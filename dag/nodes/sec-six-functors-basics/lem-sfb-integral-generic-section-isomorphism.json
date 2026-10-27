@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-integral-generic-section-isomorphism",
+ "kind": "statement",
+ "title": "A section of an integral birational morphism is an isomorphism",
+ "statement": "Let $X$ and $Y$ be integral schemes [def-pc-scheme, def-pc-integral-scheme]. Let $f:Y\\to X$ be separated [def-weil-proper-morphism], and suppose there is a nonempty open $V\\subseteq X$ such that $f^{-1}(V)\\to V$ is an isomorphism. If $s:X\\to Y$ is a section, meaning $f\\circ s=\\mathrm{id}_X$, then $s$ and $f$ are inverse isomorphisms. In particular, the section maps the generic point of $X$ to the generic point of $Y$ [def-sc-generic-point].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, last closed-section paragraph of proof (4); Schemes Tag 01KT (lemma-section-immersion)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-sc-generic-point"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-section-separated-closed-immersion] to $f:Y\\to X$ and its section $s$. Its hypotheses are precisely separatedness of $f$ and $f\\circ s=\\mathrm{id}_X$. Thus $s$ is a closed immersion. In particular its image $C=s(X)$ is closed in $Y$, and $s$ is a monomorphism (cancel maps into $s$ using the left inverse $f$).",
+   "uses": [
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KT, lemma-section-immersion, separated case."
+   }
+  },
+  {
+   "text": "Put $W=f^{-1}(V)$. The isomorphism $W\\to V$ and nonemptiness of $V$ imply $W\\ne\\varnothing$. For $y\\in W$ put $x=f(y)\\in V$. The section identity gives $f(s(x))=x$, hence $s(x)\\in W$; injectivity of $W\\to V$ gives $s(x)=y$. Therefore $W\\subseteq C$. Integrality of $Y$ implies irreducibility [def-pc-integral-scheme]. If $C\\ne Y$, the proper closed sets $C$ and $Y\\setminus W$ would cover $Y$, contradicting [def-weil-irreducible-components]. Thus $C=Y$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, last paragraph of proof (4), closed image is all of Y; density argument made explicit."
+   }
+  },
+  {
+   "text": "The scheme $Y$ is reduced by [def-pc-integral-scheme]. Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to the closed immersion $s:X\\to Y$ and the morphism $\\mathrm{id}_Y:Y\\to Y$. The required image containment holds by Step 2. We obtain $t:Y\\to X$ with $s\\circ t=\\mathrm{id}_Y$. Consequently $t=(f\\circ s)\\circ t=f\\circ(s\\circ t)=f$, so $s\\circ f=\\mathrm{id}_Y$. Together with the given $f\\circ s=\\mathrm{id}_X$ this proves that $s$ and $f$ are inverse isomorphisms.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356, lemma-map-into-reduction, applied to the identity; supplies the scheme-theoretic justification for the final Y = X in Tag 0BFP."
+   }
+  },
+  {
+   "text": "Let $\\eta_X$ be the generic point of $X$. By [def-sc-generic-point], $\\overline{\\{\\eta_X\\}}=X$. The inverse scheme isomorphisms just obtained induce inverse continuous maps, so $s$ is a homeomorphism on spaces. Hence $\\overline{\\{s(\\eta_X)\\}}=s(\\overline{\\{\\eta_X\\}})=s(X)=Y$, which says exactly that $s(\\eta_X)$ is the generic point of $Y$.",
+   "uses": [
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, generic-point assertion in the last paragraph of proof (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-sc-generic-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, final closed-section paragraph of proof (4); Schemes 01KT and 0356 make closedness and the reduced scheme-theoretic step explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsIntegral\"",
+   "results": "{\"t\": \"2026-10-22T07:39:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsClosedImmersion\\\", \\\"AlgebraicGeometry.IsIntegral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_of_isClosedImmersion_of_surjective (ClosedImmersion.lean:416) needs both a closed immersion and surjectivity; the singleton-generic-fibre and closed-section arguments here establish these hypotheses and are not one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Ss]urjective|[Cc]losedImmersion.*[Ii]so|section.*genericPoint",
+   "results": "{\"t\": \"2026-10-22T07:39:29Z\", \"tool\": \"grep\", \"query\": \"isIso.*[Ss]urjective|[Cc]losedImmersion.*[Ii]so|section.*genericPoint\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\"], \"digest\": \"02ec40f931507359\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_of_isClosedImmersion_of_surjective (ClosedImmersion.lean:416) needs both a closed immersion and surjectivity; the singleton-generic-fibre and closed-section arguments here establish these hypotheses and are not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a separated morphism whose image contains the generic point of an integral scheme is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T07:39:29Z\", \"tool\": \"leanfinder\", \"query\": \"A section of a separated morphism whose image contains the generic point of an integral scheme is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"3b35e8bbbf7c6798\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_of_isClosedImmersion_of_surjective (ClosedImmersion.lean:416) needs both a closed immersion and surjectivity; the singleton-generic-fibre and closed-section arguments here establish these hypotheses and are not one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of a separated morphism whose image contains the generic point of an integral scheme is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T07:39:29Z\", \"tool\": \"leansearch\", \"query\": \"A section of a separated morphism whose image contains the generic point of an integral scheme is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.isSeparated_of_injective\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\"], \"digest\": \"cf87054e443df4b9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_of_isClosedImmersion_of_surjective (ClosedImmersion.lean:416) needs both a closed immersion and surjectivity; the singleton-generic-fibre and closed-section arguments here establish these hypotheses and are not one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_isClosedImmersion_of_surjective|isIso_of_surjective.*[Rr]educed|isIso.*[Dd]ense|exists.*[Ss]talk|exists.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-22T07:42:13Z\", \"tool\": \"grep\", \"query\": \"isIso_of_isClosedImmersion_of_surjective|isIso_of_surjective.*[Rr]educed|isIso.*[Dd]ense|exists.*[Ss]talk|exists.*[Ss]ection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"7ec5e286c8246ae1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_of_isClosedImmersion_of_surjective (ClosedImmersion.lean:416) needs both a closed immersion and surjectivity; the singleton-generic-fibre and closed-section arguments here establish these hypotheses and are not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a separated map between integral schemes has singleton generic fibre, any section is an isomorphism because its closed image contains the generic point",
+   "results": "{\"t\": \"2026-10-22T07:42:19Z\", \"tool\": \"leanfinder\", \"query\": \"If a separated map between integral schemes has singleton generic fibre, any section is an isomorphism because its closed image contains the generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.IsSeparated.instMap\"], \"digest\": \"b0e493805b716f35\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_of_isClosedImmersion_of_surjective (ClosedImmersion.lean:416) needs both a closed immersion and surjectivity; the singleton-generic-fibre and closed-section arguments here establish these hypotheses and are not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a separated birational morphism of integral schemes that is an isomorphism over a nonempty open is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T09:28:22Z\", \"tool\": \"leanfinder\", \"query\": \"A section of a separated birational morphism of integral schemes that is an isomorphism over a nonempty open is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.IsIntegralHom.of_comp\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\"], \"digest\": \"3c3785c5e0787403\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: a closed-immersion isomorphism criterion needs closedness and surjectivity, established in separate steps; normalization theorems concern integral morphisms, a different hypothesis from integral source and target schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, CategoryTheory.IsSplitMono",
+   "results": "{\"t\": \"2026-10-23T09:29:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSeparated, CategoryTheory.IsSplitMono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: a closed-immersion isomorphism criterion needs closedness and surjectivity, established in separate steps; normalization theorems concern integral morphisms, a different hypothesis from integral source and target schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "section.*[Ii]so|isIso.*[Ss]ection|isIso_of_isClosedImmersion_of_surjective|isClosedImmersion_of_comp_eq_id",
+   "results": "{\"t\": \"2026-10-23T09:29:12Z\", \"tool\": \"grep\", \"query\": \"section.*[Ii]so|isIso.*[Ss]ection|isIso_of_isClosedImmersion_of_surjective|isClosedImmersion_of_comp_eq_id\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"0960ad3f3b768fca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: a closed-immersion isomorphism criterion needs closedness and surjectivity, established in separate steps; normalization theorems concern integral morphisms, a different hypothesis from integral source and target schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of a separated birational morphism of integral schemes is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T09:29:42Z\", \"tool\": \"leansearch\", \"query\": \"A section of a separated birational morphism of integral schemes is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.isSeparated_of_injective\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.Scheme.Hom.appIso\", \"AlgebraicGeometry.IsSeparated.casesOn\", \"AlgebraicGeometry.IsLocalIso\"], \"digest\": \"31a77ed77569b4b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: a closed-immersion isomorphism criterion needs closedness and surjectivity, established in separate steps; normalization theorems concern integral morphisms, a different hypothesis from integral source and target schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion with dense image into a reduced scheme is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T09:29:53Z\", \"tool\": \"leanfinder\", \"query\": \"A closed immersion with dense image into a reduced scheme is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot\", \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"AlgebraicGeometry.isClosedImmersion_of_comp_eq_id\", \"AlgebraicGeometry.isImmersion_eq_inf\"], \"digest\": \"26451dab65f90252\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: a closed-immersion isomorphism criterion needs closedness and surjectivity, established in separate steps; normalization theorems concern integral morphisms, a different hypothesis from integral source and target schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-modification-codimension-one",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Old step 6: singleton generic fibre, closed image through the source generic point, and the Spec(D/I) ideal computation.",
+   "via": [
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-generic-section-isomorphism",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Four-step split using existing nodes only: section is a closed immersion; its closed image contains the nonempty isomorphism open and hence all of integral Y; apply reduced-source factorization to id_Y and cancel using the section identity to obtain the inverse; transport the closure of the generic singleton through the resulting homeomorphism. No new nodes and no Mathlib leaf for the whole item. Read Stacks 0BFP, 01KT and 0356 and the complete statements of all cited nodes.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite, through de Jong Lemma 3.13 and the normal-modification codimension-one argument, specifically its closed-section isomorphism step. Current blueprint ancestor tool returns None (already null on the imported item); preserve that ancestry. Current latest unit and direct-images proof were read; no change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme-theoretic tool: a morphism from a reduced scheme factors through a closed subscheme when its image is contained there. Used for id_Y after surjectivity of the section; the constructibility unit gives no replacement for this basic geometric fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-08fa238e3",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-08fa238e3 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and changed nothing; review.md is in the run directory. The statement is byte-identical to the base and live versions, and the item is still unsplit in live, so no other group has superseded it; no re-split note exists. Source check: Stacks varieties.tex 0BFP, last paragraph of the proof of (4), uses exactly the item's hypotheses (closed section, generic point to generic point, Y = X). Step 1 cites the 01KT leaf (section of a separated morphism is a closed immersion; schemes.tex l.4275 read) and def-weil-closed-immersion for the closed image. Step 2 is a correct elementary density argument: W = f^{-1}(V) is nonempty and lies in the image C, so if C were not Y then C and Y minus W would cover the irreducible Y, a contradiction. Step 3 applies lem-weil-pbc-reduced-source-factors-through-closed-subscheme (0356, schemes.tex l.2269 read) to id_Y on the reduced Y, giving t with s∘t = id; then t = f∘s∘t = f, which is valid. Step 4 carries the generic point through the homeomorphism. proof_deps equal the union of the uses. The parent normal-modification step 4 applies the item consistently. The DAG search (rg -L) found no duplicate. The tool_uses entry for the off-route sk-thm-p1 node is accepted as a generic scheme-theory tool. The worker's counterexamples, each dropping one hypothesis (P^1 with a rational section; the line with doubled origin; the non-reduced Spec k[t,e]/(te,e^2)), all check out. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralGenericSectionIsomorphism",
+  "declaration": "AlgebraicGeometry.section_inverse_of_isIntegral_of_isIso_morphismRestrict",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralGenericSectionIsomorphism.lean",
+  "statement": "theorem section_inverse_of_isIntegral_of_isIso_morphismRestrict {X Y : Scheme.{u}} [IsIntegral X] [IsIntegral Y] (f : Y ⟶ X) [IsSeparated f] (hV : ∃ V : X.Opens, (V : Set X).Nonempty ∧ IsIso (f ∣_ V)) (s : X ⟶ Y) (hs : s ≫ f = 𝟙 X) : f ≫ s = 𝟙 Y ∧ s (genericPoint X) = genericPoint Y",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7500a2d1",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Node unchanged except new lean record (diffed vs side-live). Lean matches every clause: [IsIntegral X/Y], [IsSeparated f] (def-weil-proper-morphism declarations), ∃ V nonempty with IsIso (f ∣_ V) (Mathlib morphismRestrict), hs : s ≫ f = 𝟙 X; conclusion f ≫ s = 𝟙 Y ∧ s (genericPoint X) = genericPoint Y gives inverse isos + generic point. No extra assumptions, single forced universe u, lean.statement verbatim. Stacks 0BFP/01KT/0356 read; statement true; docstring steps cite existing IsClosedImmersion.of_comp (Separated.lean:242) and existsUnique_fac_of_range_subset_range (side-live ClosedImmersion.lean:186). No Mathlib/project duplicate. Docstrings with source + blueprint id, proof sorry only, report has Worker report and Second reading (same session, disclosed). No fixes, no compile needed."
+ }
+}

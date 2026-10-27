@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-chevalley-borel-intersection",
+ "kind": "statement",
+ "title": "Chevalley intersection formula for Borel subgroups through a maximal torus",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms] and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure $\\bar k$. A torus is a group scheme $T$ with $T_{\\bar k}\\simeq(\\mathbf G_m)^r$ for some integer $r\\geq0$ [def-sc-gm-ga]. A Borel subgroup of $G$ is a maximal smooth connected solvable subgroup, where solvable means that successive commutator subgroup schemes eventually become trivial. A maximal torus is a torus not strictly contained in another torus subgroup. Assume that $k$ is algebraically closed, $G$ is smooth and connected and $T\\subseteq G$ is a maximal torus. Let $R_u(G)$ denote the largest smooth connected normal unipotent subgroup of $G$, where unipotent means that all geometric points in a faithful finite-dimensional matrix representation satisfy $(u-I)^N=0$ for some $N\\geq1$. Let $\\mathcal B_T$ be the set of all Borel subgroups containing $T$. Put $I=\\bigcap_{B\\in\\mathcal B_T}B$, the scheme-theoretic intersection (its ideal in the affine coordinate ring $k[G]$ is the sum of the ideals of these $B$). Denote by $(I_{\\mathrm{red}})^\\circ$ the reduced closed subscheme supported on the connected component containing the identity in $|I|$; reduction is as in [def-weil-pbc-scheme-reduction]. Then, as closed subgroup schemes of $G$, $$(I_{\\mathrm{red}})^\\circ=R_u(G)\\cdot T,$$ where the right side is the scheme-theoretic image of multiplication $R_u(G)\\times_kT\\to G$, namely the closed subscheme defined by the kernel of its map on affine coordinate rings.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-general-borel-flag-variety], $\\mathcal B_T$ is nonempty. Write $H=(I_{\\mathrm{red}})^\\circ$. The intersection is a subgroup scheme: on every test algebra it is the intersection of subgroups; equivalently its defining ideal is the sum of their Hopf ideals. It is affine of finite type since its coordinate ring is a quotient of $k[G]$. By [lem-sfb-locally-algebraic-group-identity-component], $H$ is a smooth connected subgroup. The inclusion $T\\to I$ factors through its reduction by [lem-weil-pbc-reduced-source-factors-through-closed-subscheme], and through the identity component since $T$ is connected and contains the identity. Thus $T\\subseteq H$. Choose $B_0\\in\\mathcal B_T$; then $H\\subseteq B_0$, so $H$ is solvable: iterated commutators in $H$ map into the corresponding derived subgroups of $B_0$. The maximality of $T$ in $G$ implies its maximality in $H$.",
+   "uses": [
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.56, first equality; preliminary reduction to the solvable group I(T) in Section 17h, pp.373--375."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-perfect-solvable-unipotent-torus] to $H$ over the perfect field $k$. Obtain a smooth connected normal unipotent $U=H_u$ with torus quotient $q:H\\to D=H/U$. By [lem-sfb-solvable-torus-complements], $q|_T:T\\to D$ is an isomorphism. Let $s:D\\to T\\subseteq H$ be its inverse followed by inclusion. Multiplication $U\\times_k T\\to H$ has the inverse $h\\mapsto(hs(q(h))^{-1},s(q(h)))$: the first coordinate lies in $\\ker q=U$ and the two composites are identities on every test algebra. Consequently $H$ is exactly the scheme-theoretic image of $U\\times_kT\\to G$, since this map is the isomorphism just displayed followed by the closed inclusion of $H$.",
+   "uses": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-solvable-torus-complements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.33(a)--(d), pp.335--336; the solvable decomposition implicit at the start of the proof of Theorem 17.56."
+   }
+  },
+  {
+   "text": "Put $R=R_u(G)$ and $X=\\mathcal B(G)$. By [lem-sfb-smooth-unipotent-solvable], $R$ is solvable. It is smooth and connected by its defining properties, so [lem-sfb-solvable-proper-fixed-point] applied to the nonempty proper $X$ supplies an $R$-fixed point $b_{B_1}$. The scheme-theoretic stabilizer equality of [lem-sfb-general-borel-flag-variety] gives $R\\subseteq B_1$. For any Borel $B'$, transitivity supplies $g\\in G(k)$ with $B'=gB_1g^{-1}$. Normality of $R$ gives $R=gRg^{-1}\\subseteq B'$ as subgroup schemes. Hence $R\\subseteq I$. Smoothness makes $R$ reduced by [sbc-lem-smooth-geometrically-reduced]; [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] and connectedness therefore give $R\\subseteq H$. Since $U$ contains every smooth unipotent subgroup of $H$ by [lem-sfb-perfect-solvable-unipotent-torus], $R\\subseteq U$.",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-general-borel-flag-variety",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-sfb-perfect-solvable-unipotent-torus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The evident inclusion R_u(G) in every Borel; Theorems 17.9 and 17.3, pp.353--354, together with Theorem 16.33(b)."
+   }
+  },
+  {
+   "text": "For any $x\\in X(k)$, take the reduced closure $Z=\\overline{T\\cdot x}$ of its $T$-orbit. By [lem-sfb-smooth-group-orbit-geometry] it is invariant, and by [lem-weil-pbc-proper-fp-permanence] it is a nonempty proper finite-type scheme, as a closed subscheme of $X$. Apply [lem-sfb-solvable-proper-fixed-point] to the torus $T$ acting on $Z$; tori are commutative and hence solvable. It gives a $T$-fixed $b_B\\in Z(k)$, with $B\\supseteq T$ by [lem-sfb-general-borel-flag-variety]. Thus $x\\in A_B$ by the rational-point description in [lem-sfb-luna-borel-attraction-charts]. We have proved that every rational flag belongs to such a chart. The node on charts applies with $V=U$, because $U\\subseteq H\\subseteq B'$ for every $B'\\supseteq T$. Each $A_B$ is affine and $U$-invariant.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-luna-borel-attraction-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 17h, p.375, paragraph proving that the opens B(B) cover the flag variety; Theorem 17.65, p.374."
+   }
+  },
+  {
+   "text": "Fix $x\\in X(k)$ and let $O=U\\cdot x$. By [lem-sfb-smooth-group-orbit-geometry] its reduced closure $Z_U$ is $U$-invariant. It is proper by [lem-weil-pbc-proper-fp-permanence]. The smooth connected unipotent $U$ is solvable by [lem-sfb-smooth-unipotent-solvable]; hence [lem-sfb-solvable-proper-fixed-point] gives a $U$-fixed point $y\\in Z_U(k)$. Choose $A_B$ containing $y$, as in the preceding step. Its closed complement is $U(k)$-invariant by [lem-sfb-luna-borel-attraction-charts]. If any rational point of $O$ lay in that complement, transitivity of $U(k)$ on $O(k)$ would put all of $O(k)$ there. This implies $O$ lies there as a subscheme: the inverse image of the open $A_B$ in the orbit morphism from the affine reduced $U$ would otherwise be a nonempty open with a $k$-point, by [lem-wf-affine-nullstellensatz-vanishing]. The closed complement would then contain $Z_U$ and $y$, a contradiction. Thus $O\\subseteq A_B$.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-luna-borel-attraction-charts",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 17h, last paragraph, p.375, through the containment of the orbit in B(B)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-kostant-rosenlicht-affine-orbits] to $U$ acting on the affine finite-type scheme $A_B$: $O$ is closed in $A_B$. Since $y\\in\\overline O\\cap A_B$ and $O\\subseteq A_B$, it follows that $y\\in O$. A $U$-fixed rational point in a transitive orbit forces that orbit to be a singleton: if $y=u_0x$, then $x=u_0^{-1}y=y$, and every $ux=y$. Thus every $u\\in U(k)$ fixes every $x\\in X(k)$. For $x=b_{B'}$, the scheme-theoretic stabilizer of [lem-sfb-general-borel-flag-variety] gives $U(k)\\subseteq B'(k)$. The affine $U$ is reduced by [sbc-lem-smooth-geometrically-reduced]. Every equation of $B'$ restricts to a function on $U$ vanishing on all $U(k)$; it is zero by [lem-wf-affine-nullstellensatz-vanishing]. Therefore $U\\subseteq B'$ as subgroup schemes for every Borel $B'$, including those not containing $T$.",
+   "uses": [
+    "lem-sfb-kostant-rosenlicht-affine-orbits",
+    "lem-sfb-general-borel-flag-variety",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 17h, last paragraph, p.375, from Kostant--Rosenlicht to triviality of the orbit; scheme-theoretic upgrade using reducedness and the affine vanishing principle."
+   }
+  },
+  {
+   "text": "Let $J$ be the scheme-theoretic intersection of all Borel subgroups, and put $K=(J_{\\mathrm{red}})^\\circ$. As for $I$, the sum of the defining Hopf ideals represents $J$ as an affine finite-type subgroup. By [lem-sfb-locally-algebraic-group-identity-component], $K$ is smooth and connected. Since $K\\subseteq B_0$, commutator termination in $B_0$ proves that $K$ is solvable. Conjugation by each $g\\in G(k)$ permutes the Borels and preserves their intersection, its reduction and its identity component, as closed subgroup schemes. Hence $K$ is normal in $G$ by [lem-sfb-smooth-ambient-normality-geometric]. The preceding step gives $U\\subseteq J$; reducedness and connectedness give $U\\subseteq K$, using [sbc-lem-smooth-geometrically-reduced] and [lem-weil-pbc-reduced-source-factors-through-closed-subscheme]. Apply [lem-sfb-perfect-solvable-unipotent-torus] to $K$: its smooth connected unipotent subgroup $K_u$ contains $U$, and is normal in the smooth ambient $G$. By the defining maximal property of $R_u(G)$, $U\\subseteq K_u\\subseteq R_u(G)$.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-smooth-ambient-normality-geometric",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-sfb-perfect-solvable-unipotent-torus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 17h, pp.374--375, reduction to Remark 17.31, p.361; Theorem 16.33 and Proposition 1.90. The reduced full intersection itself supplies the normal solvable subgroup needed here."
+   }
+  },
+  {
+   "text": "The two inclusions give $U=R_u(G)$ as closed subgroup schemes. Substituting into the scheme-theoretic image identity from step 2 yields $$(I_{\\mathrm{red}})^\\circ=H=R_u(G)\\cdot T.$$ In particular the conclusion is an equality of the specified closed subgroup schemes, with the product defined by the kernel on coordinate rings, and not just an equality of rational-point sets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.56, first displayed equality, p.371; conclusion of Section 17h."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-general-borel-flag-variety",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-solvable-torus-complements",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-solvable-proper-fixed-point",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-luna-borel-attraction-charts",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-kostant-rosenlicht-affine-orbits",
+  "lem-sfb-smooth-ambient-normality-geometric"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 17h, Theorems 17.64--17.65 and proof of Theorem 17.56, printed pp.373--375; Theorem 16.33 and Remark 17.31 made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley theorem unipotent radical times a maximal torus equals the reduced identity component of the intersection of Borel subgroups containing the torus",
+   "results": "Search completed; 8 hits. Returned names/files: RootPairing.GeckConstruction.h_mem_cartanSubalgebra', RootPairing.GeckConstruction.instHasTrivialRadical, RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, LieAlgebra.cartan_sup_iSup_rootSpace_eq_top, LieAlgebra.zeroRootSubalgebra_normalizer_eq_self, RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra, LieAlgebra.zero_rootSpace_eq_top_of_nilpotent, LieAlgebra.IsKilling.biSup_corootSpace_eq_top. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intersection of all Borel subgroups containing a maximal torus has reduced identity component equal to the product of the unipotent radical and the torus",
+   "results": "Search completed; 8 hits. Returned names/files: Subgroup.connectedComponentOfOne, Subgroup.mem_iInf, Subgroup.top_subgroupOf, Subgroup.instInfSet, OpenSubgroup.mem_inf, Subgroup.relindex_iInf_le, Subgroup.index_iInf_le, Subgroup.normalCore_eq_iInf_conjAct. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unipotent\", \"radical\"",
+   "results": "Search completed; 0 hits. Returned names/files: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|unipotentRadical|unipotent radical",
+   "results": "Search completed; 25 hits. Returned names/files: Mathlib/Dynamics/Newton.lean, Mathlib/Dynamics/Newton.lean, Mathlib/Dynamics/Newton.lean, Mathlib/Algebra/LieRinehartAlgebra/Defs.lean, Mathlib/FieldTheory/ChevalleyWarning.lean, Mathlib/FieldTheory/ChevalleyWarning.lean, Mathlib/FieldTheory/ChevalleyWarning.lean, Mathlib/FieldTheory/ChevalleyWarning.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley intersection theorem: reduced identity component of the intersection of Borel subgroups containing a maximal torus is unipotent radical times torus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"frattini\", \"module\": \"Mathlib/GroupTheory/Frattini\", \"type\": \"(G : Type u_1) → [inst : Group G] → Subgroup G\", \"doc\": \"The Frattini subgroup of a group $G$ is defined as the radical of the subgroup lattice of $G$, which is the intersection of all maximal subgroups of $G$. This corresponds to the infimum of the coatoms\"}\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the Cartan subalgebra constructed via the Geck method is a Lie subalgebra of the matrix algebra $ \\\\text\"}\n  {\"name\": \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {L : Type u_2} [inst : LieRing L] {K : Type u_4} [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  (H : LieSubalgebra K L) [inst_4 : H.IsCartanSubalgebra] [LieModule.IsTriangularizable K (↥H) L],\\n  H.toLieSubmodule ⊔ ⨆ α, ⨆ (_ : α.IsNonZero), LieAlgebra.rootSpace H ⇑α = ⊤\", \"doc\": \"The direct sum of the Cartan subalgebra $\\\\mathfrak{h}$ and all non-zero root spaces associated with weights $\\\\chi$ equals the entire Lie algebra $\\\\mathfrak{g}$, i.e., $\\\\mathfrak{h} \\\\oplus \\\\bigoplus_{\\\\\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L} {H : LieSubalgebra R L}\\n  [self : H.IsCartanSubalgebra], H.normalizer = H\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is $ \\\\mathfrak{h} $ itself. This\"}\n  {\"name\": \"LieAlgebra.rootSpace_zero_eq\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : H.IsCartanSubalgebra] [IsNoetherian R L],\\n  LieAlgebra.rootSpace H 0 = H.toLieSubmodule\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $\\\\mathfrak{g}$ is Noetherian as an $R$-module, then the root space of $\\\\mat\"}\n  {\"name\": \"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (H : LieSubalgebra R L),\\n  H.IsCartanSubalgebra ↔ H.toLieSubmodule.IsUcsLimit\", \"doc\": \"A Lie subalgebra $\\\\mathfrak{h}$ of a Lie algebra over a commutative ring is a Cartan subalgebra if and only if it is a stabilized term in the upper central series of its underlying Lie submodule struc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a connected linear algebraic group intersecting all Borel subgroups through a maximal torus gives the torus times the unipotent radical after taking the reduced identity component",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.connectedComponentOfOne\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"(G : Type*) [TopologicalSpace G] [Group G] [IsTopologicalGroup G] : Subgroup G\", \"doc\": \"The subgroup of a topological group $G$ consisting of all elements in the connected component of the identity element $1$. This is the maximal preconnected subset containing $1$, and it forms a subgro\"}\n  {\"name\": \"Subgroup.pathComponentOne\", \"module\": \"Mathlib.Topology.Connected.PathConnected\", \"type\": \"(G : Type*) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] : Subgroup G\", \"doc\": \"The subgroup of a topological group $G$ consisting of all elements path-connected to the identity element $1$. This set contains $1$, is closed under multiplication (due to the continuity of multiplic\"}\n  {\"name\": \"Subgroup.Normal.pathComponentOne\", \"module\": \"Mathlib.Topology.Connected.PathConnected\", \"type\": \"(G : Type*) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] : (Subgroup.pathComponentOne G).Normal\", \"doc\": \"In a topological group $G$, the subgroup consisting of all elements path-connected to the identity element $1$ is a normal subgroup. This follows from the continuity of group operations, which ensures\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_iff\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasCentralRadical R L ↔ LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is a central ideal if and only if the radical of $\\\\mathfrak{g}$ is equal to the center of $\\\\mathfrak{g}$.\"}\n  {\"name\": \"LieAlgebra.radical\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"(R : Type u) → (L : Type v) → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → LieIdeal R L\", \"doc\": \"The radical of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ is defined as the supremum (sum) of all solvable Lie ideals in $\\\\mathfrak{g}$. This represents the largest solvable ideal contai\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.radical_eq_center\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.HasCentralRadical R L], LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $ with a central radical, the radical of $ L $ is equal to its center. That is, $ \\\\operatorname{rad}(L) = \\\\mathfrak{z}(L) $, where $ \\\\oper\"}\n  {\"name\": \"Subgroup.normalCore_eq_iInf_conjAct\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"(H : Subgroup G) : H.normalCore = ⨅ (g : ConjAct G), g • H\", \"doc\": \"The normal core of a subgroup $H \\\\subseteq G$ is equal to the intersection of all conjugates $gHg^{-1}$ for $g \\\\in G$, i.e., $H_{\\\\text{normalCore}} = \\\\bigcap_{g \\\\in G} gHg^{-1}$.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.casesOn\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"{k : Type u_3} →\\n  {A : Type u_4} →\\n    [inst : Field k] →\\n      [inst_1 : Ring A] →\\n        [inst_2 : Algebra k A] →\\n          {motive : Algebra.IsGeometricallyReduced k A → Sort u} →\\n            (t : Algebra.IsGeometricallyReduced k A) →\\n              ((isReduced_algebraicClosure_tensorProduct : I\", \"doc\": \"If $ A $ is geometrically reduced over a field $ k $, then the tensor product $ A \\\\otimes_k \\\\overline{k} $ is a reduced ring, where $ \\\\overline{k} $ denotes the algebraic closure of $ k $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"torus\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|unipotentRadical|Chevalley.*intersection",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-torus-self-centralizer",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained.",
+   "via": [
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-chevalley-borel-intersection",
+  "worker": "stage1",
+  "group": "Q03",
+  "summary": "Followed Milne 17h: smooth reduced intersection and its solvable decomposition, invariant affine attraction charts, fixed points in proper orbit closures, Kostant--Rosenlicht, and the normal full Borel intersection. Retained the exact statement and scheme-theoretic product. Three statement-only inputs; reused the existing solvable, orbit, fixed-point and reduction nodes after checking their statements. No Lean attachment or Mathlib match.",
+  "blueprint": "Realizes the supporting Chevalley input in the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli route; newest blueprint direct-images proof (3) read. The item is a created auxiliary lemma, not a blueprint unit key node; nearest imported blueprint ancestor is null as reported by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme-theoretic reduction or properness tool; this does not replace the unit route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme-theoretic reduction or properness tool; this does not replace the unit route."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic affine vanishing principle to pass from rational points to subgroup schemes; this does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-76b236725",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-76b236725 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 17.56 (p.371), §17h with 17.64, 17.65 and the proof of 17.56 (pp.373-375), 17.9, 17.48, and §17f with 17.52. The item statement is verbatim (identical to live and side-live, item still unsplit live), with no weakening. The 8 steps follow Luna's proof in Milne. Step 1: identity component plus reduced factorization gives H smooth, connected and solvable, with T maximal in it. Step 2: perfect-solvable H_u plus torus complements, with the explicit inverse checked, gives H = U·T as the scheme image. Step 3: fixed point plus scheme stabilizer plus conjugacy plus normality gives R_u ⊆ U. Steps 4-6: T-orbit closures put every rational point in a chart; the invariant complement of a chart puts each U-orbit in it; Kostant-Rosenlicht in the affine chart makes each orbit trivial; the vanishing principle gives U ⊆ every Borel scheme-theoretically. Step 7: the full intersection K is normal by smooth-ambient-normality-geometric, so U ⊆ K_u ⊆ R_u(G). All hypotheses were checked against the cited statements; def-sfb-solvable-group-structure reconciles the solvability conventions. New nodes: the general flag variety (true, X = G/B; stabilizer, conjugacy and fixed-point clauses checked; reductive-pair, solvable-flag and Picard nodes are not duplicates); the Luna charts (a faithful generalization of 17.65, since the proof uses only V ⊆ the parabolic stabilizer; checked via the B^- big cell; not the item restated); Kostant-Rosenlicht (17.64, connected case). No duplicates in snapshot or live (rg Borel, Rosenlicht, attraction). No cycle: the closure has neither the item nor its citer. Batch-5 flags: the trf closure nodes of perfect-solvable-unipotent-torus and smooth-unipotent-solvable (smooth-fpqc-base-descent, scheme-cover-descent-datum, etc.) are generic fppf, descent and algebraic-space foundations, not trace-formula or Poincaré-duality content, so the citations are accepted. Generic tool uses: pbc reduced-factorization and proper permanence, sbc smooth reduced, wf Nullstellensatz. No SGA. No fixes."
+ }
+}

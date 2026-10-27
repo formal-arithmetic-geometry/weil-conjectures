@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-dvr-comodule-finite-free-lattice",
+ "kind": "statement",
+ "title": "Finite subsets of torsion-free DVR comodules lie in finite free subcomodules",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring]. Let $C$ be an $A$-module flat over $A$, meaning that tensoring with $C$ preserves injections of $A$-modules, with $A$-linear maps $\\Delta:C\\to C\\otimes_A C$ and $\\epsilon:C\\to A$ satisfying coassociativity and both counit identities. Tensor products are [def-weil-pbc-module-tensor-product]. Let $M$ be a torsion-free $A$-module, meaning $am=0$ with $a\\ne0$ implies $m=0$, with an $A$-linear map $\\rho:M\\to M\\otimes_A C$ satisfying $(\\rho\\otimes1_C)\\rho=(1_M\\otimes\\Delta)\\rho$ and $(1_M\\otimes\\epsilon)\\rho=1_M$. For every finite subset $T\\subseteq M$, there exist an $A$-submodule $V\\subseteq M$ containing $T$, a finite $A$-basis of $V$, and a coaction $\\rho_V:V\\to V\\otimes_A C$ satisfying the same identities, such that $(i\\otimes1_C)\\rho_V=\\rho i$ for the inclusion $i:V\\hookrightarrow M$. The empty subset and the zero module are allowed.",
+ "source": {
+  "document": "literature/milne-basic-affine-group-schemes.pdf",
+  "place": "Milne, Basic Theory of Affine Group Schemes, VIII, Aside 4.7, printed p.117, together with Aside 9.4, printed pp.125--126 (the finite torsion-free module is free over a DVR). WANTED local copy; read https://www.jmilne.org/math/CourseNotes/AGS.pdf. No field-only subcomodule lemma is being applied."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For each $t\\in T$ choose a finite tensor expansion $\\rho(t)=\\sum_{a\\in I_t}m_{ta}\\otimes c_{ta}$ using [def-weil-pbc-module-tensor-product]. Let $W\\subseteq M$ be the span of the finite union of all $m_{ta}$. Then $W$ is finitely generated and $\\rho(t)$ belongs to the image of $W\\otimes_A C$ for every $t\\in T$. If $T$ is empty take $W=0$. No basis of $C$ is chosen.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Aside 4.7, printed p.117: choose a finite coefficient module and take its stable core; Aside 9.4, printed pp.125--126, integral representation application."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-coalgebra-subcomodule-core] to the ring $A$, coalgebra $C$, comodule $(M,\\rho)$ and this $W$. Its flatness and coaction hypotheses are exactly those of the item. Put $V=W^\\circ$. Its statement gives $V\\subseteq W$, a coaction $\\rho_V$ satisfying both identities, and $(i\\otimes1_C)\\rho_V=\\rho i$. The expansions in step 1 imply $t\\in W^\\circ$ for each $t\\in T$, hence $T\\subseteq V$.",
+   "uses": [
+    "lem-sfb-flat-coalgebra-subcomodule-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Aside 4.7, printed p.117: choose a finite coefficient module and take its stable core; Aside 9.4, printed pp.125--126, integral representation application."
+   }
+  },
+  {
+   "text": "By [def-sc-discrete-valuation-ring] every ideal of $A$ is principal, hence finitely generated, so $A$ is Noetherian by [def-weil-pbc-noetherian-ring]. Now $W$ is finite by construction and $V\\subseteq W$ by step 2. Apply [lem-weil-pbc-noetherian-submodule-finite] with ambient module $W$ to conclude that $V$ is finitely generated.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Aside 4.7, printed p.117: choose a finite coefficient module and take its stable core; Aside 9.4, printed pp.125--126, integral representation application."
+   }
+  },
+  {
+   "text": "If $av=0$ in $V$ with $a\\ne0$, inclusion in $M$ gives $a i(v)=0$, so torsion-freeness of $M$ and injectivity of $i$ give $v=0$. Thus $V$ is torsion free. By [lem-sc-dvr-fg-torsionfree-free], $V$ is finite free and has a finite $A$-basis. Together with step 2 this supplies every required datum. For $T=\\varnothing$, step 1 gives $W=0$ and step 2 gives $V\\subseteq0$, so $V=0$ with its empty basis and zero coaction. The same applies when $M=0$.",
+   "uses": [
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Aside 4.7, printed p.117: choose a finite coefficient module and take its stable core; Aside 9.4, printed pp.125--126, integral representation application."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sfb-flat-coalgebra-subcomodule-core",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-basic-affine-group-schemes.pdf",
+  "place": "Agent-written assembly following the argument read online in VIII, Aside 4.7; local source WANTED. The sole coalgebra input is separately stated as the stable-core lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "subcomodule|finite.*comodule|comodule.*finite",
+   "results": "{\"t\": \"2026-10-24T04:56:33Z\", \"tool\": \"grep\", \"query\": \"subcomodule|finite.*comodule|comodule.*finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The hits give finite flat modules being free and ordinary finite-dimensional spans, but no existence of a stable finite submodule.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite subsets of a flat Hopf algebra over a DVR lie in finite free subcomodules",
+   "results": "{\"t\": \"2026-10-24T04:56:34Z\", \"tool\": \"leansearch\", \"query\": \"Finite subsets of a flat Hopf algebra over a DVR lie in finite free subcomodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_flat_of_isLocalRing\", \"FiniteDimensional.span_finset\", \"Module.Flat.finsupp\", \"Module.Flat.of_free\", \"Module.freeLocus_eq_univ\", \"Module.Finite.of_finite\", \"FiniteDimensional.of_subalgebra_toSubmodule\", \"Submodule.finiteDimensional_finset_sup\"], \"digest\": \"ef02b60a66e1830b\"}; The hits give finite flat modules being free and ordinary finite-dimensional spans, but no existence of a stable finite submodule.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Coalgebra, Module.Free",
+   "results": "{\"t\": \"2026-10-24T04:56:34Z\", \"tool\": \"loogle\", \"query\": \"Coalgebra, Module.Free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The hits give finite flat modules being free and ordinary finite-dimensional spans, but no existence of a stable finite submodule.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat Hopf algebra over a discrete valuation ring every finite subset is contained in a finite free subcomodule of the regular comodule",
+   "results": "{\"t\": \"2026-10-24T04:56:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat Hopf algebra over a discrete valuation ring every finite subset is contained in a finite free subcomodule of the regular comodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_flat_of_finrank_eq\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.free_of_flat_of_isLocalRing\", \"Module.exists_basis_of_span_of_flat\", \"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"Module.Flat.instInvertibleSubtypeMemSubmoduleSubmoduleAlgebra\", \"FiniteDimensional.left\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\"], \"digest\": \"bd39c9553430e71a\"}; The hits give finite flat modules being free and ordinary finite-dimensional spans, but no existence of a stable finite submodule.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coalgebra flat over a noetherian ring has every comodule equal to the directed union of its finitely generated subcomodules",
+   "results": "{\"t\": \"2026-10-24T04:59:09Z\", \"tool\": \"leanfinder\", \"query\": \"A coalgebra flat over a noetherian ring has every comodule equal to the directed union of its finitely generated subcomodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"AdicCompletion.flat_of_isNoetherian\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"IsNoetherian\", \"isNoetherian_def\", \"Module.flat_iff\", \"IsSemiprimaryRing.finite_of_isNoetherian\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\"], \"digest\": \"d42ff5f79c087582\"}; The hits give finite flat modules being free and ordinary finite-dimensional spans, but no existence of a stable finite submodule.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subcomodule|Comodule|coaction",
+   "results": "{\"t\": \"2026-10-24T06:58:00Z\", \"tool\": \"grep\", \"query\": \"subcomodule|Comodule|coaction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits supply ordinary finite tensor coefficients, Noetherian finiteness or PID freeness, not a stable finite subcomodule. Read the corresponding existing DAG leaves and the returned types. Coalgebra.IsFrobenius.instFinite requires a Frobenius algebra and says nothing about comodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Coalgebra, Module.Finite",
+   "results": "{\"t\": \"2026-10-24T06:58:00Z\", \"tool\": \"loogle\", \"query\": \"Coalgebra, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Coalgebra.IsFrobenius.instFinite\"], \"digest\": \"a86a60553ae4aa54\"}; Hits supply ordinary finite tensor coefficients, Noetherian finiteness or PID freeness, not a stable finite subcomodule. Read the corresponding existing DAG leaves and the returned types. Coalgebra.IsFrobenius.instFinite requires a Frobenius algebra and says nothing about comodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a comodule over a flat coalgebra over a Noetherian ring lies in a finitely generated subcomodule",
+   "results": "{\"t\": \"2026-10-24T06:58:01Z\", \"tool\": \"leanfinder\", \"query\": \"A finite subset of a comodule over a flat coalgebra over a Noetherian ring lies in a finitely generated subcomodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNoetherian_span_of_finite\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"Submodule.exists_fg_le_subset_range_rTensor_inclusion\", \"isNoetherian_of_finite\", \"Submodule.FG.of_le\", \"Module.IsNoetherian.finite\", \"TensorProduct.exists_finite_submodule_left_of_finite'\", \"IsNoetherian.noetherian\"], \"digest\": \"dba20cc5e8bb1c8a\"}; Hits supply ordinary finite tensor coefficients, Noetherian finiteness or PID freeness, not a stable finite subcomodule. Read the corresponding existing DAG leaves and the returned types. Coalgebra.IsFrobenius.instFinite requires a Frobenius algebra and says nothing about comodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite subset of a torsion free comodule over a flat coalgebra over a discrete valuation ring is contained in a finite free subcomodule",
+   "results": "{\"t\": \"2026-10-24T07:03:18Z\", \"tool\": \"leansearch\", \"query\": \"Every finite subset of a torsion free comodule over a flat coalgebra over a discrete valuation ring is contained in a finite free subcomodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"Module.free_of_finite_type_torsion_free\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.basisOfFiniteTypeTorsionFree\", \"Module.free_of_flat_of_isLocalRing\", \"Module.free_iff_isTorsionFree\", \"Module.basisOfFiniteTypeTorsionFree'\", \"IsDedekindDomain.flat_iff_torsion_eq_bot\"], \"digest\": \"48f75d9af77c936e\"}; Hits supply ordinary finite tensor coefficients, Noetherian finiteness or PID freeness, not a stable finite subcomodule. Read the corresponding existing DAG leaves and the returned types. Coalgebra.IsFrobenius.instFinite requires a Frobenius algebra and says nothing about comodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free stable submodules containing prescribed finitely many vectors in a torsion free coalgebra comodule over a DVR",
+   "results": "{\"t\": \"2026-10-24T07:03:19Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free stable submodules containing prescribed finitely many vectors in a torsion free coalgebra comodule over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.spanFin\", \"Module.Finite.left\", \"FGModuleRepr.S\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Submodule.IsLattice.free\", \"SubmodulesRingBasis\", \"IsHausdorff.of_isTorsionFree\", \"Ideal.Filtration.submodule_fg_iff_stable\"], \"digest\": \"4ff4cb592b8a89a3\"}; Hits supply ordinary finite tensor coefficients, Noetherian finiteness or PID freeness, not a stable finite subcomodule. Read the corresponding existing DAG leaves and the returned types. Coalgebra.IsFrobenius.instFinite requires a Frobenius algebra and says nothing about comodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-dvr-reductive-linear-affine-quotient",
+  "by": "worker",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Milne, Basic Theory of Affine Group Schemes, VIII, Aside 4.7, printed p.117, together with Aside 9.4, printed pp.125--126 (the finite torsion-free module is free over a DVR). WANTED local copy; read https://www.jmilne.org/math/CourseNotes/AGS.pdf. No field-only subcomodule lemma is being applied.",
+   "via": [
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-comodule-finite-free-lattice",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement. Realized Milne VIII Aside 4.7 by choosing finitely many tensor coefficients, taking the stable core, applying existing Noetherian submodule finiteness and existing DVR finite torsion-free freeness. Added only the arbitrary-ring stable-core lemma, not another finite-subcomodule existence assertion. Read all cited node statements and recorded exact quotations.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/representation branch: Milne VIII Aside 4.7 finite coefficient module and stable core, followed by Aside 9.4 integral freeness. Current latest blueprint read at main-20261024; inherited ancestor_for_item is null because the creation chain is broken, so preserve the inherited null rather than invent an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-e7b2b0ea2",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-e7b2b0ea2 (reviewer sub-agent of L); spot-checked: Ordinary one-level split. Live item is unsplit with an identical statement and no proof, so this is not a re-split order. Steps: (1) finite tensor expansion, W = span of the first factors (tensor def, elementary). (2) New flat stable-core node with R=A; t in W° by its definition, so T ⊆ V. (3) DVR is a PID, hence Noetherian; V ⊆ W with W finite, so V is finitely generated by lem-weil-pbc-noetherian-submodule-finite. (4) V is torsion-free as a submodule of M, so it is finite free by lem-sc-dvr-fg-torsionfree-free. Cited statements say what each step uses. All deps are definitions, Mathlib leaves or the same-unit new node: no route issue, no tool_uses. New node lem-sfb-flat-coalgebra-subcomodule-core is true: I proved it myself (W° = ker((q⊗1)ρ); coassociativity plus flatness give ker(f⊗1) = ker f ⊗ C; counit gives W° ⊆ W; uniqueness and the identities by injectivity of j⊗1; maximality is immediate). Checked on W=0, W=M, C=R, C=0 and ℤ_p[x] with additive Δ. It is statement-only and self-contained, and does not restate the item (no finiteness, DVR or basis). No DAG duplicate: the comodule nodes are field-only. Mathlib has no comodule notion (rg), so 'no match' holds. Source: Milne AGS VIII Aside 4.7/9.4 is not local; correctly WANTED with by=agent. Local iAG2017 Prop. 4.7 is field-only and is rightly not used. blueprint.from.node is null, inherited from the live item; base-node fault, maintainer note only. No fixes."
+ }
+}

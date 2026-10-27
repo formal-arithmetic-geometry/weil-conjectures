@@ -1,0 +1,49 @@
+# global build 2026-10-26T16:20:30Z of d09913d1fb: Sheaf.AlgebraicGeometry.SpP1RationalPointChern failed
+error: Sheaf/AlgebraicGeometry/SpP1RationalPointChern.lean:91:2: Tactic `apply` failed: could not unify the conclusion of `(Scheme.bijective_sheafHTwoTrace N hNΩ).left`
+  ?a₁ = ?a₂
+with the goal
+  Etale.ordinaryFiniteP1PicardClass (Spec (CommRingCat.of Ω)) =
+    Scheme.Pic.ofIsInvertible (Scheme.Hom.ker x).toModules.dual
+
+Note: The full type of `(Scheme.bijective_sheafHTwoTrace N hNΩ).left` is
+  Function.Injective ⇑(Scheme.sheafHTwoTrace N hNΩ)
+
+Note: The following definitions were not unfolded because their definition is not exposed:
+  Shrink ↦ 2
+
+A : Type (u + 1)
+inst✝³ : CommRing A
+inst✝² : Finite A
+N : ℕ
+hN : 0 < N
+hA : ↑N = 0
+c : SpP1ChernFamily A N hA
+b : SpP1TwistedFamily A N hA
+d : SpP1DecompositionFamily A N hA
+hnorm : SpP1NormalizedDecompositions A N hN hA c b d
+Ω : Type u
+inst✝¹ : Field Ω
+inst✝ : IsAlgClosed Ω
+hΩ : IsUnit ↑N
+x : Spec (CommRingCat.of Ω) ⟶ ProjectiveLine (Spec (CommRingCat.of Ω))
+hx : x ≫ ProjectiveLine (Spec (CommRingCat.of Ω)) ↘ Spec (CommRingCat.of Ω) = 𝟙 (Spec (CommRingCat.of Ω))
+hI : (Scheme.Hom.ker x).IsInvertible
+hgeom :
+  IsConnectedCurve (ℙ(ULift.{u, 0} (Fin 2); Spec (CommRingCat.of Ω)) ↘ Spec (CommRingCat.of Ω)) ∧
+    Smooth (ℙ(ULift.{u, 0} (Fin 2); Spec (CommRingCat.of Ω)) ↘ Spec (CommRingCat.of Ω)) ∧
+      IsProper (ℙ(ULift.{u, 0} (Fin 2); Spec (CommRingCat.of Ω)) ↘ Spec (CommRingCat.of Ω)) ∧
+        Scheme.Hom.genus (ℙ(ULift.{u, 0} (Fin 2); Spec (CommRingCat.of Ω)) ↘ Spec (CommRingCat.of Ω)) = 0 ∧
+          Subsingleton
+            ↑((ℙ(ULift.{u, 0} (Fin 2); Spec (CommRingCat.of Ω)).toRingedSpace.moduleCohomology 1).obj
+                (Scheme.Modules.unit ℙ(ULift.{u, 0} (Fin 2); Spec (CommRingCat.of Ω))))
+this✝⁴ : IsConnectedCurve (ℙ(ULift.{u, 0} (Fin 2); Spec (CommRingCat.of Ω)) ↘ Spec (CommRingCat.of Ω)) := hgeom.left
+this✝³ : Smooth (ℙ(ULift.{u, 0} (Fin 2); Spec (CommRingCat.of Ω)) ↘ Spec (CommRingCat.of Ω)) := hgeom.right.left
+this✝² : ConnectedSpace ↥(ProjectiveLine (Spec (CommRingCat.of Ω)))
+this✝¹ : GeometricallyIntegral (ProjectiveLine (Spec (CommRingCat.of Ω)) ↘ Spec (CommRingCat.of Ω))
+hNΩ : ↑N ≠ 0
+this✝ : NeZero N
+this : (Scheme.Hom.ker x).toModules.dual.IsInvertible :=
+  Scheme.IdealSheafData.IsInvertible.isInvertible_dual_toModules hI
+⊢ Etale.ordinaryFiniteP1PicardClass (Spec (CommRingCat.of Ω)) =
+    Scheme.Pic.ofIsInvertible (Scheme.Hom.ker x).toModules.dual
+error: Lean exited with code 1

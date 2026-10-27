@@ -1,0 +1,494 @@
+{
+ "id": "lem-sfb-relation-open-locus-descent",
+ "kind": "statement",
+ "title": "Descent of a base-change-compatible source-open locus through an equivalence relation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. For each flat [def-weil-flat-morphism] locally finitely presented [def-sbc-locally-finite-presentation] morphism $f:X\\to Y$ of $S$-schemes, suppose an open subscheme $D_f\\subseteq X$ [def-weil-open-immersion] is assigned. Assume this assignment is invariant under isomorphisms of morphisms, and for every cartesian square [def-pc-fibre-product] with $f:X\\to Y$, $g:Y'\\to Y$, $f':X\\times_YY'\\to Y'$ all flat and locally of finite presentation, the equality $D_{f'}=\\operatorname{pr}_X^{-1}(D_f)$ holds. Let $V,R$ be $S$-schemes and $(s,t):R\\to V\\times_SV$ a scheme equivalence relation: for every $S$-scheme $T$, this map injects $R(T)$ into $V(T)\\times V(T)$ as an equivalence relation. Suppose $s,t$ are flat and locally of finite presentation. Let $e:V\\to R$ be the unique morphism with $s e=t e=\\mathrm{id}_V$, supplied by reflexivity on sections. Then the open subscheme $W=e^{-1}(D_s)$ satisfies $D_s=t^{-1}(W)$ as open subschemes of $R$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LH, label lemma-local-source, case g=id and Q=R=flat and locally of finite presentation; the proof identifies W as the inverse image along the identity section."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For every $S$-scheme $T$, reflexivity, symmetry and transitivity give the identity, inverse and composition on the relation $R(T)\\subseteq V(T)^2$. Each operation is natural in $T$: its endpoints are natural, and the injectivity of $R(T)\\to V(T)^2$ forces uniqueness. The Yoneda bijection therefore gives scheme morphisms $e,i,c$, with $c(a,b)=a\\circ b$ for $s(a)=t(b)$. The groupoid laws hold because both sides have the same endpoints on every test scheme. This equips $R\\rightrightarrows V$ with the groupoid structure of [def-a1-groupoid-scheme], and its identity is the specified $e$.",
+   "uses": [
+    "lem-pc-yoneda",
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0233, lemma-equivalence-groupoid; Yoneda construction of the unique operations."
+   }
+  },
+  {
+   "text": "Put $A=R\\times_{t,V,t}R$ with projections $p_0,p_1$, and let $d(a,b)=i(a)\\circ b$. The translation isomorphism [lem-a1-groupoid-source-pullback-translation], together with inversion and interchange of factors, gives isomorphisms $A\\to B=R\\times_{t,V,s}R$, $(a,b)\\mapsto(d(a,b),a)$, and $A\\to C=R\\times_{s,V,s}R$, $(a,b)\\mapsto(d(a,b),b)$. Their inverses are respectively $(z,a)\\mapsto(a,a\\circ z)$ and $(z,b)\\mapsto(b\\circ i(z),b)$; the inverse identities are precisely associativity, inverse and unit laws. To see the first directly from that cited translation, apply its inverse to $(i(b),i(a))$ and invert both output arrows. For the second apply its inverse to $(i(a),i(b))$ and invert the second output arrow. Consequently the squares with top $d:A\\to R$, bottom $s:R\\to V$, and vertical pairs $(p_0,t)$ and $(p_1,s)$ are cartesian: $t d=s p_0$ and $s d=s p_1$.",
+   "uses": [
+    "lem-a1-groupoid-source-pullback-translation",
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH, lemma-local-source, proof with g=id; cartesian division diagram from groupoids.tex Tag 03C6 (lemma-diagram-pull)."
+   }
+  },
+  {
+   "text": "The two squares identify $d$ as the base change of $s$ along $s$ and along $t$, respectively. Thus $d$ is flat by [lem-weil-pbc-flat-morphism-base-change] and locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. All morphisms required in the assignment hypothesis are therefore flat and locally of finite presentation: the original $s$, each base morphism $s$ or $t$, and the base-changed $d$. Base-change compatibility and invariance under the two displayed isomorphisms give $D_d=p_0^{-1}(D_s)$ and $D_d=p_1^{-1}(D_s)$, hence $p_0^{-1}(D_s)=p_1^{-1}(D_s)$ as open subschemes of $A$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH, lemma-local-source, proof with g=id; cartesian division diagram from groupoids.tex Tag 03C6 (lemma-diagram-pull)."
+   }
+  },
+  {
+   "text": "The identity $t e=\\mathrm{id}_V$ gives a morphism $j:R\\to A$, $r\\mapsto(r,e(t(r)))$, by the fibre-product universal property. Its composites are $p_0j=\\mathrm{id}_R$ and $p_1j=e t$. Taking inverse images of the equality in the preceding step along $j$ yields $D_s=(e t)^{-1}(D_s)=t^{-1}(e^{-1}(D_s))=t^{-1}(W)$. The inverse image $W=e^{-1}(D_s)$ is open because $e$ is continuous; the open-immersion definition identifies an open subscheme with the restricted structure sheaf on its open subset, so these inverse-image identities are identities of open subschemes.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH, lemma-local-source, proof with g=id; cartesian division diagram from groupoids.tex Tag 03C6 (lemma-diagram-pull)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-yoneda",
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme",
+  "lem-a1-groupoid-source-pullback-translation",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LH, lemma-local-source, proof specialized to g=id, with groupoids.tex Tags 0233 and 03C6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "groupoid.*[Ll]ocus|[Ll]ocus.*groupoid|[Ee]quivalence[Rr]elation.*[Oo]pen",
+   "results": {
+    "t": "2026-10-23T13:09:34Z",
+    "tool": "grep",
+    "query": "groupoid.*[Ll]ocus|[Ll]ocus.*groupoid|[Ee]quivalence[Rr]elation.*[Oo]pen",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme openness and descent of morphism properties do not assert descent of an assigned source locus through an equivalence relation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of a base change compatible open locus for a scheme groupoid",
+   "results": {
+    "t": "2026-10-23T13:09:35Z",
+    "tool": "leansearch",
+    "query": "Descent of a base change compatible open locus for a scheme groupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange",
+     "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong",
+     "AlgebraicGeometry.IsLocalAtTarget.descendsAlong",
+     "AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange",
+     "TopologicalSpace.Opens.instHasGroupoid",
+     "AlgebraicGeometry.IsSeparated.isStableUnderBaseChange",
+     "AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme"
+    ],
+    "digest": "7124173052d9e585"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme openness and descent of morphism properties do not assert descent of an assigned source locus through an equivalence relation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"locus\"",
+   "results": {
+    "t": "2026-10-23T13:09:35Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry.Scheme\", \"locus\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.zeroLocus",
+     "AlgebraicGeometry.Scheme.zeroLocus_isClosed",
+     "AlgebraicGeometry.Scheme.zeroLocus_univ",
+     "AlgebraicGeometry.Scheme.codisjoint_zeroLocus",
+     "AlgebraicGeometry.Scheme.zeroLocus_empty_eq_univ",
+     "AlgebraicGeometry.Scheme.zeroLocus_iUnion",
+     "AlgebraicGeometry.Scheme.zeroLocus_mono",
+     "AlgebraicGeometry.Scheme.zeroLocus_singleton"
+    ],
+    "digest": "2d87f6430f083c97"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme openness and descent of morphism properties do not assert descent of an assigned source locus through an equivalence relation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A source open locus of flat locally finitely presented scheme morphisms compatible with base change descends along the target projection of a scheme equivalence relation",
+   "results": {
+    "t": "2026-10-23T13:09:36Z",
+    "tool": "leanfinder",
+    "query": "A source open locus of flat locally finitely presented scheme morphisms compatible with base change descends along the target projection of a scheme equivalence relation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Flat.instDescScheme",
+     "AlgebraicGeometry.Flat.generalizingMap"
+    ],
+    "digest": "b0164582df95c60a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme openness and descent of morphism properties do not assert descent of an assigned source locus through an equivalence relation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given open subsets assigned to flat locally finitely presented scheme morphisms naturally under cartesian base change, the source locus of an equivalence relation is the inverse image of an open on its objects",
+   "results": {
+    "t": "2026-10-23T13:11:56Z",
+    "tool": "leanfinder",
+    "query": "Given open subsets assigned to flat locally finitely presented scheme morphisms naturally under cartesian base change, the source locus of an equivalence relation is the inverse image of an open on its objects",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.Flat.instResLE",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Flat.instFstScheme",
+     "AlgebraicGeometry.Flat.generalizingMap"
+    ],
+    "digest": "8ed9a559db30c3cb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme openness and descent of morphism properties do not assert descent of an assigned source locus through an equivalence relation"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*[Ll]ocus|[Ll]ocus.*groupoid|[Ee]quivalence[Rr]elation.*[Oo]pen",
+   "results": {
+    "t": "2026-10-23T14:29:12Z",
+    "tool": "grep",
+    "query": "groupoid.*[Ll]ocus|[Ll]ocus.*groupoid|[Ee]quivalence[Rr]elation.*[Oo]pen",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme pullbacks, group objects, zero loci or descent of morphism properties; none states descent of an arbitrary assigned source-open locus through an equivalence relation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A base change compatible open subset of the source of a flat finitely presented equivalence relation is pulled back from its object scheme",
+   "results": {
+    "t": "2026-10-23T14:29:13Z",
+    "tool": "leansearch",
+    "query": "A base change compatible open subset of the source of a flat finitely presented equivalence relation is pulled back from its object scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange",
+     "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme"
+    ],
+    "digest": "2f652e2484f3c584"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme pullbacks, group objects, zero loci or descent of morphism properties; none states descent of an arbitrary assigned source-open locus through an equivalence relation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"locus\"",
+   "results": {
+    "t": "2026-10-23T14:29:13Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry.Scheme\", \"locus\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.zeroLocus",
+     "AlgebraicGeometry.Scheme.zeroLocus_isClosed",
+     "AlgebraicGeometry.Scheme.zeroLocus_univ",
+     "AlgebraicGeometry.Scheme.codisjoint_zeroLocus",
+     "AlgebraicGeometry.Scheme.zeroLocus_empty_eq_univ",
+     "AlgebraicGeometry.Scheme.zeroLocus_iUnion",
+     "AlgebraicGeometry.Scheme.zeroLocus_mono",
+     "AlgebraicGeometry.Scheme.zeroLocus_singleton"
+    ],
+    "digest": "2d87f6430f083c97"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme pullbacks, group objects, zero loci or descent of morphism properties; none states descent of an arbitrary assigned source-open locus through an equivalence relation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism invariant source open locus of flat locally finitely presented scheme maps compatible with flat locally finitely presented base change descends through a scheme equivalence relation",
+   "results": {
+    "t": "2026-10-23T14:29:14Z",
+    "tool": "leanfinder",
+    "query": "An isomorphism invariant source open locus of flat locally finitely presented scheme maps compatible with flat locally finitely presented base change descends through a scheme equivalence relation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.HasRingHomProperty.descendsAlong",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally",
+     "AlgebraicGeometry.Flat.instIsMultiplicativeScheme"
+    ],
+    "digest": "e7dbce331a13a65b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme pullbacks, group objects, zero loci or descent of morphism properties; none states descent of an arbitrary assigned source-open locus through an equivalence relation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a scheme equivalence relation the division map on pairs of arrows with the same target is simultaneously a pullback of source and target",
+   "results": {
+    "t": "2026-10-23T14:32:54Z",
+    "tool": "leanfinder",
+    "query": "In a scheme equivalence relation the division map on pairs of arrows with the same target is simultaneously a pullback of source and target",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Pullback.instHasPullback",
+     "AlgebraicGeometry.Scheme.Pullback.t",
+     "AlgebraicGeometry.Scheme.Pullback.t'",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet",
+     "AlgebraicGeometry.Scheme.Pullback.gluedLiftPullbackMap",
+     "AlgebraicGeometry.Scheme.Pullback.v",
+     "AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff",
+     "AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback"
+    ],
+    "digest": "a0cc3ae8de56ef6e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme pullbacks, group objects, zero loci or descent of morphism properties; none states descent of an arbitrary assigned source-open locus through an equivalence relation."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(pullback|cartesian)|(?:pullback|cartesian).*groupoid",
+   "results": {
+    "t": "2026-10-23T14:36:42Z",
+    "tool": "grep",
+    "query": "groupoid.*(pullback|cartesian)|(?:pullback|cartesian).*groupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme pullbacks, group objects, zero loci or descent of morphism properties; none states descent of an arbitrary assigned source-open locus through an equivalence relation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The division map of a groupoid scheme gives pullback squares relating the two projections of pairs of arrows with the same target to the source map",
+   "results": {
+    "t": "2026-10-23T14:36:42Z",
+    "tool": "leansearch",
+    "query": "The division map of a groupoid scheme gives pullback squares relating the two projections of pairs of arrows with the same target to the source map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Grp.Hom.hom_hom_div",
+     "CategoryTheory.Grp_Class.div_comp",
+     "CategoryTheory.GrpObj.comp_div",
+     "CategoryTheory.GrpObj.div_comp_assoc",
+     "CategoryTheory.Grp_Class.comp_div",
+     "CategoryTheory.GrpObj.div_comp",
+     "AlgebraicGeometry.Scheme.GrpObjAsOverPullback",
+     "AlgebraicGeometry.IsProper.instFstScheme"
+    ],
+    "digest": "1a446f44cdc1a229"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme pullbacks, group objects, zero loci or descent of morphism properties; none states descent of an arbitrary assigned source-open locus through an equivalence relation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"pullback\"",
+   "results": {
+    "t": "2026-10-23T14:36:42Z",
+    "tool": "loogle",
+    "query": "\"Groupoid\", \"pullback\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme pullbacks, group objects, zero loci or descent of morphism properties; none states descent of an arbitrary assigned source-open locus through an equivalence relation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an internal groupoid of schemes pairs of arrows with common target map by division to an arrow and give cartesian squares with the source morphism",
+   "results": {
+    "t": "2026-10-23T14:36:46Z",
+    "tool": "leanfinder",
+    "query": "For an internal groupoid of schemes pairs of arrows with common target map by division to an arrow and give cartesian squares with the source morphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.GrpObjAsOverPullback",
+     "AlgebraicGeometry.Scheme.GlueData.Rel",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V",
+     "AlgebraicGeometry.Scheme.Cover.gluedCover_V"
+    ],
+    "digest": "5abf29b76138cdea"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme pullbacks, group objects, zero loci or descent of morphism properties; none states descent of an arbitrary assigned source-open locus through an equivalence relation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-relation-cm-open",
+  "date": "2026-10-23",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 0460 (lemma-make-CM), clauses (4),(5), specialized to equivalence relations; h_W is the restriction of s to the open t^{-1}(W). Definition Tag 045R (definition-CM) in more-morphisms.tex. Supporting input: descent of a base-change-compatible open locus (Tag 04LH, lemma-local-source, with g=id and Q=R=flat and locally of finite presentation).",
+   "via": [
+    "lem-sfb-flat-relation-cm-open",
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relation-open-locus-descent",
+  "worker": "stage1",
+  "summary": "Read Stacks 04LH and its groupoid diagram 03C6. Constructed the relation groupoid by Yoneda, reused the existing source-translation isomorphism to obtain both cartesian division squares, checked flat and local finite presentation hypotheses for both applications of base-change compatibility, and pulled back along the identity-section graph. No new nodes or statement changes.",
+  "blueprint": "Supports the inherited ancestor place: direct-image constructibility alteration route, through the Cohen-Macaulay relation open in Tag 0460. This item realizes the Tag 04LH descent argument invoked there. Current latest blueprint direct-images proof (3) retains compactification/direct-image preservation, without an individual imported blueprint node for this technical prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-groupoid-source-pullback-translation",
+    "why": "Generic scheme-groupoid translation isomorphism supplies the two cartesian division squares; no node of this unit states that isomorphism. It is used as a black-box geometric tool, without changing the ancestor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-groupoid-source-pullback-translation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-eebb9775b",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-eebb9775b (reviewer sub-agent of L); spot-checked: I read Stacks Tag 04LH (lemma-local-source) in full, plus groupoids.tex Tags 0233, 02YE and 03C6. The item's statement and stmt_deps match clones/live exactly, where the item is still unsplit with no repair note. The hypotheses match 04LH with g=id and Q=R=flat+lfp. The explicit invariance-under-isomorphisms assumption stands in for the intrinsic W(P,f). This is what the citer lem-sfb-flat-relation-cm-open uses. Step 1 builds e, i and c by Yoneda from injectivity on T-points; marking it elementary is fine. Step 2: the cited translation is F(a,b)=(a∘b,b) with inverse G(d,b)=(d∘i b,b). I checked by hand that G(i b,i a) with both factors inverted gives (d,a) in R×_{t,s}R, and G(i a,i b) with the second factor inverted gives (d,b) in R×_{s,s}R. Both inverses check, and t d = s p0, s d = s p1. Step 3: square B has f=s, g=t, pr_X=p0; square C has f=s, g=s, pr_X=p1. All three morphisms are flat and lfp by the base-change leaves, so D_d=p0^{-1}D_s=p1^{-1}D_s. The section e is never fed into the assignment. Step 4 pulls back along j=(id,e t), giving D_s=t^{-1}e^{-1}D_s. Edge cases (empty, diagonal, indiscrete) are consistent. Duplicate check: lem-sfb-groupoid-quasifinite-locus-descent, lem-a1-flat-relation-invariant-open-complement and the other 04LH/03C6 nodes are not duplicates. I accept the tool use of lem-a1-groupoid-source-pullback-translation, a generic groupoid isomorphism; its rank clause is not used. No SGA is cited and there are no new nodes. One cosmetic point: the report names citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelationOpenLocusDescent",
+  "declaration": "AlgebraicGeometry.relation_open_locus_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelationOpenLocusDescent.lean",
+  "statement": "theorem relation_open_locus_descent {S : Scheme.{u}} (D : ∀ {X Y : Over S} (f : X ⟶ Y), Flat f.left → LocallyOfFinitePresentation f.left → X.left.Opens) (hiso : ∀ {X Y X' Y' : Over S} (f : X ⟶ Y) (f' : X' ⟶ Y') (hf : Flat f.left) (hlfp : LocallyOfFinitePresentation f.left) (hf' : Flat f'.left) (hlfp' : LocallyOfFinitePresentation f'.left) (a : X' ≅ X) (b : Y' ≅ Y), a.hom ≫ f = f' ≫ b.hom → D f' hf' hlfp' = a.hom.left ⁻¹ᵁ (D f hf hlfp)) (hbase : ∀ {X Y X' Y' : Over S} (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (p : X' ⟶ X) (hf : Flat f.left) (hlfp : LocallyOfFinitePresentation f.left) (hg : Flat g.left) (hglfp : LocallyOfFinitePresentation g.left) (hf' : Flat f'.left) (hlfp' : LocallyOfFinitePresentation f'.left), IsPullback p.left f'.left f.left g.left → D f' hf' hlfp' = p.left ⁻¹ᵁ (D f hf hlfp)) {V R : Over S} (s t : R ⟶ V) (hinj : ∀ T : Over S, Function.Injective (fun r : T ⟶ R ↦ (r ≫ s, r ≫ t))) (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [hs : Flat s.left] [ht : Flat t.left] [hslfp : LocallyOfFinitePresentation s.left] [htlfp : LocallyOfFinitePresentation t.left] (e : V ⟶ R) (hes : e ≫ s = 𝟙 V) (het : e ≫ t = 𝟙 V) : D s hs hslfp = t.left ⁻¹ᵁ (e.left ⁻¹ᵁ (D s hs hslfp))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f85de55b",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Lean relation_open_locus_descent matches node and Stacks 04LH (g=id, flat+lfp). D is defined only on flat+lfp morphisms over S. hiso has the correct direction and is implied by hbase. hbase covers any pullback square with f,g,f' flat+lfp and no condition on p. hinj/hrel use the same equivalence-relation encoding as the consumer exists_flat_relation_cm_open. The four instances on s,t; e is supplied with s e=t e=id, which adds no hypothesis since reflexivity gives it and injectivity makes it unique. The conclusion D s = t^{-1}(e^{-1}(D s)) is the node's D_s=t^{-1}(W). Edge cases (empty, diagonal, indiscrete, constant assignments) are fine. The node changed only in lean, and its statement matches the file verbatim. stmt_deps are all existing Mathlib records; no name clash; sorry only; docstrings carry the source, blueprint id and the four steps. Advisory: private proof-only imports are unused by the statement."
+ }
+}

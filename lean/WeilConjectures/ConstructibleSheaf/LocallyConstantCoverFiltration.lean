@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.RepresentationTheory.Invariants
+import WeilConjectures.ConstructibleSheaf.SylowCoverAssociatedSheaf
+import WeilConjectures.RepresentationTheory.InvariantFlagCategoricalFiltration
 
 /-!
 # Blueprint statements
@@ -46,6 +48,23 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration
           (constantSheaf V.smallEtaleTopology
             (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
             (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))) := by
-  sorry
+  obtain ⟨V, v, hvfin, hvet, hV, d, hd, hfib, P, hPgroup, hPfin, hP,
+    M, hM, T, hTadd, hTlim, hTcolim, ⟨eM⟩, ⟨eunit⟩⟩ :=
+    Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_associated_sheaf ℓ G
+  let := hPgroup
+  let := hM
+  let := hTadd
+  let := hTlim
+  let := hTcolim
+  obtain ⟨F, h0, hn, hstable, hstep⟩ :=
+    (M.ρ.invariants_ne_bot_and_exists_filtration_of_isPGroup hP).2
+  obtain ⟨n, W, ι, hzero, ⟨eW⟩, hquot⟩ :=
+    Rep.exists_categorical_filtration_of_invariant_flag ℓ P M F h0 hn hstable hstep
+  refine ⟨V, v, hvfin, hvet, hV, d, hd, hfib, n, fun i ↦ T.obj (W i),
+    fun i ↦ T.map (ι i), T.map_isZero hzero, ⟨T.mapIso eW ≪≫ eM⟩, ?_⟩
+  intro i hi
+  obtain ⟨hmono, ⟨equot⟩⟩ := hquot i hi
+  let := hmono
+  exact ⟨inferInstance, ⟨(PreservesCokernel.iso T (ι i)).symm ≪≫ T.mapIso equot ≪≫ eunit⟩⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,243 @@
+{
+ "id": "lem-trf-coproduct-equality-locus",
+ "kind": "statement",
+ "title": "Equality schemes for sections of a coproduct of fppf sheaves",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], fix its big fppf site [def-pc-fppf-site] with the size convention [def-weil-size-convention], and let $I$ be a small set in that convention. Let $(G_i)_{i\\in I}$ be sheaves of sets [def-weil-pbc-sites-and-cohomology], let $C=\\coprod_iG_i$ be their coproduct in sheaves [def-weil-pbc-category-colimit], and write $c_i:G_i\\to C$ for the coprojections. For a scheme $X$ over $S$, write $h_X(Z)=\\operatorname{Mor}_S(Z,X)$. Let $T$ be a site object, let $a,b\\in C(T)$, and let $T=\\coprod_iA_i=\\coprod_iB_i$ be their clopen partitions, with component sections $a_i\\in G_i(A_i)$, $b_i\\in G_i(B_i)$ satisfying $c_i(a_i)=a|_{A_i}$ and $c_i(b_i)=b|_{B_i}$. Here a clopen partition is a pairwise disjoint open covering, with its open subscheme structures [def-weil-open-immersion]; empty pieces are allowed. Set $D_i=A_i\\cap B_i$. Suppose each sheaf on schemes over $D_i$ given by $Z\\mapsto\\{f:Z\\to D_i\\mid f^*(a_i|_{D_i})=f^*(b_i|_{D_i})\\}$ is represented by a scheme $E_i\\to D_i$ (representability as in [def-trf-algebraic-space]). Then the scheme coproduct $E=\\coprod_iE_i$ [lem-weil-pbc-scheme-coproduct-family], with its induced map to $T$, represents the equality sheaf of $a$ and $b$: for every $S$-scheme $Z$ in the site there is a bijection $$\\operatorname{Mor}_S(Z,E)\\ \\cong\\ \\{f:Z\\to T\\mid f^*a=f^*b\\},$$ natural in $Z$ and compatible with projection to $\\operatorname{Mor}_S(Z,T)$. Equivalently $h_E\\simeq h_T\\times_{C\\times C}C$, where $h_T\\to C\\times C$ is $(a,b)$ and $C\\to C\\times C$ is the diagonal. The isomorphism on the summand $E_i$ is induced by its given equality of component sections. No algebraic-space hypothesis on the $G_i$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces), omitted diagonal verification, expanded as the same-label equality-locus comparison; Tag 0F15 (lemma-coproduct-sheaves-open-and-closed) and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves) supply the clopen summand tests."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit",
+  "def-weil-open-immersion",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-trf-fppf-coproduct-partition-data"
+ ],
+ "proof": [
+  {
+   "text": "For the given coproduct L of E_i, retain only indices K for which E_i has a point. Choosing a point and mapping it into the pairwise disjoint D_i injects K into the underlying set of T, so K is small in the scheme universe. Form its scheme coproduct using lem-weil-pbc-scheme-coproduct-family. Empty schemes are initial, so reinserting the omitted indices preserves the coproduct universal property. Colimit uniqueness identifies this coproduct with L, proving that the given j_i are open immersions and jointly cover L.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces), omitted diagonal verification; expanded using Tag 0F15 (lemma-coproduct-sheaves-open-and-closed) and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves)"
+   }
+  },
+  {
+   "text": "Extract from each given local cartesian square that p_i is monic, the two component sections pull back equally along p_i, and every map into D_i with equal component restrictions lifts to E_i. Naturality of c_i and MapsTo give equality of a and b after restricting along j_i. The open cover of L by the j_i is an fppf cover; separatedness of C gives q*a=q*b.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces), omitted diagonal verification; expanded using Tag 0F15 (lemma-coproduct-sheaves-open-and-closed) and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves)"
+   }
+  },
+  {
+   "text": "For f:Z to T with f*a=f*b, apply lem-trf-fppf-sheaf-coproduct-partition to pull back the supplied A and B partitions. Uniqueness identifies these partitions, so each open Z_i maps to D_i. Naturality of the coprojections identifies the images of the restricted component sections, and sectionwise injectivity gives equality in G_i. The local cartesian square yields a lift v_i:Z_i to E_i. The scheme coproduct property of Z_i provided by the partition theorem lifts to Over S because its forgetful functor creates colimits. Descend the maps v_i followed by j_i to g:Z to L. Colimit extensionality and the specified equation j_i q=p_i inclusion give gq=f.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces), omitted diagonal verification; expanded using Tag 0F15 (lemma-coproduct-sheaves-open-and-closed) and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves)"
+   }
+  },
+  {
+   "text": "If fq=gq for two maps Z to L, pull back the A partition along fq using lem-trf-fppf-sheaf-coproduct-partition. On the piece Z_i, both maps land in the range of j_i: a covering summand j_k over a point of A_i must have k=i by disjointness of the A pieces. The universal property of open immersions gives factorizations of both restricted maps through E_i. Since p_i and D_i to T are monic, j_i q is monic and these factorizations agree. The scheme coproduct extensionality on the Z_i gives f=g; hence q is monic.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces), omitted diagonal verification; expanded using Tag 0F15 (lemma-coproduct-sheaves-open-and-closed) and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves)"
+   }
+  },
+  {
+   "text": "Test the displayed square at every object of the presheaf category. The equality q*a=q*b proves commutativity. Monicity of q proves injectivity of the map to compatible pairs. A compatible pair (s,f) satisfies s=f*a=f*b; the lift constructed above supplies its preimage, with first coordinate s by functoriality. The pointwise pullback criterion yields IsPullback for the original arrows. All arguments allow empty pieces and empty index types.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces), omitted diagonal verification; expanded using Tag 0F15 (lemma-coproduct-sheaves-open-and-closed) and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces), omitted diagonal verification; expanded using Tag 0F15 (lemma-coproduct-sheaves-open-and-closed) and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves); F5 formal proof uses the partition theorem's scheme coproduct universal property in place of a separate gluing construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|coproduct.*equaliz|equaliz.*coproduct|sheaf.*clopen",
+   "results": "25 hits: Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equalizer.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Equalizers.lean, Mathlib/CategoryTheory/Limits/Shapes/Reflexive.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme coproducts/structure sheaves or Zariski gluing, not the asserted natural fppf sheaf comparison; candidate sources read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The equality locus of two sections of a coproduct of sheaves is a coproduct of equality loci on clopen parts",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.pullback",
+   "results": "1 hits: AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme coproducts/structure sheaves or Zariski gluing, not the asserted natural fppf sheaf comparison; candidate sources read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equality locus of two sections of a coproduct of fppf sheaves is represented by the disjoint union of their same summand equality schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.isEmpty_pullback_sigmaι_of_ne, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst, AlgebraicGeometry.isEmpty_of_commSq_sigmaι_of_ne, AlgebraicGeometry.sigmaι_eq_iff, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.disjoint_opensRange_sigmaι",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme coproducts/structure sheaves or Zariski gluing, not the asserted natural fppf sheaf comparison; candidate sources read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the diagonal of a disjoint union of sheaves on schemes using clopen partitions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V, AlgebraicGeometry.isEmpty_pullback_sigmaι_of_ne, AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange_eq_top_of_injective, AlgebraicGeometry.isEmpty_of_commSq_sigmaι_of_ne, AlgebraicGeometry.Scheme.Pullback.range_diagonal_subset_diagonalCoverDiagonalRange",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme coproducts/structure sheaves or Zariski gluing, not the asserted natural fppf sheaf comparison; candidate sources read"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|sheaf.*clopen|coproduct.*equaliz|equaliz.*coproduct",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme coproducts/structure sheaves or Zariski gluing, not the asserted natural fppf sheaf comparison; candidate sources read"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|coproduct.*equaliz|equaliz.*coproduct|sheaf.*clopen",
+   "results": "25 hits: Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equalizer.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Equalizers.lean, Mathlib/CategoryTheory/Limits/Shapes/Reflexive.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: read candidate types; scheme structure-sheaf coproducts, Zariski local representability and topological ring-sheaf equalizers do not state the fppf coproduct equality-scheme comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.pullback",
+   "results": "1 hits: AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'",
+   "date": "2026-10-22",
+   "verdict": "no match: read candidate types; scheme structure-sheaf coproducts, Zariski local representability and topological ring-sheaf equalizers do not state the fppf coproduct equality-scheme comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The equality locus of two sections of a coproduct of sheaves is a coproduct of equality loci on clopen parts",
+   "results": "8 hits: TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, AlgebraicGeometry.Scheme.coprodPresheafObjIso, TopCat.Sheaf.objSupIsoProdEqLocus, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Presheaf.section_ext, TopCat.Presheaf.IsSheaf.section_ext, AlgebraicGeometry.Scheme.zeroLocus_map_of_eq, LocallyConstant.ofIsClopen.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: read candidate types; scheme structure-sheaf coproducts, Zariski local representability and topological ring-sheaf equalizers do not state the fppf coproduct equality-scheme comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equality locus of two sections of a coproduct of fppf sheaves is represented by the disjoint union of their same summand equality schemes",
+   "results": "8 hits: TopCat.Sheaf.objSupIsoProdEqLocus, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, AlgebraicGeometry.isEmpty_pullback_sigmaι_of_ne, AlgebraicGeometry.isEmpty_of_commSq_sigmaι_of_ne, AlgebraicGeometry.sigmaι_eq_iff, AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V",
+   "date": "2026-10-22",
+   "verdict": "no match: read candidate types; scheme structure-sheaf coproducts, Zariski local representability and topological ring-sheaf equalizers do not state the fppf coproduct equality-scheme comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the diagonal of a disjoint union of sheaves on schemes using clopen partitions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange",
+   "date": "2026-10-22",
+   "verdict": "no match: read candidate types; scheme structure-sheaf coproducts, Zariski local representability and topological ring-sheaf equalizers do not state the fppf coproduct equality-scheme comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-coproduct",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the quotient-by-etale-relation proof of lem-trf-etale-relation-quotient: Tag 02WQ (coproduct-algebraic-spaces), including its size hypothesis. Extracted scheme-test argument from lem-trf-algebraic-space-coproduct Step 2: equality loci for the diagonal.",
+   "via": [
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-coproduct-equality-locus",
+  "worker": "stage1",
+  "summary": "Expanded the omitted diagonal comparison by the forward map, equality of pulled-back labelled partitions, unique local lifts, scheme-morphism gluing, and uniqueness/naturality. Reused the existing clopen-partition theorem and Mathlib scheme coproduct/gluing leaves; no new nodes and no statement changes.",
+  "blueprint": "Support for the quotient-by-etale-relation proof of lem-trf-etale-relation-quotient: Tag 02WQ (coproduct-algebraic-spaces), including its size hypothesis. Extracted scheme-test argument from lem-trf-algebraic-space-coproduct Step 2: equality loci for the diagonal. Steps 1–5 supply the same-label equality-locus comparison supporting the algebraic-space coproduct diagonal in that extracted proof."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-685011242",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-685011242 (reviewer sub-agent of L); spot-checked: I read the whole item and all 5 steps. The statement and stmt_deps match the side-live node exactly; only the proof, proof_deps, proof_origin, status, split_report and searches changed. The item is the old Step 2 of the parent lem-trf-algebraic-space-coproduct (Q146 re-split, note resolved). It has no repair note of its own and is not on either route-pivot drop list. Source: Stacks spaces.tex l.1060, 02WQ, which says 'we omit the verification that the diagonal ... is representable', so proof_origin=agent is correct; 0F15 (l.987) and 02WO (l.1012) are confirmed in the tags table. Steps: S1 shows u↦qu lands in the equality set, using the W_i=u^{-1}(E_i) clopen partition (family leaf) and the representing bijection, plus the converse/uniqueness clause of lem-trf-fppf-sheaf-coproduct-partition, which the cited statement does contain. S2 uses the pullback clause and partition uniqueness to get f^{-1}(A_i)=f^{-1}(B_i) with components equal in G_i; the factorization through the open D_i is the one-line open-immersion universal property (advisory only), and v_i is unique. S3 glues by glueMorphisms/hom_ext over empty overlaps and gets qv=f. S4 proves injectivity from W_i ⊂ f^{-1}(A_i) on both partitions and uniqueness in the representing bijection. S5 (elementary) gives naturality and the (f,s)↔f identification with h_T×_{C×C}C. Edge cases tested: |I|=1, A_i≠B_i, D_i=∅ ⇒ E_i=∅, I=∅ ⇒ T=∅, infinite I, nonreduced Z. Route: the partition node is in the same unit sk-i-curve-zero, and the other two cites are Mathlib leaves, so no tool_uses entry is needed. There is no cycle and no SGA. Duplicate search found only the parent, its sibling coproduct-scheme-pullback (a different statement) and the cited partition node. The searches are recorded honestly, including LeanSearch marked unavailable. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfCoproductEqualityLocus",
+  "declaration": "AlgebraicGeometry.Scheme.fppfSheaf_coproduct_equality_locus",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fppfEqualityOpenInclusion",
+   "AlgebraicGeometry.Scheme.fppfEqualityCoproductProjection",
+   "AlgebraicGeometry.Scheme.fppfSheaf_coproduct_equality_locus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfCoproductEqualityLocus.lean",
+  "statement": "theorem fppfSheaf_coproduct_equality_locus {S : Scheme.{u}} {I : Type (max u v)} (G : I → Sheaf (fppfTopology.over S) (Type (max u v))) (C : Sheaf (fppfTopology.over S) (Type (max u v))) (c : ∀ i, G i ⟶ C) (hc : IsColimit (Cofan.mk C c)) (T : Over S) (a b : C.obj.obj (op T)) (A B : FppfCoproductPartition G T) (hA : A.MapsTo c a) (hB : B.MapsTo c b) (E : I → Over S) (p : ∀ i, E i ⟶ fppfPartitionOpen T (A.opens i ⊓ B.opens i)) (hE : ∀ i, IsPullback (uliftYonedaEquiv.{v}.symm ((G i).obj.map (p i).op ((G i).obj.map (fppfEqualityOpenInclusion T inf_le_left).op (A.sections i)))) (uliftYoneda.{v}.map (p i)) (prod.lift (𝟙 (G i).obj) (𝟙 (G i).obj)) (prod.lift (uliftYonedaEquiv.{v}.symm ((G i).obj.map (fppfEqualityOpenInclusion T inf_le_left).op (A.sections i))) (uliftYonedaEquiv.{v}.symm ((G i).obj.map (fppfEqualityOpenInclusion T inf_le_right).op (B.sections i))))) (L : Over S) (j : ∀ i, E i ⟶ L) (hL : IsColimit (Cofan.mk L j)) : IsPullback (uliftYonedaEquiv.{v}.symm (C.obj.map (fppfEqualityCoproductProjection T (fun i ↦ A.opens i ⊓ B.opens i) E p L j hL).op a)) (uliftYoneda.{v}.map (fppfEqualityCoproductProjection T (fun i ↦ A.opens i ⊓ B.opens i) E p L j hL)) (prod.lift (𝟙 C.obj) (𝟙 C.obj)) (prod.lift (uliftYonedaEquiv.{v}.symm a) (uliftYonedaEquiv.{v}.symm b))",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The equivalent cartesian-square formulation stated in the node, in presheaves with ULift representables. Its specified arrows encode the natural equality-locus bijection and its projection. The local hypotheses are the analogous representing squares on A_i ∩ B_i. L, j, hL specify the chosen scheme coproduct over S by its universal property; its map to T is constructed by colimit descent, not an arbitrary map. The definition node def-trf-fppf-coproduct-partition-data owns the existing partition data and MapsTo used in the signature; the partition theorem remains only in proof_deps. The two helper definitions are canonical open inclusion and coproduct descent for this same comparison; no new notion or theorem is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bfd891bb",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Re-delivery after the 1cc2afb8 H2 return; the Lean module is byte-identical. New definition node def-trf-fppf-coproduct-partition-data (existing:true on fppfPartitionOpen, fppfPartitionInclusion, FppfCoproductPartition, FppfCoproductPartition.MapsTo in the live module): its statement says exactly what the live structure and MapsTo say, its stmt_deps and source (0F15/02WO) are correct, its statement field matches the live file verbatim, and no other definition node owns these declarations. The item now cites this node in stmt_deps; the partition theorem is a proof_dep only. Every clause checked against the Lean: partitions and MapsTo, D_i = A.opens i ⊓ B.opens i with correct inf_le restrictions, the hE representing squares, the coproduct L with q = hL.desc (canonical), and the conclusion IsPullback h_L → C over h_T → C×C, which is the node's equivalent form with naturality, projection and summand clause. Edge cases hold (I empty, D_i empty, A≠B, infinite I). Statement field verbatim, sorry only, helpers carry real data, docstrings present, real Worker report and Second reading sections. No compile run (no file changed). Advisories: the coproduct L may not exist when v > u (the statement then covers only the hypothesised coproduct); Q56 df76bded9df5 creates the same node id with equivalent content, so whichever lands second is refused by merge_delivery.py:951 and must drop its copy and cite the landed node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261023T123513-L-1200662",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

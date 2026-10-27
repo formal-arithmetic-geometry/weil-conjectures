@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-integral-lambda-quotient-augmentation",
+ "kind": "statement",
+ "title": "Balanced lambda preserves the quotient augmentation",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with its valuation ring $A$. Let $g:X\\to Y$ be any scheme morphism. Use the completed coefficient ring sheaves $R_Z$, strict positive quotient functors $\\mathrm{red}_{R,Z}$, module pullback $g_R^*$ and their specified quotient units $b_{Z,n}$ from [def-sfb-integral-pullback-strict-roos-data]. Let $a:(g_R^*)^{\\mathrm{Tow}}\\circ\\mathrm{red}_{R,Y}\\cong\\mathrm{red}_{R,X}\\circ g_R^*$ be an isomorphism of the actual module-valued strict tower functors satisfying the balanced-generator formula IsLambdaNormalized. For every $R_Y$-module $M$ and every index $n\\in\\mathbf N$ (quotient exponent $n+1$), $g_R^*(b_{Y,n,M});a_{M,n}=b_{X,n,g_R^*M}$. No flatness, boundedness, constructibility or completeness condition is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph and Comparison with the Stacks Project; Balanced lambda preserves the quotient augmentation"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-pullback-strict-roos-data",
+  "def-weil-pbc-reduction-augmentation"
+ ],
+ "proof": [
+  {
+   "text": "test the two module maps on scalar-extension generators. The quotient\naugmentation sends h to h tensor 1. The normalization of lambda sends the inverse\nimage of this generator to the tensor of the inverse image of h with the transported\nunit residue. The coefficient homomorphism preserves 1, so this is the augmentation\nof the pulled module. The pullback adjunction and the sheafified tensor universal\nproperty imply equality from these generator identities. This works for arbitrary\nmodules, including torsion modules; no flatness or completeness is used.",
+   "uses": [
+    "lem-sfb-integral-augmented-quotient-towers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-augmented-quotient-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "Balanced lambda preserves the quotient augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial Roos complex comparison preserving augmentation and derived inverse limit unit",
+   "results": "CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f; localCohomology.diagramComp; CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f; CategoryTheory.Functor.mapProjectiveResolution_complex; CategoryTheory.Abelian.DoldKan.comparisonN; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀; AlgebraicTopology.DoldKan.compatibility_N₂_N₁_karoubi",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone",
+   "results": "CochainComplex.mappingCone.fst; CochainComplex.mappingCone.snd; CochainComplex.mappingCone.inl; CochainComplex.mappingCone; CochainComplex.mappingCone.descCochain; CochainComplex.mappingCone.liftCochain; CochainComplex.mappingCone.liftCochain_snd; CochainComplex.mappingCone.inl_descCochain",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "roosAugment|roosF_map_χ",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical Roos cone augmentation agrees with the quotient completion unit and scalar restriction comparison",
+   "results": "ModuleCat.RestrictionCoextensionAdj.unit'; UniformSpace.Completion.coe'; UniformSpace.Completion.coe_toComplL; ModuleCat.RestrictionCoextensionAdj.app'; RestrictScalars.addEquiv; UniformSpace.Completion.toCompl; AbstractCompletion.compare_coe; CategoryTheory.Adjunction.functorialityUnit'_app_hom",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search \"scalar Roos\"; search \"Roos quotient unit\"; search \"quotient augmentation\"",
+   "results": "No scalar-Roos or Roos-quotient-unit blueprint statement. Two general intrinsic/Koszul completion nodes for quotient augmentation; neither states the finite lambda or scalar localization equation. Existing completed quotient-unit normalization is used for the quotient-unit proof.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate statement; existing general normalization is a proof dependency."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPullbackStrictRoosNormalization",
+  "date": "2026-10-25",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "First paragraph and Comparison with the Stacks Project"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLambdaQuotientAugmentation",
+  "file": "lean/Sheaf/Paper/IntegralLambdaQuotientAugmentation.lean",
+  "declaration": "WeilConjectures.IntegralPullbackStrictRoos.integralLambdaQuotientAugmentation",
+  "statement": "theorem integralLambdaQuotientAugmentation\n    (a : T l E g ≅ U l E g) (ha : IsLambdaNormalized l E g a)\n    (M : ModR l E Y) (n : ℕ) :\n    (pullR l E g).map\n        (((completedReductionModuleUnit (datum l E) Y).app M).app (op n)) ≫\n        (a.hom.app M).app (op n) =\n      ((completedReductionModuleUnit (datum l E) X).app ((pullR l E g).obj M)).app\n        (op n)",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fcf13",
+  "group": "Q5",
+  "result": "fix",
+  "landing": "20261026T070624-L-3631191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fcf13",
+  "group": "Q5",
+  "result": "fix",
+  "landing": "20261026T070624-L-3631191",
+  "kind": "interface",
+  "note": "independent cc review: fcf1 vs 22e7 delivery (only change: public import FiniteFreeCompletedScalarComparison) and clone; 7 delivered + 4 downstream importers compiled in sandbox; gate source tools/import_prune_check.py + leanindex.closure"
+ }
+}

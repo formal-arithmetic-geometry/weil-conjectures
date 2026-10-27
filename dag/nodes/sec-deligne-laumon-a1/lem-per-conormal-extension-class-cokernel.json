@@ -1,0 +1,231 @@
+{
+ "id": "lem-per-conormal-extension-class-cokernel",
+ "kind": "statement",
+ "title": "Dual conormal cokernel classifies square-zero algebra extensions",
+ "statement": "Let $R$ be a commutative ring, let $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow B=P/I$ be a surjective homomorphism of commutative $R$-algebras, with $n\\geq0$ finite [def-weil-pbc-mv-polynomial-ring], and let $N$ be any $B$-module. Put $M=I/I^2$, $F=\\bigoplus_{i=1}^n B\\,\\mathrm dx_i$, and $\\delta:M\\to F$, $[f]\\mapsto\\sum_i(\\partial f/\\partial x_i\\bmod I)\\mathrm dx_i$, the conormal differential [def-weil-pbc-kahler-differentials]. Let $\\operatorname{Exal}_R(B,N)$ be the isomorphism classes of exact sequences $0\\to N\\xrightarrow{j}E\\xrightarrow{p}B\\to0$ of additive groups in which $E$ is a commutative $R$-algebra, $p$ is an $R$-algebra map, $j(N)=\\ker p$ has square zero, and multiplication induces the prescribed $B$-action on $N$. Isomorphisms induce the identity on $B$ and $N$. Equip these classes with Baer addition (fibre product over $B$, then pushout of the kernel along addition) and the $B$-action given by pushout along multiplication on $N$. There is a $B$-linear isomorphism\n$$\\operatorname{Exal}_R(B,N)\\cong\\operatorname{Hom}_B(M,N)/\\{u\\circ\\delta:u\\in\\operatorname{Hom}_B(F,N)\\}.$$\nUnder it the split extension $B\\oplus N$, with multiplication $(b,n)(c,m)=(bc,bm+cn)$, corresponds to zero. For an extension and any lift $\\widetilde\\alpha:P\\to E$ of the presentation map, its class corresponds to the class of $M\\to N$, $[f]\\mapsto j^{-1}(\\widetilde\\alpha(f))$. This isomorphism is natural in $N$: pushout along a $B$-linear map $v:N\\to N'$ corresponds to postcomposition by $v$. No flatness, Noetherian or finite generation hypothesis on $I$ or $N$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 0GPU, remark-extensions-of-algebras, lines 242-260: explicit cokernel and lifted-presentation formula; Baer addition and coefficient action are the corresponding fibre-product and pushout operations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\alpha:P\\twoheadrightarrow B$ for the presentation and $d_B:P\\to F$ for $f\\mapsto\\sum_i\\alpha(\\partial_i f)\\,\\mathrm dx_i$. The polynomial differential basis and the universal property of differentials identify $R$-derivations $P\\to N$ (with $P$ acting through $\\alpha$) with $B$-linear maps $u:F\\to N$, by $u\\mapsto u d_B$. Indeed a $P$-linear map from the free differential module to $N$ is specified by the images of the $\\mathrm dx_i$, and the same images specify a $B$-linear map from $F$. Leibniz gives $d_B(I^2)=0$ and $d_B(af)=\\alpha(a)d_B(f)$ for $f\\in I$, so restriction induces the stated $B$-linear $\\delta:M\\to F$. Thus $u\\mapsto u\\delta$ is $B$-linear, and its image is a submodule of $H=\\operatorname{Hom}_B(M,N)$. Denote the quotient by $C_N$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, conormal presentation and displayed cokernel; algebra.tex Tag 00RX, lemma-differentials-polynomial-ring"
+   }
+  },
+  {
+   "text": "Given an extension $E$, choose $e_i\\in E$ above $\\alpha(x_i)$. The polynomial universal property gives an $R$-algebra lift $a:P\\to E$ with $a(x_i)=e_i$. Since $a(I)\\subset j(N)$ and $j(N)^2=0$, restriction kills $I^2$. Define $\\beta_a([f])=j^{-1}(a(f))$. It is additive; for $t\\in P$ and $f\\in I$, $a(tf)=a(t)j(\\beta_a([f]))=j(\\alpha(t)\\beta_a([f]))$, proving $B$-linearity. Hence $[\\beta_a]\\in C_N$ is defined. An extension isomorphism carries a lift to a lift with exactly the same $\\beta_a$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, lifted presentation and its restriction to the ideal"
+   }
+  },
+  {
+   "text": "If $a,a'$ are two lifts, define $D(t)=j^{-1}(a'(t)-a(t))$. Expanding the product and using $j(N)^2=0$ gives $D(st)=\\alpha(s)D(t)+\\alpha(t)D(s)$; additivity and vanishing on $R$ follow by subtraction. Step 1 gives a unique $u:F\\to N$ with $D=u d_B$, hence $\\beta_{a'}-\\beta_a=u\\delta$. Conversely, for every $u$, $a'(t)=a(t)+j(u d_B(t))$ is an $R$-algebra lift: the same product expansion proves multiplicativity, and its unit and constants are unchanged. Its conormal map is $\\beta_a+u\\delta$. Consequently $c(E)=[\\beta_a]$ is independent of the lift and defined on extension classes.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, independence of the lifted-presentation representative, expanded by the derivation calculation"
+   }
+  },
+  {
+   "text": "The quotient $A_0=P/I^2$ fits into the universal square-zero extension $0\\to M\\to A_0\\to B\\to0$: its kernel is $I/I^2$, its square is zero, and its action on that kernel factors through $B$. Given any $\\beta\\in H$, apply the coefficient-pushout lemma to this extension and $\\beta:M\\to N$. It gives an extension $E_\\beta$ and a map $q_\\beta:A_0\\to E_\\beta$ whose restriction to $M$ is $j_\\beta\\beta$. The composite $P\\to A_0\\to E_\\beta$ is a lift with conormal map precisely $\\beta$. Thus every element of $C_N$ occurs as $c(E_\\beta)$.",
+   "uses": [
+    "lem-per-square-zero-kernel-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, explicit conormal representative; Tag 0GPW, coefficient pushout construction"
+   }
+  },
+  {
+   "text": "For an arbitrary extension $E$ with lift $a$ and representative $\\beta_a$, the lift kills $I^2$, so it descends to $\\bar a:A_0\\to E$. Its restriction to $M$ is $j\\beta_a$. Apply the universal property of the pushout of $A_0$ along $\\beta_a$, with target $E$ and $w=\\operatorname{id}_N$. This gives $h:E_{\\beta_a}\\to E$ inducing the identity on $N$ and $B$. It is injective: $h(z)=0$ implies the image of $z$ in $B$ is zero, so $z=j_{\\beta_a}(n)$ and $0=h(z)=j(n)$ forces $n=0$. It is surjective: for $e\\in E$, choose $z$ above its image in $B$ and write $e-h(z)=j(n)$; then $h(z+j_{\\beta_a}(n))=e$. Hence $h$ is an isomorphism of marked extensions.",
+   "uses": [
+    "lem-per-square-zero-kernel-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, reconstruction from a lifted presentation; Tag 0GPW, universal property of coefficient pushout"
+   }
+  },
+  {
+   "text": "Suppose $c(E_1)=c(E_2)$. Choose lifts with representatives $\\beta_1,\\beta_2$. Equality in the quotient means $\\beta_2-\\beta_1=u\\delta$ for some $u:F\\to N$. Replace the lift in $E_1$ by $a_1+j_1u d_B$ as in Step 3; its representative is now $\\beta_2$. Step 5 identifies both $E_1$ and $E_2$ with $E_{\\beta_2}$ by isomorphisms fixing kernel and quotient. This proves injectivity, and Step 4 proves surjectivity. Thus $c$ is the asserted bijection with the prescribed representative formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPU, well-definedness and bijectivity of the explicit class map"
+   }
+  },
+  {
+   "text": "Let $v:N\\to N'$ be $B$-linear. In the coefficient pushout $E_v$, the composite $q_va$ is a lift, and for $f\\in I$ one has $(q_va)(f)=q_vj\\beta_a([f])=j_vv\\beta_a([f])$. Its representative is therefore $v\\beta_a$. Postcomposition sends $u\\delta$ to $(vu)\\delta$, so this gives exactly the asserted map $C_N\\to C_{N'}$ and proves naturality. For $b\\in B$ take $v(n)=bn$: the class of the scalar pushout is $b[\\beta_a]$.",
+   "uses": [
+    "lem-per-square-zero-kernel-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW, coefficient-pushout diagram and the paragraph identifying its class by Tag 0GPU"
+   }
+  },
+  {
+   "text": "For extensions $E_1,E_2$ with lifts $a_1,a_2$, their fibre product is the subring $E_1\\times_BE_2=\\{(e_1,e_2):p_1(e_1)=p_2(e_2)\\}$ with componentwise operations. Projection to the common quotient is surjective, its kernel is $N\\oplus N$, and this kernel is square zero with the componentwise $B$-action. The lift $t\\mapsto(a_1(t),a_2(t))$ has representative $(\\beta_1,\\beta_2)$. Push out along $(n_1,n_2)\\mapsto n_1+n_2$; the coefficient-pushout lemma and Step 7 give representative $\\beta_1+\\beta_2$. This is precisely Baer addition. For the split extension use $t\\mapsto(\\alpha(t),0)$; its representative is zero. Since $c$ is bijective and takes the specified addition and scalar operations to those of the quotient $B$-module, all module identities hold and $c$ is a $B$-linear isomorphism. These constructions only use finite polynomial lifts and square-zero multiplication, with no condition on $I$ or $N$.",
+   "uses": [
+    "lem-per-square-zero-kernel-pushout",
+    "def-sc-trivial-square-zero-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tags 0GPU and 0GPW, fibre product followed by coefficient addition; explicit split origin"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-per-square-zero-kernel-pushout",
+  "def-sc-trivial-square-zero-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tags 0GPU (remark-extensions-of-algebras) and 0GPW (remark-extensions-of-algebras-functorial): explicit reconstruction and Baer-operation verification expanded by Q28; algebra.tex Tag 00RX for polynomial differential coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "squareZero.*[Ee]xt|[Ee]xt.*squareZero|[Cc]otangent.*[Cc]oker|[Cc]oker.*[Cc]otangent",
+   "results": "{\"t\": \"2026-10-24T07:10:03Z\", \"tool\": \"grep\", \"query\": \"squareZero.*[Ee]xt|[Ee]xt.*squareZero|[Cc]otangent.*[Cc]oker|[Cc]oker.*[Cc]otangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Derivation/ToSquareZero.lean\"], \"digest\": \"83c4e76d006e1c0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal homology, split smoothness, trivial extensions and derivation lifts do not classify arbitrary square-zero algebra extension classes by the dual conormal cokernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.Cotangent, ModuleCat.Ext",
+   "results": "{\"t\": \"2026-10-24T07:10:03Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Extension.Cotangent, ModuleCat.Ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ModuleCat.Ext'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid query: loogle: unknown identifier 'ModuleCat.Ext'; retried with Algebra.Extension.Cotangent, LinearMap.range"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Square zero algebra extensions classified by cokernel Hom of conormal differential",
+   "results": "{\"t\": \"2026-10-24T07:10:04Z\", \"tool\": \"leansearch\", \"query\": \"Square zero algebra extensions classified by cokernel Hom of conormal differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"liftOfDerivationToSquareZero_apply\", \"liftOfDerivationToSquareZero\", \"Algebra.Extension.infinitesimal\", \"TrivSqZeroExt.lift\", \"TrivSqZeroExt.algebra'\", \"CategoryTheory.ShortComplex.HomologyData.ofHasCokernel\", \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\", \"derivationToSquareZeroEquivLift\"], \"digest\": \"358c5afcc1aef2f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal homology, split smoothness, trivial extensions and derivation lifts do not classify arbitrary square-zero algebra extension classes by the dual conormal cokernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First cotangent Ext group is the cokernel of Hom from differentials to a module mapping to Hom from the conormal module",
+   "results": "{\"t\": \"2026-10-24T07:10:10Z\", \"tool\": \"leanfinder\", \"query\": \"First cotangent Ext group is the cokernel of Hom from differentials to a module mapping to Hom from the conormal module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.H1Cotangent\", \"Algebra.Extension.h1Cotangentι\", \"Algebra.H1Cotangent\", \"Algebra.Extension.H1Cotangent.map\", \"Algebra.Extension.h1Cotangentι_apply\", \"Algebra.Extension.cotangentComplex\", \"Algebra.Extension.instAddCommGroupH1Cotangent\", \"Algebra.Extension.instModuleH1CotangentOfIsScalarTowerCotangent\"], \"digest\": \"5cf063a6a1eb410e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal homology, split smoothness, trivial extensions and derivation lifts do not classify arbitrary square-zero algebra extension classes by the dual conormal cokernel."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]xtension.*[Cc]lass|[Ee]xt1|[Ee]xt.*[Cc]otangent",
+   "results": "{\"t\": \"2026-10-24T07:10:34Z\", \"tool\": \"grep\", \"query\": \"[Ee]xtension.*[Cc]lass|[Ee]xt1|[Ee]xt.*[Cc]otangent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/Bezout.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\"], \"digest\": \"a8c202df3d7fb67f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal homology, split smoothness, trivial extensions and derivation lifts do not classify arbitrary square-zero algebra extension classes by the dual conormal cokernel.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.Cotangent, LinearMap.range",
+   "results": "{\"t\": \"2026-10-24T07:10:35Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Extension.Cotangent, LinearMap.range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal homology, split smoothness, trivial extensions and derivation lifts do not classify arbitrary square-zero algebra extension classes by the dual conormal cokernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First order extensions of commutative algebras by a square zero module are computed by the dual conormal presentation",
+   "results": "{\"t\": \"2026-10-24T07:10:36Z\", \"tool\": \"leanfinder\", \"query\": \"First order extensions of commutative algebras by a square zero module are computed by the dual conormal presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TrivSqZeroExt.liftEquivOfComm_apply\", \"TrivSqZeroExt.liftEquiv_apply\", \"TrivSqZeroExt.liftEquivOfComm\", \"TrivSqZeroExt.liftEquiv\", \"DualNumber.lift\", \"TrivSqZeroExt.lift\", \"TrivSqZeroExt.lift_def\", \"TrivSqZeroExt.liftEquivOfComm_symm_apply_coe\"], \"digest\": \"cedf67e233308e47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal homology, split smoothness, trivial extensions and derivation lifts do not classify arbitrary square-zero algebra extension classes by the dual conormal cokernel."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex|def liftEquivOfComm|theorem iff_split_injection",
+   "results": "{\"t\": \"2026-10-24T07:11:59Z\", \"tool\": \"grep\", \"query\": \"cotangentComplex|def liftEquivOfComm|theorem iff_split_injection\", \"sub\": \"RingTheory/Extension\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\"], \"digest\": \"5afe4c00441cd477\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal homology, split smoothness, trivial extensions and derivation lifts do not classify arbitrary square-zero algebra extension classes by the dual conormal cokernel.",
+   "subdirectory": "RingTheory/Extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-gabber-ramero-ideal-calculus",
+  "date": "2026-10-24",
+  "group": "Q141"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited auxiliary formal-resolution branch of ancestor Step 3, via the item's recorded creation chain; §3.2.2 and Proposition 3.2.1(i),(ii), with Remark 3.2.2(i),(ii); the smooth-extension case only of the transitivity assertion. The latest ancestor proof has no separate formal-resolution sentence. Supporting calculation: dual conormal presentation of square-zero extension classes, used to prove smooth transitivity of the obstruction ideal.",
+   "via": [
+    "lem-per-gabber-ramero-ideal-calculus",
+    "lem-per-elkik-smooth-span-lifting",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-conormal-extension-class-cokernel",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its existing searches. Gave the explicit conormal class, lift-change derivation, reconstruction from P/I^2, injectivity, naturality and Baer linearity. Reused polynomial differential basis and trivial square-zero extension definitions. Added one statement-only generic coefficient-pushout construction, after DAG, latest-blueprint, Lean and recorded Mathlib searches. No compilation or Lean changes.",
+  "blueprint": "Inherited auxiliary formal-resolution branch of lem-per-artin-gabber-affine-curve Step 3 via the recorded creation chain. The latest proof has no formal-resolution paragraph; this split serves the already recorded Gabber–Ramero conormal calculation and does not alter the ancestor or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-041d544f6",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-041d544f6 (reviewer sub-agent of L); spot-checked: The item's statement is byte-identical to the base and agrees with Stacks defos.tex 0GPU (l.242) for the cokernel and lift formula, and with 0GPV/0GPW (l.309, the antidiagonal pushout) for naturality and the operations. The only stmt_deps change adds def-weil-pbc-polynomial-partial-derivative, which the statement's ∂f/∂x_i needs. The base item had an empty proof, so this is a first split; the 2026-10-21 re-split rule does not apply. All 8 steps were checked by hand. Step 1: the Kähler basis leaf plus the universal property identify derivations P→N with Hom_B(F,N), and δ is well defined (d_B kills I², and is B-linear on I). Step 2: the polynomial lift is B-linear on I/I². Step 3: lift differences are derivations, and the converse perturbation gives β+uδ with the right sign. Steps 4–5: P/I² is an extension of B by M; pushing it out along β gives surjectivity, and the universal map E_{β_a}→E is bijective, with the node's hypotheses p_D h=p and h j=j_D w v verified. Step 6: injectivity. Step 7: naturality via q_v j=j_v v, and the scalar action via multiplication by b, which is what parent lem-per-gabber-ramero-ideal-calculus steps 5–6 use. Step 8: Baer sum via the fibre product and addition, and the split extension maps to 0. New node lem-per-square-zero-kernel-pushout: every clause checked (J_v is an ideal, kernel exactness, q_v j=j_v v, existence, multiplicativity and uniqueness of h̄). Edge cases checked: v=0, N=0, v=id, and ℤ/p² versus F_p⊕F_p. B1–B9 hold, six searches are recorded, and no Mathlib match exists (TrivSqZeroExt only covers split extensions). No duplicate: lem-sfb-ring-square-zero-extension-classification does the same construction only inline in its step 7 and classifies via the full L_{A/R}; lem-sfb-affine-commutative-extension-pushout is about group schemes; the sfb sheaf Ext nodes differ. The node does not restate a clause of the item. Route stays in sk-p-dl-a1-perverse: only definitions, one Mathlib leaf and the same-unit new node are cited, so no tool_uses are needed. No fixes."
+ }
+}

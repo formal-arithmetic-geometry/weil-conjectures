@@ -77,5 +77,47 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proper-base-change",
  "unit": "sk-lem-pbc-composition-cancellation",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring which is torsion as an abelian group (for\ninstance $\\Lambda=\\mathbf Z/n$), and let $X\\xrightarrow{u}Y\\xrightarrow{v}Z$ be\nproper morphisms.\n\n1. If $\\mathrm{PBC}_\\Lambda(u)$ and $\\mathrm{PBC}_\\Lambda(v)$ hold, then\n   $\\mathrm{PBC}_\\Lambda(vu)$ holds.\n2. If $u$ is surjective and $\\mathrm{PBC}_\\Lambda(u)$ and\n   $\\mathrm{PBC}_\\Lambda(vu)$ hold, then $\\mathrm{PBC}_\\Lambda(v)$ holds.",
+  "proof": [
+   {
+    "text": "By [sk-thm-iff] it suffices to treat $\\mathrm{IA}_\\Lambda$ [sk-def-ia]. Fix an arbitrary base change\n$c:Z'\\to Z$. Write $a:X'\\to X$ and $b:Y'\\to Y$ for the projections, and\n$u':X'\\to Y'$, $v':Y'\\to Z'$ for the induced maps. Since inverse image of\nconstant-coefficient module sheaves is exact, its right adjoint $u_*$\npreserves injectives. Thus the Grothendieck spectral sequence for direct\nimages ([det-thm-groth-ss]; Stacks Project, Tag 0734) is available:\n\n$$\nR^pv'_*R^qu'_*a^{-1}J\\ \\Longrightarrow\\ R^{p+q}(v'u')_*a^{-1}J.\n$$\n\nIt is a first-quadrant spectral sequence, natural in the sheaf $J$.",
+    "uses": [
+     "sk-thm-iff",
+     "sk-def-ia",
+     "det-thm-groth-ss"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(1)* Let $J$ be injective among $\\Lambda$-module sheaves on $X$; it is torsion\nsince $\\Lambda$ is. The\ncondition $\\mathrm{IA}_\\Lambda(u)$ gives $R^qu'_*a^{-1}J=0$ for $q>0$. Degree-zero\nproper base change [sk-prop-pbc-degree-zero] identifies, as sheaves of\n$\\Lambda$-modules on $Y'_{\\Et}$,\n\n$$\nu'_*a^{-1}J\\simeq b^{-1}u_*J.\n$$\n\nThe sheaf $u_*J$ is injective, so $\\mathrm{IA}_\\Lambda(v)$ kills\n$R^pv'_*b^{-1}u_*J$ for $p>0$. Thus the spectral sequence gives\n$R^m(v'u')_*a^{-1}J=0$ for $m>0$. This proves $\\mathrm{IA}_\\Lambda(vu)$, and hence (1).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*(2)* Let $I$ be injective among $\\Lambda$-module sheaves on $Y$. Choose a\nmonomorphism of sheaves $u^{-1}I\\hookrightarrow J$ with $J$ injective on $X$,\nand let $\\iota:I\\to u_*J$ be its adjoint. This is a global sheaf morphism. It\nis monic: for a geometric point $\\bar y$ choose a geometric point $\\bar x$\nabove it, which exists by surjectivity of $u$. The composite\n\n$$\nI_{\\bar y}\\xrightarrow{\\ \\iota_{\\bar y}\\ }(u_*J)_{\\bar y}\\longrightarrow J_{\\bar x}\n$$\n\nis the stalk of the chosen monomorphism, under $(u^{-1}I)_{\\bar x}=I_{\\bar y}$,\nso it is injective. Injectivity of $I$ now supplies a sheaf map\n$s:u_*J\\to I$ satisfying $s\\iota=\\mathrm{id}_I$. Thus $I$ is a direct summand\nof $u_*J$.\n\nThe assumptions on $u$ and $vu$ give\n\n$$\nR^qu'_*a^{-1}J=0\\quad(q>0),\\qquad R^m(v'u')_*a^{-1}J=0\\quad(m>0).\n$$\n\nThe spectral sequence collapses to its $q=0$ row and gives\n\n$$\nR^pv'_*b^{-1}u_*J\\simeq R^pv'_*u'_*a^{-1}J=0\\qquad(p>0).\n$$\n\nThe splitting of $I\\to u_*J$ remains a splitting after $b^{-1}$. Higher\ndirect image preserves finite direct sums and their direct summands, so\n$R^pv'_*b^{-1}I=0$ for $p>0$. This proves $\\mathrm{IA}_\\Lambda(v)$, and (2) follows.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
 }

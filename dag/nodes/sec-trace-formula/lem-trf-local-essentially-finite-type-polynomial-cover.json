@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-local-essentially-finite-type-polynomial-cover",
+ "kind": "statement",
+ "title": "A local polynomial cover of an essentially finite type local algebra",
+ "statement": "Let $(A,\\mathfrak m_A)$ and $(B,\\mathfrak m_B)$ be commutative local rings, and let $\\varphi:A\\to B$ be a local homomorphism, meaning $\\varphi^{-1}(\\mathfrak m_B)=\\mathfrak m_A$. Assume that $B$ is essentially of finite type over $A$ [def-weil-pbc-essentially-finite-type-algebra]. There exist an integer $n\\geq0$, a polynomial algebra $P=A[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring], a prime ideal $\\mathfrak q\\subset P$, and a surjective $A$-algebra map $\\pi:P_{\\mathfrak q}\\twoheadrightarrow B$ [def-weil-pbc-localization-at-prime]. Both $A\\to P_{\\mathfrak q}$ and $\\pi$ are local: the inverse images of the respective maximal ideals are $\\mathfrak m_A$ and $\\mathfrak qP_{\\mathfrak q}$. Moreover, $A\\to P_{\\mathfrak q}$ is essentially of finite presentation, meaning that $P_{\\mathfrak q}$ is a localization of a finitely presented $A$-algebra [def-weil-pbc-finitely-presented-algebra].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), proof, first reduction paragraph: quotient of a polynomial algebra localized at a prime; the local and essential-finite-presentation properties made explicit"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of essentially finite type, choose a finite type $A$-algebra $C$, a multiplicative subset $W\\subset C$, and an $A$-algebra isomorphism $W^{-1}C\\cong B$. Write $j:C\\to B$ for the localization map followed by this isomorphism. By the definition of finite type choose $n\\geq0$ and a surjective $A$-algebra map $e:P=A[x_1,\\ldots,x_n]\\to C$. Put $h=j\\circ e:P\\to B$.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), proof, first reduction paragraph; expanded using Algebra Tags 00QM, 00F3, 00CP and 00E9"
+   }
+  },
+  {
+   "text": "Put $\\mathfrak q=h^{-1}(\\mathfrak m_B)$. This is a proper prime ideal: $h(1)=1\\notin\\mathfrak m_B$, and $h(fg)\\in\\mathfrak m_B$ implies $h(f)\\in\\mathfrak m_B$ or $h(g)\\in\\mathfrak m_B$ because the quotient by the maximal ideal is a field. For $s\\notin\\mathfrak q$, $h(s)\\notin\\mathfrak m_B$, hence $h(s)$ is a unit by the local-ring unit criterion.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), proof, first reduction paragraph; expanded using Algebra Tags 00QM, 00F3, 00CP and 00E9"
+   }
+  },
+  {
+   "text": "Apply the ring localization universal property to $h$ and $P\\setminus\\mathfrak q$. It gives $\\pi:P_{\\mathfrak q}\\to B$ with $\\pi(f/s)=h(f)h(s)^{-1}$. This is an $A$-algebra map because its composite with $A\\to P\\to P_{\\mathfrak q}$ is $\\varphi$: this follows by evaluating the formula on constant polynomials.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), proof, first reduction paragraph; expanded using Algebra Tags 00QM, 00F3, 00CP and 00E9"
+   }
+  },
+  {
+   "text": "For any $b\\in B$, the fraction description gives $b=j(c)j(w)^{-1}$ with $c\\in C$, $w\\in W$. Lift $c,w$ to $f,s\\in P$ using the surjectivity of $e$. Since $j(w)$ has inverse given by the image of $1/w$, it is a unit; the local-ring unit criterion gives $h(s)=j(w)\\notin\\mathfrak m_B$, hence $s\\notin\\mathfrak q$. Therefore $f/s\\in P_{\\mathfrak q}$ and $\\pi(f/s)=b$. Thus $\\pi$ is surjective.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), proof, first reduction paragraph; expanded using Algebra Tags 00QM, 00F3, 00CP and 00E9"
+   }
+  },
+  {
+   "text": "The ring $P_{\\mathfrak q}$ is local with maximal ideal $\\mathfrak qP_{\\mathfrak q}$. Each generator $f/1$ with $f\\in\\mathfrak q$ maps into $\\mathfrak m_B$, so $\\mathfrak qP_{\\mathfrak q}\\subseteq\\pi^{-1}(\\mathfrak m_B)$. The latter is proper because $\\pi(1)=1$; maximality forces equality. Let $\\alpha:A\\to P_{\\mathfrak q}$ be the structure map. Since $\\pi\\alpha=\\varphi$, one has $\\alpha^{-1}(\\mathfrak qP_{\\mathfrak q})=\\varphi^{-1}(\\mathfrak m_B)=\\mathfrak m_A$. These are precisely the two required locality equalities.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), proof, first reduction paragraph; expanded using Algebra Tags 00QM, 00F3, 00CP and 00E9"
+   }
+  },
+  {
+   "text": "The polynomial algebra $P$ is finitely presented over $A$: use the $n$ polynomial generators and the empty list of relations, whose ideal is zero, so the presentation is $A[x_1,\\ldots,x_n]/(0)\\cong P$. Since $P_{\\mathfrak q}$ is a localization of this finitely presented algebra, $A\\to P_{\\mathfrak q}$ is essentially of finite presentation in the stated sense (Stacks Tag 00QM). This also covers $n=0$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), proof, first reduction paragraph; expanded using Algebra Tags 00QM, 00F3, 00CP and 00E9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), proof, first reduction paragraph; expanded using Algebra Tags 00QM, 00F3, 00CP and 00E9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "EssFiniteType.*(surj|exists|quotient)|exists.*(surj|quotient).*EssFiniteType",
+   "results": "4 hits: Mathlib/RingTheory/EssentialFiniteness.lean; Mathlib/RingTheory/EssentialFiniteness.lean; Mathlib/RingTheory/EssentialFiniteness.lean; Mathlib/RingTheory/EssentialFiniteness.lean; searched Mathlib/RingTheory. Read returned signatures; none states this node or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType, IsLocalHom",
+   "results": "6 hits: Algebra.instIsSeparableResidueFieldOfFormallyUnramified; Algebra.instFiniteResidueFieldOfFormallyUnramified; Algebra.FormallyUnramified.map_maximalIdeal; Algebra.FormallyUnramified.of_map_maximalIdeal; Algebra.FormallyUnramified.iff_map_maximalIdeal_eq; Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal. Read returned signatures; none states this node or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local essentially finite type algebra over a commutative local ring is a quotient of a polynomial ring localized at a prime ideal, with local structure map",
+   "results": "8 hits: Algebra.EssFiniteType.cond; Algebra.QuasiFiniteAt; IsLocalization.Away.finitePresentation; RingHom.EssFiniteType.holdsForLocalization; instFinitePresentationAway; Algebra.EssFiniteType.isLocalization; RingHom.finiteType_isLocal; instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl. Read returned signatures; none states this node or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every local essentially finite type algebra over a local ring admits a surjective local map from a polynomial ring localized at a prime",
+   "results": "8 hits: Algebra.EssFiniteType.of_isLocalization; RingHom.finiteType_holdsForLocalizationAway; RingHom.QuasiFinite.holdsForLocalizationAway; RingHom.localization_away_map_finiteType; AlgebraicGeometry.LocallyOfFiniteType.stalkMap; Algebra.EssFiniteType.mk; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; Algebra.EssFiniteType.cond. Read returned signatures; none states this node or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local algebra which is a localization of a finitely generated algebra admits a surjective algebra homomorphism from a localized multivariate polynomial ring",
+   "results": "8 hits: Algebra.FinitePresentation.of_span_eq_top_target_aux; IsLocalization.algebraMap_pi_surjective_of_isLocalization; surjective_of_isLocalization_of_span_eq_top; RingHom.surjective_ofLocalizationSpan; IsLocalization.Away.finitePresentation; PrimeSpectrum.finite_of_toPiLocalization_surjective; RingHom.surjective_localizationPreserves; IsLocalization.surjective_piRingHom_algebraMap_comp_piEvalRingHom. Read returned signatures; none states this node or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local algebra essentially of finite type is a quotient of a polynomial ring localized at a prime ideal",
+   "results": "8 hits: Algebra.EssFiniteType.cond, Algebra.essFiniteType_iff_exists_subalgebra, Algebra.EssFiniteType.isLocalization, Algebra.QuasiFiniteAt, Algebra.instEssFiniteTypeLocalization, RingHom.finiteType_isLocal, RingHom.EssFiniteType.holdsForLocalization, instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl. No declaration gives the local polynomial cover with both locality clauses and essential finite presentation. For grep, read RingTheory/EssentialFiniteness.lean:223-249; the hits preserve essential finite type under a surjection, not construct a cover. Read the finite-subalgebra signatures at lines 40-69 and 161-166 and the candidate localization-surjection signature at Localization/Algebra.lean:122-124.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(surj|quotient)|EssFiniteType.*(surj|quotient)",
+   "results": "2 hits: 223, 247. No declaration gives the local polynomial cover with both locality clauses and essential finite presentation. For grep, read RingTheory/EssentialFiniteness.lean:223-249; the hits preserve essential finite type under a surjection, not construct a cover. Read the finite-subalgebra signatures at lines 40-69 and 161-166 and the candidate localization-surjection signature at Localization/Algebra.lean:122-124.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local essentially finite type algebra is a quotient of a localization of a finite variable polynomial algebra at a prime",
+   "results": "8 hits: Algebra.EssFiniteType.mk, Algebra.EssFiniteType.of_isLocalization, Algebra.EssFiniteType, Algebra.QuasiFinite.iff_finite_primesOver, algebra_finiteType_of_liesOver, RingHom.EssFiniteType.holdsForLocalization, Algebra.QuasiFinite.casesOn, Algebra.instEssFiniteTypeQuotientIdeal. No declaration gives the local polynomial cover with both locality clauses and essential finite presentation. For grep, read RingTheory/EssentialFiniteness.lean:223-249; the hits preserve essential finite type under a surjection, not construct a cover. Read the finite-subalgebra signatures at lines 40-69 and 161-166 and the candidate localization-surjection signature at Localization/Algebra.lean:122-124.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType, IsLocalRing",
+   "results": "8 hits: Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.FormallyUnramified.map_maximalIdeal, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal. No declaration gives the local polynomial cover with both locality clauses and essential finite presentation. For grep, read RingTheory/EssentialFiniteness.lean:223-249; the hits preserve essential finite type under a surjection, not construct a cover. Read the finite-subalgebra signatures at lines 40-69 and 161-166 and the candidate localization-surjection signature at Localization/Algebra.lean:122-124.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective homomorphism from a prime localization of a multivariate polynomial ring onto a local algebra which is a localization of a finitely generated algebra",
+   "results": "8 hits: IsLocalization.mapₐ_surjective_of_surjective, IsLocalization.algebraMap_pi_surjective_of_isLocalization, IsLocalization.Away.mapₐ_surjective_of_surjective, surjective_of_isLocalization_of_span_eq_top, RingHom.surjective_ofLocalizationSpan, surjective_of_isLocalization_isMaximal, IsLocalization.surjective_piRingHom_algebraMap_comp_piEvalRingHom, PrimeSpectrum.piLocalizationToMaximal_surjective. No declaration gives the local polynomial cover with both locality clauses and essential finite presentation. For grep, read RingTheory/EssentialFiniteness.lean:223-249; the hits preserve essential finite type under a surjection, not construct a cover. Read the finite-subalgebra signatures at lines 40-69 and 161-166 and the candidate localization-surjection signature at Localization/Algebra.lean:122-124.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-finite-module-injectivity",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: third paragraph: lift injectivity of multiplication by g from the closed fibre to the finite stalk module. Tag 0GSG: first reduction paragraph: quotient of a polynomial algebra localized at a prime; the local and essential-finite-presentation properties made explicit",
+   "via": [
+    "lem-trf-valuation-finite-module-injectivity",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-local-essentially-finite-type-polynomial-cover",
+  "worker": "stage1",
+  "summary": "Expanded the polynomial-localization reduction in Stacks 0GSG into six steps using existing Mathlib leaves only. Constructed the prime as the inverse image of the maximal ideal, exhibited a preimage fraction for every element, checked both local-map equalities, and gave the empty-relation finite presentation. The statement is unchanged; no new nodes.",
+  "blueprint": "Serves the inherited nearby-cycle semistable-alteration branch of lem-trf-local-term-locality, through the 0GSJ/0GSI flatness reduction and 0GSG first reduction paragraph. Read the latest ancestor proof and sk-i-curve-zero; this commutative algebra input does not change their route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-90106dd05",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-90106dd05 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are byte-identical to the live/side-live base, where the item is still unsplit with no proof; only status, proof, proof_deps, proof_origin, split_report and the appended mathlib_searches changed. There is no repair note, so the 2026-10-21 re-split rules don't apply. There are no new nodes and no SGA citations. Source check: Stacks more-morphisms.tex Tag 0GSG (lemma-mod-injective-valuation-ring, l.5044), second paragraph of the proof ('write B as a quotient of the localization of a polynomial algebra P at a prime q'). The item spells out exactly this reduction and correctly drops the valuation-ring hypothesis, which the reduction does not use. Steps: (1) unpacks the two definitions into C, W, j and a surjection e: A[x]→C, with h=j∘e. (2) q=h⁻¹(m_B) is a proper prime, and h(P∖q) consists of units by lem-weil-pbc-local-ring-unit-criterion. (3) the lift π(f/s)=h(f)h(s)⁻¹ comes from lem-weil-pbc-ring-localization-universal-property, and π∘α=φ on constants. (4) surjectivity: lift c and w; j(w) is a unit, so it is not in m_B, so s∉q; this holds even with zero divisors. (5) qP_q ⊆ π⁻¹(m_B), which is proper, so equality holds by maximality, and α⁻¹(qP_q)=φ⁻¹(m_B)=m_A. (6) P=A[x]/(0) is a presentation with m=0, which def-weil-pbc-finitely-presented-algebra allows. The cited statements say what each step takes from them, and proof_deps equals the union of the steps' uses. The 00QM mention in step 6 is the item's own definitional source and only raises a preflight warning. Edge cases checked: n=0 (A→B is then surjective, consistent), B a field, a kernel that is not finitely generated (only P_q is claimed essentially of finite presentation), non-Noetherian A. A DAG rg -L search found no duplicate. All six dependencies are existing Mathlib leaves, so there are no tool_uses. The blueprint from.place is specific and same_as is []. No point of A–F fails, and nothing was changed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalEssentiallyFiniteTypePolynomialCover",
+  "declaration": "Algebra.exists_local_essentially_finite_type_polynomial_cover",
+  "file": "lean/Sheaf/RingTheory/LocalEssentiallyFiniteTypePolynomialCover.lean",
+  "statement": "theorem exists_local_essentially_finite_type_polynomial_cover {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [Algebra A B] [EssFiniteType A B] (hlocal : Ideal.comap (algebraMap A B) (IsLocalRing.maximalIdeal B) = IsLocalRing.maximalIdeal A) : ∃ (n : ℕ) (q : Ideal (MvPolynomial (Fin n) A)) (_ : q.IsPrime) (π : Localization.AtPrime q →ₐ[A] B), Function.Surjective π ∧ Ideal.comap (algebraMap A (Localization.AtPrime q)) (IsLocalRing.maximalIdeal (Localization.AtPrime q)) = IsLocalRing.maximalIdeal A ∧ Ideal.comap π.toRingHom (IsLocalRing.maximalIdeal B) = IsLocalRing.maximalIdeal (Localization.AtPrime q) ∧ ∃ (C : Type u) (_ : CommRing C) (_ : Algebra A C), FinitePresentation A C ∧ ∃ W : Submonoid C, Nonempty (Localization W ≃ₐ[A] Localization.AtPrime q)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-508de9dc4",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Read the node, the 4 stmt_deps (Mathlib leaves EssFiniteType/MvPolynomial/Localization.AtPrime/FinitePresentation; EssFiniteType dep is status mathlib with mathlib_match, no lean record needed) and Stacks 0GSG l.5044 first reduction paragraph. Every clause matches: independent universes u/v, φ=algebraMap with exact hlocal comap hypothesis, ∃ n, q prime bound before AtPrime, surjective π : P_q →ₐ[A] B, both locality comap equalities (maxIdeal P_q = qP_q via map_eq_maximalIdeal), essential finite presentation written out as ∃ C:Type u fp with Localization W ≃ₐ[A] P_q (no DAG/Mathlib notion exists; C in Type u is harmless since P is the witness). Edge cases n=0, B a field, non-Noetherian A, zero rings excluded by IsLocalRing. Node differs from live/side-live only in lean; lean.statement matches the file verbatim; docstrings carry the source, blueprint tag and 6 proof steps; sorry only; autoImplicit false; no duplicate found. Not recompiled (no change)."
+ }
+}

@@ -1,0 +1,285 @@
+{
+ "id": "lem-trf-flat-association-stalk-dictionary",
+ "kind": "statement",
+ "title": "Stalk and fibre dictionaries for flat-pullback association",
+ "statement": "Let $h:Y\\to Z$ be a flat morphism of schemes [def-weil-flat-morphism], with $Z$ locally Noetherian [pqf-def-locnoeth], and let $\\mathcal G$ be a quasi-coherent $\\mathcal O_Z$-module [pqf-def-coherent]. Fix $y\\in Y$ and set $z=h(y)$, $A=\\mathcal O_{Z,z}$, $B=\\mathcal O_{Y,y}$, and $M=\\mathcal G_z$ (stalks [def-weil-pbc-module-stalk]). Write $\\mathfrak m_A,\\mathfrak m_B$ for the maximal ideals. For a ring $T$ and $T$-module $P$, let $\\operatorname{Ann}_T(v)=\\{a\\in T:av=0\\}$ and let $\\operatorname{Ass}_T(P)$ denote exact element-annihilator associated primes [def-weil-pbc-annihilator-associated-primes]. On schemes use associated points [def-trf-relative-assassin]. Let $j_z:Y_z\\to Y$ be the scheme-theoretic fibre projection [def-pc-scheme-fibre], and let $y_z$ be its unique point above $y$. Put $I=\\mathfrak m_A B$ and $C=B/I$. Then:\n\n(1) The stalk map $\\varphi:A\\to B$ is a flat local homomorphism (the inverse image of $\\mathfrak m_B$ is $\\mathfrak m_A$), and $A$ is Noetherian [def-weil-pbc-noetherian-ring].\n\n(2) There is a $B$-linear isomorphism $(h^*\\mathcal G)_y\\cong M\\otimes_A B$ (pullback [def-pc-module-pullback], tensor [def-weil-pbc-module-tensor-product]), and\n$$y\\in\\operatorname{Ass}_Y(h^*\\mathcal G)\\quad\\Longleftrightarrow\\quad\\mathfrak m_B\\in\\operatorname{Ass}_B(M\\otimes_A B).$$\nAlso $z\\in\\operatorname{Ass}_Z(\\mathcal G)$ if and only if $\\mathfrak m_A\\in\\operatorname{Ass}_A(M)$.\n\n(3) The fibre stalk map induces a ring isomorphism $C\\cong\\mathcal O_{Y_z,y_z}$ carrying $\\mathfrak m_B/I$ to its maximal ideal. For every $v\\in C$, with the $B$-action through $B\\to C$,\n$$\\operatorname{Ann}_B(v)=\\mathfrak m_B\\quad\\Longleftrightarrow\\quad\\operatorname{Ann}_C(v)=\\mathfrak m_B/I.$$\nConsequently\n$$y_z\\in\\operatorname{Ass}_{Y_z}(\\mathcal O_{Y_z})\\quad\\Longleftrightarrow\\quad\\mathfrak m_B\\in\\operatorname{Ass}_B(C).$$\nNo Noetherianity of $B$ or finite generation of $M$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05DB (lemma-bourbaki), proof, stalk-to-associated-point identifications for F=O_Y; Schemes Tag 0HA1 (lemma-local-ring-fibre) in schemes.tex; Algebra Tag 05BY (lemma-ass-quotient-ring) in algebra.tex, expanded element-annihilator comparison."
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-trf-relative-assassin",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-flat-morphism], flatness of $h$ means precisely that $B$ is flat over $A$ via the stalk map $\\varphi$. The stalk map is local because a scheme morphism is a morphism of locally ringed spaces [def-weil-locally-ringed-space-morphism]. Thus $\\varphi(\\mathfrak m_A)\\subseteq\\mathfrak m_B$. Conversely, if $a\\notin\\mathfrak m_A$, it is a unit of the local ring $A$, so $\\varphi(a)$ is a unit and is not in $\\mathfrak m_B$. Hence $\\varphi^{-1}(\\mathfrak m_B)=\\mathfrak m_A$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U3 (definition-flat), (1) and (3); Schemes Tag 01HB (definition-locally-ringed-space)"
+   }
+  },
+  {
+   "text": "Choose an affine open neighbourhood $U$ of $z$ from the Noetherian affine cover in [pqf-def-locnoeth], and put $R=\\mathcal O_Z(U)$. Then $R$ is Noetherian. By [lem-weil-pbc-affine-open-stalk-localization](c), the germ map $R\\to A$ is localization at the complement of the prime corresponding to $z$. Apply [lem-weil-pbc-localization-noetherian] to this localization to conclude that $A$ is Noetherian. This completes (1).",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence), localization assertion; Properties Tag 01OV (definition-noetherian); Schemes Tag 01HV (lemma-spec-sheaves)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-stalk-pullback] to $h$, $\\mathcal G$, and $y$. It gives the asserted $B$-linear isomorphism $(h^*\\mathcal G)_y\\cong M\\otimes_A B$. By [def-trf-relative-assassin], membership of $y$ in $\\operatorname{Ass}_Y(h^*\\mathcal G)$ means that $\\mathfrak m_B$ is an exact element-annihilator associated prime of this stalk. A $B$-linear isomorphism preserves the annihilator of each element, since it is injective and commutes with multiplication by every $b\\in B$; using [def-weil-pbc-annihilator-associated-primes] gives the first equivalence in (2). Apply the same definition of associated points to $z$ and $\\mathcal G$, whose stalk is $M$, to obtain the second equivalence.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-trf-relative-assassin",
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0098 (lemma-stalk-pullback-modules); Divisors Tag 02OJ (definition-associated) and Tag 05DB (lemma-bourbaki), first stalk paragraph of proof"
+   }
+  },
+  {
+   "text": "The fibre projection identifies the points of $Y_z$ with the points of $Y$ above $z$ by [def-pc-scheme-fibre], so $y_z$ is well defined and unique. Apply [lem-sbc-scheme-fibre-stalk-quotient] to $h$ and $y$: the fibre stalk map $B\\to\\mathcal O_{Y_z,y_z}$ has kernel $I=\\mathfrak m_A B$ and induces the asserted isomorphism $C\\cong\\mathcal O_{Y_z,y_z}$. Step 1 gives $I\\subseteq\\mathfrak m_B$. The ideal $\\mathfrak m_B/I$ is maximal because its quotient is the field $B/\\mathfrak m_B$. Every element of $C$ outside this ideal is the image of an element outside $\\mathfrak m_B$, hence is a unit. Thus this is the unique maximal ideal of $C$, and the ring isomorphism carries it to the maximal ideal of the fibre stalk.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1 (lemma-local-ring-fibre); Tag 01K1 (lemma-fibre-topological)"
+   }
+  },
+  {
+   "text": "Let $q:B\\to C$ be the quotient map. For each $v\\in C$ and $b\\in B$, $bv=0$ in the restricted $B$-module if and only if $q(b)v=0$ in $C$. Therefore $\\operatorname{Ann}_B(v)=q^{-1}(\\operatorname{Ann}_C(v))$. Surjectivity of $q$ gives $q(q^{-1}(J))=J$ for every ideal $J$ of $C$, and $q^{-1}(\\mathfrak m_B/I)=\\mathfrak m_B$. These equalities prove both directions of the annihilator equivalence in (3). By [def-weil-pbc-annihilator-associated-primes], membership of the maximal ideal in each associated-prime set is precisely existence of an element with that annihilator. Under the ring isomorphism of step 4, the same equations preserve annihilators of elements of the fibre local ring. Finally [def-trf-relative-assassin] identifies existence of an element with maximal annihilator in that stalk with $y_z\\in\\operatorname{Ass}_{Y_z}(\\mathcal O_{Y_z})$. This gives the final equivalence, without finiteness assumptions on $M$ or Noetherianity of $B$.",
+   "uses": [
+    "def-weil-pbc-annihilator-associated-primes",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05BY (lemma-ass-quotient-ring), elementary proof of the quotient-annihilator assertion omitted there; Divisors Tag 02OJ (definition-associated)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-trf-relative-assassin",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-pc-scheme-fibre",
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05DB (lemma-bourbaki), proof with F=O_Y; expanded using Tags 0098, 0HA1, 05BY and 00FN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Translate associated points of a pullback sheaf and of the structure sheaf of a scheme fibre into element annihilators in tensor product stalks and the quotient of the local ring by the base maximal ideal",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, AlgebraicGeometry.LocallyRingedSpace.coe_toΓSpecSheafedSpace_hom_base_hom_apply_asIdeal, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, AlgebraicGeometry.Scheme.toSpecΓ_base, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, Ideal.Fiber.exists_smul_eq_one_tmul, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; digest=1b858cb20f7172d5.  The hits concern open-immersion restriction, stalk localizations, or flat/Noetherian stalks separately. They do not give the tensor-pullback and fibre associated-point dictionary. Read the open-immersion hypothesis of restrictStalkNatIso; it does not apply to a general flat h.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPoints|associatedPrimes|assassin",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c.  The hits concern open-immersion restriction, stalk localizations, or flat/Noetherian stalks separately. They do not give the tensor-pullback and fibre associated-point dictionary. Read the open-immersion hypothesis of restrictStalkNatIso; it does not apply to a general flat h.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of a pullback module is a tensor product and the stalk of a scheme theoretic fibre is the quotient of the stalk ring by the base maximal ideal; associated points detected by maximal annihilators",
+   "results": "8 hits: TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackIso, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk, AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.StructureSheaf.stalkIso; digest=134a27bf559dc2e5.  The hits concern open-immersion restriction, stalk localizations, or flat/Noetherian stalks separately. They do not give the tensor-pullback and fibre associated-point dictionary. Read the open-immersion hypothesis of restrictStalkNatIso; it does not apply to a general flat h.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, stalk",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c. loogle: unknown identifier 'stalk' The hits concern open-immersion restriction, stalk localizations, or flat/Noetherian stalks separately. They do not give the tensor-pullback and fibre associated-point dictionary. Read the open-immersion hypothesis of restrictStalkNatIso; it does not apply to a general flat h.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat morphism locally Noetherian base stalk ring Noetherian pullback tensor fibre local ring quotient associated point dictionary",
+   "results": "8 hits: Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; digest=36c58005b2926a9c.  The hits concern open-immersion restriction, stalk localizations, or flat/Noetherian stalks separately. They do not give the tensor-pullback and fibre associated-point dictionary. Read the open-immersion hypothesis of restrictStalkNatIso; it does not apply to a general flat h.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(fiber|fibre).*(stalk|quotient)|(stalk|quotient).*(fiber|fibre)",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c.  The hits concern open-immersion restriction, stalk localizations, or flat/Noetherian stalks separately. They do not give the tensor-pullback and fibre associated-point dictionary. Read the open-immersion hypothesis of restrictStalkNatIso; it does not apply to a general flat h.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.tensorPullback",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c. loogle: unknown identifier 'AlgebraicGeometry.Scheme.Modules.tensorPullback' The hits concern open-immersion restriction, stalk localizations, or flat/Noetherian stalks separately. They do not give the tensor-pullback and fibre associated-point dictionary. Read the open-immersion hypothesis of restrictStalkNatIso; it does not apply to a general flat h.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "results": "3 hits: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app; digest=a78c39d0d50d14f7.  The hits concern open-immersion restriction, stalk localizations, or flat/Noetherian stalks separately. They do not give the tensor-pullback and fibre associated-point dictionary. Read the open-immersion hypothesis of restrictStalkNatIso; it does not apply to a general flat h.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of a pullback module on schemes is a tensor product, and the fibre local ring is the quotient by the base maximal ideal, giving associated point criteria",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkIso; digest=448f9a7d17ef7d9d. Inspected the returned types and Mathlib/AlgebraicGeometry/Noetherian.lean:349. Flat.stalkMap and the Noetherian stalk instance supply individual facts; restrictStalkNatIso requires an open immersion. No result supplies the entire three-clause dictionary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPoints|associatedPrimes|assassin",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. Inspected the returned types and Mathlib/AlgebraicGeometry/Noetherian.lean:349. Flat.stalkMap and the Noetherian stalk instance supply individual facts; restrictStalkNatIso requires an open immersion. No result supplies the entire three-clause dictionary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat.stalkMap",
+   "results": "1 hits: AlgebraicGeometry.Flat.stalkMap; digest=a53daa6f517bf420. Inspected the returned types and Mathlib/AlgebraicGeometry/Noetherian.lean:349. Flat.stalkMap and the Noetherian stalk instance supply individual facts; restrictStalkNatIso requires an open immersion. No result supplies the entire three-clause dictionary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated points of sheaf pullbacks and scheme fibres are detected by annihilators of elements of local tensor products and quotient stalk rings",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Pullback.SpecTensorTo_SpecOfPoint; digest=7200d65b61ec128e. Inspected the returned types and Mathlib/AlgebraicGeometry/Noetherian.lean:349. Flat.stalkMap and the Noetherian stalk instance supply individual facts; restrictStalkNatIso requires an open immersion. No result supplies the entire three-clause dictionary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local rings of a locally Noetherian scheme are Noetherian; stalk pullback tensor and associated maximal annihilators in the fibre quotient",
+   "results": "8 hits: AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing, AlgebraicGeometry.isNoetherian_Spec; digest=b48f6ad0f951dd2d. Inspected the returned types and Mathlib/AlgebraicGeometry/Noetherian.lean:349. Flat.stalkMap and the Noetherian stalk instance supply individual facts; restrictStalkNatIso requires an open immersion. No result supplies the entire three-clause dictionary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNoetherianRing \\(X.presheaf.stalk|stalkMap|restrictStalkNatIso",
+   "results": "1 hits: 349; digest=2a0e081c958e1de2. Inspected the returned types and Mathlib/AlgebraicGeometry/Noetherian.lean:349. Flat.stalkMap and the Noetherian stalk instance supply individual facts; restrictStalkNatIso requires an open immersion. No result supplies the entire three-clause dictionary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-pullback-associated-points",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting flat-family associated-point input for proof (1)--(2) of lem-trf-local-term-locality: the local ring, tensor stalk and closed-fibre translations in the flat pullback formula; returned parent proof steps 1, 2 and 5.",
+   "via": [
+    "lem-trf-flat-pullback-associated-points",
+    "lem-trf-relative-assassin-base-change",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-association-stalk-dictionary",
+  "worker": "stage1",
+  "summary": "Checked all three clauses against the Stacks sources and reused existing flat/local, localization, tensor-stalk and fibre-quotient nodes. Five explicit steps prove the dictionary; the quotient-annihilator calculation is elementary. No new nodes, statement changes or attachments.",
+  "blueprint": "Supports the existing flat-family associated-point route below lem-trf-local-term-locality (1)--(2), through lem-trf-flat-pullback-associated-points: returned parent steps 1, 2 and 5. The current blueprint ancestor contracts local terms by specialization; no step of that route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic stalk formula for ordinary module pullback; the trace-formula unit provides no replacement for this sheaf-algebra tool."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic local-ring description of a scheme fibre for any scheme morphism; no local-term or trace theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-dccac03e0",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-dccac03e0 (reviewer sub-agent of L); spot-checked: I read the item, its five steps and every cited node statement in full. The statement and stmt_deps are unchanged against live, where the item is unsplit with no repair note, so no supersession. The proof carries Q68's old parent steps 1, 2 and 5 completely and in more detail, and matches how the live parent uses clauses (1)-(3). Step 1: flatness and locality come from def-weil-flat-morphism and def-weil-locally-ringed-space-morphism, with the preimage equality written out. Step 2: the locnoeth cover plus affine-open-stalk-localization(c), whose properties (a)-(c) are exactly the hypotheses of localization-noetherian, make A Noetherian. Step 3: the pullback-stalk iso holds for any morphism and any module, and annihilators are preserved. Step 4: the fibre homeomorphism gives a unique y_z; fibre-stalk-quotient gives the kernel m_A B and the iso; the maximal-ideal argument is correct. Step 5: Ann_B(v) is the preimage of Ann_C(v) under a surjection, which is correct. Sources checked: Stacks divisors.tex 05DB proof l.327-338 with F=O_Y, schemes.tex 0HA1 l.3545, algebra.tex 05BY l.15380 (proof omitted, supplied in step 5); no SGA. Small cases: h=id, G=0, A a field, k[t]_(t). No duplicate: fibre-associated-primes-module-ring overlaps only the algebra of (3). I accept the tool_uses module-stalk-pullback (sk-thm-reduction) and scheme-fibre-stalk-quotient (sk-thm-vanishing) as generic black boxes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatAssociationStalkDictionary",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatAssociation_stalk_dictionary",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatAssociationStalkDictionary.lean",
+  "statement": "theorem flatAssociation_stalk_dictionary {Y Z : Scheme.{u}} (h : Y ⟶ Z) [Flat h] [IsLocallyNoetherian Z] (G : Z.Modules) [SheafOfModules.IsQuasicoherent.{u} G] (y : Y) : (h.stalkMap y).hom.Flat ∧ IsLocalHom (h.stalkMap y).hom ∧ (IsLocalRing.maximalIdeal (Y.presheaf.stalk y)).comap (h.stalkMap y).hom = IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y)) ∧ IsNoetherianRing (Z.presheaf.stalk (h y)) ∧ Nonempty ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj ((tensorPullback h).obj G) ≅ (ModuleCat.extendScalars (h.stalkMap y).hom).obj ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (h y)).obj G)) ∧ (y ∈ associatedPoints ((tensorPullback h).obj G) ↔ IsLocalRing.maximalIdeal (Y.presheaf.stalk y) ∈ RingTheory.annihilatorAssociatedPrimes (Y.presheaf.stalk y) ((ModuleCat.extendScalars (h.stalkMap y).hom).obj ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (h y)).obj G))) ∧ (h y ∈ associatedPoints G ↔ IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y)) ∈ RingTheory.annihilatorAssociatedPrimes (Z.presheaf.stalk (h y)) ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (h y)).obj G)) ∧ (∃ e : (Y.presheaf.stalk y ⧸ (IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y))).map (h.stalkMap y).hom) ≃+* (h.fiber (h y)).presheaf.stalk (h.asFiber y), (∀ b : Y.presheaf.stalk y, e (Ideal.Quotient.mk _ b) = ((Y.presheaf.stalkCongr (.of_eq (h.fiberι_asFiber y))).inv ≫ (h.fiberι (h y)).stalkMap (h.asFiber y)).hom b) ∧ ((IsLocalRing.maximalIdeal (Y.presheaf.stalk y)).map (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y))).map (h.stalkMap y).hom))).map e.toRingHom = IsLocalRing.maximalIdeal ((h.fiber (h y)).presheaf.stalk (h.asFiber y))) ∧ (∀ v : Y.presheaf.stalk y ⧸ (IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y))).map (h.stalkMap y).hom, (⊥ : Submodule (Y.presheaf.stalk y) (Y.presheaf.stalk y ⧸ (IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y))).map (h.stalkMap y).hom)).colon {v} = IsLocalRing.maximalIdeal (Y.presheaf.stalk y) ↔ (⊥ : Submodule (Y.presheaf.stalk y ⧸ (IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y))).map (h.stalkMap y).hom) (Y.presheaf.stalk y ⧸ (IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y))).map (h.stalkMap y).hom)).colon {v} = (IsLocalRing.maximalIdeal (Y.presheaf.stalk y)).map (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y))).map (h.stalkMap y).hom))) ∧ (h.asFiber y ∈ associatedPoints (SheafOfModules.unit (h.fiber (h y)).ringCatSheaf) ↔ IsLocalRing.maximalIdeal (Y.presheaf.stalk y) ∈ RingTheory.annihilatorAssociatedPrimes (Y.presheaf.stalk y) (Y.presheaf.stalk y ⧸ (IsLocalRing.maximalIdeal (Z.presheaf.stalk (h y))).map (h.stalkMap y).hom))",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Review FIX (2026-10-24): the fibre-stalk normalization in clause (3) inlines the body of Scheme.Hom.fiberStalkMap, `(Y.presheaf.stalkCongr (.of_eq (h.fiberι_asFiber y))).inv ≫ (h.fiberι (h y)).stalkMap (h.asFiber y)` (Mathlib Fiber primitives of def-pc-scheme-fibre), because its owners def-trf-fibre-stalk-map / lem-sbc-scheme-fibre-stalk-quotient are not statement dependencies. Sheaf.AlgebraicGeometry.FibreStalkQuotient stays a plain (proof-dependency) import. Mathematics unchanged.",
+  "fixed_by": "NT-stage2-cc-34a87c8b9"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34a87c8b9",
+  "group": "Q94",
+  "result": "fix",
+  "note": "Read the node, all 10 stmt_dep records and the exact declarations (associatedPoints, annihilatorAssociatedPrimes, tensorPullback, IsQuasicoherent, fiberStalkMap). Every hypothesis and conclusion matches the node and Stacks 05DB/0HA1/05BY: quasi-coherent G with no finite type, locally Noetherian Z only, exact element-annihilator Ass, the fibre isomorphism tied to the actual fibre stalk map and mapping m_B/I onto the maximal ideal, the quotient B-action on C, single universe u. Edge cases checked: empty Y, G=0, h=id, A a field, v=0. Gates OK: one sorry, docstrings carry source places, the blueprint id and the 5 proof steps; report sections present. H2 FIX: fiberStalkMap is owned by def-trf-fibre-stalk-map / lem-sbc-scheme-fibre-stalk-quotient, which is only a proof_dep, so its body (stalkCongr.inv ≫ fiberι.stalkMap) was inlined and the FibreStalkQuotient import made plain; fixes/FlatAssociationStalkDictionary.lean plus a lean-record.json with the verbatim statement; compiled with nt_compile --json in 14.8 s, exit 0. Advisory: RingedSpace.moduleStalkFunctor is used under def-weil-pbc-module-stalk (NC 56b7 precedent)."
+ }
+}

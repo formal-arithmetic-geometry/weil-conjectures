@@ -1,0 +1,296 @@
+{
+ "id": "lem-weil-pbc-derived-quotient-tower-presentation",
+ "kind": "statement",
+ "title": "Universal derived quotient towers with their ordinary-unit normalization",
+ "statement": "Let $\\mathcal C$ be a small site, $R$ a sheaf of commutative rings, and $q_n:R\\to S_n$ a compatible inverse sequence of ring-sheaf maps with transitions $t_n:S_{n+1}\\to S_n$. No flatness or Noetherian hypothesis is imposed on these maps. Write $\\mathcal A=\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category] and $\\mathcal T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal A)$ for strict towers [def-weil-inverse-system]. Define the additive module functor $T:\\mathcal A\\to\\mathcal T$ by $T(M)_n=\\operatorname{Res}_{q_n}(S_n\\otimes_R M)$ [def-pc-sheaf-restrict-scalars, def-pur-sheaf-tensor-product]. Its transitions send $s\\otimes m$ to $t_n(s)\\otimes m$, and its augmentation $\\eta:\\Delta\\to T$ sends $m$ to $1\\otimes m$. These are the sheafified pure-tensor maps, natural and compatible with every transition. Let $T^c,T^h$ be its termwise cochain and homotopy functors, and $Q^h,Q^h_{\\mathcal T}$ the unbounded derived localizations [def-weil-abstract-derived-category].\nThe functor $T^c$ preserves quasi-isomorphisms between K-flat $R$-complexes [def-pc-kflat-complex], without a flat-term assumption. There exists $LT:D(\\mathcal A)\\to D(\\mathcal T)$ with a counit $\\epsilon:LTQ^h\\to Q^h_{\\mathcal T}T^h$ which is a universal right Kan extension along $Q^h$: for every $G$ and $a:GQ^h\\to Q^h_{\\mathcal T}T^h$ there is a unique $b:G\\to LT$ with $\\epsilon(bQ^h)=a$. For every K-flat cochain complex $P$, $\\epsilon_{pP}$ is invertible, where $p$ is quotient by chain homotopy. Every complex has a K-flat resolution on which these computations apply. The ordinary augmentation remains the specified $1\\otimes m$ map; no derived completion unit is included in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (proetale-lemma-naive-completion): strict reduction functor, its scalar-unit augmentation and universal K-flat homotopy presentation; categorical construction written by the worker"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\Delta M=(M\\xleftarrow{1}M\\xleftarrow{1}\\cdots)$. On sections define $T(a)_n(s\\otimes m)=s\\otimes a(m)$ and $\\tau_n(s\\otimes m)=t_n(s)\\otimes m$. Compatibility $t_nq_{n+1}=q_n$ makes $\\tau_n$ balanced over $R$ and $R$-linear; both formulas commute with restrictions and hence sheafify. The identities $T(ba)=T(b)T(a)$, $T(1)=1$, $T(a+b)=T(a)+T(b)$, and $\\tau_nT(a)_{n+1}=T(a)_n\\tau_n$ hold on pure tensors and therefore after sheafification. Thus these formulas define an additive strict-tower functor. The maps $m\\mapsto1\\otimes m$ are $R$-linear, commute with restrictions and module maps, and satisfy $\\tau_n(1\\otimes m)=t_n(1)\\otimes m=1\\otimes m$; they give exactly the specified natural augmentation $\\eta:\\Delta\\to T$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), reduction tower; elementary sectionwise construction of its ordinary scalar-unit augmentation"
+   }
+  },
+  {
+   "text": "Kernels of strict-tower maps are the component kernels, with transitions restricted to them; cokernels are the component cokernels, with the induced transitions. Their universal maps assemble uniquely because the component maps commute with transitions. The abelian identities are therefore checked at each level, so $\\mathcal T$ is abelian and $H^i(X)_n=H^i(X_n)$. A tower map is an isomorphism if and only if every component is: naturality for the component inverses follows by multiplying the original naturality equation by those inverses. Consequently quasi-isomorphisms of tower complexes are exactly componentwise quasi-isomorphisms. Restriction of scalars keeps the underlying abelian sheaf, sectionwise kernels and sheafified cokernels, so it keeps cohomology and quasi-isomorphisms.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-inverse-system",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change); elementary componentwise abelian-category verification"
+   }
+  },
+  {
+   "text": "Let a:P→P′ be a quasi-isomorphism with both complexes K-flat. For every n, apply the proved independent-coefficient K-flat invariance helper derivedChangeOfRingsIndependentCoefficients_kflat_invariance from the generic ringed-site implementation of [lem-pur-derived-change-of-rings] to q_n and the ordinary scalar-extension functor. This is the arbitrary-universe version of the originally cited change-of-rings K-flat invariance step; it imposes no flat-term condition. Restriction to R preserves the underlying abelian sheaf, hence preserves quasi-isomorphisms by exact faithful forgetting to abelian sheaves. The componentwise criterion of Step 2 then shows T^c(a) is a quasi-isomorphism. Neither surjectivity nor flatness of q_n is used.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side), specialization to S_n in degree zero, and Tag 06YY (lemma-derived-base-change)"
+   }
+  },
+  {
+   "text": "Apply $T$ to differentials and to a homotopy equation $a-b=dh+hd$; additivity preserves that equation, yielding $T^h:K(\\mathcal A)\\to K(\\mathcal T)$. It also gives $T(P[1])\\cong T(P)[1]$ and $T(C(a))\\cong C(T(a))$: the canonical biproduct comparison identifies the cone differential with the matrix $\\left(\\begin{smallmatrix}T(d)&T(a)\\\\0&-T(d)\\end{smallmatrix}\\right)$, and identifies its inclusion and negative projection. Hence $F=Q^h_{\\mathcal T}T^h$ sends the standard cone triangles to distinguished triangles and is exact. This uses only the cone and shift formulas for the homotopy and derived categories, not exactness of the module functor $T$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Cone and distinguished-triangle formulas (definition-cone and definition-distinguished-triangle); elementary matrix calculation"
+   }
+  },
+  {
+   "text": "Let $\\mathcal P$ be the class of all K-flat complexes, with no condition on their terms. By [lem-pc-kflat-resolution], each complex $X$ has a quasi-isomorphism $P\\to X$ with $P\\in\\mathcal P$ (indeed $P$ can also have flat terms). Step 3 shows that $F$ inverts every quasi-isomorphism between objects of $\\mathcal P$, since $Q^h_{\\mathcal T}$ inverts quasi-isomorphisms. The two hypotheses of [lem-pur-left-derived-from-kflat-class] now hold for the exact functor $F$ of Step 4. Its conclusion gives $LT:D(\\mathcal A)\\to D(\\mathcal T)$ and $\\epsilon:LTQ^h\\to F$, universal among such pairs, with $\\epsilon_{pP}$ invertible for every $P\\in\\mathcal P$. Expanding that universal property gives the unique $b:G\\to LT$ satisfying $\\epsilon(bQ^h)=a$ for every $a:GQ^h\\to F$. The augmentation retained is the ordinary transformation constructed in Step 1.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes), dual assertion; Tag 05S9 and equation-everywhere (universal property); resolutions: sites-cohomology Tag 06YS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Assembly of Tags 06YT and 06YS with derived.tex Tag 06XN; the K-flat invariance step uses the already proved independent-coefficient helper in Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients. The ordinary strict tower and scalar-unit augmentation are constructed sectionwise and extended through the locally bijective sheafification unit. Tag 099M supplies context, not the general ring-map theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct the left derived strict quotient tower with a comparison invertible on all K-flat complexes",
+   "results": "8 hit(s): CategoryTheory.Functor.IsLeftDerivedFunctor.mk, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, CategoryTheory.Functor.IsLeftDerivedFunctor, DerivedCategory.left_fac, DerivedCategory.isIso_Q_map_iff_quasiIso, HasDerivedCategory.standard, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplexUpToQuasiIso",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Kan-extension counits assume the derived functor exists; they do not construct the strict quotient tower or its all-complex normalized completion unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict tower of scalar extension functors on sheaf module complexes admits a universal total left derived presentation computed on K-flat complexes",
+   "results": "8 hit(s): CategoryTheory.Tor', Ext, CategoryTheory.Tor_obj, CategoryTheory.Tor, SheafOfModules.Presentation.map, CategoryTheory.Tor'_obj_obj, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, localCohomology.diagram",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Kan-extension counits assume the derived functor exists; they do not construct the strict quotient tower or its all-complex normalized completion unit."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientPresentation|reductionTower|KFlat|kFlat",
+   "results": "0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Kan-extension counits assume the derived functor exists; they do not construct the strict quotient tower or its all-complex normalized completion unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"counit\"",
+   "results": "1 hit(s): CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Kan-extension counits assume the derived functor exists; they do not construct the strict quotient tower or its all-complex normalized completion unit."
+  },
+  {
+   "tool": "grep",
+   "query": "totalLeftDerivedCounit|isLeftDerivedFunctor_iff|leftDerivedLift|leftDerivedNat",
+   "results": "7 hit(s): Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Kan-extension counits assume the derived functor exists; they do not construct the strict quotient tower or its all-complex normalized completion unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize the map to derived inverse limit of a K-flat derived reduction tower by the ordinary constant tower unit on every complex",
+   "results": "8 hit(s): CategoryTheory.PreservesFiniteLimitsOfFlat.fac, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.flat_of_isNoetherian, CategoryTheory.PreservesFiniteLimitsOfFlat.lift, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AdicCompletion.ofTensorProduct",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Kan-extension counits assume the derived functor exists; they do not construct the strict quotient tower or its all-complex normalized completion unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat complexes resolve the strict quotient tower functor into its universal total left derived functor on the homotopy category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"The functor from the homotopy category to the derived category satisfies the lifting condition with respect to quasi-isomorphisms, ensuring compatibility between the homotopy category functor composit\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasProjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n          \", \"doc\": \"The n-th left-derived functor of an additive functor $ F : C \\to D $, constructed as the composition of the left-derived functor to the homotopy category of chain complexes in $ D $ followed by the n-t\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n           \", \"doc\": \"Given an additive functor $ F : C \\\\to D $ between abelian categories and a natural number $ n $, the $ n $-th right-derived functor is constructed by first taking injective resolutions in $ C $, apply\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasProjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n \", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, this constructs the induced natural transformat\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n           \", \"doc\": \"The right-derived functor associated to an additive functor $ F : C \\to D $, constructed by first taking injective resolutions in the abelian category $ C $ and then applying the induced functor betwee\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasProjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n          \", \"doc\": \"The left derived functor associated to an additive functor $ F : C \\to D $, constructed by composing the projective resolutions functor on $ C $ with the induced functor between homotopy categories. Fo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlat\", \"IsLeftDerivedFunctor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk][Ff]lat.*[Qq]uasiIso|[Qq]uasiIso.*[Kk][Ff]lat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total left derived strict reduction tower has invertible counit on all K flat complexes without flat terms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \": L ⋙ F.totalLeftDerived L W ⟶ F\", \"doc\": \"The natural transformation from the composition of the localization functor $ L $ with the total left derived functor of $ F $ to $ F $ itself, defined as the counit of the right Kan extension constru\"}\n  {\"name\": \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \": (F.totalLeftDerived L W).IsLeftDerivedFunctor (F.totalLeftDerivedCounit L W) W\", \"doc\": \"The total left derived functor of $ F $ with respect to the morphism property $ W $, constructed via the localization functor $ L $, satisfies the universal property of a left derived functor. Specifi\"}\n  {\"name\": \"CategoryTheory.Functor.totalLeftDerived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \": D ⥤ H\", \"doc\": \"The total left derived functor of $ F $ with respect to $ P $ is defined as the right Kan extension of $ F $ along the localization functor $ L $ associated with $ P $. This construction provides a un\"}\n  {\"name\": \"CategoryTheory.Functor.totalRightDerivedUnit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \": F ⟶ L ⋙ F.totalRightDerived L W\", \"doc\": \"The natural transformation from $ F $ to the composition of $ L $ with the total right derived functor of $ F $, defined as the unit of the left Kan extension. This transformation satisfies the univer\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {H : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_2} D] [inst_2 : CategoryTheory.Category.{v_5, u_3} H]\\n  {LF : CategoryTheory.Functor D H} {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  {α : \", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $LF : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, a natural transformation $\\\\\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) (n : ℤ) [Y.IsStrictlyGE n] :\\n  ∃ (Y' : CochainComplex C ℤ) (_ : Y'.IsStrictlyGE n) (g : X ⟶ Y') (s : Y ⟶ Y') (_ : IsIso (Q.map s)),\\n    f = Q.map g ≫ inv (Q.map s)\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) (n : ℤ) [X.IsStrictlyLE n] :\\n  ∃ (X' : CochainComplex C ℤ) (_ : X'.IsStrictlyLE n) (s : X' ⟶ X) (_ : IsIso (Q.map s)) (g : X' ⟶ Y),\\n    f = inv (Q.map s) ≫ Q.map g\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}\n  {\"name\": \"CategoryTheory.Functor.totalRightDerived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \": D ⥤ H\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, and a morphism property $P$ in $\\\\mathcal{C}$, the total right derived functor of $F$ with respect\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientTower|reductionTower|KFlat|kFlat",
+   "results": "{\"t\": \"2026-10-22T09:36:09Z\", \"tool\": \"grep\", \"query\": \"quotientTower|reductionTower|KFlat|kFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give Kan-extension APIs assuming existence, projective Tor, or exact-functor localization; none gives this strict sheaf tower and K-flat resolving construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived functor of a tower of extension of scalars on sheaves is a right Kan extension with counit invertible on K flat complexes",
+   "results": "{\"t\": \"2026-10-22T09:36:10Z\", \"tool\": \"leansearch\", \"query\": \"The derived functor of a tower of extension of scalars on sheaves is a right Kan extension with counit invertible on K flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.ranCounit\", \"CategoryTheory.Functor.rightKanExtensionCounit\", \"CategoryTheory.Functor.ran\", \"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit\", \"CategoryTheory.Functor.instIsRightKanExtensionObjRanAppRanCounit\", \"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\"], \"digest\": \"162480028dc4d115\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give Kan-extension APIs assuming existence, projective Tor, or exact-functor localization; none gives this strict sheaf tower and K-flat resolving construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-22T09:36:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLeftDerivedFunctor\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLeftDerivedFunctor\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension\", \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift\", \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorCompCompInvAssociatorWhiskerRightOfIsRightAdjoint\"], \"digest\": \"5538b6c713bb2d39\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give Kan-extension APIs assuming existence, projective Tor, or exact-functor localization; none gives this strict sheaf tower and K-flat resolving construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict inverse tower of sheaf scalar extension functors has a universal left derived functor computed on every K flat complex",
+   "results": "{\"t\": \"2026-10-22T09:36:12Z\", \"tool\": \"leanfinder\", \"query\": \"A strict inverse tower of sheaf scalar extension functors has a universal left derived functor computed on every K flat complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.lan_flat_of_flat\", \"Ext\", \"CategoryTheory.Functor.totalLeftDerived\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\"], \"digest\": \"1c962b11d83788e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give Kan-extension APIs assuming existence, projective Tor, or exact-functor localization; none gives this strict sheaf tower and K-flat resolving construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on sheaf modules that preserves quasi isomorphisms between K flat complexes admits an unbounded total left derived functor",
+   "results": "{\"t\": \"2026-10-22T09:36:41Z\", \"tool\": \"leanfinder\", \"query\": \"An additive functor on sheaf modules that preserves quasi isomorphisms between K flat complexes admits an unbounded total left derived functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\"], \"digest\": \"41b7f166e1d830de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits give Kan-extension APIs assuming existence, projective Tor, or exact-functor localization; none gives this strict sheaf tower and K-flat resolving construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constant-completion-equivalence",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "evaluation of the strict reduction tower: old step 3, Q1 preservation of K-flat quasi-isomorphisms and universal homotopy-level construction; cochain transport and unit normalization are separate tasks",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-derived-quotient-tower-presentation",
+  "worker": "stage1",
+  "summary": "Kept the statement; constructed the strict ordinary tensor tower and scalar-unit augmentation, checked componentwise cohomology and the additive cone calculation, and applied existing sheaf change-of-rings invariance, K-flat resolution and resolving-class derived-functor nodes. No new nodes.",
+  "blueprint": "def-weil-pbc-completed-pullback: total left derived strict tower and finite reduction tower; via lem-weil-pbc-constant-completion-equivalence, old step 3/Q1, restricted to the universal homotopy-level reduction presentation and ordinary augmentation.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "General ringed-site scalar-extension quasi-isomorphism invariance on all K-flat complexes is used at each level; the unit provides no such invariance theorem."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General ringed-site unbounded K-flat resolution supplies the resolving class; no proper-base-change argument is replaced."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic exact-functor resolving-class criterion supplies the right Kan universal property and its counit on every K-flat complex; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-pc-kflat-resolution",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-8a425b515",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-8a425b515 (reviewer sub-agent of L); spot-checked: Read the item in full and all 9 cited nodes' statements. The statement and stmt_deps are identical to the node created by the landed O3 parent split d6023006. No repair note exists for this item and no new nodes were created. Step 1: the strict tower T(M)_n=Res_{q_n}(S_n⊗M) is balanced because t_n q_{n+1}=q_n (checked), and the 1⊗m augmentation is compatible because t_n(1)=1; elementary from def-pur-sheaf-tensor-product, def-pc-sheaf-restrict-scalars and def-weil-inverse-system. Step 2: componentwise abelian structure, cohomology and isomorphisms in the tower category, and Res keeps cohomology; elementary from def-weil-sheaf-of-modules-category. Step 3: lem-pur-change-of-rings-kflat-quasi-iso (any ring map, any quasi-iso between K-flat complexes, no flat-term hypothesis) applied at each level, plus tensor symmetry with no sign since S_n is in degree 0; this matches Stacks 06YT (sites-cohomology l.3233). Step 4: an additive functor keeps homotopies, and the cone matrix (Td,Ta;0,-Td) makes Q_T T^h exact; uses the cone/shift conventions of def-weil-abstract-derived-category. Step 5: lem-pc-kflat-resolution (resolution maps P→X) and Step 3 give both hypotheses of lem-pur-left-derived-from-kflat-class for the class of all K-flat complexes, which yields exactly the right Kan universal property and ε invertible on K-flat complexes; this is the dual of 06XN. Small cases: S_n=R; S_n=0; Z→Z/p^n, where ε is not invertible on Z/p (not K-flat), consistent with the statement. No duplicate: 43 K-flat/tower/Kan hits are specialisations (lem-a1-finite-reduction-tower-resolving-model, lem-weil-pbc-reduction-pullback-derived-tower) or data definitions (def-pur-strict-quotient-completion-data and similar). No cycle: none of the cited nodes reaches the item. Tool uses of the three off-unit generic tools (sk-def-sf-operations, sk-thm-picard-semicon) are accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedQuotientTowerPresentation",
+  "declaration": "SheafOfModules.DerivedQuotientTower.exists_presentation",
+  "declarations": [
+   "SheafOfModules.DerivedQuotientTower.Mod",
+   "SheafOfModules.DerivedQuotientTower.reductionObj",
+   "SheafOfModules.DerivedQuotientTower.tensorSection",
+   "SheafOfModules.DerivedQuotientTower.exists_presentation"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedQuotientTowerPresentation.lean",
+  "statement": "theorem exists_presentation (S : ℕ → Sheaf J CommRingCat.{r}) (q : ∀ n : ℕ, R ⟶ S n) (t : ∀ n : ℕ, S (n + 1) ⟶ S n) (hq : ∀ n : ℕ, q (n + 1) ≫ t n = q n) : ∃ (T : Mod R ⥤ (ℕᵒᵖ ⥤ Mod R)) (hobj : ∀ (M : Mod R) (n : ℕ), (T.obj M).obj (op n) = reductionObj (q n) M) (_ : T.Additive) (η : Functor.const ℕᵒᵖ ⟶ T), (∀ (M N : Mod R) (f : M ⟶ N) (n : ℕ), (T.map f).app (op n) = eqToHom (hobj M n) ≫ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map (q n))).map (changeOfRingsHom (q n) M f) ≫ eqToHom (hobj N n).symm) ∧ (∀ (M : Mod R) (n : ℕ) (U : Cᵒᵖ) (s : (S (n + 1)).obj.obj U) (m : M.val.obj U), (eqToHom (hobj M (n + 1)).symm ≫ (T.obj M).map (homOfLE (Nat.le_succ n)).op ≫ eqToHom (hobj M n)).val.app U (tensorSection (q (n + 1)) M U s m) = tensorSection (q n) M U ((t n).hom.app U s) m) ∧ (∀ (M : Mod R) (n : ℕ) (U : Cᵒᵖ) (m : M.val.obj U), ((η.app M).app (op n) ≫ eqToHom (hobj M n)).val.app U m = tensorSection (q n) M U 1 m) ∧ (∀ {P P' : CochainComplex (Mod R) ℤ} (f : P ⟶ P'), CochainComplex.IsKFlatIndependentCoefficients (R := R) P → CochainComplex.IsKFlatIndependentCoefficients (R := R) P' → QuasiIso f → QuasiIso ((T.mapHomologicalComplex (.up ℤ)).map f)) ∧ (∃ (LT : DerivedCategory (Mod R) ⥤ DerivedCategory (ℕᵒᵖ ⥤ Mod R)) (ε : DerivedCategory.Qh ⋙ LT ⟶ T.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh), (∀ (G : DerivedCategory (Mod R) ⥤ DerivedCategory (ℕᵒᵖ ⥤ Mod R)) (a : DerivedCategory.Qh ⋙ G ⟶ T.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh), ∃! b : G ⟶ LT, Functor.whiskerLeft DerivedCategory.Qh b ≫ ε = a) ∧ ∀ P : CochainComplex (Mod R) ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := R) P → IsIso (ε.app ((HomotopyCategory.quotient (Mod R) (.up ℤ)).obj P))) ∧ (∀ X : CochainComplex (Mod R) ℤ, ∃ (P : CochainComplex (Mod R) ℤ) (f : P ⟶ X), CochainComplex.IsKFlatResolutionIndependentCoefficients (R := R) f)",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Universal presentation for arbitrary compatible ring-sheaf maps, with exact ordinary objects/maps and sheafified pure-tensor transition/unit formulas. Natural level n denotes source level n+1. Site object, site morphism, coefficient, and the two localization Hom universes remain independent. No derived completion unit is asserted. The auxiliary abbreviations and local pure tensor expose the recorded constructions without choosing any data from the existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cab71186e",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Read the node, all 6 stmt_dep records, the module, report.md (has Worker report and Second reading by Q72) and the upstream TensorProduct/KFlat/LeftDerived sources. Every clause matches: T pinned on objects (hobj = Res∘changeOfRings) and maps (changeOfRingsHom); transitions and the 1⊗m augmentation are pinned on actual sheafified pure tensors (tensorSection = sheafification unit of changeOfRingsPresheaf); K-flat quasi-iso preservation with no flat-term condition; LT, ε with ∃! b and whiskerLeft Qh b ≫ ε = a for every G, a; ε iso on the homotopy quotient of every K-flat P; K-flat resolutions. No flatness/Noetherian assumptions; the extra instances are Prop structural ones; universes u v r wA wT independent; lean.statement verbatim; declaration list exact; no hollow defs, only the theorem is sorry; docstrings carry source, blueprint and all 5 steps. Not Lean-closed live; first S2 delivery. Advisory: changeOfRings is owned via def-pur-sheaf-tensor-product's statement and lean_audit, not its declaration list. No compile, per instruction; no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261024T184824-L-3206255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

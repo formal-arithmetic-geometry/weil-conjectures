@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-finite-galois-vector-space-descent",
+ "kind": "statement",
+ "title": "Finite Galois descent for arbitrary semilinear vector spaces",
+ "statement": "Let $L/k$ be a finite Galois extension of fields [def-weil-field, def-pc-field-extension]: $L$ is finite-dimensional over $k$, separable algebraic [def-weil-pbc-separable-algebraic-extension], and normal, meaning that every minimal polynomial over $k$ of an element of $L$ splits in $L[T]$. Put $\\Pi=\\operatorname{Aut}_k(L)$. A semilinear $\\Pi$-action on an $L$-vector space $V$ is a family of additive bijections $\\sigma_V$ with $1_V=\\mathrm{id}$, $(\\sigma\\tau)_V=\\sigma_V\\tau_V$, and $\\sigma_V(\\lambda v)=\\sigma(\\lambda)\\sigma_V(v)$. Put $V^\\Pi=\\{v\\in V:\\sigma_V(v)=v\\text{ for all }\\sigma\\}$, a $k$-vector space. Scalar extension $U\\mapsto L\\otimes_k U$ [def-weil-module-base-change, def-weil-pbc-module-tensor-product], with action $\\sigma(\\lambda\\otimes u)=\\sigma(\\lambda)\\otimes u$, and the invariants functor are inverse equivalences between $k$-vector spaces and semilinear $\\Pi$-spaces, with equivariant $L$-linear maps as morphisms. More explicitly, for every $V$ the map $\\theta_V:L\\otimes_k V^\\Pi\\to V$, $\\lambda\\otimes v\\mapsto\\lambda v$, is an equivariant $L$-linear isomorphism, natural in equivariant $L$-linear maps. For every $U$ the map $\\eta_U:U\\to(L\\otimes_k U)^\\Pi$, $u\\mapsto1\\otimes u$, is a natural $k$-linear isomorphism. For $k$-vector spaces $U,W$, $f\\mapsto 1\\otimes f$ is a bijection from $\\operatorname{Hom}_k(U,W)$ to the equivariant $L$-linear maps $L\\otimes_k U\\to L\\otimes_k W$. There is no finite-dimensionality assumption on $U,V,W$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix A.64, printed pp.580–581 (all vector spaces, finite Galois case); Proposition 3.36, printed p.77 (explicit invariants quasi-inverse). Also Stacks Project Tag 0CDR, descent.tex, lemma-galois-descent, specialized to X = Spec(k), gives the equivalent quasi-coherent formulation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-galois-fixed-field], $\\Pi$ is finite and $L^\\Pi=k$. Apply clause (1) of [lem-exc-finite-galois-tensor-decomposition], with its base field $L$ renamed $k$ and its extension $E$ renamed $L$. Take the inverse image of the function $\\delta_{\\sigma,1}$ under its tensor isomorphism. By the tensor presentation [def-weil-pbc-module-tensor-product], write it as a finite sum $\\sum_i a_i\\otimes b_i$. Thus $\\sum_i a_i\\sigma(b_i)=\\delta_{\\sigma,1}$ for every $\\sigma\\in\\Pi$. For $v\\in V$ set $T_b(v)=\\sum_{\\sigma\\in\\Pi}\\sigma_V(bv)$. Reindexing by $\\sigma\\mapsto\\tau\\sigma$ proves $\\tau_V(T_b(v))=T_b(v)$, so $T_b(v)\\in V^\\Pi$. Define the additive map $S_V:V\\to L\\otimes_k V^\\Pi$ by $S_V(v)=\\sum_i a_i\\otimes T_{b_i}(v)$. These sums are finite independently of the dimension of $V$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "lem-exc-finite-galois-tensor-decomposition",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "A.64, printed pp.580–581 and 3.36, printed p.77; agent-written explicit tensor calculation replacing the Morita argument, using Stacks Tags 03SF (pione-section-finite-etale-under-galois), 09DW (fields-theorem-galois-theory), 09I1 (fields-lemma-finite-Galois)."
+   }
+  },
+  {
+   "text": "The tensor universal property [def-weil-pbc-module-tensor-product] gives the stated $L$-linear map $\\theta_V$. The preceding coefficient identities give $\\theta_V S_V(v)=\\sum_\\sigma(\\sum_i a_i\\sigma(b_i))\\sigma_V(v)=v$. Write $\\operatorname{tr}(c)=\\sum_\\sigma\\sigma(c)$. Reindexing shows this scalar is fixed, hence lies in $k$ by [lem-weil-pbc-finite-galois-fixed-field]. For $w\\in V^\\Pi$ and $c\\in L$, tensor balancing gives $S_V(cw)=\\sum_i a_i\\otimes\\operatorname{tr}(b_ic)w=(\\sum_i a_i\\operatorname{tr}(b_ic))\\otimes w=c\\otimes w$: indeed the coefficient in parentheses is $\\sum_\\sigma\\sigma(c)\\sum_i a_i\\sigma(b_i)=c$. Additivity and generation by pure tensors prove $S_V\\theta_V=\\mathrm{id}$. Thus $\\theta_V$ is bijective, and its inverse is automatically $L$-linear. On pure tensors, $\\theta_V(\\sigma(\\lambda)\\otimes w)=\\sigma(\\lambda)w=\\sigma_V(\\lambda w)$, proving equivariance. For an equivariant $L$-linear $h:V\\to V\\prime$, $h(\\lambda w)=\\lambda h(w)$ and $h(w)$ is fixed; hence $h\\theta_V=\\theta_{V\\prime}(1\\otimes h|_{V^\\Pi})$. This proves naturality.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "A.64, printed pp.580–581 and 3.36, printed p.77; agent-written explicit tensor calculation replacing the Morita argument, using Stacks Tags 03SF (pione-section-finite-etale-under-galois), 09DW (fields-theorem-galois-theory), 09I1 (fields-lemma-finite-Galois)."
+   }
+  },
+  {
+   "text": "The coefficient formula from step 1 implies $\\sum_i a_i\\operatorname{tr}(b_i)=1$ by summing over $\\Pi$. Consequently some $\\operatorname{tr}(b_j)\\ne0$ (otherwise the left side is zero). Set $t=b_j/\\operatorname{tr}(b_j)$, using that this denominator lies in $k$ by [lem-weil-pbc-finite-galois-fixed-field]. Then $\\operatorname{tr}(t)=1$. The function $p:L\\to k$, $p(c)=\\operatorname{tr}(tc)$, is $k$-linear and $p(1)=1$. For any $k$-space $U$, the tensor universal property [def-weil-pbc-module-tensor-product] defines $P_U:L\\otimes_kU\\to U$ by $P_U(c\\otimes u)=p(c)u$. It satisfies $P_U(1\\otimes u)=u$. Moreover for every tensor $z$, $1\\otimes P_U(z)=\\sum_\\sigma\\sigma(t)\\sigma(z)$, where each $\\sigma$ acts on the first tensor factor: check this on $c\\otimes u$, obtaining $\\sum_\\sigma\\sigma(tc)\\otimes u=1\\otimes\\operatorname{tr}(tc)u$, and extend additively. If $z$ is fixed this is $(\\sum_\\sigma\\sigma(t))z=z$. Thus $P_U$ restricted to invariants is the inverse of $\\eta_U$; no basis or finite-dimensionality is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "A.64, printed pp.580–581 and 3.36, printed p.77; agent-written explicit tensor calculation replacing the Morita argument, using Stacks Tags 03SF (pione-section-finite-etale-under-galois), 09DW (fields-theorem-galois-theory), 09I1 (fields-lemma-finite-Galois)."
+   }
+  },
+  {
+   "text": "The map $\\eta_U$ is $k$-linear by bilinearity, takes values in invariants because $\\sigma(1)=1$, and is natural since $(1\\otimes f)(1\\otimes u)=1\\otimes f(u)$; step 3 proves it is an isomorphism. Tensoring preserves identity and composition by [def-weil-pbc-module-tensor-product], and restriction to invariants does likewise. Step 2 and step 3 therefore give natural inverse isomorphisms for the two composite functors, proving the equivalence. Their standard triangle identities can also be checked directly: $\\theta_{L\\otimes U}(\\lambda\\otimes\\eta_U(u))=\\lambda\\otimes u$; and, for fixed $w\\in V$, $\\theta_V(\\eta_{V^\\Pi}(w))=w$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "A.64, printed pp.580–581 and 3.36, printed p.77; agent-written explicit tensor calculation replacing the Morita argument, using Stacks Tags 03SF (pione-section-finite-etale-under-galois), 09DW (fields-theorem-galois-theory), 09I1 (fields-lemma-finite-Galois)."
+   }
+  },
+  {
+   "text": "For an equivariant $L$-linear $g:L\\otimes_kU\\to L\\otimes_kW$, $g(1\\otimes u)$ is fixed. Define $f=\\eta_W^{-1}\\circ g|_{(L\\otimes U)^\\Pi}\\circ\\eta_U$. It is $k$-linear. Then $g(\\lambda\\otimes u)=\\lambda g(1\\otimes u)=\\lambda\\eta_W(f(u))=\\lambda\\otimes f(u)$, so tensor generation [def-weil-pbc-module-tensor-product] gives $g=1\\otimes f$. Conversely $1\\otimes f$ is equivariant on each pure tensor, and the displayed construction recovers $f$ by $\\eta_W^{-1}\\eta_W=\\mathrm{id}$. This proves the asserted Hom bijection for arbitrary $U,W$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "A.64, printed pp.580–581 and 3.36, printed p.77; agent-written explicit tensor calculation replacing the Morita argument, using Stacks Tags 03SF (pione-section-finite-etale-under-galois), 09DW (fields-theorem-galois-theory), 09I1 (fields-lemma-finite-Galois)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "A.64, printed pp.580–581 and 3.36, printed p.77; agent-written explicit tensor calculation replacing the Morita argument, using Stacks Tags 03SF (pione-section-finite-etale-under-galois), 09DW (fields-theorem-galois-theory), 09I1 (fields-lemma-finite-Galois)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite Galois extension L over k, scalar extension gives an equivalence of all vector spaces with semilinear Galois actions and invariants recover the k vector space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isInvariant_of_isGalois\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : \", \"doc\": \"If $ L/K $ is a finite Galois extension and $ B $ is the integral closure of $ A $ in $ L $, then $ B $ is invariant under the action of the Galois group $ \\\\text{Gal}(L/K) $. This means that for all $\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : Algebra A\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"IsGaloisGroup.to_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is a finite Galois group of $ B $ over $ A $, then $ G $ is also the Galois group of the fraction field $ L $ of $ B $ over the fraction field $ K $ of $ A $.\"}\n  {\"name\": \"IsGaloisGroup.iff_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"Let $G$ be a finite group, $A$ an integrally closed commutative ring, and $B$ an $A$-algebra with a multiplicative $G$-action. Then $G$ is the Galois group of $B$ over $A$ if and only if $B$ is integr\"}\n  {\"name\": \"IsGaloisGroup.isInvariant\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], Algebra.IsInvariant A B G\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $. Specifically, for all $ a \\\\in A $, $ g \\\\in G $, and $ b \\\\in B $\"}\n  {\"name\": \"IsGaloisGroup.of_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is the Galois group of $ L $ over $ K $, $ A $ is integrally closed, and $ B $ is integral over $ A $, then $ G $ is also the Galois group of $ B $ over $ A $.\"}\n  {\"name\": \"IsGalois.mem_range_algebraMap_iff_fixed\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E] [IsGalois F E]\\n  [FiniteDimensional F E] (x : E), x ∈ Set.range ⇑(algebraMap F E) ↔ ∀ (f : Gal(E/F)), f x = x\", \"doc\": \"For a finite Galois extension $ E/F $, an element $ x \\\\in E $ lies in the image of the canonical embedding $ F \\\\to E $ if and only if every automorphism $ f \\\\in \\\\text{Gal}(E/F) $ fixes $ x $, i.e., $ \"}\n  {\"name\": \"IsGaloisGroup.fixedPoints\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (L : Type u_4) [inst : Group G] [inst_1 : Field L] [inst_2 : MulSemiringAction G L] [Finite G]\\n  [FaithfulSMul G L], IsGaloisGroup G (↥(FixedPoints.subfield G L)) L\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ L $, then $ G $ is the Galois group of the field extension $ L $ over the subfield of elements fixed by the action of $ G $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear action of a finite Galois group on an arbitrary vector space admits descent: invariant vectors form a base field form and scalar extension is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsGaloisGroup.isInvariant\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], Algebra.IsInvariant A B G\", \"doc\": \"If $ G $ is the Galois group of $ B $ over $ A $, then the algebra structure of $ A $ over $ B $ is invariant under the action of $ G $. Specifically, for all $ a \\\\in A $, $ g \\\\in G $, and $ b \\\\in B $\"}\n  {\"name\": \"IsGaloisGroup.fixedPoints\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (L : Type u_4) [inst : Group G] [inst_1 : Field L] [inst_2 : MulSemiringAction G L] [Finite G]\\n  [FaithfulSMul G L], IsGaloisGroup G (↥(FixedPoints.subfield G L)) L\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ L $, then $ G $ is the Galois group of the field extension $ L $ over the subfield of elements fixed by the action of $ G $.\"}\n  {\"name\": \"IsGaloisGroup.finiteDimensional\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] [Finite G] [IsGaloisGroup G K L], FiniteDimensional K L\", \"doc\": \"If $ G $ is a finite group and $ G $ is the Galois group of the field extension $ L $ over $ K $, then $ L $ is a finite-dimensional vector space over $ K $. This follows from the fundamental theorem \"}\n  {\"name\": \"IsGalois.of_fixed_field\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ (E : Type u_2) [inst : Field E] (G : Type u_3) [inst_1 : Group G] [Finite G] [inst_3 : MulSemiringAction G E],\\n  IsGalois (↥(FixedPoints.subfield G E)) E\", \"doc\": \"If a finite group $ G $ acts on a field $ E $, then the extension $ E $ over the subfield of elements fixed by all elements of $ G $ is a Galois extension (i.e., it is algebraic, normal, and separable\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : Algebra A\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"FixedPoints.normal\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u) [inst : Group G] (F : Type v) [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [Finite G],\\n  Normal (↥(FixedPoints.subfield G F)) F\", \"doc\": \"For any field $ F $ and monoid $ M $ acting on $ F $, the field $ F $ is equipped with an algebra structure over its subfield of $ M $-fixed elements. This structure arises from the canonical inclusio\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : \", \"doc\": \"If $ L/K $ is a finite Galois extension and $ B $ is the integral closure of $ A $ in $ L $, then $ B $ is invariant under the action of the Galois group $ \\\\text{Gal}(L/K) $. This means that for all $\"}\n  {\"name\": \"FixedPoints.isSeparable\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u) [inst : Group G] (F : Type v) [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [Finite G],\\n  Algebra.IsSeparable (↥(FixedPoints.subfield G F)) F\", \"doc\": \"For any field $ F $ and monoid $ M $ acting on $ F $, the field $ F $ is equipped with an algebra structure over its subfield of $ M $-fixed elements. This structure arises from the canonical inclusio\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGalois\", \"TensorProduct\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "grep",
+   "query": "(Galois.*descent|descent.*Galois|semilinear.*invariant|invariant.*semilinear)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Galois vector space descent: the map L tensor invariants V to V is a linear isomorphism without finite dimensionality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsGalois.finiteDimensional_of_finite\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"[IsGalois F E] [Finite Gal(E/F)] : FiniteDimensional F E\", \"doc\": \"If $ E/F $ is a Galois field extension and the Galois group $ \\\\text{Gal}(E/F) $ is finite, then $ E $ is a finite-dimensional vector space over $ F $.\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[FiniteDimensional K L] [IsGalois K L] : Algebra.IsInvariant A B (B ≃ₐ[A] B)\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"LinearEquiv.coe_ofInjectiveEndo\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Basic\", \"type\": \"(f : V →ₗ[K] V) (h_inj : Injective f) : ⇑(ofInjectiveEndo f h_inj) = f\", \"doc\": \"Every injective linear map $ f : V \\to V $ on a finite-dimensional vector space $ V $ over a division ring $ K $ is a linear isomorphism (equivalence), since injectivity implies bijectivity in finite-d\"}\n  {\"name\": \"FiniteGaloisIntermediateField.instFiniteDimensionalSubtypeMemIntermediateField\", \"module\": \"Mathlib.FieldTheory.Galois.GaloisClosure\", \"type\": \"(L : FiniteGaloisIntermediateField k K) : FiniteDimensional k L\", \"doc\": \"Any finite Galois intermediate field $ L $ between a base field $ k $ and a finite Galois extension $ K $ is finite-dimensional as a vector space over $ k $.\"}\n  {\"name\": \"FiniteGaloisIntermediateField.finiteDimensional\", \"module\": \"Mathlib.FieldTheory.Galois.GaloisClosure\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  (self : FiniteGaloisIntermediateField k K), FiniteDimensional k ↥self.toIntermediateField\", \"doc\": \"Every intermediate field $ L $ in a finite Galois extension $ K/k $ is finite-dimensional as a vector space over the base field $ k $. In other words, if $ L $ is a finite Galois intermediate field be\"}\n  {\"name\": \"Representation.ofCoinvariantsTprodLeftRegular\", \"module\": \"Mathlib.RepresentationTheory.Coinvariants\", \"type\": \": Coinvariants (ρ.tprod (leftRegular k G)) →ₗ[k] V\", \"doc\": \"The linear map from the coinvariants of the tensor product representation $\\\\rho \\\\otimes \\\\text{leftRegular}(k,G)$ to the module $V$, constructed by lifting the composition of the tensor product of the \"}\n  {\"name\": \"Representation.linHom.invariantsEquivFDRepHom\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u} →\\n  [inst : Field k] →\\n    {G : Type u} → [inst_1 : Group G] → (X Y : FDRep k G) → ↥(Representation.linHom X.ρ Y.ρ).invariants ≃ₗ[k] X ⟶ Y\", \"doc\": \"For a field $k$ and group $G$, the invariant elements of the linear maps between two finitely generated representations $X$ and $Y$ (fixed by the $G$-action) are linearly equivalent to the space of mo\"}\n  {\"name\": \"LinearMap.linearEquivOfInjective_apply\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Lemmas\", \"type\": \"[FiniteDimensional K V] [FiniteDimensional K V₂] {f : V →ₗ[K] V₂} (hf : Injective f)\\n  (hdim : finrank K V = finrank K V₂) (x : V) : f.linearEquivOfInjective hf hdim x = f x\", \"doc\": \"For a division ring $ K $ and finite-dimensional vector spaces $ V $ and $ V_2 $ over $ K $ with equal dimensions, any injective linear map $ f : V \\to V_2 $ is bijective, hence a linear equivalence be\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "grep",
+   "query": "(semilinear|descent|invariant)",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Algebra.Ring.Action.Invariant\"}\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"71\", \"text\": \"section InvariantSubfields\"}\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"75\", \"text\": \"/-- A typeclass for subrings invariant under a `MulSemiringAction`. -/\"}\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"76\", \"text\": \"class IsInvariantSubfield (S : Subfield F) : Prop where\"}\n  {\"file\": \"Mathlib/FieldTheory/Fixed.lean\", \"line\": \"81\", \"text\": \"instance IsInvariantSubfield.toMulSemiringAction [IsInvariantSubfield M S] :\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"64\", \"text\": \"attribute [instance low] commutes isInvariant\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"69\", \"text\": \"  exact Algebra.IsInvariant.isInvariant\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"80\", \"text\": \"  isInvariant := ⟨fun x ↦ (InfiniteGalois.mem_bot_iff_fixed x).mpr⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"168\", \"text\": \"  · obtain ⟨a, rfl⟩ := hHFL.isInvariant.isInvariant x hx\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"310\", \"text\": \"  refine ⟨IsGaloisGroup.isInvariant.isInvariant _, ?_⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent.lean\", \"line\": \"32\", \"text\": \"- `IsPurelyInseparable.iterateFrobeniusₛₗ`: version of `iterateFrobenius` as a semilinear map over\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent.lean\", \"line\": \"236\", \"text\": \"We define it both as a ring homomorphism and a semilinear map over a subfield `F` of `K`.\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent.lean\", \"line\": \"240\", \"text\": \"to avoid problems with definitional equality when using the semilinear map version.\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent.lean\", \"line\": \"308\", \"text\": \"section Semilinear\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent.lean\", \"line\": \"313\", \"text\": \"/-- Version of `iterateFrobenius` as a semilinear map over a subfield `F` of `K`, w.r.t. the\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field invariance and ordinary linear representations do not give arbitrary semilinear vector-space descent or Hopf descent; HopfAlgebra.ofAlgHom constructs an antipode on an already given bialgebra and supplies no descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Galois descent for arbitrary vector spaces: scalar extension from k to L and semilinear Galois invariants are inverse equivalences",
+   "date": "2026-10-23",
+   "results": "8 hits; Algebra.isInvariant_of_isGalois, galLiftEquiv, Algebra.isInvariant_of_isGalois', galRestrict, IsGaloisGroup.to_isFractionRing, AlgEquiv.fintype, IsGaloisGroup.mulEquivAlgEquiv_symm_apply, IsGaloisGroup.iff_isFractionRing; source subdirectory ",
+   "verdict": "no match: tensor-map bijectivity assumes the factor maps already bijective; invariant integral-closure and linear representation results do not state semilinear vector-space descent. Fixed-field facts are reused through the existing Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGalois\", \"TensorProduct\"",
+   "date": "2026-10-23",
+   "results": "0 hits; ; source subdirectory ",
+   "verdict": "no match: tensor-map bijectivity assumes the factor maps already bijective; invariant integral-closure and linear representation results do not state semilinear vector-space descent. Fixed-field facts are reused through the existing Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "(Galois.*descent|descent.*Galois|semilinear.*invariant|invariant.*semilinear)",
+   "date": "2026-10-23",
+   "results": "0 hits; ; source subdirectory ",
+   "verdict": "no match: tensor-map bijectivity assumes the factor maps already bijective; invariant integral-closure and linear representation results do not state semilinear vector-space descent. Fixed-field facts are reused through the existing Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical linear map from L tensor the fixed vectors of a semilinear Galois representation to the representation is bijective for a finite Galois extension",
+   "date": "2026-10-23",
+   "results": "8 hits; TensorProduct.map_bijective, Module.Invertible.lTensor_bijective_iff, Module.Invertible.rTensor_bijective_iff, bijective_algebraMap_of_linearEquiv, LinearMap.lTensor_bij_iff_rTensor_bij, IsTensorProduct, IsLocalizedModule.fromLocalizedModule.bij, Module.Invertible.lTensor_surjective_iff; source subdirectory ",
+   "verdict": "no match: tensor-map bijectivity assumes the factor maps already bijective; invariant integral-closure and linear representation results do not state semilinear vector-space descent. Fixed-field facts are reused through the existing Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "(semilinear|descent|invariant)",
+   "date": "2026-10-23",
+   "results": "15 hits; Mathlib/FieldTheory/Fixed.lean, Mathlib/FieldTheory/Fixed.lean, Mathlib/FieldTheory/Fixed.lean, Mathlib/FieldTheory/Fixed.lean, Mathlib/FieldTheory/Fixed.lean, Mathlib/FieldTheory/Galois/IsGaloisGroup.lean, Mathlib/FieldTheory/Galois/IsGaloisGroup.lean, Mathlib/FieldTheory/Galois/IsGaloisGroup.lean; source subdirectory FieldTheory",
+   "verdict": "no match: tensor-map bijectivity assumes the factor maps already bijective; invariant integral-closure and linear representation results do not state semilinear vector-space descent. Fixed-field facts are reused through the existing Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois descent equivalence between vector spaces and modules with semilinear action using invariants, without finite dimension",
+   "date": "2026-10-23",
+   "results": "8 hits; Algebra.isInvariant_of_isGalois, Algebra.isInvariant_of_isGalois', IsGaloisGroup.isInvariant, Representation.linHom.invariantsEquivFDRepHom, IsGaloisGroup, IsGaloisGroup.iff_isFractionRing, Representation.linHom.invariantsEquivRepHom, IsGaloisGroup.of_isFractionRing; source subdirectory ",
+   "verdict": "no match: tensor-map bijectivity assumes the factor maps already bijective; invariant integral-closure and linear representation results do not state semilinear vector-space descent. Fixed-field facts are reused through the existing Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-galois-hopf-algebra-descent",
+  "date": "2026-10-23",
+  "group": "Q138"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type. Supporting input: Milne Theorem 12.23: character description needed before forming the torsion quotient in Notation 12.29. Supporting input for the character construction: finite Galois descent of the semilinear group algebra and its Hopf morphisms. Underlying input in Milne A.64: arbitrary semilinear vector spaces descend to their invariant subspace, before descending Hopf operations.",
+   "via": [
+    "lem-sfb-galois-hopf-algebra-descent",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-galois-vector-space-descent",
+  "worker": "stage1",
+  "summary": "Proved arbitrary semilinear descent with an explicit inverse built from the existing finite Galois tensor decomposition; a weighted trace of value one proves the unit without choosing bases. Verified naturality, triangles, and Hom bijection. No new nodes. Milne A.64 uses Morita equivalence; the replacement elementary tensor calculation is explicitly agent-written.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), the recorded alteration/moduli/group-descent prerequisite chain; underlying vector-space input for Milne A.64 in the parent Hopf descent. Whole-blueprint searches for Galois, semilinear, vector space found no equivalent node. The ancestor command returns None because created.item reaches the module-name string Sheaf.SixFunctors.CtfStabilityDirectImages; inherited from.node is retained, with the intended blueprint ancestor and place named here.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-galois-tensor-decomposition",
+    "why": "Only clause (1), the finite Galois tensor decomposition, is used as a generic field-algebra tool. The unit has no such algebraic statement; neither scheme clause (2) nor sheaf descent is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-galois-tensor-decomposition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-4fc1c55a2",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-4fc1c55a2 (reviewer sub-agent of L); spot-checked: Read the whole item and all 5 steps; the delivery adds no new nodes and no repair note applies. Statement agrees with Milne iAG A.64 (PDF p.592, printed 580-581: equivalence for all K-vector spaces with semilinear action) and 3.36 (PDF p.89, printed p.77: quasi-inverse V^Pi). The proof replaces Milne's Morita argument with an explicit one, correctly marked by=agent. Step 1: the inverse image of delta_{sigma,1} under clause (1) of lem-exc-finite-galois-tensor-decomposition (base renamed L->k, extension E->L; factor order checked) gives Sum a_i sigma(b_i)=delta. T_b is Pi-fixed by reindexing. Step 2: theta S = id; S theta(c tensor w) = (Sum a_i tr(b_i c)) tensor w = c tensor w, using that tr(.) lies in k by lem-weil-pbc-finite-galois-fixed-field (Mathlib leaf); equivariance and naturality checked. Step 3: trace-one t = b_j/tr(b_j) and P_U(c tensor u)=tr(tc)u invert eta without dividing by |Pi|; tested on F_4/F_2, where tr(1)=0 but t=omega works. Steps 4-5: triangle identities and the Hom bijection g = 1 tensor (eta_W^-1 g eta_U) checked on pure tensors. Edge cases L=k, zero spaces and infinite dimension hold. Searched for duplicates with rg -L over dag/nodes: galois-stable-subspace-descent, matrix-descent-*, exc-finite-galois-sections-descent and exc-field-module-sections-invariants are all different statements. The only citer, lem-sfb-galois-hopf-algebra-descent, uses exactly theta, eta and the Hom bijection. proof_deps equals the union of the uses, and there is no cycle. Accepted tool_use: lem-exc-finite-galois-tensor-decomposition clause (1), a generic field-algebra fact not given by any node of the item's unit. No SGA. Maintainer note: blueprint.from.node is null, inherited from the parent creation chain that reaches a module-name string; not this delivery's fault."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteGaloisVectorSpaceDescent",
+  "declaration": "Field.finiteGaloisVectorSpaceDescent",
+  "file": "lean/Sheaf/FieldTheory/FiniteGaloisVectorSpaceDescent.lean",
+  "statement": "theorem finiteGaloisVectorSpaceDescent (k : Type u) (L : Type v) [Field k] [Field L] [Algebra k L] [FiniteDimensional k L] [IsGalois k L] : ∃ θ : ∀ (V : Type w) [AddCommGroup V] [Module L V] [Module k V] [IsScalarTower k L V] (ρ : Representation k (L ≃ₐ[k] L) V), (∀ (σ : L ≃ₐ[k] L) (a : L) (z : V), ρ σ (a • z) = σ a • ρ σ z) → (L ⊗[k] ρ.invariants) ≃ₗ[L] V, ∃ η : ∀ (U : Type x) [AddCommGroup U] [Module k U], U ≃ₗ[k] (Representation.tprod (AlgEquiv.toLinearMapHom k L) (Representation.trivial k (L ≃ₐ[k] L) U)).invariants, (∀ (V : Type w) [AddCommGroup V] [Module L V] [Module k V] [IsScalarTower k L V] (ρ : Representation k (L ≃ₐ[k] L) V) (hρ : ∀ (σ : L ≃ₐ[k] L) (a : L) (z : V), ρ σ (a • z) = σ a • ρ σ z), (∀ (a : L) (z : ρ.invariants), θ V ρ hρ (a ⊗ₜ[k] z) = a • (z : V)) ∧ (∀ (σ : L ≃ₐ[k] L) (z : L ⊗[k] ρ.invariants), θ V ρ hρ ((Representation.tprod (AlgEquiv.toLinearMapHom k L) (Representation.trivial k (L ≃ₐ[k] L) ρ.invariants)) σ z) = ρ σ (θ V ρ hρ z))) ∧ (∀ (V V' : Type w) [AddCommGroup V] [Module L V] [Module k V] [IsScalarTower k L V] [AddCommGroup V'] [Module L V'] [Module k V'] [IsScalarTower k L V'] (ρ : Representation k (L ≃ₐ[k] L) V) (ρ' : Representation k (L ≃ₐ[k] L) V') (hρ : ∀ (σ : L ≃ₐ[k] L) (a : L) (z : V), ρ σ (a • z) = σ a • ρ σ z) (hρ' : ∀ (σ : L ≃ₐ[k] L) (a : L) (z : V'), ρ' σ (a • z) = σ a • ρ' σ z) (f : V →ₗ[L] V') (hf : ∀ (σ : L ≃ₐ[k] L) (z : V), f (ρ σ z) = ρ' σ (f z)) (z : L ⊗[k] ρ.invariants), f (θ V ρ hρ z) = θ V' ρ' hρ' ((LinearMap.baseChange L (((f.restrictScalars k).comp ρ.invariants.subtype).codRestrict ρ'.invariants (fun z σ ↦ (hf σ z).symm.trans (congrArg f (z.property σ))))) z)) ∧ (∀ (U : Type x) [AddCommGroup U] [Module k U] (z : U), (η U z : L ⊗[k] U) = 1 ⊗ₜ[k] z) ∧ (∀ (U W : Type x) [AddCommGroup U] [Module k U] [AddCommGroup W] [Module k W] (f : U →ₗ[k] W) (z : U), (η W (f z) : L ⊗[k] W) = LinearMap.baseChange L f (η U z)) ∧ (∀ (U : Type x) (W : Type y) [AddCommGroup U] [Module k U] [AddCommGroup W] [Module k W], (∀ (f : U →ₗ[k] W) (σ : L ≃ₐ[k] L) (z : L ⊗[k] U), LinearMap.baseChange L f ((Representation.tprod (AlgEquiv.toLinearMapHom k L) (Representation.trivial k (L ≃ₐ[k] L) U)) σ z) = (Representation.tprod (AlgEquiv.toLinearMapHom k L) (Representation.trivial k (L ≃ₐ[k] L) W)) σ (LinearMap.baseChange L f z)) ∧ (∀ (g : L ⊗[k] U →ₗ[L] L ⊗[k] W), (∀ (σ : L ≃ₐ[k] L) (z : L ⊗[k] U), g ((Representation.tprod (AlgEquiv.toLinearMapHom k L) (Representation.trivial k (L ≃ₐ[k] L) U)) σ z) = (Representation.tprod (AlgEquiv.toLinearMapHom k L) (Representation.trivial k (L ≃ₐ[k] L) W)) σ (g z)) → ∃! f : U →ₗ[k] W, LinearMap.baseChange L f = g))",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-706a0fd10",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Single theorem Field.finiteGaloisVectorSpaceDescent, sorry proof, no defs. Hypotheses = Field/Algebra/FiniteDimensional/IsGalois (separable+normal), no extras; semilinear action as k-Representation + hρ semilinearity (equivalent: σ fixes k, group gives bijections; Module k V + IsScalarTower is restriction of scalars). Invariants = ρ.invariants; tensor action = tprod(toLinearMapHom, trivial). θ pinned by a⊗z↦a•z, equivariant on all tensors, natural in equivariant f via genuine codRestrict (membership proof checked); η pinned by 1⊗z and natural; Hom bijection: baseChange equivariant + ∃! preimage for equivariant g, independent universes x,y. No finite-dim/char assumptions; edge cases L=k, zero spaces, infinite dim, F4/F2 covered. Universes u,v,w,x,y explicit. stmt_deps records match used declarations; node statement/stmt_deps unchanged vs live (only lean differs); lean.statement verbatim. No duplicate in Mathlib/project (only matrix-cocycle descent). Docstrings carry source, blueprint tag and 5 proof steps; report has Worker report and Second reading by Q15. Not recompiled (no change)."
+ }
+}

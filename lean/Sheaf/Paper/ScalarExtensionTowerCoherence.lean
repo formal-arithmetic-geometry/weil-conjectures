@@ -22,14 +22,17 @@ public import Sheaf.Paper.IntegralComparisonRealizationModels
 public import Sheaf.Paper.IntegralOperationsScalarComparisons
 public import Sheaf.Paper.CompletedOperationTowerSubstitution
 public import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
-import Sheaf.Paper.ScalarExtensionTensorUnit
-import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.Paper.KFlatRingedToposPullback
+import all Sheaf.Paper.ScalarExtensionTensorUnit
+import Sheaf.Paper.TensorPullbackRepresentativeDescent
+import Sheaf.Paper.ResolvingRepresentativeWhiskering
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+public import Sheaf.Paper.ScalarExtensionTowerComparisonData
+public import Sheaf.Paper.ScalarExtensionTowerComposition
+import all Sheaf.Paper.ScalarExtensionTowerComparisonData
+
 /-! # Scalar extension on strict quotient models
 
 Source: main-20261015 blueprint, def-weil-derived-pullback-tensor-hom, integral operations;
@@ -49,6 +52,18 @@ Stacks Tags 03EL and 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
+set_option genSizeOf false
+set_option genCtorIdx false
+set_option genInjectivity false
+set_option genSizeOfSpec false
+attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
+  CategoryTheory.Functor.mapDerivedCategory
+  WeilConjectures.coefficientTotalTensor
+  SheafOfModules.monoidalCategory
+  WeilConjectures.coefficientSequenceCommRingSheaf
+  WeilConjectures.coefficientSequenceCommRingPresheaf
+  WeilConjectures.integralComparisonSequenceScalarModel
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
@@ -57,176 +72,19 @@ attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 attribute [-instance] WeilConjectures.coefficientSequenceEssentiallySmall
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
+open scoped ChangeOfRings
 namespace WeilConjectures.ScalarExtensionTower
 
-/-- The sequence site has the small pro-etale site's original size.
-Source: Stacks 0941 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-instance (priority := 3000) sequenceSmall (W : Scheme.{u}) :
-    EssentiallySmall.{u + 1} (ℕ × W.ProEt) :=
-  coefficientSequenceEssentiallySmall.{u, 0} W
-
-/-- The original small pro-etale site, with object size u+1 and Hom size u.
-Source: blueprint size convention (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-instance (priority := 3000) siteSmall (W : Scheme.{u}) : EssentiallySmall.{u + 1} W.ProEt :=
-  essentiallySmallSelf.{0, u, u + 1} _
-
 variable (l : ℕ) [Fact l.Prime]
-
-/-- Signed direct-sum total tensor on the actual quotient sequence site.
-Source: blueprint integral operations; Stacks 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-abbrev tensor (E : Type u) [Field E] [Algebra ℚ_[l] E]
-    [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) :=
-  coefficientTotalTensor.{u, u + 1, u}
-    (coefficientSequenceTopology (Scheme.ProEt.topology W))
-    (coefficientSequenceCommRingSheaf.{u, u} l E W)
-
-/-- Cochain quotient systems, with every transition retained in their module structure.
-Source: blueprint integral operations; Stacks 0941
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-abbrev Complex (E : Type u) [Field E] [Algebra ℚ_[l] E]
-    [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) :=
-  CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ
-
 variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- Additivity of the actual ordinary sequence-site scalar extension.
-Source: Stacks 06YY (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-instance scalarAdditive (W : Scheme.{u}) :
-    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).E.Additive :=
-  (integralComparisonSequenceScalarModel.{u, u} l E L ι W).additive
+attribute [local irreducible] scalar_adj comparisons
+  integralComparisonSequenceTensorSection integralComparisonSequenceScalarUnit
 
-/-- Termwise scalar extension through the actual quotient-ring inclusions.
-Source: blueprint integral operations; Stacks 06YY
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-abbrev scalar (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{u}) :=
-  (integralComparisonSequenceScalarModel.{u, u} l E L ι W).E.mapHomologicalComplex (.up ℤ)
-
-/-- Termwise constant-coefficient pro-etale pullback of entire quotient systems.
-Source: blueprint integral operations; Stacks 03D2
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
-  (integralComparisonSequencePullback.{u, u} l E f).mapHomologicalComplex (.up ℤ)
-
-/-- The specified scalar-association isomorphism, lifted termwise.
-Source: blueprint integral operations, proof step 3; Stacks 03EL
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def kappa {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    pull l E f ⋙ scalar l E L ι X ≅ scalar l E L ι Y ⋙ pull l L f :=
-  NatIso.mapHomologicalComplex (integralComparisonSequenceScalarPullback.{u, u} l E L ι f) (.up ℤ)
-
-/-- The scalar action unitor on the same strict quotient complexes.
-Source: blueprint integral operations, proof step 7
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def scalarUnit (W : Scheme.{u}) : scalar l E E (AlgHom.id ℚ_[l] E) W ≅ 𝟭 _ :=
-  NatIso.mapHomologicalComplex (integralComparisonSequenceScalarUnit.{u, u} l E W) (.up ℤ)
-
-/-- Successive extension is identified by multiplication of the coefficient factors.
-Source: blueprint integral operations, proof step 7
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def scalarComp (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
-    (j : L →ₐ[ℚ_[l]] F) (W : Scheme.{u}) :
-    scalar l E L ι W ⋙ scalar l L F j W ≅ scalar l E F (j.comp ι) W :=
-  NatIso.mapHomologicalComplex
-    (integralComparisonSequenceScalarComposition.{u, u} l E L ι F j W) (.up ℤ)
-
-/-- Tensor generator in the (p,q) summand of the signed direct-sum total.
-Source: Stacks 03EK, 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-abbrev generator (W : Scheme.{u}) (P Q : Complex l E W) (p q : ℤ)
-    (U : (ℕ × W.ProEt)ᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :=
-  coefficientTensorGenerator.{u, u + 1, u}
-    (coefficientSequenceTopology (Scheme.ProEt.topology W))
-    (coefficientSequenceCommRingSheaf.{u, u} l E W) P Q p q (p + q) rfl U x y
-
-/-- The adjunction-unit generator read as a section on the base-change object.
-Source: Stacks 03D2 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def pullSection {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (M : coefficientSequenceModules.{u, u} l E Y) (n : ℕ) (U : Y.ProEt)
-    (x : M.val.obj (op (n, U))) :
-    ((integralComparisonSequencePullback.{u, u} l E f).obj M).val.obj
-      (op (n, (Scheme.proEtaleBaseChange f).obj U)) :=
-  integralComparisonSequenceGenerator.{u, u} l E f M n U x
-
-/-- Pure-tensor-normalized tensor comparisons on strict quotient systems.
-All components, including their inverses, are chain maps of actual sequence-site modules.
-Source: blueprint integral operations, proof steps 3--6; Stacks 03EL and 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-structure Comparisons where
-  /-- Scalar tensor comparison for all coefficient extensions. -/
-  sigma : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]
-    [Field B] [Algebra ℚ_[l] B] [FiniteDimensional ℚ_[l] B]
-    (i : A →ₐ[ℚ_[l]] B) (W : Scheme.{u}),
-    tensor l A W ⋙ scalar l A B i W ≅
-      (scalar l A B i W).prod (scalar l A B i W) ⋙ tensor l B W
-  /-- The comparison sends b tensor (x tensor y) to (b tensor x) tensor (1 tensor y). -/
-  sigma_formula : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]
-    [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]
-    [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B) (W : Scheme.{u})
-    (P Q : Complex l A W) (p q : ℤ) (U : (ℕ × W.ProEt)ᵒᵖ)
-    (b : (coefficientSequenceCommRingSheaf.{u, u} l B W).obj.obj U)
-    (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),
-    (((sigma A B i W).hom.app (P, Q)).f (p + q)).val.app U
-      (integralComparisonSequenceTensorSection.{u, u} l A B i W
-        (((tensor l A W).obj (P, Q)).X (p + q)) U b
-        (generator l A W P Q p q U x y)) =
-      generator l B W ((scalar l A B i W).obj P) ((scalar l A B i W).obj Q) p q U
-        (integralComparisonSequenceTensorSection.{u, u} l A B i W (P.X p) U b x)
-        (integralComparisonSequenceTensorSection.{u, u} l A B i W (Q.X q) U 1 y)
-  /-- Finite tensor-pullback comparisons on whole quotient diagrams. -/
-  c : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]
-    {X Y : Scheme.{u}} (f : X ⟶ Y),
-    tensor l A Y ⋙ pull l A f ≅ (pull l A f).prod (pull l A f) ⋙ tensor l A X
-  /-- The inverse-image unit formula, extended to arbitrary target coefficients. -/
-  c_formula : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]
-    [FiniteDimensional ℚ_[l] A] {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (P Q : Complex l A Y) (p q : ℤ) (n : ℕ) (U : Y.ProEt)
-    (b : (coefficientSequenceCommRingSheaf.{u, u} l A X).obj.obj
-      (op (n, (Scheme.proEtaleBaseChange f).obj U)))
-    (x : (P.X p).val.obj (op (n, U))) (y : (Q.X q).val.obj (op (n, U))),
-    (((c A f).hom.app (P, Q)).f (p + q)).val.app
-      (op (n, (Scheme.proEtaleBaseChange f).obj U))
-      (b • pullSection l A f
-        (((tensor l A Y).obj (P, Q)).X (p + q)) n U
-        (generator l A Y P Q p q (op (n, U)) x y)) =
-      generator l A X ((pull l A f).obj P) ((pull l A f).obj Q) p q
-        (op (n, (Scheme.proEtaleBaseChange f).obj U))
-        (b • pullSection l A f (P.X p) n U x)
-        (pullSection l A f (Q.X q) n U y)
-
-/-- Existence and uniqueness of the two specified chain comparisons.
-Source: blueprint integral operations, proof steps 3--4; Stacks 03EL and 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence).
-Proof: apply the ordinary sheaf tensor comparison to the geometric inverse image
-and to identity inverse image with the actual coefficient map. Its insertion and
-multiplication formulas are inverse by balancing. Totalize over all p+q=n. The
-comparison preserves bidegrees, so commutes with both differential terms, including
-(-1)^p. These formulas commute with horizontal quotient maps and vertical restrictions,
-hence are maps on the sequence site. Pure tensors locally generate the sheaf tensor
-and its direct-sum total; this proves uniqueness as well as naturality. -/
-theorem comparisons_existsUnique : Nonempty (Unique (Comparisons l)) := by
-  sorry
-
-/-- Canonical comparisons fixed by their pure-tensor characterization.
-Source: Stacks 03EL, 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def comparisons : Comparisons l := (Classical.choice (comparisons_existsUnique l)).default
-
-/-- The left route around the scalar-extension square, as an actual strict chain iso.
-Source: node proof steps 3--6 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def leftRoute {X Y : Scheme.{u}} (f : X ⟶ Y) :=
-  Functor.isoWhiskerLeft (tensor l E Y) (kappa l E L ι f) ≪≫
-    Functor.isoWhiskerRight ((comparisons l).sigma E L ι Y) (pull l L f) ≪≫
-    Functor.isoWhiskerLeft ((scalar l E L ι Y).prod (scalar l E L ι Y))
-      ((comparisons l).c L f)
-
-/-- The right route, using the same scalar-association maps on both tensor factors.
-Source: node proof steps 3--6 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def rightRoute {X Y : Scheme.{u}} (f : X ⟶ Y) :=
-  Functor.isoWhiskerRight ((comparisons l).c E f) (scalar l E L ι X) ≪≫
-    Functor.isoWhiskerLeft ((pull l E f).prod (pull l E f)) ((comparisons l).sigma E L ι X) ≪≫
-    Functor.isoWhiskerRight (NatIso.prod (kappa l E L ι f) (kappa l E L ι f)) (tensor l L X)
-
+set_option maxHeartbeats 800000 in
+-- Check all three normalized maps on homogeneous tensor generators.
 /-- Equality before localization, hence for both directions and all quotient transitions.
 Source: blueprint integral operations; Stacks 03EL, 07A4
 (blueprint: lem-pur-scalar-extension-tower-coherence).
@@ -240,88 +98,63 @@ is a sequence-site module map, so this equality and its inverse retain every
 horizontal quotient transition, as well as vertical restrictions. -/
 theorem square {X Y : Scheme.{u}} (f : X ⟶ Y) :
     leftRoute l E L ι f = rightRoute l E L ι f := by
-  sorry
-
-private theorem pull_hom_ext {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (M : coefficientSequenceModules.{u, u} l E Y)
-    (N : coefficientSequenceModules.{u, u} l E X)
-    {a b : (integralComparisonSequencePullback.{u, u} l E f).obj M ⟶ N}
-    (h : ∀ (n : ℕ) (U : Y.ProEt) (x : M.val.obj (op (n, U))),
-      a.val.app (op (n, (Scheme.proEtaleBaseChange f).obj U))
-          (pullSection l E f M n U x) =
-        b.val.app (op (n, (Scheme.proEtaleBaseChange f).obj U))
-          (pullSection l E f M n U x)) : a = b := by
-  apply ((Adjunction.ofIsRightAdjoint
-    (integralComparisonSequenceDirectImage.{u, u} l E f)).homEquiv M N).injective
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro V
-  apply ModuleCat.hom_ext
-  apply LinearMap.ext
-  intro x
-  exact h V.unop.1 V.unop.2 x
-
-private theorem scalar_unit_section (W : Scheme.{u})
-    (M : coefficientSequenceModules.{u, u} l E W) (V : (ℕ × W.ProEt)ᵒᵖ)
-    (s : (coefficientSequenceCommRingSheaf.{u, u} l E W).obj.obj V)
-    (x : M.val.obj V) :
-    ((integralComparisonSequenceScalarUnit.{u, u} l E W).hom.app M).val.app V
-      (integralComparisonSequenceTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W M V s x) =
-        s • x := by
-  exact (integralComparisonSequenceScalarUnit_existsUnique.{u, u} l E W).exists.choose_spec
-    M V s x
-
-private theorem scalar_unit_inv_section (W : Scheme.{u})
-    (M : coefficientSequenceModules.{u, u} l E W) (V : (ℕ × W.ProEt)ᵒᵖ)
-    (x : M.val.obj V) :
-    ((integralComparisonSequenceScalarUnit.{u, u} l E W).inv.app M).val.app V x =
-      integralComparisonSequenceTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W M V 1 x := by
-  have h := scalar_unit_section l E W M V 1 x
-  have hh := congrArg
-    (fun z ↦ ((integralComparisonSequenceScalarUnit.{u, u} l E W).inv.app M).val.app V z) h
-  simpa only [one_smul, ← ModuleCat.comp_apply, ← PresheafOfModules.comp_app,
-    ← SheafOfModules.comp_val, Iso.hom_inv_id_app, SheafOfModules.id_val,
-    PresheafOfModules.id_app, ModuleCat.id_apply] using hh.symm
-
-private theorem pull_section_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
-    {M N : coefficientSequenceModules.{u, u} l E Y} (a : M ⟶ N)
-    (n : ℕ) (U : Y.ProEt) (x : M.val.obj (op (n, U))) :
-    ((integralComparisonSequencePullback.{u, u} l E f).map a).val.app
-        (op (n, (Scheme.proEtaleBaseChange f).obj U)) (pullSection l E f M n U x) =
-      pullSection l E f N n U (a.val.app (op (n, U)) x) := by
-  have h := (Adjunction.ofIsRightAdjoint
-    (integralComparisonSequenceDirectImage.{u, u} l E f)).unit.naturality a
-  exact (congrArg (fun k ↦ (k.val.app (op (n, U))) x) h).symm
-
-private theorem scalar_pull_unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    integralComparisonSequenceScalarPullback.{u, u} l E E (AlgHom.id ℚ_[l] E) f ≪≫
-        Functor.isoWhiskerRight (integralComparisonSequenceScalarUnit.{u, u} l E Y)
-          (integralComparisonSequencePullback.{u, u} l E f) =
-      Functor.isoWhiskerLeft (integralComparisonSequencePullback.{u, u} l E f)
-        (integralComparisonSequenceScalarUnit.{u, u} l E X) := by
   apply Iso.ext
   apply NatTrans.ext
-  funext M
-  apply (cancel_epi ((integralComparisonSequenceScalarUnit.{u, u} l E X).inv.app
-    ((integralComparisonSequencePullback.{u, u} l E f).obj M))).1
-  apply pull_hom_ext l E f M
-  intro n U x
-  dsimp
-  simp only [PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  erw [scalar_unit_inv_section l E X
-    ((integralComparisonSequencePullback.{u, u} l E f).obj M)
-    (op (n, (Scheme.proEtaleBaseChange f).obj U)) (pullSection l E f M n U x)]
-  have hk := (integralComparisonSequenceScalarPullback_existsUnique.{u, u}
-    l E E (AlgHom.id ℚ_[l] E) f).exists.choose_spec M n U x
-  change ((integralComparisonSequencePullback.{u, u} l E f).map
-      ((integralComparisonSequenceScalarUnit.{u, u} l E Y).hom.app M)).val.app _
-      (((integralComparisonSequenceScalarPullback.{u, u} l E E
-        (AlgHom.id ℚ_[l] E) f).hom.app M).val.app _ _) = _
-  erw [hk, pull_section_naturality, scalar_unit_section, one_smul]
-  symm
-  simpa only [Functor.id_obj, one_smul] using scalar_unit_section l E X
-    ((integralComparisonSequencePullback.{u, u} l E f).obj M)
-    (op (n, (Scheme.proEtaleBaseChange f).obj U)) 1 (pullSection l E f M n U x)
+  funext Z
+  rcases Z with ⟨P, Q⟩
+  apply HomologicalComplex.hom_ext
+  intro n
+  apply ((scalar_adj l E L ι X).homEquiv _ _).injective
+  apply ((Adjunction.ofIsRightAdjoint
+    (integralComparisonSequenceDirectImage.{u, u} l E f)).homEquiv _ _).injective
+  apply WeilConjectures.total_tensor_sections_ext l E Y P Q n
+  intro p q hpq V
+  rcases V with ⟨m, U⟩
+  intro x y
+  subst n
+  change
+    (((scalar_adj l E L ι X).homEquiv _ _)
+      (((leftRoute l E L ι f).hom.app (P, Q)).f (p + q))).val.app
+        (op (m, (Scheme.proEtaleBaseChange f).obj U))
+        (pullSection l E f _ m U (generator l E Y P Q p q (op (m, U)) x y)) =
+    (((scalar_adj l E L ι X).homEquiv _ _)
+      (((rightRoute l E L ι f).hom.app (P, Q)).f (p + q))).val.app
+        (op (m, (Scheme.proEtaleBaseChange f).obj U))
+        (pullSection l E f _ m U (generator l E Y P Q p q (op (m, U)) x y))
+  refine (scalar_transpose_section l E L ι X
+    ((integralComparisonSequencePullback.{u, u} l E f).obj
+      (((tensor l E Y).obj (P, Q)).X (p + q))) _ _
+    (op (m, (Scheme.proEtaleBaseChange f).obj U))
+    (pullSection l E f _ m U (generator l E Y P Q p q (op (m, U)) x y))).trans ?_
+  refine Eq.trans ?_ (scalar_transpose_section l E L ι X
+    ((integralComparisonSequencePullback.{u, u} l E f).obj
+      (((tensor l E Y).obj (P, Q)).X (p + q))) _ _
+    (op (m, (Scheme.proEtaleBaseChange f).obj U))
+    (pullSection l E f _ m U (generator l E Y P Q p q (op (m, U)) x y))).symm
+  simp only [leftRoute, rightRoute, leftRouteCore, rightRouteCore, Iso.trans_hom,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
+    HomologicalComplex.comp_f,
+    SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  erw [scalar_pull_section l E L ι f
+    (((tensor l E Y).obj (P, Q)).X (p + q)) m U
+    (generator l E Y P Q p q (op (m, U)) x y)]
+  erw [pull_section_naturality l L f
+    ((((comparisons l).sigma E L ι Y).hom.app (P, Q)).f (p + q))]
+  erw [(comparisons l).sigma_formula E L ι Y P Q p q (op (m, U)) 1 x y]
+  erw [pull_tensor_section l L f ((scalar l E L ι Y).obj P)
+    ((scalar l E L ι Y).obj Q) p q m U]
+  erw [scalar_section_naturality l E L ι X
+    ((((comparisons l).c E f).hom.app (P, Q)).f (p + q))]
+  erw [pull_tensor_section l E f P Q p q m U x y]
+  erw [(comparisons l).sigma_formula E L ι X
+    ((pull l E f).obj P) ((pull l E f).obj Q) p q
+    (op (m, (Scheme.proEtaleBaseChange f).obj U)) 1
+    (pullSection l E f (P.X p) m U x) (pullSection l E f (Q.X q) m U y)]
+  erw [WeilConjectures.generator_map]
+  erw [scalar_pull_section l E L ι f (P.X p) m U x,
+    scalar_pull_section l E L ι f (Q.X q) m U y]
+  rfl
 
 /-- Identity extension is the identity under the actual scalar action unitors.
 Source: node proof step 7; Stacks 03EL
@@ -332,48 +165,18 @@ one in the second factor. Applying the two action unitors gives x tensor y again
 These formulas commute with every quotient and restriction, giving the displayed
 identities as strict-system equations. -/
 theorem unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (kappa l E E (AlgHom.id ℚ_[l] E) f ≪≫
-      Functor.isoWhiskerRight (scalarUnit l E Y) (pull l E f) =
-        Functor.isoWhiskerLeft (pull l E f) (scalarUnit l E X)) ∧
-    ((comparisons l).sigma E E (AlgHom.id ℚ_[l] E) Y ≪≫
-      Functor.isoWhiskerRight (NatIso.prod (scalarUnit l E Y) (scalarUnit l E Y)) (tensor l E Y) =
-      Functor.isoWhiskerLeft (tensor l E Y) (scalarUnit l E Y)) := by
+    UnitSquare (pull l E f) (scalar l E E (AlgHom.id ℚ_[l] E) Y)
+      (scalar l E E (AlgHom.id ℚ_[l] E) X) (kappa l E E (AlgHom.id ℚ_[l] E) f)
+      (scalarUnit l E Y) (scalarUnit l E X) ∧
+    TensorUnitSquare (tensor l E Y) (scalar l E E (AlgHom.id ℚ_[l] E) Y)
+      ((comparisons l).sigma E E (AlgHom.id ℚ_[l] E) Y) (scalarUnit l E Y) := by
+  unfold UnitSquare TensorUnitSquare
   constructor
-  · have h := congrArg (fun a ↦ NatIso.mapHomologicalComplex a (.up ℤ))
-      (scalar_pull_unit l E f)
-    exact h
+  · exact map_unit_square _ _ _ _ _ _ (scalar_pull_unit l E f)
   · exact scalarExtensionTensorUnit l E Y
       ((comparisons l).sigma E E (AlgHom.id ℚ_[l] E) Y)
       (fun P Q p q V x y ↦
         (comparisons l).sigma_formula E E (AlgHom.id ℚ_[l] E) Y P Q p q V 1 x y)
-
-/-- Direct and successive scalar comparisons agree before passing to derived limits.
-Source: node proof step 7; Stacks 03EL, 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence).
-Proof: the coefficient map for E to F is the composite of those for E to L and
-L to F. The scalar associator sends d tensor (b tensor x) to d*j(b) tensor x.
-The two pullback routes therefore multiply exactly these coefficients. For tensor,
-both routes send d tensor (b tensor (x tensor y)) to
-(d*j(b) tensor x) tensor (1 tensor y). Balancing, sheafification and direct sums
-extend these equations. Reductions preserve multiplication and one, so these are
-identities of strict systems, including their inverses. -/
-theorem composition (F : Type u) [Field F] [Algebra ℚ_[l] F]
-    [FiniteDimensional ℚ_[l] F] (j : L →ₐ[ℚ_[l]] F)
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (Functor.isoWhiskerRight (kappa l E L ι f) (scalar l L F j X) ≪≫
-      Functor.isoWhiskerLeft (scalar l E L ι Y) (kappa l L F j f) ≪≫
-      Functor.isoWhiskerRight (scalarComp l E L ι F j Y) (pull l F f) =
-      Functor.isoWhiskerLeft (pull l E f) (scalarComp l E L ι F j X) ≪≫
-        kappa l E F (j.comp ι) f) ∧
-    (Functor.isoWhiskerRight ((comparisons l).sigma E L ι Y) (scalar l L F j Y) ≪≫
-      Functor.isoWhiskerLeft ((scalar l E L ι Y).prod (scalar l E L ι Y))
-        ((comparisons l).sigma L F j Y) ≪≫
-      Functor.isoWhiskerRight (NatIso.prod (scalarComp l E L ι F j Y)
-        (scalarComp l E L ι F j Y)) (tensor l F Y) =
-      Functor.isoWhiskerLeft (tensor l E Y) (scalarComp l E L ι F j Y) ≪≫
-        (comparisons l).sigma E F (j.comp ι) Y) := by
-  sorry
-
 
 /-- A generator read in the legacy restricted finite-tensor tower's exact section type.
 Source: Stacks 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
@@ -426,14 +229,19 @@ def IsTensorModelNormalized (W : Scheme.{u})
             (((κC n).hom.f p).val.app U (coefficientEvaluationSection.{u, u} l E W (C.X p) n U x))
             (((κD n).hom.f r).val.app U
               (coefficientEvaluationSection.{u, u} l E W (D.X r) n U y))) ∧
-      realization.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
-        (coefficientSequenceLimit.{u, u} l E W).map
-          (S.systemClosed.tensor.map (Prod.mkHom eC.hom eD.hom)) ≫
-        (coefficientSequenceLimit.{u, u} l E W).map
-          ((S.systemTensorModel.iso _ _ _ C D hC hD).inv) ≫
-        (integralComparisonRoosBridge.{u, u} l E W ρ ((tensor l E W).obj (C, D))).hom ≫
-        DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom) =
-        (integralCompletedTensorComparison.{u, u} l E W).hom.app (P, Q)
+      FiveStepEquation
+        (realization.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
+        ((coefficientSequenceLimit.{u, u} l E W).map
+          (S.systemClosed.tensor.map (Prod.mkHom eC.hom eD.hom)))
+        ((coefficientSequenceLimit.{u, u} l E W).map
+          ((S.systemTensorModel.iso _ _ _ C D hC hD).inv))
+        ((integralComparisonRoosBridge.{u, u} l E W ρ
+          ((tensor l E W).obj (C, D))).hom)
+        (DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom))
+        ((integralCompletedTensorComparison.{u, u} l E W).hom.app (P, Q))
+
+
+attribute [local irreducible] IsTensorModelNormalized
 
 /-- A normalized presentation of the named completed tensor by whole quotient systems.
 Source: node proof steps 1, 4, 8; Stacks 06YS, 07A4 and 0941
@@ -512,6 +320,29 @@ def DerivedSigmaModel (W : Scheme.{u})
       DerivedCategory.Q.map (((comparisons l).sigma E L ι W).hom.app (P, Q)) ≫
       (SL.systemTensorModel.iso _ _ _ _ _ hsP.1 hsQ.1).hom
 
+attribute [local irreducible] DerivedSigmaModel
+
+private theorem scalar_good (W : Scheme.{u}) (P : Complex l E W) (hP : Good l E W P) :
+    Good l L W ((scalar l E L ι W).obj P) := by
+  unfold Good at hP ⊢
+  have h := SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients
+    (integralComparisonSequenceScalarMap.{u, u} l E L ι W) P
+    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).E
+    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).obj_eq
+    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).map_eq hP.1
+    (fun n ↦ (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1}
+        (coefficientSequenceCommRingSheaf.{u, u} l E W) (P.X n)) (hP.2 n))
+  refine ⟨h.1, fun n ↦ ?_⟩
+  exact (exactFunctor _ _).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1}
+      (coefficientSequenceCommRingSheaf.{u, u} l L W)
+      (((scalar l E L ι W).obj P).X n)).symm (h.2 n)
+
+
+set_option maxHeartbeats 800000 in
+-- Compare the restricted tensor models and counits simultaneously.
+
 /-- The derived comparison is determined by the same strict sigma on good representatives.
 Source: node proof steps 1, 4, 8; Stacks 06YS, 07A4
 (blueprint: lem-pur-scalar-extension-tower-coherence).
@@ -528,7 +359,61 @@ theorem derivedSigma_existsUnique (W : Scheme.{u})
       (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod
         (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor,
       DerivedSigmaModel l E L ι W SE SL α := by
-  sorry
+  unfold DerivedSigmaModel
+  let A := coefficientSequenceModules.{u, u} l E W
+  let B := coefficientSequenceModules.{u, u} l L W
+  let P : ObjectProperty (CochainComplex A ℤ) := Good l E W
+  let S : ObjectProperty (CochainComplex B ℤ) := Good l L W
+  let H : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ P X.as
+  have hres : ∀ X : HomotopyCategory A (.up ℤ),
+      ∃ (Y : H.FullSubcategory) (f : Y.obj ⟶ X), HomotopyCategory.quasiIso A (.up ℤ) f := by
+    intro X
+    obtain ⟨K, f, hK, hflat, hf, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := coefficientSequenceCommRingSheaf.{u, u} l E W) X.as
+    have hs : ∀ n, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+        (R := coefficientSequenceCommRingSheaf.{u, u} l E W) (K.X n) := fun n ↦
+      (exactFunctor _ _).prop_of_iso (SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1}
+        (coefficientSequenceCommRingSheaf.{u, u} l E W) (K.X n)).symm (hflat n)
+    refine ⟨⟨(HomotopyCategory.quotient A (.up ℤ)).obj K, hK, hs⟩,
+      (HomotopyCategory.quotient A (.up ℤ)).map f, ?_⟩
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff f).2 hf
+  obtain ⟨ff⟩ := resolvingRepresentativesFullyFaithfulWhiskering (DerivedCategory B)
+    (HomotopyCategory.quotient A (.up ℤ)) HomotopyCategory.quotient_obj_surjective
+    (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh P H (fun _ ↦ Iff.rfl) hres
+  let ff' := ff.ofIso ((Functor.whiskeringLeft _ _ (DerivedCategory B)).mapIso
+    (NatIso.prod (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))
+      (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))))
+  let PE : ObjectProperty (CochainComplex A ℤ) :=
+    CochainComplex.IsKFlatIndependentCoefficients
+      (R := coefficientSequenceCommRingSheaf.{u, u} l E W)
+  let PL : ObjectProperty (CochainComplex B ℤ) :=
+    CochainComplex.IsKFlatIndependentCoefficients
+      (R := coefficientSequenceCommRingSheaf.{u, u} l L W)
+  let iE : P.FullSubcategory ⥤ PE.FullSubcategory :=
+    ObjectProperty.lift _ P.ι (fun X ↦ X.property.1)
+  let iL : S.FullSubcategory ⥤ PL.FullSubcategory :=
+    ObjectProperty.lift _ S.ι (fun X ↦ X.property.1)
+  let r := Functor.isoWhiskerLeft (iE.prod iE) SE.systemTensorModel.comparison
+  let r' := Functor.isoWhiskerLeft (iL.prod iL) SL.systemTensorModel.comparison
+  obtain ⟨α, hα, huniq⟩ := tensorComparisonDescent
+    DerivedCategory.Q DerivedCategory.Q (scalar l E L ι W)
+    (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W)
+    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).ε P S
+    (fun X hX ↦ scalar_good l E L ι W X hX) ff' (tensor l E W) (tensor l L W)
+    SE.systemClosed.tensor SL.systemClosed.tensor r r'
+    ((comparisons l).sigma E L ι W)
+    (fun X hX ↦ (integralComparisonSequenceScalarModel.{u, u} l E L ι W).computes X hX.1)
+    (fun X Y hX hY ↦ (integralComparisonSequenceScalarModel.{u, u} l E L ι W).computes _
+      (coefficientTotalTensor_isKFlat.{u, u + 1, u} _ _ X Y hX.1 hY.1))
+  refine ⟨α, ?_, ?_⟩
+  · intro X Y hX hY
+    exact ⟨scalar_good l E L ι W X hX, scalar_good l E L ι W Y hY, hα X Y hX hY⟩
+  · intro β hβ
+    apply huniq β
+    intro X Y hX hY
+    obtain ⟨hX', hY', h⟩ := hβ X Y hX hY
+    exact h
 
 /-- The representative-normalized derived tensor scalar comparison on coherent systems.
 Source: Stacks 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
@@ -536,6 +421,11 @@ def derivedSigma (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W) :=
   (derivedSigma_existsUnique l E L ι W SE SL).exists.choose
+
+attribute [local irreducible] integralScalarExtension integralScalarExtensionOfUniverses
+  integralCompletedTensor integralDerivedPullback
+  integralComparisonDerivedSequenceScalar integralComparisonDerivedSequencePullback
+  pullbackReduction scalarReduction tensorReduction derivedSigma
 
 /-- The normalized realization models exist for the named completed tensor and scalar functors.
 Source: node proof step 8; Stacks 06YS, 07A4, 0941
@@ -635,6 +525,9 @@ theorem scalarExtensionTowerCoherence (W : Bool → Scheme.{u})
         (derivedSigma l E L ι (W false) (ME.calculus false) (ML.calculus false)).hom.app
           ((ME.calculus false).reduction.obj M.obj, (ME.calculus false).reduction.obj N.obj)) := by
   sorry
+
+attribute [local semireducible] coefficientSequenceCommRingSheaf
+  coefficientSequenceCommRingPresheaf
 
 /-- The actual local section of a strict quotient model specified by its evaluation iso.
 Source: node proof step 2 (blueprint: lem-pur-scalar-extension-tower-coherence). -/

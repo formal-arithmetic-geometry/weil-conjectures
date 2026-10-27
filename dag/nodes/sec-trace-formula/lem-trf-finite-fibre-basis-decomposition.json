@@ -1,0 +1,200 @@
+{
+ "id": "lem-trf-finite-fibre-basis-decomposition",
+ "kind": "statement",
+ "title": "Finite-fibre decomposition of a zero pushforward in a free module",
+ "statement": "Let $A$ be a commutative ring and $X,Y$ sets. Write $A^{(X)}$ for the free $A$-module [def-weil-pbc-free-module] of finitely supported functions $X\\to A$, with basis $e_x$ (value $1$ at $x$ and $0$ elsewhere), and similarly for $A^{(Y)}$. For a map $q:X\\to Y$, let $q_*:A^{(X)}\\to A^{(Y)}$ be the $A$-linear map $e_x\\mapsto e_{q(x)}$. Let $T\\subseteq X$ be finite, let $a_x\\in A$ for $x\\in T$, and put $f=\\sum_{x\\in T}a_xe_x$, $C=q(T)$, $T_z=\\{x\\in T:q(x)=z\\}$ and $b_z=\\sum_{x\\in T_z}a_x$ for $z\\in C$. Then $q_*f=\\sum_{z\\in C}b_ze_z$, so $q_*f=0$ if and only if every $b_z=0$. Each $T_z$ with $z\\in C$ is nonempty. For any choice $r_z\\in T_z$, the identities\n$$\\sum_{x\\in T_z}a_xe_x=\\sum_{x\\in T_z}a_x(e_x-e_{r_z})+b_ze_{r_z},\\qquad\nf=\\sum_{z\\in C}\\sum_{x\\in T_z}a_x(e_x-e_{r_z})+\\sum_{z\\in C}b_ze_{r_z}$$\nhold. In particular, if $q_*f=0$, then $f=\\sum_{z\\in C}\\sum_{x\\in T_z}a_x(e_x-e_{r_z})$, and every difference in this sum has $q(x)=q(r_z)$. When $T$ is empty, $C$ is empty and these are empty-sum identities, with no representatives required.",
+ "source": {
+  "document": "Mathlib/Data/Finsupp/Basic.lean",
+  "place": "Finsupp.mapDomain_apply_eq_sum, lines 1432--1434, supporting fibre coefficient formula. Agent-formulated free-module decomposition extracted from steps 2--4 of lem-trf-congruence-polynomial-kernel; the full decomposition is not asserted to be in Mathlib."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "The sets $T_z$, $z\\in C$, partition $T$: each $x\\in T$ lies in $T_{q(x)}$, and membership in both $T_z$ and $T_w$ implies $z=q(x)=w$. Conversely, $z\\in C=q(T)$ supplies an $x\\in T_z$, proving nonemptiness. Thus the finite pairs $(z,x)$ with $z\\in C$ and $x\\in T_z$ correspond bijectively to $T$, by $(z,x)\\mapsto x$, with inverse $x\\mapsto(q(x),x)$. Reindexing a finite sum by these inverse maps gives $\\sum_{x\\in T}v_x=\\sum_{z\\in C}\\sum_{x\\in T_z}v_x$ for any family in an abelian group. Only the finitely many nonempty sets $T_z$ require representatives; choose one in each.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Data/Finsupp/Basic.lean",
+    "place": "Finsupp.mapDomain_single, lines 308–310; Finsupp.mapDomain_apply_eq_sum, lines 1432–1434. The finite-sum argument below is written by the agent."
+   }
+  },
+  {
+   "text": "By the defining linearity and basis values of $q_*$, $q_*f=\\sum_{x\\in T}a_xe_{q(x)}$. Apply the partition from step 1 and use $q(x)=z$ on $T_z$ to get $q_*f=\\sum_{z\\in C}(\\sum_{x\\in T_z}a_x)e_z=\\sum_{z\\in C}b_ze_z$. In the free module of [def-weil-pbc-free-module], the basis expansion is unique. More explicitly, evaluation at $z\\in C$ in this last sum is $b_z$, since $e_w(z)$ is $1$ when $w=z$ and $0$ otherwise. Hence $q_*f=0$ implies $b_z=0$ for every $z\\in C$; conversely these equalities make every summand zero.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Data/Finsupp/Basic.lean",
+    "place": "Finsupp.mapDomain_single, lines 308–310; Finsupp.mapDomain_apply_eq_sum, lines 1432–1434. The finite-sum argument below is written by the agent."
+   }
+  },
+  {
+   "text": "Fix $z\\in C$ and any $r_z\\in T_z$. Distribute the scalar multiplications and finite sums: $\\sum_{x\\in T_z}a_x(e_x-e_{r_z})=\\sum_{x\\in T_z}a_xe_x-(\\sum_{x\\in T_z}a_x)e_{r_z}=\\sum_{x\\in T_z}a_xe_x-b_ze_{r_z}$. Adding $b_ze_{r_z}$ proves the first displayed identity. This calculation uses only the module axioms and holds for every choice of $r_z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Data/Finsupp/Basic.lean",
+    "place": "Finsupp.mapDomain_single, lines 308–310; Finsupp.mapDomain_apply_eq_sum, lines 1432–1434. The finite-sum argument below is written by the agent."
+   }
+  },
+  {
+   "text": "Sum the identity of step 3 over $z\\in C$. Reindex its left side by the bijection of step 1 to obtain $f$; distribute the outer sum over the two summands on the right. This is precisely the second displayed identity. When $q_*f=0$, step 2 makes each $b_z$ zero, leaving just the stated double sum of differences. In each such summand $x,r_z\\in T_z$, so $q(x)=z=q(r_z)$. If $T=\\varnothing$, then $C=q(T)=\\varnothing$ and $f=0$; both sides of every asserted sum identity are zero, and the family of representatives is the empty family.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Data/Finsupp/Basic.lean",
+    "place": "Finsupp.mapDomain_single, lines 308–310; Finsupp.mapDomain_apply_eq_sum, lines 1432–1434. The finite-sum argument below is written by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Data/Finsupp/Basic.lean",
+  "place": "Agent-written finite partition and representative-subtraction argument, consistent with Finsupp.mapDomain_apply_eq_sum (lines 1432–1434); this Mathlib theorem is supporting material, not a source for the whole decomposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ker.*(mapDomain|lmapDomain)|(mapDomain|lmapDomain).*ker",
+   "results": "4 hits: Mathlib/LinearAlgebra/Finsupp/Supported.lean, Mathlib/LinearAlgebra/Finsupp/Supported.lean, Mathlib/LinearAlgebra/Finsupp/Supported.lean, Mathlib/RingTheory/Kaehler/Basic.lean. No exact match or one-line specialization: mapDomain_apply_eq_sum computes one fibre coefficient; range_lmapDomain concerns the image; lmapDomain_disjoint_ker assumes injectivity on a subset. Module.Relations.ker_toQuotient and Solution.IsPresentation.ker_π require a prescribed quotient or an already established presentation. None supplies the representative decomposition of an arbitrary free-module pushforward kernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a map of sets and a finite linear combination of basis vectors mapping to zero, express it as the sum over each fibre of coefficients times differences from one chosen representative",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finsupp.mapDomain, Finsupp.single",
+   "results": "3 hits: Finsupp.mapDomain_single, Finsupp.mapDomain_fintype, Finsupp.mapDomain_apply. No exact match or one-line specialization: mapDomain_apply_eq_sum computes one fibre coefficient; range_lmapDomain concerns the image; lmapDomain_disjoint_ker assumes injectivity on a subset. Module.Relations.ker_toQuotient and Solution.IsPresentation.ker_π require a prescribed quotient or an already established presentation. None supplies the representative decomposition of an arbitrary free-module pushforward kernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely supported function whose pushforward along a map is zero is a finite sum of differences of basis vectors within fibres, with coefficients from its original support",
+   "results": "8 hits: Finsupp.linearCombination_comapDomain, FunOnFinite.linearMap_apply_apply, Finsupp.range_lmapDomain, Finsupp.linearCombination_mapDomain, Finsupp.lift_apply, Profinite.NobelingProof.GoodProducts.finsuppSum_mem_span_eval, Ideal.finsuppTotal_apply_eq_of_fintype, Finsupp.linearCombination_embDomain. No exact match or one-line specialization: mapDomain_apply_eq_sum computes one fibre coefficient; range_lmapDomain concerns the image; lmapDomain_disjoint_ker assumes injectivity on a subset. Module.Relations.ker_toQuotient and Solution.IsPresentation.ker_π require a prescribed quotient or an already established presentation. None supplies the representative decomposition of an arbitrary free-module pushforward kernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDomain_apply_eq_sum|linearCombination_mapDomain|range_lmapDomain",
+   "results": "9 hits: Mathlib/LinearAlgebra/LinearIndependent/Basic.lean, Mathlib/LinearAlgebra/Finsupp/VectorSpace.lean, Mathlib/LinearAlgebra/Finsupp/VectorSpace.lean, Mathlib/LinearAlgebra/Finsupp/VectorSpace.lean, Mathlib/LinearAlgebra/Finsupp/Span.lean, Mathlib/LinearAlgebra/Finsupp/LinearCombination.lean, Mathlib/LinearAlgebra/Finsupp/LinearCombination.lean, Mathlib/Data/Finsupp/Basic.lean. No exact match or one-line specialization: mapDomain_apply_eq_sum computes one fibre coefficient; range_lmapDomain concerns the image; lmapDomain_disjoint_ker assumes injectivity on a subset. Module.Relations.ker_toQuotient and Solution.IsPresentation.ker_π require a prescribed quotient or an already established presentation. None supplies the representative decomposition of an arbitrary free-module pushforward kernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of the linear map on free modules induced by a function of basis index sets is spanned by differences of basis vectors with the same image",
+   "results": "8 hits: Module.Relations.Solution.IsPresentation.ker_π, Module.Relations.Solution.span_relation_le_ker_π, KaehlerDifferential.kerTotal_eq, Module.Relations.ker_toQuotient, Finsupp.ker_mapRange, LinearIndependent.repr_ker, Module.Basis.SmithNormalForm.le_ker_coord_of_notMem_range, Module.Finite.kerRepr. No exact match or one-line specialization: mapDomain_apply_eq_sum computes one fibre coefficient; range_lmapDomain concerns the image; lmapDomain_disjoint_ker assumes injectivity on a subset. Module.Relations.ker_toQuotient and Solution.IsPresentation.ker_π require a prescribed quotient or an already established presentation. None supplies the representative decomposition of an arbitrary free-module pushforward kernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ker.*(mapDomain|lmapDomain)|(mapDomain|lmapDomain).*ker|sum_fiberwise",
+   "results": "25 hits: Mathlib/InformationTheory/Coding/KraftMcMillan.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean, Mathlib/NumberTheory/LSeries/Convolution.lean, Mathlib/FieldTheory/ChevalleyWarning.lean, Mathlib/Topology/Algebra/InfiniteSum/ENNReal.lean, Mathlib/LinearAlgebra/Finsupp/Supported.lean, Mathlib/LinearAlgebra/Finsupp/Supported.lean; supporting linear-combination, fibre-reindexing or injective-on-support facts only; no theorem gives the complete item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finsupp.mapDomain, Finsupp.single",
+   "results": "3 hits: Finsupp.mapDomain_single, Finsupp.mapDomain_fintype, Finsupp.mapDomain_apply; mapDomain_single is the basis formula and mapDomain_apply evaluates the pushforward; neither supplies representative subtraction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernel of a map of free modules induced by a function is generated by differences of basis vectors having the same image",
+   "results": "8 hits: LinearMap.sub_mem_ker_iff, LinearMap.ker, ModuleCat.free_map_apply, vectorSpan_image_eq_span_vsub_set_right_ne, ModuleCat.freeDesc, Module.Finite.kerRepr, Module.Relations.ker_toQuotient, LinearIndependent.repr_ker; sub_mem_ker_iff tests one difference; ker_toQuotient concerns a quotient by specified relations, not an arbitrary map of index sets. No exact match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite linear combination in a free module pushed along a function is the sum of fibre coefficients, and its kernel elements decompose as differences of basis vectors in the same fibre",
+   "results": "8 hits: Finsupp.linearCombination_comapDomain, Finsupp.linearCombination_comp, Finsupp.linearCombination_mapDomain, Finsupp.linearCombination_eq_fintype_linearCombination_apply, Finsupp.linearCombination_comp_lmapDomain, Finsupp.lmapDomain_linearCombination, Finsupp.linearCombination_embDomain, Module.Basis.constr_def; supporting linear-combination, fibre-reindexing or injective-on-support facts only; no theorem gives the complete item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDomain_apply_eq_sum|mapDomain_single",
+   "results": "5 hits: 172, 309, 531, 568, 1432; read mapDomain_single:309–310 and mapDomain_apply_eq_sum:1432–1434. The latter computes a coefficient over the actual support; it does not give the representative identities for an arbitrary finite T.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Decompose a finite sum with zero sum of coefficients as the sum of the original coefficients times each vector minus one chosen vector",
+   "results": "8 hits: Finset.weightedVSub_eq_linear_combination, Finset.sum_weightedVSubVSubWeights, Finset.sum_smul_vsub_const_eq_weightedVSub, Finsupp.linearCombination_comp_addSingleEquiv, Finset.sum_smul_const_vsub_eq_neg_weightedVSub, Finsupp.weight_sub_single_add, Finset.weightedVSub_eq_weightedVSubOfPoint_of_sum_eq_zero, Finset.weightedVSub_apply_const; affine weighted-sum results concern a single weighted sum, not grouping an arbitrary finite support along q and the full list of identities. Read weightedVSubOfPoint_apply (Combination.lean:66–68) and weightedVSubOfPoint_eq_of_sum_eq_zero (108–119); the elementary subtraction is written explicitly in proof step 3.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weightedVSub_eq_linear_combination|sum_smul_vsub_const_eq_weightedVSub|weightedVSubOfPoint_apply|weightedVSubOfPoint.*eq",
+   "results": "5 hits: 66, 70, 72, 74, 85; supporting linear-combination, fibre-reindexing or injective-on-support facts only; no theorem gives the complete item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-congruence-polynomial-kernel",
+  "date": "2026-10-22",
+  "group": "Q142"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Finite-presentation input used in the chart-spreading proof: Kernel of a monoid-algebra quotient induced by a congruence. Refines the binomial-kernel input to lem-trf-fg-commutative-monoid-finite-presentation: finite-support grouping and representative subtraction (returned kernel proof, steps 2--4).",
+   "via": [
+    "lem-trf-congruence-polynomial-kernel",
+    "lem-trf-fg-commutative-monoid-finite-presentation",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-fibre-basis-decomposition",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its free-module dependency. Proved all clauses in four explicit elementary steps: partition by finite fibres, compute and evaluate the pushforward, expand representative subtraction, then sum and specialize to the kernel. No new nodes: none of these calculations hides an independent non-elementary lemma. Searched the project, full DAG, blueprint and Mathlib; the supporting fibre-coefficient and affine weighted-sum results do not state the whole item. Checked empty support, zero coefficients, injective and constant maps, and the zero ring.",
+  "blueprint": "Realizes the finite-support grouping and representative-subtraction input (steps 2–4 extracted from lem-trf-congruence-polynomial-kernel) in the chart-spreading/finite-presentation ancestry of lem-trf-local-term-locality. Read the latest blueprint ancestor and sk-i-curve-zero: they do not themselves assert this algebra lemma; no unit or chapter route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-780fc1766",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-780fc1766 (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes, and no repair note makes this a re-split. Statement unchanged. Hypotheses checked: A is a commutative ring, X and Y are any sets, T is finite, and no surjectivity or nonzero coefficients are needed. Cases tested: T empty, constant q, injective q, Z/6 with coefficients 2 and 4 on one fibre, a representative with zero coefficient, and the zero ring. Step 1: fibre partition and reindexing by (z,x)↦x with inverse x↦(q(x),x) (sum_fiberwise), elementary. Step 2 cites def-weil-pbc-free-module (a mathlib node); I read its statement, and its unique-expansion clause gives q_*f=Σ b_z e_z and q_*f=0 ⇔ all b_z=0 by evaluation. Steps 3 and 4 are distributivity and summation over C; x and r_z both lie in T_z, so q(x)=q(r_z), and the empty case is handled. The parent lem-trf-congruence-polynomial-kernel, step 2, uses exactly the final clause, so the item is strictly smaller than the parent (no D1). Mathlib source checked: Finsupp/Basic.lean mapDomain_single at 308–310 and mapDomain_apply_eq_sum at 1432–1434 are correct; they are supporting material only and there is no one-line leaf. The 13 searches cover all three kinds; the LeanSearch rate limit is honestly recorded as unavailable. A grep -R over the DAG for mapDomain and finitely-supported kernel or fibre statements found no duplicate. Blueprint from and via are kept, same_as=[]. No SGA, no tool_uses, no fixes."
+ }
+}

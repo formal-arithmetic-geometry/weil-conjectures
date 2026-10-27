@@ -1,0 +1,122 @@
+{
+ "id": "lem-sp-integral-tower-constructible-coherence",
+ "kind": "statement",
+ "title": "Restrict compactification coherence to integral bounded constructible objects.",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, and the integral coefficient, reduction, and strict tower constructions of [def-sp-integral-direct-image-tower-data]. Restrict compactification coherence to integral bounded constructible objects. The precise quantifiers, domains and canonical arrows are the Lean statement below.\n\ntheorem constructible_compactification_coherence :\n    ∀ (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n      (X Y : Scheme.{u}) [X.Over (Spec (.of k))]\n      [Y.Over (Spec (.of k))]\n      [LocallyOfFiniteType (X ↘ Spec (.of k))]\n      [QuasiCompact (X ↘ Spec (.of k))]\n      [IsSeparated (X ↘ Spec (.of k))]\n      [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n      [QuasiCompact (Y ↘ Spec (.of k))]\n      [IsSeparated (Y ↘ Spec (.of k))]\n      (f : X ⟶ Y) [f.IsOver (Spec (.of k))]\n      (d : ℕ) [SmoothOfRelativeDimension d f],\n    ∃ φ : ∀ c₁ c₂ : Compactification f,\n        (constantModelBoundedConstructible (spIntegralCondensed l E) X).ι ⋙ shriek l E c₁ ≅\n          (constantModelBoundedConstructible (spIntegralCondensed l E) X).ι ⋙ shriek l E c₂,\n      (∀ c : Compactification f, φ c c = Iso.refl _) ∧\n      (∀ c₁ c₂ c₃ : Compactification f, φ c₁ c₂ ≪≫ φ c₂ c₃ = φ c₁ c₃) ∧\n      ∀ (c₁ c₂ : Compactification.BoundaryCompactification f)\n        (r : Compactification.DenseBoundaryCompactification f)\n        (h₁ : r.obj ⟶ c₁) (h₂ : r.obj ⟶ c₂) (M : Constructible l E X),\n        (φ c₁.obj.obj c₂.obj.obj).hom.app M ≫\n          CondensedRing.compactificationRefinementComponent (spIntegralCondensed l E) h₂ M.obj =\n        CondensedRing.compactificationRefinementComponent (spIntegralCondensed l E) h₁ M.obj",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (1)-(3)"
+ },
+ "stmt_deps": [
+  "def-sp-integral-direct-image-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "the schemes are qcqs and the integral coefficients are admissible. The integral-model\ncriterion identifies bounded constructible objects with finite-Tor constructible objects,\nwhich lie in the ambient localizing closure. Apply compactification_coherence_cocycle and\nwhisker its comparisons with this full-subcategory inclusion. Every compactification open\nis quasi-compact by QuasiCompact.of_comp, so it defines a boundary compactification.\nTransport along these canonical lifts. Their underlying compactifications are unchanged;\nthe identity, cocycle and dense-refinement normalization equations therefore restrict\ncomponentwise. Empty schemes and equal compactifications require no exception.",
+   "uses": [
+    "sk-lem-integral-models",
+    "sk-def-localizing-closure",
+    "det-sf-comp-coherence-cocycle",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lemma-nagata-open-immersion-qc-over-separated-target"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-integral-models",
+  "sk-def-localizing-closure",
+  "det-sf-comp-coherence-cocycle",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lemma-nagata-open-immersion-qc-over-separated-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (1)-(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized strict tower of finite coefficient sheaves has derived inverse limit reconstructing an integral compact support direct image",
+   "results": "SheafOfModules.hasLimitsOfShape; SheafOfModules.hasLimit; CategoryTheory.Sheaf.ΓNatIsoLim; CategoryTheory.Sheaf.createsLimitsOfShape and generic sheaf limits.",
+   "date": "2026-10-25",
+   "verdict": "No match: none provides the specialized normalized integral strict tower comparisons or projection mates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"comp\"",
+   "results": "CategoryTheory.Adjunction.comp; comp_homEquiv; triangle component identities.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction tools only; not this sheaf/tower comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported integral adic sheaf pushforward reconstructs from normalized finite quotient systems with uniform Tor amplitude and satisfies projection formula",
+   "results": "localCohomology.diagram; localCohomology.ofDiagram; AdicCompletion.eval_comp_of; IsAdicComplete.StrictMono.mkQ_comp_lift; AdicCompletion.of_apply.",
+   "date": "2026-10-25",
+   "verdict": "No match: these are scalar algebraic completions or local cohomology, not the unbounded strict system derived functors."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|derivedComplete|normalizedTower",
+   "results": "msearch returned unrelated compact support in analysis; local algebraic-geometry site search has no integral compact-support tower theorem.",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib theorem. Existing project dependencies require transports between their independently specified presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralDirectImageTower",
+  "date": "2026-10-25",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Proof paragraph (2), compactification independence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTowerCompactificationCoherence",
+  "file": "lean/Sheaf/Paper/IntegralTowerCompactificationCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralDirectImageTower.constructible_compactification_coherence",
+  "statement": "theorem constructible_compactification_coherence : ∀ (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (d : ℕ) [SmoothOfRelativeDimension d f], ∃ φ : ∀ c₁ c₂ : Compactification f, (constantModelBoundedConstructible (spIntegralCondensed l E) X).ι ⋙ shriek l E c₁ ≅ (constantModelBoundedConstructible (spIntegralCondensed l E) X).ι ⋙ shriek l E c₂, (∀ c : Compactification f, φ c c = Iso.refl _) ∧ (∀ c₁ c₂ c₃ : Compactification f, φ c₁ c₂ ≪≫ φ c₂ c₃ = φ c₁ c₃) ∧ ∀ (c₁ c₂ : Compactification.BoundaryCompactification f) (r : Compactification.DenseBoundaryCompactification f) (h₁ : r.obj ⟶ c₁) (h₂ : r.obj ⟶ c₂) (M : Constructible l E X), (φ c₁.obj.obj c₂.obj.obj).hom.app M ≫ CondensedRing.compactificationRefinementComponent (spIntegralCondensed l E) h₂ M.obj = CondensedRing.compactificationRefinementComponent (spIntegralCondensed l E) h₁ M.obj",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "blueprint": "Exact component of the original proof, with the original unit route retained. Search of the whole imported blueprint found finite-coefficient coherence but no duplicate of this integral normalized comparison.",
+  "note": "Existing dependency statements are used through coordinate transport; this lemma isolates that transport and its specified canonical maps."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0fa3a",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261025T162022-L-206552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0fa3a",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261025T162022-L-206552",
+  "kind": "interface",
+  "note": "independent cc review: integral_direct_image_tower signature vs clone a25e16ef939 (byte-identical); IntegralDirectImageTowerData vs old interface (identical decls, only plain imports and respectTransparency options changed); five split sorry statements vs item clauses and node pinning; new node statement fields vs Lean signatures"
+ }
+}

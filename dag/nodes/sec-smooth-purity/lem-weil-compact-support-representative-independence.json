@@ -23,13 +23,13 @@
  ],
  "proof": [
   {
-   "text": "Choose one compactification using its existence theorem and a small site in the stated coefficient universes. The coherent reduction-tower theorem gives the exact $R$-linear functor $T=\\mathcal T_f^c$, including its evaluation isomorphisms and quotient transitions. The strict-tower limit theorem supplies the exact functor $L=R\\lim$, computed by resolving the entire tower. Its Roos triangle identifies $LT(K)$ with the integral compact-support derived-limit formula, without choosing cones functorially.",
+   "text": "Fix the supplied compactification c. Choose exactly T and its evaluation isomorphisms e from exists_compactSupportReductionTower and exactly RF and its unit eta from ringedStrictTowerHomotopyLimitOfUniverses. Descend each ordinary limit projection through the universal property of the total right derived functor; its factorization identity gives the required normalization on every complex. Compare this derived functor with the standard K-injective right derived limit. Exact countable products of completed-coefficient sheaves and the existing canonical Roos-triangle proof give a derived-limit triangle whose first map consists of these normalized projections.",
    "uses": [
-    "prop-compactification-refinement",
     "def-weil-pbc-proetale-site",
     "lem-weil-compact-support-reduction-tower-functor",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-integral-rational-qbar-compact-support"
+    "lem-coef-constant-tower-roos",
+    "lem-pur-integral-operations-well-defined"
    ],
    "elementary": false,
    "source": {
@@ -38,12 +38,12 @@
    }
   },
   {
-   "text": "Constant sections act on $\\mathcal A_Y=\\operatorname{Mod}(B_Y)$, $B_Y=\\widehat{\\mathcal O}_{E,Y}$ [lem-weil-integral-constructible-linear], and componentwise on the abelian category $\\operatorname{Tow}(\\mathcal A_Y)$ [lem-weil-tower-category-levelwise-abelian], commuting with the module-map transitions; derived localizations inherit this [lem-weil-linear-abelian-derived-category]. On compatible families $\\lim(au)=a\\lim(u)$ and $\\lim(u+v)=\\lim(u)+\\lim(v)$. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], tower complexes have K-injective resolutions and $L=R\\lim$ is the total right derived functor of termwise $\\lim$, computed on them. So [lem-weil-kinjective-total-derived-linear] applies with $\\mathcal A=\\operatorname{Tow}(\\mathcal A_Y)$, $\\mathcal B=\\mathcal A_Y$, $U=\\lim$: $L$ is additive and $R$-linear, hence so is $LT$ ($T$ is $R$-linear by [lem-weil-compact-support-reduction-tower-functor]). No linear choice of resolutions is required.",
+   "text": "Identify the scalar action chosen by the coherent-tower theorem with the published ambient integral action: their constant sections agree after every finite quotient projection, and localization identifies the resulting scalar natural transformations on complexes. The uniqueness characterization of integralCoefficientLinear then identifies the linear structures. Ordinary inverse limit is linear by its projections. The proved K-injective right-derived-linearity helper in CompactSupportReductionTower makes its standard right derived functor linear, and uniqueness of right derived functors transfers this to the prescribed RF. The composite T followed by RF is therefore linear. T is additive from its recorded triangulated structure, and RF is additive by the same comparison with standard right derived limit.",
    "uses": [
     "lem-weil-integral-constructible-linear",
+    "lem-weil-integral-scalar-extension-well-defined",
     "lem-weil-tower-category-levelwise-abelian",
     "lem-weil-linear-abelian-derived-category",
-    "lem-weil-kinjective-total-derived-linear",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "lem-weil-compact-support-reduction-tower-functor"
    ],
@@ -54,12 +54,13 @@
    }
   },
   {
-   "text": "The integral compact-support constructibility theorem applies with the same field, invertible prime, coefficient field, compactification and transitions. Every such derived limit lies in $\\mathcal C_Y$, with the asserted uniform cohomological interval. Thus $LT$ restricts to $F:\\mathcal C_X\\to\\mathcal C_Y$. Fullness and the inherited triangulated and linear structures preserve exactness and linearity. Its values are $Rf_!K$ by the compact-support definition.",
+   "text": "The successor transition in the coherent tower is definitionally the specified sfCompactSupportTransition. Transport the normalized Roos triangle by the product of the evaluation isomorphisms e. Compare this triangle with the chosen derived-limit witness defining sfIntegralCompactSupportValue: rotate both triangles and extend the identity of their common transition arrow to an isomorphism of triangles; shifting back supplies an isomorphism of vertices preserving the first maps. Define F on exactly the prescribed integral compact-support objects and conjugate the maps of T followed by RF by these isomorphisms. Their naturality, projection compatibility, additivity and scalar linearity follow from cancellation and bilinearity. Membership of the prescribed objects is supplied by their existing constructibility proof.",
    "uses": [
+    "def-weil-derived-limit",
     "lem-sf-integral-compact-support-constructible",
-    "lem-weil-integral-constructible-triangulated",
     "lem-weil-integral-constructible-linear",
-    "def-weil-integral-rational-qbar-compact-support"
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-weil-compact-support-reduction-tower-functor"
    ],
    "elementary": false,
    "source": {
@@ -93,17 +94,18 @@
   }
  ],
  "proof_deps": [
-  "prop-compactification-refinement",
   "def-weil-pbc-proetale-site",
   "lem-weil-compact-support-reduction-tower-functor",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-constant-tower-roos",
+  "lem-pur-integral-operations-well-defined",
   "lem-weil-integral-constructible-linear",
+  "lem-weil-integral-scalar-extension-well-defined",
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-linear-abelian-derived-category",
-  "lem-weil-kinjective-total-derived-linear",
+  "def-weil-derived-limit",
   "lem-sf-integral-compact-support-constructible",
-  "lem-weil-integral-constructible-triangulated",
+  "def-weil-integral-rational-qbar-compact-support",
   "def-weil-rationalization-karoubi",
   "def-weil-linear-scalar-localization",
   "def-weil-module-base-change"
@@ -111,7 +113,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-  "place": "Agent assembly of the existing coherent tower, total derived limit, constructibility and scalar-localization facts; K-injective scalar-linearity has been extracted as a separate statement-only lemma. Source route unchanged."
+  "place": "Stage-3 proof by J4: normalized derived projections, scalar normalization, projection-preserving comparison of Roos vertices, explicit tensor extension, and functorial isomorphism laws. The supplied compactification and the existing proved right-derived linearity helper remove two planned prerequisites; no statement changes."
  },
  "mathlib_searches": [
   {
@@ -303,7 +305,18 @@
   "prop-weil-pbc-rational-transport"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
@@ -348,5 +361,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Repair of return L at 0535fdf24816: retain all binders and rational identity/composition/cocycle clauses; bind T and e to exists_compactSupportReductionTower and RF and η to ringedStrictTowerHomotopyLimitOfUniverses. The integral functor is naturally isomorphic after inclusion to T followed by RF. The comparison preserves the projections of the chosen Roos vertex to every sfCompactSupportTerm, and derived projections are normalized by η against ordinary limit projections on complexes. This constrains the integral maps before the pure-tensor rational extension."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T041222-L-1097403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

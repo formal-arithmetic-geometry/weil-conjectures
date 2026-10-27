@@ -1,0 +1,464 @@
+{
+ "id": "lem-sfb-semiabelian-multiplication-fppf",
+ "kind": "statement",
+ "title": "Multiplication by any positive integer is an fppf cover of a semiabelian scheme",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $p:G\\to S$ be a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with identity $e$. The addition, inverse and identity are $S$-morphisms satisfying the commutative group identities; separated means that the diagonal is a closed immersion. Assume every geometric fibre is semiabelian: after an algebraically closed residue-field extension $k$, it fits into an exact sequence of fppf sheaves $1\\to\\mathbf G_{m,k}^r\\to G_k\\to A_k\\to1$, where $r\\geq0$, $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$, and $A_k$ is a proper smooth geometrically connected $k$-group scheme. For every integer $d\\geq1$, the homomorphism $[d]:G\\to G$, the sum of $d$ copies of the identity, is flat, surjective, quasi-finite and of finite presentation. Here flat means that its local ring maps are flat, surjective refers to underlying points, and quasi-finite means finite type with finite fibres. In particular $[d]$ is an fpqc covering (faithfully flat and quasi-compact), without any invertibility condition on $d$. For $a\\geq1$ its iterated relation schemes $R_a=G\\times_{[d],G,[d]}\\cdots\\times_{[d],G,[d]}G$ with $a$ factors are flat and of finite presentation over $S$, hence locally Noetherian. Their restriction over an open of $S$ is the corresponding relation scheme for the restricted multiplication map. No assertion that $[d]$ is finite or etale over $S$ is made.",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "II 3.3.2.1, proof: multiplication on a connected semistable group is surjective, flat and quasi-finite, used again for descent in II 3.3.3. Local original WANTED. The assertions about relation schemes are its base-change and composition consequences."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-semiabelian-geometric-fibres",
+  "pqf-def-quasifinite",
+  "def-pc-fppf-site",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix $d\\geq1$. Work first over an algebraically closed residue-field extension $k$, and write $H=G_k$ and $0\\to T\\to H\\to A\\to0$ for its given semiabelian presentation. For $T=\\mathbf G_m^r$, the pullback of $[d]_T$ by a point $(u_1,\\ldots,u_r)$ over $\\operatorname{Spec}C$ is\n$$\\operatorname{Spec} C[z_1,\\ldots,z_r]/(z_1^d-u_1,\\ldots,z_r^d-u_r).$$\nEach $z_i$ is automatically a unit, with inverse $u_i^{-1}z_i^{d-1}$. Successively applying [lem-weil-pbc-monic-quotient-free] gives a free $C$-basis $\\prod_i z_i^{a_i}$, $0\\leq a_i<d$, of size $d^r$. This algebra has the displayed finite presentation; its module is flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat], and hence the map is flat by [lem-weil-pbc-flat-morphism-affine-criterion]. It is finite locally free by [def-pc-finite-locally-free]. For each prime of $C$, choose in an algebraic closure of its residue field roots of the nonzero $u_i$; these are nonzero and give a point above the prime. Thus $[d]_T$ is surjective, including when the characteristic divides $d$. For $r=0$ the algebra is $C$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-pc-finite-locally-free",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG, lemma-characterize-henselian (monic quotient calculation); Tag 00NX, lemma-finite-projective (finite free is flat); explicit Laurent-coordinate calculation."
+   }
+  },
+  {
+   "text": "The proper smooth geometrically connected group $A$ is an abelian variety by [def-sc-abelian-variety]. Its multiplication $[d]_A$ is finite locally free by [lem-sc-mult-n-finite-flat] and surjective by [lem-sc-mult-n-isogeny]. The three multiplication maps give a compatible diagram from the given exact sequence $0\\to T\\to H\\to A\\to0$ to itself: every group homomorphism commutes with a sum of $d$ copies. Apply [lem-sfb-finite-flat-homomorphism-extensions] to this diagram, using step 1 on the kernels. It follows that $[d]_H$ is finite locally free and surjective. In particular it is flat, locally finitely presented and has finite fibres. This conclusion holds for every geometric fibre of $p$.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "lem-sc-mult-n-finite-flat",
+    "lem-sc-mult-n-isogeny",
+    "lem-sfb-finite-flat-homomorphism-extensions",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BFG, lemma-degree-multiplication-by-d; Tag 03RP, proposition-review-abelian-varieties; extension assembly using descent Tag 02VO."
+   }
+  },
+  {
+   "text": "The map $m=[d]:G\\to G$ is locally of finite presentation by [lem-a1-map-over-base-finite-presentation], with both structure maps equal to the finitely presented $p$. In fact it is of finite presentation. To check this, restrict the base to any affine open $V\\subset S$. The scheme $G_V$ is quasi-compact since $p$ is quasi-compact, and quasi-separated since it is separated over the affine scheme $V$ ([lem-pc-separated-quasi-separated] and [lem-weil-pbc-qcqs-morphism-permanence](2)). Thus the endomorphism $m_V:G_V\\to G_V$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1). These properties hold for $m$ by locality on its target: the opens $G_V$ cover the target and $m^{-1}(G_V)=G_V$. For quasi-compactness use [lem-pc-quasi-compact-local-on-target]; quasi-separatedness follows by applying the same assertion to its diagonal. Consequently $m$ is locally of finite presentation, quasi-compact and quasi-separated, which is finite presentation by [def-sbc-locally-finite-presentation].",
+   "uses": [
+    "lem-a1-map-over-base-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-quasi-compact-local-on-target",
+    "def-sbc-locally-finite-presentation",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FV, lemma-finite-presentation-permanence; spaces-morphisms.tex Tag 03KG, lemma-quasi-compact-local, clause (6), specialized to schemes."
+   }
+  },
+  {
+   "text": "For $s\\in S$ choose an algebraic closure $k$ of $\\kappa(s)$. The map $\\operatorname{Spec}k\\to\\operatorname{Spec}\\kappa(s)$ is an fpqc covering by [lem-pc-field-extension-fpqc-cover]. Its base change to the target $G_s$ is flat and surjective by [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-surjective-base-change]. At any point of $G_s$ choose a point above it; step 2 says that the geometric base change of $m_s$ is flat at every point. Thus [lem-sfb-pointwise-flatness-base-change](2) shows that $m_s$ is flat everywhere. Now $p$ is flat and locally of finite presentation by [lem-pc-smooth-flat], and its target copy is locally of finite type. Apply [lem-sfb-fibrewise-flatness-criterion] at each point of the source $G$ to conclude that $m$ is flat.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-pc-smooth-flat",
+    "lem-sfb-fibrewise-flatness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 039C, theorem-criterion-flatness-fibre, structure sheaf; morphisms.tex flat base change and pointwise descent."
+   }
+  },
+  {
+   "text": "Surjectivity of $m$ follows from step 2: given a point $y$ of its target, put $s=p(y)$, lift $y$ to the geometric base change $G_k$ using [lem-weil-pbc-surjective-base-change] and [lem-pc-field-extension-fpqc-cover], and then lift this point along the surjective $[d]_{G_k}$. Projecting back gives a preimage of $y$. Also $m$ is quasi-finite at every point. Indeed every point $x$ of $G_s$ lifts under the same surjective geometric base change; the upstairs map is finite by step 2 and hence quasi-finite by [pqf-lem-finite-qf], and [lem-sfb-scheme-quasifinite-at-base-change] descends quasi-finiteness at this point first to $m_s$ and then to $m$. The latter application uses the arbitrary base change $\\operatorname{Spec}\\kappa(s)\\to S$ on the two copies of $G$, viewed as the corresponding base change on the target. Together with quasi-compactness from step 3, [pqf-lem-qf-locqf-qc] gives quasi-finiteness. Its fibres are finite: after an algebraically closed extension of the residue field of a target point, the fibre is a fibre of the finite map from step 2, so is finite; the surjective projection back to the original fibre shows that it too has finitely many points. This is the finite-fibre conclusion of the item, as in [pqf-def-quasifinite].",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-sfb-scheme-quasifinite-at-base-change",
+    "pqf-def-quasifinite",
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-locqf-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TM, lemma-base-change-quasi-finite, clause (1); surjectivity checked by geometric lifting."
+   }
+  },
+  {
+   "text": "Flatness, surjectivity and finite presentation give an fppf covering by [def-pc-fppf-site]. Quasi-compactness is part of finite presentation, so it is also an fpqc covering by [def-weil-pbc-fpqc-covering]: over an affine target open its quasi-compact inverse image has a finite affine cover, whose images cover the target open. This proves the asserted covering properties with no condition on $d$ beyond positivity.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021L and 022B, covering definitions; finite affine refinement for a quasi-compact inverse image."
+   }
+  },
+  {
+   "text": "Write $R_1=G$ with its structure map $p$, and for $a\\geq1$ use the common value map $R_a\\to G$ to identify $R_{a+1}=R_a\\times_{G,m}G$. Its projection to $R_a$ is a base change of $m$, so is flat and of finite presentation by [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). Inductively $R_a\\to S$ is flat by [lem-pc-flat-compose]. It is of finite presentation as well: local finite presentation composes by [lem-sbc-locally-finite-presentation-composition]; on every affine open $V\\subset S$, the successive inverse images are quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](2), starting from $G_V$. Thus the composites are quasi-compact and quasi-separated locally on $S$, and [def-sbc-locally-finite-presentation] applies. For local Noetherianity choose a Noetherian affine neighbourhood $V$ of each point of $S$. The scheme $(R_a)_V$ is of finite type over $V$, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. These opens cover $R_a$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TR (lemma-composition-finite-presentation), 01T6 (lemma-finite-type-noetherian), flat base change and composition."
+   }
+  },
+  {
+   "text": "For an open $U\\subseteq S$, a test scheme over $U$ maps to $R_a\\times_SU$ exactly when it gives $a$ maps to $G_U$ whose images under the restricted $m_U$ agree. The fibre-product universal property [def-pc-fibre-product] therefore identifies $R_a\\times_SU$ with the stated iterated relation scheme over $U$, compatibly with its projections. The formulas are unchanged for $a=1$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Fibre-product universal property, applied to open restriction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-pc-finite-locally-free",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "lem-sc-mult-n-finite-flat",
+  "lem-sc-mult-n-isogeny",
+  "lem-sfb-finite-flat-homomorphism-extensions",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-quasi-compact-local-on-target",
+  "def-sbc-locally-finite-presentation",
+  "lem-pc-separated-quasi-separated",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-pointwise-flatness-base-change",
+  "lem-pc-smooth-flat",
+  "lem-sfb-fibrewise-flatness-criterion",
+  "lem-sfb-scheme-quasifinite-at-base-change",
+  "pqf-def-quasifinite",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-locqf-qc",
+  "def-pc-fppf-site",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 0BFG and 03RP; descent Tag 02VO; fibrewise flatness Tag 039C. Relative semiabelian assembly written by Q25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by any positive integer on a semiabelian scheme is faithfully flat quasi finite and of finite presentation even when the integer is not invertible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.Flat f]\\n  [hg : AlgebraicGeometry.Flat g], AlgebraicGeometry.Flat (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Spec.map f) ∧ AlgebraicGeometry.Surjective (AlgebraicGeometry.Spec.map f) ↔\\n    (CommRingCat.Hom.hom f).FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication n on a smooth commutative group scheme with semiabelian geometric fibres is a quasi finite fppf covering",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"Mathlib.Tactic.Abel.smulg\", \"module\": \"Mathlib.Tactic.Abel\", \"type\": \"{α} [AddCommGroup α] (n : ℤ) (x : α) : α\", \"doc\": \"The function maps an integer $ n $ and an element $ x $ of an additive commutative group $ \\\\alpha $ to the scalar multiplication $ n \\\\cdot x $.\"}\n  {\"name\": \"AddCircle.isAddQuotientCoveringMap_nsmul\", \"module\": \"Mathlib.Topology.Covering.AddCircle\", \"type\": \"{n : ℕ} (hn : IsUnit (n : 𝕜)) :\\n  IsAddQuotientCoveringMap (n • · : AddCircle p → _) (nsmulAddMonoidHom (α := AddCircle p) n).ker\", \"doc\": \"For any natural number $n$ that is a unit in the additive commutative group $\\\\mathbb{K}$, the scalar multiplication map $x \\\\mapsto n \\\\cdot x$ on the additive circle $\\\\mathbb{K}/\\\\langle p \\\\rangle$ is a\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"smoothLeftMul\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": C^∞⟮I, G; I, G⟯\", \"doc\": \"For a group $G$ modeled as a charted space with a model with corners structure over a nontrivially normed field, the left multiplication map $\\\\lambda x. g \\\\cdot x : G \\\\to G$ is smooth ($C^\\\\infty$) whe\"}\n  {\"name\": \"mulMulHom\", \"module\": \"Mathlib.Algebra.Group.Prod\", \"type\": \"[CommSemigroup α] : α × α →ₙ* α\", \"doc\": \"Given a commutative semigroup $\\\\alpha$, this defines the multiplicative homomorphism from $\\\\alpha \\\\times \\\\alpha$ to $\\\\alpha$ that maps each pair $(a, b)$ to the product $a \\\\cdot b$. The homomorphism p\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [LocallyQuasiFinite f] [LocallyQuasiFinite g] : LocallyQuasiFinite (f ≫ g)\", \"doc\": \"The composition of two locally quasi-finite morphisms of schemes is again a locally quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → ℕ\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\\\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emi[Aa]belian|[Ss]emiabelian|[Mm]ultiplication.*[Ff]lat|[Ff]lat.*[Mm]ultiplication",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"line\": \"23\", \"text\": \"* `Module.Flat.isSMulRegular_of_nonZeroDivisors`: Scalar multiplication by a nonzerodivisor of `R`\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"line\": \"50\", \"text\": \"/-- Scalar multiplication `m ↦ r • m` by a regular `r` is injective on a flat module. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"line\": \"78\", \"text\": \"/-- Scalar multiplication `m ↦ r • m` by a nonzerodivisor `r` is injective on a flat module. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"16\", \"text\": \"`S` is `R`-flat and the multiplication map `S ⊗[R] S → S` is flat.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity and flatness of the isogeny multiplication by n on families of extensions of abelian varieties by tori",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.Surjective f],\\n  CategoryTheory.Epi f\", \"doc\": \"Every flat and surjective morphism of schemes is an epimorphism in the category of schemes.\"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Surjective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"Given a pushout diagram of commutative rings with a faithfully flat homomorphism $ R \\to R' $ and a surjective homomorphism $ R' \\to S' $, the induced homomorphism $ R \\to S $ is surjective. This establi\"}\n  {\"name\": \"Module.FaithfullyFlat.surjective_of_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u_3}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Module.FaithfullyFlat R S],\\n  Function.Surjective ⇑(algebraMap S (TensorProduct R S T)) → Function.Surjective ⇑(algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the canonical algebra map $ S \\\\to S \\\\otimes_R T $ is surjective, then the canonical algebra map $ R \\\\to T $ is also surjective.\"}\n  {\"name\": \"Algebra.Generators.Cotangent.surjective_map_ofComp\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The cotangent module homomorphism induced by the composition of algebra extensions is surjective, i.e., the map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to \\\\ker(\\\\phi')/\\\\ker(\\\\phi')^2$ associated to the composed exten\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.map_ofComp_surjective\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The linear map between cotangent spaces induced by the algebra extension homomorphism of composed algebra extensions is surjective, i.e., the map $ P.\\text{CotangentSpace} \\to Q.\\text{CotangentSpace} $ a\"}\n  {\"name\": \"KaehlerDifferential.mapBaseChange_surjective\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A : Type u_2) (B : Type u_3) [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [inst_6 : IsScalarTower R A B],\\n  Function.Surjective ⇑(algebraMap A B) → Function.Surjective ⇑(KaehlerDifferential.mapB\", \"doc\": \"Given commutative rings $ R $, $ A $, and $ B $ with $ A $ an $ R $-algebra, $ B $ an $ A $-algebra, and $ B $ an $ R $-algebra via the scalar tower $ R \\\\to A \\\\to B $, if the algebra map $ A \\\\to B $ i\"}\n  {\"name\": \"Module.FaithfullyFlat.lTensor_surjective_iff_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_4}\\n  {N' : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : AddCommGroup N'] [inst_5 : Module R N] [inst_6 : Module R N']\\n  (f : N →ₗ[R] N') [Module.FaithfullyFlat R M], Function.Surjective ⇑(Lin\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a faithfully flat $ R $-module. For any linear map $ f $ between $ R $-modules, $ f $ is surjective if and only if the induced linear map $ f \\\\otimes \\\\text{id\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For smooth commutative group schemes with semiabelian geometric fibres multiplication by a positive integer is surjective flat quasi finite and finitely presented",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.Surjective f],\\n  CategoryTheory.Epi f\", \"doc\": \"Every flat and surjective morphism of schemes is an epimorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Surjective ⇑P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|multiplication.*(flat|quasi.?finite)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by any positive integer on a semiabelian scheme is an fppf covering",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddCircle.isAddQuotientCoveringMap_nsmul\", \"module\": \"Mathlib.Topology.Covering.AddCircle\", \"type\": \"{n : ℕ} (hn : IsUnit (n : 𝕜)) :\\n  IsAddQuotientCoveringMap (n • · : AddCircle p → _) (nsmulAddMonoidHom (α := AddCircle p) n).ker\", \"doc\": \"For any natural number $n$ that is a unit in the additive commutative group $\\\\mathbb{K}$, the scalar multiplication map $x \\\\mapsto n \\\\cdot x$ on the additive circle $\\\\mathbb{K}/\\\\langle p \\\\rangle$ is a\"}\n  {\"name\": \"AddCircle.isAddQuotientCoveringMap_zsmul_of_ne_zero\", \"module\": \"Mathlib.Topology.Covering.AddCircle\", \"type\": \"[Algebra ℚ 𝕜] (n : ℤ) [NeZero n] :\\n  IsAddQuotientCoveringMap (n • · : AddCircle p → _) (zsmulAddGroupHom (α := AddCircle p) n).ker\", \"doc\": \"Let $\\\\mathbb{K}$ be a $\\\\mathbb{Q}$-algebra and $p \\\\in \\\\mathbb{K}$. For any non-zero integer $n \\\\in \\\\mathbb{Z}$, the scalar multiplication map $n \\\\cdot -$ on the additive circle $\\\\mathbb{K}/\\\\langle p \\\\\"}\n  {\"name\": \"AddCircle.isAddQuotientCoveringMap_zsmul\", \"module\": \"Mathlib.Topology.Covering.AddCircle\", \"type\": \"{n : ℤ} (hn : IsUnit (n : 𝕜)) :\\n  IsAddQuotientCoveringMap (n • · : AddCircle p → _) (zsmulAddGroupHom (α := AddCircle p) n).ker\", \"doc\": \"For any integer $n$ that is a unit in the field $\\\\mathbb{K}$, the scalar multiplication map $n \\\\cdot -$ on the additive circle $\\\\mathbb{K}/\\\\langle p \\\\rangle$ is a covering map induced by the quotient \"}\n  {\"name\": \"Mathlib.Tactic.Abel.smulg\", \"module\": \"Mathlib.Tactic.Abel\", \"type\": \"{α} [AddCommGroup α] (n : ℤ) (x : α) : α\", \"doc\": \"The function maps an integer $ n $ and an element $ x $ of an additive commutative group $ \\\\alpha $ to the scalar multiplication $ n \\\\cdot x $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.cover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{P : MorphismProperty Scheme.{u}} {X S : Scheme.{u}} (f : X ⟶ S) (hf : P f) [Surjective f] :\\n  Cover.{v} (precoverage P) S\", \"doc\": \"Given a morphism $ f: X \\to S $ of schemes that is surjective and satisfies a morphism property $ P $, the singleton presieve $\\\\{f\\\\}$ forms a covering sieve in the precoverage defined by the intersecti\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → ℕ\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\\\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over.over\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    {inst : P.IsStableUnderBaseChange} →\\n      {inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P} →\\n        {X : AlgebraicGeometry.Scheme} →\\n          {inst_2 : X.Over S} →\\n          \", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, this function maps each element of the zeroth c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"(S : AlgebraicGeometry.Scheme) →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    [P.IsStableUnderBaseChange] →\\n      [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X : AlgebraicGeometry.Scheme} →\\n          [X.Over S] → AlgebraicGeometry.Scheme.Cover (Alg\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, the cover of $ X $ is defined by the precoverag\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication isogenies on families of extensions of abelian varieties by tori are faithfully flat without an invertibility assumption",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"{R : Type u_3} → {S : Type u_4} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Injective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"If a ring homomorphism becomes injective after base change along a faithfully flat ring homomorphism, then the original homomorphism is injective. Formally, given commutative rings $R, S, R', S'$ with\"}\n  {\"name\": \"Module.FaithfullyFlat.faithfulSMul\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [Module.FaithfullyFlat A B], FaithfulSMul A B\", \"doc\": \"If $ A $ is a commutative ring and $ B $ is an $ A $-algebra that is faithfully flat as an $ A $-module, then the scalar multiplication of $ A $ on $ B $ is faithful. This means that for any two eleme\"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Surjective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"Given a pushout diagram of commutative rings with a faithfully flat homomorphism $ R \\to R' $ and a surjective homomorphism $ R' \\to S' $, the induced homomorphism $ R \\to S $ is surjective. This establi\"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"In a pushout diagram of commutative rings, if the algebra maps $ R \\to R' $ and $ R' \\to S' $ are bijective, then the induced algebra map $ R \\to S $ is faithfully flat. This requires scalar tower compat\"}\n  {\"name\": \"RingHom.FaithfullyFlat.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"The composition of two faithfully flat ring homomorphisms between commutative rings is again a faithfully flat ring homomorphism.\"}\n  {\"name\": \"RingHom.FaithfullyFlat.respectsIso\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, T $, if a ring homomorphism $ f : R \\\\to S $ is faithfully flat, then composing $ f $ with a ring isomorphism $ e : S \\\\cong T $ results in a faithfully flat homomorphism $\"}\n  {\"name\": \"Module.FaithfullyFlat.trans\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (S : Type u_2) [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Module.FaithfullyFlat R S] [Module.FaithfullyFlat S M], Module.FaithfullyFlat R M\", \"doc\": \"If $ M $ is a faithfully flat $ R $-module and $ N $ is a faithfully flat $ M $-module, then $ N $ is a faithfully flat $ R $-module. This expresses the transitivity property of faithful flatness in m\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-symmetric-cubical-extension",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Multiplication by any positive integer is an fppf cover of a semiabelian scheme",
+   "via": [
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-multiplication-fppf",
+  "worker": "stage1",
+  "summary": "Retained the statement; proved torus multiplication explicitly, used abelian multiplication and a single smaller general group-extension lemma, descended geometric fibre flatness and quasi-finiteness, and proved the relation-scheme assertions by induction. No invertibility or constancy of toric rank assumed.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/semistable Picard auxiliary chain; supports normal symmetric cubical extension. The inherited chain has no surviving blueprint ancestor (blueprint_refs ancestor returns None); preserved that null and its explicit place and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "Generic The quotient of a polynomial ring by a monic polynomial is free with the power basis used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "why": "Generic A finite free module is finitely presented and flat used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic Flatness of a scheme morphism on affine charts used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "def-pc-finite-locally-free",
+    "why": "Generic Finite locally free morphisms used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "def-weil-algebraic-closure",
+    "why": "Generic Algebraic closure of a field used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "def-sc-abelian-variety",
+    "why": "Generic Abelian varieties used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-mult-n-finite-flat",
+    "why": "Generic Multiplication by $d$ is finite flat of degree $d^{2g}$ used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-mult-n-isogeny",
+    "why": "Generic Multiplication by $n$ is surjective with finite kernel used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic A finite morphism is separated, universally closed and has finite fibres used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic Local finite presentation of a morphism over a base used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-quasi-compact-local-on-target",
+    "why": "Generic Quasi-compactness is local on the target used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Generic Morphisms locally of finite presentation used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Generic A field extension gives an fpqc singleton cover of spectra used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic Base change of a flat morphism of schemes is flat used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic Base change of a surjective morphism is surjective used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic Smooth morphisms are flat used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Generic Quasi-finite morphisms and finite fibres used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "def-pc-fppf-site",
+    "why": "Generic The big fppf site used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "Generic fpqc covering of a scheme used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic Fibre product of schemes used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-flat-compose",
+    "why": "Generic Flatness is transitive used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-sbc-locally-finite-presentation-composition",
+    "why": "Generic Composition preserves local finite presentation used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used with precisely its stated hypotheses; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic A separated morphism of schemes is quasi-separated applied to the finitely presented multiplication map, without changing the unit route."
+   },
+   {
+    "node": "pqf-lem-finite-qf",
+    "why": "Generic Finite morphisms are quasi-finite applied to the finitely presented multiplication map, without changing the unit route."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Generic Quasi-finite = locally quasi-finite + quasi-compact applied to the finitely presented multiplication map, without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-pc-finite-locally-free",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "lem-sc-mult-n-finite-flat",
+  "lem-sc-mult-n-isogeny",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-quasi-compact-local-on-target",
+  "def-sbc-locally-finite-presentation",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-pc-smooth-flat",
+  "pqf-def-quasifinite",
+  "def-pc-fppf-site",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-separated-quasi-separated",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-6db942457",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-6db942457 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The proof is correct and nothing needs to go back; the only change is cosmetic. Item statement: unchanged and true for every d≥1, including when the characteristic divides d. It claims [d] is flat, surjective, quasi-finite and of finite presentation, and correctly does not claim finite or etale. Step 1: the torus case is checked directly with the algebras C[z]/(z^d−u). Step 2: [d] on the abelian quotient is finite locally free and surjective (lem-sc-mult-n-finite-flat; Stacks 0BFG holds for all d; lem-sc-mult-n-isogeny), and the new node combines the torus and abelian parts. Step 3: finite presentation by checking quasi-compact and quasi-separated over affine opens. Step 4: flatness comes down from the geometric fibre by lem-sfb-pointwise-flatness-base-change(2), then the fibrewise criterion (Stacks 039C) gives it over S; its hypotheses hold. Step 5: quasi-finiteness comes down through two base changes, and finite fibres are checked. Steps 6-8 (the covering properties, the induction on the relation schemes R_a, and restriction to opens) are sound. New node lem-sfb-finite-flat-homomorphism-extensions: true. Fppf-locally the map E1 → E2 ×_{Q2} Q1 is a base change of u, so Stacks 02VO descends finite local freeness, and the map to E2 is a base change of w. It is checked on the cases K=0, Q=0 and mu_p, and it is statement-only. Its five search records are real. It is no duplicate: the existing invertible-multiplication, torsion-kernel, Hom-finite-free and finite-locally-free fppf-descent nodes all state something else. It does not restate the item. The 27 declared tool_uses are generic facts and are accepted. Batch-5 check: lem-sc-mult-n-finite-flat and lem-sc-mult-n-isogeny reach lem-trf-rational-sequence-polynomial-forward-difference, which says a rational sequence with polynomial differences is polynomial. lem-sfb-fibrewise-flatness-criterion reaches lem-trf-localization-finite-presentation-ring-map, which says localization preserves finitely presented ring maps. Both are generic algebra, neither the trace formula nor Poincare duality nor a step of their proofs, so I accept them. No SGA source is cited. FIX: step 3 of the item repeated the same parenthetical citation twice in a row; I removed one copy and changed nothing else. Advisory, not changed: the inherited statement mentions fppf sheaves without listing def-pc-fppf-site in its statement dependencies.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianMultiplicationFppf",
+  "declaration": "AlgebraicGeometry.semiabelian_multiplication_fppf",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianMultiplicationFppf.lean",
+  "statement": "theorem semiabelian_multiplication_fppf {S : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (G : Grp (Over S)) [IsCommMonObj G.X] [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom] (hG : HasSemiabelianGeometricFibres G) (d : ℕ) (hd : 0 < d) : Flat (𝟙 G.X ^ d).left ∧ Surjective (𝟙 G.X ^ d).left ∧ Scheme.Hom.IsQuasiFinite (𝟙 G.X ^ d).left ∧ Scheme.Hom.HasFiniteFibres (𝟙 G.X ^ d).left ∧ LocallyOfFinitePresentation (𝟙 G.X ^ d).left ∧ QuasiCompact (𝟙 G.X ^ d).left ∧ QuasiSeparated (𝟙 G.X ^ d).left ∧ Presieve.singleton (𝟙 G.X ^ d).left ∈ Scheme.fppfPrecoverage G.X.left ∧ Presieve.singleton (𝟙 G.X ^ d).left ∈ Scheme.fpqcPrecoverage G.X.left ∧ ∀ (a : ℕ), 0 < a → ∀ R : WidePullbackCone (fun _ : Fin a ↦ (𝟙 G.X ^ d)), IsLimit R → Flat R.pt.hom ∧ LocallyOfFinitePresentation R.pt.hom ∧ QuasiCompact R.pt.hom ∧ QuasiSeparated R.pt.hom ∧ IsLocallyNoetherian R.pt.left ∧ ∀ U : S.Opens, Nonempty (IsLimit ((Over.pullback U.ι).mapCone R))",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed semiabelian-geometric-fibres notion and the recorded Stacks quasi-finiteness and finite-fibres predicates. The relation schemes are all limiting wide pullback cones in Over S; open restriction preserves their actual cones and every projection."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81d1c53ed",
+  "group": "NA",
+  "result": "pass",
+  "note": "Item JSON = live except lean + 5 added stmt_deps, all landed def nodes the statement names (semiabelian fibres, quasi-finite, fppf, fpqc, fibre product); lean.statement verbatim. Clause check: normal integral loc. Noetherian S; Grp (Over S) + IsCommMonObj, Smooth/IsSeparated/LFP+QC = exactly finite presentation; landed HasSemiabelianGeometricFibres; [d] = (𝟙 G.X ^ d).left in the Hom-monoid, d>0. Conclusions: Flat, Surjective, Stacks IsQuasiFinite + HasFiniteFibres, LFP∧QC∧QS, fppf/fpqc singleton precoverage membership; relation schemes = every limiting WidePullbackCone in Over S for a>0 with flat/LFP/QC/QS/IsLocallyNoetherian, and Over.pullback U.ι preserves the actual cone. No finiteness/etaleness claim. Edge cases d=1, char | d, rank 0, a=1, U=∅, universes OK. Docstrings carry source, blueprint tag and 8 proof steps; whole-proof sorry; both report sections present; no duplicate found; all imports exist. Advisory: IsDomain in hS redundant. No files changed, nothing compiled."
+ }
+}

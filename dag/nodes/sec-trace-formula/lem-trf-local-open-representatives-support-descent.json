@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-local-open-representatives-support-descent",
+ "kind": "statement",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "proof": [
+  {
+   "text": "For any scheme $R$ and maps $a:R\\to T_i$ and $b:R\\to T_j$ with $q_i\\circ a=q_j\\circ b$, put $A=a^{-1}(W_i)$. The composite $A\\to R\\to T_i$ has image in $W_i$, so the defining lifting property of an open subscheme gives a map $f:A\\to W_i$ over $T_i$. This uses only the open subscheme construction [def-weil-open-immersion], not the base-change theorem for general open immersions.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY (lemma-base-change-immersion), open-immersion case; applied to the local opens in Spaces Descent Tag 041X"
+   }
+  },
+  {
+   "text": "Evaluate $\\alpha_i$ on the $T_i$-object $A\\to R\\to T_i$ and the map $f$. This gives an element of $F(A\\to T)$. The equality of composites to $T$ identifies exactly the two structure morphisms $A\\to T$. Apply the inverse of $\\alpha_j$ at the $T_j$-object $A\\to R\\to T_j$ to get a $T_j$-map $g:A\\to W_j$. Its triangle identity gives $b(A)\\subseteq W_j$, hence $a^{-1}(W_i)\\subseteq b^{-1}(W_j)$. Apply this to the two projections of $R=T_i\\times_T T_j$ [def-pc-fibre-product], using their defining commutativity relation, and then exchange $i$ and $j$ to get equality of inverse-image opens. No naturality, sheaf condition or compatibility of the isomorphisms is required.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X (lemma-descending-property-open-immersion), equality of the two pulled-back opens; direct evaluation argument extending it to the stated arbitrary presheaf"
+   }
+  },
+  {
+   "text": "Each $q_i$ is flat and locally of finite presentation by [def-weil-etale-morphism]. Together with joint surjectivity this is exactly an fppf covering by [def-pc-fppf-site]. Applying [lem-trf-fppf-covering-is-fpqc] makes the same set-indexed family an fpqc covering; it requires no finiteness of $I$ or quasi-compactness of $T_i$ or $T$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), etale covers are fpqc; definition-fppf-covering in Section Tag 021L"
+   }
+  },
+  {
+   "text": "Now [lem-weil-pbc-open-subscheme-fpqc-descent] applies to the fpqc family of step 3 and the opens $W_i$: its overlap-equality hypothesis is step 2. It gives a unique open subscheme $U\\subseteq T$ with $q_i^{-1}(U)=W_i$ for every $i$, proving the remaining assertion. The descent lemma allows an empty covering when $T=\\varnothing$, so this case is included.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0 (lemma-open-fpqc-covering), existence and uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-open-subscheme-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 041X (lemma-descending-property-open-immersion), support argument via descent.tex Tag 03N0. The arbitrary-presheaf overlap argument is expanded by evaluation on the local opens; the cover comparison is topologies.tex Tag 022C. C9 formalization: compare inverse-image opens by the open-subscheme lifting property for arbitrary commuting maps, then specialize to the fibre-product projections."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-open-immersion-etale-local",
+  "date": "2026-10-22",
+  "group": "Q109"
+ },
+ "title": "Descent of the support of etale-local open representatives",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], with all schemes, sets and functors in the universes of [def-weil-size-convention]. Let $F:(\\mathit{Sch}/T)^{\\mathrm{op}}\\to\\mathsf{Sets}$ be a presheaf, where $\\mathit{Sch}/T$ has objects scheme morphisms $Z\\to T$ and arrows commuting with these maps. Let $\\{q_i:T_i\\to T\\}_{i\\in I}$ be a set-indexed jointly surjective family of etale morphisms [def-weil-etale-morphism]. For each $i$, let $W_i\\subseteq T_i$ be an open subscheme [def-weil-open-immersion] and suppose given a natural isomorphism $\\alpha_i:h_{W_i/T_i}\\xrightarrow{\\sim}F|_{T_i}$ of presheaves on $\\mathit{Sch}/T_i$, where $h_{W_i/T_i}(Z)=\\operatorname{Mor}_{T_i}(Z,W_i)$ and $F|_{T_i}(Z\\to T_i)=F(Z\\to T_i\\to T)$. Then for every $i,j$ the inverse images of $W_i$ and $W_j$ in $T_i\\times_TT_j$ [def-pc-fibre-product] are equal as open subschemes. There exists a unique open subscheme $U\\subseteq T$ such that $q_i^{-1}(U)=W_i$ as open subschemes of $T_i$ for every $i$. No sheaf condition on $F$, compatibility hypothesis on the $\\alpha_i$, finiteness of $I$, or quasi-compactness of the schemes is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 041X (lemma-descending-property-open-immersion), proof: equality of the two pulled-back open subschemes and descent of their support using descent.tex Tag 03N0 (lemma-open-fpqc-covering); arbitrary-presheaf version of the support argument in old steps 2-4 of lem-trf-space-open-immersion-etale-local."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local open representatives of a presheaf over a scheme descend along a jointly surjective etale cover to a unique open subset",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, CategoryTheory.Presheaf",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Presheaf'; Read FlatDescent.lean: the descent instances concern existing scheme morphisms, not local representations of a presheaf. Read Sites/Representability.lean: Zariski relatively representable open covers require different data. None states automatic compatibility and support descent for an arbitrary presheaf on Sch/T.",
+   "date": "2026-10-22",
+   "verdict": "query rejected; no mathematical verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*(subfunctor|descen)|descen.*open|subfunctor.*open",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean; Read FlatDescent.lean: the descent instances concern existing scheme morphisms, not local representations of a presheaf. Read Sites/Representability.lean: Zariski relatively representable open covers require different data. None states automatic compatibility and support descent for an arbitrary presheaf on Sch/T.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf over the functor of points of a scheme represented by open subschemes after an etale covering has compatible local open subsets which descend to a unique open subset of the base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S; AlgebraicGeometry.Scheme.OpenCover.ext_elem; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map; AlgebraicGeometry.Scheme.Cover.gluedCover_t'; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U; Read FlatDescent.lean: the descent instances concern existing scheme morphisms, not local representations of a presheaf. Read Sites/Representability.lean: Zariski relatively representable open covers require different data. None states automatic compatibility and support descent for an arbitrary presheaf on Sch/T.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion",
+   "results": "12 hits: AlgebraicGeometry.isOpenImmersion_isMultiplicative; AlgebraicGeometry.isOpenImmersion_isStableUnderComposition; AlgebraicGeometry.isOpenImmersion_respectsIso; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; AlgebraicGeometry.IsOpenImmersion; AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.Hom.opensRange; AlgebraicGeometry.IsOpenImmersion.mono; Read FlatDescent.lean: the descent instances concern existing scheme morphisms, not local representations of a presheaf. Read Sites/Representability.lean: Zariski relatively representable open covers require different data. None states automatic compatibility and support descent for an arbitrary presheaf on Sch/T.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible open subsets representing base changes of a functor of schemes along an etale cover descend to an open subscheme of the target",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_X; AlgebraicGeometry.Scheme.IsLocallyDirected.tAux; AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_I₀; AlgebraicGeometry.Scheme.IsLocallyDirected.V; Read FlatDescent.lean: the descent instances concern existing scheme morphisms, not local representations of a presheaf. Read Sites/Representability.lean: Zariski relatively representable open covers require different data. None states automatic compatibility and support descent for an arbitrary presheaf on Sch/T.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a presheaf on schemes over T with restrictions represented by open subschemes W_i of a jointly surjective etale cover T_i, the two inverse images of W_i and W_j on overlaps are equal and the opens descend uniquely to T",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Cover.gluedCover_t'; AlgebraicGeometry.Scheme.OpenCover.ext_elem; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map; AlgebraicGeometry.Scheme.Cover.hom_ext; AlgebraicGeometry.Scheme.OpenCover.restrict_X; AlgebraicGeometry.Scheme.Cover.gluedCover_t; AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle; AlgebraicGeometry.Scheme.Cover.gluedCover_V; Read FlatDescent.lean: the descent instances concern existing scheme morphisms, not local representations of a presheaf. Read Sites/Representability.lean: Zariski relatively representable open covers require different data. None states automatic compatibility and support descent for an arbitrary presheaf on Sch/T.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presheaf on Sch over T has compatible local representing open subsets along an etale cover; those open subsets descend to a unique open subset of T",
+   "results": "8 hits: TopCat.Presheaf.IsSheafOpensLeCover; TopCat.Presheaf.IsSheafUniqueGluing; AlgebraicGeometry.SheafedSpace.IsSheaf; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.restrict_presheaf_obj; AlgebraicGeometry.Scheme.etalePretopology; TopCat.Presheaf.toTypes_isSheaf; AlgebraicGeometry.Scheme.smallEtalePretopology; Read FlatDescent.lean: the descent instances concern existing scheme morphisms, not local representations of a presheaf. Read Sites/Representability.lean: Zariski relatively representable open covers require different data. None states automatic compatibility and support descent for an arbitrary presheaf on Sch/T.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible open subsets representing restrictions of a presheaf to an etale covering descend to a unique open subset",
+   "results": "{\"t\": \"2026-10-23T12:00:51Z\", \"tool\": \"leansearch\", \"query\": \"Compatible open subsets representing restrictions of a presheaf to an etale covering descend to a unique open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.IsCompatible\", \"TopCat.Presheaf.IsSheafUniqueGluing\", \"TopCat.Presheaf.IsSheafOpensLeCover\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing_types\", \"AlgebraicGeometry.SheafedSpace.IsSheaf\", \"TopCat.Presheaf.IsSheaf.isSheafOpensLeCover\", \"AlgebraicGeometry.Scheme.restrict_presheaf_obj\"], \"digest\": \"0ae901bad9e458f7\"}; Topological presheaf sheaf-condition lemmas and scheme restriction do not state the assertion on Sch/T.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, CategoryTheory.yoneda",
+   "results": "{\"t\": \"2026-10-23T12:00:51Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsOpenImmersion, CategoryTheory.yoneda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U\", \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveFunYonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map\", \"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf\"], \"digest\": \"68d986717859b425\"}; Read Sites/Representability.lean:40-100: LocalRepresentability assumes a Zariski sheaf and relatively representable open maps to it. It does not state automatic overlap equality for the restrictions of an arbitrary presheaf. The isoOfEq names in the second semantic search were not found by the candidate-name grep in the pinned AlgebraicGeometry source.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf on schemes over T locally represented by open subschemes along an etale cover has compatible open supports descending to T",
+   "results": "{\"t\": \"2026-10-23T12:00:57Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf on schemes over T locally represented by open subschemes along an etale cover has compatible open supports descending to T\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.t\"], \"digest\": \"a500a287a5155ff2\"}; Read Sites/Representability.lean:40-100: LocalRepresentability assumes a Zariski sheaf and relatively representable open maps to it. It does not state automatic overlap equality for the restrictions of an arbitrary presheaf. The isoOfEq names in the second semantic search were not found by the candidate-name grep in the pinned AlgebraicGeometry source.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphic representable presheaves of open subschemes over a scheme give equal open subsets; these subsets descend along a jointly surjective etale family",
+   "results": "{\"t\": \"2026-10-23T12:03:33Z\", \"tool\": \"leanfinder\", \"query\": \"Isomorphic representable presheaves of open subschemes over a scheme give equal open subsets; these subsets descend along a jointly surjective etale family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isoOfEq\", \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf\", \"AlgebraicGeometry.morphismRestrictEq\", \"AlgebraicGeometry.Scheme.isoOfEq_hom_ι\", \"AlgebraicGeometry.Scheme.isoOfEq_hom\", \"AlgebraicGeometry.Scheme.isoOfEq_hom_ι_assoc\", \"AlgebraicGeometry.Scheme.isoOfEq_inv_ι_assoc\"], \"digest\": \"9bddd55f677cea23\"}; Read Sites/Representability.lean:40-100: LocalRepresentability assumes a Zariski sheaf and relatively representable open maps to it. It does not state automatic overlap equality for the restrictions of an arbitrary presheaf. The isoOfEq names in the second semantic search were not found by the candidate-name grep in the pinned AlgebraicGeometry source.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def isoOfEq|lemma isoOfEq_hom_ι|descendsAlong_isOpenImmersion|LocalRepresentability.isRepresentable",
+   "results": "{\"t\": \"2026-10-23T12:11:57Z\", \"tool\": \"grep\", \"query\": \"def isoOfEq|lemma isoOfEq_hom_ι|descendsAlong_isOpenImmersion|LocalRepresentability.isRepresentable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"257e8dff09de57d1\"}; Only morphism-property descent and affine-transition limit hits, not arbitrary-presheaf local support descent. The candidate source Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:133 assumes an existing downstairs scheme morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 041X (lemma-descending-property-open-immersion), proof: equality of the two pulled-back open subschemes and descent of their support using descent.tex Tag 03N0 (lemma-open-fpqc-covering); arbitrary-presheaf version of the support argument in old steps 2-4 of lem-trf-space-open-immersion-etale-local.",
+   "via": [
+    "lem-trf-space-open-immersion-etale-local",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-local-open-representatives-support-descent",
+  "worker": "stage1",
+  "summary": "Kept the complete arbitrary-presheaf statement. Proved overlap equality by evaluating each given representation on the other pulled-back open; used the existing open-immersion base-change leaf, the existing fppf-to-fpqc leaf, and the already closed compatible-open descent theorem. No new nodes, no statement change, no sheaf or compatibility hypothesis added. Rechecked exact project attachment, current blueprint and all cited statements; refreshed the item Mathlib searches with two semantic phrasings.",
+  "blueprint": "Supplies support descent inside lem-trf-space-open-immersion-etale-local (steps 2-3), in the inherited geometric/polarized descent chain below lem-trf-local-term-locality. Realizes precisely Spaces Descent Tag 041X: compatible pullback opens (steps 1-2), the etale/fpqc comparison (step 3), and Tag 03N0 support descent (step 4). The current blueprint ancestor gives the trace-locality theorem, not a duplicate of this auxiliary geometric lemma.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-bb5b42a81",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-bb5b42a81 (reviewer sub-agent of L); spot-checked: Read the item's 4 steps in full; there are no new nodes. Statement and stmt_deps are identical to live, where the item is still unsplit with no repair note, so it is not superseded and not a re-split order. Step 1: the Mathlib leaf lem-weil-pbc-open-immersion-base-change makes A=R×W_i and B=R×W_j opens of R=T_i×_T T_j. Step 2, checked in detail and correctly marked elementary: alpha_i(A)(u) lies in F(A→T); alpha_j(A)^{-1} gives v:A→W_j over T_j, because q_i p_i=q_j p_j; the pair (a,v) factors a through B; by symmetry and def-weil-open-immersion the two opens are equal. It uses no sheaf condition and no compatibility of the alpha_i. Step 3: étale ⇒ flat+lfp gives an fppf covering (def-pc-fppf-site), and the leaf lem-trf-fppf-covering-is-fpqc gives the same family as fpqc. Step 4: lem-weil-pbc-open-subscheme-fpqc-descent, Lean-closed in slopmaster2 and so a tool by itself, matches Stacks 03N0 exactly. Sources read: spaces-descent.tex 041X (proof l.1503-1545) and descent.tex 03N0 (l.4101); tag/labels 01JY, 022C, 021L, 03N0, 041X match tags/tags. Edge cases: empty I, empty W_i, empty overlaps, the identity cover, and a duplicated identity cover with different W (correctly impossible). No duplicates: lem-trf-fppf-local-open-subfunctor-descent and lem-weil-pbc-etale-open-fpqc-descent state other things. proof_deps is the union of the step uses, no SGA is cited, and tool_uses can stay empty because the off-unit citations are a Mathlib leaf and a Lean-closed node. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalOpenRepresentativesSupportDescent",
+  "declaration": "AlgebraicGeometry.localOpenRepresentatives_support_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalOpenRepresentativesSupportDescent.lean",
+  "statement": "theorem localOpenRepresentatives_support_descent {T : Scheme.{u}} (F : (Over T)ᵒᵖ ⥤ Type (max u w)) {I : Type v} {T' : I → Scheme.{u}} (q : ∀ i, T' i ⟶ T) [∀ i, Etale (q i)] (hq : ∀ t : T, ∃ (i : I) (x : T' i), q i x = t) (W : ∀ i, (T' i).Opens) (α : ∀ i, uliftYoneda.{w}.obj (Over.mk (W i).ι) ≅ (Over.map (q i)).op ⋙ F) : (∀ i j : I, (pullback.fst (q i) (q j) ⁻¹ᵁ W i) = (pullback.snd (q i) (q j) ⁻¹ᵁ W j)) ∧ (∃! U : T.Opens, ∀ i, (q i ⁻¹ᵁ U) = W i)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67825bbf3",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: arbitrary presheaf F on Over T in Type (max u w) (no sheaf/compatibility hypothesis), set-indexed etale family with joint surjectivity only, W i : Opens, α i : uliftYoneda.obj (Over.mk (W i).ι) ≅ (Over.map (q i)).op ⋙ F (correct universes, v₁=u), conclusions: overlap equality of pullback.fst/snd preimages ∧ ∃! U with q i ⁻¹ᵁ U = W i. Lean statement verbatim in file; node diff vs live adds only the lean record; stmt_deps all Mathlib leaves; proof-only import FpqcOpenSubschemeDescent exists and its hypothesis is exactly conclusion 1. Edge cases (empty I, empty/full W, infinite I, non-qc) covered. Not a duplicate of lem-trf-fppf-local-open-subfunctor-descent. Docstrings with source/blueprint and 4 proof steps; sorry only; report has Worker report and Second reading by Q68. No findings; no compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T081339-L-1928137",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

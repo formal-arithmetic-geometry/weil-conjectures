@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-exact-proper-open-projection-mate",
+ "kind": "statement",
+ "title": "Proper/open projection equation in exact pullback coordinates",
+ "statement": "Fix a finite commutative ring A. Let i:W to C and k:Z to Zbar be quasi-compact opens, v:W to Z and t:C to Zbar be proper, and h:i t=v k. For arbitrary Q in D(W_proet,A) and N in D(Z_proet,A), put J=k_!N and let Gamma be properOpenMate(i,v,t,k,h). Using the exact-pullback projection of [def-pur-product-open-tensor-projection-data], delta_(R_vQ,N) followed by k_!(projection_v(Q,N)) and Gamma_(Q tensor P_vN) equals (Gamma_Q tensor identity_J) followed by projection_t(i_!Q,J) and R_t(gamma_i(Q,P_tJ) followed by i_!(identity_Q tensor (square_(i,t,v,k) followed by P_v(openUnit_N inverse)))). This is the equation before any product tensor map d is pasted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection."
+ },
+ "stmt_deps": [
+  "def-pur-product-open-tensor-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply properOpenProjectionMate to the square (i,v,t,k) and objects Q,J. Transport all total left-derived pullbacks through leftDerivedUpperStarIsoMapDerivedCategory, using naturality with tensor and proper direct image. Canonical derived pullback composition transports to the exact square comparison since both localize the same upperStar composition. Identify P_kJ=N by the inverse open unit. Naturality of projection in its second input moves this map through projection_v; naturality of Gamma moves the induced tensor map through Gamma. The transported tensor and projection maps are exactly gamma and projection by definition. The resulting equality is the stated one, without inversion of a projection map.",
+   "uses": [
+    "lem-sf-proper-open-tensor-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proper-open-tensor-compatibility"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor of an open adjunction counit with an object extended by zero is an isomorphism and restricts to the identity.",
+   "results": "Adjunction.counitAsIsoOfIso and isIso_counit_of_iso (Mathlib.CategoryTheory.Monad.Adjunction) concern an equivalence, not tensor-supported objects. Scheme.Modules.restrictFunctorId concerns ordinary scheme modules. None states the finite pro-etale derived comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open tensor product comparison on two product open immersions agrees with tensoring the open counit and restricts to the open unit.",
+   "results": "Scheme.Modules.restrictFunctorComp and restrictFunctorComp_hom_app_app concern ordinary scheme module restriction. Scheme.Pullback.tensorCongr_SpecTensorTo concerns affine scheme products, not derived open extension. No matching map identity.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg counit.*tensor|tensor.*counit Mathlib/CategoryTheory/Adjunction Mathlib/CategoryTheory/Monoidal; rg projectionMap lean/WeilConjectures/CategoryTheory/Adjunction; rg gamma.*natur|rho.*natur lean/Sheaf/Paper lean/WeilConjectures/SixFunctors; blueprint_refs.py search open counit tensor / supported product",
+   "results": "Mathlib Monoidal/Functor map_mu_comp_counit_app_tensor needs monoidal structures on the named functors. Existing source ProjectionMap supplies adjunct and invertibility APIs; ProperOpenProjectionMate supplies the derived-coordinate equation. The exact-pullback transport and the supported product restriction identities are not already stated. The only blueprint supported-product hit is the relative Kunneth unit, whose symmetry paragraph is the source here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProductOpenTensorProjection",
+  "date": "2026-10-26",
+  "group": "H5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proper/open projection equation in exact pullback coordinates in the product compactification proper-reduction calculation.",
+   "via": [
+    "lem-pur-product-open-tensor-projection",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExactProperOpenProjectionMate",
+  "file": "lean/Sheaf/Paper/ExactProperOpenProjectionMate.lean",
+  "declaration": "WeilConjectures.ProductOpenTensorProjection.exactProperOpenProjectionMate",
+  "statement": "theorem exactProperOpenProjectionMate (A : Type (u + 1)) [CommRing A] [Finite A] {W C Z Zb : Scheme.{u}} (i : W ⟶ C) (v : W ⟶ Z) (t : C ⟶ Zb) (k : Z ⟶ Zb) [IsOpenImmersion i] [IsOpenImmersion k] [QuasiCompact i] [QuasiCompact k] [IsProper v] [IsProper t] (h : i ≫ t = v ≫ k) (Q : FiniteD A W) (N : FiniteD A Z) : (gamma A k ((ProperOpenPush A v).obj Q) ((finiteShriek A k).obj N) ≫ (finiteShriek A k).map (tensorMap A Z (𝟙 _) (openUnit A k N).inv)) ≫ (finiteShriek A k).map (projection A v Q N) ≫ (properOpenMate A i v t k h).app (tensor A W Q ((pull A v).obj N)) = tensorMap A Zb ((properOpenMate A i v t k h).app Q) (𝟙 ((finiteShriek A k).obj N)) ≫ projection A t ((finiteShriek A i).obj Q) ((finiteShriek A k).obj N) ≫ (ProperOpenPush A t).map (gamma A i Q ((pull A t).obj ((finiteShriek A k).obj N)) ≫ (finiteShriek A i).map (tensorMap A W (𝟙 Q) (((square A i t v k h).app ((finiteShriek A k).obj N) ≪≫ (pull A v).mapIso (openUnit A k N).symm).hom)))",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-pur-exact-proper-open-projection-mate",
+  "worker": "stage3",
+  "summary": "Independent step of the original product-open tensor argument; the original item proves the assembly by naturality.",
+  "blueprint": "Symmetry paragraph of lem-sf-kunneth-coherence, in the existing proper-reduction route; no model-purity unit step bypassed.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proper-open-tensor-compatibility",
+    "why": "The generic open normalization, open compositor, or proper/open tensor mate is used unchanged for this step of the fixed product-compactification argument."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0ebe",
+  "group": "H5",
+  "result": "fix",
+  "landing": "20261025T204650-L-2991923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0ebe",
+  "group": "H5",
+  "result": "fix",
+  "landing": "20261025T204650-L-2991923",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/3 split modules vs published ProductOpenTensorProjection.lean (verbatim def move, unchanged Assertion+theorem) and upstream properOpenProjectionMate/FiniteOpenProductSwap defs; nodes vs proof"
+ }
+}

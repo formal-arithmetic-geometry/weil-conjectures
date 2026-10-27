@@ -165,7 +165,18 @@
   "def-weil-weil-sheaf-complex"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-zeta-weil",
  "unit": "sk-input-weights",
  "split_report": {
@@ -193,5 +204,25 @@
    "AlgebraicGeometry.WeilSheaf.weightPurity_adicConstant"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.ZetaFunction.Weights: the blueprint item prop-weight-purity's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Fix the global finite-field datum\n$(p,a,q,k_0,k)$, where $p$ is prime and $a\\in\\mathbf Z_{\\geq1}$ with\n$q=p^a$. Choose a prime $\\ell\\neq p$, an algebraic closure\n$\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, and any field embedding\n$\\iota:\\Qlb\\hookrightarrow\\mathbf C$. All coefficient sheaves are the pulled-back condensed rings\n$\\Lambda_X=p_X^*\\Lambda$ on the pro-étale site ($\\Lambda=\\Ql,\\Qlb$;\n[det-def-sfb-pulled-back-coefficients]), and complexes lie in\n$D^b_c(X,\\Lambda)\\subset D(X_{\\mathrm{proét}},\\Lambda)$\n([det-def-sfb-bounded-constructible]), with Weil structures as in\n[sk-def-sf-weil-complexes]. Let\n$X_0/k_0$ be smooth and proper of pure dimension\n$d\\in\\mathbf Z_{\\geq0}$, and put $X=X_0\\times_{k_0}k$. Let\n$a_X:X\\to\\Spec k$ be the structure morphism, and let\n$g_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\operatorname{Frob}_q)$\nbe the geometric-Frobenius automorphism.\nLet $F_\\ell$ be the induced\nglobal geometric Frobenius\non the ordinary and\ncompactly supported cohomology with $\\Ql$-coefficients,\nand let $F_{\\Qlb}$ be its scalar extension to the corresponding\n$\\Qlb$-cohomology. Define the graded cohomology notation by\n\n$$\nH^\\bullet(X,\\Lambda):=\\bigoplus_{i\\in\\mathbf Z}H^i(X,\\Lambda),\n\\qquad\nH_c^\\bullet(X,\\Lambda):=\\bigoplus_{i\\in\\mathbf Z}H_c^i(X,\\Lambda)\n\\quad(\\Lambda=\\Ql,\\Qlb).\n$$\n\nUse the scalar-extension identifications\n([sk-prop-sfb-finite-extension-compatibility])\n\n$$\nH^\\bullet(X,\\Ql)\\otimes_{\\Ql}\\Qlb\\simeq H^\\bullet(X,\\Qlb),\\qquad\nH_c^\\bullet(X,\\Ql)\\otimes_{\\Ql}\\Qlb\\simeq H_c^\\bullet(X,\\Qlb).\n$$\n\nThe dualizing Weil complex is the one fixed in the\ncomplex-weight definition, with\n$\\operatorname{For}(\\omega_X)=Ra_X^!\\Qlb$ for the\nexceptional inverse image of $a_X$\nand its canonical Weil lift; no admissibility hypothesis is imposed on $a_X$.\nThese operators come from the constant\nWeil sheaf $(\\Qlb)_X$ on the\nsmall pro-etale site, with the\ngeometric-Frobenius convention. Fix an\nindeterminate $T$. For\n$0\\leq i\\leq2d$, set\n\n$$\nH^i(X,\\Qlb)=H^i\\!\\left(R\\Gamma(X,(\\Qlb)_X)\\right),\\qquad\nH_c^i(X,\\Qlb)=H^i\\!\\left(R\\Gamma_c(X,(\\Qlb)_X)\\right),\n\\qquad\nV_{i,\\ell}=H^i(X,\\Ql),\n$$\n\nand $F_{i,\\ell}=F_\\ell|_{V_{i,\\ell}}$,\n$P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})$. These data are the\nsmooth-proper\ncohomological family; reciprocal roots use the\nordinary/reciprocal-root\nconvention. Use the\ncomplex-weight and\nFrobenius-module weight\npredicates. Then the constant\nWeil sheaf $(\\Qlb)_X$ is\n$\\iota$-pure of weight $0$.",
+  "proof": [
+   {
+    "text": "The interpretation of the words weight for the constant Weil complex and\nits cohomology is the one fixed by [def-weil-complex-weights]: its\nupper-weight predicate is checked on the cohomology-sheaf filtration while\nits lower-weight predicate is obtained by applying the duality operation\nand the same filtration criterion. With these conventions the constant\nWeil sheaf $(\\Qlb)_X$ of the statement is the constant Weil complex of\nthe smooth-proper purity interface, whose hypotheses are exactly the\nsmoothness, properness, coefficient, embedding $\\iota$, and\nFrobenius data fixed above; clause (1) of\n[thm-weil-deligne-purity] is therefore precisely the assertion that\n$(\\Qlb)_X$ is $\\iota$-pure of weight $0$.",
+    "uses": [
+     "def-weil-complex-weights",
+     "thm-weil-deligne-purity"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

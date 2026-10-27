@@ -1,0 +1,774 @@
+# SystemBlockRepetition derived-comparison module boundary
+
+## Reason
+
+The completed endpoint/repetition proof and the already proved generic derived
+comparison section together compiled in 79.2 and 81.8 seconds on the server,
+exceeding the 60-second single-file limit. After abstracting coefficient transports
+and adding proof-local irreducibility annotations, move the self-contained generic
+section into `Sheaf.Paper.SystemBlockDerivedComparison`. The item publicly imports
+it. A second support module, `Sheaf.Paper.SystemBlockConstructions`, holds the
+existing block definitions and ordinary coherence proofs, likewise re-exported.
+The first extraction and generic transport abstraction still left the item at
+60 seconds, so both extractions are required. This preserves all public signatures and their availability from the item.
+No shared definition body, global attribute or instance changes. The ordinary
+composition proof also now checks coefficient transports in a generic private
+helper before applying it to sequence sites, avoiding concrete coefficient
+unfolding in that calculation.
+
+## Old
+
+The following signatures were declared in `Sheaf.Paper.SystemBlockRepetition`,
+inside their existing generic sections. They are reproduced verbatim:
+
+```lean
+def blockDerivedComparison (square : RX ⋙ GD ≅ G ⋙ RY) :
+    RX.mapDerivedCategory ⋙ GD.rightDerivedFunctor ≅
+      G.rightDerivedFunctor ⋙ RY.mapDerivedCategory
+
+def blockComplexComparison (square : RX ⋙ GD ≅ G ⋙ RY)
+    (N : CochainComplex X ℤ) :
+    (GD.mapHomologicalComplex (.up ℤ)).obj ((RX.mapHomologicalComplex (.up ℤ)).obj N) ≅
+      (RY.mapHomologicalComplex (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj N)
+
+theorem blockDerivedComparison_normalization (square : RX ⋙ GD ≅ G ⋙ RY) :
+    (∀ N : CochainComplex X ℤ,
+      GD.rightDerivedFunctorUnitQ ((RX.mapHomologicalComplex (.up ℤ)).obj N) ≫
+        GD.rightDerivedFunctor.map (RX.mapDerivedCategoryFactors.inv.app N) ≫
+        (blockDerivedComparison RX RY G GD square).hom.app (DerivedCategory.Q.obj N) =
+      DerivedCategory.Q.map (blockComplexComparison RX RY G GD square N).hom ≫
+        RY.mapDerivedCategoryFactors.inv.app ((G.mapHomologicalComplex (.up ℤ)).obj N) ≫
+        RY.mapDerivedCategory.map (G.rightDerivedFunctorUnitQ N)) ∧
+    (∀ κ : RX.mapDerivedCategory ⋙ GD.rightDerivedFunctor ≅
+        G.rightDerivedFunctor ⋙ RY.mapDerivedCategory,
+      (∀ (I : CochainComplex X ℤ) [I.IsKInjective],
+        GD.rightDerivedFunctorUnitQ ((RX.mapHomologicalComplex (.up ℤ)).obj I) ≫
+          GD.rightDerivedFunctor.map (RX.mapDerivedCategoryFactors.inv.app I) ≫
+          κ.hom.app (DerivedCategory.Q.obj I) =
+        DerivedCategory.Q.map (blockComplexComparison RX RY G GD square I).hom ≫
+          RY.mapDerivedCategoryFactors.inv.app ((G.mapHomologicalComplex (.up ℤ)).obj I) ≫
+          RY.mapDerivedCategory.map (G.rightDerivedFunctorUnitQ I)) →
+      κ = blockDerivedComparison RX RY G GD square)
+
+theorem blockDerivedComparison_adjunction
+    (square : RX ⋙ GD ≅ G ⋙ RY)
+    (F : Y ⥤ X) (FD : Yd ⥤ Xd) [F.Additive] [FD.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits FD] [PreservesFiniteColimits FD]
+    (adj : F ⊣ G) (adjd : FD ⊣ GD)
+    (pullSquare : F ⋙ RX ≅ RY ⋙ FD)
+    (unit : ∀ M : Y,
+      RY.map (adj.unit.app M) ≫ square.inv.app (F.obj M) ≫
+          GD.map (pullSquare.hom.app M) = adjd.unit.app (RY.obj M))
+    (counit : ∀ N : X,
+      FD.map (square.inv.app N) ≫ adjd.counit.app (RX.obj N) =
+        pullSquare.inv.app (G.obj N) ≫ RX.map (adj.counit.app N)) :
+    (∀ M : DerivedCategory Y,
+      RY.mapDerivedCategory.map
+          (adj.mapDerivedCategoryRightDerivedAdjunction.unit.app M) ≫
+        (blockDerivedComparison RX RY G GD square).inv.app (F.mapDerivedCategory.obj M) ≫
+        GD.rightDerivedFunctor.map
+          ((Functor.mapDerivedCategorySquareIso pullSquare).hom.app M) =
+      adjd.mapDerivedCategoryRightDerivedAdjunction.unit.app (RY.mapDerivedCategory.obj M)) ∧
+    (∀ N : DerivedCategory X,
+      FD.mapDerivedCategory.map ((blockDerivedComparison RX RY G GD square).inv.app N) ≫
+        adjd.mapDerivedCategoryRightDerivedAdjunction.counit.app (RX.mapDerivedCategory.obj N) =
+      (Functor.mapDerivedCategorySquareIso pullSquare).inv.app (G.rightDerivedFunctor.obj N) ≫
+        RX.mapDerivedCategory.map
+          (adj.mapDerivedCategoryRightDerivedAdjunction.counit.app N))
+
+def blockCoefficientComparison (square : Gp ⋙ UY ≅ UX ⋙ G) :
+    Gp.rightDerivedFunctor ⋙ UY.mapDerivedCategory ⟶
+      UX.mapDerivedCategory ⋙ G.rightDerivedFunctor
+
+theorem blockCoefficientComparison_naturality
+    (s : RX ⋙ GD ≅ G ⋙ RY) (sp : RXp ⋙ GDp ≅ Gp ⋙ RYp)
+    (b : Gp ⋙ UY ≅ UX ⋙ G) (d : GDp ⋙ UYd ≅ UXd ⋙ GD)
+    (ex : RXp ⋙ UXd ≅ UX ⋙ RX) (ey : RYp ⋙ UYd ≅ UY ⋙ RY)
+    (cube : ∀ N : Xp,
+      d.hom.app (RXp.obj N) ≫ GD.map (ex.hom.app N) ≫ s.hom.app (UX.obj N) =
+      UYd.map (sp.hom.app N) ≫ ey.hom.app (Gp.obj N) ≫ RY.map (b.hom.app N)) :
+    ∀ N : DerivedCategory Xp,
+      (blockCoefficientComparison UXd UYd GD GDp d).app (RXp.mapDerivedCategory.obj N) ≫
+        GD.rightDerivedFunctor.map ((Functor.mapDerivedCategorySquareIso ex).hom.app N) ≫
+        (blockDerivedComparison RX RY G GD s).hom.app (UX.mapDerivedCategory.obj N) =
+      UYd.mapDerivedCategory.map ((blockDerivedComparison RXp RYp Gp GDp sp).hom.app N) ≫
+        (Functor.mapDerivedCategorySquareIso ey).hom.app (Gp.rightDerivedFunctor.obj N) ≫
+        RY.mapDerivedCategory.map ((blockCoefficientComparison UX UY G Gp b).app N)
+
+theorem blockDerivedComparison_comp
+    (s₀₁ : RX₀₁ ⋙ G₁ ≅ G₀ ⋙ RY₀₁) (s₁₂ : RX₁₂ ⋙ G₂ ≅ G₁ ⋙ RY₁₂)
+    (s₀₂ : RX₀₂ ⋙ G₂ ≅ G₀ ⋙ RY₀₂)
+    (ex : RX₀₁ ⋙ RX₁₂ ≅ RX₀₂) (ey : RY₀₁ ⋙ RY₁₂ ≅ RY₀₂)
+    (coherent : ∀ N : X₀,
+      G₂.map (ex.hom.app N) ≫ s₀₂.hom.app N =
+      s₁₂.hom.app (RX₀₁.obj N) ≫ RY₁₂.map (s₀₁.hom.app N) ≫ ey.hom.app (G₀.obj N)) :
+    ∀ N : DerivedCategory X₀,
+      G₂.rightDerivedFunctor.map ((Functor.mapDerivedCategoryCompNatIso ex).hom.app N) ≫
+        (blockDerivedComparison RX₀₂ RY₀₂ G₀ G₂ s₀₂).hom.app N =
+      (blockDerivedComparison RX₁₂ RY₁₂ G₁ G₂ s₁₂).hom.app (RX₀₁.mapDerivedCategory.obj N) ≫
+        RY₁₂.mapDerivedCategory.map ((blockDerivedComparison RX₀₁ RY₀₁ G₀ G₁ s₀₁).hom.app N) ≫
+        (Functor.mapDerivedCategoryCompNatIso ey).hom.app (G₀.rightDerivedFunctor.obj N)
+
+theorem blockDerivedComparison_id (square : RX ⋙ G ≅ G ⋙ RY)
+    (ex : RX ≅ 𝟭 X) (ey : RY ≅ 𝟭 Y)
+    (coherent : ∀ N : X, square.hom.app N ≫ ey.hom.app (G.obj N) = G.map (ex.hom.app N)) :
+    ∀ N : DerivedCategory X,
+      (blockDerivedComparison RX RY G G square).hom.app N ≫
+        (Functor.mapDerivedCategoryNatIso ey ≪≫ Functor.mapDerivedCategoryIdIso Y).hom.app
+          (G.rightDerivedFunctor.obj N) =
+      G.rightDerivedFunctor.map
+        ((Functor.mapDerivedCategoryNatIso ex ≪≫ Functor.mapDerivedCategoryIdIso X).hom.app N)
+```
+
+The public declarations in the following existing construction and
+ordinary-coherence blocks also move to `Sheaf.Paper.SystemBlockConstructions`,
+retaining their signatures and definition bodies verbatim. Private context is
+reproduced too; `blockPushforward_exact` remains in the item. Proof-only transport
+abstraction is described above:
+
+```lean
+/-- A nondecreasing surjection with finite nonempty interval fibers.
+Source: finite-block generalization of Zheng 4.1
+(blueprint: lem-pur-system-block-repetition). -/
+structure SystemBlockMap where
+  /-- The map on zero-based sequence indices. -/
+  index : ℕ →o ℕ
+  /-- Every block occurs. -/
+  onto : Function.Surjective index
+  /-- Every block is finite; monotonicity makes it an interval. -/
+  finite : ∀ i : ℕ, Set.Finite {m : ℕ | index m = i}
+
+/-- The first index of a block, not an arbitrary point in its fiber.
+Source: finite-block endpoint construction following Zheng 4.1
+(blueprint: lem-pur-system-block-repetition). -/
+def SystemBlockMap.first (t : SystemBlockMap) (i : ℕ) : ℕ := Nat.find (t.onto i)
+
+/-- The repeated coefficient objects.
+Source: Zheng 4.1, finite-block reindexing
+(blueprint: lem-pur-system-block-repetition). -/
+def blockCoefficients {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
+    (B : ℕ → Sheaf J CommRingCat.{r}) (t : SystemBlockMap) :
+    ℕ → Sheaf J CommRingCat.{r} := fun m ↦ B (t.index m)
+
+/-- The repeated transition is the specified composite; within a block it is the identity.
+Source: Zheng 4.1, finite-block reindexing
+(blueprint: lem-pur-system-block-repetition). -/
+def blockTransitions {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
+    (J : GrothendieckTopology C) (B : ℕ → Sheaf J CommRingCat.{r})
+    (τ : ∀ n : ℕ, B (n + 1) ⟶ B n) (t : SystemBlockMap) (m : ℕ) :
+    blockCoefficients B t (m + 1) ⟶ blockCoefficients B t m :=
+  coefficientMap J B τ (t.index.monotone (Nat.le_succ m))
+
+/-- Endpoint and interval properties, and the no-skipped-level assertion at a boundary.
+Source: finite-block generalization of Zheng 4.1
+(blueprint: lem-pur-system-block-repetition).
+Proof: Nat.find_spec gives t(a_i)=i and Nat.find_min' gives minimality. Monotonicity
+then gives a_i≤m<a_(i+1) for t(m)=i and monotonicity of a. If t(m+1)>t(m)+1,
+surjectivity at the missing integer contradicts monotonicity on either side of m.
+Thus blockTransitions is identity within blocks and the original adjacent map at a boundary. -/
+theorem systemBlockMap_endpoints (t : SystemBlockMap) :
+    (∀ i : ℕ, t.index (t.first i) = i) ∧ Monotone t.first ∧
+    (∀ m : ℕ, t.first (t.index m) ≤ m ∧ m < t.first (t.index m + 1)) ∧
+    (∀ m : ℕ, t.index (m + 1) = t.index m ∨ t.index (m + 1) = t.index m + 1) := by
+  have hf : ∀ i, t.index (t.first i) = i := fun i ↦ Nat.find_spec (t.onto i)
+  have hmin : ∀ m, t.first (t.index m) ≤ m := fun m ↦
+    Nat.find_min' (t.onto (t.index m)) rfl
+  have hm : Monotone t.first := by
+    intro i j hij
+    by_contra hn
+    have h := t.index.monotone (Nat.le_of_lt (Nat.lt_of_not_ge hn))
+    rw [hf i, hf j] at h
+    have he : i = j := Nat.le_antisymm hij h
+    subst j
+    exact hn le_rfl
+  refine ⟨hf, hm, ?_, ?_⟩
+  · intro m
+    refine ⟨hmin m, ?_⟩
+    by_contra hn
+    have h := t.index.monotone (Nat.le_of_not_gt hn)
+    rw [hf] at h
+    exact Nat.not_succ_le_self _ h
+  · intro m
+    have hlo := t.index.monotone (Nat.le_succ m)
+    by_cases he : t.index (m + 1) = t.index m
+    · exact Or.inl he
+    · right
+      obtain ⟨k, hk⟩ := t.onto (t.index m + 1)
+      by_cases hkm : k ≤ m
+      · have h := t.index.monotone hkm
+        rw [hk] at h
+        exact False.elim (Nat.not_succ_le_self _ h)
+      · have h := t.index.monotone (Nat.succ_le_of_lt (Nat.lt_of_not_ge hkm))
+        rw [hk] at h
+        exact Nat.le_antisymm h (Nat.succ_le_of_lt (lt_of_le_of_ne hlo (Ne.symm he)))
+
+/-- First-endpoint monotonicity, needed by the real endpoint functor.
+Source: Zheng 4.1 finite-block generalization (blueprint: lem-pur-system-block-repetition).
+Proof: the endpoint and interval assertions of systemBlockMap_endpoints give this
+projection; equivalently minimality and monotonicity of t prohibit reversed endpoints. -/
+theorem SystemBlockMap.firstMonotone (t : SystemBlockMap) : Monotone t.first := by
+  exact (systemBlockMap_endpoints t).2.1
+
+/-- Reindexing of the sequence site by a monotone map.
+Source: Zheng 4.1 (blueprint: lem-pur-system-block-repetition). -/
+def blockSite {C : Type c} [Category.{v} C] (k : ℕ →o ℕ) : ℕ × C ⥤ ℕ × C :=
+  k.toFunctor.prod (𝟭 C)
+
+/-- Reindexing preserves the vertical sheaf condition.
+Source: Zheng 4.1 (blueprint: lem-pur-system-block-repetition).
+Proof: at (m,U) restriction along a vertical cover is exactly restriction of the
+original sheaf along that same cover of U at level k(m); glue there. Thus
+precomposition carries every sheaf to a sheaf, which is the continuity criterion. -/
+theorem blockSite_continuous {C : Type c} [Category.{v} C]
+    (J : GrothendieckTopology C) (k : ℕ →o ℕ) :
+    (blockSite (C := C) k).IsContinuous
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J) := by
+  apply Functor.isContinuous_of_coverPreserving
+  · constructor
+    intro G Z T x hx Y₁ Y₂ X f₁ f₂ g₁ g₂ hg₁ hg₂ he
+    let W : ℕ × C := (min Y₁.1 Y₂.1, X.2)
+    let p₁ : W ⟶ Y₁ := Prod.mkHom (homOfLE (min_le_left _ _)) f₁.2
+    let p₂ : W ⟶ Y₂ := Prod.mkHom (homOfLE (min_le_right _ _)) f₂.2
+    have hp : X.1 ≤ k (min Y₁.1 Y₂.1) := by
+      rcases le_total Y₁.1 Y₂.1 with h | h
+      · rw [min_eq_left h]
+        exact leOfHom f₁.1
+      · rw [min_eq_right h]
+        exact leOfHom f₂.1
+    let q : X ⟶ (blockSite (C := C) k).obj W :=
+      Prod.mkHom (homOfLE hp) (𝟙 X.2)
+    have e₁ : q ≫ (blockSite k).map p₁ = f₁ := by
+      apply Prod.hom_ext
+      · exact Subsingleton.elim _ _
+      · simp [q, p₁, blockSite]
+    have e₂ : q ≫ (blockSite k).map p₂ = f₂ := by
+      apply Prod.hom_ext
+      · exact Subsingleton.elim _ _
+      · simp [q, p₂, blockSite]
+    have hc := hx p₁ p₂ hg₁ hg₂ (by
+      apply Prod.hom_ext
+      · exact Subsingleton.elim _ _
+      · change f₁.2 ≫ g₁.2 = f₂.2 ≫ g₂.2
+        exact congrArg (fun f ↦ f.2) he)
+    rw [← e₁, ← e₂, op_comp, op_comp, G.obj.map_comp, G.obj.map_comp]
+    exact congrArg (G.obj.map q.op) hc
+  · constructor
+    intro X S hS
+    apply J.superset_covering _ hS
+    intro V f hf
+    exact ⟨(X.1, V), Prod.mkHom (𝟙 _) f, 𝟙 _, hf, by
+      ext <;> simp [blockSite]⟩
+
+/-- Continuity for the canonical sequence-site reindexing.
+Source: Zheng 4.1 (blueprint: lem-pur-system-block-repetition). -/
+instance blockSiteContinuous {C : Type c} [Category.{v} C]
+    (J : GrothendieckTopology C) (k : ℕ →o ℕ) :
+    (blockSite (C := C) k).IsContinuous
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J) :=
+  blockSite_continuous J k
+
+/-- First endpoints as a bundled monotone map, with actual least-index data.
+Source: Zheng 4.1 finite-block generalization (blueprint: lem-pur-system-block-repetition). -/
+def SystemBlockMap.endpoints (t : SystemBlockMap) : ℕ →o ℕ :=
+  ⟨t.first, t.firstMonotone⟩
+
+/-- Fibers of a composite block map are finite unions of finite fibers.
+Source: Zheng 4.1 finite-block composition (blueprint: lem-pur-system-block-repetition).
+Proof: the fiber at i is the union, over the finite fiber t⁻¹(i), of the finite
+fibers s⁻¹(j). Finite unions preserve finiteness. -/
+theorem SystemBlockMap.comp_finite (t s : SystemBlockMap) (i : ℕ) :
+    Set.Finite {m : ℕ | t.index (s.index m) = i} := by
+  have h := (t.finite i).biUnion (fun j _ ↦ s.finite j)
+  apply h.subset
+  intro m hm
+  exact Set.mem_iUnion₂.mpr ⟨s.index m, hm, rfl⟩
+
+/-- Composite block map with its actual composed index function.
+Source: Zheng 4.1 finite-block composition (blueprint: lem-pur-system-block-repetition). -/
+def SystemBlockMap.comp (t s : SystemBlockMap) : SystemBlockMap where
+  index := t.index.comp s.index
+  onto := t.onto.comp s.onto
+  finite := t.comp_finite s
+
+/-- The identity block map, including singleton fibers.
+Source: Zheng 4.1 identity reindexing (blueprint: lem-pur-system-block-repetition). -/
+def SystemBlockMap.id : SystemBlockMap where
+  index := OrderHom.id
+  onto := Function.surjective_id
+  finite := fun i ↦ Set.finite_singleton i
+
+variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
+  (J : GrothendieckTopology C) (B : ℕ → Sheaf J CommRingCat.{r})
+  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n) (t : SystemBlockMap)
+
+omit [EssentiallySmall.{r} C] in
+private theorem blockRings (k : ℕ →o ℕ) :
+    rings J (fun n ↦ B (k n))
+      (fun n ↦ coefficientMap J B τ (k.monotone (Nat.le_succ n))) =
+      k.toFunctor.op ⋙ rings J B τ := by
+  let cmp : k.toFunctor.op ⋙ rings J B τ ⟶
+      rings J (fun n ↦ B (k n))
+        (fun n ↦ coefficientMap J B τ (k.monotone (Nat.le_succ n))) :=
+    NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (by
+      intro n
+      simp only [Functor.comp_map, rings, Functor.ofOpSequence_map_homOfLE_succ,
+        Category.id_comp, Category.comp_id]
+      rfl)
+  symm
+  refine Functor.hext (fun _ ↦ rfl) ?_
+  intro X Y f
+  apply heq_of_eq
+  have hh := cmp.naturality f
+  dsimp only [cmp] at hh
+  simpa only [NatTrans.ofOpSequence_app, Category.id_comp, Category.comp_id] using hh
+
+omit [EssentiallySmall.{r} C] in
+private theorem blockRingPresheaf (k : ℕ →o ℕ)
+    (F : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{r}) :
+    (blockSite (C := C) k).op ⋙ (prodOpEquiv (C := ℕ) (D := C)).functor ⋙
+        Functor.uncurry.obj (F ⋙ sheafToPresheaf J CommRingCat.{r}) =
+      (prodOpEquiv (C := ℕ) (D := C)).functor ⋙
+        Functor.uncurry.obj ((k.toFunctor.op ⋙ F) ⋙ sheafToPresheaf J CommRingCat.{r}) := by
+  refine CategoryTheory.Functor.ext (fun _ ↦ rfl) ?_
+  intro X Y f
+  rfl
+
+private theorem blockPushforward_exact (k : ℕ →o ℕ)
+    {S R : Sheaf (coefficientSequenceTopology J) RingCat.{r}}
+    (φ : S ⟶ ((blockSite (C := C) k).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj R) :
+    (SheafOfModules.pushforward.{r} φ).Additive ∧
+      PreservesFiniteLimits (SheafOfModules.pushforward.{r} φ) ∧
+      PreservesFiniteColimits (SheafOfModules.pushforward.{r} φ) := by
+  refine ⟨⟨by intros; ext U x; rfl⟩, ?_, ?_⟩
+  · let T := SheafOfModules.forget.{r} S ⋙ PresheafOfModules.toPresheaf S.obj
+    have : PreservesFiniteLimits (SheafOfModules.pushforward.{r} φ ⋙ T) := by
+      change PreservesFiniteLimits
+        ((SheafOfModules.forget.{r} R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙
+          (Functor.whiskeringLeft _ _ _).obj (blockSite (C := C) k).op)
+      infer_instance
+    exact preservesFiniteLimits_of_reflects_of_preserves _ T
+  · let : (blockSite (C := C) k).IsCocontinuous
+        (coefficientSequenceTopology J) (coefficientSequenceTopology J) :=
+      ⟨fun hS ↦ hS⟩
+    let : ∀ (F : (ℕ × C)ᵒᵖ ⥤ AddCommGrpCat.{r}),
+        (blockSite (C := C) k).op.HasPointwiseRightKanExtension F := fun F X ↦ by
+      let : HasLimitsOfShape (StructuredArrow X (blockSite (C := C) k).op)
+          AddCommGrpCat.{r} := HasLimitsOfShape.of_essentiallySmall _ _
+      infer_instance
+    let H := (blockSite (C := C) k).sheafPushforwardContinuous AddCommGrpCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)
+    have : PreservesColimitsOfSize.{0, 0} H :=
+      ((blockSite (C := C) k).sheafAdjunctionCocontinuous AddCommGrpCat.{r}
+        (coefficientSequenceTopology J)
+          (coefficientSequenceTopology J)).leftAdjoint_preservesColimits
+    let T := SheafOfModules.toSheaf.{r} S
+    have : PreservesFiniteColimits (SheafOfModules.pushforward.{r} φ ⋙ T) := by
+      change PreservesFiniteColimits (SheafOfModules.toSheaf.{r} R ⋙ H)
+      infer_instance
+    have : ReflectsFiniteColimits T :=
+      { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+    exact preservesFiniteColimits_of_reflects_of_preserves _ T
+
+/-- The identity coefficient identification for repetition on the sequence site.
+Source: Zheng 4.1 (blueprint: lem-pur-system-block-repetition).
+Proof: both ring sheaves have B_(t(m))(U) at (m,U). The horizontal maps are the
+same composites of tau by functoriality of rings, including identity maps within
+a block. Vertical maps are B_(t(m))'s restrictions. Extensionality proves equality. -/
+theorem blockRepeatRing :
+    ((blockSite (C := C) t.index).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj
+      (ring (coefficientSequenceTopology J) (systemRing J B τ)) =
+    ring (coefficientSequenceTopology J)
+      (systemRing J (blockCoefficients B t) (blockTransitions J B τ t)) := by
+  let cmp : t.index.toFunctor.op ⋙ rings J B τ ⟶
+      rings J (blockCoefficients B t) (blockTransitions J B τ t) :=
+    NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (by
+      intro n
+      simp only [Functor.comp_map, rings, Functor.ofOpSequence_map_homOfLE_succ,
+        Category.id_comp, Category.comp_id]
+      rfl)
+  apply ObjectProperty.FullSubcategory.ext
+  refine Functor.hext (fun _ ↦ rfl) ?_
+  intro X Y f
+  have hh := cmp.naturality (f.unop.1).op
+  dsimp only [cmp] at hh
+  simp only [NatTrans.ofOpSequence_app, Category.id_comp, Category.comp_id] at hh
+  dsimp [blockSite, ring, systemRing, ringPresheaf,
+    Functor.sheafPushforwardContinuous]
+  apply heq_of_eq
+  change (forget₂ CommRingCat RingCat).map _ = (forget₂ CommRingCat RingCat).map _
+  congr 1
+  dsimp [Functor.uncurry]
+  congr 1
+  exact congrArg (fun α ↦ α.hom.app (op X.unop.2)) hh
+
+/-- Actual repetition, as restriction on the ringed sequence site.
+Source: Zheng 4.1 (blueprint: lem-pur-system-block-repetition). -/
+def blockRepeat : Systems J B τ ⥤
+    Systems J (blockCoefficients B t) (blockTransitions J B τ t) :=
+  SheafOfModules.pushforward (F := blockSite (C := C) t.index)
+    (eqToHom (blockRepeatRing J B τ t).symm)
+
+/-- The identity coefficient identification at first endpoints.
+Source: Zheng 4.1 finite-block generalization (blueprint: lem-pur-system-block-repetition).
+Proof: t(a_i)=i identifies every section ring with B_i. The composite transition
+from a_(i+1) to a_i reindexes to the original B_(i+1)→B_i by functoriality of the
+coefficient sequence. Vertical restrictions are unchanged. Use sheaf extensionality. -/
+theorem blockEndpointRing :
+    ((blockSite (C := C) t.endpoints).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj
+      (ring (coefficientSequenceTopology J)
+        (systemRing J (blockCoefficients B t) (blockTransitions J B τ t))) =
+    ring (coefficientSequenceTopology J) (systemRing J B τ) := by
+  have hi : t.endpoints.toFunctor ⋙ t.index.toFunctor = 𝟭 ℕ := by
+    refine CategoryTheory.Functor.ext (fun n ↦ (systemBlockMap_endpoints t).1 n) ?_
+    intro X Y f
+    apply Subsingleton.elim
+  have hr : t.endpoints.toFunctor.op ⋙
+      rings J (blockCoefficients B t) (blockTransitions J B τ t) = rings J B τ := by
+    rw [show rings J (blockCoefficients B t) (blockTransitions J B τ t) =
+      t.index.toFunctor.op ⋙ rings J B τ from blockRings J B τ t.index]
+    change (t.endpoints.toFunctor ⋙ t.index.toFunctor).op ⋙ rings J B τ = _
+    rw [hi]
+    rfl
+  apply ObjectProperty.FullSubcategory.ext
+  change ((blockSite (C := C) t.endpoints).op ⋙
+      (prodOpEquiv (C := ℕ) (D := C)).functor ⋙
+        Functor.uncurry.obj (rings J (blockCoefficients B t) (blockTransitions J B τ t) ⋙
+          sheafToPresheaf J CommRingCat.{r})) ⋙ forget₂ CommRingCat RingCat = _
+  rw [blockRingPresheaf, hr]
+  rfl
+
+/-- Actual first-endpoint evaluation, as restriction on the ringed sequence site.
+Source: Zheng 4.1 finite-block generalization (blueprint: lem-pur-system-block-repetition). -/
+def blockEndpoint : Systems J (blockCoefficients B t) (blockTransitions J B τ t) ⥤
+    Systems J B τ :=
+  SheafOfModules.pushforward (F := blockSite (C := C) t.endpoints)
+    (eqToHom (blockEndpointRing J B τ t).symm)
+
+/-- The actual endpoint/repetition pair, with all section and arrow formulas.
+Source: Zheng 4.1, finite-block generalization; Stacks 08BJ
+(blueprint: lem-pur-system-block-repetition). -/
+structure SystemBlockRepetition where
+  /-- Repetition of strict systems. -/
+  repetition : Systems J B τ ⥤ Systems J (blockCoefficients B t) (blockTransitions J B τ t)
+  /-- Repetition is the constructed restriction, not a chosen unrelated functor. -/
+  repetition_canonical : repetition = blockRepeat J B τ t
+  /-- Evaluation at first endpoints, with composite transitions. -/
+  endpoint : Systems J (blockCoefficients B t) (blockTransitions J B τ t) ⥤ Systems J B τ
+  /-- Endpoint evaluation is the constructed restriction. -/
+  endpoint_canonical : endpoint = blockEndpoint J B τ t
+  /-- The actual component modules, with their original coefficient actions. -/
+  evaluation : ∀ m : ℕ,
+    repetition ⋙ SemilinearSections.evaluation J (blockCoefficients B t)
+      (blockTransitions J B τ t) m ≅ SemilinearSections.evaluation J B τ (t.index m)
+  /-- These identifications are identities on section carriers. -/
+  evaluation_sections : ∀ (m : ℕ) (M : Systems J B τ) (U : Cᵒᵖ)
+    (x : ((SemilinearSections.evaluation J (blockCoefficients B t)
+      (blockTransitions J B τ t) m).obj (repetition.obj M)).val.obj U),
+    HEq ((((evaluation m).hom.app M).val.app U) x) x
+  /-- Every presheaf restriction, including horizontal transitions, is reindexed. -/
+  repeat_restrictions : ∀ (M : Systems J B τ) {U V : (ℕ × C)ᵒᵖ} (f : U ⟶ V),
+    HEq (fun x ↦ (repetition.obj M).val.map f x)
+      (fun x ↦ M.val.map (((t.index.toFunctor.prod (𝟭 C)).map f.unop).op) x)
+  /-- The first-endpoint module is P_(a_i), including its module structure. -/
+  endpoint_sections : ∀ (P : Systems J (blockCoefficients B t) (blockTransitions J B τ t))
+    (i : ℕ) (U : Cᵒᵖ),
+    HEq ((endpoint.obj P).val.obj (op (i, U.unop)))
+      (P.val.obj (op (t.first i, U.unop)))
+  /-- Endpoint morphisms are the original component maps. -/
+  endpoint_maps : ∀ {P Q : Systems J (blockCoefficients B t) (blockTransitions J B τ t)}
+    (f : P ⟶ Q) (i : ℕ) (U : Cᵒᵖ),
+    HEq (fun x ↦ ((endpoint.map f).val.app (op (i, U.unop))) x)
+      (fun x ↦ (f.val.app (op (t.first i, U.unop))) x)
+  /-- First endpoints are monotone, permitting all composite transitions. -/
+  first_monotone : Monotone t.first
+  /-- Endpoint restrictions are the actual composites, including vertical restrictions. -/
+  endpoint_restrictions : ∀
+    (P : Systems J (blockCoefficients B t) (blockTransitions J B τ t))
+    {U V : (ℕ × C)ᵒᵖ} (f : U ⟶ V),
+    HEq (fun x ↦ (endpoint.obj P).val.map f x)
+      (fun x ↦ P.val.map
+        (((first_monotone.functor.prod (𝟭 C)).map f.unop).op) x)
+  /-- The endpoint functor is LEFT adjoint to repetition. -/
+  adjunction : endpoint ⊣ repetition
+  /-- The adjunct formula uses the transition to the FIRST endpoint. -/
+  adjunct : ∀
+    (P : Systems J (blockCoefficients B t) (blockTransitions J B τ t))
+    (M : Systems J B τ) (f : endpoint.obj P ⟶ M) (m : ℕ) (U : Cᵒᵖ)
+    (h : t.first (t.index m) ≤ m),
+    ∀ (x : P.val.obj (op (m, U.unop)))
+      (y : (endpoint.obj P).val.obj (op (t.index m, U.unop))),
+      HEq y (P.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x) →
+      HEq ((((adjunction.homEquiv P M) f).val.app (op (m, U.unop))) x)
+        ((f.val.app (op (t.index m, U.unop))) y)
+  /-- Repetition is additive. -/
+  [repeat_additive : repetition.Additive]
+  /-- Repetition preserves kernels. -/
+  [repeat_limits : PreservesFiniteLimits repetition]
+  /-- Repetition preserves cokernels. -/
+  [repeat_colimits : PreservesFiniteColimits repetition]
+  /-- Endpoint evaluation is additive. -/
+  [endpoint_additive : endpoint.Additive]
+  /-- Endpoint evaluation preserves kernels. -/
+  [endpoint_limits : PreservesFiniteLimits endpoint]
+  /-- Endpoint evaluation preserves cokernels. -/
+  [endpoint_colimits : PreservesFiniteColimits endpoint]
+  /-- Repetition preserves K-injectives for UNBOUNDED complexes of systems. -/
+  kinjective : ∀ I : CochainComplex (Systems J B τ) ℤ, I.IsKInjective →
+    CochainComplex.IsKInjective ((repetition.mapHomologicalComplex (.up ℤ)).obj I)
+
+attribute [instance] SystemBlockRepetition.repeat_additive SystemBlockRepetition.repeat_limits
+  SystemBlockRepetition.repeat_colimits SystemBlockRepetition.endpoint_additive
+  SystemBlockRepetition.endpoint_limits SystemBlockRepetition.endpoint_colimits
+
+/-- K-injective preservation from the actual endpoint adjunction package.
+Source: Stacks 08BJ (blueprint: lem-pur-system-block-repetition). -/
+instance SystemBlockRepetition.preservesKInjective
+    (R : SystemBlockRepetition J B τ t) : R.repetition.PreservesKInjectiveComplexes where
+  isKInjective_map I := R.kinjective I inferInstance
+
+omit [EssentiallySmall.{r} C] in
+private theorem blockPushforward_id
+    {R S : Sheaf (coefficientSequenceTopology J) RingCat.{r}} (e : S = R) :
+    HEq (SheafOfModules.pushforward.{r} (F := blockSite (C := C) OrderHom.id)
+      (eqToHom e)) (𝟭 (SheafOfModules.{r} R)) := by
+  subst S
+  rfl
+
+private theorem modulePushforwardComp
+    {D₀ : Type u₁} {D₁ : Type u₂} {D₂ : Type u₃}
+    [Category.{v₁} D₀] [Category.{v₂} D₁] [Category.{v₃} D₂]
+    {J₀ : GrothendieckTopology D₀} {J₁ : GrothendieckTopology D₁}
+    {J₂ : GrothendieckTopology D₂} (F : D₀ ⥤ D₁) (G : D₁ ⥤ D₂)
+    [F.IsContinuous J₀ J₁] [G.IsContinuous J₁ J₂] [(F ⋙ G).IsContinuous J₀ J₂]
+    {R₀ : Sheaf J₀ RingCat.{r}} {R₁ : Sheaf J₁ RingCat.{r}}
+    {R₂ : Sheaf J₂ RingCat.{r}}
+    (φ : R₀ ⟶ (F.sheafPushforwardContinuous RingCat.{r} J₀ J₁).obj R₁)
+    (ψ : R₁ ⟶ (G.sheafPushforwardContinuous RingCat.{r} J₁ J₂).obj R₂) :
+    SheafOfModules.pushforward.{r} ψ ⋙ SheafOfModules.pushforward.{r} φ =
+      SheafOfModules.pushforward.{r} (F := F ⋙ G)
+        (φ ≫ (F.sheafPushforwardContinuous RingCat.{r} J₀ J₁).map ψ) := by
+  rfl
+
+omit [EssentiallySmall.{r} C] in
+private theorem blockPushforward_comp (k l : ℕ →o ℕ)
+    {R S T : Sheaf (coefficientSequenceTopology J) RingCat.{r}}
+    (e : S = ((blockSite (C := C) k).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj R)
+    (d : T = ((blockSite (C := C) l).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj S)
+    (g : T = ((blockSite (C := C) (k.comp l)).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj R) :
+    HEq (SheafOfModules.pushforward.{r} (eqToHom e) ⋙
+        SheafOfModules.pushforward.{r} (eqToHom d))
+      (SheafOfModules.pushforward.{r} (eqToHom g)) := by
+  have hc : eqToHom d ≫
+      ((blockSite (C := C) l).sheafPushforwardContinuous RingCat.{r}
+        (coefficientSequenceTopology J) (coefficientSequenceTopology J)).map (eqToHom e) =
+      eqToHom g := by
+    simp only [eqToHom_map, eqToHom_trans]
+  let : (blockSite (C := C) l ⋙ blockSite (C := C) k).IsContinuous
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J) :=
+    Functor.isContinuous_comp _ _ _ (coefficientSequenceTopology J) _
+  have hfun := modulePushforwardComp (blockSite (C := C) l) (blockSite (C := C) k)
+    (eqToHom d) (eqToHom e)
+  apply heq_of_eq
+  exact hfun.trans (congrArg
+    (fun φ ↦ SheafOfModules.pushforward.{r} (F := blockSite (C := C) (k.comp l)) φ) hc)
+
+omit [EssentiallySmall.{r} C] in
+private theorem blockPushforward_heq (k : ℕ →o ℕ)
+    {R S T : Sheaf (coefficientSequenceTopology J) RingCat.{r}} (e : S = T)
+    (h : S = ((blockSite (C := C) k).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj R)
+    (h' : T = ((blockSite (C := C) k).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj R) :
+    HEq (SheafOfModules.pushforward.{r} (eqToHom h))
+      (SheafOfModules.pushforward.{r} (eqToHom h')) := by
+  subst T
+  rfl
+
+/-- Repetition for a composite block map is the composite on every restriction and map.
+The explicit transition equality transports between the two strictly reindexed ring
+presentations; no second definition of the system category is introduced.
+Source: Zheng 4.1 finite-block composition (blueprint: lem-pur-system-block-repetition).
+Proof: functoriality of rings identifies each composite tau with the original map
+from t(s(m+1)) to t(s(m)). Both repeated module presheaves at (m,U) are M_(t(s(m)))(U)
+and use the same restrictions and component morphisms. Extensionality gives the
+transition equality and the functor identity, including all scalar actions. -/
+theorem blockRepeat_comp (s : SystemBlockMap) :
+    ∃ _hτ : blockTransitions J (blockCoefficients B t) (blockTransitions J B τ t) s =
+        blockTransitions J B τ (t.comp s),
+      HEq (blockRepeat J B τ t ⋙
+        blockRepeat J (blockCoefficients B t) (blockTransitions J B τ t) s)
+        (blockRepeat J B τ (t.comp s)) := by
+  have ht : blockTransitions J (blockCoefficients B t) (blockTransitions J B τ t) s =
+      blockTransitions J B τ (t.comp s) := by
+    funext m
+    let cmp : t.index.toFunctor.op ⋙ rings J B τ ⟶
+        rings J (blockCoefficients B t) (blockTransitions J B τ t) :=
+      NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (by
+        intro n
+        simp only [Functor.comp_map, rings, Functor.ofOpSequence_map_homOfLE_succ,
+          Category.id_comp, Category.comp_id]
+        rfl)
+    have hh := cmp.naturality (homOfLE (s.index.monotone (Nat.le_succ m))).op
+    dsimp only [cmp] at hh
+    simp only [NatTrans.ofOpSequence_app, Category.id_comp, Category.comp_id] at hh
+    exact hh.symm
+  refine ⟨ht, ?_⟩
+  have hT : ring (coefficientSequenceTopology J)
+      (systemRing J (blockCoefficients (blockCoefficients B t) s)
+        (blockTransitions J (blockCoefficients B t) (blockTransitions J B τ t) s)) =
+      ring (coefficientSequenceTopology J)
+        (systemRing J (blockCoefficients B (t.comp s)) (blockTransitions J B τ (t.comp s))) := by
+    rw [ht]
+    rfl
+  have he := blockPushforward_comp J t.index s.index
+    (blockRepeatRing J B τ t).symm
+    (blockRepeatRing J (blockCoefficients B t) (blockTransitions J B τ t) s).symm
+    (hT.trans (blockRepeatRing J B τ (t.comp s)).symm)
+  exact he.trans (blockPushforward_heq J (t.comp s).index hT _ _)
+
+/-- Identity repetition is the identity functor, with the identity coefficient tower.
+Source: Zheng 4.1 identity reindexing (blueprint: lem-pur-system-block-repetition).
+Proof: rings sends each adjacent generator to tau. All section modules,
+restrictions and component maps are unchanged. Presheaf and functor extensionality
+give the two identities, including the identity scalar actions. -/
+theorem blockRepeat_id :
+    blockTransitions J B τ SystemBlockMap.id = τ ∧
+      HEq (blockRepeat J B τ SystemBlockMap.id) (𝟭 (Systems J B τ)) := by
+  have ht : blockTransitions J B τ SystemBlockMap.id = τ := by
+    funext n
+    exact Functor.ofOpSequence_map_homOfLE_succ τ n
+  refine ⟨ht, ?_⟩
+  exact blockPushforward_id J (blockRepeatRing J B τ SystemBlockMap.id).symm
+
+omit [EssentiallySmall.{r} C] in
+private theorem blockPushforward_restrict (k : ℕ →o ℕ)
+    {R R' S S' : Sheaf (coefficientSequenceTopology J) RingCat.{r}}
+    (a : R ⟶ R') (d : S ⟶ S')
+    (φ : S ⟶ ((blockSite (C := C) k).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj R)
+    (φ' : S' ⟶ ((blockSite (C := C) k).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj R')
+    (h : φ ≫ ((blockSite (C := C) k).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).map a = d ≫ φ') :
+    SheafOfModules.restrictScalars.{r} a ⋙ SheafOfModules.pushforward φ =
+      SheafOfModules.pushforward φ' ⋙ SheafOfModules.restrictScalars.{r} d := by
+  change SheafOfModules.pushforward.{r}
+    (F := blockSite (C := C) k)
+    (φ ≫ ((blockSite (C := C) k).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).map a) =
+    SheafOfModules.pushforward.{r} (F := blockSite (C := C) k) (d ≫ φ')
+  rw [h]
+
+/-- Repetition commutes with exact restriction of scalars by the section identity.
+Source: Zheng 4.1 coefficient reindexing (blueprint: lem-pur-system-block-repetition).
+Proof: the repeated compatible coefficient map has component b_(t(m)); induction
+on interval length gives its compatibility with the composite transitions. Both
+functors keep precisely the same section groups and component arrows, restricting
+the B_(t(m)) action through that same map. Extensionality gives the strict identity. -/
+theorem blockRepeat_restrictScalars
+    (B' : ℕ → Sheaf J CommRingCat.{r}) (τ' : ∀ n : ℕ, B' (n + 1) ⟶ B' n)
+    (b : ∀ n : ℕ, B n ⟶ B' n)
+    (hb : ∀ n : ℕ, b (n + 1) ≫ τ' n = τ n ≫ b n) :
+    ∃ hd : ∀ m : ℕ,
+      b (t.index (m + 1)) ≫ blockTransitions J B' τ' t m =
+        blockTransitions J B τ t m ≫ b (t.index m),
+      res (systemMap J B τ B' τ' b hb) ⋙ blockRepeat J B τ t =
+        blockRepeat J B' τ' t ⋙
+          res (systemMap J (blockCoefficients B t) (blockTransitions J B τ t)
+            (blockCoefficients B' t) (blockTransitions J B' τ' t)
+            (fun m ↦ b (t.index m)) hd) := by
+  let cmp : rings J B τ ⟶ rings J B' τ' :=
+    NatTrans.ofOpSequence b (by
+      intro n
+      simpa only [rings, Functor.ofOpSequence_map_homOfLE_succ] using (hb n).symm)
+  have hd : ∀ m : ℕ,
+      b (t.index (m + 1)) ≫ blockTransitions J B' τ' t m =
+        blockTransitions J B τ t m ≫ b (t.index m) := by
+    intro m
+    exact (cmp.naturality (homOfLE (t.index.monotone (Nat.le_succ m))).op).symm
+  refine ⟨hd, ?_⟩
+  let φB := eqToHom (blockRepeatRing J B τ t).symm
+  let φF := eqToHom (blockRepeatRing J B' τ' t).symm
+  let a := (sheafCompose (coefficientSequenceTopology J)
+    (forget₂ CommRingCat.{r} RingCat.{r})).map (systemMap J B τ B' τ' b hb)
+  let d := (sheafCompose (coefficientSequenceTopology J)
+    (forget₂ CommRingCat.{r} RingCat.{r})).map
+      (systemMap J (blockCoefficients B t) (blockTransitions J B τ t)
+        (blockCoefficients B' t) (blockTransitions J B' τ' t)
+        (fun m ↦ b (t.index m)) hd)
+  have he : φB ≫ ((blockSite (C := C) t.index).sheafPushforwardContinuous RingCat.{r}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology J)).map a = d ≫ φF := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    have hB : φB.hom.app V = 𝟙 _ := by
+      dsimp only [φB]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    have hF : φF.hom.app V = 𝟙 _ := by
+      dsimp only [φF]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    change φB.hom.app V ≫ _ = _ ≫ φF.hom.app V
+    rw [hB, hF, Category.id_comp, Category.comp_id]
+    have h₁ := (systemMap_existsUnique J B τ B' τ' b hb).exists.choose_spec
+      (t.index V.unop.1) (op V.unop.2)
+    have h₂ := (systemMap_existsUnique J (blockCoefficients B t) (blockTransitions J B τ t)
+      (blockCoefficients B' t) (blockTransitions J B' τ' t)
+      (fun m ↦ b (t.index m)) hd).exists.choose_spec V.unop.1 (op V.unop.2)
+    exact congrArg (fun f ↦ (forget₂ CommRingCat.{r} RingCat.{r}).map f) (h₁.trans h₂.symm)
+  exact blockPushforward_restrict J t.index a d φB φF he
+
+```
+
+## New
+
+The eight signatures above and their proofs are retained in
+`Sheaf.Paper.SystemBlockDerivedComparison`, with the same enclosing generic
+variables. The item adds this public import:
+
+```lean
+public import Sheaf.Paper.SystemBlockDerivedComparison
+public import Sheaf.Paper.SystemBlockConstructions
+```
+
+The support module explicitly publicly imports
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction`,
+needed by its public derived-adjunction statement. The original item remains the
+import path used by its consumers. The geometric section-normalization private
+import is removed: the two elementary mate unit/counit identities it supplied
+are proved locally with the existing complete proofs. This avoids citing the
+broader geometric node, whose statement dependencies reach the item. The two `local irreducible` attributes on
+`blockComplexComparison` and `blockCoefficientComparison` only affect proofs in
+the extracted section; their public reducibility and definitions do not change.
+The new proof of `systemBlockRepetition` scopes its coefficient irreducibility
+attributes to that one theorem. There are no forced adaptations.
+
+## Users
+
+| module | group holding it | effect |
+| --- | --- | --- |
+| Sheaf.Paper.SystemBlockRepetition | V2 | Re-exports the extracted declarations; proves the actual endpoint/repetition package. |
+| Sheaf.SixFunctors.NormalizedOpenSections | unclaimed | Existing direct importer; no source change required. |
+| Sheaf.Paper.EtaleCofinalSupportRealization | unclaimed | Existing direct importer; no source change required. |
+| Sheaf.Paper.EtaleCofinalSupportComposition | unclaimed | Existing direct importer; no source change required. |
+| Sheaf.Paper.EtaleSystemCofinalData | unclaimed | Existing direct importer; no source change required. |
+
+The preflight textual-use advisories for `SystemBlockMap.comp` and `.id`
+match unrelated occurrences of the generic final names `comp` and `id`. The
+actual block-map/package consumers are the four direct importers listed above;
+all were compiled against the preserved public interface.
+
+Consumer compilation results are recorded in `report.md`. Unchanged consumer
+copies are removed from the packet after validation.
+
+## Status
+
+landed 20261026T235948-L-1474002 2026-10-26 (merge of deliver/V2/Sheaf.Paper.SystemBlockRepetition)

@@ -1,0 +1,176 @@
+{
+ "id": "lem-sfb-flat-space-groupoid-abelian",
+ "kind": "statement",
+ "title": "Abelianity of quasi-coherent modules on a flat algebraic-space groupoid",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $(U,R,s,t,e,i,c)$ a groupoid in algebraic spaces over $S$ [def-sfb-algebraic-space-groupoid, def-trf-algebraic-space], with $c:R\\times_{s,U,t}R\\to R$. Suppose $s,t$ are flat: after etale scheme charts of source and target their scheme representatives are flat [def-weil-flat-morphism]. On the small etale ringed sites use module sheaves [def-weil-sheaf-of-modules-category], quasi-coherent modules [def-trf-space-quasi-coherent-module], and tensor pullbacks [def-trf-space-etale-module-functors]. Define $\\mathcal C$ to have objects $(M,\\alpha)$ with $M\\in\\operatorname{QCoh}(U)$ and $\\alpha:t^*M\\xrightarrow{\\sim}s^*M$, with $e^*\\alpha=1$ and $c^*\\alpha=\\operatorname{pr}_1^*\\alpha\\circ\\operatorname{pr}_0^*\\alpha$ on $R\\times_{s,U,t}R$ under the canonical pullback identifications. A morphism $v:(M,\\alpha)\\to(N,\\beta)$ is a module map with $s^*v\\circ\\alpha=\\beta\\circ t^*v$; identities, composition and addition are those of the underlying module maps. Then $\\mathcal C$ is an abelian category [def-sp-abelian]. The forgetful functor to $\\operatorname{QCoh}(U)$ computes kernels and cokernels as the underlying module-sheaf kernels and cokernels with their induced descent data. No quasi-compactness, finiteness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 06VZ, lemma-abelian, statement and proof; the module datum is spelled out in definition-groupoid-module in the same section."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-space-groupoid",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sp-abelian",
+  "def-sfb-space-groupoid-module",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-flat-space-groupoid-kernels-cokernels] to the given $S,U,R,s,t,e,i,c$. Its groupoid convention is the same: $c$ composes the second arrow followed by the first, and the descent isomorphism goes from $t^*M$ to $s^*M$. Its objects obey exactly $e^*\\alpha=1$ and $c^*\\alpha=\\operatorname{pr}_1^*\\alpha\\circ\\operatorname{pr}_0^*\\alpha$; its morphisms obey exactly $s^*v\\circ\\alpha=\\beta\\circ t^*v$. Thus its category and forgetful functor are the category and functor of this statement, with the same underlying identities, composition and addition. Its hypotheses require just the stated groupoid and flatness of $s,t$ on etale scheme charts. The cited statement gives abelianity and computes both kernels and cokernels as small-etale module-sheaf kernels and cokernels endowed with their induced groupoid isomorphisms, including quasi-coherence of those underlying modules. These are all the required conclusions. Its explicit absence of quasi-compactness, finite-presentation, separation and Noetherian assumptions confirms that no extra hypothesis is used.",
+   "uses": [
+    "lem-sfb-flat-space-groupoid-kernels-cokernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 06VZ, lemma-abelian; definition-groupoid-module, with the already existing stronger node lem-sfb-flat-space-groupoid-kernels-cokernels."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-space-groupoid-kernels-cokernels"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 06VZ, lemma-abelian; definition-groupoid-module, with the already existing stronger node lem-sfb-flat-space-groupoid-kernels-cokernels."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaves on a flat groupoid in algebraic spaces form an abelian category",
+   "results": "8 hits: CategoryTheory.sheafIsAbelian, SheafOfModules.IsQuasicoherent.mk, CategoryTheory.Sheaf.instIsGrothendieckAbelian, SheafOfModules.isQuasicoherent, SheafOfModules.instAbelian, SheafOfModules.IsQuasicoherent, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern all module sheaves on schemes or arbitrary ringed sites, and definitions of quasi-coherence; none supplies flat algebraic-space groupoid descent data or their kernels and cokernels. Read Sheaf/Abelian.lean and Sheaf/Quasicoherent.lean; the ambient abelian instance does not restrict to this subcategory automatically."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of quasi coherent modules with descent data on a flat algebraic space groupoid is abelian",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, instAbelianCondensedMod, instAbelianLightCondMod, SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, PresheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instCategory, SheafOfModules.QuasicoherentData.X",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern all module sheaves on schemes or arbitrary ringed sites, and definitions of quasi-coherence; none supplies flat algebraic-space groupoid descent data or their kernels and cokernels. Read Sheaf/Abelian.lean and Sheaf/Quasicoherent.lean; the ambient abelian instance does not restrict to this subcategory automatically."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules with equivariant descent data for flat source and target maps have kernels and cokernels on the underlying algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.X, AlgebraicGeometry.Scheme.Modules.instCategory, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern all module sheaves on schemes or arbitrary ringed sites, and definitions of quasi-coherence; none supplies flat algebraic-space groupoid descent data or their kernels and cokernels. Read Sheaf/Abelian.lean and Sheaf/Quasicoherent.lean; the ambient abelian instance does not restrict to this subcategory automatically."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"Abelian\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern all module sheaves on schemes or arbitrary ringed sites, and definitions of quasi-coherence; none supplies flat algebraic-space groupoid descent data or their kernels and cokernels. Read Sheaf/Abelian.lean and Sheaf/Quasicoherent.lean; the ambient abelian instance does not restrict to this subcategory automatically."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*abelian|abelian.*groupoid|quasi.?coherent.*abelian|abelian.*quasi.?coherent",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern all module sheaves on schemes or arbitrary ringed sites, and definitions of quasi-coherence; none supplies flat algebraic-space groupoid descent data or their kernels and cokernels. Read Sheaf/Abelian.lean and Sheaf/Quasicoherent.lean; the ambient abelian instance does not restrict to this subcategory automatically."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of equivariant quasi coherent modules for a flat groupoid in algebraic spaces is abelian",
+   "results": "8 hits: SheafOfModules.instAbelian, ModuleCat.abelian, Action.instAbelian, PresheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian, FGModuleCat.instAbelian, instAbelianCondensedMod, instAbelianLightCondMod",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient module-sheaf abelian instances and quasi-coherent presentation definitions do not give the algebraic-space groupoid category or its underlying kernels and cokernels. The Action instance is for a fixed monoid acting inside one category; this is not descent along the two varying-space tensor pullbacks. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Sheaf/Quasicoherent.lean and CategoryTheory/Action/Limits.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on a flat algebraic space groupoid form an abelian category with kernels and cokernels computed on the object space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, instAbelianCondensedMod, instAbelianLightCondMod, SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instCategory, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.QuasicoherentData.X, PresheafOfModules.instAbelian",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient module-sheaf abelian instances and quasi-coherent presentation definitions do not give the algebraic-space groupoid category or its underlying kernels and cokernels. The Action instance is for a fixed monoid acting inside one category; this is not descent along the two varying-space tensor pullbacks. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Sheaf/Quasicoherent.lean and CategoryTheory/Action/Limits.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels and cokernels for quasi coherent sheaves with descent isomorphisms along two flat maps of algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.IdealSheafData.map_ker, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, AlgebraicGeometry.Flat.instDescScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient module-sheaf abelian instances and quasi-coherent presentation definitions do not give the algebraic-space groupoid category or its underlying kernels and cokernels. The Action instance is for a fixed monoid acting inside one category; this is not descent along the two varying-space tensor pullbacks. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Sheaf/Quasicoherent.lean and CategoryTheory/Action/Limits.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-qcoh-abelian",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B; Quasi-coherent algebra image factorization on smooth tests; module prerequisite: Quasi-coherent modules on an algebraic stack form an abelian category; Abelianity of quasi-coherent modules on a flat algebraic-space groupoid",
+   "via": [
+    "lem-sfb-stack-qcoh-abelian",
+    "lem-sfb-stack-algebra-smooth-image",
+    "lem-sfb-adequate-algebra-pushforward",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-space-groupoid-abelian",
+  "worker": "stage1",
+  "summary": "Q28: Read Stacks 06VZ and the groupoid module definition, searched the project Lean, whole DAG, blueprint and Mathlib. The pre-existing same-unit kernels-cokernels node states every clause here with the identical hypotheses and category; reuse it without creating duplicate nodes. Statement and statement dependencies are unchanged. No finished project attachment or Mathlib match was found.",
+  "blueprint": "This created node serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) auxiliary chain, specifically the abelianity prerequisite for quasi-coherent algebra images on stacks. The short proof reuses the already existing flat-space groupoid kernel/cokernel theorem in the same unit. The inherited from.node is null, as confirmed by blueprint_refs.py ancestor; no latest-blueprint node directly states this auxiliary result."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-bc7ddcc60",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-bc7ddcc60 (reviewer sub-agent of L); spot-checked: Delivery: only the item and the report changed, with no new nodes. The item's statement, stmt_deps and blueprint are identical to live, and the item is still unsplit on live and side-live, so no other group has superseded it. Step 1 cites the base node lem-sfb-flat-space-groupoid-kernels-cokernels, which is in the same unit, unsplit and has no proof_deps, so there is no cycle. That node has the same data (S,U,R,s,t,e,i,c), the same composition order c(a,b)=a∘b, α: t^*M→s^*M, e^*α=1, c^*α=pr_1^*α∘pr_0^*α, s^*v∘α=β∘t^*v, flatness on étale charts and the same small-étale QCoh and pullback defs. It also proves more: abelian, kernels and cokernels computed underlying and quasi-coherent, and the forgetful functor faithful and conservative. So the step is a direct specialisation, which the brief handles by citation. Source checks in Stacks spaces-groupoids.tex: definition-groupoid-module (l.991) has the same cocycle order; lemma-isomorphism (l.1031) shows α is always invertible; lemma-abelian = 06VZ (l.1151) needs only flat s,t and no finiteness. Parent lem-sfb-stack-qcoh-abelian: its δ→α=δ^{-1} rewrite matches the item's convention. Edge cases checked: empty U, trivial groupoid, zero and identity maps; flatness is needed. DAG search for 06VZ found only scheme-only relatives. Advisory for the maintainer: the item and the cited node were both created on 2026-10-24 and the cited node is stronger, so consider merging them, and its future split must not cite this item. The null blueprint from.node is inherited from the base. The report mentions citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatSpaceGroupoidAbelian",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.flat_space_groupoid_abelian",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatSpaceGroupoidAbelian.lean",
+  "statement": "theorem flat_space_groupoid_abelian {S : Scheme.{u}} (G : ModuleGroupoid S) (_hs : MapIsFlat G.s) (_ht : MapIsFlat G.t) : ∃ (_a : Abelian (SpaceGroupoidModule G)), (SpaceGroupoidModule.forgetToModules (G := G)).Additive ∧ ∀ (M N : SpaceGroupoidModule G) (f : M ⟶ N), PreservesLimit (parallelPair f 0) (SpaceGroupoidModule.forgetToModules (G := G)) ∧ PreservesColimit (parallelPair f 0) (SpaceGroupoidModule.forgetToModules (G := G))",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned a1d5d5fb6085: import and reuse SpaceGroupoidModule and its forgetful functor; no duplicate descent-category declarations remain."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bac2a4d6",
+  "group": "Q120",
+  "result": "fix",
+  "note": "Re-delivery after the landing RETURN (name clash with pending Q160 443ecd36): the item module now imports and ships Sheaf/AlgebraicGeometry/SpaceGroupoidModule.lean, byte-identical to Q160's PASSed but unlanded module (cmp), plus def-sfb-space-groupoid-module, whose record matches Q160's apart from provenance fields. Checked against Stacks definition-groupoid-module, lemma-isomorphism and 06VZ. ModuleGroupoid: specified IsPullback p0 p1 s t, IsPresheafGroupoid laws transported, c(a,b)=a∘b. Only MapIsFlat s,t is assumed. α : t^*M ≅ s^*M; unit and cocycle laws use the canonical moduleTensorComposition/eqToIso/moduleTensorPullbackId comparisons and match the Stacks diagram. Hom t^*v≫β=α≫s^*v; identities and composition are the underlying ones. Conclusion: ∃ Abelian, forgetToModules Additive, and it preserves the limit and colimit of parallelPair f 0 for every f. Edge cases covered; no finiteness or universe restriction. Item differs from side-live only in lean and two added owner stmt_deps; statement unchanged; lean.statement verbatim. Definition module has real data and no sorry; the theorem proof is sorry. Sole fault H11: the second reading is a self-audit, repaired by fixes/lem-sfb-flat-space-groupoid-abelian.report.md (Worker report, New nodes and Repair validation verbatim, independent second reading added). No Lean changed, no compile run. Maintainer advisory: Q160 443e and this delivery both add the identical def-sfb-space-groupoid-module and module, so land only one; the second must re-point rather than re-add."
+ }
+}

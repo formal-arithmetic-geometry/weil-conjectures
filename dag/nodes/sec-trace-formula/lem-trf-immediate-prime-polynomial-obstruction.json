@@ -1,0 +1,223 @@
+{
+ "id": "lem-trf-immediate-prime-polynomial-obstruction",
+ "kind": "statement",
+ "title": "An immediate prime-degree extension forces an unattained polynomial infimum",
+ "statement": "All fields below are fields [def-weil-field] with compatible nontrivial nonarchimedean real absolute values. For such a field $A$, write $A^\\circ=\\{x:|x|\\le1\\}$ for its valuation ring [def-trf-valuation-ring], $\\widetilde A=A^\\circ/\\{x:|x|<1\\}$ and $\\Gamma_A=|A^\\times|$. For a finite extension $B/A$ set $e(B/A)=[\\Gamma_B:\\Gamma_A]$, $f(B/A)=[\\widetilde B:\\widetilde A]$ and $d(B/A)=[B:A]/(e(B/A)f(B/A))$. Call it immediate if its value group and residue field equal those of $A$, unramified if $e=d=1$ and the residue extension is separable, and tame if $d=1$, its residue extension is separable and its ramification index is prime to the residue characteristic (with no index restriction in residue characteristic zero). A field extension is separable if every algebraic element has a minimal polynomial with distinct roots. Let $A$ be complete with $p=\\operatorname{char}(\\widetilde A)>0$ and let $B/A$ be immediate of degree $p$. There exist $a,b\\in A$ with $s=\\inf_{c\\in A}|c^p-ac+b|>0$, $|pb|<s$, and $|c^p-ac+b|>s$ for every $c\\in A$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 6.1.1, p. 36; reformulated and proved as Proposition 6.1.4(i),(iv)(a), pp. 38–40. No discreteness or separability of B/A assumed.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose $\\alpha\\in B\\setminus A$. The residue characteristic $p$ is prime, hence $p\\ge2$. Degree multiplicativity gives $[A(\\alpha):A]>1$ dividing $[B:A]=p$, so $A(\\alpha)=B$. Let $f\\in A[T]$ be its monic minimal polynomial. Its degree is $p$: the kernel description of the minimal polynomial identifies $A[\\alpha]$ with $A[T]/(f)$, whose basis is $1,T,\\ldots,T^{\\deg f-1}$ by monic division; $A[\\alpha]$ is a field because it is a finite-dimensional domain over $A$, so it equals $A(\\alpha)$.",
+   "uses": [
+    "lem-weil-pbc-field-degree-multiplicativity",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4, immediate cases, printed p. 39: choose a non-base-field element and its degree-p monic minimal polynomial."
+   }
+  },
+  {
+   "text": "For any $x\\in B\\setminus A$, put $r_x=\\inf_{c\\in A}|x-c|$. It is positive: if it were zero, choose $c_n\\in A$ with $|x-c_n|<1/n$; this is Cauchy, and its limit in the complete field $A$ would equal $x$. No distance is minimal. Indeed, for $y=x-c\\ne0$, equality of value groups gives $t\\in A^\\times$ with $|t|=|y|$, and equality of residue fields gives $u\\in A^\\circ$ with the same residue as $y/t$. Thus $|y/t-u|<1$ and $|x-(c+tu)|<|x-c|$. Consequently $r_x<|x-c|$ for every $c\\in A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4, immediate case, printed p. 39: positivity by completeness and nonattainment by immediacy, with both arguments expanded."
+   }
+  },
+  {
+   "text": "For $c\\in A$, the monic minimal polynomial of $\\alpha-c$ is $f(T+c)$: substitution is an invertible automorphism of $A[T]$ preserving monicity, irreducibility and degree, and the polynomial vanishes at $\\alpha-c$. The constant-term norm formula therefore gives $$|f(c)|=|\\alpha-c|^p.$$ This argument applies to any non-base-field generator of $B/A$, with its own monic minimal polynomial. In particular its constant term has norm equal to the $p$th power of the norm of that generator.",
+   "uses": [
+    "lem-trf-complete-minpoly-constant-norm",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4, printed pp. 39–40: constant-term and evaluation norms; use the general Mathlib formula instead of introducing a second root and applying Krasner."
+   }
+  },
+  {
+   "text": "First suppose $f$ is inseparable. Since $f$ is irreducible, failure of coprimality with its derivative forces $f\\mid f\\prime$; as $\\deg f\\prime<p$, it follows that $f\\prime=0$. Coefficientwise differentiation then forces the characteristic of $A$ to be $p$ and every coefficient of degrees $1,\\ldots,p-1$ to vanish: the leading derivative coefficient is $p$, and each of $1,\\ldots,p-1$ is nonzero in characteristic $p$. Thus $f(T)=T^p+b$. Take $a=0$ and $r=r_\\alpha$. The preceding two steps give $\\inf_c|c^p+b|=r^p>0$, and every value is strictly greater than $r^p$. Moreover $|pb|=0<r^p$, proving the assertion in this case.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4, inseparable immediate case, printed p. 39; the prime-degree purely inseparable reduction is written by differentiating the minimal polynomial."
+   }
+  },
+  {
+   "text": "Now suppose $f$ is separable. Put $r=r_\\alpha$. Apply the coefficient-normalization lemma, whose hypotheses are precisely completeness of $A$, immediacy and degree $p$, separability, and the positive unattained distance established above. Replace $\\alpha$ by $\\beta=\\alpha-c_0$ and write its minimal polynomial as $$F(T)=T^p+\\sum_{i=1}^{p-1}u_iT^i+b.$$ Translation does not change the infimum $r$. With $R=|\\beta|>r$, the lemma gives $|u_1|\\le r^{p-1}$, $|u_i|R^i<r^p$ for $2\\le i<p$, and $|p|R^p<r^p$. The evaluation formula from step 3 gives $|b|=R^p$ and $|F(c)|=|\\beta-c|^p$. Set $a=-u_1$, $g(T)=T^p-aT+b$, and $s=r^p$.",
+   "uses": [
+    "lem-trf-separable-prime-coefficient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4, separable immediate case, printed p. 40, coefficient estimates and the instruction to remove the terms of degrees 2 through p-1."
+   }
+  },
+  {
+   "text": "For $|c|\\le R$, the finite sum $H(c)=F(c)-g(c)=\\sum_{i=2}^{p-1}u_ic^i$ has norm $<s$, while $|F(c)|=|\\beta-c|^p>s$. The ultrametric inequality applied in both directions gives $|g(c)|=|F(c)|>s$. If $|c|>R$, then $|b|=R^p<|c|^p$ and $|ac|\\le r^{p-1}|c|<|c|^p$; hence the leading term strictly dominates and $|g(c)|=|c|^p>s$. The empty sum for $p=2$ is zero and satisfies the same estimate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4, printed p. 40, deletion of intermediate terms; explicit estimate on the ball of radius R and on its complement."
+   }
+  },
+  {
+   "text": "Take $c_n\\in A$ with $|\\beta-c_n|\\to r$. Since $r<R$, eventually $|\\beta-c_n|<R$, whence $|c_n|=R$ by the ultrametric inequality. Step 6 gives $|g(c_n)|=|\\beta-c_n|^p\\to r^p=s$. Together with the strict lower bound for every $c$, this proves $s=\\inf_c|g(c)|>0$ and nonattainment. Finally $|pb|=|p|R^p<s$ by the normalization estimate. These are all the required clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4, printed p. 40, conclusion of (i): the infimum and its nonattainment and the inequality for pb."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-trf-complete-minpoly-constant-norm",
+  "def-pc-separable-polynomial",
+  "lem-trf-separable-prime-coefficient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 6.1.4, immediate cases, printed pp. 39–40, read online because the cited local PDF is missing. The assembly replaces the Berkovich-disc/root/Krasner end of the proof with the constant-term norm formula and an explicit two-region estimate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An immediate extension of complete nonarchimedean fields of prime degree yields a polynomial X to p minus a X plus b whose positive infimum norm is not attained",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"hensels_lemma\", \"module\": \"Mathlib/NumberTheory/Padics/Hensel\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u_1} [inst_1 : CommSemiring R] [inst_2 : Algebra R ℤ_[p]]\\n  {F : Polynomial R} {a : ℤ_[p]},\\n  ‖(Polynomial.aeval a) F‖ < ‖(Polynomial.aeval a) (Polynomial.derivative F)‖ ^ 2 →\\n    ∃ z,\\n      (Polynomial.aeval z) F = 0 ∧\\n        ‖z - a‖ < ‖(Polynomial.a\", \"doc\": \"For a polynomial $ F $ over the p-adic integers $ \\\\mathbb{Z}_p $ and an element $ a \\\\in \\\\mathbb{Z}_p $, if the p-adic norm of $ F(a) $ is strictly less than the p-adic norm of the derivative $ F'(a) $\"}\n  {\"name\": \"Valued.integer.exists_nnnorm_lt_one\", \"module\": \"Mathlib/Topology/Algebra/Valued/LocallyCompact\", \"type\": \"∀ (K : Type u_1) [inst : NontriviallyNormedField K] [inst_1 : IsUltrametricDist K], ∃ x, 0 < ‖x‖₊ ∧ ‖x‖₊ < 1\", \"doc\": \"There exists an element $ x $ in the ring of integers $ \\\\mathcal{O}[K] $ of the valued field $ K $ such that $ 0 < \\\\|x\\\\| < 1 $, where $ \\\\|\\\\cdot\\\\| $ denotes the non-negative real-valued norm induced by\"}\n  {\"name\": \"Valued.integer.exists_norm_lt_one\", \"module\": \"Mathlib/Topology/Algebra/Valued/LocallyCompact\", \"type\": \"∀ (K : Type u_1) [inst : NontriviallyNormedField K] [inst_1 : IsUltrametricDist K], ∃ x, 0 < ‖x‖ ∧ ‖x‖ < 1\", \"doc\": \"There exists a non-zero element $x$ in the ring of integers $\\\\mathcal{O}_K$ of the valued field $K$ such that the norm of $x$ satisfies $0 < \\\\|x\\\\| < 1$.\"}\n  {\"name\": \"Valued.integer.exists_norm_coe_lt_one\", \"module\": \"Mathlib/Topology/Algebra/Valued/LocallyCompact\", \"type\": \"∀ (K : Type u_1) [inst : NontriviallyNormedField K] [inst_1 : IsUltrametricDist K], ∃ x, 0 < ‖↑x‖ ∧ ‖↑x‖ < 1\", \"doc\": \"There exists an element $ x $ in the ring of integers $ \\\\mathcal{O}[K] $ of the valued field $ K $ such that $ 0 < \\\\|x\\\\| < 1 $, demonstrating the valuation is non-trivial.\"}\n  {\"name\": \"IsUltrametricDist.isNonarchimedean_invariantExtension\", \"module\": \"Mathlib/Analysis/Normed/Unbundled/InvariantExtension\", \"type\": \"∀ (K : Type u_1) [inst : NormedField K] (L : Type u_2) [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [h_fin : FiniteDimensional K L] [hu : IsUltrametricDist K],\\n  IsNonarchimedean ⇑(IsUltrametricDist.invariantExtension K L)\", \"doc\": \"For a finite-dimensional field extension $ L $ of an ultrametric normed field $ K $, there exists an ultrametric algebra norm on $ L $ defined as the supremum of non-Archimedean algebra norms over all\"}\n  {\"name\": \"Polynomial.exists_forall_norm_le\", \"module\": \"Mathlib/Topology/Algebra/Polynomial\", \"type\": \"∀ {R : Type u_2} [inst : NormedRing R] [IsAbsoluteValue norm] [ProperSpace R] (p : Polynomial R),\\n  ∃ x, ∀ (y : R), ‖Polynomial.eval x p‖ ≤ ‖Polynomial.eval y p‖\", \"doc\": \"In a proper space $ R $, every polynomial $ p \\\\in R[X] $ attains its minimum norm, i.e., there exists an $ x \\\\in R $ such that $ \\\\|p(x)\\\\| \\\\leq \\\\|p(y)\\\\| $ for all $ y \\\\in R $.\"}\n  {\"name\": \"isNonarchimedean_spectralNorm\", \"module\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm\", \"type\": \"∀ {K : Type u_2} [inst : NormedField K] {L : Type u_3} [inst_1 : Field L] [inst_2 : Algebra K L] [IsUltrametricDist K]\\n  [h_alg : Algebra.IsAlgebraic K L], IsNonarchimedean (spectralNorm K L)\", \"doc\": \"For any field extension $ L $ over a base field $ K $, the spectral norm $ \\\\|\\\\cdot\\\\| $ satisfies the non-Archimedean inequality: for all $ a, b \\\\in L $, $ \\\\|a + b\\\\| \\\\leq \\\\max(\\\\|a\\\\|, \\\\|b\\\\|) $.\"}\n  {\"name\": \"Field.primitive_element_inf_aux_exists_c\", \"module\": \"Mathlib/FieldTheory/PrimitiveElement\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [Infinite F] {E : Type u_2} [inst_2 : Field E] (ϕ : F →+* E) (α β : E)\\n  (f g : Polynomial F),\\n  ∃ c, ∀ α' ∈ (Polynomial.map ϕ f).roots, ∀ β' ∈ (Polynomial.map ϕ g).roots, -(α' - α) / (β' - β) ≠ ϕ c\", \"doc\": \"For any polynomials $f, g$ over a field $F$ and a ring homomorphism $\\\\phi: F \\\\to K$, there exists an element $c \\\\in F$ such that for all roots $\\\\alpha' \\\\in K$ of $f_\\\\phi$ and $\\\\beta' \\\\in K$ of $g_\\\\phi\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Immediate degree p extensions give nonattained infima for additive polynomials with small p times constant coefficient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddMonoidAlgebra.le_infDegree_mul\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Degree\", \"type\": \"[AddZeroClass A] [Add T] [AddLeftMono T] [AddRightMono T] (D : AddHom A T) (f g : R[A]) :\\n  f.infDegree D + g.infDegree D ≤ (f * g).infDegree D\", \"doc\": \"Let $ R $ be a semiring, $ A $ an additive monoid, and $ T $ an ordered additive monoid with a degree function $ D : A \\\\to T $. For any $ f, g \\\\in R[A] $, the infimum degree of the product $ f \\\\cdot g\"}\n  {\"name\": \"isPurelyInseparable_iff_natSepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \": IsPurelyInseparable F E ↔ ∀ x : E, (minpoly F x).natSepDegree = 1\", \"doc\": \"A field extension $ E $ over $ F $ is purely inseparable if and only if, for every element $ x \\\\in E $, the natural separable degree of the minimal polynomial of $ x $ over $ F $ is equal to 1.\"}\n  {\"name\": \"FiniteField.instFieldExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"(k : Type u_1) →\\n  [inst : Field k] →\\n    (p : ℕ) → [inst_1 : Fact (Nat.Prime p)] → (n : ℕ) → [inst_2 : CharP k p] → Field (FiniteField.Extension k p n)\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is the dimens\"}\n  {\"name\": \"FiniteField.Extension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"[CharP k p] : Type\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this definition constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is\"}\n  {\"name\": \"minpoly.natDegree_le\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Basic\", \"type\": \"(x : L) [FiniteDimensional K L] : (minpoly K x).natDegree ≤ finrank K L\", \"doc\": \"For any element $x$ in a finite-dimensional field extension $L/K$, the natural degree of the minimal polynomial of $x$ over $K$ is less than or equal to the finite rank $[L : K]$ of the extension. For\"}\n  {\"name\": \"Polynomial.degree_add_degree_leadingCoeff_inv\", \"module\": \"Mathlib.Algebra.Polynomial.Degree.Lemmas\", \"type\": \"(p : K[X]) : degree p + degree (C (leadingCoeff p)⁻¹) = degree p\", \"doc\": \"For any polynomial $ p $ over a division ring $ K $, the sum of the degree of $ p $ and the degree of the constant polynomial with coefficient $ (\\\\text{lc}(p))^{-1} $ equals the degree of $ p $, where\"}\n  {\"name\": \"IsPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"(F : Type u_1) → (E : Type u_2) → [inst : CommRing F] → [inst_1 : Ring E] → [Algebra F E] → Prop\", \"doc\": \"The property that the field extension $ E $ over $ F $ is purely inseparable, meaning every element of $ E $ has a minimal polynomial over $ F $ of the form $ x^{p^n} - a $ for some $ a \\\\in F $ and pr\"}\n  {\"name\": \"AddMonoidAlgebra.infDegree\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Degree\", \"type\": \"(f : R[A]) : T\", \"doc\": \"For an element $ f $ in the additive monoid algebra $ R[A] $, this function computes the infimum (greatest lower bound) of the degrees of the elements in its support, where the support consists of the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, Polynomial.eval",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "immediate.*extension|infimum.*polynomial|critical.*coset|defectless",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial approximation obstruction to an immediate finite extension of prime degree of analytic fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LindemannWeierstrass.exp_polynomial_approx\", \"module\": \"Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart\", \"type\": \"∀ (f : Polynomial ℤ),\\n  Polynomial.eval 0 f ≠ 0 →\\n    ∃ c,\\n      ∀ p > (Polynomial.eval 0 f).natAbs,\\n        Nat.Prime p →\\n          ∃ n,\\n            ¬↑p ∣ n ∧\\n              ∃ gp,\\n                gp.natDegree ≤ p * f.natDegree - 1 ∧\\n                  ∀ {r : ℂ},\\n                    r ∈ f.aroots ℂ → ‖\", \"doc\": \"For any non-zero constant term polynomial $ f \\\\in \\\\mathbb{Z}[X] $, there exists a constant $ c > 0 $ such that for all primes $ p > |f(0)| $, there exists an integer $ n \\\\not\\\\equiv 0 \\\\mod p $ and a po\"}\n  {\"name\": \"isLiouville_of_finiteDimensional\", \"module\": \"Mathlib/FieldTheory/Differential/Liouville\", \"type\": \"∀ {F : Type u_1} {K : Type u_2} [inst : Field F] [inst_1 : Field K] [inst_2 : Differential F] [inst_3 : Differential K]\\n  [inst_4 : Algebra F K] [DifferentialAlgebra F K] [CharZero F] [FiniteDimensional F K], IsLiouville F K\", \"doc\": \"Every finite-dimensional field extension $ K/F $ is Liouville over $ F $ with respect to the given derivations and algebra structure. This means that elements of $ K $ can be expressed as combinations\"}\n  {\"name\": \"Field.primitive_element_inf_aux_exists_c\", \"module\": \"Mathlib/FieldTheory/PrimitiveElement\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [Infinite F] {E : Type u_2} [inst_2 : Field E] (ϕ : F →+* E) (α β : E)\\n  (f g : Polynomial F),\\n  ∃ c, ∀ α' ∈ (Polynomial.map ϕ f).roots, ∀ β' ∈ (Polynomial.map ϕ g).roots, -(α' - α) / (β' - β) ≠ ϕ c\", \"doc\": \"For any polynomials $f, g$ over a field $F$ and a ring homomorphism $\\\\phi: F \\\\to K$, there exists an element $c \\\\in F$ such that for all roots $\\\\alpha' \\\\in K$ of $f_\\\\phi$ and $\\\\beta' \\\\in K$ of $g_\\\\phi\"}\n  {\"name\": \"IsLiouville\", \"module\": \"Mathlib/FieldTheory/Differential/Liouville\", \"type\": \"(F : Type u_1) →\\n  (K : Type u_2) → [inst : Field F] → [inst_1 : Field K] → [Differential F] → [Differential K] → [Algebra F K] → Prop\", \"doc\": \"A proposition asserting that an element in the field $ K $ is Liouville over $ F $ with respect to the given derivations and algebra structure, meaning it can be expressed as a combination of logarith\"}\n  {\"name\": \"Polynomial.exists_approx_polynomial\", \"module\": \"Mathlib/NumberTheory/ClassNumber/AdmissibleCardPowDegree\", \"type\": \"∀ {Fq : Type u_1} [inst : Fintype Fq] [inst_1 : Field Fq] {b : Polynomial Fq},\\n  b ≠ 0 →\\n    ∀ {ε : ℝ},\\n      0 < ε →\\n        ∀ (A : Fin (Fintype.card Fq ^ ⌈-Real.log ε / Real.log ↑(Fintype.card Fq)⌉₊).succ → Polynomial Fq),\\n          ∃ i₀ i₁, i₀ ≠ i₁ ∧ ↑(Polynomial.cardPowDegree (A i₁ % b - A i₀ % \", \"doc\": \"For any non-zero polynomial $ b $ over a finite field $ \\\\mathbb{F}_q $ and any $ \\\\varepsilon > 0 $, if $ A $ is a family of polynomials indexed by a finite set of size $ q^{\\\\lceil -\\\\log \\\\varepsilon / \"}\n  {\"name\": \"Field.Emb.Cardinal.two_le_deg\", \"module\": \"Mathlib/FieldTheory/CardinalEmb\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [rank_inf : Fact (Cardinal.aleph0 ≤ Module.rank F E)] [inst_3 : Algebra.IsAlgebraic F E] [Algebra.IsSeparable F E]\\n  (i : (Module.rank F E).ord.ToType),\\n  2 ≤\\n    Cardinal.mk\\n      (Field.Emb\\n        ↥(Intermedi\", \"doc\": \"For each index $i$, the cardinality of the set $X_i$ is at least 2, implying that the degree of the field extension is greater than or equal to 2.\"}\n  {\"name\": \"NumberField.hermiteTheorem.finite_of_finite_generating_set\", \"module\": \"Mathlib/NumberTheory/NumberField/Discriminant/Basic\", \"type\": \"∀ (A : Type u_2) [inst : Field A] [inst_1 : CharZero A] {p : IntermediateField ℚ A → Prop} (S : Set { F // p F })\\n  {T : Set A}, T.Finite → (∀ F ∈ S, ∃ x ∈ T, ↑F = ℚ⟮x⟯) → S.Finite\", \"doc\": \"Given a finite set $ T \\\\subset A $ and a set $ S $ of intermediate fields between $ \\\\mathbb{Q} $ and $ A $, if every field $ F \\\\in S $ is generated by a single element $ x \\\\in T $ (i.e., $ F = \\\\mathbb\"}\n  {\"name\": \"instIsLiouvilleSubtypeMemIntermediateField\", \"module\": \"Mathlib/FieldTheory/Differential/Liouville\", \"type\": \"∀ {F : Type u_1} {K : Type u_2} [inst : Field F] [inst_1 : Field K] [inst_2 : Differential F] [inst_3 : Differential K]\\n  [inst_4 : Algebra F K] [DifferentialAlgebra F K] [inst_6 : CharZero F] (B : IntermediateField F K)\\n  [inst_7 : FiniteDimensional F ↥B] [inst_8 : IsLiouville F K], IsLiouville F ↥\", \"doc\": \"If $ K $ is a Liouville field extension of $ F $ and $ B $ is a finite-dimensional intermediate field between $ F $ and $ K $, then $ B $ is also a Liouville field extension of $ F $. This instance as\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Immediate prime degree extension of a complete nonarchimedean field gives a trinomial with positive unattained infimum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ), 0 < ChevalleyThm.MvPolynomialC.degBound k D n\", \"doc\": \"For any natural number $k$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the degree bound $\\\\text{degBound}\\\\,k\\\\,D\\\\,n$ satisfies $0 < \\\\text{degBound}\\\\,k\\\\,D\\\\,n$ for all $n \\\\in \\\\mathbb{N}$.\"}\n  {\"name\": \"Field.primitive_element_inf_aux_exists_c\", \"module\": \"Mathlib/FieldTheory/PrimitiveElement\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [Infinite F] {E : Type u_2} [inst_2 : Field E] (ϕ : F →+* E) (α β : E)\\n  (f g : Polynomial F),\\n  ∃ c, ∀ α' ∈ (Polynomial.map ϕ f).roots, ∀ β' ∈ (Polynomial.map ϕ g).roots, -(α' - α) / (β' - β) ≠ ϕ c\", \"doc\": \"For any polynomials $f, g$ over a field $F$ and a ring homomorphism $\\\\phi: F \\\\to K$, there exists an element $c \\\\in F$ such that for all roots $\\\\alpha' \\\\in K$ of $f_\\\\phi$ and $\\\\beta' \\\\in K$ of $g_\\\\phi\"}\n  {\"name\": \"Polynomial.cardPowDegreeIsAdmissible\", \"module\": \"Mathlib/NumberTheory/ClassNumber/AdmissibleCardPowDegree\", \"type\": \"{Fq : Type u_1} → [inst : Fintype Fq] → [inst_1 : Field Fq] → Polynomial.cardPowDegree.IsAdmissible\", \"doc\": \"The absolute value on the polynomial ring $\\\\mathbb{F}_q[X]$ defined by $|f| = q^{\\\\deg(f)}$ is admissible, satisfying the required density condition for Euclidean domains. Specifically, for any $\\\\varep\"}\n  {\"name\": \"Polynomial.IsUnitTrinomial.irreducible_of_coprime'\", \"module\": \"Mathlib/Analysis/Complex/Polynomial/UnitTrinomial\", \"type\": \"∀ {p : Polynomial ℤ},\\n  p.IsUnitTrinomial → (∀ (z : ℂ), ¬((Polynomial.aeval z) p = 0 ∧ (Polynomial.aeval z) p.mirror = 0)) → Irreducible p\", \"doc\": \"If $ p $ is a unit trinomial over $ \\\\mathbb{Z} $ and there is no complex number $ z $ such that both $ p(z) = 0 $ and its mirror polynomial $ \\\\text{mirror}(p)(z) = 0 $, then $ p $ is irreducible in $ \"}\n  {\"name\": \"Polynomial.cardPowDegree_anti_archimedean\", \"module\": \"Mathlib/NumberTheory/ClassNumber/AdmissibleCardPowDegree\", \"type\": \"∀ {Fq : Type u_1} [inst : Fintype Fq] [inst_1 : Field Fq] {x y z : Polynomial Fq} {a : ℤ},\\n  Polynomial.cardPowDegree (x - y) < a → Polynomial.cardPowDegree (y - z) < a → Polynomial.cardPowDegree (x - z) < a\", \"doc\": \"For any polynomials $x, y, z$ over a finite field $\\\\mathbb{F}_q$, if $\\\\deg(x - y) < a$ and $\\\\deg(y - z) < a$, then $\\\\deg(x - z) < a$.\"}\n  {\"name\": \"MvPolynomial.exists_mem_support_not_dvd_of_forall_totalDegree_le\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (p : ℕ),\\n  Nat.Prime p →\\n    (∀ (s : Finset K), LinearIndepOn k id ↑s → LinearIndepOn k (fun x => x ^ p) ↑s) →\\n      ∀ {a : ι → K} {F : MvPolynomial ι k},\\n        (∀ (F' : MvPolynomial ι k), F' \", \"doc\": \"Let $ R $ be a commutative semiring, $ \\\\sigma $ a type of variables, and $ p $ a prime number. If $ F \\\\in R[\\\\sigma] $ is a nonzero multivariate polynomial such that $ F(a) = 0 $ for some assignment $ \"}\n  {\"name\": \"Polynomial.exists_partition_polynomial_aux\", \"module\": \"Mathlib/NumberTheory/ClassNumber/AdmissibleCardPowDegree\", \"type\": \"∀ {Fq : Type u_1} [inst : Fintype Fq] [inst_1 : Field Fq] (n : ℕ) {ε : ℝ},\\n  0 < ε →\\n    ∀ {b : Polynomial Fq},\\n      b ≠ 0 →\\n        ∀ (A : Fin n → Polynomial Fq),\\n          ∃ t,\\n            ∀ (i₀ i₁ : Fin n),\\n              t i₀ = t i₁ ↔ ↑(Polynomial.cardPowDegree (A i₁ % b - A i₀ % b)) < Polynomia\", \"doc\": \"For any natural number $n$, positive real $\\\\varepsilon$, non-zero polynomial $b \\\\in \\\\mathbb{F}_q[X]$, and function $A : \\\\mathrm{Fin}(n) \\\\to \\\\mathbb{F}_q[X]$, there exists a function $t : \\\\mathrm{Fin}(\"}\n  {\"name\": \"Polynomial.exists_approx_polynomial\", \"module\": \"Mathlib/NumberTheory/ClassNumber/AdmissibleCardPowDegree\", \"type\": \"∀ {Fq : Type u_1} [inst : Fintype Fq] [inst_1 : Field Fq] {b : Polynomial Fq},\\n  b ≠ 0 →\\n    ∀ {ε : ℝ},\\n      0 < ε →\\n        ∀ (A : Fin (Fintype.card Fq ^ ⌈-Real.log ε / Real.log ↑(Fintype.card Fq)⌉₊).succ → Polynomial Fq),\\n          ∃ i₀ i₁, i₀ ≠ i₁ ∧ ↑(Polynomial.cardPowDegree (A i₁ % b - A i₀ % \", \"doc\": \"For any non-zero polynomial $ b $ over a finite field $ \\\\mathbb{F}_q $ and any $ \\\\varepsilon > 0 $, if $ A $ is a family of polynomials indexed by a finite set of size $ q^{\\\\lceil -\\\\log \\\\varepsilon / \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no immediate-extension obstruction theorem; the minimum theorem requires ProperSpace, and the purely inseparable formulas alone do not imply the valued-field assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An immediate extension of degree p gives a polynomial X^p-aX+b whose norm infimum is not attained",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.exists_forall_norm_le\", \"module\": \"Mathlib.Topology.Algebra.Polynomial\", \"type\": \"[ProperSpace R] (p : R[X]) : ∃ x, ∀ y, ‖p.eval x‖ ≤ ‖p.eval y‖\", \"doc\": \"In a proper space $ R $, every polynomial $ p \\\\in R[X] $ attains its minimum norm, i.e., there exists an $ x \\\\in R $ such that $ \\\\|p(x)\\\\| \\\\leq \\\\|p(y)\\\\| $ for all $ y \\\\in R $.\"}\n  {\"name\": \"IsPurelyInseparable.minpoly_natDegree_eq'\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"(p : ℕ) [ExpChar K p] (a : L) : (minpoly K a).natDegree = p ^ elemExponent K a\", \"doc\": \"For a purely inseparable element $ a $ over a field $ K $ with exponential characteristic $ p $, the natural degree of the minimal polynomial $ \\\\minpoly_K(a) $ equals $ p^{e} $, where $ e $ is the ele\"}\n  {\"name\": \"IsPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"(F : Type u_1) → (E : Type u_2) → [inst : CommRing F] → [inst_1 : Ring E] → [Algebra F E] → Prop\", \"doc\": \"The property that the field extension $ E $ over $ F $ is purely inseparable, meaning every element of $ E $ has a minimal polynomial over $ F $ of the form $ x^{p^n} - a $ for some $ a \\\\in F $ and pr\"}\n  {\"name\": \"IsPurelyInseparable.normal\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] : Normal F E\", \"doc\": \"Every purely inseparable field extension is a normal extension. Specifically, if $ E $ is a purely inseparable extension of $ F $, then $ E $ is a normal extension of $ F $, meaning every irreducible \"}\n  {\"name\": \"NumberField.Embeddings.coeff_bdd_of_norm_le\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Embeddings\", \"type\": \"{B : ℝ} {x : K} (h : ∀ φ : K →+* A, ‖φ x‖ ≤ B) (i : ℕ) :\\n  ‖(minpoly ℚ x).coeff i‖ ≤ max B 1 ^ finrank ℚ K * (finrank ℚ K).choose (finrank ℚ K / 2)\", \"doc\": \"Let $ K $ be a number field (a finite algebraic extension of $ \\\\mathbb{Q} $) and $ x \\\\in K $. Suppose that for every ring homomorphism $ \\\\varphi: K \\\\to A $ into a normed field $ A $, the norm $ \\\\|\\\\var\"}\n  {\"name\": \"FiniteField.instFieldExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"(k : Type u_1) →\\n  [inst : Field k] →\\n    (p : ℕ) → [inst_1 : Fact (Nat.Prime p)] → (n : ℕ) → [inst_2 : CharP k p] → Field (FiniteField.Extension k p n)\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is the dimens\"}\n  {\"name\": \"IsPurelyInseparable.minpoly_eq_X_sub_C_pow\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"(q : ℕ) [ExpChar F q] [IsPurelyInseparable F E] (x : E) :\\n  ∃ n : ℕ, (minpoly F x).map (algebraMap F E) = (X - C x) ^ q ^ n\", \"doc\": \"In a purely inseparable field extension $ E/F $ with exponential characteristic $ q $, for every element $ x \\\\in E $, there exists $ n \\\\in \\\\mathbb{N} $ such that the minimal polynomial of $ x $ over $\"}\n  {\"name\": \"FiniteField.Extension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"[CharP k p] : Type\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this definition constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no immediate-extension obstruction theorem; the minimum theorem requires ProperSpace, and the purely inseparable formulas alone do not imply the valued-field assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, Polynomial.eval",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no immediate-extension obstruction theorem; the minimum theorem requires ProperSpace, and the purely inseparable formulas alone do not imply the valued-field assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "immediate.*extension|unattained.*inf|critical.*coset|defectless",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no immediate-extension obstruction theorem; the minimum theorem requires ProperSpace, and the purely inseparable formulas alone do not imply the valued-field assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonattainment of the minimum absolute value of additive polynomial values over an analytic field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Polynomial.exists_forall_norm_le\", \"module\": \"Mathlib/Topology/Algebra/Polynomial\", \"type\": \"∀ {R : Type u_2} [inst : NormedRing R] [IsAbsoluteValue norm] [ProperSpace R] (p : Polynomial R),\\n  ∃ x, ∀ (y : R), ‖Polynomial.eval x p‖ ≤ ‖Polynomial.eval y p‖\", \"doc\": \"In a proper space $ R $, every polynomial $ p \\\\in R[X] $ attains its minimum norm, i.e., there exists an $ x \\\\in R $ such that $ \\\\|p(x)\\\\| \\\\leq \\\\|p(y)\\\\| $ for all $ y \\\\in R $.\"}\n  {\"name\": \"one_le_pow_mul_abs_eval_div\", \"module\": \"Mathlib/Algebra/Polynomial/DenomsClearable\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : LinearOrder K] [IsStrictOrderedRing K] {f : Polynomial ℤ} {a b : ℤ},\\n  0 < b →\\n    Polynomial.eval (↑a / ↑b) (Polynomial.map (algebraMap ℤ K) f) ≠ 0 →\\n      1 ≤ ↑b ^ f.natDegree * |Polynomial.eval (↑a / ↑b) (Polynomial.map (algebraMap ℤ K) f)|\", \"doc\": \"For any linearly ordered field $ K $ with strict ordered ring structure, given a non-zero polynomial $ f \\\\in \\\\mathbb{Z}[X] $, integers $ a, b $ with $ b > 0 $, and assuming $ f\\\\left(\\\\frac{a}{b}\\\\right)\"}\n  {\"name\": \"Polynomial.abs_isBoundedUnder_iff\", \"module\": \"Mathlib/Analysis/Polynomial/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NormedField 𝕜] [inst_1 : LinearOrder 𝕜] [IsStrictOrderedRing 𝕜] (P : Polynomial 𝕜)\\n  [OrderTopology 𝕜],\\n  (Filter.IsBoundedUnder (fun x1 x2 => x1 ≤ x2) Filter.atTop fun x => |Polynomial.eval x P|) ↔ P.degree ≤ 0\", \"doc\": \"The absolute value of the polynomial $ P $ evaluated at $ x $ is bounded as $ x $ approaches infinity (in the sense of the filter at top) if and only if the degree of $ P $ is less than or equal to ze\"}\n  {\"name\": \"Polynomial.one_le_mahlerMeasure_of_ne_zero\", \"module\": \"Mathlib/NumberTheory/MahlerMeasure\", \"type\": \"∀ {p : Polynomial ℤ}, p ≠ 0 → 1 ≤ (Polynomial.map (Int.castRingHom ℂ) p).mahlerMeasure\", \"doc\": \"For any nonzero polynomial $ p \\\\in \\\\mathbb{Z}[X] $, the Mahler measure of the complex polynomial obtained by mapping $ p $'s coefficients to $ \\\\mathbb{C} $ via the canonical ring homomorphism is at le\"}\n  {\"name\": \"Polynomial.tendsto_abv_aeval_atTop\", \"module\": \"Mathlib/Topology/Algebra/Polynomial\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {k : Type u_3} {α : Type u_4} [inst : CommSemiring R] [inst_1 : Ring A]\\n  [inst_2 : Algebra R A] [inst_3 : Field k] [inst_4 : LinearOrder k] [IsStrictOrderedRing k] (abv : A → k)\\n  [IsAbsoluteValue abv] (p : Polynomial R),\\n  0 < p.degree →\\n    (algebraMap R A) p.leadi\", \"doc\": \"For a polynomial $ p $ with positive degree and non-zero leading coefficient in $ R[X] $, if the absolute value of $ z(x) $ tends to infinity along a filter $ l $, then the absolute value of $ p $ eva\"}\n  {\"name\": \"Polynomial.mahlerMeasure_pos_of_ne_zero\", \"module\": \"Mathlib/Analysis/Polynomial/MahlerMeasure\", \"type\": \"∀ {p : Polynomial ℂ}, p ≠ 0 → 0 < p.mahlerMeasure\", \"doc\": \"For any non-zero polynomial $ p $, its Mahler measure $ M(p) $ satisfies $ M(p) > 0 $. The Mahler measure is defined as $ \\\\exp\\\\left(\\\\frac{1}{2\\\\pi} \\\\int_0^{2\\\\pi} \\\\log \\\\|p(e^{i\\\\theta})\\\\| \\\\, d\\\\theta\\\\righ\"}\n  {\"name\": \"Polynomial.cauchyBound\", \"module\": \"Mathlib/Analysis/Polynomial/CauchyBound\", \"type\": \"{K : Type u_1} → [inst : NormedDivisionRing K] → Polynomial K → NNReal\", \"doc\": \"The Cauchy bound of a polynomial $ p $ over a normed division ring $ K $ is defined as $ 1 + \\\\frac{\\\\sup_{0 \\\\leq i < \\\\deg p} \\\\|\\\\text{coeff}_i(p)\\\\|}{\\\\|\\\\text{leadingCoeff}(p)\\\\|} $, where $ \\\\sup $ denotes\"}\n  {\"name\": \"Polynomial.tendsto_abv_eval₂_atTop\", \"module\": \"Mathlib/Topology/Algebra/Polynomial\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {k : Type u_3} {α : Type u_4} [inst : Semiring R] [inst_1 : Ring S] [inst_2 : Field k]\\n  [inst_3 : LinearOrder k] [IsStrictOrderedRing k] (f : R →+* S) (abv : S → k) [IsAbsoluteValue abv] (p : Polynomial R),\\n  0 < p.degree →\\n    f p.leadingCoeff ≠ 0 →\\n      ∀ {l : Fil\", \"doc\": \"For a polynomial $ p $ with positive degree and non-zero leading coefficient, if the absolute value of a sequence $ z $ tends to infinity, then the absolute value of $ p $ evaluated at $ z $ also tend\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no immediate-extension obstruction theorem; the minimum theorem requires ProperSpace, and the purely inseparable formulas alone do not imply the valued-field assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-type23-stability",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: Proposition 6.1.1, p. 36; reformulated and proved as Proposition 6.1.4(i),(iv)(a), pp. 38–40. No discreteness or separability of B/A assumed.",
+   "via": [
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-immediate-prime-polynomial-obstruction",
+  "worker": "stage1",
+  "summary": "Split both separability cases; prove positivity and nonattainment of distance explicitly, isolate the technical coefficient normalization, and use a Mathlib constant-term norm leaf to justify deleting intermediate coefficients on and off a ball. No statement change.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: Proposition 6.1.1, p. 36; reformulated and proved as Proposition 6.1.4(i),(iv)(a), pp. 38–40. No discreteness or separability of B/A assumed. This split supplies the Proposition 6.1.1 obstruction used in the type 2/3 stability branch; it makes no change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-7523f58e8",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-7523f58e8 (reviewer sub-agent of L); spot-checked: I read Temkin, Stable Modification, Prop 6.1.1 (p.36), Lemma 6.1.2 and Prop 6.1.4 with its full proof (pp.38-41). The local PDF is missing; I fetched the author's PDF from the node URL and saved a copy at src_dl/temkin.pdf. The item statement is unchanged and is the a,b part of 6.1.1. Step 1 (degree p via degree multiplicativity and the minimal-polynomial kernel) is correct. Step 2 (r>0 by completeness; r not attained via equal value groups and residue fields) is correct and elementary. Step 3 (|f(c)|=|alpha-c|^p from the constant-term leaf applied to f(T+c)) is correct. Step 4 (an inseparable irreducible f has f'=0, so char p and f=T^p+b, a=0, |pb|=0) is correct and matches Temkin p.39. Step 5 checks every hypothesis of the normalization node. Step 6 checks both regions: for |c|<=R the error H stays below s<|F(c)|; for |c|>R the leading term c^p dominates; p=2 has H=0. Step 7 gets the exact infimum from an approximating sequence and gives |pb|<s. New nodes: (1) lem-trf-complete-minpoly-constant-norm is a Mathlib leaf. I verified SpectralNorm.lean section variables at 690-691, spectralNorm_unique_field_norm_ext at 770-772 and spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow at 991-992. It is a one-line specialization and duplicates neither lem-trf-spectral-norm-algebraic-extension nor the Q_l absolute-value node. (2) lem-trf-separable-prime-coefficient-normalization is unsplit and statement-only. Its three estimates are exactly those of Temkin p.40. I first doubted the strict bound |u_i|R^i<r^p; it follows from Temkin's argument that f' is invertible on a disc E_0 containing the non-split disc E, since zeros of f' have degree <p while points of E have degree >=p. Tested p=2, Artin-Schreier, and the discrete case (vacuous). It does not restate the item. My dag/nodes search found no duplicate: the prime-coset-model needs an algebraically closed residue field and a divisible value group; the others are critical-polynomial-minimum, pth-root-obstruction and coset-generator-reduction, none of which states these bounds. No SGA, no tool_uses, no fixes."
+ }
+}

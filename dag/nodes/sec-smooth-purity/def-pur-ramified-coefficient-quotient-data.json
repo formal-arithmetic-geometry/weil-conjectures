@@ -1,0 +1,165 @@
+{
+ "id": "def-pur-ramified-coefficient-quotient-data",
+ "kind": "definition",
+ "title": "Arbitrary ramified quotient coefficient maps and balanced derived reduction",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, finite extensions $E,F$ of $\\mathbf Q_\\ell$, a $\\mathbf Q_\\ell$-algebra embedding $i:E\\to F$, valuation rings $A,B$, chosen uniformizers $t,v$, and $A_{E,n}=A/(t^n)$, $A_{F,a}=B/(v^a)$ [def-weil-l-adic-coefficient-extension]. Fix $e\\in\\mathbf N$ with the ramification ideal equality $\\operatorname{map}(A\\to B,(t))=(v^e)$, and use its retained quotient map $A_{E,n}\\to A_{F,en}$ and tensor-unit-normalized tensor-composition comparisons [def-pur-finite-compact-support-scalar-data]. For $n,a\\in\\mathbf N$ and $a\\le en$, define $q_{n,a}:A_{E,n}\\to A_{F,a}$ to be this retained quotient map followed by the canonical further quotient $A_{F,en}\\to A_{F,a}$. For a scheme $W$ on the small pro-etale site [def-weil-pbc-proetale-site], define $(q_{n,a})_W$ by applying the constant-sheaf functor to this ring homomorphism, with the standard coefficient universe lift [def-weil-pbc-constant-sheaf]. Let $R_E\\to R_F$ be the canonical residue-normalized completed coefficient map [def-weil-completed-integral-scalar-data], with finite projections $\\pi_{E,n},\\pi_{F,a}$ [def-pur-integral-compact-support-coefficient-data]. When $1\\le n$ and $1\\le a$, define the balanced derived reduction isomorphism\n$$(-\\otimes^L_{R_E}R_F)\\otimes^L_{R_F}(A_{F,a})_W\\simeq(-\\otimes^L_{R_E}(A_{E,n})_W)\\otimes^L_{(A_{E,n})_W}(A_{F,a})_W$$\nusing derived change of rings [lem-pur-derived-change-of-rings]: compose the tensor-composition isomorphism for $R_E\\to R_F\\to(A_{F,a})_W$, identified with $R_E\\xrightarrow{\\pi_{E,n}}(A_{E,n})_W\\xrightarrow{(q_{n,a})_W}(A_{F,a})_W$, with the inverse tensor-composition isomorphism for the latter factorization. The coefficient and scheme carriers here have the same universe, as in these published declarations. The quotient-map definitions allow $n=0$ and $a=0$; only the balanced reduction uses positive exponents.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-scalar-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Finite quotient reductions in (1) and finite field extension in (3); canonical coefficient constructions as in Bhatt--Scholze Lemma 6.8.2(1), Definition 3.4.10 and Proposition 3.5.1."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ramified quotient coefficient ring maps and canonical balanced derived reduction on pro etale sheaves",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.quotientToQuotientRangePowQuotSucc",
+     "Ideal.Quotient.algebraMap_quotient_pow_ramificationIdx",
+     "Ideal.Quotient.algebraMap_quotient_of_ramificationIdx_neZero",
+     "Ideal.quotientToQuotientRangePowQuotSucc_mk",
+     "Ideal.Quotient.algebraQuotientOfRamificationIdxNeZero.congr_simp",
+     "Ideal.quotientToQuotientRangePowQuotSucc.congr_simp",
+     "Ideal.Factors.piQuotientEquiv",
+     "Ideal.quotientToQuotientRangePowQuotSuccAux"
+    ],
+    "digest": "2994fbc69b64e7ac"
+   },
+   "date": "2026-10-25",
+   "verdict": "Only ordinary ideal-quotient arithmetic matches; no coefficient sheaf or canonical derived balancing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical ramified quotient maps and tensor balancing for completed coefficient sheaves",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRhamPlus",
+     "BDeRham",
+     "AdicCompletion.ofTensorProduct_tmul",
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "AdicCompletion.ofTensorProduct",
+     "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+     "AdicCompletion.ofTensorProduct_naturality",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of"
+    ],
+    "digest": "07addb1e479f7b35"
+   },
+   "date": "2026-10-25",
+   "verdict": "Only adic completion tensor APIs; no exact construction."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportCoefficientQuotient|compactSupportCoefficientBalancedReduction|completedScalarComparison|completedDerivedScalarExtension",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No Mathlib matches. Project declaration searches locate precisely the three published definitions in Sheaf.Paper.CompactSupportCoefficientModels; none in WeilConjectures. No prior definition node owns those names."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportCoefficientQuotient|compactSupportCoefficientBalancedReduction|completedScalarComparison|completedDerivedScalarExtension (lean/WeilConjectures; lean/Sheaf; dag/nodes)",
+   "results": "rg: no definition in lean/WeilConjectures; three exact definitions in lean/Sheaf/Paper/CompactSupportCoefficientModels. Exact lean.declaration/declarations scan of dag/nodes: only theorem node lem-pur-compact-support-coefficient-models owns them. blueprint_refs.py search of exact names: 0 matches.",
+   "date": "2026-10-25",
+   "verdict": "Re-export existing declarations under a definition node as explicitly requested by the H2 return; no duplicate Lean construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-reconstructed-pair-finite-scalar-extension",
+  "date": "2026-10-25",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "thm-pur-rational-and-qbar-purity, proof Steps 1–2: transporting the reconstructed lattice to Qlb; sk-thm-purity-transport Steps 2–3. This supplies the missing comparison of its exceptional-image output with the seed target’s condensed right adjoint, without asserting smooth purity. Returned reconstruction proof Steps 8, 9, 10. Canonical coefficient data used in finite scalar extension.",
+   "via": [
+    "lem-pur-reconstructed-pair-finite-scalar-extension",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportCoefficientModels",
+  "declaration": "WeilConjectures.compactSupportCoefficientBalancedReduction",
+  "declarations": [
+   "WeilConjectures.compactSupportCoefficientQuotient",
+   "WeilConjectures.compactSupportCoefficientQuotientSheaf",
+   "WeilConjectures.compactSupportCoefficientBalancedReduction"
+  ],
+  "statement": "def compactSupportCoefficientBalancedReduction\n    (e : ℕ) (he : PurCompactSupport.Ramification l E F i e)\n    (n a : ℕ) (hn : 1 ≤ n) (ha : 1 ≤ a) (han : a ≤ e * n) (W : Scheme.{u}) :\n    pbcDerivedExtend (completedCoefficientMap l E F i W) ⋙\n        pbcDerivedExtend (PurCompactSupport.projection l F a ha W) ≅\n      pbcDerivedExtend (PurCompactSupport.projection l E n hn W) ⋙\n        pbcDerivedExtend\n          (compactSupportCoefficientQuotientSheaf l E F i e he n a han W)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-25",
+  "existing": true,
+  "note": "Returned-delivery H2 repair: definition-node re-export of the exact published declarations. Their real constructions are reused without any new Lean definition, arbitrary choice, or additional assertion. The originating theorem module remains unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a21de70b",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a21de70b",
+  "group": "NB",
+  "result": "pass",
+  "note": "8a21 re-delivery makes exactly the H12 correction from 71e0. It drops def-pur-ordinary-completed-scalar-comparison-data and cites the landed def-sf-completed-scalar-comparison-data, which is on the base (5e90c8a3f09). CompletionAgreement uses the abbrev completedIntegralScalarComparison (reducibly completedScalarComparison) and imports SfCompletedScalarComparisonData. The Lean is otherwise byte-identical to the 61b2 module, which was accepted mathematically. The prose statement is unchanged: only stmt_deps and lean differ from the base. def-pur-ramified-coefficient-quotient-data is unchanged from its accepted 71e0 version. lean.statement is verbatim and all 67 declarations are present. The four sorry uses are postponed theorems; the remaining tactic blocks build data. The report has the Worker report and Second reading sections. Worker scompile exit 0 (41.5 s) and dry run OK. Advisories: the second reading is a self-reading; purCoefficientModel is theorem-owned and inherited from landed dependencies."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261026T070817-L-3660453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.compactSupportCoefficientModels_ordinary"
+  ],
+  "sorry_after": []
+ }
+}

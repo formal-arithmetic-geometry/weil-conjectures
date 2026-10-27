@@ -1,0 +1,285 @@
+{
+ "id": "lem-trf-smooth-strict-local-base-model",
+ "kind": "statement",
+ "title": "Strict-local base change model of a smooth morphism",
+ "statement": "Let $f:V\\to S$ be a smooth morphism of schemes [def-sbc-smooth-morphisms] and let $\\bar v:\\operatorname{Spec}\\Omega\\to V$ and $\\bar s=f\\bar v$ be geometric points [def-weil-geometric-point] defined over the same algebraically closed field $\\Omega$. Put $A=\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$, $B=\\mathcal O^{\\mathrm{sh}}_{V,\\bar v}$, as geometric strict local rings [def-weil-pbc-strict-henselization-limit], and let $\\varphi:A\\to B$ be the canonical local map induced by `strictHenselizationMap`, equivalently by strict-henselization functoriality [lem-weil-pbc-strict-henselization-functoriality]. Let $j:\\operatorname{Spec}A\\to S$ be the structural morphism [def-weil-pbc-strict-henselization-structural-map] and $a:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}A$ the canonical lift of $\\bar s$ through the closed point. Set $W=V\\times_S\\operatorname{Spec}A$ [def-pc-fibre-product], $p:W\\to\\operatorname{Spec}A$, $\\bar w=(\\bar v,a)$, and let $w$ be its image. Then $p$ is smooth, $w$ lies over the closed point of $\\operatorname{Spec}A$, and the ordinary local structural map $A\\to C=\\mathcal O_{W,w}$ is flat and local [def-weil-pbc-flat-ring-map, def-weil-locally-ringed-space-morphism]. Relative to the separable residue closure selected by $\\bar w$ inside $\\Omega$, there is a canonical isomorphism of local rings $B\\simeq C^{\\mathrm{sh}}$ [def-sc-ring-strict-henselization] under which $\\varphi$ is the composite $A\\to C\\to C^{\\mathrm{sh}}$ and the residue evaluations into $\\Omega$ agree. On spectra this isomorphism agrees, via the affine local-ring comparison, with the canonical strict-localization map $W_{(\\bar w)}\\to V_{(\\bar v)}$ induced by projection; that map is an isomorphism over $V$. Both $A$ and $B$ are local rings and their maximal ideals are exactly the kernels of their canonical geometric-point evaluations into $\\Omega$. If $S$ and $V$ are locally Noetherian [pqf-def-locnoeth], then $A$ and $B$ are Noetherian [def-weil-pbc-noetherian-ring]. The comparison and flatness of $A\\to C$ do not require this extra Noetherian hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Agent-supplied comparison realizing old steps 1--3: Tag 04HX (lemma-describe-etale-local-ring), Tag 08HV (lemma-strictly-henselian-functorial-improve), Tag 01VB (lemma-base-change-smooth), Tag 01VF (lemma-smooth-flat), and Tag 06LJ (lemma-henselization-noetherian)."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-sc-ring-strict-henselization",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use strict-henselization local structure for A and B. The codomain-restricted geometric evaluation is surjective onto its relative separable closure, so the evaluation into Omega is local; its kernel is the maximal ideal. Evaluate the pullback lift equation at the closed point to obtain p(w)=m_A. Functoriality supplies evaluation compatibility for strictMap, hence strictMap is local.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an affine chart of S at the geometric image. The closed-point equation from functoriality and generization in a local spectrum factor Spec A through that chart. Apply the small-model affine-chart ind-etale theorem directly, avoiding the detour through the identity comparison. Base-change these local affine ind-etale charts by f, transport along pullback symmetry, and apply ind-etale strict-local invariance to q:W to V. Its isomorphism and the specified strictProjection satisfy the same structural and evaluation equations; functoriality uniqueness identifies them.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
+    "lem-trf-locally-ind-etale-base-change-charts",
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Smoothness is stable under base change, so p is smooth and flat. The canonical map from A to its stalk at p(w)=m_A is the inverse of stalkClosedPointIso and is therefore bijective, flat, and local. Compose it with the flat local stalk map of p to obtain ordinaryMap. No Noetherian hypothesis occurs.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-smooth-flat",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the actual-stalk presentation comparison to the geometric point of W, with the residue algebra fixed by descResidueField and the scalar tower through the ordinary residue field. It supplies H, P, and theta with their structural and evaluation equations. The ring equivalence opposite to the now-proved canonical strictProjection, followed by theta, is beta. Contravariance gives Spec beta = Spec theta followed by strictProjection; pointed functoriality gives beta evaluation compatibility.",
+   "uses": [
+    "lem-trf-geometric-strict-local-stalk-presentation",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let d be A to C to H. Naturality of fromSpecStalk and the defining formula of ordinaryMap identify Spec d with Spec theta followed by the structural map of W and p. Precompose by the inverse of Spec beta to get a map from V_(v) to S_(fv). The pullback square and the strictProjection structural equation show it is over f. The theta and beta evaluation equations and the closed geometric lift show it is pointed. Uniqueness in strict-henselization functoriality makes it strictHenselizationMap f v. Cancel the beta isomorphism and use faithfulness of Spec to obtain beta composed with strictMap = d. This is a complete Lean calculation; no extra intermediate lemma is assumed for this compatibility.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any locally Noetherian X and geometric point x, its ordinary stalk is Noetherian by the Mathlib stalk instance. Apply the actual-stalk presentation comparison at x. Its presentation gives IsStrictHenselization for H directly from the stored cocone. Strict-henselization Noetherianity makes H Noetherian; transport along theta inverse. Apply this general argument to S,fv and V,v.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-trf-geometric-strict-local-stalk-presentation",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-pc-proper-base-change",
+  "lem-pc-smooth-flat",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-geometric-strict-local-stalk-presentation",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-locally-ind-etale-base-change-charts",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/more-algebra.tex",
+  "place": "A5 Lean assembly of the six original steps, with one genuine actual-stalk transport lemma split off; canonical beta factorization is proved by pointed-map uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme morphism after base change to the strict localization of its base has the same strict local ring, canonically over the strict local base, with flat ordinary local structural map",
+   "results": "{\"t\": \"2026-10-22T06:00:50Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth scheme morphism after base change to the strict localization of its base has the same strict local ring, canonically over the strict local base, with flat ordinary local structural map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"RingHom.Smooth.propertyIsLocal\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.smoothLocus_comap_of_isLocalization\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"RingHom.isStandardSmoothOfRelativeDimension_stableUnderCompositionWithLocalizationAway\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"03e96cd5a1b5282b\"}; Smooth chart hits give ordinary local smooth presentations, not the canonical strict-local base-change comparison or its residue compatibility. Grep returned no strict henselization in Mathlib AlgebraicGeometry. Read Morphisms/Smooth.lean:84--102.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphisms at compatible geometric points admit a canonical local factorization through the ordinary local ring of the strict base change, and strict henselizations of Noetherian local rings are Noetherian",
+   "results": "{\"t\": \"2026-10-22T06:00:51Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth morphisms at compatible geometric points admit a canonical local factorization through the ordinary local ring of the strict base change, and strict henselizations of Noetherian local rings are Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.IsSmoothAt\", \"RingHom.Smooth.propertyIsLocal\"], \"digest\": \"c57ee9a7a3dac7b0\"}; Smooth chart hits give ordinary local smooth presentations, not the canonical strict-local base-change comparison or its residue compatibility. Grep returned no strict henselization in Mathlib AlgebraicGeometry. Read Morphisms/Smooth.lean:84--102.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"strictHenselization\"",
+   "results": "{\"t\": \"2026-10-22T06:00:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"strictHenselization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Smooth chart hits give ordinary local smooth presentations, not the canonical strict-local base-change comparison or its residue compatibility. Grep returned no strict henselization in Mathlib AlgebraicGeometry. Read Morphisms/Smooth.lean:84--102.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change to a strict henselization preserves the strict local ring at a compatible geometric point",
+   "results": "{\"t\": \"2026-10-22T06:00:39Z\", \"tool\": \"leansearch\", \"query\": \"Smooth base change to a strict henselization preserves the strict local ring at a compatible geometric point\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Smooth chart hits give ordinary local smooth presentations, not the canonical strict-local base-change comparison or its residue compatibility. Grep returned no strict henselization in Mathlib AlgebraicGeometry. Read Morphisms/Smooth.lean:84--102.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|henselization",
+   "results": "{\"t\": \"2026-10-22T06:00:39Z\", \"tool\": \"grep\", \"query\": \"strictHensel|strict_hensel|henselization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Smooth chart hits give ordinary local smooth presentations, not the canonical strict-local base-change comparison or its residue compatibility. Grep returned no strict henselization in Mathlib AlgebraicGeometry. Read Morphisms/Smooth.lean:84--102.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|strictLocalization",
+   "results": "{\"t\": \"2026-10-23T09:36:29Z\", \"tool\": \"grep\", \"query\": \"strictHensel|strict_hensel|strictLocalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned source candidates: Smooth.lean:62-102 supplies affine smooth charts only; LocalProperties/Basic.lean:490 supplies localization stability only; neither constructs or compares strict henselizations. No strict henselization grep hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict localizations of a scheme are unchanged by base change to the strict localization of the base",
+   "results": "{\"t\": \"2026-10-23T09:36:29Z\", \"tool\": \"leansearch\", \"query\": \"Strict localizations of a scheme are unchanged by base change to the strict localization of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange.of_isLocalization\", \"IsLocalizedModule.isBaseChange\", \"RingHom.IsStableUnderBaseChange.localizationPreserves\", \"IsLocalization.Away.tensorRightEquiv\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"IsLocalization.Away.tensorEquiv\", \"RingHom.locally_isStableUnderBaseChange\", \"isLocalizedModule_iff_isBaseChange\"], \"digest\": \"18c486a2acc8b13e\"}; Read the returned source candidates: Smooth.lean:62-102 supplies affine smooth charts only; LocalProperties/Basic.lean:490 supplies localization stability only; neither constructs or compares strict henselizations. No strict henselization grep hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictHenselization\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T09:36:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"strictHenselization\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned source candidates: Smooth.lean:62-102 supplies affine smooth charts only; LocalProperties/Basic.lean:490 supplies localization stability only; neither constructs or compares strict henselizations. No strict henselization grep hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism over a strictly local base has a flat local map to its ordinary local ring and the same geometric strict henselization",
+   "results": "{\"t\": \"2026-10-23T09:36:39Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism over a strictly local base has a flat local map to its ordinary local ring and the same geometric strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"RingHom.Smooth.propertyIsLocal\", \"RingHom.smooth_iff_locally_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"RingHom.Smooth.holdsForLocalizationAway\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"6f8115156017dc52\"}; Read the returned source candidates: Smooth.lean:62-102 supplies affine smooth charts only; LocalProperties/Basic.lean:490 supplies localization stability only; neither constructs or compares strict henselizations. No strict henselization grep hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a scheme to the strict henselization of its base preserves strict localizations at compatible geometric points",
+   "results": "{\"t\": \"2026-10-23T09:36:40Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of a scheme to the strict henselization of its base preserves strict localizations at compatible geometric points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"AlgebraicGeometry.HasRingHomProperty.stalkMap\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.IsStandardOpenImmersion.isStableUnderBaseChange\", \"RingHom.IsStableUnderBaseChange.of_isLocalization\", \"AlgebraicGeometry.HasRingHomProperty.of_stalkMap\", \"RingHom.locally_isStableUnderBaseChange\", \"RingHom.IsStableUnderBaseChange.localizationPreserves\"], \"digest\": \"b24710efdef4fab9\"}; Read the returned source candidates: Smooth.lean:62-102 supplies affine smooth charts only; LocalProperties/Basic.lean:490 supplies localization stability only; neither constructs or compares strict henselizations. No strict henselization grep hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-geometric-stalk-algebra",
+  "date": "2026-10-22",
+  "group": "Q17"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Re-split of lem-trf-smooth-geometric-stalk-algebra: old steps 1--3 (Noetherian affine models, strict-base-change comparison, ordinary smooth-flat local map).",
+   "via": [
+    "lem-trf-smooth-geometric-stalk-algebra",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-strict-local-base-model",
+  "worker": "stage1",
+  "summary": "Preserved every clause of the statement. Six proof steps assemble existing ind-etale strict-local invariance, affine local-ring comparison, smooth-flat base change and Noetherian strict henselization. Checked canonical arrows, residue evaluations and the absence of Noetherian hypotheses in the comparison and flatness. No new nodes; no project attachment exists.",
+  "blueprint": "Historical nearby-duality/alteration input under lem-trf-local-term-locality (1)-(2), via the recorded ancestry: old smooth-geometric-stalk-algebra steps 1-3. Latest blueprint local-term-locality and sk-i-curve-zero read; this generic local algebra input changes no chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Canonical local maps, closed geometric lift and residue compatibility; a geometric local-ring tool, absent from this trace unit."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Canonical comparison of geometric and algebraic strict local rings, with structural and evaluation equalities; absent from this trace unit."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only the smoothness clause under arbitrary base change; generic scheme geometry absent from this trace unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Noetherianity of the strict henselization of a Noetherian local ring; a commutative-algebra tool absent from this trace unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-pc-proper-base-change",
+  "lem-sc-strict-henselization-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-e8cd11e96",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-e8cd11e96 (reviewer sub-agent of L); spot-checked: Read the item and all 6 steps in full. The statement is unchanged against live and there are no new nodes; the item is still unsplit on live and side-live, with no repair note for it. Step 1: functoriality (1) gives the closed-point lift a with j∘a = s̄, so p(w) = m_A. lem-trf-strict-local-comparison-ind-etale applied to id_S and id_R shows R→A is ind-etale. Step 2: lem-trf-ind-etale-strict-local-invariance covers arbitrary base change, so it applies to q:W→V and gives W_(w̄)≅V_(v̄) over V. Step 3: an affine Spec D around w, the stalk lemma (c) gives C≅D_P, and lem-exc gives θ with the structural and evaluation identities; then β=θα^#. Step 4: I recomputed j_S∘Spec h = f∘j_V for h=β⁻¹(A→C→C^sh) through ρ_W∘α⁻¹ and j p = f q. Evaluations match since p w̄ = a; kernels of evaluation are the maximal ideals, so h is local; uniqueness in (3) gives h=φ. Step 5: 01VB smooth clause of lem-pc-proper-base-change, then 01VF; the stalk source is A_{m_A}=A; locality comes from the locally ringed space structure; no Noetherian hypothesis. Step 6: Noetherian affine D under pqf-def-locnoeth, D_p is Noetherian, lem-exc identifies A and B with (D_p)^sh, and 06LJ (lem-sc-strict-henselization-noetherian) finishes. The pair-category and triple-category forms of strict henselization agree for a local ring, an elementary point I accept. Sources checked: 04HX, 01VB, 01VF and 06LJ against their tex labels; 08HV and 0GIP labels verified. No SGA; no cycle. Accepted tool_uses: functoriality, exc affine comparison, pc base change (smooth clause), sc strict-henselization Noetherian. Edge cases checked: f=id, étale f, non-closed w, Ω larger than the residue closures, non-Noetherian and non-separated bases. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothStrictLocalBaseModel",
+  "declaration": "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.smooth_strictLocal_base_model",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.baseChange",
+   "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.projection",
+   "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.geometricPoint",
+   "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.point",
+   "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.ordinaryLocalRing",
+   "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.ordinaryMap",
+   "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.strictMap",
+   "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.strictProjection",
+   "AlgebraicGeometry.Scheme.SmoothStrictLocalBaseModel.smooth_strictLocal_base_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothStrictLocalBaseModel.lean",
+  "statement": "theorem smooth_strictLocal_base_model {V S : Scheme.{u}} (f : V ⟶ S) [Smooth f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (v : Spec (.of Ω) ⟶ V) : Smooth (projection f v) ∧ ∃ (_ : IsLocalRing (strictHenselizationRing (v ≫ f))) (_ : IsLocalRing (strictHenselizationRing v)), projection f v (point f v) = IsLocalRing.closedPoint (strictHenselizationRing (v ≫ f)) ∧ RingHom.Flat (ordinaryMap f v) ∧ IsLocalHom (ordinaryMap f v) ∧ IsLocalHom (strictMap f v) ∧ RingHom.ker (strictHenselizationPointEvaluation (v ≫ f)) = IsLocalRing.maximalIdeal (strictHenselizationRing (v ≫ f)) ∧ RingHom.ker (strictHenselizationPointEvaluation v) = IsLocalRing.maximalIdeal (strictHenselizationRing v) ∧ (IsLocallyNoetherian S → IsLocallyNoetherian V → IsNoetherianRing (strictHenselizationRing (v ≫ f)) ∧ IsNoetherianRing (strictHenselizationRing v)) ∧ IsIso (strictProjection f v) ∧ strictProjection f v ≫ strictHenselizationStructuralMap v = strictHenselizationStructuralMap (geometricPoint f v) ≫ pullback.fst f (strictHenselizationStructuralMap (v ≫ f)) ∧ ∃ (_ : Algebra (IsLocalRing.ResidueField (ordinaryLocalRing f v)) Ω), algebraMap (IsLocalRing.ResidueField (ordinaryLocalRing f v)) Ω = (descResidueField (stalkClosedPointTo (geometricPoint f v))).hom ∧ ∃ (_ : Algebra (ordinaryLocalRing f v) (separableClosure (IsLocalRing.ResidueField (ordinaryLocalRing f v)) Ω)) (_ : IsScalarTower (ordinaryLocalRing f v) (IsLocalRing.ResidueField (ordinaryLocalRing f v)) (separableClosure (IsLocalRing.ResidueField (ordinaryLocalRing f v)) Ω)) (H : Type u) (_ : CommRing H) (_ : Algebra (ordinaryLocalRing f v) H) (P : Algebra.StrictHenselizationPresentationIn (ordinaryLocalRing f v) (separableClosure (IsLocalRing.ResidueField (ordinaryLocalRing f v)) Ω) H) (_ : IsLocalRing H) (θ : strictHenselizationRing (geometricPoint f v) ≃+* H) (β : strictHenselizationRing v ≃+* H), IsLocalHom β.toRingHom ∧ β.toRingHom.comp (strictMap f v) = (algebraMap (ordinaryLocalRing f v) H).comp (ordinaryMap f v) ∧ (separableClosure (IsLocalRing.ResidueField (ordinaryLocalRing f v)) Ω).subtype.comp (P.residueMap.comp β.toRingHom) = strictHenselizationPointEvaluation v ∧ Spec.map (CommRingCat.ofHom θ.toRingHom) ≫ strictHenselizationStructuralMap (geometricPoint f v) = Spec.map (CommRingCat.ofHom (algebraMap (ordinaryLocalRing f v) H)) ≫ (baseChange f v).fromSpecStalk (point f v) ∧ (separableClosure (IsLocalRing.ResidueField (ordinaryLocalRing f v)) Ω).subtype.comp (P.residueMap.comp θ.toRingHom) = strictHenselizationPointEvaluation (geometricPoint f v) ∧ Spec.map (CommRingCat.ofHom β.toRingHom) = Spec.map (CommRingCat.ofHom θ.toRingHom) ≫ strictProjection f v",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary declarations construct only the named objects of this node. The comparison uses the recorded StrictHenselizationPresentationIn with its induced residueMap, and the canonical strictHenselizationMap via full faithfulness of Spec. No hypotheses beyond smoothness and the geometric point; Noetherianity is a conditional conclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69db5ee2a",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Item JSON differs from side-live only in lean; dependency nodes byte-identical; lean.statement verbatim. Every clause matched: Smooth p; w over closedPoint A; ordinaryMap (toStalk ≫ stalkMap) flat and local; β : B ≃ H with a real StrictHenselizationPresentationIn of C at the separable closure pinned to w̄'s residue embedding (scalar tower fixes the C-algebra); β∘φ = (C→H)∘ordinaryMap; residue evaluation; θ fixed by its structural and evaluation equations; Spec β = Spec θ ≫ strictProjection; strictProjection (strictHenselizationMap of fst ≫ eqToHom) IsIso and over V; ker eval = maximal ideal for A and B; conditional Noetherian clause. No extra hypotheses, single universe u, helpers are canonical (no hollow defs), docstrings carry source, blueprint tag and 6 steps, only the main theorem is sorry. Advisory: strictHenselizationPointEvaluation's owner def-weil-pbc-strict-henselization-point-evaluation is not in stmt_deps, but it is exposed by the cited functoriality record (closedLift_over) and 13 landed statements use it uncited; unused proof-dependency imports; second reading by the same worker, stated openly. Not compiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T091046-L-3302327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

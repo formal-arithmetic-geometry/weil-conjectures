@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-qcqs-proper-open-boundary-functor",
+ "kind": "statement",
+ "title": "Continuity of the open-proper-closed composite on the ambient localizing hull",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ inside it, with valuation ring $\\mathcal O_E$. Let $\\Lambda$ be a finite commutative ring annihilated by a power of $\\ell$, or $\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, with exactly the discrete or induced $\\ell$-adic topological condensed-ring convention of [sk-def-localizing-closure]. For every scheme $T$ put $\\Lambda_T=p_T^*\\Lambda$ and $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$, the ordinary unbounded module-object derived category [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-derived-pushpull], with smallness fixed by [def-weil-size-convention]. Let $S$ be a quasi-compact quasi-separated scheme, let $q:Y\\to S$ and $f:X\\to Y$ be proper morphisms [def-weil-proper-morphism, def-weil-quasi-separated-morphism], let $e:V\\hookrightarrow X$ be a quasi-compact open immersion [def-weil-open-immersion, def-weil-finite-type-morphism], and let $c:C\\hookrightarrow Y$ be a closed immersion with quasi-compact open complement [def-weil-closed-immersion]. For any scheme $T$ write $\\mathcal L_T=\\operatorname{Loc}(\\mathrm D_{\\mathrm{ctf}}(T,\\Lambda))$, with finite constant scalar-model constructibility and Tor amplitude as in [sk-def-sfb-constructible], and with the replete triangulated closure and small coproducts taken in the ambient $D_T$ [sk-def-localizing-closure]. Put $J=D(e_!)$ [sk-def-sfb-module-lower-shriek]. The actual module-object inverse images $e^*$ and $c^*$ have underlying functors the ordinary exact inverse images of abelian sheaves, and are exact. The derived functors $J$ and $D(c^*)$ are triangulated and preserve all small ambient coproducts. Moreover, $J(\\mathcal L_V)\\subseteq\\mathcal L_X$, and the functor\n$$F=D(c^*)\\circ Rf_*\\circ J:\\mathcal L_V\\longrightarrow D_C$$\nis triangulated and preserves all small ambient coproducts. Explicitly, for every small family $(K_t)_{t\\in I}$ of objects of $\\mathcal L_V$, the canonical map\n$$\\bigoplus_{t\\in I}F(K_t)\\longrightarrow F\\!\\left(\\bigoplus_{t\\in I}K_t\\right)$$\nis an isomorphism, including $I=\\varnothing$, without common cohomological bounds or a derived-completeness condition. No relation between the images of $e$ and $c$ is required, and no vanishing assertion is made. There is no field, characteristic, Noetherian or finite-dimensional-base hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement isomorphisms: the use of det-sf-comp-coherence-refinement (2), first paragraph on exact functors preserving sums; coefficient typing and localizing transport (old boundary-vanishing steps 1 and 5). Agent formulation of the extracted argument in the full qcqs scope; not an attribution to a field-restricted theorem."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-lower-shriek"
+ ],
+ "proof": [
+  {
+   "text": "For $T=V,X,Y,C$, abelian pro-etale sheaves form a closed symmetric monoidal Grothendieck category by [lem-weil-pbc-sheaf-tensor-closed]. Applying [lem-sfb-modobj-grothendieck] to the commutative ring object $\\Lambda_T$ makes $\\operatorname{Mod}_{\\Lambda_T}$ Grothendieck. Hence it has small coproducts and K-injective resolutions, as supplied by [sk-def-sfb-derived-categories]. These are the ambient categories used throughout.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-grothendieck",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9 (lemma-derived-products), ambient hypotheses; coefficient-module realization as in the cited blueprint nodes"
+   }
+  },
+  {
+   "text": "Apply the untwisted assertion of [sk-prop-sfb-cartesian-coefficients] to $e$ and $c$: their actual scalar-extension module inverse images are canonically the lifts of ordinary abelian inverse image and are exact. By [sk-def-sfb-module-lower-shriek], $e_!$ is exact and left adjoint to $e^*$. The exact-functor theorem [lem-sf-exact-functor-derived-triangulated] therefore makes $J=D(e_!)$ and $D(c^*)$ triangulated termwise functors.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); blueprint cartesian coefficients, untwisted assertion"
+   }
+  },
+  {
+   "text": "The adjunctions $e_!\\dashv e^*$ and $c^*\\dashv c_*$ are given by [sk-def-sfb-module-lower-shriek] and [sk-def-sfb-module-pushforward-pullback]. Thus [lem-weil-pbc-left-adjoint-preserves-colimits] applied to a small discrete index category says both underived left adjoints preserve every small coproduct. Apply [lem-pur-exact-derived-coproducts] to these exact functors between the Grothendieck categories of step 1. It follows that $J$ and $D(c^*)$ preserve the ambient unbounded derived coproducts, including the empty one; no restriction on degrees is involved.",
+   "uses": [
+    "sk-def-sfb-module-lower-shriek",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-pur-exact-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9 (lemma-derived-products), termwise coproduct clause; categories.tex Tag 0038 (lemma-adjoint-exact)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-qc-open-extension-ctf] to send the finite constant-model constructible finite-Tor generators under J into the target generators. For any replete localizing target property P containing those generators, its inverse image along J is triangulated and replete by Mathlib ObjectProperty.inverseImage. It is closed under the specified small coproducts: J preserves the diagram colimit by step 3, and the inverse of preservesColimitIso transports the target closure assertion back to J of that colimit. The defining intersection localizingClosureOfSize then sends every source hull object into P, hence into the target hull. The source hull is triangulated directly: zero and shifts belong to every defining property, and for a distinguished triangle whose first and third objects lie in the intersection, each defining replete triangulated property contains the middle object. Its inclusion is therefore triangulated by Mathlib.",
+   "uses": [
+    "lem-sfb-qc-open-extension-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, first paragraph: open extension and passage to the localizing hull"
+   }
+  },
+  {
+   "text": "For the given $S,q,f$, [lem-sfb-qcqs-proper-localizing-coproducts] applies without further hypotheses to every small family $(JK_t)$ in $\\mathcal L_X$ supplied by step 4. Its canonical proper coproduct comparison is invertible. The K-injective right derived functor $Rf_*$ is triangulated by [lem-pc-right-derived-functor-triangulated]. Thus the composite $F$ on $\\mathcal L_V$ is triangulated. For sums its comparison factors as the following three canonical isomorphisms:\n$$\\bigoplus_tD(c^*)Rf_*JK_t\\ \\cong\\ D(c^*)\\bigl(\\bigoplus_tRf_*JK_t\\bigr)\\ \\cong\\ D(c^*)Rf_*\\bigl(\\bigoplus_tJK_t\\bigr)\\ \\cong\\ D(c^*)Rf_*J\\bigl(\\bigoplus_tK_t\\bigr).$$\nEach composite with the $t$-th coprojection is $F$ of that coprojection, so this is exactly the comparison asked for. The same factorization holds for the empty index set. The proper theorem has neither a common bound nor a completeness assumption, and the other two functors act on the full ambient categories. Consequently no relation between the images of $e,c$ or additional geometric hypothesis is used.",
+   "uses": [
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2) Isomorphism, first paragraph: exact sum-preserving composite; canonical coprojection calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-exact-derived-coproducts",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-qc-open-extension-ctf",
+  "lem-sfb-qcqs-proper-localizing-coproducts",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement (2), first paragraph, with the existing qcqs proper coproduct and quasi-compact open-extension inputs; formal derived coproduct assembly by Stacks 07D9, 015F and 0038. Z8 formalization: the localizing transport and source-hull triangulated structure are proved directly from the defining intersection and Mathlib inverse-image/colimit APIs, rather than importing the deleted LocalizingFunctor module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ll]ocalizing.*[Cc]oproduct|[Pp]roper.*[Cc]oproduct|[Ee]xtension[Bb]y[Zz]ero",
+   "results": "25 hits: Mathlib/Condensed/TopComparison.lean; Mathlib/GroupTheory/Coprod/Basic.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/LinearAlgebra/DFinsupp.lean; Mathlib/Algebra/DirectSum/Module.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic localization or triangulated functors and ordinary structure-sheaf pushforward, not the open-proper-closed condensed-module composite or its localizing coproduct assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic localization or triangulated functors and ordinary structure-sheaf pushforward, not the open-proper-closed condensed-module composite or its localizing coproduct assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper derived direct image composed with extension by zero and closed pullback preserves small direct sums on a localizing subcategory",
+   "results": "8 hits: CategoryTheory.Localization.functor_additive_iff; ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; instAB4AddCommGrpCat; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; DerivedCategory.instHasZeroObject; CategoryTheory.Localization.Preadditive.zero_add'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic localization or triangulated functors and ordinary structure-sheaf pushforward, not the open-proper-closed condensed-module composite or its localizing coproduct assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor closed inverse image after proper derived pushforward after open extension by zero is triangulated and preserves coproducts on the localizing closure of constructible complexes",
+   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated; CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Triangulated.Localization.isTriangulated_functor; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Functor.IsHomological.mk'; DerivedCategory.TStructure.t; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic localization or triangulated functors and ordinary structure-sheaf pushforward, not the open-proper-closed condensed-module composite or its localizing coproduct assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of a proper scheme morphism composed with open shriek is an exact coproduct preserving functor on the localizing hull of constructible generators",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; CategoryTheory.Functor.sheafPushforwardCocontinuous; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic localization or triangulated functors and ordinary structure-sheaf pushforward, not the open-proper-closed condensed-module composite or its localizing coproduct assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image of condensed module sheaves preserves arbitrary direct sums on the localizing hull of constructible complexes, after extension by zero and pullback",
+   "results": "8 hits: Condensed.instAB4CondensedMod, Condensed.instAB5CondensedMod, Condensed.profiniteSolid, LightCondensed.instIsGrothendieckAbelianLightCondMod, CompHausLike.LocallyConstantModule.functor, CondensedMod.LocallyConstant.functor, CondensedMod.IsSolid, CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category-theoretic or condensed-module facts, not the full scheme-theoretic open-proper-closed localizing comparison; the proper and constructible-open inputs remain DAG lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category-theoretic or condensed-module facts, not the full scheme-theoretic open-proper-closed localizing comparison; the proper and constructible-open inputs remain DAG lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing.*coproduct|proper.*coproduct|extensionByZero",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/Instances.lean, Mathlib/AlgebraicTopology/ModelCategory/Instances.lean, Mathlib/GroupTheory/Coprod/Basic.lean, Mathlib/GroupTheory/CoprodI.lean, Mathlib/Algebra/DirectSum/Module.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/BinaryProducts.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category-theoretic or condensed-module facts, not the full scheme-theoretic open-proper-closed localizing comparison; the proper and constructible-open inputs remain DAG lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived functor proper pushforward composed with open extension by zero and inverse image preserves arbitrary coproducts of constructible generated objects",
+   "results": "8 hits: CategoryTheory.Limits.comp_preservesFiniteCoproducts, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.Limits.PreservesFiniteCoproducts, CategoryTheory.Functor.preservesBinaryCoproducts_of_preservesCokernels, SheafOfModules.pushforwardComp, preservesBinaryCoproducts_of_preservesInitial_and_pushouts, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits, CategoryTheory.Limits.instPreservesFiniteCoproductsOfPreservesFiniteColimits",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category-theoretic or condensed-module facts, not the full scheme-theoretic open-proper-closed localizing comparison; the proper and constructible-open inputs remain DAG lemmas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composition of exact inverse image, proper derived direct image, and open shriek commutes with unrestricted coproducts on constructible localizing subcategories of unbounded sheaf module derived categories",
+   "results": "8 hits: SheafOfModules.pushforwardComp, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforward_assoc, CategoryTheory.sheafComposeIso_inv_fac, CategoryTheory.sheafComposeIso_inv_fac_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, CategoryTheory.sheafComposeIso_hom_fac",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category-theoretic or condensed-module facts, not the full scheme-theoretic open-proper-closed localizing comparison; the proper and constructible-open inputs remain DAG lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-proper-open-boundary-vanishing",
+  "date": "2026-10-22",
+  "group": "Q139"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms: the use of det-sf-comp-coherence-refinement (2), first paragraph on exact functors preserving sums; coefficient typing and localizing transport (old boundary-vanishing steps 1 and 5).",
+   "via": [
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qcqs-proper-open-boundary-functor",
+  "worker": "stage1",
+  "summary": "No new nodes. Reused the existing full-scope qcqs proper coproduct theorem and quasi-compact open-extension finite-Tor theorem, then proved exact inverse-image typing, ambient coproduct preservation and localizing transport using existing generic tools. No statement correction or field restriction.",
+  "blueprint": "det-sf-comp-coherence-refinement (2), first paragraph supplies the exact sum-preserving input used by det-sf-comp-coherence-cocycle; steps 1-3 justify its ambient categorical meaning, step 4 the open localizing input, step 5 the canonical composite comparison.",
+  "tool_uses": [
+   {
+    "node": "det-proper-image-localizing-principle",
+    "why": "Generic localizing-hull transport for an exact sum-preserving functor and its generator images."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic K-injective right derived functors are triangulated, used only for the actual proper module direct image."
+   },
+   {
+    "node": "lem-pur-exact-derived-coproducts",
+    "why": "Generic exact-functor derived coproduct theorem with the fixed indexing universe; no purity assertion or route is used."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact-functor passage to ordinary unbounded derived categories."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic Grothendieck property of internal modules; establishes the hypotheses for the unbounded derived coproduct tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic left-adjoint colimit preservation, used on discrete small diagrams."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "The ambient abelian sheaf category is closed symmetric monoidal Grothendieck, needed to apply the module-object Grothendieck theorem."
+   },
+   {
+    "node": "sk-def-sfb-derived-categories",
+    "why": "Supplies K-injective resolutions for Grothendieck categories and the ordinary unbounded derived conventions."
+   },
+   {
+    "node": "sk-def-sfb-module-lower-shriek",
+    "why": "Actual exact module extension by zero and its adjunction, used for the open factor."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Actual module pullback/direct-image adjunction for the closed factor."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Untwisted cartesian coefficient isomorphism and exact actual inverse image for arbitrary schemes; no field hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-proper-image-localizing-principle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-exact-derived-coproducts",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-modobj-grothendieck",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-69a44bb45",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-69a44bb45 (reviewer sub-agent of L); spot-checked: lem-sfb-qcqs-proper-open-boundary-functor is a correct five-step split with no new nodes. The statement and stmt_deps are unchanged from the Q139 unsplit node. Each step uses only what its cited statements say. Step 1: lem-weil-pbc-sheaf-tensor-closed plus lem-sfb-modobj-grothendieck make Mod_{Λ_T} Grothendieck, and sk-def-sfb-derived-categories gives K-injective resolutions. Step 2: the untwisted clause of sk-prop-sfb-cartesian-coefficients makes the module inverse images exact, sk-def-sfb-module-lower-shriek gives e_! exact with e_! ⊣ e^*, and lem-sf-exact-functor-derived-triangulated makes the derived functors triangulated. Step 3: c^* ⊣ c_* from the module pushforward-pullback node, lem-weil-pbc-left-adjoint-preserves-colimits on a discrete index category, and lem-pur-exact-derived-coproducts (its hypotheses checked) give ambient sum preservation. Step 4: lem-sfb-qc-open-extension-ctf (same unit, exact coefficient and constructibility conventions, quasi-compact open hypothesis) plus det-proper-image-localizing-principle give J(L_V) ⊆ L_X. Step 5: lem-sfb-qcqs-proper-localizing-coproducts has exactly the item's scope (S qcqs, q and f proper, I=∅ included, no bounds). With it, the 3-isomorphism factorization and the coprojection check correctly give the canonical comparison. Sources checked: blueprint main-20261015 det-sf-comp-coherence-refinement proof (2), first paragraph; Stacks 07D9, 015F, 0038 at the right labels; no SGA. Edge cases checked: I=∅, V=∅, e=id, C=∅, overlapping images of e and c, residue characteristic ℓ; c's quasi-compact-complement hypothesis is unused but harmless. Not duplicates: det-sf-comp-coherence-single and det-proper-image-localizing-open are restricted to finite-type schemes over a field. No cycle. The off-unit generic tools declared in split_report.tool_uses are accepted. Batch-5: lem-sfb-qcqs-proper-localizing-coproducts reaches lem-pod-lisse-module-sheaves-as-module-objects only through proper base change. That node is the foundational fact that lisse sheaves are module objects in finite locally constant étale sheaves; it is not the content or a step of Poincaré duality or the trace formula, and neither assumption leaf gives it. The cited proper-coproduct property is also outside both assumptions, so there is no RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsProperOpenBoundaryFunctor",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.qcqs_proper_open_boundary_functor",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsProperOpenBoundaryFunctor.lean",
+  "statement": "theorem qcqs_proper_open_boundary_functor (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {S X Y V C : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (q : Y ⟶ S) [IsProper q] (f : X ⟶ Y) [IsProper f] (e : V ⟶ X) [IsOpenImmersion e] [QuasiCompact e] (c : C ⟶ Y) [IsClosedImmersion c] (hc : IsCompact (Set.range c)ᶜ) : (PreservesFiniteLimits (upperStar Λ e) ∧ PreservesFiniteColimits (upperStar Λ e) ∧ Nonempty (upperStar Λ e ⋙ Mod.forget (condensedRingObj Λ V) ≅ Mod.forget (condensedRingObj Λ X) ⋙ ProEtale.upperStar Ab.{u + 1} e)) ∧ (PreservesFiniteLimits (upperStar Λ c) ∧ PreservesFiniteColimits (upperStar Λ c) ∧ Nonempty (upperStar Λ c ⋙ Mod.forget (condensedRingObj Λ C) ≅ Mod.forget (condensedRingObj Λ Y) ⋙ ProEtale.upperStar Ab.{u + 1} c)) ∧ (openImmersionLowerShriek Λ e).mapDerivedCategory.IsTriangulated ∧ (upperStar Λ c).mapDerivedCategory.IsTriangulated ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) (openImmersionLowerShriek Λ e).mapDerivedCategory) ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) (upperStar Λ c).mapDerivedCategory) ∧ (∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V)), localizingClosureOfSize.{u + 1} (constantModelBoundedConstructible Λ V ⊓ fun L ↦ DerivedCategory.finiteTorAmplitude _ L) K → localizingClosureOfSize.{u + 1} (constantModelBoundedConstructible Λ X ⊓ fun L ↦ DerivedCategory.finiteTorAmplitude _ L) ((openImmersionLowerShriek Λ e).mapDerivedCategory.obj K)) ∧ (∃ (_ : (localizingClosureOfSize.{u + 1} (constantModelBoundedConstructible Λ V ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K)).IsTriangulated), ((localizingClosureOfSize.{u + 1} (constantModelBoundedConstructible Λ V ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K)).ι ⋙ (openImmersionLowerShriek Λ e).mapDerivedCategory ⋙ (lowerStar Λ f).rightDerivedFunctor ⋙ (upperStar Λ c).mapDerivedCategory).IsTriangulated) ∧ (∀ (I : Type (u + 1)) (K : I → DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V))), (∀ t : I, localizingClosureOfSize.{u + 1} (constantModelBoundedConstructible Λ V ⊓ fun L ↦ DerivedCategory.finiteTorAmplitude _ L) (K t)) → PreservesColimit (Discrete.functor K) ((openImmersionLowerShriek Λ e).mapDerivedCategory ⋙ moduleObjectDerivedPushforward Λ f ⋙ (upperStar Λ c).mapDerivedCategory))",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fb06b699",
+  "group": "O1",
+  "result": "pass",
+  "note": "Only the item lean field changed; all 11 dep records are byte-identical to live; the statement appears verbatim; one sorry theorem with source/blueprint docstrings and the 5-step plan. Clauses match the node: exact e^*/c^* with a real underlying-iso claim (upperStar = extendScalars), J and D(c^*) triangulated and preserving all Type(u+1) sums, J(L_V)⊆L_X on localizingClosureOfSize.{u+1}(constantModelBoundedConstructible ⊓ finiteTorAmplitude), the composite on the hull is IsTriangulated (the Prop ∃ supplies the instance), and the sum comparison is PreservesColimit (Discrete.functor K), as in the recorded qcqs_proper_localizing_preservesCoproduct. q and hc are kept unused as in the node; no extra hypotheses; I=∅, empty V/C and overlapping images are covered. Not recompiled (worker reports a clean compile, 24.6 s). Advisory: the parent's landed Lean uses localizingClosureProEtale (larger sums), so its stage-3 proof must prove that hull is inside the OfSize.{u+1} hull. Also advisory: upperStar/lowerStar are owned outside the stmt_deps; the deleted det-proper-image-localizing-principle import is omitted; some imports are proof-only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261023T135813-L-2974694",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

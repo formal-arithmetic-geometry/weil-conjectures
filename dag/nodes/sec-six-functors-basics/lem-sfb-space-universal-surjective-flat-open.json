@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-space-universal-surjective-flat-open",
+ "kind": "statement",
+ "title": "The universal surjective-flat locus for algebraic spaces is open",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $A,C,B$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $p:A\\to B$, $q:C\\to B$, and $f:A\\to C$ satisfy $q\\circ f=p$. Flatness, local finite presentation, local finite type, separatedness and universal closedness use the chartwise and topological definitions of [def-sfb-space-morphism-properties]. A map is closed when its map of point spaces sends closed sets to closed sets. Assume that $p$ is flat, locally of finite presentation and closed, and that $q$ is locally of finite type and closed. Then there is an open subspace $V\\subseteq B$ [def-a1-space-open-subspace] such that, for every algebraic space $T$ over $S$ and every $h:T\\to B$, the base change $f_T:A\\times_BT\\to C\\times_BT$ is flat and surjective if and only if $h$ factors through $V$. Here surjective means surjective on the point sets of [def-a1-space-point-topology]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XC (spaces-more-morphisms-lemma-where-surjective-flat), all five hypotheses and arbitrary algebraic-space parameter changes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-relative-flat-locus-base-change] with $(X,Y,Z)=(A,C,B)$; its three hypotheses are among ours. Let $L\\subseteq|A|$ be its open flat locus and put $E=|A|\\setminus L$. As $p$ is closed, $p(E)$ is closed. Thus $F_0=|B|\\setminus p(E)$ is open. Choose an etale scheme atlas of $B$ [def-trf-algebraic-space] and apply [lem-a1-space-invariant-open-quotient] to this open subset. It gives an open subspace $F\\subseteq B$ with $|F|=F_0$.",
+   "uses": [
+    "lem-sfb-space-relative-flat-locus-base-change",
+    "def-trf-algebraic-space",
+    "lem-a1-space-invariant-open-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC (lemma-where-surjective-flat), proof; flat-locus construction expanded from Tag 05XB (lemma-where-flat)."
+   }
+  },
+  {
+   "text": "For any $h:T\\to B$, write $a:A\\times_BT\\to A$. By Step 1 the flat locus of $f_T$ is $a^{-1}(L)$. Hence $f_T$ is flat exactly when no point of $A\\times_BT$ projects into $E$ (flatness means flatness at all points, by the chart test). The point-pair surjectivity in [lem-a1-space-point-open-calculus] shows that such a point exists if and only if some $e\\in E$ and $t\\in|T|$ satisfy $p(e)=h(t)$: every such pair lifts to a point of the fibre product. Consequently $f_T$ is flat if and only if $h(|T|)\\subseteq|F|$. By [lem-a1-space-open-factor-scheme-tests] this is equivalent to factorization of $h$ through $F$. In particular $f_F:A_F\\to C_F$ is flat, where $A_F=A\\times_BF$ and $C_F=C\\times_BF$.",
+   "uses": [
+    "lem-sfb-space-relative-flat-locus-base-change",
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC (lemma-where-surjective-flat), proof; flat-locus construction expanded from Tag 05XB (lemma-where-flat)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-relative-lfp-permanence] to $f$ and $q$: $qf=p$ is locally of finite presentation and $q$ is locally of finite type. Thus $f$ is locally of finite presentation. Its base change along $C_F\\to C$ is $f_F$: for each test sheaf, a pair consisting of an $A$-section and a $C_F$-section over the same $C$-section is exactly an $A$-section and an $F$-section over the same $B$-section. This is the fibre-product universal property [lem-trf-space-fibre-products-etale-covers]. The base-change rule of [lem-sfb-stack-chartwise-smooth-etale-calculus] applies to these morphisms, which are representable by algebraic spaces since their sheaf fibre products are algebraic spaces. Hence $f_F$ is locally of finite presentation. Together with its flatness, [lem-sfb-flat-lfp-space-universally-open] implies that $I=f_F(|A_F|)$ is open in $|C_F|$.",
+   "uses": [
+    "lem-sfb-space-relative-lfp-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-lfp-space-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC (lemma-where-surjective-flat), proof; flat-locus construction expanded from Tag 05XB (lemma-where-flat)."
+   }
+  },
+  {
+   "text": "Let $q_F:C_F\\to F$ be the projection. It is closed even though we have assumed only closedness of $q$. Indeed [lem-a1-space-open-factor-scheme-tests] and [lem-a1-space-point-open-calculus] identify $|C_F|$ with the open subset $q^{-1}(|F|)$ of $|C|$. Any closed subset of this subspace is $D_0\\cap q^{-1}(|F|)$ for some closed $D_0\\subseteq|C|$. Its $q_F$-image is $q(D_0)\\cap|F|$, closed in $|F|$ because $q$ is closed. In particular $D=|C_F|\\setminus I$ is closed and $q_F(D)$ is closed in $|F|$.",
+   "uses": [
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC (lemma-where-surjective-flat), proof; flat-locus construction expanded from Tag 05XB (lemma-where-flat)."
+   }
+  },
+  {
+   "text": "The subset $V_0=|F|\\setminus q_F(D)$ is open in $|F|$, hence in $|B|$, since $F$ is an open subspace [lem-a1-space-point-open-calculus]. Apply [lem-a1-space-invariant-open-quotient] to an atlas of $B$ as in Step 1 to obtain an open subspace $V\\subseteq B$ with $|V|=V_0$. The inclusion $V\\to B$ factors uniquely through $F$ by [lem-a1-space-open-factor-scheme-tests], since $V_0\\subseteq|F|$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-invariant-open-quotient",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC (lemma-where-surjective-flat), proof; flat-locus construction expanded from Tag 05XB (lemma-where-flat)."
+   }
+  },
+  {
+   "text": "For any $g:T\\to F$, let $r:C_F\\times_FT\\to C_F$ and $s:C_F\\times_FT\\to T$. The morphism $(f_F)_T$ is the base change of $f_F$ along $r$: on every test object both source descriptions are pairs of an $A_F$-section and a $T$-section with the same $F$-section [lem-trf-space-fibre-products-etale-covers]. The image formula in [lem-a1-space-point-open-calculus] therefore gives $\\operatorname{im}|(f_F)_T|=r^{-1}(I)$. Thus $(f_F)_T$ is surjective if and only if $r^{-1}(D)$ is empty. The same node gives $s(r^{-1}(D))=g^{-1}(q_F(D))$: one inclusion follows by commutativity, while for the other a pair $d\\in D,t\\in|T|$ with $q_F(d)=g(t)$ lifts to a point of $C_F\\times_FT$. Therefore surjectivity is equivalent to $g(|T|)\\subseteq V_0$. If this holds, the composite $T\\to B$ factors through $V$ by [lem-a1-space-open-factor-scheme-tests]. Conversely such a factorization has point image in $V_0$; hence the equivalence holds in both directions.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC (lemma-where-surjective-flat), proof; flat-locus construction expanded from Tag 05XB (lemma-where-flat)."
+   }
+  },
+  {
+   "text": "Finally let $h:T\\to B$ be arbitrary. If $h$ factors through $V$, Step 5 also factors it through $F$, so Step 2 gives flatness of $f_T$, and Step 6 gives surjectivity. Conversely, if $f_T$ is flat and surjective, Step 2 gives its unique factorization $g:T\\to F$, and Step 6 then factors $h$ through $V$. Here the maps over $F$ in Step 6 equal the original base changes over $B$: by [lem-trf-space-fibre-products-etale-covers], on each test object a pair into $A_F$ and $T$ over $F$ is uniquely a pair into $A$ and $T$ over $B$, since the $F$-section is forced to be the given section composed with $g$. The same applies to $C$, and these identifications commute with $f$. This proves the claimed universal property for arbitrary algebraic spaces $T$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XC (lemma-where-surjective-flat), proof; flat-locus construction expanded from Tag 05XB (lemma-where-flat)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-space-relative-flat-locus-base-change",
+  "lem-sfb-space-relative-lfp-permanence",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XC (lemma-where-surjective-flat), proof; flat-locus construction expanded from Tag 05XB (lemma-where-flat)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of algebraic spaces A to C over B the base changes where the map is flat and surjective form an open subspace of B",
+   "results": "8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme base-change stability, open maps or descent, not the parameter locus for arbitrary algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|whereSurjectiveFlat|whereClosedImmersion|where_surjective_flat",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme base-change stability, open maps or descent, not the parameter locus for arbitrary algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base change locus where a map of algebraic spaces is surjective and flat is an open subspace",
+   "results": "8 hits; AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, Module.Flat.isBaseChange, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme base-change stability, open maps or descent, not the parameter locus for arbitrary algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Flat\", \"Surjective\"",
+   "results": "12 hits; AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine, AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation, AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme base-change stability, open maps or descent, not the parameter locus for arbitrary algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented closed family A over B and a closed locally finite type C over B the surjective flat locus of A to C is universally represented by an open subspace of B",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme base-change stability, open maps or descent, not the parameter locus for arbitrary algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|whereSurjectiveFlat|where_surjective_flat",
+   "results": "{\"t\": \"2026-10-23T13:57:33Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|whereSurjectiveFlat|where_surjective_flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all hits are scheme flatness, openness, or descent, not the algebraic-space parameter open with this universal property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal surjective flat parameter locus of a family of algebraic spaces is open",
+   "results": "{\"t\": \"2026-10-23T13:57:34Z\", \"tool\": \"leansearch\", \"query\": \"The universal surjective flat parameter locus of a family of algebraic spaces is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\"], \"digest\": \"2380e637ece405f3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all hits are scheme flatness, openness, or descent, not the algebraic-space parameter open with this universal property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Flat\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-23T13:57:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Flat\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"61c8852206c0f6e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all hits are scheme flatness, openness, or descent, not the algebraic-space parameter open with this universal property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subspace represents base changes where a morphism of algebraic spaces is flat and surjective",
+   "results": "{\"t\": \"2026-10-23T13:57:34Z\", \"tool\": \"leanfinder\", \"query\": \"An open subspace represents base changes where a morphism of algebraic spaces is flat and surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.eq\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"7c1488c32ba00ad8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all hits are scheme flatness, openness, or descent, not the algebraic-space parameter open with this universal property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed flat finitely presented family X over Z and Y locally finite type and closed over Z there is an open locus where X to Y is universally faithfully flat",
+   "results": "{\"t\": \"2026-10-23T13:57:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed flat finitely presented family X over Z and Y locally finite type and closed over Z there is an open locus where X to Y is universally faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"55a40d92827543f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: all hits are scheme flatness, openness, or descent, not the algebraic-space parameter open with this universal property."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-universal-isomorphism-open",
+  "date": "2026-10-23",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor. In quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism to the first projection. Supporting input: Tag 05XC (spaces-more-morphisms-lemma-where-surjective-flat), all five hypotheses and arbitrary algebraic-space parameter changes.",
+   "via": [
+    "lem-sfb-space-universal-isomorphism-open",
+    "lem-sfb-space-graphs-open-in-hilbert",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-universal-surjective-flat-open",
+  "worker": "stage1",
+  "summary": "Q49: preserved the full algebraic-space statement and all five hypotheses. Followed 05XC, expanding 05XB into the source flat-locus construction and its point-lifting argument. Added only the source-locus theorem 05X3, reusing existing permanence, openness and point/open-subspace tools. Proved the surjectivity open and both directions after arbitrary algebraic-space base change explicitly.",
+  "blueprint": "Retained the inherited null ancestor and full creator chain, as blueprint_refs.py ancestor confirms. The inherited from.place locates the 05XC prerequisite in the graph/Hilbert argument. Steps 1--2 realize its first sentence via 05XB and 05X3; Steps 3--7 realize the lfp/open-image construction and final point-lifting argument. Whole-blueprint searches for surjective flat, flat locus, flatness, open subspace and 05X3 found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-invariant-open-quotient",
+    "why": "Constructs an open subspace from an open subset of a point space; this foundational algebraic-space tool is not a step of the six-functor unit."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Provides fibre-product point lifting, the image identity, and the topology of open subspaces for arbitrary algebraic spaces."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Provides factorization through an open subspace from containment of the point image for an arbitrary algebraic-space source."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Provides algebraic-space sheaf fibre products and their universal property; needed as a generic geometric construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-644ddf95a",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-644ddf95a (reviewer sub-agent of L); spot-checked: I read Stacks 05XC, 05XB and 05X3 (spaces-more-morphisms.tex l.11729, l.11687, l.5917). The item statement is unchanged from base and live still has it unsplit. The five hypotheses of 05XC are exact (p lfp, flat, closed; q lft, closed) and the parameter changes are arbitrary algebraic spaces. New node lem-sfb-space-relative-flat-locus-base-change is exactly 05X3 for algebraic spaces. Its flat point is defined with 'every chart diagram', which is equivalent to Stacks' 'exists' (lemma-flat-local) and gives flat everywhere = the chart test of def-sfb-space-morphism-properties. It is statement-only with 5 searches. It is not a duplicate: only the scheme nodes 05VK and 05XB-schemes exist, and the snapshot, live and side-live have no space flat-locus node. It is strictly smaller than the item (D1 OK). Steps: 1 uses the new node, closedness of p and the invariant-open quotient to build F. 2 shows the flat locus of f_T is a^{-1}(L), and pair-lifting in point-open-calculus gives f_T flat iff h(|T|) is in |F|, with the factorization from open-factor-scheme-tests. 3 gets f lfp from 05WT permanence, f_F lfp by base change in the chartwise calculus (same convention as other lem-sfb-space nodes), and I open by 042S. 4 shows q_F is closed via the open-subspace homeomorphism, elementary, using only ordinary closedness of q. 5 builds V. 6 uses the image formula r^{-1}(I) and s(r^{-1}D)=g^{-1}(q_F D), so surjective iff g(|T|) is in V_0. 7 identifies the fibre products over F and over B. All correct, and proof_deps equals the union of uses. I tested edge cases A=∅ and C=∅, a point in A^1 (F=V=∅) and a clopen point (F=B, V=∅). The tool_uses (3 a1 point/open-subspace nodes, trf fibre products) are generic algebraic-space foundations and are accepted. Batch-5: every flagged citation reaches sec-trace-formula only through def-trf-algebraic-space or lem-trf-space-fibre-products-etale-covers (025Y/02X2). These are generic foundations, not steps of the trace formula or Poincaré duality proofs, so no assumption leaf is needed. No SGA. Minor: the report lists citations.json and searches.jsonl, but they are not in the commit; advisory only."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceUniversalSurjectiveFlatOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_openSubspace_universal_surjective_flat",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.baseChangeDiagramMap",
+   "AlgebraicGeometry.AlgebraicSpace.exists_openSubspace_universal_surjective_flat"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceUniversalSurjectiveFlatOpen.lean",
+  "statement": "theorem exists_openSubspace_universal_surjective_flat {S : Scheme.{u}} (A C B : AlgebraicSpace S) (p : A ⟶ B) (q : C ⟶ B) (f : A ⟶ C) (w : f ≫ q = p) (hp_flat : MapIsFlat p) (hp_lfp : MapIsLocallyOfFinitePresentation p) (hp_closed : ∀ Z : Set (Point A.obj.obj), IsClosed Z → IsClosed {y : Point B.obj.obj | ∃ a : PointRepresentative A.obj.obj, (Quot.mk _ a : Point A.obj.obj) ∈ Z ∧ (Quot.mk _ (a.map p.hom.hom) : Point _) = y}) (hq_lft : MapIsLocally (@LocallyOfFiniteType) q) (hq_closed : ∀ Z : Set (Point C.obj.obj), IsClosed Z → IsClosed {y : Point B.obj.obj | ∃ c : PointRepresentative C.obj.obj, (Quot.mk _ c : Point C.obj.obj) ∈ Z ∧ (Quot.mk _ (c.map q.hom.hom) : Point _) = y}) : ∃ V : OpenSubspace B, ∀ (T : AlgebraicSpace S) (h : T ⟶ B), (MapIsFlat (baseChangeDiagramMap p q f w h) ∧ pointImage (baseChangeDiagramMap p q f w h).hom.hom = Set.univ) ↔ ∃ l : T.obj.obj ⟶ V.val.toFunctor, l ≫ V.val.ι = h.hom.hom",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper constructs the canonical map between sheaf fibre products using their algebraic-space closure theorem; no representability hypothesis is imposed on f. Review FIX (2026-10-24): closedness of p and q is stated as 'the image on point classes of every closed set is closed' and point-surjectivity of f_T as `pointImage … = Set.univ`, using Point, PointRepresentative.map and pointImage of the stmt_deps def-a1-algebraic-space-point-classes/def-a1-space-point-topology, instead of `IsClosedMap (mapPoint …)` and `Function.Surjective (mapPoint …)`, whose owner def-sfb-proper-curve-moduli is not a stmt_dep of the item. The hypotheses and conclusion are equivalent to the delivered ones (mapPoint sends Quot.mk a to Quot.mk (a.map f)); nothing else changed.",
+  "fixed_by": "NT-stage2-cc-9d11bcf3a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d11bcf3a",
+  "group": "Q67",
+  "result": "fix",
+  "note": "Read item, 7 stmt_deps, module, report (Worker report + Second reading present), Stacks 05XC l.11729. All five hypotheses exact (p flat+lfp+closed, q lft+closed, ordinary closedness), T arbitrary algebraic spaces, single universe u, conclusion ∃ V : OpenSubspace B with ↔ factorization through V.val.ι; baseChangeDiagramMap is the canonical Limits.pullback.map between the actual sheaf fibre products (real data, docstrings). Edge cases T/A/B empty and f = id are fine. H2 finding: mapPoint (owner def-sfb-proper-curve-moduli, not a stmt_dep) was used in IsClosedMap for p and q and in Function.Surjective for f_T. FIX restates closedness as 'the representative image of every closed set is closed' (= mapPoint '' Z) and surjectivity as pointImage … = Set.univ, using def-a1-space-point-topology; the statement is equivalent. fixes/: full module, lean-record.json (verbatim statement; refit_record clean), report.md with a Review fix section. nt_compile --json on the fixed module: 5.5 s, clean."
+ }
+}

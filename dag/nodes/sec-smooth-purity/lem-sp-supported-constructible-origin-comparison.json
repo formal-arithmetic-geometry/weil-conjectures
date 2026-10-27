@@ -1,0 +1,283 @@
+{
+ "id": "lem-sp-supported-constructible-origin-comparison",
+ "kind": "statement",
+ "title": "Supported constructible etale origin and its unbounded coefficient tensor comparison",
+ "statement": "Let $A\\to B$ be a unital homomorphism of finite commutative rings, let $U,Z$ be schemes, and let $j:U\\hookrightarrow Z$ be an open immersion. Use constant-ring module sheaves on the small etale and pro-etale sites and their ordinary uncompleted unbounded derived categories, with exact comparison $\\nu_T^*$ [def-weil-pbc-proetale-modules, def-weil-pbc-derived-categories], and the extensions $j_!^{\\mathrm{et},A}$ and $j_!^{\\mathrm{pro},A}$ [def-weil-pbc-extension-by-zero, def-weil-extension-by-zero]. Let $M\\in D(U_{\\mathrm{proet}},A)$ have bounded intrinsically constructible cohomology [def-weil-proetale-constructible-sheaf]. Then there exist a bounded etale $A$-complex $L$ with constructible cohomology [def-weil-pbc-etale-constructible-sheaf] and an isomorphism $e:\\nu_U^*L\\xrightarrow{\\sim}M$. For every such pair $(L,e)$ put\n$$K=j_!^{\\mathrm{et},A}L,\\qquad N=j_!^{\\mathrm{pro},A}M,\\qquad H=K\\otimes^L_{A_{Z,\\mathrm{et}}}B_{Z,\\mathrm{et}},$$\nwhere $B$ is regarded as an $A$-module [def-kun-derived-tensor]. The complexes $K$ and $N$ are bounded. The termwise sheaf comparison, composed with $j_!^{\\mathrm{pro},A}(e)$, induces a canonical isomorphism\n$$c_e:\\nu_Z^*K\\xrightarrow{\\sim}N.$$\nThere is also a canonical isomorphism in the unbounded derived category\n$$t_e:\\nu_Z^*H\\xrightarrow{\\sim}N\\otimes^L_{A_Z}B_Z,$$\nwhere the target is the pro-etale derived tensor [def-weil-derived-tensor].\nHere $t_e$ is the composite of the derived tensor pullback comparison, the constant-section-preserving identification $\\nu_Z^*B_{Z,\\mathrm{et}}\\cong B_Z$ as $A_Z$-modules, and $c_e\\otimes1$. No finite Tor-amplitude hypothesis on $M$ or $B$ is imposed, and no boundedness of $H$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AK (lemma-compare-constructible), 09AL (lemma-compare-constructible-derived), 09AF (lemma-jshriek-comparison); combined with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product) and sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact). Agent-written combination preserving returned steps 1-3 of lem-sp-supported-etale-tensor-origin."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-extension-by-zero",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-kun-derived-tensor",
+  "def-weil-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "On every stratum of each cohomology sheaf apply [lem-sf-proetale-lisse-finite-models] to its local constancy and finite geometric stalks. The same stratification now witnesses source-library fixed-module constructibility. Apply [lem-weil-pbc-fixed-module-constructible-origin] degreewise, then [lem-weil-pbc-fixed-module-bounded-constructible-origin] to hM and those sheaf origins. This supplies a bounded constructible etale L and an isomorphism of its comparison image with M. Convert the cohomology predicates using [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. This avoids transporting to intrinsic ringed coefficients or changing the coefficient universe.",
+   "uses": [
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099Y, 09AK and 09AL; existing fixed-module finite-model and derived descent declarations"
+   }
+  },
+  {
+   "text": "For every chosen L, exact fixed-module extension by zero on the etale and pro-etale sites preserves boundedness by CategoryTheory.Functor.bounded_mapDerivedCategory_obj. Apply this directly to hL and hM; constructibility and the origin isomorphism are unnecessary for these two bounds. The fixed-module exactness instances are the ones underlying [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-extension-by-zero-exact]. The existing openComparison definition applies Functor.mapDerivedCategorySquareIso to the canonical sheaf comparison [lem-cbc-proetale-extension-zero-comparison] and composes with pro-etale j_! applied to e. Thus it supplies precisely the required c_e for every origin.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; sites-modules.tex Tag 03DJ, lemma-extension-by-zero-exact; degreewise derived descent"
+   }
+  },
+  {
+   "text": "The constantModuleComparison definition reuses comparisonUpperStarConstantSheafIso, whose body is the same left-adjoint uniqueness construction from the constant-sheaf adjunction [lem-weil-pbc-constant-sheaf-maps-global-sections] and the site-comparison adjunction [def-weil-pbc-site-comparison-morphism]. The inclusion fixes the terminal scheme, so the two right adjoints are identified by evaluation on that terminal object. Its adjunction hom equivalences send pulled-back constant sections to themselves. Apply mapDerivedCategorySingleFunctor and then the degree-zero single functor to this natural isomorphism at B restricted along A to B. This is coefficientComparison: an A-linear comparison with the prescribed constant-section normalization.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-constant-sheaf-maps-global-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf; universal-property calculation for the site inclusion"
+   }
+  },
+  {
+   "text": "The existing canonical fixed-module comparison derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso constructs the unbounded tensor pullback isomorphism from the strong monoidal exact comparison via Functor.leftDerivedTensorComparison. The coefficient categories and derived tensors are [def-kun-derived-tensor] and [def-weil-derived-tensor]; exactness is [prop-weil-pbc-site-comparison-finite-level]. The existing tensorComparison definition composes this isomorphism with the image of coefficientComparison under tensor with nu_Z^*K and then the tensor image of openComparison. This is exactly the prescribed order: tensor pullback, 1 tensor beta_B, c_e tensor 1. Each factor is an isomorphism in the unbounded derived category; no Tor bound or bound on H is used. No general ringed-topos coefficient transport is needed.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-kun-derived-tensor",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY, lemma-derived-base-change, and 07A4, lemma-pullback-tensor-product; canonical unbounded K-flat comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "def-kun-derived-tensor",
+  "def-weil-derived-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y, 09AK, 09AL and 09AF; fixed-module descent and exact-functor boundedness assembled by M6, 2026-10-22. Canonical constant, open and unbounded tensor comparisons remain the existing definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible proetale complex has a bounded etale origin whose open extension and unbounded coefficient tensor pull back to the corresponding proetale complexes",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsEtale.of_comp, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.comp, Algebra.Etale.comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned algebraic etale and scheme-module restriction facts do not construct a pro-etale constructible derived origin or its supported constant-coefficient tensor comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion the etale to proetale derived comparison commutes with extension by zero and derived tensor with a constant finite coefficient ring",
+   "results": "OK: 8 hits; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned algebraic etale and scheme-module restriction facts do not construct a pro-etale constructible derived origin or its supported constant-coefficient tensor comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact etale proetale comparison of the derived tensor of an open extension by zero with a constant coefficient module before any boundedness assumption",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, Algebra.Etale.formallyEtale, RingHom.Etale, RingHom.Etale.propertyIsLocal, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned algebraic etale and scheme-module restriction facts do not construct a pro-etale constructible derived origin or its supported constant-coefficient tensor comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"mapDerivedCategory\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned algebraic etale and scheme-module restriction facts do not construct a pro-etale constructible derived origin or its supported constant-coefficient tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale.*(tensor|extension)|extension.*pro.?etale",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned algebraic etale and scheme-module restriction facts do not construct a pro-etale constructible derived origin or its supported constant-coefficient tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale.*(tensor|constructible|extension)|extension.*pro.?etale",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give constructible etale origin together with the supported unbounded derived coefficient comparison; bounded representatives and ordinary sheafification pullback are only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"mapDerivedCategory\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give constructible etale origin together with the supported unbounded derived coefficient comparison; bounded representatives and ordinary sheafification pullback are only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible proetale complex has bounded etale origin and comparison commutes with open extension by zero and unbounded derived tensor",
+   "results": "OK: 8 hits; Algebra.FormallyEtale.comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.etaleLocus_eq_compl_support, Algebra.Etale.comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give constructible etale origin together with the supported unbounded derived coefficient comparison; bounded representatives and ordinary sheafification pullback are only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible proetale complexes descend to etale complexes and their unbounded coefficient tensors agree under pullback",
+   "results": "OK: 8 hits; Algebra.Etale.exists_subalgebra_fg, SheafOfModules.sheafificationCompPullback, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.baseChange, Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give constructible etale origin together with the supported unbounded derived coefficient comparison; bounded representatives and ordinary sheafification pullback are only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse image from etale to proetale sheaves preserves extension by zero and tensor product with a constant finite coefficient module",
+   "results": "OK: 8 hits; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, Condensed.profiniteSolid, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Condensed.profiniteSolidCounit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give constructible etale origin together with the supported unbounded derived coefficient comparison; bounded representatives and ordinary sheafification pullback are only ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-supported-etale-tensor-origin",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Step 1, open-supported tensor comparison: construct bounded etale origin, descend open comparison termwise, and apply unbounded monoidal site comparison; returned item steps 1-3.",
+   "via": [
+    "lem-sp-supported-etale-tensor-origin"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-supported-constructible-origin-comparison",
+  "worker": "stage1",
+  "summary": "Four-step assembly using existing DAG nodes only: bounded finite-ring constructible origin, exact open extension and degreewise comparison, constant-section-preserving coefficient identification by universal properties, and canonical unbounded ringed tensor comparison. Statement and inherited metadata unchanged; no new nodes.",
+  "blueprint": "det-sp-reduction-direct-image, Step 1: the natural map and the open-supported coefficient tensor comparison. This item supplies bounded etale K and the unbounded comparison for H, without asserting H bounded; the parent supported-etale-tensor-origin separately treats boundedness from finite Tor amplitude.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "General finite-ring constructible origin supplies L and e without the special DVR coefficient restriction of the unit; no replacement of the unit coefficient-comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic etale extension-by-zero exactness gives boundedness and descent of the termwise comparison; the unit does not separately prove this site tool."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Generic pro-etale extension-by-zero exactness gives boundedness and descent, as required by the unit open-supported comparison."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Sheaf-level site comparison is the generic open-comparison tool needed by the unit, not an alternative coefficient-comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "why": "The general constant-sheaf universal property normalizes the coefficient identification by constant sections; no same-unit universal-property lemma is needed."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Exactness of site comparison identifies termwise inverse image with derived ringed pullback; generic site tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "General K-flat derived pullback computation identifies the actual exact site-comparison functor used in the unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic unbounded ringed-topos tensor comparison proves the unit tensor transport without a finite Tor-dimension hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-3dcb9c042",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-3dcb9c042 (reviewer sub-agent of L); spot-checked: I read the whole item, its four steps and every cited statement, plus Stacks 09AF and 07A4 (09AL through the reviewed derived-origin node). The delivery creates no new nodes and leaves the statement and stmt_deps unchanged. It carries the parent re-split's old steps 1-3 (Q10 report) without dropping any argument. Old step 1 now cites lem-weil-pbc-finite-ring-constructible-derived-origin, which states the bounded derived origin directly for any scheme and any finite ring. Step 2 uses both j_! exactness lemmas, the termwise derived functor and the natural sheaf comparison; it descends to D because the functors are exact, and c_e=j_!(e)∘a_L points ν_Z^*K→N. Step 3 builds β_B from the ν adjunction and the constant-sheaf universal property on both sites (Z is final in each), so constant sections are preserved and β is compatible with A→B. Step 4 uses unbounded 07A4 through the ringed-topoi tensor-pullback, with Lν^* equal to termwise ν^*. The composite is the t_e of the statement, with no Tor or boundedness assumption. Edge cases checked: U empty; j=id; zero ring; M=0; Z/4→F_2, where H is unbounded and no boundedness is claimed. Duplicate candidates (lem-fix-reduction-open-etale-origin, lem-sf-comparison-open-tensor-coherence, the origin node) are narrower, a different statement, or an ingredient. No SGA source is cited. I accept the declared tool_uses as generic site tools. FIX (C1/C4, one fault): step 2 claimed exactness of ν_U^*, ν_Z^* without citing anything. I added [prop-weil-pbc-site-comparison-finite-level] to its text and uses; proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.SupportedConstructibleOriginComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.SupportedConstructibleOriginComparison.supported_constructible_origin_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SupportedConstructibleOriginComparison.constantModuleComparison",
+   "AlgebraicGeometry.ProEtale.SupportedConstructibleOriginComparison.coefficientComparison",
+   "AlgebraicGeometry.ProEtale.SupportedConstructibleOriginComparison.openComparison",
+   "AlgebraicGeometry.ProEtale.SupportedConstructibleOriginComparison.tensorComparison",
+   "AlgebraicGeometry.ProEtale.SupportedConstructibleOriginComparison.supported_constructible_origin_comparison"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/SupportedConstructibleOriginComparison.lean",
+  "statement": "theorem supported_constructible_origin_comparison (A : Type (u + 1)) [CommRing A] [Finite A] {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] (M : DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} A))) (hM : _root_.DerivedCategory.TStructure.t.bounded M) (hc : ∀ q : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf U A ((_root_.DerivedCategory.homologyFunctor _ q).obj M)) : (∃ L : Etale.DerivedCategoryModule A U, _root_.DerivedCategory.TStructure.t.bounded L ∧ (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj L)) ∧ Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj L ≅ M)) ∧ (∀ L : Etale.DerivedCategoryModule A U, _root_.DerivedCategory.TStructure.t.bounded L → (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj L)) → ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj L ≅ M) → _root_.DerivedCategory.TStructure.t.bounded ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj L) ∧ _root_.DerivedCategory.TStructure.t.bounded ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The node is represented jointly by the bounded-origin theorem and the explicit canonical isomorphism definitions openComparison (c_e) and tensorComparison (t_e), valid for every chosen origin. The fixed-scalar presentation uses the recorded intrinsic constructibility predicate and the existing constant-ring realization equivalences. No Tor-amplitude assumption and no boundedness assertion for H."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d5e26d80",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Not dropped; live node lean null; only the lean field changed. Origin theorem matches the node clause by clause: bounded M with constructible cohomology via the recorded fixed-module predicate; exists bounded constructible etale L with Nonempty(nu L ≅ M); for every such pair both j_! extensions are bounded. Pro-etale j_! is the fixed-module coordinate of the recorded sfIntrinsicExtensionByZero (definitionally conjugated), so no second notion. c_e = mapDerivedCategorySquareIso of the recorded mate followed by j_!.mapIso e, direction nu_Z^*K -> N. t_e = canonical leftDerivedTensorComparison-based pullback iso, then 1⊗beta_B, then c_e⊗1, in the node's order; beta_B is leftAdjointUniq of the constant-sheaf adjunctions, fixed by constant sections; B is an A-module via restrictScalars f; no Tor or boundedness of H. Only sorry is the theorem proof; docstrings and the verbatim statement are fine; lines <=100. Edge cases checked: U empty, j=id, M=0, zero ring, Z/4->F_2. No reviewer compile (nothing changed); worker reports a clean compile. Advisory only: possibly unused RestrictScalars public import; ProEtaleSiteComparison proof import missing."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-8c4fa",
+  "group": "M6",
+  "result": "fix",
+  "landing": "20261022T152904-L-3359907",
+  "kind": "interface",
+  "note": "independent cc review: Delivered proof of supported_constructible_origin_comparison against the node lem-sp-supported-constructible-origin-comparison and its new proof_deps (finite_models_of_fixed_lisse, exists_isConstructibleSheaf_iso_comparisonUpperStar_obj, boundedConstructible_of_homology, isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf); constantModuleComparison's new body against comparisonUpperStarConstantSheafIso; unit sk-lem-sp-reduction realized (empty)"
+ }
+}

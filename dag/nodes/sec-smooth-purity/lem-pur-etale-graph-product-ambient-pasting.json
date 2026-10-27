@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-etale-graph-product-ambient-pasting",
+ "kind": "statement",
+ "title": "Proper ambient projection part of the product interchange grid",
+ "statement": "Let A be a finite commutative ring and let d1,d2 be two proper/open interchange diagrams for f:X→Y and g:Y→Z [def-pur-etale-graph-interchange-data]. Choose a side n and write m for the other side. Let F,G,H be their pairwise product presentations [lem-pur-etale-pairwise-product-graph-normalization, lem-pur-etale-graph-product-geometry]. For each presentation take its selected supporting neighborhood O_f=F.P×_{V_n}W_n, O_g=G.P×_{T_n}Y, O_h=H.P×_{P_n}W_n. Put barF=(z_f,j_f,F.p), barG=(z_g,j_g,G.p), barH=(z_h,j_h,H.p), where j is the open neighborhood inclusion and z is the product graph followed by the open inclusion of the intersection. Define a_f,a_g,a_h by the proper compositor splitting z q=a_n, the Cartesian proper/open side exchange, and the proper compositor for the ambient projection. No inverse graph triangle is included. Let N=H.P×_{P_n}V_n with open K:N→H.P, E:O_h→N induced by e_n, proper R:N→O_g induced by productP and r_n, and proper maps BV:F.P→N and BW:O_f→O_h induced by the product projections and k_m. Their B square commutes and their Q square (K,R,productP,j_g) commutes. Define barI by the inverse normalized B exchange and the normalized Q exchange, including the proper and open compositors, exactly as productInterchange [def-pur-etale-graph-product-interchange]. Then I_n;a_h=(a_f whiskered by G_n);(a_g whiskered by barF);barI. This equality contains only the proper ambient factors and no graph shrinking triangle.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), final A--F comparison; Tags 0F7C and 0F7D for vertical and horizontal pasting. Agent formalization of the ambient subgrid of the product-graph extension, not a claim that the source states this extension verbatim."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-interchange-data",
+  "lem-pur-etale-pairwise-product-graph-normalization",
+  "lem-pur-etale-graph-product-geometry",
+  "def-pur-etale-graph-product-interchange"
+ ],
+ "proof": [
+  {
+   "text": "Use the source-lift subgrid to express the identity-normalized source transport as the f-side ambientLambda, the middle graph splitter, and the inverse B lift.",
+   "uses": [
+    "lem-pur-etale-graph-ambient-source-pasting",
+    "def-pur-etale-graph-product-ambient-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the target-square subgrid to replace rawSquare followed by the composite ambientLambda with sourceTransport followed by middleTail and squareInterchange.",
+   "uses": [
+    "lem-pur-etale-graph-ambient-square-pasting",
+    "def-pur-etale-graph-product-ambient-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the isomorphism equalities on each input object. Apply the target-square equality, combine the two maps under the final functor, substitute the source-lift equality, and move the middleTail across the inverse B lift using its naturality. The associators and unitors have identity components. This gives exactly the unchanged selected-side equality, for each Boolean side.",
+   "uses": [
+    "lem-amb-natural-transformation-whisker-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-graph-ambient-source-pasting",
+  "def-pur-etale-graph-product-ambient-geometry",
+  "lem-pur-etale-graph-ambient-square-pasting",
+  "lem-amb-natural-transformation-whisker-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), final A--F comparison; Tags 0F7C and 0F7D for vertical and horizontal pasting. Agent formalization of the ambient subgrid of the product-graph extension, not a claim that the source states this extension verbatim. Factorization through the e/B source and k/Q square subgrids; the final assembly is proved by functoriality and naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of proper direct image and open extension by zero exchange under pasting squares and graph product comparisons",
+   "results": "AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app_assoc; AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app; AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'; AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_fac_assoc",
+   "date": "2026-10-26",
+   "verdict": "No exact derived product-grid pasting result; geometric and categorical tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"whisker_exchange\"",
+   "results": "CategoryTheory.Bicategory.whisker_exchange; CategoryTheory.Bicategory.whisker_exchange_assoc; CategoryTheory.MonoidalCategory.whisker_exchange; CategoryTheory.MonoidalCategory.whisker_exchange_assoc; CategoryTheory.eHom_whisker_exchange; CategoryTheory.eHom_whisker_exchange_assoc; CategoryTheory.FreeBicategory.Rel.whisker_exchange; CategoryTheory.Localization.Monoidal.whisker_exchange",
+   "date": "2026-10-26",
+   "verdict": "No exact derived product-grid pasting result; geometric and categorical tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*[Oo]pen.*[Cc]omp|[Gg]raph.*[Ii]nterchange",
+   "results": "Mathlib/Topology/MetricSpace/Polish.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact derived product-grid pasting result; geometric and categorical tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open exchange squares commute with proper projection and open shrinking of graph neighborhoods",
+   "results": "CategoryTheory.Square.commSq; AlgebraicGeometry.IsProper.instMorphismRestrict; CategoryTheory.CommSq.recOn; Opens.mayerVietorisSquare; IsOpenMap.functorNhds_obj_coe; CategoryTheory.Square.Hom.comm₁₂; CategoryTheory.Square.noConfusionType; AlgebraicGeometry.IsOpenImmersion.isPullback",
+   "date": "2026-10-26",
+   "verdict": "No exact derived product-grid pasting result; geometric and categorical tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProductRowPasting",
+  "date": "2026-10-26",
+  "group": "Y3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): the specified compactification exchange, its restriction to a base chart, and the composition comparison used before transposition; detailed compositor argument in sk-thm-sf-comp-composition and sk-prop-sf-pf-coherence. Missing comparison/interchange square when changing the graph presentations; Stacks 0F7J independence-of-choices argument. Proper ambient / graph shrinking factorization: the ambient subgrid.",
+   "via": [
+    "lem-pur-etale-graph-product-row-pasting",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphProductAmbientPasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphProductAmbientPasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphProductAmbientPasting",
+  "statement": "theorem etaleGraphProductAmbientPasting (A : Type (u + 1)) [CommRing A] [Finite A] {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} (d₁ d₂ : EtaleGraphInterchangeDiagram f g) (second : Bool) : (match second with | false => let af := EtaleGraphPresentation.ProductRow.ambientLambda d₁.sourcePresentation d₂.sourcePresentation false A let ag := EtaleGraphPresentation.ProductRow.ambientLambda (EtaleGraphPresentation.ofCompactification d₁.compactification) (EtaleGraphPresentation.ofCompactification d₂.compactification) false A let ah := EtaleGraphPresentation.ProductRow.ambientLambda d₁.compositePresentation d₂.compositePresentation false A (etaleGraphDiagramInterchange A d₁).hom ≫ ah.hom = Functor.whiskerRight af.hom ((EtaleGraphPresentation.ofCompactification d₁.compactification).functor A) ≫ Functor.whiskerLeft ((EtaleGraphInterchangeDiagram.ProductRow.First.F d₁ d₂).functor A) ag.hom ≫ (EtaleGraphInterchangeDiagram.ProductRow.First.interchange d₁ d₂ A).hom | true => let af := EtaleGraphPresentation.ProductRow.ambientLambda d₁.sourcePresentation d₂.sourcePresentation true A let ag := EtaleGraphPresentation.ProductRow.ambientLambda (EtaleGraphPresentation.ofCompactification d₁.compactification) (EtaleGraphPresentation.ofCompactification d₂.compactification) true A let ah := EtaleGraphPresentation.ProductRow.ambientLambda d₁.compositePresentation d₂.compositePresentation true A (etaleGraphDiagramInterchange A d₂).hom ≫ ah.hom = Functor.whiskerRight af.hom ((EtaleGraphPresentation.ofCompactification d₂.compactification).functor A) ≫ Functor.whiskerLeft ((EtaleGraphInterchangeDiagram.ProductRow.Second.F d₁ d₂).functor A) ag.hom ≫ (EtaleGraphInterchangeDiagram.ProductRow.Second.interchange d₁ d₂ A).hom )",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleGraphProductAmbientPasting"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T024239-L-651928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-861ca",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T065319-L-2810813",
+  "kind": "interface",
+  "note": "independent cc review: item proof against the two new subgrid lemmas (both checked true against the exchange family's Cartesian/vertical/horizontal pasting rules); geometry module diffed against the published item module (verbatim); direct importer ShrinkPasting and RowPasting compiled against the delivered modules"
+ }
+}

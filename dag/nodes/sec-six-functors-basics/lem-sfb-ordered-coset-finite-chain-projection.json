@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-ordered-coset-finite-chain-projection",
+ "kind": "statement",
+ "title": "Finite continuous ordered-coset chain projection",
+ "statement": "Let $G$ be a topological group, let $H\\subseteq G$ be an open subgroup of finite index, let $n\\geq1$, and choose $a_0,\\ldots,a_n\\in G$. Let $B_q(G)$ be the free abelian group with basis $[x_0,\\ldots,x_q]$ for all tuples in $G^{q+1}$, repetitions allowed, and $B_{-1}(G)=\\mathbf Z[\\varnothing]$, with alternating-deletion boundary $\\partial$, augmentation $\\partial[x]=[\\varnothing]$, and $\\partial[\\varnothing]=0$ [def-weil-pbc-free-module]. Let $J_q$ be the free abelian group on symbols $[(i_0,z_0),\\ldots,(i_q,z_q)]$ with $0\\leq i_0<\\cdots<i_q\\leq n$ and $z_j\\in Ha_{i_j}$, with the same boundary and augmentation; $J_{-1}=\\mathbf Z[\\varnothing]$. Write $e_q:J_q\\to B_q(G)$ for erasure of colors. For $h\\in H$ let $S^h$ be the specified ordered-join operator of [lem-sfb-ordered-join-partial-contraction], with chosen vertices $ha_i$.\nThere is a finite transversal $D$ of the right cosets $H\\backslash G$ containing $1$. The unique factorization $x=\\rho(x)s(x)$ with $\\rho(x)\\in H$, $s(x)\\in D$ defines a continuous map $\\rho:G\\to H$ satisfying $\\rho(hx)=h\\rho(x)$ for $h\\in H$. For any such transversal define homomorphisms $P_q:B_q(G)\\to J_q$ by linear extension of\n$$P_{-1}=1,\\qquad P_0[x]=[(0,\\rho(x)a_0)],\\qquad P_q[x_0,\\ldots,x_q]=S^{\\rho(x_0)}_{q-1}\\bigl(P_{q-1}(\\partial[x_0,\\ldots,x_q])\\bigr)\\quad(1\\leq q\\leq n).$$\nThen $\\partial^2=0$ on both augmented chain groups, $e$ commutes with $\\partial$, and $\\partial P_q=P_{q-1}\\partial$ for $0\\leq q\\leq n$. All $P_q$ and $A_q=e_qP_q$ are $H$-equivariant for coordinatewise left translation, and $A_{-1}=1$. For each $0\\leq q\\leq n$ the value $P_q[x]$ has an expansion as a fixed finite integer sum of colored symbols whose vertices have the form $\\rho(x_j)a_i$. Its integer coefficients, color lists and selections of the input positions $j$ do not depend on $x$; repeated terms are retained. Consequently $A_q[x]$ is a fixed finite integer sum of basis tuples obtained from continuous maps $G^{q+1}\\to G^{q+1}$. Every tuple in the expansion of $A_n[x]$ belongs to $Ha_0\\times\\cdots\\times Ha_n$. All choices and expansions are independent of coefficient spaces, and no normality of $H$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: continuous coset retraction and ordered-join chain projection; retained item proof steps 2–6 (and tuple-chain conventions in step 3). Agent-formulated, not asserted in the blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "lem-sfb-ordered-join-partial-contraction"
+ ],
+ "proof": [
+  {
+   "text": "Choose one representative of each of the finitely many right cosets $Hd$, choosing $1$ for $H$, and call the set $D$. For $x\\in Hd$, put $s(x)=d$ and $\\rho(x)=xd^{-1}\\in H$. Distinct cosets are disjoint, and $x=hd$ forces $h=xd^{-1}$, proving uniqueness. Each $Hd$ is open: right multiplication by $d$ and its inverse are continuous by the topological-group axioms. On this open set $\\rho$ is the continuous map $x\\mapsto xd^{-1}$ into the subspace $H$; for open $U\\subseteq H$, its inverse image is the union over $d\\in D$ of these open inverse images in $Hd$, hence open in $G$. If $h\\in H$, then $hx\\in Hd$ whenever $x\\in Hd$, so $\\rho(hx)=hxd^{-1}=h\\rho(x)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic auxiliary expansion: continuous right-coset retraction; not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "On tuple chains $B(G)$, deleting original positions $i<j$ in the two possible orders gives the same tuple with coefficients $(-1)^{i+j-1}$ and $(-1)^{i+j}$, which cancel. This proves $\\partial^2=0$, including degree one where the resulting tuple is empty; in degrees zero and $-1$ it is zero by definition. On $J$, square-zero is the assertion of [lem-sfb-ordered-join-partial-contraction] with $r=n+1$ and $X_i=Ha_i$. Erasure commutes with boundary since both composites give the same alternating list of erased faces; at degree zero both give $[\\varnothing]$. Erasure commutes with translation for the same coordinatewise reason.",
+   "uses": [
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic auxiliary expansion: boundaries and erasure; not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Define $T_q:B_q(G)\\to B_q(H)$ on basis tuples by $T_q[x_0,\\ldots,x_q]=[\\rho(x_0),\\ldots,\\rho(x_q)]$ and $T_{-1}=1$, extending by finite integer sums using [def-weil-pbc-free-module]. Applying $\\rho$ before or after deleting a position gives identical tuples with identical signs, so $\\partial T_q=T_{q-1}\\partial$, also at augmentation. Step 1 gives $T_q(hx)=hT_q(x)$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic auxiliary expansion: coordinatewise retraction of tuple chains; not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ordered-join-coset-comparison] to the underlying group $G$, its subgroup $H$, the given $n\\geq1$ and the $a_i$. Write $\\bar P_q:B_q(H)\\to J_q$ for its maps. The present $P_q$ equals $\\bar P_qT_q$: this is the displayed formula in degrees $-1,0$; assuming equality in degree $q-1$, the composite on $[x]$ is $S^{\\rho(x_0)}_{q-1}\\bar P_{q-1}(\\partial T_q[x])=S^{\\rho(x_0)}_{q-1}P_{q-1}(\\partial[x])$, exactly the required recursion. Thus its homomorphisms are defined by that recursion. The cited chain and equivariance identities, composed with those for $T$, give $\\partial P_q=P_{q-1}\\partial$ and $H$-equivariance in every required degree. Step 2 gives the same for $A=eP$, and $A_{-1}=1$.",
+   "uses": [
+    "lem-sfb-ordered-join-coset-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic auxiliary expansion: assembly of the specified recursion with the existing subgroup-tuple comparison; not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Take the fixed finite lists in [lem-sfb-ordered-join-coset-comparison] and substitute $h_j=\\rho(x_j)$ in its displayed expansion. Step 4 identifies the result with $P_q[x]$. The coefficients, colors and input indices are unchanged, including repeated terms. After erasure each coordinate is $\\rho(x_j)a_i$, a continuous function of $x$ by step 1 and continuity of multiplication, hence each tuple map is continuous in the product topology. At degree $n$ each color list has $n+1$ distinct increasing entries in $\\{0,\\ldots,n\\}$, hence is exactly $0,\\ldots,n$; its $i$th erased coordinate lies in $Ha_i$. All constructions use only integer chains and the fixed group data, so they are independent of coefficient spaces. No step uses normality of $H$.",
+   "uses": [
+    "lem-sfb-ordered-join-coset-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic auxiliary expansion: finite continuous expansions and top-degree rectangle; not asserted in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ordered-join-partial-contraction",
+  "def-weil-pbc-free-module",
+  "lem-sfb-ordered-join-coset-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary scalar tame-kernel expansion. The blueprint gives the proper/open direct-image route, not this chain construction. This proof reduces the existing H-tuple ordered-join comparison along the continuous coset retraction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An augmented chain map from free tuple chains to the ordered join of subgroup cosets has an equivariant continuous finite integral expansion",
+   "results": {
+    "t": "2026-10-22T06:04:01Z",
+    "tool": "leanfinder",
+    "query": "An augmented chain map from free tuple chains to the ordered join of subgroup cosets has an equivariant continuous finite integral expansion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "QuotientGroup.integral_mul_eq_integral_automorphize_mul",
+     "QuotientAddGroup.integral_mul_eq_integral_automorphize_mul",
+     "tendsto_tsum_div_pow_atTop_integral",
+     "QuotientGroup.integral_eq_integral_automorphize",
+     "MeasureTheory.IsFundamentalDomain.setIntegral_eq_tsum'",
+     "MeasureTheory.IsFundamentalDomain.setIntegral_eq_tsum",
+     "MeasureTheory.IsFundamentalDomain.setLIntegral_eq_tsum'",
+     "MeasureTheory.IsFundamentalDomain.integral_eq_tsum_of_ac"
+    ],
+    "digest": "4d72e067e563b487"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar resolutions and homotopy constructors do not give the ordered-color coset projection with continuous integral tuple formulas; Rep.barResolution source inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an H equivariant chain comparison from the augmented tuple resolution to the join of n plus one H torsors with finite continuous vertex formulas",
+   "results": {
+    "t": "2026-10-22T06:04:37Z",
+    "tool": "leansearch",
+    "query": "Construct an H equivariant chain comparison from the augmented tuple resolution to the join of n plus one H torsors with finite continuous vertex formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomotopyEquiv.mk.inj",
+     "HomotopyEquiv.mk.injEq",
+     "Homotopy.mkInductiveAux₂_add_one",
+     "HomotopyEquiv.recOn",
+     "Homotopy.mkInductiveAux₂",
+     "CategoryTheory.ProjectiveResolution.homotopyEquiv_hom_π_assoc",
+     "HomotopyEquiv.hom",
+     "homotopic"
+    ],
+    "digest": "0ac6754c56bb99d0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar resolutions and homotopy constructors do not give the ordered-color coset projection with continuous integral tuple formulas; Rep.barResolution source inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"barResolution\", \"homotopy\"",
+   "results": {
+    "t": "2026-10-22T06:04:14Z",
+    "tool": "loogle",
+    "query": "\"barResolution\", \"homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: Loogle is currently under load, please try again later.",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: loogle: Loogle is currently under load, please try again later."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"barResolution\"",
+   "results": {
+    "t": "2026-10-22T06:04:56Z",
+    "tool": "loogle",
+    "query": "\"barResolution\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Rep.barResolution",
+     "Rep.barResolution_complex",
+     "Rep.barResolution.extIso"
+    ],
+    "digest": "b30fe57367825f0e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar resolutions and homotopy constructors do not give the ordered-color coset projection with continuous integral tuple formulas; Rep.barResolution source inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "(ordered.*join|join.*ordered|coset.*chain)",
+   "results": {
+    "t": "2026-10-22T06:04:14Z",
+    "tool": "grep",
+    "query": "(ordered.*join|join.*ordered|coset.*chain)",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bar resolutions and homotopy constructors do not give the ordered-color coset projection with continuous integral tuple formulas; Rep.barResolution source inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "(ordered.*join|join.*ordered|coset.*chain|chain.*coset)",
+   "results": {
+    "t": "2026-10-23T04:17:13Z",
+    "tool": "grep",
+    "query": "(ordered.*join|join.*ordered|coset.*chain|chain.*coset)",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no ordered-join/coset-chain declaration in RepresentationTheory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A partial contraction of an ordered join induces an equivariant chain projection with continuous coset representative vertex formulas",
+   "results": {
+    "t": "2026-10-23T04:17:13Z",
+    "tool": "leansearch",
+    "query": "A partial contraction of an ordered join induces an equivariant chain projection with continuous coset representative vertex formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IndexedPartition.proj_some_index",
+     "Submodule.linearProjOfClosedCompl",
+     "DiscreteQuotient.ofLE_proj",
+     "DiscreteQuotient.ofLE_comp_proj",
+     "Profinite.NobelingProof.continuous_projRestricts",
+     "Profinite.NobelingProof.ProjRestricts_coe",
+     "InverseSystem.piLTProj",
+     "Profinite.NobelingProof.proj_comp_of_subset"
+    ],
+    "digest": "5a5cbbd18b4c14c7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern setoid projections, complementary subspaces, discrete quotients and Nobeling projections, not ordered-join chain maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.barResolution, Homotopy",
+   "results": {
+    "t": "2026-10-23T04:17:13Z",
+    "tool": "loogle",
+    "query": "Rep.barResolution, Homotopy",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no hits for the combined pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented chain map from tuple chains of a topological group to the ordered join of open subgroup cosets has a finite continuous integral expansion",
+   "results": {
+    "t": "2026-10-23T04:17:16Z",
+    "tool": "leanfinder",
+    "query": "An augmented chain map from tuple chains of a topological group to the ordered join of open subgroup cosets has a finite continuous integral expansion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "QuotientGroup.integral_mul_eq_integral_automorphize_mul",
+     "QuotientAddGroup.integral_mul_eq_integral_automorphize_mul",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "BoxIntegral.Integrable.toBoxAdditive",
+     "torusIntegral_succAbove",
+     "tendsto_integral_comp_smul_smul_of_integrable'",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "tendsto_integral_comp_smul_smul_of_integrable"
+    ],
+    "digest": "c707d36575cf5c97"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: general standard/bar resolutions, induction/coinduction or integral/approximation results do not give this continuous ordered-coset projection; RepresentationTheory/Homological/Resolution.lean lines 170-221 and 420-441 inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "(continuous.*(retract|rightTransversal|leftTransversal)|coset.*representative|barResolution)",
+   "results": {
+    "t": "2026-10-23T04:18:27Z",
+    "tool": "grep",
+    "query": "(continuous.*(retract|rightTransversal|leftTransversal)|coset.*representative|barResolution)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean"
+    ],
+    "digest": "3ffae966b6b59479"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: general standard/bar resolutions, induction/coinduction or integral/approximation results do not give this continuous ordered-coset projection; RepresentationTheory/Homological/Resolution.lean lines 170-221 and 420-441 inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A topological group retracts equivariantly onto an open subgroup using coset representatives and induces a map on augmented free homogeneous chains",
+   "results": {
+    "t": "2026-10-23T04:18:39Z",
+    "tool": "leanfinder",
+    "query": "A topological group retracts equivariantly onto an open subgroup using coset representatives and induces a map on augmented free homogeneous chains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.FiniteCyclicGroup.resolution.π",
+     "Rep.FiniteCyclicGroup.resolution.π_f",
+     "Rep.standardComplex.ε",
+     "Rep.indToCoindAux",
+     "Rep.standardComplex.εToSingle₀",
+     "Rep.standardComplex.xIso",
+     "groupHomology.inhomogeneousChains",
+     "Rep.standardComplex"
+    ],
+    "digest": "ce85aa71213b3fee"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: general standard/bar resolutions, induction/coinduction or integral/approximation results do not give this continuous ordered-coset projection; RepresentationTheory/Homological/Resolution.lean lines 170-221 and 420-441 inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-finite-evaluation-rectangle-replacement",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: continuous coset retraction and ordered-join chain projection; retained item proof steps 2–6 (and tuple-chain conventions in step 3). Agent-formulated, not asserted in the blueprint.",
+   "via": [
+    "lem-sfb-bounded-finite-evaluation-rectangle-replacement",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ordered-coset-finite-chain-projection",
+  "worker": "stage1",
+  "summary": "Retained the statement and its hypotheses. Reused the current reviewed ordered-join-coset-comparison on H-tuples rather than duplicate its algebraic induction. Constructed the finite right-coset retraction explicitly, checked its continuity and H-equivariance, and identified the required recursive P with the composite of the coordinatewise retraction and that existing comparison. Checked all augmented degrees, fixed finite expansions and top-degree rectangle. No new nodes.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images: auxiliary continuous-coset/ordered-join expansion, absent from the blueprint itself. The ancestor command returns None; the inherited from.node=null and via chain are retained. Whole-blueprint searches for coset, ordered join and chain projection find no equivalent blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-76aa949f4",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-76aa949f4 (reviewer sub-agent of L); spot-checked: Read the item in full: the statement is unchanged against live (still unsplit, with no parallel split and no repair note) and it has 5 steps and no new nodes. Read the full statements of def-weil-pbc-free-module, lem-sfb-ordered-join-partial-contraction (reviewed, Q136) and lem-sfb-ordered-join-coset-comparison (reviewed, Q157). Step 1 builds a finite right-coset transversal with 1 in it and ρ(x)=xd⁻¹ on each coset Hd. Each Hd is open because right translation is a homeomorphism, so ρ is continuous by gluing over a finite open cover, and ρ(hx)=hρ(x); normality of H is never used. Step 2 checks the sign pairing for ∂²=0 on B(G); on J, ∂²=0 is the contraction node's own clause with r=n+1 and X_i=Ha_i, and its J_q=0 for q≥r matches the item's empty J_q for q>n. Step 3 defines T as ρ applied to each coordinate; it commutes with ∂ and with the H-action. Step 4: I checked by induction that P_q=P̄_qT_q, with base case [(0,ρ(x_0)a_0)]. This gives ∂P_q=P_{q-1}∂ and H-equivariance for 0≤q≤n from the cited clauses; the comparison node's hypotheses (G, H, n≥1, any a_i) all hold. Step 5 substitutes h_j=ρ(x_j) into the comparison node's fixed-list expansion clause, so each tuple is a continuous function of x, and in top degree the colors are forced to be 0..n, which gives support in Ha_0×…×Ha_n. Small cases: for n=1, ∂P_1=P_0∂ by hand; H=G gives ρ=id; H={1} forces G finite discrete; coinciding cosets and non-normal H also work. proof_deps equal the union of the step uses. There is no cycle: only the parent cites the item. All cited statements are in the same unit sk-thm-sf-ctf-stability and there are no tool_uses. Source main-20261015 direct-images proof ¶(3) has no such construction, and the item honestly marks its proof as agent-written; no SGA is used. The parent uses only A=eP, equivariance, the expansions and top-degree support, which are exactly the item's clauses. No fixes."
+ }
+}

@@ -1,0 +1,140 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J, lemma-shriek-proper-and-open and lemma-shriek-composition"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Cartesian mate normalization and compatible triangle, with the recorded site comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian proper open derived mate computes canonical compact support compositor on etale origin objects",
+   "results": "Eight hits, including Scheme.Modules.restrictAdjunction, IsEtale.instHasOfPostcompPropertyScheme, and Condensed.profiniteSolidCounit; no derived compact-support tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "No match for either specified comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.IsEquivalence",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*[Cc]ompositor|[Cc]ompositor.*cartesian",
+   "results": "0 hits. Local rg finds the assigned module and its parent; neither supplies the restriction or candidate site square.",
+   "date": "2026-10-27",
+   "verdict": "No existing replacement theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison between etale and proetale derived compact support commutes with composition on a Cartesian proper open tower",
+   "results": "Eight hits: Algebra.Etale.comp, Algebra.FormallyEtale.comp, RingHom.Etale.stableUnderComposition, IsEtale.of_comp, IsEtale.instHasOfPostcompPropertyScheme, Scheme.Modules.restrictFunctorComp_hom_app_app, Scheme.Modules.restrictFunctorComp, IsProper.instCompScheme.",
+   "date": "2026-10-27",
+   "verdict": "No match for the derived site square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CartesianCompactSupportCompositor",
+  "date": "2026-10-27",
+  "group": "F5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "The composition identity in the sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\"; Cartesian compact-support-compositor normalization for that composition clause.",
+   "via": [
+    "lem-sf-cartesian-compact-support-compositor",
+    "lem-sf-projection-compatible-triangle-assembly"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-cartesian-tower-restriction",
+ "title": "D+ restriction of the raw Cartesian mate tower",
+ "statement": "For a finite-field datum F and a finite commutative coefficient ring A, let X,V,W,Y,B,Z be finite-type F.k-schemes (the category Spaces F of [def-sf-composition-projection-data]). Let j:X -> V, b:V -> W and i:Y -> B be open immersions, with b and i quasi-compact; let q:V -> Y, p:W -> B and s:B -> Z be proper, with b p = q i a Cartesian square. For every bounded-below etale complex E on X, write N for the exact site comparison and AP for the specified pro-etale D+ tower map of [lem-sp-finite-site-tower-paste]. Let S_E be the canonical D+ inclusion isomorphism for the source word S_s J_i S_q J_j and T_E that for the output word S_(p s) J_(j b), formed by the displayed composites of the proper and open inclusion compatibilities in CartesianTower.sourceInclusion and targetInclusion. Then inclusion(AP(E)) followed by T_E equals S_E followed by the raw alpha of [def-sf-composition-projection-data] evaluated at N(E). This assertion makes no reference to the canonical compact-support compositor or to candidate comparisons.",
+ "proof": [
+  {
+   "text": "For the Cartesian square b p = q i, its canonical clopen lift V -> W x_B Y is an isomorphism, and the clopen projector in the intrinsic properOpenAlpha is the identity. The proper-adjunction mate, transposed again under J_i adjoint to P_i, is the inverse restriction exchange followed by the inverse open unit: open normalization makes the restricted beta the identity, and the two remaining proper unit/counit pairs cancel by the triangle identities.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-mate-pasting",
+    "def-sf-ambient-proper-open-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical site/open comparison and properOpen_site_mate identify this specific adjunct with the site-transported interchange. Naturality through the open site isomorphism at j changes the witness from N(J_j E) to J_j(N E), yielding exactly GP.",
+   "uses": [
+    "lem-sp-proper-open-coefficient-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker by the proper s and paste with the canonical proper and open compositors. The D+ inclusion carries these compositors to their unbounded adjunction-normalized counterparts. On expanding the three defining squares, all internal inclusion isomorphisms cancel and leave sourceInclusion and targetInclusion on the boundary.",
+   "uses": [
+    "lem-sp-finite-site-tower-paste"
+   ],
+   "elementary": false
+  }
+ ],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-composition-projection-data",
+  "lem-sp-finite-site-tower-paste",
+  "def-sf-ambient-proper-open-calculus"
+ ],
+ "proof_deps": [
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-mate-pasting",
+  "def-sf-ambient-proper-open-calculus",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-sp-finite-site-tower-paste"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CartesianTowerRestriction",
+  "file": "lean/Sheaf/SixFunctors/CartesianTowerRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.cartesianTowerRestriction",
+  "statement": "theorem cartesianTowerRestriction\n    (F : WeilConjectures.FiniteFieldDatum.{u})\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X V W Y B Z : Spaces F}\n    (j : X ⟶ V) (b : V ⟶ W) (q : V ⟶ Y) (p : W ⟶ B) (i : Y ⟶ B) (s : B ⟶ Z)\n    [IsOpenImmersion ((geometry F).map j)] [IsOpenImmersion ((geometry F).map b)]\n    [IsOpenImmersion ((geometry F).map i)] [QuasiCompact ((geometry F).map b)]\n    [QuasiCompact ((geometry F).map i)]\n    [IsProper ((geometry F).map q)] [IsProper ((geometry F).map p)]\n    [IsProper ((geometry F).map s)]\n    (hb : b ≫ p = q ≫ i)\n    (sq : IsPullback b.hom.left q.hom.left p.hom.left i.hom.left)\n    (E : FiniteSiteTower.DE A X.obj.left) :\n    letI : IsOpenImmersion j.hom.left := ‹IsOpenImmersion ((geometry F).map j)›\n    letI : IsOpenImmersion b.hom.left := ‹IsOpenImmersion ((geometry F).map b)›\n    letI : IsOpenImmersion i.hom.left := ‹IsOpenImmersion ((geometry F).map i)›\n    letI : QuasiCompact b.hom.left := ‹QuasiCompact ((geometry F).map b)›\n    letI : QuasiCompact i.hom.left := ‹QuasiCompact ((geometry F).map i)›\n    letI : IsProper q.hom.left := ‹IsProper ((geometry F).map q)›\n    letI : IsProper p.hom.left := ‹IsProper ((geometry F).map p)›\n    letI : IsProper s.hom.left := ‹IsProper ((geometry F).map s)›\n    letI : IsOpenImmersion (j ≫ b).hom.left :=\n      mappedCompositeOpen (geo := geometry F) j b\n    letI : IsProper (p ≫ s).hom.left := mappedCompositeProper (geo := geometry F) p s\n    DerivedCategory.Plus.ι.map\n        (FiniteSiteTower.AP A j.hom.left b.hom.left p.hom.left s.hom.left i.hom.left\n          q.hom.left sq E) ≫\n      (CartesianTower.targetInclusion A (j ≫ b).hom.left (p ≫ s).hom.left\n        ((FiniteSiteTower.N A X.obj.left).obj E)).hom =\n    (CartesianTower.sourceInclusion A j.hom.left q.hom.left i.hom.left s.hom.left\n        ((FiniteSiteTower.N A X.obj.left).obj E)).hom ≫\n      (alpha (ordinary F A) j b q p i s hb).app\n        ((comparisonUpperStar (ModuleCat.{u + 1} A) X.obj.left).mapDerivedCategory.obj\n          E.obj)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CartesianTower.sourceInclusion",
+   "AlgebraicGeometry.ProEtale.CartesianTower.targetInclusion",
+   "AlgebraicGeometry.ProEtale.cartesianTowerRestriction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f2d5",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T034638-L-3669558",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f2d5",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T034638-L-3669558",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new sorry lemmas + verbatim candidateCompositor move against clone, FiniteSiteTower.paste and alpha defs; sandbox compile incl. importer ProjectionCompatibleTriangleAssembly OK; axioms OK"
+ }
+}

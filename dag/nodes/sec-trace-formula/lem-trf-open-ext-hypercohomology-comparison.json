@@ -1,0 +1,335 @@
+{
+ "id": "lem-trf-open-ext-hypercohomology-comparison",
+ "kind": "statement",
+ "title": "Open-restriction compatibility of local Ext and internal-Hom hypercohomology",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism], using its site of opens with open coverings [def-weil-pbc-sites-and-cohomology] in a common universe containing its opens and module values [def-weil-size-convention]. Let $K,L\\in D(\\mathcal O_X)$ be arbitrary objects of the unbounded derived category of module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. Put $A=R\\mathcal Hom_{\\mathcal O_X}(K,L)$ [def-pur-derived-internal-hom]. For any open $U$, $K_U,L_U$ denote termwise derived restrictions to its restricted structure sheaf. Write $H^i(U,A)=H^i(R\\Gamma(U,A))$, where $R\\Gamma(U,-)$ is unbounded derived evaluation at $U$, computed on K-injective representatives and followed by forgetting scalars [def-sfb-right-derived-functor, def-pur-kinjective-complex]. For every integer $i$ there are canonical additive isomorphisms\n$$\\alpha_U^i:H^i(U,A)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(\\mathcal O_U)}(K_U,L_U[i])$$\nwhich form an isomorphism of abelian presheaves on $X$: for each inclusion $j:W\\subseteq U$ and every $a\\in H^i(U,A)$,\n$$\\alpha_W^i(\\operatorname{res}_{U,W}a)=\\operatorname{res}^{D}_{U,W}(\\alpha_U^i(a)).$$\nHere the left restriction is induced by evaluation of a representative complex on smaller opens; the right restriction is exact derived open restriction with its canonical composition and shift isomorphisms [def-trf-ringed-derived-open-hom-restriction], applied to the pair $K,L[i]$. The comparisons are natural contravariantly in $K$ and covariantly in $L$, and compatible with successive open restrictions. No boundedness or local-freeness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DK (cohomology-lemma-section-RHom-over-U), all shifts and open-restriction naturality"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-right-derived-functor",
+  "def-pur-kinjective-complex",
+  "def-pur-derived-internal-hom",
+  "def-trf-ringed-derived-open-hom-restriction",
+  "def-trf-ringed-space-hypercohomology-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Choose complexes E,M representing K,L. On the small site of opens, choose a functorial K-injective resolution M→I, and a K-flat resolution t:P→E, using the two existence statements cited below. Set C=\\mathcal Hom^\\bullet(E,I) and B=\\mathcal Hom^\\bullet(P,I). The definition of derived internal Hom identifies QC with A, where Q is derived localization. The induced map b:C→B is a quasi-isomorphism by the well-definedness lemma, applied with s=id_I and t. The K-flat/K-injective Hom lemma makes B K-injective. Crucially, the section quasi-isomorphism lemma also says Γ(U,b) is a quasi-isomorphism for every open U; a quasi-isomorphism of sheaf complexes alone would not justify this last assertion. All these results allow unbounded complexes and apply to the commutative structure sheaf in the stipulated universe.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-kflat-resolution",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-pur-hom-complex-sections-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DK, cohomology-lemma-section-RHom-over-U, choice of resolutions; cohomology-lemma-RHom-from-K-flat-into-K-injective and cohomology-lemma-RHom-well-defined"
+   }
+  },
+  {
+   "text": "Let η_{U,C}:QΓ(U,C)→RΓ(U,QC) be the derived-evaluation unit. Its naturality for b gives a commutative square with top arrow QΓ(U,b), bottom arrow RΓ(U,Qb), and right arrow η_{U,B}. The top and bottom arrows are isomorphisms by Step 1, and η_{U,B} is an isomorphism since B is K-injective. Thus η_{U,C} is an isomorphism for every U. This uses the unit characterization of the right derived functor, not an assumption that C itself is K-injective. Concretely, take a single functorial K-injective resolution c:C→J on X. The unit is represented for every U by Γ(U,c):Γ(U,C)→Γ(U,J), and all restriction maps on RΓ(U,QC) are represented by restrictions of Γ(U,J). Hence these units commute with open restrictions: res_{U,W}Γ(U,c)=Γ(W,c)res_{U,W}.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DK, cohomology-lemma-section-RHom-over-U, computation by sections; cohomology.tex section-unbounded, derived evaluation on K-injectives"
+   }
+  },
+  {
+   "text": "For each U and integer i, apply the canonical sections comparison to E,I. It gives H^iΓ(U,C)≅Hom_{K(\\mathcal O_U)}(E_U,I_U[i]), specified on a cocycle z by the homotopy class of the shifted chain map f_z whose components are the evaluated Hom-complex projections. Restriction of I to U is K-injective by the localized-restriction lemma. Its shift I_U[i] is K-injective as well: a map from an acyclic N into I_U[i] corresponds to a map from the acyclic N[-i] into I_U, so is null homotopic. The K-injective localization lemma therefore identifies this homotopy Hom group with Hom_{D(\\mathcal O_U)}(K_U,L_U[i]). Denote the resulting map by β_U^i; its representative formula is [z]↦Q_U(f_z), with the identifications QE_U=K_U and QI_U=L_U and the canonical shift comparison understood. It is additive: the projection formula sends z+z′ to f_z+f_{z′}, and homotopy quotient and derived localization preserve sums. Define α_U^i=β_U^i∘H^i(η_{U,C})^{-1}. Both factors are isomorphisms, so this gives the asserted additive isomorphism in every integer degree.",
+   "uses": [
+    "lem-pur-hom-complex-sections-canonical-comparison",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-kinjective-complex",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DK, cohomology-lemma-section-RHom-over-U, and equation-cohomology-hom-complex; cohomology-lemma-restrict-K-injective-to-open"
+   }
+  },
+  {
+   "text": "For j:W⊆U and a degree-i cocycle z over U, the projection defining its p-th component is a map of sheaves. Its value after restriction is therefore (z^p)|_W. Consequently the shifted chain map associated with res(z) is the restriction of f_z: the signs in the shift depend only on i and the cochain degree, and restriction preserves them. The same assertion for a degree-(i−1) cochain h shows res(dh)=d(res h), so it holds on cohomology classes. In the notation of the derived-open-restriction definition, naturality of the comparison e:R_U S_j≅R_W gives\n\\[e_E^{-1};S_j(Q_U(f_z));e_{I[i]}=Q_W(f_{\\operatorname{res}z}).\\]\nHere the source and target use the canonical restriction/shift identifications; this is precisely the definition's conjugation formula for res^D, not an identification of unrelated Hom groups. Thus β_W^i(res[z])=res^D(β_U^i[z]). Step 2 gives the same commuting square for η. Since its components are invertible, composing these two squares proves α_W^i(res a)=res^D(α_U^i(a)) for every a.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pur-hom-complex-sections-canonical-comparison",
+    "def-trf-ringed-derived-open-hom-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "cohomology-equation-cohomology-hom-complex and Tag 08DL, cohomology-lemma-restriction-RHom-to-U; componentwise elaboration of open-restriction naturality"
+   }
+  },
+  {
+   "text": "For chain maps t:E′→E and s:I→I′, the map on Hom-complex cochains is z↦szt; the associated shifted chain map is s[i]∘f_z∘t. The canonical comparison and the derived-naturality lemma therefore make β contravariantly natural in E and covariantly natural in I. With the functorial resolutions fixed in Steps 1–2, both c:C→J and the induced unit maps are natural as well. Thus α is natural on pairs of representing complexes. If either representing map is a quasi-isomorphism, the well-definedness and section quasi-isomorphism lemmas invert it, and the derived restriction functors invert it by their definition. The universal property of localization consequently descends these commuting squares to arbitrary morphisms in D(\\mathcal O_X), contravariantly in K and covariantly in L. The same naturality, applied to the resolution maps M→I and to the comparison with any other resolution, shows that the comparisons so obtained agree under the canonical identifications of representatives: both send a cocycle to its localized chain map. Hence the maps are canonical, rather than dependent on E,M,I or J.",
+   "uses": [
+    "lem-pur-hom-complex-sections-canonical-comparison",
+    "lem-pur-hom-complex-sections-derived-naturality",
+    "lem-pur-rhom-well-defined",
+    "lem-pur-hom-complex-sections-quasi-iso",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "cohomology-equation-cohomology-hom-complex, cohomology-lemma-RHom-well-defined, and construction in cohomology-section-internal-hom; naturality of the displayed maps"
+   }
+  },
+  {
+   "text": "For V⊆W⊆U, restricting each component of a cochain twice gives its restriction directly from U to V. The same holds for c:C→J. Therefore the two commuting squares of Step 4 compose to the square for V⊆U; for U⊆U they are identity squares. On the derived-Hom side the comparison maps e are induced by these same composition identifications of restriction functors, so the middle e and e^{-1} cancel in the two successive conjugations. This proves compatibility with successive restrictions. Each β is additive and each η is an additive isomorphism, so the α_U^i assemble to an isomorphism of abelian presheaves. No step imposed boundedness or local freeness.",
+   "uses": [
+    "def-trf-ringed-derived-open-hom-restriction",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "cohomology-equation-cohomology-hom-complex and cohomology-lemma-restriction-RHom-to-U, successive open restrictions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-hom-complex-sections-quasi-iso",
+  "def-sfb-right-derived-functor",
+  "lem-pur-hom-complex-sections-canonical-comparison",
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "def-trf-ringed-derived-open-hom-restriction",
+  "lem-pur-hom-complex-sections-derived-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DK (cohomology-lemma-section-RHom-over-U), cohomology-equation-cohomology-hom-complex, and Tag 08DL (cohomology-lemma-restriction-RHom-to-U), with componentwise naturality spelled out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "RHom|internalHom.*[Ss]ection|[Ss]ection.*internalHom",
+   "results": "{\"t\": \"2026-10-22T06:43:06Z\", \"tool\": \"grep\", \"query\": \"RHom|internalHom.*[Ss]ection|[Ss]ection.*internalHom\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\"], \"digest\": \"7430932a850eabeb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf Hom and section restriction, not all-degree unbounded local derived Hom with canonical open-restriction compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of sheaves restriction to open subsets computed by the same K-injective complex",
+   "results": "{\"t\": \"2026-10-22T06:43:06Z\", \"tool\": \"leansearch\", \"query\": \"Derived internal Hom of sheaves restriction to open subsets computed by the same K-injective complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.Opens.ι_app\", \"CategoryTheory.sheafHom\", \"CategoryTheory.sheafHom'\", \"AlgebraicGeometry.Scheme.Modules.Hom.app\", \"HomologicalComplex.restriction\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\"], \"digest\": \"8ce1da5a63f18021\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf Hom and section restriction, not all-degree unbounded local derived Hom with canonical open-restriction compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homComplex\"",
+   "results": "{\"t\": \"2026-10-22T06:43:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"homComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf Hom and section restriction, not all-degree unbounded local derived Hom with canonical open-restriction compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded complexes of module sheaves on a ringed space derived sections of internal Hom are naturally the local derived Hom complex compatibly with open restriction",
+   "results": "{\"t\": \"2026-10-22T06:43:16Z\", \"tool\": \"leanfinder\", \"query\": \"For unbounded complexes of module sheaves on a ringed space derived sections of internal Hom are naturally the local derived Hom complex compatibly with open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"SheafOfModules.sectionsMap\", \"SheafOfModules.unitHomEquiv\", \"SheafOfModules.sectionsFunctor_map\"], \"digest\": \"9c45f4f9827d4bc1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf Hom and section restriction, not all-degree unbounded local derived Hom with canonical open-restriction compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*internal.*hom|internal.*hom.*derived|RHom",
+   "results": "{\"t\": \"2026-10-22T06:43:28Z\", \"tool\": \"grep\", \"query\": \"derived.*internal.*hom|internal.*hom.*derived|RHom\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Symmetric.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Symmetric.lean\"], \"digest\": \"b03cb1910c9168a0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf Hom and section restriction, not all-degree unbounded local derived Hom with canonical open-restriction compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural isomorphism from derived sections of sheaf Hom to the derived complex of morphisms commutes with restrictions to smaller opens",
+   "results": "{\"t\": \"2026-10-22T06:43:39Z\", \"tool\": \"leanfinder\", \"query\": \"The natural isomorphism from derived sections of sheaf Hom to the derived complex of morphisms commutes with restrictions to smaller opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes_map_assoc\", \"CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq\", \"CategoryTheory.Sheaf.ΓRes_map\", \"TopCat.Sheaf.extend_hom_app\", \"CategoryTheory.Sheaf.ΓRes_naturality\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm\", \"CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm\"], \"digest\": \"6e970e915719ecdd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf Hom and section restriction, not all-degree unbounded local derived Hom with canonical open-restriction compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|derivedInternalHom|isKInjective_homComplex",
+   "results": "{\"t\": \"2026-10-23T12:30:00Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|derivedInternalHom|isKInjective_homComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern single sheaves, ordinary sections, or external cochain Hom; none states the unbounded ringed-space internal-Hom comparison with canonical open restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local Ext groups equal cohomology of derived sections of internal Hom naturally for open restrictions",
+   "results": "{\"t\": \"2026-10-23T12:30:01Z\", \"tool\": \"leansearch\", \"query\": \"Local Ext groups equal cohomology of derived sections of internal Hom naturally for open restrictions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.Abelian.Ext.mk₀\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.Abelian.Ext\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extMk.congr_simp\", \"AlgebraicGeometry.Scheme.Modules.hom_ext\"], \"digest\": \"6951dede8c47a269\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern single sheaves, ordinary sections, or external cochain Hom; none states the unbounded ringed-space internal-Hom comparison with canonical open restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CochainComplex",
+   "results": "{\"t\": \"2026-10-23T12:30:01Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CochainComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern single sheaves, ordinary sections, or external cochain Hom; none states the unbounded ringed-space internal-Hom comparison with canonical open restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded complexes of sheaves of modules on a ringed space hypercohomology of derived internal Hom computes morphisms in the derived category and commutes with restriction to open subsets",
+   "results": "{\"t\": \"2026-10-23T12:30:02Z\", \"tool\": \"leanfinder\", \"query\": \"For unbounded complexes of sheaves of modules on a ringed space hypercohomology of derived internal Hom computes morphisms in the derived category and commutes with restriction to open subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"LightCondensed.ihom_map_val_app\"], \"digest\": \"c84712c3551f75b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern single sheaves, ordinary sections, or external cochain Hom; none states the unbounded ringed-space internal-Hom comparison with canonical open restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex|cohomologyPresheaf|unitHomEquiv",
+   "results": "{\"t\": \"2026-10-23T12:30:43Z\", \"tool\": \"grep\", \"query\": \"homComplex|cohomologyPresheaf|unitHomEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\"], \"digest\": \"0f9460e60e3a0f38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern single sheaves, ordinary sections, or external cochain Hom; none states the unbounded ringed-space internal-Hom comparison with canonical open restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of the section complex of sheaf Hom identifies with morphisms to shifts in the derived category naturally under open restriction",
+   "results": "{\"t\": \"2026-10-23T12:30:45Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of the section complex of sheaf Hom identifies with morphisms to shifts in the derived category naturally under open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk\", \"CategoryTheory.sheafHomSectionsEquiv\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.Sheaf.ΓHomEquiv\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom\"], \"digest\": \"ed3ec2cc683102ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern single sheaves, ordinary sections, or external cochain Hom; none states the unbounded ringed-space internal-Hom comparison with canonical open restriction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-basis-local-ext-sheaf",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting BBD descent component of lem-trf-local-term-locality: the internal-Hom translation in the last paragraph of the proof of Tag 0D66, part (2); returned item Step 1.",
+   "via": [
+    "lem-trf-derived-basis-local-ext-sheaf",
+    "lem-trf-derived-basis-local-hom-glue",
+    "lem-trf-derived-basis-bbd-descent",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-open-ext-hypercohomology-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the full unbounded statement. Assembled existing resolution, section-comparison and K-injective localization nodes; wrote the open-restriction square on cocycle representatives and descended naturality through localization. No new nodes.",
+  "blueprint": "The ancestry names lem-trf-local-term-locality, Supporting BBD descent component: the internal-Hom translation in the last paragraph of Tag 0D66(2), via lem-trf-derived-basis-local-ext-sheaf. The current latest local-term proof no longer contains that BBD digression; this is a generic comparison needed by the existing descendant, proved directly from Stacks 08DK and the Hom-complex formula. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site resolution or Hom-complex comparison used as a black box for the explicit local Ext comparison; this trace-formula unit supplies no such homological-algebra tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site resolution or Hom-complex comparison used as a black box for the explicit local Ext comparison; this trace-formula unit supplies no such homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic ringed-site resolution or Hom-complex comparison used as a black box for the explicit local Ext comparison; this trace-formula unit supplies no such homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic ringed-site resolution or Hom-complex comparison used as a black box for the explicit local Ext comparison; this trace-formula unit supplies no such homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-hom-complex-sections-quasi-iso",
+    "why": "Generic ringed-site resolution or Hom-complex comparison used as a black box for the explicit local Ext comparison; this trace-formula unit supplies no such homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-hom-complex-sections-canonical-comparison",
+    "why": "Generic ringed-site resolution or Hom-complex comparison used as a black box for the explicit local Ext comparison; this trace-formula unit supplies no such homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic ringed-site resolution or Hom-complex comparison used as a black box for the explicit local Ext comparison; this trace-formula unit supplies no such homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-hom-complex-sections-derived-naturality",
+    "why": "Generic ringed-site resolution or Hom-complex comparison used as a black box for the explicit local Ext comparison; this trace-formula unit supplies no such homological-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-hom-complex-sections-quasi-iso",
+  "lem-pur-hom-complex-sections-canonical-comparison",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-hom-complex-sections-derived-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-3273053dc",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-3273053dc (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and the 15 cited statements in full against Stacks cohomology.tex 08DK (l.10581, lemma-section-RHom-over-U) and 08DL (l.10640). The delivery adds no new nodes. The statement is byte-identical to live, which is still unsplit. proof_deps equals the union of the step uses, and nothing cites SGA. Step 1 builds C=Hom(E,I) and B=Hom(P,I) with P K-flat. It applies rhom-well-defined with s=id_I and t:P→E, hom-kflat-into-kinjective (B is K-injective) and hom-complex-sections-quasi-iso (Γ(U,b) is a quasi-iso for every U). Step 2 uses the naturality square of the unit η (def-sfb-right-derived-functor) to show η_C is an isomorphism even though C need not be K-injective. Step 3 uses the canonical-comparison formula, K-injectivity of I|_U and of its shift (also for negative i), and kinjective-hom-derived; this gives an additive isomorphism α in every degree. Step 4 is an elementary restriction square. The p-th projection is a sheaf map, and the e-conjugation formula of def-trf-ringed-derived-open-hom-restriction applies; Lean `res` = overFunctor in both nodes. Step 5 gets naturality from (szt)^p=s z^p t, then descends through the localization Ch^op×Ch→D^op×D. Step 6: successive restrictions compose and e/e^{-1} cancel. Edge cases: U=∅, zero K or L, W=U, and a one-point space, which gives H^i RHom_R(K,L)=Hom_D(K,L[i]). The duplicate search found only degree-0 special tools (pur-rhom-into-kinjective-local, pur-localized-hom-complex-homotopy) and tensor/evaluation slice comparisons. I accept the eight tool_uses as generic ringed-site homological algebra. The blueprint ancestry is inherited and unchanged. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenExtHypercohomologyComparison",
+  "declaration": "AlgebraicGeometry.openExt_hypercohomology_comparison",
+  "declarations": [
+   "AlgebraicGeometry.localDerivedExt",
+   "AlgebraicGeometry.internalHomHypercohomology",
+   "AlgebraicGeometry.localDerivedExtRestriction",
+   "AlgebraicGeometry.openExt_hypercohomology_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenExtHypercohomologyComparison.lean",
+  "statement": "theorem openExt_hypercohomology_comparison (i : ℤ) : ∃ α : ∀ (K L : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (U : Opens X), ((internalHomHypercohomology X i).obj (op K, L)).obj (op U) ≃+ localDerivedExt X K L i U, (∀ (K L : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (W U : Opens X) (j : W ⟶ U) (a : ((internalHomHypercohomology X i).obj (op K, L)).obj (op U)), α K L W (((internalHomHypercohomology X i).obj (op K, L)).map j.op a) = localDerivedExtRestriction X i j (α K L U a)) ∧ (∀ (K' K L L' : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (t : K' ⟶ K) (s : L ⟶ L') (U : Opens X) (a : ((internalHomHypercohomology X i).obj (op K, L)).obj (op U)), α K' L' U (((internalHomHypercohomology X i).map (t.op, s)).app (op U) a) = (SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.map t ≫ α K L U a ≫ (shiftFunctor _ i).map ((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.map s)) ∧ (∀ (K L : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (V W U : Opens X) (k : V ⟶ W) (j : W ⟶ U) (a : ((internalHomHypercohomology X i).obj (op K, L)).obj (op U)), localDerivedExtRestriction X i k (localDerivedExtRestriction X i j (α K L U a)) = localDerivedExtRestriction X i (k ≫ j) (α K L U a))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All-degree unbounded additive comparison with explicit open restriction, two-variable derived naturality, and successive restrictions. Reuses ringedSpaceHypercohomologyPresheaf owned by def-trf-ringed-space-hypercohomology-presheaf and canonical derivedOpenHomRestriction; the proof docstring specifies the canonical cocycle construction. Repair of H2 in returned delivery 3cf63b51d89c: no theorem dependency is cited only for auxiliary definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e58ea841",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after 3cf63b51 H2 return. H2 repaired: internalHomHypercohomology now = derivedInternalHom ⋙ RingedSpace.ringedSpaceHypercohomologyPresheaf owned by def node def-trf-ringed-space-hypercohomology-presheaf (reviewed+reviewed_lean pass; node+module present in delivery tree), cited in stmt_deps; no theorem cited for defs. Node diff vs live: only lean record + that stmt_dep; statement/proof unchanged; lean.statement verbatim in file. Clause check OK: RingedSpace, free w, unbounded K L, ≃+ for all i:ℤ, restriction square = derivedOpenHomRestriction on (K,L[i]) conjugated by commShiftIso, naturality t.op/s with correct variance, successive restrictions; edge cases U=∅, K/L=0, i any sign, W=U, one-point. No hollow defs, sorry only, docstrings with 08DK/08DL + blueprint, report sections present. Advisory: α existential (−α also satisfies), canonicity rests on docstring. No compile (no changes)."
+ }
+}

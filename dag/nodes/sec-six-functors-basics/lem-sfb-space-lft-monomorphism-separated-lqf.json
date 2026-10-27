@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-space-lft-monomorphism-separated-lqf",
+ "kind": "statement",
+ "title": "Locally finite type monomorphisms of algebraic spaces into schemes are separated and locally quasi-finite",
+ "statement": "Let $S$ and $T$ be schemes [def-pc-scheme], with $T$ over $S$, in the universes of [def-weil-size-convention]. Let $X$ be an algebraic space over $S$ [def-trf-algebraic-space] and let $f:X\\to h_T$ be an $S$-morphism, where $h_T(H)=\\operatorname{Mor}_S(H,T)$. Assume $f$ is a monomorphism: $X(H)\\to h_T(H)$ is injective for every $S$-scheme $H$. Assume $f$ is locally of finite type in the chartwise sense: for every representable etale map $h_V\\to X$ from a scheme $V$, the composite $V\\to T$ is locally of finite type [def-weil-finite-type-morphism]. Then $f$ is separated, meaning that its diagonal $X\\to X\\times_{h_T}X$ becomes a closed immersion after every scheme base change [def-weil-closed-immersion], and $f$ is chartwise locally quasi-finite: for every such chart $V\\to X$, the composite $V\\to T$ is locally quasi-finite [pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0463 (lemma-monomorphism-loc-finite-type-loc-quasi-finite), specialized to a scheme target; chartwise local finite type and local quasi-finiteness are the conventions of the finite-type and quasi-finite sections."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "For every $S$-scheme $H$, a pair $(x_1,x_2)$ in $(X\\times_{h_T}X)(H)$ has $f(x_1)=f(x_2)$, hence $x_1=x_2$ by monicity. The inverse to the diagonal is $(x_1,x_2)\\mapsto x_1$, naturally in $H$. Explicitly, a scheme test $h_W\\to X\\times_{h_T}X$ is a pair $(u,v)\\in X(W)^2$ with $f(u)=f(v)$, so $u=v$. The pullback of the diagonal is represented by $W$: on an $S$-scheme $H$, a map $g:H\\to W$ has the unique compatible section $g^*u=g^*v$ of $X(H)$. Its projection to $W$ is the identity. By [def-weil-closed-immersion] this is a closed immersion: the whole space is closed and the structure-sheaf map is the identity. Thus $f$ is separated.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0463, separatedness sentence; elementary diagonal argument underlying lemma-monomorphism-separated"
+   }
+  },
+  {
+   "text": "Fix an arbitrary representable etale map $e:h_V\\to X$ from a scheme, and write $q:V\\to T$ for $f e$. It is locally of finite type by the hypothesis. We prove directly that $q$ is formally unramified. Let $i:H\\hookrightarrow H^{\\prime}$ be an affine first order thickening over $T$, and let $a,b:H^{\\prime}\\to V$ be two lifts over $T$ of the same $H\\to V$. Since both are over $T$, $f(e a)=q a=q b=f(e b)$ in $h_T(H^{\\prime})$; monicity on $H^{\\prime}$ gives $e a=e b=:c$ as sections of $X(H^{\\prime})$. By the representable etale condition in [def-trf-algebraic-space], $P=h_{H^{\\prime}}\\times_X h_V$ is a scheme and $p:P\\to H^{\\prime}$ is etale. The maps $s_a=(\\mathrm{id},a)$ and $s_b=(\\mathrm{id},b)$ satisfy $p s_a=p s_b=\\mathrm{id}_{H^{\\prime}}$ and $s_a i=s_b i$, so they are lifts of the same $H\\to P$ over the base scheme $H^{\\prime}$. By [def-weil-etale-morphism], $p$ is unramified; [lem-weil-pbc-unramified-formally-unramified] gives uniqueness of such lifts, so these sections are equal. The projection $r:P\\to V$ satisfies $r s_a=a$ and $r s_b=b$, so $a=b$. Here the thickening is also over the base $H^{\\prime}$ via $i$ and $\\mathrm{id}_{H^{\\prime}}$, exactly as required by the uniqueness theorem. This proves the affine lifting condition of [def-weil-pbc-formally-unramified-morphism].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-formally-unramified",
+    "def-weil-pbc-formally-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HE (lemma-unramified-formally-unramified); elementary uniqueness-of-lifts argument for the chart of Tag 0463"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-lft-formally-unramified-unramified] to the scheme morphism $q:V\\to T$: its locally finite type hypothesis is the hypothesis of the item for this chart, and its formal unramifiedness was proved in step 2. Hence $q$ is unramified.",
+   "uses": [
+    "lem-weil-pbc-lft-formally-unramified-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HE (lemma-unramified-formally-unramified), (2) implies (1)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-unramified-quasi-finite-at-points], $q$ is quasi-finite at every point of $V$, hence locally quasi-finite in the exact affine-neighbourhood sense required. The representable etale map $h_V\\to X$ was arbitrary, so this proves chartwise local quasi-finiteness and completes the two conclusions.",
+   "uses": [
+    "lem-weil-pbc-unramified-quasi-finite-at-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V5 (lemma-unramified-quasi-finite)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-unramified-formally-unramified",
+  "def-weil-pbc-formally-unramified-morphism",
+  "lem-weil-pbc-lft-formally-unramified-unramified",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0463; chart proof replaced by the elementary formal-unramified lifting argument, with More on Morphisms Tag 02HE and Morphisms Tag 02V5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|monomorphism.*quasi.finite|[Mm]ono.*[Ll]ocally[Oo]f[Ff]inite[Tt]ype",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern morphisms of schemes; IsSeparated.isSeparated_of_mono at Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:61 proves only the scheme separatedness clause. QuasiFinite.lean:16-35 and 43-70 concern schemes, with a different ring-theoretic LocallyQuasiFinite convention. None treats a possibly non-schematic algebraic-space source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monomorphism of algebraic spaces locally of finite type is separated and locally quasi-finite",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isSeparated_of_injective, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern morphisms of schemes; IsSeparated.isSeparated_of_mono at Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:61 proves only the scheme separatedness clause. QuasiFinite.lean:16-35 and 43-70 concern schemes, with a different ring-theoretic LocallyQuasiFinite convention. None treats a possibly non-schematic algebraic-space source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Mono\", \"LocallyOfFiniteType\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern morphisms of schemes; IsSeparated.isSeparated_of_mono at Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:61 proves only the scheme separatedness clause. QuasiFinite.lean:16-35 and 43-70 concern schemes, with a different ring-theoretic LocallyQuasiFinite convention. None treats a possibly non-schematic algebraic-space source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type monomorphism of algebraic spaces is separated and locally quasi-finite",
+   "results": "OK 8 hit(s): AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern morphisms of schemes; IsSeparated.isSeparated_of_mono at Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:61 proves only the scheme separatedness clause. QuasiFinite.lean:16-35 and 43-70 concern schemes, with a different ring-theoretic LocallyQuasiFinite convention. None treats a possibly non-schematic algebraic-space source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space mapping monomorphically and locally of finite type into a scheme has separated locally quasi-finite structure morphism",
+   "results": "OK 8 hit(s): AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.IsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern morphisms of schemes; IsSeparated.isSeparated_of_mono at Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:61 proves only the scheme separatedness clause. QuasiFinite.lean:16-35 and 43-70 concern schemes, with a different ring-theoretic LocallyQuasiFinite convention. None treats a possibly non-schematic algebraic-space source."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|monomorphism.*quasi.finite|isSeparated_of_mono",
+   "results": "OK 1 hit(s): Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: all hits are scheme morphisms, not arbitrary algebraic-space sources; read Separated.lean:61 and QuasiFinite.lean:16-70. No algebraic-space declaration in the project source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monomorphism of algebraic spaces locally of finite type is separated and locally quasi-finite",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isSeparated_of_injective, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: all hits are scheme morphisms, not arbitrary algebraic-space sources; read Separated.lean:61 and QuasiFinite.lean:16-70. No algebraic-space declaration in the project source."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, CategoryTheory.Mono",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: all hits are scheme morphisms, not arbitrary algebraic-space sources; read Separated.lean:61 and QuasiFinite.lean:16-70. No algebraic-space declaration in the project source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space subfunctor of a scheme has locally quasi-finite scheme charts if its morphism is locally of finite type",
+   "results": "OK 8 hit(s): AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: all hits are scheme morphisms, not arbitrary algebraic-space sources; read Separated.lean:61 and QuasiFinite.lean:16-70. No algebraic-space declaration in the project source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type monomorphism of algebraic spaces into a scheme is separated and locally quasi-finite",
+   "results": "OK 8 hit(s): AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: all hits are scheme morphisms, not arbitrary algebraic-space sources; read Separated.lean:61 and QuasiFinite.lean:16-70. No algebraic-space declaration in the project source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-sheaf-space-atlas-bootstrap",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Passage from trivial geometric level stabilizers to an algebraic space on all test schemes, before identifying the coarse scheme. Sublemma: the algebraic-space recognition step after constructing the sheaf of isomorphism classes and checking its atlas. Strictly smaller geometric input: Stacks 0463 applied to the relation monomorphism into the scheme U times_S U, in the scheme-atlas specialization of the bootstrap reduction.",
+   "via": [
+    "lem-sfb-etale-sheaf-space-atlas-bootstrap",
+    "lem-sfb-dm-geometric-inertia-trivial",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-lft-monomorphism-separated-lqf",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved separatedness by the sectionwise inverse to the diagonal. For every representable etale scheme chart, proved formal unramifiedness of its composite by monicity and uniqueness of lifts for the etale pullback scheme. Existing 02HE and 02V5 nodes then give local quasi-finiteness. No new nodes; all scheme, chart and infinitesimal hypotheses checked. Returned delivery repaired against the current unsplit DAG: all seven cited statements reread and their quotes revalidated; the base and equalities in the infinitesimal uniqueness application are explicit, and step 2 is marked non-elementary because it invokes the cited theorem. Latest return 0f9f5acb9f3 repaired against the current unsplit live node: step 1 now constructs the diagonal pullback on every scheme test, and step 2 writes the equality in h_T(H-prime) before applying monicity. All current cited statements and exact quotations have been rechecked; no statement or dependency changes are needed. Return b09b6e0f219 repaired on 2026-10-23: initial rebased dry run 2a0e52bbbb3 passed; all seven current citation files have the same hashes as the previous inspection. The infinitesimal step now names the projection to V and its two composites, and explicitly equips the thickening with its H-prime base maps. No statement, citation or unit-route change is needed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Passage from trivial geometric level stabilizers to an algebraic space on all test schemes, before identifying the coarse scheme. Sublemma: the algebraic-space recognition step after constructing the sheaf of isomorphism classes and checking its atlas. Strictly smaller geometric input: Stacks 0463 applied to the relation monomorphism into the scheme U times_S U, in the scheme-atlas specialization of the bootstrap reduction. The four steps discharge precisely the separated locally quasi-finite input, without replacing any unit step. Inherited null nearest-blueprint ancestry is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme unramified-implies-locally-quasi-finite theorem (02V5), applied to each chart after verifying unramifiedness. No unit-local node supplies this foundational implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-615276e3e",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-615276e3e (reviewer sub-agent of L); spot-checked: Fourth delivery with 0 new nodes and no fixes. Against the previous head b09b6e0f219f, the statement, stmt_deps, proof_deps, source and steps 1, 3 and 4 are identical. The only change is in step 2, which now names the projection r:P→V (r s_a=a, r s_b=b) and says the thickening is over H′ via i and id. The statement matches Stacks 0463 (spaces-morphisms.tex:5361-5390) with target h_T and is not weakened. Step 1: since f is a monomorphism, the diagonal is an isomorphism; its pullback to any scheme W is id_W, which is a closed immersion by def-weil-closed-immersion. Step 2: monicity on H′ gives ea=eb=c. P=h_{H′}×_X h_V is a scheme and p:P→H′ is étale, hence unramified. The sections s_a=(id,a) and s_b=(id,b) are lifts over H′ that agree on H, so lem-weil-pbc-unramified-formally-unramified (any first-order thickening, base H′, structure map id) gives s_a=s_b, and therefore a=b. Step 3: lem-weil-pbc-lft-formally-unramified-unramified (02HE) applies with lft from the chart hypothesis. Step 4: lem-weil-pbc-unramified-quasi-finite-at-points (02V5) gives exactly pqf-def-quasifinite (1)/(2). I accepted the tool use of the generic 02V5 node. Edge cases (empty source, identity, closed immersion, no qc or separated-base hypothesis) need no extra assumptions. No SGA, no duplicates, no repair note for the item. Maintainer: the earlier landing refusals were the unpromoted side completion, not the mathematics."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceLftMonomorphismSeparatedLqf",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.separated_and_chartwise_isLocallyQuasiFinite_of_lft_monomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceLftMonomorphismSeparatedLqf.lean",
+  "statement": "theorem separated_and_chartwise_isLocallyQuasiFinite_of_lft_monomorphism {S : Scheme.{u}} (T : Over S) (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T) (hmono : ∀ H : Over S, Function.Injective (f.app (op H))) (hft : ∀ (V : Over S) (e : yoneda.obj V ⟶ X.obj.obj), IsEtale e → LocallyOfFiniteType (yoneda.preimage (e ≫ f)).left) : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal f) ∧ ∀ (V : Over S) (e : yoneda.obj V ⟶ X.obj.obj), IsEtale e → Scheme.Hom.IsLocallyQuasiFinite (yoneda.preimage (e ≫ f)).left",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da44cb093",
+  "group": "NL",
+  "result": "pass",
+  "note": "The single sorry theorem matches node lem-sfb-space-lft-monomorphism-separated-lqf (Stacks 0463, scheme target) clause by clause. Monomorphism is sectionwise injectivity on Over S. Charts are AlgebraicSpace.IsEtale (representable étale) with LocallyOfFiniteType of yoneda.preimage (e ≫ f). Separatedness is IsRepresentableWith IsClosedImmersion on pullback.diagonal f, the project convention. The second conclusion is Scheme.Hom.IsLocallyQuasiFinite (Stacks 01TD). There is one arbitrary universe u, no extra instances or assumptions, and edge cases are covered. The node differs from live only in lean, lean.statement matches the file verbatim, there are no new nodes or dependency records, and there is no duplicate in the project or Mathlib. Docstrings carry the source place, the blueprint id and all 4 proof steps. Worker report and Second reading sections are present. No fixes, so no compile."
+ }
+}

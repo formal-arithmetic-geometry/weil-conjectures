@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-picard-space-curves-smooth",
+ "kind": "statement",
+ "title": "Representability and smoothness of the Picard space of a relative curve",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:C\\to S$ be proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] and of finite presentation [def-sbc-locally-finite-presentation], with fibres of dimension at most one. Suppose the canonical map $\\mathcal O_T\\to(f_T)_*\\mathcal O_{C_T}$ is an isomorphism for every $S$-scheme $T$, where $C_T=C\\times_ST$ [def-pc-base-change]. The relative Picard fppf sheaf $P=\\operatorname{Pic}_{C/S}$ [sk-def-picard-pic] is represented by a commutative group algebraic space [def-trf-algebraic-space] over $S$. The map $P\\to S$ is smooth, quasi-separated and locally of finite presentation, and its diagonal is an immersion. The group law is induced by tensor product of invertible modules [def-sc-invertible-module]. For algebraic spaces, smoothness and local finite presentation are tested on etale scheme charts; quasi-separated means that the diagonal is quasi-compact, and the immersion assertion is about the representable diagonal.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D2C, proposition-pic-functor; Tag 0D2D, lemma-diagonal-pic; literature/stacks-project/moduli.tex Tag 0DNI, lemma-pic-functor-qs-lfp, and Tag 0DPK, lemma-pic-functor-curves-smooth."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "sk-def-picard-pic",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-picard-stack-curve-geometry] to $f:C\\to S$. Its properness, flatness and finite presentation are precisely the stated hypotheses, and the fibre dimension bound supplies smoothness. Thus the category $\\mathcal B_f$ of line bundles (retaining all automorphisms) is an algebraic stack smooth over $S$. This does not yet assert representability of its isomorphism-class sheaf.",
+   "uses": [
+    "lem-sfb-picard-stack-curve-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DPJ, lemma-pic-curves-smooth; quot.tex Tag 0D04, proposition-pic"
+   }
+  },
+  {
+   "text": "For $L$ on $C_T$, a local trivialization identifies an endomorphism with multiplication by a local function. These functions agree on overlaps, so $\\operatorname{Aut}(L)=\\Gamma(C_T,\\mathcal O_{C_T})^\\times$. The assumed canonical isomorphism of structure sheaves identifies this naturally with $\\Gamma(T,\\mathcal O_T)^\\times$. Consequently $I_{\\mathcal B_f/S}\\to\\mathcal B_f$ pulls back at every object over $T$ to $\\mathbf G_{m,T}\\to T$. On $T=\\operatorname{Spec}A$ this is $\\operatorname{Spec}(A[z,w]/(zw-1))\\to\\operatorname{Spec}A$, of finite presentation. For a square-zero surjection $R'\\to R$, lift a unit and its inverse to $a,b\\in R'$. Write $ab=1+i$ with $i^2=0$; then $a$ is invertible with inverse $b(1-i)$. This lifts every map from an affine first-order thickening, proving formal smoothness and hence smoothness by [def-sbc-smooth-morphisms]. Smoothness implies flatness and local finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. All these identifications commute with base change, so the inertia projection has the hypotheses of the flat-inertia quotient theorem.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-affine-spectrum",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "lemma-pic-inertia; examples-stacks.tex example-inertia-stack-of-picard; explicit square-zero unit lift"
+   }
+  },
+  {
+   "text": "By [lem-sfb-flat-inertia-algebraic-space-quotient], the sheaf $Q=(T\\mapsto\\operatorname{Pic}(C_T))^{\\mathrm{fppf}}$ is an algebraic space smooth over $S$. Use the big site within a containing universe as in [def-pc-fppf-site]. The sheafification unit is locally bijective by [lem-cbc-set-presheaf-sheafification-local-bijection]: its associated-sheaf map is an isomorphism by the adjunction identities of [def-weil-pbc-sheafification]. Thus sheaf sections locally have presheaf representatives and equality of their images is local equality. Identify $Q$ with $P$ of [sk-def-picard-pic]: every bundle pulled back from $T$ is trivial after a Zariski covering of $T$. Thus the maps from the presheaves $\\operatorname{Pic}(C_T)$ and $\\operatorname{Pic}(C_T)/f_T^*\\operatorname{Pic}(T)$ have the same sheafification: locally lift a quotient class, and trivialize any base bundle witnessing a difference. This proves local surjectivity and local injectivity of the presheaf quotient map, so the same cited local-bijection criterion gives the isomorphism of sheafifications. The generic quotient theorem applies over arbitrary $S$ and does not assume a rational section. Since smooth scheme charts are locally of finite presentation by [def-sbc-smooth-morphisms], $P\\to S$ is locally of finite presentation in the convention of the statement.",
+   "uses": [
+    "lem-sfb-flat-inertia-algebraic-space-quotient",
+    "sk-def-picard-pic",
+    "def-sbc-smooth-morphisms",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "section-pic-functor, definition of the functor; paragraph after proposition-pic-functor describing the gerbe route; moduli.tex lemma-pic-functor-curves-smooth"
+   }
+  },
+  {
+   "text": "Tensor product, the trivial bundle and duality give multiplication, identity and inversion on the presheaf $T\\mapsto\\operatorname{Pic}(C_T)$; pullback respects each. Using the local representative and local equality properties established in step 3, on sheaf sections, choose a common fppf refinement with bundle representatives and apply these operations there. Replacing representatives only changes their classes by locally trivial differences, so the resulting sections agree on overlaps and glue uniquely. Associativity, commutativity, the identity and inverse equations hold on this cover by the corresponding bundle isomorphisms, hence hold in the sheaf. By [def-trf-algebraic-space], morphisms of spaces are natural transformations of their sheaves. Therefore these operations themselves give maps $P\\times_SP\\to P$, $S\\to P$ and $P\\to P$, with the asserted equations, making $P$ a commutative group algebraic space and identifying its law with tensor product.",
+   "uses": [
+    "def-sc-invertible-module",
+    "sk-def-picard-pic",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "section-pic-functor, group structure from tensor product"
+   }
+  },
+  {
+   "text": "Test the diagonal on a scheme $T\\to P\\times_SP$, given by sections $s,t\\in P(T)$. By the local representative property established in step 3, choose an fppf covering $T_i\\to T$ on which they are represented by line bundles $V_i,W_i$ on $C_{T_i}$. Put $L_i=V_i\\otimes W_i^{-1}$. The morphism $C_{T_i}\\to T_i$ retains properness, flatness and finite presentation by [lem-sfb-space-flat-proper-fp-locality], and the universal structure-sheaf hypothesis persists because every $T_i$-scheme is an $S$-scheme. Apply [lem-sc-picard-diagonal-locally-closed] to this morphism and the rank-one bundle $L_i$. It gives an immersion $Z_i\\to T_i$ of finite presentation. For any $T'\\to T_i$, its factorization criterion is equivalent to $L_i|_{C_{T'}}=f_{T'}^*N$ for an invertible $N$ on $T'$. Indeed the cited node initially gives a finite locally free $N$; every fibre of $C_{T'}\\to T'$ is nonempty, since over a residue field the universal structure-sheaf hypothesis gives $H^0(C_{t'},\\mathcal O)=\\kappa(t')\\ne0$. Pulling back to a point of that fibre forces the rank of $N$ at $t'$ to be one. Finally [lem-pc-pic-exact] says exactly that a line bundle has zero Picard sheaf class if and only if it is pulled back from the base. Hence $Z_i$ represents the equality functor $s|_{T_i}=t|_{T_i}$, including all nonreduced test schemes, not only its point set.",
+   "uses": [
+    "sk-def-picard-pic",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-pc-pic-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D2D, lemma-diagonal-pic, reduction to the pullback locus; more-morphisms.tex Tag 0BDP"
+   }
+  },
+  {
+   "text": "The base change $E=T\\times_{P\\times_SP}P$ of the diagonal is already an algebraic space. Its pullback to $T_i$ is the equality functor just represented by $Z_i$, so is a quasi-compact immersion: finite presentation includes quasi-compactness. Apply [lem-sfb-space-quasi-compact-immersion-locality] to $E\\to T$ and the fppf covering $\\{T_i\\to T\\}$. Thus $E\\to T$ is a quasi-compact immersion, including representability by a scheme. As this holds for every scheme test $T\\to P\\times_SP$, the diagonal is representable by quasi-compact immersions. Its quasi-compactness is precisely the quasi-separatedness of $P\\to S$ in the statement, and the immersion clause also follows.",
+   "uses": [
+    "lem-sfb-space-quasi-compact-immersion-locality",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0424, lemma-descending-property-quasi-compact-immersion; quot.tex Tag 0D2D"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-picard-stack-curve-geometry",
+  "def-sc-invertible-module",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-flat-inertia-algebraic-space-quotient",
+  "sk-def-picard-pic",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-pc-pic-exact",
+  "lem-sfb-space-quasi-compact-immersion-locality",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D2C/0D2D: the explicitly indicated gerbe alternative for representability and the universal pullback locus for the diagonal; moduli.tex Tags 0DPJ/0DPK for stack and space smoothness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative Picard functor of a proper flat family of curves with universal structure sheaf pushforward is a smooth locally finitely presented algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability and smoothness of the Picard sheaf of a proper relative curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"smoothSheafCommGroup\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf CommGrpCat.{u} (TopCat.of M)\", \"doc\": \"The sheaf on a topological manifold $ M $, taking values in the category of commutative groups, where sections over open subsets are smooth maps to a commutative Lie group $ A $, forming commutative g\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.relative.rep\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \"{f : X ⟶ Y} (hf : P.relative F f) : F.relativelyRepresentable f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ in category $ \\\\mathcal{D} $ satisfies the relative morphism property with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, then $ f $ is relatively representable\"}\n  {\"name\": \"CategoryTheory.Sheaf.isSheaf_of_isRepresentable\", \"module\": \"Mathlib.CategoryTheory.Sites.Canonical\", \"type\": \"(P : Cᵒᵖ ⥤ Type v) [P.IsRepresentable] : Presieve.IsSheaf (canonicalTopology C) P\", \"doc\": \"Any representable presheaf on a category $\\\\mathcal{C}$ is a sheaf with respect to the canonical Grothendieck topology on $\\\\mathcal{C}$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "picardFunctor|PicardScheme|PicardSpace|relativePicard",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Picard fppf sheaf of a proper flat family of curves with universally trivial direct image of the structure sheaf is a smooth algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n m : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [hf : AlgebraicGeometry.IsSmoothOfRelativeDimension n f] [hg : AlgebraicGeometry.IsSmoothOfRelativeDimension m g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension (n + m) (CategoryTheory.CategoryStr\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability and smoothness of the Picard functor for a proper flat finitely presented relative curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"{f : R →+* S} : f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": MorphismProperty D\", \"doc\": \"A morphism $ f : X \\to Y $ in category $ \\\\mathcal{D} $ is relatively representable with respect to a functor $ F : \\\\mathcal{C} \\to \\\\mathcal{D} $ if for every object $ a $ in $ \\\\mathcal{C} $ and every mo\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.relative.rep\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \"{f : X ⟶ Y} (hf : P.relative F f) : F.relativelyRepresentable f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ in category $ \\\\mathcal{D} $ satisfies the relative morphism property with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, then $ f $ is relatively representable\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "PicardSpace|PicardStack|relativePicard|picardFunctor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Moduli of line bundles over a family of curves form a smooth quasi separated group algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.AffineSpace.homOfVector (X ↘ S) v) S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n m : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [hf : AlgebraicGeometry.IsSmoothOfRelativeDimension n f] [hg : AlgebraicGeometry.IsSmoothOfRelativeDimension m g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension (n + m) (CategoryTheory.CategoryStr\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S T : AlgebraicGeometry.Scheme} (f : S ⟶ T),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.AffineSpace.map n f) (AlgebraicGeometry.AffineSpace n S ↘ S)\\n    (AlgebraicGeometry.AffineSpace n T ↘ T) f\", \"doc\": \"Given a morphism $f: S \\\\to T$ of schemes, the induced morphism $\\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_T$ between affine spaces forms a pullback square with the canonical projections $\\\\mathbb{A}^n_S \\\\to S$ a\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-relative-picard-kummer",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve.",
+   "via": [
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-picard-space-curves-smooth",
+  "worker": "stage1",
+  "summary": "Split via the algebraic smooth stack of line bundles and the general flat-inertia quotient theorem; compute inertia explicitly as the multiplicative group, identify the two sheafifications, and prove the diagonal using the existing universal finite-locally-free pullback locus and fppf descent of quasi-compact immersions. No statement change. Three statement-only prerequisites, no Mathlib leaves.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images proof (3), the relative Picard prerequisite along the inherited stable-curve/Kummer branch; stack algebraicity and smoothness, explicit scalar inertia, quotient sheaf, tensor law, and universal equality loci. Inherited null blueprint ancestor is retained; the current ancestor command also returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-picard-diagonal-locally-closed",
+    "why": "General universal pullback locus of a finite locally free module; needed for the Picard diagonal over arbitrary bases, not a use of the theorem of the cube."
+   },
+   {
+    "node": "lem-pc-pic-exact",
+    "why": "General exactness at Pic(C_T) under the universal structure-sheaf hypothesis, needed to identify the equality locus with pullback of a base line bundle; no curve-over-a-field theorem is used."
+   },
+   {
+    "node": "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "why": "General criterion for local representatives, local equality and isomorphisms on sheafification, used on the big fppf site within its containing universe; no hypercover theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-pc-pic-exact",
+  "lem-cbc-set-presheaf-sheafification-local-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-5ad2afecc",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-5ad2afecc (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement, and checked them against the Stacks source at each cited place: quot 0D04 proposition-pic, 0D2C proposition-pic-functor, 0D2D lemma-diagonal-pic and lemma-flat-geometrically-connected-fibres; more-morphisms 0BDP; moduli 0DPJ, gerbe-over-pic-functor, 0DNI, 0DPK; stacks-morphisms 06QJ, 06QD, 0DN8; spaces-descent 0AHD, 0424. The item statement is unchanged and matches 0D2C, 0D2D, 0DNI and 0DPK specialised to schemes. The route stack -> gerbe -> quotient space is the one the Stacks remark after 0D2C names. Step 2: the inertia is G_m by the universal O-isomorphism, and the unit-lifting argument is correct in every characteristic. Step 3: the two sheafifications are identified through the cited local-bijection criterion (Mathlib leaf). Step 5: the 0BDP locus gives a finitely presented immersion with N finite locally free; the step adds a correct rank-one argument (fibres are nonempty since H^0 of the fibre is the residue field) and identifies the locus with s=t through lem-pc-pic-exact. Step 6: the diagonal descends as a quasi-compact immersion by 0424, which gives quasi-separatedness. No hypothesis is added or dropped and no step uses a proof instead of a statement. The new nodes are statement-only, self-contained, correctly tagged and labelled, searched, and not restatements of the item; I tested them on BG_m, the empty case, the nodal case and non-quasi-compact opens. Duplicate search over the whole DAG (tags, labels, gerbe, inertia, Picard stack, immersion descent) found no duplicate. The three declared tool uses (0BDP locus, Pic exactness, sheafification criterion) are generic and accepted. Batch-5 check: def-trf-algebraic-space is a general definition. The closures of def-sfb-algebraic-moduli-stack, the chartwise and space-locality lemmas and lem-sc-picard-diagonal-locally-closed reach only generic material: trf algebraic-space and projective-bundle geometry, def-trf-schematically-dense-open, and sk-lem-finite pod- module facts and Mathlib leaves. None is the trace formula, Poincaré duality, a step of their proofs or an nt-assume leaf, so no RETURN on that ground. blueprint.from.node null is inherited from the base. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardSpaceCurvesSmooth",
+  "declaration": "AlgebraicGeometry.picard_space_curves_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardSpaceCurvesSmooth.lean",
+  "statement": "theorem picard_space_curves_smooth {C S : Scheme.{u}} (f : C ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (hdim : ∀ s : S, topologicalKrullDim (f.fiber s) ≤ (1 : WithBot ℕ∞)) (hO : ∀ (T : Scheme.{u}) (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) : ∃ (P : AlgebraicSpace S) (G : (Over S)ᵒᵖ ⥤ CommGrpCat.{u}), G ⋙ forget CommGrpCat = P.obj.obj ∧ Nonempty (G ⋙ forget₂ CommGrpCat GrpCat ⋙ GrpCat.uliftFunctor.{u + 1, u} ≅ picardFunctorGrp f) ∧ (∀ (U : Over S) (a : yoneda.obj U ⟶ P.obj.obj), AlgebraicSpace.IsEtale a → Smooth U.hom ∧ LocallyOfFinitePresentation U.hom) ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left ∧ IsImmersion p.left) (prod.lift (𝟙 P.obj.obj) (𝟙 P.obj.obj))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3234827cc",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0D2C/0D2D/0DNI/0DPK clause by clause: proper/flat/fp instances, topologicalKrullDim fibre bound ≤1, hO = canonical tensor-pullback unit at O_T for all T (same interface as landed flat_proper_picard_algebraic_space), ∃ AlgebraicSpace P + CommGrpCat G over P with ULift group iso to picardFunctorGrp (fppf sheafified tensor law), smooth ∧ lfp on every étale chart, diagonal IsRepresentableWith (QuasiCompact ∧ IsImmersion). Edge cases (empty S/fibres, dim 0, nonreduced tests, universe lift) fine; no new defs, sorry-only, docstrings with source/blueprint and 6 proof steps, lean.statement verbatim, both report sections present, no duplicate. Non-blocking: picardFunctorGrp not in any node lean record (sk-def-picard-pic has no lean field); same usage already landed in sibling. Not recompiled per instruction."
+ }
+}

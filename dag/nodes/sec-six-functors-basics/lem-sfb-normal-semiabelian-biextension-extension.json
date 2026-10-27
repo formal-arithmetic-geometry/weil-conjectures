@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-normal-semiabelian-biextension-extension",
+ "kind": "statement",
+ "title": "Generic biextensions extend over a normal semiabelian base",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $P\\to S$ and $Q\\to S$ be smooth separated commutative group schemes of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], whose group operations satisfy the commutative group identities and whose diagonals are closed immersions. Assume every geometric fibre of each group is an extension, exact as fppf sheaves, of a proper smooth geometrically connected group scheme by a split torus $\\mathbf G_m^r$, with $r\\geq0$ (the ranks for the two groups and for different fibres may differ), where $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$ [def-weil-proper-morphism]. Let $\\eta$ be the generic point of $S$, put $K=\\kappa(\\eta)$, and write $P_\\eta,Q_\\eta$ for the generic fibres [def-pc-base-change]. A $\\mathbf G_m$-biextension of two commutative $S$-group schemes $(P,Q)$ means an invertible module $E$ on $P\\times_S Q$ [def-sc-invertible-module], with trivializations on both identity axes agreeing at their intersection and isomorphisms $E_{x+x',y}\\simeq E_{x,y}\\otimes E_{x',y}$ and $E_{x,y+y'}\\simeq E_{x,y}\\otimes E_{x,y'}$. These are isomorphisms of pulled-back invertible modules on $P\\times_SP\\times_SQ$ and $P\\times_SQ\\times_SQ$, respectively; they satisfy associativity, commutativity and the identity laws in each variable, and the interchange law saying that expanding $E_{x+x',y+y'}$ in either order gives the same map to the tensor product of its four factors. Isomorphisms of biextensions preserve both laws and both axis trivializations. Tensor and pullback are [def-pur-sheaf-tensor-product, def-pc-module-pullback]. Every $\\mathbf G_{m,K}$-biextension $E_\\eta$ of $(P_\\eta,Q_\\eta)$ is isomorphic to the generic restriction of a $\\mathbf G_{m,S}$-biextension $E$ of $(P,Q)$. Every isomorphism between the generic restrictions of two such biextensions extends uniquely over $S$. In particular, the first assertion extends the underlying invertible module on the product together with both addition laws, not just its class modulo an equivalence relation.",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "II Theorem 3.6, generic-fibre equivalence for biextensions, connected-fibre case. Primary theorem statement located online in Numdam search; local original WANTED.",
+  "external": [
+   {
+    "document": "literature/lan-arithmetic-compactifications-revised-thesis.pdf",
+    "place": "Revised 2021 thesis Theorem 3.3.2.6 (printed p.70, PDF p.84), read online at https://www.kwlan.org/articles/cpt-PEL-type-thesis-revision-dense.pdf"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "For any finite product $H$ of copies of $P,Q$, the structure map is smooth by smooth base change and composition [lem-pc-proper-base-change, lem-trf-smooth-composition]. Finite presentation and separatedness follow on affine charts and from the product diagonal. Each geometric fibre is semiabelian: take the product of the two exact sequences in the hypothesis, whose kernel is the product split torus and whose quotient is the product abelian variety. In particular its fibres are geometrically connected. Apply [lem-sfb-normal-group-vertical-cartier-descent] to $H$. We obtain the following full faithfulness for rigidified lines, also over the generic point. If $a_\\eta:L_\\eta\\simeq M_\\eta$ preserves the identity frames, it spreads to an isomorphism on $H_V$ for a dense open $V\\subset S$: use finitely many local frames over a nonempty affine base open, clear denominators of the section, its inverse and their overlap equations, and shrink the base once. Its rational divisor $D$ is supported outside $H_V$. The cited divisor lemma says $D=p_H^*e_H^*D$. Along the identity its rational value is the isomorphism prescribed by the two global frames, so $e_H^*D=0$. Hence $D=0$; the same lemma makes $a_\\eta$ an everywhere invertible section of $M\\otimes L^\\vee$. This gives a unique global rigidification-preserving isomorphism. Uniqueness follows from equality of rational sections on the integral scheme $H$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sfb-normal-group-vertical-cartier-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lan-arithmetic-compactifications-revised-thesis.pdf",
+    "place": "Sections 3.3.2 and 3.2.1; online revised thesis, printed p.70 (PDF page 84, zero-based index 83), Theorems 3.3.2.3(2), 3.3.2.6. Local copy WANTED. Agent assembly of the existing cubical-extension and descent statements."
+   }
+  },
+  {
+   "text": "Work first over an affine open $W=\\operatorname{Spec}R\\subset S$, and put $H=P_W\\times_W Q_W$. Spread the underlying line $E_\\eta$ and its trivialization at $(0,0)$ to $H_U$ for a nonempty principal open $U\\subset W$. Here is the finite-data argument: choose finitely many principal affine charts of $H_\\eta$ with line frames, lift their defining functions to charts of $H$ after localizing $R$, and clear the finitely many denominators in the transition units, their inverses and the triple-overlap equations. The charts cover after further shrinking because on each of a finite affine cover the generic cover admits a finite unit-ideal identity; clear the coefficients in those identities. The units now glue a line by [lem-pc-fpqc-descent](3). Its identity fibre and frame spread by the identical finite-chart argument on $W$. The generic biextension laws give a symmetry: $E_\\eta(-x,y)\\simeq E_\\eta(x,y)^\\vee$ by the first addition law at $x+(-x)=0$, and $E_\\eta(-x,-y)\\simeq E_\\eta(-x,y)^\\vee\\simeq E_\\eta(x,y)$ by the second. Spread this isomorphism and its inverse by clearing their finitely many coefficients. Thus the resulting rigidified line $N$ on $H_U$ is symmetric. Give it its unique cubical structure using [lem-sfb-semiabelian-cubical-rigidification](b).",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "lem-sfb-semiabelian-cubical-rigidification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lan-arithmetic-compactifications-revised-thesis.pdf",
+    "place": "Sections 3.3.2 and 3.2.1; online revised thesis, printed p.70 (PDF page 84, zero-based index 83), Theorems 3.3.2.3(2), 3.3.2.6. Local copy WANTED. Agent assembly of the existing cubical-extension and descent statements."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-symmetric-cubical-extension] to $H\\to W$ and $N$ on the dense open $U$. It supplies a cubical rigidified line $E_W$ on $H$ and a rigidification-preserving isomorphism $E_W|_{H_U}\\simeq N$. Its generic restriction therefore identifies $E_W|_{H_\\eta}$ with the supplied $E_\\eta$. The normal integral locally Noetherian base and smooth separated finite-presentation semiabelian group hypotheses hold by step 1, while step 2 supplies the cubical structure and simultaneous-inversion symmetry. No positivity or properness assumption is needed.",
+   "uses": [
+    "lem-sfb-normal-symmetric-cubical-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lan-arithmetic-compactifications-revised-thesis.pdf",
+    "place": "Sections 3.3.2 and 3.2.1; online revised thesis, printed p.70 (PDF page 84, zero-based index 83), Theorems 3.3.2.3(2), 3.3.2.6. Local copy WANTED. Agent assembly of the existing cubical-extension and descent statements."
+   }
+  },
+  {
+   "text": "Recover the full biextension data from this line. Restriction of $E_W$ to either identity axis is a globally rigidified line on $P_W$ or $Q_W$. Its generic trivialization extends uniquely by step 1. On $P_W\\times_W P_W\\times_W Q_W$, the two lines $(m_P,1)^*E_W$ and $\\operatorname{pr}_{13}^*E_W\\otimes\\operatorname{pr}_{23}^*E_W$ are invertible and canonically rigidified at the total identity by [lem-weil-pbc-invertible-pullback-tensor]. Their generic addition-law isomorphism preserves that rigidification, so step 1 extends it uniquely. Apply exactly this argument on $P_W\\times_W Q_W\\times_W Q_W$ for the second addition law. On every axis of these products the required identity maps agree with the extended laws: both are extensions of the same generic maps. Associativity and commutativity in each variable are equalities of maps between the same invertible modules on products of at most four copies. The interchange law compares the two maps on $P_W^2\\times_W Q_W^2$ to the four-factor tensor product. In each case the composites agree generically, and the products are integral by step 1, so their local coefficients agree as rational functions and hence as regular functions. All biextension axioms therefore hold over $W$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lan-arithmetic-compactifications-revised-thesis.pdf",
+    "place": "Sections 3.3.2 and 3.2.1; online revised thesis, printed p.70 (PDF page 84, zero-based index 83), Theorems 3.3.2.3(2), 3.3.2.6. Local copy WANTED. Agent assembly of the existing cubical-extension and descent statements."
+   }
+  },
+  {
+   "text": "For two biextensions on $P\\times_SQ$, their total-identity rigidifications and any supplied generic biextension isomorphism meet step 1. It gives a unique underlying line isomorphism extending it. Its compatibility with each axis trivialization and each addition law is an equality of regular maps on the corresponding integral product, true generically. Thus it is a biextension isomorphism. This proves the full-faithfulness clause independently of step 3. Finally cover $S$ by affine opens $W$. The extensions from step 4 are canonically identified on their overlaps by this full faithfulness. The identifications satisfy the cocycle condition, since the two composites have the same generic restriction. By [lem-pc-fpqc-descent](1),(3) the lines and their maps glue. The axis frames and addition laws glue by its full faithfulness, and their equations hold on the open cover. This produces the requested global biextension and its given generic identification.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lan-arithmetic-compactifications-revised-thesis.pdf",
+    "place": "Sections 3.3.2 and 3.2.1; online revised thesis, printed p.70 (PDF page 84, zero-based index 83), Theorems 3.3.2.3(2), 3.3.2.6. Local copy WANTED. Agent assembly of the existing cubical-extension and descent statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sfb-normal-group-vertical-cartier-descent",
+  "lem-pc-fpqc-descent",
+  "lem-sfb-semiabelian-cubical-rigidification",
+  "lem-sfb-normal-symmetric-cubical-extension",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/lan-arithmetic-compactifications-revised-thesis.pdf",
+  "place": "Sections 3.3.2 and 3.2.1; online revised thesis, printed p.70 (PDF page 84, zero-based index 83), Theorems 3.3.2.3(2), 3.3.2.6. Local copy WANTED. Agent assembly of the existing cubical-extension and descent statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Biextensions of two semiabelian schemes over a normal integral base extend uniquely from the generic fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  [AlgebraicGeometry.IsReduced X] [AlgebraicGeometry.IsSeparated (Y ↘ S)] {f g : X ⟶ Y}\\n  [AlgebraicGeometry.Scheme.Hom.IsOver f S] [AlgebraicGeometry.Scheme.Hom.IsOver g S] {W : AlgebraicGeometry\", \"doc\": \"Let $S$ be a base scheme. If $X$ is a reduced scheme over $S$, $Y$ is a separated scheme over $S$, and $f,g : X \\\\to Y$ are morphisms over $S$, then $f = g$ provided there exists a dense open subscheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.ext\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {t₁ t₂ : AlgebraicGeometry.Scheme.Pullback.Triplet f g},\\n  t₁.x = t₂.x → t₁.y = t₂.y → t₁ = t₂\", \"doc\": \"If two pullback triplets in the category of schemes have equal X-components and equal Y-components, then the triplets themselves are equal.\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X)\\n  [AlgebraicGeometry.IsDominant ι],\\n  CategoryTheory.CategoryStruct.comp ι f = CategoryTheory.CategoryStruct.comp ι g → f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} (s : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSeparated s],\\n  CategoryTheory.CategoryStruct.comp f s = CategoryTheory.CategoryStruct.comp g s →\\n    ∀ (ι : W ⟶ X) [AlgebraicGeometry.IsDominant ι],\\n      CategoryTheory.CategoryS\", \"doc\": \"Let $ X $ be a reduced scheme, and let $ f, g : X \\\\to Y $ be morphisms of schemes. Suppose $ s : Y \\\\to Z $ is a separated morphism with $ f \\\\circ s = g \\\\circ s $. If there exists a dominant morphism $\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n      CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) →\\n    (∀ (i : n),\\n        (CategoryTheory\", \"doc\": \"If two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over $S$ agree on their composition with the structure morphism $\\\\mathbb{A}^n_S \\\\to S$ and induce identical maps on all coordina\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  f = g ↔\\n    CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n        CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) ∧\\n      ∀ (i : n),\\n        \", \"doc\": \"Two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over a base scheme $S$ are equal if and only if (1) their compositions with the canonical morphism $\\\\mathbb{A}^n_S \\\\to S$ are equal\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f g : X ⟶ Y},\\n  AlgebraicGeometry.Scheme.Hom.appTop f = AlgebraicGeometry.Scheme.Hom.appTop g → f = g\", \"doc\": \"For any schemes $X$ and $Y$ where $Y$ is affine, if two morphisms $f, g : X \\to Y$ induce the same map on global sections of the structure sheaf (i.e., $f^\\\\#(\\\\top) = g^\\\\#(\\\\top)$), then $f = g$. This es\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ring Picard groups, elliptic-curve point ideals, abstract group cohomology and extensionality for existing morphisms do not construct semiabelian line biextensions or extend them from a generic fibre. Whole-Mathlib grep has no relevant declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of multiplicative group biextensions of semiabelian schemes to the generic point is an equivalence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulEquiv.restrictRootsOfUnity\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.Basic\", \"type\": \"(σ : R ≃* S) (n : ℕ) : rootsOfUnity n R ≃* rootsOfUnity n S\", \"doc\": \"Given a multiplicative equivalence $\\\\sigma: R \\\\simeq^* S$ between commutative monoids $R$ and $S$, and a natural number $n$, this constructs a multiplicative equivalence between the subgroup of $n$-th\"}\n  {\"name\": \"MulEquiv.unzero\", \"module\": \"Mathlib.Algebra.GroupWithZero.WithZero\", \"type\": \"[Group β] (e : WithZero α ≃* WithZero β) : α ≃* β\", \"doc\": \"Given multiplicative equivalences between the adjoined-zero structures $\\\\text{WithZero}(\\\\alpha)$ and $\\\\text{WithZero}(\\\\beta)$, this constructs the corresponding multiplicative equivalence between the \"}\n  {\"name\": \"RestrictScalars.addEquiv\", \"module\": \"Mathlib.Algebra.Algebra.RestrictScalars\", \"type\": \": RestrictScalars R S M ≃+ M\", \"doc\": \"The restriction of scalars construction that views an $ S $-module $ M $ as an $ R $-module (given a ring homomorphism $ R \\\\to S $) is additively equivalent to $ M $ itself via the identity map.\"}\n  {\"name\": \"GroupExtension.Equiv.coe_toMulEquiv\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \": ⇑(equiv : E ≃* E') = equiv\", \"doc\": \"For any equivalence $\\\\phi : E \\\\simeq^* E'$ between group extensions with the same normal subgroup $N$ and quotient group $G$, the canonical coercion of $\\\\phi$ to a multiplicative equivalence (group is\"}\n  {\"name\": \"GroupExtension.Equiv.instMulEquivClass\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \": MulEquivClass (S.Equiv S') E E'\", \"doc\": \"The type of equivalences between two group extensions with the same normal subgroup $N$ and quotient group $G$ is equipped with a multiplicative equivalence structure. This means each equivalence is a\"}\n  {\"name\": \"AlgHom.restrictNormal'\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \"[Normal F E] : Gal(E/F)\", \"doc\": \"Given a normal field extension $ E/F $, the restriction map from the Galois group $ \\\\text{Gal}(E/F) $ to itself, induced by restricting algebra homomorphisms to $ E $, is bijective under scalar tower \"}\n  {\"name\": \"ValuationSubring.unitGroupMulEquiv\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \": A.unitGroup ≃* Aˣ\", \"doc\": \"The canonical multiplicative equivalence between the unit group of a valuation subring $ A $ and the group of units $ K^\\times $ of the ambient field $ K $. This equivalence is defined by inclusion of \"}\n  {\"name\": \"AlgEquiv.restrictNormal\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \"[Normal F E] : Gal(E/F)\", \"doc\": \"Given a normal field extension $ E/F $, the restriction map from the Galois group $ \\\\text{Gal}(E/F) $ to itself, induced by restricting algebra homomorphisms to $ E $, is bijective under scalar tower \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ring Picard groups, elliptic-curve point ideals, abstract group cohomology and extensionality for existing morphisms do not construct semiabelian line biextensions or extend them from a generic fibre. Whole-Mathlib grep has no relevant declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Biextension\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ring Picard groups, elliptic-curve point ideals, abstract group cohomology and extensionality for existing morphisms do not construct semiabelian line biextensions or extend them from a generic fibre. Whole-Mathlib grep has no relevant declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "biextension|semiabelian|semiAbelian",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ring Picard groups, elliptic-curve point ideals, abstract group cohomology and extensionality for existing morphisms do not construct semiabelian line biextensions or extend them from a generic fibre. Whole-Mathlib grep has no relevant declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a line bundle additive in each variable on the product of generic semiabelian fibres over a normal scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → AlgebraicGeometry.Scheme.Pullback.Triplet f g → CommRingCat\", \"doc\": \"For a pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, this constructs the pushout in the category of commutative rings formed by composing the inverse residue\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.const_add\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f₁ f₂ g₁ g₂ : R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu₁ : ∀ x ∈ U, g₁ ∈ x.asIdeal.primeCompl)\\n  (hu₂ : ∀ x ∈ U, g₂ ∈ x.asIdeal.primeCompl),\\n  AlgebraicGeometry.StructureSheaf.const R f₁ g₁ U hu₁ + AlgebraicGeometry.StructureSh\", \"doc\": \"For a commutative ring $ R $, the addition of constant sections in the structure sheaf $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)} $ satisfies $ \\\\text{const}_R(f_1, g_1) + \\\\text{const}_R(f_2, g_2) = \\\\text{\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"{ι : Type u} →\\n  (R : ι → CommRingCat) →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing } ⟶ X) →\\n        (i : ι) → AlgebraicGeometry.Spec (R i) ⟶ X\", \"doc\": \"Given a morphism from the spectrum of the product ring $\\\\prod_i R_i$ to a scheme $X$, this function constructs the corresponding family of morphisms from each spectrum $\\\\operatorname{Spec}(R_i)$ to $X\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  {S X : AlgebraicGeometry.Scheme} →\\n    (X ⟶ S) → (n → ↑(X.presheaf.obj (Opposite.op ⊤))) → (X ⟶ AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"Given a morphism $ f : X \\\\to S $ and a vector $ v $ consisting of global sections of the structure sheaf of $ X $, this function constructs the corresponding morphism from $ X $ to the affine space $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.AffineSpace.homOfVector (X ↘ S) v) S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.comp_homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X Y : AlgebraicGeometry.Scheme} (v : n → ↑(Y.presheaf.obj (Opposite.op ⊤))) (f : X ⟶ Y) (g : Y ⟶ S),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace.homOfVector g v) =\\n    AlgebraicGeometry.AffineSpace.homOfVector (CategoryTheory.CategoryStruct.comp f g)\\n     \", \"doc\": \"For schemes $X, Y$ over a base scheme $S$, given a vector $v$ of global sections of the structure sheaf of $Y$, and morphisms $f : X \\\\to Y$ and $g : Y \\\\to S$, the composition $f \\\\circ \\\\text{homOfVecto\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ring Picard groups, elliptic-curve point ideals, abstract group cohomology and extensionality for existing morphisms do not construct semiabelian line biextensions or extend them from a generic fibre. Whole-Mathlib grep has no relevant declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-generic-picard-class-lifting",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Local rational lifting of generic semiabelian Picard classes modulo algebraic equivalence. Q73: Extension input: biextensions on the product, prior to diagonal pullback.",
+   "via": [
+    "lem-sfb-semiabelian-generic-picard-class-lifting",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-semiabelian-biextension-extension",
+  "worker": "stage1",
+  "summary": "Split the generic biextension-extension equivalence into normalized vertical-divisor full faithfulness, finite-data spreading and simultaneous-inversion symmetry, existing symmetric cubical extension on the product, extension of both addition laws and their equations, and Zariski descent. Reused all seven existing supporting statements; no new nodes. The former five-node cycle has been removed upstream at symmetric-line-power-prolongation; the required initial dry run now passes. Corrected doubled TeX escapes and obsolete conditional-cycle annotations, without changing the statement or searches.",
+  "blueprint": "Supporting input for the inherited det-thm-sf-ctf-stability-direct-images (3) Picard/alteration branch. Steps 1--5 supply generic biextension extension before diagonal pullback in semiabelian-generic-picard-class-lifting. Read latest main-20261024 direct-images proof and retained the inherited chapter, unit, null ancestor and full via chain; whole imported-blueprint biextension search found no same-statement node. No chapter/unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic smooth-product, tensor or line-descent tool; no unit-specific replacement."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic smooth-product, tensor or line-descent tool; no unit-specific replacement."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic smooth-product, tensor or line-descent tool; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic smooth-product, tensor or line-descent tool; no unit-specific replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-12606885f",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-12606885f (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged; 5 steps; 0 new nodes) and all 7 cited statements in full. The statement matches Moret-Bailly II 3.6 and Lan Thm 3.3.2.6: generic restriction of G_m-biextensions of semiabelian groups over a normal integral base is an equivalence, here specialized by locally Noetherian and finite presentation. Neither source is local, both are WANTED, proof_origin is agent, and no SGA is cited. The former 5-node cycle is gone in the snapshot DAG: lem-sfb-symmetric-line-power-prolongation is unsplit and no longer cites raynaud-generic-ample-symmetrization, and no cited node's closure reaches the item. Step 1 meets every hypothesis of vertical-Cartier descent on finite products. The divisor of a frame-preserving generic isomorphism has e^*D=0, so D=p^*e^*D=0 and the isomorphism is everywhere invertible; uniqueness holds because H is integral. Step 2 writes out the finite-chart spreading argument (not a bare E5 'clear denominators'). The symmetry E(-x,-y)≅E(x,y) comes from the two addition laws with no division by 2, and cubical-rigidification (b) applies over a normal U. Step 3 applies symmetric-cubical extension to H=P×Q over affine W with exactly its hypotheses; this is a smaller input, not D1/D2. Step 4 extends both axis trivializations and both laws through step 1 on P²×Q and P×Q². The associativity, commutativity, identity and interchange equations hold by generic equality on integral products. Step 5 proves full faithfulness and glues over a Zariski cover by fpqc descent (1),(3), with the cocycle condition from uniqueness. Batch-5: lem-trf-smooth-composition is a generic Mathlib leaf. The closures of vertical-Cartier descent, cubical rigidification and symmetric cubical extension reach only generic trf/pod nodes (smooth-connected-fibre normal integrality, def-trf-algebraic-space, descent and limit lemmas). No trace-formula or Poincaré-duality theorem and no nt-assume leaf occurs, so all four are accepted. Accepted tool_uses: proper-base-change, smooth-composition, fpqc-descent and invertible-pullback-tensor, all generic. Unit and chapter unchanged. No fixes."
+ }
+}

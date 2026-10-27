@@ -1,0 +1,133 @@
+{
+ "id": "lem-trf-log-map-global-chart-isomorphism",
+ "kind": "statement",
+ "title": "A structural log map identifying common global charts is an isomorphism",
+ "statement": "Let X be a locally Noetherian scheme [pqf-def-locnoeth], L and K etale log structures, P a commutative monoid, and cL:P→L(X), cK:P→K(X) global charts in the geometric-stalk sense of [def-trf-fs-log-blowup]. Let f:L→K be a map of monoid sheaves with f followed by alpha_K equal to alpha_L. Suppose f_X composed with cL equals cK. Then f is an isomorphism of monoid sheaves. Neither existence of f nor existence of the charts is asserted.",
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-trf-fs-log-blowup"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69; original associated-log proof steps 10, stalkwise isomorphism recognition. Detailed agent argument is in the Lean docstring."
+ },
+ "proof": [
+  {
+   "text": "Take the colimit-induced map at every geometric point. Naturality makes it commute with structural maps. Bijectivity of the structural maps on unit groups forces it to preserve the canonical ring-unit inclusions. The global chart equation holds on germs.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two chart pair maps are surjective. Their kernel congruences are the generated unit relations of the same structural chart, so are equal. The induced map on stalks, which commutes with both pair maps, is therefore bijective.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose algebraic closures of residue fields to form a covering family of geometric points. Conservativity gives an isomorphism of the underlying set sheaves. The unique inverses of its component bijections preserve multiplication, identity and restriction, and therefore supply a monoid-sheaf inverse.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-trf-fs-log-blowup",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69; original associated-log proof steps 10, stalkwise isomorphism recognition. Detailed agent argument is in the Lean docstring."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of log structures identifying the same monoid chart is an isomorphism; stalk of sheafified unit pushout",
+   "results": "TopCat.Presheaf.sheafifyStalkIso and isIso_of_stalkFunctor_map_iso apply to topological sheaves, not the stated etale monoid-pushout normalization. No exact theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "log monoid sheaves with the same global chart have isomorphic geometric stalk pushouts",
+   "results": "TopCat.Presheaf.isIso_of_stalkFunctor_map_iso and ordinary ringed-space stalk extensionality; no log chart theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "prelogStalk.*IsStalkChart|IsStalkChart.*prelogStalk|prelogPresentation.*stalk|associatedLog_universal",
+   "results": "Project has generic etaleLogPresentation_comparison, with prelogStalkMap hypotheses rather than global chart hypotheses; filteredRing_logPushout is the small filtered ring comparison. No normalized constant-chart geometric-stalk theorem. Mathlib has no LogStructure declaration.",
+   "date": "2026-10-26",
+   "verdict": "new normalization step needed"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AssociatedLogUniversalStalks",
+  "date": "2026-10-26",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fine-log chart-spreading input, through lem-trf-log-regular-sharp-chart, to the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2); Travaux de Gabber VI, 3.7(a), printed p. 75, final sentence extending the restriction of a splitting to a chart. Associated-log proof: a log map identifying common global charts is stalkwise invertible.",
+   "via": [
+    "lem-trf-associated-log-universal-stalks",
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LogGlobalChartIsomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogGlobalChartIsomorphism.lean",
+  "declaration": "AlgebraicGeometry.EtaleLogStructure.isIso_of_globalChart",
+  "statement": "theorem EtaleLogStructure.isIso_of_globalChart {X : Scheme.{u}}\n    [IsLocallyNoetherian X] (L K : EtaleLogStructure.{u} X)\n    {P : Type u} [CommMonoid P]\n    (cL : P →* L.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 X))))\n    (cK : P →* K.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 X))))\n    (hL : L.IsChart (Scheme.Etale.mk (𝟙 X)) cL)\n    (hK : K.IsChart (Scheme.Etale.mk (𝟙 X)) cK)\n    (f : L.monoidSheaf ⟶ K.monoidSheaf) (hf : f.hom ≫ K.alpha = L.alpha)\n    (hc : (f.hom.app (op (Scheme.Etale.mk (𝟙 X)))).hom.comp cL = cK) :\n    IsIso f",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3248e",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261026T100337-L-4189534",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3248e",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261026T100337-L-4189534",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 3248 vs prior 31c1b (Lean+nodes byte-identical, change record only); moved associatedLog* block and main statement vs current published clone (identical); 20 direct importers compiled against the delivered modules (all OK)"
+ }
+}

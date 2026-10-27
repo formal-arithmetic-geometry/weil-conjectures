@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-projection-tensor-integration",
+ "kind": "statement",
+ "title": "Tensoring unit integration gives the coefficient integration transpose",
+ "statement": "Use [def-pur-projection-purity-coordinates] for a positive setting projectionSetting F C E n and a separated finite-type Y. Let K be a bounded-below fixed-scalar pro-etale complex with finite-Tor bounded constructible etale presentation Ke and comparison eK. Let U be the independent coefficient-unit integration mate of [lem-pur-projection-unit-integration]. For every d >= 0 the composite smoothPurityReassociation, tensor with U, the counit-defined smoothPurityTheta at Ke, and projectionTargetMap equals projectionSourceIso followed by integrationTranspose of [lem-pur-affine-ordered-integration-transposes]. No diagonal orientation or smoothPurityMap occurs. All source, target and adjacent exponent coordinates are the specified ones; rank zero, empty bases and K=0 are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Model diagonal/DNC integration normalization and final canonical reassociations."
+ },
+ "stmt_deps": [
+  "def-pur-projection-purity-coordinates",
+  "lem-pur-projection-unit-integration",
+  "lem-pur-affine-ordered-integration-transposes",
+  "def-pur-smooth-purity-map"
+ ],
+ "proof": [
+  {
+   "text": "On the ordinary etale site use the finite-Tor coefficient normalization to verify both projection domains. Naturality of inverse projection and the adjunction counit equation identify theta composed with tensor of the unit counit mate with the coefficient trace transpose.",
+   "uses": [
+    "lem-pur-affine-coefficient-counit-normalization",
+    "lem-pur-tensor-trace-transpose"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the actual projection, trace and its transpose through the bounded site comparison and eK. The comparison-unit term is exactly the terminal term in smoothPurityTheta. Apply the root-normalized exponent independence; recurse through the ordered shifted Tate tensor powers to identify source coordinates with projectionSourceIso. At zero the exceptional identity comparison and counit give projectionTargetMap.",
+   "uses": [
+    "lem-pur-finite-site-counit-projection-transport",
+    "lem-pur-affine-ordered-integration-transposes",
+    "def-pur-affine-diagonal-tate-coordinates",
+    "def-pur-affine-diagonal-tensor-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-affine-coefficient-counit-normalization",
+  "lem-pur-tensor-trace-transpose",
+  "lem-pur-finite-site-counit-projection-transport",
+  "lem-pur-affine-ordered-integration-transposes",
+  "def-pur-affine-diagonal-tate-coordinates",
+  "def-pur-affine-diagonal-tensor-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Model diagonal/DNC integration normalization and final canonical reassociations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor compatibility of exceptional integration transposes with the dualizing object",
+   "results": "8 hits, contraction and module-dual identities and tensorRightHomEquiv_tensor; no scheme exceptional functor normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The smooth purity isomorphism for an affine space projection equals the iterated affine line integration transpose",
+   "results": "8 affine coordinate scheme formulas; no exceptional integration transpose. Loogle purity returned compiler IR declarations only.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|diagonalAffineMate|tensorTraceIntegrated; blueprint_refs search projection purity and tensor trace transpose",
+   "results": "Mathlib has no geometric purity comparison. Library has the generic tensor-trace identity and the normalized diagonal orientation, but not the present coordinate compatibility. Existing vector unit transpose statements import the item and cannot be its prerequisites.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionPurityAgreement",
+  "date": "2026-10-26",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Model diagonal/DNC integration normalization and final canonical reassociations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionTensorIntegration",
+  "file": "lean/Sheaf/Paper/ProjectionTensorIntegration.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.projection_tensor_integration",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.projection_tensor_integration"
+  ],
+  "statement": "theorem projection_tensor_integration\n    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)\n    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]\n    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]\n    (K : Plus (AffineLinePurity.Ring (projectionSetting F C E n)) Y)\n    (Ke : Etale.DerivedCategoryModule (projectionSetting F C E n).Coefficient Y)\n    (hKe : etaleFiniteTor (projectionSetting F C E n).Coefficient Y Ke)\n    (eK : (ProEtale.VectorIntegrationSite.comparison\n      (projectionSetting F C E n).Coefficient Y).obj Ke ≅ K.obj) (d : ℕ) :\n    let P := projectionSetting F C E n\n    letI := (projection_geometry Y d).1\n    letI := (projection_geometry Y d).2\n    (P.smoothPurityReassociation (iteratedAffineLine Y d) d\n      ((P.smoothPurityPullback (iteratedAffineLineProj Y d)).obj K.obj)).hom ≫\n      ((smoothPurityTensor P.Coefficient (iteratedAffineLine Y d)).obj\n        ((P.smoothPurityPullback (iteratedAffineLineProj Y d)).obj K.obj)).map\n          (projectionUnitIntegration P Y aY d) ≫\n      P.smoothPurityTheta (iteratedAffineLineProj Y d) K.obj Ke eK ≫\n      projectionTargetMap F C E n Y aY K.obj d =\n    (projectionSourceIso F C E n Y aY K.obj d).hom ≫\n      ProEtale.AffineOrderedIntegration.integrationTranspose P Y aY K Ke hKe eK d",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0cb7",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261026T003152-L-150778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0cb7",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261026T003152-L-150778",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new sorried lemmas in ProjectionTensorIntegration against node lem-pur-projection-purity-agreement, smoothPurityMap/existsUnique_smoothPurityTensorMap and ordered_integration_transposes; 7 direct importers compiled"
+ }
+}

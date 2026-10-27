@@ -1,0 +1,259 @@
+{
+ "id": "lem-trf-shift-filtered-matrix-inverse",
+ "kind": "statement",
+ "title": "Inverse matrices preserve shifted degree-lex coefficient support",
+ "statement": "Let $L$ be a field [def-weil-field], $m,n,r\\ge0$, and $u_1,\\ldots,u_r\\in\\mathbf N^n$. On $\\mathbf N^{m+n}$ use ascending lexicographic order of $(|\\alpha|,\\alpha_1,\\ldots,\\alpha_{m+n})$, with the first $m$ coordinates before the last $n$. Let $A=(A_{ij})$ be an $r\\times r$ matrix [def-weil-matrix] over $L[[W_1,\\ldots,W_m]]$ [def-weil-pbc-multivariate-power-series], and use the determinant of [def-weil-pbc-matrix-determinant]. Suppose $\\det(A)(0)\\ne0$, and suppose for every $i,j$ and $\\delta\\in\\mathbf N^m$,\n$$[W^\\delta]A_{ij}\\ne0\\quad\\Longrightarrow\\quad(\\delta,u_i)\\ge(0,u_j).$$\nThen $A$ has a unique two-sided inverse over $L[[W]]$, and for every $i,j,\\delta$ its entries satisfy\n$$[W^\\delta](A^{-1})_{ij}\\ne0\\quad\\Longrightarrow\\quad(\\delta,u_i)\\ge(0,u_j).$$\nThe assertion includes repeated weights, no $W$ variables, and the empty matrix.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent algebra refinement of the local coefficient construction on the ILO VIII 2.3.11--2.3.13 route. Motivating finite matrix solve: Bierstone--Milman, Invent. Math. 128 (1997), Lemma 9.12 and (9.13), printed pp.280--281, online journal PDF https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf . ILO does not state this support estimate; a complete cofactor argument is recorded in report.md. No single Stacks tag states it."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-matrix",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Write $R=L[[W]]$. Extend the exponent comparison to the lexicographically ordered abelian group $G=\\mathbf Z^{1+m+n}$ by the additive map\n$$\\theta(\\delta,v)=(\\sum_a\\delta_a+\\sum_bv_b,\\delta_1,\\ldots,\\delta_m,v_1,\\ldots,v_n).$$\nFor nonnegative exponents this is exactly the order in the statement. Translation preserves and reflects lexicographic comparisons: the first unequal coordinate is unchanged on adding the same vector. Sums of nonnegative vectors in this order are nonnegative: at the earliest coordinate where any summand is nonzero, every such summand is positive. Thus finitely many weak inequalities can be added and common vectors cancelled. Also $\\theta(\\epsilon,0)\\ge0$ for $\\epsilon\\in\\mathbf N^m$, since either $\\epsilon=0$ or its total degree is positive.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent algebra refinement of ILO VIII 2.3.11--2.3.13, printed pp.93--94 (PDF pp.99--100): finite coefficient-matrix solve in the BM 1997 Lemma 9.12/(9.13) route. ILO does not assert this support estimate; the cofactor calculation here is agent-written."
+   }
+  },
+  {
+   "text": "Put $D=\\det A$. The field definition makes $D(0)\\ne0$ a unit of $L$; a field is a local ring with maximal ideal zero. By clause (a) of [lem-weil-pbc-power-series-local-ring], $D$ is a unit of $R$; choose its scalar inverse $h$. By [lem-weil-pbc-matrix-adjugate-identity], the matrix $B=h\\operatorname{adj}(A)$ satisfies $AB=BA=1$, since $hD=1$ and scalar multiplication commutes with matrix multiplication over the commutative ring $R$. If $B'$ is another two-sided inverse, $B'=B'(AB)=(B'A)B=B$. It remains to check the coefficients of this explicit $B$.",
+   "uses": [
+    "def-weil-field",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent algebra refinement of ILO VIII 2.3.11--2.3.13, printed pp.93--94 (PDF pp.99--100): finite coefficient-matrix solve in the BM 1997 Lemma 9.12/(9.13) route. ILO does not assert this support estimate; the cofactor calculation here is agent-written."
+   }
+  },
+  {
+   "text": "Suppose $r>0$, and fix $i,j$. By the cofactor description in [lem-weil-pbc-matrix-adjugate-identity], $\\operatorname{adj}(A)_{ij}$ is, up to sign, the determinant with row $j$ and column $i$ deleted. Expand this determinant by [def-weil-pbc-matrix-determinant] and its products by [def-weil-pbc-multivariate-power-series]. A nonzero coefficient at $W^\\delta$ has a nonzero summand in these finite sums. Such a summand chooses a bijection $\\sigma:I\\setminus\\{j\\}\\to I\\setminus\\{i\\}$, where $I=\\{1,\\ldots,r\\}$, and exponents $\\delta_k\\in\\mathbf N^m$ with $\\sum_{k\\ne j}\\delta_k=\\delta$, such that every $[W^{\\delta_k}]A_{k,\\sigma(k)}$ is nonzero. Indeed a nonzero product cannot have a zero factor. Each coefficient sum is finite because there are finitely many decompositions of the fixed nonnegative multi-index $\\delta$. The empty product for $r=1$ contributes only at $\\delta=0$.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent algebra refinement of ILO VIII 2.3.11--2.3.13, printed pp.93--94 (PDF pp.99--100): finite coefficient-matrix solve in the BM 1997 Lemma 9.12/(9.13) route. ILO does not assert this support estimate; the cofactor calculation here is agent-written."
+   }
+  },
+  {
+   "text": "For the summand in step 3, the given support condition reads $\\theta(\\delta_k,u_k)\\ge\\theta(0,u_{\\sigma(k)})$ for every $k\\ne j$. Set $U=\\sum_{k\\in I}u_k$. Add these inequalities using step 1. The bijection exhausts precisely the columns other than $i$, so\n$$\\theta(\\delta,U-u_j)\\ge\\theta(0,U-u_i).$$\nAdd $\\theta(0,u_i+u_j)$ and cancel $\\theta(0,U)$ in $G$. This gives $\\theta(\\delta,u_i)\\ge\\theta(0,u_j)$. Consequently every nonzero coefficient of $\\operatorname{adj}(A)_{ij}$ satisfies the required bound. No strict comparison or distinctness of weights has been used; all subtractions took place in $G$, not in truncated natural-number arithmetic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent algebra refinement of ILO VIII 2.3.11--2.3.13, printed pp.93--94 (PDF pp.99--100): finite coefficient-matrix solve in the BM 1997 Lemma 9.12/(9.13) route. ILO does not assert this support estimate; the cofactor calculation here is agent-written."
+   }
+  },
+  {
+   "text": "By the product formula in [def-weil-pbc-multivariate-power-series], a nonzero coefficient $[W^\\delta]B_{ij}=[W^\\delta](h\\operatorname{adj}(A)_{ij})$ has a nonzero summand $[W^\\epsilon]h\\,[W^\\eta]\\operatorname{adj}(A)_{ij}$ with $\\epsilon+\\eta=\\delta$. Step 4 gives $\\theta(\\eta,u_i)\\ge\\theta(0,u_j)$, and step 1 gives $\\theta(\\epsilon,0)\\ge0$. Adding yields $\\theta(\\delta,u_i)\\ge\\theta(0,u_j)$, exactly the claimed inequality for $B=A^{-1}$. This uses no support restriction on the scalar inverse $h$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent algebra refinement of ILO VIII 2.3.11--2.3.13, printed pp.93--94 (PDF pp.99--100): finite coefficient-matrix solve in the BM 1997 Lemma 9.12/(9.13) route. ILO does not assert this support estimate; the cofactor calculation here is agent-written."
+   }
+  },
+  {
+   "text": "For $r=0$ there is just one empty matrix and no entry to test. Its determinant is $1$ by [def-weil-pbc-matrix-determinant]; its product with itself is the empty identity, so the inverse assertion and the support assertion hold. For $m=0$, [def-weil-pbc-multivariate-power-series] identifies $R$ with $L$ and the only exponent is $0$; the same cofactor sums and cancellations still apply. For $n=0$, every weight is the empty vector and the support condition is automatic. The $r=1$ empty cofactor was included in step 3, and repeated weights were included in step 4.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent algebra refinement of ILO VIII 2.3.11--2.3.13, printed pp.93--94 (PDF pp.99--100): finite coefficient-matrix solve in the BM 1997 Lemma 9.12/(9.13) route. ILO does not assert this support estimate; the cofactor calculation here is agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent algebra refinement of ILO VIII 2.3.11--2.3.13, printed pp.93--94 (PDF pp.99--100): finite coefficient-matrix solve in the BM 1997 Lemma 9.12/(9.13) route. ILO does not assert this support estimate; the cofactor calculation here is agent-written."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "shift.*filtrat|filtrat.*inv|monomial.*matrix",
+   "results": "{\"t\": \"2026-10-23T11:32:44Z\", \"tool\": \"grep\", \"query\": \"shift.*filtrat|filtrat.*inv|monomial.*matrix\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverses and block-triangular matrix inverses do not assert coefficient support inequalities shifted by exponent weights; inspected the returned signatures and Matrix/Block.lean:407-433, Matrix/NonsingularInverse.lean:170-217, MvPowerSeries/Inverse.lean:125-144"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse formal power series matrix preserves shifted total degree lexicographic filtration",
+   "results": "{\"t\": \"2026-10-23T11:32:44Z\", \"tool\": \"leansearch\", \"query\": \"inverse formal power series matrix preserves shifted total degree lexicographic filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.inv\", \"PowerSeries.inv_mul_cancel\", \"PowerSeries.coeff_inv\", \"PowerSeries.inv\", \"MvPowerSeries.coeff_inv\", \"MvPowerSeries.invOfUnit\", \"MvPowerSeries.coeff_inv_aux\", \"MvPowerSeries.instInv\"], \"digest\": \"b191e3e9b4118158\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverses and block-triangular matrix inverses do not assert coefficient support inequalities shifted by exponent weights; inspected the returned signatures and Matrix/Block.lean:407-433, Matrix/NonsingularInverse.lean:170-217, MvPowerSeries/Inverse.lean:125-144"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.inv, MvPowerSeries",
+   "results": "{\"t\": \"2026-10-23T11:32:44Z\", \"tool\": \"loogle\", \"query\": \"Matrix.inv, MvPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverses and block-triangular matrix inverses do not assert coefficient support inequalities shifted by exponent weights; inspected the returned signatures and Matrix/Block.lean:407-433, Matrix/NonsingularInverse.lean:170-217, MvPowerSeries/Inverse.lean:125-144"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-shift-filtered-matrix-inverse: inverse of a formal power series matrix preserves inequalities on monomial supports shifted by finitely many exponent weights",
+   "results": "{\"t\": \"2026-10-23T11:32:54Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-shift-filtered-matrix-inverse: inverse of a formal power series matrix preserves inequalities on monomial supports shifted by finitely many exponent weights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.inv.aux\", \"MvPowerSeries.inv\", \"MvPowerSeries.coeff_inv\", \"MvPowerSeries.coeff_inv_aux\", \"PowerSeries.coeff_inv\", \"MvPowerSeries.invOfUnit\", \"PowerSeries.coeff_inv_aux\", \"MvPowerSeries.inv_mul_cancel\"], \"digest\": \"d0aed96dc981cc58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverses and block-triangular matrix inverses do not assert coefficient support inequalities shifted by exponent weights; inspected the returned signatures and Matrix/Block.lean:407-433, Matrix/NonsingularInverse.lean:170-217, MvPowerSeries/Inverse.lean:125-144"
+  },
+  {
+   "tool": "grep",
+   "query": "nonsing_inv|mul_nonsing_inv|adjugate",
+   "results": "{\"t\": \"2026-10-23T11:34:35Z\", \"tool\": \"grep\", \"query\": \"nonsing_inv|mul_nonsing_inv|adjugate\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean\"], \"digest\": \"a5bbf216c8fff006\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverses and block-triangular matrix inverses do not assert coefficient support inequalities shifted by exponent weights; inspected the returned signatures and Matrix/Block.lean:407-433, Matrix/NonsingularInverse.lean:170-217, MvPowerSeries/Inverse.lean:125-144"
+  },
+  {
+   "tool": "grep",
+   "query": "coeff_inv_aux|inv_mul_cancel|isUnit_iff_constantCoeff",
+   "results": "{\"t\": \"2026-10-23T11:34:35Z\", \"tool\": \"grep\", \"query\": \"coeff_inv_aux|inv_mul_cancel|isUnit_iff_constantCoeff\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\"], \"digest\": \"441319d156433bc9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverses and block-triangular matrix inverses do not assert coefficient support inequalities shifted by exponent weights; inspected the returned signatures and Matrix/Block.lean:407-433, Matrix/NonsingularInverse.lean:170-217, MvPowerSeries/Inverse.lean:125-144"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-shift-filtered-matrix-inverse: a matrix over K[[x]] whose entries respect shifted degree lex order has an inverse respecting the same shifts when its determinant is a unit",
+   "results": "{\"t\": \"2026-10-23T11:34:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-shift-filtered-matrix-inverse: a matrix over K[[x]] whose entries respect shifted degree lex order has an inverse respecting the same shifts when its determinant is a unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.blockTriangular_inv_of_blockTriangular\", \"Matrix.BlockTriangular.inv_toBlock\", \"Matrix.BlockTriangular.toBlock_inverse_mul_toBlock_eq_one\", \"Algebra.Norm.Transitivity.auxMat\", \"Matrix.mem_subfield_of_mul_eq_one_of_mem_subfield_right\", \"Matrix.TransvectionStruct.prod_mul_reverse_inv_prod\", \"Matrix.GeneralLinearGroup.upperRightHom_apply\", \"Matrix.TransvectionStruct.inv_c\"], \"digest\": \"e5070e936c026513\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverses and block-triangular matrix inverses do not assert coefficient support inequalities shifted by exponent weights; inspected the returned signatures and Matrix/Block.lean:407-433, Matrix/NonsingularInverse.lean:170-217, MvPowerSeries/Inverse.lean:125-144"
+  },
+  {
+   "tool": "grep",
+   "query": "shift.*filtrat|filtrat.*inv|monomial.*matrix",
+   "results": "{\"t\": \"2026-10-23T12:19:15Z\", \"tool\": \"grep\", \"query\": \"shift.*filtrat|filtrat.*inv|monomial.*matrix\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverse formulas do not give shifted matrix-entry support; Matrix.blockTriangular_inv_of_blockTriangular (Block.lean:423) only preserves zero blocks, and nonsing_inv_apply (NonsingularInverse.lean:178) only gives the adjugate formula. Read these signatures and MvPowerSeries/Inverse.lean:138,197--241."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse of a matrix of multivariate formal power series preserves shifted monomial support inequalities",
+   "results": "{\"t\": \"2026-10-23T12:19:15Z\", \"tool\": \"leansearch\", \"query\": \"inverse of a matrix of multivariate formal power series preserves shifted monomial support inequalities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.inv\", \"MvPowerSeries.instInvOneClass\", \"MvPowerSeries.instInv\", \"MvPowerSeries.inv_eq_iff_mul_eq_one\", \"MvPowerSeries.invOfUnit\", \"FormalMultilinearSeries.leftInv\", \"PowerSeries.inv\", \"Function.mulSupport_inv\"], \"digest\": \"0f1384be88452515\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverse formulas do not give shifted matrix-entry support; Matrix.blockTriangular_inv_of_blockTriangular (Block.lean:423) only preserves zero blocks, and nonsing_inv_apply (NonsingularInverse.lean:178) only gives the adjugate formula. Read these signatures and MvPowerSeries/Inverse.lean:138,197--241."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.inv, MvPowerSeries",
+   "results": "{\"t\": \"2026-10-23T12:19:16Z\", \"tool\": \"loogle\", \"query\": \"Matrix.inv, MvPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverse formulas do not give shifted matrix-entry support; Matrix.blockTriangular_inv_of_blockTriangular (Block.lean:423) only preserves zero blocks, and nonsing_inv_apply (NonsingularInverse.lean:178) only gives the adjugate formula. Read these signatures and MvPowerSeries/Inverse.lean:138,197--241."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-shift-filtered-matrix-inverse: inverse formal power series matrix preserves support in a shifted total degree lexicographic filtration",
+   "results": "{\"t\": \"2026-10-23T12:19:18Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-shift-filtered-matrix-inverse: inverse formal power series matrix preserves support in a shifted total degree lexicographic filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.inv.aux\", \"MvPowerSeries.inv\", \"support_subset_support_matPolyEquiv\", \"MvPowerSeries.coeff_inv\", \"MvPowerSeries.coeff_inv_aux\", \"MvPowerSeries.instInv\", \"PowerSeries.coeff_inv\", \"MvPowerSeries.invOfUnit\"], \"digest\": \"29e4c95c03ce9880\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverse formulas do not give shifted matrix-entry support; Matrix.blockTriangular_inv_of_blockTriangular (Block.lean:423) only preserves zero blocks, and nonsing_inv_apply (NonsingularInverse.lean:178) only gives the adjugate formula. Read these signatures and MvPowerSeries/Inverse.lean:138,197--241."
+  },
+  {
+   "tool": "grep",
+   "query": "blockTriangular_inv_of_blockTriangular|nonsing_inv_apply",
+   "results": "{\"t\": \"2026-10-23T12:28:56Z\", \"tool\": \"grep\", \"query\": \"blockTriangular_inv_of_blockTriangular|nonsing_inv_apply\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Block.lean\", \"Mathlib/LinearAlgebra/Matrix/ZPow.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/PosDef.lean\"], \"digest\": \"5e1d1ad2b696f9fe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverse formulas do not give shifted matrix-entry support; Matrix.blockTriangular_inv_of_blockTriangular (Block.lean:423) only preserves zero blocks, and nonsing_inv_apply (NonsingularInverse.lean:178) only gives the adjugate formula. Read these signatures and MvPowerSeries/Inverse.lean:138,197--241."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-shift-filtered-matrix-inverse: invertible matrix respecting degree lex order after shifting rows and columns by exponent weights has inverse respecting the same order",
+   "results": "{\"t\": \"2026-10-23T12:28:56Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-shift-filtered-matrix-inverse: invertible matrix respecting degree lex order after shifting rows and columns by exponent weights has inverse respecting the same order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ω\", \"Matrix.blockTriangular_inv_of_blockTriangular\", \"Matrix.TransvectionStruct.inv_i\", \"Matrix.BlockTriangular.toBlock_inverse_mul_toBlock_eq_one\", \"Matrix.BlockTriangular.inv_toBlock\", \"Matrix.TransvectionStruct.inv_j\", \"Matrix.toBlock_inverse_eq_zero\", \"RootPairing.GeckConstruction.ωConj_invFun\"], \"digest\": \"e50af33390bfeafc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar series inverse formulas do not give shifted matrix-entry support; Matrix.blockTriangular_inv_of_blockTriangular (Block.lean:423) only preserves zero blocks, and nonsing_inv_apply (NonsingularInverse.lean:178) only gives the adjugate formula. Read these signatures and MvPowerSeries/Inverse.lean:138,197--241."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-exact-block-coefficient-projection",
+  "date": "2026-10-23",
+  "group": "Q21"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 2.3.11--2.3.13, pp.93--94: local Hilbert--Samuel presentation input; refined by BM 1997 Chapter III, Theorem 9.6 and its block induction (9.7)--(9.14), with the five formal conditions (7.2). Subargument: BM 1997 Lemma 9.12 and (9.13)--(9.14), pp.280--281; agent refinement: simultaneous earlier tests and full correction columns. Returned steps 5--7 and the projection invariant of step 1. Algebra needed in the finite matrix solve of BM Lemma 9.12: the inverse coefficient matrix respects the shifts attached to its column exponents, so full correction tails do not lower a retained Taylor exponent.",
+   "via": [
+    "lem-trf-exact-block-coefficient-projection",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-shift-filtered-matrix-inverse",
+  "worker": "stage1",
+  "summary": "Statement unchanged. The inverse is constructed from the existing formal-series unit criterion and adjugate identities. The support bound is proved by expanding each transposed cofactor, adding the entry inequalities in an ordered integer group, cancelling the total weight, and multiplying by an arbitrary scalar series. No new nodes: the finite-sum and order arguments are elementary steps, and both non-elementary algebra facts already have Mathlib-leaf nodes. Empty matrices, empty variable lists and repeated weights are included.",
+  "blueprint": "Historical ancestry: lem-trf-local-term-locality through exact-block-coefficient-projection and the ILO VIII 2.3.11--2.3.13 local invariant route. This is the shifted coefficient estimate used in step 6 of lem-trf-exact-block-coefficient-projection (the finite solve refining BM 1997 Lemma 9.12/(9.13)); it asserts no new local-term theorem or desingularization input."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-d89b6f1c0",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-d89b6f1c0 (reviewer sub-agent of L); spot-checked: I read the whole item and all four of its cited statements; there are no new nodes. The statement, stmt_deps, blueprint and source are byte-identical to the node Q21 created. Only the proof, proof_deps, proof_origin, status, split_report and searches changed; the 7 old search records are kept and 6 new ones that actually ran follow them. proof_deps equals the union of the step uses. There is no repair note and no SGA; proof_origin.by is agent, which is honest because ILO VIII 2.3.11-13 and BM Lemma 9.12 do not state this estimate. Step 1: theta(delta,v)=(|delta|+|v|,delta,v) into lex Z^{1+m+n} matches the statement's order, and weak inequalities can be added and cancelled in this ordered group. Step 2: the field makes D(0) a unit, so D is a unit by clause (a) of lem-weil-pbc-power-series-local-ring; B=h*adj(A) is a two-sided inverse by the adjugate identity, and uniqueness follows from B'=B'(AB)=(B'A)B. Step 3 takes the cofactor description (row j and column i deleted) from the adjugate node's statement; the Leibniz and Cauchy expansions give sigma: I\\{j} -> I\\{i} with all factors nonzero. Step 4: I rechecked the cancellation by hand; it gives theta(delta,u_i) >= theta(0,u_j) with the correct orientation and only weak inequalities, so repeated weights are allowed. Step 5: multiplying by h only adds theta(eps,0) >= 0. Step 6: the cases r=0, m=0, n=0 and r=1 are covered. I tested m=n=1, u=(0,1), A=[[1,W],[1,1]], whose inverse is (1-W)^{-1}[[1,-W],[-1,1]], and the conclusion holds. Grepping the DAG for adjugate, cofactor, inverse matrix and lexicographic found no duplicate. The two citers (exact-block-coefficient-projection step 6 and formal-transverse-shift-calculus with n=0) still match the unchanged statement. The elementary marks are justified, and the non-elementary inputs are two existing Mathlib leaves. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ShiftFilteredMatrixInverse",
+  "declaration": "Matrix.exists_unique_twoSidedInverse_shiftedDegreeLex",
+  "file": "lean/Sheaf/RingTheory/ShiftFilteredMatrixInverse.lean",
+  "statement": "theorem exists_unique_twoSidedInverse_shiftedDegreeLex {L : Type u} [Field L] {m n r : ℕ} (weights : Fin r → Fin n →₀ ℕ) (A : Matrix (Fin r) (Fin r) (MvPowerSeries (Fin m) L)) (hdet : MvPowerSeries.constantCoeff (Matrix.det A) ≠ 0) (hsupport : ∀ (i j : Fin r) (delta : Fin m →₀ ℕ), MvPowerSeries.coeff delta (A i j) ≠ 0 → ¬ Finsupp.DegLex (Sum.Lex (· < ·) (· < ·)) (· < ·) (Finsupp.sumElim delta (weights i)) (Finsupp.sumElim (0 : Fin m →₀ ℕ) (weights j))) : ∃ B : Matrix (Fin r) (Fin r) (MvPowerSeries (Fin m) L), A * B = 1 ∧ B * A = 1 ∧ (∀ C : Matrix (Fin r) (Fin r) (MvPowerSeries (Fin m) L), A * C = 1 → C * A = 1 → C = B) ∧ ∀ (i j : Fin r) (delta : Fin m →₀ ℕ), MvPowerSeries.coeff delta (B i j) ≠ 0 → ¬ Finsupp.DegLex (Sum.Lex (· < ·) (· < ·)) (· < ·) (Finsupp.sumElim delta (weights i)) (Finsupp.sumElim (0 : Fin m →₀ ℕ) (weights j))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-424edb2cd",
+  "group": "Q09",
+  "result": "pass",
+  "note": "The node is unchanged apart from lean, lean.statement matches the file verbatim, there is one sorry and no definitions, and the docstrings carry the source place, the blueprint id and all six proof steps. Field/Matrix/MvPowerSeries/Matrix.det/constantCoeff match the stmt_dep records. Read Mathlib Finsupp.DegLex (Prod.Lex on (degree, Finsupp.Lex)) and Pi.Lex: with Sum.Lex(<)(<) on Fin m ⊕ Fin n this is the node's ascending (|α|,α_1..α_{m+n}) lex order with W coordinates first, and ¬DegLex expresses the weak ≥ with the correct orientation. The conclusion gives a two-sided inverse, uniqueness over all two-sided inverses with no support condition, and the same bound for the inverse; quantifier order matches. Edge cases r=0, m=0, n=0, r=1 and repeated weights are covered. Re-derived the step-4 cofactor cancellation and the step-5 multiplication by h. The order encoding matches RegularHilbertCoefficientDatum.lean:268, and no existing declaration duplicates the theorem. Not recompiled because no file changed. Minor: the Second reading section is the worker's own second pass."
+ }
+}

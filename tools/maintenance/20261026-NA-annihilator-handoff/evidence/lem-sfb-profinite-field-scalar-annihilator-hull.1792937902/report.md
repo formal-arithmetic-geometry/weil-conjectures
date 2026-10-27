@@ -1,0 +1,28 @@
+# Worker report
+
+1. Files written: copied the item node and appended the actual fresh search records to `dag/nodes/sec-six-functors-basics/lem-sfb-profinite-field-scalar-annihilator-hull.json`; no new nodes and no `citations.json`, because no complete stage-1 split is claimed.
+2. Attachments: none. I searched `lean/WeilConjectures/` for the item id, annihilator/kernel terminology, and the relevant condensed/profinite declarations; no sorry-free project declaration states this item.
+3. WANTED: an exact reference for the asserted degree-zero sheaf-annihilator generation theorem with ordinary derived products and the stated bounded-below filtered-colimit closure. Hemo--Richarz--Scholbach, Example 4.2 and Remark 6.4, only supply the Stone-Cech counterexample showing that the kernel can be non-lisse; they do not prove membership in the larger class $\mathcal J$.
+4. The imported item is an agent-formulated obligation and its source explicitly says “exact generation reference WANTED”. The existing predecessor `lem-sfb-profinite-constant-model-relation-hull` has a genuine reduction to this rank-one item, but its accepted review records the rank-one core as open. The item therefore cannot presently be split into a proof whose every non-elementary step is supported by a cited node. In particular, the tempting clopen-neighborhood inverse-limit argument needs a new Roos/exactness theorem for `E`-valued scalar-model sheaves; the existing finite-bundle Roos node applies only to finite discrete fibres and does not state that result. Treating that missing theorem as a step would violate C1/C4, while making it a node would merely move the unresolved core without a proof.
+5. What I could not finish: a faithful complete proof of the item. No Lean, compiler, Lake, build, repository, or launcher files were changed. The recorded Mathlib searches found only generic condensed-module constructors and no annihilator-generation theorem; the search log is retained in the sandbox.
+
+## Review by NA
+
+I read the item node, the chapter and unit records, Hemo--Richarz--Scholbach Example 4.2 and Remark 6.4, and the full statement and proof dependencies of `lem-sfb-profinite-constant-model-relation-hull`. The item has the hypotheses $P$ extremally disconnected, $a\in C(P,E)$, the actual sheaf kernel $K_a$, and the exact closure conditions on $\mathcal J$; no hypothesis can be added to make the argument easier. HRS confirms that such kernels need not be lisse, so the finite-local-model shortcut is invalid. The predecessor's step invoking this item is the only place where the rank-one generation assertion is required, and its review explicitly labels this core open.
+
+I also checked the existing `lem-sfb-relative-finite-bundle-roos` statement: it gives exact Roos sequences for inverse systems of finite locally constant bundles with finite discrete fibres. The present $R_E$-modules have $E$-valued continuous sections, so that statement cannot be cited for the needed inverse-limit construction. Searches of the whole DAG and latest blueprint found no stronger scalar-model Roos or annihilator-generation node; searches of the project Lean source found no declaration. The Mathlib searches recorded in `searches.jsonl` returned only generic `CondensedMod` constructors, `ContinuousSMul`, and `TopModuleCat.ker`, none of which states the required theorem. Since the source reference is explicitly wanted and the missing result is the mathematical content of the item, I am stopping with the honest disposition below rather than fabricating a split.
+
+
+## Explicit failure of the clopen-tower shortcut
+
+Take $P=\beta\mathbf N$, $E=\mathbf Q_\ell$, and the continuous extension of $a(n)=\ell^n$, with zero set $Z=P\setminus\mathbf N$. Index $\mathbf N$ here starting at 1. Put $U_k=P\setminus\{1,\ldots,k-1\}$, $e_k=1_{U_k}$, and $M_k=e_kR_E$, with transitions the inclusions. Each $M_k$ is a retract of $R_E$. Sectionwise $\varprojlim_k M_k=K_a$: the simultaneous support condition is vanishing off $b^{-1}Z$ for every test $b:Q\to P$. Thus this is the correct ordinary-limit candidate, including all nonterminal tests.
+
+It does not give a short exact Roos sequence. Define $y_k=\ell^{-k}e_k\in M_k(P)$. A solution of $z_k-z_{k+1}=y_k$ would satisfy $z_{n+1}(n)=0$ and therefore
+$$z_1(n)=\sum_{k=1}^n\ell^{-k}.$$
+The absolute values of these sums are $\ell^n$, which are unbounded. This contradicts compactness of the image of a continuous function $P\to E$. Since $P$ is extremally disconnected, every finite jointly surjective profinite cover of $P$ has a section after its finite disjoint union is formed (Stacks Tag 08YN, topology.tex, proposition-projective-in-category-hausdorff-qc). Hence a cover-local solution would pull back to a solution over $P$; the failure really is failure of sheaf epimorphy, not merely global-section surjectivity. I read that Stacks statement and checked the topology and compact-Hausdorff hypotheses. The existing finite-bundle Roos theorem cannot be extended to these $E$-valued bundles by the same claim.
+
+This is a counterexample to the proposed proof step, not a counterexample to the item's quantified assertion about $\mathcal J$. No statement correction is justified from this computation. I did not mark the item split or run a dry run/push for an incomplete proof. An unchanged proof with extra search records is not a stage-1 delivery.
+
+## Process deviation
+
+During inspection I mistakenly ran a read-only `git status --short` in the shared repository, contrary to the explicit ban on all git commands there. It changed no project files. All written artifacts are in the assigned sandbox; no git command was used for delivery.

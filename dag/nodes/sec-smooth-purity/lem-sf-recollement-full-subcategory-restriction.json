@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-recollement-full-subcategory-restriction",
+ "kind": "statement",
+ "title": "Restriction of localization presentations to full triangulated subcategories",
+ "statement": "Let \\(\\mathcal C\\) be a pretriangulated preadditive category with a zero object and additive integer shifts. Let \\(S\\) be a full triangulated object property of \\(\\mathcal C\\). Let \\(P=(F,H,\\epsilon,\\eta)\\) be a presentation [def-sf-recollement-presentation-data], where \\(F,H:\\mathcal C\\to\\mathcal C\\), \\(\\epsilon:F\\to\\mathrm{id}\\), and \\(\\eta:\\mathrm{id}\\to H\\), and assume \\(F,H\\) carry objects satisfying \\(S\\) to objects satisfying \\(S\\). Restrict these literal functors and maps to the full subcategory \\(\\mathcal C_S\\). Additivity and linearity, whenever given on the original functors, restrict. If the original two maps extend to a distinguished triangle at every object, the restricted maps do also. If \\(\\operatorname{Hom}(F(K)[n],H(M))=0\\) for all objects \\(K,M\\) and integers \\(n\\), the same vanishing holds in \\(\\mathcal C_S\\).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Integral sheaf localization and coefficient passage, steps 3–10"
+ },
+ "stmt_deps": [
+  "def-sf-recollement-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Lift the given functors and transformations to the full subcategory. Lift the connecting arrow after the inverse inclusion-shift comparison. The inclusion sends the resulting triangle to one isomorphic to the original distinguished triangle. Its fully faithful Hom map and shift isomorphism transfer orthogonality.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Integral sheaf localization and coefficient passage, steps 3–10"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the closed restriction unit preserves derived complete constructible sheaves and equals extension by zero from the open complement",
+   "results": "Eight unrelated algebraic-geometry kernel and restriction results; no completed constructible localization comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the recorded geometric comparisons and exact sheaf sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSES_distinguished",
+   "results": "DerivedCategory.triangleOfSES_distinguished in Mathlib.Algebra.Homology.DerivedCategory.ShortExact",
+   "date": "2026-10-25",
+   "verdict": "Used for the termwise short exact sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "kernelSequence_exact|triangleOfSES_distinguished",
+   "results": "ShortComplex.kernelSequence_exact in Mathlib.Algebra.Homology.ShortComplex.Exact; DerivedCategory.triangleOfSES_distinguished in DerivedCategory.ShortExact.",
+   "date": "2026-10-25",
+   "verdict": "Use both for the actual kernel short exact sequence and its derived triangle."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfOpenClosedTriangleAllStages",
+  "date": "2026-10-25",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Integral localization: the full triangulated subcategory inherits the displayed distinguished triangle and Hom vanishing.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfRecollementRestriction",
+  "file": "lean/Sheaf/Paper/SfRecollementRestriction.lean",
+  "declaration": "WeilConjectures.sfRecollementRestriction_distinguished",
+  "statement": "theorem sfRecollementRestriction_distinguished\n    (ht : ∀ K, ∃ δ, Triangle.mk (P.counit.app K) (P.unit.app K) δ ∈ distTriang C)\n    (K : S.FullSubcategory) :\n    ∃ δ, Triangle.mk ((sfRecollementRestriction S P ho hc).counit.app K)\n      ((sfRecollementRestriction S P ho hc).unit.app K) δ ∈ distTriang _",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.sfRecollementRestriction",
+   "WeilConjectures.sfRecollementRestriction_distinguished",
+   "WeilConjectures.sfRecollementRestriction_orthogonality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-633be",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261025T043310-L-1694419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-633be",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261025T043310-L-1694419",
+  "kind": "interface",
+  "note": "independent cc review: old item vs new item + SfOpenClosedTriangleData (verbatim move, public re-export of all 18 public imports); new sorry lemma vs the item's Normalization/Vertices clauses and node plan steps 3-4; 10 direct importers compiled against the delivered modules (all OK)"
+ }
+}

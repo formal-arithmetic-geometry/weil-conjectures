@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-flat-lfp-structure-relative-pseudocoherence",
+ "kind": "statement",
+ "title": "A flat locally finitely presented structure sheaf is relatively pseudo-coherent",
+ "statement": "Let $g:Y\\to S$ be a flat, locally finitely presented morphism of schemes [def-pc-scheme], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation]. Then $\\mathcal O_Y[0]\\in D(\\mathcal O_Y)$ is pseudo-coherent relative to $S$ [def-pc-derived-category], [def-sfb-relative-pseudo-coherent-complex]. No quasi-compactness or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0695, lemma-flat-finite-presentation-pseudo-coherent, with Tag 067Y, lemma-pseudo-coherent, clause (3); algebraic input Tag 067J, more-algebra.tex lemma-flat-finite-presentation-perfect"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open cover $S=\\bigcup_a V_a$ and affine open covers $g^{-1}(V_a)=\\bigcup_b U_{ab}$. Write $V_a=\\operatorname{Spec}R_a$ and $U_{ab}=\\operatorname{Spec}C_{ab}$. Such covers exist because schemes have affine neighbourhood bases. By [lem-weil-pbc-flat-morphism-affine-criterion] and [lem-weil-pbc-lfp-affine-opens-finite-presentation], every induced map $R_a\\to C_{ab}$ is flat and of finite presentation. These statements apply to arbitrary affine open pairs with $g(U_{ab})\\subseteq V_a$; no finite subcover is chosen.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U5, lemma-flat-characterize, and 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2) in each"
+   }
+  },
+  {
+   "text": "Fix $(a,b)$ and abbreviate its rings by $R,C$. By [def-weil-pbc-finitely-presented-algebra], choose a surjective $R$-algebra map $\\pi:P=R[x_1,\\ldots,x_n]\\twoheadrightarrow C$ with finitely generated kernel, allowing $n=0$. The images of the variables generate $C$ as an $R$-algebra. The same holds for every affine open $V=\\operatorname{Spec}A\\subseteq S$ and every affine open $\\operatorname{Spec}B\\subseteq g^{-1}(V)$, since [lem-weil-pbc-lfp-affine-opens-finite-presentation] makes $A\\to B$ finitely presented, hence finitely generated; as $g^{-1}(V)$ has an affine open cover, $g$ is locally of finite type [def-weil-finite-type-morphism]. By [def-nagata-relative-affine-space], $\\operatorname{Spec}P=\\mathbf A^n_{V_a}$. Let $i=\\operatorname{Spec}(\\pi):U_{ab}\\to\\mathbf A^n_{V_a}$, a morphism over $V_a$. For the one-member affine cover of $\\mathbf A^n_{V_a}$ by itself, $i^{-1}(\\operatorname{Spec}P)=U_{ab}$ is affine and the induced ring map is $\\pi$, which is surjective; so $i$ is a closed immersion [def-weil-closed-immersion] by [lem-weil-pbc-closed-immersion-affine-cover-criterion](2).",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "def-nagata-relative-affine-space",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 067Y, lemma-pseudo-coherent, affine presentations underlying (1) implies (3); Tag 09UI, definition-relative-pseudo-coherence"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-fp-polynomial-pseudocoherent] to the flat finitely presented map $R\\to C$ of step 1 and the surjective presentation $\\pi$ of step 2. It gives that $C[0]$, with $P$-action through this very $\\pi$, is quasi-isomorphic to a bounded-above complex of finite free $P$-modules. Flatness is over $R$, not over $P$; no Noetherian property of either ring is required.",
+   "uses": [
+    "lem-sfb-flat-fp-polynomial-pseudocoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 067J, lemma-flat-finite-presentation-perfect, pseudo-coherence consequence for a polynomial presentation"
+   }
+  },
+  {
+   "text": "Under [lem-pc-affine-qcoh-derived-equivalence], $\\mathcal O_{U_{ab}}[0]$ is the sheaf associated to $C[0]$. By [lem-weil-pbc-pushforward-tilde-spec], ordinary pushforward along $i=\\operatorname{Spec}(\\pi)$ identifies $i_*\\mathcal O_{U_{ab}}$ with the sheaf $\\widetilde C$ on $\\operatorname{Spec}P$, where $C$ has the same $P$-action as in step 3. To compute the derived image, choose a K-injective resolution $\\mathcal O_{U_{ab}}[0]\\to I^\\bullet$ as in [def-pc-derived-direct-image]. The ordinary functor $i_*$ preserves homology of every short complex by [lem-pc-closed-module-pushforward-homology], so it preserves the cohomology isomorphisms of this resolution. Consequently $i_*\\mathcal O_{U_{ab}}[0]\\to i_*I^\\bullet$ is a quasi-isomorphism, and the latter represents $Ri_*(\\mathcal O_{U_{ab}}[0])$. We obtain $Ri_*(\\mathcal O_{U_{ab}}[0])\\cong\\widetilde{C[0]}$ in $D(\\mathcal O_{\\operatorname{Spec}P})$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-pushforward-tilde-spec",
+    "def-pc-derived-direct-image",
+    "lem-pc-closed-module-pushforward-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 08KS, lemma-i-star-equivalence, exactness; schemes.tex Tag 01I9, lemma-widetilde-pullback (2); perfect.tex Tag 06Z0 for affine realization"
+   }
+  },
+  {
+   "text": "Use [lem-pc-affine-pseudo-coherent-criterion] on $\\operatorname{Spec}P$ with the module complex $C[0]$. Its bounded-above finite-free representative from step 3 proves that $\\widetilde{C[0]}$ is pseudo-coherent. The identification of step 4 proves the same for $Ri_*(\\mathcal O_{U_{ab}}[0])$. By [def-pur-pseudo-coherent-complex], this means it is $m$-pseudo-coherent for every integer $m$, with the strictly perfect approximation meaning of [def-sfb-m-pseudo-coherent-complex].",
+   "uses": [
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "def-pur-pseudo-coherent-complex",
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E7, lemma-pseudo-coherent-affine, pseudo-coherent clause; cohomology.tex Tag 08CB, definition-pseudo-coherent"
+   }
+  },
+  {
+   "text": "Fix any integer $m$. For every pair $(a,b)$, the closed immersion of step 2 has the $m$-pseudo-coherent derived image established in step 5. For the open inclusion $j:U_{ab}\\to Y$, $j^{-1}\\mathcal O_Y=\\mathcal O_{U_{ab}}$; the formula in [def-pc-derived-pullback] gives $Lj^*\\mathcal O_Y[0]=\\mathcal O_{U_{ab}}\\otimes^L_{\\mathcal O_{U_{ab}}}\\mathcal O_{U_{ab}}[0]=\\mathcal O_{U_{ab}}[0]$. Hence these are precisely the affine covers and embeddings required by [def-sfb-relative-pseudo-coherent-complex] for $\\mathcal O_Y[0]$. Thus it is $m$-pseudo-coherent relative to $S$. Since $m$ was arbitrary, it is pseudo-coherent relative to $S$. The argument permits infinite covers and arbitrary base rings, as well as empty inverse images.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UI, definition-relative-pseudo-coherence, clauses (1) and (2); realizes Tag 067Y (3) for Tag 0695"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-finite-type-morphism",
+  "def-nagata-relative-affine-space",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-sfb-flat-fp-polynomial-pseudocoherent",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-pushforward-tilde-spec",
+  "def-pc-derived-direct-image",
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "def-pur-pseudo-coherent-complex",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0695, lemma-flat-finite-presentation-pseudo-coherent, and Tag 067Y, lemma-pseudo-coherent, (1) implies (3); expanded using Tag 067J, the affine criterion 08E7, and ordinary closed-immersion pushforward 08KS/01I9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf of a flat locally finitely presented scheme is pseudo coherent relative to the base",
+   "results": "{\"t\": \"2026-10-23T13:39:11Z\", \"tool\": \"leanfinder\", \"query\": \"The structure sheaf of a flat locally finitely presented scheme is pseudo coherent relative to the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.stalkMap\"], \"digest\": \"8326e988992924ac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T13:39:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\"], \"digest\": \"2c507d8605ee08b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo.?[Cc]oher|relative.*perfect",
+   "results": "{\"t\": \"2026-10-23T13:39:08Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo.?[Cc]oher|relative.*perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"Mathlib/FieldTheory/IsPerfectClosure.lean\"], \"digest\": \"b49848919e1c3b73\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat locally finitely presented scheme morphism is pseudo coherent without a Noetherian assumption",
+   "results": "{\"t\": \"2026-10-23T13:39:09Z\", \"tool\": \"leansearch\", \"query\": \"A flat locally finitely presented scheme morphism is pseudo coherent without a Noetherian assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"Module.Flat.projective_of_finitePresentation\"], \"digest\": \"ff4c9f38bf8ee3c6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented algebra has a bounded above finite free resolution as a module over a presenting polynomial algebra",
+   "results": "{\"t\": \"2026-10-23T13:39:12Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented algebra has a bounded above finite free resolution as a module over a presenting polynomial algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Algebra.Smooth.finitePresentation\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.Flat.projective_of_finitePresentation\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.IsStandardSmooth.out\", \"Algebra.FinitePresentation.of_finitePresentation\"], \"digest\": \"261284417a26dd5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf of a flat locally finitely presented morphism is relatively pseudo coherent over the base",
+   "results": "{\"t\": \"2026-10-23T17:58:39Z\", \"tool\": \"leanfinder\", \"query\": \"The structure sheaf of a flat locally finitely presented morphism is relatively pseudo coherent over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\"], \"digest\": \"50f8fbd7666ceaf6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, finite presentation, smoothness, universal openness, finite-presentation module criteria or relative perfect fields; none states the derived relative pseudo-coherence assertion. Finite presentation as an algebra does not imply finite presentation as an R-module."
+  },
+  {
+   "tool": "grep",
+   "query": "PseudoCoherent|pseudoCoherent|pseudo_coherent|[Rr]elative.*[Pp]erfect",
+   "results": "{\"t\": \"2026-10-23T17:59:36Z\", \"tool\": \"grep\", \"query\": \"PseudoCoherent|pseudoCoherent|pseudo_coherent|[Rr]elative.*[Pp]erfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"Mathlib/FieldTheory/IsPerfectClosure.lean\"], \"digest\": \"b49848919e1c3b73\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, finite presentation, smoothness, universal openness, finite-presentation module criteria or relative perfect fields; none states the derived relative pseudo-coherence assertion. Finite presentation as an algebra does not imply finite presentation as an R-module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat scheme morphism locally of finite presentation the structure sheaf is pseudo coherent relative to the base",
+   "results": "{\"t\": \"2026-10-23T17:59:36Z\", \"tool\": \"leansearch\", \"query\": \"For a flat scheme morphism locally of finite presentation the structure sheaf is pseudo coherent relative to the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.stalkMap\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.mk\"], \"digest\": \"4115a8f53eb667e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, finite presentation, smoothness, universal openness, finite-presentation module criteria or relative perfect fields; none states the derived relative pseudo-coherence assertion. Finite presentation as an algebra does not imply finite presentation as an R-module."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T17:59:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\"], \"digest\": \"2c507d8605ee08b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, finite presentation, smoothness, universal openness, finite-presentation module criteria or relative perfect fields; none states the derived relative pseudo-coherence assertion. Finite presentation as an algebra does not imply finite presentation as an R-module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented algebra admits a bounded above resolution by finite free modules over a presenting polynomial ring",
+   "results": "{\"t\": \"2026-10-23T17:59:37Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented algebra admits a bounded above resolution by finite free modules over a presenting polynomial ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Module.Flat.projective_of_finitePresentation\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.Smooth.finitePresentation\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.FinitePresentation.of_finitePresentation\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"a1c7263812849549\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flatness, finite presentation, smoothness, universal openness, finite-presentation module criteria or relative perfect fields; none states the derived relative pseudo-coherence assertion. Finite presentation as an algebra does not imply finite presentation as an R-module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 09UU (lemma-check-relative-pseudo-coherence-on-charts, equivalence (1) and (3) for every integer m). Supporting prerequisite of 09UU proof, final sentence: a flat locally finitely presented ambient scheme has structure sheaf pseudo-coherent relative to S.",
+   "via": [
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-lfp-structure-relative-pseudocoherence",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its hypotheses. Assembled the affine proof in six steps from the existing flat/lfp affine criteria, polynomial pseudo-coherence, ordinary closed pushforward and affine pseudo-coherence criterion. Created no nodes: every needed non-elementary fact already exists. Checked the actual statements, recorded five fresh searches, and retained prior search records.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images clause (3) cohomology-and-base-change chain, specifically the final structure-sheaf prerequisite of Stacks 09UU recorded in blueprint.from.place. Read current latest sk-thm-sf-ctf-stability/_section.md and its direct-images proof; no unit or chapter route changes. The ancestor tool returns None for the existing created.item chain, so retain the existing null ancestor and precise place. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Affine realization of the structure module as the associated sheaf of the unit module. Generic scheme-derived tool; no node of this unit states this auxiliary comparison, and it does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-closed-module-pushforward-homology",
+    "why": "Ordinary closed-immersion module pushforward preserves homology, so its termwise action on a resolution computes the derived image. Generic scheme-derived tool; no node of this unit states this auxiliary comparison, and it does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Transfers the polynomial finite-free resolution to pseudo-coherence on the affine ambient scheme. Generic scheme-derived tool; no node of this unit states this auxiliary comparison, and it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-pc-affine-pseudo-coherent-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-961d1fb75",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-961d1fb75 (reviewer sub-agent of L); spot-checked: Read the item, all 20 cited node statements, Stacks 0695/09UI (more-morphisms l.16675, l.17428), 067J (more-algebra l.21815) and 08KS (modules l.1946, lemma-i-star-equivalence). The statement and stmt_deps are unchanged and not weakened. There are no new nodes. No duplicate or cycle: the flat-ambient node and the flat-family perfect-direct-image node cite this item, and the item does not cite them. Steps 1 and 3-6 are correct: 01U5/01TQ affine pairs; the polynomial lemma for any surjective presentation with no Noetherian hypothesis; affine equivalence plus 01I9(2) plus exactness of i_* on a K-injective resolution gives Ri_*O_U = C~; the 08E7 criterion plus the def-pur all-m equivalence; Lj^* of the unit. Two small faults in step 2, both repaired. (a) Local finite type was checked only on the chosen covers V_a, but def-weil-finite-type-morphism quantifies over every affine V; it now argues this for every affine V via lem-weil-pbc-lfp-affine-opens-finite-presentation. (b) The closed immersion was taken from the 'for every affine open' clause of def-weil-closed-immersion without proving affineness of the preimages; it now cites lem-weil-pbc-closed-immersion-affine-cover-criterion(2) on the one-member cover {Spec P}. Step 2 uses and proof_deps are updated (union of step uses) and elementary is set to false. The corrected item file is in fixes/dag/nodes/sec-six-functors-basics/. Edge cases checked: empty Y, g = id (n = 0), non-Noetherian R[t], infinite covers. The declared tool_uses are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatLfpStructureRelativePseudoCoherent",
+  "declaration": "AlgebraicGeometry.Scheme.isPseudoCoherentRelativeTo_structureSheaf_of_flat_of_locallyOfFinitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatLfpStructureRelativePseudoCoherent.lean",
+  "statement": "theorem isPseudoCoherentRelativeTo_structureSheaf_of_flat_of_locallyOfFinitePresentation [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] {Y S : Scheme.{u}} (g : Y ⟶ S) [Flat g] [LocallyOfFinitePresentation g] : IsPseudoCoherentRelativeTo g ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings Y.toRingedSpace)))",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b907946c",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps, live IsPseudoCoherentRelativeTo/IsMPseudoCoherentRelativeTo (E : schemeDerivedCategory X, an abbrev for DerivedCategory of SheafOfModules) and Stacks 0695/067Y(3)/067J. Lean {Y S : Scheme.{u}} (g : Y ⟶ S) [Flat g] [LocallyOfFinitePresentation g] concludes IsPseudoCoherentRelativeTo g of (DerivedCategory.singleFunctor _ 0).obj (SheafOfModules.unit _), the same O_X[0] form used in live DerivedStructureSheafHomHypercohomology and DerivedTensorUnitCompact. LocallyOfFiniteType comes from the Mathlib instance FinitePresentation.lean:109; the only extra binder is the HasDerivedCategory.{w} family the predicate requires; no qc/Noetherian assumption. Universes are bound. Edge cases ok: empty Y/S, n=0, non-Noetherian, infinite covers. Node differs from live only in lean (live had none, not a rebind); statement verbatim; proof by sorry; docstrings carry source places, blueprint id and the six steps; report has Worker report and Second reading by Q07. No duplicate in Sheaf/WeilConjectures or Mathlib. No change, so no compile; worker reports a clean scompile."
+ }
+}

@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-artin-versality-generalization",
+ "kind": "statement",
+ "title": "Versality is stable under generalization",
+ "statement": "Let $\\Lambda$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and put $S=\\operatorname{Spec}\\Lambda$ [def-weil-affine-spectrum]. Work with $S$-schemes [def-pc-scheme] in the universes of [def-weil-size-convention]. Let $\\mathcal F$ be fibred in groupoids on their big fppf site [def-pc-fppf-site]. A category fibred in groupoids assigns a groupoid $\\mathcal F(T)$ to each scheme $T$ over the base, with pullback functors and coherent identity and composition isomorphisms. Assume that for every base scheme $T$ and $a,b\\in\\mathcal F(T)$ the presheaf $T'\\mapsto\\operatorname{Isom}(a|_{T'},b|_{T'})$ is represented by an algebraic space over $T$ [def-trf-algebraic-space]. Assume also that for every diagram of base algebras $A\\to B\\leftarrow B'$ with $B'\\to B$ surjective and square-zero kernel, restriction gives an equivalence $\\mathcal F(\\operatorname{Spec}(A\\times_B B'))\\simeq\\mathcal F(\\operatorname{Spec}A)\\times_{\\mathcal F(\\operatorname{Spec}B)}\\mathcal F(\\operatorname{Spec}B')$, where the right side retains the specified isomorphism over $B$ and arrows compatible with it. Assume limit preservation: for every small directed inverse system of affine base schemes with limit $T$, objects over $T$ descend to a stage, isomorphisms between stage objects descend to a sufficiently late common stage, and equality of such isomorphisms over $T$ holds at a sufficiently late common stage. Let $U$ be of finite type over $S$ and $x\\in\\mathcal F(U)$. A point $u\\in U$ is of finite type if $\\operatorname{Spec}\\kappa(u)\\to U$ is of finite type [def-weil-finite-type-morphism, def-weil-residue-field]. For $x\\in\\mathcal F(U)$, versality at $u$ means: for every surjection $A'\\to A$ of Artinian local base algebras with common residue field identified with $\\kappa(u)$ and nilpotent kernel, every map $\\operatorname{Spec}A\\to U$ reducing to $u$, and every $y'\\in\\mathcal F(\\operatorname{Spec}A')$ with a specified isomorphism $y'|_A\\cong x|_A$, there is a lift $\\operatorname{Spec}A'\\to U$ and an isomorphism $y'\\cong x|_{A'}$ inducing the specified one. Artinian means that descending chains of ideals stabilize; local means having a unique maximal ideal, and all maps respect the residue-field identifications. For finite type points $u,u_0\\in U$ with $u_0\\in\\overline{\\{u\\}}$, if $x$ is versal at $u_0$, then $x$ is versal at $u$.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0G2K (lemma-generalization-versality), specialized to an affine Noetherian base; definitions definition-RS-star and definition-versal."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine member $U_0=\\operatorname{Spec}R_0$ of a finite-type affine cover of $U$ containing $u_0$; its coordinate ring is finitely generated over $\\Lambda$ by the definition of finite type. It also contains $u$, since every open containing a specialization contains its generalizations. Versality is unchanged by this restriction: a map from an Artinian local spectrum centered at either point factors through any open neighbourhood of that point, because its spectrum has a single point. Replace $U$ by $U_0$.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0G2K (lemma-generalization-versality), specialized to an affine Noetherian base; definitions definition-RS-star and definition-versal."
+   }
+  },
+  {
+   "text": "Suppose $x$ is not versal at $u$. The single-point obstruction lemma gives $j:U\\hookrightarrow T=\\operatorname{Spec}R$, $y\\in\\mathcal F(T)$ and $\\theta:x\\cong j^*y$, with $R\\to R_0$ surjective and square-zero kernel, for which no neighbourhood of $u$ admits a retraction arrow $y\\to x$ inducing $\\theta^{-1}$. Its hypotheses hold because $\\Lambda$ is Noetherian, $U$ is affine finite type, $u$ is a finite type point, and the assumed fibre-product equivalence is (RS*).",
+   "uses": [
+    "lem-sfb-artin-single-point-obstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0G2K (lemma-generalization-versality), specialized to an affine Noetherian base; definitions definition-RS-star and definition-versal."
+   }
+  },
+  {
+   "text": "Order the finitely generated $\\Lambda$-subalgebras $R_i\\subset R$ by inclusion. Finite unions of generating sets give upper bounds; each element of $R$ belongs to a stage. Thus their union is $R$ and is their ring colimit: compatible ring maps glue uniquely element by element. The affine-limit theorem identifies $T=\\varprojlim\\operatorname{Spec}R_i$. Limit preservation descends $y$ to $x^\\prime$ over some $U^\\prime=\\operatorname{Spec}R_i$, with a specified isomorphism on $T$. Enlarge $R_i$ by lifts of finitely many $\\Lambda$-algebra generators of $R_0$, so $R_i\\to R_0$ is surjective. Its kernel is a subideal of the square-zero kernel of $R\\to R_0$. Hence $j^\\prime:U\\hookrightarrow U^\\prime$ is a first order thickening, $U^\\prime$ is finite type over $S$, and the arrows $x\\to y\\to x^\\prime$ lie over $U\\to T\\to U^\\prime$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0G2K (lemma-generalization-versality), specialized to an affine Noetherian base; definitions definition-RS-star and definition-versal."
+   }
+  },
+  {
+   "text": "Apply versal base change over $\\Lambda$ to $x$ and $x^\\prime$. It gives an algebraic space $Z$ representing triples $(a:V\\to U,b:V\\to U^\\prime,\\alpha:a^*x\\cong b^*x^\\prime)$, projections $p,q$, and the section $i:U\\to Z$ determined by the specified reduction isomorphism, with $p i=\\operatorname{id}$ and $q i=j^\\prime$. The cited thickening clause ensures $i(u_0)$ is a finite type point and gives an open $O\\subset Z$ containing it on which $q$ is smooth. The open $i^{-1}(O)$ contains $u_0$ and therefore $u$.",
+   "uses": [
+    "lem-sfb-artin-noetherian-versal-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0G2K (lemma-generalization-versality), specialized to an affine Noetherian base; definitions definition-RS-star and definition-versal."
+   }
+  },
+  {
+   "text": "Choose a principal affine neighbourhood $D(f_0)\\subset U$ of $u_0$ contained in $i^{-1}(O)$, and lift $f_0$ to $f\\in R_i$. Restrict $U,U^\\prime,T$ to $D(f_0),D(f),D(f)$, respectively. Square-zero ideals lie in every prime, so these corresponding opens have identical underlying spaces and still contain $u$. Apply affine infinitesimal lifting to the smooth map $O\\to U^\\prime$ (with its original target), the affine thickening $D(f_0)\\hookrightarrow D(f)$ and $i|_{D(f_0)}$. It gives $i^\\prime:D(f)\\to O$ with $q i^\\prime$ the inclusion and $i^\\prime j^\\prime=i$. Pull back the universal isomorphism along $i^\\prime$ and invert it to obtain an arrow $x^\\prime|_{D(f)}\\to x$ over $p i^\\prime$, whose reduction is the inverse of $x\\to x^\\prime$. Composing with $y|_{D(f)}\\to x^\\prime|_{D(f)}$ gives a retraction arrow to $x$ on a neighbourhood of $u$ in $T$. Its composite with $x\\to y$ is the restriction identity by the specified reduction isomorphisms. This contradicts the obstruction and proves versality at $u$.",
+   "uses": [
+    "lem-sfb-smooth-space-affine-infinitesimal-lift",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0G2K (lemma-generalization-versality), specialized to an affine Noetherian base; definitions definition-RS-star and definition-versal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-sfb-artin-single-point-obstruction",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-sbc-first-order-thickening",
+  "lem-sfb-artin-noetherian-versal-base-change",
+  "lem-sfb-smooth-space-affine-infinitesimal-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0G2K (lemma-generalization-versality), specialized to an affine Noetherian base; definitions definition-RS-star and definition-versal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Versality for a category fibred in groupoids is stable under generalization of finite type points",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism being a generalizing map on the underlying topological spaces is Zariski-local at the source. This means that for any scheme morphism, if its restriction to a Zariski\"}\n  {\"name\": \"AlgebraicGeometry.universally_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {ι : Type u} (U : ι → Y.Opens),\\n      TopologicalSpace.IsOpenCover U → (∀ (i : ι), P (f ∣_ U i)) → P f) →\\n    AlgebraicGeometry.IsZariskiLocalAtTarget P.universally\", \"doc\": \"If a morphism property $P$ on schemes satisfies the condition that for any morphism $f$ and Zariski covering sieve $S$ on the target of $f$, the existence of a morphism in the pullback of $S$ along $f\"}\n  {\"name\": \"AlgebraicGeometry.universally_isLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {ι : Type u} (U : ι → Y.Opens),\\n      TopologicalSpace.IsOpenCover U → (∀ (i : ι), P (f ∣_ U i)) → P f) →\\n    AlgebraicGeometry.IsZariskiLocalAtTarget P.universally\", \"doc\": \"If a morphism property $ P $ on schemes is local on the target (i.e., for any morphism $ f $ and Zariski open cover $ \\\\{U_i\\\\} $ of the target, $ f $ has property $ P $ if each restriction $ f|_{U_i} $\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is a generalizing map is Zariski-local at the target. Specifically, for any such morphism $ f $ and any Zariski covering siev\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $P$ on schemes is Zariski local at the target if, for any morphism $f$ with property $P$ and any Zariski covering sieve $S$ on the target of $f$ (generated by open immersions), the\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $ P $ on schemes is said to be Zariski-local at the source if it satisfies the condition of being local at the source with respect to the Zariski precoverage, which is generated by\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $P$ on schemes is local at the target if, for any morphism $f$ with property $P$ and any covering sieve $S$ on the target of $f$ (in some Grothendieck topology), there exists a mor\"}\n  {\"name\": \"AlgebraicGeometry.universally_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P],\\n  AlgebraicGeometry.IsZariskiLocalAtSource P.universally\", \"doc\": \"If $ P $ is a morphism property on schemes that is Zariski-local at the source, then the property $ P $ being universally satisfied (i.e., preserved under all pullbacks) remains Zariski-local at the s\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: topological generalizing maps and local morphism properties do not assert stability of versality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\"",
+   "sub": "",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AddOreLocalization.universalAddHom\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [AddMonoid R] {S : AddSubmonoid R} [AddOreLocalization.AddOreSet S] {T : Type u_2} [AddMonoid T] (f : R →+ T) (fS : ↥S →+ AddUnits T) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) : AddOreLocalization S R →+ T\", \"doc\": \"The universal lift from a morphism `R →+ T`, which maps elements of `S` to\\nadditive-units of `T`, to a morphism `AddOreLocalization R S →+ T`.\"}\n  {\"name\": \"OreLocalization.universalMulHom\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [Monoid R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_2} [Monoid T] (f : R →* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) : OreLocalization S R →* T\", \"doc\": \"The universal lift from a morphism `R →* T`, which maps elements of `S` to units of `T`,\\nto a morphism `R[S⁻¹] →* T`.\"}\n  {\"name\": \"AddOreLocalization.universalAddHom_commutes\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [AddMonoid R] {S : AddSubmonoid R} [AddOreLocalization.AddOreSet S] {T : Type u_2} [AddMonoid T] (f : R →+ T) (fS : ↥S →+ AddUnits T) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} : (AddOreLocalization.universalAddHom f fS hf) (AddOreLocalization.numeratorHom r) = f r\", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalMulHom_commutes\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [Monoid R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_2} [Monoid T] (f : R →* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} : (OreLocalization.universalMulHom f fS hf) (OreLocalization.numeratorHom r) = f r\", \"doc\": \"\"}\n  {\"name\": \"AddOreLocalization.universalAddHom_unique\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [AddMonoid R] {S : AddSubmonoid R} [AddOreLocalization.AddOreSet S] {T : Type u_2} [AddMonoid T] (f : R →+ T) (fS : ↥S →+ AddUnits T) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) (φ : AddOreLocalization S R →+ T) (huniv : ∀ (r : R), φ (AddOreLocalization.numeratorHom r) = f r) : φ = AddOreLocal\", \"doc\": \"The universal morphism `universalAddHom` is unique.\"}\n  {\"name\": \"OreLocalization.universalMulHom_unique\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [Monoid R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_2} [Monoid T] (f : R →* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) (φ : OreLocalization S R →* T) (huniv : ∀ (r : R), φ (OreLocalization.numeratorHom r) = f r) : φ = OreLocalization.universalMulHom f fS hf\", \"doc\": \"The universal morphism `universalMulHom` is unique.\"}\n  {\"name\": \"AddOreLocalization.universalAddHom_apply\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [AddMonoid R] {S : AddSubmonoid R} [AddOreLocalization.AddOreSet S] {T : Type u_2} [AddMonoid T] (f : R →+ T) (fS : ↥S →+ AddUnits T) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} {s : ↥S} : (AddOreLocalization.universalAddHom f fS hf) (r -ₒ s) = ↑(-fS s) + f r\", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalMulHom_apply\", \"module\": \"Mathlib.GroupTheory.OreLocalization.Basic\", \"type\": \" {R : Type u_1} [Monoid R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_2} [Monoid T] (f : R →* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} {s : ↥S} : (OreLocalization.universalMulHom f fS hf) (r /ₒ s) = ↑(fS s)⁻¹ * f r\", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalHom\", \"module\": \"Mathlib.RingTheory.OreLocalization.Ring\", \"type\": \" {R : Type u_1} [Semiring R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_3} [Semiring T] (f : R →+* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) : OreLocalization S R →+* T\", \"doc\": \"The universal lift from a ring homomorphism `f : R →+* T`, which maps elements in `S` to\\nunits of `T`, to a ring homomorphism `R[S⁻¹] →+* T`. This extends the construction on\\nmonoids.\"}\n  {\"name\": \"OreLocalization.universalHom_commutes\", \"module\": \"Mathlib.RingTheory.OreLocalization.Ring\", \"type\": \" {R : Type u_1} [Semiring R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_3} [Semiring T] (f : R →+* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} : (OreLocalization.universalHom f fS hf) (OreLocalization.numeratorHom r) = f r\", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalHom_unique\", \"module\": \"Mathlib.RingTheory.OreLocalization.Ring\", \"type\": \" {R : Type u_1} [Semiring R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_3} [Semiring T] (f : R →+* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) (φ : OreLocalization S R →+* T) (huniv : ∀ (r : R), φ (OreLocalization.numeratorHom r) = f r) : φ = OreLocalization.universalHom f fS \", \"doc\": \"\"}\n  {\"name\": \"OreLocalization.universalHom_apply\", \"module\": \"Mathlib.RingTheory.OreLocalization.Ring\", \"type\": \" {R : Type u_1} [Semiring R] {S : Submonoid R} [OreLocalization.OreSet S] {T : Type u_3} [Semiring T] (f : R →+* T) (fS : ↥S →* Tˣ) (hf : ∀ (s : ↥S), f ↑s = ↑(fS s)) {r : R} {s : ↥S} : (OreLocalization.universalHom f fS hf) (r /ₒ s) = ↑(fS s)⁻¹ * f r\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: topological generalizing maps and local morphism properties do not assert stability of versality"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bversal\\b|RimSchlessinger",
+   "sub": "",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"15\", \"text\": \"weak limit satisfies the same \\\"versal property\\\" as a limit, without the uniqueness\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"194\", \"text\": \"/-- The versal morphism from any other cone to a weak limit cone. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"36\", \"text\": \"apply them to infinitesimal smooth (or versal) extensions later.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: topological generalizing maps and local morphism properties do not assert stability of versality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A versal deformation remains versal at generalizations of a point",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"StableUnderGeneralization\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ is stable under generalization if for any points $ x $ and $ y $, whenever $ y $ specializes to $ x $ (i.e., every neighborhood of $ x $ is a neighborhood of $ y $) and $ x \\\\in s $, then $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] : GeneralizingMap f\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"GeneralizingMap.stableUnderGeneralization_range\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \"(h : GeneralizingMap f) : StableUnderGeneralization (range f)\", \"doc\": \"If $ f : X \\\\to Y $ is a generalizing map between topological spaces, then the image of $ f $ is stable under generalization. That is, for any $ y \\\\in Y $ specializing to a point in the image, $ y $ it\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"GeneralizingMap\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \"(f : X → Y) : Prop\", \"doc\": \"A function $ f : X \\\\to Y $ between topological spaces is a generalizing map if, for any $ x \\\\in X $ and $ y \\\\in Y $, whenever $ y $ specializes to $ f(x) $ (i.e., every neighborhood of $ f(x) $ contai\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.universally_isLocalAtSource\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P],\\n  AlgebraicGeometry.IsZariskiLocalAtSource P.universally\", \"doc\": \"If a morphism property $ P $ on schemes is Zariski-local at the source, then the property that $ P $ is preserved under all pullbacks (denoted $ P.universally $) is also Zariski-local at the source. T\"}\n  {\"name\": \"StableUnderGeneralization.image\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y},\\n  GeneralizingMap f → ∀ {s : Set X}, StableUnderGeneralization s → StableUnderGeneralization (f '' s)\", \"doc\": \"If $ f : X \\\\to Y $ is a generalizing map between topological spaces and $ s \\\\subseteq X $ is stable under generalization, then the image $ f(s) \\\\subseteq Y $ is also stable under generalization. A set\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: topological generalizing maps and local morphism properties do not assert stability of versality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a deformation family is versal is stable under generalization",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism being a generalizing map on the underlying topological spaces is Zariski-local at the source. This means that for any scheme morphism, if its restriction to a Zariski\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is a generalizing map is Zariski-local at the target. Specifically, for any such morphism $ f $ and any Zariski covering siev\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $ P $ on schemes is said to be Zariski-local at the source if it satisfies the condition of being local at the source with respect to the Zariski precoverage, which is generated by\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $P$ on schemes is Zariski local at the target if, for any morphism $f$ with property $P$ and any Zariski covering sieve $S$ on the target of $f$ (generated by open immersions), the\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being universally open for a morphism of schemes is Zariski-local at the source. That is, if a morphism $ f: X \\to Y $ has an open cover $ \\\\{U_i\\\\} $ of $ X $ such that each restriction \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: topological generalizing maps and local morphism properties do not assert stability of versality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-square-zero-effectivity-openness",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, first paragraph: use of lemma-generalization-versality to exclude a bad generalization of u_0.",
+   "via": [
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-versality-generalization",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0G2K via the single-point obstruction 0G2J, finite-type descent, versal base change 0CXM and affine infinitesimal lifting 04AM. Added two statement-only prerequisites; retained the original statement and searches.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, first paragraph: use of lemma-generalization-versality to exclude a bad generalization of u_0. Realizes the stable-under-generalization prerequisite through the five steps of Tag 0G2K.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic affine inverse-limit existence and coordinate-ring identification needed for limit-preserving descent; no different unit route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-6d0d6d4a9",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-6d0d6d4a9 (reviewer sub-agent of L); spot-checked: I read Stacks artin.tex: definition-versal, 0CXM lemma-base-change-versal with its proof, definition-RS-star, 0G2J lemma-single-point with its proof, and 0G2K lemma-generalization-versality with its proof. I also read spaces-morphisms definition-finite-type-point and lemma-identify-finite-type-points. The item's statement and stmt_deps are unchanged from live. This is a first delivery; there is no re-split note. Step 1: shrinking to an affine finite-type U_0 is elementary and keeps u, u_0, versality and the finite-type-point property. Step 2: the single-point node's hypotheses hold exactly, including (RS*) in the same wording. Step 3: lem-weil-pbc-limit-affine-transition gives T = lim Spec R_i, limit preservation descends y, and enlarging R_i gives a square-zero kernel, hence a first-order thickening. Step 4: the new 0CXM node applies to (U,x),(U',x') through its thickening clause, so i(u_0) is a finite-type point with q smooth on O, and i^{-1}(O) contains u. Step 5: 04AM lifting on D(f_0) into D(f) gives i'; inverting the pulled-back universal isomorphism and composing with y->x' gives a retraction that contradicts 0G2J(3). proof_deps equals the union of the uses and there is no cycle. New node 0G2J: true specialization of the source to an affine Noetherian base; the no-retraction clause is equivalent to the source's (3); tested on F = point over k[t]/t^2, where k[t]/t^3 has no splitting. New node 0CXM: assumes (RS*) and limit preservation, which are stronger than (RS) and the diagonal being locally of finite type, so it is true. The section i is locally of finite type because p is, so it preserves finite-type points. Duplicate check: it is the arbitrary-Noetherian-base generalization of the existing Z-only lem-sfb-artin-versal-base-change-smooth, which cannot apply here because a finite-type Lambda-scheme need not be of finite type over Z. That is advisory only. lem-sfb-artin-nonversal-thickening-tower (0G2S) is not a duplicate. Batch-5 flag: def-trf-algebraic-space is the general Stacks 025Y definition and the item already cited it on live; it is not part of the trace-formula or Poincare-duality proofs, so it is accepted. tool_uses: accepted lem-weil-pbc-limit-affine-transition as a generic Limits 01YX/01YW tool. No SGA is used. from.node null is inherited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinVersalityGeneralization",
+  "declaration": "AlgebraicGeometry.ArtinVersality.isVersalAt_of_specializes",
+  "declarations": [
+   "AlgebraicGeometry.ArtinVersality.Object",
+   "AlgebraicGeometry.ArtinVersality.Lift",
+   "AlgebraicGeometry.ArtinVersality.ObjectsDescend",
+   "AlgebraicGeometry.ArtinVersality.ArrowsDescend",
+   "AlgebraicGeometry.ArtinVersality.ArrowEqualitiesDescend",
+   "AlgebraicGeometry.ArtinVersality.IsLimitPreserving",
+   "AlgebraicGeometry.ArtinVersality.IsRimSchlessingerStar",
+   "AlgebraicGeometry.ArtinVersality.IsVersalAt",
+   "AlgebraicGeometry.ArtinVersality.isVersalAt_of_specializes"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinVersalityGeneralization.lean",
+  "statement": "theorem isVersalAt_of_specializes (R : Type u) [CommRing R] [IsNoetherianRing R] (F : BasedCategory.{v, w} (Over (Spec (.of R)))) (hFibred : IsFibredInGroupoids F) (hDiagonal : HasAlgebraicSpaceDiagonal F) (hRS : IsRimSchlessingerStar F) (hLimits : IsLimitPreserving F) (U : Over (Spec (.of R))) [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] (x : Object F U) (u u₀ : U.left) (hu : LocallyOfFiniteType (U.left.fromSpecResidueField u) ∧ QuasiCompact (U.left.fromSpecResidueField u)) (hu₀ : LocallyOfFiniteType (U.left.fromSpecResidueField u₀) ∧ QuasiCompact (U.left.fromSpecResidueField u₀)) (hsp : u ⤳ u₀) (hx : IsVersalAt F U x u₀) : IsVersalAt F U x u",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "General-base total-category helpers unpack the inline RS*, limit-preservation and versality notions. The integer-only ArtinCriterion helpers cannot express this arbitrary-Noetherian-base statement. Existing CFG and representable-diagonal vocabulary is reused unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-954103b56",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Read the item, the 9 stmt_deps with their lean records, the module, the report and artin.tex (0G2K, RS*, limit-preserving, versal/hat-x). Node changes only lean plus an allowed landed stmt_dep (def-sfb-stable-pointed-moduli-groupoids, owner of IsFibredInGroupoids/HasAlgebraicSpaceDiagonal); statement verbatim. Clause match: Noetherian R over Spec R; strong-cartesian CFG; diagonal test equals the Isom-space condition; RS* as a total-category pushout along an affine first-order thickening, equivalent to the fibre-product equivalence given fibredness; limit preservation = essentially surjective, full, faithful over directed preorders in Type u; U LOFT+QC; finite-type points = LOFT and QC residue maps; u ⤳ u₀ is the right direction; IsVersalAt matches smoothness of x̂ over C_Λ (residue markings, S-structure, b≫d=c) and the landed ℤ-only ArtinCriterion version. Edge cases fine. No hollow defs, sorry only, docstrings and 5 steps present. The existing versality defs are Spec ℤ-only so new helpers are permitted. Advisory: the IsFirstOrderThickening owner (def-sbc-first-order-thickening) is a proof_dep, not a stmt_dep (inline notion); Filtered.Basic import redundant; the sibling single-point-obstruction and noetherian-versal-base-change nodes should reuse these helpers. No compile (no file changed)."
+ }
+}

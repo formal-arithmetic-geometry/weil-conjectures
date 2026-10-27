@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-closed-test-scalar-model-coherence",
+ "kind": "statement",
+ "title": "Universal coefficient comparison for closed-test models",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and on every small pro-etale site put $\\Lambda_Y=p_Y^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. Use internal $\\Lambda_Y$-modules [sk-def-sfb-module-objects], their exact inverse images and ordinary unbounded derived direct images computed on K-injectives [sk-def-sfb-module-derived-pushpull]. All sites and section values are taken in a common sufficiently large universe. Let $A$ be a commutative ring, $\\mathfrak a\\subseteq A$ an ideal, $U=\\operatorname{Spec}A$, and $s:Z=\\operatorname{Spec}(A/\\mathfrak a)\\hookrightarrow U$. Let $v$ be the affine ind-etale closed-site lift [def-exc-closed-site-lift]. Let $V\\to Z$ be an affine ind-etale object such that $V$ and $B=v(V)$ are w-contractible [sk-def-pe-wlocal]. Let $f:X\\to U$ be a morphism of affine schemes and put $X_Z=X\\times_UZ$, with projections $h:X_Z\\to X$, $f_Z:X_Z\\to Z$. Put $T=X\\times_UB$, $T_0=X\\times_UV$ and $a:T_0\\hookrightarrow T$; products mean scheme fibre products [def-pc-fibre-product]. Let $c:\\Lambda\\to\\Lambda'$ be a morphism of commutative condensed rings and write $\\operatorname{Res}_Y$ for exact restriction of scalars on module sheaves and their ordinary derived categories [sk-def-sfb-change-of-scalars, sk-def-sfb-derived-categories]. For any scheme morphism $b:Y'\\to Y$, let\n$$\\delta_b:\\operatorname{Res}_Y Rb_{*,\\Lambda'}\\longrightarrow Rb_{*,\\Lambda}\\operatorname{Res}_{Y'}$$\nbe the right-derived comparison induced by the ordinary sectionwise identity $b_{*,\\Lambda}\\operatorname{Res}_{Y'}=\\operatorname{Res}_Yb_{*,\\Lambda'}$. For any object $W$ of the site of $Y$, similarly let\n$$\\gamma_W:R\\Gamma_{\\Lambda'}(W,-)\\longrightarrow R\\Gamma_{\\Lambda}(W,\\operatorname{Res}_Y(-))$$\nbe the comparison induced by the identity on ordinary underlying abelian section groups; its direction and normalization are those of the universal right-derived units [def-sfb-right-derived-functor].\nThe comparisons $\\delta_b,\\gamma_W$ commute with site localization, the actual closed-test unit-section maps $F(B)\\to(s^*F)(V)$, the ordinary pullback composition maps, and the unit–counit mate for the square. Consequently the squares comparing the normalized closed-test section models $Q(\\mathcal I(T))$, $Q(\\mathcal J(T_0))$ for the two coefficient systems commute, as does the square for their chain restriction $Q(j(T_0)\\circ\\eta_a)$. Here $\\mathcal I$ represents a bounded-below object and $\\mathcal J$ resolves its $h^*$-pullback; the section models are identified with derived sections by the actual closed-unit inverse and degreewise localization identities. These equalities are equalities in $D(\\operatorname{Ab})$, and are natural for every actual derived module map $K\\to\\operatorname{Res}_XN$, with $K$ bounded below over $\\Lambda_X$ and $N$ bounded below over $\\Lambda'_X$. They apply in particular to $M[0]\\to\\operatorname{Res}_X(\\Lambda'_X\\otimes_{\\Lambda_X}M)[0]$ induced by the ordinary scalar-extension unit $m\\mapsto1\\otimes m$. No derived tensor unit is substituted for this map. No preservation of K-injectives by $\\operatorname{Res}$ and no invertibility of $\\delta_b$ or $\\gamma_W$ is assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09T5, lemma-derived-adjoint-functors and the universal right-derived comparison; agent internal scalar and section compatibility argument, returned proof steps 10–11."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-exc-closed-site-lift",
+  "sk-def-pe-wlocal",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-right-derived-functor",
+  "def-sfb-proetale-inverse-image-unit-section",
+  "def-pur-localized-ringed-site",
+  "def-sfb-closed-test-scalar-comparison-maps",
+  "def-sfb-closed-test-scalar-model-diagrams"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the universal scalar equations and section coherence from their separate steps. The latter includes the computation-unit equation proved using rightDerivedPullback.",
+   "uses": [
+    "lem-sfb-closed-test-scalar-universal-coherence",
+    "lem-sfb-closed-test-scalar-section-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the conditional scalar-model-square theorem to those universal and section equations and the two supplied models.",
+   "uses": [
+    "lem-sfb-closed-test-scalar-model-squares"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For K to Res N, naturality of derivedSectionArrow gives the left MapCoherence equation, and section coherence gives its right equation. Apply actual derived-map model naturality to obtain ModelMapCoherence.",
+   "uses": [
+    "lem-sfb-closed-test-model-map-naturality",
+    "def-sfb-closed-test-scalar-model-diagrams"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the same results to scalarUnit, the ordinary extension/restriction unit in degree zero. Actual model naturality is unbounded, so no extra boundedness proof or flatness assumption is needed.",
+   "uses": [
+    "lem-sfb-closed-test-model-map-naturality",
+    "def-sfb-closed-test-derived-exchange-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-closed-test-scalar-universal-coherence",
+  "lem-sfb-closed-test-scalar-section-coherence",
+  "lem-sfb-closed-test-scalar-model-squares",
+  "lem-sfb-closed-test-model-map-naturality",
+  "def-sfb-closed-test-scalar-model-diagrams",
+  "def-sfb-closed-test-derived-exchange-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y and 09T5. Assemble universal, section and scalar-model equations with actual derived-map naturality and ordinary scalar-unit specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars on condensed pro etale modules commutes with closed test section models and the derived adjunction mate using a noninvertible right derived direct image comparison",
+   "results": "8 hits: LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, LightCondensed.ihomPoints_symm_comp, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, Condensed.freeForgetAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, LightCondensed.freeForgetAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: Ordinary ring-module scalar adjunction units and algebraic base-change identities do not give the universal derived scalar comparison squares for closed pro-etale test section models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"restrictScalars\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Ordinary ring-module scalar adjunction units and algebraic base-change identities do not give the universal derived scalar comparison squares for closed pro-etale test section models."
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|restrictionOfScalars).*(rightDerived|baseChange|unit)|(rightDerived|baseChange|unit).*(restrictScalars|restrictionOfScalars)",
+   "results": "25 hits: Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/RingTheory/Bialgebra/Quotient.lean, Mathlib/RingTheory/Bialgebra/TensorProduct.lean, Mathlib/Algebra/Module/LocalizedModule/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Ordinary ring-module scalar adjunction units and algebraic base-change identities do not give the universal derived scalar comparison squares for closed pro-etale test section models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derive the sectionwise identity between direct image and scalar restriction by the universal right derived unit and prove compatibility with closed pro etale unit sections for an actual module map",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison R f push Res to Res R f push need not be invertible but commutes with closed test evaluation and ordinary scalar extension unit",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.RestrictionCoextensionAdj.unit'_app, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+   "date": "2026-10-22",
+   "verdict": "no match: Ordinary ring-module scalar adjunction units and algebraic base-change identities do not give the universal derived scalar comparison squares for closed pro-etale test section models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"restrictScalars\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar restriction or abstract derived adjunction/comparison factors, not all closed-test section-model and actual-map naturality clauses for arbitrary condensed coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal right derived comparison for scalar restriction commutes with closed test section models and derived base change mate",
+   "results": "8 hits: ModuleCat.instIsRightAdjointRestrictScalars, ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj', RestrictScalars, AlgHom.restrictScalars, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar restriction or abstract derived adjunction/comparison factors, not all closed-test section-model and actual-map naturality clauses for arbitrary condensed coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|restrictionOfScalars).*(rightDerived|baseChange|unit)|(rightDerived|baseChange|unit).*(restrictScalars|restrictionOfScalars)",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar restriction or abstract derived adjunction/comparison factors, not all closed-test section-model and actual-map naturality clauses for arbitrary condensed coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars right derived direct image comparison commutes with adjunction units counits and evaluation on localized sites",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app_assoc, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar restriction or abstract derived adjunction/comparison factors, not all closed-test section-model and actual-map naturality clauses for arbitrary condensed coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical right derived functor comparison for an exact square respects geometric adjunction mates without restriction of scalars preserving injectives",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar restriction or abstract derived adjunction/comparison factors, not all closed-test section-model and actual-map naturality clauses for arbitrary condensed coefficients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-test-derived-exchange-model",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 10, 11: Universal coefficient comparison for closed-test models",
+   "via": [
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-test-scalar-model-coherence",
+  "worker": "stage1",
+  "summary": "Nine-step proof from existing exact-square, ring-sheaf scalar adjunction and closed-test model statements; no new nodes. Preserve the full statement and the forward non-inverted scalar comparisons. Spell out the unit/counit equations, exchange rectangle, inverse closed-unit normalization, chain restriction square, and cospan naturality for every actual K to Res N. Check identity, empty, zero-coefficient and non-flat cases.",
+  "blueprint": "The ancestor query returns None, as in the inherited from.node. This serves the inherited paragraph (3) closed-test identification through lem-sfb-closed-test-derived-exchange-model, specifically returned steps 10--11, without changing the unit route. Whole-blueprint scalar-model and coefficient-comparison searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic Scalar adjunction transport between internal and sectionwise module sheaves used only for its stated comparison/normalization; it does not replace the unit's closed-test proof route."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic Section equivalence and canonical derived push-pull adjunctions used only for its stated comparison/normalization; it does not replace the unit's closed-test proof route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic Derived adjunctions under compatible changes of ring sheaves used only for its stated comparison/normalization; it does not replace the unit's closed-test proof route."
+   },
+   {
+    "node": "lem-sfb-unbounded-sections-localization",
+    "why": "Generic Unbounded derived sections agree with localized-site derived sections used only for its stated comparison/normalization; it does not replace the unit's closed-test proof route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category used only for its stated comparison/normalization; it does not replace the unit's closed-test proof route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-derived-slice-localization",
+    "why": "Generic canonical derived slice comparison, with adjunction compatibility, proves localization compatibility of the scalar comparison; no replacement of the closed-test route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-unbounded-sections-localization",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-9c4dd94aa",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-9c4dd94aa (reviewer sub-agent of L); spot-checked: I read the item and all 14 cited statements in full. The statement, stmt_deps and blueprint field are identical to the Q27 re-split version. The live node is still unsplit and there is no repair note, so the delivery is not superseded. There are no new nodes and no SGA. Step 2: I checked the types of the exact-square lemma (U=r_{Y'}, V=r_Y, F=b_{*,S}, G=b_{*,R}; for sections V=id). This gives δ_b: Res Rb_{*,Λ'}→Rb_{*,Λ}Res and γ_W in the item's direction, with uniqueness, and Res is not assumed to preserve K-injectives. Step 3: ring-sheaf-change d has the same direction and the same computation-unit normalization, so d=δ_b. The adjunct identity with t=id and t=ε^S gives exactly the two displayed unit and counit equations. Step 5: I re-derived δ·r(Ex')=Ex_{rN}·s^*δ_f by naturality of δ, the unit/counit substitution, the θ square and naturality of η; it is genuinely elementary. Steps 4 and 6–8: the localization squares come from the degreewise identity (09T5 uniqueness plus slice-localization). The unit-section inverse commutes with restriction because underlying sections do not change. The pasting with chain-mate gives γ_{T0}r_S=r_R γ_T, and the cospans use only forward γ arrows; the D^+ naturality comes from localized-model-coherence plus K-injective Hom. Step 9 uses the ordinary unit m↦1⊗m. Edge cases checked: c=id, 𝔞=0, 𝔞=A, Λ'=0, and non-flat ℤ→ℤ/2, where restriction loses K-injectivity and the proof re-resolves. Batch-5 findings: lem-pd-section-derived-pushpull-normalization is a generic internal/section normalization cited by 14 sfb nodes, and neither assumption gives it; lem-trf-localization-essentially-surjective is a pure category-theory Mathlib leaf. Both are outside the assumptions. The tool_uses list six generic normalization lemmas, all accepted; none replaces the closed-test route. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedTestScalarModelCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestScalarModelCoherence.closed_test_scalar_model_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClosedTestScalarModelCoherence.closed_test_scalar_model_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedTestScalarModelCoherence.lean",
+  "statement": "theorem closed_test_scalar_model_coherence : UniversalCoherence c ∧ SectionCoherence c ∧ ∀ (A : Type u) [CommRing A] (a : Ideal A) {X XZ : Scheme.{u}} [IsAffine X] (f : X ⟶ Spec (.of A)) (h : XZ ⟶ X) (fZ : XZ ⟶ Spec (.of (A ⧸ a))) (w : IsPullback h fZ f (closedMap A a)) (V : (Spec (.of (A ⧸ a))).AffineProEt) [IsWContractibleRing Γ(V.left, ⊤)] [IsWContractibleRing Γ((liftedTest A a V).left, ⊤)], (∀ (N : DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj S X))) (M : TestModel S h N.obj) (P : TestModel Λ h ((restrict c X).obj N.obj)), ModelCoherence c A a f h fZ w V N.obj M P) ∧ (∀ (K : DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (N : DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj S X))) (α : K.obj ⟶ (restrict c X).obj N.obj) (M : TestModel Λ h K.obj) (P : TestModel Λ h ((restrict c X).obj N.obj)), MapCoherence c A a f h fZ w V K.obj N.obj α ∧ ModelMapCoherence A a f h fZ w V α M P) ∧ (∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X), MapCoherence c A a f h fZ w V ((DerivedCategory.singleFunctor _ 0).obj M) ((DerivedCategory.singleFunctor _ 0).obj ((Mod.extendScalars (coefficientMap c X)).obj M)) (scalarUnit c X M) ∧ ∀ (P : TestModel Λ h ((DerivedCategory.singleFunctor _ 0).obj M)) (P' : TestModel Λ h ((restrict c X).obj ((DerivedCategory.singleFunctor _ 0).obj ((Mod.extendScalars (coefficientMap c X)).obj M)))), ModelMapCoherence A a f h fZ w V (scalarUnit c X M) P P')",
+  "branch": "sheaf-dag",
+  "by": "Q71",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-469b1e072",
+  "group": "Q71",
+  "result": "fix",
+  "note": "Mathematics correct: delta=restrictPush and gamma are forward rightDerivedPullback comparisons, never inverted. UniversalCoherence (normalization, unit, counit, compositor, exchange square), SectionCoherence (gamma normalization, unit-section and derived squares, direct-image section identity), ModelCoherence (8 IsIso + source/target/chain/2 localization squares, sourceModel = eUnit.inv≫eLeft.inv of the landed section-models lemma), Map/ModelMapCoherence for every actual K→Res N on D^+, scalarUnit = ordinary m↦1⊗m. Edge cases c=id, 𝔞=0, 𝔞=A, Λ'=0, non-flat ℤ→ℤ/2 OK; no extra hypotheses; H5/H6/H8 OK. FIX (H2): new node def-sfb-closed-test-scalar-comparison-maps uses coefficientMap, comap*/derivedComapUpperStarIso and adj/pullComp/exchange without citing owners → fixes/def-sfb-closed-test-scalar-comparison-maps.json adds sk-def-sfb-coefficient-change, sk-def-sfb-coefficient-comparisons, def-sfb-closed-test-derived-exchange-maps; fixes/def-sfb-closed-test-scalar-model-diagrams.json adds sk-def-sfb-coefficient-comparisons (bracket text added; Lean unchanged, no compile). Advisories: restrict/restrictPush/scalarUnit owned only by parent theorem module (rule-7 import omission listed, as Q45) → extend def-sfb-closed-test-derived-exchange-maps; kinjective-section-models plain defs cited via the theorem node (no def owner yet); MapCoherence conjuncts redundant; localization rendered at section level; second reading by same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T101407-L-3688871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

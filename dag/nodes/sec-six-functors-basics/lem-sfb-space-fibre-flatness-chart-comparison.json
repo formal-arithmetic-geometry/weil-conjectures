@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-space-fibre-flatness-chart-comparison",
+ "kind": "statement",
+ "title": "Field-valued fibre flatness agrees with the etale scheme-chart fibre test",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be morphisms of algebraic spaces over $S$ [def-trf-algebraic-space]; put $g=h\\circ f$. Let $F$ be a quasi-coherent $\\mathcal O_X$-module on the small etale site [def-trf-space-quasi-coherent-module]. Use tensor pullback [def-trf-space-etale-module-functors] and field-valued point classes [def-a1-space-point-topology]. Fix $x\\in|X|$. For every representative $\\xi:\\operatorname{Spec}K\\to X$, with $K$ a field [def-weil-field], put $z_K=g\\xi$, $X_{z_K}=X\\times_{Z,z_K}\\operatorname{Spec}K$, $Y_{z_K}=Y\\times_{Z,z_K}\\operatorname{Spec}K$ [lem-trf-space-fibre-products-etale-covers], and let $F_{z_K}$ be the pullback of $F$. Let $\\widetilde x$ be the point of $X_{z_K}$ defined by $(\\xi,\\mathrm{id})$. Relative flatness of a quasi-coherent module at a space point means that on every compatible etale scheme-chart diagram its ordinary Zariski stalk is flat over the corresponding base local ring; module flatness is [def-weil-pbc-flat-ring-map]. On a scheme chart, a small-etale quasi-coherent module is interpreted as its Zariski module by restriction to opens [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Consider any compatible scheme diagram $U\\to V\\to W$ with etale vertical maps $a:U\\to X$, $b:V\\to Y$, $c:W\\to Z$, and any $u\\in U$ mapping to $x$. Write $v\\in V$ and $w\\in W$ for its images and put $U_w=U\\times_W\\operatorname{Spec}\\kappa(w)$ and $V_w=V\\times_W\\operatorname{Spec}\\kappa(w)$ [def-pc-scheme-fibre]. Let $F_w$ be the ordinary quasi-coherent module on $U_w$ obtained by tensor pullback of the Zariski module of $a^*F$ [def-pc-module-pullback]. Then $F_{z_K}$ is flat over $Y_{z_K}$ at $\\widetilde x$ if and only if $(F_w)_u$ is flat over $\\mathcal O_{V_w,v}$. This holds for every such representative and diagram; such diagrams and points $u$ exist. Consequently either condition is independent of all these choices. There are no finiteness, relative-flatness, nonzero-module, or Noetherian assumptions.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-a1-space-point-topology",
+  "def-weil-field",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas $W\\to Z$, then a surjective etale scheme atlas $V\\to W\\times_ZY$, and finally one $U\\to V\\times_YX$. Fibre products exist by [lem-trf-space-fibre-products-etale-covers]. Base change and composition of etale coverings [lem-trf-space-chartwise-etale-permanence] show that the composites $V\\to Y$ and $U\\to X$ are etale and surjective on point classes. Thus some $u\\in U$ maps to $x$. This proves existence; from now on fix ANY diagram and point allowed by the statement, not necessarily this surjective choice.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+   }
+  },
+  {
+   "text": "Fix also ANY representative $\\xi:\\operatorname{Spec}K\\to X$ of $x$. The residue-field representative $\\operatorname{Spec}\\kappa(u)\\to U\\to X$ and $\\xi$ have the same class. By the equivalence relation in [def-a1-algebraic-space-point-classes], there are a field $L$ and embeddings $K\\to L$, $\\kappa(u)\\to L$ for which the maps to $X$ agree. Put $T=\\operatorname{Spec}L$. Its map to $U$ induces maps to $V$ and $W$, the last factoring through $\\operatorname{Spec}\\kappa(w)$. These maps and $T\\to\\operatorname{Spec}K$ have the same composite to $Z$.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+   }
+  },
+  {
+   "text": "Put $B=V\\times_WT=V_w\\times_{\\operatorname{Spec}\\kappa(w)}T$, $A=U\\times_WT=U_w\\times_{\\operatorname{Spec}\\kappa(w)}T$, and $D=X_{z_K}\\times_{Y_{z_K}}B$. These are fibre products, with $A,B$ schemes. The equality of maps in step 2 defines a point $t\\in A$ lying over $u$ and over $\\widetilde x\\in X_{z_K}$; write $d$ for its image in $D$ and $b$ for its image in $B$. The identities $D=(X\\times_YV)\\times_VB$ and $A=U\\times_VB$ follow by matching the projections and their equalities. Both $U\\to X$ and $X\\times_YV\\to X$ are etale, so $U\\to X\\times_YV$ is etale by [lem-trf-space-chartwise-etale-permanence]. Its base change $A\\to D$ is therefore an etale scheme chart. The square $D\\to X_{z_K}$ over $B\\to Y_{z_K}$ is cartesian, as is the square $A\\to U_w$ over $B\\to V_w$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+   }
+  },
+  {
+   "text": "Let $N$ be the Zariski quasi-coherent module on $A$ corresponding to the pullback of $F$ along $A\\to X$. Pullbacks of $F$ to $X_{z_K}$ and $D$ remain quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. By [def-sfb-space-module-tensor-composition], pulling $F_{z_K}$ to $D$ and then to $A$ is canonically the same pullback of $F$: locally both iterated tensors map $c\\otimes(e\\otimes m)$ to $c\\,e\\otimes m$. The other path $A\\to U_w\\to U\\to X$ gives the same module. The pullback comparison for arbitrary scheme morphisms in [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies this latter module with the ordinary tensor pullback of $F_w$ along $A\\to U_w$. Thus all the modules compared below are $N$, with the scalar actions from $A\\to B$.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "def-sfb-space-module-tensor-composition",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+   }
+  },
+  {
+   "text": "The map $B\\to V_w$ is the base change of the field extension $T\\to\\operatorname{Spec}\\kappa(w)$, hence flat by [lem-pc-field-extension-flat] and [lem-sfb-stack-chartwise-smooth-etale-calculus]. Also factor $B\\to Y_{z_K}$ as $B\\to V\\times_ZT\\to Y\\times_ZT\\to Y_{z_K}$. The last arrow is base change of $\\operatorname{Spec}L\\to\\operatorname{Spec}K$, hence flat. The middle arrow is base change of $V\\to Y$, hence etale. The first is base change of the diagonal $W\\to W\\times_ZW$ along the pair of maps $V\\times_ZT\\to W$ furnished by $V$ and $T$; the diagonal is etale by etale permanence, since both $W\\to Z$ and $W\\times_ZW\\to Z$ are etale. Therefore all three factors are flat and their composite is flat. The permanence statements and etale-implies-flat used here are exactly [lem-trf-space-chartwise-etale-permanence] and [lem-sfb-stack-chartwise-smooth-etale-calculus], applied to algebraic spaces (in particular to morphisms representable by algebraic spaces).",
+   "uses": [
+    "lem-pc-field-extension-flat",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+   }
+  },
+  {
+   "text": "Apply both clauses of [lem-sfb-space-pointwise-module-flat-base-change] to the ACTUAL cartesian square $D=X_{z_K}\\times_{Y_{z_K}}B$, at $d$ over $\\widetilde x$. The base map $B\\to Y_{z_K}$ is flat at $b$ by step 5, and the module is quasi-coherent by step 4. Consequently $F_{z_K}$ is flat over $Y_{z_K}$ at $\\widetilde x$ if and only if its pullback to $D$ is flat over $B$ at $d$.",
+   "uses": [
+    "lem-sfb-space-pointwise-module-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+   }
+  },
+  {
+   "text": "The etale scheme chart $A\\to D$ at $t$, together with the identity chart $B\\to B$, is an admissible chart diagram for $D\\to B$. By [lem-sfb-space-module-flat-arbitrary-charts], flatness of the pulled-back module on $D$ at $d$ is equivalent to the single condition that $N_t$ is flat over $\\mathcal O_{B,b}$. The node states both directions, including that one such chart and point suffices; neither this chart nor $A\\to D$ has to be surjective. Its quasi-coherent hypothesis holds by step 4.",
+   "uses": [
+    "lem-sfb-space-module-flat-arbitrary-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+   }
+  },
+  {
+   "text": "Apply both clauses of the SCHEME statement [lem-sfb-pointwise-module-flatness-base-change] to the cartesian square $A=U_w\\times_{V_w}B$ at $t$ over $u$. Its base map $B\\to V_w$ is flat by step 5. Step 4 identifies the pulled-back module with $N$. Thus $N_t$ is flat over $\\mathcal O_{B,b}$ if and only if $(F_w)_u$ is flat over $\\mathcal O_{V_w,v}$. Combining this equivalence with steps 6 and 7 proves the assertion for the arbitrary representative and arbitrary diagram fixed above.",
+   "uses": [
+    "lem-sfb-pointwise-module-flatness-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+   }
+  },
+  {
+   "text": "For two representatives, compare each with one diagram supplied by step 1; both field-fibre tests are equivalent to the same chart-fibre test. For two diagrams, compare each with one representative of $x$; both chart-fibre tests are equivalent to the same field-fibre test. This proves independence of all choices. The argument never uses a nonzero stalk, finite presentation, relative flatness over $Z$, or a Noetherian assumption. In particular the zero module gives true flatness conditions on both sides.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05WY (lemma-flat-on-fibres-at-point), equivalence of conditions (2) and (3), including the choice-independence and diagram-existence assertions in its proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-a1-algebraic-space-point-classes",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "def-sfb-space-module-tensor-composition",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-field-extension-flat",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-pointwise-module-flat-base-change",
+  "lem-sfb-space-module-flat-arbitrary-charts",
+  "lem-sfb-pointwise-module-flatness-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05WY, proof of (2) iff (3) and existence paragraph; the final diagram is corrected by inserting the actual fibre product D and using Tag 05VU on its etale source chart."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*(fibre|fiber)|(fibre|fiber).*flat",
+   "results": "OK 3 hit(s).  Returned: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a quasi coherent sheaf on a fibre of algebraic spaces can be checked on etale chart fibres",
+   "results": "OK 8 hit(s).  Returned: AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.flat_of_affine_subset, RingHom.Flat.propertyIsLocal, RingHom.Flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.instMorphismRestrict",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat",
+   "results": "OK 12 hit(s).  Returned: AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instRespectsSchemeIsOpenImmersion, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness on a fibre of morphisms of algebraic spaces is independent of the field valued point representative and equivalent to flatness on etale scheme chart fibres",
+   "results": "OK 8 hit(s).  Returned: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|flat.*(fibre|fiber)|(fibre|fiber).*flat",
+   "results": "OK 0 hit(s).  Returned: ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For X to Y to Z and a quasi coherent module on X, flatness on the field valued Z fibre is equivalent to flatness on the ordinary residue fibre of etale scheme charts U to V to W",
+   "results": "OK 8 hit(s).  Returned: AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a quasi coherent module on an algebraic space fibre agrees with flatness on residue field fibres of etale scheme charts",
+   "results": "OK 8 hit(s).  Returned: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-morphism flatness and smooth-fibre results do not state the quasi-coherent module comparison for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat",
+   "results": "OK 12 hit(s).  Returned: AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instRespectsSchemeIsOpenImmersion, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-morphism flatness and smooth-fibre results do not state the quasi-coherent module comparison for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|flat.*(fibre|fiber)|(fibre|fiber).*flat",
+   "results": "OK 3 hit(s).  Returned: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-morphism flatness and smooth-fibre results do not state the quasi-coherent module comparison for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise flatness of a quasi coherent sheaf on algebraic space fibres can be tested on etale charts",
+   "results": "OK 8 hit(s).  Returned: AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset, RingHom.Flat.propertyIsLocal, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.iff_flat_stalkMap",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-morphism flatness and smooth-fibre results do not state the quasi-coherent module comparison for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms X to Y to Z flatness of a module on the Z fibre at a field valued point is independent of representatives and equivalent on etale chart residue fibres",
+   "results": "OK 8 hit(s).  Returned: AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, Algebra.Smooth.flat, Algebra.FormallyUnramified.flat_of_restrictScalars",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-morphism flatness and smooth-fibre results do not state the quasi-coherent module comparison for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-fibre-flat-free-criterion",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Invertible modules form an open substack for proper flat algebraic spaces. Specific input: quot.tex lemma-picard-stack-open-in-coh, the sentence invoking spaces-more-morphisms lemma-finite-free-open to obtain W and its arbitrary-base-change property. Supporting input in the proof of Tag 0CZT: the invocation of lemma-flat-and-free-at-point-fibre, together with lemma-flat-on-fibres-at-point for id_X over Y. Specific comparison prerequisite: Tag 05WY, conditions (2) and (3), used for the identity of X over Y.",
+   "via": [
+    "lem-sfb-space-fibre-flat-free-criterion",
+    "lem-sfb-space-relative-finite-free-locus-base-change",
+    "lem-sfb-space-invertible-open-coherent",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-fibre-flatness-chart-comparison",
+  "worker": "stage1",
+  "summary": "Proved 05WY (2) iff (3) using a common field lift, an actual cartesian comparison D, etale source-chart detection and pointwise flat base change. Reused existing nodes throughout, with no new nodes and no statement change. Corrected the source proof's false claim that its left-hand square is cartesian; the intervening source map is only etale. Verified each citation against its statement, all hypotheses and zero-module/identity/disconnected-chart cases.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Invertible modules form an open substack for proper flat algebraic spaces. Specific input: quot.tex lemma-picard-stack-open-in-coh, the sentence invoking spaces-more-morphisms lemma-finite-free-open to obtain W and its arbitrary-base-change property. Supporting input in the proof of Tag 0CZT: the invocation of lemma-flat-and-free-at-point-fibre, together with lemma-flat-on-fibres-at-point for id_X over Y. Specific comparison prerequisite: Tag 05WY, conditions (2) and (3), used for the identity of X over Y. Realizes the 05WY supporting comparison for the finite-free locus prerequisite; keeps the current blueprint direct-image proof (3) route. No higher-level record is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Supplies scheme atlases surjective on point classes for the three successive choices in 05WY; an atlas-existence tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Supplies algebraic-space fibre products and surjectivity of pulled-back etale covers, the generic geometry used in 05WY."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Supplies composition, base change and cancellation for etale charts, used to form the comparison diagram of 05WY."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Identifies the chart modules and their tensor pullbacks with the Zariski quasi-coherent modules needed for the ordinary stalk test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-123cd60a5",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-123cd60a5 (reviewer sub-agent of L); spot-checked: I read Stacks 05WY in full (statement, existence paragraph, proofs of (1)-(3) and (2)-(3)), the item's nine steps and the statements of all 12 cited nodes. No new nodes, and the statement is unchanged: it is byte-identical to live and side-live, where the item is still unsplit. There is no repair note and no other node duplicating 05WY. The report's source error is real: the left square of the source's final diagram is not cartesian (counterexample with U = Spec k ⊔ Spec k). The delivery repairs it by inserting the true fibre product D = X_z ×_{Y_z} B = (X×_YV)×_VB, applying 05VW (lem-sfb-space-pointwise-module-flat-base-change, both clauses) to D, then 05VU (lem-sfb-space-module-flat-arbitrary-charts) to the étale chart A = U×_VB → D, then 047C on the scheme square A = U_w×_{V_w}B. I checked: the common-field argument from the point-class definition; the identities for A, B, D and the point t; the étale map U→X×_YV by the permanence clause; flatness of B→V_w; flatness of B→Y_{z_K} as diagonal base change, then étale, then field base change; and the module identification through tensor composition and the Zariski–étale comparison. Small cases checked: F=0, identity charts, disconnected U, transcendental L, empty X. Batch-5 flags: all eight cited nodes are generic algebraic-space foundations (03FX/03BX, 03FT-03FV, 03BU, 03GA, 03D8, 04XC, 05VW, 05VU), not steps of the trace formula or Poincaré duality proofs, so they are accepted. The four tool_uses (atlas, fibre products, étale permanence, Zariski–étale) are accepted. No SGA source is used. No changes."
+ }
+}

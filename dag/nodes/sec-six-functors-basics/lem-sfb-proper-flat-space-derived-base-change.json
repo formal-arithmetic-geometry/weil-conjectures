@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-proper-flat-space-derived-base-change",
+ "kind": "statement",
+ "title": "Perfect coherent derived direct image for proper flat algebraic spaces",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a flat proper finitely presented morphism of algebraic spaces [def-trf-algebraic-space]. Flatness and finite presentation are tested on etale scheme charts, and proper means separated, of finite type and universally closed. Let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module of finite presentation, flat over $T$: on each etale scheme chart it is an associated module sheaf, locally has a presentation $\\mathcal O^m\\to\\mathcal O^n\\to\\mathcal F\\to0$ with $m,n$ finite, and its stalks are flat over the corresponding stalks of $T$. Write $f_{\\mathrm{et}}:X_{\\mathrm{et}}\\to T_{\\mathrm{et}}$ for the induced morphism of small etale ringed topoi, and $\\epsilon_T:T_{\\mathrm{et}}\\to T_{\\mathrm{Zar}}$ for restriction to the Zariski site. Derived categories of modules on these sites are localizations of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Set\n$$K_f(\\mathcal F)=R\\epsilon_{T,*}Rf_{\\mathrm{et},*}\\mathcal F\\in D(\\mathcal O_T)$$\n[def-pc-derived-category]. Then $K_f(\\mathcal F)$ is perfect [def-pc-perfect-complex]. The pullback $\\epsilon_T^*$ on module sheaves is exact, and the canonical counit is an isomorphism in the derived category of $T_{\\mathrm{et}}$,\n$$\\epsilon_T^*K_f(\\mathcal F)\\xrightarrow{\\sim}Rf_{\\mathrm{et},*}\\mathcal F.$$\nFor every morphism of schemes $h:T'\\to T$, write $X'=X\\times_TT'$, $f':X'\\to T'$ and $\\mathcal F'$ for the ordinary module pullback of $\\mathcal F$. The canonical derived base-change morphism is an isomorphism\n$$Lh^*K_f(\\mathcal F)\\xrightarrow{\\sim}K_{f'}(\\mathcal F')$$\nin $D(\\mathcal O_{T'})$, with derived pullback as in [def-pc-derived-pullback]. Under the displayed etale--Zariski counit isomorphisms this is the usual derived base-change morphism on the small etale sites. These canonical isomorphisms respect identities and composition of base changes. For $\\mathcal F=\\mathcal O_X$, they take the derived scalar unit $\\mathcal O_T[0]\\to K_f(\\mathcal O_X)$ to the scalar unit for $f'$. No fibre-dimension bound, reducedness or Noetherianness of $T$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CTM (lemma-flat-proper-perfect-direct-image-general), with Tag 071Q (lemma-derived-quasi-coherent-small-etale-site), Tag 08H8 (lemma-epsilon-flat), Tag 08HG (lemma-descend-perfect), and Tag 08GH (remark-match-total-direct-images) for the Zariski convention."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-pullback",
+  "def-sfb-space-zariski-ordinary-comparison",
+  "def-sfb-space-zariski-derived-comparison",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-space-base-change-comparisons",
+  "def-sfb-space-flat-proper-coefficient",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-module-derived-exchange",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-affine-sections-compositors",
+  "def-sfb-canonical-scheme-derived-adjunction-composition",
+  "def-sfb-relative-dualizing-trace-pair"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=Rf_{\\mathrm{et},*}\\mathcal F$. In [lem-sfb-proper-support-tensor-perfect] take $S=Y=T$, $E=\\mathcal O_X[0]$ and $G^\\bullet=\\mathcal F[0]$. The first factor is strictly perfect of rank one; tensoring it with $G^\\bullet$ is canonically $\\mathcal F[0]$. The sole term has the assumed finite presentation and relative flatness, and its support is closed in the proper space $X$, hence proper over $T$: a closed subspace is separated, finite type, and remains closed after every base change, and restricting a proper map to it preserves all three properties. Thus $A$ is etale-perfect. It has quasi-coherent cohomology by the same cited statement.",
+   "uses": [
+    "lem-sfb-proper-support-tensor-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0CTM (lemma-flat-proper-perfect-direct-image-general), specialization of 0A1P with a single term; 08JL (lemma-pseudo-coherent), strict-perfect chart argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-derived-etale-zariski-equivalence] to $A$. Its quasi-inverse gives $K=R\\epsilon_{T,*}A\\in D_{\\mathrm{QCoh}}(\\mathcal O_T)$ and its canonical counit gives $\\epsilon_T^*K\\simeq A$. It also gives exactness of $\\epsilon_T^*$. By [lem-sfb-etale-detects-perfect], $K$ is Zariski-perfect, because its etale pullback is the perfect object $A$ from Step 1.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-detects-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "071Q (lemma-derived-quasi-coherent-small-etale-site), 08H8 (lemma-epsilon-flat) and 08HG (lemma-descend-perfect)."
+   }
+  },
+  {
+   "text": "Let $h:T'\\to T$, $q:X'\\to X$, and $A'=Rf'_{\\mathrm{et},*}(q^*\\mathcal F)$. Properness makes $f$ quasi-compact and separated, hence quasi-separated. Apply [lem-sfb-space-flat-complex-base-change] to $E=\\mathcal O_X[0]$ and $G^\\bullet=\\mathcal F[0]$. Its canonical map becomes an isomorphism $b_h:Lh_{\\mathrm{et}}^*A\\to A'$, since $Lq^*\\mathcal O_X=\\mathcal O_{X'}$ and the second factor is explicitly the ordinary $q^*\\mathcal F$. In particular $A'$ has quasi-coherent cohomology. Indeed $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_T)$ by Step 2, so by [lem-pc-derived-pullback-qcoh-component] every $H^n(Lh^*K)$ is quasi-coherent on each affine open $U\\subseteq T'$ with $h(U)$ inside an affine open of $T$; these $U$ cover $T'$ and quasi-coherence is local, so $Lh^*K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{T'})$. The pullback comparison of [lem-sfb-derived-etale-zariski-equivalence] identifies $Lh_{\\mathrm{et}}^*A\\simeq Lh_{\\mathrm{et}}^*\\epsilon_T^*K$ with $\\epsilon_{T'}^*Lh^*K$, which lies in $D_{\\mathrm{QCoh}}(\\mathcal O_{T',\\mathrm{et}})$ by the equivalence, and $b_h$ is an isomorphism onto $A'$. Thus the counit comparison also applies to $A'$. No inference that $Lq^*\\mathcal F=q^*\\mathcal F$ from relative flatness is used.",
+   "uses": [
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-pc-derived-pullback-qcoh-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0A1K (lemma-base-change-tensor), exact target and coefficient comparison in its proof; 08GH (remark-match-total-direct-images)."
+   }
+  },
+  {
+   "text": "The image under $\\epsilon_{T'}^*$ of the required map is the composite\n$$\\epsilon_{T'}^*Lh^*K\\simeq Lh_{\\mathrm{et}}^*\\epsilon_T^*K\\longrightarrow Lh_{\\mathrm{et}}^*A\\xrightarrow{b_h}A'\\simeq\\epsilon_{T'}^*R\\epsilon_{T',*}A'.$$\nAll arrows are isomorphisms by Steps 2--3 and [lem-sfb-derived-etale-zariski-equivalence]. Full faithfulness therefore gives its unique Zariski isomorphism $Lh^*K\\to K_{f'}(\\mathcal F')$. It is the canonical base-change map. The canonical map for the composite morphisms $\\epsilon_T\\circ f_{\\mathrm{et}}$ and $\\epsilon_{T'}\\circ f'_{\\mathrm{et}}$ is the exchange for the composite adjunction $Lf_{\\mathrm{et}}^*\\epsilon_T^*\\dashv R\\epsilon_{T,*}Rf_{\\mathrm{et},*}$ followed by $R\\epsilon_{T',*}$ of the coefficient map. By [lem-weil-pbc-mate-pasting](2) that exchange is $R\\epsilon_{T',*}$ of the $f$-exchange composed with the $\\epsilon$-exchange $Lh^*R\\epsilon_{T,*}A\\to R\\epsilon_{T',*}Lh_{\\mathrm{et}}^*A$, the mate of the pullback comparison. By [def-weil-pbc-adjunction-mate] the transpose of the latter under $\\epsilon_{T'}^*\\dashv R\\epsilon_{T',*}$ is $\\epsilon_{T'}^*Lh^*K\\simeq Lh_{\\mathrm{et}}^*\\epsilon_T^*K\\to Lh_{\\mathrm{et}}^*A$, the pullback comparison followed by the counit. Hence the transpose of the canonical Zariski map is the displayed composite without its last arrow, and since the counit at $A'$ is invertible, its image under $\\epsilon_{T'}^*$ is the displayed composite. This also proves the asserted identification with the small-etale derived base-change map.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "071Q and 08GH: transport the precise canonical 0A1K morphism through the equivalence."
+   }
+  },
+  {
+   "text": "For $T''\\xrightarrow{k}T'\\xrightarrow{h}T$, apply [lem-weil-pbc-mate-pasting](1) to the two derived pullback squares defining exchange; their paste is the square for $hk$. The coefficient comparisons paste too: after a K-flat resolution, the maps to ordinary pullbacks send a tensor $c\\otimes b\\otimes m$ to $cb\\otimes m$ in either order. Hence $b_{hk}=b_k\\circ Lk_{\\mathrm{et}}^*b_h$ after the canonical pullback comparisons. The identity case is [lem-weil-pbc-mate-pasting](4), and the coefficient map is then the identity. The identity and composition compatibility of the site comparisons in [lem-sfb-derived-etale-zariski-equivalence] transfers both equalities to the displayed Zariski isomorphisms; faithfulness ensures equality of those actual morphisms.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0A1K; sites-cohomology.tex 0E47 (remark-compose-base-change-horizontal), verification by the existing mate-pasting theorem."
+   }
+  },
+  {
+   "text": "For $\\mathcal F=\\mathcal O_X$, write $u_f:\\mathcal O_T\\to A$ for the derived adjunction unit at the structure module. The transpose of $b_h\\circ Lh_{\\mathrm{et}}^*u_f$ is $Lq^*(\\varepsilon_f\\circ Lf^*u_f)$, after identifying pullbacks of structure modules with structure modules. The triangle identity makes this the identity of $\\mathcal O_{X'}$. The transpose of $u_{f'}$ is also that identity, so the adjunction bijection gives $b_h\\circ Lh_{\\mathrm{et}}^*u_f=u_{f'}$. Here the ordinary coefficient comparison for the structure module is its scalar multiplication identification. This uses the mate definition in [def-weil-pbc-adjunction-mate]. The scalar-insertion normalization and canonical unit/counit of [lem-sfb-derived-etale-zariski-equivalence] give the same equality for $\\mathcal O_T[0]\\to K$. Thus the Zariski base-change isomorphism preserves the scalar unit.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-space-flat-complex-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0A1K canonical mate definition; 071Q and 08GH equivalence normalization; triangle-identity calculation for the scalar unit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proper-support-tensor-perfect",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-detects-perfect",
+  "lem-sfb-space-flat-complex-base-change",
+  "lem-pc-derived-pullback-qcoh-component",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "0CTM via 0A1P and 0A1K, then 071Q, 08H8, 08HG and 08GH; identity, pasting and scalar clauses are the explicit canonical-mate calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented algebraic space over a scheme, the derived direct image of a finitely presented sheaf flat over the base is perfect and commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness, underived module adjunctions and ell-adic cohomology do not state perfect coherent derived direct image or arbitrary derived base change for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck coherent cohomology and base change: a proper finitely presented morphism and a base flat finite presentation module have perfect derived pushforward",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"module\": \"Mathlib/CategoryTheory/Sites/Pullback\", \"type\": \"∀ {C : Type v₁} [inst : CategoryTheory.SmallCategory C] {D : Type v₁} [inst_1 : CategoryTheory.SmallCategory D]\\n  (G : CategoryTheory.Functor C D) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v₁, u₁} A]\\n  (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) {FA\", \"doc\": \"If a functor $ G $ is representably flat, then its sheaf pullback functor preserves finite limits.\"}\n  {\"name\": \"SheafOfModules.bijective_pushforwardSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given a continuous and final functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves \"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the composition of the sheaf pushforward functor $ G_\\\\ast $ with the inclusion of sheaves into presheaves is naturally isomorphic to the\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this functor maps a sheaf $\\\\mathcal{F}$ on $\\\\ma\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness, underived module adjunctions and ell-adic cohomology do not state perfect coherent derived direct image or arbitrary derived base change for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cohomology\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.EllAdicCohomology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] (n : ℕ) : Type (u + 1)\", \"doc\": \"`ℓ`-adic cohomology of a scheme in degree `n`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] (n : ℕ) : AddCommGroup (X.EllAdicCohomology ℓ n)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] [IsEmpty ↥X] (n : ℕ) : Subsingleton (X.EllAdicCohomology ℓ n)\", \"doc\": \"`ℓ`-adic cohomology is trivial for the empty scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness, underived module adjunctions and ell-adic cohomology do not state perfect coherent derived direct image or arbitrary derived base change for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(directImage|pushforward)|cohomology.*baseChange|baseChange.*cohomology",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness, underived module adjunctions and ell-adic cohomology do not state perfect coherent derived direct image or arbitrary derived base change for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper flat finitely presented algebraic space has perfect derived structure sheaf direct image with arbitrary derived base change",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-h0-genus-strata",
+  "date": "2026-10-22",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand.",
+   "via": [
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-flat-space-derived-base-change",
+  "worker": "stage1",
+  "summary": "Specialize the supported tensor theorem, compare etale and Zariski derived categories, and verify the exact canonical base-change map, pasting and scalar unit. Four general statement-only prerequisites; existing scheme-only results do not cover algebraic spaces. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Realized by Steps 1--4 for perfectness and derived base change and Steps 5--6 for canonical coherence and scalar units."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-a4fb423b4",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-a4fb423b4 (reviewer sub-agent of L); spot-checked: Sources read in spaces-perfect.tex: 0CTM, 0A1P (statement and approximation proof), 0A1K (exact map in the proof), 08H8, 071Q (the proof gives Rε_* as quasi-inverse with an invertible counit on unbounded D_QCoh), 08HG and 08GH. The four new statement-only nodes match their sources hypothesis by hypothesis: proper-support-tensor-perfect = 0A1P, plus quasi-coherent cohomology, which is true; space-flat-complex-base-change = 0A1K with the ordinary (g')^*G; derived-etale-zariski-equivalence = 08H8+071Q+08GH, where faithfulness holds because O^sh is faithfully flat; etale-detects-perfect = 08HG for arbitrary A. I tested them on G=0, X=∅, identity maps, a separably closed point and an infinite sum ⊕O[n]. No duplicates: the 071Q/08HG/0A1P/0A1K nodes elsewhere in the DAG are scheme-only or affine-only. No new node restates a clause of the item. The item's proof is a short assembly following 0CTM = 0A1P+0A1K, then the 071Q/08HG transport. Three repairs: (1) C1/C4, Step 3: quasi-coherence of A' needed Lh^*K ∈ D_QCoh, which no cited node gave; now cited from lem-pc-derived-pullback-qcoh-component (08DW, on the route). (2) C1, Step 4: the identification with the canonical composite exchange is now written out via lem-weil-pbc-mate-pasting(2) and def-weil-pbc-adjunction-mate (transpose = pullback comparison then counit; the counit at A' is invertible). (3) lem-sfb-etale-detects-perfect: removed the unused stmt_deps def-trf-space-quasi-coherent-module, pqf-def-coherent and def-weil-size-convention. Batch 5: the closures of def-trf-algebraic-space, def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors and lem-trf-zariski-etale-functor-comparison-square stay inside generic sk-i-curve-zero nodes (space definitions, module functors, Zariski/étale tensor comparison). They reach no trace-formula or Poincaré-duality step or batch-4 target, and are used only as statement notions, so all are accepted. No tool_uses are needed; mate-pasting, adjunction-mate and the qcoh-component node are on the route.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatSpaceDerivedBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.properFlatSpace_derivedBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceCoefficient",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceImageFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceImage",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceCoefficientMap",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceEtaleBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceEtaleScalar",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceEpsilonUnit",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceSingleRight",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceScalar",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceZariskiStructure",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpacePullbackId",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceOrdinaryStructure",
+   "AlgebraicGeometry.AlgebraicSpace.ProperFlatSpaceDerivedBaseChangeSystem",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpace_derivedBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatSpaceDerivedBaseChange.lean",
+  "statement": "theorem properFlatSpace_derivedBaseChange : Nonempty (ProperFlatSpaceDerivedBaseChangeSystem (S := S))",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70dfbc3d3",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Read the item node, the 3 snapshot modules, both new def-node records and the live dependency declarations. Every clause matches with no stronger hypothesis: Y : Over S covers any T; proper/flat/lfp and qcoh/fp/ModuleIsFlatOver hypotheses; K = R(spaceZariskiRestriction)∘Rf_*∘single0; perfect, ε-exactness fields, counit IsIso; arbitrary IsPullback base change with ordinary moduleTensorPullback coefficient; etaleIdentification, identity, composition and scalar clauses. The Nonempty system is pinned: context is the Prop IsRightAdjoint; the derived adjunction is fixed by the representative homEquiv equation plus target naturality; the ordinary square sectionwise, with an existing chart (morphismRestrict); the derived square by composite right-derived units; properFlatSpacePullbackId is the i of the same exists_derivedPullbackComposition witness, fixed by the unit laws. Not H4: DerivedEtaleZariskiEquivalenceData is on the scheme-native site. Added stmt_deps are all definition nodes; statement fields verbatim; docstrings carry source, blueprint and 6 proof steps; only sorry is the main proof; Worker report and Second reading sections present. Advisories: base change defined as ε'-transpose, so etaleIdentification is tautological (canonical, accepted); pullbackId comes straight from the exists_derivedPullbackComposition theorem; no compile run (no fix)."
+ }
+}

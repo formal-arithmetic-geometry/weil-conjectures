@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-space-universal-closed-immersion-open",
+ "kind": "statement",
+ "title": "The universal closed-immersion locus for algebraic spaces is open",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $A,C,B$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $p:A\\to B$, $q:C\\to B$, and $f:A\\to C$ satisfy $q\\circ f=p$. Flatness, local finite presentation, local finite type, separatedness and universal closedness use the chartwise and topological definitions of [def-sfb-space-morphism-properties]. A map is closed when its map of point spaces sends closed sets to closed sets. Assume that $p$ is locally of finite type and universally closed and that $q$ is separated. Then there is an open subspace $V\\subseteq B$ [def-a1-space-open-subspace] such that, for every algebraic space $T$ over $S$ and every $h:T\\to B$, the base change $f_T:A\\times_BT\\to C\\times_BT$ is a closed immersion if and only if $h$ factors through $V$. A closed immersion of spaces means a representable morphism all of whose scheme base changes are closed immersions [def-weil-closed-immersion]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XA (spaces-more-morphisms-lemma-where-closed-immersion), all three hypotheses and arbitrary algebraic-space parameter changes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=A\\times_B C$ and $\\Gamma=(\\mathrm{id}_A,f):A\\to P$. The square with right side $\\Delta_q:C\\to C\\times_B C$ and bottom map $(f\\operatorname{pr}_A,\\operatorname{pr}_C):P\\to C\\times_B C$ is cartesian: on every scheme test its pullback consists of triples $(a,c,y)$ with $f(a)=y=c$, hence is naturally $A$. Since $q$ is separated, $\\Delta_q$ is a representable closed immersion. Thus $\\Gamma$ is a closed immersion: each scheme test of its pullback is a scheme test of $\\Delta_q$. By the closed-subspace properness statement, $\\Gamma$ is proper, hence universally closed.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-closed-subspace-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XA proof, second sentence; graph factorization in spaces-morphisms Tag 04NX, proof of (1)."
+   }
+  },
+  {
+   "text": "Universal closedness is stable under base change directly from its definition: a further base change is a base change of the original map. It is stable under composition because, after any base change, the two induced point maps send closed sets successively to closed sets. The projection $P\\to C$ is a base change of $p$, so $f=\\operatorname{pr}_C\\Gamma$ is universally closed. The projection $r:A\\times_C A\\to A$ is a base change of $f$; hence $p_2=p r$ is universally closed. In particular $p$ and $p_2$ are closed, by taking identity base changes.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XA proof, verification of the hypotheses of 05X9; spaces-morphisms lemmas base-change-universally-closed and composition-universally-closed, expanded from the definition."
+   }
+  },
+  {
+   "text": "Apply the unramified/injective parameter-locus statement to $(p,q,f)$. Its local-finite-type hypothesis is assumed for $p$; both closed-map hypotheses were proved in step 2. It gives an open subspace $V\\subseteq B$ such that, for every algebraic-space map $h:T\\to B$, $h$ factors through $V$ exactly when $f_T$ is unramified and universally injective.",
+   "uses": [
+    "lem-sfb-space-unramified-radicial-parameter-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XA proof: apply Tag 05X9."
+   }
+  },
+  {
+   "text": "Fix any such $T,h$. The map $f_T$ is universally closed by step 2, since it is the base change of $f$ along $C\\times_B T\\to C$. The closed-immersion criterion therefore identifies its being unramified and universally injective with its being a closed immersion. Combining this equivalence with step 3 gives the claimed universal property of $V$ for every algebraic-space parameter change.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-unramified-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XA proof, first sentence and base-change sentence, using Tag 05W8 (1) iff (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-unramified-radicial-parameter-open",
+  "lem-sfb-space-closed-immersion-unramified-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XA (lemma-where-closed-immersion), with the graph argument of spaces-morphisms Tag 04NX written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|whereClosedImmersion|where_closed_immersion|closed.immersion.*locus",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion stability and separated-composition facts do not construct the universal base locus for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor where a morphism of algebraic spaces becomes a closed immersion is an open subspace of the base",
+   "results": "8 hits; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor, AlgebraicGeometry.Scheme.Hom.opensFunctor, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.opensFunctor, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.opensFunctor, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion stability and separated-composition facts do not construct the universal base locus for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsClosedImmersion\"",
+   "results": "12 hits; AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget, AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.respectsIso, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion stability and separated-composition facts do not construct the universal base locus for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces with source locally finite type universally closed over the base and target separated has a universal open closed immersion locus",
+   "results": "8 hits; AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated, AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion stability and separated-composition facts do not construct the universal base locus for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper source over the base and separated target the base changes making a morphism a closed immersion are represented by an open algebraic space",
+   "results": "8 hits; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme, AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion stability and separated-composition facts do not construct the universal base locus for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of algebraic spaces from a locally finite type universally closed source over a base into a separated target has a universal open closed immersion locus",
+   "results": "{\"t\": \"2026-10-23T14:16:24Z\", \"tool\": \"leanfinder\", \"query\": \"A map of algebraic spaces from a locally finite type universally closed source over a base into a separated target has a universal open closed immersion locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated\", \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyClosed\"], \"digest\": \"50f91d0ea15de413\"}; Scheme stability and cancellation hits do not construct the algebraic-space closed-immersion parameter locus; no project attachment was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsClosedImmersion\"",
+   "results": "{\"t\": \"2026-10-23T14:16:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsClosedImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\"], \"digest\": \"dde6e3f6ca46fb98\"}; Scheme stability and cancellation hits do not construct the algebraic-space closed-immersion parameter locus; no project attachment was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|whereClosedImmersion|where_closed_immersion|closed.immersion.*locus",
+   "results": "{\"t\": \"2026-10-23T14:16:19Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|whereClosedImmersion|where_closed_immersion|closed.immersion.*locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Scheme stability and cancellation hits do not construct the algebraic-space closed-immersion parameter locus; no project attachment was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The parameter functor of base changes making a morphism of algebraic spaces a closed immersion is an open subspace of the base",
+   "results": "{\"t\": \"2026-10-23T14:16:20Z\", \"tool\": \"leansearch\", \"query\": \"The parameter functor of base changes making a morphism of algebraic spaces a closed immersion is an open subspace of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.opensFunctor\", \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor\", \"AlgebraicGeometry.Scheme.Hom.opensFunctor\"], \"digest\": \"8ea779f11b6fea53\"}; Scheme stability and cancellation hits do not construct the algebraic-space closed-immersion parameter locus; no project attachment was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Openness of the universal closed embedding locus for maps of algebraic spaces with universally closed locally finite type source and separated target",
+   "results": "{\"t\": \"2026-10-23T14:16:23Z\", \"tool\": \"leanfinder\", \"query\": \"Openness of the universal closed embedding locus for maps of algebraic spaces with universally closed locally finite type source and separated target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.isClosedEmbedding_isZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.UniversallyClosed.out\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\"], \"digest\": \"96be513fb288914d\"}; Scheme stability and cancellation hits do not construct the algebraic-space closed-immersion parameter locus; no project attachment was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-universal-isomorphism-open",
+  "date": "2026-10-23",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor. In quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism to the first projection. Supporting input: Tag 05XA (spaces-more-morphisms-lemma-where-closed-immersion), all three hypotheses and arbitrary algebraic-space parameter changes.",
+   "via": [
+    "lem-sfb-space-universal-isomorphism-open",
+    "lem-sfb-space-graphs-open-in-hilbert",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-universal-closed-immersion-open",
+  "worker": "stage1",
+  "summary": "Kept the algebraic-space statement unchanged. Wrote the graph cartesian test and the elementary base-change/composition arguments for universal closedness. Two statement-only prerequisites isolate Tags 05X9 and 05W8 at algebraic-space generality; existing similarly named nodes cover schemes only. Checked sources, citations, edge cases and logged searches.",
+  "blueprint": "The inherited provenance locates this below det-thm-sf-ctf-stability-direct-images proof (3), through the graph/Hilbert and stable-curve supporting chain. The latest blueprint direct-images proof retains proper direct image and compactification. This is not the unit key node. All of Stacks 05XA is realized by steps 1-4. blueprint_refs ancestor returns null on the existing chain; preserve that node and via. Whole-blueprint searches 05XA,05X9,05W8,04NX and concept searches found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Steps 1-2 take only the existence of fibre products of algebraic spaces (P=A x_B C, C x_B C, A x_C A, A x_B T) and their universal property; generic foundation of algebraic spaces (unit sk-i-curve-zero), not part of the trace-formula or Poincare-duality statements or proofs; no node of sk-thm-sf-ctf-stability's unit closure states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-75d4c44fc",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-75d4c44fc (reviewer sub-agent of L); spot-checked: The delivery faithfully splits Stacks 05XA (spaces-more-morphisms l.11642), with the graph argument of 04NX(1) written out; tags checked against tags/tags. Item statement unchanged and matches 05XA: p locally of finite type and universally closed, q separated, arbitrary algebraic-space Z'. Steps: (1) Γ is the base change of Δ_q (checked on T-points), so it is a closed immersion, hence proper and universally closed by lem-sfb-space-closed-subspace-proper. (2) Base-change and composition stability come from the topological definition in def-sfb-space-morphism-properties, giving f, f_T and p_2 universally closed. (3) New 05X9 node, whose hypotheses match exactly. (4) New 05W8 (1)<=>(3) node with universal closedness fixed. Both new nodes are true and are faithful to the source. Small cases checked: empty source, identity, split étale double cover, purely inseparable point, k[ε] thickening. Neither node restates a clause of the item. Scheme versions already exist (05X9, 04XV, 04NX diagram, lem-pc-proper-monomorphism-closed), but no space version exists in the snapshot, live or side-live. No SGA. Batch-5: def-trf-algebraic-space and the a1/sfb space definitions are generic definitions. lem-trf-space-fibre-products-etale-covers is a generic foundation. The closure of lem-sfb-space-closed-subspace-proper reaches only generic space/descent trf nodes, nothing of the trace formula or Poincaré duality. All accepted. FIX (C8): item steps 1-2 use lem-trf-space-fibre-products-etale-covers (unit sk-i-curve-zero, outside the unit closure) without declaring it. Added split_report.tool_uses for it in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-universal-closed-immersion-open.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceUniversalClosedImmersionOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_openSubspace_universal_closedImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceUniversalClosedImmersionOpen.lean",
+  "statement": "theorem exists_openSubspace_universal_closedImmersion {S : Scheme.{u}} (A C B : AlgebraicSpace S) (p : A ⟶ B) (q : C ⟶ B) (f : A ⟶ C) (w : f ≫ q = p) (hp_lft : MapIsLocally (@LocallyOfFiniteType) p) (hp_closed : MapIsUniversallyClosed p) (hq_sep : MapIsSeparated q) : ∃ V : OpenSubspace B, ∀ (T : AlgebraicSpace S) (h : T ⟶ B), IsRepresentableWith (fun _ _ r ↦ IsClosedImmersion r.left) (pullback.map p.hom h.hom q.hom h.hom f.hom (𝟙 T.obj) (𝟙 B.obj) (by simpa using (congrArg (fun k : A ⟶ B ↦ k.hom) w).symm) (by simp)).hom ↔ ∃ l : T.obj.obj ⟶ V.val.toFunctor, l ≫ V.val.ι = h.hom.hom",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16f157671",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05XA (spaces-more-morphisms l.11642): hypotheses MapIsLocally LocallyOfFiniteType p, MapIsUniversallyClosed p, MapIsSeparated q with w : f ≫ q = p, nothing stronger; conclusion ∃ V : OpenSubspace B before ∀ algebraic space T and h, canonical pullback.map f_T between sheaf fibre products with correct squares, closed immersion as IsRepresentableWith IsClosedImmersion (same pattern as MapIsSeparated), factorization through V.val.ι as in sibling exists_openSubspace_universal_isomorphism. Edge cases empty A/T, f = id and nonreduced immersions covered; single universe u, nothing unbound. Node differs from side-live only in lean; lean.statement verbatim in file; stmt_deps unchanged and point to their recorded declarations; scheme-only node lem-sfb-universal-closed-immersion-open is a different node, so no duplicate; proof is sorry; source/blueprint/proof docstrings present; report has Worker report and Second reading by Q44 sections. No compile re-run, no files changed."
+ }
+}

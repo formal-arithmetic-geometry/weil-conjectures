@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-monomial-series-coordinate-derivatives",
+ "kind": "statement",
+ "title": "Coordinate derivatives of absolutely convergent monomial series",
+ "statement": "Fix an integer $m\\geq0$ and positive real numbers $R_1,\\ldots,R_m$. For multiindices $\\alpha\\in\\mathbf N^m$ put $R^\\alpha=\\prod_iR_i^{\\alpha_i}$, $z^\\alpha=\\prod_i z_i^{\\alpha_i}$, and $\\alpha!=\\prod_i\\alpha_i!$. Let $a:\\mathbf N^m\\to\\mathbf C$ satisfy $\\sum_\\alpha |a_\\alpha|R^\\alpha<\\infty$, with absolute value [def-weil-complex-absolute-value] and sums interpreted as limits of finite subsums. On $P_R=\\{z\\in\\mathbf C^m:|z_i|<R_i\\}$ define $F(z)=\\sum_\\alpha a_\\alpha z^\\alpha$. For every $\\nu\\in\\mathbf N^m$, the iterated ordinary complex coordinate derivative $\\partial^\\nu F$ exists on $P_R$ and\n$$\\partial^\\nu F(z)=\\sum_{\\alpha\\geq\\nu}a_\\alpha\\frac{\\alpha!}{(\\alpha-\\nu)!}z^{\\alpha-\\nu}.$$\nHere $\\alpha\\geq\\nu$ means coordinatewise inequality, and derivatives can be taken in any order with $\\nu_i$ derivatives in coordinate $i$. For every positive $s_i<R_i$, the series on the right converges absolutely and uniformly on $|z_i|\\leq s_i$. In particular $\\partial^\\nu F(0)=\\nu!a_\\nu$. When $m=0$ these assertions mean $F=a_0$ and the only derivative is order zero.",
+ "source": {
+  "document": "literature/cartan-1951-52-exp10.pdf",
+  "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf. Frenkel, Cartan 1951-52 exp.10, section 4 printed pp.6-7 (normal convergence), section 6 printed p.9 (complex coefficients and Cauchy inequalities). Agent-formulated termwise-calculus refinement; not a quoted theorem there. Mathlib candidates: HasFPowerSeriesOnBall.fderiv_eq, FDeriv/Analytic.lean:205, and factorial_smul:863."
+ },
+ "stmt_deps": [
+  "def-weil-complex-absolute-value"
+ ],
+ "proof": [
+  {
+   "text": "For $m=0$, the multiindex set has just its empty index, every weight and factorial is $1$, and the domain is a point. The assertion is exactly $F=a_0$. Assume henceforth $m>0$. Put $b_\\alpha=|a_\\alpha|R^\\alpha$ and $B=\\sum_\\alpha b_\\alpha<\\infty$. For each $\\nu$ define $h_{\\alpha,\\nu}(z)=a_\\alpha\\alpha!z^{\\alpha-\\nu}/(\\alpha-\\nu)!$ when $\\alpha\\geq\\nu$, and $h_{\\alpha,\\nu}=0$ otherwise. In particular $h_{\\alpha,0}=a_\\alpha z^\\alpha$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7 (coefficient majorants) and section 6 printed p.9. Agent-written termwise-calculus refinement, with the calculus inputs cited separately."
+   }
+  },
+  {
+   "text": "Fix $0<s_i<R_i$. Set $q_i=s_i/R_i$ and $\\delta_i=(1-q_i)/2>0$. For integers $n\\geq k$, the nonnegative binomial expansion gives $\\binom nk q_i^{n-k}\\delta_i^k\\leq(q_i+\\delta_i)^n\\leq1$. Thus $(n!/(n-k)!)q_i^{n-k}\\leq k!\\delta_i^{-k}$. Multiplying these inequalities for $n=\\alpha_i,k=\\nu_i$, and using multiplicativity of absolute value, yields $|h_{\\alpha,\\nu}(z)|\\leq C_{\\nu,s}b_\\alpha$ for $|z_i|\\leq s_i$, where $C_{\\nu,s}=\\prod_i R_i^{-\\nu_i}\\nu_i!\\delta_i^{-\\nu_i}$. For $\\alpha\\not\\geq\\nu$ the bound holds because the term is zero. This is a finite binomial calculation; it requires no differentiation of geometric series.",
+   "uses": [
+    "def-weil-complex-absolute-value"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7 (coefficient majorants) and section 6 printed p.9. Agent-written termwise-calculus refinement, with the calculus inputs cited separately."
+   }
+  },
+  {
+   "text": "The nonnegative family $C_{\\nu,s}b_\\alpha$ is summable, since multiplication by a constant commutes with each finite subsum and its limit. Apply [lem-sfb-absolute-series-domination] to obtain absolute convergence of $\\sum_\\alpha h_{\\alpha,\\nu}(z)$ at every point of the closed smaller polydisc. Apply [lem-wf-dominated-continuous-function-series] to both the terms and their absolute values for uniform convergence: enumerate $\\mathbf N^m$ by increasing total degree, lexicographically inside each finite degree. This enumeration exhausts every finite subset, so the finite-subsum hypothesis gives a summable sequence of the same bounds. The cited uniform convergence of initial sums also gives uniform convergence of the net of all finite subsums: beyond an initial segment, every omitted or extra finite tail has norm bounded by the sum of the same nonnegative tail, which tends to zero. Write the resulting sum as $H_\\nu$; in particular $H_0=F$.",
+   "uses": [
+    "lem-sfb-absolute-series-domination",
+    "lem-wf-dominated-continuous-function-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7 (coefficient majorants) and section 6 printed p.9. Agent-written termwise-calculus refinement, with the calculus inputs cited separately."
+   }
+  },
+  {
+   "text": "For a coordinate $j$, fix all other coordinates. Each function $w\\mapsto h_{\\alpha,\\nu}(z_1,\\ldots,w,\\ldots,z_m)$ is a scalar monomial or zero. By [lem-sfb-complex-monomial-derivative] its derivative is $h_{\\alpha,\\nu+e_j}$. Indeed, if $\\alpha\\geq\\nu$ and $\\alpha_j>\\nu_j$, the power rule multiplies the coefficient by $\\alpha_j-\\nu_j$, giving $\\alpha!/(\\alpha-\\nu-e_j)!$. If $\\alpha_j=\\nu_j$, its power in $w$ is zero and its derivative is zero. If $\\alpha\\not\\geq\\nu$, both the function and its required derivative are zero.",
+   "uses": [
+    "lem-sfb-complex-monomial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7 (coefficient majorants) and section 6 printed p.9. Agent-written termwise-calculus refinement, with the calculus inputs cited separately."
+   }
+  },
+  {
+   "text": "Fix $z\\in P_R$ and choose $|z_i|<s_i<R_i$. In coordinate $j$ use the disc $|w|<s_j$, keeping the other coordinates fixed at $z_i$. Step 4 gives the term derivatives on the whole disc. Step 2 with $\\nu+e_j$ bounds them by the summable family $C_{\\nu+e_j,s}b_\\alpha$. Step 3 supplies summability of the values at $w=0$. Therefore [lem-sfb-disc-series-differentiation] gives $\\partial_jH_\\nu(z)=H_{\\nu+e_j}(z)$. This holds for every $z$, $\\nu$, and $j$. Induct on the length of an arbitrary ordered list of coordinates: the empty list gives $F=H_0$; appending $j$ replaces $H_\\nu$ by $H_{\\nu+e_j}$. Hence every list with multiplicities $\\nu$ has derivative $H_\\nu$, independently of its order, and step 3 gives the stated absolute and uniform convergence.",
+   "uses": [
+    "lem-sfb-disc-series-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7 (coefficient majorants) and section 6 printed p.9. Agent-written termwise-calculus refinement, with the calculus inputs cited separately."
+   }
+  },
+  {
+   "text": "At $z=0$ a term of $H_\\nu$ can survive only when $\\alpha-\\nu=0$: any positive exponent has a zero coordinate factor. The sole remaining term is $a_\\nu\\nu!$, since the zero monomial has value $1$. Thus $\\partial^\\nu F(0)=\\nu!a_\\nu$, including $\\nu=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cartan-1951-52-exp10.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7 (coefficient majorants) and section 6 printed p.9. Agent-written termwise-calculus refinement, with the calculus inputs cited separately."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-complex-absolute-value",
+  "lem-sfb-absolute-series-domination",
+  "lem-wf-dominated-continuous-function-series",
+  "lem-sfb-complex-monomial-derivative",
+  "lem-sfb-disc-series-differentiation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/cartan-1951-52-exp10.pdf",
+  "place": "WANTED locally; read online https://www.numdam.org/item/SHC_1951-1952__4__A10_0.pdf, Frenkel exp.10 section 4 printed pp.6-7 (coefficient majorants) and section 6 printed p.9. Agent-written termwise-calculus refinement, with the calculus inputs cited separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Termwise partial differentiation of an absolutely convergent multivariate complex power series on every smaller polydisc recovers its Taylor coefficients",
+   "results": "{\"t\": \"2026-10-24T03:17:48Z\", \"tool\": \"leansearch\", \"query\": \"Termwise partial differentiation of an absolutely convergent multivariate complex power series on every smaller polydisc recovers its Taylor coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Complex.taylorSeries_eq_on_emetric_ball'\", \"HasFTaylorSeriesUpToOn.fderivWithin\", \"PowerSeries.coeff_derivativeFun\", \"AnalyticOn.hasFPowerSeriesOnSubball\", \"HasFPowerSeriesWithinOnBall.iteratedFDerivWithin\", \"Complex.hasSum_taylorSeries_on_ball\", \"Complex.taylorSeries_eq_on_ball\", \"HasFPowerSeriesWithinOnBall.fderivWithin_of_mem\"], \"digest\": \"1b93b067e29d8a58\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib formal multilinear derivatives and univariate Taylor sums require a nontrivial construction/comparison with scalar multiindex monomial coefficients and the smaller-polydisc uniform majorants; not a one-line specialization. Source signatures read at FDeriv/Analytic.lean:205,863-869 and Analytic/IteratedFDeriv.lean:65-88."
+  },
+  {
+   "tool": "loogle",
+   "query": "HasFPowerSeriesOnBall, iteratedFDeriv",
+   "results": "{\"t\": \"2026-10-24T03:17:49Z\", \"tool\": \"loogle\", \"query\": \"HasFPowerSeriesOnBall, iteratedFDeriv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"HasFPowerSeriesOnBall.iteratedFDeriv_zero_apply_diag\", \"HasFPowerSeriesOnBall.factorial_smul\", \"HasFPowerSeriesOnBall.hasSum_iteratedFDeriv\", \"HasFPowerSeriesOnBall.iteratedFDeriv_eq_sum_of_completeSpace\", \"HasFPowerSeriesOnBall.iteratedFDeriv_eq_sum\"], \"digest\": \"ebb960a977b459ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib formal multilinear derivatives and univariate Taylor sums require a nontrivial construction/comparison with scalar multiindex monomial coefficients and the smaller-polydisc uniform majorants; not a one-line specialization. Source signatures read at FDeriv/Analytic.lean:205,863-869 and Analytic/IteratedFDeriv.lean:65-88."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an absolutely convergent power series in finitely many complex variables every iterated coordinate derivative is given by differentiating each monomial and at zero equals alpha factorial times its coefficient",
+   "results": "{\"t\": \"2026-10-24T03:17:50Z\", \"tool\": \"leanfinder\", \"query\": \"For an absolutely convergent power series in finitely many complex variables every iterated coordinate derivative is given by differentiating each monomial and at zero equals alpha factorial times its coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFPowerSeriesOnBall.factorial_smul\", \"HasFPowerSeriesOnBall.iteratedFDeriv_eq_sum_of_completeSpace\", \"HasFPowerSeriesOnBall.iteratedFDeriv_eq_sum\", \"HasFPowerSeriesOnBall.hasSum_iteratedFDeriv\", \"HasFPowerSeriesWithinOnBall.iteratedFDerivWithin_eq_sum_of_completeSpace\", \"HasFPowerSeriesWithinOnBall.iteratedFDerivWithin_eq_sum\", \"HasFPowerSeriesWithinOnBall.iteratedFDerivWithin\", \"HasFiniteFPowerSeriesOnBall.fderiv'\"], \"digest\": \"f34bbf681b7f6421\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib formal multilinear derivatives and univariate Taylor sums require a nontrivial construction/comparison with scalar multiindex monomial coefficients and the smaller-polydisc uniform majorants; not a one-line specialization. Source signatures read at FDeriv/Analytic.lean:205,863-869 and Analytic/IteratedFDeriv.lean:65-88."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate partial derivatives of the sum of a multivariate scalar monomial series are sums with factorial-ratio coefficients and converge uniformly on compact smaller polydiscs",
+   "results": "{\"t\": \"2026-10-24T03:17:51Z\", \"tool\": \"leanfinder\", \"query\": \"Coordinate partial derivatives of the sum of a multivariate scalar monomial series are sums with factorial-ratio coefficients and converge uniformly on compact smaller polydiscs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.derivSeries\", \"HasFPowerSeriesOnBall.hasSum_iteratedFDeriv\", \"HasFPowerSeriesOnBall.factorial_smul\", \"HasFPowerSeriesOnBall.fderiv\", \"HasFPowerSeriesOnBall.fderiv_eq\", \"HasFiniteFPowerSeriesOnBall.fderiv_eq\", \"HasFPowerSeriesWithinOnBall.hasFDerivWithinAt\", \"HasFPowerSeriesOnBall.hasFDerivAt\"], \"digest\": \"14c3f962ca42476d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib formal multilinear derivatives and univariate Taylor sums require a nontrivial construction/comparison with scalar multiindex monomial coefficients and the smaller-polydisc uniform majorants; not a one-line specialization. Source signatures read at FDeriv/Analytic.lean:205,863-869 and Analytic/IteratedFDeriv.lean:65-88."
+  },
+  {
+   "tool": "grep",
+   "query": "factorial_smul|hasSum_iteratedFDeriv|fderiv_eq",
+   "results": "{\"t\": \"2026-10-24T03:19:12Z\", \"tool\": \"grep\", \"query\": \"factorial_smul|hasSum_iteratedFDeriv|fderiv_eq\", \"sub\": \"Analysis/Calculus/FDeriv\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/FDeriv/Basic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Congr.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Congr.lean\"], \"digest\": \"e1f0f25726a9c892\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib formal multilinear derivatives and univariate Taylor sums require a nontrivial construction/comparison with scalar multiindex monomial coefficients and the smaller-polydisc uniform majorants; not a one-line specialization. Source signatures read at FDeriv/Analytic.lean:205,863-869 and Analytic/IteratedFDeriv.lean:65-88."
+  },
+  {
+   "tool": "loogle",
+   "query": "HasFPowerSeriesOnBall, iteratedFDeriv",
+   "results": "{\"t\": \"2026-10-24T03:37:02Z\", \"tool\": \"loogle\", \"query\": \"HasFPowerSeriesOnBall, iteratedFDeriv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"HasFPowerSeriesOnBall.iteratedFDeriv_zero_apply_diag\", \"HasFPowerSeriesOnBall.factorial_smul\", \"HasFPowerSeriesOnBall.hasSum_iteratedFDeriv\", \"HasFPowerSeriesOnBall.iteratedFDeriv_eq_sum_of_completeSpace\", \"HasFPowerSeriesOnBall.iteratedFDeriv_eq_sum\"], \"digest\": \"ebb960a977b459ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits use formal multilinear coefficients or univariate/Fréchet derivatives; converting scalar multiindices and proving smaller-polydisc majorants is not a one-line specialization. Read FDeriv/Analytic.lean:205-208,856-869 and Analytic/IteratedFDeriv.lean:63-85."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated coordinate derivatives of an absolutely convergent multivariate complex monomial series converge uniformly on every smaller polydisc and recover factorial times coefficients",
+   "results": "{\"t\": \"2026-10-24T03:37:02Z\", \"tool\": \"leansearch\", \"query\": \"Iterated coordinate derivatives of an absolutely convergent multivariate complex monomial series converge uniformly on every smaller polydisc and recover factorial times coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AnalyticOn.hasFPowerSeriesOnSubball\", \"iteratedDerivWithin_tsum\", \"FormalMultilinearSeries.iteratedFDerivSeries\", \"iteratedFDeriv_tsum\", \"CPolynomialOn.iterated_deriv\", \"HasFPowerSeriesWithinOnBall.iteratedFDerivWithin\", \"HasFPowerSeriesWithinOnBall.iteratedFDerivWithin_eq_sum_of_completeSpace\", \"HasFPowerSeriesWithinOnBall.iteratedFDerivWithin_eq_sum\"], \"digest\": \"269eab729d274f81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits use formal multilinear coefficients or univariate/Fréchet derivatives; converting scalar multiindices and proving smaller-polydisc majorants is not a one-line specialization. Read FDeriv/Analytic.lean:205-208,856-869 and Analytic/IteratedFDeriv.lean:63-85."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed partial derivatives of scalar power series on polydiscs are termwise derivatives with multiindex factorial ratios",
+   "results": "{\"t\": \"2026-10-24T03:37:04Z\", \"tool\": \"leanfinder\", \"query\": \"Mixed partial derivatives of scalar power series on polydiscs are termwise derivatives with multiindex factorial ratios\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFPowerSeriesOnBall.factorial_smul\", \"HasFPowerSeriesOnBall.hasSum_iteratedFDeriv\", \"HasFPowerSeriesOnBall.iteratedFDeriv_eq_sum_of_completeSpace\", \"HasFPowerSeriesOnBall.fderiv\", \"HasFPowerSeriesOnBall.iteratedFDeriv_eq_sum\", \"HasFPowerSeriesOnBall.fderiv_eq\", \"HasFPowerSeriesOnBall.hasFDerivAt\", \"HasFPowerSeriesWithinOnBall.hasFDerivWithinAt\"], \"digest\": \"4602564c2b2e8a6c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits use formal multilinear coefficients or univariate/Fréchet derivatives; converting scalar multiindices and proving smaller-polydisc majorants is not a one-line specialization. Read FDeriv/Analytic.lean:205-208,856-869 and Analytic/IteratedFDeriv.lean:63-85."
+  },
+  {
+   "tool": "grep",
+   "query": "factorial_smul|hasSum_iteratedFDeriv|fderiv_eq",
+   "results": "{\"t\": \"2026-10-24T03:37:30Z\", \"tool\": \"grep\", \"query\": \"factorial_smul|hasSum_iteratedFDeriv|fderiv_eq\", \"sub\": \"Analysis/Calculus/FDeriv\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/FDeriv/Congr.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Congr.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Const.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Analytic.lean\"], \"digest\": \"db0716dee192ce9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits use formal multilinear coefficients or univariate/Fréchet derivatives; converting scalar multiindices and proving smaller-polydisc majorants is not a one-line specialization. Read FDeriv/Analytic.lean:205-208,856-869 and Analytic/IteratedFDeriv.lean:63-85."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weighted-taylor-banach-model",
+  "date": "2026-10-24",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain: local-ring input for exact analytic pullback. The canonical local completion comparison. Analytic local-coordinate input: Analytic Weierstrass division after linear regularization. Supporting input: Complete weighted Taylor coefficient model for holomorphic germs. Supporting coefficient-model input: Coordinate derivatives of absolutely convergent monomial series.",
+   "via": [
+    "lem-sfb-weighted-taylor-banach-model",
+    "lem-sfb-holomorphic-weierstrass-division",
+    "lem-sfb-analytic-local-completion-comparison",
+    "lem-sfb-analytic-pullback-exact",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-monomial-series-coordinate-derivatives",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved binomial majorants explicitly, reused absolute-series domination and the existing M-test, and isolated only scalar monomial differentiation and disc termwise differentiation as two Mathlib leaves. Set up induction over arbitrary ordered coordinate lists and treated dimension zero and zero exponents.",
+  "blueprint": "Supporting weighted Taylor coefficient model in the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain; the local analytic refinement is agent-written and does not replace a chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-3fbb11127",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-3fbb11127 (reviewer sub-agent of L); spot-checked: Every step of the item and both new nodes check out. The item is still unsplit in side-live with the same statement, so no other group has split it. Statement tested on small cases: m=1 with F=1/(1-z) and R=1/2; m=2 with z1z2, where the (1,0) derivative is z2 and alpha not >= nu gives zero; and m=0. Step 2: q+delta=(1+q)/2<1 gives binom(n,k)q^(n-k)delta^k<=1, hence the majorant C_{nu,s}b_alpha; this holds for k=0, n=k and alpha not >= nu, and is correctly marked elementary. Step 3: absolute-series-domination (any index set, R or C) gives absolute convergence; the sequential M-test, applied after a bijective enumeration of N^m and also to absolute values, gives uniform convergence, with the passage to the net of finite subsums written out. Step 4: the three exponent cases of the monomial power rule give h_{alpha,nu+e_j}. Step 5: every hypothesis of disc-series-differentiation is discharged (polynomial terms on C, step-4 derivatives, step-2 bound with nu+e_j, value at 0 from step 3, slice disc inside P_R); the induction over ordered coordinate lists has an explicit base and successor. Step 6: at z=0 only alpha=nu survives, with 0^0=1. New leaves read in Mathlib: complex-monomial-derivative = (hasDerivAt_pow n z).const_mul c (Pow.lean:137-139, Mul.lean:355-358), valid at n=0 and z=0; disc-series-differentiation = hasDerivAt_tsum_of_isPreconnected (SmoothSeries.lean:89-97, arbitrary index type) with ball 0 r, convex_ball (Convex.lean:63-64) and Convex.isPreconnected (PathConnected.lean:95-97), y0=0 since r>0. Both are statement-only and self-contained, and neither restates a clause of the item. Duplicate search over the snapshot DAG (holomorphic-germ-taylor-jets, compact-parameter-taylor-expansion, rp-taylor-sum-on-disc, analytic-germ-differentiable, trf-block-low-derivative-recovery) and blueprint_refs search found no duplicate. Parent weighted-taylor-banach-model step 9 uses exactly the conclusion d^alpha F(0)=alpha! c_alpha. The source (Cartan/Frenkel exp.10) is absent from literature/, recorded as WANTED, and proof_origin is agent. The only off-unit citation is a Mathlib leaf, so no tool_uses are needed. No SGA, unit unchanged, no fixes."
+ }
+}

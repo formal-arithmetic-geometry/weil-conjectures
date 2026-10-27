@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-contracting-rank-one-cell",
+ "kind": "statement",
+ "title": "Contracting triangular cell for mixed-commuting rank-one generators",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Groups are affine $F$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_a,\\mathbf G_m$ for [def-sc-gm-ga]. Let $G$ be smooth and connected and $T\\subseteq G$ a split maximal torus, that is, a subgroup isomorphic to $\\mathbf G_m^r$ and maximal among such subgroups. Write $N_G(T)$ for the subgroup functor normalizing $T$ after every scalar extension. Put $X=\\operatorname{Hom}(T,\\mathbf G_m)$ and $Y=\\operatorname{Hom}(\\mathbf G_m,T)$, paired by $\\chi\\circ\\eta(t)=t^{\\langle\\chi,\\eta\\rangle}$. Let $D\\subset X\\setminus\\{0\\}$ be finite, nonempty and $\\mathbf Z$-linearly independent. For each $\\alpha\\in D$ let $J_\\alpha\\subseteq G$ be split reductive with maximal torus $T$ and roots exactly $\\pm\\alpha$, with conventions as in [lem-sfb-reductive-borel-pair-structure]. Denote its root groups by $U_\\alpha,V_\\alpha=U_{-\\alpha}$ [lem-sfb-reductive-root-subgroup-parametrizations]. Assume $G$ is the smallest closed subgroup containing these $J_\\alpha$, and that $V_\\alpha$ commutes scheme-theoretically with $U_\\beta$ whenever $\\alpha\\ne\\beta$. Let $U,V$ be the smallest closed subgroups containing the $U_\\alpha$, respectively the $V_\\alpha$. For a cocharacter $\\eta$, let $U_G(\\eta)$ be the subgroup functor of points $g$ for which $\\eta(t)g\\eta(t)^{-1}$ extends to $t=0$ with value $1$, and let $Z_G(\\eta)$ be the subgroup functor centralizing $\\eta(\\mathbf G_m)$ after every scalar extension. Choose $\\lambda\\in Y$ and $n>0$ with $\\langle\\alpha,\\lambda\\rangle=n$ for every $\\alpha\\in D$. Then $U,V$ are smooth connected unipotent subgroups normalized by $T$, the products $TU$ and $TV$ are smooth connected solvable closed subgroups, and multiplication $V\\times_F T\\times_F U\\to G$ is an open immersion with dense image. One has $U=U_G(\\lambda)$, $V=U_G(-\\lambda)$, $Z_G(\\lambda)=T$ and $(TU)\\cap(TV)=T$ as subgroup schemes. Solvable means that successive scheme-theoretic derived subgroups terminate at the identity. Unipotent means that geometric points are unipotent matrices in a faithful representation. No reductivity hypothesis is imposed on $G$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.31, printed p.494; the triangular-cell argument 23.22, pp.491--492, and cocharacter limit groups Theorem 13.33, pp.265--266. Supporting assertion: contracting positive/negative generated groups and their open cell (Steinberg 1999, 5.6--5.10)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "def-sfb-cocharacter-contracting-points",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Put $U_+=U_G(\\lambda)$, $U_-=U_G(-\\lambda)$, $Z=Z_G(\\lambda)$, and let $P_\\pm$ be the corresponding limit-exists groups. The cocharacter structure lemma makes these smooth connected closed subgroups, with $U_\\pm$ unipotent and $P_+=U_+\\rtimes Z$. To check intersections without losing infinitesimal points, take a faithful closed embedding of $G$ from the faithful-weight-block lemma with central torus $1$, and a weight basis for $\\lambda$ with weights $m_1\\ge\\cdots\\ge m_N$. On every test algebra conjugation multiplies entry $g_{ij}$ by $t^{m_i-m_j}$. Thus $P_+$ is block upper triangular, $P_-$ block lower triangular, $Z$ block diagonal, and $U_\\pm$ have identity diagonal blocks. In particular $P_+\\cap P_-=Z$ and $U_-\\cap P_+=1$ as functors. The Lie-weight formulas give $\\operatorname{Lie}(U_-)\\oplus\\operatorname{Lie}(P_+)=\\operatorname{Lie}(G)$. The transverse-product theorem therefore makes multiplication $U_-\\times P_+\\to G$ an open immersion. Reordering $U_+\\rtimes Z$ gives an open immersion $U_-\\times Z\\times U_+\\to G$; denote its image by $\\Omega$.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-central-torus-faithful-weight-blocks",
+    "lem-sfb-gm-representation-weight-basis",
+    "lem-sfb-transverse-subgroup-product-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(a)--(e), pp.265--266; matrix proof and transverse multiplication."
+   }
+  },
+  {
+   "text": "For every $\\alpha$, the root parametrization gives $\\lambda(t)u_\\alpha(a)\\lambda(t)^{-1}=u_\\alpha(t^n a)$; the negative-root formula has exponent $-n$. Consequently $U_\\alpha\\subset U_+$ and $V_\\alpha\\subset U_-$, and minimality gives $U\\subset U_+$, $V\\subset U_-$. Here the inclusions hold on all test algebras. For smoothness and connectedness of $U$, enumerate $D=\\{\\alpha_1,\\ldots,\\alpha_d\\}$ and use the multiplication map from the palindromic product $X=U_{\\alpha_1}\\times\\cdots\\times U_{\\alpha_d}\\times U_{\\alpha_d}\\times\\cdots\\times U_{\\alpha_1}$ to $G$, pointed at the identities. Its image is inverse-stable on every algebra, and each root group occurs by setting other coordinates to the identity. Its coordinate ring over any field extension is a polynomial ring, hence a domain; thus $X$ is geometrically reduced and connected. The pointed-map generation lemma identifies its generated group with $U$ and makes $U$ geometrically reduced and connected. The geometrically-reduced group lemma makes it smooth. Repeat with the $V_\\alpha$ to obtain the same conclusions for $V$. Both are unipotent by restriction of the faithful representations of $U_+$ and $U_-$.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-affine-pointed-map-generated-subgroup",
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2h, Propositions 2.46--2.48, pp.54--55; root conjugation formula (135), p.431; cocharacter kernels, pp.265--266."
+   }
+  },
+  {
+   "text": "The same coordinate construction records the density needed below. For $U$ its defining ideal is $I=\\bigcap_{q\\ge1}\\ker(F[G]\\to F[X^q])$. Since each $X^q$ is an affine space, the Nullstellensatz vanishing principle shows that a function vanishing on all rational root words belongs to $I$. Hence those words are schematically dense in $U$; likewise the negative words are schematically dense in $V$. For each $J_\\alpha$, the rank-one reflection lemma gives $\\operatorname{Lie}(J_\\alpha)=\\operatorname{Lie}(T)\\oplus\\mathfrak j_\\alpha\\oplus\\mathfrak j_{-\\alpha}$, the last two summands being the tangent lines of its root groups. The smooth-subgroup tangent-generation lemma shows that $T,U_\\alpha,V_\\alpha$ generate $J_\\alpha$. Thus $T$ and all signed root groups generate $G$. Apply the pointed-map construction to a palindromic product containing $T$ and all signed root groups. Its source and all powers have Laurent polynomial coordinate domains, and its image is inverse-stable. Minimality identifies the resulting group with $G$; the same ideal calculation and vanishing principle show that the abstract subgroup $\\Gamma\\subset G(F)$ generated by these rational points is schematically dense in $G$.",
+   "uses": [
+    "lem-sfb-affine-pointed-map-generated-subgroup",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-smooth-subgroup-tangent-generation",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2h, pp.54--56; Theorem 21.11(b),(c),(f), pp.428--430; generated-group density as used in 23.22."
+   }
+  },
+  {
+   "text": "The root conjugation formulas also show that $T$ normalizes $U$ and $V$ scheme-theoretically. Indeed conjugation acts on each palindromic parameter space and commutes with its word map; hence every word-map kernel is preserved by the torus coaction, and so is their intersection. This last assertion can be checked coefficient by coefficient in the Laurent monomial basis of $F[T]$. Also $T\\subset Z$ since it is commutative. Define $C$ to be the reduced closed subscheme whose underlying set is the closure of $V(F)T(F)U(F)$ in $G$. Left translation by $V(F)$ and by $T(F)$ preserves this closure: $V$ is a group and $T$ normalizes both factors. We shall prove $C=G$. This is a density argument only; at this point no reductivity of $G$ or openness of the smaller product has been used.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-affine-pointed-map-generated-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The setup and closure argument of 23.21--23.22, p.491; torus normalization checked on the universal word maps."
+   }
+  },
+  {
+   "text": "Choose for each $J_\\alpha$ the opposite-root $\\operatorname{SL}_2$ homomorphism, and use its upper and lower parameters for $u_\\alpha,v_\\alpha$. In $\\operatorname{SL}_2$, direct multiplication, with $d=1+ab$ invertible, gives\n$$x_+(a)x_-(b)=x_-(b/d)h(d)x_+(a/d).$$\nIndeed both matrices have entries $(1+ab,a,b,1)$ in row order: the lower-right entry on the right is $(ab+1)/d=1$. Applying the homomorphism gives the same identity in $J_\\alpha$, with $h(d)$ replaced by $\\alpha^\\vee(d)\\in T$. This is valid in every characteristic and for all test algebras with $d$ invertible. It requires no arbitrary reparametrization of a root group and no assertion that this formula holds when $d=0$.",
+   "uses": [
+    "lem-sfb-opposite-root-sl2-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11 proof and opposite-root parametrizations, pp.429--430; explicit Gauss identity supplying the rank-one replacement in 23.22."
+   }
+  },
+  {
+   "text": "We prove by induction on $q$ that $u_\\alpha(a)v_{\\beta_1}(b_1)\\cdots v_{\\beta_q}(b_q)$ lies in $C(F)$ for every rational tuple and every choice of indices. For $q=0$ it belongs to $U(F)$. If $\\alpha\\ne\\beta_1$, mixed commutation moves $v_{\\beta_1}(b_1)$ to the left; the induction hypothesis and left $V(F)$-stability of $C$ apply. If $\\alpha=\\beta_1$, first work on the principal open $1+ab_1\\ne0$ of the affine parameter space. Step 5 writes the product as $v_\\alpha(b_1/d)\\alpha^\\vee(d)$ times a word beginning with $u_\\alpha(a/d)$ followed by $q-1$ negative factors. The latter belongs to $C(F)$ by induction; left $V(F)$- and $T(F)$-stability give the assertion there. To include the exceptional locus, pull back any equation of $C$ along the original polynomial word map. It vanishes at all rational points of this principal open, so vanishes in its reduced localization by the Nullstellensatz. Since $1+ab_1$ is a nonzero polynomial in a polynomial domain, the localization is injective, so it vanishes everywhere. This completes the induction, including $d=0$.",
+   "uses": [
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "23.22, p.491, induction (149); explicit localization argument replaces an unjustified use of Gauss decomposition on the exceptional locus."
+   }
+  },
+  {
+   "text": "Fix $u=u_\\alpha(a)\\in U_\\alpha(F)$. For each defining equation $f$ of $C$, the function $v\\mapsto f(uv)$ on $V$ vanishes on every negative root word by step 6. The schematic density from step 3 implies that it is zero. Thus $uV(F)\\subset C(F)$. Right translation by $U(F)$ and $T(F)$ preserves $C$: it preserves $V(F)T(F)U(F)$ because $U$ is a group normalized by $T$. Hence $uvtu\\prime\\in C(F)$ for every $v\\in V(F)$, $t\\in T(F)$ and $u\\prime\\in U(F)$. Therefore $u$ preserves the closure $C$ under left translation. Both $u$ and $u^{-1}$ have this property. Together with left $V(F)$- and $T(F)$-stability, every element of $\\Gamma$ preserves $C$. Since $1\\in C$, $\\Gamma\\subset C(F)$. By its schematic density in $G$, every equation of $C$ is zero. Hence $C=G$ and $V(F)T(F)U(F)$ is dense in $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "23.22, p.491, passage from (149) to stability under the generating groups; density is the explicit coordinate-ideal consequence established in step 3."
+   }
+  },
+  {
+   "text": "In the open chart $\\Omega\\simeq U_-\\times Z\\times U_+$ of step 1, the morphism $V\\times T\\times U\\to\\Omega$ is the product of three closed immersions, since $V\\subset U_-$, $T\\subset Z$ and $U\\subset U_+$. It is therefore a closed immersion in this chart. Its image contains the dense subset $V(F)T(F)U(F)$ of $G$, so its underlying closed subset is all of $\\Omega$. Moreover $\\Omega$ is reduced: the smoothness of $G$ implies geometric reducedness. A defining ideal whose vanishing locus is all of a reduced affine scheme is zero, since each of its elements is nilpotent. Apply this on affine opens of $\\Omega$. Thus $V\\times T\\times U\\xrightarrow{\\sim}\\Omega$. Pulling this equality back along each coordinate axis gives $V=U_-$, $T=Z$, $U=U_+$ as closed subschemes. Multiplication is consequently the asserted open immersion with dense image. This upgrades the rational-point density argument to all test algebras, including nonreduced ones.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(d), pp.265--266, together with 23.22--23.23, pp.491--492; closed subproduct inside the universal cocharacter chart."
+   }
+  },
+  {
+   "text": "Since $Z=T$, the cocharacter semidirect-product isomorphisms identify $TU=P_+$ and $TV=P_-$ as closed subgroup schemes. Both are smooth and connected, and step 1 gives $(TU)\\cap(TV)=P_+\\cap P_-=Z=T$ on every test algebra. Their projections to $T$ have kernels $U,V$. These kernels are smooth unipotent and hence solvable by the unipotent-solvability lemma. Its finite normal series with commutative quotients forces termination of successive derived subgroups: if $U=U_0\\supset\\cdots\\supset U_l=1$ is such a series, commutators in $U_i$ lie in $U_{i+1}$, so $\\mathcal D^iU\\subset U_i$. For $P_+$ the commutative torus quotient forces $\\mathcal D P_+\\subset U$, and then $\\mathcal D^{l+1}P_+=1$. The argument for $P_-$ is identical. Thus solvability has exactly the scheme-theoretic derived-series meaning in the item.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-smooth-unipotent-solvable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(b),(e), pp.265--266; unipotent solvability, Proposition 14.21, pp.284--285."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cocharacter-limit-smooth-structure",
+  "lem-sfb-central-torus-faithful-weight-blocks",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-transverse-subgroup-product-open",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-affine-pointed-map-generated-subgroup",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-opposite-root-sl2-parametrizations",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-smooth-unipotent-solvable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "23.22, p.491, word-length induction; Theorem 13.33, pp.265--266, supplies the ambient cocharacter chart. Universal-coordinate details and the closed-subproduct argument are supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A group generated by rank one reductive subgroups and commuting mixed root groups has an open triangular cell V times T times U",
+   "results": "{\"t\": \"2026-10-23T22:27:14Z\", \"tool\": \"leanfinder\", \"query\": \"A group generated by rank one reductive subgroups and commuting mixed root groups has an open triangular cell V times T times U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_generator\", \"NonarchimedeanGroup.exists_openSubgroup_separating\", \"NonarchimedeanGroup.prod_subset\", \"NonarchimedeanGroup.prod_self_subset\", \"MeasureTheory.fundamentalInterior\", \"MeasureTheory.Measure.haar.index_defined\", \"MeasureTheory.fundamentalInterior_union_fundamentalFrontier\", \"MeasureTheory.Measure.haar.index_elim\"], \"digest\": \"60a3c8712166079a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological groups or triangularizable Lie modules. The grep hits are generic open-immersion composition facts, not algebraic-group multiplication cells."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Oppositely contracted unipotent subgroups give a dense open multiplication cell in an algebraic group",
+   "results": "{\"t\": \"2026-10-23T22:27:15Z\", \"tool\": \"leanfinder\", \"query\": \"Oppositely contracted unipotent subgroups give a dense open multiplication cell in an algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_generator\", \"IsOpen.mul_closure_one_eq\", \"mul_mem_connectedComponent_one\", \"Subgroup.closure_mul_image_mul_eq_top\", \"NonarchimedeanGroup.exists_openSubgroup_separating\", \"Subgroup.closure_mul_image_eq_top\", \"Subgroup.dense_of_not_isolated_one\", \"IsTopologicalGroup.mulInvClosureNhd.mul\"], \"digest\": \"a5ef6733738dfeeb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological groups or triangularizable Lie modules. The grep hits are generic open-immersion composition facts, not algebraic-group multiplication cells."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reductive\"",
+   "results": "{\"t\": \"2026-10-23T22:27:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"reductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological groups or triangularizable Lie modules. The grep hits are generic open-immersion composition facts, not algebraic-group multiplication cells."
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersion.*mul|big.cell|root.subgroup",
+   "results": "{\"t\": \"2026-10-23T22:27:13Z\", \"tool\": \"grep\", \"query\": \"openImmersion.*mul|big.cell|root.subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\"], \"digest\": \"b31b1cfb755ddd20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological groups or triangularizable Lie modules. The grep hits are generic open-immersion composition facts, not algebraic-group multiplication cells."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Triangular cell in a linear algebraic group generated by rank one subgroups",
+   "results": "{\"t\": \"2026-10-23T22:27:13Z\", \"tool\": \"leansearch\", \"query\": \"Triangular cell in a linear algebraic group generated by rank one subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.IsTriangularizable\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieModule.IsTriangularizable.mk\", \"LieModule.instIsTriangularizableSubtypeMemLieSubalgebra\", \"LieModule.instIsTriangularizableSubtypeMemLieSubmodule\", \"LieModule.IsTriangularizable.congr_simp\", \"LieModule.instIsTriangularizableSubtypeMemLieSubmodule_1\", \"LieModule.IsTriangularizable.recOn\"], \"digest\": \"3278b3bf63541c4a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological groups or triangularizable Lie modules. The grep hits are generic open-immersion composition facts, not algebraic-group multiplication cells."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\"",
+   "results": "{\"t\": \"2026-10-23T23:00:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"cocharacter\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, CW cells or Lie-module triangularizability, not this affine group-scheme cell theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|root.subgroup|big.cell",
+   "results": "{\"t\": \"2026-10-23T23:00:03Z\", \"tool\": \"grep\", \"query\": \"cocharacter|root.subgroup|big.cell\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, CW cells or Lie-module triangularizability, not this affine group-scheme cell theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of opposite cocharacter unipotent groups and a torus is an open dense cell for groups generated by rank one reductive subgroups",
+   "results": "{\"t\": \"2026-10-23T23:00:03Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplication of opposite cocharacter unipotent groups and a torus is an open dense cell for groups generated by rank one reductive subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_generator\", \"NonarchimedeanGroup.exists_openSubgroup_separating\", \"NonarchimedeanGroup.prod_subset\", \"IsOpen.mul_closure_one_eq\", \"IsOpen.dense_iUnion_preimage_smul\", \"Subgroup.closure_mul_image_eq_top\", \"NonarchimedeanGroup.prod_self_subset\", \"IsOpen.dense_iUnion_smul\"], \"digest\": \"08ac8adcbf53724b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, CW cells or Lie-module triangularizability, not this affine group-scheme cell theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangular open cell in an algebraic group generated by semisimple rank one subgroups",
+   "results": "{\"t\": \"2026-10-23T23:00:04Z\", \"tool\": \"leansearch\", \"query\": \"A triangular open cell in an algebraic group generated by semisimple rank one subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.RelCWComplex.openCell\", \"Topology.RelCWComplex.openCell_subset_complex\", \"Topology.RelCWComplex.openCell_subset_closedCell\", \"LieModule.IsTriangularizable\", \"LieModule.IsTriangularizable.mk\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"Topology.RelCWComplex.openCell_subset_skeletonLT\", \"IsTopologicalGroup.mulInvClosureNhd\"], \"digest\": \"0ce0d174c16c6f1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, CW cells or Lie-module triangularizability, not this affine group-scheme cell theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected closed algebraic subgroups generate a smooth connected subgroup with schematically dense finite multiplication words",
+   "results": "{\"t\": \"2026-10-23T23:01:38Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth connected closed algebraic subgroups generate a smooth connected subgroup with schematically dense finite multiplication words\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"mul_mem_connectedComponent_one\", \"Subgroup.dense_or_cyclic\", \"Subgroup.pathComponentOne\", \"dense_submonoidClosure_iff_subgroupClosure\", \"controlled_prod_of_mem_closure\", \"Subgroup.closure_mul_image_eq_top\", \"Subgroup.le_topologicalClosure\"], \"digest\": \"e745ed481b93e68e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, CW cells or Lie-module triangularizability, not this affine group-scheme cell theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-one-reductive-generation",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Theorem 23.31 and Remark 23.33, printed p.494; root-coroot compatibility for embedded rank-one subgroups as in Theorem 21.11, pp.428-429. Supporting Contracting triangular cell for mixed-commuting rank-one generators.",
+   "via": [
+    "lem-sfb-rank-one-reductive-generation",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-contracting-rank-one-cell",
+  "worker": "stage1",
+  "summary": "Q149 retained the statement and proved it without ambient reductivity or new nodes: generated-group smoothness and word density, an explicit rank-one Gauss identity with its exceptional-locus argument, the mixed-root induction, and equality with the universal cocharacter cell. All inputs reuse existing DAG statements; no project attachment was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Theorem 23.31 and Remark 23.33, printed p.494; root-coroot compatibility for embedded rank-one subgroups as in Theorem 21.11, pp.428-429. Supporting Contracting triangular cell for mixed-commuting rank-one generators. The current blueprint direct-images alteration branch is retained. The ancestor command returns None, as recorded in the existing metadata; no ancestor is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic reduced-affine vanishing principle for polynomial word parameters and schematic density; no step of the unit is replaced."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-over-field reducedness for the cocharacter open chart; used only to upgrade a dense closed subproduct to equality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-c0a756e25",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-c0a756e25 (reviewer sub-agent of L); spot-checked: I read the item, the 9 steps and all 13 cited statements in full. No new nodes; the statement is unchanged from live, where the item was an empty unsplit node; no repair note. No cycle: neither the item nor its parent is in any proof_dep closure, and G's reductivity is never used, only that of each J_alpha. No SGA. The steps follow Milne iAG 23.22 (p.491), made scheme-theoretic, together with Theorem 13.33. Part (d) of 13.33 correctly comes from transverse-subgroup-product-open, after a block-triangular check on all test algebras that U-∩P+=1, P+∩P-=Z and the Lie spaces are complementary. Step 2: U and V are smooth, connected and unipotent via pointed-map generation on palindromic G_a products, then geometrically-reduced-group-smooth. Step 3: tangent generation inside each J_alpha, with Lie J_alpha = Lie T + g_alpha + g_-alpha from the rank-one-reflections and root-subgroup nodes, gives G generated by T and the signed root groups; with the Nullstellensatz this makes Gamma schematically dense. I recomputed the Gauss identity x+(a)x-(b)=x-(b/d)h(d)x+(a/d), d=1+ab. Step 6's induction and its exceptional locus d=0 (principal open, injective localization) are complete. Step 7 gives closure C=G. Step 8 identifies VxTxU with the chart Omega as a closed subscheme of a reduced scheme, giving U=U+, V=U-, T=Z. Step 9's derived-series argument is correct. Edge cases checked: |D|=1, characteristic 2, nonreduced test algebras. I accept the generic tool_uses nullstellensatz-vanishing and smooth-geometrically-reduced. The four batch-5 flags reach only the generic sk-i-curve-zero nodes trf-smooth-at-point-fibre-criterion (01V9), trf-smooth-fpqc-base-descent (02VL), trf-fg-torsionfree-group-free and the definition def-trf-scheme-cover-descent-datum. None is the trace formula, Poincare duality or a step of their proofs, so no RETURN. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ContractingRankOneCell",
+  "declaration": "AlgebraicGeometry.contracting_rankOne_cell",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ContractingRankOneCell.lean",
+  "statement": "theorem contracting_rankOne_cell (F : Type u) [Field F] [IsAlgClosed F] (G T : Grp (Over (Spec (.of F)))) (hG : SolvableGroupStructure.IsAlgebraic G) (hGsmooth : Smooth G.X.hom) (hGconnected : ConnectedSpace G.X.left) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (r : ℕ) (hsplit : Nonempty (T ≅ MultiplicativeType.splitTorus F r)) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (D : Finset (Additive (RankOneRoots.Character T))) (hne : D.Nonempty) (hnonzero : ∀ α : D, α.val ≠ 0) (hindep : LinearIndependent ℤ (fun α : D ↦ α.val)) (J : D → Grp (Over (Spec (.of F)))) (iJ : ∀ α : D, J α ⟶ G) (tJ : ∀ α : D, T ⟶ J α) (hJclosed : ∀ α : D, IsClosedSubgroupScheme (iJ α).hom.hom) (hJred : ∀ α : D, ReductiveTorusCentralizer.IsReductive (J α)) (hJT : ∀ α : D, ReductiveTorusCentralizer.IsMaximalTorus (tJ α)) (hJTcomp : ∀ α : D, tJ α ≫ iJ α = iT) (aJ : ∀ α : D, ModObj T.X (J α).X) (haJ : ∀ α : D, (aJ α).smul = RankOneRoots.adjointMap (tJ α)) (hroots : ∀ α : D, RankOneRoots.roots T (J α) (aJ α) = {α.val.toMul, α.val.toMul⁻¹}) (Ua Va : D → Grp (Over (Spec (.of F)))) (jUa : ∀ α : D, Ua α ⟶ J α) (jVa : ∀ α : D, Va α ⟶ J α) (hUa : ∀ α : D, IsClosedSubgroupScheme (jUa α).hom.hom ∧ Smooth (Ua α).X.hom ∧ ConnectedSpace (Ua α).X.left ∧ @TorusCharacterTangent.IsStable F _ T (J α) (aJ α) _ (jUa α) ∧ (GrpObj.differential (jUa α).hom.hom).toLinearMap.range = RankOneRoots.weight T (J α) (aJ α) α.val.toMul) (hVa : ∀ α : D, IsClosedSubgroupScheme (jVa α).hom.hom ∧ Smooth (Va α).X.hom ∧ ConnectedSpace (Va α).X.left ∧ @TorusCharacterTangent.IsStable F _ T (J α) (aJ α) _ (jVa α) ∧ (GrpObj.differential (jVa α).hom.hom).toLinearMap.range = RankOneRoots.weight T (J α) (aJ α) α.val.toMul⁻¹) (hgenerate : ∀ (K : Grp (Over (Spec (.of F)))) (k : K ⟶ G), IsClosedSubgroupScheme k.hom.hom → (∀ α : D, ∃ f : J α ⟶ K, f ≫ k = iJ α) → ∃ f : G ⟶ K, f ≫ k = 𝟙 G) (hmixed : ∀ (α β : D), α ≠ β → ∀ (W : Over (Spec (.of F))) (v : W ⟶ (Va α).X) (x : W ⟶ (Ua β).X), Commute (v ≫ (jVa α ≫ iJ α).hom.hom) (x ≫ (jUa β ≫ iJ β).hom.hom)) (U V : Grp (Over (Spec (.of F)))) (iU : U ⟶ G) (iV : V ⟶ G) (hUclosed : IsClosedSubgroupScheme iU.hom.hom) (hVclosed : IsClosedSubgroupScheme iV.hom.hom) (hUcontains : ∀ α : D, ∃ f : Ua α ⟶ U, f ≫ iU = jUa α ≫ iJ α) (hVcontains : ∀ α : D, ∃ f : Va α ⟶ V, f ≫ iV = jVa α ≫ iJ α) (hUmin : ∀ (K : Grp (Over (Spec (.of F)))) (k : K ⟶ G), IsClosedSubgroupScheme k.hom.hom → (∀ α : D, ∃ f : Ua α ⟶ K, f ≫ k = jUa α ≫ iJ α) → ∃ f : U ⟶ K, f ≫ k = iU) (hVmin : ∀ (K : Grp (Over (Spec (.of F)))) (k : K ⟶ G), IsClosedSubgroupScheme k.hom.hom → (∀ α : D, ∃ f : Va α ⟶ K, f ≫ k = jVa α ≫ iJ α) → ∃ f : V ⟶ K, f ≫ k = iV) (aG : ModObj T.X G.X) (haG : aG.smul = RankOneRoots.adjointMap iT) (lam : RankOneRoots.Cocharacter T) (n : ℕ) (hn : 0 < n) (hpair : ∀ α : D, lam.hom.hom ≫ α.val.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ n) : Smooth U.X.hom ∧ ConnectedSpace U.X.left ∧ SolvableGroupStructure.IsUnipotent U ∧ Smooth V.X.hom ∧ ConnectedSpace V.X.left ∧ SolvableGroupStructure.IsUnipotent V ∧ @TorusCharacterTangent.IsStable F _ T G aG _ iU ∧ @TorusCharacterTangent.IsStable F _ T G aG _ iV ∧ IsOpenImmersion ((fst (V.X ⊗ T.X) U.X ≫ ((fst V.X T.X ≫ iV.hom.hom) * (snd V.X T.X ≫ iT.hom.hom))) * (snd (V.X ⊗ T.X) U.X ≫ iU.hom.hom)).left ∧ DenseRange ((fst (V.X ⊗ T.X) U.X ≫ ((fst V.X T.X ≫ iV.hom.hom) * (snd V.X T.X ≫ iT.hom.hom))) * (snd (V.X ⊗ T.X) U.X ≫ iU.hom.hom)).left ∧ (∀ W : Over (Spec (.of F)), Set.range (fun x : W ⟶ U.X ↦ x ≫ iU.hom.hom) = {g | CocharacterContraction.Contracts G (lam ≫ iT) W g}) ∧ (∀ W : Over (Spec (.of F)), Set.range (fun x : W ⟶ V.X ↦ x ≫ iV.hom.hom) = {g | CocharacterContraction.Contracts G (lam⁻¹ ≫ iT) W g}) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], ReductiveTorusCentralizer.centralizerPoints (lam ≫ iT) A = Set.range (fun x : StandardGroupSchemes.affine F A ⟶ T.X ↦ x ≫ iT.hom.hom)) ∧ ∃ (P Q : Grp (Over (Spec (.of F)))) (p : P ⟶ G) (q : Q ⟶ G) (tP : T ⟶ P) (uP : U ⟶ P) (tQ : T ⟶ Q) (vQ : V ⟶ Q), IsClosedSubgroupScheme p.hom.hom ∧ IsClosedSubgroupScheme q.hom.hom ∧ tP ≫ p = iT ∧ uP ≫ p = iU ∧ tQ ≫ q = iT ∧ vQ ≫ q = iV ∧ IsIso ((fst T.X U.X ≫ tP.hom.hom) * (snd T.X U.X ≫ uP.hom.hom)) ∧ IsIso ((fst T.X V.X ≫ tQ.hom.hom) * (snd T.X V.X ≫ vQ.hom.hom)) ∧ Smooth P.X.hom ∧ ConnectedSpace P.X.left ∧ IsSolvableGroupScheme P.X ∧ Smooth Q.X.hom ∧ ConnectedSpace Q.X.left ∧ IsSolvableGroupScheme Q.X ∧ IsPullback tP.hom.hom tQ.hom.hom p.hom.hom q.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-532ca2664",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Every node hypothesis and conclusion has its Lean counterpart, checked against the dependency declarations in side-live (RankOneRoots, ReductiveTorusCentralizer, TorusCharacterTangent, SolvableGroupStructure, Semisimple, StandardGroupSchemes, and the uniqueness clause of reductive_root_subgroup_parametrizations). Root groups are pinned by the recorded characterization and the actions are pinned to conjugation. U=U_G(lam) and V=U_G(lam^-1) via the new Contracts predicate on all test schemes; Z_G(lam)=T on all algebras; TU and TV are pinned by multiplication isomorphisms; the intersection is an IsPullback; solvability is the derived-series predicate. The IsCommMonObj binders are true Props, not stronger assumptions. The new def node is non-hollow (x↦t punctured line, zero section from the counit), matches its statement and is not a duplicate (DAG and lean greps). lean.statement is verbatim. stmt_deps gained only the new def node and landed def nodes. Proof is sorry only; docstrings and report sections are present. Minor note: def-sfb-tori-multiplicative-type (splitTorus) is reachable only transitively. No fixes, no compile run."
+ }
+}

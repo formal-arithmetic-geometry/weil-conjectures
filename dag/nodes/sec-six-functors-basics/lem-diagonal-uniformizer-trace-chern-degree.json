@@ -1,0 +1,151 @@
+{
+ "id": "lem-diagonal-uniformizer-trace-chern-degree",
+ "kind": "statement",
+ "title": "Degree one of the scalar-reduced trace on the canonical Chern summand",
+ "statement": "Let l be prime and let Y and P=ProjectiveLine Y be Noetherian schemes, with DiagonalTraceLocalizations at l. Fix a finite intermediate l-adic field E, a maximal-ideal generator pi, and a natural n. Give l-adic and integral coefficient Diagrams zl and integral, and ScalarCompatibility toIntegral along integralMap l E [def-sfb-diagonal-coefficient-diagrams, def-sfb-diagonal-coefficient-scalars]. Give tq:DiagonalTrace.Result for q:P→Y, with tq.model.model the identity [def-sfb-diagonal-trace-presentation]. Give CompletedRealizations completedY, completedP, a full-unit CompletedPushSquare from tq.Rc to zl.Rq and CompletedTraceCompatibility identifying tq.trace with zl.traceq [def-sfb-diagonal-coefficient-reference]. Put A=ULift(O_E/(pi^(n+1))), assume A finite and killed by l^(n+1), and assume l^(n+1) invertible on Y. Give a quotient Diagram d and ScalarCompatibility from integral to d. Give finite realizations eY,eP, a root-normalized QuotientLineRealization lineP at exponent n+1, and a FiniteTracePresentation p [def-sfb-diagonal-coefficient-quotient-line, def-diagonal-finite-arrow-equations]. Let t=p.realizedTrace be d.traceq transported to the canonical finite pushforward and unit [lem-diagonal-finite-trace-chern-criterion]. Then biprod.inr followed by geoP1TwistedMap followed by t is the identity of the finite unit A_Y. This only compares the Chern composite, an endomorphism of A_Y. It has no diagonal completed arrow, Family, Reference, no conditions on the completed diagonal surface, and no conclusion about the other summand or the entire trace.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-quotient-line",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-scalars",
+  "def-sfb-diagonal-trace-models",
+  "sk-lem-geo-p1-cohomology",
+  "def-diagonal-finite-arrow-equations",
+  "lem-diagonal-finite-trace-chern-criterion",
+  "def-sfb-diagonal-trace-presentation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), reduction of the trace; trace proof paragraph (1), inverse positive unit/Chern splitting"
+ },
+ "proof": [
+  {
+   "text": "Derive l invertible from hYpow. Lift the strict-system Chern adjunct to a normalized completed arrow c.",
+   "uses": [
+    "lem-diagonal-completed-chern-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The twisted-splitting component equation identifies the model Chern adjunct with the second injection into the twisted splitting. Composing with the inverse-splitting trace cancels the splitting and gives identity. Restriction, the varying direct-image isomorphism, and Rlim preserve this identity. Using c normalization and tq.construction proves that the constant-scalar image of c followed by tq.trace is identity; faithfulness on the degree-zero completed unit proves c followed by tq.trace is identity.",
+   "uses": [
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "def-sfb-diagonal-trace-presentation",
+    "lem-sfb-diagonal-trace-single-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite Chern normalization to identify F(c) followed by the prescribed pushforward comparison v with the unit comparison u followed by the canonical finite Chern adjunct.",
+   "uses": [
+    "lem-diagonal-uniformizer-chern-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose q_trace, toIntegral.q.trace, scalar.q.trace and the defining equation of presentation.realizedTrace using functoriality. This gives F(tq.trace) followed by u equal to v followed by realizedTrace. Substitute both comparisons into F(c followed by tq.trace)=identity, then cancel the isomorphism u to obtain FiniteTraceChernDegree.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-reference",
+    "def-sfb-diagonal-coefficient-scalars",
+    "lem-diagonal-finite-trace-chern-criterion",
+    "def-diagonal-uniformizer-chern-transport"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-completed-chern-lift",
+  "lem-sfb-diagonal-trace-twisted-splitting-components",
+  "def-sfb-diagonal-trace-presentation",
+  "lem-sfb-diagonal-trace-single-faithful",
+  "lem-diagonal-uniformizer-chern-normalization",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-scalars",
+  "lem-diagonal-finite-trace-chern-criterion",
+  "def-diagonal-uniformizer-chern-transport"
+ ],
+ "proof_origin": {
+  "by": "D9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), the strict-system section class, passage to Rlim, and completed coefficients",
+  "note": "Use the whole-system Chern/trace identity and full-faithfulness to lift the Chern adjunct. Formal trace transport is proved; the sole remaining hole is the trace-independent finite Chern-arrow normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar reduction of the completed projective line trace integrates the positive Kummer Chern class to one",
+   "date": "2026-10-27",
+   "results": "8 hits, including Algebra.normalizedTrace and NumberField.dedekindZeta_residue; none concerns sheaf-theoretic traces or Chern classes.",
+   "verdict": "No matching geometric comparison. The existing Result.torsion_chern gives its system-level starting equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure.zero",
+   "date": "2026-10-27",
+   "results": "One hit: CategoryTheory.Triangulated.TStructure.zero, Mathlib.CategoryTheory.Triangulated.TStructure.Basic.",
+   "verdict": "Use directly for the positive shifted-line component; it does not give the scalar Chern-degree equation."
+  },
+  {
+   "tool": "grep",
+   "query": "Chern.*trace|trace.*Chern",
+   "date": "2026-10-27",
+   "results": "0 hits in the launcher Mathlib search. Local rg of Sheaf and WeilConjectures found Result.torsion_chern and the finite trace definitions, but no normalized realized-trace Chern degree theorem.",
+   "verdict": "No duplicate of the remaining coefficient-comparison obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerTraceReduction",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), applying the coefficient functor to the projective-line trace, with its definition from det-prop-diagonal-tower-trace(1)",
+   "via": [
+    "lem-diagonal-uniformizer-trace-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalUniformizerTraceChernDegree",
+  "file": "lean/Sheaf/Paper/DiagonalUniformizerTraceChernDegree.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalUniformizer_traceChernDegree",
+  "statement": "theorem diagonalUniformizer_traceChernDegree\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    (zl : Diagram (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y (zlLine l))\n    (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) (n : ℕ)\n    (integral : Diagram (Profinite.padicIntegersRingObj.{u} l E.1) Y\n      (fun X ↦ spIntegralTwist X l E))\n    (toIntegral : ScalarCompatibility (integralMap l E) Y (zlLine l)\n      (fun X ↦ spIntegralTwist X l E) (integralLineMap l E) zl integral)\n    (tq : DiagonalTrace.Result l (ULift.{u} (Padic l)) (ProjectiveLine Y ↘ Y))\n    (completedY : CompletedRealization l Y)\n    (completedP : CompletedRealization l (ProjectiveLine Y))\n    (q_model : tq.model.model = Iso.refl (ProjectiveLine Y))\n    (q_square : CompletedPushSquare l (ProjectiveLine Y ↘ Y)\n      completedP completedY tq.Rc zl.Rq)\n    (q_trace : CompletedTraceCompatibility l (ProjectiveLine Y ↘ Y)\n      completedP completedY tq zl.Rq q_square zl.traceq)\n    [hfinite : Finite (ULift.{u + 1} (completedResidue l E π n))]\n    (hA : ((l ^ (n + 1) : ℕ) : ULift.{u + 1} (completedResidue l E π n)) = 0)\n    (hYpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(Y, ⊤)))\n    (d : Diagram (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n      Y (quotientLine l E π n))\n    (scalar : ScalarCompatibility (quotientMap l E π n) Y\n      (fun X ↦ spIntegralTwist X l E) (quotientLine l E π n)\n      (quotientLineMap l E π n) integral d)\n    (eY : FiniteRealization\n      (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n      (ULift.{u + 1} (completedResidue l E π n)) Y)\n    (eP : FiniteRealization\n      (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n      (ULift.{u + 1} (completedResidue l E π n)) (ProjectiveLine Y))\n    (lineP : QuotientLineRealization l E π n n hA (ProjectiveLine Y) eP)\n    (presentation : FiniteTracePresentation\n      (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n      (ULift.{u + 1} (completedResidue l E π n))\n      (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _) hA Y hYpow\n      (quotientLine l E π n) d eY eP) :\n    FiniteTraceChernDegree\n      (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n      (ULift.{u + 1} (completedResidue l E π n))\n      (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _) hA Y hYpow\n      (quotientLine l E π n) d eY eP (lineP.iso l) presentation",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T235934-L-1472113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261027T050550-L-238335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

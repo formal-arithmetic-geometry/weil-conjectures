@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-finite-tate-local-root-tensors-ext",
+ "kind": "statement",
+ "title": "Local lifted root tensors detect maps from a finite Tate power",
+ "status": "split",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a positive coefficient quotient A=O_E/(pi_E^(n+1)). Let T be a scheme on which l is invertible, r a nonnegative integer with l^(r+1)A=0, and d a nonnegative tensor exponent. Use the finite etale power and comparison inverse image of [def-pur-finite-tate-site-comparison]. For every pro-etale sheaf M of A-modules, two morphisms f,g from the comparison inverse image of the degree-d finite etale Tate twist to M are equal if they agree on every restricted comparison-unit pure root tensor on every pro-etale test W over an etale object U for which its d finite roots admit lifts to the pro-etale root tower with the prescribed equality of underlying units. No normalization value or invertibility of f or g is assumed.",
+ "stmt_deps": [
+  "def-pur-finite-tate-site-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Lemma describe-pullback-from-etale (0GLZ); section-tensor-product; uniqueness step in def-pur-adic-root-comparisons"
+ },
+ "proof": [
+  {
+   "text": "Transpose f and g under the etale/pro-etale comparison adjunction. The local-span theorem says each section of a finite etale Tate power is locally in the span of pure finite-root tensors. Agreement on these tensors gives agreement on the span, and target sheaf separatedness then gives equality on arbitrary sections and hence of the adjuncts.",
+   "uses": [
+    "lem-pur-finite-tate-etale-power-generation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any fixed etale root tensor on U, the finite-root site comparison identifies its roots on the pro-etale site with the same underlying units. Apply local surjectivity of the root-tower projection to each of the finitely many roots and refine the covers to obtain all lifts on one common pro-etale cover of U. The global unit hypothesis implies invertibility of l in every stalk.",
+   "uses": [
+    "lem-amb-finite-root-site-comparison",
+    "lem-amb-root-tower-finite-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every member of this cover, apply the displayed hypothesis to the lifted roots. Naturality identifies these values with restrictions of the two original images. Target sheaf separatedness gives equality on U. The generating and adjunction reductions give f=g. The empty tuple, empty cover and zero coefficient ring require no exceptions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-tate-etale-power-generation",
+  "lem-amb-finite-root-site-comparison",
+  "lem-amb-root-tower-finite-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
+  "place": "Finite local intersection of root-tower image sieves, the finite-root unit comparison, and local pure-tensor span followed by separatedness and the comparison adjunction. Formalized by Z7, 2026-10-25."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from inverse image of etale roots of unity tensor powers are equal if they agree on pure root tensors after local lifts to the proetale Tate module",
+   "results": "Eight unrelated etale presentation and Kummer algebra hits; no sheaf root-tensor detection theorem.",
+   "date": "2026-10-25",
+   "verdict": "No match; existing root tower and tensor universal properties are the ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf morphisms from inverse image of roots of unity tensor powers equal on local root lifts generators",
+   "results": "General sheaf unitHomEquiv, Presentation.map_pi_eq and gluing lemmas; no root-tensor extensionality theorem.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteTateSiteComparison|adicPurityRootQuotients|heq_iff_eq; local root tensor detection in lean/Sheaf and dag/nodes",
+   "results": "Existing normalization predicates and existence theorems, plus generic tensor extensionality helpers; no declaration with this local-lift detection statement. Blueprint search root tensor returned zero matches.",
+   "date": "2026-10-25",
+   "verdict": "New local-generation step needed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPurityRootComparisons",
+  "date": "2026-10-25",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Canonical finite twist comparisons: def-pur-adic-root-comparisons root-normalization uniqueness step.",
+   "via": [
+    "def-pur-adic-root-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTateLocalRootTensorsExt",
+  "file": "lean/Sheaf/Paper/FiniteTateLocalRootTensorsExt.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteTate_local_root_tensors_hom_ext",
+  "statement": "theorem finiteTate_local_root_tensors_hom_ext\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (T : Scheme.{u})\n    (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ)\n    (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (d : ℕ)\n    (M : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (finiteTateCoefficient l E n)))\n    (f g : (ProEtale.comparisonUpperStar\n      (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj\n        (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA d) ⟶ M)\n    (h : ∀ (U : T.Etaleᵒᵖ) (W : T.ProEtᵒᵖ)\n      (v : W.unop ⟶ (toProEt T).obj U.unop) (a : finiteTateCoefficient l E n)\n      (z : Fin d → (T.rootsOfUnitySheaf (l ^ (r + 1))).obj.obj U)\n      (x : Fin d → (purTwistZlOne T l).obj.obj W),\n      (∀ i : Fin d, finiteTateLimitRootValue l T r W (x i) =\n        Units.map v.left.appTop.hom.toMonoidHom\n          (finiteTateEtaleRootValue T (l ^ (r + 1)) U (z i))) →\n      f.hom.app W\n        (((ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj\n            (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA d)).obj.map v.op\n          (((ProEtale.comparisonAdjunction\n            (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).unit.app\n              (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA d)).hom.app U\n                (finiteTateEtalePowerGenerator T _ (l ^ (r + 1)) hA U a d z))) =\n      g.hom.app W\n        (((ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj\n            (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA d)).obj.map v.op\n          (((ProEtale.comparisonAdjunction\n            (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).unit.app\n              (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA d)).hom.app U\n                (finiteTateEtalePowerGenerator T _ (l ^ (r + 1)) hA U a d z)))) :\n    f = g",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261025T123215-L-1843605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T164959-L-1149589",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,247 @@
+{
+ "id": "lem-coef-finite-point-counit-unit-normalization",
+ "kind": "statement",
+ "title": "Counit normalization of the finite identity-point dualizing object",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$, a uniformizer $\\varpi$, and $n\\ge1$. Put $A=R/\\varpi^n$ [def-weil-l-adic-coefficient-extension], $s=\\operatorname{Spec}k$ and $B=A_s$ on the small pro-etale site [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf].\nLet $G=A_{s,\\mathrm{et}}$ and $\\nu:s_{\\mathrm{proet}}\\to s_{\\mathrm{et}}$ be the comparison morphism [def-weil-pbc-site-comparison-morphism]. Use the finite exceptional-inverse-image construction [def-weil-exceptional-inverse-image] at $a_s=\\operatorname{id}_s$, with the identity compactification and the identity right adjoint of ordinary etale identity compact support [def-amb-etale-compact-support]. Then $A$ is finite, $B=\\nu^*G$ under the constant-ring comparison, and the identity dualizing object has the specified presentation $\\omega=Ra_s^!B=\\nu^*R\\nu_*B$. If $\\eta$ and $\\epsilon$ are the unit and counit of $\\nu^*\\dashv R\\nu_*$, the morphism $\\alpha=\\epsilon_B:\\omega\\to B$ is an isomorphism with inverse $\\nu^*(\\eta_G)$. These equalities are in the derived category and use the constant-ring identification; in particular the normalization is the actual comparison counit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Opening sentence: identity compact support and its right adjoint; finite comparison counit normalization (old item step 1)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-exceptional-inverse-image",
+  "def-amb-etale-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-l-adic-extension-absolute-value], the absolute value on $E$ is nonarchimedean. By [lem-weil-l-adic-extension-integers-dvr], its valuation ring $R$ is a DVR with finite residue field and maximal ideal $\\varpi R$. Apply [lem-weil-valued-dvr-finite-quotients], clause (2), with $K=E$, $\\mathcal O=R$ and the chosen $\\varpi$: since $n\\ge1$, $A=R/\\varpi^nR$ is finite. This is the coefficient ring of [def-weil-l-adic-coefficient-extension].",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Finite coefficient datum in the opening sentence; finiteness supplied by the existing valued-DVR quotient lemma."
+   }
+  },
+  {
+   "text": "The comparison is a geometric morphism by [def-weil-pbc-site-comparison-morphism]. Apply [lem-pe-constant-left-module-inverse-image] to it with $\\Lambda=A$. Its canonical ring-sheaf isomorphism $\\nu^{-1}A_{s,\\mathrm{et}}\\cong A_s$ preserves the scalar sections. On the regular rank-one module this is also the module comparison, hence $\\nu^*G=B$. Exactness in the same lemma gives this identification for these degree-zero objects in the bounded-below derived category.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, rings and fixed-ring modules; Tag 0H7J, example-constant-sheaf."
+   }
+  },
+  {
+   "text": "For the identity compactification, [def-amb-etale-compact-support] gives $R(\\operatorname{id})_*\\operatorname{id}_!$. Extension and direct image along the identity act as the identity on complexes and maps, so $D\\operatorname{id}_!=\\operatorname{id}$, and $R(\\operatorname{id})_*Q L=Q I$ for a K-injective resolution $L\\to I$; the image $Q(L\\to I)$ of this resolution is an isomorphism, natural in $L$, so the compact-support functor is naturally isomorphic to the identity, not literally equal to it. Hence the identity functor is a right adjoint of it, with the adjunction transported along this isomorphism; this is the identity right adjoint stipulated in the statement, and the right adjoint $f^\\times$ in the finite formula is only determined up to unique isomorphism, so this choice is permitted. Substitution in the finite formula $Rf_n^!=\\nu_X^*f^\\times R\\nu_{Y,*}$ of [def-weil-exceptional-inverse-image] gives $\\omega=\\nu^*R\\nu_*B$.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Opening sentence, identity compact support and its identity right adjoint; finite transported formula."
+   }
+  },
+  {
+   "text": "The comparison theorem is stated for modules over the coefficient ring sheaf $(U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),A))^\\#$ of [def-weil-pbc-proetale-modules], whereas $B$ is a module over the constant ring sheaf $A_s$. Apply [lem-weil-pbc-integral-coefficient-presentation-comparison] with $\\mathcal O_E=R$, the chosen $\\varpi$, $T=s$ and level $n$: its isomorphisms $\\kappa_n$ and $e_n$ identify this ring sheaf with the constant ring sheaf of $A$, carrying each constant scalar to the same constant, and restriction of scalars along them is an exact equivalence of module categories. Both inverse images are defined by [def-weil-pbc-site-comparison-morphism] on underlying sheaves and the scalar endomorphisms $\\lambda_r$, so this equivalence identifies $D^+$, $\\nu^*$, $R\\nu_*$ and the adjunction used below with those of the theorem. The object $G=A_{s,\\mathrm{et}}[0]$ is bounded below and $A$ is finite by step 1, so [thm-weil-pbc-site-comparison] makes $\\eta_G:G\\to R\\nu_*\\nu^*G$ invertible. Put $\\beta=\\nu^*(\\eta_G):B\\to\\omega$, using steps 2 and 3. Its inverse is $\\nu^*(\\eta_G^{-1})$, by functoriality. The left triangle identity for the given adjunction says $\\epsilon_{\\nu^*G}\\circ\\nu^*(\\eta_G)=1_{\\nu^*G}$. Under the constant-ring identification of step 2 and naturality of $\\epsilon$ this is $\\epsilon_B\\circ\\beta=1_B$. Composing on the right with $\\beta^{-1}$ gives $\\epsilon_B=\\beta^{-1}$, so also $\\beta\\circ\\epsilon_B=1_\\omega$. Thus the actual counit $\\alpha=\\epsilon_B$ is an isomorphism with the asserted inverse.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, lemma-relative-comparison (2); the triangle identity is part of the given adjunction (Mathlib Adjunction.Basic, lines 107-115)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-weil-valued-dvr-finite-quotients",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Opening sentence, expanded using Stacks 099V and 00YV and the existing coefficient lemmas; counit normalization written by Q110."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "identity exceptional inverse image etale proetale finite coefficient constant sheaf comparison counit is isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"CategoryTheory.IsIso AlgebraicGeometry.ΓSpec.adjunction.counit\", \"doc\": \"The counit of the adjunction between the global sections functor $\\\\Gamma$ (contravariant from schemes to commutative rings) and the spectrum functor $\\\\operatorname{Spec}$ (from commutative rings to sc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"For a predicate $ P $ on compact Hausdorff-like spaces that has explicit finite coproducts, the unit of the adjunction between the functor constructing sheaves of locally constant functions and the se\"}\n  {\"name\": \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"CategoryTheory.IsIso LightCondSet.sequentialAdjunction.counit\", \"doc\": \"The counit of the adjunction between the category of sequential topological spaces and the category of light condensed sets is an isomorphism.\"}\n  {\"name\": \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CategoryTheory.IsIso CondensedSet.compactlyGeneratedAdjunction.counit\", \"doc\": \"The counit of the adjunction between compactly generated spaces and condensed sets is an isomorphism. This means that for every compactly generated space $X$, the canonical morphism from the condensed\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  [(CategoryTheory.constantSheaf J D).Faithful] [(CategoryTheory.constantSheaf J D\", \"doc\": \"Given a terminal object $ T $ in a category $ \\\\mathcal{C} $, a category $ \\\\mathcal{D} $, and a constant sheaf $ F $ on $ \\\\mathcal{C} $ with values in $ \\\\mathcal{D} $, if the constant sheaf functor is \"}\n  {\"name\": \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((Condensed.forget R).map\\n      ((Condensed.discreteUnderlyingAdj (ModuleCat R)).counit.app ((CondensedMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the counit of the adjunction between discrete condensed modules and the underlying category, evaluated at the locally constant condensed module associated to $ M $, be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical units/counits and unrelated scheme or condensed adjunctions do not identify this finite transported exceptional object or its specified counit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] : C ≌ D\", \"doc\": \"If the unit and counit of a given adjunction are (pointwise) isomorphisms, then we can upgrade the\\nadjunction to an equivalence.\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_functor\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] : adj.toEquiv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_inverse\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] : adj.toEquiv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] (X : D) : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] (X : C) : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] (X : D) : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] (X : C) : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [CategoryTheory.IsIso h.unit] : L.FullyFaithful\", \"doc\": \"If the unit is an isomorphism, then the left adjoint is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [CategoryTheory.IsIso h.counit] : R.FullyFaithful\", \"doc\": \"If the counit is an isomorphism, then the right adjoint is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [L.IsEquivalence] : CategoryTheory.IsIso h.counit\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [R.IsEquivalence] : CategoryTheory.IsIso h.counit\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [R.IsEquivalence] : CategoryTheory.IsIso h.unit\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical units/counits and unrelated scheme or condensed adjunctions do not identify this finite transported exceptional object or its specified counit."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*counit|counit.*comparison",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Monadicity.lean\", \"line\": \"215\", \"text\": \"    (adj.counit.app (F.obj ((comparison adj).obj B).A))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Monadicity.lean\", \"line\": \"218\", \"text\": \"theorem comparisonAdjunction_counit_app\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Monadicity.lean\", \"line\": \"220\", \"text\": \"    (comparisonAdjunction adj).counit.app B = colimit.desc _ (counitCofork adj B) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Monadicity.lean\", \"line\": \"319\", \"text\": \"    have : ∀ (Y : D), IsIso ((comparisonAdjunction adj).counit.app Y) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Monadicity.lean\", \"line\": \"321\", \"text\": \"      rw [comparisonAdjunction_counit_app]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"line\": \"144\", \"text\": \"theorem comparisonAdjunction_counit_f_aux\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"line\": \"148\", \"text\": \"    ((comparisonAdjunction adj).counit.app A).f =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"line\": \"154\", \"text\": \"the Beck equalizer is the counit for the adjunction on the comparison functor.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"line\": \"170\", \"text\": \"theorem comparisonAdjunction_counit_f\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"line\": \"174\", \"text\": \"    ((comparisonAdjunction adj).counit.app A).f = (beckEqualizer A).lift (counitFork A) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"55\", \"text\": \"natural in `B`, where the first morphism is the product comparison and the latter uses the counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"88\", \"text\": \"  convert! mateEquiv_counit _ _ (prodComparisonNatIso F A).inv B using 2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical units/counits and unrelated scheme or condensed adjunctions do not identify this finite transported exceptional object or its specified counit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "dualizing object identity morphism normalized by etale proetale comparison counit",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fully faithful inverse image derived site comparison constant unit counit inverse adjunction unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation from the identity functor on $\\\\mathcal{D}_1$ to the composition $G' \\\\circ F'$, constructed via the left-derived lift involving associators, whiskering operations, and the un\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit\", \"module\": \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁}\\n  [F.Full] [F.Faithful] (adj : G ⊣ F),\\n  ((CategoryTheory.MorphismProperty.isomorphisms C₂).invers\", \"doc\": \"Given an adjunction $ G \\\\dashv F $ between categories $ \\\\mathcal{C}_1 $ and $ \\\\mathcal{C}_2 $, the unit of the adjunction, when considered in the functor category $ \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ e\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_1$ in category $\\\\mathcal{C}_1$, the composition of the derived unit transformation $\\\\eta'$ evaluated at $L_1(X_1)$ followed by $F'$ applied to $\\\\alpha_{X_1}$ equals the composition o\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.counitIso\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          (K : CategoryTheory.GrothendieckTopology D) →\\n            (e : C ≌ D) →\\n              (A : Type u₃\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where $e^{-1}$ is a dense subsite, this natural isomor\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the underlying presheaf of the unit of the adjunction between cocontinuous an\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical units/counits and unrelated scheme or condensed adjunctions do not identify this finite transported exceptional object or its specified counit."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|proEtale",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"7bd5a9f58fe6453b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the finite transported exceptional object together with the specified comparison counit and inverse"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale proetale derived comparison unit constant finite coefficient ring counit inverse",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafAdj_counit_app\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit\", \"CompHausLike.LocallyConstant.counit_app_val\", \"Condensed.profiniteSolidCounit\", \"CompHausLike.LocallyConstant.counit\", \"CondensedSet.topCatAdjunctionCounitEquiv\", \"MvPowerSeries.constantCoeff_invOfUnit\", \"CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit\"], \"digest\": \"37f9e17c4332cddd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the finite transported exceptional object together with the specified comparison counit and inverse"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_triangle_components",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.left_triangle_components\"], \"digest\": \"ccfbe949c29bc7c4\"}",
+   "date": "2026-10-22",
+   "verdict": "generic triangle identity found, used as the defining adjunction identity; no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient etale proetale derived comparison unit identity exceptional inverse image counit normalization",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.lift_X_left\", \"StandardEtalePresentation.toSubmersivePresentation_map\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"CategoryTheory.Idempotents.DoldKan.hε\", \"StandardEtalePair.homEquiv\", \"Algebra.instIsStandardEtale\"], \"digest\": \"389ee1cd5f3e2cca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the finite transported exceptional object together with the specified comparison counit and inverse"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image etale proetale fully faithful constant coefficients dualizing identity comparison counit isomorphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"Condensed.profiniteSolidCounit\", \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\"], \"digest\": \"60413487a72424cb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the finite transported exceptional object together with the specified comparison counit and inverse"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-point-internal-hom-evaluation",
+  "date": "2026-10-22",
+  "group": "Q147"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second paragraph: finite derived mapping-complex adjunction transported through the point identification; Opening sentence: identity compact support and its right adjoint; finite comparison counit normalization (old item step 1).",
+   "via": [
+    "lem-coef-finite-point-internal-hom-evaluation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-finite-point-counit-unit-normalization",
+  "worker": "stage1",
+  "summary": "Four-step finite counit normalization using existing quotient finiteness, constant-ring transport and bounded-below comparison nodes. The inverse is computed by the triangle identity; no new node or Lean file. Statement unchanged.",
+  "blueprint": "prop-coef-integral-dualizing, proof second paragraph: finite mapping-complex adjunction through the point identification, with its counit-defined normalization; the identity-point calculation follows lem-pod-point-dualizing-complex.proof.md, opening sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic local-field structure theorem supplies the DVR and finite residue field, not a replacement of a duality step."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic geometric inverse-image theorem identifies the actual constant coefficient rings and regular modules."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic bounded-below finite-coefficient comparison theorem supplies the invertible unit required by the finite exceptional formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pe-constant-left-module-inverse-image",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-a87817ecc",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-a87817ecc (reviewer sub-agent of L); spot-checked: This is a one-level split with no new nodes and the statement unchanged; I read the whole proof. Parent lem-coef-finite-point-internal-hom-evaluation, step 1, cites the item for exactly these clauses. Source: main-20261015 lem-pod-point-dualizing-complex.proof.md, opening sentence (the right adjoint of the identity is the identity). Ancestor: prop-coef-integral-dualizing.proof.md, second paragraph (finite comparisons defined by their counits). No SGA. All cited statements lie in the unit's transitive route (sf-comparison, properbasechange, nagata l-adic lemmas). I accept the split_report tool_uses as generic black-box uses. Step 1: I checked every hypothesis of lem-weil-valued-dvr-finite-quotients (2) against the absolute-value and integers-dvr lemmas; correct. Step 2: lem-pe-constant-left-module-inverse-image gives ν^{-1}A_et ≅ A_s carrying constants to constants, so ν^*G ≅ B; correct. Step 3, repaired: under def-amb-etale-compact-support, R(id)_* = Q(K-injective resolution), which is naturally isomorphic to the identity but not literally equal to it. The text now says the identity is a right adjoint with the adjunction transported along that isomorphism, and that this is the stipulated choice; f^× is only determined up to unique isomorphism. Step 4, repaired: thm-weil-pbc-site-comparison works over the coefficient ring (U↦Cont(π0(|U|),Λ))^# of def-weil-pbc-proetale-modules, not the constant sheaf A_s that the item uses. The step now cites def-weil-pbc-proetale-modules and lem-weil-pbc-integral-coefficient-presentation-comparison (κ_n, e_n with O_E=R) for that identification, and names naturality of ε. The step is now marked non-elementary and proof_deps are updated. Neither added node reaches the item, so there is no cycle. The triangle-identity computation ε_B=ν^*(η_G)^{-1} is correct. Small case: s=Spec k with k algebraically closed gives Rν_*B=A and ω≅B. Edge cases checked: n=1, E=Q_ℓ, ramified E, non-reduced A. No duplicate: lem-pod-point-dualizing-complex and lem-pod-identity-compact-support-normalization give unnormalized isomorphisms only. Fix file: fixes/dag/nodes/sec-six-functors/lem-coef-finite-point-counit-unit-normalization.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FinitePointCounitUnitNormalization",
+  "declaration": "WeilConjectures.FinitePointCounit.finite_point_counit_unit_normalization",
+  "declarations": [
+   "WeilConjectures.FinitePointCounit.etaleConstant",
+   "WeilConjectures.FinitePointCounit.proEtaleConstant",
+   "WeilConjectures.FinitePointCounit.constantComparison",
+   "WeilConjectures.FinitePointCounit.compactSupportIdentity",
+   "WeilConjectures.FinitePointCounit.identityRightAdjunction",
+   "WeilConjectures.FinitePointCounit.omega",
+   "WeilConjectures.FinitePointCounit.chosenPresentation",
+   "WeilConjectures.FinitePointCounit.alpha",
+   "WeilConjectures.FinitePointCounit.beta",
+   "WeilConjectures.FinitePointCounit.finite_point_counit_unit_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/FinitePointCounitUnitNormalization.lean",
+  "statement": "theorem finite_point_counit_unit_normalization (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) : Finite (Padic.coefficientExtensionRing l E (n + 1)) ∧ IsIso (alpha (Spec (.of D.k)) (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) ∧ beta (Spec (.of D.k)) (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) ≫ alpha (Spec (.of D.k)) (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) = 𝟙 _ ∧ alpha (Spec (.of D.k)) (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) ≫ beta (Spec (.of D.k)) (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) = 𝟙 _",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b0b3d0ac",
+  "group": "Q82",
+  "result": "pass",
+  "note": "All node clauses match the Lean with no extra hypotheses: Finite A; IsIso of the actual derived comparison counit at B; beta (ν^*η_G conjugated by the canonical constant comparison) is a two-sided inverse of alpha. Both identities hold by naturality, the triangle identity and unit invertibility on D^+, and neither is a tautology. The identity-compactification presentation ω = ν^*Rν_*B is given as data and tied to the recorded sfFiniteExceptionalAt by rightAdjointUniq (chosenPresentation). Universes: one u, ULift.{u+1} module convention, no equality imposed. lean.statement verbatim; only the lean record changed; docstrings carry source and blueprint tags; no hollow defs; only the theorem is sorry. Advisory: constantComparison restates ProEtale.comparisonUpperStarConstantSheafIso at degree 0 (equal by adjoint uniqueness), and the parent uses the intrinsic presentation of B, so stage 3 needs a bridge. No files changed, so no compile; worker reported clean scompile at 9.8 s and 14.7 s."
+ }
+}

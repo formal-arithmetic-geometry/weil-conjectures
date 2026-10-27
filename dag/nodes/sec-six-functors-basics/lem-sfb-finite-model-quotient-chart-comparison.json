@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-finite-model-quotient-chart-comparison",
+ "kind": "statement",
+ "title": "Specified scalar presentations compute reduction after any chart pullback",
+ "statement": "Fix $\\ell,E,A,R_n$ and the quotient coordinates of [def-sfb-finite-model-quotient-coordinates]. Let $V,T$ be schemes, $f:T\\to V$ any morphism, $M$ an integral coefficient module sheaf on $V$, $n\\ge0$, and $e$ a normalized quotient encoding on $T$. Let $P$ be an $A$-module with an isomorphism $f^*M\\simeq B_T\\otimes_A P$. Let $a,b$ be finite ranks, $v$ an $A$-matrix, and $w:A^b\\to P$ such that the actual integral differential $v:A^a\\to A^b$ is injective, its image is the kernel of $w$, and $w$ is surjective. Then in the derived category over the quotient coefficient ring there is an isomorphism $f^*(M[0]\\otimes^L_{B_V}R_{n,V})\\simeq e^{-1}(\\underline{[R_n^a\\xrightarrow{\\bar v}R_n^b]})$, using precisely the given quotient map and normalized encoding. No constructibility, qcqs or finite-presentation assumption on $P$ is needed beyond this exact presentation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models and Locality: compare quotient extension with a specified scalar resolution, before taking cohomology."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-model-quotient-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Apply scalarPullComparison_isIso from FreeParameterScalarMaps to the actual reductionRing map. Compose its inverse with leftDerivedFunctorIsoMapDerivedCategory and mapDerivedCategorySingleFunctor to identify pullback of reduction with reduction of the pulled-back degree-zero module.",
+   "uses": [
+    "def-sfb-free-parameter-scalar-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the chosen extension-integers DVR structure and constantToContinuous_preservesFiniteLimits to apply the proved modelFunctor_exact helper. The given function exactness, injectivity and surjectivity form a short exact sequence in ModuleCat, whose model image is short exact. Construct its augmentation from the double complex to the single cokernel and prove it a quasi-isomorphism, checking exactness in degree -1 and degree 0 and zero terms elsewhere.",
+   "uses": [
+    "def-sfb-finite-constant-model-data",
+    "lem-sfb-constant-to-continuous-scalar-flat",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply free_complex_reduction to the exact same scalar matrix. Map the specified chart model isomorphism and the inverse augmentation isomorphism through derived reduction, then compose with the pullback comparison and the free-complex reduction isomorphism.",
+   "uses": [
+    "lem-sfb-finite-model-free-complex-reduction",
+    "def-sfb-finite-model-quotient-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-free-parameter-scalar-maps",
+  "def-sfb-finite-constant-model-data",
+  "lem-sfb-constant-to-continuous-scalar-flat",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-finite-model-free-complex-reduction",
+  "def-sfb-finite-model-quotient-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models and Locality: compare quotient extension with a specified scalar resolution, before taking cohomology.",
+  "note": "B7: explicit short-exact double-complex augmentation and existing modelFunctor exactness; K-flat free reduction is proved, leaving only ordinary normalized matrix comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of a finite free resolution with a quotient ring is the reduced two term complex",
+   "results": "OK 8 hits: TensorProduct.tensorQuotEquivQuotSMul; ProjectiveResolution.quasiIso; TensorProduct.tensorQuotientEquiv; TensorProduct.quotientTensorEquiv; QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop; ProjectiveResolution.exact_succ; HasDerivedCategory; TensorProduct.quotientTensorQuotientEquiv.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the specified finite-model quotient comparison or descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"double\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the specified finite-model quotient comparison or descent."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientExtensionRing|IsConstructibleProEtaleFixedModuleSheaf|ordinaryComplex",
+   "results": "OK 0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the specified finite-model quotient comparison or descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelSheafQuotientConstructible",
+  "date": "2026-10-25",
+  "group": "G4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Local models and Locality paragraphs of the finite-model proof; returned proof steps 8--9. Agent finite-quotient matrix calculation and finite-stratification descent; compare Bhatt--Scholze Section 6.3 for classical finite coefficients. Local models and Locality: compare quotient extension with a specified scalar resolution, before taking cohomology.",
+   "via": [
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteModelQuotientChartComparison",
+  "file": "lean/Sheaf/Paper/FiniteModelQuotientChartComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteModelQuotient.chart_comparison",
+  "statement": "theorem chart_comparison (V T : Scheme.{u}) (f : T ⟶ V) (M : AdicCompletion.Modules l E V) (n : ℕ) (e : Encoding l E n T) (P : ModuleCat.{u + 1} (A l E)) (eP : (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).obj M ≅ model l E T P) (a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) (w : ModuleCat.of (A l E) (Fin b → ULift.{u + 1} (A l E)) ⟶ P) (hinj : Function.Injective (integralDifferential l E a b v).hom) (hexact : Function.Exact (integralDifferential l E a b v).hom w.hom) (hsurj : Function.Surjective w.hom) : Nonempty (((CondensedRing.moduleObjectDerivedPullback (DerivedNakayama.quotientRing l E (n + 1)) f).obj (reduction l E V M n)) ≅ internalComplex l E T n a b v e)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9ff81",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T101103-L-3656596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T122536-L-1782635",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

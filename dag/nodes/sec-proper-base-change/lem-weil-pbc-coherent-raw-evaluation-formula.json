@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-coherent-raw-evaluation-formula",
+ "kind": "statement",
+ "title": "Raw evaluation under Ext-to-derived comparison",
+ "statement": "Let f:X to S be a scheme morphism, G a quasi-coherent module on X, q a natural number, V an etale S-scheme and z a raw higher-direct-image class on V. Apply affineRealizationRawEquiv(f,G,q,V) and then sheafHToDerived to z. The result equals rawRestrictedCohomologyComparison(f,q,lifted G,V)(z) followed by derived cohomology of the single-complex map induced by coherentEtaleRestrictionIso(pullback.snd(V.hom,f),G).hom. Dependencies: [def-weil-pbc-coherent-higher-image-classes], [def-weil-pbc-etale-cohomology-presentation].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images, restriction of cohomology classes; Descent Tag 03DR, tensor-section restriction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-higher-image-classes",
+  "def-weil-pbc-etale-cohomology-presentation"
+ ],
+ "proof": [
+  {
+   "text": "expand affineRealizationRawEquiv into rawRestrictedCohomologyComparison,\nthe inverse of sheafHDerivedEquiv, and cohomology of coherentEtaleRestrictionIso.\nApply sheafHToDerived_map to the last coefficient morphism. The forward map of\nsheafHDerivedEquiv is sheafHToDerived by its construction from Equiv.ofBijective;\nhence it cancels its inverse. The remaining composite is precisely the right hand\nside. This assertion concerns the evaluation equivalence alone and has no chart\nrestriction or scalar. In degree zero the same inverse cancellation applies,\nand the empty chart and zero coefficient cases require no nonzero generator.",
+   "uses": [
+    "def-weil-pbc-coherent-higher-image-classes",
+    "new-sheaf-h-derived-naturality",
+    "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-higher-image-classes",
+  "new-sheaf-h-derived-naturality",
+  "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q8 and 0EZM; the specified raw evaluation equivalence and naturality of the derived evaluation under the coherent coefficient isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback naturality for a commutative square of sheaf coefficient maps and single complexes",
+   "results": "Eight hits on module sheaf pullback and group cohomology; none express the fixed etale derived pullback or normalization.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map_comp_apply",
+   "results": "One hit for cohomology of a coefficient composite.",
+   "date": "2026-10-26",
+   "verdict": "Useful functoriality, not the claimed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rawAffineComplexPullback|coherentEtaleRestrictionIso|sheafHToDerived_map",
+   "results": "No Mathlib matches. Local source inspected and partial proofs recorded in the worker scratchpad.",
+   "date": "2026-10-26",
+   "verdict": "No existing matching interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of pullback in sheaf cohomology with respect to a commutative square of coefficient endomorphisms",
+   "results": "Eight hits: general categorical commutative-square naturality and sheaf-of-modules pullback composition; none for the prescribed derived etale raw comparison.",
+   "date": "2026-10-26",
+   "verdict": "No matching fixed-comparison interface; use functor and natural-transformation naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentRawScalarRestriction",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-raw-scalar-restriction",
+   "place": "Strict component of the scalar restriction proof."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawEvaluationFormulaAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawEvaluationFormulaAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.raw_evaluation_formula_aux",
+  "statement": "theorem raw_evaluation_formula_aux {X S : Scheme.{u}} (f : X ⟶ S) (G : X.Modules) [G.IsQuasicoherent] (q : ℕ) (V : S.Etale) (z : (Etale.abelianHigherDirectImageRawPresheaf f q (liftedCoherentEtaleSheaf G)).obj (op V)) : Etale.sheafHToDerived (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V)) q (affineRealizationRawEquiv f G q V z) = (Etale.cohomology AddCommGrpCat.{u + 1} (Limits.pullback V.hom f) (q : ℤ)).map (DerivedCategory.Q.map ((CochainComplex.singleFunctor _ 0).map (coherentEtaleRestrictionIso (pullback.snd V.hom f) G).hom)) (Etale.rawRestrictedCohomologyComparison f q (liftedCoherentEtaleSheaf G) V z)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26",
+  "declarations": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065714-L-3196579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065714-L-3196579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

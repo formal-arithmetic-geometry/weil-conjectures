@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-nodal-relative-dualizing-line",
+ "kind": "statement",
+ "title": "Dualizing line for arbitrary-base nodal curve families",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a flat, proper, finitely presented morphism of algebraic spaces [def-trf-algebraic-space] whose geometric fibres are nonempty, pure of dimension one and at worst nodal. Flatness and finite presentation for spaces are tested on etale scheme charts; proper means separated, of finite type and universally closed. Nodal means that at each nonsmooth closed geometric point the completed local ring is $\\Omega[[u,v]]/(uv)$, with completion and power series as in [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The geometric fibres are schemes and are reduced and Gorenstein, meaning that every local ring is Noetherian and has finite injective dimension as a module over itself (it admits a finite injective resolution). There is a canonical line module $\\omega_{X/T}$ on the small etale site of $X$; a line module is an $\\mathcal O_X$-module etale locally isomorphic to $\\mathcal O_X$. It is characterized by relative Serre duality: after every affine base change $V=\\operatorname{Spec}A\\to T$, for every quasi-coherent module $F$ [def-trf-space-quasi-coherent-module] on $X_V$ there is a natural isomorphism\n$$\\operatorname{Hom}_{\\mathcal O_{X_V}}(F,\\omega_{X_V/V})\\cong\\operatorname{Hom}_A(H^1(X_V,F),A).$$\nHere $H^1$ is the first right derived functor of sections of module sheaves. For every $T'\\to T$, with $p:X_{T'}\\to X$, there is a canonical isomorphism $p^*\\omega_{X/T}\\cong\\omega_{X_{T'}/T'}$ compatible with iterated base change. In particular the restriction to a geometric fibre is its ordinary dualizing invertible module. On a scheme a line module corresponds to an ordinary invertible module [def-sc-invertible-module].",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E6P (lemma-CM-dualizing), 0E6Q (definition-relative-dualizing-sheaf) and its displayed relative-duality property, 0E6R (lemma-gorenstein-dualizing); nodal fibres: curves.tex Tag 0E37 (lemma-facts-about-nodal-curves); schematic fibres: spaces-over-fields.tex Tag 0ADD."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-sc-invertible-module",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-curve-moduli-groupoids",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-module-scheme-restriction",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-module-derived-exchange",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-relative-dualizing-trace-pair",
+  "def-sfb-space-affine-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Fix any geometric base point $\\operatorname{Spec}\\Omega\\to T$ and put $C=X_\\Omega$. Properness supplies separation and finite type over $\\Omega$, and the fibre hypothesis supplies dimension one. Thus [lem-sfb-separated-space-dimension-one-scheme] makes $C$ a scheme. Its nonsmooth closed points have the completed local rings in the hypothesis, so [lem-trf-nodal-points-reduced-algebraically-closed] makes $C$ reduced. Regard $C$ as a family over $\\operatorname{Spec}\\Omega$: flatness holds by [lem-weil-pbc-module-over-field-flat], and properness and finite presentation are inherited from $f$. Every algebraically closed extension $\\Omega\\subseteq\\Omega'$ is also a geometric base point of $T$. Apply the same schematicity and reducedness arguments to $X_{\\Omega'}$: it is reduced and, by hypothesis, nonempty, pure of dimension one and nodal. Thus every geometric fibre of this scheme-family meets all the hypotheses of the scheme theorem. Hence [lem-sfb-gorenstein-curve-relative-dualizing] supplies an invertible module $M_\\Omega$ with $f_\\Omega^!\\Omega\\simeq M_\\Omega[1]$, and identifies $M_\\Omega$ with the fibre's Serre-duality module.",
+   "uses": [
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-trf-nodal-points-reduced-algebraically-closed",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-sfb-gorenstein-curve-relative-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Relative dualizing sheaf section, fibre discussion immediately before Tag 0E6P; Tag 0E6R, with curves.tex Tag 0E37 and spaces-over-fields.tex Tag 0ADD."
+   }
+  },
+  {
+   "text": "The Gorenstein claim also follows without assuming it of the family. Apply [lem-sfb-proper-field-algebraic-dualizing] to $C/\\Omega$. At every point $x$, the complex $(f_\\Omega^!\\Omega)_x$ has finite injective dimension over $\\mathcal O_{C,x}$. By step 1 this complex is $M_{\\Omega,x}[1]$, and $M_{\\Omega,x}$ is free of rank one. Shift a bounded injective representative back by one; it represents $\\mathcal O_{C,x}[0]$. Remove its negative-degree terms successively: the first nonzero differential in negative degree is injective by exactness, and splits because its source is injective. Removing this contractible summand leaves injective terms. After finitely many removals, the degree-zero kernel is $\\mathcal O_{C,x}$ and the remaining complex is a finite injective resolution. This is the definition of a Gorenstein Noetherian local ring, so $C$ is Gorenstein at every point, not merely at its closed points.",
+   "uses": [
+    "lem-sfb-proper-field-algebraic-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0AA3 (lemma-shriek-dualizing), 0AWI (example-proper-over-local); invertible-dualizing criterion Tag 0BFQ (lemma-gorenstein), here unwound directly."
+   }
+  },
+  {
+   "text": "Choose the canonical trace pair $(K_f,\\tau_f)$ from [lem-sfb-proper-flat-space-derived-duality]. Its derived pullback to $C=X_\\Omega$ is the scheme adjoint object $f_\\Omega^!\\Omega$, hence is $M_\\Omega[1]$ by step 1. For any geometric point of $X$, choose its algebraically closed residue field $\\Omega$ and factor it through $X_\\Omega$. Pullback of $M_\\Omega$ to this point is a one-dimensional $\\Omega$-vector space; as a line module it is flat, so derived and ordinary pullback agree. Composition of derived tensor pullbacks therefore gives $Lx^*K_f\\simeq\\Omega[1]$. The complex $K_f$ is pseudo-coherent and locally bounded. Apply [lem-sfb-pseudocoherent-point-fibre-line] with $m=1$: the actual module $\\omega_{X/T}=H^{-1}(K_f)$ is a line module and there is a canonical derived isomorphism $K_f\\simeq\\omega_{X/T}[1]$.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-pseudocoherent-point-fibre-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E6P and 0E6R, fibrewise argument suggested at start of the proof; more-algebra.tex Tag 0BYP supplies the explicit fibre-to-line criterion."
+   }
+  },
+  {
+   "text": "Let $a:T'\\to T$ and $p:X_{T'}\\to X$. Apply the same construction to the base-changed family; the geometric fibres are the ones already considered. Derived base change of trace pairs in [lem-sfb-proper-flat-space-derived-duality] gives $Lp^*K_f\\simeq K_{f_{T'}}$. On any etale chart where $\\omega_{X/T}$ is $\\mathcal O_X$, derived tensor pullback has no higher Tor terms. Thus $Lp^*(\\omega_{X/T}[1])=(p^*\\omega_{X/T})[1]$. Substituting the isomorphisms of step 3 and taking $H^{-1}$ gives $p^*\\omega_{X/T}\\simeq\\omega_{X_{T'}/T'}$. For two successive base changes, the two maps are $H^{-1}$ of the same iterated trace-pair comparison, since that comparison respects composition. This proves the required cocycle and identity compatibilities; for a geometric base point it identifies the restriction with $M_\\Omega$.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-duality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6P, first paragraph of proof; derived comparison in spaces-duality.tex Tag 0E6C."
+   }
+  },
+  {
+   "text": "Take any affine $V=\\operatorname{Spec}A\\to T$ and any quasi-coherent $F$ on $X_V$. The bound [lem-sfb-proper-space-curve-qcoh-bound] gives $H^q(X_V,F)=0$ for $q>1$, so $Q=R\\Gamma(X_V,F)[1]$ lies in $D(A)^{\\leq0}$ and $H^0(Q)=H^1(X_V,F)$. In the truncation triangle $\\tau_{\\leq-1}Q\\to Q\\to H^0(Q)[0]\\to(\\tau_{\\leq-1}Q)[1]$, both Hom groups from $\\tau_{\\leq-1}Q$ and from its shift $[1]$ to $A[0]$ vanish by [lem-pc-derived-tstructure-orthogonality]. Applying Hom into $A[0]$ therefore gives $\\operatorname{Hom}_{D(A)}(Q,A[0])=\\operatorname{Hom}_A(H^1(X_V,F),A)$, using [lem-weil-pbc-derived-single-fully-faithful] for the degree-zero objects. The same fully faithful single embedding, shift cancellation, and the trace adjunction of [lem-sfb-proper-flat-space-derived-duality] give\n$$\\operatorname{Hom}(F,\\omega_{X_V/V})=\\operatorname{Hom}_{D(\\mathcal O_{X_V})}(F[1],K_{f_V})=\\operatorname{Hom}_{D(A)}(Q,A[0]).$$\nComposing gives exactly the displayed relative Serre duality. All maps are functorial in $F$, since the trace adjunction, truncation map and single embedding are functorial. No coherence or flatness hypothesis on $F$ was used.",
+   "uses": [
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-pc-derived-tstructure-orthogonality",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sfb-proper-flat-space-derived-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Displayed relative Serre-duality property following Tag 0E6Q; negative-degree terms are removed by the explicit truncation triangle."
+   }
+  },
+  {
+   "text": "A module equipped with the relative Serre-duality isomorphisms represents the functor $F\\mapsto\\operatorname{Hom}_A(H^1(X_V,F),A)$ on each affine base change. Two such representing modules have a unique comparison compatible with those isomorphisms: evaluate the natural comparison on each representing module and its identity morphism; naturality shows that the resulting two morphisms are inverse. On overlaps and triple overlaps these comparisons agree because both induce the same natural comparison of represented functors. Consequently the characterization is canonical locally on $T$, with the normalization supplied by the trace. Finally, when $X$ is a scheme, [lem-trf-scheme-etale-invertible-comparison] gives an equivalence, with all module morphisms, between ordinary invertible modules and line modules on its small etale site. Its essential-surjectivity clause applies to the line module constructed in step 3; thus this line comes from an ordinary invertible module. This proves the last clause and the full characterization.",
+   "uses": [
+    "lem-trf-scheme-etale-invertible-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Following Tag 0E6Q, characterization locally on the base; scheme comparison: descent.tex Tags 03DX and 05VG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-separated-space-dimension-one-scheme",
+  "lem-trf-nodal-points-reduced-algebraically-closed",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-sfb-gorenstein-curve-relative-dualizing",
+  "lem-sfb-proper-field-algebraic-dualizing",
+  "lem-sfb-proper-flat-space-derived-duality",
+  "lem-sfb-pseudocoherent-point-fibre-line",
+  "lem-sfb-proper-space-curve-qcoh-bound",
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-trf-scheme-etale-invertible-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Relative dualizing sheaf section, fibrewise proof of Tags 0E6P and 0E6R and displayed property after 0E6Q; general derived inputs made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented family of nodal curves has an invertible relative dualizing sheaf compatible with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: flat base change and ring differentials do not construct a relative dualizing line for nodal algebraic-space families"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dualizing module of a flat Gorenstein family of curves is an invertible sheaf and commutes with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra_apply\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (A : Type u_7) [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  (M : CommRing.Pic R), (CommRing.Pic.mapAlgebra R A) M = CommRing.Pic.mk A (TensorProduct R A M.AsModule)\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, and an element $ [M] $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group homomorphism $ \\\\mathrm{Pic}(R) \\\\to \\\\mathrm{Pic}(A) $ sends $ [M] $ t\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] →\\n    (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → CommRing.Pic R →* CommRing.Pic A\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-algebra $ A $, this defines a group homomorphism from the Picard group $ \\\\mathrm{Pic}(R) $ to $ \\\\mathrm{Pic}(A) $. It maps each isomorphism class of inver\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: flat base change and ring differentials do not construct a relative dualizing line for nodal algebraic-space families"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: flat base change and ring differentials do not construct a relative dualizing line for nodal algebraic-space families"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Gorenstein|nodal",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"295\", \"text\": \"/-- Lagrange interpolation: given a finset `s : Finset ι`, a nodal map `v : ι → F` injective on\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"529\", \"text\": \"section Nodal\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"536\", \"text\": \"/-- `nodal s v` is the unique monic polynomial whose roots are the nodes defined by `v` and `s`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"538\", \"text\": \"That is, the roots of `nodal s v` are exactly the image of `v` on `s`,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"541\", \"text\": \"We can use `nodal` to define the barycentric forms of the evaluated interpolant.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"32\", \"text\": \"* consider dualizing the results to right adjoints\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"20\", \"text\": \"This file was obtained by dualizing the definitions in\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"line\": \"12\", \"text\": \"# The dualizing functor on `Cat`\"}\n  {\"file\": \"Mathlib/GroupTheory/Focal.lean\", \"line\": \"37\", \"text\": \"* [D. Gorenstein, *Finite Groups*][gorenstein1968]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"22\", \"text\": \"by dualizing this file. These two files should be kept in sync.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"21\", \"text\": \"Note: this file was obtained by dualizing the definitions in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"27\", \"text\": \"(This file was obtained by dualizing the results in the file\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToDual.lean\", \"line\": \"27\", \"text\": \"  We may also want this feature for dualizing results about bicategories.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"line\": \"190\", \"text\": \"and dualizing the result using `toDual`.\"}\n  {\"file\": \"Mathlib/Data/Set/Defs.lean\", \"line\": \"60\", \"text\": \"Additionally, dualizing the order on sets would mean that a set is dual to its complement.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: flat base change and ring differentials do not construct a relative dualizing line for nodal algebraic-space families"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper flat finitely presented family of nodal curves has an invertible relative dualizing sheaf compatible with arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: flat base change and ring differentials do not construct a relative dualizing line for nodal algebraic-space families"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Gorenstein|nodal",
+   "results": "[grep] OK 0 hit(s)\n\nSearch directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: flat base change and ring differentials do not construct a relative dualizing line for nodal algebraic-space families"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented nodal curve family of algebraic spaces has a relative dualizing invertible module with arbitrary base change and Serre duality",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: proper Gorenstein coherent relative duality for algebraic spaces is not flat or smooth base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality for a Gorenstein family of proper curves over an arbitrary scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FGModuleCat.exactPairing\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) → [inst : Field K] → (V : FGModuleCat K) → CategoryTheory.ExactPairing V (FGModuleCat.FGModuleCatDual K V)\", \"doc\": \"For any field $ K $ and finitely generated $ K $-module $ V $, there exists an exact pairing between $ V $ and its dual module $ \\\\text{Hom}_K(V, K) $, constructed via coevaluation and evaluation maps \"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤),\\n  CategoryTheo\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ over a commutative ring $A$, a scheme $X$, and a ring homomorphism $f : A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ such that the image of the irrelevant ideal $\\\\mathcal{I} \\\\subs\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    {X : AlgebraicGeometry.Scheme} →\\n      [inst : X.Over S] → { f // AlgebraicGeometry.Scheme.Hom.IsOver f S } ≃ (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural equivalence between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections \"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {X : AlgebraicGeometry.Scheme} →\\n    (X ⟶\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }) ≃\\n      (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {Z : AlgebraicG\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a scheme $X$, a ring homomorphism $f : A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ satisfying $f(\\\\text{irrelevant ideal}) = A$, and a morphism $h : \\\\text{Spec}(\\\\mathcal{A}_0) \\\\to \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: proper Gorenstein coherent relative duality for algebraic spaces is not flat or smooth base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: proper Gorenstein coherent relative duality for algebraic spaces is not flat or smooth base change"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Gorenstein|nodal",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/Focal.lean\", \"line\": \"37\", \"text\": \"* [D. Gorenstein, *Finite Groups*][gorenstein1968]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"32\", \"text\": \"* consider dualizing the results to right adjoints\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"22\", \"text\": \"by dualizing this file. These two files should be kept in sync.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"21\", \"text\": \"Note: this file was obtained by dualizing the definitions in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"27\", \"text\": \"(This file was obtained by dualizing the results in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"line\": \"12\", \"text\": \"# The dualizing functor on `Cat`\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"line\": \"190\", \"text\": \"and dualizing the result using `toDual`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"20\", \"text\": \"This file was obtained by dualizing the definitions in\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"295\", \"text\": \"/-- Lagrange interpolation: given a finset `s : Finset ι`, a nodal map `v : ι → F` injective on\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"529\", \"text\": \"section Nodal\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"536\", \"text\": \"/-- `nodal s v` is the unique monic polynomial whose roots are the nodes defined by `v` and `s`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"538\", \"text\": \"That is, the roots of `nodal s v` are exactly the image of `v` on `s`,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"541\", \"text\": \"We can use `nodal` to define the barycentric forms of the evaluated interpolant.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToDual.lean\", \"line\": \"27\", \"text\": \"  We may also want this feature for dualizing results about bicategories.\"}\n  {\"file\": \"Mathlib/Data/Set/Defs.lean\", \"line\": \"60\", \"text\": \"Additionally, dualizing the order on sets would mean that a set is dual to its complement.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: proper Gorenstein coherent relative duality for algebraic spaces is not flat or smooth base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper flat finitely presented nodal curve family of algebraic spaces has a relative dualizing invertible module with arbitrary base change and Serre duality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.toDualBaseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": A ⊗[R] Dual R V ≃ₗ[A] Dual A W\", \"doc\": \"The linear equivalence between the tensor product of an $ R $-algebra $ A $ with the dual module $ \\text{Dual}_R V $ and the dual module $ \\text{Dual}_A W $, establishing that base change commutes with \"}\n  {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"[Flat R M] [FinitePresentation R M] : Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}\n  {\"name\": \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"[Algebra.FinitePresentation R S] : Module.FinitePresentation S Ω[S⁄R]\", \"doc\": \"If an $ R $-algebra $ S $ is finitely presented over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitely presented as an $ S $-module.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[EssFiniteType R A] [FormallySmooth R A] : Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Module.Invertible.instDual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Module.Invertible R (Dual R M)\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-module $ M $, if $ M $ is invertible, then its dual module $ \\text{Dual}_R(M) $ consisting of all $ R $-linear maps $ M \\to R $ is also an invertible $ R $-\"}\n  {\"name\": \"Module.Invertible.linearEquiv\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"[Module.Invertible R M] : Module.Dual R M ⊗[R] M ≃ₗ[R] R\", \"doc\": \"For a commutative semiring $ R $ and an invertible $ R $-module $ M $, the tensor product of the dual module $ M^* $ with $ M $ is linearly equivalent to $ R $ as an $ R $-module. This equivalence is \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: proper Gorenstein coherent relative duality for algebraic spaces is not flat or smooth base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-and-smooth-family-open-loci",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness.",
+   "via": [
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-relative-dualizing-line",
+  "worker": "stage1",
+  "summary": "Follows the fibrewise argument of the Stacks relative-dualizing section, reuses the existing nodal scheme theorem on geometric fibres, and exposes general derived duality, geometric-point recognition of shifted lines, absolute dualizing stalks over fields, and the arbitrary-base quasi-coherent cohomology bound. Derives ordinary base change and relative Serre duality explicitly. No mathematical change to the statement; Gorenstein and H^1 are spelled out and the existing space-quasi-coherent definition is referenced. Repair after returned head f021f8a8111: rebased through the delivery tool onto the current live DAG, re-read both changed citations, and replaced the broad scheme/etale equivalence in step 6 by its now-separated rank-one comparison lem-trf-scheme-etale-invertible-comparison. The nodal hypothesis and the four searched prerequisites are retained. Fresh repair verification explicitly checks reducedness over every algebraically closed extension in step 1, so the reused scheme-family theorem is applied with all of its geometric-fibre hypotheses. Continuation on 2026-10-23: verified the interrupted dry-run receipt, compared again with the returned head and current DAG, and spelled out removal of negative-degree contractible injective summands in step 2 to obtain an actual finite injective resolution.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-separated-space-dimension-one-scheme",
+    "why": "Generic scheme/space or nodal-fibre comparison tool used at geometric fibres or for the final scheme clause; does not replace the alteration/moduli route of the unit."
+   },
+   {
+    "node": "lem-trf-nodal-points-reduced-algebraically-closed",
+    "why": "Generic scheme/space or nodal-fibre comparison tool used at geometric fibres or for the final scheme clause; does not replace the alteration/moduli route of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-over-field-flat",
+    "why": "Generic scheme/space or nodal-fibre comparison tool used at geometric fibres or for the final scheme clause; does not replace the alteration/moduli route of the unit."
+   },
+   {
+    "node": "lem-sfb-gorenstein-curve-relative-dualizing",
+    "why": "Generic scheme/space or nodal-fibre comparison tool used at geometric fibres or for the final scheme clause; does not replace the alteration/moduli route of the unit."
+   },
+   {
+    "node": "lem-pc-derived-tstructure-orthogonality",
+    "why": "Generic standard derived-category orthogonality/single-embedding tool for the truncation calculation; does not replace the alteration/moduli route of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic standard derived-category orthogonality/single-embedding tool for the truncation calculation; does not replace the alteration/moduli route of the unit."
+   },
+   {
+    "node": "lem-trf-scheme-etale-invertible-comparison",
+    "why": "The specific rank-one scheme/etale comparison supplies the final scheme clause; it is a generic comparison tool and does not replace the unit alteration/moduli route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-separated-space-dimension-one-scheme",
+  "lem-trf-nodal-points-reduced-algebraically-closed",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-sfb-gorenstein-curve-relative-dualizing",
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-trf-scheme-etale-invertible-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-266343f76",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-266343f76 (reviewer sub-agent of L); spot-checked: Fourth delivery of this split. The earlier deliveries f021, d3c9 and 801a each got a FIX, and each landing was refused with 'completed in this project's DAG but not in the live DAG', so the FIX was lost each time. I compared all five nodes with 801a field by field. The four new nodes are identical, and the item's statement, deps and steps 1 and 3-6 are unchanged. Step 2 now spells out how the finite injective dimension of O_x[1] gives a finite injective resolution of O_x: split off the lowest negative-degree term, which is injective and maps injectively, and repeat. I checked this and it is correct. All steps were re-read and re-checked: (1) 0ADD schematicity, reducedness of the nodal fibres, and the hypotheses of the scheme theorem over every algebraically closed extension; (3) base change to Spec Omega and the point-fibre node with m=1; (4) H^-1 of the trace-pair base change; (5) the truncation argument recomputed, with both outer Homs zero by t-orthogonality; (6) Yoneda uniqueness plus the essential surjectivity of lem-trf-scheme-etale-invertible-comparison. The new nodes are true general tools and none restates an item clause; sources are Stacks 0E5X/0E5Z/0E61/0E6C/0E6E, 0BYP, 0E6F with 0E7D, and 0AA3. No duplicates and no SGA source. Batch-5 check: the item's unit is sk-thm-sf-ctf-stability, cited only by the de Jong stable-loci node, so it belongs to finiteness and constructibility, not to the proof of the trace formula or of Poincare duality. The cited sec-trace-formula nodes are general foundations: def-trf-algebraic-space (Stacks 025Y) and def-trf-space-quasi-coherent-module (03G9) are definitions; lem-sfb-separated-space-dimension-one-scheme (0ADD) reaches trace-formula nodes only through that definition; lem-trf-nodal-points-reduced-algebraically-closed is pure commutative algebra; lem-trf-scheme-etale-invertible-comparison is descent (03DX, 05VG). All are accepted. FIX (B3/C5, re-applied unchanged from 801a): lem-sfb-proper-field-algebraic-dualizing now cites def-per-algebraic-normalized-dualizing and adds it to stmt_deps, in fixes/dag/nodes/sec-six-functors-basics/. Maintainer note: please promote the item together with this fix; it has now been lost three times.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalRelativeDualizingLine",
+  "declaration": "AlgebraicGeometry.exists_nodalDualizingLineSystem",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.nodalLineH1",
+   "AlgebraicGeometry.AlgebraicSpace.nodalLineSingle",
+   "AlgebraicGeometry.AlgebraicSpace.nodalLinePullbackMap",
+   "AlgebraicGeometry.NodalDualizingLineBaseChange",
+   "AlgebraicGeometry.NodalDualizingLineSystem",
+   "AlgebraicGeometry.exists_nodalDualizingLineSystem"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalRelativeDualizingLine.lean",
+  "statement": "theorem exists_nodalDualizingLineSystem {S : Scheme.{u}} {T : Over S} [∀ Z : AlgebraicSpace S, HasDerivedCategory.{w} Z.SmallModules] (C : ProperCurveFamily T) (hnodal : C.HasNonemptyNodalGeometricFibres) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ T.left), ∃ (U : Over S) (r : U ⟶ Over.mk (a ≫ T.hom)) (e : yoneda.obj U ≅ Limits.pullback C.projection (yoneda.map (Over.homMk a rfl : Over.mk (a ≫ T.hom) ⟶ T))), e.hom ≫ Limits.pullback.snd C.projection (yoneda.map (Over.homMk a rfl : Over.mk (a ≫ T.hom) ⟶ T)) = yoneda.map r ∧ IsReduced U.left ∧ ∀ x : U.left, IsNoetherianRing (U.left.presheaf.stalk x) ∧ ∃ n : ℕ, HasInjectiveDimensionLE (ModuleCat.of (U.left.presheaf.stalk x) (U.left.presheaf.stalk x)) n) ∧ Nonempty (NodalDualizingLineSystem C)",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses ProperCurveFamily and its nonempty nodal geometric-fibre predicate. The helper structures retain every cartesian realization of arbitrary scheme base change and state the relative dualizing line introduced by this node. Relative trace pairs and an explicit universal-derived-counit comparison normalize its base-change maps. H1 is nodalLineH1, an explicit abbreviation for QCoh inclusion, small-model restriction and the first right derived functor of the existing affineScalarSections, right derived in all modules. Added statement dependencies are already recorded live nodes; no original statement or proof fields change. H2 repair of returned head 5adf023e54eb: drops the higher-image theorem from stmt_deps and its public import; cites def-sfb-space-affine-global-sections and uses the documented nodalLineH1 abbreviation in all Serre-duality fields."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5879f102a",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Repairs the H2 return of 5adf023e54eb: the theorem lem-sfb-space-affine-base-higher-image-sections is replaced in stmt_deps by def-sfb-space-affine-global-sections (owns affineScalarSections). H1 is the documented abbrev nodalLineH1 = QCoh.ι ⋙ smallModuleRestriction ⋙ (affineScalarSections …).rightDerived 1, the same composite as before at q=1, used in all four places; the global isGrothendieckAbelian attribute is the removed module's activation and has landed precedent. All 19 stmt_deps are definition nodes; only lean and stmt_deps differ from the live node; lean.statement is verbatim; no name clashes. Independent reading: hypotheses are ProperCurveFamily plus the landed HasNonemptyNodalGeometricFibres (nonempty, pure dim 1, smooth or ordinary node with completion Ω[[u,v]]/(uv)), nothing stronger. Conclusions: geometric fibres are represented schemes, reduced, with Noetherian finite-injective-dimension stalks at all points; ω is a line module whose degree −1 shift is an IsRelativeDualizingTracePair; Serre duality natural in all QCoh F over every affine presentation; Yoneda uniqueness; base change fixed by the trace equation via the universal derived counit, with identity and composition coherences; invertible on every scheme realization. Edge cases (empty base, smooth or disconnected fibres, char 2, F=0, non-coherent F) and universes (u; w only for localization) are correct. One sorry, real data, docstrings complete. No compile (no FIX)."
+ }
+}

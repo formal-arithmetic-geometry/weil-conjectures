@@ -1,0 +1,75 @@
+{
+ "id": "det-sp-nearby-cycles-exchanges",
+ "kind": "statement",
+ "title": "Pullback and proper exchanges for nearby cycles",
+ "statement": "Let $S$ be a strictly henselian trait with a chosen geometric generic point $\\bar\\eta$ (for\ninstance the strict henselization of $\\operatorname{Spec}k[t]_{(t)}$ for an algebraically closed\nfield $k$), let $\\ell$ be invertible on $S$, and let $A$ be a finite commutative ring annihilated\nby a power of $\\ell$. For $\\mathcal Y\\to S$ separated of finite type, let $\\bar{\\mathcal Y}$ be its\npullback to the integral closure $\\bar S$ of $S$ in the chosen separable closure of its fraction\nfield, let $\\bar i$ and $\\bar j$ be the inclusions of the special fibre $\\mathcal Y_s$ and of the\ngeometric generic fibre $\\mathcal Y_{\\bar\\eta}$ into $\\bar{\\mathcal Y}$, and put\n\n$$\nR\\Psi_{\\mathcal Y}(L)=\\bar i^{*}R\\bar j_*L_{\\bar\\eta}\n\\qquad(L\\in D^b_c(\\mathcal Y_{\\eta,\\mathrm{\\acute et}},A)).\n$$\n\nLet $f\\colon\\mathcal Y'\\to\\mathcal Y$ be a morphism of separated finite-type $S$-schemes.\n\n1. **(Pullback exchange.)** Restricting to the special fibre the base-change map\n   $\\bar f^*R\\bar j_*\\to R\\bar j'_*f_{\\bar\\eta}^*$ of the square formed by $\\bar f$ and the\n   generic-fibre inclusions gives a natural transformation of functors\n   $D^b_c(\\mathcal Y_{\\eta,\\mathrm{\\acute et}},A)\\to D(\\mathcal Y'_{s,\\mathrm{\\acute et}},A)$\n\n   $$\n   f_s^*R\\Psi_{\\mathcal Y}\\longrightarrow R\\Psi_{\\mathcal Y'}f_\\eta^*,\n   $$\n\n   which is invertible when $f$ is smooth.\n1. **(Proper exchange.)** If $f$ is proper, proper base change for $\\bar f$ along $\\bar i$ and the\n   identification $R\\bar f_*R\\bar j'_*=R\\bar j_*Rf_{\\bar\\eta*}$ give an isomorphism of functors\n   $D^b_c(\\mathcal Y'_{\\eta,\\mathrm{\\acute et}},A)\\to D(\\mathcal Y_{s,\\mathrm{\\acute et}},A)$\n\n   $$\n   Rf_{s*}R\\Psi_{\\mathcal Y'}\\xrightarrow{\\sim}R\\Psi_{\\mathcal Y}Rf_{\\eta*}.\n   $$\n\nBoth exchanges are compatible with composition of morphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-lem-tf-sp-constant-family/det-sp-nearby-cycles-exchanges.md",
+  "place": "node det-sp-nearby-cycles-exchanges, order None",
+  "external": [
+   {
+    "document": "SGA 7",
+    "place": "The same normalizations appear in (SGA 7 II, XIII, (2.1.7.1)–(2.1.7.3))."
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The invertibility comes from two base change theorems for torsion coefficients.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For proper $f$, composition identifies the two generic direct images,\n$R\\bar f_*R\\bar j'_*\\simeq R(\\bar f\\bar j')_*=R(\\bar j f_{\\bar\\eta})_*\\simeq R\\bar j_*Rf_{\\bar\\eta*}$.\nProper base change [thm-weil-pbc-bounded-below] for the proper map $\\bar f$ and the closed\nimmersion $\\bar i$ of the special fibre gives\n$\\bar i^*R\\bar f_*\\simeq Rf_{s*}\\bar i'^*$ on complexes with torsion cohomology. Combining,\n\n$$\nRf_{s*}R\\Psi_{\\mathcal Y'}L=Rf_{s*}\\bar i'^*R\\bar j'_*L_{\\bar\\eta}\n\\simeq\\bar i^*R\\bar f_*R\\bar j'_*L_{\\bar\\eta}\n\\simeq\\bar i^*R\\bar j_*Rf_{\\bar\\eta*}L_{\\bar\\eta}=R\\Psi_{\\mathcal Y}Rf_{\\eta*}L,\n$$\n\nwhere the last step uses that proper direct image commutes with the base change from $\\eta$ to\n$\\bar\\eta$ (proper base change again).",
+   "uses": [
+    "thm-weil-pbc-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For smooth $f$, the square formed by $\\bar f$, $\\bar j$ and $\\bar j'$ is cartesian, $\\bar f$ is\nsmooth and $\\bar j$ is quasi-compact and quasi-separated. Smooth base change\n[sbc-thm-bounded-derived-smooth-base-change] makes $\\bar f^*R\\bar j_*\\to R\\bar j'_*f_{\\bar\\eta}^*$\nan isomorphism on bounded constructible complexes; the coefficients are annihilated by a power of\n$\\ell$, which is invertible on $S$. Restricting to the special fibre gives the invertibility of\nthe pullback exchange.",
+   "uses": [
+    "sbc-thm-bounded-derived-smooth-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compatibility with composition holds because base-change maps paste along composite squares and\nthe composition identifications of direct images are associative. The same normalizations appear\nin (SGA 7 II, XIII, (2.1.7.1)–(2.1.7.3)).",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-bounded-below",
+  "sbc-thm-bounded-derived-smooth-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-lem-tf-sp-constant-family/det-sp-nearby-cycles-exchanges.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "thm-weil-pbc-bounded-below",
+  "sbc-thm-bounded-derived-smooth-base-change"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "det-sp-nearby-cycles-exchanges",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-lem-tf-sp-constant-family"
+}

@@ -1,0 +1,145 @@
+{
+ "id": "lem-trf-maximum-history-common-stage",
+ "kind": "statement",
+ "title": "Regularity agrees at common maximum-history stages",
+ "statement": "Let $V$ be totally ordered with least element, let $\\nu$ be a supplied resolution invariant calculus [def-trf-resolution-invariant-calculus-data], and let $A$ be an embedded rational pair [def-trf-labeled-embedded-resolution]. Let $T$ and $U$ be chronological maximum segments [lem-trf-maximum-history-chronology] of lengths $r$ and $s$ over $A$; their prefixes are admissible, their extensions are maximum steps and all sources of extensions are nonregular [def-trf-admissible-embedded-history]. For every natural number $i\\leq r,s$, the final scheme of the length-$i$ prefix in $T$ is regular if and only if that in $U$ is regular [def-weil-regular-scheme]. No regularity of the two terminal stages and no labeled lower-cut realization are assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.1.1--2.1.4, 2.3.4 and 2.3.11, printed pp.86--87,91--93; common-prefix canonical comparison induction from original finite-realization Step 3"
+ },
+ "stmt_deps": [
+  "def-trf-resolution-invariant-calculus-data",
+  "def-trf-admissible-embedded-history",
+  "def-trf-labeled-embedded-resolution",
+  "def-weil-regular-scheme",
+  "lem-trf-maximum-history-chronology"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the common prefix, identifying initial ambient and intrinsic diagrams through their normalized isomorphisms with A. Maintain commuting ambient and intrinsic isomorphisms on the entire prefix, preserving earlier ideals. They give a smooth history comparison over the identity initial pair, with identity index map and no deletions.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "def-trf-admissible-embedded-history",
+    "def-trf-labeled-embedded-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "SmoothValues identifies the invariant functions under that comparison. Their greatest positive values and full loci agree. The new centers are reduced, hence on each affine open they have the same radical ideal cutting out that locus. Their intrinsic ideals, and then their ambient ideals through the compatible closed immersions, agree. Principalization makes the common extended ideal invertible on both blowups. The blowup universal property lifts the preceding isomorphism in both directions, and uniqueness makes the lifts inverse.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "def-trf-admissible-embedded-history",
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ambient comparison takes the same open complement and its scheme-theoretic closure to one another, so it identifies strict transforms and extends the induction. At the desired common stage, isomorphisms preserve local Noetherianity and identify stalk rings, so regularity agrees. The induction uses only the indicated prefix, not terminal regularity or tower padding.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-resolution-invariant-calculus-data",
+  "def-trf-admissible-embedded-history",
+  "def-trf-labeled-embedded-resolution",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property",
+  "def-nagata-strict-transform",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.1.1--2.1.4, 2.3.4 and 2.3.11, printed pp.86--87,91--93; common-prefix canonical comparison induction from original finite-realization Step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms between two ordinary blowup histories whose centers are the reduced full maximum locus preserve regularity at their common prefixes",
+   "results": "{\"t\": \"2026-10-26T08:16:56Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphisms between two ordinary blowup histories whose centers are the reduced full maximum locus preserve regularity at their common prefixes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.RegularEpi.ofIso\", \"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"LinearEquiv.isRegular_congr'\", \"CategoryTheory.RegularMono.ofIso\", \"AlgebraicGeometry.isOpenImmersion_respectsIso\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\"], \"digest\": \"dc162db9b475b2d0\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match: generic isomorphism instances and regular epi/mono results do not compare maximum-history prefixes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two embedded blowup maximum center histories agree at every common chronological stage and therefore stop at the same length",
+   "results": "{\"t\": \"2026-10-26T08:11:31Z\", \"tool\": \"leanfinder\", \"query\": \"Two embedded blowup maximum center histories agree at every common chronological stage and therefore stop at the same length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PiNat.cylinder_eq_cylinder_of_le_firstDiff\", \"PiNat.apply_eq_of_lt_firstDiff\", \"PFunctor.M.ext_aux\", \"PiNat.res_eq_res\", \"PFunctor.M.ext'\", \"PFunctor.Approx.truncate_eq_of_agree\", \"PFunctor.Approx.AllAgree\", \"PFunctor.M.agree_iff_agree'\"], \"digest\": \"5f555ebdeb133fdb\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match: PiNat cylinder and polynomial-functor prefix agreements concern unrelated objects"
+  },
+  {
+   "tool": "grep",
+   "query": "LowerSet.*ncard|ncard.*LowerSet|maximumHistory",
+   "results": "{\"t\": \"2026-10-26T08:11:31Z\", \"tool\": \"grep\", \"query\": \"LowerSet.*ncard|ncard.*LowerSet|maximumHistory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match for maximumHistory in Mathlib; source library search found no existing common-stage comparison theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MaximumHistoryFiniteRealization",
+  "date": "2026-10-26",
+  "group": "U4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Re-split of lem-trf-embedded-resolution-ambient-comparison, old Steps 1--2: realize the maximum-center recursion, terminate it, and index it by the reverse invariant order. Further extraction: ILO VIII 2.1.1--2.1.4, 2.3.4 and 2.3.11, printed pp.86--87,91--93; common-prefix canonical comparison induction from original finite-realization Step 3",
+   "via": [
+    "lem-trf-maximum-history-finite-realization",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MaximumHistoryCommonStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/MaximumHistoryCommonStage.lean",
+  "declaration": "AlgebraicGeometry.maximumHistorySegment_commonStage",
+  "statement": "theorem maximumHistorySegment_commonStage {V : Type w} [LinearOrder V] [OrderBot V]\n    {ν : ResolutionInvariantCalculus.{u} V} {A : EmbeddedResolutionPair.{u}} {r s : ℕ}\n    (T : MaximumHistorySegment ν A r) (U : MaximumHistorySegment ν A s)\n    (i : ℕ) (hi : i ≤ r) (hj : i ≤ s) :\n    IsRegularScheme (T.history ⟨i, Nat.lt_succ_of_le hi⟩).X ↔\n      IsRegularScheme (U.history ⟨i, Nat.lt_succ_of_le hj⟩).X",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T092748-L-3463822",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T092748-L-3463822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

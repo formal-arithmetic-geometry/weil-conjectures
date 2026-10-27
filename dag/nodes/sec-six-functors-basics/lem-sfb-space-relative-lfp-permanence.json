@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-space-relative-lfp-permanence",
+ "kind": "statement",
+ "title": "Relative local finite presentation for morphisms of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of algebraic spaces over $S$ [def-trf-algebraic-space]. Interpret locally of finite presentation and locally of finite type by etale scheme charts, with scheme meanings as in [def-sbc-locally-finite-presentation] and [def-weil-finite-type-morphism]. If $g\\circ f:X\\to Z$ is locally of finite presentation and $g$ is locally of finite type, then $f$ is locally of finite presentation. No separation or quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05WT (lemma-finite-presentation-permanence)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose a scheme atlas $w:W\\to Z$. Form $Y_W=Y\\times_ZW$, choose a scheme atlas $v:V\\to Y_W$, form $X_V=X\\times_YV$, and choose a scheme atlas $u:U\\to X_V$. These fibre products are algebraic spaces by [lem-trf-space-fibre-products-etale-covers], so the atlases exist by [def-trf-algebraic-space]. The atlas maps and the projections $Y_W\\to Y$ and $X_V\\to X$ are representable surjective etale, and so are their composites $b:V\\to Y$ and $a:U\\to X$, by [lem-trf-space-representable-etale-scheme-tests]. Let $q:V\\to W$ and $h:U\\to V$ be the remaining projections. The fibre-product identities give $g b=w q$ and $f a=b h$, hence $(g\\circ f)a=w(qh)$. Thus $(V,W,b,w,q)$ is a presentation diagram for $g$, $(U,W,a,w,qh)$ is one for $g\\circ f$, and $(U,V,a,b,h)$ is one for $f$, each with surjective source chart.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05WT (lemma-finite-presentation-permanence), proof, with Tag 03MJ (lemma-local-source-target)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-scheme-etale-source-target-properties], local finite type and local finite presentation are etale local on source-and-target. Apply condition (1) of [lem-sfb-space-etale-presentation-property-criterion] to the first two presentation diagrams of step 1: the hypothesis on $g$ gives local finite type of the scheme map $q:V\\to W$, and the hypothesis on $g\\circ f$ gives local finite presentation of $qh:U\\to W$. Apply [lem-a1-map-over-base-finite-presentation] with its base scheme $S=W$, source $X=U$, target $Y=V$, structure maps $p=qh$, $q=q$, and $h=h$. The equality $q\\circ h=p$ is the definition of $p$. All three objects are schemes, and the two finiteness hypotheses have just been verified. It follows that $h:U\\to V$ is locally of finite presentation.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-a1-map-over-base-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05WT (lemma-finite-presentation-permanence), proof, with Tag 03MJ (lemma-local-source-target)."
+   }
+  },
+  {
+   "text": "In the third presentation diagram of step 1 the vertical maps $a:U\\to X$ and $b:V\\to Y$ are representable etale, $a$ is surjective, and step 2 proves local finite presentation of $h$. Local finite presentation is etale local on source-and-target by [lem-sfb-scheme-etale-source-target-properties]. Condition (2) of [lem-sfb-space-etale-presentation-property-criterion] therefore proves that $f$ is locally of finite presentation in precisely the chart sense stipulated in the statement. The construction used unrestricted scheme atlases and no quasi-compactness or separation assumption.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05WT (lemma-finite-presentation-permanence), proof, with Tag 03MJ (lemma-local-source-target)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-a1-map-over-base-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05WT (lemma-finite-presentation-permanence), proof; the chart steps are justified by existing nodes for Tags 03MJ, 03EC and 02X2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If X is locally of finite presentation over Z and Y is locally of finite type over Z then every Z morphism X to Y of algebraic spaces is locally of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [hg : AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite presentation is itself a morphism that is locally of finite presentation. This follows from the fact that the property of being l\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, if $ g $ is locally of finite presentation, then the first projection morphism from the pullback of $ f $ and $ g $ to $ X \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition and base change are different assertions; AlgHom.FinitePresentation.of_comp_finiteType is the affine ring input, requiring chart descent to prove this algebraic-space statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite presentation of a morphism of algebraic spaces follows from local finite presentation of its composite and local finite type of the target over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [hg : AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite presentation is itself a morphism that is locally of finite presentation. This follows from the fact that the property of being l\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ f \\\\circ g $ is locally of finite type, then the morphism $ f $ is locally of finite type. A morphism is locally of f\"}\n  {\"name\": \"AlgHom.FinitePresentation.of_comp_finiteType\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} {C : Type u_4} [inst : CommRing R] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : CommRing C] [inst_4 : Algebra R A] [inst_5 : Algebra R B] [inst_6 : Algebra R C]\\n  (f : A →ₐ[R] B) {g : B →ₐ[R] C}, (g.comp f).FinitePresentation → f.FiniteType →\", \"doc\": \"Let $ f : A \\\\to B $ and $ g : B \\\\to C $ be algebra homomorphisms over a commutative semiring $ R $. If the composition $ g \\\\circ f $ is finitely presented and $ f $ is of finite type, then $ g $ is fi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition and base change are different assertions; AlgHom.FinitePresentation.of_comp_finiteType is the affine ring input, requiring chart descent to prove this algebraic-space statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism between algebraic spaces locally finitely presented over a common base is locally finitely presented",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : LocallyOfFinitePresentation f]\\n  [hg : LocallyOfFinitePresentation g] : LocallyOfFinitePresentation (f ≫ g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite presentation is itself a morphism that is locally of finite presentation. This follows from the fact that the property of being l\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": MorphismProperty.IsStableUnderComposition @LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyOfFinitePresentation f] : LocallyOfFinitePresentation (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is locally of finite presentation, then for any open subset $ V $ of $ Y $, the restriction $ f|_V $ is also locally of finite presentation.\"}\n  {\"name\": \"RingHom.finitePresentation_isLocal\", \"module\": \"Mathlib.RingTheory.RingHom.FinitePresentation\", \"type\": \": PropertyIsLocal @FinitePresentation\", \"doc\": \"The property of a ring homomorphism between commutative rings being finitely presented is local, meaning it can be checked after localization at prime ideals or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition and base change are different assertions; AlgHom.FinitePresentation.of_comp_finiteType is the affine ring input, requiring chart descent to prove this algebraic-space statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\", \"LocallyOfFiniteType\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsLocallyNoetherian Y] [AlgebraicGeometry.LocallyOfFiniteType f] : AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.IsLocallyNoetherian Y] : AlgebraicGeometry.LocallyOfFinitePresentation f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition and base change are different assertions; AlgHom.FinitePresentation.of_comp_finiteType is the affine ring input, requiring chart descent to prove this algebraic-space statement."
+  },
+  {
+   "tool": "grep",
+   "query": "(LocallyOfFinitePresentation|locallyOfFinitePresentation).*(of_comp|of_composition)|locallyOfFinitePresentation_of",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1164\", \"text\": \"private nonrec lemma Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1257\", \"text\": \"  -- Using the affine version `exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1273\", \"text\": \"    choose k ak hk hk' using fun j ↦ exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"62\", \"text\": \"instance (priority := 900) locallyOfFinitePresentation_of_isOpenImmersion [IsOpenImmersion f] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition and base change are different assertions; AlgHom.FinitePresentation.of_comp_finiteType is the affine ring input, requiring chart descent to prove this algebraic-space statement."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyOfFinitePresentation_of_comp|of_comp_finiteType",
+   "results": "{\"t\": \"2026-10-23T11:28:20Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|locallyOfFinitePresentation_of_comp|of_comp_finiteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/RingTheory/FinitePresentation.lean\", \"Mathlib/RingTheory/FinitePresentation.lean\", \"Mathlib/RingTheory/FinitePresentation.lean\", \"Mathlib/RingTheory/FiniteType.lean\", \"Mathlib/RingTheory/FiniteType.lean\"], \"digest\": \"17e783ce923f4ff0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring maps, not algebraic-space cancellation. RingHom.FinitePresentation.of_comp_finiteType (Mathlib/RingTheory/FinitePresentation.lean:442) is the affine input; passing to algebraic spaces requires the presentation argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic spaces is locally of finite presentation if its composite is locally of finite presentation and its target is locally of finite type over the same base",
+   "results": "{\"t\": \"2026-10-23T11:28:20Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of algebraic spaces is locally of finite presentation if its composite is locally of finite presentation and its target is locally of finite type over the same base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgHom.FinitePresentation.of_comp_finiteType\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.mk\"], \"digest\": \"954182a37a9720c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring maps, not algebraic-space cancellation. RingHom.FinitePresentation.of_comp_finiteType (Mathlib/RingTheory/FinitePresentation.lean:442) is the affine input; passing to algebraic spaces requires the presentation argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\", \"LocallyOfFiniteType\"",
+   "results": "{\"t\": \"2026-10-23T11:28:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyOfFinitePresentation\\\", \\\"LocallyOfFiniteType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType\"], \"digest\": \"e97402c1736d86df\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring maps, not algebraic-space cancellation. RingHom.FinitePresentation.of_comp_finiteType (Mathlib/RingTheory/FinitePresentation.lean:442) is the affine input; passing to algebraic spaces requires the presentation argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the composite of two morphisms of algebraic spaces is locally of finite presentation and the second is locally of finite type then the first is locally of finite presentation",
+   "results": "{\"t\": \"2026-10-23T11:28:22Z\", \"tool\": \"leanfinder\", \"query\": \"If the composite of two morphisms of algebraic spaces is locally of finite presentation and the second is locally of finite type then the first is locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgHom.FinitePresentation.of_comp_finiteType\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"29f30ea2a69db93c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring maps, not algebraic-space cancellation. RingHom.FinitePresentation.of_comp_finiteType (Mathlib/RingTheory/FinitePresentation.lean:442) is the affine input; passing to algebraic spaces requires the presentation argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite presentation cancellation for algebraic spaces using etale scheme presentations",
+   "results": "{\"t\": \"2026-10-23T11:28:23Z\", \"tool\": \"leanfinder\", \"query\": \"Local finite presentation cancellation for algebraic spaces using etale scheme presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\"], \"digest\": \"a50c59ec20c083e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring maps, not algebraic-space cancellation. RingHom.FinitePresentation.of_comp_finiteType (Mathlib/RingTheory/FinitePresentation.lean:442) is the affine input; passing to algebraic spaces requires the presentation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-group-invertible-multiplication",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Invertible multiplication on a smooth commutative group space. Supporting infinitesimal input: Relative local finite presentation for morphisms of algebraic spaces.",
+   "via": [
+    "lem-sfb-smooth-group-invertible-multiplication",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-relative-lfp-permanence",
+  "worker": "stage1",
+  "summary": "Checked Tag 05WT against the statement and expanded its three compatible atlas choices into explicit presentation diagrams. Reused the general etale presentation criterion, scheme etale locality, fibre-product/atlas calculus, and the existing scheme cancellation node (attached to a closed project declaration). No new node or statement change is needed. All non-elementary inputs are cited by statement.",
+  "blueprint": "The inherited from.place locates the infinitesimal input to invertible multiplication in the relative Picard/Kummer branch below det-thm-sf-ctf-stability-direct-images, proof (3). The current latest blueprint direct-images proof (3) supplies the proper/open direct-image route; this supporting node realizes the relative-finite-presentation input along the existing alteration branch. The exact 05WT statement has no separate blueprint match. The inherited null from.node and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products and preservation of surjective etale covers under base change, used to construct compatible scheme charts."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic etale base-change and composition calculus for the atlas maps; no cancellation theorem is taken from it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-a417cc9b4",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-a417cc9b4 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. Stacks spaces-morphisms 05WT (lemma-finite-presentation-permanence, line 5610) matches the item hypothesis by hypothesis, with no separation or quasi-compactness assumption. The statement is unchanged from live, where the item is still unsplit; there are no new nodes and no repair note. Step 1 follows the source's W→Z, V→Y_W, U→X_V atlases: fibre products come from lem-trf-space-fibre-products-etale-covers, and base change and composition of representable surjective etale maps from lem-trf-space-representable-etale-scheme-tests. I checked gb=wq, fa=bh and (gf)a=w(qh) by hand; the three tuples are presentation diagrams. Step 2: lfp and lft are etale local on source-and-target (lem-sfb-scheme-etale-source-target-properties); clause (1) of the presentation criterion gives q lft and qh lfp; then lem-a1-map-over-base-finite-presentation (02FV(1)) with S=W gives h lfp. That node is Lean-closed: locallyOfFinitePresentation_of_comp, FinitePresentation.lean:53-57, sorry-free, exact statement. Step 3: clause (2) with a surjective gives f lfp. Edge cases checked: empty X, empty Z, g=id, schemes. No duplicate in the DAG: the other 05WT hits are provenance text only. Batch-5: both trf space nodes are generic algebraic-space foundations (02X2, 03EC); scheme-etale-source-target reaches only generic smooth composition; the criterion reaches only the algebraic-space definition. None is a step of the trace formula or Poincare proof, so all are accepted. The two declared tool_uses are generic and accepted. Advisory: q and h are treated as scheme maps by the Yoneda convention."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeLfpPermanence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.mapIsLocallyOfFinitePresentation_of_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeLfpPermanence.lean",
+  "statement": "theorem mapIsLocallyOfFinitePresentation_of_comp {S : Scheme.{u}} {X Y Z : AlgebraicSpace S} (f : X ⟶ Y) (g : Y ⟶ Z) (hfg : MapIsLocallyOfFinitePresentation (f ≫ g)) (hg : MapIsLocally (@LocallyOfFiniteType) g) : MapIsLocallyOfFinitePresentation f",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing algebraic-space chart predicates of def-sfb-space-morphism-properties, added to stmt_deps; the mathematical statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc8e01053",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Statement matches Stacks 05WT (spaces-morphisms.tex line 5610) clause by clause: S : Scheme.{u}, X Y Z : AlgebraicSpace S, f, g; hfg is MapIsLocallyOfFinitePresentation (f ≫ g), hg is MapIsLocally (@LocallyOfFiniteType) g, conclusion MapIsLocallyOfFinitePresentation f. MapIsLocally is the every-étale-chart test of def-sfb-space-morphism-properties (Stacks definition-P / 03MJ). Adding that landed def node to stmt_deps is justified; the node differs from live only by the lean record and that stmt_dep. No extra hypotheses or universes. No duplicate: only a private scheme-level lfp_of_comp exists in RelativeFlatLocusBaseChange. Edge cases checked: empty X or Z, g = id, f = id, schemes. Proof is sorry only; docstrings carry 05WT and the blueprint id; the three proof steps are reproduced; lean.statement is verbatim; the report has both required sections. No compile run because no file was changed."
+ }
+}

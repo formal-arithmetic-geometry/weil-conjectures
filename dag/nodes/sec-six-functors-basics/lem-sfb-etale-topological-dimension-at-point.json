@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-etale-topological-dimension-at-point",
+ "kind": "statement",
+ "title": "Etale morphisms preserve topological dimension at a point",
+ "statement": "Let $e:U\\to V$ be an etale morphism of schemes [def-pc-scheme, def-weil-etale-morphism]. Let $u\\in U$ and put $v=e(u)$. For the topological Krull dimension at a point [def-kun-topological-dimension-at-point], defined as the minimum of the Krull dimensions of open neighbourhoods, one has $$\\dim_u U=\\dim_v V.$$ The dimensions may be infinite. No finite-type-over-a-field, Noetherian, quasi-compactness, separatedness or surjectivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 04N4 (lemma-dimension-at-point-local)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "For any open subscheme $W$ of $U$ or $V$, [lem-sc-scheme-sober] identifies its irreducible closed subsets with closures of single points. Thus a strict chain $Z_0\\subsetneq\\cdots\\subsetneq Z_n$ corresponds to distinct points $z_n\\rightsquigarrow\\cdots\\rightsquigarrow z_0$, where $a\\rightsquigarrow b$ means $b\\in\\overline{\\{a\\}}$. Conversely such a chain gives the strict chain of singleton closures: equality of two closures would contradict uniqueness of the generic point. By [def-kun-topological-krull-dimension], $\\dim W$ is therefore the supremum of lengths of these finite strict specialization chains. This includes infinite dimension as an unbounded supremum, without choosing an infinite chain.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 04N4 (lemma-dimension-at-point-local), both paragraphs: pass between irreducible closed subsets and their generic points; Schemes Tag 01IS (lemma-scheme-sober)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-fibre-discrete-separable-points] every scheme fibre of $e$ is discrete, and [def-pc-scheme-fibre] identifies it homeomorphically with the set-theoretic fibre with its subspace topology. If $a\\rightsquigarrow b$ and $e(a)=e(b)=v_0$, then the specialization also holds in that subspace: every open neighbourhood of $b$ there is the intersection with an ambient open neighbourhood, which contains $a$. In a discrete space take the neighbourhood $\\{b\\}$ to get $a=b$. Since a scheme morphism is continuous, it preserves specializations. Hence every finite strict specialization chain in any source open maps to a strict chain in any target open containing its image.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-scheme-fibre",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 04N4, first inequality: images of generic points remain distinct because the fibres are discrete (Morphisms Tag 02GL; Schemes Tag 01K1)."
+   }
+  },
+  {
+   "text": "Let $B\\subseteq V$ be any open neighbourhood of $v$. The inverse image $A=e^{-1}(B)$ is an open neighbourhood of $u$. Steps 1 and 2 show $\\dim A\\le\\dim B$, by taking suprema of finite chain lengths. By [def-kun-topological-dimension-at-point], $\\dim_u U\\le\\dim A\\le\\dim B$. This holds for every $B$, so taking the minimum gives $\\dim_u U\\le\\dim_v V$.",
+   "uses": [
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 04N4, first inequality, conclusion from arbitrary target neighbourhoods."
+   }
+  },
+  {
+   "text": "By [def-weil-etale-morphism], $e$ is flat and locally of finite presentation. Thus [lem-weil-pbc-flat-lfp-open] shows that $e$ is open. For an arbitrary open neighbourhood $A\\subseteq U$ of $u$, put $B=e(A)$. Then $B$ is an open neighbourhood of $v$, and $e|_A:A\\to B$ is surjective on points. Fix a finite strict specialization chain $b_n\\rightsquigarrow\\cdots\\rightsquigarrow b_0$ in $B$ and choose $a_0\\in A$ above $b_0$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 04N4, second inequality: the image of an arbitrary source neighbourhood is open, by Morphisms Tag 01UA (lemma-fppf-open)."
+   }
+  },
+  {
+   "text": "Inductively suppose $a_i\\in A$ maps to $b_i$. The stalk map $R=\\mathcal O_{V,b_i}\\to S=\\mathcal O_{U,a_i}$ is flat and local by [def-weil-flat-morphism]. By [lem-weil-pbc-spec-local-ring-canonical-morphism], the generalization $b_{i+1}$ is represented by a prime $\\mathfrak p\\subseteq\\mathfrak m_R$, since the image of $\\operatorname{Spec}R\\to V$ is exactly the generalizations of $b_i$. The maximal ideal $\\mathfrak m_S$ contracts to $\\mathfrak m_R$ because the stalk map is local. Apply [lem-sc-flat-going-down] to obtain $\\mathfrak q\\subseteq\\mathfrak m_S$ contracting to $\\mathfrak p$. Its image under $\\operatorname{Spec}S\\to U$ is a generalization $a_{i+1}$ of $a_i$, mapping to $b_{i+1}$: the canonical maps commute with $e$, as on affine charts they are the localized ring maps in [lem-weil-pbc-spec-local-ring-canonical-morphism]. Opens contain every generalization of each of their points, so $a_{i+1}\\in A$. The lift is distinct from $a_i$ because $b_{i+1}\\ne b_i$. This finite induction lifts the entire strict chain inside $A$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 04N4, second inequality: flat local stalk map, Schemes Tag 01J7 (lemma-specialize-points), and flat going down, Algebra Tag 00HS (lemma-flat-going-down)."
+   }
+  },
+  {
+   "text": "Step 5 and the chain description of step 1 give $\\dim B\\le\\dim A$ for every source neighbourhood $A$ of $u$. Since $B=e(A)$ is an open neighbourhood of $v$, [def-kun-topological-dimension-at-point] gives $\\dim_v V\\le\\dim B\\le\\dim A$. Taking the minimum over $A$ gives $\\dim_v V\\le\\dim_u U$. Combine with step 3 by antisymmetry. All comparisons use suprema of finite chains and minima in the extended natural numbers, so the argument also covers dimension $\\infty$.",
+   "uses": [
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 04N4, second inequality, final conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-sober",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-scheme-fibre",
+  "def-pc-scheme",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-sc-flat-going-down"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 04N4 (lemma-dimension-at-point-local), complete proof: inject specialization chains using discrete fibres, lift chains using flat going down, and take neighbourhood minima."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism of schemes preserves the topological Krull dimension at a point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern etale morphism properties or global topological dimension; none states invariance of dimension at a point under an arbitrary etale scheme map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The minimum dimension of open neighbourhoods at a point is invariant under etale maps of schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern etale morphism properties or global topological dimension; none states invariance of dimension at a point under an arbitrary etale scheme map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDimAt\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern etale morphism properties or global topological dimension; none states invariance of dimension at a point under an arbitrary etale scheme map"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|dimension.at.point.*etale|etale.*dimension.at.point",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern etale morphism properties or global topological dimension; none states invariance of dimension at a point under an arbitrary etale scheme map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale morphism of schemes U to V and u mapping to v, the topological dimension at u equals the topological dimension at v",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"IsClosedEmbedding.topologicalKrullDim_le\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : Y → X},\\n  Topology.IsInducing f → topologicalKrullDim Y ≤ topologicalKrullDim X\", \"doc\": \"If $ Y $ is a topological space equipped with the topology induced by a map $ f : Y \\\\to X $, then the topological Krull dimension of $ Y $ is less than or equal to the topological Krull dimension of $\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"IsHomeomorph.topologicalKrullDim_eq\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"(f : X → Y) (h : IsHomeomorph f) : topologicalKrullDim X = topologicalKrullDim Y\", \"doc\": \"If two topological spaces are homeomorphic, then their topological Krull dimensions are equal. Specifically, for a homeomorphism $ f : X \\\\to Y $, the Krull dimension of $ X $ coincides with that of $ \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"IsInducing.topologicalKrullDim_le\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"{f : Y → X} (hf : IsInducing f) : topologicalKrullDim Y ≤ topologicalKrullDim X\", \"doc\": \"If $ f : Y \\\\to X $ is an inducing map (i.e., the topology on $ Y $ is the coarsest making $ f $ continuous), then the topological Krull dimension of $ Y $ is less than or equal to the topological Krul\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern etale morphism properties or global topological dimension; none states invariance of dimension at a point under an arbitrary etale scheme map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDimAt\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem comparing neighbourhood-minimum dimension under arbitrary etale maps; only etale properties and no topologicalKrullDimAt hits"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|etale.*dimension.at.point|dimension.at.point.*etale",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem comparing neighbourhood-minimum dimension under arbitrary etale maps; only etale properties and no topologicalKrullDimAt hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale scheme morphism preserves local topological dimension defined by open neighborhoods",
+   "results": "8 hits; AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.topologically_isLocalAtSource, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem comparing neighbourhood-minimum dimension under arbitrary etale maps; only etale properties and no topologicalKrullDimAt hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale morphisms preserve the infimum of dimensions of open neighborhoods at each point",
+   "results": "8 hits; RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, Algebra.isOpen_etaleLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem comparing neighbourhood-minimum dimension under arbitrary etale maps; only etale properties and no topologicalKrullDimAt hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of an open neighborhood of a point under an etale map of schemes",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.etaleLocus, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.isOpen_etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem comparing neighbourhood-minimum dimension under arbitrary etale maps; only etale properties and no topologicalKrullDimAt hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-local-fibre-dimension-open",
+  "date": "2026-10-23",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E6I proof, the dimension-one open locus, with arbitrary-base-change invariance. Supporting input: Stacks 0D4Q, lemma-dimension-fibres-proper, the upper semicontinuity half of the proof of 0D4R. Supporting input: openness of the bounded local fibre-dimension locus upstairs, used to form the closed subset Z_d in the proof of 0D4Q. Chart comparison prerequisite: Stacks 04NM clause (3) via Descent 04NL and 04N4, dimension at a point is etale local.",
+   "via": [
+    "lem-sfb-space-local-fibre-dimension-open",
+    "lem-sfb-proper-space-fibre-dimension-upper-semicontinuous",
+    "lem-sfb-proper-flat-space-fibre-dimension",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-topological-dimension-at-point",
+  "worker": "stage1",
+  "summary": "Q156 split of Stacks 04N4 using six steps and only existing nodes. Both chain comparisons and both neighbourhood-minimum inequalities are explicit, including infinite dimension. Avoided the reversed specialization wording of the existing generalizations-lift leaf by citing flat going down and canonical local spectra. No new nodes or Lean changes.",
+  "blueprint": "Retains the inherited null ancestor (blueprint_refs ancestor returns None) and via chain. Realizes the chart-comparison prerequisite 04N4 in the bounded local fibre-dimension locus used in the alteration input under det-thm-sf-ctf-stability-direct-images, paragraph (3). The latest blueprint paragraph (3) is the open/proper direct-image assembly; no chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic points turn irreducible-closed chains into specialization chains in arbitrary schemes; this is a generic topology tool, not the Brauer theorem route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Uses only discreteness of arbitrary etale fibres; no equivalent statement in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Uses the canonical local spectrum description of generalizations and its affine localization formula, not any cohomological base change."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Uses flat going down solely to lift one generalization at a time; no equivalent commutative algebra statement in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-sc-flat-going-down"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-048e7823b",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-048e7823b (reviewer sub-agent of L); spot-checked: I read the whole item, a six-step split of Stacks 04N4 (descent.tex, lemma-dimension-at-point-local) that creates no new nodes. The statement matches the source exactly: e étale, dim_u U = dim_v V, with dimension at a point defined as the minimum over open neighbourhoods (Topology 0055 (4)). No hypothesis is added, and infinite dimension is allowed. Step 1: by uniqueness of generic points (lem-sc-scheme-sober, 01IS), strict chains of irreducible closed sets are the same as chains of distinct specializing points. Step 2: fibres are discrete (02GL (2)) and homeomorphic to the set-theoretic fibre (01K1, a clause of def-pc-scheme-fibre), so a specialization between two points with the same image is trivial, and images of strict chains stay strict. Step 3: the first inequality, from minima over A = e^{-1}(B). Step 4: e is open by lem-weil-pbc-flat-lfp-open (01UA), so B = e(A) is open. Step 5: chains are lifted one generalization at a time using the flat local stalk map, clause (1) and the localization formula of lem-weil-pbc-spec-local-ring-canonical-morphism (01J7), and going down (00HS). The induction has a base and a step, the square of canonical maps commutes on affine charts, and lifts stay in A because opens are stable under generalization. Step 6: the reverse inequality. Every cited statement says what its step uses, proof_deps equals the union of the uses, and there is no cycle. Edge cases checked: empty U, a finite separable point, D(t) ⊂ A¹ (not surjective), an infinite disjoint union (not quasi-compact), infinite dimension, and topological versus local-ring dimension. No existing node states 04N4, and Mathlib has nothing comparable (grep for topologicalKrullDim). Accepted tool uses: lem-weil-pbc-etale-fibre-discrete-separable-points and lem-weil-pbc-spec-local-ring-canonical-morphism, both from sk-thm-p1 and used only as generic scheme facts. The null blueprint.from.node is inherited from the node's creation, which goes back to a Lean-module-named item; it is not a fault of this delivery. Live and side-live have the node unsplit, there is no repair note, and this is the first delivery. One report remark is wrong but changes nothing: the STATEMENT-DISPUTED claim on lem-weil-pbc-flat-generalizations-lift. In the Stacks/Mathlib convention, 'v specializing to f(t)' means v is a generalization of f(t), so that node is correct, and the item does not cite it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleTopologicalDimensionAtPoint",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.topologicalKrullDimAt_eq_of_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTopologicalDimensionAtPoint.lean",
+  "statement": "theorem Scheme.Hom.topologicalKrullDimAt_eq_of_etale {U V : Scheme.{u}} (e : U ⟶ V) [Etale e] (x : U) : topologicalKrullDimAt x = topologicalKrullDimAt (e x)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e08ee5324",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement {U V : Scheme.{u}} (e : U ⟶ V) [Etale e] (x : U) : topologicalKrullDimAt x = topologicalKrullDimAt (e x) matches node and Stacks 04N4 (descent.tex 5172) clause by clause; topologicalKrullDimAt is the recorded neighbourhood-infimum in WithBot ℕ∞ (∞ allowed, not local-ring dim); no extra hypotheses or universe restriction; edge cases (empty U, non-surjective e, infinite dim, non-qc) covered. Node copy differs from live only in lean; lean.statement verbatim in file; stmt_deps exact; docstrings carry source/blueprint and six proof steps; proof sorry only; no duplicate (only global topologicalKrullDim_le_of_etale and flat-quasi-finite-to-smooth variant exist). Not recompiled (no change). No findings."
+ }
+}

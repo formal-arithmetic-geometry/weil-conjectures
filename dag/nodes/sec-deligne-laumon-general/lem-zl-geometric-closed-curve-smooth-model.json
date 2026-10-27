@@ -1,0 +1,315 @@
+{
+ "id": "lem-zl-geometric-closed-curve-smooth-model",
+ "kind": "statement",
+ "title": "Smooth finite-field model of a prescribed geometric closed curve",
+ "statement": "Fix $k_0=\\mathbf F_q$, its algebraic closure $k$, and the subfields $k_m=\\mathbf F_{q^m}\\subset k$ [def-weil-finite-field-fiber]. Let $X_0$ be an affine finite-type $k_0$-scheme and put $X=X_0\\times_{k_0}k$ [def-weil-affine-spectrum; def-weil-finite-type-morphism; def-pc-base-change]. Let $i:C\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], where $C$ is a nonempty smooth connected affine $k$-scheme of pure dimension one [def-sbc-smooth-morphisms; def-weil-connected-scheme; def-weil-pure-dimension]. There exist $m\\ge1$, an affine finite-type $k_m$-scheme $C_m$, a closed immersion $i_m:C_m\\hookrightarrow X_0\\times_{k_0}k_m$, and an isomorphism $(C_m)_k\\simeq C$ commuting with the immersions into $X$. The scheme $C_m$ is smooth, geometrically connected [def-pc-geometrically-irreducible], and of pure dimension one. Moreover, for every given $k$-point $c$ of $C$, its image $z$ in $C_m$ is a closed point and $\\kappa(z)/k_m$ is finite. The same model works for any prescribed finite set of such points, without enlarging the field separately for each point.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2: finite-field model of the prescribed geometric curve, and closed points under its geometric lifts (old steps 2-3 and end of 4)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-pure-dimension",
+  "def-pc-geometrically-irreducible",
+  "def-weil-residue-field",
+  "def-weil-field-valued-points",
+  "def-weil-closed-points"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-zl-bertini-finite-field-descent] to the given closed immersion. It supplies one integer $m\\ge1$ and a closed subscheme $i_m:C_m\\hookrightarrow X_m=X_0\\times_{k_0}k_m$ whose base change is the prescribed closed subscheme $i:C\\hookrightarrow X$. Equality as closed subschemes supplies the required isomorphism $(C_m)_k\\simeq C$ over $X$, including its compatibility with the given immersion; no reduction of the subscheme is taken.",
+   "uses": [
+    "lem-zl-bertini-finite-field-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 2: finite-field model of the prescribed geometric curve, and closed points under its geometric lifts (old steps 2-3 and end of 4)."
+   }
+  },
+  {
+   "text": "The ambient model is affine by the affine base-change instances. The closed immersion i_m is affine and locally of finite type by [def-weil-closed-immersion]. Hence its source C_m is affine. Its structure morphism is the composite of i_m with the base change of X_0 to k_m, so it is locally of finite type and quasi-compact by [lem-sfb-finite-type-composition-base-change]. No tensor-product presentation of the ambient model is needed.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QO (lemma-closed-immersion), 01T4 (lemma-base-change-finite-type); affine tensor fibre product"
+   }
+  },
+  {
+   "text": "The map $g:\\operatorname{Spec}k\\to\\operatorname{Spec}k_m$ is flat by [lem-pc-field-extension-flat]. Both spectra have one point by [def-weil-affine-spectrum], so $g$ is surjective and quasi-compact: the inverse image of either open of the target is empty or a one-point space. Thus $g$ meets all three hypotheses of fpqc smoothness descent. Moreover [lem-weil-pbc-surjective-base-change] applied to $g$ and $C_m\\to\\operatorname{Spec}k_m$ makes the projection $p:C\\simeq(C_m)_k\\to C_m$ surjective. In particular $C_m$ is nonempty.",
+   "uses": [
+    "lem-pc-field-extension-flat",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VL (lemma-descending-property-smooth), verification of the single fpqc base change"
+   }
+  },
+  {
+   "text": "The base change of $C_m\\to\\operatorname{Spec}k_m$ along $g$ is $C\\to\\operatorname{Spec}k$, which is smooth by hypothesis. Apply [lem-trf-smooth-fpqc-base-descent], with the flat, quasi-compact, surjective map $g$ verified in step 3, to obtain smoothness of $C_m$. The field $k$ is algebraically closed and contains $k_m$; the connectedness of $(C_m)_k\\simeq C$ therefore gives geometric connectedness of $C_m$ by [lem-weil-geometrically-connected-algebraic-closure]. Neither argument requires another constant extension.",
+   "uses": [
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-weil-geometrically-connected-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VL (lemma-descending-property-smooth); varieties.tex Tag 0387 (lemma-characterize-geometrically-connected)"
+   }
+  },
+  {
+   "text": "Apply the proved scheme-level theorem [lem-sbc-equidimensional-open-local-dimension] to the top open of C. The given pure-dimension hypothesis, transported along the homeomorphism between C and its top open, yields local dimension one at each point of C. Lift each point of C_m to its geometric base change using the surjective projection from step 3, and then to C using the comparison isomorphism. Homeomorphism invariance of local topological dimension and the local-dimension equality of [lem-trf-field-extension-component-local-dimension] give local dimension one at every point of C_m. The model is locally Noetherian because it is locally of finite type over a field. Apply the proved top-open instance of [lem-sbc-constant-local-dimension-components] and transport its component dimensions along the top-open homeomorphism. This proves exactly [def-weil-pure-dimension] for C_m, without another field extension.",
+   "uses": [
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-trf-field-extension-component-local-dimension",
+    "lem-sbc-constant-local-dimension-components",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), (1); varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic), (5)"
+   }
+  },
+  {
+   "text": "Let $c:\\operatorname{Spec}k\\to C$ be any given $k$-point, and let $z$ be the image of its composite with $p$. The residue-field map of [def-weil-residue-field] is an embedding $\\kappa(z)\\hookrightarrow k$ over $k_m$. Every element of $k$ is algebraic over $k_0$, hence also over $k_m$, so $\\kappa(z)/k_m$ is algebraic and has transcendence degree zero. Since $C_m$ is of finite type over $k_m$, clause (a) of [lem-kun-closed-point-field] now says both that $z$ is closed and that $\\kappa(z)/k_m$ is finite.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-point-field.md",
+    "place": "Clause (a), applied to the already constructed finite-type model"
+   }
+  },
+  {
+   "text": "The integer $m$ and the model in step 1 were chosen before any point was considered. Step 6 applies to each $k$-point individually for that fixed model. Applying this universal assertion to every member of any prescribed finite set proves the simultaneous assertion, including the empty finite set, with exactly the same $m$, $C_m$, and immersion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 2: finite-field model of the prescribed geometric curve, and closed points under its geometric lifts (old steps 2-3 and end of 4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-pure-dimension",
+  "def-weil-residue-field",
+  "lem-kun-closed-point-field",
+  "lem-pc-field-extension-flat",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-field-extension-component-local-dimension",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-zl-bertini-finite-field-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2; V4 Lean assembly using finite-field closed-subscheme descent, fpqc descent of smoothness, algebraically closed connectedness, scheme-level pure/local dimension criteria, and the residue-field closed-point criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected affine curve over an algebraic closure of a finite field descends as a smooth geometrically connected affine closed curve over a finite extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.integral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {K : Type u_2} {inst_1 : Field K} {inst_2 : Algebra R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsIntegral R W], ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For any commutative ring $ R $, field $ K $ equipped with an $ R $-algebra structure, and integral Weierstrass curve $ W $ over $ K $, there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ su\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K),\\n  WeierstrassCurve.IsIntegral R W ↔ ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve $ W $ over $ K $, the curve $ W $ is integral (i.e., its coordinate ring is an integral do\"}\n  {\"name\": \"WeierstrassCurve.integralModel\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {K : Type u_2} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra R K] → (W : WeierstrassCurve K) → [hW : WeierstrassCurve.IsIntegral R W] → WeierstrassCurve R\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and an integral Weierstrass curve $ W $ over $ K $, this constructs the integral model of $ W $ as a Weierstrass\"}\n  {\"name\": \"WeierstrassCurve.baseChange_integralModel_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W], (WeierstrassCurve.integralModel R W).baseChange K = W\", \"doc\": \"For an integral Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, the base change of its integral model over $ R $ to $ K $ recovers the original curve $ W $, i.e., \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  (F : Type u) →\\n    (K : Type v) →\\n      [inst : CommRing R] →\\n        [inst_1 : Field F] →\\n          [inst_2 : Field K] →\\n            {W' : WeierstrassCurve.Affine R} →\\n              [inst_3 : DecidableEq F] →\\n                [inst_4 : DecidableEq K] →\\n                  [inst_5 : Al\", \"doc\": \"Given fields $F$ and $K$ equipped with an $R$-algebra structure and satisfying the scalar tower compatibility condition $R \\to F \\to K$, this function defines a group homomorphism from the set of points\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth/base-change tools do not construct the prescribed finite-field closed curve model with all the stated properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness and pure dimension one descend under faithfully flat field extension for affine schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → Algebra.IsStandardSmoothOfRelativeDimension n R S\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the target ring $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the algebra structure\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ), RingHom.IsStableUnderBaseChange (@RingHom.IsStandardSmoothOfRelativeDimension n)\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is standard smooth of relative dimension $ n $, then the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth/base-change tools do not construct the prescribed finite-field closed curve model with all the stated properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.GeometricallyConnected",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth/base-change tools do not construct the prescribed finite-field closed curve model with all the stated properties"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.field.*curve|curve.*finite.field|geometricallyConnected.*descen",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth/base-change tools do not construct the prescribed finite-field closed curve model with all the stated properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth connected affine curve over an algebraic closure of a finite field descends as a smooth geometrically connected affine closed curve over a finite extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Smooth A B] :\\n  ∃ (A₀ : Type u) (B₀ : Type u) (_ : CommRing A₀) (_ : CommRing B₀) (_ : Algebra R A₀) (_ : Algebra A₀ A) (_ :\\n    Algebra A₀ B₀),\\n    Function.Injective (algebraMap A₀ A) ∧ FiniteType R A₀ ∧ Smooth A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.casesOn\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"{k : Type u_3} →\\n  {A : Type u_4} →\\n    [inst : Field k] →\\n      [inst_1 : Ring A] →\\n        [inst_2 : Algebra k A] →\\n          {motive : Algebra.IsGeometricallyReduced k A → Sort u} →\\n            (t : Algebra.IsGeometricallyReduced k A) →\\n              ((isReduced_algebraicClosure_tensorProduct : I\", \"doc\": \"If $ A $ is geometrically reduced over a field $ k $, then the tensor product $ A \\\\otimes_k \\\\overline{k} $ is a reduced ring, where $ \\\\overline{k} $ denotes the algebraic closure of $ k $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[PerfectField K] [Algebra.EssFiniteType K L] : Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"IsSepClosure.isAlgClosure_of_perfectField\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"[Algebra k K] [IsSepClosure k K] [PerfectField k] : IsAlgClosure k K\", \"doc\": \"If $ K $ is a separable closure of a perfect field $ k $, then $ K $ is an algebraic closure of $ k $. This means that when $ k $ is a perfect field (every element has a $ p $-th root in characteristi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth/base-change tools do not construct the prescribed finite-field closed curve model with all the stated properties"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.field.*curve|curve.*finite.field|geometricallyConnected.*descen",
+   "results": "{\"t\": \"2026-10-22T12:04:01Z\", \"tool\": \"grep\", \"query\": \"finite.field.*curve|curve.*finite.field|geometricallyConnected.*descen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not descend the prescribed closed curve with all clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of a closed subscheme over an algebraic closure of a finite field to a finite field extension",
+   "results": "{\"t\": \"2026-10-22T12:04:02Z\", \"tool\": \"leansearch\", \"query\": \"Descent of a closed subscheme over an algebraic closure of a finite field to a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"IsSepClosure.recOn\", \"separableClosure.isSeparable\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"separableClosure.isPurelyInseparable\", \"separableClosure.isAlgebraic\", \"isSepClosed_iff_isPurelyInseparable_algebraicClosure\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\"], \"digest\": \"fb4e3d17ba4b201f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not descend the prescribed closed curve with all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.GeometricallyConnected",
+   "results": "{\"t\": \"2026-10-22T12:04:02Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, AlgebraicGeometry.GeometricallyConnected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no usable query: service reports unknown identifier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected affine closed curve over the algebraic closure of a finite field has a smooth geometrically connected model over a finite extension",
+   "results": "{\"t\": \"2026-10-22T12:04:10Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth connected affine closed curve over the algebraic closure of a finite field has a smooth geometrically connected model over a finite extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Affine\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.Affine.FunctionField\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.isIntegral_iff\", \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\"], \"digest\": \"73048c187a06d53b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not descend the prescribed closed curve with all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.GeometricallyConnected",
+   "results": "{\"t\": \"2026-10-22T12:04:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.GeometricallyConnected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not descend the prescribed closed curve with all clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-two-point-curve-constituent-purity",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 2: finite-field model of the prescribed geometric curve, and closed points under its geometric lifts (old steps 2-3 and end of 4).",
+   "via": [
+    "lem-zl-two-point-curve-constituent-purity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-geometric-closed-curve-smooth-model",
+  "worker": "stage1",
+  "summary": "Q42: retained the full prescribed model statement and all existing search records; reused existing closed-subscheme descent, fpqc smoothness, algebraic-closure connectedness and local dimension nodes. Proved affineness, finite type and the common-model point assertion explicitly. No new nodes.",
+  "blueprint": "thm-zl-real-mixed-by-curves, main-20261015 proof paragraph 2: the smooth geometrically connected affine curve over a further finite field, and points over the two prescribed geometric lifts.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic finite-type residue-field criterion gives closedness and finite residue degree for the same model."
+   },
+   {
+    "node": "lem-pc-field-extension-flat",
+    "why": "Generic geometric tool for affine base change, field flatness or surjectivity; supplies infrastructure for the fixed finite-field curve route, not a replacement route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic geometric tool for affine base change, field flatness or surjectivity; supplies infrastructure for the fixed finite-field curve route, not a replacement route."
+   },
+   {
+    "node": "lem-trf-field-extension-component-local-dimension",
+    "why": "Generic local-dimension invariance and component dimensions, to retain pure dimension one under descent."
+   },
+   {
+    "node": "lem-trf-smooth-fpqc-base-descent",
+    "why": "Generic fpqc smoothness descent for the finite-field model; the unit provides no descent theorem."
+   },
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Generic test for geometric connectedness on the specified algebraic closure; used after the unit's closed-subscheme descent."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-components",
+    "why": "Generic component formula converts the hypothesis of pure dimension into local dimension one."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic geometric tool for affine base change, field flatness or surjectivity; supplies infrastructure for the fixed finite-field curve route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic geometric tool for affine base change, field flatness or surjectivity; supplies infrastructure for the fixed finite-field curve route, not a replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-pc-field-extension-flat",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-field-extension-component-local-dimension",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-7d1a79a7a",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-7d1a79a7a (reviewer sub-agent of L); spot-checked: I read the item in full; this delivery adds no new nodes. The statement is unchanged and only gains three existing definition stmt_deps. All seven steps check out. Step 1: lem-zl-bertini-finite-field-descent needs only finite type and gives the closed subscheme C_m with base change i(C), so the isomorphism is compatible with the immersions. Step 2: finite type of C_m, via the affine quotient description (Tag 01QO) and finite-type base change. Step 3: Spec k -> Spec k_m is flat, quasi-compact and surjective, and C -> C_m is surjective by base change of surjections. Step 4: smoothness by fpqc descent (Tag 02VL); geometric connectedness by checking over the algebraically closed k (Tag 0387). Step 5: pure dimension one, by Tag 00OT for local dimension 1 on C, then lem-trf-field-extension-component-local-dimension with L=k and then with the identity extension to get every component of dimension 1. Step 6: the residue field kappa(z) embeds in k, so it is algebraic, and lem-kun-closed-point-field (a) gives z closed with finite residue extension. Step 7 is an elementary quantifier step. The route matches paragraph 2 of the main-20261015 proof of thm-zl-real-mixed-by-curves and the last paragraph of the lem-zl-bertini-finite-cover-curve proof. No SGA is cited and there is no cycle. The only citer, lem-zl-two-point-curve-constituent-purity, uses exactly what the statement gives. Batch-5 flag: lem-trf-smooth-fpqc-base-descent is a generic Mathlib-status leaf, and lem-trf-field-extension-component-local-dimension is an unsplit generic Stacks dimension lemma (02FY, 0A21). Neither assumed statement gives these results and neither is a step in proving them, so I accept both citations. Edge cases checked: generic point, empty finite set, nonempty C, nonreduced X_0, and A^1 inside A^2 with unbounded residue degrees. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricClosedCurveSmoothModel",
+  "declaration": "WeilConjectures.FiniteFieldDatum.exists_smooth_closed_curve_finiteField_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricClosedCurveSmoothModel.lean",
+  "statement": "theorem exists_smooth_closed_curve_finiteField_model (D : FiniteFieldDatum.{u}) (X₀ : Over (Spec (CommRingCat.of D.k₀))) [IsAffine X₀.left] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (C : Scheme.{u}) (i : C ⟶ (D.geometricFiber X₀).left) [IsClosedImmersion i] [IsAffine C] [ConnectedSpace C] [Smooth (i ≫ (D.geometricFiber X₀).hom)] (hC : C.IsPureDimension 1) : ∃ (m : ℕ) (hm : 1 ≤ m) (Cₘ : Over (Spec (CommRingCat.of (D.extensionSubfield m hm)))) (iₘ : Cₘ ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (D.extensionEmbedding m hm)))).obj X₀), IsAffine Cₘ.left ∧ LocallyOfFiniteType Cₘ.hom ∧ QuasiCompact Cₘ.hom ∧ IsClosedImmersion iₘ.left ∧ Smooth Cₘ.hom ∧ GeometricallyConnected Cₘ.hom ∧ Cₘ.left.IsPureDimension 1 ∧ ∃ e : Over.mk (i ≫ (D.geometricFiber X₀).hom) ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype))).obj Cₘ, (e.hom.left ≫ pullback.fst Cₘ.hom (Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype)) ≫ iₘ.left ≫ pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (D.extensionEmbedding m hm))) = i ≫ pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) ∧ ∀ (c : Over.mk (𝟙 (Spec (CommRingCat.of D.k))) ⟶ Over.mk (i ≫ (D.geometricFiber X₀).hom)) (z : Cₘ.left), (e.hom.left ≫ pullback.fst Cₘ.hom (Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype))) (c.left (IsLocalRing.closedPoint D.k)) = z → z ∈ closedPoints Cₘ.left ∧ (Cₘ.hom.residueFieldAlgebraMap z).Finite",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3305b89ef",
+  "group": "NU",
+  "result": "pass",
+  "note": "Clause-by-clause match of node and Lean: FiniteFieldDatum, extensionSubfield/extensionEmbedding and geometricFiber (Over.pullback along algebraMap k₀ k); X₀ affine and finite type; C closed immersion, affine, ConnectedSpace (includes nonempty), Smooth over k, IsPureDimension 1. Conclusions: m≥1, Cₘ affine/LocallyOfFiniteType/QuasiCompact, iₘ closed immersion, Smooth, GeometricallyConnected (def-pc-geometrically-irreducible match), pure dim 1, iso e over Spec k plus fst equation (= full compatibility in X), universal k-point clause after the existentials giving closedPoints and residueFieldAlgebraMap.Finite. Same shape as the step-1 dependency exists_closed_subscheme_finiteField_descent. lean.statement byte-identical to the file signature; node unchanged except lean; no name collision or parallel landing; docstrings and 7 proof steps present; sorry only, no definitions; Worker report and Second reading by NU sections present. Not recompiled (worker reports clean compile and dry run, commit bf98dbfd671). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261024T223349-L-1599482",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

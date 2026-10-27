@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-limit-test-representable-property",
+ "kind": "statement",
+ "title": "Finite-presentation affine tests for a representable morphism property",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $f:\\mathcal F\\to\\mathcal G$ be a morphism of categories fibred in groupoids on $S$-schemes, meaning categories with cartesian pullbacks along all base maps and groupoid fibres. Write $h_T$ for the discrete groupoid of maps into an $S$-scheme $T$. Assume $f$ is representable by algebraic spaces [def-trf-algebraic-space]: for each $T$ and $y\\in\\mathcal G(T)$ the $2$-fibre product $\\mathcal F\\times_{\\mathcal G}h_T$ is represented by an algebraic space $W_y$ over $T$. Assume $\\mathcal G$ is limit preserving on objects: for every small nonempty directed inverse system of affine $S$-schemes $T_i$ with limit $T$, every object in $\\mathcal G(T)$ is isomorphic to the pullback of an object at some stage. Let $P$ be an isomorphism-invariant property of maps from algebraic spaces over $S$ to $S$-schemes. Suppose $P$ is stable under every scheme base change, and is Zariski local on its scheme target: for any open cover $T=\\bigcup_jT_j$ and any space $W\\to T$, $P(W\\to T)$ holds if and only if all $P(W\\times_TT_j\\to T_j)$ hold. If $P(W_y\\to T)$ holds for every affine $S$-scheme $T$ locally of finite presentation [def-sbc-locally-finite-presentation] and every $y\\in\\mathcal G(T)$, then it holds for every $S$-scheme $T$ and every $y\\in\\mathcal G(T)$.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 07WI (lemma-check-property-limit-preserving), proof; the proof only uses Zariski locality on the scheme target and arbitrary scheme base change, so these explicitly stated properties suffice."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-fibred-groupoid-limit-preserving"
+ ],
+ "proof": [
+  {
+   "text": "First record the formal base-change identification used below. For an $S$-map $u:T'\\to T$, an object $y\\in\\mathcal G(T)$ and an isomorphism $\\sigma:u^*y\\cong y'$, one has $W_{y'}\\cong W_y\\times_TT'$ over $T'$; the right side exists by [lem-trf-space-fibre-products-etale-covers]. Indeed, on a test $v:Z\\to T'$, compose an isomorphism $\\alpha:f(a)\\cong v^*y'$ with $(v^*\\sigma)^{-1}$ to obtain $f(a)\\cong(uv)^*y$. Composition with $v^*\\sigma$ reverses this operation, on both objects and arrows. These operations commute with pullback (using the cartesian-lift identifications), so they identify the two represented functors on test schemes. Morphisms of algebraic spaces are natural transformations by [def-trf-algebraic-space], so the inverse transformations give the asserted isomorphism, with the projection to $T'$ unchanged.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 07WI (lemma-check-property-limit-preserving), last sentence: the identity F_y = F_{y_i} times_{V_i} V; formal identification expanded on test objects"
+   }
+  },
+  {
+   "text": "For now let $V=\\operatorname{Spec}A$ be affine, with structure map factoring through an affine open $U=\\operatorname{Spec}R\\subseteq S$, so that $A$ is an $R$-algebra. Following the second proof of Stacks 00QN, let $I$ be the set of pairs $(E,K)$ with $E\\subseteq A$ finite and $K\\subseteq R[X_e;e\\in E]$ a finite set of polynomials vanishing under $X_e\\mapsto e$, ordered by $(E,K)\\le(E',K')$ iff $E\\subseteq E'$ and $K\\subseteq K'$ inside $R[X_e;e\\in E']$. It is a subset of a set built from $A$, hence small; $(\\emptyset,\\emptyset)\\in I$, and $(E\\cup E',K\\cup K')$ bounds two pairs, so $I$ is a nonempty directed set. Put $A_{(E,K)}=R[X_e;e\\in E]/(K)$, finitely presented over $R$, with the $R$-algebra maps $X_e\\mapsto e$ to $A$ and $X_e\\mapsto X_e$ between the stages; they are compatible. Write $i=(E,K)$ and $A_i=A_{(E,K)}$ below. This is a colimit in $R$-algebras [def-weil-pbc-category-colimit]. Given compatible $R$-algebra maps $b_{(E,K)}:A_{(E,K)}\\to B$, put $\\phi(a)=b_{(\\{a\\},\\emptyset)}(X_a)$; compatibility gives $b_{(E,K)}(X_e)=\\phi(e)$ for all $e\\in E$. The stages $(\\{a,a',a+a',aa'\\},\\{X_{a+a'}-X_a-X_{a'},X_{aa'}-X_aX_{a'}\\})$, $(\\{1\\},\\{X_1-1\\})$ and $(\\{a,ra\\},\\{X_{ra}-rX_a\\})$ show that $\\phi$ is an $R$-algebra map, and then $\\phi$ composed with $A_{(E,K)}\\to A$ agrees with $b_{(E,K)}$ on the generators $X_e$. Any compatible $u:A\\to B$ has $u(a)=b_{(\\{a\\},\\emptyset)}(X_a)=\\phi(a)$, which gives uniqueness. The index set is chosen explicitly because the hypothesis on $\\mathcal G$ is stated for small directed systems.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QN (lemma-ring-colimit-fp), second proof: the directed set of pairs (S, E) and the algebras A_{S,E}; the colimit check that Stacks calls clear is written out"
+   }
+  },
+  {
+   "text": "The same cocone is a colimit in commutative rings. To check its universal property [def-weil-pbc-category-colimit], take any compatible ring maps $b_i:A_i\\to B$. Their composites $R\\to B$ agree, since any two indices have a common upper bound and all transition maps are $R$-linear; nonemptiness supplies one such composite. Equip $B$ with this $R$-algebra structure. The $R$-algebra colimit property from step 2 gives a unique compatible map $A\\to B$. Conversely any compatible ring map $A\\to B$ must induce this same map on $R$, by factoring $R\\to A$ through any $A_i$, so uniqueness also holds among ring maps.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QN (lemma-ring-colimit-fp), its directed algebra-colimit presentation viewed as a ring colimit; universal-property verification"
+   }
+  },
+  {
+   "text": "Put $V_i=\\operatorname{Spec}A_i$. By [lem-weil-pbc-spec-colimit-limit], the scheme $V$ with its actual projections is the inverse limit of the affine schemes $V_i$. All maps are over $U$, hence over $S$, because the ring maps are $R$-algebra maps. The scheme-limit universal property also holds over $S$: any factorization through $V$ respects its $S$-structure after composing with any one projection, and the directed index set is nonempty. Each $V_i\\to S$ is locally of finite presentation by [def-sbc-locally-finite-presentation]: at every point use the whole affine source $V_i$, the affine open $U$ of the original target $S$, and the finitely presented ring map $R\\to A_i$. In particular no quasi-separatedness or quasi-compactness assumption on $S$ is being used.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 07WI (lemma-check-property-limit-preserving), affine inverse-limit presentation; Limits Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); finite-presentation chart from Morphisms Tag 01TP (definition-finite-presentation)"
+   }
+  },
+  {
+   "text": "Let $y\\in\\mathcal G(V)$. The limit-preserving-on-objects hypothesis gives an index $i$, an object $y_i\\in\\mathcal G(V_i)$ and an isomorphism $p_i^*y_i\\cong y$. Since $V_i$ is affine and locally of finite presentation over $S$, the test hypothesis gives $P(W_{y_i}\\to V_i)$. By the assumed stability of $P$ under every scheme base change, $P(W_{y_i}\\times_{V_i}V\\to V)$ holds. Step 1 identifies this morphism with $W_y\\to V$, so isomorphism invariance of $P$ proves $P(W_y\\to V)$. Thus the conclusion holds for every affine $V$ whose structure map factors through an affine open of $S$. This uses only descent of the single object $y$, with no descent or full faithfulness assertion for arrows and no limit-preservation assumption on $\\mathcal F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 07WI (lemma-check-property-limit-preserving), proof, descent of y and arbitrary base change"
+   }
+  },
+  {
+   "text": "Now let $T$ be any $S$-scheme and $y\\in\\mathcal G(T)$. For each $t\\in T$, use [lem-weil-pbc-affine-opens-basis] on $S$ to find an affine open $U$ containing its image. The inverse image of $U$ is open in $T$; use the same lemma on $T$ to find an affine open $V$ containing $t$ inside that inverse image. By the open-subscheme description in [def-weil-open-immersion], the structure map of $V$ factors through $U$. All such $V$ form an open cover of $T$. Step 5 applies to $y|_V$, giving $P(W_{y|_V}\\to V)$. By step 1 these maps are precisely, up to isomorphism over $V$, the restrictions $W_y\\times_TV\\to V$. Apply the assumed Zariski locality of $P$ on its scheme target to this open cover to obtain $P(W_y\\to T)$. If $T$ is empty the empty open cover gives the same conclusion directly from that locality equivalence. Neither a finite cover nor affine intersections nor a quasi-compact or quasi-separated base is required.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 07WI (lemma-check-property-limit-preserving), first two sentences of proof; Zariski affine-cover reduction, expanded with Schemes Tag 01IT (lemma-basis-affine-opens)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "def-weil-pbc-category-colimit",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 07WI (lemma-check-property-limit-preserving), proof, with the explicit small directed presentation from algebra.tex Tag 00QN (lemma-ring-colimit-fp), second proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "limitPreserv|limit_preserv|check.*property.*limit",
+   "results": "1 hits: Mathlib/CategoryTheory/Limits/Sifted.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properties of representable morphisms of categories fibred in groupoids can be tested on finite presentation affine schemes",
+   "results": "8 hits: CategoryTheory.MorphismProperty.isFinitelyPresentable, CategoryTheory.Functor.relativelyRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CategoryTheory.Functor.IsRepresentable, AlgebraicGeometry.locallyOfFinitePresentation_iff, CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"limit\", \"Smooth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Testing a base change stable local property of a representable morphism of fibred groupoids on affine schemes of finite presentation when the target preserves limits",
+   "results": "8 hits: AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For representable morphisms of categories fibred in groupoids with target preserving inverse limits, test any base change stable Zariski local property on finitely presented affine base schemes",
+   "results": "8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.HasAffineProperty.iff, AlgebraicGeometry.universally_isLocalAtSource",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "limitPreserv|limit_preserv|[Ff]ibred|[Ff]ibered",
+   "results": "{\"t\": \"2026-10-23T11:53:51Z\", \"tool\": \"grep\", \"query\": \"limitPreserv|limit_preserv|[Ff]ibred|[Ff]ibered\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"2427903012144564\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned facts concern scheme morphism properties, scheme local representability, or ordinary functor limits; none gives this object-descent criterion for representable morphisms of fibred groupoids with algebraic-space fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Testing properties of representable morphisms of fibered groupoids on affine schemes locally of finite presentation using limit preserving objects",
+   "results": "{\"t\": \"2026-10-23T11:53:51Z\", \"tool\": \"leansearch\", \"query\": \"Testing properties of representable morphisms of fibered groupoids on affine schemes locally of finite presentation using limit preserving objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"CategoryTheory.MorphismProperty.isFinitelyPresentable\", \"CategoryTheory.Limits.LimitPresentation.map\", \"CategoryTheory.Functor.representable_preservesLimit\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.Functor.representable_preservesLimits\", \"CategoryTheory.Functor.representable_preservesLimitsOfShape\"], \"digest\": \"e374e2733cd72d1f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned facts concern scheme morphism properties, scheme local representability, or ordinary functor limits; none gives this object-descent criterion for representable morphisms of fibred groupoids with algebraic-space fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativelyRepresentable\", \"IsZariskiLocalAtTarget\"",
+   "results": "{\"t\": \"2026-10-23T11:53:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"relativelyRepresentable\\\", \\\"IsZariskiLocalAtTarget\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned facts concern scheme morphism properties, scheme local representability, or ordinary functor limits; none gives this object-descent criterion for representable morphisms of fibred groupoids with algebraic-space fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Object descent along small directed affine inverse limits reduces representable morphism properties to affine schemes locally of finite presentation",
+   "results": "{\"t\": \"2026-10-23T11:53:55Z\", \"tool\": \"leanfinder\", \"query\": \"Object descent along small directed affine inverse limits reduces representable morphism properties to affine schemes locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"], \"digest\": \"21cfe652fc0251ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned facts concern scheme morphism properties, scheme local representability, or ordinary functor limits; none gives this object-descent criterion for representable morphisms of fibred groupoids with algebraic-space fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A base change stable Zariski local property of a representable morphism of categories fibred in groupoids is tested on finitely presented affine schemes when target objects preserve directed limits",
+   "results": "{\"t\": \"2026-10-23T11:53:56Z\", \"tool\": \"leanfinder\", \"query\": \"A base change stable Zariski local property of a representable morphism of categories fibred in groupoids is tested on finitely presented affine schemes when target objects preserve directed limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.of_isZariskiLocalAtTarget\", \"AlgebraicGeometry.HasAffineProperty.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.iff\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"e6033c82b9f13326\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned facts concern scheme morphism properties, scheme local representability, or ordinary functor limits; none gives this object-descent criterion for representable morphisms of fibred groupoids with algebraic-space fibres"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-representable-infinitesimal-smoothness",
+  "date": "2026-10-23",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: last sentence, application of lemma-implies-smooth; Tag 07XX proof: reduction to affine V locally of finite presentation, invoking Tag 07WI",
+   "via": [
+    "lem-sfb-artin-representable-infinitesimal-smoothness",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-limit-test-representable-property",
+  "worker": "stage1",
+  "summary": "Read Stacks 07WI and 00QN and retained the original statement. Gave six explicit steps: representable fibre base-change identification; the small directed finite-generator/finite-relation presentation and its colimit check; spectrum limit and finite-presentation charts; descent of one target object, stability of P and isomorphism invariance; and Zariski affine-cover assembly. Reused the reviewed small-index construction from the surjectivity special case without citing that weaker statement. No new nodes or Mathlib leaves. Checked every cited statement and recorded verbatim per-step quotations; searched the current project, DAG, blueprint and Mathlib.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: last sentence, application of lemma-implies-smooth; Tag 07XX proof: reduction to affine V locally of finite presentation, invoking Tag 07WI; steps 1-6 supply exactly the Tag 07WI finite-presentation affine-test reduction. The current blueprint direct-images proof (3) is the parent context; the inherited ancestry has null from.node and is retained, as ancestor reports None.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only the generic existence of algebraic-space sheaf fibre products is used to expand the representable base-change identification; the unit has no replacement for this construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-45924f113",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-45924f113 (reviewer sub-agent of L); spot-checked: I read the delivery in full, the sources (Stacks 07WI in criteria.tex; the second proof of 00QN in algebra.tex) and every cited statement. The statement is unchanged from live. It asks for less than 07WI (only Zariski locality and base change instead of fppf locality) and is still true, because 07WI's proof uses only the Zariski reduction and base change. There are no new nodes and no repair note, and the item is still unsplit in live and side-live. Step 1: I checked the direction of the base-change computation; it uses only fibre products from lem-trf-space-fibre-products-etale-covers and that morphisms are natural transformations from def-trf-algebraic-space. Steps 2-3: the explicit small directed set of finite pairs (E,K) is a set, nonempty and directed, and the generator stages prove the colimit property in R-algebras and then in rings; I checked the degenerate cases a=a' and a'=0. The existing node 0BUF is indexed by a filtered category, so an explicit directed set is justified. Step 4: the Spec-limit leaf, the limit also holds over S because the index set is nonempty, and each stage V_i is locally of finite presentation using the whole source and the affine open U, with no qc/qs assumption. Step 5: descent of the single object, base change of P, step 1, isomorphism invariance. Step 6: affine-basis leaf twice, open-immersion factorization, Zariski locality; no affine intersections assumed (E1). proof_deps equals the union of uses. The parent artin-representable-infinitesimal-smoothness step 7 matches the hypotheses. Batch 5: lem-trf-space-fibre-products-etale-covers is generic algebraic-space fibre-product theory (02X2/041F, space-generic deps), not part of the trace formula or Poincare duality, so it is outside the assumptions; I accept it as the declared tool_use. No duplicates: the surjective special case and the 06CX, 04AK and 0CMY nodes all state different things."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LimitTestRepresentableProperty",
+  "declaration": "CategoryTheory.limit_test_representable_property",
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitTestRepresentableProperty.lean",
+  "statement": "theorem limit_test_representable_property {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)) (f : BasedFunctor F G) (hF : IsFibredInGroupoids F) (hG : IsFibredInGroupoids G) (hrep : IsRepresentableByAlgebraicSpaces f) (hLimits : FibredGroupoidLimit.ObjectsDescend G) (P : ∀ (T : Over S) (Z : AlgebraicSpace S), (Z.obj.obj ⟶ yoneda.obj T) → Prop) (hIso : ∀ (T T' : Over S) (Z Z' : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T) (a' : Z'.obj.obj ⟶ yoneda.obj T') (e : Z.obj.obj ≅ Z'.obj.obj) (d : T ≅ T'), e.hom ≫ a' = a ≫ yoneda.map d.hom → (P T Z a ↔ P T' Z' a')) (hBase : ∀ (T T' : Over S) (Z Z' : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T) (a' : Z'.obj.obj ⟶ yoneda.obj T') (b : Z'.obj.obj ⟶ Z.obj.obj) (g : T' ⟶ T), IsPullback b a' a (yoneda.map g) → P T Z a → P T' Z' a') (hLocal : ∀ (T : Over S) (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T) (𝒰 : Set T.left.Opens), (∀ x : T.left, ∃ U ∈ 𝒰, x ∈ U) → (P T Z a ↔ ∀ (U : T.left.Opens), U ∈ 𝒰 → ∀ (Z' : AlgebraicSpace S) (a' : Z'.obj.obj ⟶ yoneda.obj (Over.mk (U.ι ≫ T.hom))) (b : Z'.obj.obj ⟶ Z.obj.obj), IsPullback b a' a (yoneda.map (Over.homMk U.ι)) → P (Over.mk (U.ι ≫ T.hom)) Z' a')) (hTest : ∀ (T : Over S), IsAffine T.left → LocallyOfFinitePresentation T.hom → ∀ (t : BasedFunctor (discreteModuli (yoneda.obj T)) G) (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange f T t Z a → P T Z a) : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) G) (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange f T t Z a → P T Z a",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The property is arbitrary on algebraic-space maps to scheme targets. Its isomorphism, base-change, and arbitrary-open-cover laws are explicit hypotheses. Only FibredGroupoidLimit.ObjectsDescend is assumed, with no arrow descent or source limit preservation. Added the two already landed definition nodes supplying the reused groupoid and object-descent interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b2a7b8e6",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read the node, Stacks 07WI, all 6 stmt_deps and the side-live declarations (IsFibredInGroupoids, discreteModuli, HasSpaceBaseChange, IsRepresentableByAlgebraicSpaces, FibredGroupoidLimit.ObjectsDescend, AlgebraicSpace). The Lean statement matches the node clause by clause: fibred groupoids; representability by an actual equivalence with the iso-comma 2-fibre product; objects-only small nonempty directed affine descent; arbitrary P with iso invariance, IsPullback base change and Zariski iff over arbitrary covers (empty allowed); affine locally-finite-presentation test; conclusion for all T, t, Z, a. No qc/qs assumption; index universe u. lean.statement verbatim. The added stmt_deps are the two landed def nodes whose declarations are used; no other node field changed. No hollow definition, sorry only, docstrings with source and blueprint and steps 1-6. No duplicate found. No compile run since no file was changed."
+ }
+}

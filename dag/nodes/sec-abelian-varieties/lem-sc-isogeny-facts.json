@@ -243,7 +243,62 @@
    "elementary": false
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isIsogeny_npow_id"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isIsogeny_npow_id",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny",
+     "lines": [
+      332,
+      343
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.isogenyDegree_npow_id",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny",
+     "lines": [
+      346,
+      377
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.flat_torsionSubgroupScheme",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny",
+     "lines": [
+      380,
+      386
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.finrankΓ_torsionSubgroupScheme",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny",
+     "lines": [
+      388,
+      393
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-isogeny",
  "split_report": {
@@ -271,9 +326,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isf1757 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements (mult-n-isogeny: surjective+finite kernel over any field; mult-n-finite-flat: finite flat locally free rank d^{2g}, kernel order d^{2g} for any d>=1, no invertibility needed; isogeny-degree; fppf-site def); alg. closed specialization keeps hypotheses; transitive closure of all cited nodes (234 nodes) contains neither lem-sc-isogeny-surjective nor the item: no cycle; tool_use def-pc-fppf-site accepted as generic. No faults beyond the second reading."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $A$ be an abelian variety of\ndimension $g$ over a field $k$ and $n\\geq1$.\n\n**(a)** The map $[n]$ of [def-sc-mult-n] is an\nisogeny of degree $n^{2g}$, finite,\nflat and surjective.\n\n**(b)** In particular the kernel $A[n]$ is a finite flat group\nscheme of order $n^{2g}$ over $k$, and $[n]:A\\to A$ is an fppf\ncovering.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be an abelian variety of\ndimension $g$ over a field $k$ and $n\\geq1$.\n\n**(a)** The map $[n]$ of [def-sc-mult-n] is an\nisogeny of degree $n^{2g}$, finite,\nflat and surjective, and $[n]_*\\mathcal O_A$ is a locally free\n$\\mathcal O_A$-module of rank $n^{2g}$.\n\n**(b)** In particular the kernel $A[n]$ is a finite flat group\nscheme of order $n^{2g}$ over $k$, and $[n]:A\\to A$ is an fppf\ncovering.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened",
+  "proof_text": "*Reference for the classical inputs: Stacks Project, Groupoid\nSchemes, Section 39.9, [Tag 0BF9](https://stacks.math.columbia.edu/tag/0BF9) – in particular Lemma 39.9.2, [Tag 0BFA](https://stacks.math.columbia.edu/tag/0BFA)\n(abelian varieties are projective; recorded in this blueprint as\n[lem-sc-abelian-variety-projective]), Lemmas 39.9.6 and 39.9.7,\n[Tag 0BFE](https://stacks.math.columbia.edu/tag/0BFE) and [Tag 0BFF](https://stacks.math.columbia.edu/tag/0BFF) (the theorem of the cube for abelian varieties,\nrecorded as [thm-sc-theorem-of-cube]; see also More on Morphisms, Theorem 37.33.8, [Tag 0BF4](https://stacks.math.columbia.edu/tag/0BF4)), Lemma\n39.9.8, [Tag 0BFG](https://stacks.math.columbia.edu/tag/0BFG) ($[d]$ is finite locally free of degree\n$d^{2\\dim A}$), and Proposition 39.9.11, [Tag 03RP](https://stacks.math.columbia.edu/tag/03RP); cf. the\nclassical treatments of Mumford and Milne*.\n\n**Reduction to $k$ algebraically closed.** Let $\\bar k$ be an algebraic\nclosure of $k$. The base change $A_{\\bar k}$ is an abelian variety of\ndimension $g$ over $\\bar k$ ([def-sc-abelian-variety]), the base change of\n$[n]$ is the map $[n]$ of $A_{\\bar k}$, and the base change of the kernel\n$A[n]=A\\times_{[n],A,e}\\Spec k$ is $A_{\\bar k}[n]$ ([def-sc-mult-n]).\nSince $\\Spec\\bar k\\to\\Spec k$ is faithfully flat and quasi-compact, a\nmorphism of $k$-schemes is finite, flat, resp. surjective as soon as its\nbase change to $\\bar k$ is (fpqc descent), and the rank of the locally\nfree module $[n]_*\\mathcal O_A$ and the order\n$\\dim_k\\Gamma(A[n],\\mathcal O_{A[n]})$ of the finite kernel do not change\nunder the base change $k\\to\\bar k$. So all assertions of (a) and (b) for\n$A$ follow from those for $A_{\\bar k}$, and we may assume that $k$ is\nalgebraically closed.\n\n(a) By\n[lem-sc-mult-n-isogeny], the map $[n]$ of\n[def-sc-mult-n] is a surjective homomorphism of group schemes\nwith finite kernel $A[n]$, and it is finite (as in loc. cit.);\nit is an isogeny in the sense of [def-sc-isogeny]. It is\nflat: the fibres $[n]^{-1}(y)=x+A[n]$ are translates of the\nfinite scheme $A[n]$, hence all have the same length, so\n[lem-sc-finite-constant-length-flat] applies and\n$[n]_*\\mathcal O_A$ is locally free of rank $\\deg([n])$. Thus\n$[n]$ is finite flat and surjective.\n\nIt remains to compute the degree. We follow the classical argument of Stacks Project, Lemma 39.9.8. By\n[lem-sc-abelian-variety-projective] $A$ is projective, so\nit carries an ample line bundle, and for any ample $\\mathcal L$\nthe module $\\mathcal N:=\\mathcal L\\otimes[-1]^*\\mathcal L$ is\nample with $[-1]^*\\mathcal N\\cong\\mathcal N$\n([lem-sc-ample-tensor]). By [thm-sc-theorem-of-cube]\nand [lem-sc-mult-n-pullback],\n$[n]^*\\mathcal N\\cong\\mathcal N^{\\otimes n^2}$. Let\n$\\deg_{\\mathcal M}$ be the degree of [def-sc-hilbert-degree],\nso that $m\\mapsto\\chi(A,\\mathcal N^{\\otimes m})$ is the numerical\npolynomial of [lem-sc-hilbert-polynomial]. Then\n\n$$\n\\deg_{\\mathcal N^{\\otimes n^2}}(A)=n^{2g}\\deg_{\\mathcal N}(A),\n$$\n\nbecause replacing $\\mathcal N$ by $\\mathcal N^{\\otimes n^2}$\nreplaces $\\chi(A,\\mathcal N^{\\otimes m})$ by\n$\\chi(A,\\mathcal N^{\\otimes mn^2})$, which multiplies the leading\ncoefficient of the numerical polynomial by $n^{2g}$. By\n[lem-sc-deg-pullback-finite], since $[n]$ is finite\nsurjective,\n\n$$\n\\deg_{\\mathcal N^{\\otimes n^2}}(A)\n=\\deg_{[n]^*\\mathcal N}(A)=\\deg([n])\\deg_{\\mathcal N}(A).\n$$\n\nHere $\\deg([n])$ is the degree of the finite flat morphism\n$[n]$, which is the order of the kernel $A[n]$, i.e. the\ndegree of the isogeny $[n]$, by\n[lem-sc-isogeny-degree]. Comparing the two formulas gives\n$\\deg([n])=n^{2g}$ (using\n$\\deg_{\\mathcal N}(A)\\neq0$: for an ample $\\mathcal M$ on a\nproper $g$-dimensional variety over $k$, $\\deg_{\\mathcal M}(X)>0$, *reference: Stacks Project, Varieties, Lemma\n33.45.9, [Tag 0BEV](https://stacks.math.columbia.edu/tag/0BEV)*). This\ngives (a) (with $[n]_*\\mathcal O_A$ locally free of rank\n$\\deg([n])=n^{2g}$), and (b) is immediate from\nthe definition of the kernel ([def-sc-mult-n]) and the\nfiniteness statement."
  }
 }

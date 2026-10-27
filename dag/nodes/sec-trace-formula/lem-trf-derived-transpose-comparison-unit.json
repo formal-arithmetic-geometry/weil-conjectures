@@ -1,0 +1,255 @@
+{
+ "id": "lem-trf-derived-transpose-comparison-unit",
+ "kind": "statement",
+ "title": "The derived transpose of a termwise mate and its comparison unit",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal A',\\mathcal B'$ be abelian categories [def-sp-abelian] in a common universe [def-weil-size-convention], with derived categories [def-weil-abstract-derived-category] and bounded-below derived categories [def-weil-pbc-bounded-derived-subcategories]. Write $K^+(\\mathcal C)$ for bounded-below cochain complexes modulo chain homotopy, $q:K^+(\\mathcal C)\\to D^+(\\mathcal C)$ for localization at quasi-isomorphisms, and $K(F)$ for termwise application of an additive functor. Let $L:\\mathcal B\\to\\mathcal A$, $L':\\mathcal B'\\to\\mathcal A'$, $G:\\mathcal B\\to\\mathcal B'$ and $H:\\mathcal A\\to\\mathcal A'$ be exact additive functors. Put $E=D(L)$, $E'=D(L')$, $T=D(G)$ and $S=D(H)$, with their canonical natural localization isomorphisms $\\phi_{F,V}:D(F)(qV)\\xrightarrow{\\sim}qK(F)V$ [lem-weil-pbc-exact-functor-derived-factorization]. Let $\\sigma:L'G\\to HL$ be an arbitrary natural transformation, and let $\\sigma^K:K(L')K(G)\\to K(H)K(L)$ be its termwise transformation on $K^+$. Assume $\\mathcal A,\\mathcal A'$ have enough injectives, meaning that every object embeds into an injective object [def-sp-injective-resolutions]. Give additive right adjoints $R,R'$ and adjunctions $L\\dashv R$, $L'\\dashv R'$. Write $\\eta'^K,\\varepsilon^K$ for their termwise homotopy unit and counit [lem-weil-pbc-termwise-adjunction-homotopy]. Let $U=\\mathbf R R$, $U'=\\mathbf R R'$ with natural comparison maps $\\alpha:qK(R)\\to Uq$, $\\alpha':qK(R')\\to U'q$ [lem-weil-pbc-right-derived-plus-injective]. Use the canonical derived adjunctions $E\\dashv U$ and $E'\\dashv U'$, with primed unit $\\eta'^D$ and unprimed counit $\\varepsilon^D$, normalized by the unit and counit identities of [lem-trf-bounded-below-derived-adjunction]. Let $b:GR\\to R'H$ be the ordinary mate of $\\sigma$ [def-weil-pbc-adjunction-mate]. For each $P\\in K^+(\\mathcal A)$ put $N=K(R)P$, $M=K(G)N$, $W=K(H)P$, $Z=qM$, and $d=K(H)(\\varepsilon^K_P)\\circ\\sigma^K_N:K(L')M\\to W$. Then\n$$K(R')(d)\\circ\\eta'^K_M=K(b)_P,$$\nand, in $D^+(\\mathcal B')$,\n$$U'(q(d))\\circ U'(\\phi_{L',M})\\circ\\eta'^D_Z=\\alpha'_W\\circ q(K(b)_P).$$\nThe first equality uses the homotopy classes of the genuine termwise chain maps. In particular their degree-$n$ components are $R'(H(\\varepsilon_{P^n}))\\circ R'(\\sigma_{R(P^n)})\\circ\\eta'_{G(R(P^n))}=b_{P^n}$, where $\\varepsilon,\\eta'$ are the ordinary counit and primed unit. The second equality holds for arbitrary bounded-below $P$; neither injectivity of $W$ nor invertibility of $\\alpha'_W$ is required. No derived square or mate of a derived square is part of this assertion.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+  "place": "Old proof step 2 (primed adjunction data) and steps 6–7: derivedPlus_mateEquiv_app_fac, lines 452–464; termwise component calculation in lean/WeilConjectures/CategoryTheory/HomotopyCategory/Adjunction.lean, mapHomotopyCategoryPlus_mateEquiv_app, lines 599–648."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-trf-bounded-below-derived-adjunction",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-termwise-adjunction-homotopy], the unit and counit in $K^+$ are represented by their termwise chain maps. In degree $n$, the composite $K(R')(d)\\circ\\eta'^K_M$ is $R'(H(\\varepsilon_{P^n}))\\circ R'(\\sigma_{R(P^n)})\\circ\\eta'_{G(R(P^n))}$, using functoriality and the definition of $d$. This is precisely $b_{P^n}$ by [def-weil-pbc-adjunction-mate]. Thus the two genuine chain maps agree in every degree, hence their homotopy classes agree: $K(R')(d)\\circ\\eta'^K_M=K(b)_P$.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/HomotopyCategory/Adjunction.lean",
+    "place": "NatTrans.mapHomotopyCategoryPlus_mateEquiv_app, HomotopyCategory/Adjunction.lean:604–648 (degreewise calculation)."
+   }
+  },
+  {
+   "text": "Apply the unit identity of [lem-trf-bounded-below-derived-adjunction] to $L'\\dashv R'$ and $M\\in K^+(\\mathcal B')$. Its hypotheses hold because $L'$ is exact and $\\mathcal A'$ has enough injectives. With $Z=qM$ it gives $U'(\\phi_{L',M})\\circ\\eta'^D_Z=\\alpha'_{K(L')M}\\circ q(\\eta'^K_M)$. Postcompose this equality with $U'(q(d))$.",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_unit_app_fac:143–149; derivedPlus_mateEquiv_app_fac, h₆:456."
+   }
+  },
+  {
+   "text": "The comparison in [lem-weil-pbc-right-derived-plus-injective] is a natural transformation on all of $K^+(\\mathcal A')$. Its naturality at $d:K(L')M\\to W$ reads $U'(q(d))\\circ\\alpha'_{K(L')M}=\\alpha'_W\\circ q(K(R')(d))$. Substitute this into step 2, use that $q$ preserves composition, and substitute step 1. The resulting right side is $\\alpha'_W\\circ q(K(R')(d)\\circ\\eta'^K_M)=\\alpha'_W\\circ q(K(b)_P)$, which is the required second equality. Naturality applies without injectivity of $W$, and no comparison map was inverted.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, h₅ and h₆ and the map_comp/naturality rewrites:454–466."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-weil-pbc-adjunction-mate",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+  "place": "Termwise mate calculation in HomotopyCategory/Adjunction.lean:604–648 and unit/naturality part of derivedPlus_mateEquiv_app_fac:452–466; expanded as a three-step argument without assuming a derived square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived adjunction transpose of the localized ordinary counit and square composite equals the ordinary mate on bounded below complexes followed by the right derived comparison unit",
+   "results": "{\"t\": \"2026-10-22T06:04:11Z\", \"tool\": \"leanfinder\", \"query\": \"The derived adjunction transpose of the localized ordinary counit and square composite equals the ordinary mate on bounded below complexes followed by the right derived comparison unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη\"], \"digest\": \"f6a053c0ac8ce2ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is a unit comparison and the other hits concern exact functor comparisons or objectwise derived functors; none states the termwise mate identity together with its bounded-below derived transpose comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*mate|mate.*derived|derivedη.*fac|derived.*unit.*fac",
+   "results": "{\"t\": \"2026-10-22T06:04:27Z\", \"tool\": \"grep\", \"query\": \"derived.*mate|mate.*derived|derivedη.*fac|derived.*unit.*fac\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\"], \"digest\": \"a80afd94873cb764\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is a unit comparison and the other hits concern exact functor comparisons or objectwise derived functors; none states the termwise mate identity together with its bounded-below derived transpose comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.derivedη, Adjunction.derivedε",
+   "results": "{\"t\": \"2026-10-22T06:04:28Z\", \"tool\": \"loogle\", \"query\": \"Adjunction.derivedη, Adjunction.derivedε\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Adjunction.derivedη'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'Adjunction.derivedη'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of termwise adjunction mates with the right derived comparison unit on arbitrary bounded below complexes",
+   "results": "{\"t\": \"2026-10-22T06:05:08Z\", \"tool\": \"leansearch\", \"query\": \"Compatibility of termwise adjunction mates with the right derived comparison unit on arbitrary bounded below complexes\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary mate applied degreewise equals the homotopy transpose and the primed derived unit factorization carries this transpose to the derived category",
+   "results": "{\"t\": \"2026-10-22T06:05:24Z\", \"tool\": \"leanfinder\", \"query\": \"The ordinary mate applied degreewise equals the homotopy transpose and the primed derived unit factorization carries this transpose to the derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp\", \"DerivedCategory.singleFunctorsPostcompQhIso\", \"CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq\"], \"digest\": \"abb82c5240fe5bd7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is a unit comparison and the other hits concern exact functor comparisons or objectwise derived functors; none states the termwise mate identity together with its bounded-below derived transpose comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryPlus_mate|derivedPlus_unit_app_fac|derivedPlus_counit_app_fac",
+   "results": "{\"t\": \"2026-10-22T06:05:25Z\", \"tool\": \"grep\", \"query\": \"mapHomotopyCategoryPlus_mate|derivedPlus_unit_app_fac|derivedPlus_counit_app_fac\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is a unit comparison and the other hits concern exact functor comparisons or objectwise derived functors; none states the termwise mate identity together with its bounded-below derived transpose comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "{\"t\": \"2026-10-22T06:05:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη_fac_app\"], \"digest\": \"4e172f2df61df5e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derivedη_fac_app is a unit comparison and the other hits concern exact functor comparisons or objectwise derived functors; none states the termwise mate identity together with its bounded-below derived transpose comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|derived.*mate|mate.*derived",
+   "results": "{\"t\": \"2026-10-23T09:28:33Z\", \"tool\": \"grep\", \"query\": \"derivedη_fac_app|derived.*mate|mate.*derived\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"756457af01e0b283\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the derived-unit formula and naturality hits provide inputs, not the two-clause mate comparison on bounded-below complexes; project-specific Plus mate names are absent from Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "{\"t\": \"2026-10-23T09:28:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη_fac_app\"], \"digest\": \"4e172f2df61df5e5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the derived-unit formula and naturality hits provide inputs, not the two-clause mate comparison on bounded-below complexes; project-specific Plus mate names are absent from Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the comparison transformation and the unit formula for derived adjunction imply compatibility with transpose on homotopy categories",
+   "results": "{\"t\": \"2026-10-23T09:28:34Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of the comparison transformation and the unit formula for derived adjunction imply compatibility with transpose on homotopy categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.unit_naturality_assoc\", \"CategoryTheory.Adjunction.unit_naturality\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.counit_naturality_assoc\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff\", \"CategoryTheory.NatTrans.mapHomotopyCategory_comp\"], \"digest\": \"4bf79bb16153f4f8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the derived-unit formula and naturality hits provide inputs, not the two-clause mate comparison on bounded-below complexes; project-specific Plus mate names are absent from Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived adjunction transpose of a termwise mate equals the localized mate followed by the natural right derived comparison map on bounded below complexes",
+   "results": "{\"t\": \"2026-10-23T09:28:36Z\", \"tool\": \"leanfinder\", \"query\": \"The derived adjunction transpose of a termwise mate equals the localized mate followed by the natural right derived comparison map on bounded below complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_unit\"], \"digest\": \"9f1f4f30a6c0a3c6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the derived-unit formula and naturality hits provide inputs, not the two-clause mate comparison on bounded-below complexes; project-specific Plus mate names are absent from Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryPlus_mate|derivedPlus_mate|derivedPlus_unit_app_fac",
+   "results": "{\"t\": \"2026-10-23T09:32:43Z\", \"tool\": \"grep\", \"query\": \"mapHomotopyCategoryPlus_mate|derivedPlus_mate|derivedPlus_unit_app_fac\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the derived-unit formula and naturality hits provide inputs, not the two-clause mate comparison on bounded-below complexes; project-specific Plus mate names are absent from Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Applying a natural right derived comparison to an adjunction transpose agrees with first localizing the transpose and then composing with the comparison at its target",
+   "results": "{\"t\": \"2026-10-23T09:32:49Z\", \"tool\": \"leanfinder\", \"query\": \"Applying a natural right derived comparison to an adjunction transpose agrees with first localizing the transpose and then composing with the comparison at its target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\"], \"digest\": \"3e5ac271016ebc15\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the derived-unit formula and naturality hits provide inputs, not the two-clause mate comparison on bounded-below complexes; project-specific Plus mate names are absent from Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-below-derived-mate-model",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization first descent via the ph/etale comparison: the canonical arrow identification in Stacks 0DDJ(2), specifically computation of a derived mate by its underived square on complexes. Extraction: Old proof step 2 (primed adjunction data) and steps 6–7: derivedPlus_mateEquiv_app_fac, lines 452–464; termwise component calculation in lean/WeilConjectures/CategoryTheory/HomotopyCategory/Adjunction.lean, mapHomotopyCategoryPlus_mateEquiv_app, lines 599–648.",
+   "via": [
+    "lem-trf-bounded-below-derived-mate-model",
+    "lem-trf-big-small-etale-localization-derived-pushforward",
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-derived-transpose-comparison-unit",
+  "worker": "stage1",
+  "summary": "Retained the statement and all statement dependencies. Proved the termwise identity directly by components, then used the existing normalized derived-unit identity and naturality of the right-derived comparison. No new nodes, no injectivity or comparison-invertibility assumption, and no derived square. Audited cited statements and supplied verbatim citations.",
+  "blueprint": "The normal-cone specialization descent comparison under lem-trf-local-term-locality: the termwise mate/unit subcalculation extracted by lem-trf-bounded-below-derived-mate-model. The latest blueprint has no separate statement of this categorical sublemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Its termwise unit/counit description is generic homological algebra used inside the existing comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Its natural comparison transformation on all bounded-below complexes is needed for naturality; no trace-formula-specific node replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-17a5d9616",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-17a5d9616 (reviewer sub-agent of L); spot-checked: Read the item in full. It has no new nodes, an unchanged statement, and is still unsplit in live and side-live; there is no repair note. Statement types check: d:K(L')K(G)K(R)P->K(H)P, and both sides of each identity have matching source and target. Step 1: the degree-n component R'H(eps_{P^n})R'(sigma_{RP^n})eta'_{GRP^n} is exactly the three-arrow formula of def-weil-pbc-adjunction-mate (L1=L, R1=R, L2=L', R2=R'). Termwise unit and counit come from lem-weil-pbc-termwise-adjunction-homotopy (a),(b), and the chain maps are equal before taking classes. Step 2: the first unit identity of lem-trf-bounded-below-derived-adjunction applies to L' and R' at N=M; its hypotheses hold (A' has enough injectives, L' exact, additive, nothing needed on B'). Step 3: lem-weil-pbc-right-derived-plus-injective (1) makes alpha' natural on all of K^+(A'). Substituting this and step 1 gives the claim without injectivity of W or invertibility of alpha'_W. Tested sigma=0, identity adjunction, one-degree complex and non-injective W. Duplicate scan: the parent bounded-below-derived-mate-model uses only clause 2 and the sibling derived-mate-counit-reduction is the counit side; no duplicate. Sources are PlusAdjunction.lean:143-149,452-466 and HomotopyCategory/Adjunction.lean:604-648. No SGA. Accepted tool_uses: the generic off-unit pbc termwise-adjunction and right-derived-plus nodes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.TransposeComparisonUnit",
+  "declaration": "CategoryTheory.Adjunction.derivedTransposeComparisonUnit",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/TransposeComparisonUnit.lean",
+  "statement": "theorem derivedTransposeComparisonUnit {A : Type uA} {B : Type uB} {A' : Type uA'} {B' : Type uB'} [Category.{vA} A] [Category.{vB} B] [Category.{vA'} A'] [Category.{vB'} B'] [Abelian A] [Abelian B] [Abelian A'] [Abelian B'] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] [HasDerivedCategory.{wA'} A'] [HasDerivedCategory.{wB'} B'] [EnoughInjectives A] [EnoughInjectives A'] {L : B ⥤ A} {L' : B' ⥤ A'} {G : B ⥤ B'} {H : A ⥤ A'} {R : A ⥤ B} {R' : A' ⥤ B'} [L.Additive] [L'.Additive] [G.Additive] [H.Additive] [R.Additive] [R'.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] [PreservesFiniteLimits L'] [PreservesFiniteColimits L'] [PreservesFiniteLimits G] [PreservesFiniteColimits G] [PreservesFiniteLimits H] [PreservesFiniteColimits H] (adj : L ⊣ R) (adj' : L' ⊣ R') (σ : TwoSquare G L L' H) (P : HomotopyCategory.Plus A) : (adj'.mapHomotopyCategoryPlus.unit.app (G.mapHomotopyCategoryPlus.obj (R.mapHomotopyCategoryPlus.obj P)) ≫ R'.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app (R.mapHomotopyCategoryPlus.obj P) ≫ H.mapHomotopyCategoryPlus.map (adj.mapHomotopyCategoryPlus.counit.app P)) = (NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app P) ∧ (adj'.derivedPlus.unit.app (DerivedCategory.Plus.Qh.obj (G.mapHomotopyCategoryPlus.obj (R.mapHomotopyCategoryPlus.obj P))) ≫ R'.rightDerivedFunctorPlus.map (L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj (R.mapHomotopyCategoryPlus.obj P))) ≫ R'.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app (R.mapHomotopyCategoryPlus.obj P) ≫ H.mapHomotopyCategoryPlus.map (adj.mapHomotopyCategoryPlus.counit.app P))) = DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app P) ≫ R'.rightDerivedFunctorPlusUnit.app (H.mapHomotopyCategoryPlus.obj P)) ∧ (∀ n : ℤ, adj'.unit.app (G.obj (R.obj (P.obj.as.X n))) ≫ R'.map (σ.natTrans.app (R.obj (P.obj.as.X n))) ≫ R'.map (H.map (adj.counit.app (P.obj.as.X n))) = (mateEquiv adj adj' σ).natTrans.app (P.obj.as.X n))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-129a93db4",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Clause-by-clause check of TransposeComparisonUnit.lean against the node. Exact L,L',G,H; enough injectives only on A,A'; arbitrary σ as TwoSquare G L L' H; b = mateEquiv natTrans, components match def-weil-pbc-adjunction-mate. Conjunct 1 = homotopy identity η'^K_M≫K(R')d = K(b)_P. Conjunct 2 = η'^D_Z≫U'φ≫U'(q d) = q(K(b)_P)≫α'_W, using the canonical derivedPlus and mapDerivedCategoryPlusFactorsh.hom, α' at arbitrary W with no inverse. Conjunct 3 = degreewise formula for all n∈ℤ. Universes independent (weaker than 'common universe'), all bound. lean.statement verbatim (diff). No definitions, single sorry, source and blueprint docstrings with the 3-step proof. Not a duplicate: mapHomotopyCategoryPlus_mateEquiv_app gives only clause 1; derivedPlus_mateEquiv_app_fac is the excluded derived-mate form. Statement and stmt_deps unchanged. Not compiled (no changes; worker reports clean compile). Minor: the second reading was by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T092424-L-3431328",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Adjunction.derivedTransposeComparisonUnit"
+  ],
+  "sorry_after": []
+ }
+}

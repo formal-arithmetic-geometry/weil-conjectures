@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-integral-simple-reflection-gauss-chart",
+ "kind": "statement",
+ "title": "Simple-reflection integral Gauss chart with positive-system support",
+ "statement": "Let $\\mathcal R=(M,\\Phi,M^\\vee,\\Phi^\\vee)$ be a finite reduced root datum with $\\mathbf Q\\Phi=M\\otimes\\mathbf Q$ and $\\mathbf Z\\Phi^\\vee=M^\\vee$, and $(G,T_{\\mathbf Q}=D_{\\mathbf Q}(M))$ a split rational realization [def-sfb-pinned-split-root-realization]. Fix a base $\\Delta$, rational root parameters $p_\\alpha$, orderings and integral one-sign groups $E_\\pm$ satisfying [lem-sfb-rational-chevalley-one-sign-integrality]. Thus $E_\\pm$ are affine spaces over $\\mathbf Z$ with polynomial group laws, their generic fibres are the ordered root-product unipotent radicals, and $T_{\\mathbf Z}=D_{\\mathbf Z}(M)$ acts by the root characters [def-sfb-ring-diagonalizable-group]. Set $C=E_-\\times_{\\mathbf Z}T_{\\mathbf Z}\\times_{\\mathbf Z}E_+$ [def-pc-fibre-product], with coordinate inclusions of $E_-$, $T_{\\mathbf Z}$ and $E_+$. Suppose the ordered product $c:C_{\\mathbf Q}\\to G$ is an open immersion [def-weil-open-immersion].\n\nFor a simple root $a\\in\\Delta$, put $n_a=p_a(1)p_{-a}(-1)p_a(1)$ and $s_a(m)=m-\\langle m,a^\\vee\\rangle a$. Then $n_a$ normalizes $T_{\\mathbf Q}$ and acts on it by the monomial automorphism $s_a$, and $n_a^2=a^\\vee(-1)$. Use the integral reorderings to write a point of $C$ in the form\n$$\\left(\\prod_{\\beta\\in\\Phi^+\\setminus\\{a\\}}p_{-\\beta}(z_{-\\beta})\\right)p_{-a}(v)\\,t\\,p_a(u)\\left(\\prod_{\\beta\\in\\Phi^+\\setminus\\{a\\}}p_\\beta(z_\\beta)\\right),$$\nwhere each displayed $p$ over $\\mathbf Z$ means the corresponding coordinate axis in its one-sign group, not multiplication in an ambient integral group. Let $V_a\\subset C$ be the principal open defined in these coordinates by $d_a=1+vu\\chi_a(t)$ invertible. There is a morphism $F_a:V_a\\to C$ extending $c^{-1}\\operatorname{Ad}(n_a)c$. Its torus restriction is $s_a$, and each root-axis restriction is $z\\mapsto\\epsilon_{a,\\beta}z$ onto the $s_a\\beta$ axis, using the signs in [lem-sfb-rational-chevalley-one-sign-integrality]. In particular $F_a(e)=e$.\n\nHere is an additional coordinate-support assertion. For a positive system $P=w(\\Phi^+)$, where $w$ is any product of root reflections, let $C_P\\subset C$ be the closed coordinate subscheme with torus coordinate $1$ and coordinates outside $P$ zero. These equations can be imposed using any ordering separately on the negative and positive factors, giving the same closed subscheme. One has $C_P\\subset V_a$, and $F_a$ restricts to an isomorphism of schemes $C_P\\simeq C_{s_aP}$. No group structure on $C_P$ when $P$ has mixed signs, and no ambient integral reductive group, is assumed. Empty roots give no assertions indexed by $a$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Lemma 6.3.8 and equation (6.3.4), printed pp.220--222. Coordinate-support refinement needed for the Weyl-word induction of Lemma 6.3.9; agent formulation from the displayed rank-one formula and one-sign reorderings. Read online; WANTED local copy. No Stacks tag for this root-coordinate calculation."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-rational-chevalley-one-sign-integrality",
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Work only with the given rational group and the two integral one-sign groups. Apply [lem-sfb-split-root-subgroup-weyl-calculus] over $\\mathbf Q$, with pinning $dp_a(1)$ for $a\\in\\Delta$. For the rank-one check, [lem-sfb-relative-root-rank-one-centralizer] gives the reductive centralizer with roots $\\{a,-a\\}$ and full torus $T_{\\mathbf Q}$. Apply [lem-sfb-relative-rank-one-local-matrix-model] over the nonzero Noetherian field $\\mathbf Q$ to this centralizer. Its model has a central split torus and matrix factor $\\operatorname{SL}_2$, $\\operatorname{PGL}_2$ or $\\operatorname{GL}_2$, with root character the ratio of diagonal entries. The opposite parameters in [lem-sfb-rational-chevalley-one-sign-integrality] are the linked parameters: the displayed Gauss identity is the linked rank-one normalization (in the rank-one matrix coordinates an opposite parameter is lower-unitriangular with entry $kv$; the torus factor in the upper/lower product is $a^\\vee(1+kuv)$, so comparison with $a^\\vee(1+uv)$ forces $k=1$: applying $a$ and comparing the $uv$ coefficient gives $2k=2$ in $\\mathbf Q$). Thus the Weyl-calculus statement applies to exactly $n_a=p_a(1)p_{-a}(-1)p_a(1)$: it normalizes $T_{\\mathbf Q}$, acts by $s_a$, and $n_a^2=a^\\vee(-1)$. The one-sign input gives its signed action on every root parameter. In particular it interchanges $p_a,p_{-a}$ by negation. Also $s_a$ preserves $\\Phi^+\\setminus\\{a\\}$: in the simple-root coordinates a positive root other than $a$ has some positive coefficient away from $a$, unchanged by $s_a$; since every root has coefficients of one sign, its reflected root remains positive. Applying the involution twice gives a permutation of this set.",
+   "uses": [
+    "lem-sfb-rational-chevalley-one-sign-integrality",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-relative-root-rank-one-centralizer",
+    "lem-sfb-relative-rank-one-local-matrix-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Lemma 6.3.8, equation (6.3.4), printed pp.220--222; support refinement by agent using the closed-root-set assertion of the cited Weyl-calculus node. No SGA source is used."
+   }
+  },
+  {
+   "text": "Use the integral reordering isomorphisms of [lem-sfb-rational-chevalley-one-sign-integrality] to put $p_{-a}(v)$ last in $E_-$ and $p_a(u)$ first in $E_+$. Denote the products of all other negative and positive axes by $L$ and $R$, so the rational product is $Lp_{-a}(v)t p_a(u)R$. Define $L'$ and $R'$ integrally by replacing, in these same ordered lists, each $p_\\beta(z)$ by $p_{s_a\\beta}(\\epsilon_{a,\\beta}z)$ and multiplying in the corresponding one-sign group. The preceding root permutation ensures that $L'$ is a product of negative axes and $R'$ a product of positive axes. These definitions use polynomial one-sign multiplication, never multiplication in an integral ambient group.",
+   "uses": [
+    "lem-sfb-rational-chevalley-one-sign-integrality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Lemma 6.3.8, equation (6.3.4), printed pp.220--222; support refinement by agent using the closed-root-set assertion of the cited Weyl-calculus node. No SGA source is used."
+   }
+  },
+  {
+   "text": "Put $q=\\chi_a(t)$ and $t'=D_{\\mathbf Z}(s_a)(t)$. The diagonalizable-group definition gives $\\chi_{-a}(t')=q$ and $\\chi_a(t')=q^{-1}$. Conjugating the middle three rational factors by $n_a$ gives\n$$p_a(-v)t'p_{-a}(-u)=p_a(-v)p_{-a}(-uq)t'.$$\nApply the given rank-one Gauss identity with arguments $-v,-uq$. Its denominator is precisely $d=1+vuq$. Moving the resulting positive factor past $t'$ gives\n$$p_{-a}(-uq/d)\\,a^\\vee(d)t'\\,p_a(-vq/d).$$\nIndeed $p_a(-v/d)t'=t'p_a(-vq/d)$. Hence define on $V_a=D(d)$\n$$F_a(L,v,t,u,R)=\\bigl(L' p_{-a}(-uq/d),\\ a^\\vee(d)t',\\ p_a(-vq/d)R'\\bigr),$$\nwhere the first and third products are in $E_-$ and $E_+$. Every coordinate belongs to the localized coordinate ring: one-sign laws are integral polynomials, $q$ is a Laurent monomial, and for $m\\in M$ the torus coordinate pulls back to $d^{\\langle m,a^\\vee\\rangle}\\chi_{s_am}(t)$. Thus these formulas define a scheme morphism over $\\mathbf Z$ and reproduce $c^{-1}\\operatorname{Ad}(n_a)c$ on its whole rational domain.",
+   "uses": [
+    "lem-sfb-rational-chevalley-one-sign-integrality",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Lemma 6.3.8, equation (6.3.4), printed pp.220--222; support refinement by agent using the closed-root-set assertion of the cited Weyl-calculus node. No SGA source is used."
+   }
+  },
+  {
+   "text": "On $T$ one has $u=v=0$, $L=R=1$, $d=1$, and the formula is $t\\mapsto t'$. On either simple-root axis, $t=1$ and one of $u,v$ is zero, so the formula sends $p_a(u)$ to $p_{-a}(-u)$ and $p_{-a}(v)$ to $p_a(-v)$. On every other root axis $u=v=0$, and the formula is the prescribed signed axis of $L'$ or $R'$. All these axes and $T$ are contained in $V_a$ because $d=1$ there. Setting every root coordinate to zero and $t=1$ also proves $F_a(e)=e$.",
+   "uses": [
+    "lem-sfb-rational-chevalley-one-sign-integrality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Lemma 6.3.8, equation (6.3.4), printed pp.220--222; support refinement by agent using the closed-root-set assertion of the cited Weyl-calculus node. No SGA source is used."
+   }
+  },
+  {
+   "text": "We first justify the ordering independence required to define $C_P$. A positive system $P=w\\Phi^+$ is closed under nonempty sums which are roots, and has no opposite pair. This follows by applying $w^{-1}$ and adding nonnegative simple-root coefficients. The same is true of $P\\cap\\Phi^+$ and $P\\cap(-\\Phi^+)$. The closed-root-set assertion of [lem-sfb-split-root-subgroup-weyl-calculus], applied over $\\mathbf Q$, says that the product of the rational root groups in either intersection, in any enumeration, is the same subgroup scheme. Therefore each integral one-sign reordering map sends its coordinate subspace supported on that intersection into the identically supported coordinate subspace for the other ordering: the coordinates required to vanish are integral polynomials which vanish over $\\mathbf Q$, hence are zero in $\\mathbf Z[z_\\beta]$. Apply the same argument to the inverse reordering map. This proves equality of the resulting closed subschemes over $\\mathbf Z$, including after nonreduced base change. It also proves $C_P$ is a product of the axes indexed by $P$, with torus coordinate $1$, and so has torsion-free polynomial coordinate ring.",
+   "uses": [
+    "lem-sfb-rational-chevalley-one-sign-integrality",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Lemma 6.3.8, equation (6.3.4), printed pp.220--222; support refinement by agent using the closed-root-set assertion of the cited Weyl-calculus node. No SGA source is used."
+   }
+  },
+  {
+   "text": "In the reordered coordinates defining $V_a$, a positive system contains exactly one of $a,-a$. Consequently either $u=0$ or $v=0$ identically on $C_P$, and $q=1$, so $d=1$ as a function on this closed scheme. This proves $C_P\\subset V_a$ scheme-theoretically. On it the middle output torus factor $a^\\vee(d)t'$ is $1$. To check all remaining support equations, apply the closed-root-set theorem of [lem-sfb-split-root-subgroup-weyl-calculus] over $\\mathbf Q$ to $P$ and $s_aP$. It identifies $(C_P)_{\\mathbf Q}$, by multiplication with negative factors before positive ones, with $U_P$; any such ordering is allowed. Signed conjugation sends each of its factors to its reflected root subgroup, hence sends $U_P$ to $U_{s_aP}$. The latter subgroup is the image of $(C_{s_aP})_{\\mathbf Q}$ with its analogous negative-before-positive ordering. Uniqueness of coordinates in the assumed open immersion $c$ now implies every forbidden output coordinate of $F_a|C_P$ is zero over $\\mathbf Q$. Each is a polynomial over $\\mathbf Z$ (the denominator is $1$ here), so torsion-freeness makes it zero integrally. Thus $F_a$ factors through $C_{s_aP}$.",
+   "uses": [
+    "lem-sfb-rational-chevalley-one-sign-integrality",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Lemma 6.3.8, equation (6.3.4), printed pp.220--222; support refinement by agent using the closed-root-set assertion of the cited Weyl-calculus node. No SGA source is used."
+   }
+  },
+  {
+   "text": "Apply the preceding support argument also to $s_aP$. The two restrictions can therefore be composed alternately four times. Over $\\mathbf Q$ this fourth iterate is conjugation by $n_a^4=1$, since $n_a^2=a^\\vee(-1)$ and $a^\\vee$ is a group homomorphism. Both the fourth iterate and the identity have integral polynomial coordinates on $C_P$, so equality over $\\mathbf Q$ implies equality over $\\mathbf Z$ coefficient by coefficient; likewise on $C_{s_aP}$. The triple iterate starting at $C_{s_aP}$ is therefore a two-sided inverse to $F_a:C_P\\to C_{s_aP}$. This proves the requested scheme isomorphism. The argument has not equipped a mixed-sign $C_P$ with a group law. In rank zero there is no $a$, so every assertion indexed by a simple root is vacuous.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Lemma 6.3.8, equation (6.3.4), printed pp.220--222; support refinement by agent using the closed-root-set assertion of the cited Weyl-calculus node. No SGA source is used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-chevalley-one-sign-integrality",
+  "lem-sfb-split-root-subgroup-weyl-calculus",
+  "lem-sfb-relative-root-rank-one-centralizer",
+  "lem-sfb-relative-rank-one-local-matrix-model",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 6.3.8 and displayed Gauss calculation, pp.220--222, followed by agent support and inverse arguments using the existing closed-root-set node; read online, local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Gauss|[Cc]hevalley|[Ww]eyl",
+   "results": "0 hits: . Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simple reflection integral Gauss decomposition on a split reductive group big cell",
+   "results": "8 hits: CoxeterSystem.simple, RootPairing.reflection, MeasureTheory.IsFundamentalDomain.setIntegral_eq_tsum', MeasureTheory.IsFundamentalDomain.integral_eq_tsum', CoxeterSystem.IsReflection, CoxeterSystem.isReflection_simple, MeasureTheory.IsFundamentalDomain.setLIntegral_eq_tsum', RootPairing.reflection_apply. Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"reflection\"",
+   "results": "12 hits: RootPairing.reflectionPerm, RootPairing.reflectionPerm_involutive, RootPairing.reflectionPerm_symm, RootPairing.reflectionPerm_inv, RootPairing.flip_reflectionPerm, RootPairing.coreflection, RootPairing.reflection, RootPairing.reflectionPerm_self. Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple Weyl reflection conjugates the integral big cell by the Gauss formula on the principal open where one plus the product of opposite simple root coordinates times a torus character is invertible",
+   "results": "8 hits: RootPairing.weylGroup.ofIdx_smul, RootPairing.weylGroup, RootPairing.weylGroup.ofIdx, RootPairing.reflection_mem_weylGroup, RootPairing.range_weylGroup_coweightHom, LieAlgebra.IsKilling.reflectRoot, RootPairing.weylGroup.induction, RootPairing.weylGroup_toSubmonoid. Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed root parameters and one sign integral group laws give partial simple reflection conjugation preserving coordinate subspaces supported on Weyl translates of positive roots",
+   "results": "8 hits: RootPairing.Base.IsPos.reflectionPerm, RootPairing.Base.IsPos.induction_on_reflect, RootPairing.Base.induction_reflect, RootPairing.weylGroup.ofIdx_smul, RootPairing.weylGroup, RootPairing.chainTopCoeff_reflectionPerm_right, RootPairing.chainBotCoeff_reflectionPerm_right, RootPairing.chainTopCoeff_reflectionPerm_left. Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss|[Ii]ntegral.*[Cc]onjugation|[Bb]ig.?[Cc]ell",
+   "results": "0 hits: . Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple reflection conjugation on integral root cell with Gauss denominator 1 plus uv times a root character",
+   "results": "8 hits; RootPairing.chainTopCoeff_reflectionPerm_right, RootPairing.EmbeddedG2.threeShortAddLong, RootPairing.chainBotCoeff_reflectionPerm_right, RootPairing.EmbeddedG2.threeShortAddTwoLong, RootPairing.EmbeddedG2.shortAddLong, RootPairing.Base.induction_reflect, RootPairing.chainBotCoeff_reflectionPerm_left, RootPairing.chainTopCoeff_reflectionPerm_left. Read signatures and relevant local source: root-pairing reflections, Geck Lie submodule conjugation, Gauss sums and Jordan--Chevalley decomposition do not state an integral root-cell scheme chart.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss|[Bb]ig.?[Cc]ell|[Cc]hevalley",
+   "results": "25 hits; Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/GaussSum.lean, Mathlib/NumberTheory/GaussSum.lean, Mathlib/NumberTheory/GaussSum.lean. Read signatures and relevant local source: root-pairing reflections, Geck Lie submodule conjugation, Gauss sums and Jordan--Chevalley decomposition do not state an integral root-cell scheme chart.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral simple Weyl reflection Gauss chart on a split reductive group root cell",
+   "results": "8 hits; RootPairing.isSimpleModule_weylGroupRootRep_iff, RootPairing.weylGroup.ofIdx_smul, RootPairing.weylGroup, RootPairing.weylGroup_toSubmonoid, RootPairing.weylGroup.induction, RootPairing.reflection, RootPairing.reflection_apply_self, RootPairing.reflection_mem_weylGroup. Read signatures and relevant local source: root-pairing reflections, Geck Lie submodule conjugation, Gauss sums and Jordan--Chevalley decomposition do not state an integral root-cell scheme chart.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"reflection\"",
+   "results": "12 hits; RootPairing.reflectionPerm, RootPairing.reflectionPerm_involutive, RootPairing.reflectionPerm_symm, RootPairing.reflectionPerm_inv, RootPairing.flip_reflectionPerm, RootPairing.coreflection, RootPairing.reflection, RootPairing.reflectionPerm_self. Read signatures and relevant local source: root-pairing reflections, Geck Lie submodule conjugation, Gauss sums and Jordan--Chevalley decomposition do not state an integral root-cell scheme chart.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation by a Weyl representative extends to integer polynomial root group coordinates on a localized big cell and preserves positive root support",
+   "results": "8 hits; RootPairing.GeckConstruction.ωConj_mem_of_mem, RootPairing.weylGroup_apply_root, RootPairing.weylGroupRootRep, RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff, RootPairing.weylGroup, RootPairing.Base.IsPos.reflectionPerm, RootPairing.weylGroup.ofIdx, RootPairing.weylGroup.ofIdx_smul. Read signatures and relevant local source: root-pairing reflections, Geck Lie submodule conjugation, Gauss sums and Jordan--Chevalley decomposition do not state an integral root-cell scheme chart.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ig.?[Cc]ell|[Rr]oot.?[Gg]roup|[Cc]hevalley",
+   "results": "15 hits; Mathlib/Algebra/LieRinehartAlgebra/Defs.lean, Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean, Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean, Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean, Mathlib/Algebra/Lie/Extension.lean, Mathlib/Algebra/Lie/Extension.lean, Mathlib/Algebra/Lie/Extension.lean, Mathlib/Algebra/Lie/Basis/Basic.lean. Read signatures and relevant local source: root-pairing reflections, Geck Lie submodule conjugation, Gauss sums and Jordan--Chevalley decomposition do not state an integral root-cell scheme chart.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-longest-weyl-partial-conjugation",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Integral prolongation of a given split rational reductive group Supporting input: Section 6.3, Proposition 6.3.4, Lemmas 6.3.7--6.3.9, Proposition 6.3.11, Proposition 6.3.13 and the following paragraph, equation (6.3.5), printed pp.214--227; root-cell construction and smooth birational envelope before fibral semisimplicity; Section 6.3, Proposition 6.3.4 and the opposite-root normalization after Remark 6.3.5, Lemmas 6.3.7--6.3.9, Proposition 6.3.11, Proposition 6.3.13, printed pp.215--226; rational rank-one identities in Theorem 4.2.6(1), equation (4.2.1), and Corollary 5.1.9(3). The partial root-cell law, before adjoining translates or forming its group envelope. Supporting input: Longest-Weyl partial conjugation before the partial multiplication construction. Rank-one prerequisite: simple-reflection Gauss chart and preservation of coordinate support in a Weyl-translated positive system.",
+   "via": [
+    "lem-sfb-integral-longest-weyl-partial-conjugation",
+    "lem-sfb-chevalley-integral-birational-law",
+    "lem-sfb-chevalley-birational-integral-envelope",
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-simple-reflection-gauss-chart",
+  "worker": "stage1",
+  "summary": "Read Conrad Lemma 6.3.8 and its displayed rank-one calculation online. Constructed the localized map explicitly, then proved ordering-independent positive-system support by rational closed-root products and torsion-free integral coordinate rings. A fourth-iterate argument gives the inverse. Reused existing one-sign and Weyl-calculus nodes; no new nodes. No statement change.",
+  "blueprint": "Current latest sec-six-functors-basics/sk-thm-sf-ctf-stability, direct-images supporting alteration branch, through the inherited integral-model and longest-Weyl prerequisites. The nearest blueprint ancestor is None as reported by blueprint_refs.py; inherited null from.node and via retained. Realizes the simple-reflection rank-one prerequisite in the inherited from.place. Searches of the entire blueprint for integral simple reflection Gauss chart, root subgroup, rank one and closed roots find no equivalent item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-e2beffc4a",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-e2beffc4a (reviewer sub-agent of L); spot-checked: I read Conrad, Reductive group schemes, Lemma 6.3.8 and its proof, printed pp.220-222, from the PDF at the URL in the source field. Step 3's formula p_{-a}(-uq/d)·a^∨(d)t'·p_a(-vq/d) on D(1+vuq) is exactly Conrad's display, with x0=v and x=u. Statement and stmt_deps are unchanged and there are no new nodes. This is a first split of an unsplit node, not a 2026-10-21 re-split.\n\nStep 1: I checked the linked parameters in SL2 directly. Matching the Gauss torus factor a^∨(1+cc'uv) with the one-sign node's a^∨(1+uv) forces cc'=1, so n_a=[[0,c],[-1/c,0]] and n_a^2=-I=a^∨(-1). Uniqueness of the linked generator in the Weyl-calculus node then gives Y=dp_{-a}(1). The hypotheses of the centralizer and local matrix-model nodes hold over Q. The fact that n_a sends p_{-a}(z) to p_a(-z) is not stated but follows in one line from n_a^2=a^∨(-1).\n\nSteps 2-4: I checked the substitutions t'p_{-a}(-u)=p_{-a}(-uq)t', with χ_{-a}(t')=q and χ_a(t')=q^{-1}, and the torus pullback d^{⟨m,a^∨⟩}χ_{s_a m}(t), which is a unit on D(d). All coordinates are integral after inverting d.\n\nStep 5: positive systems and their intersections with ±Φ^+ are closed and contain no opposite pair. The closed-root-set clause over Q then forces the forbidden coordinates to vanish in Q[z], hence in Z[z], in both directions. This is an equality of closed subschemes.\n\nStep 6: d=1 on C_P. n_a carries U_P onto U_{s_aP}, the open immersion c is a monomorphism, and the coordinate ring is torsion-free, so F_a sends C_P into C_{s_aP}.\n\nStep 7: n_a^4=1 gives F^4=id integrally, so F^3 is a two-sided inverse.\n\nEdge cases checked: rank 0, SL2 with P={a} and P={-a}, characteristic 2 and nonreduced bases.\n\nNo duplicates: lem-sfb-simple-root-weyl-transport, lem-sfb-integral-chevalley-weyl-atlas and lem-sfb-rank-two-root-coordinate-classification state different results, and the remaining hits are nodes that cite this item.\n\nBatch 5: all three flagged citations (lem-sfb-split-root-subgroup-weyl-calculus, lem-sfb-relative-root-rank-one-centralizer and lem-sfb-relative-rank-one-local-matrix-model) are already in the closure of the base stmt_dep lem-sfb-rational-chevalley-one-sign-integrality, so the delivery adds nothing to the batch-5 closure. The trf nodes they reach are generic Mathlib leaves, not steps of the trace formula or Poincare duality: lem-trf-fg-torsionfree-group-free, lem-trf-smooth-fpqc-base-descent (Stacks 02VL) and lem-trf-fppf-covering-is-fpqc (Stacks 022C). Accepted. No tool_uses, no fixes."
+ }
+}

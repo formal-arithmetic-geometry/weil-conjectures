@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-identity-quotient-roos-normalization",
+ "kind": "statement",
+ "title": "Identity scalar normalization of the specified quotient Roos comparison",
+ "statement": "Let R be a sheaf of commutative rings on an essentially coefficient-small site, with module sheafification and the unbounded derived module category. Let F be a cochain model of extension along the identity of R, c : F.E ≅ id any ordinary natural identification, t a global section and P any unbounded cochain complex. Let d be specified quotient-tower product and two-coordinate Roos comparison data with arithmetic exponent one. Suppose its finite-stage isomorphisms carry the images of the canonical quotient maps to the canonical quotient maps of F.E(P). Then its actual cone map is c on the source Roos complex, followed by the Roos map of c inverse on P and by its specified arithmetic map. This is an equality before localization. No injectivity of t, K-flatness of P, or exactness of products is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok; identity specialization of the product/cone comparison. The finite-stage calculation uses Modules on Sites, Tag 03EP (tensor preserves cokernels)."
+ },
+ "stmt_deps": [
+  "lem-pur-finite-free-completion-exchange"
+ ],
+ "proof": [
+  {
+   "text": "In each degree the sole nonzero summand of the tensor with a degree-zero single complex has epic inclusion, by total-tensor extensionality and vanishing of all other summands. Tensor preserves colimits and hence epimorphisms, so tensoring the cokernel projection is epic. Composing with the inverse unitor proves that the canonical quotient map is degreewise epic, hence epic as a cochain map. The natural identification c makes its scalar-extension image epic. Cancel that image in the prescribed quotient equation. Naturality of c and the already proved private quotient_natural lemma of PrincipalQuotientCompletionExists identify each finite-stage comparison with c followed by the quotient tower map of c inverse. Transport the exponent-one index along 1*(n+1)-1=n.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-principal-quotient-completion-model",
+    "lem-pur-principal-quotient-completion-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the product comparison with each projection. Its specification and the finite-stage formula from the first step give c on the product followed by the product map of the quotient tower map of c inverse. Product extensionality proves this equality.",
+   "uses": [
+    "lem-pur-finite-free-completion-exchange"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At exponent one the weighted block sum equals selection: its only term is the identity transition. Keep the index transport expressed by selection. Postcompose the proposed cone equality with the signed Roos coordinate isomorphism, then with each biproduct projection. The cone formula, the product equality, functoriality of the Roos coordinates, and naturality of c give the two equalities. Biproduct extensionality in every degree proves the cochain equality.",
+   "uses": [
+    "lem-pur-finite-free-completion-exchange"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pur-principal-quotient-completion-model",
+  "lem-pur-finite-free-completion-exchange",
+  "lem-pur-principal-quotient-completion-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 product/cone coordinates; Modules on Sites Tag 03EP cokernel preservation. F2 implements quotient epi cancellation, reusing the proved quotient naturality lemma from PrincipalQuotientCompletionExists."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An identity scalar extension natural isomorphism determines the map on a quotient tower by cancellation of epimorphic quotient maps, and the two Roos product coordinates",
+   "results": "ModuleCat.extendScalarsId, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-23",
+   "verdict": "No match for the specified quotient/Roos comparison. The degreewise epimorphism criterion and ordinary scalar identity are reusable tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"epi_of_epi_f\"",
+   "results": "CategoryTheory.epi_of_epi_fac, HomologicalComplex.epi_of_epi_f",
+   "date": "2026-10-23",
+   "verdict": "No match for the specified quotient/Roos comparison. The degreewise epimorphism criterion and ordinary scalar identity are reusable tools."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|quotientMap_degree|scalarRoosCoordinates",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "No match for the specified quotient/Roos comparison. The degreewise epimorphism criterion and ordinary scalar identity are reusable tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural identification of identity scalar extension determines quotient tower maps by epimorphism cancellation and gives identity on both Roos product coordinates",
+   "results": "ModuleCat.extendScalarsId_hom_app_one_tmul; ModuleCat.ExtendScalars.map'_id; ModuleCat.extendScalarsId; LinearMap.extendScalarsOfIsLocalization_apply; ModuleCat.extendScalars_comp_id; ModuleCat.extendScalars_id_comp; LinearMap.coeIsScalarTower; Algebra.Extension.self",
+   "date": "2026-10-23",
+   "verdict": "The ordinary scalar identity is available and used in the main proof. No result states the specified quotient-tower and actual two-coordinate Roos normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteFreeCompletionExchangeCoherence",
+  "date": "2026-10-23",
+  "group": "S1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-free-completion-exchange-coherence",
+   "place": "Identity coefficient law: identify the prescribed quotient and both Roos coordinate maps under scalar multiplication.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.IdentityQuotientRoosNormalization",
+  "file": "lean/Sheaf/Algebra/Homology/IdentityQuotientRoosNormalization.lean",
+  "declaration": "CategoryTheory.PrincipalQuotientCompletion.identityQuotientRoosNormalization",
+  "statement": "theorem identityQuotientRoosNormalization\n    (F : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, w, w} (𝟙 R))\n    (c : F.E ≅ 𝟭 _)\n    (t : (SheafOfModules.unit\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections)\n    (P : CochainComplex (ringedSiteModules.{r}\n      (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ℤ)\n    (d : RepresentativeRoosComparison F.E (sourceTower t P) (targetTower F t P) 1)\n    (hq : ∀ n : ℕ, (extendedComplex F).map (quotientMap R t P n) ≫\n      d.β.hom.app (op n) = quotientMap R t ((extendedComplex F).obj P) (1 * (n + 1) - 1)) :\n    let cc : extendedComplex F ≅ 𝟭 _ := NatIso.mapHomologicalComplex c (.up ℤ) ≪≫\n      Functor.mapHomologicalComplexIdIso _ _\n    d.δ.hom = cc.hom.app ((quotientRoos R t).obj P) ≫\n      (quotientRoos R t).map (cc.inv.app P) ≫ d.a",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261024T020146-L-2563672",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261024T185138-L-3433229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

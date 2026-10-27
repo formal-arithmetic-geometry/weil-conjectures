@@ -1,0 +1,422 @@
+{
+ "id": "lem-sfb-space-noetherian-ample-neighbourhood",
+ "kind": "statement",
+ "title": "Ampleness near a schematic fibre over a Noetherian base",
+ "statement": "Let $T$ be a Noetherian scheme [def-pc-scheme], meaning a scheme with a finite affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Let $f:X\\to T$ be a proper morphism of algebraic spaces [def-trf-algebraic-space], and let $L$ be a line module on $X$. Here proper means separated, of finite type and universally closed; separated means that the diagonal is a closed immersion, finite type means quasi-compact and locally of finite type on etale scheme charts, and universally closed means closed on underlying spaces after every base change. A line module on an algebraic space is an $\\mathcal O$-module on its small etale site locally isomorphic to $\\mathcal O$ [def-trf-algebraic-space]. For a morphism $a:Z\\to W$, write $a^*M=\\mathcal O_Z\\otimes_{a^{-1}\\mathcal O_W}a^{-1}M$ using its canonical ringed etale topoi [lem-trf-space-enlarged-etale-ringed-site-model]; on schemes use the corresponding ordinary invertible module [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, def-sc-invertible-module]. For a line module $N$ on a space $Z$ over a scheme $B$, relatively ample means that $Z$ is a scheme and $N$ is ample on the inverse image of every affine open of $B$ [def-weil-pbc-ample-invertible-module]. Let $t\\in T$, put $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$, and suppose $X_t$ is a scheme and $L_t$ is ample. There is an open neighbourhood $V\\subseteq T$ of $t$ such that $X_V$ is a scheme and $L_V$ is relatively ample over $V$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0D3A (lemma-ample-in-neighbourhood); relative ampleness is Definition 0D31 and its scheme-base sanity check 0D32."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-sc-invertible-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sfb-space-morphism-properties",
+  "def-trf-space-line-module-proj-input"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-trf-space-enlarged-etale-ringed-site-model] for the tensor pullbacks. Pulling back a trivialization of a line and its inverse shows that its pullback and its tensor powers remain lines; multiplying elementary tensors identifies pullback of a tensor power with the power of the pullback. On schemes [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies these lines, their sections and their pullbacks with the ordinary invertible modules. If $X_t$ is empty, properness makes $f(|X|)$ closed, and $t$ is outside it. Choose an affine neighbourhood $V$ in its complement by [lem-weil-pbc-affine-opens-basis]. Then $X_V$ is the empty scheme, and ampleness on every affine inverse image is vacuous by [def-weil-pbc-ample-invertible-module]. Hence assume $X_t$ nonempty.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D3A (lemma-ample-in-neighbourhood), preliminary line-module interpretation and empty-fibre case"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-ample-fibre-section-lifting] to obtain a bound $a$. The scheme $X_t$ is proper over $\\kappa(t)$ by [lem-sfb-space-proper-base-change], hence locally of finite type. Apply [lem-trf-affine-eventual-power-immersion] to its ample line $L_t$. Choose $d\\geq\\max(a,1)$ large enough to obtain an immersion $j:X_t\\to\\mathbf P^r_{\\kappa(t)}$ and $j^*\\mathcal O(1)\\cong L_t^{\\otimes d}$. Projective space is separated by [lem-trf-projective-bundle-quotient-geometry]. Thus $j$ is proper by [lem-weil-pbc-proper-over-separated] and a closed immersion by [lem-weil-pbc-proper-immersion-closed]. The canonical isomorphism $\\theta$ of [lem-trf-free-projective-bundle-base-change-space] between this relative-Proj projective space and $\\mathbf P(\\{0,\\ldots,r\\};\\kappa(t))$ lies over the base and is, on the affine chart, the Proj comparison fixing every $T_i$; it therefore matches the standard opens $D_+(T_i)$, the coordinates $T_l/T_i$ and the twists glued from them, so the base-change-model statements below apply. Pull back the standard coordinates using $j^*\\mathcal O(1)\\cong L_t^{\\otimes d}$ to get sections $v_0,\\ldots,v_r$ generating $L_t^{\\otimes d}$: each coordinate trivializes on its chart and these charts cover, by [lem-weil-pbc-projective-space-standard-charts]. Their associated morphism is $j$ by the quotient classification in [lem-trf-projective-bundle-quotient-geometry].",
+   "uses": [
+    "lem-sfb-space-ample-fibre-section-lifting",
+    "lem-sfb-space-proper-base-change",
+    "lem-trf-affine-eventual-power-immersion",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-trf-free-projective-bundle-base-change-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D3A (lemma-ample-in-neighbourhood), first paragraph, choice of a sufficiently high projective embedding on the fibre"
+   }
+  },
+  {
+   "text": "For each of the finitely many $v_i$, apply [lem-sfb-space-ample-fibre-section-lifting] at this same $d$. Intersect their neighbourhoods and choose an affine open neighbourhood $U$ of $t$ inside the intersection by [lem-weil-pbc-affine-opens-basis]. Restrict all lifts to get $s_i\\in\\Gamma(X_U,L^{\\otimes d})$ with fibre tuple $(v_i)$. Replace $T$ by $U$ and $X$ by $X_U$. Properness persists by [lem-sfb-space-proper-base-change]. The Noetherian hypothesis was used before this replacement; no new application of the lifting lemma is needed.",
+   "uses": [
+    "lem-sfb-space-ample-fibre-section-lifting",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D3A (lemma-ample-in-neighbourhood), first paragraph, simultaneous lifting of the finitely many coordinates"
+   }
+  },
+  {
+   "text": "Put $M=L^{\\otimes d}$. The locus $G$ where the $s_i$ generate $M$ is open: on a scheme etale chart trivializing $M$, write $s_i=a_i e$; its inverse image is $\\bigcup_iD(a_i)$. These opens agree under change of trivialization and pullback; [lem-trf-etale-open-chart-morphism-descent] gives the corresponding open subspace of $X$. The fibre lies in $G$ since the $v_i$ generate. The complement $C=|X|\\setminus|G|$ is closed, so $f(C)$ is closed and misses $t$. Replace $T$ by an affine neighbourhood of $t$ inside $T\\setminus f(C)$ and restrict $X$. Now the $s_i$ generate $M$ everywhere. Properness is preserved by [lem-sfb-space-proper-base-change].",
+   "uses": [
+    "lem-trf-etale-open-chart-morphism-descent",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D3A (lemma-ample-in-neighbourhood), first paragraph, deleting the proper image of the nongeneration locus"
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $p:A\\to X$ as in [def-trf-algebraic-space]. On $A$, [lem-trf-projective-bundle-quotient-geometry] applied to the quotient $\\mathcal O_A^{r+1}\\twoheadrightarrow p^*M$ constructs a $T$-map $A\\to P=\\mathbf P^r_T$ and a quotient-compatible twist isomorphism. Naturality of that statement makes the two maps equal on the scheme $A\\times_XA$. Apply [lem-trf-etale-open-chart-morphism-descent] with the whole atlas as its invariant open to descend a unique $\\varphi:X\\to P$. The local twist isomorphisms also agree on $A\\times_XA$: each sends the same pulled-back coordinate sections to the $s_i$, and those sections generate. They therefore give an isomorphism $\\varphi^*\\mathcal O_P(1)\\cong M$ of module sheaves on the small etale site. Explicitly a local section is sent by the local maps after pulling back to the atlas, and their equality on overlaps gives its unique glued image; the inverses glue in the same way. The same construction on any scheme test gives the quotient morphism there, by the atlas descent's test-scheme clause. In particular the fibre map is $j$, and, once $X$ is a scheme, the descended map is its ordinary quotient morphism. This supplies the projective-space construction whose details the source omits.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-etale-open-chart-morphism-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D3A (lemma-ample-in-neighbourhood), first paragraph, omitted algebraic-space construction of phi and its hyperplane pullback"
+   }
+  },
+  {
+   "text": "The map $q:P\\to T$ is proper by [lemma-nagata-projective-space-base-change-proper], transported along the isomorphism $\\theta:P\\cong\\mathbf P(\\{0,\\ldots,r\\};T)$ over $T$ of [lem-trf-free-projective-bundle-base-change-space]; hence $q$ is separated. The graph $\\Gamma_\\varphi:X\\to X\\times_TP$ is the pullback of $\\Delta_q:P\\to P\\times_TP$ by $(\\varphi\\operatorname{pr}_X,\\operatorname{pr}_P)$. It is therefore a closed immersion on every scheme test: [lem-weil-pbc-closed-immersion-base-change] applies to that test and $\\Delta_q$. By [lem-sfb-space-closed-subspace-proper] the graph is proper. The projection $X\\times_TP\\to P$ is proper by [lem-sfb-space-proper-base-change]. Their composite $\\varphi$ is proper by [lem-sfb-space-proper-composition].",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-trf-free-projective-bundle-base-change-space",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D3A (lemma-ample-in-neighbourhood), last paragraph, properness of phi via its closed graph"
+   }
+  },
+  {
+   "text": "Let $Q\\subseteq|X|$ be the quasi-finite locus of $\\varphi$; it is open by [lem-sfb-space-quasifinite-locus-open]. For every point $z\\in|P_t|$, the fibre of $\\varphi$ over $z$ is the base change of the closed immersion $j$ to $\\operatorname{Spec}\\kappa(z)$, hence is a closed subscheme of that field spectrum by [lem-weil-pbc-closed-immersion-base-change]. It is empty or that one-point scheme, because a field has only the zero and unit ideals. By [lem-sfb-space-finite-fibre-quasifinite-criterion], all points of $X$ over $z$ lie in $Q$. Thus the closed set $\\varphi(|X|\\setminus Q)$ misses the entire $|P_t|$. Write $W=P\\setminus\\varphi(|X|\\setminus Q)$. On $W$, $\\varphi$ is proper by [lem-sfb-space-proper-base-change] and locally quasi-finite. The explicit assertion in [lem-sfb-stack-separation-composition], that a proper locally quasi-finite algebraic space over a scheme is finite over it and a scheme, applies to $\\varphi^{-1}W\\to W$. Consequently this restriction is finite and its source is a scheme.",
+   "uses": [
+    "lem-sfb-space-quasifinite-locus-open",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-space-finite-fibre-quasifinite-criterion",
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-stack-separation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D3A (lemma-ample-in-neighbourhood), last paragraph, finite over an open containing the entire projective-space fibre"
+   }
+  },
+  {
+   "text": "Since $q$ is proper, $q(P\\setminus W)$ is closed; it does not contain $t$ because $P_t\\subseteq W$. Choose an affine open $V\\ni t$ inside $T\\setminus q(P\\setminus W)$ by [lem-weil-pbc-affine-opens-basis]. Then $P_V\\subseteq W$. The preimage of this open under the finite scheme morphism $\\varphi^{-1}W\\to W$ is $X_V$, and the restriction $\\varphi_V:X_V\\to P_V$ is finite: on an affine open of $P_V$ it is the same finite ring map as before, using [def-weil-finite-integral-morphism]. In particular $X_V$ is a scheme. Step 5 on the scheme test $X_V\\to X$ identifies $\\varphi_V$ with the morphism given by the restricted $s_i$ and identifies its hyperplane pullback with $L^{\\otimes d}|_{X_V}$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D3A (lemma-ample-in-neighbourhood), last paragraph, shrinking the base by closedness of projective space"
+   }
+  },
+  {
+   "text": "Compose with the isomorphism $\\theta$ over $V$ of [lem-trf-free-projective-bundle-base-change-space], which on affine charts fixes every $T_i$ and hence matches $D_+(T_i)$ and the glued twists $\\mathcal O(1)$ with their coordinate sections. By the quotient compatibility of step 5, $\\theta\\varphi_V$ pulls $\\mathcal O(1)$ back to $L^{\\otimes d}|_{X_V}$ with $T_i\\mapsto s_i$, so it is the morphism $\\varphi_{(L^{\\otimes d},(s_i))}$ of [def-weil-pbc-morphism-to-projective-space-by-sections] by the uniqueness stated there. By [lem-weil-pbc-projective-morphism-chart-preimage], $(X_V)_{s_i}=\\varphi_V^{-1}(D_+(T_i)_V)$. The target charts are affine because $V$ is affine, by [lem-weil-pbc-projective-space-standard-charts]. Finiteness makes their inverse images affine by [def-weil-finite-integral-morphism]. They cover $X_V$, and each $s_i$ is a section of the positive power $L^{\\otimes d}$. Also $X_V$ is quasi-compact: its proper map to the affine, hence quasi-compact $V$ is quasi-compact, by [lem-sfb-space-proper-base-change] and [lem-weil-pbc-affine-scheme-qcqs]. These facts are exactly ampleness of $L_V$ in [def-weil-pbc-ample-invertible-module]; no extraction of a root of an ample power is needed. For every affine open $B\\subseteq V$, $B\\to V$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine], so $X_B\\to X_V$ is affine by [lem-weil-pbc-affine-morphism-permanence]. The affine pullback theorem [lem-weil-pbc-pullback-ample-invertible] gives ampleness of $L_B$. This is precisely the relative-ampleness conclusion.",
+   "uses": [
+    "lem-trf-free-projective-bundle-base-change-space",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-morphism-chart-preimage",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-proper-base-change",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-pullback-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D3A (lemma-ample-in-neighbourhood), last paragraph, finite affine chart pullbacks prove ampleness directly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-space-ample-fibre-section-lifting",
+  "lem-sfb-space-proper-base-change",
+  "lem-trf-affine-eventual-power-immersion",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-trf-etale-open-chart-morphism-descent",
+  "def-trf-algebraic-space",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-proper-composition",
+  "lem-sfb-space-quasifinite-locus-open",
+  "lem-sfb-space-finite-fibre-quasifinite-criterion",
+  "lem-sfb-stack-separation-composition",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-trf-free-projective-bundle-base-change-space",
+  "def-weil-pbc-morphism-to-projective-space-by-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0D3A (lemma-ample-in-neighbourhood), with omitted construction written via existing quotient geometry and etale descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper algebraic space over a Noetherian scheme an invertible module ample on a schematic fibre becomes ample on a scheme over an open neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : {X : AlgebraicGeometry.Scheme} → X.Opens → Prop) {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  (∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (∀ (x : ↥U), ∃ V, ∃ (_ : ↑x ∈ V), ∃ x, P V) → P U) →\\n    (∀ (X Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion \", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property of ring homomorphisms that is stable under composition with localization and preserved by localization. Let $x \\\\in X$ be a point.\\\\n\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op U))], TopologicalSpace.NoetherianSpace ↥↑U\", \"doc\": \"If $ U $ is an affine open subset of a scheme $ X $ and the ring of global sections $ \\\\Gamma(U) $ is Noetherian, then the underlying topological space of $ U $ is a Noetherian topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample line bundle on a fibre of a proper algebraic space spreads near that fibre over a Noetherian base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] (y : ↥Y),\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X] {f : Z ⟶ X}\\n  [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every open immersion $ f: Z \\to X $ into a locally Noetherian scheme $ X $ is a quasi-compact morphism. That is, if $ X $ admits an open cover by Noetherian schemes and $ f $ is an open immersion (a mo\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [TopologicalSpace.NoetherianSpace ↥X] (f : X ⟶ Y), AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Z} {g : Y ⟶ Z} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : Y.Opens},\\n      IsCompact ↑V →\\n        ∀ {W : Z.Opens},\\n          AlgebraicGeometry.IsAffineOpen W →\\n            U ≤ (TopologicalSpace.Opens.map f.base).obj W →\\n              V\", \"doc\": \"Given schemes $X, Y, Z$ with morphisms $f : X \\\\to Z$ and $g : Y \\\\to Z$, if $U \\\\subseteq X$ is an affine open subset, $V \\\\subseteq Y$ is a compact subset, $W \\\\subseteq Z$ is an affine open subset, and \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Ample\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*(neigh|fibre|fiber)|IsAmple",
+   "results": "[grep] OK 0 hit(s)\nSearch directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper algebraic space over a Noetherian base with an ample invertible sheaf on one schematic fibre is a scheme with relatively ample sheaf near that fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsAffine X] [IsNoetherianRing Γ(X, ⊤)] : NoetherianSpace X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper algebraic space with an ample line bundle on a schematic fibre is a scheme with relatively ample line bundle over a neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ampleness spreads from a fibre over a Noetherian base for proper algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Ample\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*(neigh|fibre|fiber)|IsAmple",
+   "results": "[grep] OK 0 hit(s)\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ample fibre of proper algebraic space spreads to an open neighbourhood of a Noetherian base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x] {y : Y} (e : sX x = sY y)\\n  (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk x)\\n  (h : sY.stalkMap y ≫ φ = S.presheaf.stalkSpecializes (Inseparable.of_eq e).specializes ≫ sX.stalkMap x) :\\n  ∃ (U : X.Opens) (hxU : x ∈ U) (f : U.toScheme ⟶ Y),\\n    Spe\", \"doc\": \"Let $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ be morphisms of schemes. Let $x \\\\in X$ and $y \\\\in Y$ be points such that $s_X(x) = s_Y(y)$. Let $\\\\phi: \\\\mathcal{O}_{Y,y} \\\\to \\\\mathcal{O}_{X,x}$ be a homomorphism \"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x] (φ : Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : φ ≫ sY = X.fromSpecStalk x ≫ sX) :\\n  ∃ (U : X.Opens) (hxU : x ∈ U) (f : U.toScheme ⟶ Y), φ = U.fromSpecStalkOfMem x hxU ≫ f ∧ f ≫ sY = U.ι ≫ sX\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(U : X.Opens) (hU : IsAffineOpen U) [IsNoetherianRing Γ(X, U)] : NoetherianSpace U\", \"doc\": \"If $ U $ is an affine open subset of a scheme $ X $ and the ring of global sections $ \\\\Gamma(U) $ is Noetherian, then the underlying topological space of $ U $ is a Noetherian topological space.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \"(hPa : StableUnderCompositionWithLocalizationAwayTarget P) (hPl : LocalizationAwayPreserves P) (x : X)\\n  (U₁ : Y.affineOpens) (U₂ : Y.affineOpens) (V₁ : X.affineOpens) (V₂ : X.affineOpens) (hx₁ : x ∈ V₁.1) (hx₂ : x ∈ V₂.1)\\n  (e₂ : V₂.1 ≤ f ⁻¹ᵁ U₂.1) (h₂ : P (f.appLE U₂ V₂ e₂).hom) (hfx₁ : f x ∈ U₁.1\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property of ring homomorphisms that is stable under composition with localization and preserved by localization. Let $x \\\\in X$ be a point.\\\\n\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X\", \"doc\": \"If $ X $ is an open subscheme of a locally Noetherian scheme $ Y $, then $ X $ is locally Noetherian. This follows because an open immersion $ f: X \\\\to Y $ ensures $ X $ inherits the local Noetherian \"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-ample-locus",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3A: the Noetherian stage of the ampleness spreading argument, after schematic and ample fibre descent.",
+   "via": [
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-noetherian-ample-neighbourhood",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0D3A, extracted only the genuinely missing algebraic-space high-power section-lifting input (0D39), and reused existing projective quotient geometry, etale morphism descent and proper locally quasi-finite representability. Wrote the omitted construction and hyperplane comparison explicitly, handled empty fibres and checked relative ampleness on every affine open. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3A: the Noetherian stage of the ampleness spreading argument, after schematic and ample fibre descent. Supports the existing alteration/moduli prerequisite chain; current latest direct-image proof (3) uses proper direct-image stability as a black box. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic Enlarged etale ringed-site models of algebraic spaces used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic The affine opens of a scheme form a basis of its topology (Stacks 01IT) used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-trf-affine-eventual-power-immersion",
+    "why": "Generic All sufficiently large ample powers embed over an affine base used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic Projective bundles of arbitrary quasi-coherent modules classify invertible quotients used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Generic A morphism from a proper scheme to a separated scheme over the same base is proper used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-immersion-closed",
+    "why": "Generic Proper immersions are closed immersions used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic Standard charts and coordinate sections of projective space over a scheme used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-trf-etale-open-chart-morphism-descent",
+    "why": "Generic Descent of invariant opens together with compatible morphisms along an etale atlas used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic Projective space is proper over its base used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic Base change of a closed immersion is a closed immersion used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-morphism-chart-preimage",
+    "why": "Generic Preimage of a standard chart under a morphism to projective space given by sections used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic Affine schemes are quasi-compact and quasi-separated used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic A morphism between affine schemes is affine (Stacks 01SH) used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic Base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Generic Pullback of an ample invertible module used exactly through its statement in the Stacks 0D3A argument; no same-unit node supplies this scheme or descent tool."
+   },
+   {
+    "node": "lem-trf-free-projective-bundle-base-change-space",
+    "why": "Generic comparison of the relative-Proj projective space with the base-change projective space P({0..r};S), matching standard charts and coordinates; needed to apply the base-change-model projective-space nodes (standard charts, properness, chart preimages) to the quotient-classification model used in the Stacks 0D3A argument. Added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-affine-eventual-power-immersion",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-trf-etale-open-chart-morphism-descent",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-trf-free-projective-bundle-base-change-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-764d47131",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-764d47131 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-divisors 0D3A (lemma-ample-in-neighbourhood) and 0D39 (lemma-ample-on-fibre) in full, with 0D31/0D32. The item statement is unchanged and matches the source. The proof is now 9 steps: the fibre embedding; lifting finitely many sections; shrinking to the generation locus; building φ by étale descent (the details Stacks omits); properness of φ via the graph; quasi-finiteness near P_t, then finite and schematic via the proper locally-quasi-finite clause of lem-sfb-stack-separation-composition (step 8 of that node proves it, via 03XX and 02LS); shrinking the base; ampleness on the charts plus affine pullback for relative ampleness. The empty fibre is handled. New node lem-sfb-space-ample-fibre-section-lifting is 0D39 with F=O_X written with stalk representatives: true, statement-only, self-contained, five searches recorded. It is not a duplicate of the scheme node lem-trf-ample-fibre-section-lifting (0D2M), because X is only an algebraic space until step 8, and it is strictly smaller than the item. One fault, C1/C4: steps 2, 6 and 9 applied nodes about the base-change model P({0..r};T) (standard charts, lemma-nagata-projective-space-base-change-proper, chart preimages for φ_(L,(s_i))) to the relative-Proj model produced by the quotient-geometry and eventual-immersion nodes, with no identification. FIX: those steps now cite the existing lem-trf-free-projective-bundle-base-change-space (θ, which fixes the T_i on affine charts). Step 9 now identifies θφ_V with φ_(L^d,(s_i)) by the uniqueness in def-weil-pbc-morphism-to-projective-space-by-sections. Both nodes were added to uses/proof_deps and the comparison node to tool_uses. No cycle. Batch-5: every listed trf/space citation is generic algebraic-space or projective geometry (025Y, 03G0, 03DX, 01VS, 01OB, 02WU, 04WP, 0ACK, 050K), so all are kept. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceNoetherianAmpleNeighbourhood",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_relativelyAmple_neighbourhood_of_noetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceNoetherianAmpleNeighbourhood.lean",
+  "statement": "theorem exists_relativelyAmple_neighbourhood_of_noetherian (T : Scheme.{u}) [IsNoetherian T] (X : AlgebraicSpace T) (f : X ⟶ schemeSpace (Over.mk (𝟙 T))) (hf : MapIsProper f) (L : X.Modules) (hL : X.IsLineModule L) (t : T) (hfibre : ∃ (Z : Over T) (p : Z ⟶ Over.mk (T.fromSpecResidueField t)) (q : yoneda.obj Z ⟶ X.obj.obj), IsPullback q (yoneda.map p) f.hom.hom (yoneda.map (Over.homMk (T.fromSpecResidueField t) (Category.comp_id _))) ∧ Scheme.Modules.IsAmple Z.left ((lineTestFamily X L hL).module (CostructuredArrow.mk q))) : ∃ V : T.Opens, t ∈ V ∧ ∃ (Z : Over T) (p : Z ⟶ Over.mk V.ι) (q : yoneda.obj Z ⟶ X.obj.obj), IsPullback q (yoneda.map p) f.hom.hom (yoneda.map (Over.homMk V.ι (Category.comp_id _))) ∧ ∀ W : V.toScheme.Opens, IsAffineOpen W → @Scheme.Modules.IsAmple (p.left ⁻¹ᵁ W).toScheme ((Scheme.Modules.tensorPullback (p.left ⁻¹ᵁ W).ι).obj ((lineTestFamily X L hL).module (CostructuredArrow.mk q))) ((Scheme.Modules.invertible_pullback_tensor (p.left ⁻¹ᵁ W).ι).1 ((lineTestFamily X L hL).module (CostructuredArrow.mk q))).2",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Scheme pullback squares express the schematic fibre and open restriction. Uses the existing canonical lineTestFamily, determined by its descent universal property, for the ordinary invertible modules. Added the already landed morphism-property and scheme-test line-family definition nodes to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e96084c",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Statement matches Stacks 0D3A/0D31/0D32 and the unchanged node clause by clause: IsNoetherian T; f to the terminal schemeSpace T; MapIsProper = separated (closed-immersion diagonal) ∧ finite type ∧ universally closed; IsLineModule L; schematic fibre via a presheaf IsPullback over Spec κ(t) with both projections fixed; ampleness of L_t via the canonical lineTestFamily (unique up to the étale-compatible iso). Conclusion: an open V ∋ t, X_V represented, and IsAmple of the tensorPullback on p⁻¹W for every affine W ⊆ V, with nothing added. Edge cases (empty fibre, empty T, non-closed t, empty W, single universe u) OK. The 2 added stmt_deps are landed definition nodes and the declarations are in their lean.declarations; the other 9 dependency records are identical to side-live; the live item has no lean record yet; lean.statement is verbatim in the file; the single theorem's proof is sorry; docstrings and the 9 proof steps are present; the report has both sections. Non-blocking note: invertible_pullback_tensor (theorem node lem-weil-pbc-invertible-pullback-tensor) is used only as the Prop instance witness for IsAmple, the same pattern as the landed lem-sc-ample-on-reduction-noetherian. No compile (no FIX)."
+ }
+}

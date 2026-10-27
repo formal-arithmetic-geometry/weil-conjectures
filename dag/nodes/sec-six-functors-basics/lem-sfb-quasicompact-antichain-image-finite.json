@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-quasicompact-antichain-image-finite",
+ "kind": "statement",
+ "title": "A quasi-compact scheme has finite specialization-antichain image in a locally Noetherian scheme",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], let $X$ be quasi-compact (every open covering of $|X|$ has a finite subcover), and let $Y$ be locally Noetherian [pqf-def-locnoeth]. Let $h:X\\to Y$ be any morphism. Suppose that for $y,y^{\\prime}\\in |h|(|X|)$, the inclusion $y^{\\prime}\\in\\overline{\\{y\\}}$ implies $y=y^{\\prime}$, where closure is in the Zariski topology of $Y$. Then the image $|h|(|X|)$ is a finite set. No finite-type or Noetherian hypothesis on $X$, and no separation or quasi-compactness hypothesis on $Y$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent-formulated consequence of Tag 01RL (lemma-quasi-compact-dominant), applied on Noetherian affine target charts to the affine kernel closed image; finite irreducible components: properties.tex Tag 0BA8 (lemma-Noetherian-irreducible-components). Neither tag alone states this finite-image criterion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open covering $Y=\\bigcup_a V_a$, $V_a=\\operatorname{Spec}R_a$, with every $R_a$ Noetherian, using [pqf-def-locnoeth]. For each $x\\in X$ choose $a$ with $h(x)\\in V_a$ and, by [lem-weil-pbc-affine-opens-basis], an affine open $U_x$ with $x\\in U_x\\subseteq h^{-1}(V_a)$. These opens cover $X$, so quasi-compactness gives finitely many $U_1,\\ldots,U_n$ covering $X$, each with a chosen $V_{a(i)}$. Write $U_i=\\operatorname{Spec}B_i$ and $R_i=R_{a(i)}$. By [lem-weil-pbc-affine-opens-induced-ring-map-spec-square], the restriction $U_i\\to V_{a(i)}$ is induced by its section-ring map $\\varphi_i:R_i\\to B_i$ and sends a prime $\\mathfrak q$ to $\\varphi_i^{-1}(\\mathfrak q)$. It suffices to prove that each such image $E_i$ is finite, since $h(X)=\\bigcup_{i=1}^n E_i$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (lemma-basis-affine-opens), 01I1 (lemma-morphism-into-affine); finite subcover from the stated quasi-compactness hypothesis."
+   }
+  },
+  {
+   "text": "Fix $i$, abbreviate $R=R_i$, $B=B_i$, $\\varphi=\\varphi_i$, and put $K=\\ker\\varphi$, $A=R/K$, with quotient map $\\pi:R\\to A$. The map $\\psi:A\\to B$, $\\psi(r+K)=\\varphi(r)$, is well defined and injective: equality of the images means $r-r^{\\prime}\\in K$. For every prime $\\mathfrak p\\supseteq K$, the subset $\\mathfrak p/K=\\{r+K:r\\in\\mathfrak p\\}$ is a proper prime ideal of $A$, since products and membership lift along $\\pi$, and $\\pi^{-1}(\\mathfrak p/K)=\\mathfrak p$. Conversely $\\pi^{-1}(\\mathfrak b)$ is prime containing $K$ for every prime $\\mathfrak b$ of $A$, and $\\pi(\\pi^{-1}(\\mathfrak b))=\\mathfrak b$ by surjectivity. These inverse operations preserve inclusion, so a prime minimal over $K$ corresponds to a minimal prime of $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FL (lemma-image-dense-generic-points), proof: quotient by the kernel; the elementary prime-ideal correspondence is written out."
+   }
+  },
+  {
+   "text": "Let $M$ be the set of prime ideals of $R$ minimal over $K$. This set is finite by [lem-sc-finite-minimal-primes-over-ideal], since $R$ is Noetherian. For each $\\mathfrak m\\in M$, step 2 says $\\mathfrak m/K$ is a minimal prime of $A$. Apply [lem-weil-pbc-injective-minimal-prime-lift] to the injective map $\\psi:A\\to B$. There is a prime $\\mathfrak q$ of $B$ with $\\psi^{-1}(\\mathfrak q)=\\mathfrak m/K$. Taking inverse images under $\\pi$ gives $\\varphi^{-1}(\\mathfrak q)=\\pi^{-1}(\\psi^{-1}(\\mathfrak q))=\\mathfrak m$. Thus every point of $M$ belongs to $E_i$.",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-weil-pbc-injective-minimal-prime-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FK (lemma-injective-minimal-primes-in-image); Tag 00FR (lemma-Noetherian-irreducible-components), in its arbitrary-ideal form recorded by the cited node."
+   }
+  },
+  {
+   "text": "For any $\\mathfrak p\\in E_i$, contraction shows $K\\subseteq\\mathfrak p$. Apply [lem-weil-pbc-prime-contains-minimal-prime] to choose $\\mathfrak m\\in M$ with $\\mathfrak m\\subseteq\\mathfrak p$. Step 3 places $\\mathfrak m$ in $E_i$ as well. In the Zariski topology [def-weil-affine-spectrum], $\\mathfrak p\\in\\overline{\\{\\mathfrak m\\}}$: every closed set $V(J)$ containing $\\mathfrak m$ has $J\\subseteq\\mathfrak m\\subseteq\\mathfrak p$, so contains $\\mathfrak p$. This specialization in $V_{a(i)}$ is also a specialization in $Y$, because for every closed $F\\subseteq Y$ containing $\\mathfrak m$, its intersection with $V_{a(i)}$ is closed and contains $\\mathfrak p$. Both points lie in $h(X)$, so the hypothesis gives $\\mathfrak p=\\mathfrak m$. Consequently $E_i=M$ as subsets of this affine chart, hence $E_i$ is finite.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), part (4); specialization read directly from the closed sets V(J)."
+   }
+  },
+  {
+   "text": "The union $h(X)=\\bigcup_{i=1}^n E_i$ of these finitely many finite images is finite. If $X$ is empty, take the empty finite subcover and the image is empty. If on a patch $K=R$, then $B$ is the zero ring, so $\\operatorname{Spec}B$ and $E_i$ are empty; steps 3 and 4 quantify over empty sets and remain valid.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Finite-union conclusion of the agent argument; zero-ring case from the definition of prime ideal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-injective-minimal-prime-lift",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent assembly of Tags 00FK, 00FR, 00E0, following the quotient-by-kernel reduction of Tag 00FL; affine source refinement by schemes.tex Tag 01IT and ring-map identification by Tag 01I1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "antichain|generic.*point.*image|image.*generic.*point|finite.*image",
+   "results": "{\"t\": \"2026-10-24T13:43:22Z\", \"tool\": \"grep\", \"query\": \"antichain|generic.*point.*image|image.*generic.*point|finite.*image\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-preimage theorems concern locally quasi-finite morphisms, not finiteness of a morphism image. Generic-point and Noetherian results are ingredients; none is this antichain-image theorem or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a quasi compact scheme with image an antichain of specialization into a locally Noetherian scheme has finite image",
+   "results": "{\"t\": \"2026-10-24T13:43:23Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a quasi compact scheme with image an antichain of specialization into a locally Noetherian scheme has finite image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\"], \"digest\": \"0c0cd187344fe21b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-preimage theorems concern locally quasi-finite morphisms, not finiteness of a morphism image. Generic-point and Noetherian results are ingredients; none is this antichain-image theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "antichain.*finite|finite.*antichain",
+   "results": "{\"t\": \"2026-10-24T13:44:12Z\", \"tool\": \"grep\", \"query\": \"antichain.*finite|finite.*antichain\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-preimage theorems concern locally quasi-finite morphisms, not finiteness of a morphism image. Generic-point and Noetherian results are ingredients; none is this antichain-image theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "antichain|specializes.*[Ff]inite|[Ff]inite.*specializes|finite.*[Rr]ange|[Rr]ange.*finite",
+   "results": "{\"t\": \"2026-10-24T13:44:12Z\", \"tool\": \"grep\", \"query\": \"antichain|specializes.*[Ff]inite|[Ff]inite.*specializes|finite.*[Rr]ange|[Rr]ange.*finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\"], \"digest\": \"cf78f63d96b22375\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-preimage theorems concern locally quasi-finite morphisms, not finiteness of a morphism image. Generic-point and Noetherian results are ingredients; none is this antichain-image theorem or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a quasi compact scheme to a locally Noetherian scheme has finite image if no two distinct image points specialize to one another",
+   "results": "{\"t\": \"2026-10-24T13:44:13Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from a quasi compact scheme to a locally Noetherian scheme has finite image if no two distinct image points specialize to one another\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.isClosedMap_iff_specializingMap\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\"], \"digest\": \"27db7db15a33a47a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-preimage theorems concern locally quasi-finite morphisms, not finiteness of a morphism image. Generic-point and Noetherian results are ingredients; none is this antichain-image theorem or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact, Set.Finite",
+   "results": "{\"t\": \"2026-10-24T13:44:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.QuasiCompact, Set.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finite_preimage\", \"AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton\", \"AlgebraicGeometry.locallyQuasiFinite_iff_finite_preimage_singleton\"], \"digest\": \"bad9482fe3865d52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-preimage theorems concern locally quasi-finite morphisms, not finiteness of a morphism image. Generic-point and Noetherian results are ingredients; none is this antichain-image theorem or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a quasi compact scheme to a locally Noetherian scheme with specialization antichain image has finite image",
+   "results": "{\"t\": \"2026-10-24T14:21:21Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a quasi compact scheme to a locally Noetherian scheme with specialization antichain image has finite image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.QuasiCompact.isCompact_preimage_singleton\"], \"digest\": \"3ad4ecf3d2669842\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finiteness of fibres, morphism properties, or ingredients, not this finite-image criterion; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "antichain|[Ff]inite.*[Rr]ange|[Rr]ange.*[Ff]inite",
+   "results": "{\"t\": \"2026-10-24T14:21:59Z\", \"tool\": \"grep\", \"query\": \"antichain|[Ff]inite.*[Rr]ange|[Rr]ange.*[Ff]inite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\"], \"digest\": \"9145decc5bb64990\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finiteness of fibres, morphism properties, or ingredients, not this finite-image criterion; no one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact scheme morphism into a locally Noetherian scheme has finite image when image points are pairwise incomparable for specialization",
+   "results": "{\"t\": \"2026-10-24T14:21:59Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact scheme morphism into a locally Noetherian scheme has finite image when image points are pairwise incomparable for specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.isCompact_preimage\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.isClosedMap_iff_specializingMap\"], \"digest\": \"cbb87c1cfc8a5718\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finiteness of fibres, morphism properties, or ingredients, not this finite-image criterion; no one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring homomorphism induces a map of prime spectra whose image contains every minimal prime of the quotient by its kernel",
+   "results": "{\"t\": \"2026-10-24T14:22:55Z\", \"tool\": \"leanfinder\", \"query\": \"A ring homomorphism induces a map of prime spectra whose image contains every minimal prime of the quotient by its kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.denseRange_comap_iff_minimalPrimes\", \"Ideal.minimalPrimes_map_of_surjective\", \"Ideal.exists_comap_eq_of_mem_minimalPrimes\", \"Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes\", \"Ideal.minimalPrimes_comap_subset\", \"Ideal.exists_minimalPrimes_comap_eq\", \"Ideal.minimalPrimes_eq_comap\", \"Ideal.exists_comap_eq_of_mem_minimalPrimes_of_injective\"], \"digest\": \"ed3b47f2a6f4a3da\"}",
+   "date": "2026-10-24",
+   "verdict": "ingredients only: prime-spectrum and minimal-prime lemmas; existing DAG nodes already supply the needed injective-map lifting, so no new node."
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes|closure_range_comap|exists.*comap",
+   "results": "{\"t\": \"2026-10-24T14:24:38Z\", \"tool\": \"grep\", \"query\": \"minimalPrimes|closure_range_comap|exists.*comap\", \"sub\": \"RingTheory/Spectrum/Prime\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean\", \"Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Basic.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\"], \"digest\": \"62e1e6f3daee9073\"}",
+   "date": "2026-10-24",
+   "verdict": "ingredients only: prime-spectrum and minimal-prime lemmas; existing DAG nodes already supply the needed injective-map lifting, so no new node."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.comap, minimalPrimes",
+   "results": "{\"t\": \"2026-10-24T14:24:39Z\", \"tool\": \"loogle\", \"query\": \"PrimeSpectrum.comap, minimalPrimes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PrimeSpectrum.denseRange_comap_iff_minimalPrimes\"], \"digest\": \"231be226ca648390\"}",
+   "date": "2026-10-24",
+   "verdict": "ingredients only: prime-spectrum and minimal-prime lemmas; existing DAG nodes already supply the needed injective-map lifting, so no new node."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_comap_eq_of_mem_minimalPrimes|exists_minimalPrimes_comap_eq|denseRange_comap_iff_minimalPrimes|closure_range_comap",
+   "results": "{\"t\": \"2026-10-24T14:26:08Z\", \"tool\": \"grep\", \"query\": \"exists_comap_eq_of_mem_minimalPrimes|exists_minimalPrimes_comap_eq|denseRange_comap_iff_minimalPrimes|closure_range_comap\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\"], \"digest\": \"8250943f8f7159a1\"}",
+   "date": "2026-10-24",
+   "verdict": "ingredients only: prime-spectrum and minimal-prime lemmas; existing DAG nodes already supply the needed injective-map lifting, so no new node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a scheme morphism from a compact source to a locally noetherian target is finite if its induced specialization order is equality",
+   "results": "{\"t\": \"2026-10-24T14:32:45Z\", \"tool\": \"leansearch\", \"query\": \"The image of a scheme morphism from a compact source to a locally noetherian target is finite if its induced specialization order is equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsFinite.mk\"], \"digest\": \"19e3cfd95321b383\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finiteness of fibres, morphism properties, or ingredients, not this finite-image criterion; no one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-descent-finite-point-orbits",
+  "date": "2026-10-24",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input: Anantharaman Proposition 4.1.1 and Proposition 4.1.3 (scan OCR 4.1.5), printed pp.54-55: integral descent criterion and descent of affine neighbourhoods; restrict to integral covers which are also fpqc. Last property clause: Stacks Tags 02KU, 02L0, 02L2, descent.tex labels lemma-descending-property-separated, lemma-descending-property-finite-presentation, lemma-descending-property-flat. Supporting argument: finite point orbits before applying property (FA); finite-orbit prerequisite: finiteness of a quasi-compact image with no nontrivial specializations.",
+   "via": [
+    "lem-sfb-integral-descent-finite-point-orbits",
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-quasicompact-antichain-image-finite",
+  "worker": "Q16 stage1",
+  "summary": "Kept the statement and its two statement dependencies. Wrote the finite paired-affine-cover argument and the minimal-primes-over-the-kernel proof, using only existing nodes. Explicitly verified the quotient prime correspondence and that specialization in an affine target chart remains specialization in Y. No finite-type hypothesis, target quasi-compactness, or source Noetherianity is used. No new nodes; no exact sorry-free project attachment or Mathlib match found.",
+  "blueprint": "The inherited place is det-thm-sf-ctf-stability-direct-images proof (3), supporting the finite-orbit prerequisite in lem-sfb-integral-descent-finite-point-orbits. The current latest blueprint proof (3) assembles proper and open direct images; the present generic algebraic-geometric tool realizes only the inherited finite-image prerequisite and changes no chapter or unit route. Blueprint searches for antichain, 01RL, 0BA8, generic-point image and minimal primes found no equivalent blueprint item. The ancestor tool currently returns None for this already-created chain; its inherited blueprint.from.node and via are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-a502a2342",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-a502a2342 (reviewer sub-agent of L); spot-checked: PASS: I read the full proof; the split is correct and needs no changes. The item's statement and stmt_deps (def-pc-scheme, pqf-def-locnoeth) are unchanged, it creates no new nodes, and this is a first split, not a re-split (no repair note). Step 1: pqf-def-locnoeth gives an affine cover with Noetherian rings; 01IT (lem-weil-pbc-affine-opens-basis) gives affine U_x inside h^-1(V_a); 01I1 (lem-weil-pbc-affine-opens-induced-ring-map-spec-square) applies because f(U) is inside V by construction; quasi-compactness of X gives a finite subcover, and no intersection is assumed affine. Step 2: the quotient by K=ker(phi) is injective and preserves minimal primes over K (checked). Step 3: 00FR (lem-sc-finite-minimal-primes-over-ideal) allows any ideal of a Noetherian ring, and 00FK (lem-weil-pbc-injective-minimal-prime-lift) needs only injectivity, so the finitely many primes minimal over K all lie in E_i. Step 4: 00E0(4) gives m inside p, a specialization in Spec R that also holds in Y, and the antichain hypothesis is used in the right direction, so E_i equals that finite set. Edge cases: X empty, and K=R forcing B=0. This is the same reduction as the proof of Stacks 00FL (algebra.tex:5921-5944). All tags and labels match stacks tags/tags. Every cited theorem is a Mathlib leaf, so no tool_uses are needed. There is no cycle, and a DAG search found no duplicate (antichain hits are unrelated monomial nodes). The parent lem-sfb-integral-descent-finite-point-orbits uses the statement exactly as stated. Delivery-errors A-F pass, and there is no SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCompactAntichainImageFinite",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.finite_range_of_specialization_antichain",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCompactAntichainImageFinite.lean",
+  "statement": "theorem finite_range_of_specialization_antichain {X Y : AlgebraicGeometry.Scheme.{u}} [CompactSpace X] [AlgebraicGeometry.IsLocallyNoetherian Y] (h : X ⟶ Y) (hanti : ∀ (y : Y), y ∈ Set.range h → ∀ (y' : Y), y' ∈ Set.range h → y' ∈ closure ({y} : Set Y) → y = y') : (Set.range h).Finite",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b6382fff",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Item-only delivery: theorem AlgebraicGeometry.Scheme.Hom.finite_range_of_specialization_antichain with sorry. Clauses match the node: Scheme.{u} X Y, [CompactSpace X] for quasi-compact, [IsLocallyNoetherian Y] (recorded pqf-def-locnoeth decl), any h, antichain hypothesis with the same quantifiers and direction (closure in Y, Set.range via the Scheme.Hom CoeFun), conclusion (Set.range h).Finite; no extra hypotheses. Math is true; the 5-step proof is sound; edge cases (empty X, K=R, empty Y) are covered. Docstrings have the source place, blueprint tag and proof steps; lean.statement matches the file verbatim; no definitions, no pro-etale content, no name collision; report has Worker report and Second reading by Q92. No findings; not recompiled (no file changed)."
+ }
+}

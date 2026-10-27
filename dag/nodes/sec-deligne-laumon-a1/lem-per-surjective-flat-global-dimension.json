@@ -1,0 +1,253 @@
+{
+ "id": "lem-per-surjective-flat-global-dimension",
+ "kind": "statement",
+ "title": "Global dimension formula for a surjective flat morphism",
+ "statement": "Let $f:X\\to Y$ be a morphism of locally Noetherian schemes [pqf-def-locnoeth], flat [def-weil-flat-morphism] and locally of finite type [def-weil-finite-type-morphism]. Let $d\\in\\mathbb N$. For $b\\in Y$ write $X_b=X\\times_Y\\operatorname{Spec}\\kappa(b)$ for its scheme-theoretic fibre [def-pc-scheme-fibre]. Suppose $\\dim_a(X_{f(a)})=d$ for every $a\\in X$, where the point of the fibre corresponding to $a$ is understood and $\\dim_a$ denotes the minimum of dimensions of open neighbourhoods [def-kun-topological-dimension-at-point]. Assume moreover that $f$ is surjective on underlying points and that $Y$ is nonempty. Then $$\\dim X=\\dim Y+d,$$ where both dimensions are the global topological Krull dimensions [def-kun-topological-krull-dimension], with $+\\infty+d=+\\infty$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AFE (lemma-rel-dimension-dimension), second proof paragraph: local-ring dimension formula and supremum over the nonempty constant-dimensional fibres; parent old proof steps 3-4"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "For a point of either $X$ or $Y$, choose a member $U$ of the affine open covering with Noetherian section rings supplied by [pqf-def-locnoeth]. The germ map from $\\mathcal O(U)$ to its stalk is a localization by [lem-weil-pbc-affine-open-stalk-localization], clause (c). Hence [lem-weil-pbc-localization-noetherian] makes every local ring of $X$ and $Y$ Noetherian. This checks the ring hypotheses needed below without assuming either scheme is quasi-compact or globally finite-dimensional.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFE (lemma-rel-dimension-dimension), second proof paragraph; expand the supremum argument using Properties 04MU (lemma-dimension) and Topology 0B7I (lemma-dimension-supremum-local-dimensions)"
+   }
+  },
+  {
+   "text": "For $a\\in X$, put $b=f(a)$, $A=\\mathcal O_{Y,b}$, $B=\\mathcal O_{X,a}$, and $C=\\mathcal O_{X_b,a}$, with the corresponding fibre point understood. By [def-weil-flat-morphism], $A\\to B$ is flat and local, so the inverse image of the maximal ideal of $B$ is the maximal ideal $\\mathfrak m_A$ of $A$. Apply [lem-weil-pbc-flat-height-formula] to these maximal ideals. Localizing a local ring at its maximal ideal changes nothing: every denominator outside the maximal ideal is already a unit and $r/s\\mapsto rs^{-1}$ is inverse to localization. Thus $\\dim B=\\dim A+\\dim(B/\\mathfrak m_AB)$. The isomorphism of [lem-sbc-scheme-fibre-stalk-quotient] identifies the last ring with $C$. Ring isomorphisms preserve chains of prime ideals, so preserve dimension by [def-weil-pbc-krull-dimension-ring]. We obtain, for every $a$, $$\\dim\\mathcal O_{X,a}=\\dim\\mathcal O_{Y,f(a)}+\\dim\\mathcal O_{X_{f(a)},a}.$$",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFE (lemma-rel-dimension-dimension), second proof paragraph; expand the supremum argument using Properties 04MU (lemma-dimension) and Topology 0B7I (lemma-dimension-supremum-local-dimensions)"
+   }
+  },
+  {
+   "text": "Fix $b\\in Y$. Surjectivity and the homeomorphism onto $f^{-1}(b)$ in [def-pc-scheme-fibre] show that $X_b$ is nonempty, and every point $z$ of $X_b$ corresponds to a point $a$ over $b$. By hypothesis its local topological dimension is $d$. Therefore [lem-weil-pbc-dimension-supremum-local-dimensions] gives $\\dim X_b=\\sup_{z\\in X_b}d=d$. Applying [lem-pc-scheme-dimension-local-rings] to $X_b$ now gives $$d=\\sup_{z\\in X_b}\\dim\\mathcal O_{X_b,z}.$$ Consequently every fibre stalk has dimension at most $d$, and at least one has dimension exactly $d$. Indeed, these dimensions are nonnegative integers since their supremum is the finite integer $d$ and a nonzero local ring has a maximal prime ideal. If $d=0$, any fibre point works. If $d>0$ and none attained $d$, all would be at most $d-1$, contradicting the displayed supremum. In particular, the fibre stalk dimension is not asserted to equal $d$ at every point.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-pc-scheme-dimension-local-rings",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFE (lemma-rel-dimension-dimension), second proof paragraph; expand the supremum argument using Properties 04MU (lemma-dimension) and Topology 0B7I (lemma-dimension-supremum-local-dimensions)"
+   }
+  },
+  {
+   "text": "By [lem-pc-scheme-dimension-local-rings], $\\dim X=\\sup_{a\\in X}\\dim\\mathcal O_{X,a}$ and $\\dim Y=\\sup_{b\\in Y}\\dim\\mathcal O_{Y,b}$. Step 2 and the bound in Step 3 give, for every $a$, $$\\dim\\mathcal O_{X,a}\\le\\dim\\mathcal O_{Y,f(a)}+d\\le\\dim Y+d.$$ Taking the supremum proves $\\dim X\\le\\dim Y+d$. Conversely, for each $b$ choose a fibre point attaining $d$ as in Step 3 and let $a\\in X$ be its image. Step 2 and the source supremum give $$\\dim X\\ge\\dim\\mathcal O_{Y,b}+d.$$ If $\\dim Y=e<\\infty$, the nonempty family of base-stalk dimensions has supremum the nonnegative integer $e$, so attains $e$: for $e>0$, failure would bound them by $e-1$, and for $e=0$ every base point works. Hence $\\dim X\\ge e+d$. If $\\dim Y=\\infty$, these stalk dimensions are unbounded or include infinity, and the same inequality gives $\\dim X=\\infty$. The base is nonempty by hypothesis, so no empty supremum occurs in this argument; surjectivity also makes $X$ nonempty. Both bounds give $\\dim X=\\dim Y+d$, including $d=0$ and infinite global dimension.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFE (lemma-rel-dimension-dimension), second proof paragraph; expand the supremum argument using Properties 04MU (lemma-dimension) and Topology 0B7I (lemma-dimension-supremum-local-dimensions)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AFE (lemma-rel-dimension-dimension), second proof paragraph; expand the supremum argument using Properties 04MU (lemma-dimension) and Topology 0B7I (lemma-dimension-supremum-local-dimensions)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(flat|Flat).*(krullDim|KrullDim)|(krullDim|KrullDim).*(flat|Flat)",
+   "results": "0 hits; ; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"krullDim\"",
+   "results": "0 hits; ; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective flat morphism of schemes of constant fibre dimension has total dimension equal to base dimension plus fibre dimension",
+   "results": "8 hits; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Surjective, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.isQuotientMap_of_surjective; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective flat locally finite type morphism of locally Noetherian schemes with constant local fibre dimension d has Krull dimension of source equal to Krull dimension of target plus d",
+   "results": "8 hits; ringKrullDim_le_of_surjective, ringKrullDim_succ_le_of_surjective, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, lift_trdeg_le_of_surjective; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of a faithfully flat locally finite type scheme morphism with equidimensional nonempty fibres is base dimension plus fibre dimension",
+   "results": "8 hits; AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.Flat, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, Algebra.HasGoingDown.of_flat, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective flat locally finite type morphism of locally Noetherian schemes with constant local fibre dimension d has Krull dimension of source equal to dimension of target plus d",
+   "results": "8 hits: ringKrullDim_succ_le_of_surjective, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, ringKrullDim_le_of_surjective, MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_le_ringKrullDim_add_spanFinrank, Algebra.IsStandardSmooth.relativeDimension, Polynomial.ringKrullDim_of_isNoetherianRing. Inspected: flatness and smoothness interfaces, surjective ring dimension bounds and polynomial dimension results; none states the scheme global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(flat|Flat).*(krullDim|KrullDim)|(krullDim|KrullDim).*(flat|Flat)",
+   "results": "0 hits: . Inspected: flatness and smoothness interfaces, surjective ring dimension bounds and polynomial dimension results; none states the scheme global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective flat morphism of locally Noetherian schemes of constant fibre dimension d has dimension of source equal to dimension of target plus d",
+   "results": "8 hits: AlgebraicGeometry.Surjective, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.flat_appLE. Inspected: flatness and smoothness interfaces, surjective ring dimension bounds and polynomial dimension results; none states the scheme global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"krullDim\"",
+   "results": "0 hits: . Inspected: flatness and smoothness interfaces, surjective ring dimension bounds and polynomial dimension results; none states the scheme global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of faithfully flat finite type scheme morphism with equidimensional fibres is dimension of base plus relative dimension",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmooth.relativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.trans, AlgebraicGeometry.Flat, Algebra.HasGoingDown.of_flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.flat_and_surjective_SpecMap_iff. Inspected: flatness and smoothness interfaces, surjective ring dimension bounds and polynomial dimension results; none states the scheme global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-flat-constant-relative-dimension",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph of lem-per-smooth-pullback-t-exact, support dimension increase under smooth pullback: Tag 0AFE (lemma-rel-dimension-dimension), second proof paragraph: local-ring dimension formula and supremum over the nonempty constant-dimensional fibres; parent old proof steps 3-4",
+   "via": [
+    "lem-per-flat-constant-relative-dimension",
+    "lem-per-smooth-local-dimension",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-surjective-flat-global-dimension",
+  "worker": "stage1",
+  "summary": "Expanded the second paragraph of Stacks 0AFE into Noetherian stalk verification, the flat local-ring formula via existing 00ON and 0HA1 nodes, a separate supremum computation on every nonempty fibre with attainment of finite d, and both global dimension inequalities including infinity. Reused all existing tools; no new nodes or statement changes.",
+  "blueprint": "Realizes the first proof paragraph of lem-per-smooth-pullback-t-exact via its support-dimension branch: the global dimension subargument in the second paragraph of 0AFE used by lem-per-flat-constant-relative-dimension.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine germ localization identifies the actual stalks used in the dimension formula; the perverse unit has no such scheme-local algebra interface."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic localization permanence verifies the Noetherian hypotheses of the flat height formula; it does not replace a perverse-unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Generic flat Noetherian ring dimension theorem 00ON explicitly invoked by 0AFE; existing Mathlib leaf, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic scheme fibre-stalk quotient identifies the closed-fibre term in 00ON with the actual scheme fibre stalk; no perverse-unit node supplies this comparison."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic topological dimension supremum computes the dimension of a nonempty fibre from its constant local dimensions; existing closed tool."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic scheme dimension supremum 04MU is explicitly invoked by 0AFE; used on source, target and fibres, with no replacement of the perverse route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-d71813b56",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-d71813b56 (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes and no statement change. Source is Stacks 0AFE (morphisms.tex l.5679), second paragraph, which uses 00ON (algebra.tex l.27421) and 04MU (properties.tex l.1233). The hypotheses match 0AFE after its shrinking to a surjective map; locally of finite type is kept though unused. Step 1: an affine cover by Noetherian rings (pqf-def-locnoeth) plus clause (c) of the affine-open stalk localization makes every stalk Noetherian. Step 2: the stalk map is local and flat, so the flat height formula applies at the two maximal ideals; the fibre stalk is identified with O_{X,a}/m_b O_{X,a} by lem-sbc-scheme-fibre-stalk-quotient; dimension is preserved by the ring isomorphism. Step 3: surjectivity makes each fibre nonempty, the topological dimension supremum gives dim X_b = d, and 04MU on the fibre then shows every fibre stalk has dimension at most d with d attained (d=0 and d>0 checked separately). It correctly avoids claiming every fibre stalk has dimension d (generic point of A^1_k). Step 4: 04MU on X and Y gives both inequalities, including the infinite case; the nonempty Y rules out an empty supremum. Tested on the identity map, A^1_k -> Spec k, a DVR, disjoint unions and unbounded unions. Duplicate search (0AFE, the dimension-formula patterns) finds only the parent and its sibling, neither a duplicate. No cycle (DFS from the item's dependencies). The six declared tool_uses are the generic 00ON/04MU/stalk/fibre/topological facts 0AFE itself invokes, used as black boxes; all accepted. No SGA cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SurjectiveFlatGlobalDimension",
+  "declaration": "AlgebraicGeometry.topologicalKrullDim_eq_add_of_surjective_flat_constantRelativeDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SurjectiveFlatGlobalDimension.lean",
+  "statement": "theorem topologicalKrullDim_eq_add_of_surjective_flat_constantRelativeDimension {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (f : X ⟶ Y) [Flat f] [LocallyOfFiniteType f] (d : ℕ) (hd : ∀ a : X, topologicalKrullDimAt (f.asFiber a) = (d : WithBot ℕ∞)) [Surjective f] [Nonempty Y] : topologicalKrullDim X = topologicalKrullDim Y + (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-435606ac8",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Checked the item against Stacks 0AFE second paragraph (global claim after shrinking to surjective f). Clause-by-clause: Scheme.{u}, IsLocallyNoetherian X/Y, Flat, LocallyOfFiniteType, d:ℕ, hd via topologicalKrullDimAt (f.asFiber a) (open-neighbourhood local dimension of the Mathlib fibre point, not stalk dimension), Surjective, Nonempty Y (stated in node), conclusion topologicalKrullDim X = topologicalKrullDim Y + d in WithBot ℕ∞ (⊤+d=⊤). No extra hypotheses. Read the dep declarations (Fiber.lean asFiber/fiberι_asFiber, side-live topologicalKrullDimAt l.343, Surjective); recorded lean fields match. Node differs from side-live only by the lean field; lean.statement verbatim in file; universe bound. Consistent with the parent FlatConstantRelativeDimension conventions. Edge cases d=0, infinite-dimensional base, empty Y excluded, A^1 generic point, non-surjective maps. No duplicate (0AFE grep finds only the parent local statement). sorry only, no defs; docstrings carry source, blueprint id and the 4 node steps; plain imports are existing proof_dep modules. The Second reading section is a worker self-check (dispatcher forbade other agents); noted, not a fault. No compile (no file changed)."
+ }
+}

@@ -93,7 +93,32 @@
   }
  ],
  "mathlib_match": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.isIso_moduleAbelianInverseImageComparison"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_moduleAbelianInverseImageComparison",
+     "module": "WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison",
+     "lines": [
+      25,
+      138
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "existing": false,
   "module": "WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison",
@@ -123,5 +148,31 @@
   "landing": "20261012T021914-L-1037797",
   "kind": "interface",
   "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, dependency statements, sources, report and library diffs; both modules compile cleanly, axiom checks agree, and existing interfaces and the unit route are preserved."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $i:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $\\Lambda$ a commutative ring. Let $J$ be a sheaf of $\\Lambda$-modules on the small etale site of $Y$ [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves]. Write $U_X,U_Y$ for the functors forgetting to abelian sheaves. For the inverse-image and direct-image adjunctions [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image], the abelian adjoint of $U_Y(\\eta^{\\mathrm{Mod}}_J):U_YJ\\to i_*U_X(i^{-1}_{\\mathrm{Mod}}J)$ is an isomorphism $i^{-1}_{\\mathrm{Ab}}U_YJ\\xrightarrow{\\sim}U_X(i^{-1}_{\\mathrm{Mod}}J)$. This is the particular canonical comparison determined by the module adjunction unit, not merely existence of some isomorphism.",
+  "proof": [
+   {
+    "text": "Write the inverse image [def-weil-pbc-inverse-image] as the left Kan extension of presheaves along the pullback of etale objects, followed by sheafification. The functor forgetting a sheaf of $\\Lambda$-modules to its underlying abelian sheaf preserves colimits and limits; hence it commutes with left Kan extension and with sheafification, and we obtain an isomorphism $e:i^{-1}_{\\mathrm{Ab}}U_YJ\\xrightarrow{\\sim}U_X(i^{-1}_{\\mathrm{Mod}}J)$.",
+    "uses": [
+     "def-weil-pbc-inverse-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By naturality of the sheafification unit, the composite of the abelian sheafification unit with $e$ is the comparison map for the left Kan extensions followed by the underlying map of the module sheafification unit. Since the Kan extension comparison is compatible with the Kan extension units, it follows that the abelian adjoint of $e$ is the underlying map $U_Y(\\eta^{\\mathrm{Mod}}_J)$ of the module adjunction unit; here we use that the direct image [def-weil-pbc-direct-image] commutes with forgetting, as it is restriction of presheaves. Since passing to adjoints is a bijection on morphisms, the abelian adjoint of $U_Y(\\eta^{\\mathrm{Mod}}_J)$ is $e$, which is an isomorphism ([def-weil-pbc-inverse-image]).",
+    "uses": [
+     "def-weil-pbc-direct-image",
+     "def-weil-pbc-inverse-image"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

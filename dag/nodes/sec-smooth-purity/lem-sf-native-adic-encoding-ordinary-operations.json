@@ -1,0 +1,180 @@
+{
+ "id": "lem-sf-native-adic-encoding-ordinary-operations",
+ "kind": "statement",
+ "title": "Ordinary native adic encoding and derived pushforward comparison",
+ "statement": "Fix a prime l and its algebraic closure Omega of Q_l [def-weil-l-adic-numbers, def-weil-algebraic-closure]. For every scheme T use the native locally finite continuous Omega coefficient ring and its module category [def-sf-native-weil-derived-framework], applied directly to T, and the pulled-back bounded-image condensed Omega ring R_T [sk-def-sfb-qlbar-condensed, sk-def-sfb-pulled-back-coefficients]. The explicit encoding E_T forgets the native vector-space action to abelian module sheaves and restricts scalars along the canonical coefficient isomorphism formed from globalCoefficientIso and padicAlgClSheafIsoAdicConstantSheaf. This E_T is an additive exact equivalence preserving underlying abelian sheaves, inducing the ordinary unbounded derived equivalence, and preserving and reflecting K-injectivity. For every scheme map f:X -> Y it identifies native ordinary pushforward and pullback with the condensed module operations [sk-def-sfb-module-pushforward-pullback]. The pushforward comparison is the identity on underlying sections; the pullback comparison is its adjunction mate, is exact, and the actual coefficient pushforward maps satisfy the displayed naturality square. The composite of universal right-derived composition isomorphisms gives D(E_Y) Rf_*^native isomorphic to Rf_*^R D(E_X). These are precisely the general native (non-fixed-pair) declarations formerly contained in NativeEncodingDerivedOperations, now extracted without changing signatures or non-theorem bodies.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.1 and 6.8.3 for coefficient modules; agent-formulated native comparison extracted from returned steps 3, 4 and 7. Native source: lean/WeilConjectures/SixFunctors/ProEtale/Adic/Module.lean:50-56; WeilSheaf/LowerStar.lean:79-85,116-142; CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean:62-97. The paper supplies the module model, not this native encoding theorem."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-sf-native-weil-derived-framework",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply nativeScalarForgetting_isEquivalence to the actual mapMod functor on native adic sheaves, then compose with Mod.comapEquivalenceOfIsIso for the specified coefficientIso. This proves encoding_isEquivalence without the sectionwise finite-span derived comparison. The existing encodingAdditive and encoding_underlying proofs retain the specified action on maps and underlying sheaves.",
+   "uses": [
+    "lem-sf-native-scalar-forgetting-equivalence",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing exact-equivalence APIs give preservation of finite limits and colimits and equivalence of the ordinary unbounded derived categories. The inverse exact equivalence preserves K-injective complexes; transport along the termwise unit gives reflection, while applying the forward equivalence gives preservation. The universal right-derived composition comparisons define derivedPushComparison.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the naturality square for the specified coefficientIso itself. On each finite-field leg, globalCoefficientIso_fac identifies it with chartComparison followed by the native colimit inclusion. The chart comparison is its explicit adjoint (finiteFieldComparison_test); the inclusion followed by the native realization is postcomposition of continuous functions. The canonical condensedPushforwardHom is natural in the condensed ring, by unit naturality and upperStarFromPointComp naturality. The existing continuousChart_scheme_naturality and the pointwise precomposition formula give equality after every finite-field leg. The abelian-sheaf colimit obtained by isColimitOfPreserves from Profinite.isColimitPadicAlgClRingObjCocone then gives equality of the two underlying morphisms. This repeats the already proved local argument of locallyFiniteCoefficientRing_realization without importing its cyclic public Weil-sheaf interface.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-pbc-continuous-chart-scheme-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct nativePushforwardComparison by the canonical mapModComapIso, mapModCompIso and comapComp isomorphisms on both sides. Native pushforward commutes strictly and monoidally with forgetting ambient scalars; the coefficient naturality square identifies the final restriction maps. The underlying maps of every factor are identities, hence the component on every section is the identity.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse mate of the preceding direct-image comparison under the actual native and condensed pullback-pushforward adjunctions. Both side encoding functors are equivalences by step 1, so isIso_inverseMate_of_equivalences makes the inverse mate invertible. Its inverse is the requested pullback comparison q. The apply_symm_apply identity for mateEquiv proves exactly that the mate of q.inv is p.hom. The existing condensed upperStar preservation instances supply both exactness clauses. Together with the identity on sections and step 3 this proves encoding_ordinary_operations.",
+   "uses": [
+    "lem-stage3-inverse-mate-equivalences",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "sk-def-sfb-module-objects",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-condensed-qbar-coefficient-construction",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-chart-scheme-naturality",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-stage3-inverse-mate-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-25",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proofs from the existing native scalar-forgetting equivalence, coefficient finite-field normalization and colimit, and inverse-mate equivalence. Coefficient naturality reuses the proved local argument in LocallyFiniteCoefficientRingRealization; importing that module would recreate a cycle through WeilSheaf.LowerShriek. No statement, definition, unit route, or public import changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The exact equivalence from adic module sheaves to condensed coefficient modules commutes with ordinary derived pushforward",
+   "results": "Eight generic module-sheaf pushforward results, including SheafOfModules.pushforward and pushforwardSections.",
+   "date": "2026-10-25",
+   "verdict": "No native continuous coefficient encoding or derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact coefficient encoding equivalence of native adic sheaves and module objects over condensed Qbar with derived pushforward comparison",
+   "results": [
+    "CondensedMod",
+    "CondensedMod.IsSolid",
+    "LightCondMod",
+    "Condensed.profiniteSolid",
+    "LightCondMod.LocallyConstant.adjunction",
+    "CondensedMod.LocallyConstant.functor",
+    "LightCondMod.ofSheafLightProfinite",
+    "CondensedMod.LocallyConstant.adjunction"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No match; generic condensed module constructions only."
+  },
+  {
+   "tool": "grep",
+   "query": "AdicSheaf|condensedRingObj|derivedPushComparison",
+   "results": "Five hits on ellAdicSheaf in Mathlib.AlgebraicGeometry.Sites.ElladicCohomology.",
+   "date": "2026-10-25",
+   "verdict": "No project-specific native module encoding or derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness",
+  "date": "2026-10-25",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native coefficient comparison in the projective projection input of sk-prop-sf-finiteness; extracted existing declaration group, not a new proof obligation. Whole-blueprint search for native encoding has no match. The item created.item chain has no imported blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-projective-space-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-finiteness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeAdicEncodingCore",
+  "file": "lean/Sheaf/Paper/NativeAdicEncodingCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.NativeEncoding.encoding_ordinary_operations",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NativeEncoding.coefficientIso",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.coefficientIsoMon",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.encoding",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.encodingAdditive",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.encoding_isEquivalence",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.equivalence",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.derivedEncoding",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.encoding_underlying",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.encoding_exact_derived",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.encoding_ordinary_operations",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.pushComparison",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.pullComparison",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.derivedPushComparison"
+  ],
+  "statement": "theorem encoding_ordinary_operations (l : ℕ) [Fact l.Prime]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ p : adicLowerStar l f ⋙ encoding l Y ≅\n        encoding l X ⋙ CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f,\n      (∀ (M : AdicSheaf l X) (V : Y.ProEtᵒᵖ)\n        (m : ((adicLowerStar l f).obj M).X.obj.obj V),\n        ((p.hom.app M).hom.hom.app V) m = m) ∧\n      ∃ q : adicUpperStar l f ⋙ encoding l X ≅\n          encoding l Y ⋙ CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f,\n      (mateEquiv (adicUpperStarLowerStarAdjunction l f)\n        (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)\n        q.inv).natTrans = p.hom ∧\n      PreservesFiniteLimits (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f) ∧\n      PreservesFiniteColimits (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f) ∧\n      (condensedPushforwardHom (Profinite.padicAlgClRingObj l) f ≫\n          (lowerStar Ab.{u + 1} f).map (coefficientIso l X).hom =\n        (coefficientIso l Y).hom ≫\n          (weilCoefficientsForgetAb l Y).map (adicConstantSheafToLowerStar l f))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-25",
+  "note": "All thirteen original native declarations retain their signatures and data bodies. The two remaining holes, encoding_isEquivalence and encoding_ordinary_operations, are now proved from scalar forgetting, the specified coefficient naturality square, canonical module transport, and inverse mates. No new sorry is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-83faf",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261025T043250-L-1693096",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261025T095648-L-3460674",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

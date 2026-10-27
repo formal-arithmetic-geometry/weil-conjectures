@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-cyclic-total-triangulated",
+ "kind": "statement",
+ "title": "Signed cyclic totalization on the bounded-below derived category",
+ "statement": "Let $R$ be a commutative condensed ring on the small coherent profinite site in a universe containing all parameter sets [sk-def-sfb-condensed-ring, def-weil-size-convention]. Use internal $R$-modules $\\mathcal M_R$ [sk-def-sfb-module-objects] and action categories $\\mathcal A_P(R)$ for the condensed group $\\underline P(S)=C(S,P)$ [def-sfb-condensed-action-module]. Let $G$ be profinite. For a bounded-below $G\\times\\mathbf Z_{\\mathrm{disc}}$-complex $N$, let $K^G(N)^n=N^n\\oplus N^{n-1}$, with $d(x,y)=(d_Nx,(T-1)x-d_Ny)$, where $T$ is the action of $1\\in\\mathbf Z$, and let $b_N:\\Gamma_{\\mathbf Z}^G N\\to K^G(N)$ be $(\\mathrm{inclusion},0)$. The displayed differential squares to zero and is $G$-equivariant. Diagonal application to chain maps defines an additive functor on complexes; an equivariant chain homotopy $h$ induces the total homotopy $(h,-h)$. It carries bounded-below quasi-isomorphisms to quasi-isomorphisms and descends to a triangulated functor $QK^G:D^+(\\mathcal A_{G\\times\\mathbf Z}(R))\\to D^+(\\mathcal A_G(R))$.\n\nIts shift comparison $K^G(N[s])\\to K^G(N)[s]$ has coordinates $(x,y)\\mapsto(x,(-1)^s y)$. For every chain map $f:A\\to B$, reordering the summands of $K^G C(f)$ into those of $C(K^G f)$ and multiplying the source-cone summand in cyclic degree $a$ by $(-1)^a$ is a chain isomorphism. It identifies the target inclusion and the negative cone projection with the shift comparison just specified, hence all three arrows in the convention $C(f)\\xrightarrow{-p}A[1]$ of [def-weil-abstract-derived-category]. For a vertical lower bound $b$, shifting it to zero and multiplying column $a$ by $(-1)^{ab}$ identifies this total with the corresponding first-quadrant total, including quasi-isomorphism comparisons. Interchanging the double-complex indices is compatible with totalization by the sign $(-1)^{a q}$ in bidegree $(a,q)$. These identifications apply to row augmentations as well as column comparisons, with sign $1$ on the augmentation axes.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary relative cyclic calculation. Agent-formulated extracted task from the returned proof of lem-sfb-relative-cyclic-restriction-model, steps 7,8. Exact combined reference WANTED; argument and ingredient references retained in report.md."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-sp-double-complex-total",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sfb-relative-cyclic-total"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal B=\\mathcal A_{G\\times\\mathbf Z}(R)$, $\\mathcal C=\\mathcal A_G(R)$ and let $U:\\mathcal B\\to\\mathcal C$ restrict along $g\\mapsto(g,0)$. Apply [lem-sfb-condensed-action-injective-infrastructure] to the topological groups $G\\times\\mathbf Z_{\\mathrm{disc}}$ and $G$: both categories are abelian and $U$ is additive and exact. This explicitly allows the non-profinite discrete factor. In [def-sfb-condensed-action-module], the commuting product actions make the action $T$ of $1\\in\\mathbf Z$ a natural $G$-equivariant automorphism of $U$. Write $u=T-1$. The relative invariant inclusion lands in $\\ker u$. Conversely a section killed by $u$ and all its restrictions is fixed by every integer power of $T$. Every continuous map from a profinite parameter to discrete $\\mathbf Z$ has finite image and is constant on a finite clopen partition; the sheaf identity then says that section is fixed by the entire condensed $\\mathbf Z$-action. Thus $\\Gamma_{\\mathbf Z}^G N=\\ker(u:UN\\to UN)$ degreewise, with its induced differential and residual action.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), relative cyclic calculation; action-category and invariant inclusion setup (agent argument)"
+   }
+  },
+  {
+   "text": "For any complex $N$ (no bound is needed), $u$ commutes with $d_N$. Hence $d_K^2(x,y)=(0,u d_Nx-d_Nu x)=0$. On a chain map $f$, set $K(f)(x,y)=(f x,f y)$; the two chain-map equations are $d f=f d$ and $u f=f u$. Identities, composition and addition hold coordinatewise. If $f-g=d h+h d$ and $h$ is equivariant, set $H(x,y)=(h x,-h y)$. Direct substitution gives $(d_KH+Hd_K)(x,y)=((f-g)x,(f-g)y)$: the mixed term $u h-h u$ vanishes. All these maps commute with $G$. For an invariant $x$, $u x=0$, so $d_K(x,0)=(d_Nx,0)$; consequently $b_N$ is a natural chain map. This uses just the complexes, shift and homotopy conventions of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition (definition-cone), conventions on complexes; explicit two-coordinate calculation written by Q125"
+   }
+  },
+  {
+   "text": "For $s\\in\\mathbf Z$, put $\\varepsilon=(-1)^s$. The differential of $K(N[s])$ is $(\\varepsilon d x,u x-\\varepsilon d y)$. Applying $S_s(x,y)=(x,\\varepsilon y)$ gives $(\\varepsilon d x,\\varepsilon u x-d y)$, which is also the differential of $K(N)[s]$ applied to $S_s(x,y)$. Thus $S_s$ is a natural chain isomorphism, its inverse having the same coordinate signs. The equality $(-1)^{s+t}=(-1)^s(-1)^t$ proves shift coherence, including negative shifts and shift zero. On the augmentation $(x,0)$ its sign is $1$. Here [def-weil-abstract-derived-category] fixes the signed shifts.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition (definition-shift-cochain); explicit signed comparison written by Q125"
+   }
+  },
+  {
+   "text": "Use the cone and negative third-arrow convention in [def-weil-abstract-derived-category]. Write a degree-$n$ element of $K C(f)$ as $(b,a,c,e)$ in $B^n\\oplus A^{n+1}\\oplus B^{n-1}\\oplus A^n$. Its differential is $(d_Bb+fa,-d_Aa,u_Bb-d_Bc-fe,u_Aa+d_Ae)$. Define $\\Phi_f(b,a,c,e)=(b,c,a,-e)$ in $K(B)^n\\oplus K(A)^{n+1}$. Both $d\\Phi_f$ and $\\Phi_f d$ are $(d_Bb+fa,u_Bb-d_Bc-fe,-d_Aa,-u_Aa-d_Ae)$. This is a natural chain isomorphism with inverse obtained by undoing the permutation and the same sign. It is identity on $K(B)$, so preserves the second arrow; the first arrow is $K(f)$. On the last arrow, $K(-p)$ gives $(-a,-e)$, and $S_1$ gives $(-a,e)$, exactly $-p\\Phi_f$. Thus it identifies all three arrows, with precisely the stated source-cone sign $(-1)^a$ in cyclic degree $a=0,1$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition (definition-cone); explicit four-coordinate calculation for the fixed negative cone projection"
+   }
+  },
+  {
+   "text": "For every $N$ the inclusion $y\\mapsto(0,y)$ and projection $(x,y)\\mapsto x$ give the degreewise split short exact sequence $0\\to U(N)[-1]\\to K(N)\\to U(N)\\to0$. These are chain maps because the differential on $U(N)[-1]$ is $-d_N$. Apply [lem-weil-pbc-complex-ses-homology-long-exact] in the abelian category $\\mathcal C$. The exact segment $H^{n-1}(UN)\\to H^n(KN)\\to H^n(UN)$ shows that acyclicity of $UN$ implies acyclicity of $KN$. More generally, if $H^j(UN)=0$ for $j<c$, the two outer terms vanish for $n<c$, so $H^n(KN)=0$. This is an application of the cited exact sequence, not an exactness assertion about invariant sections.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117 (lemma-long-exact-sequence-cochain), applied to the displayed split sequence"
+   }
+  },
+  {
+   "text": "If $f:A\\to B$ is a quasi-isomorphism in $\\mathcal B$, [lem-pur-quasi-iso-cone-acyclic] says $C(f)$ is acyclic. Exactness of the restriction $U$ from [lem-sfb-condensed-action-injective-infrastructure] preserves kernels and cokernels, so $H^n(UC(f))=U H^n(C(f))=0$. Step 5 makes $KC(f)$ acyclic. The isomorphism $\\Phi_f$ of step 4 then makes $C(Kf)$ acyclic; apply [lem-pur-quasi-iso-cone-acyclic] in $\\mathcal C$ to conclude that $Kf$ is a quasi-isomorphism. The same exactness identifies $H^n(UN)=U H^n(N)$, so the lower cohomology bound used in step 5 follows from a lower bound for $N$.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-sfb-condensed-action-injective-infrastructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), acyclic cone criterion; the signed comparison is step 4"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-universal-property](1) to $Q_{\\mathcal C}K$ and $Q_{\\mathcal B}$: step 6 gives an induced functor $QK:D(\\mathcal B)\\to D(\\mathcal C)$. Part (2) descends $S_s$, and part (3) descends its coherence identities. The localization $Q_{\\mathcal B}$ is additive and essentially surjective by [lem-sfb-derived-localization-additive]; $Q_{\\mathcal C}K$ is additive, so [lem-pur-additive-localization-descent] makes $QK$ additive. By [def-weil-abstract-derived-category], every distinguished triangle is isomorphic to the localized cone triangle of some chain map. Step 4 carries each such triangle to the cone triangle of $Kf$, including its last arrow with the shift of step 3. Thus $QK$ preserves distinguished triangles. Finally step 5 and exactness of $U$ show that $QK$ preserves cohomological lower bounds. Restrict to the full triangulated subcategories $D^+$ of [def-weil-pbc-bounded-derived-subcategories]. Using the unbounded construction first avoids any assumption that every chosen representative is termwise bounded below.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-derived-localization-additive",
+    "lem-pur-additive-localization-descent",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category) and Tag 05R7 (lemma-universal-property-localization); cone-image argument written explicitly"
+   }
+  },
+  {
+   "text": "For clarity spell out the lower-bound identification using [def-sp-double-complex-total]. Let $D^{a,q}=0$ unless $a\\ge0$ and $q\\ge b$; in the cyclic case only $a=0,1$ occur. Define $D_b^{a,r}=D^{a,r+b}$, horizontal differential $d_I$ and vertical differential $(-1)^b d_{II}$. This is the signed vertical shift to a first-quadrant double complex. After matching the summands in degree $n$, the differential of $\\operatorname{Tot}(D_b)[-b]$ is $(-1)^b d_I+(-1)^a d_{II}$. Multiplication by $\\theta_a=(-1)^{ab}$ gives an isomorphism $\\operatorname{Tot}(D)\\to\\operatorname{Tot}(D_b)[-b]$: the horizontal equality is $\\theta_{a+1}=(-1)^b\\theta_a$ and the vertical equality is tautological. These diagonal signs commute with every bicomplex map, so the comparison squares, and hence their quasi-isomorphism assertions, correspond under this isomorphism and the shift. A row augmentation is supported on the column $a=0$, where $\\theta_0=1$; thus the same comparison applies to its augmentation map. Only finite sums occur in each degree.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Double-complex total convention of def-sp-double-complex-total; agent-written signed lower-bound reindexing"
+   }
+  },
+  {
+   "text": "For the transposed bicomplex $D^{\\mathrm t}$, [def-sp-double-complex-total] gives differential $d_{II}+(-1)^q d_I$ on the summand formerly indexed by $(a,q)$. Reorder the summands and multiply this summand by $\\eta_{a,q}=(-1)^{aq}$. The horizontal chain-map equality is $\\eta_{a+1,q}=(-1)^q\\eta_{a,q}$; the vertical equality is $(-1)^a\\eta_{a,q+1}=\\eta_{a,q}$. This proves the asserted transposition isomorphism and its naturality on comparison maps. On either augmentation axis $a=0$ or $q=0$ one has $\\eta_{a,q}=1$. Hence a row augmentation becomes the column augmentation with unchanged axis map, and the same calculation works in reverse. For a lower bound $b$, first use the signed reindexing of step 8 and apply this calculation to its first-quadrant indices. All row and column comparison diagrams are carried along by these explicit chain isomorphisms.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Double-complex total convention of def-sp-double-complex-total; agent-written transposition and augmentation sign check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-derived-localization-additive",
+  "lem-pur-additive-localization-descent",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted relative cyclic task; Q125 coordinate proof using Stacks Tags 0117, 05RT, 05RU and ordinary localization. No claim that the blueprint contains this auxiliary calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two column total of a complex with automorphism generator minus identity descends to triangulated functor with signed shift and cone comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.homologySequenceδ\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"{C : Type u_1} →\\n  {A : Type u_3} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.HasShift C ℤ] →\\n        [inst_2 : CategoryTheory.Category.{v_3, u_3} A] →\\n          (F : CategoryTheory.Functor C A) →\\n            [inst_3 : F.ShiftSequence ℤ] →\\n              (T : \", \"doc\": \"Given a triangulated functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{A}$ with integer-indexed shift structure, a triangle $T$ in $\\\\mathcal{C}$, and integers $n_0, n_1$ satisfying $n_0 + 1 = n_1$, this construct\"}\n  {\"name\": \"CategoryTheory.Functor.comp_homologySequenceδ\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a triangulated functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ with integer-indexed shift structure, given a triangle $ T $ in $ \\\\mathcal{C} $ and integers $ n_0, n_1 $ such that $ n_0 + 1 = n_1 $, th\"}\n  {\"name\": \"CategoryTheory.Pretriangulated.preadditiveYoneda_homologySequenceδ_apply\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Yoneda\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive]\\n  (T : CategoryTheory.Pretriangulated.Triangle C) (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁) {B : C}\\n  (\", \"doc\": \"For a triangle $T$ in a pretriangulated category $\\\\mathcal{C}$ with integer shifts, integers $n_0, n_1$ satisfying $n_0 + 1 = n_1$, and a morphism $x: T_1 \\\\to B[n_0]$, the application of the δ-morphis\"}\n  {\"name\": \"CategoryTheory.Functor.homologySequenceδ_comp\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a triangulated functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $, a distinguished triangle $ T $ in $ \\\\mathcal{C} $, and integers $ n_0, n_1 $ satisfying $ n_0 + 1 = n_1 $, the composition of the δ-morp\"}\n  {\"name\": \"CochainComplex.mappingCone.mapTriangleIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n            [inst_4 : CategoryTheory.Pr\", \"doc\": \"Given preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with binary biproducts, and an additive functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, for any morphism $\\\\phi : K \\\\to L$ of cochain complexes i\"}\n  {\"name\": \"CategoryTheory.Functor.homologySequence_comp\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ from a pretriangulated category $ \\\\mathcal{C} $ with integer-indexed shifts to an abelian category $ \\\\mathcal{A} $, and a distinguished tr\"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.truncGEδLT\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.HasShift C ℤ] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n          \", \"doc\": \"The natural transformation constructed by left whiskering the truncation triangle functor with the canonical natural transformation from the third object functor to the shifted first object functor, y\"}\n  {\"name\": \"CochainComplex.mappingCone.inl_v_triangle_mor₃_f\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasBinaryBiproducts C] {K L : CochainComplex C ℤ} (φ : K ⟶ L) (p q : ℤ)\\n  (hpq : p + -1 = q),\\n  CategoryTheory.CategoryStruct.comp ((CochainComplex.mappingCone.inl\", \"doc\": \"For integers $ p $ and $ q $ satisfying $ p - 1 = q $, the composition of the inclusion morphism component $ (\\\\text{inl} \\\\, \\\\phi)_p^q $ with the third morphism $ (\\\\text{triangle} \\\\, \\\\phi).\\\\text{mor}_3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.mapTriangleIso and mapTrianglehIso concern termwise additive functors. K here mixes adjacent complex degrees with T-1; its signed cyclic cone/shift comparison and quasi-isomorphism descent are not one-line specializations. The totalRightDerived shift instance assumes an already constructed derived functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping fiber of natural endomorphism of complexes preserves homotopies quasi isomorphisms shifts and distinguished triangles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.mappingCone.mapTrianglehIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n            [inst_4 : CategoryTheory.Pr\", \"doc\": \"Given preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with binary biproducts, and an additive functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, for any morphism $\\\\phi : K \\\\to L$ of cochain complexes i\"}\n  {\"name\": \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Preadditive C]\\n  [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] [inst_4 : CategoryTheory.Preadditive D]\\n  [inst_5 : CategoryTheory.Limits.H\", \"doc\": \"Given an additive functor $ G : C \\to D $ between preadditive categories $ C $ and $ D $, the induced functor between their homotopy categories of integer-indexed cochain complexes is triangulated. Thi\"}\n  {\"name\": \"HomotopyCategory.instCommShiftHomologicalComplexIntUpHomFunctorMapHomotopyCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Shift\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive], CategoryTheory.NatTrans.CommShift (F.mapHom\", \"doc\": \"The induced functor from the homotopy category of integer-indexed chain complexes commutes with the integer shift operation. Specifically, for any integer $ n $, shifting a complex by $ n $ and then a\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"The natural isomorphism asserting that the induced functor from the homotopy category to the derived category commutes with the integer shift operation, ensuring that shifting a complex before or afte\"}\n  {\"name\": \"CochainComplex.mappingCone.mapTriangleIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n            [inst_4 : CategoryTheory.Pr\", \"doc\": \"Given preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with binary biproducts, and an additive functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, for any morphism $\\\\phi : K \\\\to L$ of cochain complexes i\"}\n  {\"name\": \"HomotopyCategory.spectralObjectMappingCone\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n          CategoryTheory.Triangulated.SpectralObject (HomotopyCat\", \"doc\": \"A spectral object in the homotopy category of integer-indexed cochain complexes, constructed using the composable arrows functor followed by the quotient to homotopy classes. The structure includes: (\"}\n  {\"name\": \"CategoryTheory.Functor.comp_homologySequenceδ\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a triangulated functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ with integer-indexed shift structure, given a triangle $ T $ in $ \\\\mathcal{C} $ and integers $ n_0, n_1 $ such that $ n_0 + 1 = n_1 $, th\"}\n  {\"name\": \"HomotopyCategory.spectralObjectMappingCone_ω₁\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C],\\n  (HomotopyCategory.spectralObjectMappingCone C).ω₁ =\\n    (HomotopyCategory.composableArro\", \"doc\": \"The first omega functor $\\\\omega_1$ of the spectral object in the homotopy category is defined as the composition of the composable arrows functor (which maps 1-composable arrows to their mapping cones\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.mapTriangleIso and mapTrianglehIso concern termwise additive functors. K here mixes adjacent complex degrees with T-1; its signed cyclic cone/shift comparison and quasi-isomorphism descent are not one-line specializations. The totalRightDerived shift instance assumes an already constructed derived functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"commShift\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsRightDerivedFunctor.instCommShiftTotalRightDerived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerivedCommShift\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] {F : CategoryTheory.Functor C D} {L : CategoryTheory.Functor C H} (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] (A : Type \", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.mapTriangleIso and mapTrianglehIso concern termwise additive functors. K here mixes adjacent complex degrees with T-1; its signed cyclic cone/shift comparison and quasi-isomorphism descent are not one-line specializations. The totalRightDerived shift instance assumes an already constructed derived functor."
+  },
+  {
+   "tool": "grep",
+   "query": "(cyclic|Cyclic).*(total|Total|cone|Cone)",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Order/Circular.lean\", \"line\": \"148\", \"text\": \"replaced by ternary relations `btw` and `sbtw`. `btw` is reflexive, cyclic, antisymmetric and total.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.mapTriangleIso and mapTrianglehIso concern termwise additive functors. K here mixes adjacent complex degrees with T-1; its signed cyclic cone/shift comparison and quasi-isomorphism descent are not one-line specializations. The totalRightDerived shift instance assumes an already constructed derived functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two column cyclic total generator minus one triangulated functor signed shift cone",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(cyclic|Cyclic).*(total|Total|cone|Cone)",
+   "results": "OK 1 hits: Mathlib/Order/Circular.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: termwise additive-functor cone/derived machinery does not state the cyclic functor mixing adjacent degrees; totalFunctor alone does not supply these shift, cone, and descent comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"mapTriangleIso\"",
+   "results": "OK 1 hits: CochainComplex.mappingCone.mapTriangleIso",
+   "date": "2026-10-22",
+   "verdict": "no match: termwise additive-functor cone/derived machinery does not state the cyclic functor mixing adjacent degrees; totalFunctor alone does not supply these shift, cone, and descent comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two column cyclic totalization of a complex with automorphism is a triangulated functor preserving quasi isomorphisms with signed shifts and cones",
+   "results": "OK 8 hits: CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.IsHomological, HomotopyCategory.instIsTriangulatedIntUp, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, CategoryTheory.Functor.IsHomological.mk', CochainComplex.mappingCone.mapTrianglehIso, CategoryTheory.Functor.isHomological_of_localization",
+   "date": "2026-10-22",
+   "verdict": "no match: termwise additive-functor cone/derived machinery does not state the cyclic functor mixing adjacent degrees; totalFunctor alone does not supply these shift, cone, and descent comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed two column totalization of a complex with automorphism induces a triangulated functor on derived categories",
+   "results": "OK 8 hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.instAdditive, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, HomologicalComplex₂.totalFunctor, CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor, HomologicalComplex₂.totalFunctor_map, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+   "date": "2026-10-22",
+   "verdict": "no match: termwise additive-functor cone/derived machinery does not state the cyclic functor mixing adjacent degrees; totalFunctor alone does not supply these shift, cone, and descent comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping fiber of a natural endomorphism of complexes commutes with shifts and mapping cones and preserves quasi isomorphisms",
+   "results": "OK 8 hits: CochainComplex.mappingCone.mapTrianglehIso, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexXIso', CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapTriangleIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: termwise additive-functor cone/derived machinery does not state the cyclic functor mixing adjacent degrees; totalFunctor alone does not supply these shift, cone, and descent comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-cyclic-restriction-model",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: relative cyclic restriction and residual-action forgetting below the tame-boundary analytic condensed calculation; explicit rank-one row augmentation and bar evaluation at the chosen generator. Returned relative-cyclic proof steps 7,8: Signed cyclic totalization on the bounded-below derived category.",
+   "via": [
+    "lem-sfb-relative-cyclic-restriction-model",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-cyclic-total-triangulated",
+  "worker": "stage1",
+  "summary": "Q125 supplies a nine-step proof with explicit two- and four-coordinate signs, the split short exact sequence, acyclic-cone quasi-isomorphism test, ordinary localization and signed lower-bound/transposition formulas. Every non-elementary input is an existing node; zero new nodes. Statement unchanged.",
+  "blueprint": "Paragraph (3) direct images, auxiliary relative cyclic calculation extracted from lem-sfb-relative-cyclic-restriction-model steps 7,8. Steps 1–7 justify its triangulated cyclic total; steps 8–9 justify its reindexing and row/column augmentation comparisons. The inherited ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Definition/convention used in the explicit coordinate argument; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "General abelian-complex long exact sequence used on a two-column split sequence; no spectral-sequence route is substituted."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "General quasi-isomorphism/acyclic-cone criterion used twice on the explicit cone comparison."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Ordinary localization of functors and their natural transformations; formal descent of the constructed functor."
+   },
+   {
+    "node": "lem-sfb-derived-localization-additive",
+    "why": "Additivity and essential surjectivity of the derived localization, needed for additive descent."
+   },
+   {
+    "node": "lem-pur-additive-localization-descent",
+    "why": "Generic additive descent through an additive essentially-surjective localization."
+   },
+   {
+    "node": "def-weil-pbc-bounded-derived-subcategories",
+    "why": "Definition/convention used in the explicit coordinate argument; no unit proof route is replaced."
+   },
+   {
+    "node": "def-sp-double-complex-total",
+    "why": "Definition/convention used in the explicit coordinate argument; no unit proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-derived-localization-additive",
+  "lem-pur-additive-localization-descent",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sp-double-complex-total"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-400342b75",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-400342b75 (reviewer sub-agent of L); spot-checked: Read the item's nine steps in full, every cited node statement and the Stacks labels; I recomputed every coordinate identity. The statement and stmt_deps are identical to the version NE created on 2026-10-22. There are 0 new nodes, no SGA citation and no re-split note. Step 1: lem-sfb-condensed-action-injective-infrastructure allows any topological group, so it covers G×Z_disc, and restriction along g↦(g,0) is exact. The product-invariants datum of def-sfb-condensed-action-module gives the kernel-fixed sections, which are the C(T,Z)-fixed sections. Such a map is constant on a finite clopen cover, so these are exactly ker(T−1). Step 2: d_K²=(0,[u,d]x)=0, and the homotopy (h,−h) has mixed term uh−hu=0. Step 3: S_s=(x,(−1)^s y) commutes with the differentials, using the shift convention (−1)^k d of def-weil-abstract-derived-category and Stacks. Step 4: using the cone convention C(f)=L⊕K[1] with d=[[d_L,f],[0,−d_K]], both dΦ and Φd equal (db+fa, ub−dc−fe, −da, −ua−de). The last arrow gives K(−p) then S_1 = (−a,e) = −pΦ. Step 5: the degreewise split sequence U N[−1]→KN→UN and its long exact sequence give the bound n<c correctly. Step 6: acyclicity of the cone passes through the exact U and Φ. Step 7: localization universal property parts (1)–(3) descend the functor, the shift isomorphisms and their coherence. Additivity follows from additive descent with essential surjectivity. Every triangle is the image of a cone triangle, and D^+ is defined by cohomology vanishing, so no representative needs to be termwise bounded. Step 8: θ=(−1)^{ab} satisfies θ_{a+1}=(−1)^bθ_a. With the total convention d_I+(−1)^p d_II, the two-column total equals K exactly. Step 9: η=(−1)^{aq} satisfies both chain equations and is 1 on the axes. Small cases T=1, M in degree 0, f=0, odd/negative s and b, and char 2 all check out. Duplicates: def-sfb-relative-cyclic-total (NB) is a specification-only definition of the same model, not a proven lemma. The relative-cyclic-restriction, row-derived and coefficient-square nodes cite this item, so citing them here would be circular. The tool_uses are generic homological conventions and are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CyclicTotalTriangulated",
+  "declaration": "CategoryTheory.RelativeCyclic.exists_signed_cyclicTotal",
+  "declarations": [
+   "CategoryTheory.RelativeCyclic.HasSignedTotalShift",
+   "CategoryTheory.RelativeCyclic.IsTotalDescent",
+   "CategoryTheory.RelativeCyclic.exists_signed_cyclicTotal",
+   "CategoryTheory.RelativeCyclic.cyclicTotal_cone",
+   "CategoryTheory.RelativeCyclic.cyclicTotal_twoColumn",
+   "CategoryTheory.RelativeCyclic.cyclicTotal_lowerBound",
+   "CategoryTheory.RelativeCyclic.cyclicTotal_transpose"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CyclicTotalTriangulated.lean",
+  "statement": "theorem exists_signed_cyclicTotal : ∃ K : TotalModel A G, K.functor.Additive ∧ HasSignedTotalShift A G K ∧ (∀ (N P : CochainComplex (Equivariant A (G × Z.{u})) ℤ) (f g : N ⟶ P) (h : Homotopy f g), ∃ H : Homotopy (K.functor.map f) (K.functor.map g), ∀ i j : ℤ, H.hom i j ≫ (K.coordinates P j).hom = (K.coordinates N i).hom ≫ biprod.map ((retainResidual A G Z).map (h.hom i j)) (-((retainResidual A G Z).map (h.hom (i - 1) (j - 1))))) ∧ (∀ (N P : CochainComplex (Equivariant A (G × Z.{u})) ℤ), CochainComplex.plus _ N → CochainComplex.plus _ P → ∀ f : N ⟶ P, QuasiIso f → QuasiIso (K.functor.map f)) ∧ (∃ (F : DerivedCategory.Plus (Equivariant A (G × Z.{u})) ⥤ DerivedCategory.Plus (Equivariant A G)) (σ : F.CommShift ℤ), @IsTotalDescent A G _ _ _ _ _ _ K F σ)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the already landed def-sfb-relative-cyclic-total specification, added to stmt_deps; the remaining signed comparisons are clauses of this node, with no comparison to derived invariants assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84bf5bc6c",
+  "group": "N6",
+  "result": "pass",
+  "note": "Only lean and an added landed stmt_dep (def-sfb-relative-cyclic-total, used for TotalModel/plusQ) changed; 8 dep records identical to live; statement verbatim; 7 decls present. Clauses checked against node and Mathlib conventions: TotalModel fixes coordinates N^n⊕N^{n-1}, d=(dx,(T-1)x-dy), diagonal maps, augmentation (incl,0); homotopy (h,-h) verified (mixed term cancels); QI preservation for plus complexes; descent F to DerivedCategory.Plus is additive and triangulated, with a CommShift iso to plusQ⋙F⋙ι ≅ ι⋙K⋙Q that pins F and σ; HasSignedTotalShift pins the shift as (x,(-1)^s y); cone e has fstX/sndX coordinates = (b,c,a,-e), recomputed, plus inr and the negative mor₃ through the S_1 shift; two-column total matches ε₂=(-1)^a; lower-bound sign (a*b).negOnePow = Mathlib ι_totalShift₂Iso_hom_f; flip σ=(a*q).negOnePow, naturality, QuasiIso iff, axis sign 1. Edge cases (s,b negative/odd/zero, T=1, f=0, char 2, unbounded N, axes) ok. No hollow defs, sorry-only proofs, docstrings carry source and blueprint tag, no extra assumptions or universes, no duplicates. Advisory: proof-only imports; axis clauses are special cases of the general sign formulas. No compile (no files changed)."
+ }
+}

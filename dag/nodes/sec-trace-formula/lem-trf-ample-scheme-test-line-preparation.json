@@ -1,0 +1,410 @@
+{
+ "id": "lem-trf-ample-scheme-test-line-preparation",
+ "kind": "statement",
+ "title": "Line-module preparation on an arbitrary scheme test of a locally polarized space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $f:F\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and $M$ a line module on $F$. Let $\\{g_i:Y_i\\to Y\\}_{i\\in I}$ be a jointly surjective etale family from schemes, and suppose $F_i=F\\times_YY_i$ is a scheme for every $i$. Write $M_i$ for the ordinary invertible module [def-sc-invertible-module] obtained by restricting $M$ along $F_i\\to F$ and then to Zariski opens [def-trf-space-module-scheme-restriction]. Suppose $M_i|_{F_i\\times_{Y_i}V}$ is ample [def-weil-pbc-ample-invertible-module] for every affine open $V\\subseteq Y_i$.\nFor any scheme $T$ over $S$ and any map $h_T\\to Y$, put $X=F\\times_YT$, $T_i=Y_i\\times_YT$, and $X_i=X\\times_TT_i\\simeq F_i\\times_{Y_i}T_i$. Then $X$ is an algebraic space, all $T_i,X_i$ are schemes, and $\\{T_i\\to T\\}$ and $\\{X_i\\to X\\}$ are jointly surjective etale families. Let $N_i$ be the ordinary tensor pullback of $M_i$ to $X_i$ [def-pc-module-pullback]. The $N_i$ are invertible and ample on the inverse image of every affine open of $T_i$. On $X_i\\times_XX_j$, their transition isomorphisms obtained by pulling back the restriction identifications of $M$ on $F_i\\times_FF_j$ satisfy the diagonal identity and the triple-overlap cocycle. There is a line module $N$ on $X$, with identifications $N|_{X_i}\\simeq N_i$ inducing exactly these transitions; it is unique up to the unique isomorphism preserving the identifications. The projection $f_T:X\\to T$ is quasi-compact and separated, in the terminology of [def-sfb-space-quasi-compact-presheaf-map] and [def-sfb-presheaf-map-separated-diagonal]. If $T\\to Y$ is etale, the same local identifications induce a canonical isomorphism $N\\simeq M|_X$ of line modules on $X$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C (lemma-descending-property-ample), the polarized-scheme descent sentence of lem-trf-local-term-locality, via the arbitrary-scheme-test reduction of lem-trf-algebraic-space-ample-local: old proof Steps 1 and 2 (base-changed covers, invertible cocycle descent, etale-test comparison, and quasi-compact separated preparation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-trf-space-module-scheme-restriction",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-sfb-ordinary-etale-identification",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal",
+  "def-trf-tensor-sections-unit-composition"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the geometric charts on the arbitrary scheme test, choosing the actual scheme pullbacks as source schemes.",
+   "uses": [
+    "lem-trf-ample-scheme-test-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalized line descent to the original M, these charts, and their commuting triangles. This supplies original invertibility, every transition and cocycle, the descended line module, uniqueness, and the etale comparison.",
+   "uses": [
+    "lem-trf-ample-test-normalized-line-descent",
+    "def-trf-ample-test-normalized-section-equations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use clause (1) of invertible_pullback_tensor to make each literal pullback invertible. Apply scheme relative-ampleness base change to each actual scheme pullback; no transport across an arbitrary chosen chart is needed.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-scheme-relative-ample-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each affine open of T_i, absolute ampleness supplies CompactSpace of its inverse image. The Mathlib affine-open criterion gives QuasiCompact of the local scheme map. The final separatedness clause of the canonical-Proj criterion gives IsSeparated.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-finite-type-morphism",
+    "lem-trf-scheme-ample-canonical-proj-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the scheme-chart recognition bridge to obtain both presheaf geometric properties. Build the complete preparation structure from the chart data, normalized line data, and these proved local module properties. The etale comparison is exactly the one carried by normalized line descent.",
+   "uses": [
+    "lem-trf-scheme-chart-qc-separated-presheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-ample-scheme-test-charts",
+  "lem-trf-ample-test-normalized-line-descent",
+  "def-trf-ample-test-normalized-section-equations",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-scheme-relative-ample-base-change",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-finite-type-morphism",
+  "lem-trf-scheme-ample-canonical-proj-criterion",
+  "lem-trf-scheme-chart-qc-separated-presheaf",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C preparation, formally assembled by S4 from three strictly partial proof obligations: geometric charts, normalized line descent and scheme-to-presheaf recognition. Invertibility, relative ampleness and local quasi-compactness/separatedness are proved from the existing declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a relatively ample line module on an etale scheme cover of the base of an algebraic space morphism, every arbitrary scheme test admits a descended line module with ample local scheme pullbacks and quasi compact separated projection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  (𝒰' : (i : 𝒰.\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {T : AlgebraicGeometry.Scheme} (f : T ⟶ S),\\n  AlgebraicGeometry.QuasiCompactCover (CategoryTheory.PreZeroHypercover.pullback₁ f 𝒰)\", \"doc\": \"Given a quasi-compact cover $\\\\mathcal{U}$ of a scheme $S$ and a morphism $f : T \\\\to S$ of schemes, the pullback of $\\\\mathcal{U}$ along $f$ forms a quasi-compact cover of $T$. This asserts that the pro\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale descent of line bundles and relative polarizations on arbitrary base changes of algebraic spaces, with quasi compact separated structure morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n      ∀ {X Y S : AlgebraicGeometry.Scheme} [AlgebraicGeometry.I\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change and respects isomorphisms, then for affine schemes $ X, Y, S $ with morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $, the property $ P \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S T : AlgebraicGeometry.Scheme} (f : S ⟶ T),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.AffineSpace.map n f) (AlgebraicGeometry.AffineSpace n S ↘ S)\\n    (AlgebraicGeometry.AffineSpace n T ↘ T) f\", \"doc\": \"Given a morphism $f: S \\\\to T$ of schemes, the induced morphism $\\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_T$ between affine spaces forms a pullback square with the canonical projections $\\\\mathbb{A}^n_S \\\\to S$ a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"Given a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the morphisms $\\\\operatorname{Spec}(\\\\kappa(T.x)) \\to \\\\operatorname{Spec}(T.tensor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the Spec maps of the left/right inclusions into the pushout of residue fields $T.te\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pull back and descend invertible modules to an arbitrary scheme test of an algebraic space using an etale atlas, preserving local relative ampleness and descending quasi compactness and separatedness",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \": W.Cover (precoverage P)\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and schemes $ X $ and $ W $ over $ S $, if $ \\\\mathcal{U} $ is a $ P $-precover\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverPullbackCoverOver\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \": (𝒰.pullbackCoverOver S f).Over S\", \"doc\": \"Given a base scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, a scheme $ X $ over $ S $ with a $ P $-precoverage cover $ \\\\mathcal{U} $,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\", \"pullback\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"VectorField.pullback_eq_of_not_isInvertible\", \"module\": \"Mathlib.Analysis.Calculus.VectorField\", \"type\": \" {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_2} [NormedAddCommGroup E] [NormedSpace 𝕜 E] {F : Type u_3} [NormedAddCommGroup F] [NormedSpace 𝕜 F] {f : E → F} {x : E} (h : ¬(fderiv 𝕜 f x).IsInvertible) (V : F → F) : VectorField.pullback 𝕜 f V x = 0\", \"doc\": \"\"}\n  {\"name\": \"VectorField.pullbackWithin_eq_of_not_isInvertible\", \"module\": \"Mathlib.Analysis.Calculus.VectorField\", \"type\": \" {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_2} [NormedAddCommGroup E] [NormedSpace 𝕜 E] {F : Type u_3} [NormedAddCommGroup F] [NormedSpace 𝕜 F] {s : Set E} {f : E → F} {x : E} (h : ¬(fderivWithin 𝕜 f s x).IsInvertible) (V : F → F) : VectorField.pullbackWithin 𝕜 f V s x = 0\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descend.*[Ii]nvertible|[Ii]nvertible.*descen",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|relatively.ample|invertible.*descent",
+   "results": "Actual search: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale locally polarized algebraic space morphism: on any scheme base change descend a line bundle with ample local restrictions and quasi compact separated projection",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, RingHom.Etale, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsInvertible\"",
+   "results": "Actual search: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pull back an invertible module on an algebraic space along an arbitrary scheme test, using etale descent; relative ampleness survives and the projection is quasi compact separated",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback; ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf with relatively ample restrictions on an etale atlas of an algebraic space pulls back by scheme tests and descends uniquely with a prescribed cocycle",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t', AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f, AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq, AlgebraicGeometry.Scheme.LocalRepresentability.glueData; ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-ample-local",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the polarized-scheme descent sentence of lem-trf-local-term-locality, via the arbitrary-scheme-test reduction of lem-trf-algebraic-space-ample-local: old proof Steps 1 and 2 (base-changed covers, invertible cocycle descent, etale-test comparison, and quasi-compact separated preparation).",
+   "via": [
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-ample-scheme-test-line-preparation",
+  "worker": "stage1",
+  "summary": "Proved the eight-step preparation entirely from existing nodes: fibre products and covers, arbitrary scheme-base-change ampleness, prescribed restriction transitions and their tensor-pullback cocycle, effective descent with unique comparison, quasi-compact/separated scheme tests and space descent, and the etale comparison. No new nodes or changed statement. All cited statements were read; local terminology was checked testwise.",
+  "blueprint": "Historical polarized-descent input beneath lem-trf-local-term-locality via lem-trf-algebraic-space-ample-local, its Steps 1 and 2. The latest blueprint locality proof no longer contains the historical polarized-scheme sentence; this delivery retains the assigned ancestry and supplies the existing parent input without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "why": "Generic unit-compatible identification of tensor pullback with restriction on opens; fixes the precise ordinary-module normalization of the scheme-site equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic tensor-pullback preservation of ordinary invertibility (clause (1)); no theorem of this unit replaces this module tool."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Generic scheme quasi-compact base change, used to compare the scheme and space affine-test definitions, not to replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme closed-immersion base change verifies separatedness on every scheme test of a diagonal."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-fa31cfa51",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-fa31cfa51 (reviewer sub-agent of L); spot-checked: Read in full: Stacks 0D3C (spaces-descent.tex 2122-2200), the 8-step proof and every cited statement. The statement, stmt_deps, source and blueprint are byte-identical to side-live, where the item is still unsplit, so it is not superseded and not weakened. The proof carries all of the parent's old Steps 1-2 (covers, N_i invertible and ample via 0893-type base change, cocycle, descent and uniqueness, qc+sep via the 01VI clause of the canonical-proj criterion plus space locality 03KG/03KM, N≅M|_X for étale T). No cycle (closure from the cited nodes reaches neither the item nor lem-trf-algebraic-space-ample-local); proof_deps equals the union of uses; no SGA. Steps 1-7 are correct: hypotheses match exactly, and T need not be qc or flat. One C4 fault, repaired: Step 8 cited lem-trf-space-fibre-products-etale-covers for base change of a single étale T→Y, but that lemma only covers jointly surjective families, and it asserted that a_i is étale without a reason. The fix applies the lemma to the family {T→Y}∪{g_i}, and gets a_i étale as the scheme test of X→F at F_i→F via def-trf-algebraic-space, which is added to Step 8's uses. Tool use lem-weil-pbc-invertible-pullback-tensor (1) accepted as generic; the other three are Mathlib leaves. No new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.AmpleSchemeTestLinePreparation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_ampleSchemeTestLinePreparation",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.AmpleSchemeTestLinePreparation",
+   "AlgebraicGeometry.AlgebraicSpace.exists_ampleSchemeTestLinePreparation"
+  ],
+  "file": "lean/Sheaf/TraceFormula/AmpleSchemeTestLinePreparation.lean",
+  "statement": "theorem exists_ampleSchemeTestLinePreparation {S : Scheme.{u}} {F Y : AlgebraicSpace S} (f : F ⟶ Y) (M : F.Modules) (hM : F.IsLineModule M) (I : Type v) (Yᵢ : I → Y.EtaleSite) (Fᵢ : I → F.EtaleSite) (pᵢ : ∀ i : I, (Fᵢ i).obj.left ⟶ (Yᵢ i).obj.left) (hcover : IsJointlySurjective (fun i : I ↦ (Yᵢ i).obj.hom)) (hpb : ∀ i : I, IsPullback (Fᵢ i).obj.hom (yoneda.map (pᵢ i)) f.hom.hom (Yᵢ i).obj.hom) (hample : ∀ (i : I) (V : (Y.etaleForget.obj (Yᵢ i)).Opens), IsAffineOpen V → ∃ hL : ((tensorPullback ((pᵢ i).left ⁻¹ᵁ V).ι).obj ((F.schemeRestriction (Fᵢ i)).obj M)).IsInvertible, @IsAmple ((pᵢ i).left ⁻¹ᵁ V).toScheme ((tensorPullback ((pᵢ i).left ⁻¹ᵁ V).ι).obj ((F.schemeRestriction (Fᵢ i)).obj M)) hL) (T : Over S) (h : yoneda.obj T ⟶ Y.obj.obj) : ∃ P : AmpleSchemeTestLinePreparation f M Yᵢ Fᵢ pᵢ T h, IsEtale h → AmpleTestEtaleComparison F P.X P.toF M P.N Fᵢ P.Xᵢ P.xF P.original P.identification",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The existential result bundle and final comparison clause retain the exact base-change squares, ordinary tensor pullbacks, normalized original restrictions, pulled-back transitions with diagonal and cocycle, effective descent with uniqueness preserving identifications, quasi-compact/separated projection, and locally normalized etale-test comparison. Helper predicates only spell out these local equations; all maps have concrete tensor-composition data. The covering index universe is independent. Returned-head 39e4bfa645eb repair: statement dependencies now cite the definition owners of ordinary/etale identifications, canonical tensor composition, quasi-compactness and separatedness; both descent and locality theorems remain proof dependencies. Mathematical signature unchanged. H2 repair of a799091a0d34: tensorSectionsComp/tensorSectionsUnit now have the definition owner def-trf-tensor-sections-unit-composition; the functoriality theorem is cited only for the proof. Rebase repair: def-sfb-ordinary-etale-identification has now landed with the four unchanged helper definitions extracted into Sheaf.AlgebraicGeometry.OrdinaryEtaleIdentification. Reuse that owner and drop this packet's redundant proposed ordinary-identification node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bcf3e061c",
+  "group": "Q37",
+  "result": "pass",
+  "note": "bcf3 is a re-delivery of a7da (PASS) to clear its advisory. Step 3 now cites lem-sc-etale-qcoherent-presheaf-functorial in its text and uses, so proof_deps equals the union of uses; statement_change gains old_proof; the Lean change is 3 docstring lines (signature and definitions byte-identical to the compiled a7da/a799 file). check_statement_change(main, head) returned no errors; old_statement, old_stmt_deps, old_proof and old_proof_deps equal side-live main verbatim; only Step 3 differs and the only proof_deps addition is the functoriality theorem. Citation-only statement change (qc/separated references go to def-sfb-* owners); citer ample-local holds. All stmt_deps are on main or delivered (def-trf-tensor-sections-unit-composition existing:true, no rival owner on main). The §1(B) point-cover repair of qc-separated-etale-local is unchanged (node JSON read from the commit; the snapshot omits it). Mathematics re-checked clause by clause; edge cases covered; only sorry proofs; no compile (no file changed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "Q37 stage 2",
+  "old_statement": "Let $S$ be a scheme [def-pc-scheme], $f:F\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and $M$ a line module on $F$. Let $\\{g_i:Y_i\\to Y\\}_{i\\in I}$ be a jointly surjective etale family from schemes, and suppose $F_i=F\\times_YY_i$ is a scheme for every $i$. Write $M_i$ for the ordinary invertible module [def-sc-invertible-module] obtained by restricting $M$ along $F_i\\to F$ and then to Zariski opens [def-trf-space-module-scheme-restriction]. Suppose $M_i|_{F_i\\times_{Y_i}V}$ is ample [def-weil-pbc-ample-invertible-module] for every affine open $V\\subseteq Y_i$.\nFor any scheme $T$ over $S$ and any map $h_T\\to Y$, put $X=F\\times_YT$, $T_i=Y_i\\times_YT$, and $X_i=X\\times_TT_i\\simeq F_i\\times_{Y_i}T_i$. Then $X$ is an algebraic space, all $T_i,X_i$ are schemes, and $\\{T_i\\to T\\}$ and $\\{X_i\\to X\\}$ are jointly surjective etale families. Let $N_i$ be the ordinary tensor pullback of $M_i$ to $X_i$ [def-pc-module-pullback]. The $N_i$ are invertible and ample on the inverse image of every affine open of $T_i$. On $X_i\\times_XX_j$, their transition isomorphisms obtained by pulling back the restriction identifications of $M$ on $F_i\\times_FF_j$ satisfy the diagonal identity and the triple-overlap cocycle. There is a line module $N$ on $X$, with identifications $N|_{X_i}\\simeq N_i$ inducing exactly these transitions; it is unique up to the unique isomorphism preserving the identifications. The projection $f_T:X\\to T$ is quasi-compact and separated, in the terminology of [lem-trf-space-qc-separated-etale-local]. If $T\\to Y$ is etale, the same local identifications induce a canonical isomorphism $N\\simeq M|_X$ of line modules on $X$.",
+  "what": "Citation-only correction required by the independent H2 return of 39e4bfa645eb: the quasi-compact/separated terminology cited a theorem instead of its landed definition owners. Replace that reference, and replace the corresponding statement dependency; also bind the ordinary/etale helpers to their requested definition owner and cite the tensor-composition owner. No hypothesis, object, or mathematical conclusion changes. Both theorems remain proof dependencies. Further H2 repair of a799091a0d34: tensorSectionsComp and tensorSectionsUnit receive their own existing-definition owner instead of citing the presheaf-functoriality conclusion; that theorem is added only to proof_deps. Current-main rebase: use the newly landed def-sfb-ordinary-etale-identification in place of the unlanded duplicate def-trf-algebraic-space-ordinary-etale-identification. Repair of returned head a7da3638c2ff: Step 3 now explicitly cites and uses the tensor-section restriction identity/composition theorem, so the proof_deps list equals the union of proof-step uses; no mathematical statement changes.",
+  "source": {
+   "document": "literature/stacks-project/spaces-descent.tex",
+   "place": "Tag 0D3C (lemma-descending-property-ample), the polarized-scheme descent sentence of lem-trf-local-term-locality, via the arbitrary-scheme-test reduction of lem-trf-algebraic-space-ample-local: old proof Steps 1 and 2 (base-changed covers, invertible cocycle descent, etale-test comparison, and quasi-compact separated preparation)."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-algebraic-space-ample-local",
+    "holds": true,
+    "note": "Only the definition-owner citations for quasi-compactness and separatedness change; the arbitrary-test preparation and every conclusion used in its first proof step are identical."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-trf-algebraic-space",
+   "def-sc-invertible-module",
+   "def-trf-space-module-scheme-restriction",
+   "def-weil-pbc-ample-invertible-module",
+   "def-pc-module-pullback",
+   "lem-trf-space-qc-separated-etale-local"
+  ],
+  "old_proof_deps": [
+   "lem-trf-space-fibre-products-etale-covers",
+   "def-pc-fibre-product",
+   "def-trf-algebraic-space",
+   "lem-weil-pbc-invertible-pullback-tensor",
+   "lem-trf-scheme-relative-ample-base-change",
+   "lem-trf-scheme-etale-invertible-comparison",
+   "lem-trf-etale-line-sections-normalized-comparisons",
+   "lem-weil-pbc-open-immersion-module-pullback-restriction",
+   "def-trf-space-module-scheme-restriction",
+   "def-pc-module-pullback",
+   "lem-trf-algebraic-space-invertible-descent",
+   "def-weil-pbc-ample-invertible-module",
+   "def-weil-finite-type-morphism",
+   "lem-trf-scheme-ample-canonical-proj-criterion",
+   "lem-trf-space-qc-separated-etale-local",
+   "lem-pc-quasi-compact-base-change",
+   "def-weil-proper-morphism",
+   "lem-weil-pbc-closed-immersion-base-change"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply [lem-trf-space-fibre-products-etale-covers] first to $F\\to Y\\leftarrow T$, then to the covering $(Y_i\\to Y)_i$ after base change to $T$ and to $X=F\\times_YT$. It gives the algebraic space $X$, schemes $T_i=Y_i\\times_YT$, and the jointly surjective etale family $(T_i\\to T)_i$. The other base change gives the covering $(X_i\\to X)_i$. Associativity of fibre products identifies $X_i$ with $F_i\\times_{Y_i}T_i$: both have the same tuples of compatible maps to $F,Y_i,T$. Since $F_i,Y_i,T_i$ are schemes, [def-pc-fibre-product] makes each $X_i$ a scheme. Representability of the diagonals also makes all double and triple overlaps of these scheme charts schemes.",
+    "uses": [
+     "lem-trf-space-fibre-products-etale-covers",
+     "def-pc-fibre-product",
+     "def-trf-algebraic-space"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/spaces.tex",
+     "place": "Tag 02X2 (lemma-fibre-product-spaces); spaces-topologies.tex Tag 041F (lemma-etale), (3); the fibre-product tuple identifications are universal-property calculations."
+    }
+   },
+   {
+    "text": "Write $a_i:X_i\\to F_i$ and put $N_i=a_i^*M_i$. Clause (1) of [lem-weil-pbc-invertible-pullback-tensor] makes $N_i$ invertible. Apply [lem-trf-scheme-relative-ample-base-change] to $F_i\\to Y_i$, the arbitrary scheme map $T_i\\to Y_i$, and $M_i$. Its hypothesis is exactly the assumed ampleness over all affine opens of $Y_i$, so it proves ampleness of $N_i$ on the inverse image of every affine open of $T_i$. No etaleness or flatness of $T\\to Y$ is needed.",
+    "uses": [
+     "lem-weil-pbc-invertible-pullback-tensor",
+     "lem-trf-scheme-relative-ample-base-change"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/morphisms.tex",
+     "place": "Tag 0893 (lemma-ample-base-change); modules.tex Tag 0B8L (lemma-pullback-invertible)."
+    }
+   },
+   {
+    "text": "On $R_{ij}=F_i\\times_FF_j$ write $r_i,r_j$ for the projections. By [lem-trf-scheme-etale-invertible-comparison], the ordinary modules $r_i^*M_i,r_j^*M_j$ correspond to the restrictions of $M$ to the same localized site $(R_{ij})_{\\mathrm{et}}$. Restriction of a sheaf composes by composition of its indexing maps [def-trf-algebraic-space]. The identity between these two restrictions therefore gives a specified isomorphism $\\alpha_{ij}:r_j^*M_j\\simeq r_i^*M_i$. The comparison equivalence is fully faithful and compatible with composition of etale maps. Consequently its ordinary isomorphisms satisfy the diagonal identity and $\\alpha_{ij}\\alpha_{jk}=\\alpha_{ik}$ on triple overlaps: both composites correspond to the identity of the same restriction of $M$. The comparisons of [lem-trf-etale-line-sections-normalized-comparisons] are the unit-normalized tensor comparisons, including their identity and composition laws. On opens, [lem-weil-pbc-open-immersion-module-pullback-restriction] identifies the tensor pullback with ordinary restriction. Thus restriction to opens here is precisely [def-trf-space-module-scheme-restriction].",
+    "uses": [
+     "lem-trf-scheme-etale-invertible-comparison",
+     "lem-trf-etale-line-sections-normalized-comparisons",
+     "lem-weil-pbc-open-immersion-module-pullback-restriction",
+     "def-trf-algebraic-space",
+     "def-trf-space-module-scheme-restriction"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/descent.tex",
+     "place": "Tags 03DX (proposition-equivalence-quasi-coherent), (2), 05VG (lemma-equivalence-quasi-coherent-properties), and 03LC (proposition-equivalence-quasi-coherent-functorial), (1)."
+    }
+   },
+   {
+    "text": "Put $D_{ij}=X_i\\times_XX_j$, with projections $p_i,p_j$. Its projections to $F_i,F_j$ induce $b_{ij}:D_{ij}\\to R_{ij}$. Pull back $\\alpha_{ij}$ by $b_{ij}$ and use composition of tensor pullbacks [def-pc-module-pullback] to obtain $\\beta_{ij}:p_j^*N_j\\simeq p_i^*N_i$. These are exactly the transitions in the statement. The composition identifications are the tensor associativity maps: locally they send $c\\otimes(d\\otimes m)$ to $c\\,a^\\sharp(d)\\otimes m$. For three pullbacks, either bracketing sends $c\\otimes(d\\otimes(e\\otimes m))$ to $c\\,a^\\sharp(d)\\,(a^\\sharp b^\\sharp)(e)\\otimes m$. Thus there is no change of the cocycle under the composition identifications. Functoriality of pullback sends the identity and the equality $\\alpha_{ij}\\alpha_{jk}=\\alpha_{ik}$ to the diagonal identity and $\\beta_{ij}\\beta_{jk}=\\beta_{ik}$, respectively.",
+    "uses": [
+     "def-pc-module-pullback"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/sheaves.tex",
+     "place": "Tag 0097 (lemma-push-pull-composition-modules), with the elementary associativity formula for the tensor pullback of Tag 0095."
+    }
+   },
+   {
+    "text": "Apply [lem-trf-algebraic-space-invertible-descent] to the algebraic space $X$, the scheme covering $(X_i\\to X)_i$, the ordinary invertible modules $N_i$, and the transitions $\\beta_{ij}$ just verified. It gives a line module $N$ and identifications with the $N_i$ inducing exactly those transitions. For two such choices the induced local comparison isomorphisms agree on every double overlap. The Hom bijection in the same cited statement gives a unique global comparison. Apply it again to their inverses: both composites restrict to identities and hence are identities by injectivity of that Hom map. This is uniqueness up to the unique isomorphism preserving the identifications.",
+    "uses": [
+     "lem-trf-algebraic-space-invertible-descent"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/spaces-descent.tex",
+     "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), effectiveness and full faithfulness, and Tag 060X (lemma-finite-locally-free-descends), rank one."
+    }
+   },
+   {
+    "text": "Let $v_i:X_i\\to T_i$ be the projection. For each affine open $V\\subseteq T_i$, Step 2 and [def-weil-pbc-ample-invertible-module] imply that $v_i^{-1}(V)$ is quasi-compact. By [def-weil-finite-type-morphism] this says that $v_i$ is quasi-compact as a scheme morphism. Apply condition (1) of [lem-trf-scheme-ample-canonical-proj-criterion] to $v_i,N_i$. It requires precisely this quasi-compactness, invertibility, and ampleness over every affine open. Its final assertion gives that $v_i$ is separated. We use only that final assertion, without constructing a Proj map or using the conclusion of the parent ampleness-descent item.",
+    "uses": [
+     "def-weil-pbc-ample-invertible-module",
+     "def-weil-finite-type-morphism",
+     "lem-trf-scheme-ample-canonical-proj-criterion"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/morphisms.tex",
+     "place": "Tags 01VJ (lemma-characterize-relatively-ample) and 01VI (lemma-relatively-ample-separated); spaces-descent.tex Tag 0D3C, quasi-compact/separated preparation paragraph."
+    }
+   },
+   {
+    "text": "These scheme properties also satisfy the space terminology of [lem-trf-space-qc-separated-etale-local]. Indeed, for an affine scheme $Z\\to T_i$, [lem-pc-quasi-compact-base-change] gives a quasi-compact morphism $X_i\\times_{T_i}Z\\to Z$. Its source is quasi-compact by evaluating the definition at the affine open $Z$ itself; its identity is a surjective etale atlas. For separatedness, [def-weil-proper-morphism] makes the scheme diagonal of $v_i$ a closed immersion. Every scheme test of that diagonal remains a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Now apply the reverse implication of [lem-trf-space-qc-separated-etale-local] to $X\\to T$ and the jointly surjective etale scheme family $(T_i\\to T)_i$. All its local base changes are the $v_i$, so $f_T$ is quasi-compact and separated in exactly the stipulated sense.",
+    "uses": [
+     "lem-trf-space-qc-separated-etale-local",
+     "lem-pc-quasi-compact-base-change",
+     "def-weil-finite-type-morphism",
+     "def-weil-proper-morphism",
+     "lem-weil-pbc-closed-immersion-base-change"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/spaces-morphisms.tex",
+     "place": "Tags 03KG (lemma-quasi-compact-local) and 03KM (lemma-separated-local); scheme base changes use schemes.tex Tag 01K5 and morphisms.tex Tag 01QR."
+    }
+   },
+   {
+    "text": "Finally suppose $T\\to Y$ is etale. Then $\\{T\\to Y\\}\\cup\\{g_i\\}_{i}$ is a jointly surjective etale family, so [lem-trf-space-fibre-products-etale-covers], applied to it and $F\\to Y$, makes its member $X=F\\times_YT\\to F$ etale, and $M|_X$ is defined by restriction. Since $X_i\\simeq F_i\\times_FX$, the map $a_i:X_i\\to F_i$ is the scheme test of the etale map $X\\to F$ at $F_i\\to F$, hence etale by the definition of etale maps in [def-trf-algebraic-space]. The etale pullback compatibility of [lem-trf-scheme-etale-invertible-comparison] identifies $(M|_X)|_{X_i}$ with the line module associated to $a_i^*M_i=N_i$. On overlaps these identifications give $\\beta_{ij}$ by their construction as restrictions of the same $M$, followed by tensor composition. The Hom bijection of [lem-trf-algebraic-space-invertible-descent] therefore glues these local identifications to a unique $N\\simeq M|_X$; gluing the inverse local maps proves it is an isomorphism. Its prescribed local character makes it canonical.",
+    "uses": [
+     "lem-trf-space-fibre-products-etale-covers",
+     "def-trf-algebraic-space",
+     "lem-trf-scheme-etale-invertible-comparison",
+     "lem-trf-algebraic-space-invertible-descent"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/descent.tex",
+     "place": "Tag 03LC (proposition-equivalence-quasi-coherent-functorial), (1); spaces-descent.tex Tag 04W8, fully faithful descent."
+    }
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7e2e3",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T082945-L-2243945",
+  "kind": "interface",
+  "note": "independent cc review: 6 defs moved byte-identical to clone; item signature/structure vs node lean.statement; 3 new sorry statements vs their nodes and the definitions of the qc/separated presheaf properties; no importers of item in clone"
+ }
+}

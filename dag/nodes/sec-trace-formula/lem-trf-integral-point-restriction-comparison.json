@@ -1,0 +1,107 @@
+{
+ "id": "lem-trf-integral-point-restriction-comparison",
+ "kind": "statement",
+ "title": "The section-normalized completed-linear restriction/pullback comparison",
+ "statement": "Use the coefficient conventions [def-trf-coefficient-conventions] and point Frobenius [def-trf-scheme-frobenius]. For a finite-field datum D, a prime l and a finite-dimensional coefficient extension E/Q_l, write c for coefficientSequenceRestriction on Spec D.k and G_r for ordinary sequence pullback at the r-th Frobenius power [def-trf-integral-comparison-sequence-systems, def-trf-integral-comparison-realization-models]. Write H_r for the termwise completed-module inverse image [def-weil-inverse-image-pullback-comparison, def-trf-coefficient-tower-operations]. There is a unique natural isomorphism j_r:c⋙H_r≅G_r⋙c such that, for every system M, level n, site object U and section x over the reindexed object Phi_r(U), its component sends the scalar-restriction cast of x to the scalar-restriction cast of the tensor-unit sequence generator of x, restricted along the specified isomorphism comma arrow. These are the actual site arrows, coefficient actions, generator and casts of the recorded models, not independently chosen identifications. No constructibility, completeness or finite-output condition is assumed. This is the unchanged original declaration IntegralPointTransportTower.restrictionComparison_existsUnique, now placed in a separate compilation unit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Agent-formulated prerequisite to clause (3): point transport on arbitrary simultaneous output systems and its whole-limit normalization; the blueprint asserts the application, not this stronger comparison lemma. Original j_r subclaim, preserved without strengthening or weakening."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-integral-comparison-realization-models",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-coefficient-tower-operations"
+ ],
+ "proof": [
+  {
+   "text": "Apply WeilConjectures.integralTowerInverseImageUnit_existsUnique to the scheme isomorphism ((pointFrobeniusAut D)^r).hom. Its arbitrary-scheme source and target are both Spec D.k. The definitions ordinaryInverseTower and ordinaryPullback are exactly the tower inverse image and sequence pullback used there, so the isomorphism type, every tensor-unit section formula, and uniqueness specialize without any casts or additional hypotheses.",
+   "uses": [
+    "def-trf-integral-tower-inverse-image-unit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-tower-inverse-image-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6, 03CZ and 0941; C6 specializes the already proved integralTowerInverseImageUnit_existsUnique (def-trf-integral-tower-inverse-image-unit) to Frobenius powers. The arbitrary-isomorphism proof constructs the actual adjunction unit and comma restriction, retains all quotient transitions, and proves uniqueness sectionwise."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image under an isomorphism of ringed sites is reindexing with transported scalars and commutes with scalar restriction along finite coefficient quotients",
+   "results": "8 hits, including SheafOfModules.ιFree_mapFree_inv, Scheme.Modules.inv_app, Scheme.inv_app and Scheme.Modules.restrictFunctorId_inv_app_app. They describe isomorphism inverses or free sheaves, not the simultaneous completed-linear scalar-restriction comparison.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits: restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val, restrictScalars_map_val. These give the scalar-restriction construction and its underlying presheaf, not this system comparison.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientSequenceRestriction",
+   "results": "0 Mathlib hits. The whole coefficient-system functor is project-specific.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPointTransportTowerPowers",
+  "date": "2026-10-27",
+  "group": "D3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-integral-point-transport-tower-powers",
+   "place": "Original j_r existence/uniqueness subclaim, prerequisite steps 1–2 and 5; unchanged statement moved for compilation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPointTransportComparisons",
+  "file": "lean/Sheaf/Paper/IntegralPointTransportComparisons.lean",
+  "declaration": "WeilConjectures.IntegralPointTransportTower.restrictionComparison_existsUnique",
+  "statement": "theorem restrictionComparison_existsUnique (r : ℕ) :\n    ∃! j : coefficientSequenceRestriction l E (Spec (.of D.k)) ⋙ ordinaryInverseTower D l E r ≅\n        ordinaryPullback D l E r ⋙ coefficientSequenceRestriction l E (Spec (.of D.k)),\n      ∀ (M : coefficientSequenceModules l E (Spec (.of D.k))) (n : ℕ) (U : (Spec (.of D.k)).ProEt)\n        (x : M.val.obj (op (n, (proEtaleIsoPostcompose\n          ((pointFrobeniusAut D) ^ r).hom).obj U))),\n        (((j.hom.app M).app (op n)).val.app (op U))\n          (integralComparisonRestrictedSection l E (Spec (.of D.k)) M n\n            (op ((proEtaleIsoPostcompose ((pointFrobeniusAut D) ^ r).hom).obj U)) x) =\n        integralComparisonRestrictedSection l E (Spec (.of D.k))\n          ((ordinaryPullback D l E r).obj M) n (op U)\n          (((ordinaryPullback D l E r).obj M).val.map\n            (CategoryTheory.Prod.mkHom (𝟙 n)\n              (proEtaleIsoCommaArrow ((pointFrobeniusAut D) ^ r).hom U)).op\n            (integralComparisonSequenceGenerator l E ((pointFrobeniusAut D) ^ r).hom M n\n              ((proEtaleIsoPostcompose ((pointFrobeniusAut D) ^ r).hom).obj U) x))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2a140",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T021306-L-2753286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T034624-L-3666701",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

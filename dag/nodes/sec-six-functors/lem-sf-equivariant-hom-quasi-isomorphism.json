@@ -1,0 +1,266 @@
+{
+ "id": "lem-sf-equivariant-hom-quasi-isomorphism",
+ "kind": "statement",
+ "title": "Equivariant product internal Hom preserves quasi-isomorphisms into K-injective targets",
+ "statement": "Let $(C,J,R)$ be a ringed site small in the coefficient universe [def-weil-size-convention], with $R$ a sheaf of commutative rings. Let $s$ be an automorphism of its sheaf topos with a specified ring isomorphism $s^{-1}R\\simeq R$, and let $T=s^*$ be the induced additive exact autoequivalence of $\\mathcal C=\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category]. Write $\\mathcal W=\\mathcal C^T$ for fixed pairs $(M,\\theta_M:TM\\xrightarrow{\\sim}M)$ and intertwining morphisms [def-weil-endofunctor-fixed-pair-category], and $U:\\mathcal W\\to\\mathcal C$ for forgetting the structure. Put $H(M,N)=\\mathcal Hom_R(UM,UN)$, where internal sheaf Hom sends a localized site object $V$ to the $R|_V$-linear sheaf maps $UM|_V\\to UN|_V$. Give it the conjugation structure $h\\mapsto\\theta_N T(h)\\theta_M^{-1}$, using the pullback comparison for internal Hom. For integer-indexed complexes define\n$$H^\\bullet(K,I)^n=\\prod_{p\\in\\mathbf Z}H(K^p,I^{p+n}),\\qquad d(f)=d_I f-(-1)^n f d_K.$$\nProducts are taken in $\\mathcal W$. A complex is K-injective if every chain map into it from an acyclic complex is null-homotopic. Use the ordinary derived categories and quasi-isomorphisms of [def-weil-abstract-derived-category].\n\nThe functor $U$ creates these products, is exact and detects quasi-isomorphisms, and sends K-injective complexes to K-injective complexes. There is a natural identification of complexes\n$$UH^\\bullet(K,I)\\simeq\\mathcal Hom_R^\\bullet(UK,UI)$$\nwith the product terms and differential displayed above. If $t:K'\\to K$ is any quasi-isomorphism of complexes in $\\mathcal W$ and $v:I'\\to I$ is a quasi-isomorphism between K-injective complexes in $\\mathcal W$, then\n$$H^\\bullet(t,v):H^\\bullet(K,I')\\longrightarrow H^\\bullet(K',I),\\qquad f\\longmapsto v f t,$$\nis an equivariant chain map and a quasi-isomorphism. Thus its image under $Q_{\\mathcal W}$ is an isomorphism in $D(\\mathcal W)$. No boundedness, local freeness, tensor exactness, or exactness of infinite products is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A95 (lemma-RHom-well-defined), equivariant analogue combined with Tag 08BJ (derived.tex, lemma-adjoint-preserve-K-injectives). Agent-formulated equivariant bridge; these tags state the ordinary internal-Hom and abstract adjunction inputs, respectively."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-presentation-comparison-data",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof": [
+  {
+   "text": "The category $\\mathcal C=\\operatorname{Mod}(R)$ is Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], since the site is small in the specified universe. Its small limits can also be constructed directly: over each site object take the compatible tuples in the product of the diagram's sections, with coordinatewise scalars and restrictions. Compatible local tuples glue uniquely coordinatewise, so this is a sheaf and has the limit universal property. Small colimits exist by the cited Grothendieck assertion. Thus [lem-sf-fixed-pair-created-abelian-structure] applies to the given additive autoequivalence $T$: $\\mathcal W$ is abelian and $U$ creates the integer-indexed products and is exact and conservative. In particular the underlying product of the $H(K^p,I^{p+n})$ is the ordinary product of the internal sheaf Homs.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (sites-modules.tex, lemma-limits-colimits), coordinatewise limit construction; the fixed-pair lift is the cited created-structure lemma."
+   }
+  },
+  {
+   "text": "For the proved structural clause, use the existing source-library instance `IsoAlgebra.preservesKInjectiveComplexes_forget`, whose proof applies [lem-weil-pbc-right-adjoint-preserves-kinjective] to the exact integer-orbit free/forget adjunction. The Grothendieck module-sheaf category has exact integer coproducts. Thus UI and UI′ are K-injective. The existing forgetful functor preserves finite limits and finite colimits and reflects isomorphisms. Apply `HomologicalComplex.quasiIso_map_iff_of_preservesHomology` to detect quasi-isomorphisms. For creation of integer products, use [lem-sf-fixed-pair-created-abelian-structure] in universe u and transfer along the equivalence Discrete(ULift Z) ≃ Discrete Z. This proves `equivariantHom_forget_properties` without the derived-forget comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; implemented by the existing exact free/forget adjunction in RightDerivedFunctor/IsoAlgebra.lean."
+   }
+  },
+  {
+   "text": "Use the internal-Hom pullback comparison specified in the statement, and write $\\Theta_{M,N}(f)=\\theta_N T(f)\\theta_M^{-1}$. The comparison $T\\mathcal Hom_R(UM,UN)\\to\\mathcal Hom_R(TUM,TUN)$ is an isomorphism, natural in both variables, because $T=s^*$ is part of an equivalence of ringed topoi (quasi-inverse $(s^{-1})^*$, using the specified ring isomorphism), and an equivalence carries the internal Hom, defined by $R$-linear maps over every localized object, to the internal Hom. Composing it with conjugation by the isomorphisms $\\theta_N$ and $\\theta_M^{-1}$ gives an isomorphism $TH(M,N)\\xrightarrow{\\sim}H(M,N)$, so $(H(M,N),\\Theta_{M,N})$ is a fixed pair, and postcomposition and precomposition with morphisms of $\\mathcal W$ are morphisms of $\\mathcal W$ by the two identities below. Naturality of that comparison and the intertwining identities give\n$$\\Theta_{K^p,I^{p+n+1}}(d_I f)=d_I\\Theta_{K^p,I^{p+n}}(f),\\qquad\n\\Theta_{K^{p-1},I^{p+n}}(f d_K)=\\Theta_{K^p,I^{p+n}}(f)d_K.$$\nHence the signed differential is a morphism of fixed pairs. Expanding its square gives $d_I^2f-fd_K^2=0$, because the two mixed terms have opposite signs. Creation of products in step 1 therefore gives the asserted identification $UH^\\bullet(K,I)\\simeq\\mathcal Hom_R^\\bullet(UK,UI)$: in degree $n$ it is the map whose projections are the identity on every internal-Hom factor. Both differentials have those same projections. This proves compatibility with differentials and naturality, without asserting exactness of products.",
+   "uses": [
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), the displayed product terms and signed differential; conjugation calculation for the fixed-pair structure."
+   }
+  },
+  {
+   "text": "Define $H^n(t,v)$ by its $p$-th component $f_p\\mapsto v^{p+n}f_p t^p$. On such a component equivariance is the identity\n$$\\theta_I T(vft)\\theta_{K'}^{-1}\n=v\\theta_{I'}T(f)\\theta_K^{-1}t,$$\nobtained by substituting $\\theta_I T(v)=v\\theta_{I'}$ and $T(t)\\theta_{K'}^{-1}=\\theta_K^{-1}t$. Moreover\n$$d(vft)=v(d_I'f-(-1)^n f d_K)t$$\nsince $v$ and $t$ commute with the differentials. The universal property of the products makes these component identities the required equivariant chain-map identity. Under step 3 its underlying map is precisely the ordinary internal-Hom map $f\\mapsto(Uv)f(Ut)$.",
+   "uses": [
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95 (lemma-RHom-well-defined), its induced Hom-complex morphism, with the explicit conjugation check."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-rhom-well-defined] to $Ut:UK'\\to UK$ and $Uv:UI'\\to UI$. Step 2 verifies its quasi-isomorphism and K-injectivity hypotheses, and steps 3-4 identify its actual Hom-complex morphism with $UH^\\bullet(t,v)$. It follows that $UH^\\bullet(t,v)$ is a quasi-isomorphism. The kernel/cokernel and conservativity argument of step 2 then shows that $H^\\bullet(t,v)$ is a quasi-isomorphism in $\\mathcal W$. Finally $Q_{\\mathcal W}$ inverts this map by the definition of the derived-category localization [def-weil-abstract-derived-category]. All these inputs apply to unbounded complexes and require no local freeness or tensor exactness.",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "lem-sf-fixed-pair-created-abelian-structure",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95 (lemma-RHom-well-defined); Tag 05RU (definition-derived-category), localization at quasi-isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pur-rhom-well-defined",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Partial Lean proof by G4: pure-tensor naturality (Tag 0A8X, sheafification naturality) and structural forgetting (Tag 08BJ, existing source free/forget adjunction). Steps 3--5 remain the intended mathematical route; their present Lean attachment is STATEMENT-DISPUTED because RingedPresentationAt.underlying has no scalar-compatibility requirement. The counterexample is in the G4 delivery report. No statement or definition changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed site with an automorphism, forgetting the action detects quasi isomorphisms of internal Hom complexes into K injective equivariant complexes",
+   "results": "8 hits: CochainComplex.IsKInjective.Qh_map_bijective, CochainComplex.isKInjective_iff_of_iso, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.isKInjective_of_iso, DerivedCategory.instIsIsoMapCochainComplexIntQ, CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.isIso_Q_map_iff_quasiIso, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Hom and quasi-isomorphism results do not give the equivariant internal-sheaf-Hom bridge."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf internal Hom complex with invertible automorphism action preserves quasi isomorphisms in both variables when targets are K injective",
+   "results": "8 hits: CategoryTheory.ShortComplex.quasiIso_map_of_preservesRightHomology, HomologicalComplex.instIsMultiplicativeQuasiIso, HomologicalComplex.quasiIso, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, HomologicalComplex.quasiIso_map_of_preservesHomology, quasiIso_comp, CategoryTheory.ShortComplex.QuasiIso.isIso, HomologicalComplex.instRespectsIsoQuasiIso",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Hom and quasi-isomorphism results do not give the equivariant internal-sheaf-Hom bridge."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"bifunctorHom\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Hom and quasi-isomorphism results do not give the equivariant internal-sheaf-Hom bridge."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHom.*[Qq]uasi|[Qq]uasi.*bifunctorHom|IsoAlgebra",
+   "results": "1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Hom and quasi-isomorphism results do not give the equivariant internal-sheaf-Hom bridge."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition by a quasi isomorphism induces a quasi isomorphism of product total internal Hom sheaf complexes with equivariance",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.quasiIso_shift_iff, CochainComplex.instQuasiIsoIntMapHomologicalComplexUpShiftFunctor, CochainComplex.quasiIsoAt_shift_iff, quasiIsoAt_iff_comp_right, CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso, HomologicalComplex.instIsMultiplicativeQuasiIso, quasiIsoAt_iff_comp_left",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Hom and quasi-isomorphism results do not give the equivariant internal-sheaf-Hom bridge."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed site forgetting invertible automorphism equivariance preserves K injective complexes and detects quasi isomorphisms of product internal Hom complexes",
+   "results": "8 hits: CochainComplex.IsKInjective.Qh_map_bijective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.IsKProjective.Qh_map_bijective, CochainComplex.isKInjective_iff_of_iso, CochainComplex.isKInjective_of_iso, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective",
+   "date": "2026-10-22",
+   "verdict": "no match: these general homological-complex or ordinary Hom results do not state the equivariant internal-sheaf-Hom comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHom.*[Qq]uasi|[Qq]uasi.*bifunctorHom|IsoAlgebra",
+   "results": "1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these general homological-complex or ordinary Hom results do not state the equivariant internal-sheaf-Hom comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product sheaf internal Hom complex with invertible automorphism action preserves quasi isomorphisms into K injective equivariant complexes",
+   "results": "8 hits: HomologicalComplex.quasiIso_map_of_preservesHomology, HomologicalComplex.instIsMultiplicativeQuasiIso, HomologicalComplex.instRespectsIsoQuasiIso, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, CategoryTheory.ShortComplex.QuasiIso.isIso, QuasiIso, CochainComplex.isKInjective_of_iso, HomologicalComplex.quasiIsoAt_map_of_preservesHomology",
+   "date": "2026-10-22",
+   "verdict": "no match: these general homological-complex or ordinary Hom results do not state the equivariant internal-sheaf-Hom comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"IsoAlgebra\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these general homological-complex or ordinary Hom results do not state the equivariant internal-sheaf-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition by a quasi isomorphism and postcomposition between K injective complexes induce a quasi isomorphism of internal sheaf Hom with conjugation automorphism action",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, DerivedCategory.instIsIsoMapCochainComplexIntQ, DerivedCategory.isIso_Q_map_iff_quasiIso, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CochainComplex.IsKInjective.Qh_map_bijective, CochainComplex.isKInjective_iff_of_iso, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+   "date": "2026-10-22",
+   "verdict": "no match: these general homological-complex or ordinary Hom results do not state the equivariant internal-sheaf-Hom comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-derived-hom-single-resolution",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "place": "Opening paragraph of lem-a1-local-boundary-duality.proof.md: the identity D_U F = F^vee(1)[2]; quasi-isomorphism invariance needed by the single-resolution internal-Hom comparison, through lem-sf-weil-lisse-internal-hom-tensor-dual and lem-sf-weil-derived-hom-single-resolution.",
+   "via": [
+    "lem-sf-weil-derived-hom-single-resolution",
+    "lem-sf-weil-lisse-internal-hom-tensor-dual"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-equivariant-hom-quasi-isomorphism",
+  "worker": "stage1",
+  "summary": "Reused existing fixed-pair created structure, Grothendieck, exact derived-forget comparison, and ordinary internal-Hom invariance nodes. Wrote the conjugation and signed chain-map checks explicitly. No new nodes, no statement change, and no exact-product assumption. Corrected the inherited null blueprint anchor to the existing parent split's explicit anchor.",
+  "blueprint": "Opening lisse-duality identity in lem-a1-local-boundary-duality.proof.md: steps 1-2 establish the forgetful reduction, steps 3-4 identify the actual equivariant product-Hom map, and step 5 applies ordinary RHom invariance.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site module Grothendieck property, needed to apply the fixed-pair forgetful theorem; no geometric route is replaced."
+   },
+   {
+    "node": "lem-sf-fixed-pair-created-abelian-structure",
+    "why": "Generic categorical creation of products and exact conservative forgetting for an additive autoequivalence; used only as a fixed-pair tool."
+   },
+   {
+    "node": "lem-sf-fixed-pair-derived-forget-comparison",
+    "why": "Its first paragraph supplies preservation of K-injectives by the forgetful functor for any Grothendieck category with an additive autoequivalence."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Ordinary ringed-site product-Hom invariance is the source input Tag 0A95; equivariance is checked directly before forgetting."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-pur-rhom-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-b67002e21",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-b67002e21 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and every cited statement in full. The commit has one item and its report, no new nodes, no SGA, and no repair note (an ordinary one-level split). Step 1 is correct: lem-pur-ringed-site-grothendieck-abelian (small site, commutative ring sheaf) plus an inline 03DB sectionwise limit construction satisfy the hypotheses of lem-sf-fixed-pair-created-abelian-structure (V-small limits, colimits and Hom sets, additive autoequivalence). That node gives W abelian and U creating products, exact and conservative. Step 2 is correct: the first paragraph of lem-sf-fixed-pair-derived-forget-comparison (Grothendieck C, D=C, H=T) gives that U preserves K-injectives, and exactness with conservativity gives detection of quasi-isomorphisms. Step 3: I checked the conjugation identities and the indices (d_K: K^{p-1}→K^p) and that d²=0. The differential sign agrees with def-pur-hom-complex and Stacks 0A8X, so the identity-projection identification is right. Step 4: equivariance of f↦vft follows from θ_I T(v)=vθ_{I'} and T(t)θ_{K'}^{-1}=θ_K^{-1}t. Step 5: the hypotheses of lem-pur-rhom-well-defined (= Stacks 0A95, sites-cohomology.tex l.8754: any quasi-isomorphism of sources, a quasi-isomorphism between K-injective targets, map f↦sft) are checked by step 2, and Q_W inverts the map by def-weil-abstract-derived-category. The parent lem-sf-weil-derived-hom-single-resolution step 2 (t=α, v=1_I, Φ) is covered by the statement. Edge cases checked: T=id, t or v an identity, K=0, I=0, empty site or zero ring, unbounded complexes. No duplicate in the DAG (rg -L for 0A95 and the conjugation structure). FIX (one gap): step 3 never showed that (H(M,N), θ_N T(−) θ_M^{-1}) is a fixed pair, i.e. that the internal-Hom pullback comparison is invertible, and the products 'taken in W' need this. I added one sentence: T=s^* is part of an equivalence of ringed topoi, which carries internal Hom to internal Hom naturally; conjugating by the isomorphisms θ gives the structure. Accepted tool_uses: lem-sf-fixed-pair-created-abelian-structure and lem-sf-fixed-pair-derived-forget-comparison (generic fixed-pair tools); the two lem-pur nodes are on the route through sk-def-sf-operations. The corrected node is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EquivariantHomQuasiIsomorphism",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.exists_equivariantHom_quasiIso",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.equivariantHomTensorPairSection",
+   "CategoryTheory.Endofunctor.IsoAlgebra.equivariantHomTensorPair_naturality",
+   "CategoryTheory.Endofunctor.IsoAlgebra.equivariantHomTensorPair",
+   "CategoryTheory.Endofunctor.IsoAlgebra.equivariantHomEvaluation",
+   "CategoryTheory.Endofunctor.IsoAlgebra.equivariantHomPullback_additive",
+   "CategoryTheory.Endofunctor.IsoAlgebra.equivariantHomPair",
+   "CategoryTheory.Endofunctor.IsoAlgebra.equivariantHom_forget_properties",
+   "CategoryTheory.Endofunctor.IsoAlgebra.exists_equivariantHom_quasiIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EquivariantHomQuasiIsomorphism.lean",
+  "statement": "theorem exists_equivariantHom_quasiIso (e : RingedToposMorphism (localCoefficientRings R) (localCoefficientRings R)) [e.inverse.IsEquivalence] [IsIso e.ringMap] (P : RingedPresentationAt e) [HasDerivedCategory.{w} (IsoAlgebra P.transport.modules.functor)] : ∃ (χ : ∀ M N : PresentationModules R, P.transport.modules.functor.obj (M ⊗ N) ≅ P.transport.modules.functor.obj M ⊗ P.transport.modules.functor.obj N) (γ : ∀ M N : PresentationModules R, P.transport.modules.functor.obj (SheafOfModules.homObj (R := R) M N) ≅ SheafOfModules.homObj (R := R) (P.transport.modules.functor.obj M) (P.transport.modules.functor.obj N)), (∀ M N : PresentationModules R, equivariantHomTensorPair (P.transport.modules.functor.obj M) (P.transport.modules.functor.obj N) ≫ (presentationForget R).map (χ M N).inv ≫ P.underlying.hom.app (M ⊗ N) = prod.map (P.underlying.hom.app M) (P.underlying.hom.app N) ≫ inv (prodComparison e.inverse ((presentationForget R).obj M) ((presentationForget R).obj N)) ≫ e.inverse.map (equivariantHomTensorPair M N)) ∧ (∀ M N : PresentationModules R, P.transport.modules.functor.map (equivariantHomEvaluation M N) = (χ M (SheafOfModules.homObj (R := R) M N)).hom ≫ (𝟙 _ ⊗ₘ (γ M N).hom) ≫ equivariantHomEvaluation (P.transport.modules.functor.obj M) (P.transport.modules.functor.obj N)) ∧ ∃ (H : (CochainComplex (IsoAlgebra P.transport.modules.functor) ℤ)ᵒᵖ ⥤ CochainComplex (IsoAlgebra P.transport.modules.functor) ℤ ⥤ CochainComplex (IsoAlgebra P.transport.modules.functor) ℤ) (α : Functor.uncurry.obj H ⋙ (forget P.transport.modules.functor).mapHomologicalComplex (.up ℤ) ≅ (((forget P.transport.modules.functor).mapHomologicalComplex (.up ℤ)).op.prod ((forget P.transport.modules.functor).mapHomologicalComplex (.up ℤ))) ⋙ Functor.uncurry.obj (homComplexFunctor (R := R))) (π : ∀ (K I : CochainComplex (IsoAlgebra P.transport.modules.functor) ℤ) (n p : ℤ), ((H.obj (op K)).obj I).X n ⟶ equivariantHomPair P.transport.modules.functor γ (K.X p) (I.X (p + n))), (∀ (K I : CochainComplex (IsoAlgebra P.transport.modules.functor) ℤ) (n : ℤ), Nonempty (IsLimit (Fan.mk (((H.obj (op K)).obj I).X n) (π K I n)))) ∧ (∀ (K I : CochainComplex (IsoAlgebra P.transport.modules.functor) ℤ) (n p : ℤ), (forget P.transport.modules.functor).map (π K I n p) = (α.hom.app (op K, I)).f n ≫ homComplexπ (((forget P.transport.modules.functor).mapHomologicalComplex (.up ℤ)).obj K) (((forget P.transport.modules.functor).mapHomologicalComplex (.up ℤ)).obj I) n p (p + n) rfl) ∧ (∀ (K' K I' I : CochainComplex (IsoAlgebra P.transport.modules.functor) ℤ) (t : K' ⟶ K) (v : I' ⟶ I), I'.IsKInjective → I.IsKInjective → QuasiIso t → QuasiIso v → QuasiIso (((H.map t.op).app I') ≫ (H.obj (op K')).map v) ∧ IsIso (DerivedCategory.Q.map (((H.map t.op).app I') ≫ (H.obj (op K')).map v)))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The structural clauses are equivariantHom_forget_properties; exists_equivariantHom_quasiIso states the construction and invariance. RingedPresentationAt explicitly presents the induced pullback of the given ringed-topos automorphism. The comparison is fixed on pure tensors and evaluation, not an arbitrary natural isomorphism. No source statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-155389900",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Read the item, all 10 stmt_dep records (identical to side-live), the module, the report (Worker report + Second reading by Q54 present) and the upstream decls (RingedPresentationAt, RingedToposMorphism, homComplexπ, preservesKInjectiveComplexes_forget). Every clause matches the node and Stacks 0A95/0A8X/08BJ: T = P.transport.modules.functor is pinned as the inverse of e.modules; the conjugation θ_N T(h) θ_M⁻¹ runs in the right direction; χ is fixed on pure tensors and γ by evaluation (unique by tensor-Hom adjunction); the existential bifunctor H is determined up to unique isomorphism by its product fans in IsoAlgebra and the identity-on-factors projection equation, which also fixes the sign d_I f-(-1)^n f d_K; the final clause holds for arbitrary t,v with only K-injective targets and quasi-iso hypotheses and concludes QuasiIso and IsIso Q.map of the same map. Mechanical finding: homComplexπ is Classical.choose of lem-sc-hom-complex-projections' theorem, so the statement genuinely depends on an object the theorem constructs; PASS on that point. Only stmt_deps (6 existing used nodes) and lean changed; statement verbatim; defs have real data, the naturality proof is a named sorried theorem, all theorems are sorry; docstrings complete; no line over 100 chars. Edge cases checked: T=id, t or v identity, zero complexes, empty site, negative degrees. No compile run since nothing was changed. Advisory: generic upstream modules MonoidalClosed and RightDerivedFunctor.IsoAlgebra have no owning node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261024T185815-L-3685980",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

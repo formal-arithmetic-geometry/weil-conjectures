@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-resolution",
+ "kind": "statement",
+ "title": "Scalar realization preserves resolving pairs and their localization tensors",
+ "statement": "For a finite commutative ring R and scheme T, the scalar realization carries the flat-term K-flat complexes of [lem-sf-finite-scalar-tensor-complex] into intrinsic flat-term K-flat complexes [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Restriction from functors on pairs of fixed derived objects to pairs in this resolving class is fully faithful. The inverse native localization tensorator gives the fixed derived tensor representative isomorphism on these pairs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS, 07A4; sites-modules.tex Tag 0GMW; categories.tex Tags 04VI–04VK"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "An exact tensor equivalence preserves term flatness by conjugating tensor-right with its inverse, and preserves K-flatness by lifting every acyclic test complex through the inverse equivalence and using the total tensor isomorphism.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use flat-term K-flat resolutions and the homotopy quotient to show fully faithful restriction to pairs of these representatives.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In abstract monoidal Grothendieck abelian categories, the homotopy localization tensor counit is invertible on a K-flat right input. The cochain quotient is strong monoidal, so its composite tensorator is invertible. Assemble these tensorators naturally on an arbitrary specified K-flat class and invert the resulting natural transformation. Specialize this generic construction to the fixed flat-term K-flat class; this avoids repeatedly unfolding the concrete monoidal instances.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS, 07A4; sites-modules.tex Tag 0GMW; categories.tex Tags 04VI–04VK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of module sheaves over a constant ring identifies derived tensor products compatibly with inverse image",
+   "results": "Eight ordinary sheaf monoidal and free condensed module results; no specified unbounded realization square.",
+   "date": "2026-10-27",
+   "verdict": "Use the concrete realization and project representative descent APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module sheaves identifies unbounded derived tensor functors uniquely on flat K flat representatives",
+   "results": "Eight hits about flat module kernels, sheaf pushforward congruence, sheaf equality and ordinary module pullback adjunctions; no exact normalized derived tensor statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ",
+   "results": "The tensorator and its monoidal isomorphism API were found; no scalar realization compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing localization tensorator."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparisonNatTrans|resolvingRepresentativesFullyFaithfulWhiskering",
+   "results": "Mathlib service found no hits. Repository search located the proved total comparison and resolving restriction APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use the project general constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackComparison",
+  "date": "2026-10-27",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-comparison",
+   "place": "Scalar realization preserves resolving pairs and their localization tensors",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorResolution",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorResolution.lean",
+  "declaration": "WeilConjectures.finiteScalarPreservesRepresentatives",
+  "statement": "theorem finiteScalarPreservesRepresentatives (T : Scheme.{u}) (R : Type u)\n    [CommRing R] [Finite R] (P : CochainComplex\n      (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)\n    (hP : finiteScalarFlatRepresentatives T R P) :\n    proEtaleFlatRepresentatives T (proEtaleConstantRing T R)\n      (((sfIntrinsicModuleEquivalence T R).functor.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarRealizationPreservesFlatKFlat",
+   "WeilConjectures.finiteScalarPreservesRepresentatives",
+   "WeilConjectures.finiteScalarRepresentativesFullyFaithful",
+   "WeilConjectures.finiteScalarLocalizationTensor_isIso",
+   "WeilConjectures.finiteScalarFixedTensorRepresentativeOfKFlat",
+   "WeilConjectures.finiteScalarFixedTensorRepresentativeForCoefficients",
+   "WeilConjectures.finiteScalarFlatRepresentatives_kFlat"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged); moved defs vs clone bodies (verbatim); 7 delivered modules + direct importer FiniteScalarProperProjectionPresentation compiled in sandbox; hole statement vs its node and the pinned definitions it uses"
+ }
+}

@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-space-perfect-localizing-generation",
+ "kind": "statement",
+ "title": "Perfect localizing generation for quasi-compact quasi-separated algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Algebraic spaces and schemes are [def-trf-algebraic-space, def-pc-scheme]. Use the small etale site with structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and their unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be the full subcategory whose cohomology sheaves are quasi-coherent [def-trf-space-quasi-coherent-module]. A perfect object means an object locally represented by a bounded complex of direct summands of finite free module sheaves [def-weil-pbc-strict-perfect-coefficient-package]. Let $S$ be a scheme and $X$ a quasi-compact and quasi-separated algebraic space over $S$; quasi-compact means every open cover of $|X|$ has a finite subcover and quasi-separated means its diagonal is quasi-compact. Then $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ is closed under arbitrary set-indexed coproducts computed in $D(\\mathcal O_X)$, and is the smallest strictly full subcategory of $D(\\mathcal O_X)$ containing the perfect objects and closed under shifts, distinguished-triangle cones, retracts and arbitrary set-indexed coproducts.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09IY, theorem-bondal-van-den-Bergh, with compactness and ambient coproducts in its compact-generation use in the second proof of proposition-better-coherator; localizing formulation via derived.tex Tag 09SN, lemma-write-as-colimit."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-a1-space-point-topology",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use the small skeleton fixed in [def-weil-size-convention]. By [lem-pur-ringed-site-grothendieck-abelian], $\\mathcal A=\\operatorname{Mod}(\\mathcal O_X)$ is Grothendieck; by [lem-sfb-grothendieck-k-injective] it has K-injective resolutions. Its coproducts are exact: write a coproduct of short exact sequences as the filtered colimit of the finite subsum sequences. Finite subsums are exact by the abelian biproduct identities, and the filtered colimit preserves exactness by the Grothendieck property. The finite-subsums identification follows directly from the coproduct universal property: compatible maps from all finite subsums are precisely families of maps from individual summands. Apply [lem-kun-grothendieck-derived-coproducts] and [src-weil-derived-homology-preserves-coproducts]. Thus ambient derived coproducts exist and $H^q(\\bigoplus_i E_i)\\cong\\bigoplus_iH^q(E_i)$. By [lem-sfb-space-qcoh-kernels-colimits] the right side is quasi-coherent for $E_i\\in C_X$. Fullness then restricts the ambient coproduct universal property to $C_X$, so its coproducts agree with the ambient ones.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-kun-grothendieck-derived-coproducts",
+    "src-weil-derived-homology-preserves-coproducts",
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F3, lemma-quasi-coherence-direct-sums, proof; injectives.tex Tag 07D9, lemma-derived-products, clauses (1)-(2)."
+   }
+  },
+  {
+   "text": "The full subcategory $C_X$ is strictly full and shift-stable since cohomology is functorial and $H^q(E[n])=H^{q+n}(E)$. For a triangle $E\\to F\\to G\\to E[1]$ with $E,F\\in C_X$, [lem-sf-derived-homology-long-exact] gives $0\\to\\operatorname{coker}(H^qE\\to H^qF)\\to H^qG\\to\\ker(H^{q+1}E\\to H^{q+1}F)\\to0$. The end terms are quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits], and the middle is so by [lem-sfb-space-qcoh-extension-closed]. Rotation gives the other two-out-of-three cases, so $C_X$ is triangulated. It is retract-closed: if $E$ is a retract of $F$, applying $H^q$ expresses $H^qE$ as the image of an idempotent of $H^qF$; image closure in [lem-sfb-space-qcoh-kernels-colimits] applies. Finally [lem-sfb-space-perfect-objects-compact] places every perfect object in $C_X$. Hence $C_X$ itself is one of the ambient subcategories in the statement.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-qcoh-extension-closed",
+    "lem-sfb-space-perfect-objects-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 071X, definition-derived-quasi-coherent and the following explanation via spaces-properties.tex Tag 03M1; Tag 09M8."
+   }
+  },
+  {
+   "text": "Choose $P$ by [lem-sfb-space-perfect-weak-generator]; it is compact in $C_X$ by [lem-sfb-space-perfect-objects-compact]. Its shifted-Hom vanishing criterion is precisely weak generation of $C_X$: replacing $n$ by $-n$ identifies maps $P[n]\\to E$ with maps $P\\to E[-n]$. Apply [lem-pc-compact-generators-build-objects] to the singleton family $P$ in the triangulated category $C_X$, using the coproducts of step 1. For each $E\\in C_X$ it gives a sequence $X_1\\to X_2\\to\\cdots$, with $X_1$ and all $Z_n$ coproducts of shifts of $P$, triangles $Z_n\\to X_n\\to X_{n+1}\\to Z_n[1]$, and the telescope triangle $\\bigoplus_nX_n\\xrightarrow{1-\\mathrm{shift}}\\bigoplus_nX_n\\to E\\to(\\bigoplus_nX_n)[1]$. These are ambient distinguished triangles; their coproducts are ambient ones by step 1. All index sets, including the shifted-Hom indexing sets used by this lemma, lie in the chosen larger universe.",
+   "uses": [
+    "lem-sfb-space-perfect-weak-generator",
+    "lem-sfb-space-perfect-objects-compact",
+    "lem-pc-compact-generators-build-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IY, theorem-bondal-van-den-Bergh; Tag 09M8, proposition-compact-is-perfect; derived.tex Tag 09SN, lemma-write-as-colimit."
+   }
+  },
+  {
+   "text": "Let $L$ be any strictly full ambient subcategory containing all perfect objects and closed under the four stated operations. It contains $P$, all its shifts, and their coproducts; hence it contains $X_1$ and each $Z_n$. Induct on $n$: from $X_n,Z_n\\in L$, cone closure applied to $Z_n\\to X_n$ puts $X_{n+1}$ in $L$. Thus $\\bigoplus_n X_n\\in L$, and its endomorphism $1-\\mathrm{shift}$ has cone $E$, so $E\\in L$. This proves $C_X\\subseteq L$ for every such $L$. Step 2 and the coproduct closure of step 1 show that $C_X$ itself has all those properties, establishing the claimed smallest subcategory and the coproduct clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SN, lemma-write-as-colimit, telescope triangle and closure under cones and direct sums."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-space-qcoh-extension-closed",
+  "lem-sfb-space-perfect-objects-compact",
+  "lem-sfb-space-perfect-weak-generator",
+  "lem-pc-compact-generators-build-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 08F3, 09IY, 09M8 and the second proof of proposition-better-coherator; localizing conclusion via derived.tex Tag 09SN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of quasi coherent sheaves on a quasi compact quasi separated algebraic space is generated by perfect complexes under shifts cones and coproducts",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect generator compact generation unbounded derived category algebraic spaces",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsLocalizing",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.ObjectProperty.IsLocalizing'\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*generat|generat.*perfect|algebraic.?space.*derived",
+   "sub": "",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"line\": \"269\", \"text\": \"If the Killing form is non-degenerate and the coefficients are a perfect field, this space is\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"114\", \"text\": \"  that `K` is a perfect field and `L` has non-degenerate Killing form. -/\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparablyGenerated.lean\", \"line\": \"311\", \"text\": \"/-- Any finitely generated extension over perfect fields are separably generated. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/BilinearForm/DualLattice.lean\", \"line\": \"67\", \"text\": \"-- TODO: Show that this is perfect when `N` is a lattice and `B` is nondegenerate.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"line\": \"106\", \"text\": \"that freeness follows automatically since two finitely-generated Abelian groups in perfect pairing\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"60\", \"text\": \"If `k` is a perfect ring of characteristic `p`, a Witt vector `x : 𝕎 k` falls in ideal generated by\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"77\", \"text\": \"If `k` is a perfect ring of characteristic `p`, a Witt vector `x : 𝕎 k` falls in ideal generated by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Field.lean\", \"line\": \"16\", \"text\": \"In particular finitely generated field extensions over perfect fields are smooth.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes generate the derived category of quasi coherent sheaves on an algebraic space",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \"{K L : HomologicalComplex C c} (f : K ⟶ L) : IsIso (Q.map f) ↔ HomologicalComplex.quasiIso C c f\", \"doc\": \"A morphism $ f $ between homological complexes becomes an isomorphism in the derived category $ \\\\mathcal{D} = \\\\mathcal{K}[\\\\text{QuasiIso}^{-1}] $ if and only if $ f $ is a quasi-isomorphism (i.e., ind\"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Category.{w} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}\n  {\"name\": \"DerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Type (max u v)\", \"doc\": \"The derived category of homological complexes with integer-indexed shapes, obtained by localizing the category of such complexes at quasi-isomorphisms (morphisms inducing isomorphisms on all homology \"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      (c : ComplexShape ι) →\\n        [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [(HomologicalComplex.quasiIso C c).HasLocalizati\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Qh.IsLocalization (HomotopyCategory.subcategoryAcyclic C).trW\", \"doc\": \"The derived category is obtained by localizing the homotopy category of integer-indexed chain complexes at the class of quasi-isomorphisms, which corresponds to the morphism property $\\\\mathrm{trW}$ de\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-pullback-limit",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof, first paragraph: reduction to perfect tests using the perfect generator, including the ambient-coproduct interpretation.",
+   "via": [
+    "lem-sfb-proper-flat-space-pullback-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-perfect-localizing-generation",
+  "worker": "stage1",
+  "summary": "Derived ambient coproduct closure from existing generic ringed-site/Grothendieck and derived cohomology inputs; proved triangulated and retract closure using space quasi-coherent module calculus, added extension closure, perfect weak-generator existence and perfect-to-compact inputs, reused the existing compact-generator telescope, and wrote the final induction and telescope-cone closure. No statement change and no Lean attachment.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) auxiliary alteration/deformation route through Tag 0D3F, first paragraph: reduction to perfect tests using a perfect generator. The live created.item chain has a broken blueprint ancestor (ancestor command prints None); inherited from.node=null and via are retained rather than inventing an ancestor. Current blueprint/latest direct-image proof (3) was read; none of its nodes states this space theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic small ringed-site Grothendieck theorem used as a black box in the unchanged Stacks compact-generation route; no node of this unit provides that generic input."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic K-injective existence theorem used as a black box in the unchanged Stacks compact-generation route; no node of this unit provides that generic input."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic termwise derived coproduct theorem used as a black box in the unchanged Stacks compact-generation route; no node of this unit provides that generic input."
+   },
+   {
+    "node": "src-weil-derived-homology-preserves-coproducts",
+    "why": "Generic cohomology preservation of exact coproducts used as a black box in the unchanged Stacks compact-generation route; no node of this unit provides that generic input."
+   },
+   {
+    "node": "lem-pc-compact-generators-build-objects",
+    "why": "Generic compact-generator telescope theorem used as a black box in the unchanged Stacks compact-generation route; no node of this unit provides that generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
+  "lem-pc-compact-generators-build-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-489681646",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-489681646 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement and the sources at the cited places: spaces-perfect 071X, 08F3, 09IY (bondal-van-den-Bergh), 09M8 (first paragraph), spaces-properties 03M1(4), and derived 09SN via lem-pc-compact-generators-build-objects. Step 1 follows the 08F3 proof: Grothendieck, K-injective, exact coproducts written out via finite subsums, termwise derived coproducts, H^q preserves sums, quasi-coherent sums. Step 2: the long exact sequence gives 0→coker→H^qG→ker→0; kernels-colimits gives the end terms and the new extension node the middle; retracts are covered by the image of an idempotent; perfect objects lie in C_X. Step 3: 09SN telescope applied to the singleton compact generator. The criterion Hom(P[n],E)=0 matches def-pc-generators via shift. The hypotheses (triangulated, coproducts, compact) come from steps 1-2. Step 4 is an elementary induction plus the cone of 1-shift, and gives minimality. New nodes are true and faithful to their sources: 09IY detection, 09M8 perfect⇒compact inside D_QCoh (not ambient), 03M1(4) extension direction. They are statement-only, strictly smaller than the item, and not duplicates: the DAG analogues are scheme-only or the converse direction. Batch-5 flags: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions, outside the trace-formula and Poincaré-duality proofs, so OK. Five declared tool_uses are generic homological black boxes and are accepted. The blueprint ancestor is null, inherited from the base chain (maintainer note). Advisory: the compactness node presupposes the coproducts in C_X exist, which is true by 08F3."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectLocalizingGeneration",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfect_localizing_generation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectLocalizingGeneration.lean",
+  "statement": "theorem perfect_localizing_generation {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] [CompactSpace (Point X.obj.obj)] (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) : HasCoproducts.{u} X.DerivedModules ∧ (derivedQCohProperty.{u, w} X).IsClosedUnderIsomorphisms ∧ (derivedQCohProperty.{u, w} X).IsStableUnderShift ℤ ∧ (derivedQCohProperty.{u, w} X).IsTriangulatedClosed₃ ∧ (derivedQCohProperty.{u, w} X).IsStableUnderRetracts ∧ (∀ I : Type u, (derivedQCohProperty.{u, w} X).IsClosedUnderColimitsOfShape (Discrete I)) ∧ (∀ E : X.DerivedModules, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, 0, w} X.smallStructureSheaf E → derivedQCohProperty.{u, w} X E) ∧ ∀ L : ObjectProperty X.DerivedModules, L.IsClosedUnderIsomorphisms → L.IsStableUnderShift ℤ → L.IsTriangulatedClosed₃ → L.IsStableUnderRetracts → (∀ I : Type u, L.IsClosedUnderColimitsOfShape (Discrete I)) → (∀ E : X.DerivedModules, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, 0, w} X.smallStructureSheaf E → L E) → derivedQCohProperty.{u, w} X ≤ L",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a34076e9a",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after RETURN d561d1db: H4 fixed, the theorem is now on the landed X.DerivedModules / derivedQCohProperty with Type u coproducts and IsPerfectOnRingedSiteOfUniverses.{u,u,0,w} X.smallStructureSheaf (max u u 0 = u, no universe restriction); H13 fixed, the dependency module and the def-trf-algebraic-space rebind are removed and the dependency records are byte-identical to live. The three added stmt_deps are landed and used; lean.statement is verbatim. Every clause matches the node (coproducts, strict fullness, all integer shifts, cone closure, retracts, coproduct closure, perfect objects in D_QCoh, minimality) with no extra hypotheses; edge cases covered. Advisory: hqs is the same text as IsAbsolutelyQuasiSeparated but does not cite it, as in the sibling node; the HomologySequence public import is proof-only. No compile, no file changed."
+ }
+}

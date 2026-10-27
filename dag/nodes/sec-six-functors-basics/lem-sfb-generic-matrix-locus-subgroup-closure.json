@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-generic-matrix-locus-subgroup-closure",
+ "kind": "statement",
+ "title": "Generic matrix-group laws extend to scheme-theoretic closure",
+ "statement": "Let $F$ be a field [def-weil-field], $E$ a finite-dimensional $F$-vector space, and $G\\subseteq\\operatorname{GL}(E)$ an affine finite-type closed subgroup scheme [def-sc-group-scheme, def-sc-group-scheme-subgroup, def-sc-general-linear-group]; in dimension zero put $\\operatorname{GL}(0)=1$. Let $C=\\operatorname{Spec}A$ be an affine finite-type $F$-scheme such that $A\\otimes_F L$ is a nonzero integral domain for every field extension $L/F$. Let $j:C\\to G$ be a quasi-compact immersion, that is, a closed immersion followed by an open immersion [def-weil-closed-immersion, def-weil-open-immersion], and suppose there is $c_0\\in C(F)$ with $j(c_0)=1$. Suppose there are nonempty opens $V\\subseteq C\\times_F C$ and $W\\subseteq C$ and morphisms $m_0:V\\to C$, $i_0:W\\to C$ satisfying $j\\circ m_0=m_G\\circ(j\\times j)|_V$ and $j\\circ i_0=i_G\\circ j|_W$, where $m_G$ and $i_G$ are multiplication and inversion in $G$. Put $B=\\Gamma(G,\\mathcal O_G)$ and $I=\\ker(j^*:B\\to A)$. Then multiplication, inverse and identity of $G$ restrict to the closed subscheme $H=\\operatorname{Spec}(B/I)$, making $H\\hookrightarrow G$ a closed subgroup scheme. In particular this $H$ is the scheme-theoretic image of $j$ [def-nagata-scheme-theoretic-image]. Neither a group law on all of $C$, nor smoothness of $G$ or $C$, is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 1c, Lemma 1.40 and Theorem 1.45, printed pp.18-19, closure stability argument; agent generalization to an affine locus with only generic multiplication and inversion, proved by the coordinate-kernel/tensor-injection argument recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof": [
+  {
+   "text": "Write $r=j^*:B\\to A$, $D=B/I$, $q:B\\to D$, and $p:D\\hookrightarrow A$, $p(q(b))=r(b)$. The formula for $p$ is well defined and injective since $I=\\ker r$ [def-weil-pbc-algebra-hom-quotient]. The affine group coordinate theorem [lem-sfb-affine-group-coordinate-hopf] supplies the pullbacks $\\Delta:B\\to B\\otimes_F B$, $S:B\\to B$ and $\\epsilon:B\\to F$ of the given multiplication, inverse and identity. Identify $C\\times_F C$ with $\\operatorname{Spec}(A\\otimes_F A)$ by [lem-weil-pbc-fibre-product-affine-spectra].",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1c, Lemma 1.40 and Theorem 1.45, printed pp.18-19; agent coordinate-kernel proof for the generic-law variant (not an invocation of the rational-point closure theorem)."
+   }
+  },
+  {
+   "text": "The algebra $A$ is a nonzero domain by the hypothesis at $L=F$. Put $K=\\operatorname{Frac}(A)$. Tensor the injection $A\\hookrightarrow K$ with the $F$-vector space $A$: [lem-weil-pbc-module-over-field-flat] and [lem-trf-flat-tensor-preserves-injection] give an injection $A\\otimes_F A\\hookrightarrow A\\otimes_F K$. Its target is a nonzero domain by the hypothesis at $L=K$, so its unital subring $A\\otimes_F A$ is a nonzero domain. Thus $C$ and $C\\times_F C$ are integral schemes [def-pc-integral-scheme]. For clarity, the affine criterion follows directly from this definition: an affine open in the spectrum of a domain is covered by principal opens whose rings are domain localizations, and its sections embed in the common fraction field.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1c, Lemma 1.40 and Theorem 1.45, printed pp.18-19; agent coordinate-kernel proof for the generic-law variant (not an invocation of the rational-point closure theorem)."
+   }
+  },
+  {
+   "text": "Tensoring $p:D\\hookrightarrow A$ first with $D$ and then with $A$ preserves injectivity, since both are $F$-vector spaces [lem-weil-pbc-module-over-field-flat, lem-trf-flat-tensor-preserves-injection]. Consequently $p\\otimes p:D\\otimes_F D\\hookrightarrow A\\otimes_F A$ is injective. For $b\\in I$, the section $(r\\otimes r)\\Delta(b)$ restricts on $V$ to $m_0^*(r(b))=0$ by the stated equality of morphisms. Choose a point $v\\in V$. Its germ is zero; the injectivity of the germ map for an integral scheme [lem-sc-integral-scheme-stalks-in-function-field], applied to the global open of $C\\times_F C$, gives $(r\\otimes r)\\Delta(b)=0$. Hence injectivity of $p\\otimes p$ gives $(q\\otimes q)\\Delta(b)=0$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-trf-flat-tensor-preserves-injection",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1c, Lemma 1.40 and Theorem 1.45, printed pp.18-19; agent coordinate-kernel proof for the generic-law variant (not an invocation of the rational-point closure theorem)."
+   }
+  },
+  {
+   "text": "Likewise, for $b\\in I$, $r(S(b))$ restricts on $W$ to $i_0^*(r(b))=0$. Choose $w\\in W$ and apply the injective germ map of the integral scheme $C$ [lem-sc-integral-scheme-stalks-in-function-field]. Thus $r(S(b))=0$, so $S(b)\\in I$. Also $\\epsilon(b)=c_0^*(r(b))=0$, since $j(c_0)=1$. This proves that $qS$ and $\\epsilon$ kill $I$, in addition to the vanishing of $(q\\otimes q)\\Delta$ on $I$ from step 3.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1c, Lemma 1.40 and Theorem 1.45, printed pp.18-19; agent coordinate-kernel proof for the generic-law variant (not an invocation of the rational-point closure theorem)."
+   }
+  },
+  {
+   "text": "Define $\\Delta_D(q(b))=(q\\otimes q)\\Delta(b)$, $S_D(q(b))=q(S(b))$, and $\\epsilon_D(q(b))=\\epsilon(b)$. Steps 3 and 4 make these formulas independent of the representative $b$; they are $F$-algebra maps because their composites with the surjective $q$ are $F$-algebra maps [def-weil-pbc-algebra-hom-quotient]. By the contravariant affine spectrum correspondence [def-weil-affine-spectrum] and the affine product identification [lem-weil-pbc-fibre-product-affine-spectra], they give actual morphisms $H\\times_F H\\to H$, $H\\to H$ and $\\operatorname{Spec}F\\to H$. Their composites with $h=\\operatorname{Spec}q:H\\to G$ are the restrictions of the specified operations on $G$, by the three displayed coordinate equalities. The surjectivity of $q$ makes $h$ a closed immersion [def-weil-closed-immersion].",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1c, Lemma 1.40 and Theorem 1.45, printed pp.18-19; agent coordinate-kernel proof for the generic-law variant (not an invocation of the rational-point closure theorem)."
+   }
+  },
+  {
+   "text": "For every commutative $F$-algebra $R$, precomposition with the surjection $q$ injects $\\operatorname{Hom}_{F\\text{-alg}}(D,R)$ into $\\operatorname{Hom}_{F\\text{-alg}}(B,R)$. The morphisms of step 5 show that its image contains the identity and is closed under the multiplication and inverse of $G(R)$. It is therefore a subgroup, and its group identities are precisely the identities inherited from $G(R)$. The functor-of-points formulation of [def-sc-group-scheme] now makes these morphisms a group-scheme structure on $H$, and [def-sc-group-scheme-subgroup] says that the closed immersion $h$ is a closed subgroup scheme. This argument verifies the identities on all test algebras, including nonreduced ones.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1c, Lemma 1.40 and Theorem 1.45, printed pp.18-19; agent coordinate-kernel proof for the generic-law variant (not an invocation of the rational-point closure theorem)."
+   }
+  },
+  {
+   "text": "Finally $r=pq$ factors $j$ through $H$. Every closed subscheme $Z\\hookrightarrow G=\\operatorname{Spec}B$ is $\\operatorname{Spec}(B/J)$ for an ideal $J\\subseteq B$ [def-weil-closed-immersion]. By the affine spectrum correspondence [def-weil-affine-spectrum], $j$ factors through $Z$ exactly when $J\\subseteq\\ker r=I$: a map killing $J$ descends by $b+J\\mapsto r(b)$, and a factorization kills $J$. In that case $B/J\\to B/I$ gives a unique comparison $H\\to Z$ over $G$. Thus $H$ is the smallest closed subscheme through which $j$ factors, which is the scheme-theoretic image by [lemma-nagata-scheme-theoretic-closure-minimal, def-nagata-scheme-theoretic-image]. None of these steps requires smoothness or an everywhere-defined law on $C$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "lemma-nagata-scheme-theoretic-closure-minimal",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R7 (definition-scheme-theoretic-image) and 01R8 (lemma-quasi-compact-scheme-theoretic-image); elementary affine ideal calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "lemma-nagata-scheme-theoretic-closure-minimal",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 1c, Lemma 1.40 and Theorem 1.45, printed pp.18-19; agent coordinate-kernel proof for the generic-law variant (not an invocation of the rational-point closure theorem)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally closed integral matrix subscheme containing the identity whose multiplication and inverse generically factor through itself is open in its closed subgroup closure",
+   "results": "{\"t\": \"2026-10-23T22:16:54Z\", \"tool\": \"leanfinder\", \"query\": \"A locally closed integral matrix subscheme containing the identity whose multiplication and inverse generically factor through itself is open in its closed subgroup closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTopologicalGroup.mulInvClosureNhd.isOpen\", \"IsOpen.mul_closure_one_eq\", \"Subgroup.isOpen_of_one_mem_interior\", \"Subgroup.isOpen_of_isClosed_of_finiteIndex\", \"IsTopologicalGroup.mulInvClosureNhd\", \"Subgroup.connectedComponentOfOne\", \"OpenSubgroup.isClopen\", \"Subgroup.isClosed_of_isOpen\"], \"digest\": \"d5a49e99231c562c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological subgroup closure requires an actual subgroup and gives no scheme structure. IsIntegral and closed-immersion instances do not extend generic group laws to the scheme-theoretic image; no hit states this affine Hopf-ideal criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic closure of an integral locally closed subvariety is an algebraic subgroup if it is generically stable under products and inversion",
+   "results": "{\"t\": \"2026-10-23T22:16:53Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme theoretic closure of an integral locally closed subvariety is an algebraic subgroup if it is generically stable under products and inversion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\"], \"digest\": \"64ab54c522d52df5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological subgroup closure requires an actual subgroup and gives no scheme structure. IsIntegral and closed-immersion instances do not extend generic group laws to the scheme-theoretic image; no hit states this affine Hopf-ideal criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally closed geometrically integral subscheme of an affine group generically closed under multiplication and inversion has group scheme closure",
+   "results": "{\"t\": \"2026-10-23T22:16:52Z\", \"tool\": \"leansearch\", \"query\": \"A locally closed geometrically integral subscheme of an affine group generically closed under multiplication and inversion has group scheme closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\"], \"digest\": \"c11ab67c2f3e7e24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological subgroup closure requires an actual subgroup and gives no scheme structure. IsIntegral and closed-immersion instances do not extend generic group laws to the scheme-theoretic image; no hit states this affine Hopf-ideal criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"closure\", \"subgroup\"",
+   "results": "{\"t\": \"2026-10-23T22:18:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"closure\\\", \\\"subgroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubgroup.closure\", \"Subgroup.closure\", \"AddSubgroup.closure_univ\", \"Subgroup.closure_univ\", \"AddSubgroup.closure_empty\", \"Subgroup.closure_empty\", \"AddSubgroup.closure_eq\", \"AddSubgroup.subset_closure\"], \"digest\": \"06772fa91060f01b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological subgroup closure requires an actual subgroup and gives no scheme structure. IsIntegral and closed-immersion instances do not extend generic group laws to the scheme-theoretic image; no hit states this affine Hopf-ideal criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "closure|dense|subgroup",
+   "results": "{\"t\": \"2026-10-23T22:16:52Z\", \"tool\": \"grep\", \"query\": \"closure|dense|subgroup\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"36ef1e35402e3915\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological subgroup closure requires an actual subgroup and gives no scheme structure. IsIntegral and closed-immersion instances do not extend generic group laws to the scheme-theoretic image; no hit states this affine Hopf-ideal criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "image|closure|subgroup",
+   "results": "{\"t\": \"2026-10-23T23:00:13Z\", \"tool\": \"grep\", \"query\": \"image|closure|subgroup\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"2641208e2321b2dc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern actual subgroup closures, generic integral-scheme machinery, or quotient Hopf algebras once the Hopf-ideal condition is known; none extends generic partial laws to this scheme image. Existing DAG leaves carry the component tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral subscheme generically stable under multiplication and inverse has scheme theoretic closure a closed subgroup scheme",
+   "results": "{\"t\": \"2026-10-23T23:00:13Z\", \"tool\": \"leansearch\", \"query\": \"An integral subscheme generically stable under multiplication and inverse has scheme theoretic closure a closed subgroup scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClosedSubgroup.ctorIdx\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"ClosedSubgroup\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AddSubgroup.toSubgroup_closure\", \"ClosedSubgroup.recOn\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\"], \"digest\": \"ce34a1c8086c8582\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern actual subgroup closures, generic integral-scheme machinery, or quotient Hopf algebras once the Hopf-ideal condition is known; none extends generic partial laws to this scheme image. Existing DAG leaves carry the component tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Ideal",
+   "results": "{\"t\": \"2026-10-23T23:00:13Z\", \"tool\": \"loogle\", \"query\": \"HopfAlgebra, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HopfAlgebra.Quotient.instQuotientIdeal\"], \"digest\": \"77c19f21b743d77f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern actual subgroup closures, generic integral-scheme machinery, or quotient Hopf algebras once the Hopf-ideal condition is known; none extends generic partial laws to this scheme image. Existing DAG leaves carry the component tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic image of a geometrically integral affine locus in an affine group is a subgroup when generic multiplication and inversion factor through the locus",
+   "results": "{\"t\": \"2026-10-23T23:00:14Z\", \"tool\": \"leanfinder\", \"query\": \"The scheme theoretic image of a geometrically integral affine locus in an affine group is a subgroup when generic multiplication and inversion factor through the locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\"], \"digest\": \"4584ec90982bf839\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern actual subgroup closures, generic integral-scheme machinery, or quotient Hopf algebras once the Hopf-ideal condition is known; none extends generic partial laws to this scheme image. Existing DAG leaves carry the component tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic partial group laws on an integral affine subscheme extend to the closed scheme image by injectivity of restriction and tensor products",
+   "results": "{\"t\": \"2026-10-23T23:01:32Z\", \"tool\": \"leanfinder\", \"query\": \"Generic partial group laws on an integral affine subscheme extend to the closed scheme image by injectivity of restriction and tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specTargetImage\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\"], \"digest\": \"790cb3722dab90aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern actual subgroup closures, generic integral-scheme machinery, or quotient Hopf algebras once the Hopf-ideal condition is known; none extends generic partial laws to this scheme image. Existing DAG leaves carry the component tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-exponential-big-cell",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, Theorem 23.72 proof, pp.510-511: omitted details needed to use the weight-character torus rather than the full diagonal torus. The open-cell strengthening is an agent-stated construction lemma. Supporting generic scheme lemma: extension of local multiplication and inverse identities to the closed matrix-locus image, before reductivity.",
+   "via": [
+    "lem-sfb-chevalley-exponential-big-cell",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-generic-matrix-locus-subgroup-closure",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the generic-law closure by coordinate maps: geometric integrality gives an integral product via tensor injectivity, nonempty-open vanishing is detected by injective germs, and quotient coordinate formulas give restricted operations and their group identities on all test algebras. Reused existing DAG inputs; no new nodes.",
+  "blueprint": "Inherited null ancestor and via chain retained after blueprint_refs ancestor returned None. Realizes the supporting generic closure argument in the parent Chevalley big-cell proof step 5, below the inherited direct-images (3) alteration prerequisite. Latest main-20261024 unit and direct-images proof read; no unit or chapter route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-f46e3f3a4",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-f46e3f3a4 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The delivery is one commit with the item and its report only, and no new nodes. The statement and stmt_deps are identical to the live node, which is unsplit, has no repair note and no parallel split. The proof is correct. Steps 3 and 4 show that the kernel I of B→A is killed by Δ (through q⊗q), by the antipode S and by the counit ε. Step 3 makes p⊗p injective by flatness over a field. A⊗A is a domain because A⊗A embeds in A⊗Frac(A), which is a domain by the geometric-integrality hypothesis at L=Frac(A). A section vanishing on the nonempty open V (or W) is then zero by germ injectivity on an integral scheme (lem-sc-integral-scheme-stalks-in-function-field clause 1). The counit uses j∘c0=e. Step 5 descends the Hopf maps to B/I. Step 6 gives a subgroup H(R)={φ: φ(I)=0} for every algebra R, including nonreduced ones, which is exactly def-sc-group-scheme-subgroup. Step 7 gets minimality from affine ideal containment J⊆I, plus the Lean-closed nagata closure-minimal lemma and def-nagata-scheme-theoretic-image. Small cases checked: G=1, C=Spec F, C=G=GL as in the parent's step 5, nonreduced G, imperfect F and E=0. The source is Milne iAG2017 L1.40/T1.45 (PDF pp.30-31); both assume an actual subgroup, so the agent origin is correct. Stacks 01R7 and 01R8 labels are verified. All cited nodes are Mathlib leaves, definitions or Lean-closed, so the empty tool_uses is correct and there is no SGA citation. The duplicate scan found nothing: lem-sc-image-subgroup and lem-wf-zariski-closure-subgroup need a proper homomorphism or an abstract subgroup. Batch-5 flag on lem-trf-flat-tensor-preserves-injection: it is a Mathlib leaf (Module.Flat.lTensor_preserves_injective_linearMap) with no dependencies. It is generic flatness, neither assumption gives it and it is not part of their proofs, and 10 other sfb nodes already cite it, so it is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericMatrixLocusSubgroupClosure",
+  "declaration": "AlgebraicGeometry.GenericMatrixLocus.isClosedSubgroupScheme_closure",
+  "declarations": [
+   "AlgebraicGeometry.GenericMatrixLocus.coordinates",
+   "AlgebraicGeometry.GenericMatrixLocus.closure",
+   "AlgebraicGeometry.GenericMatrixLocus.inclusion",
+   "AlgebraicGeometry.GenericMatrixLocus.closureOver",
+   "AlgebraicGeometry.GenericMatrixLocus.isClosedSubgroupScheme_closure"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericMatrixLocusSubgroupClosure.lean",
+  "statement": "theorem isClosedSubgroupScheme_closure (E : Type u) [AddCommGroup E] [Module F E] [FiniteDimensional F E] (G : Over (Spec (.of F))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] (embedding : G ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} (Module.finrank F E)) F) [IsClosedSubgroupScheme embedding] [Algebra.FiniteType F A] (hgeom : ∀ (L : Type u) [Field L] [Algebra F L], IsDomain (A ⊗[F] L)) (j : (Spec (.of A)).asOver (Spec (.of F)) ⟶ G) [IsImmersion j.left] [QuasiCompact j.left] (c₀ : 𝟙_ (Over (Spec (.of F))) ⟶ (Spec (.of A)).asOver (Spec (.of F))) (hc₀ : c₀ ≫ j = η[G]) (V : (((Spec (.of A)).asOver (Spec (.of F))) ⊗ ((Spec (.of A)).asOver (Spec (.of F)))).left.Opens) (W : (Spec (.of A)).Opens) (hV : Nonempty V) (hW : Nonempty W) (m₀ : V.toScheme ⟶ Spec (.of A)) (i₀ : W.toScheme ⟶ Spec (.of A)) (hm : m₀ ≫ j.left = V.ι ≫ (j ⊗ₘ j).left ≫ μ[G].left) (hi : i₀ ≫ j.left = W.ι ≫ j.left ≫ ι[G].left) : (∃ _ : GrpObj (closureOver j), IsClosedSubgroupScheme (Over.homMk (inclusion j) : closureOver j ⟶ G)) ∧ ∃ e : closure j ≅ j.left.image, e.hom ≫ j.left.imageι = inclusion j",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary definitions construct the actual coordinate map B → A, quotient Spec(B/ker(j*)), quotient inclusion into G, and its structure over F. GL(E) uses the existing general linear scheme on LinearGroupSchemes.Index (Module.finrank F E), the basis-coordinate model, including dimension zero. The conclusion identifies this explicit quotient with Scheme.Hom.image over G."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18d423f73",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Clause-by-clause check of isClosedSubgroupScheme_closure against node and stmt_deps: F, E (finrank index; E=0 gives trivial GL as GL(0)=1), affine finite-type GrpObj G, IsClosedSubgroupScheme embedding into GeneralLinearGroup, Algebra.FiniteType A, hgeom over Type-u fields (weaker hypothesis; F and Frac A suffice), IsImmersion+QuasiCompact j, c₀ with c₀≫j=η, nonempty opens V⊆C⊗C and W, hm/hi exactly the stated equalities (F-linearity of m₀,i₀ automatic). Helpers coordinates/closure/inclusion/closureOver carry real data (Spec(B/ker j*), isoSpec). Conclusion: ∃ GrpObj with IsClosedSubgroupScheme (pinned by IsMonHom+mono) ∧ iso to Scheme.Hom.image over G. Node differs from live only by the lean field; statement verbatim; no name clash in side-live; only the main theorem is sorry; docstrings and 7 proof steps present; report sections present. No findings; not recompiled per instructions."
+ }
+}

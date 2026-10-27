@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-finite-affine-fppf-cech-vanishing",
+ "kind": "statement",
+ "title": "Finite affine fppf covers have vanishing quasi-coherent Cech cohomology",
+ "statement": "Fix the universes and small site presentations of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], $F$ an arbitrary quasi-coherent Zariski $\\mathcal O_S$-module [pqf-def-coherent], and $F^a$ its associated module sheaf on $\\mathcal C_S=(\\mathit{Sch}/S)_{\\mathrm{fppf}}$ [def-pc-fppf-site, lem-sfb-scheme-big-fppf-quasicoherent-equivalence]. Thus $F^a(v:T\\to S)=\\Gamma(T,v^*F)$ with tensor-pullback restrictions [def-pc-module-pullback]. Let $u:V\\to S$ be an object with $V$ affine, and let $\\mathcal V=\\{g_i:V_i\\to V\\}_{i\\in I}$ be an fppf covering with $I$ finite and every $V_i$ affine. For the underlying abelian sheaf $(F^a)_{ab}$, form the Cech complex of [def-weil-pbc-site-cech-complex], whose degree $p\\ge0$ term is $\\prod_{(i_0,\\ldots,i_p)\\in I^{p+1}}\\Gamma(V_{i_0}\\times_V\\cdots\\times_V V_{i_p},(u g_{i_0}\\operatorname{pr}_0)^*F)$ and whose differential is the alternating sum of restriction along projections omitting one factor. Then $\\check H^p(\\mathcal V,(F^a)_{ab})=0$ for every $p>0$. The empty covering of the empty affine scheme and empty covering members are allowed. No finite-generation or flatness hypothesis on $F$, and no Noetherian or separation hypothesis on $S$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03FJ, lemma-standard-covering-Cech-quasi-coherent, fppf case (with the standard finite affine coverings of Tag 03FI, lemma-standard-covering-Cech)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-fppf-site",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "def-pc-module-pullback",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=u^*F$ and $M=\\Gamma(V,G)$. Pullback preserves quasi-coherence, so $G$ is quasi-coherent on the affine scheme $V$. The base-restriction clause of the big-fppf equivalence identifies $F^a|_{(\\mathit{Sch}/V)_{\\mathrm{fppf}}}$ with $A_V(G)$, whose value on $w:T\\to V$ is $\\Gamma(T,w^*G)$ and whose restrictions are tensor pullbacks. Thus we may compute the displayed Cech complex using $G$ on $V$. This is the canonical composite-pullback identification, not any exactness assertion about the associated-sheaf functor.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03FJ, proof: set R=Gamma(U,O_U), M=Gamma(U,F^a); Tag 03LC (proposition-equivalence-quasi-coherent-functorial)(1), restriction to the base object."
+   }
+  },
+  {
+   "text": "Write $A=\\Gamma(V,\\mathcal O_V)$, $A_i=\\Gamma(V_i,\\mathcal O_{V_i})$, and $B=\\prod_{i\\in I}A_i$ with its diagonal $A$-algebra structure. Each $g_i$ is flat by the fppf-cover definition, hence $A\\to A_i$ is flat by the affine criterion. The finite product lemma makes $B$ flat over $A$. The finite-coproduct spectrum isomorphism identifies $\\operatorname{Spec}B$ with $\\coprod_i V_i$, compatibly with the coordinate maps to $V$. Every point of $V$ lifts to some $V_i$ by joint surjectivity, and then to $\\operatorname{Spec}B$ by its coprojection. Hence $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is surjective. The flat-surjective spectrum criterion gives faithful flatness of $A\\to B$.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-finite-product-flat-modules",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03FI and 03FJ, proof: replace the finite affine family by its coproduct and obtain a faithfully flat coordinate algebra; Morphisms 01U5 (lemma-flat-characterize), Algebra 00HQ (lemma-ff-rings)."
+   }
+  },
+  {
+   "text": "For a tuple $\\mathbf i=(i_0,\\ldots,i_p)$, put $T_{\\mathbf i}=V_{i_0}\\times_V\\cdots\\times_V V_{i_p}$ and $w_{\\mathbf i}:T_{\\mathbf i}\\to V$. Inductively applying the affine fibre-product theorem identifies $T_{\\mathbf i}$ with $\\operatorname{Spec}D_{\\mathbf i}$, where $D_{\\mathbf i}=A_{i_0}\\otimes_A\\cdots\\otimes_A A_{i_p}$. Its projection omitting factor $j$ corresponds to the algebra map inserting $1$ in slot $j$: both maps agree on each retained factor by the stated projection formulas and the tensor universal property. The affine-section theorem, applied with the whole source and target as affine opens, gives the isomorphism\n$$c_{\\mathbf i}:M\\otimes_A D_{\\mathbf i}\\xrightarrow{\\sim}\\Gamma(T_{\\mathbf i},w_{\\mathbf i}^*G),\\qquad m\\otimes d\\longmapsto d\\,w_{\\mathbf i}^*m.$$\nNo affine-open intersections in $S$ are used.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03FJ, displayed calculation of the degree p term; Schemes 01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines), 01I9 (lemma-widetilde-pullback)."
+   }
+  },
+  {
+   "text": "For every $p\\ge0$, repeated application of the finite-product tensor isomorphism, with tensor-factor associativity and symmetry, gives\n$$M\\otimes_A B^{\\otimes_A(p+1)}\\xrightarrow{\\sim}\\prod_{\\mathbf i\\in I^{p+1}}(M\\otimes_A D_{\\mathbf i}).$$\nThere are only finitely many factors at each application, and the other tensor factor may be an arbitrary module. Compose with $\\prod_{\\mathbf i}c_{\\mathbf i}$ to obtain $\\alpha_p:M\\otimes_A B^{\\otimes_A(p+1)}\\xrightarrow{\\sim}C^p$, where $C^p$ is the Cech term. Explicitly, for $b^r=(b^r_i)_{i\\in I}\\in B$,\n$$\\bigl(\\alpha_p(m\\otimes b^0\\otimes\\cdots\\otimes b^p)\\bigr)_{\\mathbf i}=c_{\\mathbf i}(m\\otimes b^0_{i_0}\\otimes\\cdots\\otimes b^p_{i_p}).$$\nThis is a composition of the cited isomorphisms; no new existence or comparison theorem is assumed.",
+   "uses": [
+    "lem-weil-pbc-tensor-finite-product",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03FI and 03FJ, degreewise comparison with the coproduct and tensor-power cochains; Algebra 00DD (lemma-tensor-products-commute-with-limits), finite products equal finite direct sums."
+   }
+  },
+  {
+   "text": "Check each coface, not just the degreewise terms. Let $\\mathbf k=(k_0,\\ldots,k_{p+1})$ and let $\\pi_j:T_{\\mathbf k}\\to T_{\\mathbf k\\setminus j}$ omit factor $j$. Under the ring coordinates of step 3, its pullback takes\n$$m\\otimes a_0\\otimes\\cdots\\otimes a_p\\longmapsto m\\otimes a_0\\otimes\\cdots\\otimes a_{j-1}\\otimes1\\otimes a_j\\otimes\\cdots\\otimes a_p.$$\nIndeed, pull back the section $d\\,w^*m$ in the formula for $c$: it becomes $\\pi_j^\\sharp(d)\\,(w\\pi_j)^*m$, by the tensor-pullback definition and the canonical composite identification. The insertion of $1_B$ on $M\\otimes_A B^{\\otimes_A(p+1)}$ has component $1_{A_{k_j}}$, so step 4 gives exactly this same section in component $\\mathbf k$. Pure tensors generate the source as an abelian group, so the two homomorphisms agree. Summing over $j$ with signs $(-1)^j$ proves $d_C^p\\alpha_p=\\alpha_{p+1}d_{\\mathrm{Am}}^p$. Thus the $\\alpha_p$ form an isomorphism of cochain complexes, with the alternating Amitsur differential.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-identity-composition",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03FJ, sentence omitting verification of the Cech maps; the verification here uses the explicit section map of Schemes 01I9 and the composite-pullback isomorphism of Sheaves 0097 (lemma-push-pull-composition-modules)."
+   }
+  },
+  {
+   "text": "Apply the augmented Amitsur exactness theorem to the faithfully flat $A$-algebra $B$ of step 2 and the arbitrary $A$-module $M$. In every degree $p>0$, it says $\\ker d_{\\mathrm{Am}}^p=\\operatorname{im}d_{\\mathrm{Am}}^{p-1}$. The complex isomorphism of step 5 carries these kernels and images onto those of $C^\\bullet$. The definition $\\check H^p=\\ker d_C^p/\\operatorname{im}d_C^{p-1}$ therefore gives the required zero group. This does not require $M$ flat or finitely generated. If $I=\\varnothing$, the covering condition forces $V=\\varnothing$, and every $C^p$ is the empty product of abelian groups, hence zero; the result follows directly. Empty members in a nonempty family have $A_i=0$; all the finite-product, affine-spectrum and tensor isomorphisms above still apply. No separation or Noetherian hypothesis was used.",
+   "uses": [
+    "lem-pc-cech-exact",
+    "def-weil-pbc-site-cech-complex",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03FJ, final sentence invoking Tag 023M (lemma-ff-exact); empty-family cases by the Cech-complex definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-tensor-finite-product",
+  "def-weil-pbc-site-cech-complex",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-cech-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03FJ (lemma-standard-covering-Cech-quasi-coherent), proof; Tag 03FI (lemma-standard-covering-Cech)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fppf.*[Cc]ech|[Cc]ech.*fppf|Amitsur|amitsur",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general Cech complexes, quasi-coherent presentation data, and exactness detection by faithful flatness do not state finite affine fppf Cech vanishing or affine fppf derived cohomology vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"exact\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general Cech complexes, quasi-coherent presentation data, and exactness detection by faithful flatness do not state finite affine fppf Cech vanishing or affine fppf derived cohomology vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Cech complex of a quasi coherent module for a faithfully flat affine covering is exact in positive degrees",
+   "results": "8 hits: CochainComplex.exactAt_succ_single_obj, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.FaithfullyFlat.lTensor_exact_iff_exact, HomologicalComplex.ExactAt, Module.Flat.lTensor_shortComplex_exact, Module.FaithfullyFlat.toFlat",
+   "date": "2026-10-23",
+   "verdict": "no match: general Cech complexes, quasi-coherent presentation data, and exactness detection by faithful flatness do not state finite affine fppf Cech vanishing or affine fppf derived cohomology vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite fppf covering of an affine scheme, the Cech complex of a quasi coherent sheaf has zero positive cohomology",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.QuasicoherentData.coversTop, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: general Cech complexes, quasi-coherent presentation data, and exactness detection by faithful flatness do not state finite affine fppf Cech vanishing or affine fppf derived cohomology vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(exact|homology)|faithfullyFlat.*complex|complex.*faithfullyFlat",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: general Cech complexes, quasi-coherent presentation data, and exactness detection by faithful flatness do not state finite affine fppf Cech vanishing or affine fppf derived cohomology vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent identifies the Cech cochains of a quasi coherent module with an exact augmented Amitsur complex",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.presentation, SheafOfModules.Presentation.map_π_eq, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_π, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.Presentation.map",
+   "date": "2026-10-23",
+   "verdict": "no match: general Cech complexes, quasi-coherent presentation data, and exactness detection by faithful flatness do not state finite affine fppf Cech vanishing or affine fppf derived cohomology vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite affine fppf covering the Cech complex of an arbitrary quasi coherent module has zero positive cohomology",
+   "results": "{\"t\": \"2026-10-23T21:35:54Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite affine fppf covering the Cech complex of an arbitrary quasi coherent module has zero positive cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.coversTop\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\"], \"digest\": \"5a6b9abe02ef29d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data and general exactness/complex constructors do not prove affine fppf Cech vanishing; the project Amitsur theorem is reused through lem-pc-cech-exact"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"exact\"",
+   "results": "{\"t\": \"2026-10-23T21:36:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cech\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data and general exactness/complex constructors do not prove affine fppf Cech vanishing; the project Amitsur theorem is reused through lem-pc-cech-exact"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*[Cc]ech|[Cc]ech.*fppf|[Aa]mitsur",
+   "results": "{\"t\": \"2026-10-23T21:36:21Z\", \"tool\": \"grep\", \"query\": \"fppf.*[Cc]ech|[Cc]ech.*fppf|[Aa]mitsur\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data and general exactness/complex constructors do not prove affine fppf Cech vanishing; the project Amitsur theorem is reused through lem-pc-cech-exact"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented Cech complex of a finite faithfully flat affine cover is exact for every module",
+   "results": "{\"t\": \"2026-10-23T21:36:56Z\", \"tool\": \"leansearch\", \"query\": \"The augmented Cech complex of a finite faithfully flat affine cover is exact for every module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.augment\", \"CategoryTheory.Arrow.augmentedCechConerve\", \"CochainComplex.augment\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"CategoryTheory.CosimplicialObject.augmentedCechConerve.congr_simp\", \"CochainComplex.fromSingle₀AsComplex\", \"Module.Flat.rTensor_shortComplex_exact\", \"HomologicalComplex.ExactAt\"], \"digest\": \"26564828c66f9bda\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data and general exactness/complex constructors do not prove affine fppf Cech vanishing; the project Amitsur theorem is reused through lem-pc-cech-exact"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent identifies quasi coherent Cech cochains for an affine fppf cover with an exact Amitsur complex",
+   "results": "{\"t\": \"2026-10-23T21:38:25Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat descent identifies quasi coherent Cech cochains for an affine fppf cover with an exact Amitsur complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.coversTop\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\"], \"digest\": \"7c056571f1478204\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data and general exactness/complex constructors do not prove affine fppf Cech vanishing; the project Amitsur theorem is reused through lem-pc-cech-exact"
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor_exact_iff_exact|iff_exact_iff_rTensor_exact|QuasicoherentData|cechComplexFunctor",
+   "results": "{\"t\": \"2026-10-23T21:39:37Z\", \"tool\": \"grep\", \"query\": \"lTensor_exact_iff_exact|iff_exact_iff_rTensor_exact|QuasicoherentData|cechComplexFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\"], \"digest\": \"20736a9bb9930cee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data and general exactness/complex constructors do not prove affine fppf Cech vanishing; the project Amitsur theorem is reused through lem-pc-cech-exact"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-scheme-fppf-qcoh-acyclic",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: hypothesis (3) in the unbounded descent argument: derived unit only for modules in degree zero; supporting input: 0DHE proof: compare small-etale and big-fppf sections at the base and every flat face, with one compatible resolution; Quasi-coherent modules are acyclic for big-fppf to small-etale direct image; affine-scheme cohomology input in the proof of Stacks 0DGN(7), via the affine-cover argument of 0DEW(7). Supporting input: Stacks 03DW proof, first affine-objects paragraph, application of 03FJ to standard affine fppf coverings.",
+   "via": [
+    "lem-sfb-affine-scheme-fppf-qcoh-acyclic",
+    "lem-sfb-space-fppf-qcoh-higher-vanishing",
+    "lem-sfb-flat-object-fppf-derived-sections",
+    "lem-sfb-fppf-face-heart-derived-unit",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-affine-fppf-cech-vanishing",
+  "worker": "stage1",
+  "summary": "Followed Stacks 03FJ through finite product faithful flatness, affine tensor section formulas, finite-product tensor distribution, explicit signed coface compatibility, and the existing Lean-closed Amitsur exactness node. Reused all needed lemmas; no new nodes or statement changes. Checked arbitrary modules, arbitrary ambient schemes and empty covers/members.",
+  "blueprint": "Supporting affine fppf Cech input along the inherited direct-image branch of sk-thm-sf-ctf-stability. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3); this is below the unit route. Inherited blueprint.from.node=null is retained: blueprint_refs.py ancestor also returns None. Searches for Cech, affine Cech and fppf Cech found no equal blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "why": "Use its canonical base-restriction formula to compute F^a over V; no cohomology comparison or exactness is invoked."
+   },
+   {
+    "node": "lem-pc-cech-exact",
+    "why": "Generic faithfully flat Amitsur exactness for an arbitrary module; the node is Lean-closed and supplies the algebraic last step of Stacks 03FJ."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic pullback of quasi-coherent modules, applied to u; the node is Lean-closed."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine pullback section formula, with its explicit map, applied on each overlap; the node is Lean-closed."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic canonical comparison of iterated module pullbacks, needed for the explicit face calculation; the node is Lean-closed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "lem-pc-cech-exact",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-4faf6f090",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-4faf6f090 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has 0 new nodes and its statement, stmt_deps, source and blueprint are byte-identical to clones/live and side-live, where the item is still unsplit. I read Stacks descent.tex 03FI and 03FJ (statement and proof). The six steps follow 03FJ by the equivalent route B=prod A_i. Step 1 computes on V through the base-restriction clause of the big-fppf equivalence node. Step 2 gets faithful flatness of A->B from the affine flatness criterion, the finite product of flat modules, the coproduct-spectrum isomorphism, joint surjectivity and the flat-plus-surjective criterion. Step 3 identifies T_i=Spec D_i, where omitting factor j inserts 1 in slot j, and uses the explicit section formula of the affine pullback-sections node. Step 4 distributes the tensor over the finite product. Step 5 writes out the coface check that Stacks omits; I re-derived it, signs (-1)^j included, against the Lean Amitsur cofaces at Amitsur.lean:229-248. Step 6 applies lem-pc-cech-exact. Edge cases checked: identity cover, I empty, V empty, an empty member, and non-flat Z/2 on a Zariski cover. No duplicate exists: the Cech nodes on other sites are small-etale only. I accept all 5 declared tool_uses as generic Lean-closed module tools. proof_deps equals the union of step uses, and there is no SGA citation. Advisory: step 5 assumes the canonical composite pullback isomorphism sends pi^*(w^*m) to (w pi)^*m. The cited node states only that the isomorphisms exist, and earlier reviews (Q62 and the affine-sections node) accepted this normalization as standard."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineFppfCechVanishing",
+  "declaration": "AlgebraicGeometry.Scheme.finite_affine_fppf_cech_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineFppfCechVanishing.lean",
+  "statement": "theorem finite_affine_fppf_cech_vanishing (S : Scheme.{u}) (F : SfbZariskiQCoh S) (V : Over S) [IsAffine V.left] {I : Type w} [Finite I] (Vᵢ : I → Over S) [∀ i : I, IsAffine (Vᵢ i).left] (g : ∀ i : I, Vᵢ i ⟶ V) (hcover : Presieve.ofArrows (fun i : I ↦ (Vᵢ i).left) (fun i : I ↦ (g i).left) ∈ fppfPrecoverage V.left) (D : SiteCechComplex Vᵢ g) (p : ℕ) (hp : 0 < p) : IsZero ((D.cohomologyFunctor p).obj (((sfbAssociated S ((Classical.choose scheme_big_fppf_quasicoherent_equivalence) S)).obj F).val.presheaf))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6db6d600f",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Single sorry theorem; only the item's lean record is added (diffed against side-live, no new nodes or dependency changes). Every clause matches node and Stacks 03FI/03FJ: S : Scheme.{u}; F : SfbZariskiQCoh (isQuasicoherent, no finiteness/flatness); V : Over S affine; finite I : Type w, possibly empty; affine Vᵢ with g in Over S; fppfPrecoverage on (g i).left; any SiteCechComplex D (fibre products over V, signed succAbove differential); IsZero of cohomology for all p>0, degree 0 excluded. F^a via Classical.choose of scheme_big_fppf_quasicoherent_equivalence: the chosen e carries section isos to Γ(tensorPullback) compatible with tensor-pullback restrictions, so the abelian presheaf is the node's up to iso and IsZero does not depend on the choice; same witness as landed AffineSchemeFppfQCohAcyclic; genuine theorem stmt_dep. Edge cases: empty I/V/member, empty S, zero module. Universes u, w; cohomology in max u w; no forced universe equality. Docstrings carry source place, blueprint tag and six-step proof; statement verbatim; no hollow defs, no pro-etale substitute, no duplicate found. No compile (none needed, no FIX)."
+ }
+}

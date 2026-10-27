@@ -1,0 +1,147 @@
+{
+ "id": "lem-fix-etale-origin-extension-pullback-cube",
+ "kind": "statement",
+ "title": "Extension of scalars commutes with intrinsic realization and pullback",
+ "statement": "Let φ:A→B be a map of finite commutative rings, p:Z→Y any scheme morphism and C an arbitrary object of D(Y_et,A). Let F and a be the intrinsic realization and its inverse-mate pullback comparison [def-fix-etale-origin-scalar-pullback-data]. Let σ_T:F_T^A S_T≅S_et F_T^B be siteScalarIso [def-finite-compact-scalar-transport-data] and c_i:L_B S_Y→S_Z L_A the specified intrinsic scalar pullback. Then L_B(σ_Y.inv_C);c_i(F_Y^A C);S_Z(a_A(C)) = a_B(S_et C);F_Z^B(c_et(C));σ_Z.inv_(L_et,A C), where c_et is Etale.scalarPullbackIso.hom. This tensor-free cube concerns extension alone and includes no restriction functor or projection formula.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-pullback-composition (Tag 0D6D), derived tensor construction Tag 06YY, geometric adjunction Tag 07A6, and remark-compatible-with-diagram (Tag 0E48): extension-of-scalars face of the normalized coefficient comparison"
+ },
+ "stmt_deps": [
+  "def-fix-etale-origin-scalar-pullback-data",
+  "def-finite-compact-scalar-transport-data",
+  "def-pur-etale-scalar-pullback-iso",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Identify the scalar-adjunction mate of realizationScalarIso.hom with the inverse derived realization/restriction square. The existing proved realization_scalar_unit lemma supplies precisely the unit equation, so mateEquiv_eq_of_unit gives the identification.",
+   "uses": [
+    "lem-finite-open-scalar-realization-transport",
+    "def-finite-compact-scalar-transport-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste that identity with the defining inverse-mate equation for pbcComparisonReduction and whisker by intrinsicSiteFunctorIso at both ends. Compatibility of mates with horizontal composition and top/bottom whiskering gives the mate of siteScalarIso.hom as properOriginRestrictionIso.inv.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "def-fix-proper-etale-origin-scalar-data",
+    "def-finite-compact-scalar-transport-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse intrinsic scalar/pullback comparison is the inverse scalar mate of originRestrictionPullback by its FourCorners construction. The proved representative normalization identifies the inverse etale scalar/pullback comparison with the scalar mate of scalarRestrictionPullbackIso.hom.",
+   "uses": [
+    "def-weil-pbc-four-corners",
+    "lem-sfb-scalar-site-comparison-normalized-data",
+    "def-pur-etale-scalar-pullback-iso",
+    "def-fix-etale-origin-scalar-pullback-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply injectivity of the scalar mates equivalence to the two pastings. After the identifications above, their mates are exactly the existing etaleOriginRestrictionPullbackCube. Evaluate the resulting reverse extension cube at C, and cancel the scalar/pullback and site/scalar isomorphisms to obtain the displayed forward cube. This is valid on all unbounded inputs and for zero rings and empty schemes, since it uses only adjunction identities and natural isomorphisms.",
+   "uses": [
+    "lem-fix-etale-origin-restriction-pullback-cube"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-finite-open-scalar-realization-transport",
+  "def-finite-compact-scalar-transport-data",
+  "def-weil-pbc-witness-compatibility",
+  "def-fix-proper-etale-origin-scalar-data",
+  "def-weil-pbc-four-corners",
+  "lem-sfb-scalar-site-comparison-normalized-data",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-fix-etale-origin-scalar-pullback-data",
+  "lem-fix-etale-origin-restriction-pullback-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D, 07A6 and 0E48; scalar adjunction mate pasting, reusing the proved unit normalization and the stated restriction cube",
+  "note": "U4 replaces the repeated K-flat balancing argument by scalar-mate injectivity. No new lemma is left unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The restriction and extension of scalars comparisons under intrinsic realization commute with geometric pullback on derived categories of sheaves",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, free-module pullback identities, and Scheme.Modules.restrictFunctorIsoPullback. These concern ordinary module pullback or free modules, not the two specified derived realization cubes.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate. Underived pullback composition provides background but does not identify these normalized derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoWhiskerLeft\", \"naturality\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "realization.*pullback|pullback.*realization",
+   "results": "0 Mathlib hits. Local rg found etaleProEtale_scalar_pullback_cube and realizationRestriction_directImage_cube; neither states the combined intrinsic cube with properOriginRestrictionIso and originPullback.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; the proved etale scalar/tensor square is reused in the assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleOriginScalarProjectionSquare",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-compact-support-coefficient-change",
+   "place": "Extension of scalars commutes with intrinsic realization and pullback; a face of the proper-factor coefficient comparison",
+   "via": [
+    "lem-fix-proper-etale-origin-scalar-isomorphism",
+    "lem-fix-etale-origin-scalar-projection-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleOriginExtensionPullbackCube",
+  "file": "lean/Sheaf/Paper/EtaleOriginExtensionPullbackCube.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleOriginExtensionPullbackCube",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.etaleOriginExtensionPullbackCube"
+  ],
+  "statement": "theorem etaleOriginExtensionPullbackCube\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)\n    (C : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) Y) :\n    (Scheme.proEtaleConstantRingDerivedPullback B p).map\n        ((Scheme.FiniteCompactScalar.siteScalarIso φ Y).inv.app C) ≫\n      (directImageScalarPullbackIso φ p).hom.app\n        ((finiteCoefficientIntrinsicDerivedComparison Y A).obj C) ≫\n      (directImageScalarExtension φ Z).map ((originPullback A p).app C) =\n    (originPullback B p).app\n        ((Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) Y).obj C) ≫\n      (finiteCoefficientIntrinsicDerivedComparison Z B).map\n        ((Etale.scalarPullbackIso (RingHom.ulift.{u + 1, u + 1, u, u} φ) p).hom.app C) ≫\n      (Scheme.FiniteCompactScalar.siteScalarIso φ Z).inv.app\n        ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p).leftDerivedFunctor.obj\n          C)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T094420-L-223756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T112435-L-1583677",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

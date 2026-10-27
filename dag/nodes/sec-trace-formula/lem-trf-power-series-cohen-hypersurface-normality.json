@@ -1,0 +1,275 @@
+{
+ "id": "lem-trf-power-series-cohen-hypersurface-normality",
+ "kind": "statement",
+ "title": "Normal ambient power-series rings and Cohen hypersurfaces",
+ "statement": "Let $d\\geq0$ be an integer. In either of the following cases form a commutative ring $S$. (i) Let $k$ be any field and put $S=k[[X_1,\\ldots,X_d]]$ [def-weil-pbc-multivariate-power-series]. (ii) Let $p$ be a prime and let $C$ be a Cohen ring with maximal ideal $pC$ [def-weil-pbc-cohen-ring]. Put $A=C[[X_1,\\ldots,X_d]]$ and $\\mathfrak n=(p,X_1,\\ldots,X_d)A$. Let $\\Theta\\in A$ have constant coefficient exactly $p$, and put $S=A/(\\Theta)$. In case (ii), $\\Theta\\in\\mathfrak n\\setminus\\mathfrak n^2$. In both cases $S$ is a regular local ring [def-weil-regular-scheme] and a normal domain [def-weil-pbc-normal-ring], meaning a nonzero integral domain integrally closed in its fraction field. No perfectness hypothesis is imposed on $C/pC$. The case $d=0$ is included: $S=k$ in (i) and $S=C/pC$ in (ii).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-formulated combination of Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary), Tag 00NQ (lemma-regular-ring-CM), Tag 0AFS (lemma-localization-of-regular-local-is-regular), and Tag 0567 (lemma-regular-normal). Extracted from steps 3 and 5 of the returned split; the constant-coefficient argument is agent-origin, not a theorem quoted verbatim from these tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-power-series-field-cohen-regular-complete] to the field $k$ in (i) and to the Cohen ring $C$ in (ii). In (i) it gives that $S$ is regular local. In (ii) it gives that $A$ is regular local with maximal ideal $\\mathfrak n=(p,X_1,\\ldots,X_d)A$. The theorem allows every field and every Cohen ring, including imperfect residue fields and $d=0$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary), first two sentences"
+   }
+  },
+  {
+   "text": "In (ii), let $\\epsilon:A\\to C$ be constant coefficient. By [lem-weil-pbc-power-series-quotient-variables] it is a ring homomorphism with kernel $(X_1,\\ldots,X_d)$. Thus $\\Theta-p\\in(X_1,\\ldots,X_d)$ and $\\Theta\\in\\mathfrak n$. Each generator of $\\mathfrak n$ maps into $pC$, so every element of $\\mathfrak n$ has constant coefficient in $pC$. An element of $\\mathfrak n^2$ is a finite sum of products of two elements of $\\mathfrak n$, hence has constant coefficient in $p^2C$. But $p\\notin p^2C$: otherwise $p=p^2c$; since $C$ is a domain and $p\\ne0$ by [def-weil-pbc-cohen-ring], cancellation gives $1=pc$, contrary to $p$ lying in the proper maximal ideal $pC$. Since $\\epsilon(\\Theta)=p$, it follows that $\\Theta\\notin\\mathfrak n^2$.",
+   "uses": [
+    "lem-weil-pbc-power-series-quotient-variables",
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent argument using Tag 0327 (definition-cohen-ring) and the constant-coefficient map in Tag 0306 (lemma-Noetherian-power-series)"
+   }
+  },
+  {
+   "text": "In (ii), apply [lem-weil-pbc-regular-local-hypersurface-criterion] to the regular local ring $(A,\\mathfrak n)$ and $f=\\Theta$. Step 2 verifies both $f\\in\\mathfrak n$ and $f\\notin\\mathfrak n^2$. Therefore $S=A/(\\Theta)$ is regular local. Together with step 1, this proves regular localness in both cases.",
+   "uses": [
+    "lem-weil-pbc-regular-local-hypersurface-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NQ (lemma-regular-ring-CM), regular local quotients by a member of a minimal parameter system"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak m$ be the maximal ideal of $S$, now regular local in either case. By [lem-weil-pbc-regular-local-localization], $S$ is a regular ring. By [lem-weil-pbc-regular-ring-normal], every prime localization is a normal domain, in particular $S_{\\mathfrak m}$. The canonical map $S\\to S_{\\mathfrak m}$ is an isomorphism: every $s\\notin\\mathfrak m$ is a unit, and the inverse sends $a/s$ to $as^{-1}$; the defining equality of fractions makes this well defined and both composites are the identity. Consequently $S$ is a nonzero domain. This isomorphism also identifies the fraction fields: send $a/b$ to the quotient of the images of $a$ and $b$. A monic equation over $S$ maps to the same equation over $S_{\\mathfrak m}$, so integral closedness there implies integral closedness in $S$. This proves exactly the normal-domain condition of [def-weil-pbc-normal-ring].",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-regular-ring-normal",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AFS (lemma-localization-of-regular-local-is-regular) and Tag 0567 (lemma-regular-normal); explicit elementary identification at the maximal ideal"
+   }
+  },
+  {
+   "text": "For $d=0$, [def-weil-pbc-multivariate-power-series] identifies the series ring with its coefficient ring. Thus (i) is $S=k$. In (ii) the sole coefficient of $\\Theta$ is $p$, so $\\Theta=p$ and $S=C/pC$. No step required any condition on Frobenius of $C/pC$, so no perfectness hypothesis is used.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary), zero-variable specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tags 032C, 00NQ, 0AFS, 0567; constant-coefficient non-square argument and localization identification written explicitly by Q95"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A formal power series ring over a field is a normal domain; over a Cohen ring with uniformizer p its quotient by a series with constant coefficient p is a regular local normal domain.",
+   "results": "8 hits; PowerSeries.instIsDiscreteValuationRing, PowerSeries.IsWeierstrassDivisor, PowerSeries.hasUnitMulPowIrreducibleFactorization, PowerSeries.not_isField, PowerSeries.idealX, PowerSeries.exists_isWeierstrassFactorization, PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain, PowerSeries.instIsLocalRing",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsIntegrallyClosed",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|IsRegularLocalRing|constantCoeff",
+   "results": "25 hits; Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean; Mathlib/RingTheory/MvPowerSeries",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A power series with constant term a uniformizer in a complete discrete valuation ring is outside the square of the maximal ideal, and its power series hypersurface quotient is a normal domain.",
+   "results": "8 hits; PowerSeries.isDistinguishedAt_weierstrassDistinguished, PowerSeries.weierstrassDistinguished, PowerSeries.exists_isWeierstrassFactorization, PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit, PowerSeries.weierstrassUnit, PowerSeries.exists_isWeierstrassDivision, PowerSeries.IsWeierstrassDivisorAt, Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality of formal power series over a field and of a Cohen power series quotient with constant term p.",
+   "results": "8 hits; PowerSeries.isNoetherianRing, PowerSeries.instNormalizationMonoid, PowerSeries.X_eq_normalizeX, PowerSeries.isUnit_iff_constantCoeff, PowerSeries.not_isField, PowerSeries.instIsDomain, PowerSeries.instIsNoetherianRing, PowerSeries.ker_coeff_eq_max_ideal",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal.Quotient",
+   "results": "0 hits; ; loogle: unknown identifier 'Ideal.Quotient'",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsRegularLocalRing",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multivariate formal power series ring over a field is regular local and normal; over a Cohen DVR a series with constant coefficient p cuts out a regular local normal domain.",
+   "results": "8 hits; PowerSeries.instIsDiscreteValuationRing, PowerSeries.idealX, PowerSeries.instNormalizationMonoid, PowerSeries.instUniqueFactorizationMonoid, MvPowerSeries.instIsLocalRing, PowerSeries.hasUnitMulPowIrreducibleFactorization, PowerSeries.maximalIdeal_eq_span_X, PowerSeries.IsWeierstrassDivisor",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|IsIntegrallyClosed|hypersurface",
+   "results": "0 hits; ; Mathlib/RingTheory/MvPowerSeries",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular local ring quotient by an element outside the square of its maximal ideal is regular, and a regular local ring is a normal domain.",
+   "results": "8 hits; ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, IsArtinianRing.fieldOfSubtypeIsMaximal, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing, Ideal.Quotient.normal, Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, Module.supportDim_quotSMulTop_succ_eq_supportDim",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formal power series over a complete discrete valuation ring with constant coefficient a uniformizer defines a regular local hypersurface quotient.",
+   "results": "8 hits; PowerSeries.isDistinguishedAt_weierstrassDistinguished, PowerSeries.weierstrassDistinguished, PowerSeries.IsWeierstrassDivisor, PowerSeries.exists_isWeierstrassFactorization, PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit, PowerSeries.exists_isWeierstrassDivision, PowerSeries.weierstrassUnit, PowerSeries.IsWeierstrassDivisorAt",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-saturation-normality",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry, through log-regular divisorial structure: the saturated completed local models in Expose VI 1.6(i)--(ii). Auxiliary ambient-ring argument for those models, extracted from old steps 3 and 5 of lem-trf-log-regular-saturation-normality.",
+   "via": [
+    "lem-trf-log-regular-saturation-normality",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-power-series-cohen-hypersurface-normality",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and split into five steps using existing nodes only. Proved the non-square assertion directly by constant coefficient and cancellation in the Cohen DVR, applied the existing parameter hypersurface criterion, then regular-local localization and regular-ring normality. Wrote out the maximal-localization isomorphism and zero-variable cases. Searched project Lean and Mathlib; no full attachment or Mathlib match.",
+  "blueprint": "Realizes the ambient regularity/normality input in the existing ancestry from lem-trf-local-term-locality proof (1)--(2), through nearby-cycle duality, log-regular desingularization and saturated completed charts. The immediate parent extracted this precise argument from its old steps 3 and 5; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic commutative-algebra tool for the completed local models; the trace-formula unit has no alternative statement supplying this ring-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-quotient-variables",
+    "why": "Generic commutative-algebra tool for the completed local models; the trace-formula unit has no alternative statement supplying this ring-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-hypersurface-criterion",
+    "why": "Generic commutative-algebra tool for the completed local models; the trace-formula unit has no alternative statement supplying this ring-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic commutative-algebra tool for the completed local models; the trace-formula unit has no alternative statement supplying this ring-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic commutative-algebra tool for the completed local models; the trace-formula unit has no alternative statement supplying this ring-theoretic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-6eeabdd6b",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-6eeabdd6b (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes and leaves the statement unchanged. There is no repair note, so this is not a re-split. Step 1 cites the power-series regularity node: with Λ a field or a Cohen ring and d≥0, the maximal ideal is (p,X) and the ring is regular local (Stacks 032C at algebra.tex:45023, checked). Step 2 is elementary: the constant-coefficient map has kernel (X) by the quotient-variables node, so Θ∈n and the constant coefficients of n² lie in p²C. p∉p²C because C is a domain with p≠0 and p is not a unit (def-weil-pbc-cohen-ring). Step 3 applies the hypersurface criterion with both hypotheses checked (00NQ, line 25731). Step 4: S is a regular ring by 0AFS (line 27126), so S_m is a normal domain by 0567 (line 44046), and S≅S_m because every element outside m is a unit; this gives the definition of a normal domain. Step 5 covers d=0. Edge cases checked: d=0 in both cases, Θ=p+X_1, and constant term p², which fails, so 'exactly p' is required. No perfectness assumption is added. The parent lem-trf-log-regular-saturation-normality step 3 uses the item exactly as stated. Duplicate search found only the regular→UFD node and the dimension-1 regular⇔normal node; neither is the item. The five generic lem-weil-pbc-* tool_uses are accepted. Sources are Stacks only, with no SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesCohenHypersurfaceNormality",
+  "declaration": "MvPowerSeries.power_series_cohen_hypersurface_normality",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesCohenHypersurfaceNormality.lean",
+  "statement": "theorem power_series_cohen_hypersurface_normality (d : ℕ) : (∀ (k : Type u) [Field k], IsRegularLocalRing (MvPowerSeries (Fin d) k) ∧ IsDomain (MvPowerSeries (Fin d) k) ∧ IsIntegrallyClosed (MvPowerSeries (Fin d) k) ∧ (d = 0 → Nonempty (MvPowerSeries (Fin d) k ≃+* k))) ∧ (∀ (C : Type v) [CommRing C] (p : ℕ), IsCohenRing p C → ∀ (Θ : MvPowerSeries (Fin d) C), constantCoeff Θ = (p : C) → Θ ∈ Ideal.span (insert (MvPowerSeries.C (p : C)) (Set.range (X : Fin d → MvPowerSeries (Fin d) C))) ∧ Θ ∉ Ideal.span (insert (MvPowerSeries.C (p : C)) (Set.range (X : Fin d → MvPowerSeries (Fin d) C))) ^ 2 ∧ IsRegularLocalRing (MvPowerSeries (Fin d) C ⧸ Ideal.span {Θ}) ∧ IsDomain (MvPowerSeries (Fin d) C ⧸ Ideal.span {Θ}) ∧ IsIntegrallyClosed (MvPowerSeries (Fin d) C ⧸ Ideal.span {Θ}) ∧ (d = 0 → Nonempty ((MvPowerSeries (Fin d) C ⧸ Ideal.span {Θ}) ≃+* (C ⧸ Ideal.span {(p : C)}))))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b9c4713c",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Item lem-trf-power-series-cohen-hypersurface-normality: the Lean matches the node clause by clause. Field case for any k : Type u; Cohen case via IsCohenRing (prime p, maximal ideal (p), complete) for every Θ with constantCoeff Θ = p. Conclusions: Θ ∈ (p,X) and Θ ∉ (p,X)^2, IsRegularLocalRing, IsDomain ∧ IsIntegrallyClosed (recorded inline normal-domain form), d=0 identifications as Nonempty ring isos. No extra hypotheses or perfectness; universes u, v independent; lean.statement verbatim; lines ≤ 100. The statement is true; edge cases d=0, Θ=p, Θ=p+X_1 and constant term p² (excluded by 'exactly p') checked. Node changes only lean; dep records identical to side-live; no new nodes or statement change. Public imports for stmt deps, plain imports for the 5 proof-dep modules, all of which exist. No duplicate found in the side-live trees. Sorry-only proof; source and blueprint docstrings and 5-step proof present. No compile: no file changed; worker reports a clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T082700-L-2208943",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "MvPowerSeries.power_series_cohen_hypersurface_normality"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "lem-coef-semilinear-projection-below-factorization",
+ "kind": "statement",
+ "title": "Below-level factorization of singleton projection through semilinear reduction",
+ "statement": "Let C be a category with independent object and morphism universes c,v, J a Grothendieck topology, and C essentially small in max(c,v,r). Let B_n be commutative ring sheaves with maps tau_n : B_(n+1) to B_n, with coefficient universe max(c,v,r). Use the actual sequence-site module systems, ordinary unbounded derived category DS, derived evaluations e_n, and derived reductions of [def-coef-semilinear-system-models]. Fix closed tensor structures, K-flat models, tensorEvaluation isomorphisms and TensorComparisonModel data normalized by ordinaryEvaluationTensor as in [def-coef-semilinear-derived-calculus]. For any derived system M, indices q at most n, normalized scalar data A for B_n to B_q, an adjunction adj : L left adjoint to e_n, and P in D(B_n), there is an isomorphism alpha : e_q L(P tensor M_n) to e_q(LP) tensor A.T(M_n). If f : L(P tensor M_n) to LP tensor M is the inverse adjunction transpose of (unit_P tensor id_M_n) followed by tensorEvaluation_n inverse, then e_q(f) followed by tensorEvaluation_q equals alpha followed by tensor(id,reduction_A(M,n,q)). There is no cartesianness assumption and no claim that reduction or f is invertible. The exact object and morphism formulas, including all universes, are the Lean statement in lean.statement.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21; Proposition 4.17(a) and its proof, printed pp.25-26. The unit-defined projection argument is step 2 of lem-coef-semilinear-cartesian-hom-evaluation; the extension from constant quotient rings to arbitrary sheaves of commutative rings is the same local tensor computation."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose normalized scalar data for all coefficient maps and scalar tensor comparisons using semilinearScalarTensor. Package the given tensor models and these comparisons in SystemTensorReductionModels, without choosing any internal-Hom comparison. The tensor-reduction core proves the actual reduction tensor identity.",
+   "uses": [
+    "def-coef-semilinear-tensor-reduction-models",
+    "lem-coef-semilinear-tensor-reduction-core",
+    "lem-coef-semilinear-scalar-data",
+    "lem-coef-semilinear-scalar-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reduction is a natural transformation delta from e_n followed by scalar extension to e_q. Compose scalar extension of the unit of L with delta to form kappa from scalar extension to L followed by e_q. The below-level singleton mate theorem makes every kappa component invertible. Define alpha as kappa inverse on P tensor M_n, then scalar tensor comparison, then tensor(kappa_P,id).",
+   "uses": [
+    "lem-coef-semilinear-singleton-evaluation-mate",
+    "def-coef-semilinear-tensor-reduction-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For f the inverse adjunction transpose in the statement, unit followed by e_n(f) equals tensor(unit,id) followed by inverse evaluation comparison. Naturality of delta, tensor reduction, and naturality of scalar tensor comparison identify the two sides after precomposition by kappa; cancel it. The private proved factorization_of_tensor_reduction writes this calculation. Finally the unique unit-compatible isomorphism from the chosen scalar adjunction to the supplied A identifies reductions and transports alpha.",
+   "uses": [
+    "lem-coef-semilinear-tensor-reduction-core",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-tensor-reduction-models",
+  "lem-coef-semilinear-scalar-data",
+  "lem-coef-semilinear-scalar-tensor",
+  "lem-coef-semilinear-singleton-evaluation-mate",
+  "lem-coef-semilinear-tensor-reduction-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21 (singleton extension and below-level scalar extension); Proposition 4.17(a), printed pp.25-26 (tensor projection). Stacks Tags 03EK, 06YY, 07A4, 06YT and 0FND supply the module tensor and normalized derived-adjunction constructions. Tensor-only extraction of the existing ordinary/cochain/derived reduction proofs followed by singleton mate and categorical naturality; no internal-Hom datum is presupposed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with tensor product and singleton left adjoint evaluated below a coefficient vertex",
+   "results": "ModuleCat.ExtendScalars.obj', extendRestrictScalarsAdj and its unit formula; no derived sequence-site factorization theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; ordinary scalar tensor adjunction only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection below singleton vertex equals tensor with semilinear reduction for an arbitrary system",
+   "results": "Rep.diagonalSuccIsoTensorTrivial_hom_hom_single, HomologicalComplex.tensorUnitIso, PiTensorProduct.subsingletonEquiv and related formulas; no derived singleton projection factorization.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|system.*Projection|cartesian.*tensor",
+   "results": "Mathlib cartesian-monoidal tensor and projection declarations only. Additional local searches found SystemSingleDerivedBelow and SystemSingleDerivedTranspose, with no tensor factorization; SystemTensorReductionFormula requires full Data, whose homEvaluation is the consumer of the item.",
+   "date": "2026-10-26",
+   "verdict": "No existing theorem stating this factorization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCartesianProjection",
+  "date": "2026-10-26",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Step 2 of lem-coef-semilinear-cartesian-projection: scalar/tensor reassociation and the actual projection map below the source vertex, before using invertibility of the cartesian reduction.",
+   "via": [
+    "lem-coef-semilinear-cartesian-projection",
+    "lem-coef-semilinear-system-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-coef-semilinear-cartesian-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearProjectionBelowFactorization",
+  "file": "lean/Sheaf/Paper/SemilinearProjectionBelowFactorization.lean",
+  "declaration": "WeilConjectures.SemilinearSections.semilinearProjectionBelowFactorization",
+  "statement": "theorem semilinearProjectionBelowFactorization\n    (closed : Closed.{c, v, r} (coefficientSequenceTopology J)\n      (systemRing.{c, v, max c v r} J B τ))\n    (models : Models.{c, v, r} (coefficientSequenceTopology J)\n      (systemRing.{c, v, max c v r} J B τ) closed)\n    (level : ∀ n : ℕ, Closed.{c, v, r} J (B n))\n    (levelModels : ∀ n : ℕ, Models.{c, v, r} J (B n) (level n))\n    (tensorEvaluation : ∀ n : ℕ,\n      closed.tensor ⋙ e.{c, v, max c v r} J B τ n ≅\n        ((e.{c, v, max c v r} J B τ n).prod\n          (e.{c, v, max c v r} J B τ n)) ⋙ (level n).tensor)\n    (tensorModel : ∀ n : ℕ,\n      TensorComparisonModel.{c, v, r} (coefficientSequenceTopology J) J\n        (systemRing.{c, v, max c v r} J B τ) (B n)\n        (evaluation.{c, v, max c v r} J B τ n) closed (level n) models\n        (levelModels n) (tensorEvaluation n))\n    (ordinary : ∀ (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ),\n      (tensorModel n).ordinary M N = ordinaryEvaluationTensor.{c, v, r} J B τ n M N)\n    (M : DS.{c, v, max c v r} J B τ) (n q : ℕ) (h : q ≤ n)\n    (A : ScalarData.{c, v, max c v r}\n      (coefficientMap.{c, v, max c v r} J B τ h))\n    (L : D.{c, v, max c v r} J (B n) ⥤ DS.{c, v, max c v r} J B τ)\n    (adj : L ⊣ e.{c, v, max c v r} J B τ n)\n    (P : D.{c, v, max c v r} J (B n)) :\n    ∃ α : (e.{c, v, max c v r} J B τ q).obj\n        (L.obj ((level n).tensor.obj (P, (e.{c, v, max c v r} J B τ n).obj M))) ≅\n      (level q).tensor.obj\n        ((e.{c, v, max c v r} J B τ q).obj (L.obj P),\n          A.T.obj ((e.{c, v, max c v r} J B τ n).obj M)),\n      (e.{c, v, max c v r} J B τ q).map\n          ((adj.homEquiv _ _).symm\n            ((level n).tensor.map\n                (Prod.mkHom (adj.unit.app P)\n                  (𝟙 ((e.{c, v, max c v r} J B τ n).obj M))) ≫\n              (tensorEvaluation n).inv.app (L.obj P, M))) ≫\n        (tensorEvaluation q).hom.app (L.obj P, M) =\n      α.hom ≫ (level q).tensor.map\n        (Prod.mkHom (𝟙 ((e.{c, v, max c v r} J B τ q).obj (L.obj P)))\n          (reduction.{c, v, max c v r} J B τ h A M))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T100230-L-4155293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T114155-L-2271281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

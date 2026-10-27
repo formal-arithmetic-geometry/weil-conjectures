@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-closed-intersection-vertex-contraction",
+ "kind": "statement",
+ "title": "Affine closed-intersection comparison and the vertex contraction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $A$ a sheaf of commutative rings on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and use module sheaves [def-weil-sheaf-of-modules-category] with inverse-image coefficient rings and the actual module inverse and direct images [def-weil-proetale-inverse-image]. Use the canonical unit-normalized adjunctions [def-sfb-proetale-unit-normalized-adjunction]. Let $i:Z\\hookrightarrow X$ and $i_a:Z_a\\hookrightarrow X$, $1\\leq a\\leq m$, be closed immersions [def-weil-closed-immersion], with each $i_a$ factoring through $i$. Let $M$ range over $A$-module sheaves. Assume their complementary open immersions [def-weil-open-immersion] are quasi-compact morphisms [def-weil-finite-type-morphism]. Assume $m\\geq1$; no covering hypothesis is needed. For a nonempty subset $J\\subseteq\\{1,\\ldots,m\\}$ let $Z_J$ be the scheme-theoretic intersection (the iterated fibre product over $X$ [def-pc-fibre-product]), and put $E_J=i_{J,*}i_J^*$ and $E_Z=i_*i^*$. For $J\\subseteq L$, let $r_{J,L}:E_J\\to E_L$ be the actual unit of $Z_L\\hookrightarrow Z_J$ pushed to $X$, with inverse-image composition identifications; define $r_{Z,J}$ similarly. Write $D^{-1}(M)=E_Z(M)$, $D^p(M)=\\bigoplus_{|J|=p+1}E_J(M)$ for $0\\leq p<m$, and $D^p=0$ otherwise. Use cochain complexes [def-weil-abstract-derived-category]. The proposed differential is\n$$ (dc)_{(a_0<\\cdots<a_{p+1})}=\\sum_{t=0}^{p+1}(-1)^t r_{L\\setminus\\{a_t\\},L}(c_{L\\setminus\\{a_t\\}}),\\qquad d^{-1}=(r_{Z,\\{a\\}})_a. $$\nEvery $E_J$ and $E_Z$ is exact. Their units and restriction maps commute with open restriction through the canonical inverse-image identifications. Exactness of complexes of these module sheaves can be tested on any affine open cover of $X$.\nLet $v:V\\hookrightarrow X$ be any affine open, replace all the closed schemes by their fibre products with $V$, and denote the resulting augmented complex by $D_V(M|_V)$. For every $a$, applying $i_{a,V}^*$ to this augmented complex gives a contractible complex. More precisely closed base change identifies its summand at $J$ with direct image on $Z_a\\times_XV$ from $Z_{J\\cup\\{a\\}}\\times_XV$ of the restricted module, and its degree $-1$ term with $i_{a,V}^*(M|_V)$. It identifies all face maps with the actual restriction units. If $a\\notin J$, the restricted map $r_{J,J\\cup\\{a\\}}$ is invertible. Define the component of $h^p$ from $J\\cup\\{a\\}$ to $J$ by\n$$(-1)^{\\#\\{b\\in J:b<a\\}}(i_{a,V}^*r_{J,J\\cup\\{a\\}})^{-1},$$\nand set the other components to zero; for $J=\\varnothing$ use the singleton-$a$ component followed by the closed counit. Then $dh+hd=1$, including degrees $-1$ and $m-1$. Restriction of $D_V(M|_V)$ to $V\\setminus |Z\\times_XV|$ is zero. These identifications are linear over the inverse-image rings and natural in $M$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); agent affine closed-base-change and insertion-contraction consequence extracted from old steps 1, 4 and 5 of lem-sfb-finite-closed-cover-resolution, using the existing arbitrary-ring base-change node."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-sfb-proetale-unit-normalized-adjunction",
+  "def-weil-abstract-derived-category",
+  "def-sfb-closed-intersection-augmented-row"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing signed-refinement system to the given family. Its row, through lem-sfb-closed-intersection-row-from-signed, gives D. Outside degrees -1 through m-1 the finite-subset degree index is empty (cardinality is between 0 and m). Its product functor is zero by projection extensionality; evaluate and transport through D.terms to prove support.",
+   "uses": [
+    "lem-sfb-closed-restriction-signed-refinements",
+    "lem-sfb-closed-intersection-row-from-signed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sfb-closed-intersection-geometry. Each intersection is closed with quasi-compact complementary open, so proEtale_ringed_open_closed gives exact closed direct image. The immersion inverse-image limit-preservation theorem gives exact actual-ring inverse image. Compose these exact functors to obtain exactness of every term, including the empty index.",
+   "uses": [
+    "lem-sfb-closed-intersection-geometry",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Open inverse image is exact by immersion limit preservation, hence preserves homology. Zariski-cover slice module detection detects zero homology for any ring sheaf. The ringed open comparison identifies actual open inverse image, after an equivalence of modules, with slice restriction. Thus acyclicity is equivalent to acyclicity on the given cover. The Lean helper proves this for every open cover; affineness is unused.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "lem-pur-zariski-cover-slice-module-detection",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any open g, apply lem-sfb-closed-intersection-open-comparison to get D_prime and its full unit-normalized compatibility. Geometry gives the original hypotheses for the pulled-back family. If Y is affine, apply lem-sfb-closed-intersection-affine-vertex to D_prime for each vertex.",
+   "uses": [
+    "lem-sfb-closed-intersection-open-comparison",
+    "lem-sfb-closed-intersection-geometry",
+    "lem-sfb-closed-intersection-affine-vertex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For vanishing off the support, each intersection factors through the closed support by geometry. On a test object over the complementary open, its fibre product with that intersection is empty. The underlying abelian sheaf has zero sections there since the bottom sieve covers the empty object. This makes the slice restriction of each closed direct image zero. Transport across the ringed open comparison and reflect zero through its faithful equivalence, obtaining zero actual open inverse image of each intersection term. Evaluation and exact open inverse image preserve the finite product defining graded; the resulting limit cone has zero diagram and hence zero vertex. Transport through D_prime.terms to obtain zero for each row degree. No affine, compactness, or coefficient-flatness assumption is used in this last argument.",
+   "uses": [
+    "lem-sfb-closed-intersection-geometry",
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-zariski-cover-slice-module-detection",
+  "lem-sfb-closed-intersection-affine-vertex",
+  "lem-sfb-closed-intersection-geometry",
+  "lem-sfb-closed-intersection-open-comparison",
+  "lem-sfb-closed-intersection-row-from-signed",
+  "lem-sfb-closed-restriction-signed-refinements",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-ringed-open-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM and 09AH; C3 formal assembly from signed rows, finite-intersection geometry, open comparison, and affine vertex insertion; affine-cover detection and off-support vanishing proved directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an augmented finite closed intersection Cech complex to one member admits an insertion index contracting homotopy",
+   "results": "8 hits: AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant, AlgebraicTopology.DoldKan.homotopyPToId, AlgebraicTopology.DoldKan.homotopyPInftyToId_hom, AlgebraicTopology.DoldKan.homotopyPInftyToId, classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve, HomologicalComplex.homotopyCofiber.inrCompHomotopy, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv; ",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial extra degeneracy and Dold-Kan homotopies do not supply the closed-base-change identifications or the finite ordered intersection contraction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Augmented Cech complex restricted to a closed member is contractible by inserting that member",
+   "results": "8 hits: ChainComplex.augment, ChainComplex.truncateAugment, isClosed_preimage_val_coborder, Topology.CWComplex.Subcomplex.union_closedCell, Topology.CWComplex.isClosed_of_isClosed_inter_openCell_or_isClosed_inter_closedCell, Topology.RelCWComplex.Subcomplex.recOn, Topology.RelCWComplex.Subcomplex.coe_mk'', Topology.RelCWComplex.Subcomplex.casesOn; ",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial extra degeneracy and Dold-Kan homotopies do not supply the closed-base-change identifications or the finite ordered intersection contraction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cochain complex of a finite poset intersection diagram contracts after making one vertex restriction invertible",
+   "results": "8 hits: AlgebraicTopology.DoldKan.P_is_eventually_constant, AlgebraicTopology.DoldKan.Q_is_eventually_constant, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo, CochainComplex.ConnectData.restrictionGEIso, AlgebraicTopology.DoldKan.comp_P_eq_self_iff, AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant, CochainComplex.ConnectData.restrictionLEIso; ",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial extra degeneracy and Dold-Kan homotopies do not supply the closed-base-change identifications or the finite ordered intersection contraction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"homotopy\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial extra degeneracy and Dold-Kan homotopies do not supply the closed-base-change identifications or the finite ordered intersection contraction"
+  },
+  {
+   "tool": "grep",
+   "query": "(cech.*(homotop|contract)|contract.*cech|insertion.*homotop)",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial extra degeneracy and Dold-Kan homotopies do not supply the closed-base-change identifications or the finite ordered intersection contraction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented alternating complex of restrictions to finite closed intersections of proetale module sheaves contracts after inverse image to one member",
+   "results": "Hits: LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, SheafOfModules.Presentation.map_π_eq, Condensed.isColimitLocallyConstantPresheaf_desc_apply, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Profinite.NobelingProof.CC_exact",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the finite ordered closed-intersection complex with its actual module units and base-change-normalized contraction"
+  },
+  {
+   "tool": "grep",
+   "query": "(cech.*(homotop|contract)|contract.*cech|insertion.*homotop)",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the finite ordered closed-intersection complex with its actual module units and base-change-normalized contraction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Augmented Cech cochain complex of closed restrictions contracts on each closed member",
+   "results": "Hits: ChainComplex.augment, CochainComplex.augment, CategoryTheory.Arrow.augmentedCechConerve, CochainComplex.fromSingle₀AsComplex, CochainComplex.of, CategoryTheory.CosimplicialObject.augmentedCechConerve.congr_simp, CochainComplex.augment_X_zero, CochainComplex.augment_d_succ_succ",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the finite ordered closed-intersection complex with its actual module units and base-change-normalized contraction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"homotopy\"",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the finite ordered closed-intersection complex with its actual module units and base-change-normalized contraction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating finite subset cochain diagram with commuting restriction maps contracts when adjoining a fixed vertex is invertible",
+   "results": "Hits: CochainComplex.ConnectData.restrictionLEIso, CochainComplex.ConnectData.restrictionGEIso, AlgebraicTopology.alternatingCofaceMapComplex, AlgebraicTopology.AlternatingCofaceMapComplex.obj, HomologicalComplex.alternatingConstScIsoEven, CochainComplex.ConnectData.restrictionLEIso_inv_f, HomologicalComplex.alternatingConstScIsoOdd, CochainComplex.ConnectData.restrictionLEIso_hom_f",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the finite ordered closed-intersection complex with its actual module units and base-change-normalized contraction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-closed-cover-resolution",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images; technical support-resolution subargument: Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); agent affine closed-base-change and insertion-contraction consequence extracted from old steps 1, 4 and 5 of lem-sfb-finite-closed-cover-resolution, using the existing arbitrary-ring base-change node.",
+   "via": [
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-intersection-vertex-contraction",
+  "worker": "stage1",
+  "summary": "Checked exact closed pushforward hypotheses, unit-normalized restrictions, affine local detection, arbitrary-ring closed base-change mates and the componentwise signed insertion identity, including both endpoint degrees. Reused existing general facts and created no nodes.",
+  "blueprint": "Technical finite-closed-support resolution in paragraph (3) of det-thm-sf-ctf-stability-direct-images, extracted via lem-sfb-finite-closed-cover-resolution; the latest blueprint only states the higher direct-image route, and the explicit insertion argument is agent-written.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Quasi-compact complements remain so after restriction or closed base change. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-sf-ring-sheaf-base-change-mates",
+    "why": "Canonical closed base-change mate for arbitrary ring sheaves on affine bases and closed members. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Identify homology after exact restriction. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exactness of inverse image with inverse-image ring coefficients. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Stability of closed immersions gives the intersection inclusions. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Uniqueness of the ordinary unit-normalized pullback comparison. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-restriction-exact",
+    "why": "Exactness of restriction to localized module sites. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Kernels and sheafified cokernels of modules. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Arbitrary-ring exact closed direct images, counits and complementary-open vanishing. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identify open-site restriction and covering test objects. This is a generic tool for the support resolution; the unit has no replacement for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-1f0bc392d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-1f0bc392d (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged vs live; live and side-live still unsplit with an empty proof, no repair note, no new nodes), every cited statement, Stacks proetale 09AA/09BM/09AH (l. 4945/5020/5135) and the parent finite-closed-cover-resolution step 2, which cites the item for exactly its clauses. Small cases checked: m=1, empty Z_a, V∩Z empty, Z_a contained in Z_b, no covering. Signs re-derived by hand: for a in J both signs are (-1)^{s_a(J\\a)}; for a not in J the exponents s_a(J)+k+[a<b] and k+s_a(J)-[b<a] differ by 1; endpoint degrees -1 and m-1 hold. Step 1: exactness of the closed direct image needs only the quasi-compact complement (ringed open-closed node); the finite union of quasi-compact complements is elementary. Step 3: localization identifies the sites, and the unit-normalized units restrict to units. Step 4: kernels are sectionwise, cokernels sheafified, restriction to the localized site is exact, and separatedness on the Zariski cover finishes. Step 5: the ring-sheaf mates node applies with V and Z_a affine (qcqs) and a quasi-compact complement. Its mapMod operations and adjunction are the item's inverse-image-coefficient ones (same abelian unit). Z x_V Z_a = Z_a because Z -> V is a monomorphism. For a not in J the face becomes the unit of the identity, hence invertible. Steps 6-8 are correct. FIX (C5): step 2 re-proved r_{L,H}r_{J,L}=r_{J,H} and d^2=0, which the existing sibling lem-sfb-closed-restriction-signed-refinements (identical data, live split+reviewed PASS, no cycle) states. Step 2 now cites it, including the singleton square from d^0d^{-1}=0, and keeps the short composite-unit argument for r_{J,L}r_{Z,J}=r_{Z,L}. proof_deps updated; the fix is at fixes/dag/nodes/sec-six-functors-basics/<item>.json. Batch-5: lem-trf-geometric-inverse-image-exact is a generic fact (inverse image along a geometric morphism is exact). Neither the trace formula nor Poincare duality gives it, it is not a step of their proofs, and its proof_deps are generic pbc/galois nodes, so it is accepted. The declared tool_uses are generic black boxes and accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedIntersectionVertexContraction",
+  "declaration": "AlgebraicGeometry.ClosedIntersection.closed_intersection_vertex_contraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedIntersectionVertexContraction.lean",
+  "statement": "theorem closed_intersection_vertex_contraction {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (m : ℕ) (hm : 0 < m) (W : Fin m → Over X) (hclosed : ∀ a, IsClosedImmersion (W a).hom) (hfactor : ∀ a, Nonempty (W a ⟶ Over.mk i)) (hqc : ∃ U : X.Opens, Set.range U.ι = (Set.range i)ᶜ ∧ QuasiCompact U.ι) (hqcW : ∀ a, ∃ U : X.Opens, Set.range U.ι = (Set.range (W a).hom)ᶜ ∧ QuasiCompact U.ι) (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) : ∃ D : Row i W A, (∀ s, PreservesFiniteLimits (term i W A s) ∧ PreservesFiniteColimits (term i W A s)) ∧ (∀ (M : Modules A) (p : ℤ), p < -1 ∨ (m : ℤ) ≤ p → IsZero ((D.rows.obj M).X p)) ∧ (∀ (I : Type v) (V : I → X.Opens), (∀ b, IsAffineOpen (V b)) → (⋃ b, (V b : Set X)) = Set.univ → ∀ K : CochainComplex (Modules A) ℤ, K.Acyclic ↔ ∀ b, ((finiteClosedPullbackComplex (V b).ι A).obj K).Acyclic) ∧ ∀ {Y : Scheme.{u}} (g : Y ⟶ X) [IsOpenImmersion g], ∃ D' : Row (pullback.fst g i) (finiteClosedPullbackFamily W g) (inverseRing g A), Nonempty (OpenCompatibility D g D') ∧ (IsAffine Y → (∀ a, Nonempty (VertexContraction D' a)) ∧ ∀ (U : Y.Opens), Set.range U.ι = (Set.range (pullback.fst g i))ᶜ → ∀ (M : Modules (inverseRing g A)) (p : ℤ), IsZero ((inverse U.ι (inverseRing g A)).obj ((D'.rows.obj M).X p)))",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-926ebdb66",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. Hypotheses: closed immersions, factorisation through Z, quasi-compact complements, m>=1, no cover. The augmented row has E_Z in degree -1; restrictions are fixed by the epi-unit equation; the deletion sign is (-1)^position. Conclusions: exactness of every E_J/E_Z; open-restriction compatibility fixed by units and projections; affine-cover acyclicity detection; on affine Y, vertex-contraction data with base change fixed by unit sections and the mate, the degree -1 identification, both inverse identities, the exact h sign and dh+hd=1 in all degrees; vanishing off Z. Signs and edge cases checked (m=1, empty members, J empty, degrees -1, m-1 and out of range). Statement text verbatim; item node changed only in lean and one stmt_dep; no hollow definitions; proof is only sorry; docstrings and source present; genuine ProEt site. The existing:true primitives node (read from the commit via git show) follows the accepted inverse-image-unit-section pattern. Notes: the parent finite-cover-resolution proof-dep import would close an import cycle (stage 3 must move the finiteClosed* helpers out; the report does not list this); finiteClosedPullback* are reached only transitively; underlyingMap is unused; the second reading is a self-audit. Nothing compiled, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T081212-L-1867064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

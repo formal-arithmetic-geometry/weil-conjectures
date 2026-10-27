@@ -98,7 +98,18 @@
   "result": "pass",
   "note": "Full immutable audit completed; Lean signature matches the node, no substantive or mechanical faults found, and local side-overlay compilation succeeded."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
@@ -108,5 +119,35 @@
   "landing": "20261018T144408-L-3501307",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "1. For every (small) set $I$ and every family of epimorphisms $\\varphi_i\\colon A_i\\to B_i$\n   of abelian sheaves on $X_{\\mathrm{proét}}$, the product\n   $\\prod_i\\varphi_i\\colon\\prod_iA_i\\to\\prod_iB_i$ is an epimorphism. Hence for every family\n   of short exact sequences $0\\to A_i\\to B_i\\to C_i\\to0$ of abelian sheaves the sequence\n   $0\\to\\prod_iA_i\\to\\prod_iB_i\\to\\prod_iC_i\\to0$ is exact.\n2. Let $\\Lambda$ be a ring. Countable products of epimorphisms of sheaves of $\\Lambda$-modules\n   on $X_{\\mathrm{proét}}$ are epimorphisms; equivalently, countable products are exact in the\n   category of sheaves of $\\Lambda$-modules on $X_{\\mathrm{proét}}$. The same holds for\n   modules over the pullback to $X_{\\mathrm{proét}}$ of a commutative condensed ring.",
+  "proof": [
+   {
+    "text": "Products of sheaves are computed sectionwise (the forgetful functor to presheaves creates\nlimits, and limits of presheaves are computed objectwise). Kernels commute with products, so\nin both parts only the surjectivity of a product of epimorphisms has to be shown.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*1, and 2 for sheaves of $\\Lambda$-modules.* Let $\\varphi_i\\colon A_i\\to B_i$ be epimorphisms\n(of abelian sheaves, or of sheaves of $\\Lambda$-modules) and let $W$ be an affine weakly\ncontractible object. By [det-pe-wc-sections-exact] each $A_i(W)\\to B_i(W)$ is surjective, and\na tuple $(b_i)\\in\\prod_iB_i(W)=(\\prod_iB_i)(W)$ lifts to $(a_i)\\in\\prod_iA_i(W)$ by choosing a\npreimage $a_i$ of each $b_i$ (axiom of choice). Hence $\\prod_i\\varphi_i$ is surjective on\nsections over every such $W$, and by [det-pe-sections-conservative] (exactness of\n$\\prod_iA_i\\to\\prod_iB_i\\to0$) it is an epimorphism. This argument works for every index set;\nfor countable index sets repleteness alone suffices, as in Bhatt–Scholze, §3.1.",
+    "uses": [
+     "det-pe-wc-sections-exact",
+     "det-pe-sections-conservative"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*2 for module objects.* A morphism of module objects over the pullback of a condensed ring is\nan epimorphism if and only if its underlying morphism of abelian sheaves is one, and products\nof module objects are computed on underlying abelian sheaves. So the assertion follows from 1.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

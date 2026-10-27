@@ -14,6 +14,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Sheaf.CategoryTheory.Sites.GeometricInverseImageExact
 import Sheaf.CategoryTheory.Sites.InverseImageFreeModule
 import Sheaf.CategoryTheory.Sites.SheafifiedDifferentialsCokernel
@@ -168,6 +169,22 @@ noncomputable def squareSetsMap {A B A' B' : Sheaf J CommRingCat.{w}}
 variable {D : Type uD} [Category.{vD} D] [EssentiallySmall.{w} D]
   {K : GrothendieckTopology D}
 
+private theorem omega_hom_ext {A B : Sheaf J CommRingCat.{w}} (φ : A ⟶ B)
+    {N : ringedSiteModules.{w} (ring B)} (a b : omega φ ⟶ N)
+    (h : ∀ (U : Cᵒᵖ) (x : B.obj.obj U),
+      a.val.app U ((derivation φ).d x) = b.val.app U ((derivation φ).d x)) : a = b := by
+  let := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
+  let : ∀ U : Cᵒᵖ,
+      HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)
+        AddCommGrpCat.{w} :=
+    fun _ ↦ HasLimitsOfShape.of_small.{w, w} AddCommGrpCat.{w} _
+  let := GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
+    J (A := AddCommGrpCat.{w})
+  apply ((PresheafOfModules.sheafificationAdjunction (𝟙 (ring B).obj)).homEquiv _ _).injective
+  apply (isUniversal' φ.hom).postcomp_injective
+  ext U x
+  exact h U x
+
 /-- Compatibility of the transported ring map with the inverse image of the original map.
 Source: Stacks 08TQ (blueprint: lem-trf-topos-inverse-image-differentials). -/
 def RingMapCompatibility
@@ -268,7 +285,55 @@ theorem inverseDifferentials_identity
     (he : d φ ≫ F.moduleUnderlying.inv.app (omega φ) ≫ (moduleSets B).map e.hom = d φ) :
     F.moduleUnderlying.inv.app (omega φ) ≫ (moduleSets B).map e.hom =
       𝟙 ((moduleSets B).obj (omega φ)) := by
-  sorry
+  let M := omega φ
+  let X := (moduleSets B).obj M
+  let α := F.moduleUnderlying.inv.app M
+  let addM : MonoidalCategoryStruct.tensorObj X X ⟶ X :=
+    ⟨{ app := fun U ↦ ↾(fun z ↦ ULift.up (z.1.down + z.2.down))
+       naturality := by
+         intro U V r
+         ext z
+         exact congrArg ULift.up ((M.val.map r).hom.map_add _ _).symm }⟩
+  have ha (U : Cᵒᵖ) (x y : M.val.obj U) :
+      (α.hom.app U (ULift.up (x + y))).down =
+        (α.hom.app U (ULift.up x)).down + (α.hom.app U (ULift.up y)).down := by
+    exact F.moduleAdd M (MonoidalCategoryStruct.tensorObj X X) (CartesianMonoidalCategory.fst X X)
+      (CartesianMonoidalCategory.snd X X) addM (fun _ _ ↦ rfl) U (ULift.up x, ULift.up y)
+  let smulM : MonoidalCategoryStruct.tensorObj (sets B) X ⟶ X :=
+    ⟨{ app := fun U ↦ ↾(fun z ↦ ULift.up
+         ((@id (B.obj.obj U) z.1.down) • (@id (M.val.obj U) z.2.down)))
+       naturality := by
+         intro U V r
+         ext z
+         exact congrArg ULift.up (M.val.map_smul r z.1.down z.2.down).symm }⟩
+  have hs (U : Cᵒᵖ) (r : B.obj.obj U) (x : M.val.obj U) :
+      (α.hom.app U (ULift.up (r • x))).down =
+        r • (@id ((F.modules.obj M).val.obj U)
+          (α.hom.app U (ULift.up x)).down) := by
+    have ht := F.moduleSMul M (MonoidalCategoryStruct.tensorObj (sets B) X)
+      (CartesianMonoidalCategory.fst (sets B) X)
+      (CartesianMonoidalCategory.snd (sets B) X) smulM (fun _ _ ↦ rfl)
+      U (ULift.up r, ULift.up x)
+    rw [hB] at ht
+    exact ht
+  let β : M ⟶ F.modules.obj M :=
+    ⟨{ app := fun U ↦ ModuleCat.ofHom (X := M.val.obj U)
+         (Y := (F.modules.obj M).val.obj U)
+         { toFun := fun x ↦ (α.hom.app U (ULift.up x)).down
+           map_add' := ha U
+           map_smul' := hs U }
+       naturality := by
+         intro U V r
+         ext x
+         have hx := congrArg (fun k ↦ k (ULift.up x)) (α.hom.naturality r)
+         exact congrArg ULift.down hx }⟩
+  have ht : β ≫ e.hom = 𝟙 M := by
+    apply omega_hom_ext φ
+    intro U x
+    have hx := congrArg (fun k ↦ k.hom.app U (ULift.up x)) he
+    exact congrArg ULift.down hx
+  change (moduleSets B).map (β ≫ e.hom) = _
+  rw [ht, Functor.map_id]
 
 variable {E : Type uE} [Category.{vE} E] [EssentiallySmall.{w} E]
   {L : GrothendieckTopology E}

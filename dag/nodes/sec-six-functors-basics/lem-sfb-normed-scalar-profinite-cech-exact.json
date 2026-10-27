@@ -14,105 +14,41 @@
  ],
  "proof": [
   {
-   "text": "Put $P_r=T_S^r$. Repeatedly apply [lem-sfb-finite-quotient-fiber-product] to $P_{r+1}=P_r\\times_S T$, starting with $P_1=T$. It gives the compact Hausdorff totally disconnected topology on every $P_r$; the tuple identification and its inverse are the coordinate maps. Deleting a coordinate is continuous. Thus every displayed differential is continuous. In $d_{k+1}d_k$, deleting positions $i<j$ in the two possible orders gives the same function with opposite signs $(-1)^{i+j-1}$ and $(-1)^{i+j}$, so $d_{k+1}d_k=0$. If $T=S=\\varnothing$, every cochain group is zero and $g=0$ proves the claim. We may henceforth work with nonempty $S$ (surjectivity makes $T$ nonempty).",
-   "uses": [
-    "lem-sfb-finite-quotient-fiber-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.3.9(2)–(4), explicit Cech expansion: domains and differentials. Profinite fibre products are the Stacks 08ZY/0A2P input recorded by the cited node."
-   }
-  },
-  {
-   "text": "First let $M$ be any finite discrete abelian group and let $c\\in C(P_{n+1},M)$ be a cocycle, with $n\\geq1$. Apply [lem-sfb-finite-valued-cech-cocycle-descent] to obtain $q_0:T_0\\twoheadrightarrow S_0$, $a,b$ and $c_0$ with $d_nc_0=0$. Choose a set section $\\sigma:S_0\\to T_0$; it is continuous since both sets are finite discrete. Put\n$$v_0(x_0,\\ldots,x_{n-1})=c_0(\\sigma(q_0(x_0)),x_0,\\ldots,x_{n-1}).$$\nFor an equal-image tuple $(x_0,\\ldots,x_n)$, the equation $d_nc_0=0$ on $(\\sigma(q_0(x_0)),x_0,\\ldots,x_n)$ reads\n$$c_0(x_0,\\ldots,x_n)=\\sum_{j=0}^n(-1)^j c_0(\\sigma(q_0(x_0)),x_0,\\ldots,\\widehat{x_j},\\ldots,x_n).$$\nAll base images are equal, so the sum is $d_{n-1}v_0$. Precompose $v_0$ with $a$ in every coordinate. The resulting continuous $v:P_n\\to M$ satisfies $d_{n-1}v=c$, since coordinate deletion commutes with $a$. This proves the finite-coefficient assertion used below, including $n=1$.",
-   "uses": [
-    "lem-sfb-finite-valued-cech-cocycle-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.3.9(2), discrete coefficients: agent expansion through finite quotient descent and the explicit extra-coordinate contraction."
-   }
-  },
-  {
-   "text": "Use the coefficient datum [def-weil-l-adic-coefficient-extension], and put $O=\\mathcal O_E$. By [lem-weil-l-adic-extension-integers-dvr] choose a nonzero uniformizer $\\pi$ with $0<|\\pi|_E<1$ and $\\pi O=\\mathfrak m_E$; $O$ is a DVR with finite residue field. By [lem-weil-valued-dvr-finite-quotients], $A_m=O/\\pi^mO$ is finite for every $m\\geq1$ and $p_m:A_{m+1}\\to A_m$ is surjective. By [lem-sfb-integers-profinite-tower], the reduction map\n$$O\\xrightarrow{\\sim}\\varprojlim_{m\\geq1}A_m$$\nis a topological ring isomorphism for the discrete quotient topologies. In particular each reduction $O\\to A_m$ is continuous and the reductions jointly distinguish elements of $O$.",
+   "text": "Give each positive coefficient quotient A_m the discrete topology. Apply lem-sfb-integers-profinite-tower to identify the integers O_E, with their spectral subspace topology, with the compatible-family subring of the positive quotients. The quotient maps are additive and continuous; the transition maps are surjective quotient factor maps. Positive-level finiteness is the interface in def-weil-l-adic-coefficient-extension. The subring membership equations identify this limit with the compatible-sequence subtype used by lem-sfb-inverse-limit-cech-primitive.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
     "lem-sfb-integers-profinite-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.3.9(4), the sequential limit of discrete integral quotients: local field data and the topological inverse-limit input are supplied by the cited arithmetic nodes."
-   }
+   "elementary": false
   },
   {
-   "text": "Temporarily suppose $f:P_{n+1}\\to O$ is a continuous cocycle. Write $f_m$ for its reduction in $A_m$; then $d_nf_m=0$ because reduction is additive. Step 2 with $M=(A_1,+)$ gives a continuous $g_1:P_n\\to A_1$ with $d_{n-1}g_1=f_1$. We construct by induction continuous $g_m:P_n\\to A_m$ with\n$$d_{n-1}g_m=f_m,\\qquad p_mg_{m+1}=g_m.$$\nThe first equation at $m=1$ is the base case just obtained. The next two steps give the induction step for every $m\\geq1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.3.9(4), agent expansion: initialize a compatible sequence of integral primitives, rather than choosing unrelated primitives at every level."
-   }
-  },
-  {
-   "text": "Assume $g_m$ is constructed. Choose a set section $s_m:A_m\\to A_{m+1}$ of the surjection $p_m$ from [lem-weil-valued-dvr-finite-quotients]; it is continuous between finite discrete spaces. Thus $\\widetilde g=s_m\\circ g_m$ is a continuous lift; no additivity of $s_m$ is assumed. Set\n$$r=d_{n-1}\\widetilde g-f_{m+1}.$$\nThe additive map $p_m$ sends $r$ to $d_{n-1}g_m-f_m=0$. Hence $r$ is a continuous cochain with values in the finite discrete abelian group $K_m=\\ker(p_m)$: it is continuous as a map to the subset $K_m\\subseteq A_{m+1}$. Further,\n$$d_nr=d_nd_{n-1}\\widetilde g-d_nf_{m+1}=0$$\nby step 1 and the cocycle equation for $f$. The same equation holds in $K_m$ because its inclusion is injective.",
+   "text": "For an integral cocycle h, project its signed-sum equation to every finite coefficient quotient. Apply lem-sfb-finite-coefficient-cech-primitive-lift with A the zero group PUnit and B the first quotient to obtain a first primitive. Apply lem-sfb-inverse-limit-cech-primitive with this prescribed primitive and compose the resulting continuous limit-valued primitive with the inverse of the ring homeomorphism. Injectivity of the ring isomorphism and equality in each coordinate prove the integral boundary equation.",
    "uses": [
-    "lem-weil-valued-dvr-finite-quotients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.3.9(4), explicit profinitely split coefficient transition and its finite-kernel obstruction cocycle."
-   }
-  },
-  {
-   "text": "Apply the finite-coefficient result of step 2 to $M=K_m$ and this degree-$n$ cocycle $r$. It gives continuous $v:P_n\\to K_m$ with $d_{n-1}v=r$. Let $\\iota_m:K_m\\hookrightarrow A_{m+1}$ be the inclusion and define\n$$g_{m+1}=\\widetilde g-\\iota_m v.$$\nThen $p_mg_{m+1}=g_m$, since $p_m\\iota_m=0$, and\n$$d_{n-1}g_{m+1}=d_{n-1}\\widetilde g-\\iota_mr=f_{m+1}.$$\nThis completes the stated induction. It works in degree $n=1$: it solves a $K_m$-valued degree-one cocycle by a degree-zero cochain, and uses no negative degree or degree-zero vanishing claim.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.3.9(4), explicit finite-kernel correction producing compatible primitives."
-   }
-  },
-  {
-   "text": "For each $x\\in P_n$, the compatible tuple $(g_m(x))_{m\\geq1}$ lies in $\\varprojlim_mA_m$. The map to the product is continuous because each coordinate $g_m$ is continuous; corestricting to the compatibility subspace preserves continuity. Compose with the inverse homeomorphism in [lem-sfb-integers-profinite-tower] to obtain a continuous $g_O:P_n\\to O$. For every $m$, the reduction of $d_{n-1}g_O$ is $d_{n-1}g_m=f_m$, since the reduction maps preserve finite signed sums. The ring-isomorphism part of that node makes the reductions jointly injective, so $d_{n-1}g_O=f$ as actual $O$-valued functions. This proves the integral assertion without any exchange of cohomology and inverse limits.",
-   "uses": [
+    "lem-sfb-finite-coefficient-cech-primitive-lift",
+    "lem-sfb-inverse-limit-cech-primitive",
     "lem-sfb-integers-profinite-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.3.9(4), explicit inverse-limit reconstruction and equality checked in every finite quotient."
-   }
+   "elementary": false
   },
   {
-   "text": "Return to the given $E$-valued cocycle $f$. The open sets\n$$U_k=\\{x\\in P_{n+1}:|f(x)|_E<|\\pi|_E^{-k}\\}\\qquad(k\\geq0)$$\ncover $P_{n+1}$ because $0<|\\pi|_E<1$. Compactness of $P_{n+1}$ from [lem-sfb-finite-quotient-fiber-product] gives a finite subcover. The $U_k$ are increasing; take its largest index $k$. Then $|\\pi^kf(x)|_E<1$ for every $x$, so $h=\\pi^kf$ is a continuous $O$-valued cocycle, with $O$ carrying its subspace topology. The integral result of steps 4–7 gives continuous $u:P_n\\to O$ with $d_{n-1}u=h$. Set $g=\\pi^{-k}u:P_n\\to E$. Multiplication by this fixed field element is continuous, and linearity of the finite signed sum gives\n$$d_{n-1}g=\\pi^{-k}d_{n-1}u=\\pi^{-k}\\pi^kf=f.$$\nNo local constancy is imposed on $f,u$ or $g$.",
+   "text": "The equal-image tuple space is closed in the finite product of T: write its condition as an intersection of closed equalizers. It is compact. The continuous image of f therefore has a positive norm bound R. The spectral norm makes E a nontrivially normed field; Mathlib supplies a nonzero scalar a with norm(a) < 1/R. The DVR theorem identifies O_E with the closed unit ball, so h=a f is a continuous integral cocycle. Solve it by the preceding step and multiply the resulting primitive by a^(-1). Distribute fixed scalar multiplication through the finite sums and cancel the nonzero scalar. This also works for empty tuple spaces and for n=0.",
    "uses": [
-    "lem-sfb-finite-quotient-fiber-product"
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.3.9(3), localization from integral to field coefficients: compactness supplies one denominator, followed by the explicit scalar cancellation."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-finite-quotient-fiber-product",
-  "lem-sfb-finite-valued-cech-cocycle-descent",
   "def-weil-l-adic-coefficient-extension",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-sfb-integers-profinite-tower"
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-finite-coefficient-cech-primitive-lift",
+  "lem-sfb-inverse-limit-cech-primitive",
+  "lem-weil-l-adic-extension-integers-dvr"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 4.3.9(2)–(4), printed page 33. Agent-written explicit Cech proof along its discrete / sequential integral limit / localization route; no claim that the paper states this pointwise Cech lemma verbatim."
+  "place": "Lemma 4.3.9(2)-(4), printed page 33. Existing finite primitive lifting and inverse-limit primitive declarations implement the discrete and sequential-limit steps. Mathlib compactness and norm bounds implement localization with one nonzero scalar."
  },
  "mathlib_searches": [
   {
@@ -630,7 +566,7 @@
   "date": "2026-10-22",
   "item": "lem-sfb-normed-scalar-profinite-cech-exact",
   "worker": "stage1",
-  "summary": "ND: proved by finite cocycle descent and finite extra-coordinate contraction, compatible integral primitives corrected through finite coefficient kernels, topological inverse-limit reconstruction, and one compact denominator. One strictly subsidiary statement-only finite-descent node; reused the existing integral tower and arithmetic inputs. Statement unchanged; all continuous functions and empty spaces retained. No Lean writing or compilation.",
+  "summary": "Q94 repair of the 5386-character returned proof: extract two statement-only, self-contained lemmas for finite coefficient lifting with prescribed reduction (old steps 2,5,6) and inverse-limit continuous primitives (old steps 4,7 and the induction conclusion). Retain domains, d squared zero, arithmetic tower and single compact denominator in the parent. Parent statement and all source/audit/Lean metadata unchanged; original eight arguments preserved verbatim in the report. No Lean writing or compilation. Current-DAG landing repair: reread every cited statement against the retained split, explicitly check compatibility of the reduced cocycle in the assembly, and normalize inherited doubled TeX escapes in proof text. The two extracted nodes and their logged searches are retained.",
   "blueprint": "Realizes paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, the finite E open-direct-image analytic input in the inherited from.place/via chain. The ancestor command returns None for this detached ancestry; its inherited null node value and exact source place are preserved. Whole-blueprint searches found no same statement.",
   "tool_uses": [
    {
@@ -648,24 +584,21 @@
   ]
  },
  "tool_uses": [
-  "lem-sfb-finite-quotient-fiber-product",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-sfb-integers-profinite-tower"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-ND-77fe211b8",
-  "group": "ND",
+  "reviewer": "NT-cc-Q94-17b7a6147",
+  "group": "Q94",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-77fe211b8 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, Bhatt–Scholze Lemma 4.3.9 with its proof (p.33), and the Stacks tags 08ZY/08ZZ/0A2P/0A2R. The item statement is unchanged and no repair note applies. Item steps: step 1 iterates lem-sfb-finite-quotient-fiber-product on P_{r+1}=P_r×_S T, and the d²=0 signs and the empty case are correct. Step 2's contraction v0=c0(σq0x0,…) is correct; it needs d c0=0 on the whole finite fibre power, and the new node supplies exactly that. Step 3's citations say what is used (DVR and uniformizer, finite A_m with surjective transitions, O→lim A_m a ring isomorphism and homeomorphism). Steps 4–6 set up the induction explicitly: a non-additive set-section lift, a cocycle error in the finite kernel, and a correction preserving both invariants. Step 7 rebuilds the O-valued primitive through the inverse homeomorphism and checks the equation via joint injectivity of the reductions. Step 8 bounds f by compactness, which gives one π^k denominator. New node lem-sfb-finite-valued-cech-cocycle-descent is true: compatible finite clopen partition pairs are cofinal, lim of the finite fibre powers is T_S^r, c factors through a finite stage, and the sets where the extended c0 fails the cocycle equation can't all be nonempty, by 0A2R. Small cases checked: empty spaces, a point with a constant cocycle (forces m=0 for odd n), M=0, n=1. It is statement-only, self-contained, strictly smaller than the item, and not a clause of the parent. rg -L DAG searches found no duplicate. Tool uses accepted as generic black boxes: fiber-product, integers-dvr, integers-profinite-tower. Coefficients are finite E with its norm topology, the statement is not weakened, there is no base-change morphism, no SGA, no cycle, and proof_deps equals the union of uses. from.node null is inherited from the detached chain. Advisory: the new node's source could also name Stacks 0A2R."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-17b7a6147 (reviewer sub-agent of L); spot-checked: This is a re-delivery after the landing refusal 'side completion not promoted' for the head Q94 927c234d, which passed review. Compared as parsed JSON with that head, the two new nodes (lem-sfb-finite-coefficient-cech-primitive-lift, lem-sfb-inverse-limit-cech-primitive) are identical. The item statement, stmt_deps, source, Lean fields and tool_uses are also identical. There are two changes. Step 3 adds that the reduced cocycle is compatible (p_m ρ_{m+1} f_L = ρ_m f_L); this is correct because f_L takes values in L, and it is the hypothesis node 2's recursion needs. The split_report summary is extended. I re-read everything on this head. Step 1: lem-sfb-finite-quotient-fiber-product, applied repeatedly through P_r→S, gives compact Hausdorff totally disconnected P_r; the d²=0 signs are right and the empty case is handled. Step 2: the DVR lemma clauses 2–4 give 0<|π|<1. The finite-quotients lemma gives finite A_m with surjective transitions, and its clause 1 makes A_m independent of π. integers-profinite-tower(1) gives O_E≅L as a ring isomorphism and a homeomorphism. Step 3: node 1 applies with A=0, B=A_1 and the zero cochain. Node 2's hypotheses (finite A_m, surjective p_m, the same L) hold, and the inverse of ι keeps continuity and finite sums. Step 4: the increasing open U_k cover P_{n+1}; compactness gives one k, so π^k f is O-valued, and g=π^{-k}u gives dg=f. Node 1 is true: finite-coefficient exactness (Bhatt–Scholze 4.3.9(2)) plus the set-section lift t=s∘u, r=dt−c, v=t−ιw. Node 2 is true: apply node 1 recursively with d u_m = p_m ρ_{m+1} f = ρ_m f, then the result is continuous coordinatewise into the product and lands in L. Small cases checked: A=0, p=id, q=id, empty spaces, zero groups, a constant tower. Re-split: old steps 1 and 3 are kept, old steps 2, 5 and 6 become node 1, old steps 4, 6 and 7 become node 2, and old step 8 is kept. The old text is preserved in the report and nothing is dropped. The two nodes are of comparable size, and the parent is a short 4-step assembly of 2807 characters. A search with rg -L over the current snapshot found no duplicate: the per cochain-colimit, Čech surjective-unions, norm-algcl, cocycle-descent and compact-quotient nodes all differ. Bhatt–Scholze Lemma 4.3.9(2)–(4) on printed page 33 was read, and the new nodes are flagged as agent-formulated. No delivered source cites SGA; the only 'SGA' string is the inherited reviewed.note saying 'no SGA'. There is no cycle, and proof_deps equals the union of uses on all three nodes. The item is still cited by normed-scalar-profinite-hom-acyclic. No fixes. Note for the maintainer: this is a promotion-loop re-delivery, identical in substance to the earlier PASS."
  },
  "lean": {
   "module": "Sheaf.Topology.NormedScalarProfiniteCechExact",
   "declaration": "Profinite.normedScalarProfiniteCech_exact",
   "declarations": [
-   "Profinite.scalarCechTuples",
-   "Profinite.scalarCechDelete",
    "Profinite.normedScalarProfiniteCech_exact"
   ],
   "file": "lean/Sheaf/Topology/NormedScalarProfiniteCechExact.lean",
@@ -674,7 +607,7 @@
   "by": "NM",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The positive degree is indexed as n + 1 for n : ℕ. Cocycle and coboundary equalities are the displayed differentials evaluated pointwise. E carries exactly the spectral-norm topology from the coefficient dependency; no local constancy, continuous section, or additional completeness hypothesis is imposed. Tuple and deletion helpers belong to this explicit Cech statement."
+  "note": "The positive degree is indexed as n + 1 for n : ℕ. Cocycle and coboundary equalities are the displayed differentials evaluated pointwise. E carries exactly the spectral-norm topology from the coefficient dependency; no local constancy, continuous section, or additional completeness hypothesis is imposed. Tuple and deletion helpers are reexported unchanged from Sheaf.Topology.ProfiniteCechTuples, attached to def-sfb-profinite-cech-tuples."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -683,5 +616,27 @@
   "group": "NM",
   "result": "pass",
   "note": "Clause-by-clause check of Profinite.normedScalarProfiniteCech_exact against the node: prime l; finite E/Q_l binders as in def-weil-l-adic-coefficient-extension; E topology from spectralNorm.normedField, the same spectral norm as Padic.coefficientExtensionAbsoluteValue, field ops are the given Field E (Mathlib SpectralNorm.lean:854); S T : Profinite.{v}, E : Type u independent; q continuous surjection with no section or Nonempty; scalarCechTuples = pairwise equal-image subtype of Fin r -> T with subspace topology; scalarCechDelete omits coordinate j via succAbove; degree n+1 indexing checked (f on n+2 tuples, cocycle over Fin (n+3), g on n+1 tuples, boundary over Fin (n+2)); signs (-1)^j. Edge cases: degree 1, q = id, empty spaces, universes. Node unchanged vs live except lean; lean.statement verbatim; helpers are real constructions; the only sorry is the theorem proof; docstrings carry source, blueprint id and 8 proof steps; no existing profinite Cech-tuple helper in side-live Sheaf/WeilConjectures. Advisory: unused plain proof-dep imports and a redundant public import of CoefficientExtensionFinite. No changes, no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9afd2",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261025T071241-L-161674",
+  "kind": "interface",
+  "note": "independent cc review: the delivered proof of normedScalarProfiniteCech_exact (integral helper via the integers tower, finite_coefficient_cech_primitive_lift and exists_inverseLimit_cech_primitive, then compact bound and scaling) against the node plan and the live dependency statements; the verbatim tuple extraction and the two one-line forced import changes against the base clone; all four delivered modules plus importers FiniteNormedScalarSectionAcyclicity and NormAlgclProfiniteCechExact compiled with lcompile"
  }
 }

@@ -1,0 +1,161 @@
+{
+ "id": "lem-sfb-continuous-algcl-proper-lisse-stratum",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-single",
+   "place": "Proper-image paragraph: the proper image calculation for one locally closed lisse generator, before finite stratification devissage.",
+   "via": [
+    "det-sf-comp-continuous-algcl-heart-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Proper finiteness for a single locally closed all-continuous lisse piece",
+ "statement": "Fix a prime ell and a field k of positive prime characteristic different from ell, and a proper k-morphism p:X to Y between separated finite-type k-schemes [sk-def-sfb-dc-setting]. Let B be the condensed ring of all continuous maps to the topological algebraic closure PadicAlgCl ell, with pulled-back ring B_T on T. Let v:V to X be an open immersion [def-weil-open-immersion], let t:S to V be a closed immersion [def-weil-closed-immersion], and assume S reduced [def-pc-reduced-scheme]. If L is a lisse B_S-module [def-sfb-lisse-coefficient-module], then every integer-degree cohomology module of Rp_*(v_! t_* L)[0] has finite constant local models on a finite constructible stratification of Y [det-def-sfb-constructible-local-model]. Here v_! is the ordinary module-object extension by zero [def-sfb-module-open-lower-shriek], t_* is the ordinary module-object direct image [def-sfb-module-lower-star], and Rp_* is the total right derived module-object pushforward [sk-def-sfb-module-derived-pushpull]. The notation means Rp_*((v_! t_* L)[0]); no finite-subextension-valued restriction on B is imposed. Empty S, zero L and rank zero are included.",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "det-def-sfb-constructible-local-model",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-single.proof.md",
+  "place": "Proper direct image paragraph, specialized to a locally closed lisse generator; the compact-monodromy, lattice and finite-model comparison expansion is the original single proof step of det-sf-comp-continuous-algcl-heart-finiteness (Sheaf.Paper.ContinuousAlgClProperHeartFiniteness, original theorem docstring)."
+ },
+ "proof": [
+  {
+   "text": "Give S the induced finite-type separated k-scheme structure. On a finite normal refinement of S, a lisse all-continuous coefficient module gives finite-dimensional continuous monodromy of a profinite fundamental group. Compact-matrix coefficient descent gives a finite intermediate extension E of Q_ell containing all matrix entries. Choose an invariant integral lattice, descend the representation to E and extend it by zero along the given locally closed immersion. Localization and noetherian induction handle the refinement and its closed complement. This step is only a stratum calculation, not the finite-filtration devissage for arbitrary constructible input.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module",
+    "lem-real-compact-matrix-coefficient-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-single.proof.md",
+    "place": "Proper direct image paragraph, specialized to a locally closed lisse generator; the compact-monodromy, lattice and finite-model comparison expansion is the original single proof step of det-sf-comp-continuous-algcl-heart-finiteness (Sheaf.Paper.ContinuousAlgClProperHeartFiniteness, original theorem docstring)."
+   }
+  },
+  {
+   "text": "For the finite E piece use properHeart_constructible_cohomology, and for its integral lattice use the finite torsion reductions, their common proper cohomological bound and the Milnor sequence. On an adapted target stratum obtain a bounded finite-projective cochain model of the integral proper image. This bound and finite generation permit the coefficient comparison to be computed termwise with finite matrices. After inverting ell and extending these matrices to B=C(-,PadicAlgCl ell), they compute the actual B-coefficient proper image of the extended lisse piece. Descend the resulting finite constant local models on a finite target stratification. This comparison is the remaining content of the lemma: it does not invoke the existing all-continuous scalar comparison, whose proof in turn assumes the parent theorem. In particular it does not identify B with the finite-subextension-valued coefficient ring.",
+   "uses": [
+    "lem-proper-heart-constructible-cohomology",
+    "det-proper-heart-bound-torsion",
+    "det-proper-heart-bound-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-single.proof.md",
+    "place": "Proper direct image paragraph, specialized to a locally closed lisse generator; the compact-monodromy, lattice and finite-model comparison expansion is the original single proof step of det-sf-comp-continuous-algcl-heart-finiteness (Sheaf.Paper.ContinuousAlgClProperHeartFiniteness, original theorem docstring)."
+   }
+  },
+  {
+   "text": "Left t-exactness of the derived pushforward makes the negative cohomology zero. Zero modules and empty strata have rank-zero finite constant models. Combining this with the calculation in nonnegative degrees proves the assertion for every integer n.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-single.proof.md",
+    "place": "Proper direct image paragraph, specialized to a locally closed lisse generator; the compact-monodromy, lattice and finite-model comparison expansion is the original single proof step of det-sf-comp-continuous-algcl-heart-finiteness (Sheaf.Paper.ContinuousAlgClProperHeartFiniteness, original theorem docstring)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-lisse-coefficient-module",
+  "det-def-sfb-constructible-local-model",
+  "det-proper-heart-bound-lattice",
+  "det-proper-heart-bound-torsion",
+  "lem-proper-heart-constructible-cohomology",
+  "lem-real-compact-matrix-coefficient-descent",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-single.proof.md",
+  "place": "Proper direct image paragraph, specialized to a locally closed lisse generator; the compact-monodromy, lattice and finite-model comparison expansion is the original single proof step of det-sf-comp-continuous-algcl-heart-finiteness (Sheaf.Paper.ContinuousAlgClProperHeartFiniteness, original theorem docstring)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image of extension by zero of a lisse sheaf on a locally closed stratum is constructible over continuous p-adic algebraic closure coefficients",
+   "results": "8 hits: PadicAlgCl; Scheme.Hom.isLocallyConstructible_image; CondensedSet.LocallyConstant.functorFullyFaithful; CondensedSet.LocallyConstant.iso; LightCondensed.lanLightCondSet; Scheme.IdealSheafData.map_vanishingIdeal; LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; IsProper.instMorphismRestrict.",
+   "date": "2026-10-27",
+   "verdict": "No match: generic coefficient, constructible-set and locally constant condensed-set infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLisseCoefficientModule",
+   "results": "0 hits; unknown identifier IsLisseCoefficientModule.",
+   "date": "2026-10-27",
+   "verdict": "No match: the project-specific coefficient lisse predicate is absent from Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*lisse|lisse.*proper",
+   "results": "0 hits via msearch grep. Local project search finds the parent finiteness theorem and scalar comparison, which depends on the parent; no independently usable theorem for this single-stratum input.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousAlgClProperHeartFiniteness",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousAlgClProperLisseStratum",
+  "file": "lean/Sheaf/Paper/ContinuousAlgClProperLisseStratum.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousAlgCl_proper_lisse_stratum",
+  "statement": "theorem continuousAlgCl_proper_lisse_stratum\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p]\n    (V S : Scheme.{u}) (v : V ⟶ X) [IsOpenImmersion v]\n    (t : S ⟶ V) [IsClosedImmersion t] [IsReduced S]\n    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) S))\n    (hL : IsLisseCoefficientModule (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) L) :\n    ∀ n : ℤ, IsConstantModelConstructible\n      (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) Y\n      ((DerivedCategory.homologyFunctor _ n).obj\n        ((lowerStar (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) p).rightDerivedFunctor.obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            ((openImmersionLowerShriek (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) v).obj\n              ((lowerStar (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) t).obj L)))))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "det-sf-comp-continuous-algcl-heart-finiteness",
+  "worker": "stage3",
+  "summary": "Extract only the locally closed lisse-generator case of the existing proof. The parent now performs the genuine finite-filtration/triangulated-closure assembly using a proved coefficient-general generation theorem. This lemma retains finite monodromy descent and actual all-continuous coefficient comparison, and is not the arbitrary-constructible statement under another name.",
+  "blueprint": "Proper-image paragraph of det-sf-comp-coherence-single, through the parent single-sheaf finiteness obligation.",
+  "tool_uses": [
+   {
+    "node": "lem-real-compact-matrix-coefficient-descent",
+    "why": "Generic proved finite coefficient descent for a compact matrix representation; this supplies only the monodromy coefficient field."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T182710-L-3577809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T182710-L-3577809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

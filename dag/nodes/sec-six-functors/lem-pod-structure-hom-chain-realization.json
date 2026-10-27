@@ -1,0 +1,229 @@
+{
+ "id": "lem-pod-structure-hom-chain-realization",
+ "kind": "statement",
+ "title": "Finite-Tor realization of the structure-morphism Hom chain",
+ "statement": "Use the Poincare conventions [def-pod-conventions], with $a:X\\to s=\\operatorname{Spec}k$ the admissible structure morphism, $K\\in D^b_{ctf}(X,\\Lambda)$ and $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Use finite Tor amplitude [def-weil-finite-tor-amplitude], the derived operations [def-weil-derived-pullback-tensor-hom], ordinary and exceptional adjunctions [fix-prop-adjunctions], restricted tensor–Hom adjunction [det-thm-sf-ctf-stability-adjunctions], projection [def-exchange-projection, fix-prop-projection-formula], and currying conventions [lem-pod-closed-uncurry-laws]. For $N,T\\in D^b_{ctf}(s,\\Lambda)$ put\n$$C=Ra_!K,\\qquad L_N=R\\mathcal Hom_X(K,Ra^!N),\\qquad A_N=Ra_*L_N,\\qquad B_N=R\\mathcal Hom_s(C,N).$$\nThen $C,A_N,B_N$ belong to $D^b_{ctf}(s,\\Lambda)$, and $Ra^!N,L_N,La^*T,K\\otimes^LLa^*T$ belong to $D^b_{ctf}(X,\\Lambda)$. This includes $N=\\Lambda_s$ and $N=\\omega_{s,\\Lambda}=R(\\operatorname{id}_s)^!\\Lambda_s$; the coefficient unit has Tor amplitude $[0,0]$.\nWrite $\\varepsilon_{L_N}:La^*A_N\\to L_N$, $\\mu_N:Ra_!Ra^!N\\to N$, and $P_T:C\\otimes^LT\\to Ra_!(K\\otimes^LLa^*T)$ for the chosen counits and projection. Define\n$$p_N=\\mu_N\\circ Ra_!\\bigl(\\operatorname{ev}_{K,Ra^!N}\\circ(1_K\\otimes\\varepsilon_{L_N})\\bigr)\\circ P_{A_N},\\qquad \\alpha_N=\\operatorname{curry}(p_N):A_N\\to B_N.$$\nBoth specified canonical isomorphisms [lem-sf-tensor-hom] and [fix-lem-tensor-adjunction] at $(a,K,N)$ have underlying morphism $\\alpha_N$. Their reverse Hom chain, from $\\operatorname{Hom}_s(T,A_N)$ to $\\operatorname{Hom}_s(T,B_N)$, is postcomposition with $\\alpha_N$ for every finite-Tor test object $T$. For every $b:N\\to N'$ one has\n$$\\alpha_{N'}\\circ Ra_*R\\mathcal Hom_X(K,Ra^!b)=R\\mathcal Hom_s(C,b)\\circ\\alpha_N.$$\nAll assertions use completed operations at $\\mathcal O_E$, raw scalar localization at $E$, and a common finite coefficient-field stage at $\\overline{\\mathbf Q}_\\ell$. No site-perfectness of $K$ or properness of $a$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1 and lem-sf-tensor-hom.proof.md Steps 1–2; domain verification and represented-arrow identification from returned lem-pod-global-duality-map-identification steps 1–2 (agent expansion)"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "fix-prop-adjunctions",
+  "det-thm-sf-ctf-stability-adjunctions",
+  "def-exchange-projection",
+  "fix-prop-projection-formula",
+  "lem-pod-closed-uncurry-laws",
+  "lem-sf-tensor-hom",
+  "fix-lem-tensor-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pod-hom-chain-ctf-domains] with $f=a$, $M=K$, $Y=s$. The Poincare hypotheses make $a$ a separated finite-type morphism between finite-type $k$-schemes with the required exceptional adjunction. Its seven membership assertions give exactly $C,A_N,B_N,Ra^!N,L_N,La^*T,K\\otimes^LLa^*T$ in the stated finite-Tor categories. In particular $P_{A_N}$ and all five Hom bijections are defined at each coefficient stage.",
+   "uses": [
+    "lem-pod-hom-chain-ctf-domains",
+    "def-pod-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Steps 1–2: the five Hom bijections and their canonical representing map"
+   }
+  },
+  {
+   "text": "The coefficient-object theorem [lem-weil-constant-coefficient-objects-constructible] puts $\\Lambda_s$ in the bounded constructible point category. At finite coefficients $\\Lambda_s\\otimes^L M=M$ for every degree-zero module sheaf $M$, so its Tor amplitude is $[0,0]$. Integrally each reduction is the finite unit by that theorem, so the same interval works for every reduction; at field stages use the defining equality $D^b_{ctf}=D^b_c$ [def-weil-finite-tor-amplitude]. Thus $N=\\Lambda_s$ is allowed. By [lem-pod-point-dualizing-complex], $\\omega_{s,\\Lambda}\\cong\\Lambda_s$, so it is allowed too.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-finite-tor-amplitude",
+    "lem-pod-point-dualizing-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Steps 1–2: the five Hom bijections and their canonical representing map"
+   }
+  },
+  {
+   "text": "For $t:T\\to A_N$, specialize [lem-pod-hom-chain-counit-formula] to $(a,K,N)$. Its $p_N$ is literally the displayed $p_N$: the ordinary counit, evaluation, exceptional counit and chosen projection occur in the same order. Hence its composite $\\Phi_T^N$ is postcomposition with $\\alpha_N=\\operatorname{curry}(p_N)$ for every finite-Tor $T$. In particular $\\Phi_{A_N}^N(1_{A_N})=\\alpha_N$.",
+   "uses": [
+    "lem-pod-hom-chain-counit-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Steps 1–2: the five Hom bijections and their canonical representing map"
+   }
+  },
+  {
+   "text": "Here is the representing-map identification for the specified canonical isomorphisms [lem-sf-tensor-hom, fix-lem-tensor-adjunction]. In both constructions the forward Hom chain $h_T$ runs from $\\operatorname{Hom}(T,B_N)$ to $\\operatorname{Hom}(T,A_N)$: uncurry, precompose with $P_T^{-1}$, exceptional adjunction, curry, ordinary adjunction. Reversing these five specified bijections gives precisely $\\Phi_T^N$ of step 3; in particular the projection arrow reverses to precomposition with $P_T$, not $P_T^{-1}$. The chosen canonical representing arrow is therefore $h_{A_N}^{-1}(1_{A_N})=\\Phi_{A_N}^N(1_{A_N})=\\alpha_N$ in each construction. Explicitly set $r=h_{B_N}(1_{B_N})$. Naturality in $T$ gives $h_T(u)=r\\circ u$ and $(h_T)^{-1}(v)=\\alpha_N\\circ v$. The inverse-bijection identities at the two identity arrows yield $r\\circ\\alpha_N=1_{A_N}$ and $\\alpha_N\\circ r=1_{B_N}$. Thus the representing arrow is an isomorphism, with exactly the required direction. This is the identity-component calculation defining the canonical comparison, not an identification based merely on existence of an abstract isomorphism.",
+   "uses": [
+    "lem-sf-tensor-hom",
+    "fix-lem-tensor-adjunction",
+    "lem-pod-hom-chain-counit-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Steps 1–2: the five Hom bijections and their canonical representing map"
+   }
+  },
+  {
+   "text": "For $b:N\\to N'$ put $u=Ra_*R\\mathcal Hom_X(K,Ra^!b)$ and $v=R\\mathcal Hom_s(C,b)$. Naturality in $N$ of [lem-pod-hom-chain-counit-formula] gives $\\Phi_{A_N}^{N'}(u)=v\\circ\\Phi_{A_N}^{N}(1_{A_N})$. Step 3 identifies the left side with $\\alpha_{N'}\\circ u$ and the right side with $v\\circ\\alpha_N$, the claimed equality. The domain and counit-formula lemmas expressly use completed integral operations, rationalization and common finite stages, so every preceding equality is an equality in the chosen coefficient category. The argument never invokes the coefficient-dual tensor formula for $K$ or the proper identification $Ra_!=Ra_*$.",
+   "uses": [
+    "lem-pod-hom-chain-counit-formula",
+    "lem-pod-hom-chain-ctf-domains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Steps 1–2: the five Hom bijections and their canonical representing map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-hom-chain-ctf-domains",
+  "def-pod-conventions",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-finite-tor-amplitude",
+  "lem-pod-point-dualizing-complex",
+  "lem-pod-hom-chain-counit-formula",
+  "lem-sf-tensor-hom",
+  "fix-lem-tensor-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Steps 1–2: the five Hom bijections and their canonical representing map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a structure morphism the finite Tor constructible tensor Hom comparison is the evaluation projection counit transpose and the representing isomorphism of the adjunction Hom chain",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition'. Generic tensor-Hom adjunctions, derived-adjunction counits or condensed internal-projectivity; no all-stage constructible-domain and specified geometric comparison identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify the natural map representing a chain of ordinary and exceptional derived adjunctions with the curry of its counit evaluation composite at finite integral and rational coefficients",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction. Generic tensor-Hom adjunctions, derived-adjunction counits or condensed internal-projectivity; no all-stage constructible-domain and specified geometric comparison identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor internal Hom exchange for compactly supported direct image has constructible finite Tor outputs and is induced by projection formula and adjunction counits",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Types.tensorProductAdjunction; lTensorHomEquivHomLTensor; CategoryTheory.MonoidalClosed.internalHomAdjunction₂; ModuleCat.monoidalClosedHomEquiv; CategoryTheory.Tor'; CategoryTheory.ihom.coev; CategoryTheory.ihom.adjunction; CategoryTheory.Tor. Generic tensor-Hom adjunctions, derived-adjunction counits or condensed internal-projectivity; no all-stage constructible-domain and specified geometric comparison identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.MonoidalClosed.curry",
+   "results": "[loogle] OK 3 hit(s); CategoryTheory.MonoidalClosed.homEquiv_apply_eq; CategoryTheory.MonoidalClosed.ofEquiv_curry_def; LightCondensed.ihomPoints_symm_apply. Generic tensor-Hom adjunctions, derived-adjunction counits or condensed internal-projectivity; no all-stage constructible-domain and specified geometric comparison identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHomRightDerivedLowerShriek|exceptional.*adjunction|finiteTor.*Hom",
+   "results": "[grep] OK 0 hit(s); no hits. Generic tensor-Hom adjunctions, derived-adjunction counits or condensed internal-projectivity; no all-stage constructible-domain and specified geometric comparison identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the structure morphism the constructible finite Tor tensor Hom adjunction is the curry of the projection evaluation counit pairing at finite integral and rational coefficients",
+   "results": "8 hits; LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, CategoryTheory.IsGrothendieckAbelian.tensorObj, LightCondensed.free_internallyProjective_iff_tensor_condition, FGModuleCat.FGModuleCatEvaluation_apply, FGModuleCat.FGModuleCatEvaluation_apply', LightCondensed.internallyProjective_iff_tensor_condition'. The hits are generic closed-category evaluation, ordinary sheaf adjunctions or module evaluation; none states the geometric finite-Tor domain and specified four-stage comparison identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.MonoidalClosed.curry",
+   "results": "3 hits; CategoryTheory.MonoidalClosed.homEquiv_apply_eq, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, LightCondensed.ihomPoints_symm_apply. The hits are generic closed-category evaluation, ordinary sheaf adjunctions or module evaluation; none states the geometric finite-Tor domain and specified four-stage comparison identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHomRightDerivedLowerShriek|finiteTor.*Hom|exceptional.*adjunction",
+   "results": "0 hits; . The hits are generic closed-category evaluation, ordinary sheaf adjunctions or module evaluation; none states the geometric finite-Tor domain and specified four-stage comparison identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom exchange for compact support and exceptional pullback on bounded constructible finite Tor complexes is realized by projection evaluation and adjunction counits",
+   "results": "8 hits; CategoryTheory.ihom.ihom_adjunction_counit, CategoryTheory.ihom.ev, CategoryTheory.Pi.closedCounit, CategoryTheory.exp.ev, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counit, CategoryTheory.ExponentiableMorphism.ev_coev, CompHausLike.LocallyConstant.counitApp. The hits are generic closed-category evaluation, ordinary sheaf adjunctions or module evaluation; none states the geometric finite-Tor domain and specified four-stage comparison identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical isomorphism from pushforward internal Hom into exceptional inverse image to internal Hom of compactly supported pushforward is identified by its action on all finite Tor test complexes",
+   "results": "8 hits; SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp, SheafOfModules.pushforwardNatIso_inv, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit. The hits are generic closed-category evaluation, ordinary sheaf adjunctions or module evaluation; none states the geometric finite-Tor domain and specified four-stage comparison identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "curry_natural|homEquiv_apply_eq|ihom_adjunction_counit",
+   "results": "19 hits; Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean. The hits are generic closed-category evaluation, ordinary sheaf adjunctions or module evaluation; none states the geometric finite-Tor domain and specified four-stage comparison identification.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-global-duality-map-identification",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Second paragraph: the five Hom bijections and their specified counit/evaluation realization; third paragraph: the canonical reverse global comparison. Carries returned item proof steps 1–2.",
+   "via": [
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pod-structure-hom-chain-realization",
+  "worker": "stage1",
+  "summary": "Reused the existing general Hom-chain domain and counit-formula lemmas. Verified the coefficient-unit and point-dualizing inputs, identified each specified canonical comparison by its identity component, and obtained naturality by evaluating the existing natural Hom chain. No new nodes or Mathlib leaves. The statement is unchanged.",
+  "blueprint": "Realizes thm-pod-identification-of-the-comparison.proof.md paragraphs 2–3, with arbitrary finite-Tor tests and arbitrary N: the five Hom bijections and their specified evaluation/counit representing arrow. The construction is fix-lem-tensor-adjunction.proof.md Steps 1–2 and lem-sf-tensor-hom.proof.md Steps 1–2 in the current blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Generic coefficient-unit constructibility and its integral reductions; the unit route has no more specific coefficient-unit construction."
+   },
+   {
+    "node": "lem-pod-point-dualizing-complex",
+    "why": "Generic normalization of the exceptional functor of the identity at the coefficient point, used only to admit N=omega_s."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-pod-point-dualizing-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-b676e5446",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-b676e5446 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. This is a one-level split with no new nodes. The statement and stmt_deps are byte-identical to side-live; there is no repair note on the item (the counit-formula note is resolved) and live is still unsplit. proof_deps equals the union of the step uses, there is no cycle, no SGA, and every cited unit is on the sk-thm-sf-package route. Step 1: lem-pod-hom-chain-ctf-domains applies with f=a, M=K, Y=s: a is separated of finite type, the exceptional adjunction comes from def-fix (4), and the coefficient categories are the same. Its statement lists the seven ctf memberships and the five bijections with their directions. Step 2: lem-weil-constant clauses (1)-(3) give Λ_s Tor amplitude [0,0] at every reduction, and the field stages hold by definition. lem-pod-point-dualizing-complex gives ω_s≅Λ_s. Step 3: the counit-formula's p_N matches the item's factor for factor, so Φ_T^N = curry(p_N)∘−. Step 4: I recomputed the inverse of the forward chain h_T from main-20261015 and latest fix-lem-tensor-adjunction Step 1 and the lem-sf-tensor-hom blueprint_update (uncurry, PF⁻¹, exceptional, curry, ordinary). It is exactly Φ, so the canonical forward map b=h_A⁻¹(1_A) of both DAG constructions equals α_N, and the Yoneda inverse calculation is correct. Step 5 follows from naturality in N of the counit formula at T=A_N, t=1. Edge cases checked: X empty, K=0, N=0, T=0, a=id_s. Batch 5: (1) ctf-domains reaches lem-pd-module-ringed-topos-derived-comparison through det-thm-sf-ctf-stability-adjunctions. That is general ctf stability and a module dictionary, already cited by the base item, and not PD. (2) point-dualizing reaches lem-trf-completion-unit-strict-quotient-model, a coefficient-level strict-quotient completion model; R(id_s)^!≅id is a generic point normalization, not part of the trace formula or PD. (3) counit-formula reaches lem-pod-closed-uncurry-laws, a generic Mathlib closed-monoidal leaf. All three accepted. Accepted tool_uses: lem-weil-constant-coefficient-objects-constructible and lem-pod-point-dualizing-complex. Advisory: the left/right tensor-Hom factor convention (det-thm(2)) is used consistently, and the source/proof_origin paths differ between main-20261015 and latest, with the same Step 1 text."
+ }
+}

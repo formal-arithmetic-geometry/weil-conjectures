@@ -1,0 +1,171 @@
+{
+ "id": "lem-sf-residue-lisse-clopen-bases",
+ "kind": "statement",
+ "title": "Residue bases and complete pullback on a common clopen partition",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with valuation ring $R$, uniformizer $\\varpi$ and residue field $k$ [def-weil-l-adic-coefficient-extension]. On the small pro-etale site of a scheme $X$, put $B_X=\\varprojlim_{n\\geq1}(R/\\varpi^n)_X$ [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients, def-pur-sheaf-inverse-limit]. Let $S$ be affine and weakly contractible, meaning that epimorphisms of set sheaves are surjective on $S$-sections [def-pc-scheme]. Let $K\\in D(\\operatorname{Mod}(B_S))$ be quotient-tower derived complete [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category, def-weil-derived-complete, def-weil-integral-reduction-tower]. Its residue reduction is $K_1=K\\otimes^L_{B_S}k_S$ [def-weil-integral-derived-reduction]. Assume $K_1$ has bounded constructible cohomology, every cohomology sheaf is locally constant, and $K_1$ has finite Tor amplitude [def-weil-finite-torsion-constructibility, def-weil-proetale-locally-constant-sheaf, def-weil-derived-cohomology-sheaves, def-weil-proetale-tor-amplitude]. There is a finite disjoint open cover $S=\\coprod_i U_i$ [def-weil-open-immersion] such that every $U_i$ is compact and weakly contractible, and every finite free $B_{U_i}$-module sheaf is projective. The completed derived pullback $M_i$ of $K$ to $U_i$ is complete [def-pur-integral-derived-operations]. For each $i$ there are integers $a\\leq b$ and a function $r:\\mathbf Z\\to\\mathbf N$ such that $H^q((M_i)_1)\\cong k_{U_i}^{\\oplus r(q)}$ for every $q\\in[a,b]$. After restriction to every object $V$ of $(U_i)_{\\mathrm{proet}}$, the residue $(M_i)_1$ has Tor amplitude $[a,b]$. The finite free sheaves in the Lean statement are the existing topCellIntegralFree and topCellResidueFree [lem-sf-complete-top-residue-cell-cone]. No bounded integral complex or projective model is asserted. The empty cover and zero ranks are allowed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C3 (lemma-local-structure-constructible-complex) and 098F; sites-cohomology.tex Tags 0946 and 08FZ. The finite residue field specialization of the simultaneous trivialization and complete restriction, before the degree induction."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-open-immersion",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-derived-limit",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "def-weil-integral-derived-reduction",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-completed-integral-coefficients",
+  "lem-sf-complete-top-residue-cell-cone"
+ ],
+ "proof": [
+  {
+   "text": "Choose the ordered Tor interval and test against the coefficient unit to obtain residue cohomology vanishing outside it. Finite constructible geometric stalks are obtained by factoring each geometric point through its constructibility stratum and using pullback-stalk comparison. Combine these finite stalks with local constancy via the pro-etale finite-model theorem and its scalar comparison to obtain finite module models on the integer interval.",
+   "uses": [
+    "lem-sf-complete-residue-cohomology-bounds",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-pbc-surjective-stalks-residue-field-iso",
+    "lem-trf-proetale-pullback-stalk-coherence",
+    "lem-weil-pbc-proetale-finite-model-local-constancy",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply simultaneous clopen localization to this finite family. Retain compactness and weak contractibility. The existing projectivity conclusion for finite products of completed coefficient units applies to topCellIntegralFree by finite biproduct/coproduct comparison and ULift reindexing.",
+   "uses": [
+    "lem-sf-clopen-lisse-complete-localization",
+    "lem-sf-complete-top-residue-cell-cone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare completed pullback of the complete input with ordinary normalized restriction. The localization reduction isomorphism then identifies its residue with exact restriction of the original residue. Exact derived functors commute with cohomology. The slice residue free comparison supplies the displayed bases; choose the ranks and extend them by zero outside the interval. Completeness transports along the same comparison using the completion-unit criterion.",
+   "uses": [
+    "lem-sf-clopen-complete-pullback-comparison",
+    "lem-sf-clopen-residue-free-restriction",
+    "lem-sf-clopen-lisse-complete-localization",
+    "lem-fix-qcqs-completion-unit-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient DVR makes the residue ring a field. Exact restriction preserves the cohomological vanishing interval, and so does pullback to every local pro-etale object. The bounded-field tensor calculation turns this vanishing into the required Tor interval on every such object.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-field-tor-amplitude"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-complete-residue-cohomology-bounds",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-pbc-surjective-stalks-residue-field-iso",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-sf-clopen-lisse-complete-localization",
+  "lem-sf-complete-top-residue-cell-cone",
+  "lem-sf-clopen-complete-pullback-comparison",
+  "lem-sf-clopen-residue-free-restriction",
+  "lem-fix-qcqs-completion-unit-criterion",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-field-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "M8",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C3 and 098F. Actual assembly uses pro-etale finite stalk/model comparisons, normalized clopen restriction, exact derived homology, and field Tor amplitude after every local pullback."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely many lisse constructible cohomology sheaves on weakly contractible affine have simultaneous finite clopen trivialization with exact restriction",
+   "results": "8 hits, including CondensedSet.LocallyConstant.functorFullyFaithful and AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact; no pro-etale residue/coefficient restriction result.",
+   "verdict": "No match; the project clopen localization theorem supplies the geometry, but its slice/ordinary restriction presentation needs assembly with the completed pullback interface.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete complexes with finite constant residue cohomology have bounded finite projective sheaf models",
+   "results": "8 hits: K-projective complexes and their derived morphism APIs, including CochainComplex.isKProjective_of_projective and IsKProjective. No clopen residue-basis theorem.",
+   "verdict": "No matching restriction theorem. K-projective APIs used for the separate, proved induction attachment.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "complete.*residue|residue.*projective",
+   "results": "15 Mathlib hits in local field and L-series files; no sheaf-complex local model theorem. Local rg on the project found SfClopenLisseCompleteLocalization, SfClopenRestrictionData, CompleteTopResidueCellCone, ProjectiveTopCellAttachment, and finite-model APIs; their signatures were read.",
+   "verdict": "Use the existing localization theorem; the new obligation is its assembly with residue cohomology and the completed derived pullback, not a replacement local-model theorem.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ResidueLisseProjectiveModels",
+  "date": "2026-10-27",
+  "group": "R5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted residue-local-model preparation: simultaneous clopen residue bases and completeness under the precise completed pullback, prior to interval induction.",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ResidueLisseClopenBases",
+  "file": "lean/Sheaf/Paper/ResidueLisseClopenBases.lean",
+  "declaration": "WeilConjectures.residue_lisse_clopen_bases",
+  "statement": "theorem residue_lisse_clopen_bases\n    (S : Scheme.{u}) (hS : IsAffine S)\n    (hweak : (Scheme.ProEt.topology S).IsWeaklyContractible.{u + 1}\n      (Scheme.ProEt.mk (𝟙 S)))\n    (K : DerivedCategory (integralTowerModules.{u, u} l E S))\n    (hcomplete : IsDerivedCompleteUnrestricted.{u, u} l E S K)\n    (hresidue : intrinsicFiniteTorsionConstructible l E 1 (by omega) S\n      ((scalarReductionDerivedExtension.{u, u} l E S 0).obj K))\n    (hlisse : ∀ q : ℤ, IsLocallyConstantProEtaleModuleSheaf S\n      (Padic.coefficientExtensionRing l E 1)\n      ((DerivedCategory.homologyFunctor\n        (proEtaleRingModules S (proEtaleConstantRing S\n          (Padic.coefficientExtensionRing l E 1))) q).obj\n        ((scalarReductionDerivedExtension.{u, u} l E S 0).obj K)))\n    (hTor : HasFiniteProEtaleTorAmplitude S\n      (Padic.coefficientExtensionRing l E 1)\n      ((scalarReductionDerivedExtension.{u, u} l E S 0).obj K)) :\n    ∃ (n : ℕ) (U : Fin n → S.Opens),\n      (⨆ i, U i) = ⊤ ∧ Pairwise (fun i j ↦ Disjoint (U i) (U j)) ∧\n      ∀ i : Fin n,\n        CompactSpace (U i).toScheme ∧\n        (∀ (F G : Sheaf (ProEt.topology (U i).toScheme) (Type (u + 1)))\n          (f : F ⟶ G), Epi f →\n            Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 (U i).toScheme))))) ∧\n        (∀ r : ℕ, Projective (topCellIntegralFree.{u} l E (U i).toScheme r)) ∧\n        IsDerivedCompleteUnrestricted.{u, u} l E (U i).toScheme\n          ((integralDerivedPullback.{u, u} l E (U i).ι).obj K) ∧\n        ∃ (a b : ℤ) (r : ℤ → ℕ), a ≤ b ∧\n          (∀ q : Set.Icc a b, Nonempty\n            (topCellResidueFree.{u} l E (U i).toScheme (r q.val) ≅\n              (DerivedCategory.homologyFunctor\n                (scalarReductionTarget.{u, u} l E (U i).toScheme 0) q.val).obj\n                ((scalarReductionDerivedExtension.{u, u} l E (U i).toScheme 0).obj\n                  ((integralDerivedPullback.{u, u} l E (U i).ι).obj K)))) ∧\n          (∀ V : (U i).toScheme.ProEt,\n            HasProEtaleTorAmplitude V.left (Padic.coefficientExtensionRing l E 1)\n              ((proEtaleRingDerivedPullback V.hom\n                (proEtaleConstantRing (U i).toScheme (Padic.coefficientExtensionRing l E 1))\n                (proEtaleConstantRing V.left (Padic.coefficientExtensionRing l E 1))\n                (AlgebraicGeometry.ProEtale.StrictTower.constantRingIso\n                  (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E 1)) V.hom)).obj\n                ((scalarReductionDerivedExtension.{u, u} l E (U i).toScheme 0).obj\n                  ((integralDerivedPullback.{u, u} l E (U i).ι).obj K))) a b)",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ede4f",
+  "group": "R5",
+  "result": "fix",
+  "landing": "20261027T021359-L-2763710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T050624-L-246211",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

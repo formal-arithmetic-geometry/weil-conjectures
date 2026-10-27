@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-space-lft-cancellation",
+ "kind": "statement",
+ "title": "Cancellation of local finite type for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $X,Y,Z$ be algebraic spaces over $S$ [def-trf-algebraic-space]. For a morphism of algebraic spaces, locally of finite type means locally of finite type on compatible etale scheme charts, using [def-weil-finite-type-morphism]. Let $a:X\\to Y$ and $b:Y\\to Z$ be morphisms. If $b\\circ a:X\\to Z$ is locally of finite type, then $a:X\\to Y$ is locally of finite type. No finite-type, separatedness, or representability-by-schemes assumption on $b$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0462 (lemma-permanence-finite-type)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas $W\\to Z$ using [def-trf-algebraic-space]. Form $Y_W=Y\\times_ZW$, choose a surjective etale scheme atlas $V\\to Y_W$, and form $X_V=X\\times_YV$ and a surjective etale scheme atlas $U\\to X_V$. These fibre products are algebraic spaces by [lem-trf-space-fibre-products-etale-covers], so each atlas exists. The projections give scheme morphisms $\\alpha:U\\to V$ and $\\beta:V\\to W$ and a commutative diagram over $X\\xrightarrow{a}Y\\xrightarrow{b}Z$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02X1 (lemma-lift-morphism-presentations), construction of compatible atlases; Tag 02X2 (lemma-fibre-product-spaces); Tag 025Y (definition-algebraic-space)."
+   }
+  },
+  {
+   "text": "Write $X_W=X\\times_ZW$. The projection $Y_W\\to Y$ is the pullback of $W\\to Z$, hence is surjective etale. Thus $V\\to Y$ is surjective etale by [lem-trf-space-chartwise-etale-permanence]. Also $X_V\\cong X_W\\times_{Y_W}V$: on every test scheme both sides consist of triples $(x,v,w)$ with $a(x)$ equal to the image of $v$ in $Y$ and $w$ equal to the image of $v$ in $W$; forgetting and restoring $w$ give inverse maps. Consequently $X_V\\to X_W$ is the pullback of $V\\to Y_W$ and is surjective etale by [lem-trf-space-fibre-products-etale-covers]. Its composite $U\\to X_W$ is surjective etale by [lem-trf-space-chartwise-etale-permanence].",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), clauses (2) and (3); spaces.tex Tag 02X1 (lemma-lift-morphism-presentations), pullback construction."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-local-properties-chart-test] with $P=$ locally of finite type to $b\\circ a$, using the atlas $W\\to Z$ and the surjective etale scheme map $U\\to X_W$ verified in step 2. The hypothesis on $b\\circ a$ gives that $\\beta\\circ\\alpha:U\\to W$ is locally of finite type. Clause (a) of [lemma-nagata-finite-type-to-separated-target], applied to the scheme triangle $U\\xrightarrow{\\alpha}V\\xrightarrow{\\beta}W$, now gives that $\\alpha$ is locally of finite type. This clause requires no hypothesis on $\\beta$.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test",
+    "lemma-nagata-finite-type-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0462 (lemma-permanence-finite-type), final sentence: Tag 040Y (lemma-finite-type-local) and morphisms.tex Tag 01T8 (lemma-permanence-finite-type)."
+   }
+  },
+  {
+   "text": "Finally apply [lem-sfb-space-local-properties-chart-test] to $a:X\\to Y$. Its target chart is the surjective etale scheme map $V\\to Y$ from step 2, and its source chart is exactly the chosen surjective etale map $U\\to X\\times_YV$. Since their scheme map $\\alpha:U\\to V$ is locally of finite type by step 3, the criterion gives that $a$ is locally of finite type.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0462 (lemma-permanence-finite-type), conclusion using Tag 040Y (lemma-finite-type-local), conditions (7) and (8)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lemma-nagata-finite-type-to-separated-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0462 (lemma-permanence-finite-type), compatible scheme charts and scheme cancellation; the atlas construction from spaces.tex Tag 02X1 is expanded using fibre products and etale-cover permanence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|AlgebraicStack|locallyOfFiniteType_of_comp|locallyOfFiniteType.*[Bb]ase[Cc]hange",
+   "results": "Read 2 returned hits; leading declarations/files: Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only finite-type and diagonal declarations do not state the algebraic-space cancellation or stack diagonal assertion; extending from schemes to algebraic spaces is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local finite type morphisms of algebraic spaces are stable under base change and cancellation of postcomposition",
+   "results": "Read 8 returned hits; leading declarations/files: AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.LocallyOfFiniteType. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only finite-type and diagonal declarations do not state the algebraic-space cancellation or stack diagonal assertion; extending from schemes to algebraic spaces is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "Read 12 returned hits; leading declarations/files: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.locallyOfFiniteType_comp. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only finite-type and diagonal declarations do not state the algebraic-space cancellation or stack diagonal assertion; extending from schemes to algebraic spaces is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any map between algebraic spaces locally of finite type over a scheme is locally of finite type",
+   "results": "Read 8 returned hits; leading declarations/files: AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.LocallyQuasiFinite. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only finite-type and diagonal declarations do not state the algebraic-space cancellation or stack diagonal assertion; extending from schemes to algebraic spaces is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of algebraic spaces if a composite is locally of finite type then its first map is locally of finite type; local finite type is stable under base change",
+   "results": "Read 8 returned hits; leading declarations/files: AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instCompScheme. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only finite-type and diagonal declarations do not state the algebraic-space cancellation or stack diagonal assertion; extending from schemes to algebraic spaces is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the composite of two algebraic space morphisms is locally of finite type then the first morphism is locally of finite type",
+   "results": "Read 8 returned hits: AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.IsFinite.comp_iff. Scheme cancellation was read at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:72-74.",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme statements; the algebraic-space chart argument is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyOfFiniteType_of_comp",
+   "results": "Read 1 returned hits: Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean. Scheme cancellation was read at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:72-74.",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme statements; the algebraic-space chart argument is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cancellation of locally finite type for algebraic spaces from a locally finite type composite",
+   "results": "Read 8 returned hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType. Scheme cancellation was read at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:72-74.",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme statements; the algebraic-space chart argument is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "Read 12 returned hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.locallyOfFiniteType_comp. Scheme cancellation was read at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:72-74.",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme statements; the algebraic-space chart argument is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between algebraic spaces over a base is locally of finite type whenever its structure map to the base is locally of finite type",
+   "results": "Read 8 returned hits: AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_iff. Scheme cancellation was read at Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:72-74.",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme statements; the algebraic-space chart argument is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-representable-stack-diagonal-criterion",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Diagonal criterion for representable stack morphisms. Proof of the diagonal criterion, local-finite-type Isom-map input: cancellation of postcomposition for algebraic spaces (Tag 0462).",
+   "via": [
+    "lem-sfb-representable-stack-diagonal-criterion",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-lft-cancellation",
+  "worker": "stage1",
+  "summary": "Follow Stacks 0462 using iterated etale scheme atlases, verify both cartesian chart hypotheses explicitly, apply existing scheme cancellation, and descend with the existing chart criterion. Reuse five existing nodes; no new nodes, no statement change. Rechecked the project Lean source and ran all four search modes with a second semantic phrasing.",
+  "blueprint": "Supporting local-finite-type cancellation input for lem-sfb-representable-stack-diagonal-criterion in the inherited alteration/moduli chain below det-thm-sf-ctf-stability-direct-images paragraph (3). The current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) records open/proper direct-image preservation; this delivery only splits its already-created generic algebraic-space prerequisite. blueprint_refs.py ancestor still reports None, as the inherited from.place already explains. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and pullback of singleton etale covers construct compatible charts; the unit has no substitute for this foundational tool."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic composition of singleton etale covers verifies the two surjective chart maps; no trace-formula or local-term conclusion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-5023de68d",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-5023de68d (reviewer sub-agent of L); spot-checked: Read Stacks Tag 0462 (spaces-morphisms.tex l.4489-4512), 040Y (7)/(8), spaces 02X1, and Mathlib locallyOfFiniteType_of_comp (FiniteType.lean:72-74). The item's statement, stmt_deps and blueprint are identical to the live node, which is still unsplit with an empty proof, so nothing is superseded and no target changed. There is no re-split note. There are no new nodes. Step 1 builds the atlases W->Z, V->Y_W, U->X_V; the fibre products are algebraic spaces by lem-trf-space-fibre-products-etale-covers. Step 2: Y_W->Y is the base change of the cover W->Z, V->Y is a composite of coverings, and both are representable because their sources are schemes (chartwise-permanence equivalence clause). I checked the identification X_V = X_W x_{Y_W} V on T-points; it is the universal property only, and it gives U->X_W surjective etale, exactly what the chart-test node needs. Step 3: the chart test on b∘a with (W, U->X_W) gives U->W locally of finite type; this map equals β∘α (checked). Clause (a) of lemma-nagata-finite-type-to-separated-target then gives α locally of finite type with no hypothesis on β. Step 4: the chart test on a with (V->Y, U->X x_Y V) concludes. No cycle: the chart test has no proof_deps, and the item is cited only by lem-sfb-representable-stack-diagonal-criterion. Edge cases checked: X empty, a or b identity, all spaces schemes, b non-separated. Duplicate search over the algebraic-space finite-type nodes, seven read: none states this cancellation. Batch 5: lem-trf-space-fibre-products-etale-covers and lem-trf-space-chartwise-etale-permanence are generic algebraic-space fibre-product and etale-cover calculus, neither part of the trace-formula or Poincaré-duality statements nor of their proofs, so the tool uses are accepted. No changes."
+ }
+}

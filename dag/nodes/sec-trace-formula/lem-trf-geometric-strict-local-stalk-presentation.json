@@ -1,0 +1,140 @@
+{
+ "id": "lem-trf-geometric-strict-local-stalk-presentation",
+ "kind": "statement",
+ "title": "Strict henselization presentation over the actual scheme stalk",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\bar x:\\operatorname{Spec}\\Omega\\to X$ a geometric point with $\\Omega$ algebraically closed [def-weil-geometric-point]. Put $x=\\bar x(*)$, $C=\\mathcal O_{X,x}$ and $k=C/\\mathfrak m_C$ [def-weil-residue-field, def-weil-locally-ringed-space-morphism]. Fix the embedding $k\\to\\Omega$ to be the one induced by the local map of $\\bar x$, and let $K$ be the separable algebraic closure of $k$ inside $\\Omega$ [def-weil-pbc-relative-separable-closure]. Give $K$ its $C$-algebra structure through $C\\to k\\to K$. There exist a commutative local ring $H$, a $C$-algebra structure on it, a specified pointed-etale colimit presentation $P$ making it the strict henselization of $C$ relative to $K$ [def-sc-ring-strict-henselization], and a ring isomorphism $\\theta:\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}\\simeq H$ [def-weil-pbc-strict-henselization-limit], such that $\\operatorname{Spec}(\\theta)$ followed by the structural morphism to $X$ [def-weil-pbc-strict-henselization-structural-map] equals $\\operatorname{Spec}(C\\to H)$ followed by $\\operatorname{Spec}C\\to X$, and $H\\xrightarrow{P.\\mathrm{residueMap}}K\\hookrightarrow\\Omega$ composed with $\\theta$ equals the canonical geometric evaluation [def-weil-pbc-strict-henselization-point-evaluation]. There is no Noetherian assumption.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX (lemma-describe-etale-local-ring); schemes.tex Tag 01HV (lemma-spec-sheaves); algebra.tex Tag 04GW (lemma-strict-henselization-different)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-residue-field",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-relative-separable-closure",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-strict-henselization-point-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the strict-henselization residue-triple construction to C and its specified separable closure K. Send a pointed etale algebra to the prime kernel of its pointing and the induced residue embedding; in the reverse direction compose the residue embedding with the residue quotient. These inverse functors preserve the C-algebra diagram and all evaluations. Transport the colimit to obtain the specified presentation P and the local ring H.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring); schemes.tex Tag 01HV (lemma-spec-sheaves); algebra.tex Tag 04GW (lemma-strict-henselization-different)."
+   }
+  },
+  {
+   "text": "Choose an affine chart Spec D at x and lift the geometric point through it, with prime p. The affine-open stalk isomorphism C = D_p preserves chart germs and induces the given residue-field embedding into Omega. Transport P along this isomorphism and the corresponding identification of the separable closures inside Omega. Apply the affine strict-local comparison to obtain theta. Its structural equation becomes the equation with X.fromSpecStalk x because the stalk isomorphism preserves germs. The evaluation equation is preserved by the same residue embedding. Transport the local-ring structure back to H.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring); schemes.tex Tag 01HV (lemma-spec-sheaves); algebra.tex Tag 04GW (lemma-strict-henselization-different)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, with schemes.tex Tag 01HV and algebra.tex Tag 04GW: explicit ordinary-stalk transport of the published affine comparison; remaining part of smooth-strict-local-base-model step 3.",
+  "group": "A5",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The geometric strict henselization of a scheme at a geometric point is the strict henselization of its ordinary local ring with compatible structure map and geometric evaluation",
+   "results": "8 hits, including Scheme.residueField, Scheme.descResidueField and Scheme.fromSpecResidueField. Read ResidueField.lean:63-86 and Stalk.lean:270-296,355-366: these construct the ordinary residue map and local stalk map, but do not provide a strict henselization colimit presentation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictHenselization\", \"stalk\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|StrictHenselization",
+   "results": "0 hits in Mathlib/AlgebraicGeometry. Project search found affine_strict_local_ring_comparison, read its complete signature: it has base Localization.AtPrime p.asIdeal, not the actual scheme stalk, and assumes a presentation. Its statement supplies the chart comparison used in step 2.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothStrictLocalBaseModel",
+  "date": "2026-10-26",
+  "group": "A5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under local-term-locality (1)-(2), through smooth-strict-local-base-model step 3: identify the geometric strict-local ring with a pointed-etale presentation over the actual ordinary stalk.",
+   "via": [
+    "lem-trf-smooth-strict-local-base-model",
+    "lem-trf-smooth-geometric-stalk-algebra",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeometricStrictLocalStalkPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricStrictLocalStalkPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.geometricStrictLocal_stalk_presentation",
+  "statement": "theorem geometricStrictLocal_stalk_presentation\n    {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (x : Spec (.of Ω) ⟶ X)\n    [Algebra (IsLocalRing.ResidueField (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω)))) Ω]\n    (hΩ : algebraMap\n      (IsLocalRing.ResidueField (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω)))) Ω =\n        (descResidueField (stalkClosedPointTo x)).hom)\n    [Algebra (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω)))\n      (separableClosure\n        (IsLocalRing.ResidueField (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω)))) Ω)]\n    [IsScalarTower (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω)))\n      (IsLocalRing.ResidueField (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω))))\n      (separableClosure\n        (IsLocalRing.ResidueField (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω)))) Ω)] :\n    ∃ (H : Type u) (_ : CommRing H)\n      (_ : Algebra (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω))) H)\n      (P : Algebra.StrictHenselizationPresentationIn\n        (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω)))\n        (separableClosure\n          (IsLocalRing.ResidueField (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω)))) Ω) H)\n      (_ : IsLocalRing H) (θ : strictHenselizationRing x ≃+* H),\n      Spec.map (CommRingCat.ofHom θ.toRingHom) ≫ strictHenselizationStructuralMap x =\n        Spec.map (CommRingCat.ofHom\n          (algebraMap (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω))) H)) ≫\n            X.fromSpecStalk (x (IsLocalRing.closedPoint Ω)) ∧\n      (separableClosure\n        (IsLocalRing.ResidueField\n          (X.presheaf.stalk (x (IsLocalRing.closedPoint Ω)))) Ω).subtype.comp\n          (P.residueMap.comp θ.toRingHom) = strictHenselizationPointEvaluation x",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T091046-L-3302327",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T091046-L-3302327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

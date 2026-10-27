@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-abelian-degree-tate-valuation",
+ "kind": "statement",
+ "title": "Degree and Tate determinant have the same prime-adic absolute value",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety] of positive dimension, and let $\\ell$ be a prime different from $\\operatorname{char}k$. For a group-scheme endomorphism $a:A\\to A$ [def-sc-group-scheme], define $d(a)$ to be its isogeny degree, or zero if it is not an isogeny [def-sc-isogeny]. Let $V_\\ell(a)$ be the induced endomorphism of the rational Tate module $V_\\ell A$ [sk-def-av-tate]. Then, using the canonical image of $d(a)$ in $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers],\n$$|d(a)|_\\ell=|\\det(V_\\ell(a)\\mid V_\\ell A)|_\\ell.$$\nHere determinant is [def-weil-endomorphism-determinant]. In particular this equality includes non-isogenies, when both sides are zero, and inseparable isogenies.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, proof of Proposition 10.20, printed p.52, first display (isogeny case); positive-dimensional kernels and Tate rank give the non-isogeny case, as detailed in the report."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sc-isogeny",
+  "sk-def-av-tate",
+  "def-weil-l-adic-numbers",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=T_\\ell A$, $V=V_\\ell A$ and $h=2\\dim A$. By [prop-av-tate-rank], choose a $\\mathbf Z_\\ell$-basis of $T$ of size $h$; the same basis gives $V=T\\otimes\\mathbf Q_\\ell$. Let $F$ be the matrix of $T_\\ell(a)$, using the componentwise action of [sk-def-av-tate]. Its scalar extension represents $V_\\ell(a)$, so their determinants, computed from these basis matrices as in [def-weil-endomorphism-determinant], are the same after $\\mathbf Z_\\ell\\hookrightarrow\\mathbf Q_\\ell$.",
+   "uses": [
+    "prop-av-tate-rank",
+    "sk-def-av-tate",
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 10.5, printed p.45; proof of Proposition 10.20, printed p.52"
+   }
+  },
+  {
+   "text": "For any abelian variety $C/k$ and $n\\geq1$, projection to the $n$th coordinate induces $T_\\ell C/\\ell^nT_\\ell C\\simeq C[\\ell^n](k)$. Indeed, repeatedly use [lem-sc-isogeny-surjective] with the positive integer $\\ell$ to lift a point $x_n$ to $x_{n+1},x_{n+2},\\ldots$ with $\\ell x_{j+1}=x_j$, and set $x_j=\\ell^{n-j}x_n$ below level $n$. These points have the required torsion orders. For a compatible sequence $t$ with $t_n=0$, the sequence $s_j=t_{j+n}$ is killed by $\\ell^j$ and satisfies $\\ell^ns=t$; conversely $\\ell^nt$ has zero $n$th coordinate. This proves the kernel assertion and surjectivity directly from [sk-def-av-tate]. The identification commutes with $a$, by its coordinate formula. Thus $\\ker(F\\bmod\\ell^n)$ is exactly $(\\ker a)(k)[\\ell^n]$.",
+   "uses": [
+    "lem-sc-isogeny-surjective",
+    "sk-def-av-tate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Remark 7.3, printed p.34; Proposition 10.5, printed p.45; finite-level expansion of p.52"
+   }
+  },
+  {
+   "text": "First suppose $a$ is an isogeny. By [lem-sc-kernel-subgroup], its kernel $K$ is a closed subgroup, and it is a finite commutative group scheme of order $d=d(a)$ by [def-sc-isogeny] and [lem-sc-av-commutative]. Apply [lem-sfb-finite-group-scheme-primary-order] to $K$, with the given algebraically closed $k$ and invertible prime $\\ell$. If $b=v_\\ell(d)$, this gives $\\#K(k)[\\ell^n]=\\ell^b$ for every $n\\geq\\max(1,b)$. In particular the kernels of $F\\bmod\\ell^n$ have this fixed cardinality for all such $n$. This uses the full scheme order $d$, so a nonreduced kernel is allowed.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "def-sc-isogeny",
+    "lem-sc-av-commutative",
+    "lem-sfb-finite-group-scheme-primary-order"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I proof of Proposition 10.20, printed p.52, first and second equalities"
+   }
+  },
+  {
+   "text": "Use [def-weil-l-adic-numbers] to view $\\mathbf Z_\\ell$ as a DVR with uniformizer $\\ell$, and apply [lem-sfb-dvr-matrix-smith-powers] to $F$. Write its diagonal form as $r$ entries $\\ell^{c_i}$ and $h-r$ zeros. The invertible basis matrices remain invertible modulo $\\ell^n$. Multiplication by $\\ell^c$ on $\\mathbf Z_\\ell/\\ell^n\\simeq\\mathbf Z/\\ell^n\\mathbf Z$ has kernel cardinality $\\ell^{\\min(c,n)}$: if $c<n$ the kernel consists of multiples of $\\ell^{n-c}$, and if $c\\geq n$ it is the whole ring. A zero diagonal entry contributes $\\ell^n$. Hence\n$$\\#\\ker(F\\bmod\\ell^n)=\\ell^{n(h-r)+\\sum_i\\min(c_i,n)}.$$\nComparing with step 3 for arbitrarily large $n$ forces $r=h$; then taking $n$ at least all $c_i$ and $b$ gives $b=\\sum_i c_i$. The two invertible basis matrices have unit determinants (their determinants multiply those of their inverses to $1$), so $|\\det F|_\\ell=\\ell^{-\\sum_i c_i}=\\ell^{-b}=|d|_\\ell$. This proves the isogeny case.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "lem-sfb-dvr-matrix-smith-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I proof of Proposition 10.20, printed p.52, final determinant/index equality, expanded by DVR Smith form"
+   }
+  },
+  {
+   "text": "Now suppose $a$ is not an isogeny. The kernel $H=\\ker a$ is a closed subgroup scheme by [lem-sc-kernel-subgroup]. By [lem-sfb-abelian-closed-subgroup-reduced-component], its reduced identity component $B$ is an abelian subvariety of $A$ and $\\dim B=\\dim H$. If $\\dim B=0$, that node makes $H$ finite; since source and target of $a$ have equal dimension, [lem-sfb-finite-kernel-equal-dimension-isogeny] makes $a$ surjective, contradicting [def-sc-isogeny]. Hence $\\dim B>0$. By [prop-av-tate-rank], $T_\\ell B$ has positive rank. Its inclusion into $T_\\ell A$ is injective: each coordinate is a point of the closed subgroup $B$, so equality of its images means equality of the coordinates. Choose a nonzero $t\\in T_\\ell B$. Its image is nonzero and is killed by $T_\\ell(a)$, because $B\\subset H$.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "lem-sfb-abelian-closed-subgroup-reduced-component",
+    "lem-sfb-finite-kernel-equal-dimension-isogeny",
+    "def-sc-isogeny",
+    "prop-av-tate-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 7.1, printed p.32; reduced kernel discussion after Remark 10.2, printed p.43; Tate rank Proposition 10.5, printed p.45"
+   }
+  },
+  {
+   "text": "In the free coordinates of step 1, the nonzero image of $t$ remains nonzero over $\\mathbf Q_\\ell$: one of its coordinates is a nonzero element of the subring $\\mathbf Z_\\ell\\subset\\mathbf Q_\\ell$ of [def-weil-l-adic-numbers]. Thus $V_\\ell(a)$ has a nonzero kernel vector, so it is not invertible, and its determinant is zero by [def-weil-endomorphism-determinant]. By definition $d(a)=0$ in the non-isogeny case. Since $|0|_\\ell=0$, the required equality holds here also.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I proof of Proposition 10.20, printed p.52; non-isogeny zero case expanded from the kernel and rank inputs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-isogeny",
+  "def-weil-endomorphism-determinant",
+  "def-weil-l-adic-numbers",
+  "lem-sc-av-commutative",
+  "lem-sc-isogeny-surjective",
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-abelian-closed-subgroup-reduced-component",
+  "lem-sfb-dvr-matrix-smith-powers",
+  "lem-sfb-finite-group-scheme-primary-order",
+  "lem-sfb-finite-kernel-equal-dimension-isogeny",
+  "prop-av-tate-rank",
+  "sk-def-av-tate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I proof of Proposition 10.20, printed p.52: expanded finite-level torsion/Smith calculation; non-isogeny case from Proposition 7.1 and reduced kernel identity component."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an abelian variety endomorphism the ell adic absolute value of its isogeny degree equals the absolute value of its Tate module determinant including nonisogenies",
+   "results": "8 hits; top: Ideal.natAbs_det_equiv, Ideal.natAbs_det_basis_change, NumberField.Units.abs_det_eq_abs_det, Submodule.natAbs_det_equiv, FractionalIdeal.abs_det_basis_change, NumberField.mixedEmbedding.det_basisOfFractionalIdeal_eq_norm, NumberField.mixedEmbedding.fundamentalCone.abs_det_completeBasis_equivFunL_symm, NumberField.det_basisOfFractionalIdeal_eq_absNorm",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant-index theorems for integer lattices do not identify the geometric isogeny kernel with the Tate cokernel"
+  },
+  {
+   "tool": "grep",
+   "query": "tateModule|TateModule|isogeny",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant-index theorems for integer lattices do not identify the geometric isogeny kernel with the Tate cokernel"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ell primary order of an isogeny kernel equals the index of the induced map on its Tate module",
+   "results": "8 hits; top: FiniteField.orderOf_frobeniusAlgHom, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, Submodule.submodule_torsionBy_orderIso, Submodule.comapMkQOrderEmbedding_eq, Order.krullDim_eq_of_orderIso, ModuleCat.toKernelSubobject, Algebra.Extension.Cotangent.of, CategoryTheory.Limits.kernelOrderHom",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant-index theorems for integer lattices do not identify the geometric isogeny kernel with the Tate cokernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tateModule\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant-index theorems for integer lattices do not identify the geometric isogeny kernel with the Tate cokernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ell valuation of the degree of a homomorphism of abelian varieties equals the ell valuation of its determinant on the rational Tate module",
+   "results": "8 hits; top: WeierstrassCurve.valuation_Δ_aux, WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral, WeierstrassCurve.IsMinimal.val_Δ_maximal, NumberField.Units.finrank_mul_regOfFamily_eq_det, NumberField.Units.abs_det_eq_abs_det, Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two, NumberField.Units.finrank_mul_regulator_eq_det, WeierstrassCurve.coe_map_Δ'",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant-index theorems for integer lattices do not identify the geometric isogeny kernel with the Tate cokernel"
+  },
+  {
+   "tool": "grep",
+   "query": "tateModule|TateModule|isogeny",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ell adic absolute value of an abelian variety isogeny degree equals that of the determinant on the Tate module, with both zero for nonisogenies",
+   "results": "8 hits; Ideal.natAbs_det_equiv, NumberField.toNNReal_valued_eq_adicAbv, Ideal.natAbs_det_basis_change, NumberField.FinitePlace.norm_def, NumberField.Units.abs_det_eq_abs_det, Submodule.natAbs_det_equiv, NumberField.RingOfIntegers.HeightOneSpectrum.adicAbv_def, FractionalIdeal.abs_det_basis_change",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "f4b7df721619fa88"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The prime to characteristic part of the order of a finite group scheme over an algebraically closed field equals that of its group of points",
+   "results": "8 hits; prime_dvd_char_iff_dvd_card, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, IsPGroup.iff_card, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, charP_of_card_eq_prime, CharP.addOrderOf_one, IsAlgClosed.perfectRing, FiniteField.card",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "6cf0b1fae821c0b3"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PadicInt\", \"det\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective endomorphism of a finite free module over the p adic integers the cardinality of the cokernel is the inverse p adic norm of the determinant",
+   "results": "8 hits; Submodule.natAbs_det_equiv, Submodule.natAbs_det_basis_change, ClassGroup.cardM, ModN.natCard_eq, Ideal.natAbs_det_equiv, Ideal.natAbs_det_basis_change, ClassGroup.normBound, Module.Basis.SmithNormalForm.toAddSubgroup_index_eq_pow_mul_prod",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "b3f199eaf2083eed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smith normal form computes the kernel cardinality of a matrix modulo powers of a prime over the p adic integers",
+   "results": "8 hits; Module.Basis.SmithNormalForm.toAddSubgroup_index_eq_pow_mul_prod, Module.Basis.SmithNormalForm.toAddSubgroup_index_eq_ite, Module.Basis.SmithNormalForm.toAddSubgroup_index_ne_zero_iff, ClassGroup.cardM, Module.Basis.SmithNormalForm.a, Submodule.smithNormalFormCoeffs, Submodule.smithNormalFormCoeffs_ne_zero, Ideal.smithCoeffs",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "f81db4a10c1fc174"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite commutative group scheme over an algebraically closed field has the same ell primary order as its rational points when ell differs from the characteristic",
+   "results": "8 hits; prime_dvd_char_iff_dvd_card, Field.nonempty_iff, Fintype.isPrimePow_card_of_field, charP_of_card_eq_prime_pow, ZModModule.isPGroup_multiplicative, Fintype.nonempty_field_iff, FiniteField.card', FiniteField.card",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "b50f0c247d287b6b"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Ee]quiv|[Ee]quiv.*[Zz][Mm]od|isDiscreteValuation",
+   "results": "9 hits; Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/RingHoms.lean; Mathlib/NumberTheory/Padics",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "0427f02f6232465a"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*order|order.*connected|groupScheme|GroupScheme",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"isogeny\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between abelian varieties of equal dimension is an isogeny if and only if its kernel is finite",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.ker_eq_bot_of_isIso, AddMonoidHom.finite_iff_finite_ker_range, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot, MonoidHom.finite_iff_finite_ker_range, AlgebraicGeometry.Scheme.Hom.ker_comp_of_isIso, AddSubgroup.finiteIndex_ker, AlgebraicGeometry.IsFinite.instOfIsIsoScheme, AddCommGrpCat.kernelIsoKer",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "b768b5cfb204bfbb"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The primary torsion subgroup of rational points of a finite commutative group scheme has cardinality equal to the prime power part of its scheme theoretic order for a prime invertible in the field",
+   "results": "8 hits; AddCircle.card_torsion_le_of_isSMulRegular, AddCircle.card_addOrderOf_eq_totient, NumberField.Units.torsionOrder, AddCircle.card_torsion_le_of_isSMulRegular_int, card_addOrderOf_eq_totient_aux₂, ModN.natCard_eq, NumberField.Units.even_torsionOrder, NumberField.Units.torsionOrder_ne_zero",
+   "date": "2026-10-23",
+   "verdict": "no match for the geometric degree/Tate determinant equality; integer-lattice determinant formulas and abstract group facts do not supply it",
+   "digest": "052968a015ee6ed3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The valuation of the degree of an abelian variety endomorphism equals the valuation of its determinant acting on the rational Tate module",
+   "results": "8 hits; NumberField.Units.finrank_mul_regOfFamily_eq_det, IsBaseChange.det_endHom, NumberField.Units.finrank_mul_regulator_eq_det, NumberField.mixedEmbedding.fundamentalCone.abs_det_completeBasis_equivFunL_symm, LinearMap.finite_of_det_ne_one, NumberField.Units.abs_det_eq_abs_det, Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two, Ideal.natAbs_det_equiv",
+   "date": "2026-10-23",
+   "verdict": "no match: determinant base change is elementary here, but does not compare a geometric isogeny degree with Tate action",
+   "digest": "ac70f194617520ed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-tate-charpoly",
+  "date": "2026-10-23",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I, proof of Proposition 10.20, printed p.52, first display (isogeny case); positive-dimensional kernels and Tate rank give the non-isogeny case, as detailed in the report.",
+   "via": [
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-degree-tate-valuation",
+  "worker": "stage1",
+  "group": "Q48",
+  "summary": "Preserved the statement. Expanded Milne AV I p.52 into finite-level Tate projection, torsion cardinality and Smith determinant steps, then proved the non-isogeny case via the positive-dimensional reduced kernel. One statement-only finite-group-scheme primary-order input; reused the existing Smith form and finite-kernel isogeny criterion. No characteristic polynomial or relative Tate determinant citation, which would be circular.",
+  "blueprint": "Realizes the inherited from.place supporting the abelian Tate characteristic-polynomial input to det-thm-sf-ctf-stability-direct-images proof (3). Read current latest direct-images proof; this is a lower-node prerequisite, not a change of unit route. The ancestor command reports None; inherited null ancestor and via chain retained. Whole-blueprint searches for Tate module determinant, Tate cokernel, Smith, finite group scheme and connected-etale find no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "prop-av-tate-rank",
+    "why": "Generic abelian-variety Tate rank supplies integral and rational bases; no same-unit node gives rank."
+   },
+   {
+    "node": "lem-sc-isogeny-surjective",
+    "why": "Generic multiplication-surjectivity lifts finite torsion points to compatible Tate sequences."
+   },
+   {
+    "node": "lem-sc-av-commutative",
+    "why": "Generic commutativity makes the isogeny kernel a commutative finite group scheme."
+   },
+   {
+    "node": "lem-sfb-dvr-matrix-smith-powers",
+    "why": "Generic DVR matrix normal form computes finite-level kernels and determinant norm."
+   },
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic group-scheme kernel is a closed subgroup, needed for its reduced identity component."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-av-tate-rank",
+  "lem-sc-isogeny-surjective",
+  "lem-sc-av-commutative",
+  "lem-sfb-dvr-matrix-smith-powers",
+  "lem-sc-kernel-subgroup"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-dfb0acd29",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-dfb0acd29 (reviewer sub-agent of L); spot-checked: Read the item's six steps and the new node lem-sfb-finite-group-scheme-primary-order in full, against Milne AV I printed p.52 (proof of Prop. 10.20, first display) and Milne iAG Prop. 11.3, Cor. 11.30 and Cor. 11.31. The item statement and source are unchanged from live, the live item is still unsplit, and there is no cycle (the closure has neither the item nor its only citer lem-sfb-abelian-tate-charpoly). No SGA is cited. Step 2's T/l^n identification (lifting by lem-sc-isogeny-surjective, kernel via the shifted sequence s_j=t_{j+n}) is correct, and kernel points come from lem-sc-kernel-subgroup. Step 3 applies the new node with the scheme order, so nonreduced kernels are covered. Step 4's Smith-form count l^{n(h-r)+sum min(c_i,n)} forces r=h and sum c_i=b; the unit determinants then give |det F|=|d|. Step 5: when a is not an isogeny, B=(H_red)^0 has positive dimension, because a 0-dimensional B makes H finite and lem-sfb-finite-kernel-equal-dimension-isogeny would then make a surjective, hence an isogeny. T_l B is nonzero, maps injectively into T_l A, and is killed by T_l(a). Step 6 then gives det=0. The new node is true via the connected-etale splitting: the connected order is a power of the characteristic exponent, then take the l-primary part of the finite abelian group. Tested on mu_p, alpha_p, Z/l^2 and mixed products. It does not duplicate lem-sc-connected-finite-order, lem-sc-fg-order-prime-etale, lem-sfb-finite-group-scheme-order-annihilator or lem-sfb-finite-commutative-group-local-constant-product (the last is an ingredient of its future proof). It is not a clause of the item. The stronger lem-sfb-isogeny-relative-tate-determinant (unsplit) was rightly not cited. Batch-5 flags: lem-sc-isogeny-surjective and prop-av-tate-rank reach def-trf-schematically-dense-open only through the general Nagata/Chow/Hilbert-polynomial chain. That chain is no part of the trace formula or of Poincare duality, so both citations are accepted. The declared tool_uses (generic abelian-variety, group-scheme and Smith-form tools) are accepted. FIX: steps 1 and 6 now cite def-weil-endomorphism-determinant (basis-matrix determinant; invertible iff det is nonzero), and it is added to their uses and to proof_deps.; 1 file(s) fixed by the reviewer"
+ }
+}

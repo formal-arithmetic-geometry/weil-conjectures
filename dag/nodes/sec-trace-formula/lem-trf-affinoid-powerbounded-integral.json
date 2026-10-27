@@ -9,11 +9,79 @@
   "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
  },
  "stmt_deps": [
-  "def-trf-valuation-ring"
+  "def-trf-valuation-ring",
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-affinoid-quotient-norm-topology] to the given presentation $q$. Its quotient Gauss norm $\\|\\cdot\\|_q$ is equivalent to the affinoid Banach norm, so the hypothesis on powers gives a real $M\\ge1$ with $\\|c^m\\|_q\\le M$ for all $m\\ge0$. Write $\\rho_C$ for the maximal-ideal supremum of [lem-trf-affinoid-supremum-seminorm-calculus].",
+   "uses": [
+    "lem-trf-affinoid-quotient-norm-topology",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Proposition 4(i)-(ii), Proposition 19 alternative proof, and Theorem 16(iii)."
+   }
+  },
+  {
+   "text": "By [lem-trf-affinoid-supremum-seminorm-calculus], $\\rho_C(c)^m=\\rho_C(c^m)\\le\\|c^m\\|_q\\le M$ for every $m\\ge1$. If $\\rho_C(c)=1+\\delta$ with $\\delta>0$, the binomial expansion gives $\\rho_C(c)^m\\ge1+m\\delta$; choosing an integer $m>(M-1)/\\delta$ contradicts the bound. Therefore $\\rho_C(c)\\le1$.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Theorem 16, implication (iii) to (i), using Propositions 5 and 8."
+   }
+  },
+  {
+   "text": "The ideal $I=\\ker q$ is proper since $q(1)=1\\ne0$. Apply [lem-trf-tate-normalization-lift] to get an injection $\\iota:B=K\\langle U_1,\\ldots,U_d\\rangle\\to K\\langle T_1,\\ldots,T_r\\rangle$ for which $\\varphi=q\\iota:B\\to C$ is injective and finite. Here $K\\langle T\\rangle/I\\cong C$ by $f+I\\mapsto q(f)$, so the finite generating set given by normalization maps to a finite $B$-module generating set of $C$.",
+   "uses": [
+    "lem-trf-tate-normalization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Theorem 16, normalization step; Section 1.2, Corollary 10."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-affinoid-spectral-equation] to $\\varphi:B\\to C$ and $c$. This gives $n\\ge1$, $b_i\\in B$, and $c^n+\\sum_{i=1}^n\\varphi(b_i)c^{n-i}=0$ with $\\max_i\\rho_B(b_i)^{1/i}=\\rho_C(c)\\le1$. Thus each $\\rho_B(b_i)\\le1$. Both algebras are nonzero affinoids and $\\varphi$ is finite by step 3; no torsion-free or reducedness hypothesis is needed for this cited statement.",
+   "uses": [
+    "lem-trf-finite-affinoid-spectral-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Theorem 16, implication (i) to (ii), using Lemma 13."
+   }
+  },
+  {
+   "text": "For each $i$, [lem-trf-affinoid-supremum-seminorm-calculus] gives $\\|\\iota(b_i)\\|_G=\\rho_{K\\langle T\\rangle}(\\iota(b_i))\\le\\rho_B(b_i)\\le1$. Every coefficient of the restricted series $\\iota(b_i)$ therefore has absolute value at most one, so $\\iota(b_i)\\in V\\langle T\\rangle$ and $a_i=q(\\iota(b_i))=\\varphi(b_i)\\in D$. The monic polynomial $X^n+\\sum_{i=1}^n a_iX^{n-i}\\in D[X]$ has positive degree and vanishes at $c$ by step 4. This uses the original $q$, without changing its unit ball.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Theorem 16, final coefficient estimate from Propositions 6 and 7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-quotient-norm-topology",
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-tate-normalization-lift",
+  "lem-trf-finite-affinoid-spectral-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.4, Theorem 16, printed pp.28-29. Reconstruction of its (iii) to (i) to (ii) argument from primary PDF read online; archival copy WANTED. Norm-topology input uses the open mapping alternative to Proposition 19 to avoid circular use of Theorem 16."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +117,88 @@
    "results": "8 hits; read results: IsIntegral.pow_iff, IsIntegral.pow, IsAlmostIntegral, IsIntegral, IsIntegral.of_pow, PowerBasis.repr_gen_pow_isIntegral, completeIntegralClosure, PowerBasis.repr_pow_isIntegral.  No match: IsAlmostIntegral is a different condition, and its conversion to integrality is not automatic. IsIntegral.pow and algebraic field norm lemmas do not derive integrality from power boundedness in an affinoid.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "power.?bounded|IsAlmostIntegral|IsIntegral.*(norm|Norm)|integral.*unit.ball",
+   "results": {
+    "t": "2026-10-24T08:06:01Z",
+    "tool": "grep",
+    "query": "power.?bounded|IsAlmostIntegral|IsIntegral.*(norm|Norm)|integral.*unit.ball",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/NumberField/Norm.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean"
+    ],
+    "digest": "c306f332ef7b8f45"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: almost integral elements and algebraic integral powers do not imply the analytic affinoid statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A power bounded element of an affinoid algebra is integral over the image of the unit ball of any presentation by a Tate algebra",
+   "results": {
+    "t": "2026-10-24T08:06:01Z",
+    "tool": "leanfinder",
+    "query": "A power bounded element of an affinoid algebra is integral over the image of the unit ball of any presentation by a Tate algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsAlmostIntegral",
+     "PowerBasis.repr_pow_isIntegral",
+     "PowerBasis.isIntegral_gen",
+     "mem_completeIntegralClosure",
+     "PowerBasis.repr_gen_pow_isIntegral",
+     "completeIntegralClosure",
+     "IsIntegral.isAlmostIntegral",
+     "IsIntegrallyClosed.exists_algebraMap_eq_of_isIntegral_pow"
+    ],
+    "digest": "58638cfb18b52d99"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: almost integral elements and algebraic integral powers do not imply the analytic affinoid statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Power bounded elements of an affinoid algebra are integral over the image of the Tate algebra unit ball",
+   "results": {
+    "t": "2026-10-24T08:06:01Z",
+    "tool": "leansearch",
+    "query": "Power bounded elements of an affinoid algebra are integral over the image of the Tate algebra unit ball",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsIntegral.pow_iff",
+     "IsIntegral.pow",
+     "IsAlmostIntegral",
+     "IsIntegral",
+     "IsIntegral.of_pow",
+     "PowerBasis.repr_gen_pow_isIntegral",
+     "completeIntegralClosure",
+     "PowerBasis.repr_pow_isIntegral"
+    ],
+    "digest": "23b3860ef93c3e4f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: almost integral elements and algebraic integral powers do not imply the analytic affinoid statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-grauert-remmert-powerbounded",
@@ -87,5 +233,49 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affinoid-powerbounded-integral",
+  "worker": "stage1",
+  "summary": "Q149 retained the statement and historical searches, found no live Lean attachment, and supplied the five-step Bosch argument through four analytic inputs, each statement-only and searched twice semantically. Bounded powers, normalization, coefficient bounds, and membership in the original presentation image are handled separately.",
+  "blueprint": "Historical analytic input under lem-trf-local-term-locality via the Temkin normalization chain recorded in blueprint.from. Latest blueprint proof (1)-(2) uses contracting correspondences and does not mention affinoids; this split only realizes the already imported analytic prerequisite and does not replace a current unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-df62fa988",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-df62fa988 (reviewer sub-agent of L); spot-checked: Bosch 2008 is not in literature/ and network access is blocked here, so I could not open the cited places. The worker recorded WANTED and proof_origin.by=agent, and I checked every statement myself. Item statement unchanged, the general A° integral over α(R<T>) with no reducedness assumed; tested on r=0, K<T>/(T^2) with a large multiple of ε (X^2=0, ρ=0) and K×K (idempotent X^2−X). Step 1: the open-mapping norm equivalence turns topological bounds into quotient-norm bounds, and the hypotheses of the quotient-norm node hold. Step 2: positive-power rule plus ρ≤‖·‖_q for the same q; the (1+δ)^m argument is elementary. Step 3: ker q proper since C≠0; the normalization lift makes φ=qι injective and finite. Step 4: Lemma-13 node applied with B=K<U>; max ρ_B(b_i)^{1/i}=ρ_C(c)≤1 gives ρ_B(b_i)≤1. Step 5: contractivity for ι plus ρ=Gauss norm on Tate algebras puts ι(b_i) in V<T>, so a_i=q(ι(b_i)) lies in D for the original q. New nodes are all true. Quotient-norm node: ker q closed, open mapping theorem, no circle through Thm 16. Supremum node: maximal ideals of A pull back to maximal ideals, the absolute value extends uniquely, |h(x)|≤‖h‖_G, maximum modulus. Normalization lift: Weierstrass automorphism σ composed with the inclusion. Spectral equation, true without injectivity or reducedness: reduce through lifted normalizations to a finite injective T_d→A, take minimal polynomials over the normal T_d on each minimal-prime component, raise the product to a nilpotent-killing power, and map contractively into B. No new node restates the item; the proof is a short assembly of the four nodes. rg -L duplicate search over the DAG: the closest existing node is lem-per-tate-maximal-residue-evaluation, which covers only the supremum node's setup clause for T_r itself, so it is not a duplicate; the supremum node's later split should cite it and lem-per-banach-character-norm-bound. The spectral node's stmt_dep on the supremum lemma is acceptable at stage 1; flag it for stage 2. No blueprint text on affinoids, so same_as [] is correct. Three kinds of search recorded for every node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffinoidPowerboundedIntegral",
+  "declaration": "RestrictedSeries.affinoid_powerbounded_integral",
+  "file": "lean/Sheaf/RingTheory/AffinoidPowerboundedIntegral.lean",
+  "statement": "theorem affinoid_powerbounded_integral (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (V : ValuationSubring K) (hV : ∀ a : K, a ∈ V ↔ ‖a‖ ≤ 1) (r : ℕ) (C : Type v) [NormedCommRing C] [Nontrivial C] [NormedAlgebra K C] [IsUltrametricDist C] [CompleteSpace C] (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* C) (hscalar : q.comp (constants K r) = algebraMap K C) (hsurj : Function.Surjective q) (hcont : ∀ s, ∀ ε : ℝ, 0 < ε → ∃ δ : ℝ, 0 < δ ∧ ∀ t, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (t.val - s.val) < δ → ‖q t - q s‖ < ε) (c : C) (hbounded : ∃ M : ℝ, ∀ m : ℕ, ‖c ^ m‖ ≤ M) : ∃ p : Polynomial C, p.Monic ∧ 0 < p.natDegree ∧ p.eval c = 0 ∧ ∀ i : ℕ, ∃ s : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))), (∀ ν : Fin r →₀ ℕ, MvPowerSeries.coeff ν s.val ∈ V) ∧ q s = p.coeff i",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ad03aabb",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Clause-by-clause: K is a complete ultrametric NontriviallyNormedField; V is pinned to the unit ball by hV (ValuationSubring, the def-trf-valuation-ring notion); the Tate algebra is Mathlib IsRestricted.subring at polyradius 1 with the recorded RestrictedSeries.constants; C is a nonzero complete ultrametric NormedAlgebra with q continuous for the Gauss norm, surjective and scalar-compatible, the same encoding as the landed AffinoidQuotientNormTopology; by the open mapping theorem this is exactly the affinoid topology, with no stronger assumption. Conclusion: monic p in C[X] of positive degree vanishing at c, each coefficient lifting through q to a series with coefficients in V, equivalent to a polynomial over D=q(V<T>). Edge cases r=0, c=0/1, nilpotent of large norm in K<T>/(T^2), idempotent in KxK, C=0 excluded. Only the node's lean field changed; lean.statement verbatim in the file; single sorry; public imports for statement deps, plain imports for proof deps; docstrings carry the Bosch place, blueprint id and five proof steps; max line 87; universes u,v bound. No duplicate declaration. Not compiled: no file changed. Bosch PDF not in literature/ (WANTED); mathematics judged directly."
+ }
 }

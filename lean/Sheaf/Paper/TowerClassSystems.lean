@@ -10,6 +10,8 @@ public import Sheaf.Paper.DiagonalTowerSystem
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
+import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+
 /-! # Systems for canonical tower classes
 
 Source: blueprint main-20261015, sec-smooth-purity,
@@ -78,7 +80,8 @@ constant-system functor preserves them, including the additive group laws. -/
 theorem constant_exact (T : Scheme.{u}) :
     (constant T).Additive ∧ PreservesFiniteLimits (constant T) ∧
       PreservesFiniteColimits (constant T) := by
-  sorry
+  unfold constant
+  exact ⟨⟨fun {_ _ _ _} ↦ rfl⟩, inferInstance, inferInstance⟩
 
 /-- Additivity of constant systems. Source: classes (2)
 (blueprint: def-sp-tower-class-systems). -/
@@ -187,6 +190,127 @@ structure Forget (T : Scheme.{u})
 
 attribute [instance] Forget.additive Forget.limits Forget.colimits
 
+private theorem cast_int_natural {A A' : AddCommGrpCat.{u + 1}}
+    {R S : CommRingCat.{u + 1}}
+    (e : A = AddCommGrpCat.of R) (e' : A' = AddCommGrpCat.of S)
+    (f : A ⟶ A') (g : R ⟶ S) (h : HEq f.hom g.hom.toAddMonoidHom) (k : ℤ) :
+    f ((eqToHom e.symm) (k : R)) = (eqToHom e'.symm) (k : S) := by
+  subst A
+  subst A'
+  have hh := eq_of_heq h
+  change f.hom (k : R) = (k : S)
+  rw [hh]
+  exact map_intCast g.hom k
+
+private theorem coefficientGroupEq (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (F : Forget T B) (n : ℕ) (U : T.ProEtᵒᵖ) :
+    ((F.F.obj (coefficient T B)).obj (op n)).obj.obj U =
+      AddCommGrpCat.of ((B.obj (op n)).obj.obj U) :=
+  F.sections (coefficient T B) n U
+
+private def integerSectionMap (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (F : Forget T B) (n : ℕ) (U : T.ProEtᵒᵖ) :
+    AddCommGrpCat.of (ULift.{u + 1} ℤ) ⟶
+      ((F.F.obj (coefficient T B)).obj (op n)).obj.obj U :=
+  AddCommGrpCat.ofHom
+    (((eqToHom (coefficientGroupEq T B F n U).symm).hom).comp
+      ((Int.castAddHom ((B.obj (op n)).obj.obj U)).comp
+        AddEquiv.ulift.toAddMonoidHom))
+
+private abbrev coefficientRingPresheaf (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :=
+  SemilinearSections.ringPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
+    (fun n ↦ B.obj (op n)) (fun n ↦ B.map (homOfLE (Nat.le_succ n)).op)
+
+private theorem integerSectionMap_restrictions (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (F : Forget T B) (n : ℕ) {U V : T.ProEtᵒᵖ} (f : U ⟶ V) :
+    integerSectionMap T B F n U ≫
+      ((F.F.obj (coefficient T B)).obj (op n)).obj.map f =
+        integerSectionMap T B F n V := by
+  ext k
+  apply cast_int_natural (coefficientGroupEq T B F n U)
+    (coefficientGroupEq T B F n V) _
+    ((coefficientRingPresheaf T B).map (Prod.mkHom (𝟙 n) f.unop).op)
+  exact F.restrictions (coefficient T B) n f
+
+private theorem int_cast_transport {A : AddCommGrpCat.{u + 1}}
+    {R : CommRingCat.{u + 1}} (e : A = AddCommGrpCat.of R) (k : ℤ) :
+    HEq ((eqToHom e.symm) (k : R)) (k : R) := by
+  subst A
+  rfl
+
+private theorem integerSectionMap_spec (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (F : Forget T B) (n : ℕ) (U : T.ProEtᵒᵖ) (k : ULift.{u + 1} ℤ) :
+    HEq (integerSectionMap T B F n U k) (k.down : (B.obj (op n)).obj.obj U) :=
+  int_cast_transport (coefficientGroupEq T B F n U) k.down
+
+private def integerPresheafMap (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (F : Forget T B) (n : ℕ) :
+    (Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)) ⟶
+      ((F.F.obj (coefficient T B)).obj (op n)).obj where
+  app := integerSectionMap T B F n
+  naturality U V f := by
+    change 𝟙 _ ≫ integerSectionMap T B F n V =
+      integerSectionMap T B F n U ≫ _
+    rw [Category.id_comp]
+    exact (integerSectionMap_restrictions T B F n f).symm
+
+private def integerLevelMap (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (F : Forget T B) (n : ℕ) :
+    (constantSheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of (ULift.{u + 1} ℤ)) ⟶
+        (F.F.obj (coefficient T B)).obj (op n) where
+  hom := sheafifyLift (Scheme.ProEt.topology T) (integerPresheafMap T B F n)
+    ((F.F.obj (coefficient T B)).obj (op n)).property
+
+private theorem integerLevelMap_spec (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (F : Forget T B) (n : ℕ) (U : T.ProEtᵒᵖ) (k : ULift.{u + 1} ℤ) :
+    HEq ((integerLevelMap T B F n).hom.app U
+      ((toSheafify (Scheme.ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj
+          (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U k))
+      (k.down : (B.obj (op n)).obj.obj U) := by
+  have h := congrArg (fun a ↦ a.app U k)
+    (toSheafify_sheafifyLift (Scheme.ProEt.topology T) (integerPresheafMap T B F n)
+      ((F.F.obj (coefficient T B)).obj (op n)).property)
+  exact h.heq.trans (integerSectionMap_spec T B F n U k)
+
+private theorem integerSectionMap_transitions (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (F : Forget T B) (n : ℕ) (U : T.ProEtᵒᵖ) :
+    integerSectionMap T B F (n + 1) U ≫
+      ((F.F.obj (coefficient T B)).map (homOfLE (Nat.le_succ n)).op).hom.app U =
+        integerSectionMap T B F n U := by
+  ext k
+  apply cast_int_natural (coefficientGroupEq T B F (n + 1) U)
+    (coefficientGroupEq T B F n U) _
+    ((coefficientRingPresheaf T B).map
+      (Prod.mkHom (homOfLE (Nat.le_succ n)) (𝟙 U.unop)).op)
+  exact F.transitions (coefficient T B) (Nat.le_succ n) U
+
+private theorem integerLevelMap_transitions (T : Scheme.{u})
+    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
+    (F : Forget T B) (n : ℕ) :
+    integerLevelMap T B F (n + 1) ≫
+      (F.F.obj (coefficient T B)).map (homOfLE (Nat.le_succ n)).op =
+        integerLevelMap T B F n := by
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext (Scheme.ProEt.topology T) _ _
+    ((F.F.obj (coefficient T B)).obj (op n)).property
+  change toSheafify _ _ ≫ (sheafifyLift _ (integerPresheafMap T B F (n + 1)) _ ≫
+    ((F.F.obj (coefficient T B)).map (homOfLE (Nat.le_succ n)).op).hom) =
+      toSheafify _ _ ≫ sheafifyLift _ (integerPresheafMap T B F n) _
+  rw [← Category.assoc, toSheafify_sheafifyLift, toSheafify_sheafifyLift]
+  ext U k
+  exact congrArg (fun a ↦ a k) (integerSectionMap_transitions T B F n U)
+
 /-- The quotient of the constant integer tower is fixed on every constant section.
 Source: classes (2), coefficient unit (blueprint: def-sp-tower-class-systems).
 Proof: at each level the integer acts on the coefficient unit by its integer
@@ -202,7 +326,20 @@ theorem integerGenerator_existsUnique (T : Scheme.{u})
             ((Functor.const T.ProEtᵒᵖ).obj
               (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U k))
           (k.down : (B.obj (op n)).obj.obj U) := by
-  sorry
+  let f : integers T ⟶ F.F.obj (coefficient T B) :=
+    NatTrans.ofOpSequence (integerLevelMap T B F) (fun n ↦ by
+      change 𝟙 _ ≫ integerLevelMap T B F n = integerLevelMap T B F (n + 1) ≫ _
+      rw [Category.id_comp]
+      exact (integerLevelMap_transitions T B F n).symm)
+  refine ⟨f, integerLevelMap_spec T B F, ?_⟩
+  intro g hg
+  apply NatTrans.ext
+  funext n
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext (Scheme.ProEt.topology T) _ _
+    ((F.F.obj (coefficient T B)).obj n).property
+  ext U k
+  exact eq_of_heq ((hg n.unop U k).trans (integerLevelMap_spec T B F n.unop U k).symm)
 
 /-- The canonical integer-to-coefficient quotient, fixed by constant generators.
 Source: classes (2) (blueprint: def-sp-tower-class-systems). -/

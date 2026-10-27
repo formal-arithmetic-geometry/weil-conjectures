@@ -292,5 +292,34 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-703c34465 (reviewer sub-agent of L); spot-checked: Read the full item: statement, 7 steps, 20 proof_deps and 4 stmt_deps statements, the blueprint_updates, unit sk-i-curve-zero, chapter sec-trace-formula, and the parent's transitivity step. Sources read: Stacks topologies.tex 0DBF(2) with 0DBD, and limits.tex 0202. No SGA is used. The statement matches 0DBF(2) hypothesis by hypothesis. Its form (a T-morphism Z_a->V_ji, so r|Z_a factors through V_ji->U_j->T) is exactly what the parent's sieve-transitivity step needs. Step-by-step checks: S2 applies the Chow node correctly over an affine (hence qcqs) U_j; the closed-immersion form agrees with 0202, since an immersion from a proper source is closed. The A_ji are kept non-affine and still map to the original V_ji. S3: P_j and W_j are qcqs by qcqs-over-affine, so g_j is qcqs by morphism-permanence (1). The image-restriction hypotheses hold, including the weaker qc-only blueprint_update. g_W=b_j and SIm(b_j)=W_j, so W_j = W̄_j x_U U_j as an open subscheme. S4: the two-summand coproduct is proper by a short check from the definitions; marking it elementary is acceptable, and no existing node states it. Surjectivity holds and c_j^{-1}(U_j)=W_j. S5: the induction with base Z^(0)=U is set up correctly, using surjective base change. S6: the covering argument and the commutativity over T are both correct. S1 and S7 cover the edge cases: T empty, U_j empty, n_j=0, N>0. Small cases tested: P^1 over a field with two charts, and U=P^1 with identity V_j; the latter gives Z = P^1 ⊔ {0} ⊔ {∞}. Both work. No duplicates in the DAG (rg for 0DBF and standard ph) and no new nodes. All six declared tool_uses are accepted as generic geometric black boxes. Remarks: the report flags a possible Noetherian assumption in the slopmaster2 Lean attached to sk-thm-chow-projective; that is the owner's audit question and not a fault here. No fixes written."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StandardPhCompositeRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.standard_ph_composite_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardPhCompositeRefinement.lean",
+  "statement": "theorem standard_ph_composite_refinement (S : Scheme.{u}) (T : Over S) [IsAffine T.left] (U : Scheme.{u}) (p : U ⟶ T.left) [IsProper p] (hp : Function.Surjective p) (m : ℕ) (Uj : Fin m → U.Opens) (hUaff : ∀ j, IsAffineOpen (Uj j)) (hUcover : (⨆ j, Uj j) = ⊤) (V : Fin m → Scheme.{u}) (q : ∀ j, V j ⟶ (Uj j).toScheme) (hqproper : ∀ j, IsProper (q j)) (hqsurj : ∀ j, Function.Surjective (q j)) (n : Fin m → ℕ) (Vji : ∀ j, Fin (n j) → (V j).Opens) (hVaff : ∀ j i, IsAffineOpen (Vji j i)) (hVcover : ∀ j, (⨆ i, Vji j i) = ⊤) : ∃ (Z : Scheme.{u}) (r : Z ⟶ T.left), IsProper r ∧ Function.Surjective r ∧ ∃ (N : ℕ) (Za : Fin N → Z.Opens), (∀ a, IsAffineOpen (Za a)) ∧ (⨆ a, Za a) = ⊤ ∧ ∀ a, ∃ (j : Fin m) (i : Fin (n j)) (f : (Za a).toScheme ⟶ (Vji j i).toScheme), f ≫ (Vji j i).ι ≫ q j ≫ (Uj j).ι ≫ p = (Za a).ι ≫ r",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cec329294",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read node, Tag 0DBF(2) source and proof (topologies.tex 2336-2406), the 4 stmt_dep records, the module and the report. All hypotheses (IsAffine T.left; IsProper and surjective p and q j; Fin-indexed affine opens with sup = top; n depending on j) and conclusions (proper surjective r; finite affine cover Za; for each a, (j,i) and f with f ≫ Vji.ι ≫ q j ≫ Uj.ι ≫ p = Za.ι ≫ r) match, with quantifier order kept and no extra assumptions; single universe u. Edge cases ok: empty T (N=0), m=0, n j=0, nonempty T forces N>0. lean.statement verbatim in file; one sorry, no defs; docstrings carry source place, blueprint id and the 7 proof steps; only a lean block added to the node; report has Worker report and Second reading sections. No duplicate: ph_affine_standard_sieve_basis is the consumer and does not state this lemma; Mathlib searches found nothing. Advisory: the ChowModification proof-dep attachment assumes a Noetherian base (proof stage only). No compile run because nothing was changed."
+ }
 }

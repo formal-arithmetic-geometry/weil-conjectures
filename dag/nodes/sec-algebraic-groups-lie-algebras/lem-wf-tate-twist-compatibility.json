@@ -228,7 +228,30 @@
   "def-weil-pbc-proetale-site"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.tateTwistSheafIso",
+     "module": "WeilConjectures.WeilSheaf.TateTwistCohomology",
+     "lines": [
+      256,
+      264
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-p-cyclotomic",
  "split_report": {
@@ -320,5 +343,26 @@
   "group": "Q12",
   "result": "pass",
   "note": "Read item, 3 stmt_deps, source place, both modules (item + §1(B) WfTateTwist), report, and the used declarations (WeilD/weilScalarExtension, pbcTate*, rootLineMap/signedLineMaps, IsPurRootLimitComparison, pbcConditionalRational, mapOfNatIso). Clauses match: inherited sep/finite-type hyps only; clause 1 = IsIso + projection identity of the actual root-limit map, which by definition underlies rationalLineMap 1 (∃!-pinned to signedLineMaps); clause 2 ∀ m:ℤ, E≤F (E=F, ramified allowed), Nonempty iso in functors to WeilD F, so the Frobenius square is included. The §1(B) repair is justified (upstream record is a Q̄ constant twist on WeilComplex) and faithful: degree-0 signed lines, evaluation-normalized negative maps = H(φ⁻¹,φ), tensor Weil map (φ_K⊗φ_m)∘μ via ∃!-pinned comparisons; the ordinary flat-line tensor instead of the completed tensor is the identification of the item's steps 1/5 and wf_tensor_weil gives only ∃ T W. Only lean fields changed, the item statement matches the file, all helpers are listed, ≤100 chars, sorry only, docstrings with 9 steps, proof-dep imports present, Mathlib ProEt. Advisories: rootLineMap/IsPurRootLimitComparison owners not in stmt_deps (H2 forbids adding them); Nonempty for clause 2 is fine since no citer needs β. No recompile (no changes)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For every $m\\in\\mathbf Z$, the functorial pullback of roots of unity\ngives a strict arrow\n$\\Phi_X^*\\Lambda_X(1)\\stackrel{\\sim}{\\to}\\Lambda_X(1)$ (the structure $\\tau_1$), and the Tate twist functor\n$(-)(m)$ of [def-wf-tate-twist] commutes with finite scalar\nextension.",
+  "proof": [
+   {
+    "text": "For finite coefficients $A$ the sheaf $A_X(1)=\\mu_{\\ell^r,X}\\otimes A_X$ of\n[sk-def-sp-tate-twist] receives the canonical isomorphism\n$\\Phi_X^*\\mu_{\\ell^r,X}\\cong\\mu_{\\ell^r,X}$, and the $\\ell$-power maps are\n$\\Phi_X$-equivariant. Since $\\Phi_X$ is an automorphism of $X$, the pullback\n$\\Phi_X^*$ is an equivalence of pro-étale topoi and commutes with the inverse limit\n$\\cO_{E,X}(1)=\\varprojlim_n(\\cO_E/\\ell^n)_X(1)$, with inverting $\\ell$ and with the\ncolimit over $E$; this gives the strict arrow on $\\Lambda_X(1)$. The induced arrows\nfor tensor products and duals give the cases $m>0$ and $m<0$ by\n[lem-wf-tensor-weil] and [lem-wf-internal-hom-weil]. For a finite extension\n$F/E$ one has $F_X(m)=F_X\\otimes_{E_X}E_X(m)$ by construction, compatibly with the\nWeil structures, so $(-)(m)$ commutes with finite scalar extension; functoriality in\n$m$ follows from the same constructions being natural.",
+    "uses": [
+     "sk-def-sp-tate-twist",
+     "lem-wf-tensor-weil",
+     "lem-wf-internal-hom-weil"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

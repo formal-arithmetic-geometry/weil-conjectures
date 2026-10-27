@@ -11,6 +11,11 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIsomorphismInverseImage
 public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 
+import Sheaf.Paper.PbcRationalAutomorphismScalarCoherence
+import Mathlib.CategoryTheory.Preadditive.EndoFunctor
+import WeilConjectures.AlgebraicGeometry.FibreDimension
+import Mathlib.Algebra.CharP.CharAndCard
+
 /-!
 # Completed coefficient transport and Weil categories
 
@@ -33,9 +38,17 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
-
-
-
+attribute [local irreducible] ScalarLocalization.category ScalarLocalization.preadditive
+  ScalarLocalization.composition ScalarLocalization.linear ScalarLocalization.linearOriginal
+  AlgebraicGeometry.Scheme.pbcIntegralLinear AlgebraicGeometry.Scheme.pbcCompletedDerivedLinear
+  AlgebraicGeometry.Scheme.pbcCompletedModulesLinear
+attribute [local irreducible] Padic.coefficientExtensionIntegers
+  Padic.coefficientExtensionUniformizer AlgebraicGeometry.Scheme.pbcScalarExtension
+  AlgebraicGeometry.Scheme.pbcScalarAssociator
+  AlgebraicGeometry.Scheme.pbcIsoRationalScalarComparison
+  AlgebraicGeometry.Scheme.pbcIntegralDatum AlgebraicGeometry.Scheme.pbcUniformizer
+  AlgebraicGeometry.Scheme.pbcCompletedScalarSections
+  AlgebraicGeometry.Scheme.pbcCompletedSection AlgebraicGeometry.Scheme.pbcCompletedScalar
 
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
@@ -58,11 +71,149 @@ Forgetting the structure is injective on each Hom set, so the displayed
 equations determine the group operations and the preadditive structure uniquely. -/
 theorem preadditive_exists :
     ∃! P : Preadditive (IsoAlgebra F), PreadditiveNormalized F P := by
-  sorry
+  let P : Preadditive (IsoAlgebra F) :=
+    inferInstanceAs (Preadditive (Algebra.IsIsoStr F).FullSubcategory)
+  refine ⟨P, ?_, ?_⟩
+  · intro K L f g
+    exact ⟨rfl, rfl⟩
+  · intro Q hQ
+    apply Preadditive.ext
+    funext K L
+    apply AddCommGroup.ext
+    funext f g
+    apply ObjectProperty.hom_ext
+    apply Algebra.Hom.ext
+    exact (hQ K L f g).1
 
 /-- The group structure with its specified faithful underlying morphisms.
 Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
 instance preadditive : Preadditive (IsoAlgebra F) := (preadditive_exists F).exists.choose
+
+section Cocycle
+universe w v' z'
+variable {I : Type w} [Preorder I] {A : I → Type z'} [∀ i, Category.{v'} (A i)]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem normalized_cocycle (S : StageSystem A) (P : ∀ i, A i ⥤ A i)
+    (e : ∀ {i j} (h : i ≤ j), S.T h ⋙ P j ≅ P i ⋙ S.T h)
+    (a : ∀ {i j k} (h : i ≤ j) (k : j ≤ k),
+      mapOfNatIso (e h) ⋙ mapOfNatIso (e k) ≅ mapOfNatIso (e (h.trans k)))
+    (ha : ∀ {i j k} (h : i ≤ j) (k : j ≤ k) (K : IsoAlgebra (P i)),
+      ((a h k).hom.app K).hom.f = (S.assoc h k).hom.app K.carrier)
+    {i j k l : I} (h : i ≤ j) (g : j ≤ k) (f : k ≤ l) (K : IsoAlgebra (P i)) :
+    (mapOfNatIso (e f)).map ((a h g).hom.app K) ≫ (a (h.trans g) f).hom.app K =
+      (a g f).hom.app ((mapOfNatIso (e h)).obj K) ≫ (a h (g.trans f)).hom.app K := by
+  apply ObjectProperty.hom_ext
+  apply Algebra.Hom.ext
+  change (S.T f).map ((a h g).hom.app K).hom.f ≫
+      ((a (h.trans g) f).hom.app K).hom.f =
+    ((a g f).hom.app ((mapOfNatIso (e h)).obj K)).hom.f ≫
+      ((a h (g.trans f)).hom.app K).hom.f
+  rw [ha, ha, ha, ha]
+  exact S.cocycle h g f K.carrier
+
+/-- Lift the scalar associator using its compatibility with the endofunctors. -/
+private theorem normalized_associator_exists (S : StageSystem A) (P : ∀ i, A i ⥤ A i)
+    (e : ∀ {i j} (h : i ≤ j), S.T h ⋙ P j ≅ P i ⋙ S.T h)
+    {i j k : I} (h : i ≤ j) (g : j ≤ k)
+    (hc : ∀ K : A i,
+      (P k).map ((S.assoc h g).hom.app K) ≫ (e (h.trans g)).hom.app K =
+        (e g).hom.app ((S.T h).obj K) ≫ (S.T g).map ((e h).hom.app K) ≫
+          (S.assoc h g).hom.app ((P i).obj K)) :
+    ∃! a : mapOfNatIso (e h) ⋙ mapOfNatIso (e g) ≅ mapOfNatIso (e (h.trans g)),
+      ∀ K : IsoAlgebra (P i), (a.hom.app K).hom.f = (S.assoc h g).hom.app K.carrier := by
+  let a : mapOfNatIso (e h) ⋙ mapOfNatIso (e g) ≅ mapOfNatIso (e (h.trans g)) :=
+    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _
+      (Algebra.isoMk ((S.assoc h g).app K.carrier) (by
+        change (P k).map ((S.assoc h g).hom.app K.carrier) ≫
+            ((e (h.trans g)).hom.app K.carrier ≫ (S.T (h.trans g)).map K.obj.str) =
+          ((e g).hom.app ((S.T h).obj K.carrier) ≫
+            (S.T g).map ((e h).hom.app K.carrier ≫ (S.T h).map K.obj.str)) ≫
+              (S.assoc h g).hom.app K.carrier
+        rw [← Category.assoc, hc]
+        simp only [Functor.map_comp, Category.assoc]
+        have hn := (S.assoc h g).hom.naturality K.obj.str
+        dsimp only [Functor.comp_map] at hn
+        rw [hn]))) (by
+          intro K L f
+          apply ObjectProperty.hom_ext
+          apply Algebra.Hom.ext
+          exact (S.assoc h g).hom.naturality f.hom.f)
+  refine ⟨a, fun _ ↦ rfl, ?_⟩
+  intro b hb
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  apply ObjectProperty.hom_ext
+  apply Algebra.Hom.ext
+  exact hb K
+
+end Cocycle
+
+section AdditiveTransport
+variable {D' : Type*} [Category D'] [Preadditive D']
+  {G : D' ⥤ D'} [G.Additive] {L : C ⥤ D'} [L.Additive]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The specified inherited sums make transport additive.
+Source: underlying morphism formula (blueprint: def-wf-weil-category). -/
+private theorem normalized_map_additive (e : L ⋙ G ≅ F ⋙ L) :
+    (mapOfNatIso e).Additive := by
+  refine ⟨fun {K K'} f g ↦ ?_⟩
+  apply ObjectProperty.hom_ext
+  apply Algebra.Hom.ext
+  have source := (preadditive_exists F).exists.choose_spec
+  have target := (preadditive_exists G).exists.choose_spec
+  rw [(target _ _ _ _).1]
+  change L.map (f + g).hom.f = _
+  rw [(source _ _ f g).1]
+  exact L.map_add
+
+end AdditiveTransport
+
+end CategoryTheory.Endofunctor.IsoAlgebra
+
+namespace CategoryTheory.Endofunctor.IsoAlgebra
+universe v z
+variable {C : Type z} [Category.{v} C] {F : C ⥤ C}
+set_option backward.isDefEq.respectTransparency false in
+/-- A normalized idempotent lift over the identity fixes each invertible algebra.
+Source: cancellation in the commuting square (blueprint: def-wf-weil-category). -/
+private theorem mapOfNatIso_eq_id_of_idempotent {L : C ⥤ C} (e : L ⋙ F ≅ F ⋙ L) (hL : L = 𝟭 C)
+    (α : L ⋙ L ≅ L) (hα : HEq α (Functor.leftUnitor L))
+    (a : mapOfNatIso e ⋙ mapOfNatIso e ≅ mapOfNatIso e)
+    (ha : ∀ K, (a.hom.app K).hom.f = α.hom.app K.carrier) :
+    mapOfNatIso e = 𝟭 (IsoAlgebra F) := by
+  subst L
+  have hα' : α = Functor.leftUnitor (𝟭 C) := eq_of_heq hα
+  subst α
+  have he (K : IsoAlgebra F) : e.hom.app K.carrier = 𝟙 _ := by
+    have h := (a.hom.app K).hom.h
+    change F.map (a.hom.app K).hom.f ≫ (e.hom.app K.carrier ≫ K.obj.str) =
+      (e.hom.app K.carrier ≫ (e.hom.app K.carrier ≫ K.obj.str)) ≫
+        (a.hom.app K).hom.f at h
+    rw [ha] at h
+    change F.map (𝟙 _) ≫ _ = _ ≫ 𝟙 _ at h
+    rw [F.map_id, Category.id_comp, Category.comp_id] at h
+    have hs : K.obj.str = e.hom.app K.carrier ≫ K.obj.str :=
+      (cancel_epi (e.hom.app K.carrier)).1 h
+    exact ((cancel_mono K.obj.str).1 (by simpa only [Category.id_comp] using hs)).symm
+  have ho (K : IsoAlgebra F) : (mapOfNatIso e).obj K = K := by
+    apply ObjectProperty.FullSubcategory.ext
+    change Endofunctor.Algebra.mk K.carrier (e.hom.app K.carrier ≫ K.obj.str) = K.obj
+    rw [he, Category.id_comp]
+    rfl
+  have : (forget F).Faithful :=
+    ⟨fun h ↦ ObjectProperty.hom_ext _ (Algebra.Hom.ext h)⟩
+  let b : mapOfNatIso e ≅ 𝟭 (IsoAlgebra F) :=
+    NatIso.ofComponents (fun K ↦ eqToIso (ho K)) (by
+      intro K L f
+      apply (forget F).map_injective
+      simp only [Functor.map_comp, eqToIso.hom, eqToHom_map]
+      change f.hom.f ≫ eqToHom _ = eqToHom _ ≫ f.hom.f
+      simp only [eqToHom_refl, Category.comp_id, Category.id_comp])
+  exact Functor.ext_of_iso b ho (fun _ ↦ rfl)
+
 
 end CategoryTheory.Endofunctor.IsoAlgebra
 
@@ -86,7 +237,35 @@ theorem weilGeometricFiber_coefficientHypotheses :
       (∃ m : ℕ, topologicalKrullDim (D.geometricFiber X₀).left ≤ m) ∧
       ∀ t : (D.geometricFiber X₀).left,
         IsUnit (c.l : (D.geometricFiber X₀).left.presheaf.stalk t) := by
-  sorry
+  classical
+  have := hsep
+  let f := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  let X := pullback X₀.hom f
+  have : LocallyOfFiniteType (pullback.snd X₀.hom f) := inferInstance
+  have : QuasiCompact (pullback.snd X₀.hom f) := inferInstance
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.snd X₀.hom f)
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.snd X₀.hom f)
+  have hn : IsNoetherian X := {}
+  change IsNoetherian X ∧ (∃ m : ℕ, topologicalKrullDim X ≤ m) ∧
+    ∀ t : X, IsUnit (c.l : X.presheaf.stalk t)
+  refine ⟨hn, ?_, ?_⟩
+  · obtain ⟨n, hn⟩ := exists_topologicalKrullDim_le_of_isPullback_of_compactSpace X₀.hom
+    exact ⟨n, hn D.k f (pullback.fst X₀.hom f) (pullback.snd X₀.hom f)
+      (IsPullback.of_hasPullback _ _)⟩
+  · let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+    have : Fact D.p.Prime := ⟨D.prime⟩
+    have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+      (by simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq)
+    have hunit : IsUnit (c.l : D.k₀) :=
+      isUnit_iff_ne_zero.mpr (CharP.cast_ne_zero_of_ne_of_prime D.k₀
+        (Fact.out : c.l.Prime) c.different.symm)
+    intro t
+    simpa only [map_natCast] using hunit.map
+      ((((Scheme.ΓSpecIso (.of D.k₀)).inv ≫
+        (pullback.fst X₀.hom f ≫ X₀.hom).appTop) ≫
+        X.presheaf.germ (⊤ : X.Opens) t (by trivial)).hom)
 
 /-- The noetherian instance is a property of the specified geometric fiber.
 Source: blueprint order 2106 (blueprint: def-wf-weil-category).
@@ -94,7 +273,15 @@ Proof: base change preserves finite type over the field; a finite-type scheme
 over a noetherian field is noetherian. -/
 @[instance] theorem weilGeometricFiber_isNoetherian :
     IsNoetherian (D.geometricFiber X₀).left := by
-  sorry
+  have := hsep
+  let f := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  let X : Scheme.{u} := pullback X₀.hom f
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.snd X₀.hom f)
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.snd X₀.hom f)
+  change IsNoetherian X
+  exact {}
 
 /-- The geometric-Frobenius pullback on the exact PBC rational coefficient category.
 Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
@@ -160,7 +347,12 @@ for commuting morphisms of fixed pairs. -/
 @[instance] theorem weilScalarExtension_additive
     {E F : Padic.FiniteCoefficientFields c.l c.Qbar} (h : E ≤ F) :
     (weilScalarExtension D c X₀ h).Additive := by
-  sorry
+  let : (weilCoefficientExtension D c X₀ h).Additive :=
+    pbcScalarExtension_additive c.l c.Qbar (D.geometricFiber X₀).left
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 h
+  exact CategoryTheory.Endofunctor.IsoAlgebra.normalized_map_additive _
+    (weilFrobeniusScalarComparison D c X₀ h)
 
 /-- The tensor associator is Frobenius-equivariant and thus lifts uniquely to
 Weil pairs. Its underlying map is specified, so it is not an arbitrary isomorphism.
@@ -180,7 +372,18 @@ theorem weilScalarAssociator_exists {E F G : Padic.FiniteCoefficientFields c.l c
           (pbcScalarAssociator c.l c.Qbar (D.geometricFiber X₀).left
             (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
             (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 h k).hom.app K.carrier := by
-  sorry
+  exact CategoryTheory.Endofunctor.IsoAlgebra.normalized_associator_exists
+    (pbcScalarSystem c.l c.Qbar (D.geometricFiber X₀).left
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.2)
+    (fun E ↦ pbcRationalIsoPullback (D.geometricFrobenius X₀)
+      (pbcStageDatum.{u} c.l c.Qbar E) (pbcStageUniformizer.{u} c.l c.Qbar E))
+    (fun a ↦ pbcIsoRationalScalarComparison c.l c.Qbar (D.geometricFrobenius X₀)
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 a) h k
+    (pbcIsoRationalScalarComparison_comp c.l c.Qbar (D.geometricFrobenius X₀)
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 h k)
 
 /-- Tensor balancing induces the associator on the fixed-pair categories.
 Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/
@@ -190,6 +393,9 @@ def weilScalarAssociator {E F G : Padic.FiniteCoefficientFields c.l c.Qbar}
         weilScalarExtension D c X₀ (h.trans k) :=
   (weilScalarAssociator_exists D c X₀ h k).exists.choose
 
+attribute [local irreducible] weilScalarAssociator
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The induced associators satisfy the same cocycle equality as tensor balancing.
 Source: blueprint order 2106 (blueprint: def-wf-weil-category).
 Proof: forget to the coefficient category and use the defining component
@@ -202,7 +408,16 @@ theorem weilScalarAssociator_cocycle
         (weilScalarAssociator D c X₀ (h.trans k) j).hom.app K =
       (weilScalarAssociator D c X₀ k j).hom.app ((weilScalarExtension D c X₀ h).obj K) ≫
         (weilScalarAssociator D c X₀ h (k.trans j)).hom.app K := by
-  sorry
+  exact CategoryTheory.Endofunctor.IsoAlgebra.normalized_cocycle
+    (pbcScalarSystem c.l c.Qbar (D.geometricFiber X₀).left
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.2)
+    (fun E ↦ weilFrobeniusPullback D c X₀ E)
+    (fun a ↦ weilFrobeniusScalarComparison D c X₀ a)
+    (fun a b ↦ weilScalarAssociator D c X₀ a b)
+    (fun a b L ↦ by
+      unfold weilScalarAssociator
+      exact (weilScalarAssociator_exists D c X₀ a b).exists.choose_spec L) h k j K
 
 /-- The equal-field transition is the normalized identity functor.
 Source: blueprint order 2106 (blueprint: def-wf-weil-category).
@@ -212,7 +427,17 @@ rational normalizations therefore make its Frobenius comparison identity.
 Thus the carriers, structure isomorphisms and all morphisms remain identical. -/
 theorem weilScalarExtension_refl (E : Padic.FiniteCoefficientFields c.l c.Qbar) :
     weilScalarExtension D c X₀ (le_refl E) = 𝟭 (WeilD D c X₀ E) := by
-  sorry
+  have units := pbcScalarSystem_units c.l c.Qbar (D.geometricFiber X₀).left
+    (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
+    (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 (le_refl E)
+  exact CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso_eq_id_of_idempotent
+    (weilFrobeniusScalarComparison D c X₀ (le_refl E)) units.1
+    (pbcScalarAssociator c.l c.Qbar (D.geometricFiber X₀).left
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
+      (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 (le_refl E) (le_refl E))
+    units.2.1 (weilScalarAssociator D c X₀ (le_refl E) (le_refl E))
+    (by unfold weilScalarAssociator
+        exact (weilScalarAssociator_exists D c X₀ (le_refl E) (le_refl E)).exists.choose_spec)
 
 /-- The concrete system of Weil categories with its induced tensor associators.
 Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/

@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-relative-rhom-flat-base-change-model",
+ "kind": "statement",
+ "title": "Flat Hom-complex model for a target of finite relative Tor dimension",
+ "statement": "Let $R\\to S$ be a flat homomorphism of commutative rings [def-weil-pbc-flat-ring-map]. Work in ordinary unbounded module derived categories [def-weil-abstract-derived-category], with derived scalar extension [def-trf-affine-diagonal-module-data] and derived Hom [def-pur-derived-internal-hom] on the one-object ringed site. Let $K,L\\in D(S)$, assume $K$ is pseudo-coherent over $S$ [def-pc-ring-pseudo-coherent-complex], and suppose that for some integers $a\\le b$, every $R$-module $N$ satisfies $H^j(L\\otimes_R^{\\mathbf L}N)=0$ for $j\\notin[a,b]$. There exist a bounded-above cochain complex $P^\\bullet$ of finite free $S$-modules representing $K$ and a bounded cochain complex $F^\\bullet$ of $S$-modules representing $L$ whose terms are flat over $R$ (tensoring with each term preserves exact sequences). Cochain complexes use [def-pc-cochain-complex-modules], on the one-object site. For any such $P,F$, put $E^\\bullet=\\operatorname{Hom}_S^\\bullet(P,F)$ [def-sc-module-total-hom-complex], so $E^n=\\bigoplus_p\\operatorname{Hom}_S(P^p,F^{p+n})$ (only finitely many summands are nonzero) and $d(h)=d_Fh-(-1)^nhd_P$. The complex $E$ is bounded below with $R$-flat terms and represents $R\\operatorname{Hom}_S(K,L)$ in $D(S)$. For every homomorphism $R\\to T$ of commutative rings, put $S_T=S\\otimes_RT$, $K_T=K\\otimes_S^{\\mathbf L}S_T$ and $L_T=L\\otimes_S^{\\mathbf L}S_T$. The ordinary termwise tensors $P\\otimes_RT$ and $F\\otimes_RT$ represent $K_T$ and $L_T$, and the chain isomorphism\n$$E\\otimes_RT\\xrightarrow{\\sim}\\operatorname{Hom}_{S_T}^\\bullet(P\\otimes_RT,F\\otimes_RT),\\qquad (h\\otimes t)(p\\otimes u)=h(p)\\otimes tu$$\ninduces an isomorphism $E\\otimes_RT\\simeq R\\operatorname{Hom}_{S_T}(K_T,L_T)$ in $D(S_T)$. In particular it gives an additive isomorphism $H^0(E\\otimes_RT)\\cong\\operatorname{Hom}_{D(S_T)}(K_T,L_T)$. For every homomorphism of $R$-algebras $T\\to U$, the cohomology map of the chain map $E\\otimes_RT\\to E\\otimes_RU$, $h\\otimes t\\mapsto h\\otimes\\overline t$, corresponds under these isomorphisms to derived scalar extension from $S_T$ to $S_U$ (using the canonical iterated-tensor identifications of $K_T,L_T$ with $K_U,L_U$ after extension). The comparisons respect identities and composition of $T\\to U$. No finite-presentation assumption on $R\\to S$, no pseudo-coherence assumption on $L$, and no flatness assumption on $R\\to T$ or $T\\to U$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, (1), (2), (a), (b); transition-map normalization from the displayed termwise Hom isomorphism in its proof. Excludes its additional finite-presentation clause."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-abstract-derived-category",
+  "def-trf-affine-diagonal-module-data",
+  "def-pur-derived-internal-hom",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pc-cochain-complex-modules",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose $P$ from the definition of pseudo-coherence. Taking $N=R$ in the hypothesis shows that $H^j(L)=0$ outside $[a,b]$. Apply [lem-weil-pbc-bounded-above-projective-model] over $S$ to obtain a projective complex $Q$ representing $L$, zero above $b$. Its terms are $S$-flat by [lem-weil-pbc-projective-module-flat], hence $R$-flat by [lem-pc-module-flat-transitive]. By [lem-pc-module-bounded-flat-kflat], $Q$ computes $L\\otimes_R^{\\mathbf L}N$ by ordinary tensor for every $N$. Its tensor cohomology in degree $a-1$ therefore vanishes universally. Apply [lem-pc-module-flat-opcycles-tor-criterion] over $R$: $Q^a/\\operatorname{im}(d_Q^{a-1})$ is $R$-flat. Define $F^i=0$ for $i<a$, $F^a=Q^a/\\operatorname{im}(d_Q^{a-1})$, and $F^i=Q^i$ for $i>a$, with the induced differential. The quotient chain map $Q\\to F$ induces the identity on cohomology in degrees $i\\ge a$; below $a$ both cohomologies vanish. Thus $F$ represents $L$ and is supported in $[a,b]$, with all terms $R$-flat. Projective terms suffice in this construction; no finite-generation condition on $Q$ is used.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-weil-pbc-bounded-above-projective-model",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-flat-transitive",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-module-flat-opcycles-tor-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, first proof paragraph; Tag 0653, lemma-last-one-flat; projective replacement from derived.tex Tag 0646, lemma-projective-resolutions-exist"
+   }
+  },
+  {
+   "text": "Now take any $P,F$ allowed by the statement, with $P^p=0$ for $p>m$ and $F^q=0$ outside $[c,d]$. In degree $n$ the product defining [def-sc-module-total-hom-complex] has nonzero factors only for $c-n\\le p\\le\\min(m,d-n)$, a finite interval. It is therefore the displayed finite direct sum, and vanishes for $n<c-m$. Choose a finite basis of each $P^p$, of rank $r_p$; then $\\operatorname{Hom}_S(P^p,F^{p+n})\\cong(F^{p+n})^{r_p}$. Hence each $E^n$ is a finite product of $R$-flat modules, flat by [lem-weil-pbc-finite-product-flat-modules], including empty products. Finite free modules are projective by [def-weil-pbc-projective-module], and $F$ is bounded, in particular bounded below. Hence [lem-sc-affine-projective-complex-derived-hom], applied over $S$ to the bounded-above projective complex $P$ and the bounded-below complex $F$, says that $E=\\operatorname{Hom}_S^\\bullet(P,F)$ represents the derived Hom of [def-pur-derived-internal-hom] on the one-object ringed site with ring $S$; since $P,F$ represent $K,L$, this is the derived-category isomorphism $Q_SE\\simeq R\\operatorname{Hom}_S(K,L)$.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "lem-weil-pbc-finite-product-flat-modules",
+    "def-weil-pbc-projective-module",
+    "lem-sc-affine-projective-complex-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, proof of (a); Tag 0A66, lemma-RHom-out-of-projective"
+   }
+  },
+  {
+   "text": "For arbitrary $R\\to T$, both $P$ and $F$ are bounded-above $R$-flat complexes: for $P$ use [lem-weil-pbc-projective-module-flat] and [lem-pc-module-flat-transitive], and for $F$ use its hypothesis. They are $R$-K-flat by [lem-pc-module-bounded-flat-kflat]. For either complex $C$, apply [lem-sfb-flat-algebra-derived-module-tensor-exchange] with $N=T$ and an augmented free $R$-resolution $V\\to T[0]$. It identifies $Q_S\\operatorname{Tot}(C\\otimes_RV)$ with $Q_SC\\otimes_S^{\\mathbf L}S_T$ and identifies the derived-to-ordinary comparison with $1_C\\otimes(V\\to T[0])$. This augmentation is a quasi-isomorphism: its cone is $\\operatorname{Tot}(C\\otimes_R\\operatorname{Cone}(V\\to T[0]))$, up to the usual tensor-cone signs, and is acyclic by $R$-K-flatness of $C$. Consequently $C\\otimes_RT$ represents the required derived scalar extension, with its $S_T$-action. In particular $P_T=P\\otimes_RT$ and $F_T=F\\otimes_RT$ represent $K_T,L_T$. The terms $P_T^p\\cong S_T^{r_p}$ are finite free, and $F_T$ remains bounded.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-flat-transitive",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sfb-flat-algebra-derived-module-tensor-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, proof of (b), first paragraph; Tag 0661, lemma-base-change-comparison"
+   }
+  },
+  {
+   "text": "The termwise map $\\beta_T$ sends $h\\otimes t$ to $(p\\otimes u\\mapsto h(p)\\otimes tu)$. For $P^p=S^{r_p}$ its degree-$(p,p+n)$ component is the coordinate isomorphism $(F^{p+n})^{r_p}\\otimes_RT\\cong(F^{p+n}\\otimes_RT)^{r_p}$: a tuple supported in coordinate $j$, tensored with $t$, maps to the same coordinate tensored with $t$, and the inverse adds these coordinate inclusions. There are finitely many $p$ in each degree by step 2. Distributing tensor over this finite direct sum therefore gives an isomorphism in each degree. Evaluate both differentials on $p\\otimes u$: both give $d_Fh(p)\\otimes tu-(-1)^nh(d_Pp)\\otimes tu$. Thus the degreewise isomorphisms form the stated chain isomorphism. The finite free terms of $P_T$ are projective [def-weil-pbc-projective-module] and $F_T$ is bounded, in particular bounded below, so [lem-sc-affine-projective-complex-derived-hom] applies over $S_T$ to $P_T,F_T$; together with step 3 this identifies its target with $R\\operatorname{Hom}_{S_T}(K_T,L_T)$ in $D(S_T)$.",
+   "uses": [
+    "lem-sc-affine-projective-complex-derived-hom",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, proof of (b), displayed Hom-complex equality and final sentence"
+   }
+  },
+  {
+   "text": "The differential on $\\operatorname{Hom}_{S_T}^\\bullet(P_T,F_T)$ makes its degree-zero cycles exactly the chain maps $P_T\\to F_T$. A degree-zero boundary is $d_Fs+sd_P$ for a degree-minus-one family $s$, exactly a null-homotopic chain map. Its $H^0$ is consequently the additive group of chain maps modulo homotopy. The bounded-above projective complex $P_T$ is K-projective by [lem-sc-bounded-above-projective-kprojective]. Apply [lem-coef-kprojective-derived-hom-bijection] in $\\operatorname{Mod}(S_T)$: localization identifies those homotopy classes with $\\operatorname{Hom}_{D(S_T)}(K_T,L_T)$. All maps here preserve addition (localization is additive and the quotient uses the additive homotopy relation), so this is the asserted additive isomorphism after $\\beta_T$.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective, proof, and derived.tex Tag 064B, lemma-morphisms-from-projective-complex; degree-zero consequence of the Hom-complex model"
+   }
+  },
+  {
+   "text": "Let $v:T\\to U$ be any $R$-algebra map. By [lem-weil-pbc-flat-module-base-change], $S_T$ is flat over $T$ and every $F_T^q$ is $T$-flat. The $P_T^p$ are $T$-flat by [lem-weil-pbc-projective-module-flat] and [lem-pc-module-flat-transitive]. They remain bounded above, and $F_T$ remains bounded. Thus step 3, now for $T\\to S_T$ and $T\\to U$, computes derived scalar extension on both $P_T,F_T$ by ordinary tensor. The balancing identifications are $(P\\otimes_RT)\\otimes_TU\\cong P\\otimes_RU$ and the analogous ones for $F$, sending $(x\\otimes t)\\otimes u$ to $x\\otimes v(t)u$. For an elementary homogeneous cochain $h\\otimes t$, its image under the chain map of the question, followed by $\\beta_U$, takes $p\\otimes u$ to $h(p)\\otimes v(t)u$. Extending $\\beta_T(h\\otimes t)$ by scalars gives exactly the same formula. Additivity proves equality for every cochain, in particular every degree-zero cycle. Tensor sends a homotopy $s$ to $s\\otimes1$ and preserves $f-g=ds+sd$, so the equality passes to homotopy classes. By step 5 it says exactly that the cohomology map is derived scalar extension on morphisms. For $T\\xrightarrow{v}U\\xrightarrow{w}W$, both iterated formulas send $h\\otimes t$ to $h\\otimes w(v(t))$; for the identity they fix it. This proves the identity and composition clauses, with the displayed balancing maps giving the canonical iterated-tensor identifications.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, displayed termwise comparison in the proof of (b), transition-map normalization by evaluation on pure tensors; algebra.tex Tag 00HI, lemma-flat-base-change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-bounded-above-projective-model",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "def-sc-module-total-hom-complex",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "def-weil-pbc-projective-module",
+  "lem-sc-affine-projective-complex-derived-hom",
+  "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-weil-pbc-flat-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, proof of (1), (2), (a), (b); explicit degree-zero and transition-map consequences of its Hom comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat map R to A a pseudo coherent source and a target of finite Tor dimension over R have a bounded flat Hom complex computing derived Hom after arbitrary base change",
+   "results": "8 hits; top=['Ext', 'Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing', 'Module.Flat.of_flat_tensorProduct', 'ModuleCat.preservesFiniteLimits_extendScalars_of_flat', \"Module.Flat.iff_rTensor_exact'\", 'Module.FaithfullyFlat.iff_exact_iff_rTensor_exact', \"Module.Flat.iff_lTensor_exact'\", 'Module.Flat.iff_lTensor_exact']; subdirectory=; note=; digest=da814590be3d464b",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Ext, localization, Hom-complex definitions, flatness and underived base-change results do not supply the uniform derived Hom model and arbitrary scalar-extension comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "relatively.?perfect|relativeRHom|pseudo.?coherent|PseudoCoherent",
+   "results": "0 hits; top=[]; subdirectory=Algebra/Homology; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Ext, localization, Hom-complex definitions, flatness and underived base-change results do not supply the uniform derived Hom model and arbitrary scalar-extension comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from a pseudo coherent complex into a complex of finite relative Tor dimension is computed by a single Hom complex under arbitrary base change",
+   "results": "8 hits; top=['HomologicalComplexUpToQuasiIso', 'CategoryTheory.Functor.rightDerivedToHomotopyCategory', 'HomologicalComplexUpToQuasiIso.Q', 'CochainComplex.HomComplex', 'HomologicalComplex.Hom.mk', 'CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app', 'CategoryTheory.ProjectiveResolution.extMk_hom', 'CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt']; subdirectory=; note=; digest=ca460c89a8038593",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Ext, localization, Hom-complex definitions, flatness and underived base-change results do not supply the uniform derived Hom model and arbitrary scalar-extension comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Hom\", \"tensor\"",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Ext, localization, Hom-complex definitions, flatness and underived base-change results do not supply the uniform derived Hom model and arbitrary scalar-extension comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "RHom base change for bounded above finite free source and bounded complex of modules flat over the base ring",
+   "results": "8 hits; top=['IsBaseChange.of_comp', 'RingHom.Flat.isStableUnderBaseChange', 'IsBaseChange.comp_iff', 'RingHom.finitePresentation_isStableUnderBaseChange', 'RingHom.FaithfullyFlat.isStableUnderBaseChange', 'RingHom.FormallySmooth.isStableUnderBaseChange', 'IsBaseChange.finitePow', 'IsBaseChange']; subdirectory=; note=; digest=af5af6a89147fce0",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Ext, localization, Hom-complex definitions, flatness and underived base-change results do not supply the uniform derived Hom model and arbitrary scalar-extension comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex over a flat algebra has derived Hom commuting with arbitrary base change into a relatively bounded flat complex",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat.isStableUnderBaseChange', 'CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory', 'Ext', 'ModuleCat.preservesFiniteLimits_extendScalars_of_flat', 'CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory', 'Module.Flat.lTensor_shortComplex_exact', 'Module.Flat.rTensor_shortComplex_exact', 'ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat']; subdirectory=; note=; digest=b9f1f9ceeb4dba80",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned flatness, exact functor and Ext declarations do not state the uniform relative Hom model or its arbitrary scalar comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-perfect-hom-filtered-colimit",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine scalar endomorphisms and negative Ext input, before sheaf localization. Specific tool for the affine homothety input: Stacks 0E2G, final paragraph, invoking relative-perfect continuity (0DHX(2)). Proof of this continuity input: Stacks 0DHX(2), first sentence, choosing the models in 0E1U without assuming pseudo-coherence of the target.",
+   "via": [
+    "lem-sfb-relative-perfect-hom-filtered-colimit",
+    "lem-sfb-arbitrary-ring-relative-dualizing-homothety",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-rhom-flat-base-change-model",
+  "worker": "stage1",
+  "summary": "Checked Tag 0E1U and its projective-Hom, flat-truncation and tensor-comparison prerequisites. Reused all existing nodes: pseudo-coherent source model, bounded-above projective replacement, flat opcycles criterion, bounded-above flat K-flatness, projective Hom computation and relative tensor exchange. Wrote the finite-coordinate chain isomorphism and the chain-map/homotopy argument identifying arbitrary scalar transitions, with no added finiteness or flatness assumptions. No statement correction or new node.",
+  "blueprint": "Supporting ordinary-module input to det-thm-sf-ctf-stability-direct-images, proof (3), along the item's recorded alteration/duality/relative-perfect continuity ancestry; the current blueprint proof was read and is unchanged. Realizes Stacks 0DHX(2)'s use of 0E1U, preserving the existing unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-bounded-above-projective-model",
+    "why": "Generic ordinary-module input to the Stacks 0E1U model argument: Upper bounded derived module objects admit projective models. The current unit supplies no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module input to the Stacks 0E1U model argument: Bounded-above flat module complexes are K-flat. The current unit supplies no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-pc-module-flat-opcycles-tor-criterion",
+    "why": "Generic ordinary-module input to the Stacks 0E1U model argument: Tor criterion for flatness of the opcycles of a flat complex. The current unit supplies no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-sc-affine-projective-complex-derived-hom",
+    "why": "Generic ordinary-module input to the Stacks 0E1U model argument (Tag 0A66): a Hom complex out of a bounded-above projective complex into a bounded-below complex represents derived Hom on the one-object ringed site. The current unit supplies no replacement for this algebraic tool; it replaces the earlier citation of a sec-poincare-duality node, which lies in the batch-5 assumed Poincare-duality chapter."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-bounded-above-projective-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "lem-sc-affine-projective-complex-derived-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-00b543970",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-00b543970 (reviewer sub-agent of L); spot-checked: Read Stacks 0E1U in full, along with 0653, 0A66, 0661, 0646, 064B and 00HI. The item statement matches clauses (1), (2), (a) and (b), with the finite-presentation clause excluded. The base change is S→S⊗_R T with the K-flat derived extension in ordinary D(S); there is no flatness on T or U. The statement and stmt_deps are identical to live, and live is still unsplit, so nothing supersedes the delivery. There is no repair note, no new node and no SGA citation. All six steps hold. Step 1: the projective model Q, R-flatness by transitivity, K-flatness, the 0653 opcycles criterion and the truncation cohomology all check out. Step 2: E has finitely many factors, flat terms and is zero for n<c−m. Step 3: the exchange node's augmentation is a quasi-isomorphism because C is R-K-flat. Step 4: the coordinatewise isomorphism holds and the differential sign is right. Step 5: degree-0 boundaries are d_F s + s d_P, and Qh_map_bijective applies. Step 6: S_T, F_T and P_T are T-flat, the balancing maps work and the composition clause holds. Small-case check: R=S=ℤ, T=ℤ/2 gives the right answer. FIX: steps 2 and 4 cited lem-pod-projective-hom-evaluation-model, a node of the sec-poincare-duality chapter. I replaced it with the existing reviewed generic node lem-sc-affine-projective-complex-derived-hom (Tag 0A66: bounded-above projective source, bounded-below target, RHom of def-pur-derived-internal-hom on the one-point site). F and F_T are bounded, so its hypotheses hold, and its closure reaches no trace-formula or Poincaré-duality node. proof_deps and the tool_uses entry were updated to match. The second batch-5 flag, lem-sfb-flat-algebra-derived-module-tensor-exchange, reaches the trace-formula chapter only through lem-trf-one-point-derived-ring-identification. That node is a generic identification of the one-point-site derived category with D(A), not the trace formula, so the citation is accepted. Advisory: lem-sfb-relative-rhom-finite-flat-base-change-model (Q84) is a special case of this item with R→S finitely presented and L pseudo-coherent; it is not a duplicate. Accepted tool uses: bounded-above-projective-model, bounded-flat-kflat, flat-opcycles-tor-criterion and sc-affine-projective-complex-derived-hom.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RelativeRHomFlatBaseChangeModel",
+  "declaration": "CochainComplex.relativeRHom_flat_baseChange_model",
+  "declarations": [
+   "CochainComplex.relativeRHomScalar",
+   "CochainComplex.relativeRHomRingMap",
+   "CochainComplex.relativeRHomTensor",
+   "CochainComplex.relativeRHomDerived",
+   "CochainComplex.relativeRHomPure",
+   "CochainComplex.relativeRHomRes",
+   "CochainComplex.relativeRHomCounit",
+   "CochainComplex.RelativeRHomFlatBaseChangeComparisons",
+   "CochainComplex.relativeRHomBaseChangedIso",
+   "CochainComplex.relativeRHomDerivedRes",
+   "CochainComplex.RelativeRHomFlatBaseChangeTransitions",
+   "CochainComplex.RelativeRHomFlatModelPair",
+   "CochainComplex.relativeRHom_flat_baseChange_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RelativeRHomFlatBaseChangeModel.lean",
+  "statement": "theorem relativeRHom_flat_baseChange_model {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] (hflat : RingHom.Flat (algebraMap R S)) (K L : DerivedCategory (ModuleCat.{u} S)) (hK : DerivedCategory.IsPseudoCoherent K) (a b : ℤ) (hab : a ≤ b) (hL : ∀ (N : ModuleCat.{u} R) (j : ℤ), j < a ∨ b < j → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) j).obj (((ModuleCat.restrictScalars (algebraMap R S)).mapDerivedCategory.obj L) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj N))) : (∃ P F : CochainComplex (ModuleCat.{u} S) ℤ, RelativeRHomFlatModelPair (R := R) K L P F) ∧ ∀ (P F : CochainComplex (ModuleCat.{u} S) ℤ), RelativeRHomFlatModelPair (R := R) K L P F → ∀ (eP : DerivedCategory.Q.obj P ≅ K) (eF : DerivedCategory.Q.obj F ≅ L), ∃ c : RelativeRHomFlatBaseChangeComparisons (R := R) K L P F eP eF, Nonempty (RelativeRHomFlatBaseChangeTransitions c)",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper definitions name the canonical scalar extensions and their pure tensors; the two structures package exactly the comparison and transition conclusions. All choices are existential conclusion data, normalized by counits and pure tensors. The derived comparison is explicitly Q.mapIso homIso followed by targetRepresents. No definition chooses data from the postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-213e8096e",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Statement and stmt_deps byte-identical to live; only the lean field is added; lean.statement verbatim in file; single sorry; 13 declarations documented with Stacks 0E1U and blueprint; no name collisions. Hypotheses match exactly: RingHom.Flat, IsPseudoCoherent K, hL over all N:ModuleCat.{u} R with the project derived tensor and exact restriction; no finite presentation, no pseudo-coherence of L, no flatness of T or U. Conclusions all present and pinned: model-pair existence; finiteSum pinned by coordinate projections; boundedBelow; flat; source/target isos pinned by the real leftDerivedFunctorCounit and eP/eF; homIso_pure checked ((ss'⊗tt')⊗h(x)); homologyIso pinned on all cycles; change pinned by pure tensors; units pinned by normalization; universal property true by steps 3 and 6; H0 square checked by naturality; identity and composition by HEq on defeq carriers. Advisory: represents and targetRepresents are unpinned existence data, consistent with the node wording and with affineProjectiveComplexDerivedHom (Nonempty). Edge cases checked: zero ring, zero objects, empty sums, a=b, non-flat T. No compile, since nothing was changed."
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-open-extension-good-complex-pullback",
+ "kind": "statement",
+ "title": "Completed ordinary pullback preserves goodness after extension",
+ "statement": "For every open immersion j : X → Y and every good complex P on X, the completed ordinary pullback of its completed open extension is good on X.",
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-a1-flat-term-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI, 03DJ, 0E8I and 0G7E."
+ },
+ "proof": [
+  {
+   "text": "Apply openExtension_goodComplex_extension to P to obtain independent-coefficient K-flatness and site-flatness of every term of the completed open extension. Apply the already proved pro-etale specialization ringPull_preserves_flat of isKFlat_ringedToposPullback to j and the completed coefficient ring isomorphism. Its two conclusions are definitionally integralOperationsGoodComplex for integralOrdinaryPull of that extension.",
+   "uses": [
+    "lem-sf-open-extension-good-complex-extension",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-extension-good-complex-extension",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "def-sp-varying-ring-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J6",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat, using the existing pro-etale specialization after completed open extension."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenExtensionGoodComplex",
+  "date": "2026-10-27",
+  "group": "P8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-extension-good-complex",
+   "place": "Conjunct component of the preservation argument.",
+   "via": [
+    "lem-sf-open-extension-good-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenExtensionGoodComplexPullback",
+  "file": "lean/Sheaf/SixFunctors/OpenExtensionGoodComplexPullback.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.openExtension_goodComplex_pullback",
+  "statement": "theorem openExtension_goodComplex_pullback {X Y : Scheme.{u}}\n    (j : X ⟶ Y) [IsOpenImmersion j]\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory) :\n    integralOperationsGoodComplex l E X\n      (((integralOrdinaryPull l E j).mapHomologicalComplex (.up ℤ)).obj\n        (((PurCompactSupport.openExtension\n        (PurCompactSupport.completed l E) j).mapHomologicalComplex\n           (.up ℤ)).obj P.obj))",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "completed open extension preserves K-flat complexes with flat terms",
+   "results": "No direct match; generic flat tensor lemmas only.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open extension by zero preserves K-flat flat-term complexes",
+   "results": "No direct match.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "openExtension goodComplex KFlat flat",
+   "results": "No existing concrete theorem found.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261027T012918-L-2346562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T034702-L-3674172",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

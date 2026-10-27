@@ -1,0 +1,158 @@
+{
+ "id": "lem-trf-regular-separable-residue-smooth",
+ "kind": "statement",
+ "title": "Smoothness at a regular point with separable algebraic residue field",
+ "statement": "Let k be a field [def-weil-field], f:X→Spec k locally of finite type [def-weil-finite-type-morphism], and x a point. Suppose the stalk O_{X,x} is a regular local ring [def-weil-regular-scheme] and the canonical residue field κ(x) is separable algebraic over k [def-weil-residue-field, def-weil-pbc-separable-algebraic-extension]. There is an open neighbourhood U of x with U→Spec k smooth [def-sbc-smooth-morphisms]. No closedness hypothesis on x is needed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00TV, regular local separable-residue smoothness criterion, applied on an affine neighbourhood."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-regular-scheme",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood V of x. Its coordinate algebra is finite type over k, and localization at the corresponding prime is the stalk. Transport regularity and the residue field along this localization isomorphism.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
+   }
+  },
+  {
+   "text": "The residue-field isomorphism respects k by the germ-stalk-map and residue-field-map equations. Mathlib Algebra.FormallyEtale.of_isSeparable gives formally smooth residue field. Apply the proved upstream Algebra.FormallySmooth.localization_of_isRegularLocalRing in WeilConjectures.Mathlib.RingTheory.Smooth.Local. This is the regular-local criterion of Stacks 00TV in the formally smooth residue-field formulation; no custom IsSeparableExtension is needed. Translate via formallySmooth_stalkMap_iff. The open smooth locus restricts to a smooth morphism, giving U.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00TV, regular local separable-residue smoothness criterion, applied on an affine neighbourhood.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A regular point of a scheme locally of finite type over a field with separable algebraic residue field is smooth",
+   "results": "{\"t\": \"2026-10-23T12:44:37Z\", \"tool\": \"leanfinder\", \"query\": \"A regular point of a scheme locally of finite type over a field with separable algebraic residue field is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"1e039666da7dcb4c\"}; None gives this complete scheme-level assertion. Relevant component, residue-field and localization results are used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-23T12:44:35Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallySmooth, IsRegularLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; None gives this complete scheme-level assertion. Relevant component, residue-field and localization results are used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness at a regular point with a separable algebraic residue field on a finite type scheme",
+   "results": "{\"t\": \"2026-10-23T12:56:42Z\", \"tool\": \"leansearch\", \"query\": \"Smoothness at a regular point with a separable algebraic residue field on a finite type scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.Scheme.residueField\"], \"digest\": \"22550b5c809f6505\"}; None gives this complete scheme-level assertion. Relevant component, residue-field and localization results are used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]sRegularLocalRing|of_isSeparable",
+   "results": "{\"t\": \"2026-10-23T12:44:35Z\", \"tool\": \"grep\", \"query\": \"[Ii]sRegularLocalRing|of_isSeparable\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\"], \"digest\": \"7dd4f7b6fdcb258d\"}; Component finiteness, formal smoothness, or residue-field results do not give the complete assertion; used the relevant ones in the Lean proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StacksNodalClosedSubcurve",
+  "date": "2026-10-23",
+  "group": "U1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0E38 subcurve input: Smoothness at a regular point with separable algebraic residue field",
+   "via": [
+    "lem-trf-stacks-nodal-closed-subcurve",
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-nodal-contraction-euler-defect",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RegularSeparableResidueSmooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularSeparableResidueSmooth.lean",
+  "declaration": "AlgebraicGeometry.regular_separable_residue_smooth",
+  "statement": "theorem regular_separable_residue_smooth\n    {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] (x : X)\n    [IsRegularLocalRing (X.presheaf.stalk x)]\n    (hsep : @Algebra.IsSeparable k (X.residueField x) _ _\n      (f.residueFieldAlgebraMap x).toAlgebra) :\n    ∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261023T135442-L-2899166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261023T135442-L-2899166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

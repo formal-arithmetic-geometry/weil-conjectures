@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-pointed-free-deletion-contraction",
+ "kind": "statement",
+ "title": "Universally contractible free deletion complex of a pointed condensed set",
+ "statement": "Let $A$ be a commutative condensed ring on a small coherent site of profinite sets with finite jointly surjective coverings [sk-def-sfb-condensed-ring, def-weil-size-convention]. Work in internal $A$-modules [sk-def-sfb-module-objects], with internal relative tensor [def-sfb-modobj-relative-tensor]. Write $A[X]$ for the free internal module on a condensed set $X$, with its canonical generalized generators $[x]$, as in [def-sfb-condensed-free-module-adjunction]. Let $X$ be a condensed set equipped with a global point $e:1\\to X$. For $n\\geq0$ put $Q_n=A[X^{n+1}]$. Let $d_0=\\epsilon:Q_0\\to A$ send $[x]$ to $1$, and for $n\\geq1$ let $d_n:Q_n\\to Q_{n-1}$ be the alternating linearized deletion map\n$$d_n[x_0,\\ldots,x_n]=\\sum_{i=0}^{n}(-1)^i[x_0,\\ldots,\\widehat{x_i},\\ldots,x_n].$$\nThese are internal-module morphisms and $d_0d_1=0$, $d_nd_{n+1}=0$ for $n\\geq1$. The actual maps\n$$h_{-1}:A\\to Q_0,\\quad a\\mapsto a[e],\\qquad h_n:Q_n\\to Q_{n+1},\\quad [x_0,\\ldots,x_n]\\mapsto[e,x_0,\\ldots,x_n]$$\nare natural in pointed condensed sets and satisfy\n$$\\epsilon h_{-1}=\\operatorname{id}_A,\\qquad d_1h_0+h_{-1}\\epsilon=\\operatorname{id}_{Q_0},\\qquad d_{n+1}h_n+h_{n-1}d_n=\\operatorname{id}_{Q_n}\\quad(n\\geq1).$$\nThe augmented complex $\\cdots\\to Q_1\\to Q_0\\to A\\to0$ is exact, meaning equality of the image and kernel subobjects and epimorphic augmentation. For every internal $A$-module $T$, after the unit identification $A\\otimes_A T\\cong T$, the maps $h_n\\otimes\\operatorname{id}_T$ and $h_{-1}\\otimes\\operatorname{id}_T$ satisfy the same contracting identities for the tensored complex. This augmented tensored complex is exact, with split epimorphic augmentation to $T$. Neither flatness of $T$ nor a group structure on $X$ is assumed; no equivariance of the contracting maps is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: extracted internal bar input. Former proof steps 4-6 and 9: double-deletion cancellation, insertion of the distinguished point, kernel-factorization exactness and tensoring the contraction. Generalized from the identity point of the condensed group. Agent-formulated argument; independent reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-condensed-free-module-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use the fixed free-linearization comparison of [lem-sfb-condensed-free-linearization-tensor]. Define augmentation as the free map to the cartesian tensor unit followed by its normalized unit isomorphism to the regular module. Define its section by the inverse isomorphism and the free pointed singleton tuple. The comparison gives augmentation, insertion and deletion formulas on generalized generators. The section formula follows by linearity from the unit-generator formula, since the evaluated terminal sheaf has a unique section. All chosen comparison isomorphisms are normalized by the fixed free adjunction [def-sfb-condensed-free-module-adjunction].",
+   "uses": [
+    "def-sfb-condensed-free-module-adjunction",
+    "lem-sfb-condensed-free-linearization-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted internal bar input: construction of deletion and point-insertion morphisms"
+   }
+  },
+  {
+   "text": "Prove the double-deletion identity by product extensionality and Fin.succAbove_succAbove_succAbove_predAbove. Expand the composite of alternating sums. Partition pairs (i,j) according to j≤i and pair (i,j) with (j,i+1) in the complement; the identical composite free maps have opposite coefficients. This is the finite-sum bijection argument of Mathlib AlgebraicTopology.AlternatingFaceMapComplex.d_squared. At augmentation the two maps to the cartesian tensor unit coincide and their coefficients are 1 and -1.",
+   "uses": [
+    "def-sfb-condensed-free-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted internal bar input: former step 4, double-deletion cancellation"
+   }
+  },
+  {
+   "text": "Product extensionality shows insertion followed by deletion zero is the identity, and insertion followed by deletion i+1 is deletion i followed by insertion. Apply the free functor, split the alternating sum into its zero and successor parts, and cancel to obtain the positive contracting identities. In degree zero the remaining singleton is the pointed tuple, so the augmentation-section term cancels it. The augmentation after its section is the identity because the cartesian tensor unit is terminal and the normalized unit maps are inverse.",
+   "uses": [
+    "def-sfb-condensed-free-module-adjunction",
+    "lem-sfb-condensed-free-linearization-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted internal bar input: former step 5, insertion of the distinguished point"
+   }
+  },
+  {
+   "text": "Check coordinatewise that powers of a map commute with deletion, and that a pointed map commutes with insertion and the singleton tuple. Apply functoriality of the free functor and distribute composition over finite sums to prove boundary and insertion naturality. Uniqueness of maps to the cartesian tensor unit proves augmentation naturality; the pointed equation proves section naturality.",
+   "uses": [
+    "def-sfb-condensed-free-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted internal bar input: naturality of the insertion contraction"
+   }
+  },
+  {
+   "text": "Transfer abelianness through [def-weil-pbc-internal-abelian-sheaf-module-equivalence], using [lem-pur-ringed-site-module-category-abelian]. In an abelian category a short complex f,g is exact iff kernel.ι g followed by cokernel.π f vanishes. Compose h f + g k = id with these two maps: the f term vanishes by the cokernel equation, and the g term by the kernel equation. This proves exactness in zero and every positive degree. The specified augmentation section makes augmentation split epic.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pur-ringed-site-module-category-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted internal bar input: former step 6, kernel-factorization exactness; supporting Stacks Tag 03DA, sites-modules.tex, lemma-abelian"
+   }
+  },
+  {
+   "text": "Use the proved MonoidalPreadditive instance for the internal relative tensor of [def-sfb-modobj-relative-tensor], which is implemented upstream in WeilConjectures.CategoryTheory.ModuleObjects.Monoidal. Apply the additive functor tensorRight T to the complex and contracting identities. At augmentation conjugate by the left unitor; its inverse cancels the unitor in the degree-zero contraction and in the augmentation-section composite. This yields exactly the specified tensored maps and identities without using flatness or preservation of kernels.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted internal bar input: former step 9, tensoring the contraction; supporting Stacks Tags 03EK (section-tensor-product), 0GMW (lemma-sheafification-tensor), and 03EO (lemma-internal-hom-adjoint-tensor), sites-modules.tex"
+   }
+  },
+  {
+   "text": "Apply the same kernel-cokernel exactness argument from step 5 to the tensored complex and contracting identities. The specified tensored section is a section of the tensored augmentation and hence proves it epic. This uses only additivity of tensor and the point, without flatness of the coefficients or a group law on the condensed set.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pur-ringed-site-module-category-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted internal bar input: former step 9, universal exactness from the tensored contracting maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-free-module-adjunction",
+  "lem-sfb-condensed-free-linearization-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-ringed-site-module-category-abelian",
+  "def-sfb-modobj-relative-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted pointed deletion input; Lean proof by finite-product identities, the pair-cancellation bijection of Mathlib AlternatingFaceMapComplex.d_squared, the abelian kernel-cokernel criterion, and the existing internal tensor MonoidalPreadditive instance. Written by S9, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The augmented free module deletion complex of powers of a pointed condensed set has an identity insertion contraction that remains exact after arbitrary internal tensor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Monoid G] → (classifyingSpaceUniversalCover.compForgetAugmented.toModule k G).ExtraDegeneracy\", \"doc\": \"For a commutative ring $k$ and monoid $G$, this constructs an extra degeneracy structure on the augmented simplicial $k$-module object obtained by lifting the classifying space universal cover (compos\"}\n  {\"name\": \"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"module\": \"Mathlib/AlgebraicTopology/SingularHomology/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasCoproducts C]\\n  [inst_2 : CategoryTheory.Preadditive C] (n : ℕ) (R : C) (X : TopCat) [TotallyDisconnectedSpace ↑X],\\n  n ≠ 0 → HomologicalComplex.ExactAt (((AlgebraicTopology.singularChainComplexFunctor C).obj\", \"doc\": \"For any totally disconnected topological space $X$ and any non-zero integer $n$, the singular chain complex associated to $X$ is exact at degree $n$. This means the image of the differential map at de\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"ChainComplex.alternatingConst_exactAt\", \"module\": \"Mathlib/Algebra/Homology/AlternatingConst\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [CategoryTheory.Limits.HasZeroObject C] (X : C) (n : ℕ),\\n  n ≠ 0 → HomologicalComplex.ExactAt (ChainComplex.alternatingConst.obj X) n\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$ with zero morphisms and any positive integer $n$, the alternating constant chain complex constructed from $X$ is exact at index $n$. This complex has con\"}\n  {\"name\": \"Profinite.NobelingProof.CC_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n      {f : LocallyConstant ↑C ℤ},\\n      (Profinite.NobelingProof.Linea\", \"doc\": \"In Nobeling's profinite construction, for any locally constant $\\\\mathbb{Z}$-valued function $f$ on $C$ satisfying $\\\\text{Linear}_{C\\\\to C'}(f) = 0$ (where $\\\\text{Linear}_{C\\\\to C'}$ denotes the $\\\\mathbb\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ) (n : ℕ),\\n  AlgebraicTopology.DoldKan.HigherFacesVanish (n + 1)\\n    (((AlgebraicTopology.DoldKan.Γ₀.splitting K).cofan\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts and any natural number $ n $, the higher face maps $ \\\\delta^{j+1} $ (for $ j \\\\in \\\\{0, 1, \\\\dots, n\\\\} $) acting\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) starts with an already constructed augmented simplicial object and extra degeneracy. It does not construct this free internal deletion complex or identify the actual generator insertion and its arbitrary-T tensor contraction. classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule (RepresentationTheory/Homological/Resolution.lean:160) is for an abstract group over an ordinary ring. ChainComplex.alternatingConst_exactAt is the constant-object special case; Profinite.NobelingProof exactness has different terms. Thus no exact or one-line match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alternating deletion chain complex of powers of a pointed sheaf of sets contracts by insertion of its global point and tensoring preserves the contraction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicTopology.alternatingFaceMapComplex\", \"module\": \"Mathlib.AlgebraicTopology.AlternatingFaceMapComplex\", \"type\": \": SimplicialObject C ⥤ ChainComplex C ℕ\", \"doc\": \"The functor that sends a simplicial object $X$ in a category $\\\\mathcal{C}$ to its associated chain complex in $\\\\mathcal{C}$ indexed by $\\\\mathbb{N}$, where each differential is the alternating sum of f\"}\n  {\"name\": \"ChainComplex.alternatingConst\", \"module\": \"Mathlib.Algebra.Homology.AlternatingConst\", \"type\": \"[HasZeroMorphisms C] : C ⥤ ChainComplex C ℕ\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero morphisms, this functor constructs a chain complex in $\\\\mathcal{C}$ with constant objects $X$ at each index $i \\\\in \\\\mathbb{N}$. The differentials alternate bet\"}\n  {\"name\": \"HomologicalComplex.tensorObj\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \"(K₁ K₂ : HomologicalComplex C c) [HasTensor K₁ K₂] : HomologicalComplex C c\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a category $ \\\\mathcal{C} $ equipped with a monoidal structure via the curried tensor product bifunctor, this constructs their tensor product as a\"}\n  {\"name\": \"HomologicalComplex.tensorHom\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \"{K₁ K₂ L₁ L₂ : HomologicalComplex C c} (f : K₁ ⟶ L₁) (g : K₂ ⟶ L₂) [HasTensor K₁ K₂] [HasTensor L₁ L₂] :\\n  tensorObj K₁ K₂ ⟶ tensorObj L₁ L₂\", \"doc\": \"Given morphisms $f: K_1 \\\\to L_1$ and $g: K_2 \\\\to L_2$ between homological complexes in a monoidal category, this constructs the induced morphism $K_1 \\\\otimes K_2 \\\\to L_1 \\\\otimes L_2$ between their ten\"}\n  {\"name\": \"CategoryTheory.Sheaf.coneΓ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) : Cone F.val\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this constructs a cone over the underlying presheaf $ F $ with apex given by the global sections $\\\\Gamma(F)$ of $ F $. The c\"}\n  {\"name\": \"AlgebraicTopology.AlternatingFaceMapComplex.obj\", \"module\": \"Mathlib.AlgebraicTopology.AlternatingFaceMapComplex\", \"type\": \": ChainComplex C ℕ\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$, this constructs the chain complex in $\\\\mathcal{C}$ indexed by natural numbers $\\\\mathbb{N}$, where each object at level $n$ is $X_n$ and the dif\"}\n  {\"name\": \"AlgebraicTopology.alternatingCofaceMapComplex\", \"module\": \"Mathlib.AlgebraicTopology.AlternatingFaceMapComplex\", \"type\": \": CosimplicialObject C ⥤ CochainComplex C ℕ\", \"doc\": \"The functor that associates to each cosimplicial object $X$ in a preadditive category $\\\\mathcal{C}$ a cochain complex indexed by $\\\\mathbb{N}$, where the $n$-th object is $X_n$ and the differential $d^\"}\n  {\"name\": \"ChainComplex.alternatingConstHomologyZero\", \"module\": \"Mathlib.Algebra.Homology.AlternatingConst\", \"type\": \"(X : C) : (alternatingConst.obj X).homology 0 ≅ X\", \"doc\": \"For any object $X$ in a category with zero morphisms, the homology of the alternating chain complex constructed with constant objects $X$ at degree 0 is isomorphic to $X$ itself. This follows from the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) starts with an already constructed augmented simplicial object and extra degeneracy. It does not construct this free internal deletion complex or identify the actual generator insertion and its arbitrary-T tensor contraction. classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule (RepresentationTheory/Homological/Resolution.lean:160) is for an abstract group over an ordinary ring. ChainComplex.alternatingConst_exactAt is the constant-object special case; Profinite.NobelingProof exactness has different terms. Thus no exact or one-line match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extraDegeneracy\", \"homotopy\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"module\": \"Mathlib.AlgebraicTopology.ExtraDegeneracy\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Preadditive C] [CategoryTheory.Limits.HasZeroObject C] {X : CategoryTheory.SimplicialObject.Augmented C} (ed : X.ExtraDegeneracy) : HomotopyEquiv (AlgebraicTopology.AlternatingFaceMapComplex.obj (CategoryTheory.SimplicialObject.A\", \"doc\": \"If `C` is a preadditive category and `X` is an augmented simplicial object\\nin `C` that has an extra degeneracy, then the augmentation on the alternating\\nface map complex of `X` is a homotopy equivalen\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy.h\", \"module\": \"Mathlib.AlgebraicTopology.ExtraDegeneracy\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {X : CategoryTheory.SimplicialObject.Augmented C} (ed : X.ExtraDegeneracy) {n : ℕ} (i : Fin (n + 1)) : X.left.obj (Opposite.op { len := n }) ⟶ X.left.obj (Opposite.op { len := n + 1 })\", \"doc\": \"Auxiliary definition for `ExtraDegeneracy.homotopy`.\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy\", \"module\": \"Mathlib.AlgebraicTopology.ExtraDegeneracy\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {X : CategoryTheory.SimplicialObject.Augmented C} (ed : X.ExtraDegeneracy) : CategoryTheory.SimplicialObject.Homotopy (CategoryTheory.CategoryStruct.comp X.hom ed.section_) (CategoryTheory.CategoryStruct.id X.left)\", \"doc\": \"If `ed` is an extradegeneracy for an augmented simplicial object `X`, then this\\nis a homotopy from `X.hom ≫ ed.section_` to `𝟙 X.left`.\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy_h\", \"module\": \"Mathlib.AlgebraicTopology.ExtraDegeneracy\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {X : CategoryTheory.SimplicialObject.Augmented C} (ed : X.ExtraDegeneracy) {n✝ : ℕ} (i : Fin (n✝ + 1)) : ed.homotopy.h i = CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy.h ed i\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy.h_eq\", \"module\": \"Mathlib.AlgebraicTopology.ExtraDegeneracy\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {X : CategoryTheory.SimplicialObject.Augmented C} (ed : X.ExtraDegeneracy) {n : ℕ} (i : Fin (n + 1)) (j : ℕ) (hj : j = ↑i.rev := by grind) : CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy.h ed i = CategoryTheory.CategoryStruc\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy.h_eq_assoc\", \"module\": \"Mathlib.AlgebraicTopology.ExtraDegeneracy\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {X : CategoryTheory.SimplicialObject.Augmented C} (ed : X.ExtraDegeneracy) {n : ℕ} (i : Fin (n + 1)) (j : ℕ) (hj : j = ↑i.rev := by grind) {Z : C} (h : X.left.obj (Opposite.op { len := n + 1 }) ⟶ Z) : CategoryTheory.CategoryStruct.comp (Category\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) starts with an already constructed augmented simplicial object and extra degeneracy. It does not construct this free internal deletion complex or identify the actual generator insertion and its arbitrary-T tensor contraction. classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule (RepresentationTheory/Homological/Resolution.lean:160) is for an abstract group over an ordinary ring. ChainComplex.alternatingConst_exactAt is the constant-object special case; Profinite.NobelingProof exactness has different terms. Thus no exact or one-line match."
+  },
+  {
+   "tool": "grep",
+   "query": "contract|extraDegeneracy|homotopy|barComplex",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) starts with an already constructed augmented simplicial object and extra degeneracy. It does not construct this free internal deletion complex or identify the actual generator insertion and its arbitrary-T tensor contraction. classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule (RepresentationTheory/Homological/Resolution.lean:160) is for an abstract group over an ordinary ring. ChainComplex.alternatingConst_exactAt is the constant-object special case; Profinite.NobelingProof exactness has different terms. Thus no exact or one-line match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal tensor exactness of a sheafified free augmented Cech complex split by a global section for a variable sheaf of rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₁ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the first object $ X_1 $ of the associated Mayer-Vietoris short complex is given by sheafif\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) starts with an already constructed augmented simplicial object and extra degeneracy. It does not construct this free internal deletion complex or identify the actual generator insertion and its arbitrary-T tensor contraction. classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule (RepresentationTheory/Homological/Resolution.lean:160) is for an abstract group over an ordinary ring. ChainComplex.alternatingConst_exactAt is the constant-object special case; Profinite.NobelingProof exactness has different terms. Thus no exact or one-line match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented free module deletion complex on powers of a pointed sheaf of sets contracts by insertion of its global point and remains exact after arbitrary internal tensor",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, SheafOfModules.relationsOfIsCokernelFree_I, classifyingSpaceUniversalCover.compForgetAugmented.toModule, SheafOfModules.relationsOfIsCokernelFree_s.",
+   "date": "2026-10-22",
+   "verdict": "no match: ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) assumes an augmented simplicial object with an extra degeneracy already supplied; identifying that construction with these explicit free internal maps is additional work. The representation-theoretic hits concern a monoid over an ordinary ring. ShortComplex.Splitting.exact/map supply abstract split-complex consequences, not these maps or their identities. No exact or one-line specialization states the whole item."
+  },
+  {
+   "tool": "grep",
+   "query": "extraDegeneracy|contractingHomotopy|alternatingFaceMapComplex",
+   "results": "Search subdirectory: AlgebraicTopology. 25 hits: Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean, Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean, Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean, Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean, Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match: ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) assumes an augmented simplicial object with an extra degeneracy already supplied; identifying that construction with these explicit free internal maps is additional work. The representation-theoretic hits concern a monoid over an ordinary ring. ShortComplex.Splitting.exact/map supply abstract split-complex consequences, not these maps or their identities. No exact or one-line specialization states the whole item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A free augmented Cech chain complex of a pointed condensed set is split exact and remains split exact after tensoring with any module",
+   "results": "8 hits: CategoryTheory.ShortComplex.Splitting.exact, ChainComplex.augment, Condensed.instAB4CondensedMod, CategoryTheory.ShortComplex.Splitting.map, CategoryTheory.ShortComplex.Splitting.mk.sizeOf_spec, ChainComplex.toSingle₀AsComplex, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CategoryTheory.ShortComplex.Splitting.shortExact.",
+   "date": "2026-10-22",
+   "verdict": "no match: ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) assumes an augmented simplicial object with an extra degeneracy already supplied; identifying that construction with these explicit free internal maps is additional work. The representation-theoretic hits concern a monoid over an ordinary ring. ShortComplex.Splitting.exact/map supply abstract split-complex consequences, not these maps or their identities. No exact or one-line specialization states the whole item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extraDegeneracy\", \"homotopy\"",
+   "results": "6 hits: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy.h, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy_h, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy.h_eq, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopy.h_eq_assoc.",
+   "date": "2026-10-22",
+   "verdict": "no match: ExtraDegeneracy.homotopyEquiv (Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:415) assumes an augmented simplicial object with an extra degeneracy already supplied; identifying that construction with these explicit free internal maps is additional work. The representation-theoretic hits concern a monoid over an ordinary ring. ShortComplex.Splitting.exact/map supply abstract split-complex consequences, not these maps or their identities. No exact or one-line specialization states the whole item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-internal-bar-resolution",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, formal internal bar input. Former proof steps 4-6 and 9: double-deletion cancellation, insertion of the distinguished point, kernel-factorization exactness and tensoring the contraction. Generalized from the identity point of the condensed group. Agent-formulated argument; independent reference WANTED.",
+   "via": [
+    "lem-sfb-condensed-internal-bar-resolution",
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-pointed-free-deletion-contraction",
+  "worker": "stage1",
+  "group": "Q125",
+  "summary": "Constructed all maps from the fixed free adjunction, wrote out double-deletion cancellation, the actual insertion identities and pointed naturality, and proved image/kernel exactness by a split factorization through the kernel. Tensor additivity and the internal/section comparison are cited explicitly, followed by the same kernel argument for arbitrary T. Reused existing nodes throughout; no new nodes. Normalized imported TeX escapes without changing the mathematical statement.",
+  "blueprint": "The source paragraph (3), open direct image, needs the internal homogeneous bar resolution. Steps 1-4 supply its free differential and nonequivariant point insertion, step 5 the former kernel-factorization exactness, and steps 6-7 the former arbitrary-coefficient tensor contraction. The ancestor command returns None; the existing null from.node and its recorded via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic comparison of internal relative tensor with section-module tensor, preserving the unitors; used only to transport tensor additivity. No node of this unit states the comparison for arbitrary internal modules."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic additivity and monoidal unit of tensor on a ringed site, needed for arbitrary T; the unit has no standalone general tensor-additivity statement."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-a0cc814e4",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-a0cc814e4 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and steps 1–7. The delivery adds no new nodes and no fixes, and its statement is unchanged apart from TeX escape normalization. The parent lem-sfb-condensed-internal-bar-resolution uses it in step 3 with X = G pointed at the identity, relying on every clause. There is no repair or re-split note for this item. Blueprint main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), lines 19–25, only motivates the input, so the agent proof origin with an independent reference WANTED is honest. No SGA source is used. Step 2: removing j then i carries the sign (-1)^{i+j} and removing i then j-1 carries (-1)^{i+j-1}, so the terms cancel in pairs; εd_1 = 1-1 = 0. Step 3: d_{n+1}[e,x] = [x] - h_{n-1}d_n[x], and degree 0 gives ([x]-[e]) + [e] = [x]. Step 4 uses f(e) = e'. Steps 5 and 7: the kernel factorization d_{n+1} = kq with qh_nk = id_K is correct, including n = 0. It runs in Mod(A_sec), reached through def-weil-pbc-internal-abelian-sheaf-module-equivalence, which is abelian by lem-pur-ringed-site-module-category-abelian on the universe-(u+1)-small site. Step 6: additivity of -⊗_A T comes from lem-pe-internal-section-tensor-comparison and lem-pc-sheaf-modules-tensor-closed, and the degree-0 unitor identities check out. The case X = 1 works: d alternates between id and 0, h = id, and both parities satisfy the identities. Duplicate candidates (lem-weil-pbc-cech-nerve-free-homology, lem-weil-pbc-set-cech-nerve-free-resolution, lem-sc-presheaf-free-nerve-exact) cover ordinary-ring or presheaf Čech settings and lack the internal-module setting, the explicit contraction and the arbitrary-T tensor clause, so none is a duplicate. I accept both declared tool_uses, lem-pe-internal-section-tensor-comparison and lem-pc-sheaf-modules-tensor-closed, as generic black boxes; the sibling and parent nodes already use the same comparison."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PointedFreeDeletionContraction",
+  "declaration": "Profinite.CondensedAction.PointedDeletion.exists_natural_contraction",
+  "declarations": [
+   "Profinite.CondensedAction.PointedDeletion.Sets",
+   "Profinite.CondensedAction.PointedDeletion.power",
+   "Profinite.CondensedAction.PointedDeletion.powerMap",
+   "Profinite.CondensedAction.PointedDeletion.deletion",
+   "Profinite.CondensedAction.PointedDeletion.insertion",
+   "Profinite.CondensedAction.PointedDeletion.pointTuple",
+   "Profinite.CondensedAction.PointedDeletion.term",
+   "Profinite.CondensedAction.PointedDeletion.generator",
+   "Profinite.CondensedAction.PointedDeletion.boundary",
+   "Profinite.CondensedAction.PointedDeletion.homotopy",
+   "Profinite.CondensedAction.PointedDeletion.termMap",
+   "Profinite.CondensedAction.PointedDeletion.Contraction",
+   "Profinite.CondensedAction.PointedDeletion.NaturalContraction",
+   "Profinite.CondensedAction.PointedDeletion.exists_natural_contraction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PointedFreeDeletionContraction.lean",
+  "statement": "theorem exists_natural_contraction : Nonempty (NaturalContraction R)",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Canonical finite powers, coordinate deletion, alternating free differentials and point insertion are real definitions using the recorded free adjunction. The theorem specifies augmentation and its section by their generalized-generator formulas and packages all contraction, exactness, arbitrary-tensor and pointed-naturality clauses. No definition chooses data from the postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7edcd503",
+  "group": "NM",
+  "result": "pass",
+  "note": "Every node clause matched: alternating deletion boundary (succAbove, signs, shift), point-prepending homotopy, augmentation and section uniquely fixed by generator formulas through the free adjunction (not hollow), all three contracting identities, exactness and epi clauses, arbitrary-T tensored versions with the left unitor, pointed naturality, no flatness or group law. Edge cases n=0/1, X=1, empty S, zero ring, nonflat T; universes as in the free-adjunction record. Record verbatim, only lean changed, 14 declarations present, docstrings and proof steps 1-7, searches agree (ExtraDegeneracy not a match). Maintainer notes: onSections/regularOne are owned by parent theorem lem-sfb-condensed-internal-bar-resolution (trivial wrappers in a module that must be imported anyway; move them with free/freeAdjunction when relocating to fix the stage-3 import cycle); Modules/sectionModule/sectionRings owners not in stmt_deps (stage 2 cannot add existing nodes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T061023-L-2393346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

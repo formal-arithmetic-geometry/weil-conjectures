@@ -14,51 +14,29 @@
  ],
  "proof": [
   {
-   "text": "Unpack [def-weil-pbc-essentially-finite-type-algebra] for $P$ and $Q$: choose finite type $k$-algebras $B,C$, multiplicative subsets $W\\subset B$, $Z\\subset C$, and identifications $P=W^{-1}B$, $Q=Z^{-1}C$. By [def-weil-pbc-finite-type-algebra], choose algebra generators $b_1,\\ldots,b_r$ of $B$ and $c_1,\\ldots,c_s$ of $C$. Write $p_i=b_i/1\\in P$ and $q_j=c_j/1\\in Q$. Thus every element of $P$ is $b/w$, with $b,w$ polynomials in the $b_i$ and $w\\in W$; every element of $Q$ has the corresponding form $c/z$. No finite generation of either localization as a $k$-algebra is being assumed.",
+   "text": "Apply [lem-trf-compatible-polynomial-fraction-presentations] to the surjective $k$-algebra maps $u,v$, whose sources are essentially of finite type. Obtain $D=k[x_1,\\ldots,x_r,y_1,\\ldots,y_s]$ and maps $f:D\\to P$, $g:D\\to Q$ with $u f=v g=:h$. For each $p\\in P$ it gives $a,t$ in the $x$-polynomial subalgebra with $f(t)$ a unit and $p f(t)=f(a)$; for each $q\\in Q$ it gives $c,z$ in the $y$-polynomial subalgebra with $g(z)$ a unit and $q g(z)=g(c)$. Viewed in $D$, these are exactly the two fraction hypotheses of step 2.",
    "uses": [
-    "def-weil-pbc-essentially-finite-type-algebra",
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SF (lemma-lci-local), regular-local presentation comparison, refined through a common polynomial localization; Tag 00SE (lemma-ci-well-defined)"
-   }
-  },
-  {
-   "text": "Surjectivity of $u$ and $v$ supplies elements $\\widetilde q_j\\in P$ and $\\widetilde p_i\\in Q$ with $u(\\widetilde q_j)=v(q_j)$ and $v(\\widetilde p_i)=u(p_i)$. Set $D=k[x_1,\\ldots,x_r,y_1,\\ldots,y_s]$. The evaluation property in [def-weil-pbc-mv-polynomial-ring] gives maps $f:D\\to P$, $g:D\\to Q$ by $f(x_i)=p_i$, $f(y_j)=\\widetilde q_j$, $g(x_i)=\\widetilde p_i$, $g(y_j)=q_j$. They have the same composite $h=u\\circ f=v\\circ g:D\\to A$, since these composites agree on the variables and on $k$. Put $\\mathfrak n=h^{-1}(\\mathfrak m_A)$. This is a prime ideal: if $h(ab)\\in\\mathfrak m_A$, the field $A/\\mathfrak m_A$ gives $h(a)\\in\\mathfrak m_A$ or $h(b)\\in\\mathfrak m_A$, and $h(1)\\notin\\mathfrak m_A$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SF (lemma-lci-local), regular-local presentation comparison, refined through a common polynomial localization; Tag 00SE (lemma-ci-well-defined)"
-   }
-  },
-  {
-   "text": "Let $T=D_{\\mathfrak n}$, a local ring with maximal ideal $\\mathfrak nT$ by [def-weil-pbc-localization-at-prime]. Since $u,v$ are local, $u^{-1}(\\mathfrak m_A)=\\mathfrak m_P$ and $v^{-1}(\\mathfrak m_A)=\\mathfrak m_Q$: elements in the source maximal ideal map into the target maximal ideal, and elements outside it are units and stay units. Hence $f^{-1}(\\mathfrak m_P)=\\mathfrak n=g^{-1}(\\mathfrak m_Q)$. The localization universal property [lem-weil-pbc-ring-localization-universal-property] extends $f,g,h$ to $\\alpha:T\\to P$, $\\beta:T\\to Q$, $\\gamma:T\\to A$, by $d/t\\mapsto f(d)f(t)^{-1}$ and the analogous formulas. The maps are local, since numerators in $\\mathfrak n$ map into the respective maximal ideals. Uniqueness gives $u\\alpha=\\gamma=v\\beta$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-ring-localization-universal-property"
+    "lem-trf-compatible-polynomial-fraction-presentations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00CP (proposition-universal-property-localization), with the common-polynomial refinement of Tag 00SF"
+    "place": "Tag 00SF (lemma-lci-local), simultaneous polynomial-presentation refinement"
    }
   },
   {
-   "text": "The extensions $\\alpha$ and $\\beta$ are surjective, directly from the fraction descriptions in step 1. Indeed, for $b/w\\in P$ choose polynomials $a(x),t(x)$ representing $b,w\\in B$. Then $f(t)=w/1$ is a unit of $P$, so $h(t)=u(w/1)$ is a unit of $A$, whence $t\\notin\\mathfrak n$. The element $a(x)/t(x)\\in T$ maps to $b/w$. For $c/z\\in Q$, represent $c,z$ by polynomials $a(y),t(y)$ in the $c_j$; the same argument uses $g(t)=z/1$ and gives a preimage under $\\beta$. Thus $\\gamma=u\\alpha=v\\beta$ is surjective too.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-trf-common-localization-surjective-diagram] to the underlying ring maps $f,g,u,v$. The polynomial fraction witnesses from step 1 are also witnesses in $D$; $P,Q,A$ are local rings and $u,v$ are local surjections by hypothesis. Thus $\\mathfrak n=h^{-1}(\\mathfrak m_A)$ is prime and $T=D_{\\mathfrak n}$ has surjective local ring maps $\\alpha:T\\to P$, $\\beta:T\\to Q$, $\\gamma:T\\to A$, with $u\\alpha=\\gamma=v\\beta$. These are equalities of maps on the same ring $T$, as needed for comparing their kernels.",
+   "uses": [
+    "lem-trf-common-localization-surjective-diagram"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SF (lemma-lci-local), regular-local presentation comparison, refined through a common polynomial localization; Tag 00SE (lemma-ci-well-defined)"
+    "place": "Tag 00CP (proposition-universal-property-localization), common prime-local extension and fraction surjectivity"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-polynomial-ring-field-regular-ring] to the polynomial ring $D$ and its prime $\\mathfrak n$: $T$ is regular local. Consequently $T\\xrightarrow{\\alpha}P\\xrightarrow{u}A$ is a chain of surjective local homomorphisms with both source rings regular local. The statement of [lem-trf-regular-local-surjection-kernel-comparison] applies without completeness assumptions and says that $\\ker\\gamma=\\ker(u\\alpha)$ is generated by a finite regular sequence in $\\mathfrak m_T$ if and only if $\\ker u$ is generated by a finite regular sequence in $\\mathfrak m_P$.",
+   "text": "Apply [lem-weil-pbc-polynomial-ring-field-regular-ring] to the $r+s$ variables of $D$ (renumbered as one finite list) and the prime $\\mathfrak n$ of step 2. Thus $T=D_{\\mathfrak n}$ is regular local. Apply [lem-trf-regular-local-surjection-kernel-comparison] to $T\\xrightarrow{\\alpha}P\\xrightarrow{u}A$: both maps are surjective local and $T,P$ are regular local. Since $u\\alpha=\\gamma$, their composite kernel is exactly $\\ker\\gamma$. Hence its finite regular-sequence property in $\\mathfrak m_T$ is equivalent to that of $\\ker u$ in $\\mathfrak m_P$.",
    "uses": [
     "lem-weil-pbc-polynomial-ring-field-regular-ring",
     "lem-trf-regular-local-surjection-kernel-comparison"
@@ -66,34 +44,31 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00OQ (proposition-finite-gl-dim-polynomial-ring) and 00SE (lemma-ci-well-defined), conditions (1) and (3)"
+    "place": "Tags 00OQ (proposition-finite-gl-dim-polynomial-ring) and 00SE (lemma-ci-well-defined), (1) iff (3)"
    }
   },
   {
-   "text": "Apply [lem-trf-regular-local-surjection-kernel-comparison] to $T\\xrightarrow{\\beta}Q\\xrightarrow{v}A$, whose maps are surjective local and whose first two rings are regular local. It identifies the same property of $\\ker\\gamma=\\ker(v\\beta)$ with the asserted property of $\\ker v$. Combining the two equivalences proves the desired equivalence for $\\ker u$ and $\\ker v$. The comparison lemma explicitly permits empty sequences, so this argument also includes zero kernels. All rings used are the original local rings or the polynomial localization $T$; none has been completed.",
+   "text": "Apply [lem-trf-regular-local-surjection-kernel-comparison] to $T\\xrightarrow{\\beta}Q\\xrightarrow{v}A$. The maps are surjective local ring homomorphisms by step 2, and $T,Q$ are regular local by step 3 and the original hypothesis. The equality $v\\beta=\\gamma$ identifies this composite kernel with the same ideal $\\ker\\gamma\\subseteq T$ used in step 3. Thus the regular-sequence properties of $\\ker u$ and $\\ker v$ are equivalent through that one ideal. Both comparisons allow empty sequences and require no completeness.",
    "uses": [
     "lem-trf-regular-local-surjection-kernel-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SE (lemma-ci-well-defined), conditions (1) and (3); conclusion of Tag 00SF (lemma-lci-local)"
+    "place": "Tag 00SE (lemma-ci-well-defined), (1) iff (3); assembly of Tag 00SF (lemma-lci-local)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-essentially-finite-type-algebra",
-  "def-weil-pbc-finite-type-algebra",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-trf-compatible-polynomial-fraction-presentations",
+  "lem-trf-common-localization-surjective-diagram",
   "lem-weil-pbc-polynomial-ring-field-regular-ring",
   "lem-trf-regular-local-surjection-kernel-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Common-polynomial refinement of Tag 00SF (lemma-lci-local), using the existing surjective-chain comparison of Tag 00SE; evaluation and fraction details supplied explicitly."
+  "place": "Re-split of the common-polynomial refinement of Tag 00SF (lemma-lci-local): compatible fraction presentations and common-localization diagram are separate statements; assembly uses Tag 00OQ and Tag 00SE twice."
  },
  "mathlib_searches": [
   {
@@ -201,20 +176,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-essentially-finite-type-ci-kernel-invariance",
   "worker": "stage1",
-  "summary": "Expanded presentation independence by choosing finite-type localization models for both sources, lifting both finite sets of polynomial generators across the surjections, and constructing a single regular local polynomial localization mapping surjectively and locally to both sources over A. Applied the existing Tag 00SE comparison twice. Statement unchanged; no new nodes, no completeness argument, no Lean attachment. Repeated item searches with two semantic phrasings and inspected the hits; retained the inherited searches.",
-  "blueprint": "The affine-local complete-intersection input below lem-trf-local-term-locality, through lem-trf-lci-pointwise-criterion: the Tag 00SF (1) implies (2) replacement of a regular-local presentation by a chosen polynomial-local presentation. This algebraic detail supports the inherited sk-i-curve-zero deformation route; no unit step is replaced.",
+  "summary": "Human-directed re-split and landing-return repair, rebuilt by the delivery tool on the current DAG. Two independently stateable unsplit lemmas carry simultaneous polynomial evaluation with fraction witnesses and the common prime-local extension/surjectivity diagram; all old construction arguments are preserved in the report. The four-step assembly uses these lemmas, polynomial-local regularity, and the existing regular-local kernel comparison twice. Current item fields outside the split agree with the retained delivery; all current cited statements and literal quotations were re-read. Step 1 now writes both unit-denominator equations explicitly, checking the exact hypotheses needed in step 2. The original statement, statement dependencies, sources, searches, and maintainer metadata are preserved.",
+  "blueprint": "The affine-local complete-intersection input below lem-trf-local-term-locality, through lem-trf-lci-pointwise-criterion: the Tag 00SF (1) implies (2) replacement of a regular-local presentation by a chosen polynomial-local presentation. This algebraic detail supports the inherited sk-i-curve-zero deformation route; no unit step is replaced. Re-split: new lemmas carry the common-polynomial construction and its prime-local extension from returned steps 1-4; assembly retains returned steps 5-6.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q22-5adc0532f",
-  "group": "Q22",
+  "reviewer": "NT-cc-Q96-d5386113a",
+  "group": "Q96",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-5adc0532f (reviewer sub-agent of L); spot-checked: Read all required guidance, the item, unit/chapter route, cited DAG statements, and Stacks Tags 00SD, 00SE, 00SF, 00CP, and 00OQ. The six-step common-localization proof is correct, hypotheses and edge cases check out, no new nodes or duplicates were introduced, and no forbidden route or source is used. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-d5386113a (reviewer sub-agent of L); spot-checked: This is the fourth push of the human-ordered re-split of lem-trf-essentially-finite-type-ci-kernel-invariance (repair note released 2026-10-22). The earlier heads 4514391f, 86a58d10 and 228b2c3a were PASSed, and L refused each landing only because the side completion was not yet promoted. The live and side-live node still has the old six-step proof dated 2026-10-18, so no other group has superseded this delivery. Diff against 228b2c3a: both new nodes are byte-identical. In the item, the statement, stmt_deps, source, blueprint and steps 2-4 are unchanged. Step 1 now writes p f(t)=f(a) and q g(z)=g(c) explicitly, and the split_report changed. That is a real edit, not an A6 re-push, and it adds no claim. Re-split coverage: old steps 1-2 and the fraction witnesses of old step 4 are in lem-trf-compatible-polynomial-fraction-presentations (1103 characters). The prime claim, old step 3 and old step 4 are in lem-trf-common-localization-surjective-diagram (1232 characters). Old steps 5-6 are the assembly, 2106 characters in 4 steps. Nothing is dropped, and neither new node restates the item. I re-checked node 1: from P=W^-1B with generators, cross lifts, and evaluation uniqueness, uf=vg; for p=b/w, f(t)=w/1 is a unit and p f(t)=f(a). It holds for r=s=0, P=k(t) and A=0. I re-checked node 2 for any ring D: n=h^-1(m_A) is prime; for a local surjection u, u^-1(m_A)=m_P. Stacks 00CP (algebra.tex l.1084) gives unique alpha, beta and gamma by its formula. They are local because nT has numerators in n. They are surjective because f(t) a unit puts t outside n, and uα=γ=vβ by uniqueness. Assembly: the polynomial ring over a field is regular at every prime, so T=D_n is regular local. The kernel comparison (U=T, V=P or Q, W=A) applies twice, and ker(uα)=ker γ=ker(vβ), so the item follows exactly, with empty sequences allowed and no completeness. There are no SGA citations, no cycle and no tool_uses. An rg -L duplicate search found no duplicate. No fixes."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.EssentiallyFiniteTypeCIKernelInvariance",
@@ -234,5 +209,16 @@
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, route-pivot compliance, report sections, and compiler evidence all checked; no findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

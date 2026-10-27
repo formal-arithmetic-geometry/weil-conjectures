@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-base-flat-polynomial-tor-bound",
+ "kind": "statement",
+ "title": "Base-flat polynomial modules: ordinary Tor bound and base derived tensor",
+ "statement": "Let $R$ be a commutative ring, $n\\geq0$ an integer, and $P=R[x_1,\\ldots,x_n]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring]. Let $M$ be a $P$-module whose restriction along $R\\to P$ is flat [def-weil-pbc-flat-ring-map]. Use first-variable ordinary module Tor [def-weil-pbc-tor-modules] and ordinary module derived categories [def-weil-abstract-derived-category], with derived tensor computed on K-flat first complexes as in [lem-pc-source-kflat-module-tensor-model]. For every $R$-module $L$ there is an isomorphism in $D(R)$ $$M[0]\\otimes_R^{\\mathbf L}L[0]\\cong(M\\otimes_RL)[0],$$ and $\\operatorname{Tor}^R_j(M,L)=0$ for every $j>0$. For every $P$-module $N$ one has $\\operatorname{Tor}^P_j(M,N)=0$ for every $j>n$. No finite-generation or Noetherian hypothesis is imposed. The cases $n=0$, $M=0$ and the zero ring are included.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 068X, lemma-perfect-over-polynomial-ring, base-to-polynomial Tor-bound input; ordinary-module quantitative refinement using the existing general polynomial Tor bound. Base derived tensor computation: section-derived-tensor-product."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-tor-modules",
+  "def-weil-abstract-derived-category",
+  "lem-pc-source-kflat-module-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "Regard $M$ as an $R$-module. By [lem-weil-pbc-flat-tensor-exact], its tensor functors preserve exact sequences. The complex $M[0]$ has flat terms (the zero terms have zero tensor functors) and is bounded above by zero. Apply [lem-pc-module-bounded-flat-kflat]; the equivalent categorical convention in [def-pc-module-kflat-complex] makes $M[0]$ an admissible first complex for [lem-pc-source-kflat-module-tensor-model]. Apply that comparison with second complex $L[0]$. In degree $q$, the total tensor has only the summand with both indices zero when $q=0$, and otherwise is zero; its differentials vanish. Thus it is $(M\\otimes_R L)[0]$, giving the asserted isomorphism in $D(R)$ for every $L$, without any flatness condition on $L$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 064K (lemma-derived-tor-quasi-isomorphism), 06XZ (definition-K-flat), 06XY (section-derived-tensor-product); ordinary-module first-factor model of the cited node."
+   }
+  },
+  {
+   "text": "Compute ordinary Tor independently of the derived-category convention. For any $R$-module $L$, choose a projective resolution $F_\\bullet\\to L$ as in [def-weil-pbc-tor-modules]. For every $j>0$ the sequence $F_{j+1}\\to F_j\\to F_{j-1}$ is exact. By [lem-weil-pbc-flat-tensor-exact], tensoring this sequence with the flat module $M$ remains exact, so $H_j(F_\\bullet\\otimes_R M)=0$. The definition identifies this homology with $\\operatorname{Tor}^R_j(L,M)$. Now [lem-weil-pbc-tor-symmetry], applied over the commutative ring $R$, identifies $\\operatorname{Tor}^R_j(M,L)$ with $\\operatorname{Tor}^R_j(L,M)$, and hence with zero. This supplies first-variable ordinary Tor vanishing for every test module $L$.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat), exact tensor criterion; Tag 00M3 (lemma-tor-left-right), symmetry of projective-resolution Tor."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-polynomial-tor-bound] with $A=R$, the given polynomial $P$-module $M$, the given natural number $n$, and $d=0$. Step 2 supplies precisely its hypothesis for the restriction along $R\\to P$: all ordinary $\\operatorname{Tor}^R_j(M,L)$ vanish when $j>0$. Its conclusion is $\\operatorname{Tor}^P_j(M,N)=0$ when $j>0+n=n$, for every $P$-module $N$. The cited result has no finiteness hypotheses and explicitly permits $n=0$, $d=0$, and the zero ring and module. Step 1 likewise used no finiteness condition. When $M=0$ all displayed tensors are zero; over the zero ring every unital module is zero. Thus all specified boundary cases are retained.",
+   "uses": [
+    "lem-pc-polynomial-tor-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/RingTheory/PolynomialTorBound.lean",
+    "place": "ModuleCat.polynomial_tor_bound_of_base_tor_bound, lines 47–97; ordinary-module quantitative input recorded by the cited node (Weibel Theorem 4.3.7)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-pc-polynomial-tor-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 064K and 06XY for the base derived calculation; algebra.tex Tags 00HD and 00M3 for ordinary Tor; specialize existing lem-pc-polynomial-tor-bound at d=0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Tor.*[Ff]lat|[Ff]lat.*Tor|[Pp]olynomial.*[Tt]or",
+   "results": "{\"t\": \"2026-10-22T06:46:03Z\", \"tool\": \"grep\", \"query\": \"Tor.*[Ff]lat|[Ff]lat.*Tor|[Pp]olynomial.*[Tt]or\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\"], \"digest\": \"5507eb310757e02a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exactness of tensor with flat modules and polynomial Krull-dimension results do not give the polynomial Tor bound or the derived tensor isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat module over the base ring has projective resolution Tor zero in positive degrees and polynomial extension raises Tor dimension by number of variables",
+   "results": "{\"t\": \"2026-10-22T06:46:03Z\", \"tool\": \"leansearch\", \"query\": \"A flat module over the base ring has projective resolution Tor zero in positive degrees and polynomial extension raises Tor dimension by number of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.projectiveResolution\", \"Module.Flat\", \"Module.Flat.of_projective\", \"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.mk\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_rTensor_injectiveₛ\"], \"digest\": \"a3b8ffe196f6e278\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exactness of tensor with flat modules and polynomial Krull-dimension results do not give the polynomial Tor bound or the derived tensor isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, MvPolynomial",
+   "results": "{\"t\": \"2026-10-22T06:46:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exactness of tensor with flat modules and polynomial Krull-dimension results do not give the polynomial Tor bound or the derived tensor isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module over R[x1,...,xn] flat over R has Tor over the polynomial ring zero above n and derived tensor over R is ordinary tensor",
+   "results": "{\"t\": \"2026-10-22T06:46:13Z\", \"tool\": \"leanfinder\", \"query\": \"A module over R[x1,...,xn] flat over R has Tor over the polynomial ring zero above n and derived tensor over R is ordinary tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Algebra.Smooth.flat\", \"Module.Flat.iff_rTensor_exact'\", \"Module.FaithfullyFlat.iff_zero_iff_rTensor_zero\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.FaithfullyFlat.iff_zero_iff_lTensor_zero\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"b3ce9234c21bca51\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exactness of tensor with flat modules and polynomial Krull-dimension results do not give the polynomial Tor bound or the derived tensor isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b|torAmplitude|flatDimension",
+   "results": "{\"t\": \"2026-10-22T06:46:14Z\", \"tool\": \"grep\", \"query\": \"\\\\bTor\\\\b|torAmplitude|flatDimension\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"da911e168f4f55db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exactness of tensor with flat modules and polynomial Krull-dimension results do not give the polynomial Tor bound or the derived tensor isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"flat\"",
+   "results": "{\"t\": \"2026-10-22T06:46:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Tor\\\", \\\"flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Vector.flatten\", \"Vector.flatMap\", \"Vector.flatMapM\", \"Vector.flatMap_id\", \"Vector.flatMap_id'\", \"Vector.flatten_replicate_replicate\", \"Vector.flatMap_def\", \"Vector.flatMap_replicate\"], \"digest\": \"f95fd0991e18798b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exactness of tensor with flat modules and polynomial Krull-dimension results do not give the polynomial Tor bound or the derived tensor isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat dimension over a polynomial ring is at most the number of indeterminates for a module flat over the coefficient ring",
+   "results": "{\"t\": \"2026-10-22T06:46:25Z\", \"tool\": \"leanfinder\", \"query\": \"Flat dimension over a polynomial ring is at most the number of indeterminates for a module flat over the coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.LinearDisjoint.rank_le_one_of_flat_of_self\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"rank_mvPolynomial_mvPolynomial\", \"Module.free_of_flat_of_finrank_eq\", \"Algebra.Smooth.flat\", \"Subalgebra.LinearDisjoint.rank_eq_one_of_flat_of_self_of_inj\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\"], \"digest\": \"0cf1b007063a4212\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exactness of tensor with flat modules and polynomial Krull-dimension results do not give the polynomial Tor bound or the derived tensor isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Ff]lat|[Ff]lat.*Tor|polynomial_tor_bound",
+   "results": "{\"t\": \"2026-10-23T09:32:54Z\", \"tool\": \"grep\", \"query\": \"Tor.*[Ff]lat|[Ff]lat.*Tor|polynomial_tor_bound\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\"], \"digest\": \"a492e0309534a107\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned tensor-exactness, torsion-free, projective-Tor or Krull-dimension results do not state all clauses of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat modules have vanishing higher Tor and flat dimension over a polynomial ring increases by at most its number of variables",
+   "results": "{\"t\": \"2026-10-23T09:32:54Z\", \"tool\": \"leansearch\", \"query\": \"Flat modules have vanishing higher Tor and flat dimension over a polynomial ring increases by at most its number of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_exact\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat\", \"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.of_forall_isTrivialRelation\", \"Module.Flat.iff_flat_tensorProduct\"], \"digest\": \"e4b939ba18d8c634\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned tensor-exactness, torsion-free, projective-Tor or Krull-dimension results do not state all clauses of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T09:32:54Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned tensor-exactness, torsion-free, projective-Tor or Krull-dimension results do not state all clauses of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module over a polynomial ring flat over the base ring has ordinary Tor zero above the number of variables and its base derived tensor is ordinary tensor",
+   "results": "{\"t\": \"2026-10-23T09:33:02Z\", \"tool\": \"leanfinder\", \"query\": \"A module over a polynomial ring flat over the base ring has ordinary Tor zero above the number of variables and its base derived tensor is ordinary tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_rTensor\", \"Module.FaithfullyFlat.iff_zero_iff_rTensor_zero\", \"Module.FaithfullyFlat.iff_zero_iff_lTensor_zero\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.FaithfullyFlat\"], \"digest\": \"4da9caabd043a55e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned tensor-exactness, torsion-free, projective-Tor or Krull-dimension results do not state all clauses of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|flatDimension|isZero.*[Tt]or|[Tt]or.*isZero",
+   "results": "{\"t\": \"2026-10-23T09:34:23Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|flatDimension|isZero.*[Tt]or|[Tt]or.*isZero\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"ffc5cfda4fb355d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned tensor-exactness, torsion-free, projective-Tor or Krull-dimension results do not state all clauses of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"flat\"",
+   "results": "{\"t\": \"2026-10-23T09:34:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Tor\\\", \\\"flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Vector.flatten\", \"Vector.flatMap\", \"Vector.flatMapM\", \"Vector.flatMap_id\", \"Vector.flatMap_id'\", \"Vector.flatten_replicate_replicate\", \"Vector.flatMap_def\", \"Vector.flatMap_replicate\"], \"digest\": \"f95fd0991e18798b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned tensor-exactness, torsion-free, projective-Tor or Krull-dimension results do not state all clauses of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat dimension over R[x1,...,xn] is bounded by flat dimension over R plus n",
+   "results": "{\"t\": \"2026-10-23T09:34:34Z\", \"tool\": \"leanfinder\", \"query\": \"Flat dimension over R[x1,...,xn] is bounded by flat dimension over R plus n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"Polynomial.ringKrullDim_le\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\"], \"digest\": \"0d728d8f4f27e436\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned tensor-exactness, torsion-free, projective-Tor or Krull-dimension results do not state all clauses of this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-polynomial-quotient-perfect",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: coherent relative-duality polynomial-chart input; the algebraic upper-shriek relative-perfection calculation used before the marked dualizing construction. More precisely, returned item proof steps 2--3: compute both base Tor conventions on the degree-zero flat model, then transfer the ordinary bound across the polynomial variables.",
+   "via": [
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-base-flat-polynomial-tor-bound",
+  "worker": "stage1",
+  "summary": "Assemble three explicit steps using existing bounded-flat K-flatness, first-complex derived tensor, exact tensor, ordinary Tor symmetry, and general polynomial Tor bound; no new nodes, no hypothesis changes. Ordinary Tor is computed by projective resolution independently of derived tensor.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), contracting-correspondence specialization branch; its existing coherent relative-duality polynomial-chart refinement is continued through parent lem-trf-flat-polynomial-quotient-perfect, proof steps 2--3. This split computes the base derived tensor and first-variable Tor before specializing the existing polynomial transfer bound.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module bounded-flat K-flatness, used on M[0]; the trace-formula unit has no such algebraic lemma."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic ordinary-module derived tensor computation on a K-flat first complex, already in the item statement; no trace-formula unit result supplies this comparison."
+   },
+   {
+    "node": "lem-weil-pbc-tor-symmetry",
+    "why": "Generic symmetry of ordinary projective-resolution Tor changes the resolved test module back to the mandated first-variable convention; no trace-formula unit result states it."
+   },
+   {
+    "node": "lem-pc-polynomial-tor-bound",
+    "why": "Existing general ordinary Tor transfer bound specialized at d=0, explicitly the item source route; no trace-formula unit result states this commutative algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-pc-polynomial-tor-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-855a51408",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-855a51408 (reviewer sub-agent of L); spot-checked: I read all of the item, a first split with no new nodes: three steps that use only existing reviewed nodes. The statement is unchanged and matches what the parent lem-trf-flat-polynomial-quotient-perfect step 2 uses. It is the ordinary-module, finiteness-free form of Stacks 068X (more-algebra.tex 20174-20220), whose proof needs pseudo-coherence, so proof_origin agent is correct. Small cases checked: n=0, M=0, the zero ring, R=k with M=k[x]/(x) (Tor_1 nonzero, Tor_2 zero, so the bound is sharp), and Z with Q (flat but not projective). Step 1: flat-tensor-exact (00HD) supplies the exactness that lem-pc-module-bounded-flat-kflat (064K) needs, so M[0] is K-flat. def-pc-module-kflat-complex uses the same acyclic-tensor convention as lem-pc-source-kflat-module-tensor-model, which allows any L[0]. Tot(M[0] tensor L[0]) equals (M tensor L)[0], so the iso holds in D(R). Step 2: a projective resolution of L stays exact after tensoring with M for every j at least 1, so Tor_j(L,M)=0, and lem-weil-pbc-tor-symmetry (00M3) gives the first-variable form. Step 3: lem-pc-polynomial-tor-bound with d=0 gives the third clause. proof_deps equals the union of the uses, and there is no cycle. A scan of all node statements for Tor and flat found no duplicate of the conjunction. I accept the four declared tool_uses: bounded-flat-kflat, source-kflat-tensor-model, tor-symmetry and polynomial-tor-bound, all generic algebra. No SGA. Advisory only: the item has no lean_audit field, carried over from the base node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BaseFlatPolynomialTorBound",
+  "declaration": "ModuleCat.base_flat_polynomial_tor_bound",
+  "file": "lean/Sheaf/RingTheory/BaseFlatPolynomialTorBound.lean",
+  "statement": "theorem base_flat_polynomial_tor_bound {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)] (n : ℕ) (M : ModuleCat.{u} (MvPolynomial (Fin n) R)) (hflat : Module.Flat R ((restrictScalars MvPolynomial.C).obj M)) : (∀ L : ModuleCat.{u} R, Nonempty (((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj ((restrictScalars MvPolynomial.C).obj M)) ⊗ ((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj L) ≅ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj (((restrictScalars MvPolynomial.C).obj M) ⊗ L))) ∧ (∀ (L : ModuleCat.{u} R) (j : ℕ), 0 < j → IsZero (((Tor' (ModuleCat.{u} R) j).obj ((restrictScalars MvPolynomial.C).obj M)).obj L)) ∧ (∀ (N : ModuleCat.{u} (MvPolynomial (Fin n) R)) (j : ℕ), n < j → IsZero (((Tor' (ModuleCat.{u} (MvPolynomial (Fin n) R)) j).obj M).obj N))",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6cc9a961",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Each node clause matches the Lean. Flatness is on the R-restriction via MvPolynomial.C. The first clause is ∀ L, Nonempty iso M[0]⊗ᴸL[0] ≅ (M⊗L)[0] in DerivedCategory(ModuleCat R); ⊗ is the K-flat derived tensor of lem-pc-source-kflat-module-tensor-model via hasDerivedMonoidalCategory + ModuleCat.hasFunctorialFlatResolution. Both Tor clauses use first-variable Tor' (def-weil-pbc-tor-modules record) and the bound is n<j strict; conventions match lem-pc-polynomial-tor-bound for step 3 with d=0. No extra hypotheses; universe w is free. Edge cases checked: n=0, M=0, zero ring, k[x]/(x) sharpness, Q over Z. lean.statement is verbatim with the file. Docstrings carry the source places and blueprint tag. Proof is sorry only, no definitions. No duplicate or parallel landing. The report has Worker report and Second reading sections. No compile run, since no file was changed."
+ }
+}

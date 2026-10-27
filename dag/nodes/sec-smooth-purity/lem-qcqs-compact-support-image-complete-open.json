@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "stmt_deps": [],
+ "proof_deps": [
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-sf-open-quotient-koszul-completeness",
+  "lem-sf-open-dvr-ringed-identification",
+  "lem-sf-complete-direct-image-reduction"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": "lem-qcqs-compact-support-finite-comparison",
+  "from": null,
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportImageComplete",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "openExtension IsSfDerivedComplete proEtaleRingDerivedDirectImage completeness",
+   "results": "No existing public theorem with this exact predicate and functor was found.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "id": "lem-qcqs-compact-support-image-complete-open",
+ "title": "Derived completeness after qcqs open extension",
+ "statement": "Under the hypotheses of lem-qcqs-compact-support-image-complete, the completed open extension of every integral constructible input is derived complete.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Open extension part of the completeness paragraph of the proper/open compact-support argument",
+  "note": "Strictly smaller open factor of the compact-support image completeness statement."
+ },
+ "proof": [
+  {
+   "text": "The compactification open factor is quasi-compact because f is quasi-compact. Map the unit l in the base field to global sections of X and to global sections of c.Z through c.g followed by the structure morphism of Y. This establishes exactly the two invertibility hypotheses of the existing open-completeness theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Convert intrinsic derived completeness of K, which is the first part of its integral constructibility property, to unrestricted quotient completeness. The proved compactSupport_complete_iff helper uses the intrinsic/legacy comparison and an auxiliary finite field of characteristic different from l; it adds no assumption on the actual base field.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the open-preservation clause of openQuotientKoszulCompleteness to c.i. It supplies a projection-normalized DVR open model O and quotient completeness of O.jShriek(K). Convert that conclusion back to intrinsic derived completeness using the same intrinsic/legacy comparison.",
+   "uses": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The proved openDvr_ringed_identification identifies O.jShriek naturally with the actual PurCompactSupport.openExtension-derived functor in the goal. Apply its component at K and the proved complete_iso helper: the natural reduction units and transitions transport the distinguished Roos triangle along this isomorphism. This proves the original statement without a new intermediate obligation.",
+   "uses": [
+    "lem-sf-open-dvr-ringed-identification",
+    "lem-sf-complete-direct-image-reduction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": "E8: complete Lean proof from the already proved quotient/Koszul open-completeness assembly and the DVR-to-ringed open identification; intrinsic/legacy and isomorphism transport reuse proved private helpers. No new statements or holes.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompactSupportOpenComplete",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportOpenComplete.lean",
+  "declaration": "WeilConjectures.sfQcqsCompactSupport_open_complete",
+  "declarations": [
+   "WeilConjectures.sfQcqsCompactSupport_open_complete"
+  ],
+  "statement": "theorem sfQcqsCompactSupport_open_complete (K : sfIntegralConstructibleCategory l E X) : IsSfDerivedComplete l E c.Z ((openExtension (completed l E) c.i).mapDerivedCategory.obj K.obj)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T222746-L-692191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261027T012826-L-2336758",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

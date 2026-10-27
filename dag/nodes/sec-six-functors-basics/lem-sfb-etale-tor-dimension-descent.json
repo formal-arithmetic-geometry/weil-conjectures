@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-etale-tor-dimension-descent",
+ "kind": "statement",
+ "title": "Etale descent of Tor amplitude and local finite Tor dimension",
+ "statement": "Let $X$ be any scheme [def-pc-scheme] and $\\epsilon_X:(X_{\\mathrm{et}},\\mathcal O_{X,\\mathrm{et}})\\to(X_{\\mathrm{Zar}},\\mathcal O_X)$ the canonical morphism of ringed sites, with tensor module pullback $\\epsilon_X^*$ [lem-trf-zariski-etale-functor-comparison-square]. Let $E\\in D(\\mathcal O_X)$ be arbitrary. Use unbounded derived categories of sheaves of modules [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. Write $\\otimes^{\\mathbf L}$ for the derived tensor product, computed by a K-flat resolution [def-pc-kflat-complex] and the total tensor complex [def-pc-tensor-complex-sheaves]. An object $K$ has Tor amplitude in $[a,b]$, for integers $a\\le b$, if $H^j(K\\otimes^{\\mathbf L}F)=0$ for every structure-module sheaf $F$ and every $j\\notin[a,b]$. It has finite Tor dimension if such an interval exists; it locally has finite Tor dimension if locally on every site object some such interval exists, allowed to depend on the covering member. For every $a\\le b$, $E$ has Tor amplitude in $[a,b]$ if and only if $\\epsilon_X^*E$ has Tor amplitude in $[a,b]$. In addition, $E$ locally has finite Tor dimension in the Zariski topology if and only if $\\epsilon_X^*E$ locally has finite Tor dimension in the small etale topology. No quasi-coherence or global boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08HF (lemma-descend-tor-amplitude), including its Zariski-local application after taking a finite subcover over an affine open; Tor conventions: sites-cohomology.tex Tag 08FZ (definition-tor-amplitude)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-scheme",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-derived-etale-zariski-equivalence], $\\epsilon_X^*$ is exact and faithful on ALL structure-module sheaves, without quasi-coherence. Its termwise functor therefore represents its derived functor by [lem-weil-pbc-exact-functor-derived-factorization]. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to obtain $H^j(\\epsilon_X^*C)\\simeq\\epsilon_X^*H^j(C)$ for every complex $C$. Exactness identifies $L\\epsilon_X^*$ with this termwise functor, so [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies, in the unbounded derived category, $\\epsilon_X^*(E\\otimes^{\\mathbf L}F)\\simeq\\epsilon_X^*E\\otimes^{\\mathbf L}\\epsilon_X^*F$. These statements apply to any scheme in place of $X$.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HF, lemma-descend-tor-amplitude, converse proof; Tag 08H8, lemma-epsilon-flat; tensor comparison: sites-cohomology.tex Tag 07A4, lemma-pullback-tensor-product"
+   }
+  },
+  {
+   "text": "Suppose $E$ has Tor amplitude in $[a,b]$. Apply [lem-sp-ringed-site-tor-flat-model] on the Zariski ringed site to represent $E$ by a flat-term complex $P$ zero outside $[a,b]$. This is a bounded-above complex on the ringed space $(X,\\mathcal O_X)$, so [lem-pc-bounded-above-flat-kflat] makes it K-flat. Apply [lem-weil-pbc-ringed-topos-kflat-pullback] to $P$: $\\epsilon_X^*P$ has flat terms, and its terms still vanish outside $[a,b]$. By exact-functor localization [lem-weil-pbc-exact-functor-derived-factorization] and Step 1 it represents $\\epsilon_X^*E$. The reverse implication in [lem-sp-ringed-site-tor-flat-model], now on the small etale site, proves the required Tor interval against EVERY etale structure-module sheaf, including those not pulled back from the Zariski site.",
+   "uses": [
+    "lem-sp-ringed-site-tor-flat-model",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08H5, lemma-tor-amplitude-pullback, proof using Tag 08G1, lemma-tor-amplitude; K-flat pullback: Tag 0G7E; Zariski bounded-flat input: cohomology.tex Tag 06YD"
+   }
+  },
+  {
+   "text": "Conversely, suppose $\\epsilon_X^*E$ has Tor amplitude in $[a,b]$. For any Zariski structure-module sheaf $F$, the tensor comparison of Step 1 identifies $\\epsilon_X^*(E\\otimes^{\\mathbf L}F)$ with $\\epsilon_X^*E\\otimes^{\\mathbf L}\\epsilon_X^*F$, whose $j$th cohomology is zero for $j\\notin[a,b]$. The exact-functor cohomology isomorphism of [lem-weil-pbc-exact-functor-complex-cohomology] identifies this zero sheaf with $\\epsilon_X^*H^j(E\\otimes^{\\mathbf L}F)$. Faithfulness in [lem-sfb-derived-etale-zariski-equivalence] forces $H^j(E\\otimes^{\\mathbf L}F)=0$: if its pullback is zero, its identity pulls back to zero, hence is zero. Since $F$ was arbitrary, $E$ has the same Tor interval.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HF, lemma-descend-tor-amplitude, converse proof"
+   }
+  },
+  {
+   "text": "Taking the existential quantifier over the same integers $a\\le b$ in Steps 2 and 3 proves that $E$ has finite Tor dimension if and only if $\\epsilon_X^*E$ does. This does not assert that either object is globally bounded for an arbitrary input; boundedness is a consequence only when such an interval exists.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HF, lemma-descend-tor-amplitude, assertion (2); sites-cohomology.tex Tag 08FZ, definition-tor-amplitude"
+   }
+  },
+  {
+   "text": "For an open immersion $j:U\\hookrightarrow X$, write $r_U$ for restriction to the etale object $U$. The site equivalence in [lem-weil-pbc-etale-site-localization-open] identifies $(X_{\\mathrm{et}})/U$ with $U_{\\mathrm{et}}$. It identifies the structure rings as well, since both assign $\\Gamma(V,\\mathcal O_V)$ to an etale $V\\to U$; hence it identifies module sheaves and complexes with these same sectionwise operations. By [lem-weil-pbc-etale-inverse-image-restriction] the inverse image $j_{\\mathrm{et}}^{-1}$ along the etale map $j$ is restriction along $U_{\\mathrm{et}}\\to X_{\\mathrm{et}}$; it carries $\\mathcal O_{X,\\mathrm{et}}$ to $\\mathcal O_{U,\\mathrm{et}}$ with identity ring map, so the tensor pullback $j_{\\mathrm{et}}^*=\\mathcal O_{U,\\mathrm{et}}\\otimes_{j_{\\mathrm{et}}^{-1}\\mathcal O_{X,\\mathrm{et}}}j_{\\mathrm{et}}^{-1}(-)$ is $r_U$ under this identification. For Zariski modules, $j^*$ is ordinary restriction by [lem-weil-pbc-open-immersion-module-pullback-restriction]. Apply [lem-trf-zariski-etale-functor-comparison-square] with $a=j$ to get $\\epsilon_U^*j^*\\simeq r_U\\epsilon_X^*$. Both restrictions are exact by [lem-pur-site-restriction-module-adjunction-exact], and both epsilon pullbacks are exact by Step 1. Consequently the same comparison applied termwise gives $\\epsilon_U^*(E|_U)\\simeq(\\epsilon_X^*E)|_U$ in the unbounded derived category, using [lem-weil-pbc-exact-functor-derived-factorization].",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-trf-zariski-etale-functor-comparison-square",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03FH, remark-change-topologies-ringed-sites (2), specialized to an open immersion; localization: sites.tex Tag 00XZ and sites-modules.tex Tag 04IX"
+   }
+  },
+  {
+   "text": "Assume $E$ locally has finite Tor dimension in the Zariski topology. There is an open covering $\\{U_i\\}$ of $X$ on which $E|_{U_i}$ has some interval $[a_i,b_i]$. Steps 2 and 5 give that same interval for $(\\epsilon_X^*E)|_{U_i}$. For any etale object $V\\to X$, the base changes $V\\times_XU_i\\to V$ form an etale covering by [def-weil-pbc-etale-site]. Restrict the interval on $U_i$ to $V\\times_XU_i$ using [lem-sf-site-tor-interval-restriction]; the successive restrictions agree by the sectionwise relocalization formula in [def-pur-localized-ringed-site]. Thus every etale object has a covering on which the restricted complex has finite Tor dimension, precisely the local definition in the statement.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-sf-site-tor-interval-restriction",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, definition-tor-amplitude (3); Tag 08H5, lemma-tor-amplitude-pullback, applied to site localization"
+   }
+  },
+  {
+   "text": "Now suppose $\\epsilon_X^*E$ locally has finite Tor dimension. Fix a NONEMPTY affine open $U\\subseteq X$. By Step 5 and the local definition, there is an etale covering $\\{v_i:V_i\\to U\\}$ on which the restriction of $\\epsilon_U^*(E|_U)$ has intervals $[a_i,b_i]$. Every image $v_i(V_i)$ is open by [lem-weil-pbc-etale-morphism-open-map]. These images cover $U$ by [def-weil-pbc-etale-site]. Since an affine scheme is quasi-compact [lem-weil-pbc-affine-scheme-qcqs], the definition [def-weil-pbc-quasi-compact-scheme] supplies finitely many indices $i_1,\\ldots,i_n$ whose images cover $U$, with $n\\ge1$. Put $a=\\min_k a_{i_k}$ and $b=\\max_k b_{i_k}$. Then $a\\le b$ and every selected local interval is contained in $[a,b]$. This interval may depend on $U$, which is all local finite Tor dimension requires.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HF, lemma-descend-tor-amplitude, local application of (1); open images: morphisms.tex Tag 03WT; finite subcover: algebra.tex Tag 00E8 and topology.tex Tag 005A"
+   }
+  },
+  {
+   "text": "Set $K=\\epsilon_U^*(E|_U)$ and let $F$ be ANY degree-zero etale structure-module sheaf on $U$. Restriction $r_k$ to $V_{i_k}$ is exact by [lem-pur-site-restriction-module-adjunction-exact]. By [lem-weil-pbc-etale-inverse-image-restriction] for the etale map $V_{i_k}\\to U$, $r_k$ is the inverse image of the induced morphism of small etale topoi; its ring map is the identity on the restricted structure ring [def-pur-localized-ringed-site], so its tensor and derived pullbacks are this restriction. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and [lem-weil-pbc-exact-functor-complex-cohomology],\n$$r_kH^j(K\\otimes^{\\mathbf L}F)\\simeq H^j(K|_{V_{i_k}}\\otimes^{\\mathbf L}F|_{V_{i_k}})=0\\quad(j\\notin[a,b]).$$\nThese vanishings imply $H^j(K\\otimes^{\\mathbf L}F)=0$: for any etale $W\\to U$, the family $W\\times_UV_{i_k}\\to W$ covers, and every section restricts to zero on its members, hence is zero by the separatedness axiom of a sheaf. As $F$ was arbitrary, $K$ has Tor interval $[a,b]$. Step 3 applied to the scheme $U$ gives this interval for $E|_U$. The empty affine open has only zero sheaves and may use $[0,0]$. The affine opens contained in any open $W\\subseteq X$ cover $W$, so $E$ locally has finite Tor dimension on the Zariski site. No compactness of $X$ or quasi-coherence of $E,F$ was used.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HF, lemma-descend-tor-amplitude (1), applied on affine opens; locality details expanding the use in Tag 08HG, lemma-descend-perfect; sites-cohomology.tex Tag 08FZ (3), tensor comparison Tag 07A4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-etale-site",
+  "lem-sf-site-tor-interval-restriction",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08HF, lemma-descend-tor-amplitude, for the fixed/global assertions; explicit finite-subcover expansion for the additional local assertion in the input node, using sites-cohomology.tex Tag 08FZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of an arbitrary complex of structure sheaf modules is detected by pullback from Zariski to the small etale site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local finite Tor dimension descends from etale topology to Zariski topology on a scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": IsOpen (etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.*amplitude.*etale|etale.*tor.*amplitude|tor.*dimension.*etale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.*amplitude|tor.*dimension.*etale|etale.*tor.*dimension",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not compare arbitrary structure-module derived Tor intervals across the Zariski and small etale sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local finite Tor dimension descends from etale topology to Zariski topology for arbitrary complexes of structure sheaf modules",
+   "results": "8 hits: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.smallEtaleTopology, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not compare arbitrary structure-module derived Tor intervals across the Zariski and small etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of arbitrary structure sheaf complexes is detected by Zariski to etale pullback",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, RingHom.Etale.propertyIsLocal, Algebra.isOpen_etaleLocus, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not compare arbitrary structure-module derived Tor intervals across the Zariski and small etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact faithful change of ringed sites preserves and reflects finite Tor intervals for arbitrary unbounded derived module objects",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Tor', CategoryTheory.Functor.map_distinguished_exact, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not compare arbitrary structure-module derived Tor intervals across the Zariski and small etale sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-detects-perfect",
+  "date": "2026-10-23",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input for 08HG: Tag 08HF (lemma-descend-tor-amplitude), including its Zariski-local application after taking a finite subcover over an affine open; Tor conventions: sites-cohomology.tex Tag 08FZ (definition-tor-amplitude).",
+   "via": [
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-tor-dimension-descent",
+  "worker": "stage1",
+  "summary": "Checked Tag 08HF and the 08FZ local definition, searched project Lean and Mathlib, and split both interval directions and local finite Tor descent using only existing DAG nodes. The additional local clause is proved explicitly by a finite subcover over each affine open and cohomology-sheaf gluing. Statement and existing provenance retained; no new nodes.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images (3) prerequisite chain, via etale detection of perfectness for the 0E1J derived direct-image input. The latest blueprint direct-image proof was read; this auxiliary is not itself a blueprint statement. Ancestor command returns None; inherited from.node=null and via retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Unbounded ringed-topos tensor comparison, both for epsilon and slice restriction; the unit does not supply this generic homological tool."
+   },
+   {
+    "node": "lem-sp-ringed-site-tor-flat-model",
+    "why": "General ringed-site characterization of a prescribed Tor interval by a bounded flat model; no constant-coefficient specialization of this unit covers arbitrary structure modules."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "K-flatness of the bounded flat Zariski model on the ringed space; generic resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "General pullback preservation of flat-term K-flat models for the canonical epsilon morphism; not a replacement for the geometric unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Equivalence of the small etale slice over an open with its own small etale site, used with the explicitly identical structure rings."
+   },
+   {
+    "node": "lem-trf-zariski-etale-functor-comparison-square",
+    "why": "The comparison square for ALL modules along an open immersion, not its separate quasi-coherent pushforward clause."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of restriction for arbitrary structure-module sheaves, used to commute restriction and cohomology."
+   },
+   {
+    "node": "lem-sf-site-tor-interval-restriction",
+    "why": "Prescribed Tor intervals survive arbitrary site restriction; generic local tensor-testing tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-site-tor-interval-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-368d5caeb",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-368d5caeb (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full; there are no new nodes. The statement is unchanged against live (still unsplit there), so no other group has superseded it, and there is no repair or re-split note. Source checks: Stacks 08HF (spaces-perfect.tex 2975-3005) gives the fixed-interval and finite-Tor-dimension equivalences. 08H8 gives that ε^* is exact and that ε^*F=0 implies F=0. 08FZ(3) (sites-cohomology 12387) is exactly the item's local definition. The labels 08H5, 08G1, 07A4, 0G7E, 06YD, 03WT and 03FH all exist. Steps 1-4 are correct: they run the 08H5/08G1 flat-model argument, then the 08HF converse through the unbounded tensor comparison and faithfulness on all modules. Step 6 base-changes the cover and uses relocalization; step 7 takes a finite subcover of a nonempty affine open and the min/max of the intervals; step 8 glues the vanishing by sheaf separatedness. Small cases checked: empty X, E=O_X, E=0, and a non-quasi-compact X where local and global finite Tor dimension differ. Fault C1/C4: step 5's 'j_et^*=r_U' and step 8's use of restriction to V_{i_k} as a ringed-topos pullback had no citation. The cited nodes give only j_! ⊣ j^* and the site equivalence. FIX: cite the existing lem-weil-pbc-etale-inverse-image-restriction (Stacks 03S2/03S3, j^{-1}=restriction for etale j) in steps 5 and 8 and add it to proof_deps. I also corrected step 8's wording 'affine opens cover X' to 'affine opens in any open W cover W', as the 08FZ(3) definition needs. The dependency closure has no cycle. The duplicate search for 08HF and Tor amplitude found only the non-duplicate lem-trf-affine-relative-* family. No SGA source is used. The split_report tool_uses are accepted as generic machinery.; 1 file(s) fixed by the reviewer"
+ }
+}

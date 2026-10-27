@@ -1,0 +1,424 @@
+{
+ "id": "lem-sfb-face-component-injective-total-model",
+ "kind": "statement",
+ "title": "Derived face augmentation from componentwise injective resolutions",
+ "statement": "Let $(\\mathcal C_p,\\mathcal O_p)$ be a coherent diagram of small ringed sites indexed by $\\Delta_{\\mathrm{inj}}^{\\mathrm{op}}$, and let $a_p:(\\operatorname{Sh}(\\mathcal C_p),\\mathcal O_p)\\to(\\operatorname{Sh}(\\mathcal D),R)$ be a coherent augmentation, with total module category $\\mathscr M$, evaluations $e_p$, and total augmentation $a$ as in [lem-sfb-semisimplicial-ringed-total-category]. Assume every transition module pullback and every $a_p^*$ is exact. Use module sheaves [def-weil-sheaf-of-modules-category], injective resolutions [def-sp-injective-resolutions], and ordinary unbounded derived categories [def-weil-abstract-derived-category]. Let $F\\in\\mathscr M$ and let $F[0]\\to J^\\bullet$ be a quasi-isomorphism of total-module complexes with $J^q=0$ for $q<0$ and every $e_pJ^q$ injective in $\\operatorname{Mod}(\\mathcal O_p)$. There is a natural isomorphism in $D(R)$\n$$c_J:Q\\operatorname{Tot}(A_J)\\xrightarrow{\\sim}Ra_*F[0],\\qquad A_J^{p,q}=a_{p,*}e_pJ^q,\\quad p,q\\geq0.$$\nHere $Q$ is localization, the horizontal differential is the alternating sum of the transposes of the face transitions, the vertical differential is induced by $J$, and $d_{\\rm Tot}=d_h+(-1)^p d_v$; totalization has only finitely many summands in each degree [def-sp-double-complex-total]. This computation uses the ambient K-injective right derived functor. It is compatible with maps of augmented componentwise injective resolutions. More precisely, let $G$ be an $R$-module, let $G[0]\\to K^\\bullet$ be a nonnegative injective resolution, and let $\\phi:a^*G\\to F$. For any cochain map $t:a^*K^\\bullet\\to J^\\bullet$ extending $\\phi$, its component adjoints $K^q\\to a_{0,*}e_0J^q$ followed by the $(0,q)$ total inclusions define a map $b_t:K^\\bullet\\to\\operatorname{Tot}(A_J)$. Under $QK^\\bullet\\simeq G[0]$ and $c_J$, $Qb_t$ is the canonical derived adjoint of $\\phi[0]$, namely $G[0]\\xrightarrow{\\eta_G}Ra_*a^*G[0]\\xrightarrow{Ra_*(\\phi[0])}Ra_*F[0]$. No covering, cartesian-transition, or quasi-coherence hypothesis on $F$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D7F, lemma-augmentation-spectral-sequence-modules, double-complex proof using lemma-simplicial-resolution-augmentation-modules and lemma-augmentation-cech-complex-modules. Agent adaptation to injective order maps and componentwise injective resolutions, including augmentation normalization."
+ },
+ "stmt_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Write $r_J:F[0]\\to J$. The total-category lemma gives exact, jointly conservative evaluations and $e_pa^*=a_p^*$. Hence $a^*$ is exact: evaluate the kernel and cokernel of the image of any short exact sequence and use exactness of every $a_p^*$. Module adjunction supplies $a^*\\dashv a_*$ and $a_p^*\\dashv a_{p,*}$. For a face $\\delta_i:[p]\\hookrightarrow[p+1]$, transpose the transition $f_{\\delta_i}^*e_pE\\to e_{p+1}E$ to obtain $a_{p,*}e_pE\\to a_{p+1,*}e_{p+1}E$ (using $a_pf_{\\delta_i}\\simeq a_{p+1}$). Coherence makes the two composites deleting distinct vertices agree. In the alternating sum they have opposite signs, so $d_h^2=0$. For a complex $E$ the transitions commute with $d_E$, giving $d_hd_v=d_vd_h$. Thus the prescribed $d_h+(-1)^pd_v$ squares to zero. All constructions are natural in actual total-module chain maps; each total degree has only the finitely many pairs $p+q=n$.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "lemma-augmentation-cech-complex-modules and lemma-augmentation-spectral-sequence-modules; face-only ringed adaptation"
+   }
+  },
+  {
+   "text": "Here is the face-only replacement of the free resolution used in the source. For any $R$-module $H$ put $P_p(H)=\\ell_p(a_p^*H)$, using the exact free evaluation adjoint. In component $m$ its summands are $a_m^*H$ labelled by strictly increasing tuples $(i_0<\\cdots<i_p)$ in $[m]$. Define $\\partial$ by alternating deletion of entries and $P_0(H)\\to a^*H$ by folding the vertex summands. These maps commute with transitions, which relabel tuples by increasing injections, and $\\partial^2=0$ by paired deletions. This augmented chain complex is exact: in component $m$, set $s_{-1}(x)=(0;x)$ and let $s_p(i_0,\\ldots,i_p;x)=(0,i_0,\\ldots,i_p;x)$ if $i_0>0$, and $0$ if $i_0=0$. Deleting the initial $0$ contributes the original tuple; the other deletion terms cancel those of $s\\partial$. If $i_0=0$, only deletion of $i_0$ contributes to $s\\partial$, again giving the original tuple. Thus $\\partial s+s\\partial=1$, including augmented degree $-1$. Exact evaluations reflect exactness, proving $\\cdots\\to P_1(H)\\to P_0(H)\\to a^*H\\to0$ exact. The contraction need not commute with transitions; only componentwise exactness is used.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "lemma-simplicial-resolution-augmentation-modules; explicit contraction for injective order maps"
+   }
+  },
+  {
+   "text": "For an injective total module $I$, apply $\\operatorname{Hom}_{\\mathscr M}(-,I)$ to the exact complex of step 2. Exactness follows directly from injectivity: a cocycle $P_p(H)\\to I$ kills $\\operatorname{im}\\partial_{p+1}$, so factors through $\\operatorname{im}\\partial_p\\hookrightarrow P_{p-1}(H)$ and extends across this monomorphism. At the first term the same quotient argument identifies the kernel with $\\operatorname{Hom}(a^*H,I)$. The two adjunctions identify the resulting exact complex with $0\\to\\operatorname{Hom}_R(H,a_*I)\\to\\operatorname{Hom}_R(H,a_{0,*}e_0I)\\to\\cdots$, with precisely the face maps of step 1. This implies exactness of the sheaf complex $0\\to a_*I\\to a_{0,*}e_0I\\to\\cdots$: for each differential take $H$ to be its kernel and lift the kernel inclusion through the preceding term, using the exact Hom complex. The resulting map onto that kernel is split surjective. At the initial term the Hom bijection identifies $a_*I$ with the kernel. The augmentation is the component-zero transpose of $a^*a_*I\\to I$, and is natural in $I$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "lemma-augmentation-cech-complex-modules, Hom-exactness argument, with step 2 in place of the simplicial free resolution"
+   }
+  },
+  {
+   "text": "The small ringed total site and the base site have Grothendieck abelian module categories, hence enough injectives. Choose a nonnegative total injective resolution $r_I:F[0]\\to I^\\bullet$. It is K-injective by the bounded-below injectives theorem. For every $p$, the exact left adjoint $\\ell_p\\dashv e_p$ implies that $e_pI^q$ is injective; thus $e_pI$ is also a nonnegative K-injective complex. In particular evaluation of this chosen total resolution satisfies the componentwise condition of the item. Grothendieck K-injective existence applies to all complexes in the total category, so the ambient unbounded right derived functor exists. Its canonical resolution comparison is $\\rho_I:Q(a_*I)\\xrightarrow{\\sim}Ra_*F[0]$, explicitly $\\rho_I=(Ra_*(Qr_I))^{-1}\\eta_I$, where $\\eta_I:Q(a_*I)\\to Ra_*(QI)$ is the right-derived comparison. This is the full K-injective comparison, not merely a statement about its individual cohomology objects.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-injective-resolutions-exist, lemma-bounded-below-injectives-K-injective; injectives.tex theorem-K-injective-embedding-grothendieck"
+   }
+  },
+  {
+   "text": "Apply step 3 to each $I^q$. Its natural augmentations form a chain map $\\alpha_I:a_*I\\to\\operatorname{Tot}(A_I)$, supported in face degree zero. Regarding $a_*I$ as the double complex concentrated in face degree zero, $\\alpha_I$ is a map of first-quadrant double complexes whose maps on horizontal rows are quasi-isomorphisms, by step 3. Apply the first-quadrant total column comparison after interchanging the two indices. The original and transposed totals are canonically chain-isomorphic by multiplication by $(-1)^{pq}$ on bidegree $(p,q)$: this changes $d_v+(-1)^q d_h$ into $d_h+(-1)^p d_v$. On face degree zero this sign is $1$. Thus the comparison proves that the actual $\\alpha_I$ is a quasi-isomorphism. Define $c_I=\\rho_I\\,(Q\\alpha_I)^{-1}$. This proves the required derived computation for a total injective resolution, with its specified augmentation, without an assumption about the augmentation being a cover.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "def-sp-double-complex-total",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "lemma-double-complex-gives-resolution, second-variable variant, and lemma-first-quadrant-ss; application of the existing column-comparison node"
+   }
+  },
+  {
+   "text": "Localization on maps into the K-injective $I$ is bijective. Consequently the derived map $Qr_I\\,(Qr_J)^{-1}:QJ\\to QI$ has a chain representative $u:J\\to I$. Its composite with $r_J$ is homotopic to $r_I$; these maps from $F[0]$ to nonnegative $I$ are equal, since every degree of a homotopy between them is zero. Thus $u$ extends the identity on $F$ and is a quasi-isomorphism. Exact evaluation makes $e_pu$ a quasi-isomorphism. Both its source and target are bounded-below injective complexes, so it is a homotopy equivalence by the K-injective Hom theorem. The additive functor $a_{p,*}$ preserves its homotopy inverse and both homotopies. Therefore every column $a_{p,*}e_pu$ is a quasi-isomorphism. The first-quadrant column comparison gives a quasi-isomorphism $T(u):\\operatorname{Tot}(A_J)\\to\\operatorname{Tot}(A_I)$. Put $c_J=c_I\\,QT(u)$, an isomorphism in the ordinary unbounded $D(R)$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-K-injective and lemma-bounded-below-injectives-K-injective; homology.tex lemma-first-quadrant-ss"
+   }
+  },
+  {
+   "text": "The comparison just defined is independent of $u$. Two choices represent the same derived map into $I$, hence are homotopic by the K-injective Hom bijection. A total-module homotopy $h^q:J^q\\to I^{q-1}$ induces the total homotopy whose $(p,q)$ component is $(-1)^p a_{p,*}e_ph^q$. Its vertical terms give $dh+hd$, while horizontal terms cancel since $h$ commutes with each face map and the sign changes when $p$ increases. Hence the two $QT(u)$ agree. To compare different total injective resolutions $I,I'$ of $F$, represent $Qr_{I'}(Qr_I)^{-1}$ by $v:I\\to I'$. It extends the identity on $F$, as in step 6. The chain equality $T(v)\\alpha_I=\\alpha_{I'}a_*v$ and naturality of the right-derived unit give $c_{I'}QT(v)=c_I$. Comparing $u'$ with $vu$ in the Hom bijection proves independence of $I$ too.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sp-double-complex-total",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-K-injective; spaces-simplicial.tex lemma-augmentation-spectral-sequence-modules, functoriality with the explicit total homotopy sign"
+   }
+  },
+  {
+   "text": "For an augmented componentwise-injective resolution map $w:J_F\\to J_{F'}$ over $f:F\\to F'$, choose total injective resolutions and comparisons $u_F,u_{F'}$. The K-injective Hom bijection gives $v:I_F\\to I_{F'}$ representing $Qr_{I_{F'}}Q(f[0])(Qr_{I_F})^{-1}$. The maps $u_{F'}w$ and $vu_F$ represent the same derived map, hence are homotopic; their total maps agree after localization by step 7. Naturality of $\\alpha$ and of the derived unit yields $c_{I_{F'}}QT(v)=Ra_*(f[0])c_{I_F}$. Substitution gives $c_{J_{F'}}QT(w)=Ra_*(f[0])c_{J_F}$, the claimed naturality on augmented resolution maps.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "lemma-augmentation-spectral-sequence-modules, functoriality; derived.tex lemma-K-injective"
+   }
+  },
+  {
+   "text": "Fix an $R$-module $G$, a nonnegative injective resolution $r_K:G[0]\\to K$, a module map $\\phi:a^*G\\to F$, and a chain map $t:a^*K\\to J$ satisfying $t\\,a^*r_K=r_J\\phi[0]$. The adjoint of $e_0t$ is a chain map into $a_{0,*}e_0J$. The two cofaces to degree one agree on its image: both transpose, by coherence of $a^*K$ and the total-module map $t$, to the component-one map $a_1^*K\\to e_1J$. Their alternating difference is zero. Inclusion in $(0,q)$ therefore gives the stated cochain map $b_t$. Let $s:K\\to a_*I$ be the ordinary termwise adjoint of $ut:a^*K\\to I$. Naturality of the adjunction bijections gives the actual chain equality $T(u)b_t=\\alpha_I s$: both sides have only the $(0,q)$ component, the adjoint of $e_0(ut)$. It follows that $c_JQb_t=\\rho_IQs$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "lemma-augmentation-cech-complex-modules, construction by adjointness; explicit component-zero augmentation square"
+   }
+  },
+  {
+   "text": "Use exactness of $a^*$ from step 1. Its left derived functor is termwise $a^*$, computed on every complex, by the exact-functor derived theorem. The normalized derived adjunction theorem applies to $a^*\\dashv a_*$ with the left resolving class equal to the whole homotopy category and the ambient K-injective right-derived pair of step 4. It says that the derived transpose of $Q(ut)$ is $\\eta_IQs$. Since $ut\\,a^*r_K=r_I\\phi[0]$, naturality of this transpose gives\n$$\\rho_IQs\\,Qr_K=Ra_*(\\phi[0])\\,\\eta^{\\mathrm{adj}}_{G[0]}.$$\nIndeed, multiply the transpose equation by $(Ra_*Qr_I)^{-1}$; this is exactly the factor in $\\rho_I$. Combining with step 9 and inverting $Qr_K$ is the required identification of $Qb_t$ under $c_J$ and $QK\\simeq G[0]$. This also covers every choice of $t$ extending $\\phi$: its normalized derived value depends only on $\\phi$. The argument used exact transition pullbacks and exact $a_p^*$, but imposed neither cartesian transitions on $F$ nor a cover nor quasi-coherence.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-derived-adjoint-functors; sites-cohomology.tex lemma-adjoint, unit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-sp-double-complex-total",
+  "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-resolving-derived-adjunction-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Face-only adaptation of lemma-simplicial-resolution-augmentation-modules, lemma-augmentation-cech-complex-modules and Tag 0D7F (lemma-augmentation-spectral-sequence-modules); explicit componentwise-resolution comparison and adjunction normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an augmented semisimplicial diagram of ringed sites with exact pullbacks, derived augmentation pushforward is computed by the alternating face total complex of a componentwise injective resolution",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.rightDerived_app_eq, AlgebraicTopology.AlternatingFaceMapComplex.ε, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.toRightDerivedZero, Rep.standardComplex.compForgetAugmentedIso",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforward, injective-resolution computation of individual derived functors, and alternating face complexes do not give the ringed face-total comparison or its canonical adjoint normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforward, injective-resolution computation of individual derived functors, and alternating face complexes do not give the ringed face-total comparison or its canonical adjoint normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward along an augmentation of a semisimplicial ringed site is the total complex of a componentwise injective resolution",
+   "results": "8 hits; PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, CategoryTheory.InjectiveResolution.ofCocomplex, SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, CategoryTheory.InjectiveResolution.isoRightDerivedObj, SheafOfModules.pushforwardSections, CategoryTheory.InjectiveResolution.desc",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforward, injective-resolution computation of individual derived functors, and alternating face complexes do not give the ringed face-total comparison or its canonical adjoint normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|semiSimplicial|augmentation.*(injective|derived)|componentwise.*injective",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforward, injective-resolution computation of individual derived functors, and alternating face complexes do not give the ringed face-total comparison or its canonical adjoint normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Cech resolution double complex with componentwise injective modules computes right derived direct image on a ringed total site as a derived category isomorphism compatible with the augmentation map",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforward, injective-resolution computation of individual derived functors, and alternating face complexes do not give the ringed face-total comparison or its canonical adjoint normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(derived|injective)|injective.*cech|total.*(pushforward|augmentation)",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module pushforward, injective-resolution computation of individual derived functors, and alternating face complexes do not give the ringed face-total comparison or its canonical adjoint normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*injective|injective.*cech|total.*augmentation",
+   "results": "{\"t\": \"2026-10-23T18:45:21Z\", \"tool\": \"grep\", \"query\": \"cech.*injective|injective.*cech|total.*augmentation\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual derived functors, ordinary module pushforward or generic derived adjunction; none states the semisimplicial ringed total comparison with componentwise injective resolutions and augmentation normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|semiSimplicial|componentwise.*injective|augmentation.*derived",
+   "results": "{\"t\": \"2026-10-23T18:45:21Z\", \"tool\": \"grep\", \"query\": \"semisimplicial|semiSimplicial|componentwise.*injective|augmentation.*derived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual derived functors, ordinary module pushforward or generic derived adjunction; none states the semisimplicial ringed total comparison with componentwise injective resolutions and augmentation normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-23T18:45:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual derived functors, ordinary module pushforward or generic derived adjunction; none states the semisimplicial ringed total comparison with componentwise injective resolutions and augmentation normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived augmentation pushforward of a module on a semisimplicial ringed site is computed by the total complex of componentwise injective resolutions",
+   "results": "{\"t\": \"2026-10-23T18:45:22Z\", \"tool\": \"leansearch\", \"query\": \"Derived augmentation pushforward of a module on a semisimplicial ringed site is computed by the total complex of componentwise injective resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforward₀\", \"PresheafOfModules.pushforward₀_obj\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.pushforward_obj_val\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"SheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀_obj_obj_isModule\"], \"digest\": \"2d0ebe3a2cee7630\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual derived functors, ordinary module pushforward or generic derived adjunction; none states the semisimplicial ringed total comparison with componentwise injective resolutions and augmentation normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating coface double complex for an augmented diagram of ringed sites computes right derived direct image and its derived adjunction unit",
+   "results": "{\"t\": \"2026-10-23T18:45:23Z\", \"tool\": \"leanfinder\", \"query\": \"Alternating coface double complex for an augmented diagram of ringed sites computes right derived direct image and its derived adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\"], \"digest\": \"1b1f140b05ad858b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual derived functors, ordinary module pushforward or generic derived adjunction; none states the semisimplicial ringed total comparison with componentwise injective resolutions and augmentation normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A componentwise injective resolution on a semisimplicial ringed total site computes derived augmentation pushforward by the alternating face total complex",
+   "results": "{\"t\": \"2026-10-23T18:45:24Z\", \"tool\": \"leanfinder\", \"query\": \"A componentwise injective resolution on a semisimplicial ringed total site computes derived augmentation pushforward by the alternating face total complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.injectiveResolutions\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles\", \"CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq\"], \"digest\": \"932dc0d454897b2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual derived functors, ordinary module pushforward or generic derived adjunction; none states the semisimplicial ringed total comparison with componentwise injective resolutions and augmentation normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zariski-cech-module-derived-unit",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Ordinary unbounded descent only after an actual cartesian total object has been constructed; no strictification of a diagram in homotopy categories is asserted. Supporting input: canonical derived unit on an ordinary module in degree zero for the Zariski open-cover face total augmentation (hypothesis (3) of 0D7V). Resolution-computation input: alternating-face total model for an arbitrary total module with a componentwise injective resolution, before imposing the open-cover condition.",
+   "via": [
+    "lem-sfb-zariski-cech-module-derived-unit",
+    "lem-sfb-zariski-total-quasicoherent-descent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-face-component-injective-total-model",
+  "worker": "stage1",
+  "summary": "O2: supplied the face-only simplex contraction, injective Hom row-exactness, total injective comparison, choice independence, naturality, and the chain augmentation square proving the canonical derived-adjoint normalization. Reused existing DAG tools without creating nodes. Statement and statement dependencies unchanged; no Lean writing or compilation.",
+  "blueprint": "The recorded det-thm-sf-ctf-stability-direct-images (3) supporting descent chain, via lem-sfb-zariski-cech-module-derived-unit: supplies its componentwise-injective total computation before imposing the open-cover condition. Read latest unit/direct-images proof; this is a lower-level module-resolution tool and changes no unit or chapter route. Inherited blueprint.from.node is null (the ancestor command returns null); preserved it and its complete inherited place/via rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "def-sp-double-complex-total",
+    "why": "Generic First-quadrant double complexes, total complex and the two filtrations input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Generic Injective objects and injective resolutions input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Module sheaves over arbitrary ring sheaves are Grothendieck input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic Grothendieck abelian categories have enough injectives input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "Generic Injective resolutions exist, and a left exact functor is recovered in degree zero input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic Bounded-below complexes of injectives are K-injective input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic Right adjoints of exact functors preserve injectives input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic Grothendieck abelian categories have K-injective resolutions input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic Right derived functor on the unbounded derived category input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic Columnwise quasi-isomorphisms induce first-quadrant total quasi-isomorphisms input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic Derived category of an abelian category input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic Derived adjunction normalized by a left resolving class and K-injectives input for the explicit resolution comparison; it does not replace a step of the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-resolving-derived-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-1570e3dd5",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-1570e3dd5 (reviewer sub-agent of L); spot-checked: I read the item in full and checked all 10 steps against Stacks spaces-simplicial lemma-simplicial-resolution-augmentation-modules, lemma-augmentation-cech-complex-modules and lemma-augmentation-spectral-sequence-modules (l.2109-2215), and against the statement of every cited node. The delivery has no new nodes; the statement and stmt_deps are unchanged, and there is no re-split note. Checks done by hand: the contraction for injective maps (ds+sd=1 in the cases i_0>0, i_0=0 and the augmented degree), the Hom exactness for injectives by factoring through the image and extending, the sign iso (-1)^{pq} between the two total-complex conventions, the total homotopy (-1)^p a_{p,*}e_p h, the identity rho_{I'}Q(a_*v)=rho_I, the chain equality T(u)b_t=alpha_I s, and the transpose computation in step 10. The hypotheses of resolving-derived-adjunction-normalization hold (P is all complexes since a^* is exact; the total module category is Grothendieck). Edge cases: the constant diagram (horizontal maps 0,1,0,1,...), the zero ring and the m=0 component; no clause is false. There is no duplicate: lem-sfb-face-total-derived-sections is the algebraic-space sections result built on a total injective resolution. The DAG stays acyclic. All 15 declared tool_uses are generic homological algebra and I accept them. Minor note: the column-comparison node's 'K.flip.X n' does not fix an orientation, but steps 5 and 6 hold in either one through the natural sign iso. Batch-5 finding: the newly cited evaluation-free-adjoint reaches lem-trf-slice-site-total-pseudofunctor only through lem-sfb-semisimplicial-ringed-total-category, which was already a stmt_dep on the base. The trf nodes in the closure (slice-site total pseudofunctor and systems, localization essentially surjective, adjoint-composition coherence, generated-precoverage criterion) are generic site and category constructions, not part of the trace formula or Poincare duality, so this is not a RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FaceComponentInjectiveTotalModel",
+  "declaration": "CategoryTheory.SemisimplicialRingedTotal.face_component_injective_total_model",
+  "declarations": [
+   "CategoryTheory.SemisimplicialRingedTotal.faceColumn",
+   "CategoryTheory.SemisimplicialRingedTotal.faceCoface",
+   "CategoryTheory.SemisimplicialRingedTotal.FaceNonnegativeResolution",
+   "CategoryTheory.SemisimplicialRingedTotal.FaceComponentResolution",
+   "CategoryTheory.SemisimplicialRingedTotal.faceSingleMap",
+   "CategoryTheory.SemisimplicialRingedTotal.FaceComponentTotalModel",
+   "CategoryTheory.SemisimplicialRingedTotal.face_component_injective_total_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FaceComponentInjectiveTotalModel.lean",
+  "statement": "theorem face_component_injective_total_model (V : AugmentationPresentation P S A) (faceExact : ∀ (i j : SemiSimplexCategoryᵒᵖ) (a : i ⟶ j), PreservesFiniteLimits (P.pullback a).ordinary ∧ PreservesFiniteColimits (P.pullback a).ordinary) (augmentationExact : ∀ i : SemiSimplexCategoryᵒᵖ, PreservesFiniteLimits (V.components i).ordinary ∧ PreservesFiniteColimits (V.components i).ordinary) (RF : (R.total h).D ⥤ S.D) (η : V.map.modules.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF) (hRF : RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (R.total h).modules (.up ℤ))) : Nonempty (FaceComponentTotalModel V RF η)",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual ringed total-category inputs; output pins every bicomplex column and horizontal differential, finite diagonals, whole-object derived comparison, naturality and component-zero augmentation normalization. The universal ambient unbounded right-derived pair is an explicit parameter, so this works for the recorded K-injective construction and every canonically equivalent universal pair. Helper structures only bundle the resolutions and comparison clauses of this node; no theorem is used to choose data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1ec9de13",
+  "group": "Q142",
+  "result": "pass",
+  "note": "First stage-2 delivery of this item. Only the lean record changed; the statement, stmt_deps and proof are unchanged, with no new nodes. Each node clause matches the Lean. Hypotheses: exact P.pullback and exact V.components (a_p^*); FaceComponentResolution requires injectivity only after evaluation. Derived functor: any universal right-derived pair RF/η/hRF of a_* on unbounded complexes. Double complex: column isos of complexes fix A_J and d_v; horizontal fixes d_h as Σ(-1)^i faceCoface, the transpose of compositor, counit and transition, with directions checked against the dependency fields; Mathlib total gives d_h+(-1)^p d_v; finite_diagonal and total_negative cover finite summands. comparison is an isomorphism of whole objects in D(R); naturality holds over every w and f. The augmentation clause covers every extending t, pins b_t degree by degree, and its unit normalization Q(unit)≫η equals the derived unit by derivedAdjunctionOfResolvingClass with f=𝟙. No hollow definitions, sorry-only proof, docstrings with source, blueprint and ten proof steps. lean.statement is verbatim in the file; no name collisions in side-live; single universe u. Edge cases p=0, n=0, negative degrees, zero ring and constant diagram are covered. No findings; not recompiled because nothing changed."
+ }
+}

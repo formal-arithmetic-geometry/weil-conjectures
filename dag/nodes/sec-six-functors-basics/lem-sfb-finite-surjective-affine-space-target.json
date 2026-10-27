@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-finite-surjective-affine-space-target",
+ "kind": "statement",
+ "title": "Finite surjective affine-source morphisms to algebraic spaces have affine target",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $f:X\\to Y$ be a morphism. Suppose $X$ is represented by an affine scheme, and suppose $f$ is finite on scheme tests: for every $S$-scheme $T$ and morphism $T\\to Y$, the sheaf fibre product $X\\times_YT$ [lem-trf-space-fibre-products-etale-covers] is represented by a scheme and its projection to $T$ is finite [def-weil-finite-integral-morphism]. Suppose the map $|f|:|X|\\to|Y|$ on field-valued point classes with atlas topology [def-a1-space-point-topology] is surjective. Then $Y$ is represented by an affine scheme over $S$. No Noetherian, finite-presentation, or flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07VS (lemma-affine), full statement. Surjectivity on point classes agrees with scheme-test surjectivity by spaces-properties.tex Tag 03H5 (lemma-characterize-surjective)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-integral-morphism",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Finiteness on every scheme test makes every test map proper by [lem-weil-pbc-finite-proper]. Thus [lem-sfb-space-representable-proper-tests] gives intrinsic properness of $f$, in particular universal closedness. The affine scheme $X$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. The continuous surjection $|X|\\to|Y|$ makes $|Y|$ quasi-compact: pull any open cover back to $X$ and take a finite subcover. By [lem-sfb-space-uc-surjection-separation], $Y$ is quasi-separated. Use [lem-sfb-space-change-base-to-integers] to view both spaces over $\\operatorname{Spec}\\mathbf Z$. Its coproduct formula identifies each new scheme-test fibre with the original test fibre for the induced map to $S$, and its unchanged atlas identifies point spaces. Finiteness, surjectivity and qcqs therefore persist.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-sfb-space-representable-proper-tests",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-uc-surjection-separation",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VS, first paragraph; the qcqs conclusion suffices, without the stronger separatedness conclusion."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-finite-fp-approximation] to write $X=\\varprojlim_aX_a$ over $Y$, with affine transitions and finite finitely presented $g_a:X_a\\to Y$. Every $X_a$ is qcqs by [lem-sfb-space-fp-qcqs-source]. Since the limit $X$ is affine, [lem-sfb-space-affine-limits-schematic-stages] makes some $X_a$ affine. The factorization $f=g_a p_a$ makes $|g_a|$ surjective: a point of $Y$ has an $f$-preimage, whose $p_a$-image is a $g_a$-preimage. Replace $X,f$ by this $X_a,g_a$; the target has not changed and now $f$ is also finitely presented.",
+   "uses": [
+    "lem-sfb-space-finite-fp-approximation",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-affine-limits-schematic-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VS, second paragraph."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-absolute-noetherian-approximation], write $Y=\\varprojlim_iY_i$ with affine transitions and Noetherian qcqs stages. Apply [lem-sfb-space-fp-over-space-limit-descent] to the finitely presented $f$ to obtain a finitely presented $f_0:X_0\\to Y_{i_0}$ with $X\\cong X_0\\times_{Y_{i_0}}Y$. On the directed tail $i\\geq i_0$ set $X_i=X_0\\times_{Y_{i_0}}Y_i$ and let $f_i:X_i\\to Y_i$ be its projection. Finite presentation persists by [lem-sfb-space-flat-proper-fp-locality], so each $X_i$ is qcqs by [lem-sfb-space-fp-qcqs-source]. Its transition maps are affine by base change [lem-sfb-space-affine-locality]. Base-change compatibility of limits [lem-sfb-space-affine-limits-schematic-stages] identifies $X=\\varprojlim_iX_i$.",
+   "uses": [
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-space-fp-over-space-limit-descent",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-limits-schematic-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VS, third paragraph, approximation and descent of the finitely presented morphism."
+   }
+  },
+  {
+   "text": "The morphism $f_0$ is locally of finite presentation, hence locally of finite type: on every chart a finitely presented algebra has its finite list of generators. Apply [lem-sfb-space-eventually-finite-map] with bases $B_i=Y_i$, stage source $X_0$ and stage target $Y_{i_0}$ to make every sufficiently late $f_i$ finite. Apply [lem-sfb-space-eventually-surjective-map] to the same system to make every sufficiently late $f_i$ surjective; its local finite presentation hypothesis comes from $f_0$. Since $X$ is affine, [lem-sfb-space-affine-limits-schematic-stages] also makes every sufficiently late $X_i$ affine. Choose a common upper bound of these three indices. Then $X_i$ is an affine scheme, $f_i$ is finite surjective, and $Y_i$ is Noetherian. By [lem-sfb-noetherian-space-finite-affine-descent], $Y_i$ is an affine scheme.",
+   "uses": [
+    "lem-sfb-space-eventually-finite-map",
+    "lem-sfb-space-eventually-surjective-map",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-noetherian-space-finite-affine-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VS, third paragraph, descent of finite and surjective, affineness of the source, and Tag 07VP."
+   }
+  },
+  {
+   "text": "The limit projection $Y\\to Y_i$ is affine by [lem-sfb-space-affine-limits-schematic-stages]. Its target $Y_i$ is affine, so [lem-sfb-space-affine-locality] implies that $Y$ is represented by an affine scheme. By the equivalence with spaces equipped with a map to $S$ in [lem-sfb-space-change-base-to-integers], this affine scheme with the resulting structure map represents the original algebraic space over $S$.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VS, final sentence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-proper",
+  "lem-sfb-space-representable-proper-tests",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-uc-surjection-separation",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-space-finite-fp-approximation",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-absolute-noetherian-approximation",
+  "lem-sfb-space-fp-over-space-limit-descent",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-eventually-finite-map",
+  "lem-sfb-space-eventually-surjective-map",
+  "lem-sfb-noetherian-space-finite-affine-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07VS (lemma-affine), the full approximation proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism from an affine scheme to an algebraic space has affine target",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.isAffine_of_isAffineHom. ",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned IsFinite, IsAffineHom, finite_app, and effective-epimorphism results concern schemes; none proves affine representability of an arbitrary algebraic-space target. Read Morphisms/Finite.lean:35-55 and EffectiveEpi.lean:120-122; the latter already assumes both schemes affine."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ii]sAffine.*[Ss]urjective|[Ss]urjective.*[Ii]sAffine",
+   "results": "Actual logged search: 16 hits; Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean. Subdirectory: AlgebraicGeometry. ",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned IsFinite, IsAffineHom, finite_app, and effective-epimorphism results concern schemes; none proves affine representability of an arbitrary algebraic-space target. Read Morphisms/Finite.lean:35-55 and EffectiveEpi.lean:120-122; the latter already assumes both schemes affine."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite surjective morphism from an affine scheme to an algebraic space has affine target",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.AffineTargetMorphismProperty, AlgebraicGeometry.HasAffineProperty, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.affineAnd, AlgebraicGeometry.AffineTargetMorphismProperty.of, AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.IsFinite, AlgebraicGeometry.sourceAffineLocally. ",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned IsFinite, IsAffineHom, finite_app, and effective-epimorphism results concern schemes; none proves affine representability of an arbitrary algebraic-space target. Read Morphisms/Finite.lean:35-55 and EffectiveEpi.lean:120-122; the latter already assumes both schemes affine."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"IsAffine\"",
+   "results": "Actual logged search: 4 hits; AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom. ",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned IsFinite, IsAffineHom, finite_app, and effective-epimorphism results concern schemes; none proves affine representability of an arbitrary algebraic-space target. Read Morphisms/Finite.lean:35-55 and EffectiveEpi.lean:120-122; the latter already assumes both schemes affine."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affineness descends along finite surjective maps of algebraic spaces without a Noetherian hypothesis",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset, AlgebraicGeometry.locallyOfFiniteType_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned IsFinite, IsAffineHom, finite_app, and effective-epimorphism results concern schemes; none proves affine representability of an arbitrary algebraic-space target. Read Morphisms/Finite.lean:35-55 and EffectiveEpi.lean:120-122; the latter already assumes both schemes affine."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-thickening-of-scheme-space",
+  "date": "2026-10-23",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y.",
+   "via": [
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-surjective-affine-space-target",
+  "worker": "stage1",
+  "summary": "Followed Tag 07VS through qcqs descent, finite-presentation approximation, absolute Noetherian approximation, descent over algebraic-space bases, eventual finiteness and surjectivity, and the existing Noetherian affine-target theorem. Six missing general tools are stated only; existing space limit, locality and Noetherian affineness nodes are reused. The statement is unchanged. No exact project attachment or Mathlib match was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. The Tag 07VS supporting argument is realized by steps 1-5; the latest sk-thm-sf-ctf-stability unit and its chapter route are unchanged. The inherited ancestor is null because the creation chain ends at the module name Sheaf.SixFunctors.CtfStabilityDirectImages, not a DAG node.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic continuity and scheme-test/point surjectivity comparison, Tags 03BX and 03H5; the unit has no separate point-calculus statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-0d8a19167",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-0d8a19167 (reviewer sub-agent of L); spot-checked: I read Stacks 07VS in full. All 5 steps follow it. Step 1: finite⇒proper (lem-weil-pbc-finite-proper), proper on scheme tests gives intrinsic properness and so universal closedness (representable-proper-tests), and the new 05Z2 node gives qs (separatedness is not needed later). Step 2: 07VR approximation; the X_a are qcqs by fp-qcqs-source; some X_a is affine by affine-limits-schematic-stages; surjectivity through f=g_a p_a is elementary. Step 3: 07SU stages are qs and of finite type over Z, hence Noetherian; 07SK gives f_0 over space bases; X_i is fp, qcqs, has affine transitions, and X=lim X_i. Step 4: 084Z (lft) and 07SN (lfp) in Situation 084W, whose qcqs hypotheses hold, then 07VP. Step 5: affine-locality and change-base-to-integers. I checked all tags against tags/tags. The six new nodes are statement-only and faithful to 05Z2, 07VR, 07SU, 07SK, 084Z and 07SN. Small cases (empty, identity, singleton index) are fine. The rg -L tag and label search finds only scheme or affine-base versions, so there are no duplicates. No SGA. Batch-5: every listed citation reaches sec-trace-formula only through def-trf-algebraic-space or lem-trf-space-fibre-products-etale-covers, which are generic definitions and foundations outside the assumed statements, so no assumption leaf is needed. tool_use lem-a1-space-point-open-calculus is accepted as generic. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineSpaceTarget",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affine_representation_of_finite_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSurjectiveAffineSpaceTarget.lean",
+  "statement": "theorem exists_affine_representation_of_finite_surjective {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hX : ∃ U : Over S, IsAffine U.left ∧ Nonempty (X.obj.obj ≅ yoneda.obj U)) (hfinite : IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) f.hom.hom) (hsurj : pointImage f.hom.hom = Set.univ) : ∃ V : Over S, IsAffine V.left ∧ Nonempty (Y.obj.obj ≅ yoneda.obj V)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2c8ea939",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read Stacks 07VS (spaces-limits.tex:3375) and the live Lean of IsRepresentableWith, AlgebraicSpace, PointRepresentative/Point/pointImage. Every clause matches the node: hX and the conclusion are the existential Yoneda iso with IsAffine on the scheme (form already used in SpaceQcqsDistinguishedSquareInduction.lean:84); hfinite = IsRepresentableWith (IsFinite p.left), p the projection to T; hsurj pointImage = univ is |f| surjective (equivalent to the mapPoint form). No Noetherian/fp/flat hypotheses, no extra instances, single universe u, all variables bound; lean.statement verbatim. Edge cases checked: empty X, identity, nilpotent thickening, nonaffine S. No duplicate: the WeilConjectures isAffine_of_isFinite_surjective is schemes-only; the declaration name is unused. No new definitions; proof `by sorry`; docstrings carry source/blueprint and the five proof steps; all imported modules exist live. Report has Worker report and Second reading by N0 (author's second pass). No file changed, no compile run. No findings."
+ }
+}

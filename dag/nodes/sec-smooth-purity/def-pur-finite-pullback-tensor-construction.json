@@ -1,0 +1,148 @@
+{
+ "id": "def-pur-finite-pullback-tensor-construction",
+ "kind": "definition",
+ "title": "Construction layer of the canonical finite tensor comparison",
+ "status": "split",
+ "statement": "Fix a prime l, a finite extension E of Q_l, n≥0, and a scheme morphism f:X→Y with l invertible on X and Y, with the coefficient categories and operations of [def-weil-derived-pullback-tensor-hom] and finite coefficient rings of [def-weil-l-adic-coefficient-extension]. Restrict the prescribed K-flat tensor model to flat-term K-flat representatives [def-sfb-proetale-tensor-model]. Identify the ordinary ringed pullback with the intrinsic finite pullback by the unique comparison preserving the actual adjunction-unit sections. Define finitePullbackTensorConstruction to be the composite of the inverse derived realization, inverse source tensor-model comparison, the canonical pro-etale tensor comparison, the target tensor-model comparison, and the tensor of the two derived realizations. Package this same family into a natural isomorphism, with identical components. Retain the four coefficient-level comparison-family types. These are the existing constructions extracted into an importable layer; canonicalFinitePullbackTensor is their API alias, with no replacement functors or arbitrary comparison maps.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sfb-proetale-tensor-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product, proof and final displayed total map); Tag 06YS (lemma-K-flat-resolution); Tag 06YU (definition-derived-tor and the following symmetry paragraph); More on Algebra, Tag 0FNG (section-sign-rules, item-flip-tensor-product)."
+ },
+ "proof": [
+  {
+   "text": "For pullbackTensorIndependent use the first property of the given flat-term K-flat representative: at these universes the two K-flat predicates are definitionally equal.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For pullbackTensorFiniteRepresentative_existsUnique use ObjectProperty.ιOfLE to include flat-term K-flat complexes among all K-flat complexes, and whisker T.comparison with the product inclusion. Set the tensor field to S.tensor. The component equation is reflexive. For uniqueness eliminate the asserted tensor-functor equality, then use isomorphism and natural-transformation extensionality and the prescribed component equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For pullbackTensorFiniteRealization_existsUnique specialize openSquarePullbackModel_existsUnique to the finite coefficient ring at exponent n+1. The constant-ring identifications and the displayed adjunction-unit section equations agree definitionally.",
+   "uses": [
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the five already specified natural isomorphisms to form finitePullbackTensorConstructionIso. Its component is definitionally the displayed finite comparison family. No additional existence theorem is used.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "def-sfb-proetale-tensor-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-trf-open-square-exchange",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-sfb-proetale-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product, proof and final displayed total map); Tag 06YS (lemma-K-flat-resolution); Tag 06YU (definition-derived-tor and the following symmetry paragraph); More on Algebra, Tag 0FNG (section-sign-rules, item-flip-tensor-product). Q2 separation of construction, representative calculation and naturality descent."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback tensor comparison commutes with signed symmetry on K flat representatives",
+   "results": "8 hits, including TensorProduct.lift_comp_comm_eq, TensorProduct.gradedComm_symm and categorical pullback symmetry. No derived ringed-site normalization result.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived inverse image tensor isomorphism normalized on K flat resolutions and signed braiding",
+   "results": "8 hits: CategoryTheory.Tor'_obj_map, HomologicalComplex.leftUnitor'_inv_comm, CategoryTheory.Tor', CategoryTheory.Tor'_map_app, CategoryTheory.Tor, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding.*pullback|pullback.*braiding|tensor.*[Kk][Ff]lat",
+   "results": "3 hits: AlgebraicGeometry/Limits.lean:451, CategoryTheory/Extensive.lean:123 and :125; these concern coproducts and categorical pullbacks.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorComparison",
+  "date": "2026-10-26",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The clause \"These actions commute with finite reduction and scalar extension to Qlb\"; via lem-pur-derived-pullback-tensor-iso and def-pur-finite-pullback-tensor-comparison, using the fixed finite tensor/pullback comparison and its signed coherence.",
+   "via": [
+    "def-pur-finite-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorConstruction",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorConstruction.lean",
+  "declaration": "WeilConjectures.finitePullbackTensorConstruction",
+  "declarations": [
+   "WeilConjectures.FinitePullbackTensorComparison",
+   "WeilConjectures.IntegralPullbackTensorComparison",
+   "WeilConjectures.RationalPullbackTensorComparison",
+   "WeilConjectures.CommonStagePullbackTensorComparison",
+   "WeilConjectures.pullbackTensorSiteSmall",
+   "WeilConjectures.pullbackTensorCoefficientFinite",
+   "WeilConjectures.pullbackTensorCoefficientIso",
+   "WeilConjectures.pullbackTensorIndependent",
+   "WeilConjectures.pullbackTensorFiniteRepresentative_existsUnique",
+   "WeilConjectures.pullbackTensorFiniteModel",
+   "WeilConjectures.pullbackTensorFiniteModelIso",
+   "WeilConjectures.pullbackTensorFiniteRealization_existsUnique",
+   "WeilConjectures.pullbackTensorFiniteRealization",
+   "WeilConjectures.finitePullbackTensorConstruction",
+   "WeilConjectures.finitePullbackTensorConstructionIso"
+  ],
+  "statement": "def finitePullbackTensorConstruction {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) [hX : ∀ x : X, Invertible (l : X.residueField x)] [hY : ∀ y : Y, Invertible (l : Y.residueField y)] : (@FinitePullbackTensorComparison l _ E _ _ _ X Y f n hX hY)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c1754",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T130643-L-3488572",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c1754",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T130643-L-3488572",
+  "kind": "interface",
+  "note": "independent cc review: 4 delivered modules vs published FinitePullbackTensorComparison (verbatim move except rename to finitePullbackTensorConstruction + new ConstructionIso); new hole vs item braiding statement (special case on flat K-flat Q-images); node records vs Lean; direct importer CompletedPullbackTensorComparison compiled against delivered set (exit 0)"
+ }
+}

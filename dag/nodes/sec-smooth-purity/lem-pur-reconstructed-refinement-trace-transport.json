@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-reconstructed-refinement-trace-transport",
+ "kind": "statement",
+ "title": "Transport an integral refinement trace square through coefficients",
+ "statement": "Fix a prime $\\ell$, a normed finite extension $E/\\mathbf Q_\\ell$, a field $k$ whose characteristic is prime and different from $\\ell$, separated finite-type $k$-schemes $X,Y$, a $k$-morphism $f:X\\to Y$, and a specified normalized compact-support comparison family $C$ [lem-pur-compact-support-condensed-realization]. Use the actual functors, maps, supplied pairs, and normalized Brown data of [def-pur-reconstructed-refinement-data]. Let $w:c\\to d$ be a refinement, let $M_1,M_2$ be arbitrary completed integral constructible objects on $X$, $L$ one on $Y$, $a:M_2\\to M_1$, and $t_1:P_c(M_1)\\to L$, $t_2:P_d(M_2)\\to L$. Assume $t_1\\circ P_c(a)=t_2\\circ q_{M_2}$, where $q$ is the specified forward integral comparison. This square remains commutative after (1) completed integral scalar extension along every embedding $E\\to H$ of finite extensions of $\\mathbf Q_\\ell$, using scalarTrace and the comparison over $H$; (2) the specified rational realization into the bounded constructible condensed $E$ categories, using fieldTrace and fieldComparison; and (3) its composite with finite-valued closure realization along every embedding $E\\to\\Omega=\\overline{\\mathbf Q}_\\ell$, using omegaTrace and omegaComparison. In each case the trace is the inverse specified support comparison followed by the image of $t_i$. No Brown or supplied-system hypothesis is imposed on the arbitrary objects and traces.",
+ "stmt_deps": [
+  "def-pur-reconstructed-refinement-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "blueprint sk-prop-sp-unique-adjoint categorical proof, Naturality;\nsk-prop-sp-rational and sk-thm-sp-qbar; parent proof Steps 7--8."
+ },
+ "proof": [
+  {
+   "text": "apply the specified completed integral scalar extension to the input equality.\nNaturality of its compact-support comparison and the coefficient refinement square\nrewrite the image as the scalar equation. For rational realization apply the\nrationalization/realization functor, use naturality of the specified realization\ncomparison, and invert its refinement square. For closure realization apply the\nactual finite-valued closure scalar functor to the rational equality. Naturality\nof the compact-support projection and condensedProjection_refinement identify the\ninverse projection factors; all are invertible on bounded constructibles. Cancel\nthe inverse refinement and projection factors to obtain the closure equation.\nAll equalities are preserved by functors, so this works for arbitrary traces and\narbitrary integral morphisms; no representing-pair or theta hypothesis is needed.",
+   "uses": [
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-ringed-refinement-coefficient-square",
+    "def-pur-condensed-compact-support-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-ringed-refinement-coefficient-square",
+  "def-pur-condensed-compact-support-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "blueprint sk-prop-sp-unique-adjoint categorical proof, Naturality;\nsk-prop-sp-rational and sk-thm-sp-qbar; parent proof Steps 7--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact conservative derived evaluations detect equality of maps between systems concentrated in a single degree",
+   "results": "CochainComplex.fromSingle₀Equiv and chain-map extensionality; no project geometric comparison.",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; the project-specific normalization calculation is not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a counit preserving comparison of right adjoints along an isomorphism of left adjoints",
+   "results": "Adjunction.rightAdjointUniq and its counit formulas; the Brown domain here is restricted, with explicitly transported system maps.",
+   "date": "2026-10-26",
+   "verdict": "Use the counit uniqueness argument; no exact project statement."
+  },
+  {
+   "tool": "grep",
+   "query": "systemRefinement_(id|comp)|hom_formula|single_degree_square|condensedProjection_refinement",
+   "results": "Remote Mathlib grep: OK 0 hits. Local rg on the project found systemRefinement_id and systemRefinement_comp, Brown hom_formula, same-compactification single_degree_square, and condensedProjection_refinement; their signatures were read.",
+   "date": "2026-10-26",
+   "verdict": "These supply substeps of the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ReconstructedPairRefinementCoherence",
+  "date": "2026-10-26",
+  "group": "A5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "blueprint sk-prop-sp-unique-adjoint categorical proof, Naturality;\nsk-prop-sp-rational and sk-thm-sp-qbar; parent proof Steps 7--8.",
+   "via": [
+    "lem-pur-reconstructed-pair-refinement-coherence",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReconstructedRefinementTraceTransport",
+  "file": "lean/Sheaf/Paper/ReconstructedRefinementTraceTransport.lean",
+  "declaration": "WeilConjectures.ReconstructedPairRefinement.reconstructedRefinementTraceTransport",
+  "statement": "theorem reconstructedRefinementTraceTransport\n    {c d : Compactification f} (w : c.Refinement d)\n    (M₁ M₂ : CondensedERealization.Integral l E X.scheme)\n    (L : CondensedERealization.Integral l E Y.scheme) (a : M₂ ⟶ M₁)\n    (t₁ : (support l E k C X Y f c).obj M₁ ⟶ L)\n    (t₂ : (support l E k C X Y f d).obj M₂ ⟶ L)\n    (h : (support l E k C X Y f c).map a ≫ t₁ =\n      (comparison l E k C X Y f w).hom.app M₂ ≫ t₂) :\n    (∀ (H : Type u) [NormedField H] [NormedAlgebra ℚ_[l] H]\n      [FiniteDimensional ℚ_[l] H] (i : E →ₐ[ℚ_[l]] H),\n      (support l H k C X Y f c).map ((integralScalar l E H i k X).map a) ≫\n          scalarTrace l E k C X Y f H i c t₁ =\n        (comparison l H k C X Y f w).hom.app ((integralScalar l E H i k X).obj M₂) ≫\n          scalarTrace l E k C X Y f H i d t₂) ∧\n    ((fieldSupport l E k C X Y f c).map ((realize l E k C X).map a) ≫\n        fieldTrace l E k C X Y f c t₁ =\n      (fieldComparison l E k C X Y f w).hom.app ((realize l E k C X).obj M₂) ≫\n        fieldTrace l E k C X Y f d t₂) ∧\n    (∀ b : E →ₐ[ℚ_[l]] PadicAlgCl l,\n      (omegaSupport l k X Y f c).map\n          (((realize l E k C X) ⋙ toOmega l E k b X).map a) ≫\n        omegaTrace l E k C X Y f b c (fieldTrace l E k C X Y f c t₁) =\n      (omegaComparison l k X Y f w).hom.app\n          (((realize l E k C X) ⋙ toOmega l E k b X).obj M₂) ≫\n        omegaTrace l E k C X Y f b d (fieldTrace l E k C X Y f d t₂))",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "independent cc review: delivered ReconstructedPairRefinementData.lean vs clone item module (verbatim prefix); 5 sorried lemmas vs old Coherence fields (4 verbatim, TraceTransport generalized, true via scalar_refinement/RefinementCoherence.realization/condensedProjection_refinement); item node vs proof"
+ }
+}

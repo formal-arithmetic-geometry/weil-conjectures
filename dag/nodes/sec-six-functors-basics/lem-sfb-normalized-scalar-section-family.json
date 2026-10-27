@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-normalized-scalar-section-family",
+ "kind": "statement",
+ "title": "Simultaneous normalized scalar section comparisons",
+ "statement": "For a morphism φ of commutative condensed rings, let b be a family of universally normalized derived scalar/pullback comparisons. There is one section scalar comparison s at each scheme, normalized on ordinary balanced generators and flat-term K-flat computation counits, such that every b_h is SectionPullNormalized relative to s at its endpoints. The derived categories are ordinary unbounded internal and section module categories. See [def-sfb-internal-derived-scalar-comparisons], [def-sfb-internal-section-scalar-pullback-comparison-data] for the exact fixed operations and normalization equations.",
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-internal-section-scalar-pullback-comparison-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6D, 07A7 and 0E47; scalar exchange rectangle proof steps 1 and 6"
+ },
+ "proof": [
+  {
+   "text": "Apply internal_scalar_pullback_normalization to the identity at each scheme and retain its normalized section scalar comparison. Choose these comparisons pointwise. For every edge apply the endpoint normalization transport theorem to the two chosen normalized comparisons and the supplied PullNormalized witness. These supply the simultaneous family and every required section pullback normalization.",
+   "uses": [
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-sfb-section-pull-normalization-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-sfb-section-pull-normalization-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit normalization argument extracted from lem-sfb-scalar-geometric-exchange-rectangle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of base change mates for a coherent change of coefficients between pullback adjunctions",
+   "results": "CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.ev_naturality; PresheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(mate|conjugate).*(cube|rectangle|past)",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived scalar extension comparisons can be chosen simultaneously under equivalence between internal modules and section modules",
+   "results": "LinearEquiv.extendScalarsOfIsLocalizationEquiv; IsLocalizedModule.mapExtendScalars.congr_simp; LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply; LinearEquiv.extendScalarsOfIsLocalization.congr_simp; Module.FinitePresentation.isLocalizedModule_mapExtendScalars; LinearEquiv.extendScalarsOfIsLocalization; Module.Baer.ExtensionOf.dExt_iff; RestrictScalars.addEquiv",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived extension of scalars commutes with a square of geometric pullback composition isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.pullbackSpecIso_hom_base_assoc; KaehlerDifferential.tensorKaehlerEquiv_left_inv; AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc; KaehlerDifferential.moduleBaseChange'",
+   "date": "2026-10-23",
+   "verdict": "Generic categorical or module results do not supply this normalized derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarGeometricExchangeRectangle",
+  "date": "2026-10-23",
+  "group": "J6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Proof step 1 of scalar geometric exchange rectangle.",
+   "via": [
+    "lem-sfb-scalar-geometric-exchange-rectangle",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedScalarSectionFamily",
+  "file": "lean/Sheaf/Paper/NormalizedScalarSectionFamily.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.normalized_scalar_section_family",
+  "statement": "theorem normalized_scalar_section_family (φ : Λ ⟶ Λ') [IsMonHom φ]\n    (b : ∀ {U V : Scheme.{u}} (h : U ⟶ V),\n      D φ V ⋙ L Λ' h ≅ L Λ h ⋙ D φ U)\n    (normalized : ∀ {U V : Scheme.{u}} (h : U ⟶ V), PullNormalized φ h (b h)) :\n    ∃ s : ∀ T : Scheme.{u}, SectionScalarComparison φ T,\n      (∀ T : Scheme.{u}, SectionScalarNormalized φ T (s T)) ∧\n      ∀ {U V : Scheme.{u}} (h : U ⟶ V),\n        SectionPullNormalized φ h (s U) (s V) (b h)",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261024T015051-L-2318376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261024T015051-L-2318376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-rational-tensor-tower-coherence",
+ "kind": "statement",
+ "title": "Tensor coherence under successive rational scalar extension",
+ "statement": "Let l be prime, W a scheme with l invertible in each residue field, and E, L, M finite extensions of Q_l in the universe of W, with Q_l-algebra maps i:E→L and j:L→M. For X,Y in the raw rational constructible E-category of [def-sf-finite-rational-derived-operations], the tensor comparison for i followed by scalar extension along j, the tensor comparison for j, and the tensor of the two components of sfRationalScalarComp from [lem-weil-scalar-extension-composition] equals its component on X tensor Y followed by the tensor comparison for j composed with i. All functors and comparisons are the specific published normalized ones; no common-stage category or recorded stage system is involved.",
+ "source": {
+  "document": "lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean",
+  "place": "scalarOperationsOrdinary_tower, tensor clause, followed by completion conjugation and rationalization in the common-stage tensor argument of def-weil-derived-pullback-tensor-hom"
+ },
+ "stmt_deps": [
+  "def-sf-finite-rational-derived-operations",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-tensor-tower-datum"
+ ],
+ "proof": [
+  {
+   "text": "Apply the tensor clause of scalarOperationsOrdinary_tower to E, L, M and their actual inclusion maps. This supplies the ordinary tensor tower equation on every pair of derived objects.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use uniqueness of the good-representative normalization to identify sfIntegralOrdinaryComparison with scalarCompletionIso on each intrinsic integral object. Expand sfIntegralScalarComp by its component specification. The private tensorTower_conjugate calculation uses naturality of scalarCompletion and scalarTensorOrdinary and cancels the consecutive completion inverses. Full faithfulness of the constructible inclusion then gives integralTensor_tower.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-scalar-extension-composition",
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply sfRationalConstructibleLocalization to integralTensor_tower. The pure-tensor specifications of rational scalar extension and rationalDerivedTensor identify maps of integral arrows with their localized images. The component specifications of rationalTensorScalarComparison and sfRationalScalarComp identify the remaining factors. Heterogeneous congruence handles the prescribed object equalities, giving rationalTensor_tower. Package the categories and prescribed comparisons in rationalTensorTowerDatum and identify its Coherent predicate with this proved component equation.",
+   "uses": [
+    "def-sf-finite-rational-derived-operations",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "def-sf-finite-rational-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean",
+  "place": "scalarOperationsOrdinary_tower, tensor clause, followed by completion conjugation and rationalization in the common-stage tensor argument of def-weil-derived-pullback-tensor-hom"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality and associativity of scalar extension comparison isomorphisms for derived tensor products",
+   "results": "ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc', TensorProduct.AlgebraTensorModule.distribBaseChange and ordinary module scalar comparison lemmas.",
+   "date": "2026-10-27",
+   "verdict": "No match: these are ordinary module maps, not the specified completed and rationalized constructible comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension natural isomorphisms for derived tensor products satisfy the composition tower equation",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul; ModuleCat.extendScalars_assoc and variants; TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange.",
+   "date": "2026-10-27",
+   "verdict": "No completed or rational constructible tensor comparison tower equation; the hits concern ordinary module scalar extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "NatIso.ofComponents and its component equations.",
+   "date": "2026-10-27",
+   "verdict": "Constructs natural isomorphisms but supplies no tensor scalar tower equation."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|distribBaseChange in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean and Mathlib/LinearAlgebra/TensorProduct/Tower.lean; FamilyTower in the DAG and blueprint",
+   "results": "Ordinary module associativity and base-change tensor formulas; no blueprint node for FamilyTower. Project generic bifunctor descent is already proved.",
+   "date": "2026-10-27",
+   "verdict": "Retain the project scalar comparison calculation; generic descent does not supply coherence of these particular comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalTensorStageCoherence",
+  "date": "2026-10-27",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-rational-tensor-stage-coherence",
+   "place": "ordinary tower, completion conjugation, and rationalization steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalTensorTowerCoherence",
+  "file": "lean/Sheaf/Paper/RationalTensorTowerCoherence.lean",
+  "declaration": "WeilConjectures.rationalTensor_tower",
+  "statement": "theorem rationalTensor_tower\n    (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]\n    (j : L →ₐ[ℚ_[l]] M) :\n    (rationalTensorTowerDatum l W E L ι M j).Coherent",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.rationalTensorTowerDatum",
+   "WeilConjectures.rationalTensor_tower"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T123508-L-2310452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T123508-L-2310452",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

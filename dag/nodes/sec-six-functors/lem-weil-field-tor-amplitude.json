@@ -135,7 +135,18 @@
   "def-weil-rationalization-karoubi"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
  "split_report": {
@@ -194,5 +205,24 @@
   "landing": "20261019T132227-L-1203898",
   "kind": "proof",
   "note": "independent cc review: delivered FieldTorAmplitude.lean (signature identical to the node's lean.statement, proof complete) with the node proof/proof_deps, the unit realized list (empty), axioms (sorryAx only via the cited exists_constantFieldTensorCohomology and the statement dependency exists_ordinaryFieldRealization), and the compile of the importer WeilFourierInversion"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda\\in\\{E,\\Qlb\\}$, regarded as a condensed ring, let $Y$ be a\nstanding scheme, and let $K\\in\\Dbc(Y,\\Lambda)$ be an object of the condensed\nbounded constructible category ([sk-def-sfb-bounded-constructible]). Then $K$\nhas finite Tor amplitude ([sk-def-sfb-constructible],\n[def-weil-finite-tor-amplitude]): there are integers $a\\leq b$ such that\n\n$$\n \\mathcal H^r\\bigl(K\\otimes^{\\mathbf L}_{\\Lambda_Y}M\\bigr)=0\n \\qquad(r\\in\\mathbf Z\\setminus[a,b])\n$$\n\nfor every sheaf $M$ of $\\Lambda_Y$-modules placed in degree zero. Thus\n$\\Dctf(Y,\\Lambda)=\\Dbc(Y,\\Lambda)$.",
+  "proof": [
+   {
+    "text": "Complexes of finite Tor amplitude form a subcategory closed under shifts and\ncones: from a triangle $K'\\to K\\to K''\\to$ and the long exact cohomology\nsequence of $-\\otimes^{\\mathbf L}_{\\Lambda_Y}M$, if $K'$ and $K''$ have Tor\namplitude in $[a',b']$ and $[a'',b'']$, then $K$ has Tor amplitude in\n$[\\min(a',a''),\\max(b',b'')]$. By [sk-cor-coefficient-heart-ii], $K$ is\nobtained by finitely many cones from objects $a_!L[n]$, with\n$a:S\\hookrightarrow Y$ a locally closed immersion and $L$ a lisse\n$\\Lambda_S$-module ([sk-lem-coefficient-heart] (3)), so it suffices to show\nthat $a_!L$ has Tor amplitude in $[0,0]$. The module $L$ is locally free of\nfinite rank for the pro-étale topology, hence flat, so\n$L\\otimes^{\\mathbf L}_{\\Lambda_S}N=L\\otimes_{\\Lambda_S}N$ for every\n$\\Lambda_S$-module $N$. Writing $a=i\\circ u$ with $u$ open and $i$ closed, the\nfunctors $u_!$, $i_*$ and $a^*$ are exact and satisfy the projection formulas\n$u_!L\\otimes M\\cong u_!(L\\otimes u^*M)$ and\n$i_*L'\\otimes M\\cong i_*(L'\\otimes i^*M)$, so\n\n$$\na_!L\\otimes^{\\mathbf L}_{\\Lambda_Y}M\\cong a_!\\bigl(L\\otimes_{\\Lambda_S}a^*M\\bigr)\n$$\n\nis a sheaf in degree $0$.",
+    "uses": [
+     "sk-lem-coefficient-heart"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

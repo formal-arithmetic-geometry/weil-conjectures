@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-stack-smooth-atlas-base-change",
+ "kind": "statement",
+ "title": "Smooth atlas comparison and arbitrary base change for algebraic stacks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $\\mathcal X$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack]. Use the fibred groupoids, morphisms, representability and 2-fibre products of [def-sfb-stable-pointed-moduli-groupoids], with algebraic spaces as in [def-trf-algebraic-space]. A morphism $p:W\\to\\mathcal X$ from a scheme is representable smooth if every scheme base change is an algebraic space whose projection to the base is smooth on every etale scheme chart [def-sbc-smooth-morphisms]; surjective means surjective on field-valued point classes after scheme base change. Then $\\mathcal X$ is smooth over $S$ in the atlas sense of [def-sfb-algebraic-moduli-stack] if and only if, for every scheme $W$ and representable smooth $p:W\\to\\mathcal X$, the composite $W\\to S$ is smooth. No surjectivity of $p$ is assumed in this test. For every scheme morphism $S'\\to S$, the 2-fibre product $\\mathcal X_{S'}=\\mathcal X\\times_S S'$ is algebraic, and the base change of any smooth surjective scheme atlas of $\\mathcal X$ is a smooth surjective scheme atlas of $\\mathcal X_{S'}$. If $\\mathcal X$ is smooth over $S$, then $\\mathcal X_{S'}$ is smooth over $S'$. No finite-type, Noetherian or Deligne--Mumford hypothesis on $\\mathcal X$ or $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06FM (lemma-local-source-target) with property smooth and target S, 075U (definition-smooth), and 075W (lemma-base-change-smooth); algebraicity of the fibre product is algebraic.tex Tag 04T2 (lemma-2-fibre-product)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-moduli-scheme-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Assume that $\\mathcal X$ is smooth over $S$, and choose a smooth surjective atlas $a:U\\to\\mathcal X$ with $U\\to S$ smooth, as in [def-sfb-algebraic-moduli-stack]. For an arbitrary representable smooth $p:W\\to\\mathcal X$, put $R=U\\times_{\\mathcal X}W$. By representability, $R$ is an algebraic space. The representable-map calculus [lem-sfb-fibred-groupoid-representable-smooth-calculus] says that $R\\to U$ is smooth and $q:R\\to W$ is smooth and surjective. Regard the schemes as their representable algebraic spaces [def-trf-scheme-algebraic-space]. Apply [lem-sfb-space-smooth-source-point-locality] first to $R\\to U\\to S$: since $U\\to S$ is smooth everywhere, $R\\to S$ is smooth everywhere. For each point $w$ of $W$, choose a point $r$ of $R$ over $w$, using surjectivity of $q$. Apply that same pointwise equivalence to $R\\xrightarrow{q}W\\to S$ at $r$: smoothness of $R\\to S$ at $r$ gives smoothness of $W\\to S$ at $w$. Smoothness on neighbourhoods of every point is smoothness of the morphism. This proves the forward implication without assuming $p$ surjective.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-space-smooth-source-point-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM (lemma-local-source-target), proof of (2) implies (1), specialized to target S; spaces-descent.tex Tag 06F2 (lemma-smooth-smooth-local-source)"
+   }
+  },
+  {
+   "text": "Conversely, algebraicity supplies a smooth surjective scheme atlas $a:U\\to\\mathcal X$ by [def-sfb-algebraic-moduli-stack]. Apply the assumed test to this particular representable smooth map. It gives $U\\to S$ smooth, so this atlas witnesses smoothness of $\\mathcal X$ over $S$ by the definition.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 075U (definition-smooth), with Tag 06FM (lemma-local-source-target)"
+   }
+  },
+  {
+   "text": "Let $S'\\to S$ be arbitrary. The schemes $S$ and $S'$ are algebraic stacks over $S$ through their representable sheaves [def-trf-scheme-algebraic-space]: a representable sheaf is an fppf, hence etale, sheaf, so a stack with discrete fibres; its diagonal is represented by scheme fibre products; and its identity is a scheme atlas whose scheme base changes are identities, hence smooth and surjective. The algebraic-stack fibre-product theorem [lem-sfb-algebraic-stack-fibre-products], applied over $S$ to $\\mathcal X\\to S\\leftarrow S'$, gives the algebraic stack $\\mathcal X'=\\mathcal X\\times_S S'$. Interpreting it over $S'$ uses [lem-sfb-etale-stack-localization]: objects and etale descent over an $S'$-scheme are the same objects and descent data with the specified map to $S'$. The diagonal tests are unchanged: for two objects over $T\\to S'$, their isomorphism sheaf is the same algebraic space as before. For any smooth surjective scheme atlas $U\\to\\mathcal X$, the scheme fibre product $U'=U\\times_S S'$ exists by [def-pc-fibre-product]. The triples describing the 2-fibre products in [def-sfb-stable-pointed-moduli-groupoids] identify $U'$ with $U\\times_{\\mathcal X}\\mathcal X'$: the extra object of $\\mathcal X$ is identified with the image of the object from $U$, leaving precisely its map to $S'$ and the equality of the maps to $S$. Hence $U'\\to\\mathcal X'$ is the 2-base change of the original atlas, so [lem-sfb-fibred-groupoid-representable-smooth-calculus] makes it representable smooth and surjective. This gives the required atlas over $S'$, and together with the stack and diagonal tests verifies algebraicity over $S'$.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-etale-stack-localization",
+    "def-pc-fibre-product",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "algebraic.tex Tag 04T2 (lemma-2-fibre-product), Tags 0302 and 045C (base change of representability and representable properties); stacks.tex Tag 04WV (lemma-localize-stacks)"
+   }
+  },
+  {
+   "text": "If $\\mathcal X$ is smooth over $S$, choose its atlas $U$ with $U\\to S$ smooth [def-sfb-algebraic-moduli-stack]. For this atlas, the structural morphism $f':U'=U\\times_S S'\\to S'$ is the scheme base change of $f:U\\to S$ along $S'\\to S$ [def-pc-fibre-product]. A smooth morphism of schemes is flat and locally of finite presentation [lem-pc-smooth-flat], so the pointwise base-change lemma [lem-sfb-scheme-flat-smooth-point-base-change] applies to $f$ and the arbitrary morphism $S'\\to S$: for every $u'\\in U'$, $f'$ is smooth at $u'$ because $f$ is smooth at the image of $u'$ in $U$. Smoothness on an open neighbourhood of every point is smoothness of $f'$, since these open neighbourhoods cover $U'$ and smoothness of schemes is local on the source. Thus $U'\\to S'$ is smooth. The atlas $U'\\to\\mathcal X'$ established in the preceding step therefore witnesses smoothness of $\\mathcal X'$ over $S'$ by the definition [def-sfb-algebraic-moduli-stack]. This argument places no flatness, finiteness or Noetherian restriction on the base-changing map.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-pc-fibre-product",
+    "lem-pc-smooth-flat",
+    "lem-sfb-scheme-flat-smooth-point-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 075W (lemma-base-change-smooth) on the base-changed atlas; scheme input morphisms.tex Tag 01VB (lemma-base-change-smooth), here through the pointwise flat base-change lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-space-smooth-source-point-locality",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-etale-stack-localization",
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-pc-smooth-flat",
+  "lem-sfb-scheme-flat-smooth-point-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06FM and 075U; direct atlas proof of Tag 075W using algebraic.tex 04T2 and spaces-descent.tex 06F2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|SmoothAtlas|[Ss]mooth.*[Ss]tack",
+   "results": "{\"t\": \"2026-10-23T13:39:25Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|SmoothAtlas|[Ss]mooth.*[Ss]tack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and its permanence only; no algebraic-stack atlas or curve-moduli statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of an algebraic stack over a base scheme is independent of smooth atlas and is stable under base change",
+   "results": "{\"t\": \"2026-10-23T13:39:25Z\", \"tool\": \"leansearch\", \"query\": \"Smoothness of an algebraic stack over a base scheme is independent of smooth atlas and is stable under base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\"], \"digest\": \"9d4484bb02b397cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and its permanence only; no algebraic-stack atlas or curve-moduli statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T13:39:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeSmooth\", \"AlgebraicGeometry.instRespectsSchemeSmoothIsOpenImmersion\", \"AlgebraicGeometry.instIsMultiplicativeSchemeSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.smoothLocus\", \"AlgebraicGeometry.instSmoothFstScheme\", \"AlgebraicGeometry.instSmoothSndScheme\", \"AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.instSmoothOfRelativeDimensionFstScheme\"], \"digest\": \"b49d7266ba0060cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and its permanence only; no algebraic-stack atlas or curve-moduli statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic stack smooth over a scheme S every smooth scheme chart has smooth composite to S and smoothness persists under arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T13:39:27Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic stack smooth over a scheme S every smooth scheme chart has smooth composite to S and smoothness persists under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"d130b4293b13ec2b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and its permanence only; no algebraic-stack atlas or curve-moduli statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth surjective presentation detects smoothness of algebraic stacks over arbitrary schemes",
+   "results": "{\"t\": \"2026-10-23T13:39:28Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth surjective presentation detects smoothness of algebraic stacks over arbitrary schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"4789883a20d174b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and its permanence only; no algebraic-stack atlas or curve-moduli statement"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|SmoothAtlas|[Ss]mooth.*[Ss]tack",
+   "results": "{\"t\": \"2026-10-23T14:26:38Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|SmoothAtlas|[Ss]mooth.*[Ss]tack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results are scheme smoothness, ring formal smoothness or scheme pullback surjectivity; none states algebraic-stack atlas comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth surjective atlas comparison for algebraic stacks over an arbitrary base scheme",
+   "results": "{\"t\": \"2026-10-23T14:27:01Z\", \"tool\": \"leansearch\", \"query\": \"Smooth surjective atlas comparison for algebraic stacks over an arbitrary base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_comp_surjective\", \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.FormallySmooth.of_comp_surjective\", \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"AlgebraicGeometry.IsSmooth.recOn\"], \"digest\": \"4e50d5fa5e01b705\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results are scheme smoothness, ring formal smoothness or scheme pullback surjectivity; none states algebraic-stack atlas comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T14:27:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeSmooth\", \"AlgebraicGeometry.instRespectsSchemeSmoothIsOpenImmersion\", \"AlgebraicGeometry.instIsMultiplicativeSchemeSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.smoothLocus\", \"AlgebraicGeometry.instSmoothFstScheme\", \"AlgebraicGeometry.instSmoothSndScheme\", \"AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.instSmoothOfRelativeDimensionFstScheme\"], \"digest\": \"b49d7266ba0060cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results are scheme smoothness, ring formal smoothness or scheme pullback surjectivity; none states algebraic-stack atlas comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable smooth morphism from a scheme into a smooth Artin stack has smooth structural composite",
+   "results": "{\"t\": \"2026-10-23T14:27:02Z\", \"tool\": \"leanfinder\", \"query\": \"A representable smooth morphism from a scheme into a smooth Artin stack has smooth structural composite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"15af755a0f3e5c86\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results are scheme smoothness, ring formal smoothness or scheme pullback surjectivity; none states algebraic-stack atlas comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness of an algebraic stack over a scheme can be tested on arbitrary smooth scheme charts and is preserved by scheme base change",
+   "results": "{\"t\": \"2026-10-23T14:27:03Z\", \"tool\": \"leanfinder\", \"query\": \"Smoothness of an algebraic stack over a scheme can be tested on arbitrary smooth scheme charts and is preserved by scheme base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"3cbb7fffdbb11adf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results are scheme smoothness, ring formal smoothness or scheme pullback surjectivity; none states algebraic-stack atlas comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-arithmetic-nodal-curve-stack-smooth",
+  "date": "2026-10-23",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Regular universal etale presentation of the stable moduli groupoid. Geometric prerequisite: algebraicity and unobstructedness of all nodal curve families, before imposing stability or selecting an atlas. Generic atlas comparison and arbitrary scheme base change used when passing from the absolute isolated-lci smooth locus to the arithmetic nodal stack and testing nonsurjective charts. The explicit inherited ancestor is det-thm-sf-ctf-stability-direct-images, paragraph (3), in literature/blueprint/latest; the automatic creation chain terminates at a Lean module rather than a DAG id.",
+   "via": [
+    "lem-sfb-arithmetic-nodal-curve-stack-smooth",
+    "lem-sfb-stable-moduli-regular-universal-atlas",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-smooth-atlas-base-change",
+  "worker": "stage1",
+  "summary": "Four-step proof using the common algebraic-space refinement of an atlas and an arbitrary smooth chart, pointwise smooth-source locality, and direct atlas base change. Reuses existing general representable-map and algebraic-stack fibre-product nodes; no new nodes. Neither DM-only chart comparison nor field-only stack permanence is applied. Statement unchanged. Maintainer reader (Q06 review): step 3 now cites def-trf-scheme-algebraic-space for S, S' as algebraic stacks; step 4 takes scheme base change of smoothness from lem-pc-smooth-flat and lem-sfb-scheme-flat-smooth-point-base-change instead of the representable-map calculus.",
+  "blueprint": "Supplies generic atlas comparison and arbitrary arithmetic base change below paragraph (3), Rj_* preservation, of det-thm-sf-ctf-stability-direct-images in literature/blueprint/latest. Repairs the inherited null ancestor using the explicitly named blueprint node; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "The representable-sheaf interpretation of a scheme is generic vocabulary used by the algebraic-space source-locality tool; no alternative notion is introduced."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Existence and universal property of scheme fibre products identify the base-changed atlas; this is a generic construction, not a replacement proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-scheme-algebraic-space",
+  "def-pc-fibre-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-5c4dbe00b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-5c4dbe00b (reviewer sub-agent of L); spot-checked: Read the item, all 4 steps and every cited statement, plus the Stacks sources: stacks-morphisms 06FM (proof of (2)=>(1)), 075U and 075W, and the tags 04T2, 04WV, 06F2 and 01VB. The statement and stmt_deps are byte-identical to the base copy taken from the Q57 snapshot, and the statement is true as written; it is 06FM with target S plus 075W. No new nodes; no repair note; no SGA. Steps 1 and 2 are correct. Step 1 builds R=U×_X W; the calculus gives R→U smooth and R→W smooth surjective. Source-point-locality is then applied twice: R→U→S, then R→W→S at a lift of each point of W. Surjectivity of p is never used. Two faults, both repaired. (1) C1, step 3: the fibre-product theorem needs S and S' to be algebraic stacks, and nothing was cited for that. The step now says it and cites def-trf-scheme-algebraic-space. The change of base to S' through lem-sfb-etale-stack-localization (applied as S'→S) and the triple identification U'≅U×_X X' were checked and are correct. (2) C3/C4, step 4: it took 'U'→S' smooth' from the base-change stability of lem-sfb-fibred-groupoid-representable-smooth-calculus. That lemma only covers maps already known to be representable smooth, and it matches the representable notion with the def-trf notion only for etale and surjective. So the step assumed the scheme base-change fact it was proving. It is replaced by lem-pc-smooth-flat (Mathlib leaf) plus lem-sfb-scheme-flat-smooth-point-base-change (same unit; flat lfp f, arbitrary h), followed by locality on the source. proof_deps recomputed; no cycle. Batch-5: the calculus, point-locality and fibre-product nodes reach sec-trace-formula only through the general definition def-trf-algebraic-space; def-trf-scheme-algebraic-space is a generic definition. The fix's lem-sfb-scheme-flat-smooth-point-base-change reaches only generic lem-trf smooth-at-point local-algebra lemmas. None of these is the trace formula, Poincare duality, or a step of their proofs, so all are kept. The declared tool_uses (def-trf-scheme-algebraic-space, def-pc-fibre-product) are generic notions; accepted. The blueprint.from.node repair to det-thm-sf-ctf-stability-direct-images is accepted. Corrected item: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stack-smooth-atlas-base-change.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSmoothAtlasBaseChange",
+  "declaration": "CategoryTheory.isSmoothModuliStack_iff_forall_smooth_scheme_map",
+  "declarations": [
+   "CategoryTheory.isSmoothModuliStack_iff_forall_smooth_scheme_map",
+   "CategoryTheory.isAlgebraicModuliStack_schemeBaseChange",
+   "CategoryTheory.isSmoothModuliAtlas_schemeBaseChange",
+   "CategoryTheory.isSmoothModuliStack_schemeBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSmoothAtlasBaseChange.lean",
+  "statement": "theorem isSmoothModuliStack_iff_forall_smooth_scheme_map {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) : IsSmoothModuliStack F ↔ ∀ (W : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj W)) F), (∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange p T t Z a ∧ SpaceMapIsSmooth Z T a) → Smooth W.hom",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7bafdb1b",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Re-delivery of the head 2dd1799850d7, which was PASSed and then returned by the landing because the new node def-sfb-moduli-scheme-base-change had blueprint.from.node 'det-thm-sf-ctf-stability-direct-images' while the computed ancestor is None. Snapshot diff: only from.node -> null and a report section changed; both Lean modules and the item node are byte-identical. blueprint_refs.py ancestor now gives None, which matches. Substance re-checked against live AlgebraicModuliStack/StablePointedModuliGroupoids: the iff premise is IsSmoothModuliAtlas without surjectivity; clauses 2-4 allow arbitrary g with no flatness or finiteness hypothesis; the explicit iso-comma base change and the counit atlas map are real data; universes u,v,w are free; the lean.statement fields are verbatim; only sorrys; no duplicate and no parallel landing in side-live. Advisory: 4 proof_deps lack Lean (stage 3); the second reading is formal. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-trf-flat-fibre-smooth-locus-image",
+ "kind": "statement",
+ "title": "A smooth point of a fibre maps to the smooth locus of a flat morphism",
+ "statement": "Let $f:X\\to Y$ be a flat morphism of schemes [def-weil-flat-morphism] locally of finite presentation [def-sbc-locally-finite-presentation]. For $y\\in Y$, let $w\\in X_y$ be a point of the scheme-theoretic fibre [def-pc-scheme-fibre]. If $X_y\\to\\operatorname{Spec}\\kappa(y)$ is smooth at $w$ [def-sbc-smooth-morphisms], then $f$ is smooth at the image of $w$ in $X$. Smoothness at a point means membership in the open smooth locus, or equivalently existence of an open neighbourhood on which the morphism is smooth.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V9, lemma-smooth-at-point, (2) implies (1); already proved as Scheme.Hom.fiberι_mem_smoothLocus in lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean:154-202."
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Apply the pointwise flat-fibre criterion [lem-trf-smooth-at-point-fibre-criterion] at the image x of w. The fibre inclusion is injective and identifies w with the canonical fibre point over x; global flatness implies flatness on its stalk. The smooth fibre neighbourhood therefore gives a smooth neighbourhood of x. The attached source-library theorem already proves this implication directly: choose affine neighbourhoods whose fibre lies in the smooth fibre locus, apply the flat smooth-fibre algebra criterion, and transfer membership in the smooth locus along the affine open isomorphisms.",
+   "uses": [
+    "lem-trf-smooth-at-point-fibre-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-smooth-at-point-fibre-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V9, lemma-smooth-at-point, (2) implies (1); proved source-library implementation SmoothFiber.lean:154-202."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat morphism locally of finite presentation is smooth at the image of every smooth point of its fibre",
+   "results": "8 hits, chiefly IsSmooth constructors and Flat.mk; no exact Mathlib hit. Local source search found the already proved Scheme.Hom.fiberι_mem_smoothLocus.",
+   "date": "2026-10-23",
+   "verdict": "existing source-library theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.smoothLocus",
+   "results": "7 hits: smoothLocus, dense_smoothLocus_of_perfectField, genericPoint_mem_smoothLocus_of_perfectField, smoothLocus_eq_top, smoothLocus_eq_top_iff, preimage_smoothLocus_eq, mem_smoothLocus. These describe the locus; the pointwise fibre criterion is in the source library.",
+   "date": "2026-10-23",
+   "verdict": "existing source-library theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberι_mem_smoothLocus|generic_points_mem_dense_open_fibre",
+   "results": "msearch Mathlib grep: 0 hits. Direct rg on lean/WeilConjectures found SmoothFiber.lean:154, and SlicingFlat.lean:145 uses that proved pointwise criterion. Read its full proof at lines 154-202.",
+   "date": "2026-10-23",
+   "verdict": "existing source-library theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.GenericFibrePointsSmooth",
+  "group": "X7",
+  "date": "2026-10-23"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Generic-fibre smoothness input in the semistable-alteration branch: the final use of Tag 01V9 to lift smoothness from the fibre point to its image.",
+   "via": [
+    "lem-trf-generic-fibre-points-smooth",
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.fiberι_mem_smoothLocus",
+  "statement": "theorem Scheme.Hom.fiberι_mem_smoothLocus {X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f]\n    [LocallyOfFinitePresentation f] {y : Y} {w : f.fiber y}\n    (hw : w ∈ (f.fiberToSpecResidueField y).smoothLocus) : f.fiberι y w ∈ f.smoothLocus",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-23",
+  "note": "Attaches an already proved source-library theorem; no new Lean declaration and no new proof hole. The local-stalk-flat equivalence remains on its original node; this attachment records the global-flat implication used by the item."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261023T132404-L-2264191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261023T132404-L-2264191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

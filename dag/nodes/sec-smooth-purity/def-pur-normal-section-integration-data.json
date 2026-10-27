@@ -1,0 +1,139 @@
+{
+ "id": "def-pur-normal-section-integration-data",
+ "kind": "definition",
+ "title": "Integration orientation of the actual normal-section invariant",
+ "statement": "Fix a finite purity setting P, its coefficient ring A and exponent m as in [def-pur-conventions], and a normalized etale compact-support datum N. Let B be a finite-type k-scheme, aB its structure map, and let g:V->B be smooth separated of pure dimension d, quasi-compact, with a closed section s and g s=1 [def-pur-section-restriction-data]. Let F=I_s/I_s^2 be its rank-d conormal module [def-pur-finite-smooth-canonical-interfaces]. Define normalIntegration:C_A(pi_N,z)~A_B(d)[2d], where pi_N is the actual normal projection, as follows. Use the homogeneous Rees comparison and the symmetric conormal comparison to identify the actual normal cone with the vector bundle Spec Sym F, preserving projection and zero. Apply the etale section restriction along the inverse model isomorphism [def-pur-diagonal-dnc-chart-data], followed by bundleOrientation, the inverse of the actual zero-section integration adjunct [def-pur-bundle-integration-orientation]. Apply the etale/pro-etale comparison pullback and precompose the canonical normalComparison [thm-pur-dnc-invariance]. This is exactly the existing normalIntegration construction, relocated without a changed signature or body.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), actual normal-bundle integration construction"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-section-restriction-data",
+  "def-pur-finite-smooth-canonical-interfaces",
+  "def-pur-diagonal-dnc-chart-data",
+  "def-pur-finite-ring-section-data",
+  "def-pur-bundle-integration-orientation",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof": [
+  {
+   "text": "The homogeneous Rees comparison followed by coneBundleIso is an isomorphism e from the actual normal cone to Spec Sym F. Their projection and augmentation equations give e pi_F=pi_N and z e=z_F. Invert e and use the two inverse equations to obtain the projection and section equations for e inverse.",
+   "uses": [
+    "def-pur-finite-smooth-canonical-interfaces",
+    "def-pur-finite-ring-section-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), vector-bundle integration"
+   }
+  },
+  {
+   "text": "Compose the specified etale-locality section isomorphism for e inverse with bundleOrientation, apply the comparison-site functor, and precompose normalComparison. All terms are actual constructions; no object is chosen from mere existence.",
+   "uses": [
+    "def-pur-diagonal-dnc-chart-data",
+    "def-pur-bundle-integration-orientation",
+    "thm-pur-dnc-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), vector-bundle integration"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-smooth-canonical-interfaces",
+  "def-pur-finite-ring-section-data",
+  "def-pur-diagonal-dnc-chart-data",
+  "def-pur-bundle-integration-orientation",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), actual normal-bundle integration construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The zero section restriction of the inverse integration adjunct of a normal vector bundle commutes with arbitrary scheme base change",
+   "results": "Eight hits about Bundle.zeroSection, differentiability of zero sections and RingedSpace.res_zero. No derived etale or pro-etale integration square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zero section restriction of inverse integration adjunct on normal bundle agrees with normalized section orientation",
+   "results": "Eight hits about Riemannian vector-bundle trivializations, stereographic derivatives and tangent coordinates. No etale derived section orientation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalCone\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalIntegration|normalCone.*Integration|bundleSectionAdjoint",
+   "results": "0 Mathlib hits. Project search finds normalModelSectionOrientation for a presentation and an integration adjunct, but not the conormal-model specialization with its coefficient-compositor identification.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionDncIntegrationSquare",
+  "date": "2026-10-25",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), actual normal-bundle integration construction",
+   "via": [
+    "lem-sp-section-dnc-integration-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalSectionIntegrationData",
+  "file": "lean/Sheaf/Paper/NormalSectionIntegrationData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.SectionIntegration.normalIntegration",
+  "statement": "def normalIntegration (P : PurityFiniteSetting.{u})\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)\n    {B : Scheme.{u}} {d : ℕ}\n    (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (X : Pair B d) :\n    Dnc.normalSection P d X.g aB X.s X.section_eq ≅ P.diagonalTwist B d",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50e31",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261025T202646-L-2739006",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50e31",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261025T202646-L-2739006",
+  "kind": "interface",
+  "note": "independent cc review: SectionDncIntegrationSquare 50e314b5: moved normalIntegration diffed line by line against the item diff and the change record (verbatim); both item proofs read against coherence/diagonalDncAssemblyGlobal/existsUnique_dncInvariance; 2 new sorry nodes checked against normalModelSectionOrientation and ordinaryFiniteTwistTransport_unique; DAG reachability checked (no cycles); 0 importers of the item in live"
+ }
+}

@@ -1,0 +1,207 @@
+{
+ "id": "lem-trf-left-derived-ses-cohomology-normalization",
+ "kind": "statement",
+ "title": "Counit normalization of the short exact sequence cohomology tail",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian]. Suppose $\\mathcal A$ has enough projectives: every object is a quotient of an object $P$ such that maps from $P$ lift across epimorphisms. Let $V:\\mathcal A\\to\\mathcal B$ be additive and right exact, meaning that it preserves cokernels and finite direct sums. Write $K(\\mathcal A)$ and $K(\\mathcal B)$ for the homotopy categories of integer cochain complexes and $Q_{\\mathcal A},Q_{\\mathcal B}$ for their localizations at quasi-isomorphisms [def-weil-abstract-derived-category]. Assume the total left derived functor $LV:D(\\mathcal A)\\to D(\\mathcal B)$ of the termwise functor $Q_{\\mathcal B}K(V)$ is defined at every object in the essentially-constant denominator-diagram sense [def-pur-saturated-triangulated-localization], with canonical natural comparison $\\varepsilon_C:LV(Q_{\\mathcal A}C)\\to Q_{\\mathcal B}V(C)$. Write $M[0]$ for the complex concentrated in degree zero. Put $T^q(N)=H^q(LV(Q_{\\mathcal A}(N[0])))$ for $q\\in\\mathbf Z$, with maps $T^q(f)=H^q(LV(Q_{\\mathcal A}(f[0])))$. Fix a short exact sequence $0\\to M'\\xrightarrow{i}M\\xrightarrow{p}M''\\to0$ and a distinguished triangle\n$$LV(Q_{\\mathcal A}(M'[0]))\\xrightarrow{LV(Q_{\\mathcal A}(i[0]))}LV(Q_{\\mathcal A}(M[0]))\\xrightarrow{LV(Q_{\\mathcal A}(p[0]))}LV(Q_{\\mathcal A}(M''[0]))\\xrightarrow{w}LV(Q_{\\mathcal A}(M'[0]))[1].$$\nThen its connecting maps $\\partial^q:T^q(M'')\\to T^{q+1}(M')$ give an exact sequence\n$$\\cdots\\to T^{q-1}(M'')\\xrightarrow{\\partial^{q-1}}T^q(M')\\xrightarrow{T^q(i)}T^q(M)\\xrightarrow{T^q(p)}T^q(M'')\\xrightarrow{\\partial^q}T^{q+1}(M')\\to\\cdots.$$\nThe maps $c_N=H^0(\\varepsilon_{N[0]}):T^0(N)\\to V(N)$, using the canonical identification $H^0(Q_{\\mathcal B}(V(N)[0]))\\cong V(N)$, are isomorphisms satisfying $c_{N_2}\\circ T^0(f)=V(f)\\circ c_{N_1}$ for every $f:N_1\\to N_2$. All $T^q(N)$ vanish for $q>0$, and the normalized tail is exactly\n$$T^{-1}(M'')\\xrightarrow{c_{M'}\\circ\\partial^{-1}}V(M')\\xrightarrow{V(i)}V(M)\\xrightarrow{V(p)}V(M'')\\to0.$$\nIn particular the arrows in this exact tail are the specified images under $V$, without any acyclicity assumption.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015D (lemma-F-acyclic-ses), proof, dualized: cohomology sequence, positive-degree vanishing and identification of the degree-zero arrows (old Steps 1 and 4); supporting lemma-cohomology-homological, lemma-negative-vanishing, lemma-left-exact-higher-derived and lemma-irrelevant."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-derived-homology-long-exact] in the abelian category $\\mathcal B$ to the distinguished triangle stipulated in the statement. Set $X=LV(Q_{\\mathcal A}(M'[0]))$, $Y=LV(Q_{\\mathcal A}(M[0]))$, and $Z=LV(Q_{\\mathcal A}(M''[0]))$. Its first two arrows are the specified images of $i[0]$ and $p[0]$, so their cohomology maps are exactly $T^q(i)$ and $T^q(p)$. Its connecting morphism, obtained from $H^q(w)$ and the cohomology identification for $[1]$, is $\\partial^q$. The cited exact sequence, for all integer degrees, is therefore the asserted long exact sequence.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS, lemma-cohomology-homological and equation-long-exact-cohomology-sequence-D; Tag 015D, lemma-F-acyclic-ses, proof (dual tail)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-left-derived-object-cohomology] to $V$ and each object $N$ of $\\mathcal A$. Its hypotheses are precisely the given abelian categories, enough projectives, additivity, right exactness, and existence of the total left derived functor in the essentially-constant sense. It gives $T^q(N)=0$ for $q>0$ and identifies the actual $H^0(\\varepsilon_{N[0]})$, not just some isomorphism, as an isomorphism $c_N:T^0(N)\\to V(N)$. It also gives $c_{N_2}T^0(f)=V(f)c_{N_1}$ for every $f:N_1\\to N_2$. In particular $T^1(M')=0$.",
+   "uses": [
+    "lem-trf-left-derived-object-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Duals of Tags 05TC (lemma-negative-vanishing) and 05TD (lemma-left-exact-higher-derived); Tag 05T5 (lemma-irrelevant), clauses (3),(4)."
+   }
+  },
+  {
+   "text": "The degree-zero segment of step 1 ends $T^{-1}(M'')\\xrightarrow{\\partial^{-1}}T^0(M')\\xrightarrow{T^0(i)}T^0(M)\\xrightarrow{T^0(p)}T^0(M'')\\to0$ by step 2. Replace its three degree-zero objects by $V(M'),V(M),V(M'')$ through their $c$ isomorphisms. The resulting arrows are $c_{M'}\\partial^{-1}$, $c_M T^0(i)c_{M'}^{-1}=V(i)$ and $c_{M''}T^0(p)c_M^{-1}=V(p)$, the two equalities being step 2 with $f=i,p$. This sequence is exact: composing with an isomorphism leaves an image subobject unchanged at its source side and carries it isomorphically at its target side, and the same universal-property calculation applies to kernels. Thus each image-kernel equality of step 1 is carried to the corresponding equality for these arrows; at the last object its kernel towards zero is the whole object. This is precisely the stated normalized exact tail, with no acyclicity hypothesis.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015D, lemma-F-acyclic-ses, proof: identification of degree-zero arrows through the canonical comparison, dualized; elementary invariance of kernels and images under isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-homology-long-exact",
+  "lem-trf-left-derived-object-cohomology",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015D (lemma-F-acyclic-ses), proof, dualized: long exact cohomology sequence and normalization using the canonical degree-zero comparison. Supporting Tags 05RS, 05TC, 05TD and 05T5 are supplied by existing DAG nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a right exact additive functor with total left derived functor the cohomology long exact sequence of a short exact sequence has degree zero tail ending in the original functor maps",
+   "results": "{\"t\": \"2026-10-22T06:48:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a right exact additive functor with total left derived functor the cohomology long exact sequence of a short exact sequence has degree zero tail ending in the original functor maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.ShortComplex.ShortExact.singleδ\", \"CategoryTheory.Abelian.Ext.contravariantSequence_exact\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.covariantSequence_exact\", \"DerivedCategory.HomologySequence.exact₁\", \"CategoryTheory.Functor.homologySequence_exact₁\", \"DerivedCategory.HomologySequence.exact₃\"], \"digest\": \"fe5b6e0b7ab14c27\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologySequence.exact₁/exact₃ are components for an already distinguished triangle. leftDerivedZeroIsoSelf concerns projective-resolution individual derived functors, not the specified universal total-derived counit. Normalizing the entire long exact sequence and identifying its actual maps requires the comparison argument; no hit states this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\", \"exact\"",
+   "results": "{\"t\": \"2026-10-22T06:48:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"leftDerived\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologySequence.exact₁/exact₃ are components for an already distinguished triangle. leftDerivedZeroIsoSelf concerns projective-resolution individual derived functors, not the specified universal total-derived counit. Normalizing the entire long exact sequence and identifying its actual maps requires the comparison argument; no hit states this result."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*(exact|Exact)|exact.*leftDerived",
+   "results": "{\"t\": \"2026-10-22T06:48:19Z\", \"tool\": \"grep\", \"query\": \"leftDerived.*(exact|Exact)|exact.*leftDerived\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\"], \"digest\": \"aa82aec55a031914\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologySequence.exact₁/exact₃ are components for an already distinguished triangle. leftDerivedZeroIsoSelf concerns projective-resolution individual derived functors, not the specified universal total-derived counit. Normalizing the entire long exact sequence and identifying its actual maps requires the comparison argument; no hit states this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Long exact cohomology sequence of total left derived functor naturally identifies degree zero arrows with the underived functor",
+   "results": "{\"t\": \"2026-10-22T06:48:20Z\", \"tool\": \"leansearch\", \"query\": \"Long exact cohomology sequence of total left derived functor naturally identifies degree zero arrows with the underived functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq\"], \"digest\": \"ce44259717f43c51\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologySequence.exact₁/exact₃ are components for an already distinguished triangle. leftDerivedZeroIsoSelf concerns projective-resolution individual derived functors, not the specified universal total-derived counit. Normalizing the entire long exact sequence and identifying its actual maps requires the comparison argument; no hit states this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize the long exact sequence of left derived functors by the counit isomorphism in degree zero",
+   "results": "{\"t\": \"2026-10-22T06:48:32Z\", \"tool\": \"leanfinder\", \"query\": \"Normalize the long exact sequence of left derived functors by the counit isomorphism in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\"], \"digest\": \"4ae3a89aba670f53\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologySequence.exact₁/exact₃ are components for an already distinguished triangle. leftDerivedZeroIsoSelf concerns projective-resolution individual derived functors, not the specified universal total-derived counit. Normalizing the entire long exact sequence and identifying its actual maps requires the comparison argument; no hit states this result."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*(exact|Exact)|exact.*leftDerived",
+   "results": "{\"t\": \"2026-10-23T12:22:03Z\", \"tool\": \"grep\", \"query\": \"leftDerived.*(exact|Exact)|exact.*leftDerived\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\"], \"digest\": \"aa82aec55a031914\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313,341-367 and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58. The resolution-based zeroth derived functor is naturally isomorphic to V, but comparison with the specified total-derived counit is not a one-line specialization. General triangle cohomology exactness is already the Mathlib leaf lem-sf-derived-homology-long-exact. The other hits concern Ext maps for exact functors or components of the snake lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Long exact sequence of total left derived functor identifies zeroth cohomology with a right exact functor by its counit",
+   "results": "{\"t\": \"2026-10-23T12:22:03Z\", \"tool\": \"leansearch\", \"query\": \"Long exact sequence of total left derived functor identifies zeroth cohomology with a right exact functor by its counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp\", \"CategoryTheory.Functor.totalLeftDerived\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc\"], \"digest\": \"412933cd65d517b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313,341-367 and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58. The resolution-based zeroth derived functor is naturally isomorphic to V, but comparison with the specified total-derived counit is not a one-line specialization. General triangle cohomology exactness is already the Mathlib leaf lem-sf-derived-homology-long-exact. The other hits concern Ext maps for exact functors or components of the snake lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\", \"exact\"",
+   "results": "{\"t\": \"2026-10-23T12:22:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"leftDerived\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313,341-367 and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58. The resolution-based zeroth derived functor is naturally isomorphic to V, but comparison with the specified total-derived counit is not a one-line specialization. General triangle cohomology exactness is already the Mathlib leaf lem-sf-derived-homology-long-exact. The other hits concern Ext maps for exact functors or components of the snake lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The long exact cohomology sequence of a total left derived right exact functor is normalized by its degree zero counit to the original functor maps",
+   "results": "{\"t\": \"2026-10-23T12:22:05Z\", \"tool\": \"leanfinder\", \"query\": \"The long exact cohomology sequence of a total left derived right exact functor is normalized by its degree zero counit to the original functor maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.fromLeftDerivedZero\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.leftDerived_map_eq\"], \"digest\": \"c03952b484ab96bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313,341-367 and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58. The resolution-based zeroth derived functor is naturally isomorphic to V, but comparison with the specified total-derived counit is not a one-line specialization. General triangle cohomology exactness is already the Mathlib leaf lem-sf-derived-homology-long-exact. The other hits concern Ext maps for exact functors or components of the snake lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero tail of the long exact sequence of left derived functors of a right exact additive functor has arrows obtained by applying the original functor",
+   "results": "{\"t\": \"2026-10-23T12:22:26Z\", \"tool\": \"leanfinder\", \"query\": \"The degree zero tail of the long exact sequence of left derived functors of a right exact additive functor has arrows obtained by applying the original functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.ShortComplex.SnakeInput.functorL₀_map\", \"CategoryTheory.ShortComplex.SnakeInput.functorL₁_obj\", \"CategoryTheory.ShortComplex.SnakeInput.composableArrowsFunctor\", \"CategoryTheory.ShortComplex.SnakeInput.functorL₁'\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_zero\", \"CategoryTheory.ShortComplex.SnakeInput.functorL₁'_obj\"], \"digest\": \"afd6eeedbf345253\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313,341-367 and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58. The resolution-based zeroth derived functor is naturally isomorphic to V, but comparison with the specified total-derived counit is not a one-line specialization. General triangle cohomology exactness is already the Mathlib leaf lem-sf-derived-homology-long-exact. The other hits concern Ext maps for exact functors or components of the snake lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-left-acyclic-short-exact",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Supporting object-level input: closure of left-acyclic objects under extensions and kernels of epimorphisms, dual of Stacks 015D. Re-split component: cohomology sequence, positive-degree vanishing and identification of the degree-zero arrows (old Steps 1 and 4); supporting lemma-cohomology-homological, lemma-negative-vanishing, lemma-left-exact-higher-derived and lemma-irrelevant.",
+   "via": [
+    "lem-trf-left-acyclic-short-exact",
+    "lem-trf-bounded-above-acyclic-derived-computation",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-left-derived-ses-cohomology-normalization",
+  "worker": "stage1",
+  "summary": "NX splits the cohomology normalization into the existing long-exact cohomology leaf, the existing total-left-derived single-object cohomology theorem, and an explicit elementary conjugation of the degree-zero arrows. Preserved the statement, statement dependencies, source route, and all inherited search evidence. No new nodes: the apparent auxiliary lemmas already exist. Checked exactness at the final object and the absence of acyclicity assumptions.",
+  "blueprint": "Supports lem-trf-local-term-locality proof (1)--(2) through the inherited nearby-cycle/semistable-modification and bar-resolution dependency chain, specifically the cohomology-sequence and degree-zero normalization component of lem-trf-left-acyclic-short-exact (dual of Stacks 015D). The latest blueprint proof remains the contracting-correspondence/normal-cone route; this generic homological tool changes no unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-dc7dab279",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-dc7dab279 (reviewer sub-agent of L); spot-checked: I read all three steps, the three cited statements and Stacks derived.tex 015D and 05RS (eq. long-exact-cohomology-sequence-D). The statement and stmt_deps are byte-identical to the unsplit item in the Q83 snapshots. The item is still unsplit on live and side-live, so nothing supersedes this delivery. There are no new nodes and no SGA. Step 1: lem-sf-derived-homology-long-exact applies to the distinguished triangle the statement assumes. Its δ is the canonical H^q(w)+shift map, both in Stacks 05RS and in Mathlib's HomologySequence.δ (shiftMap of mor₃, l.152), so ∂^q is the leaf's own map. Step 2: the hypotheses of lem-trf-left-derived-object-cohomology match clause by clause, and it gives T^q=0 for q>0, the actual c_N=H^0(ε) as an isomorphism, and naturality. Step 3 is a correct elementary conjugation: V(i)=c_M T^0(i) c_{M'}^{-1} by naturality, and V(p) is epi because T^1(M')=0. A DFS over the cited nodes' deps finds no cycle. I found no duplicate node. Small cases check out: V=id, V=0, and −⊗Z/n on 0→Z→Z→Z/n→0, where T^{-1}=Z/n and the leading arrow is nonzero. The parent's Step 2 is fully supplied. The proof is a short assembly of cited statements; no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftDerivedSesCohomologyNormalization",
+  "declaration": "CategoryTheory.Functor.leftDerived_ses_cohomology_normalization",
+  "declarations": [
+   "CategoryTheory.Functor.leftDerivedObjectCohomologyFunctor",
+   "CategoryTheory.Functor.leftDerivedShortComplexTriangle",
+   "CategoryTheory.Functor.leftDerived_ses_cohomology_normalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LeftDerivedSesCohomologyNormalization.lean",
+  "statement": "theorem leftDerived_ses_cohomology_normalization {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [EnoughProjectives A] (V : A ⥤ B) [V.Additive] [PreservesFiniteColimits V] (LV : DerivedCategory A ⥤ DerivedCategory B) (ε : DerivedCategory.Qh ⋙ LV ⟶ V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) (hLV : LV.IsRightKanExtension ε) (hdefined : ∀ X : HomotopyCategory A (ComplexShape.up ℤ), ∃ Y : DerivedCategory B, IsEssentiallyConstantProDiagram (MorphismProperty.Over.forget (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ⊤ X ⋙ Over.forget X ⋙ V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) Y) (S : ShortComplex A) (hS : S.ShortExact) (w : LV.obj ((DerivedCategory.singleFunctor A 0).obj S.X₃) ⟶ (LV.obj ((DerivedCategory.singleFunctor A 0).obj S.X₁))⟦(1 : ℤ)⟧) (hT : leftDerivedShortComplexTriangle LV S w ∈ distTriang (DerivedCategory B)) : (∀ q : ℤ, imageSubobject ((leftDerivedObjectCohomologyFunctor LV q).map S.f) = kernelSubobject ((leftDerivedObjectCohomologyFunctor LV q).map S.g) ∧ imageSubobject ((leftDerivedObjectCohomologyFunctor LV q).map S.g) = kernelSubobject (DerivedCategory.HomologySequence.δ (leftDerivedShortComplexTriangle LV S w) q (q + 1)) ∧ imageSubobject (DerivedCategory.HomologySequence.δ (leftDerivedShortComplexTriangle LV S w) q (q + 1)) = kernelSubobject ((leftDerivedObjectCohomologyFunctor LV (q + 1)).map S.f)) ∧ (∀ N : A, IsIso ((DerivedCategory.homologyFunctor B 0).map (ε.app ((HomotopyCategory.singleFunctor A 0).obj N)) ≫ (DerivedCategory.homologyFunctor B 0).map ((DerivedCategory.quotientCompQhIso B).inv.app ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj ((CochainComplex.singleFunctor A 0).obj N))) ≫ (DerivedCategory.homologyFunctor B 0).map (DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex V (ComplexShape.up ℤ) 0).hom.app N)) ≫ (DerivedCategory.singleFunctorCompHomologyFunctorIso B 0).hom.app (V.obj N))) ∧ (∀ (N₁ N₂ : A) (f : N₁ ⟶ N₂), (leftDerivedObjectCohomologyFunctor LV 0).map f ≫ ((DerivedCategory.homologyFunctor B 0).map (ε.app ((HomotopyCategory.singleFunctor A 0).obj N₂)) ≫ (DerivedCategory.homologyFunctor B 0).map ((DerivedCategory.quotientCompQhIso B).inv.app ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj ((CochainComplex.singleFunctor A 0).obj N₂))) ≫ (DerivedCategory.homologyFunctor B 0).map (DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex V (ComplexShape.up ℤ) 0).hom.app N₂)) ≫ (DerivedCategory.singleFunctorCompHomologyFunctorIso B 0).hom.app (V.obj N₂)) = ((DerivedCategory.homologyFunctor B 0).map (ε.app ((HomotopyCategory.singleFunctor A 0).obj N₁)) ≫ (DerivedCategory.homologyFunctor B 0).map ((DerivedCategory.quotientCompQhIso B).inv.app ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj ((CochainComplex.singleFunctor A 0).obj N₁))) ≫ (DerivedCategory.homologyFunctor B 0).map (DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex V (ComplexShape.up ℤ) 0).hom.app N₁)) ≫ (DerivedCategory.singleFunctorCompHomologyFunctorIso B 0).hom.app (V.obj N₁)) ≫ V.map f) ∧ (∀ (N : A) (q : ℤ), 0 < q → IsZero ((leftDerivedObjectCohomologyFunctor LV q).obj N)) ∧ imageSubobject (DerivedCategory.HomologySequence.δ (leftDerivedShortComplexTriangle LV S w) (-1) 0 ≫ ((DerivedCategory.homologyFunctor B 0).map (ε.app ((HomotopyCategory.singleFunctor A 0).obj S.X₁)) ≫ (DerivedCategory.homologyFunctor B 0).map ((DerivedCategory.quotientCompQhIso B).inv.app ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj ((CochainComplex.singleFunctor A 0).obj S.X₁))) ≫ (DerivedCategory.homologyFunctor B 0).map (DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex V (ComplexShape.up ℤ) 0).hom.app S.X₁)) ≫ (DerivedCategory.singleFunctorCompHomologyFunctorIso B 0).hom.app (V.obj S.X₁))) = kernelSubobject (V.map S.f) ∧ imageSubobject (V.map S.f) = kernelSubobject (V.map S.g) ∧ Epi (V.map S.g)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Stage-2 review FIX (H2): the statement used CategoryTheory.Functor.leftDerivedObjectComparison, a def owned by theorem node lem-trf-left-derived-object-cohomology, which is not in the item's stmt_deps. Its body (H^0 of the actual counit ε at N[0] followed by Mathlib's quotientCompQhIso, singleMapHomologicalComplex and singleFunctorCompHomologyFunctorIso, all under def-weil-abstract-derived-category) is written inline at its four occurrences; it is definitionally equal (checked by rfl) to the dependency's comparison. The import of Sheaf.CategoryTheory.LeftDerivedObjectCohomology is replaced by the Mathlib modules and WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem (def-pur-saturated-triangulated-localization) that the statement needs.",
+  "fixed_by": "NT-stage2-cc-c7dc1d23c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7dc1d23c",
+  "group": "Q40",
+  "result": "fix",
+  "note": "Mathematics correct vs node and Stacks 015D dual: all hypotheses match (independent universes, IsRightKanExtension + hdefined as in lem-trf-left-derived-object-cohomology); 3 image=kernel equalities for all q with canonical HomologySequence.δ; IsIso of actual H0(ε); naturality; positive vanishing; tail im(δ(-1,0)≫c)=ker V(i), im V(i)=ker V(p), Epi V(p); no extra mono/acyclicity claim; edge cases id, 0, ⊗Z/n ok. H2: statement used leftDerivedObjectComparison, a def owned by theorem node lem-trf-left-derived-object-cohomology, which is not a stmt_dep. FIX: wrote its 4-map Mathlib composite (H0 ε, quotientCompQhIso.inv, Q.map singleMapHomologicalComplex, singleFunctorCompHomologyFunctorIso) inline at its 4 occurrences; replaced the theorem-module import with Mathlib FullyFaithful/KanExtension/Projective + IsSaturatedTriangulatedMultiplicativeSystem; record statement verbatim + note. nt_compile --json clean (5.3 s); rfl test that the inline map = leftDerivedObjectComparison compiles clean."
+ }
+}

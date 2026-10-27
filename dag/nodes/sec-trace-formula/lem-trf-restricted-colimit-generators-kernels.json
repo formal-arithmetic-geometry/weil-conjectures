@@ -1,0 +1,223 @@
+{
+ "id": "lem-trf-restricted-colimit-generators-kernels",
+ "kind": "statement",
+ "title": "Generators and eventual kernel capture identify a restricted module colimit",
+ "statement": "Let $R$ be a commutative ring, $I$ a small nonempty directed partially ordered set, and $(M_i,f_{ij})_{i\\in I}$ a directed system of $R$-modules. Let compatible linear maps $u_i:M_i\\to M$ exhibit $M$ as its colimit [def-weil-pbc-category-colimit]. Let $J\\subseteq I$ be nonempty and directed in its inherited order. Assume there is a subset $E\\subseteq M$ whose finite $R$-linear combinations exhaust $M$, and for every $x\\in E$ there are $i\\in J$ and $y\\in M_i$ with $u_i(y)=x$. Assume also that for every $i\\in J$ there is $j\\in J$ with $j\\ge i$ such that $\\ker(f_{ik})\\subseteq\\ker(f_{ij})$ for every $k\\in I$ with $k\\ge i$. Then the canonical linear map $\\operatorname{colim}_{i\\in J}M_i\\to M$ induced by the restricted cocone is an isomorphism. No countability, finite-presentation, injectivity of transitions, or Mittag-Leffler hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059W (lemma-ML-countable-colimit), proof, the final two paragraphs; extracted general restricted-colimit criterion from properties (2) and the kernel inclusion in (3)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The inherited index category $J$ is small, nonempty and filtered, since it is a directed subposet of the small poset $I$ [def-weil-pbc-category-colimit]. The maps $u_i$ for $i\\in J$ form a cocone. For $m\\in M$, write $m=\\sum_{a=1}^n r_a x_a$ with $x_a\\in E$. Choose $i_a\\in J$ and $y_a\\in M_{i_a}$ representing each $x_a$. Repeated use of directedness gives $h\\in J$ above all $i_a$; when $n=0$, choose any $h\\in J$. Linearity and compatibility give $u_h(\\sum_{a=1}^n r_a f_{i_a h}(y_a))=\\sum_{a=1}^n r_a u_{i_a}(y_a)=m$. Thus every element of $M$ is represented by one stage in $J$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W, lemma-ML-countable-colimit, proof, final paragraph after properties (1)–(3)."
+   }
+  },
+  {
+   "text": "Fix $i\\in J$ and $z\\in M_i$ with $u_i(z)=0$. Apply [lem-weil-pbc-filtered-colimit-modules-elementwise] to the given colimit over the small filtered category $I$: there is $k\\in I$, $k\\ge i$, with $f_{ik}(z)=0$. Choose the $j\\in J$, $j\\ge i$, in the kernel-capture hypothesis. Its inclusion $\\ker(f_{ik})\\subseteq\\ker(f_{ij})$ implies $f_{ij}(z)=0$. This gives eventual vanishing inside $J$; it does not require $j\\ge k$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W, lemma-ML-countable-colimit, proof, final paragraph after properties (1)–(3)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-filtered-colimit-modules-criterion] to the restricted diagram over $J$ and cocone $(M,(u_i)_{i\\in J})$. Step 1 verifies its representative condition and all index and cocone hypotheses. For its equality condition, if $u_i(x)=u_i(y)$, apply Step 2 to $z=x-y$; then $f_{ij}(x-y)=0$ gives $f_{ij}(x)=f_{ij}(y)$ by linearity. Hence this restricted cocone is a colimit in $R$-modules.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W, lemma-ML-countable-colimit, proof, final paragraph after properties (1)–(3)."
+   }
+  },
+  {
+   "text": "Let $L=\\operatorname{colim}_{i\\in J}M_i$ with legs $v_i$, and let $a:L\\to M$ be the canonical map, so $av_i=u_i$. Since Step 3 makes $M$ another colimit of the same diagram, its universal property [def-weil-pbc-category-colimit] gives $b:M\\to L$ with $bu_i=v_i$. Then $(ab)u_i=u_i$ and $(ba)v_i=v_i$ for every $i\\in J$. Uniqueness in the two universal properties yields $ab=1_M$ and $ba=1_L$. Thus the specified canonical map $a$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W, lemma-ML-countable-colimit, proof, final paragraph after properties (1)–(3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059W, lemma-ML-countable-colimit, proof, final paragraph after properties (1)–(3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lift_injective|lift_surjective|isColimit.*[Bb]ijective|[Bb]ijective.*isColimit",
+   "results": "{\"t\": \"2026-10-22T06:48:10Z\", \"tool\": \"grep\", \"query\": \"lift_injective|lift_surjective|isColimit.*[Bb]ijective|[Bb]ijective.*isColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/Zsqrtd/ToReal.lean\", \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean\", \"Mathlib/NumberTheory/Zsqrtd/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\"], \"digest\": \"8277e22fc722491a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimit constructions and representatives do not state this subdiagram criterion; lift_injective assumes injectivity of every stage-to-target map, absent here; eventually-constant diagrams impose isomorphisms on transitions, also absent here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A directed subdiagram of modules has the same colimit when its images generate the full colimit and its transition kernels eventually contain all full-system transition kernels",
+   "results": "{\"t\": \"2026-10-22T06:48:11Z\", \"tool\": \"leansearch\", \"query\": \"A directed subdiagram of modules has the same colimit when its images generate the full colimit and its transition kernels eventually contain all full-system transition kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.directLimitIsColimit\", \"ModuleCat.directLimitIsColimit_desc\", \"ModuleCat.directLimitDiagram\", \"Module.DirectLimit.induction_on\", \"ModuleCat.directLimitCocone\", \"AddCommGrpCat.Colimits.Quot\", \"CategoryTheory.Limits.createsColimitFullSubcategoryInclusion'\", \"FirstOrder.Language.DirectLimit\"], \"digest\": \"1ad60e96f2283820\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimit constructions and representatives do not state this subdiagram criterion; lift_injective assumes injectivity of every stage-to-target map, absent here; eventually-constant diagrams impose isomorphisms on transitions, also absent here"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit, Function.Bijective",
+   "results": "{\"t\": \"2026-10-22T06:48:11Z\", \"tool\": \"loogle\", \"query\": \"Module.DirectLimit, Function.Bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimit constructions and representatives do not state this subdiagram criterion; lift_injective assumes injectivity of every stage-to-target map, absent here; eventually-constant diagrams impose isomorphisms on transitions, also absent here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A restricted directed colimit of modules maps isomorphically to the full colimit if it contains representatives of generators and every element killed later is killed in the restricted system",
+   "results": "{\"t\": \"2026-10-22T06:48:19Z\", \"tool\": \"leanfinder\", \"query\": \"A restricted directed colimit of modules maps isomorphically to the full colimit if it contains representatives of generators and every element killed later is killed in the restricted system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.DirectLimit.linearEquiv\", \"ModuleCat.FilteredColimits.M.mk_surjective\", \"Module.DirectLimit.linearEquiv_of\", \"ModuleCat.directLimitIsColimit\", \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"Module.DirectLimit.exists_of\", \"Submodule.FG.directLimit\", \"ModuleCat.directLimitIsColimit_desc\"], \"digest\": \"38514e13e341a787\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimit constructions and representatives do not state this subdiagram criterion; lift_injective assumes injectivity of every stage-to-target map, absent here; eventually-constant diagrams impose isomorphisms on transitions, also absent here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect an isomorphism from a subdiagram colimit using a spanning set in its image and eventual vanishing of stage elements",
+   "results": "{\"t\": \"2026-10-22T06:48:20Z\", \"tool\": \"leanfinder\", \"query\": \"Detect an isomorphism from a subdiagram colimit using a spanning set in its image and eventual vanishing of stage elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit\", \"CategoryTheory.IsGrothendieckAbelian.exists_isIso_of_functor_from_monoOver\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit'\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f\", \"CategoryTheory.OrthogonalReflection.isIso_toSucc_iff\", \"CategoryTheory.Limits.IsColimit.ofExtendIso\", \"CategoryTheory.SmallObject.SuccStruct.ofCocone.objIsoPt\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\"], \"digest\": \"d614dea9c2949901\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimit constructions and representatives do not state this subdiagram criterion; lift_injective assumes injectivity of every stage-to-target map, absent here; eventually-constant diagrams impose isomorphisms on transitions, also absent here"
+  },
+  {
+   "tool": "grep",
+   "query": "linearEquiv|lift_injective|[Ss]urjective|[Kk]er",
+   "results": "{\"t\": \"2026-10-22T06:48:43Z\", \"tool\": \"grep\", \"query\": \"linearEquiv|lift_injective|[Ss]urjective|[Kk]er\", \"sub\": \"Algebra/Colimit/Module.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"157\", \"206\", \"214\", \"225\", \"244\"], \"digest\": \"0ae12a335f2c096f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimit constructions and representatives do not state this subdiagram criterion; lift_injective assumes injectivity of every stage-to-target map, absent here; eventually-constant diagrams impose isomorphisms on transitions, also absent here"
+  },
+  {
+   "tool": "grep",
+   "query": "lift_injective|lift_surjective|exists_of|of.zero",
+   "results": "{\"t\": \"2026-10-23T22:54:09Z\", \"tool\": \"grep\", \"query\": \"lift_injective|lift_surjective|exists_of|of.zero\", \"sub\": \"Algebra/Colimit/Module.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"100\", \"111\", \"113\", \"114\", \"121\"], \"digest\": \"90abcbc908168a19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: construction/comparison of models, lift_injective with stagewise injectivity, finite-generation special cases, and general colimit APIs do not state the restricted-subdiagram criterion. Existing Mathlib leaves for elementwise colimits and recognition are cited in the split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Directed subdiagram module colimit isomorphism generators and eventual kernels",
+   "results": "{\"t\": \"2026-10-23T22:54:10Z\", \"tool\": \"leansearch\", \"query\": \"Directed subdiagram module colimit isomorphism generators and eventual kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.directLimitIsColimit\", \"ModuleCat.directLimitIsColimit_desc\", \"Submodule.FG.directLimit\", \"AddCommGrpCat.Colimits.Quot\", \"ModuleCat.directLimitDiagram\", \"ModuleCat.directLimitCocone\", \"ModuleCat.directLimitDiagram_obj_carrier\", \"CategoryTheory.Limits.IsCokernel.cokernelIso\"], \"digest\": \"bc60af6d4d1b1c93\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: construction/comparison of models, lift_injective with stagewise injectivity, finite-generation special cases, and general colimit APIs do not state the restricted-subdiagram criterion. Existing Mathlib leaves for elementwise colimits and recognition are cited in the split."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit, Function.Bijective",
+   "results": "{\"t\": \"2026-10-23T22:54:11Z\", \"tool\": \"loogle\", \"query\": \"Module.DirectLimit, Function.Bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: construction/comparison of models, lift_injective with stagewise injectivity, finite-generation special cases, and general colimit APIs do not state the restricted-subdiagram criterion. Existing Mathlib leaves for elementwise colimits and recognition are cited in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed subdiagram of modules induces an isomorphism on colimits if representatives of generators lie in it and all transition kernels are captured at a later subdiagram stage",
+   "results": "{\"t\": \"2026-10-23T22:54:12Z\", \"tool\": \"leanfinder\", \"query\": \"A directed subdiagram of modules induces an isomorphism on colimits if representatives of generators lie in it and all transition kernels are captured at a later subdiagram stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.DirectLimit.linearEquiv\", \"ModuleCat.directLimitIsColimit\", \"Module.DirectLimit.linearEquiv_of\", \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"ModuleCat.FilteredColimits.M.mk_surjective\", \"Module.DirectLimit.exists_of₂\", \"ModuleCat.directLimitIsColimit_desc\", \"ModuleCat.FilteredColimits.M.mk_eq\"], \"digest\": \"26220369d138c454\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: construction/comparison of models, lift_injective with stagewise injectivity, finite-generation special cases, and general colimit APIs do not state the restricted-subdiagram criterion. Existing Mathlib leaves for elementwise colimits and recognition are cited in the split."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*iff|isColimitOf|bijective|exists.*zero|eq_iff",
+   "results": "{\"t\": \"2026-10-23T22:55:12Z\", \"tool\": \"grep\", \"query\": \"isColimit.*iff|isColimitOf|bijective|exists.*zero|eq_iff\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/Subobject.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean\"], \"digest\": \"35e8fe473a3c7fee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: construction/comparison of models, lift_injective with stagewise injectivity, finite-generation special cases, and general colimit APIs do not state the restricted-subdiagram criterion. Existing Mathlib leaves for elementwise colimits and recognition are cited in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map from a direct limit is bijective if its image spans the target and each stage element in its kernel eventually vanishes",
+   "results": "{\"t\": \"2026-10-23T22:55:21Z\", \"tool\": \"leanfinder\", \"query\": \"A linear map from a direct limit is bijective if its image spans the target and each stage element in its kernel eventually vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.DirectLimit.linearEquiv\", \"DirectLimit.Module.of_f\", \"Module.DirectLimit.linearEquiv_of\", \"Submodule.FG.directLimit\", \"DirectLimit.Module.lift_of\", \"bijective_of_isLocalized_span\", \"DirectLimit.Module.hom_ext_iff\", \"Module.DirectLimit.lift_injective\"], \"digest\": \"8558775f3022e843\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: construction/comparison of models, lift_injective with stagewise injectivity, finite-generation special cases, and general colimit APIs do not state the restricted-subdiagram criterion. Existing Mathlib leaves for elementwise colimits and recognition are cited in the split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ml-countable-colimit",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting Tag 059X/059W countable-extraction sentence, specifically Tag 059W proof, final surjectivity and injectivity paragraphs in returned item Steps 4 and 5.",
+   "via": [
+    "lem-trf-ml-countable-colimit",
+    "lem-trf-countable-flat-mittag-leffler-projective",
+    "lem-trf-local-flat-pure-complete-projective",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-restricted-colimit-generators-kernels",
+  "worker": "stage1",
+  "summary": "Checked the general criterion against Tag 059W final paragraph. Gave the finite-sum common-stage argument, used the existing module-colimit elementwise Mathlib leaf for eventual zero, applied the existing cocone-recognition Mathlib leaf, and identified the specified canonical map by the two universal properties. No new nodes or extra hypotheses.",
+  "blueprint": "Supports the inherited lem-trf-local-term-locality ancestry through lem-trf-ml-countable-colimit: precisely Tag 059W proof, final paragraph after properties (1)–(3), as recorded in blueprint.from.place. Latest blueprint ancestor proof inspected; this is a generic algebra tool below that route, not a replacement of a unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-3c83a1925",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-3c83a1925 (reviewer sub-agent of L); spot-checked: I read the delivery in full and it passes with no fixes. Shape: one commit changing only the item and the report, no new nodes. The item was unsplit with no repair note, so this is a first split, not a 2026-10-21 re-split. proof_deps equals the union of the step uses. Source: I read Stacks algebra.tex Tag 059W (lemma-ML-countable-colimit), the whole proof including properties (1)-(3) and the final surjectivity/injectivity paragraph. The item abstracts (2) and the kernel inclusion in (3), with countable generators generalized to an arbitrary generating set E. The parent lem-trf-ml-countable-colimit supplies exactly these hypotheses, including j in J for all k in I with k >= i. Step 1 (definition node, elementary): J nonempty and directed, hence filtered; finite-sum common stage, with n=0 handled by J nonempty. Step 2: the eventual-zero clause of the Mathlib leaf lem-weil-pbc-filtered-colimit-modules-elementwise over I, then kernel capture gives f_ij(z)=0 inside J. Step 3: the Mathlib leaf lem-weil-pbc-filtered-colimit-modules-criterion; conditions (1) and (2) come from Steps 1 and 2 with z=x-y. Step 4: the specified canonical map is an isomorphism by the two universal properties. Each step uses only the statements of the nodes it cites. Cases checked: E empty / M=0; Z->Z/2 with J={0}, where the hypothesis fails and the conclusion would be false, so the hypothesis is needed; J={1}; a noncofinal J. Duplicate searches (059W, restricted/sub-diagram colimit phrasing) found no node stating this criterion. Off-unit citations are a definition and Mathlib leaves (tools), so no tool_uses are needed. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.RestrictedColimitGeneratorsKernels",
+  "declaration": "ModuleCat.isIso_restrictedColimit_of_generators_kernel_capture",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/RestrictedColimitGeneratorsKernels.lean",
+  "statement": "theorem isIso_restrictedColimit_of_generators_kernel_capture (R : Type u) [CommRing R] {I : Type v} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{max u v w} R) (c : Cocone F) (hc : IsColimit c) (J : Set I) [Nonempty J] [IsDirected J (· ≤ ·)] (E : Set c.pt) (hspan : Submodule.span R E = ⊤) (hrepresent : ∀ x ∈ E, ∃ (i : J) (y : F.obj i.val), c.ι.app i.val y = x) (hkernel : ∀ i : J, ∃ (j : J) (hij : i.val ≤ j.val), ∀ (k : I) (hik : i.val ≤ k), LinearMap.ker (F.map (homOfLE hik)).hom ≤ LinearMap.ker (F.map (homOfLE hij)).hom) : IsIso (colimit.desc ((Subtype.mono_coe (· ∈ J)).functor ⋙ F) (c.whisker (Subtype.mono_coe (· ∈ J)).functor))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cfdc7c1e",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: R comm ring; I nonempty directed poset; F : I ⥤ ModuleCat.{max u v w} R with IsColimit c; J nonempty, directed in inherited order; span E = ⊤; representatives in J; kernel capture with ∃ j∈J, j≥i, ∀ k∈I (k≥i), ker f_ik ≤ ker f_ij (no j≥k); conclusion IsIso of colimit.desc of (Subtype.mono_coe).functor ⋙ F with whiskered cocone, the canonical map. No extra hypotheses. Universes bound; the max u v w convention matches the sole citer MLCountableColimit (advisory). Edge cases E=∅/M=0, J=I, singleton or non-cofinal J, ℤ→ℤ/2 counterexample checked. No new defs; avoids the parent's helpers (import cycle), so no duplicate; no existing match. lean.statement verbatim in file; docstrings have source and blueprint plus the 4 proof steps; proof is sorry only; report sections present. No file changed, so no compile."
+ }
+}

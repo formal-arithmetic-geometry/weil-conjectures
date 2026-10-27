@@ -1,0 +1,201 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Isomorphism and composition paragraphs, expanded using the exceptional proof definition/formal-properties paragraph and parent realization steps 1--6."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Isomorphism and composition paragraphs, expanded using the exceptional proof definition/formal-properties paragraph and parent realization steps 1--6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal derived limits of ramified scalar extension systems commute with exceptional inverse image and compact support",
+   "results": "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_map_preimage_eq_map_preimage; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; localCohomology.diagramComp",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|isoWhiskerRight|rightAdjointUniq",
+   "results": "Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/ModelTheory/PartialEquiv.lean; Mathlib/Tactic/Translate/ToDual.lean; Mathlib/Tactic/Translate/ToDual.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Initial, CategoryTheory.Limits.limit",
+   "results": "CategoryTheory.Functor.Initial.limitIso; CategoryTheory.Functor.Initial.limit_pre_isIso; CategoryTheory.Functor.Initial.limitIso_inv; CategoryTheory.Functor.Initial.limitIso_hom",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural normalized cofinal scalar extension and compact support comparison for derived coefficient sheaf systems",
+   "results": "ContDiffMapSupportedIn.coe_smul; ContDiffMapSupportedIn.instSMul; instSeminormedAddCommGroupRestrictScalars; CompactlySupportedContinuousMap.instSMulOfContinuousConstSMul; Function.locallyFinsuppWithin.coe_nsmul; TestFunction.coe_ofSupportedIn; comonadicExtendScalars; Module.RestrictScalars.normedSpaceOrig",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RamifiedScalarExceptionalLimit",
+  "date": "2026-10-25",
+  "group": "B8"
+ },
+ "id": "lem-coef-ramified-scalar-preparation",
+ "title": "Normalized ramified scalar and adjunction preparation",
+ "statement": "Fix a prime l, a finite-field datum D of characteristic p different from l, finite extensions E and L of Q_l and an embedding i:E→L. Let f:X→Y be a separated finite-type morphism of separated finite-type D.k-schemes, with a fixed compactification c. Fix a ramification index e≥1 with pi_E O_L=pi_L^e O_L. Use the strict coefficient-system and integral constructible categories and the specified support, scalar, and reduction functors of [def-coef-finite-scalar-mate-data]. There exist simultaneous Context data a for these actual functors such that the specified proper/open system scalar comparison a.alpha is invertible, and the following preparation data exist: finite scalar tensor preserves the finite domains on X and Y, with natural evaluation isomorphisms and actual quotient-transition equations at retained indices e(n+1); the integral and system adjunctions have compatible left/right evaluation isomorphisms satisfying both unit and counit laws; the actual completion unit is invertible on all four integral constructible categories; the scalar-reduction isomorphisms on X and Y are the actual scalar-model/reduction counits; retained and full limits have cofinal natural isomorphisms with the stated two-coordinate Roos normalization; the support evaluation maps have the inverse-completion-unit normalization; and both the reduction of M and its exceptional system have common finite Tor intervals for every integral constructible M on Y. This preparation asserts none of the five limit-realization isomorphisms of the parent and no support-comparison limit square. From it the five isomorphisms are defined by explicit compositions of its cofinal maps, inverse adjunction comparisons, scalar-model inverses, support realizations and completion units.",
+ "stmt_deps": [
+  "def-coef-finite-scalar-mate-data",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-integral-scalar-extension",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-size-convention",
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-ramified-scalar-system-transpose",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-coef-integral-exceptional-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "Choose a cohomological interval $[a,b]$ for the first reduction of $M$. The residue-Tor theorem gives this same Tor interval for every level of $N$. The integral exceptional theorem gives $P=G_RM\\in\\mathcal C_R(X)$ and the interval $[a-2d_X,b+2d_Y]$ for its reductions, using dimension bounds $0$ on empty schemes. By its specified construction $P=\\mathcal L_{R,X}\\mathsf E_RN$. Effectivity identifies the actual counit $\\mathcal R_{R,X}P\\to\\mathsf E_RN$ with an isomorphism: its evaluations are precisely the canonical projection-adjoint comparisons. Thus $\\mathsf E_RN$ has that uniform Tor interval, rather than merely levelwise finite Tor dimension.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.proof.md",
+    "place": "Finite scalar extension paragraph: finite free tensor and the derived limit defining integral compact support; expanded using actual reduction/limit counits."
+   }
+  },
+  {
+   "text": "For every $K\\in\\mathcal C_R(W)$, integral scalar-extension constructibility gives $T_WK\\in\\mathcal C_S(W)$. The finite-free completed-scalar comparison identifies its ordinary tensor presentation with the specified strict quotient-limit presentation by $\\chi_K$. At every full $S$-level $m$, choose $n$ with $en\\ge m$; its reduction is $K_n\\otimes^L_{A_n}S/v^m$. The scalar Tor-bound theorem shows that a uniform interval for the $K_n$ remains an interval at every such $m$. Apply this to $M$ and $P=G_RM$. This checks the domains of $G_S$ and $F_S$ used below, including the intermediate levels outside $en$.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-adic-scalar-extension-tor-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.proof.md",
+    "place": "Finite scalar extension paragraph: finite free tensor and the derived limit defining integral compact support; expanded using actual reduction/limit counits."
+   }
+  },
+  {
+   "text": "We first specify the common scalar-reduction identification, for any $K\\in\\mathcal C_R(W)$. On a flat-term K-flat representative $Q\\to K$, the retained reductions of ordinary scalar extension are\n$$(Q\\otimes_{\\widehat R_W}\\widehat S_W)\\otimes_{\\widehat S_W}(B_n)_W=(Q\\otimes_{\\widehat R_W}(A_n)_W)\\otimes_{(A_n)_W}(B_n)_W.$$\nK-flat change of rings makes both sides representatives of the indicated derived reductions. The reassociation sends $(x\\otimes s)\\otimes b$ to $(x\\otimes1)\\otimes\\bar s b$; its inverse sends $(x\\otimes a)\\otimes b$ to $(x\\otimes1)\\otimes ab$. They commute with every quotient on these complexes and with chain maps. They therefore identify $\\mathcal R_{S,W}^{(e)}T_WK$ with $\\mathsf T_W^{(e)}\\mathcal R_{R,W}K$ as functors, using $\\chi_K$ for the ordinary presentation. Apply the canonical arithmetic restriction isomorphism to the full reduction tower. It preserves the unit cone and satisfies $p_n\\rho_e=p_{en}$; completeness and the reduction/limit unit consequently give\n$$\\mathcal L_{S,W}^{(e)}\\mathsf T_W^{(e)}\\mathcal R_{R,W}K\\cong T_WK.$$\nThese maps use the actual quotient cone, so their projection-adjoints are the actual reduction counits.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sp-strict-tower-arithmetic-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.proof.md",
+    "place": "Finite scalar extension paragraph: finite free tensor and the derived limit defining integral compact support; expanded using actual reduction/limit counits."
+   }
+  },
+  {
+   "text": "Choose simultaneous system and integral adjunctions and identify them through the genuine reduction/limit counits. Normalize support evaluation by its fixed limit realization and the completion unit. The triangles give both unit/counit evaluation equations and the support normalization. No exceptional or support limit identification is assumed. The strict finite-free proper/open comparison is invertible by the same reduced integral basis and finite-sum distributivity before evaluation.",
+   "uses": [
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-ramified-scalar-system-transpose",
+    "lem-sf-integral-compact-support-constructible",
+    "prop-coef-integral-exceptional-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-coef-ramified-scalar-system-transpose",
+  "lem-pc-kflat-resolution",
+  "lem-pur-adic-scalar-extension-tor-bound",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "prop-coef-integral-exceptional-adjoint"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "Parent realization steps 1--3 and the support adjunction normalization",
+   "via": [
+    "lem-coef-ramified-scalar-exceptional-limit",
+    "lem-coef-finite-scalar-mate-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RamifiedScalarPreparation",
+  "file": "lean/Sheaf/SixFunctors/RamifiedScalarPreparation.lean",
+  "declaration": "WeilConjectures.RamifiedScalarPreparation.existsPreparation",
+  "statement": "theorem existsPreparation (e : ℕ)\n    (he : PurCompactSupport.Ramification l E L i e) (hp : 1 ≤ e) :\n    ∃ a : Context l E L i D hl f c,\n      IsIso a.alpha ∧ Nonempty (Preparation a e he hp)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.RamifiedScalarPreparation.Preparation",
+   "WeilConjectures.RamifiedScalarPreparation.Preparation.completionX",
+   "WeilConjectures.RamifiedScalarPreparation.Preparation.supportSystem",
+   "WeilConjectures.RamifiedScalarPreparation.Preparation.supportAssembly",
+   "WeilConjectures.RamifiedScalarPreparation.Preparation.source",
+   "WeilConjectures.RamifiedScalarPreparation.Preparation.target",
+   "WeilConjectures.RamifiedScalarPreparation.Preparation.scalarY",
+   "WeilConjectures.RamifiedScalarPreparation.Preparation.supportSource",
+   "WeilConjectures.RamifiedScalarPreparation.Preparation.supportTarget",
+   "WeilConjectures.RamifiedScalarPreparation.existsPreparation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T204409-L-2951256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T204409-L-2951256",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

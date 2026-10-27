@@ -1,0 +1,234 @@
+{
+ "id": "lem-route-sp-rational-twist-map-id",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sp-tate-twist",
+   "via": [
+    "lem-sp-ell-point-reduction-ring-map"
+   ],
+   "place": "Integral-twist inverse limit and rationalization followed by the colimit over finite E: identity law of the specified field-extension transitions, as made explicit by spRationalTwistMap_id in Sheaf.Paper.ProEtaleTateTwists."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The identity inclusion induces the identity transition.",
+ "statement": "Let $X$ be any scheme, let $\\ell$ be a prime, and fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$. For a finite intermediate extension $E/\\mathbf Q_\\ell$ use its ring of integers $O_E$ [def-weil-l-adic-coefficient-extension]. Write $O_{E,X}$ and $E_X$ for the pulled-back coefficient rings [sk-def-sfb-pulled-back-coefficients] of the continuous-function condensed rings $\\underline{O}_E$ [def-sfb-padic-integers-condensed-ring] and $\\underline E$ [def-sfb-padic-subfield-condensed-ring], with the topologies restricted from $\\overline{\\mathbf Q}_\\ell$. For $n\\geq0$ put $B_{E,n}=O_E/(\\ell^{n+1})$, give this finite ring the discrete topology, and denote by $B_{E,n,X}$ the pullback of its continuous-function condensed ring [def-sfb-continuous-map-condensed-ring]. Let $r_{E,n}:O_{E,X}\\to B_{E,n,X}$ be the coefficient change [def-sfb-coefficient-map] of postcomposition with the quotient map [def-sfb-continuous-map-condensed-ring-map], and $c_E:O_{E,X}\\to E_X$ the pulled-back inclusion [def-sfb-integers-to-subfield]. Write $\\mu_n=\\mu_{\\ell^{n+1},X}$ [def-pur-roots-of-unity-sheaf]. Form the $O_{E,X}$-module $L_E=\\varprojlim_{n\\geq0}(B_{E,n,X}\\otimes_{\\mathbf Z_X}\\mu_n)$, restricting scalars along $r_{E,n}$; the adjacent maps are quotient on $B$ and $u\\mapsto u^\\ell$ on roots [def-pur-sheaf-inverse-limit], [def-pur-sheaf-tensor-product]. Denote its underlying abelian-sheaf projections by $p_{E,n}$. Put $T_E=E_X\\otimes_{O_{E,X}}L_E$, the extension of scalars of $L_E$ along $c_E$ [def-sfb-modobj-extension], and let $q_E:E_X\\otimes_{\\mathbf Z_X}L_E\\to T_E$ be its defining coequalizer projection.\n\nFor an inclusion $h:E\\subseteq F$, let $i_h:E_X\\to F_X$ be its pulled-back coefficient map [def-sfb-subfield-coefficient-map]. Use the uniquely characterized maps $a_h:O_{E,X}\\to O_{F,X}$ with $c_Fa_h=i_hc_E$ [lem-route-sp-integers-map-exists-unique], $b_{h,n}:B_{E,n,X}\\to B_{F,n,X}$ with $b_{h,n}r_{E,n}=r_{F,n}a_h$ [lem-route-sp-ell-map-exists-unique], $g_h:L_E\\to L_F$ with $p_{F,n}g_h=(b_{h,n}\\otimes\\mathrm{id}_{\\mu_n})p_{E,n}$ [lem-route-sp-integral-twist-map-exists-unique], and $j_h:T_E\\to T_F$ with $j_hq_E=q_F(i_h\\otimes g_h)$ [lem-route-sp-rational-twist-map-exists-unique]. Composites in these formulas are written in functional order; $a_h$ is a morphism of ring objects and the other displayed twist maps are underlying abelian-sheaf maps. Then the rational transition of the identity inclusion is the identity: $j_{E\\subseteq E}=\\mathrm{id}_{T_E}$. Equivalently, $\\operatorname{spRationalTwistMap}(X,\\ell,\\mathrm{le\\_refl}(E))=\\mathrm{id}$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "lem-sp-ell-point-reduction-ring-map: the Lean of this node (declared in its module Sheaf.Paper.ProEtaleTateTwists) reaches AlgebraicGeometry.ProEtale.spRationalTwistMap_id, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spRationalTwistMap_id (module Sheaf.Paper.ProEtaleTateTwists, lines 356-362, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-subfield-coefficient-map",
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "lem-route-sp-rational-twist-map-exists-unique",
+  "def-sfb-padic-integers-condensed-ring",
+  "def-sfb-padic-subfield-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-coefficient-map",
+  "def-sfb-integers-to-subfield",
+  "def-sfb-modobj-extension"
+ ],
+ "proof": [
+  {
+   "text": "For $h:E\\subseteq E$ the condensed inclusion is postcomposition with the identity, hence is the identity by [def-sfb-qlbar-subextension-map]. Its image under $p_X^*$ is the identity by the functor identity axiom and [def-sfb-coefficient-map]; thus $i_h=\\mathrm{id}_{E_X}$. In the characterization of [lem-route-sp-integers-map-exists-unique], $\\mathrm{id}_{O_{E,X}}$ preserves unit and multiplication and satisfies $c_E\\mathrm{id}=\\mathrm{id}\\,c_E$. Uniqueness gives $a_h=\\mathrm{id}_{O_{E,X}}$.",
+   "uses": [
+    "def-sfb-qlbar-subextension-map",
+    "def-sfb-coefficient-map",
+    "lem-route-sp-integers-map-exists-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Integral inverse-limit and rationalization paragraph, field-extension diagram implicit in the colimit over E; explicit identity-normalization argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean, spRationalTwistMap_id docstring and preceding four uniqueness declarations (lines 268–362)."
+   }
+  },
+  {
+   "text": "For every $n\\geq0$, [lem-route-sp-ell-map-exists-unique] characterizes $b_{h,n}$ by $b_{h,n}r_{E,n}=r_{E,n}a_h$. Since step 1 gives $a_h=\\mathrm{id}$, the identity of $B_{E,n,X}$ satisfies this equation: both sides are $r_{E,n}$. Its uniqueness gives $b_{h,n}=\\mathrm{id}_{B_{E,n,X}}$.",
+   "uses": [
+    "lem-route-sp-ell-map-exists-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Integral inverse-limit and rationalization paragraph, field-extension diagram implicit in the colimit over E; explicit identity-normalization argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean, spRationalTwistMap_id docstring and preceding four uniqueness declarations (lines 268–362)."
+   }
+  },
+  {
+   "text": "By [lem-route-sp-integral-twist-map-exists-unique], $g_h$ is the unique abelian-sheaf map whose composites with $p_{E,n}$ are $(b_{h,n}\\otimes\\mathrm{id}_{\\mu_n})p_{E,n}$. Step 2 makes each right side $p_{E,n}$, since tensoring two identity maps is the identity (the tensor bifunctor identity axiom). The identity of $L_E$ has exactly these composites. Uniqueness gives $g_h=\\mathrm{id}_{L_E}$.",
+   "uses": [
+    "lem-route-sp-integral-twist-map-exists-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Integral inverse-limit and rationalization paragraph, field-extension diagram implicit in the colimit over E; explicit identity-normalization argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean, spRationalTwistMap_id docstring and preceding four uniqueness declarations (lines 268–362)."
+   }
+  },
+  {
+   "text": "By [lem-route-sp-rational-twist-map-exists-unique], $j_h$ is the unique abelian-sheaf map with $j_hq_E=q_E(i_h\\otimes g_h)$. Steps 1 and 3 make the right side $q_E(\\mathrm{id}\\otimes\\mathrm{id})=q_E$. The identity of $T_E$ satisfies the same equation, since $\\mathrm{id}\\,q_E=q_E$. Uniqueness therefore gives $j_h=\\mathrm{id}_{T_E}$, as required.",
+   "uses": [
+    "lem-route-sp-rational-twist-map-exists-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Integral inverse-limit and rationalization paragraph, field-extension diagram implicit in the colimit over E; explicit identity-normalization argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean, spRationalTwistMap_id docstring and preceding four uniqueness declarations (lines 268–362)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-qlbar-subextension-map",
+  "def-sfb-coefficient-map",
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "lem-route-sp-rational-twist-map-exists-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Integral inverse-limit and rationalization paragraph, field-extension diagram implicit in the colimit over E; explicit identity-normalization argument in lean/Sheaf/Paper/ProEtaleTateTwists.lean, spRationalTwistMap_id docstring and preceding four uniqueness declarations (lines 268–362)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'spRationalTwistMap_id' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identity coefficient extension induces identity transition on a rational Tate twist sheaf",
+   "results": "{\"t\": \"2026-10-25T06:31:57Z\", \"tool\": \"leansearch\", \"query\": \"Identity coefficient extension induces identity transition on a rational Tate twist sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalarsId_hom_app_one_tmul\", \"Algebra.Extension.self\", \"ModuleCat.extendScalarsId\", \"AlgebraicGeometry.Scheme.Cover.LocallyDirected.trans_id\", \"Algebra.Extension.Cotangent.map_id\", \"ModuleCat.extendScalars_comp_id\", \"SheafOfModules.pushforwardId\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor_mapId\"], \"digest\": \"e8e575a0b3fd78f9\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: general functor identity, ordinary module scalar-extension identity, field-localization identity and cyclotomic-character identities do not state this uniquely normalized transition of pulled-back condensed-coefficient Tate sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TateTwist\"",
+   "results": "{\"t\": \"2026-10-25T06:31:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"TateTwist\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: general functor identity, ordinary module scalar-extension identity, field-localization identity and cyclotomic-character identities do not state this uniquely normalized transition of pulled-back condensed-coefficient Tate sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "spRationalTwistMap|tateTwist|TateTwist",
+   "results": "{\"t\": \"2026-10-25T06:31:57Z\", \"tool\": \"grep\", \"query\": \"spRationalTwistMap|tateTwist|TateTwist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: general functor identity, ordinary module scalar-extension identity, field-localization identity and cyclotomic-character identities do not state this uniquely normalized transition of pulled-back condensed-coefficient Tate sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity inclusion of a finite extension of the ell adic numbers induces the identity map on its rational Tate twist sheaf",
+   "results": "{\"t\": \"2026-10-25T06:31:58Z\", \"tool\": \"leanfinder\", \"query\": \"The identity inclusion of a finite extension of the ell adic numbers induces the identity map on its rational Tate twist sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"modularCyclotomicCharacter.id\", \"Algebra.Extension.H1Cotangent.map_id\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τl\", \"cyclotomicCharacter.toZModPow_toFun\", \"cyclotomicCharacter.toZModPow\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τr\", \"WittVector.toPadicInt_comp_fromPadicInt_ext\", \"PresheafOfModules.map_id\"], \"digest\": \"80090257b1128ff9\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: general functor identity, ordinary module scalar-extension identity, field-localization identity and cyclotomic-character identities do not state this uniquely normalized transition of pulled-back condensed-coefficient Tate sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsId|map_id",
+   "results": "{\"t\": \"2026-10-25T06:32:36Z\", \"tool\": \"grep\", \"query\": \"extendScalarsId|map_id\", \"sub\": \"Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"404\", \"524\", \"954\", \"958\", \"959\"], \"digest\": \"6269d33b7c17e634\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: general functor identity, ordinary module scalar-extension identity, field-localization identity and cyclotomic-character identities do not state this uniquely normalized transition of pulled-back condensed-coefficient Tate sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_id",
+   "results": "{\"t\": \"2026-10-25T06:32:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.map_id\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_id\", \"CategoryTheory.Comonad.adj_unit\", \"CategoryTheory.Monad.adj_counit\", \"CategoryTheory.Over.postAdjunctionLeft_unit_app_left\", \"CategoryTheory.Under.postAdjunctionRight_counit_app_right\", \"PresheafOfModules.map_id\", \"PresheafOfModules.mk\", \"PresheafOfModulesOfCommRing.mk\"], \"digest\": \"9ea361068d070843\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: general functor identity, ordinary module scalar-extension identity, field-localization identity and cyclotomic-character identities do not state this uniquely normalized transition of pulled-back condensed-coefficient Tate sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map on an inverse limit of roots of unity followed by localization is identity when all coefficient maps are identity",
+   "results": "{\"t\": \"2026-10-25T06:32:39Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical map on an inverse limit of roots of unity followed by localization is identity when all coefficient maps are identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MaximalSpectrum.mapPiLocalization_id\", \"PadicInt.limNthHom_one\", \"cyclotomicCharacter.toZModPow_toFun\", \"modularCyclotomicCharacter.id\", \"PrimeSpectrum.mapPiLocalization_id\", \"IsLocalization.lift_id\", \"fontaineThetaInvertP\", \"PadicInt.lift_spec\"], \"digest\": \"60a1969ba6c76e3c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: general functor identity, ordinary module scalar-extension identity, field-localization identity and cyclotomic-character identities do not state this uniquely normalized transition of pulled-back condensed-coefficient Tate sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sp-ell-point-reduction-ring-map",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sp-tate-twist",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistConstructions",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistConstructions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spRationalTwistMap_id",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spRationalTwistMap_id"
+  ],
+  "statement": "theorem spRationalTwistMap_id (E : PadicAlgCl.FiniteIntermediateField ℓ) :\n    spRationalTwistMap X ℓ (le_refl E) = 𝟙 _ := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-sp-rational-twist-map-id",
+  "worker": "stage1",
+  "summary": "Replaced the machine-made signature/docstring with a self-contained statement of the actual integral-limit and rational-tensor constructions and the four independent normalizations. Proved the identity by four direct uniqueness applications; all tensor/functor identity calculations are written out. Reused existing nodes throughout; no new nodes. The aggregate sk-def-sp-tate-twist currently reaches this item via lem-sp-ell-point-reduction-ring-map, so it is not cited as a dependency. No extra invertibility hypothesis on ell is needed or added. No completed upstream declaration matches. All listed new searches were run through msearch.py and their hits read.",
+  "blueprint": "Latest sk-def-sp-tate-twist, paragraph beginning O_E,X(1)=inverse limit and sentence obtaining E_X(1) by inverting ell and passing to the colimit over E. This item supplies identity coherence of that specified diagram; it does not reprove local freeness or coefficient comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-route-sp-integers-map-exists-unique",
+    "why": "Uses only the unique-map characterization of the same published Tate-twist construction; filed under sk-prop-an by automatic sorry-route attribution, but this is an interface tool for the sk-def-sp-tate-twist identity law, not a replacement of a unit proof."
+   },
+   {
+    "node": "lem-route-sp-ell-map-exists-unique",
+    "why": "Uses only the unique-map characterization of the same published Tate-twist construction; filed under sk-prop-an by automatic sorry-route attribution, but this is an interface tool for the sk-def-sp-tate-twist identity law, not a replacement of a unit proof."
+   },
+   {
+    "node": "lem-route-sp-integral-twist-map-exists-unique",
+    "why": "Uses only the unique-map characterization of the same published Tate-twist construction; filed under sk-prop-an by automatic sorry-route attribution, but this is an interface tool for the sk-def-sp-tate-twist identity law, not a replacement of a unit proof."
+   },
+   {
+    "node": "lem-route-sp-rational-twist-map-exists-unique",
+    "why": "Uses only the unique-map characterization of the same published Tate-twist construction; filed under sk-prop-an by automatic sorry-route attribution, but this is an interface tool for the sk-def-sp-tate-twist identity law, not a replacement of a unit proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "lem-route-sp-rational-twist-map-exists-unique"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NH-b6e9c887b",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-b6e9c887b (reviewer sub-agent of L); spot-checked: Read the item in full against the source ProEtaleTateTwists.lean (spEllQuotient … spRationalTwistMap_id, ~95-362) and the blueprint sk-def-sp-tate-twist. Statement: matches the Lean exactly. Objects: O_E/ℓ^{n+1} with discrete topology; levels B⊗_ℤμ restricted along r; transitions are reduction ⊗ (u↦u^ℓ); limit in O_{E,X}-modules; T_E is the extension of scalars along c_E. Maps: a,b,g,j are pinned by the four ∃! theorems. Hypotheses: none beyond X a scheme and ℓ prime; leaving out ℓ-invertible matches the Lean and weakens nothing. Proof: steps 1-4 are correct elementary uniqueness applications. Step 1: ι_{E,E}=id comes from def-sfb-qlbar-subextension-map plus functoriality of p_X^*; id is a monoid hom. Steps 2-4: 𝟙⊗ₘ𝟙=𝟙 makes the identity satisfy each characterizing equation. Edge cases checked: X empty, E=Q_ℓ, ramified E, ℓ=2, ℓ not invertible, n=0. Shape: no new nodes, no relabelling. Cycle: a DAG traversal confirms none; the only citer is lem-sp-ell-point-reduction-ring-map. Duplicates: the only other DAG node on these twist maps that is not an exists-unique node is lem-route-sp-rational-twist-map-comp (the composition law). Tool uses: I accept the 4 tool_uses for the lem-route-sp-*-exists-unique interfaces; they are filed under sk-prop-an by automatic attribution but characterize maps of sk-def-sp-tate-twist itself. FIX (B3): the statement used c_E, the condensed rings of O_E, E and B, r_{E,n}, and T_E/q_E without their definition nodes. I added inline citations and stmt_deps for def-sfb-padic-integers-condensed-ring, def-sfb-padic-subfield-condensed-ring, def-sfb-continuous-map-condensed-ring, def-sfb-continuous-map-condensed-ring-map, def-sfb-coefficient-map, def-sfb-integers-to-subfield (padicIntegersToPadicSubfield) and def-sfb-modobj-extension (Mod.extendScalars). None of them reaches the item, and the claim is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-trf-point-cone-lifts-components",
+ "kind": "statement",
+ "title": "Strict component equalities for point cone lifts",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "statement": "The strict quotient units, inverse-image theta lifts, both Roos coordinates, section comparison, and induced naturality equalities appearing as the first five conjuncts of the point-cone lift naturality theorem hold simultaneously.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), point-transport comparison supplement; original steps 1--7 before the final transported-lift composition"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-point-proetale-sections-exact",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "def-trf-point-sections-roos-comparison",
+  "def-trf-strict-quotient-cone-augmentation",
+  "def-weil-frobenius-point-transport"
+ ],
+ "proof": [
+  {
+   "text": "Prove the five displayed component groups by the sectionwise pure-tensor formulas for reduction and inverse-image comparison, the signed mapping-cone lift equations, the two-coordinate diagonal Roos map formulas, normalized section comparison, and naturality of all finite reductions. The zero shifted coordinates follow from the zero homotopy in each mapping-cocone lift. Sheafification uniqueness upgrades the sectionwise calculations to strict chain-map equalities.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-trf-point-sections-roos-comparison",
+    "def-trf-strict-quotient-cone-augmentation",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), strict representative-level expansion using Stacks Tags 03EK, 03D6 and 08TC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-point-sections-roos-comparison",
+  "def-trf-strict-quotient-cone-augmentation",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), strict component calculation split from final functorial composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of zero homotopy lifts into Roos mapping cocones",
+   "results": "No direct match; existing coordinate calculations in PointQuotientAugmentationDiagram were inspected.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift_f_fst_f",
+   "results": "Mapping-cocone projection lemmas found and used as the component proof interface.",
+   "date": "2026-10-26",
+   "verdict": "match used"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImageReductionTheta_compatible|integralOperationsRoosMap_comp|sectionsRoos_existsUnique",
+   "results": "Existing strict compatibility and Roos construction declarations found in Sheaf modules.",
+   "date": "2026-10-26",
+   "verdict": "match used"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.PointConeLiftsChainNaturality",
+  "date": "2026-10-26",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-trf-point-cone-lifts-chain-naturality",
+  "via": "stage-3 strict component decomposition"
+ },
+ "lean_audit": "none",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.PointConeLiftsChainNaturality",
+  "file": "lean/Sheaf/TraceFormula/PointConeLiftsChainNaturality.lean",
+  "declaration": "WeilConjectures.PointConeLifts.pointConeLifts_components",
+  "declarations": [
+   "WeilConjectures.PointConeLifts.pointConeLifts_components"
+  ],
+  "statement": "theorem pointConeLifts_components (_hl : l ≠ D.p) : (∀ (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (n : ℕ), unrestrictedTowerUnit l E (Spec (.of D.k)) P.obj (n + 1) ≫ (unrestrictedIntegralTransition l E (Spec (.of D.k)) n).app P.obj = unrestrictedTowerUnit l E (Spec (.of D.k)) P.obj n) ∧ (∀ (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (n : ℕ), inverseImageReductionTheta l E (frobeniusPointIso D).hom (n + 1) P.obj ≫ (integralOperationsPullbackTransition l E (frobeniusPointIso D).hom n).app P.obj = inverseImageReductionTheta l E (frobeniusPointIso D).hom n P.obj) ∧ (∀ (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (n : ℕ) (i : ℤ), (reductionLift D l E P.obj).f i ≫ roosFirst ((reductionSections D l E).obj P.obj) n i = ((sectionsComplex D l E).map (unrestrictedTowerUnit l E (Spec (.of D.k)) P.obj n)).f i ∧ (reductionLift D l E P.obj).f i ≫ roosSecond ((reductionSections D l E).obj P.obj) n i = 0 ∧ (inverseImageRoosComparisonComplex l E (frobeniusPointIso D).hom P.obj).f i ≫ roosFirst ((pullbackTower D l E).obj P.obj) n i = (inverseImageReductionTheta l E (frobeniusPointIso D).hom n P.obj).f i ∧ (inverseImageRoosComparisonComplex l E (frobeniusPointIso D).hom P.obj).f i ≫ roosSecond ((pullbackTower D l E).obj P.obj) n i = 0) ∧ (∀ (X Y : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (f : X ⟶ Y), (∀ (n : ℕ) (i : ℤ), (integralOperationsRoosMap f).f i ≫ roosFirst Y n i = roosFirst X n i ≫ (f.app (op n)).f i ∧ (integralOperationsRoosMap f).f i ≫ roosSecond Y n i = roosSecond X n i ≫ (f.app (op n)).f (i + -1)) ∧ (sectionsComplex D l E).map (integralOperationsRoosMap f) ≫ (sectionsRoos D l E Y).hom = (sectionsRoos D l E X).hom ≫ integralOperationsRoosMap (Functor.whiskerRight f (sectionsComplex D l E))) ∧ (∀ (P P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (h : P.obj ⟶ P'.obj), (∀ n : ℕ, (sectionsComplex D l E).map (unrestrictedTowerUnit l E (Spec (.of D.k)) P.obj n) ≫ (((reductionSections D l E).map h).app (op n)) = (sectionsComplex D l E).map h ≫ (sectionsComplex D l E).map (unrestrictedTowerUnit l E (Spec (.of D.k)) P'.obj n)) ∧ (∀ n : ℕ, inverseImageReductionTheta l E (frobeniusPointIso D).hom n P.obj ≫ (((pullbackTower D l E).map h).app (op n)) = (trfInverseImageComplex l E (frobeniusPointIso D).hom).map h ≫ inverseImageReductionTheta l E (frobeniusPointIso D).hom n P'.obj) ∧ reductionLift D l E P.obj ≫ integralOperationsRoosMap ((reductionSections D l E).map h) = (sectionsComplex D l E).map h ≫ reductionLift D l E P'.obj ∧ inverseImageRoosComparisonComplex l E (frobeniusPointIso D).hom P.obj ≫ integralOperationsRoosMap ((pullbackTower D l E).map h) = (trfInverseImageComplex l E (frobeniusPointIso D).hom).map h ≫ inverseImageRoosComparisonComplex l E (frobeniusPointIso D).hom P'.obj)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T071120-L-3842842",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T071120-L-3842842",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

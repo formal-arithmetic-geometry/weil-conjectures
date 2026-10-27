@@ -1,0 +1,153 @@
+{
+ "id": "lem-sfb-kummer-strict-target-transport",
+ "kind": "statement",
+ "title": "Strict Kummer target and arbitrary-arrow reduction formula",
+ "statement": "Let $\\ell$ be prime and invertible on an arbitrary scheme $W$, and let $D$ be a simultaneous derived reduction of scalar extension [def-sfb-diagonal-system-interface]. There exist a strict constant $\\mathbf Z_\\ell$-module system $H$, an isomorphism of its underlying abelian tower with the actual roots tower [def-pur-roots-of-unity-sheaf], and $b:D.T(\\mathbf G_m^{\\mathrm{comp}}[1])\\simeq H[2]$. At each level there is an isomorphism $t:H_n\\simeq(\\mathbf Z/\\ell^{n+1})(1)$ whose underlying map is the specified roots-to-line map. For any abelian sheaf $S$, normalized invertible source counit $a$, residue-module sheaf $Q$, source isomorphism $s:D.ordinary(S)_n\\simeq\\operatorname{Res}Q$, and $g:S\\to\\operatorname{forget}Q$ equal to the ordinary quotient scalar unit under $s$, every $f\\in\\operatorname{Ext}^1(S,\\mathbf G_m^{\\mathrm{comp}})$ has a residue-linear reduction $e\\in\\operatorname{Ext}^2(Q,(\\mathbf Z/\\ell^{n+1})(1))$. Its scalar adjunct is $-f\\kappa$, where $\\kappa$ is the positive Kummer unit preceded by the units comparison [def-sfb-cartier-reduction-data]. Restriction of $e$ to p-adic scalars equals evaluation of $a^{-1}D.T(f)b$ under $s,t$. This statement does not involve a Cartier divisor or prescribe a Cartier boundary. Canonical small Ext witnesses and additivity of scalar forgetting are provided by proved instances for the named sheaf structures; these transport the existing Cartier coefficient witnesses along definitional equalities. The Lean existence assertion is Nonempty of the explicitly defined strict target data structure; its fields are H, roots, b, the level isomorphisms and the two normalization/transport proofs. The type alias KummerStrictTarget chooses no object. Here kummerScalarAdjunct is exactly precomposition by the generator after the exact forgetful image of e; it and negativeExtProduct are real named expressions, not assumptions. The definition kummerRootNormalization is exactly the stated canonical underlying-map equation; it introduces no additional condition or chosen data.",
+ "stmt_deps": [
+  "def-pur-roots-of-unity-sheaf",
+  "def-sfb-cartier-reduction-data",
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-geo-cartier-interface",
+  "lem-sfb-canonical-sheaf-ext",
+  "lem-sfb-kummer-strict-adjunct-compatibility"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), target paragraph (strict Kummer cohomology and transitions), and the naturality calculation of step (4), for arbitrary sources and degree-one maps rather than a Cartier boundary."
+ },
+ "proof": [
+  {
+   "text": "Obtain H, its actual roots comparison, the strict target isomorphism b and all level maps t from strict Kummer adjunct compatibility. Retain its prescribed roots equations.",
+   "uses": [
+    "lem-sfb-kummer-strict-adjunct-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary n,S,a,Q,s,g and f, apply the finite-arrow lifting theorem with the same a,b,s,t. It produces a residue-linear class e and exactly the required evaluation equation. This lifting step uses no Kummer data.",
+   "uses": [
+    "lem-sfb-diagonal-finite-arrow-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the conditional Kummer adjunct equation to this e and its restriction equation. Pair that result with the symmetric restriction equation to establish KummerArrowTransport. Assemble all unchanged fields into KummerStrictTarget.",
+   "uses": [
+    "lem-sfb-kummer-strict-adjunct-compatibility"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-kummer-strict-adjunct-compatibility",
+  "lem-sfb-diagonal-finite-arrow-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (2)--(4): residue-linear existence separated from strict Kummer adjunct compatibility, then assembled in Lean by B6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The supported integral constant sheaf reduced modulo n is the supported constant ZMod n sheaf with its quotient generator",
+   "results": "8 hits, all concerning condensed locally constant module functors; no supported quotient normalization or Kummer strict-system formula.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"adjunction\"",
+   "results": "1 hit: CategoryTheory.AbelianOfAdjunction.hasCokernels (Mathlib.CategoryTheory.Abelian.Transfer), which transfers existence of cokernels and does not identify this quotient.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*Derived|supported_integral_residue|pro_integral_residue",
+   "results": "0 hits from msearch. Direct project rg finds Etale.supported_integral_residue_sequence and ProEtale.pro_integral_residue_derived_unit, but no normalization for DiagonalReductionPresentation.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the supported residue sequence; strict-system and p-adic quotient comparisons remain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of the multiplicative group sheaf gives the roots of unity shifted by one and commutes with inverse systems and boundary maps",
+   "results": "8 hits: rootsOfUnity; MulChar.ofRootOfUnity_spec; IsCyclic.monoidHomMulEquivRootsOfUnityOfGenerator; modularCyclotomicCharacter.toFun; MulChar.apply_mem_rootsOfUnity; modularCyclotomicCharacter.toFun_spec; IsCyclic.monoidHom_mulEquiv_rootsOfUnity; CommGroup.monoidHom_mulEquiv_of_hasEnoughRootsOfUnity. All concern algebraic groups of roots, not sheaf derived reduction.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous derived prime power reduction of the units sheaf is the strict roots of unity system shifted by one, with the Kummer adjunction formula for arbitrary extension classes",
+   "results": "8 hits: cyclotomicCharacter.spec; cyclotomicCharacter.toFun_spec; AdjoinRootXPowSubCEquivToRootsOfUnity; autAdjoinRootXPowSubC_root; cyclotomicCharacter; Ideal.rootsOfUnityMapQuot_apply; modularCyclotomicCharacter.aux; modularCyclotomicCharacter.aux_spec. These describe algebraic roots and their Galois action, not the derived sheaf or strict-system comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; retain the Kummer strict-target step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalKummerReduction",
+  "group": "M2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), target paragraph (strict Kummer cohomology and transitions), and the naturality calculation of step (4), for arbitrary sources and degree-one maps rather than a Cartier boundary.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerStrictTargetTransport",
+  "file": "lean/Sheaf/Paper/KummerStrictTargetTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.kummer_strict_target_transport",
+  "statement": "theorem kummer_strict_target_transport (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasExt.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W)) :\n    Nonempty (KummerStrictTarget ℓ W hW D)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.KummerArrowTransport",
+   "AlgebraicGeometry.ProEtale.KummerTargetData",
+   "AlgebraicGeometry.ProEtale.KummerStrictTarget",
+   "AlgebraicGeometry.ProEtale.kummer_strict_target_transport",
+   "AlgebraicGeometry.ProEtale.negativeExtProduct",
+   "AlgebraicGeometry.ProEtale.kummerScalarAdjunct"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-37cf9",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261027T112320-L-1570535",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs the two new sorry statements; moved defs vs published item (verbatim); new nodes vs Lean; 4 direct importers compiled against delivered files (all OK)"
+ }
+}

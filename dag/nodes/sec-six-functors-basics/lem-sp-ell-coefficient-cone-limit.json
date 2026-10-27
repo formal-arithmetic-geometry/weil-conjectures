@@ -1,0 +1,126 @@
+{
+ "id": "lem-sp-ell-coefficient-cone-limit",
+ "kind": "statement",
+ "title": "The specified ell-power coefficient cone is a limit",
+ "statement": "Use the universe convention [def-weil-size-convention], the pro-etale site [def-weil-pbc-proetale-site], and module inverse limits [def-pur-sheaf-inverse-limit]. For a scheme X and prime ell, and a finite intermediate extension E of Q_ell as in [sk-def-sp-tate-twist], form the internal O_E,X-module quotient B_n = O_E/(ell^(n+1)) with action through the specified coefficient reduction spEllReduction. The tower maps are exactly the specified spEllPointTransition coefficient maps. The cone from the regular internal O_E,X module with these reduction projections is a limit cone in internal modules. The cone, transitions, and projections are constructed in the module, without choosing limit witnesses. This assertion contains neither roots of unity nor a slice trivialization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), compatible finite bases, integral inverse limit, and rational scalar extension"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sp-tate-twist",
+  "def-pur-sheaf-inverse-limit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved source theorem isLimitContinuousMapAbSheafCone to PadicAlgCl.integersModPowTransition and the specified integersModPowMk projections. Its three hypotheses are the proved native integersModPowMk_injective, exists_integersModPowMk_eq, and isInducing_integersModPowMk theorems. This constructs the normalized continuous-function sheaf limit cone for all ell-power quotients of PadicAlgCl.integers. The predecessor/successor Galois connection on the natural numbers is an adjunction. Its opposite shows that successor on the opposite index category is initial. Whisker this limit cone by successor to obtain the positive-exponent cone.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), compatible finite bases, integral inverse limit, and rational scalar extension"
+   }
+  },
+  {
+   "text": "The canonical chartComparison is an isomorphism for the integral ring (ultrametric and therefore totally disconnected) and each discrete quotient. chartComparison_naturality for the actual quotient transitions assembles these maps into an isomorphism from the forgotten internal coefficient diagram to the shifted continuous diagram. The same naturality applied to each quotient projection gives an isomorphism of the displayed reduction cone with the shifted source cone. Transport its limit property along these isomorphisms and reflect it through Mod.forget. This retains the exact normalized integral actions and projections.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), compatible finite bases, integral inverse limit, and rational scalar extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), native continuous ell-power limit transported through canonical coefficient comparisons; the initial successor functor removes exponent zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of quotient sheaves of the ring of integers of a finite extension of the p-adic numbers is the integral coefficient sheaf",
+   "results": "Generic sheaf module limits, adic completion, and Profinite.asLimitConeIso; no normalized pulled-back integral coefficient cone.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ofOpSequence",
+   "results": "Sequential functors and successor maps, and generic sequential limits; no coefficient completeness comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "spEllCoefficient|inverseLimit.*[Cc]oeff|[Cc]oeff.*inverseLimit",
+   "results": "No exact normalized internal-module result. Existing ProEtaleIntegralCoefficientLimit handles uniformizer quotients and a different coefficient presentation. ContinuousMapReduction supplies the generic continuous-function limit, IntegersModPow proves the native completeness hypotheses, and ContinuousCoefficientRealizations supplies the natural chart comparison. These ingredients give the proof here.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SpIntegralRationalRootBasis",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "via": [
+    "lem-sp-integral-rational-root-basis",
+    "lem-route-sp-twists-common-cover",
+    "lem-sfb-integral-tate-line-constructible"
+   ],
+   "place": "clause (3), compatible finite bases, integral inverse limit, and rational scalar extension"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SpEllCoefficientTower",
+  "file": "lean/Sheaf/Paper/SpEllCoefficientTower.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spEllCoefficientCone_isLimit",
+  "statement": "theorem spEllCoefficientCone_isLimit (E : PadicAlgCl.FiniteIntermediateField ℓ) :\n    Nonempty (IsLimit (spEllCoefficientCone X ℓ E))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T222555-L-669470",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T222555-L-669470",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

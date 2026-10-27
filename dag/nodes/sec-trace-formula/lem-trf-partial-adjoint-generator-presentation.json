@@ -1,0 +1,292 @@
+{
+ "id": "lem-trf-partial-adjoint-generator-presentation",
+ "kind": "statement",
+ "title": "Generator presentation and its transported partial-adjoint relation",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] and let $R:\\mathcal A\\to\\mathcal B$ be additive [def-weil-pbc-additive-functor]. Let $\\mathcal P\\subset\\operatorname{Ob}(\\mathcal B)$ satisfy: every object of $\\mathcal B$ admits an epimorphism from an object of $\\mathcal P$. For each $P\\in\\mathcal P$, fix $L_P\\in\\mathcal A$ and bijections $\\theta_{P,X}:\\operatorname{Hom}_{\\mathcal A}(L_P,X)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal B}(P,R(X))$ natural in $X$, meaning $\\theta_{P,X'}(u\\circ a)=R(u)\\circ\\theta_{P,X}(a)$ for $u:X\\to X'$. Put $i_P=\\theta_{P,L_P}(\\mathrm{id}_{L_P})$. Then $\\theta_{P,X}(a)=R(a)\\circ i_P$ and $\\theta_{P,X}(0)=0$ for every $P,X,a$. For every $B\\in\\mathcal B$ there exist $P_1,P_2\\in\\mathcal P$, epimorphisms $q:P_1\\twoheadrightarrow B$ and $r:P_2\\twoheadrightarrow K$, and a kernel $k:K\\to P_1$ of $q$, such that, on putting $d=k\\circ r$, the map $q$ is a cokernel of $d$: $q\\circ d=0$, and every $h:P_1\\to Y$ with $h\\circ d=0$ factors uniquely as $h=b\\circ q$. For these choices there is a unique $D:L_{P_2}\\to L_{P_1}$ with $\\theta_{P_2,L_{P_1}}(D)=i_{P_1}\\circ d$. For every $X\\in\\mathcal A$ and $a:L_{P_1}\\to X$, it satisfies $\\theta_{P_2,X}(a\\circ D)=\\theta_{P_1,X}(a)\\circ d$, and consequently $a\\circ D=0$ if and only if $\\theta_{P_1,X}(a)\\circ d=0$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0793, lemma-partially-defined-adjoint, proof: first paragraph and the choice of an exact presentation in the second paragraph; additive specialization."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [
+  {
+   "text": "Apply the stipulated naturality with $a=\\mathrm{id}_{L_P}$ and $u:L_P\\to X$. This gives $\\theta_{P,X}(u)=R(u)\\circ i_P$. By [def-weil-pbc-additive-functor], the map on each Hom group is a group homomorphism, so $R(0)=0$. Taking $u=0$ in the formula gives $\\theta_{P,X}(0)=0\\circ i_P=0$.",
+   "uses": [
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof, first paragraph (evaluation at the identity and induced map) and second paragraph (choice of exact presentation); additive specialization. Tag 0109, definition-abelian-category, supplies the abelian axioms."
+   }
+  },
+  {
+   "text": "For $B\\in\\mathcal B$, use the covering hypothesis to choose $P_1\\in\\mathcal P$ and an epimorphism $q:P_1\\to B$. Kernels exist by [def-sp-abelian]; choose a kernel $k:K\\to P_1$ of $q$. Apply the same covering hypothesis to $K$ to choose $P_2\\in\\mathcal P$ and an epimorphism $r:P_2\\to K$. Set $d=k\\circ r$. The kernel identity gives $q\\circ d=(q\\circ k)\\circ r=0$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof, first paragraph (evaluation at the identity and induced map) and second paragraph (choice of exact presentation); additive specialization. Tag 0109, definition-abelian-category, supplies the abelian axioms."
+   }
+  },
+  {
+   "text": "By [def-sp-abelian], the epimorphism $q$ is a cokernel of some $t:T\\to P_1$. Since $q\\circ t=0$, the universal property of the chosen kernel gives $s:T\\to K$ with $t=k\\circ s$. If $h:P_1\\to Y$ satisfies $h\\circ d=0$, then $(h\\circ k)\\circ r=0\\circ r$; cancellation of the epimorphism $r$ gives $h\\circ k=0$. Hence $h\\circ t=(h\\circ k)\\circ s=0$. The cokernel property of $q$ for $t$ supplies a unique $b:B\\to Y$ with $h=b\\circ q$. Together with step 2 this is exactly the cokernel property of $q$ for $d$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof, first paragraph (evaluation at the identity and induced map) and second paragraph (choice of exact presentation); additive specialization. Tag 0109, definition-abelian-category, supplies the abelian axioms."
+   }
+  },
+  {
+   "text": "The composite $i_{P_1}\\circ d$ lies in $\\operatorname{Hom}_{\\mathcal B}(P_2,R(L_{P_1}))$. Define $D=\\theta_{P_2,L_{P_1}}^{-1}(i_{P_1}\\circ d)$. Bijectivity gives both its stated defining equation and uniqueness. For $a:L_{P_1}\\to X$, the given naturality and step 1 give $\\theta_{P_2,X}(a\\circ D)=R(a)\\circ\\theta_{P_2,L_{P_1}}(D)=R(a)\\circ i_{P_1}\\circ d=\\theta_{P_1,X}(a)\\circ d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof, first paragraph (evaluation at the identity and induced map) and second paragraph (choice of exact presentation); additive specialization. Tag 0109, definition-abelian-category, supplies the abelian axioms."
+   }
+  },
+  {
+   "text": "By step 1, $\\theta_{P_2,X}(0)=0$. If $a\\circ D=0$, step 4 therefore gives $\\theta_{P_1,X}(a)\\circ d=0$. Conversely, if the latter composite is zero, step 4 gives $\\theta_{P_2,X}(a\\circ D)=0=\\theta_{P_2,X}(0)$, and injectivity of this bijection gives $a\\circ D=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof, first paragraph (evaluation at the identity and induced map) and second paragraph (choice of exact presentation); additive specialization. Tag 0109, definition-abelian-category, supplies the abelian axioms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-additive-functor",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0793, lemma-partially-defined-adjoint, proof, first paragraph (evaluation at the identity and induced map) and second paragraph (choice of exact presentation); additive specialization. Tag 0109, definition-abelian-category, supplies the abelian axioms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian, CategoryTheory.Limits.CokernelCofork",
+   "results": "12 hits: CategoryTheory.Abelian.BiproductToPushoutIsCokernel.biproductToPushoutCofork, CategoryTheory.ShortComplex.HomologyData.ofEpiMonoFactorisation.g'_eq, CategoryTheory.ShortComplex.HomologyData.ofEpiMonoFactorisation, CategoryTheory.ShortComplex.HomologyData.ofEpiMonoFactorisation.leftHomologyData, CategoryTheory.ShortComplex.HomologyData.ofEpiMonoFactorisation.rightHomologyData, CategoryTheory.ShortComplex.HomologyData.ofEpiMonoFactorisation.leftHomologyData_H, CategoryTheory.ShortComplex.HomologyData.ofEpiMonoFactorisation.rightHomologyData_H, CategoryTheory.ShortComplex.HomologyData.ofEpiMonoFactorisation.isoHomology. Digest 4a3deb1c5e337189. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "generating.*cokernel|cokernel.*generating|presentation.*epi|epi.*presentation",
+   "results": "7 hits: Mathlib/CategoryTheory/Generator/Indization.lean, Mathlib/CategoryTheory/EffectiveEpi/Enough.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean. Digest 440fdf423cbb61f6. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category every object admits a cokernel presentation P2 to P1 to B with both P1 and P2 in any class having an epimorphism onto every object",
+   "results": "8 hits: CategoryTheory.Abelian.has_cokernels, CategoryTheory.ObjectProperty.epiModSerre, CategoryTheory.Abelian.epiDesc, CategoryTheory.Abelian.epiIsCokernelOfKernel, CategoryTheory.NonPreadditiveAbelian.epiIsCokernelOfKernel, CategoryTheory.ObjectProperty.epiModSerre_iff, CategoryTheory.Abelian.epi_factorThruCoimage, CategoryTheory.ShortComplex.instEpiCokernelToAbelianCoimage. Digest c9915f0f2005d2db. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A class surjecting onto every object of an abelian category gives two term cokernel presentations with both terms in the class",
+   "results": "8 hits: Module.Presentation.cokernel, Module.Presentation.ofExact, CategoryTheory.ObjectProperty.epiModSerre_of_epi, CategoryTheory.Abelian.epiIsCokernelOfKernel, CategoryTheory.Abelian.epiDesc, CategoryTheory.Abelian.has_cokernels, CategoryTheory.NonPreadditiveAbelian.has_cokernels, CategoryTheory.NonPreadditiveAbelian.epiIsCokernelOfKernel. Digest c2426061f0e018ff. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "corepresent.*(precomp|zero)|coyonedaEquiv|partialLeftAdjoint.*map",
+   "results": "21 hits: Mathlib/CategoryTheory/ShrinkYoneda.lean, Mathlib/CategoryTheory/ShrinkYoneda.lean, Mathlib/CategoryTheory/ShrinkYoneda.lean, Mathlib/CategoryTheory/ShrinkYoneda.lean, Mathlib/CategoryTheory/ShrinkYoneda.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean. Digest 6cbd77a531ebd013. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a morphism between objects to a morphism between corepresenting objects using natural Hom bijections and identify the maps annihilating it",
+   "results": "8 hits: CategoryTheory.Functor.CorepresentableBy.homEquiv_comp, CategoryTheory.Functor.CorepresentableBy.homEquiv_eq, CategoryTheory.Functor.CorepresentableBy.uniqueUpToIso_hom, CategoryTheory.Functor.CorepresentableBy.ofIso, CategoryTheory.Grothendieck.transport, CategoryTheory.Functor.CorepresentableBy.homEquiv_symm_comp, CategoryTheory.Functor.CorepresentableBy.ofIsoObj_homEquiv, CategoryTheory.Grothendieck.toTransport. Digest 5d170a212ff0d6eb. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.coyonedaEquiv",
+   "results": "8 hits: CategoryTheory.coyonedaEquiv, CategoryTheory.coyonedaEquiv_symm_app_apply, CategoryTheory.coyonedaEquiv_apply, CategoryTheory.coyonedaEquiv_coyoneda_map, CategoryTheory.map_coyonedaEquiv, CategoryTheory.coyonedaEquiv_comp, CategoryTheory.coyonedaEquiv_naturality, CategoryTheory.coyonedaEquiv_symm_map. Digest c39e1b363439f13d. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural Hom bijections for two objects under an additive functor induce a unique map between corepresenters which intertwines precomposition and preserves zero relations",
+   "results": "8 hits: CategoryTheory.Functor.CorepresentableBy.uniqueUpToIso_hom, CategoryTheory.Functor.CorepresentableBy.homEquiv_eq, CategoryTheory.Functor.coreprW_hom_app, CategoryTheory.Functor.CorepresentableBy.homEquiv_comp, CategoryTheory.Functor.CorepresentableBy.homEquiv_symm_comp, CategoryTheory.Functor.CorepresentableBy.uniqueUpToIso_inv, CategoryTheory.Functor.CorepresentableBy.ofIsoObj_homEquiv, CategoryTheory.coreFunctor_map_app_iso_hom. Digest e52e7df330953092. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphic generating family in an abelian category provides generators and relations presentations without projectivity",
+   "results": "8 hits: ModuleCat.enoughProjectives, CategoryTheory.EnoughProjectives.presentation, Module.finitePresentation_of_projective, CategoryTheory.ProjectivePresentation.epi, CategoryTheory.ProjectivePresentation.projective, CategoryTheory.ProjectivePresentation, ModuleCat.projectiveResolution, CategoryTheory.Projective.instSyzygies. Digest 1aa388ec758bb74f. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Induced morphism of partial left adjoint representing objects satisfies theta of a composed with D equals theta of a composed with d and identifies zero loci for an additive functor",
+   "results": "8 hits: CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint, CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint, CategoryTheory.Functor.partialLeftAdjointMap, CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint, CategoryTheory.Functor.partialLeftAdjointHomEquiv_map, CategoryTheory.Functor.partialLeftAdjoint_map, CategoryTheory.Functor.partialRightAdjointMap, CategoryTheory.Functor.partialRightAdjoint_map. Digest 379a9c25ad6e99fe. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "partialLeftAdjointHomEquiv_map_comp|epiIsCokernelOfKernel|exists.*presentation",
+   "results": "16 hits: Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean. Digest de1dcd88e4fd18b0. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a two term presentation from an epimorphic class and transport its relation map to the corepresenters of an additive functor",
+   "results": "0 hits: . Digest 4f53cda18c2baa0c. service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.partialLeftAdjointHomEquiv_map_comp",
+   "results": "1 hits: CategoryTheory.Functor.partialLeftAdjointHomEquiv_map_comp. Digest 4807da2b91ba243e. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphic generating class with natural Hom corepresentations yields for each object a two term cokernel presentation and an induced relation map between the chosen corepresenters, compatible with zero under the natural Hom bijections",
+   "results": "8 hits: CategoryTheory.Injective.syzygies, CategoryTheory.Abelian.epiDesc, CategoryTheory.Injective.d, Module.Presentation.cokernelSolution.isPresentationCore, Module.Presentation.CokernelData.lift, CategoryTheory.Limits.CokernelCofork.IsColimit.ofπ', CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.epi_f, CategoryTheory.NonPreadditiveAbelian.epiIsCokernelOfKernel. Digest 318c0d5e6c692670. ",
+   "date": "2026-10-22",
+   "verdict": "no match: epiIsCokernelOfKernel (Abelian/Basic.lean:475-477) gives the normal-epi input, not existence of the two generators. ProjectivePresentation (Preadditive/Projective/Basic.lean:63-69) requires projectivity absent here. partialLeftAdjointHomEquiv_map_comp (Adjunction/PartialAdjoint.lean:100-106) supplies compatibility for the library-chosen partial representers, not the stated generator presentation with arbitrary supplied theta and zero compatibility. Read PartialAdjoint.lean:49-124 and Yoneda.lean:310-339. The combined statement needs the two cover choices, cokernel argument and relation transport; it is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "epiIsCokernelOfKernel|partialLeftAdjointHomEquiv_map_comp|class Functor.Additive",
+   "results": "{\"t\": \"2026-10-23T14:46:02Z\", \"tool\": \"grep\", \"query\": \"epiIsCokernelOfKernel|partialLeftAdjointHomEquiv_map_comp|class Functor.Additive\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Subcategory.lean\", \"Mathlib/CategoryTheory/Abelian/NonPreadditive.lean\", \"Mathlib/CategoryTheory/Abelian/NonPreadditive.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\"], \"digest\": \"19ab6a5a9d0841b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read PartialAdjoint.lean:49-124 (especially 100-106), Projective/Basic.lean:63-69, Abelian/Basic.lean:470-477, and Yoneda.lean:310-339. epiIsCokernelOfKernel gives only the cokernel input; ProjectivePresentation requires projectivity not assumed here; partialLeftAdjointHomEquiv_map_comp uses library-chosen representers. Arbitrary supplied theta, two cover choices and zero detection require the explicit proof, so this is not a one-line specialization of a returned declaration.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An epimorphic class of objects gives a cokernel presentation and natural corepresenting bijections transport the relation morphism",
+   "results": "{\"t\": \"2026-10-23T14:46:02Z\", \"tool\": \"leansearch\", \"query\": \"An epimorphic class of objects gives a cokernel presentation and natural corepresenting bijections transport the relation morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.epiDesc\", \"CategoryTheory.Limits.cokernel.ofEpi\", \"CategoryTheory.NonPreadditiveAbelian.epiIsCokernelOfKernel\", \"CategoryTheory.Abelian.epiIsCokernelOfKernel\", \"CategoryTheory.Limits.cokernel\", \"CategoryTheory.Limits.cokernel.desc_epi\", \"CategoryTheory.Abelian.comp_epiDesc\", \"CategoryTheory.ObjectProperty.epiModSerre_of_epi\"], \"digest\": \"7cf451488b2542eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read PartialAdjoint.lean:49-124 (especially 100-106), Projective/Basic.lean:63-69, Abelian/Basic.lean:470-477, and Yoneda.lean:310-339. epiIsCokernelOfKernel gives only the cokernel input; ProjectivePresentation requires projectivity not assumed here; partialLeftAdjointHomEquiv_map_comp uses library-chosen representers. Arbitrary supplied theta, two cover choices and zero detection require the explicit proof, so this is not a one-line specialization of a returned declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.partialLeftAdjointHomEquiv_map_comp",
+   "results": "{\"t\": \"2026-10-23T14:46:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.partialLeftAdjointHomEquiv_map_comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.partialLeftAdjointHomEquiv_map_comp\"], \"digest\": \"4807da2b91ba243e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read PartialAdjoint.lean:49-124 (especially 100-106), Projective/Basic.lean:63-69, Abelian/Basic.lean:470-477, and Yoneda.lean:310-339. epiIsCokernelOfKernel gives only the cokernel input; ProjectivePresentation requires projectivity not assumed here; partialLeftAdjointHomEquiv_map_comp uses library-chosen representers. Arbitrary supplied theta, two cover choices and zero detection require the explicit proof, so this is not a one-line specialization of a returned declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A class covering every object by an epimorphism in an abelian category gives a two term presentation and natural Hom bijections transport its relation to corepresenters",
+   "results": "{\"t\": \"2026-10-23T14:46:03Z\", \"tool\": \"leanfinder\", \"query\": \"A class covering every object by an epimorphism in an abelian category gives a two term presentation and natural Hom bijections transport its relation to corepresenters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.hasSeparator\", \"CategoryTheory.IsGrothendieckAbelian.instHasCoseparator\", \"CategoryTheory.Abelian.Ext.mk₀_bijective\", \"CategoryTheory.OrthogonalReflection.corepresentableBy\", \"CategoryTheory.Abelian.preadditiveCoyonedaObj_map_surjective\", \"CategoryTheory.Abelian.has_projective_separator\", \"CategoryTheory.Abelian.has_injective_coseparator\", \"HomologicalComplex.evalCompCoyonedaCorepresentable\"], \"digest\": \"f32891a1db1a5577\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read PartialAdjoint.lean:49-124 (especially 100-106), Projective/Basic.lean:63-69, Abelian/Basic.lean:470-477, and Yoneda.lean:310-339. epiIsCokernelOfKernel gives only the cokernel input; ProjectivePresentation requires projectivity not assumed here; partialLeftAdjointHomEquiv_map_comp uses library-chosen representers. Arbitrary supplied theta, two cover choices and zero detection require the explicit proof, so this is not a one-line specialization of a returned declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectivePresentation|homEquiv_comp|homEquiv_eq",
+   "results": "{\"t\": \"2026-10-23T14:46:49Z\", \"tool\": \"grep\", \"query\": \"ProjectivePresentation|homEquiv_comp|homEquiv_eq\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean\", \"Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean\", \"Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean\", \"Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean\", \"Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Localization/StructuredArrow.lean\"], \"digest\": \"0f08f840b45e0a87\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read PartialAdjoint.lean:49-124 (especially 100-106), Projective/Basic.lean:63-69, Abelian/Basic.lean:470-477, and Yoneda.lean:310-339. epiIsCokernelOfKernel gives only the cokernel input; ProjectivePresentation requires projectivity not assumed here; partialLeftAdjointHomEquiv_map_comp uses library-chosen representers. Arbitrary supplied theta, two cover choices and zero detection require the explicit proof, so this is not a one-line specialization of a returned declaration.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two epimorphic covers P1 to B and P2 to the kernel present B as a cokernel and natural Hom equivalences transfer the presentation map",
+   "results": "{\"t\": \"2026-10-23T14:46:51Z\", \"tool\": \"leanfinder\", \"query\": \"Two epimorphic covers P1 to B and P2 to the kernel present B as a cokernel and natural Hom equivalences transfer the presentation map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.epiIsCokernelOfKernel\", \"CategoryTheory.Abelian.epiDesc\", \"CategoryTheory.NonPreadditiveAbelian.epiIsCokernelOfKernel\", \"CategoryTheory.kernelCokernelCompSequence.instEpiπ\", \"CategoryTheory.Limits.isCokernelEpiComp\", \"CategoryTheory.Limits.kernel.of_cokernel_of_epi\", \"CategoryTheory.Abelian.comp_epiDesc\", \"CategoryTheory.Limits.isCokernelEpiComp_desc\"], \"digest\": \"9a2ed9ba23244919\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read PartialAdjoint.lean:49-124 (especially 100-106), Projective/Basic.lean:63-69, Abelian/Basic.lean:470-477, and Yoneda.lean:310-339. epiIsCokernelOfKernel gives only the cokernel input; ProjectivePresentation requires projectivity not assumed here; partialLeftAdjointHomEquiv_map_comp uses library-chosen representers. Arbitrary supplied theta, two cover choices and zero detection require the explicit proof, so this is not a one-line specialization of a returned declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-partially-defined-module-adjoint",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: The ordinary module lower-shriek adjoint is constructed from its values on free sheaf generators, before deriving it. Re-split of Tag 0793: first paragraph (evaluation and induced map), and second paragraph, sentence choosing an exact presentation.",
+   "via": [
+    "lem-trf-partially-defined-module-adjoint",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-partial-adjoint-generator-presentation",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Tag 0793 into five direct steps: naturality at the identity and additivity give evaluation and zero; two epimorphic covers give the presentation; the abelian normal-epi axiom plus kernel factorization proves its cokernel universal property; inverse bijection defines D, and naturality and injectivity prove compatibility and zero detection. Statement and statement dependencies unchanged. All steps are elementary from the cited definitions and supplied data; no subordinate lemma nodes are needed. No exact project attachment or whole-item Mathlib match was found.",
+  "blueprint": "Inherited ancestor lem-trf-local-term-locality, Proof (1)--(2), through the recorded lower-shriek supporting-input ancestry. Precisely the existing from.place: re-split of Tag 0793, first paragraph (evaluation and induced map), and second paragraph choosing an exact presentation. Current latest blueprint contains no separate node stating this supporting algebraic result. No chapter or unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-03b1f9b33",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-03b1f9b33 (reviewer sub-agent of L); spot-checked: Read the item in full, the statements of both cited nodes, and Stacks homology.tex Tag 0793 lemma-partially-defined-adjoint (~7387-7454). The item is the additive specialisation of the proof's first paragraph (i_P and the identity-evaluation formula, which defines the induced map) and its second (choosing an exact presentation). Statement and stmt_deps are unchanged, and the delivery has no new nodes. Step 1 sets a=id in the given naturality to get theta(u)=R(u)∘i_P; R(0)=0 comes from def-weil-pbc-additive-functor (Hom maps are group homomorphisms). Step 2: kernels exist by def-sp-abelian, two uses of the covering hypothesis give q and r, and q∘d=0. Step 3 is correct: q is a cokernel of some t by the def-sp-abelian axiom 'every epi is a cokernel', t factors through k, and h∘d=0 gives h∘k=0 because r is epi, so h∘t=0 and h factors uniquely through q. Step 4 defines D by the inverse of theta, and naturality with u=a plus step 1 gives the transport formula; the types check. Step 5 gets both directions from theta(0)=0 and injectivity. All elementary marks are justified, and Yoneda is replaced by the explicit calculation. Edge cases checked: B=0, P = all objects (q=id, d=0, D=0), R=0 (L_P≅0), R=id (D=d) and the zero category. Duplicate search over 0793 and partial-adjoint: lem-trf-cokernel-corepresenting-bijection assumes this item's output and does not construct it, and the parent lem-trf-partially-defined-module-adjoint step 1 uses exactly these clauses. No SGA citation. Blueprint from/via is inherited and same_as is []. No repair note, so the re-split rule does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PartialAdjointGeneratorPresentation",
+  "declaration": "CategoryTheory.partialAdjointGeneratorPresentation",
+  "file": "lean/Sheaf/CategoryTheory/PartialAdjointGeneratorPresentation.lean",
+  "statement": "theorem partialAdjointGeneratorPresentation {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [Abelian A] [Abelian B] (R : A ⥤ B) [R.Additive] (P : Set B) (hcover : ∀ Y : B, ∃ p : P, ∃ q : p.1 ⟶ Y, Epi q) (L : P → A) (θ : ∀ (p : P) (X : A), (L p ⟶ X) ≃ (p.1 ⟶ R.obj X)) (hθ : ∀ (p : P) (X X' : A) (a : L p ⟶ X) (u : X ⟶ X'), θ p X' (a ≫ u) = θ p X a ≫ R.map u) : (∀ (p : P) (X : A) (a : L p ⟶ X), θ p X a = θ p (L p) (𝟙 (L p)) ≫ R.map a ∧ θ p X 0 = 0) ∧ ∀ Y : B, ∃ (p₁ p₂ : P) (q : p₁.1 ⟶ Y) (K : B) (k : K ⟶ p₁.1) (r : p₂.1 ⟶ K) (hk : k ≫ q = 0), Epi q ∧ Epi r ∧ Nonempty (IsLimit (KernelFork.ofι k hk)) ∧ (r ≫ k) ≫ q = 0 ∧ (∀ (Z : B) (h : p₁.1 ⟶ Z), (r ≫ k) ≫ h = 0 → ∃! b : Y ⟶ Z, q ≫ b = h) ∧ ∃ D : L p₂ ⟶ L p₁, θ p₂ (L p₁) D = (r ≫ k) ≫ θ p₁ (L p₁) (𝟙 (L p₁)) ∧ (∀ D' : L p₂ ⟶ L p₁, θ p₂ (L p₁) D' = (r ≫ k) ≫ θ p₁ (L p₁) (𝟙 (L p₁)) → D' = D) ∧ ∀ (X : A) (a : L p₁ ⟶ X), θ p₂ X (D ≫ a) = (r ≫ k) ≫ θ p₁ X a ∧ (D ≫ a = 0 ↔ (r ≫ k) ≫ θ p₁ X a = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-927b118b1",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Lean statement exact vs node and Stacks 0793 ¶1-2: abelian A,B (4 independent universes), additive R, P : Set B with epi cover, L, θ with naturality θ(a≫u)=θ a≫R u; conclusions θ a = i≫R a ∧ θ 0 = 0, ∃ p₁ p₂ q K k r with Epi q, Epi r, kernel as Nonempty IsLimit (KernelFork.ofι k hk), (r≫k)≫q=0, cokernel ∃! for arbitrary Z, ∃ D with equation + uniqueness over all D' + transport + zero iff. Orientation/precedence checked; edge cases B=0, q iso, P=Ob B, R=0 covered; same hypothesis encoding as parent isRightAdjoint_of_epi_generating_class; node changes only lean, statement verbatim; docstrings/source/blueprint/5 steps, sorry only. Sole fault H11 same-worker second reading → fixes/lem-trf-partial-adjoint-generator-presentation.report.md (worker report verbatim + independent clause-by-clause reading). No Lean change, no compile."
+ }
+}

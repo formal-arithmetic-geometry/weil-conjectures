@@ -108,7 +108,60 @@
   "def-weil-pbc-proetale-site",
   "def-wf-weil-category"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.cyclotomicUnit",
+     "module": "WeilConjectures.WeilSheaf.TateTwist",
+     "lines": [
+      73,
+      81
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.tateTwistSheafNat",
+     "module": "WeilConjectures.WeilSheaf.TateTwist",
+     "lines": [
+      114,
+      122
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.tateTwistSheaf",
+     "module": "WeilConjectures.WeilSheaf.TateTwist",
+     "lines": [
+      131,
+      137
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.tateTwist",
+     "module": "WeilConjectures.WeilSheaf.TateTwist",
+     "lines": [
+      165,
+      169
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-d-ab-cyclotomic",
  "lean": {
@@ -169,5 +222,15 @@
   "group": "Q12",
   "result": "pass",
   "note": "Read item, 3 stmt_deps, source place, both modules (item + §1(B) WfTateTwist), report, and the used declarations (WeilD/weilScalarExtension, pbcTate*, rootLineMap/signedLineMaps, IsPurRootLimitComparison, pbcConditionalRational, mapOfNatIso). Clauses match: inherited sep/finite-type hyps only; clause 1 = IsIso + projection identity of the actual root-limit map, which by definition underlies rationalLineMap 1 (∃!-pinned to signedLineMaps); clause 2 ∀ m:ℤ, E≤F (E=F, ramified allowed), Nonempty iso in functors to WeilD F, so the Frobenius square is included. The §1(B) repair is justified (upstream record is a Q̄ constant twist on WeilComplex) and faithful: degree-0 signed lines, evaluation-normalized negative maps = H(φ⁻¹,φ), tensor Weil map (φ_K⊗φ_m)∘μ via ∃!-pinned comparisons; the ordinary flat-line tensor instead of the completed tensor is the identification of the item's steps 1/5 and wf_tensor_weil gives only ∃ T W. Only lean fields changed, the item statement matches the file, all helpers are listed, ≤100 chars, sorry only, docstrings with 9 steps, proof-dep imports present, Mathlib ProEt. Advisories: rootLineMap/IsPurRootLimitComparison owners not in stmt_deps (H2 forbids adding them); Nonempty for clause 2 is fine since no citer needs β. No recompile (no changes)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\Lambda\\in\\{E,\\Qlb\\}$, or more generally any admissible coefficient ring, and\nlet $X=X_0\\times_{k_0}k$. The Tate twists $\\Lambda_X(m)$, $m\\in\\mathbf Z$, are the\ninvertible $\\Lambda_X$-modules on $X_{\\mathrm{proét}}$ of [sk-def-sp-tate-twist]: for\n$\\Lambda=E$, $\\cO_{E,X}(1)=\\varprojlim_n(\\cO_E/\\ell^n)_X(1)$ is built from the sheaves\n$\\mu_{\\ell^n,X}$ with transition the $\\ell$-th power map, $E_X(1)$ is obtained by\ninverting $\\ell$, $\\overline{\\mathbf Q}_{\\ell,X}(1)$ by the colimit over $E$,\n$\\Lambda_X(m)$ for $m>0$ is the $m$-fold tensor power, and\n$\\Lambda_X(-m)$ its dual. Each $\\Lambda_X(m)$ carries its canonical Weil structure\n$\\tau_m:\\operatorname{Fr}_X^*\\Lambda_X(m)\\xrightarrow{\\sim}\\Lambda_X(m)$ of\n[sk-def-sf-weil-complexes], induced by the pullback of roots of unity.\n\nThe *Tate twist* of a Weil complex $(K,\\varphi_K)$, $K\\in\\Dbc(X,\\Lambda)$\n([sk-def-sf-weil-complexes], [def-weil-weil-sheaf-complex]), is\n\n$$\n(K,\\varphi_K)(m)=\\bigl(K(m),\\ \\varphi_K\\otimes\\tau_m\\bigr),\\qquad\nK(m)=K\\otimes^{\\mathbf L}_{\\Lambda_X}\\Lambda_X(m),\n$$\n\nwhere $\\varphi_K\\otimes\\tau_m$ is composed with the canonical isomorphism\n$\\operatorname{Fr}_X^*(K\\otimes^{\\mathbf L}\\Lambda_X(m))\\cong\n\\operatorname{Fr}_X^*K\\otimes^{\\mathbf L}\\operatorname{Fr}_X^*\\Lambda_X(m)$. On\nmorphisms of Weil complexes it is $h\\mapsto h\\otimes\\mathrm{id}$. It preserves\nconstructible Weil sheaves, since $\\Lambda_X(m)$ is locally free of rank one.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

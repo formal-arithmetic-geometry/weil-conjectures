@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-point-finite-multiplication-inverse",
+ "kind": "statement",
+ "title": "Multiplication inverse of the specified finite point comparison",
+ "statement": "Fix a finite-field datum D, prime l different from char(D.k), finite E/Q_l, and n >= 0. For every cochain complex K of module sheaves over the constant A_(E,n+1) ring on Spec D.k, the specified finite tensor-unit comparison for any automorphism g of the point on K is the inverse of a complex isomorphism e. For every degree i, site object U, coefficient section b and inverse-image section x, e sends b times the specified tensor-unit comparison of x to c inverse(b) times x, where c is the coefficient structure map. Use the coordinate definitions of [def-pur-point-normalization-coordinates] and comparisons of [def-weil-inverse-image-pullback-comparison]. No freeness or constructibility is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Natural Weil isomorphism; point normalization plan, steps 1--6; Deligne Weil II (1.1.7), pp. 150--151"
+ },
+ "stmt_deps": [
+  "def-pur-point-normalization-coordinates",
+  "def-weil-inverse-image-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Specialize point_automorphism_finite_transport_inverse to an arbitrary point automorphism and an arbitrary complex. Its delta and two inverse equations form the desired isomorphism e. The unique sectionwise specification of inverseImageFiniteComparisonComplex rewrites the tensor-unit input to the existing multiplication coordinate equation.",
+   "uses": [
+    "lem-weil-point-automorphism-derived-transport-inverse",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-automorphism-derived-transport-inverse",
+  "def-weil-inverse-image-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Natural Weil isomorphism; point normalization plan, steps 1--6; Deligne Weil II (1.1.7), pp. 150--151"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A pullback of a sheaf of modules along a ring isomorphism is scalar restriction along its inverse, and the mate of an identity square is identity",
+   "results": "8 hits including SheafOfModules.pullback_id_comp, pullback_comp_id, pullbackPushforwardAdjunction, and restrictScalars; generic ordinary APIs only.",
+   "date": "2026-10-25",
+   "verdict": "no match for the specified pro-etale comparison or derived identity exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a module sheaf along a ring isomorphism is inverse to multiplication; identity square adjunction mate is identity",
+   "results": "8 hits including SheafOfModules.conjugateEquiv_pullbackId_hom, pullback_id_comp, pullback_comp_id and pullbackIso.",
+   "date": "2026-10-25",
+   "verdict": "no match for the specified point-comparison coordinates"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_id_comp|pullback_comp_id|conjugateEquiv_pullbackId_hom|IsIso.*scalarExtension",
+   "results": "14 hits, including Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean lines 144, 204, 209; generic ordinary identities.",
+   "date": "2026-10-25",
+   "verdict": "no match for these named derived coefficient comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFrobeniusTransportNormalization",
+  "date": "2026-10-25",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Natural Weil isomorphism; point normalization step 1",
+   "via": [
+    "lem-pur-point-frobenius-transport-normalization",
+    "lem-pur-twist-frobenius-scalar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointFiniteMultiplicationInverse",
+  "file": "lean/Sheaf/Paper/PointFiniteMultiplicationInverse.lean",
+  "declaration": "WeilConjectures.PointFrobeniusNormalization.pointFiniteMultiplicationInverse",
+  "declarations": [
+   "WeilConjectures.PointFrobeniusNormalization.pointFiniteMultiplicationInverse"
+  ],
+  "statement": "theorem pointFiniteMultiplicationInverse (g : Spec (.of D.k) ⟶ Spec (.of D.k)) [IsIso g] (n : ℕ) (K : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) : ∃ e : ((integralOperationsLevelPullback l E g n).mapHomologicalComplex (.up ℤ)).obj K ≅ ((inverseImageFiniteModules l E g n).mapHomologicalComplex (.up ℤ)).obj K, (∀ (i : ℤ) (U : (Spec (.of D.k)).ProEt) (x : (K.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))) (b : (integralCoefficientSheaf l E (Spec (.of D.k)) n).obj.obj (op U)), (e.hom.f i).val.app (op U) (b • ((inverseImageFiniteComparisonComplex l E g n K).f i).val.app (op U) x) = (inv (inverseImageFiniteCoefficientMap l E g n)).hom.app (op U) b • x) ∧ (∀ (i : ℤ) (U : (Spec (.of D.k)).ProEt) (x : (K.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))) (b : (integralCoefficientSheaf l E (Spec (.of D.k)) n).obj.obj (op U)), (e.hom.f i).val.app (op U) (b • (((integralOperationsLevelPullback l E g n).obj (K.X i)).val.map (proEtaleIsoCommaArrow g U).op (integralOperationsPullbackGenerator l E g n (K.X i) ((proEtaleIsoPostcompose g).obj U) x))) = (inv (inverseImageFiniteCoefficientMap l E g n)).hom.app (op U) b • x) ∧ (inverseImageFiniteComparisonComplex l E g n K = e.inv)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-690b8",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T023236-L-533707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-690b8",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T023236-L-533707",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs clone original (26 defs verbatim, theorem signature identical); pointIdentityExchangeRecipe clauses vs FiniteNormalization/IntegralNormalization fields; item node vs base node"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-completed-pullback-tensor-unit-from-associativity",
+ "kind": "lemma",
+ "title": "Coherent unit equations from associativity",
+ "status": "split",
+ "statement": "Fix a prime ell, a finite coefficient extension E/Q_ell, schemes X,Y, and f:X→Y. Let F and μ be the coherent coefficient-sequence derived pullback and normalized tensor comparison of [def-pur-completed-pullback-tower-realizations]. Assume the usual associativity equation for μ on every triple of derived coefficient-sequence objects. Then there exists an isomorphism ε:F(1_Y)≅1_X such that, for every M, μ_(1,M);(ε⊗id);λ_(FM)=F(λ_M) and μ_(M,1);(id⊗ε);ρ_(FM)=F(ρ_M). Composition is in traversal order. The same ε satisfies both equations, without boundedness, constructibility, or invertibility assumptions.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 07A4 and 0941: the ring unit under pullback, and monoidal unit coherence from an associative invertible tensor comparison."
+ },
+ "proof": [
+  {
+   "text": "Identify the chosen coherent tensor unit with the coefficient ring placed in degree zero. The reference closed symmetric monoidal structure has this unit description. The two tensor-right functors are left adjoint to the same internal-Hom functor; leftAdjointUniq at the reference unit, composed with the two unitors, gives the required identification. The sequence base-change functor is final. Mathlib pullbackObjUnitToUnit gives the ordinary pullback isomorphism for the ring unit, and exact derived pullback commutes with the single functor. Compose these isomorphisms to construct F(1_Y)≅1_X.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-weil-proetale-inverse-image",
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the assumed tensorHom associativity equation to whiskering using id_tensorHom and tensorHom_id. Apply the already-proved generic unit_from_tensor theorem in FinitePullbackTensorUnitRepresentatives to F, μ and the constructed object isomorphism. That theorem obtains ε by full faithfulness of tensoring by F(1), normalizes the right unit equation at 1, and derives both universal unit equations from associativity, naturality and the triangle axiom. Package its two equations with the same ε.",
+   "uses": [
+    "lem-pur-finite-pullback-tensor-unit-representatives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-weil-proetale-inverse-image",
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-pur-finite-pullback-tensor-unit-representatives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 07A4 and 0941: the ring unit under pullback, and monoidal unit coherence from an associative invertible tensor comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor with invertible tensor comparison satisfying associativity and an isomorphism from the image of the tensor unit admits compatible unit constraints",
+   "results": "8 hits including CategoryTheory.unitOfTensorIsoUnit, Functor.CoreMonoidal.εIso and Monoidal.InducingFunctorData.εIso.",
+   "date": "2026-10-27",
+   "verdict": "These require an existing monoidal structure; use the proved generic unit_from_tensor helper of our library to construct the unit constraint."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "12 hits: CoreMonoidal and its constructors, projections and conversions.",
+   "date": "2026-10-27",
+   "verdict": "CoreMonoidal requires both unit equations as input. It does not construct them from associativity."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*tensor|tensor.*unit",
+   "results": "25 hits: tensor units and unitors for particular categories, plus tensor product constructions.",
+   "date": "2026-10-27",
+   "verdict": "No matching normalized coherent inverse-image theorem. Existing library generic helper and ordinary sheaf-module unit API suffice."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The coherent unit step for the normalized derived pullback/tensor comparison; extracted from the completed comparison item after profiling.",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorUnitFromAssociativity",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorUnitFromAssociativity.lean",
+  "declaration": "WeilConjectures.completedPullbackTensor_unit_of_associativity",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensor_unit_of_associativity"
+  ],
+  "statement": "theorem completedPullbackTensor_unit_of_associativity\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (hA : ∀ M N P : coefficientSequenceDerived l E Y,\n    (pullbackTensorSequenceDerived l E f).map\n      ((pullbackTensorCalculus l E Y).systemClosed.monoidal.associator M N P).hom ≫\n      (pullbackTensorSystemComparison l E f).hom.app\n        (M,(pullbackTensorCalculus l E Y).systemClosed.tensor.obj (N,P)) ≫\n      (pullbackTensorCalculus l E X).systemClosed.tensor.map\n        (Prod.mkHom (𝟙 _) ((pullbackTensorSystemComparison l E f).hom.app (N,P))) =\n    (pullbackTensorSystemComparison l E f).hom.app\n      ((pullbackTensorCalculus l E Y).systemClosed.tensor.obj (M,N),P) ≫\n      (pullbackTensorCalculus l E X).systemClosed.tensor.map\n        (Prod.mkHom ((pullbackTensorSystemComparison l E f).hom.app (M,N)) (𝟙 _)) ≫\n      ((pullbackTensorCalculus l E X).systemClosed.monoidal.associator\n        ((pullbackTensorSequenceDerived l E f).obj M)\n        ((pullbackTensorSequenceDerived l E f).obj N)\n        ((pullbackTensorSequenceDerived l E f).obj P)).hom) :\n    ∃ ε : (pullbackTensorSequenceDerived l E f).obj\n        (pullbackTensorCalculus l E Y).systemClosed.monoidal.tensorUnit ≅\n      (pullbackTensorCalculus l E X).systemClosed.monoidal.tensorUnit,\n      ∀ M : coefficientSequenceDerived l E Y,\n        ((pullbackTensorSystemComparison l E f).hom.app\n          ((pullbackTensorCalculus l E Y).systemClosed.monoidal.tensorUnit,M) ≫\n          (pullbackTensorCalculus l E X).systemClosed.tensor.map\n            (Prod.mkHom ε.hom (𝟙 _)) ≫\n          ((pullbackTensorCalculus l E X).systemClosed.monoidal.leftUnitor\n            ((pullbackTensorSequenceDerived l E f).obj M)).hom =\n        (pullbackTensorSequenceDerived l E f).map\n          ((pullbackTensorCalculus l E Y).systemClosed.monoidal.leftUnitor M).hom) ∧\n        ((pullbackTensorSystemComparison l E f).hom.app\n          (M,(pullbackTensorCalculus l E Y).systemClosed.monoidal.tensorUnit) ≫\n          (pullbackTensorCalculus l E X).systemClosed.tensor.map\n            (Prod.mkHom (𝟙 _) ε.hom) ≫\n          ((pullbackTensorCalculus l E X).systemClosed.monoidal.rightUnitor\n            ((pullbackTensorSequenceDerived l E f).obj M)).hom =\n        (pullbackTensorSequenceDerived l E f).map\n          ((pullbackTensorCalculus l E Y).systemClosed.monoidal.rightUnitor M).hom)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T094443-L-229970",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T094443-L-229970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

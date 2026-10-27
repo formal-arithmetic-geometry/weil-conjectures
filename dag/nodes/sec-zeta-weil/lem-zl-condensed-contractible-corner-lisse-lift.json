@@ -1,0 +1,120 @@
+{
+ "id": "lem-zl-condensed-contractible-corner-lisse-lift",
+ "kind": "statement",
+ "title": "Lisse essential surjectivity of a normalized contractible component corner",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, $T$ a w-contractible affine scheme, and $c$ a normalized component corner [lem-zl-component-derived-pullback-square]. For every dualizable $N\\in D(T,\\Lambda)$ there is a dualizable $M\\in D(\\pi_0T,\\Lambda)$ and an isomorphism $c^*M\\cong N$. All coefficient transports and ordinary unbounded derived categories are those of the normalized corner [def-zl-condensed-generic-scalar-model-data].",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(3), construction (4.1)"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-generic-scalar-model-data",
+  "sk-def-sfb-condensed-ring",
+  "def-zl-condensed-scalar-realization",
+  "lem-zl-component-derived-pullback-square"
+ ],
+ "proof": [
+  {
+   "text": "w-contractible lisse evaluation gives the component equivalence on dualizable objects, with its canonical coefficient comparison. Compare the corner's inverse image with that functor using inverse_eq and the uniqueness of adjunction mates. The absolute-test projection normalization identifies the two beta comparisons: their right-adjoint mates are restriction along the same test-object isomorphism. The coefficient_eq field then identifies their coefficient transports. Lift this comparison to ordinary module functors and derive it termwise. Apply essential surjectivity of the lisse equivalence to N. The inverse object is dualizable, and the equivalence counit composed with the comparison gives the required isomorphism. For the empty affine or zero ring both categories have only zero objects.",
+   "uses": [
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-component-derived-pullback-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "lem-zl-component-derived-pullback-square"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 4.13, irreducible case, diagram (4.4) and paragraph following it; Lemma 4.1 and Proposition 4.3(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A dualizable complex of modules on a weakly contractible site is perfect after evaluation and a split pullback has canonical composition and scalar comparisons",
+   "results": "comp_dualTensorHom; LinearMap.IsPerfPair.dualEval; Module.Dual.eval; Module.evalEquiv; HomologicalComplex.instHasBinaryBiproductObjEval. No site or scalar-realization comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "No match for any of the coefficient-compatible site and derived-category steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable condensed sheaf complex over an algebraically closed field is scalar realization of a perfect complex; a section of a profinite component map descends generic trivializations",
+   "results": "CondensedMod.ofSheafProfinite; Condensed.profiniteSolid; Condensed.profiniteFree; LightCondensed.free_internallyProjective_iff_tensor_condition; CondensedMod.ofSheafCompHaus. These construct condensed modules or discuss projectivity, not the asserted derived comparisons.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; Loogle Functor.preimageIso finds the tool used for descent in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "generic_scalar_model|SectionComparison|pointRealization|generic_induced; geometric.*perfect.*model|contractible.*corner|slice.*section.*comparison",
+   "results": "Searched lean/Sheaf, lean/WeilConjectures and Mathlib category-theory sources. Only the parent defines these normalized interfaces; existing evaluation results use a different coefficient presentation. Blueprint search for component section scalar returned zero matching nodes. Blueprint searches for condensed perfect and profinite section also returned zero nodes.",
+   "date": "2026-10-25",
+   "verdict": "Existing general results are cited below; none states this normalized compatibility step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedIrreducibleGenericScalarModel",
+  "date": "2026-10-25",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "HRS Theorem 4.13 local scalar-model input to the field-stage projection-formula paragraph; CondensedContractibleCornerLisseLift",
+   "via": [
+    "lem-zl-condensed-irreducible-generic-scalar-model",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedContractibleCornerLisseLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedContractibleCornerLisseLift.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedGenericScalarModel.contractible_corner_lisse_lift",
+  "statement": "theorem contractible_corner_lisse_lift (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (T : Scheme.{u}) [IsAffine T] [IsWContractibleRing Γ(T, ⊤)] (c : ComponentDerivedSquare.Corner Λ T) (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ.X T))) (hN : Nonempty (HasRightDual N)) : ∃ M : CondensedRing.Evaluation.D ((coherentTopology Profinite.{u}).over (affineComponentSpace T)) (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace T)), Nonempty (HasRightDual M) ∧ Nonempty ((c.derived Λ T).obj M ≅ N)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0223e",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T101212-L-3670642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0223e",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T101212-L-3670642",
+  "kind": "interface",
+  "note": "independent cc review: Moved data block diffed against the clone's original (byte-identical), item node statement and stmt_deps unchanged; the 4 new sorried statements read against the pinned Corner/Slice structures and HRS Lemma 4.1(2), Prop 4.3(3), Thm 4.13 (4.4); item proof steps (splitting, delta, gamma) read against CoverModel fields"
+ }
+}

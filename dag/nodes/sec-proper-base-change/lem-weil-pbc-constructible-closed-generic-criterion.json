@@ -151,5 +151,61 @@
   "kind": "interface",
   "note": "independent Codex review: Delivered Lean signatures match the nodes; proofs, dependencies, source arguments and report agree. All three modules compile cleanly; axiom checks show only allowed axioms plus sorryAx from the named generic-constancy lemma."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.constructible_of_closed_generic"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.constructible_of_closed_generic",
+     "module": "WeilConjectures.AlgebraicGeometry.ConstructibleClosedGenericCriterion",
+     "lines": [
+      23,
+      89
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a Noetherian scheme [def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring, and $F$ a sheaf of $\\Lambda$-modules on its small etale site [def-weil-pbc-etale-site]. Assume that for every closed immersion $i:Z\\to X$ with $Z$ Noetherian, there is a dense open $U\\subseteq Z$ on which $i^*F$ [prop-constructible-pullback] is finite locally constant [def-constructible-finite-locally-constant]. Then $F$ is constructible [def-constructible-constructible]. No target sheaf or monomorphism is assumed, and no Noetherian condition on $\\Lambda$ is needed.",
+  "proof": [
+   {
+    "text": "Induct on closed subsets $C\\subseteq X$ (Noetherian induction: closed subsets satisfy the descending chain condition), proving the strengthened claim that $i^*F$ is constructible for every closed immersion $i:Z\\to X$ with image contained in $C$. Such a $Z$ is Noetherian, being a closed subscheme of the Noetherian $X$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "If $Z$ is empty its sheaves are zero, hence constructible. Otherwise choose the dense open $U\\subseteq Z$ supplied by the hypothesis; it is nonempty. Let $i':Z'\\to Z$ be the reduced closed complement of $U$. The image $C'$ of $i\\circ i'$ in $X$ is a proper closed subset of $C$: the image of a point of $U$ lies in $C$ but not in $C'$, $i$ being injective. By the induction hypothesis applied to $i\\circ i'$, and compatibility of inverse images with composition, the restriction of $i^*F$ to $Z'$ is constructible.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "On $U$ the sheaf $i^*F|_U$ is finite locally constant, hence constructible (one-stratum stratification) [prop-constructible-pullback]. By the open-closed characterization of constructibility [prop-constructible-open-closed], [def-constructible-stratification], $i^*F$ is constructible on $Z$. Finally take $C=X$ and $i=\\mathrm{id}_X$, using $\\mathrm{id}^*F\\cong F$.",
+    "uses": [
+     "prop-constructible-pullback",
+     "prop-constructible-open-closed",
+     "def-constructible-stratification"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

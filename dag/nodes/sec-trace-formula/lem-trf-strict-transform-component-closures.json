@@ -1,0 +1,157 @@
+{
+ "id": "lem-trf-strict-transform-component-closures",
+ "kind": "statement",
+ "title": "Irreducible component closures and dimensions in an arbitrary blowup",
+ "statement": "Let $k$ be a field and let $q:X\\to\\operatorname{Spec}k$ be of finite type, with $X$ reduced [def-pc-reduced-scheme, def-weil-finite-type-morphism]. Let $I$ be a quasi-coherent ideal sheaf with support $C\\subseteq X$, put $X'=I.\\mathrm{strictTransform}(\\mathrm{id}_X)$, and write $\\pi:X'\\to X$ for its projection [def-nagata-global-blowup, def-nagata-strict-transform]. For each irreducible component $W$ of $X$ [def-weil-irreducible-components] put $T(W)=\\overline{\\pi^{-1}(W\\setminus C)}$. Then $V\\subseteq X'$ is an irreducible component if and only if $V=T(W)$ for some irreducible component $W\\subseteq X$ with $W\\setminus C\\ne\\varnothing$. For every such $W$ one has $\\dim T(W)=\\dim W$, with topological Krull dimension [def-kun-topological-krull-dimension]. No component-avoidance hypothesis on the centre, smoothness, characteristic-zero assumption, or Hilbert--Samuel equality is imposed.",
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0804 (lemma-blowing-up-affine), 080E (lemma-strict-transform), and varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic); component-closure synthesis in steps 4--5 of lem-trf-hilbert-samuel-equality-component-rigidity, serving ILO VIII 2.3.13, p.94."
+ },
+ "proof": [
+  {
+   "text": "Finite type over the field makes X Noetherian with finitely many components. Its affine centre ideals are finitely generated. The blowup is proper, hence finite type. Identify its strict-transform presentation with the intrinsic blowup.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "thm-nagata-global-blowup-proper",
+    "def-weil-proper-morphism",
+    "thm-nagata-strict-transform-is-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scheme-theoretic strict transform is the closure of its preserved open, whose projection is isomorphic to U = X minus the centre. The preserved open is reduced, so its schematic closure is reduced and has the topological closure as its support. Each component W meeting U gives the irreducible closure of the lifted W intersect U. These finitely many closures cover, and none contains another: restricting a containment to the preserved open gives containment of distinct components of U. Thus W-prime is a component upstairs if and only if it is one of the asserted closures, with W minus the centre nonempty.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "lemma-nagata-strict-transform-over-complement",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give W and its surviving closure the reduced induced closed subscheme structures. Both are integral and locally finite type over the field. Their nonempty unchanged opens are isomorphic, hence their function fields agree over the field. Compute the dimension on a nonempty affine open using finiteType_domain_ringKrullDim_eq_trdeg, and use equality of dimension with a nonempty open for integral locally algebraic schemes. The two dimensions are equal.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lemma-nagata-strict-transform-over-complement",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-sc-integral-locally-algebraic-opens-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "thm-nagata-global-blowup-proper",
+  "def-weil-proper-morphism",
+  "thm-nagata-strict-transform-is-blowup",
+  "def-nagata-strict-transform",
+  "lemma-nagata-strict-transform-over-complement",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-sc-integral-locally-algebraic-opens-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0804 (lemma-blowing-up-affine), 080E (lemma-strict-transform), and varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic); component-closure synthesis in steps 4--5 of lem-trf-hilbert-samuel-equality-component-rigidity, serving ILO VIII 2.3.13, p.94.",
+  "note": "A grouping of genuine steps of the existing component-rigidity argument; not claimed as a verbatim theorem in ILO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Irreducible components of a blowup are strict transforms of irreducible components avoiding the center and have the same dimension",
+   "results": "8 hits, including preimage_mem_irreducibleComponents_of_isPreirreducible_fiber, image_mem_irreducibleComponents_of_isPreirreducible_fiber, PrimeSpectrum.vanishingIdeal_irreducibleComponents, and genericPoint_eq_of_isOpenImmersion. Open-map component results do not apply to a blowup.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The irreducible components of a blowup are closures of the original components outside the centre and have the same Krull dimension",
+   "results": "8 hits: topologicalKrullDim, irreducibleComponents, irreducibleComponent, IsClosedEmbedding.topologicalKrullDim_le, topologicalKrullDim_subspace_le, irreducibleComponent_property, irreducibleComponent_mem_irreducibleComponents, irreducibleComponents_eq_singleton. No blowup or component-dimension equality theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform.*(component|KrullDim)|irreducibleComponents.*strictTransform|topologicalKrullDim.*closure",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HilbertSamuelEqualityComponentRigidity",
+  "date": "2026-10-26",
+  "group": "Z9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. This lemma isolates steps 4--5 of lem-trf-hilbert-samuel-equality-component-rigidity.",
+   "via": [
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictTransformComponentClosures",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTransformComponentClosures.lean",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.strictTransform_component_closures",
+  "statement": "theorem strictTransform_component_closures {k : Type u} [Field k] {X : Scheme.{u}} (q : X ⟶ Spec (.of k)) [IsReduced X] [LocallyOfFiniteType q] [QuasiCompact q] (I : X.IdealSheafData) : (∀ W' : Set (I.strictTransform (𝟙 X)), W' ∈ irreducibleComponents (I.strictTransform (𝟙 X)) ↔ ∃ W : Set X, W ∈ irreducibleComponents X ∧ (W \\ (I.support : Set X)).Nonempty ∧ W' = closure (strictTransformToSource (𝟙 X) I.blowupMap I.support.compl ⁻¹' (W \\ (I.support : Set X)))) ∧ ∀ W : Set X, W ∈ irreducibleComponents X → (W \\ (I.support : Set X)).Nonempty → topologicalKrullDim (closure (strictTransformToSource (𝟙 X) I.blowupMap I.support.compl ⁻¹' (W \\ (I.support : Set X)))) = topologicalKrullDim W",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261026T093140-L-3543842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261026T093140-L-3543842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

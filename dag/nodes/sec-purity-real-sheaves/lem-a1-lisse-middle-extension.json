@@ -181,7 +181,116 @@
   "def-wf-middle-extension"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.exists_lowerStar_iso_directImage_of_isFinite",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension",
+     "lines": [
+      155,
+      207
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app",
+     "module": "WeilConjectures.WeilSheaf.MiddleExtension",
+     "lines": [
+      119,
+      139
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsLisse.nonempty_iso_directImage_upperStar",
+     "module": "WeilConjectures.WeilSheaf.MiddleExtension",
+     "lines": [
+      141,
+      158
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      184,
+      200
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-native-weil-shriek-composition",
+      "prop-functor-package"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      149,
+      161
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      218,
+      243
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "prop-functor-package",
+      "lem-zl-morphism-open-closed-reduction"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekOperations",
+     "lines": [
+      95,
+      114
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-i-real-boundary",
  "split_report": {
@@ -265,5 +374,25 @@
   "group": "Q132",
   "result": "pass",
   "note": "Node diff only adds lean; lean.statement verbatim (file 719-720); all 12 declarations listed. Clause match: FiniteFieldDatum/l prime/hl/Qbar Type(u+1) as in the recorded curveMiddleExtension; geometry = the existing MiddleExtensionCurve bundle, no extra hypotheses; F : c.whole.LisseSheaf = LisseAlgebraicSheaf on all of C (whole is a real U:=C, j:=id construction); unit = actual levelwise Etale.upperStarLowerStarAdjunction unit (whiskerRight ℕᵒᵖ), ordinary Etale.lowerStar, realized by the def-wf-middle-extension pipeline (middleExtensionLevelFunctor, lim, single 0, pbcStageLocalization, StageSystem.ι); conclusion IsIso in pbcQbarCategory, neither stronger nor weaker. No hollow defs; only two sorry theorems (_mem, true and no data choice, same pattern as the accepted middleExtensionIntegralComplex_mem; main thm), both with proof docstrings; docstrings carry source place and blueprint tag; universes unchanged; no pro-etale substitute. Edge cases empty/id/disconnected/F=0/n=0/torsion checked. nt_compile.py --json on snapshot vs side overlay: rc 0, no errors, 7.6 s (run twice). Minor: worker search omitted upstream ProEtale IsAdicLisseSheaf and WeilSheaf.IsLisse recovery theorems; they use other coefficient models, so not duplicates and attaching them would be a forbidden pro-etale substitution; no action needed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "If $\\mathcal F$ is lisse on a smooth curve $C_0$ and\n$j:U_0\\hookrightarrow C_0$ is dense, then the adjunction map\n\n$$\n\\mathcal F\\xrightarrow{\\sim}j_*j^*\\mathcal F\n$$\n\nis an isomorphism.",
+  "proof": [
+   {
+    "text": "The assertion is clear on $U_0$. At a removed point, lissity on\n$C_0$ makes the local inertia action trivial, so the invariant-stalk\nformula of [lem-wf-boundary-stalk-invariants] identifies the\ntarget stalk with the original stalk: $(j_*j^*\\mathcal F)_{\\bar x}= ((j^*\\mathcal F)_{\\bar\\eta})^{I_x}=(\\mathcal F_{\\bar x})^{I_x}= \\mathcal F_{\\bar x}$, the last equality because $I_x$ acts trivially\non the stalk of a lisse sheaf. The map is the naturality of the\nadjunction at every geometric point. Both sides are constructible\n($Rj_*$ preserves $\\Dbc(-,\\Qlb)$, [sk-thm-sf-ctf-stability]), so the kernel and the\ncokernel of the map are constructible ([sk-lem-coefficient-heart] (1)). Geometric stalks are\nexact (the pullback to a geometric point is exact, [det-prop-sfb-module-pullback-exact-main], and\nits global sections are exact because every pro-étale cover of the spectrum of an\nalgebraically closed field has a section, [sk-prop-pe-condensed-point]), so the kernel and the\ncokernel have zero stalks. A constructible $M$ with zero stalks vanishes: for each stratum\n$a:S\\hookrightarrow C$ of the filtration of [sk-lem-coefficient-heart] (3), $a^*M$ is lisse\nwith zero stalks, hence $a^*M=0$ by [lem-wf-lisse-stalk-vanishing] (2), so every subquotient\n$a_!(a^*M)$ vanishes and $M=0$. Hence the map is an isomorphism.",
+    "uses": [
+     "lem-wf-boundary-stalk-invariants",
+     "sk-lem-coefficient-heart",
+     "lem-wf-lisse-stalk-vanishing"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

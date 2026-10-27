@@ -1,0 +1,154 @@
+{
+ "id": "lem-sf-p1-presentation-exchange",
+ "kind": "statement",
+ "title": "Canonical exchange under an isomorphism over the projective-line base",
+ "statement": "Let A be a finite commutative ring, S and X schemes, f:X→S proper, and i:X≅ProjectiveLine(S) with i.hom followed by q equal to f, where q is the projective-line projection. Write p₁,p₂ for the projections of ProjectiveLine(S)×ₛProjectiveLine(S), r₁,r₂ for those of X×ₛX, and j=i×ₛi. Use the derived module-sheaf pullbacks, ordinary direct images, and compact-support direct images of def-sf-p1-integral-transport-data. Let β:j* followed by Rr₂! ≅ Rp₂* followed by i* be secondProjectionComparison, obtained from projectionComparison by reducing the true projection. Let δ be properExchange for the self-product square of q; let σ:i* followed by r₁* ≅ p₁* followed by j* be the pullback comparison of firstProjectionSquare; let e:Rf! followed by f* ≅ r₁* followed by Rr₂! be TraceDiagonalDatum.baseChangeIso; and let c:f*≅q* followed by i* be leftDerivedUpperStarComp for i;q=f. For every derived complex B on ProjectiveLine(S), define g_B:Rf!(i*B)→Rq*(B) as proper forget-supports at i*B, then the inverse direct-image composition comparison for i;q=f, then Rq* applied to pushPull at B. Here pushPull is the constructed isomorphism Ri* i*≅Id, not an arbitrary equivalence counit. Then β at p₁*B, followed by i* applied to δ inverse at B, equals Rr₂! applied to σ inverse at B, followed by e inverse at i*B, f* applied to g_B, and c at Rq*B. All compositions are in the written order. This identity holds for arbitrary B and involves no Tate exponent, twist transport, trace arrow, splitting, or diagonal class.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The paragraphs identifying t_p1 and t_p2 with base change of t_q, using qp1=qp2 and the composite-adjunction counit."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data",
+  "lem-sf-p1-chart-exchange",
+  "lem-sf-p1-coordinate-line-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Prove compatibility of compact-support exchange with proper forget-supports for an arbitrary Cartesian square of proper vertical maps. Use the chosen compactification, its pulled-back compactification, the proved refinement/forget-supports equation, and the proved compactification base-change/forget-supports equation. Typed private intermediate equations keep the chosen compactification and derived category interfaces fixed. This is the general private argument already used in ProperSelfExchangeForgetSupports.",
+   "uses": [
+    "def-sf-p1-integral-transport-data",
+    "lem-sf-proper-refinement-forget-supports"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For morphisms a:X→Y, b:Y→Z and c:X→Z with a;b=c, consider the commutative square with top a, left c, right b and bottom id_Z. In that square, the inverse-image square comparison is c* of the identity pullback comparison followed by the pullback compositor for a;b. This follows from leftDerivedUpperStarComp_id_right_hom_app. Transpose the ordinary exchange map along c* adjoint Rc*. The conjugate direct-image compositor and naturality of the pullback compositor reduce the equality to the counit naturality for b and the left triangle for a. Thus ordinary exchange is the identity pullback comparison, then Rb* of the unit for a, then direct-image composition.",
+   "uses": [
+    "def-sf-p1-integral-transport-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the preceding identity to a=i.hom and b=q. Postcompose it by presentationTrace. Cancel the direct-image compositor with its inverse and apply the existing proved unit_comp_pushPull. The result is exactly the identity pullback comparison at Rq*B.",
+   "uses": [
+    "def-sf-p1-integral-transport-data",
+    "lem-sf-iso-pushpull-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derivedBaseChangeMap_cube to the projective-line self-product square, the two projection squares induced by productMap, the self-product square of f, and the two copies of the square i;q=f over the identity. Precompose with the invertible projective and projection exchanges. Substitute the preceding presentationTrace identity and the identity-square comparison, then cancel the ordinary f exchange. This proves the ordinary presentation exchange equation, with no compact-support functors remaining.",
+   "uses": [
+    "def-sf-p1-integral-transport-data",
+    "lem-kun-proper-base-change-torsion-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand secondProjectionComparison at the first-coordinate pullback of B. First transport the whole proper comparison along the equality projection(f,true)=snd using a heterogeneous equality, then take components. The fixed true-projection equality contributes the identity; the remaining factors are proper forget-supports and inverse projection exchange. Substitute the ordinary presentation equation. Naturality moves the proper comparison across the inverse first-projection pullback square comparison. The inverse of the proved compact-support/ordinary exchange compatibility replaces the remaining two factors by inverse compact-support exchange followed by f* of proper forget-supports. Combine the two f* maps by functoriality. These are exactly the original displayed factors, without changing any hypothesis or public signature. For the compact-support compatibility expose baseChangeIso.hom and properExchange.hom at the natural-transformation level first, then evaluate the raw proper-compatibility equation. Specialize a proved generic categorical family only after fixing all functors, natural isomorphisms, and their compatibility equations. This keeps the proof independent of expensive component-level definitional reductions.",
+   "uses": [
+    "def-sf-p1-integral-transport-data",
+    "lem-kun-proper-base-change-torsion-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-p1-integral-transport-data",
+  "lem-sf-proper-refinement-forget-supports",
+  "lem-sf-iso-pushpull-unit-normalization",
+  "lem-kun-proper-base-change-torsion-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Canonical exchange and composite-adjunction counits in the second-coordinate calculation; fully proved in Lean by proper forget-supports compatibility, the identity-base square calculation, existing pushPull unit normalization, and derivedBaseChangeMap_cube."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The base change mate is compatible with horizontal equivalences and direct image composition for an isomorphism",
+   "results": "Found mateEquiv_hcomp, mateEquiv_vcomp and mateEquiv_square; generic mate tools do not include the scheme and compact-support comparison normalizations.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients, no exact result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_conjugateEquiv",
+   "results": "Found unit_conjugateEquiv in Mathlib.CategoryTheory.Adjunction.Mates; it gives the generic mate-unit equation, not the geometric comparison.",
+   "date": "2026-10-26",
+   "verdict": "Ingredient only."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(vComp|hComp)",
+   "results": "Found the mate composition sections and applications. Local rg additionally inspected BaseChangeCube and the private normalized shifted-line composition proof in SfP1ChartExchange.",
+   "date": "2026-10-26",
+   "verdict": "No matching public geometric equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition coherence of derived inverse image and proper base change natural isomorphisms",
+   "results": "Eight hits, including Scheme.Modules.pseudofunctor_mapComp_inv_tau_l, sheafPushforwardContinuousComp inverse components, and general pseudofunctor composition coherence. No proper compact-support comparison or normalized finite Tate-line statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; retain the proved concrete normalization and categorical pasting calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceTransportTrue",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-p1-adjunction",
+   "place": "The two-coordinate comparison calculation: Canonical exchange under an isomorphism over the projective-line base.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-true"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1PresentationExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1PresentationExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.presentationExchange",
+  "statement": "theorem presentationExchange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]\n    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (B : DerivedCategoryModule A (ProjectiveLine S)) :\n    (secondProjectionComparison A f i hi).hom.app\n        ((ordinaryFinitePullback A (projectiveLineDiagonalProjection S false)).obj B) ≫\n      (ordinaryFinitePullback A i.hom).map\n        ((properExchange A (projectiveProjectionSquare S true)).inv.app B) =\n    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (pullback.snd f f)).map\n        ((derivedSquareUpperStarIso (ModuleCat.{u + 1} A)\n          (firstProjectionSquare f i hi).toCommSq).inv.app B) ≫\n      (TraceDiagonalDatum.baseChangeIso (Λ := A) f).inv.app\n        ((ordinaryFinitePullback A i.hom).obj B) ≫\n      (ordinaryFinitePullback A f).map\n        ((rightDerivedLowerShriekIsoRightDerivedLowerStar\n            (ModuleCat.{u + 1} A) f).hom.app\n            ((ordinaryFinitePullback A i.hom).obj B) ≫\n          presentationTrace A f i hi B) ≫\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i.hom\n        (ProjectiveLine S ↘ S) f hi.symm).hom.app\n          ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj B)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SfP1Transport.secondProjectionComparison",
+   "AlgebraicGeometry.Etale.SfP1Transport.presentationExchange",
+   "AlgebraicGeometry.Etale.SfP1Transport.secondProjectionShriek_eq",
+   "AlgebraicGeometry.Etale.SfP1Transport.secondProjectionShriek_hom_app"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T094532-L-240078",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

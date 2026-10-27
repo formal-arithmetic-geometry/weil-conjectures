@@ -1,0 +1,126 @@
+{
+ "id": "lem-pd-section-resolving-oplax-edge-identifications",
+ "kind": "statement",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "title": "Six resolving oplax model edge squares",
+ "statement": "SectionEdges Λ f μ P Q H",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E; split from lem-pd-section-resolving-oplax-model-edges"
+ },
+ "stmt_deps": [
+  "def-pd-section-resolving-oplax-constraint-data"
+ ],
+ "proof": [
+  {
+   "text": "Resolve each arbitrary section complex by a flat-term K-flat complex. Construct the internal flat K-flat resolution and transfer it through the fixed exact section equivalence; section_kflat_tensor_comparison identifies its resolving property. Form the two natural transformations on cochain pairs whose components are the two sides of the representative equation. They agree on resolving pairs by h. Naturality along the pair of resolution maps extends their equality to every pair, since the source functor sends this pair to an isomorphism.",
+   "uses": [
+    "lem-pd-section-kflat-tensor-comparison",
+    "lem-sfb-abstract-kflat-resolution",
+    "def-pd-section-derived-realization",
+    "def-pd-section-total-oplax-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the six prescribed vertex maps. The source associator edge is the normalized localization associator law followed by naturality of epsilon. For the two outer splitting edges use naturality of mu in the unresolved modelTensor input and the all-pairs representative equation. For the two inner splitting edges use that representative equation at the inner pair and naturality of the target modelTensor. Tensor bifunctoriality identifies all composites with the fixed vertices. The final associator edge is naturality in the three epsilon maps followed by the target normalized localization associator law.",
+   "uses": [
+    "lem-pd-section-localization-associativity",
+    "def-pd-section-representative-tensor-arrow",
+    "lem-sfb-oplax-monoidal-of-lax-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-section-kflat-tensor-comparison",
+  "lem-sfb-abstract-kflat-resolution",
+  "def-pd-section-derived-realization",
+  "def-pd-section-total-oplax-comparison-data",
+  "lem-pd-section-localization-associativity",
+  "def-pd-section-representative-tensor-arrow",
+  "lem-sfb-oplax-monoidal-of-lax-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU, 07A4 and 0G7E; explicit six-edge calculation, extending the representative equation to all complexes by naturality along resolving resolutions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "resolving K-flat tensor closure and pullback preservation for section complexes",
+   "results": "No exact project-specific combined theorem found; generic tensor and pullback APIs only.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlatIndependentCoefficients",
+   "results": "Generic K-flat declarations found, but no theorem with the prescribed section closure conclusion.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "section_resolving_oplax|ResolvingClosure|SectionEdges",
+   "results": "Only the assigned modules and their parent use these predicates.",
+   "date": "2026-10-27",
+   "verdict": "no existing match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionResolvingOplaxModelEdges",
+  "date": "2026-10-27",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-section-resolving-oplax-model-edges",
+   "place": "Strict decomposition of its resolving-closure and edge-identification conjuncts",
+   "via": [
+    "lem-pd-section-resolving-oplax-model-edges"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionResolvingOplaxEdgeIdentifications",
+  "file": "lean/Sheaf/Paper/SectionResolvingOplaxEdgeIdentifications.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.section_resolving_oplax_edge_identifications",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.section_resolving_oplax_edge_identifications"
+  ],
+  "statement": "theorem section_resolving_oplax_edge_identifications {X Y : Scheme.{u}} (f : X ⟶ Y) (μ : SectionTensorArrow Λ f) (v : (derivedPullback Λ f).obj (DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ Y) ℤ))) ⟶ DerivedCategory.Q.obj (𝟙_ (CochainComplex (modules Λ X) ℤ))) (h : SectionHypotheses Λ f μ v) (P Q H : CochainComplex (modules Λ Y) ℤ) : SectionEdges Λ f μ P Q H",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261027T012942-L-2351326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T034716-L-3677670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

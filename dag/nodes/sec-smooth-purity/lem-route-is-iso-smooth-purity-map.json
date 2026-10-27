@@ -1,0 +1,245 @@
+{
+ "id": "lem-route-is-iso-smooth-purity-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "via": [
+    "def-pur-condensed-smooth-purity-iso",
+    "nt-target-smooth-purity-qbar"
+   ],
+   "place": "Purity transport proof Steps 1–3: normalized finite diagonal/deformation maps, reconstructed condensed adjunction comparison, and its counit transpose at the coefficient unit"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Blueprint `sk-thm-sp-qbar`: **smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an is",
+ "statement": "Let $\\ell$ be a prime and $k$ a field of characteristic $p>0$ with $p\\ne\\ell$. Let $X,Y$ be separated finite-type $k$-schemes and let $f:X\\to Y$ be a $k$-morphism smooth of pure relative dimension $d\\in\\mathbf N$ [sk-def-sfb-dc-setting, def-sbc-smooth-morphisms]. Put $\\Omega=\\overline{\\mathbf Q}_\\ell$ and $B_T=p_T^*\\underline\\Omega$, where $\\underline\\Omega$ is the finite-extension-valued condensed coefficient ring [prop-weil-pbc-qbar-condensed-two-colimit]. Write $\\mathcal C_T\\subset D(\\operatorname{Mod}_{B_T})$ for its full bounded constructible category, $F=Rf_!:\\mathcal C_X\\to\\mathcal C_Y$ for the chosen compactification functor [sk-def-sfb-dc-lower-shriek], and $G=Rf^!$ for its chosen right adjoint, with unit $\\eta$ and counit $\\varepsilon$ [sk-def-sfb-dc-upper-shriek]. Let $T_d\\in\\mathcal C_X$ be the shifted Tate object whose underlying complex is $\\mathrm{tateTwistDerived}(X,\\ell,d)[2d]$ [def-pur-condensed-tate-twists]; it lies in $\\mathcal C_X$ because $\\ell$ is invertible on $X$ [lem-route-bounded-constructible-tate-twist-derived-of-invertible].\n\nUse the normalized smooth trace constructed as follows, fixing its meaning rather than choosing an arbitrary morphism. For $n\\geq1$ put $L_n=(\\mathbf Z/\\ell^n\\mathbf Z)_Y$ and $M_n=(\\mathbf Z/\\ell^n\\mathbf Z)_X(d)[2d]$, with their quotient and root-power transitions and the diagonal/deformation purity maps $\\phi_n:M_n\\xrightarrow{\\sim}Rf_n^!L_n$ [lem-pur-finite-smooth-adjunction-general-base]. Let $L=R\\varprojlim L_n$, $M=R\\varprojlim M_n$ be the normalized integral objects [lem-pur-condensed-tate-integral-tower], and $U_T$ the integral-to-condensed realization of [lem-pur-condensed-exceptional-reconstruction]. Use its specified counit-preserving comparison $c_0:U_XM\\xrightarrow{\\sim}G(U_YL)$. Let $u:U_YL\\xrightarrow{\\sim}\\mathbf1_Y$ and $a:U_XM\\xrightarrow{\\sim}T_d$ be the canonical unit and Tate comparisons of [lem-pur-condensed-tate-realization], read in the full constructible categories. Put $c=G(u)\\circ c_0$ and define\n$$t_f=\\varepsilon_{\\mathbf1_Y}\\circ F(c)\\circ F(a^{-1}):F(T_d)\\longrightarrow\\mathbf1_Y.$$\nThis is the normalized smooth trace denoted $\\mathrm{smoothTrace}\\,\\ell\\,f\\,d$ in the upstream construction. Its adjoint\n$$\\alpha_f=\\operatorname{Hom}_{F\\dashv G}(t_f):T_d\\longrightarrow G\\mathbf1_Y,$$\nnamely $\\mathrm{smoothPurityMap}\\,\\ell\\,f\\,d$, is an isomorphism in $\\mathcal C_X$.",
+ "source": {
+  "document": "literature/upstream-master-20261016/WeilConjectures/SmoothPurity/Defs.lean",
+  "place": "def-pur-condensed-smooth-purity-iso: the Lean of this node (declared in its module WeilConjectures.SmoothPurity.Defs) reaches AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap, a sorry on the sorry route of batch3, batch4 with no node; Lean: upstream file lean/WeilConjectures/SmoothPurity/Defs.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap (module WeilConjectures.SmoothPurity.Defs, lines 141-144, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sbc-smooth-morphisms",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "sk-def-sfb-dc-lower-shriek",
+  "sk-def-sfb-dc-upper-shriek",
+  "def-pur-condensed-tate-twists",
+  "lem-route-bounded-constructible-tate-twist-derived-of-invertible",
+  "lem-pur-finite-smooth-adjunction-general-base",
+  "lem-pur-condensed-tate-integral-tower",
+  "lem-pur-condensed-exceptional-reconstruction",
+  "lem-pur-condensed-tate-realization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-finite-smooth-adjunction-general-base] to this $k,f,d$. It gives the actual diagonal/deformation isomorphisms $\\phi_n$ and the exceptional coefficient comparisons, including their quotient cocycle. By [lem-pur-condensed-tate-integral-tower] their sources and the units form normalized towers with compatible etale-origin witnesses, constructible cohomology and common bounds; their derived limits $M,L$ are completed integral constructible with the required canonical reductions. In particular every $M_n$ is concentrated in the single degree $r=-2d$. The native Over(Spec k) instantiation is now proved by the private helper smoothTrace_reconstructionInputs: it installs the two scheme-over structures, transports the six finiteness instances from X.hom and Y.hom, uses Over.w f for the morphism-over instance, derives positive characteristic from primality, and applies condensedTateIntegralTower. Its result retains the finite diagonal/deformation system and normalized Tate/unit reconstructions. No witness is extracted into a definition. Further native finite glue is proved by smoothTrace_finiteQuotientSquare: the supplied ReductionData.pro_purity square is composed with the coefficient-unit reduction, pro_natural moves that unit reduction across the lower-level gamma, and lem-pur-finite-source-unit-reduction identifies the remaining source arrow with the actual root tensor quotient. This proves the specified finite gamma quotient square, including equal levels, without asserting that the unconstructed smoothTrace already realizes it. The new smoothTrace_normalizedFiniteSystem then extracts the positive Level family and its ReductionData from that same native reconstruction result, reindexes the levels by n+1, proves all of these quotient squares by the preceding helper, and retains ReconstructionResult for the identical compactification and finiteness witnesses. Thus the actual supplied finite system, its unit quotient squares, and the theorem reconstructing these inputs are simultaneously available in Lean, with witnesses extracted only inside a proof. The native finite inverse square is now proved by smoothTrace_gammaUnit_isIso and smoothTrace_finiteInverseQuotientSquare: finite purity at the constructible unit makes gammaUnit invertible; cancel the scalar image of the upper gamma, apply the already proved forward quotient square, and cancel the lower gamma. This retains the actual root quotient map, including equal levels.",
+   "uses": [
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "lem-pur-condensed-tate-integral-tower",
+    "lem-pur-finite-source-unit-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1–2: finite diagonal/deformation purity and normalized integral towers"
+   }
+  },
+  {
+   "text": "Apply case (b) of [lem-pur-condensed-exceptional-reconstruction] with $L,M_\\bullet,\\phi_n$ from Step 1 and $r=-2d$. All normalization, intertwining, constructibility, common-bound and completed-integral hypotheses were supplied there. This yields the specified isomorphism $c_0:U_XM\\to G(U_YL)$ for the actual bounded constructible condensed right adjoint. Its counit is induced by the finite counits, so this is the normalized comparison used in the trace, with no arbitrary choice of a purity witness. The native representability-to-isomorphism step is now proved by smoothTrace_representingTranspose_isIso, before the disputed instance: naturality identifies postcomposition by the actual adjunct with the specified representing Hom bijection followed by the actual adjunction bijection. The Yoneda criterion then proves invertibility, without assuming any comparison isomorphism. The inverse compatibility of the actual reconstructed gamma maps is now proved by smoothTrace_reconstructedInverseQuotientSquare. Its hypothesis is the previously supplied IdentifiesExceptional for the actual derived limit. The conclusion says that the scalar image of the higher inverse gamma followed by the canonical reduction normalization equals the actual finite exceptional reduction followed by the lower inverse gamma. Cancel the invertible scalar image of the higher gamma, use the forward reconstructed square, and cancel the lower inverse. Thus both directions of the reduction-system comparison have actual Lean proofs. Transport from this integral coefficient presentation to the exceptional reconstruction Context and construction of the chosen smoothTrace still remain.",
+   "uses": [
+    "lem-pur-condensed-exceptional-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2–3: reconstruct the counit-preserving condensed exceptional comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-condensed-tate-realization] to $M$ on $X$ and to $L$ on $Y$ with $d=0$. Its completed-integral and canonical-reduction hypotheses hold by Step 1. This gives $a:U_XM\\xrightarrow{\\sim}T_d$ and $u:U_YL\\xrightarrow{\\sim}\\mathbf1_Y$. These ambient comparisons lift to the full constructible categories: lift each arrow and its inverse by fullness; faithfulness then lifts both inverse equations. The full-subcategory assertion is part of [prop-weil-pbc-qbar-condensed-two-colimit]. Thus $c=G(u)\\circ c_0$ is an isomorphism, with inverse $c_0^{-1}\\circ G(u^{-1})$. The full-faithfulness and inverse-composition glue is now proved in smoothPurityMap_of_reconstructed_trace. Given the actual realized object M, its ambient Tate realization a, the constructible comparison c (including the target-unit factor), and the specified trace formula, lift a with the existing fully faithful inclusion, construct e = lift(a)^(-1) followed by c, identify the actual adjunct with e.hom, and prove that its ambient inverse is mapIso(c.symm) followed by a. The geometric construction of c and the trace formula are still required inputs. The helper smoothTrace_from_representing_pairing now constructs this comparison from an explicit representing pairing t:F(M)->L, its Hom bijections, the ambient Tate identification a and target-unit identification u. It lifts a by full faithfulness, obtains c0 as the actual transpose of t, proves c0 invertible by the preceding Yoneda argument, and forms e=lift(a)^(-1);c0;G(u). The inverse adjunction law and naturality prove F(e);epsilon=F(lift(a)^(-1));t;u. This is actual Lean construction, with no comparison selected from a bare existence theorem. The geometric pairing, Tate and target-unit identifications remain inputs. The private smoothTrace_normalizedComparison_unique now strengthens the formal assembly to uniqueness for the supplied representing pairing and its specified source and target isomorphisms. It constructs e from the actual transpose and proves uniqueness by injectivity of the inverse adjunction Hom equivalence. smoothTrace_from_representing_pairing now uses that result, retaining precisely its original statement and trace formula. This does not choose a geometric pairing from a mere existence assertion. The existing smoothPurityMap_of_reconstructed_trace proof now names its lifted isomorphism and composite and proves its two equations separately, preserving exactly the prior result; this avoids expensive elaboration of the nested constructor.",
+   "uses": [
+    "lem-pur-condensed-tate-realization",
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 2: identify the reconstructed Tate object and coefficient unit"
+   }
+  },
+  {
+   "text": "Set $h=c\\circ a^{-1}:T_d\\to G\\mathbf1_Y$. The defining trace is $t_f=\\varepsilon_{\\mathbf1_Y}\\circ F(h)$. For the adjunction of [sk-def-sfb-dc-upper-shriek], its transpose is $G(t_f)\\circ\\eta_{T_d}$. Naturality of $\\eta$ and the triangle identity give\n$$G(t_f)\\circ\\eta_{T_d}=G(\\varepsilon_{\\mathbf1_Y})\\circ GF(h)\\circ\\eta_{T_d}=G(\\varepsilon_{\\mathbf1_Y})\\circ\\eta_{G\\mathbf1_Y}\\circ h=h.$$\nHence $\\alpha_f=c\\circ a^{-1}$ for this specific trace, not just for some trace with isomorphic source. The formal passage from this explicit counit formula to invertibility is proved in the source module by the private helper isIso_smoothPurityMap_of_trace_formula: it applies homEquiv to the inverse hom-equivalence formula, obtains alpha_f=h, and transports IsIso along that equality. The helper takes the comparison isomorphism and trace equality explicitly; it neither constructs nor chooses them. The geometric comparisons and normalized trace formula in the preceding steps remain to be supplied. The existing Lean attachment also still omits the intended smoothness binder, as recorded by the statement dispute in the source module and the B4 report. The general identity without invertibility is proved by smoothPurityMap_eq_of_trace_formula; isIso_smoothPurityMap_of_trace_formula now consumes this proved identity. The reconstructed isomorphism helper constructs its e before the disputed instance is declared, so this part does not use that instance. The private helper isIso_smoothPurityMap_of_representing_pairing now combines that constructed e and its counit formula with an explicit equation identifying the chosen smoothTrace with the realized pairing. It proves invertibility of the actual smoothPurityMap without assuming a geometric comparison isomorphism. The actual trace definition and this geometric identification still require construction; no original hole is claimed closed.",
+   "uses": [
+    "sk-def-sfb-dc-upper-shriek"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 3: counit-compatible identification with the chosen exceptional adjoint"
+   }
+  },
+  {
+   "text": "The inverse of $\\alpha_f=c\\circ a^{-1}$ is $\\beta_f=a\\circ c^{-1}$. Indeed $\\beta_f\\circ\\alpha_f=a\\circ c^{-1}\\circ c\\circ a^{-1}=1_{T_d}$ and $\\alpha_f\\circ\\beta_f=c\\circ a^{-1}\\circ a\\circ c^{-1}=1_{G\\mathbf1_Y}$. These equations hold in $\\mathcal C_X$ itself, proving the requested $\\operatorname{IsIso}(\\mathrm{smoothPurityMap}\\,\\ell\\,f\\,d)$. The inverse formula for the actual defined smoothPurityIso, conditional on the explicitly supplied reconstructed trace formula, is proved by smoothPurityIso_eq_of_reconstructed_trace. No original sorry is closed by this partial formalization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 3: the two inverse equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-smooth-adjunction-general-base",
+  "lem-pur-condensed-tate-integral-tower",
+  "lem-pur-finite-source-unit-reduction",
+  "lem-pur-condensed-exceptional-reconstruction",
+  "lem-pur-condensed-tate-realization",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "sk-def-sfb-dc-upper-shriek"
+ ],
+ "proof_origin": {
+  "by": "K1",
+  "date": "2026-10-27",
+  "kind": "partial formalization",
+  "source": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "note": "Four proved private helpers formalize the actual finite and reconstructed inverse quotient squares and the ordinary open-counit identity with an arbitrary preceding trace. All four original holes remain; no geometric trace is chosen."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'isIso_smoothPurityMap' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjoint of the smooth trace is an isomorphism for l-adic constructible sheaves",
+   "results": "{\"t\": \"2026-10-25T06:30:23Z\", \"tool\": \"leansearch\", \"query\": \"The adjoint of the smooth trace is an isomorphism for l-adic constructible sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearPMap.adjoint_isFormalAdjoint\", \"CategoryTheory.constantSheafΓAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"LinearMap.adjoint\", \"ContinuousLinearMap.adjoint\", \"LinearPMap.adjoint\", \"ContinuousLinearMap.adjointAux\", \"ContinuousLinearMap.adjointAux_apply\"], \"digest\": \"e60cd9d804531949\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits; ordinary adjunctions, structure-sheaf modules, discrete condensed modules and Hilbert-space adjoints do not state this normalized geometric smooth-purity isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothPurity\"",
+   "results": "{\"t\": \"2026-10-25T06:30:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"smoothPurity\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits; ordinary adjunctions, structure-sheaf modules, discrete condensed modules and Hilbert-space adjoints do not state this normalized geometric smooth-purity isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|smoothTrace|cohomologicalPurity|tateTwistDerived",
+   "results": "{\"t\": \"2026-10-25T06:30:23Z\", \"tool\": \"grep\", \"query\": \"smoothPurity|smoothTrace|cohomologicalPurity|tateTwistDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits; ordinary adjunctions, structure-sheaf modules, discrete condensed modules and Hilbert-space adjoints do not state this normalized geometric smooth-purity isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism of schemes the adjoint of the l-adic smooth trace is an isomorphism of condensed constructible complexes",
+   "results": "{\"t\": \"2026-10-25T06:30:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth morphism of schemes the adjoint of the l-adic smooth trace is an isomorphism of condensed constructible complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"CondensedMod.LocallyConstant.adjunction\", \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\"], \"digest\": \"bbc975605e6cd549\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits; ordinary adjunctions, structure-sheaf modules, discrete condensed modules and Hilbert-space adjoints do not state this normalized geometric smooth-purity isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "PoincareDuality|poincareDuality|[Ss]mooth.*[Pp]urity|[Pp]urity.*[Tt]race",
+   "results": "{\"t\": \"2026-10-25T06:35:19Z\", \"tool\": \"grep\", \"query\": \"PoincareDuality|poincareDuality|[Ss]mooth.*[Pp]urity|[Pp]urity.*[Tt]race\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits; ordinary adjunctions, structure-sheaf modules, discrete condensed modules and Hilbert-space adjoints do not state this normalized geometric smooth-purity isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UpperShriek\"",
+   "results": "{\"t\": \"2026-10-25T06:35:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"UpperShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits; ordinary adjunctions, structure-sheaf modules, discrete condensed modules and Hilbert-space adjoints do not state this normalized geometric smooth-purity isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality for a smooth scheme identifies exceptional inverse image of the l-adic coefficient unit with a shifted Tate twist",
+   "results": "{\"t\": \"2026-10-25T06:35:22Z\", \"tool\": \"leanfinder\", \"query\": \"Poincare duality for a smooth scheme identifies exceptional inverse image of the l-adic coefficient unit with a shifted Tate twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"8ae769d519dcdc7d\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits; ordinary adjunctions, structure-sheaf modules, discrete condensed modules and Hilbert-space adjoints do not state this normalized geometric smooth-purity isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-pur-condensed-smooth-purity-iso",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SmoothPurity.Defs",
+  "file": "lean/WeilConjectures/SmoothPurity/Defs.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap"
+  ],
+  "statement": "instance isIso_smoothPurityMap : IsIso (smoothPurityMap ℓ f d) :=\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "upstream declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py",
+  "branch": "slopmaster2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap",
+     "module": "WeilConjectures.SmoothPurity.Defs",
+     "lines": [
+      141,
+      144
+     ],
+     "kind": "instance",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T112402-L-1577812",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-is-iso-smooth-purity-map",
+  "worker": "stage1",
+  "summary": "Replaced the provisional Lean-only statement by its full arbitrary-field condensed statement with explicit normalized trace construction. Reused four existing geometric reconstruction nodes; calculated its adjoint and inverse in the full constructible category. No new nodes and no Lean changes. The parent definition is not cited because it already depends on this item.",
+  "blueprint": "Latest sk-thm-purity-transport proof Steps 1–3, and latest det-sp-qbar-adjunction proof final paragraph: the purity comparison is counit preserving. The existing arbitrary-field condensed comparison nodes instantiate this intent without substituting the fixed finite-field common-stage category."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-ND-88ac7d33f",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-88ac7d33f (reviewer sub-agent of L); spot-checked: Read in full: the item JSON, the report, and the live Lean (SmoothPurity/Defs.lean, the Purity section: smoothTrace is sorried data and smoothPurityMap is the homEquiv of the trace). Also read the cited node statements: finite-smooth-adjunction-general-base, condensed-tate-integral-tower, condensed-exceptional-reconstruction (case b), condensed-tate-realization, qbar-condensed-two-colimit, and sk-def-sfb-dc-setting/lower/upper-shriek. On the blueprint side I read latest sk-def-sp-trace (Tr = ε∘Rf_!γ), sk-thm-purity-transport proof Steps 2–3, and the 'Purity map' paragraph of sk-thm-sp-qbar-adjunction. The item's inline normalized trace t_f = ε∘F(c∘a^{-1}) is the blueprint's definition and agrees with the reviewed parent def-pur-condensed-smooth-purity-iso, transported to F(T_d) as the Lean type requires. No hypothesis is added, nothing is weakened, and there is no SGA citation. The coefficient ring is padicAlgClRingObj and C_T is the full Dᵇc category. Step 2: every hypothesis of case (b) with r=-2d is supplied by steps 1 and 1′, and the conclusion is for the actual boundedConstructibleUpperShriek. Step 3: the Tate realization at d and at d=0 has its M∈I with canonical reductions supplied, and the lift through the full inclusion is correct. qbar-two-colimit is in unit sk-thm-properbasechange, which is in the transitive route, so no tool use is needed. Step 4 (naturality of η plus the triangle identity) and step 5 are correctly elementary. A transitive dependency check finds no cycle. Duplicate search: def-pur-smooth-purity-map, def-pur-smooth-trace, thm-pur-rational-and-qbar-purity and lem-sf-normalized-field-purity-trace are finite or common-stage, and normalized-witness is existence only. Edge cases d=0/f=id, d=1, X empty and non-closed k are fine. FIX: the statement used T_d∈C_X without a citation, so I added [lem-route-bounded-constructible-tate-twist-derived-of-invertible] to the text and to stmt_deps. That node is the exact Lean lemma and creates no cycle. Advisory: def-route-smooth-trace, when split, must be this t_f. The archived 20261016 Defs.lean lacks the cited lines 141–144; they refer to the later file.; 1 file(s) fixed by the reviewer"
+ }
+}

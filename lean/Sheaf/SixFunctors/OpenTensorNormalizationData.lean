@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
+public import Sheaf.CategoryTheory.ExactDerivedAdjunction
 public import Sheaf.Paper.RingedProjectionRestriction
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
@@ -20,6 +21,8 @@ Source: Stacks 03DI, 0F6Z, 0E8I, 0GL1 and the open-factor sentence of
 `fix-prop-coherence` (blueprint: lem-sf-open-tensor-normalization).
 All operation presentations below are conclusions of the theorem, not hypotheses.
 -/
+
+-- Owning definition node (blueprint: def-sf-open-normalization-data).
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -526,24 +529,6 @@ abbrev OpenDerived.jStar {m : Mode} {d : Input.{u} m} (_o : OpenDerived d) :=
 Source: Stacks 0F6Z (blueprint: lem-sf-open-tensor-normalization). -/
 abbrev OpenDerived.jStar' {m : Mode} {d : Input.{u} m} (_o : OpenDerived d) :=
   (restrict m d.j' d.S).mapDerivedCategory
-
-/-- Localize the actual termwise adjunction, with the standard exact-functor
-factorizations. Source: Stacks 015F.
-(blueprint: lem-sf-open-tensor-normalization). -/
-def exactDerivedAdjunction {C D : Type v} [Category.{h} C] [Category.{h} D]
-    [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
-    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : F ⊣ G) :
-    F.mapDerivedCategory ⊣ G.mapDerivedCategory :=
-  letI : CatCommSq (F.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
-      DerivedCategory.Q F.mapDerivedCategory := ⟨(Functor.mapDerivedCategoryFactors _).symm⟩
-  letI : CatCommSq (G.mapHomologicalComplex (.up ℤ)) DerivedCategory.Q
-      DerivedCategory.Q G.mapDerivedCategory := ⟨(Functor.mapDerivedCategoryFactors _).symm⟩
-  (a.mapHomologicalComplex (.up ℤ)).localization
-    DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
-    DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
-    F.mapDerivedCategory G.mapDerivedCategory
 
 /-- The derived extension/restriction adjunction on the ambient site.
 Source: Stacks 015F (blueprint: lem-sf-open-tensor-normalization). -/

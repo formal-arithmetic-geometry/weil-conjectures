@@ -1,0 +1,402 @@
+{
+ "id": "lem-dl-a1-strict-local-inertia-generic-fibres",
+ "kind": "statement",
+ "title": "Strict local fraction fields, normalization inertia, and split finite etale fibres",
+ "statement": "Let $X$ be integral [def-pc-integral-scheme] and normal, meaning that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Put $K=\\mathcal O_{X,\\eta}$ at the generic point and choose a separable closure $\\Omega/K$ [def-pd-separable-closure]. Write $G=\\operatorname{Aut}_K(\\Omega)$. For each $x\\in X$, choose a strict henselization $A_x^{\\mathrm{sh}}$ of $A_x=\\mathcal O_{X,x}$ [def-weil-pbc-strict-henselization-limit], with its structural map to $X$ [def-weil-pbc-strict-henselization-structural-map]. Then $A_x^{\\mathrm{sh}}$ is a domain, and there exists a $K$-embedding $i_x:K_x^{\\mathrm{sh}}=\\operatorname{Frac}(A_x^{\\mathrm{sh}})\\hookrightarrow\\Omega$ compatible with that structural map. For any such embedding set $J_x=\\{g\\in G:g|_{i_x(K_x^{\\mathrm{sh}})}=1\\}$. Any two compatible embeddings $i_x,j_x$ differ by an element $g\\in G$, and $J_{x,j_x}=gJ_{x,i_x}g^{-1}$. For every finite etale cover $P\\to X$ [def-galois-categories], its pullback to $\\operatorname{Spec}A_x^{\\mathrm{sh}}$ is a finite disjoint union of copies of $\\operatorname{Spec}A_x^{\\mathrm{sh}}$; consequently $J_x$ acts trivially on $\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,P_K)$. For every nonempty affine open $V=\\operatorname{Spec}A\\subset X$, $A$ is an integrally closed domain with fraction field $K$. Let $C$ be the integral closure of $A$ in $\\Omega$, namely the elements satisfying a monic polynomial over $A$ [def-weil-pbc-integral-closure]. For every prime $\\mathfrak r\\subset C$ lying over $x\\in V$, put $I_{\\mathfrak r}=\\{g\\in G:g\\mathfrak r=\\mathfrak r,\\ g|_{\\operatorname{Frac}(C/\\mathfrak r)}=1\\}$. Then $I_{\\mathfrak r}$ is conjugate in $G$ to $J_x$, for any chosen compatible $i_x$. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, setup and first proof paragraph; Tag 0BSW, lemma-identify-inertia and its setup; Tag 0BSM, lemma-local-exact-sequence-normal, trivial composition."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-pd-separable-closure",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-galois-categories",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-integral-scheme-stalks-in-function-field], $K$ is the fraction field of every $A_x=\\mathcal O_{X,x}$, through the structural germ map. By [lem-sc-integral-function-field-affine-fraction], a nonempty affine open $V=\\operatorname{Spec}A$ has $A$ a domain with fraction field $K$. By [lem-weil-pbc-affine-open-stalk-localization], its localizations $A_{\\mathfrak p}$ are the corresponding stalks of $X$. They are normal domains by the hypothesis on $X$, so $A$ is a normal ring in [def-weil-pbc-normal-ring]. Now [lem-weil-pbc-normal-ring-integrally-closed-total] makes $A$ integrally closed in $K$: for a domain the nonzerodivisors are exactly the nonzero elements, so the total ring of fractions is $K$. This proves the assertion about every nonempty affine open, and fixes the same $K$ in every subsequent local construction.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD (lemma-normal-pione-quotient-inertia), normal integral scheme setup; schemes.tex Tag 01HV (lemma-spec-sheaves), morphisms.tex Tag 01RV (lemma-integral-scheme-rational-functions), algebra.tex Tag 034M (lemma-normal-ring-integrally-closed)"
+   }
+  },
+  {
+   "text": "Fix $x$. Let $B_x$ be the integral closure of the normal local domain $A_x$ in $\\Omega$. The inclusion $A_x\\subset B_x$ is injective and integral by its definition. By [lem-weil-pbc-integral-injective-lying-over] there is a prime $\\mathfrak q_x$ over $\\mathfrak m_x$; it is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal]. A henselization of $A_x$ exists: [lem-per-ordinary-henselian-pointed-neighbourhood-limit], applied to the ring $A_x$ and its maximal ideal $\\mathfrak m_x$, gives a henselian local $A_x$-algebra $H$ that is a directed colimit of separated etale finitely presented $A_x$-algebras $A_a$ with points over $\\mathfrak m_x$ of residue field $\\kappa(x)$, with $\\mathfrak m_xH$ maximal; these are exactly the hypotheses of [lem-per-pointed-etale-limit-henselization], whose part (1) makes $H$ a henselization $A_x^{\\mathrm h}$ of $(A_x)_{\\mathfrak m_x}=A_x$ [def-weil-pbc-henselization-at-prime]. Let $\\kappa^{\\mathrm{sep}}$ be the residue field of the prescribed $A_x^{\\mathrm{sh}}$ (the separable closure of $\\kappa(x)$ determined by its geometric point). By [lem-wf-strict-henselization-finite-lifts] the prescribed $A_x^{\\mathrm{sh}}$ is canonically $A_x$-isomorphic, respecting residues, to the colimit of finite local etale $H$-algebras $B_e$; transporting the $H$-algebra structure along this isomorphism makes $A_x^{\\mathrm h}\\to A_x^{\\mathrm{sh}}$ a compatible henselization and strict henselization. Apply [lem-dl-a1-henselian-global-inertia-comparison] to $(A_x,K,\\Omega,B_x,\\mathfrak q_x)$ and this compatible pair $A_x^{\\mathrm h}\\to A_x^{\\mathrm{sh}}$. It states that $A_x^{\\mathrm{sh}}$ is a domain and supplies a compatible embedding $A_x\\subset A_x^{\\mathrm{sh}}\\subset (B_x)_{\\mathfrak q_x}\\subset\\Omega$. Extending to fractions gives a $K$-embedding $e_x:K_x^{\\mathrm{sh}}\\hookrightarrow\\Omega$: $a/b$ maps to $e_x(a)e_x(b)^{-1}$, whose denominator is nonzero by injectivity. Its restriction to $A_x$ is the structural map fixed in Step 1. In particular $K_x^{\\mathrm{sh}}/K$ is algebraic, since it embeds into the algebraic extension $\\Omega/K$.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+    "lem-per-pointed-etale-limit-henselization",
+    "def-weil-pbc-henselization-at-prime",
+    "lem-wf-strict-henselization-finite-lifts",
+    "lem-dl-a1-henselian-global-inertia-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSD (section-ramification), setup before Tag 0BSW (lemma-identify-inertia); algebra.tex Tags 00GU (lying over) and 00GS (lemma-integral-over-field)"
+   }
+  },
+  {
+   "text": "Let $i,j:K_x^{\\mathrm{sh}}\\hookrightarrow\\Omega$ be any two compatible $K$-embeddings. Put $E=i(K_x^{\\mathrm{sh}})$ and define $f:E\\to\\Omega$ by $f(i(a))=j(a)$. This is a well-defined $K$-algebra embedding. By [lem-weil-pbc-separable-closure-exists-galois], $\\Omega/K$ is algebraic and normal, so every $K$-minimal polynomial of an element of $\\Omega$ splits in $\\Omega$. Apply [lem-exc-etale-embedding-extension-sepclosed] with base $K$, extension $\\Omega$, intermediate field $E$, target $\\Omega$ and map $f$. It gives a $K$-endomorphism $g$ of $\\Omega$ extending $f$. By [lem-exc-etale-algebraic-endomorphism-bijective] this endomorphism is bijective, hence $g\\in G$ and $j=g\\circ i$. This argument applies to infinite $E/K$ as well as finite $E/K$.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-exc-etale-embedding-extension-sepclosed",
+    "lem-exc-etale-algebraic-endomorphism-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, embeddings chosen in its setup; conjugacy expanded by the embedding-extension argument of fields.tex, with Mathlib IntermediateField.exists_algHom_of_splits and Algebra.IsAlgebraic.algHom_bijective"
+   }
+  },
+  {
+   "text": "For $h\\in G$, the condition $h\\in J_{x,j}$ is $h(g(i(a)))=g(i(a))$ for all $a\\in K_x^{\\mathrm{sh}}$. Applying $g^{-1}$ makes this equivalent to $g^{-1}hg\\in J_{x,i}$. Thus $J_{x,j}=gJ_{x,i}g^{-1}$. Each $J_{x,i}$ is a subgroup because identities, products and inverses preserve pointwise fixing.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, comparison of choices in the setup; elementary stabilizer calculation"
+   }
+  },
+  {
+   "text": "Let $P\\to X$ be finite etale and put $R=A_x^{\\mathrm{sh}}$ and $S=\\operatorname{Spec}R$. By [lem-weil-pbc-finite-morphism-permanence](a),(b), $P_S=P\\times_XS$ is finite over $S$ and affine, say $P_S=\\operatorname{Spec}T$, with $T$ a finite $R$-module by [def-weil-finite-integral-morphism]. By [lem-weil-pbc-etale-base-change-finite-limits](1), $P_S\\to S$ is etale. The ring $R$ is local and strictly henselian by [lem-weil-pbc-strict-henselization-local-structure]. By [def-weil-pbc-henselian-terminology], it is henselian and $k=R/\\mathfrak m_R$ is separably closed.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSM (lemma-local-exact-sequence-normal), trivial-composition paragraph; morphisms.tex Tags 01WL and 02GO (finite and etale base change)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselian-finite-etale-equivalence] to $R$. It makes $\\overline T=T\\otimes_Rk$ finite etale over $k$ and gives full faithfulness of reduction. By [lem-weil-pbc-etale-algebra-over-field-product], $\\overline T$ is a finite product $\\prod_{s=1}^n k_s$ of finite separable field extensions of $k$, allowing $n=0$. Each $k_s$ is $k$ by [lem-pc-sepclosed-finite-sep-trivial], hence $\\overline T\\cong k^n$. The finite etale $R$-algebra $R^n$ also reduces to $k^n$. Lift this residue isomorphism and its inverse by full faithfulness of the equivalence. Their composites reduce to the identity, so faithfulness makes the composites identities. Therefore $T\\cong R^n$ as $R$-algebras. Taking spectra proves $P_S\\cong\\coprod_{s=1}^nS$. This includes the empty cover, for which $n=0$.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-pc-sepclosed-finite-sep-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSM, splitting of Y^sh; algebra.tex Tag 04GK (lemma-henselian-cat-finite-etale), Tag 00U4 (lemma-etale-at-prime)"
+   }
+  },
+  {
+   "text": "Write $L=K_x^{\\mathrm{sh}}$. Base change the decomposition in Step 6 to $\\operatorname{Spec}L$. By [lem-sc-etale-fibre-product-base-change-coproduct], it gives $P_K\\times_K\\operatorname{Spec}L\\cong\\coprod_{s=1}^n\\operatorname{Spec}L$. Choose any embedding $i:L\\to\\Omega$. By the universal property of the fibre product, every $K$-morphism $t:\\operatorname{Spec}\\Omega\\to P_K$ has a unique lift over the fixed map $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}L$. The one-point spectrum $\\operatorname{Spec}\\Omega$ lands in exactly one summand, where the map is uniquely the fixed $L$-point, by [def-weil-affine-spectrum]. Thus each $t$ is the scalar extension of the corresponding $L$-section of $P_K$. For $h\\in J_{x,i}$, composing that section with $\\operatorname{Spec}h$ leaves it unchanged because $h\\circ i=i$. Hence $h$ fixes every $t$, proving triviality of the action; when $n=0$ the set is empty and the assertion is vacuous.",
+   "uses": [
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSM, first proof paragraph after normality: splitting after passage to the fraction field and triviality of the composite; expanded on geometric points"
+   }
+  },
+  {
+   "text": "Now fix $V=\\operatorname{Spec}A$ and a prime $\\mathfrak r\\subset C$ over $\\mathfrak p\\subset A$ corresponding to $x$. Let $M=A\\setminus\\mathfrak p$. The affine stalk identification of [lem-weil-pbc-affine-open-stalk-localization] identifies $A_x$ with $M^{-1}A$, compatibly inside $K$. By [lem-weil-pbc-integral-closure-commutes-localization], its integral closure in $\\Omega$ is $B_x=M^{-1}C$ (since $M^{-1}\\Omega=\\Omega$). The prime $\\mathfrak q=M^{-1}\\mathfrak r$ lies over $\\mathfrak m_x$, and is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal]. Its residue field is $\\operatorname{Frac}(C/\\mathfrak r)$: $B_x/\\mathfrak q=M^{-1}(C/\\mathfrak r)$ is a field containing $C/\\mathfrak r$ and contained in its fraction field. Thus it is the full fraction field. Here no assumption that $x$ is closed in $V$ has been made.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, identification of inertia over arbitrary x with the local setup of Tag 0BSD; algebra.tex Tag 0307 (lemma-integral-closure-localize)"
+   }
+  },
+  {
+   "text": "Every $g\\in G$ preserves $C$ and $B_x$: applying $g$ or $g^{-1}$ to a monic relation over $A$ or $A_x$ preserves that relation. Since $g$ fixes $M$, extension and contraction under localization show $g\\mathfrak r=\\mathfrak r$ if and only if $g\\mathfrak q=\\mathfrak q$. If these conditions hold, the induced actions on the fields in the identification $B_x/\\mathfrak q=\\operatorname{Frac}(C/\\mathfrak r)$ agree: both send $\\bar c/\\bar s$ to $\\overline{g(c)}/\\bar s$. Thus the group $I_{\\mathfrak r}$ in the item is exactly the local inertia group for $(A_x,B_x,\\mathfrak q)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, first proof paragraph; localization and residue-action comparison written explicitly"
+   }
+  },
+  {
+   "text": "Apply [lem-dl-a1-henselian-global-inertia-comparison] with this particular maximal ideal $\\mathfrak q$ and the compatible pair $A_x^{\\mathrm h}\\to A_x^{\\mathrm{sh}}$ constructed in Step 2. It supplies a compatible embedding $e:L=K_x^{\\mathrm{sh}}\\hookrightarrow\\Omega$ for which the local inertia group is $\\operatorname{Aut}_{e(L)}(\\Omega)=J_{x,e}$. By Step 9 this is $I_{\\mathfrak r}$. For any embedding $i$ chosen in the item, Steps 3 and 4 give $e=g\\circ i$ and therefore $I_{\\mathfrak r}=gJ_{x,i}g^{-1}$. The local comparison applies to arbitrary normal local domains, and the reduction equivalence and localization results likewise impose no Noetherian hypothesis. All conclusions of the item follow.",
+   "uses": [
+    "lem-dl-a1-henselian-global-inertia-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD (lemma-normal-pione-quotient-inertia), first proof paragraph; Tag 0BSW (lemma-identify-inertia), local inertia identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+  "lem-per-pointed-etale-limit-henselization",
+  "def-weil-pbc-henselization-at-prime",
+  "lem-wf-strict-henselization-finite-lifts",
+  "lem-dl-a1-henselian-global-inertia-comparison",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-exc-etale-embedding-extension-sepclosed",
+  "lem-exc-etale-algebraic-endomorphism-bijective",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-integral-closure-commutes-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BTD (lemma-normal-pione-quotient-inertia), setup and first proof paragraph, using Tag 0BSW (lemma-identify-inertia) and the trivial-composition paragraph of Tag 0BSM (lemma-local-exact-sequence-normal); embedding conjugacy and residue localization expanded explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselian local fraction fields of a normal integral scheme embed in the separable closure, their fixing subgroups are conjugate to normalization inertia and act trivially on finite etale covers",
+   "results": "8 hits: IsGaloisGroup.to_isFractionRing, IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.of_isFractionRing, Algebra.isInvariant_of_isGalois', InfiniteGalois.toAlgEquivAux_eq_liftNormal, ValuationSubring.inertiaSubgroup, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, InfiniteGalois.normalAutEquivQuotient_apply. Read IsGalois.map_fixingSubgroup, FieldTheory/Galois/Basic.lean 444-451 (conjugacy for a field already mapped by an automorphism), and the reported finite IsGaloisGroup types. They do not supply strict henselization embeddings, local normalization inertia identification, or splitting of finite etale covers. Algebra.Etale.iff_exists_algEquiv_prod concerns algebras over a field, not these local rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|[Ii]nertia",
+   "results": "0 hits: . Read IsGalois.map_fixingSubgroup, FieldTheory/Galois/Basic.lean 444-451 (conjugacy for a field already mapped by an automorphism), and the reported finite IsGaloisGroup types. They do not supply strict henselization embeddings, local normalization inertia identification, or splitting of finite etale covers. Algebra.Etale.iff_exists_algEquiv_prod concerns algebras over a field, not these local rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inertia at a point of the normalization of a normal integral scheme in a separable closure is conjugate to the fixing subgroup of the strict henselian fraction field and fixes every finite etale generic fibre",
+   "results": "8 hits: IntermediateField.fixingSubgroup, fixedByFinite, IsGalois.map_fixingSubgroup, AddSubgroup.inertia, ValuationSubring.inertiaSubgroup, IsGaloisGroup.fixingSubgroup_fixedPoints, AddSubgroup.mem_inertia, AddSubgroup.subgroupOf_inertia. Read IsGalois.map_fixingSubgroup, FieldTheory/Galois/Basic.lean 444-451 (conjugacy for a field already mapped by an automorphism), and the reported finite IsGaloisGroup types. They do not supply strict henselization embeddings, local normalization inertia identification, or splitting of finite etale covers. Algebra.Etale.iff_exists_algEquiv_prod concerns algebras over a field, not these local rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosure, IntermediateField.fixingSubgroup",
+   "results": "0 hits: . Read IsGalois.map_fixingSubgroup, FieldTheory/Galois/Basic.lean 444-451 (conjugacy for a field already mapped by an automorphism), and the reported finite IsGaloisGroup types. They do not supply strict henselization embeddings, local normalization inertia identification, or splitting of finite etale covers. Algebra.Etale.iff_exists_algEquiv_prod concerns algebras over a field, not these local rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a normal integral scheme all strict henselian local fraction field embeddings into a separable closure are conjugate and finite etale covers split after strict henselization",
+   "results": "8 hits: galLiftEquiv_apply, galLift, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.Etale.iff_exists_algEquiv_prod, AlgHom.liftNormal, Ring.instIsGaloisFractionRingNormalClosure, Algebra.FormallyEtale.of_isSeparable_aux, IsGaloisGroup.to_isFractionRing. Read IsGalois.map_fixingSubgroup, FieldTheory/Galois/Basic.lean 444-451 (conjugacy for a field already mapped by an automorphism), and the reported finite IsGaloisGroup types. They do not supply strict henselization embeddings, local normalization inertia identification, or splitting of finite etale covers. Algebra.Etale.iff_exists_algEquiv_prod concerns algebras over a field, not these local rings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|inertia",
+   "results": "25 hits: Mathlib/NumberTheory/RamificationInertia/Valuation.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/Inertia.lean, Mathlib/NumberTheory/RamificationInertia/Inertia.lean. Read Mathlib FieldTheory/Galois/Basic.lean:444-451 (fixing-subgroup conjugacy) and RingTheory/Etale/Field.lean:271-286 (product classification over a field). These cover ingredients, not the strict henselization and normalization-inertia comparison over arbitrary normal local domains. The latter is reused from lem-dl-a1-henselian-global-inertia-comparison; field algebra and conjugacy alone do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosure, IntermediateField.fixingSubgroup",
+   "results": "0 hits: . Read Mathlib FieldTheory/Galois/Basic.lean:444-451 (fixing-subgroup conjugacy) and RingTheory/Etale/Field.lean:271-286 (product classification over a field). These cover ingredients, not the strict henselization and normalization-inertia comparison over arbitrary normal local domains. The latter is reused from lem-dl-a1-henselian-global-inertia-comparison; field algebra and conjugacy alone do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization of a normal local domain embeds in a separable closure of its fraction field and its fixing subgroup is normalization inertia",
+   "results": "8 hits: ValuationSubring.inertiaSubgroup, IsGaloisGroup.to_isFractionRing, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, IsArithFrobAt.mul_inv_mem_inertia, ValuationSubring.decompositionSubgroup, IsGaloisGroup.of_isFractionRing, IsGaloisGroup.iff_isFractionRing, galRestrict_apply. Read Mathlib FieldTheory/Galois/Basic.lean:444-451 (fixing-subgroup conjugacy) and RingTheory/Etale/Field.lean:271-286 (product classification over a field). These cover ingredients, not the strict henselization and normalization-inertia comparison over arbitrary normal local domains. The latter is reused from lem-dl-a1-henselian-global-inertia-comparison; field algebra and conjugacy alone do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal local strict henselization fraction field has absolute Galois group equal to the inertia of a normalization prime",
+   "results": "8 hits: Field.absoluteGaloisGroup, IsGaloisGroup.to_isFractionRing, IsGaloisGroup.of_isFractionRing, Field.instGroupAbsoluteGaloisGroup, Ring.instIsGaloisFractionRingNormalClosure, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.inertiaDeg_eq_of_isGaloisGroup. Read Mathlib FieldTheory/Galois/Basic.lean:444-451 (fixing-subgroup conjugacy) and RingTheory/Etale/Field.lean:271-286 (product classification over a field). These cover ingredients, not the strict henselization and normalization-inertia comparison over arbitrary normal local domains. The latter is reused from lem-dl-a1-henselian-global-inertia-comparison; field algebra and conjugacy alone do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale schemes over strictly henselian local rings are finite disjoint unions of the base scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, Algebra.Etale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, AlgebraicGeometry.IsEtale, Algebra.Etale.finitePresentation. Read Mathlib FieldTheory/Galois/Basic.lean:444-451 (fixing-subgroup conjugacy) and RingTheory/Etale/Field.lean:271-286 (product classification over a field). These cover ingredients, not the strict henselization and normalization-inertia comparison over arbitrary normal local domains. The latter is reused from lem-dl-a1-henselian-global-inertia-comparison; field algebra and conjugacy alone do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph: extension to a lisse Weil sheaf on the open U_0 union infinity is equivalent to trivial inertia at infinity; Tag 0BTD, lemma-normal-pione-quotient-inertia, setup and first proof paragraph; Tag 0BSW, lemma-identify-inertia and its setup; Tag 0BSM, lemma-local-exact-sequence-normal, trivial composition.",
+   "via": [
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-dl-a1-strict-local-inertia-generic-fibres",
+  "worker": "stage1",
+  "summary": "NR checked Stacks 0BTD/0BSD/0BSW/0BSM and the current blueprint. Reused the already reviewed general normal-local inertia comparison; supplied embedding extension and conjugacy, henselian reduction and split generic-point calculation, affine normality, and the nonclosed-point normalization localization. Statement unchanged; no new nodes and no Lean attachment for the whole item. All cited statements read and quoted in citations.json; no Noetherian hypotheses or SGA sources used.",
+  "blueprint": "rem-dl-a1-conventions, second paragraph of main-20261015: extension over infinity versus trivial inertia. This local algebra item supplies the strict-henselian generic fibre, change-of-embedding conjugacy, and normalization inertia identification used by the existing normal-scheme Galois-inertia presentation. No unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-scheme-stalks-in-function-field",
+    "why": "generic integral-scheme germ and fraction-field calculation needed to give the local comparison the same K; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "generic affine fraction-field calculation needed for the affine normalization chart; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "generic affine coordinate and stalk comparison needed for localization at a possibly nonclosed point; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "generic normal-ring algebra needed to pass from normal stalks to integrally closed affine coordinates; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-lying-over",
+    "why": "generic integral-algebra existence of a prime above the local maximal ideal; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "why": "generic integral-algebra maximality used after localization; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-separable-closure-exists-galois",
+    "why": "generic splitting property of a separable closure needed for extension of arbitrary embeddings; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "generic finite base change and affineness needed to describe a pulled-back cover by a finite algebra; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "generic etale base change needed for the same pulled-back cover; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "generic strict-henselization structure needed for henselian reduction; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "why": "generic henselian finite-etale reduction equivalence needed to lift the split residue algebra; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "generic classification of etale algebras over the separably closed residue field; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-sepclosed-finite-sep-trivial",
+    "why": "generic field-theoretic triviality of finite separable extensions of a separably closed field; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sc-etale-fibre-product-base-change-coproduct",
+    "why": "generic finite coproduct base change needed to preserve the splitting on the strict local generic fibre; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "generic integral-closure localization needed to compare the affine and local normalization primes; the affine-line convention unit contains no replacement for this generic tool."
+   },
+   {
+    "node": "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+    "why": "existence of an ordinary henselian pointed-neighbourhood limit over the local ring A_x, needed to supply the henselization hypothesis of the local inertia comparison; the convention unit has no existence statement for henselizations."
+   },
+   {
+    "node": "lem-per-pointed-etale-limit-henselization",
+    "why": "part (1) identifies that limit with a henselization in the universal-property sense of def-weil-pbc-henselization-at-prime; generic henselization algebra."
+   },
+   {
+    "node": "lem-wf-strict-henselization-finite-lifts",
+    "why": "identifies the prescribed pointed-neighbourhood strict henselization with the colimit of finite local etale H-algebras, giving its compatible H-algebra structure; generic strict-henselization algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+  "lem-per-pointed-etale-limit-henselization",
+  "lem-wf-strict-henselization-finite-lifts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-bd37992d2",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-bd37992d2 (reviewer sub-agent of L); spot-checked: FIX for one C1/C4 fault in Step 2. I read in full the item, its 10 steps and every cited statement, plus Stacks 0BTD (setup and first proof paragraph), 0BSW and 0BSM. The statement is unchanged and is no weaker than 0BTD. There are no new nodes, no cycle and no SGA citation. Fault: the reviewed lem-dl-a1-henselian-global-inertia-comparison takes 'compatible henselization and strict henselization' as data. Step 2 only said '(with a compatible henselization)'; nothing proved that a henselization of A_x exists or that the prescribed A^sh carries a compatible A^h-structure. Repair: Step 2 now cites lem-per-ordinary-henselian-pointed-neighbourhood-limit for (A_x, m_x), then lem-per-pointed-etale-limit-henselization(1), whose hypotheses I matched exactly, to get H = A_x^h, and def-weil-pbc-henselization-at-prime. It cites lem-wf-strict-henselization-finite-lifts for the canonical A-isomorphism of the prescribed A^sh with colim B_e of H-algebras, which gives the compatible pair. Step 10 now uses that pair. proof_deps is the union of all uses, and split_report.tool_uses has the 3 nodes added, all reviewed PASS and acyclic. Other steps checked: Step 1 gives affine normality via A_p ≅ O_{X,x} and integral closedness in the total ring of fractions, which is K for a domain. Step 3: conjugacy holds, by embedding extension with Ω/K normal and bijectivity of algebraic endomorphisms, including infinite E/K. Step 4: J_j = g J_i g^-1. Steps 5-6: finite and étale base change, then 04GK full faithfulness, give T ≅ R^n (n = 0 allowed). Step 7: t = σ∘Spec i, so J_i fixes t (0BSM). Step 8: by 0307, B_x = M^-1 C, q = M^-1 r is maximal, and the residue field is Frac(C/r) with x not assumed closed. Step 9 is elementary localization of stabilizers and residue actions. Edge cases checked: imperfect field, non-closed point, empty cover, non-Noetherian. Batch-5 flag: comparison → def-weil-pbc-henselization-at-prime (sec-trace-formula) is a general definition. The comparison's other trf ancestors are pure henselization algebra, not part of the proof of the trace formula or of Poincaré duality, and neither assumption supplies them: accepted. The fix nodes reach only the same definition.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalInertiaGenericFibres",
+  "declaration": "AlgebraicGeometry.Scheme.strictLocalInertiaGenericFibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalInertiaGenericFibres.lean",
+  "statement": "theorem strictLocalInertiaGenericFibres (X : Scheme.{u}) [IsIntegral X] (hnormal : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x)) (Ω : Type u) [Field Ω] [Algebra X.functionField Ω] [IsSepClosure X.functionField Ω] {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ] (s : Spec (.of Ξ) ⟶ X) : ∃ (_ : IsDomain (strictHenselizationRing s)) (k : X.functionField →+* FractionRing (strictHenselizationRing s)), (Spec.map (CommRingCat.ofHom k) ≫ X.fromSpecFunctionField = Spec.map (CommRingCat.ofHom (algebraMap (strictHenselizationRing s) (FractionRing (strictHenselizationRing s)))) ≫ strictHenselizationStructuralMap s) ∧ (∃ i : FractionRing (strictHenselizationRing s) →+* Ω, i.comp k = algebraMap X.functionField Ω) ∧ (∀ (i j : FractionRing (strictHenselizationRing s) →+* Ω), i.comp k = algebraMap X.functionField Ω → j.comp k = algebraMap X.functionField Ω → ∃ g : Ω ≃ₐ[X.functionField] Ω, (∀ z : FractionRing (strictHenselizationRing s), j z = g (i z)) ∧ ∀ h : Ω ≃ₐ[X.functionField] Ω, h ∈ fixingSubgroup (Ω ≃ₐ[X.functionField] Ω) (Set.range j) ↔ g⁻¹ * h * g ∈ fixingSubgroup (Ω ≃ₐ[X.functionField] Ω) (Set.range i)) ∧ (∀ P : X.FiniteEtale, ∃ n : ℕ, Nonempty (Over.mk (pullback.snd P.obj.hom (strictHenselizationStructuralMap s)) ≅ Over.mk (Sigma.desc (fun _ : Fin n ↦ 𝟙 (strictHenselizationScheme s))))) ∧ (∀ (i : FractionRing (strictHenselizationRing s) →+* Ω), i.comp k = algebraMap X.functionField Ω → ∀ (P : X.FiniteEtale) (g : Ω ≃ₐ[X.functionField] Ω), g ∈ fixingSubgroup (Ω ≃ₐ[X.functionField] Ω) (Set.range i) → ∀ t : Spec (.of Ω) ⟶ P.obj.left, t ≫ P.obj.hom = Spec.map (CommRingCat.ofHom (algebraMap X.functionField Ω)) ≫ X.fromSpecFunctionField → Spec.map (CommRingCat.ofHom g.toRingHom) ≫ t = t) ∧ (∀ (U : X.Opens) [Nonempty U] (hU : IsAffineOpen U), IsDomain Γ(X, U) ∧ IsIntegrallyClosed Γ(X, U) ∧ IsFractionRing Γ(X, U) X.functionField ∧ ∀ [Algebra Γ(X, U) Ω] [IsScalarTower Γ(X, U) X.functionField Ω] (r : PrimeSpectrum (integralClosure Γ(X, U) Ω)), (Spec.map (CommRingCat.ofHom (algebraMap Γ(X, U) (integralClosure Γ(X, U) Ω))) ≫ hU.fromSpec) r = s (default : Spec (.of Ξ)) → ∀ (i : FractionRing (strictHenselizationRing s) →+* Ω), i.comp k = algebraMap X.functionField Ω → ∃ g : Ω ≃ₐ[X.functionField] Ω, ∀ h : Ω ≃ₐ[X.functionField] Ω, h ∈ r.asIdeal.inertia (Ω ≃ₐ[X.functionField] Ω) ↔ g⁻¹ * h * g ∈ fixingSubgroup (Ω ≃ₐ[X.functionField] Ω) (Set.range i))",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c28fe2b7a",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Read the item node, all 7 stmt_deps (strictHenselizationRing/Scheme/StructuralMap interfaces, FiniteEtale, IsIntegral, IsIntegrallyClosed, IsSepClosure, integralClosure), the module and report. Statement verbatim; only lean field changed vs live; live has no lean yet. Every clause matches: IsDomain as conclusion; k pinned by the Spec equation (fromSpecStalk is a preimmersion, hence mono, so k is canonical and unique); compatible embedding exists; conjugacy with the same g and correct direction (J_j = g J_i g⁻¹); finite étale splitting as Over-iso to ∐_{Fin n} with n=0 allowed; trivial J-action on K-points t (re-derived as true); affine opens give domain, integrally closed, fraction field K; C = integralClosure with canonical scalar tower; prime r lying over s default (non-closed points and non-maximal primes allowed); Ideal.inertia equivalent to the stabiliser with trivial Frac(C/r) action; conjugacy to J_i. No Noetherian, perfectness or closed-point hypothesis; Ω : Type u harmless (separable closures are K-isomorphic). Docstrings carry the source place, blueprint id and 10 steps; a single sorry theorem; no hollow defs. Not recompiled per instructions. Advisory: Mathlib.RingTheory.Ideal.Pointwise import possibly redundant."
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "def-sfb-square-zero-algebra-classes",
+ "kind": "definition",
+ "title": "Marked square-zero algebra extensions and their classes",
+ "status": "split",
+ "statement": "Let $R\\to B$ be a map of commutative rings and let $N$ be a $B$-module. A marked square-zero extension consists of a commutative $R$-algebra $E$, a surjective $R$-algebra map $p:E\\to B$, and an injective additive map $i:N\\to E$ with image $\\ker p$, such that $i(n)i(m)=0$ and $x i(n)=i(p(x)n)$. An isomorphism of extensions is an $R$-algebra isomorphism commuting with $p$ and $i$. Define $\\operatorname{Exal}_R(B,N)$ as the quotient by extension isomorphisms. Write $[E]$ for the class of an extension. For extensions $E,F,G$, the Baer-sum relation holds if there is an $R$-algebra map $b:E\\times_B F\\to G$ over $B$ carrying $(i_E(n),i_F(m))$ to $i_G(n+m)$. For $a\\in R$, the scalar-pushout relation between $E,F$ holds if there is an $R$-algebra map $E\\to F$ over $B$ carrying $i_E(n)$ to $i_F(an)$. An abelian group and $R$-module structure on the class set is natural if $[E]+[F]=[G]$ holds exactly for the Baer-sum relation and $a[E]=[F]$ holds exactly for the scalar-pushout relation. These are the operation graphs; this definition does not assert existence of the module structure.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Exal notation immediately preceding Tag 0DZ4 (lemma-first-order-completion); additive functor and natural module structure."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "isomorphism classes of square zero algebra extensions Baer sum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Baer.ExtensionOf.mk.injEq\", \"module\": \"Mathlib.Algebra.Module.Injective\", \"type\": \"∀ {R : Type u} [inst : Ring R] {Q : Type v} [inst_1 : AddCommGroup Q] [inst_2 : Module R Q] {M : Type u_1}\\n  {N : Type u_2} [inst_3 : AddCommGroup M] [inst_4 : AddCommGroup N] [inst_5 : Module R M] [inst_6 : Module R N]\\n  {i : M →ₗ[R] N} {f : M →ₗ[R] Q} (toLinearPMap : N →ₗ.[R] Q) (le : i.range ≤ to\", \"doc\": \"Two Baer extensions are equal if and only if their underlying linear maps, domain inclusions, and extension properties are equal. Specifically, given ring $ R $, $ R $-modules $ M, N, Q $, and linear \"}\n  {\"name\": \"TrivSqZeroExt.liftEquiv\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \":\\n  { fg : (R →ₐ[S] A) × (M →ₗ[S] A) //\\n      (∀ x y, fg.2 x * fg.2 y = 0) ∧\\n        (∀ r x, fg.2 (r •> x) = fg.1 r * fg.2 x) ∧ (∀ r x, fg.2 (x <• r) = fg.2 x * fg.1 r) } ≃\\n    (tsze R M →ₐ[S] A)\", \"doc\": \"This equivalence establishes a bijection between pairs $(f,g)$ consisting of an $S$-algebra homomorphism $f: R \\\\to A$ and an $S$-linear map $g: M \\\\to A$ satisfying $g(x)g(y) = 0$ for all $x,y \\\\in M$, \"}\n  {\"name\": \"Module.Baer.ExtensionOf.mk\", \"module\": \"Mathlib.Algebra.Module.Injective\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {Q : Type v} →\\n      [inst_1 : AddCommGroup Q] →\\n        [inst_2 : Module R Q] →\\n          {M : Type u_1} →\\n            {N : Type u_2} →\\n              [inst_3 : AddCommGroup M] →\\n                [inst_4 : AddCommGroup N] →\\n                  [inst_5 : Module R M\", \"doc\": \"Given a ring $ R $, $ R $-modules $ M, N, Q $, and linear maps $ i : M → N $ and $ f : M → Q $, this constructor builds an instance of Baer's extension data by providing a linear map $ g : N → Q $ who\"}\n  {\"name\": \"TrivSqZeroExt.liftEquivOfComm\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \": { f : M →ₗ[R'] A // ∀ x y, f x * f y = 0 } ≃ (tsze R' M →ₐ[R'] A)\", \"doc\": \"This equivalence establishes a bijection between pairs $(\\\\phi, f)$ consisting of an $R'$-algebra homomorphism $\\\\phi: R' \\\\to A$ and an $R'$-linear map $f: M \\\\to A$ satisfying $f(x)f(y) = 0$ for all $x,\"}\n  {\"name\": \"TrivSqZeroExt.algHom_ext'\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"{A} [Semiring A] [Algebra S A] ⦃f g : tsze R M →ₐ[S] A⦄ (hinl : f.comp (inlAlgHom S R M) = g.comp (inlAlgHom S R M))\\n  (hinr : f.toLinearMap.comp (inrHom R M |>.restrictScalars S) = g.toLinearMap.comp (inrHom R M |>.restrictScalars S)) :\\n  f = g\", \"doc\": \"If two $ S $-algebra homomorphisms $ f, g : R \\times M \\to A $ from a trivial square-zero extension agree on the canonical inclusion of $ R $ (via $ (r, 0) $) and on the inclusion of $ M $ (via $ (0, m)\"}\n  {\"name\": \"TrivSqZeroExt.algHom_ext'_iff\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"For a commutative semiring $ S $, semiring $ R $ with an $ S $-algebra structure, and $ R $-module $ M $ with compatible module structures, two $ S $-algebra homomorphisms $ f, g: R \\times M \\to A $ (wh\"}\n  {\"name\": \"TrivSqZeroExt.lift\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : R →ₐ[S] A) (g : M →ₗ[S] A) (hg : ∀ x y, g x * g y = 0) (hfg : ∀ r x, g (r •> x) = f r * g x)\\n  (hgf : ∀ r x, g (x <• r) = g x * f r) : tsze R M →ₐ[S] A\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"Module.Baer.instMinExtensionOf\", \"module\": \"Mathlib.Algebra.Module.Injective\", \"type\": \": Min (ExtensionOf i f)\", \"doc\": \"For any ring $ R $ and $ R $-modules $ M, N, Q $ with linear maps $ i : M → N $ and $ f : M → Q $, the set of Baer extensions of $ f $ along $ i $ is equipped with an infimum semilattice structure. Th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match: split-algebra lifting, module injectivity, and sheaf extension data do not define arbitrary marked ring square-zero extension classes and their Baer/scalar diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "square zero algebra extension classes Baer sum scalar pushout",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TrivSqZeroExt.lift_def\", \"module\": \"Mathlib/Algebra/TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"TrivSqZeroExt.liftEquiv_apply\", \"module\": \"Mathlib/Algebra/TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"TrivSqZeroExt.lift_apply_inr\", \"module\": \"Mathlib/Algebra/TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $, an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, and compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $ g(x ⋅ r) \"}\n  {\"name\": \"TrivSqZeroExt.lift\", \"module\": \"Mathlib/Algebra/TrivSqZeroExt\", \"type\": \"{S : Type u_1} →\\n  {R : Type u} →\\n    {M : Type v} →\\n      [inst : CommSemiring S] →\\n        [inst_1 : Semiring R] →\\n          [inst_2 : AddCommMonoid M] →\\n            [inst_3 : Algebra S R] →\\n              [inst_4 : Module S M] →\\n                [inst_5 : Module R M] →\\n                  [inst_6 : M\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"TrivSqZeroExt.lift_apply_inl\", \"module\": \"Mathlib/Algebra/TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"Given an $ S $-algebra homomorphism $ f : R → A $, an $ S $-linear map $ g : M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, and compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $ g(x ⋅ r\"}\n  {\"name\": \"TrivSqZeroExt.lift_comp_inrHom\", \"module\": \"Mathlib/Algebra/TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"The composition of the lifted algebra homomorphism with the inclusion of the module $ M $ into the trivial square-zero extension $ R \\\\times M $ recovers the original linear map $ g $. Specifically, fo\"}\n  {\"name\": \"TrivSqZeroExt.liftEquiv\", \"module\": \"Mathlib/Algebra/TrivSqZeroExt\", \"type\": \"{S : Type u_1} →\\n  {R : Type u} →\\n    {M : Type v} →\\n      [inst : CommSemiring S] →\\n        [inst_1 : Semiring R] →\\n          [inst_2 : AddCommMonoid M] →\\n            [inst_3 : Algebra S R] →\\n              [inst_4 : Module S M] →\\n                [inst_5 : Module R M] →\\n                  [inst_6 : M\", \"doc\": \"This equivalence establishes a bijection between pairs $(f,g)$ consisting of an $S$-algebra homomorphism $f: R \\\\to A$ and an $S$-linear map $g: M \\\\to A$ satisfying $g(x)g(y) = 0$ for all $x,y \\\\in M$, \"}\n  {\"name\": \"TrivSqZeroExt.lift_comp_inlHom\", \"module\": \"Mathlib/Algebra/TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $, an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, and compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $ g(x ⋅ r) \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match: split-algebra lifting, module injectivity, and sheaf extension data do not define arbitrary marked ring square-zero extension classes and their Baer/scalar diagrams."
+  },
+  {
+   "tool": "grep",
+   "query": "Exal|SquareZeroExtension|square.zero extension (Mathlib RingTheory; project WeilConjectures and Sheaf; DAG; blueprint_refs search Exal)",
+   "results": "[grep] OK 0 hit(s)\n\nProject grep: trivial square-zero algebras and sheaf extension frameworks only; none defines ring extension classes with a specified kernel. DAG grep found the theorem lem-sfb-ring-square-zero-extension-classification, but no separate definition node for its objects. blueprint_refs.py search Exal: 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "No match: split-algebra lifting, module injectivity, and sheaf extension data do not define arbitrary marked ring square-zero extension classes and their Baer/scalar diagrams."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-exal-completion-smooth-complement",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Exal notation, marked kernels, Baer addition and scalar pushout in the completion comparison; det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Tangent comparison for N=P, before passing from the J-adic completion to its complete local factors.",
+   "via": [
+    "lem-sfb-exal-completion-smooth-complement",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.SquareZeroAlgebraClasses",
+  "declaration": "Algebra.SquareZeroClasses.Classes",
+  "declarations": [
+   "Algebra.SquareZeroClasses.Extension",
+   "Algebra.SquareZeroClasses.Extension.p",
+   "Algebra.SquareZeroClasses.Isomorphic",
+   "Algebra.SquareZeroClasses.Classes",
+   "Algebra.SquareZeroClasses.classOf",
+   "Algebra.SquareZeroClasses.fiber",
+   "Algebra.SquareZeroClasses.IsBaerSum",
+   "Algebra.SquareZeroClasses.IsScalarPushout",
+   "Algebra.SquareZeroClasses.IsNaturalModule"
+  ],
+  "file": "lean/Sheaf/RingTheory/SquareZeroAlgebraClasses.lean",
+  "statement": "def Classes (R B N : Type u) [CommRing R] [CommRing B] [Algebra R B] [AddCommGroup N] [Module B N]",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1274fe011",
+  "group": "Q77",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1274fe011",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Stacks 0DZ4 read with its Exal notation. Hypotheses exact: Field, FiniteType, Ideal, Module.Finite, and smooth open neighbourhoods off zeroLocus J (= smoothness of the open complement). New def-sfb-square-zero-algebra-classes: Extension (exact, injective, square_zero, induced B-action), Isomorphic fixing p and i, Classes = Quot. IsBaerSum and IsScalarPushout iffs hold for the true structure and pin it uniquely. IsCompletion is an algebra iso from AdicCompletion (p^-1 J) E to F.Ring, compatible levelwise with p-hat and i-hat, so it is the canonical completion graph, not an arbitrary map. Single universe u for k, B, N and extension rings: documented, ULift-invariant, matches the citer completion_reflects_flat_liftability. No ring-level Exal duplicate in DAG, lean/Sheaf or Mathlib. Edge cases J=top, J=0, N=0, B=0, n=0 covered. Docstrings, 5 proof steps, verbatim statements, imports and the one sorry all checked. Report has Worker report and Second reading by Q77. No changes, so no compile; worker reports clean compiles."
+ }
+}

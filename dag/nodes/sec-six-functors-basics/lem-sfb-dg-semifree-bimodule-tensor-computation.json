@@ -1,0 +1,457 @@
+{
+ "id": "lem-sfb-dg-semifree-bimodule-tensor-computation",
+ "kind": "statement",
+ "title": "Semi-free DG modules compute bimodule tensor with its target action",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Let $(A,d)$ and $(B,d)$ be such differential graded algebras. A differential graded $(A,B)$-bimodule $N$ has commuting unital graded left $A$- and right $B$-actions, with $d(an)=d(a)n+(-1)^{|a|}a\\,d(n)$ and $d(nb)=d(n)b+(-1)^{|n|}n\\,d(b)$ for homogeneous elements. Use $T_N=-\\otimes_A^{\\mathbf L}N$ from [lem-sfb-dg-bimodule-derived-adjunction]. For $k\\in\\mathbf Z$ put $A[k]^i=A^{i+k}$ with differential $(-1)^kd_A$ and unchanged right action. Say that a right DG $A$-module $P$ is semi-free if it has an increasing filtration by DG submodules $0=F_{-1}P\\subset F_0P\\subset F_1P\\subset\\cdots$, with $P=\\bigcup_{j\\geq0}F_jP$, each inclusion split as a map of graded right $A$-modules, and each quotient $F_jP/F_{j-1}P$ isomorphic as a DG module to a small direct sum of shifts $A[k]$. For every such $P$, the canonical derived comparison is an isomorphism\n$$T_N(P)\\xrightarrow{\\sim}P\\otimes_A N\\quad\\text{in }D(B,d),$$\nwhere the target is the balanced DG tensor of [lem-sfb-dg-bimodule-derived-adjunction], with its right $B$-action $(p\\otimes n)b=p\\otimes(nb)$. These comparisons are natural for DG $A$-module maps between semi-free modules: under them $T_N(f)$ is the class of $f\\otimes\\mathrm{id}_N$. This is an isomorphism of DG $B$-module objects in the derived category, not only an isomorphism of their cohomology groups or of their underlying integral complexes. No flatness over $\\mathbf Z$, boundedness, countability, compactness, or condition on self extensions is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LS, lemma-derived-bc, proof: the left derived tensor is computed on modules with property (P), as defined in section-P-resolutions; the construction takes values in D(B,d)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "lem-sfb-dg-bimodule-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Regard $A$ as the dg category with one object and endomorphism complex $A$, composition given by multiplication. Its representable right module is $A$. Reindex the given filtration by $P_0=0$ and $P_{j+1}=F_jP$. Thus its semi-free modules are precisely the modules with property (P), and [lem-coef-dg-semi-free-homotopically-projective] makes them homotopically projective. By [lem-sfb-dg-homotopically-projective-hom-derived], for every such $P$ and every $X$ the localization map $\\operatorname{Hom}_{K(A,d)}(P,X)\\to\\operatorname{Hom}_{D(A,d)}(P,X)$ is bijective.",
+   "uses": [
+    "lem-coef-dg-semi-free-homotopically-projective",
+    "lem-sfb-dg-homotopically-projective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LS, lemma-derived-bc, proof; Tags 09KK, section-P-resolutions, 09KM, lemma-property-P-K-projective, 09KP, lemma-resolve, and 09KY, lemma-hom-derived."
+   }
+  },
+  {
+   "text": "For every right dg module $X$, [lem-sfb-dg-property-p-resolution] gives a quasi-isomorphism $q_X:P_X\\to X$ with property (P). Reindex its filtration by $F_jP_X=(P_X)_{j+1}$ to obtain exactly the semi-free filtration in the statement. All the modules and all cell sets lie in the chosen universe. Hence every object has a semi-free representative, with $Q_A(q_X)$ invertible in $D(A,d)$.",
+   "uses": [
+    "lem-sfb-dg-property-p-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LS, lemma-derived-bc, proof; Tags 09KK, section-P-resolutions, 09KM, lemma-property-P-K-projective, 09KP, lemma-resolve, and 09KY, lemma-hom-derived."
+   }
+  },
+  {
+   "text": "The balanced tensor of [lem-sfb-dg-bimodule-derived-adjunction] induces a functor $F:K(A,d)\\to D(B,d)$. Explicitly, for a graded $A$-linear homotopy $h$ of degree $-1$, put $H(p\\otimes n)=h(p)\\otimes n$. It is balanced since $h(pa)=h(p)a$, and right $B$-linear since $H((p\\otimes n)b)=h(p)\\otimes nb=H(p\\otimes n)b$. In $dH+Hd$ the terms involving $d_Nn$ cancel, with coefficients $(-1)^{|p|-1}+(-1)^{|p|}=0$; the remaining term is $(d h+h d)(p)\\otimes n$. Thus homotopic maps give homotopic right $B$-linear tensor maps. Identities and composition are respected on pure tensors.",
+   "uses": [
+    "lem-sfb-dg-bimodule-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LS, lemma-derived-bc, proof; Tags 09KK, section-P-resolutions, 09KM, lemma-property-P-K-projective, 09KP, lemma-resolve, and 09KY, lemma-hom-derived."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-localization-left-derived] to $C=K(A,d)$, $D=D(A,d)$, $Q=Q_A$, $H=D(B,d)$, the class of semi-free modules, and this functor $F$. Steps 1 and 2 verify its two substantive hypotheses. The resulting universal counit is an isomorphism at every semi-free $P$. Since [lem-sfb-dg-bimodule-derived-adjunction] specifies $T_N$ as the total left derived functor of this same balanced tensor, the criterion applies to its universal pair and gives the canonical comparison $T_N(P)\\xrightarrow{\\sim}P\\otimes_A N$ in $D(B,d)$.",
+   "uses": [
+    "lem-sfb-projective-localization-left-derived",
+    "lem-sfb-dg-bimodule-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LS, lemma-derived-bc, proof; Tags 09KK, section-P-resolutions, 09KM, lemma-property-P-K-projective, 09KP, lemma-resolve, and 09KY, lemma-hom-derived."
+   }
+  },
+  {
+   "text": "For a dg map $f:P\\to P'$ between semi-free modules, counit naturality gives $\\varepsilon_{P'}T_N(f)=[f\\otimes\\mathrm{id}_N]\\varepsilon_P$. These are morphisms in $D(B,d)$ throughout: step 3 used the tensor right action and $B$-linear homotopies, and step 4 took $D(B,d)$ as its target category. Thus the claimed comparisons preserve that action and have the required naturality. The argument used no flatness, boundedness, countability, compactness or self-extension hypothesis.",
+   "uses": [
+    "lem-sfb-projective-localization-left-derived",
+    "lem-sfb-dg-bimodule-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LS, lemma-derived-bc, proof; Tags 09KK, section-P-resolutions, 09KM, lemma-property-P-K-projective, 09KP, lemma-resolve, and 09KY, lemma-hom-derived."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-semi-free-homotopically-projective",
+  "lem-sfb-dg-homotopically-projective-hom-derived",
+  "lem-sfb-dg-property-p-resolution",
+  "lem-sfb-dg-bimodule-derived-adjunction",
+  "lem-sfb-projective-localization-left-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LS, proof: property-(P) computation, with its categorical comparison made explicit through outgoing Hom bijectivity (Tag 09KY)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semi.?free|DGModule|DGAlgebra|property.?[Pp].*tensor",
+   "results": {
+    "t": "2026-10-24T00:37:12Z",
+    "tool": "grep",
+    "query": "semi.?free|DGModule|DGAlgebra|property.?[Pp].*tensor",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex.tensorObj constructs an ordinary tensor of complexes; Tor and Tor' concern classical derived degrees. None computes arbitrary DG bimodule tensor in D(B,d) on semi-free A-modules, retaining its B-action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semi free differential graded module computes its derived tensor product with any differential graded bimodule",
+   "results": {
+    "t": "2026-10-24T00:37:13Z",
+    "tool": "leansearch",
+    "query": "A semi free differential graded module computes its derived tensor product with any differential graded bimodule",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "lTensorHomEquivHomLTensor",
+     "GradedTensorProduct.tmul",
+     "ModuleCat.free_δ_freeMk",
+     "ModuleCat.FreeMonoidal.μIso",
+     "TensorProduct.algebraMap_gradedMul",
+     "Bimod.tensorBimod",
+     "TensorProduct.gradedMul",
+     "TensorProduct.finsuppLeft"
+    ],
+    "digest": "0da592de8cb066fb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex.tensorObj constructs an ordinary tensor of complexes; Tor and Tor' concern classical derived degrees. None computes arbitrary DG bimodule tensor in D(B,d) on semi-free A-modules, retaining its B-action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\", \"tensor\"",
+   "results": {
+    "t": "2026-10-24T00:37:13Z",
+    "tool": "loogle",
+    "query": "\"IsKProjective\", \"tensor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex.tensorObj constructs an ordinary tensor of complexes; Tor and Tor' concern classical derived degrees. None computes arbitrary DG bimodule tensor in D(B,d) on semi-free A-modules, retaining its B-action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with a dg bimodule is computed by ordinary tensor on a semi free differential graded module with an exhaustive split filtration by sums of shifts of the dg algebra",
+   "results": {
+    "t": "2026-10-24T00:37:14Z",
+    "tool": "leanfinder",
+    "query": "Derived tensor with a dg bimodule is computed by ordinary tensor on a semi free differential graded module with an exhaustive split filtration by sums of shifts of the dg algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.tensorObj",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "HomologicalComplex.unit_tensor_d₁",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X"
+    ],
+    "digest": "12f94563fe491a74"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex.tensorObj constructs an ordinary tensor of complexes; Tor and Tor' concern classical derived degrees. None computes arbitrary DG bimodule tensor in D(B,d) on semi-free A-modules, retaining its B-action."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKProjective.*tensor|tensor.*IsKProjective|semi.?free|DGAlgebra|DGModule",
+   "results": {
+    "t": "2026-10-24T00:38:20Z",
+    "tool": "grep",
+    "query": "IsKProjective.*tensor|tensor.*IsKProjective|semi.?free|DGAlgebra|DGModule",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex.tensorObj constructs an ordinary tensor of complexes; Tor and Tor' concern classical derived degrees. None computes arbitrary DG bimodule tensor in D(B,d) on semi-free A-modules, retaining its B-action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a dg A B bimodule N and a semi free right dg A module P the derived tensor P tensor A N in the derived category of dg B modules is represented by the balanced tensor with its B action",
+   "results": {
+    "t": "2026-10-24T00:38:25Z",
+    "tool": "leanfinder",
+    "query": "For a dg A B bimodule N and a semi free right dg A module P the derived tensor P tensor A N in the derived category of dg B modules is represented by the balanced tensor with its B action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.tensorObj",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "CategoryTheory.Tor'_obj_obj",
+     "CategoryTheory.Tor_obj",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX"
+    ],
+    "digest": "fd3659c0d8854f56"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex.tensorObj constructs an ordinary tensor of complexes; Tor and Tor' concern classical derived degrees. None computes arbitrary DG bimodule tensor in D(B,d) on semi-free A-modules, retaining its B-action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semi free differential graded module computes derived tensor with an arbitrary dg bimodule in the derived category of the target dg algebra",
+   "results": {
+    "t": "2026-10-24T01:07:04Z",
+    "tool": "leanfinder",
+    "query": "A semi free differential graded module computes derived tensor with an arbitrary dg bimodule in the derived category of the target dg algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "CategoryTheory.Tor'_obj_obj",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "CategoryTheory.Tor_obj"
+    ],
+    "digest": "e0837ff92831f549"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex tensor is an ordinary complex tensor; the classical Tor constructions and generic derived-functor API do not supply the semi-free dg bimodule computation retaining the target B action. Read Monoidal.lean:44-72 and CategoryTheory/Monoidal/Tor.lean:35-55, and the generic derived API named in the hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\", \"iso\"",
+   "results": {
+    "t": "2026-10-24T01:07:28Z",
+    "tool": "loogle",
+    "query": "\"leftDerived\", \"iso\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.hasLeftDerivedFunctor_iff_of_iso",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift",
+     "CategoryTheory.Functor.leftDerivedNatIso",
+     "CategoryTheory.Functor.leftDerivedNatIso_hom",
+     "CategoryTheory.Functor.leftDerivedNatIso_inv",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso",
+     "CategoryTheory.Functor.isIso_of_isLeftDerivedFunctor_of_inverts",
+     "CategoryTheory.LocalizerMorphism.leftDerivedFunctorComparison"
+    ],
+    "digest": "073f344eb3ff3899"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex tensor is an ordinary complex tensor; the classical Tor constructions and generic derived-functor API do not supply the semi-free dg bimodule computation retaining the target B action. Read Monoidal.lean:44-72 and CategoryTheory/Monoidal/Tor.lean:35-55, and the generic derived API named in the hits."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?free|DGModule|DGAlgebra|homotopically.?projective",
+   "results": {
+    "t": "2026-10-24T01:07:28Z",
+    "tool": "grep",
+    "query": "semi.?free|DGModule|DGAlgebra|homotopically.?projective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex tensor is an ordinary complex tensor; the classical Tor constructions and generic derived-functor API do not supply the semi-free dg bimodule computation retaining the target B action. Read Monoidal.lean:44-72 and CategoryTheory/Monoidal/Tor.lean:35-55, and the generic derived API named in the hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semi free dg modules are adapted objects for the left derived tensor functor of a dg bimodule",
+   "results": {
+    "t": "2026-10-24T01:07:46Z",
+    "tool": "leansearch",
+    "query": "Semi free dg modules are adapted objects for the left derived tensor functor of a dg bimodule",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "lTensorHomEquivHomLTensor",
+     "dualTensorHomEquiv",
+     "lTensorHomEquivHomLTensor.congr_simp",
+     "ModuleCat.FreeMonoidal.μIso",
+     "Module.Free.tensor",
+     "ModuleCat.instProjectiveObjFree",
+     "Module.Flat.of_free",
+     "ModuleCat.free_δ_freeMk"
+    ],
+    "digest": "64052d12a8d46d57"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex tensor is an ordinary complex tensor; the classical Tor constructions and generic derived-functor API do not supply the semi-free dg bimodule computation retaining the target B action. Read Monoidal.lean:44-72 and CategoryTheory/Monoidal/Tor.lean:35-55, and the generic derived API named in the hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left derived functor is computed on a resolving collection of objects if the functor inverts quasi isomorphisms between those objects",
+   "results": {
+    "t": "2026-10-24T01:07:47Z",
+    "tool": "leanfinder",
+    "query": "A left derived functor is computed on a resolving collection of objects if the functor inverts quasi isomorphisms between those objects",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.hasPointwiseLeftDerivedFunctor_of_inverts",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_of_inverts",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor",
+     "CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions",
+     "CategoryTheory.Functor.leftDerived",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor.mk'",
+     "CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh"
+    ],
+    "digest": "2919bb70f0220c21"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex tensor is an ordinary complex tensor; the classical Tor constructions and generic derived-functor API do not supply the semi-free dg bimodule computation retaining the target B action. Read Monoidal.lean:44-72 and CategoryTheory/Monoidal/Tor.lean:35-55, and the generic derived API named in the hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semi free differential graded module computes derived tensor with an arbitrary dg bimodule in the derived category of the target dg algebra",
+   "results": {
+    "t": "2026-10-24T01:08:32Z",
+    "tool": "leanfinder",
+    "query": "A semi free differential graded module computes derived tensor with an arbitrary dg bimodule in the derived category of the target dg algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "CategoryTheory.Tor'_obj_obj",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "CategoryTheory.Tor_obj"
+    ],
+    "digest": "e0837ff92831f549"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomologicalComplex tensor is an ordinary complex tensor; the classical Tor constructions and generic derived-functor API do not supply the semi-free dg bimodule computation retaining the target B action. Read Monoidal.lean:44-72 and CategoryTheory/Monoidal/Tor.lean:35-55, and the generic derived API named in the hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-compact-bimodule-full-faithfulness",
+  "date": "2026-10-24",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09R9, lemma-tensor-with-compact-fully-faithful. Supporting computation in the proof of Tag 09R9: evaluating derived tensor on A[k] and on the multiplication maps A to A[k], using Tag 09LS, lemma-derived-bc, the property-(P) computation in its proof.",
+   "via": [
+    "lem-sfb-dg-compact-bimodule-full-faithfulness",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-semifree-bimodule-tensor-computation",
+  "worker": "stage1",
+  "summary": "Identified semi-free modules with property (P); reused existing projectivity, Hom-localization and resolution nodes; checked tensor homotopies retain the target B-action; isolated the generic projective-localization computation criterion and applied its universal counit. Retained the null blueprint ancestor computed from the inherited broken created.item chain; its intended blueprint route remains named in from.place. Statement unchanged.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite through 0CRM, 09S6, 09R9: the supporting 09LS property-(P) computation on A[k] and multiplication maps.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-dg-semi-free-homotopically-projective",
+    "why": "Its statement for an arbitrary small dg category specializes to the one-object dg category A and supplies the property-(P) projectivity used in the 09LS route; no same-unit node states that projectivity criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-dg-semi-free-homotopically-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-54adaa780",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-54adaa780 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full and checked them against Stacks dga 09LS, 09KK, 09KM, 09KP, 09KY and derived 06XN. The item statement is unchanged and equals live (still unsplit, no repair note, so this is a first split). Step 1: lem-coef-dg-semi-free-homotopically-projective applies to A as a one-object dg category. Its 0=P_0 filtration, shift and homotopically-projective notion match the item after reindexing. lem-sfb-dg-homotopically-projective-hom-derived then gives Hom_K(P,X)≅Hom_D(P,X). Step 2: lem-sfb-dg-property-p-resolution (arbitrary sets in u, M=0 included) reindexes to the item's F_{-1}=0. Step 3: I recomputed the homotopy descent H=h⊗id; it gives (dh+hd)⊗id, is balanced and is B-linear. Step 4: T_N is the universal pair of the adjunction node (lem-pur-left-derived-exact-when-defined convention, the same as Mathlib's IsLeftDerivedFunctor), so the 'every universal pair' clause of the new node gives ε_P iso. Step 5 is counit naturality. New node lem-sfb-projective-localization-left-derived: statement-only and self-contained. It is true: C_P→D is an equivalence by (i)+(ii), (P_Y,u_Y) is initial in (Q↓Y), so a pointwise right Kan extension exists. I tested Q=id, the empty category, P=∅ and a non-additive C. It does not duplicate lem-sfb-unary-left-derived-calculus, which needs a derivability structure that no node derives from (i)+(ii), nor lem-sf-localization-left-derived-comparison, lem-pur-left-derived-from-kflat-class or lem-pur-resolving-class-essential-constancy. Pivot flag: I accept the declared tool use of lem-coef-dg-semi-free-homotopically-projective at step 1. It is needed for dg-algebra modules (09KM), no sfb node states it, and the same use is already accepted in tool_uses of lem-sfb-dg-bimodule-derived-adjunction in this unit. 'dg categor' appears only in that one-object application. Maintainer note: that node's Lean module Sheaf.CategoryTheory.SemiFreeDGModule is absent from the live tree since the pivot, so stage 2/3 must re-provide 09KM. The null blueprint from.node is inherited from the base."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgSemifreeBimoduleTensorComputation",
+  "declaration": "CategoryTheory.DgAlgebra.semifree_bimodule_tensor_computation",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.SemiFreeFiltration",
+   "CategoryTheory.DgAlgebra.semifree_bimodule_tensor_computation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgSemifreeBimoduleTensorComputation.lean",
+  "statement": "theorem semifree_bimodule_tensor_computation (A B : Algebra.{u}) [DerivedStructure A] [DerivedStructure B] (N : Bimod A B) (F : RightModule A ⥤ RightModule B) (_t : BalancedTensorModel N F) (T : Derived A ⥤ Derived B) (α : Q A ⋙ T ⟶ F ⋙ Q B) [T.IsRightKanExtension α] : (∀ (P : RightModule A), Nonempty (SemiFreeFiltration A P) → IsIso (α.app P)) ∧ (∀ (P P' : RightModule A), Nonempty (SemiFreeFiltration A P) → Nonempty (SemiFreeFiltration A P') → ∀ f : P ⟶ P', T.map ((Q A).map f) ≫ α.app P' = α.app P ≫ (Q B).map (F.map f))",
+  "branch": "sheaf-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The node itself introduces semi-free filtrations; SemiFreeFiltration gives that filtration as actual DG modules, with exact quotient layers and degreewise coproducts of shifts. The theorem applies to the universal comparison of any balanced tensor model from the recorded derived-adjunction interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d450f9955",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 09LS/09KK. T/α are the dependency's universal right-Kan pair; BalancedTensorModel pins F (coequalizer, B-action, F.map f = f⊗id); IsIso (α.app P) is the canonical arrow in Derived B. SemiFreeFiltration has real data: F_{-1}=0 via a Subsingleton stage 0, injective DG inclusions, exhaustive, graded act-linear retractions, layers equal to the DG quotients (surjective + Function.Exact), layers are degreewise coproducts in ModuleCat of DG cells with ShiftComparison to regular A (shift sign (-1)^k, unchanged action), index : Type u. Edge cases ok: P=0, empty index, any k, unbounded, uncountable. sorry only, docstrings ok, statement verbatim, both report sections present; no file changed, no compile run. Non-blocking notes: (1) parallel same-notion def nodes Q76 def-sfb-dg-property-p-filtration and Q72 def-sfb-dg-property-p, neither on base nor landed; rebind SemiFreeFiltration after one lands; Q72/Q76 clash with each other on PropertyPFiltration. (2) owners def-sfb-dg-derived-category and def-sfb-dg-bimodule-models reached only through the cited adjunction node; advisory to add them directly. (3) the naturality conjunct is α.naturality. (4) lem-coef-dg-semi-free-homotopically-projective has no Lean module, matters at stage 3."
+ }
+}

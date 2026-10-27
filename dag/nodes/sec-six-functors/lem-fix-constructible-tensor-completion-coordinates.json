@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5, pp. 22 and 49–50, canonical augmented tensor quotient tower; proved extraction of the parent construction."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5, pp. 22 and 49–50, canonical augmented tensor quotient tower; proved extraction of the parent construction."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstructibleTensorCompletion",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": the ordinary-to-completed integral tensor comparison for evaluation.",
+   "via": [
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "lem-fix-constructible-tensor-completion-coordinates",
+ "title": "Coordinates of the canonical tensor-completion chain map",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell [def-weil-l-adic-coefficient-extension], and a scheme W [def-pc-scheme]. Work over the completed coefficient sheaf on the small pro-etale site [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients], with its unbounded derived category [def-weil-abstract-derived-category] and signed total tensor of two arbitrary cochain complexes P,Q [def-pc-tensor-complex-sheaves, lem-fix-constructible-tensor-completion-presentation]. Compose the canonical Roos augmentation of the ordinary signed total tensor with Roos of the normalized whole-tower tensor isomorphism [def-pur-integral-derived-operations, lem-pur-integral-ambient-operation-models]. This is a natural chain map into the specified completed tensor representative. Its n-th first mapping-fiber product coordinate sends a homogeneous pure tensor x tensor y to the finite tensor of the two canonical coefficient quotient sections (n denotes exponent n+1). Its shifted mapping-fiber coordinate is zero. No boundedness, nonemptiness or constructibility hypothesis is needed.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-fix-constructible-tensor-completion-presentation",
+  "lem-fix-constructible-tensor-completion-chain"
+ ],
+ "proof": [
+  {
+   "text": "Use the constructed natural chain map and its normalized component equation. The map is the actual Roos augmentation followed by the actual normalized strict tensor-tower isomorphism.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion-chain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use tensorOperationUnit_coordinates for the first product coordinate. Compose its first equality with the n-th projection, use Pi.map_pi and Pi.lift_pi_assoc, then the normalization of the quotient augmentation and of tensorTowerModel on pure tensor generators. This gives exactly the two finite quotient sections in the statement. Its second coordinate is the existing zero-coordinate equation.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "lem-fix-constructible-tensor-completion-chain",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleTensorCompletionCoordinates",
+  "file": "lean/Sheaf/Paper/ConstructibleTensorCompletionCoordinates.lean",
+  "declaration": "WeilConjectures.ConstructibleTensorModel.tensorChain_first",
+  "statement": "theorem tensorChain_first\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (p q : ℤ) (n : ℕ)\n    (U : W.ProEtᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :\n    (((((tensorCompletionChain l E W).app (P, Q)) ≫ CochainComplex.mappingCocone.fst\n      (towerTransitionEndomorphism\n      (K := fun n ↦ (integralOperationsTensorLevel l E W n).obj (P, Q))\n      (integralOperationsTowerStep ((integralOperationsTensorTowerFunctor l E W).obj (P, Q)))) ≫\n      Pi.π (fun n ↦ (integralOperationsTensorLevel l E W n).obj (P, Q)) n).f\n        (p + q)).val.app U) (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W)\n        (completedIntegralCommRingSheafUnrestricted l E W) P Q p q (p + q) rfl U x y) =\n      integralOperationsTotalTensorSection l E W n P Q p q U\n        (unrestrictedIntegralTensorSection l E W n (P.X p) U 1 x)\n        (unrestrictedIntegralTensorSection l E W n (Q.X q) U 1 y)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Roos augmentation into a mapping fiber has quotient maps as its product coordinates and zero shifted coordinates",
+   "results": "Simplicial augmentation and alternating-face-map complex results.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Pi.map_π, CategoryTheory.Limits.Pi.lift_π_assoc",
+   "results": "No results for the combined projection-law query.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*fst|mappingCocone.*snd|Pi.lift_π_assoc",
+   "results": "6 mappingCocone matches in Mathlib; no coefficient quotient coordinate formula. Pi projection laws are used as elementary categorical glue.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs node lem-fix-constructible-tensor-completion (signature unchanged, proof via 6 proved helpers + 1 true local sorry projectiveTensorChartComplete); removed unit import IntrinsicFiniteTorsionConstructibility vs unit sk-rem-sf-pf-done realized (empty; node realized only in sk-def-sf-setting, still in public import closure); 18 direct importers compiled OK in sandbox"
+ }
+}

@@ -1,0 +1,534 @@
+{
+ "id": "lem-sf-derived-weil-pullback-pushforward-adjunction",
+ "kind": "statement",
+ "title": "Actual derived Weil pullback-direct-image adjunction",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $f_0:X_0\\to Y_0$ be a separated finite-type morphism between separated finite-type $k_0$-schemes. Use the actual derived Weil categories and the actual restricted functors $f^*$ and $Rf_*$ of [def-sf-native-weil-derived-framework], whose preservation of bounded constructible cohomology is asserted separately in [lem-sf-native-weil-pullback-star-preservation]. These functors form an adjunction $f^*\\dashv Rf_*$. Thus for every $T\\in\\mathrm{WC}^{\\mathrm{der}}(Y_0)$ and $N\\in\\mathrm{WC}^{\\mathrm{der}}(X_0)$ there is a bijection\n$$\\operatorname{Hom}_{\\mathrm{WC}^{\\mathrm{der}}(X_0)}(f^*T,N)\\cong\\operatorname{Hom}_{\\mathrm{WC}^{\\mathrm{der}}(Y_0)}(T,Rf_*N),$$\nnatural in both variables. The adjunction is the restriction of the derived adjunction of the termwise module inverse image and the right-derived pushforward on $D(\\mathcal W)$; its maps are the actual derived unit and counit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, last Hom bijection; already stated without sorry in live lean/WeilConjectures/WeilSheaf/Localization.lean lines 175-195 as AlgebraicGeometry.WeilComplex.upperStarDerivedLowerStarAdjunction, restricted from ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction. Attachment candidate only; transitive closure is for the maintainer to verify."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-weil-pullback-star-preservation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-native-weil-injective-adjunction-model] to the stated finite-field and separated finite-type datum. It supplies the actual underived Weil adjunction, its exact left adjoint, resolutions inside $\\mathcal W$, and the K-injective computation of the framework\\'s ambient $f^*$ and $Rf_*$. Thus the constructions in [lem-sf-native-weil-derived-hom-comparison] apply to exactly these functors. That node gives the ambient bijections $\\Phi_{T,N}$, independent of resolutions and natural in both variables, with the specified identity transposes.",
+   "uses": [
+    "lem-sf-native-weil-injective-adjunction-model",
+    "lem-sf-native-weil-derived-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 08BJ (lemma-adjoint-preserve-K-injectives), Hom computation and homotopy adjunction; expanded by an agent to resolution independence, naturality and identity-transpose normalization. Extracted from returned proof steps 4-7."
+   }
+  },
+  {
+   "text": "Put $\\eta^d_T=\\Phi_{T,f^*T}(\\mathrm{id})$ and $\\varepsilon^d_N=\\Phi^{-1}_{Rf_*N,N}(\\mathrm{id})$. By [lem-sf-native-weil-derived-hom-comparison] these are the actual derived unit and counit. Naturality gives $\\Phi(h)=Rf_*(h)\\circ\\eta^d_T$ and $\\Phi^{-1}(a)=\\varepsilon^d_N\\circ f^*(a)$. Substituting $h=\\varepsilon^d_N$ gives $Rf_*(\\varepsilon^d_N)\\circ\\eta^d_{Rf_*N}=\\mathrm{id}$. Substituting $a=\\eta^d_T$ gives $\\varepsilon^d_{f^*T}\\circ f^*(\\eta^d_T)=\\mathrm{id}$. These are the triangle identities, so the natural Hom bijection defines the specified ambient adjunction.",
+   "uses": [
+    "lem-sf-native-weil-derived-hom-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 08BJ (lemma-adjoint-preserve-K-injectives), Hom computation and homotopy adjunction; expanded by an agent to resolution independence, naturality and identity-transpose normalization. Extracted from returned proof steps 4-7."
+   }
+  },
+  {
+   "text": "Finally apply [lem-sf-native-weil-pullback-star-preservation] with the stated $f_0,X_0,Y_0$: its hypotheses are exactly the finite-field, separated finite-type hypotheses of this item. Hence $f^*T$ and $Rf_*N$ lie in the required bounded constructible subcategories whenever $T,N$ do. By [def-sf-native-weil-derived-framework] these are full subcategories, so both Hom sets in the item are precisely the ambient Hom sets of the bijections $\\Phi_{T,N}$ in step 1. Restrict $\\Phi$, its naturality, $\\eta^d$ and $\\varepsilon^d$ to these objects. Fullness retains every unit and counit component; their triangle equalities are the same equalities of ambient morphisms from step 2. This gives every clause of the stated adjunction on the actual restricted functors.",
+   "uses": [
+    "lem-sf-native-weil-pullback-star-preservation",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, last Hom bijection: restriction of the actual ambient derived adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-injective-adjunction-model",
+  "lem-sf-native-weil-derived-hom-comparison",
+  "lem-sf-native-weil-pullback-star-preservation",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 08BJ and 070I via two separate native obligations; elementary triangle calculation and restriction as in the returned proof. Realizes fix-lem-tensor-adjunction.proof.md Step 1, last Hom bijection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryRightDerivedAdjunction|upperStarDerivedLowerStarAdjunction|ProEtaleWeilSheaf",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback is left adjoint to derived pushforward for the derived category of Weil sheaves",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Presheaf.pushforwardPullbackAdjunction",
+     "TopCat.Sheaf.instIsLeftAdjointPullback",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "TopCat.Sheaf.pullback",
+     "CategoryTheory.Functor.sheafPullback",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+     "SheafOfModules.PullbackConstruction.adjunction"
+    ],
+    "digest": "f887a321bfb021d8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"Adjunction\"",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived_counit",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Adjunction.derivedη_fac_app",
+     "CategoryTheory.Adjunction.derivedε_fac_app_assoc"
+    ],
+    "digest": "1adaaa1401f6d34f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of Frobenius equivariant sheaves is left adjoint to right derived direct image on bounded constructible complexes",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+     "LightCondMod.LocallyConstant.adjunction",
+     "SheafOfModules.instIsRightAdjointPushforward"
+    ],
+    "digest": "e3dd60503f453612"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "grep",
+   "query": "adicUpperStarLowerStarAdjunction|adicUpperStarGeometricFiberMapCompFrobeniusIso|upperStarAdicConstantSheaf",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image and direct image of adic module sheaves commute with geometric Frobenius compatibly with their adjunction unit and counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.unitToPushforwardObjUnit",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction"
+    ],
+    "digest": "a3cf1126facc6ef8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackPushforwardAdjunction\"",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModules.pullbackPushforwardAdjunction",
+     "PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "TopCat.Presheaf.pullbackPushforwardAdjunction",
+     "TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk",
+     "TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc"
+    ],
+    "digest": "9cfcb2990028bacf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction of additive exact inverse image and left exact direct image on equivariant sheaves induces adjunction on unbounded derived categories via K injective resolutions",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.derived_counit"
+    ],
+    "digest": "eac7591a0cda3cc3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback of modules over the locally finite continuous l adic coefficient sheaf has Frobenius commuting comparisons that are adjunction mates",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackIso"
+    ],
+    "digest": "4a387163b64a2e57"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical inverse image of the locally finite continuous Q l bar coefficient sheaf is an isomorphism and the Frobenius pullback and pushforward squares are mates",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackIso",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal"
+    ],
+    "digest": "369d87a935cbc53e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryRightDerivedAdjunction|derivedUpperStarLowerStarAdjunction|ProEtaleWeilSheaf",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|derivedε_fac_app|homEquiv.*[Kk]Injective|[Kk]Injective.*homEquiv",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean"
+    ],
+    "digest": "7339e7e42107eac4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KInjective\", \"adjunction\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"homEquiv\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The chain of Hom bijections using a K-injective replacement and an exact left adjoint is independent of resolution and natural in both derived variables with the original derived unit and counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app"
+    ],
+    "digest": "52f538f5bc05edfa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For native pro-etale Weil sheaves of locally finite continuous l-adic modules the Frobenius equivariant inverse image is an exact left adjoint and the direct image computes on K-injective resolutions",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "CondensedMod.LocallyConstant.adjunction",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "Condensed.profiniteSolid",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+     "SheafOfModules.PullbackConstruction.adjunction"
+    ],
+    "digest": "5e7a75e4fff01489"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Native adic Weil module sheaves have an exact inverse image left adjoint to direct image with a K-injective model for total right derivation",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullback",
+     "CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify",
+     "SheafOfModules.pushforwardPushforwardAdj"
+    ],
+    "digest": "630d0f2b5d0c36f9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution independent natural Hom equivalence on unbounded derived categories of Weil sheaves with explicitly normalized derived unit and counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derivedη.congr_simp",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.congr_simp",
+     "CategoryTheory.Adjunction.mkOfHomEquiv",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_unit_app",
+     "CategoryTheory.Adjunction.toEquivalence",
+     "CategoryTheory.Equivalence.counit"
+    ],
+    "digest": "9353fce32a15ac45"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abelian Frobenius fixed pairs of locally finite l-adic pro-etale modules are Grothendieck and their specified pullback pushforward adjunction has exact pullback and K-injective direct image",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat"
+    ],
+    "digest": "a028dc7804822c9f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For derived categories of abelian Weil sheaves show the resolution Hom chain is a canonical natural bijection and compute its transposes of identities from the underived adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val",
+     "CochainComplex.IsKInjective.Qh_map_bijective",
+     "CategoryTheory.Sheaf.H",
+     "CategoryTheory.sheafComposeNatIso",
+     "DerivedCategory.singleFunctorIsoCompQ",
+     "SheafOfModules.PullbackConstruction.adjunction"
+    ],
+    "digest": "bebd4ac3653d8d59"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the native derived Weil item; generic localization adjunctions do not discharge its native hypotheses or constructible restriction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_candidates": [],
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, final Hom bijection; the ordinary pullback/direct-image adjunction used in fix-cor-verdier-exchange.proof.md Steps 1–2, in the native derived-Weil realization. The seeded ancestor is null (blueprint_refs.py ancestor reports None); via lem-sf-weil-verdier-exchange.",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-derived-weil-pullback-pushforward-adjunction",
+  "worker": "stage1",
+  "summary": "Repair of human re-split order at returned head fb9ac2d622252ecff0be773f09a125cd5ecce345: statement unchanged; old steps 1-3 become the native injective-adjunction-model node and steps 4-7 become the native derived-hom-comparison node, both unsplit with no proof steps. The item retains only their application, the two triangle calculations, and the old full-subcategory restriction. The entire original nine-step argument is preserved verbatim in the report with an obligation-by-obligation map. All new searches were executed through msearch.py.",
+  "blueprint": "fix-lem-tensor-adjunction.proof.md Step 1, final Hom bijection; the ordinary pullback/direct-image adjunction used in fix-cor-verdier-exchange.proof.md Steps 1–2, in the native derived-Weil realization. The seeded ancestor is null (blueprint_refs.py ancestor reports None); via lem-sf-weil-verdier-exchange."
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Adjunction.derived",
+  "file": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "how": "Lines 37–46 and 144–150, read in the supplied Mathlib: an abstract localization adjunction requiring derived-functor and two composition/absoluteness hypotheses. It does not construct the native Weil-sheaf adjunction or verify those hypotheses; not a one-line specialization for this item."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sf-fixed-pair-derived-forget-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-0f91d0512",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-0f91d0512 (reviewer sub-agent of L); spot-checked: This is the 2026-10-21 human re-split: side-live repair note released, keep_plan, Q36 holds the lock, and neither new id exists in side-live. The item statement and stmt_deps are byte-identical to side-live. All 9 old step texts appear verbatim in the report. Old steps 1-3 now form lem-sf-native-weil-injective-adjunction-model (about 3070 characters) and old steps 4-7 form lem-sf-native-weil-derived-hom-comparison (about 3000 characters): two nodes of comparable size, statement-only and unsplit. Steps 8-9 stay in the item as an elementary assembly of 1855 characters: the Yoneda triangle substitution and the restriction through fullness. No argument was dropped or blurred, and neither child restates the item. The model node has no derived Hom bijection; the comparison node is ambient only and asserts no constructibility. Truth of the model node: the Grothendieck and exact-conservative forgetful clauses come from ring-sheaves-grothendieck and fixed-pair-forget ¶1. The adjunction lift with carrier unit and counit comes from the native mate identity. F_0 is exact because forgetting reflects zero. G_0 preserves K-injectives by Stacks 08BJ, which I checked. The β/c_r computation comes from def-sfb-right-derived-functor. Truth of the comparison node: I checked each arrow of the chain (070I for K-injective targets). I recomputed resolution independence through c_{r'}=Q(G_0v)c_r. Both identity normalizations hold; the counit one follows from Φ(Qε_I)=β_I via the triangle identity and T-naturality. Tested on f=id, empty schemes, N=0 and unipotent Frobenius on a point. Not a duplicate of trf-bounded-below-derived-adjunction (D^+ with enough injectives), sc-derived-adjunction-from-underived (absolute-derivability Mathlib leaf), def-weil-exact-derived-adjunction (needs both functors exact) or prop-weil-pbc-derived-inverse-image-adjunction (étale D^+). The blueprint place, fix-lem-tensor-adjunction Step 1, last Hom bijection, was checked in main-20261015. No SGA source is used, and all cited nodes are same-unit or definitions. FIX: item step 3 referred to nonexistent 'step 4' and 'step 8' (old numbering); these are now steps 1 and 2. In both new statements the notation P_T=F_T^* and W_T=A_T^{F_T^*} is now written out to match the framework, and U_T is named as the forgetful functor; this is not a mathematical change. Advisory: the model node's first paragraph overlaps lem-sf-native-weil-constructible-abelian, which its future proof should cite.; 3 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.Localization",
+  "declaration": "AlgebraicGeometry.WeilComplex.upperStarDerivedLowerStarAdjunction",
+  "statement": "noncomputable def WeilComplex.upperStarDerivedLowerStarAdjunction :\n    WeilComplex.upperStar (k₀ := k₀) (l := l) φ ⊣ WeilComplex.derivedLowerStar φ",
+  "branch": "slopmaster2",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing native adjunction on precisely the framework functors. Localization.lean constructs it by restricting ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction through ObjectProperty.fullyFaithfulι with identity comparison isomorphisms. Its homEquiv is natural in both variables, and its unit and counit are the actual ambient derived unit and counit under the inclusions. The recorded construction applies to the stated separated finite-type datum: separated implies quasi-separated; finite type means locally finite type and quasi-compact. No claim of transitive sorry-freeness is made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-398c437fb",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Existing-declaration attachment only; node equals side-live apart from lean. WeilComplex.upperStarDerivedLowerStarAdjunction (Localization.lean:191-195, identical in live) = restrictFullyFaithful of ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction = mapDerivedCategoryRightDerivedAdjunction (Adjunction.derived with mapDerivedCategoryFactorsh / rightDerivedFunctorUnit) of the real underived adjunction (mapOfNatIsoAdjunction + Frobenius mate) along fullyFaithfulι with Iso.refl, so it is the actual ambient derived unit/counit restricted. Functors are the framework's WeilComplex.upperStar/derivedLowerStar. Hypotheses QC+QS+LFT f, LFT+QC Y→Spec k0, Fact ringChar≠l are all implied by the node's separated finite-type data; nothing stronger; single framework universe u. Statement field verbatim. Edge cases (empty scheme, zero, id, immersions) covered. No H4 duplicate. Report sections present. No compile (no change)."
+ }
+}

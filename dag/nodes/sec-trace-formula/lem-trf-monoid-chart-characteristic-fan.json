@@ -1,0 +1,198 @@
+{
+ "id": "lem-trf-monoid-chart-characteristic-fan",
+ "kind": "statement",
+ "title": "Sharpening a fixed fs monoid chart and its characteristic stalks",
+ "statement": "Let $(U,M,\\alpha)$ be a locally Noetherian fs log scheme and $Q\\to\\Gamma(U,M)$ a global chart by a fine saturated monoid [def-trf-fs-log-blowup]. Put $S(Q)=(\\operatorname{Spec}_{\\mathrm{mon}}Q,\\overline{\\widetilde Q})$, the sharpened monoid spectrum [def-trf-fine-fan-blowup]. For $u\\in U$ set $E_u=\\{q\\in Q:\\alpha(q)\\in\\mathcal O_{U,u}^{\\times}\\}$. The rule $u\\mapsto Q\\setminus E_u$ and the chart homomorphism induce a local morphism of sharp monoidal spaces\n$$c_Q:(U,\\overline M)\\longrightarrow S(Q).$$\nThe log structure $M$ is associated to a log structure on the Zariski site, and $c_Q^{-1}\\overline{\\widetilde Q}\\to\\overline M$ is an isomorphism of Zariski sheaves. Here $\\overline M$ is the quotient of that Zariski log structure by $\\mathcal O_U^\\times$. For every geometric point $\\bar u$ over $u$, its comparison map canonically identifies both characteristic stalks with $Q_{E_u}/E_u^{\\mathrm{gp}}$, where $Q_{E_u}=Q-E_u$ inside $Q^{\\mathrm{gp}}$. These comparisons commute with restriction to open subsets of $U$. Every stalk of $S(Q)$ is saturated and has torsion-free group completion.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.1.2--3.1.10, pp.98--100; 3.3.2--3.3.4(ii), p.107; 3.3.12, p.108: sharpening a fixed fs monoid chart."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-trf-fine-fan-blowup",
+  "def-trf-zariski-log-structure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-chart-characteristic-stalk-comparison] to obtain Z,e,z,a,b with association, chart and section compatibility, the normalized numerator formula, and the ordinary/geometric comparison on every local log-section germ.",
+   "uses": [
+    "lem-trf-chart-characteristic-stalk-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-trf-chart-characteristic-fan-map] to the resulting Zariski chart and its normalized ordinary stalk equivalences. This gives f with the required point formula, bijective stalk maps, and numerator formula. Each bijective monoid homomorphism has a multiplicative inverse, so it is local. Apply a_x to an invertible target-stalk element: an invertible Associates class is one, and injectivity gives sharpness.",
+   "uses": [
+    "lem-trf-chart-characteristic-fan-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any open W, its inclusion preserves the neighborhood colimit: the image-on-neighborhoods functor is left adjoint to inverse image, so its opposite is final. Its canonical colimit isomorphism is inverse to the actual FineFan.stalkMap of the open restriction, as checked on each neighborhood coprojection. Compose its inverse with a_x to define aW. The inverse identity gives the required equation on all stalk elements. Substitute the already obtained ordinary/geometric comparison to prove the restricted equation for every local section.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every prime p of Q, its complement F is a submonoid and a face, since the ideal absorbs products and 1 is excluded by properness. Its closure is F itself. Use [lem-trf-affine-fan-localization-sections] to identify the actual affine stalk with Associates(Q_F), and [lem-trf-fs-face-sharpening] to obtain saturation and a finite integral basis for its completion. The equivalence induces the canonical equivalence on group completions. Transport saturation of the monoid range across it. The basis makes the completion torsion-free over the integers, so a positive power equal to 1 forces the element to be 1. This applies to every prime, independently of the scheme image.",
+   "uses": [
+    "lem-trf-affine-fan-localization-sections",
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-fan-localization-sections",
+  "lem-trf-chart-characteristic-fan-map",
+  "lem-trf-chart-characteristic-stalk-comparison",
+  "lem-trf-fs-face-sharpening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Stage 3 C9: original Steps 1 and 3 split as chart-characteristic-stalk-comparison; Steps 4 and 5 split as chart-characteristic-fan-map. Locality, sharpness, open-restriction compatibility and all-prime saturation/torsion-freeness are proved in Lean from these and the original face and affine-stalk dependencies."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fine saturated monoid chart of a log scheme gives a Zariski log structure and a sharp fan chart whose stalks are face localizations modulo units.",
+   "results": "{\"t\": \"2026-10-22T06:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"A fine saturated monoid chart of a log scheme gives a Zariski log structure and a sharp fan chart whose stalks are face localizations modulo units.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\"], \"digest\": \"4af0e76f57a9c416\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-22T06:12:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|KatoFan|MonoidalSpace",
+   "results": "{\"t\": \"2026-10-22T06:12:37Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|KatoFan|MonoidalSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sharpening a logarithmic monoid chart identifies characteristic monoids with stalks of a saturated torsion free monoidal fan.",
+   "results": "{\"t\": \"2026-10-22T06:12:38Z\", \"tool\": \"leansearch\", \"query\": \"Sharpening a logarithmic monoid chart identifies characteristic monoids with stalks of a saturated torsion free monoidal fan.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isMulTorsionFree_iff\", \"TopCat.Presheaf.submonoidPresheafOfStalk\", \"IsAffineMonoid.toIsMulTorsionFree\", \"IsMulTorsionFree.casesOn\", \"UniqueFactorizationMonoid.instIsMulTorsionFree\", \"Localization.instIsMulTorsionFree\", \"instIsMulTorsionFreeOfMulLeftStrictMonoOfMulRightStrictMono\", \"IsMulTorsionFree.mk\"], \"digest\": \"c53cbeeb1f84bf92\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sharpening a logarithmic monoid chart identifies characteristic monoids with stalks of a saturated torsion free monoidal fan.",
+   "results": "{\"t\": \"2026-10-22T06:13:09Z\", \"tool\": \"leanfinder\", \"query\": \"Sharpening a logarithmic monoid chart identifies characteristic monoids with stalks of a saturated torsion free monoidal fan.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.dirichletUnitTheorem.logEmbedding_eq_zero_iff\", \"TopCat.Presheaf.submonoidPresheafOfStalk\", \"TopCat.Presheaf.submonoidPresheafOfStalk_obj\", \"NumberField.Units.logEmbeddingQuot_apply\", \"Submonoid.log_mul\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"NumberField.Units.logEmbeddingQuot\", \"smoothSheafCommRing.isUnit_stalk_iff\"], \"digest\": \"ab8645a0465f9248\"}; Read the returned signatures: ordinary ringed-space stalks, scheme gluing and pullbacks, group completions, manifold charts, number-field logarithms and categorical monoidal localization do not assert the logarithmic monoidal-space comparison in this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A global fine saturated monoid chart induces an isomorphism of characteristic sheaves with the pullback of the sharp monoid spectrum.",
+   "results": "{\"t\": \"2026-10-23T09:28:51Z\", \"tool\": \"leanfinder\", \"query\": \"A global fine saturated monoid chart induces an isomorphism of characteristic sheaves with the pullback of the sharp monoid spectrum.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_toSpecΓ\", \"AlgebraicGeometry.StructureSheaf.isIso_to_global\", \"AlgebraicGeometry.LocallyRingedSpace.SpecΓIdentity_inv_app\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"AlgebraicGeometry.LocallyRingedSpace.SpecΓIdentity_hom_app\", \"AlgebraicGeometry.SpecMap_ΓSpecIso_hom\", \"AlgebraicGeometry.LocallyRingedSpace.SpecΓIdentity\"], \"digest\": \"fbdc7c47fe264ef6\"}; Read the returned signatures: these concern ordinary scheme stalks, localizations, etale loci, or general sheafification. None constructs associated logarithmic structures or proves the logarithmic change-of-site comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|KatoFan|MonoidalSpace",
+   "results": "{\"t\": \"2026-10-23T09:29:48Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|KatoFan|MonoidalSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: these concern ordinary scheme stalks, localizations, etale loci, or general sheafification. None constructs associated logarithmic structures or proves the logarithmic change-of-site comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A logarithmic chart has characteristic stalk equal to localization at the unit face modulo its group of units.",
+   "results": "{\"t\": \"2026-10-23T09:29:49Z\", \"tool\": \"leansearch\", \"query\": \"A logarithmic chart has characteristic stalk equal to localization at the unit face modulo its group of units.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"AlgebraicGeometry.StructureSheaf.stalkIso\", \"AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Proj.stalkIso\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_mk'\", \"ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk\"], \"digest\": \"bd153185e817c75e\"}; Read the returned signatures: these concern ordinary scheme stalks, localizations, etale loci, or general sheafification. None constructs associated logarithmic structures or proves the logarithmic change-of-site comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-23T09:29:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: these concern ordinary scheme stalks, localizations, etale loci, or general sheafification. None constructs associated logarithmic structures or proves the logarithmic change-of-site comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-fan-chart-blowup",
+  "date": "2026-10-22",
+  "group": "Q109"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, 3.3.2--3.3.13, pp.106--109, especially 3.3.4(ii), 3.3.8--3.3.11, 3.3.13(i),(iii); finite cover as in proof of 3.3.15. Subargument: returned log-fan-chart-blowup proof step(s) 1; Expose VIII 3.1.2--3.1.10, pp.98--100; 3.3.2--3.3.4(ii), p.107; 3.3.12, p.108: sharpening a fixed fs monoid chart.",
+   "via": [
+    "lem-trf-log-fan-chart-blowup",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoid-chart-characteristic-fan",
+  "worker": "stage1",
+  "summary": "Constructed the fixed-chart sharpening by explicit unit-locus and localization formulas, reusing the existing fs face-sharpening and affine-fan stalk theorems. Isolated only the general prelog-sheaf logification/change-of-site comparison; checked nonsharp charts, all fan points, and restriction compatibility. Statement unchanged.",
+  "blueprint": "Historical nearby-duality/alteration branch recorded in blueprint.from.place, through lem-trf-log-fan-chart-blowup step 1: fixed fs chart becomes a fan chart. This is a foundational detail below that node; no change to the current blueprint unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-ec2192ce3",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-ec2192ce3 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-trf-zariski-prelog-logification-comparison, every cited statement, and the source ILO VIII 3.1.5-3.1.10 (pp.99-100), 3.3.2-3.3.4 (pp.106-107) and 3.3.12 (p.108). This is a first split, not a re-split: live and side-live hold the item unsplit with an identical statement. The item statement matches 3.1.8 + 3.3.2 + 3.3.12, and all cited nodes are in unit sk-i-curve-zero. Steps 2-6 check out: E_u is a face, so Q minus E_u is a prime ideal. fs-face-sharpening and affine-fan-localization-sections give Q_F/F^gp as the stalk at every prime, including the empty prime. The explicit inverse maps of step 3 are well defined because Q is integral, and they kill E^gp. The unit loci V_a are open, the localization map on the basis is well defined because the sections of M-bar are sharp, the stalk isomorphisms are local, and restriction to opens is compatible. The new node (sheafified Zariski logification, its change to the étale site, pushout stalks, restriction compatibility) is true. Kato's construction checks out on Spec k with N, with beta(1) zero or a unit, and with the identity on O_X. It overlaps the étale-site nodes prelog-pushout-log-axiom, prelog-pushout-hom-extension and etale-log-presentation-comparison only in its étale clauses, so it is not a duplicate and does not restate the item. Searches are recorded and there is no SGA. FIX (C3/E5): step 1 identified L_E with M by lem-trf-associated-log-universal-stalks, but that lemma concerns the constant-presheaf construction L_X(Q,beta). I added the bridge: ε^{-1} is left adjoint to ε_*, constant-sheaf sheafification, and U is final, so maps from ε^{-1} of the constant sheaf Q are the same as maps Q -> K(U). L_E and M then have the same universal property and are canonically isomorphic. I added uses def-weil-pbc-constant-sheaf, lem-trf-commutative-monoid-sheafification and def-trf-geometric-morphism and synced proof_deps. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonoidChartCharacteristicFan",
+  "declaration": "AlgebraicGeometry.monoid_chart_characteristic_fan",
+  "declarations": [
+   "AlgebraicGeometry.monoid_chart_characteristic_fan"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MonoidChartCharacteristicFan.lean",
+  "statement": "theorem monoid_chart_characteristic_fan (X : FineSaturatedLogScheme.{u}) (Q : Type u) [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) (c : Q →* X.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (⊤ : X.scheme.Opens).ι))) (hc : X.logStructure.IsChart (Scheme.Etale.mk (⊤ : X.scheme.Opens).ι) c) : ∃ (Z : ZariskiLogStructure X.scheme) (e : Z.toZariskiPrelogStructure.EtaleMap X.logStructure) (z : Q →* Z.monoidSheaf.obj.obj (op ⊤)) (f : Z.characteristicMonoidalSpace ⟶ FineFan.affine Q) (a : ∀ x : X.scheme, FineFan.stalk Z.characteristicMonoidalSpace.presheaf x ≃* Associates (Algebra.faceLocalization Q (X.logStructure.globalChartUnitFace c x))) (b : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), X.logStructure.characteristic t ≃* Associates (Algebra.faceLocalization Q (X.logStructure.globalChartUnitFace c (t default)))), e.IsAssociation ∧ Z.IsChart ⊤ z ∧ (e.sectionMap ⊤).comp z = c ∧ FineFan.IsLocalMorphism f ∧ (∀ x : X.scheme, FineFan.IsSharp (FineFan.stalk Z.characteristicMonoidalSpace.presheaf x)) ∧ (∀ (x : X.scheme) (q : Q), q ∈ (f.hom.base x).carrier ↔ q ∉ X.logStructure.globalChartUnitFace c x) ∧ (∀ x : X.scheme, Function.Bijective (FineFan.stalkMap f x)) ∧ (∀ (x : X.scheme) (q : Q), FineFan.stalkMap f x (FineFan.affineGerm (f.hom.base x) q) = FineFan.germ Z.characteristicMonoidalSpace.presheaf ⊤ x (by trivial) (Z.characteristicSection ⊤ (z q))) ∧ (∀ (x : X.scheme) (q : Q), ∃ r : Algebra.faceLocalization Q (X.logStructure.globalChartUnitFace c x), r.val = Algebra.GrothendieckGroup.of q ∧ a x (FineFan.germ Z.characteristicMonoidalSpace.presheaf ⊤ x (by trivial) (Z.characteristicSection ⊤ (z q))) = Associates.mk r) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (V : X.scheme.Opens) (w : (Scheme.pointSmallEtale t).fiber.obj (Scheme.Etale.mk V.ι)) (hx : t default ∈ V) (s : Z.monoidSheaf.obj.obj (op V)), b Ω t (Associates.mk (X.logStructure.toEtalePrelogStructure.germ t (Scheme.Etale.mk V.ι) w (e.sectionMap V s))) = a (t default) (FineFan.germ Z.characteristicMonoidalSpace.presheaf V (t default) hx (Z.characteristicSection V s))) ∧ (∀ W : X.scheme.Opens, ∃ aW : ∀ (x : X.scheme) (hx : x ∈ W), FineFan.stalk (Z.characteristicMonoidalSpace.restrict W.isOpenEmbedding).presheaf ⟨x, hx⟩ ≃* Associates (Algebra.faceLocalization Q (X.logStructure.globalChartUnitFace c x)), (∀ (x : X.scheme) (hx : x ∈ W) (m : FineFan.stalk Z.characteristicMonoidalSpace.presheaf x), aW x hx (FineFan.stalkMap (Z.characteristicMonoidalSpace.ofRestrict W.isOpenEmbedding) ⟨x, hx⟩ m) = a x m) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (hw : t default ∈ W) (V : X.scheme.Opens) (_hV : V ≤ W) (w : (Scheme.pointSmallEtale t).fiber.obj (Scheme.Etale.mk V.ι)) (hv : t default ∈ V) (s : Z.monoidSheaf.obj.obj (op V)), b Ω t (Associates.mk (X.logStructure.toEtalePrelogStructure.germ t (Scheme.Etale.mk V.ι) w (e.sectionMap V s))) = aW (t default) hw (FineFan.stalkMap (Z.characteristicMonoidalSpace.ofRestrict W.isOpenEmbedding) ⟨t default, hw⟩ (FineFan.germ Z.characteristicMonoidalSpace.presheaf V (t default) hv (Z.characteristicSection V s)))) ∧ (∀ p : FineFan.MonoidPrime Q, (MonoidHom.mrange (Algebra.GrothendieckGroup.of (M := FineFan.stalk (FineFan.affine Q).presheaf p))).PowSaturated ∧ ∀ (g : Algebra.GrothendieckGroup (FineFan.stalk (FineFan.affine Q).presheaf p)) (n : ℕ), 0 < n → g ^ n = 1 → g = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing Zariski-log-structure definition node, added to stmt_deps. Global sections are evaluated at the final top-open subscheme, canonically isomorphic to the identity etale object. Stalk bijectivity states the equivalent inverse-image sheaf-isomorphism condition. Helper definitions only package the existing sharpSheaf construction and the prescribed unit face; all comparison equivalences are normalized on actual chart and log-section germs. Stage 3 C9: the three helper definitions are relocated verbatim to MonoidChartCharacteristicStalks and publicly re-exported; their Lean attachment is carried by lem-trf-chart-characteristic-stalk-comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e38410d9",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Read the node, all 3 stmt_dep declarations (FineSaturatedLogScheme carries locallyNoetherian; EtaleLogStructure.IsChart/characteristic; FineFan affine/sharpSheaf/stalkMap/IsLocalMorphism/MonoidPrime; ZariskiLogStructure/EtaleMap.IsAssociation), faceLocalization and PowSaturated. Clause by clause: E_u = IsUnit comap through germ∘topIso∘α∘c in the ordinary stalk; Z with IsAssociation, chart z and e∘z=c; M̄ = sharpSheaf of Z (units = α⁻¹O^× by the log axiom); f local with sharp stalks and pinned by the point formula and affineGerm equation; inverse-image iso as stalk bijectivity; a and b pinned on chart and log-section germs (chart germs generate the characteristic); final clause over all MonoidPrime Q including the empty prime. Edge cases (empty scheme, group Q, all units, empty W) and universes (Q : Type u forced by FineFan.affine) checked. stmt_deps gain only the landed def-trf-zariski-log-structure (allowed); lean.statement verbatim; 1 sorry; lines ≤98; docstrings with source, blueprint id and 6 proof steps; helpers non-hollow and not owned by any def node (logChartUnitFace and sharpSpace are theorem-owned and different). No compile (nothing changed). Advisory: the restriction clause is nearly implied by the pinned a/b but faithful."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6afff",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T091329-L-3333494",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature/lean.statement vs clone (identical); relocated defs vs original (verbatim, publicly re-exported, no importers); new sorry statements vs ILO VIII 3.3.2-3.3.4/3.3.12 and node lean.statement; axioms via combined scratch compile (sorryAx only from the two new holes)"
+ }
+}

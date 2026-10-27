@@ -1,0 +1,223 @@
+{
+ "id": "lem-trf-invertible-relation-minor-generators",
+ "kind": "statement",
+ "title": "An invertible relation block eliminates fixed generators on a principal open",
+ "statement": "Let $A$ be a commutative ring, $a,b\\geq0$, and $\\pi:A^{\\oplus(a+b)}\\twoheadrightarrow M$ a surjective $A$-linear map. Write $m_j=\\pi(e_j)$ for the standard generators. Let $(C\\ D)$ be an $a\\times(a+b)$ matrix [def-weil-matrix], with $C$ square of size $a$, such that every row lies in $\\ker\\pi$. Put $\\delta=\\det C$, using the determinant of [def-weil-pbc-matrix-determinant]. Let $A_\\delta=A[1/\\delta]$ [def-weil-ring-localization-away] and $M_\\delta$ be the localization at the powers of $\\delta$ [def-weil-pbc-module-localization]. Then in $M_\\delta$, with $x=(m_1/1,\\ldots,m_a/1)$ and $y=(m_{a+1}/1,\\ldots,m_{a+b}/1)$, one has $\\delta x+\\operatorname{adj}(C)Dy=0$ and $x=-\\delta^{-1}\\operatorname{adj}(C)Dy$, where the adjugate has entries $\\operatorname{adj}(C)_{ij}=(-1)^{i+j}\\det(C^{(j,i)})$, where $C^{(j,i)}$ is obtained by deleting row $j$ and column $i$ of $C$. In particular, the last $b$ elements $m_{a+1}/1,\\ldots,m_{a+b}/1$ generate $M_\\delta$. Moreover, on $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum], let $\\widetilde M$ and its canonical sections $\\tau(m_j)$ be those of [lem-weil-pbc-spec-module-tilde-sections]. The restrictions of $\\tau(m_{a+1}),\\ldots,\\tau(m_{a+b})$ generate $\\widetilde M|_{D(\\delta)}$ as a sheaf [def-weil-pbc-generating-sections]. This includes $a=0$ with $\\delta=1$, and $b=0$ with $M_\\delta=0$. No finite generation assumption on $\\ker\\pi$ is made.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07ZC, lemma-fitting-ideal-generate-locally, constructive relation-minor form of (1) implies (4); direct adjugate refinement retained from the returned proof step 2, with the associated-sheaf local-generation conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-matrix",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Each row relation says $\\sum_{i=1}^a C_{ki}m_i+\\sum_{j=1}^bD_{kj}m_{a+j}=0$ in $M$. Apply the linear map $m\\mapsto m/1$ of [def-weil-pbc-module-localization], obtaining $Cx+Dy=0$. Multiply its $k$th equation by $\\operatorname{adj}(C)_{ik}$ and sum over $k$. Distribute and interchange the finite sums; [lem-weil-pbc-matrix-adjugate-identity] gives $\\sum_k\\operatorname{adj}(C)_{ik}C_{k\\ell}=\\delta\\,\\mathbf1_{i=\\ell}$. Thus $\\delta x+\\operatorname{adj}(C)Dy=0$, with precisely the cofactor convention in that cited statement.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ZC (lemma-fitting-ideal-generate-locally), constructive refinement of (1) implies (4); agent argument using Tag 07DQ (algebra-lemma-matrix-left-inverse) and Tag 01HV (schemes-lemma-spec-sheaves) (4),(5)."
+   }
+  },
+  {
+   "text": "By [def-weil-ring-localization-away], $\\delta/1$ is a unit of $A_\\delta$ with inverse $1/\\delta$. Multiply the preceding identity by its inverse to get $x=-\\delta^{-1}\\operatorname{adj}(C)Dy$. Every element of $M_\\delta$ is $m/\\delta^n$ by [def-weil-pbc-module-localization]; surjectivity of $\\pi$ writes $m=\\sum_{i=1}^{a+b}r_i m_i$. Substitute the displayed expression for each of the first $a$ generators, so $m/\\delta^n$ is an $A_\\delta$-linear combination of the last $b$. If $a=0$, the determinant is $1$ by [def-weil-pbc-matrix-determinant], and the original surjection gives the conclusion. If $b=0$, the combination is empty, so every localized element is zero. This also covers the zero ring and $\\delta=0$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ZC (lemma-fitting-ideal-generate-locally), constructive refinement of (1) implies (4); agent argument using Tag 07DQ (algebra-lemma-matrix-left-inverse) and Tag 01HV (schemes-lemma-spec-sheaves) (4),(5)."
+   }
+  },
+  {
+   "text": "Construct the canonical compatible family of last-generator sections on D(delta). To show its free map is epic, let p and q be two maps out of the restricted tilde M agreeing after that free map. They agree on every last-generator section. Apply step 1 already in M and then the canonical map to sections on any open V contained in D(delta). Its adjugate identity, linearity of p and q, and invertibility of delta in the structure ring on V imply that p and q also agree on every first-generator section. The original module surjection pi is the finite sum of coordinate projections followed by the maps A -> M sending 1 to each original generator. Apply the additive tilde functor and the additive restriction functor. The tilde adjunction is [lem-weil-pbc-affine-tilde-gamma-adjunction]; compose it with Mathlib's restriction adjunction SheafOfModules.overPushforwardOverAdj. The elementary Hom-adjunction argument Functor.preservesEpimorphisms_of_adjunction shows that the composite sends pi to an epimorphism. For each coordinate summand, naturality of the canonical sections from [lem-weil-pbc-spec-module-tilde-sections] identifies its value on 1 with that generator section; ring-linearity shows that p and q agree on the entire summand. Hence they agree after the image of pi, and cancellation of that epimorphism gives p=q. This is the epimorphism of [def-weil-pbc-generating-sections]. The proof includes empty D(delta) and empty index sets without case distinctions.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-pbc-generating-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ZC (lemma-fitting-ideal-generate-locally), constructive refinement of (1) implies (4); agent argument using Tag 07DQ (algebra-lemma-matrix-left-inverse) and Tag 01HV (schemes-lemma-spec-sheaves) (4),(5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-generating-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07ZC motivates the statement; the explicit adjugate argument uses Algebra Tag 07DQ. For sheaf generation use naturality of the associated-sheaf maps (Schemes Tag 01HV) and preservation of epimorphisms by the tilde and restriction left adjoints, followed by categorical cancellation, rather than constructing local lifts on a basis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fittingIdeal|presentationFittingIdeal|minor.*generat|generat.*minor|adjugate",
+   "results": "{\"t\": \"2026-10-22T06:05:23Z\", \"tool\": \"grep\", \"query\": \"fittingIdeal|presentationFittingIdeal|minor.*generat|generat.*minor|adjugate\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Resultant/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Resultant/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Resultant/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Resultant/Basic.lean\"], \"digest\": \"8e705672dcd44dfb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: determinant inversion, PID normal forms and general local-generator data do not assert elimination of fixed module generators and sheaf generation on the chosen principal open"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relations with an invertible determinant eliminate generators of a module after localization",
+   "results": "{\"t\": \"2026-10-22T06:05:23Z\", \"tool\": \"leansearch\", \"query\": \"Relations with an invertible determinant eliminate generators of a module after localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.of_isLocalization\", \"Module.Finite.instLocalizationLocalizedModule\", \"isLocalizedModule_iff\", \"localizedModuleIsLocalizedModule\", \"LinearMap.isUnit_iff_isUnit_det\", \"Module.Invertible.instLocalizationLocalizedModule\", \"Matrix.invertibleEquivDetInvertible\", \"Algebra.Generators.localizationAway_val\"], \"digest\": \"e580a28ad0d05bec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: determinant inversion, PID normal forms and general local-generator data do not assert elimination of fixed module generators and sheaf generation on the chosen principal open"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.adjugate, Matrix.det, Submodule.span",
+   "results": "{\"t\": \"2026-10-22T06:05:23Z\", \"tool\": \"loogle\", \"query\": \"Matrix.adjugate, Matrix.det, Submodule.span\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: determinant inversion, PID normal forms and general local-generator data do not assert elimination of fixed module generators and sheaf generation on the chosen principal open"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible (n-r) by (n-r) minor of relations among n generators of a module lets the remaining r generators generate on that principal open",
+   "results": "{\"t\": \"2026-10-22T06:05:41Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible (n-r) by (n-r) minor of relations among n generators of a module lets the remaining r generators generate on that principal open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.basis_of_pid_aux\", \"Submodule.smithNormalFormCoeffs\", \"Ideal.exists_smith_normal_form\", \"Submodule.exists_smith_normal_form_of_rank_eq\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Submodule.smithNormalFormCoeffs_ne_zero\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.Basis.SmithNormalForm\"], \"digest\": \"ebeba3aea15306f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: determinant inversion, PID normal forms and general local-generator data do not assert elimination of fixed module generators and sheaf generation on the chosen principal open"
+  },
+  {
+   "tool": "grep",
+   "query": "fittingIdeal|FittingIdeal|fitting_ideal|relation.*minor|minor.*relation",
+   "results": "{\"t\": \"2026-10-22T06:05:59Z\", \"tool\": \"grep\", \"query\": \"fittingIdeal|FittingIdeal|fitting_ideal|relation.*minor|minor.*relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Matroid/Minor/Order.lean\", \"Mathlib/Combinatorics/Matroid/Minor/Order.lean\"], \"digest\": \"3a0fa9e70cfa44b5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: determinant inversion, PID normal forms and general local-generator data do not assert elimination of fixed module generators and sheaf generation on the chosen principal open"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite generating family with n minus r independent relations has r generators after inverting a nonzero relation minor; the images of those sections generate the associated quasi-coherent sheaf on the principal open",
+   "results": "{\"t\": \"2026-10-22T06:06:15Z\", \"tool\": \"leanfinder\", \"query\": \"A finite generating family with n minus r independent relations has r generators after inverting a nonzero relation minor; the images of those sections generate the associated quasi-coherent sheaf on the principal open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.localGeneratorsData_generators\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.QuasicoherentData.localGeneratorsData_I\", \"SheafOfModules.GeneratingSections.I\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\"], \"digest\": \"d833ea48a44f4b7c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: determinant inversion, PID normal forms and general local-generator data do not assert elimination of fixed module generators and sheaf generation on the chosen principal open"
+  },
+  {
+   "tool": "grep",
+   "query": "adjugate_mul|mul_adjugate|relation.*minor|minor.*relation",
+   "results": "{\"t\": \"2026-10-23T04:05:47Z\", \"tool\": \"grep\", \"query\": \"adjugate_mul|mul_adjugate|relation.*minor|minor.*relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/Matrix/ZPow.lean\"], \"digest\": \"9c2336ab2a8bd87e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give adjugate identities (already the cited Mathlib leaf), tilde local fractions, module presentations or PID Smith normal form, but not the fixed-generator elimination and associated-sheaf conclusion over an arbitrary commutative ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relations with a unit determinant express the first generators in terms of the remaining generators of a module",
+   "results": "{\"t\": \"2026-10-23T04:05:47Z\", \"tool\": \"leansearch\", \"query\": \"Relations with a unit determinant express the first generators in terms of the remaining generators of a module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.coe_ofIsUnitDet\", \"Module.Relations.relation\", \"LinearEquiv.ofIsUnitDet.congr_simp\", \"Module.Relations.mk\", \"LinearEquiv.ofIsUnitDet\", \"Module.Relations.R\", \"Module.Basis.det_unitsSMul\", \"Module.Basis.det_self\"], \"digest\": \"b04b833af8a7ec6c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give adjugate identities (already the cited Mathlib leaf), tilde local fractions, module presentations or PID Smith normal form, but not the fixed-generator elimination and associated-sheaf conclusion over an arbitrary commutative ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.adjugate, Matrix.det, Submodule.span",
+   "results": "{\"t\": \"2026-10-23T04:05:47Z\", \"tool\": \"loogle\", \"query\": \"Matrix.adjugate, Matrix.det, Submodule.span\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give adjugate identities (already the cited Mathlib leaf), tilde local fractions, module presentations or PID Smith normal form, but not the fixed-generator elimination and associated-sheaf conclusion over an arbitrary commutative ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible minor of a matrix of relations eliminates fixed module generators after localization and generates the associated sheaf on a principal open",
+   "results": "{\"t\": \"2026-10-23T04:05:50Z\", \"tool\": \"leanfinder\", \"query\": \"Invertible minor of a matrix of relations eliminates fixed module generators after localization and generates the associated sheaf on a principal open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.const\", \"SheafOfModules.Presentation.map_generators_I\", \"ModuleCat.Tilde.isLocallyFraction_pred\", \"SheafOfModules.QuasicoherentData.localGeneratorsData_generators\", \"ModuleCat.Tilde.isFraction\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.LocalGeneratorsData.I\", \"ModuleCat.Tilde.sectionsSubmodule\"], \"digest\": \"14b4f484707ba0d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give adjugate identities (already the cited Mathlib leaf), tilde local fractions, module presentations or PID Smith normal form, but not the fixed-generator elimination and associated-sheaf conclusion over an arbitrary commutative ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quotient module, a square block of relations with invertible determinant expresses the corresponding generators as linear combinations of the remaining ones using the adjugate matrix",
+   "results": "{\"t\": \"2026-10-23T04:06:07Z\", \"tool\": \"leanfinder\", \"query\": \"In a quotient module, a square block of relations with invertible determinant expresses the corresponding generators as linear combinations of the remaining ones using the adjugate matrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Relations.Solution.ofQuotient\", \"Module.Relations.Solution.ofQuotient_isPresentation\", \"Module.Relations.Solution.ofQuotient_var\", \"Module.Basis.SmithNormalForm.snf\", \"Module.Relations.Solution.IsPresentation.linearEquiv_symm_var\", \"FixedDetMatrices.reduce_mem_reps\", \"FixedDetMatrices.reduceStep\", \"Module.Basis.SmithNormalForm.a\"], \"digest\": \"3cbf0c90c1640a1c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give adjugate identities (already the cited Mathlib leaf), tilde local fractions, module presentations or PID Smith normal form, but not the fixed-generator elimination and associated-sheaf conclusion over an arbitrary commutative ring"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fitting-ideal-generate-locally",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise Fitting calculation below the nodal-family geometry: returned fitting-generator proof step 2, the block relation Cx+Dy=0, adjugate elimination, and local sheaf-surjectivity argument.",
+   "via": [
+    "lem-trf-fitting-ideal-generate-locally",
+    "lem-trf-dth-fitting-smooth-locus",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-invertible-relation-minor-generators",
+  "worker": "stage1",
+  "summary": "NO: proved the relation identities by the existing adjugate Mathlib leaf; proved generation by explicit fractions and sheaf generation on basic opens by the existing tilde-sections Mathlib leaf. No new nodes, no extra finiteness assumptions, no statement change. Checked zero-sized blocks and zero localizations.",
+  "blueprint": "The inherited branch from lem-trf-local-term-locality through the fitting-generator calculation: realizes the explicit block-relation, adjugate elimination and local sheaf-surjectivity argument named in blueprint.from.place. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-5a053119f",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-5a053119f (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes and its statement is unchanged. The statement is true and I tested it on a=0 (δ=1), b=0 (M_δ=0), δ=0, a one-relation 1+1 example and ℤ/6 with relation (2,−2). Step 1: a row of (C D) in ker π gives Cx+Dy=0 after the linear map m↦m/1 [def-weil-pbc-module-localization]. Multiplying by adj(C) and applying the Mathlib leaf lem-weil-pbc-matrix-adjugate-identity (adj·M=det·1) gives δx+adj(C)Dy=0, with the right orientation. Step 2: δ/1 is a unit [def-weil-ring-localization-away] and det of the empty matrix is 1 [def-weil-pbc-matrix-determinant]. Substituting into m/δ^n=Σr_i m_i/δ^n proves generation, so elementary is correct. Step 3: M_δ→M_{δh} is semilinear. The tilde leaf gives Ñ(D(δh))≅M_{δh}, the compatibility of τ with restriction, and O(D(δh))=A_{δh}. For the cover, V⊆D(δ), X∖V=V(I) and h∈I∖p give p∈D(δh)⊆V, which meets def-weil-pbc-generating-sections; this is elementary. The item gives exactly what parent lem-trf-fitting-ideal-generate-locally step 2 needs (a=n−r, b=r, and a=0). Every cited statement is a Mathlib leaf or a definition, so there is no route problem, no tool_uses and no cycle. I found no duplicate. lem-trf-affine-principal-fitting-generators states a different local-ring claim, and no blueprint node matches. Sources: Stacks 07ZC (more-algebra.tex 1524-1547) is proved by Nakayama and reduction to a field, so proof_origin=agent is honest. I also read 07DQ (algebra.tex 2668ff) for the adjugate and 01HV for the tilde sections. No SGA source is used. There is no repair note, so the re-split rule does not apply; the base proof was empty, so nothing was dropped. The report's mention of citations.json does not match the commit, which does not contain it; this does not affect the review."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InvertibleRelationMinorGenerators",
+  "declaration": "LinearMap.invertible_relation_minor_generators",
+  "file": "lean/Sheaf/RingTheory/InvertibleRelationMinorGenerators.lean",
+  "statement": "theorem invertible_relation_minor_generators (A : CommRingCat.{u}) (M : ModuleCat.{u} A) (a b : ℕ) (π : (Fin (a + b) → A) →ₗ[A] M) (hπ : Function.Surjective π) (C : Matrix (Fin a) (Fin a) A) (D : Matrix (Fin a) (Fin b) A) (hrel : ∀ k : Fin a, π (Fin.append (C k) (D k)) = 0) : (∀ i : Fin a, C.det • LocalizedModule.mkLinearMap (Submonoid.powers C.det) M (π (Pi.single (Fin.castAdd b i) 1)) + ∑ k : Fin a, ∑ j : Fin b, (C.adjugate i k * D k j) • LocalizedModule.mkLinearMap (Submonoid.powers C.det) M (π (Pi.single (Fin.natAdd a j) 1)) = 0) ∧ (∀ i : Fin a, LocalizedModule.mkLinearMap (Submonoid.powers C.det) M (π (Pi.single (Fin.castAdd b i) 1)) = -((IsLocalization.Away.invSelf C.det : Localization.Away C.det) • ∑ k : Fin a, ∑ j : Fin b, (C.adjugate i k * D k j) • LocalizedModule.mkLinearMap (Submonoid.powers C.det) M (π (Pi.single (Fin.natAdd a j) 1)))) ∧ Submodule.span (Localization.Away C.det) (Set.range (fun j : Fin b ↦ LocalizedModule.mkLinearMap (Submonoid.powers C.det) M (π (Pi.single (Fin.natAdd a j) 1)))) = ⊤ ∧ (∃ s : ULift.{u} (Fin b) → ((tilde M).over (PrimeSpectrum.basicOpen C.det)).sections, (∀ (j : ULift.{u} (Fin b)) (V : (Over (PrimeSpectrum.basicOpen C.det))ᵒᵖ), (s j).val V = tilde.toOpen M V.unop.left (π (Pi.single (Fin.natAdd a j.down) 1))) ∧ Epi (((tilde M).over (PrimeSpectrum.basicOpen C.det)).freeHomEquiv.symm s))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33825f761",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Snapshot item node = live node except new lean record; lean.statement verbatim in file with := by sorry; no parallel delivery in svc.log. Hypotheses match the node exactly (CommRingCat/ModuleCat common universe u per tilde interface; a b : ℕ; surjective π on Fin (a+b) → A; rows Fin.append (C k) (D k) in ker π; no finiteness). δ = Matrix.det, A_δ = Localization.Away, M_δ = LocalizedModule powers, m/1 = mkLinearMap: recorded deps. Mathlib adjugate = transposed cofactor matrix, same convention as node and lem-weil-pbc-matrix-adjugate-identity; no adjugate def node exists. Conjuncts: δx+adj(C)Dy=0 componentwise; x=-invSelf•adj(C)Dy; span over A_δ of the last b = ⊤; sections of (tilde M).over D(δ) pinned to tilde.toOpen on every V, with Epi freeHomEquiv.symm s = the GeneratingSections epi field (recorded rendering). Edge cases a=0, b=0, δ=0/nilpotent, zero ring all hold. No defs, only theorem sorry, source/blueprint docstrings with proof plan, Mathlib-only imports, report sections present, no duplicate found. Compile not re-run per instructions; no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T002522-L-94517",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

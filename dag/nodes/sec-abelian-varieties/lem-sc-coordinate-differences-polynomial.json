@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-coordinate-differences-polynomial",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mult-n-finite-flat",
+   "place": "proof paragraph invoking Tag 0BEM for the numerical-polynomial bound; Integrating polynomial coordinate differences on the integer lattice",
+   "via": [
+    "lem-sc-snapper-numerical-polynomial",
+    "def-sc-intersection-number"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integrating polynomial coordinate differences on the integer lattice",
+ "statement": "Let r,d be natural numbers and f:Z^r→Q a function. For every coordinate j suppose a rational multivariate polynomial Q_j is zero or has total degree < d, and f(n+e_j)-f(n)=Q_j(n) for every integer vector n. Then there is P in Q[T_0,...,T_(r-1)] of total degree at most d with P(n)=f(n) for all integer vectors n. Polynomial means the polynomial ring of [def-weil-polynomial-ring], with finitely many variables.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEM, proof of Lemma 33.45.1; lean/Sheaf/Algebra/MvPolynomial/CoordinateDifferences.lean"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-trf-rational-sequence-polynomial-forward-difference] on the partial sums of t^m to obtain a rational polynomial B_m of degree at most m+1, B_m(0)=0, and B_m(t+1)-B_m(t)=t^m on naturals. The identity is polynomial, so equality at infinitely many natural values extends it to all rational t.",
+   "uses": [
+    "lem-trf-rational-sequence-polynomial-forward-difference"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
+   }
+  },
+  {
+   "text": "Induct on r. For r=0 take the constant f(0). For r+1 expand Q_0 as a polynomial in T_0 with coefficients in the other variables. Replace T_0^m by B_m(T_0). The resulting polynomial A has degree at most d and vanishes on T_0=0. For Q_0=0 take A=0. The degree bound follows termwise from degree(coefficient)+m<d.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
+   }
+  },
+  {
+   "text": "Subtract eval(A) from f. Its first-coordinate difference is zero, so induction both forward and backward on an integer shows it is independent of T_0. On T_0=0 its remaining differences are restrictions of Q_j, whose total degrees do not increase on substitution T_0=0. Induct on r to obtain the polynomial B of the zero slice. Then A+B, with B renamed to the remaining coordinates, has degree at most d and evaluates to f on every integer vector.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-rational-sequence-polynomial-forward-difference"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEM, proof of Lemma 33.45.1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a function on the integer lattice whose coordinate forward differences are polynomials of total degree less than d is a multivariate polynomial of total degree at most d",
+   "results": "{\"t\": \"2026-10-23T10:35:44Z\", \"tool\": \"leanfinder\", \"query\": \"a function on the integer lattice whose coordinate forward differences are polynomials of total degree less than d is a multivariate polynomial of total degree at most d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.degBound\", \"ChevalleyThm.MvPolynomialC.degBound_succ\", \"Polynomial.exists_approx_polynomial_aux\", \"ChevalleyThm.MvPolynomialC.degBound_casesOn_succ\", \"LinearMap.toMvPolynomial_totalDegree_le\", \"MvPolynomial.sum_eval_eq_zero\"], \"digest\": \"f34adde1c7b9ce29\"}; No multivariate integration theorem found. The existing source-library univariate Newton theorem is used, not reproved.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, totalDegree",
+   "results": "{\"t\": \"2026-10-23T10:21:13Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, totalDegree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'totalDegree'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No multivariate integration theorem found. The existing source-library univariate Newton theorem is used, not reproved.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MvPolynomial.*(fwdDiff|difference)|exists.*polynomial.*eulerChar",
+   "results": "{\"t\": \"2026-10-23T10:23:12Z\", \"tool\": \"grep\", \"query\": \"MvPolynomial.*(fwdDiff|difference)|exists.*polynomial.*eulerChar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No multivariate integration theorem found. The existing source-library univariate Newton theorem is used, not reproved.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If every coordinate forward difference of a function from integers to rationals is a multivariate polynomial of degree less than d then the function is polynomial of degree at most d",
+   "results": "{\"t\": \"2026-10-23T12:17:04Z\", \"tool\": \"leansearch\", \"query\": \"If every coordinate forward difference of a function from integers to rationals is a multivariate polynomial of degree less than d then the function is polynomial of degree at most d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.fwdDiff_iter_degree_add_one_eq_zero\", \"Polynomial.fwdDiff_iter_eq_zero_of_degree_lt\", \"Polynomial.fwdDiff_iter_degree_eq_factorial\", \"fwdDiff_iter_sum_mul_pow_eq_zero\", \"fwdDiff_iter_eq_sum_shift\", \"fwdDiff_iter_pow_eq_zero_of_lt\", \"ChevalleyThm.MvPolynomialC.degBound\", \"fwdDiff_iter_finset_sum\"], \"digest\": \"b4f83fa61d28a87b\"}; No multivariate integration theorem found. The existing source-library univariate Newton theorem is used, not reproved.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial",
+  "date": "2026-10-23",
+  "group": "X8"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-isogeny",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.MvPolynomial.CoordinateDifferences",
+  "file": "lean/Sheaf/Algebra/MvPolynomial/CoordinateDifferences.lean",
+  "declaration": "MvPolynomial.exists_eval_eq_of_coordinate_differences",
+  "statement": "theorem exists_eval_eq_of_coordinate_differences (r d : ℕ) (f : (Fin r → ℤ) → ℚ)\n    (hf : ∀ j : Fin r, ∃ Q : MvPolynomial (Fin r) ℚ,\n      (Q = 0 ∨ Q.totalDegree < d) ∧ ∀ n : Fin r → ℤ,\n        f (Function.update n j (n j + 1)) - f n = eval (fun i ↦ (n i : ℚ)) Q) :\n    ∃ P : MvPolynomial (Fin r) ℚ, P.totalDegree ≤ d ∧\n      ∀ n : Fin r → ℤ, eval (fun i ↦ (n i : ℚ)) P = f n",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261023T132407-L-2265406",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261023T132407-L-2265406",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

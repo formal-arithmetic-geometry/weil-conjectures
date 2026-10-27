@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-reduced-dominant-generic-restriction",
+ "kind": "statement",
+ "title": "Restriction to the generic fibre detects sections on a reduced horizontal source",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. Assume $S$ is integral [def-pc-integral-scheme], with generic point $\\xi$ [def-sc-generic-point], and $X$ is reduced [def-pc-reduced-scheme]. Suppose every generic point of every irreducible component of $X$ [def-weil-irreducible-components] maps to $\\xi$. Let $V\\subseteq X$ be any open subset whose underlying topological space is quasi-compact (every open cover has a finite subcover), and give $V$ its open-subscheme structure. Put $V_\\xi=V\\times_S\\operatorname{Spec}\\kappa(\\xi)$ [def-pc-scheme-fibre, def-weil-residue-field]. Then the canonical pullback homomorphism $\\Gamma(V,\\mathcal O_X)\\to\\Gamma(V_\\xi,\\mathcal O_{V_\\xi})$ is injective. The source $X$ may be reducible, $V$ may be empty, and no properness, Noetherian, or finite-presentation assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0AY8, label lemma-geometrically-connected-fibres-towards-normal, proof: reducedness and dominance of all component generic points; generic-fibre restriction subargument made explicit. Nilpotent-section detection is the surjectivity paragraph of Tag 03GY, label lemma-stein-universally-closed.",
+  "url": "https://stacks.math.columbia.edu/tag/0AY8"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-pc-reduced-scheme",
+  "def-weil-irreducible-components",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $i:V_\\xi\\to V$ for the fibre projection and let $a\\in\\Gamma(V,\\mathcal O_X)$ satisfy $i^*a=0$. If $\\eta\\in V$ is the generic point of an irreducible component of $X$, then $f(\\eta)=\\xi$. The fibre-point description [def-pc-scheme-fibre] gives a point $z\\in V_\\xi$ with $i(z)=\\eta$. By the definition of the residue-field map [def-weil-residue-field], evaluation of $i^*a$ at $z$ is the image of $a(\\eta)$ under $\\kappa(\\eta)\\to\\kappa(z)$. A unital homomorphism of fields is injective: its kernel is an ideal and cannot contain $1$. Thus $a(\\eta)=0$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K0 (definition-fibre), 01K1 (lemma-fibre-topological), and residue-field maps of locally ringed spaces; elementary evaluation argument"
+   }
+  },
+  {
+   "text": "The nonvanishing set $D(a)=\\{x\\in V:a(x)\\ne0\\}$ is open in $X$ by [lem-weil-pbc-basic-open-function]. If $x\\in D(a)$, choose an irreducible component $C$ of $X$ containing $x$ by [lem-sc-irreducible-components-cover], and its generic point $\\eta$ by [lem-sc-scheme-sober]. Since $x\\in C=\\overline{\\{\\eta\\}}$, every open neighbourhood of $x$, in particular $D(a)$, contains $\\eta$ [def-sc-generic-point]. Hence $\\eta\\in V$ and $a(\\eta)\\ne0$, contradicting Step 1. Consequently $D(a)=\\varnothing$, so $a(x)=0$ for every $x\\in V$.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HZ (lemma-f-open), 01IS (lemma-scheme-sober); Topology Tag 004W (lemma-irreducible), together with the definition of closure"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-qc-scheme-vanishing-section-nilpotent] to the open subscheme $V$: it is quasi-compact by hypothesis and Step 2 gives vanishing at every residue field. Thus $a^n=0$ for some $n\\ge1$. The reducedness equivalence in [def-pc-reduced-scheme] says that $\\Gamma(V,\\mathcal O_X)$ is reduced, hence $a=0$. For two sections with equal pullbacks apply this argument to their difference. This proves injectivity, also when $V$ is empty, since the argument never chooses a point unless one is given.",
+   "uses": [
+    "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03GY (lemma-stein-universally-closed), proof, surjectivity paragraph; Schemes Tag 01J1 (lemma-reduced)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "lem-weil-pbc-basic-open-function",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "def-sc-generic-point",
+  "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Explicit generic-fibre section argument suggested by Tag 0AY8, using the nilpotent-section argument in Tag 03GY and the cited topology facts; the displayed three-step proof is written by Q08, not quoted from 0AY8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism from a reduced scheme to an integral scheme whose component generic points dominate the base, restriction of regular functions to the generic fibre is injective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (U : X.Opens) [inst_1 : Nonempty ↥↑U],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.germToFunctionField U))\", \"doc\": \"For an integral scheme $X$ and a non-empty open subset $U$ of $X$, the morphism from the sections of the structure sheaf $\\\\mathcal{O}_X$ over $U$ to the function field of $X$ (defined as the stalk of \"}\n  {\"name\": \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] {U : X.Opens} (x : ↥X) (hx : x ∈ U),\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx))\", \"doc\": \"If $ X $ is an integral scheme, then for any open subset $ U $ of $ X $ containing a point $ x $, the germ map from the sections of the structure sheaf over $ U $ to the stalk at $ x $ is injective. T\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X], X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.map_injective_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] {U V : X.Opens} (i : U ⟶ V) [H : Nonempty ↥↑U],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.map i.op))\", \"doc\": \"For an integral scheme $X$, if $U$ and $V$ are open subsets of $X$ with $U \\\\subseteq V$ and $U$ non-empty, then the restriction map $\\\\mathcal{O}_X(V) \\\\to \\\\mathcal{O}_X(U)$ of the structure sheaf is in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {R : CommRingCat},\\n  (∀ (I : Ideal ↑R), I.IsPrime → ∃ f ∉ I, ∀ (x y : ↑R), y * x = 0 → y ∉ I → ∃ n, f ^ n * x = 0) →\\n    (AlgebraicGeometry.Spec R).IsGermInjective\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is germ-injective if and only if for every prime ideal $I \\\\subseteq R$, there exists an element $f \\\\in R \\\\setminus I$ such that for any $x, y \\\\in R$ satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"(X : AlgebraicGeometry.Scheme) → ↥X → Prop\", \"doc\": \"For a scheme $X$ and a point $x$ in its underlying topological space, the proposition that the germ at $x$ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Injective\\n    ⇑(CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.specTargetImageFactorization f)))\", \"doc\": \"The application of the target-image factorization of a scheme morphism $ f $ to the entire topological space induces an injective map between the global sections of the structure sheaves.\"} Read Mathlib/AlgebraicGeometry/FunctionField.lean, lines 55-70: germ and restriction injectivity there assume the source scheme is integral; here it may have several components. Read Morphisms/SchemeTheoreticallyDominant.lean, lines 61-86: of_isDominant and Scheme.Hom.app_injective require density (and quasi-compactness for app_injective), not the component-generic hypotheses of this node. Establishing density of the generic pullback and the relevant quasi-compact morphism is additional work, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced scheme has injective pullback on regular functions along a morphism whose image contains all generic points of irreducible components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.map_injective_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] {U V : X.Opens} (i : U ⟶ V) [H : Nonempty ↥↑U],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.map i.op))\", \"doc\": \"For an integral scheme $X$, if $U$ and $V$ are open subsets of $X$ with $U \\\\subseteq V$ and $U$ non-empty, then the restriction map $\\\\mathcal{O}_X(V) \\\\to \\\\mathcal{O}_X(U)$ of the structure sheaf is in\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X], X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] {U : X.Opens} (x : ↥X) (hx : x ∈ U),\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx))\", \"doc\": \"If $ X $ is an integral scheme, then for any open subset $ U $ of $ X $ containing a point $ x $, the germ map from the sections of the structure sheaf over $ U $ to the stalk at $ x $ is injective. T\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {R : CommRingCat},\\n  (∀ (I : Ideal ↑R), I.IsPrime → ∃ f ∉ I, ∀ (x y : ↑R), y * x = 0 → y ∉ I → ∃ n, f ^ n * x = 0) →\\n    (AlgebraicGeometry.Spec R).IsGermInjective\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is germ-injective if and only if for every prime ideal $I \\\\subseteq R$, there exists an element $f \\\\in R \\\\setminus I$ such that for any $x, y \\\\in R$ satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (U : X.Opens) [inst_1 : Nonempty ↥↑U],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.germToFunctionField U))\", \"doc\": \"For an integral scheme $X$ and a non-empty open subset $U$ of $X$, the morphism from the sections of the structure sheaf $\\\\mathcal{O}_X$ over $U$ to the function field of $X$ (defined as the stalk of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Injective\\n    ⇑(CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.specTargetImageFactorization f)))\", \"doc\": \"The application of the target-image factorization of a scheme morphism $ f $ to the entire topological space induces an injective map between the global sections of the structure sheaves.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"(X : AlgebraicGeometry.Scheme) → ↥X → Prop\", \"doc\": \"For a scheme $X$ and a point $x$ in its underlying topological space, the proposition that the germ at $x$ is injective.\"} Read Mathlib/AlgebraicGeometry/FunctionField.lean, lines 55-70: germ and restriction injectivity there assume the source scheme is integral; here it may have several components. Read Morphisms/SchemeTheoreticallyDominant.lean, lines 61-86: of_isDominant and Scheme.Hom.app_injective require density (and quasi-compactness for app_injective), not the component-generic hypotheses of this node. Establishing density of the generic pullback and the relevant quasi-compact morphism is additional work, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(injectiv|dens)|injectiv.*generic|schematicallyDense|isSchemeTheoreticallyDense",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"184\", \"text\": \"    ((genericPoint_specializes _).mem_open f.domain.2 f.dense_domain.nonempty.choose_spec)\"} Read Mathlib/AlgebraicGeometry/FunctionField.lean, lines 55-70: germ and restriction injectivity there assume the source scheme is integral; here it may have several components. Read Morphisms/SchemeTheoreticallyDominant.lean, lines 61-86: of_isDominant and Scheme.Hom.app_injective require density (and quasi-compactness for app_injective), not the component-generic hypotheses of this node. Establishing density of the generic pullback and the relevant quasi-compact morphism is additional work, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]cheme[Tt]heoretic|[Ii]s[Ss]chematically|[Ii]s[Dd]ominant|[Rr]educed.*[Dd]ense|[Dd]ense.*[Rr]educed",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"100\", \"text\": \"instance [IsImmersion f] : IsDominant f.coborderRange.ι := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"101\", \"text\": \"  rw [isDominant_iff, DenseRange, Scheme.Opens.range_ι]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"295\", \"text\": \"lemma ext_of_isDominant_of_isSeparated [IsReduced X] {f g : X ⟶ Y}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"297\", \"text\": \"    (ι : W ⟶ X) [IsDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"305\", \"text\": \"  have : IsDominant (equalizer.ι f' g').left := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"306\", \"text\": \"    apply +allowSynthFailures IsDominant.of_comp (equalizer.lift ι' ?_).left\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"310\", \"text\": \"    surjective_of_isDominant_of_isClosed_range _ (Scheme.Hom.isClosedEmbedding _).isClosed_range\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"line\": \"180\", \"text\": \"instance (priority := low) Surjective.of_universallyClosed_of_isDominant\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"line\": \"181\", \"text\": \"    [UniversallyClosed f] [IsDominant f] : Surjective f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"18\", \"text\": \"- `AlgebraicGeometry.IsSchemeTheoreticallyDominant`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"20\", \"text\": \"- `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isDominant`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"23\", \"text\": \"- `AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isPullback`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"38\", \"text\": \"class IsSchemeTheoreticallyDominant (f : X ⟶ Y) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"41\", \"text\": \"alias Scheme.Hom.ker_eq_bot := IsSchemeTheoreticallyDominant.ker_eq_bot\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"196\", \"text\": \"  have : IsDominant i := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"198\", \"text\": \"    rw [isDominant_iff, denseRange_iff_closure_range, ← i.support_ker,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"line\": \"25\", \"text\": \"- `DenseRange` (`IsDominant`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"line\": \"211\", \"text\": \"section IsDominant\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"line\": \"217\", \"text\": \"class IsDominant : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"line\": \"221\", \"text\": \"    @IsDominant = topologically DenseRange := by ext; exact isDominant_iff _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"line\": \"223\", \"text\": \"lemma Scheme.Hom.denseRange (f : X ⟶ Y) [IsDominant f] : DenseRange f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"248\", \"text\": \"lemma isDominant_of_of_appTop_injective [CompactSpace X]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"250\", \"text\": \"    IsDominant f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"256\", \"text\": \"instance [CompactSpace X] : IsDominant X.toSpecΓ :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"257\", \"text\": \"  isDominant_of_of_appTop_injective (by\"} Read Mathlib/AlgebraicGeometry/FunctionField.lean, lines 55-70: germ and restriction injectivity there assume the source scheme is integral; here it may have several components. Read Morphisms/SchemeTheoreticallyDominant.lean, lines 61-86: of_isDominant and Scheme.Hom.app_injective require density (and quasi-compactness for app_injective), not the component-generic hypotheses of this node. Establishing density of the generic pullback and the relevant quasi-compact morphism is additional work, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections on a reduced scheme detected by the generic fibre when every irreducible component dominates the integral base",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReduced\", \"injective\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"isReduced_of_injective\", \"module\": \"Mathlib.RingTheory.Nilpotent.Defs\", \"type\": \" {R : Type u_1} {S : Type u_2} [MonoidWithZero R] [MonoidWithZero S] {F : Type u_3} [FunLike F R S] [MonoidWithZeroHomClass F R S] (f : F) (hf : Function.Injective ⇑f) [IsReduced S] : IsReduced R\", \"doc\": \"\"} Read Mathlib/AlgebraicGeometry/FunctionField.lean, lines 55-70: germ and restriction injectivity there assume the source scheme is integral; here it may have several components. Read Morphisms/SchemeTheoreticallyDominant.lean, lines 61-86: of_isDominant and Scheme.Hom.app_injective require density (and quasi-compactness for app_injective), not the component-generic hypotheses of this node. Establishing density of the generic pullback and the relevant quasi-compact morphism is additional work, not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of regular functions from a reduced scheme to the generic fibre is injective when all irreducible component generic points map to the generic point of an integral base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X], X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (U : X.Opens) [inst_1 : Nonempty ↥↑U],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.germToFunctionField U))\", \"doc\": \"For an integral scheme $X$ and a non-empty open subset $U$ of $X$, the morphism from the sections of the structure sheaf $\\\\mathcal{O}_X$ over $U$ to the function field of $X$ (defined as the stalk of \"}\n  {\"name\": \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] {U : X.Opens} (x : ↥X) (hx : x ∈ U),\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx))\", \"doc\": \"If $ X $ is an integral scheme, then for any open subset $ U $ of $ X $ containing a point $ x $, the germ map from the sections of the structure sheaf over $ U $ to the stalk at $ x $ is injective. T\"}\n  {\"name\": \"AlgebraicGeometry.map_injective_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] {U V : X.Opens} (i : U ⟶ V) [H : Nonempty ↥↑U],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.map i.op))\", \"doc\": \"For an integral scheme $X$, if $U$ and $V$ are open subsets of $X$ with $U \\\\subseteq V$ and $U$ non-empty, then the restriction map $\\\\mathcal{O}_X(V) \\\\to \\\\mathcal{O}_X(U)$ of the structure sheaf is in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"(X : AlgebraicGeometry.Scheme) → ↥X → Prop\", \"doc\": \"For a scheme $X$ and a point $x$ in its underlying topological space, the proposition that the germ at $x$ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f : R), Function.Injective ⇑(AlgebraicGeometry.StructureSheaf.toBasicOpen R f)\", \"doc\": \"The canonical ring homomorphism from the localization $R_f$ of a commutative ring $R$ at an element $f$ to the ring of sections $\\\\mathcal{O}(D(f))$ in the structure sheaf over the basic open set $D(f)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {R : CommRingCat},\\n  (∀ (I : Ideal ↑R), I.IsPrime → ∃ f ∉ I, ∀ (x y : ↑R), y * x = 0 → y ∉ I → ∃ n, f ^ n * x = 0) →\\n    (AlgebraicGeometry.Spec R).IsGermInjective\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is germ-injective if and only if for every prime ideal $I \\\\subseteq R$, there exists an element $f \\\\in R \\\\setminus I$ such that for any $x, y \\\\in R$ satisfyi\"}\n Read SchemeTheoreticallyDominant.lean:61-86 and FunctionField.lean:55-70: the former needs a scheme-theoretically dominant quasi-compact morphism already supplied; the latter assumes an integral source. Neither states the present component-dominance criterion. LeanSearch genericPoints results give only topology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.app_injective",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSchemeTheoreticallyDominant f] [AlgebraicGeometry.QuasiCompact f] (U : Y.Opens) : Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app f U))\", \"doc\": \"\"}\n Read SchemeTheoreticallyDominant.lean:61-86 and FunctionField.lean:55-70: the former needs a scheme-theoretically dominant quasi-compact morphism already supplied; the latter assumes an integral source. Neither states the present component-dominance criterion. LeanSearch genericPoints results give only topology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*injectiv|injectiv.*generic|app_injective",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"1268\", \"text\": \"lemma specTargetImageFactorization_app_injective :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"74\", \"text\": \"lemma Scheme.Hom.app_injective (f : X ⟶ Y) [IsSchemeTheoreticallyDominant f] [QuasiCompact f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"91\", \"text\": \"  ⟨fun _ ↦ isReduced_of_injective _ (f.app_injective _)⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"110\", \"text\": \"    (by simpa [Scheme.Hom.appLE] using f.app_injective U) (g.flat_appLE hU hV hVU) ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"754\", \"text\": \"lemma Hom.toImage_app_injective [QuasiCompact f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"765\", \"text\": \"  exact f.toImage_app_injective ⟨U, hU⟩\"}\n Read SchemeTheoreticallyDominant.lean:61-86 and FunctionField.lean:55-70: the former needs a scheme-theoretically dominant quasi-compact morphism already supplied; the latter assumes an integral source. Neither states the present component-dominance criterion. LeanSearch genericPoints results give only topology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular functions on a reduced scheme are determined by restriction to a generic fibre containing every component generic point",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"genericPoints.ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : genericPoints α\", \"doc\": \"In a quasi-sober topological space, this function maps each irreducible component to its unique generic point, whose closure is the component itself.\"}\n  {\"name\": \"genericPoints.isGenericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(x : genericPoints α) : IsGenericPoint x.1 (component x).1\", \"doc\": \"For any generic point $ x $ in a topological space $ \\\\alpha $, the point $ x $ is a generic point of its associated irreducible component $ \\\\overline{\\\\{x\\\\}} $.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [_root_.IsReduced Γ(X, ⊤)] : IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [hX : IrreducibleSpace X] [IrreducibleSpace Y] :\\n  f (genericPoint X) = genericPoint Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\n  {\"name\": \"genericPoints.isGenericPoint_ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : IsGenericPoint (ofComponent x).1 x\", \"doc\": \"In a quasi-sober topological space, for every irreducible component $ C $, the unique point $ x $ mapped by the generic point function satisfies that the closure of $ \\\\{x\\\\} $ is exactly $ C $.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsReduced X → Sort u} →\\n    (t : AlgebraicGeometry.IsReduced X) →\\n      ((component_reduced : ∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U))) → motive ⋯) → motive t\", \"doc\": \"Given a scheme $X$ and a type family $P$ over the predicate that $X$ is reduced, if for every open subset $U \\\\subseteq X$ the ring of sections $\\\\mathcal{O}_X(U)$ is reduced (contains no nonzero nilpot\"}\n Read SchemeTheoreticallyDominant.lean:61-86 and FunctionField.lean:55-70: the former needs a scheme-theoretically dominant quasi-compact morphism already supplied; the latter assumes an integral source. Neither states the present component-dominance criterion. LeanSearch genericPoints results give only topology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a reduced scheme inject into sections of its generic fibre under dominance of every irreducible component",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (U : X.Opens) [inst_1 : Nonempty ↥↑U],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.germToFunctionField U))\", \"doc\": \"For an integral scheme $X$ and a non-empty open subset $U$ of $X$, the morphism from the sections of the structure sheaf $\\\\mathcal{O}_X$ over $U$ to the function field of $X$ (defined as the stalk of \"}\n  {\"name\": \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] {U : X.Opens} (x : ↥X) (hx : x ∈ U),\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx))\", \"doc\": \"If $ X $ is an integral scheme, then for any open subset $ U $ of $ X $ containing a point $ x $, the germ map from the sections of the structure sheaf over $ U $ to the stalk at $ x $ is injective. T\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X], X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.map_injective_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] {U V : X.Opens} (i : U ⟶ V) [H : Nonempty ↥↑U],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.map i.op))\", \"doc\": \"For an integral scheme $X$, if $U$ and $V$ are open subsets of $X$ with $U \\\\subseteq V$ and $U$ non-empty, then the restriction map $\\\\mathcal{O}_X(V) \\\\to \\\\mathcal{O}_X(U)$ of the structure sheaf is in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {R : CommRingCat},\\n  (∀ (I : Ideal ↑R), I.IsPrime → ∃ f ∉ I, ∀ (x y : ↑R), y * x = 0 → y ∉ I → ∃ n, f ^ n * x = 0) →\\n    (AlgebraicGeometry.Spec R).IsGermInjective\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is germ-injective if and only if for every prime ideal $I \\\\subseteq R$, there exists an element $f \\\\in R \\\\setminus I$ such that for any $x, y \\\\in R$ satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.injective_germ_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x : ↥X) (hx : x ∈ U) (f : ↑(X.presheaf.obj (Opposite.op U))) (hf : x ∈ X.basicOpen f),\\n      Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx)) →\\n        Function.Injective ⇑(C\", \"doc\": \"Let $ X $ be a scheme, $ U $ an affine open subset of $ X $, $ x $ a point in $ U $, and $ f $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ such that $ x $ lies in the basic open set \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_germ_injective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X) [X.IsGermInjectiveAt x],\\n  ∃ U,\\n    ∃ (hx : x ∈ U),\\n      AlgebraicGeometry.IsAffineOpen U ∧\\n        Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx))\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$ where the germ map is injective at $x$, there exists an affine open subset $U \\\\subseteq X$ containing $x$ such that the germ map $\\\\mathcal{O}_X(U) \\\\to \\\\mathcal\"}\n Read SchemeTheoreticallyDominant.lean:61-86 and FunctionField.lean:55-70: the former needs a scheme-theoretically dominant quasi-compact morphism already supplied; the latter assumes an integral source. Neither states the present component-dominance criterion. LeanSearch genericPoints results give only topology.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proper-normal-geometric-connectedness",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: Temkin stable-modification input, specifically Lemma 4.3.2, p. 29, retaining semistability of the modified pair.; local geometric input to the repaired marking-globalization argument: the unmarked smooth-target exceptional-tree case of Temkin Lemma 4.4.2. Numerical proof of the unmarked smooth-target exceptional-fibre assertion, following Temkin Lemma 4.4.2. Auxiliary input: the Zariski connectedness applications to the proper source over the valuation base and to the proper birational modification. Extracted argument: Reducedness and dominance of the component generic points in the auxiliary normal-base connectedness argument; returned item Step 4, with the open-subscheme preparation of Step 1.",
+   "via": [
+    "lem-trf-proper-normal-geometric-connectedness",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-reduced-dominant-generic-restriction",
+  "worker": "stage1",
+  "summary": "Three-step kernel argument using only existing nodes: lift component generic points to the fibre and use injective residue-field maps; use openness of the nonvanishing locus plus component coverage and sobriety; apply the existing quasi-compact nilpotence criterion and reducedness. Statement and statement dependencies preserved; no new nodes.",
+  "blueprint": "Realizes the auxiliary reduced horizontal source argument in the inherited blueprint.from.place chain below lem-trf-local-term-locality, proof (1)--(2). Read the latest blueprint at main-20261023-1620; this is a generic geometry tool inside that route, not a replacement of the contracting-correspondence argument."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-8b6be9c25",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-8b6be9c25 (reviewer sub-agent of L); spot-checked: I read the item (3 steps, no new nodes) and all 15 cited statements in full. The statement and stmt_deps are byte-equal to live/side-live, where the item is still unsplit; there is no repair note and no supersession. proof_deps equal the union of the step uses, and every cited node is a mathlib leaf, so no tool_uses are needed. Source check: Stacks more-morphisms 0AY8, hypotheses (2), (4), (5), and its proof use exactly this reducedness/dominance input; 03GY's surjectivity paragraph is the qc vanishing-section nilpotence leaf. proof_origin=agent is accurate. Step 1: the fibre homeomorphism lifts each component generic point η to z ∈ V_ξ, residue-field maps are injective, so a(η)=0. It is correctly marked elementary. Step 2: D(a) is open (01HZ leaf (b)); for x in D(a), its component's generic point η lies in D(a) because x is in the closure of {η}; this contradicts Step 1. The argument is pointwise and needs no bound on the number of components. Step 3: the qc nilpotence leaf on V, then reducedness of O_X(V) (01J1), gives a=0. Edge cases checked: V or X empty; k[x,y]/(xy) over k; infinitely many components. Reducedness is necessary: k[t][ε]/(ε², tε) gives a counterexample. Dominance is necessary: A¹ ⊔ a closed point gives a counterexample. The DAG search found no duplicate. No SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedDominantGenericRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.injective_genericFiber_restriction_of_isReduced",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedDominantGenericRestriction.lean",
+  "statement": "theorem Scheme.Hom.injective_genericFiber_restriction_of_isReduced {X S : Scheme.{u}} (f : X ⟶ S) [IsIntegral S] [IsReduced X] (ξ : S) (hξ : IsGenericPoint ξ Set.univ) (hcomponents : ∀ (C : Set X), C ∈ irreducibleComponents X → ∀ (η : X), IsGenericPoint η C → f η = ξ) (V : X.Opens) [CompactSpace V] : Function.Injective (V.topIso.inv ≫ ((V.ι ≫ f).fiberι ξ).appTop)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ceb3db5a4",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Node unchanged except new lean record; lean.statement verbatim in module. Clauses match: IsIntegral S, ξ with IsGenericPoint ξ univ, IsReduced X (no irreducible/nonempty), hcomponents over all irreducibleComponents and their generic points, V : X.Opens with CompactSpace V, fibre = (V.ι≫f).fiber ξ = pullback along fromSpecResidueField, map V.topIso.inv ≫ fiberι.appTop (checked Restrict.lean:146, Fiber.lean:38-41, Scheme.lean:184). No extra assumptions; V=∅/X=∅/reducible/infinitely many components covered; reducedness and dominance counterexamples excluded. All 7 stmt_deps are exact Mathlib leaves; no definitions; no duplicate found in lean/Sheaf. Docstrings have source (0AY8, 03GY), blueprint tag, 3-step proof; sorry only; report sections present. No file changed, so not recompiled."
+ }
+}

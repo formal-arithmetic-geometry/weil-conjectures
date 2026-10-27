@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-integral-actual-tower-computation",
+ "kind": "statement",
+ "title": "Natural invertible computation of the actual pulled reduction tower",
+ "statement": "Let l be prime, E/Q_l finite, and h:U to T arbitrary. Scalar restriction along integralDetailedCoefficientComparison U l E is an equivalence. The literal actual tower counit is invertible on every flat-term K-flat representative. On all complexes these counits form a natural transformation from Q followed by detailed coefficient transport, derived reduction, and derived tower pullback, to the literal actual tower functor followed by Q. The published coefficient and counit data are those of [def-weil-pbc-proper-integral-ordinary-data], and the explicit actual tower functor is recorded in [lem-weil-pbc-integral-strict-model-chain-transport].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; Stacks Tags 03D3, 06YY and 099N(5). Original strict-model matching counit computation step."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "lem-weil-pbc-integral-strict-model-chain-transport",
+  "def-weil-pbc-proper-integral-ordinary-data"
+ ],
+ "proof": [
+  {
+   "text": "Lift the normalized coefficient comparison to its unique ring-sheaf isomorphism. Restriction along it is an equivalence and preserves K-flatness. Apply the existing reduction-tower counit computation. The completed coefficient inverse-image map is an isomorphism, hence ordinary tower pullback is exact and its derived counit is invertible on every complex. Compose these two counits and the exact scalar transport factor; the three naturality squares compose to the desired natural transformation, with the literal actual-tower counit as its component. This proves invertibility on good complexes.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "lemma-weil-pbc-completed-pullback-reduction",
+    "lem-zl-profinite-coefficient-slice-base-change",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-zl-profinite-coefficient-slice-base-change",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; Stacks Tags 03D3, 06YY and 099N(5). Original strict-model matching counit computation step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A ring sheaf isomorphism preserves K-flat complexes under scalar restriction, and an exact functor has an invertible derived counit",
+   "results": "Eight general Module.Flat and Ext results, without this coupled coefficient and reduction-tower computation.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project counit computations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "One exact hit for fully faithful precomposition along localization.",
+   "date": "2026-10-27",
+   "verdict": "Used in the parent descent; it does not itself prove the tower counit computation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedCounitOnComplex|isKFlat_restrictScalars_of_flat",
+   "results": "No Mathlib matches; local project search finds restrictIso_kflat, towerCounit_isIso and completedReductionPullbackCounit_isIso.",
+   "date": "2026-10-27",
+   "verdict": "The project already supplies the necessary K-flat and exact-functor laws."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictModelMatchingExists",
+  "date": "2026-10-27",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice proof paragraph: identification of ordinary integral pullback and the actual quotient-tower completion comparison; original ordinary-input proof steps 5–7. Parent comparison step(s) 2–3. Actual tower counit computation.",
+   "via": [
+    "lem-weil-pbc-integral-strict-model-matching",
+    "lem-weil-pbc-proper-integral-strict-model-comparison",
+    "lem-weil-pbc-proper-integral-ordinary-inputs",
+    "lem-weil-pbc-realization-completed-mate",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralActualTowerComputation",
+  "file": "lean/Sheaf/Paper/IntegralActualTowerComputation.lean",
+  "declaration": "WeilConjectures.pbc_integral_actual_tower_computation",
+  "statement": "theorem pbc_integral_actual_tower_computation\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :\n    (pbcIntegralTransportModules U l E).IsEquivalence ∧\n    (∀ P : (integralOperationsGoodComplex l E T).FullSubcategory,\n      IsIso (pbcIntegralActualTowerCounit l E h P.obj)) ∧\n    ∃ c : DerivedCategory.Q ⋙ integralDetailedTransport T l E ⋙\n        completedReductionTower T (pbcIntegralDatum l E) ⋙\n          completedTowerPullback h (pbcIntegralDatum l E) ⟶\n        pbcIntegralActualTowerFunctor l E h ⋙ DerivedCategory.Q,\n      ∀ P : CochainComplex (integralTowerModules l E T) ℤ,\n        c.app P = pbcIntegralActualTowerCounit l E h P",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T034711-L-3676011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T034711-L-3676011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

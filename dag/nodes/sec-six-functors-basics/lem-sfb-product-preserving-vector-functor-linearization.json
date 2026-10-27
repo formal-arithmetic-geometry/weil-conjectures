@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-product-preserving-vector-functor-linearization",
+ "kind": "statement",
+ "title": "Linearization of a product-preserving set-valued vector-space functor",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $\\mathrm{Vect}^{\\mathrm{fd}}_k$ denote the category of finite-dimensional $k$-vector spaces and $k$-linear maps, and let $L:\\mathrm{Vect}^{\\mathrm{fd}}_k\\to\\mathrm{Sets}$ be a covariant functor (it preserves identities and composition). Suppose $L(0)$ is a singleton and, for every $U,V$, the comparison $c_{U,V}=(L(p_U),L(p_V)):L(U\\oplus V)\\to L(U)\\times L(V)$ induced by the projections is bijective. There is a unique choice of $k$-vector space structures on the sets $L(V)$ such that every $L(f)$ is linear and $L(f+g)=L(f)+L(g)$, $L(af)=aL(f)$ for all parallel linear maps $f,g$ and all $a\\in k$; equivalently these choices lift $L$ to a $k$-linear functor into all $k$-vector spaces [def-weil-linear-functor]. Its operations are $0_{L(V)}=L(0\\to V)(*)$, $x+y=L(+_V)c_{V,V}^{-1}(x,y)$, and $a x=L(a\\,\\mathrm{id}_V)(x)$, where $+_V:V\\oplus V\\to V$ is addition. The maps $c_{U,V}$ are then linear isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06I6 (lemma-linear-functor), specialized to finite-dimensional vector spaces over a field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-linear-functor"
+ ],
+ "proof": [
+  {
+   "text": "Write $z_V=L(0\\to V)(*)$, $q_{U,V}=c_{U,V}^{-1}$, and use $gf=g\\circ f$. Every zero map $A\\to B$ factors through $0$, so $L(0_{A,B})$ is the constant map with value $z_B$; functoriality also gives $L(f)(z_A)=z_B$. For linear maps $h:A\\to U$ and $j:A\\to V$, projection onto either factor gives\n$c_{U,V}L(\\langle h,j\\rangle)(t)=(L(h)(t),L(j)(t))$.\nConsequently $L(\\langle h,j\\rangle)(t)=q_{U,V}(L(h)(t),L(j)(t))$. More generally, for $f:U\\to U'$ and $g:V\\to V'$, comparison of the two projections gives\n$L(f\\oplus g)q_{U,V}(x,y)=q_{U',V'}(L(f)x,L(g)y)$.\nThese identities use only functoriality and the assumed bijectivity of $c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field."
+   }
+  },
+  {
+   "text": "For each $V$ put $s_V(u,v)=u+v$, $m_a=a\\,\\mathrm{id}_V$, and define $x+y=L(s_V)q_{V,V}(x,y)$, $ax=L(m_a)x$ and $0=z_V$ as in the statement. Put $-x=L(m_{-1})x$. For $i_1(v)=(v,0)$ and $i_2(v)=(0,v)$, the first step gives $L(i_1)x=q(x,0)$ and $L(i_2)x=q(0,x)$. Since $s_Vi_1=s_Vi_2=\\mathrm{id}$, we have $x+0=0+x=x$. If $\\tau(u,v)=(v,u)$, comparison of projections gives $L(\\tau)q(x,y)=q(y,x)$; since $s_V\\tau=s_V$, addition is commutative. Finally $\\langle\\mathrm{id},m_{-1}\\rangle$ followed by $s_V$ is zero. The first step therefore gives $x+(-x)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field."
+   }
+  },
+  {
+   "text": "To check associativity, set $T=(V\\oplus V)\\oplus V$ and $t=q_{V\\oplus V,V}(q_{V,V}(x,y),z)$. If $r_1,r_2,r_3:T\\to V$ are its three coordinate projections, then $L(r_1)t=x$, $L(r_2)t=y$, $L(r_3)t=z$. Set $h=\\langle r_1,r_2\\rangle$, $j=\\langle r_2,r_3\\rangle$. The pairing identity of step 1 gives\n$L(\\langle s_Vh,r_3\\rangle)t=q(x+y,z)$ and $L(\\langle r_1,s_Vj\\rangle)t=q(x,y+z)$.\nThe two linear maps $s_V\\langle s_Vh,r_3\\rangle$ and $s_V\\langle r_1,s_Vj\\rangle$ agree, since both send $((u,v),w)$ to $u+v+w$. Applying $L$ and evaluating at $t$ proves $(x+y)+z=x+(y+z)$. Thus the operations of step 2 give an abelian group.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field."
+   }
+  },
+  {
+   "text": "For the scalar laws, $m_1=\\mathrm{id}$ and $m_am_b=m_{ab}$ imply $1x=x$ and $a(bx)=(ab)x$ by functoriality; $m_0=0$ implies $0x=0$. For $\\Delta(v)=(v,v)$, step 1 gives $L(\\Delta)x=q(x,x)$. The identity $m_{a+b}=s_V\\langle m_a,m_b\\rangle$ therefore yields\n$(a+b)x=L(s_V)q(ax,bx)=ax+bx$.\nHere all displayed identities of maps hold in the original $k$-vector space, so use only the field and vector-space axioms already assumed.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field."
+   }
+  },
+  {
+   "text": "The remaining distributivity law follows from $m_as_V=s_V(m_a\\oplus m_a)$. For $t=q_{V,V}(x,y)$, functoriality and step 1 give\n$a(x+y)=L(m_as_V)t=L(s_V)L(m_a\\oplus m_a)t=L(s_V)q(ax,ay)=ax+ay$.\nAlso $a0=0$ by step 1. Together with steps 2--4 these are all the axioms of a $k$-vector space on $L(V)$. No dimension or nonzero hypothesis on $V$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field."
+   }
+  },
+  {
+   "text": "For any linear $f:U\\to V$, the identities $fs_U=s_V(f\\oplus f)$ and $fm_a=m_af$ give\n$L(f)(x+y)=L(s_V)L(f\\oplus f)q_{U,U}(x,y)=L(s_V)q_{V,V}(L(f)x,L(f)y)=L(f)x+L(f)y$\nand $L(f)(ax)=aL(f)x$. Step 1 gives preservation of zero, so every $L(f)$ is linear. Keeping the same object sets and maps therefore gives a functor to all $k$-vector spaces: its identity and composition laws are precisely those of $L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field."
+   }
+  },
+  {
+   "text": "For parallel $f,g:U\\to V$, write $f+g=s_V\\langle f,g\\rangle$. The pairing identity of step 1 then gives, for every $x\\in L(U)$,\n$L(f+g)x=L(s_V)q_{V,V}(L(f)x,L(g)x)=L(f)x+L(g)x$.\nSimilarly $af=m_af$ implies $L(af)x=aL(f)x$. Equality on each $x$ proves the two asserted equalities of linear maps. These are exactly the additivity and scalar-linearity requirements in [def-weil-linear-functor], so the functor constructed in step 6 is $k$-linear.",
+   "uses": [
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field."
+   }
+  },
+  {
+   "text": "Both components $L(p_U)$ and $L(p_V)$ of $c_{U,V}$ are linear by step 6; hence $c_{U,V}$ is linear for the componentwise structure on $L(U)\\times L(V)$. It is bijective by hypothesis. Its inverse is linear directly: if $c(t)=u$ and $c(t')=u'$, then $c(t+t')=u+u'$ and $c(at)=au$; injectivity gives $c^{-1}(u+u')=t+t'$ and $c^{-1}(au)=at$. Thus it is a linear isomorphism, including when either space is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field."
+   }
+  },
+  {
+   "text": "For uniqueness, take any structures with the properties in the statement, and denote their operations by $+'$, scalar multiplication by $\\cdot'$ and zero by $0'$. The singleton $L(0)$ has its only possible vector-space structure. Since $L(0\\to V)$ is linear, $0'=z_V$. Linearity on morphisms in the sense of [def-weil-linear-functor] forces\n$L(a\\,\\mathrm{id}_V)=a\\cdot' L(\\mathrm{id}_V)=a\\cdot'\\mathrm{id}_{L(V)}$,\nso $a\\cdot'x=L(m_a)x$. Finally $s_V=p_1+p_2$ as maps $V\\oplus V\\to V$, hence $L(s_V)=L(p_1)+'L(p_2)$. Evaluating on the fixed element $q_{V,V}(x,y)$ yields $L(s_V)q(x,y)=x+'y$. Thus zero, scalar multiplication and addition agree with the constructed operations on every $L(V)$; additive inverses are then forced by the group law. Every arrow map was already fixed by $L$, so the lift is unique.",
+   "uses": [
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "def-weil-linear-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06I6 (lemma-linear-functor), construction and the omitted verification, expanded explicitly over a field. Stacks explicitly omits the axioms and uniqueness checks; these elementary calculations are supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "linear.functor|preserv.*product",
+   "results": "25 hits. Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/Basic.lean, Mathlib/CategoryTheory/Localization/Linear.lean.  Read CategoryTheory/Linear/LinearFunctor.lean:30-45, Preadditive/AdditiveFunctor.lean:234-240, and Algebra/Category/ModuleCat/Adjunctions.lean:309-320,350-365,397. Linear requires an existing preadditive target; additive_of_preserves_binary_products also does. Free.lift constructs a functor from a free linear category to an already linear target. None constructs module structures on a set-valued functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: these assume the target module/preadditive structure, or change the source to a free category; neither gives the asserted linear lift of a set-valued functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A product preserving set valued functor on modules has a unique module structure making it a linear functor",
+   "results": "8 hits. CategoryTheory.Functor.Linear.mk, CategoryTheory.functorCategoryLinear, CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts, LinearEquiv.prodUnique, CategoryTheory.Functor.intLinear, CategoryTheory.Functor.inducedFunctorLinear, CategoryTheory.Functor.preservesFiniteProductsOfAdditive, CategoryTheory.Functor.Linear.  Read CategoryTheory/Linear/LinearFunctor.lean:30-45, Preadditive/AdditiveFunctor.lean:234-240, and Algebra/Category/ModuleCat/Adjunctions.lean:309-320,350-365,397. Linear requires an existing preadditive target; additive_of_preserves_binary_products also does. Free.lift constructs a functor from a free linear category to an already linear target. None constructs module structures on a set-valued functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: these assume the target module/preadditive structure, or change the source to a free category; neither gives the asserted linear lift of a set-valued functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Limits.PreservesFiniteProducts",
+   "results": "0 hits. .  Read CategoryTheory/Linear/LinearFunctor.lean:30-45, Preadditive/AdditiveFunctor.lean:234-240, and Algebra/Category/ModuleCat/Adjunctions.lean:309-320,350-365,397. Linear requires an existing preadditive target; additive_of_preserves_binary_products also does. Free.lift constructs a functor from a free linear category to an already linear target. None constructs module structures on a set-valued functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: these assume the target module/preadditive structure, or change the source to a free category; neither gives the asserted linear lift of a set-valued functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor from finite dimensional vector spaces to sets preserving finite products lifts uniquely to a linear functor to vector spaces",
+   "results": "8 hits. CategoryTheory.Free.lift_linear, CategoryTheory.Free.liftUnique, CategoryTheory.Functor.inducedFunctorLinear, CategoryTheory.Free.lift, Condensed.finFree, FGModuleCat.ulift, CategoryTheory.Linear.inducedCategory, FGModuleCat.instLinearModuleCatForget₂.  Read CategoryTheory/Linear/LinearFunctor.lean:30-45, Preadditive/AdditiveFunctor.lean:234-240, and Algebra/Category/ModuleCat/Adjunctions.lean:309-320,350-365,397. Linear requires an existing preadditive target; additive_of_preserves_binary_products also does. Free.lift constructs a functor from a free linear category to an already linear target. None constructs module structures on a set-valued functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: these assume the target module/preadditive structure, or change the source to a free category; neither gives the asserted linear lift of a set-valued functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A set valued functor on modules that preserves products is canonically enriched over modules using addition maps and scalar multiplication maps",
+   "results": "8 hits. ModuleCat.instMonoidalPreadditive, ModuleCat.moduleObj, CategoryTheory.Mod_.instCategory, ModuleCat.monoidalCategory, ModuleCat.instMonoidalLinear, ModuleCat.instMonoidalClosed, FGModuleCat.instLinearModuleCatForget₂, CategoryTheory.linearYoneda.  Read CategoryTheory/Linear/LinearFunctor.lean:30-45, Preadditive/AdditiveFunctor.lean:234-240, and Algebra/Category/ModuleCat/Adjunctions.lean:309-320,350-365,397. Linear requires an existing preadditive target; additive_of_preserves_binary_products also does. Free.lift constructs a functor from a free linear category to an already linear target. None constructs module structures on a set-valued functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: these assume the target module/preadditive structure, or change the source to a free category; neither gives the asserted linear lift of a set-valued functor"
+  },
+  {
+   "tool": "grep",
+   "query": "(lift|module|linear).*(preserv.*product)|preserv.*product.*(lift|module|linear)",
+   "results": "0 hits. .  Read CategoryTheory/Linear/LinearFunctor.lean:30-45, Preadditive/AdditiveFunctor.lean:234-240, and Algebra/Category/ModuleCat/Adjunctions.lean:309-320,350-365,397. Linear requires an existing preadditive target; additive_of_preserves_binary_products also does. Free.lift constructs a functor from a free linear category to an already linear target. None constructs module structures on a set-valued functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: these assume the target module/preadditive structure, or change the source to a free category; neither gives the asserted linear lift of a set-valued functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Limits.PreservesFiniteProducts",
+   "results": "0 hits: . Read Linear/LinearFunctor.lean:30-46, Preadditive/AdditiveFunctor.lean:227-240, ModuleCat/Adjunctions.lean:309-320,350-365,397-400 and Monoidal/Cartesian/Basic.lean:944-970. None asserts the unique vector-space lift of a set-valued finite-product-preserving functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates require an already linear or module-valued target, change the source to a free linear category, or construct only a monoidal structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product preserving functor from finite dimensional vector spaces to sets has a unique linear lift to vector spaces",
+   "results": "8 hits: CategoryTheory.Free.liftUnique, CategoryTheory.Free.lift_linear, Condensed.finFree, FDRep.forget₂HomLinearEquiv, FGModuleCat.ulift, CategoryTheory.Free.lift, FGModuleCat.fullyFaithfulULift, CategoryTheory.Free.ext. Read Linear/LinearFunctor.lean:30-46, Preadditive/AdditiveFunctor.lean:227-240, ModuleCat/Adjunctions.lean:309-320,350-365,397-400 and Monoidal/Cartesian/Basic.lean:944-970. None asserts the unique vector-space lift of a set-valued finite-product-preserving functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates require an already linear or module-valued target, change the source to a free linear category, or construct only a monoidal structure"
+  },
+  {
+   "tool": "grep",
+   "query": "(preserv.*product|product.*preserv).*(linear|module)|(linear|module).*(preserv.*product|product.*preserv)",
+   "results": "0 hits: . Read Linear/LinearFunctor.lean:30-46, Preadditive/AdditiveFunctor.lean:227-240, ModuleCat/Adjunctions.lean:309-320,350-365,397-400 and Monoidal/Cartesian/Basic.lean:944-970. None asserts the unique vector-space lift of a set-valued finite-product-preserving functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates require an already linear or module-valued target, change the source to a free linear category, or construct only a monoidal structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A product preserving set valued functor on vector spaces admits a unique module structure on its values",
+   "results": "8 hits: CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts.congr_simp, CategoryTheory.Functor.Monoidal.nonempty_monoidal_iff_preservesFiniteProducts, CategoryTheory.functorCategoryLinear, ModuleCat.HasLimit.productLimitCone_cone_pt_isModule, CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts, CategoryTheory.Functor.preservesFiniteProductsOfAdditive, Rep.instModuleCarrierVModuleCat, ModuleCat.instModuleElemForallObjCompForgetSections. Read Linear/LinearFunctor.lean:30-46, Preadditive/AdditiveFunctor.lean:227-240, ModuleCat/Adjunctions.lean:309-320,350-365,397-400 and Monoidal/Cartesian/Basic.lean:944-970. None asserts the unique vector-space lift of a set-valued finite-product-preserving functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates require an already linear or module-valued target, change the source to a free linear category, or construct only a monoidal structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor to types preserving finite products transports addition and scalar multiplication to define vector space structures on its values",
+   "results": "8 hits: CategoryTheory.Functor.inducedFunctorLinear, CategoryTheory.Linear.inducedCategory, Action.forget_linear, CategoryTheory.Functor.Linear, ModuleCat.addCommGroupObj, FGModuleCat.instLinearModuleCatForget₂, ModuleCat.moduleObj, Action.functorCategoryEquivalence_linear. Read Linear/LinearFunctor.lean:30-46, Preadditive/AdditiveFunctor.lean:227-240, ModuleCat/Adjunctions.lean:309-320,350-365,397-400 and Monoidal/Cartesian/Basic.lean:944-970. None asserts the unique vector-space lift of a set-valued finite-product-preserving functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates require an already linear or module-valued target, change the source to a free linear category, or construct only a monoidal structure"
+  },
+  {
+   "tool": "grep",
+   "query": "additive_of_preserves_binary_products|class Functor.Linear|def liftUnique|def lift ",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Algebra/FreeMonoid/Basic.lean, Mathlib/NumberTheory/Zsqrtd/Basic.lean, Mathlib/Algebra/DualNumber.lean, Mathlib/FieldTheory/IsSepClosed.lean. Read Linear/LinearFunctor.lean:30-46, Preadditive/AdditiveFunctor.lean:227-240, ModuleCat/Adjunctions.lean:309-320,350-365,397-400 and Monoidal/Cartesian/Basic.lean:944-970. None asserts the unique vector-space lift of a set-valued finite-product-preserving functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates require an already linear or module-valued target, change the source to a free linear category, or construct only a monoidal structure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-rs-tangent-tensor",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tag 06IH (lemma-tangent-space-vector-space), together with Tags 06J7 (lemma-RS-implies-S1-S2) and 06I0 (lemma-S1-S2-associated-functor). General linear-algebra input for the tangent-space construction: Tag 06I6 (lemma-linear-functor), applied to V ↦ pi_0 F(k[V]).",
+   "via": [
+    "lem-sfb-artin-rs-tangent-tensor",
+    "lem-sfb-artin-rs-versal-formal-object",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-product-preserving-vector-functor-linearization",
+  "worker": "stage1",
+  "summary": "Kept the statement and its two definition dependencies unchanged. Expanded the verification omitted in Stacks 06I6 into nine elementary steps: product-pairing formulas, abelian-group laws, scalar laws, arrow linearity, linearity on Hom, linear comparisons, and uniqueness. Re-searched the project source, DAG, latest blueprint and Mathlib. No attachment, new node or Mathlib match was found.",
+  "blueprint": "Lower-level linear-algebra prerequisite for the tangent-space construction in Tags 06IH/06IA, supporting the recorded versal-formal-object chain under det-thm-sf-ctf-stability-direct-images proof (3). Read the current latest unit and direct-images proof; retained the inherited null ancestor and via list, as tools/blueprint_refs.py ancestor prints None. Searches for linear functor, preserves finite products and vector-space found no equivalent blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-ac49c98b5",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-ac49c98b5 (reviewer sub-agent of L); spot-checked: I read the source, Stacks 06I6 (formal-defos-lemma-linear-functor, formal-defos.tex lines 3150-3202, checked in tags/tags). It builds the operations L(r·), L(+)∘(product iso)^{-1} and image of L(0), then omits the verification. The item states the same thing specialised to a field: L(0) a singleton plus bijective binary c_{U,V} is the source's 'preserves finite products'. Uniqueness is stated with every L(f) linear and Hom-linearity, which is the source's 'R-linearly functorial'. The statement is not weakened, and parent lem-sfb-artin-rs-tangent-tensor step 2 uses exactly these clauses. I checked all nine elementary steps by hand. Step 1: zero maps factor through 0, and the pairing and f⊕g formulas come from the projections. Step 2: i_1=<id,0>, swap τ and s∘<id,m_{-1}>=0 give the unit, commutativity and inverse. Step 3: associativity via t∈L((V⊕V)⊕V), using only the binary q. Steps 4-5: scalar and distributive laws come from the source identities m_{a+b}=s<m_a,m_b> and m_a s=s(m_a⊕m_a). Step 6: f s=s(f⊕f) makes every L(f) linear. Step 7: f+g=s<f,g> and af=m_a f give exactly the requirements of def-weil-linear-functor. Step 8: c and its inverse are linear. Step 9: uniqueness through L(0→V), L(a·id)=a·'id and s=p1+p2 with Hom-linearity. The Hom-linearity hypothesis is really needed for the scalars (a Frobenius twist would otherwise give a second structure), and the statement includes it. Cited statements def-weil-field and def-weil-linear-functor say what the steps take from them. Edge cases tested: V=0, the constant singleton functor, the forgetful functor, V⊗W with W infinite-dimensional, a Frobenius twist, characteristic 2. There are no new nodes. The only DAG nodes citing 06I6 are the item and its parent; the modobj-linearization nodes are a different construction, and blueprint hits for 'finite products'/'linear functor' are unrelated. The recorded Mathlib searches all presuppose a linear target, so there is no leaf. The inherited blueprint from.node=null is a base-node property, not a delivery fault. tool_uses is empty, there is no re-split note for this item, no SGA source is used, and no changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProductPreservingVectorFunctorLinearization",
+  "declaration": "CategoryTheory.productPreservingVectorFunctor_linearization",
+  "declarations": [
+   "CategoryTheory.vectorFunctorProductComparison",
+   "CategoryTheory.vectorFunctorLiftIdentification",
+   "CategoryTheory.productPreservingVectorFunctor_linearization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProductPreservingVectorFunctorLinearization.lean",
+  "statement": "theorem productPreservingVectorFunctor_linearization {k : Type u} [Field k] (L : FGModuleCat.{v} k ⥤ Type w) (hzero : Unique (L.obj (FGModuleCat.of k PUnit.{v + 1}))) (hprod : ∀ U V : FGModuleCat.{v} k, Function.Bijective (vectorFunctorProductComparison L U V)) : ∃ (F : FGModuleCat.{v} k ⥤ ModuleCat.{w} k) (h : F ⋙ forget (ModuleCat.{w} k) = L), F.Additive ∧ F.Linear k ∧ (∀ G : FGModuleCat.{v} k ⥤ ModuleCat.{w} k, G ⋙ forget (ModuleCat.{w} k) = L → G.Additive → G.Linear k → G = F) ∧ (∀ V : FGModuleCat.{v} k, vectorFunctorLiftIdentification F h V 0 = L.map (0 : FGModuleCat.of k PUnit.{v + 1} ⟶ V) hzero.default) ∧ (∀ (V : FGModuleCat.{v} k) (x y : F.obj V), vectorFunctorLiftIdentification F h V (x + y) = L.map (prod.fst + prod.snd : V ⨯ V ⟶ V) ((Equiv.ofBijective (vectorFunctorProductComparison L V V) (hprod V V)).symm (vectorFunctorLiftIdentification F h V x, vectorFunctorLiftIdentification F h V y))) ∧ (∀ (V : FGModuleCat.{v} k) (a : k) (x : F.obj V), vectorFunctorLiftIdentification F h V (a • x) = L.map (a • 𝟙 V) (vectorFunctorLiftIdentification F h V x)) ∧ (∀ U V : FGModuleCat.{v} k, ∃ e : F.obj (U ⨯ V) ≃ₗ[k] (F.obj U × F.obj V), ∀ t : F.obj (U ⨯ V), e t = (F.map prod.fst t, F.map prod.snd t))",
+  "branch": "sheaf-dag",
+  "by": "Q132",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1ccc6a8b",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Only the item's lean field changed; lean.statement matches the file verbatim; no name collisions. Clause by clause: Field k; FGModuleCat.{v} k for finite-dimensional spaces; L into Type w; Unique L(0); bijective comparison (fst,snd); lift with F ⋙ forget = L (literal equality, not up to iso); F.Additive ∧ F.Linear k (Functor.Linear is map_smul only, so both are needed and present); uniqueness over all such lifts; zero, addition and scalar formulas pinned to the node's operations; the product isomorphism is pinned to the comparison map. Edge cases fine: zero space, constant one-point functor, infinite-dimensional tensor factor, characteristic 2, Frobenius twist; universes independent. Both citers use exactly these clauses. Helpers have real data (comparison map, Equiv.cast transport). Docstrings carry the source place, blueprint id and nine steps; only proof is sorry. Advisory only: the comparison helper could be built from Mathlib prodComparison. No compile run since no file changed; the worker's report records a clean compile and a passing dry run."
+ }
+}

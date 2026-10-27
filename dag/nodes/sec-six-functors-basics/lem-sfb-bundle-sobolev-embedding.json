@@ -1,0 +1,191 @@
+{
+ "id": "lem-sfb-bundle-sobolev-embedding",
+ "kind": "statement",
+ "title": "Finite-order Sobolev embedding for compact bundle sections",
+ "statement": "All vector spaces are over $\\mathbf R$ [def-weil-field]. Let $N$ be a compact oriented smooth manifold without boundary of dimension $m\\geq1$, with a smooth Riemannian metric and its positive volume form. For a smooth finite-rank real metric bundle $B$, let $L^2(B)$ be measurable square-integrable sections modulo almost-everywhere equality. For an integer $j\\geq0$, let $H^j(B)$ be the subspace of $L^2(B)$ whose local coefficients in smooth coordinate charts and bundle frames have distributional derivatives through order $j$ locally in $L^2$. Fix Sobolev norms $\\|\\cdot\\|_{H^j}$ obtained by a finite smooth coordinate trivializing cover and a subordinate smooth partition of unity, taking the square root of the sum of squared Euclidean $L^2$ norms of all derivatives through order $j$ of the localized sections. Here $H^0(B)=L^2(B)$, with its usual integrated norm $\\|\\cdot\\|_{L^2}$. Distributional derivatives are taken by duality against compactly supported smooth test functions in each chart. Let $B$ be such a bundle and let $t,r\\geq0$ be integers with $t>r+m/2$. Every $v\\in H^t(B)$ has a unique $C^r$ section $v_r$ of $B$ whose almost-everywhere equivalence class is $v$. The statement concerns the representative of the given $L^2$ class, not only an abstract embedding into a space of functions.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Sobolev lemma (2.1), printed p.289 (PDF page 289), including the preceding weak-derivative definition of the Sobolev spaces; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-bundle-sobolev-space"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite coordinate cover trivializing $B$ in the statement. Apply [lem-sfb-smooth-subordinate-partition] with $M=S=N$ to obtain smooth $\\chi_i\\geq0$ with $\\sum_i\\chi_i=1$ and closed support contained in the corresponding chart $U_i$. Its hypotheses hold: $N$ is a compact Hausdorff smooth manifold, hence sigma-compact, and $S=N$ is closed. Each $K_i=\\operatorname{supp}\\chi_i$ is compact, since it is closed in $N$. Thus its image in the chart is a compact subset of the open coordinate image.",
+   "uses": [
+    "lem-sfb-smooth-subordinate-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 (2.1), WANTED locally; agent-written Fourier/localization proof of the stated Sobolev lemma, with analytic inputs isolated as cited nodes. Demailly states the embedding without its Fourier proof; see report.md."
+   }
+  },
+  {
+   "text": "For each frame component $f$ of $v$ on $U_i$, put $w=(\\chi_i f)\\circ x_i^{-1}$ on the coordinate image and zero outside it. It has weak derivatives in $L^2(\\mathbf R^m)$ through order $t$. Indeed the test-function definition gives $\\partial_j(\\chi f)=(\\partial_j\\chi)f+\\chi\\partial_j f$: test against $\\psi$, and use the defining identity for $\\partial_j f$ with test $\\chi\\psi$. Inducting gives $\\partial^\\alpha(\\chi f)=\\sum_{\\beta\\leq\\alpha}\\binom\\alpha\\beta(\\partial^{\\alpha-\\beta}\\chi)\\partial^\\beta f$. Every summand is supported in the compact chart image of $K_i$, has bounded smooth multiplier, and is $L^2$ there by the local weak-derivative hypothesis. For zero extension the same calculation works against every global compactly supported test: each product $(\\partial^\\gamma\\chi)\\psi$ is itself compactly supported inside the chart, so every use of the defining weak identity is legitimate and introduces no boundary term. No change-of-coordinates regularity theorem is being assumed: the hypothesis already gives the weak derivatives in this very chart. Regard the real $w$ as complex-valued with zero imaginary part.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 (2.1), WANTED locally; agent-written Fourier/localization proof of the stated Sobolev lemma, with analytic inputs isolated as cited nodes. Demailly states the embedding without its Fourier proof; see report.md."
+   }
+  },
+  {
+   "text": "For each such $w$, [lem-sfb-weak-sobolev-fourier-moments] applies with the given $m,t,r$, since $t>r+m/2$. It gives every integrable Fourier moment through order $r$. Apply [lem-sfb-fourier-moment-representative] to that same $L^2$ class and its Plancherel Fourier transform. Its inverse integral is $C^r$ and equals $w$ almost everywhere. Taking the real part gives a real $C^r$ function $g$ equal to $w$ almost everywhere. Outside the compact chart image of $K_i$, $w=0$ almost everywhere, and [lem-sfb-continuous-ae-pointwise], applied on its open complement to the complexification of $g$ and zero, gives $g=0$ pointwise there.",
+   "uses": [
+    "lem-sfb-weak-sobolev-fourier-moments",
+    "lem-sfb-fourier-moment-representative",
+    "lem-sfb-continuous-ae-pointwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 (2.1), WANTED locally; agent-written Fourier/localization proof of the stated Sobolev lemma, with analytic inputs isolated as cited nodes. Demailly states the embedding without its Fourier proof; see report.md."
+   }
+  },
+  {
+   "text": "Transfer these finitely many real functions back to their frame and chart to obtain a $C^r$ section $s_i$ on $U_i$, zero outside $K_i$. Extending $s_i$ by zero to $N$ is $C^r$: near every point of $N\\setminus U_i$ there is a neighborhood disjoint from the closed set $K_i$, on which the extension is zero. Its almost-everywhere class is $\\chi_i v$. Lebesgue-null sets in coordinates and volume-null sets coincide, since the volume form has a smooth strictly positive density $\\rho$: $\\int_E\\rho=0$ implies that each $E\\cap\\{\\rho\\geq1/n\\}$ is Lebesgue-null, and their union is $E$; the converse follows by integration over a null set. Consequently the finite sum $v_r=\\sum_i s_i$ is $C^r$ and represents $(\\sum_i\\chi_i)v=v$. If $a,b$ are two such representatives, their continuous frame coefficients agree almost everywhere in every chart. Apply [lem-sfb-continuous-ae-pointwise] componentwise, using complexifications of these real coefficients, to obtain equality at every point. Hence $a=b$. This also handles the zero-rank bundle and the empty manifold.",
+   "uses": [
+    "lem-sfb-continuous-ae-pointwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 (2.1), WANTED locally; agent-written Fourier/localization proof of the stated Sobolev lemma, with analytic inputs isolated as cited nodes. Demailly states the embedding without its Fourier proof; see report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-subordinate-partition",
+  "lem-sfb-weak-sobolev-fourier-moments",
+  "lem-sfb-fourier-moment-representative",
+  "lem-sfb-continuous-ae-pointwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §2 Sobolev lemma (2.1); explicit Fourier/localization argument written by Q19 because the source states the lemma without proof; original local copy WANTED. Online recomposed excerpt VI §2 read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sobolev embedding for a finite rank bundle on a compact m dimensional manifold: Ht sections have Cr representatives when t is greater than r plus m over two",
+   "results": "{\"t\": \"2026-10-24T02:27:48Z\", \"tool\": \"leanfinder\", \"query\": \"Sobolev embedding for a finite rank bundle on a compact m dimensional manifold: Ht sections have Cr representatives when t is greater than r plus m over two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_contMDiffOn_section_forall_mem_convex_of_local\", \"exists_contMDiffSection_forall_mem_convex_of_local\", \"WithLp.contDiff_ofLp\", \"WithLp.contDiff_toLp\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq\", \"ContDiffMapSupportedIn.structureMapCLM\", \"ContDiffMapSupportedIn.structureMapLM\", \"ContDiffMapSupportedIn.seminorm_eq_bot_of_gt\"], \"digest\": \"dd602f1796b943bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold hits are smooth-section constructions and chart tests, not Sobolev regularity. Read Mathlib/Analysis/Distribution/Sobolev.lean:11--46, 237--265: MemSobolev.fourier_memL1 is a Euclidean Fourier-integrability ingredient, not the finite-order representative theorem for bundle sections. The single-file grep printed malformed file fields, retained verbatim; the directory grep supplies the correct file and line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the square integrable weak derivatives of a section exist up to order t greater than r plus half the dimension then the section has a unique Cr representative",
+   "results": "{\"t\": \"2026-10-24T02:27:51Z\", \"tool\": \"leansearch\", \"query\": \"If the square integrable weak derivatives of a section exist up to order t greater than r plus half the dimension then the section has a unique Cr representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheaf.contMDiff_section\", \"ContMDiffWithinAt.change_section_trivialization\", \"ContMDiffSection.mdifferentiable\", \"Trivialization.mdifferentiableOn_section_iff\", \"ContMDiffSection\", \"Bundle.contMDiffAt_section\", \"ContMDiffSection.ctorIdx\", \"ContMDiffSection.coe_injective\"], \"digest\": \"9ffc784dcb8cc7b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold hits are smooth-section constructions and chart tests, not Sobolev regularity. Read Mathlib/Analysis/Distribution/Sobolev.lean:11--46, 237--265: MemSobolev.fourier_memL1 is a Euclidean Fourier-integrability ingredient, not the finite-order representative theorem for bundle sections. The single-file grep printed malformed file fields, retained verbatim; the directory grep supplies the correct file and line."
+  },
+  {
+   "tool": "grep",
+   "query": "Sobolev|sobolev|ContDiff",
+   "results": "{\"t\": \"2026-10-24T02:27:56Z\", \"tool\": \"grep\", \"query\": \"Sobolev|sobolev|ContDiff\", \"sub\": \"Analysis/Distribution/Sobolev.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"11\", \"13\", \"16\", \"22\", \"28\"], \"digest\": \"a69f0bbecdb3de11\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold hits are smooth-section constructions and chart tests, not Sobolev regularity. Read Mathlib/Analysis/Distribution/Sobolev.lean:11--46, 237--265: MemSobolev.fourier_memL1 is a Euclidean Fourier-integrability ingredient, not the finite-order representative theorem for bundle sections. The single-file grep printed malformed file fields, retained verbatim; the directory grep supplies the correct file and line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sobolev\", \"contDiff\"",
+   "results": "{\"t\": \"2026-10-24T02:27:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sobolev\\\", \\\"contDiff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold hits are smooth-section constructions and chart tests, not Sobolev regularity. Read Mathlib/Analysis/Distribution/Sobolev.lean:11--46, 237--265: MemSobolev.fourier_memL1 is a Euclidean Fourier-integrability ingredient, not the finite-order representative theorem for bundle sections. The single-file grep printed malformed file fields, retained verbatim; the directory grep supplies the correct file and line."
+  },
+  {
+   "tool": "grep",
+   "query": "MemSobolev.*(continuous|contDiff)|fourier_memL1|Sobolev.*embedding",
+   "results": "{\"t\": \"2026-10-24T02:29:16Z\", \"tool\": \"grep\", \"query\": \"MemSobolev.*(continuous|contDiff)|fourier_memL1|Sobolev.*embedding\", \"sub\": \"Analysis/Distribution/\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\"], \"digest\": \"05bb689fbd6af8eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold hits are smooth-section constructions and chart tests, not Sobolev regularity. Read Mathlib/Analysis/Distribution/Sobolev.lean:11--46, 237--265: MemSobolev.fourier_memL1 is a Euclidean Fourier-integrability ingredient, not the finite-order representative theorem for bundle sections. The single-file grep printed malformed file fields, retained verbatim; the directory grep supplies the correct file and line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-adjoint-regularity",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, Sobolev lemma (2.1), printed p.289 (PDF page 289), including the preceding weak-derivative definition of the Sobolev spaces.",
+   "via": [
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bundle-sobolev-embedding",
+  "worker": "stage1",
+  "summary": "Unchanged representative-level statement. Localization by explicit weak Leibniz/test identities, two Euclidean analytic inputs, compact-support extension, finite assembly and pointwise uniqueness. Reused existing partition and continuous-ae equality Mathlib leaves; no Lean attachment.",
+  "blueprint": "Nearest blueprint ancestor search returns None, as in the inherited lineage. Supports det-thm-sf-ctf-stability-direct-images proof (3) via the recorded alteration/Kodaira/Hodge/elliptic-regularity chain; realizes the Sobolev prerequisite of lem-sfb-elliptic-adjoint-regularity without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-75b033472",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-75b033472 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the cited Mathlib leaves (smooth-subordinate-partition, continuous-ae-pointwise), the citer elliptic-adjoint-regularity and the pinned Mathlib sources (Sobolev.lean:237-275, Inversion.lean:162-167, FourierTransformDeriv.lean:500-512). Demailly is not in literature/, so the WANTED line and proof_origin=agent are correct; no SGA is cited. The item statement is unchanged and there is no re-split note. weak-sobolev-fourier-moments is true: the weak derivatives make (1+|ξ|²)^{t/2}û square-integrable, and Cauchy-Schwarz bounds the moments because 2(t-j)>m; t=0 is vacuous and the endpoint is not claimed. fourier-moment-representative is true: the j=0 moment puts h in L1∩L2, the inverse integral equals u a.e., and C^r follows from the moment majorants. Both are Euclidean scalar facts, strictly smaller than the item, statement-only and searched with all three kinds; no duplicate exists among the DAG's Sobolev, Plancherel or Fourier nodes. Step 1 meets the partition node's hypotheses (compact N is sigma-compact, S=N). Step 2 is a correct weak-Leibniz rule with the test χψ, with no boundary term on zero extension. Step 3 applies both new nodes and the a.e.-equality leaf on an open set to continuous functions. Step 4 gives the C^r zero extension, transfers null sets through a positive smooth density, assembles the finite sum and proves uniqueness. This matches the citer's use of the r=0 uniqueness. The cited leaves are notions, so the route is fine. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.BundleSobolevEmbedding",
+  "declaration": "BundleSobolev.existsUnique_contMDiff_representative",
+  "declarations": [
+   "BundleSobolev.existsUnique_contMDiff_representative"
+  ],
+  "file": "lean/Sheaf/Geometry/Manifold/BundleSobolevEmbedding.lean",
+  "statement": "theorem existsUnique_contMDiff_representative {m q : ℕ} (hm : 1 ≤ m) {N : Type u} [TopologicalSpace N] [ChartedSpace (Model m) N] [IsManifold 𝓘(ℝ, Model m) ∞ N] [T2Space N] [SecondCountableTopology N] [CompactSpace N] [MeasurableSpace N] [BorelSpace N] (g : ContMDiffRiemannianMetric 𝓘(ℝ, Model m) ∞ (Model m) (TangentSpace 𝓘(ℝ, Model m) : N → Type _)) (μ : MetricVolume g) (B : N → Type v) [TopologicalSpace (TotalSpace (Model q) B)] [∀ x, NormedAddCommGroup (B x)] [∀ x, InnerProductSpace ℝ (B x)] [FiberBundle (Model q) B] [VectorBundle ℝ (Model q) B] [ContMDiffVectorBundle ∞ (Model q) B 𝓘(ℝ, Model m)] [IsContMDiffRiemannianBundle 𝓘(ℝ, Model m) ∞ (Model q) B] (L : Localization (m := m) (q := q) B) (t r : ℕ) (htr : (r : ℝ) + (m : ℝ) / 2 < (t : ℝ)) (v : H (m := m) (q := q) B μ.measure t) : ∃! s : ContMDiffSection 𝓘(ℝ, Model m) (Model q) r B, (s.toFun : Filter.Product (ae μ.measure) B) = v.val.val",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c17a7236a",
+  "group": "NO",
+  "result": "pass",
+  "note": "Item theorem BundleSobolev.existsUnique_contMDiff_representative matches the node clause by clause: compact Hausdorff second-countable boundaryless manifold with m≥1; orientation via the Localization's positive-transition finite atlas (exists iff orientable); MetricVolume fixed on each chart by the sqrt det Gram density (uniquely determined, non-vacuous); smooth Riemannian vector bundle; real strict bound t>r+m/2; conclusion ∃! ContMDiffSection r whose a.e. germ is v itself. New def node def-sfb-bundle-sobolev-space: real data, no sorry; IsWeakDerivative sign and TestFunction U match; MemSobolev tests every maximal chart and atlas frame with local L², H^0=L^2; sobolevNorm follows the node formula. No duplicate Sobolev definition in Mathlib, lean/Sheaf, lean/WeilConjectures or DAG Lean records. Edge cases covered (empty N, q=0, r=0, odd m). lean.statement verbatim for both records; only lean and stmt_deps (new def node added) differ from live. Docstrings carry source and blueprint tags; report has both sections. No recompile per instructions. Minor notes: the new node's source place lacks the WANTED marker; the real multiPartial duplicates the complex-valued helper, a stage-3 bridge."
+ }
+}

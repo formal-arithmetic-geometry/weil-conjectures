@@ -1,0 +1,318 @@
+{
+ "id": "lem-a1-integral-semilinear-germ-square",
+ "kind": "statement",
+ "title": "Completed one-step semilinear counit germ square",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ inside a chosen algebraic closure $\\Qlb$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Let $Y_0$ be proper of finite type over $k_0$ [def-weil-proper-morphism], $Y=Y_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, and $a_Y:Y\\to s$. Put $\\gamma=(c\\mapsto c^q)^{-1}$, $h=\\operatorname{Spec}(\\gamma)$ and $g=\\operatorname{id}_{Y_0}\\times h$ [def-weil-frobenius-detailed]. On the derived-complete integral constructible categories [def-weil-derived-complete-integral-detailed], write $A=La_Y^*$, $R=Ra_{Y*}$, $P=Lg^*$, $Q=Lh^*$ [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image]. Use the specified associative pullback-composition comparisons [lem-pod-integral-pullback-composition], represented on the simultaneous whole coefficient systems [lem-trf-integral-pullback-comparison-realization]. For $M\\in D^b_c(Y,\\mathcal O_E)$, let $\\varepsilon:AR\\to\\mathrm{id}$ be the ordinary adjunction counit [fix-prop-adjunctions], and let $\\mathcal E_M=\\operatorname{FrEx}_{Y,*}(M):QRM\\to RPM$ be the actual strict-system mate followed by derived inverse limit of [def-weil-frobenius-square-exchange](1). For a $k$-point $x:s\\to Y$ put $Z_x=Lx^*$, $x_j=g^jxh^{-j}$, and let $u_x:Z_xA\\xrightarrow{\\sim}\\mathrm{id}$ and $b_{1,x,M}:QZ_{x_1}M\\xrightarrow{\\sim}Z_xPM$ be the specified comparisons for $a_Yx=\\mathrm{id}_s$ and $gx=x_1h$. Define $v_x^M=Z_x(\\varepsilon_M)u_x(RM)^{-1}:RM\\to Z_xM$.\n\nThe $x_j$ are $k$-points and $gx_j=x_{j+1}h$. The $v_x$ form natural transformations on $D^b_c(Y,\\mathcal O_E)$; explicitly $Z_x(f)v_x^M=v_x^{M'}R(f)$ for every $f:M\\to M'$. If $\\theta:AQ\\xrightarrow{\\sim}PA$ is the comparison for $a_Yg=ha_Y$, then the following are identities of the specified completed derived morphisms:\n$$\\varepsilon_{PM}A(\\mathcal E_M)=P(\\varepsilon_M)\\theta_{RM},$$\n$$Z_x(\\theta_N)u_x(QN)^{-1}=b_{1,x,AN}Q(u_{x_1}(N)^{-1})\\quad(N\\in D^b_c(s,\\mathcal O_E)),$$\nand\n$$v_x^{PM}\\mathcal E_M=b_{1,x,M}Q(v_{x_1}^M):QRM\\longrightarrow Z_xPM.$$\nThe first identity also holds for the actual mate on the ordinary derived category of strict coefficient systems, before applying the specified derived-inverse-limit functor [lem-coef-semilinear-derived-sections, prop-weil-pbc-rlim-functoriality]; its image under that functor and the unit/counit-preserving operation comparisons [lem-fix-operation-reduction] is the displayed completed identity. The assertion concerns these specified whole-system maps, without assuming that separate finite reductions detect equality of derived morphisms. No Weil structure on $M$ is assumed.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3), (1.1.7), (1.1.10)--(1.1.14), printed pp. 150--153; agent refinement of transport of structure: Old proof steps 2--4: ordinary germ naturality, whole-system mate-counit equation, and completed moving-point germ square.",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; ordinary derived input only; completed and coefficient-stage refinements are agent statements."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "lem-pod-integral-pullback-composition",
+  "lem-trf-integral-pullback-comparison-realization",
+  "fix-prop-adjunctions",
+  "def-weil-frobenius-square-exchange",
+  "lem-coef-semilinear-derived-sections",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-fix-operation-reduction",
+  "def-a1-proper-sections-germ-and-moving-point",
+  "def-weil-system-operation-exchange-realization"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-frobenius-detailed], $g,h$ are scheme automorphisms with $a_Yg=ha_Y$. Thus $a_Yg^j=h^ja_Y$ (also for negative $j$, by inversion), and\n$$a_Yx_j=h^ja_Yxh^{-j}=\\mathrm{id}_s,\\qquad gx_j=g^{j+1}xh^{-j}=x_{j+1}h.$$\nIn particular every $x_j$ is a $k$-point; no claim that $g$ itself is a $k$-morphism is used.",
+   "uses": [
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, adjoint definition of exchange; agent calculation on the specified system and completed comparisons, with Deligne Weil II (1.1.7), (1.1.10)--(1.1.14) for geometric Frobenius conventions."
+   }
+  },
+  {
+   "text": "The counit of [fix-prop-adjunctions](1) is natural. The specified composition and identity comparisons are natural by [lem-trf-integral-pullback-comparison-realization], so $u_x^{-1}$ is natural. For $f:M\\to M'$ their two naturality equations give\n$$Z_x(f)v_x^M=Z_x(\\varepsilon_{M'})Z_xA(Rf)u_x(RM)^{-1}=Z_x(\\varepsilon_{M'})u_x(RM')^{-1}R(f)=v_x^{M'}R(f).$$\nThis proves naturality on the stated integral constructible category.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, adjoint definition of exchange; agent calculation on the specified system and completed comparisons, with Deligne Weil II (1.1.7), (1.1.10)--(1.1.14) for geometric Frobenius conventions."
+   }
+  },
+  {
+   "text": "First work in the ordinary derived categories of strict coefficient systems of [lem-coef-semilinear-derived-sections]. In this step denote their operations and adjunction data by $A,R,P,Q,\\varepsilon,\\eta,\\theta$. The system exchange in [def-weil-frobenius-square-exchange](1) is the mate of $\\theta$. Put $T=P(\\varepsilon_M)\\theta_{RM}:AQRM\\to PM$. By [def-weil-pbc-adjunction-mate], its explicit adjunction transpose is $e_M=R(T)\\eta_{QRM}$. Counit naturality for $T$ and the left triangle identity give\n$$\\varepsilon_{PM}A(e_M)=\\varepsilon_{PM}AR(T)A(\\eta_{QRM})=T\\varepsilon_{AQRM}A(\\eta_{QRM})=T.$$\nThese are equations in the derived category of the whole system: the adjunction in the cited node is on that category. This proves the requested pre-limit identity.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-frobenius-square-exchange",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, adjoint definition of exchange; agent calculation on the specified system and completed comparisons, with Deligne Weil II (1.1.7), (1.1.10)--(1.1.14) for geometric Frobenius conventions."
+   }
+  },
+  {
+   "text": "Return to completed notation. Apply the specified realization $\\mathcal L_Y=R\\varprojlim\\circ U_Y$ to step 3 and use its analogue on the source scheme. Restriction $U_Y$ and the derived-limit functor [prop-weil-pbc-rlim-functoriality] preserve composition and equality. In [def-weil-frobenius-square-exchange](1), the actual integral map is defined as $\\beta_*\\mathcal L_Y(e_M)\\alpha_*$. The operation comparisons of [lem-fix-operation-reduction] preserve units and counits. The integral comparison $\\theta$ is, by [lem-trf-integral-pullback-comparison-realization], the realization of the termwise system composition isomorphisms transported by its displayed counit comparisons, so the image of the system $\\theta$ is the integral $\\theta$. Substitution of these specified comparison isomorphisms therefore turns the image of the left side of step 3 into $\\varepsilon_{PM}A(\\mathcal E_M)$ and the image of its right side into $P(\\varepsilon_M)\\theta_{RM}$. This proves the first displayed completed identity for the specified map, by functorial realization of one system equation.",
+   "uses": [
+    "prop-weil-pbc-rlim-functoriality",
+    "def-weil-frobenius-square-exchange",
+    "lem-fix-operation-reduction",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, adjoint definition of exchange; agent calculation on the specified system and completed comparisons, with Deligne Weil II (1.1.7), (1.1.10)--(1.1.14) for geometric Frobenius conventions."
+   }
+  },
+  {
+   "text": "Write $a=a_Y$ and $c_{r,t}:L(tr)^*\\to Lr^*Lt^*$ for the specified family of [lem-trf-integral-pullback-comparison-realization]. That node supplies associativity, unit comparisons and compatibility with equality of scheme maps, on whole diagrams before realization. Suppressing only these identity-pullback unitors,\n$$u_x^{-1}=c_{x,a},\\quad \\theta=c_{g,a}c_{a,h}^{-1},\\quad b_{1,x}=c_{x,g}c_{h,x_1}^{-1}.$$\nAssociativity for $(x,a,h)$ with $ax=\\mathrm{id}$ gives\n$$Z_x(c_{a,h}^{-1})u_x(QN)^{-1}=c_{x,ha}(N).$$\nAssociativity for $(h,x_1,a)$ with $ax_1=\\mathrm{id}$ gives\n$$Q(u_{x_1}(N)^{-1})=c_{h,x_1}(AN)c_{x_1h,a}(N).$$\nNow $ha=ag$ and $x_1h=gx$. Using associativity for $(x,g,a)$, both $Z_x(\\theta_N)u_x(QN)^{-1}$ and $b_{1,x,AN}Q(u_{x_1}(N)^{-1})$ become $c_{x,g}(AN)c_{gx,a}(N)$. This proves the second displayed identity with exactly the specified comparisons, including their whole-system normalization.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, adjoint definition of exchange; agent calculation on the specified system and completed comparisons, with Deligne Weil II (1.1.7), (1.1.10)--(1.1.14) for geometric Frobenius conventions."
+   }
+  },
+  {
+   "text": "Use naturality of $u_x^{-1}$ for $\\mathcal E_M:QRM\\to RPM$, then steps 4 and 5 at $N=RM$, and finally naturality of the specified comparison $b_{1,x}$ for $\\varepsilon_M:ARM\\to M$ ([lem-trf-integral-pullback-comparison-realization]):\n$$\\begin{aligned}\nv_x^{PM}\\mathcal E_M\n&=Z_x(\\varepsilon_{PM})Z_xA(\\mathcal E_M)u_x(QRM)^{-1}\\\\\n&=Z_xP(\\varepsilon_M)Z_x(\\theta_{RM})u_x(QRM)^{-1}\\\\\n&=Z_xP(\\varepsilon_M)b_{1,x,ARM}Q(u_{x_1}(RM)^{-1})\\\\\n&=b_{1,x,M}Q(Z_{x_1}(\\varepsilon_M))Q(u_{x_1}(RM)^{-1})\n=b_{1,x,M}Q(v_{x_1}^M).\n\\end{aligned}$$\nEvery line has source $QRM$ and target $Z_xPM$. Only functoriality, naturality and the already proved identities were used; no Weil structure or finite-reduction detection of morphism equality is needed.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, adjoint definition of exchange; agent calculation on the specified system and completed comparisons, with Deligne Weil II (1.1.7), (1.1.10)--(1.1.14) for geometric Frobenius conventions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-detailed",
+  "fix-prop-adjunctions",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-fix-operation-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7 (remark-base-change) for the ordinary mate construction; agent proof of the strict-system, completion and moving-point identities using the cited existing comparison statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semilinear.*germ|germ.*exchange|counit.*stalk|stalk.*counit",
+   "results": "Hits: Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean. Skyscraper.lean:345-383 was read: ordinary topological presheaf stalk/skyscraper counit only; no completed geometric germ or iterate/descent statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "Hits: none. No hits; no corresponding declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral derived global sections counit evaluation germ commutes with semilinear Frobenius exchange mate at a moving geometric point",
+   "results": "Hits: AlgebraicGeometry.Scheme.Γevaluation_naturality, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, AlgebraicGeometry.Scheme.Γevaluation_naturality_apply, AlgebraicGeometry.Scheme.fromSpecStalk_toSpecΓ, ModuleCat.Tilde.toOpen_germ_assoc, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, ModuleCat.Tilde.toOpen_germ, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap. ResidueField.lean:158-175 and Derived/Adjunction.lean:118-133 read. Structure-sheaf residue-field evaluation and generic derived counits omit the strict-system semilinear germ square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "germ.*iterat|iterat.*germ|common.stage.*transport|transport.*localization",
+   "results": "Hits: none. No matches in the Mathlib source.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"iterate\"",
+   "results": "Hits: none. No hits; no corresponding declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology evaluation commutes with automorphism pullback through the adjunction counit at integral coefficients",
+   "results": "Hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.derived_counit, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.RestrictionCoextensionAdj.counit', CommRingCat.coyonedaAdj, CategoryTheory.Adjunction.derivedη.congr_simp. ResidueField.lean:158-175 and Derived/Adjunction.lean:118-133 read. Structure-sheaf residue-field evaluation and generic derived counits omit the strict-system semilinear germ square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the counit evaluation map from completed integral etale cohomology to the fiber with respect to exchange for a field automorphism, using the strict inverse system adjunction before taking derived limits",
+   "results": "Hits: AlgebraicGeometry.Scheme.evaluation_naturality_assoc, AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc, AlgebraicGeometry.Scheme.evaluation_naturality_apply, AlgebraicGeometry.Scheme.Γevaluation_naturality, AlgebraicGeometry.Scheme.evaluation_naturality, AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality_assoc, AlgebraicGeometry.Scheme.Γevaluation_naturality_apply, AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality_apply. ResidueField.lean:158-175 and Derived/Adjunction.lean:118-133 read. Structure-sheaf residue-field evaluation and generic derived counits omit the strict-system semilinear germ square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*germ|germ.*exchange|counit.*stalk|stalk.*counit",
+   "results": "Hits: Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean. Read Mathlib/Topology/Sheaves/Skyscraper.lean:345-383: ordinary topological presheaf stalk/skyscraper adjunction, not completed cohomological evaluation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction counit identity for the mate of a pullback square and completed integral derived cohomology evaluation",
+   "results": "Hits: CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CategoryTheory.ChosenPullbacksAlong.fst', CategoryTheory.Over.mapPullbackAdj_counit_app, CategoryTheory.Over.postAdjunctionLeft_counit_app_left, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit. Read Adjunction/Basic.lean:162-182 and Adjunction/Mates.lean:123-125. Generic adjunction definitions and equations omit the geometric and whole-system comparison clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "Hits: CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app. Read Adjunction/Basic.lean:162-182 and Adjunction/Mates.lean:123-125. Generic adjunction definitions and equations omit the geometric and whole-system comparison clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived global sections evaluation at a moving geometric point for semilinear Frobenius exchange defined as the adjunction mate on strict coefficient systems",
+   "results": "Hits: AlgebraicGeometry.Scheme.Γevaluation_naturality, AlgebraicGeometry.Scheme.Γevaluation_naturality_apply, AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply, AlgebraicGeometry.Spec_Γ_naturality_assoc, CategoryTheory.Sheaf.ΓObjEquivHom_naturality. Read Mathlib/AlgebraicGeometry/ResidueField.lean:158-175: evaluation of structure-sheaf sections in residue fields, not derived integral module cohomology.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*counit|counit.*mate|homEquiv_symm_apply|counit_naturality",
+   "results": "Hits: Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean, Mathlib/CategoryTheory/Localization/StructuredArrow.lean, Mathlib/CategoryTheory/Localization/StructuredArrow.lean, Mathlib/CategoryTheory/Types/Basic.lean, Mathlib/CategoryTheory/Localization/SmallHom.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Localization/HomEquiv.lean. Read Adjunction/Mates.lean:123-125 and Adjunction/Basic.lean:162-182. Abstract adjunction calculus only, already used through existing system/adjunction nodes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a natural transformation between left adjoints satisfies the counit transpose identity and evaluation commutes with pullback composition",
+   "results": "Hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.conjugateEquiv_counit, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.mateEquiv. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:85-125; mateEquiv_counit (line 123) proves the abstract mate-counit equation only. It does not supply the specified integral operations, system realization, moving point or pullback coherence, so the whole item is not a one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|homEquiv_symm_apply|counit_naturality",
+   "results": "Hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean. Read Adjunction/Mates.lean:123-125 and Adjunction/Basic.lean:162-182. Abstract adjunction calculus only, already used through existing system/adjunction nodes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "Q53",
+  "item": "lem-a1-proper-sections-semilinear-germs",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-boundary-weights",
+   "place": "Evaluation sentence of lem-a1-finite-boundary-weights, via lem-a1-finite-weil-sections-decomposition. Old proof steps 2--4: ordinary germ naturality, whole-system mate-counit equation, and completed moving-point germ square.",
+   "via": [
+    "lem-a1-proper-sections-semilinear-germs",
+    "lem-a1-finite-weil-sections-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-integral-semilinear-germ-square",
+  "worker": "stage1",
+  "summary": "Q76: six explicit steps prove the unchanged statement. Reuses the existing whole-system adjunction, realization and associative/unital pullback-comparison statements; no new nodes. Writes out the counit triangle calculation, the two associativity reductions and the final naturality calculation, without testing equality at finite reductions. Mathlib and project searches did not find the full statement.",
+  "blueprint": "The geometric-stalk evaluation refinement of the first sentence of lem-a1-finite-boundary-weights, via lem-a1-finite-weil-sections-decomposition and lem-a1-proper-sections-semilinear-germs: the one-step integral compatibility underlying the Frobenius action. Latest blueprint statement read; no change to the weight argument or unit route.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Ordinary integral pullback/direct-image adjunction and counit; used only for its formal naturality, not exceptional adjunctions."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Specified whole-system natural associative and unital pullback comparisons, including equality of scheme morphisms; generic comparison infrastructure absent from this affine-line unit."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Ordinary adjunction and actual mate maps on strict coefficient systems, before completion; not an assertion about unrelated finite reductions."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Triangulated realization of strict towers, preserving the system equation under composition."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Compatibility of the coefficient/operation comparisons with units and counits used to identify the realized mate with the specified completed exchange."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-adjunctions",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-coef-semilinear-derived-sections",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-de220af20",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-de220af20 (reviewer sub-agent of L); spot-checked: I read all six steps and all nine cited statements. The delivery adds no new nodes, and the item statement and its 13 stmt_deps are unchanged; it is a first split, not a re-split order. Sources checked: Stacks 07A7 (remark-base-change: the base-change map is the adjoint of L(g')^*(counit) after the pullback-composition identification), and Weil II (1.1.7) and (1.1.10)-(1.1.13), pp. 150-153 (geometric Frobenius is the inverse of x->x^q). No SGA source is used. Step 1: a_Y g = h a_Y because g is a base change, so a_Y x_j = id and g x_j = x_{j+1} h. Step 2: naturality of v_x from counit naturality and u_x^{-1}. Step 3: the def-weil-pbc-adjunction-mate formula with L=A, G=Q, H=P gives e = R(T)eta with transpose T = P(eps)theta; counit naturality plus the triangle identity then give eps A(e) = T on D(S(B)). Step 5: checked by hand with lem-pod associativity on the triples (x,a,h), (h,x_1,a) and (x,g,a) together with ha=ag and x_1h=gx; both sides equal c_{x,g}(AN)c_{gx,a}(N). Step 6: checked line by line; every line goes QRM -> Z_xPM. Edge cases: Y empty, M=0, and Y=s with x=id. There is no duplicate in the DAG (rg -L search). The five tool uses are generic and accepted. FIX (C1/C3): step 4 needs the system theta to realize to the integral theta, which is what lem-trf-integral-pullback-comparison-realization states (c^E = eta^{-1} Rlim(c_.)), but the step did not cite it. I added one sentence and that citation to step 4's uses; it was already in proof_deps. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-integral-semilinear-germ-square.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralSemilinearGermSquare",
+  "declaration": "WeilConjectures.integralSemilinearGermSquare",
+  "declarations": [
+   "WeilConjectures.IntegralSemilinearGerms.point",
+   "WeilConjectures.IntegralSemilinearGerms.point_properties",
+   "WeilConjectures.IntegralSemilinearGerms.movingPoint_zero_properties",
+   "WeilConjectures.IntegralSemilinearGerms.structure_square",
+   "WeilConjectures.IntegralSemilinearGerms.unitInverse",
+   "WeilConjectures.IntegralSemilinearGerms.theta",
+   "WeilConjectures.IntegralSemilinearGerms.square",
+   "WeilConjectures.integralSemilinearGermSquare"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralSemilinearGermSquare.lean",
+  "statement": "theorem integralSemilinearGermSquare (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (_ι : E →ₐ[ℚ_[l]] Ω) (x : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left) (hx : x ≫ (D.geometricFiber Y₀).hom = 𝟙 _) : (∀ (M M' : sfIntegralConstructibleCategory l E (D.geometricFiber Y₀).left) (f : M ⟶ M'), integralGerm D Y₀ l E x hx M ≫ (constructibleIntegralPullback l E x).map f = (properFrobeniusIntegralFunctor D Y₀ l E false).map f ≫ integralGerm D Y₀ l E x hx M') ∧ (∀ M : sfIntegralConstructibleCategory l E (D.geometricFiber Y₀).left, (constructibleIntegralPullback l E (D.geometricFiber Y₀).hom).map ((properFrobeniusIntegralExchange D Y₀ l E false).app M) ≫ integralCounit D Y₀ l E ((constructibleIntegralPullback l E (D.geometricFrobenius Y₀).hom).obj M) = (IntegralSemilinearGerms.theta D Y₀ l E ((properFrobeniusIntegralFunctor D Y₀ l E false).obj M)).hom ≫ (constructibleIntegralPullback l E (D.geometricFrobenius Y₀).hom).map (integralCounit D Y₀ l E M)) ∧ (∀ N : sfIntegralConstructibleCategory l E (Spec (.of D.k)), (IntegralSemilinearGerms.unitInverse D Y₀ l E x hx ((constructibleIntegralPullback l E (frobeniusPointIso D).hom).obj N)).hom ≫ (integralDerivedPullback l E x).map (IntegralSemilinearGerms.theta D Y₀ l E N).hom.hom = (integralDerivedPullback l E (frobeniusPointIso D).hom).map (IntegralSemilinearGerms.unitInverse D Y₀ l E (movingPoint D Y₀ x 0) (IntegralSemilinearGerms.movingPoint_zero_properties D Y₀ x hx).2.1 N).hom ≫ (IntegralSemilinearGerms.square D Y₀ l E x hx ((constructibleIntegralPullback l E (D.geometricFiber Y₀).hom).obj N)).hom.hom) ∧ (∀ M : sfIntegralConstructibleCategory l E (D.geometricFiber Y₀).left, (properFrobeniusIntegralExchange D Y₀ l E false).app M ≫ integralGerm D Y₀ l E x hx ((constructibleIntegralPullback l E (D.geometricFrobenius Y₀).hom).obj M) = (constructibleIntegralPullback l E (frobeniusPointIso D).hom).map (integralGerm D Y₀ l E (movingPoint D Y₀ x 0) (IntegralSemilinearGerms.movingPoint_zero_properties D Y₀ x hx).2.1 M) ≫ (IntegralSemilinearGerms.square D Y₀ l E x hx M).hom) ∧ (∀ C : coefficientSequenceDerived l E (D.geometricFiber Y₀).left, (integralComparisonDerivedSequencePullback l E (D.geometricFiber Y₀).hom).map ((systemExchange l E (D.geometricFiber Y₀).hom (D.geometricFrobenius Y₀).hom (frobeniusPointIso D).hom (IntegralSemilinearGerms.structure_square D Y₀)).app C) ≫ (systemAdjunction l E (D.geometricFiber Y₀).hom).counit.app ((integralComparisonDerivedSequencePullback l E (D.geometricFrobenius Y₀).hom).obj C) = (systemSquare l E (D.geometricFiber Y₀).hom (D.geometricFrobenius Y₀).hom (frobeniusPointIso D).hom (IntegralSemilinearGerms.structure_square D Y₀)).hom.app ((systemDirect l E (D.geometricFiber Y₀).hom).obj C) ≫ (integralComparisonDerivedSequencePullback l E (D.geometricFrobenius Y₀).hom).map ((systemAdjunction l E (D.geometricFiber Y₀).hom).counit.app C))",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed canonical integralCounit and integralGerm (definition owner added to stmt_deps), and the actual properFrobeniusIntegralExchange, systemExchange, systemSquare and systemAdjunction. Integer moving-point properties and background semilinearity are separate clauses in the same module. Completed identities are in the full constructible categories, with the comparison identity expressed under their faithful ambient inclusion. No finite-reduction detection or Weil structure is assumed. Reviewer FIX: x_1 = movingPoint x 0 is justified by the item-owned movingPoint_zero_properties (which also identifies it with point 1), not by movingPoint_properties of the parent theorem node lem-a1-proper-sections-semilinear-germs, whose proof cites this item.",
+  "fixed_by": "NT-stage2-cc-bbcf711ed"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbcf711ed",
+  "group": "Q53",
+  "result": "fix",
+  "note": "Read item node, 15 stmt_deps, delivered module and report, and the exact dependency declarations (integralCounit/integralGerm/movingPoint, systemSquare/systemExchange = mateEquiv under systemAdjunction, directIntegral = properFrobeniusIntegralExchange false, frobeniusPointIso/geometricFrobenius). All clauses match the node: naturality; A(E)≫ε_PM = θ_RM≫P(ε); u⁻¹≫Z_x(θ) = Q(u_{x1}⁻¹)≫b_{1,x,AN}; E≫v^{PM} = Q(v_{x1})≫b; pre-limit system mate-counit identity for all C; x_j k-points over ℤ. No hollow defs, no extra hypotheses, sorry-only. FAULT: the statement (main theorem ×2, square ×1) used ProperSemilinearGerms.movingPoint_properties, owned by the parent theorem node lem-a1-proper-sections-semilinear-germs, whose proof_deps cite this item → DAG/import cycle, not addable to stmt_deps. FIX: added item-owned sorried theorem IntegralSemilinearGerms.movingPoint_zero_properties (point x 1 = movingPoint x 0, k-point, h≫x1 = x≫g) and replaced the uses; the statement Props are unchanged. Fix files: fixes/IntegralSemilinearGermSquare.lean and fixes/lem-a1-integral-semilinear-germ-square.lean-record.json (statement verbatim = file signature, declarations + new theorem). nt_compile --json: 18.3 s, exit 0, clean. Advisory: properFrobeniusIntegral* owned by lem-pod-proper-coincidence-frobenius (outside stmt_deps, already in the def node's types, no cycle); the unused Ω/_ι binders are harmless."
+ }
+}

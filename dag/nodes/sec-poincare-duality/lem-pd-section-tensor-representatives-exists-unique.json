@@ -1,0 +1,223 @@
+{
+ "id": "lem-pd-section-tensor-representatives-exists-unique",
+ "kind": "statement",
+ "title": "Existence and uniqueness of section tensor representatives",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. For each scheme $T$ use its small pro-etale site, small relative to the module coefficient universe [def-weil-pbc-proetale-site], and the internal and section-module categories $\\mathcal I_T,\\mathcal S_T$, exact section equivalence $E_T$, their unbounded derived categories, localized equivalence $D(E_T)$, conjugate derived tensor $\\mathsf T_T$, unit $\\mathsf U_T$, and signed direct-sum total $\\operatorname{Tot}_T$ of [def-pd-section-derived-tensor-data]. Assume the chosen derived categories exist, as in that construction. Write $Q_T^{\\mathrm i},Q_T^{\\mathrm s}$ for cochain localization. The internal localization tensor map $\\mu_{P,Q}:Q_T^{\\mathrm i}P\\otimes^{\\mathbf L}Q_T^{\\mathrm i}Q\\to Q_T^{\\mathrm i}\\operatorname{Tot}(P\\otimes Q)$ is that of [sk-def-sfb-derived-tensor-hom]. Write $\\kappa_P:D(E_T)Q_T^{\\mathrm i}P\\cong Q_T^{\\mathrm s}E_TP$, $c_{M,N}:D(E_T)(M\\otimes^{\\mathbf L}N)\\cong\\mathsf T_T(D(E_T)M,D(E_T)N)$, and $\\ell_{P,Q}:D(E_T)Q_T^{\\mathrm i}\\operatorname{Tot}(P\\otimes Q)\\to Q_T^{\\mathrm s}\\operatorname{Tot}_T(E_TP,E_TQ)$ for the fixed section localization, tensor, and localized ordinary total comparisons of [def-pd-section-derived-tensor-data]. Here $E_T$ also denotes its termwise action on complexes, and composition below is read right to left.\n\nFor every scheme $T$, there exists exactly one natural transformation\n$$q_T:\\mathsf T_T\\circ(Q_T^{\\mathrm s}\\times Q_T^{\\mathrm s})\\longrightarrow Q_T^{\\mathrm s}\\circ\\operatorname{Tot}_T$$\nsatisfying all three conditions:\n(1) For every pair of unbounded internal cochain complexes $P,Q$,\n$$q_{T;E_TP,E_TQ}=\\ell_{P,Q}\\circ D(E_T)(\\mu_{P,Q})\\circ c_{Q_T^{\\mathrm i}P,Q_T^{\\mathrm i}Q}^{-1}\\circ\\mathsf T_T(\\kappa_P^{-1},\\kappa_Q^{-1}).$$\n(2) For every pair of unbounded section-module cochain complexes $A,B$, if either $A$ or $B$ is K-flat, then $q_{T;A,B}$ is invertible. K-flat has the independent-coefficient meaning of [def-pc-kflat-complex]: $\\operatorname{Tot}_T(H,K)$ is acyclic for every acyclic section-module complex $H$, with no requirement that the coefficient universe equal either site universe and no requirement of flat terms.\n(3) There exists an isomorphism $\\mathsf U_T\\cong R_{T,\\mathrm{sec}}[0]$, where $R_{T,\\mathrm{sec}}$ is the regular section-ring module and $[0]$ is the degree-zero single-complex functor. The unit clause asserts existence, not a choice or uniqueness of this unit isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, definition-derived-tor, and Tag 07A4, lemma-pullback-tensor-product; exact normalization predicate and theorem: lean/Sheaf/Paper/SectionDerivedRealization.lean:58-99."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "def-pd-section-derived-tensor-data",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized representative and its invertibility and unit clauses from the split existence statements. Combine them into TensorRepresentativeCondition.",
+   "uses": [
+    "lem-pd-section-tensor-representatives-exists"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness, whisker two transformations by the termwise section equivalence. Their normalization clauses agree on every pair of internal complexes, and faithfulness of the whiskering equivalence gives equality.",
+   "uses": [
+    "lem-pd-section-tensor-representatives-exists"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-section-tensor-representatives-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4; combine split representative existence clauses with faithfulness of the fixed termwise equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TensorRepresentativeCondition|tensor_representatives|IsKFlatIndependentCoefficients",
+   "results": "0 hits; ; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Q, NatTrans",
+   "results": "0 hits; loogle: unknown identifier 'NatTrans'; top: ",
+   "date": "2026-10-24",
+   "verdict": "query rejected: loogle: unknown identifier 'NatTrans'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor preserving exact equivalence of sheaf module categories transports the K-flat derived tensor with its uniquely normalized localization comparison",
+   "results": "8 hits; ; top: Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.iff_rTensor_exact', IsLocalization.instIsLocalizedModuleTensorProductMap, Module.Flat.iff_lTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique natural transformation from localized conjugate derived tensor to total tensor, normalized by section module equivalence and invertible on K-flat complexes",
+   "results": "8 hits; ; top: IsLocalizedModule.map_lTensor, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPost_iso, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre_iso, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app', CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "lifting₂CurriedTensorPost_iso|lifting₂CurriedTensorPre_iso|tensorBifunctorIso",
+   "results": "4 hits; ; top: Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory.Q, CategoryTheory.NatTrans",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.DerivedCategory.Q'; top: ",
+   "date": "2026-10-24",
+   "verdict": "query rejected: loogle: unknown identifier 'CategoryTheory.DerivedCategory.Q'"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Q",
+   "results": "12 hits; ; top: DerivedCategory.Q, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instCommShiftCochainComplexIntQ, DerivedCategory.instAdditiveCochainComplexIntQ, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.Q_obj_single_obj",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique localization comparison of a derived tensor transported across an exact monoidal equivalence of module sheaf categories",
+   "results": "8 hits; ; top: CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.Monoidal.μ, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.LocalizedMonoidal, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-24",
+   "verdict": "no match: localization of an everywhere monoidal tensor, monoidal structure transport, degree-zero localization, and Tor infrastructure do not state this normalized unbounded K-flat section-module theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor_representatives|TensorRepresentativeCondition|KFlat",
+   "results": "0 hits; ; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: localization of an everywhere monoidal tensor, monoidal structure transport, degree-zero localization, and Tor infrastructure do not state this normalized unbounded K-flat section-module theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "transport derived tensor localization comparison across an exact equivalence of module sheaf categories",
+   "results": "8 hits; ; top: CategoryTheory.Functor.IsLocalization.of_equivalence_target, CategoryTheory.Monoidal.transportStruct, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Monoidal.transportStruct_tensorHom, CategoryTheory.Equivalence.sheafCongrPrecoherent, CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.Monoidal.transportStruct_tensorObj, CategoryTheory.Equivalence.sheafCongr_functor",
+   "date": "2026-10-24",
+   "verdict": "no match: localization of an everywhere monoidal tensor, monoidal structure transport, degree-zero localization, and Tor infrastructure do not state this normalized unbounded K-flat section-module theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Q",
+   "results": "12 hits; ; top: DerivedCategory.Q, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instCommShiftCochainComplexIntQ, DerivedCategory.instAdditiveCochainComplexIntQ, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.Q_obj_single_obj",
+   "date": "2026-10-24",
+   "verdict": "no match: localization of an everywhere monoidal tensor, monoidal structure transport, degree-zero localization, and Tor infrastructure do not state this normalized unbounded K-flat section-module theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation between bifunctors determined by an exact monoidal equivalence K flat complexes localization",
+   "results": "8 hits; ; top: CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.lift₂NatIso, CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app', CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost, CategoryTheory.Tor', CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre_iso, CategoryTheory.Tor, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorFlipCurriedTensorObjWhiskeringRightTensorBifunctor",
+   "date": "2026-10-24",
+   "verdict": "no match: localization of an everywhere monoidal tensor, monoidal structure transport, degree-zero localization, and Tor infrastructure do not state this normalized unbounded K-flat section-module theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorBifunctorIso|transportStruct|singleFunctorIsoCompQ",
+   "results": "25 hits; ; top: Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: localization of an everywhere monoidal tensor, monoidal structure transport, degree-zero localization, and Tor infrastructure do not state this normalized unbounded K-flat section-module theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-pd-section-derived-realization",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Existence and uniqueness of the normalized localization tensor q, its K-flat invertibility and regular-unit clause.",
+   "via": [
+    "def-pd-section-derived-realization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pd-section-tensor-representatives-exists-unique",
+  "worker": "stage1",
+  "summary": "Preserved the exact three-clause statement and split its sorry theorem into an explicit equivalence-counit construction/uniqueness argument, the existing all-complex conjugate-counit comparison, existing independent-universe K-flat invertibility, and localization of the normalized ordinary regular unit. Reused all required lemmas: no new nodes. Checked exact cited statements and acyclic-test versus flat-term hypotheses.",
+  "blueprint": "The created-item ancestry has no imported blueprint ancestor (blueprint_refs ancestor returns None). The split realizes the supplied SectionDerivedRealization.lean tensor_representatives docstring: normalized totals, acyclic-test invariance, localization tensor, regular unit, and uniqueness by all termwise E-images. Latest blueprint searched globally; no blueprint node states this representative-normalization assertion. The Verdier-exchange unit route is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Ordinary normalized tensor/unit/total isomorphisms for the fixed section equivalence; no statement of this unit supplies their construction."
+   },
+   {
+    "node": "lem-trf-exact-tensor-equivalence-kflat-homotopy",
+    "why": "Generic exact tensor-equivalence invariance on complex categories, including counit and K-flatness; used with the already specified total isomorphisms."
+   },
+   {
+    "node": "lem-sfb-total-tensor-homotopy",
+    "why": "The generic signed-total tensor has degree-zero regular unit; it supplies the internal complex unit."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "The generic K-flat derived monoidal construction induces the unit from the complex unit."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-bc236e101",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-bc236e101 (reviewer sub-agent of L); spot-checked: Read the item, all six steps and every cited statement in full. No new nodes, no fixes. Statement: it matches lean/Sheaf/Paper/SectionDerivedRealization.lean:58-99 (TensorRepresentativeCondition, tensor_representatives) clause by clause: the normalization (1) read right to left, invertibility (2) when either factor is acyclic-test K-flat with no flat terms required, and the unit clause (3) as existence only. It is unchanged and not weakened. Stacks 06YU and 07A4 are at sites-cohomology l.3300/3684, and 06YN, 06YP, 06YS, 06YT match their labels; proof_origin by agent is correct. Step 2 is the elementary counit construction, which I recomputed: naturality, q_{Jx}=alpha_x from the triangle identity, uniqueness by naturality at the iso epsilon_y, and consistency of (1) even when E is not injective on objects. Step 3: the conjugate-counit lemma's B_c and theta_0 are T_T and c, both normalized by the equivalence unit; with ell=Q(t)kappa and mu=epsilon^A, solving its defining equation gives (1), so q=epsilon^c, and its all-pairs clause gives q=epsilon^R v. Its hypotheses come from the tensor data, lem-pe (exactness, strong symmetric monoidal structure, flat and K-flat preservation) and Step 1. Step 4: the native-model node gives epsilon^R invertible when either complex is K-flat, with nonflat terms and independent universes allowed. Step 5: the unit is kappa followed by the localized degree-0 chain isomorphism E_c(R_i[0]) to R_sec[0]. proof_deps equals the union of uses; there is no cycle (lem-pd-section-kflat-tensor-comparison, downstream of the creator, is correctly avoided) and no duplicate in the DAG. Live copy still unsplit, no repair note. Edge cases checked: zero ring, E=id, Z/2[0] (claims nothing), contractible complexes with nonflat terms. Accepted tool_uses: lem-pe-internal-section-tensor-comparison, lem-trf-exact-tensor-equivalence-kflat-homotopy, lem-sfb-total-tensor-homotopy and lem-sfb-derived-monoidal, all used as generic black boxes. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionDerivedRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.tensor_representatives",
+  "statement": "theorem tensor_representatives (X : Scheme.{u}) :\n    ∃! q : (((DerivedCategory.Q (C := modules Λ X)).prod\n      (DerivedCategory.Q (C := modules Λ X))) ⋙ tensor Λ X) ⟶\n        totalTensor Λ X ⋙ DerivedCategory.Q (C := modules Λ X),\n      TensorRepresentativeCondition Λ X q",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing theorem, confirmed against the live source with scompile.py --source. TensorRepresentativeCondition states the specified normalization on all internal complex pairs, invertibility for either acyclic-test K-flat section complex with independent coefficient universes, and existence only of the regular-unit isomorphism. No new declaration or module is needed; the existing proof remains sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c1ae5f21",
+  "group": "NY",
+  "result": "pass",
+  "note": "Existing binding of tensor_representatives (SectionDerivedRealization.lean:58-99); node diff = lean record only; statement verbatim. All three conditions, the uniqueness quantifier and every object match the def-pd-section-derived-tensor-data and dependency declarations; no stronger assumptions; edge cases fine; Stacks 06YU/07A4 found; report sections present. No compile (no file changed). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-13f07",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T130328-L-3449208",
+  "kind": "interface",
+  "note": "independent cc review: section_tensor_representative_exists proof and the refactored TensorRepresentativeCondition/totalTensor/tensorUnit/localizedTotalComparison/totalPullComparison against their published bodies (probe equalities and ↔) and the node statements; 17-module cone incl. transitive users compiled against the delivery",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_tensor_representative_exists"
+  ],
+  "sorry_after": []
+ }
+}

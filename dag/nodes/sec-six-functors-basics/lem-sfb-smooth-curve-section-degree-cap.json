@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-smooth-curve-section-degree-cap",
+ "kind": "statement",
+ "title": "Degree cap for sections with prescribed vanishing on a smooth proper curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], let $C$ be a smooth proper connected curve over $k$ [def-sc-curves, def-weil-proper-morphism], and let $A$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Put $e=\\deg_k A$, with degree defined by $\\deg_k M=\\chi(C,M)-\\chi(C,\\mathcal O_C)$ [def-pc-degree-line-bundle, def-pc-euler-characteristic]. For an effective divisor $B=\\sum_P n_P[P]$ of degree $b=\\sum_P n_P$ [def-sc-divisor], and integers $m,q\\ge0$, the space of sections of $A^{\\otimes m}$ vanishing to order at least $q n_P$ at each $P$ is $H^0(C,A^{\\otimes m}(-qB))$ [def-sc-rational-section-divisor, def-sc-ringed-space-module-cohomology]. It is finite-dimensional and satisfies\n$$\\deg_k(A^{\\otimes m}(-qB))=me-qb,\\qquad h^0(C,A^{\\otimes m}(-qB))\\le\\max\\{me-qb+1,0\\}.$$\nThe maximum is taken in $\\mathbf Z$ and $h^0$ denotes dimension over $k$. In particular it is zero if $me-qb<0$. The zero divisor and $m=0$ or $q=0$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCS, lemma-grd-inequalities, r <= d; with varieties.tex Tags 0AYX (lemma-degree-tensor-product) and 0AYY (lemma-degree-effective-Cartier-divisor). Negative degree case by the effective zero divisor of a nonzero section. Agent formulation for tensor powers and imposed divisors."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-curves",
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-sc-divisor",
+  "def-sc-rational-section-divisor",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=A^{\\otimes m}\\otimes\\mathcal O_C(-qB)$. The divisor-module local description gives $\\mathcal O_C(-qB)_P=t^{qn_P}\\mathcal O_{C,P}$ for a uniformizer $t$, and gives $\\mathcal O_C(0)=\\mathcal O_C$. Tensor products of invertible modules are invertible, so induction on $m$ (starting with $\\mathcal O_C$) shows that $L$ is invertible. In a local basis of $A^{\\otimes m}$, a germ belongs to $L_P$ exactly when its coefficient lies in $t^{qn_P}\\mathcal O_{C,P}$, that is, has valuation at least $qn_P$. Thus the subsheaf $L\\subseteq A^{\\otimes m}$ consists exactly of sections with the specified vanishing, including the zero section; away from the finite support the condition is just regularity. Taking global sections gives the space stated in the item, with $H^0=\\Gamma$ for module cohomology.",
+   "uses": [
+    "lem-sc-divisor-module-local",
+    "lem-pc-tensor-dual-invertible",
+    "def-sc-rational-section-divisor",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BE9 (local divisor modules), 01CT (tensor products of invertible modules); cohomology.tex Tag 01DZ for degree zero"
+   }
+  },
+  {
+   "text": "The degree definition gives $\\deg\\mathcal O_C=\\chi(\\mathcal O_C)-\\chi(\\mathcal O_C)=0$. By tensor-degree additivity, induction gives $\\deg A^{\\otimes0}=0$ and $\\deg A^{\\otimes(m+1)}=me+e$, hence $\\deg A^{\\otimes m}=me$. The effective divisor $qB$ has degree $qb$, so degree agreement gives $\\deg\\mathcal O_C(qB)=qb$. Divisor-module multiplication identifies $\\mathcal O_C(-qB)\\otimes\\mathcal O_C(qB)$ with $\\mathcal O_C(0)=\\mathcal O_C$. Additivity therefore gives $\\deg\\mathcal O_C(-qB)=-qb$ and $d:=\\deg L=me-qb$. These calculations also cover $m=0$, $q=0$, and $B=0$.",
+   "uses": [
+    "def-pc-degree-line-bundle",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-pc-degree-agrees-sc",
+    "lem-sc-divisor-module-tensor-add",
+    "lem-sc-divisor-module-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYX, lemma-degree-tensor-product; Tag 0AYY, lemma-degree-effective-Cartier-divisor; degree agreement for effective divisors"
+   }
+  },
+  {
+   "text": "Since $C$ is proper over the field $k$ and $L$ is invertible, the proper-field coherence lemma makes $L$ coherent and $C$ Noetherian. Apply proper coherent cohomology to $C\\to\\operatorname{Spec}k$: the base is the spectrum of the Noetherian ring $k$, so $H^0(C,L)$ is a finite $k$-module, hence a finite-dimensional $k$-vector space. Thus $h^0(C,L)$ is an ordinary nonnegative integer.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ, lemma-coherent-Noetherian; Tags 02O5/02O6, proper coherent cohomology"
+   }
+  },
+  {
+   "text": "Assume $s\\in H^0(C,L)$ is nonzero. The smooth-connected-curve local-ring theorem makes $C$ integral. Hence the nonzero-section Cartier lemma applies: the zero scheme $D=Z(s)$ is an effective Cartier divisor, and in every nonempty trivializing affine open $U=\\operatorname{Spec}R$ the coordinate $a$ of $s$ is a nonzerodivisor and $D\\cap U=\\operatorname{Spec}(R/(a))$. The zero-scheme divisor isomorphism gives $L\\cong\\mathcal O_C(D)$. Since $C$ is proper of dimension one, the Cartier-divisor finiteness lemma gives $D$ finite over $k$. This includes the empty zero scheme of a nowhere-vanishing section.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-pc-nonzero-section-integral-cartier",
+    "lem-pc-zero-scheme-divisor-iso",
+    "lem-pc-cartier-divisor-finite-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCS, lemma-grd-inequalities, first paragraph; divisors.tex Tags 02OR/01X0 and varieties.tex Tag 0AYY"
+   }
+  },
+  {
+   "text": "The restriction $L|_D$ is invertible: restrict any local basis of $L$ to $D$. Apply finite-morphism trivialization to $D\\to\\operatorname{Spec}k$ and its unique base point. Its nonempty open neighborhood is all of $\\operatorname{Spec}k$, so $L|_D\\cong\\mathcal O_D$. Consequently $\\Gamma(D,L|_D)\\cong\\Gamma(D,\\mathcal O_D)$ as $k$-vector spaces. The effective-Cartier clause of degree-base-change, applied on the proper one-dimensional scheme $C$, says that the latter space is finite-dimensional and has dimension $\\deg\\mathcal O_C(D)$. By the isomorphism in Step 4, this is $d$. In particular, the existence of $s\\ne0$ forces $d\\ge0$.",
+   "uses": [
+    "lem-sfb-finite-trivialize-invertible-upstairs",
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCS, lemma-grd-inequalities, finite-zero-scheme calculation; divisors.tex Tag 0BUT and varieties.tex Tag 0AYY"
+   }
+  },
+  {
+   "text": "Locally in the notation of Step 4, multiplication by $s$ and restriction give $0\\to R\\xrightarrow{\\,a\\,}Re\\to(R/(a))e\\to0$: the first map is injective because $a$ is a nonzerodivisor, and the quotient is exactly the last term. Thus globally $0\\to\\mathcal O_C\\xrightarrow{s}L\\to i_*(L|_D)\\to0$, where $i:D\\hookrightarrow C$. Global sections are left exact, and by definition $\\Gamma(C,i_*(L|_D))=\\Gamma(D,L|_D)$. Global functions on the proper smooth connected curve are $k$. We get an exact sequence $0\\to k\\to H^0(C,L)\\to\\Gamma(D,L|_D)$ with no surjectivity assertion at the right. The kernel has dimension one and the image has dimension at most $d$ by Step 5: lift a basis of the image and adjoin a basis of the kernel to obtain a basis of $H^0(C,L)$. Hence $h^0(C,L)\\le1+d$ whenever there is a nonzero section.",
+   "uses": [
+    "lem-sc-global-sections-left-exact",
+    "lem-sc-global-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCS, lemma-grd-inequalities, short exact sequence and dimension inequality; divisors.tex Tag 0C6K, remark-ses-regular-section"
+   }
+  },
+  {
+   "text": "If there is no nonzero section, then $H^0(C,L)=0$ and $h^0(C,L)=0\\le\\max\\{d+1,0\\}$. Otherwise Step 5 gives $d\\ge0$, so $\\max\\{d+1,0\\}=d+1$ and Step 6 proves the required inequality. In particular $d<0$ excludes any nonzero section. Substituting $d=me-qb$ from Step 2 proves every assertion, with the maximum interpreted in $\\mathbf Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCS, lemma-grd-inequalities, r <= d, combined with the zero-section case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-divisor-module-local",
+  "lem-pc-tensor-dual-invertible",
+  "def-sc-rational-section-divisor",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-degree-line-bundle",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-pc-degree-agrees-sc",
+  "lem-sc-divisor-module-tensor-add",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-pc-coherent-hi",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-pc-zero-scheme-divisor-iso",
+  "lem-pc-cartier-divisor-finite-over-field",
+  "lem-sfb-finite-trivialize-invertible-upstairs",
+  "lem-pc-degree-base-change",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-global-functions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCS, lemma-grd-inequalities, proof of r <= d; tensor and effective-divisor degree formulas from varieties.tex Tags 0AYX and 0AYY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of global sections of a line bundle on a smooth projective curve is at most its degree plus one and high tensor powers have linear section growth",
+   "results": "Actual search log 0ef1c2cbe59a42b1: 8 hits; ChevalleyThm.degBound, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_ΨSq_le, WeierstrassCurve.natDegree_preΨ_le, ChevalleyThm.MvPolynomialC.degBound, ChevalleyThm.MvPolynomialC.degBound_succ, ChevalleyThm.MvPolynomialC.numBound_succ, ChevalleyThm.MvPolynomialC.degBound_casesOn_succ. Residue degrees, finite global function rings and Weierstrass polynomial degrees do not bound sections of arbitrary line bundles.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*(section|Section)|h0.*degree|degree.*h0|riemannRoch",
+   "results": "Actual search log 10ae725ffe4b6d70: 3 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean. Residue degrees, finite global function rings and Weierstrass polynomial degrees do not bound sections of arbitrary line bundles.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a smooth projective curve global sections of a line bundle have dimension at most the degree plus one",
+   "results": "Actual search log 6a02898894fe362e: 8 hits; AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Proj.sub_apply, AlgebraicGeometry.Proj.ext, AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.add_apply, AlgebraicGeometry.Proj.ext_iff, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict. Residue degrees, finite global function rings and Weierstrass polynomial degrees do not bound sections of arbitrary line bundles.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"degree\"",
+   "results": "Actual search log a8ed1556633c93bc: 7 hits; AlgebraicGeometry.Scheme.Hom.residueDegree, AlgebraicGeometry.Scheme.Hom.residueDegree_id, AlgebraicGeometry.Scheme.Hom.residueDegree_eq_finrank, AlgebraicGeometry.AlgebraicCycle.degree, AlgebraicGeometry.AlgebraicCycle.degree_single, AlgebraicGeometry.AlgebraicCycle.degree_apply, AlgebraicGeometry.AlgebraicCycle.degree_eq_map_of_unique. Residue degrees, finite global function rings and Weierstrass polynomial degrees do not bound sections of arbitrary line bundles.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle of negative degree has no nonzero global section and tensor degree minus an effective divisor bounds section dimensions",
+   "results": "Actual search log 45048a935f902ff6: 8 hits; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen. Residue degrees, finite global function rings and Weierstrass polynomial degrees do not bound sections of arbitrary line bundles.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a smooth proper connected algebraic curve has at most max degree plus one zero global sections in finite dimension",
+   "results": "Actual search log 34ecf33946c9f798: 8 hits; ChevalleyThm.degBound, WeierstrassCurve.natDegree_Φ_le, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_ΨSq_le, ChevalleyThm.MvPolynomialC.numBound_zero, ChevalleyThm.numBound, ChevalleyThm.MvPolynomialC.degBound. Residue degrees, finite global function rings and Weierstrass polynomial degrees do not bound sections of arbitrary line bundles.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a line bundle on a proper integral curve have dimension at most its degree plus one",
+   "results": "Actual Q05 search 13441bab9f093ce1: 8 hits; WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one, WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one, AlgebraicGeometry.instFieldCarrierFunctionField, WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, MvRatFunc.rank_eq_max_lift, MvPolynomial.rank_R, FunctionField.classNumber. Read the returned statements: polynomial degrees, function-field ranks and global functions do not give this line-bundle section bound or tensor/divisor formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finrank\", \"degree\"",
+   "results": "Actual Q05 search 42af015a5688d0f7: 12 hits; finrank_quotient_span_eq_natDegree, Polynomial.Irreducible.natDegree_dvd_finrank, minpoly.natDegree_le_spanFinrank, Field.finSepDegree_dvd_finrank, Field.finSepDegree_eq_finrank_of_isSeparable, Field.finSepDegree_le_finrank, Field.finSepDegree_eq_finrank_iff, IntermediateField.finSepDegree_adjoin_simple_le_finrank. Read the returned statements: polynomial degrees, function-field ranks and global functions do not give this line-bundle section bound or tensor/divisor formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrankH.*(le|degree)|degree.*finrankH|h0.*degree|lemma-grd",
+   "results": "Actual Q05 search 4f53cda18c2baa0c: 0 hits; . Read the returned statements: polynomial degrees, function-field ranks and global functions do not give this line-bundle section bound or tensor/divisor formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of sections of an invertible sheaf on a proper curve is bounded by degree plus one",
+   "results": "Actual Q05 search 4502a7a351809815: 8 hits; AlgebraicGeometry.finite_appTop_of_universallyClosed, SheafOfModules.GeneratingSections.mk.sizeOf_spec, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, SheafOfModules.GeneratingSections.IsFiniteType.finite, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem', PowerBasis.dim_le_degree_of_root, PrimeSpectrum.ConstructibleSetData.degBound, Lagrange.degree_interpolate_le. Read the returned statements: polynomial degrees, function-field ranks and global functions do not give this line-bundle section bound or tensor/divisor formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Riemann Roch space of a divisor on a curve has dimension at most max of degree plus one and zero",
+   "results": "Actual Q05 search d877dd87e8bbfdbb: 8 hits; WeierstrassCurve.natDegree_Φ_le, ChevalleyThm.degBound, WeierstrassCurve.natDegree_preΨ_le, RatFunc.rank_ratFunc_ratFunc, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_ΨSq_le, RatFunc.finrank_ratFunc_ratFunc, FunctionField.classNumber. Read the returned statements: polynomial degrees, function-field ranks and global functions do not give this line-bundle section bound or tensor/divisor formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-subcurve-span-weight-bound",
+  "date": "2026-10-23",
+  "group": "Q121"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/moduli route; Morrison Section 3.2 steps (7), (9)--(10): section bounds after imposing selected boundary vanishing in the subcurve span filtration.",
+   "via": [
+    "lem-sfb-subcurve-span-weight-bound",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-curve-section-degree-cap",
+  "worker": "Q05",
+  "summary": "Kept the statement unchanged. Followed the 0CCS zero-divisor and left-exact global-sections argument, with 0AYX/0AYY for tensor powers and prescribed vanishing. Reused existing nodes for all non-elementary inputs; no new nodes or Mathlib leaves. Checked every cited statement and the degenerate cases.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/moduli route; Morrison Section 3.2 steps (7), (9)--(10): section bounds after imposing selected boundary vanishing in the subcurve span filtration. Steps 1-2 realize imposed boundary vanishing and its degree; Steps 3-7 prove the section bound needed in the subcurve span filtration.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-divisor-module-local",
+    "why": "Generic local form and invertibility of divisor modules; supplies the imposed-vanishing subsheaf and unit twist."
+   },
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "Generic invertibility under tensor products, used to form L."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Generic degree-additivity theorem for invertible modules on proper curves; used only for the numerical calculation, not as a replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-pc-degree-agrees-sc",
+    "why": "Generic agreement of divisor and Euler-characteristic degrees for an effective divisor; the unit has no alternative degree comparison."
+   },
+   {
+    "node": "lem-sc-divisor-module-tensor-add",
+    "why": "Generic divisor-module tensor formula identifies the inverse twist; the unit has no divisor-module construction theorem."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic proper-field coherence preparation permits proper coherent cohomology; no theorem of this unit supplies it."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic proper coherent cohomology gives finite-dimensional sections; this is algebraic coherent cohomology, not the constructible direct-image conclusion."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic integrality of a smooth connected curve, needed to apply the nonzero-section Cartier theorem."
+   },
+   {
+    "node": "lem-pc-nonzero-section-integral-cartier",
+    "why": "Generic zero-divisor construction for a nonzero section on an integral scheme, used in the 0CCS proof; no unit node supplies it."
+   },
+   {
+    "node": "lem-pc-zero-scheme-divisor-iso",
+    "why": "Generic line-bundle identification with its effective zero divisor; no unit node supplies this Cartier-divisor tool."
+   },
+   {
+    "node": "lem-pc-cartier-divisor-finite-over-field",
+    "why": "Generic finiteness of an effective Cartier divisor on a proper curve; needed for the finite-zero-scheme argument."
+   },
+   {
+    "node": "lem-pc-degree-base-change",
+    "why": "Only its effective-Cartier degree clause is used to identify dimension of the finite zero scheme with degree; no base-change route is substituted."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Generic kernel preservation for ordinary module-sheaf sections; used to bound sections from the local exact sequence."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Generic constant-functions theorem on a proper smooth connected curve; supplies the one-dimensional kernel."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-divisor-module-local",
+  "lem-pc-tensor-dual-invertible",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-pc-degree-agrees-sc",
+  "lem-sc-divisor-module-tensor-add",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-pc-coherent-hi",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-pc-zero-scheme-divisor-iso",
+  "lem-pc-cartier-divisor-finite-over-field",
+  "lem-pc-degree-base-change",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-global-functions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-528fed77d",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-528fed77d (reviewer sub-agent of L); spot-checked: I read the item and all 18 cited statements in full. The delivery creates no new nodes and leaves the statement unchanged; the parent lem-sfb-subcurve-span-weight-bound uses it in exactly the stated form. Steps 4-6 follow Stacks 0CCS (curves.tex 442-470) one for one: zero scheme of a nonzero s is effective Cartier with L≅O(D) (02OR/01X0), D is finite over k (0AYY), L|_D≅O_D (0BUT applied to D→Spec k, whose only open neighbourhood is all of Spec k), the sequence 0→O→L→i_*L|_D (remark-ses-regular-section, divisors.tex 2891), and Γ(O)=k. Steps 1-2 handle O(-qB)⊆O and the degree me-qb using 0AYX additivity, effective-divisor degree agreement and O(-qB)⊗O(qB)≅O(0)=O. Step 7 covers the case with no nonzero section and d<0. Every cited node's hypotheses hold where it is used (integrality, dim≤1, proper, Noetherian base Spec k, the I_D^∨ convention). I tested P^1 with O(1), an elliptic curve with O(P), a nontrivial degree-0 bundle, O(-P), and m=q=0; all are correct and the statement is not weakened. Grepping the DAG found no duplicate: the linear-series and small-degree nodes need projectivity or g≥2 and do not give this item. The tool_uses are generic Stacks lemmas used as black boxes, and I accept them. Batch-5 check: lem-trf-curve-degree-tensor-additive (0AYX) and lem-trf-proper-field-invertible-coherent (01XZ) are generic coherent algebraic geometry. lem-pc-coherent-hi, lem-pc-degree-agrees-sc (via coherent Riemann-Roch), lem-pc-degree-base-change and lem-sc-global-functions reach the trf chapter only through the general definition def-trf-schematically-dense-open. None of these is the ℓ-adic trace formula, Poincaré duality or a step of their proofs, so no assumption leaf is needed. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothCurveSectionDegreeCap",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.smoothCurve_section_degree_cap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.smoothCurveVanishingTwist",
+   "AlgebraicGeometry.Scheme.Modules.smoothCurveVanishingSections",
+   "AlgebraicGeometry.Scheme.Modules.smoothCurveSectionGerm",
+   "AlgebraicGeometry.Scheme.Modules.smoothCurveSectionVanishes",
+   "AlgebraicGeometry.Scheme.Modules.smoothCurve_section_degree_cap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCurveSectionDegreeCap.lean",
+  "statement": "theorem smoothCurve_section_degree_cap (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsConnectedCurve (C ↘ Spec (.of k))] [Smooth (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))] (A : C.Modules) [A.IsInvertible] (B : C.Divisor) (hB : ∀ P : closedPoints C, 0 ≤ B P) (m q : ℕ) : (∃ j : smoothCurveVanishingSections k C A B m q →ₗ[k] ((RingedSpace.globalSectionsFunctor C.toRingedSpace ⋙ ModuleCat.restrictScalars (globalSectionsRingHom k (X := C))).obj (A.tensorPow m)), Function.Injective j ∧ ∀ s : Γ(A.tensorPow m, ⊤), s ∈ Set.range j ↔ smoothCurveSectionVanishes k C (C ↘ Spec (.of k)) (A.tensorPow m) B q s) ∧ FiniteDimensional k (smoothCurveVanishingSections k C A B m q) ∧ (smoothCurveVanishingTwist k C (C ↘ Spec (.of k)) A B m q).degree k = (m : ℤ) * A.degree k - (q : ℤ) * Divisor.degree C B ∧ (Module.finrank k (smoothCurveVanishingSections k C A B m q) : ℤ) ≤ max ((m : ℤ) * A.degree k - (q : ℤ) * Divisor.degree C B + 1) 0 ∧ ((m : ℤ) * A.degree k - (q : ℤ) * Divisor.degree C B < 0 → Subsingleton (smoothCurveVanishingSections k C A B m q))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four definition helpers specialize existing tensor powers, divisor modules, module cohomology, generic germs and rational-section orders to the objects of this statement. The injective linear map has image exactly the prescribed vanishing sections; no extra existence hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8076f2cda",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Matched every hypothesis and conclusion clause to the Lean: alg. closed k; IsConnectedCurve/Smooth/IsProper on C ↘ Spec k with nothing extra assumed; invertible A; effective B via hB on closedPoints →₀ ℤ; m,q : ℕ. Twist = A^{⊗m} ⊗ O(-(q•B)) with the right sign (v_P ≥ q n_P). H⁰ = recorded RingedSpace.moduleCohomology 0, scalars restricted along globalSectionsRingHom. Vanishing predicate uses the recorded rationalSectionOrder of the generic germ (same integrality instance as rationalSection); zero section included. ∃ injective j with range exactly the vanishing set renders 'H⁰ is the space', since the node names no canonical map. Degree = recorded χ(M)−χ(O); finrank bound via max in ℤ; Subsingleton when me−qb<0. Edge cases m=0, q=0, B=0 covered. lean.statement verbatim; node diff vs live adds only the lean record; no name clash and no existing h⁰ ≤ deg+1 result. Helpers have real data, only the theorem is sorry, docstrings carry source, blueprint tag and 7 proof steps; report has both sections. No fix, so no compile."
+ }
+}

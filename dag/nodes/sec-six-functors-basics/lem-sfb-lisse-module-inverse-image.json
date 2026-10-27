@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-lisse-module-inverse-image",
+ "kind": "statement",
+ "title": "Inverse image of a lisse coefficient module along any scheme morphism",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $h:T\\to S$ any morphism of schemes [def-pc-scheme]. Put $\\Lambda_S=p_S^*\\Lambda$ and $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] on the small pro-etale sites [def-weil-pbc-proetale-site], use internal module objects [sk-def-sfb-module-objects] and the module inverse image $h^*=\\operatorname{Ext}_{\\alpha_h}\\circ\\operatorname{mapMod}(h^*_{\\Ab})$ [sk-def-sfb-module-pushforward-pullback]. Let $M$ be a $\\Lambda_S$-module, $\\{u_i:U_i\\to S\\}_{i\\in I}$ a pro-etale covering, and $\\tau_i:M|_{U_i}\\cong(\\Lambda_S|_{U_i})^{r_i}$ isomorphisms on the slice sites [def-pur-localized-ringed-site] with $r_i\\in\\mathbf N$. Then the base changes $\\{U_i\\times_ST\\to T\\}_{i\\in I}$ [def-pc-fibre-product] form a pro-etale covering of $T$, and for every $i$ there is an isomorphism $(h^*M)|_{U_i\\times_ST}\\cong(\\Lambda_T|_{U_i\\times_ST})^{r_i}$ on the slice site of $T_{\\mathrm{proet}}$ at $U_i\\times_ST$, with the same $r_i$. In particular, if $M$ is lisse [def-sfb-lisse-coefficient-module] then so is $h^*M$. Rank zero and empty schemes are allowed; no Noetherian, finiteness or flatness hypothesis is imposed on $h$ or $\\Lambda$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
+  "place": "(2): the base change of a trivializing cover is a cover on which the restriction is free of the same rank, since pullback preserves the coefficient ring (sk-prop-sfb-cartesian-coefficients) and direct sums; stated here for an arbitrary commutative condensed ring and an arbitrary morphism."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-pur-localized-ringed-site",
+  "def-pc-fibre-product",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "The base-changed family is a pro-etale cover by the base-change stability instance for Scheme.proetalePrecoverage. Apply Precoverage.mem_coverings_of_isPullback to the given family and the flipped chosen pullback squares. This simultaneously uses fpqc and weakly etale base-change stability and works for an empty family.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
+    "place": "(2), base change of a trivializing cover and preservation of free modules"
+   }
+  },
+  {
+   "text": "Put F=InternalModuleOperations.siteMap h, a=coefficientMap Lambda h and N=E_S(M). The upperComparison isomorphism identifies E_T(h^*M) with the sectionwise upperStar of N. The latter and Mathlib SheafOfModules.pullback a are left adjoints of the same direct image; Adjunction.leftAdjointUniq identifies them. Restrict both isomorphisms to F(U_i).",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-sfb-internal-module-operations-transport",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
+    "place": "(2), base change of a trivializing cover and preservation of free modules"
+   }
+  },
+  {
+   "text": "Use the universe-general localization comparison localLeftIso. F preserves finite limits and coverings, so local_continuous supplies continuity of Over.post F on the slice sites. Its coefficient map b=locMap a U_i is the restriction of a. The global adjunction is supplied by internal-module transport; the slice adjoint exists by module_pushforward_isRightAdjoint_of_universes. Thus restriction of pullback is isomorphic to pullback of N restricted to U_i, with the restricted target coefficient ring.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "lem-pur-ringed-site-module-pullback-exists-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
+    "place": "(2), base change of a trivializing cover and preservation of free modules"
+   }
+  },
+  {
+   "text": "Over.post F preserves finite limits, hence is representably flat and final. Apply the localized module pullback to the given tau_i and compose with Mathlib SheafOfModules.pullbackObjFreeIso b (ULift (Fin (r_i))). This library isomorphism preserves the given basis index and includes the empty index. Composing with the isomorphisms of Steps 2 and 3 proves the required specified slice trivialization.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
+    "place": "(2), base change of a trivializing cover and preservation of free modules"
+   }
+  },
+  {
+   "text": "For the lisse corollary, use the already proved auxiliary CondensedRing.locFree_pullback in the module of [lem-weil-pbc-finite-etale-locally-free-models]. Its LocFree abbreviation is definitionally the existing IsLisseCoefficientModule predicate: a pro-etale scheme cover with finite-free pullbacks. The lemma base changes that cover, transports free modules by inverse image and the invertible coefficient map, and uses upperStarComp and the pullback-square equation to identify the restrictions. Apply it directly with Lambda.X, h and M. This proof includes the zero-rank and empty cases and imposes no extra hypotheses.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module",
+    "lem-weil-pbc-finite-etale-locally-free-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
+    "place": "(2), base change of a trivializing cover and preservation of free modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-covering",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-internal-module-operations-transport",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-lisse-coefficient-module",
+  "lem-weil-pbc-finite-etale-locally-free-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-common-stratification.proof.md",
+  "place": "(2); B8 Lean proof using the existing independent-universe localization theorem and Mathlib PullbackFree; the corollary reuses the already proved locFree_pullback auxiliary in FiniteEtaleLocallyFreeModels."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lisse|Lisse and proetale|ProEtale|WeaklyEtale in Mathlib (--include=*.lean)",
+   "results": "0 hits for lisse; pro-etale material only in AlgebraicGeometry/Sites/Proetale.lean (site, topology, subcanonicity) and Sites/ElladicCohomology.lean; no module inverse image or locally free coefficient module",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, PreservesColimits",
+   "results": "loogle: unknown identifier 'PreservesColimits'",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: free-module pullback is a generic ingredient; the supplied pro-etale cover, internal coefficient transport and slice trivializations are not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyFree|LocallyFree|map.*free|pullback.*free",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/Algebra/Algebra/Subalgebra/Rank.lean; Mathlib/Algebra/Lie/Rank.lean; Mathlib/Algebra/Lie/Rank.lean; Mathlib/Algebra/Module/LinearMap/Polynomial.lean; Mathlib/Algebra/Module/LinearMap/Polynomial.lean; Mathlib/Algebra/Algebra/Basic.lean; Mathlib/Algebra/Algebra/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: free-module pullback is a generic ingredient; the supplied pro-etale cover, internal coefficient transport and slice trivializations are not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a locally free finite rank sheaf of modules on a ringed site is locally free of the same rank",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.mapFree; SheafOfModules.pullbackObjFreeIso; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: free-module pullback is a generic ingredient; the supplied pro-etale cover, internal coefficient transport and slice trivializations are not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves of modules commutes with restriction to slice sites and carries finite free modules to finite free modules",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackComp; SheafOfModules.pullback; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: free-module pullback is a generic ingredient; the supplied pro-etale cover, internal coefficient transport and slice trivializations are not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: free-module pullback is a generic ingredient; the supplied pro-etale cover, internal coefficient transport and slice trivializations are not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|[Ii]sLocallyFree|pullback.*[Oo]ver|[Oo]ver.*pullback",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: free-module pullback is a generic ingredient; the supplied pro-etale cover, internal coefficient transport and slice trivializations are not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image locally free sheaf modules ringed site finite rank",
+   "results": "SheafOfModules.pullbackObjFreeIso.congr_simp; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso; SheafOfModules.free; SheafOfModules.ιFree; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.isFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: free-module pullback is a generic ingredient; the supplied pro-etale cover, internal coefficient transport and slice trivializations are not a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-field-lisse-stratified-heart-support",
+  "date": "2026-10-22",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Proof (1),(2), Integral and rational coefficients: on strata the local models are lisse sheaves, which are preserved by these operations; the pullback assertion is expanded by sk-lem-coefficient-heart-common-stratification.proof.md (2).",
+   "via": [
+    "lem-sfb-field-lisse-stratified-heart-support",
+    "lem-sfb-continuous-qbar-constructible-generators",
+    "lem-sfb-admissible-tensor-constructibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-lisse-module-inverse-image",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement, including the specified cover, the exponents, arbitrary condensed coefficients and arbitrary h. Gave five assembly steps using existing geometry, internal/sectionwise transport and ringed-site localization. Wrote out the regular-module tensor calculation; no new nodes. Repaired inherited null blueprint ancestry using the explicit ancestry already repaired in lem-sfb-continuous-qbar-constructible-generators.",
+  "blueprint": "Realizes the lisse-pullback sentence of det-thm-sf-ctf-stability-direct-images proof (1),(2), with the exact cover argument of sk-lem-coefficient-heart-common-stratification.proof.md (2).",
+  "tool_uses": [
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "The construction supplies the site morphism for arbitrary h; this is generic pro-etale functoriality, not a replacement for a unit-level proof step."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "The general coefficient-ring isomorphism is needed for arbitrary condensed Lambda; the admissible-coefficients proposition is narrower."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic comparison identifies precisely the internal pullback with ringed-topos pullback without silently changing module categories."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic ringed-site localization supplies the slice comparison and its restricted coefficient map, retaining the prescribed trivializing cover."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed module adjunction gives preservation of coproducts for the localized pullback."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic existence of module coproducts is used only for finite powers on the slice sites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-internal-module-operations-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-d8b6fd559",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-d8b6fd559 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, every cited node's statement, and the source sk-lem-coefficient-heart-common-stratification.proof.md (2). The statement and stmt_deps are unchanged from the base, where the node was unsplit (checked against the Q39, Q99, N8 and N9 snapshots). There are no new nodes. blueprint.from was null; it is now det-thm-sf-ctf-stability-direct-images, Proof (1),(2), and I verified that sentence at sk-thm-sf-ctf-stability-direct-images.proof.md l.15-17. Step 1 uses the pro-etale covering definition, fpqc base change for any morphism, and weakly etale base change; this also covers the empty case. Step 2: the internal-module transport lemma explicitly states E_T' f*_int ≅ B_T' ⊗ f^-1(-); its def-sfb-module-upper-star has the same formula as sk-def-sfb-module-pushforward-pullback; the slice equivalence keeps sheaves, sections and restrictions unchanged. Step 3: the ringed localization lemma's hypotheses hold for u_h and c, and it gives (f_V)*j* ≅ j*f*. Step 4: P_i is a left adjoint, module colimits exist, and P_i(R) = S⊗_A A ≅ S, written out with both maps and the balancing relation. Step 5 is an elementary assembly. Tested r=0, r=1, h=id, T or S empty, Λ=0 (the statement keeps the same r_i and the proof never uses invariant basis number), and non-flat h. No cycle (430 reachable nodes). No SGA. Duplicate candidates lem-weil-pbc-continuous-locally-free-pullback and lem-sfb-finite-locally-free-ringed-pullback give only the 'in particular' lisse clause, not the same cover and ranks. Declared tool_uses are generic and accepted. Advisory only: step 2 does not check the sheafification and monoidality hypotheses of the internal equivalence on the slice sites; they hold there just as on S_proet. Citing lem-sfb-alpha-iso is redundant but harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LisseModuleInverseImage",
+  "declaration": "AlgebraicGeometry.ProEtale.lisseModuleInverseImage_trivializations",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.lisseModuleInverseImage_trivializations",
+   "AlgebraicGeometry.ProEtale.isLisseCoefficientModule_upperStar"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseModuleInverseImage.lean",
+  "statement": "theorem lisseModuleInverseImage_trivializations (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] {T S : Scheme.{u}} (h : T ⟶ S) (M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ.X S)) {I : Type v} (U : I → S.ProEt) (_hU : Presieve.ofArrows (fun i ↦ (U i).left) (fun i ↦ (U i).hom) ∈ Scheme.proetalePrecoverage S) (r : I → ℕ) (_τ : ∀ i : I, ((sectionModuleFunctor (Scheme.ProEt.topology S) (condensedRingObj Λ.X S)).obj M).over (U i) ≅ SheafOfModules.free (ULift.{u + 1} (Fin (r i)))) : (Presieve.ofArrows (fun i ↦ pullback (U i).hom h) (fun i ↦ pullback.snd (U i).hom h) ∈ Scheme.proetalePrecoverage T) ∧ ∀ i : I, Nonempty (((sectionModuleFunctor (Scheme.ProEt.topology T) (condensedRingObj Λ.X T)).obj ((CondensedRing.upperStar Λ.X h).obj M)).over (Scheme.ProEt.mk (pullback.snd (U i).hom h)) ≅ SheafOfModules.free (ULift.{u + 1} (Fin (r i))))",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-677602ab0",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return: the only node changes are the lean record and the added stmt_dep def-weil-pbc-internal-abelian-sheaf-module-equivalence (a landed definition node that owns sectionModuleFunctor); statement, proof and proof_deps are unchanged and the Lean file matches the packet. Every clause matches the Lean: arbitrary condensed ring Λ with IsCommMonObj and arbitrary h : T ⟶ S; condensedRingObj gives Λ_S and Λ_T; M is an internal Mod; h^* is CondensedRing.upperStar; the cover is U : I → S.ProEt in proetalePrecoverage (propQC WeaklyEtale) with I : Type v; τ_i are isomorphisms on the slice sites (SheafOfModules.over, def-pur-localized-ringed-site) to SheafOfModules.free (ULift (Fin r_i)). Conclusions: the base-changed family (pullback.snd) covers T, and for each i there is an isomorphism (Nonempty) with the same r_i. The lisse corollary uses the recorded IsLisseCoefficientModule. Edge cases (empty I, empty T, r_i = 0, Λ = 0, h = id, non-flat h) and universes are fine. Two sorries only, docstrings carry source, blueprint tag and the 5-step proof, report sections are present. Not recompiled because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T205412-L-3229025",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

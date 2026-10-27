@@ -1,0 +1,126 @@
+{
+ "id": "lem-coef-tensor-reduction-strict-derived-square",
+ "kind": "statement",
+ "title": "Derived normalization of the already constructed strict tensor map",
+ "statement": "Let P,Q and their total tensor be good flat-term K-flat integral complexes. For the unique strict chain map tensorReductionStrictMap of [lem-coef-tensor-reduction-strict-assembly], its localization satisfies the whole-system representative square for reductionTensor from [lem-coef-derived-system-evaluation-calculus], with the adjunction-normalized reduction models and K-flat tensor comparisons of [def-pur-completed-pullback-tower-realizations]. Explicitly, reduction of the integral tensor-model comparison followed by reductionTensor and the tensor of the two ordinary reduction-model maps equals the ordinary reduction-model map of the total tensor followed by the localization of tensorReductionStrictMap and the coherent tensor-model map. This asserts equality in the system derived category before evaluation or any limit; it makes no chain-map existence or finite-component assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0941; steps 1 and 2 of lem-coef-tensor-reduction-ordinary-model"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-tensor-reduction-strict-assembly"
+ ],
+ "proof": [
+  {
+   "text": "On flat-term K-flat representatives derive ordinary inverse image for the ringed sequence projection. Its derived-adjunction comparison with the recorded reduction is the fixed pullbackTensorReductionModel: both adjunction transposes are the localized ordinary unit followed by the total-limit comparison, so the hom equivalence determines their equality.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary inverse-image tensor map is the balanced scalar map b tensor (x tensor y) to (b tensor x) tensor (1 tensor y). Its finite components are the prescribed coefficientScalarTensorIso under the unit-normalized evaluation and tensor-evaluation identifications. Unique strict assembly identifies it with tensorReductionStrictMap before localization. Naturality of the K-flat tensor comparison then gives its localization square. Transport the recorded simultaneous reductionTensor normalization to this fixed ordinary model to obtain the claimed whole-system equality; do not infer equality from finite derived evaluations. The third model uses the good-total-tensor hypothesis, and finite quotient flatness is not required.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-tensor-reduction-strict-assembly"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-tensor-reduction-strict-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Transport of simultaneous reductionTensor normalization to the fixed ordinary model in step 2 of lem-coef-tensor-reduction-ordinary-model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The localization of the tensor comparison for ordinary inverse image on K flat complexes agrees with the derived inverse image tensor comparison under adjunction normalized representative isomorphisms",
+   "results": "Eight hits, including CategoryTheory.Adjunction.derived and ring localization tensor results. Adjoint derivation alone does not identify the specified sequence-system tensor comparison.",
+   "verdict": "No complete match.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization of an ordinary inverse image tensor comparison on K flat complexes equals the derived inverse image tensor comparison with adjunction normalized representatives",
+   "results": "Eight hits: Localization.Monoidal.lifting₂CurriedTensorPre_iso, curriedTensorPreIsoPost_hom_app, mapDerivedCategoryFactorsh_hom_app, flat tensor exactness and Tor maps. None identifies these fixed coherent reduction models.",
+   "verdict": "No complete match.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Tt]ranspose|[Tt]ranspose.*tensor; reductionTensor_normalization in project and Mathlib",
+   "results": "Mathlib has no fixed coherent-system comparison. CoefDerivedSystemEvaluationCalculus supplies simultaneous representative normalization; CompletedPullbackTowerCore fixes the ordinary model by the whole-system adjunction transpose.",
+   "verdict": "Need transport between these specific normalizations; finite derived evaluation alone is insufficient.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorReductionOrdinaryModel",
+  "date": "2026-10-27",
+  "group": "A2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence: primitive tensor coefficient comparison; Transport of simultaneous reductionTensor normalization to the fixed ordinary model in step 2 of lem-coef-tensor-reduction-ordinary-model",
+   "via": [
+    "lem-coef-tensor-reduction-ordinary-model",
+    "lem-sf-tensor-quotient-augmentation-on-good",
+    "lem-sf-primitive-quotient-augmentations",
+    "lem-sf-primitive-reduction-transpose",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorReductionStrictDerivedSquare",
+  "file": "lean/Sheaf/Paper/TensorReductionStrictDerivedSquare.lean",
+  "declaration": "WeilConjectures.tensorReductionStrictMap_derived_square",
+  "declarations": [
+   "WeilConjectures.tensorReductionStrictMap_derived_square"
+  ],
+  "statement": "theorem tensorReductionStrictMap_derived_square (W : Scheme.{u})\n    (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)\n    (hT : integralOperationsGoodComplex l E W\n      ((coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)\n        (completedIntegralCommRingSheafUnrestricted l E W)).obj (P.obj, Q.obj))) :\n    let S := pullbackTensorCalculus l E W\n    let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)\n      (completedIntegralCommRingSheafUnrestricted l E W)).obj (P.obj, Q.obj)\n    S.reduction.map ((S.integralTensorModel.iso (Scheme.ProEt.topology W)\n        (completedIntegralCommRingSheafUnrestricted l E W) S.integralClosed\n        P.obj Q.obj P.property.1 Q.property.1).hom) ≫\n      S.reductionTensor.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫\n      S.systemClosed.tensor.map\n        (Prod.mkHom ((pullbackTensorReductionModel l E W).hom.app P)\n          ((pullbackTensorReductionModel l E W).hom.app Q)) =\n    (pullbackTensorReductionModel l E W).hom.app ⟨T, hT⟩ ≫\n      DerivedCategory.Q.map (tensorReductionStrictMap l E W P.obj Q.obj) ≫\n      (pullbackTensorSystemModel l E W _ _\n        (pullbackTensorReductionGood l E W P)\n        (pullbackTensorReductionGood l E W Q)).hom",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T131447-L-2938524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T131447-L-2938524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

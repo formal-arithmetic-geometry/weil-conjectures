@@ -222,7 +222,43 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-acyclicity",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic",
+    "CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic",
+     "module": "WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic",
+     "lines": [
+      300,
+      308
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology",
+     "lines": [
+      88,
+      132
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-22",
   "item": "sk-thm-acyclicity",
@@ -278,5 +314,33 @@
   "group": "N5",
   "result": "pass",
   "note": "existing:true lean-only delivery. Main declaration Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic (PlusHomology:101) inverts the canonical rightDerivedFunctorPlusUnit in DerivedCategory.Plus D for termwise-bounded-below complexes of F-acyclic objects with any integer bound. nonempty_rightDerivedObjIso_homology_of_acyclic (Acyclic:305) gives R^qF X ≅ H^q(F I) for ℕ-indexed acyclic resolutions, q≥0; the witness is the canonical isomorphism. Hypotheses: Abelian C and D, additive F, PreservesFiniteLimits, EnoughInjectives C only (weaker than the node). HasDerivedCategory is size data. Universes free. Uses the recorded rightAcyclic. lean.statement verbatim. Sources identical in side-live and slopmaster2, sorry-free. Meets the derived-form rule. Edge cases q=0, zero object, negative bounds covered. No file changed, so no compile. Maintainer note: src-right-derived-functor-plus-acyclic-unit duplicates clause 2 at DAG level and shares the existing record."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive functor between\nabelian categories with enough injectives. If $F\\to A^\\bullet$ is a resolution\nand each $A^m$ is $v$-acyclic, then\n\n$$\n\\mathcal H^q(vA^\\bullet)\\simeq R^qvF.\n$$\n\nMore generally, for a bounded below complex $A^\\bullet$ of $v$-acyclic\nobjects, the canonical comparison $vA^\\bullet\\to Rv(A^\\bullet)$ is an\nisomorphism in $D^+(\\mathcal B)$.",
+  "proof": [
+   {
+    "text": "For the first assertion put $Z^0=F$ and let $Z^{m+1}$ be the image of\n$A^m\\to A^{m+1}$. The exact sequences\n\n$$\n0\\longrightarrow Z^m\\longrightarrow A^m\\longrightarrow Z^{m+1}\\longrightarrow0\n$$\n\ngive\n\n$$\n\\operatorname{coker}(vA^m\\to vZ^{m+1})\\simeq R^1vZ^m,\n\\qquad R^avZ^{m+1}\\simeq R^{a+1}vZ^m\\quad(a\\geq1).\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Left exactness identifies the kernel of $vA^q\\to vA^{q+1}$ with $vZ^q$.\nConsequently, for $q\\geq1$,\n\n$$\n\\mathcal H^q(vA^\\bullet)=\\operatorname{coker}(vA^{q-1}\\to vZ^q)\n\\simeq R^1vZ^{q-1}\\simeq\\cdots\\simeq R^qvF,\n$$\n\nand degree zero is $vF$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the complex assertion first observe that a bounded below exact complex\nof $v$-acyclic objects remains exact after applying $v$. Indeed, its cycle\nsequences have the same form, starting with a zero cycle at the first nonzero\ndegree. The long exact sequences show inductively that all cycles are\n$v$-acyclic, so each cycle sequence remains short exact after $v$. Now choose\na quasi-isomorphism $A^\\bullet\\to J^\\bullet$ to a bounded below complex of\ninjectives. Its cone is bounded below, exact, and termwise $v$-acyclic, since\nits terms are finite direct sums of terms of $A^\\bullet$ and of $J^\\bullet$.\nApplying $v$ to the cone shows that $vA^\\bullet\\to vJ^\\bullet$ is a\nquasi-isomorphism. The target computes $Rv(A^\\bullet)$, proving the\nassertion. No spectral sequence is needed; this is why the lemma is separated\nfrom [det-thm-groth-ss].",
+    "uses": [
+     "det-thm-groth-ss"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

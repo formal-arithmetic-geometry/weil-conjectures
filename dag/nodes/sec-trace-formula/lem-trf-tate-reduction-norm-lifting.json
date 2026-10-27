@@ -1,0 +1,274 @@
+{
+ "id": "lem-trf-tate-reduction-norm-lifting",
+ "kind": "statement",
+ "title": "Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. A Tate algebra $T_r=K\\langle X_1,\\ldots,X_r\\rangle$ is the restricted-series ring of [def-trf-restricted-series-presentation], with Gauss norm $\\|\\sum a_\\nu X^\\nu\\|_G=\\sup_\\nu|a_\\nu|$. Let $C\\ne0$ be a reduced quotient of such an algebra with its affinoid Banach topology. Define $\\rho(c)=\\sup_\\chi|\\chi(c)|$, where $\\chi:C\\to K$ runs over continuous unital $K$-algebra homomorphisms. Put $V=\\{a:|a|\\le1\\}$, $\\mathfrak m=\\{a:|a|<1\\}$, $\\kappa=V/\\mathfrak m$, and $\\widetilde C=\\{c:\\rho(c)\\le1\\}/\\{c:\\rho(c)<1\\}$. Let $q:T_s\\to C$ be a specified continuous surjective $K$-algebra homomorphism, for $s\\ge0$, such that $\\rho(q(f))\\le\\|f\\|_G$ for all $f\\in T_s$. Suppose the $\\kappa$-algebra map $\\kappa[X_1,\\ldots,X_s]\\to\\widetilde C$ sending $X_i$ to the class of $q(X_i)$ is surjective. Then for every $c\\in C$ there is $f\\in T_s$ such that $q(f)=c$ and $\\|f\\|_G=\\rho(c)$.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "BGR sections 6.4.2–6.4.3, the epimorphism/reduction criterion over a stable field with spectral values in the base value group, together with Corollary 5.2.7/8 (attainment of the Tate quotient norm). Algebraically closed complete base-field specialization. Exact criterion numbering has not been verified because the book is absent. Rodriguez Vazquez, Non-Archimedean normal families, section 2.2, printed pp.1685–1686, verifies the norm-preserving lifting conclusion for distinguished epimorphisms, read online 2026-10-24. Archival copy WANTED; not present in this checkout.",
+  "url": "https://www.numdam.org/item/10.5802/aif.3432.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=V\\langle X_1,\\ldots,X_s\\rangle=\\{f:\\|f\\|_G\\le1\\}$ and $S=\\{c:\\rho(c)\\le1\\}$. By [lem-trf-affinoid-spectral-banach-norm], the given $\\rho$ is a complete nonarchimedean $K$-algebra norm. The function $\\rho_{T_s}$ defined, as for $C$, by continuous characters equals the Gauss norm, so $\\{\\rho_{T_s}\\le1\\}=R$. Indeed every $K$-algebra map $\\chi:T_s\\to K$ satisfies $|\\chi(f)|\\le\\|f\\|_G$ for $f$ with constant coefficient $c_0$: otherwise $\\lambda=\\chi(f)$ has $|\\lambda|>\\|f\\|_G\\ge|c_0|$, so $f-\\lambda$ has constant coefficient $c_0-\\lambda$ of absolute value $|\\lambda|>\\|f-c_0\\|_G$, and [lem-trf-tate-unit-coefficient-criterion] makes $f-\\lambda$ a unit with $\\chi(f-\\lambda)=0$, impossible. Hence every character is continuous, and the continuous characters are exactly the quotient maps $T_s\\to T_s/\\mathfrak n$ for maximal ideals $\\mathfrak n$, whose residue fields are finite over $K$ by [lem-trf-affinoid-supremum-seminorm-calculus], hence equal to $K$ with its own absolute value as $K$ is algebraically closed. So $\\rho_{T_s}$ is the maximal-ideal supremum of that node, which on a Tate algebra equals the Gauss norm. Apply [lem-trf-finite-affinoid-unit-ball-finiteness] to $A=T_s$, $B=C$ and $\\varphi=q$. Both algebras are nonzero and the target $C$ is reduced, $q$ is continuous and spectrally contractive by hypothesis, and $C$ is cyclic as a $T_s$-module: $c=q(f)\\cdot1$. Consequently $S$ is a finite $R$-module. The image $q(R)$ is an $R$-submodule of $S$.",
+   "uses": [
+    "lem-trf-affinoid-spectral-banach-norm",
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-trf-tate-unit-coefficient-criterion",
+    "lem-trf-finite-affinoid-unit-ball-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent assembly from finite maps on spectral unit balls (6.4.1, verified online via Conrad Lecture 12 p.2), Nakayama (Stacks 00DV, lemma-NAK), and best approximation (5.2.7/8, local book WANTED). No reliance on an unverified 6.4.3 reduction criterion."
+   }
+  },
+  {
+   "text": "The value group $|K^\\times|$ is dense in $\\mathbf R_{>0}$. Indeed choose $b$ with $0<|b|<1$ by nontriviality and inversion; algebraic closedness supplies all roots of $b$, so the group contains $|b|^{\\mathbf Q}$, dense by density of $\\mathbf Q$ after taking logarithms. By the scalar and sum inequalities of [lem-trf-affinoid-spectral-banach-norm], $\\mathfrak m S=\\{c:\\rho(c)<1\\}$: each finite sum of products $a_jc_j$ with $|a_j|<1$, $\\rho(c_j)\\le1$ has norm less than one. Conversely for $\\rho(c)<1$ choose $a\\in K^\\times$ with $\\rho(c)<|a|<1$; then $c=a(a^{-1}c)$ with $a\\in\\mathfrak m$ and $a^{-1}c\\in S$. Thus $\\widetilde C=S/\\mathfrak m S$.",
+   "uses": [
+    "lem-trf-affinoid-spectral-banach-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent assembly from finite maps on spectral unit balls (6.4.1, verified online via Conrad Lecture 12 p.2), Nakayama (Stacks 00DV, lemma-NAK), and best approximation (5.2.7/8, local book WANTED). No reliance on an unverified 6.4.3 reduction criterion."
+   }
+  },
+  {
+   "text": "For $c\\in S$, the reduction hypothesis supplies a polynomial $\\bar P\\in\\kappa[X_1,\\ldots,X_s]$ representing its class. Lift its finitely many coefficients to $V$ to obtain $P\\in R$. The difference $c-q(P)$ lies in $\\{\\rho<1\\}=\\mathfrak m S$ by step 2. Therefore $S=q(R)+\\mathfrak m S$. Set $Q=S/q(R)$ and let $J=\\mathfrak m R$ be the ideal generated in $R$ by the scalar elements of $\\mathfrak m$. The images in $Q$ of the finite generators from step 1 generate $Q$, and the displayed equality gives $JQ=Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent assembly from finite maps on spectral unit balls (6.4.1, verified online via Conrad Lecture 12 p.2), Nakayama (Stacks 00DV, lemma-NAK), and best approximation (5.2.7/8, local book WANTED). No reliance on an unverified 6.4.3 reduction criterion."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-nakayama-one-plus-ideal-annihilator] over $R$ with $I=J$ and $M=Q$. It gives $h=1+i$ with $i\\in J$ and $hQ=0$. Write $i=\\sum_{j=1}^n a_jr_j$, with $a_j\\in\\mathfrak m$ and $r_j\\in R$. The Gauss inequalities in [lem-trf-restricted-series-gauss-completion] give $\\|i\\|_G\\le\\max_j|a_j|<1$ (the empty sum is zero). The constant coefficient of $h$ has absolute value one and its nonconstant part has Gauss norm less than one. Hence [lem-trf-tate-unit-coefficient-criterion] gives an inverse $g\\in T_s$. From $g=1-ig$ the same Gauss inequalities give $\\|g\\|_G\\le\\max(1,\\|i\\|_G\\|g\\|_G)$, which forces $\\|g\\|_G\\le1$. Thus $g\\in R$, $h$ is a unit in $R$, and $hQ=0$ implies $Q=0$. We have proved $q(R)=S$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-tate-unit-coefficient-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent assembly from finite maps on spectral unit balls (6.4.1, verified online via Conrad Lecture 12 p.2), Nakayama (Stacks 00DV, lemma-NAK), and best approximation (5.2.7/8, local book WANTED). No reliance on an unverified 6.4.3 reduction criterion."
+   }
+  },
+  {
+   "text": "Fix $c\\in C$. Choose $f_0\\in T_s$ with $q(f_0)=c$. Apply [lem-trf-tate-ideal-best-approximation] to the ideal $I=\\ker q$ and $f_0$. It gives a representative $f$ of $f_0+I$ of minimum Gauss norm among all representatives, hence $q(f)=c$. Contractivity gives $\\rho(c)\\le\\|f\\|_G$. If the inequality were strict, density from step 2 would supply $a\\in K^\\times$ with $\\rho(c)<|a|<\\|f\\|_G$. The scalar rule in [lem-trf-affinoid-spectral-banach-norm] gives $a^{-1}c\\in S$. By step 4 choose $r\\in R$ with $q(r)=a^{-1}c$. Then $q(ar)=c$ and, directly by scaling the coefficients, $\\|ar\\|_G=|a|\\|r\\|_G\\le|a|<\\|f\\|_G$, contradicting minimality. Thus $\\|f\\|_G=\\rho(c)$. For $c=0$ one can also take $f=0$; all arguments include $s=0$.",
+   "uses": [
+    "lem-trf-tate-ideal-best-approximation",
+    "lem-trf-affinoid-spectral-banach-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent assembly from finite maps on spectral unit balls (6.4.1, verified online via Conrad Lecture 12 p.2), Nakayama (Stacks 00DV, lemma-NAK), and best approximation (5.2.7/8, local book WANTED). No reliance on an unverified 6.4.3 reduction criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-spectral-banach-norm",
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-finite-affinoid-unit-ball-finiteness",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-unit-coefficient-criterion",
+  "lem-trf-tate-ideal-best-approximation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Agent assembly from finite maps on spectral unit balls (6.4.1, verified online via Conrad Lecture 12 p.2), Nakayama (Stacks 00DV, lemma-NAK), and best approximation (5.2.7/8, local book WANTED). No reliance on an unverified 6.4.3 reduction criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "distinguished.*(epimorphism|surjection)|affinoid|norm.*preserving.*lift|TateAlgebra",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"grep\", \"query\": \"distinguished.*(epimorphism|surjection)|affinoid|norm.*preserving.*lift|TateAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjective_of_mkQ_comp_surjective is an ideal-adic completeness result; NormedAddGroupHom.IsQuotient.mk assumes the quotient-norm identity and does not produce attained representatives; finite-field norm surjectivity and Fontaine theta concern different objects. None proves this spectral reduction criterion for a specified Tate epimorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective reduction of a Tate algebra epimorphism implies quotient norm equals spectral norm and infimum is attained",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"leansearch\", \"query\": \"Surjective reduction of a Tate algebra epimorphism implies quotient norm equals spectral norm and infimum is attained\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_of_mkQ_comp_surjective\", \"NormedAddGroupHom.IsQuotient.mk\", \"RingHom.surjective_of_tmul_eq_tmul_of_finite\", \"Algebra.isEpi_iff_surjective_algebraMap_of_finite\", \"spectralAlgNorm\", \"spectralNorm\", \"AdicCompletion.kerProj_surjective\", \"AddSubgroup.surjective_normedMk\"], \"digest\": \"64a6892d05db6d01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjective_of_mkQ_comp_surjective is an ideal-adic completeness result; NormedAddGroupHom.IsQuotient.mk assumes the quotient-norm identity and does not produce attained representatives; finite-field norm surjectivity and Fontaine theta concern different objects. None proves this spectral reduction criterion for a specified Tate epimorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-24T08:07:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"norm\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Subgroup.normal_comap_iff_of_surjective\", \"AddSubgroup.comap_normalizer_eq_of_surjective\", \"Subgroup.comap_normalizer_eq_of_surjective\", \"FreeAddGroup.norm_surjective\", \"FreeGroup.norm_surjective\", \"AlgEquiv.restrictNormalHom_surjective\", \"Function.Surjective.pi_norm_comp\", \"Function.Surjective.pi_norm_comp'\"], \"digest\": \"c6792b870f5215fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjective_of_mkQ_comp_surjective is an ideal-adic completeness result; NormedAddGroupHom.IsQuotient.mk assumes the quotient-norm identity and does not produce attained representatives; finite-field norm surjectivity and Fontaine theta concern different objects. None proves this spectral reduction criterion for a specified Tate epimorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction criterion for a distinguished epimorphism of strict affinoid algebras over a stable field norm preserving lifts",
+   "results": "{\"t\": \"2026-10-24T08:07:17Z\", \"tool\": \"leanfinder\", \"query\": \"Reduction criterion for a distinguished epimorphism of strict affinoid algebras over a stable field norm preserving lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.affineAnd\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.affine_isReduced_iff\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"PreTilt.untiltFun\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"HenselianLocalRing\"], \"digest\": \"c5be739e88fe70a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjective_of_mkQ_comp_surjective is an ideal-adic completeness result; NormedAddGroupHom.IsQuotient.mk assumes the quotient-norm identity and does not produce attained representatives; finite-field norm surjectivity and Fontaine theta concern different objects. None proves this spectral reduction criterion for a specified Tate epimorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a specified surjective homomorphism from a Tate algebra over an algebraically closed field surjectivity of its reduction implies every element has a preimage with Gauss norm equal to the spectral norm",
+   "results": "{\"t\": \"2026-10-24T08:07:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a specified surjective homomorphism from a Tate algebra over an algebraically closed field surjectivity of its reduction implies every element has a preimage with Gauss norm equal to the spectral norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.unitsMap_norm_surjective\", \"surjective_fontaineTheta\", \"FiniteField.norm_surjective\", \"AdicCompletion.surjective_evalₐ\", \"surjective_of_mk_map_comp_surjective\", \"AdicCompletion.evalOneₐ_surjective\", \"AdicCompletion.kerProj_surjective\", \"NormedAddGroupHom.SurjectiveOnWith.exists_pos\"], \"digest\": \"bc4e79a98acaad88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjective_of_mkQ_comp_surjective is an ideal-adic completeness result; NormedAddGroupHom.IsQuotient.mk assumes the quotient-norm identity and does not produce attained representatives; finite-field norm surjectivity and Fontaine theta concern different objects. None proves this spectral reduction criterion for a specified Tate epimorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|quotient.*[Gg]auss|[Gg]auss.*quotient|distinguished.*epimorphism",
+   "results": {
+    "t": "2026-10-24T08:41:23Z",
+    "tool": "grep",
+    "query": "TateAlgebra|affinoid|quotient.*[Gg]auss|[Gg]auss.*quotient|distinguished.*epimorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: open mapping yields a fixed multiplicative loss, not exact spectral norm; finite-extension spectral norms and adic lifting have different hypotheses and objects; no Tate-reduction criterion or attained lifting statement was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A contractive surjective map from a Tate algebra to a reduced affinoid algebra surjective on canonical reductions admits preimages with Gauss norm equal to the spectral norm",
+   "results": {
+    "t": "2026-10-24T08:50:32Z",
+    "tool": "leansearch",
+    "query": "A contractive surjective map from a Tate algebra to a reduced affinoid algebra surjective on canonical reductions admits preimages with Gauss norm equal to the spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousLinearMap.exists_preimage_norm_le",
+     "spectralNorm_extends",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "spectrum.preimage_algebraMap",
+     "spectralNorm_extends_of_finiteDimensional",
+     "norm_algebraMap'",
+     "spectralAlgNorm_extends",
+     "IsProperMap.isSpectralMap"
+    ],
+    "digest": "02219df71d0e878f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: open mapping yields a fixed multiplicative loss, not exact spectral norm; finite-extension spectral norms and adic lifting have different hypotheses and objects; no Tate-reduction criterion or attained lifting statement was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of canonical reductions for a given Tate algebra presentation gives norm preserving lifts in an affinoid algebra",
+   "results": {
+    "t": "2026-10-24T08:50:41Z",
+    "tool": "leanfinder",
+    "query": "Surjectivity of canonical reductions for a given Tate algebra presentation gives norm preserving lifts in an affinoid algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.SubmersivePresentation.cotangentComplexAux_surjective",
+     "AdicCompletion.surjective_evalₐ",
+     "AdicCompletion.evalOneₐ_surjective",
+     "Algebra.FormallySmooth.liftOfSurjective",
+     "Algebra.FormallySmooth.liftOfSurjective_apply",
+     "AdicCompletion.kerProj_surjective",
+     "surjective_fontaineTheta",
+     "Algebra.FormallySmooth.comp_liftOfSurjective"
+    ],
+    "digest": "a10e5a55a53cddcd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: open mapping yields a fixed multiplicative loss, not exact spectral norm; finite-extension spectral norms and adic lifting have different hypotheses and objects; no Tate-reduction criterion or attained lifting statement was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"Surjective\"",
+   "results": {
+    "t": "2026-10-24T08:54:40Z",
+    "tool": "loogle",
+    "query": "\"norm\", \"Surjective\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Subgroup.normal_comap_iff_of_surjective",
+     "AddSubgroup.comap_normalizer_eq_of_surjective",
+     "Subgroup.comap_normalizer_eq_of_surjective",
+     "FreeAddGroup.norm_surjective",
+     "FreeGroup.norm_surjective",
+     "AlgEquiv.restrictNormalHom_surjective",
+     "Function.Surjective.pi_norm_comp",
+     "Function.Surjective.pi_norm_comp'"
+    ],
+    "digest": "c6792b870f5215fd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: open mapping yields a fixed multiplicative loss, not exact spectral norm; finite-extension spectral norms and adic lifting have different hypotheses and objects; no Tate-reduction criterion or attained lifting statement was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-distinguished-presentation",
+  "date": "2026-10-24",
+  "group": "Q104"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions.",
+   "via": [
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-reduction-norm-lifting",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved unit-ball surjectivity by finite affinoid unit-ball finiteness, identification of the strict spectral ball with mS using the dense value group, and the existing Nakayama annihilator lemma. Applied a separate Tate-ideal best-approximation input and a scaling contradiction for exact norm equality. Two statement-only analytic nodes, no Mathlib leaves; every cited statement read and quoted. Avoided the circular model-finiteness/presentation nodes above this item.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Steps 1–4 justify surjectivity on integral restricted series; step 5 supplies the norm-preserving lift used in the distinguished-presentation construction. This refines the historical analytic support only; the current contracting-correspondence unit is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-78126d204",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-78126d204 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all seven cited statements in full. The statement is unchanged and exact: an algebraically closed complete field K, a reduced C≠0, a specified contractive q, and a surjective reduction map give lifts f with ‖f‖_G=ρ(c). This is the converse direction of BGR's distinguished-epimorphism criterion. BGR, Conrad L12 and Werner are absent locally: the worker marked them WANTED and set proof_origin to agent. I checked the mathematics independently. Steps 2–5 are correct. Step 2: the value group is dense, and mS={ρ<1}. Step 3: S=q(R)+mS, and Q=S/q(R) is finite with JQ=Q. Step 4: Nakayama gives h=1+i; h is a unit in T_s by the coefficient criterion, and ‖h⁻¹‖≤1, so Q=0. Step 5: best approximation for ker q, then a scaling contradiction. The edge cases c=0 and s=0 are covered. Repair (C4) in step 1: the step identified the unit ball of T_s, defined by continuous characters, with R by citing the supremum-seminorm-calculus node, whose ρ is a supremum over maximal ideals. Every maximal-ideal character being continuous, which this needs, was not argued. The fix adds a three-line argument and adds lem-trf-tate-unit-coefficient-criterion to the step's uses (it was already in proof_deps). The argument: |χ(f)|>‖f‖_G would make f−χ(f) a unit in ker χ, so every character is contractive, and continuous characters are exactly the maximal-ideal quotients with residue field K. New nodes: unit-ball-finiteness is true; reducedness of the target is needed (K→K[ε]/ε² fails), and contractivity is automatic. It is not a duplicate: grauert-remmert-powerbounded reaches the item (I verified the cycle), and the integral-equation nodes give only integrality. Best-approximation is BGR 5.2.7/8, strict closedness of the ideals of T_n. It is not covered by the ℓ-adic finite-dimensional best-approximation node or by the quotient-norm-topology node. Neither node restates the item. No cycle, no SGA, no tool_uses; the searches cover all three kinds. The fix is in fixes/dag/nodes/sec-trace-formula/lem-trf-tate-reduction-norm-lifting.json.; 1 file(s) fixed by the reviewer"
+ }
+}

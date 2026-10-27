@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-finite-locally-free-degree-composition",
+ "kind": "statement",
+ "title": "Constant degrees multiply for finite locally free morphisms",
+ "statement": "Let $X,Y,S$ be schemes [def-pc-scheme], let $r,s\\geq0$ be integers, and let $f:X\\to Y$ and $g:Y\\to S$ be finite locally free morphisms of constant degrees $r$ and $s$, respectively [def-pc-finite-locally-free]. Then $g\\circ f:X\\to S$ is finite locally free of constant degree $rs$. No reducedness, Noetherian, connectedness or separability hypothesis is imposed; empty schemes and degree zero are allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02KC, lemma-composition-finite-locally-free, with its constant-degree refinement using Tag 02KA, definition-finite-locally-free, and fibre ranks; Tag 02KB, lemma-finite-flat. The rank calculation reduces over each finite fibre algebra to Algebra Tag 02M9, lemma-locally-free-semi-local-free, literature/stacks-project/algebra.tex."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "The composite $h=g\\circ f$ is finite locally free by [lem-trf-finite-locally-free-composition]. It remains to compute its fibre dimension at an arbitrary point $z\\in S$.",
+   "uses": [
+    "lem-trf-finite-locally-free-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KC, lemma-composition-finite-locally-free."
+   }
+  },
+  {
+   "text": "Choose an affine neighbourhood $V=\\operatorname{Spec}A$ of $z$, and put $U=g^{-1}V=\\operatorname{Spec}B_0$ and $W=f^{-1}U=\\operatorname{Spec}C_0$. These inverse images are affine by the definition of a finite morphism [def-weil-finite-integral-morphism]. Restrictions to target opens preserve the finite locally free condition and the stated degrees: the finite, flat and locally finitely presented conditions are local conditions, and the fibres are unchanged. Put $K=\\kappa(z)$, $B=B_0\\otimes_AK$ and $C=C_0\\otimes_AK$. The affine fibre-product theorem [lem-weil-pbc-fibre-product-affine-spectra] identifies $Y_z$ with $\\operatorname{Spec}B$ and $X_z$ with $\\operatorname{Spec}C$, with their map induced by $B\\to C$. In particular $\\dim_KB=s$ by the degree hypothesis [def-pc-finite-locally-free].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KA, definition-finite-locally-free; Tag 02KB, lemma-finite-flat. Affine fibre products: Schemes Tag 01I4, lemma-fibre-product-affine-schemes."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-finite-locally-free-principal-basis-cover] to $W\\to U$: choose $t_1,\\ldots,t_m\\in B_0$ generating the unit ideal and isomorphisms $(C_0)_{t_i}\\cong(B_0)_{t_i}^{\\oplus r}$. Write $\\bar t_i$ for the images in $B$. These still generate the unit ideal, by applying $B_0\\to B$ to an equation $\\sum a_it_i=1$. Extension of scalars gives $C\\cong C_0\\otimes_{B_0}B$, by $c\\otimes(b\\otimes k)\\mapsto cb\\otimes k$ with inverse $c\\otimes k\\mapsto c\\otimes(1\\otimes k)$. Localizing this formula and the chosen basis isomorphisms gives $C_{\\bar t_i}\\cong(C_0)_{t_i}\\otimes_{(B_0)_{t_i}}B_{\\bar t_i}\\cong B_{\\bar t_i}^{\\oplus r}$. The localization comparison sends $(c/t_i^a)\\otimes(b/\\bar t_i^b)$ to $cb/\\bar t_i^{a+b}$ and is inverted using the localization universal property. Tensoring the basis map and its inverse gives inverse maps, since each acts on the displayed basis coordinates. Thus $C$ has a finite principal-open free cover of constant rank $r$ as a $B$-module.",
+   "uses": [
+    "lem-a1-finite-locally-free-principal-basis-cover",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary extension of the principal-basis charts of Morphisms Tag 02KB; tensor and localization universal properties."
+   }
+  },
+  {
+   "text": "Since $B$ is finite-dimensional over $K$, [lem-weil-pbc-finite-dim-algebra-artinian] makes it Artinian; [lem-sfb-artinian-spectrum-finite] makes its prime spectrum finite, hence its subset of maximal ideals is finite. Apply [lem-sfb-semilocal-constant-rank-basis] to the cover in step 3. It supplies a $B$-basis $c_1,\\ldots,c_r$ of $C$. This application uses neither reducedness of $B$ nor a field structure on $B$.",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-artinian-spectrum-finite",
+    "lem-sfb-semilocal-constant-rank-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00J6 (lemma-finite-dimensional-algebra), 00J7 (lemma-artinian-finite-nr-max), and 02M9 (lemma-locally-free-semi-local-free)."
+   }
+  },
+  {
+   "text": "Choose a $K$-basis $b_1,\\ldots,b_s$ of $B$. Then the $rs$ products $b_ic_j$ form a $K$-basis of $C$: expand each element uniquely first in the $c_j$, and then each coefficient uniquely in the $b_i$. Uniqueness in these two expansions proves linear independence as well as spanning. Hence $\\dim_KC=rs$. By the fibre identifications of step 2 and the definition of degree [def-pc-finite-locally-free], $h$ has degree $rs$ at $z$, and $z$ was arbitrary. If $B=0$, then its unital algebra $C$ is zero and both dimensions are zero; if $r=0$, the empty $B$-basis gives $C=0$. If $S$ is empty there are no points to check. These observations also cover $s=0$ and all empty-source cases.",
+   "uses": [
+    "def-weil-vector-space-dimension",
+    "def-weil-pbc-free-module",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KA, definition-finite-locally-free: explicit fibre-rank calculation after the Tag 02M9 basis theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-locally-free-composition",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-finite-locally-free",
+  "lem-a1-finite-locally-free-principal-basis-cover",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-artinian-spectrum-finite",
+  "lem-sfb-semilocal-constant-rank-basis",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 02KC has omitted proof; the constant-degree refinement is written out using affine principal-basis charts, Tags 00J6 and 02M9, and an explicit product basis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The composite of finite locally free morphisms of constant degrees r and s is finite locally free of degree r times s",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.locallyOfFiniteType_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism composition and free-module scalar-tower rank formula do not give constant-degree composition for finite locally free schemes in one line; the latter requires a semilocal fibre argument"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_comp|rank_comp|degree_comp|IsFiniteLocallyFree",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism composition and free-module scalar-tower rank formula do not give constant-degree composition for finite locally free schemes in one line; the latter requires a semilocal fibre argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free morphisms of constant ranks r and s compose to a finite locally free morphism of rank r times s",
+   "results": "8 hits; AlgebraicGeometry.locallyOfFiniteType_comp, Module.finrank_linearMap, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instCompScheme, Module.rank_linearMap, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism composition and free-module scalar-tower rank formula do not give constant-degree composition for finite locally free schemes in one line; the latter requires a semilocal fibre argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finrank\", \"comp\"",
+   "results": "12 hits; Submodule.finrank_add_eq_of_isCompl, HomologicalComplex.eulerChar_eq_sum_finSet_of_finrankSupport_subset, HomologicalComplex.homologyEulerChar_eq_sum_finSet_of_finrankSupport_subset, Complex.finrank_real_complex, Complex.finrank_real_complex_fact, finrank_real_of_complex, RingHom.finrank_comp_left_of_bijective, RingHom.finrank_comp_right_of_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism composition and free-module scalar-tower rank formula do not give constant-degree composition for finite locally free schemes in one line; the latter requires a semilocal fibre argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars multiplies constant ranks for a tower of finite projective commutative algebras",
+   "results": "8 hits; rank_mul_rank, lift_rank_mul_lift_rank, Module.finrank_mul_finrank, IsBaseChange.rank_eq_of_le_nonZeroDivisors, IsBaseChange.finrank_eq_of_le_nonZeroDivisors, Module.finrank_bot_le_finrank_of_isScalarTower_of_free, IsBaseChange.lift_rank_eq_of_le_nonZeroDivisors, IsBaseChange.finrank_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-morphism composition and free-module scalar-tower rank formula do not give constant-degree composition for finite locally free schemes in one line; the latter requires a semilocal fibre argument"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_comp|rank_comp|degree_comp|IsFiniteLocallyFree",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition hits give no degree multiplication; module tower formulas require global freeness; rankAtStalk results do not give restriction-of-scalars multiplication."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.finrank",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Hom.finrank; AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank; AlgebraicGeometry.Scheme.Hom.finrank_comp_left_of_isIso; AlgebraicGeometry.Scheme.Hom.finrank_SpecMap_eq_finrank; AlgebraicGeometry.Scheme.Hom.finrank_eq_one_of_isIso; AlgebraicGeometry.Scheme.Hom.isIso_iff_finrank_eq; AlgebraicGeometry.Scheme.Hom.one_le_finrank_iff_surjective; AlgebraicGeometry.Scheme.Hom.finrank_SpecMap_algebraMap",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition hits give no degree multiplication; module tower formulas require global freeness; rankAtStalk results do not give restriction-of-scalars multiplication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of finite locally free scheme morphisms of degrees r and s has degree r times s",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite; AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType; AlgebraicGeometry.IsFinite.instCompScheme; AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite; AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition hits give no degree multiplication; module tower formulas require global freeness; rankAtStalk results do not give restriction-of-scalars multiplication."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_eq_mul_of_rankAtStalk_eq|finrank_mul_finrank|nonempty_basis_of_flat_of_finrank_eq",
+   "results": "25 hits: Mathlib/RingTheory/LittleWedderburn.lean; Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean; Mathlib/RingTheory/RamificationInertia/Inertia.lean; Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean; Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean; Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean; Mathlib/NumberTheory/RamificationInertia/Inertia.lean; Mathlib/Algebra/Algebra/Subalgebra/IsSimpleOrder.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition hits give no degree multiplication; module tower formulas require global freeness; rankAtStalk results do not give restriction-of-scalars multiplication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of finite locally free maps multiplies their constant fibre dimensions",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme; AlgebraicGeometry.IsFinite.comp_iff; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme; AlgebraicGeometry.IsLocalIso.instIsMultiplicativeScheme; AlgebraicGeometry.locallyOfFiniteType_comp; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition hits give no degree multiplication; module tower formulas require global freeness; rankAtStalk results do not give restriction-of-scalars multiplication."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.rankAtStalk, Module.finrank",
+   "results": "4 hits: Module.rankAtStalk_eq_finrank_of_free; Ideal.finrank_fiber_eq_rankAtStalk; Module.rankAtStalk_eq_finrank_tensorProduct; Module.rankAtStalk_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition hits give no degree multiplication; module tower formulas require global freeness; rankAtStalk results do not give restriction-of-scalars multiplication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite algebras K B C over a field K, if C is finite flat over B with constant stalk rank n, then dimension over K of C equals n times dimension of B",
+   "results": "8 hits: IsBaseChange.finrank_eq_of_le_nonZeroDivisors; Module.rankAtStalk_tensorProduct_of_isScalarTower; Module.rankAtStalk_eq; Subalgebra.LinearDisjoint.rank_eq_one_of_flat_of_self_of_inj; Module.rankAtStalk_baseChange; Algebra.IsAlgebraic.lift_rank_of_isFractionRing; Algebra.IsAlgebraic.rank_of_isFractionRing; Algebra.IsAlgebraic.finrank_of_isFractionRing",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition hits give no degree multiplication; module tower formulas require global freeness; rankAtStalk results do not give restriction-of-scalars multiplication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite flat algebra of constant rank n over a finite dimensional commutative algebra B over a field K has K dimension n times the dimension of B",
+   "results": "8 hits: Module.free_of_flat_of_finrank_eq; Module.finiteDimensional_iff_of_rank_eq_nsmul; Subalgebra.LinearDisjoint.rank_inf_eq_one_of_flat_right_of_inj; Module.nonempty_basis_of_flat_of_finrank_eq; Subalgebra.LinearDisjoint.rank_eq_one_of_flat_of_self_of_inj; Subalgebra.LinearDisjoint.rank_inf_eq_one_of_flat_left_of_inj; IsSimpleModule.finrank_eq_one_of_isMulCommutative; Subalgebra.LinearDisjoint.rank_inf_eq_one_of_flat_of_inj",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition hits give no degree multiplication; module tower formulas require global freeness; rankAtStalk results do not give restriction-of-scalars multiplication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a finite dimensional algebra multiplies the dimension of a constant rank finite flat module",
+   "results": "8 hits: Module.finrank_baseChange; Module.finrank_mul_finrank; IsBaseChange.finrank_eq; IsBaseChange.finrank_eq_of_le_nonZeroDivisors; Module.finrank_top_le_finrank_of_isScalarTower_of_free; Module.finrank_bot_le_finrank_of_isScalarTower; rank_mul_rank; Module.finrank_top_le_finrank_of_isScalarTower",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme composition hits give no degree multiplication; module tower formulas require global freeness; rankAtStalk results do not give restriction-of-scalars multiplication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-degree-multiplicative",
+  "date": "2026-10-23",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I §7, printed p.32, identification of isogeny degree with function-field degree; Remark 10.11, printed p.47; multiplicativity used in Lemma 10.22 and Proposition 10.20, printed pp.51–52. Rank multiplication for the finite locally free morphisms underlying two isogenies, including nonreduced fibres.",
+   "via": [
+    "lem-sfb-abelian-degree-multiplicative",
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-locally-free-degree-composition",
+  "worker": "Q136",
+  "summary": "Preserved the statement, old citations and searches; proved finite local freeness by the existing composition leaf, then computed each scheme-theoretic fibre rank using affine tensor coordinates and a semilocal constant-rank basis. Created only the missing Tag 02M9 module lemma, with the Mathlib finite-flat candidate recorded. Nonreduced and zero fibres are explicitly included.",
+  "blueprint": "Realizes the rank-multiplication prerequisite recorded in blueprint.from.place, below the abelian-degree multiplicativity input to the alteration route; no unit or chapter route is changed. The inherited nearest blueprint ancestor is null.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-finite-locally-free-principal-basis-cover",
+    "why": "Generic affine principal-basis charts for a finite locally free map of constant degree; the item unit has no such chart statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-finite-locally-free-principal-basis-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-d42d02154",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-d42d02154 (reviewer sub-agent of L); spot-checked: I read the item and new node in full, every cited statement, and Stacks 02KA/02KB/02KC (morphisms.tex:12360-12417) and 02M9 (algebra.tex:19291) with definition-locally-free (algebra.tex:19004). The item statement is unchanged and true; degrees multiply, with nonreduced fibres, zero degrees and empty S covered. Steps: (1) finiteness and local freeness of the composite come from the Mathlib-leaf composition node; (2) affine reduction: fibres Y_z=Spec(B0⊗K) and X_z=Spec(C0⊗K) via pullbackSpecIso, and Spec κ(z) factors through V; (3) the principal-basis cover, base-changed to B, with elementary tensor and localization identities; (4) B is Artinian, hence semilocal, and the new node gives a B-basis of rank r; (5) the product basis gives dim_K C=rs. proof_deps equals the union of uses. New node lem-sfb-semilocal-constant-rank-basis is exactly Stacks 02M9 with constant rank written as in definition-locally-free(3); I tested R=0 with the empty cover, n=0, degenerate t_i and k×k with ranks (1,0). It carries a statement only, its searches cover all three kinds, and its status is correctly unsplit, with the Mathlib candidate Module.nonempty_basis_of_flat_of_finrank_eq (LocalRing/Module.lean:395) recorded: that theorem needs Finite, Flat and residue-rank hypotheses, which take more than one line to derive. Searching the DAG with rg -L for 02M9, semilocal and the Mathlib names found no duplicate: lem-a1-semilocal-submodule-basis, lem-a1-basis-of-maximal-residue-bases, lem-weil-pbc-local-artinian-basis-when-flat and the others all have different hypotheses. I accept the declared tool_use of lem-a1-finite-locally-free-principal-basis-cover: it is generic chart algebra and no node of the item's unit gives it. Batch-5 flag on lem-trf-finite-locally-free-composition: it is a general Mathlib-leaf stability fact with no proof_deps, given by neither the trace-formula nor the Poincaré-duality assumption and no step of their proofs, so it is not a RETURN. Live and side-live clones have the item unsplit, so the delivery is not superseded. No SGA citations, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeComposition",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFreeOfDegree_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeDegreeComposition.lean",
+  "statement": "theorem Scheme.Hom.isFiniteLocallyFreeOfDegree_comp {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S) (r s : ℕ) [f.IsFiniteLocallyFreeOfDegree r] [g.IsFiniteLocallyFreeOfDegree s] : (f ≫ g).IsFiniteLocallyFreeOfDegree (r * s)",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ac425df9",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: Scheme.{u} X Y S, r s : ℕ, [f.IsFiniteLocallyFreeOfDegree r] [g.IsFiniteLocallyFreeOfDegree s] ⊢ (f ≫ g).IsFiniteLocallyFreeOfDegree (r*s). Read FiberDegree.lean:332 (fiberDegree = finrank κ(x) Γ(fiber)) and 899-909 (class extends IsFinite/Flat/LocallyOfFinitePresentation with fiberDegree_eq ∀ s); no extra hypotheses; edge cases empty S/Y, r=0, s=0 and nonreduced fibres covered; true by Stacks 02KC plus 02M9 Artinian-fibre argument. Node diff vs side-live: only lean added; item still split, no landed copy. rg found no existing composition theorem and no name clash. lean.statement verbatim; module/theorem docstrings carry source, blueprint id and the five proof steps; sorry-only; imports exist; report has both sections. No fixes, no compile run."
+ }
+}

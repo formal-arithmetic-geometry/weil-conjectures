@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-module-cup-shifted-hom-comparison",
+ "kind": "statement",
+ "title": "Ordinary module cup as tensor of normalized shifted derived morphisms",
+ "statement": "Let $X$ be any scheme [def-pc-scheme], $U=\\mathcal O_X$ and $F,G$ arbitrary module sheaves [def-weil-sheaf-of-modules-category]. Use right-derived global-sections cohomology $H^n(X,F)$ [def-sc-ringed-space-module-cohomology], the ordinary unsigned module cup $\\star$ [def-sc-module-cohomology-cup-product], and the K-flat derived tensor [def-pc-scheme-derived-tensor-structure]. Write $sF=F[0]$ and use the canonical maps $m_{F,G}$ [lem-sfb-single-tensor-augmentation-coherence]. For every $n\\geq0$ there is a canonical additive equivalence, natural in $F$,\n$$e_{F,n}:H^n(X,F)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(\\mathcal O_X)}(sU,sF[n]).$$\nIt is normalized by sending the class of a cocycle in any injective resolution to its map from $U$, evaluated on $1$, then composing with the inverse localized augmentation. Thus it uses the canonical right-derived-functor comparison, not an independently chosen isomorphism. In degree zero it sends a section $v$ to the module map $U\\to F$ taking $1$ to $v$; in particular $e_{U,0}(u_X)=1_{sU}$ for the canonical class of $1$. Coefficient maps satisfy $e_{G,n}(H^n(\\phi)a)=s(\\phi)[n]\\circ e_{F,n}(a)$.\nFor $p,q\\geq0$ and classes $a,b$, set $f=e_{F,p}(a)$, $g=e_{G,q}(b)$. Let\n$$t_{p,q}:sF[p]\\otimes^{\\mathbf L}sG[q]\\xrightarrow{\\sim}(sF\\otimes^{\\mathbf L}sG)[p+q]$$\nbe the shift comparison induced by $x\\otimes y\\mapsto(-1)^{q i}x\\otimes y$ on the summand with shifted first-factor cochain degree $i$ [lem-pur-shifted-tensor-morphism-calculus]. Then\n$$e_{F\\otimes G,p+q}(a\\star b)=m_{F,G}[p+q]\\circ t_{p,q}\\circ(f\\otimes^{\\mathbf L}g)\\circ(\\lambda^D_{sU})^{-1}.$$\nThe statement imposes no quasi-coherence, properness, separatedness, or flatness on $F,G$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FKU (section-cup-product), shifted-Hom construction preceding Tag 0FP2 (lemma-second-cup-equals-first) and its proof; Tag 01DZ for injective-resolution cohomology, and Tag 0FKV (lemma-diagrams-commute) for the ordinary resolution cup normalization. Agent-formulated natural comparison with the recorded nonnegative derived functors and unsigned resolution cup."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-module-cohomology-cup-product",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-sfb-single-tensor-augmentation-coherence",
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "def-sfb-signed-derived-tensor-shift"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective resolution $j_F:sF\\to I_F$. The module-sheaf category is abelian with enough injectives by lem-sc-ringed-space-module-sheaves-enough-injectives, and $I_F$ and its shifts are K-injective by lem-weil-pbc-bounded-below-injectives-kinjective. By def-sc-ringed-space-module-cohomology the given group is canonically $H^n(\\Gamma I_F)$. Evaluation on $1$ identifies a global cocycle $z$ with the chain map $\\widehat z:sU\\to I_F[n]$, given on an open $V$ by $r\\mapsto r z|_V$. The chain equation is $dz=0$. A homotopy between two such maps is exactly a section $w$ with difference $dw$ (absorbing the constant shift sign into $w$). Thus quotienting by homotopy gives an additive bijection from $H^n(\\Gamma I_F)$ to $\\operatorname{Hom}_{K}(sU,I_F[n])$.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01DZ, section-cohomology-sheaves; Tag 0FKU, Hom(O,-)=Gamma paragraph; derived.tex, lemma-bounded-below-injectives-K-injective"
+   }
+  },
+  {
+   "text": "The bijection of lem-weil-pbc-kinjective-hom-derived identifies these homotopy morphisms with derived morphisms. Define $e_{F,n}([z])=Q(j_F)[n]^{-1}Q(\\widehat z)$, with localization/shift comparisons understood. This is an additive equivalence. For two injective resolutions $j:sF\\to I$ and $j':sF\\to J$, the derived arrow $Q(j')Q(j)^{-1}$ has a unique homotopy-class representative $v:I\\to J$ by that same lemma. Its composite with $j$ equals $j'$ up to homotopy, again by injectivity of the localization map with target $J$. Under evaluation on $1$ it induces the canonical comparison of resolution cohomology. Postcomposition with $Q(j')^{-1}$ gives $Q(j')^{-1}Q(v)=Q(j)^{-1}$. Hence the displayed equivalence is independent of resolution and has exactly the specified canonical normalization.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; cohomology.tex, Tag 01DZ and Hom construction preceding lemma-second-cup-equals-first"
+   }
+  },
+  {
+   "text": "For a coefficient map $\\phi:F\\to G$, represent $Q(j_G)s(\\phi)Q(j_F)^{-1}$ by a map $v:I_F\\to I_G$ up to homotopy, using lem-weil-pbc-kinjective-hom-derived. It extends $\\phi$ up to homotopy under the augmentations. Since $sF$ is concentrated in degree zero and $I_G^{-1}=0$, every null-homotopic chain map $sF\\to I_G$ is zero, so $v\\circ j_F=j_G\\circ s(\\phi)$ holds exactly, as the commuting square of the next lemma requires. The normalized resolution comparison induces $H^n(\\phi)$ by lem-sp-derived-injective-resolution-naturality. Applying $v$ to $\\widehat z$ and cancelling $Q(j_G)$ gives $e_{G,n}(H^n(\\phi)[z])=s(\\phi)[n]e_{F,n}([z])$. In degree zero a section $z$ of $F$ gives $j_F\\widehat z$, so cancellation gives the actual sheaf morphism $U\\to F$, $r\\mapsto rz$. In particular the section $1$ gives the identity of $sU$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01DZ, canonical resolution comparison; Tag 0FKU, evaluation identification before lemma-second-cup-equals-first"
+   }
+  },
+  {
+   "text": "Choose a computing resolution pairing $D$ for $F,G$ by lem-sc-module-cup-pairing-exists. Write its extended complexes $K,L,M$ and augmentations $a_F,a_G,a_T$. By lem-sc-module-cup-resolution-existence choose a realization $h:\\operatorname{Tot}(K\\otimes L)\\to M$. Set $\\mu_{A,B}:QA\\otimes^{\\mathbf L}QB\\to Q\\operatorname{Tot}(A\\otimes B)$ to be the canonical lax tensorator of localization, as in lem-sf-ringed-derived-native-tensor. By lem-sc-module-cup-resolution-augmentation, $h\\operatorname{Tot}(a_F\\otimes a_G)=a_T\\epsilon$, where $\\epsilon:sF\\otimes sG\\cong s(F\\otimes G)$ is unsigned. Naturality of $\\mu$ therefore gives\n$$Q(a_T)^{-1}Q(h)\\mu_{K,L}(Q(a_F)\\otimes^LQ(a_G))=Q(\\epsilon)\\mu_{sF,sG}=m_{F,G}.$$\nThe last equality follows from the recorded flat-resolution augmentation normalization of $m$: both sides on flat models are the tensor augmentations followed by $\\epsilon$. No tensor of quasi-isomorphisms of arbitrary resolutions is inverted here.",
+   "uses": [
+    "lem-sc-module-cup-pairing-exists",
+    "lem-sc-module-cup-resolution-existence",
+    "lem-sc-module-cup-resolution-augmentation",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sfb-single-tensor-augmentation-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKU, ordinary coefficient augmentation in section-cup-product; Tag 06YH, definition-derived-tor"
+   }
+  },
+  {
+   "text": "Represent $a,b$ by global cocycles $x\\in\\Gamma K^p$, $y\\in\\Gamma L^q$. Such representatives exist since a computing resolution induces the canonical isomorphisms on cohomology (def-sc-module-cup-resolution-data). Their section maps are $u:sU\\to K[p]$, $v:sU\\to L[q]$. For the specified comparison $K\\to I_F$, evaluation sends $x$ to its comparison cocycle, and $Q(K\\to I_F)Q(a_F)=Q(j_F)$. Consequently Step 2 gives $f=Q(a_F)[p]^{-1}Q(u)$ and $g=Q(a_G)[q]^{-1}Q(v)$. Put $z=D.\\mathrm{pair}(x,y)$. The signed Leibniz identity makes $z$ a cocycle. The definition of the ordinary unsigned cup identifies $a\\star b$ with its canonical transported class. Applying the same argument to $M$ gives $e_{F\\otimes G,p+q}(a\\star b)=Q(a_T)[p+q]^{-1}Q(\\widehat z)$.",
+   "uses": [
+    "def-sc-module-cup-resolution-data",
+    "def-sc-module-cohomology-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKV, lemma-diagrams-commute, flasque-resolution normalization; Tag 01DZ"
+   }
+  },
+  {
+   "text": "Compute $\\widehat z$ before localization: it is $h[p+q]\\,s_{p,q}(u\\otimes v)\\lambda_{sU}^{-1}$, where $s_{p,q}:\\operatorname{Tot}(K[p]\\otimes L[q])\\to\\operatorname{Tot}(K\\otimes L)[p+q]$ has coefficient $(-1)^{qi}$ on shifted first-factor degree $i$. Indeed $u,v$ have source in degree zero, so $i=0$, this coefficient is $+1$, and the resulting map takes $1$ to $h(x\\otimes y)=z$. This is an equality of chain maps from a degree-zero complex. The prescribed shift on the derived tensor is the localization of this signed total shift (lem-weil-pbc-derived-tensor-shift-descent). Naturality of the canonical lax tensorator and its unit comparison (lem-sf-ringed-derived-native-tensor) therefore express the same equality as\n$$Q(\\widehat z)=Q(h)[p+q]\\mu_{K,L}[p+q]t_{p,q}(Q(u)\\otimes^LQ(v))(\\lambda^D_{sU})^{-1}.$$\nHere the $t$ at $QK,QL$ is understood. The full comparison square for $K,L$, without any flatness assumption, is lem-sfb-localization-tensorator-signed-shifts. Apply its formula and tensorator naturality to $u,v$; the tensorator unit equation identifies the source with the ordinary inverse unitor. The unit complex is K-flat since tensoring by it is the identity. In particular the calculation does not suppose that $K,L$ are flat.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-pur-shifted-tensor-morphism-calculus",
+    "lem-sfb-localization-tensorator-signed-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKU, lemma-second-cup-equals-first and its sign footnote; agent expansion in target-shift convention, rather than the source-shift convention"
+   }
+  },
+  {
+   "text": "Substitute $Q(u)=Q(a_F)[p]f$ and $Q(v)=Q(a_G)[q]g$ from Step 5 into Step 6. Naturality of the shift comparison moves $Q(a_F),Q(a_G)$ past $t_{p,q}$; this is precisely the arbitrary-morphism naturality in lem-weil-pbc-derived-tensor-shift-descent. Now multiply by $Q(a_T)[p+q]^{-1}$ and use the equality proved in Step 4. The result is\n$$e_{F\\otimes G,p+q}(a\\star b)=m_{F,G}[p+q]t_{p,q}(f\\otimes^Lg)(\\lambda^D_{sU})^{-1}.$$\nAll maps used are additive, and the only resolutions requiring injectivity were used to compute the canonical comparison. The pairing resolutions exist for arbitrary module sheaves. Thus no geometric finiteness, quasi-coherence, or coefficient flatness condition was introduced.",
+   "uses": [
+    "lem-weil-pbc-derived-tensor-shift-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKU, lemma-second-cup-equals-first; final substitution through canonical augmentations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sc-module-cup-pairing-exists",
+  "lem-sc-module-cup-resolution-existence",
+  "lem-sc-module-cup-resolution-augmentation",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-single-tensor-augmentation-coherence",
+  "def-sc-module-cup-resolution-data",
+  "def-sc-module-cohomology-cup-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-sfb-localization-tensorator-signed-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01DZ, 0FKU, 0FKV; explicit resolution normalization and target-shift sign calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of module sheaves on a ringed space is represented by morphisms from the structure sheaf in the derived category and cup product is tensoring these shifted morphisms",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, SheafOfModules.instAbelian, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, SheafOfModules.unitHomEquiv_comp_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology equals derived category Hom from structure sheaf and tensor product of morphisms computes cup product",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorHom, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.tensorProd_isSheaf, CategoryTheory.sheafHom', CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, AlgebraicGeometry.Scheme.Modules.instCategory, CategoryTheory.sheafHom",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"homology\", \"Hom\"",
+   "results": "12 hits: DerivedCategory.homologyFunctor, DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt, DerivedCategory.instIsHomologicalHomologyFunctor, DerivedCategory.shift_homologyFunctor, DerivedCategory.HomologySequence.δ, DerivedCategory.homologyFunctorFactors, DerivedCategory.HomologySequence.exact₁, DerivedCategory.HomologySequence.exact₃",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "secondCup|cup.*[Hh]om|[Hh]om.*cup|[Ss]heaf.*[Ee]xt",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived global sections cohomology is Ext from the unit module sheaf with natural coefficient maps and tensor cup pairing",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, groupCohomologyIsoExt, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of module sheaves is naturally represented by shifted derived morphisms from the structure sheaf, and unsigned cup product is tensor of those morphisms",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, groupCohomologyIsoExt",
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation and Ext comparison hits cover ingredients, not the whole normalized ordinary-module cup identity"
+  },
+  {
+   "tool": "grep",
+   "query": "secondCup|cup.*[Hh]om|[Hh]om.*cup|extEquivCohomologyClass_symm_mk_hom|unitHomEquiv",
+   "results": "25 hits: Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean, Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean, Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean, Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean, Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation and Ext comparison hits cover ingredients, not the whole normalized ordinary-module cup identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology of a sheaf of modules on a ringed space is naturally the derived Hom from the unit sheaf and cup products are tensor products of shifted morphisms",
+   "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit, CategoryTheory.Sheaf.H, PresheafOfModules.unitHomEquiv, SheafOfModules.unit, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv, PresheafOfModules.unit, SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation and Ext comparison hits cover ingredients, not the whole normalized ordinary-module cup identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Hom\", \"cohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation and Ext comparison hits cover ingredients, not the whole normalized ordinary-module cup identity"
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass_symm_mk_hom|laxMonoidalQ|tensor.*shift|shift.*tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation and Ext comparison hits cover ingredients, not the whole normalized ordinary-module cup identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural lax monoidal localization of cochain complexes to the derived category preserves tensor products of shifted maps from flat degree zero objects with the Koszul shift sign",
+   "results": "8 hits: DerivedCategory.instCommShiftCochainComplexIntQ, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, CategoryTheory.Tor', CategoryTheory.Tor, DerivedCategory.instLinearShiftFunctorInt, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Tor'_map_app",
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation and Ext comparison hits cover ingredients, not the whole normalized ordinary-module cup identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"shift\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation and Ext comparison hits cover ingredients, not the whole normalized ordinary-module cup identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived localization tensor comparison commutes with tensoring shifted cochain maps from bounded complexes of flat sheaves",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalizedModule.map_lTensor, IsLocalizedModule.rTensor, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, RingHom.Flat.ofLocalizationSpanTarget, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans",
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation and Ext comparison hits cover ingredients, not the whole normalized ordinary-module cup identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-module-cup-associativity-symmetry-unit",
+  "date": "2026-10-23",
+  "group": "Q107"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: The coherent cohomology bialgebra of a proper group. Supporting tensor-coefficient identities used in the external-product calculations: associativity, signed symmetry, and both units before the group-law construction. Auxiliary for the tensor-coefficient identities: identify the ordinary unsigned cup, canonical coefficient maps and the class of one with normalized shifted derived morphisms.",
+   "via": [
+    "lem-sfb-module-cup-associativity-symmetry-unit",
+    "lem-sfb-coherent-group-bialgebra",
+    "lem-sfb-abelian-structure-h1-dimension",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-module-cup-shifted-hom-comparison",
+  "worker": "Q54 stage1",
+  "summary": "Seven-step proof using existing resolution and K-flat localization tools. Constructs the canonical equivalence from cocycles and K-injective localization, proves coefficient and degree-zero normalization, and calculates unsigned cup by an actual resolution pairing and its augmentation square. One statement-only node isolates the full signed tensorator/localization square on arbitrary complexes; no Lean files; statement unchanged.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting ordinary cup identities in the inherited alteration prerequisite chain. Steps 1-3 supply normalized shifted Hom; steps 4-7 supply unsigned resolution cup. Inherited ancestor is null (confirmed by blueprint_refs ancestor), and inherited from/place/via retained. Whole-blueprint searches found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "The bounded-below injective criterion for an arbitrary abelian category, avoiding additional Grothendieck-category hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Compute morphisms into a K-injective resolution and obtain comparison maps; no unit-local statement gives this localization fact."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Enough injectives for ordinary ringed-space modules; needed to choose the stipulated computing resolutions."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Canonical right-derived comparison on an augmentation square, used for coefficient naturality."
+   },
+   {
+    "node": "lem-sc-module-cup-pairing-exists",
+    "why": "Existence of computing pairings for arbitrary ordinary module sheaves; supplies representatives without changing the unit route."
+   },
+   {
+    "node": "lem-sc-module-cup-resolution-existence",
+    "why": "Assemble sectionwise resolution pairing into a chain map; generic ordinary-module tool."
+   },
+   {
+    "node": "lem-sc-module-cup-resolution-augmentation",
+    "why": "Actual augmentation equation before localization, not a claimed equality of cups."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Canonical localization tensorator and its unit normalization, needed to compare the already specified K-flat tensor."
+   },
+   {
+    "node": "lem-weil-pbc-derived-tensor-shift-descent",
+    "why": "Signed total shifts descend to the specified tensor and are natural for arbitrary localized arrows."
+   },
+   {
+    "node": "lem-pur-shifted-tensor-morphism-calculus",
+    "why": "Only the displayed target-shift convention is used; no purity theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sc-module-cup-pairing-exists",
+  "lem-sc-module-cup-resolution-existence",
+  "lem-sc-module-cup-resolution-augmentation",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-pur-shifted-tensor-morphism-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-46f862ff3",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-46f862ff3 (reviewer sub-agent of L); spot-checked: Read the whole item and the new node lem-sfb-localization-tensorator-signed-shifts, every cited statement, and Stacks cohomology.tex 7170-7290 (0FP2 and its sign footnote). This is the first split: live and side-live still have the item unsplit, and only the proof fields changed against side-live (the statement and stmt_deps are the same). No SGA citation. Steps 1-7 hold. Step 1: homotopies sU->I[n] are sections w, and shifts of I stay K-injective. Step 2: independence of the resolution follows from the K-injective Hom bijection. Step 4: Q(eps)mu_{sF,sG}=m by mu-naturality and m's flat normalization. Steps 5-7: the sign (-1)^{q*0}=+1 matches the 0FP2 footnote convention, and recomputing the composite gives e(a*b). The new node is true: reduce to K-flat resolutions using naturality of mu, s, eta and t. It is checked at a=b=0, a=0, b=0 and on single-degree complexes. It is not a clause of the item, and no duplicate was found (lem-sc-scheme-tensor-shift-binary-localization-square is the narrower K-flat, shift-by-one case; the module-cup ModuleCat/RGamma nodes state other things). All 10 declared tool_uses are generic and accepted. The parent's use of the item is consistent. FIX: Step 3 cited lem-sp-derived-injective-resolution-naturality, which needs a strictly commuting square, but the step only had v j_F homotopic to j_G phi. I added the sentence that a null-homotopic map sF->I_G is zero since I_G^{-1}=0, so the square commutes exactly. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-module-cup-shifted-hom-comparison.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCupShiftedHomComparison",
+  "declaration": "AlgebraicGeometry.scheme_module_cup_shifted_hom_comparison",
+  "declarations": [
+   "AlgebraicGeometry.SchemeModuleCupShiftedHomComparison",
+   "AlgebraicGeometry.scheme_module_cup_shifted_hom_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCupShiftedHomComparison.lean",
+  "statement": "theorem scheme_module_cup_shifted_hom_comparison (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : SchemeModuleCupShiftedHomComparison.{u, w} X",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The proposition and theorem are unchanged mathematically. The signed comparison is imported and reused from its existing module and attached to def-sfb-signed-derived-tensor-shift with existing:true. The item adds only that definition node to stmt_deps; the localization compatibility theorem remains a proof dependency. Repair of returned head 5719214d83fe removes the attempted relocation and duplicate-name collision."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1145c3133",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery after 5719214d landing refusal (duplicate-name collision). Commit (4 files) now reuses the published AlgebraicGeometry.schemeSignedDerivedTensorShift via new def node def-sfb-signed-derived-tensor-shift with existing:true (verbatim header, stmt_deps def-pc-scheme/def-pc-derived-category/def-pc-scheme-derived-tensor-structure/def-sc-scheme-canonical-tensor-shift, Stacks 0FNH/06YU); item adds only that stmt_dep; no dependency module touched. Clauses rechecked: extMk_hom normalization for every injective resolution (Mathlib rightShift sign-free, so no degree sign that would break the pq-odd cup formula), coefficient naturality, degree-zero and class-of-1 clauses with zero-shift iso, cup over the unique IsModuleCupProduct, m identical to SchemeSingleTensorAugmentationCoherence's, t_{p,q} second-shift-first (-1)^{qi}, inverse unitor transported through ε which is the identity (Qh ε=𝟙, quotient εIso=refl). Edge cases p=0/q=0, non-flat F,G, empty scheme, independent u,w. Gates OK; lean.statement verbatim. No compile (no file changed). Advisory: inherited theorem stmt_deps; unused ShiftedTensorMorphismCalculus import; documented omitted ModuleCupResolutionAugmentation import."
+ }
+}

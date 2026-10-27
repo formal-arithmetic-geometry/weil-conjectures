@@ -1,0 +1,156 @@
+{
+ "id": "lem-sfb-adic-immersion-constant-module-comparison",
+ "kind": "statement",
+ "title": "Ordinary completed constant module comparison under an immersion",
+ "statement": "Let i:S→X be an immersion [def-weil-closed-immersion, def-weil-open-immersion] of schemes [def-pc-scheme], A a commutative ring, and I any ideal. Let C_X:Mod(A)→Mod(adicLisseCompletedRing(X,I)) be adicLisseConstantModules followed by completedAdicChange along the canonical constant-to-completed map [def-sfb-adic-stratified-perfect-data]. Let N_X and T_i be the actual-to-model scalar normalization and algebraic completed pullback of [lem-sfb-adic-immersion-module-normalization]. Let C_S be strictPerfectConstantSheaf on the AsSmall model of S, scalar restriction along constantModuleHomRingIso.inv, and scalar extension along ConstantCompletion.coefficientMap [def-sfb-adic-residue-lift-comparisons]. There is a natural isomorphism (C_X then N_X) then T_i ≅ C_S of ordinary module functors. This is uniform in all A-modules and all A-linear maps; it asserts no slice or derived comparison, and needs no Noetherian or perfectness hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-sfb-adic-immersion-module-normalization",
+  "def-sfb-adic-stratified-perfect-data",
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the proved ordinary completedRealizationIso underlying the completed-model complex comparison. Both completed-ring normalizations have the same finite quotient projections and the same constant-ring comparisons, hence are equal by the limit universal property. Restrict along the inverse coefficient isomorphism and cancel the two scalar restrictions. This identifies the normalized actual constants with commutative constant realization followed by coefficientMap extension.",
+   "uses": [
+    "lem-sfb-perfect-model-complex-comparison",
+    "lem-sfb-completion-normalization",
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the transported continuous site base-change functor, apply constant inverse-image scalar normalization. The sheafification unit equation and the set adjunction show that each transported constant scalar equals the corresponding target constant section.",
+   "uses": [
+    "lem-sf-constant-inverse-image-scalar-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Express a constant set sheaf as a coproduct of terminal sheaves. The left exact left adjoint preserves this presentation and gives the natural underlying set isomorphism. Lift that natural transformation to additive sheaves using the finite-limit-preserving functor equivalence. Constant scalar multiplication is preserved by the prescribed pullback, by the preceding scalar equality and the constantPullback_scalar identity. Naturality in scalar endomorphisms therefore makes the comparison linear; local surjectivity of ring sheafification extends linearity from constant scalars to all local sections. Reflect invertibility from the underlying set sheaves.",
+   "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-sp-constant-pullback-scalar",
+    "lem-sp-completed-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check F.rings.map(coefficientMap_X) followed by completedMap equals constantMap followed by coefficientMap_S after every finite quotient projection. The coefficientMap cone equations and naturality of F.constants give these equalities. Apply scalar inverse-image exchange to the source coefficientMap, then compose the two scalar extensions using the scalar-extension adjunctions. The commutative coefficient square identifies their composites.",
+   "uses": [
+    "lem-per-independent-scalar-inverse-image",
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker and compose the normalization, scalar exchange, and constant-module comparisons. Finally use the proved constantPresentationIso to replace commutative constant realization with strictPerfectConstantSheaf restricted along constantModuleHomRingIso.inv. This yields the required natural isomorphism, with no boundedness, perfectness, or Noetherian condition.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-perfect-model-complex-comparison",
+  "lem-sfb-completion-normalization",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-sf-constant-inverse-image-scalar-normalization",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-sp-constant-pullback-scalar",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-per-independent-scalar-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-pullback-module, lemma-adjoint-pullback-pushforward-modules, lemma-push-pull-composition-modules; Stacks Tags 00YY, 03D2, 03DJ and 099L; Bhatt--Scholze Lemma 6.5.8"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-pullback-module, lemma-adjoint-pullback-pushforward-modules, lemma-push-pull-composition-modules; sites.tex proposition-functoriality-algebraic-structures-topoi; reuse of the proved completedRealizationIso, scalarInverseImageIndependent, and constant-module operation comparisons (W6, 2026-10-26)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sheaves of modules on equivalent sites induces an equivalence of derived categories commuting with restriction to slice sites",
+   "results": "Equivalence.sheafCongr and its transport isomorphisms; no module normalization for these fixed coefficient maps.",
+   "date": "2026-10-26",
+   "verdict": "Use the site equivalence, then scalar equivalence; remaining comparison is project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence and its unit/counit component formulas.",
+   "date": "2026-10-26",
+   "verdict": "These construct the module equivalence, but do not identify the fixed algebraic and geometric inverse images."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Ee]quivalence|[Ee]quivalence.*mapDerivedCategory; constantSheaf.*(Pullback|pullback)|pullback.*constantSheaf",
+   "results": "Mathlib CategoryTheory/Sites/ConstantSheaf.lean:158 gives constant-object commutation. Project ExactFunctor.lean gives Equivalence.mapDerivedCategory. No fixed completed module comparison.",
+   "date": "2026-10-26",
+   "verdict": "The derived formalities are existing proved APIs; the two ordinary module comparisons are separate obligations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a constant sheaf of modules followed by extension of scalars is naturally isomorphic to the constant module sheaf followed by extension of scalars",
+   "results": "constantCommuteCompose, freeFunctorCompPullbackIso and PullbackConstruction.adjunction give constituent comparisons, but not this fixed completed coefficient-map comparison.",
+   "date": "2026-10-26",
+   "verdict": "No complete match; use the listed constituent APIs and state only the missing ordinary module comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionSliceComparison",
+  "date": "2026-10-26",
+  "group": "Y5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The local completed-coefficient identification underlying the comparison of constructible adic categories; ordinary module transport before localization, as in Bhatt--Scholze Lemma 6.5.8.",
+   "via": [
+    "lem-sfb-adic-immersion-slice-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicImmersionConstantModuleComparison",
+  "file": "lean/Sheaf/Paper/AdicImmersionConstantModuleComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbImmersion_constantModuleComparison",
+  "statement": "theorem sfbImmersion_constantModuleComparison\n    {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]\n    {A : Type (u + 1)} [CommRing A] (I : Ideal A) :\n    Nonempty ((sfbImmersionActualConstants X I ⋙ sfbImmersionNormalizeModules X I) ⋙\n      sfbImmersionCompletedPullModules i I ≅ sfbImmersionModelConstants S I)",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261026T024244-L-653309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261026T071432-L-3930161",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

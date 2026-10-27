@@ -1,0 +1,239 @@
+{
+ "id": "lem-zl-component-lift-base-change",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1) before Proposition 4.3, pp. 8-9; naturality implicit in Corollary 4.4(2), expanded by the worker"
+ },
+ "proof": [
+  {
+   "text": "Extract the coordinate equation, naturality and unique mapping property of the chosen relative lift from lem-zl-component-relative-profinite-site. Continuous maps into a profinite pullback are constructed through its standard subspace homeomorphism. For f:Y→X, send a point of the scheme pullback to (the E-coordinate of its X-lift projection, the component of its Y-projection). The pullback equation and naturality of connected components make this a continuous coordinate over Y. The mapping property gives the forward comparison. Conversely, the E-coordinate of the Y-lift gives a unique map to the X-lift over X; pair it with the Y structure map using the scheme pullback property.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Maps into a relative lift are equal when they have the same structure morphism and continuous coordinate, by uniqueness in its mapping property. In a profinite pullback equality follows from both projections. Apply these facts to the two comparison composites; for the scheme pullback also use pullback.hom_ext. This gives inverse maps. Apply the same uniqueness to the transition maps for any E→E′ to obtain a natural isomorphism.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The connected-component map preserves identity and composition, as checked on representatives. For the identity choose the slice isomorphism whose underlying map is the first pullback projection. For composition choose the standard pullback-pasting isomorphism after rewriting the component map. The first and second projections give the stated equations. To check the comparison coherence, use uniqueness into the relative Z-lift and then both projections of each profinite pullback. Their E projections agree by comparison-coordinate naturality and the first-projection equation of Over.pullbackComp; the remaining projections agree by the Over structure equations. The latter first-projection equation follows from the counit equation for conjugate adjunctions.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the geometric relative-lift description for the chosen X-lift. For the finite stage X-components indexed by a, send each actual restricted open into the lift by the unique mapping property with coordinate (component(x),a). Its image is exactly finite-label fibre a: the pullback homeomorphism proves both inclusions. The map is an embedding because its composite to X is the restricted open inclusion; its range is open and its stalk maps are isomorphisms by cancellation against those of the structure map. Thus these are disjoint open immersions covering the lift, so form a coproduct. Pullback of each open immersion is an open immersion; the open-fibre-product range formula identifies its range with the inverse image of that label fibre. Compose with the comparison isomorphism. Its coordinate formula identifies the resulting range with label-a points of the Y-lift. The structure equation forces these points to lie over the specified Y-open, giving precisely the intersection in the statement, including repeated labels and empty fibres. These transported disjoint open immersions again cover, giving the required Y-coproduct.",
+   "uses": [
+    "lem-sfb-relative-component-lift-pullback-space",
+    "lem-zl-component-relative-profinite-site",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any permitted presentation, the X-relative-lift theorem makes its image a limit cone. The slice scheme pullback is a right adjoint and preserves this limit. Transport the resulting limiting cone through the comparison natural isomorphism to obtain the other limit cone. Each cone equation is the naturality equation of that same isomorphism. No assertion that base change preserves the chosen finite-stage syntax is required.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-sfb-relative-component-lift-pullback-space",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-zl-component-relative-profinite-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 2.2.8, more precise mapping property; Hemo–Richarz–Scholbach construction before (4.1), pp. 8–9. C1 formalizes unique coordinate lifts, coherence and the labelled disjoint-open cover. Limits use the slice pullback right adjoint and transport through the constructed natural isomorphism."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-henselian-lisse-rigidity",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "title": "Affine relative component lifts commute with arbitrary affine base change",
+ "statement": "Let $f:Y\\to X$ be a morphism of affine schemes [def-pc-scheme]. Put $P=\\pi_0(X)$, $Q=\\pi_0(Y)$ with their quotient topologies and $h=\\pi_0(f):Q\\to P$ [lem-pe-spectral-components-profinite]. Work in the compatible universes of [def-weil-size-convention]. For each profinite space $E\\to P$, let $X_E=X\\times_P E$ be the affine relative component lift, defined by the inverse limit of its finite clopen stages [lem-zl-component-relative-profinite-site]; for a profinite $Q$-space $F$ let $Y_F$ be the analogous lift. Then there are canonical isomorphisms of $Y$-schemes\n$$c_{f,E}:Y\\times_X X_E\\xrightarrow{\\sim}Y_{Q\\times_P E},$$\nwhere the left side is a scheme fibre product [def-pc-fibre-product] and $Q\\times_P E$ is the topological fibre product of profinite spaces. They preserve the projections to $Y$ and $E$, are natural in $E\\to P$, and agree with the associativity identifications for identity and composite affine morphisms $f$. On a finite clopen stage they identify the pullback of each open-and-closed part $X_U$ with $Y_{h^{-1}U}$; they commute with the limiting cones of every cofiltered finite-stage presentation. In particular, the two functors from profinite $P$-spaces to $Y$-schemes, $E\\mapsto Y\\times_X X_E$ and $E\\mapsto Y_{Q\\times_P E}$, are naturally isomorphic with these normalizations. No henselian, w-local, w-contractible, surjectivity or nonemptiness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pe-spectral-components-profinite",
+  "def-weil-size-convention",
+  "lem-zl-component-relative-profinite-site",
+  "def-pc-fibre-product"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of affine schemes the component pro etale site projection is natural under scheme pullback and change of profinite component base",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.g; AlgebraicGeometry.AffineSpace.map_over; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom; LightCondSet.hom_naturality_apply; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space base-change and open-cover pullback results do not construct or compare relative component lifts; no component-lift natural isomorphism is returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the relative profinite component lift of an affine scheme commutes with every affine scheme morphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.AffineSpace.map_over; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.g; AlgebraicGeometry.AffineSpace.map_toSpecMvPoly; AlgebraicGeometry.AffineSpace.isPullback_map; AlgebraicGeometry.exists_map_preimage_eq_map_preimage; AlgebraicGeometry.isAffineHom_π_app",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space base-change and open-cover pullback results do not construct or compare relative component lifts; no component-lift natural isomorphism is returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image along a morphism of affine schemes commutes with inverse image from its profinite space of connected components",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.coe_preimage; AlgebraicGeometry.Scheme.Hom.comp_preimage; AlgebraicGeometry.Spec.preimage; AlgebraicGeometry.Scheme.preimage_comp; AlgebraicGeometry.Scheme.Hom.inv_image; AlgebraicGeometry.IsAffineOpen.preimage; AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.IsAffineHom.isAffine_preimage",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space base-change and open-cover pullback results do not construct or compare relative component lifts; no component-lift natural isomorphism is returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "Profinite, AlgebraicGeometry.Scheme",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space base-change and open-cover pullback results do not construct or compare relative component lifts; no component-lift natural isomorphism is returned."
+  },
+  {
+   "tool": "grep",
+   "query": "(component|profinite).*(pullback|inverseImage|naturality)|(pullback|inverseImage|naturality).*(component|profinite)",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean. Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space base-change and open-cover pullback results do not construct or compare relative component lifts; no component-lift natural isomorphism is returned."
+  },
+  {
+   "tool": "grep",
+   "query": "(component|profinite).*(pullback|baseChange|base_change)|(pullback|baseChange|base_change).*(component|profinite)",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean. Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general profinite limits, affine-morphism stability, affine-space base change, and affine-cover auxiliary declarations do not state base change of the relative component lift or its normalized natural isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of an affine scheme lifted from a profinite space over its connected component space",
+   "results": "8 hits: AlgebraicGeometry.isAffineHom_isStableUnderBaseChange; AlgebraicGeometry.AffineSpace.map_Spec_map; AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine; AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange; AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange; AlgebraicGeometry.AffineSpace.map; AlgebraicGeometry.affineAnd_isStableUnderBaseChange; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general profinite limits, affine-morphism stability, affine-space base change, and affine-cover auxiliary declarations do not state base change of the relative component lift or its normalized natural isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "Profinite, AlgebraicGeometry.Scheme",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general profinite limits, affine-morphism stability, affine-space base change, and affine-cover auxiliary declarations do not state base change of the relative component lift or its normalized natural isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the affine relative profinite connected component lift is naturally isomorphic to the lift of the pulled back profinite space",
+   "results": "8 hits: Profinite.isIso_indexCone_lift; Profinite.isIso_asLimitCone_lift; Profinite.toCompHausEquivalence; Condensed.isoFinYonedaComponents; Profinite.isoindexConeLift; lightProfiniteToLightCondSetIsoTopCatToLightCondSet; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general profinite limits, affine-morphism stability, affine-space base change, and affine-cover auxiliary declarations do not state base change of the relative component lift or its normalized natural isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of inverse limits of finite clopen disjoint unions along an arbitrary morphism of affine schemes",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.g; AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.Scheme.Pullback.affine_hasPullback; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general profinite limits, affine-morphism stability, affine-space base change, and affine-cover auxiliary declarations do not state base change of the relative component lift or its normalized natural isomorphism."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, relative Verdier duality: the subordinate continuous-coefficient/lisse realization chain requires Hemo–Richarz–Scholbach Corollary 4.4(2). In lem-zl-condensed-henselian-lisse-rigidity, old Step 5, this is the geometric base-change comparison for finite clopen subdivisions and their inverse limits.",
+   "via": [
+    "lem-zl-condensed-henselian-lisse-rigidity",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-component-lift-base-change",
+  "worker": "stage1",
+  "group": "Q93",
+  "summary": "Constructed mutually inverse scheme maps from the existing geometric description of the finite-stage relative lift and the existing unique continuous-lift theorem. Proved inverse, naturality, identity, composition, finite-clopen, and all presentation-cone equations explicitly; reused all generic facts and created no nodes. Statement unchanged; no project attachment or Mathlib match.",
+  "blueprint": "Realizes the base-change comparison needed in old Step 5 of lem-zl-condensed-henselian-lisse-rigidity, below the relative-duality/lisse coefficient realization in prop-zl-smooth-proper-relative-purity Proof Step 3. It supplies the comparison implicit in HRS Corollary 4.4(2), through their construction (4.1), without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-relative-component-lift-pullback-space",
+    "why": "Generic geometric description identifying the actual finite-stage relative lift with a topological pullback and giving its stalk maps and functorial coordinates. This exact identification is not a clause of the same-unit relative-site statement, and is needed for the continuous-lift argument."
+   },
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Generic open-subschema fibre-product identification, used only to check the finite-clopen normalization. The unit has no separate open-pullback lemma."
+   },
+   {
+    "node": "lem-sc-etale-fibre-product-base-change-coproduct",
+    "why": "Generic finite scheme coproduct base-change theorem, already a Mathlib leaf; checks the finite-stage disjoint-union normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-relative-component-lift-pullback-space",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-95786326b",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-95786326b (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and every cited statement in full, and checked them against Hemo–Richarz–Scholbach p. 8 (the construction before (4.1)) and Bhatt–Scholze Lemma 2.2.8 with its more precise statement after the lemma. The statement and stmt_deps are unchanged, there are no new nodes, no repair note exists for this item and no SGA is cited. Step 1: (y,(q,s))↦(f(y),s) is well defined because κ_X f = h κ_Y; it is lifted along p_X, whose stalk maps are isomorphisms, so no stalk condition on f is needed. Step 2: e r_A = κ_X f a = h κ_Y a, so t lands in |Y|×_Q(Q×_P E); it is lifted along p_Y. Step 3: cd = id because the maps agree over Y and on coordinates; bdc = b and adc = a give dc = id by fibre-product uniqueness. Step 4: for naturality both composites lie over a with E'-coordinate u r_A, using the geometric node's coordinate formula; the identity and composition cases follow the same way. Step 5: finite stages Q×_C A_i, with the non-surjective case restricted to the image; the coproduct and open-fibre-product Mathlib leaves give f^{-1}(κ_X^{-1}U_a) = κ_Y^{-1}h^{-1}U_a; the limit cone follows from presentation independence in lem-zl-component-relative-profinite-site plus naturality. Edge cases tested: Y empty, E empty, E = P, non-surjective Q→C, arbitrary f. Accepted tool uses: lem-sfb-relative-component-lift-pullback-space (generic BS 2.2.8 tool, unsplit, on the base) and two Mathlib leaves. The dependency scan finds no cycle and the whole-DAG search finds no duplicate; the citers use the unchanged statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ComponentLiftBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.component_lift_base_change",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.relativeComponentLift",
+   "AlgebraicGeometry.ProEtale.relativeComponentCoordinate",
+   "AlgebraicGeometry.ProEtale.affineComponentMap",
+   "AlgebraicGeometry.ProEtale.component_lift_base_change"
+  ],
+  "file": "lean/Sheaf/Paper/ComponentLiftBaseChange.lean",
+  "statement": "theorem component_lift_base_change : ∃ c : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X), relativeComponentLift X ⋙ Over.pullback f ≅ Over.pullback (affineComponentMap f) ⋙ relativeComponentLift Y, (∀ (X Y : Scheme.{u}) [IsAffine X] [IsAffine Y] (f : Y ⟶ X) (E : Over (affineComponentSpace X)) (z : ((relativeComponentLift X ⋙ Over.pullback f).obj E).left), pullback.fst E.hom (affineComponentMap f) (relativeComponentCoordinate Y ((Over.pullback (affineComponentMap f)).obj E) (((c f).hom.app E).left z)) = relativeComponentCoordinate X E (pullback.fst ((relativeComponentLift X).obj E).hom f z)) ∧ (∀ (X : Scheme.{u}) [IsAffine X] (E : Over (affineComponentSpace X)), ∃ e : (Over.pullback (affineComponentMap (𝟙 X))).obj E ≅ E, e.hom.left = pullback.fst E.hom (affineComponentMap (𝟙 X)) ∧ (c (𝟙 X)).hom.app E ≫ (relativeComponentLift X).map e.hom = (Over.pullbackId (X := X)).hom.app ((relativeComponentLift X).obj E)) ∧ (∀ (X Y Z : Scheme.{u}) [IsAffine X] [IsAffine Y] [IsAffine Z] (f : Y ⟶ X) (g : Z ⟶ Y) (E : Over (affineComponentSpace X)), ∃ e : (Over.pullback (affineComponentMap (g ≫ f))).obj E ≅ (Over.pullback (affineComponentMap f) ⋙ Over.pullback (affineComponentMap g)).obj E, e.hom.left ≫ pullback.fst ((Over.pullback (affineComponentMap f)).obj E).hom (affineComponentMap g) ≫ pullback.fst E.hom (affineComponentMap f) = pullback.fst E.hom (affineComponentMap (g ≫ f)) ∧ e.hom.left ≫ pullback.snd ((Over.pullback (affineComponentMap f)).obj E).hom (affineComponentMap g) = pullback.snd E.hom (affineComponentMap (g ≫ f)) ∧ (c (g ≫ f)).hom.app E ≫ (relativeComponentLift Z).map e.hom = (Over.pullbackComp g f).hom.app ((relativeComponentLift X).obj E) ≫ (Over.pullback g).map ((c f).hom.app E) ≫ (c g).hom.app ((Over.pullback (affineComponentMap f)).obj E)) ∧ (∀ (X Y : Scheme.{u}) [IsAffine X] [IsAffine Y] (f : Y ⟶ X) (A C : FintypeCat.{u}) (q : affineComponentSpace X ⟶ FintypeCat.toProfinite.obj C) (r : A ⟶ C), Function.Surjective q → ∃ j : ∀ a : A, Over.mk (componentFiniteOpen X A C q r a).ι ⟶ (relativeComponentLift X).obj (componentFiniteStage A C q r), (∀ (a : A) (x : (componentFiniteOpen X A C q r a).toScheme), pullback.snd q (FintypeCat.toProfinite.map r) (relativeComponentCoordinate X (componentFiniteStage A C q r) ((j a).left x)) = a) ∧ (∀ a : A, IsOpenImmersion (j a).left) ∧ Nonempty (IsColimit (Cofan.mk ((relativeComponentLift X).obj (componentFiniteStage A C q r)) j)) ∧ (∀ a : A, IsOpenImmersion (((Over.pullback f).map (j a) ≫ (c f).hom.app (componentFiniteStage A C q r)).left)) ∧ (∀ a : A, Set.range (((Over.pullback f).map (j a) ≫ (c f).hom.app (componentFiniteStage A C q r)).left) = (((Over.pullback (affineComponentMap f) ⋙ relativeComponentLift Y).obj (componentFiniteStage A C q r)).hom) ⁻¹' (componentFiniteOpen Y A C (affineComponentMap f ≫ q) r a).carrier ∩ {z | pullback.snd q (FintypeCat.toProfinite.map r) (pullback.fst (componentFiniteStage A C q r).hom (affineComponentMap f) (relativeComponentCoordinate Y ((Over.pullback (affineComponentMap f)).obj (componentFiniteStage A C q r)) z)) = a}) ∧ Nonempty (IsColimit (Cofan.mk ((Over.pullback (affineComponentMap f) ⋙ relativeComponentLift Y).obj (componentFiniteStage A C q r)) (fun a : A ↦ (Over.pullback f).map (j a) ≫ (c f).hom.app (componentFiniteStage A C q r))))) ∧ (∀ (X Y : Scheme.{u}) [IsAffine X] [IsAffine Y] (f : Y ⟶ X) (I : Type u) [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over (affineComponentSpace X)) (s : Cone D), (∀ i : I, IsComponentFiniteStage (D.obj i)) → IsLimit s → Nonempty (IsLimit ((relativeComponentLift X ⋙ Over.pullback f).mapCone s)) ∧ Nonempty (IsLimit ((Over.pullback (affineComponentMap f) ⋙ relativeComponentLift Y).mapCone s)) ∧ ∀ i : I, (relativeComponentLift X ⋙ Over.pullback f).map (s.π.app i) ≫ (c f).hom.app (D.obj i) = (c f).hom.app s.pt ≫ (Over.pullback (affineComponentMap f) ⋙ relativeComponentLift Y).map (s.π.app i))",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The functor and coordinate are extracted from the universal-property-characterized relative construction already recorded at lem-zl-component-relative-profinite-site. Over.pullback orders the scheme product as X_E ×_X Y; Mathlib pullbackSymmetry identifies this canonically with Y ×_X X_E. A single family of natural isomorphisms includes coordinate, identity, composition, finite-clopen summand-image and every presentation-cone normalization. Review FIX (Q118 7d7f08dd): the finite-clopen range of block a is the pulled-back open of Y intersected with the locus of finite coordinate a; the delivered bare preimage of the open is false for repeated labels (non-injective r).",
+  "fixed_by": "NT-stage2-cc-7d7f08ddf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d7f08ddf",
+  "group": "Q118",
+  "result": "fix",
+  "note": "Lean clause-by-clause vs node and dependency component_relative_profinite_site: c pinned via coordinate clause + dep ∃! mapping property (Over Y, E-coordinate, Q-coordinate forced); naturality, identity/composition (pullbackId/pullbackComp with explicit e), limit-cone clauses correct; universes single u; helpers real data, no duplicates (rg side-live Sheaf/WeilConjectures); docstrings/gates OK. H3 fault: finite-stage range clause range(leg a) = hom⁻¹'(componentFiniteOpen Y … a) is false for non-injective r since componentFiniteOpen depends only on r a (A={0,1}, C=*, Y_F=Y⊔Y contradicts colimit disjointness). FIX: intersect with the label-a locus of the Y-coordinate; docstring step 5 updated; lean-record.json with verbatim statement (refit_record: no refusals). nt_compile --json on fixed module 8.7 s rc 0."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261023T123358-L-1178355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

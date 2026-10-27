@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-completed-reduction-augmentation-level-unit",
+ "kind": "statement",
+ "title": "Finite evaluation of the completed reduction augmentation",
+ "statement": "Let T be a scheme and d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. For any K in the unbounded derived category of completed-coefficient module sheaves and any n in the natural numbers (representing positive quotient exponent n+1), evaluate the canonical derived quotient augmentation [def-weil-pbc-reduction-augmentation] at n. Compose its source with the inverse canonical derived constant/evaluation isomorphism and its target with completedReductionEvaluation. The resulting arrow from K to the scalar-restricted n-th derived reduction is exactly the unit of the normalized derived scalar-extension/restriction adjunction [def-weil-pbc-bounded-constructible-tower]. No completeness, boundedness, scheme Noetherianity or nonemptiness is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Localization returned Step 6, finite projection compatibility; evaluated quotient augmentation, Stacks Tags 03EL and 06YY."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-reduction-augmentation",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "On a K-flat complex P, postcompose the evaluated augmentation with exact scalar restriction of the invertible scalar computing counit, followed by its derived-localization factor. The defining completedReductionEvaluation normalization replaces that composite by evaluation of the tower computing counit. The augmentation normalization stratumUnit_formula replaces augmentation followed by this counit by the localization of the ordinary module quotient unit. Naturality of the evaluation factor and constantEvaluation_factors cancel the constant/evaluation comparison. Its degree-n ordinary component equals the scalar-extension unit by stratumModuleUnit_component. The normalized derived scalar adjunction gives the same morphism, proving equality after cancellation. This works also for the empty scheme, zero object and n=0 (the positive exponent-one quotient).",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-reduction-augmentation",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-completed-reduction-augmentation-of-comparison",
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Express the evaluated augmentation as a natural transformation. Every complex admits a quasi-isomorphism from a K-flat complex. Exact localization inverts this quasi-isomorphism; naturality and essential surjectivity of Q extend equality to every derived object. The module also retains the existing generic finite unit, evaluation-transition, cocycle and pullback-transition calculations as proved private helpers for the parent, and proves its generic augmented-projection helper by the adjunction triangle, projection-counit normalization and constant/evaluation coherence.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-sf-exact-tower-augmented-counit-evaluation",
+    "prop-weil-pbc-levelwise-truncations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For checking time, the module additionally retains the already-proved generic actual/intrinsic completion transport and its integral specialization as private helpers. These use the same augmentation-transport identity, normalized Koszul quotient comparison and reflector representative as the parent, with no changed data or statement.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-wf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-reduction-augmentation",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-completed-reduction-augmentation-of-comparison",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-sf-exact-tower-augmented-counit-evaluation",
+  "prop-weil-pbc-levelwise-truncations",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-wf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "C4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Finite projection step, explicit normalized computing-counit calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unit of the constant tower derived limit adjunction followed by evaluation is the identity, and this equation is natural under an exact functor",
+   "results": "CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Functor.constCompEvaluationObj_hom_app; CategoryTheory.Limits.lim_ε_π; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app; CompHausLike.LocallyConstant.adjunction_left_triangle; CategoryTheory.constantPresheafAdj_unit_app; CategoryTheory.Adjunction.functorialityUnit'",
+   "date": "2026-10-27",
+   "verdict": "General adjunction or localization tools only; reuse the existing normalized scalar and tower APIs for this specific augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_triangle_components",
+   "results": "CategoryTheory.Adjunction.left_triangle_components",
+   "date": "2026-10-27",
+   "verdict": "General adjunction or localization tools only; reuse the existing normalized scalar and tower APIs for this specific augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorUnitQ|mateEquiv",
+   "results": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-27",
+   "verdict": "General adjunction or localization tools only; reuse the existing normalized scalar and tower APIs for this specific augmentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfImmersionCompletedPullbackComparison",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-immersion-completed-pullback-comparison",
+   "place": "Finite projection compatibility: evaluation of the actual quotient augmentation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfImmersionFiniteNormalization",
+  "file": "lean/Sheaf/Paper/SfImmersionFiniteNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfCompletedReductionAugmentation_level_unit",
+  "statement": "theorem sfCompletedReductionAugmentation_level_unit (T : Scheme.{u})\n    (K : d.derived T) (n : ℕ) :\n    (ringedConstantTowerEvaluation (reductionModules T (d.completedRing T)) (op n)).inv.app K ≫\n      (reductionTowerDerivedEvaluation T (reductionModuleRing T (d.completedRing T)) n).map\n        ((completedReductionAugmentation d T).app K) ≫\n      (completedReductionEvaluation T d n).app K =\n    (pbcDerivedScalarAdjunction (d.projection T n)).unit.app K",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T112325-L-1570997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T112325-L-1570997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

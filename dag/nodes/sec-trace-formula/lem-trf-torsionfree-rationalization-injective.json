@@ -12,50 +12,36 @@
  ],
  "proof": [
   {
-   "text": "Put $S=\\mathbf Z\\setminus\\{0\\}$, which contains $1$ and is closed under multiplication. Use the fraction construction of [def-weil-pbc-module-localization]. The map $S^{-1}\\mathbf Z\\to\\mathbf Q$, $a/s\\mapsto a/s$, is a ring isomorphism: every rational has a nonzero integer denominator, and the localization relation $u(ta-sb)=0$ for some $u\\ne0$ is equivalent to $ta=sb$, exactly rational-fraction equality. The addition and multiplication formulas agree. In particular $a/1$ maps to the integer $a$ in $\\mathbf Q$.",
-   "uses": [
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00CN (definition-multiplicative-subset) and 07JZ (definition-localization-module), preceding fraction construction; elementary identification of the fraction field of Z with Q."
-   }
-  },
-  {
-   "text": "The universal property and generation clause of [def-weil-pbc-module-tensor-product] give inverse $\\mathbf Z$-linear maps $\\mu:\\mathbf Z\\otimes_{\\mathbf Z}G\\to G$, $a\\otimes g\\mapsto ag$, and $\\nu:G\\to\\mathbf Z\\otimes_{\\mathbf Z}G$, $g\\mapsto1\\otimes g$. Indeed $\\mu\\nu(g)=g$ and $\\nu\\mu(a\\otimes g)=1\\otimes ag=a\\otimes g$ by bilinearity. By [def-weil-pbc-module-localization], their localizations have formulas $(a\\otimes g)/s\\mapsto ag/s$ and $g/s\\mapsto(1\\otimes g)/s$; their composites are identities on every fraction because $\\mu\\nu$ and $\\nu\\mu$ are identities.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00CX (lemma-tensor-product), universal property and bilinearity; Tag 07JZ (definition-localization-module), induced maps on fractions."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] with $R=A=\\mathbf Z$, $T=S$, $M=\\mathbf Z$ and $N=G$. It gives an isomorphism $S^{-1}(\\mathbf Z\\otimes_{\\mathbf Z}G)\\to S^{-1}\\mathbf Z\\otimes_{\\mathbf Z}G$, $(a\\otimes g)/s\\mapsto(a/s)\\otimes g$. Combine its inverse with Step 2 and the ring identification of Step 1. Interchanging the tensor factors gives inverse maps $\\mathbf Q\\otimes_{\\mathbf Z}G\\rightleftarrows G\\otimes_{\\mathbf Z}\\mathbf Q$: they send $q\\otimes g$ to $g\\otimes q$ and back, are well-defined by the bilinear universal property of [def-weil-pbc-module-tensor-product], and their composites fix every generating pure tensor. Thus we obtain an additive isomorphism $\\theta:S^{-1}G\\to G\\otimes_{\\mathbf Z}\\mathbf Q$ satisfying $\\theta(g/s)=g\\otimes(1/s)$, and in particular $\\theta(g/1)=g\\otimes1$.",
-   "uses": [
-    "lem-weil-pbc-localization-tensor-over-base",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00DK (lemma-tensor-localization), with the existing general base-ring localization-tensor leaf; Tag 00CX (lemma-tensor-product) for the explicitly written symmetry maps."
-   }
-  },
-  {
-   "text": "Let $g,h\\in G$ satisfy $g\\otimes1=h\\otimes1$. By Step 3, $(g-h)/1=0$ in $S^{-1}G$. The kernel criterion in [def-weil-pbc-module-localization] gives a nonzero integer $s$ with $s(g-h)=0$. If $s>0$, the hypothesis gives $g-h=0$ directly. If $s<0$, then $(-s)(g-h)=-s(g-h)=0$ and $-s>0$, so the same hypothesis gives $g-h=0$. Consequently $g=h$. Bilinearity shows that $g\\mapsto g\\otimes1$ is the canonical additive homomorphism, so this proves its injectivity.",
+   "text": "Use the positive integers S = Submonoid.pos ℤ instead of all nonzero integers. Mathlib.RingTheory.Localization.FractionRing supplies IsLocalization S ℚ: every rational has a positive denominator. Thus the localization-tensor assertion [lem-weil-pbc-localization-tensor-over-base], specialized to the base ring itself and G, identifies the canonical tensor map with module localization [def-weil-pbc-module-localization]. Mathlib packages this specialization directly as IsLocalization.tensorProduct_isLocalizedModule for f = TensorProduct.mk ℤ ℚ G 1, so no explicit comparison maps are needed. The tensor definition is [def-weil-pbc-module-tensor-product].",
    "uses": [
     "def-weil-pbc-module-localization",
-    "def-weil-pbc-module-tensor-product"
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 07JZ (definition-localization-module), fraction relation and kernel criterion; Tag 00CX (lemma-tensor-product), bilinearity; elementary application of the stated torsion-free hypothesis."
+    "place": "Tags 00DK and 07JZ; Mathlib/RingTheory/Localization/FractionRing.lean positive-integer localization instance and Mathlib/RingTheory/Localization/BaseChange.lean IsLocalization.tensorProduct_isLocalizedModule."
+   }
+  },
+  {
+   "text": "If rationalizationMap G x = rationalizationMap G y, unfold only the canonical map to obtain f x = f y. By the equality criterion for module localization [def-weil-pbc-module-localization], implemented by IsLocalizedModule.exists_of_eq, there is m in S with m • x = m • y. In particular m is a strictly positive integer and m • (x - y) = 0 by distributivity.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07JZ, equality of fractions with denominator one."
+   }
+  },
+  {
+   "text": "Apply the stated torsion-free hypothesis to the positive integer m and the group element x - y. It gives x - y = 0, hence x = y. This proves injectivity without any additional hypotheses on G.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary application of the hypothesis after the Tag 07JZ equality criterion."
    }
   }
  ],
@@ -67,7 +53,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 00DK (lemma-tensor-localization), 07JZ (definition-localization-module), 00CX (lemma-tensor-product); explicit rationalization identification and torsion-free kernel argument. The Temkin archival PDF named by the item is unavailable locally."
+  "place": "Tags 00DK and 07JZ, implemented using Mathlib positive-integer localization of ℚ and IsLocalization.tensorProduct_isLocalizedModule / IsLocalizedModule.exists_of_eq; positive denominators remove the sign case and explicit comparison isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -232,5 +218,26 @@
   "result": "pass",
   "note": "Item AddCommGroup.convexChainRationalRank matches node clause by clause: AddCommGroup+LinearOrder+AddLeftMono = totally ordered abelian group; H : Fin (n+1) → AddSubgroup with inline convexity for every member and strict castSucc<succ; conclusion Cardinal.lift.{u}(mk (Fin n)) ≤ landed AddCommGroup.rationalRank (cardinal-valued, lift only a universe transport). Edge cases n=0, Γ=0, infinite rank covered; all variables bound. Dependency module for lem-trf-torsionfree-rationalization-injective (base lean null, in the item's proof-dep closure) gives the real map g ↦ 1⊗g into ℚ⊗[ℤ]G and exact injectivity under the integer torsion-free hypothesis; node changed only in lean with note; no Mathlib duplicate. Item stmt_deps gained that self-stated node (allowed by stage2_delivery.py, no cycle; logically a proof dep, noted only). No hollow def, proofs sorry, docstrings with source/blueprint/proof steps, imports per stage-2 rule 7, lines ≤100, lean.statement verbatim, report has Worker report/Dependency modules/Second reading sections. nt_compile.py --json on both siblings: clean (2.2 s, 1.7 s, rc=0); control run confirmed diagnostics are reported and #check shows the expected signatures."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261023T110210-L-3666529",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

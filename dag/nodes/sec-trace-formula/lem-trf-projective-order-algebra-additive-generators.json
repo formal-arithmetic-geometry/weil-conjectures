@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-projective-order-algebra-additive-generators",
+ "kind": "statement",
+ "title": "Additive generators of the maximal-order algebra at a projective point",
+ "statement": "Let $k$ be any field, let $N\\ge1$, and give $P=k[Z_1,\\ldots,Z_N]$ its grading with all variables in degree one [def-weil-pbc-mv-polynomial-ring, def-pc-standard-graded-algebra]. Let $\\mathfrak q\\subset P$ be a homogeneous prime ideal not containing $P_+=\\bigoplus_{d>0}P_d$. In the ordinary localization $P_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime], put\n$$U_d=\\{f\\in P_d:f/1\\in(\\mathfrak qP_{\\mathfrak q})^d\\},\\qquad U=\\bigoplus_{d\\ge0}U_d\\subseteq P.$$\nHere the direct sum denotes finite sums of homogeneous polynomials in the indicated subspaces, and $U_0=k$. Let $T$ consist of the homogeneous elements $t\\in U_d$, $d>0$, that satisfy the polynomial identity\n$$t(Z+W)=t(Z)+t(W)$$\nin the polynomial ring on two disjoint tuples of variables. Then $U$ is a graded $k$-subalgebra of $P$ and $U=k[T]$, where $k[T]$ denotes the subalgebra consisting of polynomial expressions over $k$ in finitely many members of $T$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Hironaka, Additive groups associated with points of a projective space, Theorem 2; concrete order-algebra formulation read in Dietel, A refinement of Hironaka’s additive group schemes for an extended invariant (2014), Definition 9.1.3 and Lemma 9.1.4, pp.107–108, https://d-nb.info/1068056037/34. Archival copy WANTED. ILO VIII 2.3.13, p.94, is only the ancestor motivation; no Stacks tag states this theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=P_{\\mathfrak q}$ and $\\mathfrak m=\\mathfrak qA$, using [def-weil-pbc-localization-at-prime]. Each $U_d$ is a $k$-vector subspace, since it is the inverse image of the ideal $\\mathfrak m^d$ under the linear map $P_d\\to A$. Constants give $U_0=k$. If $f\\in U_d$ and $g\\in U_e$, then $fg$ is homogeneous of degree $d+e$ by [def-pc-standard-graded-algebra] and $(fg)/1\\in\\mathfrak m^d\\mathfrak m^e=\\mathfrak m^{d+e}$. Thus the finite sums defining $U$ form a graded $k$-subalgebra of $P$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-standard-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36 for localization; explicit coefficient argument by the worker, compared with online Dietel (2014), Lemma 9.1.4 and Proposition 3.4.3(ii)--(iv), printed pp.108 and 43. Archival Dietel copy WANTED."
+   }
+  },
+  {
+   "text": "For a multiindex $B\\in\\mathbf N^N$ write $|B|=\\sum_i B_i$ and define $D_B f=[W^B]f(Z+W)$ by coefficient extraction in [def-weil-pbc-mv-polynomial-ring]. Expanding monomials gives $D_B(Z^E)=\\binom EB Z^{E-B}$ when $B\\le E$ componentwise, and zero otherwise, where $\\binom EB=\\prod_i\\binom{E_i}{B_i}$ is interpreted in $k$. Multiplying the two finite expansions gives $D_B(gh)=\\sum_{C\\le B}D_C(g)D_{B-C}(h)$. Consequently $D_0$ is the identity and $[D_B,g]=\\sum_{0<C\\le B}D_C(g)D_{B-C}$, so induction on $|B|$ shows that $D_B$ has differential order at most $|B|$ in the commutator definition of [lem-trf-differential-operator-localization]. Finite sums and multiplication of the output by an element do not increase this order: commute once and induct on the order. Applying that node with $R=k$, $B=P$ and prime $\\mathfrak q$ gives an extension $\\widetilde D_B:A\\to A$ of the same order.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-differential-operator-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36 for localization; explicit coefficient argument by the worker, compared with online Dietel (2014), Lemma 9.1.4 and Proposition 3.4.3(ii)--(iv), printed pp.108 and 43. Archival Dietel copy WANTED."
+   }
+  },
+  {
+   "text": "For an ideal $I$ in any commutative algebra $C$, a differential operator $E:C\\to C$ of order at most $r$ satisfies $E(I^d)\\subseteq I^{\\max(d-r,0)}$. Here is the elementary commutator induction, with the order convention of [lem-trf-differential-operator-localization]. At $r=0$, $E$ is multiplication by $E(1)$, so preserves every ideal power. At $r>0$, the claim for $d\\le r$ merely says the output lies in $C$. For $d>r$, write a generator of $I^d$ as $ab$, with $a\\in I$ and $b\\in I^{d-1}$. The identity $E(ab)=aE(b)+[E,a](b)$ puts both summands in $I^{d-r}$: use induction on $d$ for the first and on $r$ for the second. Additivity handles sums of these generators. This proves the assertion by induction on $r$, and then on $d$ for each fixed $r$.",
+   "uses": [
+    "lem-trf-differential-operator-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36 for localization; explicit coefficient argument by the worker, compared with online Dietel (2014), Lemma 9.1.4 and Proposition 3.4.3(ii)--(iv), printed pp.108 and 43. Archival Dietel copy WANTED."
+   }
+  },
+  {
+   "text": "Take $I=\\mathfrak m$ and the localized operators of step 2. For homogeneous $f\\in U_d$ and $|B|\\le d$, steps 2--3 give $(D_Bf)/1\\in\\mathfrak m^{d-|B|}$, since the extension agrees on $f/1$. The monomial formula makes $D_Bf$ homogeneous of degree $d-|B|$, so $D_Bf\\in U_{d-|B|}$. For $|B|>d$ it is zero. Thus $U$ is stable under all $D_B$, including those of order divisible by the characteristic; no factorial is divided out.",
+   "uses": [
+    "lem-trf-differential-operator-localization",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36 for localization; explicit coefficient argument by the worker, compared with online Dietel (2014), Lemma 9.1.4 and Proposition 3.4.3(ii)--(iv), printed pp.108 and 43. Archival Dietel copy WANTED."
+   }
+  },
+  {
+   "text": "Let $K=k[T]\\subseteq U$. Since every generator in $T$ is homogeneous, grouping the monomials in any polynomial expression in these generators by total weighted degree shows $K=\\bigoplus_d K_d$, where $K_d=K\\cap P_d$ [def-pc-standard-graded-algebra]. Suppose $K\\ne U$ and choose the least $d$ with $K_d\\ne U_d$. Constants lie in $K$ because it is a $k$-subalgebra, and every element of $U_1$ is additive and hence belongs to $T$ (including the zero polynomial). Thus $K_0=U_0=k$ and $K_1=U_1$, so $d\\ge2$. Order degree-$d$ monomials lexicographically. Gaussian elimination in the finite-dimensional space $P_d$ provides a basis of $K_d$ with distinct leading exponents. Subtract multiples of its rows from an element of $U_d\\setminus K_d$, starting at the largest pivot. This gives $f\\in U_d\\setminus K_d$ whose coefficient at every leading exponent of a nonzero element of $K_d$ is zero. There are finitely many degree-$d$ monomials, so this elimination terminates; all row subtractions stay in $U_d$ [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "def-pc-standard-graded-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36 for localization; explicit coefficient argument by the worker, compared with online Dietel (2014), Lemma 9.1.4 and Proposition 3.4.3(ii)--(iv), printed pp.108 and 43. Archival Dietel copy WANTED."
+   }
+  },
+  {
+   "text": "This $f$ cannot be additive, since then $f\\in T\\subset K$. Hence at least one monomial with nonzero coefficient in $f$ is not additive. Choose its lexicographically largest exponent $E$. Mixed terms $Z^C W^B$ arising from different monomials have different sums $B+C$, so they cannot cancel across exponents. Nonadditivity of $Z^E$ means that $(Z+W)^E-Z^E-W^E$ has a nonzero coefficient. Thus there are nonzero multiindices $B,C$ with $B+C=E$, $0<|B|,|C|<d$, and $\\binom EB\\ne0$ in $k$; also $\\binom EC=\\binom EB$. For every additive monomial of degree $d$, both $D_B$ and $D_C$ vanish, because its addition identity has no mixed coefficient of either of these proper degrees. These assertions are direct coefficient comparisons in the polynomial ring [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36 for localization; explicit coefficient argument by the worker, compared with online Dietel (2014), Lemma 9.1.4 and Proposition 3.4.3(ii)--(iv), printed pp.108 and 43. Archival Dietel copy WANTED."
+   }
+  },
+  {
+   "text": "Using the extensions of [lem-trf-differential-operator-localization] and the bound of steps 3--4, $D_Bf$ and $D_Cf$ belong to $U_{d-|B|}$ and $U_{d-|C|}$, respectively. These degrees are below $d$, so minimality gives $D_Bf,D_Cf\\in K$. The coefficient formula of step 2 shows that their leading exponents are $E-B=C$ and $E-C=B$: all larger monomials of $f$ are additive and killed, while subtracting a fixed multiindex from smaller surviving exponents preserves strict lexicographic order. The displayed binomial coefficients ensure both leading coefficients are nonzero. Since $|B|+|C|=|E|=d$, the two homogeneous degrees sum to $(d-|B|)+(d-|C|)=d$. Their product $g=(D_Bf)(D_Cf)$ therefore lies in $K_d$ and has leading exponent $B+C=E$. Indeed every other product of terms has a strictly smaller exponent, by compatibility of lexicographic order with addition, and the leading coefficient is a product of two nonzero field elements. This is the finite monomial multiplication of [def-weil-pbc-mv-polynomial-ring]. The normalization of $f$ in step 5 now forces its coefficient at $E$ to vanish, contrary to the choice of $E$.",
+   "uses": [
+    "lem-trf-differential-operator-localization",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36 for localization; explicit coefficient argument by the worker, compared with online Dietel (2014), Lemma 9.1.4 and Proposition 3.4.3(ii)--(iv), printed pp.108 and 43. Archival Dietel copy WANTED."
+   }
+  },
+  {
+   "text": "The contradiction rules out a least degree of disagreement. Hence $U_d=K_d$ for every $d$, and the finite homogeneous sums give $U=K=k[T]$. Together with step 1 this proves both assertions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36 for localization; explicit coefficient argument by the worker, compared with online Dietel (2014), Lemma 9.1.4 and Proposition 3.4.3(ii)--(iv), printed pp.108 and 43. Archival Dietel copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-differential-operator-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0G36 plus the written-out commutator/ideal-power and finite coefficient argument; compared with Dietel (2014), Proposition 3.4.3 and Lemma 9.1.4 online (local archival copy absent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Hironaka|equimultiple|order.algebra|homogeneous.*additive.*generat",
+   "results": "{\"t\": \"2026-10-22T05:37:12Z\", \"tool\": \"grep\", \"query\": \"Hironaka|equimultiple|order.algebra|homogeneous.*additive.*generat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Ray.lean\", \"Mathlib/Algebra/Order/Monoid/Unbundled/Defs.lean\"], \"digest\": \"157619444abba78a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary homogeneous polynomials, homogeneous localization, ideal powers, flatness, or power series; none asserts this order-algebra/additive-generation or numerical near-point theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebra of homogeneous polynomials whose local order is their degree is generated by additive polynomials",
+   "results": "{\"t\": \"2026-10-22T05:37:12Z\", \"tool\": \"leansearch\", \"query\": \"Algebra of homogeneous polynomials whose local order is their degree is generated by additive polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"Polynomial.homogenize\", \"Polynomial.homogenize_add\", \"MvPolynomial.IsHomogeneous.add\", \"MvPolynomial.IsHomogeneous.sum\", \"Polynomial.isHomogeneous_homogenize\", \"HomogeneousLocalization.instAlgebraSubtypeMemOfNat\", \"MvPolynomial.IsHomogeneous\"], \"digest\": \"4fb12fa3221bda63\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary homogeneous polynomials, homogeneous localization, ideal powers, flatness, or power series; none asserts this order-algebra/additive-generation or numerical near-point theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsAdditive\"",
+   "results": "{\"t\": \"2026-10-22T05:37:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"IsAdditive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary homogeneous polynomials, homogeneous localization, ideal powers, flatness, or power series; none asserts this order-algebra/additive-generation or numerical near-point theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-projective-order-algebra-additive-generators: for a homogeneous prime q in k[Z], the graded algebra of forms f of degree d with f in q^d localized at q is generated by homogeneous additive polynomials",
+   "results": "{\"t\": \"2026-10-22T05:37:22Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-projective-order-algebra-additive-generators: for a homogeneous prime q in k[Z], the graded algebra of forms f of degree d with f in q^d localized at q is generated by homogeneous additive polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.mk_surjective\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.num_mem_carrier_iff\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"HomogeneousLocalization.Away.isLocalizationElem\"], \"digest\": \"92ef170d145d2889\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary homogeneous polynomials, homogeneous localization, ideal powers, flatness, or power series; none asserts this order-algebra/additive-generation or numerical near-point theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "additive.*polynomial|polynomial.*additive",
+   "results": "{\"t\": \"2026-10-22T05:38:12Z\", \"tool\": \"grep\", \"query\": \"additive.*polynomial|polynomial.*additive\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/WittVector/IsPoly.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\"], \"digest\": \"9593e4a62bddea94\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary homogeneous polynomials, homogeneous localization, ideal powers, flatness, or power series; none asserts this order-algebra/additive-generation or numerical near-point theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graded algebra of homogeneous forms with local order at least their degree is generated by additive polynomials",
+   "results": "{\"t\": \"2026-10-22T06:47:50Z\", \"tool\": \"leanfinder\", \"query\": \"The graded algebra of homogeneous forms with local order at least their degree is generated by additive polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"MvPolynomial.homogeneousSubmodule_eq_finsupp_supported\", \"Ideal.mem_span_pow_iff_exists_isHomogeneous\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"MvPolynomial.homogeneousSubmodule_one_eq_span_X\", \"MvPolynomial.homogeneousSubmodule\"], \"digest\": \"e295daba855f81d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern first-order derivations, Kaehler differentials, localizations, homogeneous components or Weierstrass division, not localization of arbitrary finite-order differential operators or additive generation of this order algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, hasseDeriv",
+   "results": "{\"t\": \"2026-10-22T06:47:50Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, hasseDeriv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'hasseDeriv'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: name-pattern search returned no declaration; loogle: unknown identifier 'hasseDeriv'"
+  },
+  {
+   "tool": "grep",
+   "query": "hasseDeriv|Hasse.deriv|differential.*subalgebra|additive.*polynomial",
+   "results": "{\"t\": \"2026-10-22T06:47:50Z\", \"tool\": \"grep\", \"query\": \"hasseDeriv|Hasse.deriv|differential.*subalgebra|additive.*polynomial\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/WittVector/IsPoly.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\"], \"digest\": \"c6aa20372705bb2f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern first-order derivations, Kaehler differentials, localizations, homogeneous components or Weierstrass division, not localization of arbitrary finite-order differential operators or additive generation of this order algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subalgebra of a multivariable polynomial ring closed under all Hasse derivatives is generated by additive polynomials",
+   "results": "{\"t\": \"2026-10-22T06:48:50Z\", \"tool\": \"leansearch\", \"query\": \"A subalgebra of a multivariable polynomial ring closed under all Hasse derivatives is generated by additive polynomials\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous polynomial maximal ideal powers at a prime Hasse Taylor coefficients lower the order by at most the derivative degree",
+   "results": "{\"t\": \"2026-10-22T06:49:02Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous polynomial maximal ideal powers at a prime Hasse Taylor coefficients lower the order by at most the derivative degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.degree_weierstrassMod_lt\", \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\"], \"digest\": \"bfb1b95dfe307370\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern first-order derivations, Kaehler differentials, localizations, homogeneous components or Weierstrass division, not localization of arbitrary finite-order differential operators or additive generation of this order algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-near-point-additive-symmetry",
+  "date": "2026-10-22",
+  "group": "Q87"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Algebraic subgroup input: homogeneous forms of maximal local order are generated by additive polynomials.",
+   "via": [
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-projective-order-algebra-additive-generators",
+  "worker": "stage1",
+  "summary": "Preserved the statement in every characteristic. Proved the graded-algebra property and Hasse stability, then gave the full minimal-degree, row-reduction and leading-exponent contradiction for additive generation. Created only the general Stacks 0G36 localization theorem as a statement-only node; no wrapper for additive generation. No Lean writing or compilation. Repair of the side-completion promotion return: rechecked every cited statement against the current live DAG and retained the approved argument; corrected step 5 to put constants in K by its k-algebra structure, reserving additivity for degree-one forms. Latest-return repair: confirmed that the live item remains unsplit and all three existing cited statements still support the exact quotations; made explicit in step 6 why mixed coefficients from distinct original monomials cannot cancel. Continuation of the aac7118c1f7 landing return: rebased via the delivery tool onto the current DAG, reread every existing cited statement, verified all 12 quotations, and explicitly computed the degree of the derivative product in step 7.",
+  "blueprint": "Realizes the lower maximal-order-algebra input to the historical near-point/additive-symmetry branch of lem-trf-local-term-locality recorded in blueprint.from and via. Steps 1--4 supply Hasse stability, and steps 5--8 give the additive-generator argument; no chapter or unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-e3927b04b",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-e3927b04b (reviewer sub-agent of L); spot-checked: I read all 8 steps and the new node in full, and all are correct. I made no changes. Step 1: m^d m^e is in m^{d+e}, so U is a graded k-subalgebra. Step 2: the Hasse Leibniz identity [D_B,g] = sum over 0<C<=B of D_C(g) D_{B-C} gives order <= |B| in the sense of Stacks 09CI, and the new node extends D_B to P_q. Step 3: E(I^d) lies in I^{d-r} by induction; the base cases are r=0 and d<=r, and the exponents are 1+(d-1-r) and (d-1)-(r-1). Step 4: D_B maps U_d into U_{d-|B|}. Step 5: K_0=U_0=k, and U_1 is contained in T, so the least degree of disagreement is d>=2; echelon reduction starting from the largest pivot stays inside U_d. Steps 6-7: a mixed term Z^C W^B comes only from the exponent B+C, so terms of different monomials cannot cancel. Let E be the lex-largest non-additive exponent of f. Then binom(E,B) = binom(E,C) is nonzero in k, and D_B and D_C kill every additive monomial of degree d. So D_B f and D_C f have leading exponents C and B, and their product lies in K_d with leading exponent E, which contradicts the normalization of f. The new node lem-trf-differential-operator-localization is Stacks 0G36 (algebra.tex line 35026) with the order notion of 09CI (line 34656) written out in the statement. The tag/label pairs are confirmed in tags/tags. The order of the extension is measured over B_p, which matches the Stacks proof. Uniqueness holds and is not used by the item. The node is statement-only and is not a restatement of the item. rg -L over the snapshot for differential operator, Hasse, 0G36, 09CI and additive polynomial found no duplicate; the implicit-taylor, formal-jacobian and cotangent-retraction nodes state different things. Small cases agree with the statement: q=(0), (Z_1) over F_p, a linear prime, and the inseparable prime (Z_1^p-aZ_2^p) over F_p(a). There is no repair note, so the re-split rule does not apply. In live and side-live the item is still unsplit and the new node is absent; the statements of the item and its three cited definitions match live exactly. This head differs from aac7118c1f74 only by one true sentence in step 7 (the derivative degrees sum to d) and the split_report. No SGA source is used and no tool_uses were needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveOrderAlgebraAdditiveGenerators",
+  "declaration": "Hironaka.projective_order_algebra_additive_generators",
+  "file": "lean/Sheaf/RingTheory/ProjectiveOrderAlgebraAdditiveGenerators.lean",
+  "statement": "theorem projective_order_algebra_additive_generators {k : Type u} [Field k] (N : ℕ) (hN : 1 ≤ N) (q : Ideal (MvPolynomial (Fin N) k)) [q.IsPrime] (hq : @Ideal.IsHomogeneous _ _ _ _ _ _ (MvPolynomial.homogeneousSubmodule (Fin N) k) _ _ MvPolynomial.gradedAlgebra q) (hrel : ¬ @HomogeneousIdeal.toIdeal _ _ _ _ _ _ (MvPolynomial.homogeneousSubmodule (Fin N) k) _ _ MvPolynomial.gradedAlgebra (@HomogeneousIdeal.irrelevant _ _ _ _ _ _ _ _ _ _ (MvPolynomial.homogeneousSubmodule (Fin N) k) MvPolynomial.gradedAlgebra) ≤ q) : ∃ U : Subalgebra k (MvPolynomial (Fin N) k), (∀ f : MvPolynomial (Fin N) k, f ∈ U ↔ ∀ d : ℕ, algebraMap (MvPolynomial (Fin N) k) (Localization.AtPrime q) (MvPolynomial.homogeneousComponent d f) ∈ q.map (algebraMap (MvPolynomial (Fin N) k) (Localization.AtPrime q)) ^ d) ∧ (@Submodule.IsHomogeneous _ _ _ _ _ _ _ U.toSubmodule (MvPolynomial.homogeneousSubmodule (Fin N) k) _ _ _ MvPolynomial.decomposition) ∧ U = Algebra.adjoin k {t : MvPolynomial (Fin N) k | t ∈ U ∧ (∃ d : ℕ, 0 < d ∧ t.IsHomogeneous d) ∧ MvPolynomial.aeval (fun i : Fin N ↦ (MvPolynomial.X (Sum.inl i) : MvPolynomial (Fin N ⊕ Fin N) k) + MvPolynomial.X (Sum.inr i)) t = MvPolynomial.rename (Sum.inl : Fin N → Fin N ⊕ Fin N) t + MvPolynomial.rename (Sum.inr : Fin N → Fin N ⊕ Fin N) t}",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a47fe19f",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: any field k : Type u; N≥1; q prime, homogeneous for MvPolynomial.gradedAlgebra and not containing the irrelevant ideal; U fully pinned by a biconditional on every homogeneousComponent d f mapping into (q.map algebraMap)^d in Localization.AtPrime q (d=0 vacuous, so U_0=k); graded via Submodule.IsHomogeneous (Mathlib argument order checked); T defined by a polynomial identity aeval(X inl + X inr) t = rename inl t + rename inr t, positive degree, zero allowed; U = Algebra.adjoin k T. The snapshot node differs from live only in its lean record; the statement appears verbatim in the file with one sorry; the docstrings give the source place, the blueprint id and all 8 proof steps. Edge cases q=(0), N=1, (Z_1) and characteristic p are covered. No new definition; Hironaka.InOrderSpace is a different chart-based formulation the node does not cite, so it is not a duplicate. Minor report error only: the inseparable-prime example is wrong (U=k there); the statement is unaffected. No compile run because no file changed."
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-integral-tensor-constructibility",
+ "kind": "statement",
+ "title": "Constructibility clause of the ordinary integral tensor theorem",
+ "statement": "Fix a prime ell, a field k of characteristic p>0 with p different from ell, a finite extension E of Q_ell, and a separated finite-type k-scheme X [sk-def-sfb-dc-setting, def-weil-l-adic-coefficient-extension]. For K and L in the ambient uncompleted derived category over the pulled-back continuous valuation ring [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-derived-tensor-hom], finite constant-model bounded constructibility [sk-def-sfb-constructible] of both factors implies finite constant-model bounded constructibility of K tensor L. This statement is only the first clause of the parent; it asserts none of its local duality or limit-preservation clauses.",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-constructible"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "Paragraphs 2 and 3: Reduction to a stratum, followed by The stratum."
+ },
+ "proof": [
+  {
+   "text": "A separated finite-type scheme over k is Noetherian. Compare finite constant-model constructibility with general stratified local finite presentation over the spectral integer ring. For the forward direction use the scalar-presentation argument; for the reverse direction use the WithAbs valuation-ring isomorphism and the integral local finite-presentation comparison. Apply this equivalence in each cohomological degree, keeping the same boundedness condition.",
+   "uses": [
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-sfb-integral-constant-model-heart-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing coefficientSmallIso helper of IntegralTensorShriek: the finite-dimensional field E has a small algebraically equivalent presentation F. Its induced norm identifies the two integer rings isometrically, and continuous postcomposition gives an isomorphism of condensed commutative ring objects. Pull this isomorphism to X. Restriction of scalars along its inverse is a faithful exact strong monoidal equivalence. Exact derived homology comparison preserves stratified local finite presentation and boundedness. The proved integralPointMon_eq helper identifies the spectral and absolute-value topology presentations before composing this isomorphism.",
+   "uses": [
+    "det-lem-int-tensor-shriek",
+    "det-prop-integral-criterion-reductions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply boundedConstructible_tensor_closure over the small unit-ball coefficient ring. The monoidal derived-equivalence tensor comparison identifies its output with the scalar transport of the ordinary uncompleted tensor K tensor L. Faithful exactness reflects boundedness; inverse scalar transport and its counit identify each constructible homology sheaf with that of K tensor L. The comparison of the first step returns finite constant-model constructibility. This uses the existing local two-term resolution and finite truncation proof, not a completion of the tensor.",
+   "uses": [
+    "lem-sfb-dc-tensor-preserves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "det-lem-int-tensor-shriek",
+  "det-prop-integral-criterion-reductions",
+  "lem-sfb-dc-tensor-preserves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-tensor-preserves.md",
+  "place": "Reuse the existing local finite-resolution/two-truncation tensor theorem after exact monoidal coefficient transport; compare finite scalar models by integralLfpConstantModelComparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a dualizable object preserves derived complete objects and integral bounded constructibility",
+   "results": "8 hits, all LightCondensed internallyProjective tensor criteria and its monoidal closed structure; no result on the recorded augmented integral completion or constructibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "boundedConstructible",
+   "results": "0 hits; unknown identifier boundedConstructible",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantModelBoundedConstructible|boundedConstructible.*tensor",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralTensorProduct",
+  "date": "2026-10-25",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "Paragraphs 2 and 3: Reduction to a stratum, followed by The stratum.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTensorConstructibility",
+  "file": "lean/Sheaf/Paper/IntegralTensorConstructibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralTensorConstructibility",
+  "statement": "theorem integralTensorConstructibility\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpl : p ≠ l) :\n    ∀ (X : Scheme.{u}) [X.Over (Spec (.of k))]\n      [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n      [QuasiCompact (X ↘ Spec (.of k))]\n      (K L : DerivedCategory (AdicCompletion.Modules l E X)),\n      constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K →\n      constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X L →\n      constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X (K ⊗ L)",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-30d1a",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T100927-L-3639897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261025T123126-L-1834474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

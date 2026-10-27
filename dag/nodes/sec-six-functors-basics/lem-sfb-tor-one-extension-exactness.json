@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-tor-one-extension-exactness",
+ "kind": "statement",
+ "title": "Exactness at the middle first Tor module of a short exact sequence",
+ "statement": "Let $R$ be a commutative ring, let $A,B,C,M$ be $R$-modules, and let $0\\to A\\xrightarrow{u}B\\xrightarrow{v}C\\to0$ be short exact [def-weil-pbc-exact-sequence]. For the Tor modules and functorial maps of [def-weil-pbc-tor-modules], the sequence $\\operatorname{Tor}_1^R(A,M)\\xrightarrow{\\operatorname{Tor}_1(u,M)}\\operatorname{Tor}_1^R(B,M)\\xrightarrow{\\operatorname{Tor}_1(v,M)}\\operatorname{Tor}_1^R(C,M)$ is exact at its middle term: the kernel of the second map equals the image of the first. No flatness, finiteness, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00M0, lemma-long-exact-sequence-tor: the three consecutive degree-one Tor terms, with the two module arguments exchanged by Tor symmetry."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-free-resolution-ses-split] to the given short exact sequence. Obtain free resolutions $P_\\bullet,Q_\\bullet,S_\\bullet$ of $A,B,C$, with augmentation-compatible chain maps $a:P_\\bullet\\to Q_\\bullet$ and $b:Q_\\bullet\\to S_\\bullet$ lifting $u,v$, and degreewise splitting maps $p_n:Q_n\\to P_n$, $s_n:S_n\\to Q_n$ satisfying $b_na_n=0$, $p_na_n=1$, $b_ns_n=1$ and $a_np_n+s_nb_n=1$. These choices impose no condition on $M$.",
+   "uses": [
+    "lem-weil-pbc-free-resolution-ses-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 065P, lemma-reverse-long-exact-seq-ext, proof: construction of the degreewise split sequence of free resolutions."
+   }
+  },
+  {
+   "text": "Put $X_\\bullet=P_\\bullet\\otimes_RM$, $Y_\\bullet=Q_\\bullet\\otimes_RM$, $Z_\\bullet=S_\\bullet\\otimes_RM$, and $f=a\\otimes1_M$, $g=b\\otimes1_M$. Tensor the splitting maps as well. The four identities of step 1 persist, since $(h\\otimes1)(k\\otimes1)=(hk)\\otimes1$ and $(h+k)\\otimes1=h\\otimes1+k\\otimes1$, as checked on $x\\otimes m$. Hence $f_n$ is injective, $g_n$ is surjective, and $g_ny=0$ implies $y=f_n((p_n\\otimes1)y)$. Thus $0\\to X_n\\to Y_n\\to Z_n\\to0$ is exact in every degree, even when $M$ is not flat. The chain-map equations for $a,b$ give those for $f,g$ by the same composition identity.",
+   "uses": [
+    "lem-weil-pbc-free-resolution-ses-split"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 065P, lemma-reverse-long-exact-seq-ext, degreewise splitting argument, applied to tensor instead of Hom; explicit elementary tensor identities."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-ring-modules-grothendieck-abelian] to work in the abelian category of $R$-modules. Reindex each nonnegative chain complex as an integer cochain complex: set $\\widetilde X^{-n}=X_n$ for $n\\ge0$, with the same differentials, and $\\widetilde X^i=0$ for $i>0$, and likewise for $Y,Z,f,g$. The sequence remains short exact in each degree; in positive degrees it is the zero sequence. Apply [lem-weil-pbc-complex-ses-homology-long-exact] in degree $-1$. Since $H^{-1}(\\widetilde X)=\\ker(d_{X,1})/\\operatorname{im}(d_{X,2})=H_1(X_\\bullet)$, and the induced maps are unchanged on these quotients, it gives exactness of $H_1(X_\\bullet)\\xrightarrow{H_1(f)}H_1(Y_\\bullet)\\xrightarrow{H_1(g)}H_1(Z_\\bullet)$ at the middle term.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117, lemma-long-exact-sequence-cochain, the horizontal degree-i sequence, with i=-1."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-tor-modules], the chosen free resolutions give canonical isomorphisms $\\iota_A:\\operatorname{Tor}_1^R(A,M)\\to H_1(X_\\bullet)$, $\\iota_B:\\operatorname{Tor}_1^R(B,M)\\to H_1(Y_\\bullet)$ and $\\iota_C:\\operatorname{Tor}_1^R(C,M)\\to H_1(Z_\\bullet)$. Clause (1) of [lem-weil-pbc-tor-map-via-resolution-lift], applied to the augmentation-compatible lifts $a,b$, gives $\\iota_B\\operatorname{Tor}_1(u,M)=H_1(f)\\iota_A$ and $\\iota_C\\operatorname{Tor}_1(v,M)=H_1(g)\\iota_B$. If $t$ lies in the kernel of $\\operatorname{Tor}_1(v,M)$, step 3 gives $x\\in H_1(X_\\bullet)$ with $H_1(f)x=\\iota_Bt$, and then $t=\\operatorname{Tor}_1(u,M)(\\iota_A^{-1}x)$. Conversely $H_1(g)H_1(f)=0$, so the same two identities and injectivity of $\\iota_C$ show that every image element lies in that kernel. This proves the asserted equality of kernel and image.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tor-map-via-resolution-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LZ, lemma-tor-welldefined, and the following functoriality paragraph in Tag 00LY, section-tor; the degree-one segment of Tag 00M0, lemma-long-exact-sequence-tor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-resolution-ses-split",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-map-via-resolution-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00M0, lemma-long-exact-sequence-tor: first-variable proof using the free-resolution construction in Tag 065P and homology exactness Tag 0117. Written out without invoking Tor symmetry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If zero to A to B to C to zero is exact and Tor one of A with M and Tor one of C with M vanish then Tor one of B with M vanishes",
+   "sub": "",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, lTensor_injective_of_exact_of_exact_of_rTensor_injective, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, SnakeLemma.exact_δ'_right, SnakeLemma.exact_δ_right, SnakeLemma.exact_δ'_left",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological-functor sequences and the definition of Tor are present, but no direct Tor exact-segment declaration was found; identifying Tor with a triangulated homological functor is an additional theorem, not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first Tor functor sends a short exact sequence A B C to an exact sequence Tor1 A M to Tor1 B M to Tor1 C M",
+   "sub": "",
+   "results": "8 hits: CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Tor_obj, CategoryTheory.ShortComplex.SnakeInput.L₁'_exact, CategoryTheory.ShortComplex.SnakeInput.functorL₁'_obj, CategoryTheory.ShortComplex.SnakeInput.functorL₁', Rep.Tor",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological-functor sequences and the definition of Tor are present, but no direct Tor exact-segment declaration was found; identifying Tor with a triangulated homological functor is an additional theorem, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived functors form a homological delta functor exact in the middle of each fixed degree on a short exact sequence",
+   "sub": "",
+   "results": "8 hits: CategoryTheory.Functor.homologySequence_exact₁, CategoryTheory.Functor.homologySequenceComposableArrows₅_exact, CategoryTheory.Functor.homologySequence_exact₂, CategoryTheory.ShortComplex.ShortExact.singleδ, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.homologySequence_exact₃, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.IsHomological.exact",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological-functor sequences and the definition of Tor are present, but no direct Tor exact-segment declaration was found; identifying Tor with a triangulated homological functor is an additional theorem, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "def Tor|lemma.*exact|theorem.*exact|preserves.*[Cc]olimit|[Cc]oproduct",
+   "sub": "CategoryTheory/Monoidal",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological-functor sequences and the definition of Tor are present, but no direct Tor exact-segment declaration was found; identifying Tor with a triangulated homological functor is an additional theorem, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma.*exact|theorem.*exact|preserves.*[Cc]olimit|PreservesColimitsOfShape",
+   "sub": "CategoryTheory/Abelian/LeftDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological-functor sequences and the definition of Tor are present, but no direct Tor exact-segment declaration was found; identifying Tor with a triangulated homological functor is an additional theorem, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.ShortComplex.Exact",
+   "sub": "",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general homological-functor sequences and the definition of Tor are present, but no direct Tor exact-segment declaration was found; identifying Tor with a triangulated homological functor is an additional theorem, not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first Tor functor sends a short exact sequence A B C to an exact sequence Tor1 A M to Tor1 B M to Tor1 C M",
+   "sub": "",
+   "results": "8 hits: CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Tor_obj, CategoryTheory.ShortComplex.SnakeInput.L₁'_exact, CategoryTheory.ShortComplex.SnakeInput.functorL₁'_obj, CategoryTheory.ShortComplex.SnakeInput.functorL₁', Rep.Tor",
+   "date": "2026-10-23",
+   "verdict": "no match: Tor definitions, flat tensor exactness, snake-lemma sequences, or general homological-functor exactness do not directly state the Tor-one middle segment; construction of compatible resolutions remains necessary"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first Tor functor sends a short exact sequence A B C to an exact sequence Tor1 A M to Tor1 B M to Tor1 C M",
+   "sub": "",
+   "results": "8 hits: CategoryTheory.ShortComplex.SnakeInput.L₁'_exact, CategoryTheory.ShortComplex.SnakeInput.L₁_exact, CategoryTheory.Abelian.Ext.contravariantSequence_exact, CategoryTheory.ShortComplex.SnakeInput.L₀'_exact, CategoryTheory.Abelian.Ext.covariant_sequence_exact₂', CategoryTheory.ShortComplex.SnakeInput.L₂'_exact, CategoryTheory.ShortComplex.SnakeInput.L₀_exact, SnakeLemma.δ_aux",
+   "date": "2026-10-23",
+   "verdict": "no match: Tor definitions, flat tensor exactness, snake-lemma sequences, or general homological-functor exactness do not directly state the Tor-one middle segment; construction of compatible resolutions remains necessary"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*exact|exact.*Tor|homology_exact₂",
+   "sub": "CategoryTheory",
+   "results": "25 hits: Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Galois/EssSurj.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/Galois/Equivalence.lean, Mathlib/CategoryTheory/Galois/Full.lean, Mathlib/CategoryTheory/ObjectProperty/ClosureShift.lean",
+   "date": "2026-10-23",
+   "verdict": "no match in the returned hits; this broad capped search was inconclusive, so it was followed by searches in the Tor file and LeftDerived directory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.ShortComplex.Exact",
+   "sub": "",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Tor definitions, flat tensor exactness, snake-lemma sequences, or general homological-functor exactness do not directly state the Tor-one middle segment; construction of compatible resolutions remains necessary"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived functors of tensor preserve exactness at the middle term of a short exact sequence in each positive degree",
+   "sub": "",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, Module.Flat.lTensor_shortComplex_exact, CategoryTheory.Tor_obj, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: Tor definitions, flat tensor exactness, snake-lemma sequences, or general homological-functor exactness do not directly state the Tor-one middle segment; construction of compatible resolutions remains necessary"
+  },
+  {
+   "tool": "grep",
+   "query": "exact",
+   "sub": "CategoryTheory/Abelian/LeftDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Tor definitions, flat tensor exactness, snake-lemma sequences, or general homological-functor exactness do not directly state the Tor-one middle segment; construction of compatible resolutions remains necessary"
+  },
+  {
+   "tool": "grep",
+   "query": "exact|Tor|leftDerived",
+   "sub": "CategoryTheory/Monoidal/Tor.lean",
+   "results": "5 hits: 8, 12, 14, 18, 19",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Tor-file import and documentation lines only; the local file was read and contains Tor definitions and projective vanishing, no exact-segment theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-ideal-module-flatness",
+  "date": "2026-10-23",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 06BH (lemma-deform), both directions. Supporting input: the nilpotent module criterion used in the converse of Tag 06BH via Tag 063Y. Supporting input: the Tor-one exact three-term segment used for induction on the annihilating ideal power in Tag 051C.",
+   "via": [
+    "lem-sfb-nilpotent-ideal-module-flatness",
+    "lem-sfb-space-square-zero-flatness-criterion",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-tor-one-extension-exactness",
+  "worker": "stage1",
+  "summary": "Proved the missing middle Tor-one exactness from the existing degreewise split free-resolution lemma, elementary tensor splitting identities, long exact homology, and the existing natural resolution computation of Tor maps. Preserved the statement and all maintainer fields; no new nodes. Read the low-degree Tor declaration: its exact sequence starts one term too late to attach this item.",
+  "blueprint": "Supporting input for the Tor-one devissage in Tag 051C, as recorded in the inherited blueprint.from.place; no additional blueprint node states this exact segment (blueprint_refs searches Tor_1 and 00M0). The ancestor command returns null for this imported new-target route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-free-resolution-ses-split",
+    "why": "Generic free-resolution horseshoe construction for this short exact module sequence; the unit has no alternative resolution construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-free-resolution-ses-split"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-5b24954ff",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-5b24954ff (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and every cited statement in full; there are no new nodes and the statement is unchanged. Source: Stacks Tag 00M0 (algebra.tex l.18291) is for Tor_1(M,-), and the inherited place records the argument swap. The proof works directly in the first variable, so Tor symmetry is never needed. Step 1: lem-weil-pbc-free-resolution-ses-split states the resolutions, chain maps, augmentation squares and the four splitting identities. It is an off-unit horseshoe tool and is declared in tool_uses; I accept that. Step 2 (elementary): the identities survive tensoring with M, so the sequence is degreewise short exact with no flatness of M. Step 3: reindex to cochains, where H^{-1}=H_1 (checked), and use complex-ses-homology-long-exact, a Mathlib leaf for N- or Z-indexed complexes. Step 4: def-weil-pbc-tor-modules allows free resolutions, and clause (1) of tor-map-via-resolution-lift applies through the augmentation squares. Both inclusions are written out explicitly. Duplicate search: tor-long-exact-first-variable lacks exactness at Tor_1(B), and the sc-p1-tor-kernel-boundary nodes cover the δ_q segment further right, so neither duplicates the item. Small cases: 0→Z/2→Z/4→Z/2→0 with M=Z/2 gives u_* iso and v_* zero, which is exact; the zero ring is trivial. No SGA is cited and proof_deps equals the union of the step uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TorOneExtensionExactness",
+  "declaration": "CategoryTheory.tor_one_extension_exact",
+  "file": "lean/Sheaf/Algebra/Homology/TorOneExtensionExactness.lean",
+  "statement": "theorem tor_one_extension_exact {R : Type r} [CommRing R] {A : Type a} [AddCommGroup A] [Module R A] {B : Type b} [AddCommGroup B] [Module R B] {C : Type c} [AddCommGroup C] [Module R C] (M : Type m) [AddCommGroup M] [Module R M] (f : A →ₗ[R] B) (g : B →ₗ[R] C) (hf : Function.Injective f) (hfg : Function.Exact f g) (hg : Function.Surjective g) : Function.Exact (((Tor' (ModuleCat (ULift.{max r a b c m} R)) 1).map (ModuleCat.ofHom ((ULift.moduleEquiv : ULift.{max r a b c m} B ≃ₗ[ULift.{max r a b c m} R] B).symm.toLinearMap.comp ((f.restrictScalars (ULift.{max r a b c m} R)).comp (ULift.moduleEquiv : ULift.{max r a b c m} A ≃ₗ[ULift.{max r a b c m} R] A).toLinearMap)))).app (ModuleCat.of (ULift.{max r a b c m} R) (ULift.{max r a b c m} M))).hom (((Tor' (ModuleCat (ULift.{max r a b c m} R)) 1).map (ModuleCat.ofHom ((ULift.moduleEquiv : ULift.{max r a b c m} C ≃ₗ[ULift.{max r a b c m} R] C).symm.toLinearMap.comp ((g.restrictScalars (ULift.{max r a b c m} R)).comp (ULift.moduleEquiv : ULift.{max r a b c m} B ≃ₗ[ULift.{max r a b c m} R] B).toLinearMap)))).app (ModuleCat.of (ULift.{max r a b c m} R) (ULift.{max r a b c m} M))).hom",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Independent universes for R,A,B,C,M. ULift of the ring and modules to their common maximum permits the standard same-universe ModuleCat monoidal structure. Maps are canonical conjugates of f and g, with scalars restricted along ULift.down; no additional mathematical assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d24313cd",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement matches node: Tor' derives in the first variable, so ((Tor' 1).map φ).app M = Tor_1(φ,M), as def-weil-pbc-tor-modules records; SES via Injective/Function.Exact/Surjective per the def-weil-pbc-exact-sequence lean.note; conclusion Function.Exact = ker=im. Independent universes r,a,b,c,m are handled by a canonical ULift lift to max with maps conjugated by ULift.moduleEquiv (up x ↦ up (f x)): no restriction, no arbitrary map, no extra hypotheses. lean.statement verbatim, sorry only, autoImplicit off, docstrings carry Tag 00M0 + blueprint + 4 proof steps. Node unchanged apart from lean; no new nodes. No duplicate: tor_long_exact_first_variable and the TorKernelBoundary* theorems cover the segment at Tor_1(C) and the δ segment only. Report has Worker report and Second reading sections. Edge cases (zero ring, A/C/M=0, Z/2→Z/4→Z/2 with M=Z/2, mixed universes) are covered. No files changed, so no compile."
+ }
+}

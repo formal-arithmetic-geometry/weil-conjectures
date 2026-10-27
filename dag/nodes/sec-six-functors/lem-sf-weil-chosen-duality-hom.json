@@ -1,0 +1,239 @@
+{
+ "id": "lem-sf-weil-chosen-duality-hom",
+ "kind": "statement",
+ "title": "Verdier Hom bijections for chosen structure adjoints on geometric Weil pairs",
+ "statement": "Let $k_0$ be a finite field, $k$ an algebraic closure, $\\ell\\ne\\operatorname{char}k_0$ a prime, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $T_0$ be a separated finite-type $k_0$-scheme and $T=T_0\\times_{k_0}k$. Write $\\mathcal C_T=D^b_c(T,\\Omega)$ for the common-stage coefficient category [def-weil-algebraically-closed-coefficients] and $P_T=Lg_T^*$ for geometric-Frobenius pullback [def-weil-derived-pullback-tensor-hom]. Let $\\mathrm W(T_0)=\\mathcal C_T^{P_T}$ be the category of pairs $(K,\\theta:P_TK\\xrightarrow{\\sim}K)$ and commuting morphisms [def-weil-weil-sheaf-complex]. All categories in this assertion are these fixed-pair categories. Use compact support and its canonical lifted constructible exceptional adjunction [cor-coef-verdier-weil-equivariance]. Let $a_0:T_0\\to s_0=\\operatorname{Spec}k_0$ be the structure map, choose any adjunction $Ra_{0!}\\dashv J_T$ on these pair categories, and put $\\omega_T=J_T\\Omega_{s_0}$, where $\\Omega_{s_0}$ is the coefficient unit with canonical Frobenius structure. Use internal Hom with its standard Weil lift [def-weil-derived-pullback-tensor-hom]. Let $J_T^{\\rm can}$ denote the canonical lifted structure right adjoint, $\\omega_T^{\\rm can}=J_T^{\\rm can}\\Omega_{s_0}$, and $D_T^{\\rm can}=R\\mathcal Hom_T(-,\\omega_T^{\\rm can})$.\n\nThe counit-compatible right-adjoint comparison $J_T\\xrightarrow{\\sim}J_T^{\\rm can}$ induces a Weil isomorphism $n_T:\\omega_T\\xrightarrow{\\sim}\\omega_T^{\\rm can}$. The functor $D_T=R\\mathcal Hom_T(-,\\omega_T)$ preserves $\\mathrm W(T_0)$ and postcomposition with $n_T$ gives a natural Weil isomorphism $D_T\\xrightarrow{\\sim}D_T^{\\rm can}$. The specified functor $D_T$ is an anti-equivalence, has natural Weil biduality $\\delta_K:K\\xrightarrow{\\sim}D_TD_TK$, and its action on arrows gives bijections\n$$\\operatorname{Hom}_{\\mathrm W(T_0)}(A,B)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathrm W(T_0)}(D_TB,D_TA),\\qquad u\\longmapsto D_T(u),$$\nnatural in $A,B$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Dual Weil structure and equivariant biduality, paragraphs 1–2; returned proof Step 1, including normalization of chosen structure adjoints"
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex",
+  "cor-coef-verdier-weil-equivariance"
+ ],
+ "proof": [
+  {
+   "text": "Obtain B, IH, W and DualizingNormalization from cor-coef-verdier-weil-equivariance. For each compactification choose its recorded A and Z from the normalization. Apply the existing closed fixed-pair adjunction construction lem-sf-fixed-pair-adjunction-lift to A.adjunction, Z.common.left and its mate Z.common.right. Its carrier unit and counit are definitionally those of A.adjunction. Unpack the common DualizingMate to obtain the normalized coefficient-unit structure and the equivariant isomorphism iω from the geometric dualizing pair to the canonical right adjoint applied to that unit. Apply det-sp-unique-right-adjoint to any chosen adjunction to set n to the specified component of rightAdjointUniq.",
+   "uses": [
+    "cor-coef-verdier-weil-equivariance",
+    "lem-sf-fixed-pair-adjunction-lift",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Paragraphs 1–2: lifted exceptional adjunction and equivariant biduality; formal normalization by uniqueness of right adjoints"
+   }
+  },
+  {
+   "text": "For each common-stage pair, B.finite.hom at its compositum already supplies the permitted internal-Hom domain. Internal-Hom bifunctoriality gives the natural isomorphism H(-,omega) → H(-,omega′) induced by a target isomorphism n, with precisely component H(identity,n). Compose the canonical target comparison for iω inverse with IH.comparison inverse to obtain the underlying comparison to geometricDual. Lift the literal Hom functor by conjugating the geometric Weil structure through this comparison: theta_H = e composed with the old structure and inverse e (with the Frobenius functor applied to the first factor). Naturality of e and the old Weil-arrow equation prove the new arrow equation. This leaves its carrier objects and carrier maps definitionally the specified Hom operation. The same construction using the component n of rightAdjointUniq produces the chosen Hom functor and its comparison to the canonical Hom functor.",
+   "uses": [
+    "cor-coef-verdier-weil-equivariance",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Displayed dual Weil structure and paragraph 2: natural internal-Hom comparison; explicit substitution of the dualizing-object isomorphism"
+   }
+  },
+  {
+   "text": "Lift the isomorphism B.duality.bidual componentwise to fixed pairs using W.common.biduality_equivariant; naturality follows from the underlying biduality naturality and faithful carrier morphisms. Transport this natural biduality first along the canonical Hom comparison and then along the chosen Hom comparison. Explicitly c:V≅C gives the opposite component isomorphism C.rightOp≅V.rightOp; whisker it by C and then whisker c inverse by V.rightOp. Compose these with the old biduality. The opposite of the new biduality gives the second inverse identity, so Functor.IsEquivalence.mk′ proves that V is an anti-equivalence.",
+   "uses": [
+    "cor-coef-verdier-weil-equivariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Paragraph 2: equivariant biduality, transported through the natural isomorphism constructed in Step 2"
+   }
+  },
+  {
+   "text": "Use the fully faithful Hom bijection of V, composed with the elementary equivalence from arrows K→M to arrows op M→op K. The composite forward map is definitionally f↦V.map f.op, so it is the requested actual dual arrow action. Finally op_comp and Functor.map_comp give the both-variable naturality equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Paragraphs 1–2: anti-equivalence from biduality; elementary conjugation of its Hom bijections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-coef-verdier-weil-equivariance",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "det-sp-unique-right-adjoint",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Paragraphs 1–2; explicit fixed-pair transport and biduality construction formalized by D2 from the recorded coefficient data and the closed lifted-adjunction constructor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality on constructible Frobenius fixed pairs for an arbitrary chosen exceptional structure right adjoint is fully faithful with natural biduality",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"lightProfiniteToLightCondSetFullyFaithful\", \"module\": \"Mathlib/Condensed/Light/Functors\", \"type\": \"lightProfiniteToLightCondSet.FullyFaithful\", \"doc\": \"The Yoneda embedding functor from the category of light profinite spaces (compact Hausdorff, totally disconnected, second-countable spaces) to the category of light condensed sets, constructed via the\"}\n  {\"name\": \"LightCondSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"LightCondSet.LocallyConstant.functor.FullyFaithful\", \"doc\": \"The functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces (totally disconnected and second-countable) is fully faithful. This follows from the adjunction between \"}\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"CondensedSet.LocallyConstant.functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n  {\"name\": \"LightCondMod.LocallyConstant.fullyFaithfulFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → (LightCondMod.LocallyConstant.functor R).FullyFaithful\", \"doc\": \"The functor mapping $ R $-modules to light condensed $ R $-modules via locally constant functions is fully faithful. This follows from the adjunction between the locally constant module functor and th\"}\n  {\"name\": \"CondensedMod.LocallyConstant.fullyFaithfulFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → (CondensedMod.LocallyConstant.functor R).FullyFaithful\", \"doc\": \"The composition of the locally constant module functor (assigning to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions) and the underlying object functor is fully faithf\"}\n  {\"name\": \"LightCondSet.fullyFaithfulSequentialToLightCondSet\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"LightCondSet.sequentialToLightCondSet.FullyFaithful\", \"doc\": \"The functor from sequential topological spaces to light condensed sets induces a bijection between hom-sets for all pairs of objects, meaning it is fully faithful. This implies that morphisms between \"}\n  {\"name\": \"CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CondensedSet.compactlyGeneratedToCondensedSet.FullyFaithful\", \"doc\": \"The canonical functor from compactly generated spaces to condensed sets is fully faithful, as established by the fact that the counit of the adjunction between these categories is an isomorphism. This\"}\n  {\"name\": \"CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Bousfield\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Abelian C]\\n  [inst_3 : CategoryTheory.Abelian D] {G : CategoryTheory.Functor D C}\\n  [inst_4 : CategoryTheory.Limits.PreservesFiniteLimits G] [inst_\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a right adjoint functor $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ preserving finite limits and colimits, and a fully faithful left adjoint $F : \\\\mathc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing the choice of a right adjoint identifies dualizing objects and transports the contravariant internal Hom duality on Weil pairs",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.ihomPoints_apply\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite) (x : ↑((A ⟹ B).val.obj (Opposite.op S))),\\n  (LightCondensed.ihomPoints R A B S) x =\\n    CategoryTheory.MonoidalClosed.uncurry\\n      (((LightCondensed.freeForgetAdjunction R).homEquiv ((CategoryTheory.coherentTopology Ligh\", \"doc\": \"For any commutative ring $ R $, light condensed $ R $-modules $ A $ and $ B $, and a light profinite space $ S $, the points of the internal hom-object $ [A, B] $ at $ S $ are given by uncurrying the \"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_apply\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite)\\n  (x : CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R A B S).symm x =\\n    (CategoryTheory.coherentTopology LightProfinite).yonedaEquiv\\n  \", \"doc\": \"For any objects $A, B$ in the category of light condensed $R$-modules and a light profinite space $S$, the inverse of the internal hom points map $\\\\text{ihomPoints}_R(A, B, S)$ evaluated at a morphism\"}\n  {\"name\": \"CategoryTheory.tensorRightAdjunction\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (Y Y' : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          CategoryTheory.MonoidalCategory.tensorRight Y ⊣ CategoryTheory.MonoidalCategory.tensorRight Y'\", \"doc\": \"Given dual objects $Y$ and $Y'$ in a monoidal category $\\\\mathcal{C}$, this establishes an adjunction between the functors $- \\\\otimes Y$ and $- \\\\otimes Y'$. Specifically, tensoring with the dual object\"}\n  {\"name\": \"CategoryTheory.bijection\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      [inst_1 : CategoryTheory.Category.{v₁, u₂} D] →\\n        (i : CategoryTheory.Functor D C) →\\n          [inst_2 : CategoryTheory.CartesianMonoidalCategory C] →\\n            [inst_3 : CategoryTheory.Reflective i] →\\n\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with $i: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ a reflective functor whose essential image forms an exponential ideal, there is a natural bijection between the h\"}\n  {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A B : LightCondMod R) →\\n      (S : LightProfinite) →\\n        ↑((A ⟹ B).val.obj (Opposite.op S)) ≃\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}\n  {\"name\": \"CategoryTheory.tensorLeftAdjunction\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (Y Y' : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          CategoryTheory.MonoidalCategory.tensorLeft Y' ⊣ CategoryTheory.MonoidalCategory.tensorLeft Y\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, given dual objects $Y$ and $Y'$ with an exact pairing, the left tensoring functor $\\\\mathcal{C} \\\\to \\\\mathcal{C}$ defined by tensoring with $Y'$ is left adjoi\"}\n  {\"name\": \"FGModuleCat.rightDual\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) → [inst : Field K] → (V : FGModuleCat K) → CategoryTheory.HasRightDual V\", \"doc\": \"For any field $ K $ and any finitely generated $ K $-module $ V $, the dual module $ \\\\text{Hom}_K(V, K) $ is a right dual of $ V $ in the category of finitely generated $ K $-modules. This establishes\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.MonoidalClosed C] (x : C),\\n  CategoryTheory.MonoidalClosed.internalHomAdjunction₂.adj x = CategoryTheory.ihom.adjunction x\", \"doc\": \"In a monoidal closed category $\\\\mathcal{C}$, for any object $X$, the adjunction between the curried tensor product functor $Y \\\\mapsto X \\\\otimes Y$ and the internal hom-functor $[X, -]$ coincides with \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil complexes Verdier duality independent of chosen structure right adjoint natural Hom bijection",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.cyclesOpNatIso\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \": opFunctor V c ⋙ cyclesFunctor Vᵒᵖ c.symm i ≅ (opcyclesFunctor V c i).op\", \"doc\": \"A natural isomorphism between the composition of the opposite complex functor with the cycles functor in the opposite category and the opposite of the right homology functor. Specifically, for each ho\"}\n  {\"name\": \"HomologicalComplex.homologyOpNatIso\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \": opFunctor V c ⋙ homologyFunctor Vᵒᵖ c.symm i ≅ (homologyFunctor V c i).op\", \"doc\": \"There is a natural isomorphism between the composition of the opposite complex functor followed by the homology functor on the opposite category, and the opposite of the homology functor. Specifically\"}\n  {\"name\": \"CategoryTheory.ShortComplex.rightHomologyFunctorOpNatIso_inv_app\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.RightHomology\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [inst_2 : CategoryTheory.Limits.HasKernels C] [inst_3 : CategoryTheory.Limits.HasCokernels C]\\n  [inst_4 : CategoryTheory.Limits.HasKernels Cᵒᵖ] [inst_5 : CategoryTheory.Limits.HasCoke\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms, kernels, and cokernels, the inverse of the natural isomorphism between the opposite of the right homology functor on short complexes and the compositi\"}\n  {\"name\": \"HomologicalComplex.opEquivalence_functor\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \"∀ {ι : Type u_1} (V : Type u_2) [inst : CategoryTheory.Category.{v_1, u_2} V] (c : ComplexShape ι)\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V],\\n  (HomologicalComplex.opEquivalence V c).functor = HomologicalComplex.opFunctor V c\", \"doc\": \"The opposite category of homological complexes in a category $ V $ with shape $ c $ is equivalent to the category of homological complexes in the opposite category $ V^\\\\text{op} $ with symmetric shape\"}\n  {\"name\": \"CategoryTheory.ShortComplex.rightHomologyFunctorOpNatIso\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.RightHomology\", \"type\": \": (rightHomologyFunctor C).op ≅ opFunctor C ⋙ leftHomologyFunctor Cᵒᵖ\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms, kernels, and cokernels, there exists a natural isomorphism between the opposite of the right homology functor on short complexes and the composition o\"}\n  {\"name\": \"HomologicalComplex.cyclesOpIso\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \": K.op.cycles i ≅ op (K.opcycles i)\", \"doc\": \"For a homological complex $ K $ with homology at index $ i $, the cycles of the opposite complex $ K^\\text{op} $ at $ i $ are isomorphic to the opposite of the right homology object of $ K $ at $ i $. \"}\n  {\"name\": \"HomologicalComplex.cyclesOpNatIso_hom_app\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \"∀ {ι : Type u_1} (V : Type u_2) [inst : CategoryTheory.Category.{v_1, u_2} V] (c : ComplexShape ι)\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V] [inst_2 : CategoryTheory.CategoryWithHomology V] (i : ι)\\n  (X : (HomologicalComplex V c)ᵒᵖ),\\n  (HomologicalComplex.cyclesOpNatIso V c i).hom.app X \", \"doc\": \"For any homological complex $ X $ in the opposite category, the hom component of the natural isomorphism between cycles of the opposite complex and the opposite of the right homology functor at index \"}\n  {\"name\": \"HomologicalComplex.homologyOp_hom_naturality\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \": homologyMap ((opFunctor _ _).map φ.op) _ ≫ (K.homologyOp i).hom = (L.homologyOp i).hom ≫ (homologyMap φ i).op\", \"doc\": \"For a homological complex $ K $ with homology at index $ i $, there exists an isomorphism between the homology object of its opposite complex $ K^\\\\text{op} $ at index $ i $ and the opposite of the hom\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdierDual\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|verdierDual|WeilComplex",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|verdierDual|WeilComplex",
+   "results": "[grep] OK 0 hit(s). ",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: adjunction uniqueness is already the separate leaf det-sp-unique-right-adjoint; condensed adjunctions and rigid tensor duals do not state the constructible Weil assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality on Frobenius equivariant constructible complexes is independent of the choice of exceptional right adjoint",
+   "results": "[leansearch] OK 8 hit(s). CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app, CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: adjunction uniqueness is already the separate leaf det-sp-unique-right-adjoint; condensed adjunctions and rigid tensor duals do not state the constructible Weil assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdierDual\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: adjunction uniqueness is already the separate leaf det-sp-unique-right-adjoint; condensed adjunctions and rigid tensor duals do not state the constructible Weil assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality on constructible Frobenius fixed pairs for any chosen right adjoint of compact support gives natural biduality and bijections on morphisms",
+   "results": "[leanfinder] OK 8 hit(s). CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, CondensedSet.compactlyGeneratedAdjunction, CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.adjunction",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: adjunction uniqueness is already the separate leaf det-sp-unique-right-adjoint; condensed adjunctions and rigid tensor duals do not state the constructible Weil assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing a dualizing object by an isomorphism transports contravariant internal Hom duality and the Hom bijections",
+   "results": "[leanfinder] OK 8 hit(s). CategoryTheory.rightDualIso, CategoryTheory.leftDualIso, CategoryTheory.exactPairingCongrRight, CategoryTheory.exactPairingCongrLeft, CategoryTheory.exactPairingCongr, CategoryTheory.hasRightDualOfEquivalence, CategoryTheory.tensorRightHomEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj",
+   "date": "2026-10-24",
+   "verdict": "no match for this item: adjunction uniqueness is already the separate leaf det-sp-unique-right-adjoint; condensed adjunctions and rigid tensor duals do not state the constructible Weil assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-upper-shriek-verdier-conjugate",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "via": [
+    "lem-sf-weil-upper-shriek-verdier-conjugate"
+   ],
+   "place": "Proof Step 2: the two Hom bijections by Verdier anti-equivalence; arbitrary chosen structure adjoints are normalized before using those bijections. Canonical Weil biduality is supplied by cor-coef-verdier-weil-equivariance.proof.md, paragraphs 1–2."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-weil-chosen-duality-hom",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and split it without new nodes. Reused counit-normalized right-adjoint uniqueness and canonical equivariant biduality; wrote out the internal-Hom postcomposition Weil equation, the transported biduality map, and conjugation identifying the Hom bijection with the specified arrow action. Read current blueprint and live project Lean; no finished attachment exists.",
+  "blueprint": "lem-a1-local-boundary-duality proof Step 2, its two Verdier Hom bijections, via lem-sf-weil-upper-shriek-verdier-conjugate; canonical input is cor-coef-verdier-weil-equivariance proof paragraphs 1–2. Filled the previously null ancestor using the parent's explicit blueprint record.",
+  "tool_uses": [
+   {
+    "node": "cor-coef-verdier-weil-equivariance",
+    "why": "Canonical Weil equivariance of structure adjunction and biduality is a generic fixed-pair lifting tool; geometric biduality remains the unit route. This assertion is explicitly assumed in the item and no node of the unit supplies its Weil lift."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "The standard internal-Hom Weil lift is the generic operation-equivariance tool used to verify postcomposition by n; the unit supplies geometric duality rather than this equivariance calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-coef-verdier-weil-equivariance",
+  "lem-fix-weil-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-a301a149f",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-a301a149f (reviewer sub-agent of L); spot-checked: I read the item and all four cited nodes in full (statements plus blueprint_update), and the latest blueprint sources: the cor-coef-verdier-weil-equivariance proof, paragraphs 1-2, and the lem-a1-local-boundary-duality proof, Step 2. The item is still unsplit in live, so this delivery is not superseded. The statement and stmt_deps are unchanged from the base, and proof_deps is exactly the union of the step uses. Step 1: the corollary covers separated finite-type T0 at Lambda=Qlb and gives the lifted adjunction F -| J^can and the Weil biduality b, from which C is an anti-equivalence. det-sp-unique-right-adjoint (rightAdjointUniq) gives alpha with eps^can F(alpha)=eps on the pair categories, so n=alpha at the unit is a Weil isomorphism. Step 2: c=H(1,n) uses the arrow action in the definition node. RHom(K,omega) is isomorphic to RHom(K,omega^can), which is constructible, so the domain is preserved. The lift H(theta^-1,theta)h is the canonical internal-Hom Weil structure, matching the blueprint's dual Weil structure D(theta^-1) composed with the g^* comparison; the three equalities and naturality check. Step 3: I re-derived the types and naturality of delta=D(c_K)c_{CK}^-1 b_K using naturality of c at v=C(u); both are correct. Step 4: D(u)=c_A^-1 C(u) c_B, so the Hom bijection and its naturality hold. Edge cases: the point with a rescaled adjunction (n is not the identity), J=J^can (delta=b), and the empty scheme all work. The statement asks only for a biduality to exist, and the parent's Step 1 needs only that. There are no new nodes; the duplicates the worker considered are correctly rejected. I accept the tool_uses cor-coef-verdier-weil-equivariance (already a base stmt_dep) and lem-fix-weil-operations (generic Weil lift of internal Hom). No SGA source is cited. Batch-5 check: lem-fix-weil-operations reaches lem-trf-site-functorial-flat-resolution, which only states functorial flat resolutions of module sheaves on a site. That is general homological algebra, not the trace formula or Poincare duality, and lem-fix-weil-operations is already in the proof_deps of the base-cited corollary, so the closure is unchanged. The citation is genuinely outside the assumed statements. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.WeilChosenDualityHom",
+  "declaration": "WeilConjectures.SfWeilChosenDuality.chosen_duality_hom",
+  "declarations": [
+   "WeilConjectures.SfWeilChosenDuality.pairDual",
+   "WeilConjectures.SfWeilChosenDuality.Carrier",
+   "WeilConjectures.SfWeilChosenDuality.Pairs",
+   "WeilConjectures.SfWeilChosenDuality.geometricDual",
+   "WeilConjectures.SfWeilChosenDuality.geometricOmega",
+   "WeilConjectures.SfWeilChosenDuality.IsCoefficientUnit",
+   "WeilConjectures.SfWeilChosenDuality.IsHomLift",
+   "WeilConjectures.SfWeilChosenDuality.structureLeft",
+   "WeilConjectures.SfWeilChosenDuality.structureRight",
+   "WeilConjectures.SfWeilChosenDuality.ChosenConclusion",
+   "WeilConjectures.SfWeilChosenDuality.CanonicalHomComparison",
+   "WeilConjectures.SfWeilChosenDuality.chosen_duality_hom"
+  ],
+  "file": "lean/Sheaf/SixFunctors/WeilChosenDualityHom.lean",
+  "statement": "theorem chosen_duality_hom : ∃ (B : CoefVerdierWeil.FiberDuality D l hl Ω T₀) (IH : CoefVerdierWeil.FiberInternalHom D l hl Ω T₀ B) (W : CoefVerdierWeil.Coefficients D l hl Ω T₀ B), CoefVerdierWeil.DualizingNormalization D l hl Ω T₀ B W ∧ ∀ c₀ : Compactification (CoefVerdierWeil.structureModel D T₀).left, ∃ (A : CoefVerdierWeil.FiberExceptional D l hl Ω T₀ (CoefVerdierWeil.structureModel D T₀) (FrobeniusExchange.geometricCompactification D (CoefVerdierWeil.structureModel D T₀) c₀)) (Z : CoefVerdierWeil.FrobeniusAdjunctions D l hl Ω T₀ (CoefVerdierWeil.structureModel D T₀) c₀ A) (adjCan : structureLeft D l hl Ω T₀ c₀ A Z ⊣ structureRight D l hl Ω T₀ c₀ A Z), (∀ K : Pairs D l hl Ω T₀, HEq (adjCan.unit.app K).hom.f (A.adjunction.unit.app K.carrier)) ∧ (∀ M : Pairs D l hl Ω (CoefVerdierWeil.pointModel D), HEq (adjCan.counit.app M).hom.f (A.adjunction.counit.app M.carrier)) ∧ ∃ (unit : Pairs D l hl Ω (CoefVerdierWeil.pointModel D)), IsCoefficientUnit D l hl Ω unit ∧ ∃ iω : geometricOmega D l hl Ω T₀ B W ≅ (structureRight D l hl Ω T₀ c₀ A Z).obj unit, ∃ (permitted : ∀ K : Carrier D l Ω T₀, commonStageHomPairs l Ω (D.geometricFiber T₀).left (op K, ((structureRight D l hl Ω T₀ c₀ A Z).obj unit).carrier)) (C : (Pairs D l hl Ω T₀)ᵒᵖ ⥤ Pairs D l hl Ω T₀), IsHomLift D l hl Ω T₀ ((structureRight D l hl Ω T₀ c₀ A Z).obj unit) permitted C ∧ CanonicalHomComparison D l hl Ω T₀ c₀ A Z B IH W unit iω permitted C ∧ ∀ (J : Pairs D l hl Ω (CoefVerdierWeil.pointModel D) ⥤ Pairs D l hl Ω T₀) (adj : structureLeft D l hl Ω T₀ c₀ A Z ⊣ J), ChosenConclusion D l hl Ω T₀ c₀ A Z adjCan unit permitted C J adj",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All categories are the recorded common-stage Frobenius fixed-pair categories. The canonical and chosen dual functors have the actual internal-Hom carriers and arrow maps, and their natural comparison has the component H(identity,n) with n exactly the component of rightAdjointUniq. Canonical compact support, its mate lift and adjunction are normalized to the dependency; the coefficient-unit Frobenius is normalized by the specified unitor. Auxiliary predicates package only this owning assertion; no new notion or dependency repair is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a95e26776",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Node record: lean-only change; statement verbatim; docstrings with source, blueprint id and 4 proof steps; only sorry is the theorem proof; no hollow defs or new nodes. Clause check: fixed-pair common-stage categories; separated finite-type T0 with no extra hypotheses; independent universes u/v; lifted compact support/right adjoint = mapOfNatIso Z.common.left/right with adjCan unit/counit HEq to A.adjunction; unit Frobenius pinned by the unitor equation; for all J and adj, n = (adj.rightAdjointUniq adjCan).app unit; V and C carriers/maps = actual homDual; c components = H(1,n), which pins V's Frobenius; C's Frobenius pinned via CanonicalHomComparison to W.common.comparison, which comparison_evaluation and InternalHom.universal make the standard lift; IsEquivalence, Nonempty biduality iso, Hom bijection u ↦ V.map u.op and two-variable naturality. Edge cases: rescaled adjunction, empty scheme, rational theta. Advisory: B lacks FiberDualizing (harmless via iω); homDual is reached through the cited FiberInternalHom interface. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261024T223312-L-1577197",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

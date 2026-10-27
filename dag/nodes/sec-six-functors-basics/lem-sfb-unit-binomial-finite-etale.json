@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-unit-binomial-finite-etale",
+ "kind": "statement",
+ "title": "Finite etale algebra of a root of a unit",
+ "statement": "Let $R$ be a commutative ring, $n\\geq1$ an integer whose image in $R$ is a unit, and $u\\in R^\\times$. Set $B=R[T]/(T^n-u)$, with its canonical $R$-algebra structure, using the polynomial ring [def-weil-polynomial-ring] and quotient algebra [def-weil-pbc-algebra-hom-quotient]. Then $B$ is free as an $R$-module with basis $1,t,\\ldots,t^{n-1}$, where $t$ is the class of $T$, and the canonical morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ is finite, surjective and etale [def-weil-affine-spectrum, def-weil-finite-integral-morphism, def-weil-surjective-morphism, def-weil-etale-morphism]. The zero ring and $n=1$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PL, lemma-kummer-sequence, proof: the explicit unit-root algebra A[T]/(T^n-a) is finite free of rank n, surjective, and standard etale because nT^{n-1} is invertible."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Put f=X^n-C(u). Since n>=1, f is monic. If R is nontrivial, its natural degree is n, so the Mathlib power basis AdjoinRoot.powerBasis' of [lem-weil-pbc-monic-quotient-free], reindexed along natDegree f=n, is the requested Fin n-indexed basis with b_i=t^i. If R is the zero ring, the quotient is a singleton module and Module.Basis.uniqueBasis gives the basis on the same index type; all its values equal t^i.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence, proof: the explicit unit-root algebra A[T]/(T^n-a) is finite free of rank n, surjective, and standard etale because nT^{n-1} is invertible."
+   }
+  },
+  {
+   "text": "The monic quotient is a finite module by Polynomial.Monic.finite_adjoinRoot, the finiteness clause of [lem-weil-pbc-monic-quotient-free]. Translate this through RingHom.finite_algebraMap and [lem-weil-pbc-spec-finite-ring-map-finite] to obtain the finite spectrum morphism.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-spec-finite-ring-map-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence, proof: the explicit unit-root algebra A[T]/(T^n-a) is finite free of rank n, surjective, and standard etale because nT^{n-1} is invertible."
+   }
+  },
+  {
+   "text": "The polynomial has nonzero degree: it has degree n over a nontrivial ring, while over the zero ring its degree is bottom, which is also different from zero. Apply the proved source helper AdjoinRoot.faithfullyFlat_of_monic (WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic). This is the finite-free argument from [lem-weil-pbc-monic-quotient-free]: a nonempty basis makes the quotient nontrivial over a nontrivial base, hence its free-module flatness is faithful; over a zero base the maximal-ideal condition is vacuous. RingHom.faithfullyFlat_algebraMap_iff and flat_and_surjective_SpecMap_iff give surjectivity, implementing [lem-weil-pbc-faithfully-flat-surjective-spectrum] and [def-weil-surjective-morphism].",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence, proof: the explicit unit-root algebra A[T]/(T^n-a) is finite free of rank n, surjective, and standard etale because nT^{n-1} is invertible."
+   }
+  },
+  {
+   "text": "Apply the already proved source specialization AdjoinRoot.etale_X_pow_sub_C with n!=0, the given IsUnit(n:R), and u.isUnit. This helper is audited as closed under [lem-sc-kummer-exact] and proves Algebra.Etale R (AdjoinRoot f), including the zero ring and n=1, using the standard-etale pair (f,1) and its derivative certificate. RingHom.etale_algebraMap and HasRingHomProperty.Spec_iff (P:=Etale) give [def-weil-etale-morphism] for the canonical spectrum map. Conjoin this with the basis, finiteness and surjectivity already proved.",
+   "uses": [
+    "lem-sc-kummer-exact",
+    "def-weil-etale-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence, proof: the explicit unit-root algebra A[T]/(T^n-a) is finite free of rank n, surjective, and standard etale because nT^{n-1} is invertible."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-surjective-morphism",
+  "lem-sc-kummer-exact",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PL, lemma-kummer-sequence, affine unit-root paragraph; Lean assembly using Mathlib power bases and finite/spectrum equivalences, and the proved source helpers AdjoinRoot.faithfullyFlat_of_monic and AdjoinRoot.etale_X_pow_sub_C. The latter is audited under lem-sc-kummer-exact. The two extracted tensor-coordinate and inverse-derivative presentation lemmas are not needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring R and units n and u the binomial quotient R[X]/(X^n-u) is a finite etale R algebra of rank n",
+   "results": "8 hits; Algebra.instIsStandardEtale, StandardEtalePair.Ring, StandardEtalePair.instEtaleRing, Algebra.instIsStandardEtaleRing, Algebra.IsStandardEtale, StandardEtalePair, Algebra.instEtaleOfIsStandardEtale, StandardEtalePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.free_adjoinRoot and finite_adjoinRoot give the module clauses; StandardEtalePair.instEtaleRing requires constructing a presentation and proving the derivative certificate and quotient equivalence. That is not a one-line specialization giving this whole statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdjoinRoot\", \"Etale\"",
+   "results": "1 hits; StandardEtalePair.equivAwayAdjoinRoot",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.free_adjoinRoot and finite_adjoinRoot give the module clauses; StandardEtalePair.instEtaleRing requires constructing a presentation and proving the derivative certificate and quotient equivalence. That is not a one-line specialization giving this whole statement."
+  },
+  {
+   "tool": "grep",
+   "query": "etale|finite|basis",
+   "results": "0 hits; ; Mathlib/RingTheory/AdjoinRoot",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.free_adjoinRoot and finite_adjoinRoot give the module clauses; StandardEtalePair.instEtaleRing requires constructing a presentation and proving the derivative certificate and quotient equivalence. That is not a one-line specialization giving this whole statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monic polynomial quotient is finite etale when its derivative is a unit adjoin root",
+   "results": "8 hits; Polynomial.Monic.free_adjoinRoot, AdjoinRoot.isAdjoinRootMonic, AdjoinRoot.isAdjoinRootMonic.congr_simp, Polynomial.Monic.finite_adjoinRoot, IsAdjoinRootMonic.noConfusion, AdjoinRoot.isAdjoinRoot, IsAdjoinRootMonic.noConfusionType, IsAdjoinRootMonic.monic",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.free_adjoinRoot and finite_adjoinRoot give the module clauses; StandardEtalePair.instEtaleRing requires constructing a presentation and proving the derivative certificate and quotient equivalence. That is not a one-line specialization giving this whole statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monogenic algebra defined by a monic polynomial with invertible derivative is finite etale; apply to X^n minus a unit",
+   "results": "8 hits; Algebra.instIsStandardEtale, Algebra.IsStandardEtale, Algebra.instEtaleOfIsStandardEtale, StandardEtalePair.instEtaleRing, Algebra.instIsStandardEtaleRing, StandardEtalePair, StandardEtalePair.instAlgebraRing, StandardEtalePair.g",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.free_adjoinRoot and finite_adjoinRoot give the module clauses; StandardEtalePair.instEtaleRing requires constructing a presentation and proving the derivative certificate and quotient equivalence. That is not a one-line specialization giving this whole statement."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoinRoot.*[Ee]tale|[Ee]tale.*adjoinRoot|[Ee]tale.*[Xx].*pow|[Xx].*pow.*[Ee]tale",
+   "results": "7 hits; Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean; Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.Monic.free_adjoinRoot and finite_adjoinRoot give the module clauses; StandardEtalePair.instEtaleRing requires constructing a presentation and proving the derivative certificate and quotient equivalence. That is not a one-line specialization giving this whole statement."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoinRoot.*[Ee]tale|[Ee]tale.*adjoinRoot|[Ee]tale.*[Xx].*pow|[Xx].*pow.*[Ee]tale",
+   "results": "7 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: standard etale presentation and monic-quotient ingredients only; explicit derivative unit, faithful-flat coordinates, and scheme conclusions still require the argument written here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining an nth root of a unit gives a finite etale surjective cover when n is invertible",
+   "results": "8 hits: IsPrimitiveRoot.adjoin_isCyclotomicExtension, isCyclotomicExtension_singleton_iff_eq_adjoin, IsCyclotomicExtension.adjoin_roots_cyclotomic_eq_adjoin_nth_roots, IsCyclotomicExtension.iff_singleton, IsPrimitiveRoot.intermediateField_adjoin_isCyclotomicExtension, IsAdjoinRoot.casesOn, root_X_pow_sub_C_pow, CyclotomicRing",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: standard etale presentation and monic-quotient ingredients only; explicit derivative unit, faithful-flat coordinates, and scheme conclusions still require the argument written here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdjoinRoot\", \"Etale\"",
+   "results": "1 hits: StandardEtalePair.equivAwayAdjoinRoot",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: standard etale presentation and monic-quotient ingredients only; explicit derivative unit, faithful-flat coordinates, and scheme conclusions still require the argument written here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring R, a positive integer n invertible in R, and a unit u, the algebra R[X]/(X^n-u) has power basis of length n and Spec is finite surjective etale",
+   "results": "8 hits: Algebra.instIsStandardEtale, StandardEtalePair.Ring, Algebra.IsStandardEtale, StandardEtalePair, StandardEtalePresentation, Algebra.instIsStandardEtaleRing, StandardEtalePair.instEtaleRing, Algebra.instEtaleOfIsStandardEtale",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: standard etale presentation and monic-quotient ingredients only; explicit derivative unit, faithful-flat coordinates, and scheme conclusions still require the argument written here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient by a monic polynomial is a finite free module, and the quotient algebra is etale if the derivative is invertible at the adjoined root",
+   "results": "8 hits: StandardEtalePair.instEtaleRing, Algebra.instIsStandardEtaleRing, Algebra.instEtaleOfIsStandardEtale, StandardEtalePair.Ring, Algebra.IsStandardEtale, Algebra.instIsStandardEtale, StandardEtalePresentation, Algebra.IsStandardEtale.nonempty_standardEtalePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: standard etale presentation and monic-quotient ingredients only; explicit derivative unit, faithful-flat coordinates, and scheme conclusions still require the argument written here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-radical-curve-normalization",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, the normalization cover is etale away from the zeros and poles; unit-root models supply that open cover.",
+   "via": [
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-unit-binomial-finite-etale",
+  "worker": "stage1 Q64",
+  "summary": "Q64 repairs the 2026-10-22 re-split return. Statement unchanged. Two comparable independent argument blocks are extracted as unsplit statement-only nodes: power-quotient coordinates and faithful flatness, and derivative units with inverse-generator elimination. Four-step assembly has 1646 characters. Every argument of the former seven steps is allocated explicitly in report.md; no Lean is written or compiled.",
+  "blueprint": "Realizes the unit-root input in lem-sfb-tame-radical-curve-normalization, proof step 4 (successive finite etale radical covers off the branch divisor), on the recorded direct-image alteration branch of det-thm-sf-ctf-stability-direct-images (3). The inherited blueprint ancestor is null, exactly as blueprint_refs.py ancestor reports; its concrete from.place and via are retained. Re-split allocation: first new node carries the finite-free/faithfully-flat construction; second new node carries the derivative-inverse algebra presentation; the item retains the spectrum-map assembly and empty-spectrum case. Ancestor and inherited via chain unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-30c20b931",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-30c20b931 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, Stacks 03PL (etale-cohomology.tex lemma-kummer-sequence) and algebra.tex 00HB, 00UB and 00UC. The item is legitimately open again: the human re-split note (released, stage 1, batch5) came after Q51's S1 landing and N9's S2 landing, and the Lean theorem still has sorry. The item is in no dropped list and no SGA source is used.\n\nThe re-split meets the note. Each old step has a new place:\n- Old 2 and 4, plus the zero-ring basis from old 1, go into lem-sfb-monic-quotient-faithful-tensor-coordinates: the d-indexed power basis, the explicit B⊗N≅N^d with its inverse and naturality, and the exactness equivalence with faithful flatness (definition as in 00HB(2)).\n- Old 6 and the α/β algebra of old 7 go into lem-sfb-unit-binomial-derivative-presentation.\n- Old 3 and 5 become item step 2. The empty-spectrum étale case becomes step 3. Standard-étale (1) plus the spectrum iso becomes step 4.\nNothing is dropped. The two nodes are of comparable size and neither restates the item, since neither has a scheme conclusion. The assembly is 1646 characters.\n\nChecks:\n- Node B identities by hand: t(vt^{n-1})=vu=1 and f'(t)h=(na)(t·vt^{n-1})^{n-1}=1. α and β are well defined, αβ=id, and βα=id because inverses are unique.\n- Small cases: n=1, the zero ring, d=1 (unitor), and Z[T]/T^2. d=0 is correctly excluded.\n- The cited leaves (spec-finite, faithfully-flat surjective spectrum, standard-etale-monic-derivative (1)) say exactly what each step uses.\n\nSearches and form:\n- No DAG duplicate in the snapshot, live or side-live trees.\n- No full Mathlib match. The free nontrivial FaithfullyFlat instance and StandardEtalePair.equivAwayAdjoinRoot are only ingredients.\n- Searches cover leansearch, loogle and leanfinder; the first runs were unavailable, later ones succeeded. Grep was also run.\n- Blueprint: ancestor null, via=[item]+the item's via.\n\nMinor, not fixed: node B writes ū without introducing it. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnitBinomialFiniteEtale",
+  "declaration": "AlgebraicGeometry.unitBinomial_finite_surjective_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitBinomialFiniteEtale.lean",
+  "statement": "theorem unitBinomial_finite_surjective_etale (R : Type u) [CommRing R] (n : ℕ) (hn : 1 ≤ n) (hnR : IsUnit (n : R)) (u : Rˣ) : (∃ b : Module.Basis (Fin n) R (AdjoinRoot (Polynomial.X ^ n - Polynomial.C (u : R))), ∀ i : Fin n, b i = AdjoinRoot.root (Polynomial.X ^ n - Polynomial.C (u : R)) ^ (i : ℕ)) ∧ IsFinite (Spec.map (CommRingCat.ofHom (algebraMap R (AdjoinRoot (Polynomial.X ^ n - Polynomial.C (u : R)))))) ∧ Surjective (Spec.map (CommRingCat.ofHom (algebraMap R (AdjoinRoot (Polynomial.X ^ n - Polynomial.C (u : R)))))) ∧ Etale (Spec.map (CommRingCat.ofHom (algebraMap R (AdjoinRoot (Polynomial.X ^ n - Polynomial.C (u : R))))))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9df96863",
+  "group": "N9",
+  "result": "pass",
+  "note": "Single module Sheaf.AlgebraicGeometry.UnitBinomialFiniteEtale, theorem unitBinomial_finite_surjective_etale (sorry). Node identical to live except the new lean record (statement verbatim with file); repairs 07bac48b6421 RETURN, Q51 split/review preserved. Clauses match node and Stacks 03PL: CommRing R : Type u with no Nontrivial, 1 ≤ n, IsUnit (n:R), u : Rˣ, B = AdjoinRoot (X^n - C u) with canonical algebra, Basis (Fin n) with b i = root^i, IsFinite/Surjective/Etale of Spec.map (algebraMap). Zero ring, n=1, char cases correct; n=0 excluded as in node. Deps are Mathlib nodes; algebra-hom-quotient lean null with mathlib_match, as at landed citers. No hollow defs, docstrings with source/blueprint and 7-step proof, no extra assumptions, no full-statement duplicate (upstream etale_X_pow_sub_C covers only the étale clause). Advisory: unused proof-input plain imports. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T065419-L-2931215",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

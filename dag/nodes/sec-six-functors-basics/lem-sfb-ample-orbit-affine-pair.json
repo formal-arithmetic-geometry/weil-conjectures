@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-ample-orbit-affine-pair",
+ "kind": "statement",
+ "title": "Two ample principal affine opens avoiding an orbit boundary",
+ "statement": "Let $Y$ be a nonempty Noetherian scheme [def-pc-scheme], meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme], with topological Krull dimension at most one [def-kun-topological-krull-dimension]. Let $L$ be an ample invertible $\\mathcal O_Y$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module], and let $G$ be a finite group acting on $Y$ by scheme automorphisms. No base field, separatedness or faithfulness is assumed. For a section $s$ of an invertible module put $Y_s=\\{y:s(y)\\ne0\\}$, where $s(y)$ is its value in the residue-field fibre [def-weil-residue-field], and let $Z(s)=Y\\setminus Y_s$. The set $E$ of generic points of irreducible components of $Y$ [def-weil-irreducible-components] is finite and nonempty. There exist positive integers $p,q$ and sections $u\\in\\Gamma(Y,L^{\\otimes p})$, $v\\in\\Gamma(Y,L^{\\otimes q})$ such that $U=Y_u$ and $V=Y_v$ are affine, $E\\subseteq U\\cap V$, $Z=Y\\setminus U$ is a finite set of closed points of $Y$, and the finite set $T=\\bigcup_{g\\in G}g^{-1}Z$ satisfies $h^{-1}T=T$ for every $h\\in G$ and $T\\subseteq V$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Agent construction from Tag 09NV (lemma-ample-finite-set-in-principal-affine), applied first to the component generic points and then to their union with the orbit boundary. This is the preparation in original steps 1-4 of the item, serving de Jong §3.4(b); the complete retained argument and other local sources are in the repair report."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-residue-field",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], the underlying space of $Y$ is Noetherian. Apply [lem-sc-noetherian-closed-subset-finite-components] to the closed subset $Y$: its irreducible components form a finite covering $C_1,\\ldots,C_r$. Since $Y$ is nonempty, $r>0$. By [lem-weil-pbc-scheme-sober], each $C_i$ has exactly one generic point $\\eta_i$. Thus $E=\\{\\eta_1,\\ldots,\\eta_r\\}$ is finite and nonempty. Sobriety also implies $T_0$: equal point closures would have two generic points unless the points were equal.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 09NV, lemma-ample-finite-set-in-principal-affine, applied twice; Noetherian component and dimension argument using Tags 01OZ, 0BA8, 0AAX and Schemes Tag 01IS"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-ample-finite-principal-affine] to the ample module $L$, the finite subset $E$, and the open $W=Y$. Obtain $p>0$ and $u\\in\\Gamma(Y,L^{\\otimes p})$ with $U=Y_u$ affine and $E\\subseteq U$. In particular $Z=Y\\setminus U$ is closed and contains no $\\eta_i$.",
+   "uses": [
+    "lem-sc-ample-finite-principal-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 09NV, lemma-ample-finite-set-in-principal-affine, applied twice; Noetherian component and dimension argument using Tags 01OZ, 0BA8, 0AAX and Schemes Tag 01IS"
+   }
+  },
+  {
+   "text": "We check $\\dim Z\\le0$ directly from [def-kun-topological-krull-dimension]. If $A\\subsetneq B$ were irreducible closed subsets of $Z$, they would be irreducible closed in $Y$ since $Z$ is closed. As $B=\\bigcup_i(B\\cap C_i)$ is a finite closed cover, irreducibility forces $B\\subseteq C_i$ for some $i$. Moreover $B\\ne C_i$, since $\\eta_i\\notin Z$. Then $A\\subsetneq B\\subsetneq C_i$ is a length-two chain in $Y$, contradicting $\\dim Y\\le1$. Thus no positive-length chain exists in $Z$ (including $Z=\\varnothing$). Now apply [lem-sc-zero-dim-noetherian-closed-finite] to this closed subset of the Noetherian $T_0$ space established in step 1: $Z$ is finite and every point of $Z$ is closed in $Y$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-sc-zero-dim-noetherian-closed-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 09NV, lemma-ample-finite-set-in-principal-affine, applied twice; Noetherian component and dimension argument using Tags 01OZ, 0BA8, 0AAX and Schemes Tag 01IS"
+   }
+  },
+  {
+   "text": "For each $g\\in G$, the action of $g$ is a bijection with inverse the action of $g^{-1}$, so $g^{-1}Z$ is the image of the finite set $Z$ under this inverse bijection. Therefore $T=\\bigcup_{g\\in G}g^{-1}Z$ is finite. For every $h\\in G$, $h^{-1}T=\\bigcup_{g\\in G}(gh)^{-1}Z=T$, since right multiplication $g\\mapsto gh$ permutes $G$. This uses only finite unions and the action law; no faithfulness is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 09NV, lemma-ample-finite-set-in-principal-affine, applied twice; Noetherian component and dimension argument using Tags 01OZ, 0BA8, 0AAX and Schemes Tag 01IS"
+   }
+  },
+  {
+   "text": "The set $E\\cup T$ is finite. Apply [lem-sc-ample-finite-principal-affine] again, with the same ample module $L$ and open $W=Y$, to obtain $q>0$ and $v\\in\\Gamma(Y,L^{\\otimes q})$ with $V=Y_v$ affine and $E\\cup T\\subseteq V$. Consequently $E\\subseteq U\\cap V$ and $T\\subseteq V$, which supplies all remaining clauses.",
+   "uses": [
+    "lem-sc-ample-finite-principal-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 09NV, lemma-ample-finite-set-in-principal-affine, applied twice; Noetherian component and dimension argument using Tags 01OZ, 0BA8, 0AAX and Schemes Tag 01IS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-sc-ample-finite-principal-affine",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-zero-dim-noetherian-closed-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 09NV, lemma-ample-finite-set-in-principal-affine, applied twice; Noetherian component and dimension argument using Tags 01OZ, 0BA8, 0AAX and Schemes Tag 01IS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a finite type scheme of dimension at most one over any field an ample line bundle has two sections of a common positive power with affine nonvanishing opens and disjoint finite group orbit zero sets",
+   "results": "8 hits; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ample invertible sheaf on a curve choose two affine principal opens avoiding all translates of their complements over finite fields",
+   "results": "8 hits; AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.of_affine_open_cover, AlgebraicGeometry.Scheme.isBasis_affineOpens, AlgebraicGeometry.Scheme.AffineOpenCover, AlgebraicGeometry.IsAffineOpen.self_le_iSup_basicOpen_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAmple, AlgebraicGeometry.IsAffineOpen",
+   "results": "0 hits; ; loogle: unknown identifier 'AlgebraicGeometry.IsAmple'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|orbit.*zero|zero.*orbit",
+   "results": "0 hits; ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample line bundle on a finite type curve has two principal affine neighbourhoods, the second contains every translate of the finite complement of the first",
+   "results": "8 hits; AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop, AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le, AlgebraicGeometry.Scheme.openCoverBasicOpenTop, AlgebraicGeometry.Scheme.affineOpenCover_X",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf on a Noetherian scheme of dimension at most one admits two principal affine opens with the second containing the finite group orbit of the complement of the first",
+   "results": "8 hits; AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen, AlgebraicGeometry.isAffineOpen_of_isAffineOpen_basicOpen, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx, AlgebraicGeometry.IsAffineOpen.basicOpen_union_eq_self_iff, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier, AlgebraicGeometry.IsAffineOpen.self_le_basicOpen_union_iff, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the two ample-power sections and the orbit-boundary containment"
+  },
+  {
+   "tool": "grep",
+   "query": "ample|Ample|orbit.*affine|affine.*orbit",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the two ample-power sections and the orbit-boundary containment"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two affine nonvanishing opens of powers of an ample line bundle on a Noetherian curve, with a finite group orbit boundary contained in the second open",
+   "results": "8 hits; AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.IsAffineOpen.sup_of_disjoint, AlgebraicGeometry.isAffineOpen_of_isAffineOpen_basicOpen, AlgebraicGeometry.exists_basicOpen_le_affine_inter, AlgebraicGeometry.Scheme.isBasis_affineOpens, AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the two ample-power sections and the orbit-boundary containment"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsAffineOpen",
+   "results": "0 hits; ; loogle: unknown identifier 'IsAffineOpen'",
+   "date": "2026-10-23",
+   "verdict": "invalid query: unknown unqualified identifier; corrected qualified query also run"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bIsAmple\\b|ample.*invertible|orbit.*[Aa]ffine",
+   "results": "0 hits; ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the two ample-power sections and the orbit-boundary containment"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.Scheme",
+   "results": "12 hits; AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.isAffineOpen_opensRange, AlgebraicGeometry.Scheme.AffineOpenCover.ofIsOpenCover, AlgebraicGeometry.Scheme.AffineOpenCover.ofIsOpenCover_I₀, AlgebraicGeometry.IsAffineOpen.isCompact, AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion, AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion, AlgebraicGeometry.isAffineOpen_top",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the two ample-power sections and the orbit-boundary containment"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian space of dimension at most one a closed subset missing every irreducible component generic point is a finite set of closed points; apply ample finite-set section neighbourhoods twice",
+   "results": "8 hits; genericPoints.finite, TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible, TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, TopologicalSpace.NoetherianSpace.exists_finset_irreducible, TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent, TopologicalSpace.NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration supplies the two ample-power sections and the orbit-boundary containment"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ample-curve-two-section-pencil",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "§3.4(b), printed p.606, the special-fibre finite-pencil input, strengthened to disjoint orbit zero loci for products of translates. Supporting local source: Stacks coherent.tex, Tag 02O1, lemma-kill-by-twisting, for high-power restriction to a finite zero locus. This is the norm-section replacement inside the same local-pencil construction; no quotient existence is assumed. Original item steps 1-4: finite component generic set; first 09NV open, zero-dimensional finite boundary, second 09NV open through its full orbit.",
+   "via": [
+    "lem-sfb-ample-curve-two-section-pencil",
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ample-orbit-affine-pair",
+  "worker": "stage1",
+  "summary": "Checked the full Noetherian, dimension-at-most-one statement without field, separatedness, reducedness or faithful-action hypotheses. Reused the existing finite-component, sobriety, 09NV and zero-dimensional closed-subset results. Wrote the length-two-chain contradiction and the finite-group inverse-image reindexing explicitly. No new nodes and no statement correction. Logged fresh searches for the current generality; no Mathlib match.",
+  "blueprint": "Realizes the inherited from.place, namely original steps 1-4 of lem-sfb-ample-curve-two-section-pencil: finite component generic set, first 09NV open, zero-dimensional finite boundary, and second 09NV open through its full orbit. The ancestor command returns null; its inherited from.node and via are preserved. Current latest blueprint constructibility unit is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ample-finite-principal-affine",
+    "why": "Stacks 09NV is the generic ample finite-set section-neighbourhood tool used twice in this local-pencil preparation; no result of the constructibility unit states it."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-closed-finite",
+    "why": "Generic topological finiteness of a closed zero-dimensional subset of a Noetherian T0 space; used after the explicit dimension argument. No node in this constructibility unit gives the assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-zero-dim-noetherian-closed-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-ae671d59e",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-ae671d59e (reviewer sub-agent of L); spot-checked: Pass with no changes; review.md has the details. Shape: one commit; the statement is the same as on the base and only split-owned fields change; no new nodes; no SGA cited. Source: I read Stacks Tag 09NV (properties.tex line 5293). It matches lem-sc-ample-finite-principal-affine hypothesis by hypothesis: any scheme, ample L, a finite set inside an open W, giving n>0 and s with X_s affine. Tag 0AAX was read for the zero-dimensional node. The parent pencil node's step 1 uses exactly the item's p, q, u, v, U, V and T. Step 1: the minimal-element property gives a Noetherian space. The finite-components node writes Y as a finite union of components, and every component is one of them by maximality (two lines, left implicit). Sobriety gives unique generic points, so E is finite and nonempty, and it also gives T0 (equal closures would have two generic points). Step 2: 09NV is applied to E with W=Y. Step 3: an irreducible B in Z lies in some C_i, and B is not C_i because η_i is not in Z. So A⊊B⊊C_i would be a chain of length 2, which contradicts dim Y≤1. The zero-dimensional lemma then makes Z finite with points closed in Y; Z empty is allowed. Step 4 (elementary): h^{-1}g^{-1}Z=(gh)^{-1}Z, so T is invariant under every h without faithfulness, and the same works for a right action. Step 5: 09NV is applied to E∪T. Edge cases checked: Spec k; P^1 over F_2 with PGL_2(F_2), where q≠p is needed; an isolated point; and P^2, which shows dim≤1 is necessary. No duplicate found by rg -L search for 09NV, ample-finite and orbit+affine. The tool_uses for 09NV and for the zero-dimensional closed-finite node are accepted as generic curve-estimates tools."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleOrbitAffinePair",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_ample_orbit_affine_pair",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleOrbitAffinePair.lean",
+  "statement": "theorem exists_ample_orbit_affine_pair (Y : Scheme.{u}) [Nonempty Y] [IsLocallyNoetherian Y] [CompactSpace Y] (hdim : topologicalKrullDim Y ≤ 1) (L : Y.Modules) [L.IsInvertible] (hL : IsAmple Y L) {G : Type v} [Group G] [Finite G] (ρ : G →* Aut Y) : (genericPoints Y).Finite ∧ (genericPoints Y).Nonempty ∧ ∃ p q : ℕ, 0 < p ∧ 0 < q ∧ ∃ (s : (L.tensorPow p).val.presheaf.obj (Opposite.op ⊤)) (t : (L.tensorPow q).val.presheaf.obj (Opposite.op ⊤)) (U V : Y.Opens), (U : Set Y) = nonvanishingLocus (L.tensorPow p) s ∧ (V : Set Y) = nonvanishingLocus (L.tensorPow q) t ∧ IsAffineOpen U ∧ IsAffineOpen V ∧ genericPoints Y ⊆ (U : Set Y) ∩ (V : Set Y) ∧ ((U : Set Y)ᶜ).Finite ∧ (∀ z : Y, z ∈ (U : Set Y)ᶜ → IsClosed ({z} : Set Y)) ∧ ∃ T : Set Y, T = ⋃ g : G, (ρ g).hom ⁻¹' (U : Set Y)ᶜ ∧ T.Finite ∧ (∀ h : G, (ρ h).hom ⁻¹' T = T) ∧ T ⊆ (V : Set Y)",
+  "branch": "sheaf-dag",
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05a6f3038",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean; the item is not landed live, so not superseded or a rebind. lean.statement appears verbatim in AmpleOrbitAffinePair.lean. Every clause matches the node: Nonempty Y, IsLocallyNoetherian and CompactSpace, topologicalKrullDim ≤ 1, IsInvertible and IsAmple (recorded K1 decls), G : Type v finite with ρ : G →* Aut Y (same interface as the citer), genericPoints Y (def-weil-irreducible-components is a Mathlib leaf), independent p,q > 0 with sections of tensorPow over ⊤, U and V equal to nonvanishingLocus and IsAffineOpen, E ⊆ U ∩ V, Uᶜ finite with closed points, T = ⋃ preimages under ρ g that is finite, h-invariant and inside V. No extra hypotheses; universes u and v bound. True by Stacks 09NV applied twice plus the zero-dim Noetherian T0 lemma. Edge cases checked: U = Y, trivial or non-faithful G, nonreduced Y, p ≠ q. No duplicate in Mathlib or the project. Proof is only sorry; docstrings carry source, blueprint id and the 5 steps. Advisory: redundant public import ResidueField. No file changed, so no compile."
+ }
+}

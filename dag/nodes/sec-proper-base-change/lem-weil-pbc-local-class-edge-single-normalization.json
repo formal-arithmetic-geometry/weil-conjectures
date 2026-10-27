@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-local-class-edge-single-normalization",
+ "kind": "statement",
+ "title": "The local-class edge and its single-complex normalization",
+ "statement": "Let $g:T\\to S$ be a morphism of schemes and $q\\in\\mathbf Z$, with the shared derived categories of structure-module sheaves [def-weil-abstract-derived-category]. Set $R=Rg_*$, $F=g_*$, and let $H_X^q$ and $S_X^q$ be cohomology and the complex concentrated in degree $q$. Let $\\Theta$, $\\lambda$ and $\\Theta_{g^{-1}(-)}$ be the local-class, local Leray and inverse-open local-class comparisons of [def-weil-pbc-truncated-counit-edge], computed on its fixed K-injective representatives using [lem-trf-unbounded-direct-image-section-presheaf, lem-pc-ringed-space-sheafification-cohomology]. There exists a family of module maps $e_K:H_S^q(RK)\\to F(H_T^qK)$, natural in every derived object $K$, such that on every open $V\\subseteq S$ one has $\\Theta^{RK}_V\\,\\Gamma(V,e_K)=\\lambda_{g,K,V}\\,\\Theta^K_{g^{-1}V}$. For every module $M$ on $T$, let $u_{g,q,M}:S_S^q(FM)\\to R(S_T^qM)$ be the direct-image single comparison defined in [lem-weil-pbc-integer-single-adjunction-transpose]. Then $H_S^q(u_{g,q,M})$ is invertible and $H_S^q(u_{g,q,M})\\,e_{S_T^qM}=E_S(FM)\\,F(E_T(M)^{-1})$, where $E_X(N):H_X^q(S_X^qN)\\simeq N$ is the standard single/homology identification. This assertion uses no derived pullback, derived adjunction, or truncated counit.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 0BKJ and 0D5X; derived.tex Tags 08J5 and 06XS. Agent-derived normalization of the explicit maps."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-truncated-counit-edge",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "lem-pc-ringed-space-sheafification-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-integer-single-adjunction-transpose",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the edge on the fixed K-injective representative from the kernel/cokernel homology edge, transported along the fixed homology identifications. Its naturality is the naturality of these comparisons and of the raw edge.",
+   "uses": [
+    "def-weil-pbc-resolution-local-class-edge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the local-class description of this specified edge to prove the sectionwise identity.",
+   "uses": [
+    "lem-weil-pbc-resolution-local-class-edge-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invertibility of the single direct-image comparison follows from the degree-zero derived unit and integer shifts. The separate kernel/cokernel calculation on a single proves the normalization of the constructed edge. Combine these results with the explicit family to witness all three clauses.",
+   "uses": [
+    "lem-weil-pbc-integer-single-direct-image-unit-iso",
+    "lem-weil-pbc-resolution-local-class-edge-single"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-resolution-local-class-edge",
+  "lem-weil-pbc-resolution-local-class-edge-local",
+  "lem-weil-pbc-integer-single-direct-image-unit-iso",
+  "lem-weil-pbc-resolution-local-class-edge-single"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0BKJ, 0D5X and 079W; derived.tex Tag 0156. Explicit resolution edge and degree-zero unit transported by shifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafifying the local hypercohomology to cohomology sheaf map gives a natural edge Hq Rf K to f Hq K normalized by the single complex derived unit",
+   "results": "toSheafify_naturality and sheafifyLift APIs, but no module-linear edge with these fixed local and single comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural edge from homology of derived direct image to direct image of homology is obtained by sheafifying local cohomology classes and is normalized on single complexes",
+   "results": "homologyFunctorFactors and singleFunctorCompHomologyFunctorIso; no such simultaneous local edge/normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topEdgeLocalClass|topEdgeInverseLocalClass|topEdgeLocalLeray",
+   "results": "Definitions occur in DerivedAdjunctionTopEdgeData and are used by the parent through the assigned hole. No independent proof of the local module edge. Blueprint cohomology sheafification search found no duplicate.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a left exact additive functor F and a complex I there is a natural morphism Hq(F I) to F(Hq I), defined using the kernel cycles and cokernel boundaries",
+   "results": "Functor.preservesHomologyOfExact and preservesHomology_of_map_exact, ShortComplex.HomologyData.map_homologyMap, and mapCyclesIso_hom_naturality. These provide comparison APIs with homology preservation hypotheses; they do not give the module-linear local edge for the generally nonexact direct image together with its fixed local normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdgeLocalCalculation",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. The top-degree normalization of the derived-to-ordinary module adjoint. Local normalization on the upper truncation of the derived direct image. The local-class edge and its single-complex normalization.",
+   "via": [
+    "lem-weil-pbc-truncated-counit-local-class",
+    "lem-weil-pbc-derived-adjunction-top-edge",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedLocalClassEdge",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedLocalClassEdge.lean",
+  "declaration": "AlgebraicGeometry.exists_topEdgeLocalClassEdge",
+  "statement": "theorem exists_topEdgeLocalClassEdge {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ) : let HS := DerivedCategory.homologyFunctor.{w, u, u + 1} (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q let HT := DerivedCategory.homologyFunctor.{w, u, u + 1} (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q ∃ e : ∀ K : schemeDerivedCategory T, HS.obj ((schemeDerivedDirectImage g).obj K) ⟶ (Scheme.Modules.pushforward g).obj (HT.obj K), (∀ (K : schemeDerivedCategory T) (V : (TopologicalSpace.Opens S)ᵒᵖ), (RingedSpace.topEdgeLocalClass S.toRingedSpace q ((schemeDerivedDirectImage g).obj K)).app V ≫ ((SheafOfModules.toSheaf (moduleRings S.toRingedSpace)).map (e K)).hom.app V = (RingedSpace.topEdgeLocalLeray g.toLRSHom.toShHom q K).hom.app V ≫ (RingedSpace.topEdgeInverseLocalClass g.toLRSHom.toShHom q K).app V) ∧ (∀ {K K' : schemeDerivedCategory T} (k : K ⟶ K'), HS.map ((schemeDerivedDirectImage g).map k) ≫ e K' = e K ≫ (Scheme.Modules.pushforward g).map (HT.map k)) ∧ (∀ M : T.Modules, IsIso (HS.map (topEdgeSingleDirectImageMap g q M)) ∧ HS.map (topEdgeSingleDirectImageMap g q M) ≫ e ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj M) = (DerivedCategory.singleFunctorCompHomologyFunctorIso (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q).hom.app ((Scheme.Modules.pushforward g).obj M) ≫ (Scheme.Modules.pushforward g).map ((DerivedCategory.singleFunctorCompHomologyFunctorIso (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).inv.app M))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T100416-L-17961",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T114129-L-2267584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

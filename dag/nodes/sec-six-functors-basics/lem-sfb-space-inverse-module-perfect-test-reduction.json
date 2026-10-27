@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-space-inverse-module-perfect-test-reduction",
+ "kind": "statement",
+ "title": "Perfect global tests of an infinitesimal quasi-coherent module limit",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Separated, finite type and proper morphisms use [def-sfb-space-morphism-properties]. Finite presentation means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. Use quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it has a presentation $\\mathcal O^r\\to\\mathcal O^s\\to F\\to0$ with $r,s$ finite. Base-flatness means flatness of stalks on etale scheme charts over the corresponding local rings of the base [def-pc-scheme-module-flat-over]. Proper support means there exist a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $G$ on $Z$ such that $i_*G\\simeq F$ [def-sfb-space-proper-quot-functor]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective transition maps whose kernels are locally nilpotent, meaning every element of each kernel is nilpotent, and set $A=\\varprojlim_n A_n$. Let $X\\to\\operatorname{Spec}A$ be separated and finitely presented, put $X_n=X\\times_A\\operatorname{Spec}A_n$. For every $n\\geq1$ let $M_n$ be a finitely presented quasi-coherent $\\mathcal O_{X_n}$-module, flat over $A_n$, with support proper over $A_n$, with specified isomorphisms $M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$ for $n\\geq2$. Use unbounded derived categories of module sheaves [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory with quasi-coherent cohomology. Regard $M_n$ as a module on $X$ by direct image along $X_n\\hookrightarrow X$; the given transition isomorphisms followed by quotient maps define its inverse-system maps. The symbol $R\\varprojlim_{D_{\\mathrm{QCoh}}}M_n$ denotes the homotopy inverse limit in this full derived subcategory: it fits into the product triangle $K\\to\\prod_{n\\geq1}M_n\\xrightarrow{1-\\mathrm{shift}}\\prod_{n\\geq1}M_n\\to K[1]$, with products taken in $D_{\\mathrm{QCoh}}$ and projections $q_n:K\\to M_n$ induced by the first arrow. Here the shift has $n$th component equal to the transition map composed with the $(n+1)$st projection. Let $K$ be this homotopy inverse limit [lem-sfb-space-inverse-module-derived-limit]. Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be perfect: etale locally it is represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. The complex $C_E=R\\Gamma(X,K\\otimes_{\\mathcal O_X}^{\\mathbf L}E)$ is perfect over $A$, meaning represented by a bounded complex of finitely generated projective $A$-modules [def-pc-perfect-ring-complex]. Write $i_n:X_n\\hookrightarrow X$ and $E_n=Li_n^*E$. There is a canonical isomorphism in $D(A_n)$\n$$\\beta_{E,n}:C_E\\otimes_A^{\\mathbf L}A_n\\xrightarrow{\\sim}R\\Gamma(X_n,M_n\\otimes_{\\mathcal O_{X_n}}^{\\mathbf L}E_n).$$\nIt is the scalar-extension adjunct of $R\\Gamma(q_n\\otimes1_E)$ followed by the projection-formula identification\n$$R\\Gamma(X,i_{n,*}M_n\\otimes^{\\mathbf L}E)\\simeq R\\Gamma(X_n,M_n\\otimes^{\\mathbf L}E_n).$$\nEquivalently, after this identification, the scalar-extension adjunct to $R\\Gamma(q_n\\otimes1_E)$ is itself an isomorphism to the left-hand expression $R\\Gamma(X,i_{n,*}M_n\\otimes^{\\mathbf L}E)$, with its $A_n$-action. The maps are natural in all morphisms of perfect $E$, and after scalar extension $A_n\\to A_{n-1}$ their transition squares commute with the specified isomorphisms of the modules. Tensor pullback is derived using K-flat resolutions; global sections are derived using K-injective resolutions.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX6 (lemma-compute-against-perfect), part (1) and the canonical projection comparisons in its proof; the X-version uses spaces-perfect.tex Tag 08IN (lemma-cohomology-base-change) for i_n and affine-module higher-image vanishing."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-space-inverse-module-derived-limit",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-perfect-ring-complex",
+  "def-sfb-space-base-change-comparisons",
+  "def-sfb-space-affine-hom-comparison",
+  "def-zl-ring-derived-scalar-extension",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-relative-dualizing-trace-pair"
+ ],
+ "proof": [
+  {
+   "text": "Put $f_n:X_n\\to\\operatorname{Spec}A_n$ and $T_n=R\\Gamma(X_n,M_n\\otimes^{\\mathbf L}E_n)$. Base change preserves finite presentation, so $f_n$ is finitely presented; derived pullback preserves perfect objects, so $E_n$ is perfect. The proper carrier in the hypothesis contains the closed support of $M_n$: its defining ideal kills $M_n$, hence the annihilator support is contained in that carrier. The proper-support closed-operations lemma makes this annihilator support proper too. Thus the bounded complex $M_n[0]$ has exactly the finite-presentation, relative flatness and proper-support hypotheses of the tensor-perfect direct-image theorem.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-perfect-limit-category",
+    "lem-sfb-space-proper-support-closed-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6 (lemma-compute-against-perfect), proof, tensor form of the global Hom argument."
+   }
+  },
+  {
+   "text": "Apply the proper-support tensor-perfect theorem to $(f_n,E_n,M_n[0])$. Its derived direct image is perfect on $\\operatorname{Spec}A_n$. By derived direct-image composition its derived global sections over $\\operatorname{Spec}A_n$ are $T_n$, and the affine etale derived-module equivalence identifies it with the realization of $T_n$; the etale/Zariski derived equivalence, etale detection of perfectness and the affine bounded-projective criterion show that $T_n$ is a perfect $A_n$-complex. Apply flat-complex base change to $f_n$ and $\\operatorname{Spec}A_{n-1}\\to\\operatorname{Spec}A_n$. Its coefficient pullback is ordinary tensor pullback of $M_n$, identified with $M_{n-1}$ by the specified isomorphism, while $E_n$ pulls back to $E_{n-1}$. The affine pullback/tensor comparison, transported through the etale/Zariski equivalence, therefore gives an isomorphism $\\gamma_{n-1}:T_n\\otimes_{A_n}^{\\mathbf L}A_{n-1}\\to T_{n-1}$. Use as transition its scalar-restriction adjunct, so the tower maps are the ones induced by the quotient maps and the specified module isomorphisms.",
+   "uses": [
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-detects-perfect",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6 (lemma-compute-against-perfect), proof, tensor form of the global Hom argument."
+   }
+  },
+  {
+   "text": "Apply the nil-kernel ring-tower reconstruction lemma to $(A_n,T_n,\\gamma_{n-1})$. Every $T_n$ is perfect, all ring maps are surjective with locally nilpotent kernels, and $A=\\varprojlim A_n$ by hypothesis. Thus $T=R\\varprojlim T_n$ is perfect over $A$, and its projection adjuncts $\\rho_n:T\\otimes_A^{\\mathbf L}A_n\\to T_n$ are isomorphisms. This uses the all-stages-perfect case, without asserting that the rings are powers of a single ideal.",
+   "uses": [
+    "lem-sfb-nil-ring-perfect-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6 (lemma-compute-against-perfect), proof, tensor form of the global Hom argument."
+   }
+  },
+  {
+   "text": "Set $H_n=i_{n,*}M_n$. On a scheme chart $U=\\operatorname{Spec}B\\to X$, $i_n$ is $\\operatorname{Spec}(B\\otimes_A A_n)\\to\\operatorname{Spec}B$, a quotient-ring closed immersion, so it is affine and quasi-compact separated by the closed-immersion chart definition. Its direct image is quasi-coherent, and affine module higher-image vanishing gives $Ri_{n,*}M_n=H_n[0]$. The quasi-coherent derived projection formula for $i_n$, followed by derived direct-image composition, gives the canonical isomorphism\n$$\\pi_{E,n}:F_E(H_n)=R\\Gamma(X,H_n\\otimes^{\\mathbf L}E)\\xrightarrow{\\sim}T_n.$$\nThe projection formula is the counit-induced comparison; hence its naturality in the coefficient module and derived composition identify $F_E(H_n\\to H_{n-1})$ with the transition of step 2 under these isomorphisms. No flatness of $i_n$ or $X/A$ is used.",
+   "uses": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-sfb-space-affine-module-higher-image-vanishing",
+    "lem-sfb-space-qcqs-derived-projection-formula",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6 (lemma-compute-against-perfect), proof, tensor form of the global Hom argument."
+   }
+  },
+  {
+   "text": "Use the product triangle and projections of the derived-limit node for $K$. The perfect tensor global-sections lemma applies since $X/A$ is quasi-compact quasi-separated. Applying it to this triangle and then the identifications $\\pi_{E,n}$ gives an isomorphism $\\theta_E:C_E\\xrightarrow{\\sim}T$ with $p_n\\theta_E=\\pi_{E,n}R\\Gamma(q_n\\otimes1_E)$. Consequently $C_E$ is perfect and\n$$\\rho_n\\circ(\\theta_E\\otimes_A^{\\mathbf L}A_n):C_E\\otimes_A^{\\mathbf L}A_n\\xrightarrow{\\sim}T_n$$\nis an isomorphism. By scalar-extension adjunction and the displayed projection equality, this composite is exactly $\\beta_{E,n}$ specified in the statement. Composing with $\\pi_{E,n}^{-1}$ gives precisely its equivalent formulation on $X$.",
+   "uses": [
+    "lem-sfb-space-inverse-module-derived-limit",
+    "lem-sfb-space-perfect-tensor-global-limits",
+    "lem-sfb-nil-ring-perfect-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6 (lemma-compute-against-perfect), proof, tensor form of the global Hom argument."
+   }
+  },
+  {
+   "text": "For a morphism $v:E\\to E'$, the identity $(q_n\\otimes1_{E'})(1_K\\otimes v)=(1_{H_n}\\otimes v)(q_n\\otimes1_E)$, naturality of the projection formula and scalar-extension adjunction give the naturality square for $\\beta_{E,n}$. For successive levels, both $\\beta_{E,n-1}$ and $\\gamma_{n-1}\\circ(\\beta_{E,n}\\otimes_{A_n}^{\\mathbf L}A_{n-1})$ have, after scalar restriction and the canonical associativity identifications, adjunct $\\pi_{E,n-1}R\\Gamma(q_{n-1}\\otimes1_E)$: substitute $q_{n-1}=t_nq_n$ and the transition identification of step 4. The adjunction bijection makes the two maps equal. This proves the specified transition square, including its module isomorphism, and proves all asserted compatibilities.",
+   "uses": [
+    "lem-sfb-space-inverse-module-derived-limit",
+    "lem-sfb-space-qcqs-derived-projection-formula",
+    "lem-sfb-space-flat-complex-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6 (lemma-compute-against-perfect), proof, tensor form of the global Hom argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-perfect-limit-category",
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-sfb-proper-support-tensor-perfect",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-detects-perfect",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-sfb-space-flat-complex-base-change",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-sfb-nil-ring-perfect-derived-limit",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "lem-sfb-space-qcqs-derived-projection-formula",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-inverse-module-derived-limit",
+  "lem-sfb-space-perfect-tensor-global-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX6 (lemma-compute-against-perfect), tensor form of the perfect dual/global Hom argument, with canonical maps retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global cohomology of the quasi coherent derived inverse limit of flat finitely presented modules with proper support tensored with a perfect complex is perfect and commutes with reduction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes tested against compatible infinitesimal flat proper support modules give perfect inverse limit and canonical derived base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck existence derived limit perfect complex tensor cohomology and base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.instHasLimit\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \": HasLimit F\", \"doc\": \"For any functor $ F $ from a category $ J $ to the category of homological complexes in a category $ V $ with zero morphisms and a fixed complex shape, the functor $ F $ has a limit in the category of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"{P A : Type*} [CommRing P] [CommRing A] [Algebra P S] [Algebra P A] [Algebra R P] [Algebra S A] [IsScalarTower P S A]\\n  (a b) :\\n  cotangentComplexBaseChange R S P A (a ⊗ₜ b) =\\n    a • kerToTensor R P A ⟨b.1, by rw [IsScalarTower.algebraMap_eq P S A]; aesop⟩\", \"doc\": \"Given commutative rings $P, S, A$ with compatible algebra structures and a scalar tower condition $P \\\\to S \\\\to A$, the cotangent complex base change of the tensor product $a \\\\otimes b$ equals the scal\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasLimits\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \": HasLimitsOfSize.{w, w} C\", \"doc\": \"Every Grothendieck abelian category has all small limits, meaning that for any small diagram indexed by a small category, the limit of the diagram exists within the category.\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \":\\n  cotangentComplexBaseChange R S P.Ring A =\\n    AlgebraTensorModule.cancelBaseChange P.Ring S A A Ω[P.Ring⁄R] ∘ₗ\\n      P.cotangentComplex.baseChange A ∘ₗ\\n        ((AlgebraTensorModule.cancelBaseChange P.Ring S A A P.ker).symm ≪≫ₗ P.cotangentEquiv.baseChange (A := A))\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"HomologicalComplex.isGrothendieckAbelian\", \"module\": \"Mathlib.Algebra.Homology.GrothendieckAbelian\", \"type\": \"[Abelian C] [IsGrothendieckAbelian.{w} C] [c.HasNoLoop] [Small.{w} ι] :\\n  IsGrothendieckAbelian.{w} (HomologicalComplex C c)\", \"doc\": \"If $ \\\\mathcal{C} $ is a Grothendieck abelian category, $ \\\\iota $ is a small type, and $ c $ is a complex shape with no loops, then the category of homological complexes over $ \\\\mathcal{C} $ with shape\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"limit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]erfect.*[Ll]imit|[Ll]imit.*[Pp]erfect|[Dd]erived.*[Bb]ase[Cc]hange",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-affine-base-change",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CX6 (lemma-compute-against-perfect), part (1) and the canonical projection comparisons in its proof; the X-version uses spaces-perfect.tex Tag 08IN (lemma-cohomology-base-change) for i_n and affine-module higher-image vanishing.",
+   "via": [
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-inverse-module-perfect-test-reduction",
+  "worker": "stage1",
+  "group": "Q101",
+  "summary": "Unchanged statement. Construct the compatible finite-level perfect cohomology tower, reconstruct its perfect ring-theoretic inverse limit, and identify it with the global tensor test by preservation of the D_QCoh product triangle. Projection-formula and adjunction equations identify the actual reduction maps and prove naturality. Two new statement-only lemmas isolate general nil-kernel perfect reconstruction and general perfect tensor global-limit preservation; existing finite-level results are reused.",
+  "blueprint": "Latest blueprint proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: spaces-flat.tex 0CX6. The ancestor command returns null, as already recorded on the item; new nodes inherit that null and prepend the item to via. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-perfect-affine-bounded-projective",
+    "why": "Converts perfectness on an affine scheme to a bounded finite projective ring complex. This is a generic comparison tool; the unit has no replacement statement, and its geometric route is retained."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Identifies affine derived pullback with derived ring scalar extension after etale/Zariski comparison. This is a generic comparison tool; the unit has no replacement statement, and its geometric route is retained."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Quasi-compact separated direct image preserves quasi-coherence, needed for the closed immersions i_n. This is a generic comparison tool; the unit has no replacement statement, and its geometric route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-f7cc641b4",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-f7cc641b4 (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the item, both new nodes and every cited node against Stacks 0CX4/0CX6 (spaces-flat), 0CQG (more-algebra), 0A1P, 0A1K, 08IN, 073H, 03M9 and 08EB. The statement is unchanged and faithful to 0CX6(1). Step checks: step 1 gets proper annihilator support from proper-support-closed-operations, a closed subset of |Z| being proper on every closed-subspace structure. Step 2 goes from tensor-perfect to an affine perfect complex through the a_A, ε and 08EB criteria, and gets γ from 0A1K together with 08DW(2). Step 3 uses the all-perfect branch of 0CQG with locally nilpotent kernels. Step 4 uses that i_n is affine because A→A_n is surjective, plus 03M9, 073H and the 08IN projection formula. In step 5, β is the adjunct of p_nθ, which equals ρ_n(θ⊗A_n), so it is the specified map and not just some isomorphism. Step 6 is honestly elementary. Neither new node is a duplicate (grep of 0CQG/Rlim-perfect; pbc-rlim-perfect-complete is the adic case only, 0CQF-reconstruction is pseudo-coherent with nilpotent kernels) or a restatement of the item. Small cases: A_n=Z/p^n; X=Spec A with E=O; X empty; E=⊕O shows perfect is needed. Batch-5: every flagged citation is a generic space definition, the Zariski/etale square or 03M9 qcoh pushforward, none part of the trace formula or Poincaré duality, so accepted. tool_uses (08EB, 08DW, 03M9) accepted as generic tools; no SGA. Not superseded: the item is unsplit in both live clones. FIXES in fixes/dag/nodes/sec-six-functors-basics: (1) item step 2 now cites derived direct-image composition (chart-calculus, already a proof_dep) for RΓ(Spec A_n,Rf_*-)=T_n; (2) nil-ring node: dropped the undefined 'resolution-derived limit of a chosen strict tower' (def-weil-derived-limit defines only triples, B3); T is now any derived limit, and naturality is the exact adjunction statement; (3) global-limits node: the conclusion is now that (F_E(L),cF_E(p)) is a derived limit, with an isomorphism to every derived limit respecting projections; the undefined naturality for strict towers and cone choices in E was replaced by naturality of the product comparison.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInverseModulePerfectTestReduction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.inverseModulePerfectTestReduction",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleProjectionMap",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleFiniteTest",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTestComparison",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleScalar",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleFibreSquare",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTensorTest",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLevelComparison",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleReduction",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTestRightMap",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleFiniteRightMap",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleStepScalar",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleScalar_comp",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleRestrictionStep",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleExtensionStep",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTransitionSquare",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleFiniteTransition",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleFiniteReduction",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLimitProjection",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModulePerfectTestReduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInverseModulePerfectTestReduction.lean",
+  "statement": "theorem inverseModulePerfectTestReduction (hsurj : ∀ n : ℕ, Function.Surjective (r n)) (hnil : ∀ (n : ℕ) (a : A (n + 1)), (r n) a = 0 → IsNilpotent a) (hc : IsLimit c) (hsep : MapIsSeparated f) (hfp : ProperQuotFinitePresentation f) (M : ∀ n : ℕ, (properQuotFibre f (inverseModuleTest c n)).Modules) (hqc : ∀ n : ℕ, (M n).IsQuasicoherent) (hfin : ∀ n : ℕ, (M n).IsFinitePresentation) (hflat : ∀ (n : ℕ) (U : (properQuotFibre f (inverseModuleTest c n)).EtaleSite), ((schemeRestriction _ U).obj (M n)).IsFlatOver (yoneda.preimage (U.obj.hom ≫ (properQuotSnd f (inverseModuleTest c n)).hom.hom)).left) (hsupp : ∀ n : ℕ, ∃ (Z : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (i : Z ⟶ properQuotFibre f (inverseModuleTest c n)), IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) i.hom.hom ∧ MapIsProper (i ≫ properQuotSnd f (inverseModuleTest c n)) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ M n)) (e : ∀ n : ℕ, (moduleTensorPullback (properQuotFibreMap f (inverseModuleTestMap c n))).obj (M (n + 1)) ≅ M n) (hq : ∀ n : ℕ, X.derivedQCohProperty (inverseModuleDerivedTerm f (inverseModuleTest c n) (M n))) [HasProduct (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))] (K : X.DerivedQCoh) (p : K ⟶ ∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) (δ : (∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) ⟶ K⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle (fun n : ℕ ↦ inverseModuleDerivedTransition f (inverseModuleTestMap c n) (M n) (M (n + 1)) (e n) (hq n) (hq (n + 1))) K p δ) (E : X.DerivedQCoh) (hE : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E.obj) : DerivedCategory.IsPerfectRingComplex ((inverseModuleTensorTest A r c X f E.obj).obj K) ∧ (∀ n : ℕ, IsIso (inverseModuleLevelComparison A r c X f M E.obj n)) ∧ (∀ n : ℕ, IsIso (inverseModuleReduction A r c X f M hq K E.obj n (inverseModuleLimitProjection A r c X f M hq K p n))) ∧ (∀ (E' : X.DerivedQCoh) (_hE' : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E'.obj) (v : E ⟶ E') (n : ℕ), (RingDerivedScalarExtension.moduleDerivedExtension (inverseModuleScalar A r c n)).map (inverseModuleTestRightMap A r c X f (V := K.obj) v.hom) ≫ inverseModuleReduction A r c X f M hq K E'.obj n (inverseModuleLimitProjection A r c X f M hq K p n) = inverseModuleReduction A r c X f M hq K E.obj n (inverseModuleLimitProjection A r c X f M hq K p n) ≫ inverseModuleFiniteRightMap A r c X f M v.hom n) ∧ (∀ n : ℕ, IsIso (inverseModuleFiniteReduction A r c X f M e E.obj n) ∧ (inverseModuleExtensionStep A r c n).hom.app ((inverseModuleTensorTest A r c X f E.obj).obj K) ≫ inverseModuleReduction A r c X f M hq K E.obj n (inverseModuleLimitProjection A r c X f M hq K p n) = (RingDerivedScalarExtension.moduleDerivedExtension (inverseModuleStepScalar A r n)).map (inverseModuleReduction A r c X f M hq K E.obj (n + 1) (inverseModuleLimitProjection A r c X f M hq K p (n + 1))) ≫ inverseModuleFiniteReduction A r c X f M e E.obj n)",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of 9cc055cc91ae H2: use traceDirectImageComparison from def-sfb-relative-dualizing-trace-pair; use restriction composition and the unit-preserving scalar associator through the repaired def-zl-ring-derived-scalar-extension interface. Both theorem-only statement dependencies are removed. The main theorem signature and natural-language statement are unchanged; all canonical arrows retain their constructions and normalizations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc1fa4902",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery of 9cc055cc91ae (returned H2). Both theorem stmt_deps (relative-flat-closed-kernel-base-change, constant-realization-derived-scalar-extension) are removed. traceDirectImageComparison (landed def node def-sfb-relative-dualizing-trace-pair, on base) has the same body as the old helper. A §1(B) repair of def-zl-ring-derived-scalar-extension adds moduleDerivedRestrictionComposition and moduleDerivedExtensionComposition: real data, independent universes wR/wS/wT, existing declarations verbatim, live node identical to base, no name clash. The item's natural-language statement is unchanged; lean.statement is byte-identical and appears verbatim in the file; only stmt_deps and lean changed. All hypothesis and conclusion clauses and edge cases re-checked; gates met (sorry only, source and blueprint docstrings, proof docstring). Report has both sections. Advisory only: the new associator restates ConstantScalarRealization.moduleTransitivity. No file changed, nothing compiled."
+ }
+}

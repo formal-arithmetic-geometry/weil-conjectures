@@ -1,0 +1,333 @@
+{
+ "id": "lem-trf-perfect-source-evaluation-quasi-isomorphism",
+ "kind": "statement",
+ "title": "Perfect-source tensor evaluation on K-flat and K-injective representatives",
+ "statement": "Let $R$ be a commutative ring and let $M,F,J,I$ be cochain complexes of ordinary $R$-modules, viewed on the one-object ringed site. Use the direct-sum total tensor [def-pc-tensor-complex-sheaves], the product total Hom complex [def-pur-hom-complex], and localization $Q$ into the ordinary unbounded derived category $D(R)$ [def-weil-abstract-derived-category]. Assume $QM$ is perfect [def-pc-perfect-ring-complex], meaning isomorphic to a bounded complex of finitely generated projective $R$-modules, $F$ is K-flat [def-pc-module-kflat-complex], $J,I$ are K-injective [def-pur-kinjective-complex], and $q:F\\otimes_R J\\to I$ is a quasi-isomorphism. The formula on homogeneous tensors\n$$t_{M,F,J,q}(f\\otimes h)(x)=q(f\\otimes h(x))$$\ndefines a chain map\n$$F\\otimes_R\\operatorname{Hom}_R^\\bullet(M,J)\\longrightarrow\\operatorname{Hom}_R^\\bullet(M,I)$$\nwhose localization is an isomorphism in $D(R)$:\n$$Q(F\\otimes_R\\operatorname{Hom}_R^\\bullet(M,J))\\xrightarrow[Q(t_{M,F,J,q})]{\\sim}Q\\operatorname{Hom}_R^\\bullet(M,I).$$\nEquivalently, the specified chain map is a quasi-isomorphism. Under the K-flat tensor and K-injective Hom identifications [def-pur-derived-internal-hom], this is precisely the canonical derived evaluation comparison\n$$QF\\otimes_R^{\\mathbf L}R\\operatorname{Hom}_R(QM,QJ)\\longrightarrow R\\operatorname{Hom}_R(QM,QF\\otimes_R^{\\mathbf L}QJ),$$\nwith $Qq$ identifying the right-hand coefficient object with $QI$. No boundedness of $F,J,I,M$, termwise projectivity of $M$, or Noetherian hypothesis on $R$ is required beyond perfectness of $QM$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0ATK (lemma-internal-hom-evaluate-tensor-isomorphism), case (1); explicit projective-source comparison of K-flat/K-injective models."
+ },
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-pc-module-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-derived-internal-hom",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Write $H(A,B)=\\operatorname{Hom}_R^\\bullet(A,B)$. First form $c_M:F\\otimes H(M,J)\\to H(M,F\\otimes J)$ by $c_M(f\\otimes h)(x)=f\\otimes h(x)$, and set $t_M=H(M,q)c_M$. The formula is balanced and extends over the direct sum: a homogeneous tensor is a finite sum, while each $h$ is a family in the Hom product. For $|f|=p,|h|=r$ the Hom differential of $c_M(f\\otimes h)$ is the family\n$$d_Ff\\otimes h(x)+(-1)^pf\\otimes d_Jh(x)-(-1)^{p+r}f\\otimes h(d_Mx).$$\nThis equals $c_M(d_Ff\\otimes h+(-1)^pf\\otimes(d_Jh-(-1)^rh d_M))(x)$. Thus $c_M$, and then $t_M$ since $q$ is a chain map, are chain maps. No interchange of two homogeneous factors occurs, so no extra Koszul sign appears.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYM, lemma-diagonal-better, explicit construction and differential calculation; Tag 0BYN, lemma-internal-hom-diagonal-better"
+   }
+  },
+  {
+   "text": "By perfectness choose a bounded finite-projective complex $P$ and an isomorphism $QP\\cong QM$. The projective-source morphism theorem represents this isomorphism by a chain map $a:P\\to M$, since $P$ is bounded above and termwise projective. This $a$ is a quasi-isomorphism: each cohomology functor factors through $Q$, so $H^i(a)$ is an isomorphism. For $V=J,I$, apply K-injective Hom invariance with target map $1_V$ and source map $a$ to obtain quasi-isomorphisms $a_V^*:H(M,V)\\to H(P,V)$.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-pc-ring-derived-map-representative",
+    "def-weil-abstract-derived-category",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism (1), finite-projective representative; Derived Categories Tag 064B, lemma-morphisms-from-projective-complex; Sites Cohomology Tag 0A95, lemma-RHom-well-defined"
+   }
+  },
+  {
+   "text": "We check $c_P$ is degreewise invertible. Let $S=\\{a,\\ldots,b\\}$ contain the support of $P$. In degree $n$ its source and target, respectively, identify with\n$$\\bigoplus_p\\bigoplus_{s\\in S}F^p\\otimes\\operatorname{Hom}(P^s,J^{s+n-p}),\\qquad\n\\bigoplus_{s\\in S}\\operatorname{Hom}(P^s,\\bigoplus_pF^p\\otimes J^{s+n-p}).$$\nFinite products equal finite sums here. Tensor commutes with sums by the bilinear universal property: an inverse to the canonical comparison sends $f\\otimes(y_p)_p$ to the finite sum of $f\\otimes y_p$. For a finitely generated module $E$, $\\operatorname{Hom}(E,\\bigoplus_pN_p)=\\bigoplus_p\\operatorname{Hom}(E,N_p)$: the images of a finite generating set have a finite union of supports, which contains the image of every element; uniqueness is checked by projections. Apply this with $E=P^s$. After these rearrangements $c_P^n$ is the direct sum over $(p,s)$ of the finite-projective equivalences $F^p\\otimes\\operatorname{Hom}(P^s,J^{s+n-p})\\cong\\operatorname{Hom}(P^s,F^p\\otimes J^{s+n-p})$, with their stated formula $f\\otimes h\\mapsto(x\\mapsto f\\otimes h(x))$. Therefore the specified $c_P$ is an isomorphism of complexes, using its chain-map property from step 1.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-finitely-generated-module",
+    "lem-pc-finite-projective-module-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYM, lemma-diagonal-better; Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism (1), bounded finite-projective calculation"
+   }
+  },
+  {
+   "text": "The projective-source derived-Hom comparison is natural in the target and applies to $P$ and the arbitrary complexes $F\\otimes J$ and $I$. Hence the localization of $H(P,q)$ identifies with $R\\operatorname{Hom}(QP,Qq)$, which is an isomorphism. Applying cohomology through $Q$ shows that $H(P,q)$ is a quasi-isomorphism. Combined with step 3 this proves $t_P=H(P,q)c_P$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective; Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism (1)"
+   }
+  },
+  {
+   "text": "Precomposition gives a square with upper row $t_M$, lower row $t_P$, left vertical map $1_F\\otimes a_J^*$ and right vertical map $a_I^*$. Both paths send $f\\otimes h$ to the family $x\\mapsto q(f\\otimes h(a(x)))$, so the square commutes as chain maps. The two maps $a_J^*,a_I^*$ are quasi-isomorphisms by step 2, and tensoring $a_J^*$ with $F$ preserves quasi-isomorphisms by K-flatness. The bottom row is a quasi-isomorphism by step 4. On each cohomology group, the square expresses the top map as a composite of the bottom isomorphism and the vertical isomorphisms and their inverses. Thus $t_M$ is a quasi-isomorphism, and its localization is invertible.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYM, lemma-diagonal-better, functoriality; Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism (1), source-representative comparison"
+   }
+  },
+  {
+   "text": "It remains to identify the actual localized arrow with the canonical derived comparison. For source $P$, its terms are projective and hence flat, so the bounded-flat theorem makes $P$ K-flat. Put $U=F\\otimes H(P,J)$. The one-K-flat uncurrying theorem applies to $(U,P,I)$, without requiring $U$ to be K-flat. The ordinary transpose of $t_P$ is\n$$(F\\otimes H(P,J))\\otimes P\\longrightarrow I,\\quad(f\\otimes h)\\otimes x\\longmapsto q(f\\otimes h(x)).$$\nThe same uncurrying theorem applied to $(H(P,J),P,J)$ and its identity map identifies $h\\otimes x\\mapsto h(x)$ with the derived-Hom counit. The K-flat tensor model for $F$ identifies $Q(F\\otimes J)$ with $QF\\otimes^{\\mathbf L}QJ$ and $QU$ with $QF\\otimes^{\\mathbf L}QH(P,J)$; we take these identifications, like $c_{U,P}$ and $c_{H(P,J),P}$ of the uncurrying theorem, to be the natural inverse-tensorator comparisons of [lem-sf-ringed-derived-native-tensor], which exist because $F$, respectively $P$, is K-flat. At chain level the transpose factors as $(F\\otimes H(P,J))\\otimes P\\xrightarrow{\\alpha}F\\otimes(H(P,J)\\otimes P)\\xrightarrow{1\\otimes\\mathrm{ev}}F\\otimes J\\xrightarrow{q}I$, where $\\alpha$ is the native complex associator, given on pure generators by $(f\\otimes h)\\otimes x\\mapsto f\\otimes(h\\otimes x)$ [lem-sf-ringed-tensor-complex-constraints], and $\\mathrm{ev}(h\\otimes x)=h(x)$. Since these comparisons preserve the native associator and are natural in each variable [lem-sf-ringed-derived-native-tensor], writing $\\alpha^{\\mathbf L}$ for the derived associator and $H=H(P,J)$,\n$$Q\\bigl(q(1\\otimes\\mathrm{ev})\\alpha\\bigr)c_{U,P}^{-1}=Q(q)\\,c_{F,J}^{-1}\\,\\bigl(1_{QF}\\otimes Q(\\mathrm{ev})c_{H,P}^{-1}\\bigr)\\,\\alpha^{\\mathbf L}\\,(c_{F,H}\\otimes1_{QP}).$$ Under these comparisons, the displayed transpose is therefore exactly $1_{QF}$ tensor the counit, followed by $Qq$. The uncurrying theorem therefore identifies $Q(t_P)$ with the specified derived evaluation comparison followed by $R\\operatorname{Hom}(QP,Qq)$.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-trf-module-one-kflat-uncurry-normalization",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-sf-ringed-tensor-complex-constraints",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYN, lemma-internal-hom-diagonal-better, defining K-flat/K-injective model; Tag 0A66, lemma-RHom-out-of-projective"
+   }
+  },
+  {
+   "text": "The K-injective models give $QH(M,J)\\cong R\\operatorname{Hom}(QM,QJ)$ and $QH(M,I)\\cong R\\operatorname{Hom}(QM,QI)$. The K-flat model for $F$, normalized as the inverse-tensorator comparison $c_{F,H(M,J)}$ of [lem-sf-ringed-derived-native-tensor] (the same normalization as in step 6), gives the required tensor identification on the source; by naturality of that comparison in its second variable it carries $1_F\\otimes a_J^*$ to $1_{QF}\\otimes Q(a_J^*)$. These identifications carry the vertical maps of step 5 to derived-Hom precomposition by $Qa$. For completeness, the canonical derived comparison is contravariantly natural in its Hom-source: by naturality of the tensor-Hom adjunction, precomposing either its source $H(M,J)$ or its target $H(M,F\\otimes^{\\mathbf L}J)$ by $a$ has transpose $F\\otimes H(M,J)\\otimes P\\xrightarrow{1\\otimes1\\otimes a}F\\otimes H(M,J)\\otimes M\\xrightarrow{1\\otimes\\epsilon}F\\otimes J$. Thus the derived square is the localized square of step 5. Since its vertical arrows are invertible and its bottom arrow is the canonical comparison by step 6, its top arrow $Q(t_M)$ is exactly the canonical comparison as well, with $Qq$ on the coefficient object. This proves every asserted identification, in addition to invertibility.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYN, lemma-internal-hom-diagonal-better, functoriality and defining model; Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-perfect-ring-complex",
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-abstract-derived-category",
+  "lem-pur-rhom-well-defined",
+  "def-weil-finitely-generated-module",
+  "lem-pc-finite-projective-module-tensor-hom",
+  "lem-pod-projective-hom-evaluation-model",
+  "def-pc-module-kflat-complex",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-trf-module-one-kflat-uncurry-normalization",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "def-pur-derived-internal-hom",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0ATK (1), 0BYM, 0BYN, 0A66; explicit finite-projective representative proof and normalized comparison square written by Q88."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*[Hh]om|[Hh]om.*tensor|[Kk][Ii]njective",
+   "sub": "Algebra/Homology",
+   "results": "{\"t\": \"2026-10-22T06:46:29Z\", \"tool\": \"grep\", \"query\": \"tensor.*[Hh]om|[Hh]om.*tensor|[Kk][Ii]njective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\"], \"digest\": \"f1aea04a1f9377b2\"} Read Contraction.lean:295-325: lTensorHomEquivHomLTensor is for one finite-projective module, not an unbounded derived perfect source. Read KInjective.lean:35-55 and Monoidal.lean:35-65: K-injective and tensor infrastructure only. Quasi-isomorphisms localize to isomorphisms, but the hits do not prove this evaluation map is a quasi-isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect source derived Hom commutes with tensor with an arbitrary complex computed by K flat and K injective representatives",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-22T06:46:30Z\", \"tool\": \"leansearch\", \"query\": \"Perfect source derived Hom commutes with tensor with an arbitrary complex computed by K flat and K injective representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"lTensorHomEquivHomLTensor\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_injectiveₛ\", \"Module.Flat.iff_rTensor_preserves_injective_linearMapₛ\"], \"digest\": \"866912cbb9236a9c\"} Read Contraction.lean:295-325: lTensorHomEquivHomLTensor is for one finite-projective module, not an unbounded derived perfect source. Read KInjective.lean:35-55 and Monoidal.lean:35-65: K-injective and tensor infrastructure only. Quasi-isomorphisms localize to isomorphisms, but the hits do not prove this evaluation map is a quasi-isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, QuasiIso, Module.Projective",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-22T06:46:30Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex, QuasiIso, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read Contraction.lean:295-325: lTensorHomEquivHomLTensor is for one finite-projective module, not an unbounded derived perfect source. Read KInjective.lean:35-55 and Monoidal.lean:35-65: K-injective and tensor infrastructure only. Quasi-isomorphisms localize to isomorphisms, but the hits do not prove this evaluation map is a quasi-isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor evaluation F tensor Hom(P,J) to Hom(P,F tensor J) remains an isomorphism in the derived category after replacing the perfect source by any quasi isomorphic complex",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-22T06:46:40Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor evaluation F tensor Hom(P,J) to Hom(P,F tensor J) remains an isomorphism in the derived category after replacing the perfect source by any quasi isomorphic complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'_map_app\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"CategoryTheory.Tor_map\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\"], \"digest\": \"3cbcc6bfff44f0e6\"} Read Contraction.lean:295-325: lTensorHomEquivHomLTensor is for one finite-projective module, not an unbounded derived perfect source. Read KInjective.lean:35-55 and Monoidal.lean:35-65: K-injective and tensor infrastructure only. Quasi-isomorphisms localize to isomorphisms, but the hits do not prove this evaluation map is a quasi-isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect source complex M and K flat F the canonical map F tensor Hom(M,J) to Hom(M,I) is a quasi isomorphism when J and I are K injective and F tensor J to I is a quasi isomorphism",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-22T06:46:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a perfect source complex M and K flat F the canonical map F tensor Hom(M,J) to Hom(M,I) is a quasi isomorphism when J and I are K injective and F tensor J to I is a quasi isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"CategoryTheory.isZero_Tor_succ_of_projective\"], \"digest\": \"f44eab4995311a8b\"} Read Contraction.lean:295-325: lTensorHomEquivHomLTensor is for one finite-projective module, not an unbounded derived perfect source. Read KInjective.lean:35-55 and Monoidal.lean:35-65: K-injective and tensor infrastructure only. Quasi-isomorphisms localize to isomorphisms, but the hits do not prove this evaluation map is a quasi-isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHom|lTensorHomEquivHomLTensor",
+   "sub": "LinearAlgebra/Contraction.lean",
+   "results": "{\"t\": \"2026-10-22T06:47:27Z\", \"tool\": \"grep\", \"query\": \"dualTensorHom|lTensorHomEquivHomLTensor\", \"sub\": \"LinearAlgebra/Contraction.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"54\", \"69\", \"70\", \"73\", \"74\"], \"digest\": \"675b15f2ac17ebde\"} Read Contraction.lean:295-325: lTensorHomEquivHomLTensor is for one finite-projective module, not an unbounded derived perfect source. Read KInjective.lean:35-55 and Monoidal.lean:35-65: K-injective and tensor infrastructure only. Quasi-isomorphisms localize to isomorphisms, but the hits do not prove this evaluation map is a quasi-isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect source derived Hom tensor evaluation quasi-isomorphism K-flat K-injective complexes",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T09:34:35Z\", \"tool\": \"leansearch\", \"query\": \"Perfect source derived Hom tensor evaluation quasi-isomorphism K-flat K-injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.quasiIso\", \"QuasiIso\", \"quasiIso_comp\", \"instIsIsoHomologyMapOfQuasiIsoAt\", \"HomologicalComplex.instIsMultiplicativeQuasiIso\", \"quasiIso_iff\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"HomotopyCategory.quasiIso\"], \"digest\": \"32078a3fb0f97be1\"} Inspected the reported quasi-isomorphism, K-injective, and tensor infrastructure; none states the perfect-source evaluation comparison. The finite-projective module evaluation is already the Mathlib leaf lem-pc-finite-projective-module-tensor-hom (Contraction.lean:311,327,350), reused in step 3.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, QuasiIso, Module.Projective",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T09:34:36Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex, QuasiIso, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Inspected the reported quasi-isomorphism, K-injective, and tensor infrastructure; none states the perfect-source evaluation comparison. The finite-projective module evaluation is already the Mathlib leaf lem-pc-finite-projective-module-tensor-hom (Contraction.lean:311,327,350), reused in step 3.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat complex tensor derived Hom from a perfect complex gives derived Hom into the tensor product",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T09:37:09Z\", \"tool\": \"leanfinder\", \"query\": \"A K-flat complex tensor derived Hom from a perfect complex gives derived Hom into the tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\"], \"digest\": \"3b9473ccab271c96\"} Inspected the reported quasi-isomorphism, K-injective, and tensor infrastructure; none states the perfect-source evaluation comparison. The finite-projective module evaluation is already the Mathlib leaf lem-pc-finite-projective-module-tensor-hom (Contraction.lean:311,327,350), reused in step 3.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Hh]om|[Hh]om.*tensor|[Kk][Ii]njective",
+   "sub": "Algebra/Homology",
+   "results": "{\"t\": \"2026-10-23T09:37:09Z\", \"tool\": \"grep\", \"query\": \"tensor.*[Hh]om|[Hh]om.*tensor|[Kk][Ii]njective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"afa0d427ff3bea4b\"} Inspected the reported quasi-isomorphism, K-injective, and tensor infrastructure; none states the perfect-source evaluation comparison. The finite-projective module evaluation is already the Mathlib leaf lem-pc-finite-projective-module-tensor-hom (Contraction.lean:311,327,350), reused in step 3.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-perfect-algebra-coinduction-tensor",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Clauses (1) and (2), normal-cone specialization argument, specifically the sentence \"Varshavsky's theorem is proved by specialization to the normal cone of Z\"; technical algebraic duality input reached through trace specialization, relative duality, and algebraic shriek calculus in the recorded via chain. This node proves the perfect-algebra tensor/coinduction input for the one-variable refinement and open-immersion calculation. Extracted subargument of lem-trf-perfect-algebra-coinduction-tensor: old proof steps 4-6: realize a finite-projective source, identify normalized evaluation, and compare via the precomposition square.",
+   "via": [
+    "lem-trf-perfect-algebra-coinduction-tensor",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-perfect-source-evaluation-quasi-isomorphism",
+  "worker": "stage1",
+  "summary": "Seven steps construct and check the actual chain map, choose a chain quasi-isomorphism from a bounded finite-projective source, compute finite-support evaluation, use projective-Hom invariance on q, and descend the quasi-isomorphism and its canonical normalization through the precomposition square. All ingredients already have DAG nodes; no new nodes. Corrected doubled TeX backslashes and literal newline escapes only.",
+  "blueprint": "Nearest blueprint ancestor lem-trf-local-term-locality: clauses (1) and (2), sentence about specialization to the normal cone; via perfect-algebra-coinduction-tensor, extracted old steps 4–6. Steps 1,6,7 identify normalized evaluation; steps 2–5 compare its finite-projective source and arbitrary representative. Latest blueprint proof read; no duplicate statement found by searches for perfect source, evaluation tensor, tensor Hom, projective Hom, 0ATK, 0BYN.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic ordinary-module homological algebra or normalized tensor-Hom tool used in steps 2; the trace-formula unit has no replacement for this algebraic interface."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic ordinary-module homological algebra or normalized tensor-Hom tool used in steps 4; the trace-formula unit has no replacement for this algebraic interface."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module homological algebra or normalized tensor-Hom tool used in steps 6; the trace-formula unit has no replacement for this algebraic interface."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic ordinary-module homological algebra or normalized tensor-Hom tool used in steps 6,7; the trace-formula unit has no replacement for this algebraic interface."
+   },
+   {
+    "node": "lem-sf-ringed-tensor-complex-constraints",
+    "why": "Generic ordinary-module homological algebra or normalized tensor-Hom tool used in steps 6; the trace-formula unit has no replacement for this algebraic interface."
+   },
+   {
+    "node": "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "why": "Generic ordinary-module homological algebra or normalized tensor-Hom tool used in steps 7; the trace-formula unit has no replacement for this algebraic interface."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic ordinary-module homological algebra or normalized tensor-Hom tool used in steps 6,7 (normalized K-flat comparisons and their compatibility with the native associator); the trace-formula unit has no replacement for this algebraic interface. Added by the Codex maintainer reader FIX."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-well-defined",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-ee2366601",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-ee2366601 (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps, every cited statement, and Stacks more-algebra 0ATK(1) l.28653, lemma-internal-hom-diagonal-better l.18799, lemma-diagonal-better l.18036 and 0A66. The statement is byte-identical to live (live is still unsplit, so not superseded), and t_{M,F,J,q} is exactly Stacks' chain map with the same hypotheses. Stacks proves case (1) by a generator argument; the delivery's agent-written route (finite-projective representative a:P→M plus a precomposition square) is correct. Checks: step 1 Hom-differential signs verified term by term; step 2 lifts the derived iso to a:P→M with the representative lemma and gets a_V^* from rhom-well-defined with s=1; step 3 finite product = finite sum, and Hom out of the f.g. P^s commutes with the infinite sum over p, so c_P is the sum of the Mathlib-leaf equivalences; step 4 uses projective-hom-evaluation-model naturality on q; step 5 checks the square on pure tensors and uses K-flatness of F; steps 6-7 use the uncurrying lemma with the K-injective and K-flat hypotheses checked, and evaluation is a chain map with no sign. Edge cases: P=0, P=R[0]. Duplicate search (rg -L for 0ATK/0A8V/0BYM/0BYN and perfect/evaluation wording) found only the different lem-pc-perfect-ring-hom-tensor-* dual-tensor family; no duplicate. FIX (C1/C4): steps 6 and 7 identify the localized transpose with (1⊗counit) followed by Qq using lem-pc-source-kflat-module-tensor-model, which gives only an unspecified iso. Only lem-sf-ringed-derived-native-tensor states that the inverse-tensorator comparisons are natural and preserve the associator. Added it to steps 6 and 7, to proof_deps and to tool_uses, and wrote the localized identity in step 6. Advisory only: the base statement has no stmt_dep for the derived tensor/closed structure.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectSourceEvaluationQuasiIsomorphism",
+  "declaration": "CochainComplex.perfect_source_evaluation_quasi_isomorphism",
+  "declarations": [
+   "CochainComplex.perfectSourceDerivedEvaluation",
+   "CochainComplex.PerfectSourceHomModel",
+   "CochainComplex.perfect_source_evaluation_quasi_isomorphism"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectSourceEvaluationQuasiIsomorphism.lean",
+  "statement": "theorem perfect_source_evaluation_quasi_isomorphism (R : Type u) [CommRing R] (M F J I : CochainComplex (ModuleCat.{u} R) ℤ) (_hM : IsPerfectRingComplex (DerivedCategory.Q.obj M)) (_hF : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat F) [J.IsKInjective] [I.IsKInjective] (q : F ⊗ J ⟶ I) [QuasiIso q] : ∃ t : F ⊗ moduleHomComplex M J ⟶ moduleHomComplex M I, (∀ (p r s : ℤ) (f : F.X p) (h : (moduleHomComplex M J).X r) (x : M.X s), ((t.f (p + r) (HomologicalComplex.ιTensorObj F (moduleHomComplex M J) p r (p + r) rfl (f ⊗ₜ[R] h))).v s (s + (p + r)) rfl) x = q.f (s + (p + r)) (HomologicalComplex.ιTensorObj F J p (s + r) (s + (p + r)) (by omega) (f ⊗ₜ[R] (h.v s (s + r) rfl) x))) ∧ QuasiIso t ∧ IsIso (DerivedCategory.Q.map t) ∧ ∃ (eJ : DerivedCategory.Q.obj (moduleHomComplex M J) ≅ (ihom (DerivedCategory.Q.obj M)).obj (DerivedCategory.Q.obj J)) (eI : DerivedCategory.Q.obj (moduleHomComplex M I) ≅ (ihom (DerivedCategory.Q.obj M)).obj (DerivedCategory.Q.obj I)), PerfectSourceHomModel M J eJ ∧ PerfectSourceHomModel M I eI ∧ Functor.LaxMonoidal.μ DerivedCategory.Q F (moduleHomComplex M J) ≫ DerivedCategory.Q.map t ≫ eI.hom = DerivedCategory.Q.obj F ◁ eJ.hom ≫ perfectSourceDerivedEvaluation (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj F) (DerivedCategory.Q.obj J) ≫ (ihom (DerivedCategory.Q.obj M)).map (Functor.LaxMonoidal.μ DerivedCategory.Q F J ≫ DerivedCategory.Q.map q)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03ff4e4f0",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read node, 8 stmt_deps with Lean records, delivered module, report (Worker report + Second reading by Q26 present), live D(R) monoidal/closed/braiding sources (Instances/DerivedCategory, DerivedBraided braiding' canonical via Koszul braiding, ihomTensorToIhom), Stacks 0ATK(1). Node diff vs live: only lean record + added landed stmt_dep def-sc-module-total-hom-complex; lean.statement verbatim. Clauses: CommRing R/ModuleCat.{u}, IsPerfectRingComplex(Q M) only, kFlat F, IsKInjective J I, QuasiIso q; t pinned on all ιTensorObj generators and .v coordinates (unsigned formula verified chain map with ε2=(-1)^p, δ=dz-(-1)^r zd); QuasiIso ∧ IsIso Q t; eJ/eI pinned by transpose via signed ev (-1)^{pr} (same convention as landed projective_hom_evaluation_model); final equation verified by Koszul sign computation both sides (-1)^{s(p+r)} q(f⊗h(x)). Helpers have real data, theorem only sorry, docstrings with source/blueprint and 7 proof steps, no extra hypotheses/universes, no duplicates (rg names, ihomTensorToIhom, moduleHomComplex users), imports exist. Advisory: helper defs in theorem module → later citers must cite this node."
+ }
+}

@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-simple-isogeny-decomposition",
+ "kind": "statement",
+ "title": "Poincare isogeny decomposition and simple factors",
+ "statement": "Let $k$ be a field [def-weil-field]. A positive-dimensional abelian variety $C/k$ [def-sc-abelian-variety] is called $k$-simple if it has no abelian subvariety over $k$ of dimension strictly between $0$ and $\\dim C$; an abelian subvariety means a closed $k$-subgroup scheme which is itself an abelian variety [def-sc-group-scheme]. Every abelian variety $A/k$ admits a finite family of $k$-simple abelian varieties $C_1,\\ldots,C_r$ and a $k$-isogeny $u:\\prod_{i=1}^r C_i\\to A$ [def-sc-isogeny]; the product is the zero abelian variety when $r=0$. Every nonzero $k$-group-scheme homomorphism between two $k$-simple abelian varieties is an isogeny. Every $k$-isogeny $f:X\\to Y$ of abelian varieties has a $k$-isogeny $g:Y\\to X$ and an integer $n>0$ with $g\\circ f=[n]_X$ and $f\\circ g=[n]_Y$, where $[n]$ denotes multiplication by $n$ [def-sc-mult-n].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sc-isogeny",
+  "def-sc-mult-n",
+  "def-sfb-simple-abelian-variety"
+ ],
+ "proof": [
+  {
+   "text": "We first construct a complement to a nonzero proper abelian subvariety $i:B\\hookrightarrow A$. By [lem-sfb-abelian-inclusion-multiple-retraction], choose $n>0$ and $r:A\\to B$ with $ri=[n]_B$. Abelian varieties are commutative by [lem-sc-av-commutative], so $q=[n]_A-ir$ is a homomorphism. The group laws [def-sc-group-scheme, def-sc-mult-n] give $qi=0$ and $rq=[n]_Br-ri r=0$. Let $j:C\\hookrightarrow A$ be the scheme-theoretic image of $q$, an abelian variety by [lem-sfb-abelian-hom-image-dimension]. Since $rq=0$, $rj=0$: the defining ideal of $\\ker r$ pulls back to zero under $q$, so it lies in the kernel of $\\mathcal O_A\\to q_*\\mathcal O_A$, the ideal defining $C$.",
+   "uses": [
+    "lem-sfb-abelian-inclusion-multiple-retraction",
+    "lem-sc-av-commutative",
+    "def-sc-group-scheme",
+    "def-sc-mult-n",
+    "lem-sfb-abelian-hom-image-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23 and Theorem 8.24, pp.152–153; image construction replacing the potentially nonsmooth kernel complement by Im([n]-ir)."
+   }
+  },
+  {
+   "text": "The addition homomorphism $s:B\\times_kC\\to A$, $(b,c)\\mapsto i(b)+j(c)$, has abelian-variety source by [lem-sfb-abelian-finite-product]. It is surjective: $[n]_A=ir+q$ factors through $s$, and $[n]_A$ is surjective by [lem-sc-mult-n-isogeny]. Its kernel is isomorphic to $B\\times_A C$ by $(b,c)\\mapsto(b,-c)$, with the inverse given by the same formula. As $rj=0$, this intersection is a closed subscheme of $B[n]$: on it $[n]_Bb=ri(b)=rj(c)=0$. Thus it is finite, since $B[n]$ is finite by the same cited theorem; a closed subscheme of the spectrum of a finite-dimensional algebra has a quotient coordinate algebra of finite dimension. Consequently $s$ is an isogeny [def-sc-isogeny].",
+   "uses": [
+    "lem-sfb-abelian-finite-product",
+    "lem-sc-mult-n-isogeny",
+    "def-sc-isogeny"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 10.1, printed p.42, simple-factor discussion p.43, and Remark 8.6, p.36; scheme-theoretic details as specified in each step."
+   }
+  },
+  {
+   "text": "For use in induction, $\\dim A=\\dim B+\\dim C$: apply the kernel dimension formula [lem-sfb-abelian-hom-image-dimension] to the surjective map $s$, whose finite kernel has dimension zero, and use the product dimension formula [lem-sfb-abelian-finite-product]. Since $0<\\dim B<\\dim A$, both $\\dim B$ and $\\dim C$ are strictly smaller than $\\dim A$. This establishes precisely the smaller dimensions needed below.",
+   "uses": [
+    "lem-sfb-abelian-hom-image-dimension",
+    "lem-sfb-abelian-finite-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 10.1, printed p.42, simple-factor discussion p.43, and Remark 8.6, p.36; scheme-theoretic details as specified in each step."
+   }
+  },
+  {
+   "text": "Apply strong induction on $\\dim A$ to obtain the simple-factor decomposition. For dimension zero, [lem-sfb-abelian-finite-product] identifies $A$ with the empty product. For positive dimension, if $A$ is $k$-simple take the one factor $A$ and the identity isogeny. Otherwise the definition in the statement supplies $B$ with $0<\\dim B<\\dim A$, and steps 1–3 give $s:B\\times C\\to A$ with both dimensions smaller. The induction hypothesis gives isogenies $u_B:\\prod C_i\\to B$ and $u_C:\\prod D_j\\to C$. Their product, followed by $s$, is the required homomorphism; it is an isogeny by the finite-map verification in the next step.",
+   "uses": [
+    "lem-sfb-abelian-finite-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 10.1, printed p.42, simple-factor discussion p.43, and Remark 8.6, p.36; scheme-theoretic details as specified in each step."
+   }
+  },
+  {
+   "text": "Here is that verification for arbitrary isogenies. By [lem-sc-isogeny-degree] an isogeny is finite and flat. A product of two such maps factors as $u_B\\times1$ followed by $1\\times u_C$, each a base change of one factor; finiteness is preserved by base change and composition by [lem-trf-finite-radicial-basechange]. The maps are surjective: after passing to any algebraically closed extension of a target residue field, each nonempty finite fibre has a point, so the product fibre does too. Composition preserves surjectivity. The composite with $s$ is therefore finite and surjective; its kernel is finite by the base-change assertion of the same cited node, applied along the identity section. This proves that the composite is an isogeny [def-sc-isogeny] and completes the induction.",
+   "uses": [
+    "lem-sc-isogeny-degree",
+    "lem-trf-finite-radicial-basechange",
+    "def-sc-isogeny"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 10.1, printed p.42, simple-factor discussion p.43, and Remark 8.6, p.36; scheme-theoretic details as specified in each step."
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ be a nonzero homomorphism between $k$-simple abelian varieties. By [lem-sfb-abelian-hom-image-dimension] its image $I\\hookrightarrow Y$ is an abelian subvariety. It has positive dimension: otherwise [lem-sfb-abelian-finite-product] makes it the zero abelian variety and $f=0$. Simplicity of $Y$ therefore forces $\\dim I=\\dim Y$. A closed subvariety of the integral finite-dimensional variety $Y$ of full dimension is all of $Y$: a chain in a proper irreducible closed subset extends strictly by $Y$, and any full-support closed subscheme has zero ideal in a reduced scheme. Integrality is supplied by [lem-sc-abelian-variety-characterization]. Thus $f$ is surjective.",
+   "uses": [
+    "lem-sfb-abelian-hom-image-dimension",
+    "lem-sfb-abelian-finite-product",
+    "lem-sc-abelian-variety-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 10.1, printed p.42, simple-factor discussion p.43, and Remark 8.6, p.36; scheme-theoretic details as specified in each step."
+   }
+  },
+  {
+   "text": "By [lem-sfb-abelian-kernel-abelian-part], $K=\\ker f$ contains an abelian subvariety $D\\subseteq X$ with $\\dim D=\\dim K$. By simplicity of $X$, $\\dim D$ is zero or $\\dim X$. In the second case the closed-subvariety argument of step 6, now using integrality of $X$ [lem-sc-abelian-variety-characterization], gives $D=X$ and hence $f=0$, a contradiction. Therefore $\\dim K=0$, and the finite-kernel conclusion of the cited kernel lemma applies even if $K$ is nonreduced. Along with step 6 this proves that $f$ is an isogeny [def-sc-isogeny].",
+   "uses": [
+    "lem-sfb-abelian-kernel-abelian-part",
+    "lem-sc-abelian-variety-characterization",
+    "def-sc-isogeny"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 10.1, printed p.42, simple-factor discussion p.43, and Remark 8.6, p.36; scheme-theoretic details as specified in each step."
+   }
+  },
+  {
+   "text": "Now let $f:X\\to Y$ be any isogeny and $K=\\ker f$. It is finite and flat by [lem-sc-isogeny-degree], and surjective by [def-sc-isogeny]; hence $\\{f\\}$ is an fpqc covering [def-weil-pbc-fpqc-covering]. Indeed the inverse image of an affine open is affine by finiteness and maps onto that open. The finite commutative group scheme $K$ is annihilated by its positive order $n$ by [lem-sfb-finite-group-scheme-order-annihilator]; commutativity follows from [lem-sc-av-commutative]. Thus $[n]_X$ vanishes on $K$ scheme-theoretically, not just on geometric points.",
+   "uses": [
+    "lem-sc-isogeny-degree",
+    "def-sc-isogeny",
+    "def-weil-pbc-fpqc-covering",
+    "lem-sfb-finite-group-scheme-order-annihilator",
+    "lem-sc-av-commutative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 10.1, printed p.42, simple-factor discussion p.43, and Remark 8.6, p.36; scheme-theoretic details as specified in each step."
+   }
+  },
+  {
+   "text": "The group laws [def-sc-group-scheme, def-sc-mult-n] identify $X\\times_Y X$ with $X\\times_kK$: $(x,t)\\mapsto(x,x+t)$ has inverse $(x,x\\prime)\\mapsto(x,x\\prime-x)$. Both are scheme morphisms assembled from the group operations; the inverse lands in $K$ because $f(x\\prime-x)=0$. On this kernel pair the two pullbacks of $[n]_X$ are equal, since $[n](x+t)=[n]x+[n]t=[n]x$. Apply [lem-weil-pbc-fpqc-representable-descent] to obtain a unique scheme morphism $g:Y\\to X$ with $gf=[n]_X$. It is over $k$: the two maps $Y\\to\\operatorname{Spec}k$ agree after precomposing with $f$, and uniqueness in the same descent lemma cancels $f$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-mult-n",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; scheme-theoretic expansion of Milne AV I Remark 8.6, p.36."
+   }
+  },
+  {
+   "text": "Check that $g$ is a homomorphism. Write $L=g m_Y$ and $R=m_X(g\\times g)$ on $Y\\times Y$. Pullback along $f\\times f$ gives $L(fx,fx\\prime)=[n](x+x\\prime)$ and $R(fx,fx\\prime)=[n]x+[n]x\\prime$, equal by [def-sc-mult-n]. Each of $f\\times1$ and $1\\times f$ is an fpqc covering by [lem-galois-fpqc-covering-base-change]. Uniqueness in [lem-weil-pbc-fpqc-representable-descent] cancels these maps successively to give $L=R$. Also $g e_Y=gf e_X=[n]e_X=e_X$, and $(g i_Y)f=[n]i_X=i_X[n]=(i_Xg)f$, so the same uniqueness cancels $f$ and proves inverse compatibility. These are exactly the homomorphism identities [def-sc-group-scheme].",
+   "uses": [
+    "def-sc-mult-n",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; base change of coverings: Topologies Tag 022D, lemma-fpqc, part (3)."
+   }
+  },
+  {
+   "text": "Finally $(fg)f=f[n]_X=[n]_Yf$ by [def-sc-mult-n] and the homomorphism law. Uniqueness in [lem-weil-pbc-fpqc-representable-descent] cancels $f$, giving $fg=[n]_Y$. The equality $gf=[n]_X$ makes $g$ surjective because $[n]_X$ is surjective by [lem-sc-mult-n-isogeny]. The other equality embeds $\\ker g$ as a closed subgroup scheme of $Y[n]$, which is finite by that same cited theorem. Its coordinate algebra is a quotient of a finite-dimensional $k$-algebra, so $\\ker g$ is finite. Thus $g$ is an isogeny [def-sc-isogeny], and both required identities hold for the same $n>0$.",
+   "uses": [
+    "def-sc-mult-n",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-sc-mult-n-isogeny",
+    "def-sc-isogeny"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 10.1, printed p.42, simple-factor discussion p.43, and Remark 8.6, p.36; scheme-theoretic details as specified in each step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abelian-inclusion-multiple-retraction",
+  "lem-sc-av-commutative",
+  "def-sc-group-scheme",
+  "def-sc-mult-n",
+  "lem-sfb-abelian-hom-image-dimension",
+  "lem-sfb-abelian-finite-product",
+  "lem-sc-mult-n-isogeny",
+  "def-sc-isogeny",
+  "lem-sc-isogeny-degree",
+  "lem-trf-finite-radicial-basechange",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sfb-abelian-kernel-abelian-part",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-finite-group-scheme-order-annihilator",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-fpqc-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Proposition 10.1 and Remark 8.6; arbitrary-field complement built from Milne iAG Proposition 8.23 using Im([n]-ir), with explicit fpqc descent for the quasi-inverse."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An abelian variety is isogenous to a finite product of simple abelian varieties, and every nonzero homomorphism of simple abelian varieties is an isogeny",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: CategoryTheory.finrank_hom_simple_simple_eq_one_iff, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, CategoryTheory.finrank_hom_simple_simple_eq_zero_iff, CategoryTheory.isIso_of_epi_of_nonzero, CategoryTheory.finrank_hom_simple_simple, CategoryTheory.isIso_of_hom_simple, IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite, CategoryTheory.finrank_hom_simple_simple_eq_zero_of_not_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur and Wedderburn results require an already constructed semisimple category or algebra; they do not prove Poincare reducibility of abelian varieties"
+  },
+  {
+   "tool": "grep",
+   "query": "simple.*abelian|Poincare.*reducib|isogen",
+   "results": "0 hits; searched AlgebraicGeometry; logged results: none",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur and Wedderburn results require an already constructed semisimple category or algebra; they do not prove Poincare reducibility of abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"isogeny\"",
+   "results": "0 hits; searched all Mathlib / remote service; logged results: none",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur and Wedderburn results require an already constructed semisimple category or algebra; they do not prove Poincare reducibility of abelian varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Poincare complete reducibility of abelian varieties over an arbitrary field",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: CategoryTheory.Idempotents.isIdempotentComplete_of_abelian, Algebra.IsGeometricallyReduced.casesOn, Representation.IsIrreducible, Algebra.IsGeometricallyReduced.mk, IsAlgClosed.perfectField, IsAlgClosed.casesOn, Algebra.FormallyUnramified.isReduced_of_field, IsAlgClosed.recOn",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur and Wedderburn results require an already constructed semisimple category or algebra; they do not prove Poincare reducibility of abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare complete reducibility for abelian varieties and a quasi inverse to an isogeny up to multiplication by an integer",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: WeierstrassCurve.exists_variableChange_of_j_eq, WeierstrassCurve.exists_variableChange_isShortNF, WeierstrassCurve.VariableChange.instInv, WeierstrassCurve.VariableChange.instGroup, WeierstrassCurve.toShortNF_spec, WeierstrassCurve.VariableChange, WeierstrassCurve.VariableChange.inv_def, WeierstrassCurve.Affine.Point.toClass",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur and Wedderburn results require an already constructed semisimple category or algebra; they do not prove Poincare reducibility of abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare complete reducibility of abelian varieties over a field and quasi inverse isogenies",
+   "results": "8 hits; ; logged results: WeierstrassCurve.exists_variableChange_of_j_eq, WittVector.isocrystal_classification, CategoryTheory.finrank_hom_simple_simple_eq_one_iff, WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction, CategoryTheory.ObjectProperty.isoModSerre_of_isIso, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, CategoryTheory.NonPreadditiveAbelian.isIso_r, WeierstrassCurve.VariableChange.instGroup",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Schur and semisimple module results presuppose a category of abelian varieties up to isogeny with its kernel and simplicity theory; they do not establish the geometric assertions here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"isogeny\"",
+   "results": "0 hits; ; logged results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Schur and semisimple module results presuppose a category of abelian varieties up to isogeny with its kernel and simplicity theory; they do not establish the geometric assertions here"
+  },
+  {
+   "tool": "grep",
+   "query": "isogen|AbelianVariety|Poincar.*reduc",
+   "results": "0 hits; ; logged results: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Schur and semisimple module results presuppose a category of abelian varieties up to isogeny with its kernel and simplicity theory; they do not establish the geometric assertions here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every abelian variety is isogenous to a product of simple abelian varieties",
+   "results": "8 hits; ; logged results: exists_prime_addEquiv_ZMod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Group.is_simple_iff_prime_card, IsSemisimpleModule.exists_linearEquiv_dfinsupp, IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_end, CategoryTheory.Abelian.has_finite_products, IsSemisimpleRing.exists_ringEquiv_pi_matrix_end_mulOpposite, IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Schur and semisimple module results presuppose a category of abelian varieties up to isogeny with its kernel and simplicity theory; they do not establish the geometric assertions here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero homomorphism between simple abelian varieties is an isogeny",
+   "results": "8 hits; ; logged results: CategoryTheory.isIso_of_epi_of_nonzero, CategoryTheory.isIso_of_hom_simple, CategoryTheory.isIso_iff_nonzero, CategoryTheory.epi_from_simple_zero_of_not_iso, CategoryTheory.isIso_of_mono_of_nonzero, CategoryTheory.Simple.mono_isIso_iff_nonzero, CategoryTheory.finrank_hom_simple_simple_eq_zero_iff, LinearMap.bijective_of_ne_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Schur and semisimple module results presuppose a category of abelian varieties up to isogeny with its kernel and simplicity theory; they do not establish the geometric assertions here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-hom-finite-free",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies).",
+   "via": [
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-simple-isogeny-decomposition",
+  "worker": "stage1",
+  "summary": "Checked Milne AV I pp.32,36,42–43 and iAG pp.28–29,108–109,152–153,221. Constructed the complement as Im([n]-ir) to avoid assuming a reduced kernel is smooth over an imperfect field. Wrote dimension induction, the simple-map argument and scheme-theoretic fpqc descent for quasi-inverses. Five statement-only prerequisites isolate the multiple retraction, image dimension formula, arbitrary-field kernel abelian part, finite-group-scheme annihilator and finite products. No target or item statement changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). These steps supply the auxiliary isogeny input in the abelian-Hom finite-freeness branch; no unit or chapter route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-4d319b15a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-4d319b15a (reviewer sub-agent of L); spot-checked: I read the item, its 11 steps and all five new nodes in full, and checked them against the sources. Milne AV I Prop 10.1 (p.42, fn 10), the paragraph after Rem 10.2 (p.43, fn 11) and Rem 8.6 (p.36). Milne iAG Lemma 8.22, Prop 8.23 and the proof of Thm 8.24 (pp.152-153); Thm 1.72 (pp.28-29); Rem 5.42 (pp.108-109); Prop 11.32 (p.221). Stacks 0B2M, 03RO, 0B7Q and 0BFC, whose labels match tags/tags. All five new statements are true over an arbitrary field. The kernel abelian-part node is true by Im([m]-sf) for a quasi-section s; I checked mu_p, alpha_p and [p] kernels, the empty product, and B=0 and B=A for the retraction. None is a duplicate: lem-sfb-abelian-closed-subgroup-reduced-component and lem-sfb-equal-dimension-abelian-retract assume an algebraically closed field, and lem-sc-image-subgroup and lem-sc-connected-finite-order state less. Step checks: qi=0 and rq=0, and C lies in ker r scheme-theoretically. ker s is isomorphic to B x_A C, which is closed in B[n]. The dimension induction has explicit base cases. The isogeny product is handled by base change and composition, with the kernel as a base change along e. The full-dimensional image equals Y by integrality. The fpqc kernel pair X x_Y X is identified with X x K, and descent with uniqueness cancellations gives the homomorphism property and fg=[n]. No cycle; the item is not superseded in live or side-live. Batch 5: lem-sc-mult-n-isogeny is a basic abelian-variety fact, not part of the trace formula or Poincare duality; its closure reaches def-trf-schematically-dense-open only through general Nagata/Hilbert-polynomial material, so I accept it. Accepted tool uses: the sc abelian-variety lemmas (mult-n-isogeny, isogeny-degree, characterization, av-commutative) and the fpqc descent and base-change Mathlib leaves. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.SimpleIsogenyDecomposition",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_simple_isogeny_decomposition",
+  "declarations": [
+   "AlgebraicGeometry.IsAbelianVariety.exists_simple_isogeny_decomposition",
+   "AlgebraicGeometry.isIsogeny_of_nonzero_of_simple",
+   "AlgebraicGeometry.IsIsogeny.exists_isogeny_quasi_inverse"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/SimpleIsogenyDecomposition.lean",
+  "statement": "theorem IsAbelianVariety.exists_simple_isogeny_decomposition {k : Type u} [Field k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] : ∃ (r : ℕ) (C : Fin r → Over (Spec (.of k))) (_ : ∀ i, GrpObj (C i)) (_ : ∀ i, IsAbelianVariety (C i)), (∀ i, IsSimpleAbelianVariety (C i)) ∧ ∃ (_ : GrpObj (piObj C)), (∀ i, IsMonHom (Pi.π C i)) ∧ ∃ (f : piObj C ⟶ A), IsIsogeny f",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f5a4502b",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read node, new def node def-sfb-simple-abelian-variety, both modules, report, and deps (IsAbelianVariety/dim, IsIsogeny class, torsionSubgroupScheme=[n]=𝟙^n, AbelianFiniteProduct piObj convention). Simplicity: 0<dim C and no closed-immersion IsMonHom abelian B with 0<dim B<dim C, which equals the node and Milne AV p.42; equivalent to IsClosedSubgroupScheme, not an H4 duplicate. Decomposition: Fin r simple factors, piObj group law pinned by projection homs, r=0 gives Spec k, isogeny to A. Nonzero hom between simples: f≠1 (scoped MonObj zero map) gives IsIsogeny. Quasi-inverse: g isogeny, n>0, f≫g=𝟙X^n and g≫f=𝟙Y^n. Arbitrary field, universe u, no extra assumptions. Item diff vs side-live only adds lean and the (A) stmt_dep; lean.statement fields verbatim; new node has the §5 fields and 5 searches; no duplicate in project or DAG; docstrings carry source, blueprint and all 11 proof steps; sorry only; imports exist. No changes; not recompiled."
+ }
+}

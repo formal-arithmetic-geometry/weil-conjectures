@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-finite-graded-module-section-tail",
+ "kind": "statement",
+ "title": "Recovering a finite graded module from the section tail of its associated sheaf",
+ "statement": "Let $S=\\bigoplus_{d\\ge0}S_d$ be a nonnegatively graded commutative ring with $S_0$ Noetherian [def-weil-pbc-noetherian-ring], generated as an $S_0$-algebra by finitely many elements of $S_1$. Let $M=\\bigoplus_{d\\in\\mathbf Z}M_d$ be a finitely generated graded $S$-module, meaning $S_aM_b\\subseteq M_{a+b}$. Put $X=\\operatorname{Proj}(S)$ [def-pc-proj]. For $n\\in\\mathbf Z$, let $M(n)_d=M_{n+d}$ and let $\\widetilde{M(n)}$ be the associated sheaf of the shifted module [def-weil-pbc-proj-twisting-sheaf]. The canonical $S_0$-linear map $M_n\\longrightarrow H^0(X,\\widetilde{M(n)})$ [pqf-def-cohomology], sending $x\\in M_n=M(n)_0$ to the section with restriction $x/1$ on every standard homogeneous localization chart, is an isomorphism for all integers $n\\ge n_0$, for some $n_0\\ge0$. Neither nonemptiness of $X$ nor absence of irrelevant-ideal torsion in $M$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0AG7, lemma-recover-tail-graded-module; constructions.tex Tag 01MT, lemma-apply-modules, identifies the target with the sheaf associated to the shifted module because S is generated in degree one."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-proj",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite degree-one generators $f_i$ from the hypothesis, and put $\\mathcal F=\\widetilde M$. Apply [lem-sfb-finite-graded-proj-section-comparison] to obtain a Noetherian ring $S$, a coherent $\\mathcal F$, the graded module $N=\\bigoplus_n\\Gamma(X,\\mathcal F(n))$, and the degree-preserving $S$-linear canonical map $\\phi:M\\to N$. It also gives that every $\\phi_{(f_i)}$ is an isomorphism, including empty charts.",
+   "uses": [
+    "lem-sfb-finite-graded-proj-section-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, coherence and the sheafified unit/counit calculation (old steps 1--4)."
+   }
+  },
+  {
+   "text": "The hypotheses on $S_0$ and the degree-one generators, together with coherence of $\\mathcal F$, let us apply [lem-sfb-standard-proj-coherent-section-finiteness]. Its graded action is the same multiplication-by-sections action used for $N$, so $N^+=\\bigoplus_{n\\ge0}N_n$ is finite over $S$.",
+   "uses": [
+    "lem-sfb-standard-proj-coherent-section-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, nonnegative section-module finiteness, using Tag 0AG6, lemma-coherent-on-proj(4)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-graded-local-isomorphism-tail] to $\\psi=\\phi$. Step 1 supplies Noetherianity, degree preservation and all the localized isomorphisms; $M$ is finite by hypothesis and $N^+$ is finite by step 2. The lemma gives a nonnegative bound $n_0$ for which $\\phi_n:M_n\\to\\Gamma(X,\\mathcal F(n))$ is an $S_0$-linear isomorphism for every $n\\ge n_0$.",
+   "uses": [
+    "lem-sfb-graded-local-isomorphism-tail"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, nonnegative kernel/cokernel argument and final degree bound (old steps 5--8)."
+   }
+  },
+  {
+   "text": "For $n\\ge n_0$, compose $\\phi_n$ with $\\Gamma(\\alpha_{M,n})$, using [lem-sfb-standard-proj-twist-tensor]. This is an isomorphism to $H^0(X,\\widetilde{M(n)})$. By the definition of $\\phi_n$ in step 1 it is the canonical section map, whose restriction on every standard chart is $x\\mapsto x/1$. This proves the statement, with the same bound for all integers $n\\ge n_0$.",
+   "uses": [
+    "lem-sfb-standard-proj-twist-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, conclusion; constructions.tex Tag 01MT, lemma-apply-modules (old step 9)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-graded-proj-section-comparison",
+  "lem-sfb-standard-proj-coherent-section-finiteness",
+  "lem-sfb-graded-local-isomorphism-tail",
+  "lem-sfb-standard-proj-twist-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0AG7, lemma-recover-tail-graded-module; chartwise version of its kernel/cokernel proof, using 0AG5 and 0AG6(4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "recover|twist|Twist|[Ss]erre|gradedModule",
+   "results": "{\"t\": \"2026-10-22T04:22:49Z\", \"tool\": \"grep\", \"query\": \"recover|twist|Twist|[Ss]erre|gradedModule\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct Proj, its structure sheaf and affine charts; none states eventual recovery of an arbitrary finite graded module from sections of shifted associated sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Module.Finite",
+   "results": "{\"t\": \"2026-10-22T04:22:49Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct Proj, its structure sheaf and affine charts; none states eventual recovery of an arbitrary finite graded module from sections of shifted associated sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite graded module recovered from global sections of twists in high degrees Serre correspondence",
+   "results": "{\"t\": \"2026-10-22T04:22:50Z\", \"tool\": \"leansearch\", \"query\": \"Finite graded module recovered from global sections of twists in high degrees Serre correspondence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"DirectSum.GradeZero.module\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj\", \"GradedAlgebra\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"SheafOfModules.GeneratingSections.IsFiniteType\"], \"digest\": \"d9b1c928bb1a0ba8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct Proj, its structure sheaf and affine charts; none states eventual recovery of an arbitrary finite graded module from sections of shifted associated sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite graded module over a standard graded Noetherian ring the canonical map to sections of its associated sheaf is an isomorphism in all sufficiently large degrees",
+   "results": "{\"t\": \"2026-10-22T04:22:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite graded module over a standard graded Noetherian ring the canonical map to sections of its associated sheaf is an isomorphism in all sufficiently large degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\"], \"digest\": \"8e936ef131de4e59\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct Proj, its structure sheaf and affine charts; none states eventual recovery of an arbitrary finite graded module from sections of shifted associated sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre correspondence identifies high graded pieces of a finitely generated module with global sections on Proj of the shifted module sheaf",
+   "results": "{\"t\": \"2026-10-22T04:23:32Z\", \"tool\": \"leanfinder\", \"query\": \"Serre correspondence identifies high graded pieces of a finitely generated module with global sections on Proj of the shifted module sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.Proj.ext_iff\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\"], \"digest\": \"d71845aa1f91230f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct Proj, its structure sheaf and affine charts; none states eventual recovery of an arbitrary finite graded module from sections of shifted associated sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "recover.*graded|graded.*recover|serre.*[Ss]ection|[Ss]ection.*[Tt]ail",
+   "results": "{\"t\": \"2026-10-22T04:34:05Z\", \"tool\": \"grep\", \"query\": \"recover.*graded|graded.*recover|serre.*[Ss]ection|[Ss]ection.*[Tt]ail\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, graded ring components, or finite type, not eventual recovery of a finite graded module."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Module.Finite",
+   "results": "{\"t\": \"2026-10-22T04:34:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, graded ring components, or finite type, not eventual recovery of a finite graded module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical map from homogeneous component of finite graded module to global sections on Proj is an isomorphism in high degrees",
+   "results": "{\"t\": \"2026-10-22T04:34:05Z\", \"tool\": \"leansearch\", \"query\": \"Canonical map from homogeneous component of finite graded module to global sections on Proj is an isomorphism in high degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedRing.proj\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk\", \"AlgebraicGeometry.Proj.awayι.congr_simp\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\"], \"digest\": \"aa72e4a4c5eaf3c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, graded ring components, or finite type, not eventual recovery of a finite graded module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite graded module over a standard graded Noetherian ring recovered by global sections of twists in sufficiently large degrees",
+   "results": "{\"t\": \"2026-10-22T04:34:09Z\", \"tool\": \"leanfinder\", \"query\": \"Finite graded module over a standard graded Noetherian ring recovered by global sections of twists in sufficiently large degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"GradedRing.GradeZero.isNoetherianRing\", \"HomogeneousLocalization.Away.finiteType\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"HomogeneousLocalization.Away.mk_surjective\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\"], \"digest\": \"c7bcca29663bd0b4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, graded ring components, or finite type, not eventual recovery of a finite graded module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre correspondence identifies the high degree components of a finite graded module with sections of its sheaf on projective spectrum",
+   "results": "{\"t\": \"2026-10-22T04:35:33Z\", \"tool\": \"leanfinder\", \"query\": \"Serre correspondence identifies the high degree components of a finite graded module with sections of its sheaf on projective spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.openToLocalization\", \"AlgebraicGeometry.Proj.ext_iff\"], \"digest\": \"8570354077bfc0e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, graded ring components, or finite type, not eventual recovery of a finite graded module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-coordinate-ring-euler-polynomial",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; comparison prerequisite: canonical sections of shifted finite graded modules recover all sufficiently large homogeneous pieces (Stacks 0AG7).",
+   "via": [
+    "lem-sfb-projective-coordinate-ring-euler-polynomial",
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-graded-module-section-tail",
+  "worker": "stage1",
+  "summary": "Repair of O2 rebind delivery: copied the current live item without changing its statement, Lean binding or ownership. Following the released human re-split request, extracted old steps 1--4 as finite-graded-proj-section-comparison and steps 5--8 as the purely algebraic graded-local-isomorphism-tail, both statement-only, genuinely smaller nodes. The item is now a four-step assembly using the existing coherent section-finiteness and twist comparison nodes. Full transferred arguments and the prior report are retained in the sandbox report.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; comparison prerequisite: canonical sections of shifted finite graded modules recover all sufficiently large homogeneous pieces (Stacks 0AG7). Original steps 1--4 are now lem-sfb-finite-graded-proj-section-comparison; steps 5--8 are now lem-sfb-graded-local-isomorphism-tail; step 9 is the final assembly. The inherited null blueprint ancestor and its via chain are preserved.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-sc-p1-proj-tilde-functorial",
+  "lem-sc-graded-localization-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O2-87117af00",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-87117af00 (reviewer sub-agent of L); spot-checked: This is a legitimate re-split. The repair note (re-split decided by the human on 2026-10-21) is still released, and it was released at 05:47:54Z on 2026-10-22, after the Q10 S1 merge (04:50) and the N9 S2 merge (05:09). The live Lean module FiniteGradedModuleSectionTail.lean still has a sorry at line 129, so the note applies and I judged the delivery on its merits. It also supersedes O2's earlier rebind delivery, which was returned under A7. Field diff against clones/live: only proof, proof_deps and split_report differ; the statement, stmt_deps, lean, reviewed_lean and N9 ownership are unchanged. Source: Stacks coherent.tex 0AG7 (lines 3862-3929), read in full. All nine old steps survive. Old steps 1-4 are node A (lem-sfb-finite-graded-proj-section-comparison, 1808 characters): S is Noetherian, the sheaf of M is coherent, phi is S-linear, and phi_(f_i) is an isomorphism whose inverse is the counit of lem-sfb-proj-section-module-reconstruction. Old steps 5-8 are node B (lem-sfb-graded-local-isomorphism-tail, 1631 characters): K and Q are finite, K_(f)=Q_(f)=0, the annihilator exponents b_ij exist, and the pigeonhole bound B_T holds. Finiteness of N+ is a hypothesis of B, discharged by item step 2 through the existing 0AG6(4) node. Old step 9 is item steps 3-4. The item proof is 1428 characters. The two nodes are of comparable size, independent of each other, with no cycle, and neither restates the item. Both new statements are true. I checked the pigeonhole bound sum(a_i) <= sum(b_ij) - r, and that the nonnegative truncation leaves the degree-zero fractions unchanged. Edge cases checked: r=0, nilpotent f_i, M=0, T=0, M=k[t]/(t) and negative generator degrees. Every cited statement says what its step uses: section-finiteness (same action), twist-tensor alpha_{M,n} (the f_i cover), reconstruction epsilon (its chart formula), and sheaf-exists(d). Step 4 is genuinely elementary. No duplicates turned up in searches for 0AG7, degree-zero localization and eventual graded isomorphisms (checked dehomogenization, graded-module-away-comparison, section-ring-localization, cohomology-fraction). No SGA, nothing on the drop list, blueprint fields inherited, Mathlib searches of three kinds recorded. tool_uses is [], which is correct because the item now cites only unit nodes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGradedModuleSectionTail",
+  "declaration": "AlgebraicGeometry.Proj.finite_graded_module_section_tail",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGradedModuleSectionTail.lean",
+  "statement": "theorem finite_graded_module_section_tail {S : Type u} [CommRing S] (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜] [IsNoetherianRing (𝒜 0)] (hgen : ∃ (r : ℕ) (f : Fin r → S), (∀ i : Fin r, f i ∈ 𝒜 1) ∧ Algebra.adjoin (𝒜 0) (Set.range f) = ⊤) {M : Type v} [AddCommGroup M] [Module S M] [Module.Finite S M] (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜) (hsmul : ∀ (a : ℕ) (b : ℤ) (s : S) (x : M), s ∈ 𝒜 a → x ∈ 𝓜 b → s • x ∈ 𝓜 ((a : ℤ) + b)) : ∃ n0 : ℤ, 0 ≤ n0 ∧ ∀ n : ℤ, n0 ≤ n → ∃ (F : SheafOfModules.{max u v} (moduleRings (Proj 𝒜).toRingedSpace)) (alpha : ∀ (f : S) (d : ℕ), 0 < d → f ∈ 𝒜 d → F.val.obj (op (basicOpen 𝒜 f)) →+ LocalizedModule.Away f M), (∀ (f : S) (d : ℕ) (hd : 0 < d) (hf : f ∈ 𝒜 d), Function.Injective (alpha f d hd hf) ∧ Set.range (alpha f d hd hf) = degreeZeroFractions (fun k : ℕ ↦ (𝒜 k : Set S)) (fun k : ℕ ↦ (𝓜 (n + k) : Set M)) (Submonoid.powers f)) ∧ (∀ (f : S) (d : ℕ) (hd : 0 < d) (hf : f ∈ 𝒜 d) (r : HomogeneousLocalization.Away 𝒜 f) (s : F.val.obj (op (basicOpen 𝒜 f))), alpha f d hd hf (awayToSection 𝒜 f r • s) = algebraMap (HomogeneousLocalization.Away 𝒜 f) (Localization.Away f) r • alpha f d hd hf s) ∧ (∀ (f g : S) (d b : ℕ) (hd : 0 < d) (hb : 0 < b) (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 b) (inc : basicOpen 𝒜 g ≤ basicOpen 𝒜 f) (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g ^ e = a * f → ∀ (m : ℕ) (y : M) (s : F.val.obj (op (basicOpen 𝒜 f))), alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) → alpha g b hb hg (F.val.map (homOfLE inc).op s) = mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g)) ∧ ∃ (eta : 𝒜 0 →+* (Proj 𝒜).presheaf.obj (op ⊤)) (gamma : 𝓜 n →+ F.val.obj (op ⊤)), (∀ (r : 𝒜 0) (f : S) (d : ℕ) (hd : 0 < d) (hf : f ∈ 𝒜 d), (Proj 𝒜).presheaf.map (homOfLE (le_top : basicOpen 𝒜 f ≤ ⊤)).op (eta r) = awayToSection 𝒜 f (fromZeroRingHom 𝒜 _ r)) ∧ (∀ (r : 𝒜 0) (x y : 𝓜 n), (y : M) = (r : S) • (x : M) → gamma y = eta r • gamma x) ∧ (∀ (x : 𝓜 n) (f : S) (d : ℕ) (hd : 0 < d) (hf : f ∈ 𝒜 d), alpha f d hd hf (F.val.map (homOfLE (le_top : basicOpen 𝒜 f ≤ ⊤)).op (gamma x)) = mk (x : M) 1) ∧ Function.Bijective gamma",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing associated-sheaf chart interface of gradedModuleSheaf_exists for M(n), without a second sheaf construction. The canonical section and scalar maps are specified by x/1 and r/1 on every standard chart. The scalar law and bijectivity express an S_0-linear isomorphism. The existentially presented associated sheaf is uniquely determined up to the compatible isomorphism of the recorded dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8212de3d",
+  "group": "N9",
+  "result": "pass",
+  "note": "Theorem stmt_dep lem-weil-pbc-proj-graded-module-sheaf-exists: statement uses no decl of its module (only local instance + theorem); moduleRings from DerivedHomMayerVietoris, degreeZeroFractions from def-sc node, rest Mathlib. M~ is the object that theorem constructs (def-weil-pbc-proj-twisting-sheaf (1) and its Lean record route general M~ through it), so the item genuinely depends on the constructed object -> PASS on that point. Node diff vs live: only lean + two added landed stmt_deps, both used; lean.statement verbatim. Hypotheses match (IsNoetherianRing (𝒜 0), hgen with degree-one generators and r=0 allowed, Module.Finite + IsInternal ℤ-grading + hsmul, no nonempty/torsion hyps, independent universes u,v with F in max u v). Conclusion: n0:ℤ ≥0, ∀ n≥n0; F pinned via injective alpha with range degreeZeroFractions(𝒜 k, 𝓜(n+k), powers f), awayToSection scalar law and the a^m y/g^{em} restriction, matching the dependency's (b) uniqueness; eta pinned to r/1, gamma to x/1 on charts (unique by separatedness); S0 law + Bijective = S0-linear iso; H^0 read as global sections. Edge cases: empty Proj, f=0/nilpotent, irrelevant-torsion M, negative degrees, M=0, citer S=M=A. No hollow defs, sorry only, source/blueprint docstrings and 9-step proof docstring present, report sections present. No files changed, so nothing compiled. Advisory: Twist.Modules/PQFCohomology public imports not needed to type the statement."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-completed-pullback-tensor-associativity-representatives",
+ "kind": "lemma",
+ "title": "Coherent pullback tensor associativity on K-flat triples",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite coefficient extension $E/\\mathbb Q_\\ell$, schemes $X,Y$, and $f:X\\to Y$. Use the coherent coefficient-sequence modules, derived inverse image $F$, and normalized tensor comparison $\\mu$ of [def-pur-completed-pullback-tower-realizations], and the K-flat tensor models of [def-coef-ringed-tensor-hom-model]. For three K-flat cochain complexes $A,B,C$ of coefficient-sequence module sheaves on $Y$, put $M=Q_Y(A)$, $N=Q_Y(B)$, and $P=Q_Y(C)$. Then $F(\\alpha^Y_{M,N,P})\\,\\mu_{M,N\\otimes P}\\,(1\\otimes\\mu_{N,P})=\\mu_{M\\otimes N,P}\\,(\\mu_{M,N}\\otimes1)\\,\\alpha^X_{FM,FN,FP}$. Composition is in traversal order. No boundedness, termwise flatness, constructibility, or invertibility hypothesis is imposed. This statement concerns the displayed localized K-flat triples; extending it by naturality to arbitrary derived objects is separate.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, total tensor construction and its reassociation; Tag 07A2, lemma-tensor-product-K-flat."
+ },
+ "proof": [
+  {
+   "text": "Use coefficientTotalTensor_isKFlat for both intermediate total tensors and pullbackTensorSequenceGood for the inverse images. Apply the normalization of pullbackTensorSystemComparison to the four pairs (A,B), (B,C), (A tensor B,C) and (A,B tensor C).",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In each triple degree, the cochain comparison takes the adjunction-unit image of a pure tensor to the tensor of the unit images. Along either associativity path, (x tensor y) tensor z is therefore sent to f*x tensor (f*y tensor f*z). Reassociation introduces no permutation or extra Koszul sign. The same equality respects all three differential summands and sequence restrictions. Tensor sheafification, pure-tensor extensionality and total coproduct injections detect equality of the chain maps. Apply the derived quotient, insert the specified tensor representative and exact inverse-image factorization maps, and cancel their naturality squares. The remaining reassociation maps are the displayed derived associators.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-completed-pullback-tower-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The triple-degree reassociation calculation within the total-tensor proof of Tag 07A4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor with an invertible tensor comparison preserves associativity if it does so on K flat representatives",
+   "results": "8 hits: CategoryTheory.Functor.CoreMonoidal.associativity, CategoryTheory.Functor.CoreMonoidal.associativity_assoc, CategoryTheory.Functor.Monoidal.map_associator_inv'_assoc, CategoryTheory.Monoidal.InducingFunctorData.associator_eq, CategoryTheory.Functor.Monoidal.map_associator'_assoc, CategoryTheory.Functor.Monoidal.map_associator_assoc, CategoryTheory.Functor.Monoidal.map_associator_inv_assoc, CategoryTheory.Functor.Monoidal.map_tensor_assoc",
+   "date": "2026-10-27",
+   "verdict": "No exact statement of the normalized coherent inverse-image comparison on K-flat triples; the monoidal functor laws require coherence data, which is the obligation here."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*associativity|associativity.*tensor",
+   "results": "9 hits: Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact statement of the normalized coherent inverse-image comparison on K-flat triples; the monoidal functor laws require coherence data, which is the obligation here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal.associativity",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.Functor.Monoidal.associativity'",
+   "date": "2026-10-27",
+   "verdict": "No exact statement of the normalized coherent inverse-image comparison on K-flat triples; the monoidal functor laws require coherence data, which is the obligation here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical tensor comparison for derived inverse image preserves the associator on K-flat cochain complex representatives",
+   "results": "8 hits: HomologicalComplex.associator, TensorProduct.assocIsometry_symm_apply, HomologicalComplex.mapBifunctorAssociator, TensorProduct.tensorTensorTensorAssoc, HomologicalComplex.mapBifunctorAssociatorX, HomologicalComplex.leftUnitor'_inv_comm, Bimod.AssociatorBimod.inv, HomologicalComplex.mapBifunctorAssociatorX_hom_D₂",
+   "date": "2026-10-27",
+   "verdict": "No exact statement of the normalized coherent inverse-image comparison on K-flat triples; the monoidal functor laws require coherence data, which is the obligation here."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The normalized derived pullback/tensor comparison used for coefficient twists: coherent associativity before derived inverse limit.",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorAssociativityRepresentatives",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorAssociativityRepresentatives.lean",
+  "declaration": "WeilConjectures.completedPullbackTensor_associativity_representatives",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensor_associativity_representatives"
+  ],
+  "statement": "theorem completedPullbackTensor_associativity_representatives {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (A B C : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n    (hA : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := coefficientSequenceTopology (ProEt.topology Y))\n      (R := coefficientSequenceCommRingSheaf l E Y) A)\n    (hB : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := coefficientSequenceTopology (ProEt.topology Y))\n      (R := coefficientSequenceCommRingSheaf l E Y) B)\n    (hC : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := coefficientSequenceTopology (ProEt.topology Y))\n      (R := coefficientSequenceCommRingSheaf l E Y) C) :\n    let M := DerivedCategory.Q.obj A\n    let N := DerivedCategory.Q.obj B\n    let P := DerivedCategory.Q.obj C\n    (pullbackTensorSequenceDerived l E f).map\n      ((pullbackTensorCalculus l E Y).systemClosed.monoidal.associator M N P).hom ≫\n      (pullbackTensorSystemComparison l E f).hom.app\n        (M,(pullbackTensorCalculus l E Y).systemClosed.tensor.obj (N,P)) ≫\n      (pullbackTensorCalculus l E X).systemClosed.tensor.map\n        (Prod.mkHom (𝟙 _) ((pullbackTensorSystemComparison l E f).hom.app (N,P))) =\n    (pullbackTensorSystemComparison l E f).hom.app\n      ((pullbackTensorCalculus l E Y).systemClosed.tensor.obj (M,N),P) ≫\n      (pullbackTensorCalculus l E X).systemClosed.tensor.map\n        (Prod.mkHom ((pullbackTensorSystemComparison l E f).hom.app (M,N)) (𝟙 _)) ≫\n      ((pullbackTensorCalculus l E X).systemClosed.monoidal.associator\n        ((pullbackTensorSequenceDerived l E f).obj M)\n        ((pullbackTensorSequenceDerived l E f).obj N)\n        ((pullbackTensorSequenceDerived l E f).obj P)).hom",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T094443-L-229970",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T103446-L-1082582",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.completedPullbackTensor_associativity_representatives"
+  ],
+  "sorry_after": [
+   "WeilConjectures.completedPullbackTensor_associativity_representatives"
+  ]
+ }
+}

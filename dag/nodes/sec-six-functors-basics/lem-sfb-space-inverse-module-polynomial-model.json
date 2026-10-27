@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-space-inverse-module-polynomial-model",
+ "kind": "statement",
+ "title": "Polynomial finite-free model of the infinitesimal derived limit",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Separated, finite type and proper morphisms use [def-sfb-space-morphism-properties]. Finite presentation means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. Use quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it has a presentation $\\mathcal O^r\\to\\mathcal O^s\\to F\\to0$ with $r,s$ finite. Base-flatness means flatness of stalks on etale scheme charts over the corresponding local rings of the base [def-pc-scheme-module-flat-over]. Proper support means there exist a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $G$ on $Z$ such that $i_*G\\simeq F$ [def-sfb-space-proper-quot-functor]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective transition maps whose kernels are locally nilpotent, meaning every element of each kernel is nilpotent, and set $A=\\varprojlim_n A_n$. Let $X\\to\\operatorname{Spec}A$ be separated and finitely presented, put $X_n=X\\times_A\\operatorname{Spec}A_n$. For every $n\\geq1$ let $M_n$ be a finitely presented quasi-coherent $\\mathcal O_{X_n}$-module, flat over $A_n$, with support proper over $A_n$, with specified isomorphisms $M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$ for $n\\geq2$. Use unbounded derived categories of module sheaves [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory with quasi-coherent cohomology. Regard $M_n$ as a module on $X$ by direct image along $X_n\\hookrightarrow X$; the given transition isomorphisms followed by quotient maps define its inverse-system maps. The symbol $R\\varprojlim_{D_{\\mathrm{QCoh}}}M_n$ denotes the homotopy inverse limit in this full derived subcategory: it fits into the product triangle $K\\to\\prod_{n\\geq1}M_n\\xrightarrow{1-\\mathrm{shift}}\\prod_{n\\geq1}M_n\\to K[1]$, with products taken in $D_{\\mathrm{QCoh}}$ and projections $q_n:K\\to M_n$ induced by the first arrow. Here the shift has $n$th component equal to the transition map composed with the $(n+1)$st projection. Let $K$ be this homotopy inverse limit [lem-sfb-space-inverse-module-derived-limit]. Let $U=\\operatorname{Spec}B\\to X$ be an affine etale scheme chart, and let $P=A[T_1,\\ldots,T_r]\\twoheadrightarrow B$ be a surjective $A$-algebra map with $r$ finite [def-weil-pbc-mv-polynomial-ring]. There exists a bounded-above complex $E^\\bullet$ of finite free $P$-modules representing $R\\Gamma(U,K)$ after restriction of scalars to $P$. For every $f\\in P$, with image $\\bar f\\in B$, the localized complex $E^\\bullet_f$ represents $R\\Gamma(\\operatorname{Spec}B_{\\bar f},K)$ after restriction of scalars to $P_f$. Both representations respect the action of $A$. These complexes are K-flat over $A$: tensoring them termwise with any acyclic complex of $A$-modules gives an acyclic total tensor complex. In particular $E^\\bullet_f\\otimes_A R$ represents $R\\Gamma(\\operatorname{Spec}B_{\\bar f},K)\\otimes_A^{\\mathbf L}R$ for every $A$-algebra $R$, including $f=1$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX7 (lemma-relative-pseudo-coherence) and the polynomial-chart construction in the proof of Tag 0CX9 (lemma-finitely-presented); relative-to-affine comparison 0CSX (spaces-more-morphisms.tex, lemma-qcoh-relative-pseudo-coherence-characterize) and 09UU (more-morphisms.tex, lemma-check-relative-pseudo-coherence-on-charts). The localized K-flat finite-free model is the one used in 0CX9."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-space-inverse-module-derived-limit",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-space-inverse-module-derived-limit], $K$ has quasi-coherent cohomology and is bounded above. The affine base is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-sfb-space-fp-qcqs-source] makes $X$ quasi-compact and quasi-separated. For each perfect $E$, [lem-sfb-space-inverse-module-perfect-tests] gives a bounded finite-projective representative of $R\\Gamma(X,K\\otimes^{\\mathbf L}E)$. Apply [lem-pc-finite-projective-complex-free-model] to this representative; its bounded-above finite-free replacement makes the tensor test pseudo-coherent by [def-pc-ring-pseudo-coherent-complex]. The symmetry interchanging $K$ and $E$ identifies the tensor order with the following test criterion.",
+   "uses": [
+    "lem-sfb-space-inverse-module-derived-limit",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-inverse-module-perfect-tests",
+    "lem-pc-finite-projective-complex-free-model",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX7, lemma-relative-pseudo-coherence, first sentence, using 0CX5 and 0CX6"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-perfect-to-pseudocoherent-tests] with the upper bound and quasi-compact quasi-separated source just obtained. Thus $R\\Gamma(X,E\\otimes^{\\mathbf L}K)$ is pseudo-coherent over $A$ for every pseudo-coherent $E$. Apply [lem-sfb-space-pseudocoherent-tests-relative]: its hypotheses are exactly separatedness and finite presentation of $X/A$, with no flatness of $X/A$ required. It follows that $K$ is pseudo-coherent relative to $A$.",
+   "uses": [
+    "lem-sfb-space-perfect-to-pseudocoherent-tests",
+    "lem-sfb-space-pseudocoherent-tests-relative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX7, proof, using spaces-perfect.tex Tag 0CWH and spaces-more-morphisms.tex Tag 0CTT"
+   }
+  },
+  {
+   "text": "For every integer $m$, the all-etale-charts meaning in [lem-sfb-space-relative-pseudocoherence-etale-locality] gives relative $m$-pseudo-coherence of the scheme object $K_U$ corresponding to $K|_U$; hence $K_U$ is relatively pseudo-coherent. Use [lem-sfb-derived-etale-zariski-equivalence] for this object and its pullbacks. Set $i:U\\hookrightarrow V=\\operatorname{Spec}P$ using the given surjection. The polynomial projection $V\\to\\operatorname{Spec}A$ is flat by [lem-nagata-polynomial-projection-flat] and finitely presented (the finite set of generators $T_1,\\ldots,T_r$ has no relations). Therefore [lem-sfb-flat-ambient-relative-pseudocoherence] gives pseudo-coherence of $Ri_*K_U$ on $V$.",
+   "uses": [
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-nagata-polynomial-projection-flat",
+    "lem-sfb-flat-ambient-relative-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX9, lemma-finitely-presented, polynomial-chart paragraph; more-morphisms.tex Tag 09UU"
+   }
+  },
+  {
+   "text": "Use [lem-pc-affine-qcoh-derived-equivalence] to represent the scheme object $K_U$ by $\\widetilde{C^\\bullet}$, where $Q(C^\\bullet)=R\\Gamma(U,K)$. On a standard open $D(f)\\subset\\operatorname{Spec}P$, the sections of $i_*\\widetilde{C^j}$ are $C^j_{\\bar f}$ by [lem-weil-pbc-spec-module-tilde-sections], which equal $(\\operatorname{Res}_P C^j)_f$ by $c/\\bar f^a\\mapsto c/f^a$; these identifications commute with restrictions and differentials. Thus termwise $i_*\\widetilde{C^\\bullet}=\\widetilde{\\operatorname{Res}_P C^\\bullet}$. For a K-injective resolution of $\\widetilde{C^\\bullet}$, [lem-pc-affine-pushforward-resolution-quasi-iso] says that its termwise pushforward still represents $Ri_*K_U$. Consequently this is the affine sheaf object of $\\operatorname{Res}_P R\\Gamma(U,K)$. Apply [lem-pc-affine-pseudo-coherent-criterion] to its pseudo-coherence from step 3 to obtain the asserted bounded-above finite-free complex $E^\\bullet$. Its comparison in $D(P)$ respects $A\\to P$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-pc-affine-pseudo-coherent-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VF, lemma-qcoh-relative-pseudo-coherence-characterize, proof; perfect.tex Tag 08E7"
+   }
+  },
+  {
+   "text": "For $f\\in P$, localization is exact by [lem-weil-pbc-localization-module-exact], so it sends the isomorphism $Q(E^\\bullet)\\simeq C$ to an isomorphism $Q(E^\\bullet_f)\\simeq C\\otimes_P P_f$. The affine derived pullback formula [lem-pc-affine-derived-pullback-tensor-tilde], followed by the quasi-inverse in [lem-pc-affine-qcoh-derived-equivalence], identifies the latter with $R\\Gamma(\\operatorname{Spec}B_{\\bar f},K)$ after restriction to $P_f$: on a $B$-module the fraction $c/f^j$ maps to $c/\\bar f^j$, and $B\\otimes_P P_f=B_{\\bar f}$. Exactness allows this fraction identification on any representative of $C$. The etale comparison in step 3 commutes with this pullback. These maps preserve $A$ since $a(c/f^j)=(ac)/f^j$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DW(2), lemma-quasi-coherence-pullback; algebra.tex Tag 00CS"
+   }
+  },
+  {
+   "text": "As an $A$-module each term $E^i\\simeq P^{d_i}$ is free, with basis a finite union of the monomials in [def-weil-pbc-mv-polynomial-ring]. Tensoring with such a module is a direct sum of copies of the input exact sequence, hence preserves exactness. Thus the terms are $A$-flat. Applying [lem-pc-affine-flat-module-localization-preserves-flatness] with $R=A$, algebra $P$, and the powers of $f$ shows that each $E^i_f$ is also $A$-flat. Localization preserves the upper bound and makes the terms finite free over $P_f$. Now [lem-pc-module-bounded-flat-kflat] applied over $A$ to $E^\\bullet$ and $E^\\bullet_f$ gives precisely the asserted acyclic-total-tensor criterion. Finally apply [lem-pur-derived-change-of-rings] on the one-object ringed site to $A\\to R$: these K-flat representatives compute the derived scalar extensions termwise for every $A$-algebra $R$. This includes $f=1$, $f=0$, $r=0$, and zero complexes.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 064K (lemma-derived-tor-quasi-isomorphism) and 06Y6 (lemma-derived-base-change), more-algebra.tex; algebra.tex Tag 00HT(6)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-inverse-module-derived-limit",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-inverse-module-perfect-tests",
+  "lem-pc-finite-projective-complex-free-model",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-space-perfect-to-pseudocoherent-tests",
+  "lem-sfb-space-pseudocoherent-tests-relative",
+  "lem-sfb-space-relative-pseudocoherence-etale-locality",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX7 proof and the polynomial-chart paragraph of Tag 0CX9; affine comparison Tags 0CSX, 09UU and 08E7; localization Tag 08DW and K-flatness Tag 064K."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compatible inverse system of flat finitely presented sheaves with proper support on algebraic spaces has a derived limit represented on affine charts by bounded above finite free complexes over polynomial presentations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme limits, local cohomology, ordinary module colimits or Noetherian adic completion; none provides the relative pseudo-coherent polynomial resolution of this inverse system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative pseudo coherence of a derived inverse limit of flat modules with proper support over nilpotent quotients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme limits, local cohomology, ordinary module colimits or Noetherian adic completion; none provides the relative pseudo-coherent polynomial resolution of this inverse system."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of flat proper support modules is pseudo coherent relative to the base ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.DirectLimit.inhabited\", \"module\": \"Mathlib.Algebra.Colimit.Module\", \"type\": \"{R : Type u_1} →\\n  [inst : Semiring R] →\\n    {ι : Type u_2} →\\n      [inst_1 : Preorder ι] →\\n        (G : ι → Type u_3) →\\n          [inst_2 : DecidableEq ι] →\\n            [inst_3 : (i : ι) → AddCommMonoid (G i)] →\\n              [inst_4 : (i : ι) → Module R (G i)] →\\n                (f : (i j : ι) → i \", \"doc\": \"Given a semiring $ R $, a preorder $ \\\\iota $, and a direct system of $ R $-modules $ \\\\{G_i\\\\} $ indexed by $ \\\\iota $ with transition maps $ f_{ij} $, the direct limit module $ \\\\varinjlim G_i $ is const\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"ModuleCat.directLimitCocone_pt_isModule\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Limits\", \"type\": \"∀ {R : Type u} [inst : Ring R] {ι : Type v} [inst_1 : Preorder ι] (G : ι → Type v)\\n  [inst_2 : (i : ι) → AddCommGroup (G i)] [inst_3 : (i : ι) → Module R (G i)] (f : (i j : ι) → i ≤ j → G i →ₗ[R] G j)\\n  [inst_4 : DirectedSystem G fun i j h => ⇑(f i j h)] [inst_5 : DecidableEq ι],\\n  (ModuleCat.direct\", \"doc\": \"The module structure on the direct limit module $\\\\varinjlim G_i$, constructed as the quotient of the direct sum by the congruence relation induced by transition maps $f_{ij}$, coincides with the modul\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfShape D (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits of shape $D$. This means that give\"}\n  {\"name\": \"Submodule.FG.directLimit\", \"module\": \"Mathlib.RingTheory.TensorProduct.DirectLimitFG\", \"type\": \"[DecidableEq { P : Submodule R M // P.FG }] :\\n  Module.DirectLimit (ι := { P : Submodule R M // P.FG }) (G := fun P ↦ P.val)\\n      (fun ⦃P Q⦄ (h : P ≤ Q) ↦ Submodule.inclusion h) ≃ₗ[R]\\n    M\", \"doc\": \"For any semiring $ R $ and $ R $-module $ M $, the direct limit of the directed system of finitely generated submodules of $ M $ (ordered by inclusion via canonical inclusion maps) is isomorphic to $ \"}\n  {\"name\": \"ModuleCat.directLimitCocone\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Limits\", \"type\": \": Cocone (directLimitDiagram G f)\", \"doc\": \"The cocone in the category of R-modules with the direct limit module $\\\\varinjlim G_i$ as its apex and canonical linear maps $G_i \\\\to \\\\varinjlim G_i$ as components, ensuring commutativity of the direct\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme limits, local cohomology, ordinary module colimits or Noetherian adic completion; none provides the relative pseudo-coherent polynomial resolution of this inverse system."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme limits, local cohomology, ordinary module colimits or Noetherian adic completion; none provides the relative pseudo-coherent polynomial resolution of this inverse system."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|relative.*coher",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"297\", \"text\": \"/-- The relative gluing data associated to a quasi-coherent `𝒪ₓ` algebra. -/\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme limits, local cohomology, ordinary module colimits or Noetherian adic completion; none provides the relative pseudo-coherent polynomial resolution of this inverse system."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative pseudo coherent derived inverse limits have bounded above finite free resolutions on polynomial affine charts",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.Scheme.Modules.instHasLimits, AlgebraicGeometry.exists_preimage_eq, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, Ring.DirectLimit.Polynomial.exists_of, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.AffineScheme.hasLimits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary finite presentation, scheme limits and K-projectivity do not produce a finite-free resolution for this inverse-system object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent complex over a polynomial ring represented by a bounded above complex of finite free modules",
+   "results": "8 hits: CochainComplex.IsKProjective, Condensed.finFree, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, CochainComplex.IsGE, CochainComplex.IsStrictlyGE, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary finite presentation, scheme limits and K-projectivity do not produce a finite-free resolution for this inverse-system object."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-modules-near-special-fibre",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX7 (lemma-relative-pseudo-coherence) and the polynomial-chart construction in the proof of Tag 0CX9 (lemma-finitely-presented); relative-to-affine comparison 0CSX (spaces-more-morphisms.tex, lemma-qcoh-relative-pseudo-coherence-characterize) and 09UU (more-morphisms.tex, lemma-check-relative-pseudo-coherence-on-charts). The localized K-flat finite-free model is the one used in 0CX9.",
+   "via": [
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-inverse-module-polynomial-model",
+  "worker": "stage1",
+  "summary": "Followed the 0CX7 perfect-test route, reusing the space approximation and detection nodes. Created only the missing 0CX6 perfect tensor-test assertion. Passed to the given polynomial ambient scheme, applied the existing affine pseudo-coherence criterion, and wrote out scalar-compatible localization and A-K-flatness. The statement is unchanged.",
+  "blueprint": "Proof (3) of the current sk-thm-sf-ctf-stability-direct-images: inherited coherent-family effectivity prerequisite, realizing spaces-flat.tex 0CX7 and the polynomial-chart paragraph of 0CX9.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-projective-complex-free-model",
+    "why": "Generic affine or module derived-category tool used in the polynomial-model construction; the current unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine or module derived-category tool used in the polynomial-model construction; the current unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "why": "Generic affine or module derived-category tool used in the polynomial-model construction; the current unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic affine or module derived-category tool used in the polynomial-model construction; the current unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine or module derived-category tool used in the polynomial-model construction; the current unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic affine or module derived-category tool used in the polynomial-model construction; the current unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic affine or module derived-category tool used in the polynomial-model construction; the current unit has no replacement for this input."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic affine or module derived-category tool used in the polynomial-model construction; the current unit has no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-projective-complex-free-model",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-32a59a046",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-32a59a046 (reviewer sub-agent of L); spot-checked: PASS with no fixes. Read Stacks spaces-flat 0CX4-0CX9 (with the proofs of 0CX6 and 0CX9), spaces-perfect 0CWH, spaces-more-morphisms 0CTT and 0CSX, and more-morphisms 09UU. The item statement is identical to the live and side-live statement, and the item is still unsplit there, so nothing supersedes this delivery. Steps 1-2 follow 0CX7: K is bounded above (0CX5) and X is qcqs (06G5); the new node makes the perfect tests perfect, the finite-free model (064U) makes them pseudo-coherent, then 0CWH and 0CTT apply with only separated plus finitely presented, and no flatness of X/A is used. Step 3 uses the all-squares definition with V=Spec A, then 09UU (1)<=>(3) on the flat, finitely presented Spec P. Step 4 identifies i_*C~ with (Res_P C)~ through the tilde-sections node and the affine pushforward of a K-injective resolution, then applies 08E7. Step 5 uses exactness of localization (00CS), 08DW(2) and 06Z0. Step 6 uses that each term is A-free on monomials, localization keeps flatness (00HT), and 064K plus derived change of rings. Edge cases checked: f nilpotent or B=0, f=1, r=0, M_n=0. The new node perfect-tests is exactly the perfectness half of 0CX6(1), self-contained, statement only, with three kinds of search recorded; it is not a clause of the parent and is not a duplicate (checked against affine-base-change 0CX8, near-special-fibre and derived-limit 0CX5). Batch-5 flags: all are space definitions, the space fibre-product lemma, or sfb space lemmas that reach def-trf-algebraic-space only as a notion; none is the trace formula, Poincare duality or a step of their proofs, so all are accepted as generic. All 8 declared tool_uses are accepted as generic affine and module tools. No cycle, no SGA. from.node is null because the item's inherited ancestry ends in a null blueprint id; this is a base-node property, not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInverseModulePolynomialModel",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.inverseModulePolynomialModel",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleAffineChart",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLocalizedChart",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartSections",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartSections_additive",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleChartDerivedSections",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLocalizeComplex",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModulePolynomialBaseComplex",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLocalizedBaseComplex",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleLocalizedPolynomialSections",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModulePolynomialModel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInverseModulePolynomialModel.lean",
+  "statement": "theorem inverseModulePolynomialModel (A : ℕ → CommRingCat.{u}) (r : ∀ n : ℕ, A (n + 1) ⟶ A n) (hsurj : ∀ n : ℕ, Function.Surjective (r n)) (hnil : ∀ (n : ℕ) (a : A (n + 1)), (r n) a = 0 → IsNilpotent a) (c : Cone (Functor.ofOpSequence r)) (hc : IsLimit c) (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) [HasDerivedCategory.{w} X.SmallModules] (f : X ⟶ schemeSpace (inverseModuleSpec c.pt)) (hsep : MapIsSeparated f) (hfp : ProperQuotFinitePresentation f) (M : ∀ n : ℕ, (properQuotFibre f (inverseModuleTest c n)).Modules) (hqc : ∀ n : ℕ, (M n).IsQuasicoherent) (hfin : ∀ n : ℕ, (M n).IsFinitePresentation) (hflat : ∀ (n : ℕ) (U : (properQuotFibre f (inverseModuleTest c n)).EtaleSite), ((schemeRestriction _ U).obj (M n)).IsFlatOver (yoneda.preimage (U.obj.hom ≫ (properQuotSnd f (inverseModuleTest c n)).hom.hom)).left) (hsupp : ∀ n : ℕ, ∃ (Z : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (i : Z ⟶ properQuotFibre f (inverseModuleTest c n)), IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) i.hom.hom ∧ MapIsProper (i ≫ properQuotSnd f (inverseModuleTest c n)) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ M n)) (e : ∀ n : ℕ, (moduleTensorPullback (properQuotFibreMap f (inverseModuleTestMap c n))).obj (M (n + 1)) ≅ M n) (hq : ∀ n : ℕ, X.derivedQCohProperty (inverseModuleDerivedTerm f (inverseModuleTest c n) (M n))) [HasProduct (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))] (K : X.DerivedQCoh) (p : K ⟶ ∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) (δ : (∏ᶜ (fun n : ℕ ↦ inverseModuleQCohTerm f (inverseModuleTest c n) (M n) (hq n))) ⟶ K⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle (fun n : ℕ ↦ inverseModuleDerivedTransition f (inverseModuleTestMap c n) (M n) (M (n + 1)) (e n) (hq n) (hq (n + 1))) K p δ) (B : CommRingCat.{u}) (a : schemeSpace (inverseModuleSpec B) ⟶ X) (ha : IsEtale a.hom.hom) (β : c.pt ⟶ B) (hβ : a.hom.hom ≫ f.hom.hom = yoneda.map (inverseModuleSpecMap β)) (d : ℕ) (π : MvPolynomial (Fin d) c.pt →+* B) (hπ : Function.Surjective π) (hπA : π.comp MvPolynomial.C = β.hom) : ∃ E : CochainComplex (ModuleCat.{u} (MvPolynomial (Fin d) c.pt)) ℤ, (∃ b : ℤ, E.IsStrictlyLE b) ∧ (∀ i : ℤ, Module.Free (MvPolynomial (Fin d) c.pt) (E.X i) ∧ Module.Finite (MvPolynomial (Fin d) c.pt) (E.X i)) ∧ Nonempty (DerivedCategory.Q.obj E ≅ ((ModuleCat.restrictScalars π).mapDerivedCategory).obj ((inverseModuleChartDerivedSections B (inverseModuleAffineChart B a ha) (Iso.refl _)).obj K.obj)) ∧ (∀ L : CochainComplex (ModuleCat.{u} c.pt) ℤ, L.Acyclic → (CochainComplex.mapBifunctor L (inverseModulePolynomialBaseComplex c.pt d E) (MonoidalCategory.curriedTensor _)).Acyclic) ∧ ∀ g : MvPolynomial (Fin d) c.pt, Nonempty (DerivedCategory.Q.obj (inverseModuleLocalizeComplex E g) ≅ inverseModuleLocalizedPolynomialSections c.pt B d π a ha g K.obj) ∧ (∀ L : CochainComplex (ModuleCat.{u} c.pt) ℤ, L.Acyclic → (CochainComplex.mapBifunctor L (inverseModuleLocalizedBaseComplex c.pt d E g) (MonoidalCategory.curriedTensor _)).Acyclic) ∧ ∀ (R : CommRingCat.{u}) (ρ : c.pt ⟶ R), Nonempty (DerivedCategory.Q.obj (((ModuleCat.extendScalars ρ.hom).mapHomologicalComplex (.up ℤ)).obj (inverseModuleLocalizedBaseComplex c.pt d E g)) ≅ (ModuleCat.ordinaryDerivedExtendScalars ρ.hom).obj (((ModuleCat.restrictScalars ((algebraMap (MvPolynomial (Fin d) c.pt) (Localization.Away g)).comp MvPolynomial.C)).mapDerivedCategory).obj (inverseModuleLocalizedPolynomialSections c.pt B d π a ha g K.obj)))",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing inverse-system fibres, quotient transitions and Roos triangle. Helpers construct the actual affine-chart evaluation with its coordinate-ring action, its K-injective right derivation, principal chart localizations, and termwise scalar restriction/extension. The additional statement dependencies are existing landed owners of representable etale scheme tests and normalized ordinary derived scalar extension. The paper level n+1 is indexed by n : ℕ. No statement correction, extra definition node, or dependency interface repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ea83e9ed",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Independent read of 9ea83e9e: signature byte-identical to the 7e3b head returned only for F (missing full second reading), which is now present with a real Worker report and Second reading by Q62. Node JSON vs live differs only in lean and stmt_deps; statement unchanged; lean.statement matches the file verbatim; 2 sorry (theorems only), no hollow defs, docstrings with source and blueprint, lines <=100. Hypotheses equal those of the recorded inverseModuleDerivedLimit, K given by its product triangle; beta/hbeta is the induced A-algebra structure (unique, no extra assumption); surjective A-algebra presentation by MvPolynomial (Fin d), d=0 allowed. Conclusion: one bounded-above finite-free E with Q(E) iso to Res_pi of the K-injective rightDerivedFunctor of actual chart evaluation; the same E localized termwise iso to the derived sections on Spec B_(pi g) via IsLocalization.Away.map in D(P_g); total-tensor acyclicity over A for E and E_g against every acyclic L; derived scalar extension along every rho through ordinaryDerivedExtendScalars. Edge cases d=0, g=0 or nilpotent, g=1, zero or empty objects, non-flat rho covered; no universe equality imposed. Mechanical theorem-stmt_dep finding judged PASS: ordinaryDerivedExtendScalars is Classical.choice of nonempty_ordinaryDerivedChangeOfRings (an object from the theorem's conclusion, owned by lem-pur-derived-change-of-rings); representable_etale_scheme_tests only proves etaleness of the localized chart, and no definition from its module is used. Advisories: second reading written by the same worker (stated in the report); the f=1 case holds via E tensor_P P_1, canonically E. Not recompiled (no change)."
+ }
+}

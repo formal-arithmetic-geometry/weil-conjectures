@@ -1,0 +1,191 @@
+{
+ "id": "lem-weil-pbc-ring-complex-cech-cohomology-power-torsion",
+ "kind": "statement",
+ "title": "Cohomology of an ordered localization model is element-power torsion",
+ "statement": "Let $A$ be a commutative ring, and use its module-sheaf category on the one-object bottom site with a chosen derived category [def-weil-abstract-derived-category]. Let $I$ be a finitely generated ideal of $A$, let $T$ be a cochain complex with augmentation $\\epsilon_T:T\\to A[0]$, and assume the ordered localization-model predicate for $(I,T,\\epsilon_T)$ [def-weil-pbc-ring-complex-cech-data]. For every $s\\in I$, every integer $i$, and every element $x$ of the value of $H^i(T)$ at the unique site object, there exists $k\\in\\mathbb N$ with $s^k x=0$. No coefficient module or derived Hom conclusion is part of this assertion.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A6R, lemma-local-cohomology-adjoint; cohomology of an ordered localization model is element-power torsion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "First prove the unit-ideal Godement complex is zero in the derived category. Apply its proved ordered-model theorem to the singleton generating list (1). In its witness C, the only possible nonzero terms are degrees zero and one: in higher degrees an increasing tuple into Fin 1 cannot exist. The first differential is an isomorphism, because the unique singleton coordinate identifies it with A to A[1/1], an isomorphism by IsLocalization.atUnit. The two-term complex is acyclic by the mono and epi exactness criteria. Cohomology on the derived category transports this acyclicity to the Godement object.",
+   "uses": [
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A6R and 0ALZ, lemma-local-cohomology-adjoint and lemma-torsion-change-rings; with algebraization.tex Tag 099D(d), lemma-all-rings"
+   }
+  },
+  {
+   "text": "Choose a finite generating list f of I and its ordered model C from hT. Put B=A[1/s]. Since s lies in I and its image is a unit, the extended ideal is the unit ideal; hence the image list generates the unit ideal. Apply the Godement ordered-model theorem over B to that image list, obtaining D. The proved ordered scalar isomorphism identifies the termwise scalar extension of C with D. Its derived comparison to the unit-ideal Godement complex and the preceding step show D is acyclic. No change-of-generators contraction is needed.",
+   "uses": [
+    "def-weil-pbc-ring-complex-cech-data",
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "lem-weil-pbc-ring-complex-ordered-scalar-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A6R and 0ALZ, lemma-local-cohomology-adjoint and lemma-torsion-change-rings; with algebraization.tex Tag 099D(d), lemma-all-rings"
+   }
+  },
+  {
+   "text": "Construct explicitly the equivalence between the one-object bottom-site module sheaves and ordinary modules, using evaluation and constant modules. Evaluation is therefore exact. The scalar-extension section isomorphisms commute with every differential, by their normalization on 1 tensor x and the proved scalar-extension map formula. They give a cochain isomorphism from evaluated C tensored with B to evaluated D, which is acyclic. Flatness of localization makes extension of scalars exact, so its homology comparison shows that localization of each H^i(C) is zero. The given derived model isomorphism induces an isomorphism H^i(C) to H^i(T), so localization of each H^i(T) is zero too.",
+   "uses": [
+    "def-weil-pbc-ring-complex-semilinear-extension",
+    "def-weil-pbc-ring-complex-godement-construction",
+    "lem-weil-pbc-localization-flat",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A6R and 0ALZ, lemma-local-cohomology-adjoint and lemma-torsion-change-rings; with algebraization.tex Tag 099D(d), lemma-all-rings"
+   }
+  },
+  {
+   "text": "For each x in the evaluated H^i(T), its image 1 tensor x in its zero localized module vanishes. Apply IsLocalization.tensorProduct_isLocalizedModule and IsLocalizedModule.eq_zero_iff. The resulting annihilator belongs to the submonoid of powers of s, so write it as s^k and obtain s^k times x equals zero. All constructions allow the zero ring, s=0 or nilpotent, repeated generators, and an empty initial list.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A6R and 0ALZ, lemma-local-cohomology-adjoint and lemma-torsion-change-rings; with algebraization.tex Tag 099D(d), lemma-all-rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-complex-godement-cech",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-ring-complex-ordered-scalar-iso",
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "def-weil-pbc-ring-complex-godement-construction",
+  "lem-weil-pbc-localization-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A6R and 0ALZ, lemma-local-cohomology-adjoint and lemma-torsion-change-rings; with algebraization.tex Tag 099D(d), lemma-all-rings",
+  "note": "G2: shorter proof using the existing ordered scalar isomorphism and the Godement comparisons for the image list and singleton list (1), followed by exact localization. No new statements or holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms from a complex with power-torsion cohomology to a localized module vanish",
+   "results": "Generic derived functor and homology factorization APIs, including DerivedCategory.homologyFunctorFactors and Functor.mapDerivedCategoryFactors; no direct localization orthogonality theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use these comparison APIs in the proved generic lemma; the source-only ordered Cech torsion step remains separate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category maps from a complex with element-power torsion cohomology to a module on which that element acts bijectively vanish",
+   "results": "Generic K-injective, Ext and t-structure vanishing APIs; no power-torsion/localization theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use exact localization, the homology comparison, and the existing exact derived adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsTorsion",
+   "results": "No hits; identifier not indexed by the search service.",
+   "date": "2026-10-26",
+   "verdict": "Search local source for module localization instead."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*orthogonal|orthogonal.*torsion",
+   "results": "Only unrelated root-system declarations. Local searches found IsLocalizedModule.subsingleton_iff and the exact derived adjunction.",
+   "date": "2026-10-26",
+   "verdict": "No existing direct vanishing theorem; the generic argument is proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an extended ordered Cech complex of localizations is ideal-power torsion",
+   "results": "Local cohomology definitions, with no theorem for the arbitrary ordered coordinate-model predicate.",
+   "date": "2026-10-26",
+   "verdict": "Retain precisely the source-only cohomological assertion as the remaining step."
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Tt]orsion|[Tt]orsion.*Cech",
+   "results": "No Mathlib match. Local source has ordered Koszul stage torsion and private localized tensor-Cech acyclicity, but no comparison for arbitrary RingComplexHasCechModel coordinates.",
+   "date": "2026-10-26",
+   "verdict": "These do not directly discharge the coordinate-model comparison and contraction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexCechLocalizedOrthogonality",
+  "date": "2026-10-26",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 0A6R, lemma-local-cohomology-adjoint: the source localization vanishing and extension/restriction Hom calculation of the finite localization proof; source localization vanishing",
+   "via": [
+    "lem-weil-pbc-ring-complex-cech-localized-orthogonality",
+    "lem-weil-pbc-ring-complex-cech-augmentation-hom",
+    "lem-weil-pbc-ring-complex-cech-base-change",
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexCechCohomologyPowerTorsion",
+  "file": "lean/Sheaf/Paper/RingComplexCechCohomologyPowerTorsion.lean",
+  "declaration": "AlgebraicGeometry.ringComplex_cech_cohomology_power_torsion",
+  "declarations": [
+   "AlgebraicGeometry.ringComplex_cech_cohomology_power_torsion"
+  ],
+  "statement": "theorem ringComplex_cech_cohomology_power_torsion\n    (A : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]\n    (I : {I : Ideal A // I.FG})\n    (T : CochainComplex (RingSiteModules A) ℤ) (εT : T ⟶ ringComplexSingle A)\n    (hT : RingComplexHasCechModel A I.val T εT)\n    (s : A) (hs : s ∈ I.val) :\n    ∀ (i : ℤ) (x : (T.homology i).val.obj (op ⟨PUnit.unit⟩)),\n      ∃ k : ℕ, s ^ k • x = 0",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T092144-L-3404980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T104427-L-816295",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

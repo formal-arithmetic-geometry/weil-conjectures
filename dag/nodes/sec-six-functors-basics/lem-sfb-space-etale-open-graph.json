@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-space-etale-open-graph",
+ "kind": "statement",
+ "title": "Morphisms to an etale space are open graphs",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $X,Y,B$ be algebraic spaces over $S$ [def-trf-algebraic-space] with maps $X\\to B$ and $Y\\to B$. Suppose $Y\\to B$ is chartwise etale [lem-trf-space-chartwise-etale-permanence], without requiring it to be representable. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers], point spaces have the atlas topology [def-a1-space-point-topology], and open subspaces mean [def-a1-space-open-subspace]. Sending a $B$-morphism $a:X\\to Y$ to its graph gives a bijection between $\\operatorname{Hom}_B(X,Y)$ and open subspaces $\\Gamma\\subseteq X\\times_BY$ for which $\\Gamma\\to X$ is surjective and universally injective on point spaces. Universally injective means that its point map is injective after every algebraic-space base change; surjectivity likewise holds after every such base change. For each such $\\Gamma$, its projection $\\Gamma\\to X$ is an isomorphism, and the inverse correspondence is $\\operatorname{pr}_Y\\circ(\\Gamma\\to X)^{-1}$. These correspondences commute with arbitrary base change in $B$. No quasi-compactness, separation or quasi-separatedness is assumed on $X,Y,B$.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Rydh, author version 2010-03-03, Appendix A, Corollary (A.3) and Proposition (A.2), printed p.35. The no-quasi-separatedness form follows from the same chartwise facts; Stacks spaces-morphisms.tex Tag 05W5 (lemma-etale-universally-injective-open) proves the converse without that convention. Read online; local Rydh PDF WANTED.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=X\\times_BY$, with projection $p:P\\to X$; this is an algebraic space by [lem-trf-space-fibre-products-etale-covers], and $p$ is chartwise etale by the arbitrary-base-change clause of [lem-trf-space-chartwise-etale-permanence]. For a $B$-map $a:X\\to Y$, its graph $s:X\\to P$ is the natural map $x\\mapsto(x,a(x))$ and satisfies $ps=\\mathrm{id}_X$. Both $X\\to X$ and $P\\to X$ are chartwise etale; the over-base clause of that permanence node makes $s$ chartwise etale. The formula shows that $s$ is injective on sections over every scheme. Apply [lem-sfb-space-etale-monomorphism-open] to $s$. Its open image is the subfunctor $\\Gamma_a(H)=\\{(x,a_H(x)):x\\in X(H)\\}$, and $p|_{\\Gamma_a}$ has inverse $x\\mapsto(x,a_H(x))$ on each test scheme. Thus it is an isomorphism and remains so after every algebraic-space base change; in particular its point map is always bijective.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03FU (lemma-base-change-etale), 03FV (lemma-etale-permanence); spaces-morphisms.tex Tag 05W5 (lemma-etale-universally-injective-open), monomorphism case. Rydh Corollary (A.3), forward direction, with Proposition (A.2)(ii)."
+   }
+  },
+  {
+   "text": "Conversely let $j:\\Gamma\\hookrightarrow P$ be an open subspace as in the statement, and put $q=pj:\\Gamma\\to X$. By [def-a1-space-open-subspace], all scheme tests of $j$ are open immersions. The last clause of [lem-a1-space-open-chart-tests] says precisely that composing $j$ with an etale scheme chart of $\\Gamma$ is representable etale. Thus $j$ is chartwise etale. Composition in [lem-trf-space-chartwise-etale-permanence] makes $q$ chartwise etale. The assumed universal injectivity and universal surjectivity of $q$ have not been replaced by representability.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-a1-space-open-chart-tests",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WK (lemma-composition-representable-transformations-property), open chart tests; spaces-properties.tex Tag 03FT (lemma-composition-etale)."
+   }
+  },
+  {
+   "text": "Put $R=\\Gamma\\times_X\\Gamma$ using [lem-trf-space-fibre-products-etale-covers], with first projection $r:R\\to\\Gamma$ and diagonal $\\delta:\\Gamma\\to R$. Universal injectivity of $q$ says in particular that $|r|$ is injective, since $r$ is the base change of $q$ by $q:\\Gamma\\to X$. For any $z\\in|R|$, the identity $r\\delta=\\mathrm{id}_\\Gamma$ gives $|r|(|\\delta|(|r|(z)))=|r|(z)$. Injectivity of $|r|$ implies $|\\delta|(|r|(z))=z$. Thus $|\\delta|$ is surjective. This proves the needed consequence of universal injectivity directly on point sets, without assuming that point spaces preserve fibre products.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 040X (lemma-universally-injective), (2) implies (3): the split-injective point-map argument is explicit."
+   }
+  },
+  {
+   "text": "The first projection $r:R\\to\\Gamma$ is a base change of $q$ and hence chartwise etale by [lem-trf-space-chartwise-etale-permanence]. Since $r\\delta=\\mathrm{id}_\\Gamma$, its over-base clause makes $\\delta$ chartwise etale. The formula $z\\mapsto(z,z)$ is injective on all scheme sections, so [lem-sfb-space-etale-monomorphism-open] makes $\\delta$ a representable open immersion. Identify its source with its image subfunctor. Step 3 and the full-point-image clause of [lem-a1-space-point-open-calculus] imply that this image is all of $R$, so $\\delta$ is an isomorphism. For any scheme $H$ and $u,v\\in\\Gamma(H)$ with $q_H(u)=q_H(v)$, the pair $(u,v)\\in R(H)$ is therefore $(w,w)$ for a unique $w\\in\\Gamma(H)$. Hence $u=v$ and $q$ is a sheaf monomorphism. Apply [lem-sfb-space-etale-monomorphism-open] again, now to $q$. It is an open immersion, and its point map is surjective by hypothesis. The same full-point-image clause identifies its open image with $X$. Therefore $q$ is an isomorphism.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W5 (lemma-etale-universally-injective-open), diagonal argument, with spaces-properties.tex Tag 03BZ (lemma-open-subspaces)."
+   }
+  },
+  {
+   "text": "Define $a=\\operatorname{pr}_Y\\circ j\\circ q^{-1}:X\\to Y$. The fibre-product equation and $q q^{-1}=\\mathrm{id}_X$ make this a $B$-morphism. On every scheme $H$, the inclusion $j$ is $(q,\\operatorname{pr}_Yj)$, so $j q^{-1}$ is $(\\mathrm{id}_X,a)$. Its image subfunctor is exactly $\\Gamma_a$ and equals the original $\\Gamma$, since $q^{-1}$ is an isomorphism. Conversely the projection of the graph of a given $a$ has inverse $x\\mapsto(x,a(x))$, and composing with its second projection recovers $a$. These two explicit identities prove the asserted bijection and the formula for its inverse; equality here is equality of subfunctors, not a choice of a representative open immersion.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Corollary (A.3), explicit inverse of the graph correspondence; agent-written assembly of the sheaf fibre-product formulas."
+   }
+  },
+  {
+   "text": "Let $b:B_1\\to B$ be arbitrary and write $X_1=X\\times_BB_1$, $Y_1=Y\\times_BB_1$. On a test scheme, the canonical identification $P\\times_BB_1\\cong X_1\\times_{B_1}Y_1$ sends $((x,y),t)$ to $((x,t),(y,t))$, with inverse forgetting the repeated $t$. Under it, the pullback of $\\Gamma_a$ consists precisely of $((x,t),(a(x),t))$, the graph of $a_1$. An open subspace remains open under this pullback: for a scheme $H\\to P\\times_BB_1$ its scheme test is the same open subscheme as the test $H\\to P$, by [def-a1-space-open-subspace]. Moreover the inverse of the pulled-back isomorphism $q_1$ is $(q^{-1})_1$, because pulling back $q q^{-1}=\\mathrm{id}$ and $q^{-1}q=\\mathrm{id}$ gives the two inverse identities. Its second projection therefore recovers exactly $a_1$. This proves base-change compatibility in both directions, including preservation of the required universal point conditions.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Corollary (A.3), functoriality written out using the sheaf fibre-product universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-etale-monomorphism-open",
+  "def-a1-space-open-subspace",
+  "lem-a1-space-open-chart-tests",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Graph assembly of Rydh Corollary (A.3), read online; no-quasi-separatedness extension from Stacks Tags 03FT, 03FU, 03FV, 05W5, 040X and 03BZ, with the split-injective point-map argument explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms into an etale algebraic space correspond to open graphs that project universally injectively and surjectively to the source",
+   "results": "{\"t\": \"2026-10-23T19:47:43Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms into an etale algebraic space correspond to open graphs that project universally injectively and surjectively to the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"8c18ae566ecca705\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-23T19:47:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|graph.*[Ee]tale|[Ee]tale.*graph",
+   "results": "{\"t\": \"2026-10-23T19:47:42Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|graph.*[Ee]tale|[Ee]tale.*graph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale algebraic space has open diagonal and its morphisms are determined by open graph subspaces",
+   "results": "{\"t\": \"2026-10-23T19:47:43Z\", \"tool\": \"leansearch\", \"query\": \"An etale algebraic space has open diagonal and its morphisms are determined by open graph subspaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.formallyEtale\", \"Algebra.Etale\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.FormallyEtale.instFormallySmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"d0f75f2157ecc42c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of etale maps of algebraic spaces are open immersions and etale universally bijective maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-23T19:47:46Z\", \"tool\": \"leanfinder\", \"query\": \"Sections of etale maps of algebraic spaces are open immersions and etale universally bijective maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"748b40e8cd3ae1f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme etale/open-immersion declarations and scheme morphism-property descent under flatness do not state this algebraic-space result."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|graph.*[Ee]tale|[Ee]tale.*graph",
+   "results": "{\"t\": \"2026-10-23T20:59:39Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|graph.*[Ee]tale|[Ee]tale.*graph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme etale/open-immersion candidates, which do not state the algebraic-space graph correspondence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of etale maps are open immersions and universally injective surjective etale morphisms are isomorphisms",
+   "results": "{\"t\": \"2026-10-23T20:59:40Z\", \"tool\": \"leansearch\", \"query\": \"Sections of etale maps are open immersions and universally injective surjective etale morphisms are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.IsOpenImmersion.isIso\", \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso\"], \"digest\": \"23d7a50d5c0cec19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme etale/open-immersion candidates, which do not state the algebraic-space graph correspondence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-23T20:59:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme etale/open-immersion candidates, which do not state the algebraic-space graph correspondence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms to an etale algebraic space correspond to open graphs with universally injective surjective projection",
+   "results": "{\"t\": \"2026-10-23T20:59:41Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms to an etale algebraic space correspond to open graphs with universally injective surjective projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"1582a14ad0c36381\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme etale/open-immersion candidates, which do not state the algebraic-space graph correspondence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open graph subspaces classify maps into an etale sheaf represented by an algebraic space",
+   "results": "{\"t\": \"2026-10-23T20:59:41Z\", \"tool\": \"leanfinder\", \"query\": \"Open graph subspaces classify maps into an etale sheaf represented by an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"d79d4c4f9812cb2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme etale/open-immersion candidates, which do not state the algebraic-space graph correspondence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-open-surjection-etale-descent",
+  "date": "2026-10-24",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Alper Proposition 7.1.1 proof, Hom exactness; expanded Rydh Theorem (7.4) graph construction, printed p.29, as a prerequisite of the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route. Supporting input: Separated universal homeomorphisms of algebraic spaces are affine. Rydh Corollary (5.22), proof: descend the separated etale scheme presentation using Theorem (5.21). Supporting general input: Rydh Theorem (5.19)(i), effective descent with specified cocycles, applied in the proof of (5.21). Supporting input: Rydh Proposition (5.3), open-graph proof of full faithfulness, rather than the full-faithfulness conclusion itself.",
+   "via": [
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-etale-open-graph",
+  "worker": "stage1",
+  "summary": "Q24: checked Rydh Appendix A online and Stacks chartwise facts without quasi-separatedness; retained the statement and gave a six-step graph correspondence proof using existing nodes only. Expanded universal-injectivity-to-surjective-diagonal using its split-injective point projection, obtained both isomorphisms from etale monomorphisms and full open point image, and wrote both inverse identities and arbitrary base-change formulas. No new nodes or Lean files.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli chain via the existing open-surjection etale-descent node: its first proof step requires the open-graph construction. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md direct-image preservation route retained; no new blueprint statement matches this generic graph lemma. The ancestor tool returns None, preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Sheaf fibre products of arbitrary algebraic spaces, not a change of the inherited descent route."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Chartwise etale composition, base change and morphisms over a common base, without representability."
+   },
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "Open-subspace chart tests imply chartwise etaleness; this generic representable-property calculus supplies no alternative route."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Only the assertion that an open subspace with full point image equals its ambient algebraic space; generic point/open calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-a1-space-open-chart-tests",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-d3a56c77d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-d3a56c77d (reviewer sub-agent of L); spot-checked: I read the whole six-step split and every cited statement. The statement and stmt_deps are unchanged from live, the item is still unsplit live, no repair note applies, and there are no new nodes. Step 1: graph s is chartwise etale by the over-base clause (id and p are chartwise etale over X) and injective on sections, so lem-sfb-space-etale-monomorphism-open makes it an open immersion. That node's 'etale tested on scheme charts' is chartwise etale, as its step 1 says. Step 2: def-a1-space-open-subspace gives exactly the hypothesis of lem-a1-space-open-chart-tests, whose chart clause is chartwise etaleness; composition makes q chartwise etale. Step 3: the |r||delta||r| = |r| argument correctly proves the diagonal is surjective on points from universal injectivity, using r as the base change of q by q (Stacks 040X (2)=>(3)), so the elementary mark is fine. Step 4: delta and then q are etale monomorphisms, hence open immersions with full point image, hence isomorphisms by lem-a1-space-point-open-calculus; this matches the Stacks 05W5 route and assumes no separatedness. Steps 5-6 write out the explicit inverse and base-change formulas correctly. Edge cases checked: X empty; Y empty with X nonempty; Y=B; doubled origin; an empty Gamma shows the surjectivity hypothesis is needed. No duplicate exists in the DAG. The four generic algebraic-space tool_uses (trf fibre products, trf chartwise permanence, a1 open-chart tests, a1 point-open calculus) are accepted. Batch-5: all three flagged citations reach sec-trace-formula only through the definition def-trf-algebraic-space, which the item already has in its base stmt_deps; that is a general definition outside both assumptions, so not a RETURN reason. No SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleOpenGraph",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_etale_open_graph",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.etaleGraphSubfunctor",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleGraphPointCondition",
+   "AlgebraicGeometry.AlgebraicSpace.space_etale_open_graph",
+   "AlgebraicGeometry.AlgebraicSpace.space_etale_open_graph_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleOpenGraph.lean",
+  "statement": "theorem space_etale_open_graph {S : Scheme.{u}} {X Y B : AlgebraicSpace S} (f : X ⟶ B) (g : Y ⟶ B) (hg : IsChartwiseEtale g) : (∀ a : {a : X ⟶ Y // a ≫ g = f}, ∃ A : OpenSubspace (enlargedFibreProduct f g), A.val = etaleGraphSubfunctor f g a ∧ EtaleGraphPointCondition f g A) ∧ (∀ A : OpenSubspace (enlargedFibreProduct f g), EtaleGraphPointCondition f g A → (∃! a : {a : X ⟶ Y // a ≫ g = f}, etaleGraphSubfunctor f g a = A.val) ∧ ∃ e : A.val.toFunctor ≅ X.obj.obj, e.hom = A.val.ι ≫ (Limits.pullback.fst f.hom g.hom).hom ∧ ∀ a : {a : X ⟶ Y // a ≫ g = f}, etaleGraphSubfunctor f g a = A.val → a.val.hom.hom = e.inv ≫ A.val.ι ≫ (Limits.pullback.snd f.hom g.hom).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q114",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Graph classification is rendered as existence of the unique open image for every B-morphism and existence of the unique B-morphism for every admissible open subfunctor. The main statement also identifies the projection isomorphism and the inverse formula. The second theorem states arbitrary base-change compatibility in both directions, using any cartesian models and the uniquely characterized map of product presheaves. The two helper definitions are the actual graph image subfunctor and its point admissibility condition, belonging to this graph correspondence. The added landed statement dependency supplies the existing canonical mapPoint helper only; no curve assumptions are used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48836a552",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by Q114 present), module and dependency declarations (OpenSubspace, IsChartwiseEtale, enlargedFibreProduct = sheaf pullback, mapPoint, Point). Only lean and stmt_deps differ from live; lean.statement is verbatim. The added def-sfb-proper-curve-moduli stmt_dep supplies only the canonical mapPoint (same precedent as lem-a1-space-point-open-calculus), with no cycle. Sole hypothesis is chartwise etale; graph = Subfunctor.range of the pullback lift; point condition = bijective mapPoint after every algebraic-space base change (universal injectivity plus universal surjectivity); exists-unique bijection, e.hom equals the projection, inverse formula and base change with canonical m all match. Edge cases (empty X/Y, g = id, doubled sheet, non-separated targets, empty/identity base change) and universe u are fine. Helpers are not hollow, theorems are sorry only, docstrings carry source and blueprint id. No findings; no compile, since no file was changed."
+ }
+}

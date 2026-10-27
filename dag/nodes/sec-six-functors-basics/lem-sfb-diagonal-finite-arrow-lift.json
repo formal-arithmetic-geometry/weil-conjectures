@@ -1,0 +1,139 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of simultaneous derived prime power reduction factors through derived extension to finite residue coefficients; Kummer boundary is its adjunction unit",
+   "results": "Eight hits concerning KummerDedekind, cyclotomic discriminants and field Kummer extensions; no sheaf derived-reduction or strict-system theorem.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of the multiplicative group sheaf is the roots of unity shifted by one, with naturality of the Kummer boundary for extension classes",
+   "results": "Eight hits: sheaf cohomology H, nonabelian H1, Selmer fromUnit maps, Hilbert 90 and related group cohomology constructions. None gives strict reduction with residue-linear lifting.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"adjunction\"",
+   "results": "Twelve hits on ordinary adjunction extensionality and Kan-extension adjunctions; none states finite Ext lifting or Kummer normalization.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "kummer.*derived|derived.*kummer|residue.*reduction|reduction.*residue; KummerArrowTransport|KummerTargetData; blueprint derived residue and Kummer",
+   "results": "Mathlib grep only found elliptic-curve reduction. Project search found the assigned theorem and its assembly consumers, constant-exponent DivisibleExtensionDerivedReduction, and Cartier units. Blueprint search found no derived-residue node and 52 Kummer nodes; none states this arbitrary-source strict-system step separately.",
+   "date": "2026-10-27",
+   "verdict": "Reuse existing coefficient and K-flat interfaces, but make the two missing steps explicit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KummerStrictTargetTransport",
+  "group": "B6",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sfb-diagonal-finite-arrow-lift",
+ "title": "Residue-linear lift of evaluated simultaneous reduction arrows",
+ "statement": "Let $\\ell$ be prime, $W$ any scheme, and $D$ a simultaneous derived reduction of scalar extension from abelian pro-etale sheaves to constant $\\mathbf Z_\\ell$-module sheaves [def-sfb-diagonal-system-interface], with the small Ext conventions [lem-sfb-canonical-sheaf-ext]. Let $M,S$ be arbitrary abelian sheaves, $H$ a strict p-adic module system, and $b:D.T(M[1])\\simeq H[2]$. Fix a level $n$ (exponent $n+1$) and residue-module sheaves $P,Q$. Write $F_n$ for restriction from $\\mathbf Z/\\ell^{n+1}$ to $\\mathbf Z_\\ell$. Let $t:H_n\\simeq F_nP$, let $a:D.T(S[0])\\simeq D.ordinary(S)[0]$ have hom equal to the canonical derived counit, and let $s:D.ordinary(S)_n\\simeq F_nQ$. Then for every $f\\in\\operatorname{Ext}^1(S,M)$ there is $e\\in\\operatorname{Ext}^2(Q,P)$ whose exact-functor image under $F_n$ is evaluation of $a^{-1}D.T(f)b$, precomposed with $s^{-1}$ and postcomposed with $t$. This asserts lifting only for these derived-reduction arrows, not fullness of coefficient restriction on arbitrary Ext groups. There is no Kummer assumption, roots object, invertibility hypothesis on $\\ell$ on $W$, or scalar-adjunct formula.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-canonical-sheaf-ext"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (2), computation by one K-flat resolution, and step (4), evaluation through residue extension before scalar restriction; arbitrary source and target identifications."
+ },
+ "proof": [
+  {
+   "text": "The evaluated derived-reduction functor factors through the derived category of residue-module sheaves by [lem-sfb-diagonal-residue-derived-factorization].",
+   "uses": [
+    "lem-sfb-diagonal-residue-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction along the surjective coefficient projection is exact, full and faithful on sheaves. It reflects cohomological concentration. A derived object whose restriction is isomorphic to a single-degree object is therefore itself concentrated in that degree. Express both objects as single-degree objects; fullness and faithfulness on sheaves lift the prescribed isomorphism. Apply this argument at degree zero to the source and at degree minus two to the target.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the residue derived functor to f and conjugate by these two lifted isomorphisms. Use the Ext/Hom equivalence to define e. The naturality square of the factorization isomorphism, together with the exact-functor single and shift comparisons, proves the required equality of Ext classes.",
+   "uses": [
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-residue-derived-factorization",
+  "def-sfb-diagonal-system-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (2), common-resolution computation, and step (4), evaluation with residue coefficients before restriction. Fully proved by J3 using residue quotients, regular-complex resolutions, and pure-object lifting."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (2), computation by one K-flat resolution, and step (4), evaluation through residue extension before scalar restriction; arbitrary source and target identifications.",
+   "via": [
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteArrowLift",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteArrowLift.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_finite_arrow_lift",
+  "statement": "theorem diagonal_finite_arrow_lift (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasExt.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W)) (n : ℕ) :\n    diagonalFiniteArrowLiftingStatement ℓ W D n",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalFiniteArrowLifting",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteArrowLiftingStatement",
+   "AlgebraicGeometry.ProEtale.diagonal_finite_arrow_lift"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-37cf9",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261027T112320-L-1570535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T131458-L-2941336",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

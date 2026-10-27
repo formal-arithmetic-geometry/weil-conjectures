@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-projectivity-maximal-bad-reduced-quotient",
+ "kind": "statement",
+ "title": "Maximal bad quotient reduces projectivity to a reduced base",
+ "statement": "Let $R\\to S$ be a finite type flat homomorphism of commutative rings with $R$ Noetherian. Assume that $S\\otimes_R K$ is a nonzero integral domain for every prime $\\mathfrak p\\subset R$ and every field extension $K/\\kappa(\\mathfrak p)$ (geometrically integral fibres), and that $S$ is not projective as an $R$-module. Then there is a proper radical ideal $I\\subset R$ such that, writing $A=R/I$ and $B=S/IS$, the ring $A$ is nonzero, Noetherian and reduced (has no nonzero nilpotent elements), the map $A\\to B$ is finite type and flat with geometrically integral fibres, $B$ is not projective over $A$, and $B/JB$ is projective over $A/J$ for every nonzero ideal $J\\subseteq A$. Here radical means $x^n\\in I$ for some $n\\ge1$ implies $x\\in I$. The notions of Noetherian, finite type, flat, projective, residue field and tensor product are as in [def-weil-pbc-noetherian-ring], [def-weil-pbc-finite-type-algebra], [def-weil-pbc-flat-ring-map], [def-weil-pbc-projective-module], [def-weil-residue-field] and [def-weil-pbc-module-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, first proof paragraph: maximal bad ideal and radical reduction, including preservation under quotient base change"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-projective-module",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For any ideal $H\\subseteq R$, the quotient $S/HS$ is flat over $R/H$. Indeed, for an injective $R/H$-linear map $U\\to V$, regard it as an injective $R$-linear map. Flatness of $S$ makes $U\\otimes_RS\\to V\\otimes_RS$ injective [def-weil-pbc-flat-ring-map]. Clause (2) of [lem-weil-pbc-tensor-over-quotient-ring], including its naturality, identifies this with $U\\otimes_{R/H}(S/HS)\\to V\\otimes_{R/H}(S/HS)$. This is precisely flatness over $R/H$. Moreover, images of any finite set of $R$-algebra generators of $S$ generate $S/HS$ over $R/H$ [def-weil-pbc-finite-type-algebra].",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, first proof paragraph: maximal bad ideal and radical reduction, including preservation under quotient base change"
+   }
+  },
+  {
+   "text": "Let $\\Phi=\\{H\\subseteq R\\mid S/HS\\text{ is not projective over }R/H\\}$. It contains $(0)$ by hypothesis, so [lem-weil-pbc-noetherian-ideal-set-maximal] supplies a maximal member $I$. It is proper: for $H=R$, both quotients are zero, and the zero module is projective since every map out of it lifts uniquely along any surjection [def-weil-pbc-projective-module]. Thus $S/IS$ is not projective, while $S/HS$ is projective over $R/H$ for every $H\\supsetneq I$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-ideal-set-maximal",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, first proof paragraph: maximal bad ideal and radical reduction, including preservation under quotient base change"
+   }
+  },
+  {
+   "text": "Put $L=\\sqrt I$. The ideal $L$ is finitely generated, say by $x_1,\\ldots,x_t$, because $R$ is Noetherian [def-weil-pbc-noetherian-ring]. Choose $n_i\\geq1$ with $x_i^{n_i}\\in I$ and set $N=1+\\sum_i(n_i-1)$. Every degree-$N$ monomial in these generators has some exponent at least $n_i$, so $L^N\\subseteq I$; if $t=0$, this reads $L^1=0\\subseteq I$. Consequently $L/I$ is nilpotent in $R/I$. If $I\\ne L$, maximality gives projectivity of $S/LS$ over $R/L$. Apply [lem-trf-local-nilpotent-projective-flat-lift] with ring $R/I$, ideal $L/I$, and module $S/IS$, flat by step 1. Its reduction is $S/LS$, since the kernel of $S/IS\\to S/LS$ is $LS/IS=(L/I)(S/IS)$, and $(R/I)/(L/I)=R/L$. The lemma makes $S/IS$ projective, contradicting step 2. Hence $I=L$ is radical.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-trf-local-nilpotent-projective-flat-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, first proof paragraph: maximal bad ideal and radical reduction, including preservation under quotient base change"
+   }
+  },
+  {
+   "text": "Set $A=R/I$ and $B=S/IS$. Properness of $I$ gives $1_A\\ne0$. For an ideal $J$ of $A$, its inverse image $H$ in $R$ is finitely generated; images of generators of $H$ generate $J$. Thus $A$ is Noetherian [def-weil-pbc-noetherian-ring]. If $(r+I)^n=0$ with $n\\geq1$, radicality gives $r\\in I$, so $A$ is reduced. Step 1 supplies finite type and flatness of $A\\to B$. For a nonzero ideal $J$ of $A$, its inverse image $H$ strictly contains $I$. The maps $(r+I)+J\\mapsto r+H$ and $(s+IS)+JB\\mapsto s+HS$ give compatible ring and module isomorphisms $A/J\\cong R/H$ and $B/JB\\cong S/HS$. The latter is projective over the former by step 2; the lifting-along-surjections characterization [def-weil-pbc-projective-module] transports this property through the displayed isomorphisms. This also covers $J=A$, where both quotient objects are zero.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, first proof paragraph: maximal bad ideal and radical reduction, including preservation under quotient base change"
+   }
+  },
+  {
+   "text": "Finally let $\\mathfrak q$ be a prime of $A$ and let $\\mathfrak p$ be its inverse image in $R$. Then $I\\subseteq\\mathfrak p$, and $A/\\mathfrak q=R/\\mathfrak p$ by $r+I\\mapsto r+\\mathfrak p$. Localizing this domain at all nonzero elements identifies the residue fields $\\kappa(\\mathfrak q)=\\kappa(\\mathfrak p)$: both are fractions $\\bar r/\\bar t$ with $t\\notin\\mathfrak p$, with exactly the same equality relation. Equivalently these are the quotients of the corresponding local rings by their maximal ideals [def-weil-residue-field]. For any field extension $K/\\kappa(\\mathfrak q)$, clause (2) of [lem-weil-pbc-tensor-over-quotient-ring] with $H=I$, $M=S$ and quotient-ring module $K$ identifies $K\\otimes_RS$ with $K\\otimes_AB$ by $k\\otimes s\\mapsto k\\otimes(s+IS)$. Swapping tensor factors on both sides, $u\\otimes v\\mapsto v\\otimes u$, gives a ring isomorphism $S\\otimes_RK\\cong B\\otimes_AK$ (multiplication agrees on pure tensors). The first ring is a nonzero integral domain by the original fibre hypothesis at $\\mathfrak p$, so the second is too. This proves all required fibre conditions.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, first proof paragraph: maximal bad ideal and radical reduction, including preservation under quotient base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-noetherian-ideal-set-maximal",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-noetherian-ring",
+  "lem-trf-local-nilpotent-projective-flat-lift",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, first proof paragraph; quotient and fibre identifications expanded from their definitions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "maximal.*[Bb]ad|[Bb]ad.*ideal|radical.*projective|projective.*radical",
+   "results": "3 hits: Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean; read returned types: finite-presentation module projectivity needs an unavailable finite-base-module hypothesis; smooth flatness and completion flatness prove only individual inputs; no match for this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonprojective flat algebra over a Noetherian ring has a reduced nonprojective quotient whose every nonzero ideal quotient is projective",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Ideal.radical",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian flat algebra nonprojective maximal bad ideal radical quotient all nonzero ideal quotients projective",
+   "results": "8 hits: Module.projective_of_localization_maximal, Module.projective_of_localization_maximal', Module.Flat.projective_of_finitePresentation, IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime, Module.free_of_flat_of_finrank_eq, Module.faithfullyFlat_iff, IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime, Module.freeLocus_eq_univ_iff; read returned types: finite-presentation module projectivity needs an unavailable finite-base-module hypothesis; smooth flatness and completion flatness prove only individual inputs; no match for this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian induction on ideals reduces projectivity of a flat module to the reduced ring case using nilpotent lifting",
+   "results": "8 hits: Module.Flat.of_projective, Module.Flat.projective_of_finitePresentation, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing, AdicCompletion.flat_of_isNoetherian, Module.Flat.of_forall_exists_factorization, Module.projective_of_localization_maximal, Algebra.FormallyUnramified.projective_of_restrictScalars; read returned types: finite-presentation module projectivity needs an unavailable finite-base-module hypothesis; smooth flatness and completion flatness prove only individual inputs; no match for this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonprojective flat module over a Noetherian ring has a maximal bad radical quotient, all further nonzero quotients projective",
+   "results": "{\"t\": \"2026-10-23T12:26:43Z\", \"tool\": \"leanfinder\", \"query\": \"A nonprojective flat module over a Noetherian ring has a maximal bad radical quotient, all further nonzero quotients projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime\", \"Module.Flat.projective_of_finitePresentation\", \"Module.exists_ltSeries_support_isMaximal_last_of_ltSeries_support\", \"Module.projective_of_localization_maximal\", \"IsHausdorff.of_isTorsionFree\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.faithfullyFlat_iff\"], \"digest\": \"f7a6a39483672ca9\"} Read search hits: finite-presentation projectivity requires module finite presentation (not finite type as an algebra); other hits are local flatness, completion flatness, finite module filtrations, or unrelated projectivization/elliptic reduction. None gives maximal bad reduced quotients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.*[Bb]ad|[Bb]ad.*ideal|radical.*projective|projective.*radical",
+   "results": "{\"t\": \"2026-10-23T12:27:03Z\", \"tool\": \"grep\", \"query\": \"maximal.*[Bb]ad|[Bb]ad.*ideal|radical.*projective|projective.*radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\"], \"digest\": \"8f71a6368ad390ae\"} Read search hits: finite-presentation projectivity requires module finite presentation (not finite type as an algebra); other hits are local flatness, completion flatness, finite module filtrations, or unrelated projectivization/elliptic reduction. None gives maximal bad reduced quotients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonprojective flat algebra over a Noetherian ring has a radical quotient maximal among nonprojective quotients",
+   "results": "{\"t\": \"2026-10-23T12:27:03Z\", \"tool\": \"leansearch\", \"query\": \"Nonprojective flat algebra over a Noetherian ring has a radical quotient maximal among nonprojective quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_maximal\", \"Module.free_of_flat_of_isLocalRing\", \"Module.Flat.of_isLocalizedModule\", \"Module.Flat.of_projective\", \"Module.projective_of_localization_maximal'\", \"RingHom.Flat\", \"Module.Flat.projective_of_finitePresentation\", \"Module.flat_of_localized_maximal\"], \"digest\": \"5d1dfa5d9938114d\"} Read search hits: finite-presentation projectivity requires module finite presentation (not finite type as an algebra); other hits are local flatness, completion flatness, finite module filtrations, or unrelated projectivization/elliptic reduction. None gives maximal bad reduced quotients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Ideal.radical",
+   "results": "{\"t\": \"2026-10-23T12:27:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, Ideal.radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read search hits: finite-presentation projectivity requires module finite presentation (not finite type as an algebra); other hits are local flatness, completion flatness, finite module filtrations, or unrelated projectivization/elliptic reduction. None gives maximal bad reduced quotients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian induction on ideals for projectivity of a flat module using nilpotent lifting and reduced quotient",
+   "results": "{\"t\": \"2026-10-23T12:27:31Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherian induction on ideals for projectivity of a flat module using nilpotent lifting and reduced quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.of_projective\", \"Module.projective_of_localization_maximal\", \"Module.freeLocus_eq_univ\", \"AdicCompletion.flat_of_isNoetherian\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.Flat.tfae_equational_criterion\"], \"digest\": \"4b655b4aa11cdb2b\"} Read search hits: finite-presentation projectivity requires module finite presentation (not finite type as an algebra); other hits are local flatness, completion flatness, finite module filtrations, or unrelated projectivization/elliptic reduction. None gives maximal bad reduced quotients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-noetherian-fibres-projective",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Subsidiary Noetherian projectivity proof: Tag 05FS, lemma-fibres-irreducible-flat-projective, first proof paragraph: maximal bad ideal and radical reduction, including preservation under quotient base change.",
+   "via": [
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-projectivity-maximal-bad-reduced-quotient",
+  "worker": "stage1",
+  "summary": "Expanded the maximal bad ideal argument of Tag 05FS into five steps, reusing the existing Noetherian maximal-element and nilpotent flat-projective lifting nodes. Proved radical nilpotence directly from finite generation and wrote the quotient-flatness, further-quotient and field-fibre identifications explicitly. Statement unchanged; no new nodes and no Lean changes.",
+  "blueprint": "Historical semistable-alteration projectivity input (Tag 05FT via Tag 05FS) recorded in the item ancestry of lem-trf-local-term-locality. The current latest blueprint now proves local terms directly by contracting correspondences; this delivery splits only the already-dispatched supporting algebra node and does not alter the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-fd4abd8fb",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-fd4abd8fb (reviewer sub-agent of L); spot-checked: I read the five steps and every cited statement in full. The delivery keeps the statement unchanged, adds no new nodes and changes no Lean; the only files are the item and the report. Sources checked: Stacks flat.tex:2178-2207 (05FS, first proof paragraph) and algebra.tex:18922 (05CG). The item states the outcome of the 05FS reduction with all its hypotheses. Step 1: flatness over R/H follows from the injectivity definition plus clause (2) of lem-weil-pbc-tensor-over-quotient-ring, which is natural in A; finite type comes from the images of the generators. Step 2: the bad set contains (0) and has a maximal element by lem-weil-pbc-noetherian-ideal-set-maximal; the zero module over the zero ring is projective, so I is proper. Step 3: L^N lies in I for N=1+Σ(n_i−1), and the case t=0 was checked. lem-trf-local-nilpotent-projective-flat-lift (same unit, 05CG, not dependent on the item) applies to the ring R/I, the ideal L/I and the module S/IS, and the reduction (S/IS)/(LS/IS)≅S/LS is correct. This contradicts maximality, so I is radical. Step 4: A is Noetherian and reduced. For J≠0 the inverse image H strictly contains I, and the compatible isomorphisms A/J≅R/H and B/JB≅S/HS carry projectivity over; J=A is covered. Step 5: κ(q)=κ(p)=Frac(R/p), and clause (2) with K gives a ring isomorphism S⊗_R K≅B⊗_A K; the R-structures on K agree. There is no cycle, no SGA source and no duplicate (rg over the DAG for 05FS / not projective finds only the parent and the item). The only off-unit citations are Mathlib leaves, so no tool_uses are needed. There is no re-split note for this item. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MaximalBadReducedQuotient",
+  "declaration": "Algebra.exists_maximal_bad_reduced_quotient",
+  "file": "lean/Sheaf/RingTheory/MaximalBadReducedQuotient.lean",
+  "statement": "theorem exists_maximal_bad_reduced_quotient (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R] (hfinite : RingHom.FiniteType (algebraMap R S)) (hflat : RingHom.Flat (algebraMap R S)) (hfibres : ∀ (p : PrimeSpectrum R) (K : Type (max u v w)) [Field K] [Algebra p.asIdeal.ResidueField K], IsDomain (K ⊗[p.asIdeal.ResidueField] p.asIdeal.Fiber S)) (hbad : ¬ Module.Projective R S) : ∃ I : Ideal R, I ≠ ⊤ ∧ I.IsRadical ∧ Nontrivial (R ⧸ I) ∧ IsNoetherianRing (R ⧸ I) ∧ IsReduced (R ⧸ I) ∧ RingHom.FiniteType (algebraMap (R ⧸ I) (S ⧸ I.map (algebraMap R S))) ∧ RingHom.Flat (algebraMap (R ⧸ I) (S ⧸ I.map (algebraMap R S))) ∧ (∀ (q : PrimeSpectrum (R ⧸ I)) (K : Type (max u v w)) [Field K] [Algebra q.asIdeal.ResidueField K], IsDomain (K ⊗[q.asIdeal.ResidueField] q.asIdeal.Fiber (S ⧸ I.map (algebraMap R S)))) ∧ ¬ Module.Projective (R ⧸ I) (S ⧸ I.map (algebraMap R S)) ∧ (∀ J : Ideal (R ⧸ I), J ≠ ⊥ → Module.Projective ((R ⧸ I) ⧸ J) ((S ⧸ I.map (algebraMap R S)) ⧸ J.map (algebraMap (R ⧸ I) (S ⧸ I.map (algebraMap R S)))))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-835c2c982",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, 6 stmt_dep records, Stacks flat.tex 2178-2209 (05FS first proof paragraph), the delivered module and report. Every clause matches: Noetherian/RingHom.FiniteType/RingHom.Flat, inline geometric-fibre test IsDomain (K ⊗[κ(p)] p.asIdeal.Fiber S) for all fields K : Type (max u v w) (Fiber = κ(p)⊗_R S; IsDomain gives nonzero), ¬Projective; conclusion ∃ I ≠ ⊤ radical, R⧸I nontrivial/Noetherian/reduced, finite type + flat + same fibre test for the canonical algebraQuotientMapQuotient, ¬Projective, ∀ J ≠ ⊥ Projective ((R⧸I)⧸J) (B⧸J.map) (J = ⊤ included as in the node). No extra hypotheses; free universe w, no loss since an algebraic closure of κ(p) lies in universe u. Parent lem-trf-local-noetherian-fibres-projective (GeometricallyIntegral form) can instantiate w := 0, conversion is proof-level only. Note: inline geometric integrality instead of Mathlib GeometricallyIntegral follows the node (no def node exists) — advisory only. lean.statement verbatim; node diff vs side-live only adds lean; sorry-only proof; source/blueprint docstrings and 5-step proof present; ProjectiveOfFlatOfNilpotentQuotient import exists live; report has Worker report + Second reading by Q17. No file changed, so no compile; worker reports a clean compile."
+ }
+}

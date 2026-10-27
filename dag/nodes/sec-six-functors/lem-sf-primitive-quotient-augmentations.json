@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-primitive-quotient-augmentations",
+ "kind": "statement",
+ "title": "Canonical tensor and pullback augmentations realize the strict reduction maps",
+ "statement": "Fix a prime l, a finite extension E/Q_l, and the actual completed-ring derived categories and strict coefficient-system categories. Let R_X be reduction, L_X the actual total limit, and u_X the unit [lem-coef-derived-system-evaluation-calculus]. Let ringed and realization be the canonical representative-normalized models [def-sf-integral-system-canonical-bridge]. For arbitrary integral objects K,L on X, write chi for ringed.tensor.chi and dTinv for the actual global tensor-to-quotient-limit isomorphism [def-pur-completed-pullback-tensor-comparison]. Then R_X(chi) is invertible and chi followed by dTinv equals u at the ordinary tensor followed by L_X of the canonical reduction-tensor map (including tensorClosed transport). For every scheme morphism f:X→Y and arbitrary K on Y, write chiF for ringed.pull.unit and dFinv for the actual pullback-to-quotient-limit isomorphism. Then R_X(chiF) is invertible and chiF followed by dFinv equals u at ordinary pullback followed by L_X(realization.reductionPull). These are whole-system equations before finite evaluation, natural in all inputs; no completeness or boundedness hypothesis is imposed. The canonical Roos augmentations use the finite quotient maps and zero shifted coordinate [def-sf-tensor-completion-comparison, def-sf-pull-completion-comparison].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, primitive tensor/pullback coefficient comparison and open-factor normalization."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-sf-tensor-completion-comparison",
+  "def-sf-pull-completion-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For the tensor, apply the strict good-complex transpose equation. Tensor.canonical.2 computes the quotient augmentation under the ordinary representative; the defining global tensor model computes the same full Roos target. Cancel the representative and reference model isomorphisms to prove the augmentation equation on good pairs.",
+   "uses": [
+    "lem-sf-tensor-quotient-augmentation-on-good",
+    "def-sf-tensor-completion-comparison",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For pullback, apply the strict good-complex transpose equation. Pull.model and completionUnit naturality followed by its defining good-representative equation identify its left side. The defining global pullback model cancels the reference model. This proves the good-complex augmentation equation.",
+   "uses": [
+    "lem-sf-pull-quotient-augmentation-on-good",
+    "def-sf-pull-completion-comparison",
+    "def-pur-integral-derived-operations",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The existing localization theorem for flat-term K-flat complexes gives an isomorphic good representative of every object. Both sides of each augmentation equation are natural transformations. Naturality along those representative isomorphisms and cancellation extend the equations to arbitrary objects (using product isomorphisms for tensor).",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Finite scalar extension inverts completionUnit. Naturality of reductionEvaluation transfers this to each evaluation of whole reduction, and isIso_iff_evaluations makes reduction of the unit invertible. Both chi and the pull unit are this unit followed by their supplied comparison isomorphisms. Functoriality proves their reductions invertible, finishing both conjunctions.",
+   "uses": [
+    "lem-sf-finite-reduction-completion-unit",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-sf-tensor-completion-comparison",
+    "def-sf-pull-completion-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-integral-derived-operations",
+  "def-sf-pull-completion-comparison",
+  "def-sf-tensor-completion-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-integral-operations-well-defined",
+  "lem-sf-finite-reduction-completion-unit",
+  "lem-sf-pull-quotient-augmentation-on-good",
+  "lem-sf-tensor-quotient-augmentation-on-good"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "D4: strict good-representative computations, explicit cancellation of full Roos models, naturality descent and joint-conservativity assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient augmentation of completed tensor and pullback is the transpose of the canonical reduction comparison under reduction and inverse limit adjunction",
+   "results": "Eight matches on algebraic adic completion and module tensor products, none for the specified whole semilinear derived-system augmentation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\", \"symm_apply_apply\"",
+   "results": "Zero hits. The generic Hom-equivalence cancellation is proved directly in the consumer.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*reconstruction|quotient.*augmentation",
+   "results": "No Mathlib hits. Local search located the existing primitive realization, effectivity, and open-reduction declarations, whose interfaces do not give the equality for the supplied normalized models.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.GeneratorReductionStatement",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence, primitive tensor/pullback coefficient comparison and open-factor normalization.",
+   "via": [
+    "lem-sf-primitive-reduction-transpose",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PrimitiveQuotientAugmentations",
+  "file": "lean/Sheaf/SixFunctors/PrimitiveQuotientAugmentations.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.primitiveQuotientAugmentations",
+  "statement": "theorem primitiveQuotientAugmentations (ringed : IntegralSystemRealization.RingedModels l E)\n    (system : IntegralSystemRealization.Operations l E)\n    (realization : IntegralSystemRealization.RealizationModel l E system) :\n    (∀ (X : Scheme.{u}) (K L : DerivedCategory (scalarReductionSource l E X)),\n    IsIso ((IntegralSystemRealization.calculus l E X).reduction.map\n      (((ringed.tensor X).chi l E).app (K, L))) ∧\n    ((ringed.tensor X).chi l E).app (K, L) ≫\n      (pullbackTensorIntegralTensorModel l E X).hom.app (K, L) =\n      (IntegralSystemRealization.calculus l E X).adjunction.unit.app\n        ((ringed.tensor X).ordinary.tensor.obj (K, L)) ≫\n      (coefficientSequenceLimit l E X).map\n        ((IntegralSystemRealization.calculus l E X).reduction.map\n          (eqToIso (congrArg (fun T ↦ T.obj (K, L)) (ringed.tensorClosed X))).hom ≫\n          (IntegralSystemRealization.calculus l E X).reductionTensor.hom.app (K, L))) ∧\n    (∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n      (K : DerivedCategory (scalarReductionSource l E Y)),\n    IsIso ((IntegralSystemRealization.calculus l E X).reduction.map\n      (((ringed.pull f).unit l E).app K)) ∧\n    ((ringed.pull f).unit l E).app K ≫ (pullbackTensorIntegralPullbackModel l E f).hom.app K =\n      (IntegralSystemRealization.calculus l E X).adjunction.unit.app\n        ((IntegralSystemRealization.ringedPull l E f).obj K) ≫\n      (coefficientSequenceLimit l E X).map ((realization.reductionPull f).hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T095817-L-3484356",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T143015-L-907616",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -148,7 +148,50 @@
   "lem-sp-kinjective-computes"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.exists_rightDerived_shift_identification",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.ShiftIdentification",
+     "lines": [
+      38,
+      73
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.exists_rightDerived_shift_identification_nonneg",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.ShiftIdentification",
+     "lines": [
+      75,
+      110
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.isZero_rightDerived_shift_identification",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.ShiftIdentification",
+     "lines": [
+      112,
+      145
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -201,5 +244,27 @@
    "CategoryTheory.Functor.isZero_rightDerived_shift_identification"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories, $\\mathcal A$ with enough\ninjectives, let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive\n[def-sp-left-exact-additive] functor, let\n$K\\in\\operatorname{Ch}^+(\\mathcal A)$ and let $q\\in\\mathbb Z$. Write\n$\\mathcal H^qK$ for the object $\\mathcal H^q(K)$ placed in degree $0$. Then\nthe derived functor commutes with the shift and the cohomology of a shifted\ncomplex is the shifted cohomology: for every $p\\in\\mathbb Z$ there are\nisomorphisms, natural in $K$,\n\n$$\n \\mathcal H^{p+q}\\bigl(Rv(\\mathcal H^qK[-q])\\bigr)\n \\cong\\mathcal H^{p}\\bigl(Rv(\\mathcal H^qK)\\bigr),\n$$\n\nand for $p\\geq0$ the right-hand side is identified naturally with\n$R^pv(\\mathcal H^q(K))$. For $p<0$ both sides vanish.",
+  "proof": [
+   {
+    "text": "The derived functor of a left exact additive functor\n[def-sp-left-exact-additive] on $\\operatorname{Ch}^+$ is the functor applied\nto a K-injective resolution, by the definition in\n[def-sp-kinjective-bridge]. It commutes with the shift by part (3) of\n[lem-sp-kinjective-computes], so the cohomology of the shifted complex is the\nshifted cohomology, which is the displayed isomorphism; it is natural in $K$\nbecause both steps are. For $p\\geq0$ the identification with\n$R^pv(\\mathcal H^q(K))$ is the\ndefinition $R^pv=\\mathcal H^p\\circ Rv$ of [def-sp-kinjective-bridge],\ntogether with part (2) of [lem-sp-kinjective-computes] identifying it, on an\nobject, with the derived functor of [def-sp-left-exact-additive].\nFor $p<0$ the object $\\mathcal H^qK$ placed in degree $0$ has no cohomology in\nnegative degrees, so $\\mathcal H^p(Rv(\\mathcal H^qK))=0$ by\n[lem-weil-pbc-derived-functor-negative-vanishing], and the displayed isomorphism\ntransports this vanishing to $\\mathcal H^{p+q}(Rv(\\mathcal H^qK[-q]))$.",
+    "uses": [
+     "def-sp-left-exact-additive",
+     "def-sp-kinjective-bridge",
+     "lem-sp-kinjective-computes",
+     "lem-weil-pbc-derived-functor-negative-vanishing"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

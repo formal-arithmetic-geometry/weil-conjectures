@@ -29,7 +29,7 @@
  ],
  "proof": [
   {
-   "text": "Construction of $Z'''$. By [def-sbc-closed-immersion-ideal-sheaf], $\\mathcal I'$ and $\\mathcal I''$ are quasi-coherent sheaves of ideals of $\\mathcal O_X$, with $\\mathcal I'(U)=\\ker(\\mathcal O_X(U)\\to\\mathcal O_{Z'}(i'^{-1}U))$ and likewise for $\\mathcal I''$. By [lem-weil-pbc-quasi-coherent-ideal-intersection] the sheaf of ideals $\\mathcal I'\\cap\\mathcal I''$ is quasi-coherent, with $(\\mathcal I'\\cap\\mathcal I'')(U)=\\mathcal I'(U)\\cap\\mathcal I''(U)$ for every affine open $U$. By [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme] there is a closed immersion $i''':Z'''\\to X$ whose ideal sheaf $\\ker(\\mathcal O_X\\to i'''_*\\mathcal O_{Z'''})$ is $\\mathcal I'\\cap\\mathcal I''$, and for every affine open $U=\\operatorname{Spec}A$ of $X$ [def-weil-affine-spectrum], with $I=\\mathcal I'(U)$, $J=\\mathcal I''(U)$ (the ideals cutting out $Z'\\cap U$, $Z''\\cap U$), $i'''^{-1}(U)\\to U$ is $\\operatorname{Spec}(A/(I\\cap J))\\to\\operatorname{Spec}A$. This is the scheme-theoretic union of Definition 0C4H and the affine-local description in the proof of Lemma 0C4J.",
+   "text": "Let I be the infimum of the two kernel ideal sheaves, using [def-sbc-closed-immersion-ideal-sheaf] and [lem-weil-pbc-quasi-coherent-ideal-intersection]. The closed subscheme is I.subscheme with its canonical inclusion. The closed-immersion instance and IdealSheafData.ker_subschemeι give its closedness and kernel, as in [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme]. Apply the proved source lemma IdealSheafData.isPullback_subschemeCover_map (WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme) to identify every affine chart with the pullback of the quotient spectrum [def-weil-affine-spectrum].",
    "uses": [
     "def-sbc-closed-immersion-ideal-sheaf",
     "lem-weil-pbc-quasi-coherent-ideal-intersection",
@@ -43,12 +43,10 @@
    }
   },
   {
-   "text": "(a) The underlying set. Let $U\\subseteq X$ be an affine open, $A=\\mathcal O_X(U)$, $I=\\mathcal I'(U)$, $J=\\mathcal I''(U)$, and for $x\\in U$ let $\\mathfrak p_x\\subset A$ be the prime of $x$ under $U\\cong\\operatorname{Spec}A$ [lem-weil-pbc-affine-open-spec-points]. By [lem-weil-pbc-closed-immersion-image-zero-locus] applied to $i'$, $i''$ and $i'''$ (whose ideal on $U$ is $I\\cap J$ by step 1), $i'(Z')\\cap U=\\{x\\in U: I\\subseteq\\mathfrak p_x\\}$, $i''(Z'')\\cap U=\\{x\\in U: J\\subseteq\\mathfrak p_x\\}$ and $i'''(Z''')\\cap U=\\{x\\in U: I\\cap J\\subseteq\\mathfrak p_x\\}$. By [lem-weil-pbc-zero-locus-ideal-intersection], $V(I\\cap J)=V(I)\\cup V(J)$ in $\\operatorname{Spec}A$, so $I\\cap J\\subseteq\\mathfrak p_x$ iff $I\\subseteq\\mathfrak p_x$ or $J\\subseteq\\mathfrak p_x$, hence $i'''(Z''')\\cap U=(i'(Z')\\cup i''(Z''))\\cap U$. Since the affine opens cover $X$ [def-pc-scheme], $i'''(Z''')=i'(Z')\\cup i''(Z'')$.",
+   "text": "The intersection I and the product of the two kernels have equal radicals: IdealSheafData.radical_inf and radical_mul both give the infimum of their radicals. Rewriting by support_radical shows their supports agree. Mathlib IdealSheafData.support_mul, the support calculation in [lem-weil-pbc-product-ideal-closed-subscheme-union], gives the union of the two kernel supports. IdealSheafData.range_subschemeι gives the image of the constructed inclusion. As in [lem-weil-pbc-closed-immersion-image-zero-locus], Hom.support_ker identifies each original kernel support with the closure of its image. The original immersions have closed images, so these closures are their images. Coercion of the supremum of closed subsets is set union, yielding the required equality globally.",
    "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-closed-immersion-image-zero-locus",
-    "lem-weil-pbc-zero-locus-ideal-intersection",
-    "def-pc-scheme"
+    "lem-weil-pbc-product-ideal-closed-subscheme-union",
+    "lem-weil-pbc-closed-immersion-image-zero-locus"
    ],
    "elementary": false,
    "source": {
@@ -57,7 +55,7 @@
    }
   },
   {
-   "text": "(b) The closed immersions $a',a''$. The ideal sheaf $\\mathcal I'\\cap\\mathcal I''$ of $i'''$ (step 1) is contained in $\\mathcal I'$ and in $\\mathcal I''$. By [lem-weil-pbc-closed-immersion-factor-ideal-inclusion] applied to $i=i'$ and the closed immersion $i'''$ there is a morphism $a':Z'\\to Z'''$ with $i'''\\circ a'=i'$, and $a'$ is a closed immersion; applied to $i=i''$ and $i'''$ it gives a closed immersion $a'':Z''\\to Z'''$ with $i'''\\circ a''=i''$.",
+   "text": "By ker_subschemeι, the kernel of the constructed closed immersion is I. The inequalities inf_le_left and inf_le_right therefore satisfy the hypotheses of IsClosedImmersion.lift, the factorization in [lem-weil-pbc-closed-immersion-factor-ideal-inclusion]. For each original immersion take that lift; lift_fac supplies its equation over X. Transport the closed-immersion instance of the original immersion along this equation, and apply IsClosedImmersion.of_comp_isClosedImmersion to prove that the factor itself is a closed immersion.",
    "uses": [
     "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
    ],
@@ -73,16 +71,14 @@
   "lem-weil-pbc-quasi-coherent-ideal-intersection",
   "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-product-ideal-closed-subscheme-union",
   "lem-weil-pbc-closed-immersion-image-zero-locus",
-  "lem-weil-pbc-zero-locus-ideal-intersection",
-  "def-pc-scheme",
   "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Definition 0C4H and Lemma 0C4J (first sentence and affine-local description of its proof), Lemma 01QP; Algebra, Lemma 00E0 (9) (literature/stacks-project/algebra.tex) for (a)"
+  "place": "Definition 0C4H and Lemma 0C4J (construction and closed inclusions), with the support identity of Algebra Lemma 00E0 (9), implemented globally using Mathlib support_radical, radical_inf, radical_mul and support_mul. The affine pullback clause reuses the proved source lemma isPullback_subschemeCover_map."
  },
  "mathlib_searches": [
   {
@@ -129,7 +125,18 @@
   "item": "lem-weil-pbc-closed-subset-proper-over-base-properties",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -161,5 +168,15 @@
   "group": "J1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261023T105530-L-3572141",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

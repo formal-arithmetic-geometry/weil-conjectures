@@ -1,0 +1,129 @@
+{
+ "id": "new-t2-etale-adic-path-data",
+ "kind": "statement",
+ "title": "Normalized finite, integral and algebraic path constructions",
+ "statement": "Let Y be a scheme and y,z geometric points over the same algebraically closed field. Finite etale fibre paths determine unique linear maps on finite locally constant module stalks with finite underlying stalks, by their finite-cover germ rule. Under the Noetherian, separated and invertibility hypotheses of [def-pod-lisse-l-adic-sheaves], finite adic level stalks are finite. The unique inverse-limit path is determined by its level projections. Rational and algebraic paths are its successive scalar extensions to the finite coefficient field and its algebraic closure, on the fibres of [def-pod-lisse-adic-fibre-functors]. The algebraic path preserves identity and composition and gives the geometric representation. Its morphism stalk maps use the recorded algebraic fibre functor. The Weil sheaf abbreviation uses [def-wf-lisse-adic-automorphism-pullback]. These are the existing constructions relocated verbatim from the parent, with a proved public composition lemma.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), (1.1.6), pp.146-150; finite path compatibility from Stacks 0BND (2)"
+ },
+ "stmt_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pod-lisse-adic-fibre-functors",
+  "def-wf-lisse-adic-automorphism-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The underlying finite locally constant set sheaf is represented by a finite etale cover. Apply the given path to this cover and use the existing linear fibre transport. Its germ formula gives the required normalization. Every stalk element is represented by a section on such a cover, proving uniqueness.",
+   "uses": [
+    "new-e5-linear-fibre-path-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing integral fibre-path construction proves finiteness of the adic level stalks. Germ normalization makes the finite path maps natural for transition maps. Apply the inverse-limit functor to this natural isomorphism; limit projections prove normalization and uniqueness. Identity and composition hold on germs, hence on limit projections, and survive both scalar extensions, giving the algebraic path representation laws.",
+   "uses": [
+    "new-e5-integral-fibre-path-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-e5-linear-fibre-path-transport",
+  "new-e5-integral-fibre-path-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "date": "2026-10-25",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), (1.1.6), pp.146-150; finite path compatibility from Stacks 0BND (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical geometric stalk action of a lisse l-adic sheaf is continuous and descends to a finite coefficient field; path transport commutes with sheaf morphisms and pullback",
+   "results": "Eight hits, all generic pullback/stalk APIs; no normalized etale adic path compatibility theorem.",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; use existing categorical naturality and scalar-extension APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits including NatTrans.naturality; this applies once a natural isomorphism with the recorded path components is identified.",
+   "date": "2026-10-25",
+   "verdict": "Generic naturality API only."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleAlgebraicPath|etaleWeilFrobenius|etaleGeometricRep|NatTrans.naturality|isoOfNatIso_hom_π|generalLinearEquiv",
+   "results": "Read the item, its consumers, FibreFunctorLinearTransport, IntegralFibrePathConstruction, AlgebraicFibrePathConstruction, RationalFibrePathConstruction, and Mathlib. No existing theorem states the two compatibility equations. The upstream Monodromy module proves the abstract group extension and uniqueness.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the proved group lift; split only the two missing path squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleWeilFundamentalRepresentation",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-fundamental-representation",
+   "place": "Normalized finite, integral and algebraic path constructions in the geometric and Weil fundamental representation construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-geometry",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleAdicPathData",
+  "file": "lean/Sheaf/Paper/EtaleAdicPathData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleFinitePathIso_exists",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleFinitePathIso_exists",
+   "AlgebraicGeometry.Scheme.etaleFinitePathIso",
+   "AlgebraicGeometry.Scheme.etaleIntegralLevel_finite",
+   "AlgebraicGeometry.Scheme.etaleIntegralPathIso_exists",
+   "AlgebraicGeometry.Scheme.etaleIntegralPathIso",
+   "AlgebraicGeometry.Scheme.etaleRationalPathIso",
+   "AlgebraicGeometry.Scheme.etaleAlgebraicPathIso",
+   "AlgebraicGeometry.Scheme.etaleAlgebraicPath",
+   "AlgebraicGeometry.Scheme.etaleAlgebraicPath_laws",
+   "AlgebraicGeometry.Scheme.etaleGeometricRep",
+   "AlgebraicGeometry.Scheme.EtaleLisseWeilSheaf",
+   "AlgebraicGeometry.Scheme.etaleAlgebraicFiberMap",
+   "AlgebraicGeometry.Scheme.etaleAlgebraicPathIso_trans"
+  ],
+  "statement": "theorem etaleFinitePathIso_exists (R : Type (u + 1)) [Ring R]\n    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))\n    (hF : IsFiniteLocallyConstantSheaf F)\n    (hfin : ∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω'] (t : Spec (.of Ω') ⟶ Y),\n      Finite (((pointSmallEtale t).ulift.{u + 1}.sheafFiber\n        (A := ModuleCat.{u + 1} R)).obj F))\n    (τ : fiber y ≅ fiber z) :\n    ∃! e : (pointSmallEtale y).ulift.{u + 1}.sheafFiber.obj F ≅\n        (pointSmallEtale z).ulift.{u + 1}.sheafFiber.obj F,\n      ∀ (P : Y.FiniteEtale) (a : (fiber y).obj P) (s : F.obj.obj (op P.obj)),\n        e.hom ((pointSmallEtale y).ulift.{u + 1}.toPresheafFiber P.obj ⟨a⟩ F.obj s) =\n          (pointSmallEtale z).ulift.{u + 1}.toPresheafFiber P.obj\n            ⟨τ.hom.app P a⟩ F.obj s",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8ebdc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T123853-L-1910906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8ebdc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T123853-L-1910906",
+  "kind": "interface",
+  "note": "independent cc review: item statements byte-identical to published; EtaleAdicPathData prefix verbatim vs published item lines 1-413; two new sorry squares checked against lisseAlgebraicFiberFunctor/AutomorphismFiberIso definitions and algebraicFibrePathIso; 15 direct importers compiled against delivered modules; #print axioms"
+ }
+}

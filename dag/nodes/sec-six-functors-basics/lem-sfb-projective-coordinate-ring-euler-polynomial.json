@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-projective-coordinate-ring-euler-polynomial",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial",
+   "via": [
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Homogeneous coordinate ring dimensions equal twisted Euler characteristics",
+ "statement": "Let $k$ be a field [def-weil-field], let $N\\ge0$, let $B=k[z_0,\\ldots,z_N]$ be graded by total degree, and let $J\\subseteq B$ be a homogeneous ideal. Put $A=B/J=\\bigoplus_{m\\ge0}A_m$ with the induced grading, and let $i:Z=\\operatorname{Proj}(A)\\hookrightarrow\\mathbf P^N_k=\\operatorname{Proj}(B)$ be the closed subscheme defined by $J$ [def-pc-proj, def-weil-closed-immersion]. Put $\\mathcal O_Z(m)=i^*\\mathcal O_{\\mathbf P^N_k}(m)$ [def-pc-projective-space-twist, def-pc-module-pullback], where on the specified model $\\mathbf P^N_k=\\operatorname{Proj}(B)$ the sheaf $\\mathcal O_{\\mathbf P^N_k}(m)=\\widetilde{B(m)}$ is the Proj twisting sheaf [def-weil-pbc-proj-twisting-sheaf]. Then there is $m_0\\ge0$ such that $\\dim_kA_m=\\chi(Z,\\mathcal O_Z(m))$ [def-pc-euler-characteristic] for every $m\\ge m_0$. In particular the polynomial eventually equal to $m\\mapsto\\dim_kA_m$ depends only on the closed subscheme $Z$, not on the homogeneous ideal $J$ defining it. The ideal $J$ need not be saturated, and $Z$ may be empty, in which case both sides vanish for $m\\gg0$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0AG7 (lemma-recover-tail-graded-module), applied to the finite graded $B$-module $A$, with varieties.tex Tag 08AE (lemma-hilbert-polynomial-H0) and coherent.tex Tag 01YS (lemma-coherent-projective) (4) for the vanishing of higher cohomology of large twists."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-proj",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-pc-euler-characteristic",
+  "def-sfb-coordinate-quotient-grading",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-coordinate-quotient-section-polynomial-tail] to the actual quotient $A=B/J$. With $L_m=\\mathcal O_Z(m)$ this gives $a\\ge0$, a polynomial $P_J$, and for $m\\ge a$ a $k$-linear isomorphism $A_m\\cong H^0(Z,\\mathcal O_Z(m))$ with $P_J(m)=\\dim_k A_m$. The chart comparison in that statement uses the pulled-back ambient Proj twist specified here, so no saturation of $J$ occurs.",
+   "uses": [
+    "lem-sfb-coordinate-quotient-section-polynomial-tail"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module, for the actual quotient graded ring; constructions.tex Tag 01MT, lemma-apply-modules, and Tag 01N1, lemma-surjective-graded-rings-generated-degree-1-map-proj, for the chartwise pullback comparison; algebra.tex Tag 00K1, proposition-graded-hilbert-polynomial, for the eventual polynomial."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-twist-euler-section-uniqueness] with $X=Z$ and $\\mathcal F=\\mathcal O_Z$. The structure sheaf is quasi-coherent and has the finite presentation $\\mathcal O_Z^{\\oplus0}\\to\\mathcal O_Z\\xrightarrow{\\mathrm{id}}\\mathcal O_Z\\to0$; tensoring with it is the unit identification, so $E_m=\\mathcal O_Z(m)$. For $m\\ge b$ the cited statement gives $\\chi(Z,\\mathcal O_Z(m))=\\dim_k H^0(Z,\\mathcal O_Z(m))$. Taking $m_0=\\max(a,b)$ and the equality in step 1 proves the required coordinate/Euler equality and eventual polynomial existence.",
+   "uses": [
+    "lem-sfb-projective-twist-euler-section-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YS, lemma-coherent-projective (2)--(4), in its closed-immersion form; varieties.tex Tag 08AE, lemma-hilbert-polynomial-H0, for reduction to degree zero. Uniqueness and the empty case use the elementary rational-polynomial root argument in the returned parent proof, step 6 (agent argument)."
+   }
+  },
+  {
+   "text": "For two homogeneous ideals defining the same closed subscheme of this fixed projective space, identify their quotient Proj schemes with that closed subscheme $i:Z\\hookrightarrow P$; their pulled-back twists are therefore the same $i^*\\widetilde{B(m)}$. Step 1 for each ideal says that its polynomial agrees eventually with this one section-dimension function. The uniqueness clause of [lem-sfb-projective-twist-euler-section-uniqueness] gives equality of the polynomials. If $Z=\\varnothing$, its section and Euler functions are zero by that same node, so step 1 gives $A_m=0$ eventually and the polynomial is zero. This includes the unit ideal and unsaturated irrelevant-primary ideals.",
+   "uses": [
+    "lem-sfb-projective-twist-euler-section-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YS, lemma-coherent-projective (2)--(4), in its closed-immersion form; varieties.tex Tag 08AE, lemma-hilbert-polynomial-H0, for reduction to degree zero. Uniqueness and the empty case use the elementary rational-polynomial root argument in the returned parent proof, step 6 (agent argument)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-coordinate-quotient-section-polynomial-tail",
+  "lem-sfb-projective-twist-euler-section-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Assembly of the two extracted arguments, following Tags 0AG7 and 01YS, with constructions.tex Tags 01MT and 01N1, algebra.tex Tag 00K1, varieties.tex Tag 08AE, and the elementary uniqueness argument already present in the returned proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'hilbertPoly\\|HilbertPoly' and grep -rn 'eulerChar\\|EulerChar' AlgebraicGeometry in .lake/packages/mathlib/Mathlib (sheaf project pin)",
+   "results": "Mathlib/RingTheory/Polynomial/HilbertPoly.lean only (Hilbert polynomial of a power series / polynomial ring, no schemes); no eulerChar in AlgebraicGeometry; ProjectiveSpectrum has no twisting-sheaf cohomology",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib has no coherent cohomology of Proj, so neither side of the comparison is stated there"
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPoly|HilbertPoly|eulerChar|EulerChar",
+   "results": "{\"t\": \"2026-10-22T04:22:23Z\", \"tool\": \"grep\", \"query\": \"hilbertPoly|HilbertPoly|eulerChar|EulerChar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the searches find Proj affine charts and the purely polynomial HilbertPoly API, not this comparison with coherent cohomology; the second phrasing searches the more general finite graded-module section theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre theorem homogeneous coordinate ring Hilbert polynomial Euler characteristic of projective scheme",
+   "results": "{\"t\": \"2026-10-22T04:22:23Z\", \"tool\": \"leansearch\", \"query\": \"Serre theorem homogeneous coordinate ring Hilbert polynomial Euler characteristic of projective scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_smul\", \"Polynomial.hilbertPoly_mul_one_sub_pow_add\", \"Polynomial.coeff_mul_invOneSubPow_eq_hilbertPoly_eval\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"AlgebraicGeometry.Proj.mul_apply\", \"WeierstrassCurve.Projective.polynomial_relation\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\"], \"digest\": \"ed5daee425e05d3a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the searches find Proj affine charts and the purely polynomial HilbertPoly API, not this comparison with coherent cohomology; the second phrasing searches the more general finite graded-module section theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Module.finrank",
+   "results": "{\"t\": \"2026-10-22T04:22:23Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, Module.finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the searches find Proj affine charts and the purely polynomial HilbertPoly API, not this comparison with coherent cohomology; the second phrasing searches the more general finite graded-module section theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a homogeneous ideal in a polynomial ring over a field the dimension of the graded quotient in large degree equals the Euler characteristic of its projective scheme twist",
+   "results": "{\"t\": \"2026-10-22T04:22:30Z\", \"tool\": \"leanfinder\", \"query\": \"For a homogeneous ideal in a polynomial ring over a field the dimension of the graded quotient in large degree equals the Euler characteristic of its projective scheme twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"ProjectiveSpectrum.not_irrelevant_le\", \"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum.asHomogeneousIdeal\", \"HomogeneousLocalization.deg\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\"], \"digest\": \"c2d6811b06f2a9e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the searches find Proj affine charts and the purely polynomial HilbertPoly API, not this comparison with coherent cohomology; the second phrasing searches the more general finite graded-module section theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "recover|twist|Twist|[Ss]erre|gradedModule",
+   "results": "{\"t\": \"2026-10-22T04:22:49Z\", \"tool\": \"grep\", \"query\": \"recover|twist|Twist|[Ss]erre|gradedModule\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the searches find Proj affine charts and the purely polynomial HilbertPoly API, not this comparison with coherent cohomology; the second phrasing searches the more general finite graded-module section theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Module.Finite",
+   "results": "{\"t\": \"2026-10-22T04:22:49Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the searches find Proj affine charts and the purely polynomial HilbertPoly API, not this comparison with coherent cohomology; the second phrasing searches the more general finite graded-module section theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite graded module recovered from global sections of twists in high degrees Serre correspondence",
+   "results": "{\"t\": \"2026-10-22T04:22:50Z\", \"tool\": \"leansearch\", \"query\": \"Finite graded module recovered from global sections of twists in high degrees Serre correspondence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"DirectSum.GradeZero.module\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj\", \"GradedAlgebra\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"SheafOfModules.GeneratingSections.IsFiniteType\"], \"digest\": \"d9b1c928bb1a0ba8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the searches find Proj affine charts and the purely polynomial HilbertPoly API, not this comparison with coherent cohomology; the second phrasing searches the more general finite graded-module section theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite graded module over a standard graded Noetherian ring the canonical map to sections of its associated sheaf is an isomorphism in all sufficiently large degrees",
+   "results": "{\"t\": \"2026-10-22T04:22:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite graded module over a standard graded Noetherian ring the canonical map to sections of its associated sheaf is an isomorphism in all sufficiently large degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\"], \"digest\": \"8e936ef131de4e59\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the searches find Proj affine charts and the purely polynomial HilbertPoly API, not this comparison with coherent cohomology; the second phrasing searches the more general finite graded-module section theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre correspondence identifies high graded pieces of a finitely generated module with global sections on Proj of the shifted module sheaf",
+   "results": "{\"t\": \"2026-10-22T04:23:32Z\", \"tool\": \"leanfinder\", \"query\": \"Serre correspondence identifies high graded pieces of a finitely generated module with global sections on Proj of the shifted module sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.Proj.ext_iff\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\"], \"digest\": \"d71845aa1f91230f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the searches find Proj affine charts and the purely polynomial HilbertPoly API, not this comparison with coherent cohomology; the second phrasing searches the more general finite graded-module section theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-projective-curve-isom-graphs",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-projective-coordinate-ring-euler-polynomial",
+  "worker": "stage1",
+  "summary": "Required re-split: extracted old steps 1,2,5 into the coordinate section/polynomial node and old steps 3,4,6 into the projective cohomology/Euler/uniqueness node. Both are statement-only unsplit tasks of comparable argument size; the parent is a short assembly. Its statement is unchanged, including its exact Proj model, unsaturated ideals, polynomial independence and the empty case.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; old steps 1,2,5 are realized by lem-sfb-coordinate-quotient-section-polynomial-tail and old steps 3,4,6 by lem-sfb-projective-twist-euler-section-uniqueness."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-serre-vanishing",
+  "lem-trf-standard-graded-hilbert-function"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-f582aee8f",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-f582aee8f (reviewer sub-agent of L); spot-checked: Re-split under the human decision of 2026-10-21 (repair note released 2026-10-22). Old proof: 6 steps, 3890 characters. The item statement and every non-proof field are byte-identical to live. The item is not superseded: live and side-live still hold the 6-step split, and neither new id exists there. It is not on the dropped list, and nothing cites SGA. Accounting: old steps 1, 2, 5 (chart iso A(m)~≅i^*B(m)~ with bases u_j^m and transitions (u_i/u_j)^m; 0AG7 for S=M=A with A_0=k or 0 Noetherian; monomial finiteness; 00K1 polynomial) are the assertions of lem-sfb-coordinate-quotient-section-polynomial-tail. Old steps 3, 4, 6 (uniform Serre vanishing; χ=dim H^0; root-count uniqueness; empty case) are the assertions of lem-sfb-projective-twist-euler-section-uniqueness. No argument was dropped. The nodes are of comparable size (2046 and 1844 characters of old argument). Neither restates the item: node 1 has no χ and node 2 has no coordinate ring. The parent is a 3-step assembly of 1623 characters. Step 1 takes L_m=i^*B(m)~, which is the item's O_Z(m). Step 2 uses F=O_Z with the unit identification and m_0=max(a,b). Step 3 applies node-2 uniqueness to both P_J, which agree eventually with the same h^0 function, and covers the empty, J=B and irrelevant-primary cases. Sources read: coherent.tex 0AG7 (l.3862), 01YS (l.3641: (2) vanishing above n, (3) finiteness, (4) high-twist vanishing), varieties.tex 08AE (l.6828), and constructions 01MT/01N1. Node 2's finite-dimensionality follows from 01YS(3) applied to i_*E_m, which makes def-pc-euler-characteristic (proper over k, coherent) well defined. Small cases checked: N=0 with J=0; (z_0^r); J=B; (x^2,xy), which is only eventual (dim A_1=2 vs h^0=1); F=0; X=∅; P^1 with O. Both new nodes are statement-only (B1), self-contained, and every notion cites its definition node. Searches: grep, Loogle and LeanFinder ran; LeanSearch is recorded as unavailable. Duplicate search (rg -L for 0AG7, 08AE, Euler and H^0 equalities) found only partial overlaps. Advisory: node 1's θ_m clause is an instance of lem-sfb-graded-proj-quotient-twist-comparison. The proof of node 1 should cite that node and lem-sfb-finite-graded-module-section-tail; the proof of node 2 should cite lem-weil-pbc-closed-immersion-serre-vanishing. Maintainer note: the item's tool_uses (serre-vanishing, trf standard-graded-hilbert) are now stale because its proof no longer cites them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCoordinateRingEulerPolynomial",
+  "declaration": "AlgebraicGeometry.exists_coordinateQuotient_euler_polynomial",
+  "declarations": [
+   "AlgebraicGeometry.coordinateQuotientGradedMap",
+   "AlgebraicGeometry.coordinateQuotientImmersion",
+   "AlgebraicGeometry.coordinateQuotientEuler",
+   "AlgebraicGeometry.exists_coordinateQuotient_euler_polynomial",
+   "AlgebraicGeometry.coordinateQuotient_polynomial_independent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCoordinateRingEulerPolynomial.lean",
+  "statement": "theorem exists_coordinateQuotient_euler_polynomial (J : HomogeneousIdeal (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (N + 1))) k)) : ∃ (m₀ : ℕ) (P : Polynomial ℚ), (∀ m : ℕ, m₀ ≤ m → (Module.finrank k (coordinateQuotientPiece J m) : ℤ) = coordinateQuotientEuler J m ∧ P.eval (m : ℚ) = (Module.finrank k (coordinateQuotientPiece J m) : ℚ)) ∧ (IsEmpty (Proj (coordinateQuotientPiece J)) → P = 0 ∧ ∀ m : ℕ, m₀ ≤ m → Module.finrank k (coordinateQuotientPiece J m) = 0 ∧ coordinateQuotientEuler J m = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d26e7dc6",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Re-delivery of returned head 1f29bf13. H13 fixed: def-pc-projective-space-twist record is byte-identical to live (ProjectiveSpace.twist); def-weil-pbc-proj-twisting-sheaf is unchanged (Proj.twist). §1(C) correction as requested: the O_Z(m) clause cites [def-weil-pbc-proj-twisting-sheaf] (Stacks 01MN(1), O(m)=B(m)~), added to stmt_deps with def-sfb-coordinate-quotient-grading; citer audit of flat-graded-tail-proj, flat-projective-hilbert-polynomial-locality and projective-curve-isom-graphs holds; proof and proof_deps unchanged. H9 advisory done (local instance). Clauses checked: field, ULift.{u} Fin(N+1) variables (forced by projectiveSpaceOverAffine universes), HomogeneousIdeal, quotient pieces with ∃!-characterized grading (not hollow), Proj.map closed immersion via irrelevant_le_map_of_surjective, tensorPullback of Proj.twist, eulerChar with OverClass.ofHom structure map, ∃ m0 and P, empty-Proj clause, embedded-iso independence. Edge cases N=0, J=0, J=B, (z0^r) and unsaturated are covered. lean.statement fields match the files verbatim. No compile (no changed file).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "Q21 stage 2",
+  "old_statement": "Let $k$ be a field [def-weil-field], let $N\\ge0$, let $B=k[z_0,\\ldots,z_N]$ be graded by total degree, and let $J\\subseteq B$ be a homogeneous ideal. Put $A=B/J=\\bigoplus_{m\\ge0}A_m$ with the induced grading, and let $i:Z=\\operatorname{Proj}(A)\\hookrightarrow\\mathbf P^N_k=\\operatorname{Proj}(B)$ be the closed subscheme defined by $J$ [def-pc-proj, def-weil-closed-immersion]. Put $\\mathcal O_Z(m)=i^*\\mathcal O_{\\mathbf P^N_k}(m)$ [def-pc-projective-space-twist, def-pc-module-pullback]. Then there is $m_0\\ge0$ such that $\\dim_kA_m=\\chi(Z,\\mathcal O_Z(m))$ [def-pc-euler-characteristic] for every $m\\ge m_0$. In particular the polynomial eventually equal to $m\\mapsto\\dim_kA_m$ depends only on the closed subscheme $Z$, not on the homogeneous ideal $J$ defining it. The ideal $J$ need not be saturated, and $Z$ may be empty, in which case both sides vanish for $m\\gg0$.",
+  "what": "The O_Z(m) clause names the absolute ambient model Proj(B), but cites only def-pc-projective-space-twist, whose landed declaration ProjectiveSpace.twist lives on the distinct relative base-change model. The source leaves comparison of those Lean scheme models as a TODO, so that declaration cannot directly type the displayed pullback. Specify the Proj twisting sheaf on this exact ambient model and cite its already recorded node; retain the base record of def-pc-projective-space-twist unchanged. No hypothesis or numerical conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/constructions.tex",
+   "place": "Tag 01MN, definition-twist (1), O_Proj(B)(m) = the sheaf associated to B(m); Tag 01MT, lemma-apply-modules, degree-one chart trivializations, as used by step 1 of the item."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-flat-graded-tail-proj",
+    "holds": true,
+    "note": "Its field assertion still identifies the eventual quotient dimensions with Euler characteristics of the twists on the indicated polynomial Proj, including unsaturated and unit ideals."
+   },
+   {
+    "id": "lem-sfb-flat-projective-hilbert-polynomial-locality",
+    "holds": true,
+    "note": "The field-valued comparison and independence of coordinate presentation still hold for the indicated projective embedding and its Proj twists."
+   },
+   {
+    "id": "lem-sfb-projective-curve-isom-graphs",
+    "holds": true,
+    "note": "The graph in its fixed Segre projective embedding still has the same eventual coordinate and Euler polynomial; the specified Proj twist is exactly the polarization used in the chart calculation."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-field",
+   "def-pc-proj",
+   "def-weil-closed-immersion",
+   "def-pc-projective-space-twist",
+   "def-pc-module-pullback",
+   "def-pc-euler-characteristic"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

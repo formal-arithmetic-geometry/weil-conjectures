@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-ringed-hypercohomology-shifted-unit",
+ "kind": "statement",
+ "title": "Shifted-unit representation and edge evaluation of ringed-site hypercohomology",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with a sheaf of commutative rings $\\mathcal O$. Use module sheaves [def-weil-sheaf-of-modules-category], the unbounded derived category $D(\\mathcal O)$ [def-weil-abstract-derived-category], and cohomology sheaves $\\mathcal H^n$ [def-weil-derived-cohomology-sheaves]. Let $A$ be a commutative ring with a map $A\\to\\Gamma(\\mathcal C,\\mathcal O)$, and let $s:(\\operatorname{Sh}(\\mathcal C),\\mathcal O)\\to(\\operatorname{Set},A)$ be the corresponding morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism]. Write $G=Rs_*=R\\Gamma(\\mathcal C,-)$, with its induced $A$-action, computed by K-injective resolutions [def-pur-ringed-site-zeroth-hypercohomology], and use the canonical derived adjunction $Ls^*\\dashv G$ [lem-weil-pbc-ringed-projection-mate-exact]. For $n\\in\\mathbf Z$, write $A_n$ and $\\mathcal O_n$ for the complexes with $A$ and $\\mathcal O$ respectively in degree $n$, zero elsewhere and zero differential. The canonical unit and shift comparisons give $Ls^*A_n\\cong\\mathcal O_n$. For every $K\\in D(\\mathcal O)$ there is an additive bijection, natural in $K$,\n$$\\gamma_K^n:H^nG(K)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(\\mathcal O)}(\\mathcal O_n,K).$$\nIt is the inverse of the canonical composite\n$$\\operatorname{Hom}_{D(\\mathcal O)}(Ls^*A_n,K)\\xrightarrow{\\mathrm{adj}}\\operatorname{Hom}_{D(A)}(A_n,GK)\\xrightarrow{\\sim}H^nG(K),$$\nwhere the last arrow evaluates the representing cocycle at $1\\in A$. If $I$ is a K-injective representative of $K$ and $z$ is a degree-$n$ global cocycle in $I$, then $\\gamma_K^n([z])$ is the derived class of the cochain map $\\mathcal O_n\\to I$ whose degree-$n$ component sends $a$ to $az$. The map $e_K^n:H^nG(K)\\to\\Gamma(\\mathcal C,\\mathcal H^nK)$ taking a global cocycle in $I$ to its class in the cohomology sheaf is independent of $I$, natural for every derived morphism, and satisfies\n$$e_K^n(x)=\\mathcal H^n(\\gamma_K^n(x))(1).$$\nHere $\\mathcal H^n(\\mathcal O_n)=\\mathcal O$, and $1$ means its compatible family of unit sections. No final site object, boundedness, flatness or enough-projectives hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JA (lemma-section-RHom-over-U), global assertion and its K-flat/K-injective proof, specialized to the shifted structure sheaf; Tag 0BKV (lemma-sheafification-cohomology), cocycle quotient. The combined normalized statement is agent-stated."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-sfb-ringed-site-scalar-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ringed projection/adjunction theorem to the stated morphism s to the point. Its unit identification gives Ls^*A[0] ≅ O[0], and its canonical integer-shift structures give Ls^*A_n ≅ O_n: here A_n=A[0][-n] and O_n=O[0][-n]. These are the unit and shift comparisons in the statement, not arbitrary isomorphisms between the same objects. The theorem applies to arbitrary small ringed topoi and imposes no flatness on A → Γ(O).",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), unit and shift specialization"
+   }
+  },
+  {
+   "text": "For any complex I of O-modules, a cochain map f:O_n → I is determined by the compatible sections z_U=f^n_U(1). Conversely a compatible family z of degree-n sections with dz=0 defines f^n_U(a)=a z_U and all other components zero. The chain-map equation is exactly dz=0. A homotopy from f_z to f_w has only one possibly nonzero component O → I^{n-1}; evaluating it at 1 gives t with z-w=d t. Conversely such t defines that homotopy by a ↦ a t. Thus evaluation and its inverse give an additive bijection H^n(Γ(I)) ≅ Hom_{K(O)}(O_n,I), natural under every cochain map I → J. These calculations use global sections as Hom_O(O,-), so they require no final object of the presented site.",
+   "uses": [
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA (lemma-section-RHom-over-U), global computation via Tag 0A94; direct single-complex calculation of that Hom complex"
+   }
+  },
+  {
+   "text": "Choose a K-injective representative I of K using the existence theorem. K-injective localization identifies Hom_{K(O)}(O_n,I) with Hom_{D(O)}(O_n,K), without a boundedness condition on either complex. Compose this identification with Step 2 and the defining computation H^nG(K)=H^nΓ(I), retaining the A-action on sections. This defines γ_K^n and gives exactly the displayed representative f_z. For every derived morphism h:K → L, the K-injective derived-map theorem gives a homotopy class g:I → J which computes h and G(h). The equation g f_z=f_{g(z)} from Step 2 proves γ_L^n(H^nG(h)([z]))=h γ_K^n([z]). The same theorem's canonical resolution transitions prove independence of I; they intertwine this equation and satisfy the cocycle identity. All maps are additive.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sf-kinjective-derived-map-computation",
+    "def-pur-ringed-site-zeroth-hypercohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined); sites-cohomology.tex Tag 07A5 (section-unbounded)"
+   }
+  },
+  {
+   "text": "For an arbitrary complex E of A-modules the same elementary calculation as Step 2 identifies Hom_{K(A)}(A_n,E) with H^n(E), by evaluation at 1. The complex A_n is K-projective in the definition of the cited localization theorem: if E is acyclic, any cycle z ∈ E^n is d t for some t ∈ E^{n-1}, and a ↦ a t is a null homotopy of the corresponding map. That theorem therefore identifies Hom_{D(A)}(A_n,QE) with H^n(E). It does so by the canonical localization map, so evaluation is independent of the chosen representative E and is natural for all derived morphisms. In particular this applies to E=Γ(I), which represents GK even though Γ(I) need not itself be K-injective over A.",
+   "uses": [
+    "lem-coef-kprojective-derived-hom-bijection",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "K-projective dual of Tag 070I (lemma-K-injective); canonical localization bijection as in Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean"
+   }
+  },
+  {
+   "text": "Use the canonical derived-adjunction normalization on the flat-term K-flat resolving class: resolutions are supplied by the K-flat resolution theorem, pullback preserves quasi-isomorphisms between these representatives by the supplied ringed-topos pullback theorem, and the unbounded target resolutions are those of Step 3. The complex A_n belongs to this class: its only nonzero term is free of rank one, and tensoring any acyclic complex with A_n is its degree translation with the signed differential, hence acyclic. Its pullback is the literal O_n under Step 1's unit comparison. The adjunction produced by the normalization theorem is the canonical derived adjunction of Step 1: both are induced from the ordinary module adjunction s^*⊣s_* on resolving representatives, and the normalization formula fixes the adjunction bijection Hom(Ls^*QM,QI)≅Hom(QM,G QI) for every flat-term K-flat M and K-injective I, because every derived map Ls^*QM→QI is Q of a chain map s^*M→I by K-injective localization; every object of either derived category is isomorphic to such a QM or QI by the two resolution theorems, so naturality determines the bijection everywhere and no automorphism of Ls^* can intervene. The normalization theorem says that the derived adjunct of Q(f_z):Ls^*A_n → QI is Q of its termwise adjunct A_n → Γ(I), followed by the right-derived comparison. That adjunct sends a ∈ A to its image times z; in particular 1 ↦ z. Under the K-injective computation of GK, Step 4 consequently sends this adjunct to [z]. Since every class is represented by a cocycle and γ is bijective, γ is the inverse of exactly the composite specified in the statement.",
+   "uses": [
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors), normalized on representatives; sites-cohomology.tex Tags 07A6, 06YS and 0G7E"
+   }
+  },
+  {
+   "text": "The degree-n cohomology map of f_z sends the section a of O=H^n(O_n) to the image of a z in ker(d_I^n)/im(d_I^{n-1}), the quotient as a module sheaf. Evaluating it on the compatible family 1 therefore gives exactly the section obtained from the global cocycle z by the cohomology-sheaf quotient. A global boundary has zero image in this quotient. Thus the stated cocycle map equals x ↦ H^n(γ_K^n(x))(1). Step 3 makes γ independent of the resolution and natural for every derived morphism, and cohomology is a functor on the derived category. Applying that functor to its naturality equation proves Γ(H^n(h))(e_K^n(x))=e_L^n(H^nG(h)(x)); the same formula proves resolution independence. This establishes all edge assertions without identifying a sheaf quotient with its presheaf of sections.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV (lemma-sheafification-cohomology), cocycle quotient calculation, combined with Step 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-abstract-derived-category",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "def-pc-kflat-complex",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JA (lemma-section-RHom-over-U), 0A94 (lemma-RHom-into-K-injective), 0BKV (lemma-sheafification-cohomology); explicit assembly with derived.tex Tags 070I, 070Y and 09T5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a ringed site hypercohomology in degree n is Hom in the derived category from the structure sheaf placed in degree n and the edge sends a morphism to its cohomology map on one",
+   "results": "{\"t\": \"2026-10-23T21:51:09Z\", \"tool\": \"leansearch\", \"query\": \"For a ringed site hypercohomology in degree n is Hom in the derived category from the structure sheaf placed in degree n and the edge sends a morphism to its cohomology map on one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.homEquiv\", \"CategoryTheory.Sheaf.H\", \"DerivedCategory.homologyFunctor\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk\", \"groupCohomology.functor\", \"groupHomology\", \"CochainComplex.HomComplex.Cochain.mk\", \"CategoryTheory.Functor.rightDerived\"], \"digest\": \"787df9447567c0d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unbounded derived global sections cohomology identified with morphisms from shifted unit sheaf",
+   "results": "{\"t\": \"2026-10-23T21:51:15Z\", \"tool\": \"leanfinder\", \"query\": \"unbounded derived global sections cohomology identified with morphisms from shifted unit sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.Abelian.Ext.homEquiv\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom\"], \"digest\": \"0b57f12649754f21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "{\"t\": \"2026-10-23T21:51:18Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|shiftedHom|homology.*[Uu]nit|[Uu]nit.*homology",
+   "results": "{\"t\": \"2026-10-23T21:51:18Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|shiftedHom|homology.*[Uu]nit|[Uu]nit.*homology\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "hypercohomology class as a map from shifted structure sheaf and canonical map to global sections of cohomology sheaf",
+   "results": "{\"t\": \"2026-10-23T21:52:06Z\", \"tool\": \"leanfinder\", \"query\": \"hypercohomology class as a map from shifted structure sheaf and canonical map to global sections of cohomology sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom\", \"CochainComplex.HomComplex.CohomologyClass\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CochainComplex.HomComplex.CohomologyClass.toHom\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CochainComplex.HomComplex.CohomologyClass.toHom_mk\"], \"digest\": \"f31603710024fbf6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an unbounded complex of module sheaves on a ringed site its nth hypercohomology is morphisms from the structure sheaf placed in degree n with cocycle evaluation at the unit",
+   "results": "{\"t\": \"2026-10-23T22:30:17Z\", \"tool\": \"leanfinder\", \"query\": \"For an unbounded complex of module sheaves on a ringed site its nth hypercohomology is morphisms from the structure sheaf placed in degree n with cocycle evaluation at the unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CochainComplex.HomComplex.CohomologyClass\", \"CochainComplex.HomComplex.Cocycle.toSingleMk\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\", \"CochainComplex.HomComplex.leftHomologyData'_K_coe\"], \"digest\": \"a54ff2427c578f96\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Sheaf.H (nonnegative Ext for an abelian sheaf), HomComplex cohomology/localization (abstract complexes), and sectionsMap (underived); none states the complete ringed-site representation, canonical adjunction normalization and edge assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "{\"t\": \"2026-10-23T22:31:01Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Sheaf.H (nonnegative Ext for an abelian sheaf), HomComplex cohomology/localization (abstract complexes), and sectionsMap (underived); none states the complete ringed-site representation, canonical adjunction normalization and edge assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ringed site hypercohomology represented by the shifted structure sheaf in the unbounded derived category",
+   "results": "{\"t\": \"2026-10-23T22:31:25Z\", \"tool\": \"leansearch\", \"query\": \"Ringed site hypercohomology represented by the shifted structure sheaf in the unbounded derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"CategoryTheory.Sheaf.H\", \"AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf'\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Spec.locallyRingedSpaceObj_presheaf'\", \"AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.Spec_sheaf\"], \"digest\": \"87848a93688bd052\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Sheaf.H (nonnegative Ext for an abelian sheaf), HomComplex cohomology/localization (abstract complexes), and sectionsMap (underived); none states the complete ringed-site representation, canonical adjunction normalization and edge assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|shiftedHom|homology.*[Uu]nit|[Uu]nit.*homology",
+   "results": "{\"t\": \"2026-10-23T22:31:25Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|shiftedHom|homology.*[Uu]nit|[Uu]nit.*homology\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Sheaf.H (nonnegative Ext for an abelian sheaf), HomComplex cohomology/localization (abstract complexes), and sectionsMap (underived); none states the complete ringed-site representation, canonical adjunction normalization and edge assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections edge morphism sends a cohomology class to the map induced on cohomology by a morphism from the structure sheaf",
+   "results": "{\"t\": \"2026-10-23T22:31:54Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections edge morphism sends a cohomology class to the map induced on cohomology by a morphism from the structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CochainComplex.HomComplex.CohomologyClass.toHom\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk\", \"SheafOfModules.sectionsMap\", \"CochainComplex.HomComplex.CohomologyClass.toHom_mk\"], \"digest\": \"e73cd80ca8423e37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Sheaf.H (nonnegative Ext for an abelian sheaf), HomComplex cohomology/localization (abstract complexes), and sectionsMap (underived); none states the complete ringed-site representation, canonical adjunction normalization and edge assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-hypercohomology-edge-pullback",
+  "date": "2026-10-24",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Reviewer-added input for lem-sfb-abelian-coherent-exterior-base-change steps 6-8: identification of the relative cup product on higher direct images with the global cup product over affine opens, and its compatibility with base change. Supporting input for this split: Pullback compatibility of the hypercohomology-to-sheaf-cohomology edge. Prerequisite for the pullback-edge argument: represent a hypercohomology class by a morphism from the structure sheaf in one degree, normalized by the global-sections adjunction and the cohomology-sheaf quotient.",
+   "via": [
+    "lem-sfb-ringed-hypercohomology-edge-pullback",
+    "lem-sfb-space-affine-relative-cup-sections",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-hypercohomology-shifted-unit",
+  "worker": "stage1",
+  "summary": "Preserved the full unbounded ringed-site statement. Six steps compute cocycles and homotopies explicitly, use existing unbounded localization and derived-map statements, normalize the canonical adjunction on the shifted free module, and evaluate the cohomology-sheaf quotient. All prerequisites already exist; no new nodes.",
+  "blueprint": "Auxiliary in the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry: normalized global sections are used by the affine relative cup-product and hypercohomology-edge parents. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). The six steps supply the shifted-unit/edge prerequisite without changing that route. The ancestor command returns None; the inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic canonical ringed-topos adjunction with unit and integer-shift structures; the item already explicitly uses this theorem. No special-purpose statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic unbounded localization bijection into a K-injective target; no special etale or bounded-below specialization is taken. No special-purpose statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic computation of every derived morphism and of all resolution transitions by K-injective chain maps. No special-purpose statement of this unit replaces this general tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic unbounded existence on a site small in the module universe. No special-purpose statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-coef-kprojective-derived-hom-bijection",
+    "why": "Generic localization theorem for a K-projective source, applied to the rank-one single complex over A. No special-purpose statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic representative normalization of a derived adjunction, needed to pin down evaluation at 1. No special-purpose statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolutions used by the canonical pullback. No special-purpose statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "why": "Generic preservation of resolving quasi-isomorphisms by ringed-topos module pullback, with no flat structural-map assumption. No special-purpose statement of this unit replaces this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-7846bde50",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-7846bde50 (reviewer sub-agent of L); spot-checked: Read the item's statement and all six steps in full, the statements of all 13 cited nodes, and Stacks 08JA (sites-cohomology l.8874) plus the labels of 0A94, 0BKV, 070I, 070Y, 09T5, 07A6, 06YS and 0G7E. The delivery has no new nodes. The statement, stmt_deps and blueprint are byte-identical to live, where the item is still unsplit and has no repair note, so the target is not weakened and nothing supersedes this delivery. Checks: O_n=O[0][-n] fits the shift convention (K[1])^r=K^{r+1}. The morphism s to (Set,A) is constant sheaf ⊣ Γ with s^{-1}A→O adjoint to A→Γ(O). Step 2's cocycle and homotopy calculation (z−w=dt) is correct. Step 3 uses the unbounded clause of kinjective-hom-derived and the c_a, g and transition formulas of sf-kinjective-derived-map-computation, and the naturality g∘f_z=f_{g z} holds. Step 4: A_n is K-projective by the definition stated in that node. Step 6: the edge naturality e_L(H^nG(h)x)=Γ(H^n h)(e_K x) is checked. Small cases checked: n of either sign, acyclic K, O=0, a point site with a non-flat A→B, and no final object. FIX: Step 5 used lem-sfb-resolving-derived-adjunction-normalization, which only says 'there is an adjunction' with the representative formula, while the statement fixes the canonical adjunction of mate-exact. Two such adjunctions can differ by an automorphism of Ls^* (for example −1), which would flip the sign of γ. I added a sentence: the formula determines the adjunction bijection on pairs (QM,QI) with M flat-term K-flat and I K-injective, by K-injective localization and the resolution theorems, so the normalized adjunction is the canonical one. Step 5 uses now also cites prop-pur-kinjective-resolutions-exist and lem-weil-pbc-kinjective-hom-derived; proof_deps is unchanged. Duplicate search: lem-pur-rhom-global-sections, lem-pur-hom-complex-hypercohomology, lem-pc-derived-tensor-hom-sections-unit and lem-sfb-shifted-unit-tensor-composition are not the same statement. Accepted tool_uses: all 8 declared generic homological-algebra nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedHypercohomologyShiftedUnit",
+  "declaration": "CategoryTheory.RingedHypercohomologyShiftedUnit.shiftedUnitRepresentation",
+  "declarations": [
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.unitModule",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.unitComplex",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.scalarComplex",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.hyper",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.unitHomologyIso",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.scalarOne",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.evaluate",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.cocycleClass",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.component",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.scalarSection",
+   "CategoryTheory.RingedHypercohomologyShiftedUnit.shiftedUnitRepresentation"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedHypercohomologyShiftedUnit.lean",
+  "statement": "theorem shiftedUnitRepresentation : ∃ (P : ModuleCat.{u} A ⥤ Modules R) (_ : P.Additive) (adj : P ⊣ sections R A s) (unit : P.obj (ModuleCat.of A A) ≅ unitModule R) (L : DerivedCategory (ModuleCat A) ⥤ DerivedCategory (Modules R)) (ε : DerivedCategory.Q ⋙ L ⟶ P.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q), L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (ModuleCat A) (.up ℤ)) ∧ (∀ (M : Modules R) (f : P.obj (ModuleCat.of A A) ⟶ M) (U : Cᵒᵖ), (adj.homEquiv _ _ f 1).val U = (unit.inv ≫ f).val.app U (1 : R.obj.obj U)) ∧ ∃ (d : L ⊣ derivedSections R A s) (unitL : ∀ n : ℤ, L.obj (DerivedCategory.Q.obj (scalarComplex A n)) ≅ DerivedCategory.Q.obj (unitComplex R n)), (∀ n : ℤ, (unitL n).hom = ε.app (scalarComplex A n) ≫ DerivedCategory.Q.map (((HomologicalComplex.singleMapHomologicalComplex P (.up ℤ) n).app (ModuleCat.of A A)).hom ≫ (HomologicalComplex.single (Modules R) (.up ℤ) n).map unit.hom)) ∧ (∀ (M : CochainComplex (ModuleCat A) ℤ) (I : CochainComplex (Modules R) ℤ) (f : (P.mapHomologicalComplex (.up ℤ)).obj M ⟶ I), d.homEquiv _ _ (ε.app M ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv M I f) ≫ (sections R A s).rightDerivedFunctorUnitQ I) ∧ ∃ (γ : ∀ (n : ℤ) (K : DerivedCategory (Modules R)), (hyper R A s n).obj K ≃+ (DerivedCategory.Q.obj (unitComplex R n) ⟶ K)) (edge : ∀ (n : ℤ) (K : DerivedCategory (Modules R)), (hyper R A s n).obj K →+ (sections R A s).obj ((DerivedCategory.homologyFunctor (Modules R) n).obj K)), (∀ (n : ℤ) (K : DerivedCategory (Modules R)) (x : (hyper R A s n).obj K), evaluate A n _ (d.homEquiv _ _ ((unitL n).hom ≫ γ n K x)) = x) ∧ (∀ (n : ℤ) (E : DerivedCategory (ModuleCat A)), Function.Bijective (evaluate A n E)) ∧ (∀ (n : ℤ) (K K' : DerivedCategory (Modules R)) (h : K ⟶ K') (x : (hyper R A s n).obj K), γ n K' (((hyper R A s n).map h) x) = γ n K x ≫ h) ∧ (∀ (n : ℤ) (K : DerivedCategory (Modules R)) (I : CochainComplex (Modules R) ℤ) (_ : I.IsKInjective) (i : DerivedCategory.Q.obj I ≅ K) (z : (((sections R A s).mapHomologicalComplex (.up ℤ)).obj I).cycles n), ∃ f : unitComplex R n ⟶ I, (∀ (U : Cᵒᵖ) (a : R.obj.obj U), (component R n I f).val.app U a = a • (((((sections R A s).mapHomologicalComplex (.up ℤ)).obj I).iCycles n) z).val U) ∧ γ n K (cocycleClass R A s n K I i z) = DerivedCategory.Q.map f ≫ i.hom) ∧ (∀ (n : ℤ) (K : DerivedCategory (Modules R)) (x : (hyper R A s n).obj K), edge n K x = scalarSection R A s _ (SheafOfModules.unitHomEquiv _ ((unitHomologyIso R n).inv ≫ (DerivedCategory.homologyFunctor (Modules R) n).map (γ n K x)))) ∧ (∀ (n : ℤ) (K K' : DerivedCategory (Modules R)) (h : K ⟶ K') (x : (hyper R A s n).obj K), ((sections R A s).map ((DerivedCategory.homologyFunctor (Modules R) n).map h)) (edge n K x) = edge n K' (((hyper R A s n).map h) x)) ∧ (∀ (n : ℤ) (K : DerivedCategory (Modules R)) (I : CochainComplex (Modules R) ℤ) (_ : I.IsKInjective) (i : DerivedCategory.Q.obj I ≅ K) (z : (((sections R A s).mapHomologicalComplex (.up ℤ)).obj I).cycles n), ∃ y : (I.cycles n).sections, (∀ U : Cᵒᵖ, (SheafOfModules.sectionsMap (I.iCycles n) y).val U = (((((sections R A s).mapHomologicalComplex (.up ℤ)).obj I).iCycles n) z).val U) ∧ edge n K (cocycleClass R A s n K I i z) = scalarSection R A s _ (SheafOfModules.sectionsMap (I.homologyπ n ≫ (DerivedCategory.homologyFunctorFactors (Modules R) n).inv.app I ≫ (DerivedCategory.homologyFunctor (Modules R) n).map i.hom) y))",
+  "branch": "newtargets-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existential witnesses include the actual left adjoint to the recorded scalar sections functor and its left-derived comparison, an adjunction normalized on chain maps, the forced unit comparisons, and the natural additive representation with its cocycle and edge formulas. All helper definitions have real data. The landed scalar-global-sections definition node is added to stmt_deps under the standing landed-node rule."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51d54a3b0",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Node delta vs live: only lean record + landed def stmt_dep def-sfb-ringed-site-scalar-global-sections. lean.statement verbatim equal to file signature (checked). Clause-by-clause: s_*=sections R A s (compatible families with s-action), G=its canonical rightDerivedFunctor; s^* = existential left adjoint P with unit iso pinned by adj.homEquiv f 1 = (unit.inv≫f)(1); L left-derived via ε; d : L ⊣ G pinned by the chain-map normalization d.homEquiv(ε_M≫Q f)=Q(adj f)≫rightDerivedFunctorUnitQ I (identical to derivedAdjunctionOfResolvingClass, true for canonical adjunction, determines d so no −1 twist); unitL pinned to ε + single(unit.hom). γ additive bijection, inverse of adj/evaluation composite (evaluate∘d∘unitL∘γ=id plus evaluate bijective), natural for all derived h, K-injective cocycle formula a↦a•z_U for every representative; edge additive, = unitHomEquiv(Hⁿ(γx)) evaluation at 1, natural, cocycle-quotient formula via sheaf homologyπ. No final object/boundedness/flatness hypotheses; n∈ℤ, empty site, O=0, K=0 fine; single universe u per node. Helpers real with source/blueprint docstrings; only sorry is the theorem proof; imports exist on live; worker report and Second reading sections present. Not recompiled (no file changed)."
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-smooth-groupoid-fppf-quotient",
+ "kind": "statement",
+ "title": "The fppf quotient of a smooth algebraic-space groupoid",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes [def-weil-size-convention]. Let $U$ be an $S$-scheme and $R$ an algebraic space over $S$ [def-trf-algebraic-space]. Suppose $s,t:R\\to U$, an identity $e:U\\to R$, inversion $j:R\\to R$ and composition $c:R\\times_{s,U,t}R\\to R$ give a groupoid: for each test scheme $T$, objects are $U(T)$, arrows are $R(T)$ with source $s$ and target $t$, and these operations obey the category and inverse laws, naturally in $T$. Assume $s$ and $t$ are smooth, with smoothness tested on etale scheme charts using [def-sbc-smooth-morphisms]. Let $\\mathcal P$ be this presheaf of groupoids and let $\\mathcal Q=a_{fppf}\\mathcal P$ be its stackification [lem-sfb-groupoid-stackification-local-description] for the big fppf site [def-pc-fppf-site], with pullback-compatible functor $i:\\mathcal P\\to\\mathcal Q$. Write $\\pi:h_U\\to\\mathcal Q$ for the functor sending $u\\in U(T)$ to $i(u)$. Then the diagonal of $\\mathcal Q$ is representable by algebraic spaces: every $\\operatorname{Isom}_T(a,b)$ for $a,b\\in\\mathcal Q(T)$ is an algebraic space over $T$. For every scheme $T$ and $q\\in\\mathcal Q(T)$, the 2-fibre product $h_T\\times_{q,\\mathcal Q,\\pi}h_U$ is represented by an algebraic space smooth and surjective over $T$. Here $h_U(T)=\\operatorname{Mor}_S(T,U)$ is a discrete groupoid; a 2-fibre product has objects consisting of two objects and an isomorphism of their images. The natural map $R\\to h_U\\times_{\\pi,\\mathcal Q,\\pi}h_U$, sending $r\\in R(T)$ to $(s(r),t(r),i(r))$ with $i(r):i(s(r))\\to i(t(r))$ the image of the arrow $r$, is an equivalence. In particular $\\mathcal Q$ is an algebraic stack: an fppf stack with representable diagonal and smooth surjective scheme atlas.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04TK (theorem-smooth-groupoid-gives-algebraic-stack), with Tags 04WZ (lemma-diagonal-quotient-stack), 04X0 (lemma-smooth-quotient-smooth-presentation); spaces-groupoids.tex Tag 04M9 (lemma-quotient-stack-2-cartesian)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-sfb-space-groupoid-presheaf-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For $u,v\\in U(T)$, the arrow presheaf from $u$ to $v$ is $T\\times_{(u,v),U\\times_SU,(s,t)}R$. It is an algebraic space by [lem-trf-space-fibre-products-etale-covers], hence an fppf sheaf by [def-trf-algebraic-space]. The Isom clause of [lem-sfb-groupoid-stackification-local-description] therefore says that its map to $\\operatorname{Isom}(i(u),i(v))$ is an isomorphism: sheafifying a sheaf fixes it, by the universal property in [def-weil-pbc-sheafification]. This proves full faithfulness on these object pairs, naturally under base change. Here and below an algebraic space over $S$ with a map to an $S$-scheme $Z$ is the same as an algebraic space over $Z$: in either direction the sections over a test scheme correspond, a scheme chart stays a representable surjective etale chart, and the scheme fibre products testing the diagonal are the same sheaves, so [def-trf-algebraic-space] is checked directly.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 044V (lemma-quotient-stack-morphisms). Change of base scheme: spaces.tex lemma-change-base-scheme (3) and lemma-rephrase, checked from the definition."
+   }
+  },
+  {
+   "text": "On every test scheme $T$, objects of $h_U\\times_{\\mathcal Q}h_U$ are triples $(u,v,\\alpha:i(u)\\xrightarrow{\\sim}i(v))$. Step 1 gives a unique $r\\in R(T)$ with $s(r)=u$, $t(r)=v$ and $i(r)=\\alpha$. Since both factors $h_U$ are discrete, a morphism between two triples exists only for equal $u,v,\\alpha$, and is then the identity. These bijections commute with pullback, so the specified map from $R$ is an equivalence of fibred groupoids. This is the required kernel-pair assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04M9 (lemma-quotient-stack-2-cartesian), unpacking triples and Tag 044V."
+   }
+  },
+  {
+   "text": "For $a,b\\in\\mathcal Q(T)$ choose successive fppf coverings on which both are isomorphic to $i(u_i),i(v_i)$, using [lem-sfb-groupoid-stackification-local-description]. Their Isom sheaf is locally the algebraic space of step 1. Conjugation by the chosen isomorphisms identifies these sheaves, since $\\alpha\\mapsto\\beta_i\\alpha\\alpha_i^{-1}$ has inverse $\\gamma\\mapsto\\beta_i^{-1}\\gamma\\alpha_i$. Refine the covering by keeping, for each point of $T$, one member whose image contains it: it is still an fppf covering [def-pc-fppf-site], the restricted isomorphisms persist, and its index set has at most the cardinality of the point set of $T$. Choose etale scheme charts of the local spaces, objects of the big site. The charts and this index set lie in the working Grothendieck universe [def-weil-size-convention]; their disjoint union is a scheme by [lem-weil-pbc-scheme-coproduct-family], small in that universe, so it is admitted in the chosen ambient big site. The chart condition also gives an algebraic-space coproduct by [lem-trf-algebraic-space-coproduct]. Apply [lem-sfb-fppf-local-algebraic-space] to the Isom sheaf, which is a sheaf because $\\mathcal Q$ is a stack. Thus every Isom sheaf is an algebraic space: the asserted representable diagonal.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-weil-size-convention",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-fppf-local-algebraic-space",
+    "lem-trf-algebraic-space-coproduct",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04WZ (lemma-diagonal-quotient-stack); bootstrap.tex lemma-quotient-stack-isom and Tag 04SK."
+   }
+  },
+  {
+   "text": "Fix $q\\in\\mathcal Q(T)$ and form the scheme $B=T\\times_SU$ using [def-pc-fibre-product]. Over $B$, apply step 3 to the pullbacks of $q$ and the tautological object $\\pi(\\operatorname{pr}_U)$. Its Isom sheaf is an algebraic space $F/B$. By the remark at the end of step 1 it is also an algebraic space over $S$, with a map to $T$ through $B\\to T$; a section over $T'$ is a map $T'\\to B$ and a section of $F$ over it. Viewed over $T$, its test objects are precisely $(u,\\alpha:q|_{T'}\\xrightarrow{\\sim}i(u))$ for $T'\\to T$, with only identity morphisms. Hence $F$ represents $h_T\\times_{\\mathcal Q}h_U$, including its projection to $T$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04X0 (lemma-smooth-quotient-smooth-presentation), representability and the explicit 2-fibre product."
+   }
+  },
+  {
+   "text": "Choose an fppf covering $\\{T_i\\to T\\}$ and isomorphisms $q|_{T_i}\\cong i(v_i)$ by [lem-sfb-groupoid-stackification-local-description]. Replacing $\\alpha:q\\to i(u)$ by its composite with $i(v_i)\\to q$, steps 1 and 2 identify $F\\times_TT_i$ with $R\\times_{s,U,v_i}T_i$. The projection is smooth by [lem-sfb-space-smooth-surjective-fppf-locality], since $s$ is smooth. It is surjective: $z\\mapsto(e(v_i(z)),z)$ is a section, so every field-valued point has a lift with the same field. This checks surjectivity without a finiteness or separatedness assumption.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04X0 (lemma-smooth-quotient-smooth-presentation), local calculation and identity section."
+   }
+  },
+  {
+   "text": "Apply fppf target locality in [lem-sfb-space-smooth-surjective-fppf-locality] to the algebraic-space morphism $F\\to T$ from step 4 and its covering in step 5. It is smooth and surjective. This holds for every $T,q$, so $\\pi$ is a smooth surjective atlas from the given scheme $U$. Finally [lem-sfb-groupoid-stackification-local-description] supplies the fppf stack condition, step 3 the representable diagonal, and the preceding calculation the atlas. These are exactly the three conditions of an algebraic stack in the statement.",
+   "uses": [
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tags 04X0 (lemma-smooth-quotient-smooth-presentation) and 04TK (theorem-smooth-groupoid-gives-algebraic-stack)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-weil-pbc-sheafification",
+  "def-weil-size-convention",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sfb-fppf-local-algebraic-space",
+  "lem-trf-algebraic-space-coproduct",
+  "def-pc-fibre-product",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 04TK, 04WZ, 04X0, with spaces-groupoids.tex Tags 044V and 04M9; the proof specializes to a scheme object space U."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient stack of a smooth groupoid in algebraic spaces is algebraic and the object space is a smooth surjective atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → F.IsPrestackFor R\", \"doc\": \"If a pseudofunctor $\\\\mathcal{F}$ satisfies the stack condition for a presieve $R$ on an object $S$ in a category $\\\\mathcal{C}$, then $\\\\mathcal{F}$ also satisfies the prestack condition for $R$.\"}\n  {\"name\": \"TopCat.of.hasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Basic\", \"type\": \"∀ {H : Type u_1} [inst : TopologicalSpace H] {G : StructureGroupoid H} (M : Type u) [inst_1 : TopologicalSpace M]\\n  [inst_2 : ChartedSpace H M] [HasGroupoid M G], HasGroupoid (↑{ carrier := M, str := inst_1 }) G\", \"doc\": \"If a charted space $M$ over a topological space $H$ has a structure groupoid $G$, then the topological space obtained from $M$ via the canonical forgetful functor $\\\\text{TopCat.of}$ also has the struc\"}\n  {\"name\": \"IsManifold.toHasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {inst : NontriviallyNormedField 𝕜} {E : Type u_2} {inst_1 : NormedAddCommGroup E}\\n  {inst_2 : NormedSpace 𝕜 E} {H : Type u_3} {inst_3 : TopologicalSpace H} {I : ModelWithCorners 𝕜 E H} {n : WithTop ℕ∞}\\n  {M : Type u_4} {inst_4 : TopologicalSpace M} {inst_5 : ChartedSpace H M} [self \", \"doc\": \"If $ M $ is a manifold with corners modeled on $ H $, equipped with a model with corners structure consisting of a nontrivially normed field $ \\\\mathbb{K} $, a normed vector space $ E $ over $ \\\\mathbb{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"contDiffGroupoid_zero_eq\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H},\\n  contDiffGroupoid 0 I = continuousGroupoid H\", \"doc\": \"The groupoid of $C^0$ diffeomorphisms (continuous maps) constructed using the model with corners $I$ coincides with the continuous groupoid on the topological space $H$, i.e., $\\\\mathrm{contDiffGroupoi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth algebraic space groupoid R over U the quotient stack has representable diagonal and U fiber product over the quotient with U is R",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A predicate asserting that a pseudofunctor from the locally discrete opposite category of $\\\\mathcal{C}$ to the category of small categories satisfies the stack conditions with respect to a given Groth\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsStackFor R.arrows) → F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotientStack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|[Ss]mooth[Gg]roupoid|[Aa]lgebraic[Ss]tack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth groupoid in algebraic spaces defines algebraic quotient stack with kernel pair R",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsKernelPair\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.KernelPair\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → {R X Y : C} → (X ⟶ Y) → (R ⟶ X) → (R ⟶ X) → Prop\", \"doc\": \"Given a morphism $f : X \\to Y$ in a category $\\\\mathcal{C}$, the kernel pair of $f$ is a pair of morphisms $R \\rightrightarrows X$ such that the square formed by these morphisms and $f$ satisfies the uni\"}\n  {\"name\": \"Algebra.FormallySmooth.of_split\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(f : P →ₐ[R] A) (g : A →ₐ[R] P ⧸ RingHom.ker f.toRingHom ^ 2) (h : f.kerSquareLift.comp g = AlgHom.id R A) :\\n  FormallySmooth R A\", \"doc\": \"If there exists an algebra homomorphism $ g : A \\\\to P / \\\\ker(f)^2 $ such that the composition of the kernel square lift with $ g $ equals the identity on $ A $, then the algebra $ A $ over $ R $ is fo\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_split_surjection\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(f : P →ₐ[R] A) (hf : Function.Surjective f) : FormallySmooth R A ↔ ∃ g, f.kerSquareLift.comp g = AlgHom.id R A\", \"doc\": \"Let $ R $ be a commutative ring, and let $ f : P \\to A $ be a surjective $ R $-algebra homomorphism. The $ R $-algebra $ A $ is formally smooth if and only if there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Setoid.ker_mk_eq\", \"module\": \"Mathlib.Data.Setoid.Basic\", \"type\": \"(r : Setoid α) : ker (@Quotient.mk'' _ r) = r\", \"doc\": \"For any setoid $ R $ on a type $ \\\\alpha $, the kernel of the canonical quotient map sending each element to its equivalence class under $ R $ is equal to the original relation $ R $. In other words, t\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_of_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(h : Function.Surjective (algebraMap R A)) :\\n  Algebra.FormallySmooth R A ↔ IsIdempotentElem (RingHom.ker (algebraMap R A))\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-algebra $ A $, if the canonical algebra map $ R \\\\to A $ is surjective, then $ A $ is formally smooth over $ R $ if and only if the kernel of this map is an \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned stack-condition/descent-functor, ordinary category, scheme/ring or manifold declarations do not state this result for the specified fibred groupoids or algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient stack of a smooth groupoid in algebraic spaces is algebraic with a smooth surjective atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.IsSmooth f]\\n  [AlgebraicGeometry.IsSmooth g], AlgebraicGeometry.IsSmooth (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of an algebraic space groupoid has representable isomorphism sheaves and kernel pair given by the arrows",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsStackFor R.arrows) → F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Sieve S),\\n  F.IsPrestackFor R.arrows ↔\\n    ∀ (M N : ↑(F.obj { as := Opposite.op S })),\\n      CategoryTheory.Presieve.IsS\", \"doc\": \"A pseudofunctor $ F $ from the opposite category of the over category over an object $ S $ to the category of types is a prestack for a presieve $ R $ on $ S $ if and only if, for all objects $ M $ an\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Sieve S),\\n  F.IsPrestackFor R.arrows ↔\\n    ∀ ⦃S₀ : C⦄ (M N : ↑(F.obj { as := Opposite.op S₀ })) (a : S ⟶ S₀),\\n      Cate\", \"doc\": \"A pseudofunctor $ F $ satisfies the prestack condition for a sieve $ R $ on an object $ S $ if and only if, for every morphism $ a : S \\to S_0 $, the presheaf of hom-sets $ F $ satisfies the sheaf cond\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsPrestack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"For a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology, a pseudofunctor from the opposite category $ \\\\mathcal{C}^{\\\\text{op}} $ (considered as a locally discrete bicategory) to the catego\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A predicate asserting that a pseudofunctor from the locally discrete opposite category of $\\\\mathcal{C}$ to the category of small categories satisfies the stack conditions with respect to a given Groth\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsPrestackFor R.arrows) → F.IsPrestack J\", \"doc\": \"If a pseudofunctor $ F $ satisfies the prestack condition for every sieve $ R $ in a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, then $ F $ is a prestack for $ J $. Formally, for all ob\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotientStack\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|algebraicStack|smoothGroupoid",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth algebraic space groupoids give algebraic quotient stacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"smoothSheafCommGroup\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf CommGrpCat.{u} (TopCat.of M)\", \"doc\": \"The sheaf on a topological manifold $ M $, taking values in the category of commutative groups, where sections over open subsets are smooth maps to a commutative Lie group $ A $, forming commutative g\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizers\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": HasCoequalizers LocallyRingedSpace\", \"doc\": \"The category of locally ringed spaces admits coequalizers for all pairs of parallel morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: The fppf quotient of a smooth algebraic-space groupoid.",
+   "via": [
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-groupoid-fppf-quotient",
+  "worker": "stage1",
+  "summary": "Q23 checked the quotient proof against Stacks, derived the kernel pair from stackification rather than making its clause a new node, and exposed two general supporting descent results. All six clauses and the original statement are preserved.",
+  "blueprint": "The inherited provenance points to det-thm-sf-ctf-stability-direct-images proof (3), alteration supporting moduli input, through Tag 076V. Steps 1-2 realize the quotient kernel pair; step 3 its diagonal; steps 4-6 its smooth surjective atlas. The latest blueprint proof (3) was read; it now states the compactification/direct-image route and does not itself spell out the inherited moduli supporting chain. No unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-7289d114b",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-7289d114b (reviewer sub-agent of L); spot-checked: Read in full: the item, its six steps, both new nodes and every cited statement. Sources: Stacks algebraic.tex 04TK/04WZ/04X0, bootstrap quotient-stack-isom and 04SK, spaces 02WQ/03I4/04SH, spaces-descent 0429/041Q, spaces-morphisms 03ZE. This is a first split: the statement is byte-identical to live, the item is unsplit on live and side-live, there is no SGA and no cycle. The proof is correct; I checked the arrow orientation s(r)=u, t(r)=v, the kernel-pair triples, the conjugation and the local projection R×_{s,U,v_i}T_i with section e. New node lem-sfb-fppf-local-algebraic-space is 04SK with the 02WQ chart condition, which is true; lem-sfb-fppf-space-atlas-bootstrap (04S6) is related, but this is a different statement, so not a duplicate (advisory). New node lem-sfb-space-smooth-surjective-fppf-locality is 03ZE/03MH plus the fppf case of 0429/041Q, which is true; it overlaps lem-sfb-stack-chartwise-smooth-etale-calculus only in the base-change clause, and the descent clause is new. Batch 5: the closures of def-trf-algebraic-space, lem-trf-algebraic-space-coproduct and lem-trf-space-fibre-products-etale-covers contain only algebraic-space foundations (025Y/02WQ/02X2) and no trace-formula or Poincaré node, so all six citations are accepted. FIX in the item: (1) step 1 now says that an algebraic space over S with a map to a scheme Z is the same as an algebraic space over Z (03I4(3)/04SH tags in the step source), which steps 3 and 4 use tacitly; step 4 now regards F over S and T and adds def-trf-algebraic-space to its uses. (2) Step 3 asserted that the covering index lies in the universe without a bound; it now refines to one member per point (|I|≤|T|) before the coproduct size argument, and def-pc-fppf-site is added to step 3's uses and to proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGroupoidFppfQuotient",
+  "declaration": "CategoryTheory.smooth_groupoid_fppf_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGroupoidFppfQuotient.lean",
+  "statement": "theorem smooth_groupoid_fppf_quotient {S : Scheme.{u}} (U : Over S) (R : AlgebraicSpace S) (s t : R.obj.obj ⟶ yoneda.obj U) (e : yoneda.obj U ⟶ R.obj.obj) (j : R.obj.obj ⟶ R.obj.obj) (c : pullback s t ⟶ R.obj.obj) (P : BasedCategory.{v, w} (Over S)) (a : BasedFunctor (discreteModuli (yoneda.obj U)) P) (hP : SpaceGroupoidPresheafPresentation (U := schemeSpace U) (R := R) s t e j c P a) (hs : SpaceMapIsSmooth R U s) (ht : SpaceMapIsSmooth R U t) (Q : BasedCategory.{v', w'} (Over S)) (i : BasedFunctor P Q) (hi : IsFppfStackification i) : HasAlgebraicSpaceDiagonal Q ∧ IsSmoothModuliAtlas Q U (a.comp i) ∧ (spaceGroupoidKernelPairMap (U := schemeSpace U) (R := R) (s := s) (t := t) (a := a) hP.arrows i).toFunctor.IsEquivalence ∧ IsFppfModuliStack Q ∧ IsAlgebraicModuliStack Q",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a090862a",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Read item, all 7 stmt_deps, new node, both modules, report and every declaration used (SpaceMapIsSmooth, IsSmoothModuliAtlas, IsAlgebraicModuliStack, HasAlgebraicSpaceDiagonal, HasSpaceBaseChange, IsFppfStackification/IsFppfModuliStack, schemeSpace, IsPresheafGroupoid, spaceGroupoidPresentationArrow, moduliTwoFiberLift). Clause-by-clause match with 04TK/04WZ/04X0/04M9: groupoid laws, chartwise smooth s,t, P = presheaf groupoid up to equivalence (no stack condition, global objects), Q via 02ZP/0436 universal property, diagonal, atlas with actual projection, kernel-pair map r↦(s r,t r,i(η_r)) as equivalence, fppf+algebraic stack. No extra hypotheses; universes independent; edge cases ok. New node not a duplicate (existing quotient presentation assumes a stack), non-hollow, fields ok; lean.statement verbatim for both; item diff only lean+stmt_deps; one sorry; docstrings ok. No compile (nothing changed). Advisories: landed owners def-sfb-algebraic-moduli-stack, def-sfb-fppf-stackification, def-trf-scheme-algebraic-space, def-sfb-stable-pointed-moduli-groupoids not in item stmt_deps (new node also omits def-sfb-space-groupoid-quotient-presentation, def-sfb-moduli-chart-normalization); maintainer may add, as in Q61 artin-smooth-point-neighbourhood PASS. IsFppfModuliStack conjunct follows from hi. Second reading is a self-audit."
+ }
+}

@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-affine-polynomial-embedding-pseudocoherence-invariance",
+ "kind": "statement",
+ "title": "Independence of polynomial embeddings for a fixed affine morphism",
+ "statement": "Let $f:X\\to S$ be a finite type morphism of affine schemes [def-pc-scheme, def-weil-finite-type-morphism], let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], and let $m\\in\\mathbf Z$. For any two closed immersions $i:X\\hookrightarrow\\mathbf A^n_S$ and $j:X\\hookrightarrow\\mathbf A^r_S$ over $S$, where $n,r\\geq0$ [def-weil-closed-immersion, def-nagata-relative-affine-space], $Ri_*E$ is $m$-pseudo-coherent on $\\mathbf A^n_S$ if and only if $Rj_*E$ is $m$-pseudo-coherent on $\\mathbf A^r_S$ [def-pc-derived-direct-image, def-sfb-m-pseudo-coherent-complex]. No quasi-coherence of the cohomology of $E$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09VC, lemma-relatively-pseudo-coherent, comparison of two embeddings of a fixed affine morphism"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-derived-category",
+  "def-weil-closed-immersion",
+  "def-nagata-relative-affine-space",
+  "def-pc-derived-direct-image",
+  "def-sfb-m-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}R$, $X=\\operatorname{Spec}A$, $P=R[x_1,\\ldots,x_n]$, and $Q=R[y_1,\\ldots,y_r]$. By the affine descriptions in [def-nagata-relative-affine-space] and [def-weil-closed-immersion], $i,j$ correspond to surjections $\\alpha:P\\twoheadrightarrow A$, $\\beta:Q\\twoheadrightarrow A$. Choose $f_b\\in P$ with $\\alpha(f_b)=\\beta(y_b)$ and $g_a\\in Q$ with $\\beta(g_a)=\\alpha(x_a)$. Put $T=R[x_1,\\ldots,x_n,y_1,\\ldots,y_r]$. The evaluation surjections $u:T\\to P$, $y_b\\mapsto f_b$, and $v:T\\to Q$, $x_a\\mapsto g_a$, give closed immersions $s:\\operatorname{Spec}P\\to\\operatorname{Spec}T$ and $t:\\operatorname{Spec}Q\\to\\operatorname{Spec}T$. On every generator, $\\alpha u=\\beta v$; hence $si=tj=:h$. This also covers an empty list of variables.",
+   "uses": [
+    "def-nagata-relative-affine-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VC, lemma-relatively-pseudo-coherent, proof: common polynomial ring and diagram"
+   }
+  },
+  {
+   "text": "For the graph $u$, identify $T=P[y_1,\\ldots,y_r]$ by the universal property of [def-weil-pbc-mv-polynomial-ring] (the maps fixing every variable are inverse), and put $h_b=y_b-f_b\\in T$. For $0\\leq b\\leq r$, evaluating $y_1,\\ldots,y_b$ at $f_1,\\ldots,f_b$ induces $T/(h_1,\\ldots,h_b)\\cong P[y_{b+1},\\ldots,y_r]$: evaluation kills each $h_c$, and conversely $p-p(f_1,\\ldots,f_b,y_{b+1},\\ldots)$ lies in $(h_1,\\ldots,h_b)$ since $y_c^k-f_c^k=h_c\\sum_{l<k}y_c^{k-1-l}f_c^l$; at $b=r$ the induced map is $u$. On $P[y_{b+1},\\ldots,y_r]=C[y_{b+1}]$ with $C=P[y_{b+2},\\ldots,y_r]$, multiplication by $h_{b+1}=y_{b+1}-f_{b+1}$ is injective: the top $y_{b+1}$-coefficient of a nonzero polynomial reappears one degree higher in its product, with no domain or nonzero-ring hypothesis. Hence [lem-weil-pbc-regular-sequence-koszul-regular], with $R=M=T$ and the list $h_1,\\ldots,h_r$, gives $H_q(K_\\bullet(h_1,\\ldots,h_r))=0$ for $q\\neq0$. By [def-weil-pbc-koszul-complex], $K_0=T$, $d_1(e_b)=h_b$, every $K_q$ is finite free and $K_q=0$ for $q>r$; so $H_0=T/(h_1,\\ldots,h_r)\\cong P$ via $u$, and $K_\\bullet$ placed in cohomological degrees $-r,\\ldots,0$ is a bounded finite-free $T$-resolution of the evaluation module $P$. The same argument with $T=Q[x_1,\\ldots,x_n]$, the equations $x_a-g_a$ and $v$ gives a bounded finite-free $T$-resolution of $Q$. For $r=0$ (resp. $n=0$) the resolution is $T=P$ (resp. $T=Q$) in degree $0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062F (lemma-regular-koszul-regular) and Tag 0622/0623 (Koszul complex); the polynomial graph instance asserted in more-morphisms.tex Tag 09VC, final paragraph ('straightforward to prove directly')"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-tilde-free-module] in rank one, the associated sheaves of $P$ on $\\operatorname{Spec}P$ and of $Q$ on $\\operatorname{Spec}Q$ are their structure sheaves. Applying [lem-weil-pbc-pushforward-tilde-spec] to $u$ and $v$ identifies $s_*\\mathcal O_{\\operatorname{Spec}P}$ and $t_*\\mathcal O_{\\operatorname{Spec}Q}$ with the associated $T$-module sheaves of the evaluation modules $P$ and $Q$. Their degree-zero complexes are pseudo-coherent by [lem-pc-affine-pseudo-coherent-criterion]: each evaluation module is quasi-isomorphic to the bounded (therefore bounded-above) finite-free resolution of step 2. This use of the affine criterion concerns only these structure modules, not $E$.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module",
+    "lem-weil-pbc-pushforward-tilde-spec",
+    "lem-pc-affine-pseudo-coherent-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VC, lemma-relatively-pseudo-coherent, final paragraph: pseudo-coherence of the polynomial graph structure module; perfect.tex Tag 08E7; schemes.tex Tags 01HV and 01I9"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-closed-pushforward-pseudocoherence] to $s$ and $K=Ri_*E$, and to $t$ and $K=Rj_*E$. Step 1 gives the required closed immersions, and step 3 verifies their pushed-forward structure modules are pseudo-coherent. The result gives, at the same integer $m$, $Ri_*E$ is $m$-pseudo-coherent if and only if $Rs_*Ri_*E$ is $m$-pseudo-coherent, and $Rj_*E$ is $m$-pseudo-coherent if and only if $Rt_*Rj_*E$ is $m$-pseudo-coherent. The cited result applies to all derived objects: neither $Ri_*E$ nor $Rj_*E$ needs quasi-coherent cohomology.",
+   "uses": [
+    "lem-sfb-closed-pushforward-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VC, lemma-relatively-pseudo-coherent, final paragraph, invoking perfect.tex Tag 09VA, lemma-closed-push-pseudo-coherent"
+   }
+  },
+  {
+   "text": "The composition isomorphisms of [lem-pc-ringed-spaces-derived-direct-image-composition] and the equality $si=tj=h$ identify both $Rs_*Ri_*E$ and $Rt_*Rj_*E$ with $Rh_*E$ in $D(\\mathcal O_{\\operatorname{Spec}T})$. The condition of [def-sfb-m-pseudo-coherent-complex] is invariant under such an isomorphism: compose each local strictly perfect approximation with the restricted isomorphism, whose cohomology maps are isomorphisms, preserving the isomorphisms above $m$ and the surjection in degree $m$. Thus the two equivalences in step 4 have the same right-hand condition, and yield the asserted equivalence.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VC, lemma-relatively-pseudo-coherent, reduction via the commutative closed-immersion diagram; composition in cohomology.tex Tag 0D5T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-relative-affine-space",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-weil-pbc-pushforward-tilde-spec",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-sfb-closed-pushforward-pseudocoherence",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-sfb-m-pseudo-coherent-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09VC, lemma-relatively-pseudo-coherent, proof; the graph Koszul resolution written out from More on Algebra Tags 062F and 0622"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type map of affine schemes m pseudo coherence of the derived pushforward is independent of the closed embedding into affine space",
+   "results": "{\"t\": \"2026-10-23T17:58:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type map of affine schemes m pseudo coherence of the derived pushforward is independent of the closed embedding into affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.affineAnd_apply\", \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\"], \"digest\": \"f5fee9a0103ae06a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing a polynomial presentation preserves m pseudo coherence of a derived complex",
+   "results": "{\"t\": \"2026-10-23T17:58:34Z\", \"tool\": \"leansearch\", \"query\": \"Changing a polynomial presentation preserves m pseudo coherence of a derived complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.cpolynomialAt_changeOrigin_of_finite\", \"Algebra.PreSubmersivePresentation.baseChange_toPresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"MvPolynomial.coe_mul\", \"Algebra.Presentation.relationOfHasCoeffs\", \"MvPolynomial.pderiv_rename\", \"Polynomial.MonicDegreeEq.map_coe\", \"Algebra.mvPolynomial\"], \"digest\": \"85328f4968c2df2f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T17:58:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|mPseudo",
+   "results": "{\"t\": \"2026-10-23T17:58:34Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|mPseudo\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type map of affine schemes m pseudo coherence of the derived pushforward is independent of the closed embedding into affine space",
+   "results": "{\"t\": \"2026-10-23T18:28:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type map of affine schemes m pseudo coherence of the derived pushforward is independent of the closed embedding into affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.affineAnd_apply\", \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\"], \"digest\": \"f5fee9a0103ae06a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary finite-type, finite morphism or finite-presentation sheaf properties; no derived finite-stage pseudo-coherence comparison. Loogle and Mathlib grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T18:28:56Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|IsMPseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary finite-type, finite morphism or finite-presentation sheaf properties; no derived finite-stage pseudo-coherence comparison. Loogle and Mathlib grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite degree pseudo coherence of derived direct images is independent of a polynomial embedding of an affine scheme",
+   "results": "{\"t\": \"2026-10-23T18:28:56Z\", \"tool\": \"leansearch\", \"query\": \"Finite degree pseudo coherence of derived direct images is independent of a polynomial embedding of an affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsFinite.casesOn\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\"], \"digest\": \"b5fa9d6e1d765316\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary finite-type, finite morphism or finite-presentation sheaf properties; no derived finite-stage pseudo-coherence comparison. Loogle and Mathlib grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-23T18:28:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary finite-type, finite morphism or finite-presentation sheaf properties; no derived finite-stage pseudo-coherence comparison. Loogle and Mathlib grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining polynomial generators and lifting coordinate functions does not change finite stage pseudo coherence of a sheaf complex under a closed immersion",
+   "results": "{\"t\": \"2026-10-23T18:28:58Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining polynomial generators and lifting coordinate functions does not change finite stage pseudo coherence of a sheaf complex under a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"d8677151fb282403\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary finite-type, finite morphism or finite-presentation sheaf properties; no derived finite-stage pseudo-coherence comparison. Loogle and Mathlib grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 09UU (lemma-check-relative-pseudo-coherence-on-charts, equivalence (1) and (3) for every integer m). Supporting prerequisite of 09UU proof, application to id:P -> P: identify pseudo-coherence relative to P with absolute pseudo-coherence using the zero-dimensional polynomial chart of every affine open. Supporting prerequisite of Tag 09UJ: Tag 09VC, lemma-relatively-pseudo-coherent, comparison of two embeddings of a fixed affine morphism.",
+   "via": [
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-polynomial-embedding-pseudocoherence-invariance",
+  "worker": "stage1",
+  "group": "NU",
+  "summary": "Followed Stacks 09VC through the two polynomial graph embeddings. Wrote the graph Koszul resolution from the generic Koszul-regularity node (reviewer repair: the sec-trace-formula polynomial-graph coinduction node is no longer cited), and reused the existing affine pseudo-coherence criterion, structure-sheaf pushforward comparisons, closed-pushforward criterion and unbounded composition isomorphism. No new nodes or statement changes; no quasi-coherence assumption on E. Checked all cited statements, edge cases and dependency closures.",
+  "blueprint": "Realizes the Tag 09VC supporting prerequisite recorded in blueprint.from.place, below det-thm-sf-ctf-stability-direct-images proof (3). Read the latest chapter, unit and direct-image proof. Whole-blueprint searches for pseudocoher, pseudo-coherent, polynomial graph and closed push found no equivalent node. The ancestor command returns None; retained inherited null from.node and via list. No unit or chapter change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic Koszul-regularity criterion (Stacks 062F), applied to the monic graph equations y_b-f_b (resp. x_a-g_a) to get the finite-free resolution of the graph structure module; replaces the sec-trace-formula polynomial-graph coinduction node, whose closure reaches sec-trace-formula and sec-poincare-duality proof nodes (batch-5 rule)."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic affine module/sheaf pseudo-coherence criterion, applied solely to graph structure modules; not used to assume quasi-coherence of the arbitrary input E."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "why": "Generic unbounded ringed-space composition isomorphism identifies the two iterated graph pushforwards with Rh_*E; no unit-specific replacement is available."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-9775fee90",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-9775fee90 (reviewer sub-agent of L); spot-checked: Read the item against Stacks 09VC (more-morphisms.tex, lemma-relatively-pseudo-coherent) and 09VA (perfect.tex, lemma-closed-push-pseudo-coherent). The statement and stmt_deps are unchanged from the live/side-live base, where the item is unsplit and unreviewed, and there is no repair note. Step 1 is correct: the two graph closed immersions give s∘i=t∘j because αu=βv on R and on every variable. The structure-module step holds: pbc tilde leaves, then 08E7 applied only to P[0] and Q[0] over T, never to E. Step 3 is correct: 09VA at the same m for every K, with no quasi-coherence needed. Step 4 is correct: 0D5T for unbounded derived categories, and m-pseudo-coherence is invariant under isomorphism. Edge cases n=0, r=0, A=0, Z/4 coefficients and negative m all check out. lem-sfb-polynomial-presentation-pseudocoherence-invariance is the ring-level, all-degrees version for K in D(A), so it is not a duplicate, and there is no cycle. Batch-5 finding: lem-trf-polynomial-graph-coinduction is a trace-formula proof node. Its closure contains 13 sec-trace-formula and sec-poincare-duality nodes, and it lies in the closure of thm-trf-lefschetz-verdier and sk-thm-trace-transport, so it is not outside the assumption. The item uses only its generic Koszul-resolution clause. FIX: that citation is removed. The new step 2 writes the resolution out: T/(h_1..h_b) ≅ P[y_{b+1}..] by telescoping, h_{b+1}=y_{b+1}-f_{b+1} is monic and so a nonzerodivisor, then lem-weil-pbc-regular-sequence-koszul-regular (062F, R=M=T) and def-weil-pbc-koszul-complex, using def-weil-pbc-mv-polynomial-ring. The sheaf part is now step 3, and old steps 3 and 4 become 4 and 5. proof_deps is the union of the uses, and the tool_uses entry for the trf node is replaced by the 062F node, whose closure reaches no trace-formula or Poincaré-duality node. The affine-criterion and derived-composition tool uses are accepted. No other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePolynomialEmbeddingPseudoCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.isMPseudoCoherent_affine_polynomial_embedding_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePolynomialEmbeddingPseudoCoherence.lean",
+  "statement": "theorem isMPseudoCoherent_affine_polynomial_embedding_iff {X S : Scheme.{u}} [IsAffine X] [IsAffine S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (n r : ℕ) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wN} (SheafOfModules.{u} (moduleRings (AffineSpace (ULift.{u} (Fin n)) S).toRingedSpace))] [HasDerivedCategory.{wR} (SheafOfModules.{u} (moduleRings (AffineSpace (ULift.{u} (Fin r)) S).toRingedSpace))] [∀ U : (AffineSpace (ULift.{u} (Fin n)) S).Opens, HasDerivedCategory.{wN} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ U : (AffineSpace (ULift.{u} (Fin r)) S).Opens, HasDerivedCategory.{wR} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] (E : schemeDerivedCategory X) (m : ℤ) (i : X ⟶ AffineSpace (ULift.{u} (Fin n)) S) [IsClosedImmersion i] (j : X ⟶ AffineSpace (ULift.{u} (Fin r)) S) [IsClosedImmersion j] (hi : i ≫ (AffineSpace (ULift.{u} (Fin n)) S ↘ S) = f) (hj : j ≫ (AffineSpace (ULift.{u} (Fin r)) S ↘ S) = f) : IsMPseudoCoherent (AffineSpace (ULift.{u} (Fin n)) S) m ((schemeDerivedDirectImage i).obj E) ↔ IsMPseudoCoherent (AffineSpace (ULift.{u} (Fin r)) S) m ((schemeDerivedDirectImage j).obj E)",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-970799a15",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Clause-by-clause match with node: affine X,S; finite type = LocallyOfFiniteType+QuasiCompact per dep record; E in full schemeDerivedCategory with no QCoh condition; same m on both sides; n,r:ℕ with AffineSpace (ULift (Fin n)) S, the convention of RelativePseudoCoherentComplex; IsClosedImmersion plus hi/hj over S; iff of IsMPseudoCoherent of schemeDerivedDirectImage. HasDerivedCategory instances (each space and its opens) are exactly what IsMPseudoCoherent needs; universes wX/wN/wR independent, no restriction. Node identical to side-live apart from lean; item unlanded; lean.statement verbatim; no new nodes or defs; no duplicate found (ring-level PolynomialPresentationPseudoCoherence is a different result). Only proof is sorry; docstrings give source 09VC, blueprint id and 5 proof steps; proof-dep imports exist; closed-pushforward node has no Lean record so it is correctly not imported. Edge cases n=0, r=0, empty schemes, zero ring, negative m all covered. Advisory only: Tilde import harmless; Q58 second reading is a self-review. No file changed, so no compile."
+ }
+}

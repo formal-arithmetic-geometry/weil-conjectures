@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-over-compactification-common-refinement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-dc-lower-shriek",
+   "place": "the Lean proof of sk-def-sfb-dc-lower-shriek's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.Compactification.exists_overRefinement (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: Rf_! for module objects is defined through a chosen compactification; its independence of the choice compares two compactifications through a common refinement",
+   "via": []
+  },
+  "same_as": [
+   "det-nagata-refinement-common-dense"
+  ]
+ },
+ "kind": "statement",
+ "title": "Two compactifications over a base have a common cartesian refinement",
+ "statement": "Let $S$ be a quasi-compact quasi-separated scheme and let $f\\colon X\\to Y$ be a morphism of $S$-schemes whose structure morphisms $X\\to S$, $Y\\to S$ are separated, quasi-compact and locally of finite type. A compactification of $f$ is a factorization $X\\xrightarrow{i}Z\\xrightarrow{p}Y$ with $i$ an open immersion and $p$ proper [def-weil-compactifications-refinements]. For compactifications $c=(X\\xrightarrow{i}Z\\xrightarrow{p}Y)$ and $c_1=(X\\xrightarrow{i_1}Z_1\\xrightarrow{p_1}Y)$, an over-refinement $c\\to c_1$ is a proper $S$-morphism $h\\colon Z\\to Z_1$ with $p_1h=p$ such that the square with sides $\\mathrm{id}_X$, $i$, $i_1$, $h$ is cartesian, i.e. $h^{-1}(i_1(X))=i(X)$. Then any two compactifications $c_1,c_2$ of $f$ admit a compactification $c$ of $f$ with over-refinements $c\\to c_1$ and $c\\to c_2$ (take for $Z$ the scheme-theoretic closure of the image of $X$ in $Z_1\\times_YZ_2$).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-lower-shriek/_section.md",
+  "place": "sk-def-sfb-dc-lower-shriek: Rf_! for module objects is defined through a chosen compactification; its independence of the choice compares two compactifications through a common refinement; Lean: upstream file lean/WeilConjectures/Compactification/Refinement.lean, declaration AlgebraicGeometry.Compactification.exists_overRefinement (module WeilConjectures.Compactification.Refinement, lines 124-127, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-fibre-product",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof": [
+  {
+   "text": "From f.left ≫ Y.hom = X.hom, obtain QuasiCompact f.left by Mathlib QuasiCompact.of_comp; Y.hom is separated, hence quasi-separated. No finite-type cancellation or absolute qcqs instance is needed.",
+   "uses": [
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "lem-pc-separated-quasi-separated",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take c = Compactification.inf c₁ c₂, the graph-image construction underlying det-nagata-refinement-common-dense. Use its already proved source-library projection refinements infFst and infSnd and cartesian squares isPullback_infFst and isPullback_infSnd in WeilConjectures.Compactification.CommonRefinement. These give precisely the pairwise part needed here, without the stronger finite-family theorem or a separate general dense-refinement argument. Each projection is proper by Refinement.isProper.",
+   "uses": [
+    "det-nagata-refinement-common-dense",
+    "def-weil-compactifications-refinements",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each projection r, define its map over S by Over.homMk r.hom, using r.hom_g and associativity for the structure equation. Its equation over Y is Over.OverMorphism.ext r.hom_g. Flip the scheme pullback square and lift it through the pullback-reflecting functor Over.forget S with IsPullback.of_map. Package these data and r.isProper as OverRefinement; both witnesses are nonempty. This transport is the proved private helper nonempty_overRefinement_of_refinement.",
+   "uses": [
+    "def-weil-scheme-over-base",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lem-pc-separated-quasi-separated",
+  "def-weil-scheme-over-base",
+  "det-nagata-refinement-common-dense",
+  "def-weil-compactifications-refinements",
+  "lem-weil-pbc-proper-over-separated",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Compactification/OverRefinement.lean",
+  "place": "Existing fully proved exists_overRefinement′ and exists_isPullback_overG_overI′, with transport and dense-restriction proofs reproduced privately to avoid the import cycle; S8, 2026-10-23. Uses the same graph-closure and dense-restriction argument as the node source; no unit route changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "any two compactifications of a separated finite type morphism have a common refinement (Nagata)",
+   "results": "Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType (Mathlib.AlgebraicGeometry.AffineTransitionLimit), IsFinite.of_comp, quasiCompact instances: no compactification API",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Compactification\" (name substring)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rl 'Compactification' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "Mathlib/Topology/Compactification/OnePoint/* and topological files only (one-point compactification); no scheme compactification",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two compactifications of a morphism of schemes over a base admit a common refinement proper over both with cartesian open immersion squares",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.g; AlgebraicGeometry.ValuativeCriterion.existence; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.UniversallyClosed; AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V; AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion; inspected hits concern general limits, proper projections, immersions or diagonals, not common scheme compactifications over a base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Compactification",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.Compactification'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification|OverRefinement|exists_common_refinement",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common compactification refining two proper factorizations by open immersions of schemes with pullback squares over the open source",
+   "results": "AlgebraicGeometry.IsOpenImmersion.isPullback; AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion; AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left; AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder; AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right; AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact; AlgebraicGeometry.IsImmersion.isImmersion_iff_exists; AlgebraicGeometry.isPullback_of_isClosedImmersion; inspected hits concern general limits, proper projections, immersions or diagonals, not common scheme compactifications over a base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closure of the diagonal graph in the fiber product of two proper scheme compactifications is a common refinement",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.g; AlgebraicGeometry.IsProper.instFstScheme; AlgebraicGeometry.IsProper.instSndScheme; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.Pullback.range_diagonal_subset_diagonalCoverDiagonalRange; AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange; AlgebraicGeometry.IsImmersion.instDiagonalScheme; AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal; inspected hits concern general limits, proper projections, immersions or diagonals, not common scheme compactifications over a base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Compactification.exists_overRefinement"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Compactification.exists_overRefinement",
+     "module": "WeilConjectures.Compactification.Refinement",
+     "lines": [
+      119,
+      127
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-lower-shriek",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Compactification.Refinement",
+  "file": "lean/WeilConjectures/Compactification/Refinement.lean",
+  "declaration": "AlgebraicGeometry.Compactification.exists_overRefinement",
+  "declarations": [
+   "AlgebraicGeometry.Compactification.exists_overRefinement"
+  ],
+  "statement": "theorem exists_overRefinement (c₁ c₂ : Compactification f.left) :\n    ∃ c : Compactification f.left, Nonempty (OverRefinement c c₁) ∧\n      Nonempty (OverRefinement c c₂) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; SHEAF already proves the scheme-level form: Sheaf.Compactification.CommonDenseRefinement.exists_common_dense_refinement (node det-nagata-refinement-common-dense, finished) and the cartesian square of a dense refinement (lem-nagata-dense-refinement-cartesian); the upstream statement is their transport to compactifications of f.left for f in Over S with the OverRefinement structure"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-over-compactification-common-refinement",
+  "worker": "stage1",
+  "summary": "Q12 checked the sorried OverRefinement existence theorem against its imported statement and reused the existing graph-image common dense refinement and dense-refinement cartesian nodes. Verified Y qcqs and f separated finite type, proved projection properness over Y, wrote the S-structure equations and checked the pullback universal property over S. No statement change and no new nodes. Removed the unrelated field/coefficient setting dependency.",
+  "blueprint": "Supports sk-def-sfb-dc-lower-shriek, the clause defining Rf_! through a chosen compactification, by making the common-refinement comparison available in Sch/S. The geometric construction is exactly det-nagata-refinement-common-dense, proof Steps 1–3; no change of the six-functor route.",
+  "tool_uses": [
+   {
+    "node": "det-nagata-refinement-common-dense",
+    "why": "Generic geometric graph-image common refinement of scheme compactifications, used with base Y; the lower-shriek unit contains no geometric proof of it."
+   },
+   {
+    "node": "lem-nagata-dense-refinement-cartesian",
+    "why": "Generic cartesian-square theorem for a dense source refinement; the lower-shriek unit supplies no such geometric theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-nagata-refinement-common-dense",
+  "lem-nagata-dense-refinement-cartesian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-49d27fdb7",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-49d27fdb7 (reviewer sub-agent of L); spot-checked: I read the item's 5 steps in full against every cited statement, plus the sources (Stacks 01KV/01KU/03GI/01T8/01W6(2), det-nagata-refinement-common-dense md+proof, the lower-shriek _section.md compactification clause) and the Lean counterparts (OverRefinement, exists_overRefinement in Refinement.lean, overObj/overI/overG in Over.lean). Statement unchanged and matches Lean; the only stmt_deps change is dropping the unused sk-def-sfb-dc-setting. No new nodes. Not a duplicate: det-nagata-refinement-common-dense (already in same_as) is the scheme-level form over the base; the item is the Sch/S form with properness of h. prop-compactification-refinement and lem-sfb-over-compactification-composite-cartesian are different. No cycle, no SGA, tool_uses of the two Nagata nodes accepted. Steps 1, 3, 4 (the Sch/S pullback lift) and 5 are correct. Fault fixed (E1/C4): Steps 2 and 4 apply det-nagata-refinement-common-dense and lem-nagata-dense-refinement-cartesian, whose compactifications (def-nagata-compactification) need quasi-compact open immersions. The item's c_k only have open immersions, as in Lean, and the delivery never checked quasi-compactness of i_k. FIX: Step 2 now derives it via lemma-nagata-open-immersion-qc-over-separated-target (p_k i_k = f is qc by Step 1; p_k proper ⇒ separated ⇒ qs by lem-pc-separated-quasi-separated) and cites def-nagata-compactification. Uses and proof_deps updated. Edge cases checked: X empty, identity compactifications, extra disjoint components, nonreduced schemes. One repairable fault.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261023T152006-L-429603",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

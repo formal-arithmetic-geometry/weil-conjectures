@@ -1,0 +1,375 @@
+{
+ "id": "lem-sfb-split-torus-torsor-frame-geometry",
+ "kind": "statement",
+ "title": "Frame geometry of split torus torsors",
+ "statement": "Let $k$ be a field [def-weil-field], $S$ a $k$-scheme [def-pc-scheme], and $r\\geq0$. Put $T=(\\mathbf G_{m,k})^r$, with $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$. Let $q:Y\\to S$ be faithfully flat and of finite presentation [def-weil-flat-morphism, def-weil-surjective-morphism, def-sbc-locally-finite-presentation], with a right $T$-action over $S$ such that $(y,t)\\mapsto(y,yt)$ identifies $Y\\times_kT$ with $Y\\times_SY$ [def-pc-fibre-product]. There are invertible $\\mathcal O_S$-modules $A_1,\\ldots,A_r$ [def-sc-invertible-module] and a $T$-equivariant $S$-isomorphism\n$$Y\\simeq A_1^\\times\\times_S\\cdots\\times_S A_r^\\times.$$\nHere $A_i^\\times$ is the scheme representing $U\\mapsto\\operatorname{Isom}_{\\mathcal O_U}(\\mathcal O_U,f^*A_i)$ on $S$-schemes $f:U\\to S$, with scalar action on frames; pullbacks are tensor inverse images [def-pc-module-pullback]. Set $Y_0=S$ and $Y_j=\\prod_{i=1}^j A_i^\\times$ for $1\\leq j\\leq r$, with $q_j:Y_j\\to Y_{j-1}$ forgetting the last frame and $f_{j-1}:Y_{j-1}\\to S$ the projection. Write $B_j=f_{j-1}^*(A_j^\\vee)$, where $A_j^\\vee=\\mathcal Hom(A_j,\\mathcal O_S)$. For the rank-two projective bundle\n$$p_j:P_j=\\mathbf P_{Y_{j-1}}(\\mathcal O_{Y_{j-1}}\\oplus B_j)\\to Y_{j-1}$$\nin the quotient convention [lem-trf-projective-bundle-quotient-geometry, def-amb-finite-locally-free-module], there is an open immersion [def-weil-open-immersion] $i_j:Y_j\\hookrightarrow P_j$ with $p_ji_j=q_j$. Its image is the locus where both summand maps of the universal quotient are isomorphisms. The first summand gives an isomorphism $\\mathcal O_{Y_j}\\simeq i_j^*\\mathcal O_{P_j}(1)$. If $S$ is smooth separated and of finite type over $k$ [def-sbc-smooth-morphisms, def-weil-finite-type-morphism], with separated meaning that the diagonal is a closed immersion [def-weil-closed-immersion], then every $Y_j$ and $P_j$ is also smooth separated and of finite type over $k$. The isomorphism $Y\\simeq Y_r$ identifies $q$ with $q_1\\circ\\cdots\\circ q_r$, and for $r=0$ it identifies $q$ with $\\mathrm{id}_S$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 023T (proposition-fpqc-descent-quasi-coherent) and Tag 05B2 (lemma-finite-locally-free-descends), applied to the coordinate characters of the torsor; literature/stacks-project/groupoids.tex, Tags 0499 (lemma-characterize-trivial-pseudo-torsors) and 049A (definition-principal-homogeneous-space); literature/stacks-project/constructions.tex, Tags 01OB (definition-projective-bundle) and 01OE (lemma-projective-space-bundle). Agent-extracted frame and two-chart geometric consequence, not a verbatim assertion of any one tag."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-amb-finite-locally-free-module",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "The singleton $\\{q:Y\\to S\\}$ is an fppf covering by the flatness, surjectivity and finite-presentation hypotheses and [def-pc-fppf-site]. Apply [lem-trf-fppf-covering-is-fpqc] to get an fpqc covering. The given torsor isomorphism defines a morphism $g:Y\\times_SY\\to T$ by $z=y g(y,z)$. On the triple fibre product, uniqueness in that isomorphism and associativity of the action give $g(y,w)=g(y,z)g(z,w)$; also $g(y,y)=1$. Thus each coordinate $g_i$ is an invertible regular function with $g_{i,13}=g_{i,12}g_{i,23}$. These are identities of scheme morphisms, as seen by applying the given isomorphism, not merely identities on field-valued points.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0499 (lemma-characterize-trivial-pseudo-torsors) and 049A (definition-principal-homogeneous-space); fpqc covering from topologies.tex Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc)"
+   }
+  },
+  {
+   "text": "On $\\mathcal O_Y$ use the descent isomorphism $\\operatorname{pr}_1^*\\mathcal O_Y\\to\\operatorname{pr}_2^*\\mathcal O_Y$ given by multiplication by $g_i^{-1}$. Step 1 proves its cocycle. Apply the equivalence and invertible-module clause of [lem-pc-fpqc-descent] to obtain an invertible module $A_i$ and a trivialization $\\theta_i:q^*A_i\\simeq\\mathcal O_Y$ respecting that datum. Put $e_i=\\theta_i^{-1}(1)$, a frame of $q^*A_i$. On $Y\\times_SY$ the compatibility is $\\theta_{i,z}(v)=g_i(y,z)^{-1}\\theta_{i,y}(v)$, equivalently $e_i(z)=g_i(y,z)e_i(y)$ in the common pulled-back line. This choice of inverse in the descent map therefore gives the scalar action on frames requested in the statement.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T (proposition-fpqc-descent-quasi-coherent), and Tag 05B2 (lemma-finite-locally-free-descends), rank one"
+   }
+  },
+  {
+   "text": "For any invertible module $A$ on a scheme $V$, form $P=\\mathbf P_V(\\mathcal O_V\\oplus A^\\vee)$ using [lem-trf-projective-bundle-quotient-geometry]. Let $W\\subset P$ be the locus where both summand maps $\\alpha:\\mathcal O_P\\to\\mathcal O_P(1)$ and $\\beta:p^*A^\\vee\\to\\mathcal O_P(1)$ are isomorphisms. It is open: in local bases each map is multiplication by one function, and its invertibility locus is the principal open where that function is a unit. The quotient classification identifies maps $h:U\\to W$ over $V$ with frames of $h^*A$: normalize the quotient by $\\alpha^{-1}$, obtaining $(1,\\alpha^{-1}\\beta):\\mathcal O_U\\oplus h^*A^\\vee\\to\\mathcal O_U$. Its second component is evaluation at a unique frame $e:\\mathcal O_U\\simeq h^*A$. In a basis this is just the correspondence $u\\in\\mathcal O_U^\\times\\leftrightarrow(b\\mapsto ub)$; it also proves the inverse correspondence, independently of the basis. These operations commute with pullback. Thus $W$ represents $A^\\times$ with its scalar action. Its inclusion into $P$ is the required open immersion, and $\\alpha$ gives $\\mathcal O_W\\simeq\\mathcal O_P(1)|_W$. Over any open trivializing $A$, the quotient classification identifies $P$ with $\\mathbf P^1_V$ and $W$ with $D_+(T_0)\\cap D_+(T_1)$; the coordinates are $u=T_1/T_0$ and $u^{-1}=T_0/T_1$. In particular $W$ is locally $\\operatorname{Spec}R[u,u^{-1}]$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-sc-invertible-module",
+    "def-weil-open-immersion",
+    "def-nagata-relative-projective-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OB (definition-projective-bundle), subsequent quotient-functor discussion; Tag 01OE (lemma-projective-space-bundle); standard affine homogeneous-localization charts"
+   }
+  },
+  {
+   "text": "The frames $e_i$ from step 2 and the representing property in step 3 give an $S$-morphism $\\phi:Y\\to F=\\prod_{i=1}^r A_i^\\times$. Pull back along $q:Y\\to S$. Trivializing the lines by $e_i(y)$ identifies $F\\times_SY$ with $T\\times_kY$; the pullback of $\\phi$ sends $(z,y)$ to $(g(y,z),y)$. Its inverse sends $(t,y)$ to $(yt,y)$, by the assumed torsor isomorphism. The inverse is compatible with the canonical descent data: the base change of $\\phi$ is compatible, and inverting the equality expressing its compatibility gives the corresponding equality for its inverse. By [lem-galois-fpqc-morphisms-descend] that inverse descends uniquely to $F\\to Y$, and faithfulness in the same statement makes the two composites identities. Hence $\\phi$ is an isomorphism. Applying step 2 to $(y,yt)$ gives $e_i(yt)=t_i e_i(y)$, so $\\phi$ is $T$-equivariant. If $r=0$, $F=S$, the base-changed map is the given diagonal isomorphism $Y\\simeq Y\\times_SY$, and the same inverse descent proves that $\\phi=q:Y\\simeq S$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W0 (lemma-refine-coverings-fully-faithful), final assertion, applied to the fpqc singleton q; groupoids.tex Tag 0499"
+   }
+  },
+  {
+   "text": "Define $Y_j$ by the first $j$ frame factors. For a test scheme $U\\to Y_{j-1}$, its maps to $Y_j$ are exactly frames of the pullback of $A_j$ along $U\\to S$, by [def-pc-fibre-product] and [def-pc-module-pullback]. The pullback-dual identification $f_{j-1}^*(A_j^\\vee)\\simeq(f_{j-1}^*A_j)^\\vee$ is the identity on coefficients in every local rank-one basis; those identities agree when the basis is multiplied by a unit. Apply the construction and the explicit quotient of step 3 to the line $f_{j-1}^*A_j$. This gives exactly $P_j$, $i_j$, its image, and its first-summand trivialization. The universal property of the fibre product says that the successive forgetful maps compose to the structure map $Y_r\\to S$. Together with step 4 this proves the stated factorization of $q$, including the empty composite when $r=0$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OB (definition-projective-bundle), quotient-functor discussion; applying the rank-one quotient calculation of step 3"
+   }
+  },
+  {
+   "text": "Assume now that $S$ is smooth separated and of finite type over $k$. Choose a finite affine open cover $U_a=\\operatorname{Spec}R_a$ simultaneously trivializing $A_1,\\ldots,A_r$. Such a cover exists by local rank-one freeness [def-sc-invertible-module] and quasi-compactness of $S$ [def-weil-finite-type-morphism]; refine to affine opens, rather than assuming intersections of affine opens are affine. Each $R_a$ is a finitely generated $k$-algebra. Step 3 and the product description identify $Y_j|_{U_a}$ with $\\operatorname{Spec}R_a[u_1^{\\pm1},\\ldots,u_j^{\\pm1}]$, and $P_j|_{U_a}$ with $\\mathbf P^1_{Y_{j-1}|_{U_a}}$. Its two affine charts have rings $R_a[u_1^{\\pm1},\\ldots,u_{j-1}^{\\pm1},v]$. Indeed the degree-zero localization of $R[T_0,T_1]$ at $T_0$ is $R[T_1/T_0]$, with inverse sending the free variable to that ratio, and likewise at $T_1$ [def-nagata-relative-projective-space]. All these rings are finite type over $k$: adjoin finitely many variables and their inverses with relations $u_iw_i=1$. These finitely many affine charts cover the schemes, which proves finite type by its definition. This includes $Y_0=S$ and the empty base.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-finite-type-morphism",
+    "def-nagata-relative-projective-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OB and 01OE, two standard projective-line charts; morphisms.tex Section 01T0, definition of finite type"
+   }
+  },
+  {
+   "text": "Every $U_a\\to\\operatorname{Spec}k$ in step 6 is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. The Laurent-coordinate charts of $Y_j|_{U_a}$ are opens in $\\mathbf A^j_{U_a}$, and those of $P_j|_{U_a}$ are opens in $\\mathbf A^j_{U_a}$ as well (there are $j-1$ Laurent coordinates and one polynomial coordinate). Their projections to $U_a$ are smooth by [sbc-lem-affine-space-smooth] and open restriction [lem-weil-pbc-smooth-restrict-open-subschemes]. Composing with $U_a\\to\\operatorname{Spec}k$ is smooth by [lem-trf-smooth-composition]. These charts cover $Y_j$ and $P_j$, so [lem-weil-pbc-smooth-local-on-source] proves their smoothness over $k$.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "sbc-lem-affine-space-smooth",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01V6 (lemma-smooth-characterize), 01VA (lemma-composition-smooth); polynomial smoothness from algebra.tex Tag 00T7"
+   }
+  },
+  {
+   "text": "The projection $p_j:P_j\\to Y_{j-1}$ is separated by [lem-trf-projective-bundle-quotient-geometry]. The diagonal of its restriction $q_j$ to the open $Y_j\\subset P_j$ is the base change of $\\Delta_{p_j}$ along $Y_j\\times_{Y_{j-1}}Y_j\\to P_j\\times_{Y_{j-1}}P_j$, so it is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. To compose separated maps $X\\xrightarrow f B\\xrightarrow h C$, factor $\\Delta_{hf}$ as $X\\xrightarrow{\\Delta_f}X\\times_BX\\to X\\times_CX$. The second map is the base change of $\\Delta_h$, so both maps and their composite are closed immersions by [lem-weil-pbc-closed-immersion-base-change, lem-weil-pbc-closed-immersion-comp]. Starting with the assumed separated map $S\\to\\operatorname{Spec}k$, induction therefore proves that every $Y_j$ and $P_j$ is separated over $k$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OD (lemma-projective-bundle-separated); schemes.tex Tag 01KU (lemma-separated-permanence), diagonal proof; morphisms.tex Tags 01QR and 01QS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "def-pc-fibre-product",
+  "lem-pc-fpqc-descent",
+  "def-sc-invertible-module",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-weil-open-immersion",
+  "def-nagata-relative-projective-space",
+  "lem-galois-fpqc-morphisms-descend",
+  "def-pc-module-pullback",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "sbc-lem-affine-space-smooth",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Agent assembly of coordinate-character descent (023T, 05B2), quotient projective-bundle geometry (01OB, 01OE), and scheme-morphism descent (02W0); no single source states the combined item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torsor under a product of multiplicative groups is a product of nonzero line bundles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Prod.instAddTorsor\", \"module\": \"Mathlib/Algebra/AddTorsor/Basic\", \"type\": \"{G : Type u_1} →\\n  {G' : Type u_2} →\\n    {P : Type u_3} →\\n      {P' : Type u_4} →\\n        [inst : AddGroup G] → [inst_1 : AddGroup G'] → [AddTorsor G P] → [AddTorsor G' P'] → AddTorsor (G × G') (P × P')\", \"doc\": \"Given additive groups $G$ and $G'$ with additive torsors $P$ and $P'$ respectively, the product type $P \\times P'$ forms an additive torsor for the product group $G \\times G'$. The action is defined com\"}\n  {\"name\": \"Pi.instAddTorsor\", \"module\": \"Mathlib/Algebra/AddTorsor/Basic\", \"type\": \"{I : Type u} →\\n  {fg : I → Type v} →\\n    [inst : (i : I) → AddGroup (fg i)] →\\n      {fp : I → Type w} → [(i : I) → AddTorsor (fg i) (fp i)] → AddTorsor ((i : I) → fg i) ((i : I) → fp i)\", \"doc\": \"Given an index type $I$ and families of additive groups $\\\\{G_i\\\\}_{i \\\\in I}$ with corresponding additive torsors $\\\\{P_i\\\\}_{i \\\\in I}$, the product type $\\\\prod_{i \\\\in I} P_i$ forms an additive torsor und\"}\n  {\"name\": \"Prod.fst_vadd\", \"module\": \"Mathlib/Algebra/AddTorsor/Basic\", \"type\": \"∀ {G : Type u_1} {G' : Type u_2} {P : Type u_3} {P' : Type u_4} [inst : AddGroup G] [inst_1 : AddGroup G']\\n  [inst_2 : AddTorsor G P] [inst_3 : AddTorsor G' P'] (v : G × G') (p : P × P'), (v +ᵥ p).1 = v.1 +ᵥ p.1\", \"doc\": \"Given additive groups $G$ and $G'$ with additive torsors $P$ and $P'$ respectively, the product type $P \\\\times P'$ forms an additive torsor for the product group $G \\\\times G'$. The action is defined c\"}\n  {\"name\": \"Prod.mk_vadd_mk\", \"module\": \"Mathlib/Algebra/AddTorsor/Basic\", \"type\": \"∀ {G : Type u_1} {G' : Type u_2} {P : Type u_3} {P' : Type u_4} [inst : AddGroup G] [inst_1 : AddGroup G']\\n  [inst_2 : AddTorsor G P] [inst_3 : AddTorsor G' P'] (v : G) (v' : G') (p : P) (p' : P'),\\n  (v, v') +ᵥ (p, p') = (v +ᵥ p, v' +ᵥ p')\", \"doc\": \"Given additive groups $G$ and $G'$ with additive torsors $P$ and $P'$ respectively, the product type $P \\\\times P'$ forms an additive torsor for the product group $G \\\\times G'$. The action is defined c\"}\n  {\"name\": \"Finset.instAddTorsorForall\", \"module\": \"Mathlib/LinearAlgebra/AffineSpace/Combination\", \"type\": \"{k : Type u_1} → [inst : Ring k] → {ι : Type u_4} → AddTorsor (ι → k) (ι → k)\", \"doc\": \"The space of functions from ι to k forms an affine space under the component-wise action of the additive group of k, inherited from the product of additive torsors.\"}\n  {\"name\": \"Prod.snd_vadd\", \"module\": \"Mathlib/Algebra/AddTorsor/Basic\", \"type\": \"∀ {G : Type u_1} {G' : Type u_2} {P : Type u_3} {P' : Type u_4} [inst : AddGroup G] [inst_1 : AddGroup G']\\n  [inst_2 : AddTorsor G P] [inst_3 : AddTorsor G' P'] (v : G × G') (p : P × P'), (v +ᵥ p).2 = v.2 +ᵥ p.2\", \"doc\": \"For additive groups $G, G'$ with torsors $P, P'$, and for any $(v, v') \\\\in G \\\\times G'$ and $(p, p') \\\\in P \\\\times P'$, the second component of the action $(v, v') + (p, p')$ equals the action $v' + p'\"}\n  {\"name\": \"instIsTopologicalAddTorsorProd\", \"module\": \"Mathlib/Topology/Algebra/Group/AddTorsor\", \"type\": \"∀ {V : Type u_1} {W : Type u_2} {P : Type u_3} {Q : Type u_4} [inst : AddCommGroup V] [inst_1 : TopologicalSpace V]\\n  [inst_2 : AddTorsor V P] [inst_3 : TopologicalSpace P] [IsTopologicalAddTorsor P] [inst_5 : AddCommGroup W]\\n  [inst_6 : TopologicalSpace W] [inst_7 : AddTorsor W Q] [inst_8 : Topolog\", \"doc\": \"Given topological additive torsors $P$ and $Q$ for additive topological groups $G$ and $H$ respectively, the product space $P \\times Q$ equipped with the product topology is a topological additive tors\"}\n  {\"name\": \"AffineMap.fst_lineMap\", \"module\": \"Mathlib/LinearAlgebra/AffineSpace/AffineMap\", \"type\": \"∀ {k : Type u_1} {V1 : Type u_2} {P1 : Type u_3} {V2 : Type u_4} {P2 : Type u_5} [inst : Ring k]\\n  [inst_1 : AddCommGroup V1] [inst_2 : Module k V1] [inst_3 : AddTorsor V1 P1] [inst_4 : AddCommGroup V2]\\n  [inst_5 : Module k V2] [inst_6 : AddTorsor V2 P2] (p₀ p₁ : P1 × P2) (c : k),\\n  ((AffineMap.line\", \"doc\": \"Given additive groups $G$ and $G'$ with additive torsors $P$ and $P'$ respectively, the product type $P \\\\times P'$ forms an additive torsor for the product group $G \\\\times G'$. The action is defined c\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(torsor|torus).*(lineBundle|invertible|projectiv)|(lineBundle|invertible|projectiv).*(torsor|torus)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split torus torsor is a product of frame bundles of invertible sheaves with projective line compactifications",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddTorsor.noConfusionType\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"Sort u →\\n  {G : Type u_1} →\\n    {P : Type u_2} →\\n      [inst : AddGroup G] →\\n        AddTorsor G P → {G' : Type u_1} → {P' : Type u_2} → [inst' : AddGroup G'] → AddTorsor G' P' → Sort u\", \"doc\": \"A structure on a type $\\\\alpha$ making it a torsor for an additive group $G$, i.e., a free and transitive action of $G$ on $\\\\alpha$\"}\n  {\"name\": \"AddTorsor.noConfusion\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"{P : Sort u} →\\n  {G : Type u_1} →\\n    {P_1 : Type u_2} →\\n      {inst : AddGroup G} →\\n        {t : AddTorsor G P_1} →\\n          {G' : Type u_1} →\\n            {P' : Type u_2} →\\n              {inst' : AddGroup G'} →\\n                {t' : AddTorsor G' P'} → G = G' → P_1 = P' → inst ≍ inst' → t ≍ t' → Ad\", \"doc\": \"A structure on a type $\\\\alpha$ making it a torsor for an additive group $G$, i.e., a free and transitive action of $G$ on $\\\\alpha$\"}\n  {\"name\": \"AddTorsor.mk\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"{G : outParam (Type u_1)} →\\n  {P : Type u_2} →\\n    [inst : AddGroup G] →\\n      [toAddAction : AddAction G P] →\\n        [toVSub : VSub G P] →\\n          [nonempty : Nonempty P] →\\n            (∀ (p₁ p₂ : P), (p₁ -ᵥ p₂) +ᵥ p₂ = p₁) → (∀ (g : G) (p : P), (g +ᵥ p) -ᵥ p = g) → AddTorsor G P\", \"doc\": \"Given an additive group $ G $, a non-empty type $ P $ with an additive action of $ G $ and a vector subtraction operation, if for all $ p_1, p_2 \\\\in P $, $ (p_1 - p_2) + p_2 = p_1 $ and for all $ g \\\\i\"}\n  {\"name\": \"AddTorsor\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"(G : outParam (Type u_1)) → Type u_2 → [AddGroup G] → Type (max u_1 u_2)\", \"doc\": \"A structure on a type $\\\\alpha$ making it a torsor for an additive group $G$, i.e., a free and transitive action of $G$ on $\\\\alpha$\"}\n  {\"name\": \"Prod.mk_vadd_mk\", \"module\": \"Mathlib.Algebra.AddTorsor.Basic\", \"type\": \"(v : G) (v' : G') (p : P) (p' : P') : (v, v') +ᵥ (p, p') = (v +ᵥ p, v' +ᵥ p')\", \"doc\": \"Given additive groups $G$ and $G'$ with additive torsors $P$ and $P'$ respectively, the product type $P \\\\times P'$ forms an additive torsor for the product group $G \\\\times G'$. The action is defined c\"}\n  {\"name\": \"AffineMap.fst_lineMap\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineMap\", \"type\": \"(p₀ p₁ : P1 × P2) (c : k) : (lineMap p₀ p₁ c).1 = lineMap p₀.1 p₁.1 c\", \"doc\": \"Given additive groups $G$ and $G'$ with additive torsors $P$ and $P'$ respectively, the product type $P \\\\times P'$ forms an additive torsor for the product group $G \\\\times G'$. The action is defined c\"}\n  {\"name\": \"Prod.fst_vadd\", \"module\": \"Mathlib.Algebra.AddTorsor.Basic\", \"type\": \"(v : G × G') (p : P × P') : (v +ᵥ p).1 = v.1 +ᵥ p.1\", \"doc\": \"Given additive groups $G$ and $G'$ with additive torsors $P$ and $P'$ respectively, the product type $P \\\\times P'$ forms an additive torsor for the product group $G \\\\times G'$. The action is defined c\"}\n  {\"name\": \"Prod.instAddTorsor\", \"module\": \"Mathlib.Algebra.AddTorsor.Basic\", \"type\": \": AddTorsor (G × G') (P × P')\", \"doc\": \"Given additive groups $G$ and $G'$ with additive torsors $P$ and $P'$ respectively, the product type $P \\times P'$ forms an additive torsor for the product group $G \\times G'$. The action is defined com\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of rank one modules classifies multiplicative group torsors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.FaithfullyFlat.rTensor_reflects_triviality\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FaithfullyFlat R M] (N : Type u_1) [inst_4 : AddCommGroup N] [inst_5 : Module R N]\\n  [h : Subsingleton (TensorProduct R N M)], Subsingleton N\", \"doc\": \"If $ M $ is a faithfully flat $ R $-module and $ N $ is an $ R $-module such that the tensor product $ N \\\\otimes_R M $ is trivial (i.e., has only one element), then $ N $ itself is trivial.\"}\n  {\"name\": \"Module.FaithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"(R : Type u) → (M : Type v) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"The property that $ M $ is a faithfully flat module over the commutative ring $ R $, meaning it is flat and the functor $ -\\\\otimes_R M $ is faithful.\"}\n  {\"name\": \"Module.FaithfullyFlat.lTensor_reflects_triviality\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FaithfullyFlat R M] (N : Type u_1) [inst_4 : AddCommGroup N] [inst_5 : Module R N]\\n  [Subsingleton (TensorProduct R M N)], Subsingleton N\", \"doc\": \"If $ M $ is a faithfully flat $ R $-module and the tensor product $ M \\\\otimes_R N $ is trivial (i.e., a subsingleton), then the $ R $-module $ N $ is trivial.\"}\n  {\"name\": \"Module.FaithfullyFlat.faithfulSMul\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [Module.FaithfullyFlat A B], FaithfulSMul A B\", \"doc\": \"If $ A $ is a commutative ring and $ B $ is an $ A $-algebra that is faithfully flat as an $ A $-module, then the scalar multiplication of $ A $ on $ B $ is faithful. This means that for any two eleme\"}\n  {\"name\": \"Module.FaithfullyFlat.self\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R], Module.FaithfullyFlat R R\", \"doc\": \"For any commutative ring $ R $, $ R $ is a faithfully flat module over itself. This means that $ R $, viewed as a module over itself, is flat and the tensor product functor $ -\\\\otimes_R R $ is faithfu\"}\n  {\"name\": \"Module.FaithfullyFlat.instOfNontrivialOfFree\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Nontrivial M]\\n  [Module.Free R M], Module.FaithfullyFlat R M\", \"doc\": \"Every nontrivial free module over a commutative ring is faithfully flat. That is, if $ R $ is a commutative ring and $ M $ is an $ R $-module that is both nontrivial (contains at least two distinct el\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_flat_and_rTensor_reflects_triviality\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.FaithfullyFlat R M ↔\\n    Module.Flat R M ∧\\n      ∀ (N : Type (max u v)) [inst_3 : AddCommGroup N] [inst_4 : Module R N],\\n        Subsingleton (TensorProduct R N M) → Subsingleton N\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if it is flat and for every $ R $-module $ N $, if the tensor product $ N \\\\otimes_R M $ is trivial (i.e., the zero module), \"}\n  {\"name\": \"Module.free_of_flat_of_finrank_eq\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [Finite (MaximalSpectrum R)] [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] [Module.Finite R M] [Module.Flat R M] (n : ℕ),\\n  (∀ (P : MaximalSpectrum R), Module.finrank (R ⧸ P.asIdeal) (TensorProduct R (R ⧸ P.asIdeal) M) = n) → Module.Free R M\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a finitely generated flat $ R $-module. If for every maximal ideal $ \\\\mathfrak{p} $ of $ R $, the rank of the tensor product $ (R/\\\\mathfrak{p}) \\\\otimes_R M $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(torsor|torus).*(lineBundle|invertible|projectiv)|(lineBundle|invertible|projectiv).*(torsor|torus)",
+   "results": "{\"t\": \"2026-10-23T21:12:25Z\", \"tool\": \"grep\", \"query\": \"(torsor|torus).*(lineBundle|invertible|projectiv)|(lineBundle|invertible|projectiv).*(torsor|torus)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; topological vector-bundle and ring Picard results, abstract faithfully-flat module facts and category-theoretic prestack full faithfulness do not state the scheme-torsor/frame assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat descent identifies a split torus torsor with frames of invertible sheaves",
+   "results": "{\"t\": \"2026-10-23T21:12:25Z\", \"tool\": \"leansearch\", \"query\": \"Faithfully flat descent identifies a split torus torsor with frames of invertible sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"Module.FaithfullyFlat.bijective_of_tensorProduct\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.FaithfullyFlat.toFlat\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"RingHom.FaithfullyFlat\", \"Module.Flat.iff_flat_tensorProduct\"], \"digest\": \"03c28a6d6f98ba82\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; topological vector-bundle and ring Picard results, abstract faithfully-flat module facts and category-theoretic prestack full faithfulness do not state the scheme-torsor/frame assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T21:12:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; topological vector-bundle and ring Picard results, abstract faithfully-flat module facts and category-theoretic prestack full faithfulness do not state the scheme-torsor/frame assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split multiplicative group scheme torsor is the product of frame bundles of line bundles",
+   "results": "{\"t\": \"2026-10-23T21:12:26Z\", \"tool\": \"leanfinder\", \"query\": \"A split multiplicative group scheme torsor is the product of frame bundles of line bundles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.prod_apply'\", \"Trivialization.prod.isLinear\", \"Trivialization.coordChangeL_prod\", \"VectorBundle.prod\", \"Trivialization.continuousLinearEquivAt_prod\", \"hom_trivializationAt\", \"trivialization_linear\", \"Trivialization.apply_eq_prod_continuousLinearEquivAt\"], \"digest\": \"2518de05ea5c6fd4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; topological vector-bundle and ring Picard results, abstract faithfully-flat module facts and category-theoretic prestack full faithfulness do not state the scheme-torsor/frame assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicative group torsors and invertible sheaves by faithfully flat descent",
+   "results": "{\"t\": \"2026-10-23T21:18:08Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplicative group torsors and invertible sheaves by faithfully flat descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.unitsToPic\", \"Submodule.range_unitsToPic\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"CommRing.relPic\", \"Submodule.unitsToPic_apply\", \"CommRing.Pic\", \"CommRing.Pic.functor\", \"CommRing.Pic.AsModule\"], \"digest\": \"e30553d50ab878c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; topological vector-bundle and ring Picard results, abstract faithfully-flat module facts and category-theoretic prestack full faithfulness do not state the scheme-torsor/frame assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|frameBundle|frame_bundle",
+   "results": "{\"t\": \"2026-10-23T21:20:08Z\", \"tool\": \"grep\", \"query\": \"torsor|frameBundle|frame_bundle\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; topological vector-bundle and ring Picard results, abstract faithfully-flat module facts and category-theoretic prestack full faithfulness do not state the scheme-torsor/frame assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-torsor-line-pullback",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; Relative Picard detection by the three identity faces; field-fibre reduction: lift an arbitrary line module to the proper abelian quotient; supporting geometry: coordinate-character frames and one projective-line compactification per coordinate",
+   "via": [
+    "lem-sfb-split-torus-torsor-line-pullback",
+    "lem-sfb-relative-picard-cube-face-detection",
+    "lem-sfb-semiabelian-cubical-rigidification",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-torsor-frame-geometry",
+  "worker": "stage1",
+  "summary": "NW checked the coordinate-character fpqc descent, constructed the frame opens directly from quotient projective bundles, descended the explicit inverse and checked the right scalar action; proved the tower and its smooth separated finite-type geometry using existing generic nodes only. No statement correction and no new nodes. Searched the live project and Mathlib, and checked the empty-base and rank-zero cases.",
+  "blueprint": "Retains the inherited null-ancestor provenance. Steps realize the supporting coordinate-character frames and projective-line geometry recorded in blueprint.from.place, below the existing line-pullback and cubical/alteration prerequisites of the direct-image route. Current latest blueprint unit and direct-image proof were read; neither states this auxiliary lemma, and no unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "The generic covering comparison makes the given flat surjective finitely presented torsor map an fpqc cover, without replacing any unit step."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Effective descent and rank-one preservation for arbitrary quasi-coherent descent data construct the coordinate lines; the unit has no scheme-module descent theorem of this strength."
+   },
+   {
+    "node": "lem-galois-fpqc-morphisms-descend",
+    "why": "Full faithfulness of scheme descent descends the explicitly constructed inverse over the torsor cover; this is generic descent, not the Galois-cohomology argument of its unit."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "The arbitrary-base quotient classification and separatedness of a projective bundle construct the two-invertible-summand open; this is generic projective geometry, not trace-formula input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Smoothness restricts to the explicit affine and Laurent open charts; the present unit has no replacement for this generic locality theorem."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Compose each chart projection with its smooth affine base over k; no unit-specific cohomological theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Assemble smoothness from the explicit covering charts; this is the generic scheme locality statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "The diagonal arguments use arbitrary base change of a closed immersion, a generic geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Compose the two closed immersions in the separated-composite diagonal factorization, a generic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descent",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-f02a8793a",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-f02a8793a (reviewer sub-agent of L); spot-checked: Read the item and all eight steps in full; the delivery has no new nodes. The statement and stmt_deps are identical to the Q52 FIX copy, so the target is not weakened; on live and side-live the item is still unsplit. Every cited statement covers its use. Step 1 (fppf→fpqc covering, cocycle of g) and step 2 (descent datum g_i^{-1}, sign checked: e(z)=g(y,z)e(y), so e(yt)=t e(y)) use lem-pc-fpqc-descent clauses 1 and 3. Step 3: the quotient classification gives W, the locus where both summand maps are isomorphisms; normalizing by α identifies maps to W with frames of h^*A through (h^*A)^∨, which matches the A^∨ convention. Step 4: the explicit inverse (t,y)↦(yt,y) descends by lem-galois-fpqc-morphisms-descend (bijection plus injectivity); r=0 also checked. Step 5: the tower comes from step 3 over Y_{j-1}. Step 6: finite type from a finite affine trivializing cover, with no assumption that affine intersections are affine. Step 7: smoothness via the affine-space, open-restriction (a, c), composition and source-locality nodes. Step 8: separatedness by diagonal base change and composition of closed immersions. Stacks tags checked in the .tex: 0499, 049A, 022C, 023T, 05B2, 02W0, 01OB, 01OD, 01OE, 01T0, 01V6, 01VA, 00T7, 01KU, 01QR, 01QS; no SGA. Edge cases tested: r=0, S empty, trivial r=1 chart, dual convention. No duplicate in the DAG (lem-sc-line-bundle-torsor is étale Isom only; split-solvable gives only Zariski triviality). Batch-5 flags: lem-trf-fppf-covering-is-fpqc and lem-trf-smooth-composition are generic Mathlib leaves whose closures contain no trace-formula or Poincaré-duality node; they are neither result nor proof step of either assumption, so both are accepted. All 9 declared tool_uses are accepted as generic tools."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusTorsorFrameGeometry",
+  "declaration": "AlgebraicGeometry.SplitTorusFrames.split_torus_torsor_frame_geometry",
+  "declarations": [
+   "AlgebraicGeometry.SplitTorusFrames.unitComparison",
+   "AlgebraicGeometry.SplitTorusFrames.pullFrame",
+   "AlgebraicGeometry.SplitTorusFrames.FrameModel",
+   "AlgebraicGeometry.SplitTorusFrames.framesProduct",
+   "AlgebraicGeometry.SplitTorusFrames.forget",
+   "AlgebraicGeometry.SplitTorusFrames.coordinate",
+   "AlgebraicGeometry.SplitTorusFrames.scalar",
+   "AlgebraicGeometry.SplitTorusFrames.rankTwo",
+   "AlgebraicGeometry.SplitTorusFrames.Compactification",
+   "AlgebraicGeometry.SplitTorusFrames.FrameModel.at",
+   "AlgebraicGeometry.SplitTorusFrames.Good",
+   "AlgebraicGeometry.SplitTorusFrames.FrameEquivariant",
+   "AlgebraicGeometry.SplitTorusFrames.Geometry",
+   "AlgebraicGeometry.SplitTorusFrames.split_torus_torsor_frame_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTorusTorsorFrameGeometry.lean",
+  "statement": "theorem split_torus_torsor_frame_geometry {k : Type u} [Field k] (S : Over (Spec (.of k))) (Y : Over S.left) [Flat Y.hom] [Surjective Y.hom] [LocallyOfFinitePresentation Y.hom] [QuasiCompact Y.hom] [QuasiSeparated Y.hom] (r : ℕ) (act : Over.mk (Y.hom ≫ S.hom) ⊗ (MultiplicativeType.splitTorus k r).X ⟶ Over.mk (Y.hom ≫ S.hom)) (hone : ∀ (U : Over (Spec (.of k))) (y : U ⟶ Over.mk (Y.hom ≫ S.hom)), lift y (1 : U ⟶ (MultiplicativeType.splitTorus k r).X) ≫ act = y) (hmul : ∀ (U : Over (Spec (.of k))) (y : U ⟶ Over.mk (Y.hom ≫ S.hom)) (t t' : U ⟶ (MultiplicativeType.splitTorus k r).X), lift (lift y t ≫ act) t' ≫ act = lift y (t * t') ≫ act) (_hinvariant : act.left ≫ Y.hom = (fst (Over.mk (Y.hom ≫ S.hom)) (MultiplicativeType.splitTorus k r).X).left ≫ Y.hom) (torsor : ∃ e : (Over.mk (Y.hom ≫ S.hom) ⊗ (MultiplicativeType.splitTorus k r).X).left ≅ pullback Y.hom Y.hom, e.hom ≫ pullback.fst _ _ = (fst (Over.mk (Y.hom ≫ S.hom)) (MultiplicativeType.splitTorus k r).X).left ∧ e.hom ≫ pullback.snd _ _ = act.left) : Nonempty (Geometry S Y r act)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing splitTorus and canonical quotient-projective-bundle interfaces. Helpers spell out the universal frame classification, categorical product tower, scalar equivariance on all test schemes and its geometric conclusions; no arbitrary chosen model or additional geometric hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e51c32a9",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Clause-by-clause match. Faithfully flat + finite presentation = Flat, Surjective, LocallyOfFinitePresentation, QuasiCompact, QuasiSeparated (finite presentation per def-sbc-locally-finite-presentation). Right action laws on all test schemes; torsor iso pinned by its projections. FrameModel represents Isom(O_U,f^*A) via canonical pull-back maps (boundaryPullbackComparison adjunction pinned by its unit formula). FrameEquivariant e_j(yt)=t_j e_j(y) on all test schemes, sign matches proof step 4. framesProduct/forget are the actual categorical products/projections over S. rankTwo = O ⊕ f^*(dual A); TautologicalQuotient is chart-normalized, hence canonical. Image clause, first-summand trivialization, Good (smooth, closed diagonal, LFT, QC) for all Y_j incl. Y_0 and all P_j, rank_zero. Edge cases r=0, empty S, nonreduced tests covered; single universe u. stmt_deps adds only the landed def-sfb-tori-multiplicative-type (brief l.177). Statement field verbatim. Docstrings carry source, blueprint tag and 8 proof steps. Nothing proved beyond sorry; no hollow helpers; no existing frame-scheme declaration found. Advisory: dual, smulHom, boundaryPullbackComparison, pullbackObjUnitIso are plain upstream helpers outside stmt_deps. No recompile per instructions; worker compile evidence clean."
+ }
+}

@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-pointed-galois-limit-geometry",
+ "kind": "statement",
+ "title": "Geometry of the pointed Galois inverse limit",
+ "statement": "Let $X$ be a nonempty connected quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-connected-scheme, def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism], $x:\\operatorname{Spec}\\Omega\\to X$ a geometric point [def-weil-geometric-point], and $\\Pi=\\pi_1^{\\mathrm{et}}(X,x)$ with its profinite topology and left action on finite geometric fibres [def-galois-fibre-functor]. Finite etale covers are objects of [def-weil-pbc-finite-etale-category]. For every open normal subgroup $N\\triangleleft\\Pi$, let $(Y_N,y_N)$ be a pointed connected finite etale cover identified on its geometric fibre with $(\\Pi/N,N)$, with pointed transition $Y_M\\to Y_N$ inducing $aM\\mapsto aN$ for $M\\subseteq N$. Work in compatible universes and small indexing systems [def-weil-size-convention].\nThe indicated pointed covers and transition maps exist. They form a small cofinal system in the category of pointed connected finite etale Galois covers, where Galois means that the group of $X$-automorphisms acts simply transitively on the geometric fibre. The system is directed by common refinements $M\\cap N$, with unique pointed arrows. Its limit $T$ exists in schemes over $X$ and canonically agrees with the limit over any small cofinal system of pointed connected finite etale Galois covers. Each $Y_N$ is qcqs; each transition and structure map is finite etale and surjective. Every projection $p_N:T\\to Y_N$ is affine and surjective. The compatible $y_N$ define $t:\\operatorname{Spec}\\Omega\\to T$ with $p_Nt=y_N$ and $vt=x$, where $v:T\\to X$ is the structure map.\nThe scheme $T$ is nonempty, connected, quasi-compact and quasi-separated. The morphism $v$ is affine [pqf-def-affine-morphism], flat and surjective [def-weil-flat-morphism, def-weil-surjective-morphism], and weakly etale [def-weil-weakly-etale-morphism]. For every affine open $V=\\operatorname{Spec}A\\subseteq X$, $v^{-1}V=\\operatorname{Spec}(\\varinjlim_N\\Gamma(Y_N\\times_X V,\\mathcal O))$; the displayed colimit is an ind-etale $A$-algebra, that is, a filtered colimit of etale finitely presented $A$-algebras [def-weil-pbc-ind-etale-algebra]. The singleton $\\{v\\}$ is a cover in $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site].",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01YX, lemma-directed-inverse-system-has-limit; agent expansion for pointed finite Galois systems (old steps 1–6 of lem-sfb-pointed-finite-etale-limit-cover). Supporting tagged places and full retained arguments are in the delivery report."
+ },
+ "stmt_deps": [
+  "def-galois-fibre-functor",
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-point",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-size-convention",
+  "def-weil-surjective-morphism",
+  "def-weil-weakly-etale-morphism",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the fully proved finite-etale equivalenceContAction and the stabilizer classification in cor-galois-open-subgroups. For a Galois cover its point stabilizer is normal: an automorphism of the cover carries the marked point to g inverse times that point and commutes with the natural G action. Conversely, for a connected cover with normal point stabilizer every point has the same stabilizer. The pointed isomorphism classification then makes its automorphism action transitive, hence it is Galois. No FLC comparison is needed. The private import of the node thm-galois-fundamental is retained as a unit-route dependency; its additional FLC clauses are not reapplied.",
+   "uses": [
+    "cor-galois-open-subgroups",
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (1); finite coset calculation corresponding to Tag 0BN2, lemma-galois"
+   }
+  },
+  {
+   "text": "The functor from the published small UniversalCover.Index to open normal subgroups sends a stage to the stabilizer of its marked point. Point preservation and naturality give monotonicity. Pointed arrows are unique by injectivity of evaluation on a connected object. For an inclusion of stabilizers construct the quotient-group map on the pointed quotient fibres and lift it using full faithfulness of equivalenceContAction. Every open normal subgroup is realized by exists_isConnected_stabilizer_eq and the preceding Galois criterion. Thus the stabilizer functor is fully faithful and essentially surjective. Its inverse equivalence E, with its counit, gives the exact quotient labels q. Transitivity, equivariance and the point equations prove the requested transition formula.",
+   "uses": [
+    "cor-galois-open-subgroups",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (1); pointed coset morphisms and small skeleton"
+   }
+  },
+  {
+   "text": "Use Functor.Initial.isLimitWhiskerEquiv to restrict the published limit cone along E.functor or any Initial F. Over.isLimitLiftCone proves the same cone is limiting over X, and restriction also applies there.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YX, lemma-directed-inverse-system-has-limit; elementary comparison of the cone universal properties"
+   }
+  },
+  {
+   "text": "Reuse the fully proved UniversalCover construction: its stages are finite etale, its limit exists, its projections are affine by isAffineHom_pi_app, and its structure map is affine by isAffineHom_proj. Finite maps and affine maps are quasi-compact and separated. The qcqs permanence lemmas make the stages and the cover qcqs over the given qcqs base.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YX, lemma-directed-inverse-system-has-limit; Morphisms 01SC, lemma-composition-affine; lemma-affine-separated; Schemes 01KU, lemma-separated-permanence"
+   }
+  },
+  {
+   "text": "Transitions are finite and etale by IsFinite.of_comp and Etale.of_comp applied to their composites with the stage structure map. Their source is nonempty because of the marked point and their target is connected. The image is open (etale), closed (finite), and nonempty, so it is all of the target. The same existing clopen-image argument surjective_of_nonempty_fiber proves the structure maps surjective. No trace or degree theorem is used.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01Z2, lemma-limit-nonempty, fibre argument; finite etale degree and geometric fibre count"
+   }
+  },
+  {
+   "text": "For an index j restrict the cone to Over j. This restriction is still limiting by initiality, and its structure maps to stage j are the surjective affine transitions just proved. Apply the fully proved Scheme.surjective_of_isLimit. Its proof base-changes the limit to a residue field by isLimitPullbackCone, makes every affine stage fibre nonempty, and uses Scheme.nonempty_of_isLimit. This proves every projection surjective. Reuse UniversalCover.surjective_proj for the structure map.",
+   "uses": [
+    "lem-weil-pbc-limit-nonempty",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01Z2, lemma-limit-nonempty; constant-base specialization of the fibre-product limit identity"
+   }
+  },
+  {
+   "text": "The already constructed UniversalCover.pt satisfies every requested projection equation by pt_pi and the base equation by pt_proj. Its source Spec Omega has a point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YX, lemma-directed-inverse-system-has-limit; cone universal property"
+   }
+  },
+  {
+   "text": "For the reindexed scheme diagram E.functor composed with UniversalCover.diagram, use the fully proved AffineOverLimit relative-spectrum construction. Evaluation preserves colimits, so its ring over U is canonically the exact colimit normalSectionDiagram. The unique isomorphism between its limiting cone and the published cone, together with the open chart of the relative spectrum, gives a chart map k into cover. AffineOverLimit.iota_pi and the evaluation-colimit comparison give every projection equation. The structure-map equation follows by composing the equation at the whole-group stage. The relative-gluing range formula identifies the range of k with the preimage of U, giving the required isomorphism by isoOfRangeEq. The stage ring maps are etale by HasRingHomProperty.appLE. Their cocone is compatible, and connectedness of the index shows every composite with a colimit inclusion is normalSectionAlgebraMap. RingHom.IndEtale.iff_exists supplies the filtered etale presentation; invariance under the canonical ULift ring equivalences proves IndEtaleAcrossUniverses.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YX and 01YW, affine-transition and affine-scheme limits; Morphisms 02GJ, lemma-etale-characterize; Proetale 097I, definition-ind-etale"
+   }
+  },
+  {
+   "text": "Reuse the fully proved UniversalCover.weaklyEtale_proj, whose proof applies the affine pro-etale criterion to its affine etale stages. WeaklyEtale includes flatness. Affineness supplies quasi-compactness, and surjectivity was proved above; Hom.singleton_mem_propQCPrecoverage now gives exactly the singleton pro-etale cover.",
+   "uses": [
+    "def-weil-weakly-etale-morphism",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097N, lemma-ind-etale-implies; affine weakly etale criterion and fpqc covering condition"
+   }
+  },
+  {
+   "text": "Reuse the fully proved UniversalCover.connectedSpace_cover. Its source proof connectedSpace_of_isLimit descends complementary compact opens to a common stage and uses connectedness there (including nonemptiness); the needed affine transition and qcqs stage hypotheses hold by the construction. This is the same clopen-descent argument as the original plan.",
+   "uses": [
+    "pqf-lem-limit-qc-open-descends",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01Z4, lemma-descend-opens (1); connectedness via descended complementary opens"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-galois-open-subgroups",
+  "def-weil-connected-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-affine-composition",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-limit-nonempty",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "pqf-lem-limit-qc-open-descends",
+  "thm-galois-fundamental"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tags 01YX, 01YW, 01Z2, 01Z4, with pione 0BND and proetale 097I, 097N; implemented by E4 using the published, fully proved UniversalCover and AffineOverLimit APIs and elementary stabilizer and colimit glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of pointed connected finite Galois etale covers of a connected qcqs scheme is connected affine surjective and weakly etale",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition limits and abstract finite Galois objects do not supply this pointed scheme construction with all its geometric properties and cofinality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.WeaklyEtale\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition limits and abstract finite Galois objects do not supply this pointed scheme construction with all its geometric properties and cofinality"
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyEtale.*[Ll]imit|connectedSpace_of_isLimit|surjective_of_isLimit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition limits and abstract finite Galois objects do not supply this pointed scheme construction with all its geometric properties and cofinality",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected scheme has a universal profinite etale covering constructed from all open normal subgroups of its fundamental group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one\", \"module\": \"Mathlib.Topology.Algebra.ClopenNhdofOne\", \"type\": \"{G : Type*} [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [TotallyDisconnectedSpace G]\\n  {U : Set G} (UOpen : IsOpen U) (einU : 1 ∈ U) : ∃ H : OpenNormalSubgroup G, (H : Set G) ⊆ U\", \"doc\": \"For any profinite group $G$ (a compact, totally disconnected topological group) and any open neighborhood $U$ of the identity element $1$ in $G$, there exists an open normal subgroup $H$ of $G$ such t\"}\n  {\"name\": \"ProfiniteGrp.instSmallCategoryOpenNormalSubgroupCarrierToTopTotallyDisconnectedSpaceToProfinite\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp) : SmallCategory (OpenNormalSubgroup P)\", \"doc\": \"For any profinite group $P$, the collection of open normal subgroups of $P$ forms a small category. This category is constructed by equipping the partially ordered set of open normal subgroups (under \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"InfiniteGalois.profiniteGalGrp\", \"module\": \"Mathlib.FieldTheory.Galois.Profinite\", \"type\": \"[IsGalois k K] : ProfiniteGrp\", \"doc\": \"The Galois group $\\\\text{Gal}(K/k)$ of an infinite Galois extension $K/k$, equipped with the Krull topology, is constructed as an object in the category of profinite groups. This topology ensures the g\"}\n  {\"name\": \"ProfiniteGrp.ofFiniteGrp\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic\", \"type\": \"(G : FiniteGrp) : ProfiniteGrp\", \"doc\": \"Given a finite group $G$, this constructs the corresponding profinite group by equipping $G$ with the discrete topology and verifying that it satisfies the axioms of a profinite group (compactness, to\"}\n  {\"name\": \"ProfiniteGrp.coe_of\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic\", \"type\": \"(G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [TotallyDisconnectedSpace G] :\\n  (ProfiniteGrp.of G : Type u) = G\", \"doc\": \"The canonical coercion from the profinite group constructed from $G$ to its underlying type is equal to $G$, i.e., $\\\\mathrm{ProfiniteGrp.of}\\\\, G$ as a type coincides with $G$ itself.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.openCoverOfIsOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{s : Type*} (X : Scheme.{u}) (U : s → X.Opens) (hU : IsOpenCover U) : X.OpenCover\", \"doc\": \"Given a scheme $ X $ and an open cover $\\\\{ U_i \\\\}$ of its underlying topological space, this function constructs the corresponding open cover of $ X $ in the category of schemes by taking the family o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued_open_map\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"For any open cover 𝒰 of a scheme X, the underlying continuous map of the canonical morphism from the glued scheme constructed from 𝒰 to X is an open map.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition limits and abstract finite Galois objects do not supply this pointed scheme construction with all its geometric properties and cofinality"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversalCover|PointedGalois|connectedSpace_of_isLimit|surjective_of_isLimit",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern abstract Galois objects, general affine limits, profinite spaces or the pro-etale site; none states all the pointed normal-subgroup scheme construction and geometric clauses.",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universal pointed profinite etale cover of a connected quasi compact quasi separated scheme is the limit of its connected Galois covers",
+   "results": "Returned 8 hits: Profinite.isoAsLimitConeLift, Profinite.asLimitConeIso, Profinite.lim, Profinite.asLimit, Profinite.lim', Profinite.asLimit', InfiniteGalois.profiniteGalGrp, Profinite.hasColimits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern abstract Galois objects, general affine limits, profinite spaces or the pro-etale site; none states all the pointed normal-subgroup scheme construction and geometric clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"WeaklyEtale\"",
+   "results": "Returned 3 hits: AlgebraicGeometry.Scheme.proetalePrecoverage_le_precoverage_weaklyEtale, AlgebraicGeometry.Scheme.instWeaklyEtaleF, AlgebraicGeometry.Scheme.ProEt.instWeaklyEtaleHomDiscretePUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern abstract Galois objects, general affine limits, profinite spaces or the pro-etale site; none states all the pointed normal-subgroup scheme construction and geometric clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of pointed finite Galois etale covers indexed by open normal subgroups is a connected affine surjective weakly etale scheme",
+   "results": "Returned 8 hits: CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern abstract Galois objects, general affine limits, profinite spaces or the pro-etale site; none states all the pointed normal-subgroup scheme construction and geometric clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pointed-finite-etale-limit-cover",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Complete topological group torsors on a normal scheme; Lemma 7.4.3, p. 69 (cofiltered-limit compatibility for profinite groups), Construction 7.4.4, and the finite-cover fibre functor underlying Lemma 7.4.10. Agent expansion into the pointed finite-etale inverse limit and its Cech coordinates. Upstream reference implementation: lean/WeilConjectures/AlgebraicGeometry/FundamentalGroup/UniversalCoverConstruction.lean, cover/proj/pt, bijective_fiber, transport, loop and continuous_loop, lines 129–164, 305–314, 356–376, 783–852; the full Cech statement here is not asserted to be an already finished Lean declaration.; re-split argument: old item steps [1, 2, 3, 4, 5, 6].",
+   "via": [
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-pointed-galois-limit-geometry",
+  "worker": "stage1",
+  "summary": "Split the retained geometry argument into ten checked steps using existing nodes only. Explicitly proved pointed coset cofinality and cone comparison, qcqs inheritance, projection surjectivity by constant-base fibre limits, affine ind-etale charts, the marked point, and connectedness by descent of complementary quasi-compact opens. Statement unchanged; no new nodes or Lean edits.",
+  "blueprint": "The created.item chain has no imported ancestor (blueprint_refs.py ancestor prints None). Retain the null ancestor and recorded via chain. Steps realize old steps 1–6 preserved under the geometry heading in coord/reports/ND/lem-sfb-pointed-finite-etale-limit-cover.md, within the recorded det-thm-sf-ctf-stability-direct-images paragraph (3) finite-cover route.",
+  "tool_uses": [
+   {
+    "node": "cor-galois-open-subgroups",
+    "why": "Generic Open subgroups and finite etale covers tool for the pointed finite-cover limit construction; this unit has no replacement for this input, and no unit step is rerouted."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Generic Étale, affine pro-étale and weakly étale morphisms tool for the pointed finite-cover limit construction; this unit has no replacement for this input, and no unit step is rerouted."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic Limits of schemes along affine transition morphisms tool for the pointed finite-cover limit construction; this unit has no replacement for this input, and no unit step is rerouted."
+   },
+   {
+    "node": "lem-weil-pbc-limit-fibre-products",
+    "why": "Generic Fibre products commute with limits along affine transition morphisms tool for the pointed finite-cover limit construction; this unit has no replacement for this input, and no unit step is rerouted."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic The fibre functor is an equivalence tool for the pointed finite-cover limit construction; this unit has no replacement for this input, and no unit step is rerouted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-galois-open-subgroups",
+  "thm-galois-fundamental"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-957ea9571",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-957ea9571 (reviewer sub-agent of L); spot-checked: Ordinary first split of the item (no new nodes, 10 steps). The item is a child of ND's resolved re-split of lem-sfb-pointed-finite-etale-limit-cover; it has no repair note of its own and is not on the drop list. Statement and stmt_deps are byte-identical to live. Old parent steps 1-6 all reappear, expanded: old 1→1-3, 2→4, 3→5-6, 4→8-9, 5→7, 6→10. proof_deps equals the union of uses; no SGA. Checks: (1) cor-galois-open-subgroups stabilizer correspondence and the N_Pi(U)/U coset computation are correct; (2) aM↦aN exists iff M⊆N, unique by full faithfulness, directed under ∩; (3) cofinal cone extension is elementary; (4) finite⇒affine⇒qc+separated (permanence (3)), stages and T qcqs via qcqs-permanence (2), limit-affine-transition gives the limit, affine-composition makes v affine; (5) degree from trace-degree (a),(b) is ≥1 because of the marked lift, so transitions and structure maps are surjective; (6) constant-base limit-fibre-products plus limit-nonempty (Stacks 01Z2: directed, affine transitions, nonempty qc stages) make p_N surjective; (7) t from the cone; (8) affine charts are Spec colim of étale finitely presented algebras, hence ind-étale; (9) det-pe (2),(4) give weakly étale and flat, and the single affine v^{-1}V onto V meets the pro-étale covering condition; (10) the 01Z4(1) clopen descent plus surjective p_N gives connectedness. Tags 0BND, 0BN2, 01YX, 01YW, 01Z2, 01Z4, 097I, 097N, 01SC, 02GJ, 01KU verified. Edge cases checked: Pi=1, F_q, empty affine V. No duplicate: the sbc torsor stage-descent nodes and the sibling Cech/splitting nodes are different statements. The five generic tool_uses are accepted. Advisory: step 4 relies on the explicit parenthetical clause in the mathlib-status def-weil-pbc-finite-etale-category that X-morphisms between finite étale schemes are finite étale; it is true."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.PointedGaloisLimitGeometry",
+  "declaration": "AlgebraicGeometry.Scheme.UniversalCover.exists_pointedGaloisLimitGeometry",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.UniversalCover.normalSectionDiagram",
+   "AlgebraicGeometry.Scheme.UniversalCover.normalSectionAlgebraMap",
+   "AlgebraicGeometry.Scheme.UniversalCover.exists_pointedGaloisLimitGeometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/PointedGaloisLimitGeometry.lean",
+  "statement": "theorem exists_pointedGaloisLimitGeometry {X : Scheme.{u}} [ConnectedSpace X] [CompactSpace X] [QuasiSeparatedSpace X] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (G : ProfiniteGrp.{u}) [∀ Y : X.FiniteEtale, MulAction G ((FiniteEtale.fiber x).obj Y)] [IsFundamentalGroup (FiniteEtale.fiber x) G] : ∃ E : OpenNormalSubgroup G ≌ Index x, ∃ q : ∀ N : OpenNormalSubgroup G, (FiniteEtale.fiber x).obj ((obj x).obj (E.functor.obj N)) ≃ G ⧸ N.toSubgroup, (∀ N, q N (point x (E.functor.obj N)) = QuotientGroup.mk (1 : G)) ∧ (∀ (N : OpenNormalSubgroup G) (g : G) (s : (FiniteEtale.fiber x).obj ((obj x).obj (E.functor.obj N))), q N (g • s) = QuotientGroup.mk g * q N s) ∧ (∀ {M N : OpenNormalSubgroup G} (f : M ⟶ N) (s : (FiniteEtale.fiber x).obj ((obj x).obj (E.functor.obj M))), q N ((FiniteEtale.fiber x).map ((obj x).map (E.functor.map f)) s) = QuotientGroup.map M.toSubgroup N.toSubgroup (MonoidHom.id G) (leOfHom f) (q M s)) ∧ (∀ M N : OpenNormalSubgroup G, Subsingleton (E.functor.obj M ⟶ E.functor.obj N)) ∧ (∀ M N : OpenNormalSubgroup G, Nonempty (E.functor.obj M ⟶ E.functor.obj N) ↔ M ≤ N) ∧ (∀ (N : OpenNormalSubgroup G) (s t : (FiniteEtale.fiber x).obj ((obj x).obj (E.functor.obj N))), ∃! a : Aut ((obj x).obj (E.functor.obj N)), (FiniteEtale.fiber x).map a.hom s = t) ∧ Nonempty (IsLimit ((limit.cone (diagram x)).whisker E.functor)) ∧ Nonempty (IsLimit (Over.liftCone (diagram x) (pNatTrans x) (limit.cone (diagram x)) (proj x) (π_p x))) ∧ (∀ (J : Type u) [SmallCategory J] (F : J ⥤ Index x) [Functor.Initial F], Nonempty (IsLimit ((limit.cone (diagram x)).whisker F)) ∧ Nonempty (IsLimit ((Over.liftCone (diagram x) (pNatTrans x) (limit.cone (diagram x)) (proj x) (π_p x)).whisker F))) ∧ (∀ N : OpenNormalSubgroup G, ConnectedSpace ((diagram x).obj (E.functor.obj N)) ∧ CompactSpace ((diagram x).obj (E.functor.obj N)) ∧ QuasiSeparatedSpace ((diagram x).obj (E.functor.obj N)) ∧ IsFinite (p x (E.functor.obj N)) ∧ Etale (p x (E.functor.obj N)) ∧ Surjective (p x (E.functor.obj N)) ∧ IsAffineHom (limit.π (diagram x) (E.functor.obj N)) ∧ Surjective (limit.π (diagram x) (E.functor.obj N))) ∧ (∀ {M N : OpenNormalSubgroup G} (f : M ⟶ N), IsFinite ((diagram x).map (E.functor.map f)) ∧ Etale ((diagram x).map (E.functor.map f)) ∧ Surjective ((diagram x).map (E.functor.map f))) ∧ (∀ N : OpenNormalSubgroup G, pt x ≫ limit.π (diagram x) (E.functor.obj N) = (point x (E.functor.obj N)).left) ∧ pt x ≫ proj x = x ∧ ConnectedSpace (cover x) ∧ CompactSpace (cover x) ∧ QuasiSeparatedSpace (cover x) ∧ IsAffineHom (proj x) ∧ Flat (proj x) ∧ Surjective (proj x) ∧ WeaklyEtale (proj x) ∧ (∀ U : X.AffineZariskiSite, (∀ N : OpenNormalSubgroup G, ((p x (E.functor.obj N)).app U.toOpens).hom.Etale) ∧ RingHom.IndEtaleAcrossUniverses (normalSectionAlgebraMap x G E U).hom ∧ (∀ N : OpenNormalSubgroup G, (p x (E.functor.obj N)).app U.toOpens ≫ colimit.ι (normalSectionDiagram x G E U) (op N) = normalSectionAlgebraMap x G E U) ∧ ∃ e : (proj x ⁻¹ᵁ U.toOpens).toScheme ≅ Spec (colimit (normalSectionDiagram x G E U)), e.hom ≫ Spec.map (normalSectionAlgebraMap x G E U) ≫ U.2.fromSpec = (proj x ⁻¹ᵁ U.toOpens).ι ≫ proj x ∧ ∀ N : OpenNormalSubgroup G, e.hom ≫ Spec.map (colimit.ι (normalSectionDiagram x G E U) (op N)) ≫ AffineOverLimit.chart (diagram x) (p x) (E.functor.obj N) U = (proj x ⁻¹ᵁ U.toOpens).ι ≫ limit.π (diagram x) (E.functor.obj N)) ∧ Presieve.singleton (proj x) ∈ proetalePrecoverage X",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the published UniversalCover scheme, point and small pointed-Galois diagram. The normal-subgroup equivalence and pointed equivariant quotient labels specify the covers and transitions; affine charts are identified with the actual filtered colimit of stage section rings, with both base and projection equations. G is any small profinite model of the finite fibre functor fundamental group, as in the recorded fibre equivalence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f5d847fb8",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Read node, 14 stmt_dep records, upstream UniversalCoverConstruction (Index/obj/point/diagram/p/cover/proj/pt/pNatTrans), AffineOverLimit.diagram/chart, IndEtaleAcrossUniverses, Mathlib proetalePrecoverage (propQCPrecoverage WeaklyEtale = recorded ProEt covers) and IsFundamentalGroup. Hypotheses exact: ConnectedSpace (incl. nonempty), CompactSpace, QuasiSeparatedSpace, IsAlgClosed Ω, G a small profinite IsFundamentalGroup model (exists_isFundamentalGroup gives one in universe u), nothing extra. E: OpenNormalSubgroup G ≌ Index x is pinned by the pointed, left-equivariant q N to G/N and the aM↦aN transition equation; Galois stated as ∃! Aut on the fibre plus stage connectedness; limits are the same upstream cone, also over X and along every Initial F : J ⥤ Index x; stages qcqs, finite étale surjective maps, affine surjective projections; pt equations; T connected qcqs; v affine, flat, surjective, weakly étale; affine charts: étale stage ring maps, ind-étale colimit map, e over U.2.fromSpec and compatible with each stage chart; singleton pro-étale cover. Helpers have real data; only the main theorem has sorry, with a 10-step docstring; statement verbatim; only lean added versus live; no duplicate in PointedLimitCech/FiniteSplitting. Edge cases Π=1, finite Π, empty U, any characteristic. No compile (no file changed); report records clean compiles and an OK dry run. Advisory: M⊓N directedness implicit; Scheme.FiniteEtale used rather than the MorphismProperty.Over mathlib_match, forced by the recorded fibre functor."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261023T123452-L-1194281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

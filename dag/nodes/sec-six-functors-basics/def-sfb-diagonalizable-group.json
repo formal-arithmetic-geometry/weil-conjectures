@@ -1,0 +1,123 @@
+{
+ "id": "def-sfb-diagonalizable-group",
+ "kind": "definition",
+ "title": "The diagonalizable group algebra spectrum and its canonical maps",
+ "statement": "Let $F$ be a field [def-weil-field] and $M$ an additive abelian group. Define the $F$-group scheme [def-sc-group-scheme] $D_F(M)=\\operatorname{Spec}F[M]$ [def-weil-affine-spectrum], where $F[M]$ is the finitely supported group algebra with basis $e_m$, multiplication $e_me_n=e_{m+n}$, coproduct $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$ and antipode $e_m\\mapsto e_{-m}$. For an additive homomorphism $\\alpha:M\\to N$, define $D_F(\\alpha):D_F(N)\\to D_F(M)$ by the Hopf algebra map $e_m\\mapsto e_{\\alpha(m)}$. Define its right multiplication action by $(g,h)\\mapsto gD_F(\\alpha)(h)$. These definitions do not require finite generation.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 12(b), Proposition 12.3, Remark 12.6 and Theorem 12.9(a), printed pp.231--233; Section 5(j), pp.116--118 for the right coset action."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "diagonalizable group scheme D(M) spectrum of group algebra functor induced by additive group homomorphism",
+   "results": "{\"t\": \"2026-10-23T22:57:30Z\", \"tool\": \"leansearch\", \"query\": \"diagonalizable group scheme D(M) spectrum of group algebra functor induced by additive group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonal\", \"Representation.diagonal\", \"Matrix.diagonalAddMonoidHom\", \"ContinuousAddMonoidHom.diag_toFun\", \"Matrix.diagAddMonoidHom\", \"ContinuousAddMonoidHom.diag\", \"Matrix.diagonalAddMonoidHom_apply\", \"Matrix.diagAddMonoidHom_apply\"], \"digest\": \"79913ac62f9fa6f0\"}",
+   "date": "2026-10-23",
+   "verdict": "No existing specialized D(M) construction or cokernel statement. Reuse Mathlib Hopf spectrum and group algebra maps; only package their composite."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "diagonalizable group scheme D(M) spectrum group algebra Hopf structure canonical induced map",
+   "results": "{\"t\": \"2026-10-23T22:57:33Z\", \"tool\": \"leanfinder\", \"query\": \"diagonalizable group scheme D(M) spectrum group algebra Hopf structure canonical induced map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.diagonal_Spec_map\", \"AlgebraicGeometry.diagonal_SpecMap\", \"Rep.diagonalHomEquiv_apply\", \"Rep.diagonalOneIsoLeftRegular\", \"Rep.diagonalHomEquiv\", \"Rep.diagonalSuccIsoFree_hom_hom_single\", \"Rep.diagonalOneIsoLeftRegular_hom_hom\", \"Rep.diagonalHomEquiv_symm_apply\"], \"digest\": \"7040cffca16e54bc\"}",
+   "date": "2026-10-23",
+   "verdict": "No existing specialized D(M) construction or cokernel statement. Reuse Mathlib Hopf spectrum and group algebra maps; only package their composite."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizableGroup|diagonalisable|diagonalizable group|mapDomainBialgHom|hopfSpec",
+   "results": "{\"t\": \"2026-10-23T22:57:33Z\", \"tool\": \"grep\", \"query\": \"diagonalizableGroup|diagonalisable|diagonalizable group|mapDomainBialgHom|hopfSpec\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"1c66bd5f06d8516f\"}",
+   "date": "2026-10-23",
+   "verdict": "No existing specialized D(M) construction or cokernel statement. Reuse Mathlib Hopf spectrum and group algebra maps; only package their composite."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-diagonalizable-quotient-character-kernel",
+  "date": "2026-10-23",
+  "group": "Q34"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Definition 19.26, Proposition 19.27, Example 19.25 and Remark 19.30, printed pp.404--405. Use the simply connected covering in Remark 19.30, allowing a noninjective homomorphism on centres; Proposition 19.27 identifies the derived subgroup and torus quotient. Supporting input: Theorem 12.9(b),(c), printed pp.233--234, especially the final paragraph of (c) identifying a quotient D(M)/D(M-double-prime) with D(ker(M to M-double-prime)); Definition 12.14, p.236. The group-algebra spectrum and its induced map, used in the statement.",
+   "via": [
+    "lem-sfb-diagonalizable-quotient-character-kernel",
+    "lem-sfb-reductive-central-pushout-reconstruction",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalizableGroup",
+  "declaration": "AlgebraicGeometry.diagonalizableGroup",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalizableGroup.lean",
+  "statement": "abbrev diagonalizableGroup (F : Type u) [Field F] (M : Type u) [AddCommGroup M] : Grp (Over (Spec (.of F)))",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.diagonalizableGroup",
+   "AlgebraicGeometry.diagonalizableGroupMap",
+   "AlgebraicGeometry.diagonalizableGroupAction"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-439ffa1cd",
+  "group": "Q34",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-439ffa1cd",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Item statement unchanged vs side-live; only change besides the lean record is the §1(A) stmt_dep def-sfb-diagonalizable-group. New def node: real hopfSpec/mapDomainBialgHom/μ data, no duplicate in side-live lean/Sheaf, WeilConjectures or dag (finite/inline Spec MonoidAlgebra uses only). Clause check: IsAlgClosed, AddGroup.FG M N, α : M →+ N; q = D(α.ker.subtype) restriction; FaithfullyFlat of appTop; kerι(q).left.ker = D(α).left.ker equates closed subschemes (scheme-theoretic image); yoneda D(ker α) is an fppf sheaf; coequalizer of fst/action = coset presheaf; ηq with π≫ηq = yoneda q and the bijectivity universal property = canonical sheafification; ∀ closed C, ∃ FG P, q with IsFppfGroupQuotient i q = quotient diagonalizable. Universe u forced by CommHopfAlgCat, harmless. Edge cases M=0, N=0, α=0, α injective, C trivial or all of D(M), μ_p in char p covered. Verbatim lean.statement OK for both records; one sorry; docstrings carry source, blueprint id and 7 steps; no SGA; report has both sections. No compile run (no file changed)."
+ }
+}

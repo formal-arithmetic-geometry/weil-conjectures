@@ -1,0 +1,123 @@
+{
+ "id": "lem-sp-uniform-tower-etale-domains",
+ "kind": "statement",
+ "title": "Step 2: bounded-below etale origins for uniform towers",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, a scheme T, abelian coefficient-tower data D [det-sp-coefficient-towers-abelian] and a section-normalized realization base b [def-sp-tower-shriek-realization]. If K is an ordinary derived coefficient tower with uniform bounded constructible finite-Tor levels [sk-def-sp-normalized-towers], then the realized tower is bounded below, and each positive level has a retained fixed-coefficient etale origin [def-weil-pbc-etale-origin-witness, det-sp-tower-shriek-levels]. No Noetherianity, finite-type or transition-normalization hypothesis is required for this domain assertion, and no coherence between the etale origins is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Step 2: bounded-below etale origins for uniform towers; source of the expanded standing-setting restriction in lem-sp-tower-p1-uniform-ctf-domains"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-sp-tower-shriek-realization",
+  "def-weil-pbc-etale-origin-witness",
+  "det-sp-tower-shriek-levels"
+ ],
+ "proof": [
+  {
+   "text": "Choose a common lower cohomological endpoint from the uniform tower predicate. Exact level evaluation commutes with homology; all components of a homology tower below that endpoint vanish, so its identity is zero componentwise. Exact realization preserves this lower bound.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "def-sp-tower-shriek-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n apply finiteRing_constructibleDerived_origin to the bounded intrinsically constructible level. The bounded constructible etale antecedent is bounded below. Factor the specified comparison through fixed-coefficient comparison and the canonical constant-ring realization equivalence. The realization counit and section-normalized level evaluation identify its image with the evaluation of the realized tower. Retain its comparison image as the Plus level and the original antecedent and isomorphism as FixedEtaleOriginWitness. This gives Origin independently for each n.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-pbc-etale-origin-witness",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "def-sp-tower-shriek-realization",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-weil-pbc-etale-origin-witness",
+  "det-sp-tower-shriek-levels"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Step 2: bounded-below etale origins for uniform towers; source of the expanded standing-setting restriction in lem-sp-tower-p1-uniform-ctf-domains"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded constructible complex of pro etale sheaves over a finite ring has an etale origin and uniformly bounded coefficient towers are bounded below",
+   "results": "8 actual hits; Algebra.Etale.comp, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: the hits are general evaluation, t-structure, or ring-theoretic results, not this tower assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniformly bounded constructible finite Tor coefficient tower is bounded below and its projective line pullback Tate twist shift two preserves the uniform intervals",
+   "results": "8 actual hits; DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Triangulated.TStructure.isGE_of_shift, CategoryTheory.Triangulated.TStructure.isLE_of_shift, CategoryTheory.Triangulated.TStructure.isGE_shift_iff, CategoryTheory.Triangulated.TStructure.isGE_shift, CategoryTheory.Triangulated.TStructure.isLE_shift_iff, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: the hits are general evaluation, t-structure, or ring-theoretic results, not this tower assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "towerP1_uniform|realization.*[Ee]val|isGE.*[Ee]valuation",
+   "results": "0 actual hits; ",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: the hits are general evaluation, t-structure, or ring-theoretic results, not this tower assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerP1UniformCtfDomains",
+  "date": "2026-10-25",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Step 2: bounded-below etale origins for uniform towers; source of the expanded standing-setting restriction in lem-sp-tower-p1-uniform-ctf-domains",
+   "via": [
+    "lem-sp-tower-p1-uniform-ctf-domains"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerUniformEtaleDomains",
+  "file": "lean/Sheaf/Paper/TowerUniformEtaleDomains.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1Uniform.uniformTower_etale_domains",
+  "statement": "theorem uniformTower_etale_domains (base : SpTowerShriek.Base l E) (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T) (K : spDerivedCoefficientTowers l E T D) (hK : spConstructibleTorTowers l E T D K) : (∃ a : ℤ, DerivedCategory.IsGE ((spTowerShriekRealization l E base T D).functor.obj K) a) ∧ ∀ n : ℕ, Nonempty (SpTowerShriek.Origin l E base T n ((spTowerShriekRealization l E base T D).functor.obj K))",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-32960",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T161756-L-102813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-32960",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T161756-L-102813",
+  "kind": "interface",
+  "note": "independent cc review: delivered TowerP1UniformCtfDomains + 4 new modules/nodes against clone f0d376f: theorem stmt byte-identical, 6 defs verbatim in TowerP1CtfData with public re-export and change record, 3 sorried steps against original conjuncts and finiteRing_constructibleDerived_origin/Origin/Base definitions"
+ }
+}

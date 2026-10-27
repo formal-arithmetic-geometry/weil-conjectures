@@ -1,0 +1,123 @@
+{
+ "id": "lem-pbc-canonical-tensor-representative-normalization",
+ "kind": "statement",
+ "title": "Normalization and naturality equations for the specified tensor representatives",
+ "statement": "Let f:X→Y be a scheme morphism, R,S commutative ring sheaves on the small pro-etale sites and c:f^{-1}R≅S [def-weil-pbc-proetale-operations]. Let a,b be the given tensor models [def-sfb-proetale-tensor-model] and alpha the selected canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For flat K-flat P,Q, there are proofs that CP,CQ remain flat K-flat such that DC(r_a(P,Q));alpha(QP,QQ);b.tensor(e_C(P),e_C(Q))=e_C(Tot(P,Q));Q(t_C(P,Q).inv);r_b(CP,CQ), where C is termwise geometric module pullback, DC its exact derived functor, e_C the specified factorization, t_C the ordinary signed-total comparison [def-sp-proetale-ordinary-tensor-pullback-total], and Tot the actual uncurried signed-total functor. Also, for any tensor model a and chain maps v:P→P′,w:Q→Q′ between flat K-flat endpoints, r_a(P,Q);a.tensor(Qv,Qw)=Q(Tot(v,w));r_a(P′,Q′). These are equations for the already supplied comparisons, not new choices of them.",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E, normalized geometric tensor pullback on flat K-flat representatives and naturality of the tensor representative."
+ },
+ "proof": [
+  {
+   "text": "The existing canonical tensor comparison is defined by choosing the unique natural isomorphism of proEtaleCanonicalTensorPullback. Its choice specification at P,Q gives the required witnesses and equation. Express its total-complex source using the uncurried total functor and its localized map as Q.map of the inverse. This changes no data.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For naturality, regard v and w as morphisms in the full subcategory of flat K-flat complexes, using the endpoint proofs. Apply naturality of the supplied representative natural isomorphism to their product and reverse the equation. The two functors evaluate as the stated Q(Tot(v,w)) and derived tensor map. This works for zero endpoints as well.",
+   "uses": [
+    "def-sfb-proetale-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sfb-proetale-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E, normalized geometric tensor pullback on flat K-flat representatives and naturality of the tensor representative."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits, including the exact naturality theorem. Use it for the representative naturality equation.",
+   "date": "2026-10-27",
+   "verdict": "used NatTrans.naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor pullback comparison is normalized on flat K-flat representatives",
+   "results": "Eight tensor-flatness and equalizer results, including tensorEqLocusEquiv, Module.Flat.ker_lTensor_eq and ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat. No specialized tensor-model normalization theorem. The project already supplies the canonical comparison and its unique specification.",
+   "date": "2026-10-27",
+   "verdict": "use project canonical comparison specification"
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleCanonicalTensorComparison|representative.*naturality",
+   "results": "No Mathlib hits. Project source places proEtaleCanonicalTensorComparison immediately after its unique-specification theorem. The consumer was repeatedly unfolding this definition to recover the equation.",
+   "date": "2026-10-27",
+   "verdict": "provide proved normalization API for existing data"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCoefficientTensorChainData",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "The two geometric representative normalization equations and naturality of the target representative in the coefficient tensor representative-square calculation; these APIs isolate existing definition unfolding after profiling the direct consumer.",
+   "via": [
+    "lem-pbc-coefficient-restriction-tensor-representative-square",
+    "lem-pbc-coefficient-restriction-tensor-comparison-compatibility",
+    "lem-pbc-coefficient-restriction-tensor-comparison",
+    "lem-pbc-completed-tensor-projection-coefficient-transport",
+    "lem-pbc-completed-scalar-projection-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleTensorRepresentativeNormalization",
+  "file": "lean/Sheaf/Paper/ProEtaleTensorRepresentativeNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientTensorTransport.canonical_tensor_representative",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CoefficientTensorTransport.canonical_tensor_representative",
+   "AlgebraicGeometry.Scheme.CoefficientTensorTransport.tensor_representative_naturality"
+  ],
+  "statement": "theorem canonical_tensor_representative {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)\n    (P Q : CochainComplex (proEtaleRingModules Y R) ℤ)\n    (hp : proEtaleFlatRepresentatives Y R P) (hq : proEtaleFlatRepresentatives Y R Q) :\n    ∃ (hp' : proEtaleFlatRepresentatives X S\n        (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj P))\n      (hq' : proEtaleFlatRepresentatives X S\n        (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj Q)),\n      (proEtaleRingDerivedPullback f R S c).map\n          (a.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫\n        (proEtaleCanonicalTensorComparison f R S c a b).hom.app\n          (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n        b.tensor.map (Prod.mkHom\n          ((proEtaleRingDerivedPullbackFactors f R S c).hom.app P)\n          ((proEtaleRingDerivedPullbackFactors f R S c).hom.app Q)) =\n      (proEtaleRingDerivedPullbackFactors f R S c).hom.app\n          ((CoefficientTensorChain.total Y R).obj (P, Q)) ≫\n        DerivedCategory.Q.map (proEtaleTensorPullbackTotalIso f R S c P Q).inv ≫\n        b.representative.hom.app (⟨_, hp'⟩, ⟨_, hq'⟩)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "independent cc review: restriction_tensor_chain_square proof (ordinary_square + tensorTotalComparisonSquare + tensorIso_summand) against item node and RingIsoTensorTransport fields; relocated tensorIso/tensorIso_naturality diffed verbatim vs clone and publicly re-exported; adapted RepresentativeSquare proof-only (unclaimed); 3b importer Compatibility OK"
+ }
+}

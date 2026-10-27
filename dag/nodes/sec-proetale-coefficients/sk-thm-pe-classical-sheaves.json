@@ -157,7 +157,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-eecff9d9c (reviewer sub-agent of L); spot-checked: I read the item in full, all ten cited statements, the blueprint main-20261015 unit with its three detailed statement/proof files and the comparison-unit sources, Stacks proetale.tex 0GLZ/099T/099S (tags checked) and Bhatt–Scholze pp. 34–35 (5.1.1–5.1.3). The statement agrees with the blueprint and with Bhatt–Scholze 5.1.2: X is arbitrary and Λ is discrete commutative. Nothing is weakened, no hypothesis is added, and the coefficients are the pulled-back constant Λ_X throughout. Step 1 takes full faithfulness from the Hom bijection stated by det-pe-classical-sheaves-unit. Step 2 takes the essential image from conditions (1)–(3) of det-pe-classical-sheaves-image; both classicality definitions use the same restriction-induced map c over I^op. Step 3 takes the adjunction and the equivalence for arbitrary Λ from det-pe-classical-sheaves-modules. Its finite/infinite exactness case split is redundant but correct, and it reproduces the comparison-unit proof's citation of prop-weil-pbc-site-comparison-finite-level. That citation is the only way the item reaches every carrier of the cited unit sk-prop-pe-comparison-morphism. There are no new nodes and no cycles, proof_deps equals the union of uses, and no SGA source is cited. Edge cases checked: empty X, Λ=0, Λ=Z, one-object presentations. One repairable fault: prop-weil-pbc-site-comparison-finite-level belongs to unit sk-thm-properbasechange, which is outside the item's route, and the delivery did not declare it in split_report.tool_uses. Without that entry the merge does not copy it into tool_uses and check_dag flags it once the item is reviewed. Fix: fixes/dag/nodes/sec-proetale-coefficients/sk-thm-pe-classical-sheaves.json adds only that split_report.tool_uses entry. Accepted tool use: prop-weil-pbc-site-comparison-finite-level, exactness clause, finite-Λ branch of step 3.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
@@ -186,5 +197,24 @@
   "landing": "20261019T005304-L-2748777",
   "kind": "interface",
   "note": "independent cc review: delivered ProEtaleClassicalSheaves.lean vs live clone (identical theorem signature, imports re-exported by ClassicalDerivedDefinitions) + node vs live node (proof/proof_deps/proof_origin/tool_uses only) + unit realized (empty) + 6 direct importers compiled against the delivery"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "The functor $\\nu_X^*$ is fully faithful. Its essential image is exactly the\nclassical sheaves of [sk-def-pe-classical-definition]. For modules it is an\nexact equivalence between $\\Mod(X_{\\Et},\\Lambda)$ and the full subcategory of\nclassical $\\Lambda_X$-module sheaves on $X_{\\Proet}$.",
+  "proof": [
+   {
+    "text": "Evaluation on étale objects gives $F\\xrightarrow{\\sim}\\nu_{X,*}\\nu_X^*F$ in\n$\\Sh(X_{\\Et})$, hence full faithfulness ([det-pe-classical-sheaves-unit]), and\nevery $\\nu_X^*F$ is classical by the affine evaluation formula of\n[sk-prop-pe-comparison-morphism]. Conversely, let $G$ be classical. On a\npro-étale affine the counit $\\nu_X^*\\nu_{X,*}G\\to G$ of sheaves on $X_{\\Proet}$\nis\n\n$$\n(\\nu_X^*\\nu_{X,*}G)(U)=\\varinjlim_iG(U_i)\\longrightarrow G(U),\n$$\n\nwhich is an isomorphism because $G$ is classical. Since pro-étale affines form a\ncovering basis ([sk-prop-pe-affine-basis]), the counit is an isomorphism of sheaves. The module statement follows because\n$\\nu_X^*$ is exact and both adjoint functors preserve module structures\n([det-pe-classical-sheaves-modules]).",
+    "uses": [
+     "det-pe-classical-sheaves-unit",
+     "det-pe-classical-sheaves-modules"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

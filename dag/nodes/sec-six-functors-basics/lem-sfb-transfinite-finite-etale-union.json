@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-transfinite-finite-etale-union",
+ "kind": "statement",
+ "title": "Continuous transfinite finite etale towers are directed unions of finite etale subalgebras",
+ "statement": "Let $\\theta$ be a set-sized ordinal, and let $(A_\\alpha)_{\\alpha\\leq\\theta}$ be a coherent system of commutative rings with injective transition maps $A_\\alpha\\to A_\\beta$ for $\\alpha\\leq\\beta\\leq\\theta$. Put $R=A_0$. Assume that each successor map $A_\\alpha\\to A_{\\alpha+1}$, $\\alpha<\\theta$, is finite etale: its target is a finitely generated module over its source, and the induced map of affine spectra is etale [def-weil-etale-morphism]. Assume also that for every nonzero limit ordinal $\\lambda\\leq\\theta$ the canonical cocone exhibits $A_\\lambda$ as $\\varinjlim_{\\alpha<\\lambda}A_\\alpha$ in commutative rings [def-weil-pbc-category-colimit]. Then every finite subset of $A_\\theta$ is contained in an $R$-subalgebra $B\\subseteq A_\\theta$ which is finite etale over $R$. In particular the set of all such subalgebras, ordered by inclusion, is nonempty and directed and has union $A_\\theta$. An $R$-subalgebra here means a subring containing the image of $R$; all rings and maps are unital. No locality or residue-field hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, transfinite induction starting \"We will prove the result by transfinite induction\": the finite-etale tower argument before imposing the prescribed residue field."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Identify the stages with their images in $A_\\theta$ using the injective coherent transition maps; these are nested subrings, and this identification preserves the specified colimit cocones. By transfinite induction on $\\alpha\\leq\\theta$, prove $P(\\alpha)$: every finite subset of $A_\\alpha$ lies in a finite etale $R$-subalgebra of $A_\\alpha$. For $\\alpha=0$, take $R$ itself, generated as an $R$-module by $1$; its spectrum identity is an open immersion and hence etale by clause (1) of [lem-weil-pbc-etale-composition-cancellation]. This also covers the empty subset and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, transfinite induction; general finite-etale tower argument."
+   }
+  },
+  {
+   "text": "For the successor step, assume $P(\\alpha)$ and put $A=A_\\alpha$, $S=A_{\\alpha+1}$. Let $I$ be the set of finite etale $R$-subalgebras of $A$, ordered by inclusion. It contains $R$. Given $B,B'\\in I$, choose finite $R$-module generating sets for both. Apply $P(\\alpha)$ to their union to obtain $B''\\in I$ containing both subalgebras: an $R$-subalgebra containing the module generators contains all their $R$-linear combinations. Thus $I$ is directed and its union is $A$, by $P(\\alpha)$ on singletons. This union is also a colimit in commutative rings [def-weil-pbc-category-colimit]: compatible maps out of the $B\\in I$ define a map on $A$ by evaluation in any containing subalgebra. Directedness makes that evaluation independent of the choice and allows checking addition, multiplication and the unit in one common subalgebra; uniqueness follows since the union is $A$. The index is a set of subsets of $A$, hence small after choosing a common universe.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, transfinite induction; general finite-etale tower argument."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-algebra-filtered-colimit-descent] to the directed colimit $A=\\varinjlim_{B\\in I}B$ and the etale map $A\\to S$. It gives $B_i\\in I$, an etale $B_i$-algebra $C_i$, and an $A$-algebra isomorphism $e_i:A\\otimes_{B_i}C_i\\xrightarrow{\\sim}S$. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], $C_i$ is finitely presented, hence finitely generated as a $B_i$-algebra. Apply [lem-weil-pbc-colimit-finite-ring-map] to the diagram $(B)_{B\\in I}$, distinguished index $i$, and the map $B_i\\to C_i$ (its two stage algebras are $B_i$ and $C_i$). Its limit map is $A\\to S$ and is finite by hypothesis, so there is $j\\geq i$ such that $C_j=B_j\\otimes_{B_i}C_i$ is finite over $B_j$. It is etale by [lem-weil-pbc-etale-ring-base-change]. Replace $(B_i,C_i,e_i)$ by $(B_j,C_j,e_j)$. Here the new identification is explicitly $e_j(a\\otimes(b\\otimes c))=e_i(ab\\otimes c)$, with inverse on the tensor factors $a\\otimes c\\mapsto a\\otimes(1\\otimes c)$; these respect the balanced relations and are inverse ring maps. We now have $C_i$ finite etale over $B_i$ and $e_i:A\\otimes_{B_i}C_i\\cong S$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-colimit-finite-ring-map",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, transfinite induction; general finite-etale tower argument."
+   }
+  },
+  {
+   "text": "Let $E\\subseteq S$ be finite. Express each $e_i^{-1}(x)$, $x\\in E$, as a finite sum $\\sum_\\nu a_{x,\\nu}\\otimes c_{x,\\nu}$. There are finitely many coefficients $a_{x,\\nu}\\in A$. By $P(\\alpha)$ they lie in an element of $I$; by directedness choose $k\\geq i$ whose subalgebra $B_k$ contains them all. Put $D=B_k\\otimes_{B_i}C_i$. The ring map $h:D\\to S$ given by $h(b\\otimes c)=e_i(b\\otimes c)$ is the map induced by $B_k\\hookrightarrow A$ on the first tensor factor, followed by $e_i$; the tensor-product ring structure and map are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. By the displayed finite sums, $E\\subseteq h(D)$. In particular, no assertion that the image of an arbitrary finite etale algebra is finite etale is being used.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, transfinite induction; general finite-etale tower argument."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-ring-base-change], $D$ is etale over $B_k$. If $c_1,\\ldots,c_n$ generate $C_i$ over $B_i$, then $1\\otimes c_1,\\ldots,1\\otimes c_n$ generate $D$ over $B_k$, since every pure tensor expands using those generators. Hence $D$ is finite over $B_k$, and [lem-weil-pbc-finite-module-over-finite-algebra] makes it finite over $R$, since $B_k\\in I$. Clause (2) of [lem-weil-pbc-etale-composition-cancellation] makes $D$ etale over $R$. Finally $C_i$ is flat over $B_i$ by [lem-weil-pbc-etale-algebra-flat]. Apply [lem-trf-flat-tensor-preserves-injection] to the injective $B_i$-linear map $B_k\\hookrightarrow A$ and the flat module $C_i$; exchange the two tensor factors if needed. It follows that $D\\to A\\otimes_{B_i}C_i$, and therefore $h$, is injective. Thus $h$ identifies $D$ with a finite etale $R$-subalgebra $h(D)\\subseteq S$ containing $E$. This proves $P(\\alpha+1)$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-finite-module-over-finite-algebra",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, transfinite induction; general finite-etale tower argument."
+   }
+  },
+  {
+   "text": "For a nonzero limit $\\lambda\\leq\\theta$, assume $P(\\beta)$ for all $\\beta<\\lambda$. The poset of ordinals $\\beta<\\lambda$ is nonempty and directed. By the assumed colimit cocone and clause (1) of [lem-pc-filtered-colimit-commrings-elementwise], every element of a finite $E\\subseteq A_\\lambda$ comes from a stage $A_{\\beta_x}$ with $\\beta_x<\\lambda$. Choose $\\beta<\\lambda$ bounding the finitely many $\\beta_x$; if $E$ is empty, choose $\\beta=0$. Coherence puts all representatives in $A_\\beta$. Apply $P(\\beta)$ there, then use the injective transition $A_\\beta\\hookrightarrow A_\\lambda$ to view its finite etale $R$-subalgebra as a subalgebra of $A_\\lambda$ containing $E$. Its ring and $R$-algebra structure are unchanged by this injective identification. This proves $P(\\lambda)$ and completes the induction.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, transfinite induction; general finite-etale tower argument."
+   }
+  },
+  {
+   "text": "Apply $P(\\theta)$. The set of finite etale $R$-subalgebras of $A_\\theta$ is nonempty (it contains the image of $R$), its union is $A_\\theta$ by the singleton case, and it is directed by the finite-module-generator argument of step 2 with $\\alpha=\\theta$. This is the asserted finite-subset statement and all three concluding properties.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, transfinite induction; general finite-etale tower argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-colimit-finite-ring-map",
+  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-finite-module-over-finite-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), proof, transfinite induction; general finite-etale tower argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous transfinite tower of injective finite etale ring extensions has colimit a directed union of finite etale subalgebras over its first ring",
+   "results": "{\"t\": \"2026-10-24T09:04:53Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous transfinite tower of injective finite etale ring extensions has colimit a directed union of finite etale subalgebras over its first ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.instForallOfFinite\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"Algebra.Etale.comp\", \"Algebra.Etale.finitePresentation\", \"RingHom.Etale.stableUnderComposition\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.FormallyEtale.pi_iff\"], \"digest\": \"f854a21cc486f8d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: composition, directed unions and finitely generated coefficient descent do not state closure of a continuous transfinite finite-etale tower as a directed union of finite-etale subalgebras."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ee]tale.*(transfinite|DirectLimit|iSup)|transfinite.*[Ee]tale)",
+   "results": "{\"t\": \"2026-10-24T09:05:49Z\", \"tool\": \"grep\", \"query\": \"([Ee]tale.*(transfinite|DirectLimit|iSup)|transfinite.*[Ee]tale)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: composition, directed unions and finitely generated coefficient descent do not state closure of a continuous transfinite finite-etale tower as a directed union of finite-etale subalgebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transfinite compositions of injective finite etale ring maps are directed unions of finite etale subalgebras",
+   "results": "{\"t\": \"2026-10-24T09:05:50Z\", \"tool\": \"leansearch\", \"query\": \"Transfinite compositions of injective finite etale ring maps are directed unions of finite etale subalgebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.coe_iSup_of_directed\", \"Algebra.Etale.comp\", \"RingHom.Etale.stableUnderComposition\", \"CategoryTheory.TransfiniteCompositionOfShape.iic\", \"Subalgebra.iSupLift\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.transfiniteCompositionOfShapeMapFromBot\", \"CategoryTheory.MorphismProperty.TransfiniteCompositionOfShape.iic\"], \"digest\": \"c8c3c6e8984facfc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: composition, directed unions and finitely generated coefficient descent do not state closure of a continuous transfinite finite-etale tower as a directed union of finite-etale subalgebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, DirectLimit",
+   "results": "{\"t\": \"2026-10-24T09:05:50Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, DirectLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: composition, directed unions and finitely generated coefficient descent do not state closure of a continuous transfinite finite-etale tower as a directed union of finite-etale subalgebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ind finite etale algebras are closed under well ordered continuous compositions of finite etale algebra extensions",
+   "results": "{\"t\": \"2026-10-24T09:05:52Z\", \"tool\": \"leanfinder\", \"query\": \"Ind finite etale algebras are closed under well ordered continuous compositions of finite etale algebra extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.stableUnderComposition\", \"Algebra.Etale.comp\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.FormallyEtale.comp\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.finitePresentation\", \"Algebra.FormallyEtale.pi_iff\"], \"digest\": \"da719bdf6d7334c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: composition, directed unions and finitely generated coefficient descent do not state closure of a continuous transfinite finite-etale tower as a directed union of finite-etale subalgebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous transfinite tower of injective finite etale ring maps is a directed union of finite etale subalgebras over the initial ring",
+   "results": "{\"t\": \"2026-10-24T09:37:43Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous transfinite tower of injective finite etale ring maps is a directed union of finite etale subalgebras over the initial ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.Etale.comp\", \"Field.Emb.Cardinal.directed_filtration\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.pi_iff\", \"Algebra.Etale.finitePresentation\", \"RingHom.Etale.stableUnderComposition\"], \"digest\": \"9926ae0b9be40212\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale composition, finite presentation and descent to a finitely generated coefficient subalgebra do not state the continuous transfinite finite-subset assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transfinite finite etale extensions every finite subset contained in finite etale subalgebra",
+   "results": "{\"t\": \"2026-10-24T09:37:43Z\", \"tool\": \"leansearch\", \"query\": \"Transfinite finite etale extensions every finite subset contained in finite etale subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"IntermediateField.Lifts.IsExtendible\", \"finiteExts\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"FiniteGaloisIntermediateField.subset_adjoin\", \"Algebra.Etale.finitePresentation\", \"Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"fa22c75630adcd5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale composition, finite presentation and descent to a finitely generated coefficient subalgebra do not state the continuous transfinite finite-subset assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, DirectLimit",
+   "results": "{\"t\": \"2026-10-24T09:37:44Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, DirectLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale composition, finite presentation and descent to a finitely generated coefficient subalgebra do not state the continuous transfinite finite-subset assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ee]tale.*transfinite|transfinite.*[Ee]tale|[Ee]tale.*[Dd]irectLimit)",
+   "results": "{\"t\": \"2026-10-24T09:37:44Z\", \"tool\": \"grep\", \"query\": \"([Ee]tale.*transfinite|transfinite.*[Ee]tale|[Ee]tale.*[Dd]irectLimit)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale composition, finite presentation and descent to a finitely generated coefficient subalgebra do not state the continuous transfinite finite-subset assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-separable-residue-ind-finite-etale",
+  "date": "2026-10-24",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Strict residue and completion reduction in the proof of Epp. Strict residue extension before completion: the general 09ET input, including preservation of the lower uniformizer. Supporting input: 09ET first paragraph (09E0 construction) and second paragraph (04GT compatible maps). General algebraic input: the transfinite-induction argument in the proof of Stacks 09E0, independent of residue fields.",
+   "via": [
+    "lem-sfb-local-separable-residue-ind-finite-etale",
+    "lem-sfb-dvr-strict-residue-square",
+    "lem-sfb-epp-strict-complete-reduction",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-transfinite-finite-etale-union",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 09E0 transfinite induction using only existing nodes: etale model descent plus eventual finiteness, finite tensor coefficients, flatness to embed the model, and finite-subset capture at limits. Proved directedness from module generators; no new nodes or statement changes.",
+  "blueprint": "Historical supporting algebra input through the creation chain recorded in blueprint.from; latest det-thm-sf-ctf-stability-direct-images proof (3) does not state this auxiliary theorem. The split realizes the full transfinite-induction paragraph of Stacks 09E0 below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-filtered-colimit-commrings-elementwise",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   },
+   {
+    "node": "lem-trf-flat-tensor-preserves-injection",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-finite-ring-map",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-flat",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-over-finite-algebra",
+    "why": "Generic algebra/category tool used with exactly its stated hypotheses in the Stacks 09E0 induction; it does not replace any unit-level six-functor argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-colimit-finite-ring-map",
+  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-finite-module-over-finite-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-af1486467",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-af1486467 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery creates no new nodes and leaves the statement unchanged. Source: Stacks algebra.tex Tag 09E0 (lemma-colimit-finite-etale-given-residue-field), the transfinite-induction paragraphs. The item drops the local/residue-field setting and the statement is true; small cases checked: θ=0, finite towers, θ=ω, the zero ring, non-connected R. All seven steps follow from the statements of the cited nodes with their hypotheses met. Step 1 sets up the induction with its base case (identity = open immersion, so étale). Step 2 gets directedness from finite module generators and a directed-union colimit. Step 3 uses 00U2(9) descent, then finite presentation, then 07RG with A_0=B_0=B_i and C_0=C_i, giving a finite model that stays étale under base change. Step 4 captures the coefficients in some B_k and builds h with the tensor-pushout lemma. Step 5 shows D is finite étale over R and that h is injective, by flatness of C_i over B_i and B_k↪A. Step 6 captures finite subsets at limits through the elementwise colimit lemma and a finite max <λ. proof_deps equal the union of the uses, and the elementary flags are right. Batch-5 flag: lem-trf-flat-tensor-preserves-injection is a Mathlib leaf (Module.Flat.lTensor_preserves_injective_linearMap) with no deps; it is a general flatness fact outside both the trace formula and Poincaré duality, so the citation is accepted. The worker wrote tool_uses itself, contrary to delivery-errors C8; I accept them as generic algebra tools used as black boxes (8 Mathlib leaves plus 00U2(9) descent and 07RG). No duplicate in the DAG: lem-sfb-finite-etale-subalgebra-directed-union needs a field base, lem-weil-pbc-finite-etale-algebra-stage needs a Noetherian/proper setup. No fixes."
+ }
+}

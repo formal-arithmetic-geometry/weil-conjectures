@@ -1,0 +1,45 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-exact-adjoint-zero-kernel-equivalence.json`: statement; split by the Stacks 09J1 cone argument. The item is not a Mathlib leaf. No new nodes.
+- `citations.json`: one verbatim statement excerpt for each step/node citation; the definition quote includes both TR1 and exactness.
+- `searches.jsonl`: five fresh queries executed by the prescribed msearch command, with their actual successful responses.
+
+Attachments: none. Searches of `lean/WeilConjectures/` by the exact blueprint tag and by fully faithful, adjoint, zero kernel and equivalence found no declaration giving the item. The hits concern specific sheaf functors or other adjunctions, not this general criterion. No existing Lean proof has been claimed as finished.
+
+WANTED: none. All sources used are present in the read clone.
+
+The statement agrees with Stacks Tag 09J1 (`derived-lemma-fully-faithful-adjoint-kernel-zero`, `literature/stacks-project/derived.tex:2373`), including exactness of both functors and the direction of the zero-kernel condition. The explicit conclusion about both specified adjunction maps follows from its proof. No statement correction or dispute is needed. The imported node had no proof. I filled the argument behind the source's shorthand identification GFG(Y)=G(Y): the actual first arrow is G(counit), and its inverse is the unit at G(Y), by the right triangle identity. No equality of objects or identity first arrow is assumed.
+
+The blueprint ancestor command returns None for the inherited created-node lineage. I preserved that metadata and the already specific `from.place`, rather than invent a different parent. I read the latest blueprint file `sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md`, especially (3). The recorded lineage traces the tool through projective-space tilting and Stacks 0BQU to that direct-image clause. This is an internal categorical prerequisite, not a replacement for a unit step. The unit and chapter records were read and left alone; this item is not their key statement.
+
+Nothing remains unfinished in the requested one-level split. There is no Lean writing or compilation.
+
+## New nodes
+
+None: both non-elementary inputs already exist as Mathlib leaves. The item's proof uses `lem-sp-adjunction-unit-fully-faithful-left` and `lem-kun-distinguished-cone-zero`, plus `def-weil-triangulated-category` for the axioms and exactness.
+
+## Searches and duplicate checks
+
+Whole-DAG searches by 09J1, fully faithful adjoint/unit, distinguished cone zero, and the corresponding statement/title concepts found the two reusable leaves. Whole-blueprint searches using `tools/blueprint_refs.py search` for `fully faithful adjoint`, `fully faithful`, and `09J1` found no blueprint node stating this criterion; the fully faithful results concern special sheaf inclusions, site comparisons, or Karoubi embeddings. The item's `same_as` remains empty. No new fact was introduced, so there are no new/existing same-tag pairs requiring a Not duplicates comparison.
+
+The five fresh searches are recorded verbatim in the item's appended `mathlib_searches` and in `searches.jsonl`: LeanFinder with the exact triangulated criterion, grep over `CategoryTheory/Triangulated`, Loogle for IsTriangulated and IsEquivalence, LeanSearch with the zero-kernel phrasing, and a second LeanFinder phrasing using a conservative right adjoint. All five services answered successfully. I retained the five inherited Q35 records as historical data; I do not claim to have executed those inherited queries.
+
+LeanFinder and LeanSearch returned triangulated-adjunction and equivalence-structure results; those require or provide different hypotheses and do not establish the zero-kernel criterion. The second phrasing returned `Adjunction.toEquivalence` and theorems assuming one functor already is an equivalence; the former assumes invertibility of both adjunction maps, which is the substantive work here. The grep found `Triangle.isZero₃_iff_isIso₁`, read in `Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:388-391`, already carried by `lem-kun-distinguished-cone-zero`. I also read `Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean:69-76`, where `Adjunction.unit_isIso_of_L_fully_faithful` at line 75 states exactly the existing unit leaf, and the nearby mapped-counit instance at lines 198-200 confirms the elementary triangle-identity calculation. No candidate gives the entire item by a one-line specialization.
+
+## Review by Q105
+
+I read Stacks 09J1's full statement and proof, Stacks 07RB (`categories-lemma-adjoint-fully-faithful`, especially (1) and its proof), and Stacks 05QR (`derived-lemma-third-object-zero`, all three equivalent conditions and the proof). Their labels and tags were checked against the local tags table. These are the sources for the item and its two existing lemma inputs; there are no new-node sources to certify. No SGA source is used.
+
+Step 1 opens and cites the statement of `lem-sp-adjunction-unit-fully-faithful-left`. It gives an invertible unit for a specified adjunction with fully faithful left functor, exactly the hypotheses here, and concludes a natural isomorphism, not merely an unspecified isomorphism of composites. I checked the Mathlib instance at FullyFaithful.lean:75 and the full/faithful component instance directly above it. No extra assumption on G is used.
+
+Step 2 uses only the item hypotheses, step 1, and the statement of `def-weil-triangulated-category`. That statement really includes completion of any arrow to a distinguished triangle (TR1) and preservation of distinguished triangles by an exact functor with its shift comparison. Applying those definitions constructs the counit triangle and its G-image. The displayed right triangle identity makes G(counit) the inverse of the already invertible unit; this is elementary cancellation, with no appeal to conservativity or an unproved general reflection theorem. In particular, the fourth vertex is transported by G's shift comparison, not identified by an unsupported equality.
+
+Step 3 opens and cites `lem-kun-distinguished-cone-zero`, whose statement is the iff between invertibility of the first arrow of any distinguished triangle and its third object being zero. The first application is in D to the distinguished G-image with the first arrow just proved invertible; the second is in D' to the original triangle. Between them I apply exactly the given objectwise implication G(C)=0 implies C=0. Both categories are triangulated and therefore satisfy the pretriangulated hypotheses of the leaf. Neither compactness, generation nor essential surjectivity is assumed. This matches precisely the two directions of 05QR and of the Mathlib iff.
+
+Step 4 is elementary: the inverse naturality equation is derived explicitly by multiplying the counit naturality equation by the component inverses on the two sides. The unit was already a natural isomorphism by step 1. Those two specified natural isomorphisms give the requested quasi-inverse data, so no clause is lost when the source says only that F is an equivalence.
+
+For delivery-errors B1-B8, no unsplit helper with an embedded proof, unintroduced object or unsearched claim was created; the existing item's self-contained statement and statement dependency are preserved. The proof is TeX with single mathematical backslashes after JSON decoding. The existing two Mathlib leaves are reused with the declaration/file/line read rather than duplicated. B9-B10 were checked by the blueprint and project searches above. For C1-C8, every non-elementary inference is supplied by the exact cited statement, quotations were copied verbatim into citations.json, and the only definition citation is used for the axioms it actually states. All three dependencies are Mathlib leaves (or the existing Mathlib definition), usable as general tools across units without changing a unit route. There is no new off-unit theorem. For D1-D5, the proof itself carries the cone argument, rather than handing the conclusion to a renamed lemma. For E1-E7, the direction of adjunction, full faithfulness, exactness and zero detection were checked at their uses. No two distinct coefficient categories or objects are identified.
+
+I tested the zero-category case: every component is the unique zero-object isomorphism and the same argument works. For the identity adjunction on a nonzero triangulated category, the cone of the counit is zero and the proof gives the identity. To check the necessity/direction of zero detection, the inclusion D into D×E with right adjoint the first projection is fully faithful and exact but is not an equivalence when E is nonzero; the excluded object (0,E) is exactly the nonzero cone possibility step 3 forbids. Nothing requires small index categories, finite sums or any boundedness. No proof step exceeds 2000 characters. The substantive correction to the source's compressed exposition is the explicit mapped-counit inverse calculation; the mathematical statement is unchanged.

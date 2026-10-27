@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-inertia-free-finite-cover-coarse",
+ "kind": "statement",
+ "title": "Inertia-free finite stack covers are finite over the coarse scheme",
+ "statement": "Let $k$ be a field. Let $\\mathcal X$ be a finite-type Deligne--Mumford stack over $k$ with finite diagonal and with a coarse moduli scheme $q:\\mathcal X\\to Q$. Use the meanings of stack, algebraic space, coarse moduli scheme and 2-fibre product spelled out in [def-sfb-stable-pointed-moduli-groupoids]. Let $\\nu:\\mathcal Y\\to\\mathcal X$ be a representable finite morphism of stacks; representable finite means that for every scheme $T\\to\\mathcal X$ the 2-fibre product $\\mathcal Y\\times_{\\mathcal X}T$ is a scheme finite over $T$. Suppose that every object of $\\mathcal Y$ over every algebraically closed field extension of $k$ has trivial automorphism group. Then $\\mathcal Y$ is represented by an algebraic space and the composite $q\\nu:\\mathcal Y\\to Q$ is finite. Consequently $\\mathcal Y$ is represented by a $k$-scheme finite over $Q$. No condition of linear reductivity on the geometric stabilizers of $\\mathcal X$ is required. Fields, schemes, finite type and finite morphisms use [def-weil-field], [def-pc-scheme], [def-weil-finite-type-morphism] and [def-weil-finite-integral-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUT (theorem-keel-mori): separated universal-homeomorphism coarse morphism and its etale-local construction; Tag 045H in algebraic.tex (lemma-algebraic-stack-no-automorphisms): trivial-inertia Deligne--Mumford stacks are algebraic spaces. Finite representable cover consequence and finite algebraic spaces over schemes, as used in Pikaart--de Jong Section 2.3.5 and Remark 2.3.7; agent-formulated consequence, not a verbatim Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-sfb-finite-stack-scheme-tests"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-representable-finite-stack-properties] to $\\nu$. Its scheme-test finiteness is exactly the representable finite hypothesis in the item, and its target is Deligne--Mumford. Thus $\\mathcal Y$ is Deligne--Mumford over $k$, and $\\nu$ is proper and locally quasi-finite as a stack morphism.",
+   "uses": [
+    "lem-sfb-representable-finite-stack-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UM; stacks-morphisms.tex Tags 050E, 050L, 06N3; spaces-morphisms.tex Tags 04NZ, 04NY."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dm-geometric-inertia-trivial] over $S=\\operatorname{Spec}k$ to the Deligne--Mumford stack $\\mathcal Y$ from step 1. Every geometric point over this base is an algebraically closed field extension of $k$, so the hypothesis is exactly the assumed triviality of every geometric automorphism group. Obtain an equivalence $\\mathcal Y\\simeq E$ with an algebraic space $E/k$, as discrete stacks. This also removes automorphisms over nonreduced test schemes, not merely at geometric points. In Lean, first turn a fibre endomorphism into an isomorphism: the stack is fibred in groupoids, hence its vertical arrows are invertible. Apply the geometric automorphism hypothesis to this isomorphism and take its hom.",
+   "uses": [
+    "lem-sfb-dm-geometric-inertia-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tags 045H and 04SZ; geometric-stabilizer DM corollary recorded in the cited node."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dm-coarse-proper-locally-quasifinite] to $q:\\mathcal X\\to Q$. The hypotheses are precisely finite type over the field, Deligne--Mumford, finite diagonal, and the given coarse moduli scheme. Hence $q$ is proper and locally quasi-finite. No assertion that the coarse morphism is representable or finite is made here.",
+   "uses": [
+    "lem-sfb-dm-coarse-proper-locally-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT, combined with stacks-morphisms.tex Tags 06U9, 06PU and 0CL5, as in the cited consequence."
+   }
+  },
+  {
+   "text": "The scheme Q is a DM stack. Its discrete moduli category is fibred in groupoids by the explicit cartesian lifts in the category of elements. Mathlib subcanonicity of Scheme.etaleTopology.over S gives colimits of covering sieves, and their universal property glues the compatible maps to Q. Its diagonal tests are ordinary scheme pullbacks, and the identity atlas has etale surjective projections by [lem-trf-space-representable-etale-scheme-tests]; scheme objects are algebraic spaces by [def-trf-scheme-algebraic-space]. Compose the proper locally quasi-finite maps using [lem-sfb-stack-proper-locally-quasifinite-composition]. To transfer the result to E, construct an actual based quasi-inverse to the equivalence h_E → Y by transporting its ordinary quasi-inverse along the counit-induced base isomorphism. A based functor between discrete moduli categories uniquely comes from a presheaf map, by the tautological Yoneda colimit. The equivalence invariance and discrete-space compatibility in the composition node then give properness, the closed-immersion relative diagonal, and local quasi-finiteness of every etale scheme chart of E over Q.",
+   "uses": [
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-scheme-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0CL7, 06UD, 04YS, 06UA; representable compatibility after definition-proper."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-separated-locally-qf-space-representable] with $S=\\operatorname{Spec}k$, $T=Q$ and source $E$. Step 4 supplies exactly its two assumptions: local quasi-finiteness for every etale scheme chart and testwise closedness of the relative diagonal. It gives a scheme $Z$ over $Q$ and an isomorphism $h_Z\\simeq E$ over $Q$; in particular $Z$ is a $k$-scheme. The compatibility with equivalent stacks in [lem-sfb-stack-proper-locally-quasifinite-composition] identifies its structure morphism $g:Z\\to Q$ as proper and locally quasi-finite in the ordinary scheme senses.",
+   "uses": [
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-sfb-stack-proper-locally-quasifinite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme); stacks-morphisms.tex representable compatibility after definition-proper."
+   }
+  },
+  {
+   "text": "Compose the representing presheaf isomorphism h_Z ≅ E with h_E → Y. The isomorphism over Q gives equality of its composite with qν and the discrete map h_g. Transfer properness and local quasi-finiteness to h_g with [lem-sfb-stack-proper-locally-quasifinite-composition], then use its discrete-scheme compatibility. The existing Scheme.Hom.isLocallyQuasiFinite_iff comparison for [pqf-def-quasifinite] supplies Mathlib local quasi-finiteness. Apply [pqf-lem-proper-lqf-finite] to conclude g is finite. Finally, for every scheme test h_T → h_Q, use Yoneda to obtain T → Q, form T ×_Q Z, and use stability of finite scheme maps under base change. Its presheaf pullback yields an explicit equivalence with the discrete-stack 2-fibre product. The based equivalence h_Z → Y induces an equivalence on the right factor of this 2-fibre product, preserving the first projection strictly: full faithfulness follows from full faithfulness of h_Z → Y and essential surjectivity from the based quasi-inverse and its counit. Composing these two equivalences proves representable finiteness of qν, with exactly the specified projection. The 2-fibre lift and change-of-right-factor functors are the constructions in [def-sfb-moduli-chart-normalization]. No linear reductivity or surjectivity is used.",
+   "uses": [
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "pqf-def-quasifinite",
+    "pqf-lem-proper-lqf-finite",
+    "def-sfb-moduli-chart-normalization",
+    "def-sfb-finite-stack-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LS, proper and locally quasi-finite implies finite; Mathlib AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-representable-finite-stack-properties",
+  "lem-sfb-dm-geometric-inertia-trivial",
+  "lem-sfb-dm-coarse-proper-locally-quasifinite",
+  "lem-sfb-stack-proper-locally-quasifinite-composition",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-a1-separated-locally-qf-space-representable",
+  "pqf-def-quasifinite",
+  "pqf-lem-proper-lqf-finite",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-finite-stack-scheme-tests"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Agent-formulated consequence of Tag 0DUT, the DM geometric inertia criterion, stack morphism permanence, and spaces-morphisms.tex Tag 03XX followed by More on Morphisms Tag 02LS. The source named by the imported item expressly describes an agent-formulated consequence. S9 formalization: follows these six steps; all categorical presentation, quasi-inverse, scheme descent, and 2-base-change compatibility arguments are proved as private helpers, without any new unfinished theorem. Scheme descent uses big-etale subcanonicity directly, replacing the small-etale sheaf citation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite representable cover of a finite diagonal Deligne Mumford stack with trivial source inertia is a scheme finite over its coarse moduli scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over.over\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    {inst : P.IsStableUnderBaseChange} →\\n      {inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P} →\\n        {X : AlgebraicGeometry.Scheme} →\\n          {inst_2 : X.Over S} →\\n          \", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, this function maps each element of the zeroth c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"(S : AlgebraicGeometry.Scheme) →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    [P.IsStableUnderBaseChange] →\\n      [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X : AlgebraicGeometry.Scheme} →\\n          [X.Over S] → AlgebraicGeometry.Scheme.Cover (Alg\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, the cover of $ X $ is defined by the precoverag\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.mkOfCovers\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    (J : Type u_1) →\\n      (obj : J → AlgebraicGeometry.Scheme) →\\n        (map : (j : J) → obj j ⟶ X) →\\n          (∀ (x : ↥X), ∃ j y, (CategoryTheory.ConcreteCategory.hom (map j).base) y = x) →\\n      \", \"doc\": \"Given a scheme $X$, a morphism property $P$, an index type $J$, a family of schemes $Y_j$ indexed by $J$, and morphisms $f_j: Y_j \\to X$ that are jointly surjective (their images cover $X$) and satisfy\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → ℕ\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\\\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    {inst : P.IsStableUnderBaseChange} →\\n      {inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P} →\\n        {X : AlgebraicGeometry.Scheme} →\\n          {inst_2 : X.Over S} →\\n          \", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, this defines the cover of $ X $ using the preco\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \": (pullback.diagonalObj f).Opens\", \"doc\": \"The open subsets of the diagonal object in the pullback of a morphism $ f $ with itself are defined as the union over all indices $ i $ and elements $ j $ in the zeroth component of the cover $ \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.diagonalCover\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \": (pullback.diagonalObj f).OpenCover\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $Z$ and a morphism $f: X \\\\to Z$, this constructs an open cover of the diagonal pullback scheme $X \\\\times_Z X$ by first taking the base pullback cover of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverXBind\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"(j : (𝒰.bind 𝒱).I₀) : ((𝒰.bind 𝒱).X j).Over S\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, this instance defines a cover of $ X $ using th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism to a separated Deligne Mumford stack induces a finite morphism on coarse moduli spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsFinite g],\\n  AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsFinite f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes, where $ g $ is finite. Then the composition $ f \\\\circ g $ is a finite morphism if and only if $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"For schemes $X$, $Y$, and $Z$, if $f : X \\\\to Y$ and $g : Y \\\\to Z$ are finite morphisms, then their composition $g \\\\circ f : X \\\\to Z$ is also a finite morphism. This asserts that the property of being \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.IsFinite f]\\n  [AlgebraicGeometry.IsFinite g], AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.ContainsIdentities @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `X ⟶ Y` is finite if\\nthe preimage of any affine open subset of `Y` is affine and the induced ring\\nhom is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsAffineHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "coarseModuli|coarse_moduli|coarse.*moduli|trivial.*inertia|finite.*inertia",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"line\": \"18\", \"text\": \"- `NumberField.InfinitePlace.inertiaDeg` : the inertia degree of a place `w` of `L` over a\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"line\": \"24\", \"text\": \"- `NumberField.InfinitePlace.sum_inertiaDeg_eq_finrank` : the degree of `L` over `K` is equal to\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"line\": \"105\", \"text\": \"  simp only [InfinitePlace.inertiaDeg, dif_pos]\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Inertia.lean\", \"line\": \"93\", \"text\": \"theorem inertiaDeg'_pos [p.IsMaximal] [Module.Finite R S] [P.LiesOver p] : 0 < inertiaDeg' p P :=\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Inertia.lean\", \"line\": \"98\", \"text\": \"theorem inertiaDeg'_pos' [P.IsPrime] [Module.Finite R S] [P.LiesOver p] : 0 < inertiaDeg' p P :=\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Inertia.lean\", \"line\": \"63\", \"text\": \"theorem inertiaDeg_pos [hq : q.IsPrime] [Module.Finite R S] : 0 < q.inertiaDeg R := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inertia free algebraic stack finite over a Deligne Mumford stack is an algebraic space finite over the coarse scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Deligne Mumford stack with a finite scheme cover and trivial inertia has finite morphism to its coarse moduli space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"For schemes $X$, $Y$, and $Z$, if $f : X \\\\to Y$ and $g : Y \\\\to Z$ are finite morphisms, then their composition $g \\\\circ f : X \\\\to Z$ is also a finite morphism. This asserts that the property of being \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "grep",
+   "query": "coarseModuli|CoarseModuli|DeligneMumford|AlgebraicStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite inertia free cover of a Deligne Mumford stack is a scheme finite over its coarse moduli scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over.over\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    {inst : P.IsStableUnderBaseChange} →\\n      {inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P} →\\n        {X : AlgebraicGeometry.Scheme} →\\n          {inst_2 : X.Over S} →\\n          \", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, this function maps each element of the zeroth c\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.mkOfCovers\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    (J : Type u_1) →\\n      (obj : J → AlgebraicGeometry.Scheme) →\\n        (map : (j : J) → obj j ⟶ X) →\\n          (∀ (x : ↥X), ∃ j y, (CategoryTheory.ConcreteCategory.hom (map j).base) y = x) →\\n      \", \"doc\": \"Given a scheme $X$, a morphism property $P$, an index type $J$, a family of schemes $Y_j$ indexed by $J$, and morphisms $f_j: Y_j \\to X$ that are jointly surjective (their images cover $X$) and satisfy\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.ContainsIdentities @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `X ⟶ Y` is finite if\\nthe preimage of any affine open subset of `Y` is affine and the induced ring\\nhom is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsAffineHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-abelian-level-normalization",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme.",
+   "via": [
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-inertia-free-finite-cover-coarse",
+  "worker": "stage1",
+  "summary": "Proved via proper locally quasi-finite stack morphisms, the existing geometric-inertia criterion, algebraic-space schemehood and the existing proper locally quasi-finite scheme Mathlib leaf. Added three statement-only stack inputs, retained the statement and all inherited searches, and checked every dependency statement and source. No reductivity or surjectivity added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. The six steps discharge the supporting passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "General schemehood theorem for separated locally quasi-finite algebraic spaces over a scheme (03XX). The item unit contains no replacement for this generic representability tool."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Etale gluing of morphisms into a scheme (fpqc descent of morphisms, Stacks 023Q) makes h_Q a stack, so that the composition input applies with target Q; no node of the item's unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-separated-locally-qf-space-representable"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-d574cb389",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-d574cb389 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited node's statement and the Stacks sources at the cited places: 0DUT Keel–Mori (stacks-more-morphisms.tex line 3637), 06U9, 06PU, 06UD, 0CL5 and 0CL7 (stacks-morphisms.tex), 05UM (algebraic.tex) and 03XX (spaces-morphisms.tex line 10590). The Mathlib leaf for 02LS is the one already recorded on pqf-lem-proper-lqf-finite.\n\nThe new nodes are true. (1) The coarse map is proper and locally quasi-finite. Finite diagonal gives finite inertia, so 0DUT applies, and the given q identifies with Keel–Mori's map because it is initial for maps to algebraic spaces. 0DUT makes q separated and quasi-compact, 06U9 makes it locally of finite type, and being a universal homeomorphism makes it universally closed with singleton fibres. q is quasi-DM because the diagonal of X over Q is unramified: it is the diagonal of X over k, which is unramified since X is DM, followed by a monomorphism. (2) A representable finite map to a DM stack has a DM source, by base-changing the atlas and factoring the diagonal; this works in the étale-stack convention of the definition node. Finite implies proper and locally quasi-finite. (3) Composition follows from 0CL7 and 06UD, and for algebraic spaces the stack notions agree with the ordinary ones via 04YS and étale-local quasi-finiteness. None of the new nodes restates the item or duplicates an existing node; I checked against abelian-level-coarse-moduli, unpointed-stable-coarse-projective, dm-finite-normalization-charts and unramified-diagonal-etale-atlas.\n\nSteps 1–3, 5 and 6 match the statements they cite. Small cases tested: X a scheme with q the identity, and X=BG with Y=Spec k for G of order p in characteristic p. No surjectivity, Noetherian or reductivity hypothesis enters. I accept the off-unit 03XX tool use declared by the worker.\n\nOne fault, C1, repaired: step 4 claimed that h_Q is a DM stack citing only the definition node. But h_Q being a stack is étale descent of morphisms into a scheme (Stacks 023Q), which is not elementary. The fix cites lem-weil-pbc-small-etale-representable-presheaf-sheaf, writes out the argument, adds the node to proof_deps and declares it in split_report.tool_uses. It is already in the closure of def-sfb-stable-pointed-moduli-groupoids, so it creates no cycle and nothing new from batch 5.\n\nBatch-5 mechanical findings, all accepted. def-sfb-stable-pointed-moduli-groupoids and def-trf-algebraic-space are general definitions, not steps of the trace formula or of Poincaré duality. lem-a1-separated-locally-qf-space-representable (03XX schemehood) reaches sec-trace-formula only through algebraic-space foundations, which neither assumption gives.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InertiaFreeFiniteCoverCoarse",
+  "declaration": "AlgebraicGeometry.inertiaFreeFiniteCoverCoarse",
+  "declarations": [
+   "AlgebraicGeometry.inertiaFreeFiniteCoverCoarse"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InertiaFreeFiniteCoverCoarse.lean",
+  "statement": "theorem inertiaFreeFiniteCoverCoarse (k : Type u) [Field k] (X : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (Y : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))) (hX : IsDeligneMumfordModuliStack X) (hft : HasFiniteTypeEtaleModuliAtlas X) (hdiag : HasFiniteModuliDiagonal X) (hY : IsModuliStack Y) (Q : Over (Spec (.of k))) (q : BasedFunctor X (discreteModuli (yoneda.obj Q))) (hq : IsCoarseModuliScheme X Q q) (ν : BasedFunctor Y X) (hν : IsRepresentableFiniteModuliMap ν) (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ Spec (.of k)) (y : Functor.Fiber Y.p (Over.mk a)) (α : y ≅ y), α = Iso.refl y) : (∃ (E : AlgebraicSpace (Spec (.of k))) (e : BasedFunctor (discreteModuli E.obj.obj) Y), e.toFunctor.IsEquivalence) ∧ IsRepresentableFiniteModuliMap (ν.comp q) ∧ ∃ (Z : Over (Spec (.of k))) (g : Z ⟶ Q), IsFinite g.left ∧ ∃ e : BasedFunctor (discreteModuli (yoneda.obj Z)) Y, e.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (e.comp (ν.comp q)) (discreteModuliMap (yoneda.map g)))",
+  "branch": "sheaf-dag",
+  "by": "Q53",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4596e8c0b",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Clause-by-clause match of inertiaFreeFiniteCoverCoarse to the node: field k, X/Y BasedCategories over Spec k with free universes, hX DM, hft = finite-type étale atlas (lft+qc, 06FS/04YC), hdiag = finiteness of Z→T×_S U with both projections over 𝟙, hq the recorded IsCoarseModuliScheme, hY IsModuliStack, hν representable finite with first projection, hgeom = fibre automorphisms trivial over all alg. closed Ω/k (Type u, same as the coarse def). Conclusions: algebraic-space equivalence, IsRepresentableFiniteModuliMap (ν.comp q), finite k-scheme Z→Q with ModuliTwoIso to the specified composite. No reductivity, characteristic, Noetherian or surjectivity hypothesis. New def node def-sfb-finite-stack-scheme-tests: correct encodings, real Prop bodies, 7 live stmt_deps, 3 search kinds; no existing live predicate (IsSchemeModuliBaseChange is only a sub-clause; advisory reuse). lean.statement verbatim for both records; item diff vs live = lean + one stmt_dep; docstrings with source/blueprint and 6 proof steps; plain proof imports exist (Mathlib ZMT has IsFinite.of_isProper_of_locallyQuasiFinite); no name/module collision live. Stage-1 re-split repair note is released and keeps the statement, so it does not affect S2. Delivery's own clean compiles relied on; nothing changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261023T135359-L-2881756",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

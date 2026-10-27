@@ -15,9 +15,83 @@
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 09XQ (lemma-sections-with-support-acyclic), its supported-subsheaf definition and proof, and Tag 0A45 (lemma-cohomology-with-support-triangle); bounded-below derived supported-kernel adjunction, with canonical adjunction-mate shifts."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construction and underived obligation. Set $S(F)=i^{-1}\\ker(F\\to j_*j^{-1}F)$, using the kernel functor of [def-pur-etale-supported-kernel] with its induced $A$-action. The canonical Hom bijection and exactness in [lem-pur-etale-supported-kernel-adjunction] lift from abelian sheaves to constant-$A$ modules as follows. For each $a\\in A$, naturality of that bijection identifies $S(a_F)g$ with $g a_G$ precisely when $a_F f=f i_*(a_G)$; hence it restricts to a bijection on $A$-linear maps, in both directions. Constant-ring sheaf linearity can be checked on constant scalars, since general local scalars are locally constant and the equalities glue. Kernels and cokernels in [def-weil-sheaf-of-modules-category] have their underlying abelian-sheaf kernels and sheafified cokernels, so the forgetful functor creates and reflects exactness. The exact abelian closed direct image therefore gives exact module direct image. This constructs the additive sheaf adjunction $i_*\\dashv S$, rather than choosing an unknown right-adjoint object.",
+   "uses": [
+    "def-pur-etale-supported-kernel",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, preceding supported-subsheaf definition and proof; scalar-action lift written here"
+   }
+  },
+  {
+   "text": "Derived object and morphisms. The module categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Define $i^!=RS$ by [lem-weil-pbc-right-derived-plus-injective], with its derived-functor comparison. Concretely choose $K\\cong QI_K$ with $I_K$ bounded below injective, using [lem-weil-pbc-dplus-injective-representative], and put $i^!K=Q(SI_K)$. Represent a morphism by its unique homotopy class $I_K\\to I_L$ using [lem-weil-pbc-kinjective-hom-derived], and apply $S$ termwise. Additivity preserves homotopies, identities and composition. The derived-functor universal property gives independence of representatives and its unique comparison isomorphisms. If $I_K^r=0$ for $r<b$, then $(SI_K)^r=S(0)=0$ there, so the output lies in $D^+$; no finite cohomological-dimension bound is required.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic), 013K (lemma-injective-resolutions-exist), 070I (lemma-K-injective), 070J (lemma-bounded-below-injectives-K-injective)"
+   }
+  },
+  {
+   "text": "Fixed derived adjunction. Exactness of $i_*$ makes its derived direct image the termwise functor. By [lem-weil-pbc-exact-functor-derived-factorization], $C(i_*)$ preserves quasi-isomorphisms. For bounded below $M$ choose a quasi-isomorphism $s:M\\to I$ to a bounded below injective complex [lem-weil-pbc-dplus-injective-representative]; naturality of $\\alpha$ of [def-weil-pbc-direct-image] gives $Ri_*(Qs)\\circ\\alpha_M=\\alpha_I\\circ Q(i_*s)$, and $\\alpha_I$ is invertible by [lem-weil-pbc-right-derived-plus-injective](2), so $\\alpha_M:Q(i_*M)\\to Ri_*(QM)$ is an isomorphism. The exact-left-adjoint obligation from Step 1 lets [lem-weil-pbc-right-adjoint-preserves-kinjective] apply to $i_*\\dashv S$, so $SI_K$ is K-injective. For bounded below $M$ the natural bijection is the composite\n$\\operatorname{Hom}_{D(T,A)}(Q(i_*M),QI_K)\\cong\\operatorname{Hom}_{K(T,A)}(i_*M,I_K)\\cong\\operatorname{Hom}_{K(Z,A)}(M,SI_K)\\cong\\operatorname{Hom}_{D(Z,A)}(QM,Q(SI_K))$.\nThe outer bijections are [lem-weil-pbc-kinjective-hom-derived]; the middle one is [lem-weil-pbc-termwise-adjunction-homotopy]. Define the unit to be the image of $1_{i_*M}$ and the counit to be the inverse image of $1_{i^!K}$ under this bijection. Its inverse laws and naturality give the triangle identities. This fixes the adjunction attached to the constructed functor. This constructs the bounded-below closed-support adjunction required in the definition.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070I (lemma-K-injective); bounded-below realization of the current blueprint lem-exc-closed-ambient proof"
+   }
+  },
+  {
+   "text": "Shift data. On complexes the exact additive $F=i_*$ has $\\tau_{M,n}:F(M[n])\\cong F(M)[n]$, with identity components: the differentials agree because $F((-1)^n d)=(-1)^nF(d)$. By [lem-weil-pbc-exact-functor-derived-factorization] these descend to the shift isomorphisms $\\sigma$ of the triangulated functor $F_D$, compatible with $\\varphi$; as $F_D$ preserves $D^+$, transport $\\sigma$ along the isomorphisms $\\alpha_M\\circ\\varphi_M$ of Step 3 to $e_{X,n}:Ri_*(X[n])\\cong Ri_*(X)[n]$ on $D^+$, which obey zero and addition coherence. For $G=i^!$ and the fixed unit $\\eta$ and counit $\\varepsilon$ of Step 3, equip $G$ with the structure of [lem-weil-pbc-adjunction-shift-compatibility-unique](iii). Explicitly its inverse comparison $G(K)[n]\\to G(K[n])$ is\n$G(\\varepsilon_K[n])\\circ G(e_{GK,n})\\circ\\eta_{(GK)[n]}$.\nThat node guarantees invertibility, coherence, and compatibility with this actual unit and counit; its uniqueness clause fixes the mate normalization. Thus every data component is constructed from kernels, injective resolutions and the specified adjunction.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D (lemma-adjoint-is-exact); mate construction and coherence read in Mathlib/CategoryTheory/Shift/Adjunction.lean, rightAdjointCommShift and commShift_of_leftAdjoint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-supported-kernel",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XQ and 0A45; explicit constant-module, bounded-below and mate-shift construction using the existing named obligations. The generic derived steps follow Stacks derived.tex as cited individually."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -47,6 +121,41 @@
    "results": "Only lem-per-ind-etale-closed-support-base-change lists these helper declarations. No upstream WeilConjectures occurrence. lean/Sheaf/AlgebraicGeometry/IndEtaleClosedSupportBaseChange.lean defines all four helpers at lines 84-107. Blueprint search returned 12 nodes about other closed-support settings; none owns this bounded-below finite-coefficient adjunction definition.",
    "date": "2026-10-18",
    "verdict": "Existing project declarations, no dedicated definition node; bind existing:true as requested by the H2 return."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bounded below derived closed support right adjoint to direct image of a closed immersion of schemes with finite ring coefficients",
+   "results": "AlgebraicGeometry.Scheme.kerAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData; AlgebraicGeometry.Scheme.instFullOppositeIdealSheafDataOverSubschemeFunctor; AlgebraicGeometry.instIsClosedImmersionInclusion; AlgebraicGeometry.Scheme.IdealSheafData.support_map",
+   "date": "2026-10-24",
+   "verdict": "no match: no bounded-below closed-support adjunction with fixed mate shifts; hits concern ordinary pullback/pushforward or generic derived-category tools"
+  },
+  {
+   "tool": "grep",
+   "query": "closedSupportPlus|closedSupportPlusAdjunction|upperShriek|sectionsWithSupport",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: no bounded-below closed-support adjunction with fixed mate shifts; hits concern ordinary pullback/pushforward or generic derived-category tools"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived sections supported on a closed subscheme are right adjoint to exact direct image on bounded below derived categories of etale module sheaves",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pushforwardPushforwardAdj; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; CategoryTheory.instIsRightAdjointSheafΓ",
+   "date": "2026-10-24",
+   "verdict": "no match: no bounded-below closed-support adjunction with fixed mate shifts; hits concern ordinary pullback/pushforward or generic derived-category tools"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: no bounded-below closed-support adjunction with fixed mate shifts; hits concern ordinary pullback/pushforward or generic derived-category tools"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero from a closed subscheme admits right derived supported inverse image on bounded below etale module categories with adjunction mate shift comparisons",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; localCohomology.diagram; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-24",
+   "verdict": "no match: no bounded-below closed-support adjunction with fixed mate shifts; hits concern ordinary pullback/pushforward or generic derived-category tools"
   }
  ],
  "created": {
@@ -71,39 +180,61 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange",
-  "declaration": "AlgebraicGeometry.Etale.closedSupportPlus",
-  "declarations": [
-   "AlgebraicGeometry.Etale.closedSupportPlus_isLeftAdjoint",
-   "AlgebraicGeometry.Etale.closedSupportPlus",
-   "AlgebraicGeometry.Etale.closedSupportPlusAdjunction",
-   "AlgebraicGeometry.Etale.closedSupportPlusCommShift"
-  ],
-  "statement": "abbrev closedSupportPlus {Z T : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]",
-  "branch": "newtargets-dag",
-  "by": "NW",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "H2 repair: binds the four already published general closed-support adjunction helpers, not the ind-etale base-change theorem. closedSupportPlus_isLeftAdjoint supplies the bounded-below derived supported-kernel adjunction; closedSupportPlus is Functor.rightAdjoint, closedSupportPlusAdjunction is Adjunction.ofIsLeftAdjoint, and closedSupportPlusCommShift is its canonical mate shift structure. No module or declaration is duplicated. 2026-10-20 (U): module Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange deleted (dead: no target reaches it); this node is not reached either."
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-per-closed-support-plus-adjunction",
+  "worker": "stage1",
+  "summary": "NN reconstructs only the re-admitted finite-coefficient interface. The statement, source, stmt_deps, prior searches and blueprint provenance are unchanged. Four construction-verification steps specify the supported functor on objects and maps, derive it on bounded below injectives, fix its Hom bijection/unit/counit and equip it with the unique adjunction-mate shift structure. Every obligation is an existing named node; no new nodes or stale deleted-module attachment.",
+  "blueprint": "Preserves the recorded descent from lem-per-artin-gabber-affine-curve through finite closed-support exchange, Step 3: fix the actual bounded-below closed right adjoint, unit and counit. This finite closed-support interface is independently re-admitted by coord/repair-notes/def-per-closed-support-plus-adjunction.json; its reconstruction follows current blueprint lem-exc-closed-ambient and Stacks 09XQ, rather than the withdrawn ancestor proof graph."
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-fc779966a",
-  "group": "NW",
+  "reviewer": "NT-cc-NN-2ec753c22",
+  "group": "NN",
   "result": "pass",
-  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-2ec753c22 (reviewer sub-agent of L); spot-checked: Read the item (definition, 4 steps, 0 new nodes, Q84 re-admission note with keep_plan:false, which is not a 10-21 re-split order) against live: only proof, proof_deps, proof_origin, split_report and status changed; statement, stmt_deps, source, searches and blueprint are preserved. No SGA; no cited node is route-dropped. The route matches the current blueprint proof of lem-exc-closed-ambient (main-20261015, the same as latest) and Stacks 09XQ (etale-cohomology.tex ~l.14004-14041: H_Z and Hom(i_*G,F)=Hom(G,H_Z F)). Step 1: the scalar-naturality lift of the abelian support adjunction to A-modules is correct, and the forgetful functor reflects exactness. Step 2: RS is pinned by the universal property of lem-weil-pbc-right-derived-plus-injective (3), so it is not hollow; the D^+ bound holds. Step 3: the composite of the K-injective Hom bijection, the termwise adjunction and the K-injective Hom bijection is correct (S I_K is K-injective by 08BJ with i_* exact), and unit and counit are images of identities. Step 4: the inverse mate formula typechecks and equals clause (ii) of lem-weil-pbc-adjunction-shift-compatibility-unique. FIX (C1/C5 missing citation): Steps 3 and 4 asserted that the derived functor of the exact i_* is the termwise functor and that the termwise shifts descend to D^+, but no cited node states either. Cited the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization, wrote out why alpha_M is invertible (alpha_I invertible plus naturality along a quasi-isomorphism s:M->I, adding dplus-injective-representative and right-derived-plus-injective to the uses), transported sigma along alpha_M∘phi_M, and set proof_deps to the union of the uses. Edge cases checked: Z empty, Z=T, A=0, non-reduced Z. No duplicates; the pro-etale def-exc-proetale-sections-with-support is a different object. Accepted generic tool uses: lem-pur-etale-supported-kernel-adjunction and the sk-def-exchange homological lemmas.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportPlusAdjunction",
+  "declaration": "AlgebraicGeometry.Etale.closedSupportPlusAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.closedSupportOpenComplement",
+   "AlgebraicGeometry.Etale.closedSupportPlus",
+   "AlgebraicGeometry.Etale.closedSupportPlusAdjunction",
+   "AlgebraicGeometry.Etale.closedSupportPlusUnit",
+   "AlgebraicGeometry.Etale.closedSupportPlusCounit",
+   "AlgebraicGeometry.Etale.closedSupportDirectImagePlusCommShift",
+   "AlgebraicGeometry.Etale.closedSupportPlusCommShift"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSupportPlusAdjunction.lean",
+  "statement": "def closedSupportPlusAdjunction (A : Type (u + 1)) [CommRing A] [Finite A] {Z T : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] : rightDerivedLowerStarPlus (ModuleCat.{u + 1} A) i ⊣ closedSupportPlus A i",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Constructs the bounded-below derived functor of the published module-valued supported inverse image and derives its canonical Hom adjunction. Explicit unit, counit, exact-direct-image shift transport and adjunction-mate shift structure. No arbitrary right-adjoint choice, no new sorry, no restored deleted-module attachment."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-fc779966a",
-  "group": "NW",
+  "reviewer": "NT-stage2-cc-511e96123",
+  "group": "Q18",
   "result": "pass",
-  "note": "Re-delivery after H2 RETURN of 7eff593465ab. Item .lean byte-identical (sha256 65d2b073); item node differs only by stmt_dep lem-per-ind-etale-closed-support-base-change -> def-per-closed-support-plus-adjunction. New def node: existing:true on Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange owning closedSupportPlus_isLeftAdjoint/closedSupportPlus/closedSupportPlusAdjunction/closedSupportPlusCommShift (all present live); statement (chosen right adjoint of exact closed D+ i_*, fixed adjunction, mate shifts) matches the Lean; lean.statement equals normalized signature; source Stacks 09XQ/0A45 verified in etale-cohomology.tex; stmt_deps exist and are cited; no other def owner. Item clauses re-confirmed (A finite comm ring u+1, X',X Noetherian, finite p, closed i, pullback projections, e.inv = canonical exchange, unit iso, normalized identity, IsIso i^!(E)); edge cases ok; no hollow defs; sorry only. nt_compile --json exit 0, 3.0 s, no errors. Advisory: identity clause is definitional given e.inv (node's normalization)."
+  "note": "Read node (only lean differs from live; Q84 re-admission note honoured, no restored deleted module, no closedSupportPlus duplicate in live lean), all 5 stmt_deps, the module and upstream ClosedImmersionUpperShriek/PlusAdjunction/PlusExact/rightAdjointCommShift. A:Type(u+1) CommRing Finite, IsClosedImmersion, canonical complement (range i)ᶜ, D⁺ of ModuleCat.{u+1} A étale sheaves, recorded rightDerivedLowerStarPlus; i^! = R⁺(closedUpperShriek = i^*∘ker(η_j)) genuine; adjunction = derivedPlus of the actual kernel Hom-equiv adjunction, ofNatIsoLeft along the rightDerivedUnique comparison; unit/counit from it; direct-image shift = ofIso of termwise exact shift (node Step 4); i^! shift = rightAdjointCommShift mate. Statement verbatim, 7 decls listed, docstrings with source+blueprint, no sorry/theorem/global instance, report sections present. Edge cases Z empty, Z=T, A=0, all n ok. Advisory: global resolution CommShift instance on rightDerivedFunctorPlus is a parallel but mathematically equal structure (not defeq); some unused plain imports (H9 advisory). No compile (no file changed)."
  }
 }

@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.FiniteConstantCoefficientTransport
 public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenArrows
 public import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.ProperOpenClopenProjector
+import Sheaf.AlgebraicGeometry.ProperOpenAlphaPasting
+import Sheaf.AlgebraicGeometry.TowerMateEvaluationScalars
+import Sheaf.AlgebraicGeometry.SingleLevelFiniteProperOpenTransport
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import Sheaf.AlgebraicGeometry.StrictTowerPullbackSquarePasting
@@ -41,6 +45,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
+
+attribute [local instance] clopenTowerAbelian
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem pi_image {U X : Scheme.{u}} (s : U ⟶ X)
@@ -174,7 +180,7 @@ theorem alpha_cartesian {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
     (h : k ≫ p = r ≫ i) (hsq : IsPullback k r p i) :
     alpha B k r p i h = (beta B r k i p h.symm hsq.flip).hom := by
-  sorry
+  exact ((properOpen_clopen_projector B k r p i h).2.1 hsq).2
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem moduleR_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g)
@@ -996,7 +1002,7 @@ theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
         (alpha B k r₁ p₁ i h₁).app ((G B r₂).obj N) =
       (alpha B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app N ≫
         (J B k).map ((gComp B r₁ r₂).hom.app N) := by
-  sorry
+  exact (alpha_vertical_beforeDerivation B k i j r₁ r₂ p₁ p₂ h₁ h₂ h).2.2.2.2 N
 
 /-- Intrinsic alpha agrees with horizontal pasting on every input.
 Source: Stacks, Tag 0F7D and blueprint, fifth proof step
@@ -1017,7 +1023,7 @@ theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
       (alpha B l p q j h₂).app ((J B i).obj N) ≫
         (J B l).map ((alpha B k r p i h₁).app N) ≫
         (jComp B k l).hom.app ((G B r).obj N) := by
-  sorry
+  exact (alpha_horizontal_beforeDerivation B k l i j r p q h₁ h₂ h).2.2.2.2 N
 
 /-- Intrinsic alpha commutes with the canonical pullback cube.
 Source: Stacks, Tag 0F7F and blueprint, fifth proof step
@@ -1045,7 +1051,8 @@ theorem alpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
         (J B k₁).map ((squareG B d r₁ r c wr).inv.app N) =
       (G B p₁).map ((beta B c i₁ i b wi si).hom.app N) ≫
         (alpha B k₁ r₁ p₁ i₁ h₁).app ((G B c).obj N) := by
-  sorry
+  exact (alpha_baseChange_beforeDerivation B k i r p k₁ i₁ r₁ p₁ a b c d
+    h h₁ wk wi wp wr sk si sp sr).2.2.2.2 N
 
 /-- Select the second witness without repeatedly expanding a large normalization
 predicate in the kernel. This is precisely the nested choice used by the finite
@@ -1138,7 +1145,60 @@ theorem gamma_evaluation {V W S T : Scheme.{u}}
     (finiteSource B r i M n w).hom ≫ (ev B T n).map ((gamma B k r p i h).app M) =
       (HD B T w.Λ w.φ).map ((finiteGamma w.Λ k r p i h).hom.app w.origin.L) ≫
         (finiteTarget B k p M n w).hom := by
-  sorry
+  have := evalR_isIso B p n
+  have := evalR_isIso B r n
+  have he := MateEvaluationScalars.evaluation_gamma B k r p i h n M
+  have hs := singleLevelFiniteProperOpenTransport B w.Λ w.φ k r p i h w.origin.L
+  have hn := (MateEvaluationScalars.singleDerivedGamma B k r p i h).naturality
+    (originIso B w).hom
+  dsimp only [Functor.comp_map] at hn
+  dsimp only [MateEvaluationScalars.r, MateEvaluationScalars.j] at he hn
+  change _ = (HD B T w.Λ w.φ).map
+    ((Etale.ClopenMateNormalization.normalizedComparison w.Λ k r p i h).hom.app
+      w.origin.L) ≫ _
+  apply (cancel_mono ((evalR B p n).app ((J B k).obj M) ≫
+    (moduleDirectImage B p).rightDerivedFunctor.map ((evalJ B k n).hom.app M))).1
+  dsimp only [finiteSource, finiteTarget, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Iso.app_hom, Iso.app_inv, asIso_hom, asIso_inv]
+  dsimp only [Etale.rightDerivedLowerStarPlus, Functor.comp_obj] at hs ⊢
+  simp only [Category.assoc]
+  conv_lhs =>
+    arg 2; arg 2; arg 2; arg 2; arg 2
+    rw [he]
+  simp only [Iso.inv_hom_id_app_assoc, NatIso.isIso_inv_app,
+    IsIso.inv_hom_id_assoc, ← Functor.map_comp_assoc, ← Functor.map_comp,
+    IsIso.inv_hom_id, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Functor.map_comp, Category.assoc]
+  conv_lhs =>
+    arg 2; arg 2
+    rw [hn]
+  have hid := (moduleDirectImage B p).rightDerivedFunctor.map_id
+    ((moduleJ B k).mapDerivedCategory.obj ((ev B V n).obj M))
+  conv_rhs =>
+    arg 2; arg 2; arg 2; arg 2
+    dsimp only [Functor.comp_obj]
+    rw [hid]
+  simpa only [Category.assoc, Category.comp_id] using
+    congrArg (fun f ↦ f ≫ (moduleDirectImage B p).rightDerivedFunctor.map
+      ((moduleJ B k).mapDerivedCategory.map (originIso B w).hom)) hs
+
+attribute [local irreducible] finiteSource finiteTarget
+
+private theorem isIso_of_evaluations
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    [HasDerivedCategory (ℕᵒᵖ ⥤ C)] {M N : DerivedCategory (ℕᵒᵖ ⥤ C)} (f : M ⟶ N)
+    (hf : ∀ n : ℕᵒᵖ, IsIso (((evaluation ℕᵒᵖ C).obj n).mapDerivedCategory.map f)) :
+    IsIso f := by
+  apply (DerivedCategory.isIso_iff _ f).2
+  intro q
+  apply (NatTrans.isIso_iff_isIso_app _).2
+  intro n
+  have := hf n
+  exact (NatIso.isIso_map_iff
+    (((evaluation ℕᵒᵖ C).obj n).mapDerivedCategoryHomologyFunctorIso q) f).2 (by
+      change IsIso ((DerivedCategory.homologyFunctor C q).map
+        (((evaluation ℕᵒᵖ C).obj n).mapDerivedCategory.map f))
+      infer_instance)
 
 /-- Proper/open interchange is invertible for independently bounded finite etale
 origins at every positive level, with no uniform bound on those origins.
@@ -1168,17 +1228,8 @@ theorem gamma_isIso {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       rw [heq]
       infer_instance
     exact IsIso.of_isIso_comp_left (finiteSource B r i M n w).hom _
-  apply (DerivedCategory.isIso_iff _ _).2
-  intro q
-  apply (NatTrans.isIso_iff_isIso_app _).2
-  intro n
-  have := heval n.unop
-  exact (NatIso.isIso_map_iff
-    (((evaluation ℕᵒᵖ (Modules B T)).obj n).mapDerivedCategoryHomologyFunctorIso q)
-    ((gamma B k r p i h).app M)).2 (by
-      change IsIso ((DerivedCategory.homologyFunctor (Modules B T) q).map
-        ((ev B T n.unop).map ((gamma B k r p i h).app M)))
-      infer_instance)
+  exact isIso_of_evaluations (C := Modules B T)
+    ((gamma B k r p i h).app M) (fun n ↦ heval n.unop)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in

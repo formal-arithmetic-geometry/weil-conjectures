@@ -1,0 +1,282 @@
+{
+ "id": "lem-trf-fibre-generic-localization-residue-flat",
+ "kind": "statement",
+ "title": "Fibre-generic localization: scalar comparison, flatness and closed fibre",
+ "statement": "Let $R\\to B$ be a flat homomorphism of commutative rings [def-weil-pbc-flat-ring-map], and let $\\mathfrak p\\in\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Put $A=R_{\\mathfrak p}$, $\\mathfrak m=\\mathfrak pA$, $C=(R\\setminus\\mathfrak p)^{-1}B$ and $F=B\\otimes_R\\kappa(\\mathfrak p)$, with localization and residue field as in [def-weil-pbc-localization-at-prime, def-weil-pbc-module-localization, def-weil-residue-field]. Assume $F$ is a nonzero integral domain. Define $\\mathfrak q=\\ker(B\\to F)$ and $T=B\\setminus\\mathfrak q$. Then $\\mathfrak q$ is prime and contracts to $\\mathfrak p$. The ring $D=B_{\\mathfrak q}$ has its canonical $A$-algebra structure and the map $B\\to D$ factors through $u:C\\to D$. For every $A$-module $L$ there is a natural $A$-linear isomorphism $$T^{-1}(L\\otimes_R B)\\xrightarrow{\\sim}L\\otimes_A D,\\qquad (l\\otimes b)/t\\longmapsto l\\otimes(b/t),$$ where tensor products are as in [def-weil-pbc-module-tensor-product] and the $B$-module structure on $L\\otimes_RB$ is on the second factor. The $A$-module $D$ is flat. Let $\\overline T\\subset F$ be the multiplicative image of $T$. Every element of $\\overline T$ is nonzero, and there is a canonical isomorphism $$\\theta:D/\\mathfrak mD\\xrightarrow{\\sim}\\overline T^{-1}F,\\qquad [b/t]\\longmapsto\\overline b/\\overline t.$$ Under $C/\\mathfrak mC\\cong F$, the composite of the reduction of $u$ with $\\theta$ is precisely the localization map $F\\to\\overline T^{-1}F$. In particular the reduction $C/\\mathfrak mC\\to D/\\mathfrak mD$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0810, lemma-helper-blowup-affine-space, final proof paragraph: construction and closed-fibre verification of the base-localized map into the fibre-generic localization (the elementary algebra underlying that local inclusion)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:R\\to B$ and $S=R\\setminus\\mathfrak p$. The fibre-ring quotient comparison identifies $F$ with $C/\\mathfrak mC$ as a $B$-algebra, sending $b\\otimes\\overline{r/s}$ to $[f(r)b/f(s)]$. The structural map $\\kappa(\\mathfrak p)\\to F$ is injective: a nonzero element in its kernel would have an inverse, forcing $1_F=0$, contrary to the nonzero-domain hypothesis. Thus $r\\in R$ maps to zero in $F$ exactly when its image in $\\kappa(\\mathfrak p)$ is zero, equivalently $r\\in\\mathfrak p$. For the last equivalence, $r/1\\in\\mathfrak pA$ implies $sr\\in\\mathfrak p$ for some $s\\notin\\mathfrak p$ by the fraction equality criterion, hence $r\\in\\mathfrak p$; the converse is immediate. The kernel $\\mathfrak q$ is proper, and $bb'\\in\\mathfrak q$ implies $\\bar b\\bar b'=0$ in the domain $F$, hence $b\\in\\mathfrak q$ or $b'\\in\\mathfrak q$. This proves primality and $f^{-1}(\\mathfrak q)=\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E6, remark-fundamental-diagram; kernel and fraction arguments expanded from the definitions."
+   }
+  },
+  {
+   "text": "Since $f(S)\\subseteq T$, its elements become units in $D=T^{-1}B$. The localization universal property gives the unique map $A\\to D$, $r/s\\mapsto f(r)/f(s)$, and the unique map $u:C\\to D$, $b/f(s)\\mapsto b/f(s)$, both extending the original maps. They agree on $R$ and therefore on $A$ by uniqueness; hence $u$ is an $A$-algebra map. Apply clause (2) of localization-of-localization to $B$, its multiplicative subsets $f(S)\\subseteq T$, and these maps: $u$ is a localization of $C$ at the image $U$ of $T$ under $B\\to C$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization, and iterating that universal property for nested multiplicative subsets."
+   }
+  },
+  {
+   "text": "Regard the given $A$-module $L$ as an $R$-module. Apply the prime-localized module base-change comparison to $f:R\\to B$, $M=L$, and the primes $\\mathfrak p,\\mathfrak q$ of step 1. Its first comparison is a $D$-linear isomorphism $T^{-1}(L\\otimes_RB)\\to L_{\\mathfrak p}\\otimes_AD$, with $(l\\otimes b)/t\\mapsto(l/1)\\otimes(b/t)$. Identify $L_{\\mathfrak p}$ with $L$ by $l/s\\mapsto (s/1)^{-1}l$, with inverse $l\\mapsto l/1$. This is well defined: an equality of fractions is witnessed by $v(s'l-sl')=0$, and $v,s,s'$ act invertibly on $L$; it therefore gives $s^{-1}l=(s')^{-1}l'$. The two composites are identities by the fraction relation, and the map is $A$-linear by the fraction formulas for addition and scalar multiplication. Tensoring this identification and its inverse with $D$ gives inverse maps on pure tensors. Their composite with the cited comparison is the required $A$-linear isomorphism with the stated formula. For an $A$-linear map $h:L\\to L'$, both routes in its naturality square send $(l\\otimes b)/t$ to $h(l)\\otimes(b/t)$. Every tensor is a finite sum of pure tensors and every localized tensor has one denominator, so these tests prove equality on the whole module.",
+   "uses": [
+    "lem-weil-pbc-prime-localized-module-base-change",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK, lemma-tensor-localization, and Tag 00SI, lemma-lci-field-change-local, displayed tensor comparison; scalar and naturality formulas expanded."
+   }
+  },
+  {
+   "text": "The localization-flatness lemma makes $B\\to D$ flat. Composition with the assumed flat map $R\\to B$ makes $R\\to D$ flat. The $A$-action of step 2 restricts to precisely this $R$-action. The flat-over-localization equivalence for $R\\to A=S^{-1}R$ and the $A$-module $D$ now gives flatness of $D$ over $A$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT, lemma-flat-localization, clauses (1) and (2), with composition of flat ring maps."
+   }
+  },
+  {
+   "text": "Put $I=\\mathfrak mC$. The ideal $ID$ is $\\mathfrak mD$: both are generated in $D$ by the images of the elements of $\\mathfrak m$. The quotient base-change lemma for $C\\to D$ gives $D/\\mathfrak mD\\cong D\\otimes_C(C/I)$, $[d]\\mapsto d\\otimes1$. Step 1 identifies $C/I$ with $F$ as a $C$-algebra. Exchange tensor factors by $d\\otimes z\\mapsto z\\otimes d$ (its inverse is the same exchange; both respect the tensor relations and multiplication). This gives $D/\\mathfrak mD\\cong F\\otimes_CD$. Step 2 and localization base change make $F\\to F\\otimes_CD$ a localization at the image of $U$ in $F$, which is exactly $\\overline T$. The localization universal property identifies it uniquely with $\\overline T^{-1}F$. The resulting isomorphism $\\theta$ has $[b/t]\\mapsto\\bar b/\\bar t$: in the tensor ring $1\\otimes(b/t)=(\\bar b\\otimes1)(\\bar t\\otimes1)^{-1}$, because the images of $b/1,t/1\\in C$ agree on the two tensor factors. This checks the formula for every fraction.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT, proposition-localize-quotient, proof; quotient base change from Tag 00DF, lemma-tensor-product-exact; Tag 00CP, proposition-universal-property-localization."
+   }
+  },
+  {
+   "text": "For $t\\in T$ one has $\\bar t\\ne0$ by the definition $\\mathfrak q=\\ker(B\\to F)$, so $0\\notin\\overline T$. For $c=b/f(s)\\in C$, its image in $F=C/\\mathfrak mC$ is $\\bar b/\\overline{f(s)}$. Reduction of $u$ sends its class to $[b/f(s)]$, and the formula just proved for $\\theta$ sends this to the same fraction $\\bar b/\\overline{f(s)}$ in $\\overline T^{-1}F$. Since every element of $C$ has this form, the composite is precisely localization of $F$. Finally $z/1=0$ in $\\overline T^{-1}F$ means $vz=0$ in $F$ for some $v\\in\\overline T$ by the localization equality criterion. Here $v\\ne0$ and $F$ is a domain, so $z=0$. Localization of $F$ is injective; composing the reduction of $u$ with the isomorphism $\\theta$ is injective, and hence the reduction itself is injective.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT, proposition-localize-quotient, fraction formula, and the localization equality relation; compatibility expanded on every element of C."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-ring-localization-quotient",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-prime-localized-module-base-change",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-localization-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expansion of the elementary localization algebra underlying Tag 0810 (flat.tex, lemma-helper-blowup-affine-space, final paragraph), using Tags 00E6, 00CP, 00DK, 00SI, 00HT, 00CT and 00DF. Specified scalar and reduction comparisons checked on fractions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat algebra with a domain fibre at a prime of the base, localization at the fibre generic prime is flat over the base local ring and its closed fibre is the localization of that domain.",
+   "results": "{\"t\": \"2026-10-22T06:42:47Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat algebra with a domain fibre at a prime of the base, localization at the fibre generic prime is flat over the base local ring and its closed fibre is the localization of that domain.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFlatAtPrime\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.ofLocalizationPrime\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.propertyIsLocal\", \"Module.flat_of_isLocalized_maximal\"], \"digest\": \"18b906efdb121437\"}; Read instFlatAtPrime and RingHom.Flat.localRingHom: they give the flatness clause only. Ideal.Fiber.algEquivQuotient and Ideal.Fiber.localizationAlgEquivQuotient in RingTheory/LocalRing/ResidueField/Fiber.lean (lines 88-149) give candidate fibre/quotient equivalences. They do not state the full scalar-change isomorphism together with its specified fraction formula and the compatibility of the actual reduction of u with localization at the image of B minus q. Those identifications still require a proof; no exact or one-line match for the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Localization.AtPrime",
+   "results": "{\"t\": \"2026-10-22T06:42:41Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Localization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFlatAtPrimeOfIsScalarTower\", \"Ideal.finrank_fiber_eq_rankAtStalk\", \"Ideal.finrank_fiber_eq_finrank\", \"Module.rankAtStalk_eq\", \"Ideal.ramificationIdx'_tower'\", \"Ideal.ramificationIdx_tower'\", \"Algebra.Smooth.of_formallySmooth_fiber\", \"Algebra.IsSmoothAt.of_formallySmooth_fiber\"], \"digest\": \"abdc83568a2252bf\"}; Read instFlatAtPrime and RingHom.Flat.localRingHom: they give the flatness clause only. Ideal.Fiber.algEquivQuotient and Ideal.Fiber.localizationAlgEquivQuotient in RingTheory/LocalRing/ResidueField/Fiber.lean (lines 88-149) give candidate fibre/quotient equivalences. They do not state the full scalar-change isomorphism together with its specified fraction formula and the compatibility of the actual reduction of u with localization at the image of B minus q. Those identifications still require a proof; no exact or one-line match for the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "instFlatAtPrime|residue.*[Ll]ocaliz|[Ll]ocaliz.*residue",
+   "results": "{\"t\": \"2026-10-22T06:42:41Z\", \"tool\": \"grep\", \"query\": \"instFlatAtPrime|residue.*[Ll]ocaliz|[Ll]ocaliz.*residue\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/Field.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\"], \"digest\": \"ba23999f0dcb99c3\"}; Read instFlatAtPrime and RingHom.Flat.localRingHom: they give the flatness clause only. Ideal.Fiber.algEquivQuotient and Ideal.Fiber.localizationAlgEquivQuotient in RingTheory/LocalRing/ResidueField/Fiber.lean (lines 88-149) give candidate fibre/quotient equivalences. They do not state the full scalar-change isomorphism together with its specified fraction formula and the compatibility of the actual reduction of u with localization at the image of B minus q. Those identifications still require a proof; no exact or one-line match for the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat algebra localization at a fibre generic prime and identification of its residue fibre",
+   "results": "{\"t\": \"2026-10-22T06:42:41Z\", \"tool\": \"leansearch\", \"query\": \"Flat algebra localization at a fibre generic prime and identification of its residue fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.holdsForLocalizationAway\", \"AlgebraicGeometry.StructureSheaf.Localizations\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.localRingHom\", \"Localization.AtPrime.instAlgebraOfLiesOver\", \"Module.flat_iff_of_isLocalization\"], \"digest\": \"8cff632712756f98\"}; Read instFlatAtPrime and RingHom.Flat.localRingHom: they give the flatness clause only. Ideal.Fiber.algEquivQuotient and Ideal.Fiber.localizationAlgEquivQuotient in RingTheory/LocalRing/ResidueField/Fiber.lean (lines 88-149) give candidate fibre/quotient equivalences. They do not state the full scalar-change isomorphism together with its specified fraction formula and the compatibility of the actual reduction of u with localization at the image of B minus q. Those identifications still require a proof; no exact or one-line match for the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For flat R to B and p with domain fibre F, if q is the kernel of B to F then q lies over p and B_q modulo p is the localization of F at the nonzero images of B outside q.",
+   "results": "{\"t\": \"2026-10-22T06:43:00Z\", \"tool\": \"leanfinder\", \"query\": \"For flat R to B and p with domain fibre F, if q is the kernel of B to F then q lies over p and B_q modulo p is the localization of F at the nonzero images of B outside q.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFlatAtPrime\", \"AlgHom.toKerIsLocalization_isLocalizedModule\", \"RingHom.toKerIsLocalization\", \"AlgHom.toKerIsLocalization\", \"Algebra.HasGoingDown.of_flat\", \"AlgHom.toKerIsLocalization_apply\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"b7e42e33ef60f829\"}; Read instFlatAtPrime and RingHom.Flat.localRingHom: they give the flatness clause only. Ideal.Fiber.algEquivQuotient and Ideal.Fiber.localizationAlgEquivQuotient in RingTheory/LocalRing/ResidueField/Fiber.lean (lines 88-149) give candidate fibre/quotient equivalences. They do not state the full scalar-change isomorphism together with its specified fraction formula and the compatibility of the actual reduction of u with localization at the image of B minus q. Those identifications still require a proof; no exact or one-line match for the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]iber.*[Ll]ocal|[Ll]ocal.*[Ff]iber|isLocalization",
+   "results": "{\"t\": \"2026-10-22T06:42:58Z\", \"tool\": \"grep\", \"query\": \"[Ff]iber.*[Ll]ocal|[Ll]ocal.*[Ff]iber|isLocalization\", \"sub\": \"RingTheory/LocalRing/ResidueField/Fiber.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"52\", \"54\", \"72\", \"73\", \"75\"], \"digest\": \"814fe45890042b7b\"}; Read instFlatAtPrime and RingHom.Flat.localRingHom: they give the flatness clause only. Ideal.Fiber.algEquivQuotient and Ideal.Fiber.localizationAlgEquivQuotient in RingTheory/LocalRing/ResidueField/Fiber.lean (lines 88-149) give candidate fibre/quotient equivalences. They do not state the full scalar-change isomorphism together with its specified fraction formula and the compatibility of the actual reduction of u with localization at the image of B minus q. Those identifications still require a proof; no exact or one-line match for the complete statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "instFlatAtPrime|localizationAlgEquivQuotient|algEquivQuotient",
+   "results": "{\"t\": \"2026-10-23T14:44:54Z\", \"tool\": \"grep\", \"query\": \"instFlatAtPrime|localizationAlgEquivQuotient|algEquivQuotient\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean\"], \"digest\": \"2b36e8cf5985466c\"}; Read Flat/Localization.lean:45-56, Localization/BaseChange.lean:68-145,271-285 and LocalRing/ResidueField/Fiber.lean:85-145. Flatness and fibre equivalences are constituent results; no hit states the full fraction-normalized scalar comparison and compatibility of reduction. Existing DAG nodes supply these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a flat algebra at a prime in a domain fibre gives a flat local algebra with localized closed fibre and tensor product comparison",
+   "results": "{\"t\": \"2026-10-23T14:44:55Z\", \"tool\": \"leansearch\", \"query\": \"Localizing a flat algebra at a prime in a domain fibre gives a flat local algebra with localized closed fibre and tensor product comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"Module.Flat.localizedModule\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.flat_iff_of_isLocalization\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.localRingHom\", \"IsLocalization.flat\"], \"digest\": \"cfaeadf71602f103\"}; Read Flat/Localization.lean:45-56, Localization/BaseChange.lean:68-145,271-285 and LocalRing/ResidueField/Fiber.lean:85-145. Flatness and fibre equivalences are constituent results; no hit states the full fraction-normalized scalar comparison and compatibility of reduction. Existing DAG nodes supply these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Localization.AtPrime",
+   "results": "{\"t\": \"2026-10-23T14:44:55Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Localization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFlatAtPrimeOfIsScalarTower\", \"Ideal.finrank_fiber_eq_rankAtStalk\", \"Ideal.finrank_fiber_eq_finrank\", \"Module.rankAtStalk_eq\", \"Ideal.ramificationIdx'_tower'\", \"Ideal.ramificationIdx_tower'\", \"Algebra.Smooth.of_formallySmooth_fiber\", \"Algebra.IsSmoothAt.of_formallySmooth_fiber\"], \"digest\": \"abdc83568a2252bf\"}; Read Flat/Localization.lean:45-56, Localization/BaseChange.lean:68-145,271-285 and LocalRing/ResidueField/Fiber.lean:85-145. Flatness and fibre equivalences are constituent results; no hit states the full fraction-normalized scalar comparison and compatibility of reduction. Existing DAG nodes supply these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat ring map localized at primes with domain fibre has scalar comparison for every module and closed fibre the localization of the original fibre",
+   "results": "{\"t\": \"2026-10-23T14:44:57Z\", \"tool\": \"leanfinder\", \"query\": \"A flat ring map localized at primes with domain fibre has scalar comparison for every module and closed fibre the localization of the original fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFlatAtPrime\", \"RingHom.Flat.ofLocalizationPrime\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.localRingHom\", \"Module.flat_of_isLocalized_maximal\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"41aa0e28093ab643\"}; Read Flat/Localization.lean:45-56, Localization/BaseChange.lean:68-145,271-285 and LocalRing/ResidueField/Fiber.lean:85-145. Flatness and fibre equivalences are constituent results; no hit states the full fraction-normalized scalar comparison and compatibility of reduction. Existing DAG nodes supply these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleTensorEquiv|localizationAlgEquivQuotient|localRingHom",
+   "results": "{\"t\": \"2026-10-23T14:49:55Z\", \"tool\": \"grep\", \"query\": \"moduleTensorEquiv|localizationAlgEquivQuotient|localRingHom\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\"], \"digest\": \"7dee717d0ca1cea0\"}; Read Flat/Localization.lean:45-56, Localization/BaseChange.lean:68-145,271-285 and LocalRing/ResidueField/Fiber.lean:85-145. Flatness and fibre equivalences are constituent results; no hit states the full fraction-normalized scalar comparison and compatibility of reduction. Existing DAG nodes supply these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a tensor product at a fibre generic prime identifies base local scalar extension and the quotient of the localization by the maximal ideal with a localization of the domain fibre",
+   "results": "{\"t\": \"2026-10-23T14:49:56Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of a tensor product at a fibre generic prime identifies base local scalar extension and the quotient of the localization by the maximal ideal with a localization of the domain fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.tensorEquiv\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.Away.tensor\", \"Ideal.Fiber.exists_smul_eq_one_tmul\", \"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.Away.tensorRight\", \"IsLocalization.Away.tensorRightEquiv\", \"Algebra.instIsStandardOpenImmersionTensorProduct\"], \"digest\": \"cc8ad195dd406648\"}; Read Flat/Localization.lean:45-56, Localization/BaseChange.lean:68-145,271-285 and LocalRing/ResidueField/Fiber.lean:85-145. Flatness and fibre equivalences are constituent results; no hit states the full fraction-normalized scalar comparison and compatibility of reduction. Existing DAG nodes supply these ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-generic-localization-intersection",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input through the flattening-by-blowup branch: Tag 0810, final paragraph, the base-localized algebra injects into its fibre-generic localization, hence into the product over base primes. Extracts returned item steps 1, 3 and 4.",
+   "via": [
+    "lem-trf-affine-generic-localization-intersection",
+    "lem-trf-affine-generic-rank-blowup",
+    "lem-trf-generic-free-blowup",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fibre-generic-localization-residue-flat",
+  "worker": "stage1",
+  "summary": "Six-step proof with no new nodes. Proved contraction and primality, constructed both localization maps, specialized the existing prime-localized module comparison with the explicit L_p=L identification, deduced flatness, and constructed the quotient/localization comparison with its fraction formula and injective actual reduction. Statement unchanged.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)-(2), auxiliary flattening branch through the recorded via chain; Tag 0810 final paragraph. Latest blueprint proof read: it gives the contracting-correspondence route; this item supplies only the subsidiary ring algebra in the existing flattening branch.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-prime-localized-module-base-change",
+    "why": "Generic ring/module localization comparison, first isomorphism only, for R→B and M=L; the trace-formula unit has no generic module scalar comparison. It replaces no geometric step of that unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-prime-localized-module-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-b90bb9589",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-b90bb9589 (reviewer sub-agent of L); spot-checked: Six-step split, no new nodes. Statement and stmt_deps are unchanged from the base (checked against the O2 snapshots). There is no re-split note. Every step is verified against the cited statements. Step 1: the fibre-ring-localization-quotient node identifies its pB_p with mC; kappa(p)->F is injective because F is nonzero, so q is prime and contracts to p. Step 2: universal property plus localization-of-localization clause (2) with f(S)⊆T make u a localization at U. Step 3: Phi of prime-localized-module-base-change with p=f^{-1}(q); L_p≅L is shown well defined and A-linear; naturality is checked on generators. Step 4: localization-flat, composition and flat-over-localization give D flat over A. Step 5: tensor-quotient for C->D with ID=mD and localization base change along C->F give theta with the formula [b/t]->b̄/t̄; this is checked in the tensor ring. Step 6 is elementary: t̄≠0, the composite is the localization map, injective since F is a domain. The item matches the Tag 0810 final-paragraph use and what the parent affine-generic-localization-intersection step needs. Edge cases checked: R a field, Z, Z[x], k[eps], L=0 or torsion; F=0 is correctly excluded. No duplicate in the DAG and no SGA. I accept the tool_use lem-weil-pbc-prime-localized-module-base-change as generic module algebra. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreGenericLocalizationResidueFlat",
+  "declaration": "Localization.fibreGeneric_flat_closedFibre",
+  "declarations": [
+   "Localization.fibreGeneric_kernel_prime_liesOver",
+   "Localization.fibreGenericLocalizedTensorModule",
+   "Localization.fibreGeneric_tensor_comparison",
+   "Localization.fibreGenericFibreQuotientEquiv",
+   "Localization.fibreGeneric_flat_closedFibre"
+  ],
+  "file": "lean/Sheaf/RingTheory/FibreGenericLocalizationResidueFlat.lean",
+  "statement": "theorem fibreGeneric_flat_closedFibre {R : Type u} {B : Type v} [CommRing R] [CommRing B] [Algebra R B] [Module.Flat R B] (p : Ideal R) [p.IsPrime] [IsDomain (p.Fiber B)] (q : Ideal B) [q.IsPrime] (hq : q = RingHom.ker (Algebra.TensorProduct.includeRight : B →ₐ[R] p.Fiber B).toRingHom) [q.LiesOver p] [Algebra (Localization.AtPrime p) (Localization.AtPrime q)] [Localization.AtPrime.IsLiesOverAlgebra p q] : Module.Flat (Localization.AtPrime p) (Localization.AtPrime q) ∧ (∀ z ∈ q.primeCompl.map (Algebra.TensorProduct.includeRight : B →ₐ[R] p.Fiber B).toMonoidHom, z ≠ 0) ∧ ∃ u : Localization (Algebra.algebraMapSubmonoid B p.primeCompl) →ₐ[Localization.AtPrime p] Localization.AtPrime q, u.toRingHom.comp (algebraMap B _) = algebraMap B (Localization.AtPrime q) ∧ ∃ ρ : (Localization (Algebra.algebraMapSubmonoid B p.primeCompl) ⧸ Ideal.map (algebraMap (Localization.AtPrime p) _) (IsLocalRing.maximalIdeal (Localization.AtPrime p))) →+* (Localization.AtPrime q ⧸ Ideal.map (algebraMap (Localization.AtPrime p) _) (IsLocalRing.maximalIdeal (Localization.AtPrime p))), (∀ c, ρ (Ideal.Quotient.mk _ c) = Ideal.Quotient.mk _ (u c)) ∧ ∃ θ : (Localization.AtPrime q ⧸ Ideal.map (algebraMap (Localization.AtPrime p) _) (IsLocalRing.maximalIdeal (Localization.AtPrime p))) ≃+* Localization (q.primeCompl.map (Algebra.TensorProduct.includeRight : B →ₐ[R] p.Fiber B).toMonoidHom), (∀ (b : B) (t : q.primeCompl), θ (Ideal.Quotient.mk _ (Localization.mk b t)) = Localization.mk ((Algebra.TensorProduct.includeRight : B →ₐ[R] p.Fiber B) b) ⟨(Algebra.TensorProduct.includeRight : B →ₐ[R] p.Fiber B) t, Submonoid.mem_map_of_mem _ t.property⟩) ∧ θ.toRingHom.comp ρ = (algebraMap (p.Fiber B) _).comp (fibreGenericFibreQuotientEquiv (B := B) p).symm.toRingHom ∧ Function.Injective ρ",
+  "branch": "sheaf-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The complete node is stated jointly by the three recorded theorems: kernel primality/contraction, natural tensor comparison, and flatness/closed-fibre compatibility. The instance restricts the canonical B_q-action along R_p → B_q; the quotient-equivalence helper only forgets the B-algebra structure of the existing Mathlib equivalence. Tensor factors use the commuted Mathlib model. No statement correction or new notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e402cb395",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Every node clause matches: q=ker(includeRight) prime and LiesOver p; canonical A-algebra on D via IsLiesOverAlgebra; u pinned by u∘(B→C)=(B→D); Φ family over all A-modules L:Type w, fixed on generators mk(b⊗l)t ↦ mk b t ⊗ l, natural in A-linear h; Flat A D; T̄ elements nonzero; θ:D/mD≃+*T̄⁻¹F fixed on fractions; ρ pinned on classes; θ∘ρ = algebraMap∘(Ideal.Fiber.algEquivQuotient)⁻¹ (unique B-algebra iso); ρ injective. Commuted tensor convention (B⊗L, D⊗L, κ⊗B) documented and canonical. Binders q prime / LiesOver / IsLiesOverAlgebra are thm-1 outputs or Mathlib's construction, no extra assumption. Universes u,v,w independent. Helpers have real data (compHom of moduleOfIsLocalization; toRingEquiv of Mathlib algEquivQuotient). All theorems sorry; source and blueprint docstrings with steps 1-6; lean.statement verbatim; node diff vs live only in lean; first S2 delivery. Edge cases checked: field base, B=R, L=0/torsion, F=0 excluded. Advisory only: public instance takes a free Algebra A D argument. No compile (no changes)."
+ }
+}

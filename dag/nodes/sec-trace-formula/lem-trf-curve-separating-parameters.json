@@ -17,9 +17,127 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in L$ transcendental over $K$, and put $F=K(x)$. The singleton $\\{x\\}$ is a transcendence basis of $F/K$, so $\\operatorname{trdeg}_K F=1$. The tower formula gives $1=1+\\operatorname{trdeg}_F L$, hence $\\operatorname{trdeg}_F L=0$ and $L/F$ is algebraic. Choose the given finite field-generating family $L=K(a_1,\\ldots,a_n)$. Then $L=F(a_1,\\ldots,a_n)$, and each $a_i$ is algebraic over $F$. The algebraic-generators theorem gives $[L:F]<\\infty$. This establishes the first assertion without using separability.",
+   "uses": [
+    "def-kun-transcendence-degree",
+    "lem-kun-transcendence-degree-tower",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030H, lemma-transcendence-degree-tower, and 09GH, lemma-algebraic-finitely-generated."
+   }
+  },
+  {
+   "text": "Let $C$ be the smooth integral $K$-scheme in the hypotheses, so its structure morphism $C\\to\\operatorname{Spec}K$ is smooth. Choose a nonempty affine open $\\operatorname{Spec}A\\subseteq C$. The inclusion is an open immersion, so by [lem-pc-open-immersion-smooth-composition] the composite $\\operatorname{Spec}A\\to C\\to\\operatorname{Spec}K$ is smooth; it is $\\operatorname{Spec}$ of the structure map $K\\to A$, so [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] makes $K\\to A$ a smooth ring map in the sense of [def-weil-pbc-smooth-ring-map]. Integrality makes $A$ a domain, and the generic-point fraction-field identification identifies its fraction field, compatibly over $K$, with $L$. Apply [lem-trf-smooth-domain-fraction-separably-generated] to this $A$ and $L$. Thus $L/K$ is separable in the nonalgebraic sense; no perfection of $K$ is assumed.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "def-pc-integral-scheme",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-trf-smooth-domain-fraction-separably-generated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037X, lemma-localization-smooth-separable; affine-local smoothness as in 01V4; generic fraction-field identification as in 01RV."
+   }
+  },
+  {
+   "text": "Apply the definition of a separable field extension to the finitely generated intermediate field $L$ itself. It gives a separating transcendence basis. Its cardinality is $\\operatorname{trdeg}_K L=1$, so it consists of one element $t$. Then $t$ is transcendental and $L/K(t)$ is separable algebraic; step 1 makes it finite. This proves existence. The separating-basis differential theorem says that $dt$ is an $L$-basis of $\\Omega_{L/K}$, which therefore has dimension one and is nonzero. Here and below $d$ denotes the universal $K$-derivation.",
+   "uses": [
+    "def-weil-pbc-separable-field-extension",
+    "def-kun-transcendence-degree",
+    "lem-weil-pbc-separably-generated-differentials-dimension",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition 030O, definition-separable-field-extension; separating-basis computation in the proof of 031W, lemma-derivative-zero-pth-power (the differential computation itself applies to any separating basis)."
+   }
+  },
+  {
+   "text": "For every $x\\in L$, put $F=K(x)$. The first differential exact sequence identifies $\\Omega_{L/F}$ with the quotient of $\\Omega_{L/K}$ by the image of $L\\otimes_F\\Omega_{F/K}$. That image is precisely $L\\,dx$: $x\\in F$, and every $f\\in F$ is $P(x)/Q(x)$ with $Q(x)\\ne0$, so the derivation rules give $df=(P\\prime(x)Q(x)-P(x)Q\\prime(x))Q(x)^{-2}dx$. If $dx\\ne0$, this line is all of the one-dimensional space in step 3. Thus $\\Omega_{L/F}=0$. The same finite generators as over $K$ generate $L/F$, so [lem-weil-pbc-fg-field-zero-differentials-separable] implies $L/F$ finite separable. The tower formula then gives $\\operatorname{trdeg}_K F=1$, so $x$ cannot be algebraic over $K$ (an algebraic $K(x)/K$ has degree of transcendence zero). Conversely, if $x$ is transcendental and $L/F$ finite separable, the polynomial differential basis theorem for $K[X]$ and its localization to $F=K(x)$ make $dx$ an $F$-basis of $\\Omega_{F/K}$. Finite-separable differential base change sends $1\\otimes dx$ to $dx$ and is an isomorphism onto $\\Omega_{L/K}$. Consequently $dx\\ne0$. We have proved $dx\\ne0$ if and only if $x$ is transcendental and $L/K(x)$ is finite separable.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-fg-field-zero-differentials-separable",
+    "lem-kun-transcendence-degree-tower",
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-separable-algebraic-differentials-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RS, lemma-exact-sequence-differentials; 090W, lemma-characterize-separable-algebraic-field-extensions; 00RX, lemma-differentials-polynomial-ring; 00RT, lemma-differentials-localize; finite-separable base change as in the proof of 031W."
+   }
+  },
+  {
+   "text": "Assume $\\operatorname{char}K=p>0$ and put $D=KL^p$. The derivation $d$ kills $K$ and $p$th powers since $d(a^p)=pa^{p-1}da=0$. Its zero set is closed under addition, products and inverses of nonzero elements, by the derivation rules, so $D\\subseteq\\ker d$. Conversely, if $x\\notin D$, apply [lem-weil-pbc-p-independent-insert-outside-span] with empty set $T$. Its bounded monomials consist only of $1$ and have $D$-linear span $D$; thus its hypotheses hold and $1,x,\\ldots,x^{p-1}$ are $D$-linearly independent. The singleton-family case of [lem-weil-pbc-p-independent-differentials-independent] gives $dx\\ne0$. Hence $x\\notin D$ if and only if $dx\\ne0$. Step 4 proves the asserted parameter criterion. Also $dt\\ne0$ by step 3, so $t\\notin D$ and $D\\ne L$. Finally $D$ is a $K$-linear subspace: it contains $K$, is additively closed, and $c a\\in D$ for $c\\in K$, $a\\in D$, since it is a subfield. This proves both properness and linearity.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-p-independent-insert-outside-span",
+    "lem-weil-pbc-p-independent-differentials-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P2, lemma-p-basis, equivalence (1) and (2), and the maximal-p-independent-set argument; the kernel-subfield observation follows directly from the derivation rules."
+   }
+  },
+  {
+   "text": "Assume $\\operatorname{char}K=0$. We claim that every $x\\in L$ algebraic over $K$ belongs to $K$. Indeed $F=K(x)$ is finitely generated and algebraic over $K$, so its transcendence degree is zero. The characteristic-zero separability theorem and the definition of nonalgebraic separability applied to $F$ give a separating transcendence basis with zero elements. Thus $F/K$ is separable algebraic, and it is finite by [lem-weil-pbc-algebraic-generators-finite-extension]. Separably closedness of $K$ forces $F=K$. Consequently $x\\notin K$ if and only if $x$ is transcendental over $K$. For such $x$, step 1 gives $L/K(x)$ finite. Apply the characteristic-zero theorem with base $K(x)$; since $L/K(x)$ is algebraic its separating basis is empty, so the extension is separable algebraic. Conversely, a transcendental $x$ is outside $K$ by definition. This is exactly the required criterion for $D=K$. The subfield $K$ is a $K$-linear subspace and is proper because the element $t$ of step 3 is transcendental.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "def-weil-pbc-separable-field-extension",
+    "def-kun-transcendence-degree",
+    "lem-kun-transcendence-degree-tower",
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-kun-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Characteristic-zero assertion in the proof of 00TX, lemma-characteristic-zero-local-smooth; Definition 030O; separably closedness and the finite algebraic argument (Fields 09GH)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "lem-kun-transcendence-degree-tower",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-sbc-smooth-morphisms",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-trf-smooth-domain-fraction-separably-generated",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-separably-generated-differentials-dimension",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+  "lem-weil-pbc-fg-field-zero-differentials-separable",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-separable-algebraic-differentials-base-change",
+  "lem-weil-pbc-p-independent-insert-outside-span",
+  "lem-weil-pbc-p-independent-differentials-independent",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "def-kun-separably-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of 037X, 00RS, 090W, 00RX, 00RT and separating-basis differentials; More on Algebra 07P2 for the bad-parameter subfield; original Temkin paper absent locally (WANTED in report)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,10 +180,52 @@
    "results": "OK: 1 hit: Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable, Mathlib/RingTheory/Smooth/Field.lean. The signature assumes algebraic independence and separability and proves formal smoothness; it does not provide the separating-parameter existence or the bad-parameter criterion.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "separating|p[Bb]asis|ker.*[Dd]eriv",
+   "results": "{\"t\": \"2026-10-24T07:58:31Z\", \"tool\": \"grep\", \"query\": \"separating|p[Bb]asis|ker.*[Dd]eriv\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"Mathlib/FieldTheory/SeparablyGenerated.lean\"], \"digest\": \"7c475eca8d350633\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: related separable/purely-inseparable extension statements do not give the full curve parameter criterion; separating-basis hits require additional Frobenius-independence or perfection hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth curve function field has finite separable extension over a parameter outside the pth power constant subfield",
+   "results": "{\"t\": \"2026-10-24T07:58:31Z\", \"tool\": \"leansearch\", \"query\": \"A smooth curve function field has finite separable extension over a parameter outside the pth power constant subfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.adjoin_simple_eq_adjoin_pow_expChar_of_isSeparable\", \"IsPurelyInseparable.sepDegree_eq_one\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\", \"isPurelyInseparable_iff_natSepDegree_eq_one\", \"separableClosure.isPurelyInseparable\", \"IsSeparable\", \"IsPurelyInseparable\", \"Field.insepDegree\"], \"digest\": \"873d80b48750c2d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: related separable/purely-inseparable extension statements do not give the full curve parameter criterion; separating-basis hits require additional Frobenius-independence or perfection hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-24T07:58:31Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: related separable/purely-inseparable extension statements do not give the full curve parameter criterion; separating-basis hits require additional Frobenius-independence or perfection hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separating parameters of a smooth curve function field are exactly the elements outside the subfield generated by constants and pth powers",
+   "results": "{\"t\": \"2026-10-24T07:58:32Z\", \"tool\": \"leanfinder\", \"query\": \"Separating parameters of a smooth curve function field are exactly the elements outside the subfield generated by constants and pth powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField\", \"WeierstrassCurve.Affine.FunctionField\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"IsPurelyInseparable.inseparable\", \"IsPurelyInseparable.inseparable'\"], \"digest\": \"145bb0937ecb578c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: related separable/purely-inseparable extension statements do not give the full curve parameter criterion; separating-basis hits require additional Frobenius-independence or perfection hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "separabl|separating|p[Bb]asis|kernel",
+   "results": "{\"t\": \"2026-10-24T08:00:41Z\", \"tool\": \"grep\", \"query\": \"separabl|separating|p[Bb]asis|kernel\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\"], \"digest\": \"b31cb84e5a7be36b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: related separable/purely-inseparable extension statements do not give the full curve parameter criterion; separating-basis hits require additional Frobenius-independence or perfection hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element of a one dimensional separably generated function field is a separating parameter if and only if its relative differential is nonzero",
+   "results": "{\"t\": \"2026-10-24T08:00:44Z\", \"tool\": \"leanfinder\", \"query\": \"An element of a one dimensional separably generated function field is a separating parameter if and only if its relative differential is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Differential.differentialFiniteDimensional\", \"Algebra.IsSeparable.isSeparable\", \"Algebra.IsSeparable.isSeparable'\", \"IsLiouville\", \"IsSeparable.of_integral\", \"Algebra.isSeparable_def\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Differential.differentialAlgebraFiniteDimensional\"], \"digest\": \"ceb01c1634277016\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: related separable/purely-inseparable extension statements do not give the full curve parameter criterion; separating-basis hits require additional Frobenius-independence or perfection hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valued-curve-etale-parameter",
@@ -95,5 +255,40 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-curve-separating-parameters",
+  "worker": "stage1",
+  "summary": "One-level split via separating-basis differentials and the p-independent singleton criterion. Added only the missing smooth-domain fraction-field separability implication; reused existing finiteness, differential and p-basis nodes, checked each cited statement. No statement correction. Original Temkin PDF absent locally; proof is explicitly agent-written from the local Stacks inputs.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proof of Theorem 2.1.8, printed p. 13, separating-transcendence-basis paragraph; smoothness-to-separability also Stacks Tag 037X, algebra-lemma-localization-smooth-separable; the characteristic-p criterion is the separating-parameter criterion quoted in that paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "step 2 takes from its statement only that Spec of a ring map is smooth (def-sbc-smooth-morphisms) iff the ring map is smooth (def-weil-pbc-smooth-ring-map), to feed the affine chart to the new smooth-domain node; generic scheme/ring-map bridge, no node of sk-i-curve-zero gives it"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-cd3996e12",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-cd3996e12 (reviewer sub-agent of L); spot-checked: The mathematics is read in full and correct; I repaired one citation in step 2. The item statement is unchanged from live, where the item is unsplit with no proof, and there is no re-split note. Checked on K(T): D=K(T^p), T good, T^p bad; algebraic non-constant x is impossible because L/K is separable (and in char 0 K is algebraically closed). Step-by-step checks. Step 1: tower formula plus algebraic generators give L/K(x) finite. Step 3: definition (2) applied to L gives a singleton separating basis t, and dt is a basis of Omega_{L/K} by separably-generated-differentials-dimension (closed in slopmaster2). Step 4: first exact sequence with image L dx (quotient rule written out); fg-zero-differentials gives L/K(x) finite separable; tower formula gives x transcendental; converse via polynomial basis, localization and separable base change. Step 5: ker d is a subfield containing K L^p; insert-outside-span with T empty plus singleton p-independence gives dx nonzero for x outside D (also valid for p=2); D is proper because t is not in D. Step 6 (char 0): algebraic x gives K(x)/K finite separable, so K(x)=K by separable closedness; L/K(x) is separable by the char-0 node. New node lem-trf-smooth-domain-fraction-separably-generated (smooth domain over k has fraction field separable over k): true, Stacks 07ND forward / 037X (algebra.tex l.38891, l.44512 read). It is statement-only and self-contained. Four Mathlib searches are recorded; I confirmed RingTheory/Smooth/Field.lean has only the converse and the perfect-field case. No DAG duplicate: smooth-at-generic-point-over-field, separable-extension-fraction-field-of-smooth-algebra, lem-exc-generic-smooth-domain and lem-kun-fg-separable-smooth are converses; smooth-geometrically-normal is only a possible proof route. It does not restate an item clause. FIX (C1/C4): step 2 took 'affine chart with K->A a smooth ring map' from a parenthetical remark inside def-sbc-smooth-morphisms. It now cites lem-pc-open-immersion-smooth-composition (Mathlib leaf) and lem-weil-pbc-smooth-ring-map-iff-smooth-affine (accepted tool use from sk-thm-p1, recorded in split_report.tool_uses) plus def-weil-pbc-smooth-ring-map; proof_deps updated; no cycle. The Temkin PDF is absent, so the item stays marked agent-written and the report keeps its WANTED line.; 1 file(s) fixed by the reviewer"
+ }
 }

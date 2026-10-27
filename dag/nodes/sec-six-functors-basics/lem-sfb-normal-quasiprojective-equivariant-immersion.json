@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-normal-quasiprojective-equivariant-immersion",
+ "kind": "statement",
+ "title": "Equivariant projective immersions of normal quasi-projective schemes",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-affine-spectrum]. Assume $G$ is connected [def-weil-connected-scheme]. Let $X$ be a normal separated finite-type quasi-projective $k$-scheme [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism]; normal means that every local ring is an integral domain integrally closed in its fraction field [def-weil-pbc-normal-ring]. Here quasi-projective means admitting an immersion into some $\\mathbf P^n_k=\\operatorname{Proj}(k[z_0,\\ldots,z_n])$, with the total-degree grading [def-pc-proj]; an immersion factors as a closed immersion into an open subscheme [def-weil-closed-immersion, def-weil-open-immersion]. An action is a morphism $G\\times_k X\\to X$ [def-pc-fibre-product] satisfying the identity and associativity identities. For any action of $G$ on $X$, there exist a nonzero finite-dimensional $k$-vector space $V$ [def-weil-finite-dimensional-subspace], a group-scheme homomorphism $\\rho:G\\to\\operatorname{GL}(V)$ [def-sc-general-linear-group], and a $G$-equivariant immersion $j:X\\hookrightarrow\\mathbf P(V)$. Here $\\operatorname{GL}(V)(A)=\\operatorname{Aut}_A(V\\otimes_k A)$ for a commutative $k$-algebra $A$; $\\mathbf P(V)$ is the projective space of lines, given in a basis of $V$ by $\\operatorname{Proj}(S)$ for the polynomial ring $S=k[z_0,\\ldots,z_{\\dim V-1}]$ [def-weil-pbc-mv-polynomial-ring], with $\\deg z_i=1$ and the projective action induced by $\\rho$. Equivariance is the identity $j\\circ a=\\rho_{\\mathbf P}\\circ(1_G\\times j)$ of morphisms, so holds after every algebra extension, including nonreduced ones. There is no smoothness, integrality, projectivity or faithfulness hypothesis on $X$. For $X=\\varnothing$ one may take a one-dimensional trivial representation.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Supporting input for Section 7e, definition of a linear action; NOT asserted to occur in Milne. WANTED: H. Sumihiro, Equivariant completion (1974), Theorem 1 and Lemma 8, equivariant projective embedding of a normal quasi-projective variety. Online corroboration: M. Brion, Algebraic group actions on normal varieties, arXiv:1703.09506v3, Introduction, Corollary 2.14 and the definition of G-quasi-projectivity in Section 2.5. Agent extension to finite disjoint unions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-proj",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-general-linear-group",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-connected-scheme",
+  "def-sfb-standard-linear-projective-action"
+ ],
+ "proof": [
+  {
+   "text": "If $X=\\varnothing$, take $V=k$, the trivial homomorphism, and the unique map to $\\mathbf P^0_k$. The empty subscheme is open, hence this is an immersion, and both equivariance composites are the unique map from the empty scheme. Assume henceforth $X\\ne\\varnothing$. Choose the immersion $i:X\\to\\mathbf P^n_k$ in the hypothesis and put $A=i^*\\mathcal O(1)$. By [def-trf-relatively-very-ample] this is relatively very ample over $k$. Apply the equivalence of [lem-trf-relative-ample-very-ample], with exponent $1$, to conclude that $A$ is ample. Its finite-type hypothesis is precisely the hypothesis on $X\\to\\operatorname{Spec}k$; its quasi-compact base hypothesis holds for the one-point affine base. Over that base relative ampleness is absolute ampleness by the definition in that cited statement.",
+   "uses": [
+    "def-trf-relatively-very-ample",
+    "lem-trf-relative-ample-very-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VM, definition-very-ample, and 01VU, lemma-finite-type-ample-very-ample, (2) implies (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-line-bundle-power-linearization] to $A$, obtaining $m\\geq1$ and a linearization of $L=A^{\\otimes m}$. The group is smooth, affine, connected and finite type, the field is algebraically closed, and $X$ is normal, separated and finite type, exactly as required; integrality of $X$ is not required. By [lem-sc-ample-positive-tensor-power], $L$ is still ample. By [lem-weil-pbc-ample-very-ample-immersion-affine-base], choose $d\\geq1$ and an immersion $u:X\\to\\mathbf P^r_k$ with $B:=L^{\\otimes d}\\cong u^*\\mathcal O(1)$. The base is affine and the structure morphism is finite type, hence locally finite type. The tensor power of the linearization of $L$ gives a linearization of $B$: tensor its structure isomorphism $d$ times. Its identity and cocycle follow by tensoring the identity and cocycle of $L$. By the identification of $(\\operatorname{Proj}k[x_0,\\ldots,x_r],\\mathcal O(1))$ with the projective bundle of $\\mathcal O^{\\oplus(r+1)}$ and its canonical twist in [lem-trf-projective-bundle-quotient-geometry], $u$ exhibits $B$ as relatively very ample over $\\operatorname{Spec}k$ in the sense of [def-trf-relatively-very-ample]. Thus $B$ is a linearized relatively very ample line bundle.",
+   "uses": [
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sc-ample-positive-tensor-power",
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "def-trf-relatively-very-ample",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly; WANTED Brion 1703.09506v3 Lemma 2.9; Stacks 01VT, lemma-finite-type-over-affine-ample-very-ample; Properties 01PT, lemma-ample-power-ample"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-very-ample-affine-finite-sections] to $B$ over $\\operatorname{Spec}k$. Obtain finitely many generating sections $s_0,\\ldots,s_N$ whose morphism $j_0:X\\to\\mathbf P^N_k$ is an immersion. Apply [lem-sfb-linearized-qcoherent-cohomology-coaction] in degree zero to the same linearized $B$. Its hypotheses hold because $X$ is quasi-compact and separated and an invertible module is quasi-coherent. We get a $k[G]$-coaction on $H=\\Gamma(X,B)$; after every commutative $k$-algebra extension $R$, its section action satisfies $(g s)(y)=\\theta_{g,g^{-1}y}(s(g^{-1}y))$. The base-change comparison and this formula are clauses of the cited statement, so no finite-dimensionality or properness of $H$ or $X$ is being assumed.",
+   "uses": [
+    "lem-sfb-very-ample-affine-finite-sections",
+    "lem-sfb-linearized-qcoherent-cohomology-coaction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; Morphisms Tag 02NP, lemma-very-ample-finite-type-over-affine"
+   }
+  },
+  {
+   "text": "The Hopf maps of $k[G]$ satisfy the coalgebra identities by [lem-sfb-affine-group-coordinate-hopf]. Apply [lem-sfb-comodule-finite-subcomodule] to the finite subset $\\{s_0,\\ldots,s_N\\}\\subset H$. It yields a finite-dimensional subcomodule $E\\subset H$ containing these sections. By [lem-sfb-rational-representation-comodule-dictionary], $E$ carries a rational representation $r:G\\to\\operatorname{GL}(E)$ and its inclusion into $H$ intertwines all algebra-valued actions. Since $X$ is nonempty and the $s_i$ generate an invertible module, at least one $s_i$ is nonzero, so $E\\ne0$. Put $V=E^\\vee$. For every algebra $R$, define the dual action by $r_R^\\vee(g)(\\lambda)=\\lambda\\circ r_R(g^{-1})$. In bases this is inverse transpose, with inverse $r_R^\\vee(g^{-1})$, and the equality $r_R(gh)=r_R(g)r_R(h)$ gives the group law after reversing the order twice. These matrices commute with algebra homomorphisms. The finite-dimensional clause of the dictionary therefore gives a group-scheme homomorphism $\\rho:G\\to\\operatorname{GL}(V)$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-comodule-finite-subcomodule",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed pp.83-84; Proposition 4.7, printed p.86; the dual-action formula is the elementary inverse-transpose calculation written in this step."
+   }
+  },
+  {
+   "text": "The evaluation $q:E\\otimes_k\\mathcal O_X\\to B$ is surjective because it contains the generating sections $s_i$. The quotient classification [lem-trf-projective-bundle-quotient-geometry] gives a morphism $j:X\\to\\mathbf P(V)$, with the convention that $\\mathbf P(V)$ parametrizes lines in $V=E^\\vee$, equivalently invertible quotients of $E$. Let $E_0\\subset E$ be the span of the $s_i$. In $\\mathbf P(V)$ let $U$ be the open where the restriction of the tautological quotient to $E_0$ is surjective. In bases it is the union of the standard opens on which at least one of the $s_i$-coordinates is nonzero. Restricting that quotient to the ordered family $(s_i)$ defines a morphism $p:U\\to\\mathbf P^N_k$ by the same quotient classification. The image of $j$ lies in $U$, since the $s_i$ generate $B$, and $p\\circ j=j_0$ by uniqueness for the quotient $(B,(s_i))$. Apply [lem-zl-immersion-cancellation] to conclude that $j:X\\to U$ is an immersion. Its factorization as a closed immersion into an open of $U$ is also a factorization into an open of $\\mathbf P(V)$, so $j$ is the desired immersion into $\\mathbf P(V)$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-zl-immersion-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07RK, lemma-immersion-permanence (1); Constructions Section 01OA, section-projective-bundle; Tag 01O4, lemma-apply-relative, quotient classification"
+   }
+  },
+  {
+   "text": "It remains to check equivariance as morphisms. The section formula from [lem-sfb-linearized-qcoherent-cohomology-coaction], applied to $g$ and $gx$, says $(r_R(g)e)(gx)=\\theta_{g,x}(e(x))$ for every commutative $k$-algebra $R$, every $g\\in G(R)$, every $x\\in X(R)$, and $e\\in E_R$. This denotes equality of the pulled-back sheaf maps; the coaction inclusion identifies $r_R$ with the action on sections. Equivalently the evaluation quotient at $gx$ is isomorphic, by $\\theta_{g,x}^{-1}$, to $q_x\\circ r_R(g)^{-1}$. Acting by $\\rho_R(g)$ on a line in $E_R^\\vee$ transforms its quotient precisely to $q_x\\circ r_R(g)^{-1}$, by the definition of inverse transpose. By the natural quotient bijection of [lem-trf-projective-bundle-quotient-geometry], the two composites from $G\\times_kX$ to $\\mathbf P(V)$ therefore agree on every affine test scheme. In particular this equality can be applied to the universal pair on each affine open of $G\\times_kX$, giving equality of the morphisms there, hence globally. This proves the asserted identity and all its base changes, including nonreduced ones.",
+   "uses": [
+    "lem-sfb-linearized-qcoherent-cohomology-coaction",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 01OA, section-projective-bundle; Tag 01O4, lemma-apply-relative, natural invertible-quotient classification; agent calculation from the degree-zero section formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-relatively-very-ample",
+  "lem-trf-relative-ample-very-ample",
+  "lem-sfb-normal-line-bundle-power-linearization",
+  "lem-sc-ample-positive-tensor-power",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-sfb-very-ample-affine-finite-sections",
+  "lem-sfb-linearized-qcoherent-cohomology-coaction",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-comodule-finite-subcomodule",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-zl-immersion-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Supporting construction for Section 7e; not a claim that Milne proves Sumihiro. WANTED Brion, Algebraic group actions on normal varieties, Lemma 2.9 and Section 2.5. Finite-submodule step follows Milne Proposition 4.7; scheme-theoretic assembly uses Stacks 01VU, 01VT, 02NP, 01OA and 07RK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant embedding normal quasi projective variety with affine algebraic group action into projectivization of finite dimensional representation",
+   "results": "{\"t\": \"2026-10-24T00:57:57Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant embedding normal quasi projective variety with affine algebraic group action into projectivization of finite dimensional representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.instMulAction\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.awayι\", \"Projectivization.map\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\"], \"digest\": \"20a642fe53cda72b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Projectivization actions and scheme immersions were returned, but no algebraic-group linearization or equivariant projective embedding theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, \"projective\"",
+   "results": "{\"t\": \"2026-10-24T00:57:57Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsImmersion, \\\"projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Projectivization actions and scheme immersions were returned, but no algebraic-group linearization or equivariant projective embedding theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "lineariz|equivariant.*projectiv|Sumihiro",
+   "results": "{\"t\": \"2026-10-24T00:57:57Z\", \"tool\": \"grep\", \"query\": \"lineariz|equivariant.*projectiv|Sumihiro\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Projectivization actions and scheme immersions were returned, but no algebraic-group linearization or equivariant projective embedding theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal quasiprojective variety admits an equivariant immersion into projective space of a finite dimensional representation for a connected affine algebraic group",
+   "results": "{\"t\": \"2026-10-24T00:57:58Z\", \"tool\": \"leansearch\", \"query\": \"A normal quasiprojective variety admits an equivariant immersion into projective space of a finite dimensional representation for a connected affine algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.isImmersion_iff\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\"], \"digest\": \"76d21ff07ec7de8e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Projectivization actions and scheme immersions were returned, but no algebraic-group linearization or equivariant projective embedding theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sumihiro linearization a normal quasi projective G variety embeds equivariantly into projective representation",
+   "results": "{\"t\": \"2026-10-24T01:01:59Z\", \"tool\": \"leanfinder\", \"query\": \"Sumihiro linearization a normal quasi projective G variety embeds equivariantly into projective representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.smul_def\", \"Projectivization.instMulAction\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"Projectivization.map\"], \"digest\": \"f557a15f89ea595d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Projectivization actions and scheme immersions were returned, but no algebraic-group linearization or equivariant projective embedding theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant projective immersion of a normal quasiprojective scheme for a smooth connected affine algebraic group",
+   "results": "{\"t\": \"2026-10-24T01:37:08Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant projective immersion of a normal quasiprojective scheme for a smooth connected affine algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.projIsoSpec\"], \"digest\": \"24bdd883e220a276\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Proj, ordinary immersions and abstract-group projectivization do not give algebraic-group-equivariant immersions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sumihiro equivariant projective embedding of a normal quasiprojective scheme with connected affine algebraic group action",
+   "results": "{\"t\": \"2026-10-24T01:37:08Z\", \"tool\": \"leansearch\", \"query\": \"Sumihiro equivariant projective embedding of a normal quasiprojective scheme with connected affine algebraic group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.Injective.addActionHom_embedding_apply\", \"Function.Injective.addActionHom_embedding_isInjective\", \"Rep.instProjective\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"Projectivization.instMulAction.congr_simp\", \"Projectivization.instMulAction\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"Projectivization.smul_mk\"], \"digest\": \"99cb0c579fb5d9e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Proj, ordinary immersions and abstract-group projectivization do not give algebraic-group-equivariant immersions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\", \"equivariant\"",
+   "results": "{\"t\": \"2026-10-24T01:37:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsImmersion\\\", \\\"equivariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Proj, ordinary immersions and abstract-group projectivization do not give algebraic-group-equivariant immersions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation.",
+   "via": [
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-quasiprojective-equivariant-immersion",
+  "worker": "stage1",
+  "summary": "Kept the statement, including disconnected and empty schemes and arbitrary algebra-valued equivariance. One new statement-only power-linearization lemma; reused the existing rational cohomology coaction and finite-subcomodule nodes. Constructed the dual representation and evaluation immersion, with explicit quotient calculation for scheme-theoretic equivariance. Avoided applying proper-scheme linear-system lemmas to a merely quasi-projective scheme.",
+  "blueprint": "The current blueprint sk-thm-sf-ctf-stability-direct-images proof (3) and the inherited supporting Sumihiro step are realized through power linearization, a finite invariant space of sections, projection cancellation and natural evaluation. The ancestor utility reports None; the inherited null ancestor and exact via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "def-trf-relatively-very-ample",
+    "why": "Generic scheme geometry used exactly as its statement specifies in the ample-line or evaluation-quotient construction; this unit has no replacement for this supporting tool."
+   },
+   {
+    "node": "lem-trf-relative-ample-very-ample",
+    "why": "Generic scheme geometry used exactly as its statement specifies in the ample-line or evaluation-quotient construction; this unit has no replacement for this supporting tool."
+   },
+   {
+    "node": "lem-sc-ample-positive-tensor-power",
+    "why": "Generic scheme geometry used exactly as its statement specifies in the ample-line or evaluation-quotient construction; this unit has no replacement for this supporting tool."
+   },
+   {
+    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "why": "Generic scheme geometry used exactly as its statement specifies in the ample-line or evaluation-quotient construction; this unit has no replacement for this supporting tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic scheme geometry used exactly as its statement specifies in the ample-line or evaluation-quotient construction; this unit has no replacement for this supporting tool."
+   },
+   {
+    "node": "lem-zl-immersion-cancellation",
+    "why": "Generic scheme geometry used exactly as its statement specifies in the ample-line or evaluation-quotient construction; this unit has no replacement for this supporting tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-relatively-very-ample",
+  "lem-trf-relative-ample-very-ample",
+  "lem-sc-ample-positive-tensor-power",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-zl-immersion-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-3514f305f",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-3514f305f (reviewer sub-agent of L); spot-checked: I read the item, the new node and all 12 cited statements in full. The new node lem-sfb-normal-line-bundle-power-linearization says a positive power of any line bundle on a normal separated finite-type X under a smooth connected affine G over algebraically closed k is linearizable (KKLV/Sumihiro, Brion 1703.09506 Lemma 2.9). It is true, and the extension to non-integral X via finitely many G-stable normal components is correct. Its cocycle direction matches the coaction node. Small cases (trivial G, a point, G_m on A^1, empty X) behave. It is strictly smaller than the item: no ampleness, immersion or representation. My dup search found nothing; the Pic(G) nodes are about the group, borel-quotient-affine-cell is only G/B, and the coaction/Hopf/Plücker nodes assume a given linearization. Steps: (1) i^*O(1) relatively very ample by 01VM, hence ample by 01VU with n=1; f-ample over Spec k is absolute ampleness. (2) Power linearization, 01PT, then 01VS/01VT immersion (no properness needed); tensor power of theta. (3) 02NP sections node; degree-0 coaction with base-change and section-formula clauses, hypotheses quasi-compact, separated and quasi-coherent all met. (4) Hopf laws, finite subcomodule (Milne 4.7) and dictionary give r; inverse transpose gives rho on V=E^vee; E nonzero. (5) Quotient classification gives j to Proj Sym E (lines in E^vee); p∘j=j_0 on the open U; 07RK(1), checked at morphisms.tex L220, needs no hypothesis, so j is an immersion. (6) q_{gx}∘r(g)=theta∘q_x gives j(gx)=rho(g)j(x) on all R-points, hence equality as morphisms. Batch-5: def-trf-relatively-very-ample (01VM), lem-trf-relative-ample-very-ample (01VU) and lem-trf-projective-bundle-quotient-geometry (01OA) are generic scheme theory filed in sec-trace-formula; very-ample-affine-finite-sections reaches it only through that definition. None is part of the trace formula or Poincaré duality, so all are accepted; tool_uses accepted. No SGA; not a re-split item. Two FIXes in fixes/dag/nodes/sec-six-functors-basics/: (a) B3: new node now cites [def-pc-module-pullback] for p_2^*, a^* (added to stmt_deps). (b) C1: step 2 claimed B relatively very ample without citation; it now cites def-trf-relatively-very-ample and lem-trf-projective-bundle-quotient-geometry (Proj k[x] = P(O^{r+1})), which is what step 3 needs.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalQuasiprojectiveEquivariantImmersion",
+  "declaration": "AlgebraicGeometry.exists_normal_quasiprojective_equivariant_immersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalQuasiprojectiveEquivariantImmersion.lean",
+  "statement": "theorem exists_normal_quasiprojective_equivariant_immersion (k : Type u) [Field k] [IsAlgClosed k] (G X : Over (Spec (.of k))) [GrpObj G] [ModObj G X] [Smooth G.hom] [IsAffine G.left] [ConnectedSpace G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (hnormal : ∀ x : X.left, IsDomain (X.left.presheaf.stalk x) ∧ IsIntegrallyClosed (X.left.presheaf.stalk x)) (hquasiprojective : ∃ (N : ℕ) (i : X ⟶ Over.mk (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (N + 1))) k)), IsImmersion i.left) : ∃ (n : ℕ) (ρ : G ⟶ GeneralLinearGroup (ULift.{u} (Fin (n + 1))) k) (a : ModObj (GeneralLinearGroup (ULift.{u} (Fin (n + 1))) k) (Over.mk (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) k))) (j : X ⟶ Over.mk (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) k)), IsMonHom ρ ∧ StandardLinearProjectiveAction.IsStandard k (ULift.{u} (Fin (n + 1))) a ∧ IsImmersion j.left ∧ ModObj.smul (M := G) (X := X) ≫ j = (ρ ▷ X) ≫ (GeneralLinearGroup (ULift.{u} (Fin (n + 1))) k ◁ j) ≫ a.smul ∧ (IsEmpty X.left → n = 0 ∧ ρ = CategoryTheory.CartesianMonoidalCategory.toUnit G ≫ MonObj.one)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bea997105",
+  "group": "NP",
+  "result": "pass",
+  "note": "Item lean record plus one new def node (def-sfb-standard-linear-projective-action); no other node or dependency record changed; both lean.statement fields verbatim; all 8 imported proof-dep modules exist. Each hypothesis and conclusion of the node has a matching Lean binder or conjunct: alg-closed k; G GrpObj, smooth, affine, connected, finite type; X separated, finite type, normal at every stalk (IsDomain ∧ IsIntegrallyClosed); quasi-projective as an immersion into Proj k[z_0..z_N]; ∃ n, ρ : G ⟶ upstream GL with IsMonHom, ∃ standard ModObj a, immersion j, equivariance as an equality of Over-morphisms; empty case n=0 with trivial ρ, satisfiable. IsStandard fixes a.smul as Proj of z_i ↦ Σ_j x_ij z_j; the comparison iso is fixed by both projections. On points [v] ↦ [gv]; the comultiplication is the standard matrix product and homMulEquiv is multiplicative, so this is a left action compatible with ModObj mul_smul and the existential is not vacuous. It is the action on lines of V, as in the node. Same pattern as the landed DiagonalProjectiveAction.IsDiagonal; no existing GL action on projective space found (H4). Gates ok: source and blueprint docstrings, six proof steps in the docstring, only proof is sorry, report has Worker report and Second reading by NP. No compile run (no changes); worker reports both files compiled with scompile."
+ }
+}

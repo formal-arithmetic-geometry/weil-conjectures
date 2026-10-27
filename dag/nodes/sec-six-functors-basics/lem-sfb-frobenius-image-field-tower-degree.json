@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-frobenius-image-field-tower-degree",
+ "kind": "statement",
+ "title": "Bases and degrees in the iterated Frobenius-image field tower",
+ "statement": "Let $K$ be a field of characteristic $p>0$, where $p$ is prime [def-weil-field], [def-pc-field-characteristic]. Put $L_i=K^{p^i}=\\{x^{p^i}:x\\in K\\}$ for every integer $i\\geq0$, as subfields of $K$ [def-pc-field-extension]. Suppose $d=[K:L_1]$ is finite [def-pc-field-tower], and let $(b_j)_{0\\leq j<d}$ be any $L_1$-basis of $K$ [def-weil-pbc-free-module]. For each $i\\geq0$, the map $\\alpha_i:K\\to L_i$, $x\\mapsto x^{p^i}$, is a field isomorphism carrying $L_1$ onto $L_{i+1}$, and $(b_j^{p^i})_{0\\leq j<d}$ is an $L_{i+1}$-basis of $L_i$. Consequently $[L_i:L_{i+1}]=d$ for every $i\\geq0$ and $[K:L_n]=d^n$ for every $n\\geq0$, with $L_0=K$ and $[K:L_0]=1$. No perfectness of $K$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09G9 (fields-lemma-multiplicativity-degrees), applied to the power-image tower in varieties.tex Tag 0CCG (varieties-remark-n-fold-relative-frobenius); basis transport under the injective Frobenius powers is the explicit algebraic refinement."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-characteristic",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-ring-frobenius], $f_i(x)=x^{p^i}$ is a unital ring endomorphism of $K$. Its kernel is zero: if $f_i(z)=0$ and $z\\ne0$, then $1=f_i(z)f_i(z^{-1})=0$, a contradiction. If $f_i(x)=f_i(y)$, apply this to $x-y$ to get $x=y$, proving injectivity. Its image $L_i$ contains $0,1$, is closed under subtraction and multiplication, and contains $f_i(x)^{-1}=f_i(x^{-1})$ for $x\\ne0$. Thus $L_i$ is a subfield, and corestriction gives the field isomorphism $\\alpha_i:K\\xrightarrow{\\sim}L_i$.",
+   "uses": [
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 03SM (varieties-definition-absolute-frobenius), following paragraph on the ring Frobenius; elementary injectivity and image calculation (compare fields.tex Tag 09FU, fields-lemma-field-maps-injective)."
+   }
+  },
+  {
+   "text": "For $a=x^p\\in L_1$, $\\alpha_i(a)=(x^p)^{p^i}=x^{p^{i+1}}$. Every element of $L_{i+1}$ has this form, so $\\alpha_i(L_1)=L_{i+1}$. Also $x^{p^{i+1}}=(x^p)^{p^i}\\in L_i$, proving $L_{i+1}\\subseteq L_i$; $L_0=K$ since $p^0=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCG (varieties-remark-n-fold-relative-frobenius), iteration, specialized to power images; elementary power identities."
+   }
+  },
+  {
+   "text": "Write $y\\in L_i$ as $y=\\alpha_i(x)$. By the given basis [def-weil-pbc-free-module], $x=\\sum_{j<d}a_jb_j$ with $a_j\\in L_1$. Applying the ring homomorphism $\\alpha_i$ gives $y=\\sum_{j<d}\\alpha_i(a_j)b_j^{p^i}$ with $\\alpha_i(a_j)\\in L_{i+1}$. Hence the displayed family spans $L_i$ over $L_{i+1}$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09G9 (fields-lemma-multiplicativity-degrees), basis expansion method, adapted along the ring Frobenius of varieties.tex Tag 03SM."
+   }
+  },
+  {
+   "text": "If $\\sum_{j<d}c_jb_j^{p^i}=0$ with $c_j\\in L_{i+1}$, step 2 supplies $a_j\\in L_1$ with $\\alpha_i(a_j)=c_j$. The sum equals $\\alpha_i(\\sum_{j<d}a_jb_j)$, so injectivity from step 1 gives $\\sum_{j<d}a_jb_j=0$. Uniqueness of basis coefficients [def-weil-pbc-free-module] gives $a_j=0$ and then $c_j=0$. This proves independence. Together with step 3 it is a basis of $d$ elements, so [def-weil-vector-space-dimension] and [def-pc-field-tower] give $[L_i:L_{i+1}]=d<\\infty$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-vector-space-dimension",
+    "def-pc-field-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09G9 (fields-lemma-multiplicativity-degrees), independence by coefficient comparison; elementary adaptation to an injective field homomorphism."
+   }
+  },
+  {
+   "text": "Induct on $n$ with claim that $K/L_n$ is finite of degree $d^n$. For $n=0$, $L_0=K$ and the singleton basis $(1)$, the dimension definition [def-weil-vector-space-dimension], and the degree definition [def-pc-field-tower] give degree $1=d^0$. For the induction step, $K/L_n$ is finite by induction and $L_n/L_{n+1}$ is finite of degree $d$ by step 4. Apply [lem-weil-pbc-field-degree-multiplicativity] to $L_{n+1}\\subseteq L_n\\subseteq K$: it gives finiteness and $[K:L_{n+1}]=[K:L_n][L_n:L_{n+1}]=d^n d=d^{n+1}$. This proves all degree claims without assuming that Frobenius is surjective on $K$.",
+   "uses": [
+    "lem-weil-pbc-field-degree-multiplicativity",
+    "def-weil-vector-space-dimension",
+    "def-pc-field-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09G9 (fields-lemma-multiplicativity-degrees), applied inductively to the Frobenius-image tower of varieties.tex Tag 0CCG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-frobenius",
+  "def-weil-pbc-free-module",
+  "def-weil-vector-space-dimension",
+  "def-pc-field-tower",
+  "lem-weil-pbc-field-degree-multiplicativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09G9 (fields-lemma-multiplicativity-degrees), basis expansion and tower law, adapted explicitly to the ring Frobenius of varieties.tex Tag 03SM and its iterates in Tag 0CCG. The general imperfect-field basis calculation is an agent-written algebraic refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finrank.*[Ff]robenius|[Ff]robenius.*finrank|finrank.*[Pp]ow|[Pp]ow.*finrank",
+   "results": "25 hits; Mathlib/FieldTheory/KummerPolynomial.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean; directory Mathlib/FieldTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives an unspecified exponent, and mapPowExpCharPowOfIsSeparable assumes a separable extension and keeps its scalar field fixed; neither computes this changing-scalar Frobenius tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "frobenius, Module.finrank",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives an unspecified exponent, and mapPowExpCharPowOfIsSeparable assumes a separable extension and keeps its scalar field fixed; neither computes this changing-scalar Frobenius tower"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field of characteristic p with finite degree d over K^p has degree d^n over the subfield of p^n-th powers, with bases transported by Frobenius",
+   "results": "8 hits; FiniteField.Extension.frob, IsPurelyInseparable.hasExponent_of_finiteDimensional, LinearMap.frobenius, FiniteField.Extension, FiniteField.Extension.frob_apply, FiniteField.instFieldExtension, frobenius, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives an unspecified exponent, and mapPowExpCharPowOfIsSeparable assumes a separable extension and keeps its scalar field fixed; neither computes this changing-scalar Frobenius tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a field K of characteristic p with finite degree d over its p-th power subfield, each adjacent iterated Frobenius image extension has degree d and K has degree d^n over K^(p^n)",
+   "results": "8 hits; finInsepDegree_eq_pow, IsPurelyInseparable.finrank_eq_pow, IsPurelyInseparable.hasExponent_of_finiteDimensional, IsPurelyInseparable.iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobenius, FiniteField.Extension.frob_apply, IsPurelyInseparable.iterateFrobenius_algebraMap, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives an unspecified exponent, and mapPowExpCharPowOfIsSeparable assumes a separable extension and keeps its scalar field fixed; neither computes this changing-scalar Frobenius tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport any finite basis of K over its Frobenius image by the i-th Frobenius power to obtain a basis of K^(p^i) over K^(p^(i+1)); the total degree is the n-th power of the first degree",
+   "results": "8 hits; IsPurelyInseparable.hasExponent_of_finiteDimensional, Module.Basis.mapPowExpCharPowOfIsSeparable, finInsepDegree_eq_pow, IsPurelyInseparable.finrank_eq_pow, FiniteField.orderOf_frobeniusAlgHom, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate, FiniteField.bijective_frobeniusAlgHom_pow",
+   "date": "2026-10-22",
+   "verdict": "no match: finrank_eq_pow gives an unspecified exponent, and mapPowExpCharPowOfIsSeparable assumes a separable extension and keeps its scalar field fixed; neither computes this changing-scalar Frobenius tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In characteristic p the p power Frobenius map is a ring homomorphism, and its iterates are injective on a field",
+   "results": "8 hits; iterateFrobenius_inj, IsPurelyInseparable.iterateFrobenius, frobenius_inj, PerfectionMap.injective, IsPurelyInseparable.algebraMap_iterateFrobenius, injective_frobenius, FiniteField.frobenius_pow, IsPurelyInseparable.iterateFrobenius_algebraMap",
+   "date": "2026-10-23",
+   "verdict": "related support: iterateFrobenius_inj and injective_frobenius give injectivity; existing def-weil-ring-frobenius supplies the homomorphism, so no new node is needed"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*finrank|finrank.*frobenius|mapPowExpCharPowOfIsSeparable",
+   "results": "7 hits; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: mapPowExpCharPowOfIsSeparable keeps the scalar field fixed and assumes separability; finite-field Frobenius orders do not apply to arbitrary imperfect fields"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated Frobenius image subfields of a field in characteristic p have constant adjacent degree and total degree the power of the first degree",
+   "results": "8 hits; LinearMap.iterateFrobenius, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap, IsPurelyInseparable.iterateFrobenius_algebraMap, IsPurelyInseparable.iterateFrobenius, FiniteField.Extension.frob, iterateFrobenius_def, iterateFrobenius, IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Frobenius maps or an unspecified prime-power degree, not the changing-scalar basis and exact tower formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "iterateFrobenius, Module.finrank",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Frobenius maps or an unspecified prime-power degree, not the changing-scalar basis and exact tower formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field K of characteristic p has degree d^n over its subfield of p^n powers when its degree over K^p is d, and the p^i powers of a K^p basis give a K^(p^(i+1)) basis of K^(p^i)",
+   "results": "8 hits; finInsepDegree_eq_pow, IsPurelyInseparable.finrank_eq_pow, IsPurelyInseparable.hasExponent_of_finiteDimensional, FiniteField.finrank_extension, FiniteField.finrank_zmod_extension, IsPurelyInseparable.finInsepDegree_eq, Field.lift_rank_mul_lift_insepDegree_of_isPurelyInseparable, IsPurelyInseparable.insepDegree_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Frobenius maps or an unspecified prime-power degree, not the changing-scalar basis and exact tower formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a finite basis along Frobenius to prove constant adjacent degrees in the tower of p power image subfields of an imperfect field",
+   "results": "8 hits; IsPurelyInseparable.finrank_eq_pow, finInsepDegree_eq_pow, IsPurelyInseparable.hasExponent_of_finiteDimensional, IsPRadical.isPurelyInseparable, perfectClosure.perfectRing, perfectClosure.isPurelyInseparable, perfectClosure, PerfectField",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Frobenius maps or an unspecified prime-power degree, not the changing-scalar basis and exact tower formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-relative-frobenius-degree",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, final sentence: identify the purely inseparable curve map with iterated relative Frobenius using 0CCZ. The relative-Frobenius degree input of Stacks 0CCY, first paragraph, iterated using 0CCG. Extracts original step 6: transport a finite basis along Frobenius and induct on the power-image field tower.",
+   "via": [
+    "lem-sfb-smooth-curve-relative-frobenius-degree",
+    "lem-sfb-purely-inseparable-curve-frobenius",
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-frobenius-image-field-tower-degree",
+  "worker": "stage1",
+  "summary": "Explicit image subfields, Frobenius isomorphisms, coefficient-wise spanning and independence, then induction with the existing Mathlib tower law. No new nodes: basis transport is a few-line argument from definitions. The mathematical statement is unchanged; its basis notion now cites its definition. All source, DAG and project-Lean checks were read-only. Repair of the 2026-10-23 promotion return: rebased by the delivery tool onto current origin/sheaf-dag; compared returned head 629038e061c with the current DAG, reread all eight unchanged dependencies, and made the injectivity argument and degree-one base case explicit. The five-step proof, mathematical statement, citations and logged searches are retained.",
+  "blueprint": "Realizes the recorded from.place: extracted step 6 of the smooth-curve relative-Frobenius degree refinement, within det-thm-sf-ctf-stability-direct-images proof (3), by proving the Frobenius-image field tower calculation. Retains the inherited null ancestor returned by blueprint_refs.py ancestor and its complete via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-66ae3edf9",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-66ae3edf9 (reviewer sub-agent of L); spot-checked: I read the item in full. This is a re-delivery after a promotion refusal: the earlier head 629038e061c1 had PASSed, and the live and side-live item is still unsplit with no other group's split. Against that head, only proof and split_report differ. Step 1 adds the x−y step that turns zero kernel into injectivity. Step 5's n=0 base now cites def-weil-vector-space-dimension and def-pc-field-tower, which were already in proof_deps. The statement, stmt_deps, proof_deps, sources and blueprint are byte-identical, and all 8 cited dependency nodes are identical between the two snapshots. Step checks: (1) def-weil-ring-frobenius gives a ring endomorphism since p·1=0; injectivity uses 0≠1 from def-weil-field; the image is a subfield. (2) α_i(L_1)=L_{i+1}, L_{i+1}⊆L_i and L_0=K. (3) Spanning by the unique expansion of def-weil-pbc-free-module, with coefficients in L_{i+1}. (4) Independence by lifting the coefficients through step 2 and using injectivity and uniqueness; degree = d by the dimension and degree definitions. (5) A stated induction; lem-weil-pbc-field-degree-multiplicativity (Mathlib leaf) gives both finiteness and d^n·d, and Frobenius surjectivity is never used. Sources: tags/tags maps 09G9, 0CCG, 03SM and 09FU to the labels given; I read fields.tex:541ff (09G9 with its basis proof) and varieties.tex:7252ff (0CCG). No SGA source is cited. Edge cases i=0, n=0, perfect K (d=1), F_p(t) (degree p^n) and F_p(s,t) (degree p^{2n}) all agree, and d=0 is impossible. The citer lem-sfb-smooth-curve-relative-frobenius-degree step 3 (d=p, basis 1,…,t^{p−1}) meets the item's hypotheses. No new nodes, no duplicate, no weakening, no tool_uses needed. Maintainer note: the return was a landing-state refusal, not a content fault, so this head should be landed as the item's split."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FrobeniusImageFieldTowerDegree",
+  "declaration": "FieldExtension.frobenius_image_field_tower_degree",
+  "file": "lean/Sheaf/FieldTheory/FrobeniusImageFieldTowerDegree.lean",
+  "statement": "theorem frobenius_image_field_tower_degree (K : Type u) [Field K] (p : ℕ) (hp : p.Prime) [CharP K p] (L : ℕ → Subfield K) (hL : ∀ i : ℕ, L i = (iterateFrobeniusOfPrime K hp (CharP.cast_eq_zero K p) i).fieldRange) (d : ℕ) (hd : degree (L 1) K = (d : WithTop ℕ)) (b : Module.Basis (Fin d) (L 1) K) : L 0 = ⊤ ∧ degree (L 0) K = 1 ∧ (∀ i : ℕ, ∃ α : K ≃+* L i, (∀ x : K, (α x : K) = x ^ (p ^ i)) ∧ (fun x : K ↦ (α x : K)) '' (L 1 : Set K) = (L (i + 1) : Set K) ∧ ∃ h : L (i + 1) ≤ L i, (∃ c : Module.Basis (Fin d) (L (i + 1)) (Subfield.extendScalars h), ∀ j : Fin d, (c j : K) = b j ^ (p ^ i)) ∧ degree (L (i + 1)) (Subfield.extendScalars h) = (d : WithTop ℕ)) ∧ ∀ n : ℕ, degree (L n) K = ((d ^ n : ℕ) : WithTop ℕ)",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c96b4681c",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Item differs from side-live only in its lean record; lean.statement matches the file verbatim. Every clause matched against the node: K field with prime p and CharP; L_i fixed by hL to the fieldRange of iterateFrobeniusOfPrime (real map x↦x^(p^i), existing:true record of def-weil-ring-frobenius); hd uses FieldExtension.degree (WithTop, so finiteness included); arbitrary basis b indexed by Fin d; α : K ≃+* L i fixed by its value formula, carrying L 1 onto L (i+1); containment L(i+1) ≤ L i and a basis over Subfield.extendScalars h (carrier exactly L_i, checked in Mathlib) with c j = b j^(p^i); adjacent degree d, total degree d^n, L 0 = ⊤ and degree 1. Edge cases i=0, n=0, d=0 (impossible), perfect K, F_p(t), F_p(s,t) and p=2 are consistent; one universe, bound. No new definitions, no duplicate in Mathlib or the project, proof only sorry, docstrings carry source, blueprint tag and five proof steps, report has both required sections. No compile run, per instructions; the worker reports a clean scompile. Maintainer note: the statement uses the proof_dep def-weil-ring-frobenius only to express the image subfields; acceptable, and stage 2 cannot change stmt_deps."
+ }
+}

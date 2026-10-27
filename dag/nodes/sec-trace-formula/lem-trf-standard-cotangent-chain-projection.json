@@ -1,0 +1,262 @@
+{
+ "id": "lem-trf-standard-cotangent-chain-projection",
+ "kind": "statement",
+ "title": "Standard cotangent resolution chain projection by face differences",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings. Use the standard augmented simplicial polynomial $A$-algebra $Q_n=(F_AU)^{n+1}B$ and its alternating differential complex $K^{-n}=M_n=\\Omega^1_{Q_n/A}\\otimes_{Q_n}B$ from [lem-trf-cotangent-resolution-coherence], with $F_A(E)=A[E]$ [def-weil-pbc-mv-polynomial-ring] and Kähler differentials [def-weil-pbc-kahler-differentials]. Put $R=Q_0=A[B]$, let $\\epsilon:R\\twoheadrightarrow B$ be evaluation, and set $I=\\ker\\epsilon$. Write $Q_1=A[R]$ with variables $Y_p$, $p\\in R$, and $Q_2=A[Q_1]$ with variables $Z_f$, $f\\in Q_1$; $X_b$ denotes a variable of $R$. The faces satisfy $d_0(Y_p)=p$, $d_1(Y_p)=X_{\\epsilon(p)}$, and the three faces of $Z_f$ are $f,Y_{d_0f},Y_{d_1f}$. Let $\\partial_1:M_1\\to M_0$ and $\\partial_2:M_2\\to M_1$ be the alternating face differentials, and let $\\delta:I/I^2\\to M_0$ send $[h]$ to $\\mathrm dh\\otimes1$. The rule $\\rho(\\mathrm df\\otimes b)=b[d_0(f)-d_1(f)]$ is a well-defined $B$-linear map $M_1\\to I/I^2$ satisfying $\\delta\\rho=\\partial_1$ and $\\rho\\partial_2=0$. Thus $c^{-1}=\\rho$, $c^0=1_{M_0}$, and zero lower components define a chain map $c:K\\to[I/I^2\\xrightarrow{\\delta}M_0]$ in degrees $-1,0$. These chain maps commute strictly with the standard semilinear resolution maps for every commutative ring square $A\\to A'$, $B\\to B'$, with the target viewed as a $B$-complex by restriction of scalars.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08UP (remark-explicit-comparison-map), explicit downward map and the omitted well-definedness verification; standard face functoriality from Tag 08QL (section-functoriality)."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-trf-cotangent-resolution-coherence] for the augmented simplicial algebra and its alternating differential. Evaluation is surjective since $\\epsilon(X_b)=b$. Writing $e_1=\\epsilon d_0=\\epsilon d_1:Q_1\\to B$, the evaluation faces give $d_0(Y_p)=p$, $d_1(Y_p)=X_{\\epsilon(p)}$ and $d_0(Z_f)=f$, $d_1(Z_f)=Y_{d_0f}$, $d_2(Z_f)=Y_{d_1f}$. These formulas on variables determine the faces by [def-weil-pbc-mv-polynomial-ring]. In particular both faces $Q_1\\to R$ agree after augmentation.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP (remark-explicit-comparison-map), explicit downward arrow; expanded verification."
+   }
+  },
+  {
+   "text": "The quotient $I/I^2$ is a $B$-module: define $b[h]=[rh]$ for any lift $\\epsilon(r)=b$; changing $r$ changes $rh$ by an element of $I^2$. By the Leibniz rule of [def-weil-pbc-kahler-differentials], $\\mathrm d(uv)\\otimes1=\\mathrm du\\otimes\\epsilon(v)+\\mathrm dv\\otimes\\epsilon(u)=0$ for $u,v\\in I$. Since $I^2$ consists of finite sums of such products, $h\\mapsto\\mathrm dh\\otimes1$ kills $I^2$. Also $\\mathrm d(rh)\\otimes1=\\epsilon(r)(\\mathrm dh\\otimes1)$ for $h\\in I$. This proves that the stated $\\delta:I/I^2\\to M_0$ is well-defined and $B$-linear.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP (remark-explicit-comparison-map), explicit downward arrow; expanded verification."
+   }
+  },
+  {
+   "text": "Put $\\Delta(f)=[d_0f-d_1f]\\in I/I^2$. Give this module its $Q_1$-action through $e_1$. Additivity of the faces gives additivity of $\\Delta$; their agreement on $A$ gives $\\Delta(a)=0$. Expanding the product gives $d_0(fg)-d_1(fg)=d_0(f)(d_0g-d_1g)+d_1(g)(d_0f-d_1f)$. Reducing modulo $I^2$, multiplication by either $d_0f$ or $d_1f$ on $I/I^2$ is multiplication by $e_1(f)$; hence $\\Delta(fg)=e_1(f)\\Delta(g)+e_1(g)\\Delta(f)$. Thus $\\Delta$ satisfies exactly the derivation relations of [def-weil-pbc-kahler-differentials].",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP (remark-explicit-comparison-map), explicit downward arrow; expanded verification."
+   }
+  },
+  {
+   "text": "Apply the universal property in [def-weil-pbc-kahler-differentials] to $\\Delta$ to obtain a $Q_1$-linear map $u:\\Omega^1_{Q_1/A}\\to I/I^2$, $u(\\mathrm df)=\\Delta(f)$. Apply [lem-weil-pbc-module-base-change-universal-property] to $Q_1\\xrightarrow{e_1}B$ and $u$. In the tensor order used here this is the same universal property with $\\omega\\otimes b$ in place of $b\\otimes\\omega$; its inverse is given by swapping the two factors, which respects the balancing relation. It yields the unique $B$-linear map $\\rho:M_1\\to I/I^2$ with $\\rho(\\mathrm df\\otimes b)=b\\Delta(f)$. In particular its formula respects both the differential relations and tensor balancing.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-module-base-change-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP (remark-explicit-comparison-map), explicit downward arrow; expanded verification."
+   }
+  },
+  {
+   "text": "On every generator $\\mathrm df\\otimes b$ the definition of $\\delta$ gives $\\delta\\rho(\\mathrm df\\otimes b)=\\mathrm d(d_0f-d_1f)\\otimes b$. The alternating differential from [lem-trf-cotangent-resolution-coherence] gives the same result for $\\partial_1$. The presentation of differentials in [def-weil-pbc-kahler-differentials] and tensor bilinearity show that these elements generate $M_1$ over $B$ (a scalar coefficient of a differential moves to the tensor factor through $e_1$). Therefore $\\delta\\rho=\\partial_1$.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP (remark-explicit-comparison-map), explicit downward arrow; expanded verification."
+   }
+  },
+  {
+   "text": "The elements $\\mathrm dZ_f\\otimes b$ generate $M_2$: every polynomial is a finite sum of monomials by [def-weil-pbc-mv-polynomial-ring], and repeated additivity and the Leibniz rule of [def-weil-pbc-kahler-differentials] express its differential in the variable differentials. Now $\\partial_2(\\mathrm dZ_f\\otimes b)=\\mathrm df\\otimes b-\\mathrm dY_{d_0f}\\otimes b+\\mathrm dY_{d_1f}\\otimes b$. Applying $\\rho$ gives $b$ times the class of $(d_0f-d_1f)-(d_0f-X_{\\epsilon(d_0f)})+(d_1f-X_{\\epsilon(d_1f)})=0$, since $\\epsilon(d_0f)=\\epsilon(d_1f)$. Thus $\\rho\\partial_2=0$. Together with the preceding equality these are precisely the two potentially nonzero chain-map conditions; all other conditions have both sides zero.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08UP (remark-explicit-comparison-map), explicit downward arrow; expanded verification."
+   }
+  },
+  {
+   "text": "For a ring square write $\\alpha:A\\to A\\prime$, $\\beta:B\\to B\\prime$. The standard semilinear maps $t_n:Q_n\\to Q_n\\prime$ of [lem-trf-cotangent-resolution-coherence] commute with faces and augmentations. Thus $t_0(I)\\subset I\\prime$ and $t_0(I^2)\\subset(I\\prime)^2$, giving $\\bar t_0:I/I^2\\to I\\prime/(I\\prime)^2$, $[h]\\mapsto[t_0h]$, which is $\\beta$-semilinear. The differential map is $T_n(\\mathrm df\\otimes b)=\\mathrm d(t_nf)\\otimes\\beta(b)$; its well-definedness follows directly from the differential relations in [def-weil-pbc-kahler-differentials] and tensor balancing. On generators, $\\bar t_0\\rho(\\mathrm df\\otimes b)=\\beta(b)[t_0d_0f-t_0d_1f]=\\beta(b)[d_0\\prime t_1f-d_1\\prime t_1f]=\\rho\\prime T_1(\\mathrm df\\otimes b)$, and $T_0\\delta([h])=\\mathrm d(t_0h)\\otimes1=\\delta\\prime\\bar t_0([h])$. These are equalities of maps, not merely homotopies. The degree-zero components of $c$ are identities and the lower components are zero, so the entire square of chain maps commutes strictly after restriction of target scalars.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), first paragraph; Tag 08UP (remark-explicit-comparison-map), generator formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-module-base-change-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Expanded omitted well-definedness and naturality verifications of Tags 08UP and 08QL; derivation and tensor universal properties from algebra.tex Tags 07BK, 00RO, 00CV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "standard simplicial polynomial resolution cotangent complex chain map to conormal complex by difference of two face maps",
+   "results": "8 hits; top=['Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'AlgebraicTopology.NormalizedMooreComplex.obj_d', 'AlgebraicTopology.normalizedMooreComplex_objD', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Generators.H1Cotangent.δAux', 'Algebra.Generators.H1Cotangent.δ_map', 'AlgebraicTopology.inclusionOfMooreComplexMap']; note=; digest=765b54514afaaeef. Full results retained in lem-trf-standard-cotangent-chain-projection.search-0.txt. No match: simplicial Moore-complex and presentation-differential hits do not construct this standard-resolution chain projection; read Extension/Cotangent/Basic.lean:53-67 and the returned types.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "difference of simplicial faces gives derivation into augmentation ideal modulo its square and annihilates next boundary",
+   "results": "8 hits; top=['AlgebraicTopology.AlternatingFaceMapComplex.d_squared', 'AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq', 'AlgebraicTopology.alternatingFaceMapComplex_obj_d', 'AlgebraicTopology.normalizedMooreComplex_objD', 'AlgebraicTopology.DoldKan.HigherFacesVanish.comp_δ_eq_zero_assoc', 'AlgebraicTopology.AlternatingCofaceMapComplex.d_squared', 'AlgebraicTopology.DoldKan.N₂_obj_X_d', 'AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq']; note=; digest=62ae3cc7400a2273. Full results retained in lem-trf-standard-cotangent-chain-projection.search-1.txt. No match: simplicial Moore-complex and presentation-differential hits do not construct this standard-resolution chain projection; read Extension/Cotangent/Basic.lean:53-67 and the returned types.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cotangent complex standard resolution map to naive cotangent complex differential face difference",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c. Full results retained in lem-trf-standard-cotangent-chain-projection.search-2.txt. No match: simplicial Moore-complex and presentation-differential hits do not construct this standard-resolution chain projection; read Extension/Cotangent/Basic.lean:53-67 and the returned types.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.cotangentComplex",
+   "results": "12 hits; top=['Algebra.Extension.cotangentComplex', 'Algebra.Extension.H1Cotangent.val_zero', 'Algebra.Extension.subsingleton_h1Cotangent', 'Algebra.Extension.Cotangent.map_sub_map', 'Algebra.Extension.h1Cotangentι_ext', 'Algebra.Extension.h1Cotangentι_ext_iff', 'Algebra.Extension.h1Cotangentι_apply', 'Algebra.Extension.exact_hCotangentι_cotangentComplex']; note=; digest=bb7ca485915d6d22. Full results retained in lem-trf-standard-cotangent-chain-projection.search-3.txt. No match: simplicial Moore-complex and presentation-differential hits do not construct this standard-resolution chain projection; read Extension/Cotangent/Basic.lean:53-67 and the returned types.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "standard.*resolution|face.*derivation|cotangentComplex [sub=RingTheory]",
+   "results": "25 hits; top=['Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean']; note=; digest=abde4087f935ea27. Full results retained in lem-trf-standard-cotangent-chain-projection.search-4.txt. No match: simplicial Moore-complex and presentation-differential hits do not construct this standard-resolution chain projection; read Extension/Cotangent/Basic.lean:53-67 and the returned types.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "standard.*resolution|face.*derivation|cotangentComplex [sub=RingTheory]",
+   "results": "25 hits; top=['Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean']; note=; digest=b92118815448b199. Read returned types. Extension/Cotangent/Basic.lean:59-67, 249-288 supplies a general pair-of-presentation-maps construction, not the standard simplicial chain map, boundary annihilation, and strict ring-square naturality together. Smooth/Kaehler.lean:63-85 is a split square-zero-section derivation. No exact match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.cotangentComplex",
+   "results": "12 hits; top=['Algebra.Extension.cotangentComplex', 'Algebra.Extension.H1Cotangent.val_zero', 'Algebra.Extension.subsingleton_h1Cotangent', 'Algebra.Extension.Cotangent.map_sub_map', 'Algebra.Extension.h1Cotangentι_ext', 'Algebra.Extension.h1Cotangentι_ext_iff', 'Algebra.Extension.h1Cotangentι_apply', 'Algebra.Extension.exact_hCotangentι_cotangentComplex']; note=; digest=bb7ca485915d6d22. Read returned types. Extension/Cotangent/Basic.lean:59-67, 249-288 supplies a general pair-of-presentation-maps construction, not the standard simplicial chain map, boundary annihilation, and strict ring-square naturality together. Smooth/Kaehler.lean:63-85 is a split square-zero-section derivation. No exact match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "standard simplicial polynomial resolution cotangent complex chain map to conormal complex by difference of two face maps",
+   "results": "8 hits; top=['Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Generators.H1Cotangent.δ', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Generators.H1Cotangent.δ_map', 'Algebra.Generators.H1Cotangent.δAux', 'Algebra.Extension.cotangentComplex', 'AlgebraicTopology.inclusionOfMooreComplexMap', 'Algebra.Presentation.differentials.comm₁₂']; note=; digest=fabb097785d631cb. Read returned types. Extension/Cotangent/Basic.lean:59-67, 249-288 supplies a general pair-of-presentation-maps construction, not the standard simplicial chain map, boundary annihilation, and strict ring-square naturality together. Smooth/Kaehler.lean:63-85 is a split square-zero-section derivation. No exact match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cotangent complex standard resolution map to naive cotangent complex differential face difference",
+   "results": "8 hits; top=['AlgebraicTopology.AlternatingCofaceMapComplex.objD', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Extension.Cotangent.map_sub_map', 'Algebra.Extension.cotangentComplex', 'Algebra.Presentation.differentials.hom₁', 'Rep.standardComplex.d', 'Rep.standardComplex.d_eq', 'Algebra.Extension.exact_cotangentComplex_toKaehler']; note=; digest=1dadc8d8e5be83b1. Read returned types. Extension/Cotangent/Basic.lean:59-67, 249-288 supplies a general pair-of-presentation-maps construction, not the standard simplicial chain map, boundary annihilation, and strict ring-square naturality together. Smooth/Kaehler.lean:63-85 is a split square-zero-section derivation. No exact match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "difference of two algebra homomorphisms equal modulo square zero ideal is a derivation and gives map on Kahler differentials",
+   "results": "8 hits; top=['derivationQuotKerSq', 'derivationQuotKerSq_mk', 'KaehlerDifferential.derivationQuotKerTotal', 'derivationOfSectionOfKerSqZero', \"KaehlerDifferential.endEquivDerivation'\", 'Derivation.liftKaehlerDifferential', 'CommRingCat.KaehlerDifferential.D', 'Algebra.Extension.toKaehler']; note=; digest=f98739edf3d6d83b. Read returned types. Extension/Cotangent/Basic.lean:59-67, 249-288 supplies a general pair-of-presentation-maps construction, not the standard simplicial chain map, boundary annihilation, and strict ring-square naturality together. Smooth/Kaehler.lean:63-85 is a split square-zero-section derivation. No exact match for the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-lci-naive-cotangent-model",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Natural projection to the two-term naive cotangent truncation. Repair extraction: old proof steps 1-2 and strict naturality portion of step 5: standard face-difference chain projection.",
+   "via": [
+    "lem-trf-lci-naive-cotangent-model",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-standard-cotangent-chain-projection",
+  "worker": "stage1",
+  "summary": "Q135: expand the face-difference construction into seven checked steps, including conormal module action, quotient differential, derivation relations, tensor extension, both chain conditions, and strict semilinear naturality. Reuse the existing universal-property nodes; no new nodes. Statement unchanged.",
+  "blueprint": "Historical auxiliary chain recorded in blueprint.from: naive cotangent projection supporting lci determinant adjunction in the old nearby-cycle branch of lem-trf-local-term-locality. Latest blueprint main 7284bb09 has the Varshavsky route instead; this split only discharges the already-created auxiliary ring lemma and does not replace that route or claim to realize the current unit. Tags 08UP and 08QL realize the exact extracted algebraic input."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-3285e3d72",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-3285e3d72 (reviewer sub-agent of L); spot-checked: Single commit on fb921af, touching only the item and the report. The item's statement, stmt_deps, source and blueprint are byte-identical to live, which shows it unsplit. There are no new nodes, no re-split note and no SGA citation, and the item does not depend on itself. Source: Stacks cotangent.tex, remark-explicit-comparison-map (08UP). The item matches the map df⊗b↦b[d_0f−d_1f] given there and fills in the well-definedness check that Stacks omits. It adds strict naturality, which its citer lem-trf-lci-naive-cotangent-model uses (C(s)c=c'K(s)). Step 1: the face formulas follow from d_i=G^iεG^{n-i}, and I checked them against the identity d_0d_1=d_0d_0 on Z_f. Step 2: d(uv)⊗1=0 for u,v∈I, and δ is B-linear. Step 3: I verified the expansion d_0(fg)−d_1(fg)=d_0f(d_0g−d_1g)+d_1g(d_0f−d_1f), so Δ is an A-derivation through e_1. Step 4: the Kähler universal property plus the base-change node (R=Q_1, S=B, N=I/I²) give ρ. Step 5: δρ=∂_1 on the generators df⊗b. Step 6: I recomputed ρ∂_2(dZ_f⊗b)=b[X_{εd_0f}−X_{εd_1f}]=0, and it also follows from the general simplicial identity. Step 7: t_0 maps I into I′ and I² into I′², t̄_0 is β-semilinear, and t̄_0ρ=ρ′T_1 and T_0δ=δ′t̄_0 hold strictly. Every cited statement says what its step takes from it. Edge cases checked: B=0, A=B, characteristic 2, infinite sets, non-injective α and β. Other 08UP nodes state different content (boundary-cokernel assumes ρ∂_2=0, which this item proves). The Mathlib match is correctly null: Extension.Hom.sub is related but not this chain map. No changes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StandardCotangentChainProjection",
+  "declaration": "Algebra.CotangentResolution.StandardProjection.exists_system",
+  "declarations": [
+   "Algebra.CotangentResolution.StandardProjection.coordinates",
+   "Algebra.CotangentResolution.StandardProjection.degreeIso",
+   "Algebra.CotangentResolution.StandardProjection.extension",
+   "Algebra.CotangentResolution.StandardProjection.conormal",
+   "Algebra.CotangentResolution.StandardProjection.kernelClass",
+   "Algebra.CotangentResolution.StandardProjection.faceDifference",
+   "Algebra.CotangentResolution.StandardProjection.Projection",
+   "Algebra.CotangentResolution.StandardProjection.rho",
+   "Algebra.CotangentResolution.StandardProjection.delta",
+   "Algebra.CotangentResolution.StandardProjection.boundary",
+   "Algebra.CotangentResolution.StandardProjection.TargetMap",
+   "Algebra.CotangentResolution.StandardProjection.System",
+   "Algebra.CotangentResolution.StandardProjection.exists_system"
+  ],
+  "file": "lean/Sheaf/RingTheory/StandardCotangentChainProjection.lean",
+  "statement": "theorem exists_system [∀ B : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} B)] (C : Coherence.{u}) : Nonempty (System C)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-590298f8b",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read item node (identical to live except lean), dep module CotangentResolutionCoherence in full, Mathlib Generators.self/Extension.Cotangent, delivered module and report. Clauses match: standard faces via standard_spec (Y_p↦p, X_{εp}; Z_f faces), I/I² = Mathlib Extension.Cotangent of Generators.self (ring/augmentation = standardAugmentation f 0), δ pinned on all kernel classes, ρ(b⊗dx)=b[d₀x−d₁x] with face_mem_kernel asserted not assumed, delta_rho/rho_partial correct order and sign (Mathlib alternating sum), chain map identity in deg 0/ρ in deg −1/zero elsewhere, TargetMap pinned by [h]↦[t₀h] and b⊗dx↦β(b)⊗d(t₀x), naturality strict equality of cochain maps into restrictComplex q.right. No extra hypotheses (single universe u, inherited HasDerivedCategory instance only); edge cases B=0, A=B, char 2, infinite sets, non-injective α/β covered. lean.statement verbatim; docstrings with source/blueprint and 7 proof steps; no hollow defs; only sorry. Note: conormal/kernelClass wrappers parallel NaiveCotangentComparison, whose node cites this item in proof_deps (import would be cyclic); both are Mathlib Extension.Cotangent. No compile (no file changed)."
+ }
+}

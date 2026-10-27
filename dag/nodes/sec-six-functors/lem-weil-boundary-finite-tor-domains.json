@@ -1,0 +1,287 @@
+{
+ "id": "lem-weil-boundary-finite-tor-domains",
+ "kind": "statement",
+ "title": "Finite-stage domains for closed boundary duality",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\ge1$. Put $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. All schemes below are $k$-schemes. Use ordinary constant-$A$ module derived categories on small etale sites [def-weil-pbc-derived-categories] and small pro-etale sites [def-weil-pbc-proetale-modules], taken small in a larger universe [def-weil-size-convention]. On either site $D^b_{ctf}$ denotes bounded complexes with constructible cohomology and finite Tor amplitude: tensoring with any degree-zero module sheaf has cohomology in one fixed finite interval [def-weil-pbc-constructible-complexes, def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude].\n\nLet $Y$ be a separated finite-type $k$-scheme [def-weil-finite-type-morphism, def-weil-proper-morphism]. A locally closed piece $W\\subseteq Y$ is a subscheme given by an immersion into $Y$ [def-weil-closed-immersion]. Every such $W$ is separated and finite type over $k$ and is Noetherian (locally Noetherian and quasi-compact). For its structure map $a_W$ the etale compact-support right adjoint $a_W^\\times$ exists on the ambient derived categories and preserves $D^+$ [thm-amb-etale-exceptional-adjoint, def-amb-etale-compact-support]. Put $\\omega_{W,e}=a_W^\\times A$ and $D_{W,e}=R\\mathcal Hom_A(-,\\omega_{W,e})$ [def-pur-derived-internal-hom]. This duality preserves $D^b_{ctf}(W_e,A)$ and its evaluation double-dual morphism $\\delta$ [lem-weil-duality-pairing] is invertible there.\n\nFor any closed immersion $i:Z\\hookrightarrow T$ between these pieces, let $G=i^\\times$ be the ambient right adjoint of $Ri_!=Ri_*$ and $s=i_e^*$. Then $s$ and $G$ both carry $D^b_{ctf}(T_e,A)$ into $D^b_{ctf}(Z_e,A)$. For $L\\in D^b_{ctf}(T_e,A)$, put $P=sD_{T,e}L$ and $U=GL$. There is a natural costalk isomorphism $\\widetilde\\alpha_{D_{T,e}L}:GD_{T,e}D_{T,e}L\\xrightarrow{\\sim}D_{Z,e}P$, and $\\widetilde c_L=\\widetilde\\alpha_{D_{T,e}L}\\circ G\\delta_L:U\\xrightarrow{\\sim}D_{Z,e}P$. No evaluation normalization is asserted for $\\widetilde\\alpha$.\n\nFor $\\tau=e,p$ write $\\omega_{W,p}=Ra_{W,p}^!A$ and use the specified exceptional inverse images [def-weil-exceptional-inverse-image]. The mate of bounded-below compact-support composition gives counit-compatible identifications $Ri_\\tau^!\\omega_{T,\\tau}\\cong\\omega_{Z,\\tau}$. For $p$ this is on bounded-below etale-origin objects under $C_W=\\nu_W^*$ [def-sf-comparison-derived-pullback], with $Ri_p^!=C_ZGR\\nu_{T,*}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+  "place": "Proof, first paragraph: every piece, the costalk comparison composed with Ri!delta, and finite-Tor constructibility (old split steps 1--3)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-size-convention",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-amb-etale-compact-support",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing",
+  "def-weil-exceptional-inverse-image",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-boundary-composition-mate"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace to make Y Noetherian. An immersion is a topological embedding, so IsInducing.noetherianSpace makes W a Noetherian topological space. Thus w is quasi-compact. Immersions are locally of finite type and separated, and composition with aY gives all three structure-map instances. The same finite-type argument makes W a Noetherian scheme. This avoids a separate open-closed factorization proof.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-closed-immersion",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "First paragraph: every piece and the independent costalk comparison composed with exceptional restriction of biduality."
+   }
+  },
+  {
+   "text": "For finite coefficients the existing source-library rightDerivedUpperShriekAdjunction and plus_rightDerivedUpperShriek_obj apply to the structure morphism: Nagata supplies its compactification, and the base is quasi-compact. These provide exactly the ambient adjunction and preservation of D+. No extra compactification-restriction package is needed.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-etale-lower-shriek-adjoint-from-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "First paragraph: every piece and the independent costalk comparison composed with exceptional restriction of biduality."
+   }
+  },
+  {
+   "text": "Apply finite_stage_etale_geometric_biduality to W and to every closed Z. Extract preservation of finiteTorConstructibleEtale and invertibility of the specified verdierDualDoubleDual component. The finite-field, prime-to-characteristic, coefficient and positive-level hypotheses are unchanged.",
+   "uses": [
+    "thm-weil-etale-geometric-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "First paragraph: every piece and the independent costalk comparison composed with exceptional restriction of biduality."
+   }
+  },
+  {
+   "text": "Identify the project finiteTorConstructibleEtale predicate with the proved source constructibleFiniteTor predicate. ConstructibleEtaleModuleSheafComparison identifies the cohomology predicates; isGE_iff and isLE_iff identify boundedness. hasTorAmplitudeIn_iff_torAmplitudeIn identifies the tensor-test conditions. Widen [a,b] to [min a b,b] in the reverse direction, including zero complexes and unrelated bounds. Apply the already proved constructibleFiniteTor_mapDerivedCategory_upperStar to i and translate back; no new flat-model argument is needed.",
+   "uses": [
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "First paragraph: every piece and the independent costalk comparison composed with exceptional restriction of biduality."
+   }
+  },
+  {
+   "text": "Use the existing boundaryDualizingEtaleIso and boundaryDualizingProIso at i and aW for the two required dualizing identifications. Specialize boundary_dualizing_composition with structure maps i followed by aW, aW, and the identity of Spec k to obtain the exact BoundaryCompositionCompatibility clause.",
+   "uses": [
+    "lem-weil-boundary-dualizing-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "First paragraph: every piece and the independent costalk comparison composed with exceptional restriction of biduality."
+   }
+  },
+  {
+   "text": "Construct the natural costalk isomorphism in the ordinary constant-module categories directly. The proved verdierDualLowerShriekIso, applied to derivedHomRightDerivedLowerShriekIsoOfFinite and boundaryDualizingEtaleIso, identifies R i_! followed by DT.rightOp with DZ.rightOp followed by (R i_*).op. The self-adjunctions MonoidalClosed.ihomFlipSelfAdjunction and the ordinary derived pullback/direct-image adjunction identify the right adjoint of the latter composite with s.op followed by DZ. Conjugate this natural isomorphism with the ambient exceptional adjunction and DT self-adjunction to obtain alpha: DT followed by G is naturally isomorphic to s.op followed by DZ. This is a construction from proved source declarations; it does not choose unrelated component isomorphisms.",
+   "uses": [
+    "lem-sf-tensor-hom",
+    "lem-weil-duality-pairing",
+    "def-amb-etale-compact-support",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "First paragraph: every piece and the independent costalk comparison composed with exceptional restriction of biduality."
+   }
+  },
+  {
+   "text": "For finite-Tor constructible L, G maps the canonical biduality isomorphism to an isomorphism. Compose it with alpha at DT L. The result is an isomorphism G L to DZ(s(DT L)). Steps 3 and 4 put the latter in the finite-Tor constructible category. Translate to the source predicate, apply prop_of_iso separately to boundedConstructible and finiteTorAmplitude using the inverse isomorphism, and translate back. This gives exceptional preservation and the remaining invertibility clause, and assembles all conjuncts of BoundaryClosedFiniteTorDomains and BoundaryPieceFiniteTorDomains.",
+   "uses": [
+    "thm-weil-etale-geometric-biduality",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+    "place": "First paragraph: every piece and the independent costalk comparison composed with exceptional restriction of biduality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-closed-immersion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-amb-etale-compact-support",
+  "lem-etale-lower-shriek-adjoint-from-compactification",
+  "thm-weil-etale-geometric-biduality",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-boundary-dualizing-composition",
+  "lem-sf-tensor-hom",
+  "lem-weil-duality-pairing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B6",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "First paragraph: every piece and the independent costalk comparison composed with exceptional restriction of biduality.",
+  "note": "Lean proof reuses the existing source-library constant-module pullback, ambient adjoint and natural tensor-Hom exchange API; private predicate-identification and costalk-mate helpers are fully proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor|dualizingComplex|costalk",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type or finite-presentation sheaves, constructible subsets and derived t-structure bounds do not state finite-Tor preservation by closed exceptional restriction and the dualizing composition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tor constructible etale sheaves preserved by closed restriction and exceptional restriction",
+   "results": "Hits: AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.IsFinitePresentation.mk, AlgebraicGeometry.IsFinite.instMorphismRestrict, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, SheafOfModules.IsFiniteType.mk, CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type or finite-presentation sheaves, constructible subsets and derived t-structure bounds do not state finite-Tor preservation by closed exceptional restriction and the dualizing composition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "Hits: CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type or finite-presentation sheaves, constructible subsets and derived t-structure bounds do not state finite-Tor preservation by closed exceptional restriction and the dualizing composition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient constructible sheaves on locally closed subschemes: ordinary and exceptional restriction preserve bounded finite Tor amplitude using Verdier biduality",
+   "results": "Hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.isFinitePresentation, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type or finite-presentation sheaves, constructible subsets and derived t-structure bounds do not state finite-Tor preservation by closed exceptional restriction and the dualizing composition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion exceptional inverse image of a bounded constructible complex is finite Tor via costalk duality and double duality",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap, AlgebraicGeometry.Scheme.image_zeroLocus, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-type or finite-presentation sheaves, constructible subsets and derived t-structure bounds do not state finite-Tor preservation by closed exceptional restriction and the dualizing composition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient etale Verdier duality preserves bounded constructible finite Tor complexes and closed exceptional restriction",
+   "results": "Hits: DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic t-structure, localization or scheme-morphism declarations do not assert the finite-stage duality and closed exceptional-domain statement."
+  },
+  {
+   "tool": "grep",
+   "query": "costalk|dualizingComplex|constructibleFiniteTor",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic t-structure, localization or scheme-morphism declarations do not assert the finite-stage duality and closed exceptional-domain statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale closed immersion exceptional pullback preserves bounded constructible finite Tor amplitude by Verdier biduality",
+   "results": "Hits: AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsLocalAtTarget.of_isPullback, AlgebraicGeometry.instIsClosedImmersionFstScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic t-structure, localization or scheme-morphism declarations do not assert the finite-stage duality and closed exceptional-domain statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "Hits: CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic t-structure, localization or scheme-morphism declarations do not assert the finite-stage duality and closed exceptional-domain statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Costalk of a constructible perfect complex is the dual of the restriction of its Verdier dual",
+   "results": "Hits: localCohomology.diagram, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic t-structure, localization or scheme-morphism declarations do not assert the finite-stage duality and closed exceptional-domain statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-weil-boundary-duality-discharge",
+  "date": "2026-10-22",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Proof, first paragraph: every piece, the costalk comparison composed with Ri!delta, and finite-Tor constructibility (old split steps 1--3).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-boundary-finite-tor-domains",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing nodes only. Establish geometry and ambient D+ domains, preserve ordinary pullback by a bounded flat model, obtain an unnormalized costalk isomorphism before establishing exceptional preservation, and transfer finite Tor constructibility through its composite with G delta. No statement change and no new nodes.",
+  "blueprint": "cor-weil-boundary-duality-discharge, proof first paragraph: preservation on every piece, independent costalk comparison composed with Ri!delta, and finite-Tor constructibility. The final dualizing composition clause is supplied by the already split independent composition node.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic: exactness of constant-coefficient etale module inverse image and A_T -> A_Z, used for the cohomology and constant-module trivializations of the closed pullback in step 4; no node of sk-prop-sf-biduality-general states it, and it does not replace the biduality/costalk route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-14208555d",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-14208555d (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, statement and stmt_deps unchanged. I also read every cited node's statement, the master blueprint cor-weil-boundary-duality-discharge (proof, first paragraph) and the parent's step-1 use of the item. The dependency closure has no cycle. Steps 1-3 and 5-7 are correct. Step 1: Noetherian, finite type and the immersion factorization all come from the cited Mathlib leaves. Step 2: adjunction-restriction applies to a_W and to i, and the compactification Z=Z->T gives Ri_*. Step 3: thm-weil-etale-geometric-biduality has the exact datum and the same omega and delta. Step 5: dualizing-composition gives kappa_e and the p clause with the counit normalization. Step 6: closed-costalk-duality imposes no ctf hypothesis, and post-composing with kappa_e then G delta_L gives c. Step 7: the full subcategory is closed under isomorphism. One C4 fault, in step 4: lem-weil-pbc-constructible-etale-set-pullback only gives constructibility of the underlying set sheaf, but the module-constructibility definition needs constant A-module trivializations on the strata. FIX: step 4 now uses the pulled-back strata Z x_T T_t, which are constructible by lem-pur-scheme-constructible-preimage (a Mathlib leaf in unit sk-def-sf-operations, which the item's unit cites). The pulled-back module trivializations come from the exact pullback carrying A to A and preserving a finite presentation. The set-pullback citation and its tool_use are dropped and proof_deps is recomputed. Accepted tool_use: prop-weil-pbc-inverse-image-modules-exact (generic exact module pullback). Edge cases checked: empty pieces, i=id, L=0, u=v, n>1.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryFiniteTorDomains",
+  "declaration": "WeilConjectures.boundary_finite_tor_domains",
+  "declarations": [
+   "WeilConjectures.BoundaryClosedFiniteTorDomains",
+   "WeilConjectures.BoundaryPieceFiniteTorDomains",
+   "WeilConjectures.BoundaryFiniteTorDomains",
+   "WeilConjectures.boundary_finite_tor_domains"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryFiniteTorDomains.lean",
+  "statement": "theorem boundary_finite_tor_domains (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of D.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] : BoundaryFiniteTorDomains D l E n hn aY",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Full finite-stage domain statement. The three proposition definitions only package this node’s clauses; all geometric, coefficient, derived, duality, comparison and composition constructions are existing dependencies. The sole theorem is postponed. Immersion-piece finiteness is concluded, not assumed. Natural costalk comparison carries no evaluation-normalization condition. Returned-head e1e279c9a230 repair: the existing composition constructions are now carried by def-weil-boundary-composition-mate, a definition stmt_dep; the theorem node remains a proof dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bf8ed30f",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Re-delivery of e1e279c9a230 (RETURN H2). New def node def-weil-boundary-composition-mate (existing:true, Sheaf.Paper.BoundaryDualizingComposition) re-exports the 10 requested declarations and is the only addition to the item's stmt_deps; the theorem node stays a proof_dep. Node text checked against the Lean: theta = conjugateIsoEquiv mate of compact-support composition, rho from the comparison unit, lambda, pro-etale composite order, kappa_e/kappa_p, compatibility predicate = pasted counit + naturality, not asserted. Signature verbatim; the new node's stmt_deps exist on main; no duplicate or race. Item Lean changed only in docstrings, signature identical to the compiled e1e2 file; statement, proof and proof_deps unchanged. Earlier clause-by-clause check stands; no hollow defs, sorry only, docstrings and report sections present. No compile because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261024T231244-L-2196571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

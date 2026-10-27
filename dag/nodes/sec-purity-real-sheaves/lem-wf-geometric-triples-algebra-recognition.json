@@ -1,0 +1,149 @@
+{
+ "id": "lem-wf-geometric-triples-algebra-recognition",
+ "kind": "statement",
+ "title": "Recognition of the algebraic residue-triple colimit",
+ "statement": "Let A be a local commutative ring, K a separable closure of its residue field, and C a henselian local A-algebra in an independent universe. Suppose A -> C is local and IndEtaleAcrossUniverses. Let q:C -> K be surjective, with kernel the maximal ideal of C and composite from A equal to A -> k -> K. Let (p,chi) be the residue point induced by this base field-valued map. Let c be any universal cocone of the etale residue-triple ring diagram over (A,p,K,chi). Let qA:c.pt -> K have on each coprojection the triple residue map, and rho:A -> c.pt agree with every triple structural map followed by its coprojection. There exists a ring equivalence e:C -> c.pt preserving the A-map and satisfying q composed with e inverse = qA. Furthermore every ring map f:c.pt -> C satisfying f rho = algebraMap A C and q f = qA equals e inverse. This is algebraic recognition only and contains no geometric neighbourhoods, geometric colimit, or comparison map g.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Tags 04GW and 04GP (strict triple colimit), 08HR (lemma-map-into-henselian-colimit), and 08HT (lemma-uniqueness-henselian)"
+ },
+ "stmt_deps": [
+  "def-wf-geometric-triples-comparison-maps",
+  "def-pd-separable-closure",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Identify p with the closed point and its residue field with k. Transport the separable closure structure to its scheme residue field. Apply strictHenselization_triples and transport the resulting local henselian structure and residue map along colimit uniqueness to c.pt. The prescribed rho is local ind-etale and qA is surjective with maximal-ideal kernel.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-residue-field",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At unequal universes, use the canonical ULift equivalences defining IndEtaleAcrossUniverses to transport to a common universe; carry the local structures and residue maps through these ring equivalences. Take the filtered etale presentation of each ind-etale map.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply map_into_henselian_colimit in both directions with the identity map on K, using q and qA to identify the maximal-ideal residue fields. Their maximal ideals lie over the base maximal ideal by locality; base residue compatibility follows from their prescribed composites. Uniqueness compared with identity maps proves both composites are identities and yields e. For any f in the conclusion, its residue equation forces the same maximal-ideal inverse image and residue map. The uniqueness part of the same mapping theorem gives f=e inverse.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-weil-residue-field",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Tags 04GW and 04GP (strict triple colimit), 08HR (lemma-map-into-henselian-colimit), and 08HT (lemma-uniqueness-henselian)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The image of a separable closure K of k in an extension field Omega equals the separable closure of k in Omega",
+   "results": "8 hits: separableClosure.map_eq_of_separableClosure_eq_bot; map_mem_separableClosure_iff; separableClosure.map_le_of_algHom; separableClosure.isSepClosure; separableClosure.adjoin_eq_of_isAlgebraic; separableClosure.map_eq_of_algEquiv; separableClosure.adjoin_le; isClosed_restrictScalars_separableClosure",
+   "date": "2026-10-26",
+   "verdict": "The field calculation has Mathlib lemmas; no full geometric diagram or ind-etale algebra recognition comparison found. Existing project declarations were read and the remaining specialization is stated here."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, IsSeparable",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "The field calculation has Mathlib lemmas; no full geometric diagram or ind-etale algebra recognition comparison found. Existing project declarations were read and the remaining specialization is stated here."
+  },
+  {
+   "tool": "grep",
+   "query": "separableClosure.map_eq_of_separableClosure_eq_bot|exists_comp_eq_of_isSepClosed",
+   "results": "2 hits: Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/PurelyInseparable/Tower.lean",
+   "date": "2026-10-26",
+   "verdict": "The field calculation has Mathlib lemmas; no full geometric diagram or ind-etale algebra recognition comparison found. Existing project declarations were read and the remaining specialization is stated here."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*[Uu]nique|[Ii]nd[Ee]tale|[Rr]esidue[Tt]riple",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "The field calculation has Mathlib lemmas; no full geometric diagram or ind-etale algebra recognition comparison found. Existing project declarations were read and the remaining specialization is stated here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The colimit of affine etale neighbourhood rings of a geometric point is the colimit of etale residue triples",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit; AlgebraicGeometry.LocallyRingedSpace.coproductCofan; AlgebraicGeometry.LocallyRingedSpace.instHasColimits; AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone; AlgebraicGeometry.LocallyRingedSpace.instHasColimitsOfShapeDiscrete; AlgebraicGeometry.LocallyRingedSpace.coproduct; AlgebraicGeometry.AffineScheme.hasColimits; instHasColimitsCommAlgCat",
+   "date": "2026-10-26",
+   "verdict": "The field calculation has Mathlib lemmas; no full geometric diagram or ind-etale algebra recognition comparison found. Existing project declarations were read and the remaining specialization is stated here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselian local ind etale algebras with the same residue field have a unique isomorphism preserving the residue map",
+   "results": "8 hits: HenselianLocalRing.TFAE; HenselianLocalRing; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; StandardEtalePair.hom_ext; StandardEtalePresentation.mk.inj; StandardEtalePair.homEquiv; StandardEtalePair.hom_ext_iff",
+   "date": "2026-10-26",
+   "verdict": "The field calculation has Mathlib lemmas; no full geometric diagram or ind-etale algebra recognition comparison found. Existing project declarations were read and the remaining specialization is stated here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricTriplesColimitComparison",
+  "date": "2026-10-26",
+  "group": "V7"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-boundary",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-boundary-stalk-invariants",
+   "place": "Proof paragraph 1, 'the spectrum of a field with absolute Galois group the inertia group'; paragraph 2, 'the fraction field of the strict henselization' and the induced automorphisms over the henselization. Extracts original finite-lifts proof steps 8 and 9, including unique recognition by the mapping argument in 6.; geometric comparison subargument: Algebra Tags 04GW and 04GP (strict triple colimit), 08HR (lemma-map-into-henselian-colimit), and 08HT (lemma-uniqueness-henselian)",
+   "via": [
+    "lem-wf-geometric-triples-colimit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricTriplesAlgebraRecognition",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricTriplesAlgebraRecognition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.geometric_triples_algebra_recognition",
+  "statement": "theorem geometric_triples_algebra_recognition\n    (A : CommRingCat.{u}) [IsLocalRing A]\n    (K : Type u) [Field K]\n    [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]\n    (C : Type v) [CommRing C] [HenselianLocalRing C] [Algebra A C]\n    [IsLocalHom (algebraMap A C)]\n    (hC : RingHom.IndEtaleAcrossUniverses (algebraMap A C))\n    (q : C →+* K) (hq : Function.Surjective q)\n    (hker : RingHom.ker q = IsLocalRing.maximalIdeal C)\n    (hqa : q.comp (algebraMap A C) = (geometricTriplesBaseResidue A K).hom)\n    (c : Cocone (etaleResidueTriplesRingDiagram A (geometricTriplesResiduePoint A K).1 K\n      (geometricTriplesResiduePoint A K).2)) (hc : IsColimit c)\n    (qA : c.pt ⟶ .of K)\n    (hqA : ∀ t, c.ι.app t ≫ qA = geometricTriplesTripleResidue t)\n    (ρ : A ⟶ c.pt) (hρ : ∀ t, t.α ≫ c.ι.app t = ρ) :\n    ∃ e : C ≃+* c.pt,\n      e.toRingHom.comp (algebraMap A C) = ρ.hom ∧\n      q.comp e.symm.toRingHom = qA.hom ∧\n      ∀ f : c.pt →+* C,\n        f.comp ρ.hom = algebraMap A C → q.comp f = qA.hom →\n        f = e.symm.toRingHom",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ca438",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261026T092927-L-3480808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ca438",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261026T092927-L-3480808",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); 8 moved defs vs published text (verbatim, re-exported); new lemma statements vs Stacks 04HX/08HR/08HT and etale_local_ring_triples/strictHenselization_triples; node records vs Lean; #print axioms of item proof on scratch concatenation"
+ }
+}

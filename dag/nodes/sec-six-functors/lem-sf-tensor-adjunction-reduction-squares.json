@@ -1,0 +1,250 @@
+{
+ "id": "lem-sf-tensor-adjunction-reduction-squares",
+ "kind": "statement",
+ "title": "Tensor, composition and adjunction coefficient squares on short words",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. For finite-type $k$-schemes $W$ work on their small pro-etale sites and put $\\widehat R_W=\\lim_n(A_n)_W$ [def-weil-pbc-proetale-site]. Let $\\mathcal R_W\\dashv\\mathcal L_W$ be the actual reduction/total-limit adjunction on ordinary derived categories of strict semilinear module systems, with unit $u$ and counit $e$ [lem-coef-derived-system-evaluation-calculus], using the simultaneous section constructions [lem-coef-semilinear-derived-sections]. System operations are exact inverse image $P_v$, derived direct image $S_v$ with $P_v\\dashv S_v$, exact open extension $J_j\\dashv P_j$, and derived tensor. All maps $v$ are separated finite type; maps denoted $p$ are proper and opens $j$ are quasi-compact [def-weil-scheme-morphism-properties]. Integral operations $A_{\\rm int}$ are completed pullback and tensor, proper direct image, and localized completed-ring open extension [def-pur-integral-derived-operations, def-weil-derived-direct-image, lem-sf-integral-open-reduction-comparison]. Inputs $K_i$ are derived-complete constructible integral complexes. Every input and intermediate system occurring in the assertion is normalized, has compatible etale-origin witnesses and constructible cohomology, and has cohomological and finite Tor amplitudes in common finite intervals [def-weil-derived-complete-integral-detailed, def-coef-normalized-dvr-tower, def-weil-pbc-etale-origin-witness, def-weil-finite-tor-amplitude].\n\nFor a basic operation $A$ write $d_A:\\mathcal L A(\\mathcal R K_i)\\xrightarrow{\\sim}A_{\\rm int}(K_i)$ for its defining strict reduction-tower identification, with two inputs for tensor and with $d_j$ fixed by [lem-sf-integral-open-reduction-comparison]. Write $r_A:\\mathcal R A_{\\rm int}(K_i)\\to A(\\mathcal R K_i)$ for the canonical coefficient comparison of [lem-fix-operation-reduction], using the specified $r_j$ for open extension. These maps and the canonical completed ringed-site structural maps are fixed independently, through the section-normalized constructions [def-sf-integral-system-operations, def-sf-integral-system-canonical-bridge].\n\nFor a finite typed word $B$ in these operations, write $B_{\\rm int}(K_i)$ and $B(\\mathcal R K_i)$ for its two evaluations. Define $r_B:\\mathcal R B_{\\rm int}(K_i)\\to B(\\mathcal R K_i)$ recursively: at a variable it is the identity, at a unary vertex $A$ it is $A(r_{\\rm child})\\circ r_A$, and at a tensor vertex it is $(r_{\\rm left}\\otimes r_{\\rm right})\\circ r_\\otimes$. Coefficient unit objects have their canonical scalar-unit identification. These are finite words in the typed domain [def-sf-integral-system-expression-domain], with no compact-support constructor.\n\nAssume, for each basic operation applied to every integral intermediate in the words below, the primitive transpose equality $r_A=e_{A(\\mathcal R K_i)}\\circ\\mathcal R(d_A^{-1})$. Let $\\tau:B\\to C$ be one tensor associator or left/right scalar-unit identification, a pullback compositor, a unit or counit of $P_v\\dashv S_v$ or $J_j\\dashv P_j$, or a direct-image compositor. Its endpoints have at most three operation vertices, tensor counting as one binary vertex. Let $\\tau_{\\rm int}$ be the corresponding canonical completed ringed-site map, with direct-image compositor the right-adjoint mate of the pullback compositor. Use the canonical ringed pullback/tensor/square identifications [lem-weil-pbc-ringed-exchange-tensor-coherence]. Then\n$$\\tau_{\\mathcal R K_i}\\circ r_B=r_C\\circ\\mathcal R(\\tau_{\\rm int}).$$\nThis includes both directions of each invertible tensor or composition identification. The assertion is an equality in the derived category of whole semilinear systems, natural in the integral inputs, with all quotient transitions. It identifies the independently specified completed maps with the maps induced from the simultaneous system constructions, rather than defining the completed structural maps by this equality. It asserts only these structural generators on the stated short-word domain.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "The maps-used sentence beginning “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; tensor constraints and adjunction/compositor argument (returned proof step 3)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-scheme-morphism-properties",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-finite-tor-amplitude",
+  "lem-fix-operation-reduction",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-expression-domain",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Define the ordinary word comparison q from the tensor reduction, the canonical pullback comparison, its proper right mate and inverse open mate. Induction shows R(completionMap_B) followed by r_B equals q_B. Tensor and pullback use the inverse completion factors in r; proper image uses the conjugate-mate counit formula and the two triangle identities; open extension uses naturality of the inverse mate. The independent short-word completion helper supplies invertibility of completionMap_B. Hence canceling its reduction reduces the target to the ordinary comparison square.",
+   "uses": [
+    "lem-sf-short-word-completion-isomorphism",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; direct calculation of tensor constraints and adjunction units/counits, with whole-system pullback comparison and mate pasting."
+   }
+  },
+  {
+   "text": "For a tensor associator, apply the reduction compatibility with internal-Hom composition at identity morphisms, and uncurry. The resulting equation is precisely preservation of associativity by the specified tensor reduction. Tensor naturality inserts q at all three children. The given scalar-unit normalization gives preservation of the left unitor. Preservation of the right unitor follows from associativity, the left-unit equation, tensor naturality and the triangle identity; cancel the tensor comparison and the scalar-unit isomorphism. Transport along ringed.tensorClosed gives the specified ringed constraints.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; direct calculation of tensor constraints and adjunction units/counits, with whole-system pullback comparison and mate pasting."
+   }
+  },
+  {
+   "text": "The canonical whole-system reduction/pullback composition equation gives the ordinary pullback-compositor square; naturality inserts q at the child. Invert this compatibility square and apply Mathlib mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp and mateEquiv_hcomp. The result is exactly the ordinary proper direct-image compositor square because both recorded direct-image compositors are the corresponding conjugates.",
+   "uses": [
+    "lem-sf-canonical-reduction-pull-composition",
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; direct calculation of tensor constraints and adjunction units/counits, with whole-system pullback comparison and mate pasting."
+   }
+  },
+  {
+   "text": "For proper unit and counit use Mathlib unit_mateEquiv and mateEquiv_counit for the canonical pullback comparison and its right mate. The fixed proper realization agrees with this mate after reconstruction by the conjugate formula. For the open adjunction use the inverse mate identities. At the required objects its open mate is invertible: the assumed primitive formulas and normalized reconstruction prove r_B invertible by induction, the completion helper then proves q_B invertible, and q_open = inverseOrZero(openReduction) followed by open(q_child) forces openReduction invertible. This uses only the stated normalized intermediates.",
+   "uses": [
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-short-word-completion-isomorphism",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; direct calculation of tensor constraints and adjunction units/counits, with whole-system pullback comparison and mate pasting."
+   }
+  },
+  {
+   "text": "Cancel reduction of the short-word completion transport to obtain Assertion. The tensor and composition generators are isomorphisms on both sides, so multiply the forward square by their inverses to obtain the reverse square. Recursive r is natural by induction: tensor and pullback use naturality of their comparisons together with the fact that primitive formulas make the required inverse completion comparisons invertible; proper image uses counit naturality; open uses the same local inverse-mate argument. Combining this with naturality of the system associator, unitors, compositors, units and counits proves the last conjunct. All equations are in the category of whole systems.",
+   "uses": [
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-short-word-completion-isomorphism",
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; direct calculation of tensor constraints and adjunction units/counits, with whole-system pullback comparison and mate pasting."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-operations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-sf-canonical-reduction-pull-composition",
+  "lem-sf-short-word-completion-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence; direct calculation of tensor constraints and adjunction units/counits, with whole-system pullback comparison and mate pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(reduction|coefficient).*(associator|compositor|adjunction)|semilinear.*coheren",
+   "results": "0 hits: ; searched Mathlib/CategoryTheory. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral geometric adjunction units counits and composition maps commute with reduction as whole derived coefficient systems",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.unit_app_unit_comp_map_η_assoc, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.comp_unit_app. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"unit\", \"comp\"",
+   "results": "12 hits: CategoryTheory.Adjunction.eq_unit_comp_map_iff, CategoryTheory.Adjunction.unit_comp_map_eq_iff, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit, CategoryTheory.Adjunction.comp_unit. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient reduction commutes with canonical tensor associativity unit pullback composition geometric adjunction unit counit and derived direct image composition in strict semilinear systems",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.homEquiv_extendScalarsComp, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality squares for reduction and derived limit preserve monoidal constraints and right adjoint conjugates of inverse image composition",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.comp_comparison_hasLimit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm. No statement of this specified integral-to-system comparison; general adjunction identities or unrelated scheme/sheaf results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient reduction of whole semilinear derived systems preserves tensor associators and completed pullback direct image adjunction units counits compositors",
+   "results": "8 hits: PresheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. Read the returned signatures; general mates/monoidal equivalence or ordinary sheaf pullback facts do not state this completed integral-to-semilinear derived-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction and derived inverse limit adjoint equivalence of normalized coefficient towers intertwines monoidal constraints and right adjoint mates of composition",
+   "results": "8 hits: CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor, CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor, CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.mateEquiv. Read the returned signatures; general mates/monoidal equivalence or ordinary sheaf pullback facts do not state this completed integral-to-semilinear derived-system comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-generator-reduction-coherence",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps-used sentence beginning “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; tensor constraints and adjunction/compositor argument (returned proof step 3)",
+   "via": [
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-tensor-adjunction-reduction-squares",
+  "worker": "stage1",
+  "summary": "Q66 expands the short structural-generator squares by the actual reduction/limit transpose bijection. Tensor and pullback comparisons use existing whole-system completed-operation substitution; proper adjunctions use the independently fixed right-adjoint conjugation, opens the existing normalized open comparison, and direct-image composition the mate formula. No new node, statement change, evaluation-faithfulness inference, or Lean writing.",
+  "blueprint": "fix-prop-coherence.proof.md, maps-used sentence beginning “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”: steps 1--4 give the reduction/limit and tensor/composition argument; steps 5--8 identify the specified adjunction maps and their compositor mates; step 9 handles inverse constraints and naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "why": "Generic actual reduction/limit equivalence and its specified Hom-transpose and composition calculus, used on the normalized intermediates; the unit has no other statement giving this generic reconstruction calculation."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic interpretation of completed tensor/pullback expressions and their canonical constraints as limits of whole normalized systems; does not replace any six-functor geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic pasting identity for mates under composite adjunctions, used only for the specified direct-image compositor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-normalized-reconstruction-adjunction-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-bc54dc667",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-bc54dc667 (reviewer sub-agent of L); spot-checked: Q66 lem-sf-tensor-adjunction-reduction-squares, PASS, no changes. Compared with the earlier unsplit copy in other run snapshots (NC runs): statement, stmt_deps, blueprint and source are unchanged; it adds 9 proof steps and no new nodes. proof_deps equals the union of uses; no cycle; no path to the parent or to lem-sf-primitive-reduction-transpose; no SGA. Source checked: fix-prop-coherence.proof.md lines 9-11, the maps-used sentence; proof correctly marked agent. Recomputed the math. Step 2: L(r_A)u = d_A^{-1} by naturality of u and the triangle identity, so the transpose of each square is L(tau)q_B = q_C tau_int. Step 3: the substitution comparison T-hat(q_D,q_E) followed by L T(e,e) equals q_{D tensor E}, so the associator and unitor clauses of lem-pur-completed-operation-tower-substitution give the tensor squares. Step 4: same node's pullback-composition clause gives the compositor squares. Steps 5-6: the conjugation-defined proper realization (def-sf-integral-system-canonical-bridge) makes the transported Hom bijection the canonical integral one; the transported counit u^{-1}L(eps)LP(e) composed with d_P, d_S equals u^{-1}L(eps)q_{PS}, as claimed; only proper direct images are in the domain. Step 7: d_j = u^{-1}L(r_j)^{-1} is exactly the primitive equation for j. Step 8: the direct-image compositor follows from the mate characterization with pasting clause (2); the test objects are complete with normalized pullbacks. Step 9: inverses, elementary. Edge cases checked: zero inputs, identity maps, empty and identity opens. The three declared tool uses are accepted as generic: reconstruction calculus, completed-operation substitution, mate pasting. Batch-5 flag: lem-pod-derived-exact-square-composition, reached via the substitution node, is a generic lemma that derived compositors and squares of exact functors paste like the underived ones. Neither assumption gives it and it is no duality step. Moreover, every PD/trace-chapter node the item reaches is already in the batch-5 closure when the item is removed, so the delivery adds nothing new there."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TensorAdjunctionReductionSquares",
+  "declaration": "WeilConjectures.GeneratorReduction.tensorAdjunctionReductionSquares",
+  "declarations": [
+   "WeilConjectures.GeneratorReduction.GeneratorKind.IsTensorAdjunction",
+   "WeilConjectures.GeneratorReduction.GeneratorKind.IsTensorCompositionIso",
+   "WeilConjectures.GeneratorReduction.Word.systemAction",
+   "WeilConjectures.GeneratorReduction.Word.integralAction",
+   "WeilConjectures.GeneratorReduction.tensorAdjunctionReductionSquares"
+  ],
+  "file": "lean/Sheaf/SixFunctors/TensorAdjunctionReductionSquares.lean",
+  "statement": "theorem tensorAdjunctionReductionSquares {D : FiniteFieldDatum.{u}} (coeff : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic coeff.l) E] [FiniteDimensional (Padic coeff.l) E] {S : Type s} (W : S → Scheme.{u}) (_hW : FiniteTypeFamily W D.k) {I : Type i} (location : I → S) (o : Operations coeff.l E) {a : S} {B C : Word W location a} (g : GeneratorKind W location B C) (_hKind : g.IsTensorAdjunction) (_hB : B.length ≤ 3) (_hC : C.length ≤ 3) (K : ∀ k : I, DerivedCategory (scalarReductionSource coeff.l E (W (location k)))) (lo hi torLo torHi : ℤ) (_hAdm : ∀ k : I, Admissible coeff.l E (IntegralSystemRealization.calculus coeff.l E (W (location k))) (K k) lo hi torLo torHi) (_hIntermediate : Word.admissible coeff.l E W location o K lo hi torLo torHi B ∧ Word.admissible coeff.l E W location o K lo hi torLo torHi C) (_hPrimitiveB : B.primitiveFormulas coeff.l E W location o K) (_hPrimitiveC : C.primitiveFormulas coeff.l E W location o K) : Assertion coeff.l E W location o K g ∧ (g.IsTensorCompositionIso → C.r coeff.l E W location o K ≫ inverseOrZero (g.systemMap coeff.l E W location o (inputReduction coeff.l E W location K)) = (IntegralSystemRealization.calculus coeff.l E (W a)).reduction.map (inverseOrZero (g.integralMap coeff.l E W location o K)) ≫ B.r coeff.l E W location o K) ∧ (∀ (L : ∀ k : I, DerivedCategory (scalarReductionSource coeff.l E (W (location k)))) (f : ∀ k : I, K k ⟶ L k), (∀ k : I, Admissible coeff.l E (IntegralSystemRealization.calculus coeff.l E (W (location k))) (L k) lo hi torLo torHi) → Word.admissible coeff.l E W location o L lo hi torLo torHi B → Word.admissible coeff.l E W location o L lo hi torLo torHi C → B.primitiveFormulas coeff.l E W location o L → C.primitiveFormulas coeff.l E W location o L → (IntegralSystemRealization.calculus coeff.l E (W a)).reduction.map (B.integralAction coeff.l E o K L f) ≫ B.r coeff.l E W location o L ≫ g.systemMap coeff.l E W location o (inputReduction coeff.l E W location L) = B.r coeff.l E W location o K ≫ g.systemMap coeff.l E W location o (inputReduction coeff.l E W location K) ≫ C.systemAction coeff.l E o (inputReduction coeff.l E W location K) (inputReduction coeff.l E W location L) (fun k ↦ (IntegralSystemRealization.calculus coeff.l E (W (location k))).reduction.map (f k)))",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the existing published GeneratorReduction syntax, canonical arrow constructions and recursive coefficient comparisons, without invoking generatorReductionCoherence. Selects exactly the tensor/composition/adjunction subfamily, assumes the stated primitive transpose equations, and includes the reverse squares for invertible tensor/composition generators."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca196e587",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsTensorAdjunction selects exactly the 9 node generators; Assertion = B.r ≫ τ = R(τ_int) ≫ C.r; inverse conjunct for the 5 invertible constraints is genuine (completionMap_isIso, systemMap iso); naturality conjunct via systemAction/integralAction matching the published evaluations; hypotheses = Admissible inputs + Word.admissible on B,C + primitiveFormulas on B,C with common bounds, nothing stronger; ringedPushComp/Compositors.pushComp are conjugateIsoEquiv mates; lean.statement verbatim, 5 declarations present, only theorem sorry, docstrings with source place (fix-prop-coherence.proof.md l.9) and 9 steps. M1 maintainer note: stage-3 import cycle via parent GeneratorReductionStatement (owner theorem lem-sf-generator-reduction-coherence cites the item); no def node owns Word/GeneratorKind/Assertion, so extract a data module before stage 3 (same as Q52 1e094cb4). Advisories: several stmt_dep modules only reached transitively through the parent; step-8 docstring names mateEquiv instead of the mate nodes. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261025T163551-L-694568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

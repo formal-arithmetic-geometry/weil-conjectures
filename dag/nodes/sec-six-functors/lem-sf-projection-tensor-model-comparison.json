@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-projection-tensor-model-comparison",
+ "kind": "statement",
+ "title": "Normalized comparison of ordinary tensor models preserves chi",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme X. For two normalized Tensor records t and s [def-sf-tensor-completion-comparison], there is an isomorphism e:t.ordinary.tensor≅s.ordinary.tensor whose restriction to flat-term K-flat representatives carries t.ordinary.representative to s.ordinary.representative and which satisfies e.hom≫s.chi=t.chi. No constructibility or completeness condition is imposed on the two input derived objects.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Coefficient presentation of the projection map; the explicit quotient augmentation is the one of Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5, as retained in def-sf-projection-tensor-coefficient-comparison"
+ },
+ "stmt_deps": [
+  "def-sf-tensor-completion-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The flat-term K-flat subcategory localizes to the entire derived category. Use fully faithful precomposition along its product localization to lift the ratio of the representative isomorphisms to e. The preimage equation gives the representative normalization.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-product-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two actual augmentation chains coincide by their prescribed product and shifted coordinates. Restrict the desired chi equation to representatives. Insert the two canonical completion equations, use equality of the chains, and cancel the representative isomorphisms. Faithfulness proves the equation on the derived categories.",
+   "uses": [
+    "lem-sf-tensor-completion-chain-uniqueness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-product-localization",
+  "lem-sf-tensor-completion-chain-uniqueness"
+ ],
+ "proof_origin": "D6, 2026-10-27: extracted a fully proved helper from the item after generic categorical proof interfaces removed expensive unfolding; the extraction preserves the original statement and proof route.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "two ordinary tensor completion models have representative normalized comparison compatible with quotient augmentation",
+   "results": "Eight tensor-product construction results; no theorem about the project Tensor record.",
+   "date": "2026-10-27",
+   "verdict": "Use localization and the project chain-coordinate normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "Found the fully faithful precomposition theorem in Mathlib.CategoryTheory.Localization.Predicate.",
+   "date": "2026-10-27",
+   "verdict": "Reuse it to construct and compare the ordinary models."
+  },
+  {
+   "tool": "grep",
+   "query": "models_comparison|tensorCompletionModels_comparison",
+   "results": "No Mathlib hits. The proof was completed in the item during this assignment.",
+   "date": "2026-10-27",
+   "verdict": "Extract the fully proved comparison for separate checking."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionTensorCoefficientComparison",
+  "date": "2026-10-27",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Projection-formula proof step 13: canonical comparison of the framework and PBC tensor presentations, including representative normalization and the ordinary/completed tensor comparison.",
+   "via": [
+    "def-sf-projection-tensor-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionTensorModelComparison",
+  "file": "lean/Sheaf/Paper/ProjectionTensorModelComparison.lean",
+  "declaration": "WeilConjectures.ProjectionTensorModelComparison.models_comparison",
+  "statement": "theorem models_comparison (t s : OpenFactorCoherence.Tensor l E X) :\n    ∃ e : t.ordinary.tensor ≅ s.ordinary.tensor,\n      (∀ P Q : (proEtaleFlatRepresentatives X\n          (completedIntegralCommRingSheafUnrestricted l E X)).FullSubcategory,\n        t.ordinary.representative.hom.app (P, Q) ≫\n          e.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) =\n        s.ordinary.representative.hom.app (P, Q)) ∧\n      e.hom ≫ s.chi l E = t.chi l E",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T194738-L-2534206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T194738-L-2534206",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

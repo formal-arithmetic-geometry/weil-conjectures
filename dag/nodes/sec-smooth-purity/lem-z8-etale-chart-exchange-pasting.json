@@ -1,0 +1,113 @@
+{
+ "id": "lem-z8-etale-chart-exchange-pasting",
+ "kind": "statement",
+ "title": "Etale Chart Exchange Pasting",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ndef chartCoefficientComposite\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    (F : C ⥤ D) (R : D ⥤ C) (P : C ⥤ E) (Q₀ Q : D ⥤ E)\n    (adj : F ⊣ R) (cmp : R ⋙ P ≅ Q₀) (eq : Q₀ ≅ Q)\n    (V : C) (V' : D) (c : F.obj V ⟶ V') : P.obj V ⟶ Q.obj V'\n\ntheorem chartCoefficientComposite_eq\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    (F : C ⥤ D) (R : D ⥤ C) (P : C ⥤ E) (Q₀ Q : D ⥤ E)\n    (adj : F ⊣ R) (cmp : R ⋙ P ≅ Q₀) (eq : Q₀ ≅ Q)\n    (V : C) (V' : D) (c : F.obj V ⟶ V') :\n    chartCoefficientComposite F R P Q₀ Q adj cmp eq V V' c =\n      P.map (adj.unit.app V) ≫ cmp.hom.app (F.obj V) ≫\n        eq.hom.app (F.obj V) ≫ Q.map c\n\ndef derivedChartCoefficientMap\n    {W W' X : Scheme.{u}} (e : W' ⟶ W) (p : W ⟶ X)\n    (p' : W' ⟶ X) (hp : e ≫ p = p')\n    (V : DerivedCategory (Sheaf W.smallEtaleTopology B))\n    (V' : DerivedCategory (Sheaf W'.smallEtaleTopology B))\n    (c : (upperStar B e).leftDerivedFunctor.obj V ⟶ V') :\n    (lowerStar B p).rightDerivedFunctor.obj V ⟶\n      (lowerStar B p').rightDerivedFunctor.obj V'\n\ntheorem derivedChartCoefficientMap_eq\n    {W W' X : Scheme.{u}} (e : W' ⟶ W) (p : W ⟶ X)\n    (p' : W' ⟶ X) (hp : e ≫ p = p')\n    (V : DerivedCategory (Sheaf W.smallEtaleTopology B))\n    (V' : DerivedCategory (Sheaf W'.smallEtaleTopology B))\n    (c : (upperStar B e).leftDerivedFunctor.obj V ⟶ V') :\n    derivedChartCoefficientMap B e p p' hp V V' c =\n      (lowerStar B p).rightDerivedFunctor.map\n          ((derivedUpperStarLowerStarAdjunction B e).unit.app V) ≫\n        (rightDerivedLowerStarComp B e p).hom.app\n          ((upperStar B e).leftDerivedFunctor.obj V) ≫\n        (rightDerivedLowerStarCongr B hp).hom.app\n          ((upperStar B e).leftDerivedFunctor.obj V) ≫\n        (lowerStar B p').rightDerivedFunctor.map c\n\ntheorem derivedSquareUpperStarIso_chart\n    {W W' X P Y : Scheme.{u}} {a : W ⟶ P} {p : W ⟶ X}\n    {q : P ⟶ Y} {f : X ⟶ Y} (sq : CommSq a p q f) (e : W' ⟶ W)\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology B)) :\n    (leftDerivedUpperStarComp B e p).hom.app\n        ((upperStar B f).leftDerivedFunctor.obj K) ≫\n      (upperStar B e).leftDerivedFunctor.map\n        ((derivedSquareUpperStarIso B sq).hom.app K) ≫\n      (leftDerivedUpperStarComp B e a).inv.app\n        ((upperStar B q).leftDerivedFunctor.obj K) =\n      (derivedSquareUpperStarIso B\n        (CommSq.mk (show (e ≫ a) ≫ q = (e ≫ p) ≫ f by\n          simp only [Category.assoc]; rw [sq.w]))).hom.app K\n\ntheorem chart_rightDerivedLowerStarComp_hom\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :\n    (rightDerivedLowerStarComp B f g).hom =\n      conjugateEquiv\n        ((derivedUpperStarLowerStarAdjunction B g).comp\n          (derivedUpperStarLowerStarAdjunction B f))\n        (derivedUpperStarLowerStarAdjunction B (f ≫ g))\n        (leftDerivedUpperStarComp B f g).hom\n\ntheorem derivedBaseChangeMap_chart\n    {W W' X P Y : Scheme.{u}} {a : W ⟶ P} {p : W ⟶ X}\n    {q : P ⟶ Y} {f : X ⟶ Y} (sq : CommSq a p q f) (e : W' ⟶ W)\n    (M : DerivedCategory (Sheaf P.smallEtaleTopology B)) :\n    (derivedBaseChangeMap B sq).app M ≫\n        (lowerStar B p).rightDerivedFunctor.map\n          ((derivedUpperStarLowerStarAdjunction B e).unit.app\n            ((upperStar B a).leftDerivedFunctor.obj M)) ≫\n        (rightDerivedLowerStarComp B e p).hom.app\n          ((upperStar B e).leftDerivedFunctor.obj\n            ((upperStar B a).leftDerivedFunctor.obj M)) ≫\n        (lowerStar B (e ≫ p)).rightDerivedFunctor.map\n          ((leftDerivedUpperStarComp B e a).inv.app M) =\n      (derivedBaseChangeMap B\n        (CommSq.mk (show (e ≫ a) ≫ q = (e ≫ p) ≫ f by\n          simp only [Category.assoc]; rw [sq.w]))).app M\n\ntheorem derivedBaseChangeMap_chart_of_eq\n    {W W' X P Y : Scheme.{u}} {a : W ⟶ P} {p : W ⟶ X}\n    {q : P ⟶ Y} {f : X ⟶ Y} (sq : CommSq a p q f) (e : W' ⟶ W)\n    (p' : W' ⟶ X) (hp : p' = e ≫ p) (a' : W' ⟶ P) (ha : a' = e ≫ a)\n    (sq' : CommSq a' p' q f) (M : DerivedCategory (Sheaf P.smallEtaleTopology B)) :\n    (derivedBaseChangeMap B sq).app M ≫\n        (lowerStar B p).rightDerivedFunctor.map\n          ((derivedUpperStarLowerStarAdjunction B e).unit.app\n            ((upperStar B a).leftDerivedFunctor.obj M)) ≫\n        (rightDerivedLowerStarComp B e p).hom.app\n          ((upperStar B e).leftDerivedFunctor.obj\n            ((upperStar B a).leftDerivedFunctor.obj M)) ≫\n        (rightDerivedLowerStarCongr B (Z := W') (Y := X)\n          (g₁ := e ≫ p) (g₂ := p') hp.symm).hom.app\n          ((upperStar B e).leftDerivedFunctor.obj\n            ((upperStar B a).leftDerivedFunctor.obj M)) ≫\n        (lowerStar B p').rightDerivedFunctor.map\n          ((leftDerivedUpperStarComp B e a a' ha).inv.app M) =\n      (derivedBaseChangeMap B sq').app M\n\ntheorem derivedBaseChangeMap_chart_coefficient\n    {W W' X P Y : Scheme.{u}} {a : W ⟶ P} {p : W ⟶ X}\n    {q : P ⟶ Y} {f : X ⟶ Y} (sq : CommSq a p q f) (e : W' ⟶ W)\n    (p' : W' ⟶ X) (hp : p' = e ≫ p) (a' : W' ⟶ P) (ha : a' = e ≫ a)\n    (sq' : CommSq a' p' q f) (M : DerivedCategory (Sheaf P.smallEtaleTopology B))\n    (V : DerivedCategory (Sheaf W.smallEtaleTopology B))\n    (V' : DerivedCategory (Sheaf W'.smallEtaleTopology B))\n    (c : (upperStar B a).leftDerivedFunctor.obj M ⟶ V)\n    (c' : (upperStar B e).leftDerivedFunctor.obj V ⟶ V')\n    (c'' : (upperStar B a').leftDerivedFunctor.obj M ⟶ V')\n    (hc : (upperStar B e).leftDerivedFunctor.map c ≫ c' =\n      (leftDerivedUpperStarComp B e a a' ha).inv.app M ≫ c'') :\n    (derivedBaseChangeMap B sq).app M ≫\n        (lowerStar B p).rightDerivedFunctor.map c ≫\n        (lowerStar B p).rightDerivedFunctor.map\n          ((derivedUpperStarLowerStarAdjunction B e).unit.app V) ≫\n        (rightDerivedLowerStarComp B e p).hom.app\n          ((upperStar B e).leftDerivedFunctor.obj V) ≫\n        (rightDerivedLowerStarCongr B (Z := W') (Y := X)\n          (g₁ := e ≫ p) (g₂ := p') hp.symm).hom.app\n          ((upperStar B e).leftDerivedFunctor.obj V) ≫\n        (lowerStar B p').rightDerivedFunctor.map c' =\n      (derivedBaseChangeMap B sq').app M ≫\n        (lowerStar B p').rightDerivedFunctor.map c''\n\ntheorem derivedBaseChangeMap_chart_coefficient_cached\n    {W W' X P Y : Scheme.{u}} {a : W ⟶ P} {p : W ⟶ X}\n    {q : P ⟶ Y} {f : X ⟶ Y} (sq : CommSq a p q f) (e : W' ⟶ W)\n    (p' : W' ⟶ X) (hp : p' = e ≫ p) (a' : W' ⟶ P) (ha : a' = e ≫ a)\n    (sq' : CommSq a' p' q f) (M : DerivedCategory (Sheaf P.smallEtaleTopology B))\n    (V : DerivedCategory (Sheaf W.smallEtaleTopology B))\n    (V' : DerivedCategory (Sheaf W'.smallEtaleTopology B))\n    (c : (upperStar B a).leftDerivedFunctor.obj M ⟶ V)\n    (c' : (upperStar B e).leftDerivedFunctor.obj V ⟶ V')\n    (c'' : (upperStar B a').leftDerivedFunctor.obj M ⟶ V')\n    (hc : (upperStar B e).leftDerivedFunctor.map c ≫ c' =\n      (leftDerivedUpperStarComp B e a a' ha).inv.app M ≫ c'') :\n    (derivedBaseChangeMap B sq).app M ≫\n        (lowerStar B p).rightDerivedFunctor.map c ≫\n        derivedChartCoefficientMap B e p p' hp.symm V V' c' =\n      (derivedBaseChangeMap B sq').app M ≫\n        (lowerStar B p').rightDerivedFunctor.map c''",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "lem-z8-section-projection-unit"
+ ],
+ "proof": [
+  {
+   "text": "Apply associativity of inverse-image compositors to paste the chart morphism with the square comparison. Direct-image composition is the conjugate of its inverse-image compositor. The generic mate chart-pasting identity and bottom naturality therefore identify the pasted exchange with exchange for the outer chart square. Transport along the recorded equalities for named chart morphisms, and use naturality to move a composition-compatible coefficient comparison through the resulting exchange.",
+   "uses": [
+    "lem-z8-section-projection-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-section-projection-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartExchangePasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartExchangePasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMap_chart_coefficient_cached",
+  "declarations": [
+   "AlgebraicGeometry.Etale.chartCoefficientComposite",
+   "AlgebraicGeometry.Etale.chartCoefficientComposite_eq",
+   "AlgebraicGeometry.Etale.derivedChartCoefficientMap",
+   "AlgebraicGeometry.Etale.derivedChartCoefficientMap_eq",
+   "AlgebraicGeometry.Etale.derivedSquareUpperStarIso_chart",
+   "AlgebraicGeometry.Etale.chart_rightDerivedLowerStarComp_hom",
+   "AlgebraicGeometry.Etale.derivedBaseChangeMap_chart",
+   "AlgebraicGeometry.Etale.derivedBaseChangeMap_chart_of_eq",
+   "AlgebraicGeometry.Etale.derivedBaseChangeMap_chart_coefficient",
+   "AlgebraicGeometry.Etale.derivedBaseChangeMap_chart_coefficient_cached"
+  ],
+  "statement": "theorem derivedBaseChangeMap_chart_coefficient_cached\n    {W W' X P Y : Scheme.{u}} {a : W ⟶ P} {p : W ⟶ X}\n    {q : P ⟶ Y} {f : X ⟶ Y} (sq : CommSq a p q f) (e : W' ⟶ W)\n    (p' : W' ⟶ X) (hp : p' = e ≫ p) (a' : W' ⟶ P) (ha : a' = e ≫ a)\n    (sq' : CommSq a' p' q f) (M : DerivedCategory (Sheaf P.smallEtaleTopology B))\n    (V : DerivedCategory (Sheaf W.smallEtaleTopology B))\n    (V' : DerivedCategory (Sheaf W'.smallEtaleTopology B))\n    (c : (upperStar B a).leftDerivedFunctor.obj M ⟶ V)\n    (c' : (upperStar B e).leftDerivedFunctor.obj V ⟶ V')\n    (c'' : (upperStar B a').leftDerivedFunctor.obj M ⟶ V')\n    (hc : (upperStar B e).leftDerivedFunctor.map c ≫ c' =\n      (leftDerivedUpperStarComp B e a a' ha).inv.app M ≫ c'') :\n    (derivedBaseChangeMap B sq).app M ≫\n        (lowerStar B p).rightDerivedFunctor.map c ≫\n        derivedChartCoefficientMap B e p p' hp.symm V V' c' =\n      (derivedBaseChangeMap B sq').app M ≫\n        (lowerStar B p').rightDerivedFunctor.map c''",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

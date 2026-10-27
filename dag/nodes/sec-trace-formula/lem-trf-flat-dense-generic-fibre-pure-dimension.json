@@ -20,36 +20,18 @@
  ],
  "proof": [
   {
-   "text": "Fix $s\\in S$ and an irreducible component $C$ of $X_s$. By sobriety choose its generic point $x$, regarded also as a point of $X$ using the fibre homeomorphism. Choose affine neighbourhoods $V=\\operatorname{Spec}A$ of $s$ and $U=\\operatorname{Spec}R\\subset f^{-1}(V)$ of $x$. The affine flatness criterion makes $A\\to R$ flat. Since $S$ is integral, $A$ is a domain and $\\eta\\in V$ corresponds to $(0)$. If $\\mathfrak q$ represents $x$ and $\\mathfrak p$ represents $s$, going down applied to $(0)\\subseteq\\mathfrak p$ and $\\mathfrak q$ gives $\\mathfrak q_0\\subseteq\\mathfrak q$ contracting to $(0)$. Thus there is a point $y\\in X_\\eta$ specializing to $x$ in $X$.",
+   "text": "Fix $s\\in S$ and an irreducible component $C$ of $X_s$. Apply the flat generic-component incidence lemma: it supplies a component $B$ of $X_\\eta$ with generic point $z$ such that $C$ is a component of $Z_s=\\overline{\\{z\\}}\\cap f^{-1}(s)$. Its hypotheses are precisely integrality of $S$ and flatness of $f$.",
    "uses": [
-    "lem-sc-scheme-sober",
-    "def-pc-scheme-fibre",
-    "def-pc-integral-scheme",
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-sc-flat-going-down"
+    "lem-trf-flat-generic-component-incidence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HS (lemma-flat-going-down), applied on affine charts; More on Morphisms Tag 0GSK, second list"
-   }
-  },
-  {
-   "text": "Choose an irreducible component $B$ of $X_\\eta$ containing $y$, using the component-cover theorem, and let $z$ be its generic point by sobriety. In the fibre $z$ specializes to $y$; its continuous inclusion into $X$ shows that $z$ specializes to $x$ in $X$. Put $Z=\\overline{\\{z\\}}$ in $X$ and $Z_s=Z\\cap f^{-1}(s)$. This is closed in $X_s$ and contains $x$, hence contains $C=\\overline{\\{x\\}}$ in $X_s$. Any irreducible subset of $Z_s$ properly containing $C$ would also be an irreducible subset of $X_s$ properly containing $C$. Maximality of $C$ therefore makes $C$ an irreducible component of $Z_s$.",
-   "uses": [
-    "lem-sc-irreducible-components-cover",
-    "lem-sc-scheme-sober",
-    "def-pc-scheme-fibre",
-    "def-weil-irreducible-components"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0GSK (remark-flat-equidimensional), second list: reduction to the closure of a generic-fibre component"
+    "place": "Tag 0GSK (remark-flat-equidimensional), second list: reduction to closures of generic-fibre components; affine lifting uses Algebra Tag 00HS (lemma-flat-going-down), algebra.tex."
    }
   },
   {
-   "text": "Apply the fibre-component-closure dimension lemma to the original flat, locally finite type map $f$, to $t=\\eta$, to the generic point $z$ of $B$, and to the component $C$ of $Z_s$ found in step 2. It gives $\\dim C=\\dim B=d$, where the final equality is the hypothesis on the generic fibre. Since $s$ and $C$ were arbitrary, every nonempty ordinary fibre is pure of dimension $d$. This application does not assume that the reduced closure $Z$ is itself flat.",
+   "text": "Apply the flat fibre-component-closure dimension lemma to $f$, $t=\\eta$, $B,z$, and $C\\subseteq Z_s$. It gives $\\dim C=\\dim B=d$, with the last equality supplied by the generic-fibre hypothesis. Thus all ordinary fibres have the asserted component dimensions. Only $f$ is assumed flat; flatness of the reduced closure is unnecessary.",
    "uses": [
     "lem-trf-flat-fibre-component-closure-dimension"
    ],
@@ -60,7 +42,7 @@
    }
   },
   {
-   "text": "By locally-finite-type base change, $X_s\\to\\operatorname{Spec}\\kappa(s)$ is locally of finite type. Apply the pure-open local-dimension lemma to $Y=X_s$, its whole open subset $O=X_s$, and $n=d$. Step 3 supplies every component dimension, so the local topological dimension $\\dim_x X_s$ equals $d$ at every $x\\in X_s$.",
+   "text": "By locally-finite-type base change, $X_s\\to\\operatorname{Spec}\\kappa(s)$ is locally of finite type. Apply the pure-open local-dimension lemma to $Y=X_s$, its whole open subset $O=X_s$, and $n=d$. Step 2 supplies every component dimension, so the local topological dimension $\\dim_x X_s$ equals $d$ at every $x\\in X_s$.",
    "uses": [
     "lem-weil-pbc-lft-base-change",
     "lem-sbc-equidimensional-open-local-dimension"
@@ -72,46 +54,23 @@
    }
   },
   {
-   "text": "Let $\\Omega/\\kappa(s)$ be any algebraically closed extension and put $S'=\\operatorname{Spec}\\Omega$, mapped to $S$ through $s$. Apply the fibre-dimension-after-base-change theorem to $f$ and this map. Its fibre identification identifies the fibre over the unique point of $S'$ with $G=X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\Omega$. For every $x'\\in G$ with image $x\\in X_s$, the theorem gives $\\dim_{x'}G=\\dim_x X_s=d$ by step 4. Thus the local dimension is constantly $d$ on $G$.",
+   "text": "For any algebraically closed extension $\\Omega/\\kappa(s)$, apply the field-extension component/local-dimension lemma to $Y=X_s$, $k=\\kappa(s)$, $L=\\Omega$. Its locally finite type hypothesis was checked in step 3. It identifies local dimensions on $G=X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\Omega$ with those on $X_s$ and gives, at each component generic point $z$, $\\dim D=\\dim_{p(z)}X_s=d$. This proves the geometric-fibre assertion. If a fibre or $X$ is empty there are no components and the assertions are vacuous.",
    "uses": [
-    "lem-sc-fibre-dimension-after-base-change"
+    "lem-trf-field-extension-component-local-dimension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1); this is the pointwise input to Tag 02NK"
-   }
-  },
-  {
-   "text": "The structure morphism $G\\to\\operatorname{Spec}\\Omega$ is locally of finite type by base change. A field is Noetherian because its only ideals are $0$ and the unit ideal; hence its spectrum is locally Noetherian by definition. The locally-finite-type over locally-Noetherian theorem therefore makes $G$ locally Noetherian. Apply the constant-local-dimension component theorem with $Y=G$, $O=G$, $n=d$ and step 5: every irreducible component of $G$ has dimension $d$. This proves the geometric-fibre assertion. If $X$ or one of the fibres is empty, it has no irreducible components and the assertions are vacuous.",
-   "uses": [
-    "lem-weil-pbc-lft-base-change",
-    "pqf-def-locnoeth",
-    "pqf-lem-locnoeth-lft",
-    "lem-sbc-constant-local-dimension-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T6 (lemma-finite-type-noetherian) and Tag 02NK (lemma-base-change-relative-dimension-d); Topology Tags 0055, 0052 for the component criterion"
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1), for the structure morphism to Spec k; Tag 01T6 (lemma-finite-type-noetherian) for local Noetherianity. Component-generic-point formula: varieties.tex, Tag 0A21 (lemma-dimension-locally-algebraic), part (5)."
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-scheme-sober",
-  "def-pc-scheme-fibre",
-  "def-pc-integral-scheme",
-  "lem-weil-pbc-flat-morphism-affine-criterion",
-  "lem-sc-flat-going-down",
-  "lem-sc-irreducible-components-cover",
-  "def-weil-irreducible-components",
+  "lem-trf-flat-generic-component-incidence",
   "lem-trf-flat-fibre-component-closure-dimension",
   "lem-weil-pbc-lft-base-change",
   "lem-sbc-equidimensional-open-local-dimension",
-  "lem-sc-fibre-dimension-after-base-change",
-  "pqf-def-locnoeth",
-  "pqf-lem-locnoeth-lft",
-  "lem-sbc-constant-local-dimension-components"
+  "lem-trf-field-extension-component-local-dimension"
  ],
  "proof_origin": {
   "by": "document",
@@ -218,39 +177,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-flat-dense-generic-fibre-pure-dimension",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged and expanded the 0GSK remark into affine going down, generic-fibre component selection, the component-closure dimension input of 0GSJ, and the pointwise field-base-change argument. Added one statement-only geometric input concerning component closures, which need not be flat themselves. Searched the whole DAG, blueprint, project Lean and Mathlib; no exact attachment or Mathlib match was found. Every proof citation was checked against its statement. The generic-fibre density assumption is retained although flat going down already supplies the needed generalizations.",
+  "summary": "Q83 repair of the human re-split return. Statement unchanged. Old steps 1--2 become the statement-only generic-component-incidence lemma; old steps 5--6 become the statement-only field-extension component/local-dimension lemma, with a componentwise formula that also applies to non-pure schemes. The existing component-closure dimension input and old step 4 remain in the short assembly. All six old arguments are preserved and mapped in report.md. Two independent unsplit nodes spread the work; no Lean written or compiled.",
   "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: after ILO X Theorem 3.4 Step 2 flatifies the curve and horizontal boundary, their dense generic fibres determine pure relative dimensions 1 and 0.",
   "tool_uses": [
    {
-    "node": "lem-sc-scheme-sober",
-    "why": "Supplies generic points of fibre components without any Noetherian hypothesis on the base."
-   },
-   {
-    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
-    "why": "Converts the given stalkwise flatness to the affine ring flatness required by going down."
-   },
-   {
-    "node": "lem-sc-irreducible-components-cover",
-    "why": "Chooses a generic-fibre component through the lifted point; no finiteness of the set of components is assumed."
-   },
-   {
     "node": "lem-sbc-equidimensional-open-local-dimension",
     "why": "Converts the already proved pure component dimensions of the ordinary fibre to local topological dimension; the local-term unit has no dimension-theory replacement."
-   },
-   {
-    "node": "lem-sc-fibre-dimension-after-base-change",
-    "why": "Transfers local topological fibre dimension under the arbitrary residue-field extension defining a geometric fibre."
-   },
-   {
-    "node": "pqf-lem-locnoeth-lft",
-    "why": "Supplies local Noetherianity of a locally finite type scheme over a field, needed by the component criterion."
-   },
-   {
-    "node": "lem-sbc-constant-local-dimension-components",
-    "why": "Converts constant finite local topological dimension on the geometric fibre into the required component dimensions."
    }
   ]
  },
@@ -264,12 +199,12 @@
   "lem-sbc-constant-local-dimension-components"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q69-9c27728de",
-  "group": "Q69",
+  "reviewer": "NT-cc-Q83-e8ec6544b",
+  "group": "Q83",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-9c27728de (reviewer sub-agent of L); spot-checked: The item and the new node are true, and the proof is complete. I made no fixes. Sources read: more-morphisms.tex 0GSI, 0H3X, 0GSJ and 0GSK (second list, F=O_X), plus Morphisms 02NJ and Topology definition-equidimensional. The item statement is the 0GSK remark specialized to an integral base, unchanged. New node lem-trf-flat-fibre-component-closure-dimension is true: a fibre-component generic point y is a minimal prime of a locally Noetherian fibre, so it lies in Ass_{X/S}(O_X). 0GSJ(2) then makes Y->T of relative dimension d, and Y_t equals B as a set, so d = dim B, which is finite. It needs no Noetherian base, no integral base and no purity. Tests: k[t][x,y]/(x(y-t)); the non-pure k[t][x,y,z]/(xy,xz); empty Z_s; and the blowup of A^2, which shows flatness is needed. The node is strictly smaller than the item, not a restated clause, and statement-only, and its form checks B1-B9 pass. It does not duplicate lem-trf-flat-family-generic-dimension-bound (0H3X gives only an upper bound) or the lem-sbc finite-presentation/Cohen-Macaulay nodes. Steps: (1) going down on affine charts gives eta=(0) in V, a flat ring map and a lift; correct. (2) Choosing the component and passing maximality of C to Z_s is genuinely elementary. (3) The new node is applied with t=eta, y=z, D=C. (4)-(6) cite lft base change, the pure-open local-dimension node, fibre dimension after base change (def-kun-dimension, the same notion on underlying spaces), local Noetherianity, and the constant-local-dimension component criterion; every hypothesis is checked. proof_deps equals the union of uses. There is no SGA citation, and the declared tool_uses are accepted as generic black boxes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-e8ec6544b (reviewer sub-agent of L); spot-checked: Re-split note of 2026-10-21/22 is answered. Live and side-live still hold the 6-step base, so nothing supersedes the delivery, and the statement is unchanged. Old steps 1-2 (affine going down 00HS, generic-fibre component, maximality of C) become the statement-only node lem-trf-flat-generic-component-incidence; old steps 5-6 (02FY(1), 01T6, components from constant local dimension) become lem-trf-field-extension-component-local-dimension. Old steps 3-4 stay in a 4-step assembly of 1496 characters. No argument is dropped, and the two nodes are of comparable size. Both new nodes are true. Incidence: going down over the domain A, a component B through the lift, and maximality of C passing to Z_s; tested on xy=t, empty X, identity and disjoint unions; no lft needed. Field extension: 01T4/01T6; 02FY(1) for Y->Spec k along Spec L; 0A21(5) (varieties.tex line 3805) at the generic point of D, which lies in no other component; tested on A^1 disjoint union Spec k, nonreduced finite Y, inseparable and transcendental L. Neither node restates a parent clause or duplicates a DAG node: lem-sc-fibre-dimension-after-base-change gives only the pointwise clause, lem-sc-dimension-locally-algebraic needs irreducible Y, and lem-trf-relative-dimension-base-change gives only the pure case (advisory). Steps are checked against the cited statements: closure-dimension node with t=eta, y=z, D=C; equidimensional-open-local-dimension with Y=O=X_s (the declared tool_use is accepted again); the field node with k=kappa(s), L=Omega. Searches (all three kinds), stmt_deps, blueprint from/via and the absence of SGA are all fine. FIX: in item step 3, 'Step 3 supplies every component dimension' is corrected to 'Step 2' (whole corrected item JSON in fixes/dag/nodes/sec-trace-formula/).; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension",
@@ -289,5 +224,16 @@
   "result": "pass",
   "note": "Re-delivery of the statement Q06 landed in ebb5bbc6cb: Lean signature and body byte-identical; only an accurate docstring sentence, lean.by Q06->Q106 (the tool requires the delivering group) and the Q106 report (Worker report + Second reading by Q106) differ. Checked every clause against the node and Stacks 0GSK/0GSJ/02NJ/02NK: IsIntegral S, IsGenericPoint eta univ, Flat + LocallyOfFiniteType, Dense (range f.fiberι eta), d : ℕ, generic-fibre components of dimension d; both conclusions (nonempty fibres; nonempty geometric fibres, the pullback of fiberToSpecResidueField s along Spec Ω for any algebraically closed Ω) with the same quantifier order and no extra hypotheses. Edge cases: d = 0, empty X and empty fibres are vacuous. Ω : Type u is forced by the pullback in Scheme.{u} (project convention). The node's integral base is stronger than the source's irreducible base but is the node's own accepted choice. No definitions, sorry only, source and blueprint docstrings present, recorded declarations used, no pro-étale. nt_compile.py: no errors or warnings, about 2.5 s; axioms propext, sorryAx, Classical.choice, Quot.sound."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

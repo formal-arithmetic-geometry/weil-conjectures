@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-space-finite-type-point-characterization",
+ "kind": "statement",
+ "title": "Finite type points of spaces have locally finite type field representatives",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $x\\in|X|$, where points are field-valued maps modulo equality after common field extension [def-weil-field]. The following are equivalent: (i) there are a scheme $W$, a closed point $w\\in W$, and a representable etale map $e:W\\to X$ with $e(w)=x$; (ii) there are a field $K$ and a locally finite type map $a:\\operatorname{Spec}K\\to X$ representing $x$. Here etale means [def-weil-etale-morphism], affine spectra are [def-weil-affine-spectrum], and locally of finite type for a space map is tested on compatible etale scheme charts with [def-weil-finite-type-morphism]. No Noetherian, Jacobson, quasi-compactness or separatedness assumption is imposed on $S$ or $X$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06EF (lemma-point-finite-type), conditions (1) and (2); Tag 06EH (lemma-identify-finite-type-points) restates the chart characterization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-space-etale-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Assume (i). Put $k=\\kappa(w)$ and let $c:\\operatorname{Spec}k\\to W$ be the canonical map. Choose an affine open neighbourhood of $w$ in $W$. Since $w$ is closed in $W$, it is closed in that affine open, and the residue extension for $c$ is $k/k$, of degree one. The scheme field-point criterion therefore makes $c$ locally of finite type. The chartwise calculus, applied to algebraic spaces viewed as discrete algebraic stacks, makes $e$ locally of finite type (etale implies smooth, then locally of finite presentation, then locally of finite type) and makes $e c$ locally of finite type by composition. Its field-valued point class is $e(w)=x$, so $K=k$ and $a=e c$ give (ii).",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-sfb-finite-type-field-point-characterization",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06EF (lemma-point-finite-type), proof"
+   }
+  },
+  {
+   "text": "Assume (ii), and choose a representable surjective etale scheme atlas $e:U\\to X$, which exists by the definition of an algebraic space. Form $V=U\\times_X\\operatorname{Spec}K$, with projections $p:V\\to U$ and $q:V\\to\\operatorname{Spec}K$. The fibre-product and covering theorem gives a scheme $V$ and makes $q$ surjective and etale. In particular $V$ is nonempty, since $\\operatorname{Spec}K$ has a point. The map $p$ is the base change of the locally finite type map $a$, so the chartwise calculus makes $p$ locally of finite type as an algebraic-space map. The chart-test theorem identifies this with local finite type for the scheme morphism $p$. We have the equality $e p=a q$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-affine-spectrum",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06EF (lemma-point-finite-type), proof"
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $V_0=\\operatorname{Spec}A\\subseteq V$. Its coordinate ring is nonzero: a prime ideal corresponding to any point of $V_0$ is proper. The maximal-ideal existence theorem supplies a maximal ideal $\\mathfrak m$ of $A$. The associated point $v$ is closed in $V_0$, because its singleton is the closed set $V(\\mathfrak m)$: a prime containing a maximal ideal equals that ideal. Put $L=\\kappa(v)$. For the canonical map $r:\\operatorname{Spec}L\\to V$, condition (iii) of the scheme field-point criterion holds on $V_0$, with identity residue extension $L/L$. Thus $r$ is locally of finite type. This explicitly supplies the finite type point of $V$ selected in the source proof; $v$ need not be closed in all of $V$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-sfb-finite-type-field-point-characterization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06EF (lemma-point-finite-type), proof"
+   }
+  },
+  {
+   "text": "The composite $p r:\\operatorname{Spec}L\\to U$ is locally of finite type by the chartwise composition theorem (which includes scheme morphisms). The scheme field-point criterion gives an affine open $U_0\\subseteq U$ containing its image $u$, such that $u$ is closed in $U_0$ (and $L/\\kappa(u)$ is finite, though this extra conclusion is not needed). The open inclusion $j:U_0\\hookrightarrow U$ is etale by the open-immersion theorem; the chartwise composition theorem makes $e j:U_0\\to X$ etale. It is representable: for a scheme $T$ and $T\\to X$, the sheaf $T\\times_XU_0=(T\\times_XU)\\times_UU_0$ is the open subscheme of the scheme $T\\times_XU$ (representability of $e$) lying over $U_0$. Finally $e p r=a q r$. The map $q r$ is a map of field spectra and hence comes from a field embedding $K\\hookrightarrow L$, so $a q r$ is the extension of $a$ to $L$ and represents $x$. On the other hand, by the field-point description of scheme morphisms, $p r=j_u\\circ\\operatorname{Spec}(\\varphi)$ for the canonical $j_u:\\operatorname{Spec}\\kappa(u)\\to U$ and a field map $\\varphi:\\kappa(u)\\to L$; $j_u$ factors through $U_0$, so $e p r$ is the extension to $L$ of $(e j)\\circ j_u$, which represents $(e j)(u)$. Thus $(e j)(u)=x$. Taking $W=U_0$ and $w=u$ proves (i).",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-finite-type-field-point-characterization",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06EF (lemma-point-finite-type), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-sfb-finite-type-field-point-characterization",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06EF (lemma-point-finite-type); the finite type point selection is expanded using morphisms.tex Tag 01TA and algebra.tex Tag 00E0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite type point of an algebraic space is equivalently represented by a locally finite type field valued point or by a closed point on an etale scheme chart",
+   "sub": "",
+   "results": "Read 8 returned hits: AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "No match: the closed-point criterion found is for Jacobson schemes only (Finite.lean:222); this statement concerns arbitrary algebraic spaces and closed lifts in etale charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces a finite type point has a closed etale scheme lift with residue finite over the image under a locally finite type morphism",
+   "sub": "",
+   "results": "Read 8 returned hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsEtale, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, Algebra.isOpen_etaleLocus, Algebra.Etale.finitePresentation",
+   "date": "2026-10-23",
+   "verdict": "No match: the closed-point criterion found is for Jacobson schemes only (Finite.lean:222); this statement concerns arbitrary algebraic spaces and closed lifts in etale charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsClosed\"",
+   "sub": "",
+   "results": "Read 0 returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match: the closed-point criterion found is for Jacobson schemes only (Finite.lean:222); this statement concerns arbitrary algebraic spaces and closed lifts in etale charts."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTypePoint|finite_type_point|finite type point|locally closed point",
+   "sub": "AlgebraicGeometry",
+   "results": "Read 0 returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match: the closed-point criterion found is for Jacobson schemes only (Finite.lean:222); this statement concerns arbitrary algebraic spaces and closed lifts in etale charts."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosed.*[Rr]esidue|[Rr]esidue.*IsClosed|AlgebraicSpace",
+   "sub": "AlgebraicGeometry",
+   "results": "Read 8 returned hits: Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: the closed-point criterion found is for Jacobson schemes only (Finite.lean:222); this statement concerns arbitrary algebraic spaces and closed lifts in etale charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"IsClosed\"",
+   "sub": "",
+   "results": "Read 2 hits: AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Jacobson-scheme closed-point criteria, or basic residue-field maps, not the arbitrary-algebraic-space chart equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point of an algebraic space is represented by a locally finite type morphism from a field if and only if it lifts to a closed point in an etale scheme chart",
+   "sub": "",
+   "results": "Read 8 hits: AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.Scheme.Spec_map_residue_apply, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, Algebra.mem_etaleLocus_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Jacobson-scheme closed-point criteria, or basic residue-field maps, not the arbitrary-algebraic-space chart equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|finiteTypePoint|finite_type_point|finite type point",
+   "sub": "AlgebraicGeometry",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Jacobson-scheme closed-point criteria, or basic residue-field maps, not the arbitrary-algebraic-space chart equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic spaces points locally finite type spectrum field closed point etale chart",
+   "sub": "",
+   "results": "Read 8 hits: IsLocalRing.closedPoint, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.LocallyOfFiniteType.casesOn, AlgebraicGeometry.LocallyOfFiniteType.recOn, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Jacobson-scheme closed-point criteria, or basic residue-field maps, not the arbitrary-algebraic-space chart equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field valued point of a scheme or algebraic space is locally of finite type precisely when it is a closed point in an etale neighborhood with finite residue extension",
+   "sub": "",
+   "results": "Read 8 hits: AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Jacobson-scheme closed-point criteria, or basic residue-field maps, not the arbitrary-algebraic-space chart equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-versal-base-change-smooth",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXU proof, z_0=i(u_0): passing from the locally finite type field representative to a finite type point in a chart.",
+   "via": [
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-finite-type-point-characterization",
+  "worker": "stage1",
+  "summary": "Proved both directions of Stacks 06EF using the existing scheme field-point criterion, chartwise calculus, and space fibre-product/cover nodes. Expanded the finite type point choice using a maximal ideal in a nonempty affine open. No statement change, no new nodes, no additional hypotheses. Checked every cited statement and the project Lean source.",
+  "blueprint": "Supports the existing blueprint.from.place chain: the finite type point z_0 in the proof of Tag 0CXU used by lem-sfb-artin-versal-base-change-smooth, ultimately the alteration input to det-thm-sf-ctf-stability-direct-images, proof (3). The current latest blueprint has no separate equivalent point-characterization node. The ancestor command reports null; the inherited null ancestor and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of space fibre products and preservation of surjective etale covers; the unit has no replacement for this chart-construction tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-60d6b2e9f",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-60d6b2e9f (reviewer sub-agent of L); spot-checked: I read Stacks Tag 06EF (statement and both proof paragraphs) and Tag 06EH. The item's (i) is Stacks (2) and its (ii) is Stacks (1). No hypothesis is added or dropped, and the statement and stmt_deps are unchanged from base. There are no new nodes. My rg -L search for 06EF/06EH/'finite type point' over the DAG found no duplicate: the hits are 06G3, 02J4, 06G2 and the scheme criterion 01TA. Step 1 is correct: 01TA(iii) needs closedness only in some affine open, and the chartwise calculus gives etale⇒lft and composition. Step 2 is correct: lem-trf-space-fibre-products-etale-covers makes V a scheme with q surjective etale and V nonempty, and the chart-test's last clause identifies scheme lft. Step 3 is elementary and correct: it takes a maximal ideal in a nonempty affine open (leaf 00E0) and applies 01TA(iii) to the closed point of V_0. Step 4 had a C1/E5 gap, which I repaired. First, 'representable by convention' was a bare assertion; I wrote the argument: T×_X U_0 is an open subscheme of T×_X U. Second, the step concluded (ej)(u)=x without relating Spec L→X to the point represented by Spec κ(u)→U_0→X. I added the factorization p r=j_u∘Spec(φ) from the existing Mathlib leaf lem-weil-pbc-morphism-from-spec-field (Stacks 01J5) to the step's uses and to proof_deps. Edge cases checked: empty X, Spec k, and the generic point of a DVR, which is closed in its chart but not in X. Batch-5 citations: lem-sfb-space-local-properties-chart-test (03MJ/040Y chart locality), lem-sfb-stack-chartwise-smooth-etale-calculus (04XB stability) and lem-trf-space-fibre-products-etale-covers (02X2/041F fibre products of spaces) are general foundations. Their closures reach only def-trf-algebraic-space and fppf/representability lemmas, none of which is the trace formula, Poincaré duality, or a step of their proofs, so all three are kept. The declared tool_use lem-trf-space-fibre-products-etale-covers is accepted: it is generic, and the unit's own chart-test node already depends on it. No cycles, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFiniteTypePointCharacterization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.closed_etale_lift_iff_locallyOfFiniteType_representative",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFiniteTypePointCharacterization.lean",
+  "statement": "theorem closed_etale_lift_iff_locallyOfFiniteType_representative {S : Scheme.{u}} (X : AlgebraicSpace S) (x : Point X.obj.obj) : (∃ (W : Over S) (w : W.left) (e : yoneda.obj W ⟶ X.obj.obj), IsClosed ({w} : Set W.left) ∧ IsEtale e ∧ schemePointMap e w = x) ↔ ∃ p : PointRepresentative X.obj.obj, Quot.mk _ p = x ∧ ∀ D : EtalePresentation (yonedaEquiv.symm p.value), LocallyOfFiniteType D.h.left",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses Point, PointRepresentative and schemePointMap and the unchanged EtalePresentation structure for the universal compatible-chart test on a field representative. The new definition node def-sfb-space-etale-presentation owns that existing structure; no criterion theorem is a statement dependency and no Lean definition is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdb213480",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Matches Stacks 06EF: (i)=(2) with global IsClosed {w}, representable IsEtale e and schemePointMap e w = x; (ii)=(1) as a PointRepresentative p with Quot.mk p = x and LocallyOfFiniteType on every EtalePresentation of the canonical Yoneda map, which is the 03MJ universal chart test with no surjectivity. That test equals the Stacks definition because local finite type is etale-local on source and target (etalePresentation_property_criterion). It is the unfolded body of MapIsLocally, which only takes AlgebraicSpace sources, so no duplicate notion. lean.statement verbatim. New existing:true node def-sfb-space-etale-presentation matches the 8 structure fields and 03MJ, repairing the earlier H2 return; no theorem node in stmt_deps. No new defs, sorry only, docstrings with source and blueprint tags and the 4 proof steps, both report sections present. Edge cases (empty X/S, empty charts, chart-closed but not X-closed points, universes) OK. Advisory: the EtalePresentation docstring still tags the theorem node. No compile, since no file changed."
+ }
+}

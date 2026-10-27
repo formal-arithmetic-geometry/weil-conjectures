@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-separated-group-space-geometric-scheme",
+ "kind": "statement",
+ "title": "A separated group space is a scheme after algebraic closure",
+ "statement": "Let $k$ be a field [def-weil-field] with algebraic closure $\\overline{k}$ [def-weil-algebraic-closure]. Let $G$ be a group algebraic space over $\\operatorname{Spec}k$ [def-trf-algebraic-space]: its multiplication, identity and inverse are morphisms of sheaves satisfying the group identities on every test scheme. Assume $G$ is separated, meaning that $\\Delta_{G/k}:G\\to G\\times_kG$ is representable by closed immersions [def-weil-closed-immersion]. Then the sheaf fibre product $G_{\\overline{k}}=G\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\overline{k}$ is represented by a $\\overline{k}$-scheme. Fibre products of algebraic spaces use [lem-trf-space-fibre-products-etale-covers]. Fibre products of sheaves are computed on each test scheme and agree with [def-pc-fibre-product] for representable sheaves. No finite-type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 0B8E (lemma-group-space-scheme-over-kbar)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "The closed-immersion description on affine scheme tests shows that the diagonal of $G/k$ is quasi-compact: the inverse image of an affine test is $\\operatorname{Spec}(A/I)$. Thus $G$ satisfies the quasi-separated hypothesis needed below. For any extension $K/k$, $G_K$ is an algebraic space and its group operations are obtained by applying the operations of $G$ to the first coordinates of compatible pairs of sections. All group identities hold on test schemes. Apply the monic-diagonal test lemma with $Y=X_B=G_K$ and $j=1$: every scheme test of its diagonal is a test of the diagonal of $G/k$. Hence $G_K$ is separated and has quasi-compact diagonal as well.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-monic-diagonal-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0B8E (lemma-group-space-scheme-over-kbar), quasi-separatedness and base-change hypotheses for the first two cited results"
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas $p:U\\to G$ from the definition of algebraic space. Apply the large-field Jacobson lemma to this $U$ and choose its algebraically closed extension $K/k$. The base-changed atlas $p_K:U_K\\to H=G_K$ remains surjective etale. In particular $U_K$ has closed points dense in every closed subset, and every closed point has residue field $K$. No finite-type assertion about $U$ is used.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-scheme-large-algclosed-jacobson",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0B8E (lemma-group-space-scheme-over-kbar), choice of the atlas and the large algebraically closed extension"
+   }
+  },
+  {
+   "text": "Let $W=H^{\\mathrm{sch}}$ be the largest schematic open subspace furnished by the schematic-locus lemma. By Step 1 the diagonal $H\\to H\\times_KH$ is quasi-compact on scheme tests, so the dense-open-scheme lemma with $S=\\operatorname{Spec}K$ and $Y=H$ gives a scheme $V_0$ and an open immersion $j:V_0\\to H$ with $|V_0|$ open and dense in $|H|$. The image of $j$ is an open subspace represented by the scheme $V_0$, so maximality gives $j(V_0)\\subseteq W$ and $|W|$ is dense in $|H|$. The identity section gives a point of $H$, so $|H|\\neq\\varnothing$ and the dense subset $|W|$ is nonempty. By the open-subspace/point correspondence and surjectivity of $p_K$, the inverse image $V=p_K^{-1}(W)$ is a nonempty open subscheme of $U_K$. The closed points are dense in $U_K$ (take the closed subset to be all of $U_K$), so $V$ contains a closed point $u$. Its residue field is $K$ by Step 2. Its residue-field morphism therefore gives a $K$-point $g^\\prime$ of $W$.",
+   "uses": [
+    "lem-sfb-space-dense-schematic-locus",
+    "lem-sfb-quasiseparated-space-dense-scheme-open",
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-scheme-large-algclosed-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0B8E (lemma-group-space-scheme-over-kbar), schematic locus via Tag 03JH, its density via Tag 06NH (here the existing decent-spaces node, Tag 086U), nonemptiness and existence of its rational point"
+   }
+  },
+  {
+   "text": "Every automorphism $a:H\\to H$ preserves $W$. Indeed $a(W)\\to H$ is an open subspace represented by the scheme $W$, so maximality gives $a(W)\\subseteq W$. Apply the same argument to $a^{-1}$ and then apply $a$ to obtain the reverse inclusion. For any $g\\in H(K)$ the natural map on test-scheme sections $h\\mapsto g(g^\\prime)^{-1}h$ is an automorphism, with inverse $h\\mapsto g^\\prime g^{-1}h$, by the group identities. It sends $g^\\prime$ to $g$. Consequently every $K$-point of $H$ factors through $W$.",
+   "uses": [
+    "lem-sfb-space-dense-schematic-locus",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0B8E (lemma-group-space-scheme-over-kbar), translation automorphism and invariance of the largest schematic open"
+   }
+  },
+  {
+   "text": "The inverse image $V=p_K^{-1}(W)$ is all of $U_K$. To see this, its complement $C$ is closed in $U_K$. Every closed point $u$ of $U_K$ gives a $K$-point of $H$ by Step 2, hence maps into $W$ by Step 4 and belongs to $V$. Thus $C$ contains no closed point of $U_K$. The density clause of the large-field lemma applied to $Z=C$ says $C$ is the closure of the empty set, so $C=\\varnothing$. Since $p_K$ is surjective on point classes, $|W|=|H|$. The open-subspace/point correspondence then gives $W=H$, and therefore $G_K$ is a scheme.",
+   "uses": [
+    "lem-sfb-scheme-large-algclosed-jacobson",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0B8E (lemma-group-space-scheme-over-kbar), the implicit final complement argument after all rational points are schematic"
+   }
+  },
+  {
+   "text": "Apply the field-extension schemeness lemma to $X=G$ and to the extension $K/k$ of Step 2. Its quasi-separated hypothesis was verified in Step 1 and $G_K$ is a scheme by Step 5. It follows that $G_{\\overline{k}}$ is represented by a scheme, as claimed.",
+   "uses": [
+    "lem-sfb-space-scheme-after-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0B8E (lemma-group-space-scheme-over-kbar), first sentence, applied after the proof over the large extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-monic-diagonal-tests",
+  "def-trf-algebraic-space",
+  "lem-sfb-scheme-large-algclosed-jacobson",
+  "lem-sfb-space-dense-schematic-locus",
+  "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "lem-a1-space-etale-open-image",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-scheme-after-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 0B8E (lemma-group-space-scheme-over-kbar), with its final atlas-complement argument made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated group algebraic space over a field becomes a scheme over its algebraic closure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] → Unique ↥(AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any field $ K $, the scheme $ \\\\operatorname{Spec}(K) $ has a unique carrier (underlying topological space), corresponding to the fact that the prime spectrum $ \\\\operatorname{Spec}(K) $ contains on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"(k : Type u_3) → (A : Type u_4) → [inst : Field k] → [inst_1 : Ring A] → [Algebra k A] → Prop\", \"doc\": \"Given a field $ k $ and a ring $ A $ equipped with a $ k $-algebra structure, the proposition that $ A $ is geometrically reduced over $ k $, meaning that for every field extension $ L $ of $ k $, the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits presuppose schemes or a cover by open subschemes; no group-space representability after field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability by a scheme after algebraically closed field extension for group algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Spec_essSurj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.AffineScheme.Spec.EssSurj\", \"doc\": \"The contravariant Spec functor from the category of commutative rings to affine schemes is essentially surjective, meaning every affine scheme is isomorphic to the prime spectrum $\\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits presuppose schemes or a cover by open subschemes; no group-space representability after field extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsSeparated\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits presuppose schemes or a cover by open subschemes; no group-space representability after field extension"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|GroupAlgebraicSpace|groupSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits presuppose schemes or a cover by open subschemes; no group-space representability after field extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated group algebraic space becomes a scheme over an algebraic closure",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam →\\n    AlgebraicGeometry.IsSeparated f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is separated if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.IsSeparated] : IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits presuppose schemes or a cover by open subschemes; no group-space representability after field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated group algebraic space becomes representable by a scheme over an algebraic closure without finite type assumptions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes already given, finite-type Jacobson theorems, or topological Jacobson properties; none gives the stated arbitrary-space or arbitrary-scheme field-extension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group object in algebraic spaces with closed diagonal becomes a scheme over an algebraic closure",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"Field.absoluteGaloisGroup\", \"module\": \"Mathlib.FieldTheory.AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The absolute Galois group of a field $ K $ is the group of all field automorphisms of its algebraic closure that fix $ K $ element-wise. This group captures the symmetries of the algebraic closure ove\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated g] : IsClosedImmersion (pullback.lift (𝟙 _) f (Category.id_comp (f ≫ g)))\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes already given, finite-type Jacobson theorems, or topological Jacobson properties; none gives the stated arbitrary-space or arbitrary-scheme field-extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsSeparated\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes already given, finite-type Jacobson theorems, or topological Jacobson properties; none gives the stated arbitrary-space or arbitrary-scheme field-extension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|GroupAlgebraicSpace|groupSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes already given, finite-type Jacobson theorems, or topological Jacobson properties; none gives the stated arbitrary-space or arbitrary-scheme field-extension theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-group-space-scheme",
+  "date": "2026-10-23",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: geometric: Tag 0B8F proof, first input 0B8E; schemeness after algebraic closure before descent.",
+   "via": [
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-separated-group-space-geometric-scheme",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0B8E without a finite-type assumption; isolated its three general inputs and wrote out schematic-locus invariance, translations, and the Jacobson atlas complement argument. No statement correction or Lean attachment.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images (3) auxiliary route through the rigidified Picard scheme and Tag 0B8F uses 0B8E here. Steps 1-6 give exactly that geometric representability input. The ancestry tool returns null, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-monic-diagonal-tests",
+    "why": "Generic scheme-test calculation for separatedness under field base change; the present unit has no more appropriate statement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product and base-change-of-atlas construction for algebraic spaces."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic correspondence of open subspaces with point opens and surjectivity of atlas maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-monic-diagonal-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-8a05d5a99",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-8a05d5a99 (reviewer sub-agent of L); spot-checked: I read Stacks 0B8E, 0B84, 03JH, 06NH and 0479 at their labels. The item statement is unchanged and agrees with 0B8E. Steps 1-6 are correct. Step 1 gets separatedness of G_K from the monic-diagonal lemma with Y=X_B and j=1, and a quasi-compact diagonal from the Spec(R/I) form of closed immersions. Step 2 base-changes the atlas. Step 4 shows translations preserve the largest schematic open by maximality, also for noncommutative groups. Step 5 makes the source's implicit last step explicit: the complement of p_K^{-1}(W) is closed and has no closed points, so it is empty by the Jacobson property. Step 6 applies 0B84(1). The three new nodes are true and self-contained, and none restates the item. Repairs (C5 plus one B3-type fault): (1) the density half of lem-sfb-space-dense-schematic-locus duplicates the existing node lem-sfb-quasiseparated-space-dense-scheme-open (unsplit, same unit, on base). I narrowed the new node to 03JH (largest schematic open subspace, no hypotheses) and made Step 3 cite the existing node with S=Spec K and Y=H. Its dense scheme V_0 lands in W by maximality, so W is dense and nonempty; I recomputed proof_deps. (2) In lem-sfb-scheme-large-algclosed-jacobson I reworded clause (i): |U_K| clashed with def-weil-closed-points, which uses |X| for the set of closed points. I accept the declared tool uses: lem-a1-space-monic-diagonal-tests, lem-trf-space-fibre-products-etale-covers and lem-a1-space-etale-open-image. Batch-5 finding: every listed citation is a generic definition or foundation of algebraic spaces (def-trf-algebraic-space, the fibre products of spaces, the a1 open-subspace and point-topology nodes), not a step of the trace formula or Poincaré duality proofs, so it is kept. The live item is still unsplit and there is no repair note, so this is not a re-split and is not superseded.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedGroupSpaceGeometricScheme",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_scheme_over_algebraicClosure_of_separated",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedGroupSpaceGeometricScheme.lean",
+  "statement": "theorem exists_scheme_over_algebraicClosure_of_separated {k : Type u} [Field k] (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (G : AlgebraicSpace (Spec (.of k))) (F : (Over (Spec (.of k)))ᵒᵖ ⥤ GrpCat.{u}) (e : F ⋙ forget GrpCat ≅ G.obj.obj) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 G.obj.obj) (𝟙 G.obj.obj))) : ∃ X : Over (Spec (.of Ω)), Nonempty (((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).op ⋙ G.obj.obj) ≅ yoneda.obj X)",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Group structure is a group-valued functor identified with the algebraic-space presheaf, as in the existing locally separated consumer. Base change is restriction along Over.map of the field-extension spectrum map; representability is a Yoneda isomorphism on the new base."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e7f75c7f",
+  "group": "NL",
+  "result": "pass",
+  "note": "Node unchanged except the new lean field; lean.statement verbatim in the file, proof only sorry. Lean matches Stacks 0B8E clause by clause: Field k; any algebraic closure Ω via IsAlgClosure, same universe u; G : AlgebraicSpace (Spec k); group structure as a GrpCat-valued functor F with e : F ⋙ forget ≅ G.obj.obj, the encoding of the landed consumer exists_groupScheme_of_locallySeparated; separated = IsRepresentableWith IsClosedImmersion of the diagonal prod.lift over k. The conclusion restricts G along Over.map(Spec Ω → Spec k), which is exactly the sheaf fibre product G ×_k Spec Ω on schemes over Spec Ω, and asks for a representing X : Over (Spec Ω). No finite-type or stronger assumptions, no new definitions, docstrings give source place, blueprint id and the six proof steps; plain imports are proof-dependency modules. No existing duplicate found. Not recompiled, as no file was changed."
+ }
+}

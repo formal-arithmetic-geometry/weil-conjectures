@@ -14,9 +14,55 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), open direct image; scalar analytic base, nilpotent extension devissage and filtered passage below the polynomial translation acyclicity input. Agent-formulated relative form of the rank-one cyclic resolution, exact-induction forgetting comparison, and bar normalization. The cited existing scalar theorems are context, not an assertion that their statements already include this relative form; exact combined reference WANTED."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the single complex of the restricted trivial regular module, the positive generator endomorphism is the identity in every degree. In degree zero, the identity satisfies the sectionwise characterization in generatorEndExist, so uniqueness gives equality. In other degrees the single complex is zero, and so is its image under retainResidual; all its endomorphisms agree.",
+   "uses": [
+    "def-sfb-relative-derived-invariants",
+    "def-sfb-relative-cyclic-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply TotalModel.differential to this single complex. Its differential is zero and T minus identity is zero by step 1, so the displayed biproduct lift is zero. Cancel the coordinate isomorphisms to prove that the total differential is zero. Outside degrees zero and one, both coordinate summands are zero. Additive retention and forgetting preserve zero objects, so the forgotten total is zero there too.",
+   "uses": [
+    "def-sfb-relative-cyclic-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The extension by zero of trivialCyclic has zero terms outside degrees zero and one: for nonnegative degrees use extendXIso and the explicit object formula; negative degrees are outside the embedding image. Its differential from zero to one is the extension of the specified zero differential; every other adjacent differential has a zero source or target.",
+   "uses": [
+    "def-sfb-relative-bar-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree zero compose the total coordinate isomorphism, the inverse of isoBiprodZero on the second zero summand, and the single-complex self identification; apply forgetAction and the inverse of extendXIso. In degree one use isoZeroBiprod on the first zero summand instead. In other degrees use the unique isomorphism between the two zero objects. Both differentials are zero by steps 2 and 3, so HomologicalComplex.Hom.isoOfComponents assembles these into a chain isomorphism. The two component formulas are precisely the required normalization equations. Any other normalized isomorphism has the same components in degrees zero and one by cancellation of extendXIso, and has the same components elsewhere since the target term is zero. Componentwise extensionality proves uniqueness.",
+   "uses": [
+    "def-sfb-relative-cyclic-total",
+    "def-sfb-relative-bar-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For forgetTrivialExist, restriction of the trivial regular action is definitionally the trivial regular action, so Iso.refl supplies existence and the underlying identity equation. Two such isomorphisms have the same hom by subtype extensionality from that equation; isomorphism extensionality proves uniqueness. The existing constructions trivialTotalIso, forgetTrivial, trivialSourceIso and trivialCyclicMap then retain their original definitions.",
+   "uses": [
+    "def-sfb-relative-derived-invariants"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-derived-invariants",
+  "def-sfb-relative-cyclic-total",
+  "def-sfb-relative-bar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "The existing paragraph (3), step 18 coordinate-normalization argument, implemented directly in Lean by H4 on 2026-10-26; no new mathematical assumption or proof route."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -105,10 +151,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -148,5 +198,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Read the item, its 17 steps, 7 new def nodes, all 8 modules, and the dependency Lean in side-live (CondensedEquivariantBarData/Computation, CondensedDerivedInvariants, ProductInvariants, DiscreteLatticeKoszulResolution). Only lean plus new-def-node stmt_deps changed, records verbatim, new-node fields ok, no dep changes. Clauses: ProductInvariants generalized to topological J; derived = full rightDerivedFunctor; beta = rightDerivedPullback of the unique inclusion with unit equation, CommShift and H0 inclusion; TotalModel coordinates N^n+N^(n-1), d=(dx,(T-1)x-dy), T pinned sectionwise; shift pinned to (x,(-1)^s y) (hand-checked); HasComparison pins lambda by theta alpha = Qb on all D+; cyclicMap = lambda^-1 beta; forgetting exact/conservative/injectives, forgetDerived and forgetBeta (= groupMap) and forgetCoefficient and shift; latticeCompatibility exists-witness pinned to forgotten lambda (B, E, L, k pinned, consistent under B sign) = node step 12; barEvaluation Q(j) eta^-1 c = Q(eps) with eta = dep Computation normalization transported, j the resolution-zero row, eps id/eval at v(1)/0. Edge cases tau=1, G=1, zero ring, negative bounds, universes ok. Advisories: second reading is an in-worker check (dispatcher policy); new nodes cite calculus/bar theorems instead of def-sfb-condensed-derived-invariants/def-sfb-condensed-equivariant-bar-data; DiscreteLattice.* theorem-owned vocabulary; about 20 unused proof imports; docstring says 18 steps for 17. No recompile (human rule); no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T082103-L-2130836",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

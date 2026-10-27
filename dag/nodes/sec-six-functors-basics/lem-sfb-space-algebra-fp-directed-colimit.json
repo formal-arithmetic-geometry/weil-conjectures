@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-space-algebra-fp-directed-colimit",
+ "kind": "statement",
+ "title": "Quasi-coherent algebras on qcqs spaces are directed colimits of finitely presented algebras",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Assume $X$ is quasi-compact, meaning that it admits a surjective etale atlas from a quasi-compact scheme, and quasi-separated, meaning that its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact on affine scheme tests. A morphism is quasi-compact on affine scheme tests when its pullback over each affine scheme has quasi-compact source. Let $\\mathcal A$ be a sheaf of commutative $\\mathcal O_X$-algebras on the small etale site whose underlying module is quasi-coherent [def-trf-space-quasi-coherent-module]. There exist a small nonempty directed set $I$, quasi-coherent commutative $\\mathcal O_X$-algebras $\\mathcal A_i$, algebra maps $\\alpha_{ji}:\\mathcal A_i\\to\\mathcal A_j$ for $i\\le j$ satisfying the identity and composition laws, and compatible algebra maps $\\alpha_i:\\mathcal A_i\\to\\mathcal A$, such that each $\\mathcal A_i$ is finitely presented as an algebra: for every affine etale chart $U=\\operatorname{Spec}R\\to X$, the $R$-algebra $\\mathcal A_i(U)$ has a presentation $R[T_1,\\ldots,T_n]/(f_1,\\ldots,f_m)$ for finite $n,m$. The cocone $(\\mathcal A,(\\alpha_i))$ is colimiting in quasi-coherent commutative $\\mathcal O_X$-algebras [def-weil-pbc-category-colimit]: for every such algebra $\\mathcal C$, compatible algebra maps $\\mathcal A_i\\to\\mathcal C$ factor uniquely through an algebra map $\\mathcal A\\to\\mathcal C$. Neither the transition maps nor the maps to $\\mathcal A$ are required to be injective.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The atlas form of quasi-compactness in the statement implies that $|X|$ is quasi-compact by the last assertion of [lem-a1-space-finite-affine-subatlas]. Thus [lem-sfb-space-module-fp-directed-approximation] applies to the underlying module of $\\mathcal A$. Reindex the resulting small filtered diagram by [lem-weil-pbc-filtered-category-directed-cofinal] to obtain a small nonempty directed set $I$, finitely presented quasi-coherent modules $\\mathcal F_i$, transitions $f_{ji}$, and a module colimit cocone $\\varphi_i:\\mathcal F_i\\to\\mathcal A$. Absolute quasi-separatedness is exactly the hypothesis of the module approximation node.",
+   "uses": [
+    "lem-a1-space-finite-affine-subatlas",
+    "lem-sfb-space-module-fp-directed-approximation",
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-qcoh-affine-chart-calculus], put $\\mathcal S_i=\\operatorname{Sym}(\\mathcal F_i)$ and let $\\psi_i:\\mathcal S_i\\to\\mathcal A$ extend $\\varphi_i$. The same universal property extends $j_jf_{ji}$ to $\\sigma_{ji}:\\mathcal S_i\\to\\mathcal S_j$. Checking on degree-one maps gives $\\sigma_{ii}=1$, $\\sigma_{hj}\\sigma_{ji}=\\sigma_{hi}$ and $\\psi_j\\sigma_{ji}=\\psi_i$. Let $\\mathcal J_i=\\ker\\psi_i$ and $\\mathcal B_i=\\operatorname{Im}\\psi_i\\subseteq\\mathcal A$. The cited chart calculus gives quasi-coherence, $\\mathcal B_i=\\mathcal S_i/\\mathcal J_i$, and the corresponding kernel, image and quotient on every affine etale chart. Compatibility gives $\\sigma_{ji}(\\mathcal J_i)\\subseteq\\mathcal J_j$ and $\\mathcal B_i\\subseteq\\mathcal B_j$.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "The inclusions $\\mathcal B_i\\to\\mathcal A$ exhibit an algebra colimit. For an affine etale chart $U=\\operatorname{Spec}R$, [lem-sfb-space-qcoh-affine-chart-calculus] evaluates the module colimit of step 1 as $\\mathcal A(U)=\\varinjlim_i\\mathcal F_i(U)$. By [lem-weil-pbc-filtered-colimit-modules-elementwise], every $a\\in\\mathcal A(U)$ is $\\varphi_{i,U}(x)$ for some $i,x$; hence it lies in $\\mathcal B_i(U)$. Thus these subalgebras have union $\\mathcal A(U)$. A compatible family of algebra maps on them extends uniquely to the union by assigning to $a\\in\\mathcal B_i(U)$ its given image; a common upper bound proves independence of $i$ and preservation of addition and multiplication. The chart colimit criterion of the first cited node now gives $\\mathcal A=\\varinjlim_i\\mathcal B_i$ in quasi-coherent algebra sheaves.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "For every $i$, apply [lem-sfb-space-module-fp-directed-approximation] to $\\mathcal J_i$, and [lem-weil-pbc-filtered-category-directed-cofinal] to its index category: choose $\\mathcal J_i=\\varinjlim_{k\\in K_i}\\mathcal E_{ik}$ with $K_i$ small nonempty directed and each $\\mathcal E_{ik}$ finitely presented. Denote the cocone maps by $e_{ik}:\\mathcal E_{ik}\\to\\mathcal J_i$. Let $\\mathcal L_{ik}$ be the ideal of $\\mathcal S_i$ generated by the composite $\\mathcal E_{ik}\\to\\mathcal J_i\\hookrightarrow\\mathcal S_i$, and set $\\mathcal Q_{ik}=\\mathcal S_i/\\mathcal L_{ik}$. By [lem-sfb-space-qcoh-affine-chart-calculus] these ideals and quotients are quasi-coherent, computed on affine etale charts by the generated ideals and ordinary quotients, and have the algebra quotient universal property. Since $\\mathcal L_{ik}\\subseteq\\mathcal J_i$, there is a canonical map $b_{ik}:\\mathcal Q_{ik}\\to\\mathcal B_i$.",
+   "uses": [
+    "lem-sfb-space-module-fp-directed-approximation",
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "Every $\\mathcal Q_{ik}$ is finitely presented as an algebra. On an affine etale $U=\\operatorname{Spec}R$, [lem-sfb-space-qcoh-affine-chart-calculus] makes $M=\\mathcal F_i(U)$ and $N=\\mathcal E_{ik}(U)$ finitely presented $R$-modules, and identifies $\\mathcal Q_{ik}(U)$ with $\\operatorname{Sym}_R(M)$ modulo the ideal generated by the image of $N$. A finite generating list for $N$ maps to a finite ideal-generating list. Clause (b) of [lem-weil-pbc-symmetric-algebra-finite-presentation] therefore gives a finite polynomial presentation of $\\mathcal Q_{ik}(U)$ over $R$. This is the algebra finite-presentation condition of the item; no finite presentation of its underlying module is asserted.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-weil-pbc-symmetric-algebra-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "On the small nonempty set $P=\\{(i,k):i\\in I,\\ k\\in K_i\\}$ define $(i,k)\\preceq(j,l)$ when $i\\le j$ and $\\sigma_{ji}(\\mathcal L_{ik})\\subseteq\\mathcal L_{jl}$. Identity and composition of $\\sigma$ give reflexivity and transitivity. If $k\\le l$ in $K_i$, compatibility of $e_{ik}$ gives $\\mathcal L_{ik}\\subseteq\\mathcal L_{il}$, so every row is monotone. For $i\\le j$ the map $\\mathcal E_{ik}\\to\\mathcal J_i\\to\\mathcal J_j$ factors through some $\\mathcal E_{jl}$ by [lem-sfb-space-fp-module-hom-colimit]. Its domain is finitely presented, and its target is the module-sheaf colimit chosen in step 4 on the same qcqs space. This factorization implies the required containment of generated ideals, hence $(i,k)\\preceq(j,l)$. Given two pairs, choose a common upper $j$ of their first coordinates, move both to row $j$ by this factorization, and then take a common upper bound of their second coordinates in $K_j$. Thus $P$ is directed. For $p=(i,k)\\preceq q=(j,l)$ the quotient universal property in [lem-sfb-space-qcoh-affine-chart-calculus] uniquely gives $\\alpha_{qp}:\\mathcal Q_{ik}\\to\\mathcal Q_{jl}$ with $\\alpha_{qp}q_{ik}=q_{jl}\\sigma_{ji}$, where $q_{ik}$ denotes the quotient projection. The same uniqueness gives identity and composition laws, as well as $b_{jl}\\alpha_{qp}=(\\mathcal B_i\\hookrightarrow\\mathcal B_j)b_{ik}$.",
+   "uses": [
+    "lem-sfb-space-fp-module-hom-colimit",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "For fixed $i$, the cocone $b_{ik}:\\mathcal Q_{ik}\\to\\mathcal B_i$ is colimiting. On each affine etale $U$, chart evaluation of step 4 and [lem-weil-pbc-filtered-colimit-modules-elementwise] imply that every element of $\\mathcal J_i(U)$ comes from some $\\mathcal E_{ik}(U)$. Consequently $\\bigcup_k\\mathcal L_{ik}(U)=\\mathcal J_i(U)$: one containment follows from the definition of the kernel ideal, and the other from these representatives. The ideals in this union are increasing along $K_i$. For any compatible family of algebra maps from $\\mathcal S_i(U)/\\mathcal L_{ik}(U)$, their composites with $\\mathcal S_i(U)$ agree, by a common upper bound in $K_i$ and the quotient formulas in step 6. Their common composite kills the union $\\mathcal J_i(U)$, so factors uniquely through $\\mathcal S_i(U)/\\mathcal J_i(U)=\\mathcal B_i(U)$. Conversely a map from that quotient gives such a family. The chart colimit criterion of [lem-sfb-space-qcoh-affine-chart-calculus] gives the asserted row colimit in algebra sheaves.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-directed-pairs-colimit-transitivity] in the category of quasi-coherent commutative $\\mathcal O_X$-algebras, with $D(i,k)=\\mathcal Q_{ik}$ and $B(i)=\\mathcal B_i$. Its conditions (a), (b), (c) are respectively the first-coordinate condition in the definition of $\\preceq$, row monotonicity, and the factorization assertion of step 6. The compatibility equation is the last equation of that step, its row-colimit hypothesis is step 7, and its outer colimit is step 3. It follows that the maps $\\mathcal Q_{ik}\\to\\mathcal B_i\\hookrightarrow\\mathcal A$ form a colimit cocone. Finally [lem-weil-pbc-filtered-category-directed-cofinal] applied to the small filtered preorder $P$ reindexes this cocone by a small nonempty directed set if an antisymmetric index order is required. All its terms retain the finite algebra presentations of step 5, and all arrows and cocone maps retain their laws. This is the cocone in the statement.",
+   "uses": [
+    "lem-weil-pbc-directed-pairs-colimit-transitivity",
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-sfb-space-module-fp-directed-approximation",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-symmetric-algebra-finite-presentation",
+  "lem-sfb-space-fp-module-hom-colimit",
+  "lem-weil-pbc-directed-pairs-colimit-transitivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 082A (lemma-algebra-directed-colimit-finite-presentation), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.?coherent.*algebra.*colimit|algebra.*colimit.*finite.?presentation",
+   "results": "{\"t\": \"2026-10-23T19:28:26Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|quasi.?coherent.*algebra.*colimit|algebra.*colimit.*finite.?presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module presentations, scheme limits or general colimits, not approximation of quasi-coherent algebra sheaves on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent algebra sheaf is a filtered colimit of algebras of finite presentation on a qcqs algebraic space",
+   "results": "{\"t\": \"2026-10-23T19:28:26Z\", \"tool\": \"leansearch\", \"query\": \"A quasi coherent algebra sheaf is a filtered colimit of algebras of finite presentation on a qcqs algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"0353b2240f437aa7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module presentations, scheme limits or general colimits, not approximation of quasi-coherent algebra sheaves on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCoherent\", \"FinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T19:28:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiCoherent\\\", \\\"FinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\"], \"digest\": \"cb7cd42279ad44b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module presentations, scheme limits or general colimits, not approximation of quasi-coherent algebra sheaves on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent commutative algebra on a quasi compact quasi separated algebraic space is a directed colimit of finitely presented quasi coherent algebras",
+   "results": "{\"t\": \"2026-10-23T19:28:27Z\", \"tool\": \"leanfinder\", \"query\": \"Every quasi coherent commutative algebra on a quasi compact quasi separated algebraic space is a directed colimit of finitely presented quasi coherent algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.AffineScheme.hasColimits\"], \"digest\": \"1324279d9aa7bf8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module presentations, scheme limits or general colimits, not approximation of quasi-coherent algebra sheaves on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented algebra sheaves generate all quasi coherent algebras by filtered colimits",
+   "results": "{\"t\": \"2026-10-23T19:28:29Z\", \"tool\": \"leanfinder\", \"query\": \"Locally finitely presented algebra sheaves generate all quasi coherent algebras by filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\"], \"digest\": \"035b4930ad8f4744\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module presentations, scheme limits or general colimits, not approximation of quasi-coherent algebra sheaves on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.?coherent.*algebra.*colimit|algebra.*colimit.*finite.?presentation",
+   "results": "{\"t\": \"2026-10-23T20:58:12Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|quasi.?coherent.*algebra.*colimit|algebra.*colimit.*finite.?presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite-presentation definitions and scheme colimit theorems do not assert algebra-sheaf approximation on qcqs algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent algebra sheaf is a filtered colimit of algebras of finite presentation on a qcqs algebraic space",
+   "results": "{\"t\": \"2026-10-23T20:58:13Z\", \"tool\": \"leansearch\", \"query\": \"A quasi coherent algebra sheaf is a filtered colimit of algebras of finite presentation on a qcqs algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"0353b2240f437aa7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite-presentation definitions and scheme colimit theorems do not assert algebra-sheaf approximation on qcqs algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"FinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T20:58:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicoherent\\\", \\\"FinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\"], \"digest\": \"cb7cd42279ad44b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite-presentation definitions and scheme colimit theorems do not assert algebra-sheaf approximation on qcqs algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented algebra sheaves generate all quasi coherent algebras by filtered colimits",
+   "results": "{\"t\": \"2026-10-23T20:58:14Z\", \"tool\": \"leanfinder\", \"query\": \"Locally finitely presented algebra sheaves generate all quasi coherent algebras by filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\"], \"digest\": \"035b4930ad8f4744\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite-presentation definitions and scheme colimit theorems do not assert algebra-sheaf approximation on qcqs algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent commutative algebra on a quasi compact quasi separated algebraic space is a directed colimit of finitely presented quasi coherent algebras",
+   "results": "{\"t\": \"2026-10-23T20:58:15Z\", \"tool\": \"leanfinder\", \"query\": \"Every quasi coherent commutative algebra on a quasi compact quasi separated algebraic space is a directed colimit of finitely presented quasi coherent algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.AffineScheme.hasColimits\"], \"digest\": \"1324279d9aa7bf8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module finite-presentation definitions and scheme colimit theorems do not assert algebra-sheaf approximation on qcqs algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-fp-limit",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: apply the quasi-affine envelope lemma to the chosen finite-stage map; 0871 proof, second sentence: approximate the affine envelope over the fixed qcqs target; Tag 0870 proof: apply the algebra approximation lemma 082A before forming relative spectra",
+   "via": [
+    "lem-sfb-space-affine-fp-limit",
+    "lem-sfb-space-quasiaffine-fp-envelope",
+    "lem-sfb-space-finite-type-fp-envelope",
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-algebra-fp-directed-colimit",
+  "worker": "stage1",
+  "summary": "Expanded Tag 082A into eight steps using existing algebraic-space module approximation and chart-calculus nodes. Finitely presented relation modules replace finite-type submodules by taking their images; the proof verifies directedness, quotient transitions, finite algebra presentations, row colimits and their compatible assembly. No new node, no statement change, and no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: apply the quasi-affine envelope lemma to the chosen finite-stage map; 0871 proof, second sentence: approximate the affine envelope over the fixed qcqs target; Tag 0870 proof: apply the algebra approximation lemma 082A before forming relative spectra; steps realize the algebra approximation input to Tag 0870, within the inherited direct-image approximation route. The latest blueprint direct-images proof was read; its surrounding route remains unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Its last assertion converts the given quasi-compact atlas hypothesis to quasi-compactness of the point space, as needed for module approximation."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Generic reindexing of small filtered colimits by directed sets, used without changing the algebra approximation route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "why": "The element-representative description of a filtered module colimit evaluates the generator and relation diagrams on affine etale charts."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-finite-presentation",
+    "why": "Ordinary ring-algebra finite presentations of symmetric algebras modulo finitely generated ideals; applied on each affine etale chart."
+   },
+   {
+    "node": "lem-weil-pbc-directed-pairs-colimit-transitivity",
+    "why": "Generic categorical assembly of the explicitly constructed compatible row colimits into one directed colimit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-symmetric-algebra-finite-presentation",
+  "lem-weil-pbc-directed-pairs-colimit-transitivity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-d9a3d6359",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-d9a3d6359 (reviewer sub-agent of L); spot-checked: Read Stacks Tag 082A (spaces-limits.tex l.2363) and its convention paragraph on finitely presented algebras. The item statement is unchanged from live, and live/side-live are still unsplit, so there is no supersession. The delivery has 0 new nodes. The 8 steps follow 082A: Sym(F_i) and kernel J_i, then relation modules. Here the delivery takes finitely presented modules E_ik→J_i where Stacks takes finite-type submodules; the generated ideal is the same. Stacks' 'clear' is written out: (3) A is the directed union of the image subalgebras B_i, via elementwise representatives and the chart colimit criterion of lem-sfb-space-qcoh-affine-chart-calculus; (5) chart-wise finite presentation, via clause (b) of symmetric-algebra-finite-presentation; (6) the preorder on pairs, where directedness uses lem-sfb-space-fp-module-hom-colimit with every hypothesis met (|X| qc from the last assertion of a1-finite-affine-subatlas, the same diagonal hypothesis, E_ik finitely presented, K_j small directed), and the quotient maps come from uniqueness of the quotient property, which I checked: b_jl∘α = incl∘b_ik; (7) each row colimit is S/∪L_ik = S/J_i = B_i; (8) the directed-pairs-transitivity hypotheses (a)–(c), compatibility and row/outer colimits all hold, followed by directed-cofinal reindexing. No hypothesis is used beyond qcqs and quasi-coherence. Edge cases X=∅, A=0, and a non-finitely-generated ideal with non-injective transitions all work. There is no cycle and no duplicate: the 05JS/0817 nodes are scheme-level, and the space-level 082C node assumes integrality. The off-unit generic tool_uses are accepted. Batch-5: the four flagged citations (a1-finite-affine-subatlas, module-fp-directed-approximation, qcoh-affine-chart-calculus, fp-module-hom-colimit) reach sec-trace-formula only through general definitions and foundational lemmas (def-trf-algebraic-space, already a stmt_dep of the item on the base). Their closures contain no trace-formula or Poincaré theorem, no trace-transport and no nt-assume node, so they lie genuinely outside the assumed statements. Full checks are in review.md."
+ }
+}

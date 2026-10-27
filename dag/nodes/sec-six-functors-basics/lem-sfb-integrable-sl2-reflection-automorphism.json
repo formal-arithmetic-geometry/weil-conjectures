@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-integrable-sl2-reflection-automorphism",
+ "kind": "statement",
+ "title": "Reflection automorphism from a locally nilpotent rational sl2 action",
+ "statement": "Let $L$ be a rational Lie algebra [def-wf-lie-algebra], not necessarily finite-dimensional. Let $\\mathfrak t\\subseteq L$ be an abelian subalgebra, $h\\in\\mathfrak t$, $e,f\\in L$, and $\\alpha:\\mathfrak t\\to\\mathbf Q$ linear. Assume $\\alpha(h)=2$, $[e,f]=h$, $[t,e]=\\alpha(t)e$ and $[t,f]=-\\alpha(t)f$ for every $t\\in\\mathfrak t$. Assume $\\operatorname{ad}e$ and $\\operatorname{ad}f$ are locally nilpotent: for every $x\\in L$ some power of each operator annihilates $x$. For $D=\\operatorname{ad}e$ or $-\\operatorname{ad}f$, define $\\exp(D)x=\\sum_{n\\geq0}D^n(x)/n!$, a finite sum for each $x$. Then\n$$w=\\exp(\\operatorname{ad}e)\\circ\\exp(-\\operatorname{ad}f)\\circ\\exp(\\operatorname{ad}e)$$\nis a rational Lie algebra automorphism and satisfies\n$$w(t)=t-\\alpha(t)h\\quad(t\\in\\mathfrak t),\\qquad w(e)=-f,\\quad w(f)=-e.$$\nFor a linear functional $\\beta:\\mathfrak t\\to\\mathbf Q$ write $L_\\beta=\\{x\\in L:[t,x]=\\beta(t)x\\text{ for all }t\\in\\mathfrak t\\}$. The automorphism restricts to an isomorphism\n$$w:L_\\beta\\xrightarrow{\\sim}L_{\\beta-\\beta(h)\\alpha}.$$\nNo decomposition of $L$ into weight spaces is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.63, first proof, printed p.504, Lie-theoretic reflection input to the Serre presentation; rational-field applicability stated on p.508. The expanded locally-nilpotent exponential argument is agent-supplied; Serre, Complex Semisimple Lie Algebras, Chapter VI, appendix, is WANTED."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=\\operatorname{ad}e$ and $G=-\\operatorname{ad}f$. Jacobi and bilinearity in [def-wf-lie-algebra] give $E[x,y]=[Ex,y]+[x,Ey]$ and the same identity for $G$. The assumed local nilpotence of $\\operatorname{ad}f$ implies that of $G$, since $G^nx=(-1)^n(\\operatorname{ad}f)^nx$. Apply [lem-sfb-locally-nilpotent-derivation-exponential] to $E$ and $G$. Thus $A=\\exp E$ and $B=\\exp G$ are rational Lie automorphisms, so is $w=ABA$, and $w^{-1}=A^{-1}B^{-1}A^{-1}$.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "lem-sfb-locally-nilpotent-derivation-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, pp.503-504; rational extension p.508. Agent-supplied local-exponential and sl2 reflection calculation."
+   }
+  },
+  {
+   "text": "For $t\\in\\mathfrak t$ write $a=\\alpha(t)$. The brackets give $Et=-ae$, $Ee=0$, $Ef=h$, $Eh=-2e$; also $Gt=-af$, $Ge=h$, $Gf=0$, $Gh=-2f$. Consequently the finite sums are\n$$A(t)=t-ae,\\quad A(e)=e,\\quad A(f)=f+h-e,\\quad A(h)=h-2e,$$\n$$B(t)=t-af,\\quad B(e)=e+h-f,\\quad B(f)=f,\\quad B(h)=h-2f.$$\nFor example $E^2f=-2e$, $G^2e=-2f$, and all subsequent terms vanish. The relations with $h$ use $h\\in\\mathfrak t$ and $\\alpha(h)=2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, pp.503-504; rational extension p.508. Agent-supplied local-exponential and sl2 reflection calculation."
+   }
+  },
+  {
+   "text": "Compose these formulas in the stated order. For $t\\in\\mathfrak t$,\n$$BA(t)=t-ae-ah,\\qquad ABA(t)=(t-ae)-ae-a(h-2e)=t-ah.$$\nSimilarly $BA(e)=e+h-f$ and $A(e+h-f)=e+(h-2e)-(f+h-e)=-f$; while $BA(f)=f+(h-2f)-(e+h-f)=-e$ and $A(-e)=-e$. This proves all three displayed reflection formulas, and in particular $w(h)=-h$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, pp.503-504; rational extension p.508. Agent-supplied local-exponential and sl2 reflection calculation."
+   }
+  },
+  {
+   "text": "Define $s:\\mathfrak t\\to\\mathfrak t$ by $s(t)=t-\\alpha(t)h$. Since $\\alpha(h)=2$, $\\alpha(s(t))=-\\alpha(t)$ and $s(s(t))=t$. The preceding formula gives $w|_{\\mathfrak t}=s$, hence also $w^{-1}(t)=s(t)$. If $x\\in L_\\beta$, bracket preservation gives\n$$[t,w(x)]=w([s(t),x])=\\beta(s(t))w(x)=(\\beta(t)-\\beta(h)\\alpha(t))w(x).$$\nThus $w(L_\\beta)\\subseteq L_\\gamma$ for $\\gamma=\\beta-\\beta(h)\\alpha$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, pp.503-504; rational extension p.508. Agent-supplied local-exponential and sl2 reflection calculation."
+   }
+  },
+  {
+   "text": "For $y\\in L_\\gamma$ put $z=w^{-1}(y)$. Then\n$$[t,z]=w^{-1}([w(t),y])=\\gamma(s(t))z.$$\nHere $\\gamma(h)=-\\beta(h)$, so $\\gamma(s(t))=\\gamma(t)-\\alpha(t)\\gamma(h)=\\beta(t)$. Therefore $z\\in L_\\beta$. These restrictions of $w$ and $w^{-1}$ are inverse rational linear maps between the indicated weight spaces (subspaces by bilinearity). This proves the asserted isomorphism, including zero weight spaces, without a weight-space decomposition of $L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, pp.503-504; rational extension p.508. Agent-supplied local-exponential and sl2 reflection calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra",
+  "lem-sfb-locally-nilpotent-derivation-exponential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.63, first proof, pp.503-504 and rational-field remark p.508; expanded reflection input supplied by Q34."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integrable sl2 triple in a rational Lie algebra defines the Weyl reflection automorphism exp ad e exp minus ad f exp ad e mapping weight beta to its reflection",
+   "results": "{\"t\": \"2026-10-23T22:36:41Z\", \"tool\": \"leanfinder\", \"query\": \"An integrable sl2 triple in a rational Lie algebra defines the Weyl reflection automorphism exp ad e exp minus ad f exp ad e mapping weight beta to its reflection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.reflectRoot\", \"RootPairing.GeckConstruction.isSl2Triple\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\", \"IsSl2Triple.HasPrimitiveVectorWith\", \"IsSl2Triple.symm\", \"IsSl2Triple.h_eq_coroot\", \"LieAlgebra.IsKilling.sl2SubalgebraOfRoot\"], \"digest\": \"216820a656cb3703\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp, Mathlib/Algebra/Lie/Derivation/Basic.lean:405–426, read, requires global nilpotence and supplies no sl2 reflection formula. IsSl2Triple, Algebra/Lie/Sl2.lean:41–46, only defines the relations (and assumes h nonzero). RootSystem reflection results require finite dimension and nondegenerate Killing form, which cannot be assumed in this input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally nilpotent sl2 adjoint operators exponentiate to a Lie algebra automorphism fixing the Cartan hyperplane and negating the coroot",
+   "results": "{\"t\": \"2026-10-23T22:38:24Z\", \"tool\": \"leanfinder\", \"query\": \"Locally nilpotent sl2 adjoint operators exponentiate to a Lie algebra automorphism fixing the Cartan hyperplane and negating the coroot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_f_pow_toEnd_f\", \"IsSl2Triple.h_eq_coroot\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"IsSl2Triple.lie_h_e_smul\", \"RootPairing.GeckConstruction.isSl2Triple\", \"LieAlgebra.IsKilling.sl2SubalgebraOfRoot\"], \"digest\": \"0584c99d451424be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp, Mathlib/Algebra/Lie/Derivation/Basic.lean:405–426, read, requires global nilpotence and supplies no sl2 reflection formula. IsSl2Triple, Algebra/Lie/Sl2.lean:41–46, only defines the relations (and assumes h nonzero). RootSystem reflection results require finite dimension and nondegenerate Killing form, which cannot be assumed in this input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weyl reflection automorphisms from exponentials of locally nilpotent adjoint operators of an sl2 triple",
+   "results": "{\"t\": \"2026-10-23T22:37:01Z\", \"tool\": \"leansearch\", \"query\": \"Weyl reflection automorphisms from exponentials of locally nilpotent adjoint operators of an sl2 triple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"RootPairing.reflection_mem_weylGroup\", \"RootPairing.weylGroup.induction\", \"RootPairing.weylGroup\", \"RootPairing.weylGroup.ofIdx_smul\", \"RootPairing.Equiv.reflection_inv\", \"RootPairing.weylGroup.induction'\"], \"digest\": \"3c0e3feaa08f9605\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp, Mathlib/Algebra/Lie/Derivation/Basic.lean:405–426, read, requires global nilpotence and supplies no sl2 reflection formula. IsSl2Triple, Algebra/Lie/Sl2.lean:41–46, only defines the relations (and assumes h nonzero). RootSystem reflection results require finite dimension and nondegenerate Killing form, which cannot be assumed in this input."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSl2Triple",
+   "results": "{\"t\": \"2026-10-23T22:37:01Z\", \"tool\": \"loogle\", \"query\": \"IsSl2Triple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsSl2Triple\", \"IsSl2Triple.toLieSubalgebra\", \"IsSl2Triple.lie_e_f\", \"IsSl2Triple.e_ne_zero\", \"IsSl2Triple.f_ne_zero\", \"IsSl2Triple.h_ne_zero\", \"IsSl2Triple.symm\", \"IsSl2Triple.symm_iff\"], \"digest\": \"e6dffecd0bdae38f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp, Mathlib/Algebra/Lie/Derivation/Basic.lean:405–426, read, requires global nilpotence and supplies no sl2 reflection formula. IsSl2Triple, Algebra/Lie/Sl2.lean:41–46, only defines the relations (and assumes h nonzero). RootSystem reflection results require finite dimension and nondegenerate Killing form, which cannot be assumed in this input."
+  },
+  {
+   "tool": "grep",
+   "query": "exp.*ad|reflection|locallyNilpotent|IsSl2Triple",
+   "results": "{\"t\": \"2026-10-23T22:37:00Z\", \"tool\": \"grep\", \"query\": \"exp.*ad|reflection|locallyNilpotent|IsSl2Triple\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Derivation/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/IsSimple.lean\"], \"digest\": \"96ee1ce119895dc8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp, Mathlib/Algebra/Lie/Derivation/Basic.lean:405–426, read, requires global nilpotence and supplies no sl2 reflection formula. IsSl2Triple, Algebra/Lie/Sl2.lean:41–46, only defines the relations (and assumes h nonzero). RootSystem reflection results require finite dimension and nondegenerate Killing form, which cannot be assumed in this input."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyNilpotent|LocallyNilpotent|def exp|theorem exp",
+   "results": "{\"t\": \"2026-10-23T23:24:39Z\", \"tool\": \"grep\", \"query\": \"locallyNilpotent|LocallyNilpotent|def exp|theorem exp\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Derivation/Basic.lean\"], \"digest\": \"20898563d09f3093\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally nilpotent Lie derivation exponentiates pointwise to an automorphism in characteristic zero",
+   "results": "{\"t\": \"2026-10-23T23:24:39Z\", \"tool\": \"leansearch\", \"query\": \"A locally nilpotent Lie derivation exponentiates pointwise to an automorphism in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"LieDerivation.exp_map_apply\", \"Module.End.exp_mul_of_derivation\", \"LieModule.instLinearWeightsOfCharZero\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"LieDerivation.coe_zero\", \"LieModule.exists_forall_pow_toEnd_eq_zero\"], \"digest\": \"8bd885d1c5f25c43\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieDerivation.exp",
+   "results": "{\"t\": \"2026-10-23T23:24:39Z\", \"tool\": \"loogle\", \"query\": \"LieDerivation.exp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"LieDerivation.exp_map_apply\"], \"digest\": \"09ee1c24d0e9e8c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exponential of a locally nilpotent derivation of a rational Lie algebra is a Lie algebra automorphism with inverse the exponential of its negative",
+   "results": "{\"t\": \"2026-10-23T23:24:40Z\", \"tool\": \"leanfinder\", \"query\": \"The exponential of a locally nilpotent derivation of a rational Lie algebra is a Lie algebra automorphism with inverse the exponential of its negative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"LieDerivation.exp_map_apply\", \"Module.End.exp_mul_of_derivation\", \"IsNilpotent.exp_mul_exp_neg_self\", \"IsNilpotent.exp\", \"IsNilpotent.exp_neg_mul_exp_self\", \"IsNilpotent.map_exp\"], \"digest\": \"dc160a790aad19f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise finite exponential of a linear derivation preserving the Lie bracket when each vector is killed by some power without a uniform nilpotence bound",
+   "results": "{\"t\": \"2026-10-23T23:26:51Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise finite exponential of a linear derivation preserving the Lie bracket when each vector is killed by some power without a uniform nilpotence bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp_map_apply\", \"LieDerivation.exp_apply\", \"LieDerivation.exp\", \"Module.End.exp_mul_of_derivation\", \"IsNilpotent.exp\", \"LieDerivation.iterate_apply_lie\", \"LieModule.exists_forall_pow_toEnd_eq_zero\", \"LieDerivation.iterate_apply_lie'\"], \"digest\": \"639b9cb95ecc43da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weyl reflection exp ad e exp negative ad f exp ad e in an infinite dimensional integrable sl2 Lie algebra acts on all weight spaces",
+   "results": "{\"t\": \"2026-10-23T23:26:53Z\", \"tool\": \"leanfinder\", \"query\": \"Weyl reflection exp ad e exp negative ad f exp ad e in an infinite dimensional integrable sl2 Lie algebra acts on all weight spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.reflectRoot\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"IsSl2Triple.HasPrimitiveVectorWith\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\"], \"digest\": \"663c8bd796aeb594\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple gives the bracket relations only; reflectRoot requires finite dimension and a Killing Lie algebra, and does not construct this locally finite exponential automorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "exp.*ad|reflectRoot|IsSl2Triple",
+   "results": "{\"t\": \"2026-10-23T23:28:56Z\", \"tool\": \"grep\", \"query\": \"exp.*ad|reflectRoot|IsSl2Triple\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Derivation/Basic.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\"], \"digest\": \"b6bf01cbbe9508ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple gives the bracket relations only; reflectRoot requires finite dimension and a Killing Lie algebra, and does not construct this locally finite exponential automorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-serre-rational-presentation",
+  "date": "2026-10-24",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Appendix C.21--C.22, printed p.612 (existence of a base); Section 23h, Theorem 23.63, first proof, printed pp.503--504, and characteristic-zero extension on p.508; the displayed Serre relations on p.504 require the sign and letter corrections recorded in report.md. Supporting argument for the rational Serre presentation: Reflection automorphism from a locally nilpotent rational sl2 action. This split supplies the locally nilpotent exponential prerequisite and the explicit rank-one reflection and weight-space transport.",
+   "via": [
+    "lem-sfb-serre-rational-presentation",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integrable-sl2-reflection-automorphism",
+  "worker": "stage1",
+  "summary": "Q34 preserves the statement; extracts the arbitrary-dimensional locally nilpotent derivation exponential as one genuine prerequisite, checks the sl2 signs by finite expansions, and proves both directions of the weight-space bijection. The existing nilpotent Mathlib exponential requires a uniform power bound. No Lean attachment was found.",
+  "blueprint": "Nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports. The inherited provenance starts with det-thm-sf-ctf-stability-direct-images proof (3), latest blueprint, and reaches Milne 23.63 through the rational Serre presentation. Steps 1-5 supply its existing reflection prerequisite without replacing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-cc2bf7d39",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-cc2bf7d39 (reviewer sub-agent of L); spot-checked: First split (no 2026-10-21 re-split note); the item statement and its stmt_deps (def-wf-lie-algebra) are unchanged. Step 1: E=ad e and G=-ad f are linear derivations by bilinearity and Jacobi, and G is locally nilpotent because G^n=(-1)^n(ad f)^n; the new node gives A=Exp E and B=Exp G as automorphisms, so w=ABA is one with w^-1=A^-1B^-1A^-1. I recomputed steps 2-5: Et=-ae, Eh=-2e, Ge=h, Gh=-2f, A(f)=f+h-e, B(e)=e+h-f, then w(t)=t-α(t)h, w(e)=-f, w(f)=-e. The weight map is β(st)=β(t)-β(h)α(t), and surjectivity follows from γ(h)=-β(h), so γ(st)=β(t). These steps are honestly elementary and use no finite-dimensionality or weight decomposition. Check on sl2(Q): exp(E12)exp(-E21)exp(E12)=[[0,1],[-1,0]], and conjugating by it sends e to -f and f to -e. New node lem-sfb-locally-nilpotent-derivation-exponential: a true, standard pointwise-exponential statement (Leibniz binomial formula, inverse from the coefficients (1-1)^k/k!), statement-only, self-contained, single-escaped TeX, five searches. Mathlib's LieDerivation.exp (Derivation/Basic.lean:405-426, read) needs IsNilpotent, and d/dX on Q[X] is locally but not globally nilpotent, so the node is correctly unsplit with a mathlib_candidate. It restates no clause of the item, and rg -L 'locally nilpotent' over the DAG found no duplicate. Source: Milne Theorem 23.63, first proof (pp.503-504), refers to Serre VI, and p.508 extends it to characteristic zero; the agent-written proof_origin and the Serre VI WANTED are honest. No SGA is used. Citers serre-rational-presentation and chevalley-adjoint-weyl-signs are unaffected. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.IntegrableSl2ReflectionAutomorphism",
+  "declaration": "LieAlgebra.exists_integrableSl2_reflectionAutomorphism",
+  "file": "lean/Sheaf/Algebra/Lie/IntegrableSl2ReflectionAutomorphism.lean",
+  "statement": "theorem exists_integrableSl2_reflectionAutomorphism (L : Type u) [LieRing L] [LieAlgebra ℚ L] (T : LieSubalgebra ℚ L) [IsLieAbelian T] (h : T) (e f : L) (α : T →ₗ[ℚ] ℚ) (hα : α h = 2) (hef : ⁅e, f⁆ = (h : L)) (hte : ∀ t : T, ⁅(t : L), e⁆ = α t • e) (htf : ∀ t : T, ⁅(t : L), f⁆ = -(α t) • f) (hne : ∀ x : L, ∃ n : ℕ, 0 < n ∧ (ad ℚ L e ^ n) x = 0) (hnf : ∀ x : L, ∃ n : ℕ, 0 < n ∧ (ad ℚ L f ^ n) x = 0) : ∃ w : L ≃ₗ⁅ℚ⁆ L, (⇑w = (fun x : L ↦ ∑ᶠ n : ℕ, (n.factorial : ℚ)⁻¹ • (ad ℚ L e ^ n) x) ∘ (fun x : L ↦ ∑ᶠ n : ℕ, (n.factorial : ℚ)⁻¹ • ((-ad ℚ L f) ^ n) x) ∘ (fun x : L ↦ ∑ᶠ n : ℕ, (n.factorial : ℚ)⁻¹ • (ad ℚ L e ^ n) x)) ∧ (∀ t : T, w (t : L) = (t : L) - α t • (h : L)) ∧ w e = -f ∧ w f = -e ∧ ∀ β : T →ₗ[ℚ] ℚ, ∃ φ : LieModule.weightSpace L (fun t : T ↦ β t) ≃ₗ[ℚ] LieModule.weightSpace L (fun t : T ↦ β t - β h * α t), ∀ x : LieModule.weightSpace L (fun t : T ↦ β t), (φ x : L) = w (x : L)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bf0c2c49",
+  "group": "Q15",
+  "result": "pass",
+  "note": "First stage-2 delivery; the node differs from live only in the new lean record. Every clause matches the node: (L:Type u)[LieRing][LieAlgebra ℚ] with no finiteness; abelian T; h:T; e,f; linear α; hα, hef, hte, htf with correct signs; pointwise positive-exponent local nilpotence, which is equivalent to 'some power'. ⇑w is pinned to the finsum composite exp(ad e)∘exp(-ad f)∘exp(ad e), whose support is finite by the pointwise bound. w(t)=t-α(t)h, w e=-f, w f=-e. ∀β ∃φ between ordinary Mathlib weightSpaces (an eigenspace intersection, Weights/Basic.lean:63) with φ x = w x. Recomputed the sl2 formulas and weight transport (γ(h)=-β(h)). Edge cases: L=0 or T=0 is vacuous; zero weight spaces covered. No duplicate pointwise exp in lean/Sheaf or Mathlib (LieDerivation.exp needs global IsNilpotent). stmt_deps [def-wf-lie-algebra] suffice; lean.statement is verbatim in the file; only sorry; docstrings give the Milne 23.63 source, the blueprint tag and the 5-step plan; report has both required sections. No fixes; no compile run since no file was changed."
+ }
+}

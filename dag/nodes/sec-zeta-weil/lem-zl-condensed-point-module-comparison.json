@@ -1,0 +1,294 @@
+{
+ "id": "lem-zl-condensed-point-module-comparison",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Module and derived lifts of the pullback-from-point comparison",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and let $f:T\\to X$ be any morphism of schemes [def-pc-scheme]. Use the small pro-etale sites [def-weil-pbc-proetale-site]. Let $p_Y^*$ be inverse image from the point for $Y=T,X$ [sk-def-sfb-pullback-from-point], let $\\Lambda_Y=p_Y^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], and let $\\varphi:f^{-1}p_X^*\\xrightarrow{\\sim}p_T^*$ be the monoidal comparison on abelian sheaves [sk-def-sfb-pullback-from-point-comp]. Its coefficient component is the ring isomorphism $\\alpha_f:f^{-1}\\Lambda_X\\xrightarrow{\\sim}\\Lambda_T$ [sk-def-sfb-coefficient-morphisms]. Write $\\operatorname{Mod}_{\\Lambda}$ for module objects on the point and $\\operatorname{Mod}_{\\Lambda_Y}$ for module objects on $Y_{\\mathrm{proet}}$ [sk-def-sfb-module-objects]. Denote by $p_{Y,\\Lambda}^*:\\operatorname{Mod}_{\\Lambda}\\to\\operatorname{Mod}_{\\Lambda_Y}$ the functor transporting the module action along $p_Y^*$ [sk-def-sfb-transport], and by $f_\\Lambda^*$ module inverse image with coefficient map $\\alpha_f$ [def-weil-pbc-proetale-operations].\n\nFor every $\\Lambda$-module object $M$, $\\varphi_M$ is $\\Lambda_T$-linear when the $f^{-1}\\Lambda_X$-action on $f^{-1}p_X^*M$ is transported by $\\alpha_f$. Thus these specified underlying maps give a natural isomorphism of exact module functors\n$$\\Phi:f_\\Lambda^*\\circ p_{X,\\Lambda}^*\\xrightarrow{\\sim}p_{T,\\Lambda}^*.$$\nUse the ordinary unbounded derived categories [def-weil-abstract-derived-category], with module sheaves identified with internal module objects [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Applying $\\Phi$ termwise and localizing at quasi-isomorphisms induces a natural isomorphism\n$$L f_\\Lambda^*\\circ D(p_{X,\\Lambda}^*)\\xrightarrow{\\sim}D(p_{T,\\Lambda}^*),$$\nwhose component on every represented unbounded complex is the localization of the chain isomorphism with degree-$n$ component $\\varphi_{M^n}$. No flatness, boundedness or finiteness assumption on $M$ or its representing complex is required.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, pullback paragraph before (3.1), Remark 3.2 and Definition 3.5; module-action and termwise-localization comparison extracted from returned locality proof Step 1, scalar-extension paragraph."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-pullback-from-point-comp",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-transport"
+ ],
+ "proof": [
+  {
+   "text": "The existing profinite-to-pro-etale functor is representably flat. Its opposite left Kan extension preserves finite limits because filtered colimits in abelian groups are exact; shrink AB5 to the comma-category universe. Sheaf inclusion and sheafification preserve finite limits, giving left exactness of pointUpperStar. Compose with the exact inverse image along the structure morphism. Apply the existing preservesFiniteLimits_mapMod instance to obtain the point-module finite-limit instance.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "lem-sfb-finite-upper-star-exact",
+    "sk-def-sfb-transport",
+    "lem-sfb-modobj-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, pullback paragraph before (3.1), Remark 3.2 and Definition 3.5; module-action and termwise-localization comparison extracted from returned locality proof Step 1, scalar-extension paragraph."
+   }
+  },
+  {
+   "text": "Compose pointUpperStarLowerStarAdjunction with the scheme inverse-image adjunction. Its left adjoint preserves colimits, hence finite colimits. The existing preservesFiniteColimits_mapMod instance lifts this to point modules. An additive-category functor preserving binary coproducts preserves binary biproducts, hence is additive. This proves the other two point-module instances.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "lem-sfb-finite-upper-star-exact",
+    "sk-def-sfb-transport",
+    "lem-sfb-modobj-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, pullback paragraph before (3.1), Remark 3.2 and Definition 3.5; module-action and termwise-localization comparison extracted from returned locality proof Step 1, scalar-extension paragraph."
+   }
+  },
+  {
+   "text": "Use the module morphism axiom of the component of Functor.mapModCompIso for upperStarFromPointComp. It states a_N followed by phi_M equals f^{-1}(Lambda_X) whisker phi_M followed by alpha_f whisker P and a_P. Precompose by alpha_f inverse whisker N. The tensor interchange law moves this inverse past phi_M; composition of right whiskers and alpha_f inverse followed by alpha_f = identity cancel the coefficient factors. This is exactly the displayed linearity identity for restriction along alpha_f inverse. All isomorphisms and module actions are the existing constructions.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point-comp",
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-def-sfb-transport",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, pullback paragraph before (3.1), Remark 3.2 and Definition 3.5; module-action and termwise-localization comparison extracted from returned locality proof Step 1, scalar-extension paragraph."
+   }
+  },
+  {
+   "text": "The existing scheme module inverse image preserves finite limits and colimits and is additive, so the given definition of the derived comparison is well-typed. Set F = point-module pullback and G = scheme module pullback. Expand only the composite of natural isomorphisms in the definition. Apply mapDerivedCategoryNatIso_fac to the existing upperStarFromPointModComp. Apply mapDerivedCategoryCompIso_fac to F, G and K. A private proved category lemma precomposes this identity by the inverse composition map and cancels the inverse-hom composite, then postcomposes with the localized chain comparison. This replaces the remaining inverse-composition/factorization pair by the iterated factorizations and the image of mapHomologicalComplexCompIso. Associativity gives exactly the stated normalization, for every unbounded complex. The final definitional conversion is proved structurally by congruence and proof irrelevance, after reducing composite functor objects; it reconciles direct and abelian-inherited preadditive instances in proof arguments. The resulting proof is kernel checked.",
+   "uses": [
+    "sk-def-sfb-transport",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-finite-upper-star-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, pullback paragraph before (3.1), Remark 3.2 and Definition 3.5; module-action and termwise-localization comparison extracted from returned locality proof Step 1, scalar-extension paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-pullback-from-point",
+  "lem-sfb-finite-upper-star-exact",
+  "sk-def-sfb-transport",
+  "lem-sfb-modobj-abelian",
+  "sk-def-sfb-pullback-from-point-comp",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-module-objects",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-sfb-exact-derived-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, pp. 5-6; implementation uses the existing exact mapMod instances, canonical mapModCompIso and the source-library derived normalization lemmas directly (V1, 2026-10-23)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The natural comparison f inverse image composed with pullback from the point is linear for a pulled back condensed ring and induces an isomorphism on unbounded derived module categories",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackIso; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp is underived composition for sectionwise module sheaves; it does not identify the specified point comparison on internal modules and its derived lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism between exact inverse image functors lifts to modules over a ring object and to their unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; DerivedCategory.instLinearCochainComplexIntQ; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp is underived composition for sectionwise module sheaves; it does not identify the specified point comparison on internal modules and its derived lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullback_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp is underived composition for sectionwise module sheaves; it does not identify the specified point comparison on internal modules and its derived lift"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|mapDerivedCategory.*[Ii]so",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp is underived composition for sectionwise module sheaves; it does not identify the specified point comparison on internal modules and its derived lift"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural comparison for inverse image of modules pulled back from a condensed ring on a point",
+   "results": "8 hits: Submodule.comap_coe; Submodule.comap; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; Submodule.comapSubtypeEquivOfLe_apply_coe; CondensedMod.LocallyConstant.functorIsoDiscreteAux₁; Submodule.comap_le_comap_iff_of_surjective; SheafOfModules.instIsLeftAdjointPullback; Submodule.comap_subtype_self",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp is underived composition for sectionwise module sheaves; it does not identify the specified point comparison on internal modules and its derived lift"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModCompIso|upperStarFromPoint|mapDerivedCategoryNatIso",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sectionwise pullback or exact derived machinery, not the specified condensed-point module comparison together with its unbounded derived normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of condensed modules from the point commutes with scheme inverse image on unbounded derived categories",
+   "results": "8 hits: SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sectionwise pullback or exact derived machinery, not the specified condensed-point module comparison together with its unbounded derived normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedMod, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sectionwise pullback or exact derived machinery, not the specified condensed-point module comparison together with its unbounded derived normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal inverse image comparison from condensed modules on a point lifts to module sheaves and their unbounded derived categories",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sectionwise pullback or exact derived machinery, not the specified condensed-point module comparison together with its unbounded derived normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact strong monoidal functor on abelian sheaves transports modules and a monoidal natural isomorphism gives a linear comparison and a degreewise derived isomorphism",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sectionwise pullback or exact derived machinery, not the specified condensed-point module comparison together with its unbounded derived normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-lisse-proetale-locality",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3, pullback paragraph before (3.1); Definition 3.3 and Lemma 4.5, lisse assertion. Extracted Section 3, pullback paragraph before (3.1), Remark 3.2 and Definition 3.5; module-action and termwise-localization comparison extracted from returned locality proof Step 1, scalar-extension paragraph.",
+   "via": [
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-condensed-point-module-comparison",
+  "worker": "stage1",
+  "summary": "Q156: statement unchanged. Six-step proof: exactness of point inverse image, normalized inverse-coefficient restriction, explicit specialization of existing monoidal linearity and inverse/naturality, exactness of scheme pullback, localization of the degreewise comparison, and normalized derived composition. Reused the existing DAG; no new nodes. Underived project comparison exists, but no project declaration found covers the full item.",
+  "blueprint": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3, pullback paragraph before (3.1); Definition 3.3 and Lemma 4.5, lisse assertion. Extracted Section 3, pullback paragraph before (3.1), Remark 3.2 and Definition 3.5; module-action and termwise-localization comparison extracted from returned locality proof Step 1, scalar-extension paragraph. Realizes the point-module comparison required for the continuous coefficient local models; preserves the relative-purity unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-upper-star-exact",
+    "why": "Generic exactness of pro-etale pullback pi_Y^*, the second factor of p_Y^*; no node of the unit gives it."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Generic tensor-colimit property of abelian sheaves, to check right exactness in the lifted module exactness theorem."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Generic abelianness criterion for internal module categories, for point and scheme sheaves."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic exactness of a module-valued lift of an exact functor, applied to p_Y^*."
+   },
+   {
+    "node": "lem-sfb-restricted-transport-comparison-linear",
+    "why": "Generic monoidal-action identity, specialized with inverse coefficient restriction; no geometric or purity route is substituted."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Exactness of the existing condensed-coefficient module inverse image for any scheme morphism."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Generic normalization for the unbounded derived functor of a composite of exact functors."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic identification of the exact induced functor with its total left derived functor."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic identification of the internal module pullback Ext_alpha mapMod(f^{-1}) with the sectionwise ringed-topos pullback of def-weil-pbc-proetale-operations under the internal/sectionwise equivalences."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-upper-star-exact",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-exact-derived-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-f38047e48",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-f38047e48 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement matches HRS 2305.18131 §3 pp.5-6 ('Λ_Y = f^{-1}Λ_X, f^* = f^{-1} exact'), with nothing added or dropped. The coefficient categories are internal Λ_Y-modules identified with sectionwise modules by def-weil-pbc-internal-abelian-sheaf-module-equivalence. The base-change morphism is def-weil-pbc-proetale-operations with c = α_f, and α_f is the Λ-component of sk-def-sfb-pullback-from-point-comp. No SGA source is used. Fault 1 (E1/C4), Step 1: lem-weil-pbc-site-pullback-abelian-exact assumes a morphism of sites, i.e. u_s exact on sets (Stacks 00X6), which sk-def-sfb-pullback-from-point does not supply. Fixed by citing lem-weil-pbc-left-exact-site-inverse-image-tensor (u preserves finite limits and coverings, so sheafified Lan is exact; its unit sk-thm-properbasechange is on the route) together with lem-sfb-finite-upper-star-exact for π_Y^*. Fault 2 (C1/C4), Steps 4 and 6: det-prop-sfb-module-pullback-exact-main is about the internal Ext_{α_f}∘mapMod(f^{-1}), but the statement's f_Λ^* and Lf_Λ^* are the sectionwise functors of def-weil-pbc-proetale-operations transported along E, and the proof never identified the two. Fixed by citing lem-sfb-internal-module-operations-transport (E_T f^*_int ≅ f^*_sec E_X, with f^*_sec = B_T⊗_{f^{-1}B_X}f^{-1}(−)) and transporting it to D by the already-cited lem-sfb-exact-derived-natural-iso and lem-sfb-exact-derived-composition. Steps 2, 3 and 5 are correct. Step 2: change-of-scalars clause 5 hypotheses hold and Ext_α ≅ Res_{α^{-1}}. Step 3: restricted-transport linearity with ψ = 1, ψ' = α^{-1}, φ = 1; the condition αα^{-1} = 1 holds, and linearity of the inverse and naturality follow. Step 5: D(Φ) has the stated normalization. Edge cases checked: Λ = 0, T empty, f = id, complexes unbounded in both directions. No duplicate in the DAG (searched the citers of pullback-from-point-comp) and no cycle (the closure of the newly cited nodes excludes the item). proof_deps and split_report.tool_uses are updated in fixes/dag/nodes/sec-zeta-weil/lem-zl-condensed-point-module-comparison.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedPointModuleComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedPointModuleDerivedComparison_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensedPointModule_preservesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.condensedPointModule_preservesFiniteColimits",
+   "AlgebraicGeometry.ProEtale.condensedPointModule_additive",
+   "AlgebraicGeometry.ProEtale.condensedPointModule_comparison_linear",
+   "AlgebraicGeometry.ProEtale.condensedPointModuleDerivedComparison",
+   "AlgebraicGeometry.ProEtale.condensedPointModuleDerivedComparison_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedPointModuleComparison.lean",
+  "statement": "theorem condensedPointModuleDerivedComparison_normalization (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {T X : Scheme.{u}} (f : T ⟶ X) (K : CochainComplex (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ) ℤ) : (condensedPointModuleDerivedComparison Λ f).hom.app (DerivedCategory.Q.obj K) ≫ (CondensedRing.upperStarFromPointMod Λ T).mapDerivedCategoryFactors.hom.app K = (CondensedRing.upperStar Λ f).mapDerivedCategory.map ((CondensedRing.upperStarFromPointMod Λ X).mapDerivedCategoryFactors.hom.app K) ≫ (CondensedRing.upperStar Λ f).mapDerivedCategoryFactors.hom.app (((CondensedRing.upperStarFromPointMod Λ X).mapHomologicalComplex (.up ℤ)).obj K) ≫ DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (Iso.refl (CondensedRing.upperStarFromPointMod Λ X ⋙ CondensedRing.upperStar Λ f)) (.up ℤ)).hom.app K) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (CondensedRing.upperStarFromPointModComp Λ f) (.up ℤ)).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical ordinary comparison is the existing CondensedRing.upperStarFromPointModComp, reused verbatim. The new module states exactness of point-module inverse image, linearity of the specified underlying comparison after inverse-coefficient restriction, constructs its derived comparison by exact localization, and states its normalization on every unbounded complex. No replacement module category or extra flatness, finiteness, or boundedness hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-331841cc8",
+  "group": "NR",
+  "result": "pass",
+  "note": "Item statement matches node + HRS §3 pp.5-6: arbitrary commutative condensed Λ (MonObj+IsCommMonObj on the recorded Mon type), arbitrary f, recorded p_Y^*/Λ_Y/φ/α_f; linearity = Mod morphism axiom with Res_{α_f⁻¹} source; Φ = existing canonical upperStarFromPointModComp; three exactness Prop instances for arbitrary X; derived iso = compIso⁻¹ ≪≫ mapDerivedCategoryNatIso Φ (real data); normalization on every unbounded K ends in Q.map(mapHomologicalComplex Φ). No extra hypotheses or universe restriction; statement verbatim; docstrings/source/blueprint/H8 ok; only sorry proofs. Advisory: f_Λ^* rendered by internal CondensedRing.upperStar (owner def-sfb-module-upper-star not a stmt_dep), sanctioned by the node's internal-module identification. Maintainer note: delivered def-weil-pbc-proetale-operations record (pre-Q52 base) drops Q36's proEtaleConstantRing* declarations; live Q52 superset record supersedes it, the merge guard fires and nt_parallel2 auto-reverts it (else --revert-nodes def-weil-pbc-proetale-operations). The item uses nothing from that record. No compile (no change).; reverted the delivery's change of existing node(s) def-weil-pbc-proetale-operations (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261024T191445-L-376659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

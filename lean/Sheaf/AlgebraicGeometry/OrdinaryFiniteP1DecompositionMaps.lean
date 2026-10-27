@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Kummer
+
 /-! # Canonical arrows for the inverse-twist projective-line decomposition
 
 The unit and Chern adjoint are explicit, independently of the proof of their splitting.
@@ -150,7 +152,7 @@ Source: the definition K=A_S(-1)[-2] (blueprint: thm-amb-p1-decomposition). -/
 abbrev p1DecompositionTwist (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (T : Scheme.{u}) (a b : ℤ) :
     DerivedCategoryModule A T :=
-  ((DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateSheaf A N T hA a))⟦b⟧
+  (ordinaryFiniteDegreeZero A T (Scheme.finiteEtaleTateSheaf A N T hA a))⟦b⟧
 
 /-- Shift a comparison between functors, without unfolding its concrete categories.
 Source: functoriality of the shift (blueprint: def-asd-ordinary-finite-p1-decomposition-maps). -/

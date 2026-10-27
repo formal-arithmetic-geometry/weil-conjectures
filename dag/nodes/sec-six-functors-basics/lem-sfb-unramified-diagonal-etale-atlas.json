@@ -1,0 +1,340 @@
+{
+ "id": "lem-sfb-unramified-diagonal-etale-atlas",
+ "kind": "statement",
+ "title": "Unramified diagonal yields an etale scheme atlas",
+ "statement": "Let $S$ be a scheme and $\\mathcal X$ an algebraic stack over $S$. Its relative diagonal $\\mathcal X\\to\\mathcal X\\times_S\\mathcal X$ is unramified if and only if there exists a scheme $W$ and a representable surjective etale morphism $W\\to\\mathcal X$. Thus this condition is equivalent to being a Deligne--Mumford stack in the scheme-atlas convention of [def-sfb-stable-pointed-moduli-groupoids]. Etale means [def-weil-etale-morphism], tested on scheme charts. An algebraic stack here is a stack in groupoids on schemes with representable diagonal and a smooth surjective scheme atlas; stacks, representability and scheme atlases use [def-sfb-stable-pointed-moduli-groupoids], and smooth means [def-sbc-smooth-morphisms]. Open substacks are full substacks whose pullback by every scheme is an open subscheme. A representable morphism is unramified if every scheme base change, on etale scheme charts of its algebraic-space source, is unramified in [def-weil-unramified-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06N3 (theorem-DM), equivalence (1)--(3); relative-base convention via Tag 050N (lemma-separated-implies-morphism-separated), part (1)."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sbc-smooth-morphisms",
+  "def-weil-unramified-morphism",
+  "def-weil-etale-morphism",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "First note that a map $H\\to\\mathcal X$ from a scheme is representable by algebraic spaces: for a scheme $T\\to\\mathcal X$, the groupoid $H\\times_{\\mathcal X}T$ is the base change of the representable diagonal along $H\\times_ST\\to\\mathcal X\\times_S\\mathcal X$. Its objects are triples $(h,t,\\alpha)$ with $\\alpha$ an isomorphism in $\\mathcal X$; its automorphisms fixing $h,t$ are identities. Thus it is an algebraic space, by the definition of a representable diagonal. We use these triple descriptions for all fibre-product identifications below.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM); representability convention, algebraic.tex Tag 045G."
+   }
+  },
+  {
+   "text": "Suppose $q:W\\to\\mathcal X$ is a surjective etale scheme atlas. Set $R=W\\times_{\\mathcal X}W$. Its first projection $p_1:R\\to W$ is etale by base change. Hence $p_1$ is unramified. The map $j=(p_1,p_2):R\\to W\\times_SW$ is unramified by cancellation applied to $R\\xrightarrow{j}W\\times_SW\\xrightarrow{\\mathrm{pr}_1}W$. The morphism $W\\times_SW\\to\\mathcal X\\times_S\\mathcal X$ is the composite of two base changes of $q$, so is surjective, flat and locally finitely presented. The base change of $\\Delta_{\\mathcal X/S}$ by this cover is exactly $j$. Descent of unramifiedness therefore proves that the relative diagonal is unramified.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-unramified-permanence",
+    "lem-sfb-stack-representable-unramified-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), (3) implies (1), via lemma-properties-covering-imply-diagonal; the same proof over S."
+   }
+  },
+  {
+   "text": "Conversely assume $\\Delta_{\\mathcal X/S}$ unramified, and fix a finite-type point $x$. Choose $a:\\operatorname{Spec}k\\to\\mathcal X$ representing it as in the field-representative lemma; $a$ is locally of finite type and $R_a=\\operatorname{Spec}k\\times_{\\mathcal X}\\operatorname{Spec}k$ has etale projections. Choose a smooth surjective scheme atlas $U\\to\\mathcal X$. Set $F=U\\times_{\\mathcal X}\\operatorname{Spec}k$. Then $F\\to\\operatorname{Spec}k$ is smooth and surjective by base change, so $F$ is nonempty, and $F\\to U$ is locally of finite type as a base change of $a$.",
+   "uses": [
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), first construction paragraph and the first fibre square."
+   }
+  },
+  {
+   "text": "The triple description gives $F\\times_UF\\cong R_a\\times_{\\operatorname{Spec}k}F$, using one projection $R_a\\to\\operatorname{Spec}k$ for the fibre product and the other for its second map to $F$. In particular both projections $F\\times_UF\\to F$ are etale. The diagonal $F\\to F\\times_UF$ is a morphism over $F$ between two spaces etale over $F$ (the identity of $F$ and the first projection), so it is etale. It is a monomorphism: a pair of arrows from a test scheme agreeing after this diagonal already agree after either projection. The etale-monomorphism lemma makes it an open immersion. Since $F\\to U$ is locally of finite type, the open-diagonal criterion proves that $F\\to U$ is unramified.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open",
+    "lem-sfb-space-unramified-open-diagonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), paragraph containing F times_U F and Delta_(F/U)."
+   }
+  },
+  {
+   "text": "Choose a nonempty affine scheme $V$ etale over $F$, by taking a nonempty affine open in an etale scheme cover of the nonempty algebraic space $F$. Then $V\\to\\operatorname{Spec}k$ is smooth by composition, while $b:V\\to U$ is unramified by composition of the etale, hence unramified, $V\\to F$ with $F\\to U$. The dense-separable-points lemma supplies a closed point $v\\in V$ with $\\kappa(v)/k$ finite separable. Let $u=b(v)$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-unramified-permanence",
+    "lem-pc-dense-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), choice of nonempty affine V and separable closed point v; Varieties 056U."
+   }
+  },
+  {
+   "text": "Write $A=\\mathcal O_{U,u}$ and $B=\\mathcal O_{V,v}$. Smoothness is affine-locally smoothness of k-algebras, so the smooth-over-field regularity lemma makes $B$ regular local. The unramified local criterion gives $\\mathfrak m_AB=\\mathfrak m_B$. The images of elements of $\\mathfrak m_A$ therefore span $\\mathfrak m_B/\\mathfrak m_B^2$ over $\\kappa(v)$; choose finitely many of them forming a basis. Nakayama for the finitely generated $B$-module $\\mathfrak m_B$ shows that these images minimally generate $\\mathfrak m_B$. The regular-local-generators lemma makes this list a regular sequence. Represent the chosen germs in $A$ by sections $f_1,\\ldots,f_d$ on a common open neighbourhood $U_0$ of $u$. Each vanishes at $u$, and their pullbacks to $B$ generate $\\mathfrak m_B$ and form a regular sequence. Empty lists are allowed if $B$ is a field.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-trf-unramified-maximal-ideal-residue-criterion",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), regular-parameter argument, using 056S, 02GF and 00NQ."
+   }
+  },
+  {
+   "text": "The map $U_0\\to\\mathcal X$ is smooth, hence flat and locally finitely presented. Its field fibre is the open subspace $F_0=U_0\\times_{\\mathcal X}\\operatorname{Spec}k=F\\times_UU_0$ of $F$, and $V_0=b^{-1}(U_0)=V\\times_FF_0$ is an etale scheme chart $V_0\\to F_0$ by base change, containing $v$ with $\\mathcal O_{V_0,v}=B$. Apply the fibrewise regular-slice lemma to these functions and the point $v$. After shrinking $U_0$ around $u$, their zero scheme $Z=V(f_1,\\ldots,f_d)\\subset U_0$ is flat and locally of finite presentation over $\\mathcal X$. All shrinks contain $u$ and hence preserve $v$ and its local ring; since the functions vanish at $u$, this point belongs to $Z$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-fibre-regular-slice-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), application of Tag 06MD (lemma-slice)."
+   }
+  },
+  {
+   "text": "Replace $V_0$ by $b^{-1}(U_0)$ for the shrunken $U_0$, still an etale chart of the field fibre containing $v$, and $T=Z\\times_{U_0}V_0$. This is exactly the zero scheme in $V_0$ cut out by the pulled-back functions, so $\\mathcal O_{T,v}=B/(f_1,\\ldots,f_d)B=B/\\mathfrak m_B=\\kappa(v)$. The map $T\\to\\operatorname{Spec}k$ is locally of finite type: affine-locally $V_0$ is a smooth finite-type k-algebra and $T$ is its quotient by the indicated equations. For its local map at $v$, the ideal generated by the maximal ideal of k is zero, the maximal ideal of $\\mathcal O_{T,v}$ is also zero, and the residue extension is the finite separable $\\kappa(v)/k$. The unramified local criterion therefore gives an open neighbourhood of $v$ in $T$ unramified over k.",
+   "uses": [
+    "lem-trf-unramified-maximal-ideal-residue-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), local ring of the zero scheme T and application of Morphisms 02GF."
+   }
+  },
+  {
+   "text": "The cartesian identities give an etale chart $T=Z\\times_{U_0}V_0\\to Z\\times_{\\mathcal X}\\operatorname{Spec}k$. Indeed it is the base change of $V_0\\to F_0$, and its defining equations are exactly the pullbacks already used to define $T$. At $v$, $T\\to\\operatorname{Spec}k$ is unramified by the preceding local-ring calculation. Apply the fibrewise etale-locus lemma to the flat locally finitely presented $Z\\to\\mathcal X$ and this chart. An open neighbourhood $W_x\\subset Z$ of $u$ maps etale to $\\mathcal X$. The retained point $v$ in its field fibre proves that the image of $W_x$ contains $x$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-fibre-unramified-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), zero scheme T and application of Tag 06N2 (lemma-etale-at-point)."
+   }
+  },
+  {
+   "text": "Do this for each finite-type point $x$, choosing one $W_x$ for each. Use one fixed smooth atlas $U$ in all the constructions, so each $W_x$ is an open subscheme of a closed subscheme of an open of $U$. The point classes form a set (a quotient of the points of $U$); this indexing set and these locally closed subschemes have a common bound in the universe containing $U$. Hence their coproduct belongs to that universe. Form $W=\\coprod_xW_x$. The stack descent condition glues the objects on the disjoint open cover of $W$ into $q:W\\to\\mathcal X$, whose restrictions are the maps just constructed. Chartwise source locality makes $q$ representable etale, hence flat and locally finitely presented. Its image contains every finite-type point. The finite-type-point detection lemma now proves that $q$ is surjective. This also covers the empty stack: the family and $W$ are empty and the detection lemma still applies.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-flat-lfp-finite-type-surjectivity",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), final disjoint-union and finite-type-point argument."
+   }
+  },
+  {
+   "text": "Both implications are proved. In the fixed convention a Deligne--Mumford stack is precisely a stack with representable diagonal and a surjective etale scheme atlas. The representable diagonal and the stack condition were already assumed, and maps from schemes are representable by step 1. Thus the asserted equivalence with the Deligne--Mumford terminology is exactly this definition.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), equivalence of (2) and (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-unramified-permanence",
+  "lem-sfb-stack-representable-unramified-descent",
+  "lem-sfb-finite-type-point-etale-self-relation",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-etale-monomorphism-open",
+  "lem-sfb-space-unramified-open-diagonal",
+  "lem-pc-dense-separable-points",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-trf-unramified-maximal-ideal-residue-criterion",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sfb-stack-fibre-regular-slice-flat",
+  "lem-sfb-stack-fibre-unramified-etale",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sfb-stack-flat-lfp-finite-type-surjectivity",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06N3 (theorem-DM), full construction and converse; relative base S throughout, with field representatives using Tag 050N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack has unramified diagonal iff it admits a surjective etale atlas by a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"@AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deligne Mumford criterion from an unramified diagonal constructing an etale scheme cover",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsEtale (f ≫ g)] [LocallyOfFiniteType g] [FormallyUnramified g] : IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Algebra.FormallyUnramified R A ∧ Algebra.FormallySmooth R A\", \"doc\": \"For any commutative ring $ R $ and an $ R $-algebra $ A $, $ A $ is formally étale over $ R $ if and only if it is both formally unramified and formally smooth over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R A ↔ FormallyUnramified R A ∧ FormallySmooth R A\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally étale if and only if it is both formally unramified and formally smooth over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"diagonal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*atlas|atlas.*etale|DeligneMumford",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deligne Mumford criterion from an unramified diagonal constructing an etale scheme cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring unramifiedness and general topology do not supply this algebraic-stack theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-stack-infinitesimal-dm-locus",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas.",
+   "via": [
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-unramified-diagonal-etale-atlas",
+  "worker": "stage1",
+  "summary": "Split Stacks 06N3 into eleven steps. The parameter construction is explicit in the item and reuses the existing dense-separable-points, smooth regularity, local unramified criterion, Nakayama and regular-generator nodes. Added nine statement-only supporting lemmas. Preserved the statement. The new space open-diagonal input is only part (2) of 05W1; existing part (1) does not imply it.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. The construction supplies the algebraic-stack input to the Deligne--Mumford curve locus on the alteration route of det-thm-sf-ctf-stability-direct-images, proof (3).",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "The general algebraic-space etale calculus proves that the diagonal section of an etale projection is etale; no node of this unit states that permanence result."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "The general scheme coproduct supplies the scheme underlying the disjoint union of local charts; this is a tool, not a replacement of the unit alteration route."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "General scheme or local-algebra input for the explicit regular-parameter construction in Stacks 06N3; no theorem in this unit gives this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "General scheme or local-algebra input for the explicit regular-parameter construction in Stacks 06N3; no theorem in this unit gives this general fact."
+   },
+   {
+    "node": "lem-trf-unramified-maximal-ideal-residue-criterion",
+    "why": "General scheme or local-algebra input for the explicit regular-parameter construction in Stacks 06N3; no theorem in this unit gives this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "General scheme or local-algebra input for the explicit regular-parameter construction in Stacks 06N3; no theorem in this unit gives this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "General scheme or local-algebra input for the explicit regular-parameter construction in Stacks 06N3; no theorem in this unit gives this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-trf-unramified-maximal-ideal-residue-criterion",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-b7972141b",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-b7972141b (reviewer sub-agent of L); spot-checked: I read the delivery in full against Stacks theorem-DM (06N3) and the lemmas it uses: 06G3, 06MZ, 06N0, 06MD, 06N2, 06G2 and 050N(1) in stacks-morphisms.tex; 05W1, 05W5 and 06G6 in spaces-morphisms.tex; 04XD, 04XL, 04XI and the residual-gerbe definition in stacks-properties.tex. Status: the item is still unsplit in both live clones, no repair note names it, and its statement, stmt_deps and blueprint are unchanged. proof_deps equals the union of the step uses, all cited ids exist and none is merged, there is no cycle, and no source cites SGA. Proof: the 11 steps follow 06N3. (3)=>(1) is proved by cancellation (pr1 composed with j equals p1) and 04XD descent along W x_S W -> X x_S X, whose pullback of the diagonal is R. For (1)=>(3), the field representative's étale self-relation gives F x_U F = R_a x_k F. Its diagonal is étale by the 03FV clause and is a monomorphism, hence an open immersion by 05W5, so F->U is unramified by 05W1(2). A separable closed point v (056U), a regular B (00TT), m_A B = m_B (02GF), Nakayama (00DV) and 00NQ give d = dim B regular parameters. Then come the 06MD slice, O_{T,v} = kappa(v) with unramified near v by 02GF, the étale chart T -> Z x_X k (cartesian identity checked) and the 06N2 étale locus. The coproduct glues by étale descent, and 06G2/04XL/04XI detection gives surjectivity, the empty stack included. Step 11 is the DM definition of def-sfb-stable-pointed-moduli-groupoids. New nodes: all nine are true as stated and statement-only. The 05W1(2) node is not a duplicate of the existing part-(1) node. The 06MD node's O_{V,v} hypothesis is equivalent to the strict-henselization hypothesis by faithful flatness. The field-representative node uses the fact that a residual gerbe is reduced and locally Noetherian by definition. Concept and tag searches of side-live found no duplicate, and no new node restates a clause of the item. The seven declared generic tool uses are accepted. Batch-5: def-trf-algebraic-space and def-sfb-stable-pointed-moduli-groupoids (via the def-trf-projective-bundle-morphism definition) are definitions, lem-trf-space-chartwise-etale-permanence is 03FT/03FU/03FV étale calculus, and lem-trf-unramified-maximal-ideal-residue-criterion is 02GF local algebra. Their trf/pod closures contain only generic lemmas, nothing from the trace formula or Poincaré duality, so no assumption leaf is needed. FIX: step 7 used the chart V_0 before step 8 defined it. In fixes/dag/nodes/sec-six-functors-basics/lem-sfb-unramified-diagonal-etale-atlas.json, V_0 = b^{-1}(U_0) = V x_F F_0 is now defined in step 7 as an étale chart by base change, and step 8 re-shrinks it. No uses or other fields changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedDiagonalEtaleAtlas",
+  "declaration": "CategoryTheory.unramifiedModuliDiagonal_iff_etaleAtlas",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedDiagonalEtaleAtlas.lean",
+  "statement": "theorem unramifiedModuliDiagonal_iff_etaleAtlas {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hstack : IsModuliStack F) (hdiag : HasAlgebraicSpaceDiagonal F) (hatlas : ∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z p ∧ SpaceMapIsSurjective Z T p ∧ ∀ (V : Over S) (b : yoneda.obj V ⟶ Z.obj.obj), AlgebraicSpace.IsEtale b → AlgebraicGeometry.Smooth ((yoneda.preimage (b ≫ p)).left)) : (HasUnramifiedModuliDiagonal F ↔ ∃ (W : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj W)) F), ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z p ∧ SpaceMapIsEtale Z T p ∧ SpaceMapIsSurjective Z T p) ∧ (HasUnramifiedModuliDiagonal F ↔ IsDeligneMumfordModuliStack F)",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01a66ee0d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "New module UnramifiedDiagonalEtaleAtlas states unramifiedModuliDiagonal_iff_etaleAtlas (sorry). Hypotheses IsModuliStack, HasAlgebraicSpaceDiagonal and an explicit smooth surjective representable scheme atlas (HasSpaceBaseChange + SpaceMapIsSurjective + Smooth on every étale chart) match the node's algebraic-stack convention. Conclusion: HasUnramifiedModuliDiagonal (relative over T ⨯ U in Over S, IsUnramified on étale charts) ↔ the étale-atlas existential, copied verbatim from the IsDeligneMumfordModuliStack body, and ↔ IsDeligneMumfordModuliStack. Matches Stacks 06N3 (1)-(3) with relative base 050N(1). No extra assumptions; edge cases (empty stack or base, any characteristic) are covered. Added stmt_dep def-sfb-open-moduli-substack is landed and owns HasUnramifiedModuliDiagonal (permitted). lean.statement verbatim; proof-only imports are the recorded modules of the proof deps; no existing smooth-atlas or algebraic-stack notion is duplicated; docstrings carry the source, blueprint tag and 11 proof steps; report has both sections. Advisory: proof step 1 docstring could cite def-trf-algebraic-space. No files changed, no compile."
+ }
+}

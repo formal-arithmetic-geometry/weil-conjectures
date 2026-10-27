@@ -1,0 +1,109 @@
+{
+ "id": "lem-sf-refinement-projection-proper-composition",
+ "kind": "statement",
+ "title": "Proper projection and the refinement compositor",
+ "statement": "For finite-type spaces over the fixed algebraic closure of a finite field, a prime l different from its characteristic, a finite extension E of Q_l, and positive level n+1, let c1,c2 compactify the same quasi-compact map f and let r refine c1 to c2. In the finite and simultaneous-system words of [def-sf-refinement-projection-words], Words.Composition holds: outer proper projection followed by the proper image of inner projection and comp at M tensor P_p1 L equals tensor(comp_M,id) followed by projection for p1. This holds for every unbounded M,L and every realization presentation. It does not involve the refinement mate gamma or either open tensor map.",
+ "stmt_deps": [
+  "def-sf-refinement-projection-words"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "composition/refinement sentence; explicit component calculation using Stacks 0B56 and 0DV0"
+ },
+ "proof": [
+  {
+   "text": "Construct the comparison for the composite left adjoint by composing the two tensor comparisons. Apply the proved rightAdjointProjectionMap_comp and rightAdjointProjectionMap_conjugate identities. Use naturality of the conjugate right-adjoint compositor to move the inverse pullback compositor inside the two pushforwards. Specialize tensor/composition coherence from ambientProperOpenPasting to the two actual ambient arrows, represented over the finite field base. Finally transport their composite along r.hom_g. Repeat with the curried actual system tensor comparison and the supplied system compositors.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-proper-open-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "composition/refinement sentence, proper composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula along composite adjunction and natural tensor map",
+   "results": "8 hits, including CategoryTheory.Adjunction.comp_counit_app and comp; none states the geometric normalized equations.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper open adjunction mate tensor identity and projection composition compatibility",
+   "results": "8 hits on general monoidal adjunction tensor maps and rigid mates, no matching normalized refinement equation.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap_(comp|conjugate)",
+   "results": "The search service returned 0 hits; local rg found the proved general rightAdjointProjectionMap_comp and rightAdjointProjectionMap_conjugate in WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat. These implement the categorical part of this proof.",
+   "date": "2026-10-25",
+   "verdict": "general tools available; no geometric normalized equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RefinementProjectionCounit",
+  "date": "2026-10-25",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition/refinement sentence: normalized inner proper/open square and outer proper projection pasting.",
+   "via": [
+    "lem-sf-refinement-projection-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RefinementProjectionProperComposition",
+  "file": "lean/Sheaf/SixFunctors/RefinementProjectionProperComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.RefinementProjection.refinementProjectionProperComposition",
+  "statement": "theorem refinementProjectionProperComposition\n    (F : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ)\n    {X Y : Spaces F} {f : X ⟶ Y} [QuasiCompact f.hom.left]\n    (c₁ c₂ : Compactification f.hom.left) (r : c₁.Refinement c₂) :\n    Words.Composition (finiteWords F\n      (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) r) ∧\n    ∀ (o : WeilConjectures.IntegralSystemRealization.Operations l E)\n      (z : WeilConjectures.IntegralSystemRealization.Realizations l E F o),\n      Words.Composition (WeilConjectures.IntegralSystemRealization.RefinementProjection.systemWords\n        l E F o z r)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": null,
+  "slopmaster2": null,
+  "mathlib": null
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-915b6",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T071105-L-3824606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-915b6",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T071105-L-3824606",
+  "kind": "interface",
+  "note": "independent cc review: item proof (Words.pasteNative from Local + proved Composition) against lem-sf-refinement-projection-counit and its plan; finiteComparison indexIso and finiteProjection presentation against change record (no users, item has 0 importers); new local-tensor sorry against plan step 2 and the pinned Compositors/ProperOpenCoherence; axioms on a scratch copy (sorryAx only from the local-tensor sorry and upstream ambientProperOpenPasting)"
+ }
+}

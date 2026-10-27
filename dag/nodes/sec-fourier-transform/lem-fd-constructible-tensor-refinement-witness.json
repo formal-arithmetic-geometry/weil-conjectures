@@ -1,0 +1,293 @@
+{
+ "id": "lem-fd-constructible-tensor-refinement-witness",
+ "kind": "statement",
+ "title": "Tensor trivializations on the fibre-product refinement of constructible stratifications",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a finite commutative ring and $A,B$ sheaves of modules over the constant ring sheaf $\\Lambda_X$ on the small etale site [def-weil-pbc-etale-sheaves]. Use the ordinary sheaf tensor [def-pur-sheaf-tensor-product] and module inverse image [prop-weil-pbc-inverse-image-modules-exact]. Let $(\\iota_k:Z_k\\to X)_{k<n}$ and $(\\kappa_l:W_l\\to X)_{l<m}$ be specified finite scheme stratifications [def-constructible-stratification] with constructible images [def-weil-constructible-subset], witnessing constructibility of $A$ and $B$ respectively [def-weil-pbc-etale-constructible-sheaf]. Thus $\\iota_k^{-1}A$ and $\\kappa_l^{-1}B$ are etale locally constant sheaves of finite $\\Lambda$-modules, with trivializations linear over the corresponding constant ring sheaves. Put $V_{k,l}=Z_k\\times_XW_l$ [def-pc-fibre-product], with projections $p_{k,l},q_{k,l}$ and $\\mu_{k,l}=\\iota_kp_{k,l}=\\kappa_lq_{k,l}$. Then $(\\mu_{k,l}:V_{k,l}\\to X)_{k<n,l<m}$ is a finite scheme stratification with constructible images $\\iota_k(Z_k)\\cap\\kappa_l(W_l)$. Both $p_{k,l}^{-1}\\iota_k^{-1}A$ and $q_{k,l}^{-1}\\kappa_l^{-1}B$ are finite locally constant as $\\Lambda_{V_{k,l}}$-module sheaves. There are canonical $\\Lambda_{V_{k,l}}$-linear isomorphisms, natural in $A,B$,\n$$\\mu_{k,l}^{-1}(A\\otimes_{\\Lambda_X}B)\\xrightarrow{\\sim}p_{k,l}^{-1}\\iota_k^{-1}A\\otimes_{\\Lambda_{V_{k,l}}}q_{k,l}^{-1}\\kappa_l^{-1}B.$$\nHere the coefficient rings are identified by the canonical constant-ring inverse-image maps, and the tensor isomorphisms are the ordinary module-pullback tensor comparisons. Their right-hand sides are finite locally constant module sheaves. Consequently these specified fibre-product strata witness constructibility of $A\\otimes_{\\Lambda_X}B$. Neither $A$ nor $B$ is assumed flat; no Noetherian or quasi-compact hypothesis on $X$ is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095I, lemma-tensor-product-constructible, common-refinement proof; explicit prescribed fibre-product strata and coefficient-linear tensor comparisons extracted from lem-fd-flat-constructible-tensor, returned proof steps 3-4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Add the assumed constructibility fields to the prescribed finite locally closed stratifications to obtain S-prime and T-prime. Their common refinement Stratification.inter has exactly the specified fibre-product domains and composite first-projection immersions, indexed by finProdFinEquiv. Compute each range using Pullback.range_fst and Set.image_preimage_eq_inter_range. Intersect constructible strata. The union is X by distributivity of intersections over unions; distinct pairs have a distinct coordinate, and disjointness in that coordinate implies disjointness of intersections.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095I, lemma-tensor-product-constructible, common-refinement proof; explicit prescribed fibre-product strata and coefficient-linear tensor comparisons extracted from lem-fd-flat-constructible-tensor, returned proof steps 3-4."
+   }
+  },
+  {
+   "text": "Apply the already proved IsFiniteLocallyConstantSheaf.upperStar, recorded as an additional declaration of prop-constructible-pullback, separately to each actual projection and the given finite locally constant restriction. This supplies the two required finite locally constant factors without translating to the general SheafOfModules encoding.",
+   "uses": [
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095I, lemma-tensor-product-constructible, common-refinement proof; explicit prescribed fibre-product strata and coefficient-linear tensor comparisons extracted from lem-fd-flat-constructible-tensor, returned proof steps 3-4."
+   }
+  },
+  {
+   "text": "Use the existing strong monoidal structure of module-valued etale upperStar. The defined comparison is its inverse tensorator followed by the tensor of the two upperStarComp components. OplaxMonoidal.delta_natural and NatTrans.tensor_naturality prove the asserted naturality, including the second composition comparison using pullback.condition. All these morphisms already lie in ModuleCat-valued sheaves.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095I, lemma-tensor-product-constructible, common-refinement proof; explicit prescribed fibre-product strata and coefficient-linear tensor comparisons extracted from lem-fd-flat-constructible-tensor, returned proof steps 3-4."
+   }
+  },
+  {
+   "text": "Apply IsLocallyConstantSheaf.tensorObj_part and IsFiniteSheaf.tensorObj_part to the two projection pullbacks. These proved source-library results supply local constancy and finite stalk generation, respectively. Assemble their fields into IsFiniteLocallyConstantSheaf for the tensor; no flatness is used.",
+   "uses": [
+    "lem-weil-pbc-flc-tensor-locally-constant-part",
+    "lem-weil-pbc-flc-tensor-finite-part"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095I, lemma-tensor-product-constructible, common-refinement proof; explicit prescribed fibre-product strata and coefficient-linear tensor comparisons extracted from lem-fd-flat-constructible-tensor, returned proof steps 3-4."
+   }
+  },
+  {
+   "text": "Transfer finite local constancy across the inverse of constructibleRefinementTensorIso using IsFiniteLocallyConstantSheaf.of_iso. This proves the asserted finite local constancy of the tensor restricted along each composite first projection.",
+   "uses": [
+    "lemma-constructible-iso-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095I, lemma-tensor-product-constructible, common-refinement proof; explicit prescribed fibre-product strata and coefficient-linear tensor comparisons extracted from lem-fd-flat-constructible-tensor, returned proof steps 3-4."
+   }
+  },
+  {
+   "text": "Use S-prime.inter T-prime as the witnessing stratification. Its restriction at index q is definitionally the composite first-projection restriction proved finite locally constant above at finProdFinEquiv.symm q. Apply the reverse direction of the first equivalence in finite_locally_constant_module_values_iff to obtain the required etale trivializing datum with finite module values. This is exactly IsConstructibleEtaleModuleSheaf.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095I, lemma-tensor-product-constructible, common-refinement proof; explicit prescribed fibre-product strata and coefficient-linear tensor comparisons extracted from lem-fd-flat-constructible-tensor, returned proof steps 3-4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-flc-tensor-locally-constant-part",
+  "lem-weil-pbc-flc-tensor-finite-part",
+  "lemma-constructible-iso-invariance",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "J9 Lean proof of Tag 095I via the existing fibre-product refinement, source-library finite locally constant pullback and tensor lemmas, and finite constant-value characterization. Canonical comparison naturality follows from Mathlib monoidal and natural-transformation naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(constructib.*tensor|tensor.*constructib|stratification.*tensor|tensor.*stratification)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian sheaf tensor, condensed monoidal structures and scheme fibre-product identities do not state module tensor trivializations on a prescribed common constructible stratification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian sheaf tensor, condensed monoidal structures and scheme fibre-product identities do not state module tensor trivializations on a prescribed common constructible stratification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of constructible etale module sheaves on a common refinement of finite stratifications",
+   "results": "8 hits: CategoryTheory.Sheaf.tensorProd_isSheaf, PiTensorProduct, PresheafOfModules.Monoidal.tensorHom, TensorProduct.directSumLeft, TensorProduct, TensorProduct.finsuppLeft, TensorProduct.prodLeft, TensorProduct.instModule",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian sheaf tensor, condensed monoidal structures and scheme fibre-product identities do not state module tensor trivializations on a prescribed common constructible stratification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two constructible sheaves of modules over a finite ring have finite locally constant tensor restrictions on the fibre product common refinement of their stratifications",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafCompHaus, LightCondMod.ofSheafLightProfinite, CompHausLike.LocallyConstantModule.functor, CondensedMod.ofSheafProfinite, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian sheaf tensor, condensed monoidal structures and scheme fibre-product identities do not state module tensor trivializations on a prescribed common constructible stratification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback to fibre product strata of a scheme commutes with module sheaf tensor and the resulting tensor is finite locally constant",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.pullbackSpecIso_hom_base",
+   "date": "2026-10-22",
+   "verdict": "no match: cartesian sheaf tensor, condensed monoidal structures and scheme fibre-product identities do not state module tensor trivializations on a prescribed common constructible stratification"
+  },
+  {
+   "tool": "grep",
+   "query": "(constructib.*tensor|tensor.*constructib|stratification.*tensor|tensor.*stratification)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern cartesian sheaf products, algebraic modules, or condensed monoidal structures; none states the prescribed scheme-stratum witness and module-linear comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of constructible etale module sheaves with specified common refinement stratification",
+   "results": "8 hits: CategoryTheory.Sheaf.tensorProd_isSheaf, TensorProduct.directSumLeft, PresheafOfModules.Monoidal.tensorHom, PiTensorProduct, TensorProduct.finsuppLeft, IsLocalization.moduleLid, TensorProduct, TensorProduct.prodLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern cartesian sheaf products, algebraic modules, or condensed monoidal structures; none states the prescribed scheme-stratum witness and module-linear comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern cartesian sheaf products, algebraic modules, or condensed monoidal structures; none states the prescribed scheme-stratum witness and module-linear comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible etale module sheaves tensor product restricted to fibre product strata is finite locally constant",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CompHausLike.LocallyConstantModule.functor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Etale.exists_subalgebra_fg, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern cartesian sheaf products, algebraic modules, or condensed monoidal structures; none states the prescribed scheme-stratum witness and module-linear comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme stratification refined by fibre products trivializes tensor products of finite locally constant module sheaves naturally",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern cartesian sheaf products, algebraic modules, or condensed monoidal structures; none states the prescribed scheme-stratum witness and module-linear comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-flat-constructible-tensor",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-prop-well-defined",
+ "blueprint": {
+  "from": {
+   "node": "thm-fd-transform-well-defined",
+   "place": "Proof first sentence: bounded constructibility after tensoring with the kernel; the explicit finite common-stratification and ordinary tensor argument in lem-fd-flat-constructible-tensor steps 3-4.",
+   "via": [
+    "lem-fd-flat-constructible-tensor"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-constructible-tensor-refinement-witness",
+  "worker": "stage1",
+  "summary": "Split into six explicit steps using only existing nodes: prescribed fibre-product refinement, coefficient-linear composition, finite local-model pullbacks, natural ordinary tensor comparison, tensor local models and elementary constructibility assembly. Statement and inherited fields retained; no new nodes. Added actual logged Mathlib searches and checked every cited statement.",
+  "blueprint": "Realizes thm-fd-transform-well-defined proof first sentence: constructibility of the tensor with the kernel, via the ordinary finite-coefficient common-stratification argument extracted in lem-fd-flat-constructible-tensor. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constructible-stratification-intersection",
+    "why": "Gives the prescribed scheme-theoretic fibre-product common refinement; no node of this Fourier unit states the geometry of finite stratifications."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Identifies the constant coefficient rings and module inverse image with module pullback, including units; generic coefficient bookkeeping for the tensor route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Provides the canonical adjunction-unit composition comparison and associative fibre-product direct images; generic functoriality, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sfb-finite-type-constant-module-pullback",
+    "why": "Preserves the finite module models under arbitrary site pullback; generic local-model tool needed on the refinement projections."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Supplies continuity and covering preservation of the base-change site functors and common trivializing coverings."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Supplies the finite-limit hypotheses of the generic local-model pullback tool."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Supplies module-valued constant pullback comparisons for local models; a generic coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Supplies the natural ordinary module-pullback tensor isomorphism over the actual coefficient ring sheaves."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Identifies the tensor of constant module sheaves with the constant tensor module; avoids assuming a constant-sheaf tensor theorem from a definition."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Identifies inverse image along an etale covering map with restriction to the localized site (abelian, made linear in step 5), which the constructibility definition uses; generic site bookkeeping."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-f666eb8a2",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-f666eb8a2 (reviewer sub-agent of L); spot-checked: Read the item in full (no new nodes; statement unchanged), the statement of every cited node, Stacks etale-cohomology.tex l.11991 Tag 095I (common refinement, pullback commutes with tensor, then the locally-constant tensor lemma), and the unit sk-prop-well-defined and parent lem-fd-flat-constructible-tensor step 2. The item is still unsplit in live and side-live, and there is no repair note or dropped entry. The mathematics is correct. Step 1 is the intersection node's actual statement: fibre-product strata, no E3 image factorization. Step 2: the linear lift of the composition isomorphism is valid, because the constant-scalar argument makes d linear and the unit uniqueness of lem-weil-pbc-inverse-image-composition together with prop (3) identifies the mate with c_{u,v}. Step 3: every hypothesis of lem-sfb-finite-type-constant-module-pullback is supplied (continuous, finite-limit and covering-preserving base change, rho=gamma, c_M from lemma-constructible-pullback-constant in Lambda-modules, b=id). Step 4 is 03EL with the ring isomorphism c. Step 5 uses 0GMW on the constant presheaf ring Lambda and the constant modules M,N, whose presheaf tensor is the constant M⊗N; finiteness via a quotient of Lambda^{MxN}. Edge cases checked: empty X and empty strata, Lambda=0, Z/4 with Z/2 models (no flatness used), non-quasi-compact X, non-reduced strata. Three small C1/C4 gaps repaired in fixes/dag/nodes/sec-fourier-transform/lem-fd-constructible-tensor-refinement-witness.json. (1) Step 3 used lem-sfb-finite-type-constant-module-pullback (covering sieve at every object) against def (b) (covering family of the final object) with no conversion; added it, citing def-weil-pbc-finite-type-locally-constant-module-sheaf, def-weil-pbc-etale-site and def-weil-pbc-etale-constructible-sheaf. (2) Step 5 said the composite cover {U_i x_V T_j -> V} came from base-change-continuous(1) alone; added composition of coverings via def-weil-pbc-etale-site. (3) Step 5 identified restriction to covering members (def (b)) with etale inverse image (steps 4-5, pullback-constant) without citation; cited lem-weil-pbc-etale-inverse-image-restriction(1) with a one-line Lambda-linearity argument by naturality, and added it to tool_uses (unit sk-thm-p1, the same unit as the already-declared pullback-constant tool). proof_deps recomputed; edited steps are under 2000 characters. Declared tool uses accepted as generic bookkeeping. Maintainer note: lem-pod-lisse-tensor-and-scalar-extension(2) already states the lisse tensor local formula and could serve step 5; not a fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleTensorRefinementWitness",
+  "declaration": "AlgebraicGeometry.Scheme.constructible_tensor_refinement_witness",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constructible_tensor_refinement_witness",
+   "AlgebraicGeometry.Scheme.constructibleRefinementTensorIso",
+   "AlgebraicGeometry.Scheme.constructibleRefinementTensorIso_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleTensorRefinementWitness.lean",
+  "statement": "theorem constructible_tensor_refinement_witness {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (A B : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (S T : FiniteLocallyClosedStratification X) (hS : ∀ k, Topology.IsConstructible (S.stratum k)) (hT : ∀ l, Topology.IsConstructible (T.stratum l)) (hA : ∀ k, IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (S.immersion k)).obj A)) (hB : ∀ l, IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (T.immersion l)).obj B)) : (∀ (k : Fin S.n) (l : Fin T.n), IsImmersion (pullback.fst (S.immersion k) (T.immersion l) ≫ S.immersion k) ∧ Set.range (pullback.fst (S.immersion k) (T.immersion l) ≫ S.immersion k) = S.stratum k ∩ T.stratum l ∧ Topology.IsConstructible (S.stratum k ∩ T.stratum l)) ∧ (⋃ (k : Fin S.n) (l : Fin T.n), S.stratum k ∩ T.stratum l) = Set.univ ∧ Pairwise (Function.onFun Disjoint (fun kl : Fin S.n × Fin T.n ↦ S.stratum kl.1 ∩ T.stratum kl.2)) ∧ (∀ (k : Fin S.n) (l : Fin T.n), IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (pullback.fst (S.immersion k) (T.immersion l))).obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) (S.immersion k)).obj A)) ∧ IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (pullback.snd (S.immersion k) (T.immersion l))).obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) (T.immersion l)).obj B)) ∧ IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (pullback.fst (S.immersion k) (T.immersion l))).obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) (S.immersion k)).obj A) ⊗ (Etale.upperStar (ModuleCat.{u + 1} Λ) (pullback.snd (S.immersion k) (T.immersion l))).obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) (T.immersion l)).obj B)) ∧ IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (pullback.fst (S.immersion k) (T.immersion l) ≫ S.immersion k)).obj (A ⊗ B))) ∧ IsConstructibleEtaleModuleSheaf (A ⊗ B)",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing ModuleCat-valued small-etale encoding. The specified fibre-product projections occur literally throughout. The canonical linear comparison is constructed from the monoidal pullback tensorator and adjunction composition isomorphisms, with a separate naturality statement. Finite local constancy uses IsFiniteLocallyConstantSheaf; its equivalence with finite constant-module trivializations over a finite ring is finite_locally_constant_module_values_iff."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f64b8699",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Clause-by-clause match of node and Stacks 095I: actual pullback/fst/snd strata with mu = fst ≫ ι; IsImmersion, range = intersection, constructible, cover, pairwise disjoint; finite local constancy of both pullbacks, their tensor and mu^*(A⊗B); IsConstructibleEtaleModuleSheaf (A⊗B). Canonical iso constructibleRefinementTensorIso = μIso.symm ≪≫ tensorIso of Etale.upperStarComp (second via pullback.condition), real data; naturality theorem for arbitrary a, b. hA/hB IsFiniteLocallyConstantSheaf ≡ the node's finite-value clause via proved finite_locally_constant_module_values_iff. Λ : Type (u+1) is fixed by the recorded dependency. No flat/Noetherian/qc hypothesis; edge cases (n=0, empty strata, Λ=0, non-flat, non-qc) fine. Only the lean field changed; statement verbatim; docstrings carry all 6 steps; only sorry. Advisories: IsFiniteLocallyConstantSheaf owner (def-constructible-finite-locally-constant) not in stmt_deps; ModuleCat sheaf tensor vs the SheafOfModules record on def-pur-sheaf-tensor-product; possibly redundant CochainTensorUniverses import. No compile per instruction; worker reported clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261022T145618-L-2024489",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

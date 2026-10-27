@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle, extracting the common q* K coefficient and integrating the remaining kernel factor."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCoordinateTraceContractions",
+  "date": "2026-10-25",
+  "group": "G5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient.",
+   "via": [
+    "lem-sfb-etale-coordinate-trace-contractions",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "id": "lem-sfb-etale-second-coordinate-contraction",
+ "title": "Second coordinate contraction for a coefficient of identity self symmetry",
+ "statement": "Let A be a finite commutative ring, f:X→Y proper, W=X×_Y X with projections p1,p2, F=Rf*, and L∈D(Y_et,A) with canonical signed self symmetry swap(L,L)=identity. Let t:Ff*L→A_Y and t2:Rp2*p2*f*L→A_X satisfy exchange2(f*L), then Rp2*coordinate(L), then t2 = f*t followed by the canonical unit comparison. With the specified H, comparison, evaluation and coordinateH of [def-sfb-etale-coordinate-trace-data], for every K∈D(Y_et,A) one has comparison(HK), then H(evaluation(K)), equal to Rp2* of coordinateH tensor identity, then inverse orderedProjection(p2,HK,p2*f*L), then identity tensor t2, then the right unitor. No t1 or first-coordinate identity is assumed.",
+ "stmt_deps": [
+  "def-sfb-etale-coordinate-trace-data"
+ ],
+ "proof": [
+  {
+   "text": "apply lem-weil-pbc-ringed-exchange-tensor-coherence to the self-product square,\ntransported through the normalized ringed/module-sheaf comparisons. Invert its square:\nthe pullback of inverse f projection, followed by inverse exchange, is inverse p2\nprojection followed by the tensor pullback comparison and inverse exchange on f*L.\nTensor with f*L. Use lem-sfb-ringed-projection-tensor-composition to reassociate the\ntwo tensor extractions. The coordinate comparison on HK is the pullback tensor\ncomparison conjugated by fp1=fp2, exactly coordinateH. Transport hL by the braided\npullback comparisons to see that interchanging the two copies of L_W is identity.\nNaturality of symmetry with respect to the trace moves that trace onto the remaining\nkernel factor. Substitute ht, which identifies the pulled-back trace with the p2 trace\nunder exchange and coordinate. The normalized tensor unit comparison and right\nunitors then give precisely the displayed formula. This step neither uses t1 nor\nthe first coordinate equation and makes no reference to a diagonal class.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Second triangle, extracting the common q* K coefficient and integrating the remaining kernel factor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient. Expanded from the recorded parent proof with the stated ringed coherence inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Kunneth map on a self fibre product has two factorizations by projection formula and proper base change",
+   "results": "IsProperMap.prodMap, HomologicalComplex.biprodXIso_hom_fst, Prod.comul_comp_fst, IsTensorProduct.map_mul, AddHom.prodMap_def, Pi.comul_comp_proj, CochainComplex.cm5b.fac, ContinuousAffineMap.prodMap_toAffineMap",
+   "date": "2026-10-25",
+   "verdict": "No matching projection/exchange identity on unbounded etale module derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection exchange trace contraction for an object whose tensor self braiding is the identity",
+   "results": "MonoidalCategory.tensorμ_tensorδ, tensorδ_tensorμ, BraidedCategory.tensorLeftIsoTensorRight, Dial.symmetry, SymmetricCategory.symmetry, CartesianMonoidalCategory.tensorδ_snd, MonoidalCategory.externalProductSwap, BraidedCategory.exactPairing_swap",
+   "date": "2026-10-25",
+   "verdict": "Generic symmetric tensor constraints only; no canonical etale projection/exchange contraction."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(trace|kunneth)|exchange.*(tensor|trace)",
+   "results": "Mathlib hits concern monoidal whisker exchange and tactic projection diagnostics; no derived sheaf comparison theorem. Local library has ringedKunnethFactorizations and ringedExchangeTensorCoherence on SheafOfModules, requiring transport to the ModuleCat-valued etale interface.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of these specialized canonical-map equations."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSecondCoordinateContraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSecondCoordinateContraction.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoordinateTrace.secondCoordinateContraction",
+  "statement": "theorem secondCoordinateContraction [Finite A] {X Y : Scheme.{u}}\n    (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (hL : (swap A Y L L).hom = 𝟙 _)\n    (t : (push A f).obj ((pull A f).obj L) ⟶ constantComplex A Y)\n    (t2 : (push A (pullback.snd f f)).obj\n        ((pull A (pullback.snd f f)).obj ((pull A f).obj L)) ⟶ constantComplex A X)\n    (ht : (exchange2 A f ((pull A f).obj L)).hom ≫\n        (push A (pullback.snd f f)).map (coordinate A f L).hom ≫ t2 =\n      (pull A f).map t ≫ (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom) :\n    ∀ K : DerivedCategoryModule A Y,\n        (comparison A f L ((H A f L).obj K)).hom ≫\n            (H A f L).map\n              (evaluation A f L t K) =\n          (push A (pullback.snd f f)).map\n              (((derivedTensor (ModuleCat.{u + 1} A) (pullback f f)).map\n                (coordinateH A f L K).hom).app\n                  ((pull A (pullback.snd f f)).obj ((pull A f).obj L))) ≫\n            (orderedProjectionIso A (pullback.snd f f) ((H A f L).obj K)\n              ((pull A (pullback.snd f f)).obj ((pull A f).obj L))).inv ≫\n                ((derivedTensor (ModuleCat.{u + 1} A) X).obj\n                  ((H A f L).obj K)).map t2 ≫\n                  (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X\n                    ((H A f L).obj K)).hom",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7a53",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T123006-L-1822645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7a53",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T123006-L-1822645",
+  "kind": "interface",
+  "note": "independent cc review: contractions signature and node lean.statement vs clone (identical); 14 extracted defs vs clone item module (verbatim apart from blueprint tags, item re-exports Data); three new sorried statements vs parent node steps 1-6 (true, needed, not restatements); projectionTraceNormalization axioms (propext/choice/Quot.sound)"
+ }
+}

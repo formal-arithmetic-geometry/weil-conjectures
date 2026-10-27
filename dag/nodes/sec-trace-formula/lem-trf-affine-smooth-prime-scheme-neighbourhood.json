@@ -1,0 +1,239 @@
+{
+ "id": "lem-trf-affine-smooth-prime-scheme-neighbourhood",
+ "kind": "statement",
+ "title": "A ring map smooth at a chart prime gives a principal smooth scheme neighbourhood",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. Let $W=\\operatorname{Spec}A\\subseteq X$ and $V=\\operatorname{Spec}R\\subseteq S$ be affine open subschemes [def-weil-affine-spectrum], with $f(W)\\subseteq V$, and let $\\varphi:R\\to A$ be the induced ring map. Let $x\\in W$ correspond to a prime ideal $\\mathfrak q\\subset A$. Suppose $\\varphi$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal], meaning that some $g_0\\in A\\setminus\\mathfrak q$ makes $R\\to A_{g_0}$ a smooth ring map [def-weil-pbc-smooth-ring-map]. Then there exists $g\\in A\\setminus\\mathfrak q$ such that $R\\to A_g$ is smooth and, for the principal open $W_g=D(g)\\subset W$ canonically identified with $\\operatorname{Spec}A_g$, the restriction $f|_{W_g}:W_g\\to S$ is smooth [def-sbc-smooth-morphisms]. In particular $W_g$ is an open neighbourhood of $x$ in $X$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02H6, lemma-smooth-formally-smooth, affine comparison and infinitesimal lifting criterion, applied to a principal affine source neighbourhood and its original open target; the final affine-to-scheme passage in the proof of Morphisms lemma-smooth-at-point."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of smoothness at $\\mathfrak q$ [def-weil-pbc-singular-ideal], choose the given witness $g=g_0\\notin\\mathfrak q$ with $R\\to A_g$ smooth. No finite-presentation hypothesis on $R\\to A$ is needed: smoothness is assumed only after localization.",
+   "uses": [
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TB, definition-smooth-at-prime"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-principal-localization-open-immersion], the localization map induces an open immersion $\\operatorname{Spec}A_g\\to W$ with image $W_g=D(g)$. Thus it gives the stated canonical identification with $W_g$. Since $g\\notin\\mathfrak q$, $x\\in D(g)$ by the definition of a principal open. This is open in $X$ because $W$ is open in $X$. By [lem-weil-pbc-morphism-factors-through-open-subscheme], $f|_{W_g}$ factors uniquely as $h:W_g\\to V$ followed by $V\\hookrightarrow S$. Under the affine identifications, $h$ is $\\operatorname{Spec}(R\\to A_g)$: [def-weil-affine-spectrum] identifies $W\\to V$ with $\\operatorname{Spec}\\varphi$, and functoriality identifies its composite with the localization morphism with the spectrum of $R\\to A\\to A_g$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I3 (lemma-standard-open-affine), 01HI (lemma-restrict-map-to-opens), and 01I2 (lemma-category-affine-schemes)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] to the smooth map $R\\to A_g$. Its spectrum is smooth in the scheme sense of the item. Clause (c) of [lem-weil-pbc-smooth-restrict-open-subschemes], applied to the canonical affine identifications in step 2, therefore makes $h:W_g\\to V$ smooth.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H6, lemma-smooth-formally-smooth, affine comparison; Morphisms Tag 01V6"
+   }
+  },
+  {
+   "text": "Apply clause (b) of [lem-weil-pbc-smooth-restrict-open-subschemes] with the original $f:X\\to S$, $U=W_g$ and the original target open $V$. Its hypotheses hold by step 2, and its restricted map $f_{U,V}=h$ is smooth by step 3. It follows that $f|_{W_g}:W_g\\to S$ is smooth. Together with $g\\notin\\mathfrak q$, smoothness of $R\\to A_g$, and the neighbourhood assertion in step 2, this gives every required clause.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VC (lemma-open-immersion-smooth) and 01VA (lemma-composition-smooth), final affine-to-original-target passage of lemma-smooth-at-point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "lemma-smooth-at-point, affine-to-scheme neighbourhood passage, using Tags 01I3, 01V6, 01VC, 01VA and More on Morphisms Tag 02H6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_notMem_smooth|smoothLocus_comp_of_isOpenImmersion|isSmooth_iff",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Locus.lean.  Read Mathlib/RingTheory/Smooth/Locus.lean:150-157 and Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:249-305,338-345. The ring lemma only extracts a smooth localization under finite presentation, and the scheme lemmas use formal stalk smoothness or a globally smooth morphism; the statement also requires affine scheme/ring comparison and postcomposition with the open target. The agreement of the formal-lifting scheme notion with the ring notion is a separate DAG theorem, so this is not a one-line Mathlib specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a ring map between affine charts is smooth at a prime then the scheme morphism is smooth on an open neighbourhood of the point",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmoothOfRelativeDimension.mk, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, RingHom.Smooth.  Read Mathlib/RingTheory/Smooth/Locus.lean:150-157 and Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:249-305,338-345. The ring lemma only extracts a smooth localization under finite presentation, and the scheme lemmas use formal stalk smoothness or a globally smooth morphism; the statement also requires affine scheme/ring comparison and postcomposition with the open target. The agreement of the formal-lifting scheme notion with the ring notion is a separate DAG theorem, so this is not a one-line Mathlib specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt.exists_notMem_smooth",
+   "results": "1 hits: Algebra.IsSmoothAt.exists_notMem_smooth.  Read Mathlib/RingTheory/Smooth/Locus.lean:150-157 and Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:249-305,338-345. The ring lemma only extracts a smooth localization under finite presentation, and the scheme lemmas use formal stalk smoothness or a globally smooth morphism; the statement also requires affine scheme/ring comparison and postcomposition with the open target. The agreement of the formal-lifting scheme notion with the ring notion is a separate DAG theorem, so this is not a one-line Mathlib specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a ring map between affine charts is smooth at a prime then the scheme morphism is smooth on an open neighbourhood of the point",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, RingHom.Smooth.propertyIsLocal, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension.  Read Mathlib/RingTheory/Smooth/Locus.lean:150-157 and Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:249-305,338-345. The ring lemma only extracts a smooth localization under finite presentation, and the scheme lemmas use formal stalk smoothness or a globally smooth morphism; the statement also requires affine scheme/ring comparison and postcomposition with the open target. The agreement of the formal-lifting scheme notion with the ring notion is a separate DAG theorem, so this is not a one-line Mathlib specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSmoothAt|exists_notMem_smooth",
+   "results": "12 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean.  Read Mathlib/RingTheory/Smooth/Locus.lean:150-157 and Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:249-305,338-345. The ring lemma only extracts a smooth localization under finite presentation, and the scheme lemmas use formal stalk smoothness or a globally smooth morphism; the statement also requires affine scheme/ring comparison and postcomposition with the open target. The agreement of the formal-lifting scheme notion with the ring notion is a separate DAG theorem, so this is not a one-line Mathlib specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness of a ring map after principal localization gives a smooth open neighbourhood for a scheme morphism whose target affine chart is open",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.basicOpen_subset_smoothLocus_iff_smooth, Algebra.basicOpen_subset_smoothLocus_iff, RingHom.Smooth.ofLocalizationSpanTarget, RingHom.Smooth.holdsForLocalizationAway.  Read Mathlib/RingTheory/Smooth/Locus.lean:150-157 and Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:249-305,338-345. The ring lemma only extracts a smooth localization under finite presentation, and the scheme lemmas use formal stalk smoothness or a globally smooth morphism; the statement also requires affine scheme/ring comparison and postcomposition with the open target. The agreement of the formal-lifting scheme notion with the ring notion is a separate DAG theorem, so this is not a one-line Mathlib specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Spec_iff|smooth.*[Ss]pec|[Ss]pec.*smooth|isSmooth_iff",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean. Read Smooth/Locus.lean:93-97,150-157, Smooth.lean:62-76, and RingHomProperties.lean:360-364. Ring smooth-locus hits require finite presentation of A, which the item does not assume. Spec_iff gives only the affine comparison; the full item also needs the principal-open identification and open-target composition. The scheme notion is the formal-lifting notion, covered by the existing comparison node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth ring localization in affine charts gives a smooth open neighbourhood of a point of a scheme",
+   "results": "8 hits: Algebra.Smooth.of_isLocalization_Away, Algebra.IsStandardSmooth.localization_away, RingHom.Smooth.holdsForLocalizationAway, Algebra.FormallySmooth.of_isLocalization, Algebra.basicOpen_subset_smoothLocus_iff_smooth, RingHom.Smooth.ofLocalizationSpanTarget, Algebra.FormallySmooth.localization_base, Algebra.IsStandardSmoothOfRelativeDimension.localization_away. Read Smooth/Locus.lean:93-97,150-157, Smooth.lean:62-76, and RingHomProperties.lean:360-364. Ring smooth-locus hits require finite presentation of A, which the item does not assume. Spec_iff gives only the affine comparison; the full item also needs the principal-open identification and open-target composition. The scheme notion is the formal-lifting notion, covered by the existing comparison node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.Spec.map",
+   "results": "0 hits: . Read Smooth/Locus.lean:93-97,150-157, Smooth.lean:62-76, and RingHomProperties.lean:360-364. Ring smooth-locus hits require finite presentation of A, which the item does not assume. Spec_iff gives only the affine comparison; the full item also needs the principal-open identification and open-target composition. The scheme notion is the formal-lifting notion, covered by the existing comparison node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth localization at an element outside a prime in an affine chart gives a principal open neighbourhood smooth over the original scheme target",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.basicOpen_subset_smoothLocus_iff_smooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.basicOpen_subset_smoothLocus_iff, RingHom.Smooth.holdsForLocalizationAway. Read Smooth/Locus.lean:93-97,150-157, Smooth.lean:62-76, and RingHomProperties.lean:360-364. Ring smooth-locus hits require finite presentation of A, which the item does not assume. Spec_iff gives only the affine comparison; the full item also needs the principal-open identification and open-target composition. The scheme notion is the formal-lifting notion, covered by the existing comparison node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_notMem_smooth|basicOpen_subset_smoothLocus_iff|IsSmoothAtPrime",
+   "results": "6 hits: Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean. Read Smooth/Locus.lean:93-97,150-157, Smooth.lean:62-76, and RingHomProperties.lean:360-364. Ring smooth-locus hits require finite presentation of A, which the item does not assume. Spec_iff gives only the affine comparison; the full item also needs the principal-open identification and open-target composition. The scheme notion is the formal-lifting notion, covered by the existing comparison node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If R to A_g is smooth and g avoids q then D(g) is smooth over a scheme containing Spec R as an open subscheme",
+   "results": "8 hits: Algebra.basicOpen_subset_smoothLocus_iff_smooth, Algebra.basicOpen_subset_smoothLocus_iff, RingHom.Smooth.holdsForLocalizationAway, Algebra.IsSmoothAt.exists_notMem_smooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, RingHom.isStandardSmooth_holdsForLocalizationAway, Algebra.smoothLocus. Read Smooth/Locus.lean:93-97,150-157, Smooth.lean:62-76, and RingHomProperties.lean:360-364. Ring smooth-locus hits require finite presentation of A, which the item does not assume. Spec_iff gives only the affine comparison; the full item also needs the principal-open identification and open-target composition. The scheme notion is the formal-lifting notion, covered by the existing comparison node.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-at-point-fibre-criterion",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), inherited semistable-alteration/nearby-cycle branch, via the 01V9 input to lem-trf-generic-fibre-points-smooth: returned item step 5 and the final localization choice of step 4, affine smooth principal localization to a neighbourhood smooth over the original target.",
+   "via": [
+    "lem-trf-smooth-at-point-fibre-criterion",
+    "lem-trf-generic-fibre-points-smooth",
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-smooth-prime-scheme-neighbourhood",
+  "worker": "stage1",
+  "summary": "Kept the statement and its notions unchanged. Use the witness already present in smoothness at a prime, identify its principal open by 01I3, apply the existing affine ring/scheme smoothness comparison, then the existing open-target composition lemma. No new nodes: all non-elementary inputs already exist. In particular, no finite presentation of the original chart map is assumed.",
+  "blueprint": "Inherited local geometric smooth-neighbourhood input on the semistable-alteration/nearby-cycle branch of lem-trf-local-term-locality, through lem-trf-smooth-at-point-fibre-criterion: final affine-to-original-target step. The current ancestor statement is contracting local terms, not another statement of this affine tool.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine comparison for the smooth ring map R to A_g; the trace-formula unit has no comparison of the formal-lifting scheme notion with ring smoothness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-ff3685960",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-ff3685960 (reviewer sub-agent of L); spot-checked: I read the item and all 9 nodes it cites; there are no new nodes and no repair note, and the statement is unchanged. Step 1 is the 00TB witness (algebra.tex 37511), taken straight from the definition in def-weil-pbc-singular-ideal; it is correctly marked elementary. Step 2 uses 01I3 (lem-weil-pbc-principal-localization-open-immersion) together with def-weil-open-immersion to identify Spec A_g with the open subscheme D(g). It then factors f|_{W_g} through V by 01HI and shows h∘u = Spec(R→A_g) by def-weil-affine-spectrum. Step 3 applies the 02H6/01V6 comparison (lem-weil-pbc-smooth-ring-map-iff-smooth-affine), which holds for arbitrary rings, so no finite presentation of R→A is needed. It then uses clause (c) of lem-weil-pbc-smooth-restrict-open-subschemes, with the square from step 2, to make h smooth. Step 4 uses clause (b) of the same node to get f∘j_{W_g} smooth; clause (a) would have been wrong here, since it needs f itself smooth. Edge cases checked: g=1, nilpotent g, A=0, and f not quasi-compact. The citer lem-trf-smooth-at-point-fibre-criterion step 5 uses exactly this conclusion. Tool use of the sk-thm-p1 comparison node is accepted: it is generic, and no trace-formula node supplies it. The recorded Mathlib searches cover all three kinds, and I agree there is no leaf because Mathlib's smooth locus needs finite presentation and the comparison with the formal-lifting notion is a theorem. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSmoothPrimeSchemeNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_principal_open_smooth_of_isSmoothAtPrime",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSmoothPrimeSchemeNeighbourhood.lean",
+  "statement": "theorem exists_principal_open_smooth_of_isSmoothAtPrime {X S : Scheme.{u}} (f : X ⟶ S) {R A : Type u} [CommRing R] [CommRing A] [Algebra R A] (iW : Spec (CommRingCat.of A) ⟶ X) [IsOpenImmersion iW] (iV : Spec (CommRingCat.of R) ⟶ S) [IsOpenImmersion iV] (hchart : iW ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R A)) ≫ iV) (q : PrimeSpectrum A) (hsmooth : Algebra.IsSmoothAtPrime R q) : ∃ g : A, g ∉ q.asIdeal ∧ Algebra.Smooth R (Localization.Away g) ∧ Smooth ((iW ''ᵁ PrimeSpectrum.basicOpen g).ι ≫ f) ∧ iW q ∈ iW ''ᵁ PrimeSpectrum.basicOpen g",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32d8b9c14",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Lean exists_principal_open_smooth_of_isSmoothAtPrime matches the node clause by clause. Charts are open immersions iW/iV from Spec A/Spec R. hchart iW≫f = Spec.map(algebraMap)≫iV encodes f(W)⊆V and pins the induced φ (iV mono, Spec fully faithful). The hypothesis is the recorded Algebra.IsSmoothAtPrime, whose definition (∃ g∉q, Smooth R A_g; checked in SingularIdeal.lean:28) is the node's notion. The conclusion gives g∉q, Algebra.Smooth R (Localization.Away g), Smooth ((iW ''ᵁ basicOpen g).ι ≫ f) over the original S, and iW q in that open. No FP/Noetherian/global-smoothness hypothesis; single universe u, natural for these rings. Edge cases A=0 (vacuous), g nilpotent, g=1, iV non-surjective all agree with the node. Records: stmt_deps unchanged and sufficient, lean.statement verbatim in the file, source and blueprint docstrings present with the 4 proof steps, proof sorry, no definitions. The report has Worker report and Second reading by Q27 sections. Not compiled (no file changed); worker's compile reported clean. No findings."
+ }
+}

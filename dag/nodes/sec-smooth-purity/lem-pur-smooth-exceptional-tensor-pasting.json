@@ -1,0 +1,352 @@
+{
+ "id": "lem-pur-smooth-exceptional-tensor-pasting",
+ "kind": "statement",
+ "title": "Smooth exceptional base-change mates and tensor-composition pasting",
+ "statement": "Fix the finite coefficient datum [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, $E/\\mathbf Q_\\ell$ finite with uniformizer $\\varpi_E$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$, $n\\geq1$. All schemes are finite-type $k$-schemes; absolute separatedness is not assumed. All morphisms below are separated and of finite type [def-weil-scheme-morphism-properties]. Every smooth morphism below is assumed to have a pure relative dimension $d_h\\geq0$. Work in the bounded constructible finite-Tor categories [def-weil-finite-tor-amplitude] on the small pro-etale sites [def-weil-pbc-proetale-site], with the derived operations [def-weil-derived-pullback-tensor-hom] and constructible exceptional inverse images [def-weil-exceptional-inverse-image]. Write $\\omega_h=Rh^!\\Lambda$, take $c_{v,u}:R(vu)^!\\simeq Ru^!Rv^!$ to be the specified adjunction conjugate of compact-support composition [def-pur-finite-exceptional-composition], and take $\\theta_{h,M}$ and $\\beta_{h,v}$ to be the specified counit transposes [def-pur-co-smoothness]. For composable smooth maps [def-sbc-smooth-morphisms] put $\\sigma_{u,v}=c_{v,u,\\Lambda}^{-1}\\theta_{u,\\omega_v}\\mathrm{sym}$. All pullback compositions, tensor constraints and unit comparisons below are the canonical derived ones [lem-weil-pbc-proetale-derived-pullback-composition, lem-weil-pbc-ringed-topoi-derived-tensor-pullback].\nFor a Cartesian square with smooth vertical maps $h:X\\to Y$, $h':X'\\to Y'$ and horizontal maps $u:X'\\to X$, $v:Y'\\to Y$, define\n$$B_{h,v,N}:Lu^*Rh^!N\\longrightarrow Rh'^!Lv^*N$$\nas the adjunct of $Lv^*\\varepsilon_{h,N}\\circ\\operatorname{Ex}_!^{-1}$, with the transported compact-support exchange, that is, the base-change morphism $b_{v,N}$ of [pur9-cs-def-bc]; $N\\in D^b_{ctf}(Y,\\Lambda)$. Its unit value is $\\beta_{h,v}$, and it is invertible. For a further Cartesian base change $w:Y''\\to Y'$ with upper arrow $u':X''\\to X'$, the identity\n$$B_{h,vw,N}=B_{h',w,Lv^*N}\\circ Lu'^*B_{h,v,N}$$\nholds, including the identity-base-change normalization. Moreover\n$$B_{h,v,N}\\circ Lu^*\\theta_{h,N}=\\theta_{h',Lv^*N}(1\\otimes\\beta_{h,v}).$$\nLet $X\\xrightarrow fY\\xrightarrow gZ$ and $X'\\xrightarrow aY'\\xrightarrow bZ'$ be smooth towers with a Cartesian square for each pair $(f,a)$ and $(g,b)$ and vertical comparison arrows $u:X'\\to X$, $v:Y'\\to Y$, $w:Z'\\to Z$. Then, for $N\\in D^b_{ctf}(Z,\\Lambda)$,\n$$c_{b,a,Lw^*N}B_{gf,w,N}=Ra^!(B_{g,w,N})B_{f,v,Rg^!N}Lu^*c_{g,f,N}.$$\nIn particular, with $A=\\beta_{f,v}$, $B=\\beta_{g,w}$ and $D=\\beta_{gf,w}$,\n$$D\\,Lu^*\\sigma_{f,g}=\\sigma_{a,b}(A\\otimes La^*B).$$\nThe tensor and pullback reassociations in these equations agree with either order of canonical reassociation on flat-term K-flat representatives; this includes symmetry, identity and the threefold pullback comparison. No orientation of any $\\omega$ is used.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, remaining smooth-base-change constituents: horizontal/vertical counit-mate pasting and compatibility with the tensor map (old item steps 2-3); agent-written refinement of the blueprint argument"
+ },
+ "stmt_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-proetale-site",
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-finite-exceptional-composition",
+  "def-pur-co-smoothness",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-cbc-exchange-map",
+  "def-weil-pbc-cartesian-square",
+  "pur9-cs-def-bc"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field gives locally Noetherian schemes; quasi-compactness of the structural morphisms gives compactness, hence Noetherian schemes. Nagata supplies the required compactifications. No compactification dimension bound is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: remaining smooth-base-change and co-projection constituents"
+   }
+  },
+  {
+   "text": "The statements already quantify over ordinary etale origins and apply the specified comparison functor to their maps. The source theorem Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension gives smooth exceptional base change, after supplying the finite invertible coefficient exponent. Functors preserve isomorphisms. The displayed unit normalization is definitionally the specified dualizingComplexBaseChangeMap. The tensor clause is exactly tensorMateBaseChange, with the Nagata compactification.",
+   "uses": [
+    "lem-pur-smb-extraordinary",
+    "pur9-cs-def-bc",
+    "def-pur-co-smoothness",
+    "lem-pur-tensor-mate-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: remaining smooth-base-change and co-projection constituents"
+   }
+  },
+  {
+   "text": "Reuse the proved exceptional_base_comp calculation in SectionExceptionalFibreCoherence, with explicit composite arrows transported by their equalities. Its proof uses affineLinearExchange_paste for the specified ordinary etale compact-support exchange, inversion and mate pasting. Apply the comparison functor to obtain base pasting. For the identity square specialize this pasting equation to two identity base changes, then use the proved identity_exchange_of_pasting calculation from UnboundedEtaleCompactSupportComparisons to cancel the invertible exceptional comparison against the canonical identity comparisons.",
+   "uses": [
+    "lem-trf-section-exceptional-fibre-coherence",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "pur9-cs-def-bc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: remaining smooth-base-change and co-projection constituents"
+   }
+  },
+  {
+   "text": "For two vertical towers, unboundedEtaleCompactSupport_baseChange_composition gives compact-support exchange compatibility. Conjugate by leftDerivedUpperStarIsoMapDerivedCategory and cancel those isomorphisms to obtain ExchangeCompCompatible for the specified unbounded compact-support compositors. Apply Adjunction.mateEquiv_inv_comp_rightAdjointUniq. The proved generic rightAdjointUniq_ofNatIsoLeft_hom identifies the resulting right adjoint isomorphisms with the conjugates defining finiteExceptionalComposition, yielding exceptional_tower_comp. Apply the comparison functor.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "def-pur-finite-exceptional-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: remaining smooth-base-change and co-projection constituents"
+   }
+  },
+  {
+   "text": "At the coefficient unit, naturality of the exceptional compositor with the pullback unit comparison specializes the tower equality to beta_tower_comp. The source theorem boundedConstructibleFiniteTor_dualizingComplex for a smooth pure-dimensional map, followed by constructibleFiniteTor_mapDerivedCategory, puts omega_g in the required tensor-mate domain. Apply tensorMateBaseChange at omega_g. Prove theta naturality directly over a general coefficient category from Adjunction.projectionTensorMap_naturality_right and leftUnitor_naturality, then specialize to the finite coefficient category. This avoids importing SmoothPurityMap for its private helper. Substitute the beta formula, cancel the compositor with its inverse, and move beta_g through theta_a using this naturality. This proves the sigma equation without an orientation.",
+   "uses": [
+    "lem-pur-tensor-mate-base-change",
+    "def-pur-co-smoothness",
+    "def-pur-finite-exceptional-composition",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: remaining smooth-base-change and co-projection constituents"
+   }
+  },
+  {
+   "text": "For reassociation work over a general coefficient category and specialize to ModuleCat only after proving all equations. Use the proved source associativity, signed braiding, left and right unit laws for the derived pullback, plus leftDerivedUpperStarComp_assoc'_app and leftDerivedUpperStarTensorComparison_comp. The four fixed-object derived tensor equations share tensorComparisonCoherenceAt, with their whiskering conversions proved generically. The derived localization square is expressed with its explicit counit maps and is precisely leftDerivedUpperStarTensorComparison_app_app_comp; the compositor localization equation is leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit. Factor the four chain tensor equations into tensorComparisonCoherence. For an arbitrary oplax monoidal functor its associativity and unit laws give three equations, and its braiding compatibility gives the fourth. First prove the complex tensor calculation over arbitrary abelian monoidal closed braided categories, then apply it to the actual mapHomologicalComplex functor. The source mapCochainComplex_δ and mapCochainComplex_η identities identify these maps with the displayed total tensor comparison and inverse unit isomorphism. A generic preadditive-category calculation transports pointwise threefold comparison compatibility to cochain complexes degreewise; specialize it to upperStarComp_assoc'. No representative or orientation is chosen. Share the whole threefold complex equation through complexThreefoldComparisonCoherence before specializing it to the actual six pullback functors and four canonical comparison transformations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: remaining smooth-base-change and co-projection constituents"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "lem-pur-smb-extraordinary",
+  "pur9-cs-def-bc",
+  "def-pur-co-smoothness",
+  "lem-pur-tensor-mate-base-change",
+  "lem-trf-section-exceptional-fibre-coherence",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "def-pur-finite-exceptional-composition",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1; M2 Lean proof from the specified etale compact-support exchanges, adjunction mates, tensor-mate equality and proved source monoidal coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth exceptional inverse image base change commutes with composition and dualizing tensor map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"Given commutative semirings R, S, A, B with compatible algebra structures and a pushout algebra B, the tensor product S ⊗_R Ω_{A/R} admits a scalar tower structure where the actions of S and B on the \"}\n  {\"name\": \"KaehlerDifferential.isBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"Given commutative rings $ R, S, A, B $ with compatible $ R $-algebra structures and an algebra pushout condition, the base change of the Kähler differentials module $ \\\\Omega_{A/R} $ to $ S $ satisfies\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivBase_symm_apply\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"For commutative rings $ R, S, A, B $ with compatible algebra structures and a pushout algebra $ B $, the inverse of the equivalence between $ \\\\Omega_{B/S} $ and $ S \\\\otimes_R \\\\Omega_{A/R} $ maps an el\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  KaehlerDifferential.cotangentComplexBaseChange R\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  LinearMap.baseChange A P.cotangentComplex =\\n    \", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: monoidal adjunction composition does not identify the geometric compact-support exchange or its specified exceptional tensor maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pasting counit mates of compact support base change and tensor dualizing complexes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.MonoidalCategory",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isMonoidal_comp\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] {F : CategoryTheory.Functor C D} {G : \", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: monoidal adjunction composition does not identify the geometric compact-support exchange or its specified exceptional tensor maps"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*baseChange|dualizing.*tensor|upperShriek.*comp",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: monoidal adjunction composition does not identify the geometric compact-support exchange or its specified exceptional tensor maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley mate pasting with tensor projection formula for extraordinary inverse images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.frobeniusMorphism_mate\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [inst_\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be monoidal closed categories, and let $L: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ and $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a pair of adjoint functors, with $L$ being the left \"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let `C` be a category with chosen pullbacks. Let `f: I → J` and `g: J → K` be composable morphisms such that `f`, `g`, and their composition `g ∘ f` are all exponentiable. Let `(g ∘ f)^*` and `(g ∘ f)\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For composed exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the whiskered composition of the pushforward functors' hom transformation with the pullback along $f \\\\ci\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {I J K : C} →\\n      (f : I ⟶ J) →\\n        (g : J ⟶ K) →\\n          [inst_1 : CategoryTheory.ChosenPullbacksAlong f] →\\n            [inst_2 : CategoryTheory.ChosenPullbacksAlong g] →\\n              [inst_3 : CategoryTheory.ChosenPullbacksA\", \"doc\": \"Given composable morphisms $f : I \\\\to J$ and $g : J \\\\to K$ in a category $\\\\mathcal{C}$, if $f$, $g$, and their composition $g \\\\circ f$ are all exponentiable, then the pushforward functor associated wi\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with chosen pullbacks, and let $f: I \\\\to J$ and $g: J \\\\to K$ be composable exponentiable morphisms. For an exponentiable morphism $p$, let $p^*$ be the pullback functor\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the unit of the pullback-pushforward adjunction for the composite $f \\\\circ g$ satisfies a naturality condition: t\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_ev\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (Y : CategoryTheory.Over I),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.ExponentiableMorphism.coev f)\", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map $ \\\\text{coev}_f $ applied to the pushforward object $ f_*Y $ and the pushforward of t\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_ev_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (Y : CategoryTheory.Over I) {Z : CategoryTheory.Over J}\\n  (h : (CategoryTheory.ExponentiableMorphism.pushforward f).ob\", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map (unit of the adjunction) and the pushforward of the counit (evaluation map) yields th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: monoidal adjunction composition does not identify the geometric compact-support exchange or its specified exceptional tensor maps"
+  },
+  {
+   "tool": "grep",
+   "query": "isMonoidal_comp",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"line\": \"1045\", \"text\": \"instance isMonoidal_comp {F' : D ⥤ E} {G' : E ⥤ D} (adj' : F' ⊣ G')\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: monoidal adjunction composition does not identify the geometric compact-support exchange or its specified exceptional tensor maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth exceptional inverse image base change compatible with composition and tensor counit mates",
+   "results": "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; PresheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor; CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting; no hit states the full geometric comparison with its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek.*(baseChange|comp)|dualizing.*tensor|exceptional.*pasting",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting; no hit states the full geometric comparison with its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.TwoSquare",
+   "results": "CategoryTheory.mateEquiv_hcomp; CategoryTheory.iterated_mateEquiv_conjugateEquiv; CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm; CategoryTheory.mateEquiv_square; CategoryTheory.toOverIteratedSliceForwardIsoPullback_hom_app_left; CategoryTheory.toOverIteratedSliceForwardIsoPullback_inv_app_left",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting; no hit states the full geometric comparison with its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extraordinary inverse image base change mate pasting tensor formula for smooth morphisms",
+   "results": "TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul; Algebra.Smooth.baseChange; IsBaseChange; Algebra.IsPushout.cancelBaseChangeAux_symm_tmul; IsBaseChange.tensorEquiv; Algebra.FormallySmooth.instTensorProduct; Algebra.IsStandardSmooth.baseChange; RingHom.Smooth.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting; no hit states the full geometric comparison with its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley mate horizontal vertical composition projection formula extraordinary pullback",
+   "results": "CategoryTheory.mateEquiv_hcomp; CategoryTheory.mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_square; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.Bicategory.mateEquiv_hcomp; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting is already the existing Mathlib leaf lem-weil-pbc-mate-pasting; no hit states the full geometric comparison with its specified maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-diagonal-section-pasting",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, remaining smooth-base-change constituents: horizontal/vertical counit-mate pasting and compatibility with the tensor map (old item steps 2-3)",
+   "via": [
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-smooth-exceptional-tensor-pasting",
+  "worker": "stage1",
+  "summary": "Q141: retained the statement, assembled all clauses using existing DAG results, and made both mate-pasting directions, coefficient normalization, sigma naturality, and representative coherence explicit. No new nodes. Checked finite bounded-below etale-origin domains and absence of circular dependencies.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1, final sentence: compatibility of the remaining smooth-base-change and co-projection constituents with composition. Steps 1-3 fix domains and maps; 4-5 paste; 6-7 prove tensor compatibility and sigma; 8 supplies reassociations.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project] supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic Bounded-below site comparison supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Generic The exceptional adjoint on the bounded comparison class supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic On the coefficient class the compact-support functor is computed on the étale site supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic Comparison inverse image commutes with scheme pullback supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-pur-smb-extraordinary",
+    "why": "Generic Smooth base change for the exceptional inverse image supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic Unbounded ordinary etale compact-support comparisons supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "thm-pur-cohomological-smoothness",
+    "why": "Generic Cohomological smoothness of smooth morphisms supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic Composition of derived pro-etale module pullbacks supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic Signed tensor comparison and composition on cochain sheaf pullbacks supplies the stated domain, comparison or coherence input; this is a tool for the unit smooth-base-change assembly, not a replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Naturality of the specified finite compact-support projection map is a generic input to naturality of its transpose; it does not replace a geometric step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-compactification",
+  "lem-pur-smb-extraordinary",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-9733c5d16",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-9733c5d16 (reviewer sub-agent of L); spot-checked: Read the item in full (8 steps, no new nodes), every cited statement, the main-20261015 thm-pur-composition-coherence proof Step 1 (its final sentence on the smooth-base-change and co-projection constituents), and unit sk-thm-smooth-purity, which uses sk-prop-cohsm, sk-prop-an and sk-def-purity-conv. The statement and stmt_deps are identical to the live unsplit node, so nothing is weakened. There is no repair note, so the re-split rules do not apply, and no SGA source is cited. I checked the hypotheses: finite-type k-schemes without absolute separatedness, pure relative dimensions (as lem-pur-smb-extraordinary needs), and Noetherian, compactification and dimension bounds via Nagata and the dimension lemma. Step 3: pur9-cs-def-bc b_{v,Λ} and the def-pur-co-smoothness β are the same transpose, so they agree by injectivity of the Hom bijection; lem-pur-smb-extraordinary gives invertibility for arbitrary v. Step 4: I checked mate-pasting clause (1) by hand; it gives B_{h,vw}=B_{h',w}∘Lu'*B_{h,v}, and clause (4) gives the identity case. Step 5: clauses (2) and (3) give c_{b,a}B_{gf,w}=Ra^!(B_g)B_{f,v,Rg^!N}Lu*c_{g,f}; the orientation of τ^c=c_{g,f} matches def-pur-finite-exceptional-composition and both sides have the same types. Step 7: I recomputed the σ identity; it follows from Steps 5 and 6, naturality of θ_a and naturality of sym. Step 8: the chain-level coherence lemmas are adequate. Edge cases v=id, N=0, empty schemes, d=0 and identity f or g all hold. There is no cycle; I computed the transitive closures, including the added node. Duplicate search: det-sp-tower-exceptional-bc and det-sp-mixed-base-change say different things. The unsplit Q118 node lem-pur-exceptional-base-change-pasting is only the N=Λ case of Step 5. The unsplit Q118 node lem-pur-tensor-mate-base-change (sk-prop-cohsm, on route) states exactly the Step 6 equation, b∘Lw*θ=θ'(1⊗β) with b_Λ=β, while Step 6 cited only the loose 'the two canonical maps correspond under Lu*' clause of thm-pur-cohomological-smoothness. FIX (C4, missing exact citation): added lem-pur-tensor-mate-base-change to Step 6's text and uses and to proof_deps, identifying its b with B through the compactification comparisons; no other field is changed (fixes/dag/nodes/sec-smooth-purity/lem-pur-smooth-exceptional-tensor-pasting.json). Advisory: Step 4 reaches the pro-étale-equals-transported-étale exchange identification through pur9-cs-def-bc's own statement and its stmt_dep thm-cbc-finite-level-proetale; I left it, since that is off route and the identification is already stated in pur9-cs-def-bc. All declared tool_uses are accepted as generic black boxes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothExceptionalTensorPasting",
+  "declaration": "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.smoothExceptionalTensorPasting",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.D",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.L",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.R",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.V",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.Ctf",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.sigma",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.squareClause",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.smoothExceptionalTensorPasting",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.basePastingClause",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.smoothExceptionalBasePasting",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.identityClause",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.smoothExceptionalIdentityPasting",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.towerClause",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.smoothExceptionalTowerPasting",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.symmetry",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.tensorComparisonCoherenceAt",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.reassociationClause",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.chainTensorComparison",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.tensorComparisonCoherence",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.chainReassociationClause",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.smoothExceptionalReassociationPasting",
+   "AlgebraicGeometry.ProEtale.SmoothExceptionalPasting.complexThreefoldComparisonCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothExceptionalTensorPasting.lean",
+  "statement": "theorem smoothExceptionalTensorPasting (P : WeilConjectures.PurityFiniteSetting.{u}) {X₁ X Y₁ Y : Scheme.{u}} [X₁.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X₁ ↘ Spec (.of P.field.k))] [QuasiCompact (X₁ ↘ Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [Y₁.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y₁ ↘ Spec (.of P.field.k))] [QuasiCompact (Y₁ ↘ Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (h : X ⟶ Y) [h.IsOver (Spec (.of P.field.k))] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (h₁ : X₁ ⟶ Y₁) [h₁.IsOver (Spec (.of P.field.k))] [IsSeparated h₁] [LocallyOfFiniteType h₁] [QuasiCompact h₁] (u₁ : X₁ ⟶ X) [u₁.IsOver (Spec (.of P.field.k))] [IsSeparated u₁] [LocallyOfFiniteType u₁] [QuasiCompact u₁] (v : Y₁ ⟶ Y) [v.IsOver (Spec (.of P.field.k))] [IsSeparated v] [LocallyOfFiniteType v] [QuasiCompact v] (sq : IsPullback u₁ h₁ h v) (K : D P.Coefficient Y) (d d₁ : ℕ) [SmoothOfRelativeDimension d h] [SmoothOfRelativeDimension d₁ h₁] (_hK : Ctf P.Coefficient Y K) : squareClause P P.Coefficient h h₁ u₁ v sq K",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1f3144fd",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Re-delivery after the 398f H13 RETURN. The pur9-cs-def-bc dependency module and record are no longer delivered; all snapshot dependency records are byte-identical to live (Q153's record kept). standingSquareClause is dropped (RETURN option a); its content is squareClause's first conjunct, V(B_K) invertible, which is the live standingExceptionalBaseChangeCompared. The recorded statement is verbatim and all 19 declarations exist. Other module changes: plain import of the proof dependency TensorMateBaseChange (no cycle, olean present), respectTransparency true, and local priority/irreducibility attributes on Mathlib's existing monoidal structures; no map, hypothesis or clause changed. Independently re-read against the node: conventions, squareClause (invertibility, unit value = beta, theta/B equation), base pasting, identity normalization, tower c/B pasting with c from def-pur-finite-exceptional-composition, the sigma identity, and derived and chain reassociation. Edge cases covered; all theorems sorry; no hollow definitions. Advisory only: smoothTensorBaseChangeCoherence is owned by thm-pur-cohomological-smoothness, which is a proof dependency, not a statement dependency (accepted at 398f too). No compile was run because no file was changed; the worker reports 55.1 s on the server."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T001954-L-45953",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

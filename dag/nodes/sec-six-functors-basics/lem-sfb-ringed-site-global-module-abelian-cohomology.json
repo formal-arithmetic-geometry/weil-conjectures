@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-ringed-site-global-module-abelian-cohomology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: coherent external cup and coefficient comparison over a ring with projective cohomology; used to identify the mixed degree-(1,1) component. Notion used in the statements of the two prerequisites of this split: the relative and global cup product on module cohomology of small etale ringed sites. Comparison used in the global clause of that notion: cohomology of module-derived global sections equals cohomology of the underlying additive sheaf (Stacks 03FD).",
+   "via": [
+    "def-sfb-ringed-site-module-cup-product",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Module-derived global cohomology is the cohomology of the underlying abelian sheaf",
+ "statement": "Let $\\mathcal C$ be a small site in the common coefficient universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention] and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. For a sheaf of $\\mathcal O$-modules $F$ [def-weil-sheaf-of-modules-category] write $F_{ab}$ for its underlying abelian sheaf and $\\Gamma(\\mathcal C,F)$ for the group of compatible families of sections $(s_U)_{U\\in\\mathcal C}$ [def-sfb-coefficient-module-global-sections]; no final object of $\\mathcal C$ is assumed. Let $R\\Gamma(\\mathcal C,-):D(\\mathcal O)\\to D(\\mathrm{Ab})$ be the unbounded right derived functor of $\\Gamma(\\mathcal C,-)$ on $\\mathcal O$-modules, computed on K-injective complexes of $\\mathcal O$-modules [def-weil-abstract-derived-category, def-pur-kinjective-complex, def-pur-ringed-site-zeroth-hypercohomology], and let $H^n(\\mathcal C,F_{ab})$ be the $n$th right derived functor of $\\Gamma(\\mathcal C,-)$ on abelian sheaves, computed by injective resolutions in $\\textit{Ab}(\\mathcal C)$ [def-sp-left-exact-additive, def-sp-injective-resolutions]. Then for every integer $n\\geq0$ there is a canonical additive isomorphism $$H^n\\bigl(R\\Gamma(\\mathcal C,F[0])\\bigr)\\cong H^n(\\mathcal C,F_{ab}),$$ natural in $F$, which in degree $0$ is the identity of $\\Gamma(\\mathcal C,F)$. In particular it is $\\Gamma(\\mathcal C,\\mathcal O)$-linear, where $a\\in\\Gamma(\\mathcal C,\\mathcal O)$ acts on both sides through the module endomorphism of $F$ given by multiplication by $a$. No flatness of $\\mathcal O$ over the constant sheaf $\\mathbf Z$ and no injectivity of $F_{ab}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, first displayed equality (global cohomology H^p(C,F)); global sections as morphisms from the final sheaf, i.e. compatible families, as in equation-cohomology-modules"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-coefficient-module-global-sections",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Put $Z=\\underline{\\mathbf Z}_{\\mathcal C}$. Abelian sheaves are exactly $Z$-module sheaves: for an abelian sheaf $A$, give a locally constant integer section $z$ its action by choosing a covering on which $z$ is represented by integers $n_i$, and glue the sections $n_i a|_{U_i}$. Local representability and local equality are supplied by [lem-weil-pbc-site-sheafification-sections-local], applied to the constant integer presheaf of [def-weil-pbc-constant-sheaf]. On a common refinement the two choices give the same integer multiples, so the sheaf axiom makes this action well defined. The module laws and compatibility with restriction hold on those coverings and hence globally. Conversely any unital $Z$-action must act on integer sections by repeated addition, and then on all sections by this local formula. Every additive sheaf map respects the formula. Thus this construction and forgetting are inverse additive equivalences, preserving the underlying section families and every map. Kernels and cokernels are preserved by [lem-weil-pbc-equivalence-injective-resolutions]. The unique maps from $\\mathbf Z$ to $\\mathcal O(U)$ induce the sheaf ring map $Z\\to\\mathcal O$; restriction along it is precisely this integer action on $F_{ab}$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WK, lemma-sections-sheafification; elementary integer-action construction using the sheaf axiom"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-derived-sections-scalar-coherence] with $R=Z$, $S=\\mathcal O$, the map just constructed, and the complex $F[0]$. Its hypotheses are exactly a small site and commutative ring sheaves in the common coefficient universe; its global sections are $\\operatorname{Hom}(1,M_{ab})$, the compatible families in [def-sfb-coefficient-module-global-sections], even when the site has no final object. It gives the natural isomorphism in $D(\\operatorname{Ab})$ $$\\sigma_F:R\\Gamma_{\\mathcal O}(F[0])\\xrightarrow{\\sim}R\\Gamma_Z(F_{ab}[0]).$$ This is the coefficient-restriction comparison fixed by the derived-unit equation in the cited statement, so it is the canonical comparison, rather than a choice of an abstract isomorphism. In particular its construction requires neither flatness nor preservation of injectives by forgetting $\\mathcal O$-modules.",
+   "uses": [
+    "lem-coef-derived-sections-scalar-coherence",
+    "def-sfb-coefficient-module-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied as in the cited scalar-coherence node to coefficient restriction followed by global sections"
+   }
+  },
+  {
+   "text": "Choose an abelian injective resolution $F_{ab}[0]\\to J^\\bullet$, zero in negative degrees; existence follows from [lem-weil-pbc-site-sheaves-enough-injectives] and the injective-resolution construction of [def-sp-injective-resolutions]. The equivalence of step 1 carries this to a $Z$-module injective resolution by [lem-weil-pbc-equivalence-injective-resolutions]. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so the definition [def-pur-ringed-site-zeroth-hypercohomology] computes $R\\Gamma_Z(F_{ab}[0])$ by $\\Gamma(\\mathcal C,J^\\bullet)$. On the other hand this very complex computes the right-derived abelian-sheaf cohomology in the statement. Consequently $$H^n(R\\Gamma_Z(F_{ab}[0]))=H^n(\\Gamma(\\mathcal C,J^\\bullet))\\cong H^n(\\mathcal C,F_{ab}).$$ The resolution identifications are canonical and natural: a morphism of abelian sheaves lifts to a map of their injective resolutions by [lem-weil-pbc-injective-resolution-lift-exists], and [lem-weil-pbc-derived-functor-map-via-lift] computes its induced maps by this same sectionwise chain map. Thus both descriptions give identical maps.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070J (lemma-bounded-below-injectives-K-injective), 013P (lemma-morphisms-lift), 05TD (lemma-left-exact-higher-derived); sites-cohomology.tex equation-cohomology and equation-cohomology-modules"
+   }
+  },
+  {
+   "text": "Take $H^n$ of $\\sigma_F$ and follow it by step 3. This gives the requested additive isomorphism and its naturality. In degree zero the augmentation identifies the kernel of $\\Gamma(J^0)\\to\\Gamma(J^1)$ with $\\Gamma(F_{ab})$, since compatible-family sections preserve kernels. The derived-unit equation defining $\\sigma_F$ in [lem-coef-derived-sections-scalar-coherence] identifies this augmentation with the identical underived section family; hence the comparison is the identity on $\\Gamma(\\mathcal C,F)$. Finally, for $a\\in\\Gamma(\\mathcal C,\\mathcal O)$, multiplication $m_a:F\\to F$ is a module map because $\\mathcal O$ is commutative. Naturality for $m_a$ says explicitly $c_F H^n(R\\Gamma(m_a))=H^n(\\mathcal C,(m_a)_{ab})c_F$, which is the asserted scalar linearity.",
+   "uses": [
+    "lem-coef-derived-sections-scalar-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree, global equality; degree-zero and scalar compatibility from the normalized comparison and naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-coef-derived-sections-scalar-coherence",
+  "def-sfb-coefficient-module-global-sections",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD global equality, assembled using the existing general coefficient-restriction comparison (Tag 0D6E); integer-sheaf equivalence and injective-resolution computation written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'abbrev H\\|def H.equiv₀\\|def H.map' Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "results": "Basic.lean:59 abbrev H (n : ℕ) (Ext of the constant sheaf, abelian sheaves only), :105 H.equiv₀, :114 H.map; no module-sheaf version or forgetful comparison",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE SheafOfModules Mathlib | xargs grep -lE 'Injective|Ext|SheafCohomology'",
+   "results": "AlgebraicGeometry/Modules/Tilde.lean, Algebra/Category/ModuleCat/Sheaf.lean, Sheaf/Localization.lean, Presheaf/Sheafify.lean, Presheaf/Sheafification.lean (only toSheaf.map_injective at Sheafification.lean:130); no cohomology comparison of module and abelian sheaves",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(cohomology|acyclic)|cohomology.*forget|forget.*[aA]cyclic|cohomology.*[Aa]belian",
+   "results": "; hits: Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean; read results: forgetful/global-section definitions and abelian sheaf cohomology, not the arbitrary ringed-site cohomology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of module sheaves and underlying abelian sheaves have canonically isomorphic cohomology",
+   "results": "; hits: SheafOfModules.toSheaf, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom, CategoryTheory.Sheaf.Γ, AlgebraicGeometry.Scheme.Modules.presheaf, CategoryTheory.Sheaf.ΓObjEquivSections, SheafOfModules.sectionsFunctor_obj, CategoryTheory.Sheaf.ΓObjEquivSections_naturality, CategoryTheory.Sheaf.coneΓ; read results: forgetful/global-section definitions and abelian sheaf cohomology, not the arbitrary ringed-site cohomology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Functor.rightDerived",
+   "results": "loogle: unknown identifier 'Functor.rightDerived'; hits: ; read results: forgetful/global-section definitions and abelian sheaf cohomology, not the arbitrary ringed-site cohomology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a sheaf of modules on a ringed site agrees with cohomology of its underlying sheaf of abelian groups",
+   "results": "; hits: CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.instAbelian, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, SheafOfModules.QuasicoherentData.X, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.QuasicoherentData.I; read results: forgetful/global-section definitions and abelian sheaf cohomology, not the arbitrary ringed-site cohomology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact forgetful functor from sheaves of modules to abelian sheaves sends injectives to objects acyclic for global sections",
+   "results": "; hits: SheafOfModules.instAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, PresheafOfModules.instIsLocallyInjectiveToSheafify, AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.sheafIsAbelian, instAbelianCondensedMod; read results: forgetful/global-section definitions and abelian sheaf cohomology, not the arbitrary ringed-site cohomology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf",
+   "results": "; hits: SheafOfModules.toSheaf, SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, SheafOfModules.toSheaf_obj_obj, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.toSheaf_map_hom, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf; read results: forgetful/global-section definitions and abelian sheaf cohomology, not the arbitrary ringed-site cohomology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|[aA]cyclic|[iI]njective",
+   "results": "; hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; read results: forgetful/global-section definitions and abelian sheaf cohomology, not the arbitrary ringed-site cohomology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "def-sfb-ringed-site-module-cup-product",
+  "date": "2026-10-24",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-global-module-abelian-cohomology",
+  "worker": "stage1",
+  "summary": "No statement change. Reuse the general unbounded scalar-restriction comparison for the map from the constant integer sheaf to O. Construct explicitly the equivalence of integer-module sheaves with abelian sheaves, compute the latter side on an abelian injective resolution, and verify naturality, degree-zero normalization, and scalar linearity. No new nodes.",
+  "blueprint": "Supporting input for det-thm-sf-ctf-stability-direct-images, clause (3), through the recorded alteration/Picard/cup-product ancestry: the global comparison needed by def-sfb-ringed-site-module-cup-product. The latest blueprint direct-images proof paragraph (3) is unchanged by this foundational tool split. All four steps establish the global comparison specified in the item blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-sections-scalar-coherence",
+    "why": "Generic canonical unbounded global-section comparison for restriction along arbitrary coefficient ring maps, specialized to the constant integers; no change to the geometric route of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representability and equality for the constant integer sheaf construct its action on any abelian sheaf; a generic sheafification tool, not a replacement of any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-sections-scalar-coherence",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-22d191c30",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-22d191c30 (reviewer sub-agent of L); spot-checked: I read the item, all four steps, the statement of every cited node and Stacks 03FD (sites-cohomology.tex, lemma-cohomology-modules-abelian-agree, global equality). The branch is one commit with no new nodes; the statement and stmt_deps are unchanged and proof_deps equals the union of the step uses. There is no repair note, and live and side-live are both unsplit, so the delivery is not superseded. The item does not reach itself, so there is no cycle, and no SGA source is cited. Step 1 (elementary) proves that modules over the constant Z sheaf are exactly abelian sheaves: integer sections are locally θ(n_i) by lem-weil-pbc-site-sheafification-sections-local (Lean-closed in slopmaster2), the action is glued and unique, and the forgetful functor is an isomorphism of categories. I checked this, including an object with the empty covering. Step 2 applies lem-coef-derived-sections-scalar-coherence with R=Z and S=O: it gives the iso σ: RΓ_O → RΓ_Z r with σ∘η_O=η_Z, no flatness assumed, correct direction, and its Γ=Hom(1,M_ab) are the compatible families. Step 3 takes an abelian injective resolution, makes it a Z-module resolution through the equivalence, gets K-injectivity because it is bounded below, then uses the K-injective computation of def-pur-ringed-site-zeroth-hypercohomology, with naturality from lift-exists and map-via-lift. It never claims that forgetting preserves injectives. Step 4: in degree 0 the comparison is the identity via the derived unit, and Γ(O)-linearity is naturality for m_a. The statement matches 03FD restricted to commutative O, which is what the citer def-sfb-ringed-site-module-cup-product needs. Small cases checked: empty site, point with Z/n, zero ring, a site with no final object. Accepted tool_uses: scalar-coherence and sheafification-sections-local. Advisory, not a fault: the existing node lem-weil-pbc-site-module-sheaf-constant-ring-equivalence (B=Z) states the step-1 equivalence and could be cited instead."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GlobalModuleAbelianCohomology",
+  "declaration": "CategoryTheory.CoefficientDerivedSections.global_module_abelian_cohomology",
+  "file": "lean/Sheaf/CategoryTheory/GlobalModuleAbelianCohomology.lean",
+  "statement": "theorem global_module_abelian_cohomology {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (coefficientModules R)] [HasDerivedCategory.{z} AddCommGrpCat.{u}] (H : DerivedCategory (coefficientModules R) ⥤ DerivedCategory AddCommGrpCat.{u}) (η : coefficientComplexSections R ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ H) [H.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (coefficientModules R) (ComplexShape.up ℤ))] : ∃ e : ∀ n : ℕ, DerivedCategory.singleFunctor (coefficientModules R) 0 ⋙ H ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} (n : ℤ) ≅ SheafOfModules.toSheaf _ ⋙ (Sheaf.Γ J AddCommGrpCat.{u}).rightDerived n, (∀ F : coefficientModules R, (HomologicalComplex.homologyFunctorSingleIso AddCommGrpCat.{u} (ComplexShape.up ℤ) 0).inv.app ((coefficientSections R).obj F) ≫ (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℤ) 0).map ((HomologicalComplex.singleMapHomologicalComplex (coefficientSections R) (ComplexShape.up ℤ) 0).inv.app F) ≫ (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{u} 0).inv.app ((coefficientComplexSections R).obj ((CochainComplex.singleFunctor (coefficientModules R) 0).obj F)) ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} 0).map (η.app ((CochainComplex.singleFunctor (coefficientModules R) 0).obj F)) ≫ (e 0).hom.app F = (Sheaf.Γ J AddCommGrpCat.{u}).toRightDerivedZero.app ((SheafOfModules.toSheaf _).obj F)) ∧ (∀ (n : ℕ) (F : coefficientModules R) (a : RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)), (DerivedCategory.singleFunctor (coefficientModules R) 0 ⋙ H ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} (n : ℤ)).map (SheafOfModules.Hom.mk (PresheafOfModules.sectionsSMul F.val a)) ≫ (e n).hom.app F = (e n).hom.app F ≫ ((Sheaf.Γ J AddCommGrpCat.{u}).rightDerived n).map ((SheafOfModules.toSheaf _).map (SheafOfModules.Hom.mk (PresheafOfModules.sectionsSMul F.val a)))) ∧ ∀ (F : coefficientModules R) (I : InjectiveResolution F) (K : InjectiveResolution ((SheafOfModules.toSheaf _).obj F)) (φ : ((SheafOfModules.toSheaf _).mapHomologicalComplex (ComplexShape.up ℤ)).obj I.cochainComplex ⟶ K.cochainComplex), (HomologicalComplex.singleMapHomologicalComplex (SheafOfModules.toSheaf _) (ComplexShape.up ℤ) 0).inv.app F ≫ ((SheafOfModules.toSheaf _).mapHomologicalComplex (ComplexShape.up ℤ)).map I.ι' ≫ φ = K.ι' → ∀ n : ℕ, (DerivedCategory.homologyFunctor AddCommGrpCat.{u} (n : ℤ)).map (η.app I.cochainComplex) ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} (n : ℤ)).map (H.map (inv (DerivedCategory.Q.map I.ι'))) ≫ (e n).hom.app F ≫ (K.isoRightDerivedObjCochainComplex (Sheaf.Γ J AddCommGrpCat.{u}) n).hom = (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{u} (n : ℤ)).hom.app ((coefficientComplexSections R).obj I.cochainComplex) ≫ HomologicalComplex.homologyMap (((Sheaf.Γ J AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℤ)).map φ) (n : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The arbitrary presentation H with its derived unit gives unbounded module-derived global sections. Natural isomorphisms include degree-zero unit normalization, scalar endomorphisms, and a formula for every augmentation-compatible map from a forgotten module injective resolution to an abelian injective resolution, fixing the canonical comparison in every degree. No site terminal object or coefficient flatness is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b7d21716",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Read the item, all 9 stmt_dep records, Stacks 03FD and the delivered module. Checked coefficientModules/Sections/ComplexSections (DerivedSectionsScalarCoherence:53,72,87), isoRightDerivedObjCochainComplex (PlusSingle:78), Mathlib InjectiveResolution.cochainComplex/ι' (Extend.lean:40,71) and sectionsSMul. Lean: e n : single0⋙H⋙H^n ≅ toSheaf⋙(Sheaf.Γ).rightDerived n, natural; degree-0 augmentation equation equals toRightDerivedZero (identity on compatible families); global-scalar sectionsSMul linearity; and a formula for every module injective resolution I, abelian injective resolution K and compatible φ that pins e uniquely to the canonical Γ(I)→Γ(K) comparison. φ always exists, so the clause is not vacuous. No terminal object, flatness or injectivity assumed; universes bound; (H,η,IsRightDerivedFunctor) is the standard RΓ. Statement verbatim; record differs from side-live only in lean; first delivery, not superseded; only sorry; docstrings carry source, blueprint id and 4 steps; worker report and second reading present. Edge cases: empty site, no final object, n=0, zero ring, ℤ/n point. Derived-form rule not applicable (node RHS is classical R^nΓ). Advisories: coefficientComplexSections docstring names theorem node lem-coef-derived-sections-scalar-coherence (termwise extension of the def-node-owned toSheaf⋙Γ, not a new notion); some public proof-plan imports unused by the statement. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,459 @@
+{
+ "id": "lem-sfb-affine-koszul-low-localization",
+ "kind": "statement",
+ "title": "Quantitative low-degree affine Koszul orthogonality and open localization",
+ "statement": "Let $A$ be a commutative ring, $r\\geq0$, and $f_1,\\ldots,f_r\\in A$. Put $Y=\\operatorname{Spec}A$ [def-pc-scheme], $W=\\bigcup_{k=1}^rD(f_k)$ with $D(f)=\\{\\mathfrak p:f\\notin\\mathfrak p\\}$, and let $j:W\\hookrightarrow Y$ be the open immersion. Use the Zariski structure sheaf and its unbounded derived category with quasi-coherent cohomology subcategory [def-pc-derived-category]. Let $C_f\\in D(\\mathcal O_Y)$ be obtained by sheafifying the Koszul complex $K_\\bullet(f_1,\\ldots,f_r)$ [def-weil-pbc-koszul-complex] termwise and placing $K_q$ in cochain degree $-q$. For every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and integer $a$, if\n$$\\operatorname{Hom}_{D(\\mathcal O_Y)}(C_f[-n],E)=0\\quad\\text{for every integer }n\\leq a,$$\nthen the canonical restriction-adjunction unit induces an isomorphism in the derived category\n$$\\tau_{\\leq a-1}E\\xrightarrow{\\sim}\\tau_{\\leq a-1}Rj_*(j^*E).$$\nHere $Rj_*$ is the derived direct image [def-pc-derived-direct-image] and $\\tau_{\\leq a}$ is standard cohomological truncation [def-sbc-standard-tstructure-derived-category]. This includes $r=0$, when $W=\\varnothing$ and $C_f=\\mathcal O_Y[0]$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0GEK, lemma-orthogonal-koszul-second-variant, implication (2) to (1), in situation-complex."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-pbc-koszul-complex",
+  "def-pc-derived-direct-image",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Each $D(f_k)$ is homeomorphic to $\\operatorname{Spec}(A_{f_k})$ by the localization/basic-open node, and that spectrum is quasi-compact by the basic-opens/unit-ideal node. An open cover of $W$ therefore has a finite subcover on each of its finitely many $D(f_k)$, and their union is finite. This also handles $r=0$. Put $B=Rj_*(j^*E)$. By ringed-space derived adjunction, $Rj_*$ is right adjoint to $Lj^*$, which for this open immersion is exact restriction: the inverse image of the structure sheaf is the structure sheaf on the open. Let $u:E\\to B$ be the canonical unit. Complete $u$ to a distinguished triangle $E\\xrightarrow{u}B\\to N\\to E[1]$. The derived open-unit-cone node applies because $W$ is quasi-compact and $E$ has quasi-coherent cohomology. It gives $N\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and $j^*N=0$. Here $N$ is the cone, not the fibre.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-triangulated-category",
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-pc-derived-open-unit-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEK, lemma-orthogonal-koszul-second-variant, proof of (2) implies (1), corrected cone shift and endpoint; Tags 08DD, 06Z0 and More on Algebra 062C as carried by the cited nodes."
+   }
+  },
+  {
+   "text": "The Koszul restriction-zero node gives $j^*(C_f[m])=0$ for every integer $m$. Derived adjunction identifies $\\operatorname{Hom}(C_f[m],B)$ with $\\operatorname{Hom}(j^*C_f[m],j^*E)=0$. Fix $n\\leq a-1$. Shift invariance gives $\\operatorname{Hom}(C_f[-n],E[1])\\cong\\operatorname{Hom}(C_f[-(n+1)],E)=0$, since $n+1\\leq a$. For any $v:C_f[-n]\\to N$, its composite into $E[1]$ is zero. Hom-into-triangle exactness on the rotated triangle $B\\to N\\to E[1]\\to B[1]$ factors $v$ through $B$. The latter Hom group is zero, so $v=0$. Thus $\\operatorname{Hom}(C_f[-n],N)=0$ for every $n\\leq a-1$. This is the endpoint correction: with $N$ the cone, the Hom group into $E$ is in degree $n+1$, not $n$.",
+   "uses": [
+    "lem-pc-koszul-restriction-zero",
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEK, lemma-orthogonal-koszul-second-variant, proof of (2) implies (1), corrected cone shift and endpoint; Tags 08DD, 06Z0 and More on Algebra 062C as carried by the cited nodes."
+   }
+  },
+  {
+   "text": "For every positive exponent tuple $\\mathbf e=(e_1,\\ldots,e_r)$, let $C_{\\mathbf e}$ be the sheafified cochain Koszul object for $(f_i^{e_i})$. Prove $\\operatorname{Hom}(C_{\\mathbf e}[-n],N)=0$ for all $n\\leq a-1$ by strong induction on $\\sum_i(e_i-1)$. At sum zero all exponents are one, so Step 2 applies. Otherwise choose $i$ with $e_i>1$ and keep the other coordinates fixed. The coordinate multiplication triangle, with scalars $f_i^{e_i-1}$ and $f_i$, has outer objects with coordinate exponents $e_i-1$ and $1$, and middle object $C_{\\mathbf e}$. Both outer tuples have smaller induction measure. Shift this triangle by $-n$. For any map from its middle object to $N$, precomposition from the first object is zero by induction; Hom-out-of-triangle exactness factors it through the third object, whose Hom to $N$ is also zero by induction. This proves the claim at the same $n$. For $r=0$ the induction measure is zero and there is no induction step.",
+   "uses": [
+    "lem-pc-koszul-coordinate-mul-triangle",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEK, lemma-orthogonal-koszul-second-variant, proof of (2) implies (1), corrected cone shift and endpoint; Tags 08DD, 06Z0 and More on Algebra 062C as carried by the cited nodes."
+   }
+  },
+  {
+   "text": "Fix $n\\leq a-1$ and $\\varphi:\\mathcal O_Y[-n]\\to N$. Apply supported-augmentation vanishing to $N$ and this shift: its hypotheses hold by Step 1. It supplies an index $e\\in\\mathbf N$ with $\\varphi\\circ u_e[-n]=0$. Its convention is that index $e$ means exponent $e+1$. The represent-cohomology node supplies the triangle $I_e\\xrightarrow{u_e}\\mathcal O_Y\\to K_e\\to I_e[1]$, where $K_e=C_{(e+1,\\ldots,e+1)}$. Apply Hom-out-of-triangle exactness to its shift by $-n$: $\\varphi$ factors through $K_e[-n]$. Step 3 makes this factor zero, so $\\varphi=0$. Consequently $\\operatorname{Hom}(\\mathcal O_Y[-n],N)=0$ for all $n\\leq a-1$.",
+   "uses": [
+    "lem-pc-koszul-supported-augmentation-vanishing",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEK, lemma-orthogonal-koszul-second-variant, proof of (2) implies (1), corrected cone shift and endpoint; Tags 08DD, 06Z0 and More on Algebra 062C as carried by the cited nodes."
+   }
+  },
+  {
+   "text": "Apply the structure-sheaf Hom/hypercohomology bijection to $N[n]$. Shifting the source identifies its Hom group with $\\operatorname{Hom}(\\mathcal O_Y[-n],N)$, zero by Step 4, so $H^0(R\\Gamma(Y,N[n]))=0$. The affine derived equivalence is triangulated, hence its quasi-inverse $R\\Gamma(Y,-)$ commutes with shifts; thus this is $H^n(R\\Gamma(Y,N))=0$. Write $F$ for the equivalence from $D(A)$ to $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ induced by termwise associated sheaf. Since $N$ is quasi-coherent, its counit gives $F(R\\Gamma(Y,N))\\simeq N$. The affine tilde/homology comparison applies to this very $F$ and gives $H^n(N)\\simeq\\widetilde{H^n(R\\Gamma(Y,N))}=0$ for every $n\\leq a-1$. In particular this uses the cohomology comparison, not merely conservativity of the affine equivalence.",
+   "uses": [
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "new-affine-derived-tilde-homology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEK, lemma-orthogonal-koszul-second-variant, proof of (2) implies (1), corrected cone shift and endpoint; Tags 08DD, 06Z0 and More on Algebra 062C as carried by the cited nodes."
+   }
+  },
+  {
+   "text": "For $n\\leq a-1$, the cohomological-functor clause (5) of the heart/triangle theorem applied to $E\\xrightarrow{u}B\\to N\\to E[1]$ gives the exact segment $H^{n-1}(N)\\to H^n(E)\\xrightarrow{H^n(u)}H^n(B)\\to H^n(N)$. Both outside objects vanish by Step 5, since $n-1\\leq a-1$ as well. Therefore $H^n(u)$ is an isomorphism for every $n\\leq a-1$. Standard truncation retains these cohomology objects and kills those in degrees greater than $a-1$, so $\\tau_{\\leq a-1}(u)$ induces isomorphisms on every cohomology object. Notice that this argument does not assert an isomorphism in degree $a$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEK, lemma-orthogonal-koszul-second-variant, proof of (2) implies (1), corrected cone shift and endpoint; Tags 08DD, 06Z0 and More on Algebra 062C as carried by the cited nodes."
+   }
+  },
+  {
+   "text": "A morphism of derived objects that induces isomorphisms on every cohomology object is invertible: use the cited calculus of quasi-isomorphisms and right-fraction representation in the homotopy category to represent it by a roof $P\\xleftarrow{s}Q\\xrightarrow{t}R$ with $s$ a quasi-isomorphism. Since $H^n(s)$ and the cohomology maps of the roof are invertible, $H^n(t)$ is invertible for every $n$ as well. Thus both arrows of the roof are inverted in the localization defining the derived category. Apply this to $\\tau_{\\leq a-1}(u)$ from Step 6. This proves the claimed isomorphism for the canonical unit itself.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEK, lemma-orthogonal-koszul-second-variant, proof of (2) implies (1), corrected cone shift and endpoint; Tags 08DD, 06Z0 and More on Algebra 062C as carried by the cited nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-triangulated-category",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-pc-derived-open-unit-cone",
+  "lem-pc-koszul-restriction-zero",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-pc-koszul-coordinate-mul-triangle",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-pc-koszul-supported-augmentation-vanishing",
+  "lem-sc-affine-perfect-open-represent-cohomology",
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-heart-short-exact-triangles",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0GEK (lemma-orthogonal-koszul-second-variant), source error repaired: retain the cone shift, obtain truncation at a-1. Same Koszul power/augmentation/affine-comparison route, with details from Tags 08DD, 06Z0 and 062C."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme vanishing Hom from a finite Koszul complex in degrees at most a implies the open adjunction unit is an isomorphism after truncation at most a",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CochainComplex.isIso_ιTruncLE_iff",
+     "HomologicalComplex.isIso_ιTruncLE_iff",
+     "HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported",
+     "HomologicalComplex.instIsIsoFTruncLE'ToRestrictionOfIsStrictlySupported",
+     "HomologicalComplex.isIso_truncLE'ToRestriction",
+     "CochainComplex.quasiIso_ιTruncLE_iff",
+     "HomologicalComplex.instIsIsoπTruncGEOfIsStrictlySupported",
+     "HomologicalComplex.isIso_πTruncGE_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul orthogonality below an integer implies cohomology of localization is unchanged below that integer",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.isZero_of_isGE",
+     "CochainComplex.cm5b.instIsStrictlyGEI"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"Hom\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul.*(orthogonal|localiz|trunc)|[Tt]runc.*[Kk]oszul",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On the spectrum of a ring Koszul Hom vanishing in low degrees detects truncation of the derived open restriction unit",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen",
+     "AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen",
+     "HomologicalComplex.instIsIsoFRestrictionToTruncGE'OfIsStrictlySupported",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec",
+     "HomologicalComplex.restrictionToTruncGE'_hasLift",
+     "HomologicalComplex.isZero_stupidTrunc_iff",
+     "AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen",
+     "AlgebraicGeometry.StructureSheaf.to_basicOpen_epi"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing Hom from a Koszul complex in degrees n at most a implies agreement with derived open localization in degrees n less than a",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.isZero_of_isLE",
+     "DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isGE_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; generic Ext, t-structure, fractions and cohomology support declarations do not state the finite-Koszul/open-localization assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul.*(orthogonal|localiz|trunc)|[Tt]runc.*[Kk]oszul",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; generic Ext, t-structure, fractions and cohomology support declarations do not state the finite-Koszul/open-localization assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If Ext from the Koszul complex to a quasi coherent derived object vanishes for n at most a then its localization unit is an isomorphism on cohomology below a",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Abelian.Ext",
+     "CategoryTheory.Abelian.Ext.mk₀",
+     "CategoryTheory.Abelian.Ext.homEquiv",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ",
+     "CategoryTheory.ProjectiveResolution.extMk.congr_simp",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "CategoryTheory.InjectiveResolution.extEquivCohomologyClass",
+     "DerivedCategory.Q"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; generic Ext, t-structure, fractions and cohomology support declarations do not state the finite-Koszul/open-localization assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"Hom\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; generic Ext, t-structure, fractions and cohomology support declarations do not state the finite-Koszul/open-localization assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite Koszul complex K and an unbounded quasi coherent complex E on Spec A, vanishing Hom(K,E[n]) for n at most a forces tau at most a minus one of E to equal its derived pushforward from the union of principal opens",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.IsGE",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; generic Ext, t-structure, fractions and cohomology support declarations do not state the finite-Koszul/open-localization assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-supported-koszul-low-localization",
+  "date": "2026-10-24",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, paragraphs Say V=Spec(A) through Then tau_le_a E = tau_le_a R(U to X)_*(E|U). Supporting input: Tag 0GEK, lemma-orthogonal-koszul-second-variant, implication (2) to (1), in situation-complex.",
+   "via": [
+    "lem-sfb-space-supported-koszul-low-localization",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-koszul-low-localization",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: Stacks 0GEK and the imported endpoint are false for A=Z, f=2, E=O, a=0. Corrected only the conclusion from truncation at a to a-1. The cone Hom calculation shifts the E degree to n+1. Wrote out the Koszul power induction, supported augmentation factorization, affine cohomology comparison and truncation argument using existing nodes only. No new nodes or Lean changes. Parent eventual-localization statement remains true after lowering its chosen bound by one; its Step 4 needs the adjustment described in report.md.",
+  "blueprint": "Realizes the inherited supporting chain from det-thm-sf-ctf-stability-direct-images proof (3), through the lower-boundedness detection argument of 0GFI and its affine 0GEK input. Read the latest blueprint unit and direct-images proof. The inherited from.node is null because the pre-existing creation chain has no surviving blueprint ancestor (blueprint_refs.py ancestor confirms None); preserved it and its precise from.place and via chain. Searches of all blueprint nodes for Koszul and orthogonal found no same-statement node. The numerical endpoint error is below the unit level; the eventual vanishing route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Topological localization identifies each principal open with a spectrum; a generic tool establishing the compact-open hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Quasi-compactness of a ring spectrum, used on each localization; the unit has no corresponding structure-sheaf tool."
+   },
+   {
+    "node": "lem-pc-derived-open-unit-cone",
+    "why": "The generic structure-sheaf localization cone is quasi-coherent and supported; no finite-coefficient or pro-etale operation is substituted."
+   },
+   {
+    "node": "lem-pc-koszul-restriction-zero",
+    "why": "The actual sheafified Koszul complex vanishes on its union of principal opens."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint-general",
+    "why": "Unbounded module-sheaf derived adjunction, applied only to the Zariski open immersion."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic representable exactness on B to cone(u) to E[1], retaining the essential degree n+1."
+   },
+   {
+    "node": "lem-pc-koszul-coordinate-mul-triangle",
+    "why": "Generic coordinate multiplication triangle; the induction at the fixed range n at most a-1 is written in Step 3."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Generic contravariant representable exactness for power induction and augmentation factorization."
+   },
+   {
+    "node": "lem-pc-koszul-supported-augmentation-vanishing",
+    "why": "Generic supported-object augmentation vanishing, which makes each structure-sheaf morphism factor through a power Koszul object."
+   },
+   {
+    "node": "lem-sc-affine-perfect-open-represent-cohomology",
+    "why": "Only its stated augmentation triangle is used to factor a map after the tail augmentation becomes zero."
+   },
+   {
+    "node": "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+    "why": "Generic structure-sheaf Hom equals hypercohomology, applied to the shifted supported object."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The unbounded affine quasi-coherent equivalence supplies the counit and shift compatibility."
+   },
+   {
+    "node": "new-affine-derived-tilde-homology-comparison",
+    "why": "Degreewise cohomology comparison for the existing termwise-tilde equivalence; needed beyond bare equivalence."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic unbounded cohomology long exact sequence (clause 5), applied to the actual unit cone."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "Generic homotopy-category calculus of quasi-isomorphisms, needed for the elementary final inversion argument."
+   },
+   {
+    "node": "lem-pc-right-fraction-representation",
+    "why": "Generic localization roof representation, applied to the actual homotopy category of module sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-pc-derived-open-unit-cone",
+  "lem-pc-koszul-restriction-zero",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-pc-koszul-coordinate-mul-triangle",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-pc-koszul-supported-augmentation-vanishing",
+  "lem-sc-affine-perfect-open-represent-cohomology",
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-47bd1c3ef",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-47bd1c3ef (reviewer sub-agent of L); spot-checked: Read the item in full: its statement, all 7 steps, all 24 cited statements, def-sc-koszul-open-system and Stacks perfect.tex 0GEJ/0GEK (lines 10360-10450). No new nodes. Source error (E7) confirmed: the 0GEK proof uses the triangle E→Rj_*E|_U→N→E[1] and drops the shift Hom(K[-n],N)=Hom(K[-n-1],E). Counterexample recomputed: A=Z, f=2, E=O, a=0. Here RHom(K,Z)=[Z→2→Z] in degrees 0,1 vanishes for n≤0, but H^0 of the unit is Z→Z[1/2], which is not an isomorphism. The correction τ≤a → τ≤a-1 keeps all hypotheses, objects and the canonical unit, is exactly what the argument proves, and is reported under Source error / Statement corrected. Steps: (1) W is quasi-compact (basic-open homeomorphism plus quasi-compact Spec), Lj^*=restriction, open-unit-cone gives N in QCoh with j^*N=0. (2) Koszul restriction-zero plus adjunction give Hom(C_f[m],B)=0; Hom-into (ii) on the rotated triangle needs n+1≤a. (3) Strong induction on Σ(e_i-1) via the coordinate multiplication triangle with a=f_i^{e_i-1}, b=f_i, then Hom-out (i). (4) The index convention e↔exponent e+1 matches the open-system and represent-cohomology nodes; φ factors through K_{e+1}[-n]. (5) Hypercohomology node, triangulated quasi-inverse and tilde/homology comparison give H^n(N)=0 for n≤a-1. (6) The long exact sequence (heart node clause 5) makes H^n(u) an isomorphism for n≤a-1. (7) The elementary roof argument is valid. Edge cases: r=0, a unit f_i, A=0, shifts of the counterexample. No duplicate (0GEJ sibling distinct). All 16 tool_uses are generic and accepted. No SGA. MAINTAINER FOLLOW-UP: the reviewed citer lem-sfb-space-supported-koszul-low-localization, Step 4, applies this item at the same a. It must now choose vanishing for n≤a+1 and apply the item at a+1; its ∃a statement is unaffected. The worker rightly did not edit that non-owned node. Record the 0GEK error in coord/HUMAN.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulLowLocalization",
+  "declaration": "AlgebraicGeometry.affine_koszul_low_localization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulLowLocalization.lean",
+  "statement": "theorem affine_koszul_low_localization (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (W : (Spec (.of A)).Opens) (hW : W = ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i)) [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [HasDerivedCategory.{wW} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] (E : schemeDerivedCategory (Spec (.of A))) (hE : schemeDerivedQCohProperty (Spec (.of A)) E) (a : ℤ) (hvan : ∀ n : ℤ, n ≤ a → Subsingleton (((DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj ((ExteriorAlgebra.koszulComplex A r f).extend ComplexShape.embeddingDownNat)))⟦-n⟧) ⟶ E)) : IsIso ((DerivedCategory.TStructure.t.truncLE (a - 1)).map (((@id ((schemeOpenRestriction (Spec (.of A)) W) ⊣ RingedSpace.moduleDirectImage W.ι.toLRSHom.toShHom) ((Scheme.Modules.restrictAdjunction W.ι).ofNatIsoLeft (Scheme.Modules.overFunctorEquiv W).symm)).mapDerivedCategoryRightDerivedAdjunction ).unit.app E))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75be06fb5",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read node, Stacks 0GEK (perfect.tex lemma-orthogonal-koszul-second-variant, situation-complex), all 6 stmt_dep records and Lean sources (schemeDerivedCategory/QCohProperty, schemeDerivedDirectImage = (moduleDirectImage).rightDerivedFunctor, schemeOpenRestriction, ExteriorAlgebra.koszulComplex, embeddingDownNat n↦-n, TStructure.t.truncLE, restrictAdjunction/overFunctorEquiv, mapDerivedCategoryRightDerivedAdjunction). Clause-by-clause match: arbitrary CommRing A, Fin r family incl. r=0, W=⨆ basicOpen, E in D_QCoh, Subsingleton Hom(C_f⟦-n⟧,E) for n≤a, IsIso of truncLE(a-1) of the canonical derived restriction unit (no arbitrary adjunction). a-1 endpoint is the reviewed correction; verified mathematically, and A=ℤ,f=2,E=O,a=0 refutes the printed endpoint a. Edge cases r=0, A=0, unit f_i, all f_i=0, any a, unbounded E covered. Node diff vs live: only the added stmt_dep def-pc-derived-open-restriction-maps (correct owner of schemeOpenRestriction) and the new lean record; lean.statement verbatim; dep nodes identical to live; no dep module changes; no defs, sorry only, docstrings with source/blueprint and all 7 proof steps; report has Worker report + Second reading by NF. No recompile (no file changed). Advisory: upstream mapDerivedCategoryRightDerivedAdjunction has no owning node (precedent in landed statements); second reading was in-thread."
+ }
+}

@@ -1,0 +1,282 @@
+{
+ "id": "lem-zl-constant-extension-return-local-operators",
+ "kind": "statement",
+ "title": "Sheet-return local operators and their weight filtrations",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$ and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$. Let $X_0$ be a separated finite-type $k_0$-scheme, $X=X_0\\times_{k_0}k$, $m\\ge1$, $k_m=\\mathbf F_{q^m}\\subset k$, $X_{0,m}=X_0\\times_{k_0}k_m$, and $Y=X_{0,m}\\times_{k_0}k$. Use the actual common-stage coefficient categories, constructible hearts and Weil sheaves of [def-weil-algebraically-closed-coefficients], [def-weil-constructible-heart] and [def-weil-weil-sheaf-complex], and the integral-normalized pullback comparisons of [def-zl-weil-ind-sheaf-category]. Write $g_X$ for geometric $q$-Frobenius on $X$, $H$ for geometric $q$-Frobenius on $Y$, and $P=Lg_X^*$ on the constructible heart [def-weil-frobenius-detailed].\n\nLet $(N,\\eta)$ be any constructible $k_0$-Weil sheaf on $X_{0,m}$. Define its sheet return $R(N,\\eta)=(j_0^*N,\\phi)$ over $k_m$, where $j_0:X\\to Y$ is the distinguished sheet and $\\phi:L(g_X^m)^*j_0^*N\\xrightarrow{\\sim}j_0^*N$ is the composite of the $m$ successive pullbacks of $\\eta$, using $H^m j_0=j_0g_X^m$ and the specified compositors. For every closed point $z\\in X_{0,m}$, put $r=[\\kappa(z):k_m]$. The local operators of $(N,\\eta)$ in its $k_0$ interpretation and of $R(N,\\eta)$ in its $k_m$ interpretation are conjugate, and both absolute residue sizes are $q^{mr}=\\#\\kappa(z)$.\n\nMore precisely, with compatible geometric points on the distinguished sheet, the canonical stalk identification intertwines the two operators defined by exactly the iterated point transports of [def-weil-local-frobenius-trace]: the $r$ return transitions for $H^m$ give the same ordered $mr$ factors and the same point transport as the $mr$ transitions for $H$. This identification holds at finite coefficients and on whole integral coefficient towers with their specified derived-limit realization, and then after rationalization and at common-stage $\\Qlb$ coefficients. It is natural in Weil morphisms and compatible with finite coefficient extension. Changing the residue embedding or geometric point changes the stalk identification by conjugacy. No lissity, semisimplicity or finite Tor-amplitude hypothesis is imposed.\n\nFix $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. With punctual purity and mixed filtrations as in [def-weil-punctual-weights], a sheaf and its sheet return are punctually pure of weight $w$ simultaneously for every real $w$. On a morphism $u$ of constructible $k_0$-Weil sheaves put $R(u)=j_0^*u$; this makes $R$ an exact functor to constructible $k_m$-Weil sheaves on $X_{0,m}$. For every finite filtration of $(N,\\eta)$ by constructible $k_0$-Weil subsheaves, the filtration of $R(N,\\eta)$ by the sheet returns of its terms has quotients $R(N_r)/R(N_{r-1})\\simeq R(N_r/N_{r-1})$, punctually pure of exactly the same specified weights as the corresponding quotients of the original filtration. Conversely, for every finite filtration of $R(N,\\eta)$ by constructible $k_m$-Weil subsheaves there is a unique finite filtration of $(N,\\eta)$ by constructible $k_0$-Weil subsheaves whose sheet returns are, as subobjects of $R(N,\\eta)$, the given terms, and its quotients are punctually pure of the same weights as the corresponding given quotients. This includes arbitrary upper weight bounds, zero stalks and the empty scheme.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)–(1.1.10), pp.150–152; ordered point-transport block comparison and weight-filtration consequence (returned steps 6 and 9)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-local-frobenius-trace",
+  "def-weil-punctual-weights",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-sheet-pullback-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-trf-point-power-restriction-data",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-point-section-scalar-functors",
+  "def-trf-finite-pullback-presentation-comparison",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-zl-finite-point-power-transport-data",
+  "def-zl-integral-point-tower-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the exact sheet-return construction to obtain R with ConstantExtensionSheetSpec and R.IsEquivalence. Equivalences preserve finite limits and colimits. Obtain all finite-field transport, naturality and scalar clauses from the transport comparison.",
+   "uses": [
+    "lem-zl-sheet-return-exact-functor",
+    "lem-zl-sheet-return-transport-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  },
+  {
+   "text": "Apply the common-stage local spectra statement using the rational operator and scalar clauses. This supplies the residue-degree, residue-cardinality and local conjugacy conclusions. Unfold punctual purity: replace its eigenvalue predicate by the equivalent predicate at every closed point. Both schemes have definitionally the same residue fields, so the absolute-value equations and every specified real weight agree.",
+   "uses": [
+    "lem-zl-sheet-return-local-spectra",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  },
+  {
+   "text": "For each N, lower MonoOver.congr of the return equivalence to the thin skeleton and take its order isomorphism. Its image of U is mk(R.map U.arrow). Preservation of cokernels and the canonical underlying isomorphisms of subobject representatives identify all quotient objects. Apply the proved purity equivalence to each quotient, transporting along this isomorphism. OrderIso.arrowCongr gives the finite-chain equivalence. Injectivity and preservation of bottom and top give the endpoint equations, also for length zero.",
+   "uses": [
+    "def-zl-sheet-return-data",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  },
+  {
+   "text": "Map a finite mixed filtration through R: exactness preserves zero objects, monomorphisms and cokernels, and the purity comparison preserves each quotient weight and its upper bound. Conversely map the filtration through the inverse equivalence. The counit transports purity back to every inverse image, and the unit identifies the final inverse image with N. This proves both implications using the actual finite-object-and-monomorphism definition of mixedness.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-punctual-weights",
+  "def-zl-sheet-return-data",
+  "lem-zl-sheet-return-exact-functor",
+  "lem-zl-sheet-return-local-spectra",
+  "lem-zl-sheet-return-transport-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local geometric Frobenius on a Weil sheaf is unchanged when m successive Frobenius transitions on cyclic sheets are grouped into a return map over the finite field of q^m elements",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WittVector.StandardOneDimIsocrystal.frobenius_apply\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_1) [inst_1 : CommRing k] [inst_2 : IsDomain k] [inst_3 : CharP k p]\\n  [inst_4 : PerfectRing k p] (m : ℤ) (x : WittVector.StandardOneDimIsocrystal p k m),\\n  (WittVector.Isocrystal.frobenius p k) x = ↑p ^ m • (WittVector.FractionRing.frobeniusRingHom p\", \"doc\": \"For any integer $ m $ and element $ x $ in the standard one-dimensional isocrystal over a field $ k $ of characteristic $ p $, the Frobenius isomorphism $ \\\\Phi $ satisfies $ \\\\Phi(x) = p^m \\\\cdot \\\\varph\"}\n  {\"name\": \"PerfectClosure.iterate_frobenius_mk\", \"module\": \"Mathlib/FieldTheory/PerfectClosure\", \"type\": \"∀ (K : Type u) [inst : CommRing K] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] [inst_2 : CharP K p] (n : ℕ) (x : K),\\n  (⇑(frobenius (PerfectClosure K p) p))^[n] (PerfectClosure.mk K p (n, x)) = (PerfectClosure.of K p) x\", \"doc\": \"For any natural number $n$ and element $x$ in a field $K$ of characteristic $p$, applying the Frobenius endomorphism $n$ times to the equivalence class $[(n, x)]$ in the perfect closure of $K$ yields \"}\n  {\"name\": \"iterateFrobeniusEquiv_apply\", \"module\": \"Mathlib/FieldTheory/Perfect\", \"type\": \"∀ (R : Type u_1) (p n : ℕ) [inst : CommSemiring R] [inst_1 : ExpChar R p] [inst_2 : PerfectRing R p] (a : R),\\n  (iterateFrobeniusEquiv R p n) a = (iterateFrobenius R p n) a\", \"doc\": \"In a perfect ring $ R $ with exponential characteristic $ p $, the $ n $-th iterate of the Frobenius endomorphism, which maps each element $ x $ to $ x^{p^n} $, is a ring equivalence. This equivalence\"}\n  {\"name\": \"WittVector.Isocrystal.frobenius\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            {V : Type u_2} →\\n              [inst_4 : AddCommGroup V] →\\n                [inst_5 : WittVector.Isocrystal p k V] → V ≃ₛₗ[Wit\", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and an additive commutative group $ V $ equipped with a Witt vector isocrystal structure over $ k $, this defines a semilinear isomor\"}\n  {\"name\": \"WittVector.IsocrystalHom.frob_equivariant\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {k : Type u_1} [inst_1 : CommRing k] [inst_2 : CharP k p]\\n  [inst_3 : PerfectRing k p] {V : Type u_2} [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V]\\n  {V₂ : Type u_3} [inst_6 : AddCommGroup V₂] [inst_7 : WittVector.Isocrystal p k V₂]\\n  (self : \", \"doc\": \"For a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and an additive commutative group $ V $ equipped with a Witt vector isocrystal structure over $ k $, the Frobenius endomorphism on the \"}\n  {\"name\": \"iterateFrobeniusEquiv_add\", \"module\": \"Mathlib/FieldTheory/Perfect\", \"type\": \"∀ (R : Type u_1) (p m n : ℕ) [inst : CommSemiring R] [inst_1 : ExpChar R p] [inst_2 : PerfectRing R p],\\n  iterateFrobeniusEquiv R p (m + n) = (iterateFrobeniusEquiv R p n).trans (iterateFrobeniusEquiv R p m)\", \"doc\": \"For a perfect ring $ R $ of exponential characteristic $ p $, the $ (m + n) $-th iterate of the Frobenius endomorphism is equal to the composition of the $ n $-th and $ m $-th iterates, i.e., $ F^{m +\"}\n  {\"name\": \"coe_iterateFrobeniusEquiv\", \"module\": \"Mathlib/FieldTheory/Perfect\", \"type\": \"∀ (R : Type u_1) (p n : ℕ) [inst : CommSemiring R] [inst_1 : ExpChar R p] [inst_2 : PerfectRing R p],\\n  ⇑(iterateFrobeniusEquiv R p n) = ⇑(iterateFrobenius R p n)\", \"doc\": \"The canonical function obtained by coercing the n-th iterate of the Frobenius endomorphism ring equivalence is equal to the n-th iterate of the Frobenius endomorphism homomorphism, which maps each ele\"}\n  {\"name\": \"iterateFrobeniusEquiv_symm_add\", \"module\": \"Mathlib/FieldTheory/Perfect\", \"type\": \"∀ (R : Type u_1) (p m n : ℕ) [inst : CommSemiring R] [inst_1 : ExpChar R p] [inst_2 : PerfectRing R p],\\n  (iterateFrobeniusEquiv R p (m + n)).symm = (iterateFrobeniusEquiv R p n).symm.trans (iterateFrobeniusEquiv R p m).symm\", \"doc\": \"For a perfect ring $ R $ of exponential characteristic $ p $, the inverse of the $(m + n)$-th iterate of the Frobenius endomorphism is equal to the composition of the inverses of the $n$-th and $m$-th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing the finite base field of a constructible Weil sheaf preserves its closed point Frobenius operator and absolute residue size, hence punctual weights and finite mixed filtrations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.baseChange_slope\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Formula\", \"type\": \"[DecidableEq F] [DecidableEq K] [Algebra R F] [Algebra S F] [IsScalarTower R S F] [Algebra R K] [Algebra S K]\\n  [IsScalarTower R S K] (f : F →ₐ[S] K) (x₁ x₂ y₁ y₂ : F) :\\n  (W'.baseChange K).toAffine.slope (f x₁) (f x₂) (f y₁) (f y₂) = f ((W'.baseChange F).toAffine.slope x₁ x₂ y₁ y₂)\", \"doc\": \"For an affine Weierstrass curve $ W' $ over a field $ F $, given an $ S $-algebra homomorphism $ f : F → K $, the slope of two points $ (x_1, y_1) $ and $ (x_2, y_2) $ computed after base change to $ \"}\n  {\"name\": \"FiniteField.Extension.frob_apply\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"{x : Extension k p n} : frob k p n x = x ^ Nat.card k\", \"doc\": \"For any element $x$ in the finite field extension $L$ of $k$, the Frobenius automorphism $\\\\text{Frob}$ satisfies $\\\\text{Frob}(x) = x^{|k|}$, where $|k|$ denotes the cardinality of the base field $k$.\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \"[P.IsStableUnderBaseChange] : (sourceLocalClosure W P).IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ P $ on schemes is stable under base change, then its source-local closure (the property of being locally $ P $ with respect to coverings of the source scheme) is also stable u\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_add\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"[Algebra R S] [Algebra R F] [Algebra S F] [IsScalarTower R S F] [Algebra R K] [Algebra S K] [IsScalarTower R S K]\\n  (f : F →ₐ[S] K) {P Q : Fin 3 → F} (hP : (W'.baseChange F).toProjective.Nonsingular P)\\n  (hQ : (W'.baseChange F).toProjective.Nonsingular Q) :\\n  (W'.baseChange K).toProjective.add (f ∘ \", \"doc\": \"For a projective Weierstrass curve over a ring $ R $, given an algebra homomorphism $ f : F \\\\to K $ satisfying the scalar tower condition over $ R $, and nonsingular points $ P, Q $ on the base-change\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_baseChange\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"[Algebra F K] [IsScalarTower R F K] [Algebra F L] [IsScalarTower R F L] (f : K →ₐ[F] L) (P : W'⟮F⟯) :\\n  map f (baseChange F K P) = baseChange F L P\", \"doc\": \"Given fields $F$, $K$, and $L$ with $R$-algebra structures and scalar tower compatibility $R → F → K$ and $R → F → L$, for any algebra homomorphism $f : K → L$ over $F$ and point $P$ on an affine Weie\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_injective\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \": Function.Injective <| map (W' := W') f\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the group homomorphism from $ W'(F) $ to $ W'(K) $ ind\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsStableUnderBaseChange @IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"FiniteField.Extension.frob\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Gal(Extension k p n/k)\", \"doc\": \"The Frobenius automorphism of the finite field extension $ L/k $, defined by raising elements to the power of the characteristic $ p $ of the base field $ k $, viewed as an element of the Galois group\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, FiniteField.frobeniusAlgEquiv",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointTransport|localFrobenius|WeilSheaf",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|localFrobenius|pointTransport|punctual.*pure",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the sheet-return local operator and filtration comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, Frobenius",
+   "results": "0 hits; loogle: unknown identifier 'Frobenius'",
+   "date": "2026-10-22",
+   "verdict": "inconclusive: unknown identifier; replaced by a second Loogle query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grouping iterated geometric Frobenius point transports in blocks preserves local operators of constructible sheaves when the finite base field changes",
+   "results": "iterateFrobenius_mul_apply; LinearMap.iterateFrobenius; FiniteField.Extension.frob; coe_iterateFrobenius; AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme; IsPurelyInseparable.iterateFrobenius; FiniteField.coe_frobeniusAlgEquivOfAlgebraic; FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the sheet-return local operator and filtration comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible Weil sheaf on a cyclic disjoint union of sheets has the same local Frobenius after restriction to one sheet and grouping the transitions into the return map, with unchanged punctual weights and filtrations",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff; TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst; CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso; WittVector.StandardOneDimIsocrystal.frobenius_apply; TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd; Condensed.isColimitLocallyConstantPresheaf_desc_apply; Profinite.exists_locallyConstant_finite_aux",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the sheet-return local operator and filtration comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|equivariant",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the sheet-return local operator and filtration comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"equiv\"",
+   "results": "CategoryTheory.Sheaf.homEquiv; CategoryTheory.sheafBotEquivalence; CategoryTheory.sheafBotEquivalence_functor; CategoryTheory.sheafBotEquivalence_inverse_obj_obj; CategoryTheory.sheafBotEquivalence_inverse_map_hom; CategoryTheory.sheafBotEquivalence_unitIso; CategoryTheory.sheafBotEquivalence_counitIso; SheafOfModules.unitHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the sheet-return local operator and filtration comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from sheaves equivariant under a cyclic permutation of disjoint components to one component gives an exact equivalence and preserves subobjects and finite filtrations",
+   "results": "CategoryTheory.Presheaf.coherentExtensiveEquivalence; CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_obj_val; CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_obj_val; CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_map_val; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CompHausLike.LocallyConstant.functorIso; CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val; CategoryTheory.Sheaf.ab5ofSize",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the sheet-return local operator and filtration comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-constant-extension-weil-heart-equivalence",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 1 and 5: passage to a finite constant extension and descent of its pure-quotient filtration; comparison of the two finite-base-field interpretations before finite pushforward.",
+   "via": [
+    "lem-zl-constant-extension-weil-heart-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-constant-extension-return-local-operators",
+  "worker": "stage1",
+  "summary": "No new nodes. Reuse sheet coordinates and abstract cyclic return for exactness and filtration lifting; expand the ordered Weil maps and point transports, prove whole-tower realization before rationalization, and compare purity quotient by quotient. The statement is unchanged.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md paragraphs 1 and 5: constant-extension filtration and its interpretation as a k0-Weil filtration before finite direct image. Steps 1 and 10–11 provide filtration transport; steps 2–8 prove the local identity; step 9 supplies unchanged weights.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Finite residue degree at a closed point; the constant-extension unit has no independent Zariski lemma."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Extends comparison equations to arbitrary rational Weil arrows without demanding an integral Weil lattice."
+   },
+   {
+    "node": "lem-trf-integral-point-transport-tower-powers",
+    "why": "Whole-tower transport identities and their specified integral realization; separate finite reductions are insufficient."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Specified integral pullback compositors, whole-diagram realization, and associative/scalar coherence."
+   },
+   {
+    "node": "lem-trf-iterated-return-transport-scalar-calculus",
+    "why": "Actual point-transport and return-square compatibility with finite coefficient extension."
+   },
+   {
+    "node": "lem-trf-point-transport-composition",
+    "why": "Finite point transport composition and naturality for the prescribed restriction/coprojection recipe."
+   },
+   {
+    "node": "lem-weil-local-frobenius-conjugacy-class",
+    "why": "Choice independence at closed points for arbitrary constructible Weil complexes, with no lissity assumption."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Canonical finite-coefficient pullback composition, used to type the sheet-return square and ordered product."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-trf-integral-point-transport-tower-powers",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-iterated-return-transport-scalar-calculus",
+  "lem-trf-point-transport-composition",
+  "lem-weil-local-frobenius-conjugacy-class",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-1dcc39a9f",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-1dcc39a9f (reviewer sub-agent of L); spot-checked: First split, no new nodes, statement and stmt_deps unchanged from base. I read Deligne WII p.152 ('remplacer F_{q^n} par F_q ne change ni la catégorie des faisceaux de Weil', with the sheet decomposition) and (1.1.8), (1.2.2), (1.2.6) (weights relative to N(x), real β, fixed ι); the item agrees hypothesis by hypothesis. The 11 steps check. Step 1: sheet coordinates composed with the exact cyclic-return T give R (on morphisms u_0 = j_0^*u). Advisory: the coordinate node gives the a_i only as 'through the specified comparisons', which I read as the pullbacks of η, so their product is φ. Step 2: r is finite by closed-point-field (a), #κ = q^{mr}, and the return square follows from H^m j_0 = j_0 g_X^m. Step 3: ordered induction η^{[mb]}, with associativity from the finite termwise compositors and from the integral realization node. Step 4: the point-transport-composition recurrence plus naturality gives I^{[mr]} as r blocks of m. Step 5: tower-powers recurrence, naturality and ζ/ν realization, whose hypothesis L_sC ∈ D^b_c holds. Steps 6–9: assembly, scalar localization, common stage, conjugacy (a c b^{-1} checked, also for embeddings landing on other sheets), and equal eigenvalues and q_z. Steps 10–11: the exact equivalence carries filtrations, quotients and weights. No cycle (closures checked), proof_deps equal the step uses, no SGA. Small cases checked: m=1, Spec k_0 with m=2, m=r=2, empty scheme, zero object. Not a duplicate of the Q55 pullback-return-residue node. Batch 5: conjugacy-class is already in the stmt_deps closure through def-weil-punctual-weights and is a definitional well-definedness fact, so accepted. iterated-return-scalar-calculus adds only itself (generic scalar coherence), so accepted. tower-powers adds 51 generic point-transport/coherence nodes and no trace or duality theorem, as with the earlier rulings on lem-trf-integral-pullback-comparison-realization, so accepted. Neither assumption leaf gives these results."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantExtensionReturnLocalOperators",
+  "declaration": "WeilConjectures.constantExtensionReturnLocalOperators",
+  "declarations": [
+   "WeilConjectures.constantExtensionReturnLocalOperators"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantExtensionReturnLocalOperators.lean",
+  "statement": "theorem constantExtensionReturnLocalOperators (iota : Ω ≃+* ℂ) : ∃ R : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω ⥤ sfCommonStageWeilSheaf (constantExtensionDatum D m hm) l hl (constantExtensionModel D m hm X₀) Ω, ConstantExtensionSheetSpec D m hm X₀ l hl Ω R ∧ ∃ hR : PreservesFiniteLimits R, PreservesFiniteColimits R ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], SheetReturn.TransportLaws D l E hl m ∧ SheetReturnRationalOperators D m hm X₀ l hl E ∧ SheetReturnStalkNaturality D m hm X₀ l hl E ∧ SheetReturnScalarCompatibility D m hm X₀ l hl E) ∧ @SheetReturnFiltrations.{u, v} D m hm X₀ _ _ _ l _ hl Ω _ _ _ iota R hR ∧ (∀ (N : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω) (w : ℝ), (SfIsPunctuallyPureOfWeight D l hl Ω (constantExtensionOriginalModel D m hm X₀) iota N w ↔ SfIsPunctuallyPureOfWeight (constantExtensionDatum D m hm) l hl Ω (constantExtensionModel D m hm X₀) iota (R.obj N) w)) ∧ (∀ (N : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω) (w : ℝ), SfIsMixedOfWeightsAtMost D l hl Ω (constantExtensionOriginalModel D m hm X₀) iota N w ↔ SfIsMixedOfWeightsAtMost (constantExtensionDatum D m hm) l hl Ω (constantExtensionModel D m hm X₀) iota (R.obj N) w) ∧ (∀ (z : {z : (constantExtensionModel D m hm X₀).left // z ∈ closedPoints (constantExtensionModel D m hm X₀).left}), localClosedPointDegree D (constantExtensionOriginalModel D m hm X₀) z = m * localClosedPointDegree (constantExtensionDatum D m hm) (constantExtensionModel D m hm X₀) z ∧ Nat.card ((constantExtensionModel D m hm X₀).left.residueField z.val) = D.q ^ (m * localClosedPointDegree (constantExtensionDatum D m hm) (constantExtensionModel D m hm X₀) z)) ∧ (∀ (N : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω) (z : {z : (constantExtensionModel D m hm X₀).left // z ∈ closedPoints (constantExtensionModel D m hm X₀).left}), ConstantExtensionLocalConjugacy D m hm X₀ l hl Ω (constantExtensionOriginalModel D m hm X₀) N (R.obj N) z z 1)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Stage 3: unchanged theorem signature, proved assembly from three strictly smaller comparison statements. The unchanged interfaces and three proved normalization lemmas are publicly reexported from ConstantExtensionReturnData, owned by def-zl-sheet-return-data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6155cfea",
+  "group": "NI",
+  "result": "pass",
+  "note": "Re-delivery of 2b7b (RETURN H2). Lean differs only by two inlinings: finiteComp = IteratedReturnTransport.finiteComposition formula (pointPowerPullbackModel/integralFiniteCanonicalPullbackComposition/whiskers), finiteFibre = integralOperationsFiniteModules body, both verified identical. Maths unchanged and re-checked: R pinned by ConstantExtensionSheetSpec; c F_R = F_N c with exponents m(r+1), r+1 and c pinned by ∃!; naturality and scalar squares; finite and whole-tower block laws with ζ/ν; deg_{k0} = m·deg_{km}, #κ = q^{m r}; purity/mixed ↔ for all real w; subobject/chain equivalences. Edge cases m=1, r'≥1, zero stalks, t=0, empty scheme; u/v universes independent. Owner map over side-live+snapshot: every used declaration is owned within the item's stmt_deps closure (Spec/sheet_return via §1(B) record on def-zl-constant-extension-sheet-pullback-data; new existing:true def-zl-finite-point-power-transport-data and def-zl-integral-point-tower-transport-data, statements verbatim, declarations exist, cites = stmt_deps, no duplicate owner; integralFiniteCanonicalPullbackComposition is theorem-owned but in the closure, constructed-data precedent). Parent theorem not in closure; no cycle in the stmt_deps or proof_deps checks. lean.statement verbatim, 18/18 declarations present, 4 sorries on theorems only, no line over 100 characters, report has both required sections. Advisories: Spec's record owner lacks a restriction-local-data stmt_dep and a statement sentence for Spec; the shared ConstantExtensionWeilHeartEquivalence module means the parent's stage-3 proof needs a separate module. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-483c7",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161911-L-141922",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 17 moved decls diffed verbatim vs clone item block (only blueprint tags + Prop proof); 3 new sorry statements read against item conjuncts/Deligne 1.1.10; new-node stmt_deps vs owners of Lean statement decls"
+ }
+}

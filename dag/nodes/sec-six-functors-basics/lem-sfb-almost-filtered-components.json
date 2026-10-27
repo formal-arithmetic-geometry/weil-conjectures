@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-almost-filtered-components",
+ "kind": "statement",
+ "title": "Span and parallel-pair conditions give filtered components",
+ "statement": "Use the universe convention of [def-weil-size-convention]. Let $I$ be a small category such that (a) for every $a:w\\to x$ and $b:w\\to y$ there exist $c:x\\to z$ and $d:y\\to z$ with $c\\circ a=d\\circ b$, and (b) for every $a,b:x\\to y$ there exists $c:y\\to z$ with $c\\circ a=c\\circ b$. Then there is a small set $J$ and a partition $\\operatorname{Ob}(I)=\\coprod_{j\\in J}S_j$ into nonempty subsets such that no morphism of $I$ joins different subsets and each full subcategory $I_j$ on $S_j$ is filtered [def-weil-pbc-category-colimit]. Explicitly, each $I_j$ is nonempty, every two of its objects admit arrows to a common object of $I_j$, and every parallel pair of its arrows is coequalized by an arrow in $I_j$. The empty category is allowed, with $J=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 002X (lemma-split-into-directed)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Define $x\\sim y$ when there exist an object $u$ and arrows $x\\to u$, $y\\to u$. Identities give $x\\sim x$, and exchanging the two arrows proves symmetry.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002X (lemma-split-into-directed), proof."
+   }
+  },
+  {
+   "text": "For transitivity, suppose $x\\to u\\leftarrow y$ and $y\\to v\\leftarrow t$ witness $x\\sim y$ and $y\\sim t$. Apply hypothesis (a) to the two arrows $y\\to u$ and $y\\to v$, obtaining $u\\to z$ and $v\\to z$. Composing gives $x\\to u\\to z$ and $t\\to v\\to z$, hence $x\\sim t$. Thus $\\sim$ is an equivalence relation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002X (lemma-split-into-directed), proof."
+   }
+  },
+  {
+   "text": "Let $J=\\operatorname{Ob}(I)/{\\sim}$ and let $S_j$ be the equivalence class indexed by $j$. Each class is nonempty, distinct classes are disjoint, and their union is $\\operatorname{Ob}(I)$. The quotient of the small object set and each of its classes are small in the universe of [def-weil-size-convention]. If $I$ is empty, this construction gives $J=\\varnothing$. Let $I_j$ be the full subcategory on $S_j$, with all ambient arrows between its objects and the inherited identities and composition.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002X (lemma-split-into-directed), proof."
+   }
+  },
+  {
+   "text": "For any morphism $f:x\\to y$, the arrows $f$ and $\\operatorname{id}_y$ witness $x\\sim y$. Therefore every morphism has its endpoints in the same $S_j$, so none joins distinct classes. In particular, the full subcategories $I_j$ give the claimed disjoint decomposition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002X (lemma-split-into-directed), proof."
+   }
+  },
+  {
+   "text": "If $x,y\\in S_j$, then $x\\sim y$, so choose a witness $x\\to u\\leftarrow y$. Since the arrow $x\\to u$ implies $x\\sim u$ by the preceding step, $u\\in S_j$. By fullness both witness arrows lie in $I_j$. Hence every pair of objects of $I_j$ maps to a common object of $I_j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002X (lemma-split-into-directed), proof."
+   }
+  },
+  {
+   "text": "For parallel arrows $a,b:x\\to y$ in $I_j$, hypothesis (b) supplies $c:y\\to z$ with $c\\circ a=c\\circ b$. The arrow $c$ implies $y\\sim z$, so $z\\in S_j$ and fullness makes $c$ an arrow of $I_j$. Each $I_j$ is nonempty by construction; together with the preceding common-object property and this coequalization property, these are exactly the three conditions defining filteredness in [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002X (lemma-split-into-directed), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 002X (lemma-split-into-directed), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsFiltered.*Connected|Connected.*IsFiltered|component.*filtered|filtered.*component|IsFilteredOrEmpty.of",
+   "results": "{\"t\": \"2026-10-23T22:56:15Z\", \"tool\": \"grep\", \"query\": \"IsFiltered.*Connected|Connected.*IsFiltered|component.*filtered|filtered.*component|IsFilteredOrEmpty.of\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Subobject.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ColimCoyoneda.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"Mathlib/CategoryTheory/Filtered/Basic.lean\", \"Mathlib/CategoryTheory/Filtered/Basic.lean\"], \"digest\": \"dab52a2a63ea25e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty requires a common upper object for every pair, which the present disconnected category need not have. Decomposed and decomposedEquiv (Mathlib/CategoryTheory/ConnectedComponents.lean:135,179) decompose any category into connected full subcategories but do not prove them filtered under these hypotheses. IsFiltered.isConnected and IsFiltered.span run in the reverse direction. Read Filtered/Basic.lean:76-98 and Filtered/Connected.lean:23-35; neither gives the span criterion for filtered components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A category whose every span has a commuting cocone and every parallel pair has a coequalizing morphism has filtered connected components",
+   "results": "{\"t\": \"2026-10-23T22:56:16Z\", \"tool\": \"leansearch\", \"query\": \"A category whose every span has a commuting cocone and every parallel pair has a coequalizing morphism has filtered connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFiltered.isConnected\", \"CategoryTheory.IsFiltered.of_cocone_nonempty\", \"CategoryTheory.IsFiltered.of_hasFiniteColimits\", \"CategoryTheory.isCardinalFiltered_iff\", \"CategoryTheory.Limits.HasFilteredColimits\", \"CategoryTheory.IsFilteredOrEmpty.mk\", \"CategoryTheory.IsFiltered.iff_cocone_nonempty\", \"CategoryTheory.IsFiltered.coeq\"], \"digest\": \"faa35ee439c71731\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty requires a common upper object for every pair, which the present disconnected category need not have. Decomposed and decomposedEquiv (Mathlib/CategoryTheory/ConnectedComponents.lean:135,179) decompose any category into connected full subcategories but do not prove them filtered under these hypotheses. IsFiltered.isConnected and IsFiltered.span run in the reverse direction. Read Filtered/Basic.lean:76-98 and Filtered/Connected.lean:23-35; neither gives the span criterion for filtered components."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFilteredOrEmpty\"",
+   "results": "{\"t\": \"2026-10-23T22:56:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFilteredOrEmpty\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsFilteredOrEmpty\", \"CategoryTheory.IsFiltered.toIsFilteredOrEmpty\", \"CategoryTheory.isCofilteredOrEmpty_of_isFilteredOrEmpty_op\", \"CategoryTheory.isCofilteredOrEmpty_op_of_isFilteredOrEmpty\", \"CategoryTheory.isFilteredOrEmpty_of_isCofilteredOrEmpty_op\", \"CategoryTheory.isFilteredOrEmpty_of_semilatticeSup\", \"CategoryTheory.isFilteredOrEmpty_op_of_isCofilteredOrEmpty\", \"CategoryTheory.isFilteredOrEmpty_of_directed_le\"], \"digest\": \"c67a6ab7b386599e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty requires a common upper object for every pair, which the present disconnected category need not have. Decomposed and decomposedEquiv (Mathlib/CategoryTheory/ConnectedComponents.lean:135,179) decompose any category into connected full subcategories but do not prove them filtered under these hypotheses. IsFiltered.isConnected and IsFiltered.span run in the reverse direction. Read Filtered/Basic.lean:76-98 and Filtered/Connected.lean:23-35; neither gives the span criterion for filtered components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small category where every span admits a commuting cocone and every parallel pair can be coequalized is a disjoint union of filtered full subcategories",
+   "results": "{\"t\": \"2026-10-23T22:56:17Z\", \"tool\": \"leanfinder\", \"query\": \"A small category where every span admits a commuting cocone and every parallel pair can be coequalized is a disjoint union of filtered full subcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFilteredOrEmpty\", \"CategoryTheory.IsFiltered\", \"CategoryTheory.Decomposed\", \"CategoryTheory.IsFilteredOrEmpty.cocone_objs\", \"CategoryTheory.IsFiltered.isConnected\", \"CategoryTheory.IsFilteredOrEmpty.isPreconnected\", \"CategoryTheory.Limits.HasFilteredColimits\", \"CategoryTheory.Limits.HasFilteredColimitsOfSize\"], \"digest\": \"db6e9882a34de31c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty requires a common upper object for every pair, which the present disconnected category need not have. Decomposed and decomposedEquiv (Mathlib/CategoryTheory/ConnectedComponents.lean:135,179) decompose any category into connected full subcategories but do not prove them filtered under these hypotheses. IsFiltered.isConnected and IsFiltered.span run in the reverse direction. Read Filtered/Basic.lean:76-98 and Filtered/Connected.lean:23-35; neither gives the span criterion for filtered components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected components of a category satisfying the right Ore condition and coequalizing parallel arrows are filtered",
+   "results": "{\"t\": \"2026-10-23T22:57:16Z\", \"tool\": \"leanfinder\", \"query\": \"Connected components of a category satisfying the right Ore condition and coequalizing parallel arrows are filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IndParallelPairPresentation.hI\", \"CategoryTheory.instIsFilteredI\", \"CategoryTheory.IsFiltered.isConnected\", \"CategoryTheory.IsFiltered.coeq\", \"CategoryTheory.IsFiltered.filteredClosure.coeq\", \"CategoryTheory.IsFiltered.span\", \"CategoryTheory.IsFiltered.coeq_condition\", \"CategoryTheory.IsFiltered.coeqHom\"], \"digest\": \"7713c75135d08c5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty requires a common upper object for every pair, which the present disconnected category need not have. Decomposed and decomposedEquiv (Mathlib/CategoryTheory/ConnectedComponents.lean:135,179) decompose any category into connected full subcategories but do not prove them filtered under these hypotheses. IsFiltered.isConnected and IsFiltered.span run in the reverse direction. Read Filtered/Basic.lean:76-98 and Filtered/Connected.lean:23-35; neither gives the span criterion for filtered components."
+  },
+  {
+   "tool": "grep",
+   "query": "Decomposed|equiv.*[Cc]omponent|[Cc]omponent.*[Ee]quiv|[Ff]iltered",
+   "results": "{\"t\": \"2026-10-23T22:58:56Z\", \"tool\": \"grep\", \"query\": \"Decomposed|equiv.*[Cc]omponent|[Cc]omponent.*[Ee]quiv|[Ff]iltered\", \"sub\": \"CategoryTheory/ConnectedComponents.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"22\", \"69\", \"135\", \"140\"], \"digest\": \"7dc4ba28ebecd3ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty requires a common upper object for every pair, which the present disconnected category need not have. Decomposed and decomposedEquiv (Mathlib/CategoryTheory/ConnectedComponents.lean:135,179) decompose any category into connected full subcategories but do not prove them filtered under these hypotheses. IsFiltered.isConnected and IsFiltered.span run in the reverse direction. Read Filtered/Basic.lean:76-98 and Filtered/Connected.lean:23-35; neither gives the span criterion for filtered components."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFilteredOrEmpty|IsFiltered|cocone_objs|cocone_maps",
+   "results": "{\"t\": \"2026-10-23T22:58:56Z\", \"tool\": \"grep\", \"query\": \"IsFilteredOrEmpty|IsFiltered|cocone_objs|cocone_maps\", \"sub\": \"CategoryTheory/Filtered/Connected.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"23\", \"25\", \"26\", \"33\", \"34\"], \"digest\": \"a7eeff5d72578929\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty requires a common upper object for every pair, which the present disconnected category need not have. Decomposed and decomposedEquiv (Mathlib/CategoryTheory/ConnectedComponents.lean:135,179) decompose any category into connected full subcategories but do not prove them filtered under these hypotheses. IsFiltered.isConnected and IsFiltered.span run in the reverse direction. Read Filtered/Basic.lean:76-98 and Filtered/Connected.lean:23-35; neither gives the span criterion for filtered components."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiltered.*Connected|Connected.*IsFiltered|component.*filtered|filtered.*component|IsFilteredOrEmpty.of",
+   "results": "{\"t\": \"2026-10-23T23:41:20Z\", \"tool\": \"grep\", \"query\": \"IsFiltered.*Connected|Connected.*IsFiltered|component.*filtered|filtered.*component|IsFilteredOrEmpty.of\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Colim.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Subobject.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ColimCoyoneda.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"Mathlib/CategoryTheory/Functor/Flat.lean\"], \"digest\": \"183eaef38feb51d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty assumes a common target for every object pair, stronger than hypothesis (a) on a disconnected category. IsFiltered.span and IsFiltered.isConnected give the reverse implication. Decomposed/decomposedEquiv (ConnectedComponents.lean:135,179) decompose categories into connected components without proving those components filtered. IndParallelPairPresentation.hI concerns its specific presentation category, not an arbitrary category satisfying (a),(b). Read Filtered/Basic.lean:76-98 and ConnectedComponents.lean:135-180."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every connected component of a category with common pushforward for spans and equalization of parallel morphisms is filtered",
+   "results": "{\"t\": \"2026-10-23T23:41:21Z\", \"tool\": \"leansearch\", \"query\": \"Every connected component of a category with common pushforward for spans and equalization of parallel morphisms is filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFilteredOrEmpty.mk\", \"CategoryTheory.IsFiltered.isConnected\", \"CategoryTheory.IsFiltered.of_hasFiniteColimits\", \"CategoryTheory.IsFilteredOrEmpty.isPreconnected\", \"CategoryTheory.IsFiltered.of_equivalence\", \"CategoryTheory.IsFiltered\", \"CategoryTheory.IsFiltered.coeq\", \"CategoryTheory.IsFiltered.coeq_condition\"], \"digest\": \"47ca08b746d30fdb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty assumes a common target for every object pair, stronger than hypothesis (a) on a disconnected category. IsFiltered.span and IsFiltered.isConnected give the reverse implication. Decomposed/decomposedEquiv (ConnectedComponents.lean:135,179) decompose categories into connected components without proving those components filtered. IndParallelPairPresentation.hI concerns its specific presentation category, not an arbitrary category satisfying (a),(b). Read Filtered/Basic.lean:76-98 and ConnectedComponents.lean:135-180."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFilteredOrEmpty\"",
+   "results": "{\"t\": \"2026-10-23T23:41:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFilteredOrEmpty\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsFilteredOrEmpty\", \"CategoryTheory.IsFiltered.toIsFilteredOrEmpty\", \"CategoryTheory.isCofilteredOrEmpty_of_isFilteredOrEmpty_op\", \"CategoryTheory.isCofilteredOrEmpty_op_of_isFilteredOrEmpty\", \"CategoryTheory.isFilteredOrEmpty_of_isCofilteredOrEmpty_op\", \"CategoryTheory.isFilteredOrEmpty_of_semilatticeSup\", \"CategoryTheory.isFilteredOrEmpty_op_of_isCofilteredOrEmpty\", \"CategoryTheory.isFilteredOrEmpty_of_directed_le\"], \"digest\": \"c67a6ab7b386599e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty assumes a common target for every object pair, stronger than hypothesis (a) on a disconnected category. IsFiltered.span and IsFiltered.isConnected give the reverse implication. Decomposed/decomposedEquiv (ConnectedComponents.lean:135,179) decompose categories into connected components without proving those components filtered. IndParallelPairPresentation.hI concerns its specific presentation category, not an arbitrary category satisfying (a),(b). Read Filtered/Basic.lean:76-98 and ConnectedComponents.lean:135-180."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small category with commuting cocones for spans and coequalizers for parallel pairs is a disjoint union of nonempty filtered full subcategories",
+   "results": "{\"t\": \"2026-10-23T23:41:22Z\", \"tool\": \"leanfinder\", \"query\": \"A small category with commuting cocones for spans and coequalizers for parallel pairs is a disjoint union of nonempty filtered full subcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFilteredOrEmpty\", \"CategoryTheory.IsFilteredOrEmpty.cocone_objs\", \"CategoryTheory.IsFiltered.span\", \"CategoryTheory.IsFilteredOrEmpty.cocone_maps\", \"CategoryTheory.IsFiltered\", \"CategoryTheory.IsFiltered.coeq\", \"CategoryTheory.instIsFilteredI\", \"CategoryTheory.IndParallelPairPresentation.hI\"], \"digest\": \"b14bcc91e1417c3e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty assumes a common target for every object pair, stronger than hypothesis (a) on a disconnected category. IsFiltered.span and IsFiltered.isConnected give the reverse implication. Decomposed/decomposedEquiv (ConnectedComponents.lean:135,179) decompose categories into connected components without proving those components filtered. IndParallelPairPresentation.hI concerns its specific presentation category, not an arbitrary category satisfying (a),(b). Read Filtered/Basic.lean:76-98 and ConnectedComponents.lean:135-180."
+  },
+  {
+   "tool": "grep",
+   "query": "Decomposed|decomposedEquiv|filtered|Ore",
+   "results": "{\"t\": \"2026-10-23T23:42:36Z\", \"tool\": \"grep\", \"query\": \"Decomposed|decomposedEquiv|filtered|Ore\", \"sub\": \"CategoryTheory/ConnectedComponents.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"135\", \"140\", \"141\", \"143\"], \"digest\": \"ed39082cc90b6780\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty assumes a common target for every object pair, stronger than hypothesis (a) on a disconnected category. IsFiltered.span and IsFiltered.isConnected give the reverse implication. Decomposed/decomposedEquiv (ConnectedComponents.lean:135,179) decompose categories into connected components without proving those components filtered. IndParallelPairPresentation.hI concerns its specific presentation category, not an arbitrary category satisfying (a),(b). Read Filtered/Basic.lean:76-98 and ConnectedComponents.lean:135-180."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right Ore span condition together with coequalization of parallel arrows makes each connected component of a category filtered",
+   "results": "{\"t\": \"2026-10-23T23:42:37Z\", \"tool\": \"leanfinder\", \"query\": \"The right Ore span condition together with coequalization of parallel arrows makes each connected component of a category filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IndParallelPairPresentation.hI\", \"CategoryTheory.instIsFilteredI\", \"CategoryTheory.IsFiltered.span\", \"CategoryTheory.IsFiltered.isConnected\", \"CategoryTheory.IsFiltered.coeq\", \"CategoryTheory.IsFiltered.coeq_condition\", \"CategoryTheory.IsFiltered.filteredClosure.coeq\", \"CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI\"], \"digest\": \"287bee9f31a13a05\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFilteredOrEmpty assumes a common target for every object pair, stronger than hypothesis (a) on a disconnected category. IsFiltered.span and IsFiltered.isConnected give the reverse implication. Decomposed/decomposedEquiv (ConnectedComponents.lean:135,179) decompose categories into connected components without proving those components filtered. IndParallelPairPresentation.hI concerns its specific presentation category, not an arbitrary category satisfying (a),(b). Read Filtered/Basic.lean:76-98 and ConnectedComponents.lean:135-180."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-almost-filtered-set-colimits",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Derived restriction of representable stack direct image to a scheme test. Supporting input: Ordinary big-small etale ringed comparison for algebraic spaces. Site-theoretic input to Tag 073M: the left adjoint preserves fibre products and equalizers before preservation of the terminal sheaf is checked using an atlas. General categorical input to the comma-colimit argument: Stacks Categories 002Y, with both hypotheses of 002X written explicitly. Supporting decomposition for Categories Tag 002Y: Tag 002X partitions the index category into nonempty filtered full subcategories before the componentwise finite-limit argument.",
+   "via": [
+    "lem-sfb-almost-filtered-set-colimits",
+    "lem-sfb-site-left-adjoint-connected-limits",
+    "lem-sfb-space-big-small-ringed-comparison",
+    "lem-sfb-stack-representable-derived-restriction",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-almost-filtered-components",
+  "worker": "stage1",
+  "summary": "Read Stacks 002X and expanded its common-target equivalence-relation proof into six elementary steps. Explicitly checked transitivity using (a), closure of all chosen targets in their classes, coequalization using (b), smallness, nonemptiness and the empty case. Preserved the statement and inherited metadata. Searched the project, whole DAG/blueprint and Mathlib; no exact project attachment or Mathlib leaf. No new nodes needed.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited chain in blueprint.from: Tag 002X is the decomposition prerequisite for lem-sfb-almost-filtered-set-colimits (Tag 002Y), used by the site left-adjoint connected-limits argument. Latest blueprint direct-images proof (3) read; no change to its route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-916a27190",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-916a27190 (reviewer sub-agent of L); spot-checked: I read the statement and proof of Stacks 002X, label lemma-split-into-directed (categories.tex 2451-2475; the tags file maps 002X to this label). Hypotheses (a) and (b) are word for word the source's (1) and (2). The item's conclusion spells out the source's conclusion: a small index set J, a partition of the objects into nonempty classes, no arrow between classes, and each full subcategory filtered in all three clauses of def-weil-pbc-category-colimit. It is not weakened. Steps 1-2: the relation x~y (common target) is an equivalence relation; transitivity applies (a) to the span u<-y->v, which is correct. Step 3: J is the quotient set, small by def-weil-size-convention, empty when I is empty. Step 4: an arrow f gives x~y via (f, id). Step 5: the common target of two objects lies in their class, which is the detail the source leaves out. Step 6: (b) gives the coequalizing arrow, whose target stays in the class. All three clauses are checked. Every step is genuinely elementary, the two cited definitions say what each step takes from them, and proof_deps is the union of the step uses. Tested: the empty category; a discrete two-object category (two singleton classes, so the partition is needed); a nontrivial one-object group (fails (b)); the idempotent monoid {1,e} (one filtered class); a cospan (one class). Searching the DAG for 002X, split-into-directed and the key words found only the item, its citer lem-sfb-almost-filtered-set-colimits (whose step 1 uses exactly this conclusion) and the site left-adjoint node. There are no duplicates and no Lean attachment. Mathlib has no exact match (IsFilteredOrEmpty is stronger, Decomposed is weaker). No new nodes, no SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlmostFilteredComponents",
+  "declaration": "CategoryTheory.exists_filtered_partition_of_span_coequalization",
+  "file": "lean/Sheaf/CategoryTheory/AlmostFilteredComponents.lean",
+  "statement": "theorem exists_filtered_partition_of_span_coequalization (I : Type u) [SmallCategory I] (hspan : ∀ {w x y : I} (a : w ⟶ x) (b : w ⟶ y), ∃ (z : I) (c : x ⟶ z) (d : y ⟶ z), a ≫ c = b ≫ d) (hparallel : ∀ {x y : I} (a b : x ⟶ y), ∃ (z : I) (c : y ⟶ z), a ≫ c = b ≫ c) : ∃ (J : Type u) (S : J → Set I), (∀ x : I, ∃! j : J, x ∈ S j) ∧ (∀ j : J, IsFiltered (ObjectProperty.FullSubcategory (fun x : I ↦ x ∈ S j))) ∧ (∀ (j k : J) (x y : I), x ∈ S j → y ∈ S k → (x ⟶ y) → j = k)",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ef3a2dfc",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Read Stacks 002X (categories.tex 2451-2475), the node, both stmt_deps, the module, and the report. The Lean statement matches the node: hspan and hparallel are (a) and (b) verbatim with correct composition order; the conclusion is J : Type u and S : J → Set I with ∀x ∃!j x∈S j (partition), IsFiltered on each full subcategory (nonempty plus both cocone conditions, not IsFilteredOrEmpty), and no arrows between distinct parts. No Nonempty assumption, so the empty case gives J=∅. Universe-polymorphic. lean.statement is verbatim in the file; the node differs from live only by the new lean field; docstrings carry the source place, the blueprint id and all six proof steps; the proof is sorry only; no definitions; no duplicate in Mathlib or the project; the report has the Worker report and Second reading sections. No findings."
+ }
+}

@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-nodal-subcurve-dualizing-annihilator",
+ "kind": "statement",
+ "title": "Dualizing module of a nodal subcurve as an annihilator",
+ "statement": "Let $k$ be algebraically closed [def-weil-field]. Let $X$ be a nonempty connected projective reduced $k$-scheme of pure dimension one whose singular points have completed local ring $k[[u,v]]/(uv)$ [def-pc-scheme] [def-kun-projective] [def-weil-pbc-adic-completion] [def-weil-pbc-multivariate-power-series]. Let $i:Y\\hookrightarrow X$ be the reduced closed union of a nonempty selection of its irreducible components [def-weil-closed-immersion] [def-weil-irreducible-components], and let $I_Y$ be its ideal sheaf [def-sbc-closed-immersion-ideal-sheaf]. Then $Y$ is projective, reduced, pure of dimension one and nodal in the same completed-local-ring sense (a component boundary point can become smooth). Let $\\omega_X$ and $\\omega_Y$ be the duality modules of [lem-sfb-nodal-line-serre-riemann-roch], using that module on each connected component when $Y$ is disconnected. There is a canonical isomorphism\n$$i_*\\omega_Y\\simeq\\mathcal Hom_{\\mathcal O_X}(i_*\\mathcal O_Y,\\omega_X).$$\nEvaluation at $1$ identifies this sheaf with the subsheaf $\\operatorname{Ann}_{\\omega_X}(I_Y)\\subseteq\\omega_X$ of sections killed by $I_Y$. Consequently, for every invertible module $M$ on $X$ [def-sc-invertible-module], the induced injective map\n$$\\operatorname{Hom}_{\\mathcal O_Y}(i^*M,\\omega_Y)\\longrightarrow\\operatorname{Hom}_{\\mathcal O_X}(M,\\omega_X)$$\nhas image precisely the maps whose images are annihilated by $I_Y$. Here pullback is [def-pc-module-pullback], the Hom sheaf is [def-pur-sheaf-hom], and $i_*$ is ordinary direct image of module sheaves. At generic points of $Y$ this inclusion is the canonical identification of the one-dimensional dualizing fibres; at the other component generic points its image is zero. Reducedness, pure dimension and connectedness use [def-pc-reduced-scheme] [def-weil-pure-dimension] [def-weil-connected-scheme]; algebraic closedness is [def-weil-algebraic-closure].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E33 (lemma-closed-immersion-dim-1-CM), part (2); compare Tag 0E34 (lemma-closed-subscheme-reduced-gorenstein). Evaluation-at-one and the Hom image description unwind the displayed sheaf-Hom identification. Inheritance of nodality is the local branch calculation in Tag 0C4D (lemma-nodal)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-kun-projective",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-hom",
+  "lem-sfb-nodal-line-serre-riemann-roch",
+  "def-weil-algebraic-closure",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-weil-connected-scheme",
+  "def-sfb-reduced-curve-dualizing-pair",
+  "def-pc-module-stalk-functor",
+  "def-sc-generic-point"
+ ],
+ "proof": [
+  {
+   "text": "Choose a projective embedding $X\\hookrightarrow\\mathbf P^N_k$. Composing it with $i$ is a closed immersion, so $Y$ is projective by the definition. Both $X$ and $Y$ are proper by projective-implies-proper, hence of finite type by the definition of properness. Reducedness of $Y$ is a hypothesis. Its irreducible components are exactly the selected components: each selected component is irreducible closed in $Y$, none contains another, and they cover $Y$. They all have dimension one, so $Y$ is pure of dimension one and is nonempty. The field $k$ is Noetherian (its only ideals are $0,k$); finite-type-over-Noetherian makes $X,Y$ Noetherian. They therefore have finitely many irreducible components. Connected components of $Y$ are the unions of irreducible components joined by chains of nonempty intersections; these form a finite partition into closed, hence also open, subsets. Denote their reduced open-and-closed subschemes by $Y_a$. Each is nonempty, connected, reduced and pure of dimension one, and its inclusion in $X$ is closed, so the same projective embedding applies to it.",
+   "uses": [
+    "def-kun-projective",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "def-weil-irreducible-components",
+    "def-weil-pure-dimension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), opening reduction to component unions; projectivity and connected-component bookkeeping."
+   }
+  },
+  {
+   "text": "Apply the nodal-subcurve boundary theorem with $N=X$ and the given reduced pure-dimensional-one closed subscheme $Y$. Its algebraically closed field, reduced finite-type source, pure dimension, and completed nodal local-ring hypotheses are exactly those verified above or assumed for $X$. It gives that $Y$ is nodal in the same completed-local-ring sense, and that a point on the boundary with the complementary subcurve is smooth on $Y$. Since $Y_a$ is open in $Y$, its local rings are unchanged, so every $Y_a$ is nodal as well.",
+   "uses": [
+    "lem-trf-nodal-subcurve-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), (1) and (2)(c)."
+   }
+  },
+  {
+   "text": "For $X$ and each $Y_a$, the nodal Serre-duality theorem and the reduced-curve duality theorem give representing pairs for the identical functor $F\\mapsto\\operatorname{Hom}_k(H^1(F),k)$. The uniqueness assertions identify these pairs canonically, preserving their duality isomorphisms. Apply closed-subcurve dualizing adjunction to $j_a:Y_a\\hookrightarrow X$, using its nonempty proper reduced pure-dimensional-one hypotheses. It gives $j_{a*}\\omega_{Y_a}\\simeq\\mathcal Hom_X(j_{a*}\\mathcal O_{Y_a},\\omega_X)$. Assemble over the finite disjoint clopen partition of $Y$: sections of $i_*\\omega_Y$ and of $i_*\\mathcal O_Y$ are finite products of the corresponding component sections. A homomorphism out of a finite product is uniquely the sum of its restrictions to the summands; finite products and sums of modules agree. The assembled isomorphism is therefore $i_*\\omega_Y\\simeq\\mathcal Hom_X(i_*\\mathcal O_Y,\\omega_X)$. The component comparisons preserve the representing pairs, so the isomorphism is canonical for the specified duality data.",
+   "uses": [
+    "lem-sfb-nodal-line-serre-riemann-roch",
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-sfb-closed-subcurve-dualizing-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E33 (lemma-closed-immersion-dim-1-CM), (2); Tags 0BS2 and 0BS3 for uniqueness of the representing pairs."
+   }
+  },
+  {
+   "text": "Write $q:\\mathcal O_X\\twoheadrightarrow i_*\\mathcal O_Y=\\mathcal O_X/I_Y$. For every local module homomorphism $h:\\mathcal O_X/I_Y\\to\\omega_X$, its value $w=h(\\overline1)$ determines it, since $h(\\overline a)=aw$. This value satisfies $I_Yw=0$. Conversely a section $w$ killed by $I_Y$ gives the well-defined local homomorphism $\\overline a\\mapsto aw$. These inverse constructions commute with restrictions, hence identify the sheaf Hom with $\\operatorname{Ann}_{\\omega_X}(I_Y)$. Evaluation at $1$ is thus an injective sheaf map $e:i_*\\omega_Y\\hookrightarrow\\omega_X$ with exactly the asserted image.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E33 (lemma-closed-immersion-dim-1-CM), (2); elementary evaluation-at-one description of sheaf Hom from a quotient."
+   }
+  },
+  {
+   "text": "Pullback-pushforward adjunction identifies $\\operatorname{Hom}_Y(i^*M,\\omega_Y)$ with $\\operatorname{Hom}_X(M,i_*\\omega_Y)$. Compose with $e$ to define the asserted map; its injectivity follows from injectivity of $e$. Every map in its image has values killed by $I_Y$. Conversely, if $f:M\\to\\omega_X$ has $I_Yf(M)=0$, its values lie in the subsheaf identified in the previous step, so $f$ factors uniquely through $e$. Explicitly on a trivialization $M|_U=\\mathcal O_U m$, put $w=f(m)$. The map on $i^*M|_{Y\\cap U}$ sends $\\overline a\\,i^*m$ to the unique section corresponding to $aw$ under $e$; it is well-defined because $I_Yw=0$. Uniqueness forces agreement on overlaps. This is the inverse on the claimed image.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E33 (lemma-closed-immersion-dim-1-CM), (2); elementary factorization through the annihilator and module pullback adjunction."
+   }
+  },
+  {
+   "text": "Let $\\eta$ be a generic point of a selected component. Remove the finitely many other irreducible components of $X$ to get an open neighbourhood of $\\eta$ contained in that selected component. On this open $Y$ and $X$ have the same reduced closed subscheme structure: the quotient ideal has zero radical in a reduced ring, hence is zero. Thus $(I_Y)_\\eta=0$, and evaluation at $1$ identifies the included dualizing stalk with $(\\omega_X)_\\eta$ via $\\operatorname{Hom}(\\mathcal O_{X,\\eta},(\\omega_X)_\\eta)\\to(\\omega_X)_\\eta$. The reduced-curve dualizing theorem says this is a one-dimensional vector space over $\\mathcal O_{X,\\eta}$. At the generic point of an unselected component, the complement of the selected union is an open neighbourhood disjoint from $Y$. There $i_*\\omega_Y=0$, or equivalently $I_Y=\\mathcal O_X$ and its annihilator is zero. This proves both generic-point clauses.",
+   "uses": [
+    "lem-sfb-reduced-curve-dualizing-module",
+    "def-pc-reduced-scheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E33 (lemma-closed-immersion-dim-1-CM), (2); generic stalks, using Tag 0BS3 (lemma-duality-dim-1-CM)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pure-dimension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-sfb-nodal-line-serre-riemann-roch",
+  "lem-sfb-reduced-curve-dualizing-module",
+  "lem-sfb-closed-subcurve-dualizing-adjunction",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pur-sheaf-hom",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Assembly of Tags 0E38 (lemma-closed-subscheme-nodal-curve), 0E33 (lemma-closed-immersion-dim-1-CM), 0BS2 and 0BS3; explicit quotient and Hom calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed subcurve Y of a proper curve X the dualizing sheaf pushforward is Hom O_Y omega_X",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) {U V : Y.Opens} (i : U ⟶ V),\\n  ((AlgebraicGeometry.Scheme.Modules.pushforward f).obj M).presheaf.map i.op =\\n    M.presheaf.map ((TopologicalSpace.Opens.map f.base).map i).op\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a sheaf of modules $ M $ over $ X $, the restriction map of the pushforward sheaf $ f_*M $ on an inclusion $ U \\\\subset V $ in $ Y $'s open sets is equal t\"}\n  {\"name\": \"AlgebraicGeometry.toOpen_toSpecΓ_app\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : (AlgebraicGeometry.Spec (X.presheaf.obj (Opposite.op ⊤))).Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toOpen (↑(X.presheaf.obj (Opposite.op ⊤))) U)\\n      (AlgebraicGeometry.Scheme.Hom.app X.toSpecΓ U) =\\n    X.presheaf.map (Cate\", \"doc\": \"For any scheme $X$ and open subset $U$ of $\\\\operatorname{Spec}(\\\\Gamma(X))$, the composition of the structure sheaf morphism $R \\\\to \\\\mathcal{O}_X(f^{-1}(U))$ with the unit of the $\\\\Gamma$-$\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Presheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    Y.ringCatSheaf ⟶\\n      ((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous RingCat (Opens.grothendieckTopology ↥Y)\\n            (Opens.grothendieckTopology ↥X)).obj\\n        X.ringCatSheaf\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this function constructs the induced morphism between the ring sheaf of $ Y $ and the pushforward of the ring sheaf of $ X $ along the continuous base map $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : (TopologicalSpace.Opens ↥X)ᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Hom.toLRSHom (X.ofRestrict h)).c.app V =\\n \", \"doc\": \"For a scheme $X$, open subset $U$, open immersion $h: U \\\\to X$, and open set $V$ in $X$, the sheaf component of the morphism $X|_U \\\\to X$ at $V$ equals the map induced by the counit of the adjunction \"}\n  {\"name\": \"AlgebraicGeometry.Spec.map_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) {U : (AlgebraicGeometry.Spec S).Opens} {V : (AlgebraicGeometry.Spec R).Opens}\\n  (e : U ≤ (TopologicalSpace.Opens.map (AlgebraicGeometry.Spec.map f).base).obj V),\\n  AlgebraicGeometry.Scheme.Hom.appLE (AlgebraicGeometry.Spec.map f) V U e =\\n    CommRingCat.ofHom (Algeb\", \"doc\": \"For open subsets $U$ and $V$ of the prime spectra, if $U$ is contained in the preimage of $V$ under the continuous map induced by a ring homomorphism $f : R → S$, then the morphism of structure sheave\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {M N : X.Modules} (f : X ⟶ Y) (φ : M ⟶ N) (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforward f).map φ) U =\\n    AlgebraicGeometry.Scheme.Modules.Hom.app φ ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : X.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (X.ofRestrict h) V = X.presheaf.map (⋯.adjunction.counit.\", \"doc\": \"For a scheme $X$, an open subset $U$ with open immersion $h: U \\to X$, and an open set $V$ in $X$, the component of the morphism $X|_U \\to X$ at $V$ is equal to the presheaf map of $X$ applied to the co\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary module pushforward, ideal-sheaf and closed-immersion declarations do not identify dualizing modules under a closed immersion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizing module for a reduced union of irreducible components is the subsheaf of ambient dualizing module annihilated by its defining ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, when constructing ideal sheaf data via the specified method using a family of ideals on affine open subsets, compatibility conditions under restriction to basic open subsets, and a s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → Ideal ↑(X.presheaf.obj (Opposite.op ⊤)) → X.IdealSheafData\", \"doc\": \"Given a scheme $X$ and an ideal $I$ in the global sections of its structure sheaf over the entire space $X$, this constructor defines an ideal sheaf data on $X$ by restricting $I$ to affine open subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, given compatible ideals $\\\\mathfrak{a}_U$ on affine open subsets $U \\\\subseteq X$ and a support set defined as the intersection $\\\\bigcap_U V(\\\\mathfrak{a}_U)$ of their zero loci, the su\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_iSup\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} (I : ι → X.IdealSheafData), (iSup I).support = ⨅ i, (I i).support\", \"doc\": \"For any family of ideal sheaves on a scheme $X$, the support of their supremum is equal to the intersection of the supports of each individual ideal sheaf in the family.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (CategoryTheory.CategoryStruct.comp (I.glueDataObjι U) (↑U).ι).base) =\\n    X.zeroLocus ↑(I.ideal U) ∩ ↑↑U\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the image of the composition of the gluing morphism $\\\\mathcal{I}.\\\\text{glueDataObj}\\\\iota_U$ (which maps \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_eq_eq_iInter_zeroLocus\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), ↑I.support = ⋂ U, X.zeroLocus ↑(I.ideal U)\", \"doc\": \"The support of an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$, when viewed as a subset of $X$, coincides with the intersection over all affine open subsets $U \\\\subseteq X$ of the zero loci of the ideal \"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary module pushforward, ideal-sheaf and closed-immersion declarations do not identify dualizing modules under a closed immersion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"Hom\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary module pushforward, ideal-sheaf and closed-immersion declarations do not identify dualizing modules under a closed immersion."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary module pushforward, ideal-sheaf and closed-immersion declarations do not identify dualizing modules under a closed immersion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Duality for closed immersion of proper one dimensional schemes identifies dualizing sheaf with sheaf Hom of quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat} {f : X ⟶ Spec R} :\\n  IsClosedImmersion f ↔\\n    ∃ I : Ideal R, ∃ e : X ≅ Spec (.of <| R ⧸ I), f = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"[IsClosedImmersion f] (hf : Function.Injective f.appTop) : IsIso f\", \"doc\": \"If a morphism of schemes is a closed immersion and the induced map on global sections is injective, then the morphism is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is a closed immersion if the underlying continuous map is a closed embedding and the induced maps on stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsClosedImmersion f ↔ IsFinite f ∧ Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] : IsClosedImmersion f\", \"doc\": \"Every isomorphism of schemes is a closed immersion. Specifically, if $ f: X \\to Y $ is an isomorphism of schemes, then it induces a homeomorphism of the underlying topological space of $ X $ onto a clo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary module pushforward, ideal-sheaf and closed-immersion declarations do not identify dualizing modules under a closed immersion."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising|nodal",
+   "results": "{\"t\": \"2026-10-23T11:31:05Z\", \"tool\": \"grep\", \"query\": \"dualizing|dualising|nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal sheaves, ordinary pushforward and linear dual annihilators do not state coherent dualizing adjunction for a subcurve."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dualizing module of a subcurve is the annihilator of its ideal in the dualizing module of the ambient curve",
+   "results": "{\"t\": \"2026-10-23T11:31:06Z\", \"tool\": \"leansearch\", \"query\": \"Dualizing module of a subcurve is the annihilator of its ideal in the dualizing module of the ambient curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.dualAnnihilator\", \"Submodule.dualRestrict_ker_eq_dualAnnihilator\", \"Submodule.dualAnnihilator_eq_top_iff\", \"Submodule.annihilator\", \"Submodule.dualQuotEquivDualAnnihilator_apply\", \"Submodule.dualAnnihilator_map_dualMap_le\", \"Submodule.instFunLikeSubtypeDualMemDualAnnihilator\", \"Submodule.dualAnnihilator_anti\"], \"digest\": \"845312036e3c707b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal sheaves, ordinary pushforward and linear dual annihilators do not state coherent dualizing adjunction for a subcurve."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-23T11:31:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"dualizing\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal sheaves, ordinary pushforward and linear dual annihilators do not state coherent dualizing adjunction for a subcurve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed subcurve of a proper reduced curve the dualizing sheaf is Hom of the quotient structure sheaf into the ambient dualizing sheaf",
+   "results": "{\"t\": \"2026-10-23T11:31:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed subcurve of a proper reduced curve the dualizing sheaf is Hom of the quotient structure sheaf into the ambient dualizing sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\"], \"digest\": \"c8314d3a99e65705\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal sheaves, ordinary pushforward and linear dual annihilators do not state coherent dualizing adjunction for a subcurve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Annihilator subsheaf of a dualizing sheaf on a nodal curve represents duality on a reduced union of components",
+   "results": "{\"t\": \"2026-10-23T11:35:46Z\", \"tool\": \"leanfinder\", \"query\": \"Annihilator subsheaf of a dualizing sheaf on a nodal curve represents duality on a reduced union of components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.dualCopairing_eq\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"Submodule.dualCopairing_apply\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\"], \"digest\": \"b19750e9f2369575\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal sheaves, ordinary pushforward and linear dual annihilators do not state coherent dualizing adjunction for a subcurve."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-special-clifford-subcurve",
+  "date": "2026-10-23",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Dualizing module of a nodal subcurve as an annihilator.",
+   "via": [
+    "lem-sfb-nodal-special-clifford-subcurve",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-subcurve-dualizing-annihilator",
+  "worker": "stage1",
+  "summary": "No new nodes. Reused the existing nodal-subcurve theorem and general closed-subcurve dualizing adjunction; compared duality pairs on connected components, then proved evaluation, Hom-image and generic-fibre clauses explicitly. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Dualizing module of a nodal subcurve as an annihilator.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Generic composition of closed immersions supplies the restricted projective embedding."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-implies-proper supplies properness required for dualizing adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence gives finite component bookkeeping."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic finite-component theorem allows a finite clopen partition and generic open neighbourhoods."
+   },
+   {
+    "node": "lem-trf-nodal-subcurve-boundary",
+    "why": "Generic algebraic-curve subcurve theorem supplies inheritance of nodality; no trace or nearby-cycle assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-trf-nodal-subcurve-boundary"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-47f6e7c3a",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-47f6e7c3a (reviewer sub-agent of L); spot-checked: Zero new nodes. The item statement, stmt_deps and source are identical to live and side-live, where the item is still unsplit. proof_deps is exactly the union of the step uses. Sources read: Stacks 0E33(2) (curves.tex l.759) gives i_*ω_Y = Hom(i_*O_Y, ω_X), and 0E38 (l.4577) gives inheritance of nodality and smooth boundary points. Step 1: projectivity by composing closed immersions, then properness, finite type and Noetherian; the selected components are exactly the components of Y; a finite clopen partition into Y_a. All checked against the cited statements. Step 2: the trf boundary node applies with N=X; over algebraically closed k, singular means nonsmooth. Step 3: the nodal pair (connected Y_a) and the reduced-curve pair are both coherent and are identified by Yoneda; the closed-subcurve adjunction applies to each j_a; assembly is finite sums. Step 4: evaluation-at-1 inverse via a ↦ aw. Step 5: the adjunction stated in def-pc-module-pullback plus the mono e gives injectivity and the stated image. Step 6: on X minus the other components, I_Y is nilpotent, hence 0 because X is reduced; one-dimensional generic stalk from the reduced-curve node; zero stalk at unselected generic points. Small cases checked: Y=X; two crossing lines, where Ann(v)=(u); nodal cubic; three-line chain with the outer lines selected (disconnected Y); characteristic 2. Batch-5 flag on lem-trf-nodal-subcurve-boundary: this is Stacks 0E38 curve geometry. Its 586-node closure has only generic sk-i-curve-zero algebra and curve lemmas and no trace-formula or Poincaré-duality theorem. It is outside both assumptions and is already cited by other sfb nodes, so I accept it. The recorded tool_uses are all generic and accepted. Advisory only: the item's legacy source.place names 0C4D for nodality inheritance where 0E38 is the right tag; this predates the delivery, which leaves it unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalSubcurveDualizingAnnihilator",
+  "declaration": "AlgebraicGeometry.exists_nodalSubcurveDualizingAnnihilator",
+  "declarations": [
+   "AlgebraicGeometry.nodalSubcurveHomMap",
+   "AlgebraicGeometry.exists_nodalSubcurveDualizingAnnihilator"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalSubcurveDualizingAnnihilator.lean",
+  "statement": "theorem exists_nodalSubcurveDualizingAnnihilator (k : Type u) [Field k] [IsAlgClosed k] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsHProjective (X ↘ Spec (.of k))] [ConnectedSpace X] [IsReduced X] (hPureX : X.IsPureDimension 1) (hNodalX : ∀ x : X, IsClosed ({x} : Set X) → x ∉ (X ↘ Spec (.of k)).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) k)}))) (i : Y ⟶ X) [i.IsOver (Spec (.of k))] [IsClosedImmersion i] [IsReduced Y] (S : Set (Set X)) (hS : S ⊆ irreducibleComponents X) (hne : S.Nonempty) (hUnion : Set.range i = ⋃₀ S) : IsHProjective (Y ↘ Spec (.of k)) ∧ Nonempty Y ∧ Y.IsPureDimension 1 ∧ (∀ y : Y, IsClosed ({y} : Set Y) → y ∉ (i ≫ X ↘ Spec (.of k)).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) k)}))) ∧ (∀ y : Y, i y ∈ closure ((Set.range i)ᶜ) → y ∈ (i ≫ X ↘ Spec (.of k)).smoothLocus) ∧ ∃ e : ∀ (DX : ReducedCurveDualizingPair k X) (DY : ReducedCurveDualizingPair k Y), (Scheme.Modules.pushforward i).obj DY.omega ≅ SheafOfModules.homObj (R := X.sheaf) ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Y.ringCatSheaf)) DX.omega, (∀ (DX DX' : ReducedCurveDualizingPair k X) (DY DY' : ReducedCurveDualizingPair k Y) (a : DX.omega ≅ DX'.omega) (b : DY.omega ≅ DY'.omega), (∀ (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (f : F ⟶ DX.omega), DX'.duality F hF (f ≫ a.hom) = DX.duality F hF f) → (∀ (G : Y.Modules) (hG : RingedSpace.IsCoherent Y.toRingedSpace G) (g : G ⟶ DY.omega), DY'.duality G hG (g ≫ b.hom) = DY.duality G hG g) → (Scheme.Modules.pushforward i).map b.hom ≫ (e DX' DY').hom = (e DX DY).hom ≫ SheafOfModules.homObjMap (R := X.sheaf) (𝟙 ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Y.ringCatSheaf))) a.hom) ∧ ∀ DX : ReducedCurveDualizingPair k X, ∃ ev : SheafOfModules.homObj (R := X.sheaf) ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Y.ringCatSheaf)) DX.omega ⟶ DX.omega, (∀ (U : X.Opens) (φ : Γ(SheafOfModules.homObj (R := X.sheaf) ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Y.ringCatSheaf)) DX.omega, U)), ev.val.app (op U) φ = φ.app (op (Over.mk (𝟙 U))) (1 : Γ(Y, i ⁻¹ᵁ U))) ∧ (∀ U : X.Opens, Function.Injective (ev.val.app (op U))) ∧ (∀ (U : X.Opens) (w : Γ(DX.omega, U)), w ∈ Set.range (ev.val.app (op U)) ↔ ∀ (V : X.Opens) (hVU : V ≤ U) (j : Γ(X, V)), j ∈ i.ker.idealOfOpens V → j • DX.omega.val.map (homOfLE hVU).op w = 0) ∧ ∀ DY : ReducedCurveDualizingPair k Y, (∀ (M : X.Modules), M.IsInvertible → Function.Injective (nodalSubcurveHomMap i DX.omega DY.omega ((e DX DY).hom ≫ ev) M) ∧ ∀ f : M ⟶ DX.omega, f ∈ Set.range (nodalSubcurveHomMap i DX.omega DY.omega ((e DX DY).hom ≫ ev) M) ↔ ∀ (U : X.Opens) (m : Γ(M, U)) (j : Γ(X, U)), j ∈ i.ker.idealOfOpens U → j • f.val.app (op U) m = 0) ∧ (∀ (Z : Set X), Z ∈ irreducibleComponents X → ∀ η : X, IsGenericPoint η Z → (Z ∈ S → IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace η).map ((e DX DY).hom ≫ ev)) ∧ IsField (X.presheaf.stalk η) ∧ Nonempty (((RingedSpace.moduleStalkFunctor X.toRingedSpace η).obj DX.omega) ≃ₗ[X.presheaf.stalk η] X.presheaf.stalk η)) ∧ (Z ∉ S → (RingedSpace.moduleStalkFunctor X.toRingedSpace η).map ((e DX DY).hom ≫ ev) = 0))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60410f785",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Re-delivery of returned head bc130 (RETURN H2, missing owner of ReducedCurveDualizingPair). Lean module byte-identical to bc130; my clause-by-clause re-read against the node and Stacks 0E33(2)/0E38 agrees it is correct. Item JSON differs from side-live only in lean and stmt_deps: added def-sfb-reduced-curve-dualizing-pair (new, existing:true) plus the advised landed def-pc-module-stalk-functor and def-sc-generic-point; proof_deps and statement unchanged. New node: lean.statement matches ReducedCurveDualizingModule.lean:79-80 exactly; TeX matches omega, coherence (RingedSpace.IsCoherent, owned by pqf-def-coherent), k-linear duality and naturality, and moduleCohomologyOverField; source 0BS2(5); no extra assumptions; all stmt_deps resolve; not in live or side-live, so no parallel-delivery clash. One sorry; helper nodalSubcurveHomMap is real; docstrings and both report sections present. No compile (no file changed). Notes only: e fixed up to automorphism, as in the landed adjunction; legacy 0C4D source place."
+ }
+}

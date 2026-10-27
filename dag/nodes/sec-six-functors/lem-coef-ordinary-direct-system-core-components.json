@@ -1,0 +1,168 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearOrdinaryDirectSystem",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-ordinary-direct-system-core",
+   "place": "The proof of the componentwise core: reassembly on the sequence site and the local two-component mate calculation.",
+   "via": [
+    "lem-coef-ordinary-direct-system-core"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "componentwise direct image on sequence-site strict systems with level adjunction",
+   "results": "no direct declaration; this is the project-specific sequence-site construction",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "strict system componentwise direct image mate adjunction",
+   "results": "no direct declaration",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictSystem.*direct|transition.*mate",
+   "results": "existing source helpers concern inverse systems or generic module pushforward, not this construction",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": null,
+ "id": "lem-coef-ordinary-direct-system-core-components",
+ "kind": "statement",
+ "title": "Reassembling the componentwise direct-image data",
+ "statement": "For the coefficient towers in [def-coef-semilinear-system-models], the algebraic inverse images of [lem-coef-ordinary-inverse-system], and the supplied set-sheaf and normalized level adjunctions of [lem-coef-normalized-module-adjunction], there exists a componentwise direct-image datum D with identity-on-sections level component isomorphisms. Its horizontal maps, after forgetting module structures and conjugating by the component isomorphisms and eV, equal uPush of the original horizontal maps. This normalization is part of the existence assertion, without asserting a global Hom bijection or local mate equivalence.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-coef-ordinary-inverse-system",
+  "lem-coef-normalized-module-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, paragraph constructing direct images of modules, applied to the strict sequence-site systems."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, direct images of modules and the adjunction transpose, applied levelwise to strict sequence-site systems."
+ },
+ "proof": [
+  {
+   "text": "Obtain the proved normalized direct-image restriction comparisons by transposing the restricted counit of the inverse-image scalar-restriction comparison.",
+   "uses": [
+    "lem-coef-ordinary-direct-restriction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply V at each level of the source strict system and use the restriction comparison to define its transitions. Their underlying maps are the conjugates of uPush of the original transitions. This formula proves the identity and composition laws, and naturality of the comparison proves functoriality on morphisms.",
+   "uses": [
+    "def-coef-ordinary-source-strict-system",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reassemble by the strict-system/sequence-site equivalence. Its evaluation comparison is identity on section carriers. The section formula for the reassembled transitions proves the asserted horizontal normalization.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-ordinary-direct-restriction-comparison",
+  "def-coef-ordinary-source-strict-system",
+  "def-coef-semilinear-system-models",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearOrdinaryDirectSystemCoreData",
+  "file": "lean/Sheaf/Paper/SemilinearOrdinaryDirectSystemCoreData.lean",
+  "declaration": "WeilConjectures.SemilinearSections.ordinaryDirectSystem_core_data_exists",
+  "statement": "theorem ordinaryDirectSystem_core_data_exists [PreservesFiniteLimits uInv]\n    (hI : ∀ n,\n      uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫\n          (I n).ringUnderlying.hom =\n        (I (n + 1)).ringUnderlying.hom ≫\n          (sheafCompose J' (CategoryTheory.forget CommRingCat.{max c v r})).map (σ n))\n    (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n    (adjSet : uInv ⊣ uPush)\n    (eV : ∀ n, V n ⋙ underlying.{c, v, r} J (B n) ≅\n      underlying.{c, v, r} J' (F n) ⋙ uPush)\n    (ha : ∀ n (M : Mod.{c, v, max c v r} J (B n))\n      (N : Mod.{c, v, max c v r} J' (F n)) (f : (I n).modules.obj M ⟶ N),\n      (underlying.{c, v, r} J (B n)).map ((a n).homEquiv M N f) ≫ (eV n).hom.app N =\n        adjSet.homEquiv _ _ ((I n).moduleUnderlying.inv.app M ≫\n          (underlying.{c, v, r} J' (F n)).map f)) :\n    ∃ D : OrdinaryDirectSystemCoreData.{c, v, r} (J := J) (B := B) (τ := τ)\n        (J' := J') (F := F) (σ := σ) (V := V),\n      OrdinaryDirectSystemCoreNormalized.{c, v, r} J B τ J' F σ V D uPush eV",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.OrdinaryDirectSystemCoreData",
+   "WeilConjectures.SemilinearSections.OrdinaryDirectSystemCoreNormalized",
+   "WeilConjectures.SemilinearSections.ordinaryDirectSystem_core_data_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261026T130350-L-3452344",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ed7db",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T152657-L-1147431",
+  "kind": "interface",
+  "note": "independent cc review: delivered ed7db1fc913b Lean (4 modules) and 4 node files vs clone sheaf-dag nodes and change record; unchanged parent/target statements diffed; direct importer GeometricOrdinaryRealization compiled against delivered modules (exit 0, 17.8 s); #print axioms clean"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "M2 stage 3",
+  "old_statement": "For the coefficient towers and ordinary inverse system in `lem-coef-ordinary-direct-system-core`, the supplied set-sheaf right adjoint, level module right adjoints, underlying comparisons and normalization produce a functor `push` on strict systems together with level component isomorphisms and the identity-on-sections property. No horizontal mate assertion is included in this component-data statement.",
+  "what": "The former existence conclusion did not record the horizontal normalization needed by the local mate lemma. Strengthen the construction conclusion by that normalization, proved from the explicit construction; no extra assumption is added.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tag 03D7, paragraph constructing direct images of modules, applied to the strict sequence-site systems."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-ordinary-direct-system-core",
+    "holds": true,
+    "note": "Choose the constructed D with its normalization, then apply the repaired local mate lemma."
+   },
+   {
+    "id": "lem-coef-ordinary-direct-system-core-transition-mate",
+    "holds": true,
+    "note": "The local mate lemma explicitly assumes the normalization supplied by this strengthened existence assertion."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Apply each level right adjoint to the vertical component, conjugate the horizontal underlying-sheaf maps by the supplied comparisons, verify semilinearity from the coefficient square, and reassemble the vertical slices with unchanged section carriers.",
+    "uses": [
+     "def-coef-semilinear-system-models",
+     "lem-coef-ordinary-inverse-system",
+     "lem-coef-normalized-module-adjunction"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-coef-semilinear-system-models",
+   "lem-coef-ordinary-inverse-system",
+   "lem-coef-normalized-module-adjunction"
+  ]
+ }
+}

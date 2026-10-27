@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-strict-section-quotient-tensor-models",
+ "kind": "statement",
+ "title": "Normalized section reduction tensor models",
+ "statement": "Fix a prime l, a finite extension E/Q_l and a scheme X. Use the canonical scalar presentation and actual section quotient tower of [def-sfb-strict-completion-restriction-data], with a supplied normalized section tensor comparison [lem-sfb-module-object-ringed-site-derived-comparison]. Then the strict reductions admit SectionReductionModels: normalized singleton comparison, derived tensor identification, representative models and the prescribed unit, successor and tensor-model equations. There is no assertion about completion. Precisely:\n\ntheorem strictSectionQuotientTensorModels (X : Scheme.{u})\n    (T : Presentation.{u + 2, u + 1, u + 1}\n      (Modules (DerivedNakayama.integerRing l E) X))\n    (data : PrincipalReduction.PrincipalReductionConeData l E X)\n    (hdata : data.IsCanonical l E X)\n    (hscalar : ∀ (M : Modules (DerivedNakayama.integerRing l E) X) (U : X.ProEtᵒᵖ)\n      (x : M.val.obj U),\n      (T.scalar.app M).val.app U x = sectionScalarValue l E X data.d U • x)\n    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})\n    (ι : (Functor.const ℕᵒᵖ).obj (ring (DerivedNakayama.integerRing l E) X) ⟶ B)\n    (hB : ∀ n : ℕ, B.obj (op n) = sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X)\n        (AdicCompletion.finiteRing l E X n))\n    (hι : ∀ n : ℕ, HEq (ι.app (op n))\n        (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)\n          (AdicCompletion.quotient l E X n)))\n    (hstep : ∀ n : ℕ, HEq (B.map (homOfLE (Nat.le_succ n)).op)\n        (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)\n          (AdicCompletion.transition l E X n)))\n    (H : CoefficientClosedStructure (hom (DerivedNakayama.integerRing l E) X))\n    (HM : CoefficientTensorModels.{u, u + 1, u, u + 1} (Scheme.ProEt.topology X)\n      (ring (DerivedNakayama.integerRing l E) X) H)\n    (t : TensorComparison (DerivedNakayama.integerRing l E) X H HM) :\n      Nonempty (SectionReductionModels l E X T H HM B ι)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Locality; first-reduction Cones paragraph and Stacks tags in the Lean docstring. Normalized principal quotient tensor models and augmented section completion"
+ },
+ "stmt_deps": [
+  "def-sfb-strict-completion-restriction-data",
+  "lem-sfb-module-object-ringed-site-derived-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing strictSectionQuotientConeMaps to obtain, for each K-flat P, quasi-isomorphisms c_n from the strict cone levels to termwise tensor with B_n. The component formula and T.diagonal imply naturality in P. T.augmentation_level and T.transition, with tensorUnit_levelMap, give the unit and successor squares. Compose Q(c_n) with T.reduction_descent to define the representative model.",
+   "uses": [
+    "lem-sfb-strict-section-quotient-cone-maps",
+    "def-sfb-strict-completion-restriction-data",
+    "lem-pe-kflat-roos-representative-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Collapse total tensor with N[0] by mapBifunctorSingle₂Iso, followed by the monoidal-to-site tensor identification. Use the existing generator_eq identity from RingedTensorComplexConstraints to identify the prescribed total generator with its pure-tensor summand. On the sole surviving (p,0) summand this is the identity on local pure tensors; sheafification-unit naturality identifies its values with siteSheafTensorTmul. This constructs single and proves single_values without flatness assumptions.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-fd-ringed-flat-single-tensor-cohomology",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-sf-ringed-tensor-complex-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the supplied HM, take a functorial flat K-flat replacement in both variables. Its natural HM comparison and the invertible localization of the replacement augmentations define a natural map from derived tensor to localized total tensor. K-flat preservation of quasi-isomorphisms makes it invertible when the first variable is K-flat. HM naturality makes it HM.iso.inv when both variables are K-flat. Composing with the singleton comparison gives tensorSingle.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every K-flat P form model(P) followed by tensorSingle(P).inv. Precompose with the functorial K-flat resolution K and use naturality on chain maps to obtain an isomorphism between K followed by Q and the two derived functors. Conjugate by the invertible localized resolution augmentation to obtain a natural isomorphism on all complexes. Mathlib Localization.liftNatIso descends this isomorphism through Q. Naturality for the augmentation K(P) to P shows its value is the original comparison on every K-flat representative. The unit and successor equations already proved for model supply the corresponding fields. Naturality of the total comparison in q and its equality with HM.iso.inv give tensor_model by cancelling the singleton comparison and inverse model. Assemble the structure.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-strict-section-quotient-cone-maps",
+  "def-sfb-strict-completion-restriction-data",
+  "lem-pe-kflat-roos-representative-invariance",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-fd-ringed-flat-single-tensor-cohomology",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-tensor-complex-constraints"
+ ],
+ "proof_origin": "N2 Lean proof: reuse the separately stated cone maps, construct the ordinary normalized singleton comparison, extend the supplied K-flat tensor comparison by functorial resolution, and descend the natural isomorphism by the fully faithful precomposition with the derived localization. No new sorry statement.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A K-flat complex tensor a principal quotient is computed by the mapping cone of multiplication by a regular generator",
+   "results": "CochainComplex.mappingCone; TensorProduct.tensorQuotEquivQuotSMul_comp_mk; flat tensor exactness. No section principal-cone theorem.",
+   "date": "2026-10-25",
+   "verdict": "Only algebraic primitives; not this normalized section statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, QuasiIso",
+   "results": "CochainComplex.mappingCone.quasiIso_descShortComplex (Mathlib.Algebra.Homology.HomotopyCategory.ShortExact).",
+   "date": "2026-10-25",
+   "verdict": "Reusable on flat-term replacements; does not construct the section coefficient resolution or its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "principal.*[Cc]one|[Cc]one.*[Tt]ensor",
+   "results": "msearch found geometric cone tensor products and commutative ring pushouts, no ringed-site principal cone comparison. Local rg found CompletionTriangleComparison internal coefficient comparison and PrincipalDerivedTensorCone for ordinary module categories, neither has this section interface. Blueprint search principal quotient returned no imported blueprint matches.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate. Use existing primitives in the proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictSectionPrincipalQuotientModels",
+  "date": "2026-10-25",
+  "group": "R5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Locality paragraph of the finite-model proof, expanded to the actual strict completion augmentation; returned proof steps 1--2. Stacks Tag 09AA (lemma-closed-immersion) supplies closed-immersion limit preservation; the cone/Roos comparison is an agent argument.; Normalized section reduction tensor models",
+   "via": [
+    "lem-sfb-strict-section-principal-quotient-models",
+    "lem-sfb-strict-completion-restriction-comparison",
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictSectionQuotientTensorModels",
+  "file": "lean/Sheaf/Paper/StrictSectionQuotientTensorModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictCompletionRestriction.strictSectionQuotientTensorModels",
+  "statement": "theorem strictSectionQuotientTensorModels (X : Scheme.{u})\n    (T : Presentation.{u + 2, u + 1, u + 1}\n      (Modules (DerivedNakayama.integerRing l E) X))\n    (data : PrincipalReduction.PrincipalReductionConeData l E X)\n    (hdata : data.IsCanonical l E X)\n    (hscalar : ∀ (M : Modules (DerivedNakayama.integerRing l E) X) (U : X.ProEtᵒᵖ)\n      (x : M.val.obj U),\n      (T.scalar.app M).val.app U x = sectionScalarValue l E X data.d U • x)\n    (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})\n    (ι : (Functor.const ℕᵒᵖ).obj (ring (DerivedNakayama.integerRing l E) X) ⟶ B)\n    (hB : ∀ n : ℕ, B.obj (op n) = sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X)\n        (AdicCompletion.finiteRing l E X n))\n    (hι : ∀ n : ℕ, HEq (ι.app (op n))\n        (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)\n          (AdicCompletion.quotient l E X n)))\n    (hstep : ∀ n : ℕ, HEq (B.map (homOfLE (Nat.le_succ n)).op)\n        (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)\n          (AdicCompletion.transition l E X n)))\n    (H : CoefficientClosedStructure (hom (DerivedNakayama.integerRing l E) X))\n    (HM : CoefficientTensorModels.{u, u + 1, u, u + 1} (Scheme.ProEt.topology X)\n      (ring (DerivedNakayama.integerRing l E) X) H)\n    (t : TensorComparison (DerivedNakayama.integerRing l E) X H HM) :\n      Nonempty (SectionReductionModels l E X T H HM B ι)",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261025T143904-L-1102191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T023610-L-585719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

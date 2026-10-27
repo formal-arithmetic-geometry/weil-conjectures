@@ -421,14 +421,10 @@ noncomputable def sectionModuleFunctor_counit
       hom_inv_id := SheafOfModules.hom_ext z.hom_inv_id
       inv_hom_id := SheafOfModules.hom_ext z.inv_hom_id }
 
-/-- Internal modules over a commutative monoid in abelian sheaves are sectionwise
-module sheaves over its reconstructed ring sheaf, with unchanged underlying sheaves.
-Source: Stacks Project, Tag 00YV, algebraic structures in a ringed topos.
-(blueprint: def-weil-pbc-internal-abelian-sheaf-module-equivalence).
-The sectionwise functor is fully faithful by the tensor-sheafification adjunction.
-Every sectionwise module lifts by monoidal sheafification; the adjunction unit is
-invertible since its underlying presheaf already is a sheaf. -/
-noncomputable def sectionModuleEquivalence
+/-- The existing equivalence construction, retained as a named record.
+Source: Stacks 00YV (blueprint: def-weil-pbc-internal-abelian-sheaf-module-equivalence).
+This is the original equivalence with no choice or construction changed. -/
+noncomputable def sectionModuleEquivalenceCore
     (R : Sheaf J AddCommGrpCat.{u}) [MonObj R] [IsCommMonObj R] :
     Mod (Sheaf J AddCommGrpCat.{u}) R ≌
       SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
@@ -440,6 +436,21 @@ noncomputable def sectionModuleEquivalence
     ⟨fun M ↦ ⟨liftedSheafModule J R M, ⟨sectionModuleFunctor_counit J R M⟩⟩⟩
   let : F.IsEquivalence := {}
   exact F.asEquivalence
+
+
+/-- Internal modules over a commutative monoid in abelian sheaves are sectionwise
+module sheaves over its reconstructed ring sheaf, with unchanged underlying sheaves.
+Source: Stacks Project, Tag 00YV, algebraic structures in a ringed topos.
+(blueprint: def-weil-pbc-internal-abelian-sheaf-module-equivalence).
+The sectionwise functor is fully faithful by the tensor-sheafification adjunction.
+Every sectionwise module lifts by monoidal sheafification; the adjunction unit is
+invertible since its underlying presheaf already is a sheaf. -/
+noncomputable def sectionModuleEquivalence
+    (R : Sheaf J AddCommGrpCat.{u}) [MonObj R] [IsCommMonObj R] :
+    Mod (Sheaf J AddCommGrpCat.{u}) R ≌
+      SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
+        (sectionRingSheaf J R)) :=
+  { sectionModuleEquivalenceCore J R with functor := sectionModuleFunctor J R }
 
 end Site
 end CategoryTheory.InternalAbelianSheafModule

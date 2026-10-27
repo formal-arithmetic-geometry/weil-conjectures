@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+ "kind": "statement",
+ "title": "Perfect tests suffice for bounded-above tensor finiteness",
+ "statement": "Let $A$ be a commutative ring and let $X$ be a quasi-compact and quasi-separated scheme over $A$ [def-pc-scheme, def-pc-morphism-conventions]. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ satisfy $\\mathcal H^i(K)=0$ for all $i>b$ for some integer $b$ [def-pc-derived-category]. If $R\\Gamma(X,P\\otimes^L_{\\mathcal O_X}K)$ is pseudo-coherent in $D(A)$ for every perfect $P\\in D(\\mathcal O_X)$ [def-pc-perfect-complex, def-pc-ring-pseudo-coherent-complex, def-pc-derived-direct-image, def-pc-scheme-derived-tensor-structure], then $R\\Gamma(X,E\\otimes^L_{\\mathcal O_X}K)$ is pseudo-coherent in $D(A)$ for every pseudo-coherent $E\\in D(\\mathcal O_X)$ [def-pur-pseudo-coherent-complex].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSH, lemma-perfect-enough"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-morphism-conventions",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-global-derived-rhom",
+  "def-pc-affine-global-hom-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the uniform inverse-affine-sections bound to the structure morphism $X\\to\\operatorname{Spec}\\mathbf Z$ and the affine open $\\operatorname{Spec}\\mathbf Z$. This morphism is qcqs by the hypothesis that $X$ is a qcqs scheme. Obtain $N>0$ with $R^p\\Gamma(X,M)=0$ for every quasi-coherent module $M$ and every $p\\ge N$. Global sections commute with countable products: a section of a product sheaf is exactly a tuple of sections. The unbounded-derived-functor bound therefore gives $H^i(R\\Gamma(X,L))=0$ for $i>t+N-1$ whenever $L\\in D_{\\mathrm{QCoh}}$ has no cohomology above $t$. This bound also holds for the $A$-module-valued sections in the statement: on a K-injective representative both versions have the same underlying complex of abelian groups, and a module is zero when its underlying group is zero.",
+   "uses": [
+    "lem-pc-uniform-inverse-affine-sections-bound",
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "def-pc-morphism-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSH, lemma-perfect-enough, proof first paragraph; Tags 08D5 and 08D4(3)"
+   }
+  },
+  {
+   "text": "Fix a pseudo-coherent $E$ and an arbitrary integer $m$. Put $a=m-N-1-b$. Apply perfect approximation to obtain $u:P\\to E$ which is an isomorphism on $H^i$ for $i>a$ and a surjection for $i=a$. Complete $u$ to a distinguished triangle $P\\to E\\to C\\to P[1]$. Here $P$ has quasi-coherent cohomology by the approximation statement, $E$ does by pseudo-coherence, and $C$ does by the triangulated quasi-coherent-subcategory lemma, applied with $T=X$ to the rotation $E\\to C\\to P[1]\\to E[1]$.",
+   "uses": [
+    "lem-sfb-pseudocoherent-perfect-approximation",
+    "lem-sc-pseudo-coherent-qcoh",
+    "lem-pc-supported-qcoh-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSH, proof: perfect approximation and cone triangle; Tag 08ES"
+   }
+  },
+  {
+   "text": "The cohomology exact sequence of this cone triangle gives $H^i(C)=0$ for $i\\ge a$: in $H^i(P)\\to H^i(E)\\to H^i(C)\\to H^{i+1}(P)\\to H^{i+1}(E)$ the first map is surjective and the last injective. This is the usual cohomological-functor exact sequence (on cone representatives it is the sequence of $0\\to E^\\bullet\\to C(u)^\\bullet\\to P^\\bullet[1]\\to0$).",
+   "uses": [
+    "lem-sp-long-exact-of-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSH, proof: cone has zero cohomology in degrees at least m-N-1-b"
+   }
+  },
+  {
+   "text": "Use the standard truncation description to represent $C$ by a complex zero above $a-1$ and $K$ by one zero above $b$. The bounded-above flat-replacement lemma gives quasi-isomorphic flat complexes with those same upper term bounds; they are K-flat by the bounded-above-flat lemma. Their total tensor computes $C\\otimes^{\\mathbf L}K$. In degree $j>a-1+b$ each summand $F^r\\otimes G^s$, $r+s=j$, is zero, since $r\\le a-1$ and $s\\le b$ cannot both hold. Hence $H^j(C\\otimes^{\\mathbf L}K)=0$ for $j\\ge a+b=m-N-1$. This is a direct degree calculation from the cited replacement statements, not an additional approximation lemma.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSH, proof: tensor-cone upper bound; cohomology.tex Tag 06YD; sites-cohomology.tex Tag 06YS"
+   }
+  },
+  {
+   "text": "Both $C$ and $K$ have quasi-coherent cohomology, so the canonical tensor quasi-coherence lemma applies to $C\\otimes^{\\mathbf L}K$. The bound of step 1 with $t=m-N-2$ shows that $R\\Gamma(X,C\\otimes^{\\mathbf L}K)$ has zero cohomology for $i>m-3$, in particular for every $i\\ge m-1$. No flatness of $K$ or boundedness below of either factor is used.",
+   "uses": [
+    "lem-pc-canonical-derived-tensor-qcoh",
+    "lem-pc-unbounded-derived-functor-cohomological-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSH, proof: derived sections of the tensor cone; Tags 08DX and 08D4(3)"
+   }
+  },
+  {
+   "text": "Tensor the triangle of step 2 with $K$ and apply $R\\Gamma(X,-)$. Tensoring is exact by the fixed-K-flat-tensor triangulated lemma: choose a flat-term K-flat representative of $K$ using the site-derived-tensor descent equivalence. The right-derived-functor triangulated lemma applies to global sections, giving a distinguished triangle with vertices $T_P=R\\Gamma(X,P\\otimes^{\\mathbf L}K)$, $T_E=R\\Gamma(X,E\\otimes^{\\mathbf L}K)$ and $T_C=R\\Gamma(X,C\\otimes^{\\mathbf L}K)$ in $D(A)$. In its cohomology sequence, $H^{i-1}(T_C)=H^i(T_C)=0$ for $i\\ge m$ by step 5. Thus $H^i(T_P)\\to H^i(T_E)$ is an isomorphism for all $i\\ge m$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sp-long-exact-of-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSH, proof: RΓ(P tensor K) to RΓ(E tensor K) isomorphism in high degrees; cohomology.tex Tag 06Y8"
+   }
+  },
+  {
+   "text": "By the hypothesis on perfect tests, $T_P$ is pseudo-coherent. Hence it is $m$-pseudo-coherent by the ring criterion: choose a bounded finite-free complex $F$ and $F\\to T_P$ inducing cohomology isomorphisms for $i>m$ and a surjection for $i=m$. Compose with $T_P\\to T_E$. Step 6 makes the composite an isomorphism for $i>m$ and surjective for $i=m$, so the definition says that $T_E$ is $m$-pseudo-coherent. Since $m$ was arbitrary, the same ring criterion implies that $T_E$ is pseudo-coherent. This applies to every pseudo-coherent $E$, as required.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSH, proof last paragraph; more-algebra.tex Tag 064U and definition Tag 064Q"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-uniform-inverse-affine-sections-bound",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "def-pc-morphism-conventions",
+  "lem-sfb-pseudocoherent-perfect-approximation",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-supported-qcoh-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-sp-long-exact-of-triangle",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-canonical-derived-tensor-qcoh",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "def-pc-ring-m-pseudo-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSH, lemma-perfect-enough, proof in full, expanding the tensor degree bound and final m-pseudo-coherent composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded above quasi coherent complex on a quasi compact quasi separated scheme pseudo coherent tensor tests of global sections follow from perfect tensor tests",
+   "results": "OK: 8 hits; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition', SheafOfModules.QuasicoherentData.IsFinitePresentation, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|PseudoCoherent|pseudo_coherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a bounded above quasi coherent complex on a quasi compact quasi separated scheme pseudo coherent tensor tests of global sections follow from perfect tensor tests",
+   "results": "OK: 8 hits; SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.IsQuasicoherent.rec, SheafOfModules.isQuasicoherent",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend finiteness of derived global sections tensor tests from perfect complexes to pseudo coherent complexes using perfect approximations of a bounded above quasi coherent object",
+   "results": "OK: 8 hits; SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, LightCondensed.free_internallyProjective_iff_tensor_condition, SheafOfModules.IsFinitePresentation, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*approximat|approximat.*perfect|PseudoCoherent|pseudo_coherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not assert pseudo-coherence of global sections under perfect tensor tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect tensor tests imply pseudo coherent tensor tests for derived global sections on a quasi compact quasi separated scheme",
+   "results": "OK: 8 hits; SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsQuasicoherent, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.Scheme.quasiCompactCover_iff, AlgebraicGeometry.IsSeparated.instQuasiSeparated, SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not assert pseudo-coherence of global sections under perfect tensor tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not assert pseudo-coherence of global sections under perfect tensor tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded above quasi coherent complex on a qcqs scheme finiteness of global sections after tensoring with perfect complexes implies pseudo coherence after tensoring with any pseudo coherent complex",
+   "results": "OK: 8 hits; SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not assert pseudo-coherence of global sections under perfect tensor tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-tests-detect-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSH (lemma-perfect-enough).",
+   "via": [
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+  "worker": "stage1",
+  "summary": "Checked Tag 0CSH and split its approximation argument. Created only the statement-only global perfect-approximation theorem (08ES with T=X); reused the existing cohomological, flat-replacement, quasi-coherence, exact-functor and ring pseudo-coherence tools. The tensor upper bound and m-pseudo-coherent transfer are explicit elementary steps. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSH (lemma-perfect-enough). Steps 1-7 realize Stacks 0CSH as the perfect-to-pseudo-coherent tensor-test supporting tool. Current latest blueprint unit sk-thm-sf-ctf-stability supplies the direct-image stability route; the supporting Stacks lemma has no separate blueprint match.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-uniform-inverse-affine-sections-bound",
+    "why": "uniform Zariski quasi-coherent section bound; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "why": "extension of the module section bound to bounded-above derived objects; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "quasi-coherence of a pseudo-coherent object; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-pc-supported-qcoh-triangulated",
+    "why": "closure of quasi-coherent derived objects under cone triangles, T=X; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-sp-long-exact-of-triangle",
+    "why": "cohomology exact sequence of a distinguished triangle; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "flat replacements retaining an upper term bound; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "K-flatness of the bounded-above flat replacement; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-pc-canonical-derived-tensor-qcoh",
+    "why": "quasi-coherence of the tensor cone; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "flat-term K-flat representative of the fixed tensor argument; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "exactness of fixed-argument derived tensor; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "exactness of derived global sections; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "why": "ring pseudo-coherence iff m-pseudo-coherence for every m; this is a generic tool for Stacks 0CSH, and the six-functor stability unit has no substitute for this ringed-space or algebraic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-uniform-inverse-affine-sections-bound",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sp-long-exact-of-triangle",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-canonical-derived-tensor-qcoh",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ring-pseudo-coherent-iff-all-m"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-5690f59ef",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-5690f59ef (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Sources checked: Stacks perfect.tex 0CSH lemma-perfect-enough (l.8648, statement and proof) and 08EM/08EN/08ES. The item's statement and stmt_deps are unchanged from live, which still has the item unsplit, and they match 0CSH: K in D^-_QCoh, A arbitrary, X qcqs. New node lem-sfb-pseudocoherent-perfect-approximation is 08ES with T=X. The empty support condition is harmless, the loss r is absorbed because E is pseudo-coherent, and E is in D_QCoh by lem-sc-pseudo-coherent-qcoh. It is statement-only, self-contained, cites its definitions and has correct source labels. Small cases: X empty; E=0; affine X over a non-Noetherian ring via the stupid truncation of a finite-free resolution (iso on H^i for i>a, ker d^a onto H^a at a); E unbounded below. Duplicate search: rg -L for 08ES/08EN/08EM/0CSH and for perfect+approximat over the snapshot DAG, plus the blueprint main-20261015, found nothing. Steps: (1) the uniform bound via X->Spec Z gives N, and the unbounded-functor lemma gives vanishing for i>t+N-1; (2) a=m-N-1-b, and C is QCoh by the triangulated lemma applied to the rotation; (3) H^i(C)=0 for i>=a, endpoint included; (4) flat replacements keep their upper bounds, so the tensor vanishes in degrees >=a+b=m-N-1; (5) t=m-N-2 gives vanishing for i>m-3; (6) the fixed-K-flat tensor and RGamma are exact, and H^{i-1}(T_C)=H^i(T_C)=0 for i>=m gives isomorphisms for i>=m; (7) composing with the finite-free m-approximation of T_P makes T_E m-pseudo-coherent for every m. The arithmetic matches Stacks, and nothing from the source proof was dropped. I accept the 12 generic off-unit tool_uses. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectToPseudoCoherentTensorTests",
+  "declaration": "AlgebraicGeometry.isPseudoCoherent_tensor_sections_of_perfect_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectToPseudoCoherentTensorTests.lean",
+  "statement": "theorem isPseudoCoherent_tensor_sections_of_perfect_tests (A : CommRingCat.{u}) (X : Scheme.{u}) (p : X ⟶ Spec A) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] [HasDerivedCategory.{wΓ} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (hBound : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj K)) (hTests : ∀ P : schemeDerivedCategory X, Scheme.IsPerfect X P → DerivedCategory.IsPseudoCoherent ((schemeDerivedGlobalSections X ⋙ (affineGlobalSectionsRestriction p).mapDerivedCategory).obj (P ⊗ K))) : ∀ E : schemeDerivedCategory X, Scheme.IsPseudoCoherent X E → DerivedCategory.IsPseudoCoherent ((schemeDerivedGlobalSections X ⋙ (affineGlobalSectionsRestriction p).mapDerivedCategory).obj (E ⊗ K))",
+  "branch": "sheaf-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfd6e55a4",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read the item, Stacks 0CSH (perfect.tex l.8648), the delivered module and the declarations it uses (schemeDerivedCategory, schemeDerivedQCohProperty, Scheme.IsPerfect, Scheme.IsPseudoCoherent, DerivedCategory.IsPseudoCoherent, schemeDerivedTensorMonoidal, schemeDerivedGlobalSections, affineGlobalSectionsRestriction). Every clause matches: A is any comm ring, p : X ⟶ Spec A, X qcqs as absolute conditions, K in D_QCoh with ∃ b upper bound, hTests over all perfect P, conclusion over all pseudo-coherent E; RΓ_A = RΓ followed by exact restrictScalars along ΓSpecIso.inv ≫ p.appTop. Same conventions as the landed consumer PerfectTestsDetectPseudoCoherence. Universes: shared u for A and X, independent localization universes, no silent restriction. Edge cases (empty X, zero ring, zero objects, negative b, unbounded below) are covered with no extra hypotheses. Added stmt_deps def-pc-global-derived-rhom and def-pc-affine-global-hom-base-change-map are genuine owners of the used declarations. lean.statement matches the file verbatim. All 12 proof-dependency imports exist. Proof is only sorry with no definitions; docstrings carry the source place, blueprint id and the 7-step proof. Duplicate search finds nothing. No fixes, no compile needed."
+ }
+}

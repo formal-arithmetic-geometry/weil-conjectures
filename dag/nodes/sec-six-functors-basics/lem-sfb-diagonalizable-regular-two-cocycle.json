@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-diagonalizable-regular-two-cocycle",
+ "kind": "statement",
+ "title": "Regular two-cocycles of a split diagonalizable group are coboundaries",
+ "statement": "Let $R$ be any commutative ring, $M$ a finitely generated additive abelian group, and $D=D_R(M)$ [def-sfb-ring-diagonalizable-group]. Write $B=R[M]$, with $\\Delta(e_m)=e_m\\otimes e_m$ and $\\epsilon(e_m)=1$. Let $E$ be any $R$-module equipped with an $R$-linear coaction $\\tau:E\\to E\\otimes_RB$ [def-weil-pbc-module-tensor-product] satisfying $(\\tau\\otimes1)\\tau=(1\\otimes\\Delta)\\tau$ and $(1\\otimes\\epsilon)\\tau=1_E$. For a commutative $R$-algebra $T$ and $h\\in D(T)$, evaluating the $B$-factor in $\\tau$ at $h:B\\to T$ defines the action $h\\mathbin{\\cdot}(-)$ on $E\\otimes_RT$. Put $C^n=E\\otimes_R B^{\\otimes n}$ for $n\\geq1$. For $c\\in C^n$, its evaluation $c(h_1,\\ldots,h_n)$ uses the algebra maps $h_i:B\\to T$ and multiplication in $T$; these evaluations define the regular cochain formulas below. Suppose $c\\in C^2$ satisfies\n$$h\\mathbin{\\cdot}c(k,l)-c(hk,l)+c(h,kl)-c(h,k)=0\\quad\\text{in }C^3,$$\nwhere the expression is evaluated on the universal triple of $D$-points over $B^{\\otimes3}$. Then there exists $b\\in C^1$ such that\n$$c(h,k)=h\\mathbin{\\cdot}b(k)-b(hk)+b(h)\\quad\\text{in }C^2,$$\nwith the equality evaluated on the universal pair over $B\\otimes_RB$. No flatness, finite-generation or projectivity condition is imposed on $E$, and torsion in $M$ is allowed even when its order is not invertible in $R$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes (2014), Appendix B.2, definition of the regular Hochschild cochain complex, printed pp.283-284; Lemma B.2.3 and Remark B.2.4, printed p.285, degree-two consequence of the higher-cohomology vanishing for quasi-coherent modules of diagonalizable groups. Online source read; WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Define the $R$-linear map $\\lambda:B\\to R$ by $\\lambda(\\sum_m r_me_m)=r_0$, using the finitely supported basis in [def-sfb-ring-diagonalizable-group]. Then $\\lambda(1_B)=1_R$ and $(1_B\\otimes\\lambda)\\Delta(f)=\\lambda(f)1_B$: on $e_m$ both sides are $e_0$ if $m=0$ and zero otherwise, so the equality follows by linearity. The map on the tensor product is defined by the universal property in [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Appendix B.2, regular cochain formulas on printed p.284 and diagonalizable vanishing in Remark B.2.4 on printed p.285; explicit degree-two coefficient calculation by O4."
+   }
+  },
+  {
+   "text": "Put $P=1_E\\otimes1_B\\otimes\\lambda:C^2\\to C^1$ and $b=P(c)$. This is a regular cochain, defined by an $R$-linear map of the actual tensor modules. On a generator $x\\otimes a\\otimes f$, the four unsigned terms of the given cocycle identity are respectively $\\tau(x)\\otimes a\\otimes f$, $x\\otimes\\Delta(a)\\otimes f$, $x\\otimes a\\otimes\\Delta(f)$ and $x\\otimes a\\otimes f\\otimes1_B$. These formulas are precisely evaluation at the universal triple: multiplication of two universal points pulls a function back by $\\Delta$, and omission inserts $1_B$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Appendix B.2, regular cochain formulas on printed p.284 and diagonalizable vanishing in Remark B.2.4 on printed p.285; explicit degree-two coefficient calculation by O4."
+   }
+  },
+  {
+   "text": "Apply $Q=1_E\\otimes1_B\\otimes1_B\\otimes\\lambda:C^3\\to C^2$. On the four terms of step 2 its values are $\\lambda(f)\\tau(x)\\otimes a$, $\\lambda(f)x\\otimes\\Delta(a)$, $\\lambda(f)x\\otimes a\\otimes1_B$ and $x\\otimes a\\otimes f$, respectively; the third uses step 1 and the fourth uses $\\lambda(1_B)=1_R$. Since pure tensors generate and all maps are $R$-linear, their values on $c$ are therefore $h\\mathbin{\\cdot}b(k)$, $b(hk)$, $b(h)$ and $c(h,k)$ as elements of $C^2$. This is an equality of tensor maps, not a test only on $R$-valued points.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Appendix B.2, regular cochain formulas on printed p.284 and diagonalizable vanishing in Remark B.2.4 on printed p.285; explicit degree-two coefficient calculation by O4."
+   }
+  },
+  {
+   "text": "The cocycle hypothesis and linearity of $Q$ now give $0=h\\mathbin{\\cdot}b(k)-b(hk)+b(h)-c(h,k)$ in $C^2$. Rearranging proves the required coboundary formula with the $b$ of step 2. All maps were constructed from finite sums, tensor bilinearity, $\\tau$ and $\\Delta$; the calculation uses neither division nor any exactness of tensoring, so it applies to arbitrary $E$ and to torsion in $M$ in all characteristics.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Appendix B.2, regular cochain formulas on printed p.284 and diagonalizable vanishing in Remark B.2.4 on printed p.285; explicit degree-two coefficient calculation by O4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Explicit last-variable coefficient contraction for the degree-two diagonalizable case of Remark B.2.4; the cochain convention is checked on printed p.284. Source read online; local archive absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Dd]iagonali[sz]able|[Mm]ultiplicative[Tt]ype).*(cohomolog|cocycle)|[Hh]ochschild",
+   "results": "{\"t\": \"2026-10-24T04:40:35Z\", \"tool\": \"grep\", \"query\": \"([Dd]iagonali[sz]able|[Mm]ultiplicative[Tt]ype).*(cohomolog|cocycle)|[Hh]ochschild\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\"], \"digest\": \"72c7f4390aeb0604\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern arbitrary functions on an abstract group, not the regular cochain complex of an affine group scheme. In particular they do not construct a regular cobounding cochain for a split diagonalizable group over a ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"groupCohomology\"",
+   "results": "{\"t\": \"2026-10-24T04:40:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"AddMonoidAlgebra\\\", \\\"groupCohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern arbitrary functions on an abstract group, not the regular cochain complex of an affine group scheme. In particular they do not construct a regular cobounding cochain for a split diagonalizable group over a ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A two cocycle in the regular bar complex of a diagonalizable affine group acting on a module is a coboundary",
+   "results": "{\"t\": \"2026-10-24T04:40:35Z\", \"tool\": \"leansearch\", \"query\": \"A two cocycle in the regular bar complex of a diagonalizable affine group acting on a module is a coboundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.mem_cocycles₂_of_comp_eq_d₁₂\", \"LieModule.Cohomology.mem_twoCocycle_iff\", \"groupCohomology.IsMulCoboundary₂\", \"groupCohomology.coboundaries₂_le_cocycles₂\", \"groupCohomology.IsCoboundary₂\", \"groupCohomology.coboundariesOfIsCoboundary₂\", \"groupCohomology.coboundaries₂\", \"groupCohomology.isCoboundary₂_of_mem_coboundaries₂\"], \"digest\": \"720cb99b80e5bce0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern arbitrary functions on an abstract group, not the regular cochain complex of an affine group scheme. In particular they do not construct a regular cobounding cochain for a split diagonalizable group over a ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every regular two cocycle of a split diagonalizable group scheme with coefficients in any rational module is a coboundary over an arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-24T04:40:40Z\", \"tool\": \"leanfinder\", \"query\": \"Every regular two cocycle of a split diagonalizable group scheme with coefficients in any rational module is a coboundary over an arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.isCoboundary₂_of_mem_coboundaries₂\", \"groupCohomology.H2π_eq_zero_iff\", \"groupCohomology.isCoboundary₁_of_mem_coboundaries₁\", \"groupCohomology.isMulCoboundary₂_of_mem_coboundaries₂\", \"groupCohomology.coboundariesOfIsMulCoboundary₂\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"groupCohomology.coboundariesToCocycles₂_apply\", \"groupCohomology.H2π_eq_iff\"], \"digest\": \"0dc39d26ded047a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern arbitrary functions on an abstract group, not the regular cochain complex of an affine group scheme. In particular they do not construct a regular cobounding cochain for a split diagonalizable group over a ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher rational Hochschild cohomology of diagonalizable group schemes vanishes since taking the degree zero part of a graded module is exact",
+   "results": "{\"t\": \"2026-10-24T04:40:41Z\", \"tool\": \"leanfinder\", \"query\": \"Higher rational Hochschild cohomology of diagonalizable group schemes vanishes since taking the degree zero part of a graded module is exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isZero_groupCohomology_succ_of_subsingleton\", \"groupCohomology.shortComplexH0_exact\", \"groupCohomology.d₀₁_eq_zero\", \"Rep.isZero_Tor_succ_of_projective\", \"Rep.FiniteCyclicGroup.groupCohomologyIso₀\", \"groupCohomology.subtype_comp_d₀₁_apply\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"Rep.FiniteCyclicGroup.moduleCatCochainComplex\"], \"digest\": \"aa58fb83925cae71\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern arbitrary functions on an abstract group, not the regular cochain complex of an affine group scheme. In particular they do not construct a regular cobounding cochain for a split diagonalizable group over a ring."
+  },
+  {
+   "tool": "grep",
+   "query": "([Dd]iagonali[sz]able|[Mm]ultiplicative[Tt]ype).*(cohomolog|cocycle)|[Hh]ochschild",
+   "results": "{\"t\": \"2026-10-24T05:03:02Z\", \"tool\": \"grep\", \"query\": \"([Dd]iagonali[sz]able|[Mm]ultiplicative[Tt]ype).*(cohomolog|cocycle)|[Hh]ochschild\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\"], \"digest\": \"72c7f4390aeb0604\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the sole hit is a TODO for the Hochschild-Serre spectral sequence, not regular group-scheme cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular Hochschild cohomology of a diagonalizable affine group scheme vanishes in positive degrees",
+   "results": "{\"t\": \"2026-10-24T05:03:03Z\", \"tool\": \"leansearch\", \"query\": \"Regular Hochschild cohomology of a diagonalizable affine group scheme vanishes in positive degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isZero_groupHomology_succ_of_subsingleton\", \"isZero_groupCohomology_succ_of_subsingleton\", \"groupCohomology\", \"groupCohomology.π_comp_H0Iso_hom_assoc\", \"groupHomology\", \"groupCohomology.H0Iso\", \"groupCohomology.cochainsIso₀\", \"LieModule.Cohomology.twoCochain_alt\"], \"digest\": \"5ab877a5eaf2948a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern arbitrary functions on abstract groups, subsingleton groups or Lie cochains. Their types do not imply vanishing for regular cochains of a diagonalizable group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"cocycle\"",
+   "results": "{\"t\": \"2026-10-24T05:03:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"AddMonoidAlgebra\\\", \\\"cocycle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration contains both the group-algebra and cocycle concepts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every regular two cocycle of a split diagonalizable group scheme over a ring acting on any module is a coboundary",
+   "results": "{\"t\": \"2026-10-24T05:03:04Z\", \"tool\": \"leanfinder\", \"query\": \"Every regular two cocycle of a split diagonalizable group scheme over a ring acting on any module is a coboundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.isCoboundary₂_of_mem_coboundaries₂\", \"groupCohomology.H2π_eq_zero_iff\", \"groupCohomology.isCoboundary₁_of_mem_coboundaries₁\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"groupCohomology.coboundariesOfIsMulCoboundary₂\", \"groupCohomology.isMulCoboundary₂_of_mem_coboundaries₂\", \"groupCohomology.coboundariesToCocycles₂_apply\", \"groupCohomology.H2π_eq_iff\"], \"digest\": \"4b61042aa024d527\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern arbitrary functions on abstract groups, subsingleton groups or Lie cochains. Their types do not imply vanishing for regular cochains of a diagonalizable group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized invariant linear functional on a Hopf algebra contracts its regular Hochschild cochain complex by applying the functional in the last variable",
+   "results": "{\"t\": \"2026-10-24T05:04:07Z\", \"tool\": \"leanfinder\", \"query\": \"A normalized invariant linear functional on a Hopf algebra contracts its regular Hochschild cochain complex by applying the functional in the last variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inhomogeneousCochains.d_hom_apply\", \"HopfAlgebra.sum_mul_antipode_eq_smul\", \"inhomogeneousCochains.d\", \"HopfAlgebra.sum_antipode_mul_eq_smul\", \"HopfAlgebraStruct.antipode\", \"HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit\", \"HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit\", \"HopfAlgebra.ofAlgHom\"], \"digest\": \"f3ffc397e58eb6de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary group cochain differentials and Hopf antipode axioms do not give the coefficient functional or regular coboundary assertion; their types were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-zero-diagonalizable-hom-lift",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292: etale lifting of the multiplicative type subgroup followed by etale splitting, at a point with algebraically closed residue field; completion step in the proof of Conrad Proposition 3.1.6, using Corollary B.3.5 for the fixed split source. Supporting input to the complete-local torus lifting proof: Corollary B.2.6 and Remark B.2.4, printed pp.285-287: square-zero homomorphism obstruction and its vanishing for diagonalizable groups. This node records their combined infinitesimal existence consequence, not the complete-local lifting theorem. Supporting input: Remark B.2.4, diagonalizable case: vanishing in degree two for the regular cochain complex.",
+   "via": [
+    "lem-sfb-square-zero-diagonalizable-hom-lift",
+    "lem-sfb-complete-local-split-torus-hom-lift",
+    "lem-sfb-split-torus-etale-subgroup-lift",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-diagonalizable-regular-two-cocycle",
+  "worker": "stage1",
+  "summary": "O4: kept the complete arbitrary-ring statement and both statement dependencies. Constructed b by taking the coefficient of e_0 in the last variable and checked all four cocycle terms as tensor maps. This gives a four-step elementary proof with no new nodes, no exact-invariants or cohomology machinery, and no field, flatness or invertibility hypothesis. Read the cited definitions, online Conrad Appendix B.2, current blueprint and all logged Mathlib hits.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). It supplies the regular degree-two obstruction vanishing in the square-zero homomorphism lifting prerequisite on the recorded direct-image finiteness route. The latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3) is retained; no unit or chapter route is changed. Whole-blueprint searches for diagonalizable and Hochschild found no equal imported statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-0e17ab419",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-0e17ab419 (reviewer sub-agent of L); spot-checked: Read the item in full; it creates no new nodes. Its statement is byte-identical to the Q52 creation (unsplit, empty proof) and there is no repair note, so this is not a re-split. Checked both cited statements: def-sfb-ring-diagonalizable-group gives the free basis e_m, unit e_0 and Δe_m=e_m⊗e_m; def-weil-pbc-module-tensor-product gives the universal property and generation by pure tensors. Step 1: λ = coefficient of e_0, with λ(1)=1 and (1⊗λ)Δf = λ(f)1_B checked on the basis (left-invariant integral). Step 2: the four cocycle terms on the universal triple are τ(x)⊗a⊗f, x⊗Δa⊗f, x⊗a⊗Δf and x⊗a⊗f⊗1, all correct for the statement's evaluation convention. Step 3: contracting the last slot with Q gives h·b(k), b(hk), b(h) (using step 1) and c(h,k). Step 4: the signs give c = h·b(k) − b(hk) + b(h), which matches the citer lem-sfb-square-zero-diagonalizable-hom-lift step 2. No division and no exactness of ⊗ are used, so arbitrary E, R and torsion M are honest. Hand-checked: db for b=e_1 over M=ℤ (P(db)=b), the cocycle c≡1, and M=0. Every step is genuinely elementary. Uses are definitions only, so there is no route or tool_uses issue. A DAG grep (hochschild, linearly reductive, 2-cocycle, regular cochain) finds no duplicate. Conrad App. B.2 is not local; WANTED is recorded and proof_origin is agent. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalizableRegularTwoCocycle",
+  "declaration": "AlgebraicGeometry.diagonalizable_regular_two_cocycle",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalizableRegularTwoCocycle.lean",
+  "statement": "theorem diagonalizable_regular_two_cocycle (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] [AddGroup.FG M] (E : Type w) [AddCommGroup E] [Module R E] (τ : E →ₗ[R] E ⊗[R] R[M]) (hcoassoc : (TensorProduct.assoc R E R[M] R[M]).toLinearMap ∘ₗ τ.rTensor R[M] ∘ₗ τ = (Coalgebra.comul (R := R) (A := R[M])).lTensor E ∘ₗ τ) (hcounit : (TensorProduct.rid R E).toLinearMap ∘ₗ (Coalgebra.counit (R := R) (A := R[M])).lTensor E ∘ₗ τ = LinearMap.id) (c : E ⊗[R] R[M] ⊗[R] R[M]) (hc : ((τ.rTensor R[M]).rTensor R[M]) c - (((TensorProduct.assoc R E R[M] R[M]).symm.toLinearMap ∘ₗ (Coalgebra.comul (R := R) (A := R[M])).lTensor E).rTensor R[M]) c + (TensorProduct.assoc R (E ⊗[R] R[M]) R[M] R[M]).symm ((Coalgebra.comul (R := R) (A := R[M])).lTensor (E ⊗[R] R[M]) c) - (TensorProduct.mk R (E ⊗[R] R[M] ⊗[R] R[M]) R[M]).flip 1 c = 0) : ∃ b : E ⊗[R] R[M], c = τ.rTensor R[M] b - (TensorProduct.assoc R E R[M] R[M]).symm ((Coalgebra.comul (R := R) (A := R[M])).lTensor E b) + (TensorProduct.mk R (E ⊗[R] R[M]) R[M]).flip 1 b",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de44bb14e",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Each clause checked on pure tensors (x⊗a)⊗f with left-associated ⊗. hc terms τ(x)⊗a⊗f, x⊗Δa⊗f, x⊗a⊗Δf, x⊗a⊗f⊗1 with signs +−+− are the node's h·c(k,l), c(hk,l), c(h,kl), c(h,k) on the universal triple. Conclusion c = τ.rTensor b − assoc.symm(Δ.lTensor b) + b⊗1 = h·b(k) − b(hk) + b(h). hcoassoc/hcounit are the node's coaction identities (left action). Mathlib AddMonoidAlgebra coalgebra gives e_m↦e_m⊗e_m and e_m↦1, the same coalgebra as the Hopf structure behind ringDiagonalizableGroup. Statement not vacuous: λ = coefficient of e_0 proves it with no division. Edge cases E=0, zero ring, M=0, torsion M in char p, c=0 covered. No extra hypotheses (FG is in the node); independent universes u,v,w are more general than the def node's single universe; only R[M] is used, so no second definition of the group. Both stmt_deps used, no dep record changed, no theorem stmt_dep. Parallel Q95 delivery 34a69 of the same mathematics passed but never landed (LAND superseded); live node has no lean and no live module declares the name, so no clash. Docstrings give source place and blueprint tag; all 4 proof steps present; proof is sorry; lines ≤100; report has both sections; node diff vs live is the lean field only; lean.statement verbatim. No file changed, no compile run. Advisory: docstring calls R[M] the coordinate algebra of ringDiagonalizableGroup R M, literally well-typed only when M and R share a universe."
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-finite-module-tor-projective-resolution",
+ "kind": "statement",
+ "title": "From a finite module Tor bound to a bounded augmented projective model",
+ "statement": "Let $S$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $M$ a finitely generated $S$-module [def-weil-finitely-generated-module], and $d\\geq0$ an integer. Suppose $\\operatorname{Tor}^S_j(M,N)=0$ for every $S$-module $N$ and every $j>d$, using first-variable Tor [def-weil-pbc-tor-modules]. Work in the ordinary module derived category $D(S)$ [def-weil-abstract-derived-category], with derived tensor computed as in [lem-pc-source-kflat-module-tensor-model]. Then $H^i(M[0]\\otimes_S^{\\mathbf L}N[0])=0$ for every $S$-module $N$ and every $i\\notin[-d,0]$. There are a cochain complex $E^\\bullet$ of finitely generated projective $S$-modules [def-weil-pbc-projective-module], with $E^i=0$ for $i\\notin[-d,0]$, and an augmentation $\\varepsilon:E^0\\to M$ such that $E^\\bullet\\to M[0]$ is a quasi-isomorphism. Explicitly, $\\varepsilon$ is surjective, $\\ker\\varepsilon=\\operatorname{im}(d_E^{-1})$, and $\\ker(d_E^i)=\\operatorname{im}(d_E^{i-1})$ for every $i<0$; writing $F_j=E^{-j}$ gives an exact augmented resolution $$0\\to F_d\\to\\cdots\\to F_0\\xrightarrow{\\varepsilon}M\\to0.$$ In particular $M[0]$ is perfect [def-pc-perfect-ring-complex]. When $d=0$, the assertion includes an isomorphism $E^0\\cong M$. The zero module and zero ring are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0658, lemma-perfect (model with the specified Tor interval), and 066Q, lemma-perfect-module (augmented finite-projective resolution); ordinary Tor-to-derived-amplitude input via a finite-free resolution."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-tor-modules",
+  "def-weil-abstract-derived-category",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-weil-pbc-projective-module",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-free-resolution-noetherian] to $S,M$. Reverse its exact augmented chain resolution to obtain a cochain complex $P$ with $P^{-j}=S^{\\oplus n_j}$ for $j\\ge0$ and $P^i=0$ for $i>0$. Its augmentation to $M[0]$ induces $H^0(P)\\cong M$ and $H^i(P)=0$ for $i\\ne0$, directly from the stated kernel-image equalities. Thus it is a quasi-isomorphism. This bounded-above finite-free model proves that $M[0]$ is pseudo-coherent by [def-pc-ring-pseudo-coherent-complex].",
+   "uses": [
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LP, lemma-resolution-by-finite-free (2); more-algebra.tex Tag 064T, lemma-n-pseudo-module (4)."
+   }
+  },
+  {
+   "text": "For each $S$-module $N$, apply [lem-kun-derived-module-tor-comparison] with $R=S$. If $i>0$, take $k=-i<0$ to obtain $H^i(M[0]\\otimes_S^{\\mathbf L}N[0])=0$. If $i<-d$, take $k=-i>d$; the same comparison identifies this cohomology with $\\operatorname{Tor}^S_k(M,N)$, which is zero by hypothesis. Hence the derived tensor vanishes outside $[-d,0]$ for every $N$; this is exactly the Tor-amplitude hypothesis required in the next step. No flatness assumption on $N$ has been used.",
+   "uses": [
+    "lem-kun-derived-module-tor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section computing-tor, equation-derived-tensor-module and satellite formula; Tags 00LY (algebra-section-tor), 00LZ (algebra-lemma-tor-welldefined)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-pseudo-coherent-tor-projective-window] with $A=S$, $C=M[0]$, $a=-d$, and $b=0$. The inequality $-d\\le0$ follows from $d\\ge0$; pseudo-coherence and the required tests on all modules were proved in steps 1 and 2. We obtain $E$ supported in $[-d,0]$ and an isomorphism $Q(E)\\cong M[0]$ in $D(S)$, each $E^i$ being a direct summand of a finite free module, hence finite projective as stated by the cited result.",
+   "uses": [
+    "lem-trf-pseudo-coherent-tor-projective-window"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658, lemma-perfect, final assertion with the specified Tor interval."
+   }
+  },
+  {
+   "text": "Apply the cohomology functors of [def-weil-abstract-derived-category] to this isomorphism. They give $H^0(E)\\cong M$ and $H^i(E)=0$ for $i\\ne0$. Since $E^1=0$, one has $H^0(E)=E^0/\\operatorname{im}d_E^{-1}$. Define $\\varepsilon$ as this quotient map followed by the resulting isomorphism to $M$. It is surjective with kernel $\\operatorname{im}d_E^{-1}$; it annihilates $d_E^{-1}$, so with zero components in all other degrees it is a cochain map $E\\to M[0]$. Its cohomology maps are isomorphisms, so it is a quasi-isomorphism. For $i<0$, vanishing of $H^i(E)=\\ker d_E^i/\\operatorname{im}d_E^{i-1}$ gives the claimed kernel-image equality. If $d>0$, the equality at $i=-d$ and $E^{-d-1}=0$ give injectivity at the left end; reversing indices therefore gives the displayed exact augmented resolution. If $d=0$, $E^{-1}=0$, so $\\varepsilon$ is both surjective and injective and $E^0\\cong M$. The bounded finite-projective representative makes $M[0]$ perfect by [def-pc-perfect-ring-complex]. These constructions also apply to zero modules and the zero ring.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066Q, lemma-perfect-module, passage between a nonpositive projective complex and an augmented resolution; Tag 0658, lemma-perfect."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-kun-derived-module-tor-comparison",
+  "lem-trf-pseudo-coherent-tor-projective-window",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 064T (lemma-n-pseudo-module), 0658 (lemma-perfect), 066Q (lemma-perfect-module); algebra.tex 00LP (lemma-resolution-by-finite-free) and 00LY/00LZ, with the satellite formula in section-computing-tor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]or.*[Pp]rojective|[Pp]rojective.*[Tt]or|[Tt]or.*[Aa]mplitude|[Ff]inite.*[Pp]rojective.*[Rr]esolution",
+   "results": "{\"t\": \"2026-10-22T06:46:03Z\", \"tool\": \"grep\", \"query\": \"[Tt]or.*[Pp]rojective|[Pp]rojective.*[Tt]or|[Tt]or.*[Aa]mplitude|[Ff]inite.*[Pp]rojective.*[Rr]esolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/LeftResolution.lean\", \"Mathlib/Algebra/Category/ModuleCat/LeftResolution.lean\", \"Mathlib/Algebra/Category/ModuleCat/Ulift.lean\", \"Mathlib/Algebra/Category/ModuleCat/Projective.lean\", \"Mathlib/Algebra/Category/ModuleCat/Projective.lean\", \"Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\"], \"digest\": \"5fd5e8fb8cffb47e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of unbounded projective resolutions, projective-implies-Tor-vanishing, and finitely presented flat-implies-projective do not supply this Tor-bound-to-finite-resolution theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor vanishing for a finitely generated module over a Noetherian ring gives a finite projective resolution of prescribed length",
+   "results": "{\"t\": \"2026-10-22T06:46:03Z\", \"tool\": \"leansearch\", \"query\": \"Tor vanishing for a finitely generated module over a Noetherian ring gives a finite projective resolution of prescribed length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isZero_Tor_succ_of_projective\", \"ModuleCat.projectiveResolution\", \"Rep.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.noConfusion\", \"Module.finitePresentation_of_finite\", \"Module.Flat.projective_of_finitePresentation\", \"CategoryTheory.ProjectiveResolution.instHasProjectiveResolution\"], \"digest\": \"04e429d612a7fee8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of unbounded projective resolutions, projective-implies-Tor-vanishing, and finitely presented flat-implies-projective do not supply this Tor-bound-to-finite-resolution theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, Module.Projective",
+   "results": "{\"t\": \"2026-10-22T06:46:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Finite, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsAzumaya.mk\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.dual_finite\", \"Module.dual_projective\", \"dualTensorHomEquiv\", \"dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv\", \"lTensorHomEquivHomLTensor\"], \"digest\": \"bb7c3819f43d7c39\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of unbounded projective resolutions, projective-implies-Tor-vanishing, and finitely presented flat-implies-projective do not supply this Tor-bound-to-finite-resolution theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b|torAmplitude|flatDimension|projectiveDimension",
+   "results": "{\"t\": \"2026-10-22T06:46:14Z\", \"tool\": \"grep\", \"query\": \"\\\\bTor\\\\b|torAmplitude|flatDimension|projectiveDimension\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of unbounded projective resolutions, projective-implies-Tor-vanishing, and finitely presented flat-implies-projective do not supply this Tor-bound-to-finite-resolution theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a Noetherian ring with Tor vanishing above d admits a bounded resolution by finite projective modules in degrees zero through d",
+   "results": "{\"t\": \"2026-10-22T06:46:14Z\", \"tool\": \"leanfinder\", \"query\": \"A finite module over a Noetherian ring with Tor vanishing above d admits a bounded resolution by finite projective modules in degrees zero through d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasProjectiveDimensionLT\", \"CategoryTheory.HasProjectiveDimensionLE\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"CategoryTheory.ProjectiveResolution.instHasProjectiveResolution\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions\", \"CategoryTheory.ProjectiveResolution.of\"], \"digest\": \"eb1b00f3c7ced5c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of unbounded projective resolutions, projective-implies-Tor-vanishing, and finitely presented flat-implies-projective do not supply this Tor-bound-to-finite-resolution theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"resolution\"",
+   "results": "{\"t\": \"2026-10-22T06:46:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Tor\\\", \\\"resolution\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.LeftResolution.chainComplexFunctor\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.FibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"CategoryTheory.LocalizerMorphism.LeftResolution.opFunctor\", \"CategoryTheory.LocalizerMorphism.RightResolution.unopFunctor\", \"CategoryTheory.LocalizerMorphism.LeftResolution.opFunctor_obj\", \"CategoryTheory.LocalizerMorphism.LeftResolution.opEquivalence_functor\"], \"digest\": \"e7292dba94bbc26b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of unbounded projective resolutions, projective-implies-Tor-vanishing, and finitely presented flat-implies-projective do not supply this Tor-bound-to-finite-resolution theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective dimension of a Noetherian finite module follows from a uniform bound on its flat dimension",
+   "results": "{\"t\": \"2026-10-22T06:46:25Z\", \"tool\": \"leanfinder\", \"query\": \"Finite projective dimension of a Noetherian finite module follows from a uniform bound on its flat dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.projectiveDimension_ne_top_iff\", \"CategoryTheory.projectiveDimension_lt_iff\", \"CategoryTheory.projectiveDimension_le_iff\", \"CategoryTheory.hasProjectiveDimensionLT_of_ge\", \"CategoryTheory.projectiveDimension_ge_iff\", \"CategoryTheory.instHasProjectiveDimensionLTSucc\", \"Module.Flat.projective_of_finitePresentation\", \"CategoryTheory.HasProjectiveDimensionLT\"], \"digest\": \"d1c4fffe17bb3c57\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: existence of unbounded projective resolutions, projective-implies-Tor-vanishing, and finitely presented flat-implies-projective do not supply this Tor-bound-to-finite-resolution theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a Noetherian ring with Tor vanishing above d admits a bounded finite projective resolution in degrees minus d through zero",
+   "results": "{\"t\": \"2026-10-23T09:32:53Z\", \"tool\": \"leanfinder\", \"query\": \"A finite module over a Noetherian ring with Tor vanishing above d admits a bounded finite projective resolution in degrees minus d through zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasProjectiveDimensionLE\", \"CategoryTheory.HasProjectiveDimensionLT\", \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"CategoryTheory.projectiveDimension_le_iff\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CategoryTheory.projectiveDimension_ne_top_iff\", \"CategoryTheory.isZero_Tor_succ_of_projective\"], \"digest\": \"296320fcb53b97f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective dimension is defined via Ext; projective-implies-Tor-vanishing and existence of unbounded resolutions do not give the converse Tor bound or a finite-projective model in the prescribed interval."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]or.*[Pp]rojective|[Pp]rojective.*[Tt]or|[Ff]inite.*[Pp]rojective.*[Rr]esolution",
+   "results": "{\"t\": \"2026-10-23T09:35:04Z\", \"tool\": \"grep\", \"query\": \"[Tt]or.*[Pp]rojective|[Pp]rojective.*[Tt]or|[Ff]inite.*[Pp]rojective.*[Rr]esolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean\"], \"digest\": \"3eccabdebffe0e30\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective dimension is defined via Ext; projective-implies-Tor-vanishing and existence of unbounded resolutions do not give the converse Tor bound or a finite-projective model in the prescribed interval."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated module over a Noetherian ring with finite flat dimension has a finite projective resolution of the same length",
+   "results": "{\"t\": \"2026-10-23T09:35:04Z\", \"tool\": \"leansearch\", \"query\": \"A finitely generated module over a Noetherian ring with finite flat dimension has a finite projective resolution of the same length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.projectiveResolution\", \"Module.finitePresentation_of_finite\", \"Module.finitePresentation_iff_finite\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"Module.Flat.projective_of_finitePresentation\", \"Module.IsNoetherian.finite\", \"Module.finitePresentation_of_projective\", \"FGModuleRepr.ofFinite\"], \"digest\": \"cb0dcb1a8c2279f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective dimension is defined via Ext; projective-implies-Tor-vanishing and existence of unbounded resolutions do not give the converse Tor bound or a finite-projective model in the prescribed interval."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, Module.Projective",
+   "results": "{\"t\": \"2026-10-23T09:35:04Z\", \"tool\": \"loogle\", \"query\": \"Module.Finite, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsAzumaya.mk\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.dual_finite\", \"Module.dual_projective\", \"dualTensorHomEquiv\", \"dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv\", \"lTensorHomEquivHomLTensor\"], \"digest\": \"bb7c3819f43d7c39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective dimension is defined via Ext; projective-implies-Tor-vanishing and existence of unbounded resolutions do not give the converse Tor bound or a finite-projective model in the prescribed interval."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor|[Pp]rojective[Dd]imension|[Ff]lat[Dd]imension",
+   "results": "{\"t\": \"2026-10-23T09:35:56Z\", \"tool\": \"grep\", \"query\": \"Tor|[Pp]rojective[Dd]imension|[Ff]lat[Dd]imension\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\"], \"digest\": \"61554a6798c434fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective dimension is defined via Ext; projective-implies-Tor-vanishing and existence of unbounded resolutions do not give the converse Tor bound or a finite-projective model in the prescribed interval."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated module with uniformly bounded flat dimension over a Noetherian ring has a bounded projective resolution",
+   "results": "{\"t\": \"2026-10-23T09:36:07Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated module with uniformly bounded flat dimension over a Noetherian ring has a bounded projective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasProjectiveDimensionLT\", \"CategoryTheory.HasProjectiveDimensionLE\", \"CategoryTheory.projectiveDimension_ne_top_iff\", \"CategoryTheory.projectiveDimension_le_iff\", \"CategoryTheory.instHasProjectiveDimensionLTOfNatNatOfProjective\", \"CategoryTheory.projectiveDimension_lt_iff\", \"CategoryTheory.instHasProjectiveDimensionLTSucc\", \"CategoryTheory.projective_iff_hasProjectiveDimensionLT_one\"], \"digest\": \"9c368110708c4818\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective dimension is defined via Ext; projective-implies-Tor-vanishing and existence of unbounded resolutions do not give the converse Tor bound or a finite-projective model in the prescribed interval."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-polynomial-quotient-perfect",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: coherent relative-duality polynomial-chart input; the algebraic upper-shriek relative-perfection calculation used before the marked dualizing construction. More precisely, returned item proof steps 4--5: reverse an augmented finite-free resolution, identify derived tensor cohomology with ordinary Tor, apply the finite-Tor perfectness criterion, and construct the augmentation.",
+   "via": [
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-module-tor-projective-resolution",
+  "worker": "stage1",
+  "summary": "Kept the statement and its dependencies. Four proof steps reuse finite free resolution, derived Tor comparison, and the existing prescribed-window projective representative. Constructed the actual augmentation from H^0 and checked every exactness clause, d=0 and zero objects. No new nodes; searches rerun and recorded.",
+  "blueprint": "lem-trf-local-term-locality proof (1)--(2), semistable-alteration/nearby-cycle branch, through the recorded relative-duality polynomial-chart ancestry: realizes the finite-module Tor-to-projective-resolution input of lem-trf-flat-polynomial-quotient-perfect proof steps 4--5. The current blueprint ancestor was read; its geometric contraction route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Generic Noetherian module tool supplying the initial infinite finite-free resolution; the trace unit has no construction of such a resolution."
+   },
+   {
+    "node": "lem-kun-derived-module-tor-comparison",
+    "why": "Generic comparison of ordinary first-variable Tor and derived module tensor cohomology; the trace unit has no independent Tor comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-kun-derived-module-tor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-0ce086c59",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-0ce086c59 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all four steps and every cited node's statement. Statement and stmt_deps are unchanged from Q54's version, there are no new nodes, and no repair note exists for this item. Step 1: lem-weil-pbc-finite-free-resolution-noetherian, reindexed, gives a bounded-above finite free P quasi-isomorphic to M[0], so M[0] is pseudo-coherent. Step 2: lem-kun-derived-module-tor-comparison (B_{-k}≅Tor_k for k≥0, 0 for k<0) gives vanishing outside [-d,0] for every N; it uses the same K-flat derived tensor convention as the window lemma. Step 3: lem-trf-pseudo-coherent-tor-projective-window (Stacks 0658, more-algebra.tex:18889) with a=-d, b=0; it is not cyclic, since it has no proof_deps. Step 4: the augmentation is built as the quotient E^0→H^0(E)≅M using E^1=0; I checked the chain-map condition, quasi-isomorphism, kernel-image equalities, injectivity at the left end, the d=0 isomorphism and perfectness against Stacks 066Q. Edge cases d=0, Z/n over Z, M=0 and the zero ring all check out. No SGA is cited. The two generic tool_uses are accepted. Advisory: the existing split node lem-weil-bounded-finite-tor-perfect (Noetherian bounded finite complex with Tor amplitude [a,b]) could replace steps 1 and 3; it is a more general tool, not a duplicate. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteModuleTorProjectiveResolution",
+  "declaration": "DerivedCategory.exists_finite_projective_resolution_of_tor_vanishing",
+  "file": "lean/Sheaf/RingTheory/FiniteModuleTorProjectiveResolution.lean",
+  "statement": "theorem exists_finite_projective_resolution_of_tor_vanishing (S : Type u) [CommRing S] [IsNoetherianRing S] [HasDerivedCategory.{w} (ModuleCat.{u} S)] (M : ModuleCat.{u} S) [Module.Finite S M] (d : ℤ) (hd : 0 ≤ d) (hTor : ∀ (N : ModuleCat.{u} S) (j : ℕ), d < (j : ℤ) → IsZero (((Tor' (ModuleCat.{u} S) j).obj M).obj N)) : (∀ (N : ModuleCat.{u} S) (i : ℤ), i < -d ∨ 0 < i → IsZero ((homologyFunctor (ModuleCat.{u} S) i).obj ((singleFunctor (ModuleCat.{u} S) 0).obj M ⊗ (singleFunctor (ModuleCat.{u} S) 0).obj N))) ∧ (∃ (E : CochainComplex (ModuleCat.{u} S) ℤ) (ε : E.X 0 ⟶ M) (f : E ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} S) 0).obj M), (∀ i : ℤ, i < -d ∨ 0 < i → IsZero (E.X i)) ∧ (∀ i : ℤ, Module.Finite S (E.X i) ∧ Module.Projective S (E.X i)) ∧ f.f 0 ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).hom = ε ∧ QuasiIso f ∧ Function.Surjective ε.hom ∧ LinearMap.ker ε.hom = LinearMap.range (E.d (-1) 0).hom ∧ (∀ i : ℤ, i < 0 → LinearMap.ker (E.d i (i + 1)).hom = LinearMap.range (E.d (i - 1) i).hom) ∧ (d = 0 → IsIso ε)) ∧ IsPerfectRingComplex ((singleFunctor (ModuleCat.{u} S) 0).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9be871f1b",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Statement verbatim in node lean record; only lean changed vs live. Clause-by-clause match: Noetherian S, Module.Finite M, d:ℤ with 0≤d, first-variable Tor' vanishing for all N and j>d; derived-tensor vanishing outside [-d,0] via framework K-flat ⊗ (QObjTensorQObjIsoOfKFlatLeft); E finite projective supported in [-d,0]; ε tied to f.f 0 with QuasiIso f; surjectivity, ker ε = im d^{-1}, negative-degree exactness with correct indices; d=0 → IsIso ε; IsPerfectRingComplex of M[0]. No Nontrivial, w independent, u shared as in all recorded interfaces and the kunneth Tor comparison. Edge cases d=0, M=0, zero ring, ℤ/n sign test OK. One sorry theorem, no defs, docstrings with Stacks 0658/066Q, blueprint id and 4-step plan; report has Worker report and Second reading by Q75. No duplicate (UniformPerfectQuotientBound is A/I^n-specific, w=u). Not recompiled (no change)."
+ }
+}

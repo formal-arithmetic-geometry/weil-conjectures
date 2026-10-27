@@ -1,0 +1,145 @@
+{
+ "id": "lem-pbc-completed-scalar-projection-tensor-comparison",
+ "kind": "statement",
+ "title": "Scalar-adjunction projection agrees with tensor projection for arbitrary coefficients",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $d$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. Write $R_T$ for its completed coefficient sheaf, $R_T^0$ for the limit of constant finite quotient sheaves, and $b_T:R_T^0\\cong R_T$ for the canonical limit comparison [def-weil-pbc-bounded-constructible-tower]. Assume the canonical completed coefficient map $c_f:f^{-1}R_Y\\to R_X$ is invertible. Let $F^{\\rm ab}$ be an additive ordinary functor with an equality identifying it with generic ringed direct image over $R_Y,R_X$ with coefficient isomorphism $\\operatorname{asIso}(c_f)$, and put $F=R(F^{\\rm ab})$ [def-weil-pbc-proetale-operations], and $F^0,L^0$ direct image and pullback over $R^0$ with the canonical completed coefficient identification [lemma-weil-pbc-perfect-projection-formula]. Choose arbitrary commutative ring sheaves $S_Y,S_X$, maps $\\varphi_T:R_T\\to S_T$, and $c:f^{-1}S_Y\\cong S_X$ such that $c_f;\\varphi_X=f^{-1}(\\varphi_Y);c$. Choose an additive ordinary functor $G^{\\rm ab}$ equal to ringed direct image with coefficient isomorphism $c$, and put $G=R(G^{\\rm ab})$ and let $E_T\\dashv U_T$ be derived extension and exact restriction along $\\varphi_T$ [def-weil-pbc-completed-pullback]. Suppose $i:U_X^{\\rm ab};F^{\\rm ab}\\cong G^{\\rm ab};U_Y^{\\rm ab}$ is identity on underlying sections and $e:U_X;F\\cong G;U_Y$ is its derived comparison, normalized by the universal right-derived units on every cochain complex $C$: $u_F(U_X C);F(\\rho_X^{-1}(C));e_{QC}=Q(i_C);\\rho_Y^{-1}(G^\\bullet C);U_Y(u_G(C))$. Here $\\rho_T$ is the canonical localization comparison for exact restriction and $u_F,u_G$ are the universal derived units. No finiteness, flatness or perfectness of $S_T$ over $R_T$ is assumed.\n\nLet $P\\in D(R_Y^0)$ and fix $r:(\\operatorname{Res}_{b_Y;\\varphi_Y}S_Y)[0]\\cong P$. For every $K\\in D(R_X)$ set $K^0=\\operatorname{Res}_{b_X}K$. There are tensor models $a_Y,a_X$ presenting ordinary uncompleted derived tensor by signed total tensor on flat K-flat representatives, and isomorphisms $s:\\operatorname{Res}_{b_Y}U_YE_YF(K)\\cong a_Y(F^0K^0,P)$ and $t:\\operatorname{Res}_{b_Y}U_YGE_X(K)\\cong F^0(a_X(K^0,L^0P))$, such that $\\operatorname{Res}_{b_Y}(U_Y(\\pi_{\\rm scalar}(K)));t=s;\\pi_{\\rm tensor}(K^0,P)$. Here $\\pi_{\\rm scalar}$ is the $E_Y\\dashv U_Y$ transpose of $F(\\eta_X(K));e_{E_XK}$, and $\\pi_{\\rm tensor}$ is the canonical tensor-pullback/counit projection morphism [def-weil-pbc-projection-formula-map]. The conclusion identifies these specified morphisms and asserts no invertibility of either projection.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-completed-pullback",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Projection formula, equation-projection-formula-map (Tag 0B56), lines 13660-13679; lemma-projection-formula (Tag 0944), lines 13683-13720; scalar-extension specialization of derived adjunction."
+ },
+ "proof": [
+  {
+   "text": "Construct ordinary uncompleted tensor models using the native localization tensor and its flat K-flat representative isomorphism. No arbitrary witness from an existence theorem is selected.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the normalized scalar mate to literal inverse-image ring coefficients. This uses only scalar and geometric adjunctions, including the section normalization of i and derived-unit normalization of e.",
+   "uses": [
+    "lem-pbc-completed-scalar-mate-coefficient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing arbitrary ring-sheaf scalar-mate normalization to chi=bY;phiY and the transported K. Cancel its source comparison to identify restricted beta followed by its tensor target comparison with its tensor source comparison followed by the specified projection.",
+   "uses": [
+    "lem-sfb-derived-scalar-mate-thick-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this tensor projection through the canonical completed coefficient isomorphism and r. Compose source and target isomorphisms. Associativity, the two transport squares, and hom-inverse cancellation give exactly the original displayed equality.",
+   "uses": [
+    "lem-pbc-completed-tensor-projection-coefficient-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-completed-scalar-mate-coefficient-transport",
+  "lem-pbc-completed-tensor-projection-coefficient-transport",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-derived-scalar-mate-thick-locus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56: reuse the existing literal inverse-image scalar-mate theorem; isolate scalar coefficient conjugation and tensor coefficient conjugation, then compose the two squares. The generic scalar-mate theorem is used only as a ring-sheaf tool, without its constructibility or thick-locus applications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with derived extension of scalars along a perfect finite quotient; the scalar adjunction mate is a natural isomorphism",
+   "results": "Derived adjunction unit and counit constructions; no scalar/tensor normalization for the specified pro-etale coefficient presentations.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "results": "Mathlib.CategoryTheory.Adjunction.Basic: homEquiv_naturality_left_symm. Reused adjunction naturality in the complete assembly proof.",
+   "date": "2026-10-27",
+   "verdict": "generic naturality available; no coefficient-normalization statement"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|restrict)|(scalar|restrict).*projection",
+   "results": "9 unrelated Mathlib geometric-projection hits. Local library: PerfectProjectionFormula proves tensor invertibility; ProEtaleRingSheafChangeAdjunction handles restriction/direct-image units. FiniteCoefficientDirectImage has a private etale constant-ring bounded-below scalarMate_restrict_eq_projection, with a different encoding and extra boundedness hypotheses.",
+   "date": "2026-10-27",
+   "verdict": "reuse perfect projection and coefficient-change declarations; a generic unbounded pro-etale scalar-to-tensor normalization remains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a derived scalar extension and pushforward comparison is the tensor projection morphism for a morphism of ringed topoi",
+   "results": "8 presheaf restriction/pushforward definitions, including PresheafOfModules.restrictScalars; no derived normalization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "blueprint search",
+   "query": "scalar projection; restriction tensor",
+   "results": "One unrelated finite etale direct-image node for scalar projection; no restriction tensor node. Also read the current latest perfect-projection-formula statement and proof.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate of the new comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTowerDirectImage",
+  "date": "2026-10-27",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Finite-level projection-formula clause: identify its scalar-adjunction mate with the tensor projection before applying perfectness.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarProjectionTensorComparison",
+  "file": "lean/Sheaf/Paper/CompletedScalarProjectionTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedScalarProjectionTensorComparison",
+  "statement": "theorem completedScalarProjectionTensorComparison\n    {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) [IsIso (completedCoefficientMap f d)]\n    (SY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (SX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (φY : pbcAdicCompletion Y d ⟶ SY) (φX : pbcAdicCompletion X d ⟶ SX)\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj SY ≅ SX)\n    (hc : completedCoefficientMap f d ≫ φX =\n      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map φY ≫ c.hom)\n    (F : pbcModules X (pbcAdicCompletion X d) ⥤ pbcModules Y (pbcAdicCompletion Y d))\n    [F.Additive]\n    (hF : F = proEtaleRingModuleDirectImage f (pbcAdicCompletion Y d)\n      (pbcAdicCompletion X d) (asIso (completedCoefficientMap f d)))\n    (G : pbcModules X SX ⥤ pbcModules Y SY) [G.Additive]\n    (hG : G = proEtaleRingModuleDirectImage f SY SX c)\n    (i : pbcRestrict φX ⋙ F ≅\n      G ⋙ pbcRestrict φY)\n    (hi : ∀ (M : pbcModules X SX) (U : Y.ProEtᵒᵖ),\n      HEq (fun x ↦ (i.hom.app M).val.app U x)\n        (fun x : ((proEtaleRingModuleDirectImage f SY SX c).obj M).val.obj U ↦ x))\n    (e : pbcDerivedRestrict φX ⋙ F.rightDerivedFunctor ≅\n      G.rightDerivedFunctor ⋙ pbcDerivedRestrict φY)\n    (he : ∀ C : CochainComplex (pbcModules X SX) ℤ,\n      F.rightDerivedFunctorUnitQ\n          (((pbcRestrict φX).mapHomologicalComplex (.up ℤ)).obj C) ≫\n        F.rightDerivedFunctor.map\n          ((pbcRestrict φX).mapDerivedCategoryFactors.inv.app C) ≫\n        e.hom.app (DerivedCategory.Q.obj C) =\n      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex i.hom (.up ℤ)).app C) ≫\n        (pbcRestrict φY).mapDerivedCategoryFactors.inv.app\n          ((G.mapHomologicalComplex (.up ℤ)).obj C) ≫\n        (pbcDerivedRestrict φY).map (G.rightDerivedFunctorUnitQ C))\n    (P : PerfectProjection.derived d Y)\n    (r : (DerivedCategory.singleFunctor (PerfectProjection.modules d Y) 0).obj\n        ((pbcRestrict ((pbcCompletedComparison Y d).hom ≫ φY)).obj\n          (SheafOfModules.unit (reductionModuleRing Y SY))) ≅ P)\n    (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))) :\n    ∃ (aY : ProEtaleTensorModel Y (PerfectProjection.ring d Y))\n      (aX : ProEtaleTensorModel X (PerfectProjection.ring d X))\n      (s : (pbcDerivedRestrict (pbcCompletedComparison Y d).hom).obj\n          ((pbcDerivedRestrict φY).obj\n            ((pbcDerivedExtend φY).obj\n              (F.rightDerivedFunctor.obj K))) ≅\n        aY.tensor.obj\n          ((PerfectProjection.directImage d f).obj\n            ((pbcDerivedRestrict (pbcCompletedComparison X d).hom).obj K), P))\n      (t : (pbcDerivedRestrict (pbcCompletedComparison Y d).hom).obj\n          ((pbcDerivedRestrict φY).obj\n            (G.rightDerivedFunctor.obj\n              ((pbcDerivedExtend φX).obj K))) ≅\n        (PerfectProjection.directImage d f).obj\n          (aX.tensor.obj\n            ((pbcDerivedRestrict (pbcCompletedComparison X d).hom).obj K,\n              (PerfectProjection.pullback d f).obj P))),\n      (pbcDerivedRestrict (pbcCompletedComparison Y d).hom).map\n          ((pbcDerivedRestrict φY).map\n            (((pbcDerivedScalarAdjunction φY).homEquiv _ _).symm\n              (F.rightDerivedFunctor.map\n                  ((pbcDerivedScalarAdjunction φX).unit.app K) ≫\n                e.hom.app ((pbcDerivedExtend φX).obj K)))) ≫ t.hom =\n        s.hom ≫ PerfectProjection.projection d f aY aX\n          ((pbcDerivedRestrict (pbcCompletedComparison X d).hom).obj K) P",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T222649-L-679938",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T012934-L-2350014",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

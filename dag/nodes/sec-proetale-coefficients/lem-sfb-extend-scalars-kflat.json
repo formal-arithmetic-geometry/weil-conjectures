@@ -228,7 +228,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-15ef00deb (reviewer sub-agent of L); spot-checked: I read the whole delivery and made no fixes. The item's statement is still the blueprint's (main-20261015) word for word, and its proof follows the blueprint route: S is replaced by a K-flat Q, K-flatness is used twice, and restriction detects quasi-isomorphisms. The delivery writes the cone argument as a commutative square on s. Steps 1–3 now cite lem-weil-pbc-left-adjoint-preserves-colimits (a Mathlib leaf) and the new leaf instead of proving them inline, and they establish every hypothesis of lem-sfb-abstract-kflat-resolution in Mod_R. The cited nodes are lem-sfb-modobj-grothendieck, the symmetric-tensor and internal-Hom definitions, and lem-sfb-modobj-flat-resolutions; flatness is defined the same way in the flat-resolutions node and the resolution node. I checked step 7 by computing the balancing arrows: γ_{S_R}β = μ_S(S⊗φ) by naturality of the braiding and commutativity of S. The R-actions agree, and only the (0,n) summand survives, with sign +1. I checked the inverse formula in step 6 and the reflection calculation in step 8. The exactness of Res comes from clause 4 of the change-of-scalars node, whose hypotheses all hold. The new node lem-sfb-preserving-colimits-additive is true: Stacks 010N(1) (homology.tex line 1549) states it, and Mathlib AdditiveFunctor.lean lines 330–334 (rightExactFunctor_le_additiveFunctor) give it as a one-line specialization once abelian categories supply the needed instances. I searched the DAG for duplicates by statement regex and by Mathlib declaration; the closest existing node, lem-sfb-kernel-cokernel-finite-exactness, assumes additivity and goes the other way. The new node does not restate a clause of the item, and all three kinds of Mathlib search are recorded. The unit route reaches sk-prop-sfb-module-category, so no tool_uses are needed. proof_deps equals the union of the step uses and there is no cycle. Edge cases checked: φ = id, Z→Z/2 (where dropping K-flatness gives a counterexample), zero objects, unbounded complexes, and zero or constant functors for the new leaf. No SGA source is used."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Mod.preservesKFlatQuasiIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.preservesKFlatQuasiIso",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars",
+     "lines": [
+      161,
+      175
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars",
   "declaration": "CategoryTheory.Mod.preservesKFlatQuasiIso",
@@ -246,5 +271,23 @@
   "group": "Q12",
   "result": "pass",
   "note": "The item is linked to the existing published CategoryTheory.Mod.preservesKFlatQuasiIso; only the node's lean field changed. Its full type has exactly the node's hypotheses (closed symmetric monoidal, Grothendieck abelian at size v, preadditive tensor, functorial flat resolutions, commutative ring objects R and S, ring-object map φ) and the node's conclusion (S ⊗_R s is a quasi-isomorphism), with no extra assumption or universe restriction. My nt_compile.py check (2.1 s, no errors) shows the upstream K-flat predicate is definitionally equal to the recorded IsKFlatForTotalTensor in both directions, and the recorded class PreservesTotalTensorKFlatQuasiIso follows in one line. The declaration is proved in the published source (standard axioms only). The merge tool's existing-declaration check passes with the statement verbatim. Edge cases covered: φ = id, non-flat φ such as Z→Z/2, zero ring, unbounded complexes. The report has a real worker report and the standard second-reading note. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive and which has functorial flat resolutions, and let\n$\\varphi\\colon\\mathcal R\\to\\mathcal S$ be a morphism of commutative ring objects of\n$\\mathcal C$. Let $s\\colon P\\to P'$ be a\nquasi-isomorphism between K-flat complexes of $\\mathcal R$-modules (K-flat for\n$\\otimes_{\\mathcal R}$, [def-sfb-preserves-kflat-quasi-iso]). Then\n$\\mathcal S\\otimes_{\\mathcal R}s$ is a quasi-isomorphism of complexes of\n$\\mathcal S$-modules.",
+  "proof": [
+   {
+    "text": "The cone $C$ of $s$ is acyclic and K-flat, and the cone of $\\mathcal S\\otimes_{\\mathcal R}s$\nis $\\mathcal S\\otimes_{\\mathcal R}C$. Restriction of scalars is exact and faithful on\nunderlying objects [det-def-sfb-change-of-scalars], so it detects acyclicity. Hence it\nsuffices to show that $\\mathcal S\\otimes_{\\mathcal R}C$, with $\\mathcal S$ regarded as an\n$\\mathcal R$-module through $\\varphi$, is acyclic. Choose a K-flat resolution\n$Q\\to\\mathcal S$ of $\\mathcal S$ as an $\\mathcal R$-module [det-prop-sfb-module-category].\nSince $C$ is K-flat, $Q\\otimes_{\\mathcal R}C\\to\\mathcal S\\otimes_{\\mathcal R}C$ is a\nquasi-isomorphism. Since $Q$ is K-flat and $C$ is acyclic, i.e. $0\\to C$ is a\nquasi-isomorphism, $Q\\otimes_{\\mathcal R}C$ is acyclic. Hence\n$\\mathcal S\\otimes_{\\mathcal R}C$ is acyclic.",
+    "uses": [
+     "det-def-sfb-change-of-scalars"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

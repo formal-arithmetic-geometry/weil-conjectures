@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+ "kind": "statement",
+ "title": "Sumihiro invariant affine neighbourhoods on normal torus schemes",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $r\\geq0$ be an integer, and let $T=(\\mathbf G_{m,F})^r$ be the split torus [def-sc-group-scheme, def-sc-gm-ga], with the trivial group for $r=0$. Let $X$ be a separated finite-type $F$-scheme [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism] which is normal: every local ring is an integral domain integrally closed in its field of fractions [def-weil-pbc-normal-ring]. Suppose a morphism $a:T\\times_F X\\to X$ [def-pc-fibre-product] is an action, meaning that $a(1,x)=x$ and $a(t,a(u,x))=a(tu,x)$ as identities of morphisms. For every point $x\\in |X|$ there exists an affine open subscheme $U\\subseteq X$ [def-weil-affine-spectrum, def-weil-open-immersion] containing $x$ such that $a|_{T\\times_F U}$ factors through $U$. The resulting action on $U$ makes its inclusion equivariant. Neither smoothness, projectivity, integrality of $X$, faithfulness of the action nor a characteristic restriction is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Supporting input to the concentration prerequisite of Section 22d, Theorem 22.50, printed p.480; not asserted to occur in Milne. WANTED: H. Sumihiro, Equivariant completion, J. Math. Kyoto Univ. 14 (1974), 1--28, Corollary 2, invariant affine neighbourhood theorem for normal torus varieties. Here stated for normal separated finite-type schemes, allowing finitely many disjoint normal components and ineffective actions. No Stacks tag is asserted for this theorem; the paper is absent locally."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "If $X$ is empty there is no point to treat. Otherwise fix $x\\in |X|$. In Laurent coordinates $T=\\operatorname{Spec}F[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$ is affine of finite type. Apply [lem-trf-split-lattice-torus-projection] to the lattice $\\mathbf Z^r$: $T$ is smooth and its coordinate ring is an integral domain. Its spectrum is nonempty and irreducible (the zero prime has dense closure), hence connected. Thus the group hypotheses of [lem-sfb-sumihiro-invariant-quasiprojective-open] hold. That node supplies a normal separated finite-type invariant quasi-projective open $W\\subseteq X$ with $x\\in W$. This step uses normality exactly as assumed, not smoothness of $X$; $r=0$ gives $T=\\operatorname{Spec}F$ and still meets the group hypotheses.",
+   "uses": [
+    "lem-trf-split-lattice-torus-projection",
+    "lem-sfb-sumihiro-invariant-quasiprojective-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 13f, Definition 13.45, supporting Sumihiro neighborhood input (WANTED, as specified in its node); Definition 12.14 for split tori. Agent assembly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-quasiprojective-equivariant-immersion] to $W$ and $G=T$ to obtain a finite-dimensional rational representation $V\\ne0$ and an equivariant immersion $j:W\\hookrightarrow\\mathbf P(V)=\\operatorname{Proj}(S)$. Normality implies reducedness since an integral domain has no nonzero nilpotents. Apply [lem-sfb-projective-invariant-boundary-ideals] to the reduced locally closed image of $j$. Obtain the invariant reduced projective closure $Z$ and its invariant reduced boundary $B$, with $W=Z\\setminus |B|$ as open schemes. In particular $p=j(x)$ lies in $Z$ and outside $B$. The same node makes every boundary degree piece $I(B)_d$ a finite-dimensional rational $T$-representation. Smoothness of $T$, required for this scheme-level closure statement, was checked in step 1.",
+   "uses": [
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-projective-invariant-boundary-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 7e (linear actions), and supporting equivariant immersion and invariant boundary-ideal statements; Sumihiro input is WANTED. Agent assembly."
+   }
+  },
+  {
+   "text": "By [lem-sfb-projective-closed-subscheme-homogeneous-ideal], the homogeneous ideal $I=\\bigoplus_d I(B)_d$ realizes $B$ as $\\operatorname{Proj}(S/I)$. In the prime-ideal description [def-pc-proj], $p\\notin B$ means $I\\not\\subseteq\\mathfrak p_p$. Choose a homogeneous $f\\in I_d\\setminus\\mathfrak p_p$: if all homogeneous components were in the prime, every element of $I$ would be in it. We can arrange $d>0$. Indeed if $d=0$, choose a coordinate $z_i\\notin\\mathfrak p_p$ (the prime does not contain the irrelevant ideal); then $fz_i\\in I_1\\setminus\\mathfrak p_p$ by primality. This includes $B=\\varnothing$, when the ideal can contain constants. No closed-point or rational-point assumption on $x$ is used.",
+   "uses": [
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space; homogeneous prime definition in Proj."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-torus-representation-weight-decomposition] to the representation $I(B)_d$ from step 2. Write $f=\\sum_\\chi f_\\chi$ in its finitely many weight spaces. At least one $f_\\chi$ is outside $\\mathfrak p_p$, since otherwise their sum lies in the prime. Fix such a polynomial $h=f_\\chi$. It is homogeneous of the same positive degree $d$, vanishes on $B$, and satisfies $g\\cdot h=\\chi(g)h$ after every commutative algebra extension. This uses the representation on the boundary ideal itself; decomposing in the ambient $S_d$ without proving preservation of the ideal would not justify vanishing of its weight components.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, printed pp.234--235, applied to the boundary degree subrepresentation; supporting boundary statement in step 2."
+   }
+  },
+  {
+   "text": "Set $U=j^{-1}D_+(h)$. It contains $x$ because $h\\notin\\mathfrak p_p$. Since $h$ vanishes on $B$, $D_+(h)\\cap |B|=\\varnothing$; the identification $W=Z\\setminus |B|$ from step 2 therefore identifies $U$ as a scheme with $Z\\cap D_+(h)$. The positive-degree chart $D_+(h)$ is affine by [prop-nagata-proj-standard-open]. Its intersection with the closed subscheme $Z$ is affine by the affine quotient-ring characterization [def-weil-closed-immersion]. Thus $U$ is an affine open of $W$ and of $X$. It is essential here that the polynomial vanishes on the whole boundary: an arbitrary affine projective chart would give only a locally closed subscheme.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4, lemma-standard-open, and the Proj affine chart construction; closed immersions on affines: Schemes Tag 01IQ, definition-closed-immersion."
+   }
+  },
+  {
+   "text": "For every commutative $F$-algebra $A$, $g\\in T(A)$ and local generator $v$ of a line representing a point of $\\mathbf P(V)(A)$, the contragredient polynomial convention and the eigenvector identity give $h(\\rho(g)v)=\\chi(g)^{-1}h(v)$. The factor $\\chi(g)$ is a unit. Hence the nonvanishing open $D_+(h)$ is invariant, including on nonreduced test algebras; checking in local generators suffices because they differ by units and $h$ is homogeneous. Equivariance of $j$ then maps the universal point of $T\\times_F U$ into $U$. By [def-weil-open-immersion] this gives a unique factorization of $a|_{T\\times_F U}$ through $U$. Composing either side of the identity or associativity law with $U\\hookrightarrow X$ gives the corresponding law of $a$; the open inclusion is monic, so the restricted maps satisfy the laws. The inclusion is equivariant by its defining factorization. For $r=0$ the sole character is trivial; ineffective actions and every characteristic satisfy the same unit calculation.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.46, printed p.272, invariant eigenvector-chart calculation, here applied to a positive-degree eigen-polynomial; agent universal-test-algebra verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-split-lattice-torus-projection",
+  "lem-sfb-sumihiro-invariant-quasiprojective-open",
+  "lem-sfb-normal-quasiprojective-equivariant-immersion",
+  "lem-sfb-projective-invariant-boundary-ideals",
+  "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "def-pc-proj",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "prop-nagata-proj-standard-open",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemmas 13.46 and Theorem 12.12 guide the weight-chart argument; missing Sumihiro quasi-projective and embedding inputs are stated separately, not attributed to Milne. Boundary removal and universal algebra calculation supplied by Q26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sumihiro theorem normal varieties torus invariant affine open cover",
+   "results": "{\"t\": \"2026-10-24T00:09:33Z\", \"tool\": \"leanfinder\", \"query\": \"Sumihiro theorem normal varieties torus invariant affine open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\"], \"digest\": \"354b75ffb64cfa9c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|[Ii]nvariant.*[Aa]ffine|[Aa]ffine.*[Ii]nvariant",
+   "results": "{\"t\": \"2026-10-24T00:18:56Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|[Ii]nvariant.*[Aa]ffine|[Aa]ffine.*[Ii]nvariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every point of a normal separated finite type scheme over an algebraically closed field with a split torus action has an invariant affine open neighborhood",
+   "results": "{\"t\": \"2026-10-24T00:18:56Z\", \"tool\": \"leansearch\", \"query\": \"Every point of a normal separated finite type scheme over an algebraically closed field with a split torus action has an invariant affine open neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.isBasis_affineOpens\"], \"digest\": \"80256b949c192b13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"invariant\"",
+   "results": "{\"t\": \"2026-10-24T00:18:57Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal algebraic variety torus invariant affine neighborhood of each point Sumihiro",
+   "results": "{\"t\": \"2026-10-24T00:18:57Z\", \"tool\": \"leanfinder\", \"query\": \"Normal algebraic variety torus invariant affine neighborhood of each point Sumihiro\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.local_affine\"], \"digest\": \"03567df49dafc768\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal algebraic variety torus action invariant affine open neighborhood Sumihiro",
+   "results": "{\"t\": \"2026-10-24T00:57:55Z\", \"tool\": \"leanfinder\", \"query\": \"Normal algebraic variety torus action invariant affine open neighborhood Sumihiro\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\"], \"digest\": \"b5d7ffaad321101d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary affine neighborhood and Proj chart theorems do not give torus invariance on a normal scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"invariant\"",
+   "results": "{\"t\": \"2026-10-24T00:55:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary affine neighborhood and Proj chart theorems do not give torus invariance on a normal scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|invariant.*affine.*(open|neighbo)|affine.*torus",
+   "results": "{\"t\": \"2026-10-24T00:59:42Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|invariant.*affine.*(open|neighbo)|affine.*torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary affine neighborhood and Proj chart theorems do not give torus invariance on a normal scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every point of a normal scheme of finite type over an algebraically closed field with split torus action has an invariant affine neighborhood",
+   "results": "{\"t\": \"2026-10-24T00:59:43Z\", \"tool\": \"leansearch\", \"query\": \"Every point of a normal scheme of finite type over an algebraically closed field with split torus action has an invariant affine neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.AffineCover.covers\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.exists_germ_injective\"], \"digest\": \"7a7f48398c6cd650\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary affine neighborhood and Proj chart theorems do not give torus invariance on a normal scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-invariant-affine-filtration",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction.",
+   "via": [
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+  "worker": "stage1",
+  "summary": "Q26: statement unchanged. Separated Sumihiro quasi-projective neighborhoods from equivariant projective immersions; made scheme-theoretic closure/boundary representation input explicit. Weight-decompose a boundary equation nonzero at the given arbitrary point, then obtain a closed affine chart and verify its action on all test algebras. Three new unsplit inputs, no new definitions or Mathlib leaves.",
+  "blueprint": "Inherited non-blueprint ancestor is null. Realizes the normal-case geometric neighborhood input of the torus affine filtration, inside the marked direct-image alteration/concentration prerequisite; no unit route replacement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Generic Laurent torus smoothness and geometric integral coordinate ring; no unit-specific assertion is replaced."
+   },
+   {
+    "node": "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "why": "Generic homogeneous ideal realization for the reduced boundary in projective space; independent of the unit route."
+   },
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "Generic affine standard Proj chart for a homogeneous positive-degree polynomial; no compactification argument is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-split-lattice-torus-projection",
+  "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "prop-nagata-proj-standard-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-7c6d18390",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-7c6d18390 (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes and every cited statement in full, plus Milne iAG Def 7.26, Def 13.45 and Lemma 13.46 (Sumihiro is not in literature/; marked WANTED, proof_origin agent). Item statement unchanged and true (standard Sumihiro theorem for split tori: non-closed points, disconnected normal X and r=0 are fine). Steps: (1) the trf lattice node gives T smooth with a domain coordinate ring, hence connected, so the Sumihiro node applies and gives an invariant normal quasi-projective W; (2) equivariant immersion plus the boundary node give Z, B with W=Z\\|B| and I(B)_d a T-representation; (3) by the cited homogeneous-ideal node, p∉B gives f∈I(B)_d outside 𝔭_p, with the d>0 correction via a coordinate; (4) weight-decompose inside I(B)_d itself; (5) h vanishes on B, so j^{-1}D_+(h)=Z∩D_+(h) is closed in an affine chart, hence affine; (6) h(ρ(g)v)=χ(g)^{-1}h(v), sign checked, so D_+(h) is invariant on all test algebras and the action laws restrict via the open immersion. New nodes are true and strictly smaller than the item: Sumihiro quasi-projective neighbourhoods (any characteristic; connected G preserves components), Sumihiro/GIT 1.6–1.7 equivariant immersion (component-wise linearization, trivial V for empty X), and invariant reduced closure/boundary with I(C)_d a subcomodule (G smooth makes G×Z reduced; G×W is dense; the complement is preserved). DAG-wide regex duplicate search found nothing equivalent (smooth-projective torus cover, finite-groupoid neighbourhoods, linearized coaction, orbit geometry and the projective-ideal nodes were all checked). Batch 5: lem-trf-split-lattice-torus-projection is generic Laurent/monoid algebra, not part of the trace-formula or Poincaré-duality proofs, and is already in the batch-5 closure; with the item's new proof the closure grows only by the 3 new nodes. Accepted, along with the tool use. No SGA cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SumihiroNormalTorusAffineNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_sumihiro_normal_torus_affine_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/SumihiroNormalTorusAffineNeighbourhood.lean",
+  "statement": "theorem exists_sumihiro_normal_torus_affine_neighbourhood (F : Type u) [Field F] [IsAlgClosed F] (r : ℕ) (T : Grp (Over (Spec (.of F)))) (hT : Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (X : CategoryTheory.Mod (Over (Spec (.of F))) T.X) [IsSeparated X.X.hom] [LocallyOfFiniteType X.X.hom] [QuasiCompact X.X.hom] (hnormal : ∀ p : X.X.left, IsDomain (X.X.left.presheaf.stalk p) ∧ IsIntegrallyClosed (X.X.left.presheaf.stalk p)) (x : X.X.left) : ∃ (U : CategoryTheory.Mod (Over (Spec (.of F))) T.X) (i : U ⟶ X), IsOpenImmersion i.hom.left ∧ IsAffine U.X.left ∧ x ∈ Set.range i.hom.left",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded split torus and Mathlib internal module objects. A split-torus presentation is a group-scheme isomorphism to the rank-r product. Normality is the explicit normal-domain condition on every stalk; the equivariant affine open immersion identifies its source with an invariant affine open subscheme."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3bc447913",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Item changes only lean + stmt_deps (+landed def-sfb-tori-multiplicative-type, allowed); lean.statement verbatim. H3: T ≅ splitTorus F r in Grp(Over Spec F) (rank 0 = unit), X : Mod T.X with one_smul/mul_smul as scheme identities, IsSeparated+LocallyOfFiniteType+QuasiCompact, stalkwise IsDomain ∧ IsIntegrallyClosed = def-weil-pbc-normal-ring; conclusion ∃ affine U : Mod, equivariant open immersion i with x ∈ range = node's invariant affine neighbourhood with restricted action (equivalent). No extra hypotheses; edge cases (empty X, r=0, disconnected, non-closed x, char p) covered; encoding matches citer TorusInvariantAffineFiltration. No dup, only sorry, docstrings with source/blueprint and 6 steps, lines ≤92. Not recompiled per brief; worker scompile + deliver2 dry run clean. No findings."
+ }
+}

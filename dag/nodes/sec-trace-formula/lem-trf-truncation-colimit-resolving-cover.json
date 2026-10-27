@@ -1,0 +1,412 @@
+{
+ "id": "lem-trf-truncation-colimit-resolving-cover",
+ "kind": "statement",
+ "title": "Colimit resolutions from bounded-above resolutions of good truncations",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] admitting sequential colimits indexed by the positive integers, which preserve short exact sequences of diagrams [def-weil-pbc-category-colimit]. Let $\\mathcal P$ be a class of objects containing $0$, closed under finite direct sums, such that every object of $\\mathcal A$ is an epimorphic image of an object of $\\mathcal P$. Define $\\overline{\\mathcal P}=\\{M:\\text{there exist }P\\in\\mathcal P\\text{ and an isomorphism }P\\cong M\\}$. This class contains every zero object, is stable under isomorphisms and finite biproducts, and every object is an epimorphic image of an object in it. For every $\\mathbf Z$-indexed cochain complex $K$ [def-weil-abstract-derived-category], put $T_n=\\tau_{\\le n}K$ for $n\\ge1$, where $T_n^i=K^i$ for $i<n$, $T_n^n=\\ker d_K^n$ and $T_n^i=0$ for $i>n$, with induced differentials. There exist bounded above complexes $E_n$ with terms in $\\overline{\\mathcal P}$, transitions $u_n:E_n\\to E_{n+1}$, and quasi-isomorphisms $r_n:E_n\\to T_n$ such that $r_{n+1}u_n=j_nr_n$ strictly, where $j_n:T_n\\to T_{n+1}$ is the canonical inclusion. Write $E=\\varinjlim_n E_n$ for their termwise colimit and $e_n:E_n\\to E$ for its legs. The induced chain map $a:E\\to K$, characterized by $ae_n=(T_n\\to K)r_n$, is a quasi-isomorphism. Moreover $H^j(E_n)=0$ for $j>n$, and $H^j(e_n)$ is an isomorphism for $j\\le n$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, second paragraph, colimit resolution of an arbitrary complex; Tag 06XX, lemma-special-direct-system. Isomorphism closure makes the existing 06XX formulation applicable."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The isomorphism closure $\\overline{\\mathcal P}$ is stable under isomorphisms by composition. Every zero object is isomorphic to the given $0\\in\\mathcal P$. If $M\\cong P$ and $N\\cong Q$ with $P,Q\\in\\mathcal P$, then $M\\oplus N\\cong P\\oplus Q$, and the latter belongs to $\\mathcal P$; iterating includes the empty biproduct. Finally an original cover $P\\twoheadrightarrow M$ is already a cover from $\\overline{\\mathcal P}$. Thus this class satisfies all hypotheses of the compatible-resolution theorem.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, lemma-special-direct-system, hypotheses on the class; isomorphism-closure bookkeeping."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-subcategory-truncation-resolution-system] to $K$ and $\\overline{\\mathcal P}$, using Step 1. Its statement gives bounded above complexes $E_n$ with all terms in this class, quasi-isomorphisms $r_n:E_n\\to T_n$ and transitions $u_n$ with $r_{n+1}u_n=j_nr_n$ as actual chain maps, for every $n\\ge1$. Its additional termwise epimorphism and split-monomorphism conclusions are unnecessary here. No colimit or exactness assumption is needed for this application.",
+   "uses": [
+    "lem-sfb-subcategory-truncation-resolution-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, second paragraph, invocation of Tag 06XX (lemma-special-direct-system)."
+   }
+  },
+  {
+   "text": "Write $h_n:T_n\\to K$ for the canonical inclusion. From the displayed truncation terms, $\\ker d_{T_n}^j/\\operatorname{im}d_{T_n}^{j-1}$ identifies via $h_n$ with $H^j(K)$ when $j<n$. For $j=n$, the differential out of $\\ker d_K^n$ is zero and the incoming image is the image of $d_K^{n-1}$ inside this kernel, so the same conclusion holds. For $j>n$ the term is zero and the cohomology is zero. Since $r_n$ is a quasi-isomorphism, $H^j(E_n)=0$ for $j>n$, and $c_n=H^j(h_nr_n)$ is an isomorphism for $j\\le n$. The strict squares and $h_{n+1}j_n=h_n$ give $c_{n+1}H^j(u_n)=c_n$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, second paragraph, cohomology of the good truncations."
+   }
+  },
+  {
+   "text": "For each $i$ take $E^i=\\varinjlim_{n\\ge1}E_n^i$ with legs $e_n^i$. The compatible maps $e_n^{i+1}d_{E_n}^i$ induce $d_E^i:E^i\\to E^{i+1}$. Composing $d_E^{i+1}d_E^i$ with every $e_n^i$ gives zero, hence it is zero by colimit uniqueness. Thus $E$ is a complex and the $e_n$ are chain maps. Any compatible family of chain maps out of the $E_n$ factors degreewise through $E$; its differential equations hold after precomposition with all legs, hence hold on $E$. This proves that this termwise cocone is also a colimit in complexes. The maps $h_nr_n$ are compatible by Step 2, so they induce a unique chain map $a:E\\to K$, with $ae_n=h_nr_n$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, second paragraph, termwise colimit and its augmentation."
+   }
+  },
+  {
+   "text": "Apply [src-weil-homology-preserves-exact-colimits] to the small category of positive integers with its usual order, to cochain shape on $\\mathbf Z$, and to the diagram $E_n$. The required colimits and their exactness are exactly the assumptions of this item. Consequently, for every integer $j$, $(H^j(E),H^j(e_n))$ is a colimit cocone of the diagram $H^j(E_n)$. The map induced by the compatible maps $c_n$ of Step 3 is precisely $H^j(a)$, because $H^j(a)H^j(e_n)=c_n$.",
+   "uses": [
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, second paragraph: exact sequential colimits commute with cohomology."
+   }
+  },
+  {
+   "text": "Fix $j$ and set $N=\\max(1,j)$. The cocone $(H^j(K),c_n)$ is itself colimiting. Indeed, for any compatible cocone $b_n:H^j(E_n)\\to B$, its unique factorization is $b_Nc_N^{-1}:H^j(K)\\to B$. For $n\\le N$, compose the transitions from $n$ to $N$ and use the cocone equations to obtain $(b_Nc_N^{-1})c_n=b_n$. For $n\\ge N$, write $v:H^j(E_N)\\to H^j(E_n)$ for the transition; then $c_nv=c_N$, so $v=c_n^{-1}c_N$ and the same equation follows from $b_nv=b_N$. Uniqueness follows by precomposing with the isomorphism $c_N$. By Step 5 and uniqueness of colimits, $H^j(a)$ is therefore an isomorphism. This holds for every $j$, so $a$ is a quasi-isomorphism. Finally, when $j\\le n$, $H^j(a)H^j(e_n)=c_n$ is an isomorphism by Step 3; since $H^j(a)$ is invertible, so is $H^j(e_n)$. Together with Step 3 this proves both final assertions.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, second paragraph, eventual cohomology identification and its colimit legs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-sfb-subcategory-truncation-resolution-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, second paragraph, using Tag 06XX, lemma-special-direct-system."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact sequential colimits any unbounded complex has a quasi-isomorphic colimit of bounded above resolving-class resolutions of its good truncations",
+   "results": {
+    "t": "2026-10-22T06:48:53Z",
+    "tool": "leanfinder",
+    "query": "In an abelian category with exact sequential colimits any unbounded complex has a quasi-isomorphic colimit of bounded above resolving-class resolutions of its good truncations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.left_fac_of_isStrictlyGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "HomologicalComplex.isGrothendieckAbelian",
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE"
+    ],
+    "digest": "73121c60e0e630fc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LeftResolution resolves individual objects; exists_iso_Q_obj_of_isLE changes representatives of already bounded derived objects; exact colimits of complexes and evaluation-colimit lemmas do not construct compatible resolving-class towers or prove this augmented colimit comparison. No one-line specialization. Read the returned declarations and the existing 06XX and exact-colimit homology DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncLE\", \"colimit\"",
+   "results": {
+    "t": "2026-10-22T06:48:40Z",
+    "tool": "loogle",
+    "query": "\"truncLE\", \"colimit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LeftResolution resolves individual objects; exists_iso_Q_obj_of_isLE changes representatives of already bounded derived objects; exact colimits of complexes and evaluation-colimit lemmas do not construct compatible resolving-class towers or prove this augmented colimit comparison. No one-line specialization. Read the returned declarations and the existing 06XX and exact-colimit homology DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE.*colimit|colimit.*truncLE|specialDirectSystem|subcategory.*resolution",
+   "results": {
+    "t": "2026-10-22T06:48:40Z",
+    "tool": "grep",
+    "query": "truncLE.*colimit|colimit.*truncLE|specialDirectSystem|subcategory.*resolution",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LeftResolution resolves individual objects; exists_iso_Q_obj_of_isLE changes representatives of already bounded derived objects; exact colimits of complexes and evaluation-colimit lemmas do not construct compatible resolving-class towers or prove this augmented colimit comparison. No one-line specialization. Read the returned declarations and the existing 06XX and exact-colimit homology DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every unbounded cochain complex admits a quasi-isomorphic sequential colimit of bounded above resolutions of good truncations by an epimorphically generating class",
+   "results": {
+    "t": "2026-10-22T06:49:33Z",
+    "tool": "leansearch",
+    "query": "Every unbounded cochain complex admits a quasi-isomorphic sequential colimit of bounded above resolutions of good truncations by an epimorphically generating class",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.instHasFilteredColimitsOfSize",
+     "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+     "CochainComplex.cm5b",
+     "HomologicalComplex.instHasColimit",
+     "CategoryTheory.ShortComplex.hasFiniteColimits",
+     "CochainComplex.quasiIso_truncGEMap_iff",
+     "HomologicalComplex.isColimitOfEval",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "digest": "3891836d54daede8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LeftResolution resolves individual objects; exists_iso_Q_obj_of_isLE changes representatives of already bounded derived objects; exact colimits of complexes and evaluation-colimit lemmas do not construct compatible resolving-class towers or prove this augmented colimit comparison. No one-line specialization. Read the returned declarations and the existing 06XX and exact-colimit homology DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact direct limits and a generating subcategory give a sequential tower of bounded above complexes whose colimit resolves an unbounded complex",
+   "results": {
+    "t": "2026-10-22T06:49:44Z",
+    "tool": "leanfinder",
+    "query": "Exact direct limits and a generating subcategory give a sequential tower of bounded above complexes whose colimit resolves an unbounded complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.ab5OfSize",
+     "HomologicalComplex.hasExactColimitsOfShape",
+     "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ",
+     "HomologicalComplex.isGrothendieckAbelian",
+     "CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ",
+     "HomologicalComplex.IsSupportedOutside.exactAt",
+     "HomologicalComplex.isSupported_iff",
+     "HomologicalComplex.IsSupported.exactAt"
+    ],
+    "digest": "0c64851fb3cf1a57"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LeftResolution resolves individual objects; exists_iso_Q_obj_of_isLE changes representatives of already bounded derived objects; exact colimits of complexes and evaluation-colimit lemmas do not construct compatible resolving-class towers or prove this augmented colimit comparison. No one-line specialization. Read the returned declarations and the existing 06XX and exact-colimit homology DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE.*colimit|colimit.*truncLE|specialDirectSystem|subcategory.*resolution",
+   "results": {
+    "t": "2026-10-23T14:42:07Z",
+    "tool": "grep",
+    "query": "truncLE.*colimit|colimit.*truncLE|specialDirectSystem|subcategory.*resolution",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned representative, fraction, individual-object resolution, and exact-colimit existence results do not construct a compatible tower with terms in an arbitrary quotient-generating class. Read DerivedCategory/TStructure.lean:170-183, HomologicalComplexLimits.lean:119-174, GrothendieckAbelian.lean, LeftResolution/Basic.lean and the truncation comparison in Embedding/CochainComplex.lean:42-71. Existing DAG nodes give the required two non-elementary inputs; no whole-item Mathlib match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every unbounded cochain complex admits a quasi-isomorphic sequential colimit of bounded above resolutions of good truncations by an epimorphically generating class",
+   "results": {
+    "t": "2026-10-23T14:42:07Z",
+    "tool": "leansearch",
+    "query": "Every unbounded cochain complex admits a quasi-isomorphic sequential colimit of bounded above resolutions of good truncations by an epimorphically generating class",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.instHasFilteredColimitsOfSize",
+     "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+     "CochainComplex.cm5b",
+     "HomologicalComplex.instHasColimit",
+     "CategoryTheory.ShortComplex.hasFiniteColimits",
+     "CochainComplex.quasiIso_truncGEMap_iff",
+     "HomologicalComplex.isColimitOfEval",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "digest": "3891836d54daede8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned representative, fraction, individual-object resolution, and exact-colimit existence results do not construct a compatible tower with terms in an arbitrary quotient-generating class. Read DerivedCategory/TStructure.lean:170-183, HomologicalComplexLimits.lean:119-174, GrothendieckAbelian.lean, LeftResolution/Basic.lean and the truncation comparison in Embedding/CochainComplex.lean:42-71. Existing DAG nodes give the required two non-elementary inputs; no whole-item Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncLE\", \"colimit\"",
+   "results": {
+    "t": "2026-10-23T14:42:08Z",
+    "tool": "loogle",
+    "query": "\"truncLE\", \"colimit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned representative, fraction, individual-object resolution, and exact-colimit existence results do not construct a compatible tower with terms in an arbitrary quotient-generating class. Read DerivedCategory/TStructure.lean:170-183, HomologicalComplexLimits.lean:119-174, GrothendieckAbelian.lean, LeftResolution/Basic.lean and the truncation comparison in Embedding/CochainComplex.lean:42-71. Existing DAG nodes give the required two non-elementary inputs; no whole-item Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact sequential colimits any unbounded complex has a quasi-isomorphic colimit of bounded above resolving-class resolutions of its good truncations",
+   "results": {
+    "t": "2026-10-23T14:42:12Z",
+    "tool": "leanfinder",
+    "query": "In an abelian category with exact sequential colimits any unbounded complex has a quasi-isomorphic colimit of bounded above resolving-class resolutions of its good truncations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.left_fac_of_isStrictlyGE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE"
+    ],
+    "digest": "92f39e41867d4404"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned representative, fraction, individual-object resolution, and exact-colimit existence results do not construct a compatible tower with terms in an arbitrary quotient-generating class. Read DerivedCategory/TStructure.lean:170-183, HomologicalComplexLimits.lean:119-174, GrothendieckAbelian.lean, LeftResolution/Basic.lean and the truncation comparison in Embedding/CochainComplex.lean:42-71. Existing DAG nodes give the required two non-elementary inputs; no whole-item Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact direct limits and a generating subcategory give a sequential tower of bounded above complexes whose colimit resolves an unbounded complex",
+   "results": {
+    "t": "2026-10-23T14:42:46Z",
+    "tool": "leanfinder",
+    "query": "Exact direct limits and a generating subcategory give a sequential tower of bounded above complexes whose colimit resolves an unbounded complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ",
+     "HomologicalComplex.hasExactColimitsOfShape",
+     "HomologicalComplex.ab5OfSize",
+     "Profinite.NobelingProof.succ_exact",
+     "HomologicalComplex.isGrothendieckAbelian",
+     "HomologicalComplex.instHasFilteredColimitsOfSize",
+     "HomologicalComplex.extend_exactAt",
+     "HomologicalComplex.IsSupported.exactAt"
+    ],
+    "digest": "5682dd82bf29b21f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned representative, fraction, individual-object resolution, and exact-colimit existence results do not construct a compatible tower with terms in an arbitrary quotient-generating class. Read DerivedCategory/TStructure.lean:170-183, HomologicalComplexLimits.lean:119-174, GrothendieckAbelian.lean, LeftResolution/Basic.lean and the truncation comparison in Embedding/CochainComplex.lean:42-71. Existing DAG nodes give the required two non-elementary inputs; no whole-item Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "exactAt_map_chainComplex_succ|exists_iso_Q_obj_of_isLE|isColimitOfEval|quasiIsoAt_ιTruncLE",
+   "results": {
+    "t": "2026-10-23T14:46:47Z",
+    "tool": "grep",
+    "query": "exactAt_map_chainComplex_succ|exists_iso_Q_obj_of_isLE|isColimitOfEval|quasiIsoAt_ιTruncLE",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean",
+     "Mathlib/Algebra/Homology/LeftResolution/Basic.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean",
+     "Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean",
+     "Mathlib/Algebra/Homology/HomologicalComplexLimits.lean"
+    ],
+    "digest": "6e35bd32589fc9c2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no whole-item match: these are individual-object left resolutions, bounded representatives, truncation cohomology comparisons and termwise complex-colimit constructions. Read the displayed declarations at the returned files and lines; none states a compatible resolving-class tower and its augmented colimit comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-unbounded-left-derived-criterion",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: Unbounded existence of the left derived lower shriek: the five hypotheses checked in the proof of sites-cohomology lemma-existence-derived-lower-shriek. Re-split of the Stacks 0794 supporting input: Tag 0794, proposition-left-derived-exists, second paragraph, colimit resolution of an arbitrary complex; Tag 06XX, lemma-special-direct-system. Isomorphism closure makes the existing 06XX formulation applicable.",
+   "via": [
+    "lem-trf-unbounded-left-derived-criterion",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-truncation-colimit-resolving-cover",
+  "worker": "stage1",
+  "summary": "Reused the existing 06XX compatible-resolution theorem and exact-colimit homology node; proved the closure hypotheses, constructed the termwise colimit augmentation, and checked the universal property in cohomology and every colimit leg. No statement change and no new nodes.",
+  "blueprint": "Supporting Tag 0794 colimit-resolution input on the inherited branch from lem-trf-local-term-locality, proof (1)--(2), normal-cone specialization. Steps 1--2 realize the 06XX invocation, Steps 3--6 the exact-colimit cohomology comparison; the current latest blueprint has no separate node for this auxiliary fact.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-subcategory-truncation-resolution-system",
+    "why": "Generic Stacks 06XX compatible bounded-above resolutions for any quotient-generating class; the local-term unit supplies no replacement for this homological input."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic preservation of exact colimits by cochain homology, used with the positive-integer indexing category; the local-term unit does not state this category-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-subcategory-truncation-resolution-system",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-69a2c1ac8",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-69a2c1ac8 (reviewer sub-agent of L); spot-checked: PASS with no changes. Statement checked against Stacks derived.tex 0794 (second paragraph) and 06XX. The statement is byte-identical to the one in Q151 snapshots a2594/ac1c/2a42/419a, and stmt_deps are unchanged. The 0794 paragraph needs exact sequential colimits only in A; F and B are used later in 0794. Item asserts the boundary case j=n, which holds since T_n^n=ker d^n. Step 1: the isomorphism closure P̄ gives every hypothesis of lem-sfb-subcategory-truncation-resolution-system (zero objects, stable under isomorphism and finite biproducts, covers). Step 2: that node's statement gives E_n, the strict squares and the quasi-isomorphisms for n>=1. Step 3: H^j(T_n) checked for j<n (kernel unchanged because ker d^n is a subobject of K^n), j=n and j>n, so c_{n+1}H(u_n)=c_n. Step 4: the termwise colimit is a colimit in complexes, checked on the legs. Step 5: src-weil-homology-preserves-exact-colimits holds for any I and shape when colimits are exact, and H^j(a)H^j(e_n)=c_n. Step 6: with N=max(1,j), b_N c_N^{-1} is the unique factorization, so H^j(a) and then H^j(e_n) (j<=n) are isomorphisms; no circularity. Edge cases tested: K=0, K in degree 0, n or n+1, j very negative, P without every zero object. Duplicate search (rg -L over 06XX/0794/special-direct-system; flat/K-flat towers, good-truncation-stage-naturality, resolution-colimit-quasi-isos, resolving-class-derived-descent) found no node stating the item. No new nodes; Mathlib searches are logged in all three kinds; proof_deps equals the union of uses; no SGA. The parent's re-split assigned old steps 1/3/4 here, and all three are carried. Accepted tool_uses: lem-sfb-subcategory-truncation-resolution-system and src-weil-homology-preserves-exact-colimits, both generic homological black boxes off the sk-i-curve-zero route."
+ }
+}

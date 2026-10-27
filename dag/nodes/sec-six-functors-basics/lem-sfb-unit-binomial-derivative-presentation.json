@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-unit-binomial-derivative-presentation",
+ "kind": "statement",
+ "title": "Derivative certificate and inverse-generator presentation for a unit binomial",
+ "statement": "Let $R$ be a commutative ring, $n\\geq1$ an integer, $a\\in R$ with $a(n\\cdot1_R)=1$, and $u\\in R^\\times$. Put $f=T^n-u\\in R[T]$, $B=R[T]/(f)$ and $C=R[T,Y]/(f,Yf'-1)$, with their quotient $R$-algebra structures [def-weil-polynomial-ring], [def-weil-pbc-mv-polynomial-ring], [def-weil-pbc-algebra-hom-quotient]; here $f'=nT^{n-1}$ is the formal derivative. Let $t\\in B$ and $x,y\\in C$ be the respective classes of $T$ and of $T,Y$. Write $v$ for the image of $u^{-1}$ in $B$ and $\\bar a$ for the image of $a$. Then\n$$t^n=\\bar u,\\qquad t(vt^{n-1})=1,\\qquad f'(t)h=1,\\quad h=\\bar a(vt^{n-1})^{n-1}.$$\nThere are mutually inverse $R$-algebra homomorphisms $\\alpha:C\\to B$ and $\\beta:B\\to C$ specified by\n$$\\alpha(x)=t,\\quad\\alpha(y)=h,\\quad\\beta(t)=x,\\quad\\alpha\\beta=\\mathrm{id}_B,\\quad\\beta\\alpha=\\mathrm{id}_C.$$\nIn particular the canonical structure maps are identified by this $R$-algebra isomorphism. The assertions include the zero ring and $n=1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00UB (definition-standard-etale), the derivative-inverse presentation; explicit unit-binomial specialization in etale-cohomology.tex, Tag 03PL (lemma-kummer-sequence), proof on Spec(A): n and T^(n-1) are invertible in B. Agent-extracted algebra isomorphism underlying that assertion."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "The quotient map has kernel $(f)$ by [def-weil-pbc-algebra-hom-quotient], so $t^n=\\bar u$. Put $s=vt^{n-1}$. Since $n\\geq1$, $ts=vt^n=v\\bar u=1$. All these equations use only the quotient ring operations and $u^{-1}u=1$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL (lemma-kummer-sequence), affine calculation that n and T^(n-1) are invertible in B; explicit elementary expansion by Q79."
+   }
+  },
+  {
+   "text": "Using the coefficient description in [def-weil-polynomial-ring], formal differentiation sends $\\sum c_iT^i$ to $\\sum_{i\\geq1}ic_iT^{i-1}$, hence $f\\prime=nT^{n-1}$. Commutativity and $ts=1$ give $f\\prime(t)h=(n\\bar a)t^{n-1}s^{n-1}=(ts)^{n-1}=1$. Here $n\\bar a=1$ is the image of the assumed equation $an=1$.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL (lemma-kummer-sequence), affine calculation that n and T^(n-1) are invertible in B; explicit elementary expansion by Q79."
+   }
+  },
+  {
+   "text": "By evaluation in [def-weil-pbc-mv-polynomial-ring], $T\\mapsto t$, $Y\\mapsto h$ defines an $R$-algebra homomorphism $E:R[T,Y]\\to B$. Both $f$ and $Yf\\prime-1$ map to zero. Every element of their generated ideal is $Pf+Q(Yf\\prime-1)$ and therefore maps to zero. Thus $[P]\\mapsto E(P)$ is independent of the representative modulo that ideal, preserves sums, products and constants, and defines $\\alpha:C\\to B$ with the specified generator values.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL (lemma-kummer-sequence), affine calculation that n and T^(n-1) are invertible in B; explicit elementary expansion by Q79."
+   }
+  },
+  {
+   "text": "The relation $f(x)=0$ holds in $C$ by [def-weil-pbc-algebra-hom-quotient]. Evaluation $T\\mapsto x$ from [def-weil-pbc-mv-polynomial-ring] (one variable) kills every multiple of $f$. Consequently $[P]\\mapsto P(x)$ is a well-defined $R$-algebra map $\\beta:B\\to C$, with $\\beta(t)=x$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL (lemma-kummer-sequence), affine calculation that n and T^(n-1) are invertible in B; explicit elementary expansion by Q79."
+   }
+  },
+  {
+   "text": "The composite $\\alpha\\beta$ fixes $t$ and all images of $R$. Every class of $B$ is represented by a finite sum $\\sum r_it^i$, so it fixes every class. For the other composite put $d=f\\prime(x)$ and $k=\\beta(h)$. Applying $\\beta$ to $f\\prime(t)h=1$ gives $dk=1$, whereas the defining relation of $C$ gives $yd=1$. Hence $y=y(dk)=(yd)k=k$, so $\\beta\\alpha$ fixes $y$ as well as $x$ and constants. Every class of $C$ is a finite sum $\\sum r_{ij}x^iy^j$; thus this composite also is the identity.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL (lemma-kummer-sequence), affine calculation that n and T^(n-1) are invertible in B; explicit elementary expansion by Q79."
+   }
+  },
+  {
+   "text": "Both maps fix the image of every $r\\in R$, so the inverse maps identify the structure maps as asserted in [def-weil-pbc-algebra-hom-quotient]. When $n=1$, $s=v$, $h=\\bar a=1$ and $f\\prime=1$, so the same computations apply with exponent zero. In the zero ring every displayed identity still holds, with $0=1$; the proof uses neither cancellation by a nonunit nor a nonzero hypothesis.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL (lemma-kummer-sequence), affine calculation that n and T^(n-1) are invertible in B; explicit elementary expansion by Q79."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PL (lemma-kummer-sequence), affine calculation that n and T^(n-1) are invertible in B; explicit elementary expansion by Q79."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivAwayAdjoinRoot|[Xx]_pow_sub_C|[Ii]sUnit.*derivative",
+   "results": "5 hits: Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean (Mathlib/RingTheory/Etale)",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Etale/StandardEtale.lean:201) gives a localization, requiring a standard-etale pair and a proof that the derivative is a unit. It does not state the displayed binomial inverse or the two specified inverse maps. Upstream StandardEtalePair.ofXPowSubCRingEquiv uses g=1, not this inverse-derivative presentation, and is not Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining an nth root of a unit and adjoining also the inverse derivative give canonically isomorphic algebras",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StandardEtalePair\", \"equiv\"",
+   "results": "loogle: Loogle is currently under load, please try again later.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For n invertible and u a unit in a commutative ring R, the quotient by X^n-u is isomorphic to R[X,Y]/(X^n-u,Y*n*X^(n-1)-1) by explicit inverse derivative",
+   "results": "8 hits: Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply, Polynomial.IsDistinguishedAt.algEquivQuotient, Polynomial.IsDistinguishedAt.algEquivQuotient_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply, Polynomial.quotientSpanCXSubCXSubCAlgEquiv, Polynomial.quotientSpanCXSubCAlgEquiv, StandardEtalePair.inv_aeval_X_g",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Etale/StandardEtale.lean:201) gives a localization, requiring a standard-etale pair and a proof that the derivative is a unit. It does not state the displayed binomial inverse or the two specified inverse maps. Upstream StandardEtalePair.ofXPowSubCRingEquiv uses g=1, not this inverse-derivative presentation, and is not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]sUnit.*derivative|[Ee]quiv.*[Aa]djoinRoot|ofXPowSubC",
+   "results": "25 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/IsAdjoinRoot.lean (Mathlib/RingTheory)",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Etale/StandardEtale.lean:201) gives a localization, requiring a standard-etale pair and a proof that the derivative is a unit. It does not state the displayed binomial inverse or the two specified inverse maps. Upstream StandardEtalePair.ofXPowSubCRingEquiv uses g=1, not this inverse-derivative presentation, and is not Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eliminate the inverse derivative generator in the standard etale presentation of the Kummer algebra X^n-u using the explicit inverse of n times X^(n-1)",
+   "results": "8 hits: StandardEtalePair.inv_aeval_X_g, StandardEtalePresentation.toPresentation_σ', StandardEtalePair.aeval_X_g_mul_mk_X, StandardEtalePresentation.hasMap, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, StandardEtalePresentation.P, StandardEtalePresentation.x, StandardEtalePresentation.toPresentation_val",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Etale/StandardEtale.lean:201) gives a localization, requiring a standard-etale pair and a proof that the derivative is a unit. It does not state the displayed binomial inverse or the two specified inverse maps. Upstream StandardEtalePair.ofXPowSubCRingEquiv uses g=1, not this inverse-derivative presentation, and is not Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The binomial quotient by X^n minus a unit has explicit inverse derivative and is isomorphic to the quotient adjoining that inverse",
+   "results": "8 hits: PowerSeries.invUnitsSub, Polynomial.IsDistinguishedAt.algEquivQuotient, IsLocalization.Away.mvPolynomialQuotientEquiv, PowerSeries.instInv, AdjoinRoot.quotEquivQuotMap_symm_apply, Polynomial.coeff_inv_units, PowerSeries.derivative_inv, AdjoinRoot.Polynomial.quotQuotEquivComm_symm_mk_mk",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Etale/StandardEtale.lean:201) gives a localization, requiring a standard-etale pair and a proof that the derivative is a unit. It does not state the displayed binomial inverse or the two specified inverse maps. Upstream StandardEtalePair.ofXPowSubCRingEquiv uses g=1, not this inverse-derivative presentation, and is not Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StandardEtalePair.equivAwayAdjoinRoot\"",
+   "results": "1 hits: StandardEtalePair.equivAwayAdjoinRoot",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Etale/StandardEtale.lean:201) gives a localization, requiring a standard-etale pair and a proof that the derivative is a unit. It does not state the displayed binomial inverse or the two specified inverse maps. Upstream StandardEtalePair.ofXPowSubCRingEquiv uses g=1, not this inverse-derivative presentation, and is not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "equivAwayAdjoinRoot|[Xx]_pow_sub_C|[Ii]sUnit.*derivative",
+   "results": "5 hits: Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean; Mathlib/RingTheory/Etale",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Mathlib/RingTheory/Etale/StandardEtale.lean:201) requires a constructed standard-etale pair and identifies a localization, not the displayed binomial certificate and both maps. inv_aeval_X_g (:136) supplies only the inverse-generator identity. root_X_pow_sub_C_pow (FieldTheory/KummerPolynomial.lean:30) assumes a field and supplies only the root relation; root_isInv (RingTheory/AdjoinRoot.lean:352) concerns a linear inverse polynomial. The explicit calculations and quotient maps remain to be proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient by X^n minus a unit has explicit inverse derivative and is isomorphic to the quotient adjoining that inverse",
+   "results": "8 hits: IsLocalization.Away.mvPolynomialQuotientEquiv, PowerSeries.invUnitsSub, Polynomial.IsDistinguishedAt.algEquivQuotient, Localization.awayEquivAdjoin, factorPowSucc.isUnit_of_isUnit_image, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient, AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot, AdjoinRoot.quotEquivQuotMap_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Mathlib/RingTheory/Etale/StandardEtale.lean:201) requires a constructed standard-etale pair and identifies a localization, not the displayed binomial certificate and both maps. inv_aeval_X_g (:136) supplies only the inverse-generator identity. root_X_pow_sub_C_pow (FieldTheory/KummerPolynomial.lean:30) assumes a field and supplies only the root relation; root_isInv (RingTheory/AdjoinRoot.lean:352) concerns a linear inverse polynomial. The explicit calculations and quotient maps remain to be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StandardEtalePair\", \"equiv\"",
+   "results": "8 hits: StandardEtalePair.homEquiv, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv_apply_coe, StandardEtalePair.equivAwayAdjoinRoot, StandardEtalePair.equivPolynomialQuotient, StandardEtalePair.equivAwayQuotient, StandardEtalePair.equivMvPolynomialQuotient, StandardEtalePair.equivMvPolynomialQuotient_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Mathlib/RingTheory/Etale/StandardEtale.lean:201) requires a constructed standard-etale pair and identifies a localization, not the displayed binomial certificate and both maps. inv_aeval_X_g (:136) supplies only the inverse-generator identity. root_X_pow_sub_C_pow (FieldTheory/KummerPolynomial.lean:30) assumes a field and supplies only the root relation; root_isInv (RingTheory/AdjoinRoot.lean:352) concerns a linear inverse polynomial. The explicit calculations and quotient maps remain to be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a unit u and invertible n, construct inverse R-algebra maps between R[T]/(T^n-u) and R[T,Y]/(T^n-u,Y*n*T^(n-1)-1)",
+   "results": "8 hits: StandardEtalePair.inv_aeval_X_g, Polynomial.quotientSpanXSubCAlgEquiv_symm_apply, Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply, IsAdjoinRoot.algEquiv_symm, AdjoinRoot.quotEquivQuotMap_symm_apply, Polynomial.algEquivCMulXAddC_symm_eq, IsAdjoinRoot.aequiv_symm, AdjoinRoot.symm_mapAlgEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Mathlib/RingTheory/Etale/StandardEtale.lean:201) requires a constructed standard-etale pair and identifies a localization, not the displayed binomial certificate and both maps. inv_aeval_X_g (:136) supplies only the inverse-generator identity. root_X_pow_sub_C_pow (FieldTheory/KummerPolynomial.lean:30) assumes a field and supplies only the root relation; root_isInv (RingTheory/AdjoinRoot.lean:352) concerns a linear inverse polynomial. The explicit calculations and quotient maps remain to be proved."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]sUnit.*derivative|[Ee]quiv.*[Aa]djoinRoot|ofXPowSubC",
+   "results": "25 hits: Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean; Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Mathlib/RingTheory/Etale/StandardEtale.lean:201) requires a constructed standard-etale pair and identifies a localization, not the displayed binomial certificate and both maps. inv_aeval_X_g (:136) supplies only the inverse-generator identity. root_X_pow_sub_C_pow (FieldTheory/KummerPolynomial.lean:30) assumes a field and supplies only the root relation; root_isInv (RingTheory/AdjoinRoot.lean:352) concerns a linear inverse polynomial. The explicit calculations and quotient maps remain to be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eliminate a generator adjoined as inverse of a unit in a polynomial quotient; explicit inverse of n times an nth root of a unit raised to n minus one",
+   "results": "8 hits: AdjoinRoot.root_isInv, root_X_pow_sub_C_pow, IsPrimitiveRoot.val_inv_toRootsOfUnity_coe, adjoinRootXPowSubCEquiv_symm_eq_root, StandardEtalePair.inv_aeval_X_g, rootsOfUnityEquivNthRoots_symm_apply, AdjoinRootXPowSubCEquivToRootsOfUnity, adjoinRootXPowSubCEquiv_root",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: StandardEtalePair.equivAwayAdjoinRoot (Mathlib/RingTheory/Etale/StandardEtale.lean:201) requires a constructed standard-etale pair and identifies a localization, not the displayed binomial certificate and both maps. inv_aeval_X_g (:136) supplies only the inverse-generator identity. root_X_pow_sub_C_pow (FieldTheory/KummerPolynomial.lean:30) assumes a field and supplies only the root relation; root_isInv (RingTheory/AdjoinRoot.lean:352) concerns a linear inverse polynomial. The explicit calculations and quotient maps remain to be proved."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unit-binomial-finite-etale",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, the normalization cover is etale away from the zeros and poles; unit-root models supply that open cover.; Returned item steps 6 and 7 (algebraic part): explicit inverses of t and f prime(t), construction of alpha and beta, and both composite identities including the Y-generator.",
+   "via": [
+    "lem-sfb-unit-binomial-finite-etale",
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-unit-binomial-derivative-presentation",
+  "worker": "stage1",
+  "summary": "Expanded the inverse certificate, constructed both quotient maps by evaluation on representatives, and checked both composites including the Y-generator. Reused the existing multivariate polynomial universal-property leaf and quotient-algebra definition. No new nodes or statement changes; added the missing multivariate-polynomial statement dependency. Verified the zero ring and n=1.",
+  "blueprint": "Inherited from.place: det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction, via the unit-binomial finite-etale input; this split realizes its explicitly isolated algebraic steps 6 and 7 (inverse derivative and inverse-generator elimination). Blueprint searches for derivative, binomial, inverse derivative and polynomial quotient found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-76ce1bed2",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-76ce1bed2 (reviewer sub-agent of L); spot-checked: Read the whole item: 6 steps, no new nodes. Compared with the Q64 base copy, the statement is mathematically unchanged; it only adds the [def-weil-pbc-mv-polynomial-ring] citation and stmt_dep, which R[T,Y] needs (B3). Every step is correct and is elementary as marked. Step 1: kernel (f) gives t^n=ū, and ts=vt^n=1 using n>=1. Step 2: f'(t)h=(nā)(ts)^{n-1}=1. Step 3: α is evaluation T->t, Y->h, which kills f and Yf'-1. Step 4: β is T->x. Step 5: αβ=id because B is spanned by the t^i. For βα, β(f'(t))=f'(x)=d and dk=1, while yd=1 from the relation of C, so y=y(dk)=(yd)k=k with no cancellation. Step 6: structure maps; n=1 gives h=ā=1; the zero ring works. Each cited definition says what its step takes from it (polynomial ring, quotient algebra with kernel, multivariate evaluation). The derivative is defined explicitly in the item. Tested R=Z/4, n=3, a=3, u=1 (h=3t, f'(t)h=9t^3=1) and R=Z[1/2], n=2, u=3. Source: Stacks 03PL lemma-kummer-sequence, affine paragraph ('n and T^{n-1} invertible, standard etale'), and 00UB definition-standard-etale. Both are read correctly; proof_origin is agent; no SGA is used. Parent lem-sfb-unit-binomial-finite-etale step 4 uses exactly the inverse maps C<->B fixing R. Duplicate search (grep -R over dag/nodes for T^n-u, Yf'-1 and unit binomial) found nothing. standard-etale-monic-derivative(2) gives only α, not the isomorphism. In Lean, ofXPowSubCRingEquiv uses g=1, i.e. R[X,Y]/(f,Y-1), not (f,Yf'-1), and the parent's Lean theorem is still sorry, so nothing to attach. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.UnitBinomialDerivativePresentation",
+  "declaration": "Polynomial.UnitBinomial.derivative_presentation",
+  "declarations": [
+   "Polynomial.UnitBinomial.polynomial",
+   "Polynomial.UnitBinomial.RootAlgebra",
+   "Polynomial.UnitBinomial.DerivativePresentation",
+   "Polynomial.UnitBinomial.root",
+   "Polynomial.UnitBinomial.generator",
+   "Polynomial.UnitBinomial.rootInverse",
+   "Polynomial.UnitBinomial.inverseDerivative",
+   "Polynomial.UnitBinomial.derivative_presentation"
+  ],
+  "file": "lean/Sheaf/RingTheory/UnitBinomialDerivativePresentation.lean",
+  "statement": "theorem derivative_presentation (a : R) (hn : 1 ≤ n) (ha : a * (n : R) = 1) : root R n u ^ n = algebraMap R (RootAlgebra R n u) (u : R) ∧ root R n u * rootInverse R n u = 1 ∧ Polynomial.aeval (root R n u) (Polynomial.derivative (polynomial R n u)) * inverseDerivative R n u a = 1 ∧ ∃ (α : DerivativePresentation R n u →ₐ[R] RootAlgebra R n u) (β : RootAlgebra R n u →ₐ[R] DerivativePresentation R n u), α (generator R n u 0) = root R n u ∧ α (generator R n u 1) = inverseDerivative R n u a ∧ β (root R n u) = generator R n u 0 ∧ α.comp β = AlgHom.id R (RootAlgebra R n u) ∧ β.comp α = AlgHom.id R (DerivativePresentation R n u)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary definitions name exactly the polynomial, two quotient algebras, generators and explicit inverse certificates of this node. Both quotient algebra structures and quotient maps are Mathlib constructions; the only postponed theorem is the complete node statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bd4c3079",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Only the lean field changed vs live; statement verbatim in file. Clause-by-clause: CommRing R (no Nontrivial), n:ℕ with 1≤n, a*(n:R)=1, u:Rˣ; f=X^n-C u, B=R[X]⧸span{f}, C=MvPolynomial (Fin 2) R⧸span{f(X0), X1*f'(X0)-1} via Mathlib quotient algebras/mkₐ; three certificate identities exact (rootInverse=v t^(n-1), h=ā(v t^(n-1))^(n-1)); ∃ α β AlgHoms with α x=t, α y=h, β t=x, both composites id — generator-pinned, so unique, not arbitrary. Zero ring and n=1 covered; ℤ/4,n=3 checked by hand. Defs are real data; only the theorem is sorry; source/blueprint docstrings and 6-step proof plan present; report sections present. No name clash or duplicate in side-live lean/Sheaf or WeilConjectures (parent in AlgebraicGeometry namespace). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261026T081257-L-1906339",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Polynomial.UnitBinomial.derivative_presentation"
+  ],
+  "sorry_after": []
+ }
+}

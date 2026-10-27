@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-section-affine-complement-cover",
+ "kind": "statement",
+ "title": "Affine nonvanishing loci from a finite affine section cover",
+ "statement": "Let $f:X\\to S$ be a universally closed morphism of schemes [def-pc-scheme], with S affine. Let L be an invertible O_X-module [def-sc-invertible-module]. Suppose a finite family of global sections x_j of L has affine nonvanishing opens $D_j=X$ minus the support of its zero scheme [lem-pc-zero-scheme-properties], and these opens cover X. Then the nonvanishing open of every global section s of L is affine. No regularity of s, reducedness, Noetherianity, or nonemptiness is assumed.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/AffineComplement.lean",
+  "place": "isAffineOpen_compl_support_zeroLocus, including its module docstring; the affine reciprocal-cover valuative criterion. Compare Stacks morphisms.tex Tag 0EKE for the proper ample application."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "lem-pc-zero-scheme-properties"
+ ],
+ "proof": [
+  {
+   "text": "On D_j the section x_j is a free generator. Write s=a_j x_j and let U=X_s. The coefficient zero-locus calculation gives U∩D_j=D(a_j). On U, s is a free generator, so write x_j=g_j s. The same calculation on affine subopens of U shows D(g_j)⊆D_j. Restrict the two equations to U∩D_j and cancel the free generator s: a_j g_j=1. Apply the proved IsAffineOpen.of_universallyClosed reciprocal-cover criterion to f, the finite affine cover D_j, U, a_j and g_j. This gives U affine, also when U or the index set is empty. These are exactly the steps of the attached, already proved source-library theorem.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R6",
+  "date": "2026-10-23",
+  "note": "Existing proved source-library theorem attached, with its current reciprocal-cover proof recorded; no new mathematical claim or Lean declaration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineOpen\", \"UniversallyClosed\"",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "No matching theorem: affine basic opens and covers do not give the nonvanishing conclusion for an invertible module on a universally closed scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a universally closed scheme over an affine scheme, an invertible sheaf with a finite affine nonvanishing cover has affine nonvanishing loci for all sections",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover, AlgebraicGeometry.of_affine_open_cover, AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.isAffineOpen_of_isAffineOpen_basicOpen, AlgebraicGeometry.IsAffineOpen.basicOpen, AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen",
+   "date": "2026-10-23",
+   "verdict": "No matching theorem: affine basic opens and covers do not give the nonvanishing conclusion for an invertible module on a universally closed scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a universally closed scheme over an affine scheme, a line bundle with a finite affine nonvanishing cover has affine nonvanishing locus for every section",
+   "results": "AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover",
+   "date": "2026-10-23",
+   "verdict": "No matching theorem: affine basic opens and covers do not give the nonvanishing conclusion for an invertible module on a universally closed scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanishing|zeroLocus",
+   "results": "Mathlib/NumberTheory/LSeries/Nonvanishing.lean, Mathlib/NumberTheory/LSeries/Nonvanishing.lean, Mathlib/NumberTheory/LSeries/ZetaZeros.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/Analysis/Analytic/Order.lean, Mathlib/Analysis/Analytic/IsolatedZeros.lean, Mathlib/Analysis/Analytic/IsolatedZeros.lean, Mathlib/FieldTheory/AxGrothendieck.lean",
+   "date": "2026-10-23",
+   "verdict": "No matching theorem: affine basic opens and covers do not give the nonvanishing conclusion for an invertible module on a universally closed scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectivePolarizationSectionAlgebra",
+  "date": "2026-10-23",
+  "group": "R6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Section algebras and restriction charts of projective polarizations. Affineness of the nonvanishing charts, via the already proved affine-complement cover criterion.",
+   "via": [
+    "lem-sfb-projective-polarization-section-algebra",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.AffineComplement",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAffineOpen_compl_support_zeroLocus",
+  "statement": "theorem isAffineOpen_compl_support_zeroLocus {S : Scheme.{u}} (f : X ⟶ S) [UniversallyClosed f]\n    [IsAffine S] (L : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} L] {ι : Type*}\n    [Finite ι] (x : ι → (𝟙_ X.Modules ⟶ L))\n    (hx : ∀ j, IsAffineOpen (Hom.zeroLocus (x j)).support.compl)\n    (hcov : ⨆ j, (Hom.zeroLocus (x j)).support.compl = ⊤) (s : 𝟙_ X.Modules ⟶ L) :\n    IsAffineOpen (Hom.zeroLocus s).support.compl",
+  "branch": "slopmaster2",
+  "by": "R6",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "AlgebraicGeometry.Scheme.Modules.isAffineOpen_compl_support_zeroLocus"
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261024T015959-L-2490435",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261024T015959-L-2490435",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

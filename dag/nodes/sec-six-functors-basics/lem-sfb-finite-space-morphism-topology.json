@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-finite-space-morphism-topology",
+ "kind": "statement",
+ "title": "Base change and topology of finite morphisms of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $Y,X$ algebraic spaces over $S$ [def-trf-algebraic-space], and $f:Y\\to X$ a morphism which is finite on scheme tests: for every scheme $T\\to X$, $Y\\times_XT$ is a scheme finite over $T$ [def-weil-finite-integral-morphism, def-pc-fibre-product]. For every algebraic space $X^{\\prime}\\to X$, the base change $Y\\times_XX^{\\prime}\\to X^{\\prime}$ is finite on scheme tests. The map $|f|:|Y|\\to|X|$, with point sets and atlas topology [def-a1-space-point-topology], is continuous and closed and has finite fibres. The morphism $f$ is locally quasi-finite: after any etale scheme chart $V\\to X$, the scheme morphism $Y\\times_XV\\to V$ is locally quasi-finite [pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03ZQ (lemma-integral-local), 03ZS (lemma-base-change-integral), 0414 (lemma-finite-integral), 0415 (lemma-integral-universally-closed), and 04NY (lemma-finite-quasi-finite)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product",
+  "def-a1-space-point-topology",
+  "pqf-def-quasifinite",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-space-fibre-products-etale-covers], $Y^{\\prime}=Y\\times_XX^{\\prime}$ is an algebraic space. For a scheme $T\\to X^{\\prime}$, the fibre-product universal property gives $(Y\\times_XX^{\\prime})\\times_{X^{\\prime}}T\\cong Y\\times_XT$, compatibly with projection to $T$: on sections both sides are the pairs $(y,t)$ with $f(y)$ equal to the image of $t$ in $X$. The right side is a scheme finite over $T$ by the hypothesis on $f$. This proves finiteness on scheme tests after the arbitrary base change.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03ZS, lemma-base-change-integral: direct verification on scheme tests"
+   }
+  },
+  {
+   "text": "Choose, by [lem-a1-space-affine-etale-cover], a scheme $V$ and a representable surjective etale map $p:V\\to X$ [def-trf-algebraic-space] such that $|p|:|V|\\to|X|$ is surjective. Put $W=Y\\times_XV$ and write $q:W\\to Y$, $g:W\\to V$. The hypothesis on $f$ makes $W$ a scheme and $g$ finite. For a scheme $T\\to Y$, the universal property identifies $T\\times_YW$ with $T\\times_XV$, the scheme test of $p$ along $T\\to Y\\to X$; hence $q$ is representable, etale and surjective in the sense of [def-trf-algebraic-space]. Since $\\{p\\}$ is jointly surjective on point classes, the etale-cover base-change clause of [lem-trf-space-fibre-products-etale-covers] makes $|q|:|W|\\to|Y|$ surjective as well. By [lem-a1-space-affine-etale-cover], the topology of $|X|$ (respectively $|Y|$) is the quotient topology of any representable surjective etale map from a scheme, in particular of $p$ (respectively $q$), and $|t|$ is continuous for every morphism $t$ from a scheme. Thus a subset of $|X|$ (respectively $|Y|$) is open, or closed by taking complements, exactly when its inverse image in $V$ (respectively $W$) is open, or closed. This is the atlas topology of [def-a1-space-point-topology].",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX, lemma-topology-points, first paragraph; atlas base change: spaces-topologies.tex Tag 041F, lemma-etale (3)"
+   }
+  },
+  {
+   "text": "For an open $O\\subseteq |X|$, $p^{-1}(O)$ is open in $V$. The equality $q^{-1}(|f|^{-1}(O))=g^{-1}(p^{-1}(O))$ follows from $f\\circ q=p\\circ g$ on field-point classes [def-a1-algebraic-space-point-classes]. Its right side is open because the scheme morphism $g$ is continuous [def-pc-scheme]. Detection in the atlas $q$ therefore makes $|f|^{-1}(O)$ open in $|Y|$, proving continuity. The atlas topology here is the topology of [def-a1-space-point-topology], described by the quotient topologies of step 2 [lem-a1-space-affine-etale-cover].",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "def-pc-scheme",
+    "def-a1-space-point-topology",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX, lemma-topology-points, continuity argument"
+   }
+  },
+  {
+   "text": "Let $C\\subseteq |Y|$ be closed. Its inverse image $q^{-1}(C)$ is closed in $W$. The finite scheme morphism $g$ is closed by [lem-weil-pbc-finite-closed-map-finite-fibres], so $g(q^{-1}(C))$ is closed in $V$. We claim that this is $p^{-1}(|f|(C))$. One inclusion follows from the commutative square. For the reverse inclusion, take $v\\in |V|$ and $y\\in C$ with $p(v)=f(y)$. Represent $v$ by its residue-field map $\\operatorname{Spec}\\kappa(v)\\to V$, and $y$ by $\\operatorname{Spec}K\\to Y$. The point-class definition [def-a1-algebraic-space-point-classes] gives a field $L$ extending both fields such that the two induced maps $\\operatorname{Spec}L\\to X$ agree. Their pair is a section of the sheaf fibre product $W$. Its scheme point $w$ satisfies $g(w)=v$ and $q(w)=y$, so $w\\in q^{-1}(C)$. Thus $v\\in g(q^{-1}(C))$. Closedness is detected by the atlas $p$, by the quotient-topology description of step 2 [lem-a1-space-affine-etale-cover], so $|f|(C)$ is closed. This proves closedness without identifying a fibre product of topological spaces with the point space of a sheaf fibre product.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-a1-algebraic-space-point-classes",
+    "def-trf-algebraic-space",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0415, lemma-integral-universally-closed; expanded pointwise atlas descent using spaces-properties.tex Tag 03H4, lemma-points-cartesian"
+   }
+  },
+  {
+   "text": "Fix $x\\in |X|$. The atlas $p$ was chosen surjective on point classes [lem-a1-space-affine-etale-cover], so choose $v\\in |V|$ over $x$. The scheme fibre set $g^{-1}(\\{v\\})$ is finite by [lem-weil-pbc-finite-closed-map-finite-fibres]. It maps by $q$ onto $|f|^{-1}(\\{x\\})$: given $y$ in the latter set, represent $y$ by $\\operatorname{Spec}K\\to Y$ and $v$ by $\\operatorname{Spec}\\kappa(v)\\to V$. Since their images represent the same $x$, [def-a1-algebraic-space-point-classes] supplies a common extension field $L$ on which their maps to $X$ agree. The pair over $\\operatorname{Spec}L$ is a section of $W=Y\\times_XV$ [def-trf-algebraic-space]. Its scheme point lies over $v$ and maps to the class $y$. Thus the finite scheme fibre surjects onto the required space fibre, which is finite. If $|X|$ is empty there is no $x$ to check.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-a1-algebraic-space-point-classes",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4, lemma-points-cartesian, common-field proof; morphisms.tex Tags 02NU and 02NH, finite scheme fibres"
+   }
+  },
+  {
+   "text": "For any etale scheme chart $T\\to X$, the scheme morphism $Y\\times_XT\\to T$ is finite by the assumed scheme-test condition. Apply [pqf-lem-finite-qf] to this scheme morphism: it is quasi-finite. By [pqf-lem-qf-locqf-qc] a quasi-finite morphism is locally quasi-finite, that is, quasi-finite at each point in the sense of [pqf-def-quasifinite]. This holds for every chart, exactly as required by the last clause of the statement.",
+   "uses": [
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-locqf-qc",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NY, lemma-finite-quasi-finite, reduction to morphisms.tex Tag 02NU, lemma-finite-quasi-finite"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "lem-a1-space-affine-etale-cover",
+  "def-a1-space-point-topology",
+  "def-a1-algebraic-space-point-classes",
+  "def-pc-scheme",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-locqf-qc",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03ZS, 0415 and 04NY, with the explicit atlas and common-field arguments of spaces-properties.tex Tags 03BX and 03H4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism of algebraic spaces is representable proper quasi finite has finite fibres and is stable under base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"For schemes $X$, $Y$, and $Z$, if $f : X \\\\to Y$ and $g : Y \\\\to Z$ are finite morphisms, then their composition $g \\\\circ f : X \\\\to Z$ is also a finite morphism. This asserts that the property of being \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsFinite g],\\n  AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsFinite f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes, where $ g $ is finite. Then the composition $ f \\\\circ g $ is a finite morphism if and only if $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite algebraic space morphisms are universally closed and remain finite after arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsProper\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicSpace|[Ff]inite.*[Uu]niversallyClosed|[Ff]inite.*[Bb]ase[Cc]hange",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"line\": \"342\", \"text\": \"  apply Module.finitePresentation_of_surjective (f.baseChange A)\"}\n  {\"file\": \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"line\": \"353\", \"text\": \"lemma FinitePresentation.of_isBaseChange\"}\n  {\"file\": \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"line\": \"363\", \"text\": \"  FinitePresentation.of_isBaseChange (LocalizedModule.mkLinearMap S M)\"}\n  {\"file\": \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"line\": \"696\", \"text\": \"theorem Module.FinitePresentation.isBaseChange_map (S : Type*) [CommRing S] [Algebra R S]\"}\n  {\"file\": \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"line\": \"702\", \"text\": \"    (Module.isBaseChange_map_of_finite_free N S _) (Module.isBaseChange_map_of_finite_free N S _)\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"line\": \"89\", \"text\": \"    (hQp : RingHom.HasFiniteProducts Q) [(toMorphismProperty Q).IsStableUnderCobaseChange]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"366\", \"text\": \"instance [Algebra.FiniteType (𝒜 0) A] : UniversallyClosed (Proj.toSpecZero 𝒜) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean\", \"line\": \"93\", \"text\": \"variable [HasFiniteWidePullbacks C] [P.HasOfPostcompProperty P] [P.IsStableUnderBaseChange]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"116\", \"text\": \"  HasRingHomProperty.isStableUnderBaseChange RingHom.QuasiFinite.isStableUnderBaseChange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"line\": \"80\", \"text\": \"instance locallyOfFiniteType_isStableUnderBaseChange :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"line\": \"82\", \"text\": \"  HasRingHomProperty.isStableUnderBaseChange RingHom.finiteType_isStableUnderBaseChange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"line\": \"107\", \"text\": \"      RingHom.EssFiniteType.isStableUnderBaseChange.localizationPreserves _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"85\", \"text\": \"instance locallyOfFinitePresentation_isStableUnderBaseChange :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"87\", \"text\": \"  HasRingHomProperty.isStableUnderBaseChange RingHom.finitePresentation_isStableUnderBaseChange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"21\", \"text\": \"- `AlgebraicGeometry.finite_appTop_of_universallyClosed`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"161\", \"text\": \"theorem finite_appTop_of_universallyClosed (f : X ⟶ (Spec <| .of K))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"62\", \"text\": \"    RingHom.finite_respectsIso RingHom.finite_isStableUnderBaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"line\": \"113\", \"text\": \"  exact FiniteType.baseChangeAux_surj T hf\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"397\", \"text\": \"  have : Algebra.WeaklyQuasiFiniteAt R' (Q.comap g.toRingHom) := .baseChange P _ <| by\"}\n  {\"file\": \"Mathlib/RingTheory/EssentialFiniteness.lean\", \"line\": \"168\", \"text\": \"instance EssFiniteType.baseChange [h : EssFiniteType R S] : EssFiniteType T (T ⊗[R] S) := by\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"361\", \"text\": \"lemma QuasiFiniteAt.baseChange (p : Ideal S) [p.IsPrime] [QuasiFiniteAt R p]\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"525\", \"text\": \"  have : Algebra.QuasiFiniteAt p.ResidueField qF.asIdeal := .baseChange q _\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"559\", \"text\": \"  have : Algebra.QuasiFiniteAt p.ResidueField q' := .baseChange q _ hq'\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"167\", \"text\": \"/-- Use `Algebra.QuasiFiniteAt.baseChange` instead for `Algebra.QuasiFiniteAt R p`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"192\", \"text\": \"  have := QuasiFiniteAt.baseChange (R := R) (S := _) (A := A ⧸ q.under A)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite morphism of algebraic spaces is representable universally closed with finite fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsAffineHom : AlgebraicGeometry.IsAffineHom f],\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite) →\\n    AlgebraicGeometry.IsFinite f\", \"doc\": \"Let $f: X \\\\to Y$ be an affine morphism of schemes. If for every affine open subset $U \\\\subseteq Y$, the ring of sections $\\\\Gamma(f^{-1}(U), \\\\mathcal{O}_X)$ is a finitely generated module over $\\\\Gamma(\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f → AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Given a morphism $ f: X \\\\to Y $ of schemes, if for every base change, the induced morphism is a closed map in the topological sense, then $ f $ is universally closed.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite representable morphisms of algebraic spaces have closed continuous point maps with finite fibres and are stable under base change",
+   "results": "IsFinite; universallyClosed_iff; UniversallyClosed; Scheme.Hom.isClosedMap; UniversallyClosed.out; UniversallyClosed.universally_isClosedMap; universallyClosed_eq; isProper_iff. All are scheme statements.",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-space statement; the scheme hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite map of algebraic spaces induces a continuous closed map of underlying topological spaces with finite point fibres",
+   "results": "Scheme.Hom.isClosedMap; IsFinite.instOfIsClosedImmersion; UniversallyClosed.universally_isClosedMap; instLocallyOfFiniteTypeOfIsClosedImmersion; universallyClosed_eq; IsProper.instOfIsFinite; instIsProperOfIsFinite; UniversallyClosed.out. All are scheme statements.",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-space statement; the scheme hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic spaces finite on all scheme tests is closed and locally quasi finite",
+   "results": "LocallyQuasiFinite.mk; instLocallyQuasiFiniteOfIsFinite; LocallyQuasiFinite.recOn; LocallyQuasiFinite; locallyQuasiFinite_iff; LocallyQuasiFinite.casesOn; instLocallyQuasiFiniteOfIsImmersion; IsFinite.instLocallyOfFiniteType. All are scheme statements.",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-space statement; the scheme hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsFinite\"",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-space statement; the scheme hits are used through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic_space|algebraic space",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-space statement; the scheme hits are used through existing DAG nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separated-space-dimension-one-scheme",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: base change, closedness and finite fibres of the finite cover used in both paragraphs of the proof of Tag 0ADD.",
+   "via": [
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-space-morphism-topology",
+  "worker": "stage1",
+  "summary": "Proved arbitrary base change directly on scheme tests, and descended continuity, closedness and finite fibres through a finite scheme base change of an etale atlas. Wrote the common-field point lifting explicitly. Reused existing scheme-finiteness and algebraic-space topology nodes; no new nodes. Statement unchanged. Repair of the return on head 29f1dc444c4: reconstructed the item from the current DAG with only split-owned fields overlaid; reread every current cited statement and checked all 20 verbatim citations. Expanded step 5 to display the fixed-v common-field lift explicitly. Retained all searches and the six-step route. Resumed repair on 2026-10-23: rebased the retained split fields onto the current unsplit live item after dry run c4f012a310e; reread all eleven current dependencies, including the Q119 fibre-product and N7 open-image re-splits. Expanded step 4 with explicit residue-field representatives and their scheme point; no statement or dependency changed.",
+  "blueprint": "The inherited provenance traces to det-thm-sf-ctf-stability-direct-images, proof (3), through the finite-cover step of Tag 0ADD in lem-sfb-separated-space-dimension-one-scheme. Steps 1-6 supply precisely the base-change, topology, finite-fibre and local-quasi-finiteness prerequisites recorded in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and etale base change for algebraic spaces; the stability unit has no replacement for these foundational space facts."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic point-surjective scheme atlas, atlas-independent quotient topology and continuity of scheme-source maps for algebraic spaces; the stability unit has no node for these foundational space facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-affine-etale-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-e0e7d2375",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-e0e7d2375 (reviewer sub-agent of L); spot-checked: This is the 4th delivery. The FIXes on 29f1, 5beb and d4c0 were each lost at the promotion refusal. This head differs from d4c0 only in step 4, which now spells out the common-field lift (L, then the scheme point w; correct, Stacks 03H4 spaces-properties l.281ff), and in split_report.summary. The three citation faults are still present; I rechecked each against this snapshot's statements. (C4) Steps 2 and 5 take point-surjectivity of the atlas p from the cover clause of lem-trf-space-fibre-products-etale-covers, but that clause assumes a jointly point-surjective family, and 'surjective' in def-trf-algebraic-space only means surjective on scheme tests. (C3) Steps 2, 3 and 4 cite lem-a1-space-etale-open-image for single-atlas open/closed detection, but that lemma never states independence from the atlas, and def-a1-space-point-topology is the final topology over all étale maps. lem-a1-space-affine-etale-cover gives an atlas with |w| surjective, a quotient topology independent of w, and continuity of every |t| (Stacks 03BX). (C1) Step 6 passes from quasi-finite to locally quasi-finite without a citation; it now cites pqf-lem-qf-locqf-qc (Stacks 01TJ). The rest is correct: the statement is unchanged (03ZQ scheme-test form), there are no new nodes, and the sectionwise base change, continuity, closedness via the finite scheme projection g and finite-fibre surjection all hold. Edge cases pass: empty spaces, C empty or all of |Y|, closed immersion, non-surjective f, non-quasi-compact X, inseparable residue fields. The fix combines the d4c0 steps 2, 3, 5 and 6 with this head's step 4, whose detection cite is changed to affine-etale-cover. proof_deps (11) equals the union of step uses, and tool_uses names lem-trf and affine-etale-cover. Batch 5: lem-trf-space-fibre-products-etale-covers and def-a1-algebraic-space-point-classes are generic algebraic-space foundations or definitions; their closures hold only trf fibre-product, atlas and definition nodes, and no trace-formula or Poincaré-duality step. lem-a1-space-etale-open-image (closure of 410 nodes) is dropped by the fix. Maintainer: this FIX has been lost 3 times; make sure it survives the landing.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSpaceMorphismTopology",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finite_schemeTests_baseChange_topology",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSpaceMorphismTopology.lean",
+  "statement": "theorem finite_schemeTests_baseChange_topology {S : Scheme.{u}} {Y X : AlgebraicSpace S} (f : Y ⟶ X) (hf : IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) f.hom.hom) : (∀ (X' : AlgebraicSpace S) (g : X' ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) (Limits.pullback.snd f.hom g.hom).hom) ∧ Continuous (mapPoint f.hom.hom) ∧ IsClosedMap (mapPoint f.hom.hom) ∧ (∀ x : Point X.obj.obj, (mapPoint f.hom.hom ⁻¹' {x}).Finite) ∧ (∀ (T : Over S) (a : yoneda.obj T ⟶ X.obj.obj), IsEtale a → ∃ (U : Over S) (p : U ⟶ T) (q : yoneda.obj U ⟶ Y.obj.obj), IsPullback q (yoneda.map p) f.hom.hom a ∧ Scheme.Hom.IsLocallyQuasiFinite p.left)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e11949ab1",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Node diff vs live: only lean record and stmt_dep def-sfb-proper-curve-moduli (def node; mapPoint in its lean.declarations; its 23-node closure doesn't contain the item, so no cycle). Every clause matches: hypothesis IsRepresentableWith(IsFinite p.left) = finite on scheme tests; base change over all algebraic spaces X' via sheaf pullback.snd; Continuous/IsClosedMap/finite fibres for the canonical Quot.map mapPoint with the landed final étale topology; for every IsEtale chart a representing pullback with Stacks IsLocallyQuasiFinite (∃ over a model unique up to iso is fine). No extra hypotheses; edge cases (empty X/Y/chart, non-surjective f) covered; universe u is the def-trf convention. Statement field verbatim; docstrings carry source, blueprint id and the six proof steps; sorry only; no new definitions or duplicate point map; report has Worker report and Second reading by Q71. No file changed, no compile run."
+ }
+}

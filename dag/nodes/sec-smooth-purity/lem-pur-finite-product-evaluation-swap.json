@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-finite-product-evaluation-swap",
+ "kind": "statement",
+ "title": "Swap compatibility of arbitrary derived tensor evaluation arrows",
+ "statement": "Fix P as in [def-pur-conventions]. Let B,Y,Z be schemes with maps to Spec(k), a:Y→B and b:Z→B. In the intrinsic ordinary unbounded categories take arbitrary F,G∈D(B), H∈D(Y), J∈D(Z), and arrows e:P_a F→H, d:P_b G→J. Use pairEvaluation, swapPull and swapTensor from [def-pur-finite-proper-product-maps], including their actual canonical tensor and pullback compositors. Then P_c(sigma(F,G));swapPull_(G⊗F);P_s(pairEvaluation_(b,a)(d,e));swapTensor_(H,J) = pairEvaluation_(a,b)(e,d), where c=t;b and s:Y×_B Z→Z×_B Y is the actual pullback symmetry. No direct image, exchange, projection, adjunction counit, or properness is used.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+ },
+ "stmt_deps": [
+  "def-pur-finite-proper-product-maps",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Expand pairEvaluation and swapTensor. Naturality of the canonical pullback tensor comparison moves the tensor of the arbitrary arrows past that comparison. Its composition law combines the successive tensor comparisons.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+   }
+  },
+  {
+   "text": "Pullback composition and the two projection equations s;r′=t, s;t′=r identify the two projection factors. The signed-braiding compatibility of the tensor comparison moves the input symmetry through pullback. Naturality of the signed output symmetry moves e and d through it; involutivity cancels the remaining two symmetries. The Koszul signs are those of the specified derived signed symmetry throughout.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit realization/mate or signed symmetry calculation in the cited proper-product argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of the ordinary external product defined by exchange and projection is the tensor of pullback counits and is invariant under swapping the factors",
+   "results": "8 hits including CategoryTheory.MonoidalCategory.externalProductSwap, externalProductFlip and frobeniusMorphism_mate. They concern abstract external products or cartesian closed functors, not the specified intrinsic derived comparisons and transported direct-image compositor.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For arbitrary evaluation arrows under scheme pullback, the external tensor evaluation map commutes with swapping the two fiber product projections and signed tensor symmetry",
+   "results": "8 hits including TensorProduct.lift_comp_comm_eq, LinearMap.rTensor_comm, LinearMap.lTensor_comm, and AlgebraicGeometry.Scheme.Pullback.t_fst_snd. These give algebraic tensor symmetry or scheme projection equalities, not the normalized unbounded derived comparison equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProductSwap|braiding_naturality|conjugateEquiv_counit|comp_homEquiv",
+   "results": "25 hits including module braiding naturality, Adjunction.comp_homEquiv at Basic.lean:584 and conjugateEquiv_counit at Mates.lean:285. Local rg finds no pairEvaluation or finiteProductEvaluationSwap declaration; abstract braiding naturality alone does not identify these concrete intrinsic pullback comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperProductTranspose",
+  "date": "2026-10-26",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4, symmetry of the actual finite external product: the signed tensor-of-evaluations interchange calculation after taking ordinary adjoints.",
+   "via": [
+    "lem-pur-finite-proper-product-transpose",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProductEvaluationSwap",
+  "file": "lean/Sheaf/Paper/FiniteProductEvaluationSwap.lean",
+  "declaration": "WeilConjectures.FiniteProperProduct.finiteProductEvaluationSwap",
+  "statement": "theorem finiteProductEvaluationSwap (P : PurityFiniteSetting.{u}) {B Y Z : Scheme.{u}} (a : Y ⟶ B) (b : Z ⟶ B) (sB : B ⟶ Spec (.of P.field.k)) (sY : Y ⟶ Spec (.of P.field.k)) (sZ : Z ⟶ Spec (.of P.field.k)) (F G : D P B) (H : D P Y) (J : D P Z) (e : (pull P a).obj F ⟶ H) (d : (pull P b).obj G ⟶ J) : (pull P (pullback.snd a b ≫ b)).map (sigma P B F G).hom ≫ (swapPull P a b).hom.app ((tensor P B).obj (G, F)) ≫ (pull P (pullbackSymmetry a b).hom).map (pairEvaluation P b a sB sY G F J H d e) ≫ swapTensor P a b sY sZ H J = pairEvaluation P a b sB sZ F G H J e d",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 5f2f vs 1cd1 (Lean+nodes byte-identical); item/leg vs clone; 5 downstream modules compiled against delivered set; change-record Users vs computed users"
+ }
+}

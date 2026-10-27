@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-ordinary-line-scalar-flat-descent",
+ "kind": "statement",
+ "title": "Descent of a fixed ordinary scalar and signed-line comparison",
+ "statement": "Let $X,R,S,\\alpha,p,L,K$ be as in [def-pur-ordinary-line-scalar-data], and let $l,k$ be line data for $L,K$. Suppose given ordinary natural isomorphisms $o_m:E_pT_{L,m}\\cong T_{K,m}E_p$ for every integer $m$. There are derived natural isomorphisms $d_m:D_pF_{L,m}\\cong F_{K,m}D_p$ such that, on every flat-term K-flat complex $P$, the composite of $d_m(Q_RP)$, $F_{K,m}(\\operatorname{compute}_p P)$ and the target line-factor comparison at $E_pP$ equals $D_p(l_m(P))$, followed by $\\operatorname{compute}_p(T_{L,m}P)$ and $Q_S(o_m(P))$. All maps are the fixed quotient, line-factor and ordinary-comparison maps of [def-pur-ordinary-line-scalar-data]. This assertion requires no evaluation compatibility or normalization of the ordinary signed-power comparison.",
+ "stmt_deps": [
+  "def-pur-ordinary-line-scalar-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; the ordinary signed-line part of blueprint Tate-twist local freeness proof (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves commutes with tensoring by a locally free rank one sheaf",
+   "results": "8 hits including SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits concern free sheaves and ordinary pullback, without the representative-normalized unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso, leftDerivedNatIso_hom, leftDerivedNatIso_inv",
+   "date": "2026-10-27",
+   "verdict": "Useful universal uniqueness API; it does not provide the ordinary balanced formula or the normalized evaluation square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorBinaryIso|tensorComparison|scalarTensorComparison_natural",
+   "results": "0 hits in the Mathlib search service; local rg finds the project scalar tensor core and ordinary tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project tensor comparison; no matching Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OrdinaryLineDerivedScalarComparison",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), exact signed-line twists and actual evaluation; ordinary coefficient comparison.",
+   "via": [
+    "lem-pur-ordinary-line-derived-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [
+  {
+   "text": "Restrict cochain complexes to flat-term K-flat objects. A flat-term K-flat resolution supplies a representative of every homotopy object and refines roofs. The resolving representative localization and full quotient imply that precomposition with this representative functor is fully faithful.",
+   "uses": [
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The universal scalar counit is invertible on these representatives. Whisker the source line-factor isomorphism, the scalar computation on the tensor representative, the ordinary cochain comparison, the inverse target line factor, and the inverse scalar computation. Line flatness ensures the tensor representative is still in the resolving class.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "def-pur-ordinary-line-scalar-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the inverse image of this natural isomorphism under fully faithful precomposition. Its map-preimage equality gives the displayed representative square by cancelling the computation and line-factor inverse maps.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-pur-ordinary-line-scalar-data",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YY; explicit extraction of parent proof steps 5, 6 and 8 by M1."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OrdinaryLineScalarFlatDescent",
+  "file": "lean/Sheaf/Algebra/Homology/OrdinaryLineScalarFlatDescent.lean",
+  "declaration": "SheafOfModules.OrdinaryLineScalar.ordinary_scalar_line_flat_descent",
+  "statement": "theorem ordinary_scalar_line_flat_descent\n    (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}\n      (J := Scheme.ProEt.topology X) α)\n    (L : Modules.{t, a} X R) (K : Modules.{t, a} X S)\n    (l : LineData L) (k : LineData K)\n    (o : ∀ m : ℤ, tensor.{t, a} L m ⋙ p.ordinary ≅\n      p.ordinary ⋙ tensor.{t, a} K m) :\n    ∃ d : ∀ m : ℤ, twist.{t, a, w} L m ⋙ p.derived ≅\n        p.derived ⋙ twist.{t, a, w} K m,\n      ∀ (m : ℤ) (P : CochainComplex (Modules.{t, a} X R) ℤ), FlatModel P →\n        (d m).hom.app (𝒬[R].obj P) ≫\n          (twist.{t, a, w} K m).map (compute.{t, a, w} p P) ≫\n          (k.factors m).hom.app ((p.ordinary.mapHomologicalComplex (.up ℤ)).obj P) =\n        p.derived.map ((l.factors m).hom.app P) ≫\n          compute.{t, a, w} p (((tensor.{t, a} L m).mapHomologicalComplex (.up ℤ)).obj P) ≫\n          𝒬[S].map\n            ((Functor.mapHomologicalComplexCompIso (o m) (.up ℤ)).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "independent cc review: the deleted blocks of the original module against the new Data/Presentations/LineData modules (verbatim apart from blueprint tags), the item signature against the clone, the four direct importers and #print axioms compiled in sandbox /tmp/m1sb, the timing of the published original (106.6 s) against the delivered item (34 s), and the evaluation hole against its node and the Comparison.evaluation field"
+ }
+}

@@ -1,0 +1,268 @@
+{
+ "id": "lem-trf-affine-limit-chart-diagrams",
+ "kind": "statement",
+ "title": "Affine chart diagrams along an affine-transition limit",
+ "statement": "Let $I$ be a nonempty directed set, $(S_i)_{i\\in I}$ an inverse system of schemes [def-pc-scheme] with affine transition morphisms [pqf-def-affine-morphism], and $S=\\varprojlim_iS_i$ [lem-weil-pbc-limit-affine-transition]. Fix $i_0\\in I$ and an $S_{i_0}$-morphism $g_0:U_0\\to V_0$. Suppose given a finite affine open covering $V_0=\\bigcup_jY_{j,0}$, affine opens $W_{j,0}\\subseteq S_{i_0}$ containing the image of $Y_{j,0}$, and finite affine open coverings $g_0^{-1}(Y_{j,0})=\\bigcup_kX_{jk,0}$. Write $W_{j,0}=\\operatorname{Spec}R^{(j)}_0$, $Y_{j,0}=\\operatorname{Spec}B_{j,0}$ and $X_{jk,0}=\\operatorname{Spec}C_{jk,0}$, and write $\\varphi_{jk,0}:B_{j,0}\\to C_{jk,0}$ for the induced $R^{(j)}_0$-algebra map [def-weil-affine-spectrum]. Let $p_i:S_i\\to S_{i_0}$ for $i\\geq i_0$ and $p:S\\to S_{i_0}$ be the given projections. Then $p_i^{-1}(W_{j,0})=\\operatorname{Spec}R^{(j)}_i$ and $p^{-1}(W_{j,0})=\\operatorname{Spec}R^{(j)}$ are affine, with $R^{(j)}=\\varinjlim_{i\\geq i_0}R^{(j)}_i$ compatibly with all projections. For $T=S_i$ or $T=S$, put $A_j=R^{(j)}_i$ or $R^{(j)}$, respectively. In the base changes $U_T,V_T,g_T$ to $T$ [def-pc-fibre-product], the inverse images $X_{jk,T}$ and $Y_{j,T}$ of the given opens form affine open coverings, and their identifications with $\\operatorname{Spec}(A_j\\otimes_{R^{(j)}_0}C_{jk,0})$ and $\\operatorname{Spec}(A_j\\otimes_{R^{(j)}_0}B_{j,0})$ identify $g_T|_{X_{jk,T}}$ with $\\operatorname{Spec}(\\mathrm{id}\\otimes\\varphi_{jk,0})$. These identifications commute with both projections and with the transition maps. In particular, for $i_0\\leq i'\\leq i$, the square with horizontal maps $X_{jk,i}\\to Y_{j,i}$ and $X_{jk,i'}\\to Y_{j,i'}$ and vertical transition maps is cartesian. Writing $R_\\bullet=R^{(j)}_\\bullet$, $B_0=B_{j,0}$ and $C_0=C_{jk,0}$, its coordinate comparison is the canonical isomorphism $(R_{i'}\\otimes_{R_0}C_0)\\otimes_{R_{i'}\\otimes_{R_0}B_0}(R_i\\otimes_{R_0}B_0)\\cong C_0\\otimes_{B_0}(R_i\\otimes_{R_0}B_0)\\cong R_i\\otimes_{R_0}C_0$ as algebras over $R_i\\otimes_{R_0}B_0$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0C4W (lemma-descend-unramified), proof, first paragraph: the finite affine chart reduction in Situation (situation-descent-property). The pulled-back chart systems, their affine colimit rings and the natural tensor-product comparison, including the stage-change square (old proof step 2 and the tensor comparison in old step 3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Fix $j$ and work on the upper tail $J=\\{i\\mid i\\geq i_0\\}$, a nonempty directed set: a common upper bound in $I$ of two elements of $J$ is again in $J$. By [lem-weil-pbc-limit-affine-transition] the projections to $S_{i_0}$ are affine and the inverse images $W_{j,i}$ of $W_{j,0}$ have limit $W_j=p^{-1}(W_{j,0})$, with the specified restricted projections. By [pqf-def-affine-morphism], all these inverse images are affine. Put $R_i^{(j)}=\\Gamma(W_{j,i},\\mathcal O)$ and use the pullbacks of sections for their directed transition homomorphisms. The affine clause of [lem-weil-pbc-limit-affine-transition], applied to this restricted system, gives $W_j\\cong\\operatorname{Spec}(\\varinjlim_J R_i^{(j)})$. To fix the projections: by [lem-weil-pbc-spec-colimit-limit], $\\operatorname{Spec}(\\varinjlim_J R_i^{(j)})$ with the morphisms $\\operatorname{Spec}$ of the coprojections is a limit of the same system $(W_{j,i})_{i\\in J}$ in schemes, so the unique isomorphism of limits compatible with the projections identifies $W_j$ with it; under this identification each restricted projection $W_j\\to W_{j,i}$ is $\\operatorname{Spec}$ of the coprojection $R_i^{(j)}\\to\\varinjlim_J R_i^{(j)}$. Use the given identification $W_{j,0}=\\operatorname{Spec}R_0^{(j)}$ to transport the ring at $i_0$ to $R_0^{(j)}$; [def-weil-affine-spectrum] identifies its global sections with that ring. Thus these are $R_0^{(j)}$-algebras and the limit comparison respects all their structure maps. No quasi-compactness of $S_i$ is needed.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "pqf-def-affine-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YX (lemma-directed-inverse-system-has-limit), parts (1),(2), and 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)"
+   }
+  },
+  {
+   "text": "Write $T_j=T\\times_{S_{i_0}}W_{j,0}$ for either allowed $T$; step 1 identifies it with $\\operatorname{Spec}A_j$. Apply [lem-weil-pbc-open-fibre-product] to the opens $Y_{j,0}\\subset V_0$, $W_{j,0}\\subset S_{i_0}$ and $T_j\\subset T$. Since $Y_{j,0}$ maps into $W_{j,0}$, its inverse image in $V_T$ is $Y_{j,0}\\times_{W_{j,0}}T_j$, with both projections unchanged. The same argument applies to $X_{jk,0}\\subset U_0$ since its image lies in $Y_{j,0}$, hence in $W_{j,0}$. These opens cover: every point of $V_T$ projects into some $Y_{j,0}$, and every point of $U_T$ projects into $g_0^{-1}(Y_{j,0})$ for some $j$, then into some $X_{jk,0}$. For fixed $j$, the $X_{jk,T}$ cover $g_T^{-1}(Y_{j,T})$ by the same preimage-of-union argument. All index sets remain the given finite ones.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR (lemma-open-fibre-product); Limits Tag 0C4W (lemma-descend-unramified), proof, affine-cover reduction"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-product-affine-spectra], the products in step 2 are affine with rings $A_j\\otimes_{R_0^{(j)}}B_{j,0}$ and $A_j\\otimes_{R_0^{(j)}}C_{jk,0}$. Their projection homomorphisms send $a$ to $a\\otimes1$ and $b$ (respectively $c$) to $1\\otimes b$ (respectively $1\\otimes c$). The restricted $g_T$ commutes with these projections, so its ring homomorphism must send $a\\otimes b$ to $a\\otimes\\varphi_{jk,0}(b)$. This determines it because pure tensors additively generate the tensor product. By the contravariant functoriality in [def-weil-affine-spectrum], the restricted morphism is $\\operatorname{Spec}(\\mathrm{id}\\otimes\\varphi_{jk,0})$. For a transition ring map $\\alpha:A_j\\to A'_j$, including a map to the colimit ring, the two chart transition homomorphisms are $a\\otimes b\\mapsto\\alpha(a)\\otimes b$ and $a\\otimes c\\mapsto\\alpha(a)\\otimes c$: their restrictions to each factor are the required projection maps, which uniquely determine the homomorphisms. The two paths in each square both send $a\\otimes b$ to $\\alpha(a)\\otimes\\varphi_{jk,0}(b)$. This proves compatibility with projections and every transition, including identity and composite transitions.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes), universal-property proof; Tag 01JR (lemma-open-fibre-product)"
+   }
+  },
+  {
+   "text": "For $i_0\\leq i'\\leq i$, consider the three rows $(X_{jk,i},X_{jk,i'})$, $(Y_{j,i},Y_{j,i'})$, $(W_{j,i},W_{j,i'})$, with horizontal transition maps and vertical structure maps. Step 2 identifies each chart with its original chart pulled back to $W_{j,i}$ or $W_{j,i'}$. Pullback pasting [lem-weil-pbc-cartesian-square-pasting] therefore makes both the lower square (the $Y$ row over the $W$ row) and the outer rectangle (the $X$ row over the $W$ row) cartesian: each is obtained by pasting the defining pullback squares over $W_{j,0}$ and cancelling their common right square. Apply that same pasting statement once more to cancel the lower square. The upper square is cartesian. Transposing this square gives exactly the square with horizontal maps $X_{jk,i}\\to Y_{j,i}$ and $X_{jk,i'}\\to Y_{j,i'}$ in the statement.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001Y (lemma-composition-representable), proof: iterated fibre-product identity"
+   }
+  },
+  {
+   "text": "For the coordinate comparison abbreviate $A=R_{i'}$, $A'=R_i$, $D=A\\otimes_{R_0}B_0$, $E=A'\\otimes_{R_0}B_0$, and write $\\alpha:A\\to A'$ for the transition. Here $D\\to A\\otimes C_0$ sends $a\\otimes b$ to $a\\otimes\\varphi(b)$ and $D\\to E$ sends it to $\\alpha(a)\\otimes b$. Define\n$$F:(A\\otimes C_0)\\otimes_D E\\longrightarrow C_0\\otimes_{B_0}E,\\qquad (a\\otimes c)\\otimes(a'\\otimes b)\\longmapsto c\\otimes(\\alpha(a)a'\\otimes b).$$\nIts inverse sends $c\\otimes e$ to $(1\\otimes c)\\otimes e$. The $R_0$-balancing follows from the structure maps, and the $D$-balancing follows by moving $a_1\\otimes b_1$ between the two factors: both images are $c\\otimes(\\alpha(a_1a)a'\\otimes b_1b)$, using $\\varphi(b_1)c\\otimes e=c\\otimes(1\\otimes b_1)e$ on the target. The same identity proves the inverse is $B_0$-balanced. Both maps are additive, multiplicative and preserve the unit; they fix $E$ under its second-factor action. Their composites fix pure tensors: in the source move $a\\otimes1\\in D$ from the first factor to the second; in the target the assertion is immediate. Thus $F$ is the first asserted $E$-algebra isomorphism. This is an explicit verification from the defining balanced tensor relations, not an additional lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV (section-tensor-product), balanced tensor relations; Tag 00D2 (lemma-tensor-with-bimodule)"
+   }
+  },
+  {
+   "text": "The second isomorphism is $G:C_0\\otimes_{B_0}E\\to A'\\otimes_{R_0}C_0$, $c\\otimes(a'\\otimes b)\\mapsto a'\\otimes\\varphi(b)c$, with inverse $a'\\otimes c\\mapsto c\\otimes(a'\\otimes1)$. The $B_0$-balancing is precisely $\\varphi(b)c\\otimes e=c\\otimes(1\\otimes b)e$; $R_0$-balancing uses that $\\varphi$ is an $R_0$-algebra map. These relations also show both composites are identities. The maps preserve addition, multiplication, unit and the $E$-action, where $a'\\otimes b$ acts on the target as $a'\\otimes\\varphi(b)$. Finally $GF$ sends $(a\\otimes c)\\otimes(a'\\otimes b)$ to $\\alpha(a)a'\\otimes c\\varphi(b)$. This is the coordinate map of the cartesian square of step 4: it extends its two ring maps $a\\otimes c\\mapsto\\alpha(a)\\otimes c$ and $a'\\otimes b\\mapsto a'\\otimes\\varphi(b)$. Uniqueness in the tensor-product universal property identifies it with the canonical comparison. This also verifies the specified algebra structure, rather than only an abstract ring isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV (section-tensor-product), defining universal property and balancing relations; Tag 00D2 (lemma-tensor-with-bimodule)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-affine-transition",
+  "pqf-def-affine-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0C4W (lemma-descend-unramified), first paragraph, expanded using Tags 01YX, 01YW, 01JR, 01I4 and the balanced tensor-product formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(affine|Spec|tensor).*(isLimit|inverseLimit|inverse.limit)|(isLimit|inverseLimit).*(affine|Spec|tensor)",
+   "results": "{\"t\": \"2026-10-22T06:09:50Z\", \"tool\": \"grep\", \"query\": \"(affine|Spec|tensor).*(isLimit|inverseLimit|inverse.limit)|(isLimit|inverseLimit).*(affine|Spec|tensor)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\"], \"digest\": \"6beb84b933f22563\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits supply affine limits, open restriction limits or single affine pullbacks separately; none gives this full chart diagram with its restricted morphisms, colimit rings and cartesian stage comparisons in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate rings of affine charts in an inverse system of schemes and compatibility of tensor product base changes",
+   "results": "{\"t\": \"2026-10-22T06:09:51Z\", \"tool\": \"leansearch\", \"query\": \"Coordinate rings of affine charts in an inverse system of schemes and compatibility of tensor product base changes\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsLimit, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T06:09:51Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, IsLimit, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsLimit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "inconclusive: Loogle rejected the unqualified identifier IsLimit; the corrected qualified query below was run and its actual candidates were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine charts under inverse limits of schemes with affine transition maps are spectra of tensor products with the colimit ring, naturally compatible with restriction morphisms and further base change",
+   "results": "{\"t\": \"2026-10-22T06:10:03Z\", \"tool\": \"leanfinder\", \"query\": \"Affine charts under inverse limits of schemes with affine transition maps are spectra of tensor products with the colimit ring, naturally compatible with restriction morphisms and further base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"AlgebraicGeometry.isAffineHom_π_app\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\"], \"digest\": \"bac71c620bab581d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits supply affine limits, open restriction limits or single affine pullbacks separately; none gives this full chart diagram with its restricted morphisms, colimit rings and cartesian stage comparisons in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso|pullback.*[Tt]ensor|[Tt]ensor.*pullback|isLimitOpensCone|isColimit.*[ΓG]",
+   "results": "{\"t\": \"2026-10-22T06:11:00Z\", \"tool\": \"grep\", \"query\": \"pullbackSpecIso|pullback.*[Tt]ensor|[Tt]ensor.*pullback|isLimitOpensCone|isColimit.*[ΓG]\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\"], \"digest\": \"9d0d606d3410f4e1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits supply affine limits, open restriction limits or single affine pullbacks separately; none gives this full chart diagram with its restricted morphisms, colimit rings and cartesian stage comparisons in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.IsLimit",
+   "results": "{\"t\": \"2026-10-22T06:11:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, CategoryTheory.Limits.IsLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.vPullbackConeIsLimit\", \"AlgebraicGeometry.Scheme.Pullback.gluedIsLimit\", \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"AlgebraicGeometry.isLimitOpensCone\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc\", \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"AlgebraicGeometry.Scheme.nonempty_of_isLimit\", \"AlgebraicGeometry.isAffineHom_π_app\"], \"digest\": \"4214b854e1a8cfb7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits supply affine limits, open restriction limits or single affine pullbacks separately; none gives this full chart diagram with its restricted morphisms, colimit rings and cartesian stage comparisons in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes restricted to affine open charts over a fixed affine base has tensor product coordinate rings after arbitrary affine transition base change and those ring diagrams commute with filtered limits and subsequent scalar extension",
+   "results": "{\"t\": \"2026-10-22T06:11:13Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of schemes restricted to affine open charts over a fixed affine base has tensor product coordinate rings after arbitrary affine transition base change and those ring diagrams commute with filtered limits and subsequent scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc\", \"AlgebraicGeometry.AffineSpace.map_toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.map_toSpecMvPoly_assoc\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"AlgebraicGeometry.IsAffineOpen.Spec_map_appLE_fromSpec\", \"AlgebraicGeometry.IsAffineOpen.SpecMap_appLE_fromSpec\", \"AlgebraicGeometry.AffineSpace.map_over\", \"AlgebraicGeometry.IsAffineOpen.map_fromSpec\"], \"digest\": \"94ab0d4c3aa82548\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits supply affine limits, open restriction limits or single affine pullbacks separately; none gives this full chart diagram with its restricted morphisms, colimit rings and cartesian stage comparisons in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine charts in inverse limits of schemes with affine transition morphisms have tensor product coordinate rings and cartesian base change transition squares",
+   "results": "{\"t\": \"2026-10-23T09:56:52Z\", \"tool\": \"leanfinder\", \"query\": \"Affine charts in inverse limits of schemes with affine transition morphisms have tensor product coordinate rings and cartesian base change transition squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"AlgebraicGeometry.isAffineHom_π_app\", \"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\"], \"digest\": \"5c53a634535c7396\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Candidates read supply open-restricted limits, affine projections, affine pullbacks or naturality separately; none states this combined chart diagram, its morphisms and its specified iterated tensor comparison in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso|isLimitOpensCone|isAffineHom_π_app",
+   "results": "{\"t\": \"2026-10-23T09:57:59Z\", \"tool\": \"grep\", \"query\": \"pullbackSpecIso|isLimitOpensCone|isAffineHom_π_app\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\"], \"digest\": \"36e4615accc4347b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Candidates read supply open-restricted limits, affine projections, affine pullbacks or naturality separately; none states this combined chart diagram, its morphisms and its specified iterated tensor comparison in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of affine chart coordinate ring tensor products under inverse limits and base change of schemes",
+   "results": "{\"t\": \"2026-10-23T09:57:59Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of affine chart coordinate ring tensor products under inverse limits and base change of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.map_Spec_map\", \"AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality\", \"AlgebraicGeometry.AffineSpace.map_reindex\", \"AlgebraicGeometry.AffineSpace.map\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.isoSpec_inv_naturality_assoc\"], \"digest\": \"5226be1042a017de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Candidates read supply open-restricted limits, affine projections, affine pullbacks or naturality separately; none states this combined chart diagram, its morphisms and its specified iterated tensor comparison in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.IsLimit",
+   "results": "{\"t\": \"2026-10-23T09:58:00Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, CategoryTheory.Limits.IsLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.vPullbackConeIsLimit\", \"AlgebraicGeometry.Scheme.Pullback.gluedIsLimit\", \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"AlgebraicGeometry.isLimitOpensCone\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc\", \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"AlgebraicGeometry.Scheme.nonempty_of_isLimit\", \"AlgebraicGeometry.isAffineHom_π_app\"], \"digest\": \"4214b854e1a8cfb7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Candidates read supply open-restricted limits, affine projections, affine pullbacks or naturality separately; none states this combined chart diagram, its morphisms and its specified iterated tensor comparison in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back a morphism between affine open charts along a directed system of affine scheme morphisms gives a compatible system of spectra of scalar extensions",
+   "results": "{\"t\": \"2026-10-23T09:58:00Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling back a morphism between affine open charts along a directed system of affine scheme morphisms gives a compatible system of spectra of scalar extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"AlgebraicGeometry.Scheme.directedAffineCover_f\", \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"AlgebraicGeometry.Scheme.directedAffineCover_trans\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\"], \"digest\": \"6a6a9bb4d8a93234\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Candidates read supply open-restricted limits, affine projections, affine pullbacks or naturality separately; none states this combined chart diagram, its morphisms and its specified iterated tensor comparison in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-unramified-limit-descent",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the unramified descent input used by the downstream nodal-family approximation argument. Refinement of lem-trf-unramified-limit-descent: The pulled-back chart systems, their affine colimit rings and the natural tensor-product comparison, including the stage-change square (old proof step 2 and the tensor comparison in old step 3).",
+   "via": [
+    "lem-trf-unramified-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-limit-chart-diagrams",
+  "worker": "stage1",
+  "summary": "Q135: six proof steps using only existing nodes. Affine restricted limit and colimit ring; inverse-image covers via open fibre products; explicit tensor chart maps and all transition formulas; cartesian transition square by pasting; two balanced tensor inverses and canonical algebra comparison. No new nodes, no statement correction. Existing Mathlib/project searches do not attach the whole item.",
+  "blueprint": "Historical nearby-duality/nodal-family approximation branch recorded in blueprint.from: the finite affine chart reduction of lem-trf-unramified-limit-descent (Stacks 0C4W). The current latest ancestor lem-trf-local-term-locality instead follows contracting correspondences; this delivery retains the assigned historical branch and does not replace its unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic affine-transition limit theorem gives affine projections, limits of restricted opens and the affine colimit-ring description; no node of this local-term unit provides this scheme-limit tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-6b670fd53",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-6b670fd53 (reviewer sub-agent of L); spot-checked: Read the item, its 6 steps and every cited statement. No new nodes. Statement byte-identical to live and stmt_deps unchanged; the report's claim that it fixed doubled backslashes is inaccurate but harmless. No repair note, so the re-split rules do not apply. Live node still unsplit, so not superseded. Source checked: Stacks limits.tex 0C4W (line 1794), proof paras 1-2. The given covers rightly make the qcqs hypotheses unnecessary. Small cases tested: singleton I, empty cover, zero rings, non-injective R0->Ri, phi not injective/surjective. Step 2 (01JR): p^{-1}(Y)∩q^{-1}(T_j)=p^{-1}(Y) because f∘p=g∘q; cover argument correct. Step 3 (01I4 projections plus the uniqueness clause of the Spec definition) forces id⊗phi. Step 4: pasting/cancellation 001Y applied twice, using p_i=p_{i'}∘f_{ii'}; correct. Steps 5-6 (elementary): recomputed D- and R0-balancing, the inverses and GF=α(a)a'⊗φ(b)c, which is the canonical pushout comparison; correct. Fault C4 in step 1: lem-weil-pbc-limit-affine-transition only states S=Spec(colim Γ), not that the projections are Spec of the coprojections. The item's 'compatibly with all projections' and the parent's colimit-unramified step need this. FIX: step 1 now cites the existing Mathlib leaf lem-weil-pbc-spec-colimit-limit (01YW/01I1: Spec C with Spec of the coprojections is the limit in Sch) and uses the uniqueness of limits; the leaf is added to uses and proof_deps. Accepted tool_use: lem-weil-pbc-limit-affine-transition, the generic scheme-limit tool; no node in sk-i-curve-zero gives it. The other off-unit cites are Mathlib leaves or definitions. No SGA. Advisory for the maintainer: lem-trf-finite-affine-limit-chart-family (Q67, unsplit) overlaps the chart-identification clauses but adds qcqs/lfp existence, so it is not citable here and is not a delivery fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineLimitChartDiagrams",
+  "declaration": "AlgebraicGeometry.AffineLimitChart.exists_diagrams",
+  "declarations": [
+   "AlgebraicGeometry.AffineLimitChart.bases",
+   "AlgebraicGeometry.AffineLimitChart.charts",
+   "AlgebraicGeometry.AffineLimitChart.mapCharts",
+   "AlgebraicGeometry.AffineLimitChart.tensor",
+   "AlgebraicGeometry.AffineLimitChart.pure",
+   "AlgebraicGeometry.AffineLimitChart.left",
+   "AlgebraicGeometry.AffineLimitChart.right",
+   "AlgebraicGeometry.AffineLimitChart.ringCocone",
+   "AlgebraicGeometry.AffineLimitChart.exists_diagrams"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLimitChartDiagrams.lean",
+  "statement": "theorem exists_diagrams {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (U V : Over (D.obj (op i₀))) (g : U ⟶ V) (n : ℕ) (m : Fin n → ℕ) (R₀ B₀ : Fin n → CommRingCat.{u}) (C₀ : (j : Fin n) → Fin (m j) → CommRingCat.{u}) (b : ∀ j, R₀ j ⟶ B₀ j) (φ : ∀ j k, B₀ j ⟶ C₀ j k) (w : ∀ j, Spec (R₀ j) ⟶ D.obj (op i₀)) [∀ j, IsOpenImmersion (w j)] (y : ∀ j, Over.mk (Spec.map (b j) ≫ w j) ⟶ V) [∀ j, IsOpenImmersion (y j).left] (x : ∀ j k, Over.mk (Spec.map (b j ≫ φ j k) ≫ w j) ⟶ U) [∀ j k, IsOpenImmersion (x j k).left] (hxy : ∀ j k, (x j k).left ≫ g.left = Spec.map (φ j k) ≫ (y j).left) (hy : (⋃ j, Set.range (y j).left) = Set.univ) (hx : ∀ j, (⋃ k, Set.range (x j k).left) = g.left ⁻¹' Set.range (y j).left) : ∃ (A : Fin n → (WithInitial (Over (op i₀)))ᵒᵖ ⥤ CommRingCat.{u}) (r : ∀ j t, R₀ j ⟶ (A j).obj (op t)) (eW : ∀ j, charts (bases D c i₀) (w j) ≅ (A j).rightOp ⋙ Scheme.Spec), (∀ j, Nonempty (IsColimit (ringCocone (A j)))) ∧ (∀ j t, (eW j).hom.app t ≫ Spec.map (r j t) = pullback.snd ((bases D c i₀).obj t).hom (w j)) ∧ (∀ j s t (a : s ⟶ t), r j t ≫ (A j).map a.op = r j s) ∧ ∃ (eY : ∀ j t, (charts (bases D c i₀) (Spec.map (b j) ≫ w j)).obj t ≅ Spec (tensor (r j t) (b j))) (eX : ∀ j k t, (charts (bases D c i₀) (Spec.map (b j ≫ φ j k) ≫ w j)).obj t ≅ Spec (tensor (r j t) (b j ≫ φ j k))) (q : ∀ j k t, tensor (r j t) (b j) ⟶ tensor (r j t) (b j ≫ φ j k)) (vY : ∀ j s t (a : s ⟶ t), tensor (r j t) (b j) ⟶ tensor (r j s) (b j)) (vX : ∀ j k s t (a : s ⟶ t), tensor (r j t) (b j ≫ φ j k) ⟶ tensor (r j s) (b j ≫ φ j k)), (∀ j k t (a : (A j).obj (op t)) (z : B₀ j), (q j k t).hom (pure (r j t) (b j) a z) = pure (r j t) (b j ≫ φ j k) a ((φ j k).hom z)) ∧ (∀ j s t (a : s ⟶ t) (z : (A j).obj (op t)) (b₁ : B₀ j), (vY j s t a).hom (pure (r j t) (b j) z b₁) = pure (r j s) (b j) ((A j).map a.op |>.hom z) b₁) ∧ (∀ j k s t (a : s ⟶ t) (z : (A j).obj (op t)) (c₁ : C₀ j k), (vX j k s t a).hom (pure (r j t) (b j ≫ φ j k) z c₁) = pure (r j s) (b j ≫ φ j k) ((A j).map a.op |>.hom z) c₁) ∧ (∀ j t, (eY j t).hom ≫ Spec.map (right (r j t) (b j)) = pullback.snd ((bases D c i₀).obj t).hom (Spec.map (b j) ≫ w j)) ∧ (∀ j k t, (eX j k t).hom ≫ Spec.map (right (r j t) (b j ≫ φ j k)) = pullback.snd ((bases D c i₀).obj t).hom (Spec.map (b j ≫ φ j k) ≫ w j)) ∧ (∀ j t, (eY j t).hom ≫ Spec.map (left (r j t) (b j)) ≫ (eW j).inv.app t ≫ pullback.fst ((bases D c i₀).obj t).hom (w j) = pullback.fst ((bases D c i₀).obj t).hom (Spec.map (b j) ≫ w j)) ∧ (∀ j k t, (eX j k t).hom ≫ Spec.map (left (r j t) (b j ≫ φ j k)) ≫ (eW j).inv.app t ≫ pullback.fst ((bases D c i₀).obj t).hom (w j) = pullback.fst ((bases D c i₀).obj t).hom (Spec.map (b j ≫ φ j k) ≫ w j)) ∧ (∀ j s t (a : s ⟶ t), (charts (bases D c i₀) (Spec.map (b j) ≫ w j)).map a ≫ (eY j t).hom = (eY j s).hom ≫ Spec.map (vY j s t a)) ∧ (∀ j k s t (a : s ⟶ t), (charts (bases D c i₀) (Spec.map (b j ≫ φ j k) ≫ w j)).map a ≫ (eX j k t).hom = (eX j k s).hom ≫ Spec.map (vX j k s t a)) ∧ (∀ j t, IsOpenImmersion ((mapCharts (bases D c i₀) (y j)).app t)) ∧ (∀ j k t, IsOpenImmersion ((mapCharts (bases D c i₀) (x j k)).app t)) ∧ (∀ t, (⋃ j, Set.range ((mapCharts (bases D c i₀) (y j)).app t)) = Set.univ) ∧ (∀ j t, (⋃ k, Set.range ((mapCharts (bases D c i₀) (x j k)).app t)) = ((mapCharts (bases D c i₀) g).app t) ⁻¹' Set.range ((mapCharts (bases D c i₀) (y j)).app t)) ∧ (∀ j k, ∃ h : Over.mk (Spec.map (b j ≫ φ j k) ≫ w j) ⟶ Over.mk (Spec.map (b j) ≫ w j), h.left = Spec.map (φ j k) ∧ (∀ t, (mapCharts (bases D c i₀) h).app t ≫ (eY j t).hom = (eX j k t).hom ≫ Spec.map (q j k t)) ∧ (∀ s t (a : s ⟶ t), IsPullback ((mapCharts (bases D c i₀) h).app s) ((charts (bases D c i₀) (Spec.map (b j ≫ φ j k) ≫ w j)).map a) ((charts (bases D c i₀) (Spec.map (b j) ≫ w j)).map a) ((mapCharts (bases D c i₀) h).app t))) ∧ (∀ j k s t (a : s ⟶ t), ∃ (F : tensor (q j k t) (vY j s t a) ≅ tensor (φ j k) (right (r j s) (b j))) (G : tensor (φ j k) (right (r j s) (b j)) ≅ tensor (r j s) (b j ≫ φ j k)), (∀ (z : (A j).obj (op t)) (c₁ : C₀ j k) (z' : (A j).obj (op s)) (b₁ : B₀ j), F.hom.hom (pure (q j k t) (vY j s t a) (pure (r j t) (b j ≫ φ j k) z c₁) (pure (r j s) (b j) z' b₁)) = pure (φ j k) (right (r j s) (b j)) c₁ (pure (r j s) (b j) (((A j).map a.op).hom z * z') b₁)) ∧ (∀ (c₁ : C₀ j k) (z' : (A j).obj (op s)) (b₁ : B₀ j), G.hom.hom (pure (φ j k) (right (r j s) (b j)) c₁ (pure (r j s) (b j) z' b₁)) = pure (r j s) (b j ≫ φ j k) z' ((φ j k).hom b₁ * c₁)) ∧ right (q j k t) (vY j s t a) ≫ F.hom = right (φ j k) (right (r j s) (b j)) ∧ right (φ j k) (right (r j s) (b j)) ≫ G.hom = q j k s ∧ left (q j k t) (vY j s t a) ≫ F.hom ≫ G.hom = vX j k s t a ∧ right (q j k t) (vY j s t a) ≫ F.hom ≫ G.hom = q j k s)",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56f31b698",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Only the item's lean field changed; statement identical to live, stmt_deps unchanged, lean.statement verbatim from the file; first S2 delivery, not superseded. Hypotheses match the node (directed nonempty preorder I : Type u as in exists_limit_affine_transition, IsAffineHom transitions, given limit cone, Over-morphism g, finite Fin covers by open immersions, b and φ forced by mono/fully-faithful Spec, hxy/hy/hx). All conclusion clauses present: natural iso eW of the W-system with Spec A including the limit, ringCocone colimit, r compatibility, eY/eX pinned by both projections, q/vY/vX pinned on pure tensors, base-changed open immersions and both covers, h = Spec φ base change = Spec q, IsPullback stage squares for all arrows (true; covered by the node's transition clause), F/G with the node's exact pure-tensor formulas, E-linearity, GF = canonical comparison. Edge cases n=0, m j=0, singleton I, zero rings, non-injective maps covered. Helpers are real constructions; one sorry (the item theorem) with the 6-step proof docstring; source/blueprint docstrings; no duplicate helpers in side-live. No files changed, so no compile; worker reports a clean compile. Advisories: tensor wrapper vs CommRingCat.pushoutCocone; proof-only plain imports; overlap with lem-trf-finite-affine-limit-chart-family already noted at S1."
+ }
+}

@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-qcqs-lisse-stratified-integral-lattices",
+ "kind": "statement",
+ "title": "Qcqs lisse rational modules have stratified integral lattices",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, and a finite subextension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. Let $\\Lambda=\\underline E$, the condensed ring of continuous functions to normed $E$, or $\\Lambda=\\Omega^{\\mathrm{fin}}$, whose sections on a profinite set are continuous functions to $\\Omega$ with image in one finite subextension [sk-def-sfb-qlbar-condensed]. Put $\\mathcal F=\\{E\\}$ in the first case and let $\\mathcal F$ be all finite subextensions of $\\Omega$ in the second. For $F\\in\\mathcal F$ write $A_F=\\mathcal O_F$ with its norm topology. For each scheme $T$, use the pulled-back condensed coefficient rings $\\Lambda_T,F_T,A_{F,T}$ on the small pro-étale site, module objects, and ordinary uncompleted unbounded derived categories [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull, def-weil-size-convention]. Constructibility means finite constant scalar models on a finite constructible locally closed stratification; $D_{\\mathrm{ctf}}$ means bounded constructible cohomology and finite Tor amplitude [sk-def-sfb-constructible]. A lisse module is pro-étale locally free of finite rank. A scheme is qcqs when it is quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism].\n\nLet $T$ be qcqs and $M$ a lisse $\\Lambda_T$-module. There exist $F\\in\\mathcal F$, a lisse $F_T$-module $L$, an isomorphism $\\Lambda_T\\otimes_{F_T}L\\cong M$, and a finite partition $T=\\coprod_s S_s$ by constructible locally closed subschemes [def-constructible-stratification], such that each $L|_{S_s}$ contains a lisse $A_{F,S_s}$-submodule $B_s$ whose inclusion induces an isomorphism $F_{S_s}\\otimes_{A_{F,S_s}}B_s\\cong L|_{S_s}$. Thus the induced map $\\Lambda_{S_s}\\otimes_{A_{F,S_s}}B_s\\to M|_{S_s}$ is an isomorphism. In the finite-extension case one can take $F=E$, $L=M$ and the identity for the first isomorphism. Rank zero, empty schemes, and varying ranks are allowed. There is no Noetherian, dimension, characteristic or invertibility-of-$\\ell$ hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Rank, sheaf of lattices and pushing down by trace; qcqs extension of returned steps 5–8. Replace the narrower stratification citations by Stacks Tag 03S0, etale-cohomology.tex, lemma-etale-stratified-finite; use finite-subextension-valued lisse-object descent for the algebraic-closure coefficient."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-constructible-stratification",
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-module-upper-star",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-sfb-integers-to-subfield",
+  "def-sfb-qlbar-subextension-to-qlbar",
+  "def-sfb-coefficient-map"
+ ],
+ "proof": [
+  {
+   "text": "Convert IsLisseCoefficientModule to the raw-cover LocallyFree predicate: on the same cover, extension along the invertible condensedPullbackHom preserves and reflects finite free modules. For algebraic-closure coefficients apply exists_lisse_finiteCoefficient_model once on the qcqs base. For finite coefficients retain the original module and field.",
+   "uses": [
+    "lem-sfb-lisse-finite-coefficient-model",
+    "lem-weil-pbc-continuous-locally-free-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the fixed finite field and every point x, apply continuousLisse_affine_etale_lattice to obtain an affine etale neighbourhood carrying an integral locally free module whose scalar extension is the rational pullback. The neighbourhood images are open and cover X. Compactness selects a finite subfamily. Apply the finite-coproduct lattice construction and the finite-affine cover geometry helper of ContinuousEtaleLocalLattices: the scheme coproduct is affine, hence qcqs, and its map to X is etale and surjective. This argument uses only compactness, not Noetherianity, and includes an empty finite family and varying ranks.",
+   "uses": [
+    "lem-weil-pbc-continuous-affine-etale-lattice",
+    "lem-weil-pbc-continuous-lattice-finite-coproduct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_etale_stratified_finite to this qcqs etale cover and retain its constructible strata. On each stratum put q = pullback.snd p j and r = pullback.fst p j. The map q is finite etale by that theorem and surjective by stability of scheme surjectivity under base change. Pull the integral module along r and the rational module along j; locallyFree_upperStar preserves their local freeness. Compose pullIso with the pulled original scalar-extension comparison, upperStarComp, the actual pullback.condition, and upperStarComp again. This gives the precise isomorphism E tensor r* M ≅ q* j* P.",
+   "uses": [
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-continuous-locally-free-pullback",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply continuousFiniteEtaleTrace_lattice to q and this comparison to obtain an epic trace whose actual integral image is locally free. Let F be integral scalar extension and g the composite of the pushed lattice embedding and restricted trace. The underived push comparison and the localization counit make F of the pushed embedding invertible. Naturality of the counit identifies F(g) followed by the counit with that invertible map followed by trace, hence F(g) is epic. The image factorization implies F of the image inclusion is epic. Exactness makes it monic, hence invertible. Composing with the invertible counit gives the adjoint image inclusion. Rewrite the scalar adjunction through mkOfHomEquiv_homEquiv to identify this adjoint with Mod.extendHom. The normed finite-subfield integral coefficient ring and its inclusion agree definitionally with padicIntegersRingObj and padicIntegersToPadicSubfield. Convert raw-cover local freeness back to IsLisseCoefficientModule, giving the finite-field assertion. Package lattice existence as a property of the coefficient diagram; generic proved packing/unpacking transports the normed-field theorem along the definitional equality of its coefficient diagram with the finite-subfield diagram, keeping all actual inclusions and rationalization maps.",
+   "uses": [
+    "lem-sfb-continuous-finite-etale-trace-lattice",
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "lem-weil-pbc-integral-localization-counit",
+    "lem-weil-pbc-integral-underived-push-comparison",
+    "def-weil-pbc-continuous-lattice-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-field assertion to the finite model in the algebraic-closure case. Retain the same strata, lattices and monic inclusions. The displayed final morphism is a composite of the scalar-extension associator, the extension of the invertible lattice rationalization, the invertible coefficient/pullback comparison, and the pullback of the finite-model comparison. Each factor is invertible, so their composite is invertible. This is precisely the displayed composite in the existing theorem; its signature is unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lisse-finite-coefficient-model",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "lem-weil-pbc-continuous-affine-etale-lattice",
+  "lem-weil-pbc-continuous-lattice-finite-coproduct",
+  "lem-weil-pbc-etale-stratified-finite",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-continuous-finite-etale-trace-lattice",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-integral-localization-counit",
+  "lem-weil-pbc-integral-underived-push-comparison",
+  "def-weil-pbc-continuous-lattice-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Etale local lattice existence, finite affine subcover by compactness, constructible finite-etale stratification (Stacks 03S0), trace-image descent, and finite coefficient model. Reuses existing affine and finite-coproduct lattice declarations rather than constructing a separate rank partition and representing scheme."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally free continuous l adic sheaf on a quasi compact quasi separated scheme has integral lattices on a finite constructible stratification",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat}\\n  {inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat}\\n  {ins\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, there exists local ge\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct integral lattices in lisse rational sheaves by the finite etale trace sum without a Noetherian assumption",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.intTrace\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  (B : Type u_6) →\\n    [inst : CommRing A] →\\n      [inst_1 : CommRing B] →\\n        [inst_2 : Algebra A B] →\\n          [IsDomain A] →\\n            [IsIntegrallyClosed A] →\\n              [IsDomain B] → [IsIntegrallyClosed B] → [Module.Finite A B] → [Module.IsTorsionFree A B] → B →ₗ[A] \", \"doc\": \"The linear map from $ B $ to $ A $ over $ A $, constructed using the trace function on the field extension $ L/K $, scalar restriction to $ A $, and the integral closure properties. This map sends eac\"}\n  {\"name\": \"Algebra.intTraceAux\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (B : Type u_6) →\\n        [inst : CommRing A] →\\n          [inst_1 : CommRing B] →\\n            [inst_2 : Algebra A B] →\\n              [inst_3 : Field K] →\\n                [inst_4 : Field L] →\\n                  [inst_5 : Algebra A K] →\\n    \", \"doc\": \"The linear map from $ B $ to $ A $ constructed by composing the trace function on the field extension $ L/K $ with scalar restriction to $ A $, codomain restriction to the integral closure of $ A $ in\"}\n  {\"name\": \"IsIntegralClosure.finite\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is a finitely generated $ A $-module.\"}\n  {\"name\": \"ClassGroup.fintypeOfAdmissibleOfFinite\", \"module\": \"Mathlib/NumberTheory/ClassNumber/Finite\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    (K : Type u_3) →\\n      (L : Type u_4) →\\n        [inst : EuclideanDomain R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : IsDomain S] →\\n              [inst_3 : Field K] →\\n                [inst_4 : Field L] →\\n                  [inst_5 : Algebra R K] \", \"doc\": \"If $ S $ is the integral closure of a Euclidean domain $ R $ in a finite field extension $ L $, and $ S $ forms a Dedekind domain with an admissible absolute value, then the class group of $ S $ is fi\"}\n  {\"name\": \"IsAlmostIntegral.isIntegral\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsNoetherianRing R]\\n  [IsDomain S] [FaithfulSMul R S] {s : S}, IsAlmostIntegral R s → IsIntegral R s\", \"doc\": \"Let $R$ be a Noetherian ring and $S$ be an integral domain which is a faithful $R$-algebra. If an element $s \\\\in S$ is almost integral over $R$, then $s$ is integral over $R$.\\\\n\\\\nAn element $s \\\\in S$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"exists_integral_multiples\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  {L : Type u_3} [inst_4 : Field L] [inst_5 : Algebra K L] [inst_6 : Algebra A L] [IsScalarTower A K L]\\n  [FiniteDimensional K L] [IsDomain A] (s : Finset L), ∃ y, y ≠ 0 ∧ ∀ x ∈ s, IsIn\", \"doc\": \"Let $R$ be an integral domain with field of fractions $K$. Let $L$ be a finite field extension of $K$. Let $A$ be a subring of $L$ that is also an $R$-algebra. For any finite subset $s \\\\subseteq L$, t\"}\n  {\"name\": \"FiniteDimensional.exists_is_basis_integral\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] [inst_5 : Algebra K L] [inst_6 : Algebra A L] [IsScalarTower A K L]\\n  [FiniteDimensional K L] [IsDomain A], ∃ s b, ∀ (x : ↥s), IsIntegral A (b x)\", \"doc\": \"In a finite-dimensional field extension $ L $ over $ K $, there exists a finite set $ s $ and a basis $ b $ of $ L $ over $ K $ such that every element of the basis is integral over the ring $ A $. Th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lisse sheaf over a finite extension of the p adic numbers admits locally free integral lattices after finite stratification",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"ZLattice.module_free\", \"module\": \"Mathlib.Algebra.Module.ZLattice.Basic\", \"type\": \"[IsZLattice K L] : Module.Free ℤ L\", \"doc\": \"Every ℤ-lattice in a normed vector space over a normed field is a free ℤ-module.\"}\n  {\"name\": \"PadicInt\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": Type\", \"doc\": \"The set of p-adic numbers with p-adic norm less than or equal to 1.\"}\n  {\"name\": \"Padic.field\", \"module\": \"Mathlib.NumberTheory.Padics.PadicNumbers\", \"type\": \": Field ℚ_[p]\", \"doc\": \"The p-adic numbers $\\\\mathbb{Q}_p$ form a field, obtained as the Cauchy completion of the rational numbers $\\\\mathbb{Q}$ with respect to the p-adic norm.\"}\n  {\"name\": \"PadicInt.isFractionRing\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": IsFractionRing ℤ_[p] ℚ_[p]\", \"doc\": \"The field of p-adic numbers $\\\\mathbb{Q}_p$ is the fraction field of the ring of p-adic integers $\\\\mathbb{Z}_p$. This means every non-zero element of $\\\\mathbb{Z}_p$ becomes invertible in $\\\\mathbb{Q}_p$\"}\n  {\"name\": \"LocallyConstant.freeOfProfinite\", \"module\": \"Mathlib.Topology.Category.Profinite.Nobeling.Induction\", \"type\": \"(S : Profinite.{u}) : Module.Free ℤ (LocallyConstant S ℤ)\", \"doc\": \"For any profinite space $ S $, the $ \\\\mathbb{Z} $-module of locally constant functions $ S \\\\to \\\\mathbb{Z} $ is free. This means there exists a basis (a linearly independent spanning set) for this modu\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : SheafOfModules.{u} R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Lattice\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"PresheafOfModules.Submodule.instCompleteLattice\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M : PresheafOfModules R} : CompleteLattice M.Submodule\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.Submodule.instCompleteLattice\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} {M : SheafOfModules R} : CompleteLattice M.Submodule\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : CompleteLattice X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : CompleteSemilatticeSup X.IdealSheafData\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \" {X : AlgebraicGeometry.Scheme} : SemilatticeInf X.IdealSheafData\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse.*lattice|lattice.*lisse|etale.*trace.*lattice",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; general algebraic modules, scheme morphisms, constructible subsets or sheaf generators do not state this qcqs pro-étale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse.*lattice|lattice.*lisse|stratified.*lattice",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern scheme regular functions, finite morphisms, quasicoherent sheaf generators or order lattices, not lisse rational coefficient lattices"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite stratification of a qcqs scheme carrying integral lattices in a locally free p adic sheaf",
+   "results": "AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; AlgebraicGeometry.IsFinite.instLocallyOfFiniteType; PadicInt; AlgebraicGeometry.IsFinite.instIsIntegralHom; AlgebraicGeometry.IsArtinianScheme.finite; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern scheme regular functions, finite morphisms, quasicoherent sheaf generators or order lattices, not lisse rational coefficient lattices"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Lattice\"",
+   "results": "PresheafOfModules.Submodule.instCompleteLattice; SheafOfModules.Submodule.instCompleteLattice; AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice; AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup; AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern scheme regular functions, finite morphisms, quasicoherent sheaf generators or order lattices, not lisse rational coefficient lattices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse l adic sheaf on a quasi compact quasi separated scheme admits integral lattices on a finite constructible stratification",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.exists_of_res_eq_of_qcqs; AlgebraicGeometry.IsIntegral.component_integral; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; SheafOfModules.IsFiniteType.exists_localGeneratorsData; AlgebraicGeometry.IsLocallyNoetherian",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern scheme regular functions, finite morphisms, quasicoherent sheaf generators or order lattices, not lisse rational coefficient lattices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral models of locally free sheaves for continuous nonarchimedean field coefficients via finite etale trace and lattice sums",
+   "results": "SheafOfModules.LocalGeneratorsData.I; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.LocalGeneratorsData.X; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.LocalGeneratorsData.generators; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern scheme regular functions, finite morphisms, quasicoherent sheaf generators or order lattices, not lisse rational coefficient lattices"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-rational-integral-localizing-generators",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms (2), closed-complement generator calculation: Rank, sheaf of lattices and pushing down by trace; qcqs extension of returned steps 5–8. Replace the narrower stratification citations by Stacks Tag 03S0, etale-cohomology.tex, lemma-etale-stratified-finite; use finite-subextension-valued lisse-object descent for the algebraic-closure coefficient.",
+   "via": [
+    "lem-sfb-qcqs-rational-integral-localizing-generators",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qcqs-lisse-stratified-integral-lattices",
+  "worker": "stage1",
+  "summary": "Reused existing nodes only. Proved the qcqs assertion by finite-subextension lisse descent, finite clopen rank reduction, the existing qcqs lattice scheme, finite affine étale refinement, Stacks 03S0, and the local trace-image lattice-sum calculation. Avoided the narrower Noetherian trace and stratification conclusions. Checked exact Lean attachment search, coefficient encodings, rank zero and empty schemes.",
+  "blueprint": "Realizes the closed-complement integral-generator input of det-sf-comp-coherence-cocycle through its inherited ancestry, using the rank/lattice-scheme/trace route of sk-lem-stratified-lattice; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-lisse-finite-coefficient-model",
+    "why": "Step 1 needs descent of a lisse object for the finite-subextension-valued coefficient on qcqs schemes; the compactification unit does not give coefficient descent."
+   },
+   {
+    "node": "det-lem-stratified-lattice-rank",
+    "why": "Step 2 needs finite clopen rank loci for a lisse finite-field module on a quasi-compact scheme."
+   },
+   {
+    "node": "det-lem-stratified-lattice-scheme",
+    "why": "Step 3 needs the separated étale representing lattice scheme and its universal embedded lattice on a qcqs base."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+    "why": "Step 3 refines the lattice-scheme covering to a finite affine étale cover without assuming its source quasi-compact."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "why": "Step 3 uses finite coproducts of affine pro-étale objects and their qcqs underlying schemes."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-locally-free-pullback",
+    "why": "Steps 3 and 4 preserve lisse modules on base changes; no such coefficient pullback statement is supplied by the compactification unit."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Steps 3 and 4 use exact underlying coefficient pullback, preserving embedded lattices and their scalar extensions."
+   },
+   {
+    "node": "lem-weil-pbc-etale-stratified-finite",
+    "why": "Step 4 uses exactly the qcqs stratification of an étale morphism in Stacks Tag 03S0, rather than imposing Noetherianity."
+   },
+   {
+    "node": "lem-sfb-embedded-lattice-coefficient-comparison",
+    "why": "Steps 5 and 6 identify embedded internal lattices and their rationalizations with the continuous-function coefficient encoding."
+   },
+   {
+    "node": "lem-sfb-finite-etale-trace-image",
+    "why": "Step 5 uses the globally defined trace image and its local equality with a sum of sheet submodules."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-etale-local-split",
+    "why": "Step 5 uses finite étale local splitting, valid for arbitrary schemes."
+   },
+   {
+    "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "why": "Step 6 makes finitely many lattices simultaneously constant after a local refinement of a free rational module."
+   },
+   {
+    "node": "lem-sfb-continuous-lattice-sum",
+    "why": "Step 6 uses the full sheaf-sum assertion, its local freeness and the rationalization of its inclusion."
+   },
+   {
+    "node": "lem-sfb-internal-extension-inverse-image",
+    "why": "Steps 4 and 7 carry the rationalization isomorphism and the scalar-extension isomorphism alpha along the locally closed immersions; inverse image commuting with internal extension of scalars is not given by the compactification unit (citation added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-lisse-finite-coefficient-model",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-sfb-finite-etale-trace-image",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-sfb-continuous-lattice-sum"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-dd0635d50",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-dd0635d50 (reviewer sub-agent of L); spot-checked: I read the full item, all 14 cited statements, the main-20261015 sk-lem-stratified-lattice proof with its rank/scheme/trace details, sk-lem-coefficient-finite-descent-lisse, and Stacks 03S0 (etale-cohomology.tex:12035, which needs only an étale morphism of qcqs schemes). This is the first one-level split of a node created by the Q155 re-split. It carries every argument of the parent's old steps 5–8 in more detail, the statement is byte-identical to the Q155 snapshot, and there are no new nodes and no SGA. Step checks: (1) the finite-coefficient model is stated for qcqs schemes and the same finite-subextension-valued Ω ring; (2) the rank pieces are clopen, finitely many, and qcqs; (3) the Lat scheme is separated surjective étale on a qcqs base, the singleton surjective étale family is an étale covering, the finite affine refinement gives arrows inside the sieve, and a finite disjoint union of affines is affine with F(∐)=∏F, so the restricted lattices assemble; (4) the 03S0 hypotheses hold because V is affine and X is qcqs, and the surjectivity argument is correct; (5) the embedded-lattice comparison holds on any scheme, the trace-image lemma needs only a finite étale map, the local splitting works on arbitrary schemes, and J is nonempty because p_S is surjective; (6) the lattice-class sheaf is locally constant on a trivialization, Γ_j = g_jA^r has the required bases, and the lattice-sum lemma gives a free rank-r sum with an isomorphic rationalization; (7) a constructible stratum in a clopen piece of qcqs T is constructible in T, which is elementary. Small cases checked: empty T, rank 0, the E case, and non-Noetherian qcqs T. No duplicate: sk-lem-stratified-lattice, lem-sfb-topological-stratified-lisse-lattices and det-lem-stratified-lattice-trace are all narrower (standing or Noetherian bases). All 13 declared tool_uses are accepted. Fault C1/C4, repaired: step 4 (carrying the rationalization F⊗_A B≅L along the immersion) and step 7 (turning i^*α into Λ_S⊗_{F_S}L|_S≅M|_S; it was marked elementary with no uses) both need inverse image to commute with internal extension of scalars, which no cited statement gives. I added lem-sfb-internal-extension-inverse-image to steps 4 and 7 (step 7 also cites sk-prop-sfb-cartesian-coefficients and is now elementary=false), wrote out both arguments, updated proof_deps to the union of the uses, and declared the new tool use. The added citation creates no cycle. Fix: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-qcqs-lisse-stratified-integral-lattices.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QcqsLisseStratifiedIntegralLattices",
+  "declaration": "AlgebraicGeometry.ProEtale.qcqs_lisse_stratified_integral_lattices",
+  "file": "lean/Sheaf/Paper/QcqsLisseStratifiedIntegralLattices.lean",
+  "statement": "theorem qcqs_lisse_stratified_integral_lattices (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] : (∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E.1) T), IsLisseCoefficientModule (Profinite.continuousMapRingObj E.1) M → ∃ S : Scheme.FiniteLocallyClosedStratification T, (∀ s : Fin S.n, Topology.IsConstructible (S.stratum s)) ∧ ∀ s : Fin S.n, ∃ B : Mod (Sheaf (Scheme.ProEt.topology (S.domain s)) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) (S.domain s)), IsLisseCoefficientModule (Profinite.padicIntegersRingObj ℓ E.1) B ∧ ∃ ι : B ⟶ (Mod.comap (padicIntegersToPadicSubfield (S.domain s) ℓ E)).obj ((CondensedRing.upperStar (Profinite.continuousMapRingObj E.1) (S.immersion s)).obj M), Mono ι ∧ IsIso (Mod.extendHom (padicIntegersToPadicSubfield (S.domain s) ℓ E) ι)) ∧ (∀ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T), IsLisseCoefficientModule (Profinite.padicAlgClRingObj ℓ) M → ∃ (F : PadicAlgCl.FiniteIntermediateField ℓ) (L : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj F.1) T)), IsLisseCoefficientModule (Profinite.continuousMapRingObj F.1) L ∧ ∃ e : (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) T)).obj L ≅ M, ∃ S : Scheme.FiniteLocallyClosedStratification T, (∀ s : Fin S.n, Topology.IsConstructible (S.stratum s)) ∧ ∀ s : Fin S.n, ∃ B : Mod (Sheaf (Scheme.ProEt.topology (S.domain s)) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ F.1) (S.domain s)), IsLisseCoefficientModule (Profinite.padicIntegersRingObj ℓ F.1) B ∧ ∃ ι : B ⟶ (Mod.comap (padicIntegersToPadicSubfield (S.domain s) ℓ F)).obj ((CondensedRing.upperStar (Profinite.continuousMapRingObj F.1) (S.immersion s)).obj L), Mono ι ∧ IsIso (Mod.extendHom (padicIntegersToPadicSubfield (S.domain s) ℓ F) ι) ∧ IsIso ((Mod.extendScalarsComp (padicIntegersToPadicSubfield (S.domain s) ℓ F) (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) (S.domain s))).hom.app B ≫ (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) (S.domain s))).map (Mod.extendHom (padicIntegersToPadicSubfield (S.domain s) ℓ F) ι) ≫ (CondensedRing.pullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) (S.immersion s)).hom.app L ≫ (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (S.immersion s)).map e.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-211aa1b73",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Re-delivery after the H4 RETURN of 5434b173. All 5 CondensedRing.LocallyFree uses were replaced by IsLisseCoefficientModule, owned by def-sfb-lisse-coefficient-module, which is now a stmt_dep and a public import; ContinuousLocallyFreePullback is now a plain import. 6 owner definitions were also added to stmt_deps (upper-star, change-of-scalars, extend-restrict adjunction, integers-to-subfield, qlbar-subextension, coefficient-map), all with Lean records. The node differs from live only in lean (live null) and these additive stmt_deps, and lean.statement matches the file verbatim with one sorry. Clause check: qcqs only; the two coefficient conjuncts; the closure case is ordered ∃F, lisse L, e, S; strata are constructible locally closed; each B is lisse over O_F with Mono ι and IsIso extendHom; the final composite extendScalarsComp ≫ extendScalars.map(extendHom ι) ≫ pullIso.hom ≫ upperStar.map e.hom is canonical. Empty T, rank 0 and varying ranks are allowed, with no Noetherian or universe restriction and no pro-étale substitute. Advisory only: owners of pullIso, padicIntegersRingObj and continuousMapRingObj are outside stmt_deps. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261023T230338-L-3417237",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

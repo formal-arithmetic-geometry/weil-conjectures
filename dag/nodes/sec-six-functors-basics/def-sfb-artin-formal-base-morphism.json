@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-artin-formal-base-morphism",
+ "kind": "definition",
+ "title": "Morphisms of formal objects over varying complete local bases",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative Noetherian ring and $k$ a field finite as an $R$-module. Use complete Noetherian local marked $R$-algebras, the test category, evaluation, formal objects and their transition comparisons from [def-sfb-artin-deformation-test-category]. For formal objects $\\eta$ over $B$ and $\\xi$ over $C$, a morphism $\\eta\\to\\xi$ consists of a local residue-preserving $R$-algebra map $f:B\\to C$ and, for every $n\\geq1$, an isomorphism from the evaluation of $\\eta$ along $B\\xrightarrow f C\\to C/\\mathfrak m_C^n$ to $\\xi_n$. These isomorphisms commute with all transition maps, using the canonical evaluation restriction comparisons. The maps to truncations are the actual quotient composites of $f$, not arbitrary auxiliary maps.",
+ "stmt_deps": [
+  "def-sfb-artin-deformation-test-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tags 06H3 (formal objects), 06T2 and 06T3: morphisms of formal objects over varying complete local rings"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Schlessinger S1 category of descent to Artinian test subalgebras and minimal objects",
+   "results": "{\"t\": \"2026-10-24T16:15:50Z\", \"tool\": \"leansearch\", \"query\": \"Schlessinger S1 category of descent to Artinian test subalgebras and minimal objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isArtinianObject\", \"CategoryTheory.Artinian.mk\", \"CategoryTheory.IsArtinianObject\", \"CategoryTheory.Artinian\", \"IsArtinian.set_has_minimal\", \"set_has_minimal_iff_artinian\", \"CategoryTheory.isArtinianObject_of_mono\", \"CategoryTheory.isArtinianObject_iff_antitone_chain_condition\"], \"digest\": \"a4b8c6511cebc268\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching definition in Mathlib. Project search finds the definitions only in the theorem modules being refactored; no definition node owns these notions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schlessinger\"",
+   "results": "{\"t\": \"2026-10-24T16:15:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Schlessinger\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching definition in Mathlib. Project search finds the definitions only in the theorem modules being refactored; no definition node owns these notions."
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|FormalBaseMorphism|DescentCategory",
+   "results": "{\"t\": \"2026-10-24T16:15:51Z\", \"tool\": \"grep\", \"query\": \"Schlessinger|FormalBaseMorphism|DescentCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching definition in Mathlib. Project search finds the definitions only in the theorem modules being refactored; no definition node owns these notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphism of formal deformation objects over different complete local rings with compatible truncation isomorphisms",
+   "results": "{\"t\": \"2026-10-24T16:15:52Z\", \"tool\": \"leanfinder\", \"query\": \"Morphism of formal deformation objects over different complete local rings with compatible truncation isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"DividedPowers.DPMorphism\", \"DividedPowers.IsDPMorphism\", \"DividedPowers.DPMorphism.mk'\", \"IsAdicComplete.liftAlgHom\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.lift\", \"DividedPowers.DPMorphism.isDPMorphism\"], \"digest\": \"77510c348fec2dc9\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching definition in Mathlib. Project search finds the definitions only in the theorem modules being refactored; no definition node owns these notions."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSchlessingerOne|subalgebraTest|DescentData|DescentCategory|IsMinimalDescent|FormalBaseMorphism in lean/Sheaf/AlgebraicGeometry and lean/WeilConjectures; DAG def nodes; blueprint_refs search minimal descent / formal objects",
+   "results": "Only ArtinMinimalDescentTransport declares S1 and S_x; FormalBaseMorphism is in the returned item. Upstream SchemeDescentDataCategory and NormalizedTowerDescentData concern other notions. No definition node owns these definitions; blueprint searches return 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "Move the exact existing bodies into owning definition modules, with no duplicate declarations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-versal-descended-base-power-series",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings differ from a minimal one by formal variables. Supporting input: Tag 06T3, lemma-descends-versal; hypotheses written explicitly from Tag 06T2, lemma-smallest-where-descends-versal. Shared definitions required for descended versality: Tags 06H3 (formal objects), 06T2 and 06T3: morphisms of formal objects over varying complete local rings",
+   "via": [
+    "lem-sfb-versal-descended-base-power-series",
+    "lem-sfb-stack-minimal-versal-power-series",
+    "lem-sfb-stack-versal-ring-smooth-span",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinFormalBaseMorphism",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.FormalBaseMorphism",
+  "declarations": [],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinFormalBaseMorphism.lean",
+  "statement": "structure FormalBaseMorphism {F : CofibredGroupoids.{u, v, w} R k}\n    {B C : CompleteLocalAlgebra R k} (η : FormalObject F B) (ξ : FormalObject F C)",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definition ownership repair authorized explicitly by the maintainer return for 33a28145b624. The existing declaration bodies and names are moved unchanged from their former theorem module; no second definition is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "MAINT-Q35-ownership-1792878687",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Maintenance extraction required/advised by independent H2 return for Q35 immutable head 33a28145b624. Compared extracted declarations byte-for-byte with accepted live ArtinMinimalDescentTransport or the returned item, apart from blueprint owner tags. No mathematical definition or signature changed. Compiled individually using tools/lean_file.sh at 60 s; item-only normal delivery preflight 9a140af884a passed. Mechanical ownership/provenance review only; the repaired item still awaits its normal independent review."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "MAINT-Q35-ownership-1792878687",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Maintenance extraction required/advised by independent H2 return for Q35 immutable head 33a28145b624. Compared extracted declarations byte-for-byte with accepted live ArtinMinimalDescentTransport or the returned item, apart from blueprint owner tags. No mathematical definition or signature changed. Compiled individually using tools/lean_file.sh at 60 s; item-only normal delivery preflight 9a140af884a passed. Mechanical ownership/provenance review only; the repaired item still awaits its normal independent review."
+ }
+}

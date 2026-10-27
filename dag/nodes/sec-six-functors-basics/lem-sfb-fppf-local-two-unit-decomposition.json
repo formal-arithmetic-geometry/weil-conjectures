@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-fppf-local-two-unit-decomposition",
+ "kind": "statement",
+ "title": "Fppf local decomposition with three unit conditions",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and let $u,v\\in\\Gamma(T,\\mathcal O_T)$ be arbitrary global sections. There is an fppf covering $\\{f_i:T_i\\to T\\}_{i\\in I}$ [def-pc-fppf-site] and sections $a_i,b_i\\in\\Gamma(T_i,\\mathcal O_{T_i})$ such that $f_i^*u=a_i+b_i$ and each of $a_i$, $b_i$, and $1+b_i f_i^*v$ is a unit. Neither $u$, $v$ nor $1+uv$ is assumed invertible.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, after equation (4.3.1), printed p.129: fppf-local decomposition u=u′+u″; the same open-polynomial argument gives the stated version without any condition on 1+uv. Read online 2026-10-24; local copy WANTED. No Stacks tag states this specific avoidance lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "Let $p:L=\\mathbf A^1_T\\to T$ be the affine line, with coordinate $x$, and put $P=x(p^*u-x)(1+xp^*v)\\in\\Gamma(L,\\mathcal O_L)$. Let $j:W=D(P)\\hookrightarrow L$ be its open subscheme, and set $f=p\\circ j$. The affine-line definition gives the coordinate $x$ by the compatible polynomial coordinates on the affine opens of $T$; the basic-open lemma makes $D(P)$ open. Thus $j$ is an open immersion.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-basic-open-function",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HZ, lemma-f-open; affine-line construction in def-sbc-affine-space"
+   }
+  },
+  {
+   "text": "The projection $p$ is smooth by sbc-lem-affine-space-smooth with $n=1$. Apply lem-pc-open-immersion-smooth-composition to $j$ and $p$: $f:W\\to T$ is smooth. The forward implication of sbc-lem-smooth-criterion therefore gives that $f$ is flat and locally of finite presentation. No hypothesis on $T$, $u$ or $v$ is needed for these applications.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-pc-open-immersion-smooth-composition",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VA (lemma-composition-smooth), 01VC (lemma-open-immersion-smooth), 01VE (lemma-smooth-locally-finite-presentation), 01VF (lemma-smooth-flat); polynomial smoothness Tag 00T7"
+   }
+  },
+  {
+   "text": "For $t\\in T$, choose an affine open $U=\\operatorname{Spec}R$ containing $t$, let $\\mathfrak p$ be its prime, and put $k=\\kappa(t)$. On $p^{-1}U=\\operatorname{Spec}R[X]$, use the coefficient map $\\phi:R[X]\\to k[X]$. The ring $k[X]$ is a domain by lem-weil-pbc-polynomial-ring-domain; hence $\\mathfrak q=\\ker\\phi$ is prime: $1$ is not in the kernel and $\\phi(AB)=0$ forces $\\phi(A)=0$ or $\\phi(B)=0$. Its contraction to $R$ is $\\mathfrak p$, since the residue map has kernel $\\mathfrak p$. If $\\bar u,\\bar v$ are the images in $k$, the three polynomials $X$, $\\bar u-X$ and $1+\\bar vX$ are nonzero (use respectively the coefficients $1$, $-1$, and constant coefficient $1$). Their product is nonzero in the domain $k[X]$. Thus $P\\notin\\mathfrak q$, so this point belongs to $W$ and maps to $t$. This proves surjectivity of $f$, including over finite residue fields; no rational value of $X$ is required.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-basic-open-function"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Printed p.129, after (4.3.1): fppf-local decomposition; agent supplies the polynomial-kernel proof of surjectivity without assuming 1+uv invertible"
+   }
+  },
+  {
+   "text": "By lem-weil-pbc-basic-open-function, $c=P|_W$ is a unit. Set $b=x|_W$ and $a=f^*u-b$, and write $d=1+bf^*v$, so $c=bad$. Multiplying by $c^{-1}$ exhibits inverses $b^{-1}=ad c^{-1}$, $a^{-1}=bd c^{-1}$ and $d^{-1}=ba c^{-1}$. Also $a+b=f^*u$. Steps 2 and 3, together with the definition of fppf covering, show that the singleton family $\\{f:W\\to T\\}$ is an fppf covering with the required sections. If $T$ is empty this construction still gives the empty open subscheme over it, and joint surjectivity is vacuous.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HZ (lemma-f-open), together with topologies.tex Tag 021L (section-fppf, definition-fppf-covering)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "lem-weil-pbc-basic-open-function",
+  "def-weil-open-immersion",
+  "sbc-lem-affine-space-smooth",
+  "lem-pc-open-immersion-smooth-composition",
+  "sbc-lem-smooth-criterion",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, printed p.129 after equation (4.3.1), decomposition prerequisite; explicit open-polynomial proof supplied by Q138, valid without the source context condition on 1+uv. Local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sum.*units|exists.*[Ii]sUnit|[Ii]sUnit.*exists",
+   "results": "{\"t\": \"2026-10-24T08:40:04Z\", \"tool\": \"grep\", \"query\": \"sum.*units|exists.*[Ii]sUnit|[Ii]sUnit.*exists\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/Jacobson/Ideal.lean\", \"Mathlib/RingTheory/Jacobson/Ideal.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\"], \"digest\": \"0b67ae77722a6503\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring unit alternatives, basic-open membership, and standard smooth presentations do not supply the simultaneous three unit conditions after an fppf covering."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open affine line minus finitely many sections is a surjective smooth morphism and gives locally a sum of two units",
+   "results": "{\"t\": \"2026-10-24T08:40:05Z\", \"tool\": \"leansearch\", \"query\": \"An open affine line minus finitely many sections is a surjective smooth morphism and gives locally a sum of two units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"bd15641a5baa8517\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring unit alternatives, basic-open membership, and standard smooth presentations do not supply the simultaneous three unit conditions after an fppf covering."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnit\", \"add\"",
+   "results": "{\"t\": \"2026-10-24T08:40:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsUnit\\\", \\\"add\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Int.isUnit_add_isUnit_eq_isUnit_add_isUnit\", \"AddChar.val_isUnit\", \"IsQuasiregular.isUnit_one_add\", \"Polynomial.not_isUnit_X_add_C\", \"Polynomial.roots_C_mul_X_add_C_of_IsUnit\", \"IsLocalRing.isUnit_or_isUnit_of_add_one\", \"IsLocalRing.isUnit_or_isUnit_of_isUnit_add\", \"IsLocalRing.of_isUnit_or_isUnit_of_isUnit_add\"], \"digest\": \"b97edc5ce1db8a2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring unit alternatives, basic-open membership, and standard smooth presentations do not supply the simultaneous three unit conditions after an fppf covering."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given elements u v of any commutative ring a faithfully flat finitely presented extension has a unit b with u-b and 1+b*v invertible",
+   "results": "{\"t\": \"2026-10-24T08:40:11Z\", \"tool\": \"leanfinder\", \"query\": \"Given elements u v of any commutative ring a faithfully flat finitely presented extension has a unit b with u-b and 1+b*v invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.jacobian_isUnit\", \"Algebra.IsStandardSmooth\", \"Algebra.SubmersivePresentation.ofHasCoeffs\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"Module.exists_basis_of_span_of_flat\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\"], \"digest\": \"5dc1ffa470fce1d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring unit alternatives, basic-open membership, and standard smooth presentations do not supply the simultaneous three unit conditions after an fppf covering."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sections u and v on a scheme there fppf locally exists b such that b u-b and 1+b*v are all units",
+   "results": "{\"t\": \"2026-10-24T08:40:12Z\", \"tool\": \"leanfinder\", \"query\": \"For sections u and v on a scheme there fppf locally exists b such that b u-b and 1+b*v are all units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"AlgebraicGeometry.Scheme.mem_basicOpen'\", \"AlgebraicGeometry.Scheme.mem_basicOpen''\", \"AlgebraicGeometry.Scheme.mem_basicOpen_top\"], \"digest\": \"859b3e66c3bb8bf1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring unit alternatives, basic-open membership, and standard smooth presentations do not supply the simultaneous three unit conditions after an fppf covering."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme and two global functions u and v, there fppf locally exists b such that b, u-b and 1+v*b are units",
+   "results": "{\"t\": \"2026-10-24T09:05:04Z\", \"tool\": \"leanfinder\", \"query\": \"For any scheme and two global functions u and v, there fppf locally exists b such that b, u-b and 1+v*b are units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.mem_basicOpen_top\"], \"digest\": \"b67d1f1ef6855fe0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic-open functions, local-ring unit alternatives, smoothness or flatness, not the simultaneous three unit conditions on an fppf covering."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open subset D(X*(u-X)*(1+v*X)) in the affine line over a scheme is smooth surjective and supplies a sum of units",
+   "results": "{\"t\": \"2026-10-24T09:06:47Z\", \"tool\": \"leanfinder\", \"query\": \"The open subset D(X*(u-X)*(1+v*X)) in the affine line over a scheme is smooth surjective and supplies a sum of units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.isOpen_smoothLocus\"], \"digest\": \"8838806a5c6983de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic-open functions, local-ring unit alternatives, smoothness or flatness, not the simultaneous three unit conditions on an fppf covering."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnit\", \"add\"",
+   "results": "{\"t\": \"2026-10-24T09:06:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsUnit\\\", \\\"add\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Int.isUnit_add_isUnit_eq_isUnit_add_isUnit\", \"AddChar.val_isUnit\", \"IsQuasiregular.isUnit_one_add\", \"Polynomial.not_isUnit_X_add_C\", \"Polynomial.roots_C_mul_X_add_C_of_IsUnit\", \"IsLocalRing.isUnit_or_isUnit_of_add_one\", \"IsLocalRing.isUnit_or_isUnit_of_isUnit_add\", \"IsLocalRing.of_isUnit_or_isUnit_of_isUnit_add\"], \"digest\": \"b97edc5ce1db8a2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic-open functions, local-ring unit alternatives, smoothness or flatness, not the simultaneous three unit conditions on an fppf covering."
+  },
+  {
+   "tool": "grep",
+   "query": "two.units|sum.*units|exists.*[Ii]sUnit",
+   "results": "{\"t\": \"2026-10-24T09:06:48Z\", \"tool\": \"grep\", \"query\": \"two.units|sum.*units|exists.*[Ii]sUnit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\"], \"digest\": \"4c1141b07c3ab31d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic-open functions, local-ring unit alternatives, smoothness or flatness, not the simultaneous three unit conditions on an fppf covering."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any scheme and functions u v there is a flat locally finitely presented covering with u=a+b and a b and 1+b*v invertible",
+   "results": "{\"t\": \"2026-10-24T09:06:49Z\", \"tool\": \"leansearch\", \"query\": \"For any scheme and functions u v there is a flat locally finitely presented covering with u=a+b and a b and 1+b*v invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"f790fa374bb505c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic-open functions, local-ring unit alternatives, smoothness or flatness, not the simultaneous three unit conditions on an fppf covering."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-lifted-root-gauss-relations",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: unique splitting of the central extension of SL2 in both centre cases. Supporting subargument: Lemma 4.3.3 and proof, printed pp.128--129, followed by equation (4.3.1) and its removal of the unit condition, printed pp.129--130. Prerequisite: Fppf local decomposition with three unit conditions.",
+   "via": [
+    "lem-sfb-sl2-lifted-root-gauss-relations",
+    "lem-sfb-relative-sl2-central-extension-splitting",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fppf-local-two-unit-decomposition",
+  "worker": "stage1",
+  "summary": "Construct the principal open of the affine line on which x, u-x and 1+xv are invertible; prove its smoothness using existing DAG statements and prove surjectivity by an explicit kernel prime over each base point. Every non-elementary input already has a node; no new node is needed. Statement unchanged; no 1+uv condition used. No project attachment found.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), supporting chain through lem-sfb-sl2-lifted-root-gauss-relations: supply the fppf-local unit decomposition used in Conrad p.129. Item ancestry command returns from.node=None, retained as recorded; same_as searched across the whole blueprint, no matching statement.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "General smoothness of the affine-line projection, a geometric tool for the polynomial construction; the item unit has no replacement."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Only its forward implication smooth implies flat and locally of finite presentation is used; generic geometric tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth",
+  "sbc-lem-smooth-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-8b8ad9499",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-8b8ad9499 (reviewer sub-agent of L); spot-checked: Read the item and every cited statement in full. The delivery creates no new nodes and leaves the statement unchanged. The proof's open set is W=D(x(u−x)(1+xv)) in A^1_T. Step 1 cites the affine-space chart, the basic-open lemma (b) and the open-immersion definition. Step 2: the affine line is smooth for any S, so the composite with the open immersion is smooth (Mathlib leaf), and the forward direction of the smooth criterion gives flat and lfp. Step 3 proves surjectivity with q=ker(R[X]→κ(t)[X]). q is prime because κ(t)[X] is a domain, and it contracts to p. P∉q, and basic-open (a) puts q in W. This works without rational points: for T=Spec F_2, u=1, v=0 the generic point lies in W. Step 4: P|W is a unit (basic-open (c)) and equals b·a·(1+bv), so each factor is a unit and a+b=f^*u. Tested cases: v=0, u=0, 1+uv=0, T empty, nilpotents. The statement suffices for the parent lem-sfb-sl2-lifted-root-gauss-relations, whose step needs fppf-local u=a+b with a, b, 1+bv units. Conrad is WANTED (not in the local literature), but the proof is self-contained and checked against Stacks 01HZ, 01VC, 01VE, 01VF, 021L and 00T7. A DAG search found no duplicate. Accepted tool_uses: sbc-lem-affine-space-smooth and sbc-lem-smooth-criterion (forward direction only), both generic smoothness tools."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfLocalTwoUnitDecomposition",
+  "declaration": "AlgebraicGeometry.Scheme.exists_fppf_two_unit_decomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfLocalTwoUnitDecomposition.lean",
+  "statement": "theorem exists_fppf_two_unit_decomposition (T : Scheme.{u}) (u v : Γ(T, ⊤)) : ∃ (I : Type u) (Ti : I → Scheme.{u}) (f : ∀ i, Ti i ⟶ T), Presieve.ofArrows Ti f ∈ fppfPrecoverage T ∧ ∃ (a b : ∀ i, Γ(Ti i, ⊤)), ∀ i, (f i).appTop u = a i + b i ∧ IsUnit (a i) ∧ IsUnit (b i) ∧ IsUnit (1 + b i * (f i).appTop v)",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4999db6a",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Every clause of the Lean statement matches the node: arbitrary scheme T in Scheme.{u}, arbitrary u v : Γ(T,⊤) with no IsUnit hypotheses; ∃ I : Type u with Presieve.ofArrows Ti f ∈ fppfPrecoverage T (Mathlib: flat ⊓ lfp, jointly surjective = def-pc-fppf-site); appTop u = a+b and IsUnit for a, b and 1+b·appTop v. Quantifier order, universes and edge cases (empty T, u=0, v=0, 1+uv=0, F_2) are fine. Node differs from live only in lean, and lean.statement is verbatim in the file. No new nodes; no duplicate in project Lean, DAG or Mathlib. Gates: sorry only, no definitions, docstrings with source place, blueprint id and the 4 proof steps; public statement imports, non-public proof imports present. Report has both required sections. No compile run (no file changed); worker compile clean."
+ }
+}

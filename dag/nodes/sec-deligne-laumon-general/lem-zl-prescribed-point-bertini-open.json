@@ -23,77 +23,48 @@
  ],
  "proof": [
   {
-   "text": "At each closed point of the smooth pure-dimensional scheme, the cotangent fibre has dimension d >= 2. This can be checked on its integral regular connected component, using regularity and the dimension of nonempty opens. The invertible stalk has rank one, so each jet target is nonzero.",
+   "text": "On U use its given finite family tensorSectionsUnit (U.ι followed by j) M (s_i). Define the additive map from k^I by coefficient combination and use the standard basis; its basis values are exactly these sections and its scalar law follows from the structure morphism. Apply Bertini. Specialize its extension field to k. The pullback projection along Spec(k)->Spec(k) is an isomorphism, and zero loci commute with pullback, so cancel this isomorphism to obtain a nonempty open O of coefficients giving smooth zero schemes on U. Naturality of tensor-section units under composition and scalar multiplication identifies these zero schemes with the comap of prescribedPointMember along U.ι. All these comparisons are proved private Lean helpers, not new assumptions.",
    "uses": [
-    "lem-weil-pbc-smooth-over-field-regular-local",
-    "lem-sc-regular-connected-integral",
-    "lem-weil-pbc-smooth-over-field-dimension-differentials",
-    "lem-sc-integral-locally-algebraic-opens-dimension",
-    "lem-weil-pbc-maximal-ideal-differential-cotangent-dimension"
+    "lem-zl-bertini-smooth-member"
    ],
    "elementary": false
   },
   {
-   "text": "For $s\\in S$ let $j_s:V_n\\to(\\mathfrak m_s/\\mathfrak m_s^2)\\otimes_k L_n(s)$ be its first-order evaluation. Its zero fibre is a linear closed subspace of $\\mathbf A(V_n)$ (in bases, it is defined by the linear coordinate equations of $j_s$). Hence $W=\\bigcap_{s\\in S}(\\mathbf A(V_n)\\setminus\\ker j_s)$ is open. Choose a nonzero vector in every nonzero summand of the target. Surjectivity in step 5 lifts the resulting tuple to a vector of $V_n$ lying in $W(k)$. Thus $W$ is nonempty, and its $k$-points have nonzero first-order part at every prescribed point.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Paragraph 2, nonzero first derivative at each s is a nonempty open condition"
-   }
-  },
-  {
-   "text": "Apply Bertini smoothness to the smooth $k$-scheme $X\\setminus S$, the restriction of $L_n$, and the linear restriction map $V_n\\to\\Gamma(X\\setminus S,L_n)$. The vector space is finite-dimensional by step 1; its image generates and its associated map is an immersion by step 2. It yields a nonempty Zariski open $O\\subseteq\\mathbf A(V_n)$ on which the zero schemes restricted to $X\\setminus S$ are smooth. Notice that injectivity of this linear restriction map is not a hypothesis of the cited Bertini theorem.",
+   "text": "Apply the nonzero-jet open lemma to obtain a nonempty open W with every prescribed jet nonzero.",
    "uses": [
-    "lem-zl-bertini-smooth-member"
+    "lem-zl-prescribed-point-nonzero-jet-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0FD6, lemma-bertini, hypotheses (1)-(3) and conclusion"
-   }
+   "elementary": false
   },
   {
-   "text": "The coordinate ring of $\\mathbf A(V_n)$ is a polynomial ring over $k$, hence a domain. Its nilradical is zero and prime, so its spectrum is irreducible. Every nonempty open in an irreducible space is dense: otherwise it and the complement of its closure would be disjoint nonempty opens, whose complements would be two proper closed subsets covering the space. Thus the two nonempty opens $O$ and $W$ are dense, and $U_{\\rm sm}=O\\cap W$ is a nonempty open by finite intersection of dense opens.",
+   "text": "The multivariable polynomial ring over k is a domain, so its spectrum is irreducible. The nonempty opens O and W meet by Mathlib nonempty_preirreducible_inter. Use their intersection as the output open. A coefficient point landing in it lands in each.",
    "uses": [
     "lem-weil-pbc-polynomial-ring-domain",
-    "lem-zl-spectrum-irreducible-nilradical-prime",
-    "lem-trf-finite-dense-open-intersection"
+    "lem-zl-spectrum-irreducible-nilradical-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-    "place": "Paragraph 2, combining the Bertini and derivative open conditions; elementary parameter-space argument with the cited general algebraic/topological tools"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $v\\in U_{\\rm sm}(k)$. It vanishes on $S$. Its zero scheme is smooth off $S$ by step 8. At $s\\in S$, in a local frame write $v=f$ with $f\\in\\mathfrak m_s$. The map $\\mathfrak m_s/\\mathfrak m_s^2\\to\\Omega^1_{X/k}(s)$ sends $f$ to $df(s)$ and is an isomorphism: its inverse sends $da$ to $a-a(s)$ modulo $\\mathfrak m_s^2$; the identity $ab-a(s)b(s)\\equiv a(s)(b-b(s))+b(s)(a-a(s))$ verifies the derivation rule. Thus the nonzero first-order part provided by $v\\in W(k)$ gives $df(s)\\ne0$. The nonzero-relative-differential criterion makes $H_v$ smooth in a neighbourhood of $s$. These neighbourhoods and $H_v\\setminus S$ cover $H_v$, proving smoothness everywhere.",
+   "text": "Fix such a coefficient tuple and let J be prescribedPointMember. A point z of J whose image lies outside S belongs to J.ι inverse-image U. Compare this open zero scheme to (J.comap U.ι).subscheme using the unique isomorphism between their pullback squares. Smoothness there follows from Bertini and cancellation of that isomorphism. If its image lies in S, the nonzero-jet smooth-neighbourhood lemma applies since that image is closed. Choose one such smooth neighbourhood for every point. Their supremum is top, witnessed by each point belonging to its own neighbourhood. Smoothness local on the source now proves the entire member smooth. The nonzero-jet conclusion comes from W.",
    "uses": [
-    "lem-zl-hypersurface-nonzero-relative-differential"
+    "lem-zl-prescribed-point-jet-smooth-neighborhood",
+    "lem-weil-pbc-smooth-local-on-source"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00TR, lemma-rank-omega, proof; Tag 00T7, lemma-standard-smooth; morphisms.tex Tag 01V7, lemma-smooth-locally-standard-smooth"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-smooth-over-field-regular-local",
-  "lem-sc-regular-connected-integral",
-  "lem-weil-pbc-smooth-over-field-dimension-differentials",
-  "lem-sc-integral-locally-algebraic-opens-dimension",
-  "lem-weil-pbc-maximal-ideal-differential-cotangent-dimension",
   "lem-zl-bertini-smooth-member",
+  "lem-zl-prescribed-point-nonzero-jet-open",
   "lem-weil-pbc-polynomial-ring-domain",
   "lem-zl-spectrum-irreducible-nilradical-prime",
-  "lem-trf-finite-dense-open-intersection",
-  "lem-zl-hypersurface-nonzero-relative-differential"
+  "lem-zl-prescribed-point-jet-smooth-neighborhood",
+  "lem-weil-pbc-smooth-local-on-source"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-  "place": "Proof paragraph 2: derivative open, Bertini off S, and smoothness at S"
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 2, Bertini away from S, derivative open, and gluing at S; P5 Lean specialization and assembly"
  },
  "mathlib_searches": [
   {
@@ -244,13 +215,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-7b8b9",
-  "group": "S6",
+  "reviewer": "COMPILER",
+  "group": "P5",
   "result": "pass",
-  "landing": "20261021T151200-L-1170451",
+  "landing": "20261026T023716-L-597141",
   "kind": "interface",
-  "note": "independent cc review: item signature (byte-identical) and moved defs vs live clone; 2 new sorry statements vs Stacks 0FD5/0FD6/0B5T and node texts; #print axioms on item, smooth-member, Cartier purity (sorryAx only via the 2 declared holes); node lean records vs signatures"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

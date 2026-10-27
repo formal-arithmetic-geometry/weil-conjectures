@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-p1-chart-map-composition",
+ "kind": "statement",
+ "title": "Normal form of direct-image composition in the projective-line chart",
+ "statement": "Let A be a commutative ring, N a natural number annihilating A, and t normalized finite twist transport [def-asd-ordinary-finite-p1-arrows]. Let S be a scheme with N invertible in its global sections. Write P=ProjectiveLine(S), q:P→S, W=P×_S P, and choose either projection p:W→P by a Boolean a. Let e:ProjectiveLine(P)→W be its canonical chart [def-sp-p1-diagonal-charts] and r:ProjectiveLine(P)→P the projective projection, so r=e≫p. Put B=A_W(1)[2] and choose any proof hW that N is invertible on W. Then ordinaryFiniteP1DiagonalChartMap [lem-sp-finite-p1-diagonal-kummer-component-formula] is Rp applied to the chart adjunction unit at B, followed by the component at Le(B) of rightDerivedLowerStarCompHom(e,p,r,r=e≫p), followed by Rr applied to the shifted normalized line comparison for e using hW. No exchange map occurs in this equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The composite-adjunction counit in the paragraphs identifying the two projections with base change of q; the direct-image composition step before the trace."
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-sp-p1-diagonal-charts",
+  "lem-sp-finite-p1-diagonal-kummer-component-formula"
+ ],
+ "proof": [
+  {
+   "text": "Expand ordinaryFiniteP1DiagonalChartMap and its recorded ordinaryFiniteChartTransport wrapper. Expand ordinaryFiniteAdjunction to the canonical derived adjunction. Its factors are Rp of the chart adjunction unit, the component of rightDerivedLowerStarComp(e,p), the component of rightDerivedLowerStarCongr(e≫p=r), and Rr of the chart shifted-line comparison.",
+   "uses": [
+    "lem-sp-finite-p1-diagonal-kummer-component-formula"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use r=e≫p from the canonical chart. Prove the direct-image comparison identity at the level of natural transformations: substitute r=e≫p, use rightDerivedLowerStarCongr_refl, and use conjugateEquiv_leftDerivedUpperStarComp_hom. Evaluate at Le(B) with NatTrans.congr_app. Use congrArg and associativity to compose on both sides with the mapped unit and mapped line comparison.",
+   "uses": [
+    "def-sp-p1-diagonal-charts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize to the chart and shifted line. Identify the witnesses of invertibility by proof irrelevance. Compare the recorded category and functor applications by explicit heterogeneous congruence, unfolding only the recorded chart-transport and adjunction wrappers and small object aliases; this avoids expanding derived-category localization data. The resulting equality of propositions transports the preceding proof to the original goal. No positivity is used, including for N=0; both Boolean choices and empty schemes are covered.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-p1-diagonal-kummer-component-formula",
+  "def-sp-p1-diagonal-charts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Canonical chart adjunction-unit pasting, with direct proof of the composite-adjunction comparison identity and explicit congruence for recorded instances. Repair of 20261026T235903-L-1465901: unfold the F1 recorded chart-transport and adjunction wrappers introduced before the global build."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of right derived direct images followed by congruence equals the conjugate inverse image comparison",
+   "results": "Returned generic LocalizerMorphism.rightDerivedFunctorComparison and comparison factorization lemmas, and rightDerivedZeroIsoSelf identities. None states the projective-line chart formula.",
+   "date": "2026-10-26",
+   "verdict": "Generic ingredients only; no exact chart-map statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.congr_app",
+   "results": "One exact hit: CategoryTheory.NatTrans.congr_app in Mathlib.CategoryTheory.Functor.Category. It evaluates a natural-transformation equality but does not expand this chart map.",
+   "date": "2026-10-26",
+   "verdict": "Ingredient only."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStarComp_hom_comp_congr_hom",
+   "results": "No Mathlib match. Local source-library search found the proved identity in WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence, which supplies the middle-factor identity; no existing node states its application to ordinaryFiniteP1DiagonalChartMap.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing source identity; the chart definition-normalization equation remains separate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ChartExchange",
+  "date": "2026-10-26",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The composite-adjunction counit in the paragraphs identifying the two projections with base change of q; the direct-image composition step before the trace.",
+   "via": [
+    "lem-sf-p1-chart-exchange",
+    "lem-sf-p1-integral-trace-comparison",
+    "lem-sf-p1-integral-transport",
+    "lem-sf-p1-coordinate-integrals",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1ChartMapComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1ChartMapComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.chartMap_compHom",
+  "statement": "theorem chartMap_compHom\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u})\n    (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool)\n    (hW : IsUnit (N : Γ(pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S), ⊤))) :\n    ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =\n      let e := (projectiveLineDiagonalChart S a).val.hom\n      let p := projectiveLineDiagonalProjection S a\n      let r := ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S\n      let B := (ordinaryFiniteLine A N hA\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧\n      (ordinaryFinitePushforward A p).map\n          ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) e).unit.app B) ≫\n        (rightDerivedLowerStarCompHom (ModuleCat.{u + 1} A) e p r\n          (projectiveLineDiagonalChart S a).property.symm).app\n            ((ordinaryFinitePullback A e).obj B) ≫\n        (ordinaryFinitePushforward A r).map\n          (ordinaryFiniteShiftedLinePullback A N hA t e hW).hom",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T135315-L-4018632",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T064433-L-2175421",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.SfP1Transport.chartMap_compHom"
+  ],
+  "sorry_after": []
+ }
+}

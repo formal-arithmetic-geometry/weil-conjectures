@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "For any sheaf $M$ of $R_E$-modules, sectionwise multiplication $M(V)\\otimes_{R_E(V)}R_E(V)\\to M(V)$ has inverse $x\\mapsto x\\otimes1$: the balancing relation gives $x\\otimes r=rx\\otimes1$. These inverses commute with restriction. Thus the presheaf tensor is already isomorphic to the sheaf $M$, and sheafification gives $M\\otimes_{R_E}R_E\\cong M$, naturally in $M$. Tensoring with $R_E$ is consequently the identity functor and is exact, so $R_E$ is flat by the definition of flatness. Tensoring with the zero sheaf is zero (every elementary tensor has zero second factor), hence zero is flat as well. For any acyclic complex $F$, the degree-$n$ direct-sum total tensor with $P=R_E[0]$ has just the summand $F^n\\otimes_{R_E}R_E\\cong F^n$; its differential is $d_F^n$ because $d_P=0$. It is therefore isomorphic to $F$ as a complex, hence acyclic. This proves K-flatness directly from its definition and proves that every term of $P$ is flat.",
+   "text": "For any sheaf $M$ of $R_E$-modules, sectionwise multiplication $M(V)\\otimes_{R_E(V)}R_E(V)\\to M(V)$ has inverse $x\\mapsto x\\otimes1$: the balancing relation gives $x\\otimes r=rx\\otimes1$. These inverses commute with restriction. Thus the presheaf tensor is already isomorphic to the sheaf $M$, and sheafification gives $M\\otimes_{R_E}R_E\\cong M$, naturally in $M$. Tensoring with $R_E$ is consequently the identity functor and is exact, so $R_E$ is flat by the definition of flatness. Tensoring with the zero sheaf is zero (every elementary tensor has zero second factor), hence zero is flat as well. For any acyclic complex $F$, the degree-$n$ direct-sum total tensor with $P=R_E[0]$ has just the summand $F^n\\otimes_{R_E}R_E\\cong F^n$; its differential is $d_F^n$ because $d_P=0$. It is therefore isomorphic to $F$ as a complex, hence acyclic. This proves K-flatness directly from its definition and proves that every term of $P$ is flat. In Lean, use the existing monoidal right unitor of complexes for the total-tensor identification, the monoidal flat-unit theorem and siteSheafTensorRightIso for degree zero, and preservation of zero objects for the other degrees. These give the same argument without rebuilding the tensor-unit isomorphisms.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-pc-flat-sheaf-modules",
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Write $S_m=(A_{L,m})_Y$. The balanced map $R_E(V)\\otimes_{R_E(V)}S_m(V)\\to S_m(V)$ sends $r\\otimes z$ to $\\rho_m(r)z$. Its inverse sends $z$ to $1\\otimes z$: their composites are the identity since $1\\otimes\\rho_m(r)z=r\\otimes z$ and $\\rho_m(1)z=z$. Both maps are $S_m(V)$-linear and commute with restrictions. Thus they are inverse presheaf morphisms and induce inverse morphisms after sheafification, giving $u_m$ and its stated inverse. All complexes in this calculation are concentrated in degree zero, so these maps commute with differentials. Step 1 permits the identity K-flat resolution of $P$. The definition of scalar extension along $\\rho_m$ then says exactly that this termwise tensor computes $R_E[0]\\otimes^L_{\\mathcal O_E}A_{L,m}$; the base ring for the tensor is the completed sheaf $R_E$, as stipulated in that definition.",
+   "text": "Write $S_m=(A_{L,m})_Y$. The balanced map $R_E(V)\\otimes_{R_E(V)}S_m(V)\\to S_m(V)$ sends $r\\otimes z$ to $\\rho_m(r)z$. Its inverse sends $z$ to $1\\otimes z$: their composites are the identity since $1\\otimes\\rho_m(r)z=r\\otimes z$ and $\\rho_m(1)z=z$. Both maps are $S_m(V)$-linear and commute with restrictions. Thus they are inverse presheaf morphisms and induce inverse morphisms after sheafification, giving $u_m$ and its stated inverse. All complexes in this calculation are concentrated in degree zero, so these maps commute with differentials. Step 1 permits the identity K-flat resolution of $P$. The definition of scalar extension along $\\rho_m$ then says exactly that this termwise tensor computes $R_E[0]\\otimes^L_{\\mathcal O_E}A_{L,m}$; the base ring for the tensor is the completed sheaf $R_E$, as stipulated in that definition. The Lean construction uses TensorProduct.AlgebraTensorModule.rid sectionwise, glues it with PresheafOfModules.isoMk, and applies the sheafification counit; singleMapHomologicalComplex promotes this isomorphism to single complexes. The K-flat comparison is the final computation conjunct of the recorded derived-change-of-rings witness.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-integral-scalar-extension",
@@ -78,7 +78,7 @@
    }
   },
   {
-   "text": "Put $D=1-s$. Every $T_m$ and hence $B$ is concentrated in degree zero. Unpack the strict mapping cocone $C=\\operatorname{Cone}(D)[-1]$: in its normalized $(\\mathrm{fst},\\mathrm{snd})$ coordinates, $C^n=B^n\\oplus B^{n-1}$ and its differential is $(x,y)\\mapsto(d_Bx,Dx-d_By)$. Here the usual cone differential and the minus sign of the shift give this formula after the sign in the strict first projection is included. In particular $C^0=B^0\\oplus0$, $C^1=0\\oplus B^0$, all other terms vanish, and $d_C^0(x,0)=(0,Dx)$. Define $\\eta^0(s)=(h(s),0)$ in these coordinates and $\\eta^n=0$ for $n\\ne0$. Step 4 gives $d_C^0\\eta^0(s)=(0,Dh(s))=0$. Every other chain-map equation has a zero source term or zero source differential, so also holds. This is the required $R_L$-linear chain map in the strict complex, with the stated first coordinates and zero second component, before localization.",
+   "text": "Put $D=1-s$. Every $T_m$ and hence $B$ is concentrated in degree zero. Unpack the strict mapping cocone $C=\\operatorname{Cone}(D)[-1]$: in its normalized $(\\mathrm{fst},\\mathrm{snd})$ coordinates, $C^n=B^n\\oplus B^{n-1}$ and its differential is $(x,y)\\mapsto(d_Bx,Dx-d_By)$. Here the usual cone differential and the minus sign of the shift give this formula after the sign in the strict first projection is included. In particular $C^0=B^0\\oplus0$, $C^1=0\\oplus B^0$, all other terms vanish, and $d_C^0(x,0)=(0,Dx)$. Define $\\eta^0(s)=(h(s),0)$ in these coordinates and $\\eta^n=0$ for $n\\ne0$. Step 4 gives $d_C^0\\eta^0(s)=(0,Dh(s))=0$. Every other chain-map equation has a zero source term or zero source differential, so also holds. This is the required $R_L$-linear chain map in the strict complex, with the stated first coordinates and zero second component, before localization. In Lean, apply CochainComplex.mappingCocone.lift to the compatible product map and the zero cochain; strictFirst_boundary supplies its compatibility equation.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -117,7 +117,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
-  "place": "Coefficient-object paragraph, regular-module unit calculation and strict cone normalization; background Bhatt-Scholze Definition 3.5.2 and Lemma 6.8.2(1)"
+  "place": "Coefficient-object paragraph, regular-module unit calculation and strict cone normalization; background Bhatt-Scholze Definition 3.5.2 and Lemma 6.8.2(1); Lean implementation by F5: monoidal right unitor, sectionwise AlgebraTensorModule.rid, sheafification counit, and mappingCocone.lift; all six original steps retained."
  },
  "mathlib_searches": [
   {
@@ -291,5 +291,27 @@
   "group": "NL",
   "result": "fix",
   "note": "H3: clause 2 stated Epi of integralCoefficientSheafTransition in Sheaf RingCat, which is weaker than an epimorphism of sheaves (local surjectivity, which the node's Step 2 proves and Step 4 needs). Fixed to Sheaf.IsLocallySurjective with public import Mathlib.CategoryTheory.Sites.LocallySurjective; fixes/ConstantScalarUnitQuasiIsomorphism.lean plus lean-record.json with the new verbatim statement; refit_record clean; nt_compile --json clean, 11.6 s, against live ConstantScalarStrictUnit. All other clauses match the node: finite quotients, ordinary limit with leg = η≫fst≫pr pinned by quotientCoordinates, QuasiIso η, derived-product IsLimit, Roos triangle with Q(inclusion) and Q(boundary), inverse-projection identity, IsComplete none = IsDerivedCompleteUnrestricted for R_E[0]. η is bound with exactly the normalization the dependency proves unique. Universes d/t/u independent; E=L, ramified, empty or disconnected Y and n=0 covered; helpers not hollow; only sorry; source and blueprint docstrings present. Advisory: the §1(B) ConstantScalarStrictUnit module is code-identical to NM's landed module (docstring and by/note-only differences); base 10:00 predates NM's landing, so the landing will likely revert it; suggest --revert-nodes lem-weil-constant-scalar-strict-unit."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261024T185225-L-3483245",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

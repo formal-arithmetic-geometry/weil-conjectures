@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-standard-proj-twist-tensor",
+ "kind": "statement",
+ "title": "Twists and shifted graded-module sheaves on a degree-one covered Proj",
+ "statement": "Let $S=\\bigoplus_{d\\ge0}S_d$ be a nonnegatively graded commutative ring and put $X=\\operatorname{Proj}(S)$ [def-pc-proj]. Assume that the standard opens $D_+(f)$ for $f\\in S_1$ cover $X$. Let $M=\\bigoplus_{d\\in\\mathbf Z}M_d$ be any graded $S$-module, with $S_aM_b\\subseteq M_{a+b}$. Use the associated sheaves and shifts $M(n)_d=M_{n+d}$ of [def-weil-pbc-proj-twisting-sheaf], and put $\\mathcal O_X(n)=\\widetilde{S(n)}$. For all $n\\in\\mathbf Z$, $\\mathcal O_X(n)$ is invertible [def-sc-invertible-module], and the canonical multiplication maps $\\mathcal O_X(a)\\otimes_{\\mathcal O_X}\\mathcal O_X(b)\\longrightarrow\\mathcal O_X(a+b)$ and $\\alpha_{M,n}:\\widetilde M\\otimes_{\\mathcal O_X}\\mathcal O_X(n)\\longrightarrow\\widetilde{M(n)}$ are isomorphisms [def-pur-sheaf-tensor-product]. Here $a,b\\in\\mathbf Z$; on a chart $D_+(f)$ with $f\\in S_1$, the maps send $(u/f^r)\\otimes(v/f^s)$ to $uv/f^{r+s}$, using scalar multiplication when $u$ is in $M$. These multiplication maps are unital, associative, and natural in degree-preserving maps of graded modules.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01MT, lemma-apply-modules, all three multiplication isomorphisms; Tag 01MS, lemma-when-invertible, chart formula; equations equation-multiply and equation-multiply-more-generally."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply gradedModuleSheaf_exists to each shifted grading M(a), whose internal direct-sum decomposition is obtained by reindexing the original decomposition by addition of a. Chart injectivity and the specified scalar and restriction equations identify F(a) with this quasi-coherent associated sheaf. The positive homogeneous basic opens form a basis. Descend each actual twist section to its homogeneous localized fraction by twist_fraction_descent; basicOpen_localization_detection makes that fraction unique and proves its additivity, scalar equation and restriction equation.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-sc-proj-twist-fraction-descent",
+    "lem-sc-proj-basic-open-localization-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01M7 and 01MN; chart description for 01MS."
+   }
+  },
+  {
+   "text": "On each positive basic open multiply the localized module fraction by the descended twist fraction. The shifted degree condition places the result in the chart range, including the zero numerator when its prospective degree is negative. Chart injectivity proves bilinearity. For an inclusion with g^e=c*f, the product of the two restrictions is c^(r+s)*(v*y)/g^(e*(r+s)), which is the restriction of the product. Lift this bilinear map to the sectionwise tensor product, extend the resulting restriction-compatible linear maps from the basis using the sheaf basis-extension equivalence, and descend through the module-sheafification adjunction. This constructs mult(a,b) with the fraction formula on every positive basic open.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "lem-sc-proj-twist-fraction-descent",
+    "lem-sc-proj-basic-open-localization-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Equations multiply and multiply-more-generally preceding Tag 01MS."
+   }
+  },
+  {
+   "text": "Use the existing isInvertible_twist and twistTensorIso, obtained by gluing the degree-one free generators f^a. On any open inside a degree-one chart, write both input sections as scalar multiples of the free generators. The generator equation for twistTensorIso then shows that its output is their pointwise product. These chart computations cover every open and show the product formula globally. The existing unitIsoTwistZero identifies the tensor unit with twist zero.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-module",
+    "def-pc-proj",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MS, degree-one trivializations and multiplication; Tag 01MT."
+   }
+  },
+  {
+   "text": "Two maps out of a sheaf tensor agree if their composites with the sectionwise tensor-to-sheaf map agree: use the module-sheafification adjunction and tensor induction. For the iterated tensors needed here, the two right factors are twists. The source is quasi-coherent; detect equality on sections over the affine degree-one cover, and use the free generator of each twist successively to write every section as a nested pure tensor. Thus pure triples suffice without any assertion of global pure generation. Apply these detection statements, the product formula for twists and injectivity of the module charts to prove both twist unit laws, twist associativity, the module right unit law and module associativity. The equalities reduce respectively to multiplication by one and associativity or commutation of scalar multiplication.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Coherence of equations multiply and multiply-more-generally; sheafification tensor product as in Modules on Sites, Section 03EK."
+   }
+  },
+  {
+   "text": "The module unit equation implies mult(a,0) is an isomorphism. Module associativity at (a,b,-b) implies that (mult(a,b) tensor O(-b)) followed by mult(a+b,-b) is an isomorphism, since b+(-b)=0 and the twist comparison is an isomorphism. Applying this to (a+b,-b) shows every mult(a,b) is epic, after transporting the integer indices. The same composite shows mult(a,b) tensor O(-b) is monic. Tensoring with O(-b) is an equivalence, with inverse tensoring with O(b), so it reflects monomorphisms. Thus mult(a,b) is both monic and epic, hence an isomorphism in the abelian category of sheaves of modules. This replaces construction and overlap gluing of a separate local inverse.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MS and Tag 01MT; categorical consequence of their multiplication and coherence identities."
+   }
+  },
+  {
+   "text": "For naturality, the source F(a) tensor O(b) is quasi-coherent. Restriction to the degree-one affine cover detects equality of morphisms from this source, and on each affine member equality is detected on sections. Since O(b) is free there on f^b, each tensor section is a pure tensor with that generator. Write the two factors as localized fractions. The assumed fraction equations for chi, beta and mult identify the two sides with phi(v*y)/f^(r+s) and v*phi(y)/f^(r+s), equal by S-linearity. No construction of a new tilde functor is required. Empty charts and zero modules are included in these universal properties.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-sc-proj-twist-fraction-descent",
+    "lem-sc-proj-basic-open-localization-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M7 functoriality and naturality of equation multiply-more-generally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sc-proj-basic-open-localization-detection",
+  "lem-sc-proj-twist-fraction-descent",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "V6 formalization of the fraction construction of 01MS/01MT, using existing degree-one twist trivializations; categorical inversion from the proved module unit and associativity laws replaces a separately glued inverse. Tensor detection uses the sheafification adjunction; for iterated tensors the quasi-coherent source and the two free twist generators suffice."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "twist|Twist|gradedModule|GradedModule",
+   "results": "{\"t\": \"2026-10-22T04:34:11Z\", \"tool\": \"grep\", \"query\": \"twist|Twist|gradedModule|GradedModule\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj hits concern its structure sheaf; the tensor-product hits concern algebraic graded tensor products or affine tilde, not the twist of an arbitrary graded-module sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a graded module on Proj multiplication gives tilde M tensor O(n) isomorphic to tilde of M(n)",
+   "results": "{\"t\": \"2026-10-22T04:34:12Z\", \"tool\": \"leansearch\", \"query\": \"For a graded module on Proj multiplication gives tilde M tensor O(n) isomorphic to tilde of M(n)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.algebraMap_gradedMul\", \"TensorProduct.gradedMul\", \"ModuleCat.tildeInModuleCat\", \"GradedTensorProduct.mul_def\", \"TensorProduct.gradedMul_def\", \"TensorProduct.tmul_of_gradedMul_of_tmul\", \"ModuleCat.tilde\", \"GradedTensorProduct.tmul\"], \"digest\": \"ea1819b17d99ae65\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj hits concern its structure sheaf; the tensor-product hits concern algebraic graded tensor products or affine tilde, not the twist of an arbitrary graded-module sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On Proj of a ring generated in degree one the associated sheaf of a shifted graded module is its tensor product with the invertible twisting sheaf",
+   "results": "{\"t\": \"2026-10-22T04:34:17Z\", \"tool\": \"leanfinder\", \"query\": \"On Proj of a ring generated in degree one the associated sheaf of a shifted graded module is its tensor product with the invertible twisting sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.Proj.toSheafedSpace\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\"], \"digest\": \"77bbebd97361245e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj hits concern its structure sheaf; the tensor-product hits concern algebraic graded tensor products or affine tilde, not the twist of an arbitrary graded-module sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T04:35:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj hits concern its structure sheaf; the tensor-product hits concern algebraic graded tensor products or affine tilde, not the twist of an arbitrary graded-module sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree shift of a graded module sheaf equals tensoring with O(n) on projective spectrum generated by elements of degree one",
+   "results": "{\"t\": \"2026-10-22T04:35:30Z\", \"tool\": \"leanfinder\", \"query\": \"Degree shift of a graded module sheaf equals tensoring with O(n) on projective spectrum generated by elements of degree one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.pow_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"AlgebraicGeometry.Proj.toSheafedSpace\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\"], \"digest\": \"220bc1d04dd470e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj hits concern its structure sheaf; the tensor-product hits concern algebraic graded tensor products or affine tilde, not the twist of an arbitrary graded-module sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a degree-one homogeneous element f in a graded ring, localization components are free rank one and multiplication gives tensor isomorphisms",
+   "results": "{\"t\": \"2026-10-22T04:58:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a degree-one homogeneous element f in a graded ring, localization components are free rank one and multiplication gives tensor isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.isLocalization_mul\", \"HomogeneousLocalization.awayMap\", \"HomogeneousLocalization.map\", \"HomogeneousLocalization.awayMapₐ\", \"HomogeneousLocalization\", \"HomogeneousLocalization.homogeneousLocalizationAlgebra\", \"HomogeneousLocalization.awayMap_mk\", \"TensorProduct.one_gradedMul\"], \"digest\": \"4c523a36b9ba4606\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization, TensorProduct, graded localization",
+   "results": "{\"t\": \"2026-10-22T04:58:28Z\", \"tool\": \"loogle\", \"query\": \"HomogeneousLocalization, TensorProduct, graded localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `graded`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: this query was rejected for an unknown identifier; the valid HomogeneousLocalization.Away, TensorProduct query was run separately."
+  },
+  {
+   "tool": "grep",
+   "query": "degreeZeroFractions|HomogeneousLocalization|tensor.*graded|graded.*tensor",
+   "results": "{\"t\": \"2026-10-22T04:58:28Z\", \"tool\": \"grep\", \"query\": \"degreeZeroFractions|HomogeneousLocalization|tensor.*graded|graded.*tensor\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"006bafead7979096\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "degree one localization of graded ring multiplication tensor isomorphism",
+   "results": "{\"t\": \"2026-10-22T04:58:29Z\", \"tool\": \"leansearch\", \"query\": \"degree one localization of graded ring multiplication tensor isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.one_gradedMul\", \"GradedTensorProduct.instMul\", \"GradedTensorProduct.mulHom\", \"GradedTensorProduct.tmul_coe_mul_one_tmul\", \"TensorProduct.gradedMul_one\", \"IsLocalization.atOne\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"TensorProduct.gradedComm_one\"], \"digest\": \"4d5e2e0ef2eb3a9c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.Away, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T04:58:49Z\", \"tool\": \"loogle\", \"query\": \"HomogeneousLocalization.Away, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\"], \"digest\": \"baabb8f5697f832f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "gradedMul|tensorProd|TensorProduct.*map|isLocalization_mul",
+   "results": "{\"t\": \"2026-10-22T04:58:49Z\", \"tool\": \"grep\", \"query\": \"gradedMul|tensorProd|TensorProduct.*map|isLocalization_mul\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\"], \"digest\": \"70c5bb53d725f2f2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication map from degree zero localization tensor degree n localization to degree n module localization is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T04:58:51Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplication map from degree zero localization tensor degree n localization to degree n module localization is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.moduleTensorEquiv\", \"IsLocalizedModule.map_lTensor\", \"IsLocalizedModule.rTensor\", \"IsLocalization.moduleLid\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"IsLocalization.algebraTensorEquiv\", \"IsLocalization.Away.tensorRightEquiv\", \"GradedTensorProduct.liftEquiv\"], \"digest\": \"303c99930b17f144\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "twist|Twist|GradedModule|gradedModule|tilde",
+   "results": "{\"t\": \"2026-10-22T05:06:34Z\", \"tool\": \"grep\", \"query\": \"twist|Twist|GradedModule|gradedModule|tilde\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T05:06:34Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre twisting sheaves on Proj of a graded ring: tensor product of twists and shift of any graded module give canonical multiplication isomorphisms",
+   "results": "{\"t\": \"2026-10-22T05:06:34Z\", \"tool\": \"leansearch\", \"query\": \"Serre twisting sheaves on Proj of a graded ring: tensor product of twists and shift of any graded module give canonical multiplication isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.algebraMap_gradedMul\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.Proj.mul_apply\", \"TensorProduct.gradedMul\", \"AlgebraicGeometry.Proj.toSheafedSpace\", \"TensorProduct.tmul_of_gradedMul_of_tmul\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\"], \"digest\": \"6f122bbf3682d413\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a projective spectrum covered by degree one basic opens the twists are invertible and tilde M tensor O(n) is tilde of the shifted graded module, naturally and associatively",
+   "results": "{\"t\": \"2026-10-22T05:06:36Z\", \"tool\": \"leanfinder\", \"query\": \"On a projective spectrum covered by degree one basic opens the twists are invertible and tilde M tensor O(n) is tilde of the shifted graded module, naturally and associatively\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι_assoc\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.Proj.basicOpenToSpec_SpecMap_awayMap_assoc\"], \"digest\": \"d1c0234348ec7a67\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give homogeneous-localization, structure-sheaf or algebraic tensor infrastructure, not the arbitrary graded-module sheaf twist isomorphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-graded-module-section-tail",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; comparison prerequisite: canonical sections of shifted finite graded modules recover all sufficiently large homogeneous pieces (Stacks 0AG7). Prerequisite for the comparison: identify tensor twists with shifted associated sheaves (Stacks 01MT).",
+   "via": [
+    "lem-sfb-finite-graded-module-section-tail",
+    "lem-sfb-projective-coordinate-ring-euler-polynomial",
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-standard-proj-twist-tensor",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all creator provenance. Gave seven steps following Stacks 01MS/01MT: construct the canonical sheaf maps from balanced fraction products, trivialize every twist on degree-one charts, write and check the inverse for an arbitrary shifted module, pass to the global cover, and prove unit, associativity and naturality on generators using sheafification uniqueness. Reused the existing Proj sheaf, standard-open, basis-morphism and functoriality nodes; no new node is needed.",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/Hilbert-polynomial prerequisite chain in blueprint.from.place: finite graded-module section-tail requires identifying tensor twists with shifted associated sheaves. Steps 1-4 realize exactly this Stacks 01MS chart calculation, step 5 realizes 01MT, and steps 6-7 justify the graded section-module action. The inherited from.node is null (blueprint_refs ancestor prints None); no different ancestor is invented. The polynomial-Proj blueprint lem-pc-twist-tensor is a strictly narrower statement, so same_as remains empty.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "Generic chart-section, restriction and quasi-coherence theorem for arbitrary graded modules, used to implement the local coherent-sheaf prerequisite; the six-functor unit has no replacement for this scheme construction."
+   },
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Generic topology of Proj: the standard-open basis and invertibility of f after restricting inside D_+(f); no six-functor unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-morphism-on-basis",
+    "why": "Generic extension and detection of sheaf morphisms on a topological basis, including presheaf sources; used only to implement the fraction maps and their inverses."
+   },
+   {
+    "node": "lem-sc-p1-proj-tilde-functorial",
+    "why": "Despite its historical id, the statement is functoriality of tilde for every graded ring and module, and supplies exactly the map-on-fractions formula for naturality."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic monoidal structure of sheaves of O-modules: fixes the associator and unitors, induced sectionwise, against which step 6 checks the unit and associativity of the multiplication maps."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+    "why": "Generic uniqueness of bilinear families on sheafified modules; reduces the associativity of maps out of the iterated sheaf tensor in step 6 to local pure triples."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-2008076db",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-2008076db (reviewer sub-agent of L); spot-checked: Read in full: the item, its 7 steps and every cited statement, plus Stacks constructions.tex: equation-multiply / equation-multiply-more-generally, 01MS (lemma-when-invertible, with proof) and 01MT (lemma-apply-modules). The statement is unchanged and agrees with 01MT: same degree-one cover hypothesis, the M(n)_d=M_{n+d} sign is correct, and the unital/associative/natural clauses are the creator's and true. No new nodes. The item is not on the route-pivot drop list and is still unsplit live. Steps checked: step 1 chart sections from exists (a)-(c); step 2 restriction formula c^{r+s}vu/g^{e(r+s)} and linearity extended by basis + separation; step 3 f a unit of S_h by standard-open-inclusion (1); step 4 inverse (f^{-n}y)⊗f^n with overlap c=(g/f)^n balancing verified, valid for n<0; step 5 glued β and βα=1 via (tf^{-n})∈(S_h)_0 at one sheafification level; step 7 naturality via tilde-functorial. Fault C1/C4: step 6 compared maps out of the iterated sheaf tensor (M~⊗O(a))⊗O(b) using only the sheafification universal property, which does not reach local pure triples, and the associator came from no node. FIX: step 6 now cites lem-pc-sheaf-modules-tensor-closed (associator and unitors induced sectionwise) and lem-pc-sites-module-sheafification-bilinear-extension-uniqueness (O=R=O_X, id), with the bilinear-family argument written out, and is marked elementary:false. Minor: step 3 used O_X=O_X(0) before step 6 established it; I added the identification citing def-pc-proj. Neither added node reaches the item, so there is no cycle. Both are added to proof_deps and tool_uses as generic off-unit tools. I accept the four declared tool_uses. Duplicate check: lem-trf-proj-twist-section-basic-open and lem-trf-proj-common-degree-twist-invertible only define W_d and do not state the M~ comparison; the p1 and polynomial chart nodes are narrower. Edge cases M=0, a<0, torsion M, nilpotent f, empty X and k[t] with deg t=2 are consistent.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StandardProjTwistTensor",
+  "declaration": "AlgebraicGeometry.Proj.standardProjTwistTensor",
+  "declarations": [
+   "AlgebraicGeometry.Proj.IsStandardProjShiftSheaf",
+   "AlgebraicGeometry.Proj.IsStandardProjTensorMultiplication",
+   "AlgebraicGeometry.Proj.IsStandardProjGradedMap",
+   "AlgebraicGeometry.Proj.standardProjTwistTensor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardProjTwistTensor.lean",
+  "statement": "theorem standardProjTwistTensor (cover : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ basicOpen 𝒜 f) (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜) (hsmul : ∀ (k : ℕ) (n : ℤ) (s : S) (y : M), s ∈ 𝒜 k → y ∈ 𝓜 n → s • y ∈ 𝓜 (k + n)) (F : ℤ → (Proj 𝒜).Modules) (chart : ∀ (n : ℤ) (f : S) (d : ℕ), 0 < d → f ∈ 𝒜 d → Γ(F n, basicOpen 𝒜 f) →+ LocalizedModule.Away f M) (hF : IsStandardProjShiftSheaf 𝒜 𝓜 F chart) : (∀ n : ℤ, (twist 𝒜 n).IsInvertible) ∧ (∀ (a b : ℤ) (U : (Proj 𝒜).Opens) (s : Γ(twist 𝒜 a, U)) (t : Γ(twist 𝒜 b, U)) (p : U), (((twistTensorIso 𝒜 cover a b).hom.app U (tmulSection s t)).1 p : Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) = (s.1 p : Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) * t.1 p) ∧ (∀ a : ℤ, (unitIsoTwistZero.hom ▷ twist 𝒜 a) ≫ (twistTensorIso 𝒜 cover 0 a).hom ≫ eqToHom (congrArg (twist 𝒜) (zero_add a)) = (λ_ (twist 𝒜 a)).hom) ∧ (∀ a : ℤ, (twist 𝒜 a ◁ unitIsoTwistZero.hom) ≫ (twistTensorIso 𝒜 cover a 0).hom ≫ eqToHom (congrArg (twist 𝒜) (add_zero a)) = (ρ_ (twist 𝒜 a)).hom) ∧ (∀ a b c : ℤ, ((twistTensorIso 𝒜 cover a b).hom ▷ twist 𝒜 c) ≫ (twistTensorIso 𝒜 cover (a + b) c).hom ≫ eqToHom (congrArg (twist 𝒜) (add_assoc a b c)) = (α_ (twist 𝒜 a) (twist 𝒜 b) (twist 𝒜 c)).hom ≫ (twist 𝒜 a ◁ (twistTensorIso 𝒜 cover b c).hom) ≫ (twistTensorIso 𝒜 cover a (b + c)).hom) ∧ ∃ mult : ∀ a b : ℤ, F a ⊗ twist 𝒜 b ⟶ F (a + b), IsStandardProjTensorMultiplication 𝒜 F chart mult ∧ (∀ a b : ℤ, IsIso (mult a b)) ∧ (∀ a : ℤ, (F a ◁ unitIsoTwistZero.hom) ≫ mult a 0 ≫ eqToHom (congrArg F (add_zero a)) = (ρ_ (F a)).hom) ∧ (∀ a b c : ℤ, (mult a b ▷ twist 𝒜 c) ≫ mult (a + b) c ≫ eqToHom (congrArg F (add_assoc a b c)) = (α_ (F a) (twist 𝒜 b) (twist 𝒜 c)).hom ≫ (F a ◁ (twistTensorIso 𝒜 cover b c).hom) ≫ mult a (b + c)) ∧ (∀ (N : Type u) [AddCommGroup N] [Module S N] (𝓝 : ℤ → AddSubgroup N) (G : ℤ → (Proj 𝒜).Modules) (chartG : ∀ (n : ℤ) (f : S) (d : ℕ), 0 < d → f ∈ 𝒜 d → Γ(G n, basicOpen 𝒜 f) →+ LocalizedModule.Away f N) (hG : IsStandardProjShiftSheaf 𝒜 𝓝 G chartG) (phi : M →ₗ[S] N) (hphi : ∀ (n : ℤ) (y : M), y ∈ 𝓜 n → phi y ∈ 𝓝 n) (chi : ∀ n : ℤ, F n ⟶ G n), IsStandardProjGradedMap 𝒜 F G chart chartG phi chi → ∀ beta : ∀ a b : ℤ, G a ⊗ twist 𝒜 b ⟶ G (a + b), IsStandardProjTensorMultiplication 𝒜 G chartG beta → ∀ a b : ℤ, (chi a ▷ twist 𝒜 b) ≫ beta a b = mult a b ≫ chi (a + b))",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The associated sheaves of all shifts are specified by the injective fraction-chart interface of gradedModuleSheaf_exists, with its scalar and restriction laws; the helper predicates only package these equations and the canonical fraction formulas. The theorem constructs actual isomorphism maps, with unit, associativity and naturality. The twist-only comparison is the existing twistTensorIso, not a second twist construction. Setting a=0 gives the item, and arbitrary a applies that same assertion to M(a)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00468a1a0",
+  "group": "NW",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: degree-one cover hypothesis (same form as twistTensorIso); arbitrary ℤ-graded M with IsInternal/hsmul identical to gradedModuleSheaf_exists; shifted sheaves F n specified by that existence interface with grading 𝓜(n+k) (satisfiable, unique up to unique iso); all O(n) IsInvertible; μ = twistTensorIso (canonical gluing) pinned pointwise as product of germs, with left/right unit and associativity; ∃ mult : F a ⊗ O(b) ⟶ F(a+b) fixed uniquely by the chart formula v•y/f^(r+s) on degree-one charts (O(b) free on f^b, quasi-coherent source on affine D_+(f), degree-one charts cover), with IsIso, right unit, associativity with μ, and naturality for degree-preserving φ via a tilde_functorial-style pin. Pointwise pin of t consistent (S_f = A[f^±] injects into its localizations at q[f^±]). Edge cases (empty Proj, nilpotent f, M=0, negative shifts, zero divisors) fine; universe convention as recorded dep. Recorded statement matches the file exactly; only the lean field changed; helpers are Prop predicates with real content, sorry-only proof, docstrings with source/blueprint and 7 proof steps, plain imports = proof-dep modules, lines ≤ 90. Advisory: twistTensorIso is an existing project definition no DAG node records (canonical and pinned); degreeZeroFractions is reachable through the statement dependencies."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261024T021104-L-2709652",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,6 +14,11 @@ public import Sheaf.Paper.CondensedAmbientExchange
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
+import all Sheaf.Paper.IntegralCoefficientExtComparison
+import all Sheaf.Paper.IntegralConstantModelHeartClosure
+import all Sheaf.Paper.IntegralProperCohomologicalBounds
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import Sheaf.Paper.IntegralLocalizingProperBaseChange
 import Sheaf.Paper.IntegralProperProjectionFormula
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
@@ -37,6 +42,8 @@ set_option autoImplicit false
 
 -- Keep the coefficient inverse image opaque while elaborating derived endpoints.
 attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
+attribute [local irreducible]
+  AlgebraicGeometry.ProEtale.CondensedRing.derivedComapLowerStarIso
 
 universe u
 
@@ -49,6 +56,32 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
   (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+
+attribute [local irreducible] integerRingSheafIso
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+private theorem integral_localizing_eq (T : Scheme.{u})
+    [T.Over (Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
+    [IsSeparated (T ↘ Spec (.of k))] :
+    localizingClosureProEtale (Profinite.padicIntegersRingObj ℓ E.val) T =
+      localizingClosure
+        (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) T) := by
+  let : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace
+    (T ↘ Spec (.of k))
+  let : QuasiSeparatedSpace T := quasiSeparatedSpace_of_quasiSeparated
+    (T ↘ Spec (.of k))
+  exact (localizingClosure_ctf_equals_bc ℓ T
+    (Profinite.padicIntegersRingObj ℓ E.val)
+    (Or.inr (Or.inr (Or.inl ⟨E, Or.inl ⟨Iso.refl _⟩⟩)))).1.2.2.2.1
+
+private theorem localizing_iso {C : Type*} [Category C]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (S : ObjectProperty C) {A B : C} (e : A ≅ B)
+    (hA : localizingClosure S A) : localizingClosure S B := by
+  intro P hP hS
+  let := hP.2.1
+  exact P.prop_of_iso e (hA P hP hS)
 
 section OpenImage
 
@@ -65,8 +98,10 @@ Source: blueprint main-20261015, sk-thm-sf-pf-adic, first assertion
 Proof: the standing finite-type separated hypotheses give qcqs by
 lem-weil-pbc-qcqs-over-affine. Apply clause (2) of
  det-def-localizing-closure-ctf-equals-bc to identify Dctf with Dbc for O_E.
-The coefficient sheaves are precisely the pulled-back condensed O_E sheaves required by
- det-thm-sf-pf-adic-open. Its final conclusion places Rj_*K in Dbc(X,O_E); the same
+The proved integer-ring isomorphism identifies the embedded and spectral coefficient
+presentations. Exact scalar restriction preserves bounded constructible cohomology, and
+its derived direct-image comparison transports det-thm-sf-pf-adic-open back to the
+pulled-back embedded coefficient ring. Its final conclusion places Rj_*K in Dbc(X,O_E); the same
 identification gives Dctf(X,O_E). That detail theorem proves derived completeness by
 Stacks 099L, identifies residue reduction with the direct image of the reduction because
 reduction is a cone, applies torsion open finiteness, then uses the residue criterion 09C1.
@@ -78,8 +113,48 @@ theorem integralOpenDirectImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact 
         ((moduleObjectDerivedPushforward (Profinite.padicIntegersRingObj ℓ E.val) j).obj K.obj) ∧
       DerivedCategory.finiteTorAmplitude _
         ((moduleObjectDerivedPushforward
-          (Profinite.padicIntegersRingObj ℓ E.val) j).obj K.obj) := by
-  sorry
+          (Profinite.padicIntegersRingObj ℓ E.val) j).obj K.obj)   := by
+  let : FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val) :=
+    (ULift.moduleEquiv (R := ℚ_[ℓ]) (M := E.val)).symm.finiteDimensional
+  let eR := integerRingSheafIso.{u} ℓ ⟨E.val, E.property⟩
+  let e : Profinite.padicIntegersRingObj.{u} ℓ E.val ≅
+      DerivedNakayama.integerRing ℓ (ULift.{u} E.val) :=
+    (sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
+  have : IsMonHom e.hom := by
+    dsimp only [e]
+    exact Sheaf.isMonHom_sheafCompose_map _ eR.hom
+  have : IsMonHom e.inv := by dsimp only [e]; infer_instance
+  let T : Mod (Sheaf (ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) U) ⥤
+      Mod (Sheaf (ProEt.topology U) Ab.{u + 1})
+        (condensedRingObj (DerivedNakayama.integerRing ℓ (ULift.{u} E.val)) U) :=
+    Mod.comap (coefficientMap e.inv U)
+  have hK := (bounded_transport_iff e U K.obj).2 K.property.1
+  have h := (IntegralOpenDirectImage.integral_open_direct_image ℓ (ULift.{u} E.val)
+    j k (T.mapDerivedCategory.obj K.obj) hK).2.2.1
+  have (Z : Scheme.{u}) :
+      PreservesFiniteLimits (Mod.extendScalars (coefficientMap e.inv Z)) :=
+    preservesFiniteLimits_of_natIso (Mod.extendScalarsIsoComapInv _).symm
+  let i := (derivedComapLowerStarIso e.inv j).app K.obj
+  have hbc : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X
+      ((moduleObjectDerivedPushforward (Profinite.padicIntegersRingObj ℓ E.val) j).obj K.obj) :=
+    (bounded_transport_iff e X _).1
+      ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso i.symm h.1,
+        fun n ↦ constructible_iso
+          (Λ := DerivedNakayama.integerRing ℓ (ULift.{u} E.val))
+          ((DerivedCategory.homologyFunctor _ n).mapIso i.symm) (h.2 n)⟩
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of k))
+  let : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated
+    (X ↘ Spec (.of k))
+  have heq := (localizingClosure_ctf_equals_bc ℓ X
+    (Profinite.padicIntegersRingObj ℓ E.val)
+    (Or.inr (Or.inr (Or.inl ⟨E, Or.inl ⟨Iso.refl _⟩⟩)))).1.2.2.1
+  change (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X ⊓
+    DerivedCategory.finiteTorAmplitude _) _
+  rw [heq]
+  exact hbc
 
 end OpenImage
 
@@ -125,8 +200,12 @@ theorem integralProperBaseChange {X' Y' : Scheme.{u}}
           ((moduleObjectDerivedPullback (Profinite.padicIntegersRingObj ℓ E.val) g').obj K)) ∧
       IsIso ((condensedAmbientExchange
         (Profinite.padicIntegersRingObj ℓ E.val) sq).app K) := by
-  sorry
+  rw [integral_localizing_eq ℓ E k X] at hK
+  rw [integral_localizing_eq ℓ E k Y']
+  exact integralLocalizing_properBaseChange ℓ k E.val sq K hK
 
+-- Retain the standing setting even though the conclusion only names the coefficient ring.
+include k in
 /-- The proper projection formula is an isomorphism inside the localizing closure of Dctf.
 Source: blueprint main-20261015, sk-thm-sf-pf-adic, projection assertion
 (blueprint: sk-thm-sf-pf-adic).
@@ -159,7 +238,28 @@ theorem integralProperProjection
           (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj K).obj
             ((moduleObjectDerivedPullback (Profinite.padicIntegersRingObj ℓ E.val) f).obj L))) ∧
       IsIso (moduleObjectProjectionMap (Profinite.padicIntegersRingObj ℓ E.val) f K L) := by
-  sorry
+  rw [integral_localizing_eq ℓ E k X] at hK
+  rw [integral_localizing_eq ℓ E k Y] at hL ⊢
+  obtain ⟨_, htensor, hprojection⟩ := integralProperProjectionFormula ℓ E k f
+  have hmap := hprojection K L hK hL
+  let := hmap
+  let sq : ChosenCartesianSquare (𝟙 X) f f (𝟙 Y) :=
+    { w := by simp
+      isoPullback := (asIso (pullback.fst f (𝟙 Y))).symm
+      hom_fst := by simp
+      hom_snd := by simp }
+  have hpush := (integralLocalizing_properBaseChange ℓ k E.val sq K hK).1
+  let e := leftDerivedUpperStarIsoMapDerivedCategory
+      (Profinite.padicIntegersRingObj ℓ E.val) (𝟙 Y) ≪≫
+    Functor.mapDerivedCategoryNatIso
+      (AlgebraicGeometry.ProEtale.CondensedRing.upperStarId
+        (Profinite.padicIntegersRingObj ℓ E.val) Y) ≪≫
+    Functor.mapDerivedCategoryIdIso _
+  have hp := localizing_iso _ (e.app
+    ((moduleObjectDerivedPushforward (Profinite.padicIntegersRingObj ℓ E.val) f).obj K)) hpush
+  have hsource := htensor Y _ L hp hL
+  exact ⟨hsource, localizing_iso _ (asIso
+    (moduleObjectProjectionMap (Profinite.padicIntegersRingObj ℓ E.val) f K L)) hsource, hmap⟩
 
 end ProperFormulas
 

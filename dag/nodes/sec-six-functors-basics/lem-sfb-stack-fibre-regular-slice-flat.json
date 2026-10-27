@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-stack-fibre-regular-slice-flat",
+ "kind": "statement",
+ "title": "Fibrewise regular equations cut a flat slice of a stack presentation",
+ "statement": "Let $S$ be a scheme, $\\mathcal X$ an algebraic stack over $S$, $q:U\\to\\mathcal X$ a flat locally finitely presented morphism from a scheme, and $a:\\operatorname{Spec}k\\to\\mathcal X$ a map from a field. Put $F=U\\times_{\\mathcal X}\\operatorname{Spec}k$ and let $p:F\\to U$ be the projection. Let $f_1,\\ldots,f_r\\in\\Gamma(U,\\mathcal O_U)$ with $r\\geq0$, and suppose there is an etale map $V\\to F$ from a scheme and a point $v\\in V$ where the pullbacks of the $f_i$ form an $\\mathcal O_{V,v}$-regular sequence. Let $u$ be the image of $v$ in $U$. There is an open neighbourhood $U_1$ of $u$ such that the closed subscheme $Z=V(f_1|_{U_1},\\ldots,f_r|_{U_1})\\subset U_1$ is flat and locally of finite presentation over $\\mathcal X$. Regular sequence, closed subscheme, open subscheme, flatness and local finite presentation use [def-weil-pbc-regular-sequence, def-weil-closed-immersion, def-weil-open-immersion, def-weil-flat-morphism, def-sbc-locally-finite-presentation]; etale uses [def-weil-etale-morphism]. An algebraic stack means a stack in groupoids with representable diagonal and a smooth surjective scheme atlas; stack, 2-fibre product and representability by algebraic spaces use [def-sfb-stable-pointed-moduli-groupoids]. Algebraic spaces use [def-trf-algebraic-space]. Properties of representable morphisms are tested after scheme base change on etale scheme charts.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06MD (lemma-slice), scheme-source specialization; the etale-chart formulation of the regular-sequence hypothesis is the strict-local-ring formulation there, since these local maps are faithfully flat."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $z$ for the image of $v$ in $F$. Choose a geometric point $\\bar v$ centered at $v$, and put $\\bar z=e\\bar v$ for the given etale map $e:V\\to F$. By [lem-sfb-space-strict-local-flatness], $\\mathcal O_{F,\\bar z}\\cong\\mathcal O_{V,v}^{\\mathrm{sh}}$, compatibly with germs of all the $f_i$. The map from $\\mathcal O_{V,v}$ to this strict henselization is faithfully flat by [lem-sc-strict-henselization-faithfully-flat]. Hence [lem-sfb-regular-sequence-faithfully-flat-ascent] carries the given regular sequence to $\\mathcal O_{F,\\bar z}$.",
+   "uses": [
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sfb-regular-sequence-faithfully-flat-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 04KF (lemma-describe-etale-local-ring), 07QM (lemma-dumb-properties-henselization), and algebra.tex Tag 00LM (lemma-flat-increases-depth); initial chart-to-strict-local comparison in Tag 06MD."
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas $W\\to\\mathcal X$, which exists by the algebraic-stack hypothesis. The field-extension lifting formulation of surjectivity in [lem-sfb-stack-chartwise-smooth-etale-calculus], applied to the atlas and $a$, supplies a field extension $k'/k$ and $w:\\operatorname{Spec}k'\\to W$ together with a 2-isomorphism from its composite to $a|_{k'}$. Set $T=U\\times_{\\mathcal X}W$. These fibre products are algebraic spaces: the diagonal of $\\mathcal X$ is representable, so the product of the two scheme sources over $\\mathcal X$ is its base change. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $T\\to W$ is flat and locally of finite presentation and $\\pi:T\\to U$ is smooth. The 2-isomorphism gives $F':=T\\times_W\\operatorname{Spec}k'\\cong F\\times_k k'$, compatibly with maps to $U$: on an $S$-scheme $B$, an object on the left specifies $b:B\\to\\operatorname{Spec}k'$, $x:B\\to U$, and $\\alpha:q(x)\\xrightarrow{\\sim}w(b)$ in $\\mathcal X(B)$. Compose $\\alpha$ with the chosen $w\\cong a|_{k'}$ to get the object on the right; composing with its inverse reverses this operation. Both operations preserve arrows and pullbacks.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MD (lemma-slice), first paragraph and the second cartesian diagram."
+   }
+  },
+  {
+   "text": "The projection $F\\times_k k'\\to F$ is flat and surjective, as can be checked on etale affine charts: an affine $k$-chart with ring $D$ becomes $D\\otimes_k k'$, and [lem-weil-pbc-field-extension-base-change-faithfully-flat] makes this ring map faithfully flat. Its map on spectra is surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum]; the jointly surjective etale charts of [def-trf-algebraic-space] then cover every point of $F$. Choose $z'\\in|F'|$ over $z$, and compatible geometric points $\\bar z',\\bar z$ after a common algebraically closed extension. For this extension the separable algebraic closure of each residue field inside the old algebraically closed field is already its separable algebraic closure inside the new one: any element algebraic over the residue field is algebraic over the old algebraically closed field and hence lies in it. On an etale scheme chart, each pointed etale neighbourhood has finite separable residue extension at its marked point. Its residue embeddings into the larger algebraically closed field therefore already land in the old separable closure, and their compatibility is unchanged. Thus the indexing triples and their ring maps, hence the colimits defining the old strict local ring, agree. This is the construction of [lem-weil-pbc-strict-henselization-triples]. By [lem-sfb-space-strict-local-flatness] the resulting homomorphism $\\mathcal O_{F,\\bar z}\\to\\mathcal O_{F',\\bar z'}$ is flat and local; it is faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. Apply [lem-sfb-regular-sequence-faithfully-flat-ascent] to the sequence from step 1. Thus the pulled-back $f_i$ are regular in $\\mathcal O_{F',\\bar z'}$.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-trf-algebraic-space",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-sfb-regular-sequence-faithfully-flat-ascent",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MD (lemma-slice), middle paragraph; Tag 04NG (spaces-morphisms lemma-flat-at-point-etale-local-rings), Tag 00LM (algebra lemma-flat-increases-depth)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-fibre-regular-slice-flat] to $T\\to W$, the field point $w$, the pulled-back sections, and $\\bar z'$. All its hypotheses hold: flatness and local finite presentation are from step 2, its fibre is $F'$ there, and its regularity hypothesis is step 3. It gives an open subspace $T'\\subset T$ containing the image $t'$ of $z'$ such that $H=T'\\cap V(f_1|_T,\\ldots,f_r|_T)$ is flat and locally of finite presentation over $W$.",
+   "uses": [
+    "lem-sfb-space-fibre-regular-slice-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MD (lemma-slice), application of Tag 06LW (spaces-more-morphisms lemma-slice)."
+   }
+  },
+  {
+   "text": "The morphism $\\pi|_{T'}:T'\\to U$ is smooth, hence flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. By [lem-sfb-flat-lfp-space-universally-open] its image $U_1$ is open, and $u\\in U_1$ because $t'\\in T'$ maps to $u$. Factor $T'\\to U$ through this open image. The factor $T'\\to U_1$ is the base change of $T'\\to U$ along $U_1\\hookrightarrow U$: a map to $T'$ already maps into $U_1$, so $T'\\times_U U_1\\cong T'$. Thus it is smooth by the cited base-change clause, and surjective on points by the definition of $U_1$ as the image. It is also surjective in the field-extension lifting convention of [lem-sfb-stack-chartwise-smooth-etale-calculus], which is that of the source-descent input: given $y:\\operatorname{Spec}K\\to U_1$ at a point $u_1$, choose a point of $T'$ over $u_1$ and, on an etale scheme chart of $T'$, a field point $\\operatorname{Spec}K_1\\to T'$ at it. Both $K$ and $K_1$ are extensions of $\\kappa(u_1)$, so $K\\otimes_{\\kappa(u_1)}K_1\\neq0$; a residue field $L$ at one of its maximal ideals contains both, and $\\operatorname{Spec}L\\to\\operatorname{Spec}K_1\\to T'$ lifts $y|_L$. Put $Z=V(f_1|_{U_1},\\ldots,f_r|_{U_1})$. There is a canonical identification $H\\cong T'\\times_{U_1}Z$: on affine charts $\\operatorname{Spec}B\\to\\operatorname{Spec}A\\subset U_1$, the pullback of $Z$ is $\\operatorname{Spec}(B\\otimes_A A/(f_1,\\ldots,f_r))=\\operatorname{Spec}(B/(f_1B,\\ldots,f_rB))$. These quotient identifications commute with chart restrictions, so identify the closed subspaces. Therefore $H\\to Z$ is smooth and surjective by the base-change clauses of [lem-sfb-stack-chartwise-smooth-etale-calculus].",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-lfp-space-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MD (lemma-slice), last paragraph; spaces-morphisms.tex Tag 042S (lemma-fppf-open). Surjectivity conventions: stacks-properties.tex Tag 04XI (lemma-characterize-surjective), as stated in the cited stack calculus."
+   }
+  },
+  {
+   "text": "By step 4, $H\\to W$ is flat and locally of finite presentation. The atlas $W\\to\\mathcal X$ has those properties since it is smooth. The composition $H\\to\\mathcal X$ is consequently flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The maps $H\\to Z$ and $Z\\to\\mathcal X$ are representable by algebraic spaces: for the former both objects are algebraic spaces, and for the latter both scheme sources over $\\mathcal X$ have algebraic-space fibre product by the representable-diagonal argument of step 2. Apply [lem-sfb-smooth-cover-flat-lfp-descent] to $H\\to Z\\to\\mathcal X$, using the smooth surjectivity established in step 5 in the field-extension lifting convention of that descent statement. It follows that $Z\\to\\mathcal X$ is flat and locally of finite presentation, as required. This also covers $r=0$: the zero ideal gives the whole source and all uses of regularity concern the empty list in a nonzero local ring.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-smooth-cover-flat-lfp-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MD (lemma-slice), final composition and application of Tag 06M2 (stacks-properties lemma-check-property-after-precomposing)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-strict-local-flatness",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sfb-regular-sequence-faithfully-flat-ascent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sfb-space-fibre-regular-slice-flat",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-smooth-cover-flat-lfp-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06MD (lemma-slice), scheme-source specialization; chart-to-strict-local comparison and field-extension flatness expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Rr]egular[Ss]equence.*[Ff]lat|[Ff]lat.*[Rr]egular[Ss]equence",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented map from a scheme to an algebraic stack, equations regular on a field fibre cut out a flat locally finitely presented slice near the point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular sequence in a fibre of a flat presentation of an algebraic stack gives a flat slice",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S]\\n  {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs → RingTheory.Sequence.IsWeaklyRegular S (List.map (⇑(algebraMap R S)) rs)\", \"doc\": \"If $ R $ is a flat $ S $-module and $ rs $ is a weakly regular sequence in $ R $, then the image of $ rs $ under the canonical algebra homomorphism $ R \\\\to S $ forms a weakly regular sequence in $ S $\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Module.FaithfullyFlat R S] {rs : List R},\\n  RingTheory.Sequence.IsRegular R rs → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraMap R S)) rs)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and $ rs $ is a regular sequence in $ R $, then the image of $ rs $ under the algebra map $ R \\\\to S $ is a regular sequence in $ S $.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] [Module.FaithfullyFl\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a ring homomorphism $ \\\\varphi: R \\\\to S $. If $ M $ is a faithfully flat $ R $-module and $ N = M \\\\otimes_R S $ is the base change of $ M $ along $ \\\\varphi\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] [Module.Flat R S] {f\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $\\\\phi: R \\\\to S$ be a ring homomorphism making $S$ a flat $R$-algebra. Let $M$ be an $R$-module. If a sequence of elements $(r_1, \\\\dots, r_k)$ in $R$ is a \"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat locally finitely presented map from a scheme to an algebraic stack, equations regular on a field fibre cut out a flat locally finitely presented slice near the point",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RegularSequence\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise regular equations cut out a flat locally finitely presented slice of a scheme mapping flat locally finitely presented to an algebraic stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-stack fibrewise slicing theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular sequence on a field fibre of a presentation of an algebraic stack gives a flat closed slice",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S]\\n  {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs → RingTheory.Sequence.IsWeaklyRegular S (List.map (⇑(algebraMap R S)) rs)\", \"doc\": \"If $ R $ is a flat $ S $-module and $ rs $ is a weakly regular sequence in $ R $, then the image of $ rs $ under the canonical algebra homomorphism $ R \\\\to S $ forms a weakly regular sequence in $ S $\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Module.FaithfullyFlat R S] {rs : List R},\\n  RingTheory.Sequence.IsRegular R rs → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraMap R S)) rs)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and $ rs $ is a regular sequence in $ R $, then the image of $ rs $ under the algebra map $ R \\\\to S $ is a regular sequence in $ S $.\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] [Module.FaithfullyFl\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a ring homomorphism $ \\\\varphi: R \\\\to S $. If $ M $ is a faithfully flat $ R $-module and $ N = M \\\\otimes_R S $ is the base change of $ M $ along $ \\\\varphi\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] [Module.Flat R S] {f\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $\\\\phi: R \\\\to S$ be a ring homomorphism making $S$ a flat $R$-algebra. Let $M$ be an $R$-module. If a sequence of elements $(r_1, \\\\dots, r_k)$ in $R$ is a \"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-stack fibrewise slicing theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-stack fibrewise slicing theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?stack|stack.*slice",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-stack fibrewise slicing theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrewise regular equations cut out a flat locally finitely presented slice of a scheme mapping flat locally finitely presented to an algebraic stack",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-etale-atlas",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Fibrewise regular equations cut a flat slice of a stack presentation.",
+   "via": [
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-fibre-regular-slice-flat",
+  "worker": "stage1",
+  "summary": "Followed Tag 06MD through a smooth scheme atlas, strict-local regularity ascent, algebraic-space slicing, the open image, and smooth-source descent. Three statement-only geometric inputs and one exact Mathlib leaf; statement unchanged. Repair of returned head 43dc2c2e70f02621953a15906a9d9f7bb0634757 against current DAG 2a9e3ddb1754209c4ea1bfffe785fead79706c66: the only changed external cited node is lem-sfb-stack-chartwise-smooth-etale-calculus, whose statement now specifies field-extension lifting surjectivity, its chart-test equivalence, open covers, and representability of the diagonal. Re-read that statement and its Stacks sources; adjusted steps 2, 5 and 6 to use the revised surjectivity convention explicitly and regenerated the verbatim citations from current statements. All other external cited records and all child statements are unchanged; retained actual Mathlib search logs and proof route. Delivery tool rebases the overlay on the current DAG. Revalidated again against current DAG b6d2df74e8d1dc0ee08d51ef2088ae933b0dce27 after the initial dry run 237fc808603. Only the calculus node differs from returned head 43dc2c2e70f; its current statement matches the regenerated quotations. Step 5 now writes out the chartwise point-lifting argument for surjectivity onto the open image. All four retained child statements and logged searches are preserved.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Fibrewise regular equations cut a flat slice of a stack presentation.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic ring or algebraic-space tool used in the 06MD atlas proof; the constructible-stability unit has no statement giving this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "The strict henselization as a pointed etale-neighbourhood colimit shows that enlarging the algebraically closed field does not change the old etale local ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-0ce28934f",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-0ce28934f (reviewer sub-agent of L); spot-checked: I read the item and all four new nodes in full. This is the fifth delivery. 43dc2c2e was approved by the reader, but landing refused it because the cited node lem-sfb-stack-chartwise-smooth-etale-calculus changed its statement. In the live and side-live clones the item is still unsplit with no proof and none of the four children exists. The item's statement and stmt_deps are unchanged, and there is no repair note. Of the 20 cited nodes, only the calculus statement differs from the 43dc snapshot, and it matches live exactly. It adds four clauses: surjectivity means field-extension lifting, that convention is equivalent to the chart test, a definition of open cover, and a representable diagonal. None of these adds a hypothesis that fails here, and every clause used earlier is still there. Step 2 now gets k'/k and w from the atlas through the lifting clause, which is exactly what Stacks 06MD (stacks-morphisms.tex lemma-slice) needs. Step 6 uses the same convention for the descent node, whose own statement already uses it. I re-read the whole proof against 06MD. Step 1: 04KF gives O_{F,z̄}≅O_{V,v}^sh, R→R^sh is faithfully flat (07QM node), and Mathlib IsRegular.of_faithfullyFlat (Flat.lean:92-94) carries the sequence over. Step 2: explicit 2-product operations for F'≅F×_k k'. Step 3: D→D⊗k' is faithfully flat; the strict local ring is unchanged under a larger Ω (finite separable residue extensions); 04NG gives a flat local map, hence faithfully flat, and regularity ascends. Step 4: 06LW applies to T→W at z̄'. Step 5: the image U_1 is open (042S) and H≅T'×_{U_1}Z via B⊗A/(f)=B/(f)B. Step 6: compose, then descend with 06M2 (06ET/06EV). The case r=0 holds, and no Noetherian, separability or quasi-compactness assumption is used. The new nodes match 06LW, 04KF/04NG and 06M2 and the Mathlib leaf; none duplicates an existing node or restates the item, and none cites SGA. Batch-5: def-trf-algebraic-space and def-sfb-stable-pointed-moduli-groupoids (which reaches def-trf-projective-bundle-morphism) are general definitions. The calculus and universal-openness nodes reach def-trf-algebraic-space only as a definition and are general permanence and openness facts, not steps of the trace formula or Poincaré duality, so all are accepted. Accepted tool_uses: lem-sc-strict-henselization-faithfully-flat and lem-weil-pbc-strict-henselization-triples. FIX 1 (B3, re-applied verbatim; lost a fourth time because the children are byte-identical): lem-sfb-space-strict-local-flatness now defines 'g flat at x∈|X|' by the chart definition from the proof of 04NG. FIX 2: step 5 checked the calculus's chart test only for T=U_1, but that test quantifies over every scheme T→U_1. I replaced it with a direct field-lifting proof for T'→U_1: choose a field point K_1 of T' over u_1; then K⊗_{κ(u_1)}K_1≠0, and a residue field L of it lifts y|_L. Both fixed files are under fixes/dag/nodes/sec-six-functors-basics/. Maintainer note: please carry the B3 fix through promotion.; 2 file(s) fixed by the reviewer"
+ }
+}

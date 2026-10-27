@@ -1,0 +1,128 @@
+{
+ "id": "lem-real-raw-localization-natural-iso",
+ "kind": "statement",
+ "title": "Unique descent of natural isomorphisms through raw scalar localization",
+ "statement": "Let R be a commutative ring, C an R-linear preadditive triangulated category with zero object and Z-shifts linear and additive, and p:R. Let Q:C to ScalarLocalization R C p be raw localization [def-weil-linear-scalar-localization]. For every category A and functors F,G:ScalarLocalization R C p to A, every natural isomorphism e:Q then F to Q then G has a unique natural isomorphism d:F to G with d.hom.app(Q K)=e.hom.app K for every K:C. No target additivity or linearity is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks 04VB, 05R2: categorical localization universal property; application to the actual raw scalar localization"
+ },
+ "stmt_deps": [
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved identification with categorical Rationalization from SemilinearScalarLocalization to make Q a localization at p-power multiples of identities. Apply fullyFaithfulWhiskeringLeft to Q: precomposition on functor categories is fully faithful. Take the preimageIso of e. Its map_preimage equation evaluated on K gives the required component equation.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any other d satisfying the component equations, extensionality gives equality of the precomposed natural transformations. Faithfulness then gives equality of the original hom natural transformations, and Iso.ext gives equality of the natural isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks 04VB, 05R2: categorical localization universal property; application to the actual raw scalar localization"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension realization of lisse sheaves preserves tensor products and pullback with normalized derived counits",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits: CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app, CategoryTheory.opOpEquivalence_counitIso, CategoryTheory.opOpEquivalence_unitIso, CategoryTheory.Functor.opUnopEquiv_unitIso, CategoryTheory.Functor.opUnopEquiv_counitIso",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*naturality|naturality.*localization|ScalarLocalization.*NatIso",
+   "results": "8 hits: Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Predicate.lean",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between functors on a scalar localized category is determined by its restriction to integral objects",
+   "results": "8 hits: ModuleCat.restrictScalarsCongr, CategoryTheory.Localization.isoUniqFunctor, ModuleCat.restrictScalarsId, CategoryTheory.Localization.liftNatIso, ModuleCat.restrictScalarsId'App_hom_naturality, ModuleCat.restrictScalarsId', CategoryTheory.NatIso.isIso_app_of_isIso, CategoryTheory.Codiscrete.natIsoFunctor",
+   "date": "2026-10-25",
+   "verdict": "Localization.liftNatIso and fully faithful precomposition give the raw descent argument, which is proved in Lean in this delivery."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of completed constructible tensor products and its degree zero specialization to locally free sheaves",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', LinearEquiv.extendScalarsOfIsLocalizationEquiv, Algebra.TensorProduct.basisAux, Algebra.TensorProduct.instFree, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, comonadicExtendScalars, AdicCompletion.instSMul, PiTensorProduct.instIsScalarTower",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTensorPullbackRealization",
+  "date": "2026-10-25",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Stacks 04VB, 05R2: categorical localization universal property; application to the actual raw scalar localization",
+   "via": [
+    "lem-tw-lisse-tensor-pullback-realization",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationNaturalIso",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationNaturalIso.lean",
+  "declaration": "CategoryTheory.ScalarLocalization.naturalIso_of_integral",
+  "declarations": [
+   "CategoryTheory.ScalarLocalization.naturalIso_of_integral"
+  ],
+  "statement": "theorem naturalIso_of_integral (R : Type r) [CommRing R] (C : Type u) [Category.{v} C] [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) {A : Type u'} [Category.{v'} A] (F G : ScalarLocalization R C p ⥤ A) (e : localization R C p ⋙ F ≅ localization R C p ⋙ G) : ∃! d : F ≅ G, ∀ K : C, d.hom.app ((localization R C p).obj K) = e.hom.app K",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ec16d",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T122527-L-1780869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ec16d",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T122527-L-1780869",
+  "kind": "interface",
+  "note": "independent cc review: item theorem lisse_tensor_pullback_realization (signature unchanged) against node lem-tw-lisse-tensor-pullback-realization; 3 new sorried split statements + proved naturalIso_of_integral against their new nodes; moved data block byte-identical to old item; importer LissePointSectionsRealization compiled against delivered modules (exit 0); axioms checked"
+ }
+}

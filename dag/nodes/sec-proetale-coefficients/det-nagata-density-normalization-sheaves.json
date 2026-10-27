@@ -278,7 +278,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-f37caaae9 (reviewer sub-agent of L); spot-checked: I read all of it in full: the item, every step, the new node, every cited statement, the main-20261015 blueprint item, setup, unit and pushforward texts, and the Stacks sources (proetale 09BM l.5020, 09AE, 09AH l.5135 with its w-contractible proof; sites-modules 03D6 l.1146, 03D7 l.1197, remark-when-shriek-equal l.8042). The item statement is unchanged and matches the blueprint word for word; the commutative-coefficient reading is the one accepted on 2026-10-16. Step checks: Step 1 gets quasi-compactness of j_V and j from Noetherian opens (for j it is already part of def-nagata-compactification). Step 2 checks every hypothesis of the internal/sectionwise equivalence: small site, local-iso clause (2), sheaf tensor, commutative Λ_T. Step 3 meets the hypotheses of det-sf-open-closed-sequence-ring-sheaf clauses (1)-(3) for (j_V,i) on qcqs X̄, for j, and for j_Z on qcqs Z; exactness of i^* comes from det-sf-open-closed-pullback-limits(2). Step 4 applies clause (4) with g=i and X'=Z on the true cartesian square of setup (3). Step 5 applies clause (4) with g=j_V on a qcqs V and an empty pullback open, so j_V^*j_!M=0. Step 6: the unit is mono and epi in an abelian category, and it is the specified unit. Step 7 uses exact-functor derived factorization and localization (2), with no boundedness assumption. The new node lem-sfb-internal-module-operations-transport is true: the internal and sectionwise inverse image, direct image, adjunction, open shriek (both have underlying sheaf j^Ab_! and are left adjoint to the same restriction) and base-change mates all correspond. It is statement-only (B1), not a restatement of any clause of the item (D1), and not a duplicate: I compared it with def-weil-pbc-internal-abelian-sheaf-module-equivalence, lem-pe-internal-section-tensor-comparison, lem-c2-proetale-section-module-algebraic-inverse-image, lem-sf-module-object-ordinary-coefficient-equivalence and lem-weil-pbc-ringed-topoi-module-adjunction. There is no cycle and no SGA source. Edge cases checked: identity morphism, empty U, Λ=0, X empty, Z=X̄. FIX (B3): the new node defined the sectionwise pullback, pushforward and adjunction inline without citing their definition nodes. I added [def-pur-sheaf-tensor-product] and [lem-weil-pbc-ringed-topoi-module-adjunction] to its statement and stmt_deps, in fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-internal-module-operations-transport.json. No mathematical content changed. Tool uses accepted: det-def-sfb-sheaf-tensor-local-iso (it only checks a hypothesis of the equivalence), plus the two Mathlib-leaf derived tools. The previously accepted det-sf-open-closed-sequence-ring-sheaf and def-weil-pbc-internal-abelian-sheaf-module-equivalence still apply.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Compactification.NagataDensityNormalizationSheaves",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.nagataDensityNormalizationSheaves",
@@ -310,5 +321,53 @@
   "landing": "20261021T170746-L-2757382",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the situation of [det-nagata-density-normalization-setup], assume that\n$X$ and $\\overline X$ are separated schemes of finite type over a field $k$\nof positive characteristic different from $\\ell$, and let $\\Lambda$ be the condensed\ncoefficient ring of a finite extension $E/\\Ql$ or of $\\Qlb$, with pulled-back\ncoefficient sheaves $\\Lambda_X,\\Lambda_Z,\\Lambda_{\\overline X}$. For every\nbounded constructible complex $K\\in D^b_c(X,\\Lambda)$:\n\n1. the *restriction comparison* $j_{Z,!}K\\to i^*j_!K$, the map adjoint under\n   $j_{Z,!}\\dashv j_Z^*$ to the identification\n   $K\\cong j^*j_!K\\cong j_Z^*i^*j_!K$, is an isomorphism;\n1. the *pushforward comparison*\n   $$\n   j_!K\\longrightarrow Ri_*i^*j_!K\\cong Ri_*j_{Z,!}K,\n   $$\n   the unit of $i^*\\dashv Ri_*$ followed by the inverse of the restriction\n   comparison, is an isomorphism.\n\nSince $i_*$ is exact, $Ri_*j_{Z,!}K=i_*j_{Z,!}K$, so $j_!K\\simeq i_*j_{Z,!}K$\nin $D^b_c(\\overline X,\\Lambda)$.",
+  "proof": [
+   {
+    "text": "All functors involved are exact on module sheaves, so it suffices to treat a\nsheaf $M$ of $\\Lambda_X$-modules and apply the result degreewise to a\nrepresenting complex; naturality makes the degreewise maps compatible with\nthe differentials. The cited sheaf-level statements are formulated for\nmodule sheaves over a constant ring; their arguments only use the module\nstructure and apply verbatim to $\\Lambda_X$-, $\\Lambda_Z$- and\n$\\Lambda_{\\overline X}$-module sheaves.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 1: setup.* By part (2) of [det-nagata-density-normalization-setup],\n$\\overline X$ is qcqs, $j_V:V\\hookrightarrow\\overline X$ is a quasi-compact\nopen immersion and $i:Z\\hookrightarrow\\overline X$ is its closed complement.\nHence $i_*$ is exact ([lem-exc-proetale-closed-exact]), and $j_!$, $j_{Z,!}$\nare exact ([lem-weil-extension-by-zero-exact]).",
+    "uses": [
+     "det-nagata-density-normalization-setup",
+     "lem-exc-proetale-closed-exact",
+     "lem-weil-extension-by-zero-exact"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2: the restriction comparison.* By part (3) of\n[det-nagata-density-normalization-setup], the square with sides\n$j_Z:X\\to Z$, $i:Z\\to\\overline X$, $j:X\\to\\overline X$ and $\\mathrm{id}_X$ is\ncartesian. Extension by zero commutes with base change in such a square\n([lem-cbc-proetale-extension-zero-base-change]), and the base change map is\nthe restriction comparison; so it is an isomorphism $j_{Z,!}M\\cong i^*j_!M$.",
+    "uses": [
+     "det-nagata-density-normalization-setup",
+     "lem-cbc-proetale-extension-zero-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: the restriction to $V$ vanishes.* Again by part (3),\n$X\\times_{\\overline X}V$ is empty, so $j_V^*j_!M=0$ by the stalk description\nof extension by zero ([lem-cbc-proetale-extension-zero]).",
+    "uses": [
+     "lem-cbc-proetale-extension-zero"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 4: the pushforward comparison.* A sheaf on $\\overline X$ whose\nrestriction to the quasi-compact open complement $V$ of $Z$ vanishes lies in\nthe essential image of $i_*$, and its unit $N\\to i_*i^*N$ is an isomorphism\n([lem-exc-proetale-closed-essential-image]). By Step 3 this applies to\n$N=j_!M$. Composing with $i_*$ of the inverse of the isomorphism of Step 2\nshows that the pushforward comparison $j_!M\\to i_*j_{Z,!}M$ is an\nisomorphism. Since $i_*$ is exact, $Ri_*=i_*$ on complexes, which gives the\nassertion for $K$.",
+    "uses": [
+     "lem-exc-proetale-closed-essential-image"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

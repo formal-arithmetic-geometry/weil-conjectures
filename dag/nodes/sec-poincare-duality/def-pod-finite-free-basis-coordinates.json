@@ -1,0 +1,126 @@
+{
+ "id": "def-pod-finite-free-basis-coordinates",
+ "kind": "definition",
+ "title": "K-flat representative normalization of finite-free basis coordinates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $(\\mathcal C,J)$ be a small site [def-weil-pbc-sites-and-cohomology], let $R,S$ be sheaves of commutative rings with module categories [def-weil-sheaf-of-modules-category], and let $\\phi:R\\to S$. Use ordinary and derived restriction $U,U^D$, and the canonical restriction/localization comparison $\\rho:Q_RU\\cong U^DQ_S$ of [def-sfb-scalar-hom-comparison-data]; the derived categories and localization functors are those of [def-weil-abstract-derived-category]. Fix $d\\in\\mathbf N$ and an isomorphism $e:U(S)\\cong R^{\\oplus d}$. Fix an additive scalar-extension functor $E:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$ with its specified object equalities to sheafified change of rings [def-pur-sheaf-tensor-product], an arbitrary derived functor $T:D(R)\\to D(S)$, and a natural transformation $\\epsilon:Q_R T\\to E^{\\mathrm{CoCh}}Q_S$ (composition written left to right). For $X\\in D(R)$ and $a:X^{\\oplus d}\\xrightarrow{\\sim}U^D(TX)$, define the predicate $\\operatorname{RingedFiniteFreeBasisCoordinates}(J,\\phi,d,e,E,T,\\epsilon,X,a)$ as follows. For every K-flat cochain complex $F$ [def-pc-kflat-complex], every isomorphism $q:Q_RF\\cong X$, and every $j\\in\\{0,\\ldots,d-1\\}$, there exists a cochain map $b_j:F\\to U(E^{\\mathrm{CoCh}}F)$ whose degree-$n$ section at every site object $V$ sends $x$ to the canonical sheafified pure tensor $e^{-1}(e_j)(1)\\otimes x$ [def-fix-ringed-scalar-extension-section], using the supplied object equality for $E$. Its localization must satisfy $q^{-1}Q_R(b_j)\\rho_{EF}^{-1}=\\iota_j a\\,U^D(T(q^{-1})\\epsilon_F)$, where $\\iota_j$ is the $j$th biproduct inclusion. This defines a property of the supplied isomorphism $a$, not the existence or invertibility of any Hom base-change comparison. For $d=0$ the condition on $j$ is empty.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-scalar-hom-comparison-data",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-fix-ringed-scalar-extension-section"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5: coefficient and automorphism transport; explicit normalized coefficient-coordinate and localized/common-stage composition interfaces."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Basis section normalization of finite free derived scalar extension isomorphism on every K flat sheaf complex",
+   "results": "8 hits: Algebra.TensorProduct.basisAux, Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, RingHom.Flat.respectsIso, Module.Flat.isBaseChange, IsSMulRegular.of_flat_of_isBaseChange, Module.Free.constr, ModuleCat.preservesFiniteLimits_extendScalars_of_flat; digest 22a985e0db0e6d1d",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition. Reuse the existing project declaration with existing:true rather than duplicate its data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free basis coordinates derived scalar restriction extension sheaves K flat complexes",
+   "results": "8 hits: IsBaseChange.of_fintype_basis, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeMap, SheafOfModules.Presentation.mapGenerators, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.nonempty_basis_of_flat_of_finrank_eq, SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.freeHomEquiv_comp_apply; digest af9bb9708c39fac3",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition. Reuse the existing project declaration with existing:true rather than duplicate its data."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedFiniteFreeBasisCoordinates|pullbackTensorRationalComposition|pullbackTensorCommonComposition",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition. Reuse the existing project declaration with existing:true rather than duplicate its data."
+  },
+  {
+   "tool": "grep",
+   "query": "rg RingedFiniteFreeBasisCoordinates|pullbackTensorRationalComposition|pullbackTensorCommonComposition lean/WeilConjectures lean/Sheaf; search all DAG lean.declaration and lean.declarations; blueprint_refs.py search finite free basis coordinates and pullback composition",
+   "results": "No upstream WeilConjectures or Mathlib declaration. Sheaf supplies CategoryTheory.RingedFiniteFreeBasisCoordinates in RingedFiniteFreeHomBaseChangeCoordinates.lean and both WeilConjectures.pullbackTensor*Composition declarations in DerivedPullbackTensorIso.lean. Only their theorem nodes list these declarations; no definition node owns them. Blueprint basis-coordinate search found no exact node; broad pullback/composition matches concern other constructions. def-pur-finite-scalar-coordinate-data constructs coordinate isomorphisms, whereas this predicate tests every K-flat representative of supplied coordinates.",
+   "date": "2026-10-24",
+   "verdict": "Introduce definition-node attachments to existing declarations; no Lean data is rewritten."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-reindexing-hom-coefficient-descent",
+  "date": "2026-10-24",
+  "group": "Q99"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Step 5: coefficient and automorphism transport; explicit normalized coefficient-coordinate and localized/common-stage composition interfaces.",
+   "via": [
+    "lem-pod-reindexing-hom-coefficient-descent",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeCoordinates",
+  "declaration": "CategoryTheory.RingedFiniteFreeBasisCoordinates",
+  "declarations": [
+   "CategoryTheory.RingedFiniteFreeBasisCoordinates"
+  ],
+  "statement": "def RingedFiniteFreeBasisCoordinates\n    [HasDerivedCategory.{w} (SheafOfModules.scalarModules J R)]\n    [HasDerivedCategory.{w} (SheafOfModules.scalarModules J S)]\n    (d : ℕ) (e : (SheafOfModules.scalarRestriction φ).obj\n      (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J S)) ≅\n      SheafOfModules.free\n        (R := SheafOfModules.derivedChangeRingIndependentCoefficients J R)\n        (ULift.{max c v r} (Fin d)))\n    (E : SheafOfModules.scalarModules J R ⥤ SheafOfModules.scalarModules J S)\n    (h : ∀ M, E.obj M = SheafOfModules.changeOfRings φ M)\n    [E.Additive]\n    (T : DerivedCategory (SheafOfModules.scalarModules J R) ⥤\n      DerivedCategory (SheafOfModules.scalarModules J S))\n    (ε : DerivedCategory.Q ⋙ T ⟶\n      E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (X : DerivedCategory (SheafOfModules.scalarModules J R))\n    (a : (⨁ fun _ : Fin d ↦ X) ≅ (SheafOfModules.scalarDerivedRestriction φ).obj\n      (T.obj X)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair of 2b38b2204d63: definition-node ownership of existing plain definitions formerly housed under a theorem node. The declarations are reused verbatim; this node neither asserts that its coordinate/composition normalization holds for arbitrary data nor imports the containing theorem as a statement dependency. Review FIX (503058d0): lean.statement restored to the full signature (the delivered field was cut at `(R`); the pure scalar-extension section cited is def-fix-ringed-scalar-extension-section, the owner of ringedFiniteFreeScalarSection used in the predicate."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-503058d0d",
+  "group": "Q99",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-503058d0d",
+  "group": "Q99",
+  "result": "fix",
+  "note": "Lean byte-identical to 2b38 (maths accepted there); H2 stmt_deps repaired via existing:true def nodes def-pod-finite-free-basis-coordinates / def-pod-rational-common-pullback-composition (read against decls, OK). FIX: ambient_scalar_chain still used theorem-owned uncited specifiedHomResolutionUnit via a theorem-module import → inlined its body (toKInjectiveResolution into def-owned coefficientHomResolution), import swapped; compiled clean 48.1 s. Coordinates node: full lean.statement (was cut at `(R`), pure-section cite → def-fix-ringed-scalar-extension-section (actual owner of ringedFiniteFreeScalarSection). Advisory: integral compositor owner (lem-pod-integral-pullback-composition) uncited in compositor node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T022604-L-1774691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.ringedFiniteFreeHomBaseChange_coordinates"
+  ],
+  "sorry_after": []
+ }
+}

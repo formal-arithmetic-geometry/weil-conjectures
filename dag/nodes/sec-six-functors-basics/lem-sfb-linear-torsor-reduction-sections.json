@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-linear-torsor-reduction-sections",
+ "kind": "statement",
+ "title": "Linear torsors and sections describing a reduction of structure group",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $n\\geq1$, and $L=\\operatorname{GL}_{n,S}$, the $S$-group of invertible $n\\times n$ matrices, represented by $\\operatorname{Spec}_S\\mathcal O_S[x_{ab},d]/(d\\det(x_{ab})-1)$. Let $H$ be a smooth affine finitely presented $S$-group scheme [def-sc-group-scheme, def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-sbc-locally-finite-presentation], where group-object diagrams are interpreted over $S$. Suppose $i:H\\hookrightarrow L$ is a closed subgroup [def-weil-closed-immersion], its fppf right-coset quotient $Q=L/H$ is an affine $S$-scheme, and $L\\to Q$ is a represented right $H$-torsor. Quotients mean sheafification of the orbit presheaf on the big fppf site [def-pc-fppf-site, def-weil-pbc-sheafification], and represented right torsors have the meaning of [def-sfb-split-solvable-right-torsors]. For every $S$-scheme $T$, right $L_T$-torsors are equivalent to rank-$n$ finite locally free $\\mathcal O_T$-modules [def-sc-finite-locally-free-sheaf]: $E$ corresponds to $E\\times^{L_T}\\mathcal O_T^n$, and a module $V$ corresponds to its frame scheme $\\operatorname{Isom}_{\\mathcal O_T}(\\mathcal O_T^n,V)$. For such a torsor $E$, the sheaf $E/H_T$ is represented by an affine $T$-scheme, and $E\\to E/H_T$ is a right $H_T$-torsor. The functor $P\\mapsto(E=P\\times^{H_T}L_T,\\sigma_P)$ is an equivalence between right $H_T$-torsors and pairs consisting of a right $L_T$-torsor $E$ and a section $\\sigma:T\\to E/H_T$; its inverse sends $(E,\\sigma)$ to $E\\times_{E/H_T,\\sigma}T$. The contracted product is the sheaf quotient of $P\\times_TL_T$ by $(p,l)\\cdot h=(ph,i(h)^{-1}l)$, and $\\sigma_P$ sends the class of $p$ to the right coset of $[p,1]$. All constructions and equivalences are natural under arbitrary base change $T'\\to T$ of $S$-schemes. Consequently, let $G$ be an $S$-group scheme acting on $T$ by $a:G\\times_ST\\to T$, and let $\\operatorname{pr}:G\\times_ST\\to T$ be the projection. A left $G$-action on a right $H_T$- or $L_T$-torsor $P\\to T$ covering $a$ and commuting with the right action is the same as a torsor isomorphism $\\phi:\\operatorname{pr}^*P\\simeq a^*P$ over $G\\times_ST$ which is the identity after pulling back along the unit section $T\\to G\\times_ST$ and satisfies the cocycle law over $G\\times_SG\\times_ST$. Under the frame equivalence such data on $E$ correspond to $G$-linearizations of $V$, namely $\\mathcal O$-linear isomorphisms $\\operatorname{pr}^*V\\simeq a^*V$ with the same unit and cocycle laws. Under the reduction equivalence an equivariant $H_T$-torsor $P$ corresponds to an equivariant $L_T$-torsor $E$ together with a section $\\sigma$ that is invariant, meaning that the isomorphism $\\operatorname{pr}^*(E/H_T)\\simeq a^*(E/H_T)$ induced by $\\phi$ sends $\\operatorname{pr}^*\\sigma$ to $a^*\\sigma$; equivariant isomorphisms correspond to isomorphisms respecting these data.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; read https://sites.math.washington.edu/~jarod/papers/iwahori.pdf, Section 2, Claim 2, printed p.2, the equivalence between reductions and sections and translation between general linear torsors and vector bundles. Interpret contracted products on the fppf site, not pointwise orbit sets."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-sfb-split-solvable-right-torsors",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Fix $T/S$. Use the big fppf site throughout. Every represented torsor $P\\to T$ in [def-sfb-split-solvable-right-torsors] trivializes on the singleton fppf cover $P\\to T$: its diagonal section pulls back to the trivialization $(p,h)\\mapsto(p,ph)$, with inverse given by the stipulated torsor-square isomorphism. Fppf covers are fpqc by [lem-trf-fppf-covering-is-fpqc], and representables are sheaves by [lem-weil-pbc-fpqc-representable-descent]. Thus an identity of maps can be checked after these covers; compatible local maps and their inverses glue uniquely. For represented functors this gives scheme maps and scheme isomorphisms by [lem-galois-yoneda-fully-faithful]. We use these facts only in the precise form just stated, including on base-changed covers.",
+   "uses": [
+    "def-sfb-split-solvable-right-torsors",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 023Q (lemma-fpqc-universal-effective-epimorphisms) and 022C (topologies.tex, lemma-zariski-etale-smooth-syntomic-fppf-fpqc); groupoids.tex Tags 0498 and 0499"
+   }
+  },
+  {
+   "text": "Here is the affine descent operation used below. If an fppf sheaf $F$ over a scheme $B$ has affine representing schemes $X_i/B_i$ on an fppf cover $\\{B_i\\to B\\}$, [lem-trf-fppf-sheaf-representability-descent-data] supplies their canonical scheme descent datum. Encode it on $A=\\coprod_i B_i$, $Z=\\coprod_i X_i$ using [lem-trf-fppf-family-coproduct-descent-encoding]. The map $Z\\to A$ is affine: an affine open of $A$ meets only finitely many disjoint open-and-closed components, and on each intersection its inverse image is affine; their finite disjoint union is affine by [lem-weil-pbc-affine-morphism-permanence]. Apply [lem-galois-fpqc-affine-descent-effective] to obtain an effective singleton datum. The encoding gives effectivity of the original family datum, so the sheaf-descent statement represents $F$ by $X/B$. Finally [lem-weil-pbc-fpqc-descend-affine] makes $X\\to B$ affine, using the fpqc cover from step 1. This applies also to an empty base and its empty cover.",
+   "uses": [
+    "lem-trf-fppf-sheaf-representability-descent-data",
+    "lem-trf-fppf-family-coproduct-descent-encoding",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-weil-pbc-fpqc-descend-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02W5 (lemma-descent-data-sheaves), 023X (lemma-family-is-one), 0245 (lemma-affine), 02L5 (lemma-descending-property-affine)"
+   }
+  },
+  {
+   "text": "The matrix scheme $L_B$ for any $B/S$ is affine and finitely presented over $B$: on an affine open $\\operatorname{Spec}R\\subset B$ its algebra is $R[x_{ab},d]/(d\\det x-1)$, with finitely many generators and one relation; since $L_B\\to B$ is affine, clause (3) of [lem-weil-pbc-affine-morphism-permanence] makes it quasi-compact and separated, so it is of finite presentation and not only locally so. It is the determinant principal open in $\\mathbf A_B^{n^2}$ by [lem-weil-pbc-affine-open-section-vanishing-prime]. Affine space is smooth by [sbc-lem-affine-space-smooth], and its open restriction is smooth by [lem-pc-open-immersion-smooth-composition]. It is flat by [sbc-lem-smooth-criterion], and surjective since it has the identity section. Thus $L_B\\to B$ is flat, surjective and finitely presented. The same three properties for $H_B\\to B$ follow from the hypotheses, the identity section, [sbc-lem-smooth-criterion], and base-change stability in [lem-sfb-space-flat-proper-fp-locality], applied to schemes. If a represented sheaf with right $L_B$- or $H_B$-action is locally equivariantly isomorphic to this group on an fppf cover, its structure morphism is flat and finitely presented by that node and surjective by [lem-sfb-space-smooth-surjective-fppf-locality]. Its torsor square is an isomorphism: locally its inverse is $(x,y)\\mapsto(x,x^{-1}y)$, and step 1 glues the inverse. It is therefore a represented right torsor in the definition used here.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "sbc-lem-affine-space-smooth",
+    "lem-pc-open-immersion-smooth-composition",
+    "sbc-lem-smooth-criterion",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 01VB, 01VE, 01VF (morphisms.tex); 041V and 041W (spaces-descent.tex, lemma-descending-property-finite-presentation and lemma-descending-property-flat); 0429 and 041Q for smoothness and surjectivity"
+   }
+  },
+  {
+   "text": "For a right $L_T$-torsor $E$, choose an fppf trivializing cover and sections $e_i$. On double overlaps let $g_{ij}$ be the unique matrix with $e_j=e_i g_{ij}$. The torsor square gives these as scheme maps. On triple overlaps, $g_{ik}=g_{ij}g_{jk}$. Glue the free modules $\\mathcal O_{T_i}^n$ by identifying the vector $v$ in chart $j$ with $g_{ij}v$ in chart $i$. This is a quasi-coherent descent datum by the displayed matrix identity. Apply [lem-pc-fpqc-descent] with the fpqc cover of step 1: it gives a finite locally free module $V$ of rank $n$, and compatible linear maps descend uniquely. Its sheaf of sections on $U/T$ is the associated sheaf $E\\times^{L_T}\\mathcal O_T^n$: locally $[e_i l,v]\\mapsto lv$ is a bijection, respecting $(el,v)\\sim(e,lv)$, addition, and scalars. These local bijections agree because the same $g_{ij}$ occurs on both sides. The sheaf gluing axiom makes them global bijections. This both defines the associated module and identifies it with the descended one, without assuming pointwise orbit sets are sheaves.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T (proposition-fpqc-descent-quasi-coherent) and Tag 05B2 (lemma-finite-locally-free-descends); explicit matrix cocycle for Claim 2"
+   }
+  },
+  {
+   "text": "Conversely let $V$ be finite locally free of rank $n$. Define the frame sheaf on $U/T$ by $\\operatorname{Isom}_{\\mathcal O_U}(\\mathcal O_U^n,V|_U)$, with right action $f\\cdot l=f\\circ l$. It is an fppf sheaf: compatible module isomorphisms and their inverses descend by the full faithfulness in [lem-pc-fpqc-descent], after step 1. A Zariski trivializing cover for $V$ identifies it with $L_{T_i}$, including the action. Step 2 represents this sheaf by an affine $T$-scheme; step 3 makes it a represented right torsor. The evaluation map $\\operatorname{Fr}(V)\\times^{L_T}\\mathcal O_T^n\\to V$ is $[f,v]\\mapsto f(v)$, locally an isomorphism. For $E$ the map to the frames of its associated module sends $e$ to $(v\\mapsto[e,v])$, and is locally the identity $L\\to L$. Step 1 makes it a scheme isomorphism. These maps are natural: a linear isomorphism $b$ sends $f$ to $b\\circ f$, while an equivariant torsor map $u$ sends $[e,v]$ to $[u(e),v]$. The evaluation maps commute with these formulas, so they give natural inverse equivalences of groupoids.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T (proposition-fpqc-descent-quasi-coherent), full faithfulness; Claim 2, frame and evaluation constructions"
+   }
+  },
+  {
+   "text": "For the right $L_T$-torsor $E$ let $F=E/H_T$ be its fppf quotient sheaf. On a trivializing cover for $E$, it is $Q_{T_i}$. Indeed an orbit class there maps to its right coset in $L/H$; every coset locally lifts to $L$ because $L\\to Q$ is the assumed torsor, and two lifts of the same coset differ by a unique $H$-element. These assertions identify the associated sheaves, even when a coset has no global lift. They also show that restricting the quotient sheaf to any further base change gives the same local quotient. Since $Q_{T_i}\\to T_i$ is affine by [lem-weil-pbc-affine-morphism-permanence], step 2 represents $F$ by an affine $T$-scheme $X$. The map $E\\to X$ locally is $L\\to Q$. Its pullback over a test scheme with a local lift $e$ to $E$ identifies with $H$ by $h\\mapsto eh$. Such lifts exist fppf locally by the quotient construction and the assumed torsor. Step 3 proves that $E\\to X$ is a represented right $H$-torsor. Thus $X$ is the asserted $E/H_T$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Claim 2, affineness of the quotient; descent.tex Tags 02W5 and 0245, with the assumed represented torsor L to Q"
+   }
+  },
+  {
+   "text": "For a represented right $H_T$-torsor $P$, form the fppf sheaf quotient $E=(P\\times_TL_T)/H_T$ with $(p,l)\\cdot h=(ph,i(h)^{-1}l)$. Its right $L_T$-action is $[p,l]\\cdot k=[p,lk]$; this is well defined because left multiplication by $i(h)^{-1}$ commutes with right multiplication by $k$. On a trivializing cover with section $p_i$, the formula $[p_i h,l]\\mapsto i(h)l$ identifies it equivariantly with $L$, with inverse $l\\mapsto[p_i,l]$. Apply [lem-galois-fpqc-affine-descent-effective] to the local affine $L$-model on the singleton cover $P\\to T$, and [lem-trf-fppf-sheaf-representability-descent-data] as in step 2 to represent $E$; and step 3 makes it a represented $L_T$-torsor. Step 6 forms its affine quotient $E/H_T$. Locally define a section by $[p_i,1]H$. If $p_j=p_i h_{ij}$, then $[p_j,1]=[p_i,i(h_{ij})]$, so both cosets coincide. Step 1 glues the local maps to $\\sigma_P:T\\to E/H_T$. A torsor isomorphism $u:P\\to P'$ induces $[p,l]\\mapsto[u(p),l]$ and preserves these sections, by its displayed formula.",
+   "uses": [
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-trf-fppf-sheaf-representability-descent-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Alper--Halpern-Leistner--Heinloth, Section 2, Claim 2, printed p.2; explicit contracted-product construction using descent.tex Tags 0245 and 02W5"
+   }
+  },
+  {
+   "text": "Given $(E,\\sigma)$, set $P=E\\times_{E/H_T,\\sigma}T$. It is an $H_T$-torsor: base change of step 6 gives its action and torsor square, and flatness, finite presentation and surjectivity survive base change by [lem-sfb-space-flat-proper-fp-locality] and [lem-sfb-space-smooth-surjective-fppf-locality]. Its inclusion in $E$ induces $P\\times^{H_T}L_T\\to E$, $[p,l]\\mapsto pl$. On a cover with a section $p$ of $P$ this is the identity between two trivial $L$-torsors, so step 1 proves it an isomorphism. It carries $\\sigma_P$ to $\\sigma$ since the image of $p$ in $E/H_T$ is $\\sigma$. In the other direction $P\\to(P\\times^{H_T}L_T)\\times_{(P\\times^{H_T}L_T)/H_T,\\sigma_P}T$, $p\\mapsto([p,1],\\mathrm{base}(p))$, is equivariant and locally is $H\\to H$, hence an isomorphism by step 1. A map of pairs restricts to these fibre products, and extension sends it back to the original map by $[p,l]\\mapsto pl$. Therefore the two comparisons are natural on arrows as well as on objects. This proves the reduction equivalence, rather than just a bijection on isomorphism classes.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Claim 2, inverse reduction by pullback of a section; spaces-descent.tex Tags 041V, 041W, 041Q"
+   }
+  },
+  {
+   "text": "All the comparisons above commute with an arbitrary $b:T'\\to T$. For the associated module, pulling back the gluing data gives the same free modules and matrices $b^*g_{ij}$; uniqueness in [lem-pc-fpqc-descent] identifies the two descended modules. For frame schemes the comparison on $U/T'$ sends a frame of $b^*V|_U$ to that same frame of $V|_U$, so is a natural bijection and hence a scheme isomorphism by step 1. For the quotient and contracted product, the canonical maps are $[e]H\\mapsto[e]H$ and $[p,l]\\mapsto[p,l]$ on local representatives. On the pulled-back trivializing covers these are the identity maps of $Q$ and $L$ respectively; step 1 makes them isomorphisms globally. Fibre products commute with base change by their universal property. The same formulas show that each comparison preserves sections and arrows. Under two successive base changes both composites have the same formula on local representatives, hence agree. Thus the base-change identifications are coherent, not arbitrary choices of an isomorphism.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, uniqueness of descent; Claim 2, arbitrary base-change naturality, with explicit comparison formulas"
+   }
+  },
+  {
+   "text": "Write the torsor group over $S$ as $K$, equal to $H$ or $L$. A commuting left $G$-action $A$ on $P$ gives $\\phi$ by $(g,t,p)\\mapsto(g,t,A(g,p))$, where $p$ lies over $t$. Its inverse on the fibre over $(g,t)$ sends $q$ over $gt$ to $A(g^{-1},q)$. These are scheme maps because the action and inverse are scheme maps. Conversely $\\phi:\\operatorname{pr}^*P\\simeq a^*P$ composed with the projection to $P$ gives $A:G\\times_SP\\to P$. The fact that $\\phi$ is a $K$-torsor isomorphism says exactly $A(g,ph)=A(g,p)h$. Its unit law says $A(1,p)=p$; its cocycle law says $A(g_1,A(g_2,p))=A(g_1g_2,p)$. Thus these two constructions are inverse. They also identify a commuting equivariant torsor map with a map respecting $\\phi$, by evaluating that same equation on $(g,p)$. No flatness or smoothness of the acting group $G$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Claim 2, commuting equivariant structures; unit and composition laws of the action groupoid"
+   }
+  },
+  {
+   "text": "Apply step 9 to the two maps $\\operatorname{pr},a:G\\times_ST\\to T$. The frame equivalence sends a torsor isomorphism $\\phi$ to the linear isomorphism $[e,v]\\mapsto[\\phi(e),v]$ of associated modules. Its inverse sends a frame $f$ to $b\\circ f$ for a linear isomorphism $b$. These respect identities and composition by direct substitution, so the unit and cocycle equations in step 10 correspond exactly to the linearization equations. In the reduction equivalence, extending an $H$-torsor isomorphism gives $[p,l]\\mapsto[\\phi(p),l]$. The induced map of quotients therefore sends the local coset of $[p,1]$ to the local coset of $[\\phi(p),1]$, proving the invariance equation for $\\sigma_P$. Conversely, invariance of $\\sigma$ makes $\\phi$ restrict to an isomorphism between the two pullbacks of $P=\\sigma^*E$; its unit and cocycle laws are the restrictions of those for $E$. Extension recovers $\\phi$ since it agrees on every $[p,l]$. All comparisons in step 8 use these same formulas, hence commute with equivariant arrows. This proves both equivariant conclusions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Claim 2, equivariant reduction and vector-bundle translation; explicit unit, cocycle and invariant-section equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-split-solvable-right-torsors",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-fpqc-descent",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-fppf-family-coproduct-descent-encoding",
+  "lem-trf-fppf-sheaf-representability-descent-data",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "sbc-lem-affine-space-smooth",
+  "sbc-lem-smooth-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 023T, 05B2, 0245, 02W5, 02L5 and 023Q; explicit expansion of Alper--Halpern-Leistner--Heinloth Section 2 Claim 2, printed p.2, read on author-hosted PDF; PDF WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Principal GL n bundles are equivalent to rank n vector bundles and reductions to a closed subgroup are sections of the homogeneous quotient",
+   "results": "8 hits: hom_trivializationAt, hom_trivializationAt_baseSet, VectorBundle.trivialization_linear', hom_trivializationAt_apply, hom_trivializationAt_target, hom_trivializationAt_source, trivialization_linear, VectorBundleCore.localTriv.isLinear",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern ordinary representations, topological bundles, valuations, or basic scheme morphisms, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of structure group from H to GL n identifies H torsors with vector bundles equipped with a section of their frame bundle modulo H",
+   "results": "8 hits: VectorBundle.trivialization_linear', VectorBundleCore.inCoordinates_eq, ContMDiffFiberwiseLinear.hasGroupoid, hom_trivializationAt, Trivialization.linearEquivAt, trivialization_linear, hom_trivializationAt_baseSet, hom_trivializationAt_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern ordinary representations, topological bundles, valuations, or basic scheme morphisms, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\"",
+   "results": "12 hits: AddTorsor, Torsor, addGroupIsAddTorsor, AddGroup.instAddTorsor, Group.instTorsor, AddTorsor.nonempty, Torsor.nonempty, AddTorsor.toVSub",
+   "date": "2026-10-24",
+   "verdict": "no match: The named structures and their basic operations do not state this extension, quotient, or equivalence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\"",
+   "results": "12 hits: LinearMap.GeneralLinearGroup, LinearMap.GeneralLinearGroup.ofLinearEquiv, LinearMap.GeneralLinearGroup.toLinearEquiv, LinearMap.GeneralLinearGroup.congrLinearEquiv, LinearMap.GeneralLinearGroup.congrLinearEquiv_refl, LinearMap.GeneralLinearGroup.coe_toLinearEquiv, LinearMap.GeneralLinearGroup.coe_ofLinearEquiv, LinearMap.GeneralLinearGroup.generalLinearEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: The named structures and their basic operations do not state this extension, quotient, or equivalence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|frame.*bundle|structure.*group",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration gives this assertion; the few keyword hits concern other notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductions of principal GL n bundles to a closed subgroup correspond to sections of the quotient",
+   "results": "8 hits: GroupExtension.Section, QuotientGroup.borelSpace, instMulActionSubtypeGeneralLinearGroupFinOfNatNatRealMemSubgroupQuotientSubgroupOf, GroupExtension.Splitting.toSection, ClosedSubgroup.toSubgroup, GroupExtension.Section.instFunLike, QuotientGroup.instCompactSpaceQuotientSubgroup, AddGroupExtension.Section",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned sheaf, scheme, flatness, or abstract group declarations do not give this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "General linear group scheme torsors correspond to finite locally free modules and reductions of structure group correspond to quotient sections",
+   "results": "{\"t\": \"2026-10-24T04:54:56Z\", \"tool\": \"leanfinder\", \"query\": \"General linear group scheme torsors correspond to finite locally free modules and reductions of structure group correspond to quotient sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.homOfVector_over\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.AffineSpace.homOfVector\"], \"digest\": \"acdbd915bde4b1c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space maps, abstract matrix groups, set torsors and topological vector bundles do not give these scheme-theoretic equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|frame.*bundle|structure.*group",
+   "results": "{\"t\": \"2026-10-24T04:55:51Z\", \"tool\": \"grep\", \"query\": \"torsor|frame.*bundle|structure.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\"], \"digest\": \"a960c4b46fa1fcbc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space maps, abstract matrix groups, set torsors and topological vector bundles do not give these scheme-theoretic equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "General linear group scheme torsors and rank n locally free sheaves with a reduction to a subgroup",
+   "results": "{\"t\": \"2026-10-24T04:55:51Z\", \"tool\": \"leansearch\", \"query\": \"General linear group scheme torsors and rank n locally free sheaves with a reduction to a subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.GeneralLinearGroup\", \"Matrix.termGL\", \"Matrix.GeneralLinearGroup\", \"Subgroup.HasDetOne\", \"AddTorsor.noConfusion\", \"AddTorsor.noConfusionType\", \"AddTorsor\", \"AddTorsor.mk\"], \"digest\": \"6e6f7d76e968b325\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space maps, abstract matrix groups, set torsors and topological vector bundles do not give these scheme-theoretic equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T04:55:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space maps, abstract matrix groups, set torsors and topological vector bundles do not give these scheme-theoretic equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A principal GL n bundle for the faithfully flat topology is the bundle of bases of a vector bundle",
+   "results": "{\"t\": \"2026-10-24T04:55:53Z\", \"tool\": \"leanfinder\", \"query\": \"A principal GL n bundle for the faithfully flat topology is the bundle of bases of a vector bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorBundleCore.vectorBundle\", \"Bundle.Trivial.vectorBundle\", \"VectorBundleCore\", \"VectorBundle\", \"Bundle.ContinuousLinearMap.fiberBundle\", \"trivialVectorBundleCore\", \"VectorBundle.trivialization_linear'\", \"Bundle.ContinuousLinearMap.vectorPrebundle\"], \"digest\": \"9f66a3b2692179cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space maps, abstract matrix groups, set torsors and topological vector bundles do not give these scheme-theoretic equivalences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: translation between reductive torsors and a general linear torsor with a quotient section, including its inverse and functoriality.",
+   "via": [
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-linear-torsor-reduction-sections",
+  "worker": "stage1",
+  "summary": "Q141 expanded the affine descent, matrix cocycle, frame evaluation, quotient, contracted-product and inverse-reduction arguments; verified arbitrary-base-change coherence and equivariant unit/cocycle laws. No new nodes: the required non-elementary descent results already exist. Statement unchanged.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), supporting the inherited alteration/moduli chain; this item supplies the Claim 2 torsor/section translation named in its inherited from.place. The inherited created.item chain has no imported blueprint ancestor, and blueprint_refs.py ancestor returns None; the null ancestor and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Generic descent, sheaf representation, or geometric permanence tool used with its stated hypotheses; the unit has no replacement for this auxiliary foundational fact. Its use does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-fppf-family-coproduct-descent-encoding",
+    "why": "Generic descent, sheaf representation, or geometric permanence tool used with its stated hypotheses; the unit has no replacement for this auxiliary foundational fact. Its use does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-fppf-sheaf-representability-descent-data",
+    "why": "Generic descent, sheaf representation, or geometric permanence tool used with its stated hypotheses; the unit has no replacement for this auxiliary foundational fact. Its use does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic descent, sheaf representation, or geometric permanence tool used with its stated hypotheses; the unit has no replacement for this auxiliary foundational fact. Its use does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-trf-fppf-family-coproduct-descent-encoding",
+  "lem-trf-fppf-sheaf-representability-descent-data",
+  "lem-weil-pbc-fpqc-descend-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-7773546c9",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-7773546c9 (reviewer sub-agent of L); spot-checked: Read the item in full, every stmt_dep and proof_dep statement, and the report. There are no new nodes and the statement is unchanged. Hypotheses are used as stated: Q affine and L→Q a represented torsor are assumed, not inferred. I checked steps 1–11 one by one. Step 2's affine descent checks out: the coproduct of the local models is affine via permanence (4), the singleton effectivity applies, and fpqc-descend-affine finishes it. In step 4 the cocycle g_ik=g_ij g_jk matches the gluing [e_j,v]=[e_i,g_ij v]; rank n comes from lem-pc-fpqc-descent (2). In step 7, [p_j,1]=[p_i,i(h)] gives equal cosets. In step 8, [ph,i(h)^-1 l]↦pl is well defined. Steps 10 and 11 really are elementary. Small cases tested: T empty, n=1, H=1, H=L, noncommutative H, non-flat acting G. Duplicate search (projective-frames-pgl, homogeneous-cotangent-associated-bundle, dvr-reductive-linear-affine-quotient, compact-torsor-associated-lisse) found no duplicate. FIX: step 3 claimed GL_{n,B}→B is finitely presented, but the project's convention also requires quasi-compact and quasi-separated, and the step gave no citation for that. I added clause (3) of lem-weil-pbc-affine-morphism-permanence (affine implies quasi-compact and separated) to the step-3 text and its uses. Batch-5: lem-trf-fppf-covering-is-fpqc, lem-trf-fppf-family-coproduct-descent-encoding and lem-trf-fppf-sheaf-representability-descent-data are general descent tools, not trace-formula or Poincaré-duality content. The two lem-sfb-space locality nodes reach sec-trace-formula only through the general definition def-trf-algebraic-space. All five are accepted. Accepted tool uses: the four declared ones, plus the undeclared generic tools sbc-lem-affine-space-smooth, sbc-lem-smooth-criterion and lem-pc-fpqc-descent. No SGA. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
+}

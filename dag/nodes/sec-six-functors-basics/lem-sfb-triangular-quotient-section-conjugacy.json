@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-triangular-quotient-section-conjugacy",
+ "kind": "statement",
+ "title": "Conjugacy of sections of a triangular group quotient with smooth diagonal quotient",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $F$, and closed subgroups have the meaning of [def-sc-group-scheme-subgroup, def-weil-closed-immersion]. Let $n\\geq1$, let $B_n\\subseteq\\operatorname{GL}_{n,F}$ [def-sc-general-linear-group] be the group of invertible upper triangular matrices, and let $U_n\\subseteq B_n$ be the subgroup with all diagonal entries $1$; these descriptions apply to points over every commutative $F$-algebra. Let $J\\subseteq B_n$ be a closed subgroup, and put $V=J\\cap U_n$, the scheme-theoretic intersection. Let $q:J\\to D$ represent the fppf sheaf quotient $J/V$: the sheafification of $A\\mapsto J(A)/V(A)$ for faithfully flat finitely presented coverings of commutative $F$-algebras. Assume that $D$ is smooth over $F$ [def-sbc-smooth-morphisms]. For any two group-scheme homomorphisms $s_1,s_2:D\\to J$ satisfying $q\\circ s_i=\\operatorname{id}_D$, there is $v\\in V(F)$ such that $s_2=\\operatorname{Int}(v)\\circ s_1$ as morphisms of group schemes. Explicitly, for every commutative $F$-algebra $A$ and $d\\in D(A)$, one has $(s_2)_A(d)=v_A(s_1)_A(d)v_A^{-1}$, where $v_A$ is obtained from $v$ by scalar extension. No smoothness hypothesis on $J$ or $V$, and no connectedness hypothesis, is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Summary 16.29(b), printed p.334, conjugacy of homomorphism sections with smooth multiplicative-type quotient; Theorem 16.27(a), printed p.333, requires the missing smoothness hypothesis on D (see report.md, Source error). Triangular realization: Proposition 16.2(c), printed p.325, and Theorem 16.21, printed p.330."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-sc-general-linear-group",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For upper triangular matrices, $\\delta(g)=(g_{11},\\ldots,g_{nn})$ satisfies $\\delta(gh)=\\delta(g)\\delta(h)$, and its scheme-theoretic kernel is $V$. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $\\delta:J\\to\\mathbf G_m^n$. It represents the fppf quotient $J/V$ as a closed subgroup of $\\mathbf G_m^n$. Its identification with the given $D$ is the unique one commuting with $q$, since both represent the same sheaf quotient. By [lem-sfb-split-torus-subgroups-diagonalizable], $D\\simeq\\operatorname{Spec}F[M]$ for a finitely generated abelian group $M$. For each pair $(i,j)$ let $\\chi_{ij}:D\\to\\mathbf G_m$ be the restriction of $t_i/t_j$. Thus $\\chi_{ij}(q(g))=g_{ii}/g_{jj}$ on every algebra. The assumed smoothness of $D$ is retained.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-split-torus-subgroups-diagonalizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.21 proof, p.330; Theorem 12.9(c), pp.233--234."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-unitriangular-coordinate-filtration], writing $m=n(n-1)/2$, $C_r=(i_r,j_r)$ and $V_r=J\\cap U^{(r)}$. These are subgroups normal in $J$, with $V_0=V$ and $V_m=1$. Restrict its coordinate homomorphism $p_r$ to $V_{r-1}$. By [lem-sfb-algebraic-group-homomorphism-factorization] it factors as $V_{r-1}\\xrightarrow{a_r}N_r\\hookrightarrow\\mathbf G_a$, where $a_r$ is faithfully flat and finitely presented and has scheme-theoretic kernel $V_r$. The coordinate conjugation formula gives\n$$a_r(gxg^{-1})=\\chi_{i_rj_r}(q(g))a_r(x).$$\nIn particular, substituting $g=s_1(d)$ shows that $N_r$ is stable under the scalar character $\\chi_{i_rj_r}$ of $D$: locally lift an $N_r$-point through the fppf quotient $a_r$, conjugate that lift by $s_1(d)$, and use the displayed formula. Membership in a closed subgroup descends under faithfully flat covers, since its defining equations vanish if they vanish after an injective faithfully flat algebra map.",
+   "uses": [
+    "lem-sfb-unitriangular-coordinate-filtration",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 6.49, pp.136--137; Theorem 16.21 proof, p.330."
+   }
+  },
+  {
+   "text": "Each $a\\in N_r(F)$ lifts to $v\\in V_{r-1}(F)$. Indeed, the faithfully flat surjective map $a_r$ supplied by [lem-sfb-algebraic-group-homomorphism-factorization] has nonempty fibre above $a$. This fibre is affine of finite type over $F$: its algebra is the quotient of the finitely generated coordinate algebra of $V_{r-1}$ by the equations $a_r=a$. A maximal ideal of this nonzero algebra gives a closed point. By [lem-weil-pbc-closed-point-residue-field-base] its residue field is $F$, giving the required $v$. This argument applies even when the fibre or $V_{r-1}$ is nonsmooth or nonreduced.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.27(a), p.333, lifting a rational point of a quotient; cf. 5.48, p.111."
+   }
+  },
+  {
+   "text": "For any homomorphism section $h:D\\to J$, the morphism $c(d)=h(d)s_1(d)^{-1}$ lands in $V$, because its image under $q$ is $1$. Direct multiplication gives, as morphisms on $D\\times D$,\n$$c(dd')=c(d)\\bigl(s_1(d)c(d')s_1(d)^{-1}\\bigr).$$\nIndeed $h(d)=c(d)s_1(d)$, and inserting this expression in $h(d)h(d')s_1(dd')^{-1}$ gives precisely the displayed formula. These identities hold on every algebra, not just on $F$-points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 15.1, pp.302--303; opening observation in Theorem 16.27, p.333."
+   }
+  },
+  {
+   "text": "Induct on $r=0,\\ldots,m$ with the claim that some $w_r\\in V(F)$ makes $h_r=\\operatorname{Int}(w_r^{-1})\\circ s_2$ satisfy $c_r=h_rs_1^{-1}:D\\to V_r$. For $r=0$ take $w_0=1$ and use step 4. Suppose the claim holds for $r-1$. The morphism $f_r=a_r\\circ c_{r-1}:D\\to N_r$ satisfies\n$$f_r(dd')=f_r(d)+\\chi_{i_rj_r}(d)f_r(d')$$\nby step 4, the homomorphism property of $a_r$, and the scalar conjugation formula of [lem-sfb-unitriangular-coordinate-filtration]. Apply [lem-sfb-smooth-diagonal-additive-crossed-vanishing]: step 1 supplies diagonalizability, smoothness is a hypothesis of the item, and step 2 supplies scalar stability. Obtain $a\\in N_r(F)$ with $f_r(d)=a-\\chi_{i_rj_r}(d)a$, and lift it to $v\\in V_{r-1}(F)$ by step 3. Set $w_r=w_{r-1}v$. Then\n$$c_r(d)=v^{-1}c_{r-1}(d)s_1(d)v s_1(d)^{-1},\\qquad a_r(c_r(d))=-a+f_r(d)+\\chi_{i_rj_r}(d)a=0.$$\nAll factors in $c_r$ lie in $V_{r-1}$, which is normal in $J$; the scheme-theoretic kernel description in step 2 therefore factors $c_r$ through $V_r$. This completes the induction with identities on every commutative $F$-algebra.",
+   "uses": [
+    "lem-sfb-unitriangular-coordinate-filtration",
+    "lem-sfb-smooth-diagonal-additive-crossed-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.27(a), p.333, successive removal of principal crossed homomorphisms; smooth-D scope of Summary 16.29(b), p.334."
+   }
+  },
+  {
+   "text": "At $r=m$, $V_m=1$, so $c_m=1$ and $\\operatorname{Int}(w_m^{-1})\\circ s_2=s_1$. Hence $s_2=\\operatorname{Int}(w_m)\\circ s_1$. Taking $v=w_m\\in V(F)$ proves the assertion and its formula after any scalar extension. If $n=1$, the filtration is empty and $V=1$, so the same argument says $s_2=s_1$. The proof never assumes $J$ or $V$ smooth, nor any group connected.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.27(a), p.333; Summary 16.29(b), p.334."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-unitriangular-coordinate-filtration",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-smooth-diagonal-additive-crossed-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorems 16.21 and 16.27(a), pp.330,333; Summary 16.29(b), p.334. The same filtration induction is written in successive-coordinate form rather than quotient-by-last-term form."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "trigonalizable|triangularizable|unipotent.*conjug|conjug.*unipotent",
+   "results": "25 hits; Mathlib/Algebra/Lie/CartanSubalgebra.lean, Mathlib/Algebra/Lie/Basis/Base.lean, Mathlib/Algebra/Lie/Weights/Cartan.lean, Mathlib/Algebra/Lie/Sl2.lean, Mathlib/Algebra/Lie/Sl2.lean, Mathlib/Algebra/Lie/LieTheorem.lean, Mathlib/Algebra/Lie/LieTheorem.lean, Mathlib/Algebra/Lie/LieTheorem.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group-extension conjugacy definitions and formal properties, Lie-algebra triangularizability, and root-system constructions do not assert conjugacy of group-scheme sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a quotient of an upper triangular algebraic group by its unitriangular kernel are conjugate by an element of the kernel",
+   "results": "8 hits; GroupExtension.ConjClasses, Representation.ofQuotient.congr_simp, QuotientAddGroup.lift.congr_simp, QuotientGroup.kerLift, LieModule.instIsTriangularizableSubtypeMemLieSubalgebra, Subgroup.quotConjEquiv, Representation.ofQuotient, QuotientGroup.lift",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group-extension conjugacy definitions and formal properties, Lie-algebra triangularizability, and root-system constructions do not assert conjugacy of group-scheme sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SemidirectProduct\", \"IsConj\"",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group-extension conjugacy definitions and formal properties, Lie-algebra triangularizability, and root-system constructions do not assert conjugacy of group-scheme sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two algebraic group homomorphism sections of the diagonal quotient of a trigonalizable group over an algebraically closed field are conjugate by a unipotent element",
+   "results": "8 hits; GroupExtension.IsConj, LieModule.instIsTriangularizableOfIsAlgClosed, GroupExtension.IsConj.refl, GroupExtension.Section.exists_eq_inl_mul, GroupExtension.IsConj.trans, GroupExtension.Section.exists_eq_mul_inl, AddGroupExtension.IsConj, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group-extension conjugacy definitions and formal properties, Lie-algebra triangularizability, and root-system constructions do not assert conjugacy of group-scheme sections"
+  },
+  {
+   "tool": "grep",
+   "query": "ConjClasses|conjugate|conj",
+   "results": "10 hits; Mathlib/GroupTheory/GroupExtension/Defs.lean, Mathlib/GroupTheory/GroupExtension/Defs.lean, Mathlib/GroupTheory/GroupExtension/Defs.lean, Mathlib/GroupTheory/GroupExtension/Defs.lean, Mathlib/GroupTheory/GroupExtension/Defs.lean, Mathlib/GroupTheory/GroupExtension/Basic.lean, Mathlib/GroupTheory/GroupExtension/Basic.lean, Mathlib/GroupTheory/GroupExtension/Basic.lean; directory Mathlib/GroupTheory/GroupExtension",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group-extension conjugacy definitions and formal properties, Lie-algebra triangularizability, and root-system constructions do not assert conjugacy of group-scheme sections"
+  },
+  {
+   "tool": "grep",
+   "query": "section.*conjug|conjug.*section|smooth.*diagonalizable|diagonalizable.*smooth",
+   "results": "20 hits; Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean, Mathlib/Algebra/Algebra/Spectrum/Basic.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean, Mathlib/LinearAlgebra/Matrix/PosDef.lean, Mathlib/LinearAlgebra/Matrix/PosDef.lean, Mathlib/LinearAlgebra/Determinant.lean, Mathlib/GroupTheory/GroupExtension/Defs.lean, Mathlib/GroupTheory/GroupExtension/Defs.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract GroupExtension conjugacy definitions, equivalence-relation properties, and point-dependent differences of sections do not imply one kernel point conjugates two group-scheme sections with smooth diagonal quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a triangular affine group scheme over an algebraically closed field with smooth diagonal quotient, any two group homomorphism sections are conjugate by an element of the unipotent kernel",
+   "results": "8 hits; AddGroupExtension.Section.exists_eq_inl_add, AddGroupExtension.IsConj, GroupExtension.Section.mk.inj, GroupExtension.Section.instFunLike, AddGroupExtension.Section.mk.injEq, GroupExtension.Splitting.conjAct, AddGroupExtension.Section.mk.inj, derivationOfSectionOfKerSqZero.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract GroupExtension conjugacy definitions, equivalence-relation properties, and point-dependent differences of sections do not imply one kernel point conjugates two group-scheme sections with smooth diagonal quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupExtension\", \"IsConj\"",
+   "results": "5 hits; GroupExtension.IsConj, GroupExtension.IsConj.setoid, GroupExtension.IsConj.refl, GroupExtension.IsConj.symm, GroupExtension.IsConj.trans",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract GroupExtension conjugacy definitions, equivalence-relation properties, and point-dependent differences of sections do not imply one kernel point conjugates two group-scheme sections with smooth diagonal quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two sections of an upper triangular algebraic group quotient by its unitriangular kernel are conjugate by a kernel rational point when the diagonal quotient is smooth",
+   "results": "8 hits; GroupExtension.IsConj, GroupExtension.Section.exists_eq_mul_inl, GroupExtension.Section.exists_eq_inl_mul, GroupExtension.IsConj.refl, GroupExtension.IsConj.setoid, Algebra.SubmersivePresentation.sectionCotangent_eq_iff, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, GroupExtension.ConjClasses",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract GroupExtension conjugacy definitions, equivalence-relation properties, and point-dependent differences of sections do not imply one kernel point conjugates two group-scheme sections with smooth diagonal quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "triangular.*section|section.*triangular|unipotent.*conjug|conjug.*unipotent",
+   "results": "1 hits: Mathlib/LinearAlgebra/Matrix/SchurComplement.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj is a definition and its reflexive/symmetric/transitive lemmas do not assert existence of a conjugator; the remaining hits concern matrices, representations or formal smoothness, not algebraic group-scheme sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugacy of homomorphism sections of a triangular algebraic group scheme modulo its unitriangular subgroup with smooth quotient",
+   "results": "8 hits: GroupExtension.IsConj, LinearMap.conjugate_i, GroupExtension.Splitting.conjAct, isConjRoot_algHom_iff, AddGroupExtension.IsConj, AddGroupExtension.Section, Algebra.FormallySmooth.liftOfSurjective, ConjAct.instGroup",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj is a definition and its reflexive/symmetric/transitive lemmas do not assert existence of a conjugator; the remaining hits concern matrices, representations or formal smoothness, not algebraic group-scheme sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupExtension\", \"IsConj\"",
+   "results": "5 hits: GroupExtension.IsConj, GroupExtension.IsConj.setoid, GroupExtension.IsConj.refl, GroupExtension.IsConj.symm, GroupExtension.IsConj.trans",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj is a definition and its reflexive/symmetric/transitive lemmas do not assert existence of a conjugator; the remaining hits concern matrices, representations or formal smoothness, not algebraic group-scheme sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two algebraic group scheme sections of a smooth diagonal quotient of an upper triangular group are conjugate by one unitriangular kernel rational point",
+   "results": "8 hits: Rep.diagonalHomEquiv_apply, Action.diagonalSuccIsoTensorTrivial_hom_hom_apply, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, Rep.diagonalHomEquiv_symm_apply, AlgebraicGeometry.diagonal_SpecMap, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply, AlgebraicGeometry.diagonal_Spec_map, SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj is a definition and its reflexive/symmetric/transitive lemmas do not assert existence of a conjugator; the remaining hits concern matrices, representations or formal smoothness, not algebraic group-scheme sections"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-solvable-torus-complements",
+  "date": "2026-10-23",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: The general complement theorem supplies the section; the item explicitly constructs the inverse multiplication map and projection. In the maximal-torus argument, compare the section furnished by the given torus over its image with the restriction of a section over the whole diagonal quotient; Milne Theorem 16.27(a).",
+   "via": [
+    "lem-sfb-solvable-torus-complements",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-triangular-quotient-section-conjugacy",
+  "worker": "stage1",
+  "summary": "Preserved the already corrected smooth-diagonal-quotient statement. Reused the coordinate filtration, algebraic-group image factorization and diagonalizability results; added only the additive-subgroup principal crossed-homomorphism lemma. Wrote the complete coordinate induction, including rational lifts and the conjugation sign on all algebras. No Lean declaration supplies an attachment.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting algebraic-group branch, specifically the Milne 16.27(a) conjugacy input of lem-sfb-solvable-torus-complements. Whole-blueprint searches for crossed, diagonalizable, trigonalizable and unitriangular found no duplicate. The ancestor command reports from.node=None, retained from the live lineage.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic Nullstellensatz tool for rational lifts in a nonempty affine finite-type quotient fibre; the algebraic-group unit supplies no residue-field assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-0e308af43",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-0e308af43 (reviewer sub-agent of L); spot-checked: First split, not a 2026-10-21 re-split: live item is still unsplit; statement, stmt_deps, source and blueprint field byte-identical to live; no SGA; no cycle. Source: Milne iAG2017 Th.16.27(a) p.333, Summary 16.29 p.334 (smooth D, matches the item's hypothesis), Ex.15.1 and Prop.15.3 pp.302-303. Checked the report's counterexample to 16.27(a) without smooth D: J={[[t,x],[0,1]]: t^p=1, x^p=0}, s2(t)=[[t,1-t],[0,1]], V(F)=0; correct, and the live statement already excludes it. Steps: (1) factorization node applied to delta: J->G_m^n, ker delta = J∩U_n = V; D identified with I by Yoneda; split-torus node gives D=Spec F[M]; chi_ij(q g)=g_ii/g_jj. (2) V_r=J∩U^(r) normal in J; ker(p_r|V_{r-1})=V_r; N_r closed; conjugation formula with b in J⊂B_n; chi-stability via fppf-local lift and faithfully flat descent of the ideal equations. (3) Fibre over a in N_r(F) is nonempty, affine, finite type; a closed point has residue field F (Mathlib leaf). (4) Cocycle identity re-derived. (5) Induction stated with base and step; sign checked: c_r = v^-1 c_{r-1} s1 v s1^-1, a_r(c_r) = -a+(a-chi a)+chi a = 0; normality puts all factors in V_{r-1}. (6) V_m=1; n=1 gives V=1. New node lem-sfb-smooth-diagonal-additive-crossed-vanishing: statement only, self-contained, definitions cited, 6 searches. It is true: D reduced so f factors through N_red, then Milne 15.3 with a=-m; independent check (chi trivial: Hom(D,G_a)=0; chi nontrivial: a=f(d0)/(1-chi(d0)) lies in N(F), a vector space over the finite field F_p[chi(D(F))] or equal to 0/F). Smoothness is needed (mu_p, alpha_p, f=1-t). Not a duplicate of additive-subgroup-...-extension-splitting (existence only), multiplicative-additive-vanishing-criterion, diagonalizable-to-unipotent-trivial or triangular-diagonal-kernel; strictly smaller than the item (D1). Route: all statements in sk-thm-sf-ctf-stability except the closed-point Mathlib leaf; its tool_uses entry is harmless, accepted. Batch-5: the factorization node reaches only lem-trf-fppf-covering-base-change (Mathlib leaf, sk-i-curve-zero: fppf coverings stable under base change), generic, not a step of the trace formula or Poincare duality; accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TriangularQuotientSectionConjugacy",
+  "declaration": "AlgebraicGeometry.triangular_quotient_section_conjugacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TriangularQuotientSectionConjugacy.lean",
+  "statement": "theorem triangular_quotient_section_conjugacy {F : Type u} [Field F] [IsAlgClosed F] (n : ℕ) (hn : 1 ≤ n) (J V D : Grp (Over (Spec (.of F)))) [IsAffine J.X.left] [LocallyOfFiniteType J.X.hom] [QuasiCompact J.X.hom] [IsAffine V.X.left] [LocallyOfFiniteType V.X.hom] [QuasiCompact V.X.hom] [IsAffine D.X.left] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom] (j : J.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) F) [IsClosedSubgroupScheme j] (htriangular : ∀ (A : Type u) [CommRing A] [Algebra F A] (x : (Spec (.of A)).asOver (Spec (.of F)) ⟶ J.X) (a b : Fin n), b < a → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) F A (x ≫ j)).val ⟨a⟩ ⟨b⟩ = 0) (i : V ⟶ J) [IsClosedSubgroupScheme i.hom.hom] (hintersection : ∀ (A : Type u) [CommRing A] [Algebra F A] (x : (Spec (.of A)).asOver (Spec (.of F)) ⟶ J.X), (∃ y : (Spec (.of A)).asOver (Spec (.of F)) ⟶ V.X, y ≫ i.hom.hom = x) ↔ ∀ a : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) F A (x ≫ j)).val ⟨a⟩ ⟨a⟩ = 1) (q : J ⟶ D) (hquotient : IsFppfGroupQuotient i q) [Smooth D.X.hom] (s₁ s₂ : D ⟶ J) (hs₁ : s₁ ≫ q = 𝟙 D) (hs₂ : s₂ ≫ q = 𝟙 D) : ∃ v : 𝟙_ (Over (Spec (.of F))) ⟶ V.X, s₂.hom.hom = (toUnit D.X ≫ v ≫ i.hom.hom) * s₁.hom.hom * (toUnit D.X ≫ v ≫ i.hom.hom)⁻¹ ∧ ∀ (A : Type u) [CommRing A] [Algebra F A] (d : (Spec (.of A)).asOver (Spec (.of F)) ⟶ D.X), d ≫ s₂.hom.hom = (toUnit ((Spec (.of A)).asOver (Spec (.of F))) ≫ v ≫ i.hom.hom) * (d ≫ s₁.hom.hom) * (toUnit ((Spec (.of A)).asOver (Spec (.of F))) ≫ v ≫ i.hom.hom)⁻¹",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Triangularity and the scheme-theoretic unitriangular intersection are specified on every commutative F-algebra using the existing GeneralLinearGroup.homMulEquiv; the quotient uses the existing IsFppfGroupQuotient. Both equality of morphisms and the formula after scalar extension are retained. No smoothness or connectedness condition on J or V is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8506a247e",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Item lean statement matches node clause by clause: alg. closed F; J,V,D Grp(Over Spec F) affine+LocallyOfFiniteType+QuasiCompact; n≥1; j closed subgroup of existing GeneralLinearGroup(ULift(Fin n)) F (IsClosedSubgroupScheme extends IsMonHom + closed immersion) with all-algebra lower-entry vanishing via homMulEquiv; V=J∩U_n via closed subgroup i and all-algebra iff diagonal=1 (scheme-theoretic); q via landed IsFppfGroupQuotient (def-sfb-fppf-group-quotient-presentation, live def node, record byte-identical to live); Smooth only on D; Grp-hom sections s_i≫q=𝟙; single v : 𝟙_ ⟶ V.X with morphism equality s₂=v s₁ v⁻¹ in Hom.group and per-algebra formula using toUnit≫v (scalar extension, same v). Item node differs from live only in lean+stmt_deps. Edge cases n=1, nonreduced, char p, universe u ok. No defs, sorry only, source/blueprint docstrings with 6-step plan, lean.statement verbatim, report has Worker report and Second reading by Q37. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-cauchy-transform-parameters",
+ "kind": "statement",
+ "title": "One-variable cutoff Cauchy transform with smooth parameters",
+ "statement": "Use the usual fields $\\mathbf R$ and $\\mathbf C$ [def-weil-field]. Let $c\\in\\mathbf C$, let $0<r<R$, and put $D_R=\\{z\\in\\mathbf C:|z-c|<R\\}$ and $D_r=\\{z\\in\\mathbf C:|z-c|<r\\}$. There exists a real-valued $C^\\infty$ function $\\chi$ on $\\mathbf C$, equal to $1$ on a neighborhood of $\\overline{D_r}$, whose support (the closure of its nonzero locus) is a compact subset of $D_R$, with the following properties. For every integer $m\\geq0$, every open $P\\subset\\mathbf R^m$, and every smooth $h:D_R\\times P\\to\\mathbf C$, set $H(\\zeta,t)=\\chi(\\zeta)h(\\zeta,t)$ on $D_R\\times P$ and $H(\\zeta,t)=0$ for $\\zeta\\notin D_R$. Then\n$$ (T_\\chi h)(z,t)=\\frac1\\pi\\int_{\\mathbf C}\\frac{H(\\zeta,t)}{z-\\zeta}\\,dA(\\zeta) $$\nis absolutely convergent and smooth on $\\mathbf C\\times P$, where $dA$ is planar Lebesgue measure and the integrand may be set to zero at $\\zeta=z$. Here smooth means $C^\\infty$ in all real coordinates. The map $T_\\chi$ is complex-linear in $h$ and satisfies\n$$\\frac{\\partial T_\\chi h}{\\partial\\bar z}=\\chi(z)h(z,t)\\quad\\hbox{on }D_R\\times P,\\qquad\n\\partial_t^\\nu(T_\\chi h)=T_\\chi(\\partial_t^\\nu h)\\quad\\hbox{on }\\mathbf C\\times P$$\nfor every multi-index $\\nu\\in\\mathbf N^m$, where $\\partial/\\partial\\bar z=\\tfrac12(\\partial/\\partial x+i\\partial/\\partial y)$ for $z=x+iy$. In particular $\\partial T_\\chi h/\\partial\\bar z=h$ on $D_r\\times P$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "I §3.A, Corollary (3.4), printed p.21, and I §8, Exercise 8.5, printed p.61, partial convolution with a cutoff; the parameter-derivative identities state the smooth-parameter version used there; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Choose $r<a<b<R$ and apply the smooth ball-bump lemma on the underlying real inner product space $\\mathbf C$, with radii $a,b$, to obtain $\\chi$. It is one on $D_a$, an open neighborhood of $\\overline{D_r}$, and its compact support is $\\overline{D_b}\\subset D_R$. These choices depend only on $c,r,R$.",
+   "uses": [
+    "lem-sfb-euclidean-smooth-ball-bump"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I section 3.A, formula (3.2), Corollary (3.4), printed p.21, and I section 8, Exercise 8.5, printed p.61; read online, WANTED locally"
+   }
+  },
+  {
+   "text": "Form the stated zero extension $H$. It is smooth: on $D_R\\times P$ this is the product of smooth functions; at every point outside $D_R$ it is identically zero on a neighborhood, since $\\operatorname{supp}\\chi\\subset\\overline{D_b}$ and $b<R$. It vanishes outside the single compact set $K=\\overline{D_b}$ in the complex variable. Every real partial derivative of $H$ vanishes outside $K$ as well. Moreover $\\partial_t^\\nu H$ is the same zero extension formed from $\\chi\\partial_t^\\nu h$, since $\\chi$ is independent of $t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I section 3.A, formula (3.2), Corollary (3.4), printed p.21, and I section 8, Exercise 8.5, printed p.61; read online, WANTED locally"
+   }
+  },
+  {
+   "text": "By the Cauchy--Green test-function lemma, $k(w)=1/(\\pi w)$, with $k(0)=0$, is locally integrable. Apply the parametric convolution lemma to $k,H,K,P$. This gives absolute convergence and joint real smoothness of $F(z,t)=\\int k(w)H(z-w,t)\\,dA(w)$. The substitution $\\zeta=z-w$ preserves planar Lebesgue measure: its real linear part is $-I_2$, with absolute determinant one. Thus $F=T_\\chi h$, including the chosen value zero at the singular point. The same substitution transports absolute convergence.",
+   "uses": [
+    "lem-sfb-cauchy-green-test-function",
+    "lem-sfb-locally-integrable-parametric-convolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I section 3.A, formula (3.2), Corollary (3.4), printed p.21, and I section 8, Exercise 8.5, printed p.61; read online, WANTED locally"
+   }
+  },
+  {
+   "text": "For fixed $t$, use the total derivative formula of the convolution lemma in the real $z$ directions $1,i$ and take half the first plus $i/2$ times the second. After the same substitution this yields $\\partial_{\\bar z}T_\\chi h=\\int k(z-\\zeta)\\partial_{\\bar\\zeta}H(\\zeta,t)\\,dA(\\zeta)$. The smooth function $u=H(-,t)$ has compact support, so the Cauchy--Green test-function identity makes the last expression $H(z,t)$. On $D_R\\times P$ this is $\\chi(z)h(z,t)$; on $D_r\\times P$, $\\chi=1$.",
+   "uses": [
+    "lem-sfb-locally-integrable-parametric-convolution",
+    "lem-sfb-cauchy-green-test-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I section 3.A, formula (3.2), Corollary (3.4), printed p.21, and I section 8, Exercise 8.5, printed p.61; read online, WANTED locally"
+   }
+  },
+  {
+   "text": "The parameter-direction part of the same derivative formula gives $\\partial_{t_j}F=\\int k(w)\\partial_{t_j}H(z-w,t)\\,dA(w)$. Iterate for $|\\nu|$ derivatives: the base $|\\nu|=0$ is the definition; at each induction step the differentiated $H$ is smooth with the same support $K$, so the convolution lemma applies again. Step 2 identifies the result with $T_\\chi(\\partial_t^\\nu h)$. Finally $H_{\\alpha h+\\beta h\\prime}=\\alpha H_h+\\beta H_{h\\prime}$ for $\\alpha,\\beta\\in\\mathbf C$; linearity of the absolutely convergent integral proves complex linearity. For $m=0$ only the zero multi-index occurs, and the same proof applies.",
+   "uses": [
+    "lem-sfb-locally-integrable-parametric-convolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I section 3.A, formula (3.2), Corollary (3.4), printed p.21, and I section 8, Exercise 8.5, printed p.61; read online, WANTED locally"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-euclidean-smooth-ball-bump",
+  "lem-sfb-cauchy-green-test-function",
+  "lem-sfb-locally-integrable-parametric-convolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "I section 3.A, formula (3.2), Corollary (3.4), printed p.21, and I section 8, Exercise 8.5, printed p.61; read online, WANTED locally; assembly with the Mathlib convolution results"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Cauchy transform of a compactly supported smooth function solves the inhomogeneous Cauchy Riemann equation smoothly with parameters",
+   "results": "OK 8 hits: Complex.circleTransformDeriv, Complex.circleTransformBoundingFunction, DifferentiableOn.isExactOn_ball, Complex.circleTransformDeriv_eq, Complex.continuous_circleTransformDeriv, Complex.IsExactOn, UpperHalfPlane.contMDiffAt_ofComplex, Complex.circleTransformDeriv_bound",
+   "date": "2026-10-24",
+   "verdict": "no match: generic convolution theorems provide smoothness and parameter differentiation, but not the fundamental-solution identity for 1/(pi z); circle integrals and the resolvent transform off the support do not solve the inhomogeneous d-bar equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"convolution\", ContDiff",
+   "results": "OK 6 hits: HasCompactSupport.contDiff_convolution_right, HasCompactSupport.contDiff_convolution_left, HasCompactSupport.hasDerivAt_convolution_right, HasCompactSupport.hasDerivAt_convolution_left, HasCompactSupport.hasFDerivAt_convolution_right, HasCompactSupport.hasFDerivAt_convolution_left",
+   "date": "2026-10-24",
+   "verdict": "no match: generic convolution theorems provide smoothness and parameter differentiation, but not the fundamental-solution identity for 1/(pi z); circle integrals and the resolvent transform off the support do not solve the inhomogeneous d-bar equation"
+  },
+  {
+   "tool": "grep",
+   "query": "Cauchy.*transform|Cauchy.*Green|fundamental.*solution|dbar|barPartial",
+   "results": "OK 7 hits: Mathlib/NumberTheory/Pell.lean, Mathlib/NumberTheory/Pell.lean, Mathlib/NumberTheory/Pell.lean, Mathlib/NumberTheory/Pell.lean, Mathlib/NumberTheory/Pell.lean, Mathlib/MeasureTheory/Measure/ResolventTransform.lean, Mathlib/MeasureTheory/Measure/ResolventTransform.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: generic convolution theorems provide smoothness and parameter differentiation, but not the fundamental-solution identity for 1/(pi z); circle integrals and the resolvent transform off the support do not solve the inhomogeneous d-bar equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Convolution with one over pi z solves the d bar equation with smooth parameters",
+   "results": "OK 8 hits: MeasureTheory.contDiffOn_convolution_right_with_param_comp, MeasureTheory.contDiffOn_convolution_right_with_param_aux, ContDiffBump.convolution_eq_right, HasCompactSupport.hasDerivAt_convolution_right, MeasureTheory.contDiffOn_convolution_left_with_param, MeasureTheory.hasFDerivAt_convolution_right_with_param, HasCompactSupport.contDiff_convolution_left, HasCompactSupport.hasDerivAt_convolution_left",
+   "date": "2026-10-24",
+   "verdict": "no match: generic convolution theorems provide smoothness and parameter differentiation, but not the fundamental-solution identity for 1/(pi z); circle integrals and the resolvent transform off the support do not solve the inhomogeneous d-bar equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A partial Cauchy Green integral with a cutoff is a right inverse for the antiholomorphic derivative and commutes with parameter derivatives",
+   "results": "OK 8 hits: Complex.circleTransformDeriv, Complex.circleTransform, Complex.integral_boundary_rect_of_continuousOn_of_hasFDerivAt_real, Complex.IsConservativeOn.hasDerivAt_wedgeIntegral, Complex.integral_boundary_rect_of_hasFDerivAt_real_off_countable, Complex.cderiv, Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable, Complex.IsExactOn",
+   "date": "2026-10-24",
+   "verdict": "no match: generic convolution theorems provide smoothness and parameter differentiation, but not the fundamental-solution identity for 1/(pi z); circle integrals and the resolvent transform off the support do not solve the inhomogeneous d-bar equation"
+  },
+  {
+   "tool": "grep",
+   "query": "convolution.*param|contDiff.*convolution|Cauchy.*Green|fundamental.*solution",
+   "results": "OK 19 hits: Mathlib/Analysis/Convolution.lean, Mathlib/Analysis/Convolution.lean, Mathlib/Analysis/Convolution.lean, Mathlib/Analysis/Convolution.lean, Mathlib/Analysis/Convolution.lean, Mathlib/Analysis/Calculus/ContDiff/Convolution.lean, Mathlib/Analysis/Calculus/ContDiff/Convolution.lean, Mathlib/Analysis/Calculus/ContDiff/Convolution.lean Subdirectory: Analysis",
+   "date": "2026-10-24",
+   "verdict": "no match: generic convolution theorems provide smoothness and parameter differentiation, but not the fundamental-solution identity for 1/(pi z); circle integrals and the resolvent transform off the support do not solve the inhomogeneous d-bar equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-scalar-dolbeault",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: I §3.C, formula (3.14) and Cauchy--Riemann criterion, printed pp.23--24; I §3.E, Lemma (3.29), smooth scalar case p=0, printed pp.28--29. The point a is translated to 0; only local solvability, not solvability on all of U, is asserted. Supporting scalar Dolbeault step: I §8, Exercise 8.5: the partial convolution F_J=(psi f_J) star_k (1/(pi z_k)) used to remove the highest antiholomorphic differential; analytic right-inverse and parameter commutation input",
+   "via": [
+    "lem-sfb-local-scalar-dolbeault",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cauchy-transform-parameters",
+  "worker": "stage1",
+  "summary": "Separated Cauchy--Green reproduction from smoothing and differentiation of convolution. Two generic Mathlib leaves supply ball bumps and convolution with smooth parameters. Zero extension, cutoff choice, Wirtinger and multi-index assembly are explicit; original statement retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: I §3.C, formula (3.14) and Cauchy--Riemann criterion, printed pp.23--24; I §3.E, Lemma (3.29), smooth scalar case p=0, printed pp.28--29. The point a is translated to 0; only local solvability, not solvability on all of U, is asserted. Supporting scalar Dolbeault step: I §8, Exercise 8.5: the partial convolution F_J=(psi f_J) star_k (1/(pi z_k)) used to remove the highest antiholomorphic differential; analytic right-inverse and parameter commutation input; realizes the analytic right-inverse input below the scalar Dolbeault step using the same partial-convolution route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-e5bd74330",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-e5bd74330 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps, all 3 new nodes, the cited Mathlib lines and the parent lem-sfb-local-scalar-dolbeault. The item statement is byte-identical to live, and live still has the item unsplit (clones/live and side-live), so no other group has split it first. There is no repair note, so this is not a 2026-10-21 re-split. No cycle: the only citer is the parent, and the new nodes cite only def-weil-field. Normalisation: from Cauchy–Pompeiu with dζ∧dζ̄ = −2i dA, u(z) = (1/π)∫∂̄u/(z−ζ) dA, which matches k = 1/(πw); a radial test u = φ(|ζ|²) at z = 0 gives φ(0). The Cauchy–Green node (unsplit, statement only) is true and strictly smaller than the item (D1): it is the left inverse for compactly supported u, while the item's right inverse with cutoff and parameters needs steps 3–5. The ball-bump leaf's lines are exact (ContDiffBump l.70, one_of_mem_closedBall 137, nonneg 142, le_one 148, tsupport_eq 157, hasCompactSupport 166, contDiff 203, InnerProduct l.57). The convolution leaf's lines are exact (hasFDerivAt_convolution_right_with_param 141–148, contDiffOn_convolution_right_with_param 333–338, convolutionExists_right 319–320, ConvolutionExistsAt 156–158, convolution 403–406); with 𝕜 = ℝ, G = ℂ under volume, L = multiplication, k already comes first. Steps: 1 gets χ (r < a < b < R, support = closed b-ball ⊂ D_R). Step 2 (elementary) shows the zero extension is smooth and every derivative vanishes off K. Step 3 cites the local-integrability sentence of the statement, and the substitution ζ = z − w has |det| = 1. Step 4 forms ½(D[1] + iD[i]) and applies Cauchy–Green to H(·, t), so the kernel is never differentiated. Step 5 is an explicit induction on |ν| plus linearity, with m = 0 included. Edge cases checked: m = 0, P = ∅, h = 0, z outside supp χ. There is no Pompeiu or Cauchy–Green duplicate in the DAG and nothing on these facts in blueprint main-20261015. No SGA, no tool_uses. Advisory only: the existing Mathlib leaf lem-sfb-smooth-separating-cutoff could also have produced χ, but the ball bump is a different exact-support statement and was kept. The Demailly PDF is still not held locally (WANTED; proof_origin agent, unchanged from base)."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.CutoffCauchyTransform",
+  "declaration": "Complex.exists_cutoffCauchyTransform_parameters",
+  "declarations": [
+   "Complex.cutoffCauchyIntegrand",
+   "Complex.cutoffCauchyTransform",
+   "Complex.cutoffCauchyParameterDeriv",
+   "Complex.exists_cutoffCauchyTransform_parameters"
+  ],
+  "file": "lean/Sheaf/Analysis/Complex/CutoffCauchyTransform.lean",
+  "statement": "theorem exists_cutoffCauchyTransform_parameters (c : ℂ) (r R : ℝ) (hr : 0 < r) (hrR : r < R) : ∃ χ : ℂ → ℝ, ContDiff ℝ ∞ χ ∧ (∃ U : Set ℂ, IsOpen U ∧ closure (Metric.ball c r) ⊆ U ∧ ∀ z ∈ U, χ z = 1) ∧ IsCompact (tsupport χ) ∧ tsupport χ ⊆ Metric.ball c R ∧ ∀ (m : ℕ) (P : Set (Fin m → ℝ)), IsOpen P → ∀ h : ℂ × (Fin m → ℝ) → ℂ, ContDiffOn ℝ ∞ h (Metric.ball c R ×ˢ P) → (∀ (z : ℂ) (t : Fin m → ℝ), t ∈ P → Integrable (cutoffCauchyIntegrand m c R χ h z t) volume) ∧ ContDiffOn ℝ ∞ (cutoffCauchyTransform m c R χ h) (Set.univ ×ˢ P) ∧ (∀ (z : ℂ) (t : Fin m → ℝ), z ∈ Metric.ball c R → t ∈ P → (fderiv ℝ (fun w ↦ cutoffCauchyTransform m c R χ h (w, t)) z 1 + I * fderiv ℝ (fun w ↦ cutoffCauchyTransform m c R χ h (w, t)) z I) / 2 = (χ z : ℂ) * h (z, t)) ∧ (∀ (ν : Fin m → ℕ) (z : ℂ) (t : Fin m → ℝ), t ∈ P → cutoffCauchyParameterDeriv m P ν (cutoffCauchyTransform m c R χ h) (z, t) = cutoffCauchyTransform m c R χ (cutoffCauchyParameterDeriv m P ν h) (z, t)) ∧ (∀ (z : ℂ) (t : Fin m → ℝ), z ∈ Metric.ball c r → t ∈ P → (fderiv ℝ (fun w ↦ cutoffCauchyTransform m c R χ h (w, t)) z 1 + I * fderiv ℝ (fun w ↦ cutoffCauchyTransform m c R χ h (w, t)) z I) / 2 = h (z, t)) ∧ (∀ g : ℂ × (Fin m → ℝ) → ℂ, ContDiffOn ℝ ∞ g (Metric.ball c R ×ˢ P) → ∀ (α β : ℂ) (z : ℂ) (t : Fin m → ℝ), t ∈ P → cutoffCauchyTransform m c R χ (fun q ↦ α * h q + β * g q) (z, t) = α * cutoffCauchyTransform m c R χ h (z, t) + β * cutoffCauchyTransform m c R χ g (z, t))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Input functions are ambient representatives on the open product domain; the integrand ignores all values outside the disk, and parameter differentiation is within P. The three data definitions expand the integrand, transform, and multi-index derivatives introduced by this same node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d1916f6a",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Only the lean record is added (node diff vs side-live) plus the new module CutoffCauchyTransform. Each clause matches: real C^∞ cutoff (ContDiff ∞ = ⊤:ℕ∞) equal to 1 on an open U ⊇ closure(ball c r); tsupport compact ⊆ ball c R; χ quantified before m,P,h; ContDiffOn on the open ball×P with off-domain values unused; zero-extended integrand with division by 0 = 0; (π)⁻¹∫ against volume on ℂ = planar Lebesgue (Lebesgue/Complex.lean:60); integrability for t∈P; ContDiffOn on univ×P; ∂̄ = (fderiv·1 + I·fderiv·I)/2 = χh on ball R and = h on ball r (Cauchy–Pompeiu sign checked); multi-index fderivWithin iterate on open P is the usual partial derivative; complex linearity. Edge cases m=0, ν=0, P=∅, ζ=z checked; no universes. Three data helpers, not hollow, with source/blueprint docstrings; sorry only; 5-step proof docstring; statement verbatim; no duplicate (HermitianDolbeaultData.dbar is a manifold-level field). Report sections present. No compile run (no file changed); worker reports a clean compile. Advisory: the Wirtinger expression is inlined twice."
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-ordinary-ambient-alpha-pasting",
+ "kind": "statement",
+ "title": "Ordinary derived clopen alpha pasting",
+ "statement": "For the ordinary calculus at every positive finite coefficient level, the intrinsic alpha obeys vertical and horizontal pasting, with exactly the canonical pullback and open-extension compositors of [def-sf-ambient-proper-open-calculus]. All schemes and all edges lie in Spaces of the fixed finite-field datum. Open edges are quasi-compact, proper edges are proper, and each square commutes. No Cartesian hypothesis is imposed. This assertion is only the two alpha-pasting equations, not the compositor coherence laws or any mate equation.",
+ "stmt_deps": [
+  "def-sf-ambient-proper-open-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7."
+ },
+ "proof": [
+  {
+   "text": "Apply the ordinary vertical and horizontal clauses of ambientUnderivedClopenPasting at level n. Encode each side as a finite ExactDerivedPasting.Expression with exact inverse-image and open-extension edges. The exact_derived_transformation_pasting theorem carries each ordinary equality to the equality of derived expressions, including both specified compositor cells and the intervening associators.",
+   "uses": [
+    "lem-sf-ambient-underived-clopen-pasting",
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7."
+   }
+  },
+  {
+   "text": "Use ordinary_alpha_localized to identify the transported localized square cells with properOpenAlpha. The private ordinary_pull_cell_localized and ordinary_open_comp_localized comparisons of the same ordinary-localization module identify the inverse-image and open-extension compositor cells. For vertical pasting expand the canonical total-derived pullback compositor, cancel each total/exact comparison with its inverse, and use naturality of the first square cell. For horizontal pasting use naturality of the pullback comparison and of the open compositor, then cancel the intermediate pullback isomorphism. Evaluate at an arbitrary derived object. Finally restrict the scheme statements to Spaces and unfold the ordinary calculus; all arguments apply to unbounded complexes and empty opens.",
+   "uses": [
+    "lem-sf-ambient-ordinary-clopen-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-underived-clopen-pasting",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-sf-ambient-ordinary-clopen-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7. M7: explicit finite-expression localization and naturality/cancellation of total/exact comparison isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact derived localization preserves vertical and horizontal pasting of noninvertible natural transformations",
+   "results": "LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure and Functor.leftDerivedNatTrans_comp; no prescribed pro-etale clopen comparison identity.",
+   "date": "2026-10-26",
+   "verdict": "Generic localization tools; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "Localization.liftNatTrans, comp_liftNatTrans, liftNatTrans_id and liftNatIso_hom in Mathlib.CategoryTheory.Localization.Predicate.",
+   "date": "2026-10-26",
+   "verdict": "Generic composition preservation; the prescribed total/exact comparisons still need identification."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans_id|comp_liftNatTrans in Mathlib/CategoryTheory/Localization/Predicate.lean; ordinary_open_comp_localized|ordinary_pull_cell_localized in lean/Sheaf/SixFunctors/AmbientOrdinaryClopenLocalization.lean",
+   "results": "Predicate.lean lines 339 and 347; proved private ordinary_open_comp_localized and ordinary_pull_cell_localized.",
+   "date": "2026-10-26",
+   "verdict": "The exact-derived pasting theorem and these comparison helpers support the stated reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OrdinaryAmbientProperOpenLaws",
+  "date": "2026-10-26",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ordinary-ambient-proper-open-laws",
+   "place": "Ordinary derived clopen alpha pasting",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OrdinaryAmbientAlphaPasting",
+  "file": "lean/Sheaf/SixFunctors/OrdinaryAmbientAlphaPasting.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.ordinaryAmbientAlphaPasting",
+  "statement": "theorem ordinaryAmbientAlphaPasting (F₀ : WeilConjectures.FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (hl : l ≠ F₀.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :\n    let c := (ordinary F₀ (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))\n    (∀ {A C₀ E B D F : Spaces F₀}\n    (k : A ⟶ B) (i : C₀ ⟶ D) (j : E ⟶ F)\n    (r₁ : A ⟶ C₀) (r₂ : C₀ ⟶ E) (p₁ : B ⟶ D) (p₂ : D ⟶ F)\n    [IsOpenImmersion ((geometry F₀).map k)] [IsOpenImmersion ((geometry F₀).map i)]\n    [IsOpenImmersion ((geometry F₀).map j)]\n    [QuasiCompact ((geometry F₀).map k)] [QuasiCompact ((geometry F₀).map i)]\n    [QuasiCompact ((geometry F₀).map j)]\n    [IsProper ((geometry F₀).map r₁)] [IsProper ((geometry F₀).map r₂)]\n    [IsProper ((geometry F₀).map p₁)] [IsProper ((geometry F₀).map p₂)]\n    (h₁ : k ≫ p₁ = r₁ ≫ i) (h₂ : i ≫ p₂ = r₂ ≫ j)\n    (h : k ≫ (p₁ ≫ p₂) = (r₁ ≫ r₂) ≫ j) (M : c.D E),\n    (c.pComp p₁ p₂).inv.app ((c.J j).obj M) ≫\n        (c.alpha k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app M ≫\n        (c.J k).map ((c.pComp r₁ r₂).hom.app M) =\n      (c.P p₁).map ((c.alpha i r₂ p₂ j h₂).app M) ≫\n        (c.alpha k r₁ p₁ i h₁).app ((c.P r₂).obj M)) ∧\n    (∀ {A B E C₀ D F : Spaces F₀}\n    (k : A ⟶ B) (l : B ⟶ E) (i : C₀ ⟶ D) (j : D ⟶ F)\n    (r : A ⟶ C₀) (p : B ⟶ D) (q : E ⟶ F)\n    [IsOpenImmersion ((geometry F₀).map k)] [IsOpenImmersion ((geometry F₀).map l)]\n    [IsOpenImmersion ((geometry F₀).map i)] [IsOpenImmersion ((geometry F₀).map j)]\n    [QuasiCompact ((geometry F₀).map k)] [QuasiCompact ((geometry F₀).map l)]\n    [QuasiCompact ((geometry F₀).map i)] [QuasiCompact ((geometry F₀).map j)]\n    [IsProper ((geometry F₀).map r)] [IsProper ((geometry F₀).map p)]\n    [IsProper ((geometry F₀).map q)]\n    (h₁ : k ≫ p = r ≫ i) (h₂ : l ≫ q = p ≫ j)\n    (h : (k ≫ l) ≫ q = r ≫ (i ≫ j)) (M : c.D C₀),\n    (c.P q).map ((c.jComp i j).hom.app M) ≫\n        (c.alpha (k ≫ l) r q (i ≫ j) h).app M ≫\n        (c.jComp k l).inv.app ((c.P r).obj M) =\n      (c.alpha l p q j h₂).app ((c.J i).obj M) ≫\n        (c.J l).map ((c.alpha k r p i h₁).app M))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T201834-L-3417937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261026T235921-L-1468706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

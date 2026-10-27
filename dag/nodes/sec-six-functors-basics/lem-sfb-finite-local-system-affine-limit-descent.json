@@ -1,0 +1,374 @@
+{
+ "id": "lem-sfb-finite-local-system-affine-limit-descent",
+ "kind": "statement",
+ "title": "Finite locally constant etale module sheaves descend along affine inverse limits",
+ "statement": "Let $I$ be a nonempty directed set, let $(X_i)_{i\\in I}$ be an inverse system of quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition morphisms [pqf-def-affine-morphism], and let $X=\\varprojlim_i X_i$ with projections $p_i:X\\to X_i$ [lem-weil-pbc-limit-affine-transition]. Let $\\Lambda$ be a finite commutative ring, and let $F$ be a sheaf of $\\Lambda$-modules on the small etale site $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category]. Suppose $F$ is finite locally constant as a module sheaf: there is an etale covering $\\{U_a\\to X\\}$ on which $F|_{U_a}\\cong\\underline{M_a}$ for finite $\\Lambda$-modules $M_a$ [def-constructible-locally-constant, def-weil-pbc-constant-sheaf]. Then there exist $i\\in I$, a sheaf $F_i$ of $\\Lambda$-modules on $(X_i)_{\\mathrm{et}}$ which is etale locally constant with finite $\\Lambda$-module values in this same sense, and an isomorphism $p_i^{-1}F_i\\cong F$ of $\\Lambda$-module sheaves, where inverse image has its canonical constant-coefficient module structure [def-weil-pbc-inverse-image, lem-pe-constant-left-module-inverse-image]. No Noetherian hypothesis on the schemes is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GL2, label lemma-category-loc-cst-is-colimit, part (3), essential surjectivity for finite coefficient rings (which are Noetherian)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Each projection $p_i$ is affine. Since $I$ is nonempty, choose one stage; an affine morphism is quasi-compact and quasi-separated, so the qcqs permanence statements show that $X$ is quasi-compact and quasi-separated. The one-stratum partition $X=X$ and the given finite constant local models witness constructibility of $F$ in the finite-value module sense. Apply constructible-module limit descent to obtain $i$, a constructible module sheaf $F_i$ on $X_i$, and a module isomorphism $p_i^{-1}F_i\\cong F$. This only supplies a constructible model; it does not yet supply local constancy at a stage.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-constructible-module-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GL2, label lemma-category-loc-cst-is-colimit, proof, part (3)"
+   }
+  },
+  {
+   "text": "Choose a finite affine open cover $(W_b)_{b\\in B}$ of $X_i$. For each $b$, its pullback $W_{b,X}=W_b\\times_{X_i}X$ is affine, since it is affine over the affine scheme $W_b$. Pull the given trivializing etale cover back to $W_{b,X}$ and use finite affine etale refinement there. We obtain finitely many affine etale maps $U_{b,a}\\to W_{b,X}$ covering $W_{b,X}$, and finite $\\Lambda$-modules $M_{b,a}$ with $F|_{U_{b,a}}\\cong\\underline{M_{b,a}}$. A refined member factors through a given trivializing member, so the trivialization restricts; inverse image of a constant module sheaf is constant. All these comparisons preserve scalars by the constant-coefficient module inverse-image lemma. Only finitely many pairs $(b,a)$ occur. No assertion that an intersection of arbitrary affine opens is affine is used.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "lemma-constructible-pullback-constant",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-affine-etale-base-change-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GL2, label lemma-category-loc-cst-is-colimit, proof, part (3)"
+   }
+  },
+  {
+   "text": "For each $b$, apply finite affine covering descent with fixed affine etale target $W_b$ over $X_i$ and the finite covering $U_{b,a}\\to p_i^*W_b$. In its auxiliary-factorization slots take every $U_q$ to be the terminal etale object $X_i$ and the unique structure arrow. It gives a stage $j_b\\ge i$ and affine etale objects $U_{j_b,b,a}$ covering $W_b\\times_{X_i}X_{j_b}$, whose pullbacks to $X$ are the prescribed $U_{b,a}$ over $W_{b,X}$. Directedness gives a common $j\\ge j_b$ for the finitely many $b$. Pull these covers to $X_j$; the affine etale base-change system preserves standard covering families. Their targets $W_{b,j}$ form the inverse-image open cover of $X_j$, so the combined family $(U_{j,b,a}\\to X_j)_{b,a}$ is an etale cover. Put $F_j=t_{ji}^{-1}F_i$.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-cover-factorization-descent",
+    "lem-weil-pbc-affine-etale-base-change-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GL2, finite trivializing cover descent, using Tag 0EYL (lemma-colimit-affine-sites)"
+   }
+  },
+  {
+   "text": "For each pair $(b,a)$ let $B_{b,a}=F_j|_{U_{j,b,a}}$ and $C_{b,a}=\\underline{M_{b,a}}$ on $U_{j,b,a}$. The constructibility comparison with the coefficient-category predicate, followed by constructible pullback and the comparison back, shows that $B_{b,a}$ is constructible in the same finite-value module sense as $F_i$. The constant finite module sheaf $C_{b,a}$ is constructible by its one-stratum constant trivialization. For $k\\ge j$ put $U_{k,b,a}=U_{j,b,a}\\times_{X_j}X_k$. The scheme-over-limit lemma identifies their inverse limit with $U_{b,a}$. Their transitions are affine and every $U_{k,b,a}$ is affine, hence qcqs. Constant pullback and module inverse-image composition identify the pullbacks of $B_{b,a},C_{b,a}$ to $U_{b,a}$ with $F|_{U_{b,a}},\\underline{M_{b,a}}$. The chosen trivialization therefore gives a module isomorphism $\\alpha_{b,a}$ between those pullbacks.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "prop-constructible-pullback",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lemma-constructible-pullback-constant",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GL2, label lemma-category-loc-cst-is-colimit, proof, part (3)"
+   }
+  },
+  {
+   "text": "Apply clause (1) of constructible-module morphism descent to $\\alpha_{b,a}$ and to its inverse, on the system $(U_{k,b,a})_{k\\ge j}$. They descend, possibly at different indices, to morphisms $u_{b,a}:B_{b,a,k}\\to C_{b,a,k}$ and $v_{b,a}:C_{b,a,k}\\to B_{b,a,k}$. Take a common upper bound for these indices for every one of the finitely many pairs and pull all maps there. Their pullbacks remain $\\alpha_{b,a}$ and $\\alpha_{b,a}^{-1}$, using the module inverse-image composition comparisons. At this point no claim that the descended maps are isomorphisms has been made.",
+   "uses": [
+    "lem-sfb-constructible-module-affine-limit-hom",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GL2, label lemma-category-loc-cst-is-colimit, proof, part (3)"
+   }
+  },
+  {
+   "text": "On each limit $U_{b,a}$, the pullbacks of $v_{b,a}\\circ u_{b,a}$ and $\\mathrm{id}_{B_{b,a,k}}$ are equal, and those of $u_{b,a}\\circ v_{b,a}$ and $\\mathrm{id}_{C_{b,a,k}}$ are equal: they are respectively $\\alpha_{b,a}^{-1}\\alpha_{b,a}=1$ and $\\alpha_{b,a}\\alpha_{b,a}^{-1}=1$. Clause (2) of constructible-module morphism descent detects each of these two equalities at a later stage. Constructibility at later stages follows again by constructible pullback and the module constructibility comparison. A common upper bound $l$ of the finitely many equality stages makes both identities hold for every pair. Functors preserve identities and composition, so the identities persist at $l$. Thus $F_l|_{U_{l,b,a}}\\cong\\underline{M_{b,a}}$ as module sheaves for every pair, not merely as sheaves of sets.",
+   "uses": [
+    "lem-sfb-constructible-module-affine-limit-hom",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GL2, label lemma-category-loc-cst-is-colimit, proof, part (3)"
+   }
+  },
+  {
+   "text": "The base-changed family $(U_{l,b,a}\\to X_l)_{b,a}$ still covers, by covering preservation of affine etale base change. The isomorphisms just constructed with the finite modules $M_{b,a}$ are exactly finite local constancy in the statement. Furthermore $F_l=t_{li}^{-1}F_i$, so module inverse-image composition and the isomorphism in Step 1 give $p_l^{-1}F_l\\cong p_i^{-1}F_i\\cong F$. No compatibility between different local trivializations is required: $F_l$ already exists globally, and these isomorphisms certify a local property of it. This concludes with the original finite ring and without any Noetherian assumption on the schemes.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-base-change-system",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-constructible-locally-constant",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GL2, label lemma-category-loc-cst-is-colimit, proof, part (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lemma-constructible-pullback-constant",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-affine-etale-base-change-system",
+  "lem-weil-pbc-etale-finite-cover-factorization-descent",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-sfb-constructible-module-affine-limit-hom",
+  "def-constructible-locally-constant",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GL2 (lemma-category-loc-cst-is-colimit), proof of (3); finite affine refinement and both inverse identities made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant sheaves of modules descend to a finite stage of an inverse limit of quasi compact quasi separated schemes with affine transition maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.hasLimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfShape D (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits of shape $D$. This means that give\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(X : LightCondSet.{u})\\n  (h : ∀ S : LightProfinite.{u}, IsColimit <| X.val.mapCocone (coconeRightOpOfCone S.asLimitCone)) :\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}\n  {\"name\": \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \": PreservesFiniteLimits (sheafification.{v} α)\", \"doc\": \"The sheafification functor for presheaves of modules over a presheaf of rings preserves finite limits.\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"LightCondensed.IsDiscrete\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(X : LightCondensed.{u} C)\", \"doc\": \"A sheaf $ X $ in the category of light condensed sheaves is constant if it is isomorphic to the sheafification of a constant presheaf with respect to the coherent Grothendieck topology on light profin\"}\n",
+   "verdict": "no match: categorical limits of module sheaves, structure-ring section descent, profinite locally constant functions and etale algebra properties do not descend etale module local systems",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsLocallyConstant\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "verdict": "no match: categorical limits of module sheaves, structure-ring section descent, profinite locally constant functions and etale algebra properties do not descend etale module local systems",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocally[Cc]onstant.*([Dd]escend|[Ll]imit)|([Dd]escend|[Ll]imit).* [Ll]ocally[Cc]onstant",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"31\", \"text\": \"section LocallyConstantAsColimit\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"47\", \"text\": \"The functor `locallyConstantPresheaf` takes cofiltered limits of finite sets with surjective\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"50\", \"text\": \"noncomputable def isColimitLocallyConstantPresheaf (hc : IsLimit c) [∀ i, Epi (c.π.app i)] :\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"72\", \"text\": \"lemma isColimitLocallyConstantPresheaf_desc_apply (hc : IsLimit c) [∀ i, Epi (c.π.app i)]\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"81\", \"text\": \"/-- `isColimitLocallyConstantPresheaf` in the case of `S.asLimit`. -/\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"74\", \"text\": \"open CategoryTheory Limits LocallyConstant TopologicalSpace.Fiber Opposite Function Fiber\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"55\", \"text\": \"lemma mem_locallyConstant_essImage_of_isColimit_mapCocone (X : CondensedSet.{u})\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"62\", \"text\": \"    Condensed.isoLocallyConstantOfIsColimit _ h\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"101\", \"text\": \"    mem_locallyConstant_essImage_of_isColimit_mapCocone X (fun S ↦ (h S).some)\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"178\", \"text\": \"lemma mem_locallyConstant_essImage_of_isColimit_mapCocone (X : LightCondSet.{u})\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"183\", \"text\": \"    LightCondensed.isoLocallyConstantOfIsColimit _ h\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"109\", \"text\": \"theorem exists_locallyConstant_fin_two (hC : IsLimit C) (f : LocallyConstant C.pt (Fin 2)) :\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"124\", \"text\": \"theorem exists_locallyConstant_finite_aux {α : Type*} [Finite α] (hC : IsLimit C)\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"157\", \"text\": \"    (hC : IsLimit C) (f : LocallyConstant C.pt α) :\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"191\", \"text\": \"theorem exists_locallyConstant {α : Type*} (hC : IsLimit C) (f : LocallyConstant C.pt α) :\"}\n  {\"file\": \"Mathlib/Topology/Category/LightProfinite/Basic.lean\", \"line\": \"315\", \"text\": \"    obtain ⟨n, g, h⟩ := Profinite.exists_locallyConstant S.cone S.isLimit a\"}\n",
+   "verdict": "no match: categorical limits of module sheaves, structure-ring section descent, profinite locally constant functions and etale algebra properties do not descend etale module local systems",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally constant etale module sheaf over a cofiltered affine transition scheme limit is pulled back from a finite locally constant sheaf at some stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"Profinite.exists_locallyConstant_finite_aux\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {α : Type u_1} [Finite α]\\n  (hC : CategoryTheory.Limits.IsLimit C) (f : LocallyConstant (↑C.pt.toTop) α),\\n  ∃ j g,\\n    LocallyConstant.\", \"doc\": \"Given a finite set $\\\\alpha$, a limit cone $C$ in the category of profinite spaces, and a locally constant function $f : C.\\\\text{apex} \\\\to \\\\alpha$, there exists an index $j$ in the diagram category and\"}\n  {\"name\": \"Profinite.exists_locallyConstant_finite_nonempty\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {α : Type u_1} [Finite α] [Nonempty α]\\n  (hC : CategoryTheory.Limits.IsLimit C) (f : LocallyConstant (↑C.pt.toTop) α),\\n  ∃ j g, f = Loc\", \"doc\": \"In the category of profinite spaces, given a cofiltered diagram with limit cone $C$ and a locally constant function $f : C.\\\\text{apex} \\\\to \\\\alpha$ where $\\\\alpha$ is a finite non-empty set, there exist\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n",
+   "verdict": "no match: categorical limits of module sheaves, structure-ring section descent, profinite locally constant functions and etale algebra properties do not descend etale module local systems",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of finite etale local systems under filtered direct limits of commutative rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Given a filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, a colimit cocone $c$ for $F$, and a ring homomorphism $f : R \\\\to S$ of essential finite type, if morphisms $a : S \"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.pi_iff\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I],\\n  Algebra.FormallyEtale R ((i : I) → A i) ↔ ∀ (i : I), Algebra.FormallyEtale R (A i)\", \"doc\": \"Given a finite index set $ I $ and a commutative ring $ R $, the product algebra $ \\\\prod_{i \\\\in I} A_i $ over $ R $ is formally étale if and only if each component algebra $ A_i $ is formally étale ov\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n",
+   "verdict": "no match: categorical limits of module sheaves, structure-ring section descent, profinite locally constant functions and etale algebra properties do not descend etale module local systems",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant etale module sheaves descend to a finite stage of a qcqs scheme inverse limit with affine transition morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-ring sections and scheme morphisms, condensed locally constant functions, or etale ring maps, rather than descent of finite locally constant etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of finite etale local systems with finite ring coefficients under filtered direct limits of rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Given a filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, a colimit cocone $c$ for $F$, and a ring homomorphism $f : R \\\\to S$ of essential finite type, if morphisms $a : S \"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-ring sections and scheme morphisms, condensed locally constant functions, or etale ring maps, rather than descent of finite locally constant etale module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of locally constant finite module sheaves along inverse limits of schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(X : LightCondSet.{u})\\n  (h : ∀ S : LightProfinite.{u}, IsColimit <| X.val.mapCocone (coconeRightOpOfCone S.asLimitCone)) :\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}\n  {\"name\": \"LightCondensed.lanLightCondSet\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(X : Type u) : LightCondSet.{u}\", \"doc\": \"For each type $X$, this constructs a sheaf in the category of light condensed sets by taking the pointwise left Kan extension of the locally constant function presheaf $\\\\mathrm{LocallyConstant}(-, X)$\"}\n  {\"name\": \"LocallyConstant.freeOfProfinite\", \"module\": \"Mathlib.Topology.Category.Profinite.Nobeling.Induction\", \"type\": \"(S : Profinite.{u}) : Module.Free ℤ (LocallyConstant S ℤ)\", \"doc\": \"For any profinite space $ S $, the $ \\\\mathbb{Z} $-module of locally constant functions $ S \\\\to \\\\mathbb{Z} $ is free. This means there exists a basis (a linearly independent spanning set) for this modu\"}\n  {\"name\": \"Condensed.isoLocallyConstantOfIsColimit\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(hF : ∀ S : Profinite, IsColimit <| F.mapCocone S.asLimitCone.op) :\\n  F ≅ (locallyConstantPresheaf (F.obj (toProfinite.op.obj ⟨of PUnit.{u + 1}⟩)))\", \"doc\": \"Given a functor $ F : \\text{Profinite}^{\\text{op}} \\to \\text{Type} $ such that for every profinite space $ S $, the image of the limit cone $ S.asLimitCone $ under $ F $ satisfies the colimit condition, t\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(X : Type (u + 1)) : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"LightCondensed.IsDiscrete\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(X : LightCondensed.{u} C)\", \"doc\": \"A sheaf $ X $ in the category of light condensed sheaves is constant if it is isomorphic to the sheafification of a constant presheaf with respect to the coherent Grothendieck topology on light profin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-ring sections and scheme morphisms, condensed locally constant functions, or etale ring maps, rather than descent of finite locally constant etale module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsLocallyConstant\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-ring sections and scheme morphisms, condensed locally constant functions, or etale ring maps, rather than descent of finite locally constant etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*(descen|limit)|(descen|limit).*locallyConstant",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"27\", \"text\": \"open CategoryTheory Functor Limits FintypeCat CompHausLike.LocallyConstant\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"31\", \"text\": \"section LocallyConstantAsColimit\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"42\", \"text\": \"In this declaration and `isColimitLocallyConstantPresheaf`, `coe_comp` interferes with rewriting via\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"47\", \"text\": \"The functor `locallyConstantPresheaf` takes cofiltered limits of finite sets with surjective\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"50\", \"text\": \"noncomputable def isColimitLocallyConstantPresheaf (hc : IsLimit c) [∀ i, Epi (c.π.app i)] :\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"74\", \"text\": \"open CategoryTheory Limits LocallyConstant TopologicalSpace.Fiber Opposite Function Fiber\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"55\", \"text\": \"lemma mem_locallyConstant_essImage_of_isColimit_mapCocone (X : CondensedSet.{u})\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"62\", \"text\": \"    Condensed.isoLocallyConstantOfIsColimit _ h\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"101\", \"text\": \"    mem_locallyConstant_essImage_of_isColimit_mapCocone X (fun S ↦ (h S).some)\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"105\", \"text\": \"      (Condensed.isColimitLocallyConstantPresheafDiagram Y S)⟩\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"178\", \"text\": \"lemma mem_locallyConstant_essImage_of_isColimit_mapCocone (X : LightCondSet.{u})\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"109\", \"text\": \"theorem exists_locallyConstant_fin_two (hC : IsLimit C) (f : LocallyConstant C.pt (Fin 2)) :\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"124\", \"text\": \"theorem exists_locallyConstant_finite_aux {α : Type*} [Finite α] (hC : IsLimit C)\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"157\", \"text\": \"    (hC : IsLimit C) (f : LocallyConstant C.pt α) :\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"191\", \"text\": \"theorem exists_locallyConstant {α : Type*} (hC : IsLimit C) (f : LocallyConstant C.pt α) :\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit.lean\", \"line\": \"115\", \"text\": \"When `o` is a limit ordinal, we prove that the good products in `LocallyConstant C ℤ` are linearly\"}\n  {\"file\": \"Mathlib/Topology/Category/LightProfinite/Basic.lean\", \"line\": \"315\", \"text\": \"    obtain ⟨n, g, h⟩ := Profinite.exists_locallyConstant S.cone S.isLimit a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-ring sections and scheme morphisms, condensed locally constant functions, or etale ring maps, rather than descent of finite locally constant etale module sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-smooth-proper-finite-cohomology-local-system",
+  "by": "worker",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Local-system input for the smooth full-level cover, before choosing a frame. Non-Noetherian local-system input: descending the finite locally constant coefficient sheaf in the proof of Stacks 0GLI, paragraph beginning \"In this paragraph we reduce to the case where S is Noetherian\".",
+   "via": [
+    "lem-sfb-smooth-proper-finite-cohomology-local-system",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-local-system-affine-limit-descent",
+  "worker": "stage1",
+  "group": "Q91",
+  "summary": "Followed Stacks 0GL2(3). Reused constructible module descent and finite affine covering descent; added only the faithful/fully faithful morphism input 09YU(3), which is missing for arbitrary qcqs stages. Descended both a trivializing isomorphism and its inverse and then detected both inverse identities. Applied finite affine refinement only on affine inverse images of a finite stage open cover. Preserved the statement and its coefficient category.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Local-system input for the smooth full-level cover, before choosing a frame. Non-Noetherian local-system input: descending the finite locally constant coefficient sheaf in the proof of Stacks 0GLI, paragraph beginning \"In this paragraph we reduce to the case where S is Noetherian\". The seven steps supply this local-system descent prerequisite using Stacks 0GL2; they do not change the enclosing alteration or direct-image route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-limit-descent",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-affine-refinement",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-affine-etale-base-change-system",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-etale-finite-cover-factorization-descent",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-over-limit",
+    "why": "Generic geometric or etale-sheaf tool in the Stacks 0GL2 descent proof, not a replacement of the enclosing constructible direct-image route. Its exact role is given in the proof step and in report.md."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic etale-sheaf tool (canonical inverse-image composition isomorphism) used in Steps 4, 5 and 7 to identify iterated pullbacks; added by the stage-1 reviewer as a missing citation, not a route change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lemma-constructible-pullback-constant",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-affine-etale-base-change-system",
+  "lem-weil-pbc-etale-finite-cover-factorization-descent",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-659f9c611",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-659f9c611 (reviewer sub-agent of L); spot-checked: Read Stacks etale-cohomology.tex 09YU (lemma-category-is-colimit: Faithful, Fully faithful, Essentially surjective, (3)) and 0GL2 (lemma-category-loc-cst-is-colimit), whole proof. The item statement is unchanged and keeps the 0GL2(3) coefficient category: Λ-module sheaves with finite Λ (Noetherian), module inverse image through lem-pe. No SGA source. The item is not in route-pivot-dropped, has no repair note, and is still unsplit live, so it is not superseded. The seven steps follow 0GL2 and make the implicit parts explicit. Step 1 gets a constructible model from constructible-module-limit-descent; the one-stratum constructibility and the qcqs-ness of X are checked. Steps 2-3 do the finite affine refinement only on the affine W_b×X (no affine-intersection assumption) and descend the cover through etale-finite-cover-factorization-descent; its hypotheses were checked against its statement. Step 4 gets constructibility via the comparison and prop-constructible-pullback, and the limit system via scheme-over-limit (stages affine). Steps 5-6 lift α and α^{-1} with clause (1) of the new node and force both composites to identities with clause (2). Step 7 is elementary. New node lem-sfb-constructible-module-affine-limit-hom: the faithful and fully faithful halves of 09YU(3) for finite Λ on qcqs stages. It is true, statement-only and self-contained, and it does not restate the item. Edge cases checked: X empty, Λ=0, single index. Duplicate search over 09YU/0GL2/faithful+affine-transition nodes: constructible-module-limit-descent explicitly excludes these halves, the trf Ext/Hom continuity nodes need Noetherian stages, and the affine-free arrow-descent/eventual-hom-lift nodes cover free sums only. Not a duplicate. Accepted tool_uses: generic sk-thm-p1/sk-prop-h2/sk-prop-sf-comparison scheme and étale tools. FIX (B3/C1, one fault): the new node and steps 4, 5, 7 used the canonical inverse-image composition comparisons without citing lem-weil-pbc-inverse-image-composition. I added it to the new node's statement and stmt_deps, to those steps' uses, to proof_deps and to tool_uses. Step texts are unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocalSystemAffineLimitDescent",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_localSystem_affineLimit_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalSystemAffineLimitDescent.lean",
+  "statement": "theorem exists_finite_localSystem_affineLimit_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] (c : Cone D) (hc : IsLimit c) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (F : Sheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : ∃ d : LocallyConstantDatum F, ∀ a : d.cover.I₀, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧ Nonempty (F.over (d.cover.etalePrecoverageToEtale a) ≅ (constantSheaf (c.pt.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale a)) (ModuleCat.{u + 1} Λ)).obj M)) : ∃ (i : I) (Fᵢ : Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ)), (∃ d : LocallyConstantDatum Fᵢ, ∀ a : d.cover.I₀, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧ Nonempty (Fᵢ.over (d.cover.etalePrecoverageToEtale a) ≅ (constantSheaf ((D.obj (op i)).smallEtaleTopology.over (d.cover.etalePrecoverageToEtale a)) (ModuleCat.{u + 1} Λ)).obj M)) ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj Fᵢ ≅ F)",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44a7162cf",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Item lem-sfb-finite-local-system-affine-limit-descent: only the lean field changed vs live (live lean null). Statement read against Stacks 0GL2(3) (etale-cohomology.tex l.12631ff) and the node clause by clause: directed nonempty I, affine transitions, qcqs stages, arbitrary limit cone, finite comm ring Λ, Sheaf c.pt.smallEtaleTopology (ModuleCat Λ), hypothesis ∃ LocallyConstantDatum with finite constant models on the localized sites, conclusion the same predicate at a stage plus Nonempty(Etale.upperStar (ModuleCat Λ) (c.π.app (op i)) Fᵢ ≅ F); quantifier order and pullback direction correct, no Noetherian assumption. Binder block identical to the landed sibling exists_constructible_etaleModuleSheaf_descent (I : Type u, Λ : Type (u+1); no loss for finite Λ). Statement field verbatim in the file. Edge cases (empty X, Λ=0, zero sheaf, single index) covered. No duplicate in lean/WeilConjectures, lean/Sheaf or the DAG (0GL2 grep). The theorem stmt_dep limit-affine-transition contributes no declaration to the statement. No defs, sorry only, docstrings carry the source place, the blueprint id and the 7 proof steps; small étale site, no pro-étale substitute; report sections present. Not recompiled (no change; the worker's compile is reported). Advisory only: LocallyConstantDatum.isConstant is redundant with the explicit isomorphisms."
+ }
+}

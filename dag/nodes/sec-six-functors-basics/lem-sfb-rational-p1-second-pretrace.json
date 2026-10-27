@@ -1,0 +1,155 @@
+{
+ "id": "lem-sfb-rational-p1-second-pretrace",
+ "kind": "statement",
+ "title": "Trace-free exchange/projection reordering on the self-product",
+ "statement": "Let l be prime, c a finite rational coefficient or its algebraic closure, k of characteristic p distinct from l, and Y a k-scheme. Put q:P1_Y→Y, W=P1_Y×Y P1_Y, T=Lambda_P(1)[2], F=q*, R=Rq*, and H=(-)(1)[2]. For any derived K, let nu=R(tensorShiftIso.inv) followed by inverse projection_q(K,T). Let beta:F(R T)→Rp2*(T_W) be canonical exchange followed by the first shifted-line comparison. Define S_K,V:H(FK) tensor F(V)≅H(F(K tensor V)) explicitly by tensorShiftIso, associativity, the native Koszul symmetry and the monoidal tensorator of F. Assuming projection_q(K,T), beta, exchange at H(FK), and its twisted p2 projection are invertible, J_K followed by unitTail and H(F(nu)) equals (identity_H(FK) tensor inverse beta) followed by S_K,RT. All maps are those of [def-sfb-rational-p1-second-pull-comparison], [def-sfb-rational-p1-ambient-tail] and [def-sfb-projective-ambient-unit-counit-composites]. No counit trace or completed reference occurs.",
+ "stmt_deps": [
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-rational-p1-ambient-tail",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-proetale-projection-exchange-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity: extraction of q*K and cancellation of the projection, before applying a trace."
+ },
+ "proof": [
+  {
+   "text": "Apply the normalized exchange/tensor square with inside T and outside K. Transport the ringed square through the module/ringed derived comparison, retaining its published projection and exchange arrows. Invert the square using hq,hb,hx.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the two-factor projection identity to separate the last Tate factor. The canonical pulled-line comparisons agree on the common root frame. The degree-zero rank-one line has trivial self-transposition and its degree-two shifts contribute (-1)^4=1, so this factor interchange is identity. The comparison on q*K is the pullback-composition comparison; together these are exactly secondPullComparison.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-composition",
+    "def-sfb-rational-tate-pullback-comparison",
+    "def-sfb-rational-p1-second-pull-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the projection and inverse projection in nu and the inverse twisted p2 projection in unitTail, using the given witnesses. Cancel the tensor-shift pairs. The resulting explicit word is identity tensor inverse beta followed by S_K,RT.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "def-sfb-rational-p1-ambient-tail"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-rational-p1-ambient-tail"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity: extraction of q*K and cancellation of the projection, before applying a trace."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection formula is compatible with base change and tensor associativity in derived categories",
+   "results": "Eight hits: baseChange_baseChange, distribBaseChange, Cartesian tensor coherences and projective resolution results. No geometric exchange/projection reordering.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula commutes with base change and counit tensor naturality in a symmetric monoidal category",
+   "results": "Eight hits, including Cartesian tensor products and Frobenius mates. No matching derived exchange and twisted projection statement.",
+   "date": "2026-10-27",
+   "verdict": "Use tensor naturality for the assembly; retain the geometric comparison step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"counit\"",
+   "results": "Zero hits.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(counit|baseChange)|exchange.*tensor",
+   "results": "Fourteen Mathlib hits: unrelated projection maps and ordinary monoidal whisker_exchange. Local source search finds generic ringed exchange/tensor and projection/tensor laws, not their normalization in the rational P1 maps.",
+   "date": "2026-10-27",
+   "verdict": "A normalized pretrace statement is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondTraceReordering",
+  "date": "2026-10-27",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Second identity: extraction of q*K and cancellation of the projection, before applying a trace.",
+   "via": [
+    "lem-sfb-rational-p1-second-trace-reordering",
+    "lem-sfb-rational-p1-second-ambient-contraction",
+    "lem-rational-p1-kernel-contractions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SecondPretrace",
+  "file": "lean/Sheaf/Paper/RationalP1SecondPretrace.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.second_pretrace",
+  "statement": "theorem second_pretrace\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    (K : DerivedCategory (Modules (coefficient l c).X Y))\n    (hq : IsIso (projectionMap (coefficient l c).X (ProjectiveLine Y ↘ Y) K\n      (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))\n        0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)))\n    (hx : IsIso (secondTraceExchange l c k p hpl Y)) :\n    SecondPretraceEquation (coefficient l c).X Y (line l c)\n      (secondLineComparison l c k p hpl Y)\n      ((twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj\n        ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K))\n      ((twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj\n        ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj\n          (K ⊗ (moduleObjectDerivedPushforward (coefficient l c).X\n            (ProjectiveLine Y ↘ Y)).obj\n              (((DerivedCategory.singleFunctor (Modules (coefficient l c).X\n                (ProjectiveLine Y)) 0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧))))\n      ((moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj\n        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))\n          0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧))\n      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj\n        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))\n          0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧))\n      ((twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).map\n        ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n          (counitProjectionPart (coefficient l c).X Y (line l c (ProjectiveLine Y)) K hq)))\n      (@inv _ _ _ _ (secondTraceExchange l c k p hpl Y) hx)\n      (secondTraceStrength (coefficient l c).X Y (line l c (ProjectiveLine Y)) K\n        ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj\n          (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))\n            0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧))).hom\n      (secondForwardProjection l c k p hpl Y K)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.firstLineComparisonForTrace",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceExchange",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceUnitIso",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceTensorIso",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceSwap",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceStrength",
+   "AlgebraicGeometry.ProEtale.RationalP1.counitProjectionPart",
+   "AlgebraicGeometry.ProEtale.RationalP1.second_pretrace",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTracePullMonoidal",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceBraided",
+   "AlgebraicGeometry.ProEtale.RationalP1.SecondPretraceEquation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T012925-L-2348420",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T012925-L-2348420",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

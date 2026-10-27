@@ -1,0 +1,49 @@
+# global build 2026-10-24T21:06:59Z of 2a87bbcc1c: Sheaf.Paper.ScalarExtensionBinaryCoherence failed
+error: Sheaf/Paper/ScalarExtensionBinaryCoherence.lean:1481:30: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  changeOfRingsHomOfUniverses α (scalarTensorPower R N (r + 1)) (scalarTensorPowerMap R f (r + 1)) ≫
+    (e.power P (r + 1)).hom
+in the target expression
+  (changeOfRingsOfUniverses α N).siteSheafTensorRight.map
+    (changeOfRingsHomOfUniverses α (Nat.rec N (fun x P ↦ N.siteSheafTensorRight.obj P) r)
+        (scalarTensorPowerMap R f (r + 1)) ≫
+      (e.power P (r + 1)).hom)
+
+case a.a
+C : Type uC
+inst✝³ : Category.{vC, uC} C
+J : GrothendieckTopology C
+inst✝² : J.HasSheafCompose (forget₂ CommRingCat RingCat)
+inst✝¹ : J.WEqualsLocallyBijective AddCommGrpCat
+inst✝ : HasWeakSheafify J AddCommGrpCat
+R S : Sheaf J CommRingCat
+α : R ⟶ S
+e : ScalarExtensionTensorCore R S α
+N P : SheafOfModules ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+f : N ⟶ P
+r : ℕ
+a✝ :
+  changeOfRingsHomOfUniverses α (scalarTensorPower R N r) (scalarTensorPowerMap R f r) ≫ (e.power P r).hom =
+    (e.power N r).hom ≫ scalarTensorPowerMap S (changeOfRingsHomOfUniverses α N f) r
+ih :
+  changeOfRingsHomOfUniverses α (scalarTensorPower R N (r + 1)) (scalarTensorPowerMap R f (r + 1)) ≫
+      (e.power P (r + 1)).hom =
+    (e.power N (r + 1)).hom ≫ scalarTensorPowerMap S (changeOfRingsHomOfUniverses α N f) (r + 1)
+| (changeOfRingsOfUniverses α N).siteSheafTensorRight.map
+    (changeOfRingsHomOfUniverses α (Nat.rec N (fun x P ↦ N.siteSheafTensorRight.obj P) r)
+        (scalarTensorPowerMap R f (r + 1)) ≫
+      (e.power P (r + 1)).hom)
+
+Note: The target expression is not type-correct under the `implicit` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    scalarTensorPowerMap R f (r + 1)
+  has type
+    @Quiver.Hom (SheafOfModules ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) instCategory.toQuiver
+      (scalarTensorPower R N (r + 1)) (scalarTensorPower R P (r + 1))
+  but is expected to have type
+    @Quiver.Hom (SheafOfModules ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) instCategory.toQuiver
+      (Nat.rec N (fun x P ↦ N.siteSheafTensorRight.obj P) r) (Nat.rec P (fun x P_1 ↦ P.siteSheafTensorRight.obj P_1) r)
+  in the application
+    changeOfRingsHomOfUniverses α (Nat.rec N (fun x P ↦ N.siteSheafTensorRight.obj P) r)
+      (scalarTensorPowerMap R f (r + 1))
+error: Lean exited with code 1

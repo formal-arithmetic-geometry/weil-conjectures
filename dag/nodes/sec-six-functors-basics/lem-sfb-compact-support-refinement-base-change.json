@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-compact-support-refinement-base-change",
+ "kind": "statement",
+ "title": "Local compact-support exchange pasting with a dense refinement",
+ "statement": "Let f:X→Y be quasi-compact and v:Yprime→Y arbitrary. Fix a commutative condensed ring Lambda and the normalized open comparison o_c whose inverse is the canonical open unit/square/counit exchange. Let c be a compactification of f, d a scheme-theoretically dense boundary compactification and h:d→c a boundary-preserving refinement. Let w be a dense boundary compactification after pullback, with refinements hd:w→dprime and hc:w→cprime. For every unbounded module-object complex K on X, let rho denote the canonical compactification refinement component and beta the specified compact-support proper/open composite. Then v*(rho_h,K) followed by beta_d,K followed by rho_hd,u*K equals beta_c,K followed by rho_hc,u*K. Neither proper exchange nor refinement invertibility is assumed, and dprime is not assumed dense.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Proof (2), proper exchange on the localizing generators; proof (3), identity on the open and mate pasting."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lemma-nagata-compactification-base-change",
+  "def-sfb-compact-support-base-change-maps",
+  "def-nagata-compactification",
+  "def-nagata-compactification-base-change",
+  "det-nagata-definition-refinement",
+  "def-sfb-compactification-refinement-component"
+ ],
+ "proof": [
+  {
+   "text": "Density of w and separatedness of the proper target identify the two refinement composites w→cprime, since both extend the same open map.",
+   "uses": [
+    "det-nagata-refinement-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use normalized derived adjunction composition. The normalized refinement arrows and open exchanges restrict to identity. The precise proper mate for h also restricts to identity on the open isomorphism locus. Injectivity of the open-adjunction Hom equivalence equates the two maps with target the proper pushforward from w. Only w is needed dense.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-sfb-base-change-identity-open-restriction",
+    "det-sf-comp-coherence-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proper pushforward from c and precompose with its proper mate. Naturality in the source refinement arrow and horizontal mate pasting replace the two proper mates by the mate for d. Inverse compositors in the definition of rho give exactly the stated component equality.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-base-change-identity-open-restriction",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-mate-pasting",
+  "det-nagata-refinement-morphisms",
+  "det-sf-comp-coherence-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Proof (2), proper exchange on the localizing generators; proof (3), identity on the open and mate pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change condensed coefficients on bounded constructible finite Tor complexes; canonical base change mate commutes with a boundary preserving refinement of compactifications",
+   "results": "Eight hits per query, about algebraic scalar base change, condensed limits and tensor products. No pro-etale derived exchange or compactification-refinement assertion.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "results": "mateEquiv_vcomp, mateEquiv_hcomp and conjugate variants; general mate pasting is available.",
+   "date": "2026-10-24",
+   "verdict": "Useful categorical tools, not the geometric normalization or proper exchange assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|isIso)|baseChange.*[Pp]roper",
+   "results": "Mathlib contains mate pasting and stability of geometric properties under base change. Searches of both library roots found finite/integral/rational concrete coefficient results and no full admissible generator statement or compact-support refinement equation. blueprint_refs searches for base change refinement and proper base change admissible returned zero.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate of either required interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.DetSfCompCompositionBaseChange",
+  "date": "2026-10-24",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-composition-base-change",
+   "place": "Proof (3): the two maps restrict to identity, followed by applying proper pushforward; DAG steps 4--7.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-comp-composition",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompactSupportRefinementBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.compactSupportRefinement_baseChange",
+  "file": "lean/Sheaf/SixFunctors/CompactSupportRefinementBaseChange.lean",
+  "statement": "theorem compactSupportRefinement_baseChange\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] (v : Y' ⟶ Y)\n    (o : ∀ c : Compactification f,\n      D((c.i)_!open⟦Λ⟧) ⋙ detSfDerivedPullback Λ (pullback.fst c.g v) ≅\n        detSfDerivedPullback Λ (pullback.fst f v) ⋙ D(((c.baseChange v).i)_!open⟦Λ⟧))\n    (ho : ∀ c, (o c).inv = detSfOpenBaseChangeMap Λ f v c)\n    (c : Compactification f) (d : Compactification.DenseBoundaryCompactification f)\n    (h : d.obj ⟶ detSfBoundaryCompactification c)\n    (w : Compactification.DenseBoundaryCompactification (pullback.snd f v))\n    (hd : w.obj ⟶ detSfBoundaryCompactification (d.obj.obj.obj.baseChange v))\n    (hc : w.obj ⟶ detSfBoundaryCompactification (c.baseChange v))\n    (K : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :\n    (detSfDerivedPullback Λ v).map (compactificationRefinementComponent Λ h K) ≫\n        (detSfCompactSupportBaseChangeComposite Λ f v d.obj.obj.obj\n          (o d.obj.obj.obj)).app K ≫\n        compactificationRefinementComponent Λ hd\n          ((detSfDerivedPullback Λ (pullback.fst f v)).obj K) =\n      (detSfCompactSupportBaseChangeComposite Λ f v c (o c)).app K ≫\n        compactificationRefinementComponent Λ hc\n          ((detSfDerivedPullback Λ (pullback.fst f v)).obj K)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-15846",
+  "group": "G1",
+  "result": "fix",
+  "landing": "20261025T060824-L-2375776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-15846",
+  "group": "G1",
+  "result": "fix",
+  "landing": "20261025T060824-L-2375776",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new sorry statements (generator proper base change; refinement pasting) and moved detSf* defs against node det-sf-comp-composition-base-change, change record, cited owners, and importer IntegralLocalizingCompactSupport (sandbox compile)"
+ }
+}

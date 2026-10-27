@@ -48,179 +48,136 @@
  ],
  "proof": [
   {
-   "text": "The curve C is integral of dimension one by [def-pc-smooth-projective-curve], regular by [lem-sc-smooth-regular], and proper by [lem-pc-projective-proper]. Its regularity includes local Noetherianness and hence reducedness; quasi-compactness follows from projectivity. The coherent cohomology groups are finite-dimensional by [lem-pc-euler-characteristic-well-defined], and vanish above degree one by [lem-pc-vanishing-above-dim]. Thus the alternating Euler characteristic is h^0-h^1. By [sbc-lem-smooth-geometrically-reduced], smoothness gives geometric reducedness directly. Apply [lem-pc-h0-geom-connected] to obtain H^0(C,O_C)=k. Consequently chi(O_C)=1-g. The parenthetical inclusion of proper curves uses [lem-sc-proper-dim-one-projective]: smoothness gives regularity and hence reducedness, and a proper curve has dimension one.",
+   "text": "Smooth projectivity supplies integrality, properness, Noetherianity and regularity; smoothness supplies geometric reducedness. Use the source GlobalSectionsBijective instance and the already proved Modules.eulerChar_eq_degree_add and eulerChar_eq_finrankH_zero_sub_finrankH_one for line-bundle RR and Euler normalization.",
    "uses": [
     "def-pc-smooth-projective-curve",
     "lem-sc-smooth-regular",
-    "lem-pc-projective-proper",
-    "lem-pc-euler-characteristic-well-defined",
-    "lem-pc-vanishing-above-dim",
-    "lem-pc-h0-geom-connected",
     "sbc-lem-smooth-geometrically-reduced",
-    "lem-sc-proper-dim-one-projective"
+    "lem-sc-riemann-roch",
+    "lem-pc-h0-geom-connected"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Section Riemann–Roch, equation-degree and equation-rr; blueprint RR preliminaries"
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Unit RR/G/H route, Lean implementation part 1; source declarations listed in report.md"
    }
   },
   {
-   "text": "Apply [lem-pc-regular-curve-divisor-calculus] to C. For a divisor D and closed point x it gives 0 -> O_C(D-x) -> O_C(D) -> i_{x,*}V -> 0 with dim_{kappa(x)} V=1. By [lem-pc-closed-immersion-coherent-cohomology], the last sheaf is coherent; it is supported at x and its global sections are V. Hence [lem-pc-chi-zero-dim-support] gives chi(i_{x,*}V)=dim_k V=[kappa(x):k]. By [lem-pc-euler-additive], chi(O_C(D))-chi(O_C(D-x))=[kappa(x):k]. Induct on the nonnegative integer sum_x |n_x| for D=sum_x n_x[x]. The base D=0 was computed in step 1. If n_x>0, replace D by D-x and use this identity; if n_x<0, replace D by D+x and use the identity with D+x in place of D. In both cases the induction parameter decreases by one, and chi(O_C(D))-sum_x n_x[kappa(x):k] is unchanged. Thus chi(O_C(D))=sum_x n_x[kappa(x):k]+1-g.",
+   "text": "Apply regular_curve_divisor_calculus for invertibility, O(0), tensor multiplication, principal divisors and the closed-point modification sequence. The quotient is finitely presented as a cokernel of invertible modules, hence coherent. Its given isomorphism with the residue-field skyscraper identifies its Euler characteristic with [kappa(x):k]: away from x every stalk vanishes, the support is at most a singleton, and evaluation of H0 on the top open is k-linearly equivalent to kappa(x). The scalar check is Hom.residueFieldAlgebraMap_apply. Use eulerChar_zero_dim_support and Euler additivity to compute degree O([x]). Tensor multiplication and degree_tensorObj make degree O(D) an additive homomorphism. Finsupp.addHom_ext and extensionality on the integer generator extend the equality to all integral divisors. Transport along O(D) isomorphisms. The principal-divisor isomorphism and degree_unit then give weighted degree zero.",
    "uses": [
     "lem-pc-regular-curve-divisor-calculus",
     "lem-pc-chi-zero-dim-support",
     "lem-pc-euler-additive",
-    "lem-pc-closed-immersion-coherent-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Part (1), divisor induction made explicit; Stacks varieties.tex Tag 0AYY, lemma-degree-effective-Cartier-divisor"
-   }
-  },
-  {
-   "text": "Every line bundle L is O_C(D) by [lem-pc-regular-curve-divisor-calculus]. Step 2 therefore gives chi(L)=deg D+1-g. Applied to a principal divisor, the same calculation and O_C(div(f))=O_C give deg div(f)=0. Thus the weighted divisor degree depends only on L and equals chi(L)-chi(O_C); this proves both its well-definedness and line-bundle Riemann–Roch. Multiplication O_C(D) tensor O_C(E)=O_C(D+E) also shows deg(L tensor M)=deg L+deg M, and deg(L^{-1})=-deg L. In particular this degree is exactly the cohomological degree of [def-pc-degree-line-bundle], so that subsequent degree-base-change statements apply to the degree of this item.",
-   "uses": [
-    "lem-pc-regular-curve-divisor-calculus",
+    "lem-sc-riemann-roch",
     "def-pc-degree-line-bundle"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Part (1), concluding formula and degree convention"
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Unit RR/G/H route, Lean implementation part 2; source declarations listed in report.md"
    }
   },
   {
-   "text": "For coherent F let T be its torsion subsheaf. By [lem-sc-torsion-subsheaf-quotient] it is quasi-coherent, T_eta=0, and E=F/T is torsion-free. On the Noetherian C, [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] makes T and E coherent. By [lem-weil-pbc-module-support-proper-over-base] Supp(T) is closed. It omits the generic point, so on the integral one-dimensional curve it has dimension at most zero. Hence [lem-pc-chi-zero-dim-support] gives chi(T)=dim_k H^0(C,T). By [lem-sc-regular-curve-torsionfree-free], E is finite locally free, of constant rank r=dim_{k(C)} F_eta. Euler additivity gives chi(F)=dim_k H^0(C,T)+chi(E).",
+   "text": "For a quasi-coherent finite-type F, Noetherian affine coordinate rings give finite presentation locally, which descends along the affine open cover. Apply Modules.eulerChar_eq_coherentDegree_add from the existing source RiemannRochCoherent module. Its proof takes the torsion subsheaf, proves its positive cohomology vanishes and its quotient is locally free, and reduces to the vector-bundle formula by Euler additivity.",
    "uses": [
-    "lem-sc-torsion-subsheaf-quotient",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-module-support-proper-over-base",
-    "lem-pc-chi-zero-dim-support",
-    "lem-sc-regular-curve-torsionfree-free",
-    "lem-pc-euler-additive"
+    "lem-sc-riemann-roch",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "The torsion part and the torsion-free quotient"
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Unit RR/G/H route, Lean implementation part 3; source declarations listed in report.md"
    }
   },
   {
-   "text": "For every vector bundle E of rank r, prove chi(E)=deg(det E)+r(1-g) by induction on r. For r=0 it is the zero bundle and det(0)=O_C, so both sides are zero. For r=1 this is step 3. For r>=2 choose a nonzero vector in E_eta. The saturation construction in [lem-sc-vector-bundle-line-subbundle] gives a line subbundle L with vector-bundle quotient Q of rank r-1. By [lem-sc-determinant-short-exact], det E is L tensor det Q. Euler additivity, the induction hypothesis for Q, step 3 for L and degree additivity from step 3 give chi(E)=chi(L)+chi(Q)=deg L+deg(det Q)+r(1-g)=deg(det E)+r(1-g). Substitute this in step 4 and use the stated definition deg F=dim_k H^0(C,T)+deg(det E). This gives coherent Riemann–Roch with exactly the rank and degree of the statement.",
+   "text": "The source coherent RR proof establishes the vector-bundle formula by induction on generic rank, using saturated line subbundles, locally free quotients and determinant multiplicativity, exactly as in the unit. Unfold coherentDegree and transport the determinant degree along exteriorSheafIsoExteriorPower. This yields precisely the stated formula with exteriorSheaf.",
    "uses": [
-    "lem-sc-vector-bundle-line-subbundle",
-    "lem-sc-determinant-short-exact",
-    "lem-pc-euler-additive"
+    "lem-sc-riemann-roch",
+    "lem-sc-exterior-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Proof of (*) by induction on r"
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Unit RR/G/H route, Lean implementation part 4; source declarations listed in report.md"
    }
   },
   {
-   "text": "The smooth-differential statement [lem-sc-smooth-omega-finite-locally-free] with d=1 makes omega invertible. Apply [sk-thm-picard-duality] with n=1 and q=1 to L. The perfect trace pairing identifies H^1(C,L)^vee with H^0(C,L^vee tensor omega). The inverse of an invertible module is its dual by [lem-sc-pic-group], and symmetry of tensor product gives the displayed isomorphism. With L=O_C the same duality for q=1 and q=0 gives h^0(omega)=g and h^1(omega)=h^0(O_C)=1. Thus chi(omega)=g-1, and step 3 applied to omega gives deg omega=(g-1)-(1-g)=2g-2.",
+   "text": "Apply serreDuality_residueTrace with the canonical function-field algebra to obtain the perfect cup pairing. The source RiemannRoch theorems degree_relativeDifferentials, finrankH_one_eq_zero_of_degree and finrankH_zero_eq give the canonical degree, high-degree vanishing and H0 formula. Proper cohomology finiteness converts zero finite dimension to the asserted subsingleton.",
    "uses": [
     "sk-thm-picard-duality",
-    "lem-sc-pic-group",
-    "lem-sc-smooth-omega-finite-locally-free"
+    "lem-sc-riemann-roch",
+    "lem-pc-euler-characteristic-well-defined"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/sk-thm-picard-rr-duality.md",
-    "place": "Proof (1) and (2)"
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Unit RR/G/H route, Lean implementation part 5; source declarations listed in report.md"
    }
   },
   {
-   "text": "For deg L>2g-2, put M=omega tensor L^{-1}. Its degree is 2g-2-deg L<0 by steps 3 and 6. If M had a nonzero global section, [lem-pc-regular-curve-divisor-calculus] would identify M with O_C(D) for its effective zero divisor D. Step 3 would then give deg M=sum_x n_x[kappa(x):k]>=0, a contradiction. Therefore H^0(C,M)=0; step 6 gives H^1(C,L)=0, and step 3 gives h^0(C,L)=deg L+1-g.",
-   "uses": [
-    "lem-pc-regular-curve-divisor-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/sk-thm-picard-rr-duality.md",
-    "place": "Proof (3)"
-   }
-  },
-  {
-   "text": "Let K/k be any field extension. Clause (4) of [det-picard-rr-duality] gives that C_K is a smooth projective geometrically connected curve with the same genus, identifies its canonical sheaf with omega_K and its degree with that of L, and states that the trace-pairing duality isomorphism itself extends by scalars. This last assertion is used explicitly, rather than inferred merely from equality of dimensions or naturality in L. The degree in that node agrees with the present degree by step 3. Independently [lem-sc-flat-base-change-coherent] identifies H^i(C_K,L_K) with H^i(C,L) tensor_k K; [lem-pc-finrank-field-base-change] preserves each finite dimension. Thus chi, g, degree, the RR identity and the canonical-degree identity are unchanged, and the duality isomorphism is the scalar extension of the original one. This proves the field-extension clause.",
+   "text": "Apply picard_rr_duality to omega. Extract the field-extension geometry, genus, section-normalized differential isomorphism and trace equation. Transport degree_pullback and eulerChar_pullback through picardRRPullbackIso. Compose H.baseChange_bijective_of_isSeparated with H.mapLinearEquiv for bijectivity of the canonical map. Specialize the module-cohomology trace equation to the identity on omega and scalars c=d=1. Naturality of moduleCohomologyExtResolutionEquiv and its inverse transport that equation to exactly the residue-trace equation of picardRRFieldExtension.",
    "uses": [
     "det-picard-rr-duality",
     "lem-sc-flat-base-change-coherent",
-    "lem-pc-finrank-field-base-change"
+    "lem-pc-flat-cohomology-separated",
+    "def-pc-module-pullback"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/sk-thm-picard-rr-duality.md",
-    "place": "Statement (4) and Proof (4)"
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Unit RR/G/H route, Lean implementation part 6; source declarations listed in report.md"
    }
   },
   {
-   "text": "Suppose deg L>0. Extend scalars to an algebraic closure Omega of k. Step 8 preserves degree and g. Choose m>=1 with m deg L>=2g+1, and set M=L_Omega^{tensor m}. For any closed points P,Q of C_Omega, including P=Q, their residue fields are Omega by [lem-weil-pbc-closed-point-residue-field-base]. By step 3, M, M(-P), M(-P-Q) have degrees m deg L, m deg L-1, m deg L-2, all strictly greater than 2g-2. Step 7 gives h^0(M(-P))=h^0(M)-1 and h^0(M(-P-Q))=h^0(M)-2. Apply [lem-sc-very-ample-separation-criterion] to conclude that M is very ample. Iterating [lem-weil-pbc-module-pullback-tensor] identifies M with the pullback of L^{tensor m}; so [lem-pc-very-ample-descends] makes L^{tensor m} very ample over k. By [def-sc-ample], L is ample. This proves (G) without subtracting nonrational points as if they had degree one.",
+   "text": "Reuse isAmple_of_degree_pos from the source RiemannRoch module. Its proof follows the unit G argument: extend to an algebraic closure, use RR dimension drops after one and two rational point twists to obtain very ampleness of a tensor power, and descend ampleness.",
    "uses": [
-    "lem-sc-very-ample-separation-criterion",
-    "lem-pc-very-ample-descends",
-    "def-sc-ample",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "lem-weil-pbc-module-pullback-tensor"
+    "lem-sc-degree-2g1-very-ample",
+    "def-sc-ample"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
-    "place": "Proof, dimension-drop argument and descent as in the unit proof (G)"
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Unit RR/G/H route, Lean implementation part 7; source declarations listed in report.md"
    }
   },
   {
-   "text": "For (H) let X be the proper k-scheme in that clause, of arbitrary dimension, and D its effective Cartier divisor. Its associated invertible module is O_X(D)=I_D^vee, and it is ample by hypothesis. These are precisely the hypotheses of [lem-sc-ample-complement-affine]. Its conclusion X minus D is affine means X minus Supp(D) is affine, since an open complement only depends on the underlying support. This proves (H), including D empty whenever the ampleness hypothesis is satisfied.",
+   "text": "For the arbitrary proper k-scheme and invertible ideal J, apply isAffine_compl_of_isAmple_dual_toModules to Scheme.Opens.ι of J.support.compl; Scheme.Opens.range_ι gives the required range equality. This proves H also for the empty divisor whenever its dual ideal is ample.",
    "uses": [
     "lem-sc-ample-complement-affine"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-ample-complement-affine.md",
-    "place": "Statement and Proof"
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Unit RR/G/H route, Lean implementation part 8; source declarations listed in report.md"
    }
   }
  ],
  "proof_deps": [
   "def-pc-smooth-projective-curve",
   "lem-sc-smooth-regular",
-  "lem-pc-projective-proper",
-  "lem-pc-euler-characteristic-well-defined",
-  "lem-pc-vanishing-above-dim",
-  "lem-pc-h0-geom-connected",
   "sbc-lem-smooth-geometrically-reduced",
-  "lem-sc-proper-dim-one-projective",
+  "lem-sc-riemann-roch",
+  "lem-pc-h0-geom-connected",
   "lem-pc-regular-curve-divisor-calculus",
   "lem-pc-chi-zero-dim-support",
   "lem-pc-euler-additive",
-  "lem-pc-closed-immersion-coherent-cohomology",
   "def-pc-degree-line-bundle",
-  "lem-sc-torsion-subsheaf-quotient",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-module-support-proper-over-base",
-  "lem-sc-regular-curve-torsionfree-free",
-  "lem-sc-vector-bundle-line-subbundle",
-  "lem-sc-determinant-short-exact",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sc-exterior-sheaf-comparison",
   "sk-thm-picard-duality",
-  "lem-sc-pic-group",
-  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-pc-euler-characteristic-well-defined",
   "det-picard-rr-duality",
   "lem-sc-flat-base-change-coherent",
-  "lem-pc-finrank-field-base-change",
-  "lem-sc-very-ample-separation-criterion",
-  "lem-pc-very-ample-descends",
+  "lem-pc-flat-cohomology-separated",
+  "def-pc-module-pullback",
+  "lem-sc-degree-2g1-very-ample",
   "def-sc-ample",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-module-pullback-tensor",
   "lem-sc-ample-complement-affine"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "RR proof; supplemented by the current blueprint duality detail and the divisor-calculus Stacks sources"
+  "by": "R1",
+  "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+  "place": "Stage 3 proof: reuse existing source RR, coherent RR, duality and ampleness proofs; prove valuation-divisor and canonical field-comparison glue directly."
  },
  "mathlib_searches": [
   {
@@ -314,7 +271,147 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.eulerChar_free_eq",
+    "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
+    "AlgebraicGeometry.Scheme.finrankH_zero_eq",
+    "AlgebraicGeometry.Scheme.isAmple_of_degree_pos",
+    "AlgebraicGeometry.Scheme.isAffine_compl_of_isAmple"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.eulerChar_free_eq",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      729,
+      756
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      712,
+      727
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.finrankH_zero_eq",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1460,
+      1471
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.isAmple_of_degree_pos",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1626,
+      1648
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.isAffine_compl_of_isAmple",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1676,
+      1687
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      408,
+      422
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_tensorObj_dual_toModules_iso",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      610,
+      633
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.degree_tensorObj",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      635,
+      657
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.degree_relativeDifferentials",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1378,
+      1406
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_degree_exteriorPower_add",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent",
+     "lines": [
+      489,
+      542
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.coherentDegree",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent",
+     "lines": [
+      551,
+      563
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isInvertible_dual_toModules",
+     "module": "WeilConjectures.AlgebraicGeometry.EffectiveCartier",
+     "lines": [
+      203,
+      212
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`sk-thm-picard-rr`, `lem-pc-divisor-line-bundle-properties`, part 1;"
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "sk-thm-picard-rr",
@@ -365,16 +462,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-projective-proper",
-  "lem-pc-vanishing-above-dim",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-module-support-proper-over-base",
-  "lem-sc-pic-group",
-  "sbc-lem-smooth-geometrically-reduced",
-  "lem-sc-proper-dim-one-projective",
-  "lem-pc-closed-immersion-coherent-cohomology",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-module-pullback-tensor"
+  "sbc-lem-smooth-geometrically-reduced"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -410,5 +498,64 @@
   "group": "NQ",
   "result": "pass",
   "note": "Third head. The previous head was returned only for H4/H2 (adjunction taken from theorem node lem-pc-module-pullback-adjunction). This head makes exactly the requested correction: stmt_deps now cite def-pc-module-pullback, picardRRPullbackIso := (tensorPullbackSectionAdjunction p).leftAdjointUniq (pullbackPushforwardAdjunction p), public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction, docstring and report updated. Snapshot diff shows nothing else changed; the bundled def-pc-module-pullback record is byte-identical to side-live, whose reviewed_lean is pass, and its adjunction is the unique choice pinned to the section unit. No other Classical/theorem-choice use, sorry only in the proof, statement field verbatim. Live item is still split with no lean field (not superseded); no landed node owns residueTrace/cupPairing/torsion/rank, so the two existing:true new nodes do not collide. All clauses and edge cases (genus 0, rank 0, empty D/X in (H), arbitrary K) re-confirmed as in the prior review. No compile (no file changed)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Fix a smooth proper curve $C/k$ with $H^0(C,\\cO_C)=k$, and set\n$g=\\dim_kH^1(C,\\cO_C)$. (For smooth proper $C$, the condition\n$H^0(C,\\cO_C)=k$ is equivalent to geometric connectedness, and such curves\nare projective (Stacks Project, Tag 0A26).) For an invertible sheaf $\\cL$ on $C$,\n\n$$\n\\chi(C,\\cL)=\\deg\\cL+1-g,\n\\qquad\nH^1(C,\\cL)^\\vee\\simeq H^0(C,\\omega_{C/k}\\otimes\\cL^{-1}),\n\\qquad \\deg\\omega_{C/k}=2g-2.\n$$\n\nIn particular, if\n$\\deg\\cL>2g-2$, then\n\n$$\nH^1(C,\\cL)=0,\n\\qquad h^0(C,\\cL)=\\deg\\cL+1-g.\n$$\n\nThe genus and the degree are invariant under extension of the ground\nfield.\n\nHere $\\deg\\cL=\\deg D=\\sum_xn_x[\\kappa(x):k]$ for any divisor\n$D=\\sum_xn_x\\,x$ with $\\cL\\cong\\cO_C(D)$ (well defined, since principal\ndivisors have degree $0$), and $\\chi(C,\\cL)=h^0(C,\\cL)-h^1(C,\\cL)$.\n\n*Complements* (also proved in this sketch and used in this block). The\nRiemann–Roch formula extends to coherent $\\cF$ as\n$\\chi(\\cF)=\\deg\\cF+\\operatorname{rk}(\\cF)(1-g)$, with\n$\\deg\\cF=\\dim_kH^0(C,\\mathcal T)+\\deg\\det(\\cF/\\mathcal T)$ for the torsion\nsubsheaf $\\mathcal T$; and:\n\n1. **(G)** *positive degree $\\Rightarrow$ ample:* a line bundle $\\cL$\non $C$ with $\\deg\\cL>0$ is ample;\n1. **(H)** *affine complement:* if $D$ is an effective Cartier divisor\non a proper $k$-scheme $X$ with $\\cO_X(D)$ ample, then\n$X\\setminus\\operatorname{Supp}(D)$ is affine.",
+  "proof": [
+   {
+    "text": "This is coherent duality and Riemann–Roch for smooth curves (Stacks\nProject, Tag 0B5B); the duality is given by the residue trace on\ndifferentials ([det-thm-picard-duality], with $n=1$, $q=1$, $\\cF=\\cL$).",
+    "uses": [
+     "det-thm-picard-duality"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Riemann–Roch.* By additivity of $\\chi$ in short exact sequences, the\ntorsion part of a coherent $\\cF$ (for which $\\chi=h^0$ is the length,\ni.e. the degree) and a filtration of the locally free quotient by line\nbundles (along which $\\deg\\det$ is additive) reduce the formula to line\nbundles $\\cO_C(D)$. There\n$0\\to\\cO_C(D-x)\\to\\cO_C(D)\\to\\kappa(x)\\to0$ gives\n$\\chi(\\cO_C(D))=\\chi(\\cO_C(D-x))+[\\kappa(x):k]$ (coherent cohomology\nvanishes in degrees $\\ge2$ on the one-dimensional noetherian space $C$,\nso $\\chi=h^0-h^1$ throughout); applied to $D$ when $n_x>0$ and to $D+x$\nwhen $n_x<0$, it lowers $\\sum_x|n_x|$ by one and leaves $\\chi-\\deg$\nunchanged, so by induction $\\chi(\\cO_C(D))=\\deg D+\\chi(\\cO_C)$, and\n$\\chi(\\cO_C)=h^0-h^1=1-g$ because $H^0(C,\\cO_C)=k$. (In particular\n$C$ is connected, and, its local rings being regular, integral.)",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Canonical degree.* Duality with $\\cL=\\cO_C$ gives $h^0(\\omega_{C/k})=g$\nand $h^1(\\omega_{C/k})=h^0(\\cO_C)=1$, so\n$\\deg\\omega_{C/k}=\\chi(\\omega_{C/k})-\\chi(\\cO_C)=(g-1)-(1-g)=2g-2$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Field extension.* For $K/k$, flat base change identifies\n$H^i(C_K,\\cL_K)=H^i(C,\\cL)\\otimes_kK$ for all $i$, so\n$\\chi(C_K,\\cL_K)=\\chi(C,\\cL)$; applied to $\\cL$ and to $\\cO_C$ this shows\nthat the degree $\\chi(\\cL)-\\chi(\\cO_C)$ and the genus $h^1(\\cO_C)$ are\npreserved, and that $H^0(C_K,\\cO_{C_K})=K$, so $C_K$ again satisfies the\nhypotheses.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Vanishing.* If $\\deg\\cL>2g-2$, the dual sheaf\n$\\omega_{C/k}\\otimes\\cL^{-1}$ has negative degree. A nonzero section of\nan invertible sheaf on an integral curve has an effective zero divisor,\nof degree $\\ge0$, so a negative-degree sheaf has no nonzero section.\nHence $H^1(C,\\cL)=0$, and Riemann–Roch gives\n$h^0(C,\\cL)=\\chi(C,\\cL)=\\deg\\cL+1-g$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*(G).* Ampleness descends along $\\Spec\\bar k\\to\\Spec k$ and degree is\npreserved by flat base change, so we may take $k$ algebraically closed,\nwhere every closed point is rational. For $m\\deg\\cL\\ge2g+1$ and closed\npoints $P,Q$ (possibly equal), the range $\\deg>2g-2$ above gives\n$h^0(\\cL^{\\otimes m}(-P))=h^0(\\cL^{\\otimes m})-1$ and\n$h^0(\\cL^{\\otimes m}(-P-Q))=h^0(\\cL^{\\otimes m})-2$, i.e.\n$\\cL^{\\otimes m}$ is base-point free and separates points and tangent\nvectors; hence $\\cL^{\\otimes m}$ is very ample and $\\cL$ is ample.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*(H).* Classical: the complement of the support of an ample effective\nCartier divisor $D$ is the non-vanishing locus of the canonical section\nof $\\cO_X(D)$, and non-vanishing loci of sections of an ample sheaf on a\nproper scheme are affine.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261023T135311-L-2864984",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

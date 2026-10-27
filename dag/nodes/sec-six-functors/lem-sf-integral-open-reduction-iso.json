@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-integral-open-reduction-iso",
+ "kind": "statement",
+ "title": "Invertibility of the canonical open reduction mate",
+ "statement": "For a prime l, finite coefficient field E, any Operations o and RealizationModel m, and any open immersion j:U->V, every component of m.openReduction(j) is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; localization of the ordinary open mate."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-integral-open-reduction-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The good-complex localization integralOperationsGoodLocalization is a localization at quasi-isomorphisms by the proved integralOperationsGoodLocalization_isLocalization helper. Its essential surjectivity gives a flat-term K-flat representative P and an isomorphism Q(P) to the arbitrary derived object K. Naturality, via NatTrans.isIso_app_iff_of_iso, reduces invertibility to the component at Q(P).",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each degree i, apply ordinaryOpenReduction_isIso to P.X i. Hence the complex map ordinary.openReductionComplex is an isomorphism by HomologicalComplex.Hom.isIso_of_components. DerivedCategory.Q preserves that isomorphism.",
+   "uses": [
+    "lem-sf-ordinary-open-reduction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply openReduction_mate_localization to P, obtaining the comparison isomorphisms s and t and the equality openReduction(Q(P)) followed by t.hom equals s.hom followed by Q of the ordinary complex mate. The right side is invertible by the preceding step; cancel the invertible t.hom with IsIso.of_isIso_fac_right. Together with the representative transport this proves the exact given component is invertible for every K, without completeness or quasi-compactness assumptions.",
+   "uses": [
+    "lem-sf-open-reduction-mate-localization",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-well-defined",
+  "lem-sf-ordinary-open-reduction-mate",
+  "lem-sf-open-reduction-mate-localization",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Z5",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Localization of the ordinary open mate. Lean assembly follows the existing private fixedOpenReduction_isIso proof in OpenReconstructionEffectivity, importing only its required lower-level ingredients."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOpenReductionIso",
+  "file": "lean/Sheaf/SixFunctors/IntegralOpenReductionIso.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralOpenReductionIso",
+  "statement": "theorem integralOpenReductionIso (o : Operations l E) (m : RealizationModel l E o) {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] (K : DerivedCategory (scalarReductionSource l E U)) : IsIso ((m.openReduction l E j).app K)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOpenReductionNormalizedLimit",
+  "date": "2026-10-27",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Localization of the ordinary open mate.",
+   "via": [
+    "lem-sf-integral-open-reduction-normalized-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "open extension completeness normalized coefficient limit",
+   "results": "No exact Mathlib declaration; project-specific transport required.",
+   "date": "2026-10-27",
+   "verdict": "No matching Mathlib theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (F.map f)",
+   "results": "Generic IsIso transport lemmas only; no project-specific open reduction result.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized coefficient limit open extension complete",
+   "results": "No exact project-specific match.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T012845-L-2340453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T034816-L-3688735",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,209 @@
+{
+ "id": "lem-trf-ultrametric-one-vector-approximate-projection",
+ "kind": "statement",
+ "title": "Approximate contractive projection after adjoining one vector",
+ "statement": "Let $k$ be a field [def-weil-field] with a real-valued multiplicative nonarchimedean absolute value $|\\cdot|$, vanishing exactly at zero and satisfying $|1|=1$ and $|a+b|\\leq\\max(|a|,|b|)$. Let $V$ be a $k$-vector space with a norm $\\|\\cdot\\|:V\\to\\mathbf R_{\\geq0}$ satisfying $\\|v\\|=0$ exactly when $v=0$, $\\|av\\|=|a|\\|v\\|$, and $\\|v+w\\|\\leq\\max(\\|v\\|,\\|w\\|)$. Let $U\\subseteq V$ be a linear subspace (containing zero and closed under addition and scalar multiplication) that is closed for $d(v,w)=\\|v-w\\|$. Let $x\\in V\\setminus U$ and $0<r<1$ be real. Put $W=U+kx=\\{u+ax:u\\in U,\\ a\\in k\\}$. There exists a $k$-linear map $P:W\\to U$ such that $P(u)=u$ for all $u\\in U$ and $\\|P(w)\\|\\leq r^{-1}\\|w\\|$ for all $w\\in W$, with the induced norm on $U$. Completeness of $k$ or $V$, local compactness, and spherical completeness are not assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Agent-supplied preparatory comparison for the bounded-separation consequence of BGR Proposition 2.7.1/2, printed p.110 (scan PDF p.118). The archival source is absent (WANTED); the direct distance-infimum proof is recorded in the worker report and is not attributed as a verbatim BGR assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a nonarchimedean normed field a bounded linear functional on a closed subspace extends to a one dimensional enlargement with any prescribed factor greater than one in its bound",
+   "results": {
+    "t": "2026-10-24T17:00:14Z",
+    "tool": "leanfinder",
+    "query": "Over a nonarchimedean normed field a bounded linear functional on a closed subspace extends to a one dimensional enlargement with any prescribed factor greater than one in its bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "riesz_lemma_of_norm_lt",
+     "exists_extension_norm_eq",
+     "riesz_lemma",
+     "LinearMap.extendOfNorm",
+     "LinearEquiv.norm_extend_le",
+     "Real.exists_extension_norm_eq",
+     "LinearMap.opNorm_extendOfNorm_le",
+     "LinearMap.norm_extendOfNorm_apply_le"
+    ],
+    "digest": "2923311f20308d30"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: RieszLemma supplies a separated vector but not the asserted projection and its operator estimate; the projection hits require inner products or complementary closed subspaces and completeness of the ambient space; HahnBanach.lean:40–46 requires IsRCLikeNormedField. InvariantExtension extends algebra norms, not projections. Read RieszLemma.lean:35–78, Complemented.lean:90–108, and HahnBanach.lean:35–55."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUltrametricDist\", \"extend\"",
+   "results": {
+    "t": "2026-10-24T17:00:14Z",
+    "tool": "loogle",
+    "query": "\"IsUltrametricDist\", \"extend\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "IsUltrametricDist.invariantExtension_extends",
+     "IsUltrametricDist.algNormOfAlgEquiv_extends"
+    ],
+    "digest": "f89892e2fea57e5f"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: RieszLemma supplies a separated vector but not the asserted projection and its operator estimate; the projection hits require inner products or complementary closed subspaces and completeness of the ambient space; HahnBanach.lean:40–46 requires IsRCLikeNormedField. InvariantExtension extends algebra norms, not projections. Read RieszLemma.lean:35–78, Complemented.lean:90–108, and HahnBanach.lean:35–55."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subspace of an ultrametric normed space has approximate norm one linear projections when enlarged by a single vector",
+   "results": {
+    "t": "2026-10-24T17:03:45Z",
+    "tool": "leanfinder",
+    "query": "A closed subspace of an ultrametric normed space has approximate norm one linear projections when enlarged by a single vector",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "riesz_lemma",
+     "riesz_lemma_of_norm_lt",
+     "Submodule.linearProjOfClosedCompl",
+     "ApproximatesLinearOn.closedBall_subset_target",
+     "ContinuousLinearMap.exists_approx_preimage_norm_le",
+     "ApproximatesLinearOn.surjOn_closedBall_of_nonlinearRightInverse",
+     "ApproximatesLinearOn.surjective",
+     "LinearMap.tendsto_birkhoffAverage_of_ker_subset_closure"
+    ],
+    "digest": "1328254fcb158bd5"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: RieszLemma supplies a separated vector but not the asserted projection and its operator estimate; the projection hits require inner products or complementary closed subspaces and completeness of the ambient space; HahnBanach.lean:40–46 requires IsRCLikeNormedField. InvariantExtension extends algebra norms, not projections. Read RieszLemma.lean:35–78, Complemented.lean:90–108, and HahnBanach.lean:35–55."
+  },
+  {
+   "tool": "grep",
+   "query": "ultrametric.*(extend|projection)|one.*vector.*extension|exists_extension_norm_eq",
+   "results": {
+    "t": "2026-10-24T17:03:45Z",
+    "tool": "grep",
+    "query": "ultrametric.*(extend|projection)|one.*vector.*extension|exists_extension_norm_eq",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Module/HahnBanach.lean",
+     "Mathlib/Analysis/Normed/Module/HahnBanach.lean",
+     "Mathlib/Analysis/Normed/Module/HahnBanach.lean",
+     "Mathlib/Analysis/Normed/Unbundled/InvariantExtension.lean",
+     "Mathlib/Analysis/Normed/Unbundled/InvariantExtension.lean"
+    ],
+    "digest": "4ea3297edbe43091"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: RieszLemma supplies a separated vector but not the asserted projection and its operator estimate; the projection hits require inner products or complementary closed subspaces and completeness of the ambient space; HahnBanach.lean:40–46 requires IsRCLikeNormedField. InvariantExtension extends algebra norms, not projections. Read RieszLemma.lean:35–78, Complemented.lean:90–108, and HahnBanach.lean:35–55."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an ultrametric normed vector space a closed subspace admits a projection from its span with one more vector with norm at most one divided by any r between zero and one",
+   "results": {
+    "t": "2026-10-24T17:12:55Z",
+    "tool": "leansearch",
+    "query": "In an ultrametric normed vector space a closed subspace admits a projection from its span with one more vector with norm at most one divided by any r between zero and one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Submodule.HasOrthogonalProjection.ofCompleteSpace",
+     "riesz_lemma_of_norm_lt",
+     "riesz_lemma",
+     "Submodule.orthogonalProjection_norm_le",
+     "Submodule.norm_starProjection_apply_le",
+     "Submodule.norm_orthogonalProjection_apply_le",
+     "Submodule.starProjection_norm_le",
+     "Submodule.instHasOrthogonalProjectionTop"
+    ],
+    "digest": "449c4e7469e490bd"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: RieszLemma supplies a separated vector but not the asserted projection and its operator estimate; the projection hits require inner products or complementary closed subspaces and completeness of the ambient space; HahnBanach.lean:40–46 requires IsRCLikeNormedField. InvariantExtension extends algebra norms, not projections. Read RieszLemma.lean:35–78, Complemented.lean:90–108, and HahnBanach.lean:35–55."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a vector x outside a closed subspace U of a nonarchimedean normed vector space and r less than one there is a linear projection U plus k x onto U with bound one over r",
+   "results": {
+    "t": "2026-10-24T17:12:56Z",
+    "tool": "leanfinder",
+    "query": "Given a vector x outside a closed subspace U of a nonarchimedean normed vector space and r less than one there is a linear projection U plus k x onto U with bound one over r",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "riesz_lemma",
+     "Submodule.linearProjOfClosedCompl",
+     "riesz_lemma_of_norm_lt",
+     "Submodule.coe_continuous_linearProjOfClosedCompl'",
+     "Submodule.coe_continuous_linearProjOfClosedCompl",
+     "Submodule.ClosedComplemented",
+     "IsLprojection",
+     "ContinuousLinearMap.exists_approx_preimage_norm_le"
+    ],
+    "digest": "d2bf1686c775ebf0"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: RieszLemma supplies a separated vector but not the asserted projection and its operator estimate; the projection hits require inner products or complementary closed subspaces and completeness of the ambient space; HahnBanach.lean:40–46 requires IsRCLikeNormedField. InvariantExtension extends algebra norms, not projections. Read RieszLemma.lean:35–78, Complemented.lean:90–108, and HahnBanach.lean:35–55."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-countable-type-bounded-dual",
+  "date": "2026-10-25",
+  "group": "O2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Theorem 5.3.1/1 and its proof, printed pp.212–213 (scan PDF pp.218–219); Definition 3.5.2/1, printed p.153 (scan PDF p.161), gives weak stability. The displayed inequalities spell out the weakly cartesian topology for a finite basis. Proof of BGR 5.3.1/1: Lemma 5.3.1/2 and its proof, printed pp.212-213 (scan PDF pp.218-219); bounded separation is the expanded meaning of b-separable. BGR 5.3.1/2 proof, printed p.213: the complete coefficient subfield is of countable type, and Proposition 2.7.1/2 separates its points by bounded scalar functionals. Supporting comparison for the bounded-separation proof: projection onto a closed subspace after adjoining one vector, with any bound strictly larger than one.",
+   "via": [
+    "lem-trf-countable-type-bounded-dual",
+    "lem-trf-tate-root-finite-rank-bseparation",
+    "lem-trf-tate-fraction-weak-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

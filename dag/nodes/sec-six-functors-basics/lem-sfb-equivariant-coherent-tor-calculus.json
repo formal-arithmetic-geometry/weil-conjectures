@@ -1,0 +1,530 @@
+{
+ "id": "lem-sfb-equivariant-coherent-tor-calculus",
+ "kind": "statement",
+ "title": "Equivariant coherent Tor sheaves and their exact-sequence calculus",
+ "statement": "Let $F$ be a field [def-weil-field], $G$ an affine finite-type $F$-group scheme [def-sc-group-scheme], and $X$ a finite-type $F$-scheme [def-pc-scheme, def-weil-finite-type-morphism]. Fix an action $a:G\\times_F X\\to X$, meaning $a\\circ(e\\times1_X)=1_X$ and $a\\circ(m\\times1_X)=a\\circ(1_G\\times a)$ under the product identifications. A $G$-linearization of a module $\\mathcal M$ is an isomorphism $a^*\\mathcal M\\simeq\\operatorname{pr}_2^*\\mathcal M$ on $G\\times_FX$ satisfying identity and cocycle identities. For coherent linearized $\\mathcal P,\\mathcal M$ [pqf-def-coherent], put\n$$T_q(\\mathcal P,\\mathcal M)=H^{-q}(\\mathcal P[0]\\otimes^{\\mathrm L}_{\\mathcal O_X}\\mathcal M[0])\\quad(q\\geq0),$$\nusing the actual derived tensor [def-pc-scheme-derived-tensor-structure]. These are coherent sheaves with canonical linearizations. Morphisms and the connecting maps of the Tor long exact sequence for every equivariant short exact sequence in either variable are equivariant. Kernels and images in these sequences are coherent linearized modules. On an affine open $U=\\operatorname{Spec}A$, their sections identify naturally with $\\operatorname{Tor}_q^A(\\mathcal P(U),\\mathcal M(U))$ [def-weil-pbc-tor-modules]; an augmented finite free resolution of $\\mathcal P|_U$, when available, computes the restriction by the sheafified tensor complex. These identifications commute with affine restriction. For every flat equivariant morphism $h:X'\\to X$ between finite-type $F$-schemes there are canonical equivariant isomorphisms\n$$h^*T_q(\\mathcal P,\\mathcal M)\\simeq T_q(h^*\\mathcal P,h^*\\mathcal M),$$\ncompatible with identity, composition and connecting maps. On sections, for affine opens $U=\\operatorname{Spec}A\\subseteq X$ and $U'=\\operatorname{Spec}A'\\subseteq h^{-1}(U)$, this comparison (and each comparison along the action, projection and face maps below) is, under the affine identifications above, the flat base-change isomorphism $A'\\otimes_A\\operatorname{Tor}_q^A(\\mathcal P(U),\\mathcal M(U))\\to\\operatorname{Tor}_q^{A'}(A'\\otimes_A\\mathcal P(U),A'\\otimes_A\\mathcal M(U))$. The analogous underlying-sheaf flat-pullback comparison is available along the action and projection maps and flat face maps in the action nerve; applying it to the two input linearizations is the specified linearization on $T_q$. If $\\mathcal P$ is also a coherent equivariant $\\mathcal O_X$-algebra, its multiplication induces a compatible $\\mathcal P$-module structure on each $T_q$, and the long exact sequence in $\\mathcal M$ is $\\mathcal P$-linear. If $\\mathcal P=\\mathcal O_X/\\mathcal J$ for an invariant coherent ideal, these are modules killed by $\\mathcal J$. For every linearized module $\\mathcal V$ locally isomorphic to $\\mathcal O_X^n$ for finite $n$, tensoring with $\\mathcal V$ is exact and the canonical equivariant map\n$$T_q(\\mathcal P,\\mathcal M)\\otimes\\mathcal V\\xrightarrow{\\sim}T_q(\\mathcal P,\\mathcal M\\otimes\\mathcal V)$$\nis an isomorphism. Also $T_0(\\mathcal P,\\mathcal V)=\\mathcal P\\otimes\\mathcal V$ and $T_q(\\mathcal P,\\mathcal V)=0$ for $q>0$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BP, definition-tor and the ensuing long exact sequence; equivariant coherent and flat-pullback enhancement supplied by the agent from ordinary scheme Tor, with sources and descent argument recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-pbc-tor-modules",
+  "def-weil-flat-morphism",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-scheme-tor",
+  "def-sfb-equivariant-tor-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "The field F is Noetherian: its only ideals are 0 and F. Its spectrum is one point, hence quasi-compact and locally Noetherian. Apply the finite-type-over-Noetherian lemma to X. Thus X is Noetherian. Choose an affine cover by U=Spec A with A Noetherian, using the definition of locally Noetherian. On each of these charts, coherence is quasi-coherence plus finite type, so P|_U and M|_U are the associated sheaves of their finite A-modules of sections. Choose an augmented resolution E_\\bullet of P(U) by finite free A-modules. Its length need not be finite; place E_j in cochain degree -j. The supplied finite-free-resolution sheafification makes its associated-sheaf augmentation a quasi-isomorphism to P|_U[0].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sc-finite-free-resolution-sheafification",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LP (lemma-resolution-by-finite-free), 01T6 (morphisms-lemma-finite-type-noetherian); coherent.tex 01XZ (lemma-coherent-Noetherian)"
+   }
+  },
+  {
+   "text": "On U, the sheafified resolution is bounded above and finite free in every degree. The ringed finite-free tensor lemma identifies P|_U[0] tensor-derived M|_U[0] with the sheafified complex E_\\bullet tensor_A M(U), in nonpositive cochain degrees. Equivalently use the derived affine tensor comparison. The derived affine tilde equivalence and its natural homology comparison identify its degree -q cohomology with tilde(Tor_q^A(P(U),M(U))). The tilde/Gamma unit gives the asserted section isomorphism. These statements give the derived-category comparison before taking cohomology; we are not defining a substitute tensor from separate homology groups. The same argument computes with any supplied augmented finite free resolution, including a bounded one. For an arbitrary affine open, use instead the affine derived tensor isomorphism for the two section modules and its natural cohomology comparison, followed by the derived-module Tor comparison. These impose no Noetherian or finite-free-resolution hypotheses on that affine ring, and yield the claimed affine section formula there as well.",
+   "uses": [
+    "lem-sfb-ringed-finite-free-resolution-tensor",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-pbc-tor-modules",
+    "lem-kun-derived-module-tor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YH (definition-derived-tor), 08BP (definition-tor); perfect.tex 08DX, affine derived tensor calculation"
+   }
+  },
+  {
+   "text": "Each term of the tensor complex on U is a finite direct sum of M|_U and hence coherent. The coherent-kernel/cokernel lemma makes its cycles and boundaries coherent (an image is the kernel of the cokernel), and then makes their quotient coherent. Thus all T_q are coherent, since this is local. Maps on Tor are the maps on these homology sheaves: in the first variable lift a map to the free resolutions, and in the second tensor the given coefficient map. The resolution-lift formula identifies these maps with the canonical Tor bifunctor, so the affine description is natural in both inputs.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "lem-weil-pbc-free-complex-maps-to-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), affine tensor calculation; modules.tex 01BY (lemma-coherent-abelian); algebra.tex 00LS (lemma-compare-resolutions)"
+   }
+  },
+  {
+   "text": "For a short exact sequence of coherent modules in the second variable, tensor its restriction with the finite free resolution E_\\bullet of the first variable. Degreewise this is a finite direct sum of the given short exact sequence, hence is short exact. The complex long exact sequence gives all connecting maps, including the endpoint T_0=P tensor M and the zero term after it. Its naturality lemma makes every square commute for a morphism of such sequences and for a map of first-variable resolutions. The symmetry of the derived tensor (the signed interchange, whose degree-zero restrictions have no extra sign) gives the same construction in the first variable. The K-flat fixed-tensor triangulated lemma ensures these are the connecting maps of the actual derived tensor, with its signed shift structure. This does not infer all degrees from a lemma that states only first Tor.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-sfb-ringed-finite-free-resolution-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BP (definition-tor), ensuing long exact sequence; homology.tex 0117 (lemma-long-exact-sequence-cochain)"
+   }
+  },
+  {
+   "text": "Let h:X' to X be flat, and take affine opens U=Spec A, U'=Spec B as in the statement. The affine flatness criterion makes A to B flat. Tensor E_\\bullet with B; flat tensor exactness makes it a free resolution of B tensor_A P(U). In degree j the comparison is the reassociation\nB tensor_A(E_j tensor_A M(U)) -> (B tensor_A E_j) tensor_B(B tensor_A M(U)),\nb tensor(e tensor m) |-> (b tensor e) tensor(1 tensor m).\nExact tensor preserves kernels and cokernels, so it carries ker d/im d to ker(1 tensor d)/im(1 tensor d). Consequently this chain isomorphism induces the stated flat-base-change isomorphism on Tor. The affine pullback-section formula identifies the two input modules and the pullback of T_q with these very B-tensors. No boundedness of E is needed: the kernel/image calculation involves only the adjacent differentials.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M8 (lemma-flat-base-change-tor), its free-resolution proof; morphisms.tex affine flatness criterion"
+   }
+  },
+  {
+   "text": "The comparisons of step 5 are canonical. For two resolutions, augmentation-preserving lifts exist, two such lifts are homotopic, and an additive tensor functor preserves that homotopy and its equality on homology. The map formula is compatible with these lifts by the Tor resolution-map lemma. For an affine inclusion V in U apply the same formula to its flat open immersion; on a principal refinement it is the localization map on the displayed tensor complex. This proves compatibility with affine restriction. General overlaps are covered by affine subopens, so the local comparisons agree and glue to beta_h:h^*T_q(P,M) -> T_q(h^*P,h^*M). For successive flat maps A to B to C, both comparisons on pure tensors send c tensor(b tensor(e tensor m)) to (cb tensor e) tensor(1 tensor m); for the identity the map is the identity. Thus the beta_h satisfy identity and composition with the pullback compositors. The beta_h are also natural in both inputs: for O_X-linear u:P->P_1 and v:M->M_1 between coherent modules (not necessarily equivariant), choose a lift u~:E->E_1 of u to the resolutions; then both beta_h composed with h^*T_q(u,v) and T_q(h^*u,h^*v) composed with beta_h send b tensor(e tensor m) to (b tensor u~(e)) tensor(1 tensor v(m)), and by the resolution-map lemma 1 tensor u~ computes h^*u on the base-changed resolutions. Exact pullback and the naturality of the complex long exact sequence show beta_h commutes with connecting maps: a lifted cycle, its differential and its preimage in the kernel are sent to the same three elements by tensor extension.",
+   "uses": [
+    "lem-weil-pbc-free-complex-maps-to-resolution",
+    "new-t4-augmented-resolution-lift-homotopy",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LS (lemma-compare-resolutions), 00LR (lemma-homotopic-equal-homology), 00M8 (lemma-flat-base-change-tor); modules.tex 02N4 (lemma-pullback-flat)"
+   }
+  },
+  {
+   "text": "The maps needed for the group action are flat even when G is not smooth or reduced. Indeed G to Spec F is flat; its base change pr_2:G times_F X to X is flat. The isomorphism u(g,x)=(g,a(g,x)), inverse u^{-1}(g,x)=(g,a(g^{-1},x)), has pr_2 u=a. Thus a is flat. The multiplication G times G to G is a projection after the analogous isomorphism (g,h) |-> (g,gh), so it too is flat. The face maps of the action nerve are projections, action maps, multiplication maps, their base changes or composites; the cited base-change and composition lemmas give their flatness. The unit section is not asserted flat.",
+   "uses": [
+    "lem-pc-flat-field",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-compose",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U (lemma-pullback-tensor-product), applied to the flat action and nerve maps; group inverse argument supplied by NV"
+   }
+  },
+  {
+   "text": "Write lambda_P and lambda_M for the supplied input linearizations, oriented from a^* to pr_2^*. Define\nlambda_T=beta_pr2^{-1} composed with T_q(lambda_P,lambda_M) composed with beta_a.\nThis is an isomorphism a^*T_q -> pr_2^*T_q. On G times G times X, composition compatibility of beta and functoriality of T_q identify the composite of its two linearizations with T_q of the corresponding two composites for P and M. The input cocycle identities equate these with the single linearization along multiplication, proving the cocycle for T_q. For the identity section j=(e,1), do not apply flat base change to j. Instead restrict the cocycle along (e,e,1). Since both a j and pr_2 j are the identity, the pullback compositors give (j^*lambda_T)^2=j^*lambda_T. It is an isomorphism; cancel it to get j^*lambda_T=1. This proves the unit identity even for a nonflat unit section.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U (lemma-pullback-tensor-product) for beta; agent-supplied cocycle and invertible-idempotent argument from the definition of linearization"
+   }
+  },
+  {
+   "text": "Naturality in both inputs gives equivariance of Tor maps. For an equivariant short exact sequence, the naturality squares of step 4 and the connecting-map compatibility of beta in step 6 show that its connecting maps commute with lambda_T as well. Explicitly both sides are the boundary of the same image of a lifted cycle, since the linearizations give a morphism between the pulled-back short exact sequences. Flat a^* and pr_2^* preserve kernels and images. Hence for any such equivariant map its two pullbacks of the kernel (respectively image) are the kernel (respectively image) of the two pulled-back arrows; restricting lambda yields an isomorphism between them. The cocycle and unit are inherited by these subobjects. Coherence follows from the coherent-kernel/cokernel lemma. For an equivariant flat h, the equality a_X(1_G times h)=h a_X' and the analogous projection equality identify the two composites of beta by step 6. Naturality in lambda_P,lambda_M then says beta_h is equivariant.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BP, natural Tor long exact sequence; modules.tex 02N4 (lemma-pullback-flat), 01BY (lemma-coherent-abelian)"
+   }
+  },
+  {
+   "text": "Suppose P is a coherent algebra. On an affine U resolve M(U) instead of P(U), and use the symmetry comparison already used in step 4. The complex P(U) tensor_A Q_\\bullet has the P(U)-action by multiplication on the first factor. Its homology therefore has a unital associative P(U)-module structure. The coefficient-action resolution lemma identifies this with the canonical coefficient action on Tor. The action commutes with restriction and flat base change by the pure-tensor formula of step 5, so it glues and is equivariant because the input algebra linearization respects multiplication and unit. For a sequence in M, naturality of its boundary in P shows that each multiplication endomorphism m_p:P|_U to P|_U commutes with the boundary. Since these are the just-constructed actions of local sections p, all maps in that long exact sequence are P-linear. When P=O_X/J, every local section of J acts by zero on the resolving complex P tensor Q_\\bullet, hence on every T_q.",
+   "uses": [
+    "lem-trf-tor-resolution-coefficient-actions",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-tor-map-via-resolution-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M7 (section-functoriality-tor), item (1), coefficient actions; cohomology.tex 08BP, naturality of the long exact sequence"
+   }
+  },
+  {
+   "text": "Finally let V be locally finite free with its supplied linearization. On a trivializing open V=O^n, tensor by V is a finite direct sum functor, hence exact. For the same sheafified resolution E, reassociation gives (E tensor M) tensor V = E tensor(M tensor V). Exactness of tensor by V identifies H^{-q} of the left complex with T_q(P,M) tensor V, and gives the required isomorphism. The map is canonical reassociation before homology, so changes of trivialization, the two input linearizations and the flat pullback comparisons commute with it on pure tensors; these local maps therefore glue to the claimed equivariant map. To compute T_q(P,V), use V[0] itself as a flat K-flat resolving complex: locally it is the finite free degree-zero case of the ringed tensor lemma. Thus the tensor complex is P tensor V in degree zero, giving T_0=P tensor V and T_q=0 for q>0. Rank zero and varying local finite ranks are included.",
+   "uses": [
+    "lem-sfb-ringed-finite-free-resolution-tensor",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pur-exact-derived-cohomology-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YH (definition-derived-tor), 08BP (definition-tor); finite-free tensor calculation and exact cohomology comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-group-scheme",
+  "def-weil-pbc-tor-modules",
+  "lem-kun-derived-module-tor-comparison",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-flat-compose",
+  "lem-pc-flat-field",
+  "lem-pur-exact-derived-cohomology-coherence",
+  "lem-sc-finite-free-resolution-sheafification",
+  "lem-sfb-ringed-finite-free-resolution-tensor",
+  "lem-trf-tor-resolution-coefficient-actions",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-free-complex-maps-to-resolution",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-tor-map-via-resolution-lift",
+  "new-affine-derived-tilde-homology-comparison",
+  "new-t4-augmented-resolution-lift-homotopy",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YH, 08BP, 079U; explicit affine-resolution and equivariant cocycle assembly by NV, using schemes.tex 01HV/01IB, algebra.tex 00LP/00LS/00M8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivariant.*Tor|Tor.*equivariant|coherent.*Tor|Tor.*coherent",
+   "results": "16 hits: Mathlib/Condensed/Functors.lean, Mathlib/Condensed/Epi.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; digest 15bd15ece075311d. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor sheaves of coherent modules commute with flat pullback and have natural long exact sequences",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackObjFreeIso, Module.Flat.rTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; digest c2b3c2ae9ef4e15c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat pullback of derived tensor product of coherent sheaves induces algebraic group linearization on Tor homology",
+   "results": "8 hits: Rep.Tor, Rep.Tor_obj, Rep.Tor_map, CategoryTheory.Tor_obj, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; digest d163b9e05d44aae0. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"Sheaf\"",
+   "results": "12 hits: CategoryTheory.OverPresheafAux.yonedaCollectionFunctor, CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_obj, CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_map, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompCoyoneda, CategoryTheory.Presheaf.functorToRepresentables, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap; digest 9d282b2c7f879c00. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant coherent Tor sheaves for an algebraic group action form a delta functor compatible with flat base change",
+   "results": "8 hits: Rep.Tor, Rep.Tor_obj, Rep.Tor_map, CategoryTheory.Tor, CategoryTheory.Tor', AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.H, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; digest cddf128df862fd4f. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor sheaves of coherent modules under algebraic group actions commute with flat pullback and long exact connecting maps",
+   "results": "8 hits: Rep.Tor_map, Rep.Tor, Rep.Tor_obj, Rep.torIso, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; digest 79645e3c85f06449. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic projective-resolution Tor and representation Tor do not state algebraic-group-scheme linearizations on coherent Tor sheaves, their affine normalization or the stated compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*Tor|Tor.*equivariant|coherent.*Tor|Tor.*coherent",
+   "results": "16 hits: Mathlib/Condensed/Functors.lean, Mathlib/Condensed/Epi.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/CategoryTheory/Sites/Coherent/ReflectsPrecoherent.lean; digest 936d85906ccd8c87. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic projective-resolution Tor and representation Tor do not state algebraic-group-scheme linearizations on coherent Tor sheaves, their affine normalization or the stated compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"Sheaf\"",
+   "results": "12 hits: CategoryTheory.OverPresheafAux.yonedaCollectionFunctor, CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_obj, CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_map, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda, CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompCoyoneda, CategoryTheory.Presheaf.functorToRepresentables, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap; digest 9d282b2c7f879c00. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic projective-resolution Tor and representation Tor do not state algebraic-group-scheme linearizations on coherent Tor sheaves, their affine normalization or the stated compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor of coherent sheaves has functorial flat base change and long exact sequences",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, RingHom.Flat.isStableUnderBaseChange, Module.FaithfullyFlat.instTensorProduct; digest ce78939709d66aee. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic projective-resolution Tor and representation Tor do not state algebraic-group-scheme linearizations on coherent Tor sheaves, their affine normalization or the stated compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group scheme acts on the Tor sheaves of two equivariant coherent sheaves by flat tensor pullback",
+   "results": "8 hits: Rep.Tor, Rep.Tor_map, Rep.Tor_obj, PresheafOfModules.Monoidal.tensorObj, Action.leftRegularTensorIso, Action.leftRegularTensorIso_hom_hom, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; digest 8fa477c2ec083cd6. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic projective-resolution Tor and representation Tor do not state algebraic-group-scheme linearizations on coherent Tor sheaves, their affine normalization or the stated compatibilities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-regular-self-intersection",
+  "date": "2026-10-24",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, Theorem 22.50, p.480: agent-supplied equivariant Koszul self-intersection prerequisite. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique (1986), self-intersection identity; not present locally. This is a local regular-immersion identity, not a fixed-point formula, and Milne does not prove it. Supporting input: induced linearizations and exact-sequence additivity of the Tor formula.",
+   "via": [
+    "lem-sfb-equivariant-regular-self-intersection",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-equivariant-coherent-tor-calculus",
+  "worker": "stage1",
+  "summary": "NV gives an eleven-step proof using existing DAG nodes only: affine finite-free resolution computation and coherence, natural Tor boundaries, normalized flat base change, the action-nerve cocycle, coefficient actions and finite-locally-free tensoring. Made the previously implicit G-action explicit; no smoothness of G and no flatness of its identity section are assumed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, Theorem 22.50, p.480: agent-supplied equivariant Koszul self-intersection prerequisite. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique (1986), self-intersection identity; not present locally. This is a local regular-immersion identity, not a fixed-point formula, and Milne does not prove it. Supporting input: induced linearizations and exact-sequence additivity of the Tor formula. This split expands the induced-linearization and exact-sequence prerequisite through ordinary Zariski module Tor; no change of the alteration or purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-pc-flat-compose",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-pc-flat-field",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-pur-exact-derived-cohomology-coherence",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-sc-finite-free-resolution-sheafification",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-sfb-ringed-finite-free-resolution-tensor",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-trf-tor-resolution-coefficient-actions",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-free-complex-maps-to-resolution",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-weil-pbc-tor-map-via-resolution-lift",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "new-affine-derived-tilde-homology-comparison",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "new-t4-augmented-resolution-lift-homotopy",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic ordinary module/sheaf or homological-algebra input for the affine Tor construction; the unit supplies no alternative for this supporting coherent-sheaf calculation."
+   },
+   {
+    "node": "lem-kun-derived-module-tor-comparison",
+    "why": "Generic natural identification of module-derived tensor homology with ring Tor, used for arbitrary affine charts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-flat-compose",
+  "lem-pc-flat-field",
+  "lem-pur-exact-derived-cohomology-coherence",
+  "lem-sc-finite-free-resolution-sheafification",
+  "lem-sfb-ringed-finite-free-resolution-tensor",
+  "lem-trf-tor-resolution-coefficient-actions",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-free-complex-maps-to-resolution",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-tor-map-via-resolution-lift",
+  "new-affine-derived-tilde-homology-comparison",
+  "new-t4-augmented-resolution-lift-homotopy",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-kun-derived-module-tor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-7abb604a0",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-7abb604a0 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps and every cited statement in full; there are no new nodes. Statement change vs base (Q04 FIX copy): it now fixes the action a with its unit and associativity identities. On the base a was used but never introduced, so this binds a free variable and weakens nothing; the parent supplies the action. Added stmt_deps module-pullback and sheaf-tensor are used by the statement. Sources checked: cohomology.tex l.6174 definition-tor (08BP), algebra.tex l.18714 functoriality-tor (00M7); 06YH, 00LS, 079U, 01IA and 01XZ resolve to the labels the report names. Steps 1-5 and 7-11 are correct as written. Checks: Noetherian charts; the bounded-above finite-free ringed tensor; arbitrary affines via the kun Tor comparison; coherent cycles and boundaries; a long exact sequence in all degrees through K-flat triangles; the flat base-change chain isomorphism; an explicit snake chase for connecting maps; a flat because it is the iso (g,x)->(g,a(g,x)) followed by pr_2, which holds for nonreduced G; the unit identity from restricting the cocycle along (e,e,1), giving an idempotent iso (I checked the three composites equal j); the coefficient action; locally free tensor. FIX (C3/E5): steps 8 and 9 use that beta_h is natural in both inputs, which step 6 never stated. I added one sentence to step 6 proving it on pure tensors through resolution lifts; uses and proof_deps are unchanged. Edge cases: trivial G, empty X, P=O_X, A^1 with O/(t) (T_0=T_1=F, killed by t), mu_p. Tool uses: 29 generic pbc/pc/kun/pur/sfb lemmas, accepted. Batch 5: lem-trf-tor-resolution-coefficient-actions is Stacks 00M7(1) coefficient-ring commutative algebra. Its whole closure is 7 generic nodes (two trf defs or lemmas plus pbc Tor and module definitions), so it is not a step of the trace formula or Poincare duality proof, and neither assumption gives it; accepted. The item's 618-node closure reaches no nt-assume, sk-thm-trace or batch-4 node. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantCoherentTorCalculus",
+  "declaration": "AlgebraicGeometry.SchemeTor.equivariant_coherent_tor_calculus",
+  "declarations": [
+   "AlgebraicGeometry.SchemeTor.symmetry",
+   "AlgebraicGeometry.SchemeTor.EquivariantArrow",
+   "AlgebraicGeometry.SchemeTor.EquivariantBilinear",
+   "AlgebraicGeometry.SchemeTor.EquivariantAlgebra",
+   "AlgebraicGeometry.SchemeTor.coefficientTerm",
+   "AlgebraicGeometry.SchemeTor.AlgebraCalculus",
+   "AlgebraicGeometry.SchemeTor.equivariant_coherent_tor_calculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantCoherentTorCalculus.lean",
+  "statement": "theorem equivariant_coherent_tor_calculus : ∃ (B : FlatCalculus F) (A : ActionCalculus F B), Nonempty (ExactCalculus F B A) ∧ ResolutionCalculus F ∧ EquivariantPullbacks F ∧ EquivariantFlatCalculus F B A ∧ AffineBaseChangeCalculus F B ∧ Nonempty (LocallyFreeCalculus F B A) ∧ Nonempty (AlgebraCalculus F B A)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-119119947",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Read item node (11 steps), all 12 stmt_dep records, SchemeTor/EquivariantTorCalculusData/EquivariantCoherentTorCalculus modules, existing EquivariantCoherentGZero and DerivedTensorStructure. Objects match: Field F, Space=LocallyOfFiniteType∧QuasiCompact over Spec F, GrpObj+IsAffine G, ModObj action, existing Coherent D groupoid modules, T_q=H^{-q} of actual K-flat derived tensor of single 0 objects (real data, not hollow). Every clause present as conclusion of ∃ B A: coherence, linearization pinned to β_pr2⁻¹∘T(λ_P,λ_M)∘β_a, equivariant maps/boundaries (actual HomologySequence.δ, degrees checked), coherent kernels/images, exactness at all 3 positions both variables + epi endpoint, natural affine Tor' identification with restriction compatibility via AffineBaseChange at f=𝟙+beta_id, bounded-above finite-free complexes K-flat (06YF) with canonical resolutionHomologyIso, β id/comp/naturality/boundaries, equivariant flat β iso, flat base-change formula on cycles, action/projection/face flatness (no unit flatness), P-algebra action pinned on cycles + linearity + killed ideals, finite locally free tensor clauses. No extra hypotheses, uniform universe u. Searches: only immersionTor (closed-immersion specialisation) exists; new def-sfb-scheme-tor justified. Notes: affine identification existential natural (node wording) so β/λ_T determined up to a coherent gauge (natural automorphisms of Tor per scheme, e.g. global units), giving isomorphic linearized T_q, not an arbitrary map; T_0≅P⊗M and T_0(P,V)≅P⊗V unpinned Nonempty; EquivariantArrow unused; docstring condenses the 11 steps; gzero stmt_dep only transitive via new data node; second reading by the same worker. No files changed, no compile run."
+ }
+}

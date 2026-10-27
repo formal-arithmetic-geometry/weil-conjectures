@@ -31,106 +31,94 @@
  ],
  "proof": [
   {
-   "text": "By [prop-exc-open-adjoint] in the open case, and [prop-exc-finite-etale-adjoint] in the finite etale case, the relevant compact-support functor has $f^*$ as its right adjoint on the entire ordinary derived categories. Identify $Rf^{\\times}$ with this right adjoint, using the isomorphism characterized by the adjunction bijections. By [prop-weil-pbc-proetale-constant-exact], $f_A^*$ is exact for every finite coefficient ring $A$, and likewise for $B$. Thus it can be applied termwise to any complex: exactness preserves cycles, boundaries and their quotients, so $\\mathcal H^q(f_A^*K)=f_A^*\\mathcal H^q(K)$, and it preserves quasi-isomorphisms. This reduces the interval assertions to constructibility of the inverse image and the Tor assertion to a flat-complex calculation.",
+   "text": "Construct the tensor-unit-normalized ordinary adjunction from tensorAdjunction_of_identifications. Its section formula determines its unit, hence the adjunction uniquely. Derive it using K-flat resolutions and the universal counit. The derived normalization determines the unit on each resolving object; naturality across an inverted resolution extends equality to every homotopy object, and localization gives equality of units everywhere.",
    "uses": [
-    "prop-exc-open-adjoint",
-    "prop-exc-finite-etale-adjoint",
-    "prop-weil-pbc-proetale-constant-exact"
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-derived-change-of-rings"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-exc-explicit-preservation.md",
-    "place": "Imported proof, paragraph 1, first sentence; exactness also Stacks Tag 00WJ"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-exc-explicit-preservation.proof.md",
+    "place": "open and finite etale preservation, with the cited proved categorical APIs"
    }
   },
   {
-   "text": "To prove constructibility, choose the finite stratification and locally constant finite-module restrictions supplied by [def-weil-finite-torsion-constructibility] and [def-weil-proetale-locally-constant-sheaf]. Pull back the strata to $V\\times_X X_\\nu$; their inverse images are disjoint, locally closed, and cover $V$, and their underlying sets are constructible by [lem-pur-scheme-constructible-preimage]. Write $i_\\nu:X_\\nu\\to X$, $i'_\\nu:V\\times_X X_\\nu\\to V$, and $f_\\nu:V\\times_X X_\\nu\\to X_\\nu$. The composition isomorphism in [lem-weil-pbc-left-exact-site-inverse-image-tensor] identifies $(i'_\\nu)^*f^*F$ with $f_\\nu^*i_\\nu^*F$. The pullback-local-constancy theorem [lem-exc-proetale-pullback-locally-constant] says that $f_\\nu^*i_\\nu^*F$ is locally constant with the same finite module models; hence each pulled-back stratum satisfies the constructibility condition. Together with step 1 this gives exactly the cohomological interval in [def-weil-constructible-intervals], with no degree shift.",
+   "text": "The explicit inverse image is exact, so its derived cohomology is the inverse image of source cohomology. Constant-scalar restriction identifies intrinsic constructibility with fixed-module constructibility and commutes with pullback. A constructible fixed-module sheaf has an etale origin, whose pullback is constructible by the existing source-library theorem. Cohomology outside the given interval remains zero.",
    "uses": [
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-proetale-locally-constant-sheaf",
-    "lem-pur-scheme-constructible-preimage",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-exc-proetale-pullback-locally-constant",
-    "def-weil-constructible-intervals"
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "prop-constructible-pullback",
+    "def-weil-constructible-intervals",
+    "lem-weil-proetale-dbc-triangulated"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093R, lemma-pullback-locally-constant; constructible stratification expansion from imported proof paragraph 1"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-exc-explicit-preservation.proof.md",
+    "place": "open and finite etale preservation, with the cited proved categorical APIs"
    }
   },
   {
-   "text": "Let $K\\in D^b_c(X,A)$ have Tor amplitude $[c,d]$. Apply the pro-etale assertion of [lem-sf-flat-model] to obtain a complex $P\\simeq K$ of flat $A_X$-module sheaves supported in $[c,d]$. That statement permits any scheme on which $\\ell$ is invertible; its auxiliary finite-field coefficient convention imposes no $k$-scheme hypothesis on $X$. The morphism of ringed topoi in [def-weil-proetale-inverse-image], with its constant-ring structure isomorphism, meets the hypotheses of [lem-weil-pbc-ringed-topos-flat-module-pullback]. Hence every term of $f_A^*P$ is flat over $A_V$, and it vanishes outside $[c,d]$. It represents $f_A^*K$ by step 1. It is K-flat by [lem-pc-bounded-above-flat-kflat-site]. For every $A_V$-module sheaf $M$ in degree zero, [def-weil-derived-tensor] computes $f_A^*K\\otimes_A^L M$ by $(f_A^*P)\\otimes_A M$, whose terms outside $[c,d]$ are zero. Its cohomology there is therefore zero. This is precisely the Tor bound, also for module sheaves $M$ not pulled back from $X$.",
+   "text": "Transport the intrinsic Tor predicate through the exact coefficient realization equivalence. The source-library theorem torAmplitudeIn_leftDerivedUpperStar preserves its interval; its flat-pullback instance holds over a finite ring. The coordinate comparison identifies the resulting derived functor with the explicit inverse image. Transport back to intrinsic coefficients.",
    "uses": [
-    "lem-sf-flat-model",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-ringed-topos-flat-module-pullback",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-weil-derived-tensor"
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "def-trf-finite-pullback-coordinate-comparison",
+    "lem-sfb-proetale-fixed-scalar-pullback-flat",
+    "def-weil-finite-tor-amplitude"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 05VD, lemma-pullback-flat; bounded-flat-model calculation expands imported proof paragraph 2"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-exc-explicit-preservation.proof.md",
+    "place": "open and finite etale preservation, with the cited proved categorical APIs"
    }
   },
   {
-   "text": "For the coefficient comparison let $K$ now be any derived complex. Choose $P\\to K$ K-flat with flat terms using [lem-pc-kflat-resolution]. Step 1 shows that $f_A^*P$ represents $f_A^*K$, and [lem-weil-pbc-ringed-pullback-preserves-kflat] shows it is K-flat with flat terms. By [lem-pur-derived-change-of-rings], the left side of the requested comparison is represented, as a complex of $B_V$-modules, by $(f_A^*P)\\otimes_{A_V}B_V$. The right side is represented by $f_B^*(P\\otimes_{A_X}B_X)$, since $P\\otimes_{A_X}B_X$ represents the coefficient extension and $f_B^*$ is exact. The ordinary tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] and the identification $f^{-1}B_X=B_V$ from [prop-weil-pbc-proetale-constant-ring-map] give an isomorphism between these complexes. Concretely both identify to $f^{-1}P\\otimes_{f^{-1}A_X}B_V$, and the map is the identity on local pure tensors $p\\otimes b$. It is $B_V$-linear, respects differentials, and is natural in $P$. The resolution independence in [lem-pur-derived-change-of-rings] makes this the derived comparison specified in the statement, hence an isomorphism for arbitrary $K$. This calculation uses no flatness of $A\\to B$.",
+   "text": "The specified coefficient comparison is the conjugate of the isomorphism between the composite right adjoints. Mathlib conjugateEquiv_symm_iso proves this particular natural transformation invertible, hence all its components invertible, without a boundedness hypothesis.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "prop-weil-pbc-proetale-constant-ring-map"
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); ordinary comparison: sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-exc-explicit-preservation.proof.md",
+    "place": "open and finite etale preservation, with the cited proved categorical APIs"
    }
   },
   {
-   "text": "It remains to justify bounded constructibility after reduction, rather than infer it from a nonflat quotient. Suppose $K\\in D^b_c(X,A)$ has Tor amplitude $[c,d]$. The constant $A$-module sheaf $B_X$ is bounded constructible in degree zero, since $B$ is a finite $A$-module. Apply [lem-pur-finite-tensor-constructible-cohomology] to $K$ and $B_X$: all cohomology sheaves of $K\\otimes_A^L B$ are constructible as $A$-module sheaves. Its cohomology vanishes outside $[c,d]$ by the defining Tor test [def-weil-finite-tor-amplitude], with $M=B_X$. These cohomology sheaves are also constructible as $B$-module sheaves: their $A$-action factors through $B=A/I$. On a trivializing covering member write such a cohomology sheaf as $F\\cong\\underline M$. Taking the quotient by $I$ gives $F=F/IF\\cong\\underline{M/IM}$: sheafification of the constant presheaf commutes with the cokernel defining this quotient. The finite module $M/IM$ is a $B$-module, and this quotient isomorphism is $B$-linear. This also works on empty covering members, without asserting that an arbitrary label $M$ there is annihilated by $I$. Thus reduction is bounded constructible over $B$. The model $P$ of step 3 reduces to $P\\otimes_A B$, a bounded flat $B$-complex in $[c,d]$, by [lem-sf-reduction-flat-model]. Hence it also retains Tor amplitude $[c,d]$. Apply steps 2 and 3 with coefficients $B$ to get the same assertions for $Rf_B^{\\times}(K\\otimes_A^L B)$; step 4 gives them for the isomorphic left side. All complexes used for the bounds are supported in the original intervals, so the constants do not depend on either coefficient exponent.",
+   "text": "Apply the existing scalarExtensionFunctor constructibility, Tor-preservation and boundedness lemmas to the canonical quotient map. Its derived scalar functor and flatModelReduction are left adjoints to the identical exact restriction functor; leftAdjointUniq identifies them. Transport these properties, pull back at the lower coefficient stage using the preceding steps, and transfer along the specified invertible coefficient comparison for the other side. The original cohomological and Tor bounds are retained.",
    "uses": [
-    "lem-pur-finite-tensor-constructible-cohomology",
-    "def-weil-finite-tor-amplitude",
+    "det-sp-scalar-extension-functor",
     "lem-sf-reduction-flat-model"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BQ, lemma-tensor-c, for constructible tensor cohomology; reduction of the bounded flat model is imported unit step (i), expanded using lem-sf-reduction-flat-model"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-exc-explicit-preservation.proof.md",
+    "place": "open and finite etale preservation, with the cited proved categorical APIs"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-constructible-intervals",
-  "def-weil-derived-tensor",
-  "def-weil-finite-tor-amplitude",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-proetale-inverse-image",
-  "def-weil-proetale-locally-constant-sheaf",
-  "lem-exc-proetale-pullback-locally-constant",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-resolution",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-finite-tensor-constructible-cohomology",
-  "lem-pur-scheme-constructible-preimage",
-  "lem-sf-flat-model",
-  "lem-sf-reduction-flat-model",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "prop-exc-finite-etale-adjoint",
-  "prop-exc-open-adjoint",
   "prop-weil-pbc-proetale-constant-exact",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "prop-constructible-pullback",
+  "def-weil-constructible-intervals",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "lem-sfb-proetale-fixed-scalar-pullback-flat",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "det-sp-scalar-extension-functor",
+  "lem-sf-reduction-flat-model"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-exc-explicit-preservation.md",
-  "place": "Imported proof paragraphs 1-2 and unit step (i), expanded with the cited Stacks ringed-topos lemmas; original literature copy absent on this machine"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-exc-explicit-preservation.proof.md",
+  "place": "R1 stage-3 proof: exact pullback, realization transport, normalized adjunctions and existing scalar-extension preservation"
  },
  "mathlib_searches": [
   {
@@ -202,15 +190,26 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "thm-exc-explicit-preservation",
   "worker": "stage1",
-  "summary": "Repaired the imported five-step split after the long-step review: extracted the non-elementary module-sheaf pullback/local-constancy argument from step 2 into one new statement-only node, with Mathlib searches recorded. The item statement and Lean record are unchanged; all other steps and cited tools are retained.",
-  "blueprint": "Realizes unit sk-prop-sf-rf-shriek-preservation step (i) and both paragraphs of blueprint thm-exc-explicit-preservation: steps 1-2 give exactness/constructible intervals (step 2 now cites the general module-sheaf pullback lemma); step 3 gives unchanged Tor bounds; step 4 gives the coefficient isomorphism; step 5 proves bounded constructibility and uniformity after reduction.",
+  "summary": "Repair of every numbered return point: restore old stratification citation assembly as step 2; extract all of old steps 3 and 4 into two independent statement-only bounded-flat tensor-test and unbounded B-linear K-flat comparison nodes; narrow the quotient node to B-constructibility via M/IM. The parent cites existing tensor-constructibility and reduction-flat-model statements directly. Statement, route, import metadata and Lean record unchanged. Every original argument is retained verbatim in the report with its precise destination.",
+  "blueprint": "Paragraph 1 is assembled in parent steps 1-2 using existing adjunction, exactness and stratification tools. Paragraph 2: step 3 cites flat-model existence and the new bounded-flat tensor-test node; step 4 cites the new unbounded coefficient-model node. Step 5 combines existing A-tensor constructibility, the narrowed quotient-label node, existing flat reduction, and earlier steps.",
   "tool_uses": [
    {
     "node": "prop-exc-open-adjoint",
@@ -267,27 +266,17 @@
   ]
  },
  "tool_uses": [
-  "prop-exc-open-adjoint",
   "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-sf-flat-model",
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-pur-finite-tensor-constructible-cohomology",
   "lem-sf-reduction-flat-model"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q76-a9bfe53a0",
-  "group": "Q76",
+  "reviewer": "NT-cc-Q34-1a72e36b5",
+  "group": "Q34",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-a9bfe53a0 (reviewer sub-agent of L); spot-checked: This is a repair delivery. Against the current side node, only proof, proof_deps, split_report and status changed; the statement, stmt_deps, lean, blueprint and tool_uses are byte-identical, and steps 1, 3, 4 and 5 are identical. Step 2 went from 2065 to 1004 characters, and every step is now under 2000. proof_deps equals the union of the uses lists. The new node lem-exc-proetale-pullback-locally-constant is a genuine extraction, not a restated clause (D1/D2): pullback along an arbitrary f:V->X of an A-module sheaf with finite local models on a pro-etale covering keeps the same models on the base-changed covering. It is true: base change of weakly etale maps and fpqc coverings, localization commutes with pullback, the pullback of a constant sheaf is constant, and the constant-ring map c^f_A is an isomorphism by prop-weil-pbc-proetale-constant-ring-map. I tested it on id, empty V, empty U_j, open and finite-etale f, the zero module and nonfree F_ell over Z/ell^2. The source is correct: Stacks 093R = sites-modules-lemma-pullback-locally-constant at sites-modules.tex:8435, which covers arbitrary topoi morphisms and modules over a fixed ring. It matches the blueprint sentence 'inverse image of a locally constant finite module sheaf is locally constant with the same finite module fibres'. B1-B9 hold: statement only, self-contained, every notion cited, one-backslash TeX, tag plus label, three kinds of search, from=item with via=[], same_as=[], unsplit, no SGA. I searched the DAG myself for 093R and for locally-constant pullback statements and found no duplicate: the other candidates are etale-only, about sets or abelian groups, immersion- or closed-immersion-only, or same-X local constancy. The graph stays acyclic. Repaired step 2: strata pulled back are constructible (lem-pur-scheme-constructible-preimage), the composition isomorphism is lem-weil-pbc-left-exact-site-inverse-image-tensor, and the new node is applied to f_nu, which satisfies its hypotheses. One inherited, elementary point: the definition's finite stalks are read as finite models. I re-read steps 1, 3, 4 and 5 against every cited statement. The item statement is not weakened. No new tool use. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-1a72e36b5 (reviewer sub-agent of L); spot-checked: Repair note (released 2026-10-22, at least 2 nodes, parent at most 3000 chars) is discharged and the previous RETURN's three points are repaired. Old step 3 is the new node lem-exc-bounded-flat-pullback-test (F). Old step 4 is the new node lem-exc-unbounded-coefficient-pullback-model (C). The M/IM paragraph of old step 5 is the new node lem-exc-finite-quotient-constructible-reduction (Q); its other sentences cite the existing lem-pur-finite-tensor-constructible-cohomology and lem-sf-reduction-flat-model. Old steps 1 and 2 are byte-identical citation/elementary steps. The parent is 2839 chars. Against the live base, the statement, stmt_deps and Lean record are unchanged, and none of the 9 dropped proof_deps is orphaned (each still has 11 to 492 citers). All three statements are true. F: Stacks 05VD (any ringed-topos morphism), bounded flat implies K-flat, the tensor with any A_V-module stays in [c,d]; tested on f=id, V empty, P=0, c=d, Z/l^2 with M=Z/l. C: t_P via f^{-1}P tensor B_V, 0G7E K-flatness, lem-pur-derived-change-of-rings representatives; tested on id, m=n, the non-flat Z/l^2 to Z/l, unbounded K. Q: M/IM via 093J; tested on I=0, I=A, empty members, Z/l^2 with F=Z/l. No duplicate: the closest nodes are the étale analogues lem-sf-etale-tor-flat-pullback-model and lem-weil-pbc-constructible-change-of-ring, and lem-sf-pullback-tor-amplitude needs finite-type k-schemes. Advisory: C is close to the constant-coefficient pro-étale specialization of lem-sfb-kflat-scalar-comparison-normalization; its future worker should cite that node and prop-weil-pbc-proetale-constant-ring-map. Route matches the master blueprint paragraphs 1-2, and there is no SGA citation. FIX (B3): F and C define D(f^*) via exactness of termwise inverse image, and C uses the constant-ring identifications, neither of which def-weil-proetale-inverse-image provides. I added prop-weil-pbc-proetale-constant-exact (F, C) and prop-weil-pbc-proetale-constant-ring-map (C) to the statement text and stmt_deps; no other field changed. Advisory: the split_report tool_uses list still names tools whose arguments moved into F and C.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
@@ -326,5 +315,15 @@
   "by": "Q01",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-56cd0",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261024T210838-L-44153",
+  "kind": "interface",
+  "note": "independent cc review: delivered ExplicitExceptionalPreservation.lean and node thm-exc-explicit-preservation against clone d3c52041 (public imports, signatures, node fields), unit sk-prop-sf-rf-shriek-preservation realized nodes, #print axioms on scratch copy, 2 direct importers compiled"
  }
 }

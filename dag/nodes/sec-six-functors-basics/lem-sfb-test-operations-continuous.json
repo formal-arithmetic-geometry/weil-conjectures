@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-test-operations-continuous",
+ "kind": "statement",
+ "title": "Multiplication and chart extension are continuous on bundle tests",
+ "statement": "Let $N$ be a compact Hausdorff second-countable smooth real $m$-manifold without boundary [def-sfb-smooth-real-manifold], and $E\\to N$ a smooth rank-$q$ real vector bundle [def-sfb-smooth-real-vector-bundle]. Use $\\mathcal T(E)=\\Gamma_c^\\infty(E^*\\otimes\\mathrm{Dens}_N)$, formed with [def-sfb-smooth-dual-bundle], [def-sfb-smooth-density-line], [def-sfb-smooth-tensor-bundle] and endowed with [def-sfb-compact-smooth-section-topology]. (i) For any smooth $h:N\\to\\mathbf R$, the pointwise operator $M_h:\\mathcal T(E)\\to\\mathcal T(E)$, $M_h\\phi=h\\phi$, is real-linear and continuous. (ii) For a smooth chart $x:U\\to V\\subseteq\\mathbf R^m$ and a smooth frame $e_1,\\ldots,e_q$ of $E|_U$, the formula $J_{x,e}(f)|_U=\\sum_{a=1}^q f_a(x)\\,e^a\\otimes|dx^1\\cdots dx^m|$, with zero value off $U$, defines a continuous real-linear map $J_{x,e}:\\mathscr D(V,\\mathbf R^q)\\to\\mathcal T(E)$, where $e^a$ is the dual frame and the local test domain has the LF topology of [def-sfb-local-coefficient-tests]. In particular the extended section is smooth.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: inherited Part I §3.A–3.B, printed pp.11–13 (page attribution inherited, not independently verified). Agent-stated real density convention, supporting test continuity needed for multiplication and for taking local coefficient distributions. No claim of reading this unavailable source."
+ },
+ "stmt_deps": [
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-real-vector-bundle",
+  "def-sfb-smooth-dual-bundle",
+  "def-sfb-smooth-density-line",
+  "def-sfb-smooth-tensor-bundle",
+  "def-sfb-compact-smooth-section-topology",
+  "def-sfb-local-coefficient-tests"
+ ],
+ "proof": [
+  {
+   "text": "Write $B=E^*\\otimes\\mathrm{Dens}_N$. Each defining $p$ satisfies $p(s+t)\\leq p(s)+p(t)$ and $p(cs)=|c|p(s)$ by the coordinate coefficient, derivative, supremum and norm formulas. In the smallest topology specified in the cited definition, finite intersections of seminorm balls centered at a point form a neighborhood basis: if $t\\in s_0+\\{p<\\epsilon\\}$, then $t+\\{p<\\epsilon-p(t-s_0)\\}$ lies in that translate by the triangle inequality; apply this to each of finitely many constraints. These balls are convex. Halving the radii proves continuity of addition, and $p(cs-c_0s_0)\\leq |c|p(s-s_0)+|c-c_0|p(s_0)$ proves joint scalar continuity by also keeping $|c|$ bounded near $c_0$. For every smooth section, its support is closed by its definition as a closure, hence compact as a closed subset of compact $N$: extend an open cover by the open complement and take a finite subcover of $N$. Thus the compact-support section space is the whole section space, with the same topology. This verifies the locally convex real topological vector-space hypotheses of the LF criterion.",
+   "uses": [
+    "def-sfb-compact-smooth-section-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.A–3.B, inherited pp.11–13 unverified. Agent proof from the explicitly defined chart seminorms and fixed-support LF topology."
+   }
+  },
+  {
+   "text": "In any smooth chart $y$ and frame $b$ of $B$, the coefficient expression of $M_hs$ is $(h\\circ y^{-1})s_{y,b}$. Apply the weighted-composition lemma with $g=\\mathrm{id}$ and $A=(h\\circ y^{-1})I_q$. It gives smooth coefficients and, for each defining compact $H$ and order $k$, $p_{y,b,H,k}(M_hs)\\leq C p_{y,b,H,k}(s)$ with $C$ independent of $s$. The support can only shrink, so the map is well-defined on tests. The pointwise formula is real-linear. For a target neighborhood given by finitely many seminorm inequalities, impose on $s$ the same finitely many inequalities with radii divided by their positive constants $C$; its image lies in that neighborhood. This proves continuity at zero and, by linearity, everywhere, proving (i).",
+   "uses": [
+    "lem-sfb-weighted-composition-derivative-bound",
+    "def-sfb-smooth-bundle-sections",
+    "def-sfb-compact-smooth-section-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.A–3.B, inherited pp.11–13 unverified. Agent proof from the explicitly defined chart seminorms and fixed-support LF topology."
+   }
+  },
+  {
+   "text": "Fix a compact $K\\subseteq V$ and $f\\in\\mathscr D_K$. Put $L=x^{-1}(K)\\subseteq U$, compact in $N$. Since $N$ is Hausdorff, $L$ is closed: for a point outside $L$, separate it from each point of $L$ and take a finite subcover on $L$; the intersection of the finitely many outside neighborhoods misses $L$. The proposed section is zero on the open set $N\\setminus L$. On $U$, its coefficients in the frame $e^a\\otimes|dx|$ are $f\\circ x$. In another chart $y:W\\to Q$ and frame $b$ of $B$, on $U\\cap W$ they are $A(z)f(g(z))$, where $g=x\\circ y^{-1}$ and $A$ is the coefficient change from $e^a\\otimes|dx|$ to $b$. The bundle and dual definitions give smooth coefficient changes. The revised density definition uses coefficient transitions $a\\mapsto a/g_{xy}$; specifically the $x$ density generator has coefficient $|\\det D(x\\circ y^{-1})(z)|$ in the $y$ generator. This is the reciprocal transition to $g_{xy}$ at the corresponding point and is smooth and positive by that definition. The tensor definition makes tensor coefficient changes the Kronecker product, with entries products of the respective transition entries. Consequently $A$ is smooth. The weighted-composition lemma gives smoothness on this overlap. These smooth local coefficients and the zero coefficients on $N\\setminus L$ cover $N$ and agree with the displayed formula, hence define a smooth section supported in $L$. Every local test lies in some $\\mathscr D_K$, so $J_{x,e}$ is well-defined on all tests. Its formula preserves sums and real scalar multiplication.",
+   "uses": [
+    "def-sfb-local-coefficient-tests",
+    "def-sfb-smooth-bundle-sections",
+    "def-sfb-smooth-real-vector-bundle",
+    "def-sfb-smooth-dual-bundle",
+    "def-sfb-smooth-density-line",
+    "def-sfb-smooth-tensor-bundle",
+    "lem-sfb-weighted-composition-derivative-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.A–3.B, inherited pp.11–13 unverified. Agent proof from the explicitly defined chart seminorms and fixed-support LF topology."
+   }
+  },
+  {
+   "text": "For continuity on a fixed $\\mathscr D_K$, take any target seminorm $p_{y,b,H,k}$, with $H\\subseteq Q$ compact. Set $S=H\\cap y(L\\cap W)$. This is compact: $L\\cap y^{-1}(H)$ is an intersection of two compact closed subsets of the Hausdorff space $N$, contained in $U\\cap W$, and its image under $y$ is $S$. On $S$, apply the weighted-composition estimate to the smooth $A$ and $g$ from the preceding step. Off $y(L\\cap W)$ the section vanishes on a neighborhood, so all its derivatives vanish. Therefore\n$$p_{y,b,H,k}(J_{x,e}f)\\leq C\\max_{|\\beta|\\leq k}\\sup_{w\\in g(S)}\\|\\partial^\\beta f(w)\\|\\leq C\\max_{0\\leq j\\leq k}\\sup_{w\\in\\mathbf R^m}\\|D^jf(w)\\|.$$\nThe last inequality evaluates $D^{|\\beta|}f$ on the ordered list of coordinate unit vectors; each has norm one, and the order-zero case is $f$ itself. For $m=0$ only the order-zero multi-index occurs. Each supremum on the right is precisely the norm of one defining derivative map for $\\mathscr D_K$, so a finite maximum is a continuous seminorm by its defining topology. As in step 2, finitely many target inequalities give finitely many source inequalities, proving continuity of $J_{x,e}|_{\\mathscr D_K}$. If $S$ is empty the target seminorm is zero and the same estimate holds.",
+   "uses": [
+    "lem-sfb-weighted-composition-derivative-bound",
+    "def-sfb-local-coefficient-tests",
+    "def-sfb-compact-smooth-section-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.A–3.B, inherited pp.11–13 unverified. Agent proof from the explicitly defined chart seminorms and fixed-support LF topology."
+   }
+  },
+  {
+   "text": "The section target is a locally convex real topological vector space by step 1; $J_{x,e}$ is real-linear by step 3 and continuous on every fixed-support subspace by step 4. The LF linear continuity criterion therefore proves that $J_{x,e}$ is continuous for the LF topology specified for the local tests. Together with its smooth extension and linearity already proved, this is (ii).",
+   "uses": [
+    "lem-sfb-test-lf-linear-continuity",
+    "def-sfb-local-coefficient-tests",
+    "def-sfb-compact-smooth-section-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.A–3.B, inherited pp.11–13 unverified. Agent proof from the explicitly defined chart seminorms and fixed-support LF topology."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-compact-smooth-section-topology",
+  "lem-sfb-weighted-composition-derivative-bound",
+  "def-sfb-smooth-bundle-sections",
+  "def-sfb-local-coefficient-tests",
+  "def-sfb-smooth-real-vector-bundle",
+  "def-sfb-smooth-dual-bundle",
+  "def-sfb-smooth-density-line",
+  "def-sfb-smooth-tensor-bundle",
+  "lem-sfb-test-lf-linear-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Agent proof of the explicit real bundle-test conventions; the inherited Demailly reference is unavailable locally and its pagination is unverified."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by smooth functions differentiation and extension from coordinate tests are continuous on smooth bundle test sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MDifferentiableOn.smul_section_of_tsupport\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/MDifferentiable\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F : Type u_4} {E : B → Type u_6} [inst : TopologicalSpace B]\\n  [inst_1 : TopologicalSpace (Bundle.TotalSpace F E)] [inst_2 : (x : B) → TopologicalSpace (E x)]\\n  [inst_3 : NormedAddCommGroup F] [inst_4 : NontriviallyNormedField 𝕜] [inst_5 : NormedSpace 𝕜 F]\\n  [inst_6 \", \"doc\": \"Let $ B $ be a topological space, $ E $ a vector bundle over $ B $ with fibers modeled on a normed vector space $ F $ over a nontrivially normed field $ \\\\mathbb{K} $, and $ u \\\\subseteq B $ an open set\"}\n  {\"name\": \"ContMDiffOn.clm_bundle_apply\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F₁ : Type u_3} {F₂ : Type u_4} {M : Type u_6} [inst : NontriviallyNormedField 𝕜]\\n  {n : WithTop ℕ∞} {E₁ : B → Type u_7} [inst_1 : (x : B) → AddCommGroup (E₁ x)] [inst_2 : (x : B) → Module 𝕜 (E₁ x)]\\n  [inst_3 : NormedAddCommGroup F₁] [inst_4 : NormedSpace 𝕜 F₁] [inst_\", \"doc\": \"If $\\\\phi$ is a smooth section of a bundle of continuous linear maps $E_1 \\\\to E_2$ over base space $B$, and $v$ is a smooth section of the $E_1$-bundle, then the section obtained by applying $\\\\phi$ to \"}\n  {\"name\": \"ContMDiffAt.clm_apply_of_inCoordinates\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom\", \"type\": \"∀ {𝕜 : Type u_1} {F₁ : Type u_2} {F₂ : Type u_3} {B₁ : Type u_4} {B₂ : Type u_5} {M : Type u_6} {E₁ : B₁ → Type u_7}\\n  {E₂ : B₂ → Type u_8} [inst : NontriviallyNormedField 𝕜] [inst_1 : (x : B₁) → AddCommGroup (E₁ x)]\\n  [inst_2 : (x : B₁) → Module 𝕜 (E₁ x)] [inst_3 : NormedAddCommGroup F₁] [inst_4 : \", \"doc\": \"If the coordinate representation of a function $\\\\phi$, a vector field $v$, and a chart $b_2$ are all $C^n$-differentiable at a point $m_0$ in a manifold, then the composed map sending $m$ to $\\\\phi(m)(\"}\n  {\"name\": \"ContMDiffWithinAt.clm_bundle_apply\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F₁ : Type u_3} {F₂ : Type u_4} {M : Type u_6} [inst : NontriviallyNormedField 𝕜]\\n  {n : WithTop ℕ∞} {E₁ : B → Type u_7} [inst_1 : (x : B) → AddCommGroup (E₁ x)] [inst_2 : (x : B) → Module 𝕜 (E₁ x)]\\n  [inst_3 : NormedAddCommGroup F₁] [inst_4 : NormedSpace 𝕜 F₁] [inst_\", \"doc\": \"If $\\\\phi$ is a $C^n$-differentiable section of a bundle of continuous linear maps between fibers $E_1$ and $E_2$, and $v$ is a $C^n$-differentiable section of the bundle $E_1$, then the pointwise appl\"}\n  {\"name\": \"ContMDiffOn.clm_bundle_apply₂\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F₁ : Type u_3} {F₂ : Type u_4} {F₃ : Type u_5} {M : Type u_6}\\n  [inst : NontriviallyNormedField 𝕜] {n : WithTop ℕ∞} {E₁ : B → Type u_7} [inst_1 : (x : B) → AddCommGroup (E₁ x)]\\n  [inst_2 : (x : B) → Module 𝕜 (E₁ x)] [inst_3 : NormedAddCommGroup F₁] [inst_4 : NormedSp\", \"doc\": \"If $\\\\psi$, $v$, and $w$ are $C^n$ maps into the total spaces of appropriate vector bundles, then the function assigning to each point $m$ the result of applying the bilinear map $\\\\psi(m)$ to the vecto\"}\n  {\"name\": \"ContMDiff.clm_bundle_apply\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F₁ : Type u_3} {F₂ : Type u_4} {M : Type u_6} [inst : NontriviallyNormedField 𝕜]\\n  {n : WithTop ℕ∞} {E₁ : B → Type u_7} [inst_1 : (x : B) → AddCommGroup (E₁ x)] [inst_2 : (x : B) → Module 𝕜 (E₁ x)]\\n  [inst_3 : NormedAddCommGroup F₁] [inst_4 : NormedSpace 𝕜 F₁] [inst_\", \"doc\": \"If $\\\\phi: M \\\\to \\\\text{Bundle}(\\\\mathcal{L}(E_1, E_2))$ and $v: M \\\\to \\\\text{Bundle}(E_1)$ are $C^n$-differentiable maps between manifolds and vector bundles, then the composition $m \\\\mapsto \\\\phi(m)(v(m)\"}\n  {\"name\": \"ContMDiffWithinAt.clm_bundle_apply₂\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F₁ : Type u_3} {F₂ : Type u_4} {F₃ : Type u_5} {M : Type u_6}\\n  [inst : NontriviallyNormedField 𝕜] {n : WithTop ℕ∞} {E₁ : B → Type u_7} [inst_1 : (x : B) → AddCommGroup (E₁ x)]\\n  [inst_2 : (x : B) → Module 𝕜 (E₁ x)] [inst_3 : NormedAddCommGroup F₁] [inst_4 : NormedSp\", \"doc\": \"If $\\\\psi$, $v$, and $w$ are continuously differentiable within a set $s$ at a point $x$, then the function obtained by applying $\\\\psi$ to $v$ and $w$ is also continuously differentiable within $s$ at \"}\n  {\"name\": \"ContMDiffAt.clm_bundle_apply\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F₁ : Type u_3} {F₂ : Type u_4} {M : Type u_6} [inst : NontriviallyNormedField 𝕜]\\n  {n : WithTop ℕ∞} {E₁ : B → Type u_7} [inst_1 : (x : B) → AddCommGroup (E₁ x)] [inst_2 : (x : B) → Module 𝕜 (E₁ x)]\\n  [inst_3 : NormedAddCommGroup F₁] [inst_4 : NormedSpace 𝕜 F₁] [inst_\", \"doc\": \"If $\\\\phi$ is a $C^n$-differentiable section of the continuous linear map bundle between fibers $E_1$ and $E_2$ at $x$, and $v$ is a $C^n$-differentiable section of the bundle $E_1$ at $x$, then the fu\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib supplies smooth extension by zero, local test differentiation and smooth scalar multiplication of sections, but not continuity of global bundle-test multiplication or chart-density extension for this seminorm topology. Those global topological conclusions require more than one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuity of chart extension by zero and local partial derivatives on compactly supported smooth test densities",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ContMDiff.extend_zero\", \"module\": \"Mathlib.Geometry.Manifold.ContMDiff.Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] {E' : Type u_5} [inst_5 : NormedAddCommGroup E'] [i\", \"doc\": \"Let $ M $ and $ M' $ be manifolds modeled on normed vector spaces over a nontrivially normed field $ \\\\mathbb{K} $, with $ M' $ equipped with a zero element. If $ f : U \\\\to M' $ is a $ C^n $-differenti\"}\n  {\"name\": \"HasCompactSupport.continuous_extend_zero\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"∀ {α' : Type u_3} {β : Type u_4} [inst : TopologicalSpace α'] [inst_1 : Zero β] [T2Space α']\\n  [inst_3 : TopologicalSpace β] {U : Set α'},\\n  IsOpen U → ∀ {f : ↑U → β}, Continuous f → HasCompactSupport f → Continuous (Function.extend Subtype.val f 0)\", \"doc\": \"Let $ U $ be an open subset of a Hausdorff topological space $ \\\\alpha' $, and let $ f : U \\\\to \\\\beta $ be a continuous function with compact support, where $ \\\\beta $ is a topological space with a zero \"}\n  {\"name\": \"ContMDiff.extend_one\", \"module\": \"Mathlib.Geometry.Manifold.ContMDiff.Basic\", \"type\": \"[T2Space M] [One M'] {n : WithTop ℕ∞} {U : Opens M} {f : U → M'} (supp : HasCompactMulSupport f)\\n  (diff : ContMDiff I I' n f) : ContMDiff I I' n (Subtype.val.extend f 1)\", \"doc\": \"Let $ M $ be a Hausdorff manifold modeled on a nontrivially normed field $ \\\\mathbb{K} $, and let $ M' $ be a manifold equipped with a multiplicative identity element $ 1 $. For any open subset $ U \\\\su\"}\n  {\"name\": \"OpenPartialHomeomorph.continuousAt_extend\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.ExtChartAt\", \"type\": \"{x : M} (h : x ∈ f.source) : ContinuousAt (f.extend I) x\", \"doc\": \"For any point $ x $ in the source of an open partial homeomorphism $ f $, the extended chart $ f.extend(I) $ constructed by composing $ f $ with the model-with-corners $ I $ is continuous at $ x $. Th\"}\n  {\"name\": \"ContDiffMapSupportedInClass.mk\", \"module\": \"Mathlib.Analysis.Distribution.ContDiffMapSupportedIn\", \"type\": \"{B : Type u_5} →\\n  {E : outParam (Type u_6)} →\\n    {F : outParam (Type u_7)} →\\n      [inst : NormedAddCommGroup E] →\\n        [inst_1 : NormedAddCommGroup F] →\\n          [inst_2 : NormedSpace ℝ E] →\\n            [inst_3 : NormedSpace ℝ F] →\\n              {n : outParam ℕ∞} →\\n                {K : outPar\", \"doc\": \"Given normed vector spaces $E,F$ over $\\\\mathbb{R}$, a differentiability order $n \\\\in \\\\mathbb{N}^\\\\top$, and a compact subset $K \\\\subseteq E$, this constructor defines the class of functions $B \\\\to F$ t\"}\n  {\"name\": \"ContDiffMapSupportedIn.contDiff'\", \"module\": \"Mathlib.Analysis.Distribution.ContDiffMapSupportedIn\", \"type\": \"∀ {E : Type u_2} {F : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : NormedAddCommGroup F]\\n  [inst_3 : NormedSpace ℝ F] {n : ℕ∞} {K : TopologicalSpace.Compacts E} (self : ContDiffMapSupportedIn E F n K),\\n  ContDiff ℝ (↑n) self.toFun\", \"doc\": \"For normed vector spaces $E$ and $F$ over $\\\\mathbb{R}$, a differentiability class $k \\\\in \\\\mathbb{N}^\\\\top$, and a compact subset $K \\\\subseteq E$, the underlying function of any $C^k$-map with support c\"}\n  {\"name\": \"continuousAt_extChartAt'\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.ExtChartAt\", \"type\": \"{x x' : M} (h : x' ∈ (extChartAt I x).source) : ContinuousAt (extChartAt I x) x'\", \"doc\": \"For a manifold with corners modeled on a normed vector space $E$ over a nontrivially normed field $\\\\mathbb{K}$, the extended chart $\\\\text{extChartAt}_I(x)$ is continuous at any point $x' \\\\in M$ that l\"}\n  {\"name\": \"continuousAt_extChartAt\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.ExtChartAt\", \"type\": \"(x : M) : ContinuousAt (extChartAt I x) x\", \"doc\": \"For any point $x$ in a manifold with corners $M$, the extended chart at $x$, constructed via the model with corners $I$, is continuous at $x$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib supplies smooth extension by zero, local test differentiation and smooth scalar multiplication of sections, but not continuity of global bundle-test multiplication or chart-density extension for this seminorm topology. Those global topological conclusions require more than one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "TestFunction.lineDerivCLM",
+   "results": "[loogle] OK 11 hit(s)\n  {\"name\": \"TestFunction.lineDerivCLM\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" (𝕜 : Type u_1) [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] {n k : ℕ∞} [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] (v : E) : TestFunction Ω F n →L[𝕜] TestFunction \", \"doc\": \"`lineDerivCLM 𝕜 v` is the continuous `𝕜`-linear-map sending `f : 𝓓^{n}_{K}(E, F)` to\\nits derivative along the vector `v`, which is an element of `𝓓^{k}_{K}(E, F)`.\\nThis only makes mathematical sense i\"}\n  {\"name\": \"TestFunction.lineDerivOpCLM_eq_lineDerivCLM\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] {v : E} : LineDeriv.lineDerivOpCLM 𝕜 (TestFunction Ω F ⊤) v\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.lineDerivCLM_apply_of_le\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] {n k : ℕ∞} [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] {f : TestFunction Ω F n} {v x : E} (hk : k + 1 ≤\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.lineDerivOp_eq_lineDerivCLM\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" (𝕜 : Type u_1) [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] {v : E} {f : TestFunction Ω F ⊤} : LineDeriv.lineDerivOp v \", \"doc\": \"\"}\n  {\"name\": \"TestFunction.lineDerivCLM_apply\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] {n k : ℕ∞} [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] {f : TestFunction Ω F n} {v x : E} : ((TestFunct\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.lineDerivCLM_apply_of_gt\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] {n k : ℕ∞} [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] {v : E} (hk : n < k + 1) : TestFunction.lineDeri\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.lineDerivCLM_eq_of_scalars\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" (𝕜 : Type u_1) [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] {n k : ℕ∞} [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] (𝕜' : Type u_6) [NontriviallyNormedField 𝕜'] [No\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.lineDerivCLM_add\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] {n k : ℕ∞} [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] {v₁ v₂ : E} : TestFunction.lineDerivCLM 𝕜 (v₁ + \", \"doc\": \"\"}\n  {\"name\": \"TestFunction.lineDerivCLM_smul\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] {n k : ℕ∞} [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] {c : ℝ} {v : E} : TestFunction.lineDerivCLM 𝕜 (c\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.lineDerivCLM_eq_fderivCLM\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedSpace 𝕜 F] {n k : ℕ∞} [Algebra ℝ 𝕜] [IsScalarTower ℝ 𝕜 F] {f : TestFunction Ω F n} {v x : E} : ((TestFunct\", \"doc\": \"\"}\n  {\"name\": \"Distribution.lineDerivCLM_apply\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_2} [AddCommGroup F] [Module ℝ F] [TopologicalSpace F] {n k : ℕ∞} [IsTopologicalAddGroup F] [ContinuousSMul ℝ F] {v : E} {T : Distribution Ω F k} {f : TestFunction Ω ℝ n} : ((Distribution.lineDerivCLM \", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib supplies smooth extension by zero, local test differentiation and smooth scalar multiplication of sections, but not continuity of global bundle-test multiplication or chart-density extension for this seminorm topology. Those global topological conclusions require more than one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "lineDerivCLM|smul.*CLM|mul.*CLM|ofSupportedInCLM|postcompCLM",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"line\": \"322\", \"text\": \"This is subsumed by `postcompCLM T`, which also bundles the continuity. -/\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"line\": \"803\", \"text\": \"/-- Given `T : F →L[𝕜] F'`, `postcompCLM T` is the continuous `𝕜`-linear-map sending\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"line\": \"805\", \"text\": \"noncomputable def postcompCLM [LinearMap.CompatibleSMul F F' ℝ 𝕜] (T : F →L[𝕜] F') :\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"line\": \"814\", \"text\": \"lemma postcompCLM_apply [LinearMap.CompatibleSMul F F' ℝ 𝕜] (T : F →L[𝕜] F')\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"line\": \"816\", \"text\": \"    postcompCLM T f = T ∘ f :=\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/FourierMultiplier.lean\", \"line\": \"16\", \"text\": \"* `SchwartzMap.fourierMultiplierCLM`: Fourier multiplier on Schwartz functions\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/FourierMultiplier.lean\", \"line\": \"17\", \"text\": \"* `TemperedDistribution.fourierMultiplierCLM`: Fourier multiplier on tempered distribution\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/FourierMultiplier.lean\", \"line\": \"20\", \"text\": \"* `SchwartzMap.lineDeriv_eq_fourierMultiplierCLM`: the directional derivative is equal to the\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/FourierMultiplier.lean\", \"line\": \"22\", \"text\": \"* `SchwartzMap.laplacian_eq_fourierMultiplierCLM`: the Laplacian is equal to the Fourier multiplier\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/FourierMultiplier.lean\", \"line\": \"24\", \"text\": \"* `TemperedDistribution.lineDeriv_eq_fourierMultiplierCLM`: the distributional directional\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TestFunction.lean\", \"line\": \"319\", \"text\": \"noncomputable def ofSupportedInCLM [SMulCommClass ℝ 𝕜 F] {K : Compacts E}\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TestFunction.lean\", \"line\": \"326\", \"text\": \"@[simp] theorem coe_ofSupportedInCLM [SMulCommClass ℝ 𝕜 F] {K : Compacts E}\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TestFunction.lean\", \"line\": \"328\", \"text\": \"    (ofSupportedInCLM 𝕜 K_sub_Ω : 𝓓^{n}_{K}(E, F) → 𝓓^{n}(Ω, F)) = ofSupportedIn K_sub_Ω :=\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TestFunction.lean\", \"line\": \"436\", \"text\": \"/-- Given `T : F →L[𝕜] F'`, `postcompCLM T` is the continuous `𝕜`-linear-map sending\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TestFunction.lean\", \"line\": \"438\", \"text\": \"noncomputable def postcompCLM (T : F →L[𝕜] F') :\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"line\": \"27\", \"text\": \"* `TemperedDistribution.mulLeftCLM`: Multiplication with temperate growth function as a continuous\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"line\": \"165\", \"text\": \"    (lsmul ℂ ℂ).flip.lpPairing μ p (1 - p⁻¹)⁻¹ f ∘L toLpCLM ℂ ℂ (1 - p⁻¹)⁻¹ μ\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"line\": \"248\", \"text\": \"def smulLeftCLM (g : E → ℂ) : 𝓢'(E, F) →L[ℂ] 𝓢'(E, F) :=\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"line\": \"249\", \"text\": \"  PointwiseConvergenceCLM.precomp _ (SchwartzMap.smulLeftCLM ℂ g)\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"line\": \"252\", \"text\": \"theorem smulLeftCLM_apply_apply (g : E → ℂ) (f : 𝓢'(E, F)) (f' : 𝓢(E, ℂ)) :\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Support.lean\", \"line\": \"185\", \"text\": \"theorem smulLeftCLM (hf : IsVanishingOn f s) {g : E → ℂ} (hg : g.HasTemperateGrowth) :\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Support.lean\", \"line\": \"186\", \"text\": \"    IsVanishingOn (smulLeftCLM F g f) s := by\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Support.lean\", \"line\": \"188\", \"text\": \"  apply hf ((SchwartzMap.smulLeftCLM ℂ g) u)\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Support.lean\", \"line\": \"189\", \"text\": \"  rw [SchwartzMap.smulLeftCLM_apply hg]\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Support.lean\", \"line\": \"192\", \"text\": \"@[deprecated (since := \\\"2026-07-01\\\")] alias _root_.Distribution.IsVanishingOn.smulLeftCLM :=\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib supplies smooth extension by zero, local test differentiation and smooth scalar multiplication of sections, but not continuity of global bundle-test multiplication or chart-density extension for this seminorm topology. Those global topological conclusions require more than one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a fixed smooth function and extension from coordinate tests are continuous on compact manifold bundle sections",
+   "results": "8 hits; ContMDiffOn.smul_section_of_tsupport; ContMDiffOn.const_smul_section; ContMDiff.const_smul_section; ContMDiffOn.smul_section; ContMDiffAt.const_smul_section; ContMDiffWithinAt.smul_section; ContMDiffAt.smul_section; ContMDiffWithinAt.const_smul_section",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth section multiplication and scalar-valued smooth zero extension are present, as is the LF continuity criterion, but no declaration states both bundle-test operations with this global section seminorm topology."
+  },
+  {
+   "tool": "loogle",
+   "query": "TestFunction, Continuous",
+   "results": "5 hits; TestFunction.continuous; TestFunction.continuous_ofSupportedIn; TestFunction.mkCLM; TestFunction.mkCLM_apply; TestFunction.continuous_iff_continuous_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth section multiplication and scalar-valued smooth zero extension are present, as is the LF continuity criterion, but no declaration states both bundle-test operations with this global section seminorm topology."
+  },
+  {
+   "tool": "grep",
+   "query": "mul.*CLM|smul.*CLM|continuous.*(mul|extend)|continuous_iff",
+   "results": "25 hits; Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean; Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean; Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean; Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean; Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean; Mathlib/Analysis/Distribution/Support.lean; Mathlib/Analysis/Distribution/Support.lean; Mathlib/Analysis/Distribution/Support.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth section multiplication and scalar-valued smooth zero extension are present, as is the LF continuity criterion, but no declaration states both bundle-test operations with this global section seminorm topology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth compactly supported functions chart extension to bundle sections continuity",
+   "results": "8 hits; SmoothBumpFunction.tsupport_subset_extChartAt_source; ContMDiff.extend_one; SmoothBumpFunction.coe_def; ContMDiffSection.ext_iff; SmoothBumpFunction.toFun; SmoothBumpFunction.continuous; ContDiffMapSupportedInClass.instContinuousMapClass; ContMDiffSection.ext",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth section multiplication and scalar-valued smooth zero extension are present, as is the LF continuity criterion, but no declaration states both bundle-test operations with this global section seminorm topology."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-smooth-bundle-test-distributions",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Symbol classes and real bundle pseudodifferential operators. Underlying notion: distributional bundle sections and their test-density pairing, used before local symbol quantization. Supporting input: test continuity needed for multiplication and for taking local coefficient distributions",
+   "via": [
+    "def-sfb-smooth-bundle-test-distributions",
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-test-operations-continuous",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved multiplication using a Euclidean compact derivative estimate and chart extension by smooth local coefficients, closed compact support, a fixed-support estimate and the Mathlib LF criterion. Created one genuinely analytic unsplit lemma and one Mathlib leaf; no source page is claimed read. Repair of returned head 2c4476c2b74: re-read all citations against the current DAG; refreshed changed section-topology, density-line and tensor-bundle statements. Step 1 now derives the centered neighborhood basis from the smallest-topology definition and proves compact support on compact N, instead of taking the removed sentence from the definition; step 3 uses the explicit reciprocal density and tensor coefficient transitions.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain reaches distributional bundle sections and test-density duality. This split supplies only the explicit test-operation continuity prerequisite at its analytic end; it does not alter the chapter or unit route. The latest direct-images proof and unit were read. No blueprint node states either new lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-7110bd409",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-7110bd409 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. All cited statements are identical in the snapshot, clones/live and clones/side-live, and the item is still unsplit live with the same statement. This re-delivery of 2c4476c2b748 changes only steps 1 and 3; both new node files are byte-identical. Step 1 now proves from the 'smallest topology' wording that centered finite intersections of seminorm balls form a basis, so the topology is a locally convex real topological vector space. It also proves supp s is compact on compact N, replacing the sentence removed from the definition. Step 2 applies the weighted lemma with g=id and A=(h∘y^{-1})I_q, which gives exactly p(hs) ≤ C p(s). Step 3: L=x^{-1}(K) is compact and closed, and the cover {U, N∖L} gives smoothness. The density coefficient |det D(x∘y^{-1})(z)| is checked against def-sfb-smooth-density-line as the reciprocal of g_xy, and the Kronecker entries match the tensor definition. Step 4: S=y(L∩y^{-1}H) is compact inside y(U∩W), and derivatives vanish off S. ∂^β f is D^j f on unit vectors, so it is bounded by the sup norms that define the D_K topology. Step 5 applies Mathlib TestFunction.continuous_iff_continuous_comp (TestFunction.lean:335–343; V needs only IsTopologicalAddGroup, ContinuousSMul ℝ and LocallyConvexSpace ℝ), which is an exact leaf. The weighted-composition lemma is true by Leibniz and Faà di Bruno; I checked k=0, d=m=q=r=0, S=∅ and g=id. It is self-contained, has no proof, records four kinds of search and is not a one-line Mathlib leaf. A statement scan of the DAG found no duplicate: the Sobolev chart-overlap node is an L² estimate with m≥1. Route: only definitions, leaves and the new same-unit lemma are cited. No SGA is used, and the WANTED Demailly source is honestly marked."
+ }
+}

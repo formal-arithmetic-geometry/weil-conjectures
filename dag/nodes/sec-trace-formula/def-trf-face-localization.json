@@ -1,0 +1,110 @@
+{
+ "id": "def-trf-face-localization",
+ "kind": "definition",
+ "title": "Face localization inside the group completion",
+ "statement": "Let $Q$ be a commutative monoid, written additively, and let $Q^{\\mathrm{gp}}$ and $i:Q\\to Q^{\\mathrm{gp}}$ be its canonical group completion [def-trf-fs-log-blowup]. For a submonoid $F\\subseteq Q$, define the face-localization submonoid by $Q_F=\\{i(q)-i(f):q\\in Q,\\ f\\in F\\}\\subseteq Q^{\\mathrm{gp}}$, with the addition and zero inherited from $Q^{\\mathrm{gp}}$. When $Q$ is integral this is the localization of $Q$ at $F$; the construction itself is defined for every commutative monoid and every submonoid, without requiring that $F$ be a face.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.1.1--3.1.2, printed p. 98; localization inside the group completion."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The localization of a commutative monoid Q at a submonoid F is the submonoid of its group completion consisting of q times the inverse of f.",
+   "results": "{\"t\": \"2026-10-24T13:06:34Z\", \"tool\": \"leansearch\", \"query\": \"The localization of a commutative monoid Q at a submonoid F is the submonoid of its group completion consisting of q times the inverse of f.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Localization\", \"AddLocalization\", \"IsLocalization\", \"Submonoid.LocalizationMap.AwayMap.invSelf\", \"Submonoid.LocalizationMap\", \"Localization.mk\", \"IsLocalization'\", \"Localization.Away.invSelf\"], \"digest\": \"9d90226fabd7e7da\"}",
+   "date": "2026-10-24",
+   "verdict": "The quotient localization exists in Mathlib; the precise submonoid inside the group completion is already Algebra.faceLocalization in the project. Reuse that declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization",
+   "results": "{\"t\": \"2026-10-24T13:06:35Z\", \"tool\": \"loogle\", \"query\": \"Localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Localization\", \"Submonoid.LocalizationMap.instSubsingletonLocalization\", \"Submonoid.LocalizationMap.instCancelCommMonoidLocalization\", \"Localization.monoidOf\", \"Localization.decidableEq\", \"Submonoid.LocalizationMap.instNontrivialLocalizationOfIsCancelMul\", \"Localization.instHasUniqueRoots\", \"Submonoid.LocalizationMap.instIsCancelMulLocalization\"], \"digest\": \"2512f686601e8b67\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib Localization is a quotient type, not this ambient submonoid. Use the existing project definition, not a copy."
+  },
+  {
+   "tool": "grep",
+   "query": "faceLocalization|GrothendieckGroup",
+   "results": "{\"t\": \"2026-10-24T13:06:35Z\", \"tool\": \"grep\", \"query\": \"faceLocalization|GrothendieckGroup\", \"sub\": \"GroupTheory/MonoidLocalization\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Finite.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Finite.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Finite.lean\"], \"digest\": \"d7f988e863df3f94\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib has GrothendieckGroup and of but no faceLocalization. Direct project rg finds exactly the definition in Sheaf.TraceFormula.FaceLocalizationFs; no def-node owner exists."
+  },
+  {
+   "tool": "grep",
+   "query": "rg faceLocalization lean/WeilConjectures lean/Sheaf; inspect definition-node lean records; blueprint_refs.py search face localization",
+   "results": "No hit in WeilConjectures; Sheaf.TraceFormula.FaceLocalizationFs defines Algebra.faceLocalization at line 30 and users reuse it. Scanning all definition-node lean records finds no Algebra.faceLocalization owner. Blueprint search returns seven unrelated nodes, none defining the ambient-submonoid localization.",
+   "date": "2026-10-24",
+   "verdict": "Register the existing definition as a new definition node; no duplicate Lean definition or theorem dependency."
+  }
+ ],
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-chart-face-localization-logification",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The face-localized chart subargument of the sharp-chart calculation: ILO VIII 3.1.1--3.1.2, used to form R=Q_F before its log-stalk pushout.",
+   "via": [
+    "lem-trf-chart-face-localization-logification",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.FaceLocalizationFs",
+  "declaration": "Algebra.faceLocalization",
+  "statement": "def faceLocalization (Q : Type u) [CommMonoid Q] (F : Submonoid Q) :\n    Submonoid (Algebra.GrothendieckGroup Q)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership repair requested in the return of 17d42260b120. This definition node owns the exact existing Algebra.faceLocalization, defined and publicly exported by FaceLocalizationFs. Only the ambient-submonoid construction is registered, not the theorem faceLocalization_fineSaturated. No duplicate construction or theorem assumption is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab8b0b01e",
+  "group": "Q02",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab8b0b01e",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Re-delivery of the 17d4 H2 return. The Lean is byte-identical; the item changes only lean and stmt_deps (theorem lem-trf-face-localization-fs replaced by new def node def-trf-face-localization, existing:true on the unchanged FaceLocalizationFs/Algebra.faceLocalization). check_new_node and check_existing report no failures; no def-node owner exists in side-live or the recent snapshots. Rechecked every clause: face; λ existence, extension and uniqueness; R⊕_U Aˣ via conGen over U with the pinned formula; R/U = Con.ker to Q^gp/U with pinned ι; section and splitting; IsUnit(α h p)↔p=1; P×Aˣ≅L; divisorialChartPushout≅L pinned; Associates.mk(h p)=ι p. Edge cases F={1}, F=Q with torsion, trivial Q, empty X. Advisories: H11 second reading empty by dispatcher policy; log-regular-pair decls reached only transitively via def-trf-fs-log-blowup; P vs Associates(Q_F) transport needed downstream; hQ unused. No compile, since nothing was changed."
+ }
+}

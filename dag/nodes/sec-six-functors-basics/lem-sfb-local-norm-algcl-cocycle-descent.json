@@ -14,61 +14,58 @@
  ],
  "proof": [
   {
-   "text": "Choose an $E$-basis of $W$, of size $d$. Thus $V_\\Omega=\\Omega^d$ and $V_F=F^d$ with the specified product topologies, and the action matrices have entries in $E$. Define the homogeneous cochain $f(g_0,\\ldots,g_n)=g_0 z(g_0^{-1}g_1,g_1^{-1}g_2,\\ldots,g_{n-1}^{-1}g_n)$. It is continuous and diagonally equivariant. In the alternating deletion differential, the term deleting $g_0$ is $g_1z(g_1^{-1}g_2,\\ldots)$; factoring out $g_0$ makes it the first action term of $dz$. Deleting an interior $g_i$ multiplies the two adjacent ratios, while deleting $g_{n+1}$ gives the last term. Consequently $\\delta f=g_0(dz)(g_0^{-1}g_1,\\ldots,g_n^{-1}g_{n+1})=0$. This calculation applies in every degree, including the degree-zero identity $\\delta(g\\mapsto gv)(g_0,g_1)=g_0((g_0^{-1}g_1)v-v)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent argument: explicit homogeneous coordinates."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-algcl-countable-closed-finite-cover] to get an increasing sequence $F_j\\supseteq E$. Each $V_{F_j}=F_j^d$ is closed in $\\Omega^d$, since it is the intersection of the inverse images of the closed set $F_j$ under the finitely many coordinate projections. These subspaces cover $\\Omega^d$: for each coordinate choose one $F_j$, then take the largest of the finitely many indices; if $d=0$, any index works. Put $A_j=f^{-1}(V_{F_j})$. These closed sets cover the nonempty compact Hausdorff space $G^{n+1}$. Apply [lem-sfb-baire-closed-cover-interior] with $Y=X=G^{n+1}$; thus some $A_j$ has nonempty interior; write $F=F_j$.",
+   "text": "Choose an $E$-basis of $W$ of size $d$, identifying the specified coefficient spaces with $L^d$ for $E\\subseteq L\\subseteq\\Omega$. The action matrices lie in $E$. By [lem-sfb-topological-homogeneous-cochain-coordinates], the function\n$$f(g_0,\\ldots,g_n)=g_0z(g_0^{-1}g_1,\\ldots,g_{n-1}^{-1}g_n)$$\nis continuous, diagonally equivariant and satisfies $\\delta f=\\Psi_{n+1}(dz)=0$. The coefficient actions are jointly continuous: each matrix entry is a continuous coordinate of $g e_j$, and each output coordinate is a finite sum of products of entries and vector coordinates.",
    "uses": [
-    "lem-sfb-algcl-countable-closed-finite-cover",
-    "lem-sfb-baire-closed-cover-interior"
+    "lem-sfb-topological-homogeneous-cochain-coordinates"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent argument: Baire applied to the compact source, not to the incomplete target."
+    "place": "Paragraph (3), arithmetic local cocycle input; repair assembly step 1."
    }
   },
   {
-   "text": "Choose a point $(a_0,\\ldots,a_n)$ of that interior and a product of open neighbourhoods $U_0\\times\\cdots\\times U_n$ contained in it. By the open-subgroup neighbourhood basis defining a profinite group, choose an open subgroup $H$ contained in $\\bigcap_i U_i a_i^{-1}$. Then $H a_i\\subseteq U_i$ for every $i$, so $f(Ha_0\\times\\cdots\\times Ha_n)\\subseteq V_F$. Here left cosets $Ha_i$, rather than $a_iH$, are used, to make each coordinate an $H$-equivariant torsor for left multiplication.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-sfb-profinite-map-finite-field-rectangle] to this $f$ with $m=n+1$ to obtain $F$, $H$ and $a_0,\\ldots,a_n$ with $f(Ha_0\\times\\cdots\\times Ha_n)\\subseteq F^d$. Its hypotheses hold because $G$ is profinite and $n+1\\geq1$; no cocycle property is needed for this application.",
+   "uses": [
+    "lem-sfb-profinite-map-finite-field-rectangle"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent argument: product neighbourhood and profinite subgroup basis."
+    "place": "Paragraph (3), arithmetic local cocycle input; repair assembly step 2."
    }
   },
   {
-   "text": "Use [lem-sfb-finite-subfield-continuous-linear-retraction] to choose a continuous $E$-linear retraction $p_F:\\Omega\\to F$. Coordinatewise it gives $p:\\Omega^d\\to F^d$. Because every action matrix has entries in $E$, $p(gv)=g p(v)$ for all $g\\in G$; this follows by applying $E$-linearity to each finite matrix sum. Regard $p$ also as an endomorphism of $V_\\Omega$ and put $q=1-p$. Then $r=qf$ is a continuous homogeneous equivariant cocycle, since $q$ commutes with the action and the finite sums in $\\delta$. It vanishes on $Ha_0\\times\\cdots\\times Ha_n$, since $q$ vanishes on $V_F$. Apply [lem-sfb-homogeneous-cocycle-rectangle-detection] with $K=E$, $M=V_\\Omega$ and this open $H$ to obtain a continuous $H$-equivariant $t:H^n\\to V_\\Omega$ with $r|_{H^{n+1}}=\\delta t$.",
+   "text": "Choose the continuous $E$-linear scalar retraction $p_F:\\Omega\\to F$ by [lem-sfb-finite-subfield-continuous-linear-retraction]. Apply [lem-sfb-finite-scalar-cochain-retraction] with $L=\\Omega$ to get $P:\\Omega^d\\to F^d$, inclusion $i$ and $Q=1-iP$. Thus $r=Qf$ is a continuous equivariant homogeneous cocycle vanishing on the rectangle. By [lem-sfb-homogeneous-cocycle-rectangle-detection], since $n\\geq1$ and $H$ is open, there is a continuous $H$-equivariant $t:H^n\\to\\Omega^d$ with $r|_{H^{n+1}}=\\delta t$.",
    "uses": [
     "lem-sfb-finite-subfield-continuous-linear-retraction",
+    "lem-sfb-finite-scalar-cochain-retraction",
     "lem-sfb-homogeneous-cocycle-rectangle-detection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent argument: retract the finite part and detect the remaining homogeneous class."
+    "place": "Paragraph (3), arithmetic local cocycle input; repair assembly step 3."
    }
   },
   {
-   "text": "Define $u=(pz)|_{H^n}$ and $b(h_1,\\ldots,h_{n-1})=t(1,h_1,h_1h_2,\\ldots,h_1\\cdots h_{n-1})$. For $n=1$ this is the single vector $b=t(1)$. The function $u$ is continuous as an $F^d$-valued function, and $du=p(dz)|_{H^{n+1}}=0$. Evaluating $r=\\delta t$ at $(1,h_1,h_1h_2,\\ldots,h_1\\cdots h_n)$ and using $H$-equivariance in its first deletion term gives $(z-u)(h_1,\\ldots,h_n)=(db)(h_1,\\ldots,h_n)$, by the same explicit deletion-to-ratio calculation of step 1. All these are finite evaluations and sums of continuous functions. Thus $z|_{H^n}=u+db$ with exactly the required coefficient inclusion. Rank zero, the trivial group, non-normal $H$, and degree one are included.",
-   "uses": [],
-   "elementary": true,
+   "text": "Put $u=(Pz)|_{H^n}$ and $b=\\Phi_{n-1}t$, explicitly\n$$b(h_1,\\ldots,h_{n-1})=t(1,h_1,h_1h_2,\\ldots,h_1\\cdots h_{n-1}).$$\nBy [lem-sfb-finite-scalar-cochain-retraction], $u$ is continuous with values in $F^d$ and $du=P(dz)|_{H^{n+1}}=0$. Apply $\\Phi_n$ to $Qf|=\\delta t$ using coefficient and restriction naturality and $\\Phi_n\\delta=d\\Phi_{n-1}$ from [lem-sfb-topological-homogeneous-cochain-coordinates]. This gives $z|_{H^n}-iu=db$, as required. For $n=1$, $b=t(1)$; rank zero, the trivial group and non-normal $H$ are included.",
+   "uses": [
+    "lem-sfb-finite-scalar-cochain-retraction",
+    "lem-sfb-topological-homogeneous-cochain-coordinates"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent argument: inverse homogeneous coordinates and the required equality."
+    "place": "Paragraph (3), arithmetic local cocycle input; repair assembly step 4."
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-algcl-countable-closed-finite-cover",
-  "lem-sfb-baire-closed-cover-interior",
+  "lem-sfb-topological-homogeneous-cochain-coordinates",
+  "lem-sfb-profinite-map-finite-field-rectangle",
   "lem-sfb-finite-subfield-continuous-linear-retraction",
+  "lem-sfb-finite-scalar-cochain-retraction",
   "lem-sfb-homogeneous-cocycle-rectangle-detection"
  ],
  "proof_origin": {
@@ -231,17 +228,17 @@
   "date": "2026-10-22",
   "item": "lem-sfb-local-norm-algcl-cocycle-descent",
   "worker": "stage1",
-  "summary": "Kept the full statement and explicit non-completed cochains. Reduced local finite-field normal form to Baire on the compact source and a generic rectangular homogeneous-cocycle detection lemma, after applying the existing continuous E-linear finite-field retraction. Added countable closed finite-field cover, generic rectangular detection, and a Baire Mathlib leaf.",
-  "blueprint": "Paragraph (3) arithmetic coefficient-topology input to finite-index transfer; this agent obligation is absent from the blueprint text.",
+  "summary": "Repair of batch5 re-split: unchanged statement; two independently claimable statement-only nodes separate the Baire/coset rectangle argument from scalar retraction on representation cochains. Existing coordinate-change and rectangle-detection nodes supply their exact interfaces. Every argument of the five returned steps is retained verbatim in report.md and allocated to the new nodes or existing coordinate lemma. Landing-return repair (returned head 9112bf35dfa): rebased by the delivery tool onto the current DAG, reread every current statement dependency and proof citation, and verified all seven exact quotations and coefficient hypotheses; the approved arithmetic route and both statement-only children remain valid.",
+  "blueprint": "Paragraph (3), arithmetic coefficient-topology input. New rectangle node realizes returned steps 2–3; new scalar-cochain node realizes the projection calculation of step 4 and coefficient continuity of step 5; the existing coordinate lemma carries steps 1 and 5. The blueprint does not itself prove this arithmetic input.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q06-b1cca653d",
-  "group": "Q06",
+  "reviewer": "NT-cc-Q90-7276f5443",
+  "group": "Q90",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-b1cca653d (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and every cited statement (the retraction node included), the unit's direct-images proof paragraph (3), which does not contain this input (so proof_origin=agent is correct), L19 p.3 Prop 1.1.9 (countably many finite extensions plus Baire), and Mathlib Baire/Lemmas.lean:257 and LocallyCompactRegular.lean:23. I checked the five steps by hand. Step 1: the homogenization deletion terms match dz. Step 2: the F_j^d are closed, they cover because the sequence is increasing, and G^{n+1} is compact Hausdorff, so Baire applies. Step 3: U_i a_i^{-1} is a neighbourhood of 1, so the open subgroup H gives H a_i ⊆ U_i. Step 4: p commutes with the E-matrices, so (1-p)f is an equivariant cocycle that vanishes on the rectangle; the rectangle node applies with K=E, M=Ω^d. Step 5: dehomogenizing δt gives exactly the item's d, and n=1 gives b=t(1). The rectangle-detection node is true: n=1 checked explicitly, and in general by the colored-join argument (the join is acyclic through degree n-1, its degree-n simplices are exactly the rectangle, and the homotopy runs through degree n). It is generic and is not a clause of the item. The countable-cover node is true (finitely many extensions of each degree, composita with E, closed because finite-dimensional over complete Q_ℓ). The Baire leaf is an exact Mathlib match. I found no duplicates in an rg -L search of the DAG, no SGA, no route departure, no cycle, and the only citer (profinite-algcl-derived-invariants-comparison step 7) uses the item as stated. FIX for two B3 faults: the rectangle node cited def-weil-field for 'topological field', which that node does not define; I spelled out the field topology and the topological group inline. The cover node used 'algebraic closure' without a citation; I added def-weil-algebraic-closure to its text and stmt_deps.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-7276f5443 (reviewer sub-agent of L); spot-checked: This head re-pushes 9112bf35dfa9, which was PASSed (runs/1/Q90__…__9112bf35dfa9). That head was refused at landing only because the side completion had not been promoted into the live DAG. I diffed the json-normalized nodes. lem-sfb-profinite-map-finite-field-rectangle and lem-sfb-finite-scalar-cochain-retraction are byte-identical. The item lem-sfb-local-norm-algcl-cocycle-descent differs only by one sentence appended to split_report.summary; statement, four proof steps, proof_deps, stmt_deps, source and lean are the same. Every cited statement is identical on the current base: topological-homogeneous-cochain-coordinates, finite-subfield-continuous-linear-retraction, homogeneous-cocycle-rectangle-detection, algcl-countable-closed-finite-cover and baire-closed-cover-interior (status mathlib). I re-checked the assembly. Step 1: Ψ gives the homogeneous cocycle f, and the E-matrix action is jointly continuous. Step 2: the rectangle node applies with m=n+1 and gives F, an open H and cosets Ha_i. Step 3: Q=1−iP is equivariant because the entries are in E, r=Q_*f vanishes on the rectangle, and detection applies with K=E, M=Ω^d, n≥1 and H open (not necessarily normal). Step 4: Φ_n(Q_*f|)=z|−iu and Φ_nδt=db, so z|=iu+db, and b=t(1) when n=1. Both new nodes are true. The rectangle node follows by Baire on the compact source G^m. The scalar-cochain node uses only E-linearity of p, not multiplicativity. Neither node restates the item, and together they spread the old steps 2–3 and 4–5. The closest new base nodes, the Q49 parameter-cochain children (cochain-closed-rectangle-certificates, which needs metrizable G and normal H and treats f_z families; closed-cover-retractions-stabilizing-selectors; retracted-cochain-primitive-summation; accelerated-finite-field-cochain-differences), are not duplicates. No SGA is used; Stacks 0CQN and 0DVG (convention only) and L19 p.3 Prop. 1.1.9 (motivation only) are cited. Everything is in one unit, so no tool_uses are needed. No fixes. Maintainer note: land this once L has promoted the side completion."
  },
  "lean": {
   "module": "Sheaf.RepresentationTheory.LocalNormAlgclCocycleDescent",
@@ -260,5 +257,17 @@
   "group": "NZ",
   "result": "pass",
   "note": "Clause-by-clause match. Ω is an uncompleted NormedField with NormedAlgebra ℚ_[l] and IsAlgClosure, so its norm is the unique extended norm. E is a finite IntermediateField; G is a ProfiniteGrp; hρ = IsContinuousCoefficient, the dep's clause (2). The spaces Ω⊗W and F⊗W carry moduleTopology, i.e. the product topology. The differential uses Fin.contractNth with signs (−1)^(j+1), identical to Mathlib inhomogeneousCochains.d (contractNth read at Tuple/Basic.lean:1273). Degree n+1 covers every degree ≥1; for n=1, b is a vector and db = gb−b. The conclusion has an OpenSubgroup H, a finite F with cocycle u in F⊗W, a continuous b, and z|H = incl(u)+db with incl the canonical TensorProduct.map. The node differs from live only in lean; the statement is verbatim in the file; there are no definitions, nothing beyond sorry, and docstrings give source, blueprint tag and five proof steps. No duplicate in Mathlib or the project's continuous-cochain modules. Universes u/v/w are independent. Advisory: the CoefficientExtensionFinite import only carries a stmt_dep record; Baire imports are proof-stage. No compile needed: no file changed; the worker's compiles were clean."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

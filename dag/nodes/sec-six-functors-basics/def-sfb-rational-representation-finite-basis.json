@@ -1,0 +1,133 @@
+{
+ "id": "def-sfb-rational-representation-finite-basis",
+ "kind": "definition",
+ "title": "Fixed finite basis for rational representations",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field] and let $V$ be a finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace], with $k$ and $V$ in one fixed universe $u$. Put $n=\\dim_k V$. Define the finite index set $I(V)=\\operatorname{ULift}_u(\\operatorname{Fin}(n))$, and fix the $k$-basis $b_V$ of $V$ indexed by $I(V)$ obtained from the standard chosen finite basis $\\operatorname{finBasis}_k(V)$ indexed by $\\operatorname{Fin}(n)$ by reindexing along the inverse of the lift equivalence. Thus $b_V(\\operatorname{up}(j))=\\operatorname{finBasis}_k(V)(j)$. The zero space is allowed, in which case $I(V)$ and the basis are empty. This is the fixed basis convention for identifying $\\mathrm{GL}(V)$ with a matrix general linear group.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 4(a), printed p.83: finite-dimensional representations and GL(V). The fixed lifted finite-basis convention is implemented by RationalRepresentation.FiniteIndex and finiteBasis in the existing project module."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite dimensional vector space finite basis indexed by dimension",
+   "results": "{\"t\": \"2026-10-24T05:07:28Z\", \"tool\": \"leansearch\", \"query\": \"finite dimensional vector space finite basis indexed by dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.instFintypeElemOfVectorSpaceIndex\", \"FiniteDimensional.fintypeBasisIndex\", \"FiniteDimensional.instFintypeElemOfVectorSpaceIndex.congr_simp\", \"FiniteDimensional.of_finite_basis\", \"Module.Basis.finiteDimensional_of_finite\", \"FiniteDimensional.of_fintype_basis\", \"Module.finBasis\", \"FiniteDimensional\"], \"digest\": \"02ebf32627f32342\"}",
+   "date": "2026-10-24",
+   "verdict": "Module.finBasis supplies the finite basis in Mathlib. The exact lifted index and reindexed basis already exist as RationalRepresentation.FiniteIndex and RationalRepresentation.finiteBasis; this node records them with existing:true, without a duplicate construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finBasis",
+   "results": "{\"t\": \"2026-10-24T05:07:28Z\", \"tool\": \"loogle\", \"query\": \"Module.finBasis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Module.finBasis\", \"minpoly.rootsOfMinPolyPiType\", \"minpoly.aux_inj_roots_of_min_poly\"], \"digest\": \"73acf9b8a04469e7\"}",
+   "date": "2026-10-24",
+   "verdict": "Module.finBasis supplies the finite basis in Mathlib. The exact lifted index and reindexed basis already exist as RationalRepresentation.FiniteIndex and RationalRepresentation.finiteBasis; this node records them with existing:true, without a duplicate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "def finBasis|def finiteBasis|abbrev FiniteIndex",
+   "results": "{\"t\": \"2026-10-24T05:07:29Z\", \"tool\": \"grep\", \"query\": \"def finBasis|def finiteBasis|abbrev FiniteIndex\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dimension/Free.lean\", \"Mathlib/LinearAlgebra/Dimension/Free.lean\"], \"digest\": \"3357a32db836eef4\"}",
+   "date": "2026-10-24",
+   "verdict": "Module.finBasis supplies the finite basis in Mathlib. The exact lifted index and reindexed basis already exist as RationalRepresentation.FiniteIndex and RationalRepresentation.finiteBasis; this node records them with existing:true, without a duplicate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "RationalRepresentation\\.(finiteBasis|FiniteIndex)|rational-representation-finite-basis in dag/nodes; def finiteBasis|abbrev FiniteIndex in lean/WeilConjectures and lean/Sheaf",
+   "results": "Only lem-sfb-rational-representation-comodule-dictionary lists these names in the DAG; no definition node owns them. No implementation in WeilConjectures. Sheaf/AlgebraicGeometry/RationalRepresentationComoduleDictionary.lean lines 142 and 147 define the lifted index and reindexed basis. Live source read by scompile.py --source confirms the same implementations.",
+   "date": "2026-10-24",
+   "verdict": "Record the exact existing project definitions under a new definition node as required by H2; do not move or copy them."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search 'finite basis'; ancestor lem-sfb-chevalley-scheme-line-stabilizer",
+   "results": "Two matches: def-weil-pbc-strict-perfect-coefficient-package and lem-weil-pbc-cech-criterion; neither owns this finite-basis convention. Ancestor: a node created for lem-sfb-chevalley-scheme-line-stabilizer has blueprint.from.node = None.",
+   "date": "2026-10-24",
+   "verdict": "Use the inherited null ancestor and prepend the item to its via chain."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-scheme-line-stabilizer",
+  "date": "2026-10-24",
+  "group": "Q155"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The finite-basis identification of GL(E) in the item statement, and the basis and scalar-extension identifications in proof steps 3, 5 and 7; Milne Chapter 4(a), p.83.",
+   "via": [
+    "lem-sfb-chevalley-scheme-line-stabilizer",
+    "lem-sfb-chevalley-character-cancellation",
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalRepresentationComoduleDictionary",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.finiteBasis",
+  "declarations": [
+   "AlgebraicGeometry.RationalRepresentation.FiniteIndex",
+   "AlgebraicGeometry.RationalRepresentation.finiteBasis"
+  ],
+  "statement": "def finiteBasis [FiniteDimensional k V] : Module.Basis (FiniteIndex (k := k) V) k V",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-node ownership of the existing plain definitions, requested by the H2 return of dc81fdb6821d. FiniteIndex is ULift (Fin (finrank k V)); finiteBasis is (Module.finBasis k V).reindex Equiv.ulift.symm. Neither is selected from dictionary or finite_dictionary; no theorem from that node is a statement dependency. No Lean declaration is copied, moved or changed."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c82ff2514",
+  "group": "Q155",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c82ff2514",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Re-delivery of RETURN dc81fdb6821d (H2). The item's stmt_deps replace the theorem node lem-sfb-rational-representation-comodule-dictionary with the new definition node def-sfb-rational-representation-finite-basis: existing:true record of FiniteIndex (abbrev ULift (Fin finrank)) and finiteBasis (finBasis.reindex Equiv.ulift.symm), statement verbatim from def to :=, TeX matches the code, deps field + finite-dim space, source Milne Ch.4(a) p.83, no other owner in live DAG or Mathlib. Dictionary theorem kept in proof_deps only. Lean module byte-identical to the reviewed head; all statement clauses rechecked against Milne Thm 4.27/Lemma 4.28/Rem 4.30 (affine finite type, closed subgroup, nonzero finite-dim E, IsMonHom rho, finrank D = 1, image equality for all u-algebras including 0 and nilpotent). Edge cases d=0, d=n, alpha_p, A=0 covered. Gates OK; report sections present. No file changed, so no compile."
+ }
+}

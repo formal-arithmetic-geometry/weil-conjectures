@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-product-preserving-derived-limit-mate",
+ "kind": "statement",
+ "title": "Product-preserving exact functors preserve the canonical derived-limit mate",
+ "statement": "Let T and S be schemes, and let R and R′ be arbitrary commutative ring sheaves on their small pro-etale sites [def-weil-pbc-proetale-site]. Let F:Mod(R)→Mod(R′) be additive and preserve finite limits and finite colimits [def-weil-sheaf-of-modules-category]. Equip its postcomposition functor on strict natural-number towers with finite-limit and finite-colimit preservation. Suppose the canonical product comparison F(∏ₙ Mₙ)→∏ₙ F(Mₙ) is invertible for every sequence M. For the actual total right-derived inverse-limit functors [prop-weil-pbc-rlim-functoriality] and the exact derived constant-tower functors, the mate of the localized identity-component constant-tower square is an isomorphism Rlim_R ⋙ D(F) ≅ D(F^Tow) ⋙ Rlim_R′. This specifies the particular mate for the canonical constant/limit adjunctions, not just an isomorphism of its endpoints; no boundedness or Noetherian assumptions occur.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941, lemma-derived-limit-is-ok: limit inclusion into the two-product Roos model. The canonical mate identification is the projection/universal-unit calculation of the item proof step 5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Use exact countable products on both pro-etale module categories. Transport each actual right-derived strict inverse limit from homotopy categories to complex localization and across the canonical ordinary-limit model isomorphism. Choose the existing normalized Roos corner models, and use preservation of products to obtain the isomorphism on the two signed coordinates, descending to lambda.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "def-derived-cochain-right-unit",
+    "lem-cbc-normalized-limit-square-coherence",
+    "lem-cbc-ringed-open-scalar-limit-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Roos inclusion normalization gives the comparison equation on every complex. Cancel the ordinary-limit model isomorphisms and check every limit projection to identify its ordinary map with preservesLimitNatIso. The ordinary constant-tower mate has these same projections.",
+   "uses": [
+    "lem-cbc-ringed-open-scalar-limit-coherence",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact/derived mate factorization for the fixed constant-limit adjunctions intertwines the same universal right-derived units and ordinary comparison. Extensionality for the right-derived composite identifies the descended lambda with this specified mate. Invertibility follows because lambda is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-derived-cochain-right-unit",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-cbc-normalized-limit-square-coherence",
+  "lem-cbc-ringed-open-scalar-limit-coherence",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941: specialize the existing proved normalized Roos comparison and identify the mate by universal-unit uniqueness. Reuses the general calculation in CompletedOpenEndpointLimitTransport without importing that descendant."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "An exact product preserving functor commutes with derived inverse limits of strict towers",
+   "results": "ExactFunctor, exactFunctor_iff, isLimitOfPreserves; no derived strict-limit mate theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use existing project Roos and mate-factorization lemmas."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "exact functor preserving products commutes with derived inverse limits",
+   "results": "General product preservation and exact-functor declarations; no matching derived mate.",
+   "date": "2026-10-27",
+   "verdict": "No matching Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "cbcEndpointLimit_isIso_of_products",
+   "results": "The search service returned zero hits. Direct rg in the project found the private general argument in CompletedOpenEndpointLimitTransport, a descendant of the item, and normalized Roos helpers below it. Direct Mathlib search found no matching derived-limit mate theorem. A whole-blueprint search for derived limit mate found no matching node.",
+   "date": "2026-10-27",
+   "verdict": "Extract the cycle-free, fully proved general argument; do not create another completion construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratumCompletionUnitRestriction",
+  "date": "2026-10-27",
+  "group": "A3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; completeness restriction, item proof step 5, invertibility of the specified constant/derived-limit mate.",
+   "via": [
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProductPreservingDerivedLimitMate",
+  "file": "lean/Sheaf/Paper/ProductPreservingDerivedLimitMate.lean",
+  "declaration": "AlgebraicGeometry.Scheme.productPreservingDerivedLimitMate_isIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.productPreservingDerivedLimitMate_isIso"
+  ],
+  "statement": "theorem productPreservingDerivedLimitMate_isIso {T S : Scheme.{t}}\n    {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}\n    {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}\n    (F : reductionModules T R ⥤ reductionModules S R') [F.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F)]\n    [PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F)]\n    (hphi : ∀ N : ℕ → reductionModules T R, IsIso (piComparison F N)) :\n    IsIso (mateEquiv\n      (constLimAdj : (Functor.const ℕᵒᵖ : reductionModules T R ⥤ _) ⊣\n        completedTowerLimit T R).mapDerivedCategoryRightDerivedAdjunction\n      (constLimAdj : (Functor.const ℕᵒᵖ : reductionModules S R' ⥤ _) ⊣\n        completedTowerLimit S R').mapDerivedCategoryRightDerivedAdjunction\n      (TwoSquare.mk _ _ _ _\n        (Functor.mapDerivedCategorySquareIso (Functor.compConstIso ℕᵒᵖ F)).hom)).natTrans",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T235827-L-1457906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T235827-L-1457906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

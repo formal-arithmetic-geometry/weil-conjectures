@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-dg-quasi-isomorphism-localization",
+ "kind": "statement",
+ "title": "Compatible calculus of fractions for quasi-isomorphisms of DG modules",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. For right DG modules $X,Y$ write $\\underline{\\operatorname{Hom}}_A(X,Y)^r$ for degree-$r$ graded right $A$-linear maps, with differential $df=d_Yf-(-1)^rfd_X$. Write $K(A,d)$ for DG modules with morphisms $H^0\\underline{\\operatorname{Hom}}_A(X,Y)$; its localization functor is $Q_A:K(A,d)\\to D(A,d)$. Give $K(A,d)$ its mapping-cone triangulated structure, with shifts $M[k]^i=M^{i+k}$, differential $(-1)^kd_M$, and unchanged right graded action. The cohomology is $H^i(M)=\\ker(d:M^i\\to M^{i+1})/\\operatorname{im}(d:M^{i-1}\\to M^i)$. The quasi-isomorphisms $W_A$ in $K(A,d)$ form a saturated multiplicative system compatible with the triangulated structure as defined in [def-pur-saturated-triangulated-localization]. They admit both left and right calculi of fractions and satisfy two-out-of-three. The localization is $Q_A:K(A,d)\\to D(A,d)$, with the triangulated structure for which $Q_A$ is exact. The kernel consists exactly of modules for which every $H^i$ vanishes. Give the opposite categories $K(A,d)^{\\mathrm{op}}$ and $D(A,d)^{\\mathrm{op}}$ the opposite structures: the shift by $n$ is the opposite of the original shift by $-n$, and the distinguished triangles are the reversals $\\operatorname{op}Z\\to\\operatorname{op}Y\\to\\operatorname{op}X\\to(\\operatorname{op}Z)[1]$ of distinguished triangles $X\\to Y\\to Z\\to X[1]$, the last arrow induced without signs by the original third arrow. With these structures $K(A,d)^{\\mathrm{op}}$ and $D(A,d)^{\\mathrm{op}}$ are triangulated categories, the opposite class $W_A^{\\mathrm{op}}$ is a saturated multiplicative system in $K(A,d)^{\\mathrm{op}}$ compatible with the triangulated structure as defined in [def-pur-saturated-triangulated-localization], and $Q_A^{\\mathrm{op}}:K(A,d)^{\\mathrm{op}}\\to D(A,d)^{\\mathrm{op}}$ is a localization at $W_A^{\\mathrm{op}}$ in the sense of that definition.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KJ, proposition-homotopy-category-triangulated; 09KW, lemma-acyclic; 09KX, definition-unbounded-derived-category. Opposite structures: Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean (opposite pretriangulated structure, scoped instance at line 168, sign convention in the module docstring) and Opposite/Triangulated.lean line 37 (octahedral axiom for the opposite); compatibility of the opposite class from MS5, MS6 and rotation TR2."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pur-saturated-triangulated-localization",
+  "def-sfb-dg-derived-category",
+  "def-sfb-dg-homotopy-structure"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-dg-homotopy-acyclic-localization] for this same associative DG algebra $A$. A degree-zero cocycle in the Hom complex is exactly a chain map, and a degree-zero boundary is $d_Yh+hd_X$ for a degree-minus-one $A$-linear map $h$. Thus its homotopy category is literally the $K(A,d)$ in our statement. The cited result gives its triangulation, the strictly full triangulated subcategory $\\mathcal E$ of acyclic modules, and $W_A=W_{\\mathcal E}$. No boundedness or commutativity is being assumed. For later use, $H^i$ is a functor on $K(A,d)$: a chain map preserves cycles and boundaries, and if $f-g=d_Yh+hd_X$, then on a cycle $x$ the difference $f(x)-g(x)=d_Yh(x)$ is a boundary. Identity and composition descend from chain maps.",
+   "uses": [
+    "lem-sfb-dg-homotopy-acyclic-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KJ (proposition-homotopy-category-triangulated), 09KW (lemma-acyclic); homotopy relation in section-homotopy"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-triangulated-subcategory-cone-system] to the triangulated category $K(A,d)$ and its full replete triangulated subcategory $\\mathcal E$ from step 1. The cone class in that result is $W_A$ by step 1. Consequently $W_A$ contains identities, is closed under composition, has both calculi of fractions (MS2 and MS3 in both directions), is invariant under integer shifts, and satisfies the triangle-completion condition MS6 of [def-pur-saturated-triangulated-localization]. This application does not require a direct-summand hypothesis on $\\mathcal E$.",
+   "uses": [
+    "lem-trf-triangulated-subcategory-cone-system",
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RG, lemma-construct-multiplicative-system, first assertion; Tag 05R2, definition-localization"
+   }
+  },
+  {
+   "text": "Check the remaining saturation axiom MS4 directly on cohomology. For composable $T\\xrightarrow{h}X\\xrightarrow{g}Y\\xrightarrow{f}Z$ with $fg,gh\\in W_A$, put $a=H^i(h)$, $b=H^i(g)$, $c=H^i(f)$. The map $b$ has a right inverse $a(ba)^{-1}$ and a left inverse $(cb)^{-1}c$. They agree, since for any left inverse $l$ and right inverse $r$ one has $l=l(br)=(lb)r=r$. Hence $b$ is invertible for every $i$, so $g\\in W_A$. This is exactly MS4 of [def-pur-saturated-triangulated-localization]. Two-out-of-three follows by the same functoriality: if two of $a,b,ba$ are invertible, the missing inverse is obtained by composing the other two inverses (for example $b^{-1}=a(ba)^{-1}$ when $a$ and $ba$ are invertible). Thus all six axioms hold.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KW, lemma-acyclic; elementary cohomology verification of Categories Tag 05Q8, definition-saturated-multiplicative-system"
+   }
+  },
+  {
+   "text": "Take $D(A,d)$ to be the category of fractions $W_A^{-1}K(A,d)$, as in its definition, with its canonical identity-on-objects functor $Q_A$. [lem-weil-pbc-localization-universal-property] gives its universal property on functors and natural transformations; for this category-of-fractions model the functor factorization is an equality and is unique. This is the localization of [def-pur-saturated-triangulated-localization], with its strict functor factorizations. Apply [lem-pur-localization-triangles-05r6], since step 2 gives the multiplicative system and triangulation compatibility. The localization is triangulated, $Q_A$ commutes with the shifts and is exact, and its distinguished triangles are precisely the triangles isomorphic to images of distinguished triangles of $K(A,d)$. These are the stated localized cone triangles. The chosen universe bound makes the object and fraction collections sets in the ambient universe; no smallness of an index category or infinite construction in the smaller universe is used.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-pur-saturated-triangulated-localization",
+    "lem-pur-localization-triangles-05r6"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R6, proposition-construct-localization; dga.tex Tag 09KX, definition-unbounded-derived-category, with the universe remark in Tag 09KW"
+   }
+  },
+  {
+   "text": "If $M$ is acyclic, $0\\to M$ induces isomorphisms on every cohomology group, so $Q_A(0)\\to Q_A(M)$ is invertible. Exactness of $Q_A$ implies $Q_A(0)$ is a zero object, whence $Q_A(M)=0$. Conversely, each $H^i$ from step 1 inverts $W_A$ by its definition, so [lem-weil-pbc-localization-universal-property] gives $\\overline H^i$ with $\\overline H^i Q_A=H^i$. If $Q_A(M)$ is a zero object, it is isomorphic to $Q_A(0)$; applying $\\overline H^i$ gives $H^i(M)\\cong H^i(0)=0$. This proves the asserted kernel equality without assuming the converse implication of localization in advance.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KW, lemma-acyclic, kernel assertion; Categories Tag 04VG, lemma-properties-left-localization, factorization of cohomology"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-opposite-triangulated-category] first to $K(A,d)$ and then to $D(A,d)$, both now triangulated. This gives the opposite triangulations exactly as specified in the statement: shift $n$ means the original shift $-n$, and the reversed triangles have no inserted minus sign. Apply [lem-sf-triangulated-functor-opposite] to the exact functor $Q_A$ from step 4. Its opposite has the coherent shift comparisons and is exact for these structures.",
+   "uses": [
+    "lem-sfb-opposite-triangulated-category",
+    "lem-sf-triangulated-functor-opposite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean",
+    "place": "scoped instance at line 37; Pretriangulated.lean lines 23-30,168; Functor.lean lines 246-251"
+   }
+  },
+  {
+   "text": "Reversal of arrows exchanges the two MS2 squares and the two MS3 cancellation conditions of [def-pur-saturated-triangulated-localization]. It preserves MS1, and turns MS4 into the same implication with the order of the two composite hypotheses exchanged. Steps 2 and 3 therefore prove MS1--MS4 for $W_A^{\\mathrm{op}}$. For MS5, the opposite shift by $1$ is the original shift by $-1$; step 2 gives invariance under both shifts. These checks concern the two actual calculi of fractions, rather than merely a two-out-of-three property.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R2, definition-localization; Categories Tags 04VC and 05Q8; elementary reversal of the defining diagrams"
+   }
+  },
+  {
+   "text": "To check MS6 in the opposite, represent two opposite distinguished triangles by reversals of $T=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$ and $T^{\\prime}=(X^{\\prime}\\xrightarrow{u^{\\prime}}Y^{\\prime}\\xrightarrow{v^{\\prime}}Z^{\\prime}\\xrightarrow{w^{\\prime}}X^{\\prime}[1])$. The given first two vertical maps unop to quasi-isomorphisms $a:Z^{\\prime}\\to Z$, $b:Y^{\\prime}\\to Y$ satisfying $vb=av^{\\prime}$. Apply MS6 from step 2 to the rotated triangles $Y^{\\prime}\\to Z^{\\prime}\\to X^{\\prime}[1]\\xrightarrow{-u^{\\prime}[1]}Y^{\\prime}[1]$ and $Y\\to Z\\to X[1]\\xrightarrow{-u[1]}Y[1]$, using $b,a$. It supplies a quasi-isomorphism $c_1:X^{\\prime}[1]\\to X[1]$ with $c_1w^{\\prime}=wa$ and $(-u[1])c_1=b[1](-u^{\\prime}[1])$. Shift by $-1$ and cancel the two minus signs; with $c=c_1[-1]$ the equations become $c[1]w^{\\prime}=wa$ and $uc=bu^{\\prime}$. Taking opposites gives the remaining two triangle-morphism squares, the last using $w[-1]$ and $w^{\\prime}[-1]$. Also $c\\in W_A$ by MS5, so the third map lies in $W_A^{\\mathrm{op}}$. Replacing triangles by isomorphic ones preserves these equations and membership, since their induced cohomology maps are conjugated by isomorphisms. Thus MS6 also holds.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R2, definition-localization, MS6 and rotation TR2; Mathlib opposite-triangle sign convention in Opposite/Pretriangulated.lean lines 23-30"
+   }
+  },
+  {
+   "text": "Finally let $F:K(A,d)^{\\mathrm{op}}\\to\\mathcal C$ invert $W_A^{\\mathrm{op}}$. Reverse its arrows to obtain $F^{\\vee}:K(A,d)\\to\\mathcal C^{\\mathrm{op}}$, defined by $F^{\\vee}(X)=\\operatorname{op}(F(\\operatorname{op}X))$ and $F^{\\vee}(f)=F(f^{\\mathrm{op}})^{\\mathrm{op}}$. Step 4 gives a unique $G:D(A,d)\\to\\mathcal C^{\\mathrm{op}}$ with $GQ_A=F^{\\vee}$. Unop its values and reverse its arrows to get $G^{\\vee}:D(A,d)^{\\mathrm{op}}\\to\\mathcal C$ with $G^{\\vee}Q_A^{\\mathrm{op}}=F$. These operations are inverse, so uniqueness is strict in the chosen fraction model. A natural transformation $\\alpha:F_1\\to F_2$ similarly gives $\\alpha^{\\vee}:F_2^{\\vee}\\to F_1^{\\vee}$, whose components are the opposites of those of $\\alpha$. The natural-transformation bijection of [lem-weil-pbc-localization-universal-property] lifts it uniquely $G_2\\to G_1$; reversing again gives the required unique $G_1^{\\vee}\\to G_2^{\\vee}$. Also $Q_A^{\\mathrm{op}}$ inverts $W_A^{\\mathrm{op}}$ since the opposite of an inverse is an inverse. This proves the localization universal property on both functors and natural transformations required by [def-pur-saturated-triangulated-localization].",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Localization/Opposite.lean",
+    "place": "StrictUniversalPropertyFixedTarget.op lines 34-45; elementary reversal also of natural transformations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-homotopy-acyclic-localization",
+  "lem-trf-triangulated-subcategory-cone-system",
+  "def-pur-saturated-triangulated-localization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-localization-triangles-05r6",
+  "lem-sfb-opposite-triangulated-category",
+  "lem-sf-triangulated-functor-opposite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KJ, 09KW and 09KX; derived.tex Tags 05RG and 05R6. Opposite triangulation from the Mathlib source named in the item; MS6 and the opposite strict universal property are written out in steps 7-9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy category of differential graded modules is triangulated and quasi isomorphisms form a saturated multiplicative system",
+   "results": {
+    "t": "2026-10-24T00:36:22Z",
+    "tool": "leanfinder",
+    "query": "Homotopy category of differential graded modules is triangulated and quasi isomorphisms form a saturated multiplicative system",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+     "HomotopyCategory.instIsTriangulatedIntUp",
+     "DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+     "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+     "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory",
+     "HomotopyCategory.instPretriangulatedIntUp",
+     "HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso"
+    ],
+    "digest": "e4c07d1c5e472017"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:34,38 concerns ordinary complexes in an abelian category. DG modules over a nonzero-degree DG algebra are not those complexes, so their compatible localization calculus still needs a separate theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"HasRightCalculusOfFractions\"",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "loogle",
+    "query": "\"quasiIso\", \"HasRightCalculusOfFractions\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso"
+    ],
+    "digest": "ec6e4a864726b166"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:34,38 concerns ordinary complexes in an abelian category. DG modules over a nonzero-degree DG algebra are not those complexes, so their compatible localization calculus still needs a separate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "HasRightCalculusOfFractions|HasLeftCalculusOfFractions|DGModule",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "grep",
+    "query": "HasRightCalculusOfFractions|HasLeftCalculusOfFractions|DGModule",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean"
+    ],
+    "digest": "7e20bba27ad641d6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:34,38 concerns ordinary complexes in an abelian category. DG modules over a nonzero-degree DG algebra are not those complexes, so their compatible localization calculus still needs a separate theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier localization homotopy category of DG modules by acyclic modules is derived category",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "leansearch",
+    "query": "Verdier localization homotopy category of DG modules by acyclic modules is derived category",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasDerivedCategory",
+     "HasDerivedCategory.standard",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso",
+     "HomologicalComplexUpToQuasiIso",
+     "DerivedCategory.instCategory"
+    ],
+    "digest": "cda5f93e124173e5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:34,38 concerns ordinary complexes in an abelian category. DG modules over a nonzero-degree DG algebra are not those complexes, so their compatible localization calculus still needs a separate theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary differential graded algebra the quasi isomorphisms of its DG module homotopy category admit left and right fractions compatible with triangles",
+   "results": {
+    "t": "2026-10-24T01:22:58Z",
+    "tool": "leanfinder",
+    "query": "For an arbitrary differential graded algebra the quasi isomorphisms of its DG module homotopy category admit left and right fractions compatible with triangles",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+     "DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+     "HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso",
+     "DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic"
+    ],
+    "digest": "70b7ce11c2288287"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are ordinary complexes in an abelian category; read Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:28-39. Modules over an arbitrary nonzero-degree DG algebra are not complexes of modules over a fixed ordinary ring; the DG-module triangulation is not a one-line specialization of these hits. Second semantic phrasing also found only ordinary-complex localizations."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|HasLeftCalculusOfFractions",
+   "results": {
+    "t": "2026-10-24T01:23:27Z",
+    "tool": "grep",
+    "query": "DGModule|DGAlgebra|DifferentialGraded|HasLeftCalculusOfFractions",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean"
+    ],
+    "digest": "222e792acd74d6f9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are ordinary complexes in an abelian category; read Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:28-39. Modules over an arbitrary nonzero-degree DG algebra are not complexes of modules over a fixed ordinary ring; the DG-module triangulation is not a one-line specialization of these hits. Second semantic phrasing also found only ordinary-complex localizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier localization of the homotopy category of right differential graded modules over an arbitrary differential graded ring at quasi isomorphisms",
+   "results": {
+    "t": "2026-10-24T01:23:27Z",
+    "tool": "leansearch",
+    "query": "Verdier localization of the homotopy category of right differential graded modules over an arbitrary differential graded ring at quasi isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasDerivedCategory.standard",
+     "HasDerivedCategory",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso",
+     "HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+     "DerivedCategory.Q",
+     "DerivedCategory.right_fac",
+     "HomologicalComplexUpToQuasiIso"
+    ],
+    "digest": "1d7504d6422a8b95"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are ordinary complexes in an abelian category; read Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:28-39. Modules over an arbitrary nonzero-degree DG algebra are not complexes of modules over a fixed ordinary ring; the DG-module triangulation is not a one-line specialization of these hits. Second semantic phrasing also found only ordinary-complex localizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"HasLeftCalculusOfFractions\"",
+   "results": {
+    "t": "2026-10-24T01:23:27Z",
+    "tool": "loogle",
+    "query": "\"quasiIso\", \"HasLeftCalculusOfFractions\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso"
+    ],
+    "digest": "c5e11c12f4ced9fb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are ordinary complexes in an abelian category; read Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:28-39. Modules over an arbitrary nonzero-degree DG algebra are not complexes of modules over a fixed ordinary ring; the DG-module triangulation is not a one-line specialization of these hits. Second semantic phrasing also found only ordinary-complex localizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-bimodule-derived-adjunction",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections. Within Tag 09LT: Tags 09KJ, proposition-homotopy-category-triangulated; 09KW, lemma-acyclic; 09KX, definition-unbounded-derived-category.",
+   "via": [
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-quasi-isomorphism-localization",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its definition dependencies. Reused the existing DG homotopy/acyclic cone result and generic Mathlib cone-calculus and triangulated-localization leaves. Verified saturation with explicit left and right inverses on cohomology and the kernel by descent of each cohomology functor. Added one generic Mathlib leaf for opposite triangulation; wrote out opposite MS6 using rotation, and the strict localization universal property on functors and transformations. No Lean written or compiler used.",
+  "blueprint": "Realizes the inherited DG prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), through Tag 09LT in the existing ancestry. The current latest blueprint file sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), is unchanged at the route level; the DG fractions infrastructure is below it. The ancestor command reports null for this inherited chain, which is preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-f1c648108",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-f1c648108 (reviewer sub-agent of L); spot-checked: Read the item's 9 steps, the new node and every cited statement in full. Sources checked: dga.tex 09KW (lines 2551-2591, including the universe remark), 09KJ and 09KX; Mathlib Triangulated/Opposite (Pretriangulated.lean 23-30, 59-60, 168; Triangle.lean 44-46; Triangulated.lean 37; Basic.lean 57-64; Functor.lean 246); Subcategory.lean trW at 463 ff. The statement matches the base (the Q59 snapshot statement plus the opposite clause that Q59's maintainer FIX added) and is not weakened; stmt_deps are unchanged; there is no repair note. Step 1: the Hom differential at r=-1 gives d_Y h + h d_X, so K(A,d) is the dependency's homotopy category, and the homotopy invariance of H^i is written out. Step 2: E (strictly full, triangulated, extension-closed) meets the trf leaf's hypothesis; that leaf gives MS1-3, MS5 and MS6. Step 3: MS4 is right, a(ba)^-1 is a right inverse and (cb)^-1 c a left inverse; two-out-of-three is correct. Step 4: fraction model with strict lift; nat-trans bijection from universal-property clauses (2)+(3); triangulated structure from the 05r6 leaf. Step 5: kernel proved in both directions via the strict lift of H^i. Steps 6-9: I recomputed opposite MS6 with Mathlib's unsigned reversal (the -u[1] signs from rotating the triangles cancel, giving uc=bu' and c[1]w'=wa) and checked the variance of natural transformations in the opposite universal property. New node lem-sfb-opposite-triangulated-category: true, exact Mathlib leaf (instIsTriangulatedOpposite, Triangulated.lean:37), four kinds of search recorded. A whole-DAG grep found no duplicate; lem-sf-triangulated-functor-opposite concerns functors and gives no TR4. It does not restate the parent. Every off-unit citation is a Mathlib leaf or a definition, so no tool_uses are needed; no SGA is cited. Batch-5: lem-trf-triangulated-subcategory-cone-system is a status-mathlib generic leaf with no proof_deps (calculus of fractions for a triangulated subcategory). It is not a step of the trace formula or Poincare duality and pulls in no closure, so it is outside the assumed statements and the citation is accepted. Edge cases tested: A=0, A=Z with Z[0], characteristic 2, the zero object."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgQuasiIsomorphismLocalization",
+  "declaration": "CategoryTheory.DgAlgebra.quasi_isomorphism_localization",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.homotopyQuasiIsomorphisms",
+   "CategoryTheory.DgAlgebra.quasi_isomorphism_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgQuasiIsomorphismLocalization.lean",
+  "statement": "theorem quasi_isomorphism_localization (A : Algebra.{u}) : ∃ (_s : HomotopyStructure A) (_t : IsTriangulated (HomotopyCategory A)) (_pD : Preadditive (Derived A)) (_zD : HasZeroObject (Derived A)) (_sD : HasShift (Derived A) ℤ) (_aD : ∀ n : ℤ, (shiftFunctor (Derived A) n).Additive) (_pT : Pretriangulated (Derived A)) (_tD : IsTriangulated (Derived A)) (Qh : HomotopyCategory A ⥤ Derived A) (_aQ : Qh.Additive) (_sQ : Qh.CommShift ℤ), homotopyQuotient A ⋙ Qh = Q A ∧ (homotopyQuasiIsomorphisms A).IsSaturatedTriangulatedMultiplicativeSystem ∧ (homotopyQuasiIsomorphisms A).HasLeftCalculusOfFractions ∧ (homotopyQuasiIsomorphisms A).HasRightCalculusOfFractions ∧ (homotopyQuasiIsomorphisms A).HasTwoOutOfThreeProperty ∧ Qh.IsStrictLocalizationAt.{u + 1, u, u + 1, u + 1, uE, vE} (homotopyQuasiIsomorphisms A) ∧ Qh.IsTriangulated ∧ (∀ T : Triangle (Derived A), T ∈ distTriang (Derived A) ↔ T ∈ Qh.essImageDistTriang) ∧ (∀ M : HomotopyCategory A, IsZero (Qh.obj M) ↔ ∀ n : ℤ, IsZero ((HomotopyStructure.cohomology n).obj M)) ∧ IsTriangulated (HomotopyCategory A)ᵒᵖ ∧ IsTriangulated (Derived A)ᵒᵖ ∧ (homotopyQuasiIsomorphisms A).op.IsSaturatedTriangulatedMultiplicativeSystem ∧ Qh.op.IsStrictLocalizationAt.{u + 1, u, u + 1, u + 1, uE, vE} (homotopyQuasiIsomorphisms A).op ∧ Qh.op.IsTriangulated",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-754ef2b14",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Only the new module DgQuasiIsomorphismLocalization.lean plus the item's lean/stmt_deps change; the two added stmt_deps (def-sfb-dg-derived-category, def-sfb-dg-homotopy-structure) are used in the Lean; dependency node files identical to live; statement verbatim. Clause-by-clause match: arbitrary Algebra.{u}; HomotopyCategory = quotient by A-linear homotopies; ∃ HomotopyStructure plus IsTriangulated as conclusions; W = all-H^n-iso real def; IsSaturatedTriangulatedMultiplicativeSystem (MS1-MS6), both calculi of fractions, two-out-of-three; Qh pinned by homotopyQuotient ⋙ Qh = Q A; IsStrictLocalizationAt.{u+1,u,u+1,u+1,uE,vE} matches the def's universe order with free target universes; exact Qh with distTriang = essImageDistTriang; kernel iff all H^n zero (Stacks 09KW); opposite triangulations via Mathlib scoped instances (Pretriangulated.lean:168, Triangulated.lean:37, Functor.lean:41/246); op MS1-MS6, op strict localization and op exactness. No extra hypotheses; edge cases (zero DGA, acyclic M, all shifts, universes) covered; no duplicate class in live Sheaf or Mathlib; docstrings carry source, blueprint tag and 9 steps; sorry only; both report sections present. Advisory: ∃ HomotopyStructure inherits the landed dependency's shiftIso sign-twist freedom (same as the landed homotopy_acyclic_localization); all conclusions are invariant under it. No compile run, no file changed."
+ }
+}

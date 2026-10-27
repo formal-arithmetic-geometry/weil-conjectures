@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 07A4 and 08J9; resolution part of steps 4--5 in the flat scalar evaluation refinement."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 07A4 and 08J9; resolution part of steps 4--5 in the flat scalar evaluation refinement."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatScalarEvaluationModel",
+  "date": "2026-10-24",
+  "group": "R2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-hom-flat-scalar-evaluation-model",
+   "place": "Step 5, ordinary resolution compatibility.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-sfb-ordinary-scalar-evaluation-resolution",
+ "title": "Ordinary scalar evaluation commutes with a K-flat resolution",
+ "statement": "For normalized additive ordinary scalar extensions O and scalar evaluation data E [lem-sfb-ordinary-scalar-evaluation-model], assume extension along a preserves finite limits. For arbitrary complexes P,I,D,V, a K-flat P, a chain map b:D -> Hom(P,I), and a quasi-isomorphism t:V -> D, extension sends t and t tensor 1_P to quasi-isomorphisms; tensoring t and strict scalar tensor(t) with P gives quasi-isomorphisms; scalar evaluation after strict scalar tensor(t) tensor 1_P is the scalar evaluation of t followed by b. No K-flatness of D or V, flatness of the terms of P, K-injectivity of I, or derived choices is assumed.",
+ "stmt_deps": [
+  "lem-sfb-ordinary-scalar-evaluation-model",
+  "lem-pur-kflat-tensor-quasiiso-independent"
+ ],
+ "proof": [
+  {
+   "text": "An additive exact extension preserves homology; hence it preserves t. The K-flat tensor theorem shows that t tensor 1_P is a quasi-isomorphism, and exact extension preserves this too.",
+   "uses": [
+    "lem-pur-kflat-tensor-quasiiso-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural normalized isomorphism nu identifies strict scalar tensor(t) with restriction of extension(t). Restriction is exact, so cancellation of nu shows that strict scalar tensor(t) is a quasi-isomorphism. Tensoring it with P preserves that property.",
+   "uses": [
+    "lem-sfb-ordinary-scalar-evaluation-model",
+    "lem-pur-kflat-tensor-quasiiso-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every generator (s tensor x) tensor p the two evaluation routes are s tensor b(t(x))(p). Apply tensor generation and the stored scalar evaluation formula.",
+   "uses": [
+    "lem-sfb-ordinary-scalar-evaluation-model",
+    "lem-sfb-hom-scalar-chain-identification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-sfb-ordinary-scalar-evaluation-model",
+  "lem-sfb-hom-scalar-chain-identification"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact scalar extension of complexes preserves quasi isomorphisms and commutes with evaluation after tensoring a K flat complex",
+   "results": "8 hits: flat module tensor exactness and Ext exact-functor map; none is the sheafified unbounded chain resolution assertion.",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp",
+   "results": "0 hits; search index reports unknown identifier.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_map_of_preservesHomology|kFlatTensorPreservesQuasiIsoIndependentCoefficients",
+   "results": "Mathlib Algebra/Homology/QuasiIso.lean:280 supplies exact-functor preservation. The project K-flat tensor theorem supplies right tensor preservation; both are used.",
+   "date": "2026-10-24",
+   "verdict": "use existing lemmas"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarOrdinaryEvaluationResolution",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarOrdinaryEvaluationResolution.lean",
+  "declaration": "CategoryTheory.ScalarOrdinaryEvaluation.resolution",
+  "statement": "theorem resolution (O : Scalars.{c, v, r} (J := J))\n    (E : RepresentativeData.{c, v, r} (J := J) O)\n    {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S)\n    (ha : PreservesFiniteLimits (O.E a))\n    (P I D V : StrictScalarHom.Complex.{c, v, r} R)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)\n    (b : D ⟶ homComplex (R := R) P I) (t : V ⟶ D) (ht : QuasiIso t) :\n    QuasiIso ((extension O a).map t) ∧\n    QuasiIso ((coefficientTotalTensor.{r, c, v} J R).map (Prod.mkHom t (𝟙 P))) ∧\n    QuasiIso ((extension O a).map\n      ((coefficientTotalTensor.{r, c, v} J R).map (Prod.mkHom t (𝟙 P)))) ∧\n    QuasiIso ((coefficientTotalTensor.{r, c, v} J R).map\n      (Prod.mkHom ((StrictScalarHom.tensor.{c, v, r} a).map t) (𝟙 P))) ∧\n    (coefficientTotalTensor.{r, c, v} J R).map\n      (Prod.mkHom ((StrictScalarHom.tensor.{c, v, r} a).map t) (𝟙 P)) ≫\n      E.scalarEvaluate a P I D b = E.scalarEvaluate a P I V (t ≫ b)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "independent cc review: ChainSquare/model_exists and lean.statement vs clones/live (annotation-only); node proof fields vs imports; new node lean records vs new modules; importer FlatInternalHomEvaluationRoof compiled against delivered modules (exit 0); #print axioms model_exists clean"
+ }
+}

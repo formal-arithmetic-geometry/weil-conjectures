@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-isomorphism-scalar-completed-model",
+ "kind": "statement",
+ "title": "Completed scalar chain model and preservation under inverse image",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L/\\mathbf Q_\\ell$, and an embedding $\\iota:E\\to L$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be a scheme isomorphism with $\\ell$ invertible at every stalk [def-weil-scheme-morphism-properties]. On the small pro-etale sites [def-weil-pbc-proetale-site] put $R_W=\\widehat{\\mathcal O}_{E,W}$ and $S_W=\\widehat{\\mathcal O}_{L,W}$ [def-weil-completed-integral-coefficients]. Use the specified completed coefficient inclusion and transported inverse images $G_E,G_L$ [def-weil-inverse-image-pullback-comparison, def-weil-integral-scalar-extension]. For every flat-term K-flat $R_Y$-complex $P$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], $G_EP$, $Q=P\\otimes_{R_Y}S_Y$ and $Z=G_EP\\otimes_{R_X}S_X$ are flat-term K-flat. There is a natural chain isomorphism $b_P:Z\\simeq G_LQ$ carrying $c_L(s)\\otimes x$ to $s\\otimes x$ on corresponding local sections. Tensors are the specified sheafified balanced tensor, scalar first [def-pur-sheaf-tensor-product, def-pc-tensor-complex-sheaves]. This statement asserts no finite quotient square and no derived comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; sites-cohomology.tex, Tag 0G7E; Bhatt--Scholze Lemma 6.5.9(4) and original model Steps 1-3 specialized to the recorded cochain presentations."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-integral-scalar-extension",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Compose the two maps from inverse image of the completed E coefficient ring into the completed L coefficient ring with every finite projection. The projection formula for inverseImageCompletedCoefficientMap, naturality of the finite constant coefficient comparisons, and the residue formula for completedCoefficientMap make these composites equal. Joint monicity of the limit projections gives the coefficient square. Apply limitScalarChainComparison to the finite E and L coefficient towers. Identify its scalar-extension functors with completedOrdinaryScalarExtension using their specified object equalities to sheafified changeOfRings and their conjugated map equalities. These object equalities give natural isomorphisms, and their inverses transport the sheafification-unit pure tensors to completedScalarTensorSection. Transport the comparison through these isomorphisms and restrict to good complexes. Its forward pure-tensor rule is exactly CompletedFormula. The isomorphism of sites is exact and tensor compatible, so the ringed-topos K-flat pullback theorem applies to inverse image with its transported completed coefficient action. Apply the same theorem to the identity topos and each completed coefficient inclusion to show that ordinary extension preserves flat terms and K-flatness. This gives all three clauses of PreservesModels. The argument applies to unbounded complexes, including the zero complex and an empty site, and requires no flatness of the coefficient inclusion.",
+   "uses": [
+    "lem-weil-isomorphism-limit-scalar-chain-comparison",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-isomorphism-limit-scalar-chain-comparison",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; sites-cohomology.tex, Tag 0G7E; Bhatt--Scholze Lemma 6.5.9(4) and original model Steps 1-3 specialized to the recorded cochain presentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves under a site equivalence commutes with extension of scalars and coefficient quotients on complexes",
+   "results": "CategoryTheory.Equivalence.sheafCongr and sectionwise object/map formulas; no normalized coefficient-tower cochain theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match for the prescribed tensor presentations and normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\", \"Iso\"",
+   "results": "NatIso.mapHomologicalComplex; Functor.mapHomologicalComplexCompIso and component formulas.",
+   "date": "2026-10-27",
+   "verdict": "Lifting tools only; no coefficient/K-flat comparison in these models."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*tensor|tensor.*inverseImage",
+   "results": "msearch returned zero Mathlib hits. Local search finds LimitScalarChainComparison, IsomorphismScalarQuotientChainSquares and IsomorphismScalarKFlatDescent with different presentation/universe interfaces. Blueprint scalar tensor and K-flat scalar searches give no duplicate.",
+   "date": "2026-10-27",
+   "verdict": "Missing specialization, strictly a part of the parent; use the existing generic statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along a site equivalence commutes with scalar extension of complexes with normalized pure tensor maps",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, pullbackObjFreeIso, freeFunctorCompPullbackIso, pushforwardCongr and naturality formulas.",
+   "date": "2026-10-27",
+   "verdict": "Free-module and composition tools do not identify the specified completed or finite tensor cochain presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismScalarTensorKFlatModel",
+  "group": "R7",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Ordinary scalar tensor model: Completed scalar chain model and preservation under inverse image. First cohomology-transport arrows in def-weil-global-geometric-frobenius: the integral inverse-image component has a coefficient-compatible ordinary tensor model (returned parent proof Steps 1–2 and the K-flat setup of Step 4).",
+   "via": [
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismScalarCompletedModel",
+  "file": "lean/Sheaf/Paper/IsomorphismScalarCompletedModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.scalar_completed_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finiteChangeData",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finiteExtension",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finitePure",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.inverseComplex",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.leftComplex",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.rightComplex",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finiteLeft",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finiteRight",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.restrictedLeft",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.restrictedRight",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.doublePure",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.PreservesModels",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.CompletedFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.FiniteFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.LeftQuotientFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.RightQuotientFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.QuotientSquare",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.LeftTransitionFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.RightTransitionFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.TransitionSquare",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.DerivedModel",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.scalar_completed_model"
+  ],
+  "statement": "theorem scalar_completed_model (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅ (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g, PreservesModels l E L ι g ∧ CompletedFormula l E L ι g b",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ea616",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261027T123533-L-2318397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ea616",
+  "group": "R7",
+  "result": "fix",
+  "landing": "20261027T123533-L-2318397",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean (verbatim vocabulary move, two conjunct-split holes, proved private descend_model) against the clone, the node statement and the 4 direct importers (all compile; item 45.9 s on rerun, 70 s first at load ~100); item node records against the Lean proof"
+ }
+}

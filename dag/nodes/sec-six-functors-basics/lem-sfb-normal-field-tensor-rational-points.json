@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-normal-field-tensor-rational-points",
+ "kind": "statement",
+ "title": "Prime quotients of a finite field tensor split over a receiving normal field",
+ "statement": "Let $k$ be a field [def-weil-field], let $E/k$ and $K/k$ be finite-dimensional field extensions [def-pc-field-extension], and let $u:E\\hookrightarrow K$ be a $k$-embedding. Assume $K/k$ is normal, meaning that the minimal polynomial over $k$ of every element of $K$ splits as a product of linear factors in $K[T]$. Give $B=E\\otimes_k K$ the commutative algebra tensor multiplication $(e\\otimes a)(e'\\otimes a')=ee'\\otimes aa'$ [lem-weil-pbc-algebra-tensor-pushout-universal-property] and its $K$-algebra structure $a\\mapsto1\\otimes a$. The set of prime ideals of $B$ is finite and nonempty. For every prime ideal $\\mathfrak q$ of $B$, the structural map $K\\to B/\\mathfrak q$ is an isomorphism. More precisely, $\\sigma\\mapsto\\ker(\\operatorname{ev}_\\sigma)$ is a bijection from the $k$-embeddings $\\sigma:E\\hookrightarrow K$ to these prime ideals, where $\\operatorname{ev}_\\sigma:B\\to K$ sends $e\\otimes a$ to $\\sigma(e)a$. In particular all residue fields of $\\operatorname{Spec}B$ are canonically isomorphic to $K$ through their structural maps [def-weil-affine-spectrum, def-weil-residue-field]. No separability is assumed, and $B$ need not be reduced.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem B.37, Step 2, printed p.605: all points above the chosen closed source points are rational over a normal extension receiving their residue fields. Algebraic formulation of that input; normality is Stacks Tag 09HM, fields.tex definition-normal."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite $k$-basis $e_1,\\ldots,e_d$ of $E$. The module tensor construction says every element of $B$ is a finite sum of pure tensors. Expanding each first factor in this basis and using the balancing relation gives $e\\otimes a=\\sum_i(e_i\\otimes1)c_i a$ when $e=\\sum_i c_i e_i$. Thus the $d$ elements $e_i\\otimes1$ span $B$ over $K$. Apply [lem-weil-pbc-finite-dim-algebra-artinian] to this finite-dimensional $K$-algebra, then [lem-sfb-artinian-spectrum-finite]: its set of prime ideals is finite.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-artinian-spectrum-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "lemma-tensor-product (Tag 00CX); lemma-finite-dimensional-algebra (Tag 00J6); lemma-artinian-finite-nr-max (Tag 00J7) and lemma-Noetherian-dimension-0 (Tag 00KH)"
+   }
+  },
+  {
+   "text": "For each $k$-embedding $\\sigma:E\\hookrightarrow K$, apply [lem-weil-pbc-algebra-tensor-pushout-universal-property] to $\\sigma$ and $\\mathrm{id}_K$. This gives $\\operatorname{ev}_\\sigma(e\\otimes a)=\\sigma(e)a$ and $\\operatorname{ev}_\\sigma(1\\otimes a)=a$. Its kernel is proper, and is prime: if the image of a product is zero, one image is zero since $K$ is a field. In particular $\\ker(\\operatorname{ev}_u)$ proves nonemptiness.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605; elementary tensor evaluation construction"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q$ and write $\\pi:B\\to D=B/\\mathfrak q$, $j(a)=\\pi(1\\otimes a)$ and $v(e)=\\pi(e\\otimes1)$. Here $D$ is a nonzero domain: properness gives $1\\ne0$, and primality says a zero product of classes has a zero factor. The map $j$ is injective, since $j(a)j(a^{-1})=1$ for $a\\ne0$. By [lem-weil-pbc-finite-algebra-is-integral] applied to $k\\to E$, every $e\\in E$ is algebraic. Let $P_e$ be its monic minimal polynomial as in [def-weil-pbc-separable-algebraic-extension]. The embedding $u$ gives $P(u(e))=u(P(e))$ for every $P\\in k[T]$, so $e$ and $u(e)$ have identical annihilating polynomials and identical minimal polynomial. Normality therefore gives $P_e(T)=\\prod_{r=1}^{m}(T-a_r)$ in $K[T]$, with $m\\ge1$ (a nonzero constant cannot annihilate $e$). Evaluating in $D$ gives $0=\\prod_{r=1}^{m}(v(e)-j(a_r))$. Repeatedly using the domain property yields $v(e)=j(a_r)$ for some $r$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "definition-minimal-polynomial (Tag 09GM), preceding construction and following characterization; definition-normal (Tag 09HM); algebra.tex lemma-finite-is-integral (Tag 00GK)"
+   }
+  },
+  {
+   "text": "Every $b\\in B$ is a sum $\\sum_t e_t\\otimes a_t$. By the preceding step choose $c_t\\in K$ with $v(e_t)=j(c_t)$. Then $\\pi(b)=\\sum_t v(e_t)j(a_t)=j(\\sum_t c_ta_t)$. Since $\\pi$ is onto, $j$ is onto and hence an isomorphism. Define $\\sigma_{\\mathfrak q}=j^{-1}\\circ v:E\\to K$. Both maps are $k$-algebra maps, and this map is injective: for nonzero $e$, its image has inverse the image of $e^{-1}$. On pure tensors, $\\pi(e\\otimes a)=j(\\sigma_{\\mathfrak q}(e)a)$, so $\\pi=j\\circ\\operatorname{ev}_{\\sigma_{\\mathfrak q}}$ on all of $B$. Thus $\\mathfrak q=\\ker(\\operatorname{ev}_{\\sigma_{\\mathfrak q}})$, proving surjectivity of the asserted correspondence and the structural isomorphism $K\\xrightarrow{\\sim}B/\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605; explicit scalar generation in the prime quotient"
+   }
+  },
+  {
+   "text": "If $\\ker(\\operatorname{ev}_\\sigma)=\\ker(\\operatorname{ev}_\\tau)$, then for every $e\\in E$ the element $e\\otimes1-1\\otimes\\sigma(e)$ lies in both kernels. Applying $\\operatorname{ev}_\\tau$ gives $\\tau(e)-\\sigma(e)=0$. Hence $\\tau=\\sigma$, completing the bijection. This uses the displayed evaluation formulas, not an assertion about the number of embeddings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605; elementary injectivity of the kernel correspondence"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-open-stalk-localization], the local ring of $\\operatorname{Spec}B$ at $\\mathfrak q$ is $B_{\\mathfrak q}$ with its actual germ map. By [lem-weil-pbc-prime-residue-field-algebra], its residue field is the fraction field of $D=B/\\mathfrak q$ through the quotient map. But step 4 identified $D$ with the field $K$ via $j$. Every nonzero denominator in $D$ is already invertible, so the fraction $x/y$ equals $xy^{-1}$ in $D$; hence $D\\to\\kappa(\\mathfrak q)$ is an isomorphism. Its composite with $j$ is the structural map, proving the claimed canonical $K$-identification. None of these arguments required distinct roots or reducedness of $B$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Local rings, residue field of a prime (lines 3337-3358), proposition-localize-quotient (Tag 00CT); schemes.tex lemma-spec-sheaves (Tag 01HV), parts (1) and (6)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-artinian-spectrum-finite",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-prime-residue-field-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem B.37, Step 2, printed p.605: expansion of the parenthetical normal-extension rationality input using Stacks algebra and fields facts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normal|residue|quotient|IsMaximal",
+   "results": "{\"t\": \"2026-10-23T19:00:42Z\", \"tool\": \"grep\", \"query\": \"normal|residue|quotient|IsMaximal\", \"sub\": \"FieldTheory/Normal\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Normal/Basic.lean\", \"Mathlib/FieldTheory/Normal/Basic.lean\", \"Mathlib/FieldTheory/Normal/Basic.lean\", \"Mathlib/FieldTheory/Normal/Basic.lean\", \"Mathlib/FieldTheory/Normal/Basic.lean\", \"Mathlib/FieldTheory/Normal/Defs.lean\", \"Mathlib/FieldTheory/Normal/Defs.lean\", \"Mathlib/FieldTheory/Normal/Defs.lean\"], \"digest\": \"9d6dedab826cbce8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normality and purely inseparable spectrum homeomorphisms are ingredients, not the prime-quotient evaluation classification for arbitrary finite E/k. Algebra.TensorProduct.isField_of_isAlgebraic assumes the entire tensor is a domain, which is not required here; no exact or one-line specialization found after two semantic phrasings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a normal field extension K contains a copy of a finite extension E of k, all residue fields of E tensor over k K are K, without separability",
+   "results": "{\"t\": \"2026-10-23T19:00:42Z\", \"tool\": \"leansearch\", \"query\": \"If a normal field extension K contains a copy of a finite extension E of k, all residue fields of E tensor over k K are K, without separability\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.normal\", \"Normal.casesOn\", \"IntermediateField.normal_iff_forall_fieldRange_le\", \"Normal\", \"IntermediateField.normal_iff_forall_fieldRange_eq\", \"IntermediateField.normal_iff_forall_map_le\", \"Normal.toIsAlgebraic\", \"Normal.tower_top_of_normal\"], \"digest\": \"d39820cd78f937a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normality and purely inseparable spectrum homeomorphisms are ingredients, not the prime-quotient evaluation classification for arbitrary finite E/k. Algebra.TensorProduct.isField_of_isAlgebraic assumes the entire tensor is a domain, which is not required here; no exact or one-line specialization found after two semantic phrasings."
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, Algebra.TensorProduct",
+   "results": "{\"t\": \"2026-10-23T19:00:43Z\", \"tool\": \"loogle\", \"query\": \"Normal, Algebra.TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.TensorProduct'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normality and purely inseparable spectrum homeomorphisms are ingredients, not the prime-quotient evaluation classification for arbitrary finite E/k. Algebra.TensorProduct.isField_of_isAlgebraic assumes the entire tensor is a domain, which is not required here; no exact or one-line specialization found after two semantic phrasings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let E and K be finite extensions of k and K normal over k admitting a k embedding of E. Every prime quotient of the tensor product E tensor k K is K.",
+   "results": "{\"t\": \"2026-10-23T19:00:43Z\", \"tool\": \"leanfinder\", \"query\": \"Let E and K be finite extensions of k and K normal over k admitting a k embedding of E. Every prime quotient of the tensor product E tensor k K is K.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.isField_of_isAlgebraic\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_symm\"], \"digest\": \"3840ae6dd1f1f981\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normality and purely inseparable spectrum homeomorphisms are ingredients, not the prime-quotient evaluation classification for arbitrary finite E/k. Algebra.TensorProduct.isField_of_isAlgebraic assumes the entire tensor is a domain, which is not required here; no exact or one-line specialization found after two semantic phrasings."
+  },
+  {
+   "tool": "grep",
+   "query": "Normal.*Tensor|Tensor.*Normal|quotient.*normal|normal.*quotient|residueField",
+   "results": "{\"t\": \"2026-10-23T19:02:45Z\", \"tool\": \"grep\", \"query\": \"Normal.*Tensor|Tensor.*Normal|quotient.*normal|normal.*quotient|residueField\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Galois/Basic.lean\", \"Mathlib/FieldTheory/Galois/Basic.lean\", \"Mathlib/FieldTheory/Galois/Basic.lean\", \"Mathlib/FieldTheory/Galois/Basic.lean\", \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"Mathlib/FieldTheory/Galois/Infinite.lean\"], \"digest\": \"39b4e375ef24f720\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normality and purely inseparable spectrum homeomorphisms are ingredients, not the prime-quotient evaluation classification for arbitrary finite E/k. Algebra.TensorProduct.isField_of_isAlgebraic assumes the entire tensor is a domain, which is not required here; no exact or one-line specialization found after two semantic phrasings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite field extensions E and K over k with K normal and E embedded in K, the spectrum of E tensor k K is finite and every residue field is K",
+   "results": "{\"t\": \"2026-10-23T19:02:46Z\", \"tool\": \"leanfinder\", \"query\": \"For finite field extensions E and K over k with K normal and E embedded in K, the spectrum of E tensor k K is finite and every residue field is K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Ideal.fiberIsoOfBijectiveResidueField\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\"], \"digest\": \"40fbe12b39181cf9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normality and purely inseparable spectrum homeomorphisms are ingredients, not the prime-quotient evaluation classification for arbitrary finite E/k. Algebra.TensorProduct.isField_of_isAlgebraic assumes the entire tensor is a domain, which is not required here; no exact or one-line specialization found after two semantic phrasings."
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, \"residue\"",
+   "results": "{\"t\": \"2026-10-23T19:02:46Z\", \"tool\": \"loogle\", \"query\": \"Normal, \\\"residue\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normality and purely inseparable spectrum homeomorphisms are ingredients, not the prime-quotient evaluation classification for arbitrary finite E/k. Algebra.TensorProduct.isField_of_isAlgebraic assumes the entire tensor is a domain, which is not required here; no exact or one-line specialization found after two semantic phrasings."
+  },
+  {
+   "tool": "grep",
+   "query": "Surjective|IsFinite",
+   "results": "{\"t\": \"2026-10-23T19:04:39Z\", \"tool\": \"grep\", \"query\": \"Surjective|IsFinite\", \"sub\": \"AlgebraicGeometry/PullbackCarrier.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"304\", \"323\", \"324\", \"384\", \"385\"], \"digest\": \"d9f4591b2618da5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normality and purely inseparable spectrum homeomorphisms are ingredients, not the prime-quotient evaluation classification for arbitrary finite E/k. Algebra.TensorProduct.isField_of_isAlgebraic assumes the entire tensor is a domain, which is not required here; no exact or one-line specialization found after two semantic phrasings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite extensions E and K of a field k with K normal containing E, prime ideals of E tensor k K are kernels of evaluations at k embeddings E into K and every residue field equals K",
+   "results": "{\"t\": \"2026-10-23T20:40:37Z\", \"tool\": \"leanfinder\", \"query\": \"For finite extensions E and K of a field k with K normal containing E, prime ideals of E tensor k K are kernels of evaluations at k embeddings E into K and every residue field equals K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.preimageEquivFiber_apply_asIdeal\", \"Ideal.fiberIsoOfBijectiveResidueField\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\", \"Ideal.exists_comap_galRestrict_eq\", \"PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal\", \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_symm\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\"], \"digest\": \"16fc73925c4e61bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply residue-field fibre correspondences, purely inseparable spectrum maps, or normal minimal-polynomial facts, not this normal-extension tensor quotient classification. The domain hypothesis of Algebra.TensorProduct.isField_of_isAlgebraic excludes potentially nonreduced B."
+  },
+  {
+   "tool": "grep",
+   "query": "Normal.*Tensor|Tensor.*Normal|ker.*lift|lift.*ker",
+   "results": "{\"t\": \"2026-10-23T20:41:38Z\", \"tool\": \"grep\", \"query\": \"Normal.*Tensor|Tensor.*Normal|ker.*lift|lift.*ker\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Fixed.lean\", \"Mathlib/FieldTheory/Galois/NormalBasis.lean\"], \"digest\": \"115648827e264b10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply residue-field fibre correspondences, purely inseparable spectrum maps, or normal minimal-polynomial facts, not this normal-extension tensor quotient classification. The domain hypothesis of Algebra.TensorProduct.isField_of_isAlgebraic excludes potentially nonreduced B."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime ideals of a tensor product of finite field extensions over a normal extension containing the first field have residue field equal to the normal field",
+   "results": "{\"t\": \"2026-10-23T20:41:39Z\", \"tool\": \"leansearch\", \"query\": \"Prime ideals of a tensor product of finite field extensions over a normal extension containing the first field have residue field equal to the normal field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ResidueField\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal\", \"Algebra.QuasiFinite.instResidueField\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"330a8b5fe7998216\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply residue-field fibre correspondences, purely inseparable spectrum maps, or normal minimal-polynomial facts, not this normal-extension tensor quotient classification. The domain hypothesis of Algebra.TensorProduct.isField_of_isAlgebraic excludes potentially nonreduced B."
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, Algebra.TensorProduct",
+   "results": "{\"t\": \"2026-10-23T20:41:39Z\", \"tool\": \"loogle\", \"query\": \"Normal, Algebra.TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.TensorProduct'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable: loogle: unknown identifier 'Algebra.TensorProduct'"
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, \"minpoly\"",
+   "results": "{\"t\": \"2026-10-23T20:42:05Z\", \"tool\": \"loogle\", \"query\": \"Normal, \\\"minpoly\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Normal.minpoly_eq_iff_mem_orbit\", \"minpoly.exists_algEquiv_of_root\", \"minpoly.exists_algEquiv_of_root'\", \"ConjRootClass.splits_minpoly\", \"ConjRootClass.minpoly.map_eq_prod\"], \"digest\": \"73824031c39d23f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply residue-field fibre correspondences, purely inseparable spectrum maps, or normal minimal-polynomial facts, not this normal-extension tensor quotient classification. The domain hypothesis of Algebra.TensorProduct.isField_of_isAlgebraic excludes potentially nonreduced B."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal algebraic field extension K of k containing a finite extension E makes all prime quotients of E tensor over k K isomorphic to K, including inseparable extensions",
+   "results": "{\"t\": \"2026-10-23T20:42:08Z\", \"tool\": \"leanfinder\", \"query\": \"A normal algebraic field extension K of k containing a finite extension E makes all prime quotients of E tensor over k K isomorphic to K, including inseparable extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"IntermediateField.LinearDisjoint.isField_of_isAlgebraic\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\"], \"digest\": \"fb33b2f35342a60a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply residue-field fibre correspondences, purely inseparable spectrum maps, or normal minimal-polynomial facts, not this normal-extension tensor quotient classification. The domain hypothesis of Algebra.TensorProduct.isField_of_isAlgebraic excludes potentially nonreduced B."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-closed-set-rational-lifts",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). Milne Theorem 5.39 proof: existence of G/N, expanded to the independent homogeneous-space theorem 5.28 for arbitrary closed subgroups.; Milne B.37 Step 2, the affine-neighbourhood condition required for finite field descent; Milne B.37 Step 2, second paragraph: choosing a finite normal extension that splits the residue fields of closed source lifts of the prescribed closed target points. Algebraic input to the normal-extension choice: prime quotients of a finite field tensor are rational, even when the tensor has nilpotents.",
+   "via": [
+    "lem-sfb-finite-closed-set-rational-lifts",
+    "lem-sfb-homogeneous-scheme-finite-set-affine",
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-field-tensor-rational-points",
+  "worker": "stage1",
+  "summary": "Checked Milne B.37 Step 2 and Stacks normality. Expanded prime-quotient scalar generation, the evaluation-kernel bijection, finiteness and the canonical residue-field comparison without separability. Reused existing Mathlib leaves; no new nodes. No statement change.",
+  "blueprint": "The inherited provenance leads through det-thm-sf-ctf-stability-direct-images (3), the marked-alteration prerequisites, to Milne B.37 Step 2. This item supplies only the finite normal-field tensor rationality input at the final sentence of its inherited from.place. The current blueprint has no identical field-tensor statement; same_as remains empty."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-92df36a19",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-92df36a19 (reviewer sub-agent of L); spot-checked: I read the delivery in full: a split of the item with six steps and no new nodes. Statement, stmt_deps, source and blueprint are unchanged from the live base; only status, proof, proof_deps, proof_origin, split_report and the added mathlib_searches differ. There is no re-split repair note and no SGA citation. Source: Milne iAG2017 B.37 (PDF pp. 616-618) says to take K to be any normal extension into which every κ(g_i) embeds, so that the points above are K-rational; the item is the algebraic form of this. Normality matches Stacks 09HM (fields.tex l.1827), with no separability. The tags 00J6, 00J7, 00KH, 00GK, 09GM, 01HV and 00CT are confirmed in tags/tags. Steps: (1) generation by pure tensors and the balancing relation make B finite over K; then Artinian (lem-weil-pbc-finite-dim-algebra-artinian) and finite Spec (lem-sfb-artinian-spectrum-finite). (2) ev_σ comes from pushout universal property (2), and its kernel is prime because ev_σ maps onto K. (3) Finite implies integral; only the minimal-polynomial clause of def-weil-pbc-separable-algebraic-extension is used; P_e = P_{u(e)} splits over K by normality; the domain property gives v(e) = j(a_r), with repeated roots allowed. The agreement of the k-coefficients under v and j (c⊗1 = 1⊗c) is implicit but elementary. (4) j is surjective hence an isomorphism, and q = ker ev_{σ_q}. (5) Injectivity via e⊗1 − 1⊗σ(e). (6) The stalk is B_q by 01HV, and κ = Frac(B/q) = B/q, giving the canonical K-identification. Edge cases checked: E = k; purely inseparable F_p(t)/F_p(s), where B = K[ε]/(ε^p) has one prime; Q(i), with two primes; Q(∛2), where the statement fails without normality. The DAG grep found no duplicate. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.NormalTensorRationalPoints",
+  "declaration": "Algebra.TensorProduct.normal_tensor_rational_points",
+  "file": "lean/Sheaf/FieldTheory/NormalTensorRationalPoints.lean",
+  "statement": "theorem normal_tensor_rational_points {k : Type u} {E : Type v} {K : Type w} [Field k] [Field E] [Field K] [Algebra k E] [Algebra k K] [FiniteDimensional k E] [FiniteDimensional k K] [Normal k K] (_u : E →ₐ[k] K) : {q : Ideal (E ⊗[k] K) | q.IsPrime}.Finite ∧ {q : Ideal (E ⊗[k] K) | q.IsPrime}.Nonempty ∧ (∀ (q : Ideal (E ⊗[k] K)), q.IsPrime → Function.Bijective ((Ideal.Quotient.mk q).comp (includeRight : K →ₐ[k] E ⊗[k] K).toRingHom)) ∧ Set.BijOn (fun σ : E →ₐ[k] K ↦ RingHom.ker (productMap σ (AlgHom.id k K)).toRingHom) Set.univ {q : Ideal (E ⊗[k] K) | q.IsPrime} ∧ (∀ x : Spec (CommRingCat.of (E ⊗[k] K)), Function.Bijective (((Spec (CommRingCat.of (E ⊗[k] K))).Γevaluation x).hom.comp (((Scheme.ΓSpecIso (CommRingCat.of (E ⊗[k] K))).inv).hom.comp (includeRight : K →ₐ[k] E ⊗[k] K).toRingHom)))",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c638564dc",
+  "group": "NE",
+  "result": "fix",
+  "note": "Lean and records exact: [Normal k K] + FiniteDimensional E,K + _u : E →ₐ[k] K; primes Finite ∧ Nonempty; ∀ prime q, mk q ∘ includeRight bijective; Set.BijOn σ ↦ ker(productMap σ (AlgHom.id k K)) from univ onto primes (productMap_apply_tmul rfl = σ e * a); ∀ x : Spec B, Γevaluation x ∘ ΓSpecIso.inv ∘ includeRight bijective (canonical germ/residue map). lean.statement verbatim; node differs from live only in lean; stmt_deps Mathlib leaves existing:true; sorry only, docstrings with source and blueprint tag; edge cases E=k, purely inseparable non-reduced B, Q(i), Q(cube root 2). Only fault H11: second reading was a same-worker self-check, repaired by fixes/lem-sfb-normal-field-tensor-rational-points.report.md (worker report unchanged plus an independent clause-by-clause second reading). No Lean change, no compile."
+ }
+}

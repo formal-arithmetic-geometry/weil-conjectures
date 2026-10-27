@@ -1,0 +1,139 @@
+{
+ "id": "lem-trf-log-blowup-extension-terminal-stalk",
+ "kind": "statement",
+ "title": "Terminal characteristic stalks are detected on charted tests",
+ "statement": "Let $T$ be a strict etale log blowup procedure on charted admissible inputs, and $E$ a procedure on all admissible inputs [def-trf-strict-etale-log-blowup-procedure]. Suppose every strict etale map $f:Y\\to X$ with $Y$ charted has a contracted-pullback comparison from $E(X)$ to $T(Y)$. For any admissible $X$, any algebraically closed field $\\Omega$, and any geometric point $t:\\operatorname{Spec}\\Omega\\to E(X)_{\\mathrm{last}}$, there exist a charted admissible $Y$ and a geometric point $s:\\operatorname{Spec}\\Omega\\to T(Y)_{\\mathrm{last}}$ such that the characteristic monoids of these two terminal log schemes at $t$ and $s$ are multiplicatively isomorphic [def-trf-fs-log-blowup]. No smoothness or freeness of either terminal log scheme is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VIII, Remark 3.3.13 and proof of Theorem 3.3.15, printed pp. 108--110."
+ },
+ "stmt_deps": [
+  "def-trf-strict-etale-log-blowup-procedure",
+  "def-trf-fs-log-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite quasi-compact strict etale fan-chart cover of X from log_fan_chart_blowup. Its members are admissible: strictness identifies characteristic stalks with those on X, so the torsion-free hypothesis transfers. Each member has a global fan chart.",
+   "uses": [
+    "lem-trf-log-fan-chart-blowup",
+    "def-per-strict-log-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the assumed comparison for every member of this cover. Repeat the contracted source levels at deleted stages. At every old stage the comparison supplies an fs Cartesian square. The coherent-ideal chart construction commutes with strict etale restriction and its chart tensor rings give an ordinary scheme pullback. Its universal property identifies the supplied square with that construction. Induction therefore makes all level maps strict etale. At a deleted whole center the identity has the universal blowup property, so the same statement holds for repeated levels.",
+   "uses": [
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "def-trf-fs-log-blowup",
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Joint surjectivity of etale families is stable under scheme base change. The final level maps therefore remain jointly surjective; each comparison last-index equation identifies its repeated last level with the last level of T on the corresponding member. Thus these terminal levels form a jointly surjective strict etale cover of the terminal E(X).",
+   "uses": [
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift t to this cover over the same algebraically closed field. Its fiber is a nonempty etale scheme over that field, so an affine neighbourhood of any fiber point has a rational closed point. Strictness at the resulting lift s gives the canonical characteristic monoid isomorphism; transport along the equality of the composite with t. The empty terminal scheme has no t, length zero uses the original cover, and consecutive deletions repeat levels without changing the final point or stalk.",
+   "uses": [
+    "def-per-strict-log-morphism"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-log-fan-chart-blowup",
+  "def-per-strict-log-morphism",
+  "lem-trf-coherent-log-ideal-chart-construction",
+  "def-trf-fs-log-blowup",
+  "def-trf-strict-etale-log-blowup-procedure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VIII, Remark 3.3.13 and proof of Theorem 3.3.15, printed pp. 108--110. The terminal-stalk descent argument is expanded from the descent reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For descended finite log blowup towers a geometric characteristic stalk at the terminal stage is isomorphic to a terminal stalk on a charted input",
+   "results": "Search succeeded with 8 hits: TopCat.Presheaf.stalkCongr, skyscraperPresheafStalkOfNotSpecializes, skyscraperPresheafStalkOfSpecializes, skyscraperPresheafStalkOfNotSpecializesIsTerminal, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, AlgebraicGeometry.stalkClosedPointIso, TopCat.Presheaf.sheafifyStalkIso. Read the returned types; none states a logarithmic fan-resolution procedure or the terminal log-characteristic comparison for a descended tower.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A terminal characteristic stalk of descended log blowup towers is isomorphic to a terminal stalk on some globally charted strict etale test scheme",
+   "results": "Search succeeded with 8 hits: AlgebraicGeometry.HasRingHomProperty.stalkMap_of_respectsIso, AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk, AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued, AlgebraicGeometry.isomorphisms_eq_stalkwise, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Spec_stalkClosedPointIso, AlgebraicGeometry.isIso_iff_isIso_stalkMap, AlgebraicGeometry.isIso_iff_stalk_iso. Read the returned types; none states a logarithmic fan-resolution procedure or the terminal log-characteristic comparison for a descended tower.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i logblowup|log_blowup|LogFanChart|LogBlowupComparison Mathlib WeilConjectures; rg on lean/Sheaf for terminal characteristic, charted resolution and procedure agreement; blueprint_refs.py search log blowup",
+   "results": "No matches in Mathlib or WeilConjectures. Sheaf has StrictEtaleLogBlowupProcedure, LogFanChartBlowup, FunctorialLogBlowupEtaleDescent and RigidifiedQuotientTowerComparison. Read their signatures: they define procedures, lift one fixed chart, or extend a supplied procedure, but do not identify a terminal geometric characteristic stalk on a charted test from the extension comparisons. The whole-blueprint search returned zero matches.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MonoidalResolutionTower",
+  "date": "2026-10-26",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VIII, 3.3.14--Theorem 3.3.15, printed p. 109 and proof pp. 109--110, with the saturated fan desingularization constructed in 3.1.27 and 3.2.19--3.2.21, printed pp. 102 and 105--106. The auxiliary toric resolution is taken over Q; the resulting monoidal construction has no characteristic restriction on X. This node supplies the terminal characteristic-stalk localization in step 6 of lem-trf-monoidal-resolution-tower.",
+   "via": [
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LogBlowupExtensionTerminalStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogBlowupExtensionTerminalStalk.lean",
+  "declaration": "AlgebraicGeometry.log_blowup_extension_terminal_stalk",
+  "statement": "theorem log_blowup_extension_terminal_stalk\n    (T : StrictEtaleLogBlowupProcedure IsChartedLogBlowupInput.{u})\n    (E : StrictEtaleLogBlowupProcedure IsLogBlowupInput.{u})\n    (hCompare : ∀ (X Y : FineSaturatedLogScheme.{u}) (hX : IsLogBlowupInput X)\n      (hY : IsChartedLogBlowupInput Y) (f : EtaleLogHom Y X),\n      f.IsStrict → Etale f.base →\n        Nonempty (LogBlowupComparison f (E.tower X hX) (T.tower Y hY)))\n    (X : FineSaturatedLogScheme.{u}) (hX : IsLogBlowupInput X)\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (t : Spec (.of Ω) ⟶\n      ((E.tower X hX).tower.level (Fin.last (E.tower X hX).tower.length)).scheme) :\n    ∃ (Y : FineSaturatedLogScheme.{u}) (hY : IsChartedLogBlowupInput Y)\n      (s : Spec (.of Ω) ⟶\n        ((T.tower Y hY).tower.level (Fin.last (T.tower Y hY).tower.length)).scheme),\n      Nonempty\n        (((E.tower X hX).tower.level\n            (Fin.last (E.tower X hX).tower.length)).logStructure.characteristic t ≃*\n          ((T.tower Y hY).tower.level\n            (Fin.last (T.tower Y hY).tower.length)).logStructure.characteristic s)",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T091407-L-3339768",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T091407-L-3339768",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

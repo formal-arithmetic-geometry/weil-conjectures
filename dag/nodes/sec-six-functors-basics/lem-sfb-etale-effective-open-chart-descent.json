@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-etale-effective-open-chart-descent",
+ "kind": "statement",
+ "title": "Effective open charts over etale base neighbourhoods give algebraic-space descent",
+ "statement": "Let $p:S'\\to S$ be a flat quasi-compact surjection of schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-pbc-scheme-conventions]. Let $Y/S'$ be separated (its diagonal is a closed immersion [def-weil-closed-immersion]) with a descent datum $\\alpha$ relative to $p$ [def-pd-descent-datum]. Suppose there is a set-indexed open covering $Y=\\bigcup_{i\\in I}U_i$ [def-weil-open-immersion] with the following additional data for each $i$: a factorization $p=r_iq_i$ with $r_i:T_i\\to S$ etale [def-weil-etale-morphism] and $q_i:S'\\to T_i$ a flat quasi-compact surjection; stability of $U_i$ under the restriction of $\\alpha$ to $S'\\times_{T_i}S'$; a $T_i$-scheme $Z_i$; and an isomorphism $Z_i\\times_{T_i}S'\\simeq U_i$ inducing that restricted datum [def-pc-fibre-product]. Work in the fixed universes of [def-weil-size-convention], with the indicated scheme coproducts in the big site [def-pc-fppf-site]. Then the functor\n$$X(T)=\\{y\\in Y(T\\times_SS'):\\alpha(p_0^*y)=p_1^*y\\}$$\non $S$-schemes, with restriction by pullback, is an algebraic space [def-trf-algebraic-space]. There is an isomorphism $X\\times_SS'\\simeq Y$ inducing $\\alpha$. Each $Z_i$ gives a representable etale morphism $Z_i\\to X$; collectively they give a surjective etale scheme atlas $\\coprod_iZ_i\\to X$. Over $T_i$ the corresponding map $Z_i\\to X\\times_ST_i$ is a representable open immersion whose pullback by $q_i$ is $U_i\\hookrightarrow Y$. The conclusion requires the supplied effective open charts; it makes no assertion for a general fpqc datum without them.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Agent local-chart gluing criterion, using Tag 023Q (lemma-fpqc-universal-effective-epimorphisms), Tag 02L3 (lemma-descending-property-open-immersion), and Tag 02VN (lemma-descending-property-etale); the algebraic-space atlas criterion is bootstrap.tex Tag 04S6 (theorem-final-bootstrap). A direct proof of the criterion, including the equalizer sheaf, descent of open subfunctors and the atlas, is in report.md. No general fpqc effectivity of algebraic spaces is used, and 02W5 is not invoked for the fpqc cover."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-pd-descent-datum",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $T'=T\\times_SS'$ and $T''=T\\times_SS'\\times_SS'$. All maps to $Y$ below are over the specified map to $S'$. The singleton $\\{p\\}$ is an fpqc covering: above each affine open $V\\subset S$, quasi-compactness gives a finite affine open cover of $p^{-1}(V)$, and surjectivity says that their images cover $V$; flatness is the other condition in the definition. The same argument applies to every $q_i$. Base change preserves these fpqc coverings. We use the transport notation $\\alpha_{s_0,s_1}$ on any test scheme with two maps $s_0,s_1$ to $S'$ over the same map to $S$. The cocycle says $\\alpha_{s_1,s_2}\\alpha_{s_0,s_1}=\\alpha_{s_0,s_2}$. Invertibility gives $\\alpha_{s,s}=1$ and $\\alpha_{s_1,s_0}=\\alpha_{s_0,s_1}^{-1}$.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-galois-fpqc-covering-base-change",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023V (definition-descent-datum); Tag 022D (topologies-lemma-fpqc); the singleton covering follows directly from the definition"
+   }
+  },
+  {
+   "text": "The displayed equalizer defining $X$ is an fpqc sheaf. Indeed, given a matching family $x_a\\in X(T_a)$ for an fpqc cover $\\{T_a\\to T\\}$, its maps $T_a\\times_SS'\\to Y$ glue uniquely to $y:T'\\to Y$ by representable fpqc descent and base change of the covering. Their structure maps glue to the structure map of $T'$, so $y$ is over $S'$. The equation $\\alpha_{p_0,p_1}(p_0^*y)=p_1^*y$ holds after the fpqc cover $\\{T_a\\times_SS'\\times_SS'\\to T''\\}$, hence holds by the uniqueness part of representable descent. This produces the unique section of $X(T)$; restriction is precomposition and preserves the equation. Every fppf covering is fpqc, so $X$ is also a sheaf on the stated big fppf site.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms); Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc)"
+   }
+  },
+  {
+   "text": "For $s:T\\to S'$, evaluate $x\\in X(T)$ on the graph $(1_T,s):T\\to T'$ to obtain $z:T\\to Y$ over $s$. Conversely, for such $z$, put $s_0=s\\operatorname{pr}_T$ and $s_1=\\operatorname{pr}_{S'}$ on $T'$, and set $y=\\alpha_{s_0,s_1}(z\\operatorname{pr}_T)$. The cocycle gives the matching equation on $T''$. Evaluating on the graph returns $z$, since $\\alpha_{s,s}=1$. For a matching $y$, pulling its equation back along $T'\\to T''$, $(t,s')\\mapsto(t,s(t),s')$, gives precisely this formula, so it returns $y$. These mutually inverse formulas commute with every map of tests. Thus $X\\times_SS'\\simeq h_Y$. For two lifts $s_0,s_1:T\\to S'$, the two evaluations of the same matching section are related by $\\alpha_{s_0,s_1}$; consequently the induced descent datum is exactly $\\alpha$.",
+   "uses": [
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023V (definition-descent-datum), cocycle and diagonal identities; explicit equalizer calculation"
+   }
+  },
+  {
+   "text": "Put $V_i=Z_i\\times_{T_i}S'\\simeq U_i$. The given inclusion $U_i\\to Y$ and step 3 define a section of $X(V_i)$. The two restrictions to $V_i\\times_{Z_i}V_i$ agree: under step 3 their two maps to $Y$ are related by the restriction of $\\alpha$, and the supplied effective isomorphism identifies this restriction with the canonical datum of $Z_i$. Since $V_i\\to Z_i$ is the base change of the fpqc cover $q_i$, step 2 glues this section to $c_i\\in X(Z_i)$. Restriction along maps into $Z_i$ gives a natural map $h_{Z_i}\\to X$, and together with $Z_i\\to T_i$ a map $d_i:h_{Z_i}\\to X\\times_Sh_{T_i}$. After base change by $S'\\to T_i$, its source is $U_i$ and its target is $Y$ by step 3; the map is the given inclusion. The comparison of the two local sections used here follows from the stated compatibility of the effective isomorphism with the restricted datum, not from effectivity of a general fpqc scheme datum.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023V (definition-descent-datum); Tag 023Q, applied through the fpqc sheaf constructed in step 2"
+   }
+  },
+  {
+   "text": "Fix a scheme $T\\to T_i$ and $a\\in X(T)$. On $T_i'=T\\times_{T_i}S'$, step 3 turns $a$ into a map $y:T_i'\\to Y$. Let $W'=y^{-1}(U_i)$, an open subscheme by base change of open immersions. On $T_i'\\times_TT_i'$ the two maps to $Y$ are related by $\\alpha$, and the two maps to $S'$ have equal image in $T_i$. Stability of $U_i$ under this restricted datum therefore makes the two inverse-image opens of $W'$ equal. Apply descent of compatible opens to the fpqc covering $T_i'\\to T$: there is a unique open $W\\subseteq T$ with inverse image $W'$. This construction commutes with every $T_0\\to T$: the inverse image of $W$ has the required inverse image on $T_0\\times_{T_i}S'$, so uniqueness of open descent identifies it with the open constructed for $T_0$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0 (lemma-open-fpqc-covering), compatible inverse images and uniqueness; Tag 01JY (schemes-lemma-base-change-immersion)"
+   }
+  },
+  {
+   "text": "The open $W$ in step 5 represents $h_T\\times_{X\\times_Sh_{T_i}}h_{Z_i}$. To check this, let $b:A\\to T$ be any test. Over the fpqc cover $A'=A\\times_{T_i}S'\\to A$, step 4 identifies a lift to $Z_i$ agreeing with $a$ with a factorization of $y|_{A'}$ through $U_i$. Such a factorization exists exactly when $b|_{A'}$ lands in $W'$, and is unique because an open immersion is a monomorphism. By uniqueness of open descent this is equivalent to $b$ landing in $W$, and the open-factorization lemma gives the unique map $A\\to W$. When it exists, the resulting local map $A'\\to U_i\\to Z_i$ has equal restrictions on $A'\\times_AA'$: the restricted datum on $U_i$ is the canonical one from $Z_i$. Representable fpqc descent gives a unique $A\\to Z_i$, over $T_i$. Its image under $d_i$ is $(a|_A,A\\to T_i)$, since this equality holds on $A'$ and $X$ is an fpqc sheaf. Conversely any lift has the specified local factorization. This proves the natural representing bijection and shows $d_i$ is representable by open immersions, with the required pullback $U_i\\hookrightarrow Y$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03N0 (lemma-open-fpqc-covering), 023Q (lemma-fpqc-universal-effective-epimorphisms), 023V (definition-descent-datum)"
+   }
+  },
+  {
+   "text": "Now fix any $S$-scheme $T$ and $a\\in X(T)$, without a map to $T_i$. Put $B_i=T\\times_ST_i$. Apply steps 5 and 6 to $B_i\\to T_i$ and $a|_{B_i}$, obtaining an open $P_i\\subseteq B_i$. The fibre-product identity gives $h_T\\times_Xh_{Z_i}\\simeq h_{P_i}$: a section on either side specifies a map to $T$ and a map to $Z_i$ with equal images in $X$, and the latter also specifies the required map to $T_i$. The projection $P_i\\to T$ is the open inclusion $P_i\\hookrightarrow B_i$ followed by the base change $B_i\\to T$ of $r_i$. Open immersions are etale, etale maps are stable under base change, and their composites are etale. Hence every $h_{Z_i}\\to X$ is representable etale, as asserted.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GP (lemma-open-immersion-etale), 02GO (lemma-base-change-etale), and 02GN (lemma-composition-etale)"
+   }
+  },
+  {
+   "text": "Let $Z=\\coprod_iZ_i$ and let $c:h_Z\\to X$ be the section whose restrictions are the $c_i$. It exists because the summand inclusions are open immersions, hence etale, hence flat and locally of finite presentation, and they are jointly surjective; so they form an fppf covering of $Z$ with empty pairwise overlaps, and $X$ is an fppf sheaf by step 2. For the test $(T,a)$ of step 7 put $P=\\coprod_iP_i$. A morphism $A\\to Z$ specifies the inverse images $A_i$ of its summands, a disjoint clopen partition of $A$, and maps $A_i\\to Z_i$. The equality of its image in $X(A)$ with $a|_A$ is equivalent, by the sheaf condition on this open cover, to the corresponding equalities on every $A_i$. Step 7 identifies these with maps $A_i\\to P_i$ over $T$. Conversely such a partition and maps glue uniquely to $A\\to P$, since the summands cover $P$. This gives $h_T\\times_Xh_Z\\simeq h_P$. Thus $c$ is representable. Its base change $P\\to T$ is etale by locality on the source applied to its summands $P_i\\to T$. All coproducts used are among those allowed in the statement.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Schemes, coproduct construction; Tag 02GJ (morphisms-lemma-etale-characterize); Tag 023Q supplies the Zariski sheaf condition as in step 2"
+   }
+  },
+  {
+   "text": "The base change $P\\to T$ is surjective. Indeed $T'=T\\times_SS'\\to T$ is an fpqc cover. Under step 3 the pullback of $a$ is a map $y:T'\\to Y$, and the opens $A_i=y^{-1}(U_i)$ cover $T'$. On $A_i$, the effective isomorphism supplies a map $A_i\\to Z_i$ whose image in $X$ is $a|_{A_i}$ by step 4. Hence $A_i\\to T$ factors through the representing scheme $P_i$ of step 7. For every point of $T$, choose a point above it in $T'$ and then an $A_i$ containing that point; its image in $P_i\\subset P$ lies above the original point. This proves surjectivity of every scheme base change of $c$. The argument uses the covering of all of $Y$ by the supplied $U_i$, not a covering of $S$ by the images of the $T_i$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0 (lemma-open-fpqc-covering), applied to the opens in steps 5-6; surjectivity checked on scheme tests"
+   }
+  },
+  {
+   "text": "The fppf sheaf $X$ of step 2 now has the scheme map $c:h_Z\\to X$ whose every scheme base change is the surjective etale scheme map $P\\to T$ of steps 8-9. An etale map is flat and locally of finite presentation by definition. Regard $h_Z$ and each $h_P$ as algebraic spaces via their representable sheaves. The fppf atlas bootstrap therefore applies and proves that $X$ is an algebraic space; its hypotheses do not require a pre-existing representable diagonal. The map $c$ is the required surjective etale scheme atlas. Step 7 gives the individual representable etale maps, step 6 gives their open maps over $T_i$, and step 3 gives the base-change isomorphism inducing $\\alpha$. No additional effectivity theorem is used. If the index set is empty, the cover forces $Y$ empty, and the same construction has empty atlas and empty descended space.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-fppf-space-atlas-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "bootstrap.tex Tag 04S6 (theorem-final-bootstrap), condition (4), through the existing condition-(3) node; spaces.tex Tag 025Y (definition-algebraic-space)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-covering-base-change",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-local-on-source",
+  "def-weil-etale-morphism",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-fppf-space-atlas-bootstrap",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Explicit equalizer and chart construction using Tags 023V, 023Q and 03N0, assembled with bootstrap.tex Tag 04S6. This local-chart criterion is an agent proof, not a quoted general fpqc effectivity theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc scheme descent datum is effective in algebraic spaces if it has a covering by open subschemes that are effective over etale neighbourhoods of the base",
+   "results": "{\"t\": \"2026-10-24T10:31:08Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc scheme descent datum is effective in algebraic spaces if it has a covering by open subschemes that are effective over etale neighbourhoods of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.EffectivePresentation\", \"CategoryTheory.Functor.EffectivelyEnough.presentation\", \"CategoryTheory.Functor.instEffectiveEpiEffectiveEpiOver\", \"CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced\", \"CategoryTheory.Functor.EffectivePresentation.effectiveEpi\", \"CategoryTheory.precoherentEffectiveEpiFamilyCompEffectiveEpis\", \"CategoryTheory.Functor.effectiveEpiOverObj\", \"CategoryTheory.Functor.effectiveEpiOver\"], \"digest\": \"dc9c8e3ca002c173\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct an etale atlas for the equalizer functor of an fpqc descent datum from effective open charts over etale base neighbourhoods",
+   "results": "{\"t\": \"2026-10-24T10:32:14Z\", \"tool\": \"leanfinder\", \"query\": \"Construct an etale atlas for the equalizer functor of an fpqc descent datum from effective open charts over etale base neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\"], \"digest\": \"6c656cc69b314ea9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentDatum\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T10:32:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"DescentDatum\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "effective.*descent|descent.*effective|DescentDatum",
+   "results": "{\"t\": \"2026-10-24T10:32:13Z\", \"tool\": \"grep\", \"query\": \"effective.*descent|descent.*effective|DescentDatum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fpqc descent datum with effective open subschemes over etale neighbourhoods gives an algebraic space atlas",
+   "results": "{\"t\": \"2026-10-24T10:32:14Z\", \"tool\": \"leansearch\", \"query\": \"An fpqc descent datum with effective open subschemes over etale neighbourhoods gives an algebraic space atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.openCover\", \"ChartedSpace.atlas\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.f_open\", \"atlas\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Scheme.affineCover\"], \"digest\": \"c1f5697e8cc336b6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "effective.*descent|descent.*effective|DescentDatum",
+   "results": "{\"t\": \"2026-10-24T10:59:31Z\", \"tool\": \"grep\", \"query\": \"effective.*descent|descent.*effective|DescentDatum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract effective presentations, scheme Zariski gluing or limit charts; none states algebraic-space effectivity from the supplied etale-base open charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an algebraic space from an fpqc scheme descent datum using effective open charts over etale neighbourhoods",
+   "results": "{\"t\": \"2026-10-24T10:59:31Z\", \"tool\": \"leansearch\", \"query\": \"Construct an algebraic space from an fpqc scheme descent datum using effective open charts over etale neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.mk\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.GlueData.isoCarrier\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.openCover\"], \"digest\": \"5319d104e6d8fd04\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract effective presentations, scheme Zariski gluing or limit charts; none states algebraic-space effectivity from the supplied etale-base open charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentDatum\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T10:59:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"DescentDatum\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract effective presentations, scheme Zariski gluing or limit charts; none states algebraic-space effectivity from the supplied etale-base open charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc scheme descent datum with effective invariant open charts over etale base neighbourhoods is effective as an algebraic space",
+   "results": "{\"t\": \"2026-10-24T10:59:37Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc scheme descent datum with effective invariant open charts over etale base neighbourhoods is effective as an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.EffectivePresentation.effectiveEpi\", \"CategoryTheory.Functor.EffectivelyEnough.presentation\", \"CategoryTheory.Functor.instEffectiveEpiEffectiveEpiOver\", \"CategoryTheory.Functor.EffectivePresentation\", \"CategoryTheory.Functor.effectiveEpiOverObj\", \"CategoryTheory.Functor.effectiveEpiOver\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.precoherentEffectiveEpiFamilyCompEffectiveEpis\"], \"digest\": \"f0ae82b0782540b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract effective presentations, scheme Zariski gluing or limit charts; none states algebraic-space effectivity from the supplied etale-base open charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equalizer sheaf of an fpqc descent datum admits a representable etale atlas formed from descended open subschemes",
+   "results": "{\"t\": \"2026-10-24T11:00:11Z\", \"tool\": \"leanfinder\", \"query\": \"The equalizer sheaf of an fpqc descent datum admits a representable etale atlas formed from descended open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\"], \"digest\": \"06e8826258a8b9eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract effective presentations, scheme Zariski gluing or limit charts; none states algebraic-space effectivity from the supplied etale-base open charts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+  "date": "2026-10-24",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), strict-local trait descent prerequisite inherited through the recorded via chain: construct algebraic-space effectivity from the supplied effective opens over etale base neighbourhoods.",
+   "via": [
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-effective-open-chart-descent",
+  "worker": "stage1",
+  "summary": "Constructed the equalizer fpqc sheaf and its explicit pullback isomorphism, descended the supplied chart maps and their inverse-image open loci, and checked representability, etaleness and surjectivity before applying the existing atlas bootstrap. No new nodes: every non-elementary input already has a DAG node. Statement unchanged.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (of det-thm-sf-ctf-stability-direct-images), paragraph (3); inherited strict-local descent prerequisite. The current blueprint has no separate effective-chart criterion; searched effective open, descent open and 03N0. Ancestor tool returns None, as already recorded on this inherited non-blueprint item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Generic Fpqc descent of compatible open subschemes input used exactly as its statement in the indicated proof step; the unit has no alternative primitive for this sheaf/open descent or etale scheme calculation. No six-functor route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-subscheme-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NX-e35842788",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-e35842788 (reviewer sub-agent of L); spot-checked: Read the item in full, all 10 steps and the full statement of every cited node; there are no new nodes. Checked against Stacks 04S6 (3)/(4), 03N0, 023Q, 022D(3) and 022C. The statement is true and not weakened: I tested I empty, p=id, T_i=S and empty U_i. No duplicate exists; the candidates read were lem-a1-separated-lqf-fpqc-effective-descent, lem-sfb-etale-smooth-atlas-fppf-descent, lem-sfb-space-qc-subtrusive-etale-descent and lem-trf-fppf-scheme-data-sheaf-gluing. I checked both inverses of the step-3 equalizer calculation and the induced datum. Step 4's overlap equality is exactly the restricted-datum compatibility and needs the stability of U_i. Step 5 uses open descent along T x_{T_i} S'. In step 6 the representing open is correct (mono, then descent to Z_i). Step 7 uses B_i = T x_S T_i, and P_i -> T is étale. Step 9 gets surjectivity from the cover of Y. Step 10 meets the bootstrap hypotheses. Batch-5: lem-trf-fppf-covering-is-fpqc (general 022C topology fact), def-trf-scheme-algebraic-space (a definition) and lem-sfb-fppf-space-atlas-bootstrap (whose closure reaches only def-trf-algebraic-space) are outside the trace-formula and Poincaré-duality assumptions; all accepted. I accept the declared tool use of lem-weil-pbc-open-subscheme-fpqc-descent (generic 03N0). FIX: step 8 glued c only by 'X is a Zariski sheaf', with no citation. It now says the summand open immersions are étale, hence flat and lfp, and jointly surjective, so they form an fppf covering and step 2 applies. Added lem-weil-pbc-etale-composition-cancellation, def-weil-etale-morphism and def-pc-fppf-site to the step's uses, and def-pc-fppf-site to proof_deps. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleEffectiveOpenChartDescent",
+  "declaration": "AlgebraicGeometry.EtaleEffectiveOpenChartDescent.exists_algebraicSpace_of_effective_open_charts",
+  "declarations": [
+   "AlgebraicGeometry.EtaleEffectiveOpenChartDescent.projection",
+   "AlgebraicGeometry.EtaleEffectiveOpenChartDescent.sectionMap",
+   "AlgebraicGeometry.EtaleEffectiveOpenChartDescent.relativeChartMap",
+   "AlgebraicGeometry.EtaleEffectiveOpenChartDescent.exists_algebraicSpace_of_effective_open_charts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleEffectiveOpenChartDescent.lean",
+  "statement": "theorem exists_algebraicSpace_of_effective_open_charts {S' S : Scheme.{u}} (p : S' ⟶ S) [Flat p] [QuasiCompact p] [Surjective p] (V : Over S') [IsSeparated V.hom] (D : Over.DescentDatum p V) {I : Type u} (U : I → V.left.Opens) (hcover : iSup U = ⊤) (T : I → Scheme.{u}) (rBase : ∀ i : I, T i ⟶ S) (q : ∀ i : I, S' ⟶ T i) (hp : ∀ i : I, q i ≫ rBase i = p) (hq : ∀ i : I, Flat (q i) ∧ QuasiCompact (q i) ∧ Surjective (q i)) (hr : ∀ i : I, Etale (rBase i)) (Z : ∀ i : I, Over (T i)) (b : ∀ i : I, (U i).toScheme ⟶ (Z i).left) (hpb : ∀ i : I, IsPullback (b i) ((U i).ι ≫ V.hom) (Z i).hom (q i)) (hchart : ∀ (i : I) (A : Scheme.{u}) (s₀ s₁ : A ⟶ S') (h : s₀ ≫ q i = s₁ ≫ q i) (a : Over.mk s₀ ⟶ V) (u₀ : A ⟶ (U i).toScheme), u₀ ≫ (U i).ι = a.left → ∃ u₁ : A ⟶ (U i).toScheme, u₁ ≫ (U i).ι = (D.transport s₀ s₁ (by rw [← hp i, ← Category.assoc, ← Category.assoc, h]) a).left ∧ u₁ ≫ b i = u₀ ≫ b i) : ∃ (X : AlgebraicSpace S) (r : ((Over.map p).op ⋙ X.obj.obj).RepresentableBy V), (∀ (A : Scheme.{u}) (s₀ s₁ : A ⟶ S') (h : s₀ ≫ p = s₁ ≫ p) (a : Over.mk s₀ ⟶ V), r.overDescentDatum.transport s₀ s₁ h a = D.transport s₀ s₁ h a) ∧ (∀ W : Over S, Function.Injective (sectionMap p V X.obj.obj r W) ∧ ∀ y : (Over.pullback p).obj W ⟶ V, (∃ x : X.obj.obj.obj (op W), sectionMap p V X.obj.obj r W x = y) ↔ ∀ (A : Scheme.{u}) (t : A ⟶ W.left) (s₀ s₁ : A ⟶ S') (h₀ : t ≫ W.hom = s₀ ≫ p) (h₁ : t ≫ W.hom = s₁ ≫ p), D.transport s₀ s₁ (h₀.symm.trans h₁) (Over.homMk (U := Over.mk s₀) (V := (Over.pullback p).obj W) (pullback.lift t s₀ h₀) (pullback.lift_snd t s₀ h₀) ≫ y) = Over.homMk (U := Over.mk s₁) (V := (Over.pullback p).obj W) (pullback.lift t s₁ h₁) (pullback.lift_snd t s₁ h₁) ≫ y) ∧ ∃ (c : ∀ i : I, yoneda.obj (Over.mk ((Z i).hom ≫ rBase i)) ⟶ X.obj.obj) (atlas : yoneda.obj (Over.mk (Sigma.desc (fun i : I ↦ (Z i).hom ≫ rBase i))) ⟶ X.obj.obj), AlgebraicSpace.IsEtale atlas ∧ AlgebraicSpace.IsSurjective atlas ∧ (∀ i : I, yoneda.map (Over.homMk (Sigma.ι (fun i : I ↦ (Z i).left) i) (Sigma.ι_desc (fun i : I ↦ (Z i).hom ≫ rBase i) i)) ≫ atlas = c i) ∧ (∀ i : I, AlgebraicSpace.IsEtale (c i)) ∧ (∀ i : I, AlgebraicSpace.IsRepresentableWith (fun _ _ f ↦ IsOpenImmersion f.left) (relativeChartMap (rBase i) (Z i) X.obj.obj (c i))) ∧ (∀ i : I, IsPullback (yoneda.map (Over.homMk (U := Over.mk ((U i).ι ≫ V.hom ≫ p)) (V := Over.mk ((Z i).hom ≫ rBase i)) (b i) (by simpa only [Over.mk_hom, Category.assoc, hp] using congrArg (fun f ↦ f ≫ rBase i) (hpb i).w))) (yoneda.map (Over.homMk (U := Over.mk ((U i).ι ≫ V.hom ≫ p)) (V := (Over.map p).obj V) (U i).ι rfl)) (relativeChartMap (rBase i) (Z i) X.obj.obj (c i)) (prod.lift (projection p V X.obj.obj r) (yoneda.map (Over.homMk (U := (Over.map p).obj V) (V := Over.mk (rBase i)) (V.hom ≫ q i) (by simp only [Over.mk_hom, Over.map_obj_hom, Category.assoc, hp])))))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existential algebraic space is characterized by the canonical injective restriction-to-cover map with image exactly the equalizer of alpha. RepresentableBy supplies the base-change isomorphism, retaining its induced transport. The supplied chart isomorphisms are encoded by IsPullback squares and their transport-invariant projections; the conclusion retains the corresponding relative open maps, chart pullbacks and actual coproduct atlas. Three explicit canonical-map helpers belong to this criterion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6ecac0a6",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read the node, all 11 stmt_dep records, AlgebraicSpace.lean and Over/DescentDatum.lean (side-live), the module and report. Hypotheses match exactly: hpb is the pullback-square form of the iso Z_i×_{T_i}S'≅U_i; hchart is exactly stability of U_i plus agreement of the restricted datum with the one from Z_i (the transported point lies over s₁, so u₁ is (z,s₁)), no stronger. All conclusions present: algebraic space; equalizer via injective sectionMap whose image is the matching sections; X×_S S'≅Y inducing α via RepresentableBy plus equality of overDescentDatum transport; c_i étale; étale surjective atlas on the Sigma.desc coproduct restricting to c_i; Z_i→X×_S T_i representable by open immersions; IsPullback square giving U_i↪Y. Edge cases checked: empty I, empty U_i, p=id, T_i=S, empty S or S'. Node changes only by its lean record; statement field verbatim; only sorry is the main theorem; helpers non-hollow with source/blueprint docstrings. No compile (nothing changed). Parallel NS delivery 30c7d86b2 of the same item not yet landed; the later lander must rebind."
+ }
+}

@@ -1,0 +1,414 @@
+{
+ "id": "lem-sfb-normal-extension-torsor-reduction",
+ "kind": "statement",
+ "title": "Quotient and reduction of an affine group torsor through a normal subgroup",
+ "statement": "Let $k$ be a field [def-weil-field] and let $N,G,Q$ be affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism]. Let $i:N\\hookrightarrow G$ be a closed normal subgroup [def-sc-group-scheme-subgroup] and let $q:G\\to Q$ be a faithfully flat surjective homomorphism of finite presentation with scheme-theoretic kernel $i(N)$ [def-weil-flat-morphism, def-weil-surjective-morphism, def-sbc-locally-finite-presentation]. Assume that $q$ identifies $Q$ with the fppf sheaf quotient $G/N$. For a $k$-scheme $S$ [def-pc-scheme] and any represented right $G$-torsor $P\\to S$, form the fppf sheaf quotient $P/N$ for the restricted right $N$-action; here quotient means sheafification of the orbit presheaf on the big fppf site [def-pc-fppf-site, def-weil-pbc-sheafification]. A represented right $L$-torsor $Y\\to B$ means a faithfully flat surjective map of finite presentation with a right $L$-action and isomorphism $Y\\times_k L\\simeq Y\\times_BY$, $(y,l)\\mapsto(y,yl)$ [def-pc-fibre-product]. Then $P/N$ is represented by a scheme $R$ over $S$, the induced $R\\to S$ with its right $Q$-action is a $Q$-torsor, and the quotient map $P\\to R$ is an $N$-torsor. For every $S$-section $a:S\\to R$, the scheme $P_a=P\\times_{R,a}S$ is an $N$-torsor over $S$, and any section $b:S\\to P_a$ composes to a section $e:S\\to P$. All these assertions are compatible with base change $S'\\to S$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-extracted normal-extension reduction used in Proposition 16.55, printed p.344; Example 2.68 and Proposition 2.69, printed p.60; affine faithfully flat descent in Appendix A.80--A.81, printed pp.584--585. Arbitrary-base form of the standard torsor quotient construction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-pc-fibre-product",
+  "def-sfb-split-solvable-right-torsors",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=P$ with cover $p:U\\to S$. It is fppf by the torsor hypotheses and [def-pc-fppf-site], hence fpqc by [lem-trf-fppf-covering-is-fpqc]. For any $T\\to S$ carrying a point $u\\in P(T)$, the map $G_T\\to P_T$, $h\\mapsto uh$, is an isomorphism: the inverse sends $x$ to the second coordinate of the inverse of the given torsor isomorphism at $(u,x)$. In particular the diagonal point over $U=P$ gives this trivialization over our cover. Pullbacks of $p$ remain flat, surjective and finitely presented by [lem-weil-pbc-flat-morphism-base-change], [lem-weil-pbc-surjective-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3); thus they too are fppf covers. Represented functors are sheaves on these covers by [lem-weil-pbc-fpqc-representable-descent] and the fppf-to-fpqc implication.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 2.66 and Example 2.67, printed p.60; arbitrary-base covering facts: Stacks Tags 021L, 022C, 01U9, 01S1, 01TS, 023Q"
+   }
+  },
+  {
+   "text": "The affine scheme $Q$ is flat over $k$ by [lem-pc-flat-field]. It is finitely presented over $k$: the field has just the ideals $0,k$, so its spectrum is locally Noetherian; finite type gives local finite presentation by [pqf-lem-lft-fp-locnoeth], and affineness supplies quasi-compactness and quasi-separatedness by [lem-weil-pbc-affine-morphism-permanence](3). The identity section makes $Q$ nonempty, so $Q\\to\\operatorname{Spec}k$ is surjective. Consequently every projection $Q_T\\to T$ is flat, surjective and finitely presented by the three base-change results of step 1. It is affine by [lem-weil-pbc-affine-morphism-permanence](1). The map $q$ is affine as well: a morphism between affine schemes is the spectrum morphism of its ring map, and over an affine open of its target it is the relative spectrum of the restricted algebra. Its base changes are therefore affine by the same result.",
+   "uses": [
+    "lem-pc-flat-field",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.69 and Appendix A.80, printed pp.60,584; Stacks Tags 01S7, 01SD, 01TX, 01TS, 01U9, 01S1"
+   }
+  },
+  {
+   "text": "The map $G\\times_kN\\to G\\times_QG$, $(h,n)\\mapsto(h,hi(n))$, has inverse $(h,h')\\mapsto(h,h^{-1}h')$. The second coordinate factors through $N=\\ker q$, since $q(h)^{-1}q(h')=1$; this is the fibre-product definition of kernel in [def-sc-group-scheme]. These two formulas are inverse by the group laws and the kernel identification. They are scheme morphisms by that universal property, or equivalently by [lem-galois-yoneda-fully-faithful]. Thus $q$ with its right $N$-action is an $N$-torsor. This calculation uses the scheme-theoretic kernel, not an assertion that $G(T)\\to Q(T)$ is surjective.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 2.68, printed p.60, with the inverse requested in Exercise 2-1 written out"
+   }
+  },
+  {
+   "text": "On $U\\times_SU$, let $u_0,u_1$ be the two tautological points of $P$ and let $g_{01}$ be the unique morphism to $G$ with $u_1=u_0g_{01}$, obtained from the inverse torsor isomorphism. On triple overlaps uniqueness gives $g_{02}=g_{01}g_{12}$. Give $Q_U\\to U$ the transition $z\\mapsto q(g_{01})^{-1}z$ from the $u_0$ chart to the $u_1$ chart. Its inverse is left multiplication by $q(g_{01})$, and $q(g_{12})^{-1}q(g_{01})^{-1}=q(g_{02})^{-1}$ proves the cocycle of [def-pd-descent-datum]. Since $Q_U\\to U$ is affine and $U\\to S$ is fpqc, [lem-galois-fpqc-affine-descent-effective] gives a scheme $R/S$ with $R_U\\simeq Q_U$ and exactly these transitions. The local maps $P_U\\to Q_U$, $u h\\mapsto q(h)$, are compatible: coordinates change from $h$ to $g_{01}^{-1}h$. They descend to $r:P\\to R$ by [lem-weil-pbc-fpqc-representable-descent]. Right multiplication on $Q_U$ commutes with all these left translations, so it descends along the pullback cover of $R\\times_kQ$ to a right $Q$-action. Associativity and the unit law descend as equalities by uniqueness in the same sheaf theorem.",
+   "uses": [
+    "def-pd-descent-datum",
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.81, printed p.585, affine descent applied to the explicit quotient transition datum; Stacks Tags 023V, 0245, 023Q"
+   }
+  },
+  {
+   "text": "The map $r$ is invariant under $N$, as is seen on $U$ from $q(hi(n))=q(h)$; equality descends by [lem-weil-pbc-fpqc-representable-descent]. Hence it defines a natural map $v:T\\mapsto P(T)/N(T)\\to h_R$. Check the two conditions of [lem-cbc-set-presheaf-sheafification-local-bijection] on the chosen big fppf site. For $a:T\\to R$, first pass to the fppf cover $T\\times_SU\\to T$. There $a$ is a $Q$-coordinate $z$, and the pullback of the fppf map $q:G\\to Q$ along $z$ is a further fppf cover on which $z$ lifts to $h$. The point $uh$ lifts $a$. For injectivity, take $x,x'\\in P(T)$ with $r(x)=r(x')$. The original torsor isomorphism gives a unique $g\\in G(T)$ with $x'=xg$. On $T\\times_SU$, writing $x=uh$ gives $q(h)=q(hg)$, hence $q(g)=1$. This equality holds on $T$ by representable descent. The scheme-theoretic kernel then gives $g=i(n)$ for a unique $n\\in N(T)$, so $x,x'$ already have the same orbit. The local-bijection theorem therefore identifies the sheafification of the orbit presheaf with $h_R$. The universal property in [def-weil-pbc-sheafification] makes this identification the one induced by $r$. Thus $R$ represents precisely the quotient required in the statement.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-sc-group-scheme",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent completion of the normal-extension argument behind Proposition 16.55, printed p.344; local-bijection criterion: Mathlib/CategoryTheory/Sites/LocallyBijective.lean:114--116 and :160--161, with Sites/Localization.lean:80--82 (source of lem-cbc-set-presheaf-sheafification-local-bijection); not Stacks Tag 00WJ, which concerns exactness."
+   }
+  },
+  {
+   "text": "Over $U$, the action map $R\\times_kQ\\to R\\times_SR$ is $(z,t)\\mapsto(z,zt)$, with inverse $(z,z')\\mapsto(z,z^{-1}z')$. These local inverse maps agree on overlaps: replacing both $z,z'$ by $az,az'$ leaves $z^{-1}z'$ unchanged. Representable descent [lem-weil-pbc-fpqc-representable-descent] glues the inverse, and its two inverse identities hold globally by uniqueness there. The map $R\\to S$ is affine, flat and locally of finite presentation by [lem-weil-pbc-fpqc-descend-affine], [lem-weil-pbc-fpqc-descend-flat] and [lem-weil-pbc-fpqc-descend-locally-finite-presentation], applied to its model $Q_U\\to U$ on the fpqc cover $U\\to S$. Affineness gives quasi-compactness and quasi-separatedness by [lem-weil-pbc-affine-morphism-permanence](3), hence finite presentation. Finally $R\\to S$ is surjective: for any $s$, take $u\\in U$ above it, and the identity point in the fibre of $Q_U$ over $u$ maps to a point of $R$ above $s$. These prove that $R\\to S$ is a $Q$-torsor.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.69 and Appendix A.80, printed pp.60,584; Stacks Tags 023Q, 02L5, 02L2, 02KY, 01S7"
+   }
+  },
+  {
+   "text": "The pullback of $r:P\\to R$ along the fppf cover $R_U\\to R$ is $q_U:G_U\\to Q_U$. Indeed $P_U\\simeq G_U$ and $R_U\\simeq Q_U$ identify $r_U$ with $q_U$ by its construction. Thus this pullback is affine, flat, surjective and finitely presented (steps 1--2). The three descent results of step 6 show that $r$ is affine, flat and locally of finite presentation, and affine permanence again gives finite presentation. Surjectivity descends directly on points: choose a point of the surjective cover $R_U\\to R$ over any given point of $R$, then a point above it under the surjective $q_U$. The right $N$-action preserves $r$ by step 5. The inverse of $P\\times_kN\\to P\\times_RP$ sends $(x,x')$ to $(x,n)$, where the inverse original $G$-torsor map gives $x'=xg$ and the equality $r(x)=r(x')$ forces $q(g)=1$ exactly as in step 5. Factor through the scheme-theoretic kernel to get $n$; these are morphisms by the kernel universal property, and the formulas are inverse. This proves that $r$ is an $N$-torsor.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 2.68, Proposition 2.69 and Appendix A.80, printed pp.60,584; Stacks Tags 02L5, 02L2, 02KY, 01S7"
+   }
+  },
+  {
+   "text": "For a section $a:S\\to R$, form $P_a=P\\times_{R,a}S$. Its structure map is the base change of $r$, so is flat, surjective and finitely presented by [lem-weil-pbc-flat-morphism-base-change], [lem-weil-pbc-surjective-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). The base-changed torsor isomorphism identifies $P_a\\times_kN$ with $P_a\\times_SP_a$ by the fibre-product universal property [def-pc-fibre-product]; hence $P_a$ is an $N$-torsor. If $b:S\\to P_a$ is a section, $e=\\operatorname{pr}_P b$ satisfies $p e=\\operatorname{id}_S$ because $P_a\\to S$ is its structure map. Thus it is the required section of $P$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.55, printed p.344, normal-extension induction; base change of Definition 2.66"
+   }
+  },
+  {
+   "text": "For any $S'\\to S$, the pulled-back cover $U'=U\\times_SS'\\to S'$ is fppf (step 1). On it the models are still $G_{U'}\\xrightarrow{q_{U'}}Q_{U'}$ and the transition is still $z\\mapsto q(g_{01}|_{U'\\times_{S'}U'})^{-1}z$. The local-lift and orbit-equality test of step 5 therefore identifies $(P\\times_SS')/N$ with $h_{R\\times_SS'}$. This is the canonical comparison induced by $r\\times_SS'$, since both maps send the orbit of $x$ to its quotient point. Local actions and quotient maps agree in these coordinates, so they agree globally by [lem-weil-pbc-fpqc-representable-descent]. The fibre-product universal property [def-pc-fibre-product] gives $(P_a)\\times_SS'\\simeq(P\\times_SS')\\times_{R\\times_SS',a'}S'$; both projections of this isomorphism are the evident pulled-back projections. It consequently identifies the actions, sections and composites $\\operatorname{pr}_P b$ after pullback. Identity and iterated base changes have the same projections, so uniqueness in the universal property gives their coherence. This proves all base-change assertions.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent arbitrary-base completion of the torsor reduction used in Proposition 16.55; functorial pullback of the explicit datum of Appendix A.81"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pc-flat-field",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-sc-group-scheme",
+  "lem-galois-yoneda-fully-faithful",
+  "def-pd-descent-datum",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Normal-extension induction omitted in Proposition 16.55, printed p.344; explicit arbitrary-base descent proof using Example 2.68, Proposition 2.69 and Appendix A.80--A.81, with Stacks Tags 0245 and 023Q supplying unrestricted scheme descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an exact sequence of affine group schemes a torsor modulo the normal subgroup is a quotient group torsor and its section lifts to a kernel torsor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"GroupExtension.Section.exists_eq_mul_inl\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : Group N] [inst_1 : Group G] {E : Type u_3} [inst_2 : Group E]\\n  {S : GroupExtension N E G} (σ σ' : S.Section) (g : G), ∃ n, σ g = σ' g * S.inl n\", \"doc\": \"For any two sections $\\\\sigma, \\\\sigma' : G \\\\to E$ of a group extension $1 \\\\to N \\\\xrightarrow{\\\\mathrm{inl}} E \\\\to G \\\\to 1$, there exists an element $n \\\\in N$ such that $\\\\sigma(g) = \\\\sigma'(g) \\\\cdot \\\\mat\"}\n  {\"name\": \"GroupExtension.Section.exists_mul_eq_mul_mul_inl\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : Group N] [inst_1 : Group G] {E : Type u_3} [inst_2 : Group E]\\n  {S : GroupExtension N E G} (σ : S.Section) (g₁ g₂ : G), ∃ n, σ (g₁ * g₂) = σ g₁ * σ g₂ * S.inl n\", \"doc\": \"For any elements $g_1, g_2 \\\\in G$ and a section $\\\\sigma: G \\\\to E$ of the group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$, there exists an element $n \\\\in N$ such that $\\\\sigma(g_1g_2) = \\\\sigma(g_1)\\\\sigma(g_\"}\n  {\"name\": \"GroupExtension.Section.mul_inv_mul_mul_mem_range_inl\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : Group N] [inst_1 : Group G] {E : Type u_3} [inst_2 : Group E]\\n  {S : GroupExtension N E G} (σ : S.Section) (g₁ g₂ : G), (σ (g₁ * g₂))⁻¹ * σ g₁ * σ g₂ ∈ S.inl.range\", \"doc\": \"For any elements $g_1, g_2 \\\\in G$, the product $(\\\\sigma(g_1g_2))^{-1} \\\\cdot \\\\sigma(g_1) \\\\cdot \\\\sigma(g_2)$ lies in the image of the inclusion homomorphism $N \\\\to E$ associated with the group extension\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"GroupExtension.Section.mul_mul_mul_inv_mem_range_inl\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : Group N] [inst_1 : Group G] {E : Type u_3} [inst_2 : Group E]\\n  {S : GroupExtension N E G} (σ : S.Section) (g₁ g₂ : G), σ g₁ * σ g₂ * (σ (g₁ * g₂))⁻¹ ∈ S.inl.range\", \"doc\": \"For any elements $ g_1, g_2 \\\\in G $, the product $ \\\\sigma(g_1) \\\\sigma(g_2) (\\\\sigma(g_1 g_2))^{-1} $ lies in the normal subgroup $ N $ of the group extension $ 1 \\\\to N \\\\to E \\\\to G \\\\to 1 $, where $ \\\\sig\"}\n  {\"name\": \"GroupExtension.Section.mul_inv_mem_range_inl\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : Group N] [inst_1 : Group G] {E : Type u_3} [inst_2 : Group E]\\n  {S : GroupExtension N E G} (σ σ' : S.Section) (g : G), σ g * (σ' g)⁻¹ ∈ S.inl.range\", \"doc\": \"For any element $ g \\\\in G $, the product $ \\\\sigma(g) \\\\cdot (\\\\sigma'(g))^{-1} $ lies in the normal subgroup $ N $ of the group extension $ 1 \\\\to N \\\\to E \\\\to G \\\\to 1 $.\"}\n  {\"name\": \"AddGroupExtension.Section.exists_eq_add_inl\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : AddGroup N] [inst_1 : AddGroup G] {E : Type u_3} [inst_2 : AddGroup E]\\n  {S : AddGroupExtension N E G} (σ σ' : S.Section) (g : G), ∃ n, σ g = σ' g + S.inl n\", \"doc\": \"For any two sections $\\\\sigma, \\\\sigma' : G \\\\to E$ of an additive group extension $0 \\\\to N \\\\xrightarrow{\\\\text{inl}} E \\\\to G \\\\to 0$, and for every $g \\\\in G$, there exists $n \\\\in N$ such that $\\\\sigma(g) =\"}\n  {\"name\": \"GroupExtension.quotientKerRightHomEquivRight\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : Group N] →\\n      [inst_1 : Group G] → {E : Type u_3} → [inst_2 : Group E] → (S : GroupExtension N E G) → E ⧸ S.rightHom.ker ≃* G\", \"doc\": \"The quotient group $ E / \\\\ker(\\\\phi) $, where $ \\\\phi: E \\\\to G $ is the surjective homomorphism in the group extension $ 1 \\\\to N \\\\to E \\\\to G \\\\to 1 $, is isomorphic to $ G $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-extension sections, topological covering torsors and factoring a scheme map through a closed subscheme do not give this fppf quotient and reduction of structure group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of structure group of a scheme torsor along a quotient homomorphism and reduction of structure group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A)\\n  (hI :\\n    I ≤\\n      RingHom.ker\\n        (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)))\\n  {Z : AlgebraicGeometry.Scheme} (h : Alge\", \"doc\": \"Given a scheme $X$, a commutative ring $A$, a morphism $f : X \\\\to \\\\operatorname{Spec}(A)$, an ideal $I \\\\subseteq A$ contained in the kernel of the induced ring homomorphism $\\\\Gamma(f) : A \\\\to \\\\Gamma(X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X.Hom (AlgebraicGeometry.Spec A)) →\\n      (I : Ideal ↑A) →\\n        I ≤\\n            RingHom.ker\\n              (CommRingCat.Hom.hom\\n                (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)) →\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A)\\n  (hI :\\n    I ≤\\n      RingHom.ker\\n        (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))),\\n  CategoryTheory.CategoryStruct.comp (f.l\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $f^\\\\sharp: A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ be the corresponding ring homomorphism on glo\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.AffineSpace.homOfVector (X ↘ S) v) S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_over_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  {Z : AlgebraicGeometry.Scheme} (h : S ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Affi\", \"doc\": \"For any scheme $S$ and type $n$, given a morphism $f: X \\to S$ and a morphism $h: S \\to Z$, the composition of the morphism $\\\\text{homOfVector}(f, v): X \\to \\\\mathbb{A}^n_S$ (constructed from a vector $v$\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n    f\", \"doc\": \"For any morphism $ f $ and vector $ v $, the composition of the morphism $ \\\\text{homOfVector}(f, v) $ with the canonical structure morphism $ \\\\mathbb{A}^n_S \\\\to S $ of the affine space over $ S $ equa\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X Y : AlgebraicGeometry.Scheme} (v : n → ↑(Y.presheaf.obj (Opposite.op ⊤))) (f : X ⟶ Y) (g : Y ⟶ S)\\n  {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.AffineSpace n S ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp f\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Affi\", \"doc\": \"For schemes $S, X, Y$ and an affine space $\\\\mathbb{A}^n_S$, given a vector $v$ of global sections of $Y$'s structure sheaf, morphisms $f: X \\\\to Y$, $g: Y \\\\to S$, and $h: \\\\mathbb{A}^n_S \\\\to Z$, the com\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-extension sections, topological covering torsors and factoring a scheme map through a closed subscheme do not give this fppf quotient and reduction of structure group"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"quotient\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-extension sections, topological covering torsors and factoring a scheme map through a closed subscheme do not give this fppf quotient and reduction of structure group"
+  },
+  {
+   "tool": "grep",
+   "query": "contractedProduct|contracted.product|torsor.*quotient|quotient.*torsor",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Topology/Covering/Quotient.lean\", \"line\": \"95\", \"text\": \"/-- Fibers of a quotient covering map by a group G is a G-torsor. -/\"}\n  {\"file\": \"Mathlib/Topology/Covering/Quotient.lean\", \"line\": \"96\", \"text\": \"@[to_additive /-- Fibers of a quotient covering map by an additive group G is a G-torsor. -/]\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-extension sections, topological covering torsors and factoring a scheme map through a closed subscheme do not give this fppf quotient and reduction of structure group"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of a group scheme torsor by a normal subgroup is a torsor under the quotient group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsPGroup.to_quotient\", \"module\": \"Mathlib.GroupTheory.PGroup\", \"type\": \"(H : Subgroup G) [H.Normal] : IsPGroup p (G ⧸ H)\", \"doc\": \"If $G$ is a $p$-group and $H$ is a normal subgroup of $G$, then the quotient group $G/H$ is also a $p$-group.\"}\n  {\"name\": \"IsGalois.normalAutEquivQuotient\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"[FiniteDimensional K L] [IsGalois K L] (H : Subgroup Gal(L/K)) [Subgroup.Normal H] :\\n  Gal(L/K) ⧸ H ≃* Gal(fixedField H/K)\", \"doc\": \"Given a Galois field extension $ L/K $ and a normal subgroup $ H $ of the Galois group $ \\\\text{Gal}(L/K) $, the quotient group $ \\\\text{Gal}(L/K)/H $ is isomorphic to the Galois group $ \\\\text{Gal}(E/K)\"}\n  {\"name\": \"Rep.quotientToCoinvariants\", \"module\": \"Mathlib.RepresentationTheory.Coinvariants\", \"type\": \": Rep k (G ⧸ S)\", \"doc\": \"Given a commutative ring $k$, a group $G$, a normal subgroup $S \\trianglelefteq G$, and a $k$-linear representation $A$ of $G$, this constructs the quotient representation of the coinvariants module $A\"}\n  {\"name\": \"QuotientGroup.map_mk'_self\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Defs\", \"type\": \": N.map (mk' N) = ⊥\", \"doc\": \"For a normal subgroup $ N $ of a group $ \\\\alpha $, the image of $ N $ under the canonical quotient map $ \\\\alpha \\\\to \\\\alpha/N $ is the trivial subgroup of the quotient group $ \\\\alpha/N $.\"}\n  {\"name\": \"QuotientGroup.instHasQuotientSubgroup\", \"module\": \"Mathlib.GroupTheory.Coset.Defs\", \"type\": \": HasQuotient α (Subgroup α)\", \"doc\": \"For any group $\\\\alpha$ and its subgroup $H$, the quotient group $\\\\alpha/H$ is formed by the left cosets of $H$. This instance defines the canonical quotient structure on $\\\\alpha$ by $H$, where the equ\"}\n  {\"name\": \"QuotientGroup.Quotient.group\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Defs\", \"type\": \": Group (G ⧸ N)\", \"doc\": \"For any group $ G $ and its normal subgroup $ N $, the quotient set $ G/N $ of left cosets forms a group under the operation defined by $ (aN)(bN) = (ab)N $. The normality of $ N $ ensures that this o\"}\n  {\"name\": \"QuotientAddGroup.quotientQuotientEquivQuotientAux_mk\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Basic\", \"type\": \"∀ {G : Type u} [inst : AddGroup G] (N : AddSubgroup G) [nN : N.Normal] (M : AddSubgroup G) [nM : M.Normal] (h : N ≤ M)\\n  (x : G ⧸ N),\\n  (QuotientAddGroup.quotientQuotientEquivQuotientAux N M h) ↑x = (QuotientAddGroup.map N M (AddMonoidHom.id G) h) x\", \"doc\": \"If $ N $ and $ M $ are normal subgroups of an additive group $ G $ with $ N \\\\subseteq M $, then the image of $ M $ under the canonical projection $ G \\\\to G/N $ is a normal subgroup of the quotient gro\"}\n  {\"name\": \"QuotientGroup.Quotient.group.congr_simp\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Defs\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (N : Subgroup G) [nN : N.Normal],\\n  QuotientGroup.Quotient.group N = QuotientGroup.Quotient.group N\", \"doc\": \"The group structure on the quotient group $G/N$ is congruent under the normal subgroup $N$, i.e., the group operations on $G/N$ are well-defined and satisfy $\\\\bar{G} = \\\\bar{G}$ when $N$ is normal in $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-extension sections, topological covering torsors and factoring a scheme map through a closed subscheme do not give this fppf quotient and reduction of structure group"
+  },
+  {
+   "tool": "grep",
+   "query": "contractedProduct|contracted.product|torsor.*quotient|quotient.*torsor",
+   "results": "{\"t\": \"2026-10-23T21:54:25Z\", \"tool\": \"grep\", \"query\": \"contractedProduct|contracted.product|torsor.*quotient|quotient.*torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/Covering/Quotient.lean\", \"Mathlib/Topology/Covering/Quotient.lean\"], \"digest\": \"9e2e6bfa1a389e10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group actions, representations, topological torsors and affine morphism-property descent do not state scheme-torsor quotient representability or reduction of structure group"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-23T21:54:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group actions, representations, topological torsors and affine morphism-property descent do not state scheme-torsor quotient representability or reduction of structure group"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of structure group of a represented fppf torsor along a quotient homomorphism of affine group schemes",
+   "results": "{\"t\": \"2026-10-23T21:54:26Z\", \"tool\": \"leansearch\", \"query\": \"Extension of structure group of a represented fppf torsor along a quotient homomorphism of affine group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddTorsor.noConfusion\", \"AddTorsor.noConfusionType\", \"AddTorsor\", \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"AddGroupExtension.quotientKerRightHomEquivRight\", \"GroupExtension.mk.injEq\", \"AddGroupExtension.rightHom\", \"QuotientGroup.monoidHom_ext\"], \"digest\": \"6181efc8869555c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group actions, representations, topological torsors and affine morphism-property descent do not state scheme-torsor quotient representability or reduction of structure group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient of an affine group scheme torsor by a normal subgroup is a scheme torsor under the quotient group and fibres over sections are subgroup torsors",
+   "results": "{\"t\": \"2026-10-23T21:54:27Z\", \"tool\": \"leanfinder\", \"query\": \"Quotient of an affine group scheme torsor by a normal subgroup is a scheme torsor under the quotient group and fibres over sections are subgroup torsors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Rep.ofQuotient\", \"Rep.quotientToCoinvariants\", \"Subgroup.instMulActionQuotientDiff\", \"MulAction.right_quotientAction'\", \"MulActionHom.toQuotient\", \"Action.FintypeCat.quotientToEndHom_mk\", \"AddAction.right_quotientAction'\"], \"digest\": \"b6216ed11bb639bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group actions, representations, topological torsors and affine morphism-property descent do not state scheme-torsor quotient representability or reduction of structure group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a trivial affine scheme torsor after changing its structure group by an exact sequence of group schemes",
+   "results": "{\"t\": \"2026-10-23T21:55:03Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of a trivial affine scheme torsor after changing its structure group by an exact sequence of group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.over_over\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.map_over\", \"AlgebraicGeometry.AffineSpace.homOfVector_over\"], \"digest\": \"1f3d7b9eab7edb0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group actions, representations, topological torsors and affine morphism-property descent do not state scheme-torsor quotient representability or reduction of structure group"
+  },
+  {
+   "tool": "grep",
+   "query": "HasAffineProperty.descendsAlong_of_affineAnd",
+   "results": "{\"t\": \"2026-10-23T21:57:14Z\", \"tool\": \"grep\", \"query\": \"HasAffineProperty.descendsAlong_of_affineAnd\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\"], \"digest\": \"eba81b781a37cecd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group actions, representations, topological torsors and affine morphism-property descent do not state scheme-torsor quotient representability or reduction of structure group"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-solvable-torsors-and-variety",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Characteristic sequence of a Borel quotient. Supporting input: Zariski splitting of solvable torsors and the underlying solvable variety. Supporting lemma: Agent-extracted normal-extension reduction used in Proposition 16.55, printed p.344; Example 2.68 and Proposition 2.69, printed p.60; affine faithfully flat descent in Appendix A.80--A.81, printed pp.584--585. Arbitrary-base form of the standard torsor quotient construction.",
+   "via": [
+    "lem-sfb-split-solvable-torsors-and-variety",
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-extension-torsor-reduction",
+  "worker": "stage1",
+  "summary": "Explicit quotient descent and its two torsor structures, reduction over sections, and arbitrary base-change compatibility. Reused all generic descent, locality, Yoneda and sheafification tools; no new nodes and no change to the statement. Checked the nonsmooth kernel case and all cited statements.",
+  "blueprint": "Inherited supporting route: normal-extension step in Milne Proposition 16.55 used by lem-sfb-split-solvable-torsors-and-variety. The item has no blueprint node or nearest blueprint ancestor (blueprint_refs ancestor prints None); searched the entire latest blueprint for torsor, quotient torsor and affine descent and found no duplicate. Existing from.place and via retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Convert the given fppf cover into the fpqc covering required by affine descent. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Flatness of arbitrary base changes of the torsor maps and q. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Surjectivity of base-changed covers and torsor maps. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Base change preserves finite presentation. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Glue scheme maps and verify equality after the torsor cover. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-pc-flat-field",
+    "why": "The quotient group Q is flat over the ground field. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Finite type over a field implies local finite presentation. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Affineness of the local models and quasi-compactness and quasi-separatedness of affine maps. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Turn the explicit inverse formulas on points into scheme inverse morphisms. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Represent the affine quotient model by an actual scheme over S. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "why": "Identify the descended scheme with the sheafified orbit presheaf by local lifts and orbit equality. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Descend affineness of both quotient-torsor maps from the explicit local models. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Descend flatness of both quotient-torsor maps. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Descend local finite presentation of both quotient-torsor maps. It is a generic tool; the constructible-stability unit supplies no replacement for this descent fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pc-flat-field",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-6eec99936",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-6eec99936 (reviewer sub-agent of L); spot-checked: PASS, no changes. Q16's delivery is one commit containing the item and its report. It adds no new nodes, leaves the statement unchanged and has no re-split note. Milne iAG Prop. 16.55, p.344, only says 'it follows' for this step, so the 9-step proof written by the worker is a legitimate filling-in of omitted detail. Every step checks out against the statements it cites. Step 1: P->S is an fppf cover, and the fppf-to-fpqc leaf (Stacks 022C) makes it fpqc. Step 2: Q is flat and finitely presented over k, and q is affine (elementary). Step 3: the kernel computation shows q is an N-torsor. Step 4: the cocycle orientation is correct, since x=u0h=u1h' gives transitions z->q(g01)^-1 z, and g02=g01g12 gives the cocycle as def-pd-descent-datum requires. Stacks 0245 (descent.tex:9148) applies to the affine Q_U->U, and 023Q glues r and the Q-action. Step 5: the local-bijection criterion holds. Local lifts come from the fppf pullback of q; orbit equality follows because q(g)=1 descends by 023Q uniqueness and g then factors through the kernel. Steps 6-7: affineness, flatness and local finite presentation descend (02L5, 02L2, 02KY). Affine gives quasi-compact and quasi-separated, hence finite presentation, and surjectivity is checked on points. Step 8: e=pr_P∘b satisfies pe=id because p∘pr_P=pr_S. Step 9: base change follows from 023Q uniqueness and the fibre-product universal property. Small cases checked: S empty, N=1, N=G, P trivial, and x->x^p on G_m with kernel mu_p in characteristic p (no smoothness is used). Duplicate search: the contracted-product nodes in sec-curve-estimates are about abelian étale sheaves, lem-a1-fppf-kernel-pair-quotient-descent needs a finite locally free quotient map, and lem-per-free-finite-group-affine-quotient is about finite constant groups; none states this item. Batch-5 check: lem-trf-fppf-covering-is-fpqc is the Mathlib leaf fppfPrecoverage_le_fpqcPrecoverage (Fpqc.lean:66). It is a generic comparison of two topologies, not something the trace-formula or Poincaré-duality assumptions provide and not part of their proofs, so it is accepted. The 14 tool_uses are all generic scheme or site tools that the unit does not supply, and are accepted. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NormalExtensionTorsorReduction",
+  "declaration": "AlgebraicGeometry.normal_extension_torsor_reduction",
+  "declarations": [
+   "AlgebraicGeometry.NormalTorsorReduction.Data",
+   "AlgebraicGeometry.NormalTorsorReduction.Data.map",
+   "AlgebraicGeometry.NormalTorsorReduction.SectionFiber",
+   "AlgebraicGeometry.NormalTorsorReduction.BaseChange",
+   "AlgebraicGeometry.normal_extension_torsor_reduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NormalExtensionTorsorReduction.lean",
+  "statement": "theorem normal_extension_torsor_reduction {k : Type u} [Field k] (N G Q : Grp (Over (Spec (.of k)))) (i : N ⟶ G) (q : G ⟶ Q) [IsAffine N.X.left] [LocallyOfFiniteType N.X.hom] [QuasiCompact N.X.hom] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [IsAffine Q.X.left] [LocallyOfFiniteType Q.X.hom] [QuasiCompact Q.X.hom] [IsClosedSubgroupScheme i.hom.hom] [IsNormalSubgroupScheme i.hom.hom] [Flat q.hom.hom.left] [Surjective q.hom.hom.left] [LocallyOfFinitePresentation q.hom.hom.left] [QuasiCompact q.hom.hom.left] [QuasiSeparated q.hom.hom.left] (_hquot : IsFppfGroupQuotient i q) (S : Over (Spec (.of k))) (P : RepresentedRightTorsor G S) : ∃ d : NormalTorsorReduction.Data i q P, (∀ a : S ⟶ d.quotient.space, a ≫ d.quotient.projection = 𝟙 S → Nonempty (NormalTorsorReduction.SectionFiber d a)) ∧ ∀ (S' : Over (Spec (.of k))) (f : S' ⟶ S), ∃ (P' : RepresentedRightTorsor G S') (j : P'.space ⟶ P.space), IsPullback j P'.projection P.projection f ∧ P'.action ≫ j = (j ⊗ₘ 𝟙 G.X) ≫ P.action ∧ ∃ d' : NormalTorsorReduction.Data i q P', (∀ a' : S' ⟶ d'.quotient.space, a' ≫ d'.quotient.projection = 𝟙 S' → Nonempty (NormalTorsorReduction.SectionFiber d' a')) ∧ Nonempty (NormalTorsorReduction.BaseChange d f P' j d')",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed RepresentedRightTorsor and IsFppfGroupQuotient interfaces. The four auxiliary declarations package this node’s own quotient, section-fibre and base-change conclusions and the actual quotient morphism; no independent notion or postponed theorem is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cce55ac6",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery of 5bb0cd6bc6ad (H2 RETURN). Only change: stmt_deps lem-sfb-affine-normal-quotient-geometry → def-sfb-fppf-group-quotient-presentation (live existing:true owner of IsFppfGroupQuotient, reviewed pass). Module byte-identical to the returned head; node differs from live only in lean and stmt_deps. Clause-by-clause check: k field; N,G,Q affine, finite type (IsAffine+LOFT+QC); closed normal i; q flat, surjective, lfp/qc/qs; IsFppfGroupQuotient = kernel square + sheafification universal property, its other clauses implied; P a RepresentedRightTorsor. Data pins the quotient map, the restricted action, the induced projection and Q-action, and the full sheafification universal property; SectionFiber gives the cartesian P×_{R,a}S N-torsor and the section lift; BaseChange gives the cartesian quotient map, kernel_cartesian (pins the map) and a single unique ∃! fibre comparison. Edge cases checked: empty S, N=1, N=G, μ_p Frobenius kernel, non-affine S; single universe u. No duplicate, no hollow def, proof sorry, docstrings and statement verbatim, report sections present. No file changed, no compile."
+ }
+}

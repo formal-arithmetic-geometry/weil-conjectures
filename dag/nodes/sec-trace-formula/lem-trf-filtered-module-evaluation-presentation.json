@@ -1,0 +1,263 @@
+{
+ "id": "lem-trf-filtered-module-evaluation-presentation",
+ "kind": "statement",
+ "title": "Evaluation of an increasing filtered module and its finite presentation",
+ "statement": "Let $A$ be a commutative ring, $n\\geq0$, and $M$ an $A$-module with commuting $A$-linear endomorphisms $T_1,\\ldots,T_n$. Let $(F_dM)_{d\\geq0}$ be increasing $A$-submodules with $\\bigcup_dF_dM=M$ and $T_i(F_dM)\\subseteq F_{d+1}M$. Put $P=A[X_0,X_1,\\ldots,X_n]$ and $Q=A[X_1,\\ldots,X_n]$ [def-weil-pbc-mv-polynomial-ring]. Give $N=\\bigoplus_{d\\geq0}F_dM\\,t^d$ the $P$-action $X_0(xt^d)=xt^{d+1}$, $X_i(xt^d)=T_i(x)t^{d+1}$. Give $M$ its $Q$-action $X_i x=T_i(x)$ and its $P$-action via $X_0\\mapsto1$, $X_i\\mapsto X_i$. Evaluation $\\epsilon:N\\to M$, $\\sum_dx_dt^d\\mapsto\\sum_dx_d$, is a surjective $P$-linear map with kernel $(X_0-1)N$; its induced isomorphism $N/(X_0-1)N\\cong M$ is $Q$-linear via $P/(X_0-1)\\cong Q$ [def-weil-pbc-algebra-hom-quotient]. More precisely, for every finite presentation $P^u\\xrightarrow{H}P^v\\xrightarrow{\\pi}N\\to0$, the sequence $Q^u\\xrightarrow{H(1,X)}Q^v\\xrightarrow{\\bar\\pi}M\\to0$ is exact, where $H(1,X)$ is obtained by substituting $X_0=1$ in every matrix entry and $\\bar\\pi$ sends the $j$th basis vector to $\\epsilon(\\pi(e_j))$. In particular, if $N$ is finitely presented over $P$ [def-sc-finitely-presented-module], then $M$ is finitely presented over $Q$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 053E, lemma-flat-finite-type-valuation-ring-finite-presentation, proof of (2), explicit polynomial-module realization of its homogenization step; Ancestor lem-trf-local-term-locality proof (1)--(2), specialization-to-the-normal-cone branch, valuation finite-presentation input; returned item Steps 5 and 6, including compatibility with each variable.; compare Algebra Tag 052N (lemma-homogenize)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\iota_d(x)=xt^d$ in the finite-support direct sum. Let $S_0\\iota_d(x)=\\iota_{d+1}(x)$ and $S_i\\iota_d(x)=\\iota_{d+1}(T_i x)$. These are well-defined $A$-linear maps by the filtration hypotheses. On each summand, $S_0S_i\\iota_d(x)=S_iS_0\\iota_d(x)=\\iota_{d+2}(T_i x)$ and $S_iS_j\\iota_d(x)=\\iota_{d+2}(T_iT_jx)=S_jS_i\\iota_d(x)$. Thus $p=\\sum_\\alpha a_\\alpha X^\\alpha$ acts by $p z=\\sum_\\alpha a_\\alpha S_0^{\\alpha_0}\\cdots S_n^{\\alpha_n}z$: distributivity and commutation give $(pq)z=p(qz)$ and $1z=z$. The identical formula with $T_i$ defines the $Q$-action on $M$. Polynomial evaluation defines $\\rho:P\\to Q$, $X_0\\mapsto1$, $X_i\\mapsto X_i$; restricting along $\\rho$ gives the stated $P$-action on $M$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 052N, lemma-homogenize, polynomial-module construction and its omitted dehomogenization details; explicit elementary expansion for the increasing filtration used in Tag 053E(2), more-algebra.tex, lemma-flat-finite-type-valuation-ring-finite-presentation."
+   }
+  },
+  {
+   "text": "The finite sum $\\epsilon(\\sum_d\\iota_d(x_d))=\\sum_dx_d$ is $A$-linear. For every $z\\in N$, $\\epsilon(S_0z)=\\epsilon(z)$ and $\\epsilon(S_iz)=T_i\\epsilon(z)$, by summing its components. Applying these identities repeatedly to each monomial and then adding proves $\\epsilon(pz)=\\rho(p)\\epsilon(z)$ for every $p\\in P$. Exhaustiveness gives, for each $m\\in M$, a $d$ with $m\\in F_dM$, so $\\epsilon(\\iota_d(m))=m$. Hence $\\epsilon$ is a surjective $P$-linear map.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 052N, lemma-homogenize, polynomial-module construction and its omitted dehomogenization details; explicit elementary expansion for the increasing filtration used in Tag 053E(2), more-algebra.tex, lemma-flat-finite-type-valuation-ring-finite-presentation."
+   }
+  },
+  {
+   "text": "Since $\\epsilon(S_0z-z)=0$, $(X_0-1)N\\subseteq\\ker\\epsilon$. Conversely let $z=\\sum_{d=0}^{D}\\iota_d(x_d)$ with $\\sum_{d=0}^{D}x_d=0$. For $0\\leq d<D$ set $y_d=-\\sum_{i=0}^{d}x_i\\in F_dM$, using the increasing filtration, and put $y=\\sum_{d=0}^{D-1}\\iota_d(y_d)$. The components of $(S_0-1)y$ are $-y_0=x_0$ in degree $0$, $y_{d-1}-y_d=x_d$ for $0<d<D$, and $y_{D-1}=x_D$ in degree $D$; higher components vanish. If $D=0$, the zero-sum condition gives $z=0$ and take $y=0$. Thus $z=(X_0-1)y$ and $\\ker\\epsilon=(X_0-1)N$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 052N, lemma-homogenize, polynomial-module construction and its omitted dehomogenization details; explicit elementary expansion for the increasing filtration used in Tag 053E(2), more-algebra.tex, lemma-flat-finite-type-valuation-ring-finite-presentation."
+   }
+  },
+  {
+   "text": "Let $s:Q\\to P$ include the variables $X_1,\\ldots,X_n$, so $\\rho s=1$. Write a polynomial as $p=\\sum_{k=0}^{r}s(q_k)X_0^k$. The identity $p-s(\\rho(p))=(X_0-1)\\sum_{k=1}^{r}s(q_k)(1+X_0+\\cdots+X_0^{k-1})$ proves $\\ker\\rho=(X_0-1)P$. Therefore $[p]\\mapsto\\rho(p)$ and $q\\mapsto[s(q)]$ are mutually inverse ring maps $P/(X_0-1)\\cong Q$ of the quotient ring [def-weil-pbc-algebra-hom-quotient]. On module cosets define $[z]\\mapsto\\epsilon(z)$. Step 3 makes this well-defined and injective, and Step 2 makes it surjective. Its inverse sends $m$ to $[z]$ for any lift $\\epsilon(z)=m$: any two lifts differ by Step 3, so the coset is independent of the lift. Coset addition and scalar multiplication show that this is a linear isomorphism; in particular $[s(q)z]\\mapsto q\\epsilon(z)$ proves $Q$-linearity through the displayed ring identification.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 052N, lemma-homogenize, polynomial-module construction and its omitted dehomogenization details; explicit elementary expansion for the increasing filtration used in Tag 053E(2), more-algebra.tex, lemma-flat-finite-type-valuation-ring-finite-presentation."
+   }
+  },
+  {
+   "text": "Fix the given exact presentation, write $h_{ij}$ for the entries of $H$, and define $\\bar\\pi(a_1,\\ldots,a_v)=\\sum_j a_j\\epsilon(\\pi(e_j))$. This is $Q$-linear. For $w\\in P^v$, the finite basis expansion and Step 2 give $\\bar\\pi(\\rho^v(w))=\\epsilon(\\pi(w))$, where $\\rho^v$ means entrywise evaluation. For $b\\in P^u$, entrywise evaluation respects the matrix sums, so $\\rho^v(Hb)=H(1,X)\\rho^u(b)$. Consequently $\\bar\\pi H(1,X)=0$: lift an input by $s^u$ and use $\\pi H=0$. Also $\\bar\\pi$ is surjective: lift $m\\in M$ first to $z\\in N$ by Step 2, then to $w\\in P^v$ by surjectivity of $\\pi$; its preimage is $\\rho^v(w)$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 052N, lemma-homogenize, polynomial-module construction and its omitted dehomogenization details; explicit elementary expansion for the increasing filtration used in Tag 053E(2), more-algebra.tex, lemma-flat-finite-type-valuation-ring-finite-presentation."
+   }
+  },
+  {
+   "text": "If $a\\in Q^v$ satisfies $\\bar\\pi(a)=0$, put $w=s^v(a)$. Then $\\epsilon(\\pi(w))=0$, so Step 3 supplies $y\\in N$ with $\\pi(w)=(X_0-1)y$. Choose $c\\in P^v$ with $\\pi(c)=y$. The vector $w-(X_0-1)c$ is in $\\ker\\pi=\\operatorname{im}H$, hence equals $Hb$ for some $b\\in P^u$. Evaluating every coordinate yields $a=H(1,X)\\rho^u(b)$, since $\\rho(X_0-1)=0$. Together with Step 5 this proves exactness at $Q^v$ and $M$, with precisely the specified matrix and augmentation. Finally, if $N$ is finitely presented, choose such finite $u,v$ by the definition. The resulting exact sequence of finite free $Q$-modules is a finite presentation of $M$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 052N, lemma-homogenize, polynomial-module construction and its omitted dehomogenization details; explicit elementary expansion for the increasing filtration used in Tag 053E(2), more-algebra.tex, lemma-flat-finite-type-valuation-ring-finite-presentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-quotient-module",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 052N, lemma-homogenize, omitted module dehomogenization details; explicit finite-sum proof of the specialization needed in more-algebra.tex Tag 053E(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dehomogen|eval.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*eval|ker.*eval",
+   "results": "{\"t\": \"2026-10-22T07:27:23Z\", \"tool\": \"grep\", \"query\": \"dehomogen|eval.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*eval|ker.*eval\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Module/AEval.lean\", \"Mathlib/Algebra/Polynomial/Module/AEval.lean\", \"Mathlib/Algebra/Polynomial/Module/AEval.lean\", \"Mathlib/Algebra/Polynomial/Module/AEval.lean\", \"Mathlib/Algebra/Lie/Weights/IsSimple.lean\", \"Mathlib/Algebra/Lie/Weights/IsSimple.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/GrothendieckAbelian.lean\"], \"digest\": \"9c32ba8780c4b4c1\"} Mathlib/Algebra/Polynomial/Module/AEval.lean; Mathlib/Algebra/Polynomial/Module/AEval.lean; Mathlib/Algebra/Polynomial/Module/AEval.lean; Mathlib/Algebra/Polynomial/Module/AEval.lean; Mathlib/Algebra/Lie/Weights/IsSimple.lean; Mathlib/Algebra/Lie/Weights/IsSimple.lean; Mathlib/Algebra/Homology/ModelCategory/Injective.lean; Mathlib/Algebra/Homology/GrothendieckAbelian.lean Read Filtration.lean:45-75 (decreasing ideal filtration), Polynomial/Homogenize.lean:145-157 (polynomial evaluation only), and Module/FinitePresentation.lean:338-350 (tensor base change). None identifies this increasing filtered module evaluation kernel and the evaluated relation presentation in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of a filtered Rees module by t minus one is the original module and evaluation of finite relations gives a finite presentation",
+   "results": "{\"t\": \"2026-10-22T07:27:24Z\", \"tool\": \"leansearch\", \"query\": \"The quotient of a filtered Rees module by t minus one is the original module and evaluation of finite relations gives a finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Relations.instQuotient\", \"Algebra.Presentation.ofFinitePresentation\", \"Module.FinitePresentation\", \"Algebra.Presentation.instFinitePresentationQuotientOfFinite\", \"Module.Relations.Quotient\", \"Module.Relations.surjective_toQuotient\", \"Module.Finite.repr\", \"instFinitePresentation\"], \"digest\": \"0932fcb5311e9673\"} Module.Relations.instQuotient; Algebra.Presentation.ofFinitePresentation; Module.FinitePresentation; Algebra.Presentation.instFinitePresentationQuotientOfFinite; Module.Relations.Quotient; Module.Relations.surjective_toQuotient; Module.Finite.repr; instFinitePresentation Read Filtration.lean:45-75 (decreasing ideal filtration), Polynomial/Homogenize.lean:145-157 (polynomial evaluation only), and Module/FinitePresentation.lean:338-350 (tensor base change). None identifies this increasing filtered module evaluation kernel and the evaluated relation presentation in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, MvPolynomial",
+   "results": "{\"t\": \"2026-10-22T07:27:24Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No hits. Read Filtration.lean:45-75 (decreasing ideal filtration), Polynomial/Homogenize.lean:145-157 (polynomial evaluation only), and Module/FinitePresentation.lean:338-350 (tensor base change). None identifies this increasing filtered module evaluation kernel and the evaluated relation presentation in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at t=1 on the Rees module of an exhaustive increasing module filtration has kernel (t-1) and transports finite polynomial presentations to the dehomogenized module",
+   "results": "{\"t\": \"2026-10-22T07:27:34Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation at t=1 on the Rees module of an exhaustive increasing module filtration has kernel (t-1) and transports finite polynomial presentations to the dehomogenized module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Filtration.submodule\", \"Ideal.Filtration.submoduleInfHom\", \"Ideal.Filtration.submodule_span_single\", \"Module.Finite.kerRepr\", \"Ideal.Filtration.submodule_eq_span_le_iff_stable_ge\", \"Ideal.Filtration.mem_submodule\", \"reesAlgebra\", \"adjoin_monomial_eq_reesAlgebra\"], \"digest\": \"fc2bffda09441b90\"} Ideal.Filtration.submodule; Ideal.Filtration.submoduleInfHom; Ideal.Filtration.submodule_span_single; Module.Finite.kerRepr; Ideal.Filtration.submodule_eq_span_le_iff_stable_ge; Ideal.Filtration.mem_submodule; reesAlgebra; adjoin_monomial_eq_reesAlgebra Read Filtration.lean:45-75 (decreasing ideal filtration), Polynomial/Homogenize.lean:145-157 (polynomial evaluation only), and Module/FinitePresentation.lean:338-350 (tensor base change). None identifies this increasing filtered module evaluation kernel and the evaluated relation presentation in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exhaustive increasing filtration has dehomogenization at t=1 equal to M; evaluate a matrix of polynomial relations at the homogenizing variable equal to one",
+   "results": "{\"t\": \"2026-10-22T07:30:28Z\", \"tool\": \"leanfinder\", \"query\": \"An exhaustive increasing filtration has dehomogenization at t=1 equal to M; evaluate a matrix of polynomial relations at the homogenizing variable equal to one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.aeval_homogenize_X_one\", \"Polynomial.aeval_homogenize_of_eq_one\", \"Polynomial.eval₂_homogenize_of_eq_one\", \"Polynomial.homogenize_one\", \"Polynomial.homogenize_eq_of_isHomogeneous\", \"Polynomial.eval_homogenize\", \"Matrix.toMvPolynomial_isHomogeneous\", \"Polynomial.homogenize\"], \"digest\": \"3ba73bbf0e88985b\"} Polynomial.aeval_homogenize_X_one; Polynomial.aeval_homogenize_of_eq_one; Polynomial.eval₂_homogenize_of_eq_one; Polynomial.homogenize_one; Polynomial.homogenize_eq_of_isHomogeneous; Polynomial.eval_homogenize; Matrix.toMvPolynomial_isHomogeneous; Polynomial.homogenize Read Filtration.lean:45-75 (decreasing ideal filtration), Polynomial/Homogenize.lean:145-157 (polynomial evaluation only), and Module/FinitePresentation.lean:338-350 (tensor base change). None identifies this increasing filtered module evaluation kernel and the evaluated relation presentation in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dehomogen|eval.*filtration|filtration.*eval|ker.*eval",
+   "results": "{\"t\": \"2026-10-23T14:19:17Z\", \"tool\": \"grep\", \"query\": \"dehomogen|eval.*filtration|filtration.*eval|ker.*eval\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean\", \"Mathlib/Algebra/Homology/GrothendieckAbelian.lean\", \"Mathlib/Algebra/Polynomial/Module/AEval.lean\", \"Mathlib/Algebra/Polynomial/Module/AEval.lean\", \"Mathlib/Algebra/Polynomial/Module/AEval.lean\", \"Mathlib/Algebra/Polynomial/Module/AEval.lean\", \"Mathlib/Algebra/Lie/Weights/IsSimple.lean\"], \"digest\": \"f8ea7bd425615ca9\"} Read candidate sources: FilteredAlgebra/Basic.lean:45-104 defines filtrations; Filtration.lean:45-75 concerns decreasing ideal filtrations; DirectSum/Module.lean:287 is a componentwise map kernel; Polynomial/Module/AEval.lean:116-127 concerns annihilators; Polynomial/Homogenize.lean:149-157 treats polynomial homogenization; Module/FinitePresentation.lean:338-350 gives tensor base change, without the filtered evaluation identification. None states the whole item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exhaustive increasing filtered module evaluates at t equals one to the module, kernel t minus one, and evaluation of relations preserves a finite presentation",
+   "results": "{\"t\": \"2026-10-23T14:19:18Z\", \"tool\": \"leansearch\", \"query\": \"An exhaustive increasing filtered module evaluates at t equals one to the module, kernel t minus one, and evaluation of relations preserves a finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsModuleFiltration.toIsFiltration\", \"Module.Presentation.toIsPresentation\", \"Module.FinitePresentation.out\", \"Module.FinitePresentation.casesOn\", \"Module.Relations.Solution.IsPresentation.ker_π\", \"Module.Presentation.finitePresentation\", \"Module.Relations.Solution.IsPresentation.exact\", \"Module.FinitePresentation.mk\"], \"digest\": \"f57cc8024e597875\"} Read candidate sources: FilteredAlgebra/Basic.lean:45-104 defines filtrations; Filtration.lean:45-75 concerns decreasing ideal filtrations; DirectSum/Module.lean:287 is a componentwise map kernel; Polynomial/Module/AEval.lean:116-127 concerns annihilators; Polynomial/Homogenize.lean:149-157 treats polynomial homogenization; Module/FinitePresentation.lean:338-350 gives tensor base change, without the filtered evaluation identification. None states the whole item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T14:19:18Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read candidate sources: FilteredAlgebra/Basic.lean:45-104 defines filtrations; Filtration.lean:45-75 concerns decreasing ideal filtrations; DirectSum/Module.lean:287 is a componentwise map kernel; Polynomial/Module/AEval.lean:116-127 concerns annihilators; Polynomial/Homogenize.lean:149-157 treats polynomial homogenization; Module/FinitePresentation.lean:338-350 gives tensor base change, without the filtered evaluation identification. None states the whole item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct sum of an exhaustive increasing module filtration modulo the degree shift minus identity is the original module, with evaluated polynomial finite presentations",
+   "results": "{\"t\": \"2026-10-23T14:19:22Z\", \"tool\": \"leanfinder\", \"query\": \"The direct sum of an exhaustive increasing module filtration modulo the degree shift minus identity is the original module, with evaluated polynomial finite presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsModuleFiltration.mk_int\", \"IsModuleFiltration\", \"Ideal.Filtration.submodule\", \"Ideal.Filtration.submodule_span_single\", \"IsModuleFiltration.toGradedSMul\", \"Ideal.Filtration.mem_submodule\", \"Submodule.FG.directLimit\", \"Ideal.Filtration.submodule_eq_span_le_iff_stable_ge\"], \"digest\": \"6659a6882028ce23\"} Read candidate sources: FilteredAlgebra/Basic.lean:45-104 defines filtrations; Filtration.lean:45-75 concerns decreasing ideal filtrations; DirectSum/Module.lean:287 is a componentwise map kernel; Polynomial/Module/AEval.lean:116-127 concerns annihilators; Polynomial/Homogenize.lean:149-157 treats polynomial homogenization; Module/FinitePresentation.lean:338-350 gives tensor base change, without the filtered evaluation identification. None states the whole item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Filtration|FinitePresentation.*base|base.*FinitePresentation|rTensor_exact",
+   "results": "{\"t\": \"2026-10-23T14:19:55Z\", \"tool\": \"grep\", \"query\": \"Filtration|FinitePresentation.*base|base.*FinitePresentation|rTensor_exact\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/FiniteStability.lean\", \"Mathlib/RingTheory/RingHom/Smooth.lean\", \"Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean\", \"Mathlib/RingTheory/Ideal/Cotangent.lean\", \"Mathlib/RingTheory/RingHom/FinitePresentation.lean\", \"Mathlib/RingTheory/RingHom/FinitePresentation.lean\", \"Mathlib/RingTheory/RingHom/FinitePresentation.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\"], \"digest\": \"17ee92933f3339b0\"} Read candidate sources: FilteredAlgebra/Basic.lean:45-104 defines filtrations; Filtration.lean:45-75 concerns decreasing ideal filtrations; DirectSum/Module.lean:287 is a componentwise map kernel; Polynomial/Module/AEval.lean:116-127 concerns annihilators; Polynomial/Homogenize.lean:149-157 treats polynomial homogenization; Module/FinitePresentation.lean:338-350 gives tensor base change, without the filtered evaluation identification. None states the whole item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For increasing submodules F d of M with union M, summing the components of their direct sum has kernel the image of the shift map minus the identity",
+   "results": "{\"t\": \"2026-10-23T14:19:56Z\", \"tool\": \"leanfinder\", \"query\": \"For increasing submodules F d of M with union M, summing the components of their direct sum has kernel the image of the shift map minus the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectSum.ker_lmap\", \"DirectSum.ker_map\", \"DirectSum.mker_map\", \"LinearMap.graph_eq_ker_coprod\", \"LinearMap.iInf_ker_proj_le_iSup_range_single\", \"LinearMap.isCompl_iSup_ker_pow_iInf_range_pow\", \"LinearMap.ker_fst\", \"DirectSum.IsInternal.ofBijective_coeLinearMap_of_ne\"], \"digest\": \"fe48957cda6c1463\"} Read candidate sources: FilteredAlgebra/Basic.lean:45-104 defines filtrations; Filtration.lean:45-75 concerns decreasing ideal filtrations; DirectSum/Module.lean:287 is a componentwise map kernel; Polynomial/Module/AEval.lean:116-127 concerns annihilators; Polynomial/Homogenize.lean:149-157 treats polynomial homogenization; Module/FinitePresentation.lean:338-350 gives tensor base change, without the filtered evaluation identification. None states the whole item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_lmap|class IsModuleFiltration|submodule_span_single",
+   "results": "{\"t\": \"2026-10-23T14:20:42Z\", \"tool\": \"grep\", \"query\": \"ker_lmap|class IsModuleFiltration|submodule_span_single\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/DirectSum/Module.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/FilteredAlgebra/Basic.lean\"], \"digest\": \"ce4a5cad0b8cb8a4\"} Read candidate sources: FilteredAlgebra/Basic.lean:45-104 defines filtrations; Filtration.lean:45-75 concerns decreasing ideal filtrations; DirectSum/Module.lean:287 is a componentwise map kernel; Polynomial/Module/AEval.lean:116-127 concerns annihilators; Polynomial/Homogenize.lean:149-157 treats polynomial homogenization; Module/FinitePresentation.lean:338-350 gives tensor base change, without the filtered evaluation identification. None states the whole item in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-finite-type-module-presentation",
+  "date": "2026-10-22",
+  "group": "Q124"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Ancestor lem-trf-local-term-locality proof (1)--(2), specialization-to-the-normal-cone branch, valuation finite-presentation input; returned item Steps 5 and 6, including compatibility with each variable.",
+   "via": [
+    "lem-trf-valuation-finite-type-module-presentation",
+    "lem-trf-valuation-flat-finite-module-presentation",
+    "lem-trf-valuation-finite-module-injectivity",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-filtered-module-evaluation-presentation",
+  "worker": "stage1",
+  "summary": "Q136: unchanged statement, six explicit elementary steps: commuting shift actions, surjective linear evaluation, finite partial-sum kernel calculation, polynomial and module quotient identifications, entrywise evaluated augmentation, and lift-and-correct exactness for every presentation. Added the existing direct-sum and quotient-module definitions. No new nodes: all calculations are written out from the hypotheses and cited definitions; no unquoted tensor right-exactness or first-isomorphism theorem is invoked. Searched project source for exact attachment and Mathlib by two semantic phrasings, Loogle and grep; no exact match.",
+  "blueprint": "lem-trf-local-term-locality proof (1)--(2), normal-cone specialization branch, through the inherited valuation finite-presentation input: this item expands Steps 5--6 of lem-trf-valuation-finite-type-module-presentation, i.e. dehomogenization of the filtered polynomial module. Chapter and unit route unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-7d5078379",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-7d5078379 (reviewer sub-agent of L); spot-checked: Read the item in full (0 new nodes, statement unchanged, no re-split note, no SGA), the four cited definition statements, Stacks 053E(2) and 052N (whose proof ends 'Some details omitted'; the item writes out those dehomogenization details), and the parent lem-trf-valuation-finite-type-module-presentation Steps 4-5, whose hypotheses and use match the item. I checked all six steps by hand: the shifts S_0,S_i are well defined from increasingness and T_iF_d⊆F_{d+1} and they commute; ε(pz)=ρ(p)ε(z); the partial-sum preimage y_d=-Σ_{i≤d}x_i gives components x_0, x_d and x_D (the last by the zero sum), with D=0 separate; ker ρ=(X_0-1)P by the geometric-sum identity; the Q-linear coset isomorphism; π̄∘ρ^v=ε∘π, ρ^v(Hb)=H(1,X)ρ^u(b), and the lift-and-correct kernel argument w-(X_0-1)c∈im H. All steps are genuinely elementary and correct. Small cases tested: n=0, D=1, constant and delayed filtrations, A=Z with M=Z[1/2], F_d=2^{-d}Z, T=1/2, and M=0. No duplicate found: the Nagata Rees nodes are about blow-up algebras, and lem-trf-generator-filtration-graded-module only builds N for T_i=b_i. FIX (B3): the quotient ring P/(X_0-1), used in the statement and in Step 4 as a ring isomorphism, had no definition node. I cited the existing Mathlib leaf def-weil-pbc-algebra-hom-quotient in the statement, in Step 4 (text and uses), and in stmt_deps and proof_deps. The fix file is fixes/dag/nodes/sec-trace-formula/lem-trf-filtered-module-evaluation-presentation.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.FilteredModuleEvaluationPresentation",
+  "declaration": "Module.filteredModuleEvaluationPresentation",
+  "declarations": [
+   "Module.filteredModuleEvaluationPresentation",
+   "Module.filteredModulePolynomialActions",
+   "Module.filteredModuleEvaluation",
+   "Module.filteredPolynomialEvaluation",
+   "Module.filteredModuleEvaluationRelations"
+  ],
+  "file": "lean/Sheaf/Algebra/FilteredModuleEvaluationPresentation.lean",
+  "statement": "theorem filteredModuleEvaluationPresentation (A : Type u) [CommRing A] (M : Type v) [AddCommGroup M] [Module A M] (n : ℕ) (T : Fin n → M →ₗ[A] M) (F : ℕ → Submodule A M) (hF : Monotone F) (hEx : ∀ x : M, ∃ d, x ∈ F d) (hcomm : ∀ i j, Commute (T i) (T j)) (hT : ∀ i d, ∀ x ∈ F d, T i x ∈ F (d + 1)) [Module (MvPolynomial (Option (Fin n)) A) (⨁ d, F d)] [Module (MvPolynomial (Fin n) A) M] (hNC : ∀ (a : A) (z : (⨁ d, F d)), (MvPolynomial.C a : MvPolynomial (Option (Fin n)) A) • z = a • z) (hN0 : ∀ (d : ℕ) (x : F d), (MvPolynomial.X none : MvPolynomial (Option (Fin n)) A) • DirectSum.of (fun d ↦ F d) d x = DirectSum.of (fun d ↦ F d) (d + 1) ⟨x, hF (Nat.le_succ d) x.property⟩) (hNi : ∀ (i : Fin n) (d : ℕ) (x : F d), (MvPolynomial.X (some i) : MvPolynomial (Option (Fin n)) A) • DirectSum.of (fun d ↦ F d) d x = DirectSum.of (fun d ↦ F d) (d + 1) ⟨T i x, hT i d x x.property⟩) (hMC : ∀ (a : A) (x : M), (MvPolynomial.C a : MvPolynomial (Fin n) A) • x = a • x) (hMi : ∀ (i : Fin n) (x : M), (MvPolynomial.X i : MvPolynomial (Fin n) A) • x = T i x) : Function.Surjective (filteredModuleEvaluation A M F) ∧ (∀ (p : MvPolynomial (Option (Fin n)) A) (z : (⨁ d, F d)), filteredModuleEvaluation A M F (p • z) = filteredPolynomialEvaluation A n p • filteredModuleEvaluation A M F z) ∧ (∀ z : (⨁ d, F d), filteredModuleEvaluation A M F z = 0 ↔ ∃ y : (⨁ d, F d), z = (MvPolynomial.X none - 1 : MvPolynomial (Option (Fin n)) A) • y) ∧ (∃ r : ((MvPolynomial (Option (Fin n)) A) ⧸ Ideal.span {(MvPolynomial.X none - 1 : MvPolynomial (Option (Fin n)) A)}) ≃+* (MvPolynomial (Fin n) A), ∀ p : MvPolynomial (Option (Fin n)) A, r (Ideal.Quotient.mk _ p) = filteredPolynomialEvaluation A n p) ∧ (∃ e : ((⨁ d, F d) ⧸ filteredModuleEvaluationRelations A M n F) ≃+ M, (∀ z : (⨁ d, F d), e (Submodule.mkQ _ z) = filteredModuleEvaluation A M F z) ∧ (∀ (q : MvPolynomial (Fin n) A) (z : (⨁ d, F d)), e (Submodule.mkQ _ ((MvPolynomial.rename some q) • z)) = q • e (Submodule.mkQ _ z))) ∧ (Module.FinitePresentation (MvPolynomial (Option (Fin n)) A) (⨁ d, F d) → Module.FinitePresentation (MvPolynomial (Fin n) A) M) ∧ (∀ (a b : ℕ) (H : (Fin a → MvPolynomial (Option (Fin n)) A) →ₗ[MvPolynomial (Option (Fin n)) A] (Fin b → MvPolynomial (Option (Fin n)) A)) (π : (Fin b → MvPolynomial (Option (Fin n)) A) →ₗ[MvPolynomial (Option (Fin n)) A] (⨁ d, F d)), Function.Exact H π → Function.Surjective π → ∃ (H' : (Fin a → MvPolynomial (Fin n) A) →ₗ[MvPolynomial (Fin n) A] (Fin b → MvPolynomial (Fin n) A)) (π' : (Fin b → MvPolynomial (Fin n) A) →ₗ[MvPolynomial (Fin n) A] M), (∀ (x : Fin a → MvPolynomial (Fin n) A) (i : Fin b), H' x i = ∑ j, filteredPolynomialEvaluation A n (H (Pi.single j 1) i) * x j) ∧ (∀ x : Fin b → MvPolynomial (Fin n) A, π' x = ∑ j, x j • filteredModuleEvaluation A M F (π (Pi.single j 1))) ∧ Function.Exact H' π' ∧ Function.Surjective π')",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The helper theorem gives existence of the polynomial actions; the main theorem uses any actions specified by their constants and variables. The module quotient is an additive equivalence with explicit Q-scalar compatibility through rename some, so no arbitrary quotient-module instance is chosen. All three helper definitions contain real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f34e00e6",
+  "group": "NL",
+  "result": "pass",
+  "note": "All clauses of lem-trf-filtered-module-evaluation-presentation match the Lean: surjectivity; P-linearity via eval₂Hom (X0↦1); kernel (X0−1)N as an elementwise iff; ring iso P/(X0−1)≃Q pinned on classes; additive N/(X0−1)N≃M pinned on ε, with Q-compatibility via rename some; finite-presentation implication; for every exact presentation, H',π' pinned by the evaluated entries ρ(H(e_j)_i) and ε(π e_j), with Exact and Surjective. The P/Q module instance binders are uniquely determined by the generator equations, and filteredModulePolynomialActions states that they exist under the node's hypotheses, so there is no extra assumption; no instance diamond (Submodule.module' needs SMul P A). Edge cases n=0, M=0, a=b=0 and the zero ring are admitted; universe of M independent. lean.statement is verbatim in the file; only the lean field differs from live; stmt_deps match (three mathlib-status nodes with mathlib_match); helper defs are real data; only the theorems are sorry; docstrings carry the source, blueprint tag and six steps. Advisory: the helper's body is identical to upstream MvPolynomial.dehomogenize, which no DAG node owns; the Second reading section is a self-statement under the direct-delivery policy. No compile (no file changed)."
+ }
+}

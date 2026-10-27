@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-internal-bar-character-roof-cup",
+ "kind": "statement",
+ "title": "Character extension roofs and ordered cup composition",
+ "statement": "Let $A$ be a commutative condensed ring on the small coherent profinite site and $G$ a profinite group, with $\\underline G(S)=C(S,G)$. Use internal $A$-modules, equivariant internal modules, and the coefficient universes of [sk-def-sfb-condensed-ring, sk-def-sfb-module-objects, def-sfb-condensed-action-module, def-weil-size-convention], and ordinary derived categories [def-weil-abstract-derived-category]. Let $P^{-n}=P_n=A[\\underline G^{n+1}]$ for $n\\geq0$, and $P^i=0$ for $i>0$, with diagonal left action, differential $d_P^{-n}=\\partial_n$ given by alternating deletion, $d_P^0=0$, and augmentation $e:P\\to A[0]$ sending $[g]$ to $1$, as in [lem-sfb-condensed-internal-bar-resolution]. Give $A$ trivial action. Shifts have $d_{P[1]}=-d_P$.\n\nWrite $Q$ for localization at quasi-isomorphisms and $C=R\\Gamma_G(A[0])$. Use the canonical shifted derived adjunction $\\Phi_q$ and signs $t_{p,r}$ of [lem-sfb-internal-inflation-graded-cup], so that\n$$\\Phi_p(x)\\smile\\Phi_r(y)=t_{p,r}\\Phi_{p+r}(y[p]\\circ x).$$\nThe classes $[a]:A[-1]\\to C$ and unital cup product are normalized as in [lem-sfb-condensed-derived-restriction-calculus]. For every additive condensed-group map $a:\\underline G\\to(A,+)$, form the short exact equivariant extension\n$$0\\longrightarrow A\\xrightarrow{x\\mapsto(x,0)}E_a=A\\oplus A\\xrightarrow{(x,y)\\mapsto y}A\\longrightarrow0,\\qquad g(x,y)=(x+a(g)y,y).$$\nLet $\\delta_a:A[0]\\to A[1]$ be its canonical triangle boundary in the cone convention of [lem-sfb-internal-bar-roof-adjunction]. For any equivariant cochain map $L:P\\to P[1]$ whose augmented degree $-1$ component satisfies\n$$eL[g_0,g_1]=a(g_0^{-1}g_1),$$\nput $x_a=Q(e[1]L)Q(e)^{-1}$. Then\n$$x_a=-\\delta_a,\\qquad \\Phi_1(x_a)=-[a].$$\n\nMore generally, for $q\\geq0$, additive condensed-group maps $a_1,\\ldots,a_q$ and any corresponding cochain maps $L_1,\\ldots,L_q$ satisfying these augmented-component equations, put $F_0=1_P$ and $F_q=L_q[q-1]\\circ\\cdots\\circ L_1$, and $\\rho_q=Q(e[q]F_q)Q(e)^{-1}$. Then\n$$\\rho_q=x_{a_q}[q-1]\\circ\\cdots\\circ x_{a_1},\\qquad [a_1]\\smile\\cdots\\smile[a_q]=(-1)^q T_q\\Phi_q(\\rho_q),$$\nwhere $T_0=T_1=1$ and $T_{q+1}=T_qt_{q,1}$ for $q\\geq1$. The empty composition is $1_A$ and the empty cup is the unit. The signs depend only on the fixed tensor/shift convention and the degree, independently of $A,G$, the characters and the chosen cochain lifts. No projectivity of $P_n$ or underived internal-Hom acyclicity is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, agent-formulated internal bar normalization; character extension lifts and shifted-composition induction (ordered-cup argument steps 4–5), using the corrected canonical roof/triangle signs; exact internal-category reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-internal-bar-resolution",
+  "lem-sfb-internal-bar-roof-adjunction",
+  "lem-sfb-internal-inflation-graded-cup",
+  "lem-sfb-condensed-derived-restriction-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose the single universal sign family t from internalInflationGradedCup, retaining its signs, both zero-degree normalizations and the ordered binary identity unchanged. Apply the degree-one normalization lemma to each prescribed character lift; its explicit generator equation and raw localized roof are definitionally IsCharacterLift and characterRoof. This supplies the canonical negative extension boundary and the negative positive character class.",
+   "uses": [
+    "lem-sfb-internal-bar-character-lift-normalization",
+    "lem-sfb-internal-inflation-graded-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-formulated internal character normalization, steps 1–3 of lem-sfb-internal-bar-character-roof-cup. The blueprint provides the application context; the explicit internal normalization argument is agent-supplied."
+   }
+  },
+  {
+   "text": "Rewrite a localized roof as the shifted map of the cochain endomorphism under Q, conjugated by the isomorphism Q(P) ≅ A given by Q(e) and the canonical single comparison. Mathlib ShiftedHom.map_comp preserves shifted composition. Conjugation preserves it too: shifted e.hom followed by shifted e.inv cancels, and naturality of shift addition moves the remaining conjugating map to the endpoint. The zero-shift naturality gives the identity in degree zero. Induction on q therefore identifies the roof of the ordered lifted composite with the ordered composite of the individual roofs. This argument holds for arbitrary cochain lifts, even without any character equation. The wrapper localizedShiftedRoof contains exactly the original composite, with its composition and zero-degree equations proved generically. It is irreducible to avoid expanding concrete action-category data during subsequent algebra.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sfb-localized-shifted-roof"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-formulated internal character normalization, steps 1–3 of lem-sfb-internal-bar-character-roof-cup. The blueprint provides the application context; the explicit internal normalization argument is agent-supplied."
+   }
+  },
+  {
+   "text": "For the cup formula use induction on q with the characters, lifts and their generator conditions generalized. At q=0 the roof is the zero-shift identity, and inflationPhiIdentity is exactly the defined empty cup. At q+1, the induction hypothesis gives the scalar (-1)^q T_q for the prefix, and degree-one normalization rewrites the final character class as minus Phi of its roof. Additivity of tensor in both variables and composition makes the resulting cup equal to -((-1)^q T_q) times the cup of the two Phi classes. Apply the chosen binary (q,1) identity and the roof-composition formula. The scalar is (-1)^(q+1) T_(q+1): at q=0 use t_(0,1)=1, and at positive q use the defining recursion T_(q+1)=T_q t_(q,1). No interchange of characters is made.",
+   "uses": [
+    "lem-sfb-internal-bar-character-lift-normalization",
+    "lem-sfb-internal-inflation-graded-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-formulated internal character normalization, steps 1–3 of lem-sfb-internal-bar-character-roof-cup. The blueprint provides the application context; the explicit internal normalization argument is agent-supplied."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-bar-character-lift-normalization",
+  "lem-sfb-internal-inflation-graded-cup",
+  "def-weil-abstract-derived-category",
+  "def-sfb-localized-shifted-roof"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated internal character normalization, steps 1–3 of lem-sfb-internal-bar-character-roof-cup. The blueprint provides the application context; the explicit internal normalization argument is agent-supplied. Lean assembly proves shifted-roof conjugation and finite ordered-cup induction; only the degree-one normalization is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|AlexanderWhitney|alexanderWhitney",
+   "results": "{\"t\": \"2026-10-22T06:01:24Z\", \"tool\": \"grep\", \"query\": \"cupProduct|cup_product|AlexanderWhitney|alexanderWhitney\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete representation connecting maps, generic Ext composition and light-condensed internal Hom do not state the normalized internal character-roof cup identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"δ\"",
+   "results": "{\"t\": \"2026-10-22T06:01:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"groupCohomology\\\", \\\"δ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.δ\", \"groupCohomology.mono_δ_of_isZero\", \"groupCohomology.epi_δ_of_isZero\", \"groupCohomology.isIso_δ_of_isZero\", \"groupCohomology.δ_naturality\", \"groupCohomology.δ_apply\", \"groupCohomology.δ₀_apply\", \"groupCohomology.δ₁_apply\"], \"digest\": \"e073ad5e26b1dd0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete representation connecting maps, generic Ext composition and light-condensed internal Hom do not state the normalized internal character-roof cup identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Additive group character extension connecting class shifted Yoneda composition cup product on internal condensed modules",
+   "results": "{\"t\": \"2026-10-22T06:01:25Z\", \"tool\": \"leansearch\", \"query\": \"Additive group character extension connecting class shifted Yoneda composition cup product on internal condensed modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CharacterModule\", \"AddChar.instAddCommGroup\", \"CategoryTheory.preadditiveYoneda\", \"AddChar.noConfusionType\", \"CharacterModule.instAddCommGroup\", \"AddChar.mulShift\", \"AddCommGrpCat.coyonedaType\", \"CharacterModule.ext\"], \"digest\": \"8f24faebef75ce0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete representation connecting maps, generic Ext composition and light-condensed internal Hom do not state the normalized internal character-roof cup identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a derived category of internal equivariant modules character extension connecting morphisms identify iterated bar lift roofs with ordered derived cup products up to universal shift signs",
+   "results": "{\"t\": \"2026-10-22T06:01:35Z\", \"tool\": \"leanfinder\", \"query\": \"In a derived category of internal equivariant modules character extension connecting morphisms identify iterated bar lift roofs with ordered derived cup products up to universal shift signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CochainComplex.mappingCone.lift_f_fst_v\"], \"digest\": \"fbbf101f55fab3a9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete representation connecting maps, generic Ext composition and light-condensed internal Hom do not state the normalized internal character-roof cup identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda products of one extension classes via chain map lifts agree with lax monoidal derived invariant cup under trivial inflation adjunction",
+   "results": "{\"t\": \"2026-10-22T06:02:21Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda products of one extension classes via chain map lifts agree with lax monoidal derived invariant cup under trivial inflation adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_apply\", \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"CategoryTheory.MonoidalCategory.ExternalProduct.extensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.extensionUnitRight\", \"LightCondensed.ihomPoints_symm_comp\", \"Rep.barResolution.extIso\", \"CategoryTheory.yonedaMon_naturality_assoc\", \"Rep.standardResolution.extIso\"], \"digest\": \"093f44d5600e6817\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete representation connecting maps, generic Ext composition and light-condensed internal Hom do not state the normalized internal character-roof cup identity."
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|barResolution|δ₁_apply",
+   "results": {
+    "t": "2026-10-23T10:36:16Z",
+    "tool": "grep",
+    "query": "cupProduct|cup_product|barResolution|δ₁_apply",
+    "sub": "",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean"
+    ],
+    "digest": "2b46aae4daa24664"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.barResolution.extIso and groupCohomology connecting-map formulas concern ordinary representations over a constant ring; LightCondensed.ihomPoints is underived Hom over an ordinary ring; generic projective-resolution Ext constructions require projectivity. None states the internal condensed character roof and ordered derived-cup formula for arbitrary prescribed cochain lifts. Read Resolution.lean:430-443, GroupCohomology/LongExactSequence.lean:144-161, Condensed/Light/InternallyProjective.lean:48-60, and CategoryTheory/Abelian/Projective/Ext.lean:40-61."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Character one extensions connecting morphisms via homogeneous bar cocycles and iterated Yoneda cup products for sheaves of modules",
+   "results": {
+    "t": "2026-10-23T10:36:16Z",
+    "tool": "leansearch",
+    "query": "Character one extensions connecting morphisms via homogeneous bar cocycles and iterated Yoneda cup products for sheaves of modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.coe_mapCocycles₁",
+     "Rep.barResolution.extIso",
+     "CategoryTheory.PresheafOfGroups.OneCochain.ext_iff",
+     "CategoryTheory.PresheafOfGroups.OneCochain.ext",
+     "groupCohomology.cocyclesMap_comp_isoCocycles₁_hom",
+     "SheafOfModules.Hom",
+     "SheafOfModules.Hom.ext",
+     "CategoryTheory.InjectiveResolution.extMk"
+    ],
+    "digest": "0107746a06a71ad1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.barResolution.extIso and groupCohomology connecting-map formulas concern ordinary representations over a constant ring; LightCondensed.ihomPoints is underived Hom over an ordinary ring; generic projective-resolution Ext constructions require projectivity. None states the internal condensed character roof and ordered derived-cup formula for arbitrary prescribed cochain lifts. Read Resolution.lean:430-443, GroupCohomology/LongExactSequence.lean:144-161, Condensed/Light/InternallyProjective.lean:48-60, and CategoryTheory/Abelian/Projective/Ext.lean:40-61."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"comp\"",
+   "results": {
+    "t": "2026-10-23T10:36:17Z",
+    "tool": "loogle",
+    "query": "\"Ext\", \"comp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Std.ExtDTreeMap.compare_getKey?_self",
+     "Std.ExtDTreeMap.compare_getKey_self",
+     "Std.ExtDTreeMap.Const.compare_maxKeyD_modify_eq",
+     "Std.ExtDTreeMap.Const.compare_minKeyD_modify_eq",
+     "Std.ExtDTreeMap.Const.compare_maxKey!_modify_eq",
+     "Std.ExtDTreeMap.Const.compare_minKey!_modify_eq",
+     "Std.ExtDTreeMap.Const.contains_alter_of_not_compare_eq",
+     "Std.ExtDTreeMap.Const.ordCompare_maxKeyD_modify_eq"
+    ],
+    "digest": "a13e2c9124afd821"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the quoted Ext/comp query returned unrelated Std.ExtDTreeMap comparison lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Character extension of internal condensed equivariant modules connecting morphism bar resolution roof ordered cup product",
+   "results": {
+    "t": "2026-10-23T10:36:18Z",
+    "tool": "leanfinder",
+    "query": "Character extension of internal condensed equivariant modules connecting morphism bar resolution roof ordered cup product",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.barResolution.extIso",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihom_map_val_app",
+     "LightCondMod.hom_naturality_apply",
+     "CondensedMod.hom_naturality_apply",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.internallyProjective_iff_tensor_condition'"
+    ],
+    "digest": "1876e927b12f5a08"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.barResolution.extIso and groupCohomology connecting-map formulas concern ordinary representations over a constant ring; LightCondensed.ihomPoints is underived Hom over an ordinary ring; generic projective-resolution Ext constructions require projectivity. None states the internal condensed character roof and ordered derived-cup formula for arbitrary prescribed cochain lifts. Read Resolution.lean:430-443, GroupCohomology/LongExactSequence.lean:144-161, Condensed/Light/InternallyProjective.lean:48-60, and CategoryTheory/Abelian/Projective/Ext.lean:40-61."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain map into the shifted bar complex represents a one extension and repeated shifted lifts represent the Yoneda product without projectivity of free sheaves",
+   "results": {
+    "t": "2026-10-23T10:36:51Z",
+    "tool": "leanfinder",
+    "query": "A chain map into the shifted bar complex represents a one extension and repeated shifted lifts represent the Yoneda product without projectivity of free sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChainComplex.linearYonedaObj",
+     "CategoryTheory.ProjectiveResolution.liftFSucc",
+     "Rep.barResolution.extIso",
+     "ChainComplex.linearYonedaObj_X",
+     "CategoryTheory.ProjectiveResolution.extMk_hom",
+     "ChainComplex.linearYonedaObj_d",
+     "CategoryTheory.isZero_Tor'_succ_of_projective",
+     "Rep.standardComplex.x_projective"
+    ],
+    "digest": "ae6f89fe65725e4b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.barResolution.extIso and groupCohomology connecting-map formulas concern ordinary representations over a constant ring; LightCondensed.ihomPoints is underived Hom over an ordinary ring; generic projective-resolution Ext constructions require projectivity. None states the internal condensed character roof and ordered derived-cup formula for arbitrary prescribed cochain lifts. Read Resolution.lean:430-443, GroupCohomology/LongExactSequence.lean:144-161, Condensed/Light/InternallyProjective.lean:48-60, and CategoryTheory/Abelian/Projective/Ext.lean:40-61."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-bar-ordered-cup",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: internal ordered-character normalization, extension lift and canonical triangle sign, followed by shifted roof cancellation and the ordered-cup induction. The inherited ancestor search returns None.",
+   "via": [
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-internal-bar-character-roof-cup",
+  "worker": "stage1",
+  "summary": "Five steps prove the character roof formula by an explicit equivariant extension lift, identify its shifted adjoint from the existing positive-character definition, cancel augmentation inverses for arbitrary chain lifts, and induct using the existing ordered graded-cup theorem. No new nodes: all remaining calculations are elementary consequences of cited statements. The statement is unchanged; no Lean written or compiled.",
+  "blueprint": "Current latest blueprint, direct-images proof paragraph (3), open direct image: the internal bar normalization beneath the open-coefficient input. Steps 1-3 realize the character extension normalization; steps 4-5 realize the shifted-composition and ordered-cup induction. blueprint_refs.py ancestor returns the inherited null ancestor; global blueprint searches found no equivalent imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-ea7ccb58d",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-ea7ccb58d (reviewer sub-agent of L); spot-checked: I read all five steps and every cited statement in full. The delivery adds no new nodes. The statement and stmt_deps are byte-identical to the Q47 base, and there is no re-split repair note. Step 1: I checked the E_a action for associativity; ℓ[g]=(a(g),1) is defined by the free-module adjunction in lem-sfb-condensed-internal-bar-resolution and is equivariant; ℓ∂₁=(a(g₀⁻¹g₁),0) holds without commutativity of G; exactness follows because forgetting the action detects exactness (restriction-calculus). Step 2: the short-exact-sequence clause of roof-adjunction gives ρ_f=−δ with the item's cone convention. e[1]L lives only in degree −1, so e[1]L=f̄ for every allowed L. Step 3: def-sfb-condensed-unipotent-class gives [a]=Φ₁(δ_a). I cross-checked the sign with the q=1 formula of roof-adjunction (s₁=−1, c_f=a): Φ₁(δ_a) has cocycle +a, which matches the restriction-calculus normalization and the parent's ε₁=1. Step 4 is an elementary inverse cancellation; I checked the domains and the bases ρ₀=1 and ρ₁=x_{a₁}. Step 5: the q=0 and q=1 bases hold, and the induction uses the ordered (q,1) identity of graded-cup verbatim, giving T_{q+1}=T_q t_{q,1}. Edge cases checked: trivial G, A=0, characteristic 2, and ℤ_p acting on 𝔽_p. There is no cycle (transitive-closure check) and no SGA citation. The blueprint paragraph (3) gives only context, so proof_origin=agent with a WANTED reference is honest; latest is identical to main-20261015 for that file. No changes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalBarCharacterRoofCup",
+  "declaration": "CategoryTheory.CondensedDerivedRestriction.internalBarCharacterRoofCup",
+  "declarations": [
+   "CategoryTheory.CondensedDerivedRestriction.characterLiftComponent",
+   "CategoryTheory.CondensedDerivedRestriction.IsCharacterLift",
+   "CategoryTheory.CondensedDerivedRestriction.characterRoof",
+   "CategoryTheory.CondensedDerivedRestriction.orderedCharacterLift",
+   "CategoryTheory.CondensedDerivedRestriction.orderedCharacterRoofs",
+   "CategoryTheory.CondensedDerivedRestriction.orderedCharacterCup",
+   "CategoryTheory.CondensedDerivedRestriction.characterCupSign",
+   "CategoryTheory.CondensedDerivedRestriction.internalBarCharacterRoofCup"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalBarCharacterRoofCup.lean",
+  "statement": "theorem internalBarCharacterRoofCup : ∃ t : ℕ → ℕ → ℤ, (∀ p r : ℕ, t p r = 1 ∨ t p r = -1) ∧ (∀ p : ℕ, t p 0 = 1) ∧ (∀ r : ℕ, t 0 r = 1) ∧ (∀ (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (p r : ℕ) (x : coefficient A G ⟶ (coefficient A G)⟦(p : ℤ)⟧) (y : coefficient A G ⟶ (coefficient A G)⟦(r : ℤ)⟧), inflationGradedCup A G p r (inflationPhi A G p x) (inflationPhi A G r y) = t p r • inflationPhi A G (p + r) (ShiftedHom.comp x y (by simp [Nat.cast_add, add_comm]))) ∧ ∀ (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (R : Resolution A.toMon G) (e : RoofAugmentation R) [QuasiIso e], augmentationEquation R e → (∀ (a : Character A G) (L : complex R ⟶ (complex R)⟦(1 : ℤ)⟧), IsCharacterLift R a L → characterRoof R e 1 L = -(extensionExact a).singleδ ∧ inflationPhi A G 1 (characterRoof R e 1 L) = -characterClass a) ∧ (∀ (q : ℕ) (a : Fin q → Character A G) (L : Fin q → (complex R ⟶ (complex R)⟦(1 : ℤ)⟧)), (∀ i : Fin q, IsCharacterLift R (a i) (L i)) → characterRoof R e q (orderedCharacterLift R q L) = orderedCharacterRoofs q (fun i ↦ characterRoof R e 1 (L i)) ∧ orderedCharacterCup q a = ((-1 : ℤ) ^ q * characterCupSign t q) • inflationPhi A G q (characterRoof R e q (orderedCharacterLift R q L)))",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The original orderedShiftedArrows definition is moved verbatim to InternalShiftedRoof and publicly reexported. characterRoof retains its signature and formula, packaged through the generic irreducible localizedShiftedRoof wrapper. No mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41b9a2207",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Statement faithful clause by clause: IsCharacterLift = e∘L^{-1} on generators gives a(x0⁻¹x1) with no sign; characterRoof matches roof-adjunction's roof (sign-free shift iso); x_a = −singleδ (roof-adjunction's δ) and Φ1(x_a) = −characterClass (positive class); F_q and ρ_q by ShiftedHom.comp in node order; left-associated graded cup with (−1)^q·T_q, T0=T1=1, T_{q+1}=T_q·t(q,1); t chosen before all inputs, graded clause verbatim, t(q,1) forced; [QuasiIso e] holds for the unique augmentation. Edge cases q=0/1, zero character, trivial G, zero ring, char 2 checked. No duplicate, no hollow defs, only sorry, docstrings OK. Advisory: unipotent-class and derived-cup owners not in the unchanged S1 stmt_deps; second reading by the same worker; stage-3 link to parent characterCup (right-associated). No recompile per instructions; worker reports clean 20.3 s/19.9 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0c7a8",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T082912-L-2235193",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, InternalShiftedRoof and InternalBarCharacterLiftNormalization against the clone item 6e74685 and node lem-sfb-internal-bar-character-roof-cup; new lemma = item's degree-one conjunct; axioms checked by #print axioms; 3 modules compiled with lcompile --all"
+ }
+}

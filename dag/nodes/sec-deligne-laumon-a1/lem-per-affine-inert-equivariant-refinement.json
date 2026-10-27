@@ -1,0 +1,252 @@
+{
+ "id": "lem-per-affine-inert-equivariant-refinement",
+ "kind": "statement",
+ "title": "Affine inert refinements of equivariant pointed etale neighbourhoods",
+ "statement": "Let $G$ be a finite group acting by scheme automorphisms on a separated locally Noetherian scheme $X$ [def-pc-scheme, def-weil-proper-morphism, pqf-def-locnoeth]. Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-geometric-point], and put $H=\\{g\\in G:g\\bar x=\\bar x\\}$. Let $f:V\\to X$ be an $H$-equivariant etale morphism [def-weil-etale-morphism] from a scheme with an $H$-action, where $H$ acts on $X$ by inclusion in $G$, and let $\\bar v$ be an $H$-fixed geometric point of $V$ with $f\\bar v=\\bar x$. For any $H$-invariant open subscheme $O\\subseteq V$ containing $\\bar v$, there exist an affine Noetherian scheme $W$ with an $H$-action, an $H$-fixed geometric point $\\bar w$, and an $H$-equivariant etale morphism $a:W\\to V$ factoring through $O$, such that $a\\bar w=\\bar v$ and, for every geometric point $\\bar z$ of $W$, inclusion of groups identifies\n$$\\operatorname{Stab}_H(\\bar z)=\\operatorname{Stab}_G(fa\\bar z).$$\nA scheme action here means automorphisms $a_g$ satisfying $a_1=1$ and $a_{gh}=a_ga_h$; equivariance means commutation with these automorphisms. A geometric stabilizer consists of elements fixing the geometric-point morphism, including its residue-field embedding. No log structure, tameness, regularity, quotient existence or faithful action is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 5.3.6 and the initial localization argument of proof 5.3.7, printed p.124; VI 4.1, p.76, fixed subschemes. Generic affine equivariant refinement underlying the inert shrinking, before any rigidification. In ancestor lem-per-artin-gabber-affine-curve this serves proof Step 3, regular local model and purity."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For $g\\in G$, form the equalizer $F_g=X\\times_{X\\times_{\\operatorname{Spec}\\mathbf Z}X,(1,g),\\Delta_X}X$. By [def-weil-proper-morphism] the diagonal is a closed immersion; [lem-weil-pbc-closed-immersion-base-change] therefore makes $F_g\\hookrightarrow X$ a closed immersion. Its universal property says that a geometric point $\\bar y$ factors through it exactly when $g\\bar y=\\bar y$. Put $X_0=X\\setminus\\bigcup_{g\\notin H}|F_g|$. This is open, contains $\\bar x$, and every geometric point in it has $G$-stabilizer contained in $H$. For $h\\in H$ the identity $hF_g=F_{hgh^{-1}}$ follows by composing the defining equality with $h$ and $h^{-1}$. Since conjugation by $H$ preserves $G\\setminus H$, $X_0$ is $H$-invariant.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 4.1, printed p.76, fixed subschemes; VIII proof 5.3.7, printed p.124, the open X prime obtained by removing fixed loci"
+   }
+  },
+  {
+   "text": "Fix $h\\in H$. Let $P_h=V\\times_XF_h$ with inclusion $i_h:P_h\\to V$, a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Equivariance and the equality defining $F_h$ give $fi_h=fh i_h$, so $(i_h,h i_h)$ is a map $P_h\\to V\\times_XV$. Pull back $\\Delta_f:V\\to V\\times_XV$ along this map and call the resulting equalizer $E_h\\to P_h$. The map $f$ is unramified by [def-weil-etale-morphism], hence its diagonal is open by [def-weil-unramified-morphism]; [lem-weil-pbc-open-immersion-base-change] makes $E_h$ open in $P_h$. Thus $B_h=|P_h|\\setminus|E_h|$ is closed in $P_h$, and therefore in $V$. For a geometric point $\\bar z$ of $V$, membership in $P_h$ means $hf\\bar z=f\\bar z$, and membership in $E_h$ means also $h\\bar z=\\bar z$. These are equalities of morphisms, not just of their image points. In using the first equivalence, a field-valued morphism whose image is in a closed subscheme factors through it: every element of its defining ideal maps to zero in the field.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GE, lemma-diagonal-unramified-morphism; Tag 01QR, lemma-base-change-closed-immersion; with schemes.tex Tag 01JY, lemma-base-change-immersion (open case). Explicit equalizer pullback argument"
+   }
+  },
+  {
+   "text": "Put $T=O\\cap f^{-1}(X_0)\\cap\\bigl(V\\setminus\\bigcup_{h\\in H}B_h\\bigr)$. This is an open neighbourhood of $\\bar v$: its image lies in $X_0$, and $h\\bar v=\\bar v$ puts $\\bar v$ in every $E_h$. For $k\\in H$, equivariance sends $P_h$ to $P_{khk^{-1}}$ and sends the equality $h\\bar z=\\bar z$ to $(khk^{-1})(k\\bar z)=k\\bar z$, so it sends $B_h$ to $B_{khk^{-1}}$. Thus $T$ is $H$-invariant. If $g\\in G$ fixes $f\\bar z$ for a geometric point of $T$, step 1 gives $g\\in H$; then $\\bar z\\in P_g$ and exclusion of $B_g$ gives $\\bar z\\in E_g$, hence $g\\bar z=\\bar z$. Conversely equivariance sends every element fixing $\\bar z$ to an element fixing $f\\bar z$. Therefore the two stabilizers are equal on $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.6 and initial localization of proof 5.3.7, printed p.124; explicit elementary assembly of the fixed-locus calculations in steps 1 and 2"
+   }
+  },
+  {
+   "text": "Write $v$ for the image point of $\\bar v$. By [lem-weil-pbc-affine-opens-basis], choose an affine open $A$ with $v\\in A\\subseteq T$. Set $T_1=\\bigcap_{h\\in H}hA$. All its terms contain $v$, and left multiplication permutes them, so $T_1$ is an invariant open neighbourhood of $v$ contained in $A$. The scheme $A$ is separated over $\\operatorname{Spec}\\mathbf Z$ by [lem-weil-pbc-affine-source-morphism-separated]. The diagonal of its open subscheme $T_1$ is the pullback of $\\Delta_A$ along $T_1\\times T_1\\to A\\times A$: equality of the two maps to $A$ is equality to $T_1$ because the inclusion is a monomorphism. Thus [lem-weil-pbc-closed-immersion-base-change] shows $T_1$ is separated. This does not assert that $T_1$ is affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (lemma-basis-affine-opens), 01KN (lemma-affine-separated); morphisms.tex Tag 01QR. First shrinking in the explicit invariant-affine argument underlying ILO VIII proof 5.3.7"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-affine-opens-basis] again inside $T_1$, obtaining an affine open $C$ containing $v$. Put $W=\\bigcap_{h\\in H}hC$. The translates $hC$ are affine opens of the separated scheme $T_1$. Repeated application of [lem-weil-pbc-separated-affine-open-intersection], with base $\\operatorname{Spec}\\mathbf Z$, shows that their finite nonempty intersection is affine: start with $C$ and intersect the remaining translates one at a time. Each intermediate intersection is affine by that lemma. The set $W$ contains $v$, is $H$-invariant by reindexing, and is contained in $T_1\\subseteq T\\subseteq O$. This second shrinking is essential because $V$ itself need not be separated.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (lemma-basis-affine-opens), 01KP (lemma-characterize-separated, (1)(a)); explicit finite-intersection realization of the invariant affine neighbourhoods in ILO VIII proof 5.3.7"
+   }
+  },
+  {
+   "text": "Restrict the $H$-action to $W$ and let $a:W\\hookrightarrow V$ be the inclusion. The action laws restrict, and $a$ is equivariant and factors through $O$. Since $v\\in W$, the geometric point $\\bar v$ has a unique factorization $\\bar w$ through $W$. For $h\\in H$ the maps $h\\bar w$ and $\\bar w$ have the same composite $\\bar v$ with the open immersion, hence agree. Thus $\\bar w$ is $H$-fixed and $a\\bar w=\\bar v$. The map $a$ is etale by [lem-weil-pbc-open-immersion-etale]. For any geometric $\\bar z$ of $W$, injectivity of an open immersion on morphisms identifies its stabilizer with that of $a\\bar z$ in $T$; step 3 gives the required equality with $\\operatorname{Stab}_G(fa\\bar z)$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GP (lemma-open-immersion-etale); elementary restriction of the action and the stabilizer equality already proved"
+   }
+  },
+  {
+   "text": "The unramified hypothesis on $f$ makes it locally of finite type by [def-weil-unramified-morphism]. Since $X$ is locally Noetherian, [pqf-lem-locnoeth-lft] makes $V$ locally Noetherian. Now $W$ is an affine open of $V$, so [pqf-lem-affine-open-locnoeth] makes its coordinate ring Noetherian. Consequently $W$ is an affine Noetherian scheme, as asserted.",
+   "uses": [
+    "def-weil-unramified-morphism",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); properties.tex Tag 01OW (lemma-locally-Noetherian), affine-open characterization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-open-immersion-etale",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 4.1, printed p.76 and VIII 5.3.6--5.3.7, printed p.124. Explicit general-scheme proof of the preliminary inert localization and invariant-affine shrinking; no logarithmic or tameness argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting on a separated locally Noetherian scheme has affine equivariant pointed etale refinements preserving geometric inertia groups",
+   "results": "{\"t\": \"2026-10-24T02:01:24Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group acting on a separated locally Noetherian scheme has affine equivariant pointed etale refinements preserving geometric inertia groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"arithFrobAt\", \"CategoryTheory.PreGaloisCategory.PointedGaloisObject.isGalois\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois\"], \"digest\": \"386c59117ae1e183\"}; Read the returned hits: ordinary scheme etaleness, scheme refinements, group-action stabilizers, ordinary regular rings and generalizing maps do not state this logarithmic or equivariant refinement assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivariant etale neighbourhood of a fixed geometric point can be refined to an affine neighbourhood inducing isomorphisms on geometric stabilizers",
+   "results": "{\"t\": \"2026-10-24T02:01:23Z\", \"tool\": \"leansearch\", \"query\": \"An equivariant etale neighbourhood of a fixed geometric point can be refined to an affine neighbourhood inducing isomorphisms on geometric stabilizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.of_equiv\", \"StandardEtalePresentation.mapEquiv\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"MulAction.stabilizerEquivStabilizer\", \"AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq\", \"CategoryTheory.PreGaloisCategory.nhds_one_has_basis_stabilizers\"], \"digest\": \"e19588788c933ffc\"}; Read the returned hits: ordinary scheme etaleness, scheme refinements, group-action stabilizers, ordinary regular rings and generalizing maps do not state this logarithmic or equivariant refinement assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T02:01:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizer\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary scheme etaleness, scheme refinements, group-action stabilizers, ordinary regular rings and generalizing maps do not state this logarithmic or equivariant refinement assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "([Ii]nert|[Ss]tabilizer).*(etale|étale|[Nn]eighbo)|[Ee]quivariant.*[Nn]eighbo",
+   "results": "{\"t\": \"2026-10-24T02:01:22Z\", \"tool\": \"grep\", \"query\": \"([Ii]nert|[Ss]tabilizer).*(etale|étale|[Nn]eighbo)|[Ee]quivariant.*[Nn]eighbo\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary scheme etaleness, scheme refinements, group-action stabilizers, ordinary regular rings and generalizing maps do not state this logarithmic or equivariant refinement assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(inert|stabilizer).*(etale|étale|neighbo)|equivariant.*neighbo",
+   "results": "{\"t\": \"2026-10-24T02:45:54Z\", \"tool\": \"grep\", \"query\": \"(inert|stabilizer).*(etale|étale|neighbo)|equivariant.*neighbo\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Returned signatures read. General Galois categories, affine limit refinements, ordinary etale loci, and topological stabilizer openness do not assert inert equivariant scheme neighbourhoods.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivariant etale neighbourhood of a fixed geometric point has an invariant affine open neighbourhood preserving geometric stabilizers",
+   "results": "{\"t\": \"2026-10-24T02:45:54Z\", \"tool\": \"leansearch\", \"query\": \"An equivariant etale neighbourhood of a fixed geometric point has an invariant affine open neighbourhood preserving geometric stabilizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProperlyDiscontinuousVAdd.exists_nhds_image_vadd_eq_self\", \"Algebra.Etale.of_equiv\", \"AlgebraicGeometry.affineOpensRestrict\", \"StructureGroupoid.LocalInvariantProp.liftPropWithinAt_of_liftPropAt_of_mem_nhds\", \"CategoryTheory.PreGaloisCategory.nhds_one_has_basis_stabilizers\", \"StructureGroupoid.LocalInvariantProp.congr_nhdsWithin'\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"StructureGroupoid.LocalInvariantProp.congr'\"], \"digest\": \"1e5e2f3bc2f4d72c\"}; Returned signatures read. General Galois categories, affine limit refinements, ordinary etale loci, and topological stabilizer openness do not assert inert equivariant scheme neighbourhoods.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T02:45:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizer\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Returned signatures read. General Galois categories, affine limit refinements, ordinary etale loci, and topological stabilizer openness do not assert inert equivariant scheme neighbourhoods.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting on a separated locally Noetherian scheme admits affine inert equivariant pointed etale refinements preserving all geometric stabilizers",
+   "results": "{\"t\": \"2026-10-24T02:45:55Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group acting on a separated locally Noetherian scheme admits affine inert equivariant pointed etale refinements preserving all geometric stabilizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"CategoryTheory.PreGaloisCategory.PointedGaloisObject.isGalois\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"551e3279b6964546\"}; Returned signatures read. General Galois categories, affine limit refinements, ordinary etale loci, and topological stabilizer openness do not assert inert equivariant scheme neighbourhoods.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite group equivariant etale map, the locus where source and target geometric point stabilizers agree is open",
+   "results": "{\"t\": \"2026-10-24T02:45:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite group equivariant etale map, the locus where source and target geometric point stabilizers agree is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"Algebra.isOpen_unramifiedLocus\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"stabilizer_isOpen\", \"Algebra.isOpen_smoothLocus\", \"IntermediateField.fixingSubgroup_isOpen\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"Algebra.etaleLocus\"], \"digest\": \"ffc5f400c8e22ef7\"}; Returned signatures read. General Galois categories, affine limit refinements, ordinary etale loci, and topological stabilizer openness do not assert inert equivariant scheme neighbourhoods.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-pointwise-diagonal-kummer-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "VIII 5.3.6 and the initial localization argument of proof 5.3.7, printed p.124; VI 4.1, p.76, fixed subschemes. Generic affine equivariant refinement underlying the inert shrinking, before any rigidification. In ancestor lem-per-artin-gabber-affine-curve this serves proof Step 3, regular local model and purity.",
+   "via": [
+    "lem-per-pointwise-diagonal-kummer-neighbourhood",
+    "lem-per-very-tame-locus-open",
+    "lem-per-abelian-inert-rigidification-cover",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-affine-inert-equivariant-refinement",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved inertia preservation by closed fixed loci on X and open relative equalizers on V, then constructed an invariant affine open using two successive finite-translate shrinkings, valid even for nonseparated V. Reused existing Mathlib leaves throughout; no new nodes. Checked all seven steps and their citation statements against ILO and Stacks.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (duality/purity branch), through the recorded via chain. This item supplies the generic inert affine localization used by the pointwise diagonal Kummer neighbourhood; latest blueprint ancestor read, not a replacement for its unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-81710c90c",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-81710c90c (reviewer sub-agent of L); spot-checked: I read the item in full: a 7-step proof with no new nodes. Its statement and stmt_deps are identical to live, where the item is still unsplit with no proof. No re-split note exists and no other group has split it. proof_deps equal the union of the step uses (11 generic defs and Mathlib leaves). Source check: ILO VIII 5.3.6 and the proof of 5.3.7 (printed pp.124-125) remove X^H for H not containing G_x, then pass to invariant affine neighbourhoods; VI 4.1 sets up fixed schemes. Step 1: F_g is the equalizer of (1,g) and Delta_X, a closed immersion by separatedness and base change (01QR). Reducedness of Spec Omega gives that x lies outside |F_g| for g not in H. hF_g = F_{hgh^-1}, so X_0 is H-invariant. Step 2: P_h = f^-1 F_h; equivariance makes (i_h, h i_h) land in V x_X V. E_h is the pullback of the open Delta_f (unramified def plus 01JY), so B_h is closed in V, and V need not be separated. Step 3, elementary: on T both stabilizer inclusions hold and T is invariant. Step 4: A is affine in T, T_1 = intersection of the hA is separated as an open of the affine A, and it is not claimed affine. Step 5: C is affine in T_1, and W = intersection of the hC is affine by repeated 01KP over Spec Z. Step 6: the open immersion is etale (02GP) and a monomorphism, so the fixed point lifts. Step 7: 01T6 plus the affine-open lemma make W Noetherian. Checked: trivial or non-faithful actions, residue-field action, non-reduced F_g, X not quasi-compact, V not separated, any characteristic. Duplicates: lem-per-inert-etale-quotient-comparison needs separated U, V with invariant affine covers and a G-action, so it does not apply; lem-pd-invariant-affine-neighbourhoods is a descent setting. The only citer, the pointwise diagonal Kummer neighbourhood step 1, uses the statement as written. No SGA, no tool_uses, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineInertEquivariantRefinement",
+  "declaration": "AlgebraicGeometry.exists_affine_inert_equivariant_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineInertEquivariantRefinement.lean",
+  "statement": "theorem exists_affine_inert_equivariant_refinement {G : Type v} [Group G] [Finite G] {X : Scheme.{u}} [X.IsSeparated] [IsLocallyNoetherian X] (ρX : G →* Aut X) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (H : Subgroup G) (hH : ∀ g : G, g ∈ H ↔ x ≫ (ρX g).hom = x) {V : Scheme.{u}} (ρV : H →* Aut V) (f : V ⟶ X) [Etale f] (hf : ∀ h : H, (ρV h).hom ≫ f = f ≫ (ρX h.val).hom) (t : Spec (.of Ω) ⟶ V) (ht : t ≫ f = x) (ht_fixed : ∀ h : H, t ≫ (ρV h).hom = t) (O : V.Opens) (htO : t default ∈ O) (hO : ∀ (h : H) (p : V), (ρV h).hom p ∈ O ↔ p ∈ O) : ∃ (W : Scheme.{u}) (_ : IsAffine W) (_ : IsNoetherian W) (ρW : H →* Aut W) (w : Spec (.of Ω) ⟶ W) (a : W ⟶ V), Etale a ∧ (∀ h : H, (ρW h).hom ≫ a = a ≫ (ρV h).hom) ∧ (∃ b : W ⟶ O.toScheme, b ≫ O.ι = a) ∧ w ≫ a = t ∧ (∀ h : H, w ≫ (ρW h).hom = w) ∧ ∀ (K : Type u) [Field K] [IsAlgClosed K] (z : Spec (.of K) ⟶ W) (g : G), z ≫ a ≫ f ≫ (ρX g).hom = z ≫ a ≫ f ↔ ∃ h : H, h.val = g ∧ z ≫ (ρW h).hom = z",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c88dd06a8",
+  "group": "NR",
+  "result": "pass",
+  "note": "Single sorry theorem; every node clause matches the Lean (left Aut action via Aut_mul_def; H exact stabilizer via hH; equivariance hf; two-way invariance hO; W IsAffine+IsNoetherian with ρW, fixed w, w≫a=t; Etale a; factorization through O.ι; stabilizer iff with h.val=g compares whole morphisms). No extra hypotheses (V not separated or Noetherian, no faithfulness). Universes forced by Spec typing and matching the recorded geometric-point interface. stmt_deps are the recorded Mathlib declarations; the UnramifiedMorphism proof-dep module is imported; lean.statement verbatim; not landed live and no repair note; no duplicate in lean/Sheaf or WeilConjectures; citer pointwise-diagonal-kummer step 1 is supported; docstrings carry source, blueprint and 7 steps; report sections present. No compile (no file changed)."
+ }
+}

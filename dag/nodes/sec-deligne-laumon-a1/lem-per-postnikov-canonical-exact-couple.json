@@ -1,0 +1,122 @@
+{
+ "id": "lem-per-postnikov-canonical-exact-couple",
+ "kind": "statement",
+ "title": "Canonical Postnikov exact couple",
+ "statement": "Let A and B be abelian categories, and suppose D(A) is a derived category with its standard t-structure. For every homological T:D(A)→B, there exists a PostnikovCoupleData T: the canonical successive-truncation arrows are exact, the layer comparison is normalized on cohomology, and the E2 comparison is the coherent single-functor shift comparison. The witness interfaces are defined in [def-per-postnikov-additive-witness-data].",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology Tag 011Q: exact-couple definition; Derived Categories Tag 08J5: canonical successive-truncation triangle. The degree convention is the project E2 convention."
+ },
+ "stmt_deps": [
+  "def-per-postnikov-additive-witness-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the unique layer map inducing the truncation homology comparison; homology is fully faithful on objects concentrated in degree q, so it is a natural isomorphism with the stated normalization. Apply the three exact positions of the shifted homology sequence to the canonical truncation triangle. Transport endpoints along equal total degrees. Use the canonical Postnikov objects and arrows as the initial couple and compose the coherent single-functor shift comparisons for E2. Uses [lem-sp-long-exact-of-triangle], [def-per-postnikov-truncation-couple-terms].",
+   "uses": [
+    "lem-sp-long-exact-of-triangle",
+    "def-per-postnikov-truncation-couple-terms"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-long-exact-of-triangle",
+  "def-per-postnikov-truncation-couple-terms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 011Q, 011R, 011S and 0AMJ, with the canonical Postnikov triangles of derived.tex Tag 08J5; explicit additive-functor argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Postnikov|postnikov|BigradedExactCouple",
+   "results": "{\"t\": \"2026-10-23T10:15:51Z\", \"tool\": \"grep\", \"query\": \"Postnikov|postnikov|BigradedExactCouple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching packaged theorem; the listed exactness and spectral-object declarations supply ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-23T10:15:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpectralSequence\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.SpectralSequence.pageFunctor\", \"CategoryTheory.SpectralSequence.pageFunctor_obj\", \"CategoryTheory.SpectralSequence.pageFunctor_map\"], \"digest\": \"634c6cb9303f834b\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching packaged theorem; the listed exactness and spectral-object declarations supply ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postnikov truncation tower additive homological functor exact couple spectral sequence",
+   "results": "{\"t\": \"2026-10-23T10:15:52Z\", \"tool\": \"leanfinder\", \"query\": \"Postnikov truncation tower additive homological functor exact couple spectral sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.homologySequence_exact\\u2082\", \"CategoryTheory.Functor.homologySequence_exact\\u2081\", \"CategoryTheory.Functor.homologySequence_exact\\u2083\", \"HomologicalComplex.shortComplexTruncLEX\\u2083ToTruncGE\", \"ComplexShape.Embedding.\\u03c0TruncGENatTrans\", \"HomotopyCategory.spectralObjectMappingCone\", \"CategoryTheory.Triangulated.TStructure.truncGE\\u03b4LT\", \"CochainComplex.shortComplexTruncLE\"], \"digest\": \"73ab2ef0bf6c6584\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching packaged theorem; the listed exactness and spectral-object declarations supply ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive diagram of exact couples has functorial spectral sequence pages and stable quotients",
+   "results": "8 hits: CategoryTheory.Functor.instAdditiveOfIsHomological; CategoryTheory.ShortComplex.leftHomologyFunctor_additive; CategoryTheory.ShortComplex.rightHomologyFunctor_additive; CategoryTheory.ShortComplex.homologyFunctor_additive and additive category infrastructure.",
+   "date": "2026-10-24",
+   "verdict": "No packaged exact-couple diagram construction; these give component additivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PostnikovAdditiveExactCouple",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 1: the Postnikov exact-couple and additive-map passage used through lem-per-bounded-above-rhom-hyperext, old proof Steps 4–5 and 9. Canonical Postnikov exact couple",
+   "via": [
+    "lem-per-postnikov-additive-exact-couple",
+    "lem-per-bounded-above-rhom-hyperext"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PostnikovCanonicalExactCouple",
+  "file": "lean/Sheaf/CategoryTheory/PostnikovCanonicalExactCouple.lean",
+  "declaration": "DerivedCategory.exists_postnikov_canonical_exact_couple",
+  "statement": "theorem exists_postnikov_canonical_exact_couple\n    (T : DerivedCategory A ⥤ B) [T.IsHomological] : Nonempty (PostnikovCoupleData T)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9054e",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T190629-L-4168682",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9054e",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T190629-L-4168682",
+  "kind": "interface",
+  "note": "independent cc review: item exists_postnikov_additive_exact_couple (statement unchanged) assembled from 4 proved Postnikov lemmas + 2 new sorry lemmas (spectral-sequence realization, half-plane abutment); 10 witness defs moved verbatim to PostnikovAdditiveExactCoupleData (diff vs live), owned by new def node; #print axioms clean on all proved decls"
+ }
+}

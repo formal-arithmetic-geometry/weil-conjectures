@@ -17,9 +17,128 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=C^H$ and $\\mathfrak n=B\\cap\\mathfrak m_C$. Apply [lem-per-tame-fixed-ring-generic-components]. Thus $B$ is reduced complete Noetherian local, equidimensional of dimension $e$, with residue field $\\lambda=k^H$; $C$ is finite over $B$ and $k/\\lambda$ is finite separable. Every minimal $\\mathfrak q$ of $C$ contracts to a minimal $\\mathfrak r$ of $B$, and $L_{\\mathfrak q}=\\operatorname{Frac}(C/\\mathfrak q)$ is finite separable over $M_{\\mathfrak r}=\\operatorname{Frac}(B/\\mathfrak r)$. These assertions allow the non-equivariant construction on $B$, rather than making a choice of parameters on $C$ and trying to average them.",
+   "uses": [
+    "lem-per-tame-fixed-ring-generic-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.2.3–2.2.4, printed pp.53–54; equidimensional case, so the maximal equidimensional quotient of 2.2.4 is B itself."
+   }
+  },
+  {
+   "text": "By [lem-per-coefficient-field-generic-differential-basis], choose a coefficient section $t:\\lambda\\hookrightarrow B$ and $a_1,\\ldots,a_e\\in\\mathfrak n$ whose differentials form a basis of $\\widehat\\Omega_{B/\\lambda}\\otimes_B M_{\\mathfrak r}$ for every minimal $\\mathfrak r$. Choose $\\tau_1,\\ldots,\\tau_e\\in\\mathfrak n$ with $\\sqrt{(\\tau_1,\\ldots,\\tau_e)B}=\\mathfrak n$ by [lem-weil-pbc-noetherian-local-system-of-parameters]. Define $u_i=\\tau_i^p(1+a_i)$. Since $1+a_i$ is a unit, a prime contains every $u_i$ exactly when it contains every $\\tau_i$, so $\\sqrt{(u_1,\\ldots,u_e)B}=\\mathfrak n$. Apply case (a) of [lem-per-parameter-ideal-formal-normalization] with this section and tuple: $R_0=\\lambda[[T_1,\\ldots,T_e]]\\to B$ is injective, local, finite and torsion free. For $K_0=\\operatorname{Frac}(R_0)$, it gives $B\\otimes_{R_0}K_0=\\prod_{\\mathfrak r}M_{\\mathfrak r}$ with every factor finite over $K_0$.",
+   "uses": [
+    "lem-per-coefficient-field-generic-differential-basis",
+    "lem-weil-pbc-noetherian-local-system-of-parameters",
+    "lem-per-parameter-ideal-formal-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.1.4–2.1.12, especially the explicit formula t_i = τ_i^p(1+f_i) in 2.1.12; IV 2.2.4 applies this construction to the fixed ring."
+   }
+  },
+  {
+   "text": "The universal derivation satisfies $\\mathrm d(u_i)=\\tau_i^p\\mathrm da_i$: the Leibniz rule gives $\\mathrm d(\\tau_i^p)=p\\tau_i^{p-1}\\mathrm d\\tau_i=0$ in characteristic $p$. None of the $\\tau_i$ belongs to a minimal $\\mathfrak r$: case (a) of [lem-per-parameter-ideal-formal-normalization], now applied to the original tuple $\\tau$, makes $B$ torsion free over $\\lambda[[\\tau]]$ and identifies its generic algebra with $\\prod M_{\\mathfrak r}$, so every variable has nonzero image in every factor. Consequently the $\\mathrm du_i$ remain a basis on each $M_{\\mathfrak r}$. The exact sequence [lem-per-finite-formal-map-differential-cokernel] for $R_0\\to B$, tensored with $M_{\\mathfrak r}$ using [lem-weil-pbc-tensor-right-exact], gives $\\Omega_{B/R_0}\\otimes_B M_{\\mathfrak r}=0$. By [lem-weil-pbc-kahler-differentials-localization], localization at the nonzero elements of $B/\\mathfrak r$ is not being assumed: instead first localize $B$ at $R_0\\setminus\\{0\\}$, obtaining the displayed product of fields, and then project to the factor $M_{\\mathfrak r}$. Projection to a field factor is localization at its idempotent, so the same node identifies the resulting module with $\\Omega_{M_{\\mathfrak r}/R_0}$. Every $R_0$-derivation on this field annihilates $K_0$: $D(s^{-1})=-s^{-2}D(s)=0$ for $s\\in R_0\\setminus\\{0\\}$. The universal property [def-weil-pbc-kahler-differentials] therefore identifies this with $\\Omega_{M_{\\mathfrak r}/K_0}=0$. Each finite field extension $M_{\\mathfrak r}/K_0$ is separable by [lem-weil-pbc-fg-field-zero-differentials-separable].",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-per-parameter-ideal-formal-normalization",
+    "lem-per-finite-formal-map-differential-cokernel",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-fg-field-zero-differentials-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.1.12, printed pp.52–53, exact sequence and calculation of d(t_i); localization of differentials is Stacks Tag 00RT (algebra-lemma-differentials-localize)."
+   }
+  },
+  {
+   "text": "Lift the coefficient field as in IV 2.2.6. The complete ring $C$ is henselian by [lem-weil-pbc-complete-pair-henselian]. Choose $\\alpha$ with $k=\\lambda(\\alpha)$ by [lem-weil-pbc-finite-separable-primitive-element], and let $P\\in\\lambda[X]$ be its monic minimal polynomial. Regard its coefficients in $C$ via $t$. Its reduction has the simple root $\\alpha$ in $k$, since $k/\\lambda$ is separable. By [lem-weil-pbc-henselian-local-root-lifting] there is a root $b\\in C$ reducing to $\\alpha$. Using [lem-weil-pbc-minimal-polynomial-quotient-field-iso], evaluation $X\\mapsto b$ defines a unital map $s:k=\\lambda[X]/(P)\\to C$. It is injective since $k$ is a field and $C$ is nonzero; its residue composite fixes both $\\lambda$ and $\\alpha$, hence is the identity. Any other $\\lambda$-algebra section takes $\\alpha$ to a root of $P$ with the same residue and invertible derivative, hence to $b$ by [lem-weil-pbc-simple-root-uniqueness]. Thus $s$ is the unique such section. For $h\\in H$, the map $h\\circ s\\circ\\bar h^{-1}:k\\to C$ is again a $\\lambda$-algebra residue section, since $t(\\lambda)\\subseteq B$ is fixed and $\\bar h$ fixes $\\lambda$. Uniqueness gives $h\\circ s=s\\circ\\bar h$.",
+   "uses": [
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-finite-separable-primitive-element",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "lem-weil-pbc-simple-root-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.2.6, printed p.55; explicit primitive-element Hensel lift. Supporting Stacks Tags 0ALJ, 030N, 04GG, 09G1 and 06RR."
+   }
+  },
+  {
+   "text": "The $u_i$ lie in $B$ and are therefore $H$-fixed. The finite extension $B\\to C$ is integral by [lem-weil-pbc-finite-algebra-is-integral]. If a prime $\\mathfrak q\\subset C$ contains all $u_i$, its contraction contains their ideal in $B$ and hence equals $\\mathfrak n$. By [lem-weil-pbc-integral-prime-over-maximal-maximal], $\\mathfrak q$ is maximal, hence equals $\\mathfrak m_C$. This proves $\\sqrt{(u_1,\\ldots,u_e)C}=\\mathfrak m_C$. Apply case (a) of [lem-per-parameter-ideal-formal-normalization] to $C$, the coefficient section $s$ and this tuple. It gives precisely the injective local module-finite torsion-free evaluation map $R=k[[T_1,\\ldots,T_e]]\\to C$ with identity residue map, and $C\\otimes_R K=\\prod_{\\mathfrak q}L_{\\mathfrak q}$, each factor finite over $K=\\operatorname{Frac}(R)$. Evaluation is continuous: $(T_1,\\ldots,T_e)^N$ maps into $\\mathfrak m_C^N$. The action on series is coefficientwise and fixes variables; evaluating a truncated series commutes with $h$ by coefficient equivariance and fixedness of $u_i$. The difference for a full series lies in every $\\mathfrak m_C^N$, hence is zero by [def-weil-pbc-adically-complete-ring]. Thus the evaluation map is $H$-equivariant.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-per-parameter-ideal-formal-normalization",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.2.4–2.2.6, formal evaluation and finiteness; Stacks 00GK and 00GS for extending the parameter ideal."
+   }
+  },
+  {
+   "text": "For a minimal $\\mathfrak q$ of $C$, put $\\mathfrak r=\\mathfrak q\\cap B$. The fields form a tower $K_0\\subset M_{\\mathfrak r}\\subset L_{\\mathfrak q}$ in which the first extension is separable by Step 3 and the second by Step 1. By [lem-zl-separable-permanence], $L_{\\mathfrak q}/K_0$ is separable. The coefficient map $s$ extends $t$ and the variables have the same images, so the injection $R\\hookrightarrow L_{\\mathfrak q}$ from Step 5 restricts to the injection $R_0\\hookrightarrow M_{\\mathfrak r}$ from Step 2. Passing to fractions gives $K_0\\subset K\\subset L_{\\mathfrak q}$. By [lem-sfb-separable-algebraic-intermediate-base], $L_{\\mathfrak q}/K$ is separable; it is finite by Step 5. The product in Step 5 is therefore the required finite product of finite separable extensions. This uses generic separability of the fixed-ring quotient, rather than assuming the separability of the two evaluation maps is automatic.",
+   "uses": [
+    "lem-zl-separable-permanence",
+    "lem-sfb-separable-algebraic-intermediate-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.2.6, last sentence; Stacks Tags 09HB (fields-lemma-separable-permanence) and 09H2 (fields-lemma-separable-goes-up)."
+   }
+  },
+  {
+   "text": "Finally suppose that the specified perfect subfield $k_0\\subseteq C$ is present. For $a\\in k_0$ and each $N$, choose $a_N\\in k_0$ with $a_N^{p^N}=a$. Then $s(\\overline{a_N})-a_N\\in\\mathfrak m_C$. By [def-weil-ring-frobenius], $s(\\bar a)-a=(s(\\overline{a_N})-a_N)^{p^N}\\in\\mathfrak m_C^{p^N}$. Separation in [def-weil-pbc-adically-complete-ring] makes this difference zero. Thus every residue section, in particular the equivariant section constructed above, respects the prescribed perfect subfield. This argument works when $H$ acts nontrivially on $k_0$ and does not require $k_0\\subset B$.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 2.1.4, compatibility of coefficient representatives with compatible p-power roots, written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-tame-fixed-ring-generic-components",
+  "lem-per-coefficient-field-generic-differential-basis",
+  "lem-weil-pbc-noetherian-local-system-of-parameters",
+  "lem-per-parameter-ideal-formal-normalization",
+  "def-weil-pbc-kahler-differentials",
+  "lem-per-finite-formal-map-differential-cokernel",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-fg-field-zero-differentials-separable",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-finite-separable-primitive-element",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-weil-pbc-simple-root-uniqueness",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-zl-separable-permanence",
+  "lem-sfb-separable-algebraic-intermediate-base",
+  "def-weil-ring-frobenius"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV 2.1.12 and 2.2.3–2.2.6; the equidimensional restriction avoids the parameter-lifting Lemma 2.2.5."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +167,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-19",
    "verdict": "no match: no relevant theorem; substring hits, if any, are unrelated identifiers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tame equivariant Cohen Gabber finite generically separable power series subring of a reduced complete local ring",
+   "results": "Read 8 returned hits; top results: PowerSeries.weierstrassDistinguished, PowerSeries.IsWeierstrassDivisor, PowerSeries.weierstrassUnit, PowerSeries.isDistinguishedAt_weierstrassDistinguished, PowerSeries.exists_isWeierstrassFactorization, PowerSeries.weierstrassDiv, PowerSeries.IsWeierstrassFactorization, PowerSeries.IsWeierstrassDivision. These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"IsSeparable\"",
+   "results": "Read 0 returned hits; top results: . These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenGabber|Cohen.Gabber|equivariant.*parameter",
+   "results": "Read 0 returned hits; top results: . These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced complete local ring of positive characteristic has a finite generically etale power series subring",
+   "results": "Read 8 returned hits; top results: PowerSeries.exists_isWeierstrassDivision, PowerSeries.instIsLocalRing, PowerSeries.instIsNoetherianRing, PowerSeries.instIsDomain, PowerSeries.isNoetherianRing, PowerSeries.toSubring, PowerSeries.maximalIdeal_eq_span_X, LocalSubring.mk.noConfusion. These provide integral/invariant-field or power-series facts, not the complete fixed-ring structural theorem or equivariant Cohen–Gabber construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: no exact theorem or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of invariant formal parameters and an equivariant coefficient field section in a complete equidimensional local ring, finite separable over a multivariate power series ring",
+   "results": "Read eight returned Weierstrass preparation/division hits: PowerSeries.exists_isWeierstrassFactorization, PowerSeries.isDistinguishedAt_weierstrassDistinguished, PowerSeries.weierstrassDistinguished, PowerSeries.weierstrassDiv, PowerSeries.IsWeierstrassDivision, PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit, PowerSeries.exists_isWeierstrassDivision, PowerSeries.IsWeierstrassFactorization. These concern factoring or dividing a supplied univariate series, not invariant parameters or coefficient sections.",
+   "date": "2026-10-24",
+   "verdict": "no match: the second phrasing again returns only Weierstrass facts"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-to-ell-equivariant-cohen-presentation",
@@ -63,7 +217,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3, Gabber finiteness input: the formal Cohen presentation used by ILO V 3.2.1, expanded through IV 4.3.5. Exposé IV Theorem 2.2.2 and proof 2.2.4–2.2.6, pp.53–55, restricted to the equidimensional case; generic separability is the generically étale assertion. Compatibility with a perfect subfield is the unique compatible p-power-root argument of IV 2.1.4.",
+   "place": "Proof Step 3 of lem-per-artin-gabber-affine-curve: Gabber finiteness input, expanded via ILO V 3.2.1 and IV 4.3.5; tame positive-characteristic formal presentation, IV 2.2.3–2.2.6.",
    "via": [
     "lem-per-prime-to-ell-equivariant-cohen-presentation",
     "lem-per-prime-to-ell-marked-algebraization",
@@ -80,5 +234,68 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-tame-equivariant-cohen-gabber",
+  "worker": "stage1",
+  "summary": "Constructed the invariant parameters explicitly on the tame fixed ring; lifted the residue section uniquely by Hensel, used separability in a tower, and proved perfect-subfield compatibility by Frobenius. Reused the existing differential-basis, parameter-normalization and algebra nodes; one new statement-only fixed-ring structural lemma.",
+  "blueprint": "Proof Step 3 of lem-per-artin-gabber-affine-curve: Gabber finiteness input, expanded via ILO V 3.2.1 and IV 4.3.5; tame positive-characteristic formal presentation, IV 2.2.3–2.2.6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "General complete-ring Hensel tool used for the residue coefficient lift of ILO IV 2.2.6."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "General Hensel simple-root tool; the unit has no substitute for the coefficient-section lift."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NX-548177684",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-548177684 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, the new node and all 20 cited statements, and checked them against ILO IV 2.1.12 and IV 2.2.2–2.2.6 (printed pp.52–55). This is the item's first split; the statement is unchanged from the base. Step 1: the new node lem-per-tame-fixed-ring-generic-components states ILO IV 2.2.3 and 2.2.4 for B = C^H. It is true: Reynolds averaging gives Noetherian, local, residue field k^H and complete; C/nC is Artinian and finite over λ, so C is finite over B; minimal primes contract to minimal primes by lying-over, going-up and conjugacy; the generic fields satisfy M_r = L_q^{D_q}, a Galois extension. It does not restate the item and it is not a duplicate: tame-admissible-scheme-quotient gives only finiteness and Noetherianity. Step 2: the coefficient-field, system-of-parameters and parameter-normalization (a) hypotheses all hold on B, and u_i = τ_i^p(1+a_i) has the same radical as τ. Step 3: d u_i = τ_i^p d a_i. τ_i is a nonzerodivisor (torsion-free over λ[[τ]]), so it lies in no minimal prime. The exact sequence plus right exactness give Ω⊗M_r = 0; localizing at R0∖0 and then at the factor idempotent, plus 090W, gives M_r/K0 separable. Step 4: the Hensel simple-root lift of a primitive element gives a unique λ-section s, which is therefore H-equivariant, as in ILO 2.2.6. Step 5: by integrality rad(uC) = m_C, and case (a) on C gives every clause of the item; equivariance follows by truncation. Step 6: separability passes up the tower K0 ⊂ M_r ⊂ L_q and then over K (09HB, 09H2). Step 7: the p^N-th power argument makes every section compatible with the perfect subfield k0. I tested k[[x,y]]/(xy) with the swap, trivial H and e = 1. Dropped-route finding: the item and the three flagged cites are on the 2026-10-19 drop list, but a BFS from nt-target-zeta-rational reaches the item through lem-sfb-field-log-smooth-gabber-modification → … → prime-to-ell-equivariant-cohen-presentation, not through artin-gabber-affine-curve, so I judged it on its merits. parameter-ideal-formal-normalization was already reached at base. The two differential nodes revive 6 already-split ILO IV 2.1 algebra nodes; no live twin exists and none of them is Qbar, a t-structure or alterations. I accept this, with a maintainer note that the drop-list entry and the inherited blueprint.from/via are stale. Batch-5 finding: lem-trf-finite-domain-fraction-degree is a generic Mathlib fact (finite extension of domains gives a finite fraction-field extension), not part of the trace formula or Poincaré duality proofs, and it was already in the closure; accepted. The two tool_uses (generic pbc Hensel nodes) are accepted. No SGA source is used. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TameEquivariantCohenGabber",
+  "declaration": "IsLocalRing.tame_equivariant_cohen_gabber",
+  "declarations": [
+   "IsLocalRing.IsTameEquivariantCohenGabberPresentation",
+   "IsLocalRing.tame_equivariant_cohen_gabber"
+  ],
+  "file": "lean/Sheaf/RingTheory/TameEquivariantCohenGabber.lean",
+  "statement": "theorem tame_equivariant_cohen_gabber (p : ℕ) [Fact p.Prime] (C : Type u) [CommRing C] [IsLocalRing C] [IsNoetherianRing C] [IsReduced C] [CharP C p] [IsAdicComplete (maximalIdeal C) C] (e : ℕ) (he : 1 ≤ e) (hdim : ringKrullDim C = (e : WithBot ℕ∞)) (hequidim : ∀ q : Ideal C, IsMinimalPrime q → ringKrullDim (C ⧸ q) = (e : WithBot ℕ∞)) (H : Type v) [Group H] [Finite H] (ρ : H →* RingAut C) (htame : IsUnit (Nat.card H : ResidueField C)) (K₀ : Type w) [Field K₀] (constants : Option (K₀ →+* C)) (hperfect : ∀ ι : K₀ →+* C, constants = some ι → Function.Bijective (fun a : K₀ ↦ a ^ p)) (hstable : ∀ ι : K₀ →+* C, constants = some ι → ∀ (h : H) (a : K₀), ∃ b : K₀, ρ h (ι a) = ι b) : ∃ (s : ResidueField C →+* C) (x : Fin e → C) (f : MvPowerSeries (Fin e) (ResidueField C) →+* C), IsTameEquivariantCohenGabberPresentation C H ρ e s x f ∧ (∀ ι : K₀ →+* C, constants = some ι → ∀ a : K₀, s (residue C (ι a)) = ι a)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary predicate expands exactly the promised presentation clauses; its target algebra structure is f.toAlgebra. Coefficients, variables, and ideal-power continuity characterize the evaluation map uniquely. The generic algebra is FractionRing R ⊗[R] C with its canonical left FractionRing R algebra structure, equivalent by tensor commutation to C ⊗[R] FractionRing R. Optional stable perfect constants use Option of a field inclusion, allowing none without a perfection assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b27782674",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean added; statement verbatim; one sorry. Clause match vs ILO IV 2.2.2/2.2.4-2.2.6 + 2.1.4: reduced Noetherian local IsAdicComplete CharP p, dim e≥1, equidimensional over minimal primes, ρ : H →* RingAut C, |H| a unit in k, optional perfect H-stable k₀ via Option (K₀ →+* C) with conditional hypotheses. Predicate bundles: residue section s, H-equivariant via ResidueField.mapEquiv; fixed x_i in m; f pinned by C/X values + ideal-power continuity (unique formal evaluation); injective, IsLocalHom, Module.Finite, Module.IsTorsionFree for f.toAlgebra; residue∘f = constantCoeff; rad(span x) = m; equivariant via MvPowerSeries.map; K⊗[R]C ≃ₐ[K] finite product of finite separable Type u fields. k₀ compatibility holds for every section (Step 7). Edge cases e=0, zero ring, non-domain (xy swap), trivial/non-faithful H, none, n=0 all fine. 8 stmt_deps existing:true Mathlib records; private imports exist; docstrings carry source, blueprint and 7 steps; report sections present; no hollow defs, no pro-étale use, no fix, no compile. Maintainer note: NW 0684380344cc delivered the same item (PASS, unlanded) at the same file path with another declaration; only one should land, and the later one must not rebind."
+ }
 }

@@ -1,0 +1,417 @@
+{
+ "id": "lem-sfb-perfect-resolution-coinduction-comparison",
+ "kind": "statement",
+ "title": "Coinduction transitivity on a double finite projective resolution",
+ "statement": "Let $S\\to B\\to D$ be homomorphisms of commutative rings. Work in ordinary module derived categories [def-weil-abstract-derived-category], with coinduction $C_B^S,C_D^B,C_D^S$ and their precomposition actions [def-trf-derived-coinduction], product total Hom [def-sc-module-total-hom-complex], and signed direct-sum total tensor [def-pc-tensor-complex-sheaves]. Here a finitely generated projective module means a direct summand of a finite free module. Let $a:P\\to B[0]$ be an augmented bounded complex of finitely generated projective $S$-modules, a quasi-isomorphism, and let $Q$ be another bounded complex of finitely generated projective $S$-modules. Suppose an augmentation $b:B\\otimes_S Q\\to D[0]$ is a quasi-isomorphism of $B$-complexes. Set $W=\\operatorname{Tot}(P\\otimes_S Q)$, with augmentation $w=b(a\\otimes1)$. Then $w$ is a quasi-isomorphism. For every $S$-complex $N$, choose a K-injective resolution $j:N\\to I$ [def-pur-kinjective-complex], and put $J=\\operatorname{Hom}_S^\\bullet(B[0],I)$. There is a commuting diagram of quasi-isomorphisms of $S$-complexes\n$$\\begin{array}{ccc}\nU\\operatorname{Hom}_B^\\bullet(D[0],J)&\\xrightarrow{\\ e\\ }&\\operatorname{Hom}_S^\\bullet(D[0],I)\\\\\n\\downarrow b^*&&\\downarrow w^*\\\\\nU\\operatorname{Hom}_B^\\bullet(B\\otimes_S Q,J)&\\xrightarrow{\\ \\kappa\\ }&\\operatorname{Hom}_S^\\bullet(W,I),\n\\end{array}$$\nwhere $U$ is restriction to $S$, $e(h)(d)=h(d)(1)$, and $\\kappa$ is the composite\n$$\\operatorname{Hom}_B^\\bullet(B\\otimes_S Q,J)\\cong\\operatorname{Hom}_S^\\bullet(Q,J)\n\\xrightarrow{\\operatorname{Hom}(Q,a^*)}\\operatorname{Hom}_S^\\bullet(Q,\\operatorname{Hom}_S^\\bullet(P,I))\n\\cong\\operatorname{Hom}_S^\\bullet(\\operatorname{Tot}(Q\\otimes_S P),I)\n\\xrightarrow{(\\sigma_{P,Q})^*}\\operatorname{Hom}_S^\\bullet(W,I).$$\nThe first map evaluates at $1\\otimes q$; $a^*$ is precomposition with $a$; currying evaluates $h(q)(p)$ without a sign; and $\\sigma_{P,Q}(p\\otimes q)=(-1)^{ij}q\\otimes p$ for $p\\in P^i$, $q\\in Q^j$. The top horizontal map localizes to the scalar restriction of the canonical right-adjoint composition comparison $C_D^B C_B^S([N])\\xrightarrow{\\sim}C_D^S([N])$, whose counit is the composite of the evaluation-at-one counits. Thus the bottom comparison, using the displayed quasi-isomorphisms as model identifications, computes that actual comparison, including its derived $D$-action. The map $\\operatorname{Hom}_S(W,N)\\to\\operatorname{Hom}_S(W,I)$ induced by $j$ is also a quasi-isomorphism. These identifications are natural in $N$ and in maps of the two augmented resolutions and are independent of $j$ through the canonical derived comparisons. No flatness of $B/S$ or $D/B$, Noetherianity, or boundedness of $N$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0C0F, lemma-composition-right-adjoints; agent refinement by the explicit double finite projective resolution. Chain currying: more-algebra.tex Tag 0A5Y, lemma-compose; K-injectivity of coinduction: Tag 0917, lemma-hom-K-injective. The displayed resolution-normalized diagram is an additional assertion."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-trf-derived-coinduction",
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-kinjective-complex",
+  "def-trf-module-hom-precomposition"
+ ],
+ "proof": [
+  {
+   "text": "First, $W$ is bounded with finite projective terms. If $P^i$ and $Q^j$ are retracts of $S^{r_i}$ and $S^{s_j}$, tensoring their inclusion/retraction maps exhibits $P^i\\otimes_SQ^j$ as a retract of $S^{r_is_j}$. Each $W^n$ is a finite direct sum of such retracts, since $P,Q$ are bounded. The direct sums of the inclusion/retraction maps exhibit $W^n$ as a retract of a finite free module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Finite retract calculation for the explicit total tensor; agent argument"
+   }
+  },
+  {
+   "text": "Each term of $Q$ is flat by [lem-weil-pbc-projective-module-flat], so [lem-pc-module-bounded-flat-kflat] makes $Q$ K-flat. Apply the quasi-isomorphism criterion of [def-pc-module-kflat-complex] to $a:P\\to B[0]$. It gives the quasi-isomorphism $a\\otimes1:W\\to B\\otimes_SQ$. Restriction from $B$ to $S$ does not change the groups or kernels and images of the differentials, so $b$ is also a quasi-isomorphism over $S$. On each cohomology group $H^n(w)=H^n(b)H^n(a\\otimes1)$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K, lemma-derived-tor-quasi-isomorphism; Tag 06XZ, definition-K-flat and lemma-K-flat-quasi-isomorphism"
+   }
+  },
+  {
+   "text": "For later use, a quasi-isomorphism $t:X\\to Y$ induces a quasi-isomorphism $t^*:\\operatorname{Hom}^\\bullet(Y,I)\\to\\operatorname{Hom}^\\bullet(X,I)$ whenever $I$ is K-injective. Indeed [lem-sc-module-hom-complex-quotient] and [lem-sc-hom-cocycle-homotopy-quotient-formulas] identify degree-$n$ Hom cohomology with maps $X\\to I[n]$ modulo homotopy: cycles are chain maps to the shifted target and boundaries are null homotopies. Apply [lem-sc-kinjective-quasi-iso-comparison] to $I[n]$, which is K-injective by translating the null-homotopy definition. Under these identifications $H^n(t^*)$ is precomposition with the invertible localized map $[t]$, hence is bijective for every $n$. The identifications commute with precomposition because they send a cycle to its own homotopy class.",
+   "uses": [
+    "lem-sc-module-hom-complex-quotient",
+    "lem-sc-hom-cocycle-homotopy-quotient-formulas",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; more-algebra.tex Tag 0A8H, equation-cohomology-hom-complex"
+   }
+  },
+  {
+   "text": "By [lem-trf-coinduction-total-hom-model] for $S\\to B$, $J=\\operatorname{Hom}_S^\\bullet(B[0],I)$ is K-injective over $B$. The same node, now applied to the $B$-complex $D[0]$, gives exactly $e$, with inverse $g\\mapsto(d\\mapsto(c\\mapsto g(cd)))$ for $c\\in B$. Thus $e$ is a chain isomorphism. Apply step 3 over $B$ to $b$ and $J$, and over $S$ to $w$ and $I$. This proves that $b^*$ and $w^*$ are quasi-isomorphisms, with no claim that $UJ$ is K-injective over $S$.",
+   "uses": [
+    "lem-trf-coinduction-total-hom-model",
+    "lem-sc-module-hom-complex-quotient",
+    "lem-sc-hom-cocycle-homotopy-quotient-formulas",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0917, lemma-hom-K-injective; dualizing.tex Tags 0A70 and 0A71"
+   }
+  },
+  {
+   "text": "The first arrow defining $\\kappa$ is the chain isomorphism $F\\mapsto(q\\mapsto F(1\\otimes q))$ with inverse $h\\mapsto(c\\otimes q\\mapsto c\\,h(q))$. Balancing and the inverse identities are $B$-linearity; both formulas commute with the differential since $B[0]$ is in degree zero. Precomposition $a^*:J\\to\\operatorname{Hom}_S^\\bullet(P,I)$ is a chain map, so applying product Hom from $Q$ gives a chain map by the displayed Hom differential. For the next arrow specialize [lem-trf-bimodule-chain-currying-descent] to the identity ring map $S\\to S$, with $A=Q$, $T=P$, $N=I$. It is the entire-complex isomorphism $h\\mapsto(q\\otimes p\\mapsto h(q)(p))$, without an extra sign.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "lem-trf-bimodule-chain-currying-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5Y, lemma-compose; mixed-ring version in dga.tex Tag 09LN, lemma-tensor-hom-adjunction"
+   }
+  },
+  {
+   "text": "The flip $\\sigma:P\\otimes Q\\to Q\\otimes P$ is a chain isomorphism. For $p\\in P^i,q\\in Q^j$, $d\\sigma(p\\otimes q)$ has terms $(-1)^{ij}dq\\otimes p$ and $(-1)^{ij+j}q\\otimes dp$. The terms of $\\sigma d(p\\otimes q)$ have exponents $i+i(j+1)\\equiv ij$ and $(i+1)j=ij+j$, respectively. Flipping twice gives the identity since $2ij$ is even. Consequently precomposition by $\\sigma$ is a chain isomorphism of the product Hom complexes. Combining this with step 5 constructs the specified chain map $\\kappa$.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Sign rules preceding lemma-symmetric-monoidal-cat-complexes; explicit signed flip verification"
+   }
+  },
+  {
+   "text": "Check the square on a homogeneous cochain $h:D[0]\\to J$ and a pure tensor $p\\otimes q$ of degrees $(i,j)$. Its bottom-left path has value $(-1)^{ij}h(b(1\\otimes q))(a(p))$; its top-right path has value $h(b(a(p)\\otimes q))(1)$. If $i\\ne0$ then $a(p)=0$ and both vanish. For $i=0$ the sign is $1$, and $B$-linearity of $h$ and $b$ gives\n$$h(b(1\\otimes q))(a(p))=(a(p)h(b(1\\otimes q)))(1)=h(b(a(p)\\otimes q))(1).$$\nThe formulas extend additively to each total degree, proving strict commutativity. On cohomology $H^n(\\kappa)H^n(b^*)=H^n(w^*)H^n(e)$; the other three factors are isomorphisms by step 4, so $H^n(\\kappa)$ is an isomorphism. This proves all four displayed arrows are quasi-isomorphisms.",
+   "uses": [
+    "def-trf-derived-coinduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0C0F, lemma-composition-right-adjoints: explicit augmentation-normalized representative square (agent calculation)"
+   }
+  },
+  {
+   "text": "The two top complexes are the coinduction models for $C_D^BC_B^S([N])$ and $C_D^S([N])$: $J$ is K-injective over $B$ by step 4 and $I$ is K-injective over $S$. The actions on both are precomposition in $d\\in D$. Thus $e(th)(d)=h(dt)(1)=(t\\,e(h))(d)$, so $e$ is $D$-linear before localization. By [lem-trf-derived-coinduction-adjunction] each coinduction is right adjoint to restriction with evaluation-at-one counit, independent of resolutions. For the composite adjunction the counit at $h$ is $h(1_D)(1_B)$, obtained by the two successive evaluations. Evaluation of $e(h)$ at $1_D$ has exactly this value. Hence the localized $D$-linear map $e$ is counit-compatible. By [det-sp-unique-right-adjoint] it is the canonical right-adjoint composition comparison, with its specified orientation.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-trf-coinduction-total-hom-model",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70, lemma-right-adjoint; 0A71, lemma-RHom-ext; 0C0F, lemma-composition-right-adjoints"
+   }
+  },
+  {
+   "text": "Let $L=[U\\operatorname{Hom}_B(B\\otimes_SQ,J)]$ and $R=[\\operatorname{Hom}_S(W,I)]$ in $D(S)$. Use $[b^*]^{-1}$ to identify $L$ with the scalar restriction of $C_D^BC_B^S([N])$, and $[w^*]^{-1}$ to identify $R$ with that of $C_D^S([N])$. The square says\n$$[w^*]^{-1}[\\kappa][b^*]=[e].$$\nGive $L,R$ the derived $D$-module structures transported through these very model identifications from the two top $D$-objects. Step 8 and this equality identify the bottom arrow with the actual comparison, including that action. No strict $D$-action on $P,Q,W$ is assumed or needed.",
+   "uses": [
+    "def-trf-derived-coinduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0C0F, lemma-composition-right-adjoints: interpretation of the explicit representative square"
+   }
+  },
+  {
+   "text": "By step 1, $W$ is bounded above with projective terms, so [lem-sc-bounded-above-projective-kprojective] makes it K-projective. Combine [lem-coef-kprojective-derived-hom-bijection] with the Hom cohomology/homotopy identifications of step 3, now with fixed source $W$. For every $n$, the homology map induced by $\\operatorname{Hom}_S(W,j)$ identifies with postcomposition by $[j[n]]$ on $\\operatorname{Hom}_{D(S)}([W],[N[n]])$. This is a bijection since $j$ is a quasi-isomorphism. Therefore $\\operatorname{Hom}_S(W,N)\\to\\operatorname{Hom}_S(W,I)$ is a quasi-isomorphism even for unbounded $N$.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection",
+    "lem-sc-module-hom-complex-quotient",
+    "lem-sc-hom-cocycle-homotopy-quotient-formulas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Dual K-projective form of Tag 070I, lemma-K-injective; more-algebra.tex Tag 0A8H, equation-cohomology-hom-complex"
+   }
+  },
+  {
+   "text": "For augmentation-preserving maps $u:P'\\to P$, $v:Q'\\to Q$ one has $a u=a'$ and $b(1\\otimes v)=b'$. The value of the precomposed bottom formula at $p'\\otimes q'$ is $(-1)^{ij}F(1\\otimes v(q'))(a(u(p')))$, which equals the formula using the new augmentations. A chain map $I\\to I'$ commutes with these formulas by postcomposition. Currying has precisely this naturality by [lem-trf-bimodule-chain-currying-descent], while $e$ has it by [lem-trf-coinduction-total-hom-model]. For a derived coefficient morphism, [lem-weil-pbc-kinjective-hom-derived] represents it by a unique homotopy class of maps between chosen K-injectives, so the chain-map equalities descend. In particular the comparison between $j:N\\to I$ and $j':N\\to I'$ is the homotopy class representing $[j'][j]^{-1}$; the same bijection says its composite with $j$ is homotopic to $j'$. The resolution independence in [lem-trf-derived-coinduction-adjunction] then identifies the top maps canonically. The invertible vertical identifications force exactly the same independence and naturality for the bottom map. None of these arguments uses flatness of either ring map, Noetherianity, or a bound on $N$.",
+   "uses": [
+    "lem-trf-bimodule-chain-currying-descent",
+    "lem-trf-coinduction-total-hom-model",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70, 0A71, 0C0F; derived.tex Tag 070I, lemma-K-injective; explicit naturality of the displayed cochain formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "lem-sc-module-hom-complex-quotient",
+  "lem-sc-hom-cocycle-homotopy-quotient-formulas",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-trf-coinduction-total-hom-model",
+  "def-sc-module-total-hom-complex",
+  "lem-trf-bimodule-chain-currying-descent",
+  "def-trf-derived-coinduction",
+  "lem-trf-derived-coinduction-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A70, 0A71, 0C0F; the double-resolution square and signed normalization are agent calculations using more-algebra.tex Tags 0917, 0A5Y and existing DAG tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction transitivity represented by augmented finite projective resolutions P to B and B tensor Q to D with Hom Q Hom P I currying",
+   "results": "Actual hits: CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Tor_map, CategoryTheory.Tor_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension and single projective-resolution functoriality do not give the composite derived-adjunction comparison on this double resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coinduction composition comparison computed on finite projective resolutions by currying and the signed flip of the two resolution complexes",
+   "results": "Actual hits: CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.ProjectiveResolution.Hom.hom'_f, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.Functor.mapProjectiveResolution_complex, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension and single projective-resolution functoriality do not give the composite derived-adjunction comparison on this double resolution"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated derived coinduction comparison computed using projective resolutions and evaluation at one",
+   "results": "Actual hits: CategoryTheory.ProjectiveResolution.leftDerived_app_eq, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.leftDerived, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, groupCohomology.linearYonedaObjResProjectiveResolutionIso",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension and single projective-resolution functoriality do not give the composite derived-adjunction comparison on this double resolution"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coextendScalars\"",
+   "results": "Actual hits: ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.CoextendScalars.map', ModuleCat.CoextendScalars.instCoeFunCarrierObjCoextendScalarsForall, ModuleCat.CoextendScalars.hasSMul, ModuleCat.CoextendScalars.mulAction",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension and single projective-resolution functoriality do not give the composite derived-adjunction comparison on this double resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|coinduct|coinduction|homEquiv.*[Hh]om",
+   "results": "Actual hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension and single projective-resolution functoriality do not give the composite derived-adjunction comparison on this double resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|coinduction",
+   "results": "7 actual hits: Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean, Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension, abstract derived adjunction, or single projective-resolution functoriality does not state the double-resolution square with its normalized maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coinduction composition comparison computed on finite projective resolutions",
+   "results": "8 actual hits: CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'_assoc, CategoryTheory.ProjectiveResolution.mk₀_comp_extMk, CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.Functor.leftDerived",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension, abstract derived adjunction, or single projective-resolution functoriality does not state the double-resolution square with its normalized maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coextendScalars\"",
+   "results": "12 actual hits: ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.CoextendScalars.map', ModuleCat.CoextendScalars.instCoeFunCarrierObjCoextendScalarsForall, ModuleCat.CoextendScalars.hasSMul, ModuleCat.CoextendScalars.mulAction",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension, abstract derived adjunction, or single projective-resolution functoriality does not state the double-resolution square with its normalized maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction transitivity on two bounded projective resolutions computed by evaluation at one and signed tensor Hom currying",
+   "results": "8 actual hits: CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension, abstract derived adjunction, or single projective-resolution functoriality does not state the double-resolution square with its normalized maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity of right derived Hom coextension of scalars with evaluation counits and an explicit double perfect complex model",
+   "results": "8 actual hits: CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε_fac_app, Ext, CategoryTheory.Functor.totalLeftDerivedCounit",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension, abstract derived adjunction, or single projective-resolution functoriality does not state the double-resolution square with its normalized maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-koszul-evaluation-pasting",
+  "date": "2026-10-23",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Repair of polynomial-model steps 5--8: graph-normalized diagonal generator at Noetherian stages, compatible with nonflat changes of stage, localization and Koszul refinement, before intrinsic-pair rigidity. Sublemma: signed top-Koszul evaluation and its pasting for two successive regular quotients, used in graph normalization and one-variable refinement. General resolution input for the two successive quotient evaluation counits: the double-projective model of coinduction transitivity, before the ordered top-degree sign computation.",
+   "via": [
+    "lem-sfb-koszul-evaluation-pasting",
+    "lem-sfb-polynomial-koszul-diagonal-class",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-perfect-resolution-coinduction-comparison",
+  "worker": "stage1",
+  "summary": "Proved the explicit normalized square using existing coinduced total-Hom and mixed-ring currying statements, then identified its top map by D-linearity and the composite evaluation counit. Bounded projective and K-flat tools supply all quasi-isomorphisms. No new nodes; corrected only inherited TeX double escaping.",
+  "blueprint": "Realizes the inherited from.place: double-projective coinduction comparison before the ordered top-Koszul evaluation in lem-sfb-koszul-evaluation-pasting. The ancestor command reports no surviving blueprint ancestor; the newest blueprint snapshot still references sk-thm-sf-ctf-stability but no longer contains its folder. No unit route was replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-module-flat",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "def-pc-module-kflat-complex",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-module-hom-complex-quotient",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-hom-cocycle-homotopy-quotient-formulas",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-kinjective-quasi-iso-comparison",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-coinduction-total-hom-model",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "def-sc-module-total-hom-complex",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-bimodule-chain-currying-descent",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "def-trf-derived-coinduction",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-derived-coinduction-adjunction",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-bounded-above-projective-kprojective",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-coef-kprojective-derived-hom-bijection",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic module-complex/coinduction or adjunction tool used exactly as stated in the cited steps; no specialized replacement of the constructibility unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "lem-sc-module-hom-complex-quotient",
+  "lem-sc-hom-cocycle-homotopy-quotient-formulas",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-trf-coinduction-total-hom-model",
+  "def-sc-module-total-hom-complex",
+  "lem-trf-bimodule-chain-currying-descent",
+  "def-trf-derived-coinduction",
+  "lem-trf-derived-coinduction-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6025506cc",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6025506cc (reviewer sub-agent of L); spot-checked: Read the item's 11 steps in full and every cited statement: Stacks dualizing 0C0F, 0A70 and 0A71, and more-algebra 0917. Step 2: K-flatness of Q from projective (flat) terms and boundedness, so a⊗1 and w are quasi-isomorphisms. Step 4: lem-trf-coinduction-total-hom-model with E=D[0] gives exactly e and makes J K-injective over B; UJ is never claimed K-injective over S. Step 5: currying is used with the identity ring map and no sign. Step 6: flip signs recomputed. Step 7: the square recomputed on p⊗q (vanishes for i≠0; equal for i=0 by B-linearity of h and b). Step 8: e is D-linear, matches the composite counit h(1_D)(1_B), so [e] is the canonical comparison by det-sp-unique-right-adjoint. Step 10: K-projective W gives the quasi-isomorphism for unbounded N. Step 11: naturality formulas verified. Small cases checked: identity rings, zero ring, nonflat B→D. No new nodes, no duplicates; proof_deps equals the union of uses; live item is still unsplit and has no repair note. Batch-5: lem-trf-coinduction-total-hom-model, lem-trf-bimodule-chain-currying-descent and lem-trf-derived-coinduction-adjunction are generic commutative-algebra tools (coinduction model and K-injectivity, tensor-Hom currying, derived coextension adjunction). They are outside both the trace-formula and Poincaré-duality assumptions and are not steps proving them: accepted. The 15 tool_uses are all generic and accepted. Fault (B4): the claimed 'decoding of double-escaped TeX' turned the two correct \\\\ array row separators of the base statement into single backslashes, breaking the displayed square. FIX restores the base statement verbatim in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-perfect-resolution-coinduction-comparison.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectResolutionCoinductionComparison",
+  "declaration": "ModuleCat.PerfectResolutionCoinduction.perfect_resolution_coinduction_comparison",
+  "declarations": [
+   "ModuleCat.PerfectResolutionCoinduction.Complex",
+   "ModuleCat.PerfectResolutionCoinduction.restriction",
+   "ModuleCat.PerfectResolutionCoinduction.extension",
+   "ModuleCat.PerfectResolutionCoinduction.single",
+   "ModuleCat.PerfectResolutionCoinduction.tensor",
+   "ModuleCat.PerfectResolutionCoinduction.inclusion",
+   "ModuleCat.PerfectResolutionCoinduction.AugmentationFormula",
+   "ModuleCat.PerfectResolutionCoinduction.KappaFormula",
+   "ModuleCat.PerfectResolutionCoinduction.Square",
+   "ModuleCat.PerfectResolutionCoinduction.restrictionComp",
+   "ModuleCat.PerfectResolutionCoinduction.CounitFormula",
+   "ModuleCat.PerfectResolutionCoinduction.DerivedFormula",
+   "ModuleCat.PerfectResolutionCoinduction.perfect_resolution_coinduction_comparison",
+   "ModuleCat.PerfectResolutionCoinduction.perfect_resolution_coinduction_naturality",
+   "ModuleCat.PerfectResolutionCoinduction.perfect_resolution_coinduction_top_naturality",
+   "ModuleCat.PerfectResolutionCoinduction.perfect_resolution_coinduction_resolution_independence"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectResolutionCoinductionComparison.lean",
+  "statement": "theorem perfect_resolution_coinduction_comparison (f : S →+* B) (g : B →+* D) : ∃ η : derivedCoinduction f ⋙ derivedCoinduction g ≅ derivedCoinduction (g.comp f), CounitFormula f g η ∧ ∀ (P Q : Complex S) (a : P ⟶ single ((restrictScalars f).obj (of B B))) (b : (extension f).obj Q ⟶ single ((restrictScalars g).obj (of D D))), QuasiIso a → QuasiIso b → (∃ l r : ℤ, P.IsStrictlyGE l ∧ P.IsStrictlyLE r) → (∃ l r : ℤ, Q.IsStrictlyGE l ∧ Q.IsStrictlyLE r) → (∀ n : ℤ, Module.Finite S (P.X n) ∧ Module.Projective S (P.X n)) → (∀ n : ℤ, Module.Finite S (Q.X n) ∧ Module.Projective S (Q.X n)) → ∃ w : tensor P Q ⟶ (restriction f).obj (single ((restrictScalars g).obj (of D D))), AugmentationFormula f g P Q a b w ∧ QuasiIso w ∧ (∀ (I : Complex S) [I.IsKInjective], ∃ s : Square f g P Q I a b w, DerivedFormula f g η s) ∧ (∀ (N I : Complex S) [I.IsKInjective] (j : N ⟶ I) [QuasiIso j], ∃ jW : moduleHomComplex (tensor P Q) N ⟶ moduleHomComplex (tensor P Q) I, (∀ (n i k : ℤ) (h : i + n = k) (z : (moduleHomComplex (tensor P Q) N).X n) (x : (tensor P Q).X i), ((jW.f n z).v i k h) x = j.f k ((z.v i k h) x)) ∧ QuasiIso jW)",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem and three supplementary statements jointly state the full node: normalized chain square, actual D-linear derived adjunction comparison, naturality in both augmented resolutions and coefficients, and canonical K-injective replacement independence. Helper predicates and the Square structure only package the canonical maps of this node. The bottom formula is the specified currying/flip composite: the augmentation kills P-degrees i≠0, and at i=0 the flip sign is 1. Uses the already-landed total-Hom precomposition API rather than redefining it."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e2ad84b5",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 08e6dfdfbe2c. Lean module byte-identical; the only item change is the stmt_dep swap lem-trf-hom-dual-preserves-homotopies -> def-trf-module-hom-precomposition (the owner of CochainComplex.moduleHomPrecomp: existing:true, record identical to live, landed 2026-10-22 before this delivery, publicly imported), plus a report repair section. Item node equals live except the lean record and that dep; lean.statement verbatim in file. All other statement helpers are owned by def-trf-derived-coinduction. Re-read the maths: w=b(a⊗1) via AugmentationFormula; e=evaluation at 1_B; KappaFormula fixes the currying/flip composite (sign 1 at i=0, zero otherwise); strict square with b*, w*, κ QuasiIso; topD/modelLeft/modelRight/model_commutes carry the D-action; η fixed by the composite counit (CounitFormula) and DerivedFormula; jW quasi-iso for unbounded N; naturality and replacement-independence theorems. No extra hypotheses, no hollow defs, all proofs sorry, docstrings OK, both report sections present. No file changed, so no compile."
+ }
+}

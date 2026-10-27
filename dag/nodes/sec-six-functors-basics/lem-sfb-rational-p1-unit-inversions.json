@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-rational-p1-unit-inversions",
+ "kind": "statement",
+ "title": "Invertibility of the fixed rational projective-line unit comparisons",
+ "statement": "Fix distinct primes $\\ell,p$, a field $k$ of characteristic $p$, and a separated finite-type $k$-scheme $Y$ as in [sk-def-sfb-dc-setting]. Fix $\\overline{\\mathbf Q}_\\ell$ and a finite intermediate extension $E/\\mathbf Q_\\ell$. Let $\\Lambda=\\underline E$ or the finite-subextension-valued $\\underline{\\overline{\\mathbf Q}}_\\ell$ of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed], with pulled-back coefficients [sk-def-sfb-pulled-back-coefficients]. Put $P=\\mathbf P^1_Y$, $W=P\\times_Y P$, $q:P\\to Y$, $p_1,p_2:W\\to P$, and $\\Delta:P\\to W$, using [def-nagata-projective-space-base-change]. Write $D(Z)=D(\\operatorname{Mod}_{\\Lambda_Z})$ for the ordinary unbounded category, with the derived functors of [sk-def-sfb-module-derived-pushpull] and tensor of [sk-def-sfb-derived-tensor-hom]. Let $\\mathcal L_Z=\\Loc(\\Dbc(Z,\\Lambda))$, where $\\Dbc$ means bounded cohomology with finite constant local models as in [sk-def-sfb-constructible], and $\\Loc$ is the full replete triangulated closure under all small ambient coproducts [sk-def-localizing-closure]. Let $L_Z=\\Lambda_Z(1)$ and use the root-normalized shifted comparison $e:p_2^*(L_P[2])\\simeq L_W[2]$ of [def-sfb-rational-tate-pullback-comparison]. Let $\\beta_M:q^*Rq_*M\\to Rp_{2*}p_1^*M$ be the canonical unit--composition--counit exchange of [def-weil-pbc-ambient-ringed-exchange] for the self-cartesian square of $q$, and let $\\Pi_{p_2,e,p_1^*M}$ be the fixed twisted projection of [def-sfb-tate-twisted-projection-comparison]. For every $M\\in\\mathcal L_P$, both $\\beta_M$ and $\\Pi_{p_2,e,p_1^*M}$ are isomorphisms. Thus the predicate $\\mathrm{UnitInversionCondition}(\\Lambda,Y,L,e,M)$ of [def-sfb-rational-p1-unit-inversion-condition] holds, for precisely these maps, not for unspecified isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (2): old steps 9--10, fixed exchange and twisted projection isomorphisms",
+  "note": "Construction material retained from the earlier split. The following proof-in-words was previously attached to this node. It is preserved here verbatim as source material for the worker who will prove the corresponding Lean declaration; this stage-1 node intentionally has no proof steps.\n\nFormer proof step 1:\nApply [lem-sfb-rational-p1-localizing-preservation] to obtain properness, the standing finite-type hypotheses, qcqs, and preservation of every required localizing category. The fixed rational line comparison of [def-sfb-rational-tate-pullback-comparison] is the Cartesian comparison for p_2, with the actual shifted Tate lines; invertibility of ell follows from its nonzero image in k and preservation of units. The two fixed unit maps are the ones named in [def-sfb-rational-p1-unit-inversion-condition].\n\nFormer uses: [\"lem-sfb-rational-p1-localizing-preservation\", \"def-sfb-rational-tate-pullback-comparison\", \"def-sfb-rational-p1-unit-inversion-condition\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (2): identify the fixed maps and their coefficient hypotheses'}\n\nFormer proof step 2:\nBase change for the final arrow. The cartesian square has $f=q$, $f'=p_2$, $g=q$, $g'=p_1$. Its canonical exchange map $\\beta_M:q^*Rq_*M\\to Rp_{2*}p_1^*M$ is the unit--pullback-comparison--counit composite of [def-weil-pbc-ambient-ringed-exchange]. To apply the bounded rational theorem with its general ring-object constructibility convention, take any constant-model $M\\in\\Dbc(P,\\Lambda)$. On every stratum its cohomology has a finite constant local model, hence is locally finitely presented over the coefficient ring object by the final inclusion of [det-def-sfb-constructible-local-model]. The same finite stratification therefore witnesses constructibility in [sk-def-sfb-bounded-constructible], with the same finite cohomological bounds. Consequently $M$ belongs to the bounded category of [det-thm-sfb-proper-base-change-rational], and clause (3) makes its canonical $\\beta_M$ an isomorphism. This uses only the inclusion from constant-model constructibility into ring-object constructibility. By [det-def-localizing-closure-ctf-equals-bc] the constant-model $\\Dbc$ objects are exactly the $\\Dctf$ generators. The extension statement [det-proper-base-change-unbounded-extension] therefore makes this same $\\beta_M$ an isomorphism for every $M\\in\\Loc(\\Dbc(P,\\Lambda))$. The properness and closure-preservation hypotheses were checked in the preservation lemma. Invert $\\beta$ as a natural isomorphism; its direction is $Rp_{2*}p_1^*\\to q^*Rq_*$, as required by clause (2).\n\nFormer uses: [\"def-weil-pbc-ambient-ringed-exchange\", \"det-thm-sfb-proper-base-change-rational\", \"det-def-localizing-closure-ctf-equals-bc\", \"det-proper-base-change-unbounded-extension\", \"det-def-sfb-constructible-local-model\", \"sk-def-sfb-bounded-constructible\", \"lem-sfb-rational-p1-localizing-preservation\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (2): proper base change on the localizing closure'}\n\nFormer proof step 3:\nFor $A=p_1^*M$, preservation gives $A\\in\\mathcal L_W$ and $L_P\\in\\mathcal L_P$. Apply [det-thm-sf-pf-field-localizing] to $p_2,A,L_P$, with the normalized Cartesian Tate comparison of [def-sfb-rational-tate-pullback-comparison]. Its canonical map, shifted by [2] and conjugated by the tensor-shift isomorphisms, is exactly $\\Pi_{p_2,e,A}$ of [def-sfb-tate-twisted-projection-comparison], hence invertible. In particular its inverse has direction $Rp_{2*}(p_1^*M(1)[2])\\to (Rp_{2*}p_1^*M)(1)[2]$. Following it by $T_P(\\beta_M^{-1})$ has the required target $T_Pq^*Rq_*M$. The finite-coefficient annihilation condition is irrelevant for these rational coefficients.\n\nFormer uses: [\"lem-sfb-rational-p1-localizing-preservation\", \"det-thm-sf-pf-field-localizing\", \"def-sfb-rational-tate-pullback-comparison\", \"def-sfb-tate-twisted-projection-comparison\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (2): old step 10, twisted projection inversion'}\n"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-nagata-projective-space-base-change",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-rational-p1-unit-inversion-condition"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical proper self base change exchange on projective line and the twisted projection formula are isomorphisms on the unbounded constructible localizing category",
+   "results": "{\"t\": \"2026-10-27T06:10:28Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical proper self base change exchange on projective line and the twisted projection formula are isomorphisms on the unbounded constructible localizing category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\"], \"digest\": \"09c6e2e63ba05583\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not prove invertibility of the two specified internal-module maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-27T06:10:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsIso, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not prove invertibility of the two specified internal-module maps"
+  },
+  {
+   "tool": "grep",
+   "query": "unitInversions|twistProjectionMap|condensedAmbientExchange",
+   "results": "{\"t\": \"2026-10-27T06:10:17Z\", \"tool\": \"grep\", \"query\": \"unitInversions|twistProjectionMap|condensedAmbientExchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not prove invertibility of the two specified internal-module maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change exchange and derived projection formula are invertible for rational proetale modules",
+   "results": "{\"t\": \"2026-10-27T06:10:18Z\", \"tool\": \"leansearch\", \"query\": \"Proper base change exchange and derived projection formula are invertible for rational proetale modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.baseChange_symm\", \"IsBaseChange.toDualBaseChange\", \"IsBaseChange\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\", \"LinearEquiv.baseChange_inv\", \"IsBaseChange.dual\", \"Module.Dual.baseChange\", \"Module.Invertible.instProjective\"], \"digest\": \"06823f7ed778906c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not prove invertibility of the two specified internal-module maps"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*projection|projection.*proetale|Tate.*twist",
+   "results": "{\"t\": \"2026-10-27T07:24:25Z\", \"tool\": \"grep\", \"query\": \"proetale.*projection|projection.*proetale|Tate.*twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: hits do not state invertibility of either specified rational pro-etale internal-module comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For rational proetale internal modules proper base change extends from bounded constructible generators to their closure under triangles shifts and coproducts",
+   "results": "{\"t\": \"2026-10-27T07:24:25Z\", \"tool\": \"leansearch\", \"query\": \"For rational proetale internal modules proper base change extends from bounded constructible generators to their closure under triangles shifts and coproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated\", \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"Condensed.instAB4CondensedMod\", \"instAB4StarModuleCat\", \"CategoryTheory.ObjectProperty.instIsTriangulatedIsoClosure\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"Condensed.instAB4StarCondensedMod\"], \"digest\": \"2ec3e7ab263f52d5\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: hits do not state invertibility of either specified rational pro-etale internal-module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"baseChange\"",
+   "results": "{\"t\": \"2026-10-27T07:24:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: Loogle rejected the namespace identifier; this query supplies no evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived module projection mate with a shifted Tate line is invertible for every object in the localizing closure of bounded constructible rational proetale sheaves",
+   "results": "{\"t\": \"2026-10-27T07:24:30Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical derived module projection mate with a shifted Tate line is invertible for every object in the localizing closure of bounded constructible rational proetale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isHomological_of_localization\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CochainComplex.IsKProjective.Qh_map_bijective\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"CochainComplex.IsKInjective.Qh_map_bijective\"], \"digest\": \"0bb130b30f5c15fa\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: hits do not state invertibility of either specified rational pro-etale internal-module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "{\"t\": \"2026-10-27T07:24:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"projectionFormula\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: hits do not state invertibility of either specified rational pro-etale internal-module comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-p1-adjunction-rational-unit-counit",
+  "date": "2026-10-27",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.ProEtale.RationalP1.unitInversions",
+   "module": "Sheaf.Paper.RationalP1UnitCounit",
+   "kind": "theorem",
+   "sorry": true,
+   "note": "Reassign this declaration to lem-sfb-rational-p1-unit-inversions; intended separate module Sheaf.Paper.RationalP1UnitInversions. Binding from the explicit 2026-10-27 repair order, not a claim to have inspected the missing source. The stage-1 delivery overlay preserves this candidate; the maintainer owns lean metadata."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "Well-definedness (2): old steps 9--10, fixed exchange and twisted projection isomorphisms",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-rational-p1-localizing-preservation]. Thus $Y,P,W$ are qcqs standing schemes, $q,p_2$ are proper, $p_1^*M\\in\\mathcal L_W$, and $L_P\\in\\Dbc(P,\\Lambda)\\subseteq\\mathcal L_P$. These are precisely the geometric and domain hypotheses needed below; in particular no properness of $Y$ over $k$ is required.",
+   "uses": [
+    "lem-sfb-rational-p1-localizing-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (2): proper projections and localizing domains"
+   }
+  },
+  {
+   "text": "For $K\\in\\Dbc(P,\\Lambda)$ in the constant-model sense of [sk-def-sfb-constructible], keep its finite cohomological bounds and the finite stratification for each cohomology module. On each stratum its finite constant local models are locally finitely presented by [det-def-sfb-constructible-local-model]. The same stratifications and bounds therefore satisfy the general ring-object bounded-constructibility definition [sk-def-sfb-bounded-constructible]. Only this inclusion is needed, not its converse.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-local-model.md",
+    "place": "Final inclusion of finite constant local models into locally finitely presented modules"
+   }
+  },
+  {
+   "text": "Use the self-cartesian square with $(X,Y,X',Y')=(P,Y,W,P)$ and $(f,f',g,g')=(q,p_2,q,p_1)$. Clause (3) of [det-thm-sfb-proper-base-change-rational] applies to the bounded objects from Step 2. Its canonical base-change map is $\\beta_K$: unfolding [def-weil-pbc-ambient-ringed-exchange] gives the unit of $p_2^*\\dashv Rp_{2*}$, the composition identification $p_2^*q^*\\simeq p_1^*q^*$, and the image under $Rp_{2*}p_1^*$ of the counit of $q^*\\dashv Rq_*$. Hence this specified map is invertible on every constant-model bounded constructible $K$.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-rational",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (2): canonical proper base change, first on bounded generators"
+   }
+  },
+  {
+   "text": "By [det-def-localizing-closure-ctf-equals-bc], on the qcqs scheme $P$ the constant-model categories satisfy $\\Dctf(P,\\Lambda)=\\Dbc(P,\\Lambda)$ and their localizing closures agree. Step 3 consequently proves the generator hypothesis of [det-proper-base-change-unbounded-extension]. Its displayed unit--composition--counit formula is the formula just identified for $\\beta$, with $p=q$, $p'=p_2$, $g=q$, $g'=p_1$. Applying that extension proves $\\beta_M$ invertible for every $M\\in\\mathcal L_P$, including unbounded $M$.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-proper-base-change-unbounded-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-extension.md",
+    "place": "Extension of the specified exchange from Dctf to its localizing closure"
+   }
+  },
+  {
+   "text": "Put $A=p_1^*M$ and $B=L_P[2]$. By Step 1 and the triangulated closure in [sk-def-localizing-closure], $A\\in\\mathcal L_W$ and $B\\in\\mathcal L_P$. Apply [det-thm-sf-pf-field-localizing] to $p_2,A,B$: its canonical projection mate $\\pi_{A,B}$ is invertible. The given $e:p_2^*B\\simeq L_W[2]$ is exactly the normalized comparison of [def-sfb-rational-tate-pullback-comparison]. By [def-sfb-tate-twisted-projection-comparison], $\\Pi_{p_2,e,A}$ is, in order, the inverse tensor--shift comparison, $\\pi_{A,B}$, $Rp_{2*}(1_A\\otimes e)$, and the tensor--shift comparison on $W$ inside $Rp_{2*}$. Every factor is invertible: the middle projection by the theorem, and the others because tensor and pushforward carry the specified isomorphisms to isomorphisms. Their composite is the fixed $\\Pi_{p_2,e,p_1^*M}$, so it is invertible.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "det-thm-sf-pf-field-localizing",
+    "def-sfb-rational-tate-pullback-comparison",
+    "def-sfb-tate-twisted-projection-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (2)--(3): proper projection formula with the actual shifted Tate line"
+   }
+  },
+  {
+   "text": "Steps 4 and 5 give the two conjuncts of [def-sfb-rational-p1-unit-inversion-condition] for the actual exchange and twisted projection maps in the statement. This is $\\mathrm{UnitInversionCondition}(\\Lambda,Y,L,e,M)$.",
+   "uses": [
+    "def-sfb-rational-p1-unit-inversion-condition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (2): package precisely the two inversion witnesses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-p1-localizing-preservation",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-local-model",
+  "sk-def-sfb-bounded-constructible",
+  "det-thm-sfb-proper-base-change-rational",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-proper-base-change-unbounded-extension",
+  "sk-def-localizing-closure",
+  "det-thm-sf-pf-field-localizing",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-rational-p1-unit-inversion-condition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (2)--(3), expanded using the existing bounded, unbounded-extension and localizing-projection statements"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-rational-p1-unit-inversions",
+  "worker": "stage1",
+  "summary": "Retained the statement and all earlier source material. Reused the existing preservation, bounded proper-base-change, finite-Tor comparison, unbounded-extension and projection-formula nodes. Made the constant-model inclusion explicit and applied projection directly with the shifted line, retaining the exact e. No new nodes.",
+  "blueprint": "Well-definedness (2): Step 1 supplies properness and domains; Steps 2--4 realize canonical proper base change on Loc(Dbc). Well-definedness (2)--(3): Step 5 proves invertibility of the specified twisted projection; Step 6 packages these witnesses."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NH-cb16daeeb",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-cb16daeeb (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. Statement unchanged; the old proof is kept verbatim in source.note. The proof is now 6 steps with 0 new nodes. S1: preservation lemma gives qcqs, properness of q/p1/p2, p1^*M in L_W and L_P in Dbc, with no properness of Y needed. S2 (elementary): constant-model constructibility implies lfp ring-object constructibility via det-def-sfb-constructible-local-model, same strata and bounds; latest sk-def-sfb-constructible-local-model.md, final sentence; only that direction is used. S3: det-thm-sfb-proper-base-change-rational(3) with f=q, f'=p2, g=q, g'=p1. Its map BC_sq (eta', theta, epsilon; sk-def-sfb-base-change-morphism) is beta: q^*Rq_* -> Rp2_*p1^*, which matches def-weil-pbc-ambient-ringed-exchange. S4: on qcqs P, ctf-equals-bc gives Dctf = constant-model Dbc. The unbounded extension (E and Qlb admissible; same eta'/theta/epsilon formula) then gives beta_M iso for all M in Loc, including unbounded M. S5: det-thm-sf-pf-field-localizing applied to p2, A=p1^*M, B=L_P[2] (in Loc since Loc is shift-closed). Its pi is the transpose of (epsilon tensor 1) after mu, the same as the moduleObjectProjectionMate inside Pi (theorem proof steps 5, 11, 16). The other factors of Pi (tensor-shift, Rp2_*(1 tensor e)) are isomorphisms, and e is kept exactly. S6: the condition definition asks for exactly these two maps. Edge cases M=0, Y empty, non-closed k, both coefficient choices E and Qlb, unbounded M: all fine. No cycle (closure of 16608 nodes does not contain the item); no duplicate found. Route: the source cites sk-thm-sf-pf-field for PBC on Loc, but that unit states only PF. I accept det-thm-sfb-proper-base-change-rational, det-proper-base-change-unbounded-extension and det-def-localizing-closure-ctf-equals-bc as generic tool_uses. Batch-5: I recomputed each flagged node's closure against the closure of the parent's other dependencies. The four citations add only 1 node, the extension node itself, and none of the closures reaches thm-trf, thm-pod, trace-transport or PD/TF target nodes. The pod finite-qc abelian detection and trf localization-essentially-surjective nodes are generic. lem-pd-condensed-proper-projection-formula is the general proper projection factor feeding sk-thm-sf-pf-adic, not the PF^! of nt-target-poincare-isiso, and the parent already reaches it. All accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalP1UnitCounit",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.unitInversions",
+  "statement": "theorem unitInversions (M : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y)) :\n    UnitInversionCondition (coefficient l c).X Y (line l c)\n      (secondLineComparison l c k p hpl Y) M.obj",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "The source restored in the live library already states this inversion condition at lines 430–440. The recorded candidate names this same declaration. Bind the existing declaration rather than introduce a duplicate module; its conclusion unfolds to IsIso of exactly the canonical exchange and the fixed Tate-twisted projection at the first pullback, with the published root-normalized secondLineComparison. The standing separated finite-type hypotheses specialize the existing context; no different maps or coefficient constructions are used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6cc0c25b",
+  "group": "NB",
+  "result": "pass",
+  "note": "existing:true attach of Sheaf.Paper.RationalP1UnitCounit unitInversions (l.437, sorry); only the lean field changed vs live; statement verbatim. Clauses checked: primes/char p/p≠l, separated finite-type Y over k with no stronger assumption, both coefficient cases (some E / none = padicAlgClRingObj), M over the full Loc(constant-model Dbc) subcategory, e = secondLineComparison (root-normalized, invertibility of l from p≠l), conclusion UnitInversionCondition = IsIso(condensedAmbientExchange (square Y)).app M ∧ IsIso(twistProjectionMap p2 e (p1^*M)), exchange direction q^*Rq_* → Rp2_*p1^* checked from ChosenCartesianSquare g' f' f g. Edge cases Y empty, M=0, unbounded M, l=2 covered. Advisories: parent det-prop still lists the declaration (dual owner); docstring cites the parent's blueprint tag; rationalLocalizingCategory abbrev owner def-sfb-rational-localizing-twist uncited (unfolds to cited notions); Second-reading section is the dispatcher placeholder. No compile (no file changed)."
+ }
+}

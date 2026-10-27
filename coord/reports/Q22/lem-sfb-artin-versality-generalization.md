@@ -1,0 +1,42 @@
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-artin-versality-generalization.json: item, split in five steps; original statement and prior Mathlib searches retained.
+- dag/nodes/sec-six-functors-basics/lem-sfb-artin-single-point-obstruction.json: statement, unsplit; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-artin-noetherian-versal-base-change.json: statement, unsplit; no Mathlib match.
+- citations.json: verbatim statement quotations for every use in every item step.
+
+## Attachments
+
+None. Searches of lean/WeilConjectures for the blueprint tag, word-boundary versal, RimSchlessinger and source tags found no declaration of this result. A sorry declaration would not be an attachment. No Lean was written or compiled.
+
+## WANTED
+
+None. All mathematical sources used are present.
+
+## Corrections and scope
+
+The item was statement-only; no prior sandbox split or report existed. The imported statement agrees with Stacks artin.tex Tag 0G2K and is unchanged. No statement dispute was found. The proof now exposes the two substantial uses in its source: Tag 0G2J and Tag 0CXM. The existing 0CXM node is restricted to Spec Z. It cannot be applied to an arbitrary Noetherian Lambda: a finite-type Lambda-algebra need not be finite type over Z (for example Lambda=Q(t_1,t_2,...) is Noetherian). The new base-change node retains the arbitrary Noetherian base needed by this item. It does not assert propagation of versality to a second point; that is proved by the item's contradiction argument.
+
+The item and its ancestors carry blueprint.from.node=null. tools/blueprint_refs.py ancestor prints None; I retained that result rather than inventing an imported ancestor. Its detailed place and via chain are retained, and new nodes prepend this item. The latest blueprint sk-thm-sf-ctf-stability unit and direct-images proof were read; this input remains on the inherited alteration/moduli prerequisite route, and no unit or chapter was changed. Searches of the whole blueprint for versality, nonversal, square zero thickening and 0CXM/0G2J found no matching blueprint proposition. DAG searches by tag, lemma label and concepts found the existing base-change and smooth-lifting nodes used/discussed here.
+
+## Not duplicates
+
+lem-sfb-artin-noetherian-versal-base-change vs lem-sfb-artin-versal-base-change-smooth: the existing node assumes schemes locally of finite type over Spec Z and a groupoid on Z-schemes; the new node works over Spec Lambda for an arbitrary Noetherian ring. It is the needed general form of 0CXM, not a specialization obtainable from the Z case. Its conclusion concerns a smooth fibre-product projection and a thickening section, whereas the item proves propagation between two points.
+
+The 0G2J obstruction is not the existing lem-sfb-artin-nonversal-thickening-tower: that node requires an infinite antichain of bad points, has base Z, and produces a tower. A single nonversal point does not provide such an antichain. The obstruction lemma assumes neither diagonal representability nor limit preservation, and constructs a square-zero extension with kernel kappa(u) and a precise no-local-retraction property.
+
+## Mathlib searches read
+
+All new-node queries were executed through msearch.py and their full output is retained in search-0.txt through search-9.txt. searches.jsonl holds the command log. Each new node records its own relevant searches, including two distinct semantic phrasings, Loogle, grep and LeanSearch. I read the hits: Algebra.FormallySmooth.exists_lift is lifting ring maps from an already formally smooth algebra, not construction of a deformation-groupoid obstruction. Its source at Mathlib/RingTheory/Smooth/Basic.lean:126 was read. Scheme smooth base-change stability at Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:116 applies to a morphism already known smooth and has no versality or fibred-groupoid hypothesis. It cannot prove 0CXM. Other hits concerned formally unramified maps, formally etale rings, cotangent complexes, weak limits or universal Ore-localization maps. None states either new lemma or a one-line generalization. There are zero Mathlib leaves. The item's previous searches were read and retained; the additional versality searches also corroborate them.
+
+## Review by Q22
+
+I read artin.tex lemma-generalization-versality (Tag 0G2K), definition-versal and definition-RS-star. I compared the statement's residue-field-preserving Artinian lifting tests with the versality definition and checked that its stronger RS* assumption supplies the RS used by 0CXM. For the first new node I read lemma-single-point (0G2J), including the affine pushout and its kernel computation. The no-retraction property is retained with the specified reduction isomorphism; merely saying the underlying scheme thickening does not split would be insufficient. For the second I read lemma-base-change-versal (0CXM), including the parenthetical use of limit preservation and its finite-type-point hypothesis, and the section i in the 0G2K proof. I also read spaces-more-morphisms.tex lemma-smooth-formally-smooth (04AM) and the existing affine lifting node. This is global lifting for affine tests, so no separatedness of Z is inserted.
+
+Step 1 uses the definition of finite type to choose an affine finite-type member of the cover. The topological implication follows directly from u_0 being in the closure of {u}; a one-point Artinian spectrum makes open restriction immaterial to the lifting tests. Step 2 uses precisely the new single-point obstruction: all its hypotheses hold, and its forbidden retraction is the one contradicted in step 5. Step 3 uses the actual affine-limit statement of lem-weil-pbc-limit-affine-transition; it explicitly identifies the affine limit as Spec of the ring colimit. The directed subalgebra union and its colimit universal property are written out, not taken from a Z-only node. The item's limit-preserving hypothesis descends y; adjoining lifts of a finite generating set gives a surjection to R_0 and intersection with a square-zero ideal gives a square-zero kernel. The cited first-order-thickening definition says exactly this and supplies the identical underlying spaces. Step 4 uses the full Noetherian-base 0CXM statement, including representability by triples, existence of the section i, the finite-type property of i(u_0), and a smooth open around it. I did not apply the narrower Z node. Step 5 uses the smooth-space affine infinitesimal lifting statement with source D(f_0), thickening D(f), and the smooth open O as target of the lift. The map O -> U' retains its original target, so there is no hidden need to restrict O further. Lifting f_0 makes the corresponding opens affine on U, U' and T; the final arrow only needs an open neighbourhood in T, which contains u. Inverting the pulled-back universal isomorphism and composing with the descended y arrow gives the correctly directed retraction; the specified reductions show its composite is the identity. Every cited node statement was opened, and citations.json copies its actual wording.
+
+I checked B--E against the files: both new nodes are self-contained statements only, introduce their objects, give definitions or definition dependencies, have exact source tags and labels, real logged searches, and blueprint fields. No clause of the item was merely renamed. No definition node is used for a theorem about it. Proof dependencies are exactly the union of uses, and there is no dependency back from a new node to the item. The ring-limit node is declared as a generic tool from another unit. None of the five non-elementary steps exceeds 2000 characters. For small cases: u=u_0 is consistent; empty U has no chosen points; the zero ring gives the same vacuous case; over a field distinct closed points cannot specialize to one another, so there is no spurious propagation assertion. A zero-kernel thickening would have its identity retraction, hence cannot be the obstruction produced under nonversality. The new smooth base-change assertion is vacuous if there is no finite-type point over u_0, and its section clause supplies such a point in precisely the application here. I corrected the potential base mismatch by introducing the actual Noetherian-base lemma rather than changing the item or pretending all finite-type Lambda-schemes are finite type over Z.
+
+## Unfinished
+
+No item-level argument remains. The two new prerequisites are intentionally unsplit, as required for a one-level stage-1 delivery. Independent maintainer review remains.

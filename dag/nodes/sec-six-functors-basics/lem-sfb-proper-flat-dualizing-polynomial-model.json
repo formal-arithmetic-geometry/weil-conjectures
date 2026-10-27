@@ -1,0 +1,377 @@
+{
+ "id": "lem-sfb-proper-flat-dualizing-polynomial-model",
+ "kind": "statement",
+ "title": "Proper flat duality and normalized polynomial models over arbitrary bases",
+ "statement": "Let $S$ be any scheme and let $f:X\\to S$ be a proper, flat morphism of finite presentation [def-pc-scheme], [def-weil-proper-morphism], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation]. On the unbounded derived categories of modules with quasi-coherent cohomology [def-pc-derived-category], the functor $Rf_*$ [def-pc-derived-direct-image] has a right adjoint $f^!$. Put $K_f=f^!\\mathcal O_S$. It underlies an intrinsic coherent relative dualizing pair [def-trf-coherent-relative-dualizing-pair]. For affine opens $V=\\operatorname{Spec}R\\subset S$ and $U=\\operatorname{Spec}B\\subset f^{-1}(V)$, and a polynomial presentation $P=R[t_1,\\ldots,t_n]\\twoheadrightarrow B$, there is a canonical isomorphism in $D(B)$\n$$K_f|_U\\simeq R\\operatorname{Hom}_P(B,\\Omega^n_{P/R})[n].$$\nHere $K_f|_U$ is interpreted by the affine quasi-coherent derived equivalence [lem-pc-affine-qcoh-derived-equivalence], $\\Omega^n_{P/R}=\\bigwedge^n_P\\Omega^1_{P/R}$ [def-weil-pbc-kahler-differentials], [def-weil-pbc-exterior-algebra], and derived Hom is derived coinduction with its natural $B$-action: for an injective resolution $I$ of the target it is represented by $\\operatorname{Hom}_P(B,I)$ with $(b h)(b')=h(b'b)$ [def-pur-derived-internal-hom]. The polynomial-model comparisons commute with restriction to smaller affine opens and with polynomial refinements, and satisfy the composition cocycle. Their normalization for adjoining a coordinate $t$ with image equal to the image of a chosen $a\\in P$ is the ordered Koszul contraction sending the dual of the additional relation $t-a$ tensored with $d(t-a)$ to $1$; repeated refinements use the ordered exterior and cohomological signs. These comparisons identify the polynomial models with the same intrinsic object $K_f$. No Noetherian, Cohen--Macaulay, local-complete-intersection or constant-relative-dimension assumption is made, and no concentration or invertibility of $K_f$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2X (lemma-existence-relative-dualizing), 0E4P (remark-relative-dualizing-complex-bis), and 0BV2 (remark-local-calculation-shriek); polynomial normalization: dualizing.tex Tag 0BZJ (lemma-well-defined). Arbitrary-base formulation via the intrinsic relative dualizing complex and its proper-duality comparison, not an assertion that 0BV2 alone is non-Noetherian."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-exterior-algebra",
+  "def-pur-derived-internal-hom",
+  "def-trf-derived-coinduction",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-trf-polynomial-duality-presentation-data",
+  "def-trf-polynomial-duality-restriction-primitives",
+  "def-trf-polynomial-duality-restriction-atlas",
+  "def-trf-polynomial-duality-affine-realization",
+  "def-trf-polynomial-duality-affine-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Apply the space trace-duality theorem to the schemes $X,S$, viewed as algebraic spaces over $S$, and transport it to Zariski quasi-coherent derived categories by the site comparison. This supplies $K\\in D_{\\mathrm{QCoh}}(X)$ and $\\tau:Rf_*K\\to\\mathcal O_S$. Over each affine $V\\subset S$, its restriction is identified, with its trace, with $a_V(\\mathcal O_V)$ for the right adjoint $a_V$ of $Rf_{V,*}$. Indeed $X_V$ is qcqs since it is proper over affine $V$, so the qcqs adjoint theorem applies. The trace characterization and Yoneda fix the identification, including its scalar normalization. No assertion about a global adjoint has yet been used.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-pc-qcqs-derived-direct-image-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "spaces-duality.tex Tags 0E61, 0E6E and the Hom characterization following 0E5X; 0A9E"
+   }
+  },
+  {
+   "text": "For $M\\in D_{\\mathrm{QCoh}}(S)$ define $G(M)=Lf^*M\\otimes^{\\mathbf L}K$ with trace-defined counit. On every affine base $V$ the tensor formula identifies this functor with $a_V$, with precisely that counit. The local adjunction criterion now gives $Rf_*\\dashv G$ globally. Choose $f^!=G$. Its value on $\\mathcal O_S$ is canonically $K$ by the tensor unit, so the notation $K_f$ is justified even when $S$ has no finite affine cover.",
+   "uses": [
+    "lem-sfb-proper-flat-adjoint-tensor-formula",
+    "lem-sfb-zariski-local-duality-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E4K, 0B6S; local-to-global trace criterion"
+   }
+  },
+  {
+   "text": "Over every affine base $V$, the proper-adjoint diagonal theorem supplies the pair on $X_V/V$. Its class is preserved on qcqs base-open overlaps, by that theorem's base-change clause and the trace-normalized identifications of step 1. To compare two affine bases, cover their intersection by affine opens; restriction and rigidity identify the classes there. Thus these classes are compatible. For $Y=X\\times_SX$ put $D=\\Delta_*\\mathcal O_X$ and $H=R\\mathcal Hom_Y(D,Lp_1^*K)$. On $X_V\\times_VX_V$, $H$ is $D[0]$. These self-products already cover $Y$: every point has a common image in $S$ lying in some affine $V$. Off the closed diagonal $H$ is zero. Thus so $H$ has only degree-zero cohomology. The compatible classes are sections of that sheaf (by the derived-Hom global-sections identification); they glue with zero off the diagonal. The resulting section gives $\\xi_f:D\\to Lp_1^*K$, whose multiplication map is an isomorphism locally and hence globally. Pseudo-coherence and relative finite Tor amplitude are local and hold on all $X_V$. This constructs the intrinsic coherent pair $(K_f,\\xi_f)$ on all of $Y$.",
+   "uses": [
+    "lem-sfb-proper-adjoint-diagonal-pair",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pur-rhom-global-sections",
+    "def-trf-coherent-relative-dualizing-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E2Z, 0E4P; diagonal-section gluing argument of 0E2X"
+   }
+  },
+  {
+   "text": "Fix $U=\\operatorname{Spec}B\\subset f^{-1}(V)$, $V=\\operatorname{Spec}R$. The affine criteria give $R\\to B$ flat of finite presentation. For the chosen surjection $P=R[t_1,\\ldots,t_n]\\to B$, its kernel is finitely generated. Write finitely many generators as polynomials. In the directed system of finitely generated $\\mathbf Z$-subalgebras of $R$, include their coefficients and form the same quotient $B_0$ of $P_0=R_0[t_1,\\ldots,t_n]$. Its base change is $B$. The eventual-flatness theorem permits increasing $R_0$ until $B_0/R_0$ is flat. These rings are Noetherian; the selected presentation, not just the abstract algebra $B$, has descended. The same construction descends any finite collection of refinement lifts and polynomial identities used below.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tag 02JO, flat finite-presentation approximation; chosen presentation via finitely many coefficients"
+   }
+  },
+  {
+   "text": "At the Noetherian stage the chart theorem gives a relative pair with underlying sheaf model $R\\mathcal Hom_{P_0}(i_*\\mathcal O_{U_0},\\Omega^n[n])$. The affine algebra-class evaluation comparison applies: $B_0$ is perfect over $P_0$ by the flat-polynomial-quotient theorem, hence pseudo-coherent, and the coefficient line in degree $-n$ is bounded below. It identifies that sheaf Hom with the sheafification of $C_0=C_{B_0}^{P_0}(\\Omega^n[n])$, respecting evaluation and every $B_0$-multiplication action. The affine-morphism derived equivalence realizes its $B_0$-action on $U_0$. Equip $C_0$ with the specified class $\\xi_{P_0}$ of the Koszul-diagonal lemma, rather than an arbitrary chart class. Multiplication by this class is invertible by that lemma. Its sheaf realization is therefore a coherent pair: the finiteness conditions concern the underlying object, supplied by the chart theorem. Pull this pair back along $R_0\\to R$. Since $B_0/R_0$ is flat,\n$$B_0\\otimes^{\\mathbf L}_{P_0}P=B_0\\otimes^{\\mathbf L}_{R_0}R=B.$$\nPerfect Tor-independent coinduction base change identifies its object with $C_P=C_B^P(\\Omega^n_{P/R}[n])$ in $D(B)$. Affine pullback realizes the pair geometrically. Ordered volume forms extend to the same volume.",
+   "uses": [
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-trf-affine-algebra-class-evaluation-comparison",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sfb-polynomial-koszul-diagonal-class",
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sfb-perfect-coinduction-tor-independent-base-change",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0E2E, 0E2F; perfect.tex 0A6H and 0AVW for affine realization; explicit graph class supplied by new lemma."
+   }
+  },
+  {
+   "text": "First fix the class on the actual object $C_P$. For two coefficient stages of the same chosen presentation, enlarge to a common finitely generated $\\mathbf Z$-subalgebra of $R$. Include the finite coefficients expressing each stage's defining equations in the ideal generated by the other's equations; such expressions exist after mapping to $R$, and involve finitely many coefficients. The extended presentation ideals then agree. Eventual flatness gives a common flat stage. These stage rings are Noetherian, so the scalar-extension clause of the Koszul-diagonal lemma applies to both transitions, even if nonflat. It identifies both classes with the same graph-defined class at that common stage. Successive-extension compatibility of perfect coinduction makes their further images equal as maps $B\\to C_P\\otimes_{B,p_1}^{\\mathbf L}(B\\otimes_RB)$. Denote this stage-independent class by $\\xi_P$. Only now restrict $(K_f,\\xi_f)$ to $U/V$ and apply supplied-pair rigidity, giving a unique isomorphism $(K_f|_U,\\xi_f|_U)\\simeq(C_P,\\xi_P)$. Under affine derived equivalence this is the required canonical object comparison. The coinduction definition specifies its $B$-action $(bh)(b')=h(b'b)$. Uniqueness of pair isomorphisms is used after equality of polynomial classes, not to infer their equality.",
+   "uses": [
+    "lem-sfb-polynomial-koszul-diagonal-class",
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-sfb-perfect-coinduction-tor-independent-base-change",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-trf-derived-coinduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2F finite-stage approximation; new graph-class compatibility; duality.tex 0E2W only after equality of classes."
+   }
+  },
+  {
+   "text": "For a refinement adjoining $t$ with image $\\bar a$, descend $a\\in P$ and both presentations to a common flat Noetherian stage as in step 4. The Koszul-diagonal lemma says that its specified contraction for $t-a$ sends $\\xi_{Q_0}$ to $\\xi_{P_0}$; this concerns the actual graph-defined classes. Extend this equality to $R$. Perfect coinduction base change preserves the evaluation counits, so the arrow on polynomial objects is the prescribed contraction $\\operatorname{dual}(t-a)\\otimes d(t-a)\\mapsto1$. It sends $\\xi_Q$ to $\\xi_P$ by step 6. For several coordinates use the ordered tensor evaluations with their exterior and cohomological signs. For a principal source restriction descend a lift $h\\in P$ of the inverted element and use the Koszul-diagonal lemma's localization clause at that stage. For a base restriction use its base-localization clause. These maps also preserve the specified classes after extension. Check general affine-open restrictions on principal subopens of source and base; for a fresh polynomial presentation pass to a common polynomial refinement there. No regularity of the original defining ideal is used.",
+   "uses": [
+    "lem-sfb-polynomial-koszul-diagonal-class",
+    "lem-sfb-perfect-coinduction-tor-independent-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0BZI/0BZJ with explicit graph-class compatibility; localization is checked before rigidity."
+   }
+  },
+  {
+   "text": "Compare models through their unique class-preserving identifications with the intrinsic pair, restricting that pair first on smaller opens. Direct and composite maps preserve the same fixed classes $\\xi_P$, so rigidity equates them. The concrete refinement and restriction maps of step 7 preserve these classes and therefore are exactly these comparisons, without an undetermined unit. Any two finite presentations have a common refinement with both sets of variables, choosing lifts of the extra images by surjectivity. Equality on principal subopens implies equality on arbitrary affine restrictions by uniqueness after open restriction. This proves identity, composition and overlap cocycles, including across different affine base opens. Empty charts give zero objects and unique maps. For $n=0$, $\\Omega^0_{R/R}=R$ and the shift is zero. No dimension bound, concentration, or invertibility is asserted.",
+   "uses": [
+    "lem-sfb-relative-dualizing-pair-open-rigidity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W, uniqueness; 0BZJ common-refinement argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proper-flat-space-derived-duality",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-sfb-proper-flat-adjoint-tensor-formula",
+  "lem-sfb-zariski-local-duality-adjunction",
+  "lem-sfb-proper-adjoint-diagonal-pair",
+  "lem-sfb-relative-dualizing-pair-open-rigidity",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pur-rhom-global-sections",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-colimit-flat-ring-map",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-relative-duality-polynomial-chart",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-trf-affine-algebra-class-evaluation-comparison",
+  "lem-sc-finite-affine-derived-equivalence",
+  "lem-sfb-polynomial-koszul-diagonal-class",
+  "lem-sfb-relative-dualizing-pair-base-change",
+  "lem-sfb-perfect-coinduction-tor-independent-base-change",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-trf-derived-coinduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2X, 0E4P, 0E2Z; arbitrary-base chart argument by Noetherian approximation and perfect coinduction base change, following dualizing.tex 0BZJ and 0E2F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For proper flat finitely presented morphisms of schemes the right adjoint dualizing complex has local polynomial models derived Hom into top differential forms shifted by the polynomial dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality over non Noetherian bases relative dualizing complex local polynomial presentation model",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Module.FinitePresentation.exists_notMem_bijective\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_5} {M : Type u_6} {N : Type u_7} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [Module.Finite R M] [Module.FinitePresentation R N] (f : M →ₗ[R] N)\\n  (p : Ideal R) [inst_7 : p.IsPrime] {Mₚ : Type u_3} {Nₚ : Type u_4\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ a finitely generated $ R $-module, and $ N $ a finitely presented $ R $-module. Given a linear map $ f : M → N $, a prime ideal $ \\\\mathfrak{p} ⊂ R $, and loc\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"module\": \"Mathlib/RingTheory/Localization/Free\", \"type\": \"∀ {R : Type u_4} {M : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Submonoid R)\\n  {M' : Type u_1} [inst_3 : AddCommGroup M'] [inst_4 : Module R M'] (f : M →ₗ[R] M') [IsLocalizedModule S f]\\n  (Rₛ : Type u_3) [inst_6 : CommRing Rₛ] [inst_7 : Algebra R Rₛ] [inst_8 \", \"doc\": \"Let $R$ be a commutative ring, $S$ a submonoid of $R$, and $M$ a finitely presented $R$-module. Let $R_S$ and $M_S$ denote the localizations of $R$ and $M$ at $S$, respectively. If $M_S$ is a free $R_\"}\n  {\"name\": \"Module.basicOpen_subset_freeLocus_iff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] {f : R},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Module.freeLocus R M ↔\\n    Module.Projective (Localization.Away f) (LocalizedModule (Submonoid.powers f) M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $ and an element $ f \\\\in R $, the basic open set $ D(f) $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in the free lo\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\", \"Adjunction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|dualizingComplex|twistedInverseImage|polynomial.*duali",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat morphism relative dualizing complex polynomial chart derived coinduction over arbitrary base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. This statement is the induction principle for the property that $f$ is a flat morphism. To prove a property for a flat morphism $f$, one can use the defining\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat finitely presented morphism relative dualizing complex canonical polynomial presentation top differential forms derived Hom arbitrary base",
+   "results": "Returned 8 hits: Algebra.Presentation.differentialsSolution, Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation, Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, Algebra.smoothLocus_eq_compl_support_inter, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module sheaf adjunctions, differentials and flatness do not give the derived duality polynomial model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality proper perfect morphism right adjoint pushforward relative dualizing complex",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module sheaf adjunctions, differentials and flatness do not give the derived duality polynomial model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module sheaf adjunctions, differentials and flatness do not give the derived duality polynomial model"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|dualizingComplex|polynomial.*duali|duali.*polynomial",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module sheaf adjunctions, differentials and flatness do not give the derived duality polynomial model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat morphism dualizing complex local polynomial derived Hom model",
+   "results": "Returned 8 hits: RingHom.Flat.propertyIsLocal, Module.Flat.of_isLocalizedModule, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat, AlgebraicGeometry.flat_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module sheaf adjunctions, differentials and flatness do not give the derived duality polynomial model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gorenstein-curve-relative-dualizing",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation.",
+   "via": [
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "worker": "stage1",
+  "summary": "Q60 repaired the returned split: graph-Koszul evaluation specifies the diagonal class at each Noetherian polynomial stage; its nonflat base-change, localization and refinement compatibility is applied before rigidity. Added evaluation-compatible affine coinduction realization. Seven supporting statement-only nodes; retained global trace construction, chosen-presentation descent and Tor calculation.",
+  "blueprint": "The inherited origin chain has a null blueprint ancestor (blueprint_refs.py ancestor confirms None). The textual intended source is det-thm-sf-ctf-stability-direct-images, proof (3), alteration input ILO X Lemma 2.2 and its marked plurinodal branch; this split supplies the proper-flat duality prerequisite of the ten-canonical Hilbert parameter reached by that branch. The latest sk-thm-sf-ctf-stability proof keeps direct images via proper base change and compactification; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-qcqs-derived-direct-image-right-adjoint",
+    "why": "Generic coherent algebraic duality, affine derived comparison, or finite-presentation approximation used as a tool below the nodal/Hilbert prerequisite; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic coherent algebraic duality, affine derived comparison, or finite-presentation approximation used as a tool below the nodal/Hilbert prerequisite; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic coherent algebraic duality, affine derived comparison, or finite-presentation approximation used as a tool below the nodal/Hilbert prerequisite; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic coherent algebraic duality, affine derived comparison, or finite-presentation approximation used as a tool below the nodal/Hilbert prerequisite; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-flat-ring-map",
+    "why": "Generic coherent algebraic duality, affine derived comparison, or finite-presentation approximation used as a tool below the nodal/Hilbert prerequisite; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-trf-relative-duality-polynomial-chart",
+    "why": "Generic coherent algebraic duality, affine derived comparison, or finite-presentation approximation used as a tool below the nodal/Hilbert prerequisite; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-trf-flat-polynomial-quotient-perfect",
+    "why": "Generic coherent algebraic duality, affine derived comparison, or finite-presentation approximation used as a tool below the nodal/Hilbert prerequisite; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic coherent algebraic duality, affine derived comparison, or finite-presentation approximation used as a tool below the nodal/Hilbert prerequisite; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic coherent algebraic duality, affine derived comparison, or finite-presentation approximation used as a tool below the nodal/Hilbert prerequisite; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-trf-affine-algebra-class-evaluation-comparison",
+    "why": "Generic affine derived module/sheaf comparison respecting evaluation and quotient algebra action; used at a Noetherian stage, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-finite-affine-derived-equivalence",
+    "why": "Generic affine derived module/sheaf comparison respecting evaluation and quotient algebra action; used at a Noetherian stage, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pur-rhom-global-sections",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-colimit-flat-ring-map",
+  "lem-trf-relative-duality-polynomial-chart",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-trf-affine-algebra-class-evaluation-comparison",
+  "lem-sc-finite-affine-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-cb2fd2d26",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-cb2fd2d26 (reviewer sub-agent of L); spot-checked: This re-push repairs both faults behind my RETURN of 1489325e. Live and side-live still have the item unsplit, there is no repair note, and nothing supersedes this delivery. The six earlier new nodes are byte-identical to the versions I accepted in 1489, on Stacks 0E2V/0E2W, 0E2Y, 0E4L/0E2Z/0E4P, 0E4K, 0A6A/0661/07VI and the local-adjunction argument. In the item, steps 1, 2 and 4 are unchanged. Step 3 now states the covering correctly: the products X_V×_V X_V do cover Y. One node is new: lem-sfb-polynomial-koszul-diagonal-class. It gives a specified class xi_P built from the graph Koszul resolution of x_i−x̄_i in B_2[x] (a regular sequence over any ring), flat coinduction base change (B is pseudo-coherent over the Noetherian P), coinduction transitivity and the evaluation dual-wedge⊗dx↦1. Multiplication by xi_P is invertible by construction (0E2T). Its clauses are true. Nonflat Noetherian scalar extension holds because B is P-perfect and Tor^P(B,P')=Tor^R(B,R')=0, so the resolution and evaluations base-change. In a refinement the graph ideal (x−x̄,t−ā) equals (x−x̄,t−a(x)) by a unitriangular change, so xi_Q maps to xi_P. Lift independence follows from the class clause and uniqueness. Localization holds. Small cases n=0 and B=R with x↦r check. It duplicates no existing node: algebraic-diagonal-class-normalization, relative-dualizing-isomorphism, the chart node and lci-koszul-determinant give only existence/uniqueness or lci data. The downstream polynomial-base-change node cites the item and is not used, so there is no cycle. Step 5 now cites lem-trf-affine-algebra-class-evaluation-comparison (hypotheses hold: B_0 is pseudo-coherent over P_0, Omega^n[n] is bounded below) and 0AVW, and uses xi_{P0} instead of the existential chart class. In step 6 the stages σ and τ meet in a common stage ρ where I_σP_ρ=I_τP_ρ. The lemma's scalar-extension clause plus successive perfect-coinduction base change make the classes equal before rigidity is applied, so the former E5 is fixed. In step 7 the refinement, principal-localization and base-localization clauses show the concrete arrows preserve the classes. In step 8 rigidity then identifies them with the intrinsic comparisons, so no unit-valued Čech defect remains. Batch-5: def-trf-derived-coinduction and def-trf-coherent-relative-dualizing-pair are definitions. lem-trf-relative-duality-polynomial-chart (Noetherian coherent duality), lem-trf-flat-polynomial-quotient-perfect, lem-trf-affine-algebra-class-evaluation-comparison and the def-trf-algebraic-space closure contain only generic algebra, coherent and space-foundation nodes (pod: only the generic exact-square and hom-evaluation nodes). None reaches a trace-formula or Poincaré-duality theorem, so all are accepted. The split_report tool_uses are generic and accepted. No SGA is cited. Advisory only: the Koszul sign convention must be fixed consistently at formalization; eventual flatness at the common stage is automatic; step 7's reduction for a fresh presentation of a principal open is terse."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatDualizingPolynomialModel",
+  "declaration": "AlgebraicGeometry.exists_properFlatDualizingPolynomialModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatDualizingPolynomialModel.lean",
+  "statement": "theorem exists_properFlatDualizingPolynomialModel [∀ Z : RingedSpace.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] : ∃ hO : schemeDerivedQCohProperty S (𝟙_ (schemeDerivedCategory S)), ∃ hpres : ∀ E : schemeDerivedCategory X, schemeDerivedQCohProperty X E → schemeDerivedQCohProperty S ((schemeDerivedDirectImage f).obj E), ∃ (fshriek : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory X) (K : schemeDerivedQCohCategory X), Nonempty (((schemeDerivedQCohProperty S).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ hpres E.obj E.property)) ⊣ fshriek) ∧ K = fshriek.obj ⟨𝟙_ (schemeDerivedCategory S), hO⟩ ∧ ∃ ξ : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f) ⟶ (derivedPullback (pullback.fst f f)).obj K.obj, IsCoherentRelativeDualizingPair f K.obj ξ ∧ ∃ atlas : PolynomialDualityChartAtlas f K.obj, ∀ (R B : Type u) [CommRing R] [CommRing B] [Algebra R B] (jB : Spec (.of B) ⟶ X) (jR : Spec (.of R) ⟶ S) [IsOpenImmersion jB] [IsOpenImmersion jR], jB ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R B)) ≫ jR → ∃ (M : DerivedCategory (ModuleCat.{u} B)) (e : (polynomialOpenRestriction jB).obj K.obj ≅ (polynomialAffineTilde B).obj M) (F : PolynomialDualityPresentationSystem R B (algebraMap R B) M), IsPolynomialAffineAtlasCompatible atlas R B jB jR M e F ∧ IsPolynomialLocalizedAffineAtlasCompatible atlas R B jB jR M e F",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66364978a",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Single sorry theorem exists_properFlatDualizingPolynomialModel, no new defs. Node statement/proof identical to live; only lean + stmt_deps changed (5 landed Q42 polynomial-duality def nodes added); all 18 dep records identical to live; lean.statement verbatim. Clauses checked: proper/flat/lfp (proper⇒qcqs), D_QCoh full subcategory, actual lift of Rf_* with Nonempty adjunction to fshriek, K = fshriek(𝟙_) with 𝟙_ = Q(O_S) from schemeDerivedTensorMonoidal, ∃ξ IsCoherentRelativeDualizingPair, ∀ affine open immersions over a commuting square ∃ M, e via native tilde (same as affine equivalence forward functor), presentation system over all polynomial quotients with pinned refinement contraction/coordinate wedge maps, atlas restriction equation and full/localized affine compatibility. Same shape as landed Noetherian exists_relativeDualityPolynomialChart, minus IsLocallyNoetherian, plus global adjunction. No extra hypotheses; universes u,w independent; edge cases n=0, empty, zero ring, h=0/1, non-qc base OK. Imports resolve; proof deps without Lean records are correctly noted. Docstrings carry source, blueprint and 8 proof steps. No compile (no file changed). Advisory: ξ and atlas identifications are independent existentials (canonicity via pinned transitions only), consistent with the node and precedent."
+ }
+}

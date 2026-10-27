@@ -1,0 +1,241 @@
+{
+ "id": "def-pur-completed-pullback-tower-core",
+ "kind": "definition",
+ "title": "Coherent reduction and strict pullback tower core",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell [def-weil-l-adic-coefficient-extension]. For each scheme and morphism use the actual coherent coefficient systems [def-coef-ringed-sequence-site] and their derived evaluation calculus [lem-coef-derived-system-evaluation-calculus]. Construct sequence direct and inverse image from the canonical constant-section ring map [def-trf-integral-comparison-sequence-systems], with their adjunction, exactness and evaluation comparisons. Construct ordinary coherent reduction as the left adjoint of completed scalar restriction followed by inverse limit; fix its derived model and finite evaluation by the displayed adjunction units. Reorder restricted coherent complexes into completed-module towers. Fix the total-limit/Roos model on K-injectives by limit projections and the zero second cone coordinate [def-sf-strict-roos-functor]. Construct the strict pullback tower comparison against [def-a1-integral-finite-pullback-tower], uniquely fixed at every level. All signatures, definitions and normalization equations are exactly the existing prefix of def-pur-completed-pullback-tower-realizations; this is a file split for compile time, with no new mathematical assumption or weakened statement.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-sf-strict-roos-functor",
+  "def-a1-integral-finite-pullback-tower",
+  "def-pur-finite-pullback-tensor-construction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941, 08TC and 07A4; the same coherent reduction, limit-projection Roos augmentation and finite pullback/tensor normalization sources as the original completed-comparison declarations."
+ },
+ "proof": [
+  {
+   "text": "For sequence continuity use integralComparisonSequenceBaseChange_continuous. Construct the uniquely specified sequence ring map as integralComparisonSequenceRingMap; its sections are definitionally the prescribed coefficient maps, and sheaf and natural-transformation extensionality prove uniqueness. Identify the selected sequence ring map with this map by uniqueness. The right-adjoint and exactness declarations for integralComparisonSequenceDirectImage and integralComparisonSequencePullback then prove the corresponding sequence-operation properties. Apply the proved canonical evaluation lemma integralComparisonSequenceDirectEvaluation_existsUnique, which is separated into its own module for compile time. Its proof composes the two module-pushforward composition isomorphisms with pushforwardCongr. The two coefficient morphisms agree on every section because the sequence ring map is the canonical constant-section map. Its resulting comparison is the identity on sections, and sectionwise extensionality proves its uniqueness without the arbitrary-ring-map helper.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-coef-ringed-sequence-site",
+    "lem-pur-integral-comparison-sequence-direct-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ordinary coherent limit preserves limits: evaluation of coefficientSequenceRestriction is coefficientSequenceEvaluation followed by scalarReductionRestriction. The first is a continuous module pushforward and has a left adjoint in the specified universes; the second is right adjoint to scalar extension. Evaluation jointly detects preservation of limits, and the constant-tower limit preserves limits. The category of sequence modules is Grothendieck abelian in universe u+1. Its small coseparator, completeness and well-poweredness permit the special adjoint functor theorem, proving pullbackTensorOrdinaryLimit_rightAdjoint. Additivity and the Roos augmentation then follow by the existing argument: scalar restriction and constant-tower limit are additive, and the projection equations make the augmentation killed by one minus shift.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pur-ringed-site-module-pullback-exists-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ordinary coherent limit is the composition of additive scalar restriction and additive constant-tower limit. Its left adjoint is additive by the preadditive adjunction criterion. For the Roos augmentation, compose with each product projection and each complex degree. The resulting equation is exactly the compatibility of the ordinary limit projections with the consecutive transition; hence the composite with 1 minus shift is zero, as is the differential of the zero cochain.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For inverse-image evaluation, take the inverse mate of the canonical direct-image evaluation isomorphism under pullbackTensorSequenceAdjunction and coefficientProEtaleModuleAdjunction. sequenceModulePullbackEvaluation_isIso proves that this mate is invertible for the actual sequence and finite ring sheaves and their evaluation identifications. unit_mateEquiv_symm identifies its finite Hom transpose with the required evaluated sequence unit. Injectivity of that Hom equivalence, followed by natural-transformation and isomorphism extensionality, proves uniqueness. No additional proof obligation is introduced.",
+   "uses": [
+    "lem-sf-sequence-module-pullback-evaluation",
+    "def-coef-ringed-sequence-site",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "pullbackTensorReductionModel_existsUnique: ordinary reduction is tensor extension to the sequence ring. Flat K-flat\ncomplexes compute its left derived functor. Derive the ordinary reduction/limit\nadjunction using its ordinary quotient unit and the displayed total-limit unit.\nUniqueness of a left adjoint to coefficientSequenceLimit identifies this derived\nadjunction with the recorded one. Its transpose is precisely the displayed\nformula, which determines each component and hence the natural isomorphism.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-ringed-sequence-site",
+    "def-sf-strict-roos-functor",
+    "def-a1-integral-finite-pullback-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply purSequenceOrdinaryFactorization to obtain ordinary scalar extension with its finite tensor comparison and limit-projection transpose. Transport its right adjoint along the recorded limit isomorphism and identify its left adjoint with pullbackTensorOrdinaryReduction by uniqueness of left adjoints. Compose that natural isomorphism with the inverse finite tensor comparison. The homEquiv_leftAdjointUniq_hom_app identity gives the recorded ordinary reduction unit. Substituting projection_limit into the existing transpose equation proves exactly the required finite transpose. Injectivity of the finite adjunction Hom equivalence and natural-transformation and isomorphism extensionality prove uniqueness. No new proof obligation is introduced.",
+   "uses": [
+    "lem-pur-sequence-ordinary-factorization",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved ExactProductsRoos.comparisonIso to the actual derived inverse limit and its rightDerivedFunctorUnitQ. The ordinary coefficient module category is Grothendieck, hence so is its strict tower category; its countable products are exact by integralOperationsExactProducts from the existing integral operations module. Change the sign of the Roos difference by the arrow isomorphism (identity, negative identity), and map it through the shifted cone functor. The zero-second-coordinate kernel inclusion is preserved, as checked degreewise on the source cone summand. Inverting the resulting natural isomorphism and cancelling the unit gives exactly the displayed normalization on every K-injective tower. For uniqueness choose a K-injective resolution of an arbitrary tower complex. Naturality, equality at the K-injective resolution, and invertibility of the localized resolution imply equality at the original tower. Natural-transformation and isomorphism extensionality conclude. No new proof obligation is introduced.",
+   "uses": [
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "def-coef-ringed-sequence-site",
+    "def-sf-strict-roos-functor",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "pullbackTensorPullbackTower_existsUnique: the quotient maps and inverse-image maps were fixed by their ordinary\nadjunction units. Apply the two adjunction Hom bijections: both composites\nacross a quotient transition become the same quotient unit. Thus the level\ncomparisons commute strictly with transitions. They form a tower isomorphism;\nits prescribed components give uniqueness by natural-transformation extensionality.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-ringed-sequence-site",
+    "def-sf-strict-roos-functor",
+    "def-a1-integral-finite-pullback-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site",
+  "lem-pur-integral-comparison-sequence-direct-evaluation",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "lem-sf-sequence-module-pullback-evaluation",
+  "def-weil-proetale-inverse-image",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-strict-roos-functor",
+  "def-a1-integral-finite-pullback-tower",
+  "lem-pur-sequence-ordinary-factorization",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940, 0941 and 08TC: transport the existing ordinary finite scalar-extension comparison by uniqueness of left adjoints; reuse the normalized exact-products Roos comparison and preserve the limit inclusion through its sign isomorphism. Other construction steps unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent inverse systems of sheaves of modules reduction inverse limit adjunction and Roos complex model",
+   "results": "SheafOfModules.createsLimit, evaluationPreservesLimit and hasLimit supply general limit facts; no complete normalized coherent reduction/Roos package.",
+   "date": "2026-10-27",
+   "verdict": "Retain the existing project constructions and proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits, including leftAdjointUniq, unit_leftAdjointUniq_hom and component formulas.",
+   "date": "2026-10-27",
+   "verdict": "The existing construction already uses the appropriate adjunction API; no replacement needed."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|SequenceModule",
+   "results": "0 Mathlib hits from msearch. Repository search finds the existing coherent sequence and strict Roos definitions.",
+   "date": "2026-10-27",
+   "verdict": "Preserve the project-specific normalized realizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-27",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-completed-pullback-tower-realizations",
+   "place": "Existing coherent reduction, evaluation, Roos and strict pullback tower construction prefix; file split after profiling.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTowerCore",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTowerCore.lean",
+  "declaration": "WeilConjectures.pullbackTensorFiniteAdjunction",
+  "declarations": [
+   "WeilConjectures.pullbackTensorUniqueChoice",
+   "WeilConjectures.pullbackTensorSequenceSmall",
+   "WeilConjectures.pullbackTensorCalculus",
+   "WeilConjectures.pullbackTensorSequenceBase",
+   "WeilConjectures.pullbackTensorSequenceBase_continuous",
+   "WeilConjectures.pullbackTensorSequenceRing_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceRing",
+   "WeilConjectures.pullbackTensorSequenceDirect",
+   "WeilConjectures.pullbackTensorSequenceDirect_rightAdjoint",
+   "WeilConjectures.pullbackTensorSequenceInverse",
+   "WeilConjectures.pullbackTensorSequenceAdjunction",
+   "WeilConjectures.pullbackTensorSequenceInverse_exact",
+   "WeilConjectures.pullbackTensorSequenceInverse_additive",
+   "WeilConjectures.pullbackTensorSequenceInverse_limits",
+   "WeilConjectures.pullbackTensorSequenceInverse_colimits",
+   "WeilConjectures.pullbackTensorSequenceDerived",
+   "WeilConjectures.pullbackTensorOrdinaryLimit",
+   "WeilConjectures.pullbackTensorOrdinaryLimit_rightAdjoint",
+   "WeilConjectures.pullbackTensorOrdinaryReduction",
+   "WeilConjectures.pullbackTensorOrdinaryAdjunction",
+   "WeilConjectures.pullbackTensorOrdinary_additive",
+   "WeilConjectures.pullbackTensorOrdinaryReduction_additive",
+   "WeilConjectures.pullbackTensorOrdinaryLimit_additive",
+   "WeilConjectures.pullbackTensorConstantLimit",
+   "WeilConjectures.pullbackTensorConstantLimit_additive",
+   "WeilConjectures.pullbackTensorTowerHasDerived",
+   "WeilConjectures.pullbackTensorLevelAdditive",
+   "WeilConjectures.pullbackTensorTowerKInjectives",
+   "WeilConjectures.pullbackTensorTowerQ",
+   "WeilConjectures.pullbackTensorLimitUnit",
+   "WeilConjectures.pullbackTensorReductionModel_existsUnique",
+   "WeilConjectures.pullbackTensorReductionModel",
+   "WeilConjectures.pullbackTensorFiniteAdjunction",
+   "WeilConjectures.pullbackTensorReductionEvaluation_existsUnique",
+   "WeilConjectures.pullbackTensorReductionEvaluation",
+   "WeilConjectures.pullbackTensorSequenceDirectEvaluation_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceDirectEvaluation",
+   "WeilConjectures.pullbackTensorSequenceInverseEvaluation_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceInverseEvaluation",
+   "WeilConjectures.pullbackTensorRestrictedLevel",
+   "WeilConjectures.pullbackTensorRestrictedTower",
+   "WeilConjectures.pullbackTensorRoosAugmentation",
+   "WeilConjectures.pullbackTensorRoosAugmentation_condition",
+   "WeilConjectures.pullbackTensorRoosUnit",
+   "WeilConjectures.pullbackTensorRoosModel_existsUnique",
+   "WeilConjectures.pullbackTensorRoosModel",
+   "WeilConjectures.pullbackTensorReductionEvaluationComplex",
+   "WeilConjectures.pullbackTensorInverseEvaluationComplex",
+   "WeilConjectures.pullbackTensorPullbackTowerLevel",
+   "WeilConjectures.pullbackTensorPullbackTower_existsUnique",
+   "WeilConjectures.pullbackTensorPullbackTower"
+  ],
+  "statement": "def pullbackTensorFiniteAdjunction (W : Scheme.{u}) (n : ℕ) :\n    unrestrictedIntegralReductionFunctor l E W n ⊣ scalarReductionRestriction l E W n",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c0d88",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261027T050627-L-246468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T084430-L-3679734",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

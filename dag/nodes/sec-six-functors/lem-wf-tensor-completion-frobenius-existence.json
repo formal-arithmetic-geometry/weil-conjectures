@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Item proof step 13, existence/uniqueness assembly"
+ },
+ "stmt_deps": [
+  "def-wf-weil-category",
+  "def-sf-projection-weil-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Decomposition of target proof into existence and uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "existence of normalized rational Weil tensor comparison",
+   "results": "No matching theorem; split intermediate obligation from target.",
+   "date": "2026-10-26",
+   "verdict": "new intermediate statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "∃ R, RationalComparison.Normalized",
+   "results": "No matching theorem.",
+   "date": "2026-10-26",
+   "verdict": "new intermediate statement."
+  },
+  {
+   "tool": "grep",
+   "query": "wfTensorCompletionFrobenius_exists",
+   "results": "No prior declaration.",
+   "date": "2026-10-26",
+   "verdict": "new intermediate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WfTensorCompletionFrobenius",
+  "date": "2026-10-26",
+  "group": "Y9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-tensor-completion-frobenius",
+   "place": "Existence and uniqueness assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "tool_uses": [],
+ "id": "lem-wf-tensor-completion-frobenius-existence",
+ "title": "Existence of a normalized rational tensor comparison",
+ "statement": "For finite-field datum D, coefficient datum c, separated finite-type X₀, and finite E, there exists R : WfTensorCompletion.RationalComparison D c X₀ E satisfying the target theorem’s normalization, Frobenius equation, and ordinary/completed Weil-pair isomorphism conjuncts.",
+ "proof": [
+  {
+   "text": "The detailed construction/uniqueness argument remains an intermediate obligation for a later worker; the item combines this statement with the other split statement.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Item proof step 13, existence/uniqueness assembly"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "module": "Sheaf.Paper.WfTensorCompletionFrobenius",
+  "declaration": "WeilConjectures.wfTensorCompletionFrobenius_exists",
+  "statement": "theorem wfTensorCompletionFrobenius_exists (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)\n    (X₀ : Over (Spec (.of D.k₀))) [IsSeparated X₀.hom]\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    (E : Padic.FiniteCoefficientFields c.l c.Qbar) :\n    ∃ R : WfTensorCompletion.RationalComparison D c X₀ E,\n      WfTensorCompletion.FullProperty D c X₀ E R",
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-26",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/WfTensorCompletionFrobenius.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261026T003311-L-160580",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T024132-L-640855",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.wfTensorCompletionCommonField",
+   "WeilConjectures.wfTensorCompletionFrobenius_exists",
+   "WeilConjectures.wfTensorCompletionFrobenius_unique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.wfTensorCompletionCommonField",
+   "WeilConjectures.wfTensorCompletionFrobenius_exists",
+   "WeilConjectures.wfTensorCompletionFrobenius_unique"
+  ]
+ }
+}

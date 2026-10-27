@@ -1,0 +1,215 @@
+{
+ "id": "lem-trf-monotone-vertex-prefix",
+ "kind": "statement",
+ "title": "Monotonicity of ordered vertex prefixes",
+ "statement": "Let $n\\ge1$. Regard $\\mathbf N^n$ as the exponent vectors of monomials in $\\mathbf Z[Y_1,\\ldots,Y_n]$ [def-weil-pbc-mv-polynomial-ring]. Then write $u\\le v$ for coordinatewise order on $\\mathbf N^n$, $|u|=\\sum_{j=1}^n u_j$, and $e_j$ for the $j$th coordinate vector. Let $D\\subseteq\\mathbf N^n$ be closed under addition by $\\mathbf N^n$ and under $u\\mapsto u-u_p e_p+u_p e_t$ for $1\\le p<t\\le n$. Suppose $a_1,\\ldots,a_s$ enumerate exactly the coordinatewise minimal elements of $D$, in strictly ascending lexicographic order of $(|a_h|,a_{h,1},\\ldots,a_{h,n})$. These are the additive monotone diagram and ordered vertex family of [def-trf-supported-homogeneous-division], spelled out above. Then\n$$D=\\bigcup_{h=1}^s(a_h+\\mathbf N^n).$$\nFor every $h$ and $p<t$ with $a_{h,p}>0$, there is $\\ell<h$ such that\n$$a_\\ell\\le a_h-a_{h,p}e_p+a_{h,p}e_t.$$\nFor every $0\\le q\\le s$, the set\n$$U_q=\\bigcup_{h=1}^q(a_h+\\mathbf N^n)$$\nis closed under addition by $\\mathbf N^n$ and under $v\\mapsto v-v_p e_p+v_p e_t$ for $p<t$. Empty unions are allowed; in particular $U_0=\\varnothing$ and $U_s=D$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent combinatorial refinement of Bierstone--Milman 1997 section 8, Lemma 8.2 and Remarks 8.4, pp.274--275; Original proof Steps 1, 3--4: vertex domination and the degree/lex comparison after moving positive coordinate mass; closure extended to arbitrary vectors of a prefix orthant. No Stacks tag states this combinatorial result. ILO VIII 2.3.11--2.3.13 supplies only the historical parent route; BM paper read online at https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf and absent from repository literature."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof": [
+  {
+   "text": "Use the additive-diagram and ordered-vertex definitions in [def-trf-supported-homogeneous-division]. For $x\\in D$, choose $b\\in D$ with $b\\le x$ of least total degree; the admissible degrees are a nonempty subset of $\\mathbf N$ since $x$ is admissible. Any $c\\in D$ with $c\\le b$ and $c\\ne b$ has $|c|<|b|$, a contradiction. Thus $b$ is coordinatewise minimal and equals some $a_h$. Conversely $a_h\\le x$ implies $x=a_h+(x-a_h)\\in D$ by additive closure. This proves the orthant-union equality, including the empty case.",
+   "uses": [
+    "def-trf-supported-homogeneous-division"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent combinatorial refinement of Bierstone--Milman 1997, section 8, opening definition p.273 and Lemma 8.2 proof p.274 (online PDF URL in source.place); ILO VIII 2.3.11--2.3.13, printed pp.93--94, is historical context only."
+   }
+  },
+  {
+   "text": "Fix $h,p,t$ with $p<t$ and $a_{h,p}>0$. Write $T(x)=x-x_p e_p+x_p e_t$. The hypothesis gives $T(a_h)\\in D$, so Step 1 supplies $a_\\ell\\le T(a_h)$. Also $|T(a_h)|=|a_h|$. If $|a_\\ell|<|a_h|$, the prescribed order gives $\\ell<h$. Otherwise the inequality and equal coordinate sums force $a_\\ell=T(a_h)$: all nonnegative differences have sum zero. The first coordinate where $T(a_h)$ differs from $a_h$ is $p$, where it is $0<a_{h,p}$. Hence it is strictly lexicographically smaller, so again $\\ell<h$. This proves the earlier-vertex assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent combinatorial refinement of Bierstone--Milman 1997, section 8, opening definition p.273 and Lemma 8.2 proof p.274 (online PDF URL in source.place); ILO VIII 2.3.11--2.3.13, printed pp.93--94, is historical context only."
+   }
+  },
+  {
+   "text": "For fixed $p<t$, the coordinates of $T(x)$ are $0$ at $p$, $x_t+x_p$ at $t$, and $x_j$ elsewhere. Consequently $T(x+y)=T(x)+T(y)$, and all these vectors have nonnegative coordinates. In particular if $a_{h,p}=0$, then $T(a_h)=a_h$; if $a_{h,p}>0$, Step 2 gives $a_\\ell\\le T(a_h)$ with $\\ell<h$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent combinatorial refinement of Bierstone--Milman 1997, section 8, opening definition p.273 and Lemma 8.2 proof p.274 (online PDF URL in source.place); ILO VIII 2.3.11--2.3.13, printed pp.93--94, is historical context only."
+   }
+  },
+  {
+   "text": "Fix $q$ and $v\\in U_q$, and choose $h\\le q$ and $b\\in\\mathbf N^n$ with $v=a_h+b$. For any $c\\in\\mathbf N^n$, $v+c=a_h+(b+c)\\in U_q$, proving additive closure. If $a_{h,p}=0$, Step 3 gives $T(v)=a_h+T(b)\\in U_q$. Otherwise choose $\\ell<h$ from Step 2. Then $T(v)=a_\\ell+(T(a_h)-a_\\ell)+T(b)\\in U_q$, since $\\ell<h\\le q$ and the difference is coordinatewise nonnegative. This proves closure under every required move.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent combinatorial refinement of Bierstone--Milman 1997, section 8, opening definition p.273 and Lemma 8.2 proof p.274 (online PDF URL in source.place); ILO VIII 2.3.11--2.3.13, printed pp.93--94, is historical context only."
+   }
+  },
+  {
+   "text": "For $q=0$ the defining union is empty and both closure assertions are vacuous. For $q=s$, Step 1 gives $U_s=D$. If $s=0$ the same equality forces $D=\\varnothing$, consistently with all preceding assertions. If $n=1$ there is no pair $p<t$ and the coordinate-move assertions are vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent combinatorial refinement of Bierstone--Milman 1997, section 8, opening definition p.273 and Lemma 8.2 proof p.274 (online PDF URL in source.place); ILO VIII 2.3.11--2.3.13, printed pp.93--94, is historical context only."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent combinatorial refinement of Bierstone--Milman 1997, section 8, opening definition p.273 and Lemma 8.2 proof p.274 (online PDF URL in source.place); ILO VIII 2.3.11--2.3.13, printed pp.93--94, is historical context only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "monotone.?diagram|vertex.?prefix|Pommaret|Janet",
+   "results": "{\"t\": \"2026-10-22T07:04:32Z\", \"tool\": \"grep\", \"query\": \"monotone.?diagram|vertex.?prefix|Pommaret|Janet\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Degree-lex definitions, ordinary monotonicity and Nobeling/colex initial segments do not state monotonicity of unions of vertex orthants."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An initial degree lexicographic segment of minimal generators of a monotone monomial upper set generates a monotone upper set",
+   "results": "{\"t\": \"2026-10-22T07:04:33Z\", \"tool\": \"leansearch\", \"query\": \"An initial degree lexicographic segment of minimal generators of a monotone monomial upper set generates a monotone upper set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonomialOrder.degLex\", \"DegLex\", \"Finset.Colex.IsInitSeg.exists_initSeg\", \"Finset.Colex.mem_initSeg_self\", \"Finset.Colex.IsInitSeg\", \"Finset.Colex.isInitSeg_initSeg\", \"Finset.Colex.initSeg\", \"Finset.Colex.isInitSeg_iff_exists_initSeg\"], \"digest\": \"5f63bb2cc3eace70\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Degree-lex definitions, ordinary monotonicity and Nobeling/colex initial segments do not state monotonicity of unions of vertex orthants."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonomialOrder, Set.IsLowerSet",
+   "results": "{\"t\": \"2026-10-22T07:04:33Z\", \"tool\": \"loogle\", \"query\": \"MonomialOrder, Set.IsLowerSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Set.IsLowerSet'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Loogle reports an unknown identifier; corrected query \"DegLex\" was run. Degree-lex definitions, ordinary monotonicity and Nobeling/colex initial segments do not state monotonicity of unions of vertex orthants."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monotone-vertex-prefix: initial segments of coordinatewise minimal generators ordered by degree lex generate whole-coordinate monotone upper sets",
+   "results": "{\"t\": \"2026-10-22T07:04:43Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-monotone-vertex-prefix: initial segments of coordinatewise minimal generators ordered by degree lex generate whole-coordinate monotone upper sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts\", \"Profinite.NobelingProof.GoodProducts.smaller_mono\", \"Pi.toLex_monotone\", \"Profinite.NobelingProof.GoodProducts.good_lt_maxProducts\", \"Profinite.NobelingProof.GoodProducts.MaxProducts\", \"Pi.toColex_monotone\", \"Profinite.NobelingProof.Products.isGood_mono\", \"Profinite.NobelingProof.GoodProducts.chain'_cons_of_lt\"], \"digest\": \"8203861bf32f069c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Degree-lex definitions, ordinary monotonicity and Nobeling/colex initial segments do not state monotonicity of unions of vertex orthants."
+  },
+  {
+   "tool": "grep",
+   "query": "initial.*segment|[Mm]onotone|[Mm]inimal",
+   "results": "{\"t\": \"2026-10-22T07:05:10Z\", \"tool\": \"grep\", \"query\": \"initial.*segment|[Mm]onotone|[Mm]inimal\", \"sub\": \"Data/Finsupp/MonomialOrder\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Data/Finsupp/MonomialOrder/DegLex.lean\", \"Mathlib/Data/Finsupp/MonomialOrder/DegLex.lean\", \"Mathlib/Data/Finsupp/MonomialOrder/DegLex.lean\", \"Mathlib/Data/Finsupp/MonomialOrder/DegLex.lean\"], \"digest\": \"263823881e26ec9c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Degree-lex definitions, ordinary monotonicity and Nobeling/colex initial segments do not state monotonicity of unions of vertex orthants."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DegLex\"",
+   "results": "{\"t\": \"2026-10-22T07:05:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"DegLex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DegLex\", \"ofDegLex\", \"toDegLex\", \"instAddCommMonoidDegLex\", \"Finsupp.DegLex.instLTDegLexNat\", \"Finsupp.DegLex.instLinearOrderDegLexNat\", \"ofDegLex_symm_eq\", \"toDegLex_symm_eq\"], \"digest\": \"4396e854196820e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Degree-lex definitions, ordinary monotonicity and Nobeling/colex initial segments do not state monotonicity of unions of vertex orthants."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monotone-vertex-prefix: for a Borel monotone exponent diagram, replacing a positive earlier coordinate of a minimal generator by a later coordinate is dominated by a generator earlier in degree lex order",
+   "results": "{\"t\": \"2026-10-22T07:05:21Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-monotone-vertex-prefix: for a Borel monotone exponent diagram, replacing a positive earlier coordinate of a minimal generator by a later coordinate is dominated by a generator earlier in degree lex order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.simplicialEvalσ_monotone\", \"Profinite.NobelingProof.GoodProducts.smaller_mono\", \"SimplexCategoryGenRel.IsAdmissible.mono\", \"Tuple.lt_card_le_iff_apply_le_of_monotone\", \"Profinite.NobelingProof.Products.isGood_mono\", \"SzemerediRegularity.stepBound_mono\", \"Behrend.map_monotone\", \"Cardinal.cantorFunction_le\"], \"digest\": \"5508cf4f928d432a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Degree-lex definitions, ordinary monotonicity and Nobeling/colex initial segments do not state monotonicity of unions of vertex orthants."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an additive monotone subset of natural exponent vectors, prefixes of coordinatewise minimal generators in degree lexicographic order are closed under moving an entire earlier coordinate to a later coordinate",
+   "results": "{\"t\": \"2026-10-23T20:07:13Z\", \"tool\": \"leanfinder\", \"query\": \"In an additive monotone subset of natural exponent vectors, prefixes of coordinatewise minimal generators in degree lexicographic order are closed under moving an entire earlier coordinate to a later coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.Products.isGood\", \"Profinite.NobelingProof.GoodProducts.good_lt_maxProducts\", \"Profinite.NobelingProof.GoodProducts\", \"SimplexCategoryGenRel.IsAdmissible.mono\", \"Profinite.NobelingProof.GoodProducts.MaxProducts\", \"MonomialOrder.le_add_right\", \"Profinite.NobelingProof.GoodProducts.chain'_cons_of_lt\", \"Finset.addAntidiagonal_mono_left\"], \"digest\": \"9ec2bcafc179dd3e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Nobeling good products, simplex lists, monomial-order addition and antidiagonals do not state this diagram assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "monotone.?diagram|vertex.?prefix|Borel|Pommaret|Janet",
+   "results": "{\"t\": \"2026-10-23T20:07:35Z\", \"tool\": \"grep\", \"query\": \"monotone.?diagram|vertex.?prefix|Borel|Pommaret|Janet\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No prefix-closure theorem; the degree-lex hits concern monotonicity of degree and the monomial order."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A degree lexicographic prefix of the minimal generators of a monotone monomial ideal is stable under moving all of one exponent to a later variable",
+   "results": "{\"t\": \"2026-10-23T20:07:36Z\", \"tool\": \"leansearch\", \"query\": \"A degree lexicographic prefix of the minimal generators of a monotone monomial ideal is stable under moving all of one exponent to a later variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DegLex\", \"Finsupp.DegLex.isStrictOrder\", \"MvPolynomial.degree_degLexDegree\", \"Finsupp.DegLex.monotone_degree\", \"MvPolynomial.degLex_totalDegree_monotone\", \"MonomialOrder.degLex.congr_simp\", \"MonomialOrder.degLex_single_lt_iff\", \"MvPowerSeries.exists_finsupp_eq_lexOrder_of_ne_zero\"], \"digest\": \"2d2aab3a7e176ec5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Degree-lex definitions, total-degree comparisons and a power-series order do not state the prefix or earlier-vertex conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finsupp.DegLex, Minimal",
+   "results": "{\"t\": \"2026-10-23T20:07:36Z\", \"tool\": \"loogle\", \"query\": \"Finsupp.DegLex, Minimal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No hits."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal|Minimal|monotone|initial|prefix",
+   "results": "{\"t\": \"2026-10-23T20:08:02Z\", \"tool\": \"grep\", \"query\": \"minimal|Minimal|monotone|initial|prefix\", \"sub\": \"Data/Finsupp/MonomialOrder\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Data/Finsupp/MonomialOrder/DegLex.lean\", \"Mathlib/Data/Finsupp/MonomialOrder/DegLex.lean\", \"Mathlib/Data/Finsupp/MonomialOrder/DegLex.lean\", \"Mathlib/Data/Finsupp/MonomialOrder/DegLex.lean\"], \"digest\": \"263823881e26ec9c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No prefix-closure theorem; the degree-lex hits concern monotonicity of degree and the monomial order."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Borel monotone monomial upper set, transferring a positive coordinate of a minimal exponent to a later coordinate is divisible by an earlier degree lexicographic generator",
+   "results": "{\"t\": \"2026-10-23T20:08:03Z\", \"tool\": \"leanfinder\", \"query\": \"For a Borel monotone monomial upper set, transferring a positive coordinate of a minimal exponent to a later coordinate is divisible by an earlier degree lexicographic generator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonomialOrder.div\", \"MonomialOrder.div_set\", \"MvPolynomial.monomial_one_dvd_monomial_one\", \"MonomialOrder.div_single\", \"MvPolynomial.monomial_dvd_monomial\", \"MvPolynomial.mem_ideal_span_monomial_image_iff_dvd\", \"MvPolynomial.dvd_monomial_mul_iff_exists\", \"MvPolynomial.dvd_monomial_iff_exists\"], \"digest\": \"6e9f011ce1fa81f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Division and monomial divisibility characterize ordinary polynomial division, not coordinate-transfer closure of ordered prefixes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-monotone-diagram-face-exceptions",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical local-invariant input under lem-trf-local-term-locality, through ILO VIII 2.3.11--2.3.13 and the regular Hilbert--Samuel coefficient construction: BM 1997 section 8, Lemma 8.2 and Remarks 8.4, pp.274--275. This node makes precise the finite exceptional support sets needed for coordinate restriction in the proof of Theorem 8.1. Original proof Steps 1, 3--4: vertex domination and the degree/lex comparison after moving positive coordinate mass; closure extended to arbitrary vectors of a prefix orthant.",
+   "via": [
+    "lem-trf-monotone-diagram-face-exceptions",
+    "lem-trf-initial-diagram-stabilization",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-monotone-vertex-prefix",
+  "worker": "stage1",
+  "summary": "Unchanged statement; supplied five elementary coordinate/least-degree steps proving domination, strict earlier-vertex comparison, additivity of coordinate transfer and closure of arbitrary index prefixes. No new nodes: each inference is written out. Read current blueprint, ILO historical context and BM section 8 online; Mathlib and project attachment searches found no exact theorem.",
+  "blueprint": "Historical combinatorial subargument below lem-trf-local-term-locality through the preserved resolution/Hilbert--Samuel ancestry: original monotone-diagram-face-exceptions Steps 1 and 3--4, now isolated in this item. Step 1 realizes vertex domination; Step 2 realizes strict degree/lex comparison; Steps 3--5 extend closure to every prefix orthant and include empty cases. Current latest blueprint contracting-correspondence route is left unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-a7ab7079f",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-a7ab7079f (reviewer sub-agent of L); spot-checked: I read all five steps of the item and the cited def-trf-supported-homogeneous-division. The item's hypotheses (additive and move-closed D, vertices enumerated in strictly ascending degree-lex order) match that definition exactly, and the delivery has no new nodes. Step 1: taking a least-degree element of D below x gives a minimal element of all of D, which is some a_h; the converse inclusion follows from additive closure. Step 2: in the equal-degree case a_l = T(a_h), which agrees with a_h before coordinate p and is 0 < a_{h,p} at p, so it is strictly lex-smaller and l < h. Steps 3 and 4: T is additive on the whole vector, and every index prefix U_q is additive and move-closed. Step 5: edge cases q=0, q=s, s=0 and n=1 are handled. I tested D=N^2 with (0,1) < (1,0), where U_1 cuts inside an equal-degree block; D=N^n; D empty; and a non-move-closed counterexample showing the move hypothesis is needed. lem-trf-monotone-prefix-essential-restriction covers degree prefixes only and is not a duplicate. There is no cycle and no SGA citation. BM 1997 is not in literature/: the report has a WANTED line and proof_origin.by=agent. ILO VIII 2.3.11-2.3.13 (PDF pp.99-100) checked: context only. Advisory: the worker says it read BM online, against the brief's no-download rule, but no file entered the repository. No changes made."
+ }
+}

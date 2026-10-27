@@ -1,0 +1,27 @@
+# global build 2026-10-26T15:00:08Z of 53d90c5cce: Sheaf.Paper.BoundedFlatTensorContinuity failed
+error: Sheaf/Paper/BoundedFlatTensorContinuity.lean:152:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Functor.curry.obj (Functor.uncurry.obj ?F)
+in the target expression
+  PreservesColimitsOfShape I
+    (CochainComplex.singleFunctor (modules Λ Z) 0 ⋙
+      (Functor.curry.obj (cochainTotalFunctor (curriedTensor (modules Λ Z)))).obj A)
+
+Λ : Sheaf (coherentTopology Profinite) Ab
+inst✝³ : MonObj Λ
+inst✝² : IsCommMonObj Λ
+inst✝¹ : (Z : Scheme) → HasDerivedCategory (modules Λ Z)
+Z : Scheme
+A : CochainComplex (modules Λ Z) ℤ
+I : Type (u + 1)
+inst✝ : SmallCategory I
+this : ∀ (M : modules Λ Z), PreservesColimitsOfShape I (tensorLeft M)
+hs : PreservesColimitsOfShape I (CochainComplex.singleFunctor (modules Λ Z) 0)
+ht :
+  PreservesColimitsOfShape I
+    (((curriedTensor (modules Λ Z)).map₂HomologicalComplex (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+          (ComplexShape.up ℤ)).obj
+      A)
+⊢ PreservesColimitsOfShape I
+    (CochainComplex.singleFunctor (modules Λ Z) 0 ⋙
+      (Functor.curry.obj (cochainTotalFunctor (curriedTensor (modules Λ Z)))).obj A)
+error: Lean exited with code 1

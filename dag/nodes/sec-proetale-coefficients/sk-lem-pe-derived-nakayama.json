@@ -162,7 +162,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-050e109c7 (reviewer sub-agent of L); spot-checked: I read the whole item, the unit record, the main-20261015 unit directory (section, proof, resolution and first-reduction detail files with their proofs, standard-quotients-perfect and levelwise-isomorphism-cones) and the full DAG statements and proofs of det-pe-derived-nakayama-resolution, det-pe-derived-nakayama-first-reduction and lem-weil-pbc-standard-quotients-perfect. The item statement matches _section.md word for word. The coefficient category is D(X_proet, O_E) with O_{E,X}=p_X^* of the condensed ring O_E, the same in the item, sk-def-pe-derived-completion and both det nodes. Step 1: the sheaf exactness and the natural identification of K_n with the cone of pi^n are in the statement of det-resolution; the ordinary resolution lemma applies with varpi=pi_E (one uniformizer is chosen). Steps 2 and 3 are exactly the vanishing sentence and the final sentence of the det first-reduction node, with the same hypotheses. That node is a pre-existing blueprint detail node of this unit, already split into 8 steps, so this is not D1 relabelling. Dropping the 'compare' citation of levelwise-isomorphism-cones is correct, since that lemma assumes all reductions are invertible. I accept the tool use of lem-weil-pbc-standard-quotients-perfect: the unit proof cites it explicitly, and in main-20261015 it sits inside this unit's directory. Unit realized fields are correct. There is no cycle (the closure of the 595 dependency nodes misses the item). The Nakayama-like nodes lem-fix-residue-lisse-projective-models and lem-sf-complete-residue-cohomology-bounds use B_X=lim(R/varpi^n)_X and are not duplicates. Edge cases checked: n=1, X empty, K=0, the identity morphism, and E_X, which shows completeness is needed. Fix (C1/B3-type): Step 1 asserted 'hence perfect' without a definition; it now cites def-weil-pbc-strict-perfect-coefficient-package (perfect complexes on a ringed site with a commutative structure sheaf), checked via the trivial covering with N_r=1, and the node is added to uses and proof_deps. The statement is unchanged and there are no new nodes.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -190,5 +201,26 @@
   "landing": "20261021T152315-L-1863299",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "The sheaf $(\\mathcal O_E/\\pi_E^n)_X$ has the perfect resolution\n$[\\mathcal O_{E,X}\\xrightarrow{\\pi_E^n}\\mathcal O_{E,X}]$, so $K_n$ is the cone of\n$\\pi_E^n\\colon K\\to K$. If a derived-complete complex has $K_1=0$, it is zero.\nConsequently a morphism between derived-complete complexes is an isomorphism\nwhenever its first derived reduction is an isomorphism.",
+  "proof": [
+   {
+    "text": "The coefficient sequence is exact on the profinite point, hence after pullback,\nand it supplies the two-term resolution ([lem-weil-pbc-standard-quotients-perfect],\n[det-pe-derived-nakayama-resolution]). The short exact sequences between\nsuccessive powers of $\\pi_E$ show inductively that $K_1=0$ implies $K_n=0$ for\nall $n$, and completeness then gives $K=0$. Derived completeness is preserved by\ncones, since both sides of the completion map are exact functors of $K$, so\napplying this to the cone proves the last assertion\n([det-pe-derived-nakayama-first-reduction]).",
+    "uses": [
+     "lem-weil-pbc-standard-quotients-perfect",
+     "det-pe-derived-nakayama-resolution",
+     "det-pe-derived-nakayama-first-reduction"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

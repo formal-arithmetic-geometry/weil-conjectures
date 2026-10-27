@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-fp-quotient-flatness-directed-limit",
+ "kind": "statement",
+ "title": "Flatness modulo a directed union of ideals descends to one quotient",
+ "statement": "Let $A\\to B$ be a local homomorphism of commutative local rings, with maximal ideal $\\mathfrak m$ of $A$. Suppose $B$ is a localization of a finitely presented $A$-algebra [def-weil-pbc-finitely-presented-algebra], and let $P$ be a finitely presented $B$-module [def-sc-finitely-presented-module]. Let $(J_\\lambda)_{\\lambda\\in L}$ be a nonempty family of ideals of $A$ indexed by a set, directed under inclusion, with $J_\\lambda\\subseteq\\mathfrak m$, and put $J=\\bigcup_{\\lambda\\in L}J_\\lambda$. If $P/JP$ is flat over $A/J$ [def-weil-pbc-flat-ring-map], then $P/J_\\lambda P$ is flat over $A/J_\\lambda$ for some $\\lambda\\in L$. Here $KP$ denotes the submodule consisting of finite sums of products $ax$ with $a\\in K$ and $x\\in P$. No henselian or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05MN (lemma-flat-at-point), part (2), with A_lambda=A/J_lambda, and Tag 05MK (situation-flat-at-point); underlying general result: more-algebra.tex Tag 05LT (lemma-limit-preserving-flat-at-primes). For quotient local bases, the test set of primes consists only of the maximal ideal of B/J_lambda B."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finitely presented $A$-algebra $C$ and a multiplicative subset $S\\subset C$ with $B=S^{-1}C$. Choose a finite presentation $B^u\\xrightarrow{H}B^v\\to P\\to0$. A common denominator for the finitely many entries of $H$ gives $s\\in S$ and a matrix $K$ over $C$ with $H=K/s$. Put $N=\\operatorname{coker}(K:C^u\\to C^v)$. Exact localization identifies $S^{-1}N$ with $\\operatorname{coker}K_B$; multiplication by the unit $s$ does not change the image of the presentation matrix, so $S^{-1}N\\cong P$. Thus $N$ is finitely presented over $C$. This is the explicit matrix construction of Tag 05N5, with zero quotient ideal, not an invocation of an unstated spreading theorem.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N5 (lemma-construct-fp-module), part (2), clearing the finite presentation matrix; Tag 00CS (proposition-localization-exact)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak n$ be the maximal ideal of $B$ and $\\mathfrak p$ its inverse image in $C$. Since $B$ is local, each element of $C\\setminus\\mathfrak p$ becomes a unit in $B$, and $S\\subset C\\setminus\\mathfrak p$. The universal maps $C_{\\mathfrak p}\\rightleftarrows S^{-1}C=B$ are inverse, as both fix $C$ and the inverses of its inverted elements. Locality of $A\\to B$ gives $JC\\subset\\mathfrak p$, since $J\\subset\\mathfrak m$. Write $R=A/J$, $\\overline C=C/JC$, $\\overline N=N/JN$, and $\\overline{\\mathfrak p}=\\mathfrak p/JC$. The same fraction maps give $(\\overline C)_{\\overline{\\mathfrak p}}\\cong B/JB$ and $(\\overline N)_{\\overline{\\mathfrak p}}\\cong P/JP$: the inverse sends the class of $n/t$ to $(n+JN)/(t+JC)$, and a fraction vanishes exactly when a denominator multiple of its numerator lies in the extended ideal or submodule. Consequently $(\\overline N)_{\\overline{\\mathfrak p}}$ is flat over $R$ by hypothesis.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05LT (lemma-limit-preserving-flat-at-primes), essentially finitely presented case; specialization of flat.tex Tags 05MK and 05MN to quotient local bases"
+   }
+  },
+  {
+   "text": "Reducing the finitely many algebra relations of $C$ and the matrix $K$ modulo $J$ shows that $\\overline C$ is finitely presented over $R$ and $\\overline N$ is finitely presented over $\\overline C$. By [lem-weil-pbc-openness-of-flatness], the locus $U=\\{Q\\in\\operatorname{Spec}\\overline C:(\\overline N)_Q\\text{ is flat over }R\\}$ is open. Step 2 places $\\overline{\\mathfrak p}$ in $U$. Write the closed complement as $V(I)$; since $I\\not\\subseteq\\overline{\\mathfrak p}$, choose $\\overline h\\in I\\setminus\\overline{\\mathfrak p}$, which gives $D(\\overline h)\\subset U$. Lift $\\overline h$ to $h\\in C\\setminus\\mathfrak p$. By the prime contraction assertion of [lem-weil-pbc-localization-quotient-by-prime], every maximal localization of $(\\overline N)_{\\overline h}$ over $(\\overline C)_{\\overline h}$ is a localization $(\\overline N)_Q$ with $\\overline h\\notin Q$, hence is flat over $R$. Apply [lem-sfb-base-flatness-maximal-localizations] with coefficient algebra $(\\overline C)_{\\overline h}$ to conclude that $(\\overline N)_{\\overline h}$ is flat over $R$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sc-finitely-presented-module",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-sfb-base-flatness-maximal-localizations",
+    "lem-weil-pbc-localization-quotient-by-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05LT (lemma-limit-preserving-flat-at-primes), the flat open and principal neighbourhood; algebra.tex Tag 00RC (theorem-openness-flatness) and Tag 00HT (lemma-flat-localization), part (7)"
+   }
+  },
+  {
+   "text": "Put $D=C[1/h]$ and $E=N[1/h]$. The algebra $D$ is finitely presented over $A$: to a finite presentation of $C$, adjoin one variable $t$ and the single relation $ht-1$. Localizing the matrix $K$ presents $E$ over $D$. For each index $i$ write $R_i=A/J_i$, $D_i=D/J_iD$, and $E_i=E/J_iE$. Quotient scalar extension is given by $(a+J_i)\\otimes x\\mapsto ax+J_iE$, with inverse $x+J_iE\\mapsto1\\otimes x$; the same formula works for $D_i$ and for $J$ in place of $J_i$. These maps and the fraction formula $(n/h^r)+JE\\mapsto(n+JN)/\\overline h^r$ identify $D\\otimes_A R$ with $(\\overline C)_{\\overline h}$ and $E\\otimes_A R$ with $(\\overline N)_{\\overline h}$. In particular the latter module is $R$-flat by step 3.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sc-finitely-presented-module",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N5 (lemma-construct-fp-module), presentation calculation; Tag 02JO (lemma-flat-finite-presentation-limit-flat), part (3), construction of the fixed finitely presented model"
+   }
+  },
+  {
+   "text": "Order the indices by $i\\le j$ when $J_i\\subseteq J_j$ (a directed preorder; alternatively use the set of distinct ideals). The quotient maps form a directed system with colimit $R=A/J$: a compatible family of maps out of the $R_i$ is a map out of $A$ killing every $J_i$, equivalently killing their union $J$. Fix $i_0$, and restrict to $i\\ge i_0$; this tail is cofinal because every index has an upper bound with $i_0$, and its ideals still have union $J$. Apply [lem-pc-affine-flat-module-descent] to this ring system with initial coefficient algebra $A_{i_0}=R_{i_0}$, second algebra $B_{i_0}=D_{i_0}$, and module $N_{i_0}=E_{i_0}$. The first algebra has its zero-generator presentation; the finite presentations of the other two are the relations and matrix of step 4 reduced modulo $J_{i_0}$. The quotient tensor maps of step 4 identify the later algebras and modules with $R_i,D_i,E_i$, and the limit with $R,D\\otimes_AR,E\\otimes_AR$. Step 4 supplies limit flatness. Hence for some $j\\ge i_0$, the module $E_j$ is flat over $R_j$.",
+   "uses": [
+    "lem-pc-affine-flat-module-descent",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05LT (lemma-limit-preserving-flat-at-primes), application of algebra.tex Tag 02JO (lemma-flat-finite-presentation-limit-flat), part (3), on the chosen principal neighbourhood"
+   }
+  },
+  {
+   "text": "Since $h\\notin\\mathfrak p$, its image is a unit in $B$. Thus $B/J_jB$ is a localization of $D_j$, obtained by further inverting the image of $S$, and the fraction maps of steps 1, 2, and 4 identify the localization of $E_j$ with $P/J_jP$. To check preservation of $R_j$-flatness, tensor an injection $U\\hookrightarrow V$ of $R_j$-modules with $E_j$. It stays injective by step 5. Localize this map over $D_j$; exact localization preserves its injectivity. The maps $u\\otimes(e/s)\\mapsto(u\\otimes e)/s$ and $(u\\otimes e)/s\\mapsto u\\otimes(e/s)$ identify its source and target with $U\\otimes_{R_j}(P/J_jP)$ and $V\\otimes_{R_j}(P/J_jP)$, respectively, and intertwine the maps. Therefore tensoring with $P/J_jP$ preserves every injection, which is exactly flatness over $A/J_j$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CS (proposition-localization-exact) and Tag 00HT (lemma-flat-localization), localization and relative flatness; final passage back to the local algebra in more-algebra.tex Tag 05LT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-sfb-base-flatness-maximal-localizations",
+  "lem-weil-pbc-localization-quotient-by-prime",
+  "lem-pc-affine-flat-module-descent",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 05LT (lemma-limit-preserving-flat-at-primes), essentially finitely presented case, expanded at the unique local closed point using algebra.tex Tags 05N5, 00RC, 02JO (3), and 00HT. This proves the quotient-local specialization of flat.tex Tag 05MN (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*[Ll]imit|[Ll]imit.*flat|[Ff]lat.*[Dd]irect|[Ff]lat.*[Ii]deal",
+   "results": "{\"t\": \"2026-10-23T23:47:26Z\", \"tool\": \"grep\", \"query\": \"flat.*[Ll]imit|[Ll]imit.*flat|[Ff]lat.*[Dd]irect|[Ff]lat.*[Ii]deal\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Flat/Localization.lean\", \"Mathlib/RingTheory/Flat/Localization.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"6fe6241c363a81cb\"} Local flatness, equational criteria, and finite-presentation factorization into an already flat target do not descend flatness along quotient-base limits. P is finitely presented over B, not over A.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Limit preservation of local flatness for a finitely presented module over an essentially finitely presented algebra",
+   "results": "{\"t\": \"2026-10-23T23:47:26Z\", \"tool\": \"leansearch\", \"query\": \"Limit preservation of local flatness for a finitely presented module over an essentially finitely presented algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.of_isLocalizedModule\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"CategoryTheory.preservesFiniteLimits_of_flat\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\"], \"digest\": \"12a5ebed7157ed52\"} Local flatness, equational criteria, and finite-presentation factorization into an already flat target do not descend flatness along quotient-base limits. P is finitely presented over B, not over A.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, Module.Flat",
+   "results": "{\"t\": \"2026-10-23T23:47:26Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.FinitePresentation.isBaseChange_map\", \"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.exists_factorization_of_finitePresentation\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Module.exists_basis_of_span_of_flat\", \"Module.isLocallyConstant_rankAtStalk\"], \"digest\": \"d41d37d9f655675c\"} Local flatness, equational criteria, and finite-presentation factorization into an already flat target do not descend flatness along quotient-base limits. P is finitely presented over B, not over A.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a finite presentation module is flat modulo the union of a directed family of ideals it is flat modulo one of the ideals",
+   "results": "{\"t\": \"2026-10-23T23:47:32Z\", \"tool\": \"leanfinder\", \"query\": \"If a finite presentation module is flat modulo the union of a directed family of ideals it is flat modulo one of the ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.flat_of_localized_span\", \"Module.Flat.tfae_equational_criterion\", \"Module.flat_iff\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.Flat.of_forall_exists_factorization\", \"Module.FaithfullyFlat.iff_flat_and_proper_ideal\", \"Module.Flat.directSum_iff\"], \"digest\": \"89f2db739f2440a5\"} Local flatness, equational criteria, and finite-presentation factorization into an already flat target do not descend flatness along quotient-base limits. P is finitely presented over B, not over A.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a finitely presented module over an essentially finitely presented local algebra descends to some quotient by an ideal in a directed union",
+   "results": "{\"t\": \"2026-10-23T23:47:33Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness of a finitely presented module over an essentially finitely presented local algebra descends to some quotient by an ideal in a directed union\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Module.flat_of_isLocalized_maximal\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.flat_of_localized_span\", \"Module.flat_of_localized_maximal\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"ea06b8b50f7baabc\"} Local flatness, equational criteria, and finite-presentation factorization into an already flat target do not descend flatness along quotient-base limits. P is finitely presented over B, not over A.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(limit|colimit|quotient)|((limit|colimit|quotient).*flat)",
+   "results": "{\"t\": \"2026-10-24T00:30:39Z\", \"tool\": \"grep\", \"query\": \"flat.*(limit|colimit|quotient)|((limit|colimit|quotient).*flat)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"4cbb9d1467d50bcd\"} Relative localization test hits inspected; Module.flat_of_isLocalized_maximal is already lem-sfb-base-flatness-maximal-localizations, not an attachment or a match for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness modulo a directed union of ideals descends to one quotient for a finitely presented module over a localization of a finitely presented algebra",
+   "results": "{\"t\": \"2026-10-24T00:30:39Z\", \"tool\": \"leansearch\", \"query\": \"Flatness modulo a directed union of ideals descends to one quotient for a finitely presented module over a localization of a finitely presented algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"Module.Flat.of_flat_tensorProduct\", \"Module.flat_of_isLocalized_span\", \"Module.flat_of_isLocalized_maximal\", \"IsLocalization.flat\", \"Module.flat_iff_of_isLocalization\", \"instFinitePresentationLocalizationLocalizedModule\", \"Module.flat_of_localized_maximal\"], \"digest\": \"09b7b06af5f6efc9\"} Read the returned signatures and Mathlib flatness files: no directed quotient descent theorem; relative localization tests are reused via the existing leaf.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, Module.Flat",
+   "results": "{\"t\": \"2026-10-24T00:30:39Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.FinitePresentation.isBaseChange_map\", \"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.exists_factorization_of_finitePresentation\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Module.exists_basis_of_span_of_flat\", \"Module.isLocallyConstant_rankAtStalk\"], \"digest\": \"d41d37d9f655675c\"} Read the returned signatures and Mathlib flatness files: no directed quotient descent theorem; relative localization tests are reused via the existing leaf.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a finitely presented module over an essentially finitely presented local algebra descends along directed quotients of the base ring",
+   "results": "{\"t\": \"2026-10-24T00:30:40Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness of a finitely presented module over an essentially finitely presented local algebra descends along directed quotients of the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat\", \"Module.flat_of_isLocalized_maximal\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.flat_of_localized_maximal\"], \"digest\": \"906f185ecc588940\"} Read the returned signatures and Mathlib flatness files: no directed quotient descent theorem; relative localization tests are reused via the existing leaf.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite presentation module flat modulo the union of directed ideals is already flat modulo one ideal without a Noetherian assumption",
+   "results": "{\"t\": \"2026-10-24T00:36:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finite presentation module flat modulo the union of directed ideals is already flat modulo one ideal without a Noetherian assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"Module.flat_of_isLocalized_span\", \"Module.flat_of_localized_span\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.of_forall_exists_factorization\"], \"digest\": \"7aaca79d76cdc158\"} Read the returned signatures and Mathlib flatness files: no directed quotient descent theorem; relative localization tests are reused via the existing leaf.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem flat_of_isLocalized_maximal",
+   "results": "{\"t\": \"2026-10-24T00:38:01Z\", \"tool\": \"grep\", \"query\": \"theorem flat_of_isLocalized_maximal\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Localization.lean\"], \"digest\": \"2662970e836a9845\"} Relative localization test hits inspected; Module.flat_of_isLocalized_maximal is already lem-sfb-base-flatness-maximal-localizations, not an attachment or a match for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An S module is flat over R if all its localizations at maximal ideals of S are flat over R",
+   "results": "{\"t\": \"2026-10-24T00:38:01Z\", \"tool\": \"leansearch\", \"query\": \"An S module is flat over R if all its localizations at maximal ideals of S are flat over R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_maximal\", \"Module.flat_of_localized_maximal\", \"Module.flat_of_isLocalized_span\", \"Module.Flat\", \"IsLocalization.flat\", \"Module.flat_iff_of_isLocalization\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat\"], \"digest\": \"e7e565087d3d45e3\"} Relative localization test hits inspected; Module.flat_of_isLocalized_maximal is already lem-sfb-base-flatness-maximal-localizations, not an attachment or a match for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.flat_of_isLocalized_maximal\"",
+   "results": "{\"t\": \"2026-10-24T00:38:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.flat_of_isLocalized_maximal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_maximal\"], \"digest\": \"0932b1a27716b6e4\"} Relative localization test hits inspected; Module.flat_of_isLocalized_maximal is already lem-sfb-base-flatness-maximal-localizations, not an attachment or a match for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative module flatness over R can be checked by localization at every maximal ideal of the coefficient algebra S",
+   "results": "{\"t\": \"2026-10-24T00:38:05Z\", \"tool\": \"leanfinder\", \"query\": \"Relative module flatness over R can be checked by localization at every maximal ideal of the coefficient algebra S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_maximal\", \"Module.flat_of_localized_maximal\", \"Module.flat_of_isLocalized_span\", \"Module.flat_iff_of_isLocalization\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.Flat.of_isLocalizedModule\"], \"digest\": \"fd2a5888f76188c5\"} Relative localization test hits inspected; Module.flat_of_isLocalized_maximal is already lem-sfb-base-flatness-maximal-localizations, not an attachment or a match for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-henselian-fp-module-quotient-flattening-ideal",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n). Proof of Tag 05UD, final application of Tag 05UA: flatness at a point is detected at the associated generalizations in its fibre. Subinput of Tag 05UA: Tag 0AT4 (lemma-upstairs-finite-type-injective-into-flat-mod-m). Subinput: Tag 05PG (theorem-flattening-local), specialization to local quotient maps A to A/J; finite generation is the final assertion. Supporting input in the split of 05PG: Tag 05MN (lemma-flat-at-point), part (2), with A_lambda=A/J_lambda, and Tag 05MK (situation-flat-at-point); underlying general result: more-algebra.tex Tag 05LT (lemma-limit-preserving-flat-at-primes). For quotient local bases, the test set of primes consists only of the maximal ideal of B/J_lambda B.",
+   "via": [
+    "lem-sfb-henselian-fp-module-quotient-flattening-ideal",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fp-quotient-flatness-directed-limit",
+  "worker": "stage1",
+  "summary": "Realized the directed quotient specialization by an explicit finite matrix model, a principal neighbourhood in its limit flat locus, existing affine flatness descent, and exact localization. Reused all non-elementary inputs; no new nodes. Statement and inherited source/blueprint metadata retained.",
+  "blueprint": "Supports the inherited Proof (3) direct-image/compactification chain of sk-thm-sf-ctf-stability (current latest blueprint, direct-images proof, paragraph (3)); specifically the Tag 05MN (2) input to Tag 05PG in the parent quotient-flattening-ideal split. Ancestor tool returns None, matching inherited blueprint.from.node = null.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-openness-of-flatness",
+    "why": "Generic openness theorem for finitely presented algebra modules, needed to choose a principal flat neighbourhood in the 05LT route."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-descent",
+    "why": "Generic affine finitely presented module flatness descent, precisely the Tag 02JO (3) input used by 05LT; no local algebra theorem in this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Generic exactness of module localization, used on the presentation matrix and the final tensor injection; no change of unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-at-prime-of-quotient",
+    "why": "Generic quotient/localization ring comparison identifies the limit local algebra; the module fraction comparison is written out."
+   },
+   {
+    "node": "lem-weil-pbc-localization-quotient-by-prime",
+    "why": "Generic prime contraction for a localization identifies maximal local tests on the chosen principal open; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-pc-affine-flat-module-descent",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-quotient-by-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-cc8ca9df6",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-cc8ca9df6 (reviewer sub-agent of L); spot-checked: PASS, no changes. This is a first split: the live item is unsplit and has no repair note. The statement, stmt_deps, source and blueprint are unchanged from live, and there are no new nodes. The statement matches flat.tex 05MK/05MN(2) with A_λ=A/J_λ: B/J_λB is local, so the test set V(m_{A'}B'+m_BB') is the closed point alone and the condition is exactly flatness of P/J_λP. The six steps follow more-algebra 05LT (essentially finitely presented case), and each one checks out. Step 1: the 05N5 matrix model, since K/s and K have the same image after localization (00CS). Step 2: B=C_𝔭 because S⊆C∖𝔭 and B is local, JC⊆𝔭 by locality, and the 00CT comparison applies. Step 3: the 00RC open flat locus holds even when J is infinitely generated, h is chosen in I∖𝔭̄, maximal ideals contract by 00E3(1), and Module.flat_of_isLocalized_maximal gives flatness. Step 4: D=C[1/h] is finitely presented and E⊗R≅N̄_h̄. Step 5: the 02JO(3) node applies on a cofinal tail with A_{i0}=R_{i0}, B_{i0}=D_{i0}, N_{i0}=E_{i0}. Step 6: B=S⁻¹D, P/J_jP=S⁻¹E_j, and localization keeps flatness. Edge cases checked: J=0, J=m, a singleton family, a family containing its union, P=0, empty matrices. Searches: rg for 05LT/05MN finds only this item and its parent, so there is no duplicate. No cited dep reaches the item, so there is no cycle. Mathlib searches of all three kinds are recorded. No SGA source is cited. The parent's step 7 use matches the statement. Accepted tool_uses: openness-of-flatness, affine-flat-module-descent, localization-module-exact, localization-at-prime-of-quotient and localization-quotient-by-prime, all generic commutative algebra."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuotientFlatnessDirectedLimit",
+  "declaration": "Module.exists_flat_quotient_of_directed_iSup",
+  "file": "lean/Sheaf/RingTheory/QuotientFlatnessDirectedLimit.lean",
+  "statement": "theorem exists_flat_quotient_of_directed_iSup {A : Type u} {B : Type v} {C : Type w} {P : Type p} {L : Type l} [CommRing A] [CommRing B] [CommRing C] [IsLocalRing A] [IsLocalRing B] [Algebra A B] [IsLocalHom (algebraMap A B)] [Algebra A C] [Algebra C B] [IsScalarTower A C B] [Algebra.FinitePresentation A C] (S : Submonoid C) [IsLocalization S B] [AddCommGroup P] [Module B P] [Module A P] [IsScalarTower A B P] [Module.FinitePresentation B P] [Nonempty L] (J : L → Ideal A) (hJ : Directed (· ≤ ·) J) (hJmax : ∀ i : L, J i ≤ IsLocalRing.maximalIdeal A) (hflat : Module.Flat (A ⧸ (⨆ i : L, J i)) ((A ⧸ (⨆ i : L, J i)) ⊗[A] P)) : ∃ i : L, Module.Flat (A ⧸ J i) ((A ⧸ J i) ⊗[A] P)",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d56abf058",
+  "group": "NF",
+  "result": "pass",
+  "note": "Only change vs live: added lean record; lean.statement is the file signature verbatim. All clauses match the node and flat.tex 05MK/05MN(2) with A'=A/J_λ (B/J_λB local, so the test set is the closed point): local A→B; B a localization of an fp A-algebra via witnesses C, S, IsLocalization S B and IsScalarTower A C B; P fp over B only; nonempty, set-indexed, directed J_λ ≤ m; union written as ⨆ (equal to the union for nonempty directed); P/KP as (A⧸K)⊗[A]P with canonical A/K action; Module.Flat in hypothesis and conclusion; ∃ i conclusion; universes independent; no extra hypotheses. Edge cases P=0, singleton, repeated or zero ideals, J=m covered. No definitions, sorry only, docstrings carry source, blueprint and the six proof steps; report has Worker report and Second reading by NF; imported side modules exist; recorded searches show no existing Mathlib theorem, agreed after reading the hits. Not recompiled, per instructions. No findings."
+ }
+}

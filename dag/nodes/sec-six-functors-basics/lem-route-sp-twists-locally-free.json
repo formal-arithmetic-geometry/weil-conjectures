@@ -1,0 +1,189 @@
+{
+ "id": "lem-route-sp-twists-locally-free",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "via": [
+    "lem-sfb-integral-affine-purity-induction"
+   ],
+   "place": "det-thm-int-restriction-line.proof.md paragraph (3): the integral Tate line is invertible, used in affine-purity preservation; realized by the constructed-coefficient local-generator paragraph of sk-def-sp-tate-twist."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The constructed integral, rational and sheafified-colimit lines are locally free of rank one over their respective pulled-back condensed coefficient r",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, a scheme $X$ such that $\\ell$ is invertible in every residue field, and a finite intermediate field $\\mathbf Q_\\ell\\subseteq E\\subseteq\\Omega$. Use the universe convention [def-weil-size-convention] and the small pro-etale site $C=X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. Use precisely the pulled-back condensed coefficient rings and constructed Tate lines of [sk-def-sp-tate-twist]: $R_E=\\mathcal O_{E,X}$, $K_E=E_X$, $A=\\overline{\\mathbf Q}_{\\ell,X}$,\n$$\n L_E=\\varprojlim_{n\\geq1}\\left(\\mu_{\\ell^n,X}\\otimes_{(\\mathbf Z/\\ell^n)_X}(\\mathcal O_E/\\ell^n)_X\\right),\\qquad\n Q_E=K_E\\otimes_{R_E}L_E,\\qquad\n Q_\\Omega=\\varinjlim_F Q_F.\n$$\nThe integral limit has the coefficient-reduction and root-power transitions, and the last colimit is the sheafified colimit over the small directed poset of finite intermediate fields $F$ in $\\Omega$, with its specified finite-extension transitions and $A$-action. In particular $A$ is the pullback of the finite-subextension-valued condensed coefficient ring. Read internal modules as sectionwise module sheaves through [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and let restriction to $C/U$ mean [def-pur-localized-ringed-site].\n\nThen $L_E$, $Q_E$ and $Q_\\Omega$ are finite locally free of constant rank one over $R_E$, $K_E$ and $A$, respectively. Here rank one means that on a covering of the terminal object each restricted module has a basis indexed by a singleton, equivalently is linearly isomorphic to its restricted coefficient ring. This asserts the three rank-one clauses for the signed twists at exponent $1$ of the constructed lines, whose exponent $0$ is the coefficient unit. No quasi-compactness or finite-type hypothesis is imposed on $X$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "lem-sfb-integral-affine-purity-induction: the Lean of this node (its module Sheaf.SixFunctors.IntegralAffinePurityInduction uses) reaches AlgebraicGeometry.ProEtale.spTwists_locallyFree, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spTwists_locallyFree (module Sheaf.Paper.ProEtaleTateTwists, lines 534-556, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sp-tate-twist",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-route-sp-twists-common-cover] with this $X$, prime $\\ell$ and fixed algebraic closure $\\Omega$. Its hypotheses are exactly the residue-field invertibility and size hypotheses here. It supplies a pro-etale covering family $U_i\\to X$. Clause 3, specialized to the chosen $E$, gives $R_E|_{U_i}$-linear isomorphisms $L_E|_{U_i}\\cong R_E|_{U_i}$ and $K_E|_{U_i}$-linear isomorphisms $Q_E|_{U_i}\\cong K_E|_{U_i}$. Clause 4 gives $A|_{U_i}$-linear isomorphisms $Q_\\Omega|_{U_i}\\cong A|_{U_i}$. These are the actual inverse-limit, scalar-extension and sheafified-colimit objects of this statement; in particular the algebraic-closure clause is over the pulled-back condensed ring, not a common-stage rational coefficient category. The cited lemma supplies all three on one family without a quasi-compactness hypothesis.",
+   "uses": [
+    "lem-route-sp-twists-common-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "The local-generator paragraph; its simultaneous covering and three constructed coefficient trivializations are already stated in lem-route-sp-twists-common-cover, clauses 3-4."
+   }
+  },
+  {
+   "text": "Under [def-weil-pbc-internal-abelian-sheaf-module-equivalence], underlying sections and restrictions are unchanged, so the linear isomorphisms in step 1 are isomorphisms of the sectionwise module sheaves occurring in the recorded Lean conclusion. The signed-twist convention of [sk-def-sp-tate-twist] at exponent $1$ is the one-fold tensor power of the line, canonically the line itself. With the recursive tensor-power convention starting at the unit, its unit constraint is explicitly $a\\otimes m\\mapsto am$, inverse $m\\mapsto1\\otimes m$. These formulas commute with restrictions and are linear, so the same local trivializations apply to the signed exponent-$1$ objects; exponent $0$ is exactly the respective coefficient unit.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "The signed-power convention, together with the local-generator paragraph."
+   }
+  },
+  {
+   "text": "For each of the three module sheaves $M$ with coefficient ring $R$, write $e_i:M|_{U_i}\\cong R|_{U_i}$ for step 1's isomorphism (composed with step 2's unit constraint when required). On the localized site of [def-pur-localized-ringed-site], set $s_i=e_i^{-1}(1)$. Linearity gives $e_i^{-1}(a)=a s_i$ for every local scalar $a$, so the singleton family $\\{s_i\\}$ is a basis: its free-module map $a\\mapsto a s_i$ has inverse $e_i$. Thus this covering and these singleton generating families give the local generators data with generator index $\\operatorname{Fin}(1)$ in the definition of finite locally free of rank one. This proves each of the three clauses and hence their conjunction. On the empty scheme the covering criterion is vacuous, as is that same definition.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Each constructed coefficient line is locally free of rank one: the explicit local-generator criterion after the displayed constructions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-route-sp-twists-common-cover",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sp-tate-twist",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Local-generator paragraph, assembled using the already split and reviewed common-cover theorem; the final singleton-basis calculation is explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'spTwists_locallyFree' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral and rational Tate twist sheaves on the pro-etale site are locally free of rank one using compatible primitive roots of unity",
+   "results": "8 hits: LocallyConstant.freeOfProfinite, LightCondensed.free, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.free, Condensed.free, SheafOfModules.mapFree, Condensed.profiniteFree, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic algebra, free sheaves or cyclotomic characters; none states local freeness of these constructed pro-etale Tate lines"
+  },
+  {
+   "tool": "grep",
+   "query": "tate.*locally|locally.*tate|IsFiniteLocallyFreeOfRank",
+   "results": "19 hits: Mathlib/MeasureTheory/Integral/RieszMarkovKakutani/Basic.lean, Mathlib/MeasureTheory/Integral/IntervalIntegral/LebesgueDifferentiationThm.lean, Mathlib/MeasureTheory/Function/ContinuousMapDense.lean, Mathlib/MeasureTheory/Function/LocallyIntegrable.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean, Mathlib/MeasureTheory/Measure/Haar/Basic.lean, Mathlib/Topology/Bornology/Hom.lean",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic algebra, free sheaves or cyclotomic characters; none states local freeness of these constructed pro-etale Tate lines"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate twists with condensed l-adic coefficient sheaves are invertible modules",
+   "results": "8 hits: Module.Invertible.instTensorProduct_2, Module.Invertible.instTensorProduct, Module.Invertible.instTensorProduct_1, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.isDiscrete_tfae, instAbelianCondensedMod, Module.Invertible.linearEquiv, Condensed",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic algebra, free sheaves or cyclotomic characters; none states local freeness of these constructed pro-etale Tate lines"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteLocallyFreeOfRank",
+   "results": "0 hits: ; loogle: unknown identifier 'SheafOfModules.IsFiniteLocallyFreeOfRank'",
+   "date": "2026-10-25",
+   "verdict": "invalid query: unknown identifier; no absence conclusion from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|LocallyFreeOfRank",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Module.Free",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a scheme where a prime is invertible, compatible roots of unity trivialize the inverse limit of finite Tate lines and its scalar extensions",
+   "results": "8 hits: cyclotomicCharacter.spec, cyclotomicCharacter.toZModPow_toFun, cyclotomicCharacter.toFun_apply, cyclotomicCharacter.toZModPow, cyclotomicCharacter.toFun_spec, BDeRhamPlus, PreTilt.exists_smodEq_untiltAux, BDeRham",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic algebra, free sheaves or cyclotomic characters; none states local freeness of these constructed pro-etale Tate lines"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sfb-integral-affine-purity-induction",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwists",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwists.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spTwists_locallyFree",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spTwists_locallyFree"
+  ],
+  "statement": "theorem spTwists_locallyFree\n    [∀ x : X, Invertible (ℓ : X.residueField x)]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ) :\n    (spSignedTwist X _ (spIntegralTwist X ℓ E) 1).IsFiniteLocallyFreeOfRank 1 ∧\n    (spSignedTwist X _ (spRationalTwist X ℓ E) 1).IsFiniteLocallyFreeOfRank 1 ∧\n    (spSignedTwist X _ (spQbarTwist X ℓ) 1).IsFiniteLocallyFreeOfRank 1 := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-sp-twists-locally-free",
+  "worker": "stage1",
+  "group": "NG",
+  "summary": "Replaced the provisional machine-made signature/docstring by a quantified statement of all three rank-one clauses. Reused the existing reviewed common-cover lemma (clauses 3-4); wrote the signed exponent-one identification and singleton-basis assembly explicitly. No new nodes, no change of coefficient category and no mathematical weakening. Read the actual Lean definitions, latest blueprint and existing cited statements; checked there is no dependency path from the common-cover lemma to this item.",
+  "blueprint": "The Tate-line input of det-thm-int-restriction-line paragraph (3), via lem-sfb-integral-affine-purity-induction. The current sk-def-sp-tate-twist local-generator paragraph is already decomposed in the reviewed lem-route-sp-twists-common-cover; this item assembles its three line trivializations into the exact finite-locally-free conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NG-845444fb8",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-845444fb8 (reviewer sub-agent of L); spot-checked: I read the item, the report, the cited common-cover node (statement, all 9 proof steps and its review), every stmt_dep, the current blueprint section for sk-def-sp-tate-twist (it says 'Each Λ_X(1) is locally free of rank one'), paragraph (3) of sk-thm-int-restriction-line.proof.md, and the Lean code: spSignedTwist at :675, spTwists_locallyFree at :716, and IsFiniteLocallyFreeOfRank at LocallyFree.lean:135. This was not a re-split. The base item was a provisional route node with no proof, and the delivery adds no new nodes. The statement matches the Lean conjunction exactly: three rank-one clauses at exponent 1 for one fixed finite E, over O_{E,X}, E_X and the pulled-back finite-subextension Qbar ring. Its objects are exactly those of sk-def-sp-tate-twist and nothing is weakened. Step 1 specializes clauses 3 and 4 of lem-route-sp-twists-common-cover. That node is landed, was reviewed by L, sits in the same unit and has the same hypotheses with no quasi-compactness. Step 2 identifies the one-fold tensor power with the line through the unit constraint a⊗m↦am, which is correct. Step 3 takes s_i=e_i^{-1}(1), giving a singleton basis indexed by Fin 1; this is exactly IsLocallyFreeData. Other checks: a dependency search over 11904 nodes finds no cycle; proof_deps equal the union of the steps' uses; the statement's citations equal stmt_deps. det-def-sp-tate-twist-locally-free and lem-pur-twist-sheaf-locally-free are about other objects, so they are not duplicates. Edge cases hold: empty X, ℓ=2, E=Q_ℓ, ramified E, non-quasi-compact X. No SGA is used. Advisory only, not changed: source.place still holds the machine-written text with stale Lean lines 534-556 (the declaration is now at :716), although the report says this was updated."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.spTwists_commonCover"
+  ],
+  "sorry_after": []
+ }
+}

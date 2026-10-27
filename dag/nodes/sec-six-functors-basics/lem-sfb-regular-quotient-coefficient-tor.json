@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-regular-quotient-coefficient-tor",
+ "kind": "statement",
+ "title": "Normalized Tor of a regular quotient with annihilated coefficients",
+ "statement": "Let $A$ be a commutative ring, let $f_1,\\ldots,f_r$ be a regular sequence [def-weil-pbc-regular-sequence] with $r\\geq0$, put $I=(f_1,\\ldots,f_r)$ and $B=A/I$, and let $M$ be any $B$-module. Tor is computed by augmented projective resolutions [def-weil-pbc-tor-modules]. The classes $\\bar f_j$ form a $B$-basis of $I/I^2$. There are canonical $B$-linear isomorphisms, natural in $M$,\n$$c_{A,I,M,q}:\\bigwedge_B^q(I/I^2)\\otimes_B M\\xrightarrow{\\sim}\\operatorname{Tor}_q^A(B,M)\\quad(q\\geq0).$$\nFor every regular generating tuple of $I$, its Koszul resolution [def-weil-pbc-koszul-complex] computes $c_{A,I,M,q}$ by sending $(\\bar f_{j_1}\\wedge\\cdots\\wedge\\bar f_{j_q})\\otimes m$ to the homology class of $(e_{j_1}\\wedge\\cdots\\wedge e_{j_q})\\otimes m$. This prescription is independent of the regular generating tuple and of augmentation-preserving resolution comparison maps. For a flat ring homomorphism $A\\to A'$, put $I'=IA'$, $B'=A'/I'$ and $M'=B'\\otimes_BM$. If $B'=0$, define $c_{A',I',M',q}$ to be the unique map between zero modules; otherwise the image tuple is again regular. Under the canonical flat-base-change maps for conormal modules and Tor, $B'\\otimes_Bc_{A,I,M,q}$ equals $c_{A',I',M',q}$. These compatibilities respect identities and composition. The assertion includes $r=0$; for $I=A$ separately extend the prescription by the unique zero-module maps (all $B$-modules then vanish); both sides vanish for $q>r$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 062I, lemma-H1-regular-quasi-regular, first paragraph (conormal basis); the coefficient Tor and presentation/flat-base-change enhancement is agent-supplied, with its construction and other sources recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-tor-coefficient-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply the conormal-basis theorem to $f$: write $N=I/I^2$ and $b_j=\\bar f_j$, a $B$-basis. Regularity implies Koszul regularity, so the normalized-resolution theorem supplies $K=K_A(f)$ as a projective resolution of $B$, with augmentation $K_0=A\\to B$ the quotient map. Thus the resolution comparison $\\iota_{K,M}$ identifies $\\operatorname{Tor}^A_q(B,M)$ with $H_q(K\\otimes_A M)$. All three inputs allow the empty tuple; the original regularity hypothesis makes $B\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-conormal-free",
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "new-d3-koszul-normalized-projective-resolution",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 062F (lemma-regular-koszul-regular) and 062I (lemma-H1-regular-quasi-regular), first paragraph; algebra.tex Tags 00LY and 00LN"
+   }
+  },
+  {
+   "text": "Every coefficient of the Koszul differential is an $f_j$, so $d\\otimes1_M=0$ because $IM=0$. Consequently $H_q(K\\otimes_A M)=K_q\\otimes_A M$. The exterior-basis theorem gives the increasing wedges $e_J$ as an $A$-basis of $K_q$ and $b_J$ as a $B$-basis of $\\bigwedge_B^qN$. Both $K_q\\otimes_A M$ and $(\\bigwedge_B^qN)\\otimes_B M$ are therefore direct sums of copies of $M$ indexed by the same increasing subsets $J$: the mutually inverse maps send $b_J\\otimes m$ to $e_J\\otimes m$ and back. Compose this isomorphism with $\\iota_{K,M}^{-1}$ to define $c^f_{M,q}$. This proves exactly the displayed normalization, without requiring $M$ flat.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), explicit differential following Tag 0622; algebra.tex Tag 00DM, increasing-wedge basis"
+   }
+  },
+  {
+   "text": "For a $B$-linear map $u:M\\to L$, both coefficient maps send $b_J\\otimes m$ to the class of $e_J\\otimes u(m)$. The second-variable clause of the resolution-lift theorem identifies the latter with $\\operatorname{Tor}^A_q(B,u)$, proving naturality. The $B$-action on Tor is the action from its coefficient module: scalar multiplication by $b\\in B$ is the map induced by $m\\mapsto bm$. On $K\\otimes_A M$ it is $e_J\\otimes m\\mapsto e_J\\otimes bm$. The displayed construction is therefore $B$-linear. This action restricts to the original $A$-action and is independent of the resolution by the same comparison formula.",
+   "uses": [
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LZ (lemma-tor-welldefined) and 00LY (section-tor), functoriality in the second variable"
+   }
+  },
+  {
+   "text": "Let $g_1,\\ldots,g_s$ be any other regular generating tuple for $I$. Choose $a_{ij}\\in A$ with $g_j=\\sum_i a_{ij}f_i$ and put $t:A^s\\to A^r$, $t(e'_j)=\\sum_i a_{ij}e_i$. Applying $t$ to every factor of a wedge is well defined: the tensor-algebra map preserves the relations $v\\otimes v=0$. It gives $U_q=\\bigwedge^q t$. If $\\varphi_f(e_i)=f_i$ and $\\varphi_g(e'_j)=g_j$, then $\\varphi_f t=\\varphi_g$; the differential formula gives, on a pure wedge, $d_fU(v_1\\wedge\\cdots\\wedge v_q)=\\sum_k(-1)^{k+1}\\varphi_g(v_k)t(v_1)\\wedge\\cdots\\widehat{t(v_k)}\\cdots\\wedge t(v_q)=Ud_g(v_1\\wedge\\cdots\\wedge v_q)$. Thus $U:K_A(g)\\to K_A(f)$ is a chain map with $U_0=1_A$, preserving the quotient augmentations. Neither a square matrix nor an invertible matrix over $A$ was used.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0622 and 0623, differential formula; algebra.tex Tag 00DM, tensor-quotient construction of exterior algebra"
+   }
+  },
+  {
+   "text": "Modulo $I$, the same matrix satisfies $\\bar g_j=\\sum_i\\bar a_{ij}\\bar f_i$ in $N$. Tensoring the preceding map with $M$ consequently carries $e'_{j_1}\\wedge\\cdots\\wedge e'_{j_q}\\otimes m$ to the expansion, in the $f$ wedge coordinates, of $(\\bar g_{j_1}\\wedge\\cdots\\wedge\\bar g_{j_q})\\otimes m$. Both Koszul complexes are the normalized resolutions supplied in step 1 for their respective regular tuples. The first-variable resolution-lift theorem, applied to $1_B$ and $U$, says $\\iota_{K(f),M}=H_q(U\\otimes1_M)\\iota_{K(g),M}$. Comparing the preceding values proves $c^g_{M,q}=c^f_{M,q}$ on all generators, hence everywhere. The same theorem says any augmentation-preserving lift computes that identical map on Tor, so choices of $a_{ij}$, comparison maps, and projective resolutions do not affect $c$.",
+   "uses": [
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "new-d3-koszul-normalized-projective-resolution",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LZ (lemma-tor-welldefined), identity and independence-of-lift clauses; agent-supplied coefficient generator comparison"
+   }
+  },
+  {
+   "text": "Let $A\\to A'$ be flat. For each prefix ideal $J_j=(f_1,\\ldots,f_j)$, quotient tensor identifies $A'\\otimes_A A/J_j$ with $A'/J_jA'$. Flat tensor exactness preserves the injective multiplication maps by $f_j$ on $A/J_{j-1}$. The image tuple is therefore weakly regular and, if $B'\\ne0$, regular in the stated convention. Flat tensor exactness applied to $0\\to I\\to A\\to B\\to0$ identifies $A'\\otimes_A I$ with $I'$. Apply it also to $0\\to I^2\\to I\\to N\\to0$. Since $(I')^2=I^2A'$ (expand products of finite sums of elements of $IA'$), its cokernel gives the conormal isomorphism $B'\\otimes_B N\\cong I'/(I')^2$, $b'\\otimes\\bar x\\mapsto b'\\overline{x'}$. The replacement of $A'\\otimes_A N$ by $B'\\otimes_B N$ uses $IN=0$ and the tensor-over-quotient isomorphism. This sends every $1\\otimes\\bar f_j$ to $\\overline{f'_j}$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HD (lemma-flat), 00DF (lemma-tensor-product-exact), 00LF (definition-regular-sequence); agent-supplied explicit conormal identification"
+   }
+  },
+  {
+   "text": "Assume $B'\\ne0$. Scalar extension identifies $A'\\otimes_A K_A(f)$ with $K_{A'}(f')$: on degree $q$ it sends $a'\\otimes e_J$ to $a'e'_J$, an isomorphism by the exterior bases; the differential formula and quotient augmentations agree on these elements. Flat tensor exactness makes this a resolution of $B'$. Put $C_q=K_q\\otimes_A M$ and reindex $C_q$ as the bounded cochain complex $C^{-q}$ supported in $[-r,0]$. Flat cohomology base change gives $A'\\otimes_A H_q(C)\\cong H_q(A'\\otimes_A C)$. Identify $A'\\otimes_A M$ with $M'=B'\\otimes_BM$ by tensor over the quotient. Associativity here sends $a'\\otimes(x\\otimes m)$ to $(a'\\otimes x)\\otimes(1\\otimes m)$, with inverse multiplying the two $A'$ scalars. With the normalized Tor identifications this is the canonical flat-base-change map $B'\\otimes_B\\operatorname{Tor}^A_q(B,M)\\xrightarrow{\\sim}\\operatorname{Tor}^{A'}_q(B',M')$; the replacement by a tensor over $B$ uses the action in step 3. Its cycle formula is $b'\\otimes[z]\\mapsto[b'\\otimes z]$. Resolution-lift naturality makes it independent of the selected comparison maps.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pc-flat-tensor-complex-cohom",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-tor-map-via-resolution-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH (lemma-flat-base-change-cohomology), proof: flat tensor commutes with cohomology; more-algebra.tex Tag 062H, displayed Koszul scalar extension in its proof; algebra.tex Tag 00LZ"
+   }
+  },
+  {
+   "text": "The exterior base-change map is $b'\\otimes(n_1\\wedge\\cdots\\wedge n_q)\\mapsto b'(n'_1\\wedge\\cdots\\wedge n'_q)$, where $n'_j=1\\otimes n_j$. In the conormal bases of step 6 it identifies the increasing-wedge bases, so is an isomorphism. On $b'\\otimes(b_J\\otimes m)$ both paths of the desired square now give the Tor class of $e'_J\\otimes(b'\\otimes m)$, by steps 2 and 7. These tensors generate, proving equality of the maps. For two successive flat maps $A\\to A'\\to A''$, the tensor associativity identification sends $b''\\otimes(b'\\otimes z)$ to $b''b'\\otimes z$ (with the image of $b'$ understood). Both the conormal map and the Tor cycle map obey this formula; their composites therefore equal the direct maps. For the identity ring map they send $1\\otimes z$ to $z$. The coefficient naturality square has the same verification with $m$ replaced by $u(m)$. Thus the compatibilities respect identities and composition.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DM and 00CV: exterior and tensor generators; agent-supplied explicit compatibility squares"
+   }
+  },
+  {
+   "text": "If $r=0$, then $I=0$, $N=0$, and $K$ has only $K_0=A$; the construction is $B\\otimes_BM=M\\cong\\operatorname{Tor}^A_0(A,M)$ in degree zero and the unique zero maps in positive degrees. For any $r$, the exterior-basis theorem gives zero terms on both sides for $q>r$. If $B'=0$, every $B'$-module, including $M'$ and both sides after base change, is zero; the same compatibility squares are equalities of unique maps. The separately stipulated case $I=A$ likewise has $M=0$ and all tensor and Tor complexes zero; no nonexistent regular tuple for the unit ideal is asserted. This also covers $A=0$. An intermediate zero quotient stays zero under further scalar extension, so the composition assertion covers these cases too.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-tor-modules",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DM and 00LY; agent-supplied empty-tuple and zero-module conventions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-tor-modules",
+  "lem-pc-flat-tensor-complex-cohom",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-tor-map-via-resolution-lift",
+  "new-d3-koszul-normalized-projective-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Koszul coefficient construction extending Tags 062F, 062I and 062H; algebra.tex Tags 00LY, 00LZ, 00DM and 00HD; coherent.tex Tag 02KH, flat-cohomology sentence. The presentation and flat-base-change assembly is written by N6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Tor.*[Ee]xterior|[Ee]xterior.*Tor|[Kk]oszul.*[Tt]or|[Tt]or.*[Kk]oszul",
+   "results": "19 hits: Mathlib/LinearAlgebra/ExteriorPower/Basic.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean, Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean, Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean, Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean; digest dff0d92aec9e096c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul resolution of a regular quotient with annihilated coefficients computes Tor and is independent of the regular generators",
+   "results": "8 hits: Module.quotientAnnihilator, Rep.Tor, TensorProduct.tensorQuotEquivQuotSMul, Rep.Tor_obj, Rep.torIso, Rep.barResolution, Rep.FiniteCyclicGroup.resolution, Algebra.Extension.cotangentEquiv; digest c2e1cd0ef59100a5. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"exteriorPower\"",
+   "results": "6 hits: ModuleCat.exteriorPower.functor, ModuleCat.exteriorPower.functor_obj, ModuleCat.exteriorPower.functor_map, Module.Basis.topVector_eq_exteriorPower, exteriorPower.isUnit_apply_topVector, exteriorPower.wedgePairing_eq_apply_topVector_smul; digest e2564259b2753ea2. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular sequence generating I and any module M annihilated by I the canonical Tor over A of A/I and M is exterior power of I/I squared tensor M naturally under flat base change",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_rTensor, RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_lTensor, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, RingTheory.Sequence.IsWeaklyRegular.of_flat, Module.Flat.tfae_equational_criterion, Module.free_of_lTensor_residueField_injective, Algebra.Extension.tensorH1Cotangent; digest 7f06849896decce6. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of regular generators induces exterior conormal change of basis on Tor with quotient module coefficients",
+   "results": "8 hits: Algebra.Generators.CotangentSpace.compEquiv, Algebra.Generators.H1Cotangent.δAux, Algebra.PreSubmersivePresentation.cotangentComplexAux, Algebra.Generators.cotangentSpaceBasis_repr_tmul, Algebra.Generators.exists_presentation_of_basis_cotangent, Algebra.Generators.toKaehler_tmul_D, Algebra.Generators.cotangentSpaceBasis_repr_one_tmul, Algebra.Presentation.differentials.comm₂₃; digest ee356f934bcd5067. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module/exterior/representation declarations do not state this scheme-equivariant or normalized regular-quotient Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular sequence and any module annihilated by its ideal Tor of the quotient is the exterior power of the conormal module tensor coefficients naturally under flat base change",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_rTensor, RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_lTensor, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, KaehlerDifferential.cotangentComplexBaseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange, tensorKaehlerQuotKerSqEquiv_tmul_D; digest cfb25137edd6cc8c. ",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence flat ascent, cotangent presentation comparisons, tensor quotient equivalences and exterior functors are ingredients only; none states normalized coefficient Tor for regular quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Ee]xterior|[Ee]xterior.*Tor|[Kk]oszul.*[Tt]or|[Tt]or.*[Kk]oszul",
+   "results": "19 hits: Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean, Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean, Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean; digest bd77d87d46c89322. ",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence flat ascent, cotangent presentation comparisons, tensor quotient equivalences and exterior functors are ingredients only; none states normalized coefficient Tor for regular quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul resolution computes Tor of a regular quotient with arbitrary quotient module coefficients independently of generators",
+   "results": "8 hits: TensorProduct.tensorQuotEquivQuotSMul, QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop, TensorProduct.tensorQuotientEquiv, rTensor_mkQ, Rep.Tor_obj, Module.Finite.reprEquiv, Rep.torIso, Rep.barResolution; digest 06fafae75eb56a85. ",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence flat ascent, cotangent presentation comparisons, tensor quotient equivalences and exterior functors are ingredients only; none states normalized coefficient Tor for regular quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"exteriorPower\"",
+   "results": "6 hits: ModuleCat.exteriorPower.functor, ModuleCat.exteriorPower.functor_obj, ModuleCat.exteriorPower.functor_map, Module.Basis.topVector_eq_exteriorPower, exteriorPower.isUnit_apply_topVector, exteriorPower.wedgePairing_eq_apply_topVector_smul; digest e2564259b2753ea2. ",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence flat ascent, cotangent presentation comparisons, tensor quotient equivalences and exterior functors are ingredients only; none states normalized coefficient Tor for regular quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of generators of an ideal gives a chain map on Koszul complexes inducing exterior powers of the conormal map on homology with annihilated coefficients",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δ_comp_equiv, Algebra.Generators.CotangentSpace.compEquiv, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, Algebra.Generators.H1Cotangent.δAux_ofComp, Algebra.Generators.H1Cotangent.δAux, Algebra.PreSubmersivePresentation.cotangentComplexAux, Algebra.Presentation.differentials.comm₂₃; digest e88aa5b12cb7df2d. ",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence flat ascent, cotangent presentation comparisons, tensor quotient equivalences and exterior functors are ingredients only; none states normalized coefficient Tor for regular quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "compEquiv|δ_comp_equiv",
+   "results": "5 hits: 148, 154, 155, 163, 174; digest 52d6138b4e08a57d. ",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence flat ascent, cotangent presentation comparisons, tensor quotient equivalences and exterior functors are ingredients only; none states normalized coefficient Tor for regular quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "isWeaklyRegular_rTensor|of_flat_of_isBaseChange|of_faithfullyFlat_of_isBaseChange|TODO",
+   "results": "10 hits: Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean; digest 3b64d3896a9193cc. ",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence flat ascent, cotangent presentation comparisons, tensor quotient equivalences and exterior functors are ingredients only; none states normalized coefficient Tor for regular quotients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-regular-self-intersection",
+  "date": "2026-10-24",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, Theorem 22.50, p.480: agent-supplied equivariant Koszul self-intersection prerequisite. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique (1986), self-intersection identity; not present locally. This is a local regular-immersion identity, not a fixed-point formula, and Milne does not prove it. Supporting input: Koszul coefficient comparison, independent of regular generators, needed to glue the local self-intersection calculation.",
+   "via": [
+    "lem-sfb-equivariant-regular-self-intersection",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-regular-quotient-coefficient-tor",
+  "worker": "stage1",
+  "summary": "Nine steps construct the coefficient isomorphism from the existing normalized Koszul resolution and conormal basis, prove generator independence using an explicitly checked rectangular-matrix chain map, and check flat base change and all degenerate cases on wedge tensors. Statement unchanged; no new nodes. Existing self-Tor declarations cover only M=B and are not an attachment. Every cited statement was read.",
+  "blueprint": "The current blueprint det-thm-sf-ctf-stability-direct-images, proof (3), is the inherited ancestor route. This item realizes the supporting local coefficient computation named in its existing blueprint.from.place, under the equivariant regular self-intersection prerequisite; the blueprint itself states no normalized coefficient Tor lemma. blueprint_refs ancestor returns None, retained from the live imported ancestry. Searches Koszul, conormal and regular quotient found no blueprint duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-conormal-free",
+    "why": "Generic commutative algebra: identifies the actual generator classes as a conormal basis; no scheme/coefficient operation route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic commutative algebra: regularity makes the Koszul complex acyclic in positive degrees."
+   },
+   {
+    "node": "new-d3-koszul-normalized-projective-resolution",
+    "why": "Generic projective-resolution tool: supplies the Koszul resolution with the actual quotient augmentation, not an arbitrarily normalized resolution."
+   },
+   {
+    "node": "lem-pc-flat-tensor-complex-cohom",
+    "why": "Generic bounded-complex tool applied after explicit reindexing to degrees [-r,0]; needed to recognize the canonical flat Tor comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "new-d3-koszul-normalized-projective-resolution",
+  "lem-pc-flat-tensor-complex-cohom"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-5e8187cef",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-5e8187cef (reviewer sub-agent of L); spot-checked: Read the item's statement and all 9 steps in full, against the statements of all 13 cited nodes. Shape: one commit changing only the item and its report; no new nodes; statement and stmt_deps unchanged; proof_deps equal the union of the step uses; no repair note exists, so the re-split rules do not apply. Steps: (1) conormal-free, regular⇒Koszul-regular and new-d3 give K_A(f) as a resolution with the quotient augmentation; empty tuple allowed. (2) IM=0 kills d⊗1, and the wedge bases give both inverse maps without flatness of M. (3) Naturality and B-linearity follow from lift clause (2). (4) I verified the chain map ∧t for a rectangular matrix on pure wedges, with U_0=1. (5) I checked the orientation ι_f=H(U⊗1)ι_g of lift clause (1) and that only the coefficients mod I matter, which gives c^g=c^f on generators. (6) Flat transfer of regularity holds only when B'≠0 (Z→Z[1/2], f=2), and the conormal iso uses (IA')²=I²A' and tensor-over-quotient (2). (7) The Koszul scalar extension and the flat-cohomology node, applied after reindexing into [-r,0], are correct, as are the M'≅A'⊗M and A'⊗Tor≅B'⊗_B Tor identifications. (8) The base-change, identity and composition squares are checked on generators. (9) r=0, q>r, B'=0 and I=A (only when A=0) all check. Small cases: empty tuple, one nonzerodivisor, M=0, g=uf, characteristic 2. Accepted tool_uses: conormal-free, koszul-regular, new-d3, lem-pc-flat-tensor-complex-cohom, all generic algebra. Duplicates: the new-r4 self-Tor family covers only M=B; Mathlib has only a Koszul TODO. The statement covers what the citer equivariant-regular-self-intersection uses in steps 4-5. Sources: Stacks 062F and 062I read in more-algebra.tex, 02KH in coherent.tex; no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularQuotientCoefficientTor",
+  "declaration": "AlgebraicGeometry.exists_regularQuotientCoefficientTorSystem",
+  "declarations": [
+   "AlgebraicGeometry.IsRegularQuotientCoefficientIdeal",
+   "AlgebraicGeometry.coefficientTorFunctor",
+   "AlgebraicGeometry.coefficientTorAction",
+   "AlgebraicGeometry.coefficientTor",
+   "AlgebraicGeometry.coefficientTorExterior",
+   "AlgebraicGeometry.coefficientTorTensor",
+   "AlgebraicGeometry.coefficientTorResolutionIso",
+   "AlgebraicGeometry.IsNormalizedCoefficientTor",
+   "AlgebraicGeometry.IsCoefficientTorTransport",
+   "AlgebraicGeometry.coefficientTorTransportComp",
+   "AlgebraicGeometry.coefficientTorIdealImage",
+   "AlgebraicGeometry.IsCoefficientConormalBaseChange",
+   "AlgebraicGeometry.RegularQuotientCoefficientTorSystem",
+   "AlgebraicGeometry.exists_regularQuotientCoefficientTorSystem"
+  ],
+  "file": "lean/Sheaf/RingTheory/RegularQuotientCoefficientTor.lean",
+  "statement": "theorem exists_regularQuotientCoefficientTorSystem : Nonempty RegularQuotientCoefficientTorSystem.{u}",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existential system specifies the actual Tor module, its coefficient action, Koszul normalization for every presentation and augmented resolution comparison, and canonical base-change maps by cycle formulas. All data in helper definitions is explicit; the only postponed proof is the named existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05d9f552d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Single item record change (lean set; stmt_dep def-trf-tor-coefficient-module added, needed for its torCoefficientFunctor_additive instance used by coefficientTorAction) plus one new module. Tor'(A).obj(A/I) resolves B as in def-weil-pbc-tor-modules; isoLeftDerivedObj on resolutions of A/I. Quotient action = functorial image of multiplication on M (node step 3), real ring hom; scalar_restriction to the A-action. IsNormalizedCoefficientTor quantifies every regular generating tuple, every P, every augmented a (augmentation mkQ∘zeroEquiv as upstream normalized Koszul resolution) with the e_J⊗m cycle formula; unique pins comparison (wedge generators, P and a exist). Flat base change: conormal ∃! with ideal-class formula plus extendScalarsId/Comp laws; Tor transport specified on resolution cycles independently of c (satisfiable, B-linear, unique); flat_baseChange gives IsIso of the adjoint B'⊗_B Tor→Tor', ∃! exterior map by generator formula and the full square; transport_comparison handles arbitrary semilinear u; identity/composition via uniqueness. Edge cases r=0, q>r (above_length), I=A incl. A=0, B'=0, intermediate zero quotient OK. Single universe u forced by Mathlib monoidal ModuleCat Tor'. No hollow defs, only the theorem sorried, docstrings with source and blueprint tag, no pro-etale, no duplicate (TorFlatBaseChange is coefficient-slot base change; TorCoefficientModule covers algebra coefficients only). Per-degree derived rule does not apply (node is per-degree Tor modules, no complex identification). Minor: self second reading disclosed; extra derivable IsRegularQuotientCoefficientIdeal hypotheses on A'/A''; unused private proof-dep imports. No recompile (no FIX)."
+ }
+}

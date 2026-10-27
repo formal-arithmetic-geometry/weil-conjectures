@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-closed-test-chain-exchange-normalization",
+ "kind": "statement",
+ "title": "K-injective representative of the closed-test derived mate",
+ "statement": "For the coefficient ring, affine closed-fibre square, w-contractible test and supplied K-injective representatives in [def-sfb-closed-test-chain-mate-data], the localized ordinary chainMate followed by pushModel on the chosen target representative equals the specified derived exchange of [def-sfb-closed-test-derived-exchange-maps] after the source pushModel and exact closed-pullback factors. This is only the derived-exchange conjunct, independently of its section evaluation or localized-restriction normalization.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BL, lemma-closed-immersion-affines-apply; derived.tex Tag 09T5, lemma-derived-adjoint-functors, and sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition; agent unit–counit calculation, returned proof steps 5–7."
+ },
+ "stmt_deps": [
+  "def-sfb-closed-test-chain-mate-data",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-adjunction-square-exchange",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-right-derived-functor",
+  "def-sfb-closed-test-kinjective-section-maps",
+  "def-sfb-closed-test-derived-exchange-maps",
+  "sk-def-pe-wlocal"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-closed-test-kinjective-section-models] to $\\mathcal I$ and $j$. It identifies the source and target derived objects with $Q(s^*f_*\\mathcal I)$ and $Q((f_Z)_*\\mathcal J)$, respectively, before evaluation. Apply [lem-sfb-resolving-derived-adjunction-normalization] to the specified adjunctions for $f$ and $f_Z$. Since their left adjoints are exact, all complexes form a left resolving class and their left comparison is the exact localization identification. At the K-injective $\\mathcal I$, the derived counit is consequently represented by $\\varepsilon_{f,\\mathcal I}$. The ordinary $f_Z$-adjunct of $e$ is $j\\circ h^*\\varepsilon_{f,\\mathcal I}\\circ\\theta$, by naturality of the Hom bijection and the defining adjunct of the square mate. The cited normalized derived Hom bijection sends $Q(e)$ to the class of this adjunct, followed by the inverse of $Q(j)$ to identify $Q\\mathcal J$ with $h^*K$. The result is exactly $h^*\\varepsilon_f\\circ\\theta$. Uniqueness of adjuncts proves the derived-exchange claim.",
+   "uses": [
+    "lem-sfb-closed-test-kinjective-section-models",
+    "lem-sfb-resolving-derived-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND and 09T5, lemma-pre-derived-adjoint-functors-general and lemma-derived-adjoint-functors; normalized Hom representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-closed-test-kinjective-section-models",
+  "lem-sfb-resolving-derived-adjunction-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Strict subcalculation of step 3 of lem-sfb-closed-test-chain-mate-restriction; ordinary constructions imported through the verbatim extracted data interface to avoid a circular module import."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjunction square exchange mate unit compatibility sections pullback",
+   "results": "Mathlib unit_mateEquiv and iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-25",
+   "verdict": "General mate and adjunction tools; no exact closed-test normalization statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"unit\"",
+   "results": "Abstract adjunction unit and counit identities",
+   "date": "2026-10-25",
+   "verdict": "General mate and adjunction tools; no exact closed-test normalization statement."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorUnitQ.*mate|squareExchange.*unit|iterated_mateEquiv_conjugateEquiv",
+   "results": "Abstract mate identities and source-library derived-unit APIs",
+   "date": "2026-10-25",
+   "verdict": "General mate and adjunction tools; no exact closed-test normalization statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClosedTestChainMateRestriction",
+  "date": "2026-10-25",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-closed-test-chain-mate-restriction",
+   "place": "Proof steps 3",
+   "via": [
+    "lem-sfb-closed-test-chain-mate-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClosedTestChainExchangeNormalization",
+  "file": "lean/Sheaf/Paper/ClosedTestChainExchangeNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestChainMateRestriction.closed_test_chain_exchange_normalization",
+  "statement": "theorem closed_test_chain_exchange_normalization\n    (A : Type u) [CommRing A] (a : Ideal A)\n    {X XZ : Scheme.{u}} [IsAffine X] (f : X ⟶ Spec (.of A))\n    (h : XZ ⟶ X) (fZ : XZ ⟶ Spec (.of (A ⧸ a)))\n    (w : IsPullback h fZ f (closedMap A a))\n    (V : (Spec (.of (A ⧸ a))).AffineProEt)\n    [IsWContractibleRing Γ(V.left, ⊤)]\n    [IsWContractibleRing Γ((liftedTest A a V).left, ⊤)]\n    (K : DerivedCategory.Plus\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))\n    (L : CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)\n    [L.IsKInjective] (e : DerivedCategory.Q.obj L ≅ K.obj)\n    (J : CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology XZ) Ab.{u + 1}) (condensedRingObj Λ XZ)) ℤ)\n    [J.IsKInjective] (j : (complexes (CondensedRing.upperStar Λ h)).obj L ⟶ J)\n    [QuasiIso j] :\n    HEq (DerivedCategory.Q.map (chainMate Λ w.toCommSq L J j) ≫\n        pushModel Λ fZ ((CondensedRing.upperStar Λ h).mapDerivedCategory.obj K.obj)\n          J (pullRepresentative Λ h K.obj L e J j))\n      ((CondensedRing.upperStar Λ (closedMap A a)).mapDerivedCategoryFactors.inv.app\n          ((complexes (CondensedRing.lowerStar Λ f)).obj L) ≫\n        (CondensedRing.upperStar Λ (closedMap A a)).mapDerivedCategory.map\n          (pushModel Λ f K.obj L e) ≫\n        (ClosedTestDerivedExchangeModel.exchange Λ w.toCommSq).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-25"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-13773",
+  "group": "S7",
+  "result": "fix",
+  "landing": "20261025T123833-L-1907732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-13773",
+  "group": "S7",
+  "result": "fix",
+  "landing": "20261025T123833-L-1907732",
+  "kind": "interface",
+  "note": "independent cc review: Data module declaration blocks vs published item (verbatim); new sorry statements vs item conjuncts 1/3 (byte-identical); node stmt_deps vs owners of names used; sandbox run_set + #print axioms"
+ }
+}

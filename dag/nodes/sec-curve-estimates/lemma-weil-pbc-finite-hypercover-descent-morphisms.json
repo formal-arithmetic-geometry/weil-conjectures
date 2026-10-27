@@ -111,7 +111,29 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.finite_hypercover_descent_morphisms",
+     "module": "WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts",
+     "lines": [
+      39,
+      61
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "reviewed": {
@@ -129,10 +151,11 @@
   "declaration": "AlgebraicGeometry.finite_hypercover_descent_morphisms",
   "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteHypercoverDescentParts.lean",
   "statement": "theorem finite_hypercover_descent_morphisms\n    {I : Type w} [SmallCategory I] [IsFiltered I]\n    (D : Iᵒᵖ ⥤ Scheme.{w})\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c) :\n    ∀ (r : ℕ) (i : Iᵒᵖ)\n      (U V : TruncatedFiniteSplitEtaleHypercover (D.obj i) r)\n      (φ : U.diagram ⋙ Over.pullback (c.π.app i) ⟶\n        V.diagram ⋙ Over.pullback (c.π.app i)),\n      ∃ (j : Iᵒᵖ) (h : j ⟶ i)\n        (ψ : U.diagram ⋙ Over.pullback (D.map h) ⟶\n          V.diagram ⋙ Over.pullback (D.map h)),\n        ∀ Δ : (SimplexCategory.Truncated r)ᵒᵖ,\n          (Over.pullback (c.π.app j)).map (ψ.app Δ) ≫\n              (((Over.pullbackComp (c.π.app j) (D.map h)).symm ≪≫\n                eqToIso (congrArg (fun f : c.pt ⟶ D.obj i ↦ Over.pullback f)\n                  (c.w h))).app (V.diagram.obj Δ)).hom =\n            (((Over.pullbackComp (c.π.app j) (D.map h)).symm ≪≫\n              eqToIso (congrArg (fun f : c.pt ⟶ D.obj i ↦ Over.pullback f)\n                (c.w h))).app (U.diagram.obj Δ)).hom ≫ φ.app Δ",
-  "branch": "sheaf-dag",
+  "branch": "slopmaster2",
   "by": "T1",
   "date": "2026-10-12",
-  "existing": false
+  "existing": true,
+  "note": "2026-10-22 maintainer: branch sheaf-dag -> slopmaster2, existing true (the declarations of this record are upstream declarations in slopmaster2, verbatim in live at the same module; with branch sheaf-dag tools/lean_status.py did not read the record and their sorries had no node)"
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -149,15 +172,17 @@
   "group": "T1"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "X-0518d",
-  "group": "E4",
+  "reviewer": "COMPILER",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261016T015247-L-721681",
+  "landing": "20261024T191228-L-277381",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements and constructions with all five DAG records, proof route, unchanged interfaces, clean compilation, permitted axioms, and the sole direct importer.",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
   "sorry_before": [
+   "AlgebraicGeometry.finite_hypercover_descent_equalities",
+   "AlgebraicGeometry.finite_hypercover_descent_morphisms",
    "AlgebraicGeometry.finite_hypercover_descent_objects"
   ],
   "sorry_after": []

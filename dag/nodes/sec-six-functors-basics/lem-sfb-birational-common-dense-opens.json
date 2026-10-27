@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-birational-common-dense-opens",
+ "kind": "statement",
+ "title": "Birational locally finitely presented morphisms restrict to an isomorphism of dense opens",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme] that is locally of finite presentation [def-sbc-locally-finite-presentation]. Suppose $X$ and $Y$ have finitely many irreducible components [def-weil-irreducible-components]. Assume $f$ maps the generic points of the irreducible components of $Y$ bijectively onto those of $X$ [def-sc-generic-point], and for every such generic point $\\eta$ of $Y$ the induced homomorphism $\\mathcal O_{X,f(\\eta)}\\to\\mathcal O_{Y,\\eta}$ is an isomorphism [def-weil-locally-ringed-space-morphism]. Then there are dense open subschemes $U\\subseteq Y$ and $V\\subseteq X$ [def-weil-open-immersion] such that $f(U)\\subseteq V$ and the restriction $f|_U:U\\to V$ is an isomorphism. No separatedness or reducedness hypothesis is imposed; the conclusion does not assert that $U=f^{-1}(V)$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAC, lemma-birational-birational, locally-of-finite-presentation alternative (2); birational as in Definition 01RO (definition-birational), morphisms.tex lines 12980-12998."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "If there are no irreducible components, both schemes are empty and we take $U=Y$, $V=X$. Otherwise enumerate the component generic points as $\\eta_1,\\ldots,\\eta_r$ in $Y$ and $\\xi_i=f(\\eta_i)$ in $X$, using the assumed bijection. By sobriety their closures are exactly the respective components $Y_i$ and $X_i$. Set $Y_i^\\circ=Y\\setminus\\bigcup_{j\\ne i}Y_j$ and $X_i^\\circ=X\\setminus\\bigcup_{j\\ne i}X_j$. These are open because the component families are finite. Each contains its own generic point: membership of $\\eta_i$ in another closed component would force $Y_i\\subseteq Y_j$, contrary to maximality; the same argument applies to $X$. They are pairwise disjoint and contained in their respective components. Every nonempty open subset of $Y_i^\\circ$ contains $\\eta_i$: its complement in $Y_i$ is closed and would contain the closure of $\\eta_i$ if it contained $\\eta_i$. Thus $\\eta_i$ remains generic on every neighbourhood inside $Y_i^\\circ$, and likewise for $\\xi_i$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, first sentence: reduction to irreducible schemes, with the omitted finite-component reduction written out."
+   }
+  },
+  {
+   "text": "For each $i$, choose an affine open $V_i^0=\\operatorname{Spec}B\\subseteq X_i^\\circ$ containing $\\xi_i$. Choose an affine open $U_i^0=\\operatorname{Spec}A\\subseteq Y_i^\\circ\\cap f^{-1}(V_i^0)$ containing $\\eta_i$; the latter open contains $\\eta_i$ since $f(\\eta_i)=\\xi_i$. The affine-chart square identifies this restriction of $f$ with $\\operatorname{Spec}\\varphi$ for its induced ring map $\\varphi:B\\to A$. Both affine spectra have a generic point for the whole space by Step 1, hence are irreducible: two nonempty opens both contain that point. The component/minimal-prime description of spectra therefore gives unique minimal primes $\\mathfrak q$ of $B$ and $\\mathfrak p$ of $A$, representing $\\xi_i$ and $\\eta_i$. Carry out Steps 3--6 for each $i$ with these rings.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, affine reduction paragraph."
+   }
+  },
+  {
+   "text": "The map on affine points gives $\\varphi^{-1}(\\mathfrak p)=\\mathfrak q$. The affine stalk-map formula identifies the stipulated generic local-ring isomorphism with the induced map $B_{\\mathfrak q}\\to A_{\\mathfrak p}$. Apply [lem-sfb-birational-generic-localization]: its unique-minimal-prime and contraction hypotheses were established in Step 2 and the first sentence here. Consequently the canonical map $B_{\\mathfrak q}\\to A_{\\mathfrak q}=\\varphi(B\\setminus\\mathfrak q)^{-1}A$ is an isomorphism. Here and below $A_g$ means localization of $A$ at $\\varphi(g)$.",
+   "uses": [
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-sfb-birational-generic-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, invocation of Tag 0BAB (lemma-birational-generic-fibres)."
+   }
+  },
+  {
+   "text": "The affine-chart finite-presentation theorem applied directly to $f,U_i^0,V_i^0$ gives $A\\cong B[t_1,\\ldots,t_n]/(h_1,\\ldots,h_m)$; let $x_j$ be the images of the variables. Surjectivity of $B_{\\mathfrak q}\\to A_{\\mathfrak q}$ writes $x_j/1=\\varphi(b_j)/\\varphi(s_j)$ for some $s_j\\notin\\mathfrak q$. The equality criterion for fractions supplies $s_j^\\prime\\notin\\mathfrak q$ with $\\varphi(s_j^\\prime)(\\varphi(b_j)-\\varphi(s_j)x_j)=0$ in $A$. Put $g=\\prod_j s_js_j^\\prime\\notin\\mathfrak q$ (empty product $1$). Every factor becomes a unit in $B_g$ and $A_g$, so $x_j=\\varphi(b_j)/\\varphi(s_j)$ in $A_g$. The map $B_g\\to A_g$ is surjective: $A_g$ is generated as a ring by the images of $B$, the $x_j$, and $\\varphi(g)^{-1}$, all now in its image.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, finite-generator denominator argument before alternative (2)."
+   }
+  },
+  {
+   "text": "Localizing the displayed presentation gives $A_g\\cong B_g[t_1,\\ldots,t_n]/(h_1,\\ldots,h_m)$: a map from either ring into any $B_g$-algebra amounts to choosing $n$ elements satisfying the same relations. Thus $A_g$ is finitely presented over $B_g$. Apply [lem-weil-pbc-finite-presentation-surjection-kernel-fg] with coefficient ring $B_g$, target $A_g$, and zero polynomial variables, to obtain finitely many generators $c_1,\\ldots,c_a$ of $J=\\ker(B_g\\to A_g)$. Write $c_j=b_j/g^{e_j}$. Its image in $A_{\\mathfrak q}$ is zero, and injectivity in Step 3 implies $b_j/1=0$ in $B_{\\mathfrak q}$. The fraction equality criterion gives $u_j\\notin\\mathfrak q$ with $u_jb_j=0$ in $B$. Put $h=g\\prod_j u_j\\notin\\mathfrak q$. The map $B_h\\to A_h$ remains surjective by the same generators as in Step 4. It is injective as well: if $b/h^e$ maps to zero, then $\\varphi(h)^k\\varphi(b)=0$ in $A$ for some $k$. Hence $h^kb/1\\in J$ inside $B_g$. All $c_j$ vanish in $B_h$, so $h^kb/1=0$ there; since $h$ is a unit, $b/h^e=0$. We have an isomorphism $B_h\\xrightarrow{\\sim}A_h$.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, proof of alternative (2); Tag 00R2, algebra-lemma-finite-presentation-independent, for the finitely generated kernel."
+   }
+  },
+  {
+   "text": "Let $V_i=D(h)\\subseteq V_i^0$ and $U_i=D(\\varphi(h))\\subseteq U_i^0$. Principal-localization open immersions identify these with $\\operatorname{Spec}B_h$ and $\\operatorname{Spec}A_h$. The fraction map $B_h\\to A_h$ extends $\\varphi$ and commutes with localization maps; applying the contravariant functor $\\operatorname{Spec}$ gives the corresponding commutative square. Thus $f|_{U_i}:U_i\\to V_i$ is precisely $\\operatorname{Spec}(B_h\\to A_h)$. Functoriality applied to the inverse ring isomorphism from Step 5 makes this restriction an isomorphism. The opens contain $\\xi_i$ and $\\eta_i$, respectively, since $h\\notin\\mathfrak q$ and $\\varphi^{-1}(\\mathfrak p)=\\mathfrak q$. Each $U_i$ remains inside $Y_i^\\circ$ and each $V_i$ inside $X_i^\\circ$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, conclusion of the affine argument; Tag 01I3, schemes-lemma-standard-open-affine."
+   }
+  },
+  {
+   "text": "Set $U=\\bigcup_iU_i$ and $V=\\bigcup_iV_i$. The pairwise disjoint open pieces identify the restricted map $f|_U$ with the piecewise isomorphisms $U_i\\to V_i$. Explicitly its inverse sends a point of $V_i$ by the inverse of this isomorphism. It is continuous since the $V_i$ form an open partition. On any open $W\\subseteq V$, the sheaf axiom for the disjoint cover $W=\\coprod_i(W\\cap V_i)$ identifies sections with the product of the section rings on the pieces (the overlaps are empty); the inverse sheaf maps on the pieces give inverse ring maps on these products, compatible with restrictions. These define the inverse morphism of locally ringed spaces, since its maps on local rings are the local inverses. Hence $f|_U:U\\to V$ is an isomorphism of open subschemes. Finally $U$ contains every $\\eta_i$, so its closure contains every $Y_i=\\overline{\\{\\eta_i\\}}$, and hence all of $Y$; similarly $V$ is dense in $X$. The desired source open is the union of the selected $U_i$, which need not exhaust $f^{-1}(V)$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, first-sentence finite-component reduction and conclusion; elementary gluing over disjoint open partitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components",
+  "def-weil-open-immersion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-sfb-birational-generic-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-map-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAC, lemma-birational-birational, locally-of-finite-presentation alternative (2); birational as in Definition 01RO (definition-birational), morphisms.tex lines 12980-12998."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stacks 0BAC|stacks 0BAB|Birational|PartialIso in Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Birational/{Birational,Composition,Dominant,RationalMap}.lean: PartialIso, Birational (stacks 0A20(1)), BirationalOver, Opens.partialIsoOfDense; no @[stacks 0BAC] or 0BAB tag anywhere in Mathlib",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib defines partial isomorphisms and birationality as existence of common dense opens, but has no theorem producing them from a bijection on generic points and isomorphic generic local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented morphism of schemes inducing a bijection on generic points and isomorphisms on their local rings restricts to an isomorphism of dense open subschemes",
+   "results": "{\"t\": \"2026-10-22T05:23:20Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented morphism of schemes inducing a bijection on generic points and isomorphisms on their local rings restricts to an isomorphism of dense open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.isLocalIso_iff\", \"AlgebraicGeometry.IsLocalIso.exists_isOpenImmersion\", \"AlgebraicGeometry.IsLocalIso.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.IsLocalIso.le_of_isLocalAtSource\"], \"digest\": \"a40a7b24a5465c6d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related localization, local-isomorphism or stalk results; none states this assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.PartialIso, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-22T05:23:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.PartialIso, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "grep",
+   "query": "stacks 0BAC|stacks 0BAB|generic.*(stalk|localRing)|stalk.*generic",
+   "results": "{\"t\": \"2026-10-22T05:23:28Z\", \"tool\": \"grep\", \"query\": \"stacks 0BAC|stacks 0BAB|generic.*(stalk|localRing)|stalk.*generic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"7c93bae362a510e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related localization, local-isomorphism or stalk results; none states this assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally finitely presented birational morphism isomorphism dense open subschemes generic stalks",
+   "results": "{\"t\": \"2026-10-22T05:23:37Z\", \"tool\": \"leansearch\", \"query\": \"locally finitely presented birational morphism isomorphism dense open subschemes generic stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.LocallyOfFinitePresentation.recOn\"], \"digest\": \"90c8602695ee264b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related localization, local-isomorphism or stalk results; none states this assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite presentation ring map that is an isomorphism after localization at a minimal prime becomes an isomorphism on a principal open neighbourhood of that prime",
+   "results": "{\"t\": \"2026-10-22T05:23:37Z\", \"tool\": \"leanfinder\", \"query\": \"A finite presentation ring map that is an isomorphism after localization at a minimal prime becomes an isomorphism on a principal open neighbourhood of that prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.locally_of_exists\", \"RingHom.locally_iff_finite\", \"RingHom.OfLocalizationPrime\", \"Algebra.ZariskisMainProperty\", \"RingHom.locally_iff_isLocalization\", \"RingHom.IsStandardOpenImmersion.of_bijective\", \"bijective_of_isLocalization_of_span_eq_top\", \"RingHom.HoldsForLocalization.localRingHom\"], \"digest\": \"6cfd6e89d28d44d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related localization, local-isomorphism or stalk results; none states this assertion or specializes to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-birational-isomorphism-dense-open",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Stacks 0BFP repair: Tag 0BAJ, lemma-birational-isomorphism-over-dense-open, separated and locally-finite-presentation alternatives; used for 0BFP(1). Common dense opens of Stacks 0BAC(2), Step 1 of the 0BAJ argument; replaces the dropped lem-per-birational-common-dense-opens (route pivot 2026-10-19).",
+   "via": [
+    "lem-sfb-birational-isomorphism-dense-open",
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-birational-common-dense-opens",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Stacks 0BAC(2) into seven steps: disjoint component neighbourhoods, affine charts, generic base localization, denominator clearing, finitely generated kernel killing, principal-open identification, and explicit disjoint gluing. One statement-only helper replaces the dropped 0BAB node; all other cited inputs already exist. No Lean was written or compiled.",
+  "blueprint": "Realizes the inherited Stacks 0BAC(2) common-dense-open prerequisite for the 0BAJ/0BFP repair, in the precise inherited from.place. blueprint_refs ancestor reports None; this is preserved rather than inventing an ancestor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-8e82097a1",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-8e82097a1 (reviewer sub-agent of L); spot-checked: Read Stacks morphisms.tex 01RO, 0BAB (lemma-birational-generic-fibres) and 0BAC (lemma-birational-birational) (2) in full. The item's statement and stmt_deps match side-live exactly and are not weakened. The item is not dropped, no other group has split it and it has no repair note. Steps 1-7 check out. Step 1: the opens Y_i° use finiteness of the components, and the cover lemma is needed for 'every nonempty open of Y_i° contains η_i'. Steps 2-3: affine basis, the chart square (U ⊆ f⁻¹V holds), minimal primes, and the stalk-map formula giving B_q→A_p. Steps 4-5: denominator clearing via the fraction equality criterion; the kernel-fg node with n=0 is allowed; I checked the B_h→A_h injectivity argument, and it fills in Stacks' 'may assume surjective'. Step 6: D(h) ≅ Spec B_h and D(φ(h)) ≅ Spec A_h, and η_i stays in since h∉q=φ⁻¹(p). Step 7: elementary gluing over disjoint partitions, with density from the cover lemma. Every cited node is a Mathlib leaf, so no tool_uses. The new node lem-sfb-birational-generic-localization is statement-only, self-contained and true: Stacks' argument goes A_q→κ(p) surjective, pA_q maximal and the only prime, so A_q=A_p. Tested on Z→Q, k[t]→k[t,e]/(e²,te) and k→k[e]/(e²) (hypothesis fails). It is strictly smaller than the item. Its only DAG duplicate is the dropped lem-per-birational-generic-localization (route-pivot line 1436), which the delivery does not cite; porting it as a new sfb helper is the accepted pattern. No SGA. Blueprint from.node stays null and from.place is extended correctly. Minor: the report says the maintainer created the item, but worker O3 did, on 2026-10-22. This does not affect the DAG."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirationalCommonDenseOpens",
+  "declaration": "AlgebraicGeometry.exists_common_dense_opens_isIso_of_birational",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalCommonDenseOpens.lean",
+  "statement": "theorem exists_common_dense_opens_isIso_of_birational {X Y : Scheme.{u}} (f : Y ⟶ X) [LocallyOfFinitePresentation f] (hX : (irreducibleComponents X).Finite) (hY : (irreducibleComponents Y).Finite) (hgeneric : Set.BijOn f (genericPoints Y) (genericPoints X)) (hstalk : ∀ η : Y, η ∈ genericPoints Y → IsIso (f.stalkMap η)) : ∃ (U : Y.Opens) (V : X.Opens), Dense (U : Set Y) ∧ Dense (V : Set X) ∧ ∃ hUV : U ≤ f ⁻¹ᵁ V, IsIso (f.resLE V U hUV)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ce980203",
+  "group": "O1",
+  "result": "pass",
+  "note": "Statement matches node/Stacks 0BAC(2)+01RO clause by clause: Scheme.{u} f with LocallyOfFinitePresentation; finite irreducibleComponents for X and Y; Set.BijOn f on genericPoints (Mathlib def = closure{x} ∈ components); IsIso f.stalkMap at every generic η; ∃ dense U V, U ≤ f⁻¹ᵁV, IsIso (f.resLE V U _); no extra hypotheses, U = f⁻¹V not asserted. Edge cases fine (empty, nonreduced, reducible, nonseparated). Node differs from side-live only in its new lean field; lean.statement is verbatim in the file; stmt_dep modules publicly imported; docstrings carry the source, the blueprint tag and all 7 proof steps; sorry only; no duplicate in Mathlib or Sheaf. Maintainer note: a human re-split note was released 05:47Z, after Q16's S1 landing; the statement is kept, so the Lean is unaffected, but the docstring's proof steps need refreshing after the re-split lands."
+ }
+}

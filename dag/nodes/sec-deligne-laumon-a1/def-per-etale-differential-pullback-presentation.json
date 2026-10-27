@@ -1,0 +1,131 @@
+{
+ "id": "def-per-etale-differential-pullback-presentation",
+ "kind": "definition",
+ "title": "Normalized ordinary differential and tensor-pullback presentations on the etale site",
+ "status": "split",
+ "statement": "For a scheme $X$ [def-pc-scheme], use the sheaf of rings $\\mathcal O_{X,\\mathrm{et}}$ and the log-differential structure ring of [def-per-log-differential-symbol-sheaf], and its module category [def-weil-sheaf-of-modules-category]. For $f:X\\to S$, a normalized ordinary differential presentation consists of a module sheaf $E$, an isomorphism of its additive presheaf with the tensor-section presheaf of the existing $\\Omega^1_{X/S}$ [def-sc-relative-differential-sheaf], [def-sc-etale-qcoherent-module], and a universal relative derivation $d:\\mathcal O_X\\to E$. Relative derivations are additive, satisfy Leibniz and restrictions, and annihilate functions from $S$ on every relative etale diagram. Universality means that each such derivation into any module sheaf $T$ factors uniquely through a module map $E\\to T$. For $c:Z\\to W$ and module sheaves $E$ on $W$ and $F$ on $Z$, a relative module map is a family of additive maps $E(U)\\to F(V)$ for all etale $U\\to W$, $V\\to Z$ and $k:V\\to U$ over $c$, semilinear over $k^\\sharp$ and natural in both test objects. A tensor-pullback presentation of $E$ [def-pur-sheaf-tensor-product] is a module sheaf $P$ on $Z$ and such a relative map $\\eta:E\\to P$ through which every relative module map $E\\to T$ factors uniquely as a module map $P\\to T$. Thus it is the unit-normalized representing pair for $\\mathcal O_Z\\otimes_{c^{-1}\\mathcal O_W}c^{-1}E$, not an uncharacterized isomorphic module. These are interfaces specifying representing pairs, with no object chosen from a mere existence assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-per-log-differential-symbol-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-etale-qcoherent-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Stacks Tags 03D2, 03D3, 03EK; 01UM, 03DR and 03DU for ordinary differential tensor sections. ILO VI 1.1, p.69, and the symbol-presentation interface used in lem-per-strict-log-differentials-pushout."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "logarithmic differentials of log schemes universal derivation sheaf strict morphism pushout",
+   "results": "8 hits: PresheafOfModules.Derivation'.Universal.mk, PresheafOfModules.HasDifferentials.exists_universal_derivation, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.Derivation.Universal, PresheafOfModules.Derivation.Universal.mk, KaehlerDifferential.derivationQuotKerTotal, PresheafOfModules.Derivation.instSubsingletonUniversal, PresheafOfModules.Derivation.Universal.casesOn",
+   "date": "2026-10-24",
+   "verdict": "Existing universal derivations and generic sheaf pullback found; no normalized relative-etale presentation interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.Derivation.Universal",
+   "results": "0 hits: ; loogle: unknown identifier 'PresheafOfModules.Derivation.Universal'",
+   "date": "2026-10-24",
+   "verdict": "Existing universal derivations and generic sheaf pullback found; no normalized relative-etale presentation interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf modules tensor inverse image universal property represented by semilinear natural maps over relative etale diagrams",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.mapGenerators, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-24",
+   "verdict": "Existing universal derivations and generic sheaf pullback found; no normalized relative-etale presentation interface."
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleDifferentialPullbackPresentation|EtaleOrdinaryDifferentialPresentation|logarithmic.*differential",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "Existing universal derivations and generic sheaf pullback found; no normalized relative-etale presentation interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg EtaleDifferentialPullbackPresentation|EtaleOrdinaryDifferentialPresentation in dag/nodes, lean/WeilConjectures and lean/Sheaf; tools/blueprint_refs.py search differential pullback / differential presentation",
+   "results": "No duplicate interface. ChartLogSmoothDeformationCalculus supplies the actual ring, log differential quotient and its symbols, and is reused. Mathlib supplies Derivation, reused verbatim.",
+   "date": "2026-10-24",
+   "verdict": "New presentation interface only; no replacement differential sheaf or tensor construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-strict-log-differentials-pushout",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The ordinary etale differential and tensor inverse-image interfaces needed to state the strict log-differential pushout square, before smoothness or Noetherian hypotheses.",
+   "via": [
+    "lem-per-strict-log-differentials-pushout",
+    "lem-per-strict-smooth-log-differential-sequence",
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "lem-per-kato-lattice-chart-realization",
+    "lem-per-trait-log-smooth-uniformizer-chart",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleDifferentialPullbackPresentation",
+  "declaration": "AlgebraicGeometry.EtaleDifferentialPullbackPresentation",
+  "declarations": [
+   "AlgebraicGeometry.DifferentialEtaleModules",
+   "AlgebraicGeometry.EtaleOrdinaryDifferentialPresentation",
+   "AlgebraicGeometry.EtaleDifferentialModuleMap",
+   "AlgebraicGeometry.EtaleDifferentialPullbackPresentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDifferentialPullbackPresentation.lean",
+  "statement": "structure EtaleDifferentialPullbackPresentation {Z W : Scheme.{u}} (c : Z ⟶ W) (E : DifferentialEtaleModules W)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a4a91250",
+  "group": "Q59",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a4a91250",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Re-delivery after RETURN L (H2). Lean files byte-identical to 94cd0ce71700; only DAG records changed. Item and def-per-etale-differential-pullback-presentation now cite new existing:true definition nodes def-per-log-differential-symbol-sheaf (12 plain defs in ChartLogSmoothDeformationCalculus) and def-per-log-map-composition (EtaleLogMap.comp in LogMorphismOperations) instead of the lem-sfb theorem nodes. Checked: all declarations are plain defs, none a .choose; statements verbatim in modules identical on live/side-live; TeX matches the code (six relations, least submodule, cokernel + sheafification; composition via pullback Y x_Z W); stmt_deps exist as definition nodes; no live owner collision or supersession; base stmt_deps kept. Statement re-read independently: A, B, C fixed by universal properties; u, v, j, iota, Phi pinned on generators; cokernel P, IsPushout and all three inverse formulas present; edge cases and universes ok. Advisories A1-A3 answered in the report. Minor: EtaleLogStructure owner reached only transitively; published docstrings keep the old blueprint tags (accepted existing:true pattern). No FIX, no compile."
+ }
+}

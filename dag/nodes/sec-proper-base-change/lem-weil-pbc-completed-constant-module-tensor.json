@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-completed-constant-module-tensor",
+ "kind": "statement",
+ "title": "Ordinary tensor comparison for completed constant modules",
+ "statement": "Let X be a scheme, A a commutative ring and d a ProEtaleAdicCoefficientDatum on A. Let O be adicDatumRing X d, G be completedKoszulConstant X d, and c:O to G(A) be completedKoszulOne X d, characterized by the section 1 tensor 1 [def-weil-pbc-intrinsic-completion]. With the existing sheaf tensor [def-pur-sheaf-tensor-product], there is an isomorphism of curried bifunctors tau:G(M tensor N) to G(M) tensor G(N). Its regular-module component satisfies c followed by G of the inverse right unitor of A and tau(A,A) equals the inverse left unitor of O followed by c tensor c. This statement concerns ordinary modules only and includes no complexes or change of site.",
+ "stmt_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product), the displayed change-of-rings tensor formula immediately before lemma-sheafification-tensor; Tag 0GMW (lemma-sheafification-tensor)."
+ },
+ "proof": [
+  {
+   "text": "Form the actual constant presheaf functor P used by adicLisseConstantModules: constant modules on the one-object category followed by pullback to the pro-etale site. The sectionwise identity gives a natural isomorphism tensor followed by P to P times P followed by tensor. Whisker this isomorphism with module sheafification and compose with the inverse of the pro-etale sheafification tensor comparison. This gives an uncurried natural tensor isomorphism for F=adicLisseConstantModules.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "lem-sf-proetale-sheafification-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For E=completedConstantExtension, use the object and map equalities of derivedChangeOfRingsIndependentCoefficients to transport each tensorIso from scalarExtension_constraint_coherence to E. Naturality follows by substitution of the map equality, cancellation of equality transports, the naturality field of the scalar-extension data and functoriality of tensor. Whisker the comparison of F with E and the comparison of E with F times F, and compose to obtain e:tensor followed by G isomorphic to G times G followed by tensor.",
+   "uses": [
+    "def-weil-pbc-completed-constant-realization-data",
+    "lem-pur-derived-change-of-rings",
+    "lem-pd-sheaf-scalar-extension-constraint-coherence",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that the prescribed map c=completedKoszulOne is invertible. The ordinary scalar-extension/restriction adjunction, module sheafification Hom equivalence and regular-module/sections equivalence give a natural bijection Hom(G(A),N) to sections(N). The specified section formulas for the ordinary adjunction unit and c show that this bijection is precomposition with c followed by the unit-module/sections bijection: evaluate both at 1 on each site object. Precomposition with c is therefore bijective for every N, so the coyoneda criterion gives IsIso c.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the comparison using only monoidal coherence. For an automorphism a of the tensor unit I, the maps sigma_Y=lambda_Y inverse followed by a tensor identity_Y followed by lambda_Y form a natural automorphism of the identity functor. Whisker exchange and unitor naturality prove naturality. At I, equality of the left and right unitors and right-unitor naturality give sigma_I=a. Let z be c followed by G(rho_A inverse) followed by e_(A,A), and let w be lambda_I inverse followed by c tensor c; both are isomorphisms I to G(A) tensor G(A). Choose a=w followed by z inverse. Postcompose every component of e by sigma at its target. Naturality on z gives z followed by sigma_target=sigma_I followed by z=w. Curry this natural isomorphism, obtaining the asserted tau and exactly the required regular-module equation. All constructions use isomorphisms and universal properties and include the zero ring and empty site.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-site-constant-module-functor",
+  "lem-sf-proetale-sheafification-tensor-comparison",
+  "def-weil-pbc-completed-constant-realization-data",
+  "lem-pur-derived-change-of-rings",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK change-of-rings tensor formula and Tag 0GMW; F1 composes the existing tensor comparisons, proves the specified unit invertible by adjunction, and normalizes the comparison by the natural action of an automorphism of the tensor unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheafification and extension of scalars preserve the tensor product of modules and the regular module unit",
+   "results": "8 hits, including PresheafOfModules.monoidalCategory and ModuleCat.extendRestrictScalarsAdj_unit_app_apply; no comparison for completedKoszulConstant.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing sheafification tensor and scalar-extension constraint theorems; the normalization for this particular constant functor remains to assemble."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"tensor\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No direct theorem for this normalized composite."
+  },
+  {
+   "tool": "grep",
+   "query": "completedKoszulConstant|sheafificationTensorIso|scalarExtension_constraint_coherence",
+   "results": "msearch Mathlib grep returned no hits. Local rg found the defining completedKoszulConstant and completedKoszulOne, the proved pro-etale sheafification tensor comparison and scalarExtension_constraint_coherence.",
+   "date": "2026-10-26",
+   "verdict": "The latter existing declarations provide the two ordinary construction steps but do not state their composite regular-unit normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedRealizationTensor",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-realization-tensor",
+   "place": "Ordinary module portion of the proof: constant module sheafification followed by coefficient extension; before totalization or coefficient/site transport.",
+   "via": [
+    "lem-weil-pbc-negative-koszul-tensor-realization",
+    "lem-weil-pbc-negative-koszul-tensor-dual-transport",
+    "lem-weil-pbc-completed-koszul-coefficient-comparison",
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilCompletedConstantModuleTensor",
+  "file": "lean/Sheaf/Paper/WeilCompletedConstantModuleTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedConstantModuleTensor",
+  "statement": "theorem completedConstantModuleTensor\n    (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]\n    (d : ProEtaleAdicCoefficientDatum A) :\n    let O := adicDatumRing X d\n    let G := completedKoszulConstant X d\n    let c := completedKoszulOne X d\n    letI := SheafOfModules.isMonoidal_W_independentCoefficients O\n    letI := SheafOfModules.monoidalCategory O\n    ∃ τ : (Functor.postcompose₂.obj G).obj (curriedTensor _) ≅\n        (((Functor.whiskeringLeft₂ _).obj G).obj G).obj (curriedTensor _),\n      c ≫ G.map (ρ_ (ModuleCat.of A A)).inv ≫\n        (τ.hom.app (ModuleCat.of A A)).app (ModuleCat.of A A) =\n          (λ_ (𝟙_ (adicDatumModules X d))).inv ≫ (c ⊗ₘ c)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T065057-L-2683678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261026T091457-L-3345880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-nodal-local-tangent-normalization",
+ "kind": "statement",
+ "title": "The tangent Proj of a geometric node is its quadratic normalization residue algebra",
+ "statement": "Let $k$ be a field, let $C$ be a scheme locally of finite type over $k$ [def-weil-finite-type-morphism], equidimensional of dimension one [def-kun-topological-krull-dimension], and let $x\\in C$ be a closed point. Suppose $\\kappa=\\kappa(x)$ is finite separable over $k$ [def-weil-residue-field, def-weil-pbc-separable-algebraic-extension]. Assume $x$ is a geometric ordinary double point: for an algebraic closure $\\bar k$ and a point $\\bar x\\in C_{\\bar k}$ over $x$, the completed local ring is $\\bar k[[u,v]]/(uv)$ [def-weil-algebraic-closure, def-pc-fibre-product, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Put $A=\\mathcal O_{C,x}$, $\\mathfrak m=\\mathfrak m_x$, and let $A^\\nu$ be the integral closure of $A_{\\mathrm{red}}$ in its total ring of fractions, the local reduced-normalization construction [def-weil-pbc-reduced-normalization]. There is a canonical isomorphism of $\\kappa$-schemes\n$$\\operatorname{Proj}(\\operatorname{gr}_{\\mathfrak m}A)\\ \\cong\\ \\operatorname{Spec}(A^\\nu/\\mathfrak m A^\\nu).$$\n Writing $C^\\nu\\to C$ for its reduced normalization, this spectrum is canonically $C^\\nu\\times_C\\operatorname{Spec}\\kappa$. The algebra $A^\\nu/\\mathfrak m A^\\nu$ is a separable quadratic $\\kappa$-algebra: it is either $\\kappa\\times\\kappa$ or a separable field extension of $\\kappa$ of degree two. The isomorphism is intrinsic to the pointed local ring and is natural under its isomorphisms; its two points after extending $\\kappa$ to an algebraic closure correspond to the two branches of the normalized completed node. Associated graded rings and Proj are [def-weil-pbc-associated-graded-ring, def-nagata-affine-proj]; spectra are [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBT (remark-quadratic-extension), constructions (2) and (3) and final paragraph, with Tag 0CBU (remark-trivial-quadratic-extension) and Tag 0CBW (lemma-split-node). The omitted equivalence with construction (3) is deliberately left as this local algebra node; this is not a relative normalization/base-change theorem."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-associated-graded-ring",
+  "def-nagata-affine-proj",
+  "def-weil-affine-spectrum",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-separable-node-quadratic-completion] to obtain reducedness, Noetherianity, essential finite type and dimension one for A=O_C,x, together with the nondegenerate quadratic completion. Forget the algebra structure of its equivalence; associativity of multiplication identifies the two written quadratic equations. Use [lem-sfb-nodal-tangent-canonical-grading] for the canonical grading and degree-zero residue isomorphism.",
+   "uses": [
+    "lem-sfb-separable-node-quadratic-completion",
+    "lem-sfb-nodal-tangent-canonical-grading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nodal-quadratic-tangent-comparison] to obtain i:Proj(gr_m A)≅Spec E, normalized on all allowed charts and natural, with a regular parameter f whose chart covers Proj and the quadratic residue alternative. Apply [lem-sfb-nodal-normalized-chart-uniqueness] to prove uniqueness and compatibility with the residue-field structural maps.",
+   "uses": [
+    "lem-sfb-nodal-quadratic-tangent-comparison",
+    "lem-sfb-nodal-normalized-chart-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  },
+  {
+   "text": "Finite type over the field makes C locally Noetherian by [pqf-lem-locnoeth-lft]. Apply [lem-sfb-reduced-normalization-local-fibre] for its canonical lift Spec B→C^ν and cartesian residue square. The universal property of the pullback gives the fibre isomorphism, with both required projection equations. These data form Comparison.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-reduced-normalization-local-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nodal-geometric-branch-square]. Transport its cartesian square along i.symm on the Spec E corner, leaving the other three corners fixed. The induced isomorphism with the pullback is the required geometric branch isomorphism. Its second projection is the pullback equation; its first projection reduces using i.inv≫i.hom=id. Preserve the supplied representative formulas and cardinality two.",
+   "uses": [
+    "lem-sfb-nodal-geometric-branch-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-separable-node-quadratic-completion",
+  "lem-sfb-nodal-tangent-canonical-grading",
+  "lem-sfb-nodal-quadratic-tangent-comparison",
+  "lem-sfb-nodal-normalized-chart-uniqueness",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-reduced-normalization-local-fibre",
+  "lem-sfb-nodal-geometric-branch-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0CBT, 0CBU and 0CBW. Lean assembly of the separate local comparison, scheme-normalization fibre, and geometric branch square, with grading, uniqueness and residue compatibility proved directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tangent directions of a nodal local ring are the two normalization branches and form a separable quadratic algebra over the residue field",
+   "results": "{\"t\": \"2026-10-22T04:03:15Z\", \"tool\": \"leansearch\", \"query\": \"The tangent directions of a nodal local ring are the two normalization branches and form a separable quadratic algebra over the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isSeparable\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"IsLocalRing.ResidueField\", \"instIsSeparableQuotientIdealOfResidueField\", \"Algebra.FormallyUnramified.isSeparable\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\"], \"digest\": \"893925480ad53358\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization maps and projective Weierstrass smooth-point lemmas do not identify the tangent Proj of a node with its normalization fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-22T04:03:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization maps and projective Weierstrass smooth-point lemmas do not identify the tangent Proj of a node with its normalization fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|quadratic.*[Nn]ormali|[Tt]angent.*[Nn]ormali",
+   "results": "{\"t\": \"2026-10-22T04:03:17Z\", \"tool\": \"grep\", \"query\": \"nodal|quadratic.*[Nn]ormali|[Tt]angent.*[Nn]ormali\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization maps and projective Weierstrass smooth-point lemmas do not identify the tangent Proj of a node with its normalization fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a node of a curve the projectivized associated graded ring of the maximal ideal is canonically the spectrum of the normalization modulo the extended maximal ideal, a separable quadratic residue algebra",
+   "results": "{\"t\": \"2026-10-22T04:03:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a node of a curve the projectivized associated graded ring of the maximal ideal is canonically the spectrum of the normalization modulo the extended maximal ideal, a separable quadratic residue algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"WeierstrassCurve.Affine.FunctionField\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq_comap\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"WeierstrassCurve.Projective.Point.mk_point\", \"WeierstrassCurve.Projective.Point.fromAffine_some\"], \"digest\": \"cffd79840f0b2cd5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization maps and projective Weierstrass smooth-point lemmas do not identify the tangent Proj of a node with its normalization fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projective tangent cone of an ordinary double point equals its normalization fibre over the closed point",
+   "results": "{\"t\": \"2026-10-22T04:03:27Z\", \"tool\": \"leanfinder\", \"query\": \"The projective tangent cone of an ordinary double point equals its normalization fibre over the closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.Point.toAffine_of_singular\", \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq_comap\", \"WeierstrassCurve.Projective.nonsingularLift_some\"], \"digest\": \"2863933e114b2871\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization maps and projective Weierstrass smooth-point lemmas do not identify the tangent Proj of a node with its normalization fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|[Tt]angent.*[Nn]ormali|[Nn]ormali.*[Tt]angent",
+   "results": "{\"t\": \"2026-10-22T04:22:05Z\", \"tool\": \"grep\", \"query\": \"nodal|[Tt]angent.*[Nn]ormali|[Nn]ormali.*[Tt]angent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general normalization and Proj charts do not state the nodal tangent-Proj/normalization-fibre isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent directions at a node are the two geometric branches of its normalization",
+   "results": "{\"t\": \"2026-10-22T04:22:05Z\", \"tool\": \"leansearch\", \"query\": \"The tangent directions at a node are the two geometric branches of its normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"tangentConeAt\", \"tangentConeAt_def\", \"tangentConeAt_eq_univ\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"EuclideanGeometry.Sphere.direction_orthRadius\", \"tangentConeAt_closure\"], \"digest\": \"fc6fc51d9fc53aa8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general normalization and Proj charts do not state the nodal tangent-Proj/normalization-fibre isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-22T04:22:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general normalization and Proj charts do not state the nodal tangent-Proj/normalization-fibre isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projectivized tangent cone of a nodal local ring is canonically its normalization fibre",
+   "results": "{\"t\": \"2026-10-22T04:22:17Z\", \"tool\": \"leanfinder\", \"query\": \"The projectivized tangent cone of a nodal local ring is canonically its normalization fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\"], \"digest\": \"438c6b0513bcf26c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general normalization and Proj charts do not state the nodal tangent-Proj/normalization-fibre isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proj associated graded maximal ideal ordinary double point normalization modulo maximal ideal",
+   "results": "{\"t\": \"2026-10-22T04:22:17Z\", \"tool\": \"leanfinder\", \"query\": \"Proj associated graded maximal ideal ordinary double point normalization modulo maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"WeierstrassCurve.Projective.NonsingularLift\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq_comap\"], \"digest\": \"4f0a72c9befa90cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general normalization and Proj charts do not state the nodal tangent-Proj/normalization-fibre isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-branch-double-cover",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices.",
+   "via": [
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-local-tangent-normalization",
+  "worker": "stage1",
+  "summary": "Q36 re-split repair: four independent statement-only arguments replace the long completed-model, denominator/residue, intrinsic fraction, and graded-chart/branch calculations. The original argument is retained verbatim in report.md and mapped to the four new nodes and an existing affine/stalk normalization node. Statement unchanged; assembly is below 3000 characters.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-separable-closed-point-formal-presentation",
+    "why": "Generic formal-completion, local Noetherianity or affine/stalk normalization tool used inside the unchanged nodal tangent argument; it supplies no trace or duality route."
+   },
+   {
+    "node": "lem-trf-normalization-affine-stalk-closure",
+    "why": "Generic formal-completion, local Noetherianity or affine/stalk normalization tool used inside the unchanged nodal tangent argument; it supplies no trace or duality route."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic formal-completion, local Noetherianity or affine/stalk normalization tool used inside the unchanged nodal tangent argument; it supplies no trace or duality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-curve-normalization-completion",
+  "lem-trf-separable-closed-point-formal-presentation",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-normalization-affine-stalk-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-367bf49a6",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-367bf49a6 (reviewer sub-agent of L); spot-checked: Read in full against Stacks curves.tex 0CBT, 0CBU and 0CBW. 0CBT omits the equivalence with construction (3); the item supplies it, and its statement, stmt_deps and lean record are unchanged. The re-split is real. Old steps 1-3 now sit in nodal-completed-graded-model: the a≠0 change of coordinates, normalization completion to L[[t]], m^n=t^nL[[t]], gr≅F⊕tL[t] and the lift f. Steps 5 and 7 (faithfully flat descent of mB=fB, E≅L, residue r/u^n) sit in completed-residue-denominators. Steps 6 and 8 (θ_f well defined, the overlap formula, naturality) sit in graded-normalization-fraction-map. Steps 4, 9 and the permitted-coordinate part of 8 (Proj=D_+(ut), the split or separable-field case, branch labels X=r_iY) sit in quadratic-coefficient-proj-branches. Step 10 is carried by the existing lem-trf-normalization-affine-stalk-closure. The four nodes are of comparable size, none restates the item, and the assembly stays under 3000 characters. I checked all four statements by hand and tested them on X²+Y² over R, X²+XY+Y² and X(X+Y) over F₂, u=(1,0) in F×F, and the double line. Checking the Y′ leading-coefficient clause gives (p−r·r_i)/det, consistent with the clause. I found no duplicates in the DAG. Fix 1: the four new nodes left out of stmt_deps the definition ids they cite inside multi-id brackets; added. Fix 2 (C1/E5): step 5 restricted the reduced normalization of a C that may be non-reduced and non-quasi-compact to the chart without citation; the cited node gives this only for reduced finite-type X. I restored the old step-10 argument through def-weil-pbc-reduced-normalization and def-sc-normalization, wrote out T⊗_S A=B, and added to step 4 a pointer to the finite-type chart needed by the formal-presentation base-change clause. The assembly is now 2966 characters. Batch 5: lem-trf-normalization-affine-stalk-closure is the generic normalization of a reduced finite-type k-scheme (0C3B/0CDV), not part of the trace formula or Poincaré duality, so the citation is accepted, as is the tool_use.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalLocalTangentNormalization",
+  "declaration": "AlgebraicGeometry.NodalLocal.tangent_normalization",
+  "declarations": [
+   "AlgebraicGeometry.NodalLocal.tangent_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalLocalTangentNormalization.lean",
+  "statement": "theorem tangent_normalization {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] (hpure : C.IsPureDimension 1) (x : C) (hx : x ∈ closedPoints C) (hfinite : (f.residueFieldAlgebraMap x).Finite) (hsep : @Algebra.IsSeparable k (C.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra) (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (xbar : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) (hxbar : pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) xbar = x) (hnode : Nonempty (CompletedLocalRing (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) xbar ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1}))) : ∃ (graded : GradedRing (tangentGrading (C.presheaf.stalk x))) (D : Comparison C x), D.IsNatural ∧ D.GeometricBranches (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) xbar hxbar",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The comparison is normalized on every admissible standard chart by in_n(a)/in_1(f)^n ↦ (a/f^n) mod m. Includes local-ring naturality, the canonical scheme-normalization fibre, the split/nonsplit separable quadratic alternatives, and the normalized completed geometric branch comparison. The grading structure is asserted on the actual homogeneous subgroups, never chosen to define the graded ring."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-913d2db67",
+  "group": "NF",
+  "result": "fix",
+  "note": "Statement correct against node and Stacks 0CBT/0CBU/0CBW: all hypotheses match with none added (existential geometric-node hypothesis; ring iso equivalent to an Omega-algebra iso); every conclusion clause stated with all maps pinned (iso over kappa fixed on every allowed chart and unique, normalization-fibre iso with both projections fixed, split/separable-field alternative, naturality under local-ring isomorphisms, two geometric branches with Nat.card 2); edge cases split/self-node/u^2+v^2/char 2/non-rational kappa/double line/empty scheme all handled; no empty definitions; statement verbatim; 2 added stmt_deps are existing nodes; no dep record changed. Advisory: residueFieldAlgebraMap comes from ZetaSeries, outside stmt_deps (project convention); unused proof-dep imports. FIX: proof docstring had corrupted TeX (\\ne -> ' e' so 'b^2-4ac e0', \\nu -> ' u', \\ni/\\not lost letters, four $$ displays broken); fixes/NodalLocalTangentNormalization.lean rebuilds the docstring from the node's 10 proof steps, nothing else changed; lean-record.json keeps the delivered statement; refit_record gives an unchanged record with no refusals; nt_compile --json 30.2 s, exit 0, clean."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 6 new modules vs live item (verbatim def move, IsNatural defeq via IsNaturalIso), item/new node records vs Lean, 3 sorry halves vs Stacks 0CBT/0CDV and nodes"
+ }
+}

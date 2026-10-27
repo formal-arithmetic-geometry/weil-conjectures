@@ -1,0 +1,119 @@
+{
+ "id": "def-sfb-compactification-refinement-component",
+ "kind": "definition",
+ "title": "Canonical component of a compactification refinement",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, $f:X\\to Y$ a scheme morphism, and $c=(i_c,p_c)$ and $d=(i_d,p_d)$ compactifications with quasi-compact open immersions. Let $h:d\\to c$ be a boundary-preserving refinement in the category of [det-nagata-definition-refinement]. For an arbitrary object $K\\in D(\\operatorname{Mod}_{\\Lambda_X})$, let $e_{h,K}:D(i_{c!})K\\to Rh_*D(i_{d!})K$ and $\\gamma_{h,p_c}:R(p_c\\circ h)_*\\xrightarrow{\\sim}Rp_{c*}Rh_*$ be the canonical open-adjunction refinement map and derived direct-image compositor of [def-sf-comp-refinement-data]. Using $F_c=Rp_{c*}D(i_{c!})$ and $F_d=Rp_{d*}D(i_{d!})$ from [def-sfb-module-derived-lower-shriek-compactification], define $\\rho_{h,K}:F_c(K)\\to F_d(K)$ to be the composite of $Rp_{c*}(e_{h,K})$, the component of $\\gamma_{h,p_c}^{-1}$ at $D(i_{d!})K$, and the canonical equality identification $R(p_c\\circ h)_*=Rp_{d*}$ from the refinement triangle. Neither compactification is required to be dense. This is the specified composite on the ordinary ambient derived categories, with no choice of an isomorphism.",
+ "stmt_deps": [
+  "def-sf-comp-refinement-data",
+  "def-sfb-module-derived-lower-shriek-compactification",
+  "det-nagata-definition-refinement"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+  "place": "Part (1): canonical compactification comparison with the identity compactification of a proper morphism."
+ },
+ "proof": [
+  {
+   "text": "The canonical underived equality isomorphism lowerStarCongr, after right derivation, equals the functor equality isomorphism: perform equality induction on the structural triangle, then the derived identity calculation. Thus the displayed composite is precisely the specified canonical component.",
+   "uses": [
+    "def-sf-comp-refinement-data",
+    "def-sfb-module-derived-lower-shriek-compactification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-comp-refinement-data",
+  "def-sfb-module-derived-lower-shriek-compactification"
+ ],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical component map for a boundary-preserving compactification refinement by applying derived pushforward to the open adjunction comparison",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"IsOpenMap.adjunction\", \"TopCat.Presheaf.stalkPushforward\", \"TopCat.Presheaf.pushforward_map_app'\", \"TopCat.Presheaf.toPushforwardOfIso\", \"Topology.IsInducing.adjunction\", \"IsOpenMap.adjunctionNhds\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\"]}",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactification refinement component derived pushforward open adjunction",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpenMap.adjunctionNhds\", \"Topology.IsInducing.adjunction\", \"TopologicalSpace.Opens.adjunction_counit_map_functor\", \"Stonean.stoneCechAdjunction\", \"IsOpenMap.adjunction\", \"Topology.IsInducing.adjunctionNhds\", \"CondensedSet.topCatAdjunctionCounit\", \"CondensedSet.compactlyGeneratedAdjunction\"]}",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactificationRefinementComponent|localizingRefinementMap",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adic-proper-localizing-adjunction-comparison",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-cor-existence-ii-restriction.proof.md (1), canonical comparison of compactifications used in the proper identification; det-sf-comp-coherence-cocycle proof step 4.",
+   "via": [
+    "lem-sfb-adic-proper-localizing-adjunction-comparison",
+    "lem-sfb-adic-localizing-exceptional-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "module": "Sheaf.Paper.CompactificationCoherenceCocycle",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.compactificationRefinementComponent",
+  "statement": "def compactificationRefinementComponent {X Y : Scheme.{u}} {f : X ⟶ Y}\n    {c d : Compactification.BoundaryCompactification f} (h : d ⟶ c)\n    (K : DerivedCategory\n      (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :\n    (rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K ⟶\n      (rightDerivedLowerShriekOfCompactification Λ d.obj.obj).obj K",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing definition at CompactificationCoherenceCocycle.lean:66. This node owns the plain component definition, not the theorem compactification_coherence_cocycle or its existential comparison. Section parameters are universe u, Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u+1}, [MonObj Λ] [IsCommMonObj Λ]. A4 implementation repair: derive lowerStarCongr for the structural transport; equality induction identifies its hom with the former functor eqToIso."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b476485e0",
+  "group": "Q120",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b476485e0",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 72c209e2a250; the main theorem signature is byte-identical. H2 fixed: det-sf-comp-coherence-cocycle removed; stmt_deps = 11 base deps + 4 new def nodes. H13 fixed: sk-prop-sf-existence and sk-def-localizing-closure records identical to live. New nodes: def-sfb-compactification-refinement-component (existing:true on the unchanged CompactificationCoherenceCocycle.lean:66, verbatim; deps def-sf-comp-refinement-data, def-sfb-module-derived-lower-shriek-compactification, det-nagata-definition-refinement); def-sfb-derived-open-lower-shriek-id (existing:true on ProperLowerShriek l.59-68, both decls listed, previously unowned); def-sfb-finite-tor-localizing-closure-of-size (localizingClosureOfSize.{w} of C_T); def-sfb-finite-tor-localizing-lower-shriek-of-size (ObjectProperty.lift of the actual F_c, Prop witness only). None duplicates a live node. Mathematics re-checked: hypotheses match the node; B=C and L=H with u+1 indexing on both sides; inclusion clauses present; e pinned by the refinement normalization (direction typed); b.homEquiv = a(e_M≫f) with the original J; edge cases covered; only sorry; docstrings carry source and blueprint tags. Nothing compiled (no file changed); worker reports clean scompile runs. Advisory: ofIsProper/DenseBoundaryCompactification come from def nodes not cited directly; the direct LocalizingExceptionalAdjoint import is redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2a7ff",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261025T050713-L-3833998",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompactificationCoherenceCocycle + adapted CompactificationRefinementIdentity (byte-identical to reviewed a0dcd) vs live 76c22d22b3a; node JSONs vs live; change record vs computed users; 16 modules (item, adapted, 14 direct importers) compiled exit 0"
+ }
+}

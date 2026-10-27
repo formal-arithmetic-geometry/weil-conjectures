@@ -1,0 +1,276 @@
+{
+ "id": "lem-trf-monoid-completion-coefficient-embedding",
+ "kind": "statement",
+ "title": "Coefficient-limit embedding for cofinal monoid filtrations",
+ "statement": "Let $r\\geq0$ be an integer, let $Q\\subseteq\\mathbf N^r$ be an additive submonoid, and let $L$ be a commutative ring with ideal $\\mathfrak a$. Write $B=L[Q]$ for the ring of finite sums $\\sum_{q\\in Q}c_qz^q$, with $z^qz^{q'}=z^{q+q'}$, and let $A=L[[X_1,\\ldots,X_r]]$ [def-weil-pbc-multivariate-power-series]. Put $|e|=\\sum_i e_i$, $J=\\mathfrak aB+(z^q:q\\in Q\\setminus\\{0\\})$, $I=\\mathfrak aA+(X_1,\\ldots,X_r)A$, and define $j:B\\to A$ by $j(\\sum_qc_qz^q)=\\sum_qc_qX^q$. Assume that $L\\to\\varprojlim_k L/\\mathfrak a^k$ is bijective [def-weil-pbc-adic-completion], that $j(J)\\subseteq I$, and that for every $n\\geq0$ there is $N\\geq n$ with $j^{-1}(I^N)\\subseteq J^n$. Put $T=\\varprojlim_n B/J^n$ [def-weil-pbc-adic-completion], let $\\eta:B\\to T$ be the canonical map, and give $T$ the topology with basic neighborhoods $P_n=\\ker(T\\to B/J^n)$ and $A$ the topology with basic neighborhoods $I^n$. There is a unique continuous $L$-algebra homomorphism $\\iota:T\\to A$ satisfying $\\iota\\eta=j$. It is injective. For every $x=(x_n)_n\\in T$, every choice of representatives $f_n\\in B$ of $x_n$, and every $e\\in\\mathbf N^r$, the coefficient $c_e(\\iota x)\\in L$ is characterized by\n$$c_e(\\iota x)\\equiv c_e(jf_n)\\pmod{\\mathfrak a^k}\\quad(k\\geq1,\\ n\\geq k+|e|).$$\nThis characterization is independent of all representatives. For every $n\\geq0$ one has $\\iota x-jf_n\\in I^n$ and $\\iota(P_n)\\subseteq I^n$. Also $c_e(\\iota x)=0$ for $e\\notin Q$, the sequence $\\eta(f_n)$ converges to $x$, and $\\bigcap_n I^n=0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70 gives completed monoid models only; auxiliary agent algebra, extracting old proof steps 3--5, step 6 first sentence, and step 7 of lem-trf-completed-monoid-support-projection, with the filtration bounds expressed as hypotheses."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Use [def-weil-pbc-adic-completion] to read the assumed injective completion map on $L$: an element in every $\\mathfrak a^k$ has every residue zero and hence is zero. Thus $\\bigcap_k\\mathfrak a^k=0$. Apply [lem-weil-pbc-power-series-combined-ideal-coefficients] with coefficient ring $L$, base ideal $\\mathfrak a$, and $d=r$. It gives $F\\in I^n$ exactly when $c_e(F)\\in\\mathfrak a^{n-|e|}$ for all $|e|<n$. In particular $F\\in\\bigcap_n I^n$ implies $c_e(F)\\in\\mathfrak a^k$ by taking $n=k+|e|$, for every $k\\geq1$. Every coefficient is zero, so $F=0$ by the family definition [def-weil-pbc-multivariate-power-series]. This proves the asserted separation of $A$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), motivates the completed monoid models only; the following coefficient argument is agent-written, using the existing coefficient criterion and the inverse-limit definition (Stacks Tags 00M9, section-completion, and 0317, definition-complete)."
+   }
+  },
+  {
+   "text": "The monomial formula for $j$ preserves sums, constants, and products: in the product, the coefficient at $e$ is the finite sum over $q+q'=e$, in both rings, by [def-weil-pbc-multivariate-power-series]. Since $j(J)\\subseteq I$, applying $j$ to finite sums of products gives $j(J^n)\\subseteq I^n$. Fix $x=(x_n)\\in T$ and representatives $f_n$. Compatibility in [def-weil-pbc-adic-completion] gives $f_m-f_n\\in J^n$ whenever $m\\geq n$. Consequently, for every $e$ and $k\\geq1$, the residues $c_e(jf_n)\\bmod\\mathfrak a^k$ are independent of $n\\geq k+|e|$: compare two indices at their minimum and use step 1. Changing a representative at such an index has the same effect, since its difference lies in $J^n$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), motivates the completed monoid models only; the following coefficient argument is agent-written, using the existing coefficient criterion and the inverse-limit definition (Stacks Tags 00M9, section-completion, and 0317, definition-complete)."
+   }
+  },
+  {
+   "text": "For fixed $e$, set $b_{e,k}=c_e(jf_{k+|e|})\\bmod\\mathfrak a^k$ for $k\\geq1$ and use the unique residue at $k=0$. These residues are compatible: if $l\\geq k\\geq1$, step 2 compares indices $l+|e|$ and $k+|e|$ modulo $\\mathfrak a^k$. The assumed bijection $L\\to\\varprojlim_k L/\\mathfrak a^k$ in [def-weil-pbc-adic-completion] therefore supplies exactly one $c_e(x)\\in L$ with these residues. Define $\\iota(x)=\\sum_e c_e(x)X^e$, an actual coefficient family as in [def-weil-pbc-multivariate-power-series]. Step 2 gives the stated congruence for every allowed index and every choice of representatives. If two coefficient values satisfy all the congruences, their difference belongs to every $\\mathfrak a^k$, so step 1 makes them equal. This proves both the characterization and its independence. For $e\\notin Q$, all $c_e(jf_n)$ vanish; hence $c_e(x)=0$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), motivates the completed monoid models only; the following coefficient argument is agent-written, using the existing coefficient criterion and the inverse-limit definition (Stacks Tags 00M9, section-completion, and 0317, definition-complete)."
+   }
+  },
+  {
+   "text": "Operations in $T$ are componentwise by [def-weil-pbc-adic-completion]. For $x,y\\in T$ represented by $f_n,g_n$, representatives for $x+y$ and $xy$ are $f_n+g_n$ and $f_ng_n$. Fix $e,k$ and take $n\\geq k+|e|$. The congruences of step 3 give $c_e(\\iota(x+y))\\equiv c_e(\\iota x)+c_e(\\iota y)\\pmod{\\mathfrak a^k}$. In the finite convolution for coefficient $e$, each pair $u+v=e$ has $|u|,|v|\\leq|e|$, so the same index gives $c_e(\\iota(xy))\\equiv\\sum_{u+v=e}c_u(\\iota x)c_v(\\iota y)\\pmod{\\mathfrak a^k}$. That sum is the product coefficient by [def-weil-pbc-multivariate-power-series]. Separation in step 1 turns these congruences for all $k$ into equalities. For $x=\\eta(b)$ choose $f_n=b$ for every $n$; step 3 then gives $\\iota\\eta(b)=j(b)$. In particular zero, one, and every scalar are preserved. Thus $\\iota$ is an $L$-algebra homomorphism extending $j$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), motivates the completed monoid models only; the following coefficient argument is agent-written, using the existing coefficient criterion and the inverse-limit definition (Stacks Tags 00M9, section-completion, and 0317, definition-complete)."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and $|e|<n$, and put $k=n-|e|\\geq1$. The coefficient congruence from step 3 applies at the index $n=k+|e|$ itself, giving $c_e(\\iota x-jf_n)\\in\\mathfrak a^{n-|e|}$. The criterion [lem-weil-pbc-power-series-combined-ideal-coefficients], for arbitrary $L$ and $\\mathfrak a$, yields $\\iota x-jf_n\\in I^n$. For $n=0$ this is automatic because $I^0=A$. If $x\\in P_n$, its representative $f_n$ lies in $J^n$ since $x_n=0$ [def-weil-pbc-adic-completion]; step 2 puts $jf_n\\in I^n$, and the just-proved difference gives $\\iota x\\in I^n$. Thus $\\iota(P_n)\\subseteq I^n$ for every $n$.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), motivates the completed monoid models only; the following coefficient argument is agent-written, using the existing coefficient criterion and the inverse-limit definition (Stacks Tags 00M9, section-completion, and 0317, definition-complete)."
+   }
+  },
+  {
+   "text": "If $\\iota x=0$, fix $n$ and choose the assumed $N\\geq n$ with $j^{-1}(I^N)\\subseteq J^n$. Step 5 at index $N$ gives $jf_N\\in I^N$, whence $f_N\\in J^n$. Compatibility of the coordinates of $x$ [def-weil-pbc-adic-completion] says that the image of $f_N$ in $B/J^n$ is $x_n$, so $x_n=0$. This holds for every $n$ and therefore $x=0$. Since $\\iota$ is additive, equality of two images reduces to this zero-kernel assertion by subtraction; hence $\\iota$ is injective.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), motivates the completed monoid models only; the following coefficient argument is agent-written, using the existing coefficient criterion and the inverse-limit definition (Stacks Tags 00M9, section-completion, and 0317, definition-complete)."
+   }
+  },
+  {
+   "text": "The inclusions $\\iota(P_n)\\subseteq I^n$ prove continuity directly: if $y-x\\in P_n$, additivity gives $\\iota(y)-\\iota(x)\\in I^n$, for the basic neighborhoods specified in the statement. For every $m$ and $n\\geq m$, compatibility in [def-weil-pbc-adic-completion] says that $\\eta(f_n)-x$ has zero $m$-th coordinate, so it belongs to $P_m$. This is exactly convergence $\\eta(f_n)\\to x$ for that neighborhood basis. No assertion $P_m=J^mT$, finite generation, or completeness of $T$ for extended ideal powers is being used.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), motivates the completed monoid models only; the following coefficient argument is agent-written, using the existing coefficient criterion and the inverse-limit definition (Stacks Tags 00M9, section-completion, and 0317, definition-complete)."
+   }
+  },
+  {
+   "text": "Let $g:T\\to A$ be any continuous $L$-algebra homomorphism with $g\\eta=j$. Fix $x$ and $h\\geq1$. Continuity at $x$ gives $m$ such that $y-x\\in P_m$ implies $g(y)-g(x)\\in I^h$. Choose $n\\geq m,h$. Step 7 gives $\\eta(f_n)-x\\in P_m$, hence $jf_n-g(x)\\in I^h$. Step 5 gives $\\iota x-jf_n\\in I^n\\subseteq I^h$. Adding shows $\\iota x-g(x)\\in I^h$. This holds for all $h$, so step 1 forces $g(x)=\\iota x$. It proves uniqueness for every $x$ and finishes all the claims.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), motivates the completed monoid models only; the following coefficient argument is agent-written, using the existing coefficient criterion and the inverse-limit definition (Stacks Tags 00M9, section-completion, and 0317, definition-complete)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), motivates the completed monoid models only; the following coefficient argument is agent-written, using the existing coefficient criterion and the inverse-limit definition (Stacks Tags 00M9, section-completion, and 0317, definition-complete)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, MvPowerSeries",
+   "results": "Actual returned candidates: MvPowerSeries.toAdicCompletionInv, MvPowerSeries.toAdicCompletion, MvPowerSeries.toAdicCompletionAlgEquiv, MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply, MvPowerSeries.toAdicCompletionAlgEquiv_apply, MvPowerSeries.toAdicCompletion_coe, MvPowerSeries.coeff_toAdicCompletionInv, MvPowerSeries.coeff_toAdicCompletion_val_apply_out. The polynomial equivalence concerns the variables ideal on the full polynomial ring; lifting to an inverse limit and Noetherian finite-module injectivity do not assert this coefficient-limit embedding for a general cofinal monoid subalgebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an adically complete coefficient ring coefficient limits of compatible monoid algebra polynomials define a unique continuous injective algebra map from the completion into multivariate formal power series",
+   "results": "Actual returned candidates: PowerSeries.aeval_unique, MvPowerSeries.aeval_unique, AdicCompletion.ext_evalₐ, MvPowerSeries.eval₂_unique, AdicCompletion.mkₐ, PowerSeries.eval₂_unique, IsAdicComplete.algHom_ext, MvPowerSeries.eval₂Hom. The polynomial equivalence concerns the variables ideal on the full polynomial ring; lifting to an inverse limit and Noetherian finite-module injectivity do not assert this coefficient-limit embedding for a general cofinal monoid subalgebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toAdicCompletionAlgEquiv|coeff.*(limit|[Cc]ompletion)|completion.*support|support.*completion",
+   "results": "Actual returned candidates: Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean. Read relevant source hits with their file and line; The polynomial equivalence concerns the variables ideal on the full polynomial ring; lifting to an inverse limit and Noetherian finite-module injectivity do not assert this coefficient-limit embedding for a general cofinal monoid subalgebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficientwise construction of a continuous injective homomorphism from completed affine monoid algebra over a complete local ring into power series",
+   "results": "Actual returned candidates: Polynomial.coeToPowerSeries.algHom, PowerSeries.mapAlgHom, MvPowerSeries.mapAlgHom, Polynomial.coeToPowerSeries.algHom_apply, AdicCompletion.mkₐ, PowerSeries.map, MvPowerSeries.algebraMap_apply', MvPowerSeries.map. The polynomial equivalence concerns the variables ideal on the full polynomial ring; lifting to an inverse limit and Noetherian finite-module injectivity do not assert this coefficient-limit embedding for a general cofinal monoid subalgebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the pullback of ideal powers under a monomial embedding is cofinal with the source ideal powers and the coefficient ring is adically complete, compatible polynomial coefficients give an injective continuous map of completions into formal power series",
+   "results": "Actual returned candidates: AdicCompletion.of_injective, AdicCompletion.of_inj, AdicCompletion.of_injective_iff, AdicCompletion.ext_evalₐ, AdicCompletion.map_injective, FormalMultilinearSeries.ofScalars_series_injective, PowerSeries.map_injective, LaurentSeries.exists_powerSeries_of_memIntegers. The polynomial equivalence concerns the variables ideal on the full polynomial ring; lifting to an inverse limit and Noetherian finite-module injectivity do not assert this coefficient-limit embedding for a general cofinal monoid subalgebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftRingHom|liftAlgHom|extend.*[Cc]ontinuous|[Ii]njective.*[Cc]ompletion",
+   "results": "Actual returned candidates: Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/RingHom.lean, Mathlib/RingTheory/AdicCompletion/RingHom.lean, Mathlib/RingTheory/AdicCompletion/RingHom.lean. Read relevant source hits with their file and line; The polynomial equivalence concerns the variables ideal on the full polynomial ring; lifting to an inverse limit and Noetherian finite-module injectivity do not assert this coefficient-limit embedding for a general cofinal monoid subalgebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toAdicCompletionAlgEquiv|coeff.*[Cc]ompletion|map_injective",
+   "results": "Actual search results: Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/Exactness.lean, Mathlib/RingTheory/AdicCompletion/Exactness.lean. Source inspection: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) concerns only the variables ideal of the full polynomial ring; AdicCompletion.map_injective (Exactness.lean:92) assumes Noetherian finite modules; IsAdicComplete.liftRingHom (RingHom.lean:48) requires the target already adically complete. None asserts the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a monoid subalgebra embeds into formal power series by coefficient limits",
+   "results": "Actual search results: Polynomial.coeToPowerSeries, Polynomial.toPowerSeries, Polynomial.coeToPowerSeries.algHom, MvPolynomial.toMvPowerSeries_isDenseInducing, MvPolynomial.coeToMvPowerSeries, MvPolynomial.toMvPowerSeries, AdicCompletion.subalgebra, PowerSeries.algebraMap_eq. Source inspection: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) concerns only the variables ideal of the full polynomial ring; AdicCompletion.map_injective (Exactness.lean:92) assumes Noetherian finite modules; IsAdicComplete.liftRingHom (RingHom.lean:48) requires the target already adically complete. None asserts the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, MvPowerSeries",
+   "results": "Actual search results: MvPowerSeries.toAdicCompletionInv, MvPowerSeries.toAdicCompletion, MvPowerSeries.toAdicCompletionAlgEquiv, MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply, MvPowerSeries.toAdicCompletionAlgEquiv_apply, MvPowerSeries.toAdicCompletion_coe, MvPowerSeries.coeff_toAdicCompletionInv, MvPowerSeries.coeff_toAdicCompletion_val_apply_out. Source inspection: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) concerns only the variables ideal of the full polynomial ring; AdicCompletion.map_injective (Exactness.lean:92) assumes Noetherian finite modules; IsAdicComplete.liftRingHom (RingHom.lean:48) requires the target already adically complete. None asserts the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible monoid algebra residues over an adically complete coefficient ring define an injective continuous map into multivariate formal power series",
+   "results": "Actual search results: FormalMultilinearSeries.ofScalars_series_injective, MvPowerSeries.eval₂Hom, AdicCompletion.of_injective, MvPowerSeries.aeval_unique, MvPowerSeries.eval₂_unique, PowerSeries.aeval_unique, IsAdicComplete.algHom_ext, IsAdicComplete.liftRingHom. Source inspection: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) concerns only the variables ideal of the full polynomial ring; AdicCompletion.map_injective (Exactness.lean:92) assumes Noetherian finite modules; IsAdicComplete.liftRingHom (RingHom.lean:48) requires the target already adically complete. None asserts the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftRingHom|liftAlgHom|toAdicCompletionAlgEquiv|coeff_toAdicCompletion",
+   "results": "Actual search results: Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean. Source inspection: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) concerns only the variables ideal of the full polynomial ring; AdicCompletion.map_injective (Exactness.lean:92) assumes Noetherian finite modules; IsAdicComplete.liftRingHom (RingHom.lean:48) requires the target already adically complete. None asserts the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofinal filtration on a monoid subring of a power series ring gives a coefficientwise extension from its ideal adic completion with injectivity and unique continuity",
+   "results": "Actual search results: IsAdicComplete.StrictMono.liftRingHom, AdicCompletion.subring, LaurentSeries.powerSeries_ext_subring, AdicCompletion.mkₐ, LaurentSeries.exists_powerSeries_of_memIntegers, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.liftRingHom, LaurentSeries.powerSeriesAlgEquiv. Source inspection: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) concerns only the variables ideal of the full polynomial ring; AdicCompletion.map_injective (Exactness.lean:92) assumes Noetherian finite modules; IsAdicComplete.liftRingHom (RingHom.lean:48) requires the target already adically complete. None asserts the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-monoid-support-projection",
+  "date": "2026-10-22",
+  "group": "Q69"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry through the log-regular divisorial and saturation-normality lemmas: the supported-series realization of the completed monoid model in Expose VI 1.6(i)--(ii), printed p. 70, and its module-linear coefficient retraction. Coefficient limits, algebra laws, injectivity, continuity and uniqueness: old steps 3--5 and 7, with support containment from step 6.",
+   "via": [
+    "lem-trf-completed-monoid-support-projection",
+    "lem-trf-log-regular-saturation-normality",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoid-completion-coefficient-embedding",
+  "worker": "stage1",
+  "summary": "Constructed coefficient residues and their unique lifts in the complete coefficient ring; checked finite convolution, approximation, cofinality-based injectivity, continuity and neighborhood-based uniqueness. Reused the existing combined-ideal coefficient criterion; no new nodes and no statement changes.",
+  "blueprint": "Realizes the coefficient-limit, algebra-law, injectivity, support, approximation and uniqueness subargument extracted into this item from steps 3--5 and 7 of lem-trf-completed-monoid-support-projection; remains within the recorded local-term-locality alteration ancestry. ILO VI 1.6 provides motivating completed monoid models only.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Generic coefficient criterion for powers of the combined ideal, applied with base ring L, base ideal a and r variables; the current unit provides no separate statement of this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-5ec0001cf",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-5ec0001cf (reviewer sub-agent of L); spot-checked: Shape: one commit, item and report only, 0 new nodes, statement kept, no SGA, blueprint from/same_as/split_report.blueprint present. review_split.py prints 'no such node' for the three cited nodes, but that is a snapshot symlink artefact; all three exist and I read them. Source: ILO VI 1.6 (PDF p.76) gives only the completed monoid models, so proof_origin agent is right. Stacks section-completion and definition-complete agree with def-weil-pbc-adic-completion. I re-derived all 8 steps. (1) An injective completion map gives ⋂𝔞^k=0; with the combined-ideal criterion (Λ=L, J=𝔞, d=r) this gives ⋂I^n=0. (2) j(J^n)⊆I^n and f_m−f_n∈J^n; the criterion at n≥k+|e|>|e| makes the residues stable. (3) A unique c_e by bijectivity of L→L̂; support outside Q is 0. (4) In the convolution |u|,|v|≤|e|, so one index serves every term; constant representatives give ιη=j. (5) k=n−|e| at index n gives ιx−jf_n∈I^n; x∈P_n gives f_n∈J^n. (6) ιx=0 gives jf_N∈I^N, then f_N∈J^n by cofinality, so x_n=0. (7) Continuity and convergence are correct. (8) Uniqueness follows from continuity at x and ⋂I^h=0. Edge cases: r=0, Q={0}, Q=ℕ^r, 𝔞=0, 𝔞=L, n=0. Not duplicates: lem-trf-filtered-monoid-coefficient-limit (needs an exact J^n description), lem-trf-monoid-completion-coefficients and lem-trf-formal-monoid-length-filtration (Noetherian, finitely generated). The parent's steps 2-3 use only clauses of this statement. Accepted tool_use: lem-weil-pbc-power-series-combined-ideal-coefficients (sk-thm-p1, generic algebra, has a Lean declaration). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonoidCompletionCoefficientEmbedding",
+  "declaration": "AddMonoidAlgebra.monoidCompletion_coefficientEmbedding",
+  "file": "lean/Sheaf/RingTheory/MonoidCompletionCoefficientEmbedding.lean",
+  "statement": "theorem monoidCompletion_coefficientEmbedding (r : ℕ) (Q : AddSubmonoid (Fin r →₀ ℕ)) (L : Type u) [CommRing L] (a : Ideal L) (J : Ideal (AddMonoidAlgebra L Q)) (hJ : J = Ideal.map (algebraMap L (AddMonoidAlgebra L Q)) a ⊔ Ideal.span {b | ∃ q : Q, q ≠ 0 ∧ b = single q (1 : L)}) (I : Ideal (MvPowerSeries (Fin r) L)) (hI : I = Ideal.map (algebraMap L (MvPowerSeries (Fin r) L)) a ⊔ Ideal.span (Set.range (MvPowerSeries.X : Fin r → MvPowerSeries (Fin r) L))) (j : AddMonoidAlgebra L Q →ₐ[L] MvPowerSeries (Fin r) L) (hj : ∀ (q : Q) (c : L), j (single q c) = MvPowerSeries.monomial q.1 c) (hcomplete : Function.Bijective (AdicCompletion.of a L)) (hmap : J ≤ Ideal.comap j.toRingHom I) (hcofinal : ∀ n : ℕ, ∃ N : ℕ, n ≤ N ∧ Ideal.comap j.toRingHom (I ^ N) ≤ J ^ n) : ∃ ι : AdicCompletion J (AddMonoidAlgebra L Q) →ₐ[L] MvPowerSeries (Fin r) L, @Continuous _ _ (⨅ n : ℕ, TopologicalSpace.induced (AdicCompletion.evalₐ J n) ⊥) I.adicTopology ι ∧ (∀ b : AddMonoidAlgebra L Q, ι (AdicCompletion.of J _ b) = j b) ∧ (∀ g : AdicCompletion J (AddMonoidAlgebra L Q) →ₐ[L] MvPowerSeries (Fin r) L, @Continuous _ _ (⨅ n : ℕ, TopologicalSpace.induced (AdicCompletion.evalₐ J n) ⊥) I.adicTopology g → (∀ b : AddMonoidAlgebra L Q, g (AdicCompletion.of J _ b) = j b) → g = ι) ∧ Function.Injective ι ∧ (∀ (x : AdicCompletion J (AddMonoidAlgebra L Q)) (f : ℕ → AddMonoidAlgebra L Q), (∀ n : ℕ, Ideal.Quotient.mk (J ^ n) (f n) = AdicCompletion.evalₐ J n x) → (∀ (e : Fin r →₀ ℕ) (c : L), (∀ (k n : ℕ), 1 ≤ k → k + e.degree ≤ n → c - MvPowerSeries.coeff e (j (f n)) ∈ a ^ k) ↔ c = MvPowerSeries.coeff e (ι x)) ∧ (∀ n : ℕ, ι x - j (f n) ∈ I ^ n) ∧ Filter.Tendsto (fun n : ℕ ↦ AdicCompletion.of J _ (f n)) Filter.atTop (@nhds _ (⨅ n : ℕ, TopologicalSpace.induced (AdicCompletion.evalₐ J n) ⊥) x)) ∧ (∀ (n : ℕ) (x : AdicCompletion J (AddMonoidAlgebra L Q)), AdicCompletion.evalₐ J n x = 0 → ι x ∈ I ^ n) ∧ (∀ (x : AdicCompletion J (AddMonoidAlgebra L Q)) (e : Fin r →₀ ℕ), e ∉ Q → MvPowerSeries.coeff e (ι x) = 0) ∧ (⨅ n : ℕ, I ^ n) = ⊥",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29782e002",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Fresh S2 delivery (only the lean record was added; the node is otherwise unchanged; lean.statement matches the file verbatim). Every hypothesis matches the node: hJ/hI combined ideals, hj fixes the monomial map, hcomplete/hmap/hcofinal are exact, no extra instances. The topology on T is ⨅ induced(evalₐ J n) ⊥, with basis P_n; the target has I.adicTopology. All conclusions are present: existence, ιη=j, unrestricted uniqueness, injectivity, the coefficient iff over all representatives with k≥1 and k+|e|≤n, approximation for all n, convergence, ι(P_n)⊆I^n, support in Q, ⋂I^n=⊥. Steps 1-8 re-derived. Edge cases r=0, n=0, a=⊥/⊤, Q={0} and non-f.g. Q are covered. Not a duplicate of the parent support-projection theorem or monoidCompletion_coefficients (both have stronger hypotheses). Docstrings carry source/blueprint and 8 steps; one sorry, no defs; report sections present. No compile needed (no change)."
+ }
+}

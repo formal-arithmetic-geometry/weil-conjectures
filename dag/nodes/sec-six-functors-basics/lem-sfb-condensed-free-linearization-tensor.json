@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-condensed-free-linearization-tensor",
+ "kind": "statement",
+ "title": "Sheafified free internal modules and the product-tensor linearization",
+ "statement": "Let $A$ be a commutative condensed ring on a small coherent site of profinite sets with finite jointly surjective coverings [sk-def-sfb-condensed-ring, def-weil-size-convention]. Work in internal $A$-modules [sk-def-sfb-module-objects], with internal relative tensor [def-sfb-modobj-relative-tensor]. Write $A[X]$ for the free internal module on a condensed set $X$, with its canonical generalized generators $[x]$, as in [def-sfb-condensed-free-module-adjunction]. Let $E_A$ be the underlying-sheaf-preserving internal-to-section-module equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and use the sheaf tensor structures [det-def-sfb-sheaf-tensor-structure, def-pur-sheaf-tensor-product]. For each condensed set $X$, form the presheaf of $A$-modules $F_X(S)=A(S)[X(S)]$ [def-weil-pbc-free-module], whose restriction maps send $a[x]$ to $a|_T[x|_T]$. There is a canonical isomorphism $E_A(A[X])\\cong F_X^\\#$, where $(-)^\\#$ denotes module sheafification [def-weil-presheaf-modules-sheafification]. Under this isomorphism a morphism $A[X]\\to M$ is uniquely specified by a natural assignment $x\\in X(S)\\mapsto m_x\\in E_A(M)(S)$, with formula $\\sum a_x[x]\\mapsto\\sum a_xm_x$ on the free presheaf. For a map $u:X\\to Y$ the induced map sends $[x]$ to $[u(x)]$; equality of maps out of $A[X]$ is detected on all such generalized generators. For every pair of condensed sets $X,Y$ there are inverse natural internal-module maps\n$$A[X]\\otimes_A A[Y]\\ \\rightleftarrows\\ A[X\\times Y],\\qquad [x]\\otimes[y]\\longleftrightarrow[(x,y)].$$\nThey are the sheafifications, under the internal-to-section tensor comparison [lem-pe-internal-section-tensor-comparison], of the sectionwise free-module tensor maps, commute with all restrictions and maps of $X,Y$, and agree with the canonical generator maps of the fixed free adjunction. For the terminal condensed set $1$, $A[1]\\cong A$ sends $[\\ast]$ to $1$. These identifications respect associators, symmetry and unitors. No claim that $A[X](S)$ is sectionwise free after sheafification is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: extracted internal bar input. Former proof steps 1-2: sectionwise free-module realization, generalized-generator adjunction, free-product/tensor comparison and transfer from internal to section-module sheaves; supporting Stacks Tags 03CY (lemma-sheafification-presheaf-modules) and 0GMW (lemma-sheafification-tensor), sites-modules.tex."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-condensed-free-module-adjunction",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-free-module",
+  "def-pur-sheaf-tensor-product",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put $B_X=F_X^\\#$ and let $i_X:X\\to|B_X|$ send a generalized section to its sheafified basis vector. Apply [lem-trf-free-module-sheaf-universal-property] with $B=A$ and $E=X$ on our small site. It supplies, for every section-module sheaf $N$, the natural bijection $\\operatorname{Hom}_A(B_X,N)\\cong\\operatorname{Hom}(X,|N|)$ and its inverse $\\sum a_x[x]\\mapsto\\sum a_xm_x$. All coefficients are sections of the same ring sheaf $A$; no constancy is required. In particular, this is a statement about maps from a sheafification, not about its sections being free. The construction uses precisely the module-sheafification factorization of [def-weil-presheaf-modules-sheafification].",
+   "uses": [
+    "lem-trf-free-module-sheaf-universal-property",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof: the construction of O_2[F]; Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "Set $P_X=E_A(A[X])$. The fixed adjunction of [def-sfb-condensed-free-module-adjunction] gives $\\operatorname{Hom}(A[X],M)\\cong\\operatorname{Hom}(X,U_AM)$, with restriction along its specified generator map. The equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] is fully faithful and essentially surjective and leaves the underlying sheaves and maps unchanged. Thus for every section-module sheaf $N$ the same restriction map $\\operatorname{Hom}_A(P_X,N)\\to\\operatorname{Hom}(X,|N|)$ is bijective (first for $N=E_A(M)$, then for every $N$ by an isomorphism). Apply the normalized uniqueness clause of [lem-trf-free-module-sheaf-universal-property] to $P_X$ with the image of the fixed generator map: it gives the unique isomorphism $p_X:P_X\\cong B_X$ identifying the generators. Explicitly, the maps in the two directions correspond to the two generator maps; each composite fixes the generators and hence is the identity by injectivity of the appropriate restriction bijection. This also verifies normalization against the fixed adjunction rather than a newly chosen free functor.",
+   "uses": [
+    "def-sfb-condensed-free-module-adjunction",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-trf-free-module-sheaf-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof: the construction of O_2[F]; Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "The bijections just established show that a map $A[X]\\to M$ is uniquely determined by all assignments $x\\in X(S)\\mapsto m_x\\in E_A(M)(S)$ compatible with restrictions. Its expression on $F_X$ is the finite-sum expression in step 1. For $u:X\\to Y$, naturality of the unit in [def-sfb-condensed-free-module-adjunction] says that the induced free map carries $[x]$ to $[u(x)]$. Under $p_X,p_Y$ this is exactly the sheafification of that basis map: [lem-trf-free-module-sheaf-universal-property] makes maps with these generator values equal. It follows that $p_X$ is natural in $X$ and that equality of internal maps out of $A[X]$ is detected on all generalized generators, since the equivalence preserves underlying maps.",
+   "uses": [
+    "def-sfb-condensed-free-module-adjunction",
+    "lem-trf-free-module-sheaf-universal-property",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof: the construction of O_2[F]; Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "For each $S$ define $t_S:F_X(S)\\otimes_{A(S)}F_Y(S)\\to F_{X\\times Y}(S)$ by\n$$(\\sum_xa_x[x])\\otimes(\\sum_yb_y[y])\\longmapsto\\sum_{x,y}a_xb_y[(x,y)].$$\nFinite sums and commutativity of $A(S)$ make this a balanced bilinear rule, so it induces a linear map by [def-weil-pbc-module-tensor-product]. By the free-module definition [def-weil-pbc-free-module], the prescription $[(x,y)]\\mapsto[x]\\otimes[y]$ extends uniquely to a linear map $s_S$ in the other direction. The composites fix each $[(x,y)]$ and each $[x]\\otimes[y]$; expansion of finite sums and generation by pure tensors give $t_Ss_S=1$ and $s_St_S=1$. For a restriction $S'\\to S$, both orders send $(a[x])\\otimes(b[y])$ to $(ab)|_{S'}[(x|_{S'},y|_{S'})]$, since $(ab)|_{S'}=a|_{S'}b|_{S'}$. The inverse maps commute with restrictions by the identical basis calculation. For $u:X\\to X'$ and $v:Y\\to Y'$, the two orders send $[x]\\otimes[y]$ to $[(u(x),v(y))]$. Hence $t,s$ are inverse presheaf maps, natural in both variables, including restrictions with a noninjective map on the basis sets.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, objectwise presheaf tensor definition; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-sites-module-sheafification-tensor] with ring presheaf $A$ and module presheaves $F_X,F_Y$. Because $A$ is already a sheaf, it gives the canonical isomorphism $B_X\\otimes_AB_Y\\cong(F_X\\otimes_{p,A}F_Y)^\\#$. Compose this with the sheafification of $t$ from step 4 to obtain $B_X\\otimes_AB_Y\\cong B_{X\\times Y}$; its inverse is the sheafification of $s$ through the inverse comparison. Now use $p_X,p_Y,p_{X\\times Y}$ and [lem-pe-internal-section-tensor-comparison] to obtain\n$$E_A(A[X]\\otimes_AA[Y])\\cong P_X\\otimes_AP_Y\\cong B_X\\otimes_AB_Y\\cong B_{X\\times Y}\\cong E_A(A[X\\times Y]).$$\nFull faithfulness of $E_A$ lifts this isomorphism and its inverse to the required internal maps. The internal-to-section comparison sends local pure tensors to the same pure tensors. The module-sheafification maps are induced by their presheaf maps, so the displayed maps send $[x]\\otimes[y]$ to $[(x,y)]$ and back. Every factor is natural, by steps 3-4 and the cited comparison statements.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-pe-internal-section-tensor-comparison",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, objectwise presheaf tensor definition; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "For the terminal sheaf $1$, the presheaf $F_1$ is isomorphic to $A$ by $a[\\ast]\\mapsto a$, with inverse $a\\mapsto a[\\ast]$ on every object. These formulas commute with restrictions and are inverse by the unique basis expansion [def-weil-pbc-free-module]. Since $A$ is a sheaf, module sheafification [def-weil-presheaf-modules-sheafification] leaves it canonically isomorphic to itself. Combining this with $p_1$ and the regular-module comparison $E_A(A)\\cong A$ of [lem-pe-internal-section-tensor-comparison] yields $A[1]\\cong A$ with $[\\ast]\\mapsto1$. This includes the zero ring: both sides are its zero module.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, objectwise presheaf tensor definition; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  },
+  {
+   "text": "Check coherence on generators, retaining the canonical associators, symmetry and unitors of [det-def-sfb-sheaf-tensor-structure, def-sfb-modobj-relative-tensor]. The internal-to-section comparison respects these by [lem-pe-internal-section-tensor-comparison]. For associativity both composites, after the product associator, send $([x]\\otimes[y])\\otimes[z]$ to $[(x,(y,z))]$. For symmetry both send $[x]\\otimes[y]$ to $[(y,x)]$. The left unit diagram sends $[\\ast]\\otimes[x]$ to $[x]$ by $1[x]=[x]$, and the right unit diagram sends $[x]\\otimes[\\ast]$ to $[x]$ by $[x]1=[x]$. These checks detect equality: iterating step 5 identifies every parenthesized tensor of free modules with the free module on the corresponding product sheaf, so the displayed tensors are exactly the generalized generators tested in step 3. At the section-module level the checks mean precomposing with the canonical presheaf-tensor-to-sheaf maps; [lem-pc-sites-module-sheafification-tensor] and the uniqueness of module-sheafification factorization [def-weil-presheaf-modules-sheafification] identify these with the stated tensor maps. No surjectivity on sections is used. This proves all coherence identities for the normalized maps.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-sfb-modobj-relative-tensor",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pc-sites-module-sheafification-tensor",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, objectwise presheaf tensor definition; Tag 0GMW, lemma-sheafification-tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-free-module-sheaf-universal-property",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sfb-condensed-free-module-adjunction",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pe-internal-section-tensor-comparison",
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-sfb-modobj-relative-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted formal internal-bar input; assembly from Stacks 04BL, 03CY, 03EK and 0GMW and the existing normalized free-sheaf and internal-section comparison nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The free internal module on a condensed set over a condensed ring is the sheafification of the sectionwise free module and sends products to tensor products",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.free\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor CondensedSet (CondensedMod R)\", \"doc\": \"The functor from the category of condensed sets to the category of condensed $ R $-modules, constructed by composing the free $ R $-module functor (which sends a set to its free module) with the sheaf\"}\n  {\"name\": \"LightCondensed.free\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Functor LightCondSet (LightCondMod R)\", \"doc\": \"The functor from the category of light condensed sets to the category of light condensed $ R $-modules, constructed by applying the free $ R $-module functor to each set in the sheaf and then sheafify\"}\n  {\"name\": \"SheafOfModules.freeFunctor\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"The functor from the category of types to the category of sheaves of $ R $-modules, which sends each index type $ I $ to the free sheaf of $ R $-modules constructed as the coproduct of $ I $-indexed c\"}\n  {\"name\": \"SheafOfModules.freeFunctor_obj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the free sheaf functor maps each index type $I$ to the free sheaf of $R$-modules constructed \"}\n  {\"name\": \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → (LightCondensed.free R).Monoidal\", \"doc\": \"For any commutative ring $ R $, the free module functor from the category of light condensed sets to the category of light condensed $ R $-modules is a monoidal functor. This means it preserves the te\"}\n  {\"name\": \"Condensed.freeAb\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"CategoryTheory.Functor CondensedSet CondensedAb\", \"doc\": \"The functor from the category of condensed sets to the category of condensed abelian groups, constructed by composing the free abelian group functor (which sends a set to its free abelian group) with \"}\n  {\"name\": \"Condensed.profiniteFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the composition of the canonical inclusion functor from profinite spaces to condensed sets and \"}\n  {\"name\": \"PresheafOfModules.freeObj_obj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  (F : CategoryTheory.Functor Cᵒᵖ (Type u)) (X : Cᵒᵖ),\\n  (PresheafOfModules.freeObj F).obj X = (ModuleCat.free ↑(R.obj X)).obj (F.obj X)\", \"doc\": \"Given a category $\\\\mathcal{C}$, a ring presheaf $R: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathbf{Ring}$, and a type-valued presheaf $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathbf{Type}$, the free presheaf of modules \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.FreeMonoidal.μIso (Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean:148-165) is the ordinary sectionwise tensor isomorphism. SheafOfModules.free/freeFunctor (Sheaf/Free.lean:40-64,98-103) uses a constant indexing type, not a varying condensed set. PresheafOfModules.freeAdjunction (Presheaf/Free.lean) constructs the presheaf part only. Condensed.free and LightCondensed monoidality assume an ordinary coefficient ring. Identifying the fixed internal free functor with the sheafification and transporting its normalized tensor maps remains an argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free modules on sheaves of sets over a sheaf of commutative rings preserve products as tensor products",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.FreeMonoidal.μIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Adjunctions\", \"type\": \"(X Y : Type u) : (free R).obj X ⊗ (free R).obj Y ≅ (free R).obj (X ⊗ Y)\", \"doc\": \"For any types $ X $ and $ Y $, the tensor product of the free $ R $-modules generated by $ X $ and $ Y $ is canonically isomorphic to the free $ R $-module generated by the product $ X \\times Y $. This\"}\n  {\"name\": \"ModuleCat.free_δ_freeMk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Adjunctions\", \"type\": \"{X Y : Type u} (z : X ⊗ Y) : δ (free R) _ _ (freeMk z) = freeMk z.1 ⊗ₜ freeMk z.2\", \"doc\": \"For any types $X$ and $Y$ and any element $z$ in their product $X \\times Y$, the coherence isomorphism $\\\\delta$ of the free module functor satisfies $\\\\delta_{\\\\text{free}(X), \\\\text{free}(Y)}(\\\\text{freeM\"}\n  {\"name\": \"Module.Free.tensor\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basis\", \"type\": \": Module.Free S (M ⊗[R] N)\", \"doc\": \"The tensor product of two free modules over a commutative semiring is itself a free module.\"}\n  {\"name\": \"Condensed.free\", \"module\": \"Mathlib.Condensed.Module\", \"type\": \": CondensedSet ⥤ CondensedMod R\", \"doc\": \"The functor from the category of condensed sets to the category of condensed $ R $-modules, constructed by composing the free $ R $-module functor (which sends a set to its free module) with the sheaf\"}\n  {\"name\": \"PresheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \": (Cᵒᵖ ⥤ Type u) ⥤ PresheafOfModules.{u} R\", \"doc\": \"The functor from the category of type-valued presheaves on $\\\\mathcal{C}^\\\\mathrm{op}$ to the category of presheaves of modules over a ring presheaf $R: \\\\mathcal{C}^\\\\mathrm{op} \\\\to \\\\mathbf{Ring}$. For a\"}\n  {\"name\": \"PresheafOfModules.freeObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \"(F : Cᵒᵖ ⥤ Type u) : PresheafOfModules.{u} R\", \"doc\": \"Given a category $\\\\mathcal{C}$, a ring presheaf $R: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathbf{Ring}$, and a type-valued presheaf $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathbf{Type}$, this constructs a presheaf of\"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : SheafOfModules.{u} R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObj_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat}\\n  (M₁ M₂ : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))) (X : Cᵒᵖ),\\n  (PresheafOfModules.Monoidal.tensorObj M₁ M₂).obj X =\\n    CategoryTheory.MonoidalCategoryStruct.\", \"doc\": \"For a category $\\\\mathcal{C}$ and a presheaf $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, the tensor product of two presheaves of modules $M_1$ and $M_2$ over $R$ is defined object-wise. For each\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.FreeMonoidal.μIso (Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean:148-165) is the ordinary sectionwise tensor isomorphism. SheafOfModules.free/freeFunctor (Sheaf/Free.lean:40-64,98-103) uses a constant indexing type, not a varying condensed set. PresheafOfModules.freeAdjunction (Presheaf/Free.lean) constructs the presheaf part only. Condensed.free and LightCondensed monoidality assume an ordinary coefficient ring. Identifying the fixed internal free functor with the sheafification and transporting its normalized tensor maps remains an argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"free\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.freeObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (F : CategoryTheory.Functor Cᵒᵖ (Type u)) : PresheafOfModules R\", \"doc\": \"Given a presheaf of types `F : Cᵒᵖ ⥤ Type u`, this is the presheaf\\nof modules over `R` which sends `X : Cᵒᵖ` to the free `R.obj X`-module on `F.obj X`.\"}\n  {\"name\": \"PresheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type u)) (PresheafOfModules R)\", \"doc\": \"The free presheaf of modules functor `(Cᵒᵖ ⥤ Type u) ⥤ PresheafOfModules.{u} R`.\"}\n  {\"name\": \"PresheafOfModules.free_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (F : CategoryTheory.Functor Cᵒᵖ (Type u)) : (PresheafOfModules.free R).obj F = PresheafOfModules.freeObj F\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeObj_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (F : CategoryTheory.Functor Cᵒᵖ (Type u)) (X : Cᵒᵖ) : (PresheafOfModules.freeObj F).obj X = (ModuleCat.free ↑(R.obj X)).obj (F.obj X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeAdjunctionUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (F : CategoryTheory.Functor Cᵒᵖ (Type u)) : F ⟶ (PresheafOfModules.freeObj F).presheaf.comp (CategoryTheory.forget Ab)\", \"doc\": \"The unit of `PresheafOfModules.freeAdjunction`.\"}\n  {\"name\": \"PresheafOfModules.freeObjDesc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {F : CategoryTheory.Functor Cᵒᵖ (Type u)} {G : PresheafOfModules R} (φ : F ⟶ G.presheaf.comp (CategoryTheory.forget Ab)) : PresheafOfModules.freeObj F ⟶ G\", \"doc\": \"The morphism of presheaves of modules `freeObj F ⟶ G` corresponding to\\na morphism `F ⟶ G.presheaf ⋙ forget _` of presheaves of types.\"}\n  {\"name\": \"PresheafOfModules.freeHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {F : CategoryTheory.Functor Cᵒᵖ (Type u)} {G : PresheafOfModules R} : (PresheafOfModules.freeObj F ⟶ G) ≃ (F ⟶ G.presheaf.comp (CategoryTheory.forget Ab))\", \"doc\": \"The bijection `(freeObj F ⟶ G) ≃ (F ⟶ G.presheaf ⋙ forget _)` when\\n`F` is a presheaf of types and `G` a presheaf of modules.\"}\n  {\"name\": \"PresheafOfModules.freeAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : PresheafOfModules.free R ⊣ (PresheafOfModules.toPresheaf R).comp ((CategoryTheory.Functor.whiskeringRight Cᵒᵖ Ab (Type u)).obj (CategoryTheory.forget Ab))\", \"doc\": \"The free presheaf of modules functor is left adjoint to the forget functor\\n`PresheafOfModules.{u} R ⥤ Cᵒᵖ ⥤ Type u`.\"}\n  {\"name\": \"PresheafOfModules.freeAdjunctionUnit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (F : CategoryTheory.Functor Cᵒᵖ (Type u)) (X : Cᵒᵖ) : (PresheafOfModules.freeAdjunctionUnit R F).app X = TypeCat.ofHom fun x => ModuleCat.freeMk x\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.free_map_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) {F G : CategoryTheory.Functor Cᵒᵖ (Type u)} (φ : F ⟶ G) (X : Cᵒᵖ) : ((PresheafOfModules.free R).map φ).app X = (ModuleCat.free ↑(R.obj X)).map (φ.app X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeObjDesc_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {F : CategoryTheory.Functor Cᵒᵖ (Type u)} {G : PresheafOfModules R} (φ : F ⟶ G.presheaf.comp (CategoryTheory.forget Ab)) (X : Cᵒᵖ) : (PresheafOfModules.freeObjDesc φ).app X = ModuleCat.freeDesc (φ.app X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeAdjunction_homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (F : CategoryTheory.Functor Cᵒᵖ (Type u)) (G : PresheafOfModules R) : (PresheafOfModules.freeAdjunction R).homEquiv F G = PresheafOfModules.freeHomEquiv\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.FreeMonoidal.μIso (Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean:148-165) is the ordinary sectionwise tensor isomorphism. SheafOfModules.free/freeFunctor (Sheaf/Free.lean:40-64,98-103) uses a constant indexing type, not a varying condensed set. PresheafOfModules.freeAdjunction (Presheaf/Free.lean) constructs the presheaf part only. Condensed.free and LightCondensed monoidality assume an ordinary coefficient ring. Identifying the fixed internal free functor with the sheafification and transporting its normalized tensor maps remains an argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*(tensor|prod)|tensor.*free|freeAdjunction",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"129\", \"text\": \"`free I` which is a coproduct indexed by `I` of copies of `R` (thought of as a\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"35\", \"text\": \"`M.fromFreeYonedaCoproduct : M.freeYonedaCoproduct ⟶ M`\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"36\", \"text\": \"where `M.freeYonedaCoproduct` is a coproduct indexed\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"40\", \"text\": \"`PresheafOfModules.isColimitFreeYonedaCoproductsCokernelCofork`\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"139\", \"text\": \"noncomputable abbrev freeYonedaCoproduct : PresheafOfModules.{u} R :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"143\", \"text\": \"canonical inclusion `m.freeYoneda ⟶ M.freeYonedaCoproduct`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"line\": \"91\", \"text\": \"    M.isColimitFreeYonedaCoproductsCokernelCofork\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\", \"line\": \"18\", \"text\": \"`PresheafOfModules.freeAdjunction` shows that this functor is the left\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\", \"line\": \"77\", \"text\": \"/-- The unit of `PresheafOfModules.freeAdjunction`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\", \"line\": \"79\", \"text\": \"noncomputable def freeAdjunctionUnit : F ⟶ (freeObj (R := R) F).presheaf ⋙ forget _ where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\", \"line\": \"88\", \"text\": \"  toFun ψ := freeAdjunctionUnit R F ≫ Functor.whiskerRight ((toPresheaf _).map ψ) _\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\", \"line\": \"94\", \"text\": \"    (h : freeAdjunctionUnit R F ≫ Functor.whiskerRight ((toPresheaf _).map ψ) _ =\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.FreeMonoidal.μIso (Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean:148-165) is the ordinary sectionwise tensor isomorphism. SheafOfModules.free/freeFunctor (Sheaf/Free.lean:40-64,98-103) uses a constant indexing type, not a varying condensed set. PresheafOfModules.freeAdjunction (Presheaf/Free.lean) constructs the presheaf part only. Condensed.free and LightCondensed monoidality assume an ordinary coefficient ring. Identifying the fixed internal free functor with the sheafification and transporting its normalized tensor maps remains an argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of free modules on local sections gives a strong monoidal free functor for a variable ring sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.freeFunctor_obj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the free sheaf functor maps each index type $I$ to the free sheaf of $R$-modules constructed \"}\n  {\"name\": \"SheafOfModules.freeFunctor\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"The functor from the category of types to the category of sheaves of $ R $-modules, which sends each index type $ I $ to the free sheaf of $ R $-modules constructed as the coproduct of $ I $-indexed c\"}\n  {\"name\": \"SheafOfModules.mapFree\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"LightCondensed.free\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Functor LightCondSet (LightCondMod R)\", \"doc\": \"The functor from the category of light condensed sets to the category of light condensed $ R $-modules, constructed by applying the free $ R $-module functor to each set in the sheaf and then sheafify\"}\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → (LightCondensed.free R).Monoidal\", \"doc\": \"For any commutative ring $ R $, the free module functor from the category of light condensed sets to the category of light condensed $ R $-modules is a monoidal functor. This means it preserves the te\"}\n  {\"name\": \"SheafOfModules.freeMap\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a function $ f : I \\\\to J $ between index types, this defines a canonical $ R $-module homomorphism from\"}\n  {\"name\": \"SheafOfModules.freeFunctor_map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For any function $f : X \\to Y$ between index types, the action of the free sheaf functor on $f$ is the morphism of sheaves of $R$-modules induced by $f$, which maps each canonical generator indexed by \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.FreeMonoidal.μIso (Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean:148-165) is the ordinary sectionwise tensor isomorphism. SheafOfModules.free/freeFunctor (Sheaf/Free.lean:40-64,98-103) uses a constant indexing type, not a varying condensed set. PresheafOfModules.freeAdjunction (Presheaf/Free.lean) constructs the presheaf part only. Condensed.free and LightCondensed monoidality assume an ordinary coefficient ring. Identifying the fixed internal free functor with the sheafification and transporting its normalized tensor maps remains an argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free module functor on sheaves of sets over a sheaf of commutative rings tensor product of free modules on product",
+   "results": "Actual returned names/files: SheafOfModules.freeFunctor_obj, SheafOfModules.freeFunctor, SheafOfModules.freeMap, SheafOfModules.free, SheafOfModules.mapFree, SheafOfModules.freeFunctor_map, SheafOfModules.ιFree, SheafOfModules.freeHomEquiv_freeMap; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary ModuleCat.FreeMonoidal.μIso is only sectionwise; SheafOfModules.free has a constant index type, while PresheafOfModules.freeAdjunction has no sheafified internal-module comparison. Condensed.free and LightCondensed monoidality take an ordinary coefficient ring, not a variable condensed ring. The full normalized internal statement requires the assembly proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*(tensor|prod)|tensor.*free|freeAdjunction",
+   "results": "Actual returned names/files: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary ModuleCat.FreeMonoidal.μIso is only sectionwise; SheafOfModules.free has a constant index type, while PresheafOfModules.freeAdjunction has no sheafified internal-module comparison. Condensed.free and LightCondensed monoidality take an ordinary coefficient ring, not a variable condensed ring. The full normalized internal statement requires the assembly proved here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free module on a sheaf of sets for a sheaf of rings preserves products as tensor products",
+   "results": "Actual returned names/files: ModuleCat.FreeMonoidal.μIso, ModuleCat.free_δ_freeMk, PresheafOfModules.free, Condensed.free, PresheafOfModules.freeObj, SheafOfModules.ιFree, SheafOfModules.free, LightCondensed.instMonoidalLightCondSetLightCondModFree; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary ModuleCat.FreeMonoidal.μIso is only sectionwise; SheafOfModules.free has a constant index type, while PresheafOfModules.freeAdjunction has no sheafified internal-module comparison. Condensed.free and LightCondensed monoidality take an ordinary coefficient ring, not a variable condensed ring. The full normalized internal statement requires the assembly proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"free\"",
+   "results": "Actual returned names/files: PresheafOfModules.freeObj, PresheafOfModules.free, PresheafOfModules.free_obj, PresheafOfModules.freeObj_obj, PresheafOfModules.freeAdjunctionUnit, PresheafOfModules.freeObjDesc, PresheafOfModules.freeHomEquiv, PresheafOfModules.freeAdjunction; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary ModuleCat.FreeMonoidal.μIso is only sectionwise; SheafOfModules.free has a constant index type, while PresheafOfModules.freeAdjunction has no sheafified internal-module comparison. Condensed.free and LightCondensed monoidality take an ordinary coefficient ring, not a variable condensed ring. The full normalized internal statement requires the assembly proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a variable condensed ring free sheafification of sectionwise free modules monoidal comparison",
+   "results": "Actual returned names/files: LightCondensed.instMonoidalLightCondSetLightCondModFree, Condensed.free, LightCondensed.free, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction, SheafOfModules.ιFree_mapFree_inv; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary ModuleCat.FreeMonoidal.μIso is only sectionwise; SheafOfModules.free has a constant index type, while PresheafOfModules.freeAdjunction has no sheafified internal-module comparison. Condensed.free and LightCondensed monoidality take an ordinary coefficient ring, not a variable condensed ring. The full normalized internal statement requires the assembly proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-internal-bar-resolution",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, formal internal bar input. Former proof steps 1-2: sectionwise free-module realization, generalized-generator adjunction, free-product/tensor comparison and transfer from internal to section-module sheaves; supporting Stacks Tags 03CY (lemma-sheafification-presheaf-modules) and 0GMW (lemma-sheafification-tensor), sites-modules.tex.",
+   "via": [
+    "lem-sfb-condensed-internal-bar-resolution",
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-free-linearization-tensor",
+  "worker": "stage1",
+  "summary": "Reused the existing free-module-sheaf universal property and both tensor comparisons; gave normalized identification with the fixed internal adjunction, explicit finite-sum tensor inverses and restriction checks, unit normalization, and generator tests of coherence. No new nodes. Corrected doubled TeX escapes and made three already-used notions explicit statement dependencies, without changing mathematical content.",
+  "blueprint": "Realizes the extracted former steps 1-2 of lem-sfb-condensed-internal-bar-resolution supporting paragraph (3), open direct image, in the main-20261015 direct-images proof. Existing ancestry has from.node null and is retained; no chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-free-module-sheaf-universal-property",
+    "why": "Generic construction and normalized universal property of a free module sheaf on a set sheaf, used to identify the fixed free internal module; no inverse-image or trace-formula proof route is used."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic underlying-sheaf-preserving monoidal equivalence for arbitrary internal ring modules, specialized to the condensed site; no derived-completion argument is used."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic tensor/sheafification comparison for two presheaf modules over a commutative ring presheaf; no Picard or semicontinuity argument is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-free-module-sheaf-universal-property",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sites-module-sheafification-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-7923386ba",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-7923386ba (reviewer sub-agent of L); spot-checked: Read the item in full, every cited statement, the trf node's proof, and Stacks sites-modules.tex: 04BL lemma-universal-module (l.5951, free sheaf O[F] with Σf_s[s]↦Σf_s s), 0GMW lemma-sheafification-tensor (l.3606) and 03CY (l.815). No SGA. Statement diff against the O3 base: the only change is three added citations (def-pur-sheaf-tensor-product, def-weil-pbc-free-module, lem-pe-internal-section-tensor-comparison) for notions the text already used; no hypothesis or conclusion changed, and the lem-pe comparison is canonical, fixed on pure tensors. Closure check: no cycle. No repair note for this item, so the re-split rule does not apply. Zero new nodes. Steps: (1) the trf free-sheaf lemma with B=A, E=X, whose hypotheses hold. (2) Adjunction unit plus E_A fully faithful, essentially surjective and keeping underlying sheaves, then normalized uniqueness, gives p_X; implicitly A_sec=A for a condensed ring, which is elementary. (3) Detection on generalized generators and naturality of p_X. (4) Explicit inverse sectionwise maps t and s, balanced because A(S) is commutative; I checked restrictions with merging basis elements and naturality. (5) lem-pc with O=A a sheaf, then the lem-pe monoidal comparison; pure tensors are tracked. (6) F_1≅A, a sheaf is its own sheafification, and lem-pe's regular-module clause, with [*]↦1. (7) Coherence checked on generators through iterated step 5 and the lem-pe coherence clause. Edge cases: A=0; X=∅ (X(∅)=* but A(∅)=0); X=Y=1; representable S,T; infinite X(S). No duplicate: the finite-free tensor nodes (sfb-monoidal-finite-free-transport, sfb-relative-tensor-finite-free-coordinates, sc-tensor-product-free-basis) are special cases. Batch 5: lem-trf-free-module-sheaf-universal-property is the generic Stacks 04BL free-module-sheaf universal property on any small site; its proof uses only three generic definitions, and its 120-node closure contains no other trace-formula or Poincaré-duality node and no assumption leaf. It is neither assumption nor part of their proofs, so accepted. The tool uses of lem-pe-internal-section-tensor-comparison and lem-pc-sites-module-sheafification-tensor are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedFreeLinearizationTensor",
+  "declaration": "Profinite.CondensedFreeLinearization.exists_comparison",
+  "declarations": [
+   "Profinite.CondensedFreeLinearization.coefficients",
+   "Profinite.CondensedFreeLinearization.sections",
+   "Profinite.CondensedFreeLinearization.presheafFree",
+   "Profinite.CondensedFreeLinearization.sheafFree",
+   "Profinite.CondensedFreeLinearization.generator",
+   "Profinite.CondensedFreeLinearization.sheafify",
+   "Profinite.CondensedFreeLinearization.restrictGenerators",
+   "Profinite.CondensedFreeLinearization.Comparison",
+   "Profinite.CondensedFreeLinearization.exists_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedFreeLinearizationTensor.lean",
+  "statement": "theorem exists_comparison : Nonempty (Comparison R)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The comparison specification retains the normalized natural linearization, finite-sum universal property, sectionwise tensor isomorphism, both sheafification comparisons, the internal tensor and unit isomorphisms, generator formulas, naturality, associativity, symmetry and both unit identities. All helper definitions are transparent reuses of the recorded constructions; the only postponed theorem is exists_comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-889a7f3d7",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Every node clause is in the Comparison fields: the natural linearization fixed on the adjunction-unit generators, the bijective generator restriction, the finite-sum formula, map_generator and generator_ext, presheafTensor equal to μIso hom/inv at each S, sectionTensor fixed by comparison_sectionTmul, sheafTensor (0GMW) fixed on sheafified pure tensors, tensor with both generator formulas, tensor_sheafification (types of all 5 factors checked), naturality in X and Y, unit with [*]↦regularOne, and associativity/symmetry/unit laws checked against the strong-monoidal axioms. ⊗ on set-valued sheaves is the cartesian one ((x,y) and μIso typecheck), despite the global localized instance from lem-pe. No free data and no hollow def; only exists_comparison is sorry. No added hypotheses; universes are those of the fixed free adjunction. Statement verbatim, node changed only in lean, docstrings and report sections present. Edge cases checked: zero ring, empty S, empty or terminal X, infinite X(S), merging restrictions. Advisory: onSections/pureTensor/regularOne are plain defs owned by the downstream theorem lem-sfb-condensed-internal-bar-resolution; SheafFreeModule.*/freeModuleUnit/sectionModule owners are not in stmt_deps; the import is forced by the free/freeAdjunction placement; suggest extending def-sfb-condensed-free-module-adjunction's record. Pre-existing: the bar-resolution theorem cannot import this item in its own module at stage 3. No file changed, no compile run."
+ }
+}

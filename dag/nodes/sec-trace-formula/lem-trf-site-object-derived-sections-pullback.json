@@ -29,11 +29,9 @@
    }
   },
   {
-   "text": "Both abelian sheaf categories have enough injectives by the site-sheaf theorem; the sites are small in the stated universe. Choose an integer $a$ below the cohomology of $M$. The bounded-below injective-representative theorem gives a complex $I^\\bullet$ of injectives with $I^n=0$ for $n<a$ and $QI^\\bullet\\cong M$. By step 1, $LI^\\bullet$ is bounded below with the same lower bound and represents $LM$. The right-derived injective-computation theorem, applied to the additive evaluation functors on both sites, supplies the ordinary derived sections and their natural comparison units. In particular its injective-complex clause gives $Q\\Gamma(u(U),I^\\bullet)\\xrightarrow{\\sim}R\\Gamma(u(U),M)$.",
+   "text": "Choose $a$ below the cohomology of $M$. Apply [lem-trf-site-injective-sections-model] with the given small sites, $u$, $U$, $M$ and $a$. It supplies $(I,\\rho)$, its exact inverse-image representative $LI$, and the ordinary computation isomorphisms $a_{I,\\rho}$ and $b_{I,\\rho}$. This uses no assertion that $LI$ is injective: its terms are evaluation-acyclic.",
    "uses": [
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-right-derived-plus-injective"
+    "lem-trf-site-injective-sections-model"
    ],
    "elementary": false,
    "source": {
@@ -42,23 +40,18 @@
    }
   },
   {
-   "text": "For each $n$, apply the pulled-back-injective acyclicity theorem to $I^n$: its hypotheses are precisely continuity and cocontinuity of $u$ and injectivity of $I^n$, so $H^p(U,LI^n)=0$ for all $p>0$. Evaluation $\\Gamma(U,-)$ is additive and left exact by the site-cohomology definition. Hence the acyclic-complex unit theorem (Leray) applied to the bounded-below complex $LI^\\bullet$ gives a canonical isomorphism $Q\\Gamma(U,LI^\\bullet)\\xrightarrow{\\sim}R\\Gamma(U,LM)$. The maps $e_{I^n}$ of step 1 form an isomorphism of complexes, since naturality applied to $d_I^n$ gives $e_{I^{n+1}}\\Gamma(U,Ld_I^n)=\\Gamma(u(U),d_I^n)e_{I^n}$. Combining its localization with the two computation isomorphisms gives the asserted isomorphism from $R\\Gamma(U,LM)$ to $R\\Gamma(u(U),M)$.",
-   "uses": [
-    "lem-trf-site-pullback-injective-evaluation-acyclic",
-    "def-weil-pbc-sites-and-cohomology",
-    "src-right-derived-functor-plus-acyclic-unit"
-   ],
-   "elementary": false,
+   "text": "The identities $e_{I^n}$ from step 1 commute with differentials: $e_{I^{n+1}}\\Gamma(U,Ld_I^n)=\\Gamma(u(U),d_I^n)e_{I^n}$. They give an isomorphism of complexes $e_I:\\Gamma(U,LI)\\cong\\Gamma(u(U),I)$. Therefore $c_M=b_{I,\\rho}\\circ Q(e_I^{-1})\\circ a_{I,\\rho}^{-1}$ is an isomorphism $R\\Gamma(u(U),M)\\to R\\Gamma(U,LM)$. Its inverse has the direction in the statement.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0DD8, first proof sentence, using 0D6X and Leray acyclicity Tag 015E."
    }
   },
   {
-   "text": "To specify the arrow, let $r:LI^\\bullet\\to J^\\bullet$ be a bounded-below injective replacement. The usual derived pullback of sections is represented by $\\Gamma(u(U),I^\\bullet)\\xrightarrow{e_{I^\\bullet}^{-1}}\\Gamma(U,LI^\\bullet)\\xrightarrow{\\Gamma(U,r)}\\Gamma(U,J^\\bullet)$. The second arrow is exactly the acyclic-complex comparison used in step 3, by naturality of the derived comparison unit with respect to $r$ and its injective-complex normalization. Thus the isomorphism of step 3 is the inverse of this canonical pullback, in the direction written in the statement. The same naturality and the naturality of $e$ give naturality in $M$: comparison units commute with coefficient maps, and their inverses do so as well. The uniqueness clause for right derived functors identifies these constructions after any change of injective representatives, so the conclusion concerns the ordinary derived-section functors, with no choice of a new cohomology theory.",
+   "text": "Apply [lem-trf-site-section-pullback-normalization] with $K=I$. It gives $\\tau_{QI}\\circ\\alpha^{u(U)}_I=\\alpha^U_{LI}\\circ Q(e_I^{-1})$. Naturality for $\\rho:QI\\cong M$ says $\\tau_M\\circ R\\Gamma(u(U),\\rho)=R\\Gamma(U,L\\rho)\\circ\\tau_{QI}$. Composing the first identity with $R\\Gamma(U,L\\rho)$ therefore gives $\\tau_M\\circ a_{I,\\rho}=b_{I,\\rho}\\circ Q(e_I^{-1})$. Thus $c_M=\\tau_M$, the ordinary canonical pullback of sections, and the required comparison is $\\tau_M^{-1}$. The cited normalization supplies independence of representatives and derived-functor choices. Its naturality for every derived coefficient morphism passes to the inverse.",
    "uses": [
-    "lem-weil-pbc-right-derived-plus-injective",
-    "src-right-derived-functor-plus-acyclic-unit"
+    "lem-trf-site-section-pullback-normalization"
    ],
    "elementary": false,
    "source": {
@@ -70,17 +63,13 @@
  "proof_deps": [
   "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
   "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "lem-trf-site-pullback-injective-evaluation-acyclic",
-  "def-weil-pbc-sites-and-cohomology",
-  "src-right-derived-functor-plus-acyclic-unit"
+  "lem-trf-site-injective-sections-model",
+  "lem-trf-site-section-pullback-normalization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0DD8, lemma-pullback-same-cohomology, bounded-below part (1): injective representative, 0D6X acyclicity, and Leray 015E; canonical-map and naturality details expanded using the natural right-derived comparison unit."
+  "place": "Tag 0DD8, bounded-below part (1), first proof sentence; injective-model and canonical-map arguments delegated to two statement-only nodes, with the section identity and inverse-isomorphism assembly explicit."
  },
  "mathlib_searches": [
   {
@@ -185,10 +174,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-site-object-derived-sections-pullback",
   "worker": "stage1",
-  "summary": "Kept the mathematical statement and supplied the missing cocontinuity definition citation. Proved the bounded-below comparison by the precomposition formula, an injective representative, pulled-back-injective evaluation acyclicity (one new statement-only 0D6X node), and Leray. Identified the canonical arrow as the inverse of the usual derived pullback of sections and checked naturality through comparison units. No SGA route and no finite-connected-limit or total-acyclicity assumption.",
+  "summary": "Repair of the live-DAG promotion return after the batch5 re-split: compare the retained two-node split with the current live parent and reread all current cited statements. Preserve the unchanged statement and resolution/acyclicity route. Make transport of the canonical pullback along rho explicit in step 4, eliminate the unused injective-replacement choice in the parent assembly, and remove the now-unused direct acyclic-unit tool declaration. The two statement-only tasks and their genuine logged searches are retained; the parent assembles them in fewer than 3000 characters.",
   "blueprint": "Realizes the inherited normal-cone/Orgogozo first-descent ph/etale comparison, through the proper small/big etale comparison, at the objectwise 0DD8 derived-section input. The current main-20261015 sk-i-curve-zero unit and historical ancestry are retained.",
   "tool_uses": [
    {
@@ -198,10 +187,6 @@
    {
     "node": "lem-pe-constant-left-module-inverse-image",
     "why": "Generic geometric inverse-image exactness specialized to integer modules, equivalently abelian sheaves; it supplies termwise derived inverse image, not a replacement of a unit proof step."
-   },
-   {
-    "node": "src-right-derived-functor-plus-acyclic-unit",
-    "why": "Generic Leray comparison unit for any bounded-below complex of evaluation-acyclic objects; this is the homological tool expressly used in the 0DD8 proof."
    }
   ]
  },
@@ -211,12 +196,12 @@
   "src-right-derived-functor-plus-acyclic-unit"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q71-1776876ba",
-  "group": "Q71",
+  "reviewer": "NT-cc-Q121-d553e9015",
+  "group": "Q121",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q71-1776876ba (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, cited DAG statements, Stacks Tags 0D6X/0DD8, Sites 00XR/00YV, and Derived Categories 015E/05TI. Verified hypotheses, coefficient category, variance, canonical comparison direction, edge cases, Mathlib searches, duplicate/cycle absence, and ordinary derived route compliance. All proof steps are under 2000 characters and contain no hidden lemma requiring extraction. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-d553e9015 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This re-delivery follows a live-DAG promotion return and repeats the re-split that passed at head 9b0556b6. Compared with that head, the two new nodes (lem-trf-site-injective-sections-model, lem-trf-site-section-pullback-normalization) are byte-identical as JSON. The item changed only in step 4, the split_report summary and tool_uses. Statement, stmt_deps, source, blueprint and the Lean record are unchanged. The parent proof is now 714+359+365+642 = 2080 chars against the old 3138, and the new statements are 1895 and 2334 chars, so they are of comparable size. Argument accounting: old step 1 is kept verbatim; old steps 2-3 (injective representative, 0D6X termwise acyclicity, Leray) are now the model node; the e-chain isomorphism stays as elementary step 3; old step 4 is now the normalization node. Nothing was dropped. Neither new node restates the item: the model node never compares its two models, and the normalization node never claims invertibility. I re-read the cited statements on this snapshot: dplus-injective-representative(1), site-sheaves-enough-injectives, right-derived-plus-injective (1)-(3), the 0D6X node site-pullback-injective-evaluation-acyclic, the acyclic-unit node, the continuous-cocontinuous topos adjunction (g^{-1} is precomposition) and constant-left-module inverse image (exact, specialised to Lambda = Z). The model node holds by these results plus naturality of alpha. For the normalization node, tau exists uniquely by the Kan property with beta_K = alpha^U_{LK} Q(e_K^{-1}). The replacement formula is naturality of alpha^U along r, with Qr invertible, and is well typed. New step 4 is correct: (i) the identity at QI and (ii) naturality of tau along rho give tau_M a = R Gamma(U,L rho) tau_{QI} alpha_I = b Q(e^{-1}), so c_M = tau_M and the comparison is tau_M^{-1}, matching the Lean record e.inv = pullback. The stale src-right-derived-functor-plus-acyclic-unit entry was removed from tool_uses; the accepted tool uses are the two step-1 nodes. Source checked: Stacks 0DD8 (1), sites-cohomology.tex; its bounded-below proof is injective complex + 0D6X + Leray, so the coefficients (Ab) and g^{-1} match. Edge cases checked: u = id, M = 0, a sheaf in degree 0, negative a, r = id. Duplicate search with rg -L for 0DD8, 0D6X and lemma-pullback-same-cohomology: module-pullback-injective-section-acyclic (module Ext version) and continuous-cocontinuous-derived-shriek are not duplicates. No cycle and no SGA citation."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.Sites.ObjectDerivedSectionsPullback",
@@ -249,5 +234,16 @@
   "result": "pass",
   "note": "Every hypothesis and clause matches Stacks 0DD8(1), bounded-below case: IsSiteForCoverings sites in common universe u; continuity is exactly hcover and hpullback (00WV), with no global finite-limit assumption; Mathlib IsCocontinuous (dependency part 1 only); g^-1 is Mathlib sheafPushforwardContinuous precomposition on Ab(D)->Ab(C), lifted to D+ by mapDerivedCategoryPlus; RGamma is the rightDerivedFunctorPlus of sheafSections; result is a natural iso of functors on DerivedCategory.Plus in the stated direction, with e.inv = pullback, the canonical rightDerivedFunctorPlusBaseChange of the literal identity on sections. No hollow data: sorryAx enters only through the named Prop helpers continuous (00WW) and inverseImage_exact (H5 pattern); the recorded siteContinuous_pushforward_isSheaf uses the old strict-composition site convention and is unusable here. Statement field verbatim, all 10 declarations present, node diff adds only the lean record, docstrings carry source, blueprint and proof steps, lines <=100, autoImplicit off. nt_compile --json on the snapshot module: clean, 4.6 s; an error probe confirmed the tool reports errors. Second reading is a worker self-check that matches each clause (information only)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

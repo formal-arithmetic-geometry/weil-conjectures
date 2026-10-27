@@ -1,0 +1,218 @@
+{
+ "id": "lem-sfb-group-finite-translate-cover",
+ "kind": "statement",
+ "title": "Finite translates of a fibrewise nonempty open in a smooth group space",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] and let $p:G\\to S$ be a smooth separated group algebraic space of finite presentation [def-trf-algebraic-space, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. The multiplication, inverse and identity are morphisms over $S$ satisfying the group identities; commutativity is not assumed. Smoothness and local finite presentation are tested on etale scheme charts; finite presentation additionally means quasi-compact and quasi-separated, and separated means the diagonal is a closed immersion. Suppose every geometric fibre is integral (reduced, irreducible and nonempty). Let $V\\subseteq G$ be a quasi-compact open subspace [def-a1-space-open-subspace] meeting every geometric fibre. There is a jointly surjective etale family of schemes $S_a\\to S$ [def-weil-etale-morphism] such that for each $a$ there are finitely many sections $g_{a,1},\\ldots,g_{a,n_a}\\in G(S_a)$ with\n$$G_{S_a}=\\bigcup_{j=1}^{n_a}g_{a,j}V_{S_a}.$$\nHere $gV$ is the image of $V$ by the automorphism $x\\mapsto gx$, whose inverse is $x\\mapsto g^{-1}x$. No schematicness of $G$ or $V$ is assumed. On an empty base the covering family may be empty.",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 4.6, printed p.144, finite-translate argument for a smooth group space: constructible bad tuples, fibre codimension bound, finite-type approximation of the base, and a section of the complementary open after etale localisation. This is its group-space input, separated from Picard geometry; integral fibres suffice for the codimension estimate. Primary Numdam PDF read online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-a1-space-open-subspace",
+  "def-weil-etale-morphism",
+  "def-sfb-smooth-integral-group-space"
+ ],
+ "proof": [
+  {
+   "text": "The empty base is handled by the empty family. Otherwise fix $s\\in S$ and apply [lem-sfb-group-open-arithmetic-model]. It gives an affine neighbourhood $U$ of $s$ and a group/open pair $(H,V_0)$ over a nonempty finite-type arithmetic affine $T$, whose pullback is $(G|_U,V|_U)$, with integral geometric fibres of constant dimension $d$. Put $D=\\dim T$ and $n=d+D+1$.",
+   "uses": [
+    "lem-sfb-group-open-arithmetic-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 4.6, printed p.144: reduction to finite-type arithmetic base"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-translate-bad-tuple-dimension] to $(H,V_0)$ and $n$. It supplies $X=H^{\\times_T n}$, smooth separated of finite presentation with nonempty pure $r=nd$-dimensional fibres, and a constructible bad locus $Z_n$. Its geometric-fibre closures have dimension at most $nd-n+d=r-(D+1)$. The bad condition is explicitly the existence of a point missed by every translate, not just failure to cover rational points over the residue field.",
+   "uses": [
+    "lem-sfb-translate-bad-tuple-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 4.6, printed p.144: constructible bad tuples and codimension at least n-d"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-constructible-closure-fibre-avoidance] with $c=D+1>D$. The open $W=X\\setminus\\overline{Z_n}$ is smooth and surjective over $T$. In particular it has no bad geometric tuples. Pull back $W$ to $U$; smoothness and surjectivity persist by [lem-sfb-stack-chartwise-smooth-etale-calculus].",
+   "uses": [
+    "lem-sfb-constructible-closure-fibre-avoidance",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 4.6, printed p.144: closure of the bad locus misses part of every fibre"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-space-cover-etale-sections] to $W\\times_TU\\to U$. Its jointly surjective etale scheme family $U_a\\to U$ has lifts to this space, hence to $X\\times_TU$. The $n$ projections are sections $g_{a,j}\\in G(U_a)$. Every geometric tuple on $U_a$ lies in $W$ and therefore outside $Z_n$, so Step 2 says that its translates cover the entire geometric fibre.",
+   "uses": [
+    "lem-sfb-smooth-space-cover-etale-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 4.6, printed p.144: section of the complementary smooth open after etale localization"
+   }
+  },
+  {
+   "text": "If the union of these open translates in $G_{U_a}$ were not all of it, a point outside the union would, over an algebraic closure of its residue field, give a missed geometric point, contrary to Step 4. Thus $G_{U_a}=\\bigcup_jg_{a,j}V_{U_a}$. Translation is an automorphism since the composites with translation by $g_{a,j}^{-1}$ are the identity by the group identities; no commutativity is used. Carry this out for every $s$. The composites $U_a\\to U\\hookrightarrow S$ are etale by [lem-sfb-stack-chartwise-smooth-etale-calculus] and their images cover $S$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 4.6, printed p.144: translate-cover conclusion and assembly over S"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-group-open-arithmetic-model",
+  "lem-sfb-translate-bad-tuple-dimension",
+  "lem-sfb-constructible-closure-fibre-avoidance",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-smooth-space-cover-etale-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 4.6, printed p.144, following the primary Numdam text read online; local PDF WANTED; group-space and noncommutative form made explicit by Q99"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated finitely presented group algebraic space with geometrically integral fibres and a quasi compact open meeting every fibre is etale locally covered by finitely many translates of that open by sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite tuples of sections of a smooth relative group can be chosen after etale base change so their translates of a fibrewise nonempty open cover the whole group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"Topology.IsQuotientMap.trivializationOfVAddDisjoint_baseSet\", \"module\": \"Mathlib.Topology.Covering.Quotient\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] {f : E → X} {G : Type u_3}\\n  [inst_2 : AddGroup G] [inst_3 : AddAction G E] (hf : Topology.IsQuotientMap f) [inst_4 : ContinuousConstVAdd G E]\\n  (hfG : ∀ {e₁ e₂ : E}, f e₁ = f e₂ ↔ e₁ ∈ AddAction.orbit G e₂) [i\", \"doc\": \"Given a quotient map $ f : E → X $ induced by a continuous discrete additive group action $ G $ on $ E $, where fibers of $ f $ are $ G $-orbits and nontrivial group translates of any open set $ U ⊆ E\"}\n  {\"name\": \"smoothPresheafCommGroup\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Presheaf CommGrpCat.{u} (TopCat.of M)\", \"doc\": \"A presheaf on the topological space $ M $ where for each open set $ U $, the sections are smooth maps from $ U $ to a commutative Lie group $ A $, forming a commutative group under pointwise multiplic\"}\n  {\"name\": \"smoothSheafCommGroup\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf CommGrpCat.{u} (TopCat.of M)\", \"doc\": \"The sheaf on a topological manifold $ M $, taking values in the category of commutative groups, where sections over open subsets are smooth maps to a commutative Lie group $ A $, forming commutative g\"}\n  {\"name\": \"ContMDiffOn.sum_section\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"{s : Finset ι} (hs : ∀ i ∈ s, ContMDiffOn I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (t i x)) u) :\\n  ContMDiffOn I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (∑ i ∈ s, (t i x))) u\", \"doc\": \"Given a finite set $ s $ of indices and a family of smooth sections $ t_i $ over an open set $ u $ in a vector bundle, if each section $ t_i $ is $ C^n $-differentiable on $ u $, then the sum $ \\\\sum_{\"}\n  {\"name\": \"MDifferentiableWithinAt.change_section_trivialization\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.MDifferentiable\", \"type\": \"{e : Trivialization F TotalSpace.proj} [MemTrivializationAtlas e] {e' : Trivialization F TotalSpace.proj}\\n  [MemTrivializationAtlas e'] {f : M → TotalSpace F E} {s : Set M} {x₀ : M}\\n  (hf : MDifferentiableWithinAt IM IB (π F E ∘ f) s x₀)\\n  (he'f : MDifferentiableWithinAt IM 𝓘(𝕜, F) (fun x ↦ (e (f x)\", \"doc\": \"If a section of a smooth vector bundle is differentiable within a set $S$ at a point $x_0$ with respect to one trivialization and the projection is differentiable, then it remains differentiable withi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"translate\", \"cover\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"compact_covered_by_add_left_translates\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \" {G : Type u_1} [TopologicalSpace G] [AddGroup G] [IsTopologicalAddGroup G] {K V : Set G} (hK : IsCompact K) (hV : (interior V).Nonempty) : ∃ t, K ⊆ ⋃ g ∈ t, (fun x => g + x) ⁻¹' V\", \"doc\": \"A compact set is covered by finitely many left additive translates of a set\\nwith non-empty interior.\"}\n  {\"name\": \"compact_covered_by_mul_left_translates\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \" {G : Type u_1} [TopologicalSpace G] [Group G] [IsTopologicalGroup G] {K V : Set G} (hK : IsCompact K) (hV : (interior V).Nonempty) : ∃ t, K ⊆ ⋃ g ∈ t, (fun x => g * x) ⁻¹' V\", \"doc\": \"A compact set is covered by finitely many left multiplicative translates of a set\\nwith non-empty interior.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "grep",
+   "query": "translate.*cover|cover.*translate|AlgebraicSpace",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/Group/OpenMapping.lean\", \"line\": \"44\", \"text\": \"  countably many translates of `V`, say `gᵢ V`. Let also `Kₙ` be a sequence of compact sets covering\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Basic.lean\", \"line\": \"1301\", \"text\": \"/-- A compact set is covered by finitely many left multiplicative translates of a set\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Basic.lean\", \"line\": \"1304\", \"text\": \"  /-- A compact set is covered by finitely many left additive translates of a set\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Basic.lean\", \"line\": \"1306\", \"text\": \"theorem compact_covered_by_mul_left_translates {K V : Set G} (hK : IsCompact K)\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Measure.lean\", \"line\": \"596\", \"text\": \"    compact_covered_by_mul_left_translates hK hne\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Measure.lean\", \"line\": \"644\", \"text\": \"    compact_covered_by_mul_left_translates hK h'U\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Basic.lean\", \"line\": \"23\", \"text\": \"number of left-translates of `U` that are needed to cover `K` (`index` in the formalization).\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Basic.lean\", \"line\": \"91\", \"text\": \"  it is the smallest number of (left) translates of `V` that is necessary to cover `K`.\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Basic.lean\", \"line\": \"92\", \"text\": \"  It is defined to be 0 if no finite number of translates cover `K`. -/\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Basic.lean\", \"line\": \"153\", \"text\": \"  rcases compact_covered_by_mul_left_translates hK hV with ⟨t, ht⟩; exact ⟨t.card, t, ht, rfl⟩\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Content.lean\", \"line\": \"213\", \"text\": \"  rcases compact_covered_by_mul_left_translates K.2 this with ⟨s, hs⟩\"}\n  {\"file\": \"Mathlib/Combinatorics/Additive/ApproximateSubgroup.lean\", \"line\": \"17\", \"text\": \"be covered by a small number of translates of `A`.\"}\n  {\"file\": \"Mathlib/Combinatorics/Additive/ApproximateSubgroup.lean\", \"line\": \"47\", \"text\": \"`A + A` can be covered by a small number of translates of `A`.\"}\n  {\"file\": \"Mathlib/Combinatorics/Additive/ApproximateSubgroup.lean\", \"line\": \"58\", \"text\": \"`A * A` can be covered by a small number of translates of `A`.\"}\n  {\"file\": \"Mathlib/Algebra/Group/Action/Pointwise/Set/Basic.lean\", \"line\": \"332\", \"text\": \"/-- Any intersection of translates of two sets `s` and `t` can be covered by a single translate of\"}\n  {\"file\": \"Mathlib/Algebra/Group/Action/Pointwise/Set/Basic.lean\", \"line\": \"337\", \"text\": \"/-- Any intersection of translates of two sets `s` and `t` can be covered by a single translate of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finite presentation group algebraic space is etale locally covered by finitely many translates of a fibrewise nonempty quasi compact open",
+   "results": "{\"t\": \"2026-10-23T13:21:07Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth finite presentation group algebraic space is etale locally covered by finitely many translates of a fibrewise nonempty quasi compact open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.Etale.finitePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"0868cd16cd13fdb7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic spaces and etale-local covering are absent from the returned scheme/ring and ordinary topological-group results"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"translate\", \"cover\"",
+   "results": "{\"t\": \"2026-10-23T13:33:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"translate\\\", \\\"cover\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"compact_covered_by_add_left_translates\", \"compact_covered_by_mul_left_translates\"], \"digest\": \"2b129e1c5f11aab4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic spaces and etale-local covering are absent from the returned scheme/ring and ordinary topological-group results"
+  },
+  {
+   "tool": "grep",
+   "query": "translate.*cover|cover.*translate|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T13:33:55Z\", \"tool\": \"grep\", \"query\": \"translate.*cover|cover.*translate|AlgebraicSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Group/Action/Pointwise/Set/Basic.lean\", \"Mathlib/Algebra/Group/Action/Pointwise/Set/Basic.lean\", \"Mathlib/MeasureTheory/Group/Measure.lean\", \"Mathlib/MeasureTheory/Group/Measure.lean\", \"Mathlib/MeasureTheory/Measure/Content.lean\", \"Mathlib/Topology/Algebra/Group/OpenMapping.lean\", \"Mathlib/Topology/Algebra/Group/Basic.lean\", \"Mathlib/Topology/Algebra/Group/Basic.lean\"], \"digest\": \"75e3205564e92931\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic spaces and etale-local covering are absent from the returned scheme/ring and ordinary topological-group results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale locally finite sections of a smooth algebraic group translate an open to cover the group",
+   "results": "{\"t\": \"2026-10-23T13:34:26Z\", \"tool\": \"leansearch\", \"query\": \"Etale locally finite sections of a smooth algebraic group translate an open to cover the group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover\", \"Algebra.isOpen_etaleLocus\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"smoothPresheafCommGroup\"], \"digest\": \"236e31652c8b4cf8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic spaces and etale-local covering are absent from the returned scheme/ring and ordinary topological-group results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-picard-etale-schematic",
+  "date": "2026-10-23",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space.",
+   "via": [
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-group-finite-translate-cover",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Isolated arithmetic approximation, bad-tuple incidence geometry, and the arithmetic closure estimate as three statement-only lemmas; assembled them with existing smooth-space etale local sections. Checked noncommutative order, zero-dimensional fibres, empty base and the distinction between fibrewise good tuples and a genuinely open family of good tuples.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) assembles proper and open direct images using compactification. The existing inherited auxiliary chain through nodal Picard schematicness supplies this item and uses Deligne 4.6; the latest paragraph itself does not state an alteration reduction. Steps 1--5 realize Deligne 4.6 arithmetic reduction, constructible bad tuples/codimension, closure estimate, etale section, and covering conclusion, preserving the dispatched auxiliary item and its inherited provenance."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-73907fbdc",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-73907fbdc (reviewer sub-agent of L); spot-checked: Shape: one commit, the item plus 3 new statement-only nodes (created.item = item, group Q99). The item is still unsplit in live and side-live, and the delivered statement is identical to theirs. The only citer, nodal-picard-etale-schematic Step 4, uses the unchanged statement. Step checks: (1) the arithmetic-model node gives U∋s, a nonempty f.g.-over-Z affine T, (G0,V0) with integral fibres of dimension d, and the group isomorphism; n=d+D+1. (2) The bad-tuple node gives X=H^n, a constructible Z_n, the fibre identification and closure dimension ≤ nd−n+d = r−(D+1). (3) The closure node with c=D+1>D gives W smooth and surjective; base change to U is by the chartwise calculus statement. (4) 0CFV-node étale lifts give sections g_{a,j}; the fibre identification applies at every geometric point. (5) Elementary: covering at geometric points, translation inverse, étale composites. New nodes checked true. Model: 07SK/0CN2/0851 descent; the integral-fibre and V-surjectivity loci are eventual by constructibility; constant d after shrinking around the identity section. Bad tuples: over an algebraically closed fibre E ≅ H×C^n via c_j=g_j^{-1}x, no commutativity needed, dim C ≤ d−1; 0ECX for constructibility; d=0 gives E empty. Closure: irreducible pieces plus 02JU/0BAX give dim Z̄ ≤ D+r−c < r, which is less than the fibre dimension. No duplicates found (rg -L for translates/Chevalley/0ECX/0B2M/approximation; read space-absolute-noetherian-approximation, generic-point-fp-closed-interior, scheme-product-dimension and others). None restates the item; the item proof is a short assembly. Batch-5: def-trf-algebraic-space, def-a1-space-open-subspace and def-a1-space-point-topology are definitions. Chartwise calculus is already cited by the parent. smooth-space-cover-etale-sections is Stacks 0CFV. The whole closure meets 106 trf/pod nodes, all algebraic-space foundations, with no trace/Lefschetz/Frobenius/duality theorem among them, so these citations are outside both assumptions. No SGA. Deligne PDF not local (inherited WANTED); the Stacks tags were verified locally. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupFiniteTranslateCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_etale_finite_left_translate_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupFiniteTranslateCover.lean",
+  "statement": "theorem exists_etale_finite_left_translate_cover {S : Scheme.{u}} [IsLocallyNoetherian S] (G : AlgebraicSpace S) [GrpObj G.obj.obj] (hG : IsSmoothIntegralGroupSpace G) (V : OpenSubspace G) (hVqc : CompactSpace (Point V.val.toFunctor)) (hV : ∀ (K : Type u) [Field K] [IsAlgClosed K] (s : Spec (.of K) ⟶ S), Nonempty (V.val.obj (op (Over.mk s)))) : ∃ (I : Type (u + 1)) (T : I → Over S), (∀ a : I, Etale (T a).hom) ∧ (∀ s : S, ∃ (a : I) (t : (T a).left), (T a).hom.base t = s) ∧ ∀ a : I, ∃ (n : ℕ) (g : Fin n → (yoneda.obj (T a) ⟶ G.obj.obj)), ∀ (K : Type u) [Field K] [IsAlgClosed K] (s : Spec (.of K) ⟶ (T a).left) (x : yoneda.obj (Over.mk (s ≫ (T a).hom)) ⟶ G.obj.obj), ∃ (j : Fin n) (v : yoneda.obj (Over.mk (s ≫ (T a).hom)) ⟶ V.val.toFunctor), (yoneda.map (Over.homMk s rfl) ≫ g j) * (v ≫ V.val.ι) = x",
+  "branch": "sheaf-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed def-sfb-smooth-integral-group-space geometric predicates without its commutative group structure. Mathlib GrpObj on the presheaf supplies the unrestricted group law. The cover equality is stated on all geometric points, with left multiplication and the actual open-subfunctor inclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92076be0f",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Delivery adds only the lean record and stmt_dep def-sfb-smooth-integral-group-space (landed Q21 definition node used in the signature); the node statement is unchanged. Clause check: IsLocallyNoetherian S; AlgebraicSpace G with Mathlib GrpObj on the presheaf (natural group law over S, no commutativity); IsSmoothIntegralGroupSpace read in full (Smooth/Separated/LFP/qc/qs diagonal plus GroupSpaceIntegralFibres = irreducible nonempty geometric fibre with reduced fibre charts, not reducedness of G, so no stronger assumption); OpenSubspace V with CompactSpace(Point V); hV = K-point for every algebraically closed K, equivalent to meeting each fibre since V_K is lft. Conclusion: I : Type(u+1) étale family, jointly surjective, Fin n sections; every geometric point of G_{T_a} is g_j*v (left translate), equivalent to the open cover. Edge cases: empty S, d=0, n=0, noncommutative G, single universe u. Docstrings give the source place, blueprint tag and 5 proof steps; proof is by sorry; no definitions; imports exist with no cycle; lean.statement matches the signature. Compile not reproduced (worker: sandbox 35.2 s and library 11.5 s clean). Advisory: node prose does not bracket-cite the added def node."
+ }
+}

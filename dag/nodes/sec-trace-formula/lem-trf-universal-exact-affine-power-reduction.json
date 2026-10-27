@@ -1,0 +1,293 @@
+{
+ "id": "lem-trf-universal-exact-affine-power-reduction",
+ "kind": "statement",
+ "title": "Affine base-change charts detect divisibility modulo every power",
+ "statement": "Let $f:X\\to S$ and $t:B\\to S$ be morphisms of schemes [def-pc-scheme]. Let $0\\to\\mathcal F_1\\xrightarrow{u}\\mathcal F_2\\xrightarrow{v}\\mathcal F_3\\to0$ be a short exact sequence [def-weil-pbc-exact-sequence] of quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent] whose tensor pullback [def-pc-module-pullback] to $X\\times_ST$ is short exact for every $T\\to S$. Put $Y=X\\times_SB$ [def-pc-fibre-product], with projections $p:Y\\to X$ and $q:Y\\to B$, and put $H_i=p^*\\mathcal F_i$. Choose an affine open $V=\\operatorname{Spec}A\\subseteq B$, an affine open $Z=\\operatorname{Spec}C\\subseteq q^{-1}V$ [def-weil-affine-spectrum, def-weil-open-immersion], and $a\\in A$; write $\\alpha$ for its image in $C$. Set $N_i=\\Gamma(Z,H_i)$ and let $i:N_1\\to N_2$, $j:N_2\\to N_3$ be the section maps. Then the $H_i$ are quasi-coherent, the counits $\\widetilde{N_i}\\xrightarrow{\\sim}H_i|_Z$ of [lem-weil-pbc-affine-tilde-gamma-adjunction] identify their sequence with the associated-sheaf sequence, and $0\\to N_1\\xrightarrow{i}N_2\\xrightarrow{j}N_3\\to0$ is short exact.\n\nFor every $n\\geq0$, put $T_n=\\operatorname{Spec}(A/(a^n))\\to V\\to B\\to S$. Under fibre-product pasting, $Z_n=Z\\times_VT_n$ is an open subscheme of $X\\times_ST_n$, and canonically $Z_n=\\operatorname{Spec}(C/\\alpha^nC)$. The restriction of the original sequence pulled back to $X\\times_ST_n$ identifies, including its two maps, with the associated-sheaf sequence of the quotient modules $N_i/\\alpha^nN_i$ [def-weil-pbc-quotient-module, lem-weil-pbc-spec-module-tilde-sections]. The identifications use $C\\otimes_A A/(a^n)\\cong C/\\alpha^nC$, $c\\otimes\\bar r\\mapsto\\overline{cr}$, and $(C/\\alpha^nC)\\otimes_CN_i\\cong N_i/\\alpha^nN_i$, $\\bar c\\otimes m\\mapsto\\overline{cm}$. Consequently $N_1/\\alpha^nN_1\\to N_2/\\alpha^nN_2$ is injective for every $n\\geq0$; equivalently $i(y)\\in\\alpha^nN_2$ implies $y\\in\\alpha^nN_1$. No affineness of $f$ or flatness of $C$ over $A$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080W, lemma-strict-transform-universally-injective; Opening affine reduction and universal injectivity modulo powers, expanded from returned proof Steps 1--3; the inherited flattening branch uses this to establish the module divisibility hypothesis."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-exact-sequence",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-pbc-quotient-module",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof": [
+  {
+   "text": "Apply the universal hypothesis with $T=B$. Thus the sequence $0\\to H_1\\to H_2\\to H_3\\to0$ is short exact on $Y$. Pullback preserves quasi-coherence by [lem-weil-pbc-module-pullback-quasi-coherent]. On the affine $Z$, the counits of [lem-weil-pbc-affine-tilde-gamma-adjunction] give $\\widetilde{N_i}\\cong H_i|_Z$. Their naturality identifies both sheaf arrows with $\\widetilde i$ and $\\widetilde j$: on sections the counit is the map corresponding to the identity, so its square with either section map commutes.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BG, lemma-pullback-quasi-coherent; schemes.tex Tags 01I7 and 01IB, affine adjunction"
+   }
+  },
+  {
+   "text": "Here is the affine exactness argument, also to be used below. For a short exact sequence of quasi-coherent modules on a scheme and an affine open $W$, the first section map is injective: a section with zero image is zero locally, hence zero. The kernel of the second section map is the sections of the sheaf image of the first map; clause (3) of [lem-weil-pbc-quasi-coherent-module-cokernel-image] identifies these with its sectionwise image. The third sheaf is the cokernel of the first arrow, and the same clause makes its section map surjective. Apply this to $Y$ and $W=Z$ to obtain $0\\to N_1\\to N_2\\to N_3\\to0$. This does not assume that sections are exact for arbitrary sheaves.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IC, 01IB, and 01LB: affine image and cokernel sections"
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$. Write $Y_V=Y\\times_BV$ and $X_n=X\\times_ST_n$. The fibre-product universal property identifies $Y_V\\times_VT_n$ with $X_n$: compatible maps to $X,V,T_n$ are precisely compatible maps to $X,T_n$, since the map to $V$ is forced by that to $T_n$. The inverse maps are the unique maps with these projections. By [lem-weil-pbc-open-immersion-base-change] for $V\\hookrightarrow B$ and $q$, the projection $Y_V\\to Y$ is an open immersion. Since $q|_Z$ factors through $V$ and $V\\to B$ is a monomorphism, $Z\\times_YY_V\\cong Z\\times_BV\\cong Z$ by the universal property, so the same lemma for the open immersion $Z\\hookrightarrow Y$ and $Y_V\\to Y$ shows that the induced map $Z\\to Y_V$ is an open immersion. Hence its base change $Z_n=Z\\times_VT_n\\hookrightarrow Y_V\\times_VT_n=X_n$ is an open immersion by [lem-weil-pbc-open-immersion-base-change]. This uses no affineness of $X\\to S$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY, lemma-base-change-immersion; fibre-product universal property"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-product-affine-spectra], $Z_n=\\operatorname{Spec}(C\\otimes_A A/(a^n))$. The map $c\\otimes\\bar r\\mapsto\\overline{c\\rho(r)}$ identifies this ring with $D=C/\\alpha^nC$. Its inverse is $\\bar c\\mapsto c\\otimes1$. It is well-defined because $\\alpha^nc\\otimes1=c\\otimes\\overline{a^n}=0$; the two compositions are identities since $c\\rho(r)\\otimes1=c\\otimes\\bar r$. The maps preserve products and units on pure tensors, and the map $C\\to D$ is the quotient map. Thus these are ring isomorphisms over $C$, not just module isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 and 01JQ, affine fibre products; elementary tensor calculation"
+   }
+  },
+  {
+   "text": "Let $h:Z_n\\to Z$ be the projection and $r:X_n\\to X$ the base-change projection. On $Z_n$, the two maps to $X$ agree: $r|_{Z_n}=p\\circ(Z\\hookrightarrow Y)\\circ h$. The composition isomorphism for pullback in [def-pc-module-pullback] therefore identifies $(r^*\\mathcal F_i)|_{Z_n}$ with $h^*(H_i|_Z)$, naturally for $u$ and $v$. Pull back the counits of Step 1 and apply [lem-weil-pbc-tilde-pullback-base-change] to $C\\to D$. This identifies the sequence with the associated-sheaf sequence of $D\\otimes_CN_i$, with maps $1\\otimes i$ and $1\\otimes j$. Naturality is part of both cited statements, so it identifies the arrows as well as the three objects.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-tilde-pullback-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I9, lemma-widetilde-pullback (1); modules.tex pullback composition"
+   }
+  },
+  {
+   "text": "Use clause (1) of [lem-weil-pbc-tensor-over-quotient-ring] for $R=C$ and $J=(\\alpha^n)$. It gives $D\\otimes_CN_i\\cong N_i/\\alpha^nN_i$, $\\bar c\\otimes m\\mapsto\\overline{cm}$. Its inverse sends $\\bar m$ to $1\\otimes m$; changing $m$ by $\\alpha^nx$ changes this tensor by $\\overline{\\alpha^n}\\otimes x=0$. For any $C$-linear $w:N_i\\to N_k$, both routes from $\\bar c\\otimes m$ give $\\overline{c w(m)}$. Thus the two arrows in Step 5 become the quotient maps induced by $i$ and $j$, exactly as asserted.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DF, lemma-tensor-product-exact, and 00D2, lemma-tensor-with-bimodule: quotient tensor formula"
+   }
+  },
+  {
+   "text": "The universal hypothesis with $T=T_n$ makes the sequence on $X_n$ short exact, and its terms are quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Apply the affine section argument of Step 2 on the affine open $Z_n\\subseteq X_n$, using [lem-weil-pbc-quasi-coherent-module-cokernel-image]. By Steps 5--6 and the unit isomorphisms of [lem-weil-pbc-affine-tilde-gamma-adjunction], its section maps are the quotient maps $\\bar i,\\bar j$, so $\\bar i$ is injective. Now $i(y)\\in\\alpha^nN_2$ says $\\bar i(\\bar y)=0$; injectivity says $\\bar y=0$, equivalent to $y\\in\\alpha^nN_1$ by [def-weil-pbc-quotient-module]. Conversely the divisibility implication kills every class in the kernel of $\\bar i$. For $n=0$, both quotients and $Z_0$ are zero or empty and the implication is tautological. No tensor functor was assumed left exact and no flatness of $C$ over $A$ was used.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080W, lemma-strict-transform-universally-injective, universal injectivity modulo a^n; schemes.tex Tags 01IB and 01IC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-quotient-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080W, lemma-strict-transform-universally-injective, opening affine reduction and universal injectivity modulo powers; expanded using Schemes 01I9, 01IB, 01IC, 01JQ, 01JY and Modules 01BG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A universally exact sequence of quasi coherent module sheaves gives a short exact sequence on affine base change charts and an injection modulo every power of a base ring element",
+   "results": "[leanfinder] OK 8 hit(s) exact_of_isLocalized_span; exact_of_localized_span; exact_of_localized_maximal; RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last; QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last; AdicCompletion.map_exact; Profinite.NobelingProof.succ_exact; lTensor_injective_of_exact_of_exact_of_rTensor_injective The hits concern localization exactness, quotient ring charts, or generic short complexes, not the affine sheaf/base-change comparison with all powers. Full response: search-results/affine-finder1.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor pullback to Spec A modulo a power of a followed by affine sections identifies sheaves with modules N modulo a power N",
+   "results": "[leanfinder] OK 8 hit(s) AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AdicCompletion.tensor_map_id_left_eq_map; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd The hits concern localization exactness, quotient ring charts, or generic short complexes, not the affine sheaf/base-change comparison with all powers. Full response: search-results/affine-finder2.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universally.?[Ee]xact|universally.?[Ii]njective|modulo.*power",
+   "results": "[grep] OK 18 hit(s) Mathlib/NumberTheory/Padics/RingHoms.lean:18; Mathlib/AlgebraicGeometry/RelativeGluing.lean:9; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:11; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:335; Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:13; Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:15; Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:17; Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:19; Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:22; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:10; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:23; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:24; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:83; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:85; Mathlib/CategoryTheory/EquivalenceRelation.lean:296; Mathlib/RingTheory/DedekindDomain/SelmerGroup.lean:18; Mathlib/RingTheory/DedekindDomain/SelmerGroup.lean:134; Mathlib/Combinatorics/Enumerative/Pentagonal/Ring.lean:16 The hits concern localization exactness, quotient ring charts, or generic short complexes, not the affine sheaf/base-change comparison with all powers. Full response: search-results/affine-grep.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal base change exactness of quasi coherent sheaves implies injectivity of affine sections modulo every power of a scalar",
+   "results": "[leansearch] OK 8 hit(s) IsSMulRegular.of_flat_of_isBaseChange; IsBaseChange.iff_lift_unique; Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway; IsLocalizedModule.isBaseChange; SheafOfModules.isQuasicoherent; IsBaseChange; SheafOfModules.QuasicoherentData.mk.injEq; AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange The hits concern localization exactness, quotient ring charts, or generic short complexes, not the affine sheaf/base-change comparison with all powers. Full response: search-results/affine-leansearch.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, ShortComplex.ShortExact",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'ShortComplex.ShortExact' loogle: unknown identifier 'ShortComplex.ShortExact' The hits concern localization exactness, quotient ring charts, or generic short complexes, not the affine sheaf/base-change comparison with all powers. Full response: search-results/affine-loogle.txt.",
+   "date": "2026-10-22",
+   "verdict": "invalid pattern; superseded by subsequent fully qualified or name-substring search"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.tensorPullback",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.Scheme.Modules.tensorPullback' loogle: unknown identifier 'AlgebraicGeometry.Scheme.Modules.tensorPullback' The hits concern localization exactness, quotient ring charts, or generic short complexes, not the affine sheaf/base-change comparison with all powers. Full response: search-results/affine-loogle2.txt.",
+   "date": "2026-10-22",
+   "verdict": "invalid pattern; superseded by subsequent fully qualified or name-substring search"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "[loogle] OK 12 hit(s) CategoryTheory.ShortComplex.ShortExact; CategoryTheory.ShortComplex.ShortExact.exact; CategoryTheory.ShortComplex.Splitting.shortExact; CategoryTheory.ShortComplex.ShortExact.op; CategoryTheory.ShortComplex.shortExact_iff_op; CategoryTheory.ShortComplex.ShortExact.epi_g; CategoryTheory.ShortComplex.ShortExact.mono_f; CategoryTheory.ShortComplex.shortExact_of_iso; CategoryTheory.ShortComplex.shortExact_iff_of_iso; CategoryTheory.ShortComplex.ShortExact.unop; CategoryTheory.ShortComplex.shortExact_iff_unop; CategoryTheory.ShortComplex.ShortExact.splittingOfInjective The hits concern localization exactness, quotient ring charts, or generic short complexes, not the affine sheaf/base-change comparison with all powers. Full response: search-results/affine-loogle3.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universally.?exact|universally.?injective|quotient.*pullback",
+   "results": "14 hits; Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean.  Read the hits: generic short complexes, scheme structural maps, or pullback definitions do not state this universal affine quotient-sequence comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "12 hits; CategoryTheory.ShortComplex.ShortExact, CategoryTheory.ShortComplex.ShortExact.exact, CategoryTheory.ShortComplex.Splitting.shortExact, CategoryTheory.ShortComplex.ShortExact.op, CategoryTheory.ShortComplex.shortExact_iff_op, CategoryTheory.ShortComplex.ShortExact.epi_g, CategoryTheory.ShortComplex.ShortExact.mono_f, CategoryTheory.ShortComplex.shortExact_of_iso.  Read the hits: generic short complexes, scheme structural maps, or pullback definitions do not state this universal affine quotient-sequence comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally exact sequence of quasi coherent sheaves gives injective affine section maps modulo every power of a scalar after arbitrary scheme base change",
+   "results": "8 hits; AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.specTargetImageFactorization_app_injective, AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective.  Read the hits: generic short complexes, scheme structural maps, or pullback definitions do not state this universal affine quotient-sequence comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaf pullback along affine spectrum quotient of a ring is the sheaf associated to quotient module and detects exactness",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData.I, SheafOfModules.pullbackIso.  Read the hits: generic short complexes, scheme structural maps, or pullback definitions do not state this universal affine quotient-sequence comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-universal-exact",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: displayed strict-transform exact sequence after choosing alpha. Opening affine reduction and universal injectivity modulo powers, expanded from returned proof Steps 1--3; the inherited flattening branch uses this to establish the module divisibility hypothesis.",
+   "via": [
+    "lem-trf-strict-transform-universal-exact",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-universal-exact-affine-power-reduction",
+  "worker": "stage1",
+  "summary": "Proved the affine reduction using existing DAG tools only. Expanded affine exactness via image/cokernel sections, fibre-product pasting, both tensor formulas and naturality of both sequence maps. Checked arbitrary rings and n=0; the statement is unchanged. No new nodes.",
+  "blueprint": "Retains the inherited flattening branch under lem-trf-local-term-locality: the opening affine reduction of Stacks 080W in lem-trf-strict-transform-universal-exact. The current latest ancestor proof concerns contracting correspondences and no longer explicitly contains this older flattening expansion; no route or blueprint metadata was silently rewritten.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic preservation of quasi-coherence under scheme pullback, needed for B and T_n; the item unit has no quasi-coherent pullback theorem."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic computation of images and cokernels on an affine open gives exact sections; the item unit has no such module-sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Generic natural affine pullback/tilde comparison identifies both quotient-sequence maps; the item unit has no such tensor-pullback comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-20bee2782",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-20bee2782 (reviewer sub-agent of L); spot-checked: I read Stacks 080W (divisors.tex:9037, the opening affine reduction and universal injectivity mod a^n; the source's slip a^n(x-y), which should read a^n(x-z), is not used here) and every cited statement. The statement and stmt_deps are unchanged and true. Edge cases checked: n=0, a a unit, a=0, and the counterexample 0->Z-2->Z->Z/2 with a=2. No affineness of f or flatness of C over A is assumed. Steps: (1) T=B, pullback quasi-coherence, adjunction counit (3) with naturality (1) identifies the arrows. (2) The affine-exactness argument matches clauses (1) and (3) of the cokernel-image node. (4) I checked C⊗_A A/(a^n) ≅ C/α^nC as rings over C. (5) Pullback composition plus the natural θ_M of the tilde-pullback node. (6) Clause (1) of tensor-over-quotient-ring. (7) T=T_n, the Step-2 argument on affine Z_n, adjunction unit (2) and the quotient-module definition. FIX: Step 3 asserted Z↪Y_V=Y×_BV is an open immersion with no reason; added that Y_V→Y is an open immersion by the open-immersion base-change node, Z×_Y Y_V ≅ Z×_B V ≅ Z (V→B is a monomorphism and q|_Z factors through V), and the same lemma then gives the open immersion; uses and proof_deps are unchanged. Advisory: Step 5 identifies restriction to an open with pullback along the open immersion without saying so (elementary). Accepted the 3 declared tool_uses (module-pullback-quasi-coherent, quasi-coherent-module-cokernel-image, tilde-pullback-base-change): all generic scheme-module tools with no node in the unit sk-i-curve-zero. No new nodes, no SGA. Duplicate search (rg -L over dag/nodes for universally exact/injective and 080W) found no equivalent node. The item is still unsplit in live and has no repair note of its own (the 2026-10-21 re-split note is on the parent only).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalExactAffinePowerReduction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.universalExact_affine_power_reduction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.universalExactAffineChart",
+   "AlgebraicGeometry.Scheme.Modules.universalExactAffineSections",
+   "AlgebraicGeometry.Scheme.Modules.universalExactAffineChartComposition",
+   "AlgebraicGeometry.Scheme.Modules.universalExactPowerTest",
+   "AlgebraicGeometry.Scheme.Modules.universalExact_affine_power_reduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalExactAffinePowerReduction.lean",
+  "statement": "theorem universalExact_affine_power_reduction {X S B : Scheme.{u}} (f : X ⟶ S) (t : B ⟶ S) (F : ShortComplex X.Modules) [F.X₁.IsQuasicoherent] [F.X₂.IsQuasicoherent] [F.X₃.IsQuasicoherent] (hF : F.ShortExact) (hbase : ∀ (T : Scheme.{u}) (s : T ⟶ S), ∃ h : (tensorPullback (pullback.fst f s)).map F.f ≫ (tensorPullback (pullback.fst f s)).map F.g = 0, (ShortComplex.mk ((tensorPullback (pullback.fst f s)).map F.f) ((tensorPullback (pullback.fst f s)).map F.g) h).ShortExact) (A C : CommRingCat.{u}) [Algebra A C] (v : Spec A ⟶ B) [IsOpenImmersion v] (z : Spec C ⟶ CategoryTheory.Limits.pullback f t) [IsOpenImmersion z] (hz : z ≫ pullback.snd f t = Spec.map (CommRingCat.ofHom (algebraMap A C)) ≫ v) (a : A) : ((tensorPullback (pullback.fst f t)).obj F.X₁).IsQuasicoherent ∧ ((tensorPullback (pullback.fst f t)).obj F.X₂).IsQuasicoherent ∧ ((tensorPullback (pullback.fst f t)).obj F.X₃).IsQuasicoherent ∧ IsIso ((universalExactAffineChart f t C z).obj F.X₁).fromTildeΓ ∧ IsIso ((universalExactAffineChart f t C z).obj F.X₂).fromTildeΓ ∧ IsIso ((universalExactAffineChart f t C z).obj F.X₃).fromTildeΓ ∧ (tilde.functor C).map ((universalExactAffineSections f t C z).map F.f) ≫ ((universalExactAffineChart f t C z).obj F.X₂).fromTildeΓ = ((universalExactAffineChart f t C z).obj F.X₁).fromTildeΓ ≫ (universalExactAffineChart f t C z).map F.f ∧ (tilde.functor C).map ((universalExactAffineSections f t C z).map F.g) ≫ ((universalExactAffineChart f t C z).obj F.X₃).fromTildeΓ = ((universalExactAffineChart f t C z).obj F.X₂).fromTildeΓ ≫ (universalExactAffineChart f t C z).map F.g ∧ Function.Injective ((universalExactAffineSections f t C z).map F.f) ∧ Function.Exact ((universalExactAffineSections f t C z).map F.f) ((universalExactAffineSections f t C z).map F.g) ∧ Function.Surjective ((universalExactAffineSections f t C z).map F.g) ∧ ∀ n : ℕ, ∃ (ρ : (A ⧸ Ideal.span {a ^ n}) →+* (C ⧸ Ideal.span {(algebraMap A C a) ^ n})) (e : (C ⊗[A] (A ⧸ Ideal.span {a ^ n})) ≃+* (C ⧸ Ideal.span {(algebraMap A C a) ^ n})) (eZ : CategoryTheory.Limits.pullback (Spec.map (CommRingCat.ofHom (algebraMap A C))) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {a ^ n})))) ≅ Spec (.of (C ⧸ Ideal.span {(algebraMap A C a) ^ n}))) (w : Spec (.of (C ⧸ Ideal.span {(algebraMap A C a) ^ n})) ⟶ CategoryTheory.Limits.pullback f (universalExactPowerTest t A v a n)), (∀ r : A, ρ (Ideal.Quotient.mk _ r) = Ideal.Quotient.mk _ (algebraMap A C r)) ∧ (∀ (c : C) (r : A), e (c ⊗ₜ[A] Ideal.Quotient.mk _ r) = Ideal.Quotient.mk _ (c * algebraMap A C r)) ∧ eZ.inv ≫ pullback.fst _ _ = Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))) ∧ eZ.inv ≫ pullback.snd _ _ = Spec.map (CommRingCat.ofHom ρ) ∧ IsOpenImmersion w ∧ w ≫ pullback.fst f (universalExactPowerTest t A v a n) = Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))) ≫ z ≫ pullback.fst f t ∧ w ≫ pullback.snd f (universalExactPowerTest t A v a n) = Spec.map (CommRingCat.ofHom ρ) ∧ ∃ Q : ShortComplex (ModuleCat.{u} (C ⧸ Ideal.span {(algebraMap A C a) ^ n})), Q.ShortExact ∧ ∃ e₁ : ((ModuleCat.restrictScalars (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))).obj Q.X₁) ≃ₗ[C] ((universalExactAffineSections f t C z).obj F.X₁) ⧸ ((Ideal.span {(algebraMap A C a) ^ n}) • (⊤ : Submodule C ((universalExactAffineSections f t C z).obj F.X₁))), ∃ e₂ : ((ModuleCat.restrictScalars (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))).obj Q.X₂) ≃ₗ[C] ((universalExactAffineSections f t C z).obj F.X₂) ⧸ ((Ideal.span {(algebraMap A C a) ^ n}) • (⊤ : Submodule C ((universalExactAffineSections f t C z).obj F.X₂))), ∃ e₃ : ((ModuleCat.restrictScalars (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))).obj Q.X₃) ≃ₗ[C] ((universalExactAffineSections f t C z).obj F.X₃) ⧸ ((Ideal.span {(algebraMap A C a) ^ n}) • (⊤ : Submodule C ((universalExactAffineSections f t C z).obj F.X₃))), (∀ m : (universalExactAffineSections f t C z).obj F.X₁, e₂ (Q.f (e₁.symm (Submodule.Quotient.mk m))) = Submodule.Quotient.mk ((universalExactAffineSections f t C z).map F.f m)) ∧ (∀ m : (universalExactAffineSections f t C z).obj F.X₂, e₃ (Q.g (e₂.symm (Submodule.Quotient.mk m))) = Submodule.Quotient.mk ((universalExactAffineSections f t C z).map F.g m)) ∧ ∃ l₁ : (ModuleCat.extendScalars (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))).obj ((universalExactAffineSections f t C z).obj F.X₁) ≅ Q.X₁, ∃ l₂ : (ModuleCat.extendScalars (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))).obj ((universalExactAffineSections f t C z).obj F.X₂) ≅ Q.X₂, ∃ l₃ : (ModuleCat.extendScalars (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))).obj ((universalExactAffineSections f t C z).obj F.X₃) ≅ Q.X₃, ∃ ψ₁ : tilde (R := .of (C ⧸ Ideal.span {(algebraMap A C a) ^ n})) Q.X₁ ≅ (tensorPullback ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n})))) ≫ (z ≫ pullback.fst f t))).obj F.X₁, ∃ ψ₂ : tilde (R := .of (C ⧸ Ideal.span {(algebraMap A C a) ^ n})) Q.X₂ ≅ (tensorPullback ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n})))) ≫ (z ≫ pullback.fst f t))).obj F.X₂, ∃ ψ₃ : tilde (R := .of (C ⧸ Ideal.span {(algebraMap A C a) ^ n})) Q.X₃ ≅ (tensorPullback ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n})))) ≫ (z ≫ pullback.fst f t))).obj F.X₃, (∀ (c : C) (m : (universalExactAffineSections f t C z).obj F.X₁), e₁ (l₁.hom (Ideal.Quotient.mk _ c ⊗ₜ[C, (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))] m)) = Submodule.Quotient.mk (c • m)) ∧ (∀ (c : C) (m : (universalExactAffineSections f t C z).obj F.X₂), e₂ (l₂.hom (Ideal.Quotient.mk _ c ⊗ₜ[C, (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))] m)) = Submodule.Quotient.mk (c • m)) ∧ (∀ (c : C) (m : (universalExactAffineSections f t C z).obj F.X₃), e₃ (l₃.hom (Ideal.Quotient.mk _ c ⊗ₜ[C, (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))] m)) = Submodule.Quotient.mk (c • m)) ∧ (∀ m : (universalExactAffineSections f t C z).obj F.X₁, ((tensorPullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))))).obj ((universalExactAffineChart f t C z).obj F.X₁)).presheaf.map (homOfLE le_top).op ((ψ₁.hom ≫ (universalExactAffineChartComposition f t C z (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))))).hom.app F.X₁).app ⊤ (tilde.toOpen (R := .of (C ⧸ Ideal.span {(algebraMap A C a) ^ n})) Q.X₁ ⊤ (l₁.hom ((1 : C ⧸ Ideal.span {(algebraMap A C a) ^ n}) ⊗ₜ[C, (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))] m)))) = tensorPullbackSection (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n})))) ((universalExactAffineChart f t C z).obj F.X₁) ⊤ m) ∧ (∀ m : (universalExactAffineSections f t C z).obj F.X₂, ((tensorPullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))))).obj ((universalExactAffineChart f t C z).obj F.X₂)).presheaf.map (homOfLE le_top).op ((ψ₂.hom ≫ (universalExactAffineChartComposition f t C z (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))))).hom.app F.X₂).app ⊤ (tilde.toOpen (R := .of (C ⧸ Ideal.span {(algebraMap A C a) ^ n})) Q.X₂ ⊤ (l₂.hom ((1 : C ⧸ Ideal.span {(algebraMap A C a) ^ n}) ⊗ₜ[C, (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))] m)))) = tensorPullbackSection (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n})))) ((universalExactAffineChart f t C z).obj F.X₂) ⊤ m) ∧ (∀ m : (universalExactAffineSections f t C z).obj F.X₃, ((tensorPullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))))).obj ((universalExactAffineChart f t C z).obj F.X₃)).presheaf.map (homOfLE le_top).op ((ψ₃.hom ≫ (universalExactAffineChartComposition f t C z (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))))).hom.app F.X₃).app ⊤ (tilde.toOpen (R := .of (C ⧸ Ideal.span {(algebraMap A C a) ^ n})) Q.X₃ ⊤ (l₃.hom ((1 : C ⧸ Ideal.span {(algebraMap A C a) ^ n}) ⊗ₜ[C, (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n}))] m)))) = tensorPullbackSection (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n})))) ((universalExactAffineChart f t C z).obj F.X₃) ⊤ m) ∧ (tilde.functor (.of (C ⧸ Ideal.span {(algebraMap A C a) ^ n}))).map Q.f ≫ ψ₂.hom = ψ₁.hom ≫ (tensorPullback ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n})))) ≫ (z ≫ pullback.fst f t))).map F.f ∧ (tilde.functor (.of (C ⧸ Ideal.span {(algebraMap A C a) ^ n}))).map Q.g ≫ ψ₃.hom = ψ₂.hom ≫ (tensorPullback ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {(algebraMap A C a) ^ n})))) ≫ (z ≫ pullback.fst f t))).map F.g ∧ Function.Injective (fun x ↦ e₂ (Q.f (e₁.symm x))) ∧ (∀ m : (universalExactAffineSections f t C z).obj F.X₁, (∃ x : (universalExactAffineSections f t C z).obj F.X₂, (algebraMap A C a) ^ n • x = (universalExactAffineSections f t C z).map F.f m) → ∃ y : (universalExactAffineSections f t C z).obj F.X₁, (algebraMap A C a) ^ n • y = m)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4a2f9366",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read node, Stacks 080W (divisors.tex:9035-9075), all stmt_dep owners (tensorPullback/tensorPullbackSection/tensorPullbackSectionComp source, fromTildeΓ, tilde.toOpen, Submodule quotient, IsOpenImmersion, pullback) and the module. Every hypothesis and conclusion clause matches: hbase over all T:Scheme.{u}; hz pins the Algebra A C structure; eZ and w pinned by projection equations; ring iso e and quotient isos e_i∘l_i pinned by formulas; psi_i pinned by unit normalization through the canonical composition comparison plus both squares; final injectivity and divisibility implication match the node. Q.ShortExact is equivalent to the injectivity (right exactness is automatic). n=0, a=0, a a unit, empty Z and non-flat C covered; single universe u. Helpers are real data from owner declarations (not hollow, no duplicate notion); one sorry; source and blueprint docstrings; lean.statement verbatim equal (script-checked); proof imports exist in the live tree; report has Worker report and Second reading (a self-audit). No findings; not recompiled since no file changed."
+ }
+}

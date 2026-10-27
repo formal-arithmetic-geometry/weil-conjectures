@@ -1,0 +1,102 @@
+{
+ "id": "def-sfb-embedded-ell-lattice",
+ "kind": "definition",
+ "title": "Embedded locally finite free ell-full submodules",
+ "status": "split",
+ "statement": "Let $(C,J)$ be a site, $R$ a sheaf of rings, and $L$ a sheaf of $R$-modules [def-weil-sheaf-of-modules-category]. Assume the sheafification and locally-bijective comparison structures for abelian sheaves on each slice site that are used by the module-sheaf local-freeness predicate. Fix an integer $\\ell\\geq0$. An embedded $\\ell$-lattice in $L$ consists of an $R$-subpresheaf $N\\subseteq L$ whose underlying presheaf is a sheaf, which is locally free of finite, possibly varying rank (including zero), and which is locally $\\ell$-full: for each object $T$ and $x\\in L(T)$ there is a covering sieve $S$ on $T$ such that, for every $f:V\\to T$ in $S$, some $n\\geq0$ satisfies $\\ell^n x|_V\\in N(V)$. The exponent may depend on $f$ and $x$. The embedding is the actual family of submodules of $L(T)$, not an abstract module up to isomorphism. In the coefficient-comparison application, $L$ is rational, so multiplication by $\\ell$ is invertible on $L$; the last condition expresses fullness after sheaf localization.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.3 and Proposition 6.8.4(6); blueprint latest stratified-lattice-scheme proof (1), full embedded lisse integral submodules"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IntegralLattice|embeddedLattice|lattice.*[Cc]omparison",
+   "results": "1 hits: Mathlib/Topology/LocallyFinsupp.lean.",
+   "date": "2026-10-23",
+   "verdict": "Ingredients only: presheaf submodules and module localization do not give an embedded, locally finite free sheaf with the local denominator condition."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"localization\"",
+   "results": "1 hits: PresheafOfModules.instIsLocalizationSheafOfModulesSheafificationInverseImageFunctorOppositeAbWToPresheaf.",
+   "date": "2026-10-23",
+   "verdict": "Ingredients only: presheaf submodules and module localization do not give an embedded, locally finite free sheaf with the local denominator condition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subsheaf of modules locally finite free whose localization at a prime equals its ambient rational module",
+   "results": "8 hits: Module.mem_freeLocus_of_isLocalization, Module.mem_freeLocus, ModuleCat.tilde, Module.freeLocus, Module.finrank_of_isLocalizedModule_of_free, Module.free_of_isLocalizedModule, Module.FinitePresentation.exists_free_localizedModule_powers, ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop.",
+   "date": "2026-10-23",
+   "verdict": "Ingredients only: presheaf submodules and module localization do not give an embedded, locally finite free sheaf with the local denominator condition."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.Submodule",
+   "results": "12 hits: PresheafOfModules.Submodule, PresheafOfModules.Submodule.instCompleteLattice, PresheafOfModules.Submodule.instPartialOrder, PresheafOfModules.Submodule.toPresheafOfModules, PresheafOfModules.Submodule.instMonoι, PresheafOfModules.Submodule.ι, PresheafOfModules.Submodule.instMonoHomOfLE, PresheafOfModules.Submodule.homOfLE.",
+   "date": "2026-10-23",
+   "verdict": "Ingredients only: presheaf submodules and module localization do not give an embedded, locally finite free sheaf with the local denominator condition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-embedded-lattice-coefficient-comparison",
+  "date": "2026-10-23",
+  "group": "Q145"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-stratified-lattice-scheme",
+   "place": "Proof (1), embedded integral submodules M of rational free modules with M[1/ell] equal to the ambient module.",
+   "via": [
+    "lem-sfb-embedded-lattice-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "module": "Sheaf.Paper.EmbeddedEllLattice",
+  "declaration": "SheafOfModules.EmbeddedEllLattice",
+  "file": "lean/Sheaf/Paper/EmbeddedEllLattice.lean",
+  "statement": "structure EmbeddedEllLattice {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{w}} [∀ T : C, HasWeakSheafify (J.over T) AddCommGrpCat.{w}] [∀ T : C, (J.over T).WEqualsLocallyBijective AddCommGrpCat.{w}] (ell : ℕ) (L : SheafOfModules.{w} R)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a269abb8",
+  "group": "Q145",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a269abb8",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Re-delivery of 870b0d2e (RETURN H2). Lean files byte-identical (sha256), so the prior full clause audit stands. H2 repaired: theorem stmt_dep lem-weil-pbc-integral-scalar-constructible-image replaced by existing:true def-sfb-continuous-coefficient-module-equivalence-universe owning the 4 real-data defs in IntegralScalarConstructibleImage (header verbatim, NL matches code, refs = stmt_deps, all deps live, no other owner). def-sfb-continuous-ring-canonical-comparison now cited. Mechanical finding: lattice-pair-restriction (restrictedTensorComparison_isIso / finiteLocallyFree_overMap build P.restrict) and continuous-ring-universe-realization (comparison_isIso builds continuousModule) are genuine, PASS. Advisories: H11 'no second reading' under dispatcher policy; base-era LatticeSheafBasic helpers owned only by theorem nodes. No compile needed (no file changed)."
+ }
+}

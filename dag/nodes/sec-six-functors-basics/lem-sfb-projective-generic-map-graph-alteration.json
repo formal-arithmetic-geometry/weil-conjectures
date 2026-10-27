@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-projective-generic-map-graph-alteration",
+ "kind": "statement",
+ "title": "Reduced graph closure extending a projective generic map",
+ "statement": "Let $k$ be a field and $S$ an integral separated scheme of finite type over $k$, with generic point $\\eta$ and function field $K$. Let $L/K$ be finite separable. Suppose $q:N\\to S$ is finite and surjective with $N$ normal integral of finite type over $k$, equipped with a generic-point map $j:\\operatorname{Spec}L\\to N$ identifying $k(N)$ with $L$ as a $K$-extension, such that $j$ induces an isomorphism $\\operatorname{Spec}L\\simeq N\\times_S\\operatorname{Spec}K$. Let $M$ be a projective finite-type $k$-scheme and $a:\\operatorname{Spec}L\\to M$ a $k$-morphism. Set $Q=M\\times_k N$, let $x$ be the image of $(a,j):\\operatorname{Spec}L\\to Q$, and let $i:T\\hookrightarrow Q$ be the reduced induced closed subscheme on $\\overline{\\{x\\}}$. Then $T$ is integral, and $(a,j)$ factors as $i\\circ j_T$ with $j_T:\\operatorname{Spec}L\\to T$ its generic-point map. The projection $b:T\\to N$ is proper and surjective, and the induced map $\\operatorname{Spec}L\\to T\\times_N\\operatorname{Spec}L$ is an isomorphism over $L$. The composite $r=q\\circ b:T\\to S$ is proper, surjective and of finite type; for some dense open $V\\subseteq S$, $r^{-1}(V)\\to V$ is finite. Its induced function-field extension is identified with $L/K$ via $j_T$, and $m=\\operatorname{pr}_M\\circ i:T\\to M$ satisfies $m\\circ j_T=a$.\n\nHere normal means that all local rings are integrally closed domains; separated means that the diagonal is a closed immersion. Reduced induced closed subschemes use [lem-weil-pbc-reduced-induced-closed-subscheme]; closed immersions and projectivity use [def-weil-closed-immersion] and [def-kun-projective]. The remaining notions use [def-weil-field], [def-pc-scheme], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-proper-morphism], [def-sc-function-field], [def-pc-field-extension], [def-weil-pbc-separable-algebraic-extension], [def-pc-fibre-product] and [def-sc-generic-point].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TE, lemma-algebraic-residue-field-extension-closed-point-fibre; Tag 02NW, lemma-generically-finite, (1) iff (4); literature/stacks-project/schemes.tex, Tag 01J3, lemma-reduced-closed-subscheme. Agent expansion of de Jong (1996), Section 4.17, pp.71--72, used in de Jong (1997), Lemma 3.7, printed p.608; the affine generic-fibre calculation is retained in the report."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-proper-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-fibre-product",
+  "def-sc-generic-point",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "def-kun-projective"
+ ],
+ "proof": [
+  {
+   "text": "Write $h=(a,j)$. The closure of the single point $x$ is nonempty and irreducible: two open subsets meeting it both contain $x$ and therefore meet. The reduced-induced-subscheme lemma makes $T$ reduced, so the integral-scheme criterion makes $T$ integral, with generic point $x_T=i^{-1}(x)$. On an affine open $U=\\operatorname{Spec}R$ of $Q$ containing $x$, write $\\varphi:R\\to L$ for $h$. The point $x$ corresponds to the prime $\\mathfrak p=\\ker\\varphi$ and $\\overline{\\{x\\}}\\cap U=V(\\mathfrak p)$. The reduced-induced-subscheme lemma gives $i^{-1}U=\\operatorname{Spec}(R/\\mathfrak p)$. Thus $\\varphi$ factors through $R/\\mathfrak p\\hookrightarrow L$, and these local factorizations glue uniquely (on affine overlaps they are the same quotient factorization). This defines $j_T$ with $ij_T=h$ and image $x_T$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme, affine construction; properties.tex Tag 01ON, lemma-characterize-integral"
+   }
+  },
+  {
+   "text": "Choose an affine open $W=\\operatorname{Spec}A$ of $N$ containing its generic point and an affine open $U=\\operatorname{Spec}R\\subseteq\\operatorname{pr}_N^{-1}W$ containing $x$. Put $B=R/\\ker(R\\to L)$ as in step 1. The composite $A\\to B\\hookrightarrow L$ is the generic-point inclusion supplied by $j$. The affine fraction-field lemma applied to $N$ gives $\\operatorname{Frac}(A)=L$. Consequently $A\\subseteq B\\subseteq L$ implies $\\operatorname{Frac}(B)=L$: a fraction in $B$ lies in $L$, and every element of $L$ is already a fraction of elements of $A$. Apply the same lemma to the integral scheme $T$ and its nonempty affine open $\\operatorname{Spec}B$. It identifies $k(T)=\\operatorname{Frac}(B)=L$ through the map $j_T$, so $j_T$ is precisely the generic-point map. The induced extension from $k(S)=K$ is the prescribed $L/K$, since $rj_T=qj$ and $j$ respects that $K$-structure.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions; Tag 01RW, definition-function-field; schemes.tex Tag 01HV, lemma-spec-sheaves (6), applied at the prime (0) of a domain"
+   }
+  },
+  {
+   "text": "Retain $W=\\operatorname{Spec}A$ and cover $b^{-1}W$ by its nonempty affine opens $\\operatorname{Spec}B_\\alpha$. Each contains the generic point of $T$; by step 2 its generic evaluation is injective, so $A\\subseteq B_\\alpha\\subseteq L=\\operatorname{Frac}(A)$. The affine fibre-product formula identifies its pullback to $\\operatorname{Spec}L$ with $\\operatorname{Spec}(B_\\alpha\\otimes_A L)$. Multiplication $B_\\alpha\\otimes_A L\\to L$, $c\\otimes\\lambda\\mapsto c\\lambda$, is an isomorphism with inverse $\\lambda\\mapsto1\\otimes\\lambda$: write $c=a/s$ with $a,s\\in A$, $s\\ne0$, and use $sc=a$ to get $c\\otimes\\lambda=1\\otimes(a\\lambda/s)$. These affine pullbacks cover $T\\times_N\\operatorname{Spec}L$. On each chart the morphism induced by $j_T$ is the displayed multiplication isomorphism, and its inverse is the structural projection. Thus the projection and $j_T$ are inverse globally. This proves the asserted isomorphism over $L$, including the scheme structure of the fibre.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 and 01JQ, lemma-fibre-product-affine-schemes and lemma-fibre-product-affines; explicit tensor calculation from step 2"
+   }
+  },
+  {
+   "text": "Define $m=\\operatorname{pr}_M i$. Then $mj_T=\\operatorname{pr}_M h=a$ by the defining projection equation for the fibre product. Similarly $bj_T=j$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Fibre-product universal property, projection equations"
+   }
+  },
+  {
+   "text": "The projective morphism $M\\to\\operatorname{Spec}k$ is proper by projective-implies-proper. Its base change $\\operatorname{pr}_N:Q\\to N$ is proper by proper base change. Since $i$ is a closed immersion, the closed-immersion-proper lemma applied to this projection makes $b=\\operatorname{pr}_N i$ proper. Hence its image is closed, by the definition of universally closed. The equation $bj_T=j$ puts the generic point of $N$ in that image. A closed subset containing the generic point of an integral scheme is the whole scheme, so $b$ is surjective.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WC, 01W4 and 01W5: lemma-locally-projective-proper, lemma-base-change-proper and lemma-closed-immersion-proper"
+   }
+  },
+  {
+   "text": "The finite morphism $q$ is proper by finite-implies-proper, so $r=qb$ is proper by proper composition. Both factors are surjective, hence so is $r$. Properness includes finite type, giving the finite-type assertion. It also gives quasi-compactness and separatedness. In particular $r$ is quasi-separated: its diagonal is a closed immersion, whose inverse image of an affine open is the spectrum of a quotient ring and hence quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-quasi-separated-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN, lemma-finite-proper; Tag 01W3, lemma-composition-proper; affine closed-immersion and proper definitions"
+   }
+  },
+  {
+   "text": "Fibre-product associativity gives $T\\times_S\\operatorname{Spec}K\\simeq T\\times_N(N\\times_S\\operatorname{Spec}K)$. The specified identification $N\\times_S\\operatorname{Spec}K\\simeq\\operatorname{Spec}L$ and step 3 therefore identify this fibre with $\\operatorname{Spec}L$, compatibly with $j_T$ and the structural map to $\\operatorname{Spec}K$. The underlying fibre over $\\eta$ is a singleton by the topological-fibre assertion. The spectrum of a field is Noetherian (its only ideals are $0$ and the whole field, and its spectrum is a point); since $S$ is finite type over $k$, finite-type-over-Noetherian makes $S$ Noetherian. Apply the generic-finite-neighbourhood lemma to $r$: it is quasi-compact, quasi-separated and locally of finite type by step 6, $S$ is Noetherian, and its only component has generic point $\\eta$ with a finite fibre. It gives a dense open $V\\subseteq S$ such that $r^{-1}(V)\\to V$ is finite.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW, lemma-generically-finite, (1) implies (4); Tag 01T6, lemma-finite-type-noetherian; schemes.tex Tag 01K1, lemma-fibre-topological"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-sc-function-field",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Affine reduced closure (Tag 01J3), affine fibre products (Tags 01I4, 01JQ), and explicit generic tensor calculation; assembled with morphisms.tex Tags 01WC, 01W4, 01W5, 01WN, 01W3, 01T6 and 02NW. No source asserts the whole graph-alteration statement verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Rr]ational[Mm]ap|[Gg]eneric[Ff]iber|[Gg]eneric[Ff]ibre|[Gg]raph",
+   "results": "{\"t\": \"2026-10-22T06:12:35Z\", \"tool\": \"grep\", \"query\": \"[Rr]ational[Mm]ap|[Gg]eneric[Ff]iber|[Gg]eneric[Ff]ibre|[Gg]raph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"1a78422ffcec88db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the rational-map interfaces give a map on an open, and normalization/proper-global-sections results do not construct the reduced graph closure or identify its generic fibre; this needs several arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"closure\"",
+   "results": "{\"t\": \"2026-10-22T06:12:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents\", \"AlgebraicGeometry.sourceLocalClosure\", \"AlgebraicGeometry.sourceLocalClosure.instIsZariskiLocalAtSourceIsOpenImmersionOfRespectsIsoOfRespectsLeftScheme\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsIsoScheme\", \"AlgebraicGeometry.sourceLocalClosure.instContainsIdentitiesScheme\", \"AlgebraicGeometry.sourceLocalClosure.cover\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsRightScheme\"], \"digest\": \"0518ac917e3a99fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the rational-map interfaces give a map on an open, and normalization/proper-global-sections results do not construct the reduced graph closure or identify its generic fibre; this needs several arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a rational map to a projective scheme by taking its graph closure preserving the function field on a proper birational modification",
+   "results": "{\"t\": \"2026-10-22T06:12:35Z\", \"tool\": \"leansearch\", \"query\": \"Extend a rational map to a projective scheme by taking its graph closure preserving the function field on a proper birational modification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\"], \"digest\": \"d8e8a7929e201763\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the rational-map interfaces give a map on an open, and normalization/proper-global-sections results do not construct the reduced graph closure or identify its generic fibre; this needs several arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced closure of a rational point in a projective parameter scheme over a finite normal cover is an alteration with the same function field and prescribed generic morphism",
+   "results": "{\"t\": \"2026-10-22T06:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced closure of a rational point in a projective parameter scheme over a finite normal cover is an alteration with the same function field and prescribed generic morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.isField_of_universallyClosed\"], \"digest\": \"14ac8f484695c7e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the rational-map interfaces give a map on an open, and normalization/proper-global-sections results do not construct the reduced graph closure or identify its generic fibre; this needs several arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic rational point in a proper scheme over an integral noetherian scheme has integral reduced closure proper surjective with generic fibre the original point",
+   "results": "{\"t\": \"2026-10-22T06:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"A generic rational point in a proper scheme over an integral noetherian scheme has integral reduced closure proper surjective with generic fibre the original point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"dbbd7a041d117295\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the rational-map interfaces give a map on an open, and normalization/proper-global-sections results do not construct the reduced graph closure or identify its generic fibre; this needs several arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "closure|genericFiber|genericFibre",
+   "results": "{\"t\": \"2026-10-23T04:31:20Z\", \"tool\": \"grep\", \"query\": \"closure|genericFiber|genericFibre\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"80c0d80aa9de87ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map and function-field APIs do not give the reduced graph closure together with its exact generic fibre, proper surjection and dense-open finiteness; closure hits address ideals or partial maps only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a generic map to a projective scheme by taking the reduced closure of its graph",
+   "results": "{\"t\": \"2026-10-23T04:31:20Z\", \"tool\": \"leansearch\", \"query\": \"Extend a generic map to a projective scheme by taking the reduced closure of its graph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearPMap.IsClosable\", \"AlgebraicGeometry.Scheme.PartialMap.toPartialMap_toRationalMap_restrict\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\"], \"digest\": \"9691402093127026\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map and function-field APIs do not give the reduced graph closure together with its exact generic fibre, proper surjection and dense-open finiteness; closure hits address ideals or partial maps only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced closure of a generic rational point in a projective scheme over an integral base has the same function field and is proper surjective generically finite",
+   "results": "{\"t\": \"2026-10-23T04:31:21Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced closure of a generic rational point in a projective scheme over an integral base has the same function field and is proper surjective generically finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"95d10f31c5ce6530\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map and function-field APIs do not give the reduced graph closure together with its exact generic fibre, proper surjection and dense-open finiteness; closure hits address ideals or partial maps only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"closure\"",
+   "results": "{\"t\": \"2026-10-23T04:31:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents\", \"AlgebraicGeometry.sourceLocalClosure\", \"AlgebraicGeometry.sourceLocalClosure.instIsZariskiLocalAtSourceIsOpenImmersionOfRespectsIsoOfRespectsLeftScheme\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsIsoScheme\", \"AlgebraicGeometry.sourceLocalClosure.instContainsIdentitiesScheme\", \"AlgebraicGeometry.sourceLocalClosure.cover\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsRightScheme\"], \"digest\": \"0518ac917e3a99fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map and function-field APIs do not give the reduced graph closure together with its exact generic fibre, proper surjection and dense-open finiteness; closure hits address ideals or partial maps only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral closed subscheme obtained as the closure of a function field point in a proper scheme has generic fibre exactly the original rational point",
+   "results": "{\"t\": \"2026-10-23T04:39:27Z\", \"tool\": \"leanfinder\", \"query\": \"An integral closed subscheme obtained as the closure of a function field point in a proper scheme has generic fibre exactly the original rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint\"], \"digest\": \"480bb6b40080ea13\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map and function-field APIs do not give the reduced graph closure together with its exact generic fibre, proper surjection and dense-open finiteness; closure hits address ideals or partial maps only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-generic-extension",
+  "date": "2026-10-22",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair.; old proof steps 3--5: closed generic point, integral reduced closure with exact generic fibre, proper surjection and dense-open finiteness",
+   "via": [
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-generic-map-graph-alteration",
+  "worker": "stage1",
+  "summary": "Seven-step direct affine proof; all tools already have DAG nodes, so no new nodes. The reduced closure has affine rings R/ker(R→L); its function field and generic fibre follow from A⊆B⊆Frac(A)=L. Properness, surjectivity and dense-open finiteness use existing exact statements. The item statement is unchanged.",
+  "blueprint": "Realizes the inherited direct-image alteration reduction, specifically old stable-pointed-generic-extension steps 3–5: generic point, integral graph closure with unchanged generic fibre, and proper surjective generically finite projection. Whole-blueprint searches for graph closure, generic map and reduced closure find no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Affine radical ideal description of the reduced induced structure used in the prescribed graph construction."
+   },
+   {
+    "node": "def-sc-function-field",
+    "why": "Generic scheme-theoretic tool used through its statement; no same-unit statement provides this fact."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Projective-to-proper implication for M, a generic scheme-morphism tool."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Finiteness over a dense open after the actual generic fibre has been computed; general scheme-morphism tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-sc-function-field",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-b17041b77",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-b17041b77 (reviewer sub-agent of L); spot-checked: I read the delivery in full. The statement and stmt_deps are byte-identical to live, where the item is still unsplit with no repair note; there are no new nodes. Step 1: the reduced closure on an affine chart is Spec(R/ker φ), since the radical ideal with support V(p) is p, so T is integral and h factors through it. Step 2: A⊆B⊆L=Frac(A) gives Frac(B)=L, and the affine-fraction lemma applied to N and T gives k(T)=L over K. Step 3: B_α⊗_A L≅L via c⊗λ=1⊗aλ/s; each chart is the one-point Spec L, so Spec L≅T×_N Spec L. Step 4: m j_T=a and b j_T=j from the fibre-product equations. Step 5: b is proper by projective-implies-proper, base change and the closed-immersion lemma (b); it is closed and its image contains η_N, so it is surjective. Step 6: r is proper, surjective and of finite type, and quasi-separated because its diagonal is a closed immersion with affine preimages. Step 7: pasting gives a one-point generic fibre, S is Noetherian, and every hypothesis of generic-finite-open-neighborhood holds (matches Stacks 02NW (1)⇒(4), read). Stacks 01J3, 01WC, 01W4, 01W5 and 02NW were read; all cited tags resolve. Edge cases checked: S=Spec K, nonreduced or reducible M, dim 0, M empty. The extra hypotheses (normality, separability, S separated) are unused, and the statement is not weakened. No duplicate was found in the DAG. Accepted tool_uses: reduced-induced-closed-subscheme, kun projective-implies-proper and generic-finite-open-neighborhood, all generic scheme tools; the def-sc-function-field entry is harmless. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveGenericMapGraphAlteration",
+  "declaration": "AlgebraicGeometry.projective_generic_map_graph_alteration",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveGenericMapGraphAlteration.lean",
+  "statement": "theorem projective_generic_map_graph_alteration (k K L : Type u) [Field k] [Field K] [Field L] [Algebra K L] [FiniteDimensional K L] [Algebra.IsSeparable K L] (S N M : Scheme.{u}) [IsIntegral S] (s : S ⟶ Spec (CommRingCat.of k)) [IsSeparated s] [LocallyOfFiniteType s] [QuasiCompact s] (η : S) (_hη : IsGenericPoint η Set.univ) (eK : S.presheaf.stalk η ≅ CommRingCat.of K) (q : N ⟶ S) [IsFinite q] [Surjective q] (_hN : IsNormalScheme N) [LocallyOfFiniteType (q ≫ s)] [QuasiCompact (q ≫ s)] (ηN : N) (_hηN : IsGenericPoint ηN Set.univ) (eN : N.presheaf.stalk ηN ≅ CommRingCat.of L) (j : Spec (CommRingCat.of L) ⟶ N) (_hj : j = Spec.map eN.hom ≫ N.fromSpecStalk ηN) (_hgeneric : IsPullback j (Spec.map (CommRingCat.ofHom (algebraMap K L))) q (Spec.map eK.hom ≫ S.fromSpecStalk η)) (p : M ⟶ Spec (CommRingCat.of k)) [IsHProjective p] [LocallyOfFiniteType p] [QuasiCompact p] (a : Spec (CommRingCat.of L) ⟶ M) (ha : a ≫ p = j ≫ (q ≫ s)) (T : Scheme.{u}) (i : T ⟶ pullback p (q ≫ s)) [IsClosedImmersion i] [IsReduced T] (_hi : Set.range i = closure {pullback.lift a j ha (IsLocalRing.closedPoint L)}) : IsIntegral T ∧ ∃ jT : Spec (CommRingCat.of L) ⟶ T, jT ≫ i = pullback.lift a j ha ∧ (∃ ηT : T, IsGenericPoint ηT Set.univ ∧ ∃ eT : T.presheaf.stalk ηT ≅ CommRingCat.of L, jT = Spec.map eT.hom ≫ T.fromSpecStalk ηT) ∧ IsProper (i ≫ pullback.snd p (q ≫ s)) ∧ Surjective (i ≫ pullback.snd p (q ≫ s)) ∧ IsPullback jT (𝟙 (Spec (CommRingCat.of L))) (i ≫ pullback.snd p (q ≫ s)) j ∧ IsProper (i ≫ pullback.snd p (q ≫ s) ≫ q) ∧ Surjective (i ≫ pullback.snd p (q ≫ s) ≫ q) ∧ LocallyOfFiniteType (i ≫ pullback.snd p (q ≫ s) ≫ q) ∧ QuasiCompact (i ≫ pullback.snd p (q ≫ s) ≫ q) ∧ (∃ V : S.Opens, Dense (V : Set S) ∧ IsFinite ((i ≫ pullback.snd p (q ≫ s) ≫ q) ∣_ V)) ∧ jT ≫ (i ≫ pullback.fst p (q ≫ s)) = a",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The reduced induced closed subscheme is quantified by its characterizing reduced closed immersion and image, using the uniqueness in the recorded reduced_induced_closed_subscheme theorem. Generic stalk isomorphisms identify K, L and the function field of T. Cartesian-square clauses express exactly the specified canonical generic-fibre isomorphisms, including their structural maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c0f055be",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Read node, 15 stmt_dep records, module, report; snapshot node differs from live only in lean. Every hypothesis matches: generic-fibre IsPullback (orientation checked), eN/eK generic stalks, IsNormalScheme (=IsIntegral ∧ stalks integrally closed domains), IsHProjective (def-kun-projective convention), ha = k-linearity. T is given by reduced + closed immersion + range = closure{x}, justified by uniqueness clause (3) of reduced_induced_closed_subscheme. All conclusions present: integral, unique jT, generic stalk eT, b proper surjective, IsPullback jT 𝟙 b j, r proper/surjective/LOFT/QC, dense V with IsFinite (r ∣_ V), m∘jT=a; function-field clause follows from these. Edge cases (dim 0, q=id, L=K, nonreduced M, universes) fine. Gates fine. Advisory: IsNormalScheme owner def-sbc-normal-dominant-galois not in stmt_deps (node defines normal inline); redundant LOFT/QC instances. No compile (no file changed)."
+ }
+}

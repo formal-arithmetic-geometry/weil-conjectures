@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-locally-quasifinite-pseudo-torsor",
+ "kind": "statement",
+ "title": "Local quasi-finiteness of a locally finite type pseudo-torsor",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], let $B$ be an algebraic space over $S$, and let $G$ and $X$ be algebraic spaces over $B$ [def-trf-algebraic-space]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Suppose $G$ is a group algebraic space: multiplication $m:G\\times_B G\\to G$, identity $e:B\\to G$ and inversion $i:G\\to G$ induce group structures on $G(T)$ natural in every scheme $T\\to B$. Let $a:G\\times_B X\\to X$ be an action, satisfying $a(gh,x)=a(g,a(h,x))$ and $a(e,x)=x$ on all test schemes. Assume the morphism\n$$G\\times_B X\\longrightarrow X\\times_B X,\\qquad(g,x)\\longmapsto(a(g,x),x)$$\nis an isomorphism; this defines a pseudo $G$-torsor and imposes no surjectivity on $X\\to B$. Suppose $G\\to B$ and $X\\to B$ are locally of finite type and $G\\to B$ is locally quasi-finite. Then $X\\to B$ is locally quasi-finite. Local finite type and local quasi-finiteness of algebraic-space morphisms mean the corresponding scheme properties [def-weil-finite-type-morphism, pqf-def-quasifinite] on etale scheme charts of source and target.",
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 0DSK (lemma-pseudo-torsor-implications), part (2); pseudo torsor is Tag 04TW (definition-pseudo-torsor)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-space-slice-cartesian"
+ ],
+ "proof": [
+  {
+   "text": "Fix an etale scheme chart $V\\to B$ and set $F=X\\times_B V$. By the chartwise local finite type hypothesis, $h:F\\to V$ is locally of finite type. Apply [lem-sfb-space-quasifinite-locus-open] to obtain its quasi-finite locus $Q_h\\subseteq|F|$; its inverse image under any scheme base change $V'\\to V$ is exactly the quasi-finite locus of $F\\times_VV'\\to V'$. We show every point of $|F|$ lies in $Q_h$.",
+   "uses": [
+    "lem-sfb-space-quasifinite-locus-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSK (lemma-pseudo-torsor-implications), proof of (2), using the quasi-finite locus as in spaces-morphisms.tex Tag 0ABM (lemma-base-change-quasi-finite-locus); the scheme-target version is Tag 04NW (lemma-locally-finite-type-quasi-finite-part)."
+   }
+  },
+  {
+   "text": "For $z\\in|F|$, choose a representative $x:\\operatorname{Spec}K\\to F$ as in [def-a1-algebraic-space-point-classes], and use its composite to $V$ for base change. Form $P=F\\times_V\\operatorname{Spec}K$ and $H=G\\times_B\\operatorname{Spec}K$, algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. The pair $(x,1)$ is a section $x_K$ of $P\\to\\operatorname{Spec}K$ and represents a point $z_K$ mapping to $z$. The given pseudo-torsor isomorphism pulls back to $\\theta_K:H\\times_KP\\xrightarrow{\\sim}P\\times_KP$ by the fibre-product universal property. Pull it back further along $P\\to P\\times_KP$, $y\\mapsto(y,x_K)$. Its source becomes $H$: a pair $(g,u)$ above $(y,x_K)$ must satisfy $u=x_K$ and $y=a(g,x_K)$. Thus the resulting isomorphism is $t:H\\xrightarrow{\\sim}P$, $g\\mapsto a(g,x_K)$. Explicitly its inverse sends $y$ to the first component of $\\theta_K^{-1}(y,x_K)$; both inverse identities follow from those of $\\theta_K$.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSK (lemma-pseudo-torsor-implications), proof of (2), using the quasi-finite locus as in spaces-morphisms.tex Tag 0ABM (lemma-base-change-quasi-finite-locus); the scheme-target version is Tag 04NW (lemma-locally-finite-type-quasi-finite-part)."
+   }
+  },
+  {
+   "text": "By the arbitrary-base-change clause of [lem-sfb-representable-lqf-calculus-descent], $H\\to\\operatorname{Spec}K$ is locally quasi-finite, since $G\\to B$ is. This clause applies to algebraic-space morphisms: their scheme base changes are algebraic spaces. For any etale scheme chart $U\\to P$, composing with $t^{-1}$ gives an etale chart $U\\to H$ (the scheme tests are identified by the isomorphism, as in [def-trf-algebraic-space]); its composite to $\\operatorname{Spec}K$ is the same morphism. Hence $P\\to\\operatorname{Spec}K$ is locally quasi-finite.",
+   "uses": [
+    "lem-sfb-representable-lqf-calculus-descent",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSK (lemma-pseudo-torsor-implications), proof of (2), using the quasi-finite locus as in spaces-morphisms.tex Tag 0ABM (lemma-base-change-quasi-finite-locus); the scheme-target version is Tag 04NW (lemma-locally-finite-type-quasi-finite-part)."
+   }
+  },
+  {
+   "text": "The quasi-finite locus of $P\\to\\operatorname{Spec}K$ is all of $|P|$, by its chartwise definition. In particular it contains $z_K$. By the base-change equality in [lem-sfb-space-quasifinite-locus-open], $z_K$ belongs to the inverse image of $Q_h$, so $z\\in Q_h$. As $z$ was arbitrary, $Q_h=|F|$. Every etale scheme chart $U\\to F$ is therefore quasi-finite over $V$ at every point, which is local quasi-finiteness by [pqf-def-quasifinite]. Since $V\\to B$ was arbitrary, this is the required chartwise local quasi-finiteness of $X\\to B$. If $|F|$ is empty the same argument is vacuous and all chart point conditions hold.",
+   "uses": [
+    "lem-sfb-space-quasifinite-locus-open",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSK (lemma-pseudo-torsor-implications), proof of (2), using the quasi-finite locus as in spaces-morphisms.tex Tag 0ABM (lemma-base-change-quasi-finite-locus); the scheme-target version is Tag 04NW (lemma-locally-finite-type-quasi-finite-part)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-algebraic-space-point-classes",
+  "def-trf-algebraic-space",
+  "lem-sfb-representable-lqf-calculus-descent",
+  "lem-sfb-space-quasifinite-locus-open",
+  "lem-trf-space-fibre-products-etale-covers",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 0DSK (lemma-pseudo-torsor-implications), proof of (2), using the quasi-finite locus as in spaces-morphisms.tex Tag 0ABM (lemma-base-change-quasi-finite-locus); the scheme-target version is Tag 04NW (lemma-locally-finite-type-quasi-finite-part)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?torsor|AlgebraicSpace|algebraic space",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type pseudo torsor under a locally quasi finite group algebraic space is locally quasi finite",
+   "results": "OK; 8 hits; AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.LocallyQuasiFinite.recOn, Algebra.QuasiFinite.instLocalization, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType.casesOn, Algebra.QuasiFinite.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoTorsor\", \"LocallyQuasiFinite\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space with a simply transitive group action on pairs has discrete fibres when its acting group is locally quasi finite",
+   "results": "OK; 8 hits; isCoveringMapOn_quotientMk_of_properlyDiscontinuousSMul, Finite.to_properlyDiscontinuousSMul, CategoryTheory.PreGaloisCategory.has_decomp_quotients, isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul, IsQuotientCoveringMap.disjoint, Topology.IsQuotientMap.isCoveringMapOn_of_properlyDiscontinuousSMul, properlyDiscontinuousSMul_iff_properSMul, isCoveringMapOn_quotientMk_of_properlyDiscontinuousVAdd",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo torsor under a locally quasi finite group algebraic space is locally quasi finite if both spaces are locally of finite type",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?torsor|AlgebraicSpace|algebraic space",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism and abstract action results do not state this algebraic-space pseudo-torsor assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoTorsor\", \"LocallyQuasiFinite\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism and abstract action results do not state this algebraic-space pseudo-torsor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type pseudo torsor under a locally quasi finite group algebraic space is locally quasi finite",
+   "results": "OK; 8 hits; AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism and abstract action results do not state this algebraic-space pseudo-torsor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simply transitive group action on an algebraic space implies local quasi finiteness from the acting group",
+   "results": "OK; 8 hits; AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, Finite.to_properlyDiscontinuousSMul, MulAction.finite_quotient_of_pretransitive_of_finite_quotient, CategoryTheory.PreGaloisCategory.has_decomp_quotients, ProperlyDiscontinuousSMul.finite_stabilizer', Subgroup.finite_quotient_of_pretransitive_of_index_ne_zero, isCoveringMapOn_quotientMk_of_properlyDiscontinuousSMul, isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism and abstract action results do not state this algebraic-space pseudo-torsor assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo torsor for a group algebraic space locally of finite type is locally quasi finite when the group is locally quasi finite",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.recOn, Algebra.QuasiFinite.casesOn, Algebra.QuasiFinite.recOn, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AddTorsor.noConfusionType, AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism and abstract action results do not state this algebraic-space pseudo-torsor assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-inertia-locally-quasifinite-diagonal",
+  "date": "2026-10-23",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme). Supporting input: Tag 0CL0 (lemma-diagonal-diagonal), part (5), with quasi-DM expanded as local quasi-finiteness of the relative diagonal. Proof of the inertia criterion: locally finite type Isom pseudo-torsors inherit local quasi-finiteness from their automorphism group, Tag 0DSK(2).",
+   "via": [
+    "lem-sfb-inertia-locally-quasifinite-diagonal",
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-locally-quasifinite-pseudo-torsor",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0DSK(2), expanding the field-point trivialization as a pullback of the pseudo-torsor isomorphism. Reused the existing scheme-target quasi-finite locus and algebraic-space local-quasi-finiteness base-change nodes; no new nodes, no changed statement, and no finite-type, separatedness, surjectivity or quasi-compactness hypothesis added. Point representatives remove the need for a separate field-extension existence lemma.",
+  "blueprint": "Realizes the inherited direct-image alteration prerequisite recorded in blueprint.from.place: the locally quasi-finite pseudo-torsor input to the inertia criterion, Stacks 0DSK(2). The latest sk-thm-sf-ctf-stability direct-image proof (3) is the enclosing route; the inherited blueprint ancestor is null, as blueprint_refs.py ancestor reports, and is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only its generic existence and categorical universal property of sheaf fibre products of algebraic spaces are used in Step 2; the unit has no replacement for this foundational construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-44b2b3a03",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-44b2b3a03 (reviewer sub-agent of L); spot-checked: I read the item and its four steps in full, along with the statement of every cited node. The delivery adds no new nodes, leaves the statement and stmt_deps unchanged, and fills a proof that was empty on the base. The statement matches Stacks spaces-groupoids.tex 0DSK(2) (lines 704-728) and 04TW (lines 603-617). The route follows the source's proof: make the quasi-finite locus commute with base change (0ABM, spaces-morphisms.tex lines 5107-5122, used here through the scheme-target 04NW node), then trivialise the torsor over the field of a point. Step 1 applies lem-sfb-space-quasifinite-locus-open to F=X×_B V over an etale chart V of B; local finite type comes from the item's hypothesis. Step 2 is marked elementary and earns it: P=X×_B Spec K, H=G×_B Spec K, the section (x,1), and the pullback of θ_K along y↦(y,x_K) gives t:H≅P with the stated inverse. Step 3 uses the arbitrary-base-change clause of lem-sfb-representable-lqf-calculus-descent to make H→Spec K locally quasi-finite, then carries the charts through t. Step 4 uses the locus base-change clause along Spec K→V to get z_K in the preimage of Q_h, so z is in Q_h and Q_h=|F|, which is chartwise LQF by pqf-def-quasifinite. Edge cases checked: empty X (vacuous), trivial torsor, no rational point (the field is enlarged), no quasi-compactness used, nonreduced groups. The only citer, lem-sfb-inertia-locally-quasifinite-diagonal (B=T a scheme), satisfies every hypothesis. There is no cycle. The rg -L search for pseudo-torsor/0DSK/04TW/0ABM finds no duplicate; the sibling lem-sfb-unramified-pseudo-torsor is part (1). No SGA is cited. Batch-5: def-a1-algebraic-space-point-classes and lem-sfb-space-quasifinite-locus-open reach sec-trace-formula only through the general definition def-trf-algebraic-space, which is already a stmt_dep of the item and is not part of the trace-formula or Poincare-duality proofs, so they are outside the assumed statements. tool_uses lem-trf-space-fibre-products-etale-covers (02X2, used only for fibre-product existence and universal property) is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyQuasiFinitePseudoTorsor",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.locallyQuasiFinite_of_pseudoTorsor",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyQuasiFinitePseudoTorsor.lean",
+  "statement": "theorem locallyQuasiFinite_of_pseudoTorsor {S : Scheme.{u}} (B : AlgebraicSpace S) (G X : Over B.obj) [GrpObj G] [ModObj G X] (hG : IsAlgebraicSpace G.left) (hX : IsAlgebraicSpace X.left) (_hθ : IsIso (ModObj.leftSMul G X)) (_hGft : MapIsLocally (@LocallyOfFiniteType) (ObjectProperty.homMk G.hom : (⟨G.left, hG⟩ : AlgebraicSpace S) ⟶ B)) (_hXft : MapIsLocally (@LocallyOfFiniteType) (ObjectProperty.homMk X.hom : (⟨X.left, hX⟩ : AlgebraicSpace S) ⟶ B)) (_hGq : SpaceMapIsLocallyQuasiFinite (ObjectProperty.homMk G.hom : (⟨G.left, hG⟩ : AlgebraicSpace S) ⟶ B)) : SpaceMapIsLocallyQuasiFinite (ObjectProperty.homMk X.hom : (⟨X.left, hX⟩ : AlgebraicSpace S) ⟶ B)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d71f21818",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery after eb99 H2 RETURN. Lean file byte-identical to eb99; reread, matches Stacks 0DSK(2)/04TW: GrpObj/ModObj in Over B.obj, IsIso leftSMul pseudo-torsor, LFT G,X, LQF G ⇒ LQF X, no surjectivity or extra hypotheses, single universe u, sorry only, docstrings OK. H2 repaired: theorem stmt_dep lem-sfb-free-flat-group-space-quotient replaced by new def node def-sfb-space-slice-cartesian (existing:true on groupSpaceOverCartesian in FreeFlatGroupSpaceQuotient; statement verbatim to live lines 43-44; body Over.cartesianMonoidalCategory B.obj; prose matches; status split, mathlib_match null). No cycle (theorem node deps do not reach the item or the new node), no duplicate owner or id in live DAG. Report sections present. No compile needed (no file changed). Maintainer notes: theorem record still lists the instance in declarations; new node omits explicit fppf-site and fibre-product cites (reached via def-trf-algebraic-space)."
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of K injective section comparison units under presheaf restriction and weakly etale localization with adjunction normalization",
+   "results": "8 hits: TopCat.Presheaf.map_restrict, toSheafify_naturality, OverPresheafAux.unitForward_naturality₁, Scheme.Modules.restrictAdjunction_unit_app_app, Sheaf.natTransΓRes_app; none is the internal-module derived closed-test comparison.",
+   "date": "2026-10-23",
+   "verdict": "No exact result: these are ordinary presheaf or topological-space naturality results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections on slice sites naturality of localization units and normalized direct image comparisons",
+   "results": "8 hits: Sheaf.ΓObjEquivSections_naturality, Functor.IsCoverDense.Types.naturality_assoc, Sheaf.ΓHomEquiv_naturality_left and right, Sheaf.ΓObjEquivHom_naturality. None states these derived section formulas.",
+   "date": "2026-10-23",
+   "verdict": "No exact result; only ordinary section naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedPullback; also rg rightDerivedPullback|[Rr]estrict.*KInjective in Mathlib/CategoryTheory and Mathlib/Algebra/Homology",
+   "results": "No hits for rightDerivedPullback or restriction preserving K-injectives in Mathlib; the corresponding generic right-derived pullback API is in WeilConjectures.",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib statement with these closed-test maps."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "closed test localization coherence",
+   "results": "0 blueprint nodes match; ancestor of item reports None.",
+   "date": "2026-10-23",
+   "verdict": "No duplicate imported blueprint node; inherit the recorded item ancestry."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClosedTestLocalizedModelCoherence",
+  "date": "2026-10-23",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 8, 9: Resolution and geometric coherence of closed-test section models; normalized model data and strict subcalculations of steps 4, 5, 7 and 8.",
+   "via": [
+    "lem-sfb-closed-test-localized-model-coherence",
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "id": "lem-sfb-closed-test-geometric-section-coherence",
+ "kind": "statement",
+ "title": "Canonical derived section comparisons commute with weakly etale localization.",
+ "statement": "For a commutative condensed ring Λ, quotient closed immersion s, cartesian closed-fibre square (f,h,fZ,s), and an affine closed-site test V, the canonical derived section maps of [def-sfb-closed-test-localized-model-data] satisfy the three localization computation and section-diagram clauses needed for GeometricCoherence. Explicitly: weakly etale base change of each of f,h,fZ,s preserves K-injectives under source restriction and the exchange is invertible; its representative formula is the ordinary unit-normalized mate. Localized restriction along closedFibreMap commutes with a cartesian weakly etale localization square. The canonical sectionComparison also commutes with every compatible cartesian localization cube for f and fZ, including all pullback composition constraints. This assertion concerns canonical derived section maps, independently of any representative I,J or modelArrow. The canonical mate unit and counit equations of LocalizationAdjunction are part of this statement; they follow from the defining adjunct formula and triangle identities.",
+ "stmt_deps": [
+  "def-sfb-closed-test-localized-model-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E, 0D6F, 0D6G; sites-modules.tex 04IF; derived.tex 070Y; proetale.tex 09BL. Strict part of the original coherence proof."
+ },
+ "proof": [
+  {
+   "text": "Weakly etale localization identifies the pro-etale sites with slices. Transport\ninternal modules to section-ring modules using the exact section-preserving equivalence.\nApply the ringed-sheaf-slice derived comparison to each cartesian square. Restriction\nhas an exact left adjoint and therefore preserves K-injectives; its comparison with\nderived direct image is invertible and has the stated representative formula. The mate\ncounit equation is supplied by that comparison. Transpose it using the triangle\nidentities to get the displayed unit equation. This proves LocalizationAdjunction.\nFor the restriction square, compose the ordinary units for the two successive inverse\nimages and use pullback composition to identify the equal composite scheme maps.\nFor the localization cube, evaluate both composites on a K-injective representative.\nEach is the same fibre-product section map, and the normalized derived direct-image\ncomposition carries that equality to the asserted cube. Exact pullback composition\nretains every coefficient constraint. The argument works for arbitrary squares,\nso the four specified global arrows and isomorphisms of squares are included.\n The input declarations are [lem-sbc-ringed-topos-sheaf-slice-derived-comparison], [lem-weil-proetale-weakly-etale-localization], [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], [def-weil-pbc-composite-adjunction].",
+   "uses": [
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E, 0D6F, 0D6G; sites-modules.tex 04IF; derived.tex 070Y; proetale.tex 09BL. Strict part of the original coherence proof."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedTestGeometricSectionCoherence",
+  "file": "lean/Sheaf/Paper/ClosedTestGeometricSectionCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestLocalizedModelCoherence.closed_test_geometric_section_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClosedTestLocalizedModelCoherence.closed_test_geometric_section_coherence"
+  ],
+  "statement": "theorem closed_test_geometric_section_coherence\n    (V : (Spec (.of (A ⧸ 𝔞))).AffineProEt) :\n    GeometricCoherence Λ A 𝔞 f h fZ w V",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-5381c",
+  "group": "E2",
+  "result": "fix",
+  "landing": "20261023T230716-L-3468184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-5381c",
+  "group": "E2",
+  "result": "fix",
+  "landing": "20261023T230716-L-3468184",
+  "kind": "interface",
+  "note": "independent cc review: unchanged item theorem signature (clone vs delivery) and the 31 moved declarations (bodies identical, or proved equal via *_eq_original) against the change record; the 4 sorried conjuncts against the item statement and their nodes"
+ }
+}

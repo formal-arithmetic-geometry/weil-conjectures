@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-abelian-torsion-kernel-divisibility",
+ "kind": "statement",
+ "title": "An abelian-variety homomorphism killing prime-to-characteristic torsion is divisible",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety], and let $n\\geq1$ be an integer invertible in $k$. Let $[n]_A:A\\to A$ be multiplication by $n$ [def-sc-mult-n], and put $A[n](k)=\\{x\\in A(k):[n]_A(x)=0\\}$. If a $k$-group-scheme homomorphism $f:A\\to B$ [def-sc-group-scheme] satisfies $f(x)=0$ for every $x\\in A[n](k)$, there is a unique $k$-group-scheme homomorphism $g:A\\to B$ such that $f=g\\circ[n]_A$. Equivalently $f=n g$ in $\\operatorname{Hom}_k(A,B)$, where addition of homomorphisms is pointwise addition in $B$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Remark 8.11(f) and Remark 8.12, printed p.39 (quotient universal property for [n]); Lemma 10.16, printed p.49, and its use in Proposition 14.4(b), printed p.62."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sc-mult-n"
+ ],
+ "proof": [
+  {
+   "text": "Write $q=[n]_A$ and $K=A[n]=\\ker q$. By [lem-sc-av-commutative], both $A$ and $B$ are commutative group schemes. By [lem-sc-isogeny-facts](a), $q$ is finite, flat and surjective. Since $n\\geq1$ is invertible in $k$, [lem-sc-mult-n-etale-kernel] applies and makes $K$ a finite étale group scheme over $k$. This uses the forward implication only, so it also includes the zero-dimensional abelian variety.",
+   "uses": [
+    "lem-sc-av-commutative",
+    "lem-sc-isogeny-facts",
+    "lem-sc-mult-n-etale-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 03RP (proposition-review-abelian-varieties), parts (2), (3), (5), (6); 0BFG (lemma-degree-multiplication-by-d); 0BFH (lemma-abelian-variety-multiplication-by-d-etale), forward implication."
+   }
+  },
+  {
+   "text": "The singleton $\\{q:A\\to A\\}$ is an fpqc covering. Indeed, finiteness means in particular that the inverse image of every affine open $V\\subset A$ is affine [def-weil-finite-integral-morphism]. This one affine open $q^{-1}(V)$ maps onto $V$ by surjectivity, and $q$ is flat by step 1. These are exactly the conditions in [def-weil-pbc-fpqc-covering].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022B (definition-fpqc-covering), applied directly; finite morphisms are affine by Morphisms, Tag 01WH."
+   }
+  },
+  {
+   "text": "The pointwise hypothesis implies that the restriction $f|_K$ is the zero scheme morphism. To see this without discarding nilpotent information, use the finiteness of $K$ to write $K=\\operatorname{Spec}C$, with $C$ a finite $k$-algebra [def-sc-group-scheme]. By [lem-sc-finite-etale-algebra-criterion], $C$ is a finite product of finite separable field extensions of $k$. Every such extension is $k$: the minimal polynomial of any element is irreducible and splits over the algebraically closed field [def-weil-algebraic-closure], hence is linear. Thus $K$ is a finite disjoint union of copies of $\\operatorname{Spec}k$, indexed by $K(k)=A[n](k)$. On each copy the restriction of $f$ is the zero $k$-point by hypothesis; the restrictions therefore assemble to the zero morphism $K\\to B$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sc-finite-etale-algebra-criterion",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), specialized to a finite scheme over an algebraically closed field; the equivalent finite-algebra classification is lem-sc-finite-etale-algebra-criterion."
+   }
+  },
+  {
+   "text": "Check the descent equation explicitly. By the group-scheme operations and the definition of the kernel [def-sc-group-scheme, def-sc-mult-n], there are inverse scheme morphisms $A\\times_k K\\longrightarrow A\\times_{q,A,q}A$, $(a,t)\\longmapsto(a,a+t)$, and $(a,b)\\longmapsto(a,b-a)$. The inverse lands in $K$ because $q(b-a)=q(b)-q(a)=0$; the composites are identities by the group laws. The forward map is assembled from the projection, the inclusion $K\\to A$ and $m_A$; the reverse uses $m_A$ and inversion, with $q(b-a)=0$ giving its factorization through the defining fibre product for $K$. Thus both maps are scheme morphisms by the fibre-product universal property. Under this identification the two pullbacks of $f$ are $(a,t)\\mapsto f(a)$ and $(a,t)\\mapsto f(a+t)=f(a)+f(t)$. They are equal as morphisms by step 3. Hence $f\\circ\\operatorname{pr}_1=f\\circ\\operatorname{pr}_2$ on the kernel pair of $q$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-mult-n"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Remarks 8.11(f) and 8.12, printed p.39; scheme-theoretic expansion of the quotient argument used in Lemma 10.16, printed p.49."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-representable-descent] to the covering of step 2, target scheme $B$, and compatible morphism $f$ from step 4. This gives a unique scheme morphism $g:A\\to B$ with $g\\circ q=f$. It is a $k$-morphism: writing $p_A,p_B$ for the structure maps, $(p_B\\circ g)\\circ q=p_B\\circ f=p_A\\circ q$, so uniqueness in the same descent lemma, now with target $\\operatorname{Spec}k$, gives $p_B\\circ g=p_A$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms), existence and uniqueness of the descended morphism; applied twice."
+   }
+  },
+  {
+   "text": "Verify that $g$ is a group homomorphism, using [def-sc-group-scheme]. Let $L=g\\circ m_A$ and $R=m_B\\circ(g\\times g)$ on $A\\times_k A$. The maps $h_1=q\\times\\mathrm{id}$ and $h_2=\\mathrm{id}\\times q$ are the base changes of $q$ along the first and second projections $A\\times_k A\\to A$, respectively: the pullback identifications send $(a,b,t)$ with $a=q(t)$ to $(t,b)$, and $(a,b,t)$ with $b=q(t)$ to $(a,t)$. Thus [lem-galois-fpqc-covering-base-change] makes both singleton maps fpqc coverings. Precomposing with $h_1\\circ h_2=q\\times q$ gives $L(q(a),q(b))=g(q(a+b))=f(a+b)$ and $R(q(a),q(b))=f(a)+f(b)$, equal because $q$ and $f$ are homomorphisms. These are identities of scheme morphisms. Uniqueness in [lem-weil-pbc-fpqc-representable-descent] first cancels $h_2$ to give $L\\circ h_1=R\\circ h_1$, and then cancels $h_1$ to give $L=R$. Also $g\\circ e_A=g\\circ q\\circ e_A=f\\circ e_A=e_B$. Finally $(g\\circ i_A)\\circ q=g\\circ q\\circ i_A=f\\circ i_A=i_B\\circ f=(i_B\\circ g)\\circ q$; uniqueness for $q$ gives $g\\circ i_A=i_B\\circ g$. Thus $g$ respects all group-scheme operations.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022D (lemma-fpqc), part (3), together with Descent Tag 023Q; explicit verification of the homomorphism assertion of Milne, Chapter I, Remark 8.12."
+   }
+  },
+  {
+   "text": "The uniqueness in step 5 applies to all scheme morphisms and hence to $k$-group-scheme homomorphisms. Finally, for every $k$-scheme $T$ and $a\\in A(T)$, $g_T([n]_A(a))=g_T(na)=n\\,g_T(a)$ by the homomorphism law and the definition of multiplication [def-sc-mult-n]. This identifies $g\\circ[n]_A$ with the pointwise sum of $n$ copies of $g$ as scheme morphisms. Consequently the factorization is exactly $f=ng$ in $\\operatorname{Hom}_k(A,B)$.",
+   "uses": [
+    "def-sc-mult-n"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Remarks 8.11(f) and 8.12, printed p.39; scheme-theoretic expansion of the quotient argument used in Lemma 10.16, printed p.49."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-av-commutative",
+  "lem-sc-isogeny-facts",
+  "lem-sc-mult-n-etale-kernel",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-sc-group-scheme",
+  "lem-sc-finite-etale-algebra-criterion",
+  "def-weil-algebraic-closure",
+  "def-sc-mult-n",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-fpqc-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Remarks 8.11(f) and 8.12, p.39; explicit fpqc-descent proof of their quotient argument, using Stacks Tags 023Q, 022D and 02GL. The application to arbitrary homomorphisms is Lemma 10.16, p.49."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of abelian varieties killing every n torsion point factors through multiplication by n",
+   "results": "8 hits; logged top results: ModN.liftEquiv, ZMod.lift, addMonoidHomOfForallMemZMultiples, QuotientAddGroup.homQuotientZSMulOfHom, QuotientGroup.homQuotientZPowOfHom, AddMonoidHom.map_addCyclic, zmultiplesHom_apply, addMonoidHomOfForallMemZMultiples_apply_gen",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract quotient-group lifts and divisibility of abstract groups do not produce an algebraic group-scheme morphism through [n]"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsion\"",
+   "results": "0 hits; logged top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract quotient-group lifts and divisibility of abstract groups do not produce an algebraic group-scheme morphism through [n]"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]belian[Vv]ariety|torsion.*factor|factor.*torsion",
+   "results": "5 hits; logged top results: Mathlib/Algebra/GroupWithZero/Torsion.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract quotient-group lifts and divisibility of abstract groups do not produce an algebraic group-scheme morphism through [n]"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian variety morphism vanishing on the kernel of n is divisible by n in Hom",
+   "results": "8 hits; logged top results: ModuleCat.hom_nsmul, ZMod.lift, SeparationQuotient.liftNormedAddGroupHomEquiv, divisibleByOfSMulRightSurj, AddSubgroup.torsionBy.nsmul, AddSubgroup.torsionBy, AddCommGroup.divisibleByIntOfSMulTopEqTop, AddSubgroup.torsionBy.zmodModule",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract quotient-group lifts and divisibility of abstract groups do not produce an algebraic group-scheme morphism through [n]"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a group homomorphism through the quotient of an abelian variety by its prime to characteristic torsion subgroup",
+   "results": "8 hits; logged top results: QuotientGroup.homQuotientZPowOfHom, QuotientAddGroup.homQuotientZSMulOfHom, WeierstrassCurve.Affine.Point.toClass, Abelianization.lift, Ideal.torsionMapQuot, ModN.mkQ, IsDedekindDomain.selmerGroup.fromUnitLift, QuotientGroup.homQuotientZPowOfHom_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract quotient-group lifts and divisibility of abstract groups do not produce an algebraic group-scheme morphism through [n]"
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|IsIsogeny|AbelianVariety",
+   "results": "0 hits; ; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern abstract groups or affine algebra lifts, not factorization of abelian-variety scheme morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsion\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern abstract groups or affine algebra lifts, not factorization of abelian-variety scheme morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of abelian varieties vanishing on n torsion is divisible by n in the group of algebraic homomorphisms",
+   "results": "8 hits; AddSubgroup.torsionBy.zmodModule, AddCommGroup.divisibleByIntOfSMulTopEqTop, AddSubgroup.torsionBy.nsmul, ModuleCat.hom_nsmul, AddSubgroup.torsionBy, ZMod.lift, AddSubgroup.torsionBy.mod_self_nsmul, AddGroup.divisibleByNatOfDivisibleByInt",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern abstract groups or affine algebra lifts, not factorization of abelian-variety scheme morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of abelian varieties killing all n torsion points factors as a morphism through multiplication by n",
+   "results": "8 hits; QuotientAddGroup.homQuotientZSMulOfHom, ModN.liftEquiv, QuotientAddGroup.homQuotientZSMulOfHom_comp, QuotientGroup.homQuotientZPowOfHom, QuotientGroup.homQuotientZPowOfHom_comp, addMonoidHomOfForallMemZMultiples, AddIsTorsion.extension_closed, AddCommGrpCat.asHom_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern abstract groups or affine algebra lifts, not factorization of abelian-variety scheme morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of algebraic group homomorphisms along a separable isogeny when its finite kernel is annihilated",
+   "results": "8 hits; AlgHom.liftOfSurjective_comp, AlgHom.liftOfSurjective_apply, Algebra.FormallyUnramified.lift_unique_of_ringHom, Algebra.FormallySmooth.comp_liftOfSurjective, Algebra.FormallyUnramified.lift_unique', IsSepClosed.lift_def, galLift_comp, Algebra.Extension.H1Cotangent.map_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern abstract groups or affine algebra lifts, not factorization of abelian-variety scheme morphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polarized-abelian-odd-level-rigidity",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Remark 8.11(f) and Remark 8.12, printed p.39 (quotient universal property for [n]); Lemma 10.16, printed p.49, and its use in Proposition 14.4(b), printed p.62.",
+   "via": [
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-torsion-kernel-divisibility",
+  "worker": "stage1",
+  "summary": "Expanded the quotient-by-torsion argument into an explicit scheme-theoretic descent proof. Finite étaleness upgrades vanishing on torsion k-points to vanishing on the kernel scheme; the kernel-pair calculation supplies descent, and fpqc uniqueness proves the k-structure, group law and uniqueness. Reused existing nodes throughout; no new nodes or changed statements. Repair of the returned side-completion delivery: reapplied this split over the current live unsplit item, re-read every cited statement and verified all fifteen retained quotation records. Made the two successive fpqc cancellation applications explicit in step 6; retained the original statement and all search records. On the continued promotion repair, rechecked the current DAG after initial dry-run head 8006f4fa451 and expanded step 4 to construct both kernel-pair maps directly from the group-scheme operations and fibre-product universal property. Rebased again for the current promotion return after the initial 2026-10-23 dry run at 5a0b742d807. The current live item remains unsplit and all thirteen dependency statements and fifteen quotations were re-read. Step 6 now identifies the actual pullbacks defining its two fpqc covers and verifies preservation of inversion by descent uniqueness; statement, route and searches are retained.",
+  "blueprint": "Realizes the inherited from.place: supporting kernel-divisibility input in the polarized abelian odd-level rigidity argument (Milne I, 8.11(f), 8.12 and 10.16), under det-thm-sf-ctf-stability-direct-images proof (3). Whole-blueprint searches for isogeny, separable isogeny, torsion kernel and divisible by found no equivalent node. The ancestor tool returns None for this pre-existing ancestry; its from.node and via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme-morphism descent and injectivity of restriction prove the quotient universal property and descend the group law; this is a tool, not a replacement of the unit route, and this unit has no corresponding descent statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-98af75a10",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-98af75a10 (reviewer sub-agent of L); spot-checked: This is the fourth push of the same split with no new nodes (earlier heads 344a, 5c9c and 8f1e all passed). Field by field against 8f1e, only step 6 and the split_report changed. Statement, stmt_deps, proof_deps, source, blueprint, searches and steps 1-5 and 7 are identical, and there is no repair note, so the re-split rule does not apply. I re-read all seven steps against the cited statements. Step 1: isogeny-facts(a) needs k algebraically closed and n>=1, and gives q=[n] finite, flat and surjective. mult-n-etale-kernel needs char k not dividing n, which holds because n is invertible, and gives A[n] finite étale. Step 2: finite implies affine preimages; with surjectivity and flatness this is exactly the fpqc covering definition. Step 3: by the étale-algebra criterion and algebraic closedness, K is a disjoint union of copies of Spec k, so f restricted to K is the zero scheme morphism. Step 4: the kernel pair is A×K via (a,t)↦(a,a+t), with inverse (a,b)↦(a,b−a). Step 5: one-index fpqc descent gives a unique g, which is a k-morphism by uniqueness into Spec k. Step 6 (changed): h1=q×id and h2=id×q are the base changes of q along the two projections, and the pullback coordinates are right. Cancelling h2 and then h1 gives g∘m_A=m_B∘(g×g), and the identity is preserved. The new inversion clause (g i_A) q = f i_A = i_B f = (i_B g) q is correct; it is redundant but harmless. Step 7: g∘[n]=n·g. I checked the statement against Milne AV I Remark 8.12 (p.39) in the local PDF, and Lemma 10.16 is its general-α form. Edge cases: n=1, f=0 and dimension 0; n=p supersingular shows the invertibility hypothesis is needed. Batch-5 flag: both lem-sc-isogeny-facts and lem-sc-mult-n-etale-kernel reach def-trf-schematically-dense-open only through the Hilbert polynomial, Chow and Nagata chain. That node is a generic scheme definition. Finiteness and flatness of [n] and étaleness of A[n] are given by neither the trace formula nor Poincaré duality and are not part of either proof, so both citations are accepted. No SGA is cited. I accept the declared tool_use of lem-weil-pbc-fpqc-representable-descent (Mathlib leaf). No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.TorsionKernelDivisibility",
+  "declaration": "AlgebraicGeometry.existsUnique_factor_npow_of_kills_torsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/TorsionKernelDivisibility.lean",
+  "statement": "theorem existsUnique_factor_npow_of_kills_torsion {k : Type u} [Field k] [IsAlgClosed k] (A B : Over (Spec (.of k))) [GrpObj A] [GrpObj B] [IsAbelianVariety A] [IsAbelianVariety B] (n : ℕ) (hn : 1 ≤ n) (hnk : IsUnit (n : k)) (f : A ⟶ B) [IsMonHom f] (hf : ∀ x : 𝟙_ (Over (Spec (.of k))) ⟶ A, x ≫ (𝟙 A ^ n) = 1 → x ≫ f = 1) : ∃ g : A ⟶ B, IsMonHom g ∧ f = (𝟙 A ^ n) ≫ g ∧ f = g ^ n ∧ ∀ g' : A ⟶ B, IsMonHom g' → f = (𝟙 A ^ n) ≫ g' → g' = g",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1be528e01",
+  "group": "Q154",
+  "result": "pass",
+  "note": "I checked the Lean statement against the node clause by clause. Field: IsAlgClosed. Abelian varieties: GrpObj plus IsAbelianVariety on Over (Spec k). n: 1 ≤ n and IsUnit (n : k). [n] = 𝟙 A ^ n, the same map as torsionSubgroupScheme. A[n](k): rational points x with x ≫ 𝟙 A ^ n = 1, matching torsionByPointsEquiv. f: IsMonHom. Conclusion: f = (𝟙 A ^ n) ≫ g, and the f = g ^ n conjunct is equivalent to it given IsMonHom g. Uniqueness is over all IsMonHom g' with that factorization. No extra assumptions; commutativity is not assumed. Edge cases n=0 and p | n excluded as in the node; n=1, dimension 0 and f=0 covered; one universe u. lean.statement is verbatim the file signature. The node differs from live only in the lean field, and the live node has no lean binding yet. Docstrings have the Milne source place, the blueprint id and all 7 proof steps. Plain imports are proof_dep modules. Greps of side-live Sheaf and WeilConjectures/AlgebraicGeometry found no duplicate; the semiabelian sibling node is a different statement with no Lean. Both report sections present. Per-file compile not reproduced (worker reports clean); no file changed, no fixes."
+ }
+}

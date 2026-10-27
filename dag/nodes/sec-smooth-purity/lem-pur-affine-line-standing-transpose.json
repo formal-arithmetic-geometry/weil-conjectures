@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final paragraph: ordered affine-line transposes and canonical reassociations; expanded parent proof Steps 3--8."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final paragraph: ordered affine-line transposes and canonical reassociations; expanded parent proof Steps 3--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint transpose of a composite counit equals composition of the transposes under the right adjoint compositor",
+   "results": "Found Adjunction.comp_counit_app, comp_counit, mateEquiv_counit, conjugateEquiv_counit and related abstract adjunction identities. These do not compare the independently constructed affine coefficient evaluation with its ordered compact-support contraction.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the existing project composite_transpose for the adjunction part."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv_naturality_left\"",
+   "results": "Found homEquiv_naturality_left, its inverse and square versions. These provide source naturality, not the normalized affine-line or ordered integration identity.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the project restricted exceptional Hom equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "orderedEvaluation_contraction|lineComparison_counit|standingTranspose|affineTraceCounit",
+   "results": "Remote Mathlib grep returned zero hits. Local project searches found standingEvaluation and composite_transpose in AffineLineCompositeTranspose and the independent integration construction in AffineOrderedIntegrationData. No existing named coefficient contraction or standalone standing-line counit normalization was found.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOrderedIntegrationSuccessor",
+  "date": "2026-10-26",
+  "group": "K6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Final paragraph: the independently normalized ordered affine integration and the ordered composite of its line transposes.",
+   "via": [
+    "lem-pur-affine-ordered-integration-transposes",
+    "lem-pur-affine-ordered-integration-successor"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-pur-affine-line-standing-transpose",
+ "title": "Counit normalization of the standing affine-line comparison",
+ "statement": "Fix a finite purity setting P [def-pur-conventions], a scheme Y, and a separated finite-type structure morphism a_Y:Y→Spec(k). Let K be bounded below on the small pro-etale site, with ordinary constructible finite-Tor representative K_e and comparison isomorphism e_K [def-pur-affine-line-purity-comparison]. For the affine-line projection q:A¹_Y→Y, let F_q be its standing compact-support functor, epsilon_q its restricted exceptional counit, and gamma_q the canonical affine-line comparison in standing exceptional coordinates [def-pur-affine-space-comparison]. Let b_q,K be the coefficient tensor-integration evaluation, carried from the chart compactification to the standing one by changeSupport [lem-pur-affine-line-composite-transpose]. Then F_q(gamma_q,K);epsilon_q,K=b_q,K. This is a single-line counit identity; it makes no assertion about the ordered successor, isomorphy or naturality.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-affine-space-comparison",
+  "lem-pur-affine-line-composite-transpose"
+ ],
+ "proof": [
+  {
+   "text": "Expand the specified affine-line comparison as the normalized relative Hom chain of augmentation, with its explicit retained ordinary source witness. Inverting this Hom chain gives augmentation in the chart compactification.",
+   "uses": [
+    "def-pur-affine-line-purity-comparison",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary right-adjoint uniqueness map defining lineExceptionalIso preserves counits. Transport its left compactification comparison across the site using the same retained line witness; it is changeSupport by the definition of fixedCompactSupportOriginIso. Source equality transport supplies exactly the lineSource coordinates. Therefore inverse-transposing the transported line comparison is standingEvaluation, including empty bases and zero coefficients.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "lem-pur-affine-line-composite-transpose",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-affine-space-comparison",
+  "lem-pur-affine-line-composite-transpose",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineLineStandingTranspose",
+  "file": "lean/Sheaf/Paper/AffineLineStandingTranspose.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.lineComparison_counit",
+  "statement": "theorem lineComparison_counit\n    (P : WeilConjectures.PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]\n    (K : Plus (AffineLinePurity.Ring P) Y)\n    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)\n    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)\n    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) :\n    (AffineLineEvaluation.support P aY (AffineSpace PUnit.{u + 1} Y ↘ Y)).map\n        (lineComparison P Y aY K Ke hKe eK) ≫\n      AffineLineEvaluation.counit P aY (AffineSpace PUnit.{u + 1} Y ↘ Y) K =\n    AffineLineEvaluation.standingEvaluation P Y aY K.obj Ke hKe eK",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T195816-L-3264799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T195816-L-3264799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

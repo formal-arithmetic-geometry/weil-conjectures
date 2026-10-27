@@ -1,0 +1,106 @@
+{
+ "id": "lem-per-rational-continuous-slice-transport",
+ "kind": "statement",
+ "title": "Normalized actual restriction to a pro-etale slice",
+ "statement": "For any scheme X and every pro-etale site object U, without a noetherian or dimension assumption on U, the actual rational coefficient sheaf, ordinary module inverse image, canonical derived counit and slice-site equivalence admit the normalized SiteRestriction comparison [def-per-continuous-rational-realization-data].",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), with Lemma 6.8.2(1), Proposition 6.8.11(3), Definition 6.8.8 and Remark 6.8.15; completed-ring presentation via Proposition 6.6.11. Scalar-extension and composition compatibility refer to the canonical coefficient and tensor comparisons."
+ },
+ "proof": [
+  {
+   "text": "Proof: take the actual weakly-etale slice equivalence and its continuous structure.\nIts composite with the forgetful functor is siteInclude. On continuous functions the\nrestricted rational ring and the rational ring of U have the same sections and\nrestriction functions; the identity functions give ring, including its normalization.\nUse the continuous-coefficient slice normalization theorem for its Adic rational\nisomorphism and module comparison. Remove the inserted identity tensor factor by\nmultiplication and identify literal module restriction with overFunctor followed by\npushforward along the slice equivalence and the identity-on-sections ring isomorphism.\nThe module adjunction unit formula is restriction along the actual pullback projection;\nthis is comparison_units. The literal restriction is exact, so the ordinary pullback\nis additive and preserves finite limits and colimits. Its mapDerivedCategory is a\nleft derived functor with its computation isomorphism. The general derived tensor\ncounit, after removing the identity factor termwise, has the same universal property;\nuniqueness of left derived functors gives the displayed derived isomorphism normalized\nby their counits. No noetherian or dimension hypothesis is imposed on U.left.",
+   "uses": [
+    "lem-per-continuous-coefficient-slice-normalization",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-continuous-coefficient-slice-normalization",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "E6 normalized coefficient transport in the argument of BS 6.8.14(2) and Remark 6.8.15."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical normalized derived inverse image commutes with composition scalar extension and restriction to slice sites",
+   "results": "8 hits, including Scheme.Modules pullback pseudofunctors; generic module comparisons only.",
+   "date": "2026-10-25",
+   "verdict": "No theorem for these coefficient encodings and completion units."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "12 hits on Kan extensions and derived uniqueness, including leftDerivedUnique; no project coefficient normalization.",
+   "date": "2026-10-25",
+   "verdict": "Generic universal-property API only."
+  },
+  {
+   "tool": "grep",
+   "query": "RationalRealizationPullbackComparison|ContinuousRational|rationalPullModule",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "No match in Mathlib."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousRationalDerivedRealization",
+  "date": "2026-10-25",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Continuous rational realization before the standard support bounds.",
+   "via": [
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalContinuousSliceTransport",
+  "file": "lean/Sheaf/Paper/RationalContinuousSliceTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.rationalContinuousSliceTransport",
+  "statement": "theorem rationalContinuousSliceTransport\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) (U : X.ProEt) : Nonempty (SiteRestriction l E X U)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2133",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T043222-L-1690703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2133",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T043222-L-1690703",
+  "kind": "interface",
+  "note": "independent cc review: data declarations byte-identical to clone a81abc13ee9 and publicly re-exported; item assembly checked against the node and the cone-model, localized t-structure and scalar-coherence dependencies; four sorried sub-statements checked as true against the At/Along/Family structures; 7 delivered modules + 24 direct importers compiled clean in a sandbox (max 42.6 s); axioms checked"
+ }
+}

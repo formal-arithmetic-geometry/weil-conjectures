@@ -1,0 +1,201 @@
+{
+ "id": "lem-trf-nodal-completion-rational-point",
+ "kind": "statement",
+ "title": "An abstract nodal completion forces a rational closed point",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], let $X$ be a scheme locally of finite type over $k$ [def-weil-finite-type-morphism], and let $x\\in X$. Write $A=\\mathcal O_{X,x}$, let $\\mathfrak m$ be its maximal ideal, and let $\\widehat A=\\varprojlim_{r\\ge1}A/\\mathfrak m^r$ be its maximal-ideal-adic completion [def-weil-pbc-adic-completion]. Suppose there exists an isomorphism of rings $\\widehat A\\cong k[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series], with no compatibility with the maps from $k$ assumed. Then $x$ is a closed point of $X$ [def-weil-closed-points] and the structure homomorphism $k\\to\\kappa(x)=A/\\mathfrak m$ [def-weil-residue-field] is an isomorphism. In particular, on any affine open neighbourhood $U=\\operatorname{Spec}S$ of $x$ for which $S$ is a finitely generated $k$-algebra, its prime $\\mathfrak p\\subset S$ is maximal and the structure map $k\\to S/\\mathfrak p$ is an isomorphism. No dimension or separatedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C56, lemma-node-field-extension, closed-point reduction in the proof, adapted to the abstract ring-isomorphism hypothesis without a global dimension assumption; the retained finite-generation and Eisenstein argument is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-closed-points",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=k[[u,v]]/(uv)$. A power series $f$ with constant term $c\\ne0$ has inverse $c^{-1}\\sum_{j\\ge0}(1-c^{-1}f)^j$: each coefficient is a finite sum since $1-c^{-1}f$ has zero constant term [def-weil-pbc-multivariate-power-series]. Thus in $R$ every element with nonzero constant term is a unit, while one with zero constant term cannot be a unit (apply constant-term evaluation). Evaluation $R\\twoheadrightarrow k$ therefore has the unique maximal ideal as kernel. Composing $\\widehat A\\cong R$ with it shows that $\\widehat A$ is local with residue field abstractly isomorphic to $k$. The projection $\\pi:\\widehat A\\to A/\\mathfrak m$ is surjective: the compatible residues of any lift $a\\in A$ map to its class [def-weil-pbc-adic-completion]. Its kernel is maximal, hence the unique maximal ideal. Consequently $L=A/\\mathfrak m$ is abstractly isomorphic to $k$. Transporting polynomial coefficients and a root across this field isomorphism shows that $L$ is algebraically closed; this does not identify the structure map $k\\to L$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-adic-completion",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00M9, section-completion; explicit constant-term and geometric-series calculation in the nodal quotient."
+   }
+  },
+  {
+   "text": "Choose a finite-type affine neighbourhood $U=\\operatorname{Spec}S$ of $x$ by [def-weil-finite-type-morphism], and let $\\mathfrak p$ be its prime. The germ map identifies $A$ with $S_{\\mathfrak p}$ by [lem-weil-pbc-affine-open-stalk-localization]. The residue extension $L/k$ is therefore the extension at $\\mathfrak p$ induced by $k\\to S$, and is finitely generated as a FIELD by [lem-weil-pbc-finite-type-residue-field-extension-finitely-generated], applied to this finite-type map (the prime of $k$ is $(0)$).",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07C1, lemma-regular-base-change, proof: finite generation of residue extensions; affine stalk comparison is Schemes Tag 01HV."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-algclosed-fg-field-finite] to the actual structure homomorphism $k\\to L$. Step 1 supplies algebraic closedness of its target, and Step 2 supplies finite field generation. It follows that $L$ is finite-dimensional over $k$ through that map. Since the BASE $k$ is algebraically closed, [lem-weil-pbc-alg-closed-finite-extension-trivial] now makes this specified structure homomorphism bijective.",
+   "uses": [
+    "lem-trf-algclosed-fg-field-finite",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030F and 09GH with the extracted field lemma; Tag 09GR, lemma-algebraically-closed, for triviality over the algebraically closed base."
+   }
+  },
+  {
+   "text": "For EVERY finite-type affine neighbourhood $V=\\operatorname{Spec}T$ containing $x$, clause (a) of [lem-kun-closed-point-field] applies to $V/k$ with the same finite residue extension $L/k$, so $x$ is closed in $V$ and its prime $\\mathfrak q$ is maximal. The affine stalk identification gives $L=T_{\\mathfrak q}/\\mathfrak qT_{\\mathfrak q}=T/\\mathfrak q$, compatibly with $k$, since elements outside a maximal ideal already become units in its field quotient. Thus $k\\to T/\\mathfrak q$ is an isomorphism. Finally if $z$ specializes $x$ in $X$, choose a finite-type affine neighbourhood $V$ of $z$. An open containing a specialization contains its generalization, so $x\\in V$. Closedness of $x$ in $V$ implies $z=x$. Hence $\\overline{\\{x\\}}=\\{x\\}$ in $X$, proving global closedness without separatedness or quasi-compactness.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-point-field.md",
+    "place": "Clause (a); agent-written specialization argument passes from all finite-type affine charts to global closedness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-kun-closed-point-field",
+  "lem-trf-algclosed-fg-field-finite",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C56, lemma-node-field-extension, rational-point reduction adapted to the abstract completion hypothesis; detailed source and retained Eisenstein argument in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A point of a scheme locally of finite type over an algebraically closed field whose completed local ring is abstractly isomorphic to k[[u,v]]/(uv) is a closed rational point",
+   "results": "8 hits: AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo. None gives the implication from an abstract nodal completion to closedness and rationality. The closed-point criteria require an additional finite-type morphism or closedness input. The field hits do not show that the transcendence basis is empty.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary double|AdicCompletion.*IsAlgClosed|IsAlgClosed.*AdicCompletion",
+   "results": "5 hits: Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean. None gives the implication from an abstract nodal completion to closedness and rationality. The closed-point criteria require an additional finite-type morphism or closedness input. The field hits do not show that the transcendence basis is empty.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraically closed residue field at a point of a locally finite type scheme over an algebraically closed field makes the point rational and closed",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.residueField, AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.LocallyRingedSpace.Γevaluation, AlgebraicGeometry.Scheme.evaluation.congr_simp, AlgebraicGeometry.Scheme.residue, AlgebraicGeometry.Scheme.Spec_map_residue_apply, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.IsClosedImmersion.Spec_map_residue. None gives the implication from an abstract nodal completion to closedness and rationality. The closed-point criteria require an additional finite-type morphism or closedness input. The field hits do not show that the transcendence basis is empty.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, Algebra.FiniteType, AdicCompletion",
+   "results": "0 hits: . None gives the implication from an abstract nodal completion to closedness and rationality. The closed-point criteria require an additional finite-type morphism or closedness input. The field hits do not show that the transcendence basis is empty.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field extension of finite transcendence degree which is finitely generated as a field and is algebraically closed must be algebraic over the base field",
+   "results": "8 hits: IsAlgClosed.isAlgClosure_of_transcendence_basis, FirstOrder.Field.isAlgClosed_of_model_ACF, IsAlgClosed.instIsAlgClosure, isAlgClosure_iff, IsAlgClosure.isAlgebraic, IsTranscendenceBasis.isAlgebraic_field, AlgebraicClosure.isAlgClosed, IntermediateField.finite_of_fg_of_isAlgebraic. None gives the implication from an abstract nodal completion to closedness and rationality. The closed-point criteria require an additional finite-type morphism or closedness input. The field hits do not show that the transcendence basis is empty.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-node-algebraically-closed-extension",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Supplies the hypothesis transfer used by its Steps 4, 6 and 11: nodal geometric fibres over the chosen algebraic closure give nodal fibres over every algebraically closed field. Re-split of lem-trf-node-algebraically-closed-extension: old Step 1, residue-field and closed-point argument.",
+   "via": [
+    "lem-trf-node-algebraically-closed-extension",
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-nodal-completion-rational-point",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved abstract algebraic closedness of the residue field directly from the nodal ring and the surjective first projection of the completion. Used existing affine and finite-generation nodes, extracted one general field-theoretic lemma, and proved rationality and global closedness via the specified structure map and finite-type affine charts.",
+  "blueprint": "Refines the ancestor locality/semistable base-change branch at the residue-field and closed-point argument of lem-trf-node-algebraically-closed-extension, old Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+    "why": "Generic finite-type ring-map residue extension theorem supplies finite generation as a field; no trace-unit statement supplies this foundational algebra input."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic finite-type closed-point criterion is applied only on finite-type affine neighbourhoods, after the residue extension is proved finite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-kun-closed-point-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-7b39d610e",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-7b39d610e (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-algclosed-fg-field-finite, every cited statement and the parent's Step 1, which needs exactly 'x is closed and k->kappa(x) is an isomorphism'. Step 1 is genuinely elementary: constant-term evaluation on k[[u,v]]/(uv) shows R is local with residue field k, and the surjection from the completion to A/m (the def-adic-completion map x_1) gives L≅k abstractly, so L is algebraically closed; the step makes no claim about the structure map. Step 2: the stalk-localization lemma (clause c) and the residue-extension lemma applied to k->S at p over (0) give L finitely generated as a field over k. Step 3: the new lemma gives L finite over k through the actual map, and alg-closed-finite-extension-trivial makes that map bijective. Step 4: clause (a) of lem-kun-closed-point-field on every finite-type affine chart, plus an explicit specialization argument, proves global closedness with no separatedness. proof_deps equals the union of uses. The new node is true: the transcendence basis is finite and if r>0 then Z^l - t_1 with l>e is Eisenstein, a contradiction; valid in every characteristic. Tested it on C/R, F_p-bar/F_p (excluded) and k(t)-bar (excluded). It is self-contained, statement-only and strictly smaller than the item. Duplicate scan found no duplicate: fg-field-finite-transcendence-basis, exc-transcendence-basis-algebraic-closure, closed-point-residue-field-base, affine Nullstellensatz and pure-transcendental-relatively-algebraically-closed all differ. Sources checked: curves.tex:4388 Tag 0C56, more-algebra.tex:10413 Tag 07C1, and tags 030F/09GH/09GR. No SGA is cited and there is no re-split note. Accepted tool_uses: the finite-type residue-extension lemma and lem-kun-closed-point-field. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalCompletionRationalPoint",
+  "declaration": "AlgebraicGeometry.nodalCompletion_closed_rational",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalCompletionRationalPoint.lean",
+  "statement": "theorem nodalCompletion_closed_rational {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] (x : X) (hcompletion : Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) : x ∈ closedPoints X ∧ Function.Bijective (f.residueFieldAlgebraMap x) ∧ ∀ (U : X.affineOpens) (hxU : x ∈ U.1), ((f.appLE ⊤ U.1 le_top).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).FiniteType → (U.2.primeIdealOf ⟨x, hxU⟩).asIdeal.IsMaximal ∧ Function.Bijective ((Ideal.Quotient.mk (U.2.primeIdealOf ⟨x, hxU⟩).asIdeal).comp ((f.appLE ⊤ U.1 le_top).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-177d59f28",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Lean statement checked clause by clause against node and Stacks 0C56 adaptation: existence of an abstract ring isomorphism (not k-compatible) between the maximal-ideal-adic completion of the stalk and k[[u,v]]/(uv); global closedPoints; bijectivity of the canonical structure map residueFieldAlgebraMap (ZetaSeries:224 read); affine clause over all affine opens containing x with finite-type k→Γ(X,U), maximal primeIdealOf and bijective k→S/p, composition direction checked. No extra hypotheses; shared universe u is forced by the morphism to Spec k. Statement field verbatim; node otherwise identical to live; stmt_deps unchanged; sorry only; source and blueprint docstrings with 4-step plan; report sections present. NodalPointEtaleLocality private AlgEquiv lemma is not a duplicate. No findings; no files changed; not recompiled per instructions."
+ }
+}

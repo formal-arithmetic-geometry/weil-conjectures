@@ -1,0 +1,180 @@
+{
+ "id": "lem-pur-scalar-sheaf-tensor-pullback",
+ "kind": "statement",
+ "title": "Ordinary scalar balancing and pullback square",
+ "statement": "Let A and B be commutative rings in Type(u+1), phi:A -> B a ring homomorphism and f:Z -> W a scheme morphism in universe u. On each small etale site let E be sheafified sectionwise scalar extension, U exact scalar restriction, and S=U(1_B). The ordinary balancing map b_M:M tensor_A S -> U(E M) is the unit of E adjoint to U, followed by the lax tensorator of U and its image of the right unitor [lem-pur-derived-change-of-rings]. It is invertible without flatness. Let chi:f_A^{-1} U ~= U f_B^{-1} be the specified restriction/pullback iso [lem-sbc-canonical-restrict-scalars-functor-comparisons], e:f_B^{-1}E ~= E f_A^{-1} the scalar/pullback conjugate [def-pur-scalar-pullback-representative-data], and k:f_A^{-1}S_W ~= S_Z the composite of chi on the B-unit and U of the inverse monoidal unit iso. For every A-module sheaf M on W, f_A^{-1}(b_M) ; chi_(E M) ; U(e_M) equals delta_(M,S_W) ; (id tensor k) ; b_(f_A^{-1} M), where delta is ordinary inverse-image comonoidality.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A7; ordinary scalar balancing computation in parent proof step 3"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-scalar-pullback-representative-data",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Restriction preserves sheafification by its coextension adjunction. The generic sheafified unit-projection theorem and the module balancing isomorphism prove b_M invertible.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise direct-image/restriction identity is monoidal. Conjugating under the composite monoidal adjunctions makes e monoidal. Iterated mate identities and the restriction/coextension triangles identify the scalar-adjunction mate of e inverse with chi.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "def-pur-scalar-pullback-representative-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic compatibility of unit projections with a monoidal base-change square. Its coefficient map is chi on the B-unit followed by U of the comonoidal unit map, hence k. This is exactly the displayed square.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pur-scalar-pullback-representative-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-pur-scalar-pullback-representative-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A7; ordinary scalar balancing computation in parent proof step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of extension of scalars commutes with inverse image and tensor comparison on K-flat complexes",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, Module.Flat.isBaseChange",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural_left",
+   "results": "1 hits: CategoryTheory.Functor.LaxMonoidal.μ_natural_left",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarSheafTensorMap|scalarTensorPullback|scalarTensorModelNormalization",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image tensor comparison with a complex concentrated in degree zero agrees with the ordinary monoidal pullback tensor comparison",
+   "results": "8 hits: HomologicalComplex.leftUnitor'_inv, HomologicalComplex.leftUnitor', HomologicalComplex.Monoidal.inducingFunctorData, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Functor.Monoidal.tensorObjComp_inv_app, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback tensor product comparison commutes with localization on a complex and a sheaf concentrated in degree zero",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalizedModule.rTensor, IsLocalization.tensorProduct_isLocalizedModule, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.Q, IsLocalization.tensor, CategoryTheory.Functor.mapDerivedCategoryFactors, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "the unit projection map of extension and restriction of scalars commutes with monoidal inverse image of sheaves",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, PresheafOfModules.restrictScalarsObj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "grep",
+   "query": "map.*unitProjection|tensor.*single.*pullback|pullback.*single.*tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarTensorPullbackNormalization",
+  "date": "2026-10-27",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Step 5, finite coefficient reduction; Tags 07A4 and 07A7; ordinary scalar balancing computation in parent proof step 3",
+   "via": [
+    "lem-pur-scalar-tensor-pullback-normalization",
+    "lem-pur-etale-scalar-mate-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarSheafTensorPullback",
+  "file": "lean/Sheaf/Paper/ScalarSheafTensorPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarSheafTensorPullback_square",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarSheafTensorMap_isIso",
+   "AlgebraicGeometry.Etale.scalarCoefficientSheafPullbackIso",
+   "AlgebraicGeometry.Etale.scalarSheafTensorPullback_square"
+  ],
+  "statement": "theorem scalarSheafTensorPullback_square\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {Z W : Scheme.{u}} (f : Z ⟶ W)\n    (M : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) :\n    (upperStar (ModuleCat.{u + 1} A) f).map (scalarSheafTensorMap φ W M) ≫\n        (upperStarRestrictScalarsIsoSheaf φ f).hom.app\n          ((ProEtale.etaleSheafExtendScalars φ W).obj M) ≫\n        (Sheaf.restrictScalars Z.smallEtaleTopology φ).map\n          ((scalarSheafPullbackIso φ f).hom.app M) =\n      Functor.OplaxMonoidal.δ (upperStar (ModuleCat.{u + 1} A) f) M\n          (scalarCoefficientSheaf φ W) ≫\n        ((upperStar (ModuleCat.{u + 1} A) f).obj M ◁\n          (scalarCoefficientSheafPullbackIso φ f).hom) ≫\n        scalarSheafTensorMap φ Z ((upperStar (ModuleCat.{u + 1} A) f).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T021351-L-2762338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T021351-L-2762338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

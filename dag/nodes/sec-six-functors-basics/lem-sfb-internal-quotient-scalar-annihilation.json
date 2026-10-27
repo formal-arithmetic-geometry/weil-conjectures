@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-internal-quotient-scalar-annihilation",
+ "kind": "statement",
+ "title": "A residue-kernel power annihilates the actual transported quotient unit",
+ "statement": "Let l be prime, E a finite extension of Q_l and X a scheme. Use the small constant ring O and residue map q [def-sfb-internal-completion-section-transport], and the actual transported complex N and positive quotient units u_n [def-sfb-internal-quotient-tower-model]. If a is a global section of O whose residue is zero on every site object, then f_n followed by the tensor right unitor B=N tensor O[0] to N and u_n is zero for every n, where f_n is tensor with the single-complex scalar a^(n+1) [lem-sfb-ringed-singleton-koszul-cone]. No Koszul-to-quotient maps, regularity, boundedness or flatness are asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), singleton augmentation; also proetale.tex, Section derived-completion-noetherian (099L) and Lemma naive-completion (099M)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-quotient-tower-model",
+  "def-sfb-internal-completion-section-transport",
+  "lem-sfb-ringed-singleton-koszul-cone"
+ ],
+ "proof": [
+  {
+   "text": "Compare the standard constant integral ring and every standard quotient by the positive uniformizer power with the actual discrete rings, using smallIso and its naturality. The existing sectionwise principal-kernel formula at level zero puts a residue-zero section in the principal uniformizer ideal. Ideal.pow_mem_pow and the kernel formula at level n show that its (n+1)st power is zero in the actual discrete finite quotient.",
+   "uses": [
+    "det-prop-integral-criterion-constant-coefficients",
+    "lem-sfb-internal-discrete-quotient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The discrete finite quotient maps canonically to the continuous finite coefficient ring. Its scalar square with the integral coefficient comparison commutes: the point comparison is the identity on constant sections, and the constant-to-continuous maps are the sheafification transposes of constant functions. Pull this square to X. Internal extension of scalars along the continuous quotient, followed by restriction, is the tensor with its restricted regular module; the latter is the prescribed finiteModule. Restrict the extended module along the discrete-to-continuous map and use scalar-restriction compatibility of section reconstruction and small-site pushforward. Thus each transported finite tensor term is a module over the actual discrete finite quotient.",
+   "uses": [
+    "def-sfb-integral-constant-model-realization",
+    "lem-sfb-integral-models-flat-residue",
+    "lem-sfb-integral-constant-section-projection",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "sk-def-pe-derived-completion",
+    "def-sfb-internal-completion-section-transport",
+    "def-sfb-internal-quotient-tower-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The action of a unit endomorphism on a module sheaf is sectionwise multiplication by its value at 1, as follows from pure tensor extensionality and the right-unitor formula. Consequently the scalar power acts by zero on every transported quotient term by the first two steps. The right unitor for a complex, expanded on the unique degree-zero summand of the single complex, conjugates tensor with the single scalar power to this termwise unit-endomorphism action. Naturality moves that action across the actual quotient-unit map. The action on its target is zero; complex extensionality proves the asserted composite is zero.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-sfb-internal-quotient-tower-model",
+    "lem-sfb-ringed-singleton-koszul-cone"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-integral-criterion-constant-coefficients",
+  "lem-sfb-internal-discrete-quotient-comparison",
+  "def-sfb-integral-constant-model-realization",
+  "lem-sfb-integral-models-flat-residue",
+  "lem-sfb-integral-constant-section-projection",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "sk-def-pe-derived-completion",
+  "def-sfb-internal-completion-section-transport",
+  "def-sfb-internal-quotient-tower-model",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-sfb-ringed-singleton-koszul-cone"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E); proetale.tex, Lemma naive-completion (099M). R8: sectionwise kernel powers, canonical quotient module structure, and the termwise unitor calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section in the kernel of the residue quotient has its nth power acting by zero on the quotient by the nth power of a uniformizer",
+   "results": "PadicInt.ker_toZModPow, Valuation.pow_Uniformizer_is_pow_generator and DVR ideal-power lemmas, but no transported internal quotient identity.",
+   "date": "2026-10-26",
+   "verdict": "Arithmetic ingredients only; no exact sheaf statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.pow_mem_pow",
+   "results": "Ideal.pow_mem_pow: x in I implies x^n in I^n.",
+   "date": "2026-10-26",
+   "verdict": "Useful local calculation; actual coefficient maps and tensor transport remain."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Ss]calar|[Ss]calar.*quotient|pow_mem_pow",
+   "results": "Mathlib Ideal.Operations provides pow_mem_pow; project searches locate IntegralConstantCompletion quotient descriptions and IntegralModelsStacksData coefficient maps, but no theorem annihilating the actual quotientUnits by this scalar power.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalKoszulFiniteAugmentation",
+  "date": "2026-10-26",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Reduction paragraph: the finite residue reduction is the cone of multiplication by the uniformizer; strict finite augmentation maps; A residue-kernel power annihilates the actual transported quotient unit",
+   "via": [
+    "lem-sfb-internal-koszul-finite-augmentation",
+    "lem-sfb-internal-koszul-quotient-resolution",
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalQuotientScalarAnnihilation",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalQuotientScalarAnnihilation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalCompletionTransport.quotient_scalar_annihilation",
+  "statement": "theorem quotient_scalar_annihilation\n    (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)\n    (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,\n      (residue l E X).hom.app (op U) (a.val (op U)) = 0)\n    (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :\n    ringedSingletonKoszulPower (ring l E X) a (complex l E X P) n ≫\n      (ringedKoszulRightUnitIso (ring l E X) (complex l E X P)).hom ≫\n        (quotientUnits l E X P).app (op n) = 0",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261026T024100-L-637444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261026T070856-L-3681724",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,322 @@
+{
+ "id": "lem-weil-pbc-quotient-pullback-compositor-normalization",
+ "kind": "statement",
+ "title": "Quotient module pullbacks respect normalized ordinary and derived composition",
+ "statement": "Let $(A,I)$ be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], with each $P_n=A/I^n$ finite, and put $R_T=\\varprojlim_{m\\geq1}(P_m)_T$ and $Q_{T,n}=(P_n)_T$ as an $R_T$-module via its quotient projection. Let $h:Z\\to W$ and $k:W\\to V$ be composable scheme morphisms. Give their small pro-etale topoi the canonical coefficient identifications $c_u:u^{-1}R_{\\mathrm{target}(u)}\\cong R_{\\mathrm{source}(u)}$ of [lem-weil-pbc-profinite-coefficient-inverse-image], with the composite identification for $kh=k\\circ h$. Use the actual module adjunctions and their exact derived pullbacks [def-weil-pbc-proetale-operations]. For $u=h,k,kh$, let $a_{u,n}:u^*Q_{\\mathrm{target}(u),n}\\xrightarrow{\\sim}Q_{\\mathrm{source}(u),n}$ be the coefficient-linear module comparison induced by $c_{u,n}$. Normalize its adjunct to send each constant section $p$ to the same constant section on the base-changed object. Let $D_{h,k}:k_*\\circ h_*\\cong(kh)_*$ denote the ordinary direct-image compositor; for every pro-etale object $U\\to V$, its section map is restriction along $(Z\\times_W(W\\times_VU))\\cong Z\\times_VU$. Let $b_{h,k}:(kh)^*\\xrightarrow{\\sim}h^*k^*$ be its inverse left-adjoint conjugate.\n\nFor every $n\\geq1$, the ordinary module comparisons satisfy\n$$a_{kh,n}=a_{h,n}\\circ h^*a_{k,n}\\circ b_{h,k,Q_{V,n}}.$$\nLet $q_{u,n}:Lu^*Q_{\\mathrm{target}(u),n}[0]\\xrightarrow{\\sim}Q_{\\mathrm{source}(u),n}[0]$ be the localization of $a_{u,n}$ with the canonical exact-pullback/single-complex comparisons. For the canonical derived compositor $c_{h,k}:L(kh)^*\\xrightarrow{\\sim}Lh^*Lk^*$ of [lem-weil-pbc-proetale-derived-pullback-composition], including transport along the completed coefficient identification, one has the equality in $D(R_Z)$\n$$q_{kh,n}=q_{h,n}\\circ Lh^*(q_{k,n})\\circ c_{h,k,Q_{V,n}[0]}.$$\nThe ordinary and derived comparisons are natural in quotient transition maps and morphisms of the finite coefficient systems.\n\nFor $f:X\\to Y$, $g:Y'\\to Y$, $g':X'\\to X$, and $f':X'\\to Y'$ forming a chosen Cartesian square $fg'=gf'$ [def-weil-pbc-cartesian-square], with the same datum at all four corners, let $\\theta=\\theta_\\square^{-1}=c_{f',g}\\circ c_{g',f}^{-1}:L(g')^*Lf^*\\xrightarrow{\\sim}L(f')^*Lg^*$ be the inverse of the canonical ringed-square comparison $\\theta_\\square:L(f')^*Lg^*\\to L(g')^*Lf^*$ of [def-weil-pbc-ambient-ringed-exchange]. Then\n$$q_{g',n}\\circ L(g')^*q_{f,n}=q_{f',n}\\circ L(f')^*q_{g,n}\\circ\\theta_{Q_{Y,n}[0]}.$$\nNo properness or invertibility of an exchange map is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; specialization to the section-normalized finite quotient objects in blueprint lemma-weil-pbc-perfect-projection-formula, third proof paragraph (base-change compatibility), and lean/Sheaf/Paper/PerfectProjectionFormula.lean, QuotientComposition and baseChange_compatibility, lines 1830–2150."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\rho_{u,n}:Q_{\\mathrm{target}(u),n}\\to u_*Q_{\\mathrm{source}(u),n}$ for the adjunct of $a_{u,n}$. By [lem-weil-pbc-profinite-coefficient-inverse-image] its underlying map is the canonical constant-section map. The projection identity $\\pi_{U,n}c_u=c_{u,n}u^{-1}\\pi_{V,n}$ makes this map coefficient-linear for the actions of [def-weil-pbc-proetale-operations]. Explicitly, in the tensor presentation the comparison is $x\\otimes r\\mapsto c_{u,n}(x)\\pi_{U,n}(r)$. Transporting scalars along $c_u$ identifies this with the ring-sheaf isomorphism $c_{u,n}$ on the underlying module, so it is an isomorphism. Thus the stipulated normalization uses the actual module adjunction, rather than an independently chosen isomorphism of underlying sheaves.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; coefficient projection identities of lem-weil-pbc-profinite-coefficient-inverse-image"
+   }
+  },
+  {
+   "text": "The maps $\\rho$ satisfy\n$$\\rho_{kh,n}=D_{h,k,Q_{Z,n}}\\circ k_*\\rho_{h,n}\\circ\\rho_{k,n}.$$\nIndeed [def-weil-pbc-constant-sheaf] presents $Q_{V,n}$ as the sheafification of the constant presheaf $P_n$. Precompose both proposed sheaf maps with its sheafification unit. On an object $U\\to V$ and $p\\in P_n$, the right side sends $p$ to $p$ over $W\\times_VU$, then to $p$ over $Z\\times_W(W\\times_VU)$, and then restricts it to $Z\\times_VU$. The left side sends it directly to that same constant section. The two presheaf maps therefore agree. The uniqueness in [def-weil-pbc-sheafification] proves equality of the sheaf maps, hence of the module maps. This argument does not suppose that all sections of a constant sheaf are globally constant.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0H7J and 00WH, example-constant-sheaf and proposition-sheafification-adjoint"
+   }
+  },
+  {
+   "text": "Let $\\eta_c$ be the unit of $(kh)^*\\dashv(kh)_*$ and $\\eta_{hk}$ the unit of $h^*k^*\\dashv k_*h_*$. By [def-weil-pbc-composite-adjunction] the latter hom bijection is the successive pair of hom bijections. The defining unit equation of the inverse conjugate $b$ in [lem-weil-pbc-conjugate-iso-unit-equation] is\n$$(kh)_*(b_M)\\eta_{c,M}=D_{h,k,h^*k^*M}\\eta_{hk,M}.$$\nFor $t:h^*k^*M\\to N$, postcompose by $(kh)_*t$ and use naturality of $D$. It follows that the single-adjunction transpose of $t b_M$ equals $D_{h,k,N}$ followed after the composite-adjunction transpose of $t$. For $M=Q_{V,n}$, $N=Q_{Z,n}$ and $t=a_{h,n}\\circ h^*a_{k,n}$, naturality of the two hom bijections makes that transpose $k_*\\rho_{h,n}\\circ\\rho_{k,n}$. Step 2 identifies its composite with $D$ as $\\rho_{kh,n}$. Injectivity of the single-adjunction hom bijection proves the asserted ordinary equality.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; the adjunction-unit calculation is written out here"
+   }
+  },
+  {
+   "text": "We check which ordinary comparison is being localized. Under the canonical inverse-image composition identification, the module comparison $b$ is\n$$m\\otimes r\\longmapsto(m\\otimes1)\\otimes r.$$\nIts inverse sends $(m\\otimes s)\\otimes r$ to $m\\otimes c_h(h^{-1}s)r$. The tensor balancing relation gives both inverse identities; balancing over the remaining ring uses that the coefficient map for $kh$ is the composite of those for $k$ and $h$. These are sheaf maps because their formulas commute with restrictions. The units of the module adjunction of [def-weil-pbc-proetale-operations] send $m$ to $m\\otimes1$ after the underlying inverse-image unit. Hence these formulas satisfy the unit equation in step 3. Uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] identifies this tensor comparison with the specified $b$. In particular it is the termwise canonical module comparison used in [lem-weil-pbc-proetale-derived-pullback-composition].",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; explicit tensor and unit calculation"
+   }
+  },
+  {
+   "text": "All three pullbacks are exact and their derived functors are induced termwise by [def-weil-pbc-proetale-operations]. Apply [lem-weil-pbc-localization-universal-property](2) to the termwise natural isomorphism $b$, followed by localization of complexes. This gives a derived comparison $\\widehat b:L(kh)^*\\to Lh^*Lk^*$ respecting the canonical factorization maps. It equals the specified $c_{h,k}$: for every complex $K$ choose $P\\to K$ as in [lem-pc-kflat-resolution], on the site $V_{\\mathrm{proet}}$ with ring sheaf $R_V$. At $P$ both comparisons are the class of the same termwise map by step 4 and the K-flat normalization in [lem-weil-pbc-proetale-derived-pullback-composition]. Naturality at the isomorphism represented by $P\\to K$ then gives equality at $K$. Every derived object has such a representative. The coefficient transport is included here: the composite completed comparison equals $c_{kh}$ by [lem-weil-pbc-profinite-coefficient-inverse-image], so the endpoint identification is exactly the one in the question.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D and 06YS, lemma-derived-pullback-composition and lemma-K-flat-resolution"
+   }
+  },
+  {
+   "text": "For a module $M$ let $j(M)=M[0]$, and denote the exact-pullback comparison by $s_{u,M}:Lu^*j(M)\\xrightarrow{\\sim}j(u^*M)$. Termwise application gives $u^*(M[0])=(u^*M)[0]$ and the same identity for module maps. Thus $q_{u,n}=j(a_{u,n})s_{u,Q_{\\mathrm{target}(u),n}}$. The descent formula of [lem-weil-pbc-localization-universal-property](2), with the identification of step 5, gives\n$$s_{h,k^*M}\\circ Lh^*(s_{k,M})\\circ c_{h,k,j(M)}=j(b_M)\\circ s_{kh,M}.$$\nNaturality of $s_h$ with respect to $a_{k,n}$ now rewrites $q_{h,n}\\circ Lh^*q_{k,n}\\circ c_{h,k,j(Q_{V,n})}$ as $j(a_{h,n}\\circ h^*a_{k,n}\\circ b_{Q_{V,n}})s_{kh,Q_{V,n}}$. Step 3 makes this $j(a_{kh,n})s_{kh,Q_{V,n}}=q_{kh,n}$. Only functoriality and the canonical factorization maps of the exact operations were used.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, specialized through exact localization to single complexes"
+   }
+  },
+  {
+   "text": "For a quotient transition $t:P_b\\to P_a$, the two composites of the normalized adjunct and $t$ send a constant $p$ to $t(p)$ on the base-changed object. The sheafification uniqueness used in step 2 makes them equal on the whole constant sheaf. By the projection and transition identities in [lem-weil-pbc-profinite-coefficient-inverse-image] these are maps of the required modules; transposing yields $a_{u,a}\\circ u^*t=t\\circ a_{u,b}$. For a morphism of finite ring systems $\\phi_\\bullet$, use the induced completed ring map and restrict target scalars along it. The equality $\\phi_n\\pi_n=\\pi'_n\\phi_\\infty$ makes these maps linear after that restriction, and the same constant-section test sends $p$ to $\\phi_n(p)$ on both sides. Exact restriction does not change underlying complexes. Functoriality of localization, including its respect for compositions, then gives the same naturality for the $q$'s. The composite equalities of steps 3 and 6 respect these maps because each factor does.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH, proposition-sheafification-adjoint; finite-system naturality of the coefficient comparison"
+   }
+  },
+  {
+   "text": "In the chosen square, composition coherence of [lem-weil-pbc-profinite-coefficient-inverse-image] identifies the two completed coefficient maps along $fg'=gf'$. Put $A=q_{g',n}\\circ L(g')^*q_{f,n}$ and $B=q_{f',n}\\circ L(f')^*q_{g,n}$. Step 6 gives, after this specified equality transport,\n$$A\\circ c_{g',f}=q_{fg',n}=q_{gf',n}=B\\circ c_{f',g}.$$\nHere the two middle maps are identified by substituting the equality of the composite morphisms and coefficient maps; no arbitrary isomorphism is chosen. Right-compose with $c_{g',f}^{-1}$. This gives $A=B\\circ c_{f',g}\\circ c_{g',f}^{-1}$, the desired identity since [def-weil-pbc-ambient-ringed-exchange] defines the inverse square comparison by precisely this product. Cancellation used only the pullback compositors, which are isomorphisms; it used no assertion about invertibility of exchange or properness.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+    "place": "Third paragraph, tower, operator and base-change compatibility; explicit cancellation of the two pullback compositors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-kflat-resolution",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+  "place": "Third paragraph, expanded constant-quotient composition and base-change compatibility; Stacks Tags 00WH, 03D3, 03D8, 06YS, 0D6D and the explicit QuotientComposition calculations in lean/Sheaf/Paper/PerfectProjectionFormula.lean:1830-2150"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback identifications of constant finite quotient module sheaves commute with the derived pullback composition isomorphism for completed coefficient rings",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CategoryTheory.constantCommuteCompose, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback, PresheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjoint-composition and underived free-sheaf pullback results do not give the quotient module section normalization or its equality with the canonical derived compositor over completed coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable morphisms of ringed pro-etale topoi the section-normalized quotient coefficient pullback isomorphisms compose through the canonical derived pullback compositor",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjoint-composition and underived free-sheaf pullback results do not give the quotient module section normalization or its equality with the canonical derived compositor over completed coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical isomorphism L(h compose k) star of a constant quotient module to the same quotient is compatible with the unit-normalized left adjoint composition and restriction of sections",
+   "results": "8 hits: Rep.coinvariantsAdjunction_homEquiv_apply_hom, ModuleCat.RestrictionCoextensionAdj.unit'_app, Rep.coinvariantsAdjunction_homEquiv_symm_apply_hom, Rep.coinvariantsAdjunction_unit_app_hom, ModuleCat.RestrictionCoextensionAdj.unit', Rep.indResAdjunction_counit_app_hom_hom, Rep.resIndAdjunction_unit_app, Rep.resCoindAdjunction_counit_app_hom_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjoint-composition and underived free-sheaf pullback results do not give the quotient module section normalization or its equality with the canonical derived compositor over completed coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointCompIso\"",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjoint-composition and underived free-sheaf pullback results do not give the quotient module section normalization or its equality with the canonical derived compositor over completed coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso_comp|pullbackObjFreeIso|leftAdjointCompIso",
+   "results": "19 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjoint-composition and underived free-sheaf pullback results do not give the quotient module section normalization or its equality with the canonical derived compositor over completed coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Section-normalized pullback isomorphisms for finite constant quotient module sheaves commute with ordinary and derived pullback composition over completed coefficient rings",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_assoc; authentic search digest b8d53429806f8f19",
+   "date": "2026-10-22",
+   "verdict": "no match: general underived pullback, free-module or constant-sheaf results do not state the completed-coefficient quotient normalization and canonical derived square; sources of the relevant compositor/free-module hits were read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback of finite constant quotient module sheaves commutes with the derived pullback compositor and Cartesian square comparison",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; authentic search digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointCompIso\"",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_assoc; authentic search digest cf307597c0192305",
+   "date": "2026-10-22",
+   "verdict": "no match: general underived pullback, free-module or constant-sheaf results do not state the completed-coefficient quotient normalization and canonical derived square; sources of the relevant compositor/free-module hits were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant coefficient module comparison defined by the identity on constant sections respects composite adjunctions and its degree zero derived localization",
+   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CategoryTheory.constantSheafAdj_counit_w, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.LocallyConstant.functor, LightCondensed.freeForgetAdjunction, CondensedMod.LocallyConstant.functor; authentic search digest 1abbd5f45cdabe54",
+   "date": "2026-10-22",
+   "verdict": "no match: general underived pullback, free-module or constant-sheaf results do not state the completed-coefficient quotient normalization and canonical derived square; sources of the relevant compositor/free-module hits were read"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|conjugateEquiv_pullbackComp_inv|mapDerivedCategoryNatIso_comp",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; directory Mathlib/CategoryTheory; authentic search digest 6b65155916f9accd",
+   "date": "2026-10-22",
+   "verdict": "no match: general underived pullback, free-module or constant-sheaf results do not state the completed-coefficient quotient normalization and canonical derived square; sources of the relevant compositor/free-module hits were read"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; directory Mathlib/Algebra/Category/ModuleCat/Sheaf; authentic search digest 570f03684fa206a6",
+   "date": "2026-10-22",
+   "verdict": "no match: general underived pullback, free-module or constant-sheaf results do not state the completed-coefficient quotient normalization and canonical derived square; sources of the relevant compositor/free-module hits were read"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-perfect-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Third proof paragraph: tower, operator, and base-change compatibility. Extracts the constant-section adjunct normalization, ordinary direct-image compositor, exact-derived degree-zero normalization, and quotient square from live proof step 6.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-quotient-pullback-compositor-normalization",
+  "worker": "stage1",
+  "summary": "Q53 expanded the normalized ordinary adjunct calculation, identified the tensor compositor, compared its exact localization to the canonical K-flat-normalized derived compositor, proved the degree-zero and transition formulas, and deduced the square by explicit cancellation. Reused existing general nodes; no new nodes and no statement change. No completed declaration under WeilConjectures states all clauses.",
+  "blueprint": "Realizes the third paragraph of lemma-weil-pbc-perfect-projection-formula.proof.md: constant quotient pullback and tower/operator/base-change coherence, specifically the quotient pullback square used by live parent proof step 6.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General ringed-site K-flat resolution existence compares the localized ordinary compositor with the specified canonical derived compositor; no node of this unit supplies general K-flat resolutions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-273b4b9b9",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-273b4b9b9 (reviewer sub-agent of L); spot-checked: I read the delivered item in full. The delivery creates no new nodes. Its statement and stmt_deps are unchanged from the base: the θ=θ_□^{-1} wording was already on the base, so no target is weakened. Eight steps checked: (1) Under the operations node's change-of-scalars isomorphism, a_{u,n} becomes x↦c_{u,n}(x), so it is an isomorphism, and π_U c_u=c_{u,n}u^{-1}π_V makes it linear. (2) ρ_kh=D∘k_*ρ_h∘ρ_k follows from the constant-presheaf test and sheafification uniqueness; the equivalence with the Cont(π0) presentation is in the profinite node. (3) The conjugate unit equation with L1=(kh)^*, L2=h^*k^*, δ=D was re-derived: the composite transpose is k_*ρ_h∘ρ_k, and the direction is correct. (4) The tensor formula for b satisfies the unit equation, so it is the termwise comparison that the derived-composition node pins. (5) lem-pc-kflat-resolution (Stacks 06YS) gives flat terms, which is exactly the hypothesis of that pin; naturality then extends the equality to every complex, and the clause is not misapplied to Q[0]. (6) The descent formula from localization (2) plus naturality of s gives q_kh. (7) Naturality is routine. (8) Types checked: c_{f',g}, c_{g',f} and θ=c_{f',g}c_{g',f}^{-1} match def-weil-pbc-ambient-ringed-exchange; the coefficient agreement comes from the profinite composition clause; no properness or exchange inverse is used. The declared tool use of lem-pc-kflat-resolution (unit sk-thm-picard-semicon) is accepted as a generic black box. Stacks tags 00WH, 0H7J, 03D3, 03D8, 06YS and 0D6D match their labels; no SGA source is cited; the blueprint place is main-20261015 perfect-projection-formula, last paragraph. The trf and pe quotient/compositor nodes are not duplicates (O_E towers, other units). Edge cases checked: identity morphisms and squares, n=1, zero rings and empty schemes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientPullbackCompositorNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.derived_composition",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemSheafMap_naturality",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemRingMap",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemRestriction",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemRestriction_limits",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemRestriction_colimits",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemModuleMap_existsUnique",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemModuleMap",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemDerivedRestriction",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemSingle",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemRestrictionSingle",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemDerivedMap",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemRingMap_square",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.system_naturality",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.ordinary_composition",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.derived_composition",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.transition_naturality",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.cartesian_square"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientPullbackCompositorNormalization.lean",
+  "statement": "theorem derived_composition {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) : ∃ hc : proEtaleRingCompositeCoefficients h k (ring d V) (ring d W) (ring d Z) (coefficients d k) (coefficients d h) = coefficients d (h ≫ k), ∀ n : ℕ, (eqToIso (congrArg (proEtaleRingDerivedPullback (h ≫ k) (ring d V) (ring d Z)) hc.symm) ≪≫ proEtaleCanonicalDerivedPullbackComparison h k (ring d V) (ring d W) (ring d Z) (coefficients d k) (coefficients d h)).hom.app (quotient d V n) ≫ (pullback d h).map (quotientDerivedPullback d k n).hom ≫ (quotientDerivedPullback d h n).hom = (quotientDerivedPullback d (h ≫ k) n).hom",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All clauses are stated by ordinary_composition, derived_composition, transition_naturality, system_naturality and cartesian_square. Reuses the published completed constant-quotient presentation and uniquely section-normalized quotientPullback and quotientDerivedPullback in PerfectProjectionFormula; helpers construct finite-system maps and exact scalar restriction with real data. The canonical derived compositor is the normalized comparison publicly retained by the ambient-ringed-exchange dependency, with the same ordinary and K-flat characterization as the recorded composition dependency. No statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-254467d28",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Clauses read against node and Lean: ordinary/derived/square = public copies of parent PerfectProjectionFormula's proved private quotientPullback_compositor, quotientDerivedPullback_compositor, hq (true, non-vacuous); b = leftAdjointCompIso.inv (k^*⋙h^* ≅ (kh)^*, direction ok); θ = proEtaleAmbientRingedPullbackComparison.inv (ok); a/q ∃!-pinned on constants; system-naturality helpers real (limMap, section-pinned ∃!, canonical restriction mates); statement verbatim; node change lean-only; universes u+1/u, no extra hypotheses. Advisory: (1) uses parent theorem module whose proof_deps cite the item → stage-3 import cycle, no owning def node, copy = H4 dup → maintainer should extract the quotient constructions into a def-node module; (2) proEtaleCanonicalDerivedPullbackComparison instead of recorded integralTowerGeneralPullbackComposition, same K-flat characterization, consistent with the square; (3) ProEtaleRingSheafChangeAdjunction owners not in stmt_deps; (4) derived transition conjunct duplicates parent's quotientDerivedPullback_naturality (forced by the cycle). No compile (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261022T142831-L-862932",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.cartesian_square",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.derived_composition",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.ordinary_composition",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemModuleMap_existsUnique",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemRingMap_square",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.systemSheafMap_naturality",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.system_naturality",
+   "AlgebraicGeometry.Scheme.QuotientPullbackNormalization.transition_naturality"
+  ],
+  "sorry_after": []
+ }
+}

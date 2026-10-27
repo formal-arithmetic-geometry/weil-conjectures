@@ -1,0 +1,113 @@
+{
+ "id": "lem-sfb-compatible-square-components",
+ "kind": "statement",
+ "title": "Pasted compositor squares with their component compatibility",
+ "statement": "Let $A,B,C,D$ be categories [def-nagata-category], let $E:A\\to C$ and $H:B\\to D$ be functors, and let $I$ be a type with functor families $F:I\\to(A\\to B)$, $G:I\\to(C\\to D)$ and natural isomorphisms $c_i:F_i\\mathbin{\\ggg}H\\cong E\\mathbin{\\ggg}G_i$. Given $w:i=j$, functors $L,R:A\\to B$, $\\bar L,\\bar R:C\\to D$, and natural isomorphisms $a:L\\cong F_i$, $\\bar a:\\bar L\\cong G_i$, $k:F_j\\cong R$, $\\bar k:G_j\\cong\\bar R$, fix for each $M\\in A$ objects $V_M,W_M\\in D$ and arrows $\\ell_M:H(LM)\\to V_M$, $d_M:V_M\\to\\bar L(EM)$, $r_M:H(RM)\\to W_M$, $e_M:W_M\\to\\bar R(EM)$. Suppose $H(a_M);c_i(M)=\\ell_M;d_M;\\bar a_{EM}$ and $H(k_M^{-1});c_j(M)=r_M;e_M;\\bar k_{EM}^{-1}$, where semicolons denote left-to-right composition. Set $s=a;\\operatorname{eqToIso}(F(w));k$ and $\\bar s=\\bar a;\\operatorname{eqToIso}(G(w));\\bar k$. Then $\\ell_M;d_M;\\bar s_{EM}=H(s_M);r_M;e_M$. The record $\\mathrm{CompatibleSquareComponents}$ stores a pair of natural isomorphisms $s:L\\cong R$, $\\bar s:\\bar L\\cong\\bar R$ and this equation. Its constructor $\\mathrm{compatibleSquareComponents}$ uses exactly the two displayed composites, with the compatibility proof just stated; it makes no choice of data.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0B65; elementary pasting of natural comparison isomorphisms used in the internal-module transport proof Step 6."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "For the middle comparison substitute j=i; its equality isomorphisms are identities. Invert the second assumed comparison by cancelling k inverse and kb inverse. Compose the first, middle and last comparison equalities. Functoriality and associativity give the displayed compatibility. Store the two explicit composites and this proof in a structure; no witness is chosen.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0B65; elementary categorical pasting calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pasting natural isomorphism comparison squares along composition and equality of functors",
+   "results": "CatCommSq.hComp and naturality provide related square APIs; no record with the two specified composite isomorphisms and this component equation.",
+   "date": "2026-10-25",
+   "verdict": "Use elementary pasting; retain the exact specified composites."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor.map_comp and associativity suffice for the component calculation.",
+   "date": "2026-10-25",
+   "verdict": "Use Mathlib composition laws."
+  },
+  {
+   "tool": "grep",
+   "query": "CompatibleSquareComponents|square_pasting in Mathlib, WeilConjectures and Sheaf",
+   "results": "No pre-existing data record for this concrete pair of composites. Existing EquivalenceAdjunctionComparison supplies the input compositor equalities.",
+   "date": "2026-10-25",
+   "verdict": "Add a proved data wrapper to avoid repeated kernel expansion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport",
+  "date": "2026-10-25",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-nagata-density-normalization-sheaves",
+   "place": "Proof Step 1, comparing internal and sectionwise operations; transport node Step 6, pasting normalized compositor comparisons.",
+   "via": [
+    "lem-sfb-internal-module-operations-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-nagata-density-normalization",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompatibleSquareComponents",
+  "file": "lean/Sheaf/CategoryTheory/CompatibleSquareComponents.lean",
+  "declaration": "CategoryTheory.square_pasting",
+  "declarations": [
+   "CategoryTheory.square_pasting",
+   "CategoryTheory.CompatibleSquareComponents",
+   "CategoryTheory.compatibleSquareComponents"
+  ],
+  "statement": "theorem square_pasting\n    {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]\n    {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]\n    {I : Type*} (E : A ⥤ C) (H : B ⥤ D)\n    (F : I → A ⥤ B) (G : I → C ⥤ D) (c : ∀ i, F i ⋙ H ≅ E ⋙ G i)\n    {i j : I} (w : i = j) {L R : A ⥤ B} {Lb Rb : C ⥤ D}\n    (a : L ≅ F i) (ab : Lb ≅ G i) (k : F j ≅ R) (kb : G j ≅ Rb)\n    (M : A) {V W : D}\n    (cl : H.obj (L.obj M) ⟶ V) (dl : V ⟶ Lb.obj (E.obj M))\n    (cr : H.obj (R.obj M) ⟶ W) (dr : W ⟶ Rb.obj (E.obj M))\n    (hl : H.map (a.hom.app M) ≫ (c i).hom.app M =\n      cl ≫ dl ≫ ab.hom.app (E.obj M))\n    (hr : H.map (k.inv.app M) ≫ (c j).hom.app M =\n      cr ≫ dr ≫ kb.inv.app (E.obj M)) :\n    cl ≫ dl ≫ (ab ≪≫ eqToIso (congrArg G w) ≪≫ kb).hom.app (E.obj M) =\n      H.map ((a ≪≫ eqToIso (congrArg F w) ≪≫ k).hom.app M) ≫ cr ≫ dr",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-00058",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T100919-L-3638556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-00058",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T100919-L-3638556",
+  "kind": "interface",
+  "note": "independent cc review: item Lean + new CompatibleSquareComponents module against node lem-sfb-internal-module-operations-transport, def-sfb-section-module-operations record and the change record; all 50 direct importers compiled against delivered and fixed modules, failing ones against the published baseline"
+ }
+}

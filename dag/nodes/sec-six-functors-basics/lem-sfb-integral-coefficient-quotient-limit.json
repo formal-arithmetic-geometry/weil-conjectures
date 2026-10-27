@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-integral-coefficient-quotient-limit",
+ "kind": "statement",
+ "title": "The actual positive coefficient quotient cone is limiting",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A$ and chosen uniformizer [def-weil-l-adic-coefficient-extension]. For any scheme $X$, use the actual internal coefficient modules and quotient maps of [sk-def-pe-derived-completion]. Let $B_X=p_X^*\\underline A$, $k_{n,X}=p_X^*\\underline{A/(\\pi^{n+1})}$, and let the inverse sequence have the actual quotient transitions. The cone from $B_X$ whose legs are the specified scalar quotient projections is a limit cone in internal $B_X$-modules. Every transition $k_{n+1,X}\\to k_{n,X}$ is an epimorphism. There is no geometric hypothesis on $X$.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-pe-derived-completion"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1); Propositions 3.1.9--3.1.10. Rank-one ordinary-limit calculation in the free case of the parent completeness proof."
+ },
+ "proof": [
+  {
+   "text": "Use the canonical ring homeomorphism from the valuation ring to the compatible sequences in its positive finite quotients. On each pro-etale object, compatible continuous functions to the finite quotients determine pointwise a compatible sequence, and hence a unique integral-valued function. It is continuous because the inverse-limit topology is induced by the discrete product and all its coordinates are continuous. These constructions are inverse and commute with restriction.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "det-pe-derived-nakayama-resolution",
+    "lem-weil-pbc-continuous-coefficient-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural continuous-ring realization comparison identifies the pulled-back integral coefficient sheaf and each finite quotient with their continuous-function sheaves. Its adjunction normalization commutes with every quotient and transition. Transfer the preceding sectionwise limiting cone through these isomorphisms. Evaluation, the sheaf-to-presheaf functor and the internal-module forgetful functor reflect limits, so the actual internal-module quotient cone is limiting.",
+   "uses": [
+    "lem-sfb-continuous-ring-universe-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient short exact sequence in the completion triangle comparison shows that every actual scalar quotient projection is epi. The identity saying that the next quotient followed by its transition is the current quotient implies that the transition is epi.",
+   "uses": [
+    "lem-pe-completion-triangle-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integers-profinite-tower",
+  "det-pe-derived-nakayama-resolution",
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "lem-sfb-continuous-ring-universe-realization",
+  "lem-pe-completion-triangle-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Integral coefficients as their positive finite quotient limit; explicit continuous-function construction and transfer to internal modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientExtension.*[Ll]imit|continuous.*[Ll]imit",
+   "results": "Mathlib/NumberTheory/Padics/Hensel.lean; Mathlib/NumberTheory/Padics/Hensel.lean; Mathlib/Analysis/BoxIntegral/UnitPartition.lean; Mathlib/Analysis/BoxIntegral/UnitPartition.lean; Mathlib/Topology/Continuous.lean; Mathlib/Topology/Defs/Sequences.lean; Mathlib/Analysis/LocallyConvex/Barrelled.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Preorder.lean",
+   "date": "2026-10-24",
+   "verdict": "No exact internal-module coefficient cone theorem. The PadicInt limits treat the base ring only; use the existing finite-extension profinite tower and categorical limits API."
+  },
+  {
+   "tool": "loogle",
+   "query": "Types.isLimit_iff_bijective_sectionOfCone",
+   "results": "loogle: unknown identifier 'Types.isLimit_iff_bijective_sectionOfCone'",
+   "date": "2026-10-24",
+   "verdict": "No exact internal-module coefficient cone theorem. The PadicInt limits treat the base ring only; use the existing finite-extension profinite tower and categorical limits API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions with values in the integers of a finite p-adic field extension form the inverse limit of functions with values in finite positive quotients",
+   "results": "PadicInt.limNthHom; PadicInt.lift; PadicInt.mahlerEquiv; PadicInt.adicCompletionIntegersEquiv; PadicInt.nthHomSeq; PadicInt.coe_adicCompletionIntegersEquiv_apply; PadicInt.coe_adicCompletionIntegersEquiv_symm_apply; PadicInt.limNthHom_spec",
+   "date": "2026-10-24",
+   "verdict": "No exact internal-module coefficient cone theorem. The PadicInt limits treat the base ring only; use the existing finite-extension profinite tower and categorical limits API."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarLocalModelComplete",
+  "date": "2026-10-24",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-scalar-local-model-complete",
+   "place": "Step 2, the ordinary coefficient cone and its quotient transitions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralCoefficientQuotientLimit",
+  "file": "lean/Sheaf/Paper/IntegralCoefficientQuotientLimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AdicCompletion.integral_coefficient_quotient_limit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AdicCompletion.coefficientSequence",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.coefficientCone",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.integral_coefficient_quotient_limit"
+  ],
+  "statement": "theorem integral_coefficient_quotient_limit : Nonempty (IsLimit (coefficientCone l E X)) ∧ ∀ n : ℕ, Epi ((coefficientSequence l E X).map (homOfLE n.le_succ).op)",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9dc67",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261024T191755-L-489561",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9dc67",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261024T191755-L-489561",
+  "kind": "interface",
+  "note": "independent cc review: item theorem finite_scalar_local_model_complete: pp.all elaborated type byte-identical old vs new; refactored quotientSequence/quotientTower/freeComplex checked against the change record; new node lem-sfb-integral-coefficient-quotient-limit statement vs proved Lean; proof_deps vs imports; axioms (sorryAx only via the open cited completion_triangle_comparison / strict_completion_restriction_comparison / scalar_local_model_representatives); importers Qcqs and SupportedImage compile against the delivery"
+ }
+}

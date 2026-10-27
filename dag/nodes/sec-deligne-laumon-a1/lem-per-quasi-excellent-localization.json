@@ -1,0 +1,272 @@
+{
+ "id": "lem-per-quasi-excellent-localization",
+ "kind": "statement",
+ "title": "Localization preserves quasi-excellence",
+ "statement": "Let $R$ be a quasi-excellent commutative ring [def-exc-excellent-ring], and let $T\\subseteq R$ be a multiplicative subset, meaning $1\\in T$ and $st\\in T$ whenever $s,t\\in T$. Let $T^{-1}R$ be the localization of the $R$-module $R$ [def-weil-pbc-module-localization], endowed with its usual commutative ring structure $(r/s)(r^{\\prime}/s^{\\prime})=rr^{\\prime}/ss^{\\prime}$ and unit $1/1$. Then $T^{-1}R$ is quasi-excellent. The cases $T=\\{1\\}$ and $0\\in T$ are allowed; no finite-generation assumption on $T$, universal catenarity, or ground field is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QU, lemma-finite-type-over-excellent, quasi-excellent alternative applied to the identity finite-type R-algebra R; arbitrary localization clause, lines 13372--13386."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=T^{-1}R$. By [def-exc-excellent-ring], $R$ is Noetherian, a G-ring and J-2. The fraction construction [def-weil-pbc-module-localization] makes $R\\to A$ a localization: denominators become units, every element is a fraction, and an element mapping to zero is killed by a denominator. Thus [lem-weil-pbc-localization-noetherian] gives that $A$ is Noetherian.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence; localization construction in Tag 00CM, section-localization."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q$ of $A$ and put $\\mathfrak p=\\mathfrak q\\cap R$. By clauses (1)--(3) of [lem-weil-pbc-localization-prime-residue-field-iso], the canonical map $e:R_{\\mathfrak p}\\xrightarrow{\\sim}A_{\\mathfrak q}$ is an isomorphism carrying maximal ideal to maximal ideal. Apply [lem-weil-pbc-adic-completion-ring-equiv] to these maximal ideals. It gives $\\widehat e:\\widehat{R_{\\mathfrak p}}\\xrightarrow{\\sim}\\widehat{A_{\\mathfrak q}}$ with $\\widehat e\\circ\\iota_R=\\iota_A\\circ e$. The map $\\iota_R$ is regular by the G-ring hypothesis and [def-weil-pbc-g-ring]. Apply [lem-weil-pbc-regular-ring-map-ring-equiv] to this commuting square: $\\iota_A$ is regular. This holds for every $\\mathfrak q$; together with Step 1 it proves that $A$ is a G-ring by [def-weil-pbc-g-ring].",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-adic-completion-ring-equiv",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-ring-map-ring-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PV, proposition-finite-type-over-G-ring, proof first two sentences; the local-ring comparison is Algebra Tag 00E3, lemma-spec-localization, and the completion is the inverse limit of the corresponding quotients."
+   }
+  },
+  {
+   "text": "Let $B$ be any finite type $A$-algebra. By [def-weil-pbc-essentially-finite-type-algebra], $R\\to A$ is essentially of finite type, using the identity finite type $R$-algebra $R$ and the set $T$; $A\\to B$ is essentially of finite type using $B$ and the set $\\{1\\}$. Apply [lem-weil-pbc-essentially-finite-type-composition]. The definition then provides a finite type $R$-algebra $C$, a multiplicative set $W\\subseteq C$ and an $R$-algebra isomorphism $B\\cong W^{-1}C$. Through this isomorphism regard $B$ as a localization of $C$ at $W$: the units, fractions and kernel identities are precisely those of $W^{-1}C$ carried by the isomorphism. Since $R$ is J-2, [def-exc-excellent-ring] gives an open regular locus $U\\subseteq\\operatorname{Spec}C$.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-essentially-finite-type-composition",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QM, definition-essentially-finite-p-t; Tag 07DS, lemma-composition-essentially-of-finite-type; J-2 is More on Algebra Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "Let $h:\\operatorname{Spec}B\\to\\operatorname{Spec}C$ be contraction for the localization map of Step 3. It is continuous by [lem-weil-pbc-localization-spectrum-embedding]; this applies to the given localization presentation (equivalently identify $B$ with $W^{-1}C$). For every prime $\\mathfrak b$ of $B$, clause (2) of [lem-weil-pbc-localization-prime-residue-field-iso] gives $C_{h(\\mathfrak b)}\\cong B_{\\mathfrak b}$. Apply [lem-trf-regular-local-ring-isomorphism] to this isomorphism and its inverse: $B_{\\mathfrak b}$ is regular local if and only if $C_{h(\\mathfrak b)}$ is. Consequently $\\operatorname{Reg}(\\operatorname{Spec}B)=h^{-1}(U)$, which is open. Since $B$ was an arbitrary finite type $A$-algebra, this is exactly the J-2 condition for $A$ in [def-exc-excellent-ring].",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-trf-regular-local-ring-isomorphism",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, omitted localization argument filled using Tag 07P7, definition-J, and Algebra Tag 00E3, lemma-spec-localization."
+   }
+  },
+  {
+   "text": "Steps 1, 2 and 4 give all three conditions in [def-exc-excellent-ring], so $A$ is quasi-excellent. The arguments use arbitrary multiplicative subsets. If $0\\in T$, the fraction relation [def-weil-pbc-module-localization] makes $A$ the zero ring, and every unital $A$-algebra is zero; the prime-indexed assertions in Steps 2 and 4 are then vacuous, while Step 1 still applies. Taking $T=\\{1\\}$ likewise requires no change. Universal catenarity, finite generation of $T$ and a ground field were never assumed.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QT, definition-excellent; Tag 07QU, lemma-finite-type-over-excellent, quasi-excellent alternative."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-regular-ring-map-ring-equiv",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "lem-weil-pbc-essentially-finite-type-composition",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-trf-regular-local-ring-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QU, lemma-finite-type-over-excellent explicitly omits the localization proof. The supplied proof expands that omission using local-ring and completion comparisons, and the essentially-finite-type composition lemma; it follows the componentwise G-ring/J-2 definitions (07GH, 07P7, 07QT)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-quasi-excellent-localization: Every localization of a quasi excellent commutative ring is quasi excellent",
+   "results": "{\"t\": \"2026-10-24T03:46:28Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-quasi-excellent-localization: Every localization of a quasi excellent commutative ring is quasi excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.QuasiFinite.holdsForLocalizationAway\", \"LocalizationPreserves\", \"Algebra.QuasiFinite.instLocalization\", \"Algebra.QuasiFinite.of_isLocalization\", \"RingHom.EssFiniteType.holdsForLocalization\", \"RingHom.QuasiFinite.propertyIsLocal\", \"RingHom.QuasiFinite.ofLocalizationSpanTarget\", \"OfLocalizationMaximal\"], \"digest\": \"5cf6b98c333fdd62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No quasi-excellence declaration. Hits concern localization of Noetherian or quasi-finite rings, or generic predicates for preservation; they do not establish preservation of G-rings and J-2."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "{\"t\": \"2026-10-24T03:46:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiExcellent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No quasi-excellence declaration. Hits concern localization of Noetherian or quasi-finite rings, or generic predicates for preservation; they do not establish preservation of G-rings and J-2."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiExcellent|quasi.excellent|quasiExcellent",
+   "results": "{\"t\": \"2026-10-24T03:46:28Z\", \"tool\": \"grep\", \"query\": \"QuasiExcellent|quasi.excellent|quasiExcellent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No quasi-excellence declaration. Hits concern localization of Noetherian or quasi-finite rings, or generic predicates for preservation; they do not establish preservation of G-rings and J-2."
+  },
+  {
+   "tool": "grep",
+   "query": "Excellent|G_ring|IsG(Ring|ring)|IsJ2",
+   "results": "{\"t\": \"2026-10-24T03:46:54Z\", \"tool\": \"grep\", \"query\": \"Excellent|G_ring|IsG(Ring|ring)|IsJ2\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\"], \"digest\": \"463b450233d3a170\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No quasi-excellence declaration. Hits concern localization of Noetherian or quasi-finite rings, or generic predicates for preservation; they do not establish preservation of G-rings and J-2."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-quasi-excellent-localization: Localization preserves quasi excellence of Noetherian commutative rings",
+   "results": "{\"t\": \"2026-10-24T03:46:54Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-quasi-excellent-localization: Localization preserves quasi excellence of Noetherian commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.isNoetherianRing\", \"RingHom.LocalizationPreserves\", \"RingHom.locally_localizationPreserves\", \"Algebra.QuasiFinite.of_isLocalization\", \"AlgebraicGeometry.isNoetherianRing_of_away\", \"LocalizationPreserves\", \"Algebra.FormallyUnramified.of_isLocalization\", \"isReduced_localizationPreserves\"], \"digest\": \"9d1c89477daf3e42\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No quasi-excellence declaration. Hits concern localization of Noetherian or quasi-finite rings, or generic predicates for preservation; they do not establish preservation of G-rings and J-2."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Excellent\"",
+   "results": "{\"t\": \"2026-10-24T03:46:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Excellent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No quasi-excellence declaration. Hits concern localization of Noetherian or quasi-finite rings, or generic predicates for preservation; they do not establish preservation of G-rings and J-2."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-quasi-excellent-localization: A G ring with property J2 remains a G ring with property J2 after inverting any multiplicative set",
+   "results": "{\"t\": \"2026-10-24T03:46:56Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-quasi-excellent-localization: A G ring with property J2 remains a G ring with property J2 after inverting any multiplicative set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocalizationPreserves\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"RingHom.LocalizationPreserves.away\", \"RingHom.PropertyIsLocal.localizationAwayPreserves\", \"RingHom.locally_localizationPreserves\", \"RingHom.OfLocalizationPrime\", \"RingHom.locally_localizationAwayPreserves\", \"RingHom.QuasiFinite.propertyIsLocal\"], \"digest\": \"04c5a9032526b40b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No quasi-excellence declaration. Hits concern localization of Noetherian or quasi-finite rings, or generic predicates for preservation; they do not establish preservation of G-rings and J-2."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiExcellent|quasi.excellent|IsGRing|IsJ2",
+   "results": "{\"t\": \"2026-10-24T04:18:41Z\", \"tool\": \"grep\", \"query\": \"QuasiExcellent|quasi.excellent|IsGRing|IsJ2\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern quasi-finite or essentially finite type algebras, Noetherian localization or generic localization predicates; none establishes both the G-ring and J-2 conditions of quasi-excellence. Quoted Excellent and the RingTheory predicate grep have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-quasi-excellent-localization: every localization of a quasi excellent ring is quasi excellent",
+   "results": "{\"t\": \"2026-10-24T04:18:41Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-quasi-excellent-localization: every localization of a quasi excellent ring is quasi excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.of_isLocalization\", \"IsArtinianRing.localization_artinian\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"Algebra.QuasiFinite.instLocalization\", \"Algebra.FormallyUnramified.localization_base\", \"isReduced_localizationPreserves\", \"RingHom.HoldsForLocalization\", \"RingHom.QuasiFinite.holdsForLocalizationAway\"], \"digest\": \"af506e700cd35379\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern quasi-finite or essentially finite type algebras, Noetherian localization or generic localization predicates; none establishes both the G-ring and J-2 conditions of quasi-excellence. Quoted Excellent and the RingTheory predicate grep have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Excellent\"",
+   "results": "{\"t\": \"2026-10-24T04:18:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Excellent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern quasi-finite or essentially finite type algebras, Noetherian localization or generic localization predicates; none establishes both the G-ring and J-2 conditions of quasi-excellence. Quoted Excellent and the RingTheory predicate grep have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-quasi-excellent-localization: localization of a quasi excellent ring remains Noetherian with geometrically regular formal fibres and open regular loci in finite type algebras",
+   "results": "{\"t\": \"2026-10-24T04:18:44Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-quasi-excellent-localization: localization of a quasi excellent ring remains Noetherian with geometrically regular formal fibres and open regular loci in finite type algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.holdsForLocalization\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"RingHom.finiteType_holdsForLocalizationAway\", \"Algebra.QuasiFiniteAt\", \"RingHom.finiteType_localizationPreserves\", \"Algebra.QuasiFinite.instLocalization\", \"IsLocalization.instIsNoetherianRingLocalization\", \"IsLocalization.isNoetherianRing\"], \"digest\": \"ddeabcb580323f0f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern quasi-finite or essentially finite type algebras, Noetherian localization or generic localization predicates; none establishes both the G-ring and J-2 conditions of quasi-excellence. Quoted Excellent and the RingTheory predicate grep have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-quasi-excellent-localization: inverting an arbitrary multiplicative set in a Noetherian G ring with property J2 preserves quasi excellence",
+   "results": "{\"t\": \"2026-10-24T04:26:37Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-quasi-excellent-localization: inverting an arbitrary multiplicative set in a Noetherian G ring with property J2 preserves quasi excellence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocalizationPreserves\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"Algebra.QuasiFinite.instLocalization\", \"RingHom.QuasiFinite.ofLocalizationSpanTarget\", \"RingHom.QuasiFinite.propertyIsLocal\", \"Algebra.QuasiFinite.of_isLocalization\", \"RingHom.EssFiniteType.holdsForLocalization\", \"OfLocalizationMaximal\"], \"digest\": \"3b631a6bbea976d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern quasi-finite or essentially finite type algebras, Noetherian localization or generic localization predicates; none establishes both the G-ring and J-2 conditions of quasi-excellence. Quoted Excellent and the RingTheory predicate grep have no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-blowup-local-dimension-bound",
+  "date": "2026-10-24",
+  "group": "Q67"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 via the ordinary characteristic-zero resolution branch, Temkin section 4.3 Extensions 1,...,n and Extension n+1: localization must remain in the quasi-excellent category before the dimension induction on centers.",
+   "via": [
+    "lem-per-blowup-local-dimension-bound",
+    "lem-per-codimension-resolution-improvement",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-quasi-excellent-localization",
+  "worker": "stage1",
+  "summary": "Expanded the omitted arbitrary-localization argument of Stacks 07QU into five steps, preserving the complete statement and its two statement dependencies. All needed facts were found in the live DAG, so no new nodes were created. The G-ring proof explicitly compares canonical maximal-adic completion maps; the J-2 proof models any finite type algebra over the localization as a localization of a finite type R-algebra. Checked zero-containing and infinitely generated multiplicative sets, noninjective maps and the trivial localization. No project attachment and no Mathlib match for the whole item.",
+  "blueprint": "Preserves the existing ancestor lem-per-artin-gabber-affine-curve, Step 3, via the recorded ordinary characteristic-zero resolution branch and lem-per-blowup-local-dimension-bound: this supplies closure under localization of the quasi-excellent category used before dimension induction on centers. The newest blueprint ancestor, unit and chapter were read; none states this ring-theoretic tool. No chapter or unit route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Steps 2 and 4 need the canonical local-ring comparison and its maximal-ideal compatibility. This is a general commutative-algebra tool; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-ring-equiv",
+    "why": "Step 2 needs a completion isomorphism commuting with the canonical maps. This is a general commutative-algebra tool; the perverse unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "why": "Step 2 needs regularity transported across that commuting isomorphism square. This is a general commutative-algebra tool; the perverse unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "lem-weil-pbc-regular-ring-map-ring-equiv"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-32744c1ac",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-32744c1ac (reviewer sub-agent of L); spot-checked: I read the item and all eleven cited statements in full; there are no new nodes and no repair note. The statement is correct: it is the R-localization case of Stacks 07QU (more-algebra.tex about l.13372-13386), whose proof omits the localization part. The edge cases hold: 0 in T gives the zero ring, which is Noetherian with no primes, and its finite type algebras are 0 with empty Spec; T={1} gives R; T need not be finitely generated. Step 1: R to T^{-1}R satisfies (a)-(c) of the Mathlib leaf lem-weil-pbc-localization-noetherian. Step 2: clauses (1)-(3) of lem-weil-pbc-localization-prime-residue-field-iso give e: R_p iso A_q with e(pR_p)=qA_q, which is the J=e(I) hypothesis of lem-weil-pbc-adic-completion-ring-equiv; the commuting square then feeds lem-weil-pbc-regular-ring-map-ring-equiv, so A is a G-ring. Step 3: R to A to B are both essentially of finite type (B=R with W=T, and B with W={1}); composition gives B iso W^{-1}C with C of finite type over R, and J-2 for R makes Reg(Spec C) open. Step 4: contraction is continuous by the spectrum-embedding leaf, C_{h(b)} is iso to B_b by clause (2), and of_ringEquiv in both directions gives Reg(B)=h^{-1}(U), which is open. Step 5 is the assembly. proof_deps equals the union of the step uses. No duplicate: there is no quasi-excellent, G-ring or J-2 localization node, and lem-weil-pbc-finite-type-over-g-ring covers finite type only. I accept the three declared tool_uses as generic commutative algebra with no replacement in the perverse unit. Batch-5 flag: lem-trf-regular-local-ring-isomorphism is a Mathlib leaf (IsRegularLocalRing.of_ringEquiv) whose only stmt_dep is def-weil-regular-scheme; neither assumption gives it and it is not a step of the trace formula or Poincare duality proofs, so I accept it as generic. Only Stacks is cited, so the no-SGA lock holds. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiExcellentLocalization",
+  "declaration": "isQuasiExcellent_localizedModule",
+  "file": "lean/Sheaf/RingTheory/QuasiExcellentLocalization.lean",
+  "statement": "theorem isQuasiExcellent_localizedModule (R : Type u) [CommRing R] (hR : IsQuasiExcellent R) (T : Submonoid R) : IsQuasiExcellent (LocalizedModule T R)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c726b62af",
+  "group": "NO",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 07QU (more-algebra.tex l.13372-13383, identity-algebra quasi-excellent case): R CommRing, hR : IsQuasiExcellent R (not IsExcellent), T : Submonoid R, conclusion IsQuasiExcellent (LocalizedModule T R) using Mathlib's standard CommRing (mk_mul_mk, mk_eq). Edge cases T=⊥, 0∈T (zero ring), R=0 covered; single universe u, fits the dep's single-universe J-2. lean.statement verbatim; record differs from live only in lean; deps def-exc-excellent-ring and def-weil-pbc-module-localization unchanged; proof is only sorry, nothing hollow; docstrings carry source, blueprint id and 5 steps; report has Worker report and Second reading sections. No duplicate in DAG, lean/Sheaf or Mathlib. Maintainer notes: (1) with the drop list excluded the item is unreached; live path goes through dropped lem-per-gabber-absolute-equivariant-modification (l.1594), still cited by live lem-sfb-field-log-smooth-gabber-modification; item itself not dropped, generic and correct, passed stage 1 after the drop, so not returned. (2) Parallel N6 delivery 0ec2f5323dca uses the same file path; handle the second landing as a same-id duplicate."
+ }
+}

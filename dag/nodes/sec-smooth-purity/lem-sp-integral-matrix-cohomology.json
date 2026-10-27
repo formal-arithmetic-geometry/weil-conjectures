@@ -1,0 +1,126 @@
+{
+ "id": "lem-sp-integral-matrix-cohomology",
+ "kind": "statement",
+ "title": "Homology of a constant matrix cone after exact slice restriction",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a small site $(C,J)$, and the concrete data of [def-sp-integral-matrix-model-data]. Let $U\\in C$, let $d:A^a\\to A^b$ be any finite scalar matrix, let $n\\in\\mathbf N$ denote exponent $n+1$, and let $K\\in D(B_n)$ be any derived object of module sheaves [def-weil-abstract-derived-category]. Suppose that the derived restriction of $K$ to $U$ is isomorphic to the constant cone of $\\bar d:A_n^a\\to A_n^b$. Then $H^{-1}(K)|_U\\simeq\\underline{\\ker(\\bar d)}|_U$, $H^0(K)|_U\\simeq\\underline{\\operatorname{coker}(\\bar d)}|_U$, and $H^i(K)|_U=0$ for $i\\ne-1,0$. The same two isomorphisms hold for homology computed in the slice derived category. No scalar resolution, injectivity, local-model hypothesis, finite quotient ring, transition compatibility, or cover is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093J (constant exactness), Tag 03DH (slice restriction), Tags 08JB and 0115 (homology and localization); original matrix-reduction steps 6 and 8"
+ },
+ "stmt_deps": [
+  "def-sp-integral-matrix-model-data",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The mapping cone of a scalar map between degree-zero finite free modules has homology its scalar kernel in degree -1, its scalar cokernel in degree 0, and zero elsewhere. The statement includes zero ranks.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact constant realization and exact slice restriction. They preserve kernels and cokernels, so give the same description for the restricted constant matrix complex. Exact slice restriction also commutes with homology, on complexes and after derived localization.",
+   "uses": [
+    "lem-weil-pbc-finite-type-constant-exact",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the homology functors to the supplied derived isomorphism and compose with the homology localization comparison. The two constant homology descriptions give both the restricted global homology and the homology in the slice; all remaining degrees are zero.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-sfb-ringed-site-restriction-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093J (constant exactness), Tag 03DH (slice restriction), Tags 08JB and 0115 (homology and localization); original matrix-reduction steps 6 and 8; specialization of the original eight-step matrix-reduction argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of module sheaves to slice commutes with homology and constant matrix cone homology is kernel and cokernel",
+   "results": "8 hits; restriction of complexes along index embeddings, scalar restriction, and abstract short-complex homology kernels.",
+   "date": "2026-10-25",
+   "verdict": "No theorem for the specified sectionwise ringed slice and derived matrix object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension computes a finite free resolution by reduced matrices compatible with all quotient transitions",
+   "results": "8 hits; ordinary algebra presentations and cotangent complexes.",
+   "date": "2026-10-25",
+   "verdict": "No derived ringed-site matrix comparison or all-quotient normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*quotient.*natCast|IsNoetherianRing.*Finite",
+   "results": "msearch grep returned 25 hits, mainly finite modules and Noetherian-ring instances; manual source searches also read mappingCone, homologyFunctorFactors, exact-functor, basisOfPid, exists_fin and finitePresentation_of_finite APIs.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete completed coefficient, derived quotient-square or slice-matrix homology interfaces; the available scalar algebra is proved in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLocalModelFiniteMatrixReduction",
+  "date": "2026-10-25",
+  "group": "M9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-normalized-towers",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-tower-normalized",
+   "place": "Constructibility paragraph: Tag 093J (constant exactness), Tag 03DH (slice restriction), Tags 08JB and 0115 (homology and localization); original matrix-reduction steps 6 and 8",
+   "via": [
+    "lem-sp-integral-local-model-finite-matrix-reduction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralMatrixCohomology",
+  "file": "lean/Sheaf/Paper/IntegralMatrixCohomology.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralMatrix.matrix_cohomology",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralMatrix.matrix_cohomology"
+  ],
+  "statement": "theorem matrix_cohomology (U : C) {a b : ℕ} (d : Matrix (Fin b) (Fin a) (Scalars l E)) (n : ℕ) (K : DerivedCategory (Modules J (coefficient l E J n))) (e : (overDerived J (coefficient l E J n) U).obj K ≅ localMatrixObject l E J U d n) : Nonempty ((((DerivedCategory.homologyFunctor _ (-1)).obj K).over U) ≅ (((constantAtLevel l E J n).obj (ModuleCat.of (Residues l E n) (scalarKernel l E d n))).over U)) ∧ Nonempty ((((DerivedCategory.homologyFunctor _ 0).obj K).over U) ≅ (((constantAtLevel l E J n).obj (ModuleCat.of (Residues l E n) (scalarCokernel l E d n))).over U)) ∧ (∀ i : ℤ, i ≠ -1 → i ≠ 0 → IsZero (((DerivedCategory.homologyFunctor _ i).obj K).over U)) ∧ Nonempty (((DerivedCategory.homologyFunctor _ (-1)).obj ((overDerived J (coefficient l E J n) U).obj K)) ≅ (((constantAtLevel l E J n).obj (ModuleCat.of (Residues l E n) (scalarKernel l E d n))).over U)) ∧ Nonempty (((DerivedCategory.homologyFunctor _ 0).obj ((overDerived J (coefficient l E J n) U).obj K)) ≅ (((constantAtLevel l E J n).obj (ModuleCat.of (Residues l E n) (scalarCokernel l E d n))).over U))",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8c188",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T163916-L-898532",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8c188",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T163916-L-898532",
+  "kind": "interface",
+  "note": "independent cc review: the delivered data module against the published item prefix (verbatim apart from blueprint tags and dropped plain imports); the item statement against the published one (identical); matrix_cohomology and local_resolution against their nodes and Stacks 093J/093M/06YQ (both true); a combined scratch compile with #print axioms (only the expected sorryAx)"
+ }
+}

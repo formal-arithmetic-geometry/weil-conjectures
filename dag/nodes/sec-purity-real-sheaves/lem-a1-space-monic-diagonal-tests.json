@@ -1,0 +1,221 @@
+{
+ "id": "lem-a1-space-monic-diagonal-tests",
+ "kind": "statement",
+ "title": "Diagonal scheme tests of a monomorphism into a base change",
+ "statement": "Let $S,T,B$ be schemes [def-pc-scheme], with $T,B$ over $S$, and let $b:B\\to T$ be an $S$-morphism. Let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], let $f:X\\to h_T$ be a morphism, and put $X_B=X\\times_{h_T}h_B$ [lem-trf-space-fibre-products-etale-covers]. Let $j:Y\\to X_B$ be injective on sections over every $S$-scheme (a monomorphism of sheaves). Let $g:Y\\to h_B$ and $r:Y\\to X$ be the two composites. For every $S$-scheme $D$ and morphism $d:h_D\\to Y\\times_{h_B}Y$, let $y_1,y_2\\in Y(D)$ be its components, with common image $\\beta\\in h_B(D)$, and let $x_i=r(y_i)$. There is a canonical isomorphism over $h_D$\n$$h_D\\times_{Y\\times_{h_B}Y}Y\\ \\cong\\ h_D\\times_{X\\times_{h_T}X}X,$$\nwhere both maps from $Y$ and $X$ are the relative diagonals and the map on the right from $h_D$ is $(x_1,x_2)$. The isomorphism is natural in further scheme tests over $D$. In particular, if every scheme test of $\\Delta_{X/T}$ is represented by a scheme closed-immersed in its test scheme [def-weil-closed-immersion], the same holds for $\\Delta_{Y/B}$. The assertion includes $Y=X_B$, $j=1_{X_B}$. Sheaf fibre products are computed as compatible pairs of sections as in [def-trf-algebraic-space], and scheme fibre products use [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03KL (lemma-base-change-separated), proof diagonal pullback formula; Tag 03KQ (lemma-composition-separated), specialized to a monomorphism, with equality-locus scheme tests."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $L=h_D\\times_{Y\\times_{h_B}Y}Y$ and $R=h_D\\times_{X\\times_{h_T}X}X$. For an $S$-scheme $E$ and $u:E\\to D$, naturality gives $d_E(u)=(y_1|_u,y_2|_u)$ by evaluating $d_D$ at $1_D$. In particular $g(y_i|_u)=\\beta|_u$ and $f(x_i|_u)=b\\beta|_u$. By the compatible-pair convention in the statement, $L(E)$ consists of $(u,y)$ with $y=y_1|_u=y_2|_u$; $R(E)$ consists of $(u,x)$ with $x=x_1|_u=x_2|_u$. Here natural transformations and representable functors have the meanings in [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KL (lemma-base-change-separated), diagonal base-change formula; Tag 03KQ (lemma-composition-separated), diagonal factorization, with the monomorphism case checked on sections."
+   }
+  },
+  {
+   "text": "The pair description of $X_B(E)$ gives $j_E(y_i|_u)=(x_i|_u,\\beta|_u)$. Hence $x_1|_u=x_2|_u$ implies equality of these pairs, and injectivity of $j_E$ implies $y_1|_u=y_2|_u$. Conversely applying $r_E$ to this last equality gives $x_1|_u=x_2|_u$. Only the assumed injectivity on sections is used; $r_E$ itself need not be injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KL (lemma-base-change-separated), diagonal base-change formula; Tag 03KQ (lemma-composition-separated), diagonal factorization, with the monomorphism case checked on sections."
+   }
+  },
+  {
+   "text": "Define $\\Phi_E:L(E)\\to R(E)$ by $(u,y)\\mapsto(u,r_E(y))$. Define $\\Psi_E:R(E)\\to L(E)$ by $(u,x)\\mapsto(u,y_1|_u)$, which is well-defined by step 2. Their composites are identities: in $L(E)$ one already has $y=y_1|_u$, and in $R(E)$ one has $x=x_1|_u=r_E(y_1|_u)$. For $v:E'\\to E$, restriction replaces $u$ by $uv$ and $y_1|_u$ by $y_1|_{uv}$; naturality of $r$ shows both formulas commute with restriction. Thus these are inverse sheaf morphisms over $h_D$ [def-trf-algebraic-space]. Replacing $D$ by any $D'\\to D$ gives the very same formulas, proving the claimed naturality in further scheme tests.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KL (lemma-base-change-separated), diagonal base-change formula; Tag 03KQ (lemma-composition-separated), diagonal factorization, with the monomorphism case checked on sections."
+   }
+  },
+  {
+   "text": "Under the closed-diagonal-test hypothesis, choose a representation $h_Z\\cong R$ over $h_D$ with $Z\\to D$ a closed immersion [def-weil-closed-immersion]. Compose it with $\\Psi$ to obtain $h_Z\\cong L$ over $h_D$, in the sense of [def-trf-algebraic-space]. The representing scheme and its projection $Z\\to D$ are exactly the same, so this is the required closed-immersion test for $\\Delta_{Y/B}$. This applies to every $D,d$. Finally $j=1_{X_B}$ is injective on sections, so the same argument includes $Y=X_B$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KL (lemma-base-change-separated), diagonal base-change formula; Tag 03KQ (lemma-composition-separated), diagonal factorization, with the monomorphism case checked on sections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03KL (lemma-base-change-separated), diagonal base-change formula; Tag 03KQ (lemma-composition-separated), diagonal factorization, with the monomorphism case checked on sections. Explicit sectionwise argument supplied by Q26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a monomorphism Y into X times T B the pullback of the relative diagonal of Y over B is the scheme test of the diagonal of X over T",
+   "results": "{\"t\": \"2026-10-22T07:58:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a monomorphism Y into X times T B the pullback of the relative diagonal of Y over B is the scheme test of the diagonal of X over T\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover_map\", \"AlgebraicGeometry.diagonal_SpecMap\", \"AlgebraicGeometry.diagonal_Spec_map\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.Scheme.Pullback.range_diagonal_subset_diagonalCoverDiagonalRange\"], \"digest\": \"30e148f5f3896a84\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackDiagonalMapIso and pullback_map_diagonal_isPullback give constituent categorical squares, not the scheme-test isomorphism for an arbitrary monomorphism into a base change with represented closed-diagonal tests. One must also use monomorphy, paste the squares, identify the test pullbacks, and transport their scheme representations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality loci on test schemes for a subspace of a base change are pullbacks of the original relative diagonal",
+   "results": "{\"t\": \"2026-10-22T07:58:17Z\", \"tool\": \"leanfinder\", \"query\": \"Equality loci on test schemes for a subspace of a base change are pullbacks of the original relative diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.range_diagonal_subset_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"AlgebraicGeometry.diagonal_SpecMap\", \"AlgebraicGeometry.diagonal_Spec_map\", \"AlgebraicGeometry.Scheme.Pullback.range_fst_comp\", \"AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback\", \"AlgebraicGeometry.Scheme.Pullback.range_map\"], \"digest\": \"1b862fa88060045c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackDiagonalMapIso and pullback_map_diagonal_isPullback give constituent categorical squares, not the scheme-test isomorphism for an arbitrary monomorphism into a base change with represented closed-diagonal tests. One must also use monomorphy, paste the squares, identify the test pullbacks, and transport their scheme representations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"diagonal\", \"mono\"",
+   "results": "{\"t\": \"2026-10-22T07:58:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"diagonal\\\", \\\"mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback.instIsSplitMonoDiagonal\", \"CategoryTheory.Limits.pullback.instIsIsoDiagonalOfMono\"], \"digest\": \"fad7429199651258\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackDiagonalMapIso and pullback_map_diagonal_isPullback give constituent categorical squares, not the scheme-test isomorphism for an arbitrary monomorphism into a base change with represented closed-diagonal tests. One must also use monomorphy, paste the squares, identify the test pullbacks, and transport their scheme representations."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Mm]ono|[Mm]ono.*diagonal|diagonal.*[Bb]ase[Cc]hange",
+   "results": "{\"t\": \"2026-10-22T07:58:18Z\", \"tool\": \"grep\", \"query\": \"diagonal.*[Mm]ono|[Mm]ono.*diagonal|diagonal.*[Bb]ase[Cc]hange\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Galois/Basic.lean\", \"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/Action/Concrete.lean\", \"Mathlib/CategoryTheory/Action/Concrete.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\"], \"digest\": \"bf15c402079825ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackDiagonalMapIso and pullback_map_diagonal_isPullback give constituent categorical squares, not the scheme-test isomorphism for an arbitrary monomorphism into a base change with represented closed-diagonal tests. One must also use monomorphy, paste the squares, identify the test pullbacks, and transport their scheme representations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonal pullback formula for a monomorphism into a base changed sheaf, natural over every test scheme",
+   "results": "{\"t\": \"2026-10-22T07:58:18Z\", \"tool\": \"leansearch\", \"query\": \"Diagonal pullback formula for a monomorphism into a base changed sheaf, natural over every test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback_map_diagonal_isPullback\", \"CategoryTheory.Limits.pullback_lift_diagonal_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover_map\", \"AlgebraicGeometry.Scheme.Pullback.range_map\", \"CategoryTheory.Limits.pullback.instIsSplitMonoDiagonal\", \"CategoryTheory.Limits.pullback.diagonal\", \"CategoryTheory.MorphismProperty.diagonal_iff\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\"], \"digest\": \"d86a5c4a46711b57\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackDiagonalMapIso and pullback_map_diagonal_isPullback give constituent categorical squares, not the scheme-test isomorphism for an arbitrary monomorphism into a base change with represented closed-diagonal tests. One must also use monomorphy, paste the squares, identify the test pullbacks, and transport their scheme representations."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackDiagonalMapIso|pullback_fst_map_snd_isPullback|pullback_lift_diagonal_isPullback",
+   "results": "{\"t\": \"2026-10-22T08:10:27Z\", \"tool\": \"grep\", \"query\": \"pullbackDiagonalMapIso|pullback_fst_map_snd_isPullback|pullback_lift_diagonal_isPullback\", \"sub\": \"CategoryTheory/Limits/Shapes\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\"], \"digest\": \"34d78318b2e2c0d6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackDiagonalMapIso and pullback_map_diagonal_isPullback give constituent categorical squares, not the scheme-test isomorphism for an arbitrary monomorphism into a base change with represented closed-diagonal tests. One must also use monomorphy, paste the squares, identify the test pullbacks, and transport their scheme representations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackDiagonalMapIso\"",
+   "results": "{\"t\": \"2026-10-22T08:10:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullbackDiagonalMapIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullbackDiagonalMapIso\", \"CategoryTheory.Limits.pullbackDiagonalMapIso.hom\", \"CategoryTheory.Limits.pullbackDiagonalMapIso.inv\", \"CategoryTheory.Limits.pullbackDiagonalMapIso.inv_fst\", \"CategoryTheory.Limits.pullbackDiagonalMapIso.inv_fst_assoc\", \"CategoryTheory.Limits.pullbackDiagonalMapIso.inv_snd_fst\", \"CategoryTheory.Limits.pullbackDiagonalMapIso.inv_snd_snd\", \"CategoryTheory.Limits.pullbackDiagonalMapIso.inv_snd_fst_assoc\"], \"digest\": \"f6a4112b3839a22c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackDiagonalMapIso and pullback_map_diagonal_isPullback give constituent categorical squares, not the scheme-test isomorphism for an arbitrary monomorphism into a base change with represented closed-diagonal tests. One must also use monomorphy, paste the squares, identify the test pullbacks, and transport their scheme representations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism into a base change induces an isomorphism between relative diagonal pullbacks on every test scheme",
+   "results": "{\"t\": \"2026-10-23T04:09:14Z\", \"tool\": \"leanfinder\", \"query\": \"A monomorphism into a base change induces an isomorphism between relative diagonal pullbacks on every test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"CategoryTheory.MorphismProperty.diagonal_isomorphisms\", \"CategoryTheory.Limits.pullback.instIsIsoDiagonalOfMono\", \"CategoryTheory.Limits.pullback.isIso_diagonal_iff\", \"AlgebraicGeometry.UniversallyInjective.iff_diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\"], \"digest\": \"c4a7d6d661267544\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give constituent diagonal, pullback, or equalizer results; none gives the full arbitrary monomorphism-into-base-change statement with natural scheme-test comparison and the represented closed-immersion consequence."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackDiagonalMapIso|pullback_map_diagonal_isPullback|instIsIsoDiagonalOfMono",
+   "results": "{\"t\": \"2026-10-23T04:09:39Z\", \"tool\": \"grep\", \"query\": \"pullbackDiagonalMapIso|pullback_map_diagonal_isPullback|instIsIsoDiagonalOfMono\", \"sub\": \"CategoryTheory/Limits/Shapes\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\"], \"digest\": \"c73ff64e79ea5338\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give constituent diagonal, pullback, or equalizer results; none gives the full arbitrary monomorphism-into-base-change statement with natural scheme-test comparison and the represented closed-immersion consequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality loci of sections of a sheaf embed into a fibre product and are represented by the pullback of the relative diagonal",
+   "results": "{\"t\": \"2026-10-23T04:09:39Z\", \"tool\": \"leansearch\", \"query\": \"Equality loci of sections of a sheaf embed into a fibre product and are represented by the pullback of the relative diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.pullbackDiagonal\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"image_toPullbackDiag\", \"TopCat.Presheaf.section_ext\", \"CategoryTheory.Functor.IsLocallyFaithful.ext\", \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\", \"AlgebraicGeometry.isClosedImmersion_equalizer_ι_left\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover_map\"], \"digest\": \"d98f81e04c65192b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give constituent diagonal, pullback, or equalizer results; none gives the full arbitrary monomorphism-into-base-change statement with natural scheme-test comparison and the represented closed-immersion consequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"diagonal\", \"mono\"",
+   "results": "{\"t\": \"2026-10-23T04:09:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"diagonal\\\", \\\"mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback.instIsSplitMonoDiagonal\", \"CategoryTheory.Limits.pullback.instIsIsoDiagonalOfMono\"], \"digest\": \"fad7429199651258\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give constituent diagonal, pullback, or equalizer results; none gives the full arbitrary monomorphism-into-base-change statement with natural scheme-test comparison and the represented closed-immersion consequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equalizer of two sections with a common base component is unchanged by composing an injective natural transformation into a fibre product",
+   "results": "{\"t\": \"2026-10-23T04:10:28Z\", \"tool\": \"leanfinder\", \"query\": \"Equalizer of two sections with a common base component is unchanged by composing an injective natural transformation into a fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.mapToEqualizer_eq_comp\", \"CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv_symm_ι_apply\", \"CategoryTheory.Equalizer.Presieve.Arrows.compatible_iff\", \"CategoryTheory.Equalizer.Presieve.Arrows.w\", \"CategoryTheory.Equalizer.Presieve.w\", \"CategoryTheory.Equalizer.Presieve.compatible_iff\", \"CategoryTheory.regularTopology.mapToEqualizer\", \"CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv\"], \"digest\": \"35d712040065b7d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give constituent diagonal, pullback, or equalizer results; none gives the full arbitrary monomorphism-into-base-change statement with natural scheme-test comparison and the represented closed-immersion consequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-separated-lqf-permanence",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "The geometric representability branch beneath lem-a1-affine-hc0, via 03XX and 03XW: third paragraph, base-change hypotheses in the induction diagram; fourth paragraph, separated locally quasi-finite structure of the saturated open over T′. Extraction of old permanence proof steps 5.",
+   "via": [
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-space-monic-diagonal-tests",
+  "worker": "stage1",
+  "summary": "Wrote the two inverse maps on sections, using monicity only after fixing the common B-component; verified restriction and further-test naturality and reused the same closed-immersed representing scheme. No new nodes or statement changes.",
+  "blueprint": "Realizes the specified diagonal-test subargument in the geometric representability branch below lem-a1-affine-hc0, through lem-a1-space-separated-lqf-permanence; the nearest blueprint ancestor does not itself state this formula."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-1a453d640",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-1a453d640 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery changes only the item and adds no new nodes. Its statement and stmt_deps are byte-identical to the unsplit node that N9's re-split created (checked against the N9 2bceaebce snapshot). No re-split note applies to it. I checked the statement by hand. The sections of X_B are pairs (x,β') with f(x)=bβ', and f(x_i)=bβ, so (x_1,x_2) is a valid test of Δ_{X/T}. L and R are the subfunctors {u: y_1|_u=y_2|_u} and {u: x_1|_u=x_2|_u} of h_D. Because j(y_i|_u)=(x_i|_u,β|_u) has the same second component for i=1,2, injectivity of j gives L=R. The closed-immersion consequence then reuses the same Z→D. Monicity of j and the common B-component are both necessary, and the proof uses both. Steps: 1 is the Yoneda computation by hand plus the pair descriptions, using def-trf-algebraic-space. 2 uses only injectivity of j. 3 gives Φ and Ψ, shows they are inverse, and checks naturality under restriction and under D'→D. 4 transports the representation by h_Z, using def-weil-closed-immersion. The steps use definitions only, so no tool_uses are needed, and proof_deps equals the union of the uses. Edge cases checked: j=id (which parent step 3 uses), empty Y, empty D, y_1=y_2, sections that become equal only after restriction, and X=h_T with r=b not monic. Sources: Stacks spaces-morphisms.tex Tag 03KL (lemma-base-change-separated, lines 272-286) and Tag 03KQ (lemma-composition-separated, lines 365-384), confirmed in tags/tags. The proof is honestly marked by=agent, and no SGA is cited. The cited nodes def-pc-scheme, def-trf-algebraic-space, def-pc-fibre-product, def-weil-closed-immersion and lem-trf-space-fibre-products-etale-covers are all unmerged and support the uses made of them. Duplicates: blueprint_refs search found nothing. lem-trf-sheaf-pullback-diagonal (absolute diagonal of a fibre product) and lem-trf-scheme-monomorphism-separated (about schemes) are different statements. The Mathlib searches cover all three kinds, with verdict no match. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceMonicDiagonalTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_monic_diagonal_tests",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.monicDiagonalPairMap",
+   "AlgebraicGeometry.AlgebraicSpace.monicDiagonalTestMap",
+   "AlgebraicGeometry.AlgebraicSpace.diagonalTestRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.space_monic_diagonal_tests"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceMonicDiagonalTests.lean",
+  "statement": "theorem space_monic_diagonal_tests {S : Scheme.{u}} (T B : Over S) (b : B ⟶ T) (X Y : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T) (j : Y.obj.obj ⟶ Limits.pullback f (yoneda.map b)) (hj : ∀ E : Over S, Function.Injective (j.app (op E))) : (∀ (D : Over S) (d : yoneda.obj D ⟶ Limits.pullback (j ≫ pullback.snd f (yoneda.map b)) (j ≫ pullback.snd f (yoneda.map b))), IsIso (monicDiagonalTestMap f b j d) ∧ monicDiagonalTestMap f b j d ≫ pullback.fst _ _ = pullback.fst _ _ ∧ ∀ (D' : Over S) (v : D' ⟶ D), diagonalTestRestriction (pullback.diagonal (j ≫ pullback.snd f (yoneda.map b))) d v ≫ monicDiagonalTestMap f b j d = monicDiagonalTestMap f b j (yoneda.map v ≫ d) ≫ diagonalTestRestriction (pullback.diagonal f) (d ≫ monicDiagonalPairMap f b j) v) ∧ (IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal f) → IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal (j ≫ pullback.snd f (yoneda.map b))))",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical comparison is constructed by pullback.map with the identity test component and r on the space component. The theorem asserts its invertibility, its equation over the test scheme, naturality under further tests, and the closed-immersion-test consequence. The three helper maps contain real data and only structural commutativity proofs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56f25eb79",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: S,T,B are Over S objects with an S-morphism b; X,Y : AlgebraicSpace S; X_B = Limits.pullback f (yoneda.map b) (compatible pairs, same Mathlib pullback as def-pc-fibre-product); hj is injectivity on sections over every S-scheme, with no stronger assumption; the right-hand test is d ≫ pullback.map r r (yoneda.map b), a canonical map; IsIso of the explicit pullback.map(𝟙, r) comparison, its equation over h_D, and the naturality square through explicit restriction maps; the closed-immersion clause uses the recorded IsRepresentableWith (IsClosedImmersion p.left) on pullback.diagonal f and g. The statement was checked true sectionwise by hand. Edge cases checked: empty D/Y, j=id via fibreProduct_isAlgebraicSpace, X=h_T with r not monic; single universe u. Gates pass: helpers carry real data, exactly one sorry, source and blueprint docstrings, statement verbatim, rest of node copy identical to live, no name clash in live lean/Sheaf, no new nodes. Advisory only: redundant imports (Mathlib.AlgebraicGeometry.Scheme, and the fibre-products stmt_dep module). Not recompiled, per the rules."
+ }
+}

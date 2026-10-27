@@ -1,0 +1,348 @@
+{
+ "id": "lem-sf-complete-lifted-top-cell-triangle",
+ "kind": "statement",
+ "title": "Lift a prescribed top residue basis to a complete integral triangle",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with valuation ring $R=\\mathcal O_E$, uniformizer $\\varpi$, and residue field $k=R/(\\varpi)$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$ [def-pc-scheme] work on its small pro-etale site [def-weil-pbc-proetale-site] and put $R_{n,T}=(R/\\varpi^n)_T$ and $B_T=\\varprojlim_{n\\geq1}R_{n,T}$, using constant sheaves and inverse limits [def-weil-pbc-constant-sheaf, def-pur-sheaf-inverse-limit]. Use the unbounded derived category $D(\\operatorname{Mod}(B_T))$ of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. A complex $M$ is quotient-tower complete if its canonical quotient maps exhibit it as $R\\varprojlim_{n\\geq1}(M\\otimes^L_{B_T}R_{n,T})$, with the quotient transitions and with the terms restricted to $B_T$-scalars [def-weil-derived-limit, def-pc-sheaf-restrict-scalars, lem-pur-derived-change-of-rings]. Suppose $T$ is quasi-compact [def-weil-pbc-quasi-compact-scheme] and evaluation at $T$ sends epimorphisms of sheaves of sets to surjections. Let $M\\in D(\\operatorname{Mod}(B_T))$ be quotient-tower complete. Write $M_1=M\\otimes^L_{B_T}k_T$. Fix integers $a\\leq b$ and assume that $M_1$ has Tor amplitude $[a,b]$ on every site object: for each $V\\to T$ and degree-zero $k_V$-module sheaf $N$, $H^j((M_1|_V)\\otimes^L_{k_V}N)=0$ for $j\\notin[a,b]$ [def-weil-proetale-tor-amplitude, def-weil-derived-cohomology-sheaves]. Fix a finite integer $r\\geq0$ and an isomorphism $\\theta:k_T^{\\oplus r}\\xrightarrow{\\sim}H^b(M_1)$. No freeness or local constancy is assumed for the other cohomology sheaves. Put $P=B_T^{\\oplus r}$. The canonical reduction map $H^b(M)\\to H^b(M_1)$ is an epimorphism of $B_T$-module sheaves and is surjective on $T$-sections. There are $f:P[-b]\\to M$ and a distinguished triangle\n$$P[-b]\\xrightarrow{f}M\\longrightarrow L\\longrightarrow P[-b+1]$$\nwith $L$ quotient-tower complete. The canonical derived reduction of $P[-b]$ is $k_T^{\\oplus r}[-b]$, via the coefficient quotient on its standard generators; writing $f_1$ for the reduction through this identification, one has $H^b(f_1)=\\theta$. For $r=0$, $P=0$ and $f$ is the unique morphism from zero. These assertions hold also for $a=b$ and $T=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph. Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-complete",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-sf-completed-coefficient-free-cell",
+  "def-sf-scalar-reduction-categories-restriction",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Test the residue Tor interval on the unit module after restriction to the terminal site object. Compute derived tensor with the unit by a flat K-flat representative and its right unitor, and use faithful terminal-slice restriction to obtain residue cohomological bounds. All constructions use independent scheme and coefficient universes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-sf-ringed-kflat-tensor-representative-data",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph. Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4."
+   }
+  },
+  {
+   "text": "Use strict DVR reduction triangles to propagate the residue bounds to all positive quotient levels and to prove that their top cohomology transitions are epic. Compare the chosen complete tower with this flat K-flat tower through a common K-flat roof; the uniquely specified tensor transitions agree. The bounded epimorphic derived-limit theorem gives the same bounds for M, in particular H^(b+1)(M)=0.",
+   "uses": [
+    "lem-sf-strict-dvr-reduction-triangles",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-pc-kflat-resolution",
+    "lem-sf-bounded-epimorphic-top-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph. Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4."
+   }
+  },
+  {
+   "text": "Use the completed-coefficient free-resolution theorem for the canonical reduction distinguished triangle. Its homology sequence and H^(b+1)(M)=0 make the actual top reduction epic. Exact evaluation at the terminal object, supplied by weak contractibility, makes it surjective on terminal sections.",
+   "uses": [
+    "lem-sf-completed-coefficient-free-resolution",
+    "lem-sf-weakly-contractible-projective",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph. Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4."
+   }
+  },
+  {
+   "text": "The normalized ordinary extension of the coefficient unit is the residue unit. Preservation of finite products extends this identification to the rank-r free module, including r=0. Apply the existing K-flat counit comparison for the free single complex. Naturality of the exact restriction localization comparison and the single-complex comparison identify the derived unit with precisely freeCellQuotient, not an unspecified scalar multiple.",
+   "uses": [
+    "lem-sf-completed-free-cell-ordinary-limit",
+    "lem-sf-completed-coefficient-free-resolution",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph. Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4."
+   }
+  },
+  {
+   "text": "The finite free source P is projective and the product coefficient quotient q is epic. Lift q followed by the restriction of theta through topReduction. The projective single-complex/homology bijection realizes that lift by f:P[-b]→M. Naturality of the derived unit and compatibility of restriction with single homology identify its reduced top homology. Cancel q and use faithfulness of restriction to obtain exactly theta.",
+   "uses": [
+    "lem-sf-weakly-contractible-projective",
+    "lem-sf-projective-cohomology-split-model",
+    "lem-sf-completed-coefficient-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph. Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4."
+   }
+  },
+  {
+   "text": "Complete f to a distinguished triangle. The free source is quotient-tower complete by the completed free-resolution theorem. Use the unit-compatible Roos/intrinsic completeness equivalence to translate both complete vertices into vanishing of the local principal-localization internal-Hom tests. Exact slice restriction and covariant internal Hom take the triangle to a distinguished triangle, so the third local test vanishes. Translate back to quotient-tower completeness of the cone.",
+   "uses": [
+    "lem-sf-completed-coefficient-free-resolution",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-a1-principal-koszul-strict-replacement",
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-principal-cone-local-criterion",
+    "lem-sf-site-perfect-restriction-exact",
+    "lem-sf-site-perfect-derived-restriction-iso",
+    "lem-weil-pbc-ringed-internal-hom-exact-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph. Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4."
+   }
+  },
+  {
+   "text": "For rank zero, prove the empty product is zero by product extensionality. Its derived single complex is zero, hence every map from it equals f. No argument requires a<b or a nonempty scheme.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph. Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-sf-ringed-kflat-tensor-representative-data",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-sf-strict-dvr-reduction-triangles",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-sf-bounded-epimorphic-top-derived-limit",
+  "lem-sf-completed-coefficient-free-resolution",
+  "lem-sf-weakly-contractible-projective",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-completed-free-cell-ordinary-limit",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-projective-cohomology-split-model",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-a1-principal-koszul-strict-replacement",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-principal-cone-local-criterion",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-sf-site-perfect-derived-restriction-iso",
+  "lem-weil-pbc-ringed-internal-hom-exact-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S5",
+  "date": "2026-10-24",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, final induction paragraph; implemented with the normalized scalar-extension unit, projective homology lifting, strict DVR quotient triangles and local principal-completeness tests."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "residue.*(basis|cell|cone)|complete.*(cone|triangle)",
+   "results": "3 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean (Mathlib/Algebra/Homology)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completions, residue bases and generic triangulated constructions do not give the derived sheaf top-cell lift with quotient-tower-complete cone."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adically derived complete sheaf complex with bounded residue Tor amplitude admits a finite free top cohomology lift with derived complete cone",
+   "results": "8 hits: IsAdicComplete.mk_lift, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, IsAdicComplete.StrictMono.lift, IsAdicComplete.StrictMono.lift.congr_simp, IsAdicComplete.mk, IsAdicComplete.rec",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completions, residue bases and generic triangulated constructions do not give the derived sheaf top-cell lift with quotient-tower-complete cone."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"mappingCone\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completions, residue bases and generic triangulated constructions do not give the derived sheaf top-cell lift with quotient-tower-complete cone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a prescribed basis of the highest residue cohomology of a quotient tower complete complex of sheaves over a complete discrete valuation ring to a finite free cell with derived complete cone",
+   "results": "8 hits: BDeRhamPlus, BDeRham, Algebra.SubmersivePresentation.basisKaehlerOfIsCompl, Module.exists_basis_of_basis_baseChange, IsLocalRing.basisQuotient_apply, IsLocalRing.basisQuotient_repr, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, Algebra.PreSubmersivePresentation.cotangentComplexAux",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completions, residue bases and generic triangulated constructions do not give the derived sheaf top-cell lift with quotient-tower-complete cone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift generators through the top reduction epimorphism of a derived complete complex over a valuation ring, and prove its finite free source and mapping cone complete",
+   "results": "8 hits: BDeRhamPlus, BDeRham, IsAdicComplete.StrictMono.lift, IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.of_comp_lift, IsAdicComplete.of_lift, AdicCompletion.eval_lift, IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completions, residue bases and generic triangulated constructions do not give the derived sheaf top-cell lift with quotient-tower-complete cone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a derived adically complete complex of proetale module sheaves with bounded residue Tor amplitude, lift a prescribed top residue basis to a finite free complex whose cone is complete",
+   "results": "8 hits: Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, BDeRhamPlus, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, BDeRham, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, IsAdicComplete.StrictMono.of_lift, AdicCompletion.exists_smodEq_pow_add_one_smul",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adic completion, formal smoothness or generic mapping-cone calculus; none states the pro-etale quotient-complete top-cell lift."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"triangle\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adic completion, formal smoothness or generic mapping-cone calculus; none states the pro-etale quotient-complete top-cell lift."
+  },
+  {
+   "tool": "grep",
+   "query": "complete.*(cone|triangle)|residue.*basis|basis.*residue",
+   "results": "3 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adic completion, formal smoothness or generic mapping-cone calculus; none states the pro-etale quotient-complete top-cell lift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a basis of the highest residue cohomology of a derived complete sheaf complex to a finite free cell with complete mapping cone",
+   "results": "8 hits: CochainComplex.mappingCone.liftCocycle_coe, CochainComplex.mappingCone.liftHomotopy, CochainComplex.mappingCone.ofHom_lift, CochainComplex.mappingCone.liftCochain, CochainComplex.mappingCone.lift_f, CochainComplex.mappingCone.lift, CochainComplex.mappingCone.liftCocycle.congr_simp, CochainComplex.mappingCone.δ_liftCochain",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adic completion, formal smoothness or generic mapping-cone calculus; none states the pro-etale quotient-complete top-cell lift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of top cohomology reduction for an adically complete complex of sheaves and lifting a residue field basis to a finite free cell",
+   "results": "8 hits: AdicCompletion.surjective_evalₐ, AdicCompletion.evalOneₐ_surjective, AdicCompletion.eval_surjective, Algebra.SubmersivePresentation.cotangentComplexAux_surjective, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.map_surjective_of_mkQ_comp_surjective, AdicCompletion.kerProj_surjective, AdicCompletion.of_surjective",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adic completion, formal smoothness or generic mapping-cone calculus; none states the pro-etale quotient-complete top-cell lift."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-complete-top-residue-cell-cone",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: A lifted top residue cell with a complete cone of shorter amplitude; old parent steps 5-6. Re-split: Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4.",
+   "via": [
+    "lem-sf-complete-top-residue-cell-cone",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-complete-lifted-top-cell-triangle",
+  "worker": "stage1",
+  "summary": "Proved the canonical top reduction epimorphism from the residue bounds and regular coefficient triangle; lifted the prescribed basis by exact terminal evaluation; computed its standard-generator reduction and proved source and cone completeness. Reused existing nodes throughout; no statement changes or new nodes. Reviewer FIX (Q97 maintainer reader): Step 6 now cites the same-unit lem-sf-completed-coefficient-free-resolution for completeness of the free source instead of det-pe-milnor-epimorphic plus the strict-tower limit, which did not identify the ordinary-product Milnor cone with the Roos derived limit of the statement.",
+  "blueprint": "lem-fix-weil-operations, evaluation sentence in the exceptional-adjoint paragraph; realizes the integral local projective-model subargument via lem-fix-constructible-tensor-completion / lem-fix-residue-lisse-projective-models / lem-sf-complete-top-residue-cell-cone, specifically the lifted top cell and complete cone, without the residue-cone calculation.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Generic $\\mathcal O_{E,X}$ is the limit of its finite levels used in the indicated proof step; the unit supplies no replacement for this coefficient, derived-category or completion tool."
+   },
+   {
+    "node": "lem-sp-completed-coefficient-regular-quotients",
+    "why": "Generic Completed integral coefficient projections and regular scalar powers used in the indicated proof step; the unit supplies no replacement for this coefficient, derived-category or completion tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used in the indicated proof step; the unit supplies no replacement for this coefficient, derived-category or completion tool."
+   },
+   {
+    "node": "lem-cbc-regular-quotient-flat-sequence",
+    "why": "Generic Normalized principal quotient exact sequence on a flat module used in the indicated proof step; the unit supplies no replacement for this coefficient, derived-category or completion tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used in the indicated proof step; the unit supplies no replacement for this coefficient, derived-category or completion tool."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic Bounded-above flat complexes on a ringed site are K-flat used in the indicated proof step; the unit supplies no replacement for this coefficient, derived-category or completion tool."
+   },
+   {
+    "node": "lem-sf-ringed-kflat-single-tensor-comparison",
+    "why": "Generic K-flat tensor with a degree-zero module on a ringed site used in the indicated proof step; the unit supplies no replacement for this coefficient, derived-category or completion tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Constant-to-completed coefficients on derived-complete categories used in the indicated proof step; the unit supplies no replacement for this coefficient, derived-category or completion tool."
+   },
+   {
+    "node": "lem-sfb-ringed-complete-triangulated",
+    "why": "Generic Exact Koszul completion and the triangulated complete locus used in the indicated proof step; the unit supplies no replacement for this coefficient, derived-category or completion tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-c73cbbce2",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-c73cbbce2 (reviewer sub-agent of L); spot-checked: Read the item and all of its proof in full: 8 steps, no new nodes, statement unchanged except the quasi-compact citation. Checked the statement of every cited node and Stacks proetale.tex Tag 09C3 (lemma-local-structure-constructible-complex: lift a completed free module onto H^b, then take the cone). Steps 1-5, 7 and 8 are correct. Step 1: det-prop-sfb (3) and the regular-quotients node give the exact sequence 0→B_T→B_T→k_T→0 for any T. Step 2: the residue-bounds lemma gives H^{b+1}(M)=0 with matching hypotheses. Step 3: a flat-term K-flat representative, the normalized regular-quotient sequence, the SES triangle and the long exact sequence give that H^b(M)→H^b(M_1) is an epimorphism. Step 4: exact terminal evaluation gives cycle lifts and the chain map from P[-b]. Step 5: P[-b] is K-flat, the standard-generator reduction holds and H^b(f_1)=θ. Step 7: the constant-completion comparison with A=O_E, I=(ϖ), Â=B_T, plus closure of ringed completeness under triangles, gives that L is complete. Step 8: edge cases r=0, a=b and T=∅ are covered. Fault C4/E5 in Step 6: det-pe-milnor-epimorphic computes the derived limit as Cone(1-T)[-1] with the ordinary sheaf product. The step then switches to the strict-tower R lim functor. No cited statement identifies that cone with the Roos derived limit in D(B_T) that quotient-tower completeness requires; this needs exact pro-étale products, which the step uses without citing. Repaired by citing the same-unit node lem-sf-completed-coefficient-free-resolution (reviewed pass). It states verbatim that every B_T^{⊕r} placed in a single degree is quotient-tower complete through its actual projections, and it was the old parent's citation. No cycle. Updated proof_deps and dropped the det-pe-milnor-epimorphic and strict-tower-homotopy-limit tool_uses. The remaining tool_uses are generic tools and are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompleteLiftedTopCellTriangle",
+  "declaration": "WeilConjectures.CompleteLiftedTopCell.complete_lifted_top_cell_triangle",
+  "declarations": [
+   "WeilConjectures.CompleteLiftedTopCell.residueFree",
+   "WeilConjectures.CompleteLiftedTopCell.residueCell",
+   "WeilConjectures.CompleteLiftedTopCell.freeQuotient",
+   "WeilConjectures.CompleteLiftedTopCell.freeCellQuotient",
+   "WeilConjectures.CompleteLiftedTopCell.topReduction",
+   "WeilConjectures.CompleteLiftedTopCell.residueTorTest",
+   "WeilConjectures.CompleteLiftedTopCell.complete_lifted_top_cell_triangle"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CompleteLiftedTopCellTriangle.lean",
+  "statement": "theorem complete_lifted_top_cell_triangle (hT : ∀ (F G : Sheaf (ProEt.topology T) (Type (max u (t + 1)))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 T))))) [CompactSpace T] (M : DerivedCategory (scalarReductionSource l E T)) (hcomplete : IsDerivedCompleteUnrestricted l E T M) (a b : ℤ) (hab : a ≤ b) (hTor : ∀ V : T.ProEt, residueTorTest l E T M a b V) (r : ℕ) (θ : residueFree l E T r ≅ (DerivedCategory.homologyFunctor (scalarReductionTarget l E T 0) b).obj ((scalarReductionDerivedExtension l E T 0).obj M)) : Epi (topReduction l E T M b) ∧ Function.Surjective ((topReduction l E T M b).val.app (op (ProEt.mk (𝟙 T)))) ∧ ∃ (f : DerivedCategory.Q.obj (CompletedCoefficientFree.freeCell l E T r b) ⟶ M) (L : DerivedCategory (scalarReductionSource l E T)) (g : M ⟶ L) (δ : L ⟶ (DerivedCategory.Q.obj (CompletedCoefficientFree.freeCell l E T r b))⟦(1 : ℤ)⟧), Triangle.mk f g δ ∈ distTriang _ ∧ IsDerivedCompleteUnrestricted l E T L ∧ ∃ e : (scalarReductionDerivedExtension l E T 0).obj (DerivedCategory.Q.obj (CompletedCoefficientFree.freeCell l E T r b)) ≅ residueCell l E T r b, CompletedCoefficientFree.reductionMap l E T 0 (DerivedCategory.Q.obj (CompletedCoefficientFree.freeCell l E T r b)) ≫ (scalarReductionDerivedRestriction l E T 0).map e.hom = freeCellQuotient l E T r b ∧ (DerivedCategory.singleFunctorCompHomologyFunctorIso (scalarReductionTarget l E T 0) b).inv.app (residueFree l E T r) ≫ (DerivedCategory.homologyFunctor (scalarReductionTarget l E T 0) b).map (e.inv ≫ (scalarReductionDerivedExtension l E T 0).map f) = θ.hom ∧ (r = 0 → IsZero (DerivedCategory.Q.obj (CompletedCoefficientFree.freeCell l E T r b)) ∧ ∀ f' : DerivedCategory.Q.obj (CompletedCoefficientFree.freeCell l E T r b) ⟶ M, f' = f)",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of returned head 2917c0bc325f: Lean unchanged. The finite free cell, quotient projection and derived reduction unit are owned by def-sf-completed-coefficient-free-cell; the free-resolution theorem remains a proof dependency only. The normalized adjunction theorem is genuinely used to construct reductionMap and supplies the exactness interfaces used by the statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6bb8433a",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 2917c0bc325f (H2). Lean file byte-identical; item stmt_deps swap lem-sf-completed-coefficient-free-resolution for new def-sf-completed-coefficient-free-cell (existing:true on unchanged CompletedCoefficientFreeResolution: residueModule, quotientProjection, freeCell, reductionMap) plus advisory def-sf-scalar-reduction-categories-restriction and def-weil-integral-derived-reduction; theorem kept in proof_deps (step 6). New node text matches live defs (n+1 indexing, 1↦1 projection, Fin r single cell incl. r=0, normalized adjunction unit); statement field verbatim; deps all used; no competing owner node in side-live; live item has no lean record (no supersession). Mechanical finding lem-weil-derived-scalar-extension-restriction-adjunction: PASS — reductionMap is its .choose.unit and scalarReductionRestrictionLimits/Colimits are theorems of that module needed to type piComparison inverse and mapDerivedCategory single/homology isos. Mathematics unchanged and re-confirmed against Tag 09C3 (hyps, Epi+T-surjectivity, dist triangle with complete L, e pinned by unit square, H^b(f_1)=θ, r=0, a=b, T=∅). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bfc70",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T191040-L-235563",
+  "kind": "interface",
+  "note": "independent cc review: bfc70d3b vs previously reviewed head 4b91f1a8 (C-4b91f PASS-with-record-fix): only proof-term instance edits + corrected change record/report; node identical; live base unchanged; unit sk-rem-sf-pf-done realized empty; axioms checked (52.4 s, upstream sorryAx only)"
+ }
+}

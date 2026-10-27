@@ -9,7 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
-import Sheaf.AlgebraicGeometry.UnramifiedMorphism
+import Sheaf.AlgebraicGeometry.AffineSquareMonomorphismAbsoluteSeparated
+import Sheaf.AlgebraicGeometry.MonomorphismFiniteTypeComposite
 import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 
 /-!
@@ -29,6 +30,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+-- The relation axioms are not needed for these geometric properties.
+set_option linter.unusedVariables false in
 /-- For an étale equivalence relation on an affine `S`-scheme, both projections and
 its monomorphism into the relative square are separated and locally quasi-finite.
 Here local quasi-finiteness includes the finite-type requirement of Stacks Tag 01TD.
@@ -41,27 +44,16 @@ Source: Stacks Project, Spaces, Tag 0265, opening two proof paragraphs and the f
 representability step (blueprint: lem-trf-affine-etale-relation-separated-lqf).
 
 Proof:
-1. Put `V = U ×[S] U` and let `P` be the absolute product `U × U` over `Spec ℤ`.
-   The affine fibre-product formula (lem-weil-pbc-fibre-product-affine-spectra)
-   makes `P` affine. The map `V → P` is monic: equality after it gives equality of
-   both projections, hence equality by the pullback universal property
-   (def-pc-fibre-product). Its composite `q : R → P` with the given monic `j` is monic.
-2. For either `j` or `q`, monicity makes the two projections of its self-pullback
-   equal. Its diagonal is inverse to the first projection, by the pullback universal
-   property. Thus its diagonal is an isomorphism, hence a closed and open immersion
-   (def-weil-closed-immersion, def-weil-open-immersion). Both maps are separated,
-   and the diagonal of `j` is open (def-weil-proper-morphism).
-3. The separated map `q` to the affine `P` makes `R` absolutely separated by
-   lem-sc-separated-over-affine-scheme-separated. Factor its absolute structure map
-   through `s` and through `t`. Separated cancellation, clause (b) of
-   lem-weil-pbc-separated-cancellation, makes both projections separated.
-4. Étaleness makes both projections unramified (def-weil-etale-morphism and
-   def-weil-unramified-morphism). Apply lem-weil-pbc-unramified-quasi-finite-at-points
-   to obtain their local quasi-finiteness. It also makes `s` locally of finite type.
-5. Since `j` followed by the first projection is `s`, clause (f) of
-   lem-weil-pbc-proper-fp-permanence makes `j` locally of finite type. Its open
-   diagonal from step 2 makes it unramified. Apply
-   lem-weil-pbc-unramified-quasi-finite-at-points again and combine all six conclusions. -/
+1. Apply `affine_square_monomorphism_absolute_separated` to the relation map,
+   using the canonical affine presentation of `U.left`. This makes `R.left`
+   absolutely separated. Separated cancellation makes `s.left` and `t.left`
+   separated.
+2. The étale projections are locally of finite type with open diagonals.
+   Apply `Scheme.Hom.isLocallyQuasiFinite_of_unramified` to each.
+3. The composite of the relation map with the first projection is `s.left`,
+   hence locally of finite type. Apply
+   `Scheme.Hom.monomorphism_properties_of_locallyOfFiniteType_comp` to obtain
+   separatedness and local quasi-finiteness of the relation map. -/
 theorem affine_etale_relation_separated_locally_quasi_finite
     {S : Scheme.{u}} (R U : Over S) [IsAffine U.left] (s t : R ⟶ U)
     [Mono (pullback.lift s.left t.left (s.w.trans t.w.symm))]
@@ -72,6 +64,19 @@ theorem affine_etale_relation_separated_locally_quasi_finite
     (IsSeparated t.left ∧ Scheme.Hom.IsLocallyQuasiFinite t.left) ∧
     (IsSeparated (pullback.lift s.left t.left (s.w.trans t.w.symm)) ∧
       Scheme.Hom.IsLocallyQuasiFinite (pullback.lift s.left t.left (s.w.trans t.w.symm))) := by
-  sorry
+  let j := pullback.lift s.left t.left (s.w.trans t.w.symm)
+  have hsep := affine_square_monomorphism_absolute_separated S U.left R.left
+    U.hom R.hom Γ(U.left, ⊤) U.left.isoSpec j (by simp [j, s.w])
+  have : R.left.IsSeparated := ⟨hsep.2.2.2.2⟩
+  have hjft : LocallyOfFiniteType (j ≫ pullback.fst U.hom U.hom) := by
+    simpa only [j, pullback.lift_fst] using
+      (inferInstance : LocallyOfFiniteType s.left)
+  have hj := Scheme.Hom.monomorphism_properties_of_locallyOfFiniteType_comp
+    j (pullback.fst U.hom U.hom)
+  exact ⟨⟨inferInstance, Scheme.Hom.isLocallyQuasiFinite_of_unramified s.left
+      ⟨inferInstance, inferInstance⟩⟩,
+    ⟨inferInstance, Scheme.Hom.isLocallyQuasiFinite_of_unramified t.left
+      ⟨inferInstance, inferInstance⟩⟩,
+    hj.2.2.2.2.1, hj.2.2.2.2.2.2.2⟩
 
 end AlgebraicGeometry

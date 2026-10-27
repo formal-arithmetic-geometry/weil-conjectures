@@ -1,0 +1,207 @@
+{
+ "id": "det-thm-picard-semicon",
+ "kind": "statement",
+ "title": "Semicontinuity and base change",
+ "statement": "Let $f:X\\to T$ be a proper morphism of finite presentation and $\\cF$ an\n$\\cO_X$-module of finite presentation, flat over $T$. For every integer\n$q$ the function\n$t\\mapsto\\dim_{\\kappa(t)}H^q(X_t,\\cF_t)$ is upper semicontinuous on\n$T$, and there are canonical base-change maps\n$R^qf_*\\cF\\otimes\\kappa(t)\\to H^q(X_t,\\cF_t)$, defined through the\nČech complexes of a finite affine cover over an affine open\nneighbourhood of $t$. If moreover $T$ is\n*reduced* and this function is locally constant, then $R^qf_*\\cF$ is\nfinite locally free (in particular flat), and if $T$ is moreover locally\nNoetherian, the base-change maps in degree $q$ are isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-semicon.md",
+  "place": "node det-thm-picard-semicon, order 792"
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-direct-image",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-reduced-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-sheaf-cohomology-functor"
+ ],
+ "proof": [
+  {
+   "text": "Fix $q\\in\\mathbf Z$. Apply [thm-pc-semicontinuity-base-change] with the given proper finitely presented $f$ and finitely presented $\\mathcal F=\\cF$ flat over $T$. Its fibres $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$ and $\\mathcal F_t$ are exactly ours. Clauses (1) and (2) give finite-dimensional fibre cohomology, canonical maps $\\varphi^q(t)$ and upper semicontinuity of the displayed dimension function. This reuses the existing finite-free-model/rank-minor theorem rather than introducing a second semicontinuity theorem.",
+   "uses": [
+    "thm-pc-semicontinuity-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-semicon.proof.md",
+    "place": "First paragraph: finite-free model, rank semicontinuity and reduced-base local freeness; second paragraph: canonical Cech map"
+   }
+  },
+  {
+   "text": "To specify these canonical maps by the requested Cech construction, work over an affine open $V=\\operatorname{Spec}A\\subseteq T$. The restricted morphism is separated and quasi-compact (properness includes these properties), and $\\cF$ is quasi-coherent by the flat-over convention. For a finite affine cover of $X_V$, [lem-pc-cech-resolution] identifies its Cech complex $C$ with the derived direct image. Apply [lem-pc-base-change-map-cech] to $\\operatorname{Spec}\\kappa(t)\\to V$: the canonical derived comparison is represented by the cochain map $\\gamma:C\\otimes_A\\kappa(t)\\to C_t$ whose components send $s\\otimes b$ to $b\\,p^*s$. On cohomology the ordinary comparison sends $[z]\\otimes b$ to $[\\gamma(z\\otimes b)]$. This is well-defined: cycles map to cycles, a boundary $dw$ maps to $d\\gamma(w\\otimes b)$, and the formula is balanced and additive. The cited canonical-comparison equality identifies this with $\\varphi^q(t)$, so it is independent of the chosen cover and affine neighbourhood. Thus these are precisely the Cech-defined maps in the item.",
+   "uses": [
+    "def-pc-morphism-conventions",
+    "def-pc-scheme-module-flat-over",
+    "lem-pc-cech-resolution",
+    "lem-pc-base-change-map-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-semicon.proof.md",
+    "place": "Second paragraph, first two sentences: definition through Cech complexes"
+   }
+  },
+  {
+   "text": "If $T$ is reduced and the degree-$q$ dimension function is locally constant, clause (3) of [thm-pc-semicontinuity-base-change] gives $R^qf_*\\cF$ finite locally free, hence flat. For the isomorphism assertion assume also that $T$ is locally Noetherian. The isomorphism of the same canonical $\\varphi^q(t)$ is given by clause (3) of the cited theorem in its present DAG form, and by clause (4) in the form recorded in its blueprint_update (current blueprint): there the hypotheses are $T$ reduced and locally Noetherian and $\\beta^q(s)=\\beta^q(t)$ for every generization $s$ of $t$, which holds because a generization of $t$ lies in every open neighbourhood of $t$, in particular in one on which $\\beta^q$ is constant. Local constancy allows different ranks on different components; no global constant-rank hypothesis is imposed. The cited theorem is stated for every integer $q$ (the updated form for $q\\ge0$; for $q<0$ both sides of every assertion are zero), so negative degrees as well as $q=0$ are included.",
+   "uses": [
+    "thm-pc-semicontinuity-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-semicon.proof.md",
+    "place": "First paragraph, final sentence; second paragraph, Grauert isomorphism claim"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-pc-semicontinuity-base-change",
+  "def-pc-morphism-conventions",
+  "def-pc-scheme-module-flat-over",
+  "lem-pc-cech-resolution",
+  "lem-pc-base-change-map-cech"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-semicon.proof.md",
+  "place": "First paragraph: finite-free model, rank semicontinuity and reduced-base local freeness; second paragraph: canonical Cech map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "upperSemicontinuous_hFiber|cechBaseChangeMap|Grauert|semicontinuity.*cohomology",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match for the full cohomological semicontinuity and canonical base-change theorem",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant fibre cohomology dimensions on a reduced base give finite locally free higher direct images and cohomology base change isomorphisms",
+   "results": "CondensedSet.LocallyConstant.functorFullyFaithful; IsLocallyConstant.iff_isOpen_fiber; IsLocallyConstant.iff_isOpen_fiber_apply; LocallyConstant.coeFnₗ; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; CompHausLike.LocallyConstantModule.functor_obj_val; LightCondSet.LocallyConstant.functorFullyFaithful; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-24",
+   "verdict": "no match for the full cohomological semicontinuity and canonical base-change theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "UpperSemicontinuous, AlgebraicGeometry.Scheme",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match for the full cohomological semicontinuity and canonical base-change theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upper semicontinuity of fibre cohomology and Grauert base change for a finitely presented flat sheaf under a proper finitely presented morphism",
+   "results": "AlgebraicGeometry.UniversallyOpen.of_flat; SheafOfModules.isFinitePresentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.IsFinitePresentation; AlgebraicGeometry.Flat; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-24",
+   "verdict": "no match for the full cohomological semicontinuity and canonical base-change theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Grauert|[Ss]emicontinu|higherDirectImage|homologyBaseChange",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match for the full cohomological semicontinuity and canonical base-change theorem",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grauert theorem proper morphism cohomology and base change upper semicontinuous Betti numbers reduced scheme",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget; AlgebraicGeometry.IsProper; AlgebraicGeometry.IsProper.instIsMultiplicativeScheme; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.IsProper.instSndScheme; AlgebraicGeometry.IsProper.instFstScheme; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match for the full cohomological semicontinuity and canonical base-change theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 792,
+ "blueprint_uses": [
+  "det-thm-picard-coherence"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber",
+  "AlgebraicGeometry.Scheme.Modules.cechBaseChangeMap",
+  "AlgebraicGeometry.Scheme.Modules.exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant",
+  "AlgebraicGeometry.Scheme.Modules.bijective_cechBaseChangeMap_of_forall_specializes"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber",
+  "AlgebraicGeometry.Scheme.Modules.cechBaseChangeMap",
+  "AlgebraicGeometry.Scheme.Modules.exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant",
+  "AlgebraicGeometry.Scheme.Modules.bijective_cechBaseChangeMap_of_forall_specializes"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-thm-picard-semicon",
+  "from": null,
+  "same_as": [
+   "sk-thm-picard-semicon",
+   "thm-pc-semicontinuity-base-change"
+  ]
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "det-thm-picard-semicon",
+  "worker": "stage1",
+  "summary": "Reused the existing semicontinuity/base-change theorem and the explicit Cech comparison and resolution statements. Filled the definition dependencies, verified all cited statements and integer degrees, and retained the current blueprint statement including its locally Noetherian qualification. No new nodes.",
+  "blueprint": "Step 1 uses the existing theorem realizing the first paragraph rank-minor argument; step 2 realizes the second paragraph Cech construction and its canonicity using the existing comparison; step 3 specializes the reduced-base local-freeness and Grauert conclusions. The nonreduced counterexample is explanatory, not an extra conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-base-change-map-cech",
+    "why": "Generic canonical derived comparison computed by Cech complexes; needed for the second paragraph map identification, not supplied by the perfect-locus unit."
+   },
+   {
+    "node": "lem-pc-cech-resolution",
+    "why": "Generic separated quasi-compact affine-cover computation of the derived image, required by the blueprint Cech-map construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-base-change-map-cech",
+  "lem-pc-cech-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-7cc842ebe",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-7cc842ebe (reviewer sub-agent of L); spot-checked: Read the item (blueprint main-20261023-1620 det-thm-picard-semicon order 792; the statement is verbatim) and all 8 stmt_deps. Read the cited thm-pc-semicontinuity-base-change (live statement, proof and blueprint_update), lem-pc-cech-resolution and lem-pc-base-change-map-cech. No new nodes and no re-split note. Step 1: the hypotheses match exactly; clauses (1) and (2) give finite dimensionality, the canonical φ^q(t) and semicontinuity (finite-free model, minors). Step 2: separatedness and quasi-compactness come from properness, and F is quasi-coherent because it is finitely presented. Base change along Spec κ(t)→Spec A is arbitrary, not flat. θ = γ̃∘(Lg^*→g^*) gives [z]⊗b↦[γ(z⊗b)], which is the blueprint's 1⊗[z]↦[z⊗1] and agrees with φ^q(t). Step 3: local freeness is correct by the reduced normal-form argument. FIX: step 3 attributed the isomorphism to 'clause (3)', but the cited node's blueprint_update moves the isomorphism into a new clause (4) (reduced, locally Noetherian, β constant on generizations, q≥0). Step 3 now cites (3)/(4), checks the generization hypothesis and covers q<0; uses are unchanged. Edge cases checked: empty base, q<0, field base, disconnected base, dual numbers. No cycle. Both tool_uses are generic Čech tools and are accepted. Batch-5: the closure of thm-pc-semicontinuity-base-change reaches def-trf-schematically-dense-open, lem-trf-affine-open-limit-descent and lem-pod-separated-finite-type-base-change, which are general scheme definitions and leaves, not trace-formula or Poincaré-duality steps; accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardSemicontinuity",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picard_semicontinuity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picard_semicontinuity",
+   "AlgebraicGeometry.Scheme.Modules.cechBaseChangeMap",
+   "AlgebraicGeometry.Scheme.Modules.picard_cechBaseChange_bijective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardSemicontinuity.lean",
+  "statement": "theorem picard_semicontinuity {X T : Scheme.{u}} (f : X ⟶ T) [IsProper f] [LocallyOfFinitePresentation f] (F : X.Modules) [F.IsFinitePresentation] (hF : F.IsFlatOver f) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wT} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] (q : ℤ) : UpperSemicontinuous (fun t : T ↦ if 0 ≤ q then F.hFiber f q.toNat t else 0) ∧ (IsReduced T → IsLocallyConstant (fun t : T ↦ if 0 ≤ q then F.hFiber f q.toNat t else 0) → SheafOfModules.IsFiniteLocallyFree.{u, u, u} ((schemeModuleHigherDirectImage f q).obj F) ∧ IsFlatOver (X := T) ((schemeModuleHigherDirectImage f q).obj F) (𝟙 T))",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two new statements retain integer degrees, using zero fibre dimension in negative degrees, and the recorded integer-degree schemeModuleHigherDirectImage. The map clause reuses the public upstream cechBaseChangeMap from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChangeMap, included in declarations rather than defined a second time. It is homology base change followed by the canonical Cech tensor comparison, over every affine neighbourhood and finite affine cover. The final theorem gives bijectivity of this same map under the reduced, locally constant and locally Noetherian hypotheses. Finite locally free has variable local rank; flatness is IsFlatOver of the identity. Reviewer fix: the two derived-category universes of X and T are bound separately (wX, wT), as in schemeModuleHigherDirectImage, instead of being tied to one w.",
+  "fixed_by": "NT-stage2-cc-8f38c6228"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f38c6228",
+  "group": "N0",
+  "result": "fix",
+  "note": "Read the item, all 8 stmt_deps, thm-pc-semicontinuity-base-change (statement, blueprint_update clause 4, lean record) and the upstream cechBaseChangeMap/hFiber/Semicontinuity/SchemeDerivedDirectImage/IsFiniteLocallyFree sources. Every clause matches. Integer degrees are kept, with dimension 0 for q<0. UpperSemicontinuous needs no extra hypothesis. Reduced + locally constant gives IsFiniteLocallyFree (variable rank) and IsFlatOver 𝟙 T. The map is the upstream cechBaseChangeMap (homologyBaseChange followed by the Čech base-change iso), which no node owns and the tool accepts in declarations. Bijectivity is stated for every affine V, t, finite affine cover and every q under reduced + locally Noetherian + locally constant. Statement verbatim, docstrings and sorry-only proofs checked. Edge cases: q<0, q=0, empty base, empty cover, disconnected base. FIX: the two HasDerivedCategory universes were tied to one w although the dependency binds wX/wS separately; they are now separate wX/wT (fixes/PicardSemicontinuity.lean, plus a lean-record.json that keeps the upstream cechBaseChangeMap in declarations). nt_compile --json rc=0, 11.6 s. Advisory: hFiber uses Scheme.Modules.H, not moduleCohomology; accepted as the blueprint's own upstream function and the proof dependency's, a stage-3 bridge. The RingedSpaceModuleCohomology import is unused."
+ }
+}

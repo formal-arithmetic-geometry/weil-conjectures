@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-completed-unit-strict-comparison",
+ "kind": "statement",
+ "title": "Strict regular-system comparison for the completed unit",
+ "statement": "For a prime l, a finite extension E of Q_l, a finite-field datum D of characteristic different from l, a scheme W, and a supplied coefficient-derived-system calculus S as in [lem-coef-derived-system-evaluation-calculus], choose finite identifications b_n between evaluation of the regular sequence-site module and the actual finite regular module which are identities on all sections, as in [def-pur-completed-unit-pullback-data]. There exists an isomorphism c from S.reduction of the completed regular degree-zero object to the regular sequence-site degree-zero object such that evaluation of c, the exact evaluation/single comparison, and single(b_n) compose to S.reductionEvaluation followed by the actual constantCoefficientReductionMap at every level. This asserts an isomorphism of whole systems before evaluation, not a lifting from arbitrary finite derived maps.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 3.5 and 6.5, Lemmas 6.5.9 and 6.8.2; regular-module calculation in lem-pur-completed-unit-pullback-tower"
+ },
+ "stmt_deps": [
+  "def-pur-completed-unit-pullback-data",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Apply the simultaneous reductionModel to the flat-term K-flat regular single complex. At each level ordinary tensor multiplication is an isomorphism to the finite regular single complex, with inverse z to 1 tensor z. These maps commute with the actual quotient transitions and assemble to mutually inverse chain maps on the ringed sequence site. Localize the chain isomorphism and compose with the supplied simultaneous representative comparison. The actual finite reduction map is the transpose of the completed coefficient projection, hence the reductionModel evaluation equation gives precisely the asserted equation. The section condition on b removes arbitrary scalar automorphisms. This works also on the empty site and at exponent one.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-constant-scalar-strict-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-constant-scalar-strict-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit normalized regular-module argument, refined from the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient system of scalar extension of a regular ring module is isomorphic to the regular quotient ring system",
+   "results": "8 hits concerning ordinary quotient modules and regular sequences",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unit",
+   "results": "12 hits including unit, unitHomEquiv, unit_val and freeCofan; useful ordinary interface only",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*unit|unit.*reduction|system.*regular",
+   "results": "6 unrelated hits; direct project search finds the supplied calculus and strict regular tensor calculations",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The regular module sheaf has canonical finite quotient reductions and its derived inverse limit is the completed coefficient sheaf",
+   "results": "8 hits: AdicCompletion, AdicCompletion.of_apply, AdicCompletion.of, ModuleCat.tildeInModuleCat, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafCompHaus, SheafOfModules.hasLimit, SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-25",
+   "verdict": "no exact match: ordinary units and limits do not supply normalized derived whole-system comparison or completed scalar compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "unitToPushforwardObjUnit|pullbackObjUnitToUnit in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "results": "Read lines 60-111: explicit ring-section map, its adjoint, and invertibility under finality. Used for the ordinary multiplication; no completed quotient-system or scalar-natural comparison.",
+   "date": "2026-10-25",
+   "verdict": "useful ordinary ingredient only; no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedUnitPullbackTower",
+  "date": "2026-10-24",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-unit-pullback-tower",
+   "place": "Regular coefficient calculation and coefficient transport in proof steps 1–6"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedUnitStrictComparison",
+  "file": "lean/Sheaf/Paper/CompletedUnitStrictComparison.lean",
+  "declaration": "WeilConjectures.CompletedUnitPullback.completedUnitStrictComparison",
+  "statement": "theorem completedUnitStrictComparison (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (W : Scheme.{u})\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (b : ∀ n : ℕ, (coefficientSequenceEvaluation l E W n).obj (systemUnit l E W) ≅\n      SheafOfModules.unit (integralCoefficientSheaf l E W n))\n    (hb : ∀ (n : ℕ) (V : W.ProEtᵒᵖ)\n      (x : ((coefficientSequenceEvaluation l E W n).obj (systemUnit l E W)).val.obj V),\n      HEq ((b n).hom.val.app V x) x) :\n    ∃ c : S.reduction.obj (integralConstantCoefficientObject l E W) ≅ systemObject l E W,\n      ∀ n : ℕ,\n        (coefficientSequenceDerivedEvaluation l E W n).map c.hom ≫\n          (evaluationSingle l E W n).hom ≫\n          (@DerivedCategory.singleFunctor _ _ _ (HasDerivedCategory.standard _) 0).map\n            (b n).hom =\n        (S.reductionEvaluation n).hom.app (integralConstantCoefficientObject l E W) ≫\n          constantCoefficientReductionMap l E W n",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1bb3",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T043201-L-1689002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1bb3",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T043201-L-1689002",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item modules vs clone item (moved block identical, target signature identical); 5 new nodes' lean.statement vs files; sorry lemmas vs CoefficientReductionModels/PullModel pinning; importer AdicUnitTraceReductionData compiled against delivered set"
+ }
+}

@@ -1,0 +1,115 @@
+{
+ "id": "def-trf-diagonal-jets",
+ "kind": "definition",
+ "title": "Diagonal principal parts and fibre dimensions",
+ "status": "split",
+ "statement": "For commutative rings $k,A$ and a $k$-algebra structure on $A$, let $J=\\ker(A\\otimes_k A\\to A)$, where the map is multiplication [def-weil-pbc-module-tensor-product] [def-weil-pbc-kahler-differentials]. Define $P^n_{A/k}=(A\\otimes_k A)/J^{n+1}$, with its $A$-algebra and module structure through the first tensor factor. For a homomorphism $e:A\\to L$ into a field, its fibre dimension is $\\dim_L(L\\otimes_A P^n_{A/k})$. At a point $x\\in\\operatorname{Spec}A$ [def-weil-affine-spectrum], evaluation $A\\to\\kappa(x)$ [def-weil-residue-field] is the canonical map through global sections and the stalk residue map. These definitions assert no finiteness.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.11--2.3.13; BM 1997, Remarks 9.1; BMT arXiv:0905.3580, sections 6.1 and 6.5; diagonal construction in the owning jet-diagram node."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "principal parts jet modules Taylor ideals formal power series initial exponents Hilbert Samuel dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.HasSubst.ideal\", \"module\": \"Mathlib/RingTheory/PowerSeries/Substitution\", \"type\": \"{τ : Type u_3} → {S : Type u_4} → [inst : CommRing S] → Ideal (MvPowerSeries τ S)\", \"doc\": \"The ideal in the ring of multivariate power series consisting of all power series whose constant term (coefficient of the zero monomial) is a nilpotent element in the coefficient ring $ S $. This set \"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} → [inst : CommRing A] → PowerSeries A → Ideal A → Prop\", \"doc\": \"A power series $ g $ satisfies the Weierstrass divisor condition at an ideal $ I $ if the coefficient of $ X^{\\text{ord}(g)} $ in the image of $ g $ under the quotient map $ R \\to R/I $ is a unit in the\"}\n  {\"name\": \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_X_mem\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal (PowerSeries R)},\\n  PowerSeries.X ∈ I → Submodule.spanFinrank I ≤ Submodule.spanFinrank (Ideal.map PowerSeries.constantCoeff I) + 1\", \"doc\": \"If the formal variable $ X $ is contained in an ideal $ I $ of univariate power series over a ring $ R $, then the finite rank of $ I $ is at most the finite rank of the image of $ I $ under the const\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  (f : PowerSeries A) (k : ℕ) {i : ℕ},\\n  i ≥ ((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat → (PowerSeries.coeff i) (f - g * H.seq f k) ∈ I ^ k\", \"doc\": \"For a power series $ g $ satisfying the Weierstrass divisor condition at an ideal $ I $, and for any natural number $ k $ and index $ i \\\\ge \\\\text{ord}(g) $, the coefficient of $ X^i $ in the differenc\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} → {I : Ideal A} → g.IsWeierstrassDivisorAt I → PowerSeries A → ℕ → PowerSeries A\", \"doc\": \"A recursively defined sequence of power series used in the Weierstrass preparation theorem. For a power series $ g $ satisfying the Weierstrass divisor condition at an ideal $ I $, and given another p\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  (f : PowerSeries A) (k i : ℕ), (PowerSeries.coeff i) (H.seq f (k + 1) - H.seq f k) ∈ I ^ k\", \"doc\": \"For any natural numbers $k$ and $i$, the coefficient of $X^i$ in the difference $H_{k+1} - H_k$ of the Weierstrass divisor sequence lies in the $k$-th power of the ideal $I$, i.e., $\\\\text{coeff}_i(H_{\"}\n  {\"name\": \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : Ideal (PowerSeries R)} [P.IsPrime],\\n  Submodule.spanFinrank P ≤ Submodule.spanFinrank (Ideal.map PowerSeries.constantCoeff P) + 1\", \"doc\": \"For a prime ideal $ P $ in the univariate power series ring over a commutative ring, the finite rank of $ P $ is at most the finite rank of the image of $ P $ under the constant coefficient homomorphi\"}\n  {\"name\": \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal (PowerSeries R)} [I.IsPrime],\\n  PowerSeries.X ∉ I →\\n    ∀ {S : Set R},\\n      Ideal.span S = Ideal.map PowerSeries.constantCoeff I →\\n        S.Finite → ∃ T, I = Ideal.span T ∧ T.Finite ∧ T.ncard = S.ncard\", \"doc\": \"If the formal variable $ X $ is not in the ideal $ I $ of univariate power series over a ring $ R $, and the image of $ I $ under the constant coefficient homomorphism is finitely generated by a set $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonal principal parts quotient and formal initial exponent diagrams with cumulative Hilbert functions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.hilbertPoly\", \"module\": \"Mathlib.RingTheory.Polynomial.HilbertPoly\", \"type\": \"(p : F[X]) : (d : ℕ) → F[X]\", \"doc\": \"For a polynomial $ p $ and natural number $ d $, the Hilbert polynomial is defined recursively as the sum over the support of $ p $ of $ (\\\\text{coefficient of } p \\\\text{ at } i) \\\\cdot \\\\text{preHilbert\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"[hR : IsNoetherian R R] : Functor.Initial (idealPowersToSelfLERadical J)\", \"doc\": \"Given a Noetherian commutative ring $ R $ and an ideal $ J $, the functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subs\"}\n  {\"name\": \"Polynomial.hilbertPoly_succ\", \"module\": \"Mathlib.RingTheory.Polynomial.HilbertPoly\", \"type\": \"(p : F[X]) (d : ℕ) : hilbertPoly p (d + 1) = ∑ i ∈ p.support, (p.coeff i) • preHilbertPoly F d i\", \"doc\": \"For any polynomial $ p $ over a field $ F $ and natural number $ d $, the Hilbert polynomial of $ p $ at $ d + 1 $ is equal to the sum over the support of $ p $ of the product of the coefficient of $ \"}\n  {\"name\": \"Polynomial.hilbertPoly_X_pow_succ\", \"module\": \"Mathlib.RingTheory.Polynomial.HilbertPoly\", \"type\": \"(d k : ℕ) : hilbertPoly ((X : F[X]) ^ k) (d + 1) = preHilbertPoly F d k\", \"doc\": \"For natural numbers $d$ and $k$, the Hilbert polynomial of the monomial $X^k$ (where $X$ is the indeterminate in the polynomial ring $F[X]$) evaluated at $d + 1$ is equal to the pre-Hilbert polynomial\"}\n  {\"name\": \"Ideal.quotEquivPowQuotPowSuccEquiv\", \"module\": \"Mathlib.RingTheory.Ideal.IsPrincipalPowQuotient\", \"type\": \"(h : I.IsPrincipal) (h' : I ≠ ⊥) (n : ℕ) : (R ⧸ I) ≃ (I ^ n : Ideal R) ⧸ (I • ⊤ : Submodule R (I ^ n : Ideal R))\", \"doc\": \"For a principal non-zero ideal $ I $ in a commutative ring $ R $ and a natural number $ n $, there exists an $ R $-linear equivalence between the quotient ring $ R/I $ and the quotient of the $ n $-th\"}\n  {\"name\": \"Polynomial.existsUnique_hilbertPoly\", \"module\": \"Mathlib.RingTheory.Polynomial.HilbertPoly\", \"type\": \"(p : F[X]) (d : ℕ) : ∃! h : F[X], ∃ N : ℕ, ∀ n > N, (p * invOneSubPow F d : F⟦X⟧).coeff n = h.eval (n : F)\", \"doc\": \"For any polynomial $ p $ over a field $ F $ and natural number $ d $, there exists a unique polynomial $ h $ such that for sufficiently large $ n $, the coefficient of $ X^n $ in the product of $ p $ \"}\n  {\"name\": \"Ideal.quotientToQuotientRangePowQuotSucc\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"{i : ℕ} {a : S} (a_mem : a ∈ P ^ i) :\\n  S ⧸ P →ₗ[R ⧸ p] (P ^ i).map (Ideal.Quotient.mk (P ^ e)) ⧸ LinearMap.range (powQuotSuccInclusion p P i)\", \"doc\": \"A linear map from the quotient ring $ S/\\\\mathfrak{P} $ to the quotient module $ (\\\\mathfrak{P}^i/\\\\mathfrak{P}^e)/\\\\text{range}(\\\\mathfrak{P}^{i+1} \\\\to \\\\mathfrak{P}^i) $, induced by the inclusion $ \\\\mathf\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.div\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsPrecomplete I A] : A⟦X⟧\", \"doc\": \"The power series obtained by taking the stabilized coefficients from the Weierstrass division sequence, constructed as the formal power series whose $i$-th coefficient is the stabilized value modulo $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "principalParts|initialDiagram|initialExponent|TaylorMap|taylorIdeal",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "partial: reuse existing ingredients; missing quotient and initial diagram"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-jet-diagram-hilbert-control",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Taylor modules, initial diagrams and finite local variation; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, Theorem 3.17, Corollaries 3.19--3.20, Remarks 9.1, Lemma 9.3; Bierstone--Milman--Temkin, arXiv:0905.3580, sections 6.1 and 6.5. No Stacks tag states this package. Definition of the diagonal jets and formal exponent diagrams needed to state the jet-diagram control package.",
+   "via": [
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.DiagonalJets",
+  "declaration": "DiagonalJets.principalParts",
+  "declarations": [
+   "DiagonalJets.principalParts",
+   "DiagonalJets.fibreDimension",
+   "DiagonalJets.affineEvaluation"
+  ],
+  "file": "lean/Sheaf/RingTheory/DiagonalJets.lean",
+  "statement": "abbrev principalParts (k : Type u) (A : Type v) [CommRing k] [CommRing A] [Algebra k A] (n : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb1a068f2",
+  "group": "O1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb1a068f2",
+  "group": "O1",
+  "result": "fix",
+  "note": "Item node unchanged except lean and 6 used stmt_deps; the 4 landed def-trf dep records differ from live only in lean_audit formatting. All 11 statements match the node clause by clause (P^n via first factor, fibre = summation^[trdeg] of local length at every point, unique isTaylorMap stalk map by formal etaleness, taylorIdeal truncation = intrinsic HS function, DegLex first exponents/initialDiagram, IsOrderedVertexFamily vertices, quotientSupport = Delta_i with exists-unique division, hilbertCount dimension, local finiteness, lex DCC with upward-closed D, canonical etale P^n iso pinned on generators, etale Taylor/diagram/dimension compatibility, castAdd rename free variables = summation^[r]); edge cases A=0, n=0, d=0, K=0/(1), s=0, r=0 covered; no duplicates (rg Sheaf/WeilConjectures; InitialDiagramStabilization is a division test); new def nodes real and docstringed. FIX: etale_principal_parts forced {k A B : Type u} with nothing requiring it; generalized to {k : Type u} {A : Type v} {B : Type w} (universe u v w). Complete module in fixes/JetDiagramHilbertControl.lean plus lean-record.json keeping the statement verbatim. nt_compile --json clean (item 6.4 s)."
+ }
+}

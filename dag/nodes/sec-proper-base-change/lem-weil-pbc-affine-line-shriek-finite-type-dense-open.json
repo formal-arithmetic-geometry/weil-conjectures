@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-affine-line-shriek-finite-type-dense-open",
  "kind": "statement",
  "title": "Dense-open constructibility of affine-line compact support over a finite-type integer base",
- "statement": "Let Λ be a finite commutative ring, Y an affine scheme with coordinate ring finite type over the integers, F a constructible étale Λ-module sheaf on A¹_Y, c any compactification of its projection [def-weil-pbc-projection-compactification], and q an integer. There exists a dense open V of Y such that the restriction to V of H^q(Ra_!^c(F[0])) is constructible [def-weil-pbc-etale-constructible-sheaf].",
+ "statement": "Let Λ be a finite commutative ring, Y an affine scheme with coordinate ring finite type over the integers on which the additive order of every element of Λ is invertible, F a constructible étale Λ-module sheaf on A¹_Y, c any compactification of its projection [def-weil-pbc-projection-compactification], and q an integer. There exists a dense open V of Y such that the restriction to V of H^q(Ra_!^c(F[0])) is constructible [def-weil-pbc-etale-constructible-sheaf].",
  "source": {
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tag 0GKZ, dense-open step; Tags 0GKY, 0GK3, 0GKP"
@@ -94,7 +94,7 @@
   "module": "Sheaf.AlgebraicGeometry.EtaleAffineLineShriekFiniteTypeDenseOpen",
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineLineShriekFiniteTypeDenseOpen.lean",
   "declaration": "AlgebraicGeometry.exists_dense_open_affineLine_shriek_constructible",
-  "statement": "theorem exists_dense_open_affineLine_shriek_constructible\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) [IsAffine Y]\n    [Algebra.FiniteType ℤ Γ(Y, ⊤)]\n    (F : Sheaf (AffineSpace (ULift.{u} (Fin 1)) Y).smallEtaleTopology\n      (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F)\n    (c : Compactification (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)) (q : ℤ) :\n    ∃ U : Y.Opens, Dense (U : Set Y) ∧\n      Scheme.IsConstructibleEtaleModuleSheaf\n        ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj\n          ((_root_.DerivedCategory.Plus.homologyFunctor\n        (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj\n        ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj\n          ((_root_.DerivedCategory.Plus.singleFunctor\n            (Sheaf (AffineSpace (ULift.{u} (Fin 1)) Y).smallEtaleTopology\n              (ModuleCat.{u + 1} Λ)) 0).obj F))))",
+  "statement": "theorem exists_dense_open_affineLine_shriek_constructible (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) [IsAffine Y] [Algebra.FiniteType ℤ Γ(Y, ⊤)] (hΛ : ∀ (a : Λ) (y : Y), IsUnit (addOrderOf a : Y.presheaf.stalk y)) (F : Sheaf (AffineSpace (ULift.{u} (Fin 1)) Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) (c : Compactification (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)) (q : ℤ) : ∃ U : Y.Opens, Dense (U : Set Y) ∧ Scheme.IsConstructibleEtaleModuleSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj ((_root_.DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj ((_root_.DerivedCategory.Plus.singleFunctor (Sheaf (AffineSpace (ULift.{u} (Fin 1)) Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F))))",
   "branch": "sheaf-dag",
   "by": "U2",
   "date": "2026-10-18"
@@ -140,14 +140,40 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261018T091413-L-3259206",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261022T113843-L-314135",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "M stage 2",
+  "old_statement": "Let Λ be a finite commutative ring, Y an affine scheme with coordinate ring finite type over the integers, F a constructible étale Λ-module sheaf on A¹_Y, c any compactification of its projection [def-weil-pbc-projection-compactification], and q an integer. There exists a dense open V of Y such that the restriction to V of H^q(Ra_!^c(F[0])) is constructible [def-weil-pbc-etale-constructible-sheaf].",
+  "what": "Route audit 2026-10-25 (the human approved 2026-10-26): the statement assumed no invertibility and so also proved the characteristic-p case (Artin-Schreier, Frobenius vector bundles), which the blueprint does not use: its only user, compact-support constructibility for the l-adic theorems, has l different from the characteristic. The hypothesis that the coefficient torsion is invertible on the base is added and the characteristic-p branch dropped; every caller supplies it.",
+  "source": {
+   "document": "literature/stacks-project/more-etale.tex",
+   "place": "Tag 0GL0 (theorem-constructible-shriek) for torsion prime to the residue characteristics; Tag 0GKV for a prime invertible on the base"
+  },
+  "citers": [
+   "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible"
+  ]
+ }
 }

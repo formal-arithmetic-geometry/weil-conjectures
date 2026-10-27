@@ -1,0 +1,405 @@
+{
+ "id": "lem-sfb-banach-translation-difference-split",
+ "kind": "statement",
+ "title": "Continuously split translation-difference sequence for nonarchimedean Banach coefficients",
+ "statement": "Fix a prime $\\ell$ and let $V$ be a complete normed $\\mathbf Q_\\ell$-vector space [def-weil-l-adic-numbers], with $\\|v+w\\|\\leq\\max(\\|v\\|,\\|w\\|)$ and $\\|a v\\|=|a|_\\ell\\|v\\|$ for $a\\in\\mathbf Q_\\ell$. Put $H=\\mathbf Z_\\ell$ with its inverse-limit topology and $R=C(H,V)$ with the supremum norm. Give $V$ the trivial $H$-action and give $R$ the jointly continuous translation action $(t\\cdot f)(x)=f(x+t)$. Define $\\Delta:R\\to R$ by $\\Delta f(x)=f(x+1)-f(x)$. Then\n$$0\\longrightarrow V\\xrightarrow{\\mathrm{const}}R\\xrightarrow{\\Delta}R\\longrightarrow0$$\nis an exact sequence of abstract $\\mathbf Q_\\ell$-vector spaces with continuous $H$-equivariant linear arrows. Its kernel is exactly the constant functions, whose inverse identification with $V$ is continuous evaluation at $0$. There is a continuous $\\mathbf Q_\\ell$-linear map $T:R\\to R$ with $\\Delta T=1$ and $\\|Tf\\|\\leq\\|f\\|$. More precisely, for the Mahler isometry $\\mathcal M:R\\simeq c_0(\\mathbf N,V)$ [lem-sfb-banach-mahler-coordinates], where $c_0$ is the space of sequences tending to zero with supremum norm,\n$$\\mathcal M(\\Delta f)_n=(\\mathcal Mf)_{n+1},\\qquad\nT=\\mathcal M^{-1}P\\mathcal M,\\qquad P(a_0,a_1,\\ldots)=(0,a_0,a_1,\\ldots).$$\nThe section $T$ is not required to be $H$-equivariant. The zero space $V=0$ is allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated scalar analytic input, extracted from Returned scalar-cochain proof step 5, with the Banach hypotheses prepared in step 4: translation, Mahler shift, kernel and continuous splitting. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) supplies only the cochain differential, not this theorem."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "lem-sfb-banach-mahler-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-integers-profinite-tower] with the degree-one extension $E=\\mathbf Q_\\ell$ and uniformizer $\\ell$. Its ring of integers is $H=\\mathbf Z_\\ell$ by [def-weil-l-adic-numbers]; it identifies the norm topology with the stated inverse-limit topology and makes $H$ compact Hausdorff. The addition map is continuous: $|(x+t)-(x'+t')|_\\ell\\leq\\max(|x-x'|_\\ell,|t-t'|_\\ell)$. Apply [lem-sfb-compact-function-space-complete] to $S=H$ and the complete normed space $V$. Thus $R$ is a normed $\\mathbf Q_\\ell$-vector space and its norm topology equals its compact-open topology.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "def-weil-l-adic-numbers",
+    "lem-sfb-compact-function-space-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent analytic expansion of the inherited scalar-cochain route, using the Mathlib Mahler-coordinate theorem."
+   }
+  },
+  {
+   "text": "For fixed $t$, write $\\tau_t f(x)=f(x+t)$. This is continuous in $x$, linear in $f$, and an isometry since $x\\mapsto x+t$ is bijective. To check joint continuity without assuming uniform continuity, use [lem-coef-compact-open-currying] with $K=H$: $H$ is locally compact: inside any metric neighborhood of a point choose a closed ball of sufficiently small positive radius; it is a neighborhood and, being closed in compact $H$, is compact. Its evaluation clause with $A=R$ and $g=\\mathrm{id}_R$ gives continuous $(f,y)\\mapsto f(y)$. Compose with $((t,f),x)\\mapsto(f,x+t)$ and apply its transpose clause with $A=H\\times R$ to obtain continuous $(t,f)\\mapsto\\tau_t f$. Step 1 identifies the function-space topology here with the norm topology. Pointwise $\\tau_0=1$ and $\\tau_s\\tau_t=\\tau_{s+t}$, so this is the stated action.",
+   "uses": [
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent analytic expansion of the inherited scalar-cochain route, using the Mathlib Mahler-coordinate theorem."
+   }
+  },
+  {
+   "text": "The map $\\Delta=\\tau_1-1$ is linear and continuous, with $\\|\\Delta f\\|\\leq\\|f\\|$ by the ultrametric inequality pointwise and the supremum. Constants give a linear isometry $\\mathrm{const}:V\\to R$ (evaluate at $0$ for the lower bound), hence an injection. The map $e_0(f)=f(0)$ is linear and satisfies $\\|e_0(f)\\|\\leq\\|f\\|$, so it is continuous. Constants are fixed by every $\\tau_t$, and $\\Delta\\tau_t f(x)=f(x+t+1)-f(x+t)=\\tau_t\\Delta f(x)$ because $H$ is abelian. These are the required equivariance identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent analytic expansion of the inherited scalar-cochain route, using the Mathlib Mahler-coordinate theorem."
+   }
+  },
+  {
+   "text": "Restrict the scalars of $V$ to $\\mathbf Z_\\ell$. Completeness and the ultrametric hypothesis are given, and $\\|av\\|=|a|_\\ell\\|v\\|$ implies the bounded scalar hypothesis of [lem-sfb-banach-mahler-coordinates]. Obtain its linear isometry $\\mathcal M$ with $(\\mathcal Mf)_n=(\\Delta^nf)(0)$. This formula also shows $\\mathbf Q_\\ell$-linearity: for any $a\\in\\mathbf Q_\\ell$, induction on $n$ in the difference formula gives $\\Delta^n(af)=a\\Delta^nf$; evaluation gives $\\mathcal M(af)=a\\mathcal Mf$. Its inverse is then $\\mathbf Q_\\ell$-linear by bijectivity. The same coefficient formula and $\\Delta^n(\\Delta f)=\\Delta^{n+1}f$ give $\\mathcal M(\\Delta f)_n=(\\mathcal Mf)_{n+1}$, including $n=0$.",
+   "uses": [
+    "lem-sfb-banach-mahler-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent analytic expansion of the inherited scalar-cochain route, using the Mathlib Mahler-coordinate theorem."
+   }
+  },
+  {
+   "text": "On $c_0(\\mathbf N,V)$ define $S(a)_n=a_{n+1}$ and $P(a)_0=0$, $P(a)_{n+1}=a_n$. Both sequences still tend to zero (discarding or adding a single term does not change a tail). Their formulas make them $\\mathbf Q_\\ell$-linear; $\\|Sa\\|\\leq\\|a\\|$, $\\|Pa\\|=\\|a\\|$ and $SPa=a$ hold by taking suprema. Thus $P$ is continuous. Set $T=\\mathcal M^{-1}P\\mathcal M$. Step 4 and the isometry in [lem-sfb-banach-mahler-coordinates] give continuous $\\mathbf Q_\\ell$-linearity and $\\|Tf\\|=\\|f\\|$. Moreover $\\mathcal M\\Delta Tf=SP\\mathcal Mf=\\mathcal Mf$; injectivity of $\\mathcal M$ yields $\\Delta T=1$. This proves surjectivity and the stated bound without requiring equivariance of $T$.",
+   "uses": [
+    "lem-sfb-banach-mahler-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent analytic expansion of the inherited scalar-cochain route, using the Mathlib Mahler-coordinate theorem."
+   }
+  },
+  {
+   "text": "If $\\Delta f=0$, step 4 implies $(\\mathcal Mf)_{n+1}=0$ for every $n$, while $(\\mathcal Mf)_0=f(0)$. The constant function $c=\\mathrm{const}(f(0))$ has zeroth coefficient $f(0)$ and all higher coefficients zero: $\\Delta c=0$, and iteration keeps the zero function zero. The coefficient formula and injectivity in [lem-sfb-banach-mahler-coordinates] therefore give $f=c$. Conversely every constant is killed by $\\Delta$. Consequently $\\ker\\Delta=\\mathrm{im}(\\mathrm{const})$, and $e_0$ from step 3 is the continuous inverse of the identification $V\\simeq\\ker\\Delta$. Together with injectivity in step 3 and surjectivity in step 5 this proves the displayed exact sequence and all its claims. Every formula also holds when $V=0$.",
+   "uses": [
+    "lem-sfb-banach-mahler-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent analytic expansion of the inherited scalar-cochain route, using the Mathlib Mahler-coordinate theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integers-profinite-tower",
+  "def-weil-l-adic-numbers",
+  "lem-sfb-compact-function-space-complete",
+  "lem-coef-compact-open-currying",
+  "lem-sfb-banach-mahler-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent analytic expansion of the inherited scalar-cochain route, using the Mathlib Mahler-coordinate theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a nonarchimedean Banach Qp space V the operator f(x+1)-f(x) on continuous maps Zp to V is surjective with continuous linear right inverse and constant kernel",
+   "results": "{\"t\": \"2026-10-22T06:04:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a nonarchimedean Banach Qp space V the operator f(x+1)-f(x) on continuous maps Zp to V is surjective with continuous linear right inverse and constant kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.mahlerEquiv_apply\", \"PadicInt.mahlerEquiv\", \"PadicInt.mahlerTerm\", \"PadicInt.hasSum_mahler\", \"PadicInt.mahlerSeries\", \"mahler\", \"PadicInt.fwdDiff_tendsto_zero\", \"PadicInt.mahlerEquiv_symm_apply\"], \"digest\": \"80106cb2bce344b2\"}\n[leanfinder] OK 8 hit(s)\n  {\"name\": \"PadicInt.mahlerEquiv_apply\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [inst_2 : IsBoundedSMul ℤ_[p] E] [inst_3 : IsUltrametricDist E] [inst_4 : CompleteSpace E] (f : C(ℤ_[p], E)),\\n  ⇑((PadicInt.mahlerEquiv E) f) = fun n => (fwdDiff 1)^[n] (⇑f) 0\", \"doc\": \"For a continuous function $ f $ from the $ p $-adic integers $ \\\\mathbb{Z}_p $ to a normed space $ E $, the Mahler basis expansion coefficients are given by the $ n $-th forward difference of $ f $ eva\"}\n  {\"name\": \"PadicInt.mahlerEquiv\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"{p : ℕ} →\\n  [hp : Fact (Nat.Prime p)] →\\n    (E : Type u_1) →\\n      [inst : NormedAddCommGroup E] →\\n        [inst_1 : Module ℤ_[p] E] →\\n          [inst_2 : IsBoundedSMul ℤ_[p] E] →\\n            [IsUltrametricDist E] → [CompleteSpace E] → C(ℤ_[p], E) ≃ₗᵢ[ℤ_[p]] ZeroAtInftyContinuousMap ℕ E\", \"doc\": \"The linear isometric equivalence between the space of continuous functions $ C(\\\\mathbb{Z}_p, E) $ and the space of continuous functions vanishing at infinity $ C_0(\\\\mathbb{N}, E) $, established via th\"}\n  {\"name\": \"PadicInt.mahlerTerm\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"{p : ℕ} →\\n  [hp : Fact (Nat.Prime p)] →\\n    {E : Type u_1} →\\n      [inst : NormedAddCommGroup E] → [inst_1 : Module ℤ_[p] E] → [IsBoundedSMul ℤ_[p] E] → E → ℕ → C(ℤ_[p], E)\", \"doc\": \"The function in the space of continuous maps from $\\\\mathbb{Z}_p$ to $E$ obtained by scaling the $n$-th Mahler basis function $\\\\binom{x}{n}$ by a constant $a$, where $\\\\mathbb{Z}_p$ denotes the p-adic i\"}\n  {\"name\": \"PadicInt.hasSum_mahler\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [inst_2 : IsBoundedSMul ℤ_[p] E] [inst_3 : IsUltrametricDist E] [CompleteSpace E] (f : C(ℤ_[p], E)),\\n  HasSum (fun n => PadicInt.mahlerTerm ((fwdDiff 1)^[n] (⇑f) 0) n) f\", \"doc\": \"For any continuous function $ f : \\\\mathbb{Z}_p \\\\to E $ where $ E $ is a normed additive commutative group with $ \\\\mathbb{Z}_p $-module structure, the infinite sum of the Mahler basis terms $ \\\\binom{x}\"}\n  {\"name\": \"PadicInt.mahlerSeries\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"{p : ℕ} →\\n  [hp : Fact (Nat.Prime p)] →\\n    {E : Type u_1} →\\n      [inst : NormedAddCommGroup E] → [inst_1 : Module ℤ_[p] E] → [IsBoundedSMul ℤ_[p] E] → (ℕ → E) → C(ℤ_[p], E)\", \"doc\": \"Given a sequence $ (a_n) $ in a normed additive commutative group $ E $ equipped with a $\\\\mathbb{Z}_p$-module structure, the Mahler series is the infinite sum $\\\\sum_{n=0}^\\\\infty a_n \\\\cdot \\\\binom{x}{n}\"}\n  {\"name\": \"mahler\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"{p : ℕ} → [hp : Fact (Nat.Prime p)] → ℕ → C(ℤ_[p], ℤ_[p])\", \"doc\": \"For each natural number $k$, the function $\\\\mathbb{Z}_p \\\\to \\\\mathbb{Z}_p$ defined by $x \\\\mapsto \\\\binom{x}{k}$ (the binomial coefficient), which is continuous with respect to the p-adic topology. These\"}\n  {\"name\": \"PadicInt.fwdDiff_tendsto_zero\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [IsBoundedSMul ℤ_[p] E] [IsUltrametricDist E] (f : C(ℤ_[p], E)),\\n  Filter.Tendsto (fun x => (fwdDiff 1)^[x] (⇑f) 0) Filter.atTop (nhds 0)\", \"doc\": \"For any continuous function $ f : \\\\mathbb{Z}_p \\\\to E $, the sequence of $ n $-th forward differences of $ f $ evaluated at $ 0 $, denoted $ \\\\Delta_1^n f(0) $, converges to $ 0 $ as $ n \\\\to \\\\infty $. H\"}\n  {\"name\": \"PadicInt.mahlerEquiv_symm_apply\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [inst_2 : IsBoundedSMul ℤ_[p] E] [inst_3 : IsUltrametricDist E] [inst_4 : CompleteSpace E]\\n  (a : ZeroAtInftyContinuousMap ℕ E), (PadicInt.mahlerEquiv E).symm a = PadicInt.mahlerSeries ⇑a\", \"doc\": \"For any sequence $ (a_n) $ in the space of sequences vanishing at infinity $ C_0(\\\\mathbb{N}, E) $, the inverse Mahler equivalence applied to $ (a_n) $ yields the Mahler series $ \\\\sum_{n=0}^\\\\infty a_n \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: MahlerBasis.lean:357,382,384 gives the existing Mahler-coordinate leaf, not the equivariant exact translation sequence, constant-kernel identification and continuous splitting. These still require the shift and dense-integer arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mahler coefficients shift gives a split exact sequence of continuous p adic functions with translation difference and constant kernel",
+   "results": "{\"t\": \"2026-10-22T06:04:24Z\", \"tool\": \"leansearch\", \"query\": \"Mahler coefficients shift gives a split exact sequence of continuous p adic functions with translation difference and constant kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.mahlerSeries\", \"mahler\", \"PadicInt.mahlerTerm\", \"PadicInt.mahlerSeries.congr_simp\", \"PadicInt.mahlerSeries_apply\", \"PadicInt.mahlerEquiv\", \"PadicInt.mahlerSeries_apply_nat\", \"PadicInt.addChar_of_value_at_one\"], \"digest\": \"a53d96d85fe87d53\"}\n[leansearch] OK 8 hit(s)\n  {\"name\": \"PadicInt.mahlerSeries\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \"(a : ℕ → E) : C(ℤ_[p], E)\", \"doc\": \"Given a sequence $ (a_n) $ in a normed additive commutative group $ E $ equipped with a $\\\\mathbb{Z}_p$-module structure, the Mahler series is the infinite sum $\\\\sum_{n=0}^\\\\infty a_n \\\\cdot \\\\binom{x}{n}\"}\n  {\"name\": \"mahler\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \"(k : ℕ) : C(ℤ_[p], ℤ_[p])\", \"doc\": \"For each natural number $k$, the function $\\\\mathbb{Z}_p \\\\to \\\\mathbb{Z}_p$ defined by $x \\\\mapsto \\\\binom{x}{k}$ (the binomial coefficient), which is continuous with respect to the p-adic topology. These\"}\n  {\"name\": \"PadicInt.mahlerTerm\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \": C(ℤ_[p], E)\", \"doc\": \"The function in the space of continuous maps from $\\\\mathbb{Z}_p$ to $E$ obtained by scaling the $n$-th Mahler basis function $\\\\binom{x}{n}$ by a constant $a$, where $\\\\mathbb{Z}_p$ denotes the p-adic i\"}\n  {\"name\": \"PadicInt.mahlerSeries.congr_simp\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [inst_2 : IsBoundedSMul ℤ_[p] E] (a a_1 : ℕ → E), a = a_1 → PadicInt.mahlerSeries a = PadicInt.mahlerSeries a_1\", \"doc\": \"Given two sequences $ (a_n) $ and $ (a'_n) $ in a normed additive commutative group $ E $ equipped with a $ \\\\mathbb{Z}_p $-module structure, if $ a_n = a'_n $ for all $ n $, then their Mahler series $\"}\n  {\"name\": \"PadicInt.mahlerSeries_apply\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \"(ha : Tendsto a atTop (𝓝 0)) (x : ℤ_[p]) : mahlerSeries a x = ∑' n, mahler n x • a n\", \"doc\": \"Given a sequence $(a_n)$ in a normed additive commutative group $E$ equipped with a $\\\\mathbb{Z}_p$-module structure, if $a_n \\\\to 0$ as $n \\\\to \\\\infty$ in the topology of $E$, then for every $x \\\\in \\\\mat\"}\n  {\"name\": \"PadicInt.mahlerEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \": C(ℤ_[p], E) ≃ₗᵢ[ℤ_[p]] C₀(ℕ, E)\", \"doc\": \"The linear isometric equivalence between the space of continuous functions $ C(\\\\mathbb{Z}_p, E) $ and the space of continuous functions vanishing at infinity $ C_0(\\\\mathbb{N}, E) $, established via th\"}\n  {\"name\": \"PadicInt.mahlerSeries_apply_nat\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \"(ha : Tendsto a atTop (𝓝 0)) {m n : ℕ} (hmn : m ≤ n) :\\n  mahlerSeries a (m : ℤ_[p]) = ∑ i ∈ range (n + 1), m.choose i • a i\", \"doc\": \"For a sequence $(a_n)$ in a normed additive commutative group $E$ with a $\\\\mathbb{Z}_p$-module structure, if $a_n \\\\to 0$ as $n \\\\to \\\\infty$, then evaluating the Mahler series at a natural number $m$ (e\"}\n  {\"name\": \"PadicInt.addChar_of_value_at_one\", \"module\": \"Mathlib.NumberTheory.Padics.AddChar\", \"type\": \"(r : R) (hr : Tendsto (r ^ ·) atTop (𝓝 0)) : AddChar ℤ_[p] R\", \"doc\": \"For a prime $ p $, normed ring $ R $ equipped with a $ \\\\mathbb{Z}_p $-algebra structure, bounded scalar multiplication, ultrametric distance, and completeness, if the sequence $ r^n $ converges to zer\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: MahlerBasis.lean:357,382,384 gives the existing Mahler-coordinate leaf, not the equivariant exact translation sequence, constant-kernel identification and continuous splitting. These still require the shift and dense-integer arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PadicInt.mahlerEquiv\"",
+   "results": "{\"t\": \"2026-10-22T06:04:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"PadicInt.mahlerEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"PadicInt.mahlerEquiv\", \"PadicInt.mahlerEquiv_apply\", \"PadicInt.mahlerEquiv_symm_apply\"], \"digest\": \"0a382c2462555f94\"}\n[loogle] OK 3 hit(s)\n  {\"name\": \"PadicInt.mahlerEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \" {p : ℕ} [hp : Fact (Nat.Prime p)] (E : Type u_1) [NormedAddCommGroup E] [Module ℤ_[p] E] [IsBoundedSMul ℤ_[p] E] [IsUltrametricDist E] [CompleteSpace E] : C(ℤ_[p], E) ≃ₗᵢ[ℤ_[p]] ZeroAtInftyContinuousMap ℕ E\", \"doc\": \"The isometric equivalence from `C(ℤ_[p], E)` to the space of sequences in `E` tending to `0` given\\nby Mahler's theorem, for `E` a nonarchimedean `ℚ_[p]`-Banach space.\"}\n  {\"name\": \"PadicInt.mahlerEquiv_apply\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \" {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [NormedAddCommGroup E] [Module ℤ_[p] E] [IsBoundedSMul ℤ_[p] E] [IsUltrametricDist E] [CompleteSpace E] (f : C(ℤ_[p], E)) : ⇑((PadicInt.mahlerEquiv E) f) = fun n => (fwdDiff 1)^[n] (⇑f) 0\", \"doc\": \"\"}\n  {\"name\": \"PadicInt.mahlerEquiv_symm_apply\", \"module\": \"Mathlib.NumberTheory.Padics.MahlerBasis\", \"type\": \" {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [NormedAddCommGroup E] [Module ℤ_[p] E] [IsBoundedSMul ℤ_[p] E] [IsUltrametricDist E] [CompleteSpace E] (a : ZeroAtInftyContinuousMap ℕ E) : (PadicInt.mahlerEquiv E).symm a = PadicInt.mahlerSeries ⇑a\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: MahlerBasis.lean:357,382,384 gives the existing Mahler-coordinate leaf, not the equivariant exact translation sequence, constant-kernel identification and continuous splitting. These still require the shift and dense-integer arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "mahlerEquiv|mahler.*(shift|difference)|rightInverse.*(fwdDiff|mahler)",
+   "results": "{\"t\": \"2026-10-22T06:04:24Z\", \"tool\": \"grep\", \"query\": \"mahlerEquiv|mahler.*(shift|difference)|rightInverse.*(fwdDiff|mahler)\", \"sub\": \"NumberTheory/Padics\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\"], \"digest\": \"163fa7eaacdbded2\"}\n[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"line\": \"310\", \"text\": \"The coefficients of a Mahler series can be recovered from the sum by taking forward differences at\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"line\": \"357\", \"text\": \"noncomputable def mahlerEquiv : C(ℤ_[p], E) ≃ₗᵢ[ℤ_[p]] C₀(ℕ, E) where\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"line\": \"382\", \"text\": \"lemma mahlerEquiv_apply (f : C(ℤ_[p], E)) : mahlerEquiv E f = fun n ↦ Δ_[1]^[n] f 0 := rfl\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"line\": \"384\", \"text\": \"lemma mahlerEquiv_symm_apply (a : C₀(ℕ, E)) : (mahlerEquiv E).symm a = (mahlerSeries (p := p) a) :=\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: MahlerBasis.lean:357,382,384 gives the existing Mahler-coordinate leaf, not the equivariant exact translation sequence, constant-kernel identification and continuous splitting. These still require the shift and dense-integer arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous linear antiderivative for the forward difference operator on continuous Zp valued Banach space functions by prefixing a zero Mahler coefficient",
+   "results": "{\"t\": \"2026-10-22T06:04:35Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous linear antiderivative for the forward difference operator on continuous Zp valued Banach space functions by prefixing a zero Mahler coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.mahlerEquiv_apply\", \"PadicInt.fwdDiff_mahlerSeries\", \"PadicInt.mahlerEquiv\", \"PadicInt.hasSum_mahler\", \"PadicInt.mahlerTerm\", \"PadicInt.mahlerSeries\", \"PadicInt.fwdDiff_tendsto_zero\", \"PadicInt.mahlerTerm_apply\"], \"digest\": \"451db8be9477f62a\"}\n[leanfinder] OK 8 hit(s)\n  {\"name\": \"PadicInt.mahlerEquiv_apply\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [inst_2 : IsBoundedSMul ℤ_[p] E] [inst_3 : IsUltrametricDist E] [inst_4 : CompleteSpace E] (f : C(ℤ_[p], E)),\\n  ⇑((PadicInt.mahlerEquiv E) f) = fun n => (fwdDiff 1)^[n] (⇑f) 0\", \"doc\": \"For a continuous function $ f $ from the $ p $-adic integers $ \\\\mathbb{Z}_p $ to a normed space $ E $, the Mahler basis expansion coefficients are given by the $ n $-th forward difference of $ f $ eva\"}\n  {\"name\": \"PadicInt.fwdDiff_mahlerSeries\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [inst_2 : IsBoundedSMul ℤ_[p] E] [IsUltrametricDist E] [CompleteSpace E] {a : ℕ → E},\\n  Filter.Tendsto a Filter.atTop (nhds 0) → ∀ (n : ℕ), (fwdDiff 1)^[n] (⇑(PadicInt.mahlerSeries a)) 0 = a \", \"doc\": \"For a sequence $ (a_n) $ in a normed additive commutative group $ E $ with $ \\\\mathbb{Z}_p $-module structure converging to 0, the $ n $-th forward difference of the Mahler series $ \\\\sum_{k=0}^\\\\infty a\"}\n  {\"name\": \"PadicInt.mahlerEquiv\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"{p : ℕ} →\\n  [hp : Fact (Nat.Prime p)] →\\n    (E : Type u_1) →\\n      [inst : NormedAddCommGroup E] →\\n        [inst_1 : Module ℤ_[p] E] →\\n          [inst_2 : IsBoundedSMul ℤ_[p] E] →\\n            [IsUltrametricDist E] → [CompleteSpace E] → C(ℤ_[p], E) ≃ₗᵢ[ℤ_[p]] ZeroAtInftyContinuousMap ℕ E\", \"doc\": \"The linear isometric equivalence between the space of continuous functions $ C(\\\\mathbb{Z}_p, E) $ and the space of continuous functions vanishing at infinity $ C_0(\\\\mathbb{N}, E) $, established via th\"}\n  {\"name\": \"PadicInt.hasSum_mahler\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [inst_2 : IsBoundedSMul ℤ_[p] E] [inst_3 : IsUltrametricDist E] [CompleteSpace E] (f : C(ℤ_[p], E)),\\n  HasSum (fun n => PadicInt.mahlerTerm ((fwdDiff 1)^[n] (⇑f) 0) n) f\", \"doc\": \"For any continuous function $ f : \\\\mathbb{Z}_p \\\\to E $ where $ E $ is a normed additive commutative group with $ \\\\mathbb{Z}_p $-module structure, the infinite sum of the Mahler basis terms $ \\\\binom{x}\"}\n  {\"name\": \"PadicInt.mahlerTerm\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"{p : ℕ} →\\n  [hp : Fact (Nat.Prime p)] →\\n    {E : Type u_1} →\\n      [inst : NormedAddCommGroup E] → [inst_1 : Module ℤ_[p] E] → [IsBoundedSMul ℤ_[p] E] → E → ℕ → C(ℤ_[p], E)\", \"doc\": \"The function in the space of continuous maps from $\\\\mathbb{Z}_p$ to $E$ obtained by scaling the $n$-th Mahler basis function $\\\\binom{x}{n}$ by a constant $a$, where $\\\\mathbb{Z}_p$ denotes the p-adic i\"}\n  {\"name\": \"PadicInt.mahlerSeries\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"{p : ℕ} →\\n  [hp : Fact (Nat.Prime p)] →\\n    {E : Type u_1} →\\n      [inst : NormedAddCommGroup E] → [inst_1 : Module ℤ_[p] E] → [IsBoundedSMul ℤ_[p] E] → (ℕ → E) → C(ℤ_[p], E)\", \"doc\": \"Given a sequence $ (a_n) $ in a normed additive commutative group $ E $ equipped with a $\\\\mathbb{Z}_p$-module structure, the Mahler series is the infinite sum $\\\\sum_{n=0}^\\\\infty a_n \\\\cdot \\\\binom{x}{n}\"}\n  {\"name\": \"PadicInt.fwdDiff_tendsto_zero\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [IsBoundedSMul ℤ_[p] E] [IsUltrametricDist E] (f : C(ℤ_[p], E)),\\n  Filter.Tendsto (fun x => (fwdDiff 1)^[x] (⇑f) 0) Filter.atTop (nhds 0)\", \"doc\": \"For any continuous function $ f : \\\\mathbb{Z}_p \\\\to E $, the sequence of $ n $-th forward differences of $ f $ evaluated at $ 0 $, denoted $ \\\\Delta_1^n f(0) $, converges to $ 0 $ as $ n \\\\to \\\\infty $. H\"}\n  {\"name\": \"PadicInt.mahlerTerm_apply\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [inst_2 : IsBoundedSMul ℤ_[p] E] (a : E) (n : ℕ) (x : ℤ_[p]), (PadicInt.mahlerTerm a n) x = (mahler n) x • a\", \"doc\": \"For any $ a \\\\in E $, $ n \\\\in \\\\mathbb{N} $, and $ x \\\\in \\\\mathbb{Z}_p $, the application of the Mahler basis term scaled by $ a $ satisfies $ \\\\text{mahlerTerm}_a(n)(x) = \\\\binom{x}{n} \\\\cdot a $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: MahlerBasis.lean:357,382,384 gives the existing Mahler-coordinate leaf, not the equivariant exact translation sequence, constant-kernel identification and continuous splitting. These still require the shift and dense-integer arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The action of a compact topological group on its continuous function space by translation is jointly continuous for the compact open topology",
+   "results": {
+    "t": "2026-10-23T11:56:24Z",
+    "tool": "leanfinder",
+    "query": "The action of a compact topological group on its continuous function space by translation is jointly continuous for the compact open topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.I_obj_V_topologicalSpace",
+     "ContinuousMap.instContinuousConstVAdd",
+     "ContinuousMap.instContinuousVAdd",
+     "ContinuousMap.instContinuousMulOfLocallyCompactSpace",
+     "ContinuousMap.instVAdd",
+     "ContinuousMap.vadd_apply",
+     "ContinuousCohomology.Iobj",
+     "Action.IsContinuous"
+    ],
+    "digest": "bd21a8f4eed72506"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: these searches concern the topology component; reused lem-coef-compact-open-currying and lem-sfb-compact-function-space-complete. ContinuousCohomology hits are not in this Mathlib checkout; pointwise action hits are not source translation."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*(comp|precomp)|Continuous.*(comp|precomp)",
+   "results": {
+    "t": "2026-10-23T11:57:12Z",
+    "tool": "grep",
+    "query": "continuous.*(comp|precomp)|Continuous.*(comp|precomp)",
+    "sub": "Topology/ContinuousMap",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousMap/Ideals.lean",
+     "Mathlib/Topology/ContinuousMap/Ideals.lean",
+     "Mathlib/Topology/ContinuousMap/Ideals.lean",
+     "Mathlib/Topology/ContinuousMap/Ideals.lean",
+     "Mathlib/Topology/ContinuousMap/Ideals.lean",
+     "Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean",
+     "Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean",
+     "Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean"
+    ],
+    "digest": "c765f01600ee8060"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: these searches concern the topology component; reused lem-coef-compact-open-currying and lem-sfb-compact-function-space-complete. ContinuousCohomology hits are not in this Mathlib checkout; pointwise action hits are not source translation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous action on continuous functions induced by translation of a compact topological group",
+   "results": {
+    "t": "2026-10-23T11:57:12Z",
+    "tool": "leansearch",
+    "query": "Continuous action on continuous functions induced by translation of a compact topological group",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "continuous_const_smul_iff",
+     "continuousAt_const_vadd_iff",
+     "ContinuousCohomology.Iobj_ρ_apply",
+     "translate",
+     "continuousWithinAt_const_vadd_iff",
+     "ContinuousCohomology.Iobj",
+     "Action.IsContinuous",
+     "ContinuousCohomology.I_obj_V_topologicalSpace"
+    ],
+    "digest": "623b9f7067757120"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: these searches concern the topology component; reused lem-coef-compact-open-currying and lem-sfb-compact-function-space-complete. ContinuousCohomology hits are not in this Mathlib checkout; pointwise action hits are not source translation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"comp\"",
+   "results": {
+    "t": "2026-10-23T11:57:13Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"comp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "ContinuousMap.comp",
+     "ContinuousMap.comp_id",
+     "ContinuousMap.id_comp",
+     "ContinuousMap.precomp",
+     "ContinuousMap.const_comp",
+     "ContinuousMap.comp_const",
+     "ContinuousMap.comp_assoc",
+     "ContinuousMap.comp_apply"
+    ],
+    "digest": "574ce93d7afbb2ab"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: these searches concern the topology component; reused lem-coef-compact-open-currying and lem-sfb-compact-function-space-complete. ContinuousCohomology hits are not in this Mathlib checkout; pointwise action hits are not source translation."
+  },
+  {
+   "tool": "grep",
+   "query": "CompactSpace|IsTopologicalRing|T2Space",
+   "results": {
+    "t": "2026-10-23T12:03:31Z",
+    "tool": "grep",
+    "query": "CompactSpace|IsTopologicalRing|T2Space",
+    "sub": "NumberTheory/Padics",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Padics/ProperSpace.lean",
+     "Mathlib/NumberTheory/Padics/ProperSpace.lean",
+     "Mathlib/NumberTheory/Padics/ProperSpace.lean",
+     "Mathlib/NumberTheory/Padics/ProperSpace.lean",
+     "Mathlib/NumberTheory/Padics/ProperSpace.lean",
+     "Mathlib/NumberTheory/Padics/Measure/Basic.lean",
+     "Mathlib/NumberTheory/Padics/Measure/Basic.lean",
+     "Mathlib/NumberTheory/Padics/Measure/Basic.lean"
+    ],
+    "digest": "d2088b91c6587822"
+   },
+   "date": "2026-10-23",
+   "verdict": "match for compactness component only: PadicInt.compactSpace at Mathlib/NumberTheory/Padics/ProperSpace.lean:55; reused the more general existing lem-sfb-integers-profinite-tower, rather than creating a special case. No match for the whole item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact space instance for the p adic integers",
+   "results": {
+    "t": "2026-10-23T12:03:31Z",
+    "tool": "leansearch",
+    "query": "Compact space instance for the p adic integers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt.compactSpace",
+     "PadicInt",
+     "Padic.instProperSpace",
+     "PadicInt.completeSpace",
+     "PadicInt.instIsAdicCompleteMaximalIdeal",
+     "Padic.instCompleteSpace",
+     "IsNonarchimedeanLocalField.instCompactSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation",
+     "PadicInt.complete"
+    ],
+    "digest": "e108c5f520d43871"
+   },
+   "date": "2026-10-23",
+   "verdict": "match for compactness component only: PadicInt.compactSpace at Mathlib/NumberTheory/Padics/ProperSpace.lean:55; reused the more general existing lem-sfb-integers-profinite-tower, rather than creating a special case. No match for the whole item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PadicInt\", CompactSpace",
+   "results": {
+    "t": "2026-10-23T12:03:32Z",
+    "tool": "loogle",
+    "query": "\"PadicInt\", CompactSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "PadicInt.compactSpace"
+    ],
+    "digest": "e378546dea4805dd"
+   },
+   "date": "2026-10-23",
+   "verdict": "match for compactness component only: PadicInt.compactSpace at Mathlib/NumberTheory/Padics/ProperSpace.lean:55; reused the more general existing lem-sfb-integers-profinite-tower, rather than creating a special case. No match for the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The p adic integers form a compact Hausdorff topological ring",
+   "results": {
+    "t": "2026-10-23T12:03:36Z",
+    "tool": "leanfinder",
+    "query": "The p adic integers form a compact Hausdorff topological ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt.compactSpace",
+     "PadicInt.completeSpace",
+     "Padic.instProperSpace",
+     "PadicInt",
+     "Padic",
+     "PadicInt.complete",
+     "Padic.instRing",
+     "PadicInt.instCommRing"
+    ],
+    "digest": "d05b3f5668866ccb"
+   },
+   "date": "2026-10-23",
+   "verdict": "match for compactness component only: PadicInt.compactSpace at Mathlib/NumberTheory/Padics/ProperSpace.lean:55; reused the more general existing lem-sfb-integers-profinite-tower, rather than creating a special case. No match for the whole item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-procyclic-scalar-cochain-evaluation",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; scalar analytic base. Returned scalar-cochain proof step 5, with the Banach hypotheses prepared in step 4: translation, Mahler shift, kernel and continuous splitting.",
+   "via": [
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-banach-translation-difference-split",
+  "worker": "stage1",
+  "summary": "Q160: proved the unchanged Banach translation-difference statement using the existing profinite integer tower, compact function-space and compact-open currying nodes, and the existing Mahler-coordinate leaf. All shifts, rational scalar linearity, kernel identification, norm bounds and equivariance are written explicitly. No new nodes.",
+  "blueprint": "Latest direct-images.proof.md paragraph (3), open direct image, through the inherited scalar-cochain ancestry: analytic expansion of returned step 5 with the Banach hypotheses of step 4; no replacement of a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "General local-field topology tool at the degree-one extension supplies compactness and agreement with the inverse-limit topology; no same-unit node supplies this."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-integers-profinite-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-ef2bf0e5f",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-ef2bf0e5f (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no changes. It is one commit containing the item and its report, with no new nodes. The statement, stmt_deps and blueprint fields are the same as live, where the item is still unsplit with no review, and there is no repair note for it. I read all five cited statements: lem-sfb-integers-profinite-tower clauses 1-2 applied at E=Q_l; def-weil-l-adic-numbers; lem-sfb-compact-function-space-complete (compact Hausdorff S, complete V, norm topology equals compact-open topology); lem-coef-compact-open-currying (evaluation needs K locally compact, transpose needs nothing; checked at CompactOpen.lean:430/458-467); and lem-sfb-banach-mahler-coordinates (mahlerEquiv at MahlerBasis.lean:357, apply at 382). Every hypothesis is met. Local compactness comes from small closed balls in compact Z_l. The Z_l bounded-smul hypothesis follows from ||av||=|a|||v||. Q_l-linearity of M is derived from the coefficient formula rather than assumed. Steps 2 to 6 check out: the joint continuity argument (evaluation, then addition, then transpose with A=HxR); Delta as tau_1-1 with norm at most 1 by the ultrametric inequality; equivariance; M(Delta f)_n=(Mf)_{n+1}; T=M^-1PM with SP=1, so Delta T=1 and ||Tf||=||f||; and the kernel computed by comparing Mahler coefficients with const(f(0)) and using injectivity, with e_0 as the continuous inverse. Edge cases checked: V=0, constant f (Tf=x.v), a sequence supported at index 0, and n=0. Paragraph (3) of the direct-images proof is identical in main-20261015 and latest, and no unit step is replaced. I accept the declared tool use of lem-sfb-integers-profinite-tower as a generic Z_l topology tool. There is no cycle: the 27-node closure of the cited nodes does not contain the item. The rg search for duplicates (procyclic difference, polynomial translation, cochain primitive nodes) found none. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.BanachTranslationDifferenceSplit",
+  "declaration": "PadicInt.banach_translation_difference_split",
+  "file": "lean/Sheaf/NumberTheory/Padics/BanachTranslationDifferenceSplit.lean",
+  "statement": "theorem banach_translation_difference_split (ell : ℕ) [Fact ell.Prime] (V : Type u) [NormedAddCommGroup V] [NormedSpace ℚ_[ell] V] [CompleteSpace V] [IsUltrametricDist V] : ∃ (c : V →L[ℚ_[ell]] C(ℤ_[ell], V)) (d : C(ℤ_[ell], V) →L[ℚ_[ell]] C(ℤ_[ell], V)) (e : C(ℤ_[ell], V) →L[ℚ_[ell]] V) (τ : ℤ_[ell] → C(ℤ_[ell], V) →L[ℚ_[ell]] C(ℤ_[ell], V)) (M : C(ℤ_[ell], V) ≃ₗᵢ[ℚ_[ell]] ZeroAtInftyContinuousMap ℕ V) (P : ZeroAtInftyContinuousMap ℕ V →L[ℚ_[ell]] ZeroAtInftyContinuousMap ℕ V) (T : C(ℤ_[ell], V) →L[ℚ_[ell]] C(ℤ_[ell], V)), (∀ (v : V) (x : ℤ_[ell]), c v x = v) ∧ (∀ (f : C(ℤ_[ell], V)) (x : ℤ_[ell]), d f x = f (x + 1) - f x) ∧ (∀ f : C(ℤ_[ell], V), e f = f 0) ∧ (∀ (t : ℤ_[ell]) (f : C(ℤ_[ell], V)) (x : ℤ_[ell]), τ t f x = f (x + t)) ∧ Continuous (fun z : ℤ_[ell] × C(ℤ_[ell], V) ↦ τ z.1 z.2) ∧ (∀ f : C(ℤ_[ell], V), τ 0 f = f) ∧ (∀ (s t : ℤ_[ell]) (f : C(ℤ_[ell], V)), τ s (τ t f) = τ (s + t) f) ∧ (∀ (t : ℤ_[ell]) (v : V), τ t (c v) = c v) ∧ (∀ (t : ℤ_[ell]) (f : C(ℤ_[ell], V)), d (τ t f) = τ t (d f)) ∧ Function.Injective c ∧ Function.Exact c d ∧ Function.Surjective d ∧ (∀ f : C(ℤ_[ell], V), d f = 0 ↔ f = c (e f)) ∧ (∀ v : V, e (c v) = v) ∧ (∀ (f : C(ℤ_[ell], V)) (n : ℕ), M f n = (fwdDiff 1)^[n] (⇑f) 0) ∧ (∀ (f : C(ℤ_[ell], V)) (n : ℕ), M (d f) n = M f (n + 1)) ∧ (∀ a : ZeroAtInftyContinuousMap ℕ V, P a 0 = 0) ∧ (∀ (a : ZeroAtInftyContinuousMap ℕ V) (n : ℕ), P a (n + 1) = a n) ∧ (∀ f : C(ℤ_[ell], V), T f = M.symm (P (M f))) ∧ (∀ f : C(ℤ_[ell], V), d (T f) = f) ∧ (∀ f : C(ℤ_[ell], V), ‖T f‖ ≤ ‖f‖)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed20b1eae",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Only the lean field differs from live. Every node clause is rendered: trivial action on V; translation τ pinned by its formula, jointly continuous, with action laws; continuous linear equivariant const and Δ; Injective/Exact/Surjective; kernel = constants with continuous evaluation at 0 as inverse; ℚ_ℓ-linear Mahler isometry pinned by the mahlerEquiv_apply coefficient formula; coefficient shift; zero-prefix P; T = M⁻¹PM with ΔT = 1 and ‖Tf‖ ≤ ‖f‖, no equivariance. Hypotheses are exactly a complete normed ℚ_ℓ-space with IsUltrametricDist, arbitrary universe, V = 0 allowed. No arbitrary witness, no definitions, sorry only. Docstrings carry the source place, blueprint tag and six steps. lean.statement is verbatim. No duplicate in Mathlib or the project. Not compiled per instructions; relies on the worker's reported clean compile. No findings."
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-coordinate-prime-affine-chart-realization",
+ "kind": "statement",
+ "title": "Realize a localized coordinate-prime ring chart as a quasi-finite scheme chart",
+ "statement": "Let $\\rho:R\\to A$ be a homomorphism of commutative rings, let $\\mathfrak q_A\\subset A$ be prime and $\\mathfrak p=\\rho^{-1}(\\mathfrak q_A)$, let $f\\in R\\setminus\\mathfrak p$, $d\\in A\\setminus\\mathfrak q_A$, and suppose $\\rho(f)$ is invertible in $A_d$ [def-weil-ring-localization-away]. Let $0\\le r\\le n$ be integers and let $\\theta:C=R_f[x_1,\\ldots,x_n]\\to A_d$ be an $R_f$-algebra map [def-weil-pbc-mv-polynomial-ring] of finite type and quasi-finite at every prime [def-weil-pbc-finite-type-algebra, def-weil-pbc-ring-map-quasi-finite-at-prime]. Assume $\\theta^{-1}(\\mathfrak q_A A_d)=P=(\\mathfrak pR_f,x_{r+1},\\ldots,x_n)$. Put $S=\\operatorname{Spec}R$, $Z=\\operatorname{Spec}A$, let $p:Z\\to S$ be induced by $\\rho$, and let $z\\in Z$ correspond to $\\mathfrak q_A$ [def-pc-scheme, def-weil-affine-spectrum]. The principal open subschemes $S_0=D(f)\\cong\\operatorname{Spec}R_f$ and $Z_0=D(d)\\cong\\operatorname{Spec}A_d$ contain $p(z)$ and $z$, respectively, and $Z_0\\subseteq p^{-1}(S_0)$. The morphism $q:Z_0\\to\\mathbf A^n_{S_0}=\\operatorname{Spec}C$ induced by $\\theta$ [def-sbc-affine-space] is over $S_0$, is of finite type and quasi-finite [def-weil-finite-type-morphism, pqf-def-quasifinite], and has finite discrete scheme fibres. For $t=q(z)$, one has $t=P$ and an isomorphism of $\\kappa(p(z))$-algebras $\\kappa(t)\\cong\\kappa(p(z))(u_1,\\ldots,u_r)$ [def-weil-residue-field], where the right side is the fraction field of the polynomial ring in $r$ independent variables (the base field itself if $r=0$). No fibre-dimension or finite-presentation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 052E (lemma-local-structure-finite-type), first paragraph of proof, affine scheme translation of Tag 0520 (lemma-refined-quasi-finite-over-polynomial-algebra), including the residue field of its prescribed coordinate prime."
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sbc-affine-space",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Finite type and primewise isolated algebra fibres imply that each compact fibre spectrum is discrete and therefore finite. Algebra.QuasiFinite.iff_finite_comap_preimage_singleton gives a quasi-finite ring map. The affine Spec criteria yield locally of finite type and locally quasi-finite, and affine maps are quasi-compact. Transport across basicOpenIsoSpecAway and AffineSpace.SpecIso.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-weil-finite-type-morphism",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Membership in the two basic opens is exactly hf and hd. For every x in D(d), its prime in A_d does not contain the unit rho(f), so x maps into D(f). Apply AffineSpace.SpecIso_inv_over, Spec functoriality and htheta for the equation over Spec R_f. Compose with Spec(R_f <- R) and use the localization lift equation and basicOpenIsoSpecAway_hom_SpecMap to obtain the structural equation over Spec R.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-sbc-affine-space",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Local quasi-finiteness makes each asFiber point isolated, proving the project IsQuasiFinite predicate together with finite type and quasi-compactness. The finite-fibre theorem and Scheme.Hom.discreteTopology_fiber_and_quasiFiniteAt give finite discrete scheme fibres.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "pqf-lem-qf-finitefibres",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The structural equation for basicOpenIsoSpecAway identifies the contraction of the localized marked prime with q_A. Extension of contraction is the identity for a localization, so that prime equals q_A A_d. Cancel AffineSpace.SpecIso with its inverse and use hprime to identify the image prime. Evaluate the structural equation over Spec R to identify its base point. Apply the coordinate-prime residue-field theorem at this point, replacing its base prime by the identified one.",
+   "uses": [
+    "lem-trf-coordinate-prime-rational-residue-field",
+    "def-sbc-affine-space",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-sbc-affine-space",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-trf-coordinate-prime-rational-residue-field",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "pqf-def-quasifinite",
+  "pqf-lem-qf-finitefibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 052E and 0520: geometric realization proved using Mathlib affine Spec criteria and compact discrete algebra fibres; coordinate residue-field calculation isolated as lem-trf-coordinate-prime-rational-residue-field."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a quasi finite polynomial ring homomorphism on localized affine rings whose image prime is the base prime plus the last coordinate variables construct its affine scheme chart and rational function residue field",
+   "results": "{\"t\": \"2026-10-22T06:47:18Z\", \"tool\": \"leanfinder\", \"query\": \"Given a quasi finite polynomial ring homomorphism on localized affine rings whose image prime is the base prime plus the last coordinate variables construct its affine scheme chart and rational function residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.IsPreimmersion.of_isLocalization\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\"], \"digest\": \"e52bbaf9435531be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: locallyQuasiFinite_iff and affine-space coordinate equivalences provide ingredients. Polynomial.residueFieldMapCAlgEquiv in Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean:36 handles one polynomial variable with the prime extended from the base; it does not give the multivariable coordinate-quotient calculation together with the localized scheme chart and finite discrete fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"residueField\", \"AffineSpace\"",
+   "results": "{\"t\": \"2026-10-22T06:47:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"residueField\\\", \\\"AffineSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: locallyQuasiFinite_iff and affine-space coordinate equivalences provide ingredients. Polynomial.residueFieldMapCAlgEquiv in Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean:36 handles one polynomial variable with the prime extended from the base; it does not give the multivariable coordinate-quotient calculation together with the localized scheme chart and finite discrete fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "residueField|quasiFinite|QuasiFinite",
+   "results": "{\"t\": \"2026-10-22T06:47:07Z\", \"tool\": \"grep\", \"query\": \"residueField|quasiFinite|QuasiFinite\", \"sub\": \"AlgebraicGeometry/AffineSpace.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: locallyQuasiFinite_iff and affine-space coordinate equivalences provide ingredients. Polynomial.residueFieldMapCAlgEquiv in Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean:36 handles one polynomial variable with the prime extended from the base; it does not give the multivariable coordinate-quotient calculation together with the localized scheme chart and finite discrete fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine quasi finite polynomial chart prescribed coordinate prime residue field is rational function field over base residue field",
+   "results": "{\"t\": \"2026-10-22T06:47:22Z\", \"tool\": \"leansearch\", \"query\": \"affine quasi finite polynomial chart prescribed coordinate prime residue field is rational function field over base residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.residueFieldMapCAlgEquiv\", \"Polynomial.residueFieldMapCAlgEquiv.congr_simp\", \"RingHom.QuasiFinite\", \"Algebra.QuasiFinite.recOn\", \"Algebra.QuasiFinite.casesOn\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"Algebra.QuasiFinite.mk\", \"Algebra.QuasiFinite.finite_fiber\"], \"digest\": \"c77c49ca5cab85d5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: locallyQuasiFinite_iff and affine-space coordinate equivalences provide ingredients. Polynomial.residueFieldMapCAlgEquiv in Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean:36 handles one polynomial variable with the prime extended from the base; it does not give the multivariable coordinate-quotient calculation together with the localized scheme chart and finite discrete fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine localized polynomial quasi finite chart with prescribed coordinate prime and rational function residue field",
+   "results": "{\"t\": \"2026-10-23T12:25:09Z\", \"tool\": \"leanfinder\", \"query\": \"Affine localized polynomial quasi finite chart with prescribed coordinate prime and rational function residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFiniteAt\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"Polynomial.not_quasiFiniteAt\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\"], \"digest\": \"67ab1f28a61e8b8e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give residue-field fraction descriptions, a one-variable extended-prime formula, or general quasi-finiteness ingredients; none states this localized coordinate-prime scheme chart with its base-compatible multivariable residue-field identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue field of coordinate prime in a polynomial ring over a localized ring and quasi finite affine scheme morphism",
+   "results": "{\"t\": \"2026-10-23T12:25:36Z\", \"tool\": \"leansearch\", \"query\": \"Residue field of coordinate prime in a polynomial ring over a localized ring and quasi finite affine scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Ideal.ResidueField\", \"AlgebraicGeometry.Scheme.residueField\", \"IsLocalRing.ResidueField\", \"Algebra.QuasiFinite.finite_fiber\", \"Algebra.QuasiFinite.instResidueField\", \"IsLocalRing.instInhabitedResidueField\"], \"digest\": \"430d1606963649ae\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give residue-field fraction descriptions, a one-variable extended-prime formula, or general quasi-finiteness ingredients; none states this localized coordinate-prime scheme chart with its base-compatible multivariable residue-field identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"residueField\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-23T12:25:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"residueField\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give residue-field fraction descriptions, a one-variable extended-prime formula, or general quasi-finiteness ingredients; none states this localized coordinate-prime scheme chart with its base-compatible multivariable residue-field identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The residue field at a prime equals the fraction field of the quotient by that prime; coordinate ideal in multivariate polynomial algebra",
+   "results": "{\"t\": \"2026-10-23T12:33:46Z\", \"tool\": \"leanfinder\", \"query\": \"The residue field at a prime equals the fraction field of the quotient by that prime; coordinate ideal in multivariate polynomial algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsFractionRingQuotientIdealResidueField\", \"Ideal.ResidueField\", \"instAlgebraQuotientIdealResidueField\", \"Polynomial.residueFieldMapCAlgEquiv\", \"instIsAlgebraicQuotientIdealResidueField\", \"Polynomial.residueFieldMapCAlgEquiv_algebraMap\", \"Polynomial.residueFieldMapCAlgEquiv_symm_X\", \"Ideal.algebraMap_quotient_residueField_mk\"], \"digest\": \"6c5bb10d4287477e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give residue-field fraction descriptions, a one-variable extended-prime formula, or general quasi-finiteness ingredients; none states this localized coordinate-prime scheme chart with its base-compatible multivariable residue-field identification."
+  },
+  {
+   "tool": "grep",
+   "query": "residueFieldMapCAlgEquiv|residueField.*Fraction|Fraction.*residueField",
+   "results": "{\"t\": \"2026-10-23T12:34:17Z\", \"tool\": \"grep\", \"query\": \"residueFieldMapCAlgEquiv|residueField.*Fraction|Fraction.*residueField\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuasiFinite/Polynomial.lean\", \"Mathlib/RingTheory/QuasiFinite/Polynomial.lean\", \"Mathlib/RingTheory/RamificationInertia/Inertia.lean\", \"Mathlib/RingTheory/RamificationInertia/Inertia.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\", \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean\"], \"digest\": \"f4189629848f9572\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give residue-field fraction descriptions, a one-variable extended-prime formula, or general quasi-finiteness ingredients; none states this localized coordinate-prime scheme chart with its base-compatible multivariable residue-field identification."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyQuasiFinite_iff|isDiscrete_preimage_singleton|finite_preimage_singleton|finiteType.*[Ss]pec|[Ss]pec.*finiteType",
+   "results": "{\"t\": \"2026-10-23T12:44:14Z\", \"tool\": \"grep\", \"query\": \"locallyQuasiFinite_iff|isDiscrete_preimage_singleton|finite_preimage_singleton|finiteType.*[Ss]pec|[Ss]pec.*finiteType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"5795fa8d29452344\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give residue-field fraction descriptions, a one-variable extended-prime formula, or general quasi-finiteness ingredients; none states this localized coordinate-prime scheme chart with its base-compatible multivariable residue-field identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi finite ring homomorphism from a localized polynomial algebra defines a quasi finite affine scheme chart with finite discrete fibres and residue field at a coordinate prime equal to a rational function field",
+   "results": "{\"t\": \"2026-10-23T12:44:17Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type quasi finite ring homomorphism from a localized polynomial algebra defines a quasi finite affine scheme chart with finite discrete fibres and residue field at a coordinate prime equal to a rational function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"Polynomial.not_quasiFiniteAt\"], \"digest\": \"925628a676c53381\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give residue-field fraction descriptions, a one-variable extended-prime formula, or general quasi-finiteness ingredients; none states this localized coordinate-prime scheme chart with its base-compatible multivariable residue-field identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue field of a coordinate prime in a multivariate polynomial algebra over a localization is the rational function field in the remaining variables",
+   "results": "{\"t\": \"2026-10-23T12:52:19Z\", \"tool\": \"leansearch\", \"query\": \"Residue field of a coordinate prime in a multivariate polynomial algebra over a localization is the rational function field in the remaining variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ResidueField\", \"IsLocalRing.ResidueField\", \"IsLocalRing.instInhabitedResidueField\", \"instIsFractionRingQuotientIdealResidueField\", \"Polynomial.residueFieldMapCAlgEquiv\", \"IsLocalRing.instCommRingResidueField\", \"Polynomial.residueFieldMapCAlgEquiv.congr_simp\", \"Algebra.QuasiFinite.instResidueField\"], \"digest\": \"42767dec36d6f527\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give residue-field fraction descriptions, a one-variable extended-prime formula, or general quasi-finiteness ingredients; none states this localized coordinate-prime scheme chart with its base-compatible multivariable residue-field identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the refined quasi-finite affine-space chart with purely transcendental image residue field in the affine elementary-etale finite-over-smooth ingredient (Stacks 0520 and 052E); 052E affine translation and image residue-field identification (returned proof steps 7 and 8)",
+   "via": [
+    "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coordinate-prime-affine-chart-realization",
+  "worker": "stage1",
+  "summary": "Wrote a seven-step proof using existing DAG nodes only: principal opens and the S_0-factorization, finite type and quasi-finiteness with finite discrete scheme fibres, and an explicit coefficient-kernel and fraction-field argument for the coordinate prime. Checked exact project attachments, current blueprint, existing-node statements, source tags, logged Mathlib searches, and r=0, r=n, nonreduced rings and absent presentation hypotheses. Statement unchanged; zero new nodes.",
+  "blueprint": "Serves the inherited affine elementary-etale finite-over-smooth chart ingredient below lem-trf-local-term-locality through the recorded via chain; realizes the 052E affine translation and image residue-field identification (parent split steps 7 and 8). The latest blueprint is read; no change of the contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Uses only the generic implication quasi-finite at a point implies isolated in its scheme fibre, under the locally finite type hypothesis established in step 3; no chart-existence or dimension argument is substituted."
+   },
+   {
+    "node": "pqf-lem-qf-finitefibres",
+    "why": "Uses only the generic finite-fibres consequence of quasi-finiteness, after finite type and isolated fibres are established. This unit has no separate finite-fibres theorem."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Uses only localization prime correspondence and invariance of the marked base residue field; this is a generic algebra tool independent of the local-term argument."
+   },
+   {
+    "node": "lem-weil-pbc-spec-map-residue-field-naturality",
+    "why": "Uses only the generic affine point formula and compatibility of scheme residue-field maps with ring residue-field maps, so the final isomorphism is over the given base field."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "pqf-lem-qf-finitefibres",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-spec-map-residue-field-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-3b3de3f0c",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-3b3de3f0c (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the statement of every node in stmt_deps and proof_deps, and the parent lem-trf-refined-quasi-finite-polynomial-pure-transcendental (steps 1-4). I also read Stacks 052E, its first proof paragraph, and confirmed tags 052E and 0520. Shape: one commit with two files (item and report), 0 new nodes, proof_deps equal to the union of the step uses. Statement and stmt_deps are identical to live and side-live, both still unsplit, so nothing supersedes the delivery. There is no repair note and no SGA citation. Statement: P=(pR_f,x_{r+1},...,x_n) is prime, and C/P=(R/p)_f[x_1..x_r] has fraction field kappa(p)(u_1..u_r), so the residue-field claim is right. The parent's steps 1-3 supply every hypothesis. I tested r=n=0, r=0<n, r=n and nonreduced R and A. Steps: (1) the basic-open node (a)(b) with naturality (1): the unit rho(f)/1 in A_d forces Z_0 into p^{-1}(S_0). (2) Spec functoriality gives that q is over S_0. (3) The pointwise lft criterion on the whole affine pair, plus affine implies quasi-compact, gives finite type. (4) Clause 1 of pqf-def-quasifinite, the 01TH isolated-point node, clause 3, 02NH finite fibres and the fibre homeomorphism give finite discrete fibres. (5) The localization correspondence gives t=P, and naturality (2) for R->C gives the base map. (6) ker(R_f->K)=pR_f, and splitting a polynomial into its x_{>r} part and the rest gives ker e=P. (7) Clauses (d), (b), (c) of the prime-residue-field node make E an isomorphism over K. All steps check, and the elementary flags on 2, 6 and 7 are justified. I accept the four declared generic tool_uses (01TH, 02NH, localization residue iso, Spec residue naturality). The rg -L duplicate search found no existing node with the item's content; the siblings normalized-polynomial-prime-lift, finite-fibre-synchronized-chart-shrink and finite-smooth-preliminary-chart state other things. Mathlib searches cover all three kinds. Advisory only: the kappa_{R_f} detour in step 5 is not needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoordinatePrimeAffineChart",
+  "declaration": "AlgebraicGeometry.coordinatePrimeAffineChart_realization",
+  "declarations": [
+   "AlgebraicGeometry.coordinatePrimeChartMap",
+   "AlgebraicGeometry.coordinatePrimeChartBaseProjection",
+   "AlgebraicGeometry.coordinatePrimeAffineChart_realization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoordinatePrimeAffineChart.lean",
+  "statement": "theorem coordinatePrimeAffineChart_realization {R A : Type u} [CommRing R] [CommRing A] (ρ : R →+* A) (qA : PrimeSpectrum A) (f : R) (d : A) (hf : f ∉ (qA.comap ρ).asIdeal) (hd : d ∉ qA.asIdeal) (hunit : IsUnit (algebraMap A (Localization.Away d) (ρ f))) (n r : ℕ) (hrn : r ≤ n) (θ : MvPolynomial (ULift.{u} (Fin n)) (Localization.Away f) →+* Localization.Away d) (hθ : θ.comp MvPolynomial.C = IsLocalization.Away.lift f (S := Localization.Away f) (g := (algebraMap A (Localization.Away d)).comp ρ) hunit) (hft : θ.FiniteType) (hqf : ∀ Q : PrimeSpectrum (Localization.Away d), @Algebra.IsQuasiFiniteAtPrime _ _ _ _ θ.toAlgebra hft Q) (hprime : (qA.asIdeal.map (algebraMap A (Localization.Away d))).comap θ = (qA.comap ρ).asIdeal.map (MvPolynomial.C.comp (algebraMap R (Localization.Away f))) ⊔ Ideal.span {x | ∃ i : ULift.{u} (Fin n), r ≤ i.down.val ∧ x = MvPolynomial.X i}) : Spec.map (CommRingCat.ofHom ρ) qA ∈ PrimeSpectrum.basicOpen f ∧ qA ∈ PrimeSpectrum.basicOpen d ∧ (PrimeSpectrum.basicOpen d).carrier ⊆ (Spec.map (CommRingCat.ofHom ρ)) ⁻¹' (PrimeSpectrum.basicOpen f).carrier ∧ coordinatePrimeChartMap f d n θ ≫ (AffineSpace (ULift.{u} (Fin n)) (Spec (.of (Localization.Away f))) ↘ Spec (.of (Localization.Away f))) = (basicOpenIsoSpecAway (R := .of A) d).hom ≫ Spec.map (CommRingCat.ofHom (IsLocalization.Away.lift f (S := Localization.Away f) (g := (algebraMap A (Localization.Away d)).comp ρ) hunit)) ∧ LocallyOfFiniteType (coordinatePrimeChartMap f d n θ) ∧ QuasiCompact (coordinatePrimeChartMap f d n θ) ∧ (coordinatePrimeChartMap f d n θ).IsQuasiFinite ∧ (∀ t : AffineSpace (ULift.{u} (Fin n)) (Spec (.of (Localization.Away f))), Finite ((coordinatePrimeChartMap f d n θ).fiber t) ∧ DiscreteTopology ((coordinatePrimeChartMap f d n θ).fiber t)) ∧ ∀ z0 : Scheme.Opens.toScheme (X := Spec (.of A)) (PrimeSpectrum.basicOpen d), z0.val = qA → ((AffineSpace.SpecIso (ULift.{u} (Fin n)) (.of (Localization.Away f))).hom (coordinatePrimeChartMap f d n θ z0)).asIdeal = (qA.comap ρ).asIdeal.map (MvPolynomial.C.comp (algebraMap R (Localization.Away f))) ⊔ Ideal.span {x | ∃ i : ULift.{u} (Fin n), r ≤ i.down.val ∧ x = MvPolynomial.X i} ∧ coordinatePrimeChartBaseProjection f n (coordinatePrimeChartMap f d n θ z0) = Spec.map (CommRingCat.ofHom ρ) qA ∧ ∃ e : (AffineSpace (ULift.{u} (Fin n)) (Spec (.of (Localization.Away f)))).residueField (coordinatePrimeChartMap f d n θ z0) ≃+* FractionRing (MvPolynomial (Fin r) ((Spec (.of R)).residueField (coordinatePrimeChartBaseProjection f n (coordinatePrimeChartMap f d n θ z0)))), ∀ a : (Spec (.of R)).residueField (coordinatePrimeChartBaseProjection f n (coordinatePrimeChartMap f d n θ z0)), e (((coordinatePrimeChartBaseProjection f n).residueFieldMap (coordinatePrimeChartMap f d n θ z0)).hom a) = algebraMap _ _ a",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-261ce7690",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_dep records, the upstream IsQuasiFiniteAtPrime and IsQuasiFinite definitions, the module and the report. Hypotheses match exactly: hθ is the R_f-algebra condition via Away.lift; hqf uses θ.toAlgebra with hft; hprime is (pR_f, x_{r+1..n}) with 0-based r≤i. Conclusions match the node: D(f)/D(d) membership, D(d)⊆p⁻¹D(f), the over-S_0 equation, LocallyOfFiniteType∧QuasiCompact, IsQuasiFinite, Finite∧Discrete scheme fibres for all t, t=P, base point = p(z), and a residue iso to FractionRing(MvPolynomial (Fin r) κ) compatible with the actual residueFieldMap. Edge cases r=0, n=0, r=n and nonreduced rings are covered. Helpers have real data; the statement is verbatim; only `lean` differs from live; no name clashes. Plain imports are proof_dep modules (brief §3). Advisory: the RingHomProperties import is not a proof_dep module. Not recompiled per the 2026-10-21 rule; the worker's sandbox compile was clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261026T093032-L-3503350",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

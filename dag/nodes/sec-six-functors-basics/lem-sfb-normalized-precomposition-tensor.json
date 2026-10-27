@@ -1,0 +1,188 @@
+{
+ "id": "lem-sfb-normalized-precomposition-tensor",
+ "kind": "statement",
+ "title": "Canonical coherent tensor structure on a fixed normalized precomposition core",
+ "statement": "For arbitrary small sites, let p be an InternalPrecompositionMorphism with identity structural ring map and core an InternalModulePullback p satisfying InternalModulePullbackLaws [def-sfb-internal-restriction-module-tensor-data]. Then there exists P : InternalExactTensorPullback p whose core equals the supplied core. Thus only the canonical comparison, section pure-tensor equation, and symmetric monoidal coherence are constructed; scalar-extension objects, module adjunction, multiplication unitor, section identifications, and exactness are inputs and remain identical.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-restriction-module-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "The geometric inverse image preserves finite products and is a left adjoint. The balanced-tensor universal property and module sheafification therefore construct the canonical inverse-image tensor comparison. Identity scalar extension and core.unitor transport it to the specified pullback. Its generalized pure-tensor normalization is insertion of 1; the multiplication equations in InternalModulePullbackLaws reduce this insertion to the identity.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+   }
+  },
+  {
+   "text": "Precomposition and the section-identification equation in the laws evaluate the comparison to the identity on the presheaf pure tensors. The regular ring gives the unit map, which becomes the identity after multiplication. Bilinear uniqueness proves naturality, symmetry and the two unit equations. Trilinear uniqueness proves associativity because both composites send (x tensor y) tensor z to x tensor (y tensor z). These laws define a Monoidal structure with μ the inverse of the recorded comparison.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pd-sheaf-trilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+   }
+  },
+  {
+   "text": "Package the input core and its laws with the comparison, pure-tensor equation and coherence data just constructed. The resulting core is definitionally the original core.",
+   "uses": [
+    "def-sfb-internal-restriction-module-tensor-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pd-sheaf-trilinear-universal",
+  "def-sfb-internal-restriction-module-tensor-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized pullback of module sheaves is strong symmetric monoidal and identity on regular coefficient ring",
+   "results": "SheafOfModules.pullback and pullbackPushforwardAdjunction; PresheafOfModules.monoidalCategory; no match for the normalized precomposition core.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module pullback along geometric restriction of internal group sheaf actions is exact symmetric monoidal identity on pure tensors",
+   "results": "SheafOfModules.pullbackObjFreeIso; pullback_map_ιFree_comp_pullbackObjFreeIso_hom; conjugateEquiv_pullbackComp_inv; pullback_id_comp; LightCondensed.instSymmetricCategoryLightCondMod; Action.leftRegularTensorIso. These give ordinary fixed-group actions or site-continuous pullbacks, not the prescribed precomposition core and its normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "CanonicalRingedTensorComparison|tensorComparison|monoidal in lean/Sheaf/Paper/RingedTopoiCanonicalTensorPullback.lean and lean/Sheaf/CategoryTheory; Monoidal.*Pullback in Mathlib",
+   "results": "canonicalRingedTensorComparison_existsUnique and canonicalRingedTensorComparison_unit give normalized comparisons under an explicit scalar-extension map equation; neither packages the precomposition section equation, symmetric monoidal coherence and same-core equality required here.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use the existing constructions as indicated, with this action-site normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalRestrictionModuleTensor",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tags 03D7, 03CY, 03DA and Section 03EK; internal-action application of steps 1--6 of lem-sfb-internal-restriction-module-tensor. Canonical coherent tensor structure on a fixed normalized precomposition core.",
+   "via": [
+    "lem-sfb-internal-restriction-module-tensor",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NormalizedPrecompositionTensor",
+  "file": "lean/Sheaf/CategoryTheory/NormalizedPrecompositionTensor.lean",
+  "declaration": "CategoryTheory.InternalActionSite.normalizedPrecompositionTensor",
+  "statement": "theorem normalizedPrecompositionTensor {D : Type u} [SmallCategory D] {J : GrothendieckTopology C} {T : GrothendieckTopology D} {F : D ⥤ C} {R : Sheaf J CommRingCat.{u}} {hR : Presheaf.IsSheaf T (F.op ⋙ R.obj)} (p : InternalPrecompositionMorphism J T F R hR) (core : InternalModulePullback p) (laws : InternalModulePullbackLaws core) : ∃ P : InternalExactTensorPullback p, P.core = core",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sfb-normalized-precomposition-tensor",
+  "worker": "stage3",
+  "summary": "Strict subargument extracted from the assigned six-step proof, with a matching standalone Lean theorem and complete source proof.",
+  "blueprint": "Agent-written internal-action infrastructure for direct-image paragraph (3), as recorded by lem-sfb-internal-restriction-module-tensor.",
+  "tool_uses": [
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   },
+   {
+    "node": "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   },
+   {
+    "node": "lem-pd-sheaf-trilinear-universal",
+    "why": "Existing generic algebraic/module-sheafification universal property used for this strict part of the original accepted proof; it does not replace the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd0c6",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T081855-L-2094745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd0c6",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T081855-L-2094745",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); 7 extracted defs vs clone item (verbatim); 3 sorry statements vs their nodes and the item plan steps 1-6; Presentation.inverse_morphisms vs node lem-sfb-internal-action-site-presentation and its importers"
+ }
+}

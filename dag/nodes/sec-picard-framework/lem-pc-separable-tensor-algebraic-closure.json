@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Since $k'/k$ is finite, every $x\\in k'$ is algebraic over $k$ [def-weil-algebraic-element] (if $[k':k]=d$, the $d+1$ elements $1,x,\\dots,x^d$ are linearly dependent over $k$), so no element of $k'$ is algebraically independent over $k$ and the only transcendence basis of $k'/k$ is the empty family [def-weil-pbc-transcendence-basis]. As $k'$ is finitely generated over $k$ (by a $k$-basis), the separability hypothesis [def-weil-pbc-separable-field-extension] applied to $K'=k'$ therefore says exactly that $k'/k$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]. By [lem-weil-pbc-finite-separable-extension-primitive-element], choose $\\alpha\\in k'$ with $k'=k(\\alpha)$. Let $P\\in k[T]$ be the monic minimal polynomial of $\\alpha$. The separability hypothesis says that $P$ is separable [def-weil-pbc-separable-algebraic-extension], and the power-basis statement [lem-weil-pbc-simple-algebraic-extension-power-basis] gives $k'\\cong k[T]/(P)$ as $k$-algebras.",
+   "text": "Finite-dimensionality makes the top intermediate field algebraic [def-weil-algebraic-element], so its transcendence basis is empty [def-weil-pbc-transcendence-basis]. Apply the separability hypothesis [def-weil-pbc-separable-field-extension] to this finitely generated top field, replace the generated empty subfield by the bottom field, and transport along botEquiv and topEquiv. This gives Algebra.IsSeparable k K [def-weil-pbc-separable-algebraic-extension]. Mathlib Field.powerBasisOfFiniteOfSeparable packages the primitive element [lem-weil-pbc-finite-separable-extension-primitive-element] and its power basis [lem-weil-pbc-simple-algebraic-extension-power-basis]. For P = minpoly k pb.gen, AdjoinRoot.equiv' gives k[T]/(P) isomorphic to K.",
    "uses": [
     "def-weil-algebraic-element",
     "def-weil-pbc-transcendence-basis",
@@ -41,19 +41,16 @@
    }
   },
   {
-   "text": "Tensoring the presentation with $\\Omega$ and using [lem-weil-pbc-polynomial-scalar-extension] and [lem-weil-pbc-tensor-quotient-base-change] gives an $\\Omega$-algebra isomorphism $k'\\otimes_k\\Omega\\cong\\Omega[T]/(\\overline P)$, where $\\overline P$ is the image of $P$ in $\\Omega[T]$.",
-   "uses": [
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-tensor-quotient-base-change"
-   ],
-   "elementary": false,
+   "text": "Use Mathlib Algebra.TensorProduct.commRight to put the scalar field on the left. Tensor the inverse of the primitive-element presentation with Omega. Mathlib AdjoinRoot.tensorAlgEquiv gives Omega tensor_k AdjoinRoot P isomorphic to AdjoinRoot of the image of P over Omega tensor_k k. AdjoinRoot.mapAlgEquiv along Algebra.TensorProduct.rid identifies this with Omega[T]/(P.map (algebraMap k Omega)). The coefficient-map equality follows from Polynomial.map_map and the tensor unit formula.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Algebra, proof of Lemma Tag 030U, lines 10179-10181"
    }
   },
   {
-   "text": "The coefficient map $k[T]\\to\\Omega[T]$ carries a Bezout identity for the separable polynomial $P$ to one for $\\overline P$, so $\\overline P$ is separable. Apply [lem-pc-separable-polynomial-alg-closed-quotient-product] to obtain a product decomposition of $\\Omega[T]/(\\overline P)$ into one copy of $\\Omega$ for each root of $\\overline P$.",
+   "text": "Apply the declared quotient decomposition [lem-pc-separable-polynomial-alg-closed-quotient-product] to the monic minimal polynomial P, which is separable [def-pc-separable-polynomial] by Algebra.IsSeparable k K. This gives the product of Omega indexed by the roots of the mapped P. Only the isomorphism component of the declared theorem is needed.",
    "uses": [
     "def-pc-separable-polynomial",
     "lem-pc-separable-polynomial-alg-closed-quotient-product"
@@ -65,11 +62,9 @@
    }
   },
   {
-   "text": "Evaluation at a root $\\rho$ of $\\overline P$ is the same as a $k$-embedding $k'\\to\\Omega$ sending $\\alpha$ to $\\rho$, and every such embedding is obtained uniquely this way. Thus the product is indexed by $k$-embeddings $\\sigma:k'\\hookrightarrow_k\\Omega$. The root count in the new node gives $[k':k]$ factors (equivalently, use [lem-pc-finrank-field-base-change] and the power basis), proving the final assertion.",
+   "text": "Mathlib PowerBasis.liftEquiv identifies k-algebra embeddings K to Omega with the elements where aeval of P is zero. Polynomial.eval_map_algebraMap identifies this condition with evaluation of the mapped P. Reindex the product using AlgEquiv.piCongrLeft. For the degree assertion, Mathlib AlgHom.card (in PrimitiveElement, the same finite separable setting as [lem-weil-pbc-finite-separable-extension-primitive-element]) directly counts the embeddings as Module.finrank k K. Fintype.equivFinOfCardEq then supplies the equivalence with Fin (Module.finrank k K); unfold FieldExtension.degree using finite-dimensionality.",
    "uses": [
-    "lem-pc-separable-polynomial-alg-closed-quotient-product",
-    "lem-pc-finrank-field-base-change",
-    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+    "lem-weil-pbc-finite-separable-extension-primitive-element"
    ],
    "elementary": false,
    "source": {
@@ -79,22 +74,19 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-separable-field-extension",
-  "def-weil-pbc-transcendence-basis",
   "def-weil-algebraic-element",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-field-extension",
   "lem-weil-pbc-finite-separable-extension-primitive-element",
   "def-weil-pbc-separable-algebraic-extension",
   "lem-weil-pbc-simple-algebraic-extension-power-basis",
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-weil-pbc-tensor-quotient-base-change",
   "def-pc-separable-polynomial",
-  "lem-pc-separable-polynomial-alg-closed-quotient-product",
-  "lem-pc-finrank-field-base-change"
+  "lem-pc-separable-polynomial-alg-closed-quotient-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 00U3 and Lemma Tag 030U, with Fields Lemmas 030N and 09GU"
+  "place": "Tags 030U and 00U3, with fields.tex Tags 030N and 09GU; B4 realizes the same primitive-element and Chinese remainder argument using Mathlib AdjoinRoot.tensorAlgEquiv and AlgHom.card."
  },
  "mathlib_searches": [
   {
@@ -161,5 +153,26 @@
   "result": "pass",
   "note": "fields k K Ω, universes u v w independent; [Algebra k K] = def-pc-field-extension; [FiniteDimensional k K] = finite; hsep : Algebra.IsSeparableExtension k K = recorded dep decl (explicit Prop hypothesis); [Algebra k Ω][IsAlgClosed Ω] = alg. closed field containing k (node does not ask Ω algebraic over k, so IsAlgClosed not IsAlgClosure is right); Nonempty (K ⊗[k] Ω ≃ₐ[Ω] ((K →ₐ[k] Ω) → Ω)) with local rightAlgebra = Ω-algebra iso, one factor per k-embedding; ∃ n, FieldExtension.degree k K = n ∧ embeddings ≃ Fin n = [k':k] copies; docstring carries node proof steps 1-4; header, tag, no Sheaf. prefix, lines ≤ 100, imports used, proof sorry; Mathlib: only Algebra.FormallyEtale.equivPiOfIsSepClosed (etale, PrimeSpectrum-indexed) and AlgHom.card, no exact match, slopmaster2 grep none: existing false right"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261023T123337-L-1166750",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

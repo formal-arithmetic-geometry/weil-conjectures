@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-integral-scalar-tensor-good-comparison",
+ "kind": "statement",
+ "title": "Scalar tensor natural isomorphism on good representatives",
+ "statement": "The localized scalarTensorChain components on pairs of good complexes form a natural isomorphism between scalar extension of the source tensor representative functor and the target tensor representative functor applied to scalar-extended good complexes. Its hom component is exactly Q.map scalarTensorChain.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; categories.tex, Tag 04VK (fully faithful localization descent)."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "For existence, assemble NatIso.ofComponents of asIso of the fixed Q.map scalarTensorChain components. The lower quasi-isomorphism theorem supplies invertibility, and the proved chain naturality supplies naturality after Q. The hom equation is reflexivity. For arbitrary two isomorphisms satisfying this hom-component formula, Iso.ext and NatTrans.ext reduce equality to the component equations; transitivity proves it. Apply existsUnique_of_exists_of_unique to combine the independent existence and uniqueness proofs.",
+   "uses": [
+    "lem-pur-integral-scalar-tensor-chain-quasi-iso",
+    "lem-pur-integral-scalar-tensor-chain-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0941; categories.tex, Tag 04VK (fully faithful localization descent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-tensor-chain-quasi-iso",
+  "lem-pur-integral-scalar-tensor-chain-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; categories.tex, Tag 04VK (fully faithful localization descent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar extension commutes with completed tensor product via the normalized Roos comparison",
+   "results": "Algebraic adic completion/tensor results only; no specified sheaf Roos comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use existing generic functor-square descent and the project strict models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsLocalization\"",
+   "results": "Ring localization/tensor base-change results; no such representative-normalized natural isomorphism.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorChain|scalarOperationsOrdinary_tower",
+   "results": "No Mathlib hits from msearch. Local source has the existing scalarTensorOrdinary_existsUnique hole and its normalization, not a completed proof. The helper extracts its actual descent proof, as previous normalized-comparison helpers do.",
+   "date": "2026-10-27",
+   "verdict": "Compile-time extraction of a proved argument, with no new hole."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with derived completed tensor through a normalized Roos quasi-isomorphism",
+   "results": "Eight results: ModuleCat.ExtendScalars.obj′, algebraic adic-completion tensor/scalar lemmas, ring-localization scalar extension; none concerns the specified sheaf Roos maps or normalized representative descent.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement. Retain the stated strict-model comparison and generic functor-square localization descent."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "date": "2026-10-27",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final coefficient compatibility paragraph; scalar tensor representative comparison, extracted proved helper for the per-module compile-time limit.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarTensorGoodComparison",
+  "file": "lean/Sheaf/Paper/IntegralScalarTensorGoodComparison.lean",
+  "declaration": "WeilConjectures.integralScalarTensorGoodComparison",
+  "statement": "theorem integralScalarTensorGoodComparison :\n    ∃! c : t ⋙ S ⋙ DerivedCategory.Q ≅ (Functor.prod k k) ⋙ s ⋙ DerivedCategory.Q,\n      ∀ P, c.hom.app P =\n        DerivedCategory.Q.map (scalarTensorChain l E L ι W P.1.obj P.2.obj)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-27",
+  "note": "The theorem is fully proved. Existence assembles the specified chain maps; uniqueness compares arbitrary normalized isomorphisms by their hom components, avoiding expansion of the witness."
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T112413-L-1580371",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T112413-L-1580371",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

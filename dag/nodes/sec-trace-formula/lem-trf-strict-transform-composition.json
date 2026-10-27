@@ -15,83 +15,81 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal F=\\mathcal O_X$ and denote by $\\mathcal F'$ and $\\mathcal F''$ its successive strict transforms along $b_0$ and $b_1$, while $\\mathcal G$ denotes its strict transform along the specified composite blow-up $\\operatorname{Bl}_{\\mathcal K}(S)\\to S$. Let $p:X\\times_S S_1\\to X$ and $q:X\\times_S S_2\\to X\\times_S S_1$ be the base-change projections. By [def-trf-module-strict-transform], each module strict transform here is the quotient by the local sections vanishing off the inverse image of the exceptional subscheme, with the centre ideal retained. Applying [lem-trf-strict-transform-sheaf-kernel] first to $b_0$ and $\\mathcal F$, and then to $b_1$, the morphism $X\\times_SS_1\\to S_1$ and $\\mathcal F'$ (which is quasi-coherent by the first application), gives canonical surjections $p^*\\mathcal F\\twoheadrightarrow\\mathcal F'$ and $q^*\\mathcal F'\\twoheadrightarrow\\mathcal F''$, whose kernels are supported over the inverse images of $V(\\mathcal I)$ and $V(\\mathcal J)$ respectively. Right exactness of pullback combines them into a surjection $(p\\circ q)^*\\mathcal F\\twoheadrightarrow\\mathcal F''$; its kernel is supported on the union of those two inverse images.",
+   "text": "Put $A=X\\times_SS_1$, $B=X\\times_SS_2=A\\times_{S_1}S_2$, and let $M,N$ be the successive module transforms of $\\mathcal O_X$ [def-trf-module-strict-transform]. By [lem-trf-iterated-transform-quotient-support], they are quasi-coherent and the canonical quotient $\\alpha:\\mathcal O_B\\twoheadrightarrow N$ has kernel $H$ supported on $T_I\\cup T_J$, with the notation of that node. Let $G$ be the module transform for the specified composite centre; its canonical quotient is $\\beta:\\mathcal O_B\\twoheadrightarrow G$.",
    "uses": [
+    "lem-trf-iterated-transform-quotient-support",
+    "def-pc-fibre-product",
     "def-trf-module-strict-transform",
     "lem-trf-strict-transform-sheaf-kernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080I, proof of lemma-strict-transform-composition-blowups, opening construction through the paragraph identifying the support of the kernel."
+    "place": "Tag 080I, first proof paragraph."
    }
   },
   {
-   "text": "The same pullback $(p\\circ q)^*\\mathcal F$ has the canonical surjection to $\\mathcal G$. Since $V(\\mathcal K)=V(\\mathcal I)\\cup b_0(V(\\mathcal J))$, the support of the kernel of the first surjection is contained in the inverse image of $V(\\mathcal K)$ in $X\\times_S S_2$. The kernel description in [lem-trf-strict-transform-sheaf-kernel] for the composite blow-up therefore makes this surjection factor canonically as $(p\\circ q)^*\\mathcal F\\twoheadrightarrow\\mathcal F''\\longrightarrow\\mathcal G$.",
+   "text": "The support assumption gives $T=(b_0b_1f_2)^{-1}V(\\mathcal K)=T_I\\cup T_J$. For $s\\in S_2$ with $b_0b_1(s)\\notin V(\\mathcal I)$, the complement isomorphism [thm-nagata-global-blowup-complement] gives a unique lift to $S_1$, so $b_0b_1(s)\\in b_0(V(\\mathcal J))$ iff $b_1(s)\\in V(\\mathcal J)$. Over $V(\\mathcal I)$ both unions contain $s$. Pull the equality back along $f_2:B\\to S_2$.",
+   "uses": [
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, displayed equality of support unions."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-iterated-transform-exceptional-support] with $b=b_0$, $c=b_1$ and $\\mathcal F=\\mathcal O_X$. Its exceptional subset $f_2^{-1}b_1^{-1}(V(\\mathcal J)\\cup b_0^{-1}V(\\mathcal I))$ is $T_J\\cup T_I=T$. Thus $N$ has no nonzero local sections vanishing off $T$.",
+   "uses": [
+    "lem-trf-iterated-transform-exceptional-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, last three sentences of proof; Tag 080H comparison."
+   }
+  },
+  {
+   "text": "By [lem-trf-strict-transform-sheaf-kernel], $\\ker\\beta$ consists of all local sections of $\\mathcal O_B$ vanishing off $T$, so $H\\subseteq\\ker\\beta$. The quotient property gives $\\gamma:N\\to G$ with $\\beta=\\gamma\\alpha$. It is surjective on stalks since $\\beta$ is. Off $T$, $\\alpha$ and $\\beta$ are isomorphisms, so every local section of $\\ker\\gamma$ vanishes there. Step 3 makes it zero; thus $\\gamma$ is injective and $H=\\ker\\beta$. These are ideals since multiplication preserves vanishing off $T$.",
    "uses": [
     "lem-trf-strict-transform-sheaf-kernel"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080I, proof of lemma-strict-transform-composition-blowups, paragraph beginning 'By construction of \\mathcal{G} we see that we obtain a factorization'."
+    "place": "Tag 080I, equal-kernel factorization argument."
    }
   },
   {
-   "text": "By [thm-nagata-blowup-principalizes-center], the total transform $E=b_0^{-1}V(\\mathcal I)$ on $S_1$ is an effective Cartier divisor. The sheaf $\\mathcal F'$ has no nonzero local sections supported over the inverse image of $V(\\mathcal I)$ by [lem-trf-strict-transform-sheaf-kernel]. Apply [lem-trf-strict-transform-different-centers] on the base $S_1$, with center $V(\\mathcal J)$, Cartier divisor $E$, and the quasi-coherent sheaf $\\mathcal F'$ on $X\\times_SS_1$; the product ideal $\\mathcal J\\cdot\\mathcal I\\mathcal O_{S_1}$ is again of finite type, being locally generated by the products of finitely many generators of $\\mathcal J$ with one local generator of $\\mathcal I\\mathcal O_{S_1}$. The existing comparison [lemma-nagata-blowup-invertible-factor] identifies the blow-up of $S_1$ in the product center $V(\\mathcal J)\\cdot E$ with the blow-up in $V(\\mathcal J)$, so the different-centers lemma identifies $\\mathcal F''$ with the strict transform obtained by blowing up that product center. View $b_0$ as the $U$-admissible blow-up for $U=S\\setminus V(\\mathcal I)$. By [lemma-nagata-admissible-blowup-over-open], $b_0$ is an isomorphism over $U$; consequently the inverse image of $b_0(V(\\mathcal J))$ in $S_2$ is the union of the inverse image of $V(\\mathcal I)$ and the inverse image of $V(\\mathcal J)$. After pullback to $X\\times_S S_2$, the inverse image of the product center is therefore exactly that same union, hence is the inverse image of $V(\\mathcal K)$ by the assumed support equality.",
+   "text": "By [lem-trf-iterated-transform-structure-algebra], $N=k_{2,*}\\mathcal O_{X_2}$ as a quotient algebra of $\\mathcal O_B$, and $H$ is its defining ideal. The scheme clause of [lem-trf-strict-transform-sheaf-kernel] identifies $G$ with the structure-algebra quotient for the composite scheme transform. Step 4 gives equal defining ideals. On $\\operatorname{Spec}C\\subset B$, both closed subschemes are therefore $\\operatorname{Spec}(C/H)$ [def-weil-closed-immersion]; local identity maps agree on overlaps and glue. The resulting isomorphism commutes with inclusion into $B$, hence with both projections [def-pc-fibre-product], under the specified blow-up isomorphism.",
    "uses": [
-    "thm-nagata-blowup-principalizes-center",
+    "lem-trf-iterated-transform-structure-algebra",
     "lem-trf-strict-transform-sheaf-kernel",
-    "lem-trf-strict-transform-different-centers",
-    "lemma-nagata-blowup-invertible-factor",
-    "lemma-nagata-admissible-blowup-over-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080I proof, final paragraph, applying Tag 080H (lemma-strict-transform-different-centers) to the first strict transform and the effective Cartier total transform."
-   }
-  },
-  {
-   "text": "The strict transform for the product center has no nonzero local sections supported on its center by [lem-trf-strict-transform-sheaf-kernel]. Thus the kernel of the induced map $\\mathcal F''\\to\\mathcal G$ in the factorization of Step 2, which is supported on the inverse image of $V(\\mathcal K)$ because both sheaves agree away from that inverse image, is zero. The factorization is therefore an isomorphism. To pass from modules to schemes, let $i_1:X_1\\hookrightarrow X\\times_S S_1$ and $i_2:X_2\\hookrightarrow X_1\\times_{S_1}S_2$ be the closed immersions defining the successive scheme strict transforms. The $\\mathcal O_X$ clause of [lem-trf-strict-transform-sheaf-kernel] identifies the first module strict transform with $i_{1,*}\\mathcal O_{X_1}$. Pullback along the base-changed closed immersion commutes with this pushforward by the defining affine sheaf/module formula, and [lem-trf-strict-transform-affine-pushforward] applied to the affine map $i_1$ identifies the second module strict transform with $i_{2,*}\\mathcal O_{X_2}$. The same kernel clause identifies $\\mathcal G$ with the structure sheaf of the composite scheme strict transform. Hence the module isomorphism is induced by an isomorphism of the two closed subschemes in the common ambient fibre product; equivalently, they are the same smallest closed subscheme through which the preserved open factors by [lemma-nagata-strict-transform-closure-characterization].",
-   "uses": [
-    "lem-trf-strict-transform-sheaf-kernel",
-    "lem-trf-strict-transform-affine-pushforward",
-    "lemma-nagata-strict-transform-closure-characterization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080I proof of lemma-strict-transform-composition-blowups, conclusion after the support argument."
-   }
-  },
-  {
-   "text": "All identifications above are induced by the canonical pullback maps, the specified isomorphism $S_2\\cong\\operatorname{Bl}_{\\mathcal K}(S)$, and the universal property of the fibre products. Consequently the isomorphism is compatible with the closed inclusions into $X\\times_S S_2$ and with the projections to $X$ and $S_2$, under the associative fibre-product identification in [def-pc-fibre-product].",
-   "uses": [
+    "def-weil-closed-immersion",
     "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 080I, statement and proof: compatibility with the common ambient fibre product and the projections."
+    "place": "Tag 080I, scheme clause (2), via Tags 080D and 080G."
    }
   }
  ],
  "proof_deps": [
   "def-pc-fibre-product",
-  "lem-trf-strict-transform-affine-pushforward",
-  "lem-trf-strict-transform-different-centers",
+  "def-trf-module-strict-transform",
+  "def-weil-closed-immersion",
+  "lem-trf-iterated-transform-exceptional-support",
+  "lem-trf-iterated-transform-quotient-support",
+  "lem-trf-iterated-transform-structure-algebra",
   "lem-trf-strict-transform-sheaf-kernel",
-  "lemma-nagata-admissible-blowup-over-open",
-  "lemma-nagata-blowup-invertible-factor",
-  "lemma-nagata-strict-transform-closure-characterization",
-  "thm-nagata-blowup-principalizes-center",
-  "def-trf-module-strict-transform"
+  "thm-nagata-global-blowup-complement"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 080I, lemma-strict-transform-composition-blowups, scheme clause (2), proof using clause (1) and Tag 080H."
+  "place": "Tag 080I, lemma-strict-transform-composition-blowups, proof of (1) and its specialization to scheme clause (2); Tag 080H for the different-centers comparison and Tag 080G for affine pushforward."
  },
  "mathlib_searches": [
   {
@@ -120,6 +118,41 @@
    "query": "Successive strict transforms under two blowups equal strict transform under the composite blowup",
    "results": "IdealSheafData.glueDataObjHom_comp, map_comp, Scheme.comp_base; no strict-transform theorem",
    "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The successive strict transform of a scheme along two blowups is the strict transform along their composite blowup when the composite center has the union support",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.inclusion_comp, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, AlgebraicGeometry.Scheme.IdealSheafData.inclusion_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.map_comp, AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap_subschemeι_assoc, AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion_assoc; no result states strict-transform composition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|composition.*blowup",
+   "results": "0 hits in Mathlib/AlgebraicGeometry; no result states strict-transform composition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict transform of a scheme along composition of blowups agrees with iterated strict transform",
+   "results": "AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.Scheme.stalkMap_comp, AlgebraicGeometry.IsClosedImmersion.comp, AlgebraicGeometry.Scheme.Hom.stalkMap_comp, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme, AlgebraicGeometry.instSurjectiveCompScheme; no result states strict-transform composition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, strictTransform",
+   "results": "loogle: unknown identifier 'strictTransform'; no result states strict-transform composition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic closure under successive blow ups equals the strict transform under their composition",
+   "results": "AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc, AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion_assoc, AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk_comp, AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap_subschemeι_assoc, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι, AlgebraicGeometry.specTargetImageFactorization_comp_assoc; no result states strict-transform composition.",
+   "date": "2026-10-22",
    "verdict": "no match"
   }
  ],
@@ -150,33 +183,30 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-strict-transform-composition",
   "worker": "stage1",
-  "summary": "Audited the imported Tag 080I scheme strict-transform statement and kept its hypotheses and compatibility conclusion unchanged. The proof is split into the kernel/support description for one sheaf strict transform, the support-based factorization through the composite strict transform, principalization of the first center and Tag 080H's Cartier-center comparison, vanishing of the remaining supported kernel, and the final scheme-theoretic-closure identification. Created two statement-only supporting nodes for the one-blowup sheaf kernel description and Tag 080H; no Mathlib declaration states either result.",
-  "blueprint": "Realizes the finite-after-blowing-up supporting argument cited in lem-trf-local-term-locality through the Tag 080I clause (2) strict-transform composition step.",
+  "summary": "Q73 rebases the reader-approved returned split on the current DAG without changing the statement, statement dependencies or route. Retains two independent statement-only extracted arguments: the canonical iterated quotient/support construction and the structure-algebra realization of the successive scheme transform. The newly landed lem-trf-iterated-transform-exceptional-support now supplies the Cartier/union-support argument, so the retained duplicate union-torsion-free node is removed. All old arguments, citations, proof plans and logged searches are retained in the report/history; five assembly steps total less than 3000 characters. Re-read every current cited statement and Stacks 080D/G/H/I, checked support sets and quotient-algebra compatibility, and documented current same-tag distinctions.",
+  "blueprint": "Supports the finite-after-blowup argument in the existing ancestry of lem-trf-local-term-locality, via the Tag 080I scheme strict-transform composition input. It keeps the existing kernel/support and Cartier-center comparison route; no chapter or unit route is replaced.",
   "tool_uses": [
    {
-    "node": "thm-nagata-blowup-principalizes-center",
-    "why": "The route needs the standard fact that the first blow-up makes the center ideal an effective Cartier divisor; the trace-formula unit has no replacement for this blow-up tool."
-   },
-   {
-    "node": "lemma-nagata-strict-transform-closure-characterization",
-    "why": "The final passage from the structure-sheaf comparison to equality of scheme strict transforms uses the scheme-theoretic closure characterization, which is a generic strict-transform tool from the Nagata unit."
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic blow-up isomorphism off the center, used only for the elementary union-of-supports equality."
    }
   ]
  },
  "tool_uses": [
   "thm-nagata-blowup-principalizes-center",
-  "lemma-nagata-strict-transform-closure-characterization"
+  "lemma-nagata-strict-transform-closure-characterization",
+  "thm-nagata-global-blowup-complement"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q75-9a82f1eec",
-  "group": "Q75",
+  "reviewer": "NT-cc-Q73-b57ed79ba",
+  "group": "Q73",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-9a82f1eec (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks divisors.tex 080D–080I (lines 8748–9035, with the proofs of 080H and 080I), Properties 07ZP and Morphisms 01R8, and every cited node, including the current def-trf-module-strict-transform. The item statement is 080I(2) and is unchanged from the base; I compared it with the earlier delivery snapshots. Its finite-type hypotheses are the DAG's setting, and the citer lem-trf-finite-after-blowup supplies them. Nothing was weakened. Steps 1–5 check out. Step 2 needs only the inclusion of b_1^{-1}V(J) ∪ preimage of V(I) into the preimage of V(K). In step 3, principalizes-center makes E Cartier, F' has no sections supported on E (the hypothesis of 080H(2)), invertible-factor applies with L = I·O_{S_1}, and b_0 is U-admissible for U = S∖V(I), which is quasi-compact because I has finite type; so the preimage of V(K) is the preimage of V(J·L). Step 4: the remaining kernel vanishes, and the O_X clause plus affine-pushforward for i_1 identify the scheme transforms; the base-change sentence there is redundant, not a gap. I tested the item with J unit, I unit, J = I·O_{S_1} (K = I²) and V(J) disjoint from E. Both new nodes are true, statement-only, strictly smaller than the item and not duplicates (rg for 080D/G/H/I, strict transform and supported sections over the whole DAG). The four sec-nagata nodes are Lean-closed; the two declared tool_uses are accepted. Three repairable faults are fixed in fixes/dag/nodes/sec-trace-formula/. (1) B9: in both new nodes blueprint.from.via started with the sheaf-kernel node itself and omitted the item; it is now the item followed by the item's via, and from.place names exact 080I sentences. (2) different-centers: duplicate searches removed; the source place now says clause (2) only; the statement now fixes φ: Bl_{Z_D} ≅ Bl_Z from lemma-nagata-blowup-invertible-factor and says the kernels correspond under id×φ (stmt_deps gains that node and def-pc-fibre-product). (3) sheaf-kernel: the proof inside the O_X clause (B1) became a plain assertion, with 01R8 added to the source, and I added that the kernel and F^st are quasi-coherent (07ZP), which steps 1 and 3 need to reapply the node and 080H to F'. Item steps 1 and 3 now say F' is quasi-coherent, and step 3 notes that J·I·O_{S_1} has finite type; uses and proof_deps are unchanged. Fixes (1)–(2) and the B1 part of (3) reapply the earlier FIX (ab2414239874), which this delivery did not carry; I checked them again.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-b57ed79ba (reviewer sub-agent of L); spot-checked: PASS, no fixes; full review in review.md. This head re-delivers after the landing refusals of e0d5e3b3 and 17783785, both reader PASS. The new nodes quotient-support and structure-algebra are byte-identical to 1778's. The item differs only in step 3, proof_deps and split_report: the duplicate node union-torsion-free is dropped and step 3 now cites lem-trf-iterated-transform-exceptional-support, which NG landed on side-live (on this delivery's base, not yet on live). Not superseded: live and side-live still carry the base 5-step proof. The statement, stmt_deps, tool_uses and the reviewed/lean records are unchanged. Re-split note (released, at least 2 new nodes, assembly at most 3000 characters): 2 statement-only new nodes, 5 assembly steps of 2330 characters. Where the base steps went: step 1 to quotient-support; step 3 to exceptional-support, whose first clause is the Cartier/080H argument and whose second is the set identity; the scheme passage of step 4 to structure-algebra; the rest is glue. Source: I read Stacks divisors.tex 080I (statement and whole proof) and 080H(2). Step 3 checks: the subset f2^-1 b1^-1(V(J) ∪ b0^-1 V(I)) equals T_J ∪ T_I = T, its X_2 is B, and its hypotheses (finite-type I and J, quasi-coherent O_X) hold; the node is true via principalization, 080H with D = E, and the kernel lemma for J·L. The pointwise check of step 2 through the blow-up complement tool use, ker β = all T-supported sections in step 4, and the equal-ideal gluing of step 5 are all correct. Both new nodes are true and B1-B9 hold. Edge cases tested: I=O, J=O, I=0, X=V(I), nonreduced X. Maintainer note: lem-trf-strict-transform-comparison-epimorphism (NG, unsplit) takes the item's K hypotheses and contains quotient-support plus the step-4 factorization. Quotient-support is the K-free generalization (with the isomorphism off T_I ∪ T_J), not a duplicate, and dropping it would break the 2-node minimum. The future split of comparison-epimorphism should cite quotient-support so that α is not constructed twice. No SGA."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -203,5 +233,16 @@
   "by": "Q28",
   "date": "2026-10-18"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

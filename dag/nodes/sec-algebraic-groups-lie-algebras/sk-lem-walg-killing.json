@@ -1,0 +1,211 @@
+{
+ "id": "sk-lem-walg-killing",
+ "kind": "statement",
+ "title": "The Killing form when the radical vanishes",
+ "statement": "Let $L$ be any field of characteristic zero, and let $\\mathfrak l$ be a finite-dimensional Lie algebra over $L$ [def-wf-lie-algebra]. Its radical $\\operatorname{rad}\\mathfrak l$ is the sum of all its solvable ideals [def-wf-lie-radical-centre]. If $\\operatorname{rad}\\mathfrak l=0$, the Killing form\n$$B(x,y)=\\operatorname{tr}_{\\mathfrak l}(\\operatorname{ad}x\\circ\\operatorname{ad}y)$$\nis nondegenerate and $[\\mathfrak l,\\mathfrak l]=\\mathfrak l$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-algebraic-groups-lie-algebras/sk-lem-walg-killing/_section.md",
+  "place": "node sk-lem-walg-killing, order 3720"
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-lie-radical-centre"
+ ],
+ "proof": [
+  {
+   "text": "Write $K=\\{x:B(x,y)=0\\ (y\\in\\mathfrak l)\\}$. The identities of [lem-ag-killing-form-identities] show that $K$ is an ideal: $B([a,x],y)=-B(x,[a,y])=0$ for $x\\in K$. Restriction to this ideal gives $B_K(x,y)=B(x,y)=0$ for all $x,y\\in K$, in particular for $x\\in[K,K]$.",
+   "uses": [
+    "lem-ag-killing-form-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-lem-walg-killing/sk-lem-walg-killing.proof.md",
+    "place": "Proof, first paragraph: kernel ideal and equality of traces"
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $E$ of $L$ [def-weil-algebraic-closure] and put $H=E\\otimes_L K$, with bracket $[a\\otimes x,b\\otimes y]=ab\\otimes[x,y]$. A finite basis of $K$ gives a finite basis of $H$ over $E$, so the coefficient conventions of [det-d-linear] apply here. For $u=1\\otimes x$, the identity $\\operatorname{ad}_H(u)(a\\otimes z)=a\\otimes[x,z]$ identifies its adjoint with $1\\otimes\\operatorname{ad}_K(x)$; products agree by evaluation on pure tensors. The trace clause of [lem-ag-trace-solvability-scalar-extension] gives $B_H(1\\otimes x,1\\otimes y)=\\iota(B_K(x,y))=0$. Bilinearity gives $B_H=0$, since pure tensors span $H$. Let $\\rho:H\\to\\operatorname{End}_E(H)$ be the adjoint representation [def-wf-lie-algebra], and $A=\\rho(H)$. Lift brackets and linear combinations to get $[A,A]=\\rho([H,H])$. Thus $X\\in[A,A]$, $Y\\in A$ have lifts $u\\in[H,H]$, $v\\in H$, and $\\operatorname{tr}_H(XY)=B_H(u,v)=0$. Apply [sk-lem-walg-trace-criterion] over the algebraically closed characteristic-zero field $E$: $A$ is solvable.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "det-d-linear",
+    "lem-ag-trace-solvability-scalar-extension",
+    "def-wf-lie-algebra",
+    "sk-lem-walg-trace-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-lem-walg-killing/sk-lem-walg-killing.proof.md",
+    "place": "Proof, trace-criterion application to the adjoint image; scalar-extension repair E1(a), using Mathlib Trace.lean:378 and Solvable.lean:148,301"
+   }
+  },
+  {
+   "text": "Here $\\ker\\rho=Z(H)$, since $\\rho(u)=0$ means $[u,H]=0$. Choose $n$ with $D^nA=0$. Starting at $\\rho(H)=A$, preservation of brackets and linearity inductively give $\\rho(D^rH)\\subseteq D^rA$ [def-wf-lie-algebra]. Thus $D^nH\\subseteq Z(H)$ and $D^{n+1}H=0$, so $H$ is solvable. Descend by [lem-ag-trace-solvability-scalar-extension] to get $K$ solvable over $L$. As a solvable ideal, $K\\subseteq\\operatorname{rad}\\mathfrak l=0$ [def-wf-lie-radical-centre]. Thus $K=0$ and $B$ is nondegenerate.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "lem-ag-trace-solvability-scalar-extension",
+    "def-wf-lie-radical-centre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-lem-walg-killing/sk-lem-walg-killing.proof.md",
+    "place": "Proof, abelian kernel and vanishing of K; solvability descends from the scalar extension by Mathlib Solvable.lean:301"
+   }
+  },
+  {
+   "text": "Put $D=[\\mathfrak l,\\mathfrak l]$ and $D^\\perp=\\{z:B(d,z)=0\\ (d\\in D)\\}$. If $z\\in D^\\perp$, invariance [lem-ag-killing-form-identities] gives $B(x,[y,z])=B([x,y],z)=0$ for every $x,y$. Symmetry and nondegeneracy give $[y,z]=0$ for every $y$, so $z\\in Z(\\mathfrak l)$. Conversely, for central $z$ the same identity gives $B([x,y],z)=0$, hence vanishing on their linear span. Thus $D^\\perp=Z(\\mathfrak l)$.",
+   "uses": [
+    "lem-ag-killing-form-identities",
+    "def-wf-lie-radical-centre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-lem-walg-killing/sk-lem-walg-killing.proof.md",
+    "place": "Proof, displayed equality of the orthogonal complement and the centre"
+   }
+  },
+  {
+   "text": "The centre is an ideal by the Jacobi identity and its brackets vanish, so its first derived term is zero [def-wf-lie-algebra]. It is therefore solvable and lies in the zero radical [def-wf-lie-radical-centre]. Hence $D^\\perp=0$. Apply [lem-ag-bilinear-double-orthogonal] to the symmetric, now nondegenerate $B$ on finite-dimensional $\\mathfrak l$: $D=(D^\\perp)^\\perp=0^\\perp=\\mathfrak l$, since $B(0,x)=0$ for every $x$.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "def-wf-lie-radical-centre",
+    "lem-ag-bilinear-double-orthogonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-lem-walg-killing/sk-lem-walg-killing.proof.md",
+    "place": "Proof, last sentence: centre vanishes and the derived algebra is the whole algebra"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-ag-killing-form-identities",
+  "def-weil-algebraic-closure",
+  "det-d-linear",
+  "lem-ag-trace-solvability-scalar-extension",
+  "def-wf-lie-algebra",
+  "sk-lem-walg-trace-criterion",
+  "def-wf-lie-radical-centre",
+  "lem-ag-bilinear-double-orthogonal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-lem-walg-killing/sk-lem-walg-killing.proof.md",
+  "place": "Entire unit proof, expanded with scalar-extension/descent repair E1(a) and the elementary derived-series argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "killingForm|IsSemisimple|radical_eq_bot|IsKilling",
+   "results": "25 hit(s): Mathlib/Algebra/Lie/Derivation/Killing.lean; Mathlib/Algebra/Lie/Derivation/Killing.lean; Mathlib/Algebra/Lie/Derivation/Killing.lean; Mathlib/Algebra/Lie/Derivation/Killing.lean; Mathlib/Algebra/Lie/Derivation/Killing.lean; Mathlib/Algebra/Lie/TraceForm.lean; Mathlib/Algebra/Lie/TraceForm.lean; Mathlib/Algebra/Lie/TraceForm.lean",
+   "date": "2026-10-24",
+   "verdict": "partial matches only: Killing nondegeneracy is present, but no declaration found for the whole item including perfectness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional Lie algebra over a field of characteristic zero whose solvable radical is zero has nondegenerate Killing form and equals its derived algebra",
+   "results": "8 hit(s): LieAlgebra.IsKilling.instHasTrivialRadical; LieAlgebra.IsKilling.instSemisimple; RootPairing.GeckConstruction.instHasTrivialRadical; LieAlgebra.IsSemisimple; LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful; LieAlgebra.HasTrivialRadical; LieAlgebra.IsKilling.ideal_eq_bot_of_isLieAbelian; LieAlgebra.IsSimple",
+   "date": "2026-10-24",
+   "verdict": "partial matches only: Killing nondegeneracy is present, but no declaration found for the whole item including perfectness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional semisimple Lie algebra over a characteristic zero field has nondegenerate Killing form and is perfect",
+   "results": "8 hit(s): LieAlgebra.IsKilling; LieAlgebra.IsKilling.instSemisimple; LieAlgebra.IsKilling.killingForm_nondegenerate; LieAlgebra.IsSemisimple; LieAlgebra.IsSemisimple.instHasTrivialRadical; killingForm; LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate; LieAlgebra.IsKilling.ker_killingForm_eq_bot",
+   "date": "2026-10-24",
+   "verdict": "partial matches only: Killing nondegeneracy is present, but no declaration found for the whole item including perfectness"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.HasTrivialRadical, LieAlgebra.IsKilling",
+   "results": "3 hit(s): LieAlgebra.IsKilling.instHasTrivialRadical; LieAlgebra.HasTrivialRadical.instIsKilling; LieAlgebra.hasTrivialRadical_iff_isKilling",
+   "date": "2026-10-24",
+   "verdict": "partial matches only: Killing nondegeneracy is present, but no declaration found for the whole item including perfectness"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|isPerfect|derivedSeries.*top|top.*derivedSeries|lie_eq_top",
+   "results": "8 hit(s): Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Nilpotent.lean; Mathlib/Algebra/Lie/LieTheorem.lean; Mathlib/Algebra/Lie/LieTheorem.lean",
+   "date": "2026-10-24",
+   "verdict": "partial matches only: Killing nondegeneracy is present, but no declaration found for the whole item including perfectness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple Lie algebra is perfect: its derived Lie ideal is the whole Lie algebra",
+   "results": "8 hit(s): LieAlgebra.IsSemisimple.instHasTrivialRadical; LieAlgebra.IsSemisimple; LieAlgebra.IsKilling.instSemisimple; LieAlgebra.IsSimple.instIsSemisimple; LieAlgebra.IsSemisimple.non_abelian_of_isAtom; LieAlgebra.IsKilling.instHasTrivialRadical; LieAlgebra.IsSemisimple.sSup_atoms_eq_top; LieAlgebra.HasTrivialRadical",
+   "date": "2026-10-24",
+   "verdict": "partial matches only: Killing nondegeneracy is present, but no declaration found for the whole item including perfectness"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsKilling|isSolvable_of_killingForm_apply_lie_eq_zero",
+   "results": "5 hits in Mathlib/Algebra/Lie/CartanCriterion.lean; read LieIdeal.isSolvable_of_killingForm_apply_lie_eq_zero:207-232, LieAlgebra.isSolvable_of_killingForm_apply_lie_eq_zero:239-245 and LieAlgebra.HasTrivialRadical.instIsKilling:258-259. The last gives Killing nondegeneracy, not the perfectness clause.",
+   "date": "2026-10-24",
+   "verdict": "partial match: nondegeneracy only; retain unit trace-criterion route for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "public instance HasTrivialRadical.instIsKilling|public theorem LieIdeal.isSolvable_of_killingForm_apply_lie_eq_zero",
+   "results": "2 hit(s): 207; 258",
+   "date": "2026-10-24",
+   "verdict": "partial match: confirms Mathlib Cartan results for nondegeneracy, not the whole item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 3720,
+ "blueprint_uses": [
+  "sk-i-cartier",
+  "sk-lem-walg-trace-criterion"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "sk-lem-walg-killing",
+  "from": null,
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-lem-walg-killing",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "sk-lem-walg-killing",
+  "worker": "stage1",
+  "summary": "Repair E1(a): broaden the statement to every characteristic-zero field, preserving the Q-citer; apply the unit trace criterion over an algebraic closure, prove the extended kernel solvable by the same abelian-kernel argument, and descend solvability via one additional Mathlib leaf. Retain the two previously reviewed leaves and the orthogonal-complement proof of perfectness. Checked every direct citer.",
+  "blueprint": "Steps 1-3 realize the kernel/trace-criterion/abelian-kernel paragraph, now extended to arbitrary characteristic-zero fields by scalar extension and descent as requested in repair E1(a). The sk-i-cartier coefficient conventions, through det-d-linear, apply only to the temporary E-vector spaces in step 2. Steps 4-5 realize the orthogonal-centre identity and the last sentence unchanged.",
+  "statement_scope": "STATEMENT-DISPUTED: the previous delivery imposed algebraic closedness on L, breaking the existing Q-citer. Repair E1(a) explicitly authorizes the true stronger theorem over any characteristic-zero field. Finite dimension and a field are now explicit; no coefficient convention restricts L to an algebraically closed field."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-6c9937640",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-6c9937640 (reviewer sub-agent of L); spot-checked: This re-delivery implements repair (a) from the 891d RETURN. The item now holds for every characteristic-zero field, which is stronger than both the field-free unit statement and the appendix's 'algebraically closed, char 0' convention, and is true. The only real citer, lem-sfb-split-semisimple-root-decomposition (step 1, over Q), is therefore satisfied again, so the E1 is repaired; the other sfb mentions are textual only. Steps checked: (1) invariance makes K=ker B an ideal, and ideal restriction gives B_K=0. (2) Over an algebraic closure E (def-weil-algebraic-closure; char 0 is preserved), the det-d-linear conventions hold for H=E⊗K. ad_H(1⊗x)=(ad_K x)_E, and the trace clause gives B_H(1⊗x,1⊗y)=ι(B_K)=0, so B_H≡0 by bilinearity. [ρH,ρH]=ρ[H,H], so sk-lem-walg-trace-criterion makes A=ρ(H) solvable. (3) ker ρ=Z(H) and ρ(D^rH)⊆D^rA give D^{n+1}H=0; the descent clause makes K solvable, so K⊆rad=0. (4) D^⊥=Z(l) by invariance, symmetry and nondegeneracy. (5) The centre is solvable, hence 0, and the double-orthogonal leaf gives D=0^⊥=l. The steps cover the whole unit paragraph; the only addition is scalar extension and descent. New leaf lem-ag-trace-solvability-scalar-extension, read against Mathlib: LinearMap.trace_baseChange at Trace.lean:378-380; derivedSeries_baseChange at Solvable.lean:148-150, whose base change is the image in E⊗g as the node states; isSolvable_tensorProduct_iff at Solvable.lean:301-310. FaithfullyFlat k E comes from the anonymous Nontrivial+Free instance at FaithfullyFlat/Basic.lean:209-210. No finite degree of E is needed. The leaf is not a duplicate: DAG searches find only group-theoretic solvability and categorical trace nodes. It is not a clause of the item. The killing-form-identities and bilinear-double-orthogonal leaves are byte-identical to the versions already checked in 891d (TraceForm.lean:61, 72, 415; Orthogonal.lean:292). Edge cases checked: the zero algebra, abelian algebras, sl_2(Q)⊗Q̄, and infinite E/k. No SGA, no off-unit theorem, no tool_uses. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.KillingFormOfTrivialRadical",
+  "declaration": "LieAlgebra.killingForm_nondegenerate_and_derived_eq_top_of_radical_eq_bot",
+  "file": "lean/Sheaf/Algebra/Lie/KillingFormOfTrivialRadical.lean",
+  "statement": "theorem killingForm_nondegenerate_and_derived_eq_top_of_radical_eq_bot (k : Type u) (g : Type v) [Field k] [CharZero k] [LieRing g] [LieAlgebra k g] [FiniteDimensional k g] (hrad : radical k g = ⊥) : (killingForm k g).Nondegenerate ∧ derivedSeries k g 1 = ⊤",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17568e479",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Lean statement matches node sk-lem-walg-killing clause by clause (Field k, CharZero, LieRing/LieAlgebra, FiniteDimensional, radical k g = ⊥ ⇒ (killingForm k g).Nondegenerate ∧ derivedSeries k g 1 = ⊤); no extra assumptions, universes u v bound and independent; lean.statement verbatim equal to the file; only the node's lean field changed; no H4 duplicate (Mathlib has nondegeneracy only, project center_sup_derivedSeries_eq_top differs); sorry-only proof, docstrings carry source place, blueprint tag and 5 proof steps; edge cases (zero algebra, abelian, Q citer) fine. Advisory: Second reading section is the worker's self re-check."
+ }
+}

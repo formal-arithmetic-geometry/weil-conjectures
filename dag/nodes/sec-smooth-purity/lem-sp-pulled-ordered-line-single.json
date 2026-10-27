@@ -1,0 +1,160 @@
+{
+ "id": "lem-sp-pulled-ordered-line-single",
+ "kind": "statement",
+ "title": "Exact pullback of an ordered tower line has a shifted single presentation",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, the section-normalized tower base $b$ and its ordinary operations $o$ [def-sp-tower-shriek-data], and coordinates $q$ with abelian tower data [lem-sp-coefficient-tower-shriek-calculus, det-sp-coefficient-towers-abelian]. Let $u:X'\\to X$ be a scheme morphism with $\\ell$ invertible in $\\Gamma(X,\\mathcal O_X)$. Let $w$ be strict positive Tate sheaf towers with normalized finite-level comparisons [lem-sp-tower-chart-admissibility]. Let $d\\in\\mathbf N$ and $M\\in D(\\operatorname{Tow}(X,\\mathcal O_E))$, using ordinary unnormalized coefficient towers and their ordinary derived category [sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers]. Suppose the specified section-preserving derived realization of $M$ is isomorphic to the ordered tensor of $d$ copies of the first Tate factor shifted by two, with the coefficient unit at $d=0$ [det-sp-tower-gamma]. Then there exists a sheaf tower $F\\in\\operatorname{Tow}(X',\\mathcal O_E)$ and an actual derived isomorphism\n$$u^*M\\simeq F[0][2d].$$\nHere $u^*$ is the specified exact ordinary pullback transported through the realization equivalences. No orientation, exceptional comparison or normalization of the input tower is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Paragraph (1), removing [2d] before testing maps at every level; original transport node proof step 5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "det-sp-coefficient-towers-abelian",
+  "lem-sp-tower-chart-admissibility",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-gamma"
+ ],
+ "proof": [
+  {
+   "text": "Invertibility of ell makes every finite-level positive Tate factor locally free of rank one. The ordinary tensor and exactness of strict systems are levelwise, so each factor and every finite ordered ordinary tensor of factors is flat.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "def-pur-system-level-left-extension-basic",
+    "lem-sp-tower-chart-admissibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At d=0 the ordered line is the coefficient unit in degree zero. At a successor the derived tensor of the preceding shifted single and the single of the flat first Tate factor shifted by two is the single of their ordinary tensor shifted by 2d+2. The bounded-flat K-flat computation and the tensor shift comparison give this actual derived isomorphism by induction, with the order unchanged.",
+   "uses": [
+    "lem-pc-kflat-closure",
+    "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "def-sp-tower-shriek-data",
+    "det-sp-tower-gamma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified geometric pullback is induced by exact ordinary inverse image. The realization equivalences are induced by exact equivalences of sheaf categories. Their derived functors and inverse equivalences preserve singles and commute with shifts. Apply these comparisons to the isomorphism from the previous step and to the supplied realization isomorphism, obtaining the asserted original-coordinate presentation.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-sp-tower-shriek-data",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-twist-line",
+  "def-pur-system-level-left-extension-basic",
+  "lem-sp-tower-chart-admissibility",
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-cochain-pullback-tensor-shift",
+  "def-sp-tower-shriek-data",
+  "det-sp-tower-gamma",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sp-coefficient-tower-shriek-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Paragraph (1), removing [2d] before testing maps at every level; original transport node proof step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An ordered derived tensor of d rank one sheaves shifted by two is a single sheaf shifted by 2d and exact inverse image preserves this property",
+   "results": "8 hits, including mapDerivedCategory commutation with shift and DerivedCategory.singleFunctor. Ingredients only.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived tensor power of shifted locally free Tate line sheaves remains a shifted single sheaf after exact pullback of coefficient towers",
+   "results": "8 hits, mostly LightCondensed monoidal instances and SheafOfModules.pullbackObjFreeIso; no ordered-line presentation.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*Scalar.*Pullback|orderedLine.*single|single.*orderedLine",
+   "results": "0 Mathlib hits. Local library reads found FiniteTateBalancedScalarPullback for constant and first-root lines; not the ordered-power pro-etale square.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrientationScalarTowerTransport",
+  "group": "N2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Paragraph (1), removing [2d] before testing maps at every level; original transport node proof step 5",
+   "via": [
+    "lem-sp-orientation-scalar-tower-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PulledOrderedLineSingle",
+  "file": "lean/Sheaf/Paper/PulledOrderedLineSingle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.pulled_ordered_line_single",
+  "statement": "theorem pulled_ordered_line_single\n    (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]\n    [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]\n    (b : SpTowerShriek.Base ell E) (o : SpTowerShriek.Operations ell E b)\n    (q : SpTowerCalculus.Coordinates ell E b)\n    {X X' : Scheme.{u}} (u' : X' ⟶ X) (_hX : IsUnit (ell : Γ(X, ⊤)))\n    (w : SpChartAdmissibility.Twists ell E X) (d : ℕ)\n    (M : spDerivedCoefficientTowers ell E X (q.abelian X))\n    (_line : (SpTowerCalculus.realization ell E b X (q.abelian X)).functor.obj M ≅\n      SpTowerGamma.orderedLine ell E b X w d) :\n    ∃ F : spCoefficientTowers ell E X',\n      Nonempty ((SpTowerCalculus.etalePullback ell E b o q u').obj M ≅\n        ((@DerivedCategory.singleFunctor _ _ _ (q.abelian X').hasDerived 0).obj F)⟦\n          2 * (d : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sp-pulled-ordered-line-single",
+  "worker": "stage3",
+  "summary": "Isolated a strictly smaller step of the orientation transport argument. The original item contains the complete combining proof.",
+  "blueprint": "Paragraph (1), removing [2d] before testing maps at every level; original transport node proof step 5",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "General normalized coefficient, tensor, exact-derived or site-comparison tool needed for this object/comparison calculation; no orientation or exceptional-mate conclusion is taken from another unit."
+   },
+   {
+    "node": "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "why": "General normalized coefficient, tensor, exact-derived or site-comparison tool needed for this object/comparison calculation; no orientation or exceptional-mate conclusion is taken from another unit."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "General normalized coefficient, tensor, exact-derived or site-comparison tool needed for this object/comparison calculation; no orientation or exceptional-mate conclusion is taken from another unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T023556-L-582738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T023556-L-582738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

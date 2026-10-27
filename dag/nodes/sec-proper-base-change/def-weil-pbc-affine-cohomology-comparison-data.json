@@ -1,0 +1,160 @@
+{
+ "id": "def-weil-pbc-affine-cohomology-comparison-data",
+ "kind": "definition",
+ "title": "Canonical coherent affine comparison and tensor restriction data",
+ "statement": "For a quasi-compact separated morphism of schemes [def-pc-scheme, def-weil-pbc-scheme-conventions], define the inverse uniquely normalized coherent comparison [lem-weil-pbc-qcoherent-normalized-comparison-exists], the canonical tensor-composition module-cohomology restriction [def-weil-pbc-module-cohomology-fmap], its specialization on affine etale objects, and evaluation of an explicit Module action. The coefficient and higher image are those of [def-weil-pbc-coherent-higher-image-classes]. These are exactly the existing affineRealizationComparison, affineRealizationRestriction, affineRealizationAffineComparison, affineRealizationSmul definitions, with unchanged bodies. Also bundle the actual raw and ordinary chart groups, the existing raw restriction, and the composite raw-evaluation/coherent-comparison equivalence. These are constructed from the same maps, with an explicit evaluation formula; they introduce no choice or changed normalization. The inverse comparison is natural in coefficient morphisms, and its affine specialization is unchanged by the choice of proofs of compactness and separatedness.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q8 and 03P2, canonical comparison and restriction interfaces."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-qcoherent-normalized-comparison-exists",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-coherent-higher-image-classes"
+ ],
+ "proof": [
+  {
+   "text": "For the canonical tensor-composition restriction, name the underlying arrow of the pulled-back chart morphism with source and target explicitly the fibre products. Apply the constructed generic tensor-composite cohomology restriction to this arrow, the two projections, their compatibility and the coefficient module. Its defining equation is exactly the original chosen tensor adjunction applied to the tensor-composition coefficient morphism followed by module cohomology. The equality proof is named before specializing coefficient objects, preventing expensive conversion through structural-unit sheaf data. No map or normalization changes.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-tensor-composite-cohomology-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For coefficient naturality, apply the forward uniquely normalized comparison, use its coefficient naturality, and cancel the inverse pairs. The affine specialization formula follows by unfolding its construction and proof irrelevance. The raw composite evaluation formula follows from the constructed raw equivalence.",
+   "uses": [
+    "lem-weil-pbc-qcoherent-normalized-comparison-exists",
+    "def-weil-pbc-coherent-higher-image-classes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcoherent-normalized-comparison-exists",
+  "def-weil-pbc-coherent-higher-image-classes",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-tensor-composite-cohomology-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03P2 and 03Q8; evaluation and inverse-naturality API of the recorded constructions. The restriction construction fixes its fibre-product schemes before applying the adjunction and cohomology functor, with the same underlying arrow and normalization. The generic tensor-composite restriction packages the same construction and has a proved defining equation."
+ },
+ "status": "split",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse comparison between coherent etale cohomology and ordinary module cohomology with tensor pullback restriction and explicit module scalar action",
+   "results": "8 hits: seven general sheaf-of-modules free/pullback isomorphisms and groupCohomology.isoShortComplexH1_inv. None is the fixed coherent etale comparison or module-cohomology restriction.",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing project definitions verbatim; no Mathlib replacement for this interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, CategoryTheory.Sheaf.H",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "No matching interface."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyFMap|normalized.*[Cc]omparison|[Cc]omparison.*etale",
+   "results": "0 Mathlib hits. The existing project definitions were read and copied with identical signatures and bodies.",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison between coherent etale cohomology and ordinary module cohomology, natural in coefficient morphisms, and its restriction along affine etale charts",
+   "results": "Eight hits including PresheafOfModules.sheafificationCompToSheaf, Scheme.Modules.restrictFunctorCongr, and groupCohomology; no coherent etale/ordinary comparison or normalized chart restriction.",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib construction; retain the existing project definitions verbatim."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCohomologyEtaleModuleRealization",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "03Q8 affine-cohomology realization, canonical comparison and restriction definitions.",
+   "via": [
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCohomologyComparisonData",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCohomologyComparisonData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineRealizationComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationComparison",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRestriction",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationAffineComparison",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationSmul",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRawGroup",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationOrdinaryGroup",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRawRestriction",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRawCoherentEquiv",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRawCoherentEquiv_apply",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationComparison_natural",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationAffineComparison_eq"
+  ],
+  "statement": "def affineRealizationComparison (Y : Scheme.{u}) [CompactSpace Y] [Y.IsSeparated]\n    (M : Y.Modules) [M.IsQuasicoherent] (q : ℕ) :\n    Sheaf.H (liftedCoherentEtaleSheaf M) q ≃+\n      (RingedSpace.moduleCohomology Y.toRingedSpace q).obj M",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-674ca",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261022T044031-L-1213921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d01b4",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T082110-L-2132403",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (identical) and its node; affineRealizationRestriction new body vs old (same map via the proved tensorCompositeCohomologyRestriction_eq) and the change record; new node lean.statement vs TensorCompositeCohomologyRestriction; #print axioms clean; SLOW importer AffineCohomologyEtaleModuleRealization timed against the published build at the same time (88.5 s published vs 73.6 s delivered: load, not this delivery)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

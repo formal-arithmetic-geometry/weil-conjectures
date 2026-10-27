@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-internal-scalar-tensor-pull-models",
+ "kind": "definition",
+ "title": "Common tensor model for normalized internal scalar pullback",
+ "statement": "Let a:Λ→Λ′ be a morphism of commutative condensed rings and f:X→Y a scheme morphism. Use D,V,L,B₀,B and their specified computation counits from [def-sfb-internal-derived-scalar-comparisons] and the exact restriction/pullback comparison [def-sfb-derived-comap-upper-star-iso]. Let b:V_Y L_R→L_S V_X be that exact comparison conjugated by the exact-left-derived identifications. Let v_T:V_T(1_S)≅B_T be restriction of the regular single complex followed by the fixed localization/single comparisons. Put c=L_R(v_Y inverse), then b at 1_S, then V_X of the geometric unit comparison, then v_X. For P in the homotopy category define T_P from L_R(Qh P) tensor B_X by tensoring c inverse and then the target comparison of [new-integral-residue-tensor-model], using F=ordinary pullback, G=L_R and its exact counit. Define C_P by tensorModelMapWith for the same F,G,counit, B₀,Y, H=D_Y V_Y and the canonical restricted scalar tensorPresentationDerivedCounit. All maps are concrete composites; neither flatness of a nor a choice from an existence theorem is used.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-derived-comap-upper-star-iso",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "Construct b,v,c by the indicated exact localization, restriction, single-complex and unit isomorphisms. Specialize tensorModelTargetWith and tensorModelMapWith to define T_P and C_P. The scalar counit has the required type by unfolding D.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "def-sfb-derived-comap-upper-star-iso",
+    "new-integral-residue-tensor-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-derived-comap-upper-star-iso",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W2",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.",
+  "note": "Explicit counit-model decomposition of the existing normalization argument, below the unchanged unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The counit of a derived tensor product computes extension of scalars and is compatible with the tensor comparison for exact pullback",
+   "date": "2026-10-26",
+   "results": "8 hits, including CategoryTheory.Adjunction.derivedε, ModuleCat.ExtendRestrictScalarsAdj.counit_app and coalgebra tensor counit declarations.",
+   "verdict": "No internal module tensor model square. Use the existing project tensor-model API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedNatTrans\"",
+   "date": "2026-10-26",
+   "results": "8 hits for leftDerivedNatTrans and its id, fac, app, comp and reassociated equations.",
+   "verdict": "Generic derived uniqueness ingredients only; no normalized tensor/pullback model square."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorModelRoute_fac|tensorModelTarget_isIso|scalar.*pull.*route.*model",
+   "date": "2026-10-26",
+   "results": "0 hits in Mathlib. Local rg found the generic Functor.tensorModelRoute_fac and tensorModelTarget_isIso in IntegralResidueTensorModel, plus residue-specialized route computations.",
+   "verdict": "Reuse the common model construction. The scalar route for arbitrary normalized comparisons still needs the counit calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarTensorPullNormalization",
+  "date": "2026-10-26",
+  "group": "W2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Proof paragraphs (1) and (3), identifying the canonical scalar reduction and tensor pullback maps.",
+   "via": [
+    "lem-sfb-internal-scalar-tensor-pull-normalization"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalScalarTensorPullModels",
+  "file": "lean/Sheaf/Paper/InternalScalarTensorPullModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.scalarTensorPullModelTarget",
+  "statement": "def scalarTensorPullModelTarget (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (P : HomotopyCategory (Modules Λ Y) (.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarTensorRestrictPullIso",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarTensorRegularRestriction",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarTensorRegularPullIso",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarTensorPullModelTarget",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarTensorPullModelMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T003052-L-144301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T003052-L-144301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

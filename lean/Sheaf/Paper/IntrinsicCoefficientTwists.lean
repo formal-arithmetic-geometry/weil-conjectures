@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CoefficientTwistsDetailed
 public import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 
 /-! # Tate twists in the intrinsic common-stage category
 
@@ -38,7 +39,11 @@ its completed line, so the canonical derived-completeness map is invertible.
 These are precisely the two conjuncts of sfIntegralConstructible. -/
 theorem intrinsicIntegralCoefficientTwist_mem (m : ℤ) :
     sfIntegralConstructible l E W (integralCoefficientTwist D l hl E W m) := by
-  sorry
+  obtain ⟨hc, a, b, hab, hr⟩ :=
+    integralCoefficientTwist_constructible D l hl E W m
+  refine ⟨(sfDerivedComplete_iff_legacy l E W D hl _).mpr hc, a, b, hab, ?_⟩
+  intro n
+  exact ⟨(hr n).1, (hr n).2⟩
 
 /-- The existing completed root line in the intrinsic integral full subcategory.
 Source: blueprint main-20261015, coefficient twists, signed powers

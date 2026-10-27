@@ -1,0 +1,356 @@
+{
+ "id": "lem-sfb-abelian-poincare-biduality",
+ "kind": "statement",
+ "title": "Poincare biduality and natural evaluation",
+ "statement": "Let $k$ be a field [def-weil-field] and let $A/k$ be an abelian variety [def-sc-abelian-variety]. Choose normalized dual Poincare data $(A^\\vee,\\mathcal P_A)$ for $A$ and $(A^{\\vee\\vee},\\mathcal P_{A^\\vee})$ for $A^\\vee$ [def-sfb-abelian-dual-poincare-datum]. Let $s:A^\\vee\\times_k A\\to A\\times_k A^\\vee$ interchange the factors. There is a unique group-scheme isomorphism $\\delta_A:A\\xrightarrow{\\sim}A^{\\vee\\vee}$ such that\n$$(1_{A^\\vee}\\times\\delta_A)^*\\mathcal P_{A^\\vee}\\simeq s^*\\mathcal P_A,$$\nrespecting the identity-axis rigidifications. Pullbacks here are tensor inverse images [def-pc-module-pullback]. For any abelian variety $B/k$ with such dual data and any group-scheme homomorphism $f:A\\to B$ [def-sc-group-scheme], let $f^\\vee:B^\\vee\\to A^\\vee$ be the homomorphism classifying $(f\\times1)^*\\mathcal P_B$ with its pulled-back rigidification, and let $f^{\\vee\\vee}$ be its dual. Then $f^{\\vee\\vee}\\delta_A=\\delta_B f$. These assertions hold over every field, including imperfect fields and fields of positive characteristic.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I §8, paragraph following Lemma 8.8 and the biduality consequence of Theorem 8.9, printed pp.37–38; I §9 opening, printed p.41, for the dual map. Only the biduality consequence is asserted, not the unrestricted equivalence of all four printed conditions in 8.9."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-sc-group-scheme",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=A^\\vee$, $E=A^{\\vee\\vee}$ and $Q=s^*\\mathcal P_A$ on $D\\times A$. On each geometric fibre over $A$, $Q$ is algebraically trivial: after extension to an algebraically closed $\\Omega$, the family $Q_\\Omega$ parametrized by the smooth connected proper variety $A_\\Omega$ connects its fibre at any $a\\in A(\\Omega)$ to its trivial fibre at $0$. This is precisely a generating algebraic equivalence in the cited definition; field extension preserves the abelian-variety hypotheses. Choose the trivialization of $Q$ on $0_D\\times A$ from the other-axis triviality of $\\mathcal P_A$, agreeing at $(0,0)$ with its given rigidification (rescale by a nonzero scalar). The representing property for $D$ with parameter scheme $A$ gives a unique morphism $\\delta:A\\to E$ and the required rigidified isomorphism $(1_D\\times\\delta)^*\\mathcal P_D\\simeq Q$. The fibre at $0_A$ is trivial, so the tensor group law and uniqueness give $\\delta(0_A)=0_E$. The comparison also respects the other axis: its discrepancy there is a unit on $D$, hence a scalar because $D$ is proper geometrically integral and $H^0(D,\\mathcal O_D)=k$; agreement at $(0,0)$ makes this scalar $1$.",
+   "uses": [
+    "def-sfb-abelian-dual-poincare-datum",
+    "def-sfb-line-algebraic-equivalence",
+    "lem-sfb-abelian-field-extension",
+    "lem-sc-abelian-variety-characterization",
+    "lem-pc-h0-proper-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §8 pp.36–37, universal property; agent expansion of the paragraph preceding Theorem 8.9, p.37"
+   }
+  },
+  {
+   "text": "Any pointed morphism $g:U\\to V$ between abelian varieties is a homomorphism. Indeed, the morphism $h:U\\times U\\to V$ given by $h(x,y)=g(x+y)-g(x)-g(y)$ is zero on $U\\times\\{0\\}$. Abelian varieties are geometrically integral and commutative. The rigidity lemma, with $X=Y=U$ and $Z=V$, makes $h$ factor through the second projection; its value on $\\{0\\}\\times U$ is also zero, so $h=0$. Properness, geometric connectedness and reducedness of $X$, connectedness of $Y$, and separated finite type of $Z$ all follow from these abelian-variety hypotheses. Apply this to $\\delta$.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "lem-sc-av-commutative",
+    "lem-sc-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §3 rigidity and I §8, pointed evaluation map"
+   }
+  },
+  {
+   "text": "Choose an ample invertible module $L$ on $A$ by projectivity. Its normalized difference $N_L=m^*L\\otimes p_1^*L^{-1}\\otimes p_2^*L^{-1}\\otimes c^*(0^*L)$ has its two unit-axis trivializations. Each geometric fibre $t_a^*L\\otimes L^{-1}$ is algebraically trivial: the translation family $m^*L$ on $A_\\Omega\\times A_\\Omega$ connects $L$ to $t_a^*L$. Tensoring that family with the constant $L^{-1}$ connects the trivial module to this fibre. Hence the representing property defines a unique pointed morphism $\\lambda:A\\to D$ with $(1\\times\\lambda)^*\\mathcal P_A\\simeq N_L$. The pointed-morphism argument of step 2 makes it a homomorphism, and the ample-line isogeny lemma makes it an isogeny. The dual $\\mu$ exists by the same representing property: pullback preserves algebraic equivalence, since pulling back each generating family leaves its smooth connected parameter unchanged; the trivial rigidification pulls back as well. It is pointed and hence a homomorphism by step 2. The dual-isogeny degree lemma applied to $\\lambda$ gives an isogeny $\\mu=\\lambda^\\vee:E\\to D$ with $\\deg\\mu=\\deg\\lambda$.",
+   "uses": [
+    "lem-sc-abelian-variety-projective",
+    "def-sfb-abelian-dual-poincare-datum",
+    "def-sfb-line-algebraic-equivalence",
+    "lem-sfb-abelian-field-extension",
+    "lem-sfb-ample-line-polarization-isogeny",
+    "lem-sfb-dual-isogeny-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §8 Lemma 8.8 pp.37,39–40; I Theorem 9.1 p.41"
+   }
+  },
+  {
+   "text": "The defining isomorphisms of $\\mu$ and $\\delta$ give, on $A\\times A$,\n$$(1_A\\times\\mu\\delta)^*\\mathcal P_A\\simeq(\\lambda\\times\\delta)^*\\mathcal P_D\\simeq(\\lambda\\times1_A)^*Q\\simeq s_{AA}^*(1_A\\times\\lambda)^*\\mathcal P_A\\simeq s_{AA}^*N_L\\simeq N_L.$$\nThe final isomorphism interchanges $p_1^*L^{-1}$ and $p_2^*L^{-1}$ and uses $m\\circ s_{AA}=m$; the constant-line factor is unchanged. Pullback composition and tensor comparisons are those cited. These are isomorphisms of rigidified families: if an intermediate isomorphism differs on $0_A\\times A$ by a unit on the parameter $A$, multiply by the inverse unit pulled back from that parameter. Thus uniqueness of the classifying map for $N_L$ gives $\\mu\\delta=\\lambda$. Agreement on the other axis follows from the same scalar-unit argument as in step 1, using $H^0(A,\\mathcal O_A)=k$.",
+   "uses": [
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-sc-av-commutative",
+    "lem-pc-h0-proper-variety"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §8 normalized-difference construction p.40; I §9 dual pullback identity p.41; agent symmetry calculation"
+   }
+  },
+  {
+   "text": "Both $\\lambda$ and $\\mu$ are finite flat of the same positive rank $d$, equal to their common kernel order. Since $\\mu\\delta=\\lambda$ is finite and $\\mu$ is separated, finite permanence makes $\\delta$ finite. Abelian varieties are integral. Let $F=k(D)$. The generic fibres over $D$ of $A$ and $E$ are spectra of fields $K$ and $M$, respectively: on an affine open of $D$, localizing their finite domain algebras at all nonzero elements of the base gives finite-dimensional domains over $F$, hence fields. Finite flat rank $d$ gives $[K:F]=[M:F]=d$. The map $\\delta$ over $D$ induces an $F$-algebra homomorphism $M\\to K$, injective since $M$ is a field and bijective since these vector spaces have the same finite dimension. Thus $\\delta$ induces an isomorphism of function fields and is birational. No geometric-point count or separability argument is used.",
+   "uses": [
+    "lem-sc-isogeny-degree",
+    "lem-weil-pbc-finite-permanence-over-separated",
+    "lem-sc-abelian-variety-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 9.1 p.41, degree consequence; agent generic-fibre cancellation"
+   }
+  },
+  {
+   "text": "The target $E$ is smooth over $k$, hence regular and therefore normal. The finite birational morphism $\\delta:A\\to E$ of integral schemes is consequently an isomorphism by the cited normal-target lemma (Stacks Tag 0AB1, lemma-finite-birational-over-normal). It is already a group homomorphism, so its inverse is a group homomorphism by applying $\\delta^{-1}$ to the multiplication identity. Uniqueness among group-scheme isomorphisms satisfying the Poincare identity is the uniqueness among all classifying morphisms in step 1. This proves the biduality clause over the original field $k$.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "rem-pc-regular-normal",
+    "lem-trf-finite-birational-normal-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 056S (varieties.tex lemma-smooth-regular), 0569 (regular implies normal), 0AB1 (morphisms.tex lemma-finite-birational-over-normal)"
+   }
+  },
+  {
+   "text": "The duals $f^\\vee$ and $f^{\\vee\\vee}$ exist by the representing property: pull back the families generating algebraic equivalence, keep their parameter varieties, and pull back the rigidification. They are pointed and hence homomorphisms by step 2. For $f:A\\to B$, put $C=B^\\vee$ and let $Q_B=s_B^*\\mathcal P_B$ on $C\\times B$. Pull back the defining identity for the dual of $f^\\vee:C\\to D$ and then the identity for $\\delta_A$. Pullback composition gives\n$$(1_C\\times f^{\\vee\\vee}\\delta_A)^*\\mathcal P_C\\simeq(f^\\vee\\times\\delta_A)^*\\mathcal P_D\\simeq(f^\\vee\\times1_A)^*Q_A\\simeq(1_C\\times f)^*Q_B\\simeq(1_C\\times\\delta_B f)^*\\mathcal P_C.$$\nThe middle comparison is exactly the factor-switched defining identity $(1_A\\times f^\\vee)^*\\mathcal P_A\\simeq(f\\times1_C)^*\\mathcal P_B$. Normalize these comparisons on $0_C\\times A$ by the parameter-unit adjustment of step 4; the other axis agrees by its scalar-unit argument. Uniqueness for the datum of $C$ with parameter scheme $A$ yields $f^{\\vee\\vee}\\delta_A=\\delta_B f$. All constructions and comparisons were over $k$; geometric field extensions were used only to verify the fibre condition in the definition, so neither perfection nor characteristic zero was introduced.",
+   "uses": [
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-pc-module-pullback-identity-composition",
+    "def-sfb-line-algebraic-equivalence",
+    "lem-pc-h0-proper-variety"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §9 opening p.41, dual pullback identity; agent naturality calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-sfb-line-algebraic-equivalence",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-av-commutative",
+  "lem-sc-isogeny-degree",
+  "lem-sc-rigidity",
+  "lem-sfb-abelian-field-extension",
+  "lem-sfb-ample-line-polarization-isogeny",
+  "lem-sfb-dual-isogeny-degree",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-weil-pbc-finite-permanence-over-separated",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I §8 pp.36–40 and I §9 Theorem 9.1 p.41; explicit degree-cancellation proof of the biduality consequence, not the incorrect full equivalence printed in 8.9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical evaluation map from an abelian variety to its double dual is an isomorphism natural in homomorphisms",
+   "results": "8 hits. AddChar.doubleDualEquiv, Module.Dual.eval_comp_comp_evalEquiv_eq, Module.evalEquiv, Module.symm_dualMap_evalEquiv, Module.evalEquiv_apply, Module.apply_evalEquiv_symm_apply, CharacterModule.dual_rTensor_conj_homEquiv, FGModuleCat.FGModuleCatEvaluation_apply.  Read the returned signatures: these concern module/character duality, root systems, affine space or elliptic-curve point models, not the stated abelian-variety theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any abelian variety over a field the Poincare line bundle gives a canonical natural isomorphism to the double dual",
+   "results": "8 hits. Module.evalEquiv, AddChar.doubleDualEquiv, NormedSpace.inclusionInDoubleDual, AddChar.coe_doubleDualEquiv, DomAddAct.mk, NormedSpace.inclusionInDoubleDualLi, LinearMap.IsPerfPair.dualEval, AddChar.doubleDualEmb_doubleDualEquiv_symm_apply.  Read the returned signatures: these concern module/character duality, root systems, affine space or elliptic-curve point models, not the stated abelian-variety theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Biduality for abelian varieties: switching the universal Poincare line bundle represents the dual of the dual",
+   "results": "8 hits. AddChar.coe_doubleDualEquiv, AddChar.doubleDualEquiv_symm_doubleDualEmb_apply, AddChar.doubleDualEmb_doubleDualEquiv_symm_apply, AddChar.doubleDualEquiv, CommRing.Pic.mk_dual, LinearEquiv.trans_dualMap_symm_flip, Module.symm_dualMap_evalEquiv, CharacterModule.dual_comp.  Read the returned signatures: these concern module/character duality, root systems, affine space or elliptic-curve point models, not the stated abelian-variety theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Poincare\"",
+   "results": "0 hits. .  Read the returned signatures: these concern module/character duality, root systems, affine space or elliptic-curve point models, not the stated abelian-variety theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|dualAbelian",
+   "results": "0 hits. .  Read the returned signatures: these concern module/character duality, root systems, affine space or elliptic-curve point models, not the stated abelian-variety theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|AbelianVariety",
+   "results": "0 hits. Mathlib subdirectory: AlgebraicGeometry. Read the hits: module, character and convex-cone duality, not dual abelian varieties or Poincare line bundles. No project attachment found by item tag or concept.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Biduality for abelian varieties by the universal Poincare line bundle and its switch of factors",
+   "results": "8 hits: AddChar.doubleDualEquiv, ProperCone.dual_dual_flip, AddChar.doubleDualEmb_doubleDualEquiv_symm_apply, ProperCone.dual_flip_dual, PiTensorProduct.dualDistribEquivOfBasis_symm_apply, PointedCone.dual_flip_dual_dual_flip, LinearMap.BilinForm.dualBasis_dualBasis, LinearEquiv.dualMap. Read the hits: module, character and convex-cone duality, not dual abelian varieties or Poincare line bundles. No project attachment found by item tag or concept.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Poincare\"",
+   "results": "0 hits. Read the hits: module, character and convex-cone duality, not dual abelian varieties or Poincare line bundles. No project attachment found by item tag or concept.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Poincare evaluation morphism from an abelian variety to its double dual is an isomorphism natural under homomorphisms",
+   "results": "8 hits: Module.Dual.eval_comp_comp_evalEquiv_eq, CategoryTheory.NonPreadditiveAbelian.isIso_r, CharacterModule.dual_rTensor_conj_homEquiv, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, FGModuleCat.FGModuleCatEvaluation_apply, FGModuleCat.exactPairing, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom. Read the hits: module, character and convex-cone duality, not dual abelian varieties or Poincare line bundles. No project attachment found by item tag or concept.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Switching the factors of the universal line bundle identifies an abelian variety with its bidual Picard variety",
+   "results": "8 hits: CommRing.Pic.mk_dual, AddChar.coe_doubleDualEquiv, CommRing.Pic.inv_eq_dual, AddChar.doubleDualEquiv, instCommGroupPic, Submodule.unitsQuotEquivRelPic_symm_apply, CharacterModule.homEquiv_symm_apply_apply_apply, CharacterModule.congr. Read the hits: module, character and convex-cone duality, not dual abelian varieties or Poincare line bundles. No project attachment found by item tag or concept.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polarization-calculus-over-field",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary for the symmetric ample endomorphism-span input below det-thm-sf-ctf-stability-direct-images, proof (3): Milne AV I §14, the double-dual identification behind the Rosati involution.",
+   "via": [
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-poincare-biduality",
+  "worker": "stage1",
+  "summary": "Constructed the evaluation morphism from the rigidified universal property, proved its homomorphism law by rigidity, cancelled an ample polarization using the equal degree of its dual isogeny on generic fibres, and calculated naturality. One new statement-only prerequisite for the degree of a dual isogeny; no statement change. All proof steps under 2000 characters.",
+  "blueprint": "Auxiliary in the recorded chain below det-thm-sf-ctf-stability-direct-images, proof (3), supplying biduality for the Rosati input. Current latest direct-image proof and chapter/unit read; no unit or chapter route changed. blueprint_refs ancestor returns None; inherited auxiliary provenance retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-variety-projective",
+    "why": "Choose an ample line on the original field; no local abelian-geometry node replaces this tool."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Geometric integrality supplies rigidity hypotheses and integral finite generic fibres."
+   },
+   {
+    "node": "lem-sc-av-commutative",
+    "why": "Commutativity gives the pointed-morphism defect calculation and symmetry of the normalized difference."
+   },
+   {
+    "node": "lem-sc-rigidity",
+    "why": "A pointed morphism between abelian varieties is a homomorphism; use the stated product rigidity theorem."
+   },
+   {
+    "node": "lem-sc-isogeny-degree",
+    "why": "Convert kernel order to finite flat rank over an arbitrary field."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Compose the ordinary tensor pullbacks of Poincare families."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Distribute ordinary pullback across the normalized difference tensor factors."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Regularity of the smooth bidual target."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Regularity implies normality, the hypothesis for the finite birational criterion."
+   },
+   {
+    "node": "lem-trf-finite-birational-normal-iso",
+    "why": "Turn finite birational evaluation into an isomorphism; the unit has no substitute normal-target criterion."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Global units on a proper geometrically integral abelian variety are scalars; agreement at the identity makes the second axis normalization automatic."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-av-commutative",
+  "lem-sc-rigidity",
+  "lem-sc-isogeny-degree",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-pc-h0-proper-variety"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-53cdc2071",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-53cdc2071 (reviewer sub-agent of L); spot-checked: PASS: read the item and all 7 steps, the new node lem-sfb-dual-isogeny-degree and every cited statement, plus Milne AV I §8 pp.37-40 (8.8, 8.9, 8.14, normalized difference) and §9 p.41 (alpha^vee, Thm 9.1). No repair note, so the re-split rule does not apply; statement unchanged. Step 1: the datum classifies the switched Poincare family s^*P_A on D x A, using the parameter A_Omega for the fibre condition, a trivialization chosen along 0_D x A, and H^0(D,O)=k for the second axis. Step 2: lem-sc-rigidity applied with X=Y=U, y0=0 shows pointed maps are homomorphisms. Step 3: lambda=phi_L is an isogeny by lem-sfb-ample-line-polarization-isogeny; mu exists, and the new node gives deg mu = deg lambda. Step 4: recomputed the pullback chain (1 x mu delta)^*P_A ~ N_L using s o (lambda x 1) = (1 x lambda) o s_AA and m o s = m, so mu delta = lambda by uniqueness. Step 5: finite permanence makes delta finite; on generic fibres over k(D) the two algebras are fields of the same degree d, so delta is birational (works for inseparable isogenies). Step 6: E is smooth, hence regular and normal, and 0AB1 gives an isomorphism. Step 7: recomputed the naturality chain on B^vee x A. New node: true (ker u^vee is the Cartier dual of ker u, same order); tested on id, [n] and Frobenius/Verschiebung; Milne's and Mumford's proofs of 9.1 do not use biduality and the DAG has no cycle. No duplicate: grepped the snapshot for Cartier dual / dual isogeny / kernel of the dual / dual abelian variety and read the near candidates (space-poincare-calculus, polarization-calculus, isogeny-postcomposition-degree, equal-dimension criterion). It is not a restated clause of the item. B1-B9 OK. Batch-5 findings: lem-pc-h0-proper-variety (H^0 = k) and lem-trf-finite-birational-normal-iso (Stacks 0AB1) are generic tools, not steps of the trace formula or Poincare duality; accepted. No SGA cited. tool_uses accepted. review_split's 'no such node' messages come from the symlinked chapter directories; all cited nodes exist."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.PoincareBiduality",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.poincare_biduality",
+  "declarations": [
+   "AlgebraicGeometry.poincareRigidificationBaseChange",
+   "AlgebraicGeometry.poincareOtherIdentityAxis",
+   "AlgebraicGeometry.poincareRigidificationAtOrigin",
+   "AlgebraicGeometry.PoincareAxesAgreeAtOrigin",
+   "AlgebraicGeometry.IsAbelianPoincareEvaluation",
+   "AlgebraicGeometry.ClassifiesAbelianDualHom",
+   "AlgebraicGeometry.IsAbelianVariety.poincare_biduality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/PoincareBiduality.lean",
+  "statement": "theorem IsAbelianVariety.poincare_biduality {k : Type u} [Field k] : (∀ (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (D : AbelianDualPoincareDatum A) (E : AbelianDualPoincareDatum D.dual), ∃! delta : A ≅ E.dual, IsMonHom delta.hom ∧ IsAbelianPoincareEvaluation D E delta.hom) ∧ (∀ (A B : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] [GrpObj B] [IsAbelianVariety B] (D : AbelianDualPoincareDatum A) (E : AbelianDualPoincareDatum D.dual) (F : AbelianDualPoincareDatum B) (G : AbelianDualPoincareDatum F.dual) (f : A ⟶ B), IsMonHom f → ∃ fDual : F.dual ⟶ D.dual, (IsMonHom fDual ∧ ∀ g : F.dual ⟶ D.dual, ClassifiesAbelianDualHom D F f g ↔ g = fDual) ∧ ∃ fDoubleDual : E.dual ⟶ G.dual, (IsMonHom fDoubleDual ∧ ∀ g : E.dual ⟶ G.dual, ClassifiesAbelianDualHom G E fDual g ↔ g = fDoubleDual) ∧ ∀ (deltaA : A ≅ E.dual) (deltaB : B ≅ G.dual), IsMonHom deltaA.hom → IsAbelianPoincareEvaluation D E deltaA.hom → IsMonHom deltaB.hom → IsAbelianPoincareEvaluation F G deltaB.hom → deltaA.hom ≫ fDoubleDual = f ≫ deltaB.hom)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f3b17d7a1",
+  "group": "NS",
+  "result": "pass",
+  "note": "Read the item node, its 5 stmt_deps, the live DualPoincareDatum.lean (AbelianDualPoincareDatum, abelianIdentityAxis, abelianRigidificationPullback), PolarizationCalculus.lean, the delivered PoincareBiduality.lean and the report. H3: ∃! group iso delta : A ≅ E.dual with (D.dual◁delta)^*P_E ≅ β^*P_D; both identity axes are covered (0_D×A via E.universal's rigidification shape; D×0_A with other-axis trivializations normalized at the origin by PoincareAxesAgreeAtOrigin, a true normalization since the unit is a scalar); fDual and fDoubleDual are characterized by the iff 'Classifies ↔ g = ·' (no nested-∃! weakening) with the correct variance (G E fDual); naturality deltaA≫f^∨∨ = f≫deltaB holds for all evaluation isos, not vacuous. All helper squares are type-checked; the helpers are canonical pullbackComp/Congr/ObjUnitIso composites and Props, not hollow. There are no name clashes in live and no existing biduality declaration. lean.statement is verbatim; the node differs from live only in lean; the imports are existing proof_dep modules; the docstrings carry the source place, the blueprint tag and 7 steps; the proof is sorry only; both report sections are present. Edge cases checked: dim 0, f=0/id, imperfect fields, char p, universes. Advisory: Scheme.Modules.pullback is inherited from the dependency datum. Nothing recompiled (no change)."
+ }
+}

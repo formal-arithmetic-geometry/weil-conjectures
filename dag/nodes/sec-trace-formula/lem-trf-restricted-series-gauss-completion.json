@@ -11,9 +11,94 @@
   "def-weil-field",
   "def-trf-restricted-series-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J=\\mathbf N^n$ and $f=(c_\\nu)_{\\nu\\in J}$ using [def-trf-restricted-series-presentation]. The finite set $S=\\{\\nu:|c_\\nu|\\ge1\\}$ gives the bound $|c_\\nu|\\le\\max(1,\\max_{\\mu\\in S}|c_\\mu|)$ (take the finite maximum to be zero when $S$ is empty). Thus the supremum is finite and bounds each coefficient. Its vanishing is equivalent to all coefficients being zero. The coefficient formulas for $1,-f,f+g$, together with $|1|=1$, $|-a|=|a|$ and the assumed ultrametric inequality, give $\\|1\\|=1$, $\\|-f\\|=\\|f\\|$ and $\\|f+g\\|\\le\\max(\\|f\\|,\\|g\\|)$. The same coefficient inequalities show the sum is restricted: its $\\epsilon$-exceptional set is contained in the union of the two finite exceptional sets. Consequently $d(f,g)=\\|f-g\\|$ is a metric, with its triangle inequality following from the stronger maximum bound.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Agent coefficient proof below; BGR not locally available, as recorded in the statement source and report. No unverified BGR theorem number is asserted."
+   }
+  },
+  {
+   "text": "For multiplication in [def-trf-restricted-series-presentation], the coefficient at $\\gamma$ is $\\sum_{\\alpha+\\beta=\\gamma}c_\\alpha d_\\beta$, a finite sum since each coordinate of $\\alpha$ is bounded by that of $\\gamma$. Induction on the number of summands gives $|\\sum b_j|\\le\\max_j|b_j|$ from the assumed ultrametric inequality; hence each product coefficient is at most $\\|f\\|\\|g\\|$ and taking the supremum proves the product bound. To check restrictedness directly, put $M=\\max(1,\\|f\\|,\\|g\\|)$. The sets $S=\\{\\alpha:|c_\\alpha|\\ge\\epsilon/M\\}$ and $T=\\{\\beta:|d_\\beta|\\ge\\epsilon/M\\}$ are finite. Outside the finite set $S+T=\\{\\alpha+\\beta:\\alpha\\in S,\\beta\\in T\\}$, every summand has one factor smaller than $\\epsilon/M$ and the other at most $M$, so the finite sum has absolute value smaller than $\\epsilon$. This verifies closure without using a completeness theorem. The inherited formal-series ring operations therefore have all the asserted norm bounds.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Agent coefficient proof below; BGR not locally available, as recorded in the statement source and report. No unverified BGR theorem number is asserted."
+   }
+  },
+  {
+   "text": "Give $J=\\mathbf N^n$ the discrete topology and $F$ its assumed complete metric. Every coefficient function is continuous. By step 1 its range is bounded: $|c_\\nu-c_\\mu|\\le\\max(|c_\\nu|,|c_\\mu|)\\le\\|f\\|$. Thus a Cauchy sequence $(f_m)$ in $D_n$ is a Cauchy sequence in $C_b(J,F)$, with exactly the same distance $\\sup_\\nu|c^{(m)}_\\nu-c^{(k)}_\\nu|$. Apply [lem-trf-bounded-families-complete] to obtain a bounded coefficient function $c:J\\to F$ and convergence $\\sup_\\nu|c^{(m)}_\\nu-c_\\nu|\\to0$. The topology on $J$ is used only to make all functions continuous; this is a supremum-metric completeness assertion, not product-topology completeness.",
+   "uses": [
+    "lem-trf-bounded-families-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+    "place": "BoundedContinuousFunction.instMetricSpace, line 203; dist_eq_iSup, line 222; instCompleteSpace, lines 296–328 (local pinned Mathlib source)."
+   }
+  },
+  {
+   "text": "The function $c$ from step 3 is restricted as defined in [def-trf-restricted-series-presentation]. Given $\\epsilon>0$, choose $m$ with $\\sup_\\nu|c^{(m)}_\\nu-c_\\nu|<\\epsilon/2$. Outside the finite set where $|c^{(m)}_\\nu|\\ge\\epsilon/2$, the ultrametric inequality gives $|c_\\nu|\\le\\max(|c_\\nu-c^{(m)}_\\nu|,|c^{(m)}_\\nu|)<\\epsilon$. Hence $c$ represents an element of $D_n$, and the convergence already obtained is convergence in its Gauss metric. This proves completeness.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Agent coefficient proof below; BGR not locally available, as recorded in the statement source and report. No unverified BGR theorem number is asserted."
+   }
+  },
+  {
+   "text": "For finite truncations, given $\\epsilon>0$ take the finite set $S=\\{\\nu:|c_\\nu|\\ge\\epsilon/2\\}$. Choose $N_0$ at least the total degree $\\nu_1+\\cdots+\\nu_n$ of every element of $S$ (zero if $S$ is empty). For $N\\ge N_0$ every omitted coefficient has absolute value smaller than $\\epsilon/2$, so the supremum of the omitted coefficients is at most $\\epsilon/2<\\epsilon$. There are only finitely many multi-indices of total degree at most $N$, since each coordinate lies in $\\{0,\\ldots,N\\}$. These are exactly the specified finite truncations and they converge to $f$.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Agent coefficient proof below; BGR not locally available, as recorded in the statement source and report. No unverified BGR theorem number is asserted."
+   }
+  },
+  {
+   "text": "Use the coordinate bijection $\\mathbf N^{s+1}=\\mathbf N^s\\times\\mathbf N$, and set $a_i=\\sum_\\mu c_{\\mu,i}T^\\mu$. Each row is restricted because its $\\epsilon$-exceptional set is a slice of the finite exceptional set of $c$. For $\\epsilon>0$ project the finite set $\\{(\\mu,i):|c_{\\mu,i}|\\ge\\epsilon/2\\}$ onto the last coordinate. Outside this finite projection every row norm is at most $\\epsilon/2$, proving $\\|a_i\\|\\to0$. Conversely, if each row is restricted and $\\|a_i\\|\\to0$, then only finitely many rows have norm at least $\\epsilon$; only these rows can contain a coefficient of absolute value at least $\\epsilon$, and in each such row there are only finitely many of them. Their finite union proves global restrictedness. The inverse is therefore the coefficient assignment $c_{\\mu,i}=(a_i)_\\mu$. Moreover $\\sup_{\\mu,i}|c_{\\mu,i}|=\\sup_i\\sup_\\mu|c_{\\mu,i}|$: both sides are the least common upper bound of precisely the same coefficient values. Applied to differences this gives the claimed isometry.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Agent coefficient proof below; BGR not locally available, as recorded in the statement source and report. No unverified BGR theorem number is asserted."
+   }
+  },
+  {
+   "text": "The coefficient bijection of step 6 preserves addition. For products, its coefficient at $(\\mu,k)$ is $\\sum_{i+j=k}\\sum_{\\alpha+\\beta=\\mu}c_{\\alpha,i}d_{\\beta,j}$ on either side, by the finite Cauchy-product formula of [def-trf-restricted-series-presentation]. Both sums are finite, so regrouping them is a finite distributive-law calculation. In particular the iterated Cauchy product is restricted by step 2 after the inverse assignment; no infinite rearrangement is involved. A constant has only coefficient $(0,0)$, and multiplication by $X$ changes $c_{\\mu,0}$ to zero and $c_{\\mu,i+1}$ to the old $c_{\\mu,i}$. These formulas prove both final compatibilities. For $n=0$ the index set $\\mathbf N^0$ is a singleton, so $D_0=F$ with its original absolute value; all arguments, including $s=0$, apply.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+    "place": "Agent coefficient proof below; BGR not locally available, as recorded in the statement source and report. No unverified BGR theorem number is asserted."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-restricted-series-presentation",
+  "lem-trf-bounded-families-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guntzer-remmert-non-archimedean-analysis.pdf",
+  "place": "Explicit coefficient proof by Q42, with only ambient bounded-function completeness taken from the cited Mathlib leaf; BGR remains WANTED and was not consulted."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +134,295 @@
    "results": "{\"t\": \"2026-10-19T00:12:11Z\", \"tool\": \"leanfinder\", \"query\": \"A Tate algebra of restricted convergent power series is a Banach algebra and grouping one variable gives the iterated restricted series algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"PowerSeries.WithPiTopology.instCompleteSpace\", \"MvPowerSeries.WithPiTopology.instCompleteSpace\", \"LaurentSeries.instAlgebraPowerSeries\", \"PowerSeries.WithPiTopology.instIsTopologicalRing\", \"LaurentSeries.RatFuncAdicCompl\", \"LaurentSeries.instLaurentSeriesComplete\", \"LaurentSeries.LaurentSeriesPkg\"], \"digest\": \"aea30de056bd6e51\"}",
    "date": "2026-10-19",
    "verdict": "no match: MvPowerSeries.IsRestricted.subring gives the algebraic restricted subring, and GaussNorm gives individual norm inequalities. The completeness and density hits in WithPiTopology use coefficientwise product uniformity, not the Gauss norm; neither its completeness nor the isometric iterated restricted-series identification is obtained in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The space of coefficient families tending to zero is complete for the supremum norm",
+   "results": {
+    "t": "2026-10-24T07:27:45Z",
+    "tool": "leansearch",
+    "query": "The space of coefficient families tending to zero is complete for the supremum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "lp.completeSpace",
+     "ZeroAtInftyContinuousMap.instCompleteSpace",
+     "UniformFun.instCompleteSpace",
+     "ODE.FunSpace.instCompleteSpace",
+     "ZeroAtInftyContinuousMap.instNormedSpace",
+     "BoundedContinuousFunction.instCompleteSpace",
+     "ZeroAtInftyContinuousMap.tendsto_iff_tendstoUniformly",
+     "SemiNormedGrp.completion_completeSpace"
+    ],
+    "digest": "c8582314bebf6597"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"gaussNorm\"",
+   "results": {
+    "t": "2026-10-24T07:27:45Z",
+    "tool": "loogle",
+    "query": "\"gaussNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "MvPowerSeries.HasGaussNorm",
+     "MvPowerSeries.gaussNorm",
+     "MvPowerSeries.AchievesGaussNorm",
+     "MvPowerSeries.gaussNorm_nonneg",
+     "MvPowerSeries.gaussNorm_zero",
+     "MvPowerSeries.gaussNorm_neg",
+     "MvPowerSeries.gaussNorm_eq_zero_iff",
+     "MvPowerSeries.gaussNorm_add_le_max"
+    ],
+    "digest": "0dbc0cc868afe6f0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "grep",
+   "query": "CompleteSpace|NormedRing|gaussNorm",
+   "results": {
+    "t": "2026-10-24T07:27:45Z",
+    "tool": "grep",
+    "query": "CompleteSpace|NormedRing|gaussNorm",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Substitution.lean"
+    ],
+    "digest": "0b55542ada3286bf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted series over a complete nonarchimedean field are complete for the coefficient supremum Gauss norm, polynomials are dense and regrouping variables is isometric",
+   "results": {
+    "t": "2026-10-24T07:27:46Z",
+    "tool": "leanfinder",
+    "query": "Restricted series over a complete nonarchimedean field are complete for the coefficient supremum Gauss norm, polynomials are dense and regrouping variables is isometric",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LaurentSeries.instLaurentSeriesComplete",
+     "MvPowerSeries.WithPiTopology.instCompleteSpace",
+     "PowerSeries.WithPiTopology.instCompleteSpace",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "instNonarchimedeanRingCompletion",
+     "LaurentSeries.instUniformSpaceRatFuncAdicCompl",
+     "PadicInt.mahlerSeries_apply",
+     "NormedField.instCompletableTopField"
+    ],
+    "digest": "456b3dbc32962910"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cauchy sequences of functions vanishing at infinity converge uniformly in a complete normed space",
+   "results": {
+    "t": "2026-10-24T07:27:47Z",
+    "tool": "leanfinder",
+    "query": "Cauchy sequences of functions vanishing at infinity converge uniformly in a complete normed space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ZeroAtInftyContinuousMap.instCompleteSpace",
+     "UniformFun.instCompleteSpace",
+     "ZeroAtInftyContinuousMap.tendsto_iff_tendstoUniformly",
+     "UniformOnFun.instCompleteSpace",
+     "BoundedContinuousFunction.instCompleteSpace",
+     "UniformCauchySeqOn.tendstoUniformlyOn_of_tendsto",
+     "UniformCauchySeqOnFilter.tendstoUniformlyOnFilter_of_tendsto",
+     "TendstoUniformlyOn.uniformCauchySeqOn"
+    ],
+    "digest": "5a0da1a431beeb47"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "grep",
+   "query": "instCompleteSpace|norm_eq|dist_eq|isVanishingAtInfty_iff",
+   "results": {
+    "t": "2026-10-24T07:28:13Z",
+    "tool": "grep",
+    "query": "instCompleteSpace|norm_eq|dist_eq|isVanishingAtInfty_iff",
+    "sub": "Topology/ContinuousMap/ZeroAtInfty.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "433"
+    ],
+    "digest": "a78ba92ca4109f00"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ZeroAtInftyContinuousMap\", \"instCompleteSpace\"",
+   "results": {
+    "t": "2026-10-24T07:28:13Z",
+    "tool": "loogle",
+    "query": "\"ZeroAtInftyContinuousMap\", \"instCompleteSpace\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "ZeroAtInftyContinuousMap.instCompleteSpace"
+    ],
+    "digest": "5466910abd8d9431"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded continuous functions into a complete metric space form a complete space with supremum metric",
+   "results": {
+    "t": "2026-10-24T07:28:43Z",
+    "tool": "leansearch",
+    "query": "Bounded continuous functions into a complete metric space form a complete space with supremum metric",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BoundedContinuousFunction.instCompleteSpace",
+     "BoundedContinuousFunction.instMetricSpace",
+     "BoundedContinuousFunction.instPseudoMetricSpace",
+     "ZeroAtInftyContinuousMap.instCompleteSpace",
+     "BoundedContinuousFunction.nndist_eq",
+     "BoundedContinuousFunction.dist_eq_iSup",
+     "BoundedContinuousFunction.instNormedSpace",
+     "BoundedContinuousFunction.dist_mkOfCompact"
+    ],
+    "digest": "dbeb0cc834a31ee9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "grep",
+   "query": "instCompleteSpace|dist_eq_iSup|dist_le|dist_apply_le",
+   "results": {
+    "t": "2026-10-24T07:28:43Z",
+    "tool": "grep",
+    "query": "instCompleteSpace|dist_eq_iSup|dist_le|dist_apply_le",
+    "sub": "Topology/ContinuousMap/Bounded",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/ArzelaAscoli.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean"
+    ],
+    "digest": "7bfaccb3a3d524e2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any discrete index set I and complete metric space E, bounded functions from I to E are complete for the supremum distance",
+   "results": {
+    "t": "2026-10-24T07:28:46Z",
+    "tool": "leanfinder",
+    "query": "For any discrete index set I and complete metric space E, bounded functions from I to E are complete for the supremum distance",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BoundedContinuousFunction.instCompleteSpace",
+     "PiNat.completeSpace",
+     "UniformFun.instCompleteSpace",
+     "UniformOnFun.instPseudoMetricSpaceOfBoundedSpace",
+     "ODE.FunSpace.instCompleteSpace",
+     "UniformOnFun.instCompleteSpace",
+     "Pi.complete",
+     "GromovHausdorff.instCompleteSpaceGHSpace"
+    ],
+    "digest": "4ead2548d2ffb0b8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BoundedContinuousFunction\", \"instCompleteSpace\"",
+   "results": {
+    "t": "2026-10-24T07:28:47Z",
+    "tool": "loogle",
+    "query": "\"BoundedContinuousFunction\", \"instCompleteSpace\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "BoundedContinuousFunction.instCompleteSpace"
+    ],
+    "digest": "37fcc5d77e429ca1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
+  },
+  {
+   "tool": "grep",
+   "query": "instance instCompleteSpace|theorem dist_eq_iSup",
+   "results": {
+    "t": "2026-10-24T07:29:31Z",
+    "tool": "grep",
+    "query": "instance instCompleteSpace|theorem dist_eq_iSup",
+    "sub": "Topology/ContinuousMap/Bounded",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean"
+    ],
+    "digest": "e1ef1e7cfb3fd5c4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: GaussNorm gives individual inequalities, product-topology completeness has the wrong metric, and bounded-function / zero-at-infinity completeness alone gives neither the Cauchy-product regrouping nor every clause. The bounded-function completeness match is isolated as lem-trf-bounded-families-complete."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-tate-weierstrass-norm-division",
@@ -89,5 +459,49 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-restricted-series-gauss-completion",
+  "worker": "stage1",
+  "summary": "Q42 checked the live project for an attachment, retained the statement and historical searches, and wrote a seven-step coefficient proof. One generic Mathlib leaf supplies ambient supremum-metric completeness. All finite-exceptional-set, truncation, regrouping and ring-compatibility arguments are explicit. BGR is unavailable locally; the proof is marked agent-written, not attributed to an unverified source.",
+  "blueprint": "Historical Gauss-norm prerequisite of the former formal-comparison chain under lem-trf-local-term-locality; current latest blueprint contracting-correspondence proof is unchanged. Steps establish the analytic restricted-series input only."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-707d7ebff",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-707d7ebff (reviewer sub-agent of L); spot-checked: I read the item and the new leaf lem-trf-bounded-families-complete in full. The item statement is unchanged, it is not a re-split (no repair note), and it had no proof before this delivery. All seven steps are correct elementary coefficient arguments citing def-trf-restricted-series-presentation. Step 1 handles the norm and closure under addition. Step 2 gives closure under the Cauchy product with M=max(1,|f|,|g|) and the set S+T, strict inequality included. Step 3 gets completeness on the discrete index set ℕⁿ from the leaf, using the pairwise bound |c_ν−c_μ|≤|f|. Step 4 shows the limit is restricted by the ε/2 argument. Step 5 handles truncations with a total-degree bound N_0 and the ε/2 guard. Step 6 gives the row bijection with |a_i|→0 and the isometry as a double supremum. Step 7 checks that the finite double Cauchy sums agree, plus constants and the X-shift. The leaf matches pinned Mathlib Topology/ContinuousMap/Bounded/Basic.lean: map_bounded' at line 41 and bounded at line 91 match the pairwise bound, instMetricSpace is at line 203, dist_eq_iSup is at line 222 (empty domain included), and instCompleteSpace is at line 296 with no compactness hypothesis. Specializing it to a complete absolute-valued field takes one line. Six searches are recorded. I found no duplicate in the DAG: lem-sfb-compact-function-space-complete needs a compact domain, and lem-wf-nonarchimedean-series-substitution is a different statement. I checked the trivial absolute value, n=0, s=0, an empty I and a one-point I. BGR is listed as WANTED and the proof is honestly marked agent-written. No tool_uses are needed and no fixes were written. One cosmetic point: the leaf has no merged_into key."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RestrictedSeriesGaussCompletion",
+  "declaration": "RestrictedSeries.restricted_series_gauss_completion",
+  "file": "lean/Sheaf/RingTheory/RestrictedSeriesGaussCompletion.lean",
+  "statement": "theorem restricted_series_gauss_completion (F : Type u) [NormedField F] [IsUltrametricDist F] [CompleteSpace F] : (∀ (n : ℕ) (f : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ)))), MvPowerSeries.HasGaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) f.val ∧ (MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) f.val = 0 ↔ f = 0) ∧ MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) (-f).val = MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) f.val) ∧ (∀ n : ℕ, MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) 1 = 1) ∧ (∀ (n : ℕ) (f g : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ)))), MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) (f + g).val ≤ max (MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) f.val) (MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) g.val) ∧ MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) (f * g).val ≤ MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) f.val * MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) g.val) ∧ ∃ M : ∀ n : ℕ, MetricSpace ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ))), (∀ (n : ℕ) (f g : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ)))), @dist _ (M n).toDist f g = MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) (f - g).val) ∧ (∀ n : ℕ, @CompleteSpace _ (M n).toUniformSpace) ∧ (∀ (n : ℕ) (f : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ)))), ∃ p : ℕ → ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ))), (∀ N : ℕ, (p N).val = (MvPowerSeries.truncTotal (N + 1) f.val).toMvPowerSeries) ∧ Filter.Tendsto p Filter.atTop (@nhds _ (M n).toUniformSpace.toTopologicalSpace f)) ∧ Function.Bijective (constants F 0) ∧ (∀ a : F, MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin 0 ↦ 1) (constants F 0 a).val = ‖a‖) ∧ ∀ s : ℕ, ∃ S : Subring (PowerSeries ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin s ↦ (1 : ℝ)))), (∀ a : PowerSeries ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin s ↦ (1 : ℝ))), a ∈ S ↔ Filter.Tendsto (fun i : ℕ ↦ MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin s ↦ 1) (PowerSeries.coeff i a).val) Filter.atTop (nhds 0)) ∧ ∃ e : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin (s + 1) ↦ (1 : ℝ))) ≃+* S, (∀ (f : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin (s + 1) ↦ (1 : ℝ)))) (i : ℕ) (μ : Fin s →₀ ℕ), MvPowerSeries.coeff μ (PowerSeries.coeff i (e f).val).val = MvPowerSeries.coeff (Finsupp.equivFunOnFinite.symm (Fin.snoc (fun j ↦ μ j) i)) f.val) ∧ (∀ f, MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin (s + 1) ↦ 1) f.val = ⨆ i : ℕ, MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin s ↦ 1) (PowerSeries.coeff i (e f).val).val) ∧ (∀ f g, @dist _ (M (s + 1)).toDist f g = ⨆ i : ℕ, MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin s ↦ 1) (PowerSeries.coeff i ((e f).val - (e g).val)).val) ∧ (∀ a : F, (e (constants F (s + 1) a)).val = PowerSeries.C (constants F s a)) ∧ ∀ f, (e (⟨MvPowerSeries.X (Fin.last s), MvPowerSeries.isRestricted_monomial _ _ _⟩ * f)).val = PowerSeries.X * (e f).val",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d4c179e7",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; statement is verbatim in the file; stmt_deps def-weil-field and def-trf-restricted-series-presentation are used through Mathlib IsRestricted.subring at polyradius 1, gaussNorm/HasGaussNorm and RestrictedSeries.constants. Hypotheses NormedField+IsUltrametricDist+CompleteSpace, universe u arbitrary, nothing stronger. Every clause matches: finite norm via HasGaussNorm; zero/one/neg/ultrametric/submultiplicative; existential MetricSpace pinned by dist=gaussNorm(f-g) and complete; truncTotal (N+1) = degree<=N truncations converge in that metric; D_0=F via bijective constants with norm; row subring S fixed by an exact decay iff; e: D_{s+1} ≃+* S pinned coefficientwise by Fin.snoc (last variable); norm and dist = ⨆ of row norms; constants and X-multiplication preserved. Edge cases n=0, s=0, N=0, trivially normed F covered. No duplicate in Mathlib (finSuccEquiv is first-variable and unrestricted) or project Sheaf modules. One sorry, docstrings with honest WANTED-BGR source and blueprint id, proof-dep plain import ok, report sections present. No change made, so no compile."
+ }
 }

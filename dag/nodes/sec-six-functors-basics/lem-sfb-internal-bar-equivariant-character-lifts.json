@@ -1,0 +1,165 @@
+{
+ "id": "lem-sfb-internal-bar-equivariant-character-lifts",
+ "kind": "statement",
+ "title": "Equivariant realization and augmentation of the character lifts",
+ "statement": "Let A be a commutative condensed ring, G a profinite group, R any exact normalized internal homogeneous bar resolution, B any compatible inhomogeneous bar diagram, and l : InternalBarCharacter.Lifts R B. There exist an equivariant cochain augmentation e : P → A[0] and a proof that it is a quasi-isomorphism, with augmentationEquation R e, and equivariant maps L_a : P → P[1] satisfying IsCharacterLift R a L_a. For each finite ordered character list as, the underlying augmented degree-minus-length component of e[as.length] after orderedCharacterLift R as.length (i ↦ L_(as.get i)) equals (l.augmented as).val exactly, including the canonical shift and term identifications. The assertion is about chain maps and contains neither a cup product nor a derived total comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-internal-bar-resolution",
+  "lem-sfb-internal-bar-character-lifts",
+  "lem-sfb-internal-bar-character-roof-cup"
+ ],
+ "proof": [
+  {
+   "text": "1. The complex obtained by forgetting the action on the homogeneous bar is canonically\nidentified degree by degree with InternalBarCharacter.complex. In degree -n use the\nextendXIso identifications; in positive degrees both terms are zero. These comparisons\ncommute with differentials because both differentials are the recorded boundary maps.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+   }
+  },
+  {
+   "text": "2. Lift the augmentation of the given Lifts to the action category. Its only nonzero\ncomponent is the recorded equivariant augmentation R.augmentation. The boundary equation\nis R.boundary_augmentation. Exactness at every R.objects n, exactness at degree zero and\nthe epimorphic augmentation show this map is a quasi-isomorphism. Its zero component is\naugmentationEquation, by the single-object and extension identifications.",
+   "uses": [
+    "lem-sfb-condensed-internal-bar-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+   }
+  },
+  {
+   "text": "3. For each character lift use lift_spec.1 to regard every component in degree -(n+1)\nas an equivariant morphism. In all remaining degrees use zero maps. The faithful\nforgetful functor reflects the chain-map equations, which are those of the supplied\nunderlying lift. In degree -1, lift_spec.2 and augmentation_generator show that the\naugmented generator is a(g0^-1 g1), proving IsCharacterLift.",
+   "uses": [
+    "lem-sfb-internal-bar-character-lifts",
+    "lem-sfb-condensed-internal-bar-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+   }
+  },
+  {
+   "text": "4. Induct on a list, appending its last entry. Forgetting its orderedCharacterLift\nis the supplied iterate: the empty case is iterate_nil and the successor is\niterate_snoc, since the canonical shift-addition maps and ordinary shifts commute with\nforgetting. Compose with the shifted augmentation. The augmented_component equation\nof Lifts then identifies its sole component with (l.augmented a).val. All identifications\nare sign-free reindexings; no tensor factors are permuted. This includes the empty list,\nwhere augmented_nil gives R.augmentation. No underived term is asserted projective.",
+   "uses": [
+    "lem-sfb-internal-bar-character-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-internal-bar-resolution",
+  "lem-sfb-internal-bar-character-lifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated internal homogeneous-bar normalization expanded by lem-sfb-internal-bar-ordered-cup. The paragraph supplies the route; an exact internal-category reference remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lifting componentwise equivariant maps of homogeneous bar complexes to the category of group actions and preserving their shifted composites",
+   "results": "Lean Finder returned groupHomology.chainsMap and Rep.barComplex, for discrete representations.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; general APIs only. The project constructions are used rather than replaced."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom, Functor.mapHomologicalComplex",
+   "results": "The qualified functor identifier is unknown to the remote Loogle index; no match.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; general APIs only. The project constructions are used rather than replaced."
+  },
+  {
+   "tool": "grep",
+   "query": "mkHomToSingle|from_single_hom_ext|to_single_hom_ext",
+   "results": "Single-complex constructors and extensionality are available; no internal equivariant character comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; general APIs only. The project constructions are used rather than replaced."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Componentwise equivariant cochain maps lift to complexes of group actions preserving shifts",
+   "results": "HomComplex cochain and cocycle shift equivalences and groupCohomology.cochainsMap_f only; not the condensed equivariant realization. Whole-blueprint searches for small-Hom, cup bracketing and equivariant character lifts return zero matching blueprint nodes; source name searches find no duplicate declaration.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; useful general APIs only."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalBarOrderedCup",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Ordered-cup proof steps 1--2: underlying character-lift complexes versus equivariant character-roof complexes.",
+   "via": [
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalBarEquivariantCharacterLifts",
+  "file": "lean/Sheaf/CategoryTheory/InternalBarEquivariantCharacterLifts.lean",
+  "declaration": "CategoryTheory.CondensedBar.OrderedCup.exists_equivariant_character_lifts",
+  "declarations": [
+   "CategoryTheory.CondensedBar.OrderedCup.augmentedRoofComponent",
+   "CategoryTheory.CondensedBar.OrderedCup.exists_equivariant_character_lifts"
+  ],
+  "statement": "theorem exists_equivariant_character_lifts (R : Resolution A.toMon G)\n    {F : InternalFunctions A} (B : BarDiagram (G := G) F)\n    (l : Profinite.CondensedAction.InternalBarCharacter.Lifts R B) :\n    ∃ e : RoofAugmentation R, ∃ he : QuasiIso e,\n      augmentationEquation R e ∧\n      ∃ L : Character A G → (complex R ⟶ (complex R)⟦(1 : ℤ)⟧),\n        (∀ a : Character A G, IsCharacterLift R a (L a)) ∧\n        ∀ a : List (Character A G),\n          (augmentedRoofComponent R e a.length\n            (orderedCharacterLift R a.length (fun i ↦ L (a.get i)))).val =\n              (l.augmented a).val",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed92",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T081842-L-2089288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed92",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T081842-L-2089288",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement and 14 moved definitions against clone 9a49814 (identical); three new sorry statements against RoofCup/CharacterLifts/RoofAdjunction definitions; item node proof fields against the Lean proof"
+ }
+}

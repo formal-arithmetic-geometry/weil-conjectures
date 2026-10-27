@@ -1,0 +1,488 @@
+{
+ "id": "lem-sfb-ordered-join-prefix-telescope",
+ "kind": "statement",
+ "title": "Ordered telescoping homotopy and annihilation on proper color supports",
+ "statement": "Let $r\\geq1$, put $I=\\{0,\\ldots,r-1\\}$, and let $(A_q)_{q\\in\\mathbf Z}$ be abelian groups, regarded as $\\mathbf Z$-modules with the chain-complex convention of [def-weil-pbc-module-chain-complex-homology]. For every $q\\in\\mathbf Z$ and $i\\in I$, let $d_q:A_q\\to A_{q-1}$, $c_{i,q}:A_q\\to A_{q+1}$ and $R_{i,q}:A_q\\to A_q$ be homomorphisms satisfying\n$$d_{q-1}d_q=0,\\qquad d_{q+1}c_{i,q}+c_{i,q-1}d_q=\\operatorname{id}_{A_q}-R_{i,q}.$$\nDefine $P_{0,q}=\\operatorname{id}_{A_q}$, $P_{i+1,q}=P_{i,q}\\circ R_{i,q}$ for $0\\leq i<r$, and\n$$H_q=\\sum_{i=0}^{r-1}P_{i,q+1}\\circ c_{i,q}.$$\nComposition always applies the rightmost map first; no commutation of different $R_i$ is assumed. Then, for all $q$ and $0\\leq i<r$, $d_qR_{i,q}=R_{i,q-1}d_q$; for all $0\\leq i\\leq r$, $d_qP_{i,q}=P_{i,q-1}d_q$; and\n$$d_{q+1}H_q+H_{q-1}d_q=\\sum_{i=0}^{r-1}(P_{i,q}-P_{i+1,q})=\\operatorname{id}_{A_q}-P_{r,q}.$$\nIn addition, fix any degree $q$ and suppose that for every proper subset $C\\subsetneq I$ there is a subgroup $A_{q,C}\\subseteq A_q$, that every element of $A_q$ is a finite sum of elements belonging to these subgroups, that $R_{i,q}(A_{q,C})\\subseteq A_{q,C}$ for all $i,C$, and that $R_{i,q}$ vanishes on $A_{q,C}$ whenever $i\\notin C$. Then $P_{r,q}=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), Agent generalization of ordered-join calculations 5-6: boundary commutation, ordered telescoping and annihilation on proper color supports. Not asserted in the blueprint itself."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Fix $i,q$. The chain convention is that of [def-weil-pbc-module-chain-complex-homology]. Solve the assumed local identity for $R_{i,q}$ and use the identity in degree $q-1$ as well. Distributing composition and using $d^2=0$ gives\n$$d_qR_{i,q}=d_q-d_qd_{q+1}c_{i,q}-d_qc_{i,q-1}d_q=d_q-d_qc_{i,q-1}d_q,$$\n$$R_{i,q-1}d_q=d_q-d_qc_{i,q-1}d_q-c_{i,q-2}d_{q-1}d_q=d_q-d_qc_{i,q-1}d_q.$$\nThus $d_qR_{i,q}=R_{i,q-1}d_q$ in every integer degree.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written algebraic expansion of ordered-join calculations 5-6 in lem-sfb-ordered-join-partial-contraction. The blueprint itself does not state this auxiliary calculation."
+   }
+  },
+  {
+   "text": "Induct on the prefix length $i$, simultaneously for every degree $q$. For $i=0$, both $d_qP_{0,q}$ and $P_{0,q-1}d_q$ equal $d_q$. If the equality holds at $i$, step 1 and associativity give\n$$d_qP_{i+1,q}=d_qP_{i,q}R_{i,q}=P_{i,q-1}d_qR_{i,q}=P_{i,q-1}R_{i,q-1}d_q=P_{i+1,q-1}d_q.$$\nThis proves the prefix commutation formula for $0\\leq i\\leq r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written algebraic expansion of ordered-join calculations 5-6 in lem-sfb-ordered-join-partial-contraction. The blueprint itself does not state this auxiliary calculation."
+   }
+  },
+  {
+   "text": "Distribute $d$ over the finite sum defining $H$. For each $i<r$, step 2 in degree $q+1$ and the assumed local identity in degree $q$ give\n$$d_{q+1}P_{i,q+1}c_{i,q}+P_{i,q}c_{i,q-1}d_q\n=P_{i,q}(d_{q+1}c_{i,q}+c_{i,q-1}d_q)\n=P_{i,q}(1-R_{i,q})=P_{i,q}-P_{i+1,q}.$$\nSumming these equalities proves the claimed equality with $\\sum_{i=0}^{r-1}(P_{i,q}-P_{i+1,q})$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written algebraic expansion of ordered-join calculations 5-6 in lem-sfb-ordered-join-partial-contraction. The blueprint itself does not state this auxiliary calculation."
+   }
+  },
+  {
+   "text": "For fixed $q$, induction on $k\\leq r$ gives\n$$\\sum_{i=0}^{k-1}(P_{i,q}-P_{i+1,q})=P_{0,q}-P_{k,q}.$$\nAt $k=0$ both sides are zero; adding $P_{k,q}-P_{k+1,q}$ proves the next case by cancellation in the abelian group of homomorphisms. Take $k=r$ and use $P_{0,q}=1$ to finish the homotopy identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written algebraic expansion of ordered-join calculations 5-6 in lem-sfb-ordered-join-partial-contraction. The blueprint itself does not state this auxiliary calculation."
+   }
+  },
+  {
+   "text": "Now fix a degree $q$ satisfying the support hypotheses, a proper subset $C\\subsetneq I$, and $x\\in A_{q,C}$. Choose $j\\in I\\setminus C$. Expanding the prefix recursion, with the stated order of application, gives\n$$P_{r,q}(x)=(R_{0,q}\\circ\\cdots\\circ R_{j-1,q})\\bigl(R_{j,q}((R_{j+1,q}\\circ\\cdots\\circ R_{r-1,q})(x))\\bigr).$$\nEmpty composites are identities. Successively applying the preservation hypothesis shows that the inner argument of $R_{j,q}$ belongs to $A_{q,C}$. Hence $R_{j,q}$ kills it; every remaining homomorphism sends zero to zero. Thus $P_{r,q}$ kills every $A_{q,C}$. Express any $x\\in A_q$ as a finite sum of elements of these subgroups. Additivity then gives $P_{r,q}(x)=0$, so $P_{r,q}=0$. No factors were commuted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written algebraic expansion of ordered-join calculations 5-6 in lem-sfb-ordered-join-partial-contraction. The blueprint itself does not state this auxiliary calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); agent-written algebraic expansion of ordered-join calculations 5-6 in lem-sfb-ordered-join-partial-contraction. The blueprint itself does not state this auxiliary calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a chain complex with d c_i plus c_i d equals 1 minus R_i the ordered prefix sum P_i c_i has boundary commutator 1 minus the product of the R_i",
+   "results": {
+    "t": "2026-10-22T06:10:50Z",
+    "tool": "leanfinder",
+    "query": "For a chain complex with d c_i plus c_i d equals 1 minus R_i the ordered prefix sum P_i c_i has boundary commutator 1 minus the product of the R_i",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.standardComplex.d_of",
+     "Rep.barComplex.d_single",
+     "groupHomology.inhomogeneousChains.d_single",
+     "AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq",
+     "Rep.standardComplex.d",
+     "AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq",
+     "AlgebraicTopology.DoldKan.Q_succ",
+     "Rep.standardComplex.d_comp_ε"
+    ],
+    "digest": "e451e0f9d8f84684"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan projections do not state the finite ordered-prefix formula together with annihilation on generating proper-color subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite sequence of chain homotopies gives a telescoping homotopy to the composite of the remainders; color-preserving remainders kill chains missing a color",
+   "results": {
+    "t": "2026-10-22T06:10:50Z",
+    "tool": "leanfinder",
+    "query": "A finite sequence of chain homotopies gives a telescoping homotopy to the composite of the remainders; color-preserving remainders kill chains missing a color",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mkInductiveAux₂_add_one",
+     "Homotopy.mkInductiveAux₃",
+     "Homotopy.mkInductiveAux₁",
+     "Homotopy.mkInductiveAux₂",
+     "AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant",
+     "Homotopy.mkCoinductiveAux₂_add_one",
+     "Homotopy.mkCoinductiveAux₃",
+     "Homotopy.mkCoinductiveAux₁"
+    ],
+    "digest": "0e1bfea4ed4e8ef4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan projections do not state the finite ordered-prefix formula together with annihilation on generating proper-color subgroups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"comp\"",
+   "results": {
+    "t": "2026-10-22T06:10:51Z",
+    "tool": "loogle",
+    "query": "\"Homotopy\", \"comp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.ShortComplex.HomotopyEquiv.refl",
+     "CategoryTheory.ShortComplex.HomotopyEquiv",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.symm",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.trans",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.hom",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.inv",
+     "CategoryTheory.ShortComplex.Homotopy.refl",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.symm_hom"
+    ],
+    "digest": "f047765c5a1efd41"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan projections do not state the finite ordered-prefix formula together with annihilation on generating proper-color subgroups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Telescoping finite ordered products of chain homotopies to projections gives a homotopy from the identity to their product",
+   "results": {
+    "t": "2026-10-22T06:10:50Z",
+    "tool": "leansearch",
+    "query": "Telescoping finite ordered products of chain homotopies to projections gives a homotopy from the identity to their product",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "(telescop|remainder|prefix).*(homotop|chain)|(homotop|chain).*(telescop|remainder|prefix)",
+   "results": {
+    "t": "2026-10-22T06:10:50Z",
+    "tool": "grep",
+    "query": "(telescop|remainder|prefix).*(homotop|chain)|(homotop|chain).*(telescop|remainder|prefix)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan projections do not state the finite ordered-prefix formula together with annihilation on generating proper-color subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In graded abelian groups with square zero differential and local insertion identities, an ordered telescoping homotopy has final product zero on subgroups generated by proper color supports",
+   "results": {
+    "t": "2026-10-22T06:12:43Z",
+    "tool": "leanfinder",
+    "query": "In graded abelian groups with square zero differential and local insertion identities, an ordered telescoping homotopy has final product zero on subgroups generated by proper color supports",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.hσ'_eq_zero",
+     "HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom_eq_zero",
+     "AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq_zero",
+     "AlgebraicTopology.DoldKan.σ_comp_P_eq_zero",
+     "AlgebraicTopology.DoldKan.HigherFacesVanish.of_P",
+     "Homotopy.nullHomotopicMap'_f_of_not_rel_right",
+     "Homotopy.nullHomotopicMap'_f_of_not_rel_left",
+     "AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id"
+    ],
+    "digest": "c47d0fdcf7ab644b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan projections do not state the finite ordered-prefix formula together with annihilation on generating proper-color subgroups."
+  },
+  {
+   "tool": "grep",
+   "query": "def comp|theorem comp|def trans|theorem trans",
+   "results": {
+    "t": "2026-10-22T06:12:43Z",
+    "tool": "grep",
+    "query": "def comp|theorem comp|def trans|theorem trans",
+    "sub": "Algebra/Homology/Homotopy.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "170",
+     "199",
+     "207",
+     "215",
+     "221"
+    ],
+    "digest": "ca37614409574d96"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan projections do not state the finite ordered-prefix formula together with annihilation on generating proper-color subgroups."
+  },
+  {
+   "tool": "grep",
+   "query": "(telescop|prefix).*(homotop|chain)|(homotop|chain).*(telescop|prefix)",
+   "results": {
+    "t": "2026-10-23T09:42:28Z",
+    "tool": "grep",
+    "query": "(telescop|prefix).*(homotop|chain)|(homotop|chain).*(telescop|prefix)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Data/List/Chain.lean"
+    ],
+    "digest": "6e7d3e3610bda8a8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy composition assumes chain maps and does not state the explicit ordered-prefix and proper-support clauses; Dold-Kan hits concern special simplicial projections, not arbitrary graded groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The chain homotopy from the identity to an ordered product is the sum of prefix products composed with the local homotopies",
+   "results": {
+    "t": "2026-10-23T09:42:28Z",
+    "tool": "leansearch",
+    "query": "The chain homotopy from the identity to an ordered product is the sum of prefix products composed with the local homotopies",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.comm",
+     "Homotopy.comp",
+     "Homotopy.mk",
+     "Homotopy.nullHomotopicMap",
+     "Homotopy.mkInductive",
+     "Homotopy.noConfusionType",
+     "Homotopy.mk.congr_simp",
+     "Homotopy.mkInductiveAux₂_add_one"
+    ],
+    "digest": "4739186959b8be18"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy composition assumes chain maps and does not state the explicit ordered-prefix and proper-support clauses; Dold-Kan hits concern special simplicial projections, not arbitrary graded groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"comp\"",
+   "results": {
+    "t": "2026-10-23T09:42:29Z",
+    "tool": "loogle",
+    "query": "\"Homotopy\", \"comp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.ShortComplex.HomotopyEquiv.refl",
+     "CategoryTheory.ShortComplex.HomotopyEquiv",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.symm",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.trans",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.hom",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.inv",
+     "CategoryTheory.ShortComplex.Homotopy.refl",
+     "CategoryTheory.ShortComplex.HomotopyEquiv.symm_hom"
+    ],
+    "digest": "f047765c5a1efd41"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy composition assumes chain maps and does not state the explicit ordered-prefix and proper-support clauses; Dold-Kan hits concern special simplicial projections, not arbitrary graded groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordered finite sum of prefix products of chain homotopies telescopes to the identity minus the product of the chain maps, which vanishes on invariant proper color supports",
+   "results": {
+    "t": "2026-10-23T09:42:32Z",
+    "tool": "leanfinder",
+    "query": "An ordered finite sum of prefix products of chain homotopies telescopes to the identity minus the product of the chain maps, which vanishes on invariant proper color supports",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "AlgebraicTopology.DoldKan.P_add_Q",
+     "Homotopy.mkInductiveAux₂_add_one",
+     "AlgebraicTopology.DoldKan.PInfty_add_QInfty",
+     "AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant",
+     "AlgebraicTopology.DoldKan.PInfty_comp_QInfty"
+    ],
+    "digest": "8b28795e2cb9358f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy composition assumes chain maps and does not state the explicit ordered-prefix and proper-support clauses; Dold-Kan hits concern special simplicial projections, not arbitrary graded groups."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyPToId|homotopyPInftyToId|def comp|def trans",
+   "results": {
+    "t": "2026-10-23T09:44:43Z",
+    "tool": "grep",
+    "query": "homotopyPToId|homotopyPInftyToId|def comp|def trans",
+    "sub": "Algebra/Homology/Homotopy.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "170",
+     "199",
+     "207",
+     "215",
+     "221"
+    ],
+    "digest": "ca37614409574d96"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy composition assumes chain maps and does not state the explicit ordered-prefix and proper-support clauses; Dold-Kan hits concern special simplicial projections, not arbitrary graded groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For square-zero differentials d, identities d c_i + c_i d = id - R_i imply d R_i = R_i d and the explicit homotopy sum (R_0 ... R_{i-1}) c_i telescopes without commuting the R_i",
+   "results": {
+    "t": "2026-10-23T09:44:45Z",
+    "tool": "leanfinder",
+    "query": "For square-zero differentials d, identities d c_i + c_i d = id - R_i imply d R_i = R_i d and the explicit homotopy sum (R_0 ... R_{i-1}) c_i telescopes without commuting the R_i",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mkInductiveAux₂_zero",
+     "Homotopy.mkInductiveAux₃",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "Homotopy.mkCoinductiveAux₂_add_one",
+     "Homotopy.mkInductiveAux₂_add_one",
+     "AlgebraicTopology.DoldKan.homotopyQToZero",
+     "Homotopy.comm",
+     "AlgebraicTopology.DoldKan.homotopyHσToZero"
+    ],
+    "digest": "248a92795debad83"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy composition assumes chain maps and does not state the explicit ordered-prefix and proper-support clauses; Dold-Kan hits concern special simplicial projections, not arbitrary graded groups."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyPToId|homotopyPInftyToId|PInfty_add_QInfty|P_add_Q",
+   "results": {
+    "t": "2026-10-23T09:45:12Z",
+    "tool": "grep",
+    "query": "homotopyPToId|homotopyPInftyToId|PInfty_add_QInfty|P_add_Q",
+    "sub": "AlgebraicTopology/DoldKan",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/DoldKan/Projections.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Projections.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Projections.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Projections.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Projections.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/PInfty.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/PInfty.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean"
+    ],
+    "digest": "c210bac4a7490f39"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Homotopy composition assumes chain maps and does not state the explicit ordered-prefix and proper-support clauses; Dold-Kan hits concern special simplicial projections, not arbitrary graded groups."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ordered-join-partial-contraction",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), below local continuous-cocycle descent; Agent generalization of ordered-join calculations 5-6: boundary commutation, ordered telescoping and annihilation on proper color supports. This is an agent expansion, not asserted by the blueprint.",
+   "via": [
+    "lem-sfb-ordered-join-partial-contraction",
+    "lem-sfb-homogeneous-cocycle-rectangle-detection",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ordered-join-prefix-telescope",
+  "worker": "stage1",
+  "summary": "Expanded the local identities to obtain boundary commutation, proved prefix commutation by induction, distributed and telescoped the finite sum, and killed proper-support generators in right-to-left order. All five steps are elementary calculations; no new nodes or statement changes. Read the current blueprint and searched project Lean, DAG and Mathlib.",
+  "blueprint": "Agent auxiliary expansion below paragraph (3) of the current direct-images proof; the ordered-join calculations are not assertions of the blueprint itself. Kept the existing null ancestor and its recorded via chain; no same-statement imported blueprint node found."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-c100faa7f",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-c100faa7f (reviewer sub-agent of L); spot-checked: Read the item in full. It is the 5-step elementary split of the abstract ordered-telescope node that Q136 created from old parent steps 5-6 (checked against the NN base: nothing dropped). I recomputed every step. Step 1: dR_i=R_i d by expanding 1-dc-cd in degrees q and q-1 with d^2=0. Step 2: an induction on i, set up correctly, for dP_i=P_i d. Step 3: dP_ic_i+P_ic_id=P_i(1-R_i)=P_i-P_{i+1}. Step 4: the finite telescoping, including the empty sum. Step 5: the right-to-left composite applies R_{r-1}..R_{j+1}, which keep the subgroup, then R_j kills it; generation plus additivity give P_r=0. Small cases agree: r=1; r=2 on Z^2->Z^2 gives H=1-R_0R_1, which confirms the order; C=I must be excluded. The statement matches parent step 3's use exactly (A_{q,C} = colour-set spans, R_i keeps colour sets, H=S). The cited def-weil-pbc-module-chain-complex-homology gives the d_{n-1}d_n=0 chain convention. Source main-20261015 direct-images.proof paragraph (3) was read; it does not state the calculation, and the node is honestly marked an agent expansion; no SGA, no tool_uses. No new nodes, statement and stmt_deps unchanged, proof_deps = union of uses, and no repair note applies. No duplicate in the DAG (prefix-tuple homotopy nodes differ) and no Mathlib leaf (Homotopy.comp needs chain maps and gives neither the explicit H nor the annihilation clause). Advisory: the step sources and proof_origin cite the moving literature/blueprint/latest symlink; the file is byte-identical to main-20261015 today."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.OrderedJoinPrefixTelescope",
+  "declaration": "AlgebraicTopology.orderedJoinPrefixTelescope",
+  "declarations": [
+   "AlgebraicTopology.orderedRemainderPrefix",
+   "AlgebraicTopology.orderedPrefixHomotopy",
+   "AlgebraicTopology.orderedJoinPrefixTelescope"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/OrderedJoinPrefixTelescope.lean",
+  "statement": "theorem orderedJoinPrefixTelescope (r : ℕ) (hr : 1 ≤ r) (A : ChainComplex (ModuleCat.{u} ℤ) ℤ) (c : ∀ (_i : Fin r) (q : ℤ), A.X q ⟶ A.X (q + 1)) (R : ∀ (_i : Fin r) (q : ℤ), A.X q ⟶ A.X q) (hlocal : ∀ (i : Fin r) (q : ℤ), c i q ≫ A.d (q + 1) q + A.d q (q - 1) ≫ c i (q - 1) ≫ (A.XIsoOfEq (sub_add_cancel q 1)).hom = 𝟙 (A.X q) - R i q) : (∀ (q : ℤ) (i : Fin r), R i q ≫ A.d q (q - 1) = A.d q (q - 1) ≫ R i (q - 1)) ∧ (∀ (q : ℤ) (n : ℕ), n ≤ r → orderedRemainderPrefix A R n q ≫ A.d q (q - 1) = A.d q (q - 1) ≫ orderedRemainderPrefix A R n (q - 1)) ∧ (∀ q : ℤ, orderedPrefixHomotopy A c R q ≫ A.d (q + 1) q + A.d q (q - 1) ≫ orderedPrefixHomotopy A c R (q - 1) ≫ (A.XIsoOfEq (sub_add_cancel q 1)).hom = ∑ i : Fin r, (orderedRemainderPrefix A R i.val q - orderedRemainderPrefix A R (i.val + 1) q)) ∧ (∀ q : ℤ, (∑ i : Fin r, (orderedRemainderPrefix A R i.val q - orderedRemainderPrefix A R (i.val + 1) q)) = 𝟙 (A.X q) - orderedRemainderPrefix A R r q) ∧ (∀ (q : ℤ) (S : {C : Set (Fin r) // C ⊂ Set.univ} → AddSubgroup (A.X q)), (∀ x : A.X q, ∃ (n : ℕ) (f : Fin n → A.X q) (C : Fin n → {C : Set (Fin r) // C ⊂ Set.univ}), (∀ j : Fin n, f j ∈ S (C j)) ∧ (∑ j : Fin n, f j) = x) → (∀ (i : Fin r) (C : {C : Set (Fin r) // C ⊂ Set.univ}) (x : A.X q), x ∈ S C → R i q x ∈ S C) → (∀ (i : Fin r) (C : {C : Set (Fin r) // C ⊂ Set.univ}) (x : A.X q), i ∉ C.val → x ∈ S C → R i q x = 0) → orderedRemainderPrefix A R r q = 0)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6036a5d71",
+  "group": "NI",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause; all five conclusion clauses match. ChainComplex (ModuleCat.{u} ℤ) ℤ is the model recorded by def-weil-pbc-module-chain-complex-homology; the local identity uses the correct composition order and the canonical XIsoOfEq for (q-1)+1=q. orderedRemainderPrefix unfolds to R_0∘…∘R_{n-1} with the rightmost factor acting first, so P_{i+1}=P_i∘R_i; H=Σ c_i≫P_i(q+1). Clauses: dR=Rd for all q and i; dP_n=P_nd for n≤r; dH+Hd=Σ(P_i-P_{i+1})=id-P_r; support clause over all proper subsets with explicit finite sums, preservation and vanishing give P_r=0. Edge cases r=1, n=0 and negative degrees covered; single bound universe u. Only the lean field changed; lean.statement is verbatim in the file; body is sorry only; helpers have real data and docstrings with source and blueprint. No duplicate: OrderedJoinPartialContraction.remainderPrefix is the concrete special case with the same order. No compile run since nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261025T050805-L-3841727",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicTopology.orderedJoinPrefixTelescope"
+  ],
+  "sorry_after": []
+ }
+}

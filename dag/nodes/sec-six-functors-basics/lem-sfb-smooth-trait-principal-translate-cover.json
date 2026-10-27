@@ -1,0 +1,509 @@
+{
+ "id": "lem-sfb-smooth-trait-principal-translate-cover",
+ "kind": "statement",
+ "title": "Affine principal chart and finite translate cover of a smooth generically affine trait group",
+ "statement": "Let $R$ be a strictly henselian discrete valuation ring [def-sc-discrete-valuation-ring, def-weil-pbc-henselian-terminology] with algebraically closed residue field $k$ [def-weil-algebraic-closure], fraction field $K$, and a generator $\\pi$ of its maximal ideal. Let $G$ be a smooth, separated group scheme of finite type over $S=\\operatorname{Spec}R$ [def-sbc-smooth-morphisms, def-weil-proper-morphism, def-weil-finite-type-morphism, def-weil-affine-spectrum]; its multiplication, identity and inverse satisfy the group diagrams. Assume $G_K=G\\times_S\\operatorname{Spec}K$ is affine [def-pc-base-change, def-pc-scheme]. Put $A=\\Gamma(G,\\mathcal O_G)$ and, for $h\\in A$, put $G_h=\\{x\\in G:h_x\\in\\mathcal O_{G,x}^{\\times}\\}$ with its open subscheme structure. There exist $f\\in A$, an integer $n\\geq1$, and sections $g_1,\\ldots,g_n\\in G(R)$ such that $G_f$ is affine and $G_f\\cap G_k\\ne\\varnothing$, and such that, on putting $f_0=\\pi\\cdot1_A$ and $f_j=(L_{g_j}^{-1})^*f$ for $1\\leq j\\leq n$, one has $G=\\bigcup_{j=0}^nG_{f_j}$ and every $G_{f_j}$ is affine. Here $L_g$ is left multiplication by the section $g$, $G_k=G\\times_S\\operatorname{Spec}k$, and $G(R)$ denotes the sections of $G\\to S$. In particular $G_{f_0}=G_K$ and $G_{f_j}=L_{g_j}(G_f)$ for $j\\geq1$. No connectedness hypothesis on either fibre is imposed.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/qrg.pdf: Proposition 3.1, printed p.5, the affine principal chart and its translates, citing Bosch–Lütkebohmert–Raynaud, Néron Models, p.161 Lemma 6. Finite subcover extracted using finite type; use algebraically closed residue field so closed points of the special fibre are rational. The seed is a global principal open, not just an arbitrary affine neighbourhood."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The DVR $R$ is Noetherian by [lem-weil-pbc-pid-noetherian-normal]. Its spectrum is Noetherian: the single affine chart has Noetherian coordinate ring and is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Hence $G$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. It is separated as a scheme by [lem-sc-separated-over-affine-scheme-separated], and is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine]. For any affine chart $V=\\operatorname{Spec}B$ in $G$, restriction is smooth by [lem-pc-open-immersion-smooth-composition], so $R\\to B$ is smooth by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] and flat by [lem-weil-pbc-smooth-ring-map-flat]. In particular multiplication by $\\pi$ is injective on $B$ by [lem-trf-flat-module-torsionfree-domain]. It is therefore injective on the structure sheaf and on its global sections.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-trf-flat-module-torsionfree-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD, 01T6, 01V6, 00TA; scheme finiteness and flatness preparation."
+   }
+  },
+  {
+   "text": "Both fibres are of finite type by [lem-sfb-finite-type-composition-base-change]. Applying [lem-weil-pbc-finite-type-over-noetherian] to their field bases makes them Noetherian. Smoothness of the fibres follows on the preceding affine charts from [lem-weil-pbc-smooth-ring-map-base-change-composition] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. Apply [lem-trf-smooth-reduced-dense-pullback] to $G\\to\\operatorname{Spec}R$ and to the special fibre over $k$: $G$ and $G_k$ are reduced, every generic point of $G$ lies in $G_K$, and $G_K$ is dense in every component of $G$. Both fibres are nonempty because the identity section has a point in each.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-smooth-reduced-dense-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01T6, 00T4, 034E, 00HS; smooth fibre and generic-density preparation."
+   }
+  },
+  {
+   "text": "There are finitely many generic points of $G$ and $G_k$ by [lem-weil-pbc-noetherian-finite-components]. At a generic point of $G$ the local dimension is zero, since primes of a stalk correspond to generalizations and there is no strict generalization of a component's generic point. At a generic point $z$ of $G_k$, choose a Noetherian affine chart from the locally Noetherian cover of $G$. Its ring $B$ is flat over $R$ by step 1. The local fibre ring at $z$ has dimension zero, since its corresponding prime is minimal. Thus [lem-weil-pbc-flat-height-formula] gives $\\dim\\mathcal O_{G,z}=1+0=1$. All the stalks concerned are Noetherian by [lem-weil-pbc-localization-noetherian]. Apply [lem-trf-codimension-one-points-affine-neighbourhood] to these finitely many points in the separated Noetherian scheme $G$: every quasi-compact open has finitely many components, by the Noetherian property and [lem-weil-pbc-noetherian-finite-components]. We obtain an affine open $U$ containing all of them. In particular $U$ is dense in $G$ and $U_k$ is dense in $G_k$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-trf-codimension-one-points-affine-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00ON and 09NN; common affine neighbourhood of the generic points of both fibres."
+   }
+  },
+  {
+   "text": "Put $E=G\\setminus U$. Its finitely many irreducible components exist by [lem-sc-noetherian-closed-subset-finite-components]. By [lem-sfb-affine-open-boundary-codimension-one], the generic point $\\xi$ of any such component has local dimension one in $G$. If $\\xi$ lay in $G_k$, apply [lem-weil-pbc-flat-height-formula] in a Noetherian affine chart at $\\xi$: $1=1+\\dim\\mathcal O_{G_k,\\xi}$, hence the fibre local dimension is zero. Its prime is therefore minimal, so $\\xi$ is a generic point of $G_k$, contrary to the choice of $U$. Every generic point of $E$ consequently lies in $G_K$. Each component is the closure of that point, so $E=\\overline{E\\cap G_K}$ in $G$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sfb-affine-open-boundary-codimension-one",
+    "lem-weil-pbc-flat-height-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCV and Tag 00ON; the affine boundary has no vertical component."
+   }
+  },
+  {
+   "text": "Write $G_K=\\operatorname{Spec}C$ and let $J\\subset C$ define its closed subset $E_K$. For every minimal prime $\\mathfrak p$ of $C$, its point belongs to $U_K$, so $J\\not\\subseteq\\mathfrak p$. There are finitely many such primes by [lem-weil-pbc-noetherian-finite-components], and at least one since the generic fibre contains the identity. Prime avoidance [lem-weil-pbc-prime-avoidance] supplies $a_K\\in J$ outside all of them. Consequently $D(a_K)\\subseteq U_K$, and $a_K$ is nonzero in the residue field at every generic point of $G_K$. By [lem-sfb-qcqs-functions-local-comparison], applied to $G\\to\\operatorname{Spec}R$ with powers of $\\pi$, $C=A[1/\\pi]$. Write $a_K=h/\\pi^d$ with $h\\in A$ and $d\\geq0$. Then $D(h|_{G_K})=D(a_K)$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-sfb-qcqs-functions-local-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DS and Tag 02KH (degree zero); choose a principal open dense in every generic component."
+   }
+  },
+  {
+   "text": "Choose a point $x\\in G_k$, for example the identity. The germ $h_x$ is nonzero. Indeed choose an irreducible component of $G$ containing $x$; its generic point $\\eta$ lies in $G_K$ by step 2, and $h$ has nonzero residue there by step 5. If $h_x=0$, $h$ would vanish on a neighbourhood of $x$; every such neighbourhood contains $\\eta$, a contradiction. The stalk $B=\\mathcal O_{G,x}$ is Noetherian by [lem-weil-pbc-localization-noetherian], and $\\pi B$ lies in its maximal ideal. Applying [lem-weil-pbc-krull-intersection-jacobson] with $M=B$ gives $\\bigcap_m\\pi^mB=0$. Thus $h$ cannot belong to $\\pi^mA$ for arbitrarily large $m$. Let $N$ be the largest integer with $h\\in\\pi^NA$, and write $h=\\pi^Nf$. Then $f\\notin\\pi A$ and $D(f|_{G_K})=D(a_K)$, since $\\pi$ is invertible on the generic fibre.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ (2); bound uniformizer divisibility at a nonzero special stalk."
+   }
+  },
+  {
+   "text": "The kernel of $A\\to\\Gamma(G_k,\\mathcal O_{G_k})$ is exactly $\\pi A$. To see this without assuming surjectivity on global sections, let a global section restrict to zero on $G_k$. On every affine chart $\\operatorname{Spec}B$, the fibre is $\\operatorname{Spec}(B/\\pi B)$, so the section is $\\pi$ times a section of $B$. The quotients agree on overlaps because multiplication by $\\pi$ is injective as a sheaf by step 1. They glue to a global quotient. The reverse containment is immediate. Hence $\\bar f\\ne0$. The fibre is reduced by step 2 and quasi-compact by step 2's Noetherian conclusion. If $f$ were a nonunit at every point of $G_k$, [lem-weil-pbc-qc-scheme-vanishing-section-nilpotent] would make $\\bar f$ nilpotent; reducedness would make it zero. Thus $G_f\\cap G_k$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03GY, proof, vanishing section is nilpotent; local division and unique sheaf gluing written out."
+   }
+  },
+  {
+   "text": "On $E_K$, $f$ has zero residue by steps 5--6, so $E_K\\subseteq G\\setminus G_f$. The latter is closed: on an affine chart it is the usual zero set of the restricted function. Step 4 therefore gives $E\\subseteq G\\setminus G_f$, and hence $G_f\\subseteq U$. Thus $G_f=U_{f|_U}$ as open subschemes. Since $U$ is affine, [lem-weil-pbc-principal-localization-open-immersion] identifies this open with the spectrum of the localization of $\\Gamma(U,\\mathcal O_U)$ at $f|_U$. This proves its affineness.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3 (principal localization); conclude the seed principal open is affine."
+   }
+  },
+  {
+   "text": "The nonempty open $W=G_f\\cap G_k$ contains a closed point of $G_k$ by [lem-sc-lft-over-field-jacobson-space], applied with closed subset $Z=G_k$. By [lem-weil-pbc-closed-point-residue-field-base], its residue field is $k$, giving $u\\in W(k)$. Every closed point $y$ of $G_k$ is likewise a $k$-point. Form $v=y u^{-1}\\in G_k(k)$. Choose an affine neighbourhood $V$ of $v$ in $G$. Its coordinate algebra is smooth over $R$ by [lem-pc-open-immersion-smooth-composition] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. The point $v$ is an $R$-algebra map $\\Gamma(V,\\mathcal O_V)\\to k$. The pair $(R,\\pi R)$ is henselian by [def-weil-pbc-henselian-terminology]. Applying [lem-trf-henselian-smooth-algebra-lifting] with its $A=R$ and $I=\\pi R$ lifts $v$ to a section $g\\in V(R)\\subseteq G(R)$. Its specialization is exactly $y u^{-1}$, so $y=L_g(u)\\in L_g(G_f)$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-henselian-terminology",
+    "lem-trf-henselian-smooth-algebra-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0478, Tag 00FV, Tag 0H74; rational special-fibre translations lift to R-sections."
+   }
+  },
+  {
+   "text": "For any section $g$, the group diagrams give $L_{g^{-1}}\\circ L_g=1=L_g\\circ L_{g^{-1}}$, so $L_g$ is an automorphism. It carries the affine open $G_f$ to an affine open. The union $O=\\bigcup_{g\\in G(R)}L_g(G_f)$ is open and contains every closed point of $G_k$ by step 9. If the closed subset $G_k\\setminus O$ were nonempty, [lem-sc-lft-over-field-jacobson-space] would supply a closed point of $G_k$ in it, a contradiction. Therefore $O$ contains all of $G_k$. Together with $G_K$, these opens cover $G$. Quasi-compactness of $G$ from step 1 gives finitely many sections $g_1,\\ldots,g_n$ whose translates, together with $G_K$, cover $G$. Adjoin the identity section if necessary to ensure $n\\geq1$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 and elementary group identities/finite subcover; no connectedness used."
+   }
+  },
+  {
+   "text": "Set $f_0=\\pi\\cdot1_A$ and $f_j=(L_{g_j}^{-1})^*f$. For an isomorphism the local-ring maps preserve and reflect units. Thus $x\\in G_{f_j}$ if and only if $L_{g_j}^{-1}(x)\\in G_f$, proving $G_{f_j}=L_{g_j}(G_f)$ as open subschemes. Also $R[1/\\pi]=K$: every nonzero element of a DVR is a unit times a power of its uniformizer. On each affine chart, [lem-weil-pbc-principal-localization-open-immersion] identifies the open where $\\pi$ is invertible with its base change to $R[1/\\pi]$. These identifications glue, giving $G_{f_0}=G_K$. This open is affine by hypothesis, and each of the other opens is isomorphic to the affine $G_f$. Step 10 now gives all assertions, including the finite cover.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "DVR uniformizer description (Tag 00PD), principal localization, and the definition of pullback; final identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-codimension-one-points-affine-neighbourhood",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sfb-affine-open-boundary-codimension-one",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-sfb-qcqs-functions-local-comparison",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-weil-pbc-henselian-terminology",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Agent reconstruction of BLR Neron Models §6.5 Lemma 6, p.161, and Prasad–Yu Proposition 3.1, p.5 (both WANTED locally), using Stacks 09NN, 0BCV, 00ON, 00DS, 00IQ, 02KH, 0478, 0H74. No SGA route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence of a global function whose principal open is affine and meets the closed fibre of a generically affine smooth group over a trait",
+   "results": "8 hits: AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top, AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top, AlgebraicGeometry.isAffineOpen_top, AlgebraicGeometry.IsAffineOpen.isoSpec, AlgebraicGeometry.IsAffineHom.casesOn, AlgebraicGeometry.IsAffine.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine basic-open criteria in QuasiAffine.lean (including of_forall_exists_mem_basicOpen at line 75) convert a supplied cover into quasi-affineness; they do not construct this cover from generic affineness and smoothness. AffineScheme basic-open lemmas assume the ambient open is already affine. Both seed and translate-cover phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*affine|affine.*generic|IsAffineOpen.*basicOpen|basicOpen.*IsAffineOpen",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine basic-open criteria in QuasiAffine.lean (including of_forall_exists_mem_basicOpen at line 75) convert a supplied cover into quasi-affineness; they do not construct this cover from generic affineness and smoothness. AffineScheme basic-open lemmas assume the ambient open is already affine. Both seed and translate-cover phrasings were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.IsSmooth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine basic-open criteria in QuasiAffine.lean (including of_forall_exists_mem_basicOpen at line 75) convert a supplied cover into quasi-affineness; they do not construct this cover from generic affineness and smoothness. AffineScheme basic-open lemmas assume the ambient open is already affine. Both seed and translate-cover phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated finite type group scheme over a discrete valuation ring with affine generic fibre has an affine principal open meeting the special fibre",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.affineOpenCover_X, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.reduce_to_affine_nbhd",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine basic-open criteria in QuasiAffine.lean (including of_forall_exists_mem_basicOpen at line 75) convert a supplied cover into quasi-affineness; they do not construct this cover from generic affineness and smoothness. AffineScheme basic-open lemmas assume the ambient open is already affine. Both seed and translate-cover phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a principal affine neighbourhood intersecting the closed fibre in the affinization of a separated smooth model of an affine algebraic group",
+   "results": "8 hits: AlgebraicGeometry.Scheme.affineOpenCover_X, AlgebraicGeometry.reduce_to_affine_nbhd, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.Scheme.affineOpenCover_idx, AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset, AlgebraicGeometry.Scheme.IsQuasiAffine",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine basic-open criteria in QuasiAffine.lean (including of_forall_exists_mem_basicOpen at line 75) convert a supplied cover into quasi-affineness; they do not construct this cover from generic affineness and smoothness. AffineScheme basic-open lemmas assume the ambient open is already affine. Both seed and translate-cover phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is an affine principal open of a smooth separated generically affine group over a strictly henselian trait whose translates and generic fibre cover the group",
+   "results": "8 hits: AlgebraicGeometry.Scheme.affineBasisCoverOfAffine, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.affineOpenCover_X, AlgebraicGeometry.Scheme.affineOpenCover_idx, AlgebraicGeometry.Scheme.affineOpenCover_I₀, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.reduce_to_affine_nbhd",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine basic-open criteria in QuasiAffine.lean (including of_forall_exists_mem_basicOpen at line 75) convert a supplied cover into quasi-affineness; they do not construct this cover from generic affineness and smoothness. AffineScheme basic-open lemmas assume the ambient open is already affine. Both seed and translate-cover phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*affine|affine.*generic|affini[sz]|principal.*special",
+   "results": "{\"t\": \"2026-10-24T05:05:55Z\", \"tool\": \"grep\", \"query\": \"generic.*affine|affine.*generic|affini[sz]|principal.*special\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\"], \"digest\": \"582d39c71f07d330\"}; Read returned hits: affine bases/basic-open results presuppose the chart or cover; function-field localizations do not construct an affine principal open meeting the closed fibre.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine principal open meeting the special fibre in a generically affine smooth scheme over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T05:05:55Z\", \"tool\": \"leansearch\", \"query\": \"Affine principal open meeting the special fibre in a generically affine smooth scheme over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.IsAffineOpen.Spec_basicOpen\", \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"AlgebraicGeometry.basicOpen_eq_of_affine\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk\", \"AlgebraicGeometry.basicOpen_eq_of_affine'\"], \"digest\": \"9db2a0780d9a587b\"}; Read returned hits: affine bases/basic-open results presuppose the chart or cover; function-field localizations do not construct an affine principal open meeting the closed fibre.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.IsSmooth\"",
+   "results": "{\"t\": \"2026-10-24T05:05:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsAffineOpen\\\", \\\"AlgebraicGeometry.IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: affine bases/basic-open results presuppose the chart or cover; function-field localizations do not construct an affine principal open meeting the closed fibre.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated group scheme over a henselian discrete valuation ring with affine generic fibre admits an affine global principal open meeting its special fibre",
+   "results": "{\"t\": \"2026-10-24T05:05:56Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth separated group scheme over a henselian discrete valuation ring with affine generic fibre admits an affine global principal open meeting its special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\"], \"digest\": \"2f1bee706fef5e27\"}; Read returned hits: affine bases/basic-open results presuppose the chart or cover; function-field localizations do not construct an affine principal open meeting the closed fibre.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsAffineOpen\", \"IsNormal\"",
+   "results": "{\"t\": \"2026-10-24T05:35:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsAffineOpen\\\", \\\"IsNormal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: affine bases/basic-open results presuppose the chart or cover; function-field localizations do not construct an affine principal open meeting the closed fibre.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated generically affine scheme over a discrete valuation ring has an affine principal chart and its translates cover a group scheme",
+   "results": "{\"t\": \"2026-10-24T05:35:52Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth separated generically affine scheme over a discrete valuation ring has an affine principal chart and its translates cover a group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_I₀\"], \"digest\": \"981af650fecae020\"}; Read returned hits: affine bases/basic-open results presuppose the chart or cover; function-field localizations do not construct an affine principal open meeting the closed fibre.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-generic-affine-group-affine",
+  "date": "2026-10-24",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: A monic relative torus homomorphism is a closed immersion. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting input: Conrad Theorem 5.3.5, p.166: apply Raynaud affineness to the separated flat finite-type generic-image closure; Prasad–Yu Proposition 3.1 supplies the proof. Supporting input to Raynaud affineness: Proposition 3.1, printed p.5, the affine principal chart and its translates, citing Bosch–Lütkebohmert–Raynaud, Néron Models, p.161 Lemma 6. Finite subcover extracted using finite type; use algebraically closed residue field so closed points of the special fibre are rational. The seed is a global principal open, not just an arbitrary affine neighbourhood.",
+   "via": [
+    "lem-sfb-dvr-generic-affine-group-affine",
+    "lem-sfb-relative-torus-monomorphism-closed",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-trait-principal-translate-cover",
+  "worker": "stage1",
+  "summary": "Expanded the BLR principal-chart argument and Prasad–Yu translates into eleven steps. Reused all required general facts, especially the existing Tag 09NN common affine neighbourhood node; no new nodes. Chose the generic function nonzero on every component before the Krull-intersection rescaling, checked the horizontal boundary and the kernel on global sections, and lifted arbitrary rational special points using henselian smooth-algebra lifting. Statement unchanged; no fibre connectedness used.",
+  "blueprint": "Read the latest sk-thm-sf-ctf-stability direct-image proof and the inherited generic-torus/Raynaud-affineness chain. This item realizes the principal-chart and translate-cover input in blueprint.from.place; null ancestor and inherited via retained. Searches for principal translate, principal affine and affine generic found no identical blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pid-noetherian-normal",
+    "why": "General scheme/commutative-algebra tool: A principal ideal domain is a Noetherian normal domain. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "General scheme/commutative-algebra tool: Affine schemes are quasi-compact and quasi-separated. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General scheme/commutative-algebra tool: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-sc-separated-over-affine-scheme-separated",
+    "why": "General scheme/commutative-algebra tool: A scheme separated over an affine scheme is separated. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "General scheme/commutative-algebra tool: A scheme separated and of finite type over an affine scheme is quasi-compact and quasi-separated. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "General scheme/commutative-algebra tool: An open immersion into a smooth morphism has smooth composite. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "General scheme/commutative-algebra tool: A ring map is smooth iff the morphism of spectra is smooth. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-flat",
+    "why": "General scheme/commutative-algebra tool: Smooth ring maps are flat. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-trf-flat-module-torsionfree-domain",
+    "why": "General scheme/commutative-algebra tool: Flat modules over domains are torsion-free. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "General scheme/commutative-algebra tool: Finite-type morphisms are stable under composition and base change. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "why": "General scheme/commutative-algebra tool: Smooth ring maps are stable under base change and composition. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "General scheme/commutative-algebra tool: Reducedness and generic density under smooth pullback. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-components",
+    "why": "General scheme/commutative-algebra tool: Finitely many irreducible components. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "General scheme/commutative-algebra tool: Height formula for flat ring maps of Noetherian rings. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "General scheme/commutative-algebra tool: Localizations of Noetherian rings are Noetherian. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-trf-codimension-one-points-affine-neighbourhood",
+    "why": "General scheme/commutative-algebra tool: Common affine neighbourhood of finitely many points of local dimension at most one. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "General scheme/commutative-algebra tool: A closed subset of a Noetherian scheme has finitely many irreducible components. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "General scheme/commutative-algebra tool: Prime avoidance. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "General scheme/commutative-algebra tool: Krull intersection theorem for an ideal in the Jacobson radical. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+    "why": "General scheme/commutative-algebra tool: A global section vanishing at every point of a quasi-compact scheme is nilpotent. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "def-pc-reduced-scheme",
+    "why": "General scheme/commutative-algebra tool: Reduced scheme. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "General scheme/commutative-algebra tool: Spec of a principal localization is an open immersion. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "General scheme/commutative-algebra tool: Schemes locally of finite type over a field are Jacobson. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "General scheme/commutative-algebra tool: Residue fields of closed points over an algebraically closed field. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "def-weil-pbc-henselian-terminology",
+    "why": "General scheme/commutative-algebra tool: Henselian terminology. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-trf-henselian-smooth-algebra-lifting",
+    "why": "General scheme/commutative-algebra tool: Smooth algebra homomorphisms lift across a henselian pair. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   },
+   {
+    "node": "def-sc-discrete-valuation-ring",
+    "why": "General scheme/commutative-algebra tool: Discrete valuation rings and uniformizers. Used in the explicitly numbered steps; the direct-image unit supplies no replacement for this foundational statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-codimension-one-points-affine-neighbourhood",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-weil-pbc-henselian-terminology",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-f907d7104",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-f907d7104 (reviewer sub-agent of L); spot-checked: I read all 11 steps and every cited statement. This is the item's first split (live has it unsplit), not a 2026-10-21 re-split. The statement is byte-identical to live, there are no new nodes, and there is no cycle. Raynaud/BLR 6.5/6 argument: Step 3 builds an affine U through the generic points of the special fibre. Its 09NN hypotheses (separated, Noetherian, local dims 0 and 1 via 00ON) all hold. Step 4 uses 0BCV (divisors.tex l.3485, dense U gives dim 1) and 00ON to show the boundary E is the closure of E_K. Step 5 needs r>=1 minimal primes for prime avoidance; the identity section supplies them. The qcqs-comparison node gives C=A[1/pi]. Step 6 makes the Krull 00IQ rescaling sound by choosing a_K nonzero at generic points first. Step 7 proves the kernel is pi*A by local division and gluing, then uses the qc nilpotent-section node and reducedness. So G_f is a subset of U, hence affine, and meets G_k. Step 9 lifts the k-points y*u^-1 to R-points with 0H74 (more-algebra l.3440) for the henselian pair (R, piR). Step 10 uses Jacobson density and quasi-compactness. Edge cases checked: Spec R, disconnected constant groups, generic-only components. Batch-5: all four flagged trf nodes (0539 torsion-free flat, ILO VIII 2.2.9 smooth reduced/dense pullback, 09NN affine neighbourhood, 0H74 henselian lifting) are generic algebra. Their closures contain no Poincaré-duality, sk-thm-trace or target node, and none is a step of the trace formula or Poincaré duality, so I accept them. The worker's tool_uses are generic foundations; I accept them. Cosmetic only: two defs appear in uses without a bracket citation in the text. No SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothTraitPrincipalTranslateCover",
+  "declaration": "AlgebraicGeometry.smooth_trait_principal_translate_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothTraitPrincipalTranslateCover.lean",
+  "statement": "theorem smooth_trait_principal_translate_cover (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] [IsAlgClosed (IsLocalRing.ResidueField R)] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (G : Over (Spec (.of R))) [GrpObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsAffine (pullback G.hom (Spec.map (CommRingCat.ofHom (algebraMap R K))))] : ∃ (f : Γ(G.left, ⊤)) (n : ℕ) (g : Fin n → (𝟙_ (Over (Spec (.of R))) ⟶ G)) (F : Fin (n + 1) → Γ(G.left, ⊤)), 1 ≤ n ∧ IsAffineOpen (G.left.basicOpen f) ∧ (∃ x : (pullback G.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R))) : Scheme.{u}), (pullback.fst G.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))) x ∈ G.left.basicOpen f) ∧ F 0 = G.hom.appTop ((Scheme.ΓSpecIso (.of R)).inv π) ∧ (∀ j : Fin n, F j.succ = (((toUnit G ≫ (g j)⁻¹) * 𝟙 G).left.appTop) f) ∧ (⨆ j : Fin (n + 1), G.left.basicOpen (F j)) = ⊤ ∧ (∀ j : Fin (n + 1), IsAffineOpen (G.left.basicOpen (F j))) ∧ Set.range (pullback.fst G.hom (Spec.map (CommRingCat.ofHom (algebraMap R K)))) = (G.left.basicOpen (F 0) : Set G.left) ∧ (∀ j : Fin n, (G.left.basicOpen (F j.succ) : Set G.left) = ((toUnit G ≫ g j) * 𝟙 G).left '' (G.left.basicOpen f : Set G.left))",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing GrpObj group diagrams and group law on morphisms over Spec R. The expression (toUnit G ≫ g) * 𝟙 G is left translation; no field-only translation declaration is specialized to a DVR. The uniquely specified Fin (n+1) family records f_0 and all inverse-translation pullbacks. Equalities of their underlying subsets identify the corresponding open subschemes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a1b6c454",
+  "group": "O1",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: strictly henselian DVR R (IsDiscreteValuationRing + IsStrictlyHenselianLocalRing), algebraically closed residue field, fraction field K, generator π, G : Over (Spec R) with GrpObj, Smooth, IsSeparated and finite type (LocallyOfFiniteType + QuasiCompact), affine G_K as a pullback. The conclusion fully determines F 0 = π·1 and F (j+1) = pullback of f along translation by g⁻¹; the * is Mathlib's pointwise Hom.group multiplication (Cartesian/Grp.lean:59), not composition. Also checked: cover = ⊤, every chart affine, G_{f_0} = range of the generic-fibre projection, G_{f_j} = image of G_f under translation by g_j, 1 ≤ n, G_f meets the special fibre. lean.statement is verbatim; only the lean field differs from live; the stmt_dep records match the declarations used. No new definitions, theorem is sorry, source/blueprint docstrings and proof plan present, no pro-etale, private imports exist in side-live. Edge cases (n=0, trivial or disconnected group, universe of K) checked. Not compiled: per instruction, and no file was changed. No findings."
+ }
+}

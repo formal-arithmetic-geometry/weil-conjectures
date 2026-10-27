@@ -10,26 +10,20 @@ public import Mathlib.CategoryTheory.Abelian.Subcategory
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 public import Mathlib.Topology.KrullDimension
+import Sheaf.Paper.CoefficientHeartLocallyClosedExtension
+import Sheaf.Paper.CoefficientHeartCurveLisseDescent
+import Sheaf.Paper.CoefficientHeartCurveComplement
+import Sheaf.AlgebraicGeometry.StratificationGenericNeighborhood
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import all Sheaf.Paper.FiniteEtaleLocallyFreeModels
+import all Sheaf.Paper.CoefficientHeartClosure
 import Sheaf.Paper.CoefficientHeartSmall
-import Sheaf.Paper.CompletedCondensedCoefficients
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement
-import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import Sheaf.Paper.CondensedSurjectiveClosedEquivalence
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Paper.CoefficientHeartClosure
-import Sheaf.Paper.CoefficientHeartCommonStratification
-import Sheaf.Paper.CondensedConstantConstructibility
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+import Mathlib.AlgebraicGeometry.QuasiAffine
+import Mathlib.Order.CompletePartialOrder
+import Mathlib.RingTheory.DedekindDomain.Basic
+import Mathlib.RingTheory.DedekindDomain.Dvr
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 # The constructible coefficient heart
@@ -148,6 +142,146 @@ def CoefficientHeartAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop :=
   EssentiallySmall.{u + 1} (ConstantModelConstructible Λ X) ∧
   CoefficientHeartFiltrationAssertions Λ X ∧ CoefficientHeartCurveAssertions Λ X
 
+/-- Keep the image construction abstract while assembling a filtration. -/
+private def heartFiltrationImage {Y : Scheme.{u}}
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (V : Y.Opens) : Subobject M :=
+  imageSubobject (coefficientHeartOpenCounit Λ M V)
+
+private theorem heartFiltrationImage_eq {Y : Scheme.{u}}
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (V : Y.Opens) : heartFiltrationImage Λ M V = coefficientHeartFiltrationStep Λ M V := rfl
+
+attribute [local irreducible] CondensedRing.upperStar CondensedRing.upperStarComp
+
+/-- Lissity descends across the closed side of a commuting pullback square. -/
+private theorem heartLisse_closed_square {Y S W T : Scheme.{u}}
+    (a : W ⟶ Y) (b : S ⟶ Y) (t : T ⟶ W) (r : T ⟶ S)
+    [IsClosedImmersion t] [Surjective t] (hsq : t ≫ a = r ≫ b)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (hM : IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ b).obj M)) :
+    IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ a).obj M) := by
+  have h := CondensedRing.locFree_pullback Λ r _ hM
+  let e := ((CondensedRing.upperStarComp Λ t a).app M).symm ≪≫
+    eqToIso (congrArg (fun f ↦ (CondensedRing.upperStar Λ f).obj M) hsq) ≪≫
+    (CondensedRing.upperStarComp Λ r b).app M
+  exact (coefficientHeart_curve_lisse_descent.{u, u} Λ t _).1.mpr
+    (CondensedRing.locFree_iso e h)
+
+/-- Lissity descends across the closed side of a commuting pullback square. -/
+private theorem heartLisse_closed_square_coefficient
+    (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj L)] {Y S W T : Scheme.{u}}
+    (a : W ⟶ Y) (b : S ⟶ Y) (t : T ⟶ W) (r : T ⟶ S)
+    [IsClosedImmersion t] [Surjective t] (hsq : t ≫ a = r ≫ b)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj L) Y))
+    (hM : IsLisseCoefficientModule (coefficientHeartRingObj L)
+      ((CondensedRing.upperStar (coefficientHeartRingObj L) b).obj M)) :
+    IsLisseCoefficientModule (coefficientHeartRingObj L)
+      ((CondensedRing.upperStar (coefficientHeartRingObj L) a).obj M) :=
+  heartLisse_closed_square (coefficientHeartRingObj L) a b t r hsq M hM
+
+-- Abstract the predicate before rewriting cover projections under inverse images.
+private def heartLissePullback {Y Z : Scheme.{u}} (f : Z ⟶ Y)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) : Prop :=
+  IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ f).obj M)
+
+private theorem heartLissePullback_eq {Y Z : Scheme.{u}} (f : Z ⟶ Y)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
+    heartLissePullback Λ f M =
+      IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ f).obj M) := rfl
+
+private theorem heartLissePullback_comp {Y Z T : Scheme.{u}} (f : T ⟶ Z) (g : Z ⟶ Y)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
+    heartLissePullback Λ (f ≫ g) M →
+      heartLissePullback Λ f ((CondensedRing.upperStar Λ g).obj M) := by
+  intro h
+  exact CondensedRing.locFree_iso ((CondensedRing.upperStarComp Λ f g).app M).symm h
+
+private theorem heartLissePullback_cover {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+    (C : Scheme.Cover.{u} Scheme.proetalePrecoverage Z)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (h : ∀ c, heartLissePullback Λ (C.f c ≫ g) M) : heartLissePullback Λ g M := by
+  apply CondensedRing.locFree_of_cover _ C
+  intro c
+  exact heartLissePullback_comp Λ (C.f c) g M (h c)
+
+attribute [local irreducible] heartLissePullback
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem heartLisse_iSup {Y : Scheme.{u}} {I : Type u} (W : I → Y.Opens)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (hW : ∀ c, IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ (W c).ι).obj M)) :
+    IsLisseCoefficientModule Λ
+      ((CondensedRing.upperStar Λ (⨆ c, W c).ι).obj M) := by
+  simp only [← heartLissePullback_eq] at hW ⊢
+  have hv (c : I) :
+      Y.homOfLE (le_iSup W c) ≫ (⨆ c, W c : Y.Opens).ι = (W c).ι := Y.homOfLE_ι _
+  let C : (⨆ c, W c : Y.Opens).toScheme.OpenCover := Scheme.Cover.mkOfCovers I
+    (fun c ↦ (W c).toScheme) (fun c ↦ Y.homOfLE (le_iSup W c)) (by
+    intro x
+    obtain ⟨c, hx⟩ := TopologicalSpace.Opens.mem_iSup.mp x.property
+    refine ⟨c, ⟨x.val, hx⟩, ?_⟩
+    rw [Scheme.homOfLE_apply']
+    exact Subtype.ext rfl)
+  let D : Scheme.Cover.{u} Scheme.proetalePrecoverage (⨆ c, W c : Y.Opens).toScheme :=
+    { I₀ := I
+      X := fun c ↦ (W c).toScheme
+      f := (fun c ↦ Y.homOfLE (le_iSup W c))
+      mem₀ := Scheme.zariskiPrecoverage_le_proetalePrecoverage _ C.mem₀ }
+  apply heartLissePullback_cover Λ (⨆ c, W c : Y.Opens).ι D M
+  intro c
+  change heartLissePullback Λ (Y.homOfLE (le_iSup W c) ≫ (⨆ c, W c : Y.Opens).ι) M
+  rw [hv]
+  exact hW c
+
+private theorem heartLisse_iSup_coefficient
+    (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj L)] {Y : Scheme.{u}} {I : Type u}
+    (W : I → Y.Opens)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj L) Y))
+    (hW : ∀ c, IsLisseCoefficientModule (coefficientHeartRingObj L)
+      ((CondensedRing.upperStar (coefficientHeartRingObj L) (W c).ι).obj M)) :
+    IsLisseCoefficientModule (coefficientHeartRingObj L)
+      ((CondensedRing.upperStar (coefficientHeartRingObj L) (⨆ c, W c).ι).obj M) :=
+  heartLisse_iSup (coefficientHeartRingObj L) W M hW
+
+/-- The complement with its actual reduced induced closed scheme structure. -/
+private def heartComplement {Y : Scheme.{u}} (U : Y.Opens) : Scheme.{u} :=
+  (Scheme.IdealSheafData.vanishingIdeal ⟨(U : Set Y)ᶜ, U.isOpen.isClosed_compl⟩).subscheme
+
+private def heartComplementι {Y : Scheme.{u}} (U : Y.Opens) : heartComplement U ⟶ Y :=
+  (Scheme.IdealSheafData.vanishingIdeal ⟨(U : Set Y)ᶜ, U.isOpen.isClosed_compl⟩).subschemeι
+
+private instance heartComplement_closed {Y : Scheme.{u}} (U : Y.Opens) :
+    IsClosedImmersion (heartComplementι U) := by
+  unfold heartComplementι
+  infer_instance
+
+private instance heartComplement_reduced {Y : Scheme.{u}} (U : Y.Opens) :
+    IsReduced (heartComplement U) := by
+  unfold heartComplement
+  infer_instance
+
+private theorem heartComplement_range {Y : Scheme.{u}} (U : Y.Opens) :
+    Set.range (heartComplementι U) = (U : Set Y)ᶜ := by
+  change Set.range
+    (Scheme.IdealSheafData.vanishingIdeal
+      ⟨(U : Set Y)ᶜ, U.isOpen.isClosed_compl⟩).subschemeι = (U : Set Y)ᶜ
+  rw [Scheme.IdealSheafData.range_subschemeι,
+    Scheme.IdealSheafData.coe_support_vanishingIdeal]
+  rfl
+
+attribute [local irreducible] heartFiltrationImage
+  CondensedRing.upperStarLowerStarAdjunction coefficientHeartLocallyClosedExtension
+  CondensedRing.openImmersionLowerShriekUpperStarAdjunction Subobject.ofLE Subobject.mk
+  CondensedRing.openImmersionLowerShriek CondensedRing.lowerStar
+  _root_.DerivedCategory.monoidalClosed CategoryTheory.Mod.monoidalClosed
+
+set_option cleanup.letToHave false in
+set_option backward.isDefEq.respectTransparency true in
 /-- Constructible sheaves over E or Qbar_l form an essentially small abelian heart, with
 finite locally closed lisse filtrations and the stated curve localization sequence.
 The Noetherian structure used to state the assertion is constructed from the standing
@@ -218,6 +352,129 @@ theorem coefficientHeart (ℓ : ℕ) [Fact ℓ.Prime]
     @CoefficientHeartAssertions (coefficientHeartRingObj L) _ _ X
       { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
         toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) } := by
-  sorry
+  classical
+  have _characteristic_separation := hpℓ
+  have : IsNoetherian X :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) }
+  have hcoeff :
+      Nonempty (Mon.mk (coefficientHeartRingObj L) ≅
+        Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+      Nonempty (Mon.mk (coefficientHeartRingObj L) ≅
+        Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk (coefficientHeartRingObj L) ≅
+          Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨
+        Nonempty (Mon.mk (coefficientHeartRingObj L) ≅
+        Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+      Nonempty (Mon.mk (coefficientHeartRingObj L) ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) := by
+    rcases hL with ⟨E, hE, hL⟩ | hL
+    · refine Or.inr (Or.inr (Or.inl ⟨⟨E, hE⟩, Or.inr ⟨?_⟩⟩))
+      exact eqToIso (congrArg (fun R ↦ Mon.mk (coefficientHeartRingObj R)) hL)
+    · refine Or.inr (Or.inr (Or.inr ⟨?_⟩))
+      exact eqToIso (congrArg (fun R ↦ Mon.mk (coefficientHeartRingObj R)) hL)
+  have htor := (localizingClosure_ctf_equals_bc ℓ X (coefficientHeartRingObj L) hcoeff).1.2.2.1
+  have hclosure := (coefficientHeart_closure ℓ L hL).2 X
+  have hk := hclosure.1
+  have hc := hclosure.2.1
+  have he := hclosure.2.2.1
+  have hab := hclosure.2.2.2.1
+  have hlim := hclosure.2.2.2.2.1
+  have hcolim := hclosure.2.2.2.2.2.1
+  have hstrata := hclosure.2.2.2.2.2.2
+  let P : ObjectProperty _ := IsConstantModelConstructible (coefficientHeartRingObj L) X
+  have : P.IsClosedUnderKernels := hk
+  have : P.IsClosedUnderCokernels := hc
+  have : P.IsClosedUnderExtensions := he
+  have : P.IsClosedUnderIsomorphisms :=
+    (constantModelConstructibleFiniteTor_wellDefined (coefficientHeartRingObj L) X).1
+  have : P.ContainsZero := by
+    have : Abelian P.FullSubcategory := hab.some
+    have : PreservesFiniteLimits P.ι := hlim
+    obtain ⟨Z, hZ⟩ := HasZeroObject.zero (C := P.FullSubcategory)
+    exact ⟨⟨Z.obj, P.ι.map_isZero hZ, Z.property⟩⟩
+  refine ⟨htor, ?_, hstrata, ?_, ?_, ?_, hab, hlim, hcolim,
+    coefficientHeart_essentiallySmall ℓ L hL X, ?_, ?_⟩
+  · intro K n hK
+    obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hcoh⟩ := hK
+    exact ⟨⟨⟨⟨a, inferInstance⟩, ⟨n, inferInstance⟩⟩,
+        _root_.DerivedCategory.homologyProperty_truncLE hcoh n⟩,
+      ⟨⟨⟨n, inferInstance⟩, ⟨b, inferInstance⟩⟩,
+        _root_.DerivedCategory.homologyProperty_truncGE hcoh n⟩⟩
+  · intro S a ha
+    obtain ⟨hu, h⟩ :=
+      ((coefficientHeart_locallyClosedExtension (coefficientHeartRingObj L) X).2 S a ha).2.2.2.2.2
+    obtain ⟨hadd, hD⟩ := h.2.2.2.2.2.2
+    exact ⟨h.1, h.2.1, h.2.2.1, h.2.2.2.1, h.2.2.2.2.1, h.2.2.2.2.2.1,
+      hadd, hD.2.2⟩
+  · intro F G f
+    exact ⟨P.prop_kernel f F.property G.property, P.prop_cokernel f F.property G.property⟩
+  · intro F G M f g hf hg hex
+    have := hf
+    have := hg
+    let Q := ShortComplex.mk f g (hex.zero 0)
+    have hQ : Q.Exact := Q.exact_iff_exact_toComposableArrows.mpr hex
+    exact P.prop_X₂_of_shortExact (S := Q) (ShortComplex.ShortExact.mk' hQ hf hg)
+      F.property G.property
+  · intro F
+    obtain ⟨S, hS⟩ := (hstrata F.obj).mp F.property
+    have hcommon := coefficientHeart_commonStratification ℓ L X hL
+    obtain ⟨R, hRall⟩ := hcommon.1 1 (fun _ ↦ S)
+    have hR := hRall.1
+    have hopen := hRall.2.2
+    have hRfree := hcommon.2.1.2 S R F.obj
+      (fun a ↦ heart_free_model (coefficientHeartRingObj L) _ (hS a)) (hR 0)
+    let V (a : Fin (R.n + 1)) : X.Opens := ⟨_, hopen a⟩
+    have hfil := coefficientHeart_filtration ℓ L hL X F.obj
+      F.property R (fun a ↦ heart_free_model (coefficientHeartRingObj L) _ (hRfree a))
+      V (fun _ ↦ rfl)
+    simp only [← heartFiltrationImage_eq] at hfil
+    obtain ⟨h, hquot⟩ := hfil.2.2.2
+    refine ⟨R.n, fun a ↦ heartFiltrationImage (coefficientHeartRingObj L) F.obj (V a),
+      hfil.2.1, hfil.2.2.1,
+      h, fun a ↦ ?_⟩
+    refine ⟨R.domain a, R.immersion a, R.isImmersion a,
+      (CondensedRing.upperStar (coefficientHeartRingObj L) (R.immersion a)).obj F.obj, ?_, ?_⟩
+    · exact (hquot a).2
+    · have hq := (hquot a).1
+      exact hq
+  · intro hdim F
+    obtain ⟨S, hS⟩ := (hstrata F.obj).mp F.property
+    have hn := (X.exists_stratification_generic_neighborhoods S).2
+    obtain ⟨η, j, W, hn⟩ := hn
+    have hW := hn.1
+    have hdense := hn.2.1
+    have hgeneric := hn.2.2
+    have hlocal (C : irreducibleComponents X) :
+        IsLisseCoefficientModule (coefficientHeartRingObj L)
+          ((CondensedRing.upperStar (coefficientHeartRingObj L) (W C).ι).obj F.obj) := by
+      have : Surjective (pullback.fst (W C).ι (S.immersion (j C))) := (hW C).2.2.2.2.2.2.1
+      have : IsClosedImmersion (pullback.fst (W C).ι (S.immersion (j C))) := (hW C).2.2.2.2.2.2.2.1
+      exact heartLisse_closed_square_coefficient L (W C).ι (S.immersion (j C))
+        (pullback.fst (W C).ι (S.immersion (j C)))
+        (pullback.snd (W C).ι (S.immersion (j C))) pullback.condition F.obj (hS (j C))
+    have hlisse := heartLisse_iSup_coefficient L W F.obj hlocal
+    have hgen : ∀ C ∈ irreducibleComponents X, ∀ x : X,
+        IsGenericPoint x C → x ∈ (⨆ C, W C : X.Opens) := by
+      intro C hC x hx
+      rw [(hW ⟨C, hC⟩).2.1 x hx]
+      exact hgeneric ⟨C, hC⟩
+    have hZ : ∃ Z : Scheme.{u}, ∃ i : Z ⟶ X,
+        IsClosedImmersion i ∧ IsReduced Z ∧ Set.range i = ((⨆ C, W C : X.Opens) : Set X)ᶜ := by
+      exact ⟨heartComplement (⨆ C, W C), heartComplementι (⨆ C, W C),
+        inferInstance, inferInstance, heartComplement_range _⟩
+    obtain ⟨Z, i, hiClosed, hiReduced, hi⟩ := hZ
+    have := hiClosed
+    have := hiReduced
+    have hcomp := coefficientHeart_curve_complement (coefficientHeartRingObj L)
+      X hdim (⨆ C, W C : X.Opens) hgen Z i hi F.obj
+    have : Finite Z := hcomp.2.1
+    refine ⟨(⨆ C, W C : X.Opens), hdense, hlisse, Z, i, hiClosed, hi,
+      ?_, ?_, hcomp.2.2.2⟩
+    · rw [← hi]
+      exact Set.finite_range _
+    · intro x hx
+      obtain ⟨z, rfl⟩ := hi.symm ▸ hx
+      exact hcomp.2.2.1 z
 
 end AlgebraicGeometry.ProEtale

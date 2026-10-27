@@ -1,0 +1,150 @@
+{
+ "id": "lem-sf-native-weil-ringed-tensor-model",
+ "kind": "statement",
+ "title": "Normalized action-site tensor model before comparison with a supplied adjoint",
+ "statement": "Under the finite-field, prime, finite-type, quasi-compact and separated hypotheses of [def-sf-native-weil-closed-models], fix NativeClosedHomModels M, an ordinary CoefficientClosedStructure S on M.ordinaryHom, its symmetry beta, hmonoidal identifying its monoidal structure with the fixed ordinary one, and NativeOrdinaryTensorModels hS. There exist a closed symmetric monoidal model W with right adjoints exactly M.weilHom, its symmetry gamma, coefficient-unit identifications delta and epsilon, tensor comparison t for nativeForget, Hom comparison chi compatible with the fixed native and ordinary product-total Hom representatives, and TensorCoherence c for t. The unit c.unit equals nativeForget(delta), followed by the exact-forgetting single-functor comparison and epsilon inverse. The inverse of t at (A,K) is ordinary uncurrying of nativeForget applied to the unit of W.adjunction K, followed by chi. No arbitrary tensor bifunctor T or supplied adjunction or comparison is assumed or constrained.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native constraint lifting steps 1 and 3; Stacks 06YS, 08J9 and 0FPT."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain m, gamma, delta, epsilon, t, a native tensor presentation, and c with the required unit formula from native_weil_tensor_geometry. This step supplies tensor geometry only, not native derived closedness.",
+   "uses": [
+    "lem-sf-native-weil-tensor-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct chi for precisely M.weilRepresentatives and M.ordinaryRepresentatives by native_hom_representative_exists. This is independent of m, t and all adjunctions.",
+   "uses": [
+    "lem-sf-native-hom-representative-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply native_weil_representative_currying to the presentation. The natural derived bijections construct W by the existing generic closed_of_natural_currying. Its transpose equals the supplied bijection. The representative uncurrying formula gives NativeAdjunctionNormalization for W.",
+   "uses": [
+    "lem-sf-native-weil-representative-currying",
+    "lem-sf-native-ordinary-closed-tensor-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply native_weil_tensor_evaluation to W, its normalization and chi. Inverse transposition of f is tensor(f,identity) followed by evaluation. Naturality of t moves this tensor map through t; compose with t inverse, cancel t, and combine the two ordinary tensor maps. This proves the normalized uncurrying identity for every f. Apply it to the adjunction unit: its inverse transpose is identity, so the identity reduces to the displayed mate formula. Assemble W, gamma, delta, epsilon, t, chi, c and the three equations.",
+   "uses": [
+    "lem-sf-native-weil-tensor-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-tensor-geometry",
+  "lem-sf-native-hom-representative-existence",
+  "lem-sf-native-weil-representative-currying",
+  "lem-sf-native-ordinary-closed-tensor-models",
+  "lem-sf-native-weil-tensor-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Tensor-geometry, prescribed Hom comparison, representative currying and evaluation compatibility; explicit adjunction-unit mate calculation in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport symmetric monoidal tensor along a natural isomorphism of tensor bifunctors and a unit isomorphism",
+   "results": "Found CategoryTheory.Functor.Monoidal.transport_μ, CategoryTheory.Functor.Monoidal.transport_δ, CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_hom, CategoryTheory.Functor.Monoidal.transport, CategoryTheory.Functor.Monoidal.transport_μ_assoc, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Monoidal.transport, CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_inv. No matching specialized native normalization or fixed-representative uniqueness theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.leftAdjointUniq\"",
+   "results": "Found CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc. No matching specialized native normalization or fixed-representative uniqueness theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Ii]so|[Ii]so.*tensor",
+   "results": "Found Mathlib/Tactic/Attr/Register.lean, Mathlib/Tactic/CategoryTheory/Monoidal/Datatypes.lean, Mathlib/Tactic/CategoryTheory/Monoidal/Datatypes.lean, Mathlib/Tactic/CategoryTheory/Monoidal/PureCoherence.lean, Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean. No matching specialized native normalization or fixed-representative uniqueness theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between derived internal Hom functors is uniquely determined by its projections on K injective representatives",
+   "results": "Found CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.NatTrans.rightDerived, CategoryTheory.NatTrans.leftDerived, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective. No matching specialized native normalization or fixed-representative uniqueness theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived category of modules on a ringed action site has a closed symmetric monoidal tensor and normalized forgetful comparison",
+   "results": "Found ModuleCat.monoidalClosed_curry, ModuleCat.monoidalClosed_uncurry, ModuleCat.instMonoidalClosed, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.monoidalCategory, ModuleCat.MonoidalCategory.tensorHom_def, ModuleCat.hom_tensorHom, ModuleCat.MonoidalCategory.symmetricCategory. No matching specialized native normalization or fixed-representative uniqueness theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorConstraintLifts",
+  "date": "2026-10-27",
+  "group": "E6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Internal-Hom/evaluation/transposition paragraph; individual associator, unit and signed-swap lifts and their images, before faithful verification of coherence axioms.",
+   "via": [
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilRingedTensorModel",
+  "file": "lean/Sheaf/Paper/NativeWeilRingedTensorModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_ringed_tensor_model",
+  "statement": "theorem native_weil_ringed_tensor_model\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    (M : NativeClosedHomModels k₀ l X)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (β : @SymmetricCategory _ _ S.monoidal)\n    (hmonoidal : S.monoidal = (inferInstance : MonoidalCategory\n      (DerivedCategory (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))))\n    (hS : NativeOrdinaryTensorModels l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber\n      M.ordinaryHom M.ordinaryRepresentatives S β) :\n    ∃ W : CoefficientClosedStructure M.weilHom,\n    ∃ γ : @SymmetricCategory _ _ W.monoidal,\n    ∃ δ : W.monoidal.tensorUnit ≅\n      (DerivedCategory.singleFunctor _ 0).obj (adicConstant k₀ l X),\n    ∃ ε : S.monoidal.tensorUnit ≅ (DerivedCategory.singleFunctor _ 0).obj\n      (ProEtale.AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber),\n    ∃ t : W.tensor ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor,\n    ∃ χ : M.weilHom ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).op.prod (nativeForget k₀ l X) ⋙ M.ordinaryHom,\n    ∃ c : RingedForgetTensorTransposition.TensorCoherence W.monoidal S.monoidal\n      γ β (nativeForget k₀ l X) t,\n      c.unit = (nativeForget k₀ l X).mapIso δ ≪≫\n        ((Functor.mapDerivedCategorySingleFunctor\n          (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) 0).app\n            (adicConstant k₀ l X)) ≪≫ ε.symm ∧\n      NativeHomRepresentativeCompatibility (ihomBifunctor k₀ l X)\n        (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n        M.weilHom M.ordinaryHom M.weilRepresentatives M.ordinaryRepresentatives\n        (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) χ ∧\n      (∀ A K, t.inv.app (A, K) =\n        (S.transpose ((nativeForget k₀ l X).obj A) ((nativeForget k₀ l X).obj K)\n          ((nativeForget k₀ l X).obj (W.tensor.obj (A, K)))).symm\n            ((nativeForget k₀ l X).map ((W.adjunction K).unit.app A) ≫\n              χ.hom.app (op K, W.tensor.obj (A, K))))",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T012823-L-2335970",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T034614-L-3665275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

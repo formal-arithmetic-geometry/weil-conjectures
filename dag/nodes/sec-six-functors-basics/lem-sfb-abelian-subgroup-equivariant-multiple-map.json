@@ -1,0 +1,388 @@
+{
+ "id": "lem-sfb-abelian-subgroup-equivariant-multiple-map",
+ "kind": "statement",
+ "title": "An abelian subgroup admits an equivariant positive-multiple map",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected separated group scheme of finite type over $k$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], where separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Let $i:A\\hookrightarrow G$ be a central closed subgroup scheme [def-sc-group-scheme-subgroup] with $A$ an abelian variety [def-sc-abelian-variety]; central means that $i(A(R))$ commutes with $G(R)$ for every commutative $k$-algebra $R$. There exist a positive integer $n$ and a $k$-scheme morphism $\\phi:G\\to A$ such that, for every $k$-scheme $T$ and $g\\in G(T)$, $a\\in A(T)$, $$\\phi(g\\,i(a))=\\phi(g)+[n]_A(a).$$ Here $[n]_A$ is multiplication by $n$ [def-sc-mult-n], and the equality is an equality of morphisms on the fibre product $G\\times_kA$ [def-pc-fibre-product]. The morphism $\\phi$ is not required to preserve the identity. No properness, affineness or commutativity assumption is imposed on $G$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.23 and Lemma 8.22, printed pp.152–153. The positive integer is the degree n in the proof of Lemma 8.22 (n=1 in its rational-point case). No Stacks tag states this equivariant map theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-abelian-variety",
+  "def-sc-mult-n",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Both $G$ and $A$ are nonempty, since they have identity sections. Apply [lem-sbc-connected-rational-point-geometrically-connected] to each structure morphism and its identity section. Thus both are geometrically connected. Apply [lem-trf-smooth-connected-fibre-normal-integrality] over $\\operatorname{Spec}k$ to conclude that $G_K$ and $A_K$ are integral for every field extension $K/k$. In particular $G$ and $A$ are geometrically integral. Moreover $A$ is commutative directly from the hypotheses: on any affine test scheme, centrality says $i(a)i(b)=i(b)i(a)$, and the monomorphism $i$ gives $a+b=b+a$. These identities glue over affine covers of arbitrary test schemes; evaluating at the identity of $A\\times_kA$ proves commutativity as a group-scheme identity.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-trf-smooth-connected-fibre-normal-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, printed pp.152–153, proof; Lemma 8.22 and 8.18. Generic-point spreading and equality of scheme morphisms expanded explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homogeneous-quotient] to $i:A\\hookrightarrow G$. Obtain a separated finite-type $k$-scheme $Q$ and a flat surjective finitely presented map $p:G\\to Q$. Its test-scheme coset criterion identifies\n$$\\theta:G\\times_k A\\longrightarrow G\\times_QG,\\qquad (g,a)\\longmapsto(g,g\\,i(a))$$\nas an isomorphism. Indeed, for every $k$-scheme $T$, a pair $(g,h)$ in the kernel pair has a unique $a\\in A(T)$ with $g^{-1}h=i(a)$; uniqueness uses the monomorphism $i$. This gives a natural inverse, hence a scheme inverse by [lem-galois-yoneda-fully-faithful]. The same criterion gives $p(g\\,i(a))=p(g)$, as an equality of morphisms. No commutativity of $G$ is used.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, printed pp.152–153, proof; Lemma 8.22 and 8.18. Generic-point spreading and equality of scheme morphisms expanded explicitly."
+   }
+  },
+  {
+   "text": "Under $\\theta$, the first projection $G\\times_QG\\to G$, which is the base change of $p$ along $p$, becomes $G\\times_k A\\to G$. It is smooth by [lem-pc-proper-base-change](2). The map $p$ is flat, surjective and quasi-compact (it is finitely presented); [lem-trf-smooth-fpqc-base-descent] therefore makes $p$ smooth. Apply [lem-sbc-smooth-flat-surjective-source-descent] to $G\\xrightarrow p Q\\to\\operatorname{Spec}k$: the first map is flat, surjective and locally finitely presented and the composite is smooth. Thus $Q$ is smooth over $k$. It is regular by [lem-weil-pbc-smooth-scheme-over-field-regular]. It is nonempty and connected as the continuous surjective image of the nonempty connected $G$. Hence [lem-sc-regular-connected-integral] makes $Q$ integral.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, printed pp.152–153, proof; Lemma 8.22 and 8.18. Generic-point spreading and equality of scheme morphisms expanded explicitly."
+   }
+  },
+  {
+   "text": "Let $\\eta\\in Q$ be the generic point, $K=\\kappa(\\eta)$ and $V=G\\times_Q\\operatorname{Spec}K$. By [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-surjective-base-change], $V\\to\\operatorname{Spec}K$ is flat and surjective. It is of finite type: finite presentation of $p$ is preserved by scalar extension, since finite algebra presentations tensor to finite presentations on affine charts. Pulling $\\theta$ back gives $V\\times_K A_K\\simeq V\\times_KV$ with the right translation action. By [lem-pc-proper-base-change](1),(2), $A_K$ is proper and smooth; properness includes separatedness and finite type. It is commutative and geometrically integral by step 1. Thus [lem-sfb-commutative-torsor-positive-weight], over the possibly imperfect field $K$, gives $n>0$ and $f_V:V\\to A_K$ with $f_V(va)=f_V(v)+[n]a$ as morphisms on $V\\times_K A_K$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-pc-proper-base-change",
+    "lem-sfb-commutative-torsor-positive-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, printed pp.152–153, proof; Lemma 8.22 and 8.18. Generic-point spreading and equality of scheme morphisms expanded explicitly."
+   }
+  },
+  {
+   "text": "The surjective $p$ is dominant. The generic point $\\xi$ of the integral $G$ therefore maps to $\\eta$. The generic fibre $V$ is integral with generic point induced by $\\xi$ and the same function field as $G$: on affine opens over $B=\\operatorname{Spec}R\\subset Q$, its charts are $\\operatorname{Spec}((R\\setminus\\{0\\})^{-1}C)$ for domains $C$ with injective $R\\to C$, and have fraction field $k(G)$. Thus the composite $\\operatorname{Spec}\\mathcal O_{G,\\xi}=\\operatorname{Spec}k(G)\\to V\\xrightarrow{f_V}A_K\\to A$ is a $k$-morphism. By [lem-sfb-local-ring-map-spread], applied with source $G$, base $\\operatorname{Spec}k$ and target $A$, it extends to $f_U:U\\to A$ on an open neighbourhood $U$ of $\\xi$. Its hypotheses hold: $A$ is locally finite type, and $G$ is locally Noetherian by [lem-weil-pbc-smooth-scheme-over-field-regular]. The open $U$ is dense. Apply [lem-sfb-weil-extension-to-abelian-variety] to the smooth integral separated finite-type $G$ and $A$: obtain a morphism $\\phi:G\\to A$ extending $f_U$.",
+   "uses": [
+    "lem-sfb-local-ring-map-spread",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sfb-weil-extension-to-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, printed pp.152–153, proof; Lemma 8.22 and 8.18. Generic-point spreading and equality of scheme morphisms expanded explicitly."
+   }
+  },
+  {
+   "text": "Let $\\phi_\\eta:V\\to A_K$ be the base change over $Q$ of $(p,\\phi):G\\to Q\\times_k A$. Both $\\phi_\\eta$ and $f_V$ agree on the canonical generic-point morphism $\\operatorname{Spec}k(G)\\to V$, by step 5 and the fibre-product universal property. That morphism has dense image, and $V$ is reduced by step 5. The target $A_K$ is separated over $K$. Apply [lem-sfb-relative-separated-dominant-ext], with $T=V$, $W=\\operatorname{Spec}k(G)$, $Y=A_K$ and $S=\\operatorname{Spec}K$, to get $\\phi_\\eta=f_V$ on all of $V$, not just at its generic point.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, printed pp.152–153, proof; Lemma 8.22 and 8.18. Generic-point spreading and equality of scheme morphisms expanded explicitly."
+   }
+  },
+  {
+   "text": "Put $X=G\\times_k A$ and $q=p\\circ\\operatorname{pr}_1:X\\to Q$. The projection $X\\to G$ is smooth by [lem-pc-proper-base-change](2), so $X\\to\\operatorname{Spec}k$ is smooth by [lem-trf-smooth-composition]. It is reduced by [sbc-lem-smooth-geometrically-reduced]. Since $G$ and $A$ are geometrically integral, [lem-sc-geometrically-irreducible-product] makes $X$ irreducible; hence it is integral. The identity of $A$ gives a section of $X\\to G$, so this projection is surjective and $q$ is dominant. Its generic fibre is canonically $X_\\eta=V\\times_K A_K$. Its image in $X$ is dense: the generic point of integral $X$ maps to $\\eta$ under the dominant $q$ and factors through that fibre. This uses only the generic-point description of the fibre; it asserts no open-immersion property for a generic fibre.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sc-geometrically-irreducible-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, printed pp.152–153, proof; Lemma 8.22 and 8.18. Generic-point spreading and equality of scheme morphisms expanded explicitly."
+   }
+  },
+  {
+   "text": "Consider the two $k$-morphisms $b,c:X\\to A$ defined by $b(g,a)=\\phi(g\\,i(a))$ and $c(g,a)=\\phi(g)+[n]_A(a)$. The action is over $Q$ by step 2. On $X_\\eta=V\\times_KA_K$, step 6 identifies $\\phi_\\eta$ with $f_V$, so step 4 gives $b|_{X_\\eta}=c|_{X_\\eta}$ as scheme morphisms. Apply [lem-sfb-relative-separated-dominant-ext] with reduced source $X$, dense-image morphism $X_\\eta\\to X$ and separated target $A/k$. It yields $b=c$ on $X$. Pulling this equality back along each $T\\to X$ gives the required formula for every $k$-scheme $T$, including nonreduced ones. The integer is the positive $n$ of step 4, and the construction imposes no condition on $\\phi(e_G)$.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, printed pp.152–153, proof; Lemma 8.22 and 8.18. Generic-point spreading and equality of scheme morphisms expanded explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-commutative-torsor-positive-weight",
+  "lem-sfb-local-ring-map-spread",
+  "lem-sfb-weil-extension-to-abelian-variety",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-trf-smooth-composition",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-geometrically-irreducible-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.23, printed pp.152–153, proof; Lemma 8.22 and 8.18. Generic-point spreading and equality of scheme morphisms expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a central abelian subvariety A of a smooth connected algebraic group G over an algebraically closed field there is a homomorphism G to A restricting to multiplication by a positive integer",
+   "results": "{\"t\": \"2026-10-24T08:53:22Z\", \"tool\": \"leanfinder\", \"query\": \"For a central abelian subvariety A of a smooth connected algebraic group G over an algebraically closed field there is a homomorphism G to A restricting to multiplication by a positive integer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidHom.transferCenterPow\", \"Abelianization.of\", \"Abelianization.lift\", \"CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"Subgroup.quotientCenterEmbedding\", \"MonoidHom.transferCenterPow_apply\", \"addCommGroupOfAddCyclicCenterQuotient\", \"Abelianization.lift_unique\"], \"digest\": \"a659db8f3ef97d35\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsAbelianVariety\"",
+   "results": "{\"t\": \"2026-10-24T08:53:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsAbelianVariety\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  },
+  {
+   "tool": "grep",
+   "query": "multiple.?retraction|Rosenlicht|abelian.*subvariety",
+   "results": "{\"t\": \"2026-10-24T08:53:22Z\", \"tool\": \"grep\", \"query\": \"multiple.?retraction|Rosenlicht|abelian.*subvariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected algebraic group has a morphism to any central abelian subvariety equivariant for multiplication by a positive integer",
+   "results": "{\"t\": \"2026-10-24T08:56:38Z\", \"tool\": \"leansearch\", \"query\": \"A smooth connected algebraic group has a morphism to any central abelian subvariety equivariant for multiplication by a positive integer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.Tactic.Abel.smulg\", \"Mathlib.Tactic.Abel.unfold_zsmul\", \"Subgroup.center.smulCommClass_right\", \"AddSubgroup.pointwise_isCentralScalar\", \"Subgroup.center.isMulCommutative\", \"Subgroup.pointwise_isCentralScalar\", \"AddSubgroup.zsmul\", \"QuotientAddGroup.homQuotientZSMulOfHom_id\"], \"digest\": \"ec842b24b94f7bb7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht lemma a torsor under an abelian variety gives a regular map from a smooth group to its abelian subvariety with phi ga equals phi g plus n a",
+   "results": "{\"t\": \"2026-10-24T08:56:40Z\", \"tool\": \"leanfinder\", \"query\": \"Rosenlicht lemma a torsor under an abelian variety gives a regular map from a smooth group to its abelian subvariety with phi ga equals phi g plus n a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Jacobian.addMap_eq\", \"WeierstrassCurve.Jacobian.Point.toAffine_add\", \"WeierstrassCurve.Affine.Point.toClass\", \"WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply\", \"WeierstrassCurve.Jacobian.Point.toAffineLift_add\", \"WeierstrassCurve.Affine.Point.map\", \"WeierstrassCurve.Affine.Point.instAddCommGroup\", \"WeierstrassCurve.Jacobian.Point.instAddCommGroup\"], \"digest\": \"33e2b9cff313c31e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAbelianVariety|AbelianVariety|Rosenlicht",
+   "results": "{\"t\": \"2026-10-24T08:56:40Z\", \"tool\": \"grep\", \"query\": \"IsAbelianVariety|AbelianVariety|Rosenlicht\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|equivariant.*[Aa]belian|[Aa]belian.*[Ss]ubvariety",
+   "results": "{\"t\": \"2026-10-24T09:33:33Z\", \"tool\": \"grep\", \"query\": \"Rosenlicht|equivariant.*[Aa]belian|[Aa]belian.*[Ss]ubvariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract groups, Galois categories, root weights, equivariant functions, or rational-map representatives; none constructs or extends the required positive-weight regular map to an abelian subgroup."
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*[Ee]xtension|[Mm]ultiple.*[Rr]etraction",
+   "results": "{\"t\": \"2026-10-24T09:33:33Z\", \"tool\": \"grep\", \"query\": \"Weil.*[Ee]xtension|[Mm]ultiple.*[Rr]etraction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract groups, Galois categories, root weights, equivariant functions, or rational-map representatives; none constructs or extends the required positive-weight regular map to an abelian subgroup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive weight equivariant morphism from an algebraic group to an abelian subgroup",
+   "results": "{\"t\": \"2026-10-24T09:33:33Z\", \"tool\": \"leansearch\", \"query\": \"Positive weight equivariant morphism from an algebraic group to an abelian subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.HomSubtype\", \"LieModule.weightSpace.congr_simp\", \"RootPairing.Equiv.weightMap_weightEquiv_symm\", \"RootPairing.Equiv.weightHom_injective\", \"RootPairing.Equiv.weightHom\", \"RootPairing.Equiv.weightEquiv_apply\", \"MulActionHom.instAddGroup\", \"MulActionHom.instAddCommGroup\"], \"digest\": \"38b5921523306b91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract groups, Galois categories, root weights, equivariant functions, or rational-map representatives; none constructs or extends the required positive-weight regular map to an abelian subgroup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAbelianVariety\"",
+   "results": "{\"t\": \"2026-10-24T09:33:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsAbelianVariety\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract groups, Galois categories, root weights, equivariant functions, or rational-map representatives; none constructs or extends the required positive-weight regular map to an abelian subgroup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian variety torsor over the function field of a quotient yields a rational map which extends by Weil extension",
+   "results": "{\"t\": \"2026-10-24T09:33:34Z\", \"tool\": \"leanfinder\", \"query\": \"An abelian variety torsor over the function field of a quotient yields a rational map which extends by Weil extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap\"], \"digest\": \"7566f8b7d7c83854\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract groups, Galois categories, root weights, equivariant functions, or rational-map representatives; none constructs or extends the required positive-weight regular map to an abelian subgroup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group over an algebraically closed field admits a map to a central abelian subvariety equivariant for a positive multiplication",
+   "results": "{\"t\": \"2026-10-24T09:33:35Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected algebraic group over an algebraically closed field admits a map to a central abelian subvariety equivariant for a positive multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.absoluteGaloisGroupAbelianization\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"TopologicalAbelianization\"], \"digest\": \"d90d48f46e8f1d67\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract groups, Galois categories, root weights, equivariant functions, or rational-map representatives; none constructs or extends the required positive-weight regular map to an abelian subgroup."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rosenlicht-connected-almost-complement",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Theorem 8.24 proof, first paragraph: the map of Proposition 8.23, before translation, homomorphy and taking its kernel; supporting the almost-complement in Theorem 8.26, second case.",
+   "via": [
+    "lem-sfb-rosenlicht-connected-almost-complement",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-subgroup-equivariant-multiple-map",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 8.23 and Lemma 8.22. Reused homogeneous quotient, positive-weight torsor and Weil-extension nodes, and supplied the kernel-pair inverse, smooth quotient geometry, generic-point construction and scheme-morphism equivariance. Statement unchanged; no new nodes.",
+  "blueprint": "Milne Proposition 8.23 proof (generic quotient torsor, rational map, Weil extension, global equivariance), at the supporting place recorded in blueprint.from.place and its via chain. Current latest sk-thm-sf-ctf-stability direct-images proof (3) remains the ancestor route; no independent blueprint duplicate found.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Geometric connectedness from a rational identity section; generic scheme tool used for G and A, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Only the generic smooth geometric-fibre integrality theorem over a field is used; no trace formula or duality input."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Yoneda converts the natural test-scheme inverse of the torsor kernel-pair map into a scheme inverse."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Smoothness under base change gives projections and A_K; properness under base change gives separated finite-type A_K."
+   },
+   {
+    "node": "lem-trf-smooth-fpqc-base-descent",
+    "why": "Generic fpqc descent of smooth scheme morphisms for the homogeneous quotient."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic source descent of smoothness for Q/k, with p flat surjective and locally finitely presented."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic regularity and local Noetherianity of smooth field schemes, for Q and G."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic integrality of a nonempty connected regular scheme, applied to Q."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic preservation of flatness for the quotient generic fibre."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic preservation of surjectivity for the quotient generic fibre."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic composition of smooth scheme maps to see G times A is smooth over k."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic geometric reducedness of smooth fibres, to make G times A reduced."
+   },
+   {
+    "node": "lem-sc-geometrically-irreducible-product",
+    "why": "Generic geometric irreducibility of products over a field, for G times A."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-trf-smooth-composition",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-geometrically-irreducible-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-9d97f59c3",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-9d97f59c3 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 pp.152–153: 8.16–8.21, 8.22 and 8.23 with proofs, and 8.24, which uses 8.23. The statement is unchanged: k algebraically closed, A a central abelian closed subgroup, n>0, equality of morphisms on G×A. The delivery adds no new nodes. All 18 cited statements were read and their hypotheses checked. Step 1: geometric connectedness from the identity section (lem-sbc), then geometric integrality from lem-trf-smooth-connected-fibre-normal-integrality with B=Spec k; A is commutative directly from centrality, on affine test schemes. Step 2: the homogeneous quotient and its coset criterion give the inverse of θ, made a scheme map by Yoneda. Step 3: smooth source descent makes Q smooth, hence regular, connected and integral. The fpqc-descent clause there is correct but not used later (harmless). Step 4: V is a flat, surjective, finite-type A_K-torsor, and A_K meets every hypothesis of commutative-torsor-positive-weight, including geometric integrality over K. Steps 5–6: V is the localization at the generic point, the map spreads from the local ring and the Weil extension applies to G, and the dense-image extension gives φ_η=f_V. Steps 7–8: X=G×A is smooth, reduced and irreducible, X_η has dense image, and b=c by the dense-image extension with A/k separated. Small cases A=G (Q a point, n=1), A=0 and G=A×H all work. Duplicate check: lem-sfb-abelian-inclusion-multiple-retraction is the special case G=A, not a duplicate and not cited, so there is no cycle. Batch-5 citations (lem-trf smooth-fibre integrality, smooth-fpqc-base-descent, smooth-composition, and through the existing nodes def-trf-scheme-algebraic-space and lem-trf-smooth-geometrically-normal) are generic scheme facts or definitions, not steps of the trace formula or Poincaré duality. Accepted, as are the 13 tool_uses. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AbelianSubgroupEquivariantMultipleMap",
+  "declaration": "AlgebraicGeometry.exists_abelian_subgroup_equivariant_multiple_map",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AbelianSubgroupEquivariantMultipleMap.lean",
+  "statement": "theorem exists_abelian_subgroup_equivariant_multiple_map (k : Type u) [Field k] [IsAlgClosed k] (G A : Over (Spec (.of k))) [GrpObj G] [GrpObj A] [Smooth G.hom] [ConnectedSpace G.left] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsAbelianVariety A] (i : A ⟶ G) [IsClosedSubgroupScheme i] (hcentral : ∀ (R : Type u) [CommRing R] [Algebra k R] (a : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ A) (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ G), Commute (a ≫ i) g) : ∃ (n : ℕ), 0 < n ∧ ∃ (φ : G ⟶ A), lift (fst G A) (snd G A ≫ i) ≫ μ[G] ≫ φ = lift (fst G A ≫ φ) (snd G A ≫ (𝟙 A ^ n)) ≫ μ[A]",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00eb4392c",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: algebraically closed k; G a group object over Spec k, smooth, connected, separated, locally finite type and quasi-compact; i an IsClosedSubgroupScheme (includes IsMonHom and injectivity on R-points); A with [GrpObj A] [IsAbelianVariety A], the upstream convention; centrality as Commute (a ≫ i) g on R-points for every commutative k-algebra R in universe u; conclusion ∃ n>0 ∃ φ:G⟶A, lift(fst, snd≫i)≫μ[G]≫φ = lift(fst≫φ, snd≫𝟙A^n)≫μ[A] as morphisms on G×_k A, with no homomorphism or identity condition on φ. No extra assumptions; single universe u. Node identical to live except the new lean field; statement verbatim in the file; no duplicate declaration; imported modules exist. No definitions, proof is sorry, docstrings carry Milne 8.23/8.22 pp.152-153, the blueprint id and the 8 proof steps; report has both required sections. Edge cases: trivial A, G=A, char p | n. No file changed, so nothing compiled. No findings."
+ }
+}

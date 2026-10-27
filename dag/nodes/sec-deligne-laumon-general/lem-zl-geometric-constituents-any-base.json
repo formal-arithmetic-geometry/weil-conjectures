@@ -68,7 +68,32 @@
   "def-wf-fundamental-representation"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Representation.exists_filtration_isIrreducible_restrict"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Representation.exists_filtration_isIrreducible_restrict",
+     "module": "WeilConjectures.RepresentationTheory.Clifford",
+     "lines": [
+      390,
+      422
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-i-dl-general-real",
  "lean": {
@@ -83,7 +108,11 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $k$ be an algebraically closed field, let $\\rho:W\\to\\operatorname{GL}_k(V)$\nbe a finite-dimensional representation of a group $W$, let\n$\\Pi\\subseteq W$ be a normal subgroup and $F\\in W$. Then there are\n$m\\geq1$ and a finite chain of subspaces\n$0=U_0\\subsetneq U_1\\subsetneq\\cdots\\subsetneq U_n=V$, each stable under\n$\\Pi$ and under $\\rho(F^m)$, such that every successive quotient\n$U_{i+1}/U_i$ is irreducible under $\\Pi$.",
   "proof": [
    {
@@ -97,14 +126,15 @@
     "elementary": false
    },
    {
-    "text": "Each irreducible summand is geometrically isotypic, of the form\n$S\\otimes M$, with $\\Pi$ acting irreducibly on $S$ and trivially\non $M$. Choose an intertwiner $T$ on $S$ for conjugation by\n$F^m$. Schur's lemma [lem-wf-schur-scalar] identifies the\naction of $F^m$ with $T\\otimes B$ for an invertible operator\n$B$ on $M$. The operator $B$ has an eigenline over $\\Qlb$;\nits tensor product with $S$ is Weil-stable. Irreducibility forces\n$\\dim M=1$. Thus every such summand is geometrically irreducible.\nTaking a common multiple of the extension degrees for the finitely\nmany original factors and refining their filtration proves the claim.\nThese subrepresentations are objects of the finite-stage coefficient\ncategory.\nIndeed, start with a finite coefficient field defining the original\nrepresentation and its Frobenius map, as in\n[def-weil-pbc-qbar-category]. Choose bases for the finitely many\nsubspaces in the resulting filtration. Their finitely many coordinates\nbelong to one finite extension $E'$ of that field. The subspaces\nthey span over $E'$ are stable: this can be checked after the faithful\nscalar extension $E'\\subset\\Qlb$, where stability has already been\nproved. Their subspace and quotient representations are continuous\nfor the geometric fundamental group and inherit the $F^m$-action.\nThus they give lisse Weil subsheaves and quotients at the finite stage\n$E'$, which also justifies applying the finite matrix witnesses to\nthese constituents.\nThis argument concerns the extension $\\Pi\\rtimes\\mathbf Z$ only\nand does not use a rank-one weight theorem on $X_0$.",
+    "text": "Each irreducible summand is geometrically isotypic, of the form\n$S\\otimes M$, with $\\Pi$ acting irreducibly on $S$ and trivially\non $M$. Choose an intertwiner $T$ on $S$ for conjugation by\n$F^m$. Schur's lemma [lem-wf-schur-scalar] identifies the\naction of $F^m$ with $T\\otimes B$ for an invertible operator\n$B$ on $M$. The operator $B$ has an eigenline over $\\Qlb$;\nits tensor product with $S$ is Weil-stable. Irreducibility forces\n$\\dim M=1$. Thus every such summand is geometrically irreducible.\nTaking a common multiple of the extension degrees for the finitely\nmany original factors and refining their filtration proves the claim.\nIn the application $V$ is the geometric representation of a lisse\n$\\Qlb$-Weil sheaf, and the subrepresentations are again defined over a\nfinite coefficient field. Indeed, by [thm-lisse-qlbar-representations]\n(a consequence of [sk-thm-sfb-qlbar-two-colimit] (1)) the original\nrepresentation and its Frobenius map are defined over some finite\nextension $E/\\mathbf Q_\\ell$ inside $\\Qlb$. Choose bases for the finitely\nmany subspaces in the resulting filtration. Their finitely many\ncoordinates belong to one finite extension $E'$ of $E$. The subspaces\nthey span over $E'$ are stable: this can be checked after the faithful\nscalar extension $E'\\subset\\Qlb$, where stability has already been\nproved. Their subspace and quotient representations are continuous\nfor the geometric fundamental group and inherit the $F^m$-action.\nBy [thm-lisse-qlbar-representations] they correspond to lisse Weil\nsubsheaves and quotients, defined over $E'$, which also justifies\napplying the finite matrix witnesses to these constituents.\nThis argument concerns the extension $\\Pi\\rtimes\\mathbf Z$ only\nand does not use a rank-one weight theorem on $X_0$.",
     "uses": [
      "lem-wf-schur-scalar",
-     "def-weil-pbc-qbar-category"
+     "thm-lisse-qlbar-representations",
+     "sk-thm-sfb-qlbar-two-colimit"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

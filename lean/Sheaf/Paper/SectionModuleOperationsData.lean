@@ -56,7 +56,7 @@ abbrev modules (X : Scheme.{u}) :=
 
 /-- The specified sectionwise equivalence; no new module encoding is introduced.
 Source: Stacks 00YV (blueprint: def-pd-section-module-operations-data). -/
-abbrev equivalence (X : Scheme.{u}) :=
+@[reducible] def equivalence (X : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
     (condensedRingObj Λ X)
 

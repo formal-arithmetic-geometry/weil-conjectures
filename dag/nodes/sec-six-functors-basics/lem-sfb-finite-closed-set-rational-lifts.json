@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-finite-closed-set-rational-lifts",
+ "kind": "statement",
+ "title": "Simultaneous rational lifts of a finite closed set after finite scalar extension",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ and $Y$ be schemes of finite type over $k$ [def-pc-scheme, def-weil-finite-type-morphism], and let $f:X\\to Y$ be a surjective $k$-morphism [def-weil-surjective-morphism]. Let $S\\subseteq |Y|$ be a finite set of closed points [def-weil-closed-points]. There exist a field extension $K/k$ [def-pc-field-extension] finite-dimensional as a $k$-vector space and a finite list of rational points $z_1,\\ldots,z_r\\in X_K(K)$ [def-pc-rational-point, def-pc-base-change] such that every point of $p_Y^{-1}(S)$ is $K$-rational and the underlying images of $f_K(z_1),\\ldots,f_K(z_r)$ are exactly $p_Y^{-1}(S)$, where $p_Y:Y_K\\to Y$ is the projection. The list may be empty when $S$ is empty. No separability of $K/k$, smoothness, reducedness, or flatness of $f$ is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem B.37, Step 2, printed p.605, second paragraph (finite extension splitting the closed lifts); generalized from the orbit map to a surjective morphism of finite-type schemes. Residue-field input: Stacks Tag 0478, varieties.tex lemma-locally-finite-type-Jacobson."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-closed-points",
+  "def-pc-field-extension",
+  "def-pc-rational-point",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, take $K=k$ and the empty list: its set of images and $p_Y^{-1}(S)$ are both empty. Henceforth suppose $S$ nonempty. For $s\\in S$, the subset $Z_s=f^{-1}(\\{s\\})$ is closed and nonempty by continuity and surjectivity. The space $X$ is quasi-compact by the finite-type hypothesis. It is Kolmogorov: sobriety implies that points with the same closure coincide, since both are generic points of that irreducible closure. Apply [lem-sc-quasi-compact-kolmogorov-closed-point] to the nonempty closed subset $Z_s$ to choose $x_s\\in Z_s$ closed in $X$. This does not require $f$ to be flat or separated.",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-sc-scheme-sober",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605, second paragraph; surjective finite-type-scheme generalization of its closed-lift argument."
+   }
+  },
+  {
+   "text": "Set $E_s=\\kappa(x_s)$ and $F_s=\\kappa(s)$. Both are finite over $k$ by [lem-kun-closed-point-field](a), since $X,Y$ are finite type and $x_s,s$ are closed. The residue map $F_s\\to E_s$ is a $k$-embedding. By [lem-weil-pbc-morphism-from-spec-field], the composite $\\operatorname{Spec}E_s\\to X\\xrightarrow{f}Y$ equals $\\operatorname{Spec}E_s\\to\\operatorname{Spec}F_s\\to Y$, where the first arrow is induced by that residue embedding. Thus we have an actual commuting scheme diagram, not just a lift of underlying points.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "def-weil-residue-field",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605, second paragraph; surjective finite-type-scheme generalization of its closed-lift argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-common-normal-compatible-groups] with $e=k$, the nonempty finite index set $S$, fields $E_s$, and every $J_s$ the trivial group with its trivial action. Its first conclusion gives a single finite normal extension $K/k$ and $k$-embeddings $E_s\\hookrightarrow K$. Composing with $F_s\\hookrightarrow E_s$ also embeds every $F_s$ in $K$. The extra group conclusions of that lemma are not used.",
+   "uses": [
+    "lem-sfb-common-normal-compatible-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605, second paragraph; surjective finite-type-scheme generalization of its closed-lift argument."
+   }
+  },
+  {
+   "text": "Put $D_s=(\\operatorname{Spec}E_s)_K$ and $T_s=(\\operatorname{Spec}F_s)_K$. By [lem-weil-pbc-fibre-product-affine-spectra], these are respectively $\\operatorname{Spec}(E_s\\otimes_k K)$ and $\\operatorname{Spec}(F_s\\otimes_k K)$ with the indicated $K$-structure. Apply [lem-sfb-normal-field-tensor-rational-points] to both finite extensions, using their embeddings from step 3. Each of $D_s,T_s$ has finitely many points and all its structural residue maps are isomorphisms from $K$. The projection $Y_K\\to Y$ has scheme-theoretic fibre at $s$ canonically $T_s$: both objects are the fibre product of $Y\\leftarrow\\operatorname{Spec}F_s$ with $Y_K\\to Y$, by the fibre-product universal property. Therefore its underlying fibre is exactly $|T_s|$, by [def-pc-scheme-fibre]. Every point of $p_Y^{-1}(S)$ is consequently $K$-rational, and this set is finite. By [lem-zl-fibre-residue-arrow] applied to $p_Y$, the structural residue arrow of a fibre point is the original residue arrow, so this identification also proves rationality as a point of $Y_K$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-normal-field-tensor-rational-points",
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre",
+    "lem-zl-fibre-residue-arrow"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605, second paragraph; surjective finite-type-scheme generalization of its closed-lift argument."
+   }
+  },
+  {
+   "text": "The map $\\operatorname{Spec}E_s\\to\\operatorname{Spec}F_s$ is surjective because each spectrum has one point. Base change it along $T_s\\to\\operatorname{Spec}F_s$. Its pullback is $D_s\\to T_s$, by reassociation of the fibre products over $k$, and is surjective by [lem-weil-pbc-surjective-base-change]. The commuting diagram of step 2 base changes to $D_s\\to X_K\\xrightarrow{f_K}Y_K$, whose composite is $D_s\\to T_s\\to Y_K$. For every $d\\in|D_s|$, its structural residue isomorphism $K\\xrightarrow{\\sim}\\kappa(d)$ and [lem-weil-pbc-morphism-from-spec-field] give a section $\\operatorname{Spec}K\\to D_s$ through $d$. Its composite with $D_s\\to X_K$ is a rational point $z_d$ of $X_K$. All images $f_K(z_d)$ lie above $s$, and the surjectivity just proved shows that their underlying points cover every point above $s$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-pc-rational-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605, second paragraph; surjective finite-type-scheme generalization of its closed-lift argument."
+   }
+  },
+  {
+   "text": "Enumerate the disjoint finite union of the sets $|D_s|$, for $s\\in S$, and take the corresponding list of $z_d$ from step 5. Its images lie in $p_Y^{-1}(S)$ and cover that set, proving equality of the underlying image sets. Repetitions in the list are harmless. The argument used normality rather than separability, and made no assertion that the tensor rings in step 4 were reduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605, second paragraph; surjective finite-type-scheme generalization of its closed-lift argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-surjective-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-sc-scheme-sober",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-kun-closed-point-field",
+  "def-weil-residue-field",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-sfb-common-normal-compatible-groups",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-normal-field-tensor-rational-points",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "lem-zl-fibre-residue-arrow",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-affine-spectrum",
+  "def-pc-rational-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem B.37, Step 2, printed p.605, second paragraph; surjective finite-type-scheme generalization of its closed-lift argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a surjective finite type morphism of schemes over a field and a finite set of closed points of the target, a finite extension makes every point above them rational and in the image of a rational point of the source",
+   "results": "{\"t\": \"2026-10-23T18:08:13Z\", \"tool\": \"leanfinder\", \"query\": \"Given a surjective finite type morphism of schemes over a field and a finite set of closed points of the target, a finite extension makes every point above them rational and in the image of a rational point of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"ax_grothendieck_of_locally_finite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.instIsDominantOfSurjective\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.mem_range_iff_of_surjective\"], \"digest\": \"cd69b26d780ebfad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Finite fibres, dominant maps, and individual residue-field points do not give simultaneous splitting and rational source lifts after one finite extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective morphism between finite type schemes over a field, finitely many closed target points split and have rational source lifts after some finite field extension",
+   "results": "{\"t\": \"2026-10-23T18:08:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a surjective morphism between finite type schemes over a field, finitely many closed target points split and have rational source lifts after some finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.pointsPi_surjective\", \"ax_grothendieck_of_locally_finite\", \"AlgebraicGeometry.instIsDominantOfSurjective\", \"AlgebraicGeometry.mem_range_iff_of_surjective\", \"AlgebraicGeometry.Scheme.residue_surjective\"], \"digest\": \"cec30727f657d64b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Finite fibres, dominant maps, and individual residue-field points do not give simultaneous splitting and rational source lifts after one finite extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a surjective morphism of finite type schemes over a field, a finite collection of closed target points has all of its geometric points lifted by rational source points over one finite field extension",
+   "results": "{\"t\": \"2026-10-23T18:08:49Z\", \"tool\": \"leansearch\", \"query\": \"For a surjective morphism of finite type schemes over a field, a finite collection of closed target points has all of its geometric points lifted by rational source points over one finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.Surjective.mk\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.instIsDominantOfSurjective\"], \"digest\": \"6f58b04975848b25\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Finite fibres, dominant maps, and individual residue-field points do not give simultaneous splitting and rational source lifts after one finite extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"RationalPoint\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-23T18:08:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"RationalPoint\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Finite fibres, dominant maps, and individual residue-field points do not give simultaneous splitting and rational source lifts after one finite extension."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(points|rationalPoint).*surject|finite.*extension.*rational|closedPoint.*(baseChange|pullback)|rational.*closed",
+   "results": "{\"t\": \"2026-10-23T18:08:14Z\", \"tool\": \"grep\", \"query\": \"exists.*(points|rationalPoint).*surject|finite.*extension.*rational|closedPoint.*(baseChange|pullback)|rational.*closed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Finite fibres, dominant maps, and individual residue-field points do not give simultaneous splitting and rational source lifts after one finite extension."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*finite.*(rational|point)|finite.*extension.*(point|lift)|rationalPoint",
+   "results": "{\"t\": \"2026-10-23T18:13:50Z\", \"tool\": \"grep\", \"query\": \"exists.*finite.*(rational|point)|finite.*extension.*(point|lift)|rationalPoint\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Finite fibres, dominant maps, and individual residue-field points do not give simultaneous splitting and rational source lifts after one finite extension."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*extension.*rational|rational.*lift|finite.*closed.*point",
+   "results": "{\"t\": \"2026-10-23T18:59:34Z\", \"tool\": \"grep\", \"query\": \"finite.*extension.*rational|rational.*lift|finite.*closed.*point\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjectivity, base-change stability and finite fibres do not assert simultaneous rational lifts over one finite scalar extension; second semantic phrasing also gives only those ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective morphism between finite type schemes over a field has rational lifts of every point above a finite set of closed points after one finite field extension",
+   "results": "{\"t\": \"2026-10-23T18:59:35Z\", \"tool\": \"leansearch\", \"query\": \"A surjective morphism between finite type schemes over a field has rational lifts of every point above a finite set of closed points after one finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.Surjective.surj\", \"AlgebraicGeometry.Surjective.mk\", \"AlgebraicGeometry.Scheme.Hom.surjective\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.surjective_iff\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\"], \"digest\": \"1a3b881a64bbdba0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjectivity, base-change stability and finite fibres do not assert simultaneous rational lifts over one finite scalar extension; second semantic phrasing also gives only those ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective, Module.Finite",
+   "results": "{\"t\": \"2026-10-23T18:59:35Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Surjective, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjectivity, base-change stability and finite fibres do not assert simultaneous rational lifts over one finite scalar extension; second semantic phrasing also gives only those ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of the base field makes every point above finitely many closed target points rational with rational source lifts for a surjective morphism of finite type schemes",
+   "results": "{\"t\": \"2026-10-23T18:59:36Z\", \"tool\": \"leanfinder\", \"query\": \"A finite extension of the base field makes every point above finitely many closed target points rational with rational source lifts for a surjective morphism of finite type schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.pointsPi_surjective\", \"ax_grothendieck_of_locally_finite\"], \"digest\": \"ee92c0cee3a0444c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjectivity, base-change stability and finite fibres do not assert simultaneous rational lifts over one finite scalar extension; second semantic phrasing also gives only those ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous splitting of finitely many closed points and rational lifting under a surjective map of algebraic schemes after extending the ground field by a finite extension",
+   "results": "{\"t\": \"2026-10-23T19:04:40Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous splitting of finitely many closed points and rational lifting under a surjective map of algebraic schemes after extending the ground field by a finite extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.Scheme.residue_surjective\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"ax_grothendieck_of_locally_finite\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.isField_of_universallyClosed\"], \"digest\": \"4221a9c43e55fa9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: surjectivity, base-change stability and finite fibres do not assert simultaneous rational lifts over one finite scalar extension; second semantic phrasing also gives only those ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-homogeneous-scheme-finite-set-affine",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). Milne Theorem 5.39 proof: existence of G/N, expanded to the independent homogeneous-space theorem 5.28 for arbitrary closed subgroups.; Milne B.37 Step 2, the affine-neighbourhood condition required for finite field descent; Milne B.37 Step 2, second paragraph: choosing a finite normal extension that splits the residue fields of closed source lifts of the prescribed closed target points.",
+   "via": [
+    "lem-sfb-homogeneous-scheme-finite-set-affine",
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-closed-set-rational-lifts",
+  "worker": "stage1",
+  "summary": "Kept the complete statement, including every conjugate and inseparable extensions. Chose closed source lifts by compactness, used the existing common-normal-field theorem with trivial groups, and exposed one algebraic prime-quotient lemma. Used surjective base change to prove that the rational source list covers all target points, not just one lift per original point. Read Milne B.37 Step 2 and checked all cited statements.",
+  "blueprint": "The historical supporting branch recorded in blueprint.from.place, specifically Milne B.37 Step 2 second paragraph: closed source lifts, one finite normal field receiving their residue fields, and all conjugate images. The latest direct-image proof now invokes the proper/open preservation inputs; this subsidiary algebraic tool does not change that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "General closed-point residue-field finiteness over a field, needed for both source lifts and target points; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-zl-fibre-residue-arrow",
+    "why": "The generic identification of structural residue arrows in a scheme fibre transfers the rationality proved on T_s to the actual point of Y_K; not just a homeomorphism of underlying spaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-zl-fibre-residue-arrow"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-ba33c61d7",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-ba33c61d7 (reviewer sub-agent of L); spot-checked: I read the item, its six steps and the new node lem-sfb-normal-field-tensor-rational-points in full, plus every cited statement and Milne B.37 Step 2 on printed p.605 (PDF pp.616-618). The item faithfully generalizes Milne's claim that all points above the closed lifts are rational over a normal K receiving the residue fields, keeping that the images are all points of p_Y^{-1}(S). Step 1: sober implies T0, then lem-sc-quasi-compact-kolmogorov-closed-point gives a point of Z_s closed in X. Step 2: lem-kun-closed-point-field(a) and the factorization from lem-weil-pbc-morphism-from-spec-field. Step 3: lem-sfb-common-normal-compatible-groups with trivial groups and nonempty I. Step 4: the fibre of Y_K over s is Spec(F_s tensor_k K) by the universal property, then def-pc-scheme-fibre and lem-zl-fibre-residue-arrow. Step 5: Spec E_s -> Spec F_s base-changed along T_s is D_s -> T_s, surjective by lem-weil-pbc-surjective-base-change, and the residue isomorphisms give K-sections. Step 6 is elementary. The union of the steps' uses equals proof_deps, there is no cycle, and the stmt_deps are unchanged. The new node is true: B/q is a field finite over K, normality puts the image of each e in K, the kernels of ev_sigma give a bijection with embeddings, which are finite and include u. It needs no separability or reducedness, and normality is essential (a non-normal cubic fails). It has no proof, a self-contained statement with correct citations, and blueprint ancestor null with same_as []. It duplicates no existing node: normal-scalar-extension-geometric-orbits is over an algebraically closed Omega inside an orbit statement, integral-roots and finite-galois-tensor assume separability, and finite-scalar-extension-generic-points does not give rationality. It is not a restated clause of the item. Small cases checked: S empty; R and C; C over R; F_p(t) with t^{1/p}. I accept the declared tool uses lem-kun-closed-point-field and lem-zl-fibre-residue-arrow as generic tools. No SGA is cited and this is not a re-split. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClosedSetRationalLifts",
+  "declaration": "AlgebraicGeometry.exists_finite_extension_rational_lifts_of_finite_closed_set",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClosedSetRationalLifts.lean",
+  "statement": "theorem exists_finite_extension_rational_lifts_of_finite_closed_set {k : Type u} [Field k] (X Y : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [Surjective f.left] (S : Set Y.left) (hS : S.Finite) (hclosed : S ⊆ closedPoints Y.left) : ∃ (K : Type u) (_ : Field K) (_ : Algebra k K) (_ : Module.Finite k K), ∃ zs : List ((pullback.snd X.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fieldPoints K), (∀ y : (pullback Y.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))) : Scheme.{u}), (pullback.fst Y.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) y ∈ S → ∃ q : (pullback.snd Y.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fieldPoints K, q.1 default = y) ∧ {y | ∃ z ∈ zs, ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map f).left (z.1 default) = y} = (pullback.fst Y.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⁻¹' S",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-486b7b229",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Clause-by-clause match. Over(Spec k) X,Y with LocallyOfFiniteType+QuasiCompact (finite-type record convention), Surjective f.left, S finite ⊆ closedPoints. ∃ K : Type u Field/Algebra/Module.Finite. zs typed as fieldPoints K of X_K (same form as the def-pc-rational-point record baseChangeFieldPoint). First conjunct: every y with pullback.fst y ∈ S has a K-section through it, i.e. is K-rational. Second conjunct: equality of the image set under the canonical (Over.pullback g).map f with pullback.fst ⁻¹' S. No stronger hypotheses; S=∅/Y=∅ case covered by K=k and the empty list; inseparable K and repeated entries allowed. lean.statement verbatim; the node differs from live only in lean; the item is not landed live; the private imports are proof_dep modules and exist; docstrings carry source place, blueprint id and proof steps; sole proof sorry; no definitions. Report has Worker report and Second reading sections (advisory: same worker wrote both). No compile, since no file changed."
+ }
+}

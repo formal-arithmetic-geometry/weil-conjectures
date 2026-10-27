@@ -73,7 +73,54 @@
   "lem-pc-cartier-criterion"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_addition_hilbertPresheaf",
+    "AlgebraicGeometry.IsHilbertSubscheme.exists_eq_mul",
+    "AlgebraicGeometry.IsHilbertSubscheme.mul"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_addition_hilbertPresheaf",
+     "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
+     "lines": [
+      652,
+      786
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsHilbertSubscheme.exists_eq_mul",
+     "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
+     "lines": [
+      479,
+      515
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsHilbertSubscheme.mul",
+     "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
+     "lines": [
+      622,
+      650
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-hilb-curves",
  "lean": {
@@ -90,8 +137,12 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X\\to S$ be\na separated smooth morphism of relative dimension $1$, assume that\nall the functors $\\operatorname{Hilb}^e_{X/S}$ are representable,\nand let $d\\geq0$. There is a canonical morphism\n\n$$\n\\underline{\\operatorname{Hilb}}^d_{X/S}\\times_SX\\;\\longrightarrow\\;\\underline{\\operatorname{Hilb}}^{d+1}_{X/S},\n$$\n\nfinite locally free of degree $d+1$, sending a pair\n$(Z,x)$ of a degree-$d$ closed subscheme and a point to the\nscheme-theoretic addition of $x$ to $Z$.\nFor a rational point $x$ this is the divisor $Z+x$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X\\to S$ be\na separated smooth morphism of relative dimension $1$, let $d\\geq0$ and\nassume that the functors $\\operatorname{Hilb}^d_{X/S}$ and\n$\\operatorname{Hilb}^{d+1}_{X/S}$ are representable. There is a morphism of\n$S$-schemes\n\n$$\n\\underline{\\operatorname{Hilb}}^d_{X/S}\\times_SX\\;\\longrightarrow\\;\\underline{\\operatorname{Hilb}}^{d+1}_{X/S},\n$$\n\nfinite locally free of degree $d+1$, sending a $T$-point\n$(Z,x)$, with $Z\\subset X_T$ a degree-$d$ closed subscheme and $x:T\\to X$ a\nmorphism over $S$, to the closed subscheme of $X_T$ whose ideal is the\nproduct $\\mathcal{I}_Z\\cdot\\mathcal{I}_{\\Gamma_x}$ of the ideal of $Z$ and the\nideal of the graph $\\Gamma_x\\subset X_T$ of $x$.\nFor a rational point $x$ this is the divisor $Z+x$.",
   "proof": [
    {
     "text": "Assume $\\operatorname{Hilb}^d_{X/S}$ and $\\operatorname{Hilb}^{d+1}_{X/S}$ are representable (for\nthe statement of the lemma this is part of the hypotheses, cf. the\nformulation ``or as in Lemma 44.3.4''; the proof constructs the\nmorphism from the universal objects, so representability is exactly\nwhat is needed); write $H_d:=\\underline{\\operatorname{Hilb}}^d_{X/S}$,\n$H_{d+1}:=\\underline{\\operatorname{Hilb}}^{d+1}_{X/S}$ and let\n\n$$\nD_{\\mathrm{univ}}\\subseteq X_{H_{d+1}}=H_{d+1}\\times_SX\n$$\n\nbe the universal closed object of degree $d+1$ (the element of\n$\\operatorname{Hilb}^{d+1}_{X/S}(H_{d+1})$ given by representability,\n[def-pc-hilb-functor]).",
@@ -116,6 +167,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -139,7 +139,32 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-module-pushforward-pullback",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal",
+     "lines": [
+      120,
+      124
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal",
   "declaration": "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp",
@@ -185,5 +210,25 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-bfbb9d14c (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and found no fault. It answers the 2026-10-21 human re-split note (repair-notes, released), which asked to split the landed 3731-character ND proof. Diffing against the live node, only proof, proof_deps and split_report change; the statement, stmt_deps, source and lean fields are byte-identical. The item proof is now 1810 characters in 3 steps, and the new node's proof (kept in the report) is 1626 characters. Lean: live Monoidal.lean:123 is still `:= sorry`, so B10 does not apply. New node lem-sfb-sheaf-pushforward-generator-comparison: I recomputed its proof and it is true. The mate tensor of U_D is U(ε⊗ε)∘U(a(η⊗η))∘η = η = t_D by the triangle identity. In the transported structure on R, the tensor of inverse counits is a_C(η_P⊗η_Q) = μ_a^{-1}, which cancels and leaves ε∘a_C(r t_D). Naturality of η with Uε∘η = id then gives U_C(μ_R)∘t_C = r(t_D), and the unit case is the same. It relies on the canonical conventions φ⊗ψ = a(Uφ⊗Uψ) and the strong structure of a from lem-sfb-braided-sheaf-tensor-generators, which it cites. The project lemma μ_sheafToPresheaf_comp_map_μ_sheafPushforwardContinuous (PushforwardMonoidal.lean) supports it. It is generic (one restriction, no schemes, no composition), so it does not restate a clause of the item. It is not a duplicate: def-sfb-finite-lower-star-lax-monoidal is symmetric-only and has no formulas, and an rg over all nodes found nothing else. It has 7 recorded searches. Item step 1 applies the node with E = −×_T S; the hypothesis that r preserves sheaves comes from def-sfb-finite-lower-star, and smallness from def-weil-pbc-proetale-site. Steps 2 and 3 are the tensor and unit naturality checks at b: W'→W through t_X and u_X (constant presheaf: b ↦ id); I re-verified both. There is no symmetry, no SGA and no cycle, and every step is under 2000 characters. The retained tool_uses (proetale-site, finite-lower-star, lower-star-comp) are accepted. Maintainer note: the item's lean.note still wrongly says the Lean has no sorry."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A$ be a closed braided monoidal Grothendieck abelian category (for\ninstance $\\mathcal A=\\Ab$), and let $f\\colon X\\to Y$, $g\\colon Y\\to Z$ be morphisms of\nschemes. The composition isomorphism $g_*\\circ f_*\\cong(g\\circ f)_*$ of pushforwards\nof $\\mathcal A$-valued pro-étale sheaves\n([def-sfb-finite-lower-star-comp]), induced by the canonical isomorphisms\n$(V\\times_ZY)\\times_YX\\cong V\\times_ZX$, is a monoidal natural isomorphism for the\nlax monoidal structures of [def-sfb-finite-lower-star-lax-monoidal] (composed on\n$g_*\\circ f_*$) and the tensor product of\n[lem-weil-pbc-sheaf-tensor-closed].",
+  "proof": [
+   {
+    "text": "The tensor product of sheaves is the sheafification of the objectwise tensor product\nof presheaves ([lem-weil-pbc-sheaf-tensor-closed]). Both lax monoidal structures, on\n$g_*\\circ f_*$ and on $(g\\circ f)_*$, are the sheafification of the objectwise one,\ntransported along the base change functors of the sites\n([def-sfb-finite-lower-star-lax-monoidal]): on sections over $V$ they are the maps\n$G(W)\\otimes H(W)\\to(G\\otimes H)(W)$ for $W=(V\\times_ZY)\\times_YX$ resp.\n$W=V\\times_ZX$. The composition isomorphism is induced by the pasting isomorphism\n$(V\\times_ZY)\\times_YX\\cong V\\times_ZX$, which is natural in the sheaves and hence\ncompatible with these objectwise tensor maps, and with the unit maps. Passing to\nsheafifications gives the claim.",
+    "uses": [
+     "lem-weil-pbc-sheaf-tensor-closed",
+     "def-sfb-finite-lower-star-lax-monoidal"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

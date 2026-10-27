@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-finite-kernel-group-fibres",
+ "kind": "statement",
+ "title": "A finite group-scheme kernel gives finite scheme-theoretic fibres",
+ "statement": "Let $k$ be a field [def-weil-field], let $G,H$ be group schemes of finite type over $k$ [def-sc-group-scheme, def-weil-finite-type-morphism], and let $u:G\\to H$ be a homomorphism. Suppose its scheme-theoretic kernel $K=G\\times_{H,u,e_H}\\operatorname{Spec}k$ is finite over $k$ [def-sc-group-scheme]. For every point $y\\in H$, with residue field $\\kappa(y)$ [def-weil-residue-field], the scheme-theoretic fibre $G_y=G\\times_H\\operatorname{Spec}\\kappa(y)$ [def-pc-scheme-fibre] is finite over $\\kappa(y)$ [def-weil-finite-integral-morphism]. In particular $\\dim G_y\\leq0$ for topological Krull dimension, with $\\dim\\varnothing=-\\infty$ [def-kun-topological-krull-dimension]. No surjectivity, properness, smoothness, connectedness or equal-dimension hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Proposition 7.1, printed p.32, first proof paragraph (translation of fibres after scalar extension); its fibre argument for finite kernels uses only the group law and finite type, and applies to group schemes over an arbitrary field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-weil-finite-integral-morphism",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Fix $y\\in H$, put $F=\\kappa(y)$ and $P=G_y$. If $P=\\varnothing$, then $P=\\operatorname{Spec}(0)$ and its coordinate algebra is the zero, hence finite-dimensional, $F$-module; its dimension is $-\\infty$. Otherwise choose a point $z\\in P$ and put $L=\\kappa(z)$. The residue-field map gives $F\\hookrightarrow L$. The canonical map $\\operatorname{Spec}L\\to P$, followed by $P\\to G$, gives $x\\in G(L)$ with $u(x)=y_L$. Thus $x$ gives an $L$-point of $P_L=P\\times_F\\operatorname{Spec}L$; no $F$-rational point is asserted.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-residue-field",
+    "def-weil-finite-integral-morphism",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 7.1, printed p.32, first proof paragraph: extension of scalars for fibres"
+   }
+  },
+  {
+   "text": "Write $K_L=K\\times_k\\operatorname{Spec}L$. Define $t:K_L\\to P_L$ by left multiplication by $x$, and $s:P_L\\to K_L$ by left multiplication by $x^{-1}$. These are scheme morphisms: form multiplication with the constant section $x$ (respectively its inverse) and use the fibre-product universal property. For $t$, the homomorphism identity gives $u(xa)=u(x)u(a)=y_L e=y_L$ on $K_L$; for $s$ it gives $u(x^{-1}b)=u(x)^{-1}u(b)=y_L^{-1}y_L=e$ on $P_L$. These equalities are identities of morphisms, using the group-scheme diagrams, so the maps factor through the indicated scheme-theoretic fibre products, including their nilpotents. Associativity, unit and inverse give $s(t(a))=x^{-1}(xa)=a$ and $t(s(b))=x(x^{-1}b)=b$ as morphisms. Hence $t$ and $s$ are inverse isomorphisms over $L$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 7.1, printed p.32: fibres are translates of the kernel after scalar extension; explicit group-law argument"
+   }
+  },
+  {
+   "text": "The structure map $K_L\\to\\operatorname{Spec}L$ is the base change of the finite map $K\\to\\operatorname{Spec}k$, so it is finite by clause (a) of [lem-weil-pbc-finite-morphism-permanence] (Stacks Tag 01WL). The preceding isomorphism over $L$ transfers this to $P_L\\to\\operatorname{Spec}L$: an isomorphism preserves affineness and identifies the coordinate algebras as $L$-algebras, so their finite-module condition is identical.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WL, lemma-base-change-finite"
+   }
+  },
+  {
+   "text": "The singleton family $\\{\\operatorname{Spec}L\\to\\operatorname{Spec}F\\}$ is an fpqc covering. Indeed the only stalk map is the field inclusion $F\\to L$, which is flat: choose an $F$-basis of $L$, so tensoring with $L$ is a direct sum of copies of the identity functor on $F$-vector spaces and preserves exact sequences. Both spectra have one point and the whole affine source covers the whole affine target, as required by [def-weil-pbc-fpqc-covering]. Apply [lem-weil-pbc-fpqc-descend-finite] (Stacks Tag 02LA) to $P\\to\\operatorname{Spec}F$ and this covering. Its base change is the finite morphism of the previous step, so $P$ is finite over $F$. This proves the assertion for every $y$, with the empty case already settled.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02LA, lemma-descending-property-finite; the singleton covering is checked directly"
+   }
+  },
+  {
+   "text": "For the dimension assertion apply [pqf-lem-finite-qf] to the now finite structure map $P\\to\\operatorname{Spec}F$. By [pqf-def-quasifinite] each point is isolated in its fibre. That fibre is $P$ itself, since the unique point of $\\operatorname{Spec}F$ has residue field $F$. Thus every singleton of $P$ is open, and every subset is a union of such opens. An irreducible nonempty closed subset can contain only one point: two distinct points would separate it into a singleton and its complement, both open and closed in that subset. Consequently no chain of irreducible closed subsets has a strict inclusion. The definition of topological Krull dimension gives $\\dim P\\leq0$, including $P=\\varnothing$.",
+   "uses": [
+    "pqf-lem-finite-qf",
+    "pqf-def-quasifinite",
+    "def-pc-scheme-fibre",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NU, lemma-finite-quasi-finite; dimension conclusion from the definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-finite-integral-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "pqf-lem-finite-qf",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Proposition 7.1, printed p.32, first proof paragraph; group-law argument extended to arbitrary group schemes, with Stacks Tags 01WL and 02LA for finiteness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kernel|ker.*[Ff]inite|[Ff]inite.*ker|[Ll]ocally[Qq]uasi[Ff]inite",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume the whole morphism finite or concern abstract finite groups; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism of algebraic group schemes with finite kernel has finite scheme theoretic fibres over their residue fields",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgHom.Finite, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.Scheme.Hom.ker; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume the whole morphism finite or concern abstract finite groups; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ker\", \"LocallyQuasiFinite\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume the whole morphism finite or concern abstract finite groups; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type homomorphism of group schemes over a field with finite scheme theoretic kernel has finite fibres and is locally quasi finite",
+   "results": "8 hits: AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.LocallyOfFiniteType; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume the whole morphism finite or concern abstract finite groups; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "grep",
+   "query": "ker.*[Ff]inite|[Ff]inite.*ker|[Ff]iber.*[Tt]ranslat|[Ff]ibre.*[Tt]ranslat",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume the whole morphism finite or concern abstract finite groups; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a group scheme morphism every geometric fibre is empty or a translate of the kernel; a finite kernel gives finite fibres",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.discrete_fiber, Group.fintypeOfKerOfCodom, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AddGroup.fintypeOfKerOfCodom, AlgebraicGeometry.Scheme.Hom.finite_preimage, AlgebraicGeometry.Scheme.kerFunctor_obj, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume the whole morphism finite or concern abstract finite groups; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.*(ker|fiber)|finite.*ker|ker.*finite",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates assume the whole morphism finite; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, CategoryTheory.GrpObj.ker",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.GrpObj.ker'",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates assume the whole morphism finite; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of group schemes with finite kernel has finite scheme theoretic fibres",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.Scheme.Hom.finite_preimage, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instFstScheme, AlgebraicGeometry.IsFinite.instSndScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates assume the whole morphism finite; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group scheme homomorphism with finite scheme theoretic kernel has finite fibres over residue fields",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.isFinite_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates assume the whole morphism finite; none deduces finite scheme fibres from a finite group-scheme kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fibre of a group scheme homomorphism becomes a translate of its kernel over an extension field",
+   "results": "8 hits: MonoidHom.fiberEquivKer_apply, MonoidHom.fiberEquivKer_symm_apply, MonoidHom.fiberEquivKer, Algebra.Extension.Hom.subToKer, Algebra.Extension.Hom.mapKer, AddMonoidHom.fiberEquivKer_apply, MonoidHom.fiberEquiv_apply, MonoidHom.fiberEquivKerOfSurjective",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group fibre bijections do not state an isomorphism of schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-kernel-equal-dimension-isogeny",
+  "date": "2026-10-23",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: A retract of equal-dimensional abelian varieties is an isomorphism. Milne I Proposition 7.1(c) implies (d), with finite local freeness over the Noetherian target. Supporting fibre input: Milne I Proposition 7.1, first proof paragraph, translation of a fibre after extending its residue field.",
+   "via": [
+    "lem-sfb-finite-kernel-equal-dimension-isogeny",
+    "lem-sfb-equal-dimension-abelian-retract",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-kernel-group-fibres",
+  "worker": "stage1",
+  "summary": "Q38: checked Milne I Proposition 7.1 and Stacks 01WL/02LA. Proved the translation isomorphism by explicit scheme morphisms after extending to the residue field of a fibre point, descended finiteness along the resulting singleton fpqc cover, and obtained the dimension bound from the existing finite-implies-quasi-finite node. No new nodes and no mathematical change to the statement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: A retract of equal-dimensional abelian varieties is an isomorphism. Milne I Proposition 7.1(c) implies (d), with finite local freeness over the Noetherian target. Supporting fibre input: Milne I Proposition 7.1, first proof paragraph, translation of a fibre after extending its residue field.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic fpqc locality of finiteness, used only to descend a scheme fibre along a field extension in the prescribed kernel-translation argument; no result of the item unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-0e26952fe",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-0e26952fe (reviewer sub-agent of L); spot-checked: I read the item (5 steps, no new nodes), every cited statement and the source in full. The statement is unchanged from live, which is still unsplit, and there is no repair note. Source: Milne AV I Prop 7.1 proof, printed p.32. Milne says t_b identifies α^{-1}(0)_{k(b)} with α^{-1}(b) up to scalar extension. The delivery extends to L=κ(z) for a point z of the fibre, so it needs no rational point. Step 1 builds x∈G(L) with u∘x=y_L, which holds because P→G→H = P→Spec F→H. Step 2 gives explicit inverse morphisms between K_L and P_L (P_L = G×_H Spec L), using the group diagrams and the fibre-product universal property; this is elementary. Step 3 uses lem-weil-pbc-finite-morphism-permanence (a) (Stacks 01WL) for base change of K→Spec k, plus transport along an isomorphism. Step 4 proves the singleton fpqc cover Spec L→Spec F inline, then applies lem-weil-pbc-fpqc-descend-finite (Stacks 02LA). That node is in unit sk-thm-p1 and is slopmaster2-closed; I accept its generic use, recorded in tool_uses. Step 5 uses pqf-lem-finite-qf plus pqf-def-quasifinite (3): the fibre is all of P, so P is discrete and dim≤0, including the empty case. Small cases checked: trivial map, Frobenius with kernel α_p, [n] on E at the generic point, non-surjective maps. The parent lem-sfb-finite-kernel-equal-dimension-isogeny step 2 uses exactly the dim≤0 clause. No duplicate found in the DAG. Advisory only: lem-pc-field-extension-fpqc-cover (sk-thm-picard-rr, not Lean-closed) states the cover fact that step 4 proves in two lines. I left it uncited to avoid a second cross-unit tool use. The finite-type hypotheses are unused but harmless. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FiniteKernelFibres",
+  "declaration": "AlgebraicGeometry.isFinite_fiber_and_krullDim_le_zero_of_isFinite_kernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FiniteKernelFibres.lean",
+  "statement": "theorem isFinite_fiber_and_krullDim_le_zero_of_isFinite_kernel {k : Type u} [Field k] {G H : Over (Spec (.of k))} [GrpObj G] [GrpObj H] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (f : G ⟶ H) [IsMonHom f] [IsFinite (GrpObj.ker f).hom] (y : H.left) : IsFinite (f.left.fiberToSpecResidueField y) ∧ topologicalKrullDim (f.left.fiber y) ≤ 0",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60f587e7d",
+  "group": "NW",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: Field k; G,H : Over (Spec k) with GrpObj and LocallyOfFiniteType ∧ QuasiCompact on structure maps; f with IsMonHom; IsFinite (GrpObj.ker f).hom, where ker = pullback f η[H], i.e. the scheme fibre product over e_H; arbitrary y : H.left; conclusion IsFinite (fiberToSpecResidueField y) ∧ topologicalKrullDim (fiber y) ≤ 0 (WithBot covers the empty fibre). No extra hypotheses; single universe u is the project convention. Node differs from live only in lean; statement verbatim; one sorry, no defs; source and blueprint docstrings with 5 proof steps; proof imports exist; report has Worker report and Second reading sections; no duplicate in Mathlib or the project Lean. No findings; no compile needed."
+ }
+}

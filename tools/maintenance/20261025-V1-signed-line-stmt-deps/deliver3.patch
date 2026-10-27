@@ -1,0 +1,13 @@
+--- deliver3.py.bak	2026-10-25 14:10:51.300600553 +0800
++++ deliver3.py	2026-10-25 16:44:46.273657422 +0800
+@@ -353,7 +353,9 @@
+                 changed_stmt = d.get("statement") != cur.get("statement")
+                 if changed_stmt and not isinstance(d.get("statement_change"), dict): raise SystemExit(f"FAILED: {n.stem}: the statement differs from sheaf-dag without a `statement_change` record (coord/brief-stage3.md §4)")
+                 prune = set(s3.STAGE3_PRUNES)
+-                allow = OWN | prune | (OWN_CHANGE if changed_stmt else set())
++                # 2026-10-25 (deliver3fix; the human: DAG edits a reviewer requires are delivered, the DAG check validates
++                # them): stmt_deps changes without a statement change too (V1 SignedLineDerivedBaseChange, 30+ BLOCKED)
++                allow = OWN | prune | {"stmt_deps"} | (OWN_CHANGE if changed_stmt else set())
+                 other = [k for k in set(d) | set(cur) if k not in allow and d.get(k) != cur.get(k)]
+                 if other: notes.append(f"{n.stem}: fields not yours to change were NOT delivered: {sorted(other)[:6]}")
+                 try:

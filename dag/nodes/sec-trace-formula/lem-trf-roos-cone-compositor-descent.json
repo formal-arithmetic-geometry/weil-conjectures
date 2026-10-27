@@ -1,0 +1,344 @@
+{
+ "id": "lem-trf-roos-cone-compositor-descent",
+ "kind": "statement",
+ "title": "Composition coherence of normalized product, signed Roos cone and derived-limit comparisons",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, $R$ a sheaf of commutative rings, and $\\mathcal A=\\operatorname{Mod}(R)$, with exact countable products [def-weil-sheaf-of-modules-category]. Let $\\mathcal S$ be an abelian category, and assume that the ordinary unbounded derived categories of $\\mathcal S$, $\\mathcal A$ and $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal A)$ exist [def-weil-abstract-derived-category, def-weil-inverse-system, lem-weil-tower-category-levelwise-abelian]. Let $U:\\mathcal S\\to\\operatorname{Tow}(\\mathcal A)$ be additive and exact. For $i=0,1,2$, let $F_i:\\mathcal A\\to\\mathcal A$ be additive exact functors preserving countable products, $G_i:\\mathcal S\\to\\mathcal S$ additive exact functors, and $b_i:F_i^{\\mathrm{Tow}}U\\xrightarrow{\\sim}UG_i$ natural isomorphisms of strict tower functors, where $F_i^{\\mathrm{Tow}}$ applies $F_i$ levelwise. Suppose $d:F_1F_0\\xrightarrow{\\sim}F_2$ and $t:G_1G_0\\xrightarrow{\\sim}G_2$ are natural isomorphisms satisfying, for every $M\\in\\mathcal S$,\n$$b_{2,M}\\circ d^{\\mathrm{Tow}}_{UM}=U(t_M)\\circ b_{1,G_0M}\\circ F_1^{\\mathrm{Tow}}(b_{0,M}).$$\nUse the same letters for termwise complex functors and their exact derived functors [lem-sf-exact-functor-derived-triangulated]. Put $L=R\\lim\\circ U:D(\\mathcal S)\\to D(\\mathcal A)$.\n\nFor a strict tower complex $X$ with transitions $v_n$, set $P_X=\\prod_nX_n$ termwise, $s_X((x_n))=(v_nx_{n+1})$, and $H(X)=\\operatorname{Cone}(1-s_X)[-1]$ [def-weil-strict-roos-model]. Fix the signed coordinates\n$$H(X)^q=P_X^q\\oplus P_X^{q-1},\\qquad D(x,y)=(dx,(1-s_X)x-dy).$$\nOn strict tower maps $f$, $H(f)$ is diagonal with product map $P(f)$ on both coordinates. Use the normalized natural identification $\\theta_X:R\\lim X\\xrightarrow{\\sim}H(X)$ whose inverse carries $(\\iota z,0)$ for a K-injective tower to its ordinary-limit class [lem-weil-strict-roos-comparison]. For every complex $M$ of $\\mathcal S$, define the canonical product comparison $\\psi_{i,M}:F_iP_{UM}\\to P_{UG_iM}$ by\n$$\\operatorname{pr}_n\\psi_{i,M}=(b_{i,M})_n\\circ F_i(\\operatorname{pr}_n).$$\nThen $\\psi_{i,M}$ is an isomorphism, natural in strict system chain maps. It satisfies\n$$\\psi_{i,M}F_i(s_{UM})=s_{UG_iM}\\psi_{i,M}.$$\nThe diagonal maps with entries $\\psi_{i,M}$ in degrees $q$ and $q-1$ define natural chain isomorphisms $\\kappa_{i,M}:F_iH(UM)\\xrightarrow{\\sim}H(UG_iM)$ with zero off-diagonal entries. The canonical exact-product total-limit comparison, with the normalization of [lem-cbc-exact-product-functor-strict-limit], is represented by\n$$a_{i,[M]}=\\theta_{UG_iM}^{-1}\\circ[\\kappa_{i,M}]\\circ F_i(\\theta_{UM}):F_iL[M]\\xrightarrow{\\sim}LG_i[M].$$\nHere $[M]$ and $[\\kappa]$ denote derived localization, and the canonical exact-functor localization identifications are included. These maps descend naturally to $a_i:F_iL\\xrightarrow{\\sim}LG_i$ on all of $D(\\mathcal S)$.\n\nThe following three compositor identities hold, with $T_M=U(t_M)$ on strict tower complexes:\n$$\\psi_{2,M}\\circ d_{P_{UM}}=P(T_M)\\circ\\psi_{1,G_0M}\\circ F_1(\\psi_{0,M}),$$\n$$\\kappa_{2,M}\\circ d_{H(UM)}=H(T_M)\\circ\\kappa_{1,G_0M}\\circ F_1(\\kappa_{0,M}),$$\n$$a_{2,C}\\circ d_{LC}=L(t_C)\\circ a_{1,G_0C}\\circ F_1(a_{0,C}),\\qquad C\\in D(\\mathcal S).$$\nThe first two are equalities of entire strict complex maps; in the second, both diagonal entries agree and both off-diagonal entries are zero. The last is an equality of specified natural derived morphisms, with no boundedness, constructibility, or faithfulness assumption on evaluations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok and proof; agent refinement of the normalized exact-product strict Roos comparison to coherent F/G/U compositors. Blueprint trace-transport Step 1, Global powers; returned item Steps 5-7, with the comparison normalization from Step 4."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-strict-roos-model",
+  "lem-weil-strict-roos-comparison",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact termwise derived factorizations of [lem-weil-pbc-exact-functor-derived-factorization] for $U,F_i,G_i$ and $F_i^{\\mathrm{Tow}}$. The latter is exact because kernels and cokernels of towers are levelwise [lem-weil-tower-category-levelwise-abelian]. In the coordinates $(y,z)$ in degree $q$ of [def-weil-strict-roos-model], set $(x,y')=(z,-y)$. Its differential $(-dy-(1-s)z,dz)$ becomes $(dx,(1-s)x-dy')$. The inclusion of the ordinary limit becomes $(\\iota,0)$, and a diagonal product map remains diagonal after this change. This fixes precisely the signed coordinates and normalization used in the statement; rename $y'$ as $y$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; agent sign-coordinate conversion. Exact termwise factorization: derived.tex, Tag 015F."
+   }
+  },
+  {
+   "text": "Write $X=UM$, $Y=UG_iM$, and $\\phi_{i,X}:F_iP_X\\to P_{F_i^{\\mathrm{Tow}}X}$ for the canonical product comparison. By preservation of countable products this is an isomorphism. The unique map with the prescribed projections is $\\psi_{i,M}=P(b_{i,M})\\phi_{i,X}$; its inverse is $\\phi_{i,X}^{-1}P(b_{i,M}^{-1})$. For a chain map $f:M\\to N$, the $n$th projections of $P(UG_if)\\psi_{i,M}$ and $\\psi_{i,N}F_iP(Uf)$ agree by naturality of $b_i$ and functoriality of $F_i$. Product uniqueness gives equality. Applying this equality degreewise to the differential, whose compatibility with $b_i$ is its naturality for $d_M^q$, shows that $\\psi_i$ is a chain map. This is an elementary use of the defining product universal property, with no assertion that derived evaluations are faithful.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, the two product terms; agent product-universal-property calculation."
+   }
+  },
+  {
+   "text": "Let $v_n$ and $w_n$ be the transitions of $UM$ and $UG_iM$. Strict tower compatibility [def-weil-inverse-system] says $w_n b_{i,M,n+1}=b_{i,M,n}F_i(v_n)$. Consequently both $n$th projections of $\\psi_i F_i(s_{UM})$ and $s_{UG_iM}\\psi_i$ are $b_{i,M,n}F_i(v_n)F_i(\\operatorname{pr}_{n+1})$. Thus the shift square commutes, as does its $1-s$ square by additivity. Using the canonical biproduct identifications for an additive functor, define $\\kappa_i(x,y)=(\\psi_i x,\\psi_i y)$. Directly,\n$$D\\kappa_i(x,y)=(\\psi_i dx,(1-s_Y)\\psi_i x-\\psi_i dy)=\\kappa_i F_i(D)(x,y).$$\nIt is a chain isomorphism with diagonal inverse $\\psi_i^{-1}$, and its naturality follows on both coordinates from step 2. These are equalities of maps to biproducts; the coordinate notation denotes the corresponding projection identities [def-weil-strict-roos-model]. In Lean, apply [lem-cbc-exact-product-functor-roos-chain-maps] to the explicit signed coordinate isomorphisms and compose its cone comparison with H(b). Its projected coordinate identities and product uniqueness give the two full coordinate identities.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-strict-roos-model",
+    "lem-cbc-exact-product-functor-roos-chain-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; agent strict signed-cone calculation."
+   }
+  },
+  {
+   "text": "Fix a degree and let $\\pi_n:P_{UM}\\to(UM)_n$ and $\\pi'_n:P_{UG_0M}\\to(UG_0M)_n$ denote the projections. The $n$th projection of the left side of the product compositor identity is\n$$b_{2,M,n}F_2(\\pi_n)d_{P_{UM}}=b_{2,M,n}d_{(UM)_n}F_1F_0(\\pi_n),$$\nby naturality of $d$. The $n$th projection of its right side is\n$$T_{M,n}b_{1,G_0M,n}F_1(\\pi'_n)F_1(\\psi_{0,M})=T_{M,n}b_{1,G_0M,n}F_1(b_{0,M,n})F_1F_0(\\pi_n).$$\nThe hypothesis on $b,d,t$ identifies the last expressions. Product uniqueness proves the identity in every degree, hence as entire chain maps since all displayed factors are chain maps by steps 2 and 3. The hypothesis applies to $M^q$ in each degree, and naturality applies to its differential, so this also covers unbounded $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; agent refinement realizing blueprint thm-trf-l-function-euler-product, Step 1, Global powers, composition sentence."
+   }
+  },
+  {
+   "text": "Under the additive biproduct identifications, naturality of $d$ for both inclusions into $H(UM)^q=P_{UM}^q\\oplus P_{UM}^{q-1}$ says that $d_{H(UM)}^q$ has diagonal entries $d_{P_{UM}^q}$ and $d_{P_{UM}^{q-1}}$ and zero off-diagonal entries. By [def-weil-strict-roos-model], $H(T_M)$ is diagonal with entries $P(T_M)$. Hence in degree $q$ the two diagonal entries of\n$\\kappa_{2,M}d_{H(UM)}$ and $H(T_M)\\kappa_{1,G_0M}F_1(\\kappa_{0,M})$\nare exactly the two product equalities of step 4, in degrees $q$ and $q-1$. Their off-diagonal entries are zero because each factor is diagonal. The four biproduct components determine a map, proving the entire strict cone identity. Step 3 already checked its compatibility with the signed differential.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; agent both-coordinate compositor calculation."
+   }
+  },
+  {
+   "text": "Use [lem-weil-strict-roos-derivation] for the actual strict Roos functor H, obtaining a descent CF, a factorization kappa, and the right-derived unit Q(iota) kappa. Uniqueness of total right derived functors gives rho:CF ≅ RL, with Q(iota) kappa rho = eta on every complex. Set theta=(kappa rho) inverse; then eta theta=Q(iota). The coefficient category is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], hence has enough injectives. Apply the already proved private roos_inclusion_quasiIso helper of [lem-weil-strict-roos-derivation] to every K-injective tower. Its hypotheses require neither injective terms nor K-injective resolutions of the tower category; exact countable products and enough injectives of the coefficient category suffice. This proves the quasi-isomorphism clause directly. The signed inclusion formula is step 1 and its localization normalization is eta theta=Q(iota). The duplicate limit_unit_iso and roos_tower_grothendieck arguments are unnecessary.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok and proof; normalized exact-product comparison as stated in lem-cbc-exact-product-functor-strict-limit."
+   }
+  },
+  {
+   "text": "The termwise functors in step 1 invert quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. The Roos construction descends on $D(\\operatorname{Tow}(\\mathcal A))$ and $\\theta$ is natural there by [lem-weil-strict-roos-derivation]. Thus the conjugation of the strict cone comparison from step 3 by theta and the exact-functor factorization isomorphisms is a natural isomorphism after precomposition of $F_iL$ and $LG_i$ with the localization $Q_{\\mathcal S}$: strict naturality of $\\kappa_i$ is step 3. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to these two functors and this transformation, including the canonical exact-functor factorization isomorphisms. It gives a unique natural isomorphism $a_i:F_iL\\to LG_i$ with those components. The same localization property applied to the termwise isomorphisms $d$ and $t$ gives their derived natural isomorphisms with exactly their degreewise representatives. It respects composition and identities, hence includes the canonical identifications for composite exact functors. In particular naturality of $a_i,d,t$ holds for arbitrary derived morphisms and inverses of localized quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-strict-roos-derivation",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement in Mathlib Localization.fullyFaithfulWhiskeringLeft, liftNatIso and comp_liftNatTrans (Predicate.lean:278,357,339)."
+   }
+  },
+  {
+   "text": "Compute on $C=[M]$, suppressing localization brackets and the canonical factorization isomorphisms of step 7. Put $X=UM$, $Y=UG_0M$, $Z=UG_1G_0M$, $W=UG_2M$, and $T=U(t_M):Z\\to W$. Expand the right side of the desired derived identity using step 6:\n$$L(t_C)\\theta_Z^{-1}\\kappa_{1,G_0M}F_1(\\theta_Y)F_1(\\theta_Y^{-1}\\kappa_{0,M}F_0(\\theta_X)).$$\nThe adjacent factors $F_1(\\theta_Y)$ and $F_1(\\theta_Y^{-1})$ cancel. Naturality of the normalized comparison [lem-weil-strict-roos-derivation] gives $L(t_C)\\theta_Z^{-1}=\\theta_W^{-1}H(T)$. Therefore the expression becomes\n$$\\theta_W^{-1}H(T)\\kappa_{1,G_0M}F_1(\\kappa_{0,M})F_1F_0(\\theta_X)\n=\\theta_W^{-1}\\kappa_{2,M}d_{H(X)}F_1F_0(\\theta_X),$$\nwhere the equality is localization of the entire cone identity of step 5. Naturality of derived $d$ for $\\theta_X:L[M]\\to H(X)$ changes its last two factors to $F_2(\\theta_X)d_{L[M]}$. The result is $a_{2,[M]}d_{L[M]}$. Clause (3) of [lem-weil-pbc-localization-universal-property] now proves equality of the two natural transformations on all $D(\\mathcal S)$. Only strict products and biproducts were tested by projections; the passage to derived maps uses naturality and cancellation of isomorphisms.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, with fully faithful precomposition as in the cited localization node; agent conjugation calculation using normalized Tag 0941 comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-strict-roos-model",
+  "def-weil-inverse-system",
+  "lem-cbc-exact-product-functor-roos-chain-maps",
+  "lem-weil-strict-roos-derivation",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, refined by explicit product/biproduct calculations and natural-transformation localization (categories.tex, Tag 04VG). Blueprint thm-trf-l-function-euler-product, Step 1, Global powers, composition compatibility. F4: use the strict derivation universal property for global normalization, the existing signed chain-map comparison for the cone, and fully faithful localization for direct descent. Repair of returned head 4624e3fe2: remove duplicate limit_unit_iso and roos_tower_grothendieck proofs; private import all of StrictRoosDerivation permits direct reuse of its stronger roos_inclusion_quasiIso helper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "piComparison.*comp|comp.*piComparison|roos.*compos|semilinear.*product",
+   "results": "24 hits: Mathlib/LinearAlgebra/Prod.lean, Mathlib/LinearAlgebra/Prod.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/Topology/Category/CompHausLike/SigmaComparison.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean, Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean. Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized Roos derived limit comparison for exact automorphism inverse image on strict coefficient systems with the product projection compositor equation",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "12 hits: CategoryTheory.Limits.piComparison, CategoryTheory.Limits.piComparison_comp_π, CategoryTheory.Limits.map_lift_piComparison, CategoryTheory.Limits.piComparison_comp_π_assoc, CategoryTheory.Limits.map_lift_piComparison_assoc, CategoryTheory.Limits.piComparison_comp_π_apply, CategoryTheory.Limits.instIsIsoPiComparison, CategoryTheory.Limits.PreservesProduct.of_iso_comparison. Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*(map|comp)|roos.*(comp|natur)|mappingCone.map_comp",
+   "results": "0 hits: . Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Both signed coordinates of the inverse limit mapping cocone satisfy compositor coherence and so do the derived comparisons conjugated by normalized natural isomorphisms",
+   "results": "8 hits: CategoryTheory.Limits.limit.conePointUniqueUpToIso_inv_comp, CategoryTheory.Limits.yonedaCompLimIsoCocones, CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, CategoryTheory.Limits.limit.isoLimitCone_inv_π, CategoryTheory.Limits.IsLimit.lift_comp_conePointsIsoOfNatIso_inv, CategoryTheory.Limits.IsColimit.coconePointsIsoOfNatIso_inv_desc_assoc, CategoryTheory.Limits.IsLimit.conePointsIsoOfNatIso_inv_comp, CategoryTheory.Limits.IsColimit.comp_coconePointsIsoOfNatIso_inv. Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.map",
+   "results": "12 hits: CochainComplex.mappingCone.map_id, CochainComplex.mappingCone.map, CochainComplex.mappingCone.triangleMap_hom₃, CochainComplex.mappingCone.map_eq_mapOfHomotopy, CochainComplex.mappingCone.map_comp, CochainComplex.mappingCone.map_comp_assoc, CochainComplex.mappingConeCompTriangle_mor₁, CochainComplex.mappingConeCompTriangle_mor₂. Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along powers of a scheme automorphism has a normalized derived inverse limit comparison on arbitrary strict semilinear systems whose canonical product maps respect composition",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv. Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a varying coefficient sheaf tower scalar restriction commutes coherently with exact automorphism pullback and the product comparison commutes with the site and system compositors",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso. Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation by a natural normalized Roos isomorphism transfers composition coherence of strict mapping cocone chain maps to the canonical derived inverse limit comparison",
+   "results": "8 hits: localCohomology.diagramComp, CategoryTheory.SmallObject.SuccStruct.ofCoconeObjIso_hom_naturality_assoc, CategoryTheory.SmallObject.SuccStruct.ofCoconeObjIso_hom_naturality, localCohomology.isoOfFinal, CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq, CategoryTheory.SmallObject.SuccStruct.ofCocone_map_to_top, CategoryTheory.SmallObject.SuccStruct.ofCocone_map, CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso. Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms of exact product preserving functors lift a compatible product compositor identity to diagonal maps of the signed Roos cone and normalized total derived limit",
+   "results": "8 hits: CategoryTheory.Localization.HasProductsOfShapeAux.compLimitFunctorIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetLimIso, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app. Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given exact functors U from a system category to towers and coherent isomorphisms between U G and F U, the canonical product and signed Roos derived limit comparisons respect functor compositors",
+   "results": "8 hits: CategoryTheory.preservesLimitIso_hom_π, CategoryTheory.Localization.HasProductsOfShapeAux.compLimitFunctorIso, CategoryTheory.preservesLimitIso_hom_π_assoc, CategoryTheory.preservesLimitNatIso, CategoryTheory.lift_comp_preservesLimitIso_hom_assoc, CategoryTheory.Localization.HasProductsOfShapeAux.instCatCommSqFunctorDiscreteLimObjWhiskeringRightLimitFunctor, CategoryTheory.limitCompWhiskeringRightIsoLimitComp_inv_π_assoc, CategoryTheory.limitCompWhiskeringRightIsoLimitComp_hom_whiskerRight_π. Read the returned types: piComparison and its projections, mappingCone.map_comp, ordinary limit transport and derived functor factorizations are ingredients; none states the coherent F/G/U product, signed-cone and normalized total-derived-limit identities together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "roos.*compos|Roos.*compos|piComparison_comp",
+   "results": "{\"t\": \"2026-10-22T07:06:43Z\", \"tool\": \"grep\", \"query\": \"roos.*compos|Roos.*compos|piComparison_comp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Galois/Decomposition.lean\", \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\", \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Limits/FintypeCat.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\"], \"digest\": \"4f1a2e13212324a3\"}. Read returned hits and the product and localization declarations: these give ingredients, not the combined F/G/U product, signed-cone and normalized derived-limit compositor assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "{\"t\": \"2026-10-22T07:06:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.piComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.piComparison\", \"CategoryTheory.Limits.piComparison_comp_π\", \"CategoryTheory.Limits.map_lift_piComparison\", \"CategoryTheory.Limits.piComparison_comp_π_assoc\", \"CategoryTheory.Limits.map_lift_piComparison_assoc\", \"CategoryTheory.Limits.piComparison_comp_π_apply\", \"CategoryTheory.Limits.instIsIsoPiComparison\", \"CategoryTheory.Limits.PreservesProduct.of_iso_comparison\"], \"digest\": \"c59d96e4d9f17a14\"}. Read returned hits and the product and localization declarations: these give ingredients, not the combined F/G/U product, signed-cone and normalized derived-limit compositor assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition coherence of exact product preserving functor comparison with total derived inverse limit via signed mapping cones",
+   "results": "{\"t\": \"2026-10-22T07:06:44Z\", \"tool\": \"leansearch\", \"query\": \"Composition coherence of exact product preserving functor comparison with total derived inverse limit via signed mapping cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.exactFunctor\", \"CategoryTheory.Limits.Cones.functorialityCompFunctoriality\", \"CategoryTheory.Functor.mapConeMapCone\", \"CategoryTheory.Limits.mapIsLimitOfPreservesOfIsLimit\", \"CategoryTheory.Limits.comp_preservesLimit\", \"CategoryTheory.ExactFunctor\", \"CategoryTheory.Functor.mapCoconeMapCocone_inv_hom\", \"CategoryTheory.Limits.isLimitOfHasProductOfPreservesLimit\"], \"digest\": \"bd2f16e469431b8c\"}. Read returned hits and the product and localization declarations: these give ingredients, not the combined F/G/U product, signed-cone and normalized derived-limit compositor assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms of exact product preserving functors on towers give composition coherent normalized Roos cone derived limit comparisons",
+   "results": "{\"t\": \"2026-10-22T07:06:55Z\", \"tool\": \"leanfinder\", \"query\": \"Natural isomorphisms of exact product preserving functors on towers give composition coherent normalized Roos cone derived limit comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.isoMapCone\", \"CategoryTheory.Limits.PreservesLimit₂.isoObjConePointsOfIsLimit_hom_comp_π\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetLimIso\", \"CategoryTheory.Localization.HasProductsOfShapeAux.compLimitFunctorIso\", \"CategoryTheory.preservesLimitIso_hom_π\", \"CategoryTheory.preservesLimitNatIso\", \"CategoryTheory.GrothendieckTopology.diagramCompIso\", \"CategoryTheory.Limits.PreservesLimit₂.isoObjConePointsOfIsColimit_inv_comp_map_π\"], \"digest\": \"e24ec94a915ef6a4\"}. Read returned hits and the product and localization declarations: these give ingredients, not the combined F/G/U product, signed-cone and normalized derived-limit compositor assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "roos|Roos|mappingCone.map_comp",
+   "results": "{\"t\": \"2026-10-22T07:07:40Z\", \"tool\": \"grep\", \"query\": \"roos|Roos|mappingCone.map_comp\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read returned hits and the product and localization declarations: these give ingredients, not the combined F/G/U product, signed-cone and normalized derived-limit compositor assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation by the normalized derived inverse limit Roos isomorphism carries diagonal mapping cone comparisons and their compositor identities to derived natural isomorphisms",
+   "results": "{\"t\": \"2026-10-22T07:07:50Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugation by the normalized derived inverse limit Roos isomorphism carries diagonal mapping cone comparisons and their compositor identities to derived natural isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc\"], \"digest\": \"1d86a370a1296ab8\"}. Read returned hits and the product and localization declarations: these give ingredients, not the combined F/G/U product, signed-cone and normalized derived-limit compositor assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-system-power-roos-coherence",
+  "date": "2026-10-22",
+  "group": "Q129"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers, compatibility with composition: product-projection uniqueness, both signed cone coordinates and normalized derived-limit conjugation (returned coherence Steps 5-7).",
+   "via": [
+    "lem-trf-point-system-power-roos-coherence",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-roos-cone-compositor-descent",
+  "worker": "stage1",
+  "summary": "Q118 checked the unchanged statement against the normalized Roos and exact-product comparison nodes. Wrote eight proof steps: explicit sign change, product inverse/naturality, shift and differential, product compositor, both cone diagonal components, normalized canonical comparison, localization descent, and derived cancellation. All non-elementary inputs already exist; no new nodes or Lean changes.",
+  "blueprint": "thm-trf-l-function-euler-product, Step 1, Global powers: compatibility with composition. Steps 2-5 realize strict product and whole signed-cone coherence; steps 6-8 realize normalized derived-limit descent for the returned point-system coherence steps 5-7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic normalized natural strict Roos/total-derived-limit identification; the trace-transport unit does not replace the derived-limit computation."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic exact product preserving functor comparison with specified ordinary-limit/resolution normalization; no trace-transport node supplies that normalization."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-ac001e172",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-ac001e172 (reviewer sub-agent of L); spot-checked: PASS: I read all eight steps against their cited statements and they hold. The delivery is an S1 split with no new nodes. The statement, stmt_deps, source and blueprint are unchanged from live, where the item is still unsplit and not superseded; it has no repair note and is not on the drop list. Step 1: converting (y,z) to (x,y')=(z,-y) turns def-weil-strict-roos-model's differential (-dy-(1-s)z,dz) into (dx,(1-s)x-dy'), and the inclusion becomes (iota,0), matching both strict-roos-comparison and cbc. Steps 2-3: the product projections and the tower equation w_n b_{n+1}=b_n F(v_n) prove that psi is a chain isomorphism and commutes with the shift, and I recomputed D kappa = kappa F(D). Steps 4-5: the n-th projections with naturality of d and the b/d/t hypothesis on M^q give the product compositor, and the cone compositor follows because every factor is diagonal. Step 6: cbc applies with B=A and F=F_i, and naturality of theta along b_{i,M} gives a_i. Step 7: clause (2) of the localization node gives the descent and the derived d and t. Step 8: I re-derived the cancellation, then naturality of theta along T and of derived d along theta_X, and clause (3) finishes. Small cases: the identity case gives 1=1, and scalar d,t give the right orientation. Sources checked: Stacks 0941 lemma-derived-limit-is-ok and blueprint thm-trf-l-function-euler-product Global powers (composition sentence). No SGA is cited. I accept the tool_uses strict-roos-comparison and cbc-exact-product-strict-limit as generic tools. No duplicate exists: the cbc roos-chain-maps/compatibility/resolution nodes cover a single functor only."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RoosConeCompositorDescent",
+  "declaration": "CategoryTheory.roosConeCompositorDescent",
+  "declarations": [
+   "CategoryTheory.RoosCompositor.complex",
+   "CategoryTheory.RoosCompositor.tower",
+   "CategoryTheory.RoosCompositor.coordinates",
+   "CategoryTheory.RoosCompositor.total",
+   "CategoryTheory.RoosCompositor.Comparisons",
+   "CategoryTheory.RoosCompositor.toRoos",
+   "CategoryTheory.RoosCompositor.HasProducts",
+   "CategoryTheory.RoosCompositor.HasDiagonal",
+   "CategoryTheory.RoosCompositor.HasSignedCoordinates",
+   "CategoryTheory.RoosCompositor.HasNormalization",
+   "CategoryTheory.RoosCompositor.HasDerivedModel",
+   "CategoryTheory.RoosCompositor.HasCompositors",
+   "CategoryTheory.roosConeCompositorDescent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RoosConeCompositorDescent.lean",
+  "statement": "theorem roosConeCompositorDescent {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max uC vC r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}] (R : Sheaf J RingCat.{max uC vC r}) (_hcomm : ∀ (V : Cᵒᵖ) (x y : R.obj.obj V), x * y = y * x) [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} R)] [HasDerivedCategory.{wA} (ringedSiteModules.{max uC vC r} R)] [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R)] {S : Type uS} [Category.{vS} S] [Abelian S] [HasDerivedCategory.{wS} S] (U : S ⥤ ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U] (F : Fin 3 → ringedSiteModules.{max uC vC r} R ⥤ ringedSiteModules.{max uC vC r} R) [∀ i, (F i).Additive] [∀ i, PreservesFiniteLimits (F i)] [∀ i, PreservesFiniteColimits (F i)] [∀ i, PreservesLimitsOfShape (Discrete ℕ) (F i)] (G : Fin 3 → S ⥤ S) [∀ i, (G i).Additive] [∀ i, PreservesFiniteLimits (G i)] [∀ i, PreservesFiniteColimits (G i)] (b : ∀ i : Fin 3, U ⋙ RoosCompositor.tower (F i) ≅ G i ⋙ U) (d : F 0 ⋙ F 1 ≅ F 2) (t : G 0 ⋙ G 1 ≅ G 2) (_hb : ∀ M : S, (Functor.whiskerLeft (U.obj M) d.hom) ≫ (b 2).hom.app M = (RoosCompositor.tower (F 1)).map ((b 0).hom.app M) ≫ (b 1).hom.app ((G 0).obj M) ≫ U.map (t.hom.app M)) (RL : DerivedCategory.{wA} (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ⥤ DerivedCategory.{wA} (ringedSiteModules.{max uC vC r} R)) (eta : roosLimitFunctor ⋙ DerivedCategory.Q.{wA} ⟶ DerivedCategory.Q.{wA} ⋙ RL) (_hRL : RL.IsRightDerivedFunctor eta (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) (.up ℤ))) : ∃ N : RoosCompositor.Comparisons U F G RL, RoosCompositor.HasSignedCoordinates (A := ringedSiteModules.{max uC vC r} R) ∧ RoosCompositor.HasNormalization U F G RL N eta ∧ RoosCompositor.HasProducts U F G RL N b ∧ RoosCompositor.HasDiagonal U F G RL N ∧ RoosCompositor.HasDerivedModel U F G RL N ∧ RoosCompositor.HasCompositors U F G RL N d t",
+  "branch": "sheaf-dag",
+  "by": "Q148",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d59f7577",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Lean-only delivery; statement, stmt_deps and proof identical to live. All hypotheses match the node with nothing stronger; _hb orientation type-checked term by term. Signed coordinates (k,l)->(k,-l) recomputed from Mathlib mappingCone and the [-1] shift: D(x,y)=(dx,(1-s)x-dy), limit inclusion (iota,0), consistent with cbc chiA and roosι_χ. The existential Comparisons is fully pinned: theta by eta≫theta=Q(roosι) on K-injective towers (stronger than the deps' injective-term version but true via homotopy equivalence), psi by product projections, kappa by both signed biproduct coordinates, a by the conjugation square plus naturality. Product, cone and derived compositor clauses are whole-map equalities in the node's orientation; the derived one uses mapDerivedCategoryCompNatIso (a real canonical construction). Statement field verbatim; docstrings carry source, blueprint and the 8 proof steps; report sections present. Citer lem-trf-point-system-power-roos-coherence Step 3 is covered. Advisory: towerProductShift is owned by def-weil-tower-transition-endomorphism (not a stmt_dep, but in the closure via def-weil-strict-roos-model); theorem-module imports are unused in the statement; local coordinates helper. No file changed, so no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261024T014820-L-2273599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

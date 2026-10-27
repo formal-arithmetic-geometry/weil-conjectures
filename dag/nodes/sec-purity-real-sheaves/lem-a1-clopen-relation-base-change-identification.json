@@ -1,0 +1,229 @@
+{
+ "id": "lem-a1-clopen-relation-base-change-identification",
+ "kind": "statement",
+ "title": "Clopen realization of a base-changed restricted equivalence relation",
+ "statement": "Let $T,U,R$ be schemes [def-pc-scheme], with structure morphisms $U\\to T$, $R\\to T$, and $T$-morphisms $s,t:R\\to U$. Suppose $j=(s,t):R\\to U\\times_TU$ identifies $R(H)$ with an equivalence relation on $U(H)$ for every $T$-scheme $H$ [def-pc-fibre-product]. Let $B\\to T$ be any morphism of schemes. Write $U_B=U\\times_TB$, $R_B=R\\times_TB$, and $s_B,t_B:R_B\\to U_B$ for the induced morphisms. Let $V\\subseteq U_B$ be an open and closed subscheme with its induced structure [def-weil-open-immersion]. The subset $s_B^{-1}(V)\\cap t_B^{-1}(V)$ is open and closed in $R_B$; let $C$ be its induced open subscheme and let $D$ be its induced open complement. Then $R_B=C\\amalg D$, and there are canonical isomorphisms, compatible with the maps to $R_B$ and to both copies of $V$,\n$$C\\cong V\\times_{U_B,s_B}R_B\\times_{t_B,U_B}V\\cong (V\\times_BV)\\times_{U\\times_TU}R.$$\nFor every $B$-scheme $H$, composition with $V\\hookrightarrow U_B$ identifies $V(H)$ with a subset of $U_B(H)=U(H)$ (the last equality is relative to the fixed map $H\\to B\\to T$), and identifies $C(H)$ with exactly the pairs in $R(H)$ whose two endpoints belong to this subset. In particular the two induced maps $C\\rightrightarrows V$ form an equivalence relation on $H$-points for every $B$-scheme $H$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VD (lemma-restrict-groupoid-relation), with arbitrary base change and the induced clopen open-subscheme realization; specialization used in more-groupoids.tex Tag 03X5 (lemma-quasi-finite-over-base-j-proper), conclusion (h)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=U_B$, $Y=R_B$, and $W=s_B^{-1}(|V|)\\cap t_B^{-1}(|V|)$. Morphisms of schemes are continuous. Each inverse image is open and closed because $|V|$ is, so $W$ and its complement are open and closed. Thus the induced open subschemes $C=Y|_W$ and $D=Y|_{Y\\setminus W}$ have disjoint images covering $Y$. Their structure sheaves are precisely the restrictions of $\\mathcal O_Y$, as specified by the induced open-subscheme structure.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 03X5 (lemma-quasi-finite-over-base-j-proper), clopen inverse-image decomposition in the proof"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-scheme-coproduct-family], form $E=C\\amalg D$ and the map $f:E\\to Y$ induced by the two inclusions. Glue the two coprojections $C\\to E$ and $D\\to E$ over the disjoint open covering $Y=C\\cup D$, using [lem-weil-pbc-scheme-morphism-gluing], to obtain $g:Y\\to E$. The composites $fg$ and $\\operatorname{id}_Y$ agree on $C,D$, so are equal by uniqueness of gluing. The composites $gf$ and $\\operatorname{id}_E$ agree after both coprojections, so are equal by the coproduct universal property. This proves the asserted decomposition as schemes.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes), disjoint gluing and mapping property"
+   }
+  },
+  {
+   "text": "Let $i:C\\hookrightarrow Y$ and $v:V\\hookrightarrow X$ be the inclusions. The images of $s_Bi$ and $t_Bi$ lie in $V$. By [lem-weil-pbc-morphism-factors-through-open-subscheme] they factor uniquely as $va=s_Bi$, $vb=t_Bi$, with $a,b:C\\to V$. More generally a morphism $r:H\\to Y$ factors uniquely through $C$ exactly when both $s_Br$ and $t_Br$ factor through $V$: in the forward direction compose $a,b$ with the factor through $C$; in the reverse direction the endpoint factorizations imply $|r|(H)\\subseteq W$, and the cited open-factorization statement applies to $C\\subseteq Y$. All these factorizations are over $B$, by composing the defining equalities with the structure morphism.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HI (lemma-restrict-map-to-opens), applied to the two endpoint maps and to the clopen intersection"
+   }
+  },
+  {
+   "text": "Let $P=V\\times_{X,s_B}Y\\times_{t_B,X}V$. The maps $(a,i,b)$ define $k:C\\to P$ by the fibre-product universal property [def-pc-fibre-product]. Write its three projections as $p_1,p_Y,p_2$. They satisfy $vp_1=s_Bp_Y$ and $vp_2=t_Bp_Y$, so step 3 gives a unique $l:P\\to C$ with $il=p_Y$. Now $ilk=i$, so $lk=\\operatorname{id}_C$ by uniqueness of factorization through $C$. Moreover $val=vp_1$ and $vbl=vp_2$; cancellation of the open immersion $v$ by [lem-weil-pbc-open-immersion-monomorphism] gives $al=p_1$, $bl=p_2$. Thus $kl$ has the same three projections as $\\operatorname{id}_P$ and equals it by the iterated fibre-product universal property. This is the first canonical isomorphism, preserving the map to $Y$ and both endpoint maps to $V$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VD (lemma-restrict-groupoid-relation), iterated restriction square; explicit universal-property verification"
+   }
+  },
+  {
+   "text": "Put $Q=(V\\times_BV)\\times_{U\\times_TU}R$. Denote its projections to $V$ by $q_1,q_2$ and to $R$ by $r$. Their equalities are $v_Uq_1=sr$, $v_Uq_2=tr$ and $b_Vq_1=b_Vq_2$, where $v_U:V\\to U$ and $b_V:V\\to B$ are the projections of $v$. Hence $(r,b_Vq_1)$ determines $q_Y:Q\\to Y=R\\times_TB$ by [def-pc-fibre-product]. The maps $s_Bq_Y$ and $vq_1$ agree after both projections of $X=U\\times_TB$, and therefore agree; likewise $t_Bq_Y=vq_2$. Thus $(q_1,q_Y,q_2)$ defines $Q\\to P$. Conversely the projections of $P$ give $(p_1,p_2):P\\to V\\times_BV$ (their $B$-coordinates both equal that of $p_Y$) and $p_R:P\\to R$. The endpoint equalities give their common map to $U\\times_TU$, so they define $P\\to Q$. Both composites fix all the named projections and hence are identities by the fibre-product universal property. This proves $P\\cong Q$. Its map to $Y$ is the displayed pair $(r,b_Vq_1)$, so the isomorphism preserves the specified map to $R_B$ as well as both maps to $V$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VD (lemma-restrict-groupoid-relation), displayed Cartesian description; arbitrary base change checked by projections"
+   }
+  },
+  {
+   "text": "Fix a $B$-scheme $H$ with structural map $h:H\\to B$. The universal property [def-pc-fibre-product] identifies $\\operatorname{Hom}_B(H,U_B)$ with $\\operatorname{Hom}_T(H,U)$ by $u\\mapsto(u,h)$, and likewise identifies $R_B(H)$ with $R(H)$. By [lem-weil-pbc-open-immersion-monomorphism], composition with $v$ is injective on $H$-points. Step 3 says exactly that $C(H)$ consists of those $r\\in R(H)$ whose two endpoints belong to this image of $V(H)$. The hypothesis identifies $R(H)$ injectively with an equivalence relation on $U(H)$. Its restriction to the subset $V(H)$ is reflexive since each $(x,x)$ belongs to the original relation, symmetric since $(x,y)$ implies $(y,x)$, and transitive since $(x,y),(y,z)$ imply $(x,z)$; all the endpoints still belong to that subset. Injectivity of $C(H)\\to V(H)\\times V(H)$ follows from injectivity for $R(H)$ and uniqueness of factorization through $C$. This proves every pointwise assertion without a groupoid or invariance hypothesis on $V$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VD (lemma-restrict-groupoid-relation) and the restriction construction preceding Tag 02VC; equivalence axioms on the subset"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-monomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VD (lemma-restrict-groupoid-relation), the displayed Cartesian identification, expanded using fibre-product and open-factorization universal properties; the clopen decomposition is as in more-groupoids.tex Tag 03X5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrict.*[Rr]elation|[Rr]elation.*restrict|[Ii]sClopen.*pullback",
+   "results": "{\"t\": \"2026-10-22T08:03:50Z\", \"tool\": \"grep\", \"query\": \"restrict.*[Rr]elation|[Rr]elation.*restrict|[Ii]sClopen.*pullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: open-restriction and intersection pullbacks are ingredients, but no hit states the simultaneous base-change, clopen representation, Cartesian relation square and functor-of-points equivalence assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence relation on schemes restricts to a clopen subscheme and its restricted scheme is an iterated fibre product",
+   "results": "{\"t\": \"2026-10-22T08:03:50Z\", \"tool\": \"leansearch\", \"query\": \"An equivalence relation on schemes restricts to a clopen subscheme and its restricted scheme is an iterated fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.toScheme\", \"AlgebraicGeometry.Scheme.Opens.instCanonicallyOverToScheme\", \"AlgebraicGeometry.coe_opensRestrict_symm_apply\", \"AlgebraicGeometry.affineOpensRestrict\", \"AlgebraicGeometry.Scheme.isoOfEq\", \"AlgebraicGeometry.morphismRestrictEq\", \"AlgebraicGeometry.opensRestrict\", \"AlgebraicGeometry.Scheme.Opens.stalkIso\"], \"digest\": \"0578cd967a09a371\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: open-restriction and intersection pullbacks are ingredients, but no hit states the simultaneous base-change, clopen representation, Cartesian relation square and functor-of-points equivalence assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T08:03:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullbackOfLeft\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_left\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit\"], \"digest\": \"d386bab8aa39128a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: open-restriction and intersection pullbacks are ingredients, but no hit states the simultaneous base-change, clopen representation, Cartesian relation square and functor-of-points equivalence assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a scheme equivalence relation and restriction to a clopen subscheme is represented by the clopen intersection of inverse images",
+   "results": "{\"t\": \"2026-10-22T08:03:55Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of a scheme equivalence relation and restriction to a clopen subscheme is represented by the clopen intersection of inverse images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"AlgebraicGeometry.isPullback_opens_inf\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"AlgebraicGeometry.isPullback_opens_inf_le\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst\", \"AlgebraicGeometry.isPullback_morphismRestrict\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.preimage_toBase_eq_range_ι\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι\"], \"digest\": \"018bac7d6fdd4481\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: open-restriction and intersection pullbacks are ingredients, but no hit states the simultaneous base-change, clopen representation, Cartesian relation square and functor-of-points equivalence assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The induced relation on an open and closed subscheme after arbitrary base change is the pullback of the relation map along the object square",
+   "results": "{\"t\": \"2026-10-22T08:03:56Z\", \"tool\": \"leanfinder\", \"query\": \"The induced relation on an open and closed subscheme after arbitrary base change is the pullback of the relation map along the object square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_morphismRestrict\", \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"AlgebraicGeometry.Scheme.Pullback.range_map\", \"AlgebraicGeometry.Scheme.Pullback.v\", \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_f\", \"AlgebraicGeometry.IsOpenImmersion.isPullback\", \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\"], \"digest\": \"5820b7b7be972980\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: open-restriction and intersection pullbacks are ingredients, but no hit states the simultaneous base-change, clopen representation, Cartesian relation square and functor-of-points equivalence assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction of a scheme equivalence relation to a clopen subscheme after base change is the pullback relation",
+   "results": "{\"t\": \"2026-10-23T04:07:55Z\", \"tool\": \"leanfinder\", \"query\": \"The restriction of a scheme equivalence relation to a clopen subscheme after base change is the pullback relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff\", \"AlgebraicGeometry.isPullback_morphismRestrict\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst\", \"AlgebraicGeometry.isPullback_opens_inf\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict\"], \"digest\": \"316037f2b785b767\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply open restrictions and pullbacks, but not the full base-changed clopen relation identification and its pointwise equivalence assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*[Rr]elation|[Rr]elation.*restrict|pullbackRestrictIsoRestrict|isPullback_opens_inf",
+   "results": "{\"t\": \"2026-10-23T04:08:25Z\", \"tool\": \"grep\", \"query\": \"restrict.*[Rr]elation|[Rr]elation.*restrict|pullbackRestrictIsoRestrict|isPullback_opens_inf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"a0f03d196a4480b5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply open restrictions and pullbacks, but not the full base-changed clopen relation identification and its pointwise equivalence assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A base changed equivalence relation restricted to an open and closed subscheme is represented by the intersection of the inverse images under its two projections",
+   "results": "{\"t\": \"2026-10-23T04:08:26Z\", \"tool\": \"leansearch\", \"query\": \"A base changed equivalence relation restricted to an open and closed subscheme is represented by the intersection of the inverse images under its two projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"AlgebraicGeometry.opensRestrict\", \"AlgebraicGeometry.coe_opensRestrict_symm_apply\", \"AlgebraicGeometry.coe_opensRestrict_apply_coe\", \"AlgebraicGeometry.morphismRestrictOpensRange\", \"AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right\", \"AlgebraicGeometry.Scheme.Hom.le_resLE_preimage_iff\", \"AlgebraicGeometry.morphismRestrict\"], \"digest\": \"9990b34986a3add2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply open restrictions and pullbacks, but not the full base-changed clopen relation identification and its pointwise equivalence assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T04:08:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullbackOfLeft\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_left\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit\"], \"digest\": \"d386bab8aa39128a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply open restrictions and pullbacks, but not the full base-changed clopen relation identification and its pointwise equivalence assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed and open restriction of the objects of an equivalence relation of schemes has arrows given by the Cartesian square of the relation map",
+   "results": "{\"t\": \"2026-10-23T04:09:43Z\", \"tool\": \"leanfinder\", \"query\": \"A closed and open restriction of the objects of an equivalence relation of schemes has arrows given by the Cartesian square of the relation map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_f\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_V\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.Pullback.t\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\"], \"digest\": \"a6643bda2bff7f4f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits supply open restrictions and pullbacks, but not the full base-changed clopen relation identification and its pointwise equivalence assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-proper-etale-relation-finite-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: apply More on Groupoids lemma-quasi-finite-over-base-j-proper to the affine relation R=U×_XU. Closed-relation finite-neighbourhood subargument. Construction and restriction of the relation (old steps 4 and 7).",
+   "via": [
+    "lem-a1-proper-etale-relation-finite-neighbourhood",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-clopen-relation-base-change-identification",
+  "worker": "stage1",
+  "summary": "Checked Stacks 02VD and 03X5, searched the project and whole DAG/blueprint, and expanded the clopen decomposition, both canonical isomorphisms, and the pointwise equivalence axioms. Reuses existing Mathlib leaves only; no new nodes and no statement correction.",
+  "blueprint": "Inherited lem-a1-affine-hc0 ancestor: the 03XX closed-relation finite-neighbourhood subargument recorded in blueprint.from.place, specifically construction and restriction of the base-changed relation (old steps 4 and 7). Current main-20261015 ancestor has no proof text; the precise immediate use is step 4 of lem-a1-proper-etale-relation-finite-neighbourhood."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-f865b5bc8",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-f865b5bc8 (reviewer sub-agent of L); spot-checked: I read the item, the report, all 7 cited nodes and the sources in full. Stacks 02VD (groupoids.tex l.3522) gives R'=(U'×U')×_{U×U}R; 02VB and definition-restrict-relation give the iterated fibre-product form; 03X5 (more-groupoids.tex l.2347) gives (h) and the clopen j'^{-1} piece in its proof. No SGA source is cited. The live sheaf node is still unsplit and its statement is byte-identical, and no repair note exists, so nothing supersedes this delivery and the statement is unchanged. The statement is correct. I checked C≅V×_{U_B}R_B×_{U_B}V≅(V×_BV)×_{U×_TU}R on points: (v1,v2,r) maps to (r,b) and s_B(r,b)=v1. The isomorphisms need no equivalence or invariance hypothesis; only the pointwise clause uses the hypothesis, applied to H through H→B→T. Edge cases V=∅, V=U_B, B=∅, H=∅, disconnected H, diagonal relation and total relation all behave. Step checks: (1) inverse images of a clopen set are clopen. (2) Coproduct plus gluing over the disjoint cover, with both composites checked, fg by gluing uniqueness and gf by the coproduct. (3) Unique factorization through the open V and through C, with the criterion proved in both directions. (4) k=(a,i,b) and l from step 3; lk=id by mono; al=p1 and bl=p2 by cancelling the open immersion; kl=id by projections. (5) The B-coordinates agree because s_B,t_B are B-maps; q_Y=(r,b_Vq1), and the U×_TU compatibility is checked. (6) Hom_B(H,U_B)=Hom_T(H,U); the equivalence axioms restrict to a subset; injectivity holds. Every cited node is a Mathlib leaf, so there is no route or tool_use question, proof_deps equals the union of the uses, and there is no cycle. Ten searches of all three kinds are recorded, and the blueprint fields are present. This exactly supplies the parent lem-a1-proper-etale-relation-finite-neighbourhood step 4 (B=T', V=U'). The sibling lem-a1-finite-clopen-relation-projection-properties overlaps one open-immersion clause but is about finiteness and étaleness, so it is not a duplicate. Advisory: the statement has no coproduct stmt_dep for C⨿D; this is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClopenRelationBaseChangeIdentification",
+  "declaration": "AlgebraicGeometry.clopen_relation_base_change_identification",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenRelationBaseChangeIdentification.lean",
+  "statement": "theorem clopen_relation_base_change_identification {T U R B : Scheme.{u}} (fU : U ⟶ T) (fR : R ⟶ T) (s t : R ⟶ U) (hs : s ≫ fU = fR) (ht : t ≫ fU = fR) (hrel : ∀ (H : Scheme.{u}) (hH : H ⟶ T), Function.Injective (fun r : {g : H ⟶ R // g ≫ fR = hH} ↦ (r.1 ≫ s, r.1 ≫ t)) ∧ Equivalence (fun a b : {g : H ⟶ U // g ≫ fU = hH} ↦ ∃ r : H ⟶ R, r ≫ s = a.1 ∧ r ≫ t = b.1)) (fB : B ⟶ T) (V : (pullback fU fB).Opens) (hV : IsClopen V.carrier) : ∃ (sB tB : pullback fR fB ⟶ pullback fU fB), sB ≫ pullback.fst fU fB = pullback.fst fR fB ≫ s ∧ sB ≫ pullback.snd fU fB = pullback.snd fR fB ∧ tB ≫ pullback.fst fU fB = pullback.fst fR fB ≫ t ∧ tB ≫ pullback.snd fU fB = pullback.snd fR fB ∧ ∃ (C D : (pullback fR fB).Opens), C = (sB ⁻¹ᵁ V) ⊓ (tB ⁻¹ᵁ V) ∧ IsClopen C.carrier ∧ IsCompl C D ∧ Nonempty (IsColimit (BinaryCofan.mk C.ι D.ι)) ∧ ∃ (sC tC : C.toScheme ⟶ V.toScheme), sC ≫ V.ι = C.ι ≫ sB ∧ tC ≫ V.ι = C.ι ≫ tB ∧ ∃ (e : C.toScheme ≅ pullback (pullback.snd V.ι sB ≫ tB) V.ι), e.hom ≫ pullback.fst (pullback.snd V.ι sB ≫ tB) V.ι ≫ pullback.snd V.ι sB = C.ι ∧ e.hom ≫ pullback.fst (pullback.snd V.ι sB ≫ tB) V.ι ≫ pullback.fst V.ι sB = sC ∧ e.hom ≫ pullback.snd (pullback.snd V.ι sB ≫ tB) V.ι = tC ∧ ∃ (j : R ⟶ pullback fU fU), j ≫ pullback.fst fU fU = s ∧ j ≫ pullback.snd fU fU = t ∧ ∃ (m : pullback (V.ι ≫ pullback.snd fU fB) (V.ι ≫ pullback.snd fU fB) ⟶ pullback fU fU), m ≫ pullback.fst fU fU = pullback.fst (V.ι ≫ pullback.snd fU fB) (V.ι ≫ pullback.snd fU fB) ≫ V.ι ≫ pullback.fst fU fB ∧ m ≫ pullback.snd fU fU = pullback.snd (V.ι ≫ pullback.snd fU fB) (V.ι ≫ pullback.snd fU fB) ≫ V.ι ≫ pullback.fst fU fB ∧ ∃ (k : pullback m j ⟶ pullback fR fB), k ≫ pullback.fst fR fB = pullback.snd m j ∧ k ≫ pullback.snd fR fB = pullback.fst m j ≫ pullback.fst (V.ι ≫ pullback.snd fU fB) (V.ι ≫ pullback.snd fU fB) ≫ V.ι ≫ pullback.snd fU fB ∧ ∃ (e' : pullback (pullback.snd V.ι sB ≫ tB) V.ι ≅ pullback m j), e'.hom ≫ k = pullback.fst (pullback.snd V.ι sB ≫ tB) V.ι ≫ pullback.snd V.ι sB ∧ e'.hom ≫ pullback.fst m j ≫ pullback.fst (V.ι ≫ pullback.snd fU fB) (V.ι ≫ pullback.snd fU fB) = pullback.fst (pullback.snd V.ι sB ≫ tB) V.ι ≫ pullback.fst V.ι sB ∧ e'.hom ≫ pullback.fst m j ≫ pullback.snd (V.ι ≫ pullback.snd fU fB) (V.ι ≫ pullback.snd fU fB) = pullback.snd (pullback.snd V.ι sB ≫ tB) V.ι ∧ ∀ (H : Scheme.{u}) (hH : H ⟶ B), (∀ a : H ⟶ U, a ≫ fU = hH ≫ fB → ∃! aB : H ⟶ pullback fU fB, aB ≫ pullback.fst fU fB = a ∧ aB ≫ pullback.snd fU fB = hH) ∧ Function.Injective (fun a : {g : H ⟶ V.toScheme // g ≫ V.ι ≫ pullback.snd fU fB = hH} ↦ a.1 ≫ V.ι) ∧ (∀ r : H ⟶ R, r ≫ fR = hH ≫ fB → ((∃! c : H ⟶ C.toScheme, c ≫ C.ι ≫ pullback.fst fR fB = r ∧ c ≫ C.ι ≫ pullback.snd fR fB = hH) ↔ (∃ a : H ⟶ V.toScheme, a ≫ V.ι ≫ pullback.fst fU fB = r ≫ s ∧ a ≫ V.ι ≫ pullback.snd fU fB = hH) ∧ (∃ b : H ⟶ V.toScheme, b ≫ V.ι ≫ pullback.fst fU fB = r ≫ t ∧ b ≫ V.ι ≫ pullback.snd fU fB = hH))) ∧ Function.Injective (fun c : {g : H ⟶ C.toScheme // g ≫ C.ι ≫ pullback.snd fR fB = hH} ↦ (c.1 ≫ sC, c.1 ≫ tC)) ∧ Equivalence (fun a b : {g : H ⟶ V.toScheme // g ≫ V.ι ≫ pullback.snd fU fB = hH} ↦ ∃ c : H ⟶ C.toScheme, c ≫ sC = a.1 ∧ c ≫ tC = b.1)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b04facc0",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Read node, report, module, 3 stmt_dep records (Mathlib Scheme/pullback/IsOpenImmersion+Opens.ι). lean.statement verbatim in the file, proof by sorry, docstrings with Stacks 02VD/03X5 + blueprint + 6 proof steps. hrel = injectivity + Equivalence of the image (exactly the node's hypothesis). sB/tB/sC/tC/e/j/m/k/e' all pinned by projections, so each is canonical. C = preimage intersection, IsCompl D, IsColimit BinaryCofan on actual inclusions. e: C ≅ V×_{X,sB}Y×_{tB,X}V and e' ≅ (V×_BV)×_{U×_TU}R compatible with R_B and both V maps; orientation checked. Pointwise: unique lift U(H)->U_B(H), V(H) injective, C(H) iff both endpoints in V, injectivity, Equivalence. Edge cases V=∅, V=U_B, B/H empty fine; no extra hypotheses; single universe u. Node copy = live except lean; no name clash. Not recompiled (no change). Advisory: thin second-reading section."
+ }
+}

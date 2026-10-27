@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-finite-group-cover-reductive-neutral",
+ "kind": "statement",
+ "title": "Finite group covers reflect reductivity of the neutral component",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-algebraic-closure]. Let $U,V$ be affine $F$-group schemes of finite type, and let $q:U\\to V$ be a group homomorphism which is finite and surjective on underlying spaces. Here finite means that $F[U]$ is a finite module over $F[V]$ [def-weil-affine-spectrum]. Group schemes over a ring have multiplication, identity and inverse satisfying the group diagrams of [def-sc-group-scheme], with that ring as base. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Assume $U$ is smooth. Let $U^0$ be the connected component of its identity, with its open-subscheme structure [def-weil-open-immersion], and let $H=(V_{\\mathrm{red}})^0$ be the identity component of the reduction of $V$, where reduction means quotienting coordinate rings by their nilradicals. Suppose $H$ is reductive. Over a field, reductive means smooth, geometrically connected, affine of finite type, with no nontrivial smooth connected normal unipotent subgroup after algebraic closure; unipotent means that all geometric points are unipotent matrices in a faithful representation. Then $q$ restricts to a finite surjective homomorphism $U^0\\to H$, and $U^0$ is reductive. No separability or reducedness assumption on its finite kernel is imposed.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://arxiv.org/pdf/math/0405381: Proposition 4.3, first paragraph of proof (finite-kernel case of its equal-dimension unipotent-radical argument), printed p.8; elementary component restriction for a finite surjective homomorphism"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=U^0$. Apply [lem-sfb-locally-algebraic-group-identity-component] to $U$ and $V$. It gives closed and open identity subgroups, geometric irreducibility and finite type, and identifies $(V^0)_{\\mathrm{red}}$ as a smooth connected group with underlying space $|V^0|$. Reduction commutes with restriction to an open subscheme: on each affine chart both operations quotient the same local rings by their nilpotents. Hence $(V^0)_{\\mathrm{red}}=H$. These subgroups are affine, since a closed subscheme of an affine scheme is an affine quotient by [def-weil-closed-immersion]. By [lem-weil-pbc-smooth-restrict-open-subschemes], $G$ is smooth. By [sbc-lem-smooth-geometrically-reduced] it is reduced. In particular $G$ is affine, smooth, geometrically connected and of finite type, as required for reductivity.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R (proposition-connected-component), Tag 047R (lemma-reduced-subgroup-scheme-perfect), Tags 047N and 047P; smooth restriction: morphisms, Tag 01V6 (lemma-smooth-characterize); reducedness: varieties, Tag 056T (lemma-smooth-geometrically-normal)."
+   }
+  },
+  {
+   "text": "The continuous image of the connected space $|G|$ is connected and contains the identity, so $q(G)\\subseteq |V^0|=|H|$. Since $G$ is reduced and $H\\hookrightarrow V$ is closed, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] gives a unique factor $f:G\\to H$. It is a homomorphism: its multiplication, inverse and identity identities can be checked after the closed immersion into $V$, where they are the identities for $q$; closed immersions are injective on all test-scheme maps by the affine quotient description [def-weil-closed-immersion]. To check finiteness, write $R=F[V]$, $B=F[U]$, $F[G]=B/J$, and $F[H]=R/I$. The map $R\\to B/J$ kills $I$ by this factorization. Images of any finite $R$-module generating set of $B$ generate $B/J$ over $R/I$. Thus $f$ is finite, with no flatness assertion needed yet.",
+   "uses": [
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (schemes-lemma-reduced-closed-subscheme); affine quotient and finite-module argument written out; closed immersions: Tag 01QO."
+   }
+  },
+  {
+   "text": "By [lem-sfb-group-neutral-component-translates], the components of $U$ are finitely many translates $g_aG$ with $g_a\\in U(F)$. Put $S=|f|(|G|)\\subseteq |H|$. The images $q(g_aG)=q(g_a)S$ are closed in $V$ by [lem-weil-pbc-finite-closed-map-finite-fibres], and cover $|V|$ because $q$ is surjective. Each such image is connected and contains $q(g_a)$. If it meets $|H|=|V^0|$, it is contained in that connected component; moreover the $F$-point $q(g_a)$ then factors through $H$, because its image is in $H$ and its source is reduced, by [lem-weil-pbc-reduced-source-factors-through-closed-subscheme]. Thus $|H|$ is a finite union of closed sets of the form $q(g_a)S$ with $q(g_a)\\in H(F)$. It is irreducible by step 1. A finite closed cover of a nonempty irreducible space has a member equal to the whole space (induct on the number of members using the definition of irreducibility). Hence $q(g_a)S=|H|$ for some $a$. Translation by $q(g_a)^{-1}$ is an automorphism of $H$, so $S=|H|$. This proves surjectivity of $f$.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R (proposition-connected-component); translations and finite closed cover argument expanded by the agent; closed images: morphisms Tag 01WN (lemma-finite-proper)."
+   }
+  },
+  {
+   "text": "The affine groups $G,H$ are separated by [lem-weil-pbc-affine-source-morphism-separated]. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $f$, obtaining $G\\xrightarrow{p}I\\xrightarrow{j}H$ with $p$ faithfully flat and $j$ a closed immersion. Surjectivity of $f$ implies that $j$ is surjective on spaces. Since $H$ is reduced, apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to $\\mathrm{id}_H$ and $j$: there is $s:H\\to I$ with $js=\\mathrm{id}_H$. The affine quotient description [def-weil-closed-immersion] makes $j$ a monomorphism, so $sj=\\mathrm{id}_I$ as well. Therefore $j$ is an isomorphism, and $f$ is faithfully flat. For any flat surjective morphism between affine schemes, [lem-weil-pbc-flat-morphism-affine-criterion] makes its coordinate map flat, and [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] makes that map faithfully flat. Thus the geometric faithful flatness here, and that of the factorization maps below, have the extension-of-scalars meaning required by the unipotent-image lemma.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Proposition 4.3, first paragraph, finite-kernel specialization, read online at https://arxiv.org/pdf/math/0405381; agent expansion using the homomorphism theorem (Milne iAG2017, Theorem 5.39, WANTED locally) and Stacks Tag 01J3. Affine flatness: morphisms Tag 01U5 (lemma-flat-characterize); faithful flatness: algebra Tag 00HQ (lemma-ff-rings)."
+   }
+  },
+  {
+   "text": "Let $N\\hookrightarrow G$ be any smooth connected normal unipotent closed subgroup. It is affine and of finite type as a closed subgroup of $G$. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $f|_N$, giving $N\\xrightarrow{u}J\\xrightarrow{i}H$, with $u$ faithfully flat, $J$ a finite-type group scheme, and $i$ a closed immersion. All groups are separated by [lem-weil-pbc-affine-source-morphism-separated], and $J$ is affine by [def-weil-closed-immersion]. The hypotheses of [lem-sfb-unipotent-normal-quotient-image] now hold with $A=G$, $D=H$, and the faithfully flat $f$ from step 4. That lemma says exactly that $J$ is smooth, connected and unipotent and $i(J)$ is normal in $H$. Reductivity of $H$ therefore gives $J=\\{1\\}$. Consequently $f|_N$ is the constant identity homomorphism as a morphism of schemes, not merely on $F$-points.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-weil-closed-immersion",
+    "lem-sfb-unipotent-normal-quotient-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Proposition 4.3, first paragraph of proof, unipotent image killed by the reductive target; agent expansion using the two existing homomorphism and unipotent-image nodes. No later reductive-model theorem from that paragraph is used."
+   }
+  },
+  {
+   "text": "Write $C=F[H]$, $D=F[G]$, and $E=F[N]$. By [def-weil-closed-immersion], $D\\to E$ is surjective. By step 2, $D$ is a finite $C$-module, so $E$ is a finite $C$-module. Step 5 says the map $C\\to E$ equals $C\\xrightarrow{e_H^*}F\\to E$. Therefore the same finite generating set generates $E$ as an $F$-vector space. This is where finiteness of the cover is used; there is no assertion that its kernel is reduced. Descending chains of ideals of $E$ are descending chains of subspaces in a finite-dimensional vector space, hence stabilize. Thus $E$ is Artinian. It is reduced by smoothness of $N$ and [sbc-lem-smooth-geometrically-reduced], with reducedness of global sections supplied by [def-pc-reduced-scheme].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00J6 (lemma-finite-dimensional-algebra; descending-chain proof written out); smooth implies reduced: varieties Tag 056T (lemma-smooth-geometrically-normal)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reduced-artinian-residue-product] to $E$. It identifies $E$ with a finite product of fields, one for each maximal ideal. There is at least one factor, since the identity of $N$ gives a unital $F$-algebra map $E\\to F$. If there were two or more factors, the corresponding nontrivial idempotent and its complement would give two disjoint nonempty open-and-closed subsets of $\\operatorname{Spec}E=N$, contradicting connectedness. Hence $E$ is a field. Its identity-point map $E\\to F$ is then injective and is surjective since it is the identity on the structural copy of $F$. Thus $E\\cong F$ over $F$, so $N$ is the trivial subgroup. Since $N$ was arbitrary, $G$ has no nontrivial smooth connected normal unipotent closed subgroup. Together with the smoothness, affineness, finite type and geometric connectedness of step 1, this proves that $U^0=G$ is reductive. Steps 2 and 3 give the asserted finite surjective restriction. In particular the proof also covers inseparable finite kernels.",
+   "uses": [
+    "lem-sfb-reduced-artinian-residue-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00J7 (lemma-artinian-finite-nr-max) and 00JB (lemma-artinian-finite-length), reduced case; connectedness and the identity-point argument expanded by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-sfb-unipotent-normal-quotient-image",
+  "def-pc-reduced-scheme",
+  "lem-sfb-reduced-artinian-residue-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "Proposition 4.3, first paragraph of proof, printed p.8; read online at https://arxiv.org/pdf/math/0405381. Component restriction and finite-algebra arguments expanded using the cited existing nodes and local Stacks sources; PDF WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite surjective homomorphism from a smooth affine algebraic group to a group with reductive reduced identity component the source identity component is reductive",
+   "results": "{\"t\": \"2026-10-24T02:00:20Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite surjective homomorphism from a smooth affine algebraic group to a group with reductive reduced identity component the source identity component is reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"RingHom.ker_isRadical_iff_reduced_of_surjective\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"RingHom.FormallyUnramified.of_surjective\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\"], \"digest\": \"7cba87d6a427f8c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme closed-immersion or reducedness lemmas and finite hom-sets in Galois categories do not state reductivity under finite group covers; no algebraic reductive/isogeny theorem in the searched group source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected smooth algebraic group is reductive if it has an isogeny to a reductive group",
+   "results": "{\"t\": \"2026-10-24T02:00:20Z\", \"tool\": \"leansearch\", \"query\": \"A connected smooth algebraic group is reductive if it has an isogeny to a reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.of_equiv\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.FormallyEtale.instFormallySmooth\", \"LieGroup.recOn\", \"Algebra.FormallySmooth.iff_of_equiv\", \"Algebra.smooth_iff\", \"Algebra.IsStandardSmooth.of_algEquiv\"], \"digest\": \"fa4ae837aa340bee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme closed-immersion or reducedness lemmas and finite hom-sets in Galois categories do not state reductivity under finite group covers; no algebraic reductive/isogeny theorem in the searched group source"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReductive\"",
+   "results": "{\"t\": \"2026-10-24T02:00:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsReductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme closed-immersion or reducedness lemmas and finite hom-sets in Galois categories do not state reductivity under finite group covers; no algebraic reductive/isogeny theorem in the searched group source"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|isogeny|unipotent",
+   "results": "{\"t\": \"2026-10-24T02:00:21Z\", \"tool\": \"grep\", \"query\": \"reductive|isogeny|unipotent\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme closed-immersion or reducedness lemmas and finite hom-sets in Galois categories do not state reductivity under finite group covers; no algebraic reductive/isogeny theorem in the searched group source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductivity is preserved and reflected by finite isogenies of connected algebraic groups including inseparable kernels",
+   "results": "{\"t\": \"2026-10-24T02:00:27Z\", \"tool\": \"leanfinder\", \"query\": \"Reductivity is preserved and reflected by finite isogenies of connected algebraic groups including inseparable kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"Algebra.IsGeometricallyReduced.of_injective\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\"], \"digest\": \"375ef6e844cc3c1c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme closed-immersion or reducedness lemmas and finite hom-sets in Galois categories do not state reductivity under finite group covers; no algebraic reductive/isogeny theorem in the searched group source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective homomorphism from a smooth algebraic group to a reductive group forces its identity component to be reductive",
+   "results": "{\"t\": \"2026-10-24T02:45:09Z\", \"tool\": \"leanfinder\", \"query\": \"A finite surjective homomorphism from a smooth algebraic group to a reductive group forces its identity component to be reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.Finite.of_surjective\", \"Algebra.QuasiFinite.of_surjective_algHom\", \"Algebra.EssFiniteType.of_surjective\", \"AlgHom.FiniteType.of_surjective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"AlgHom.FiniteType.comp_surjective\", \"Algebra.FormallyUnramified.of_surjective\", \"Algebra.FiniteType.of_surjective\"], \"digest\": \"912a848869dc9668\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-finiteness, smooth-algebra, abstract-group and characteristic-zero Lie-algebra results do not assert reductivity of algebraic groups under finite covers; the closed-immersion isomorphism hit is only an auxiliary step, written via the existing reduced-source factorization node."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|isogeny|unipotent",
+   "results": "{\"t\": \"2026-10-24T02:45:40Z\", \"tool\": \"grep\", \"query\": \"reductive|isogeny|unipotent\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-finiteness, smooth-algebra, abstract-group and characteristic-zero Lie-algebra results do not assert reductivity of algebraic groups under finite covers; the closed-immersion isomorphism hit is only an auxiliary step, written via the existing reduced-source factorization node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReductive\"",
+   "results": "{\"t\": \"2026-10-24T02:45:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsReductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-finiteness, smooth-algebra, abstract-group and characteristic-zero Lie-algebra results do not assert reductivity of algebraic groups under finite covers; the closed-immersion isomorphism hit is only an auxiliary step, written via the existing reduced-source factorization node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected smooth affine algebraic group with a finite kernel surjection to a reductive group is reductive",
+   "results": "{\"t\": \"2026-10-24T02:45:41Z\", \"tool\": \"leansearch\", \"query\": \"A connected smooth affine algebraic group with a finite kernel surjection to a reductive group is reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.fintypeOfKerOfCodom\", \"Algebra.FormallySmooth.iff_of_surjective\", \"Algebra.FormallySmooth.iff_split_surjection\", \"Algebra.FormallySmooth.of_split\", \"AddGroup.fintypeOfKerOfCodom\", \"Ideal.quotientKerAlgEquivOfSurjective\", \"LieAlgebra.isExtension_of_surjective\", \"QuotientGroup.quotientKerEquivOfSurjective\"], \"digest\": \"2bf9ac74653f0029\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-finiteness, smooth-algebra, abstract-group and characteristic-zero Lie-algebra results do not assert reductivity of algebraic groups under finite covers; the closed-immersion isomorphism hit is only an auxiliary step, written via the existing reduced-source factorization node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductivity is invariant under isogenies of connected linear algebraic groups even with inseparable kernel",
+   "results": "{\"t\": \"2026-10-24T02:46:42Z\", \"tool\": \"leanfinder\", \"query\": \"Reductivity is invariant under isogenies of connected linear algebraic groups even with inseparable kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified.respectsIso\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_injective\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"MulEquiv.isSimpleGroup_congr\"], \"digest\": \"f3a82022e72e7d6b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-finiteness, smooth-algebra, abstract-group and characteristic-zero Lie-algebra results do not assert reductivity of algebraic groups under finite covers; the closed-immersion isomorphism hit is only an auxiliary step, written via the existing reduced-source factorization node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasi-reductive-special-connectedness",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Proposition 4.3, first paragraph of proof (finite-kernel case of its equal-dimension unipotent-radical argument), printed p.8; elementary component restriction for a finite surjective homomorphism",
+   "via": [
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-group-cover-reductive-neutral",
+  "worker": "stage1",
+  "summary": "Q32 split the finite-cover lemma into seven steps using existing component, closed-image, homomorphism-factorization, unipotent-image and reduced-Artinian-product nodes. Proved component surjectivity by translations and a finite closed cover; killed every smooth connected normal unipotent subgroup via the reductive target and a finite reduced connected coordinate algebra. No statement change and no new nodes; inseparable kernels retained.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images (3) alteration/moduli chain recorded verbatim in blueprint.from.place, specifically the quasi-reductive-special-connectedness application of the finite special-fibre cover. The main blueprint ancestor is null in the imported chain; no upstream route or unit is changed. The current latest blueprint direct-image proof and unit were read.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme-theoretic tool for the component restriction or finite reduced algebra argument; this unit has no competing construction replacing it."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme-theoretic tool for the component restriction or finite reduced algebra argument; this unit has no competing construction replacing it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-ed26967c5",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-ed26967c5 (reviewer sub-agent of L); spot-checked: I read all 7 steps of the Q32 split of lem-sfb-finite-group-cover-reductive-neutral against the full statements of all 14 cited nodes. No new nodes. The statement, stmt_deps and blueprint are byte-identical to live, and the item is still unsplit in live and side-live with no repair note. Steps: (1) the identity-component node applied to U and V gives (V^0)_red=(V_red)^0=H; G is smooth by smooth-restrict-open (a) and reduced by 056T. (2) Factoring through H by the reduced-source factorization (01J3), plus the quotient-ring finiteness argument, is correct. (3) Translates g_aG have closed images (01WN); the finite closed cover of irreducible |H| and translation by q(g_a)^-1 inside H give S=|H|. (4) In the hom-factorization, j is a surjective closed immersion onto reduced H with a section, so it is an isomorphism; 01U5 and 00HQ give ring faithful flatness. (5) The unipotent-image node applies with A=G, D=H and every hypothesis checked; reductivity of H gives J=1 scheme-theoretically. (6) and (7) F[N] is finite over F; it is reduced, Artinian and connected, so it is a field with an F-point, so N=1. Small cases checked: Frobenius on G_m (μ_p kernel), SL2→PGL2 in characteristic 2, finite constant U, and G_a→1, which is excluded by finiteness. No duplicate: central-isogeny-borel-root-compatibility only covers central kernels, and subdirect-product-reductivity does not specialize. No cycle. proof_deps equals the union of uses. No SGA. I accept the two tool_uses (056T smooth⇒geometrically reduced, 01J3 reduced-source factorization) as generic. Batch-5 flag: lem-trf-fppf-covering-base-change, reached through the hom-factorization's fppf-quotient step, is a mathlib-status leaf (fppf coverings are stable under base change). It is generic and not a step of the trace formula or of Poincaré duality, so no RETURN. Advisory: in step 1, 'U^0 is a closed subscheme' rests on clopen⇒closed immersion; the translates node states it, and I left it as is. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FiniteCoverReductiveNeutral",
+  "declaration": "AlgebraicGeometry.finiteGroupCover_reductive_neutral",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FiniteCoverReductiveNeutral.lean",
+  "statement": "theorem finiteGroupCover_reductive_neutral (F : Type u) [Field F] [IsAlgClosed F] (U V : Grp (Over (Spec (.of F)))) [IsAffine U.X.left] [LocallyOfFiniteType U.X.hom] [QuasiCompact U.X.hom] [IsAffine V.X.left] [LocallyOfFiniteType V.X.hom] [QuasiCompact V.X.hom] (q : U ⟶ V) [IsFinite q.hom.hom.left] [Surjective q.hom.hom.left] [Smooth U.X.hom] (H : Grp (Over (Spec (.of F)))) (i : H ⟶ V) (e : H.X.left ≅ (GrpObj.identityComponent V.X).left.nilradical.subscheme) (hi : i.hom.hom.left = e.hom ≫ (GrpObj.identityComponent V.X).left.nilradical.subschemeι ≫ (GrpObj.identityComponentι V.X).left) (hH : ReductiveTorusCentralizer.IsReductive H) : (∃ f : Grp.mk (GrpObj.identityComponent U.X) ⟶ H, f.hom.hom ≫ i.hom.hom = GrpObj.identityComponentι U.X ≫ q.hom.hom ∧ IsFinite f.hom.hom.left ∧ Surjective f.hom.hom.left) ∧ ReductiveTorusCentralizer.IsReductive (Grp.mk (GrpObj.identityComponent U.X))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17ebd429e",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement verbatim in file; sorry only; no new defs. Item diff vs side-live: lean record + 2 used, landed def stmt_deps (IsReductive terminology, scheme reduction), no cycle. Clauses: alg-closed F (Type u), affine finite-type Grp(Over Spec F) U,V, IsFinite/Surjective q, Smooth U, U^0 = canonical GrpObj.identityComponent with restricted group law, H pinned as (V^0)_red via iso e + inclusion equation hi (i mono so group law/structure forced; exists over alg-closed F, not vacuous), IsReductive H; conclusion ∃ f with f≫i = ι≫q, finite, surjective, and IsReductive U^0. No extra assumptions, no kernel restriction. Edge cases mu_p Frobenius, SL2→PGL2 char 2, finite constant U, G_a→1 excluded. No duplicate (CentralIsogenyBorelRootCompatibility needs central kernel). Docstrings with source/blueprint and 7 steps. Advisory only: Second reading section is the dispatcher no-second-worker form (H11 advisory per precedent). Prasad-Yu source not available locally; checked against the stage-1-accepted node."
+ }
+}

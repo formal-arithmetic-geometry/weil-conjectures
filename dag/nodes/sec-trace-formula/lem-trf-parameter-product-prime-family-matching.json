@@ -1,0 +1,213 @@
+{
+ "id": "lem-trf-parameter-product-prime-family-matching",
+ "kind": "statement",
+ "title": "Matching a contracted prime family with regular parameter factors",
+ "statement": "Let $\\varphi:A\\to R$ be a homomorphism of commutative rings, with $R$ a regular local ring of dimension $d$ [def-weil-regular-scheme]. Choose a regular system of parameters $t_1,\\ldots,t_d$ [def-weil-pbc-regular-system-of-parameters], choose $0\\leq r\\leq d$, and put $T=\\prod_{i=1}^r t_i$, with empty product $1$. Let $I\\subseteq A$ be an ideal, let $F$ be a finite set, and let $(\\mathfrak p_a)_{a\\in F}$ be distinct prime ideals minimal over $I$, meaning that $I\\subseteq\\mathfrak p_a$ and no strictly smaller prime contains $I$. Let $(\\mathfrak q_a)_{a\\in F}$ be proper prime ideals of $R$ with $\\varphi^{-1}(\\mathfrak q_a)=\\mathfrak p_a$. For an ideal $J\\subseteq R$, write $V(J)$ for the set of primes of $R$ containing $J$. Suppose $V((T))=\\bigcup_{a\\in F}V(\\mathfrak q_a)$. Then the ideals $P_i=(t_i)$, $1\\leq i\\leq r$, are pairwise incomparable proper primes and are exactly the minimal primes over $(T)$. There is a unique bijection $e:F\\xrightarrow{\\sim}\\{1,\\ldots,r\\}$ satisfying $\\mathfrak q_a=(t_{e(a)})$ for every $a\\in F$. In particular $r=0$ forces $F=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AG0, lemma-regular-local-UFD, opening proof that parameter elements are prime; agent prime-family matching argument of returned parent steps 4--6."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof": [
+  {
+   "text": "Apply clause (b) of [lem-sfb-transverse-prime-ideal-parameters] to the given regular local ring, full regular parameter system, and initial sublist of length $r$. Its hypotheses are exactly those of the item. It gives pairwise incomparable proper prime ideals $P_i=(t_i)$ and says that these are precisely the primes minimal over $(T)$, including the empty-product case. This proves the first assertion; only the matching remains.",
+   "uses": [
+    "lem-sfb-transverse-prime-ideal-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AG0 (lemma-regular-local-UFD), opening parameter-primality argument; agent prime-family matching argument using the stated closed-set equality."
+   }
+  },
+  {
+   "text": "If $r=0$, then $T=1$ and $V((T))=\\varnothing$. For any $a\\in F$, the proper prime $\\mathfrak q_a$ itself belongs to $V(\\mathfrak q_a)$, contradicting the assumed equality with the empty set. Thus $F=\\varnothing$, and the empty map is the unique required bijection. Henceforth suppose $r>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AG0 (lemma-regular-local-UFD), opening parameter-primality argument; agent prime-family matching argument using the stated closed-set equality."
+   }
+  },
+  {
+   "text": "Fix $a\\in F$. Since $\\mathfrak q_a\\in V(\\mathfrak q_a)$, the closed-set equality gives $T\\in\\mathfrak q_a$. Primality applied successively to this finite product gives some $i$ with $t_i\\in\\mathfrak q_a$, hence $P_i\\subseteq\\mathfrak q_a$. Conversely $P_i\\in V((T))$, because $t_i$ divides $T$. The same closed-set equality gives some $b\\in F$ with $P_i\\in V(\\mathfrak q_b)$, or $\\mathfrak q_b\\subseteq P_i$. Contracting the chain $\\mathfrak q_b\\subseteq P_i\\subseteq\\mathfrak q_a$ gives $I\\subseteq\\mathfrak p_b\\subseteq\\mathfrak p_a$. Since $\\mathfrak p_b$ is prime and $\\mathfrak p_a$ is minimal over $I$, the contractions are equal. Their stipulated distinctness gives $b=a$. Thus $\\mathfrak q_a\\subseteq P_i\\subseteq\\mathfrak q_a$, proving $\\mathfrak q_a=P_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AG0 (lemma-regular-local-UFD), opening parameter-primality argument; agent prime-family matching argument using the stated closed-set equality."
+   }
+  },
+  {
+   "text": "Pairwise incomparability of the $P_i$ implies their distinctness, so the index $i$ obtained in step 3 is unique. Define $e(a)=i$. If $e(a)=e(b)$, then $\\mathfrak q_a=P_{e(a)}=\\mathfrak q_b$; contracting yields $\\mathfrak p_a=\\mathfrak p_b$, so $a=b$. Thus $e$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AG0 (lemma-regular-local-UFD), opening parameter-primality argument; agent prime-family matching argument using the stated closed-set equality."
+   }
+  },
+  {
+   "text": "For any $i\\in\\{1,\\ldots,r\\}$, the point $P_i\\in V((T))$ belongs to $V(\\mathfrak q_a)$ for some $a\\in F$. Consequently $P_{e(a)}=\\mathfrak q_a\\subseteq P_i$. Incomparability forces $e(a)=i$, proving surjectivity. Any other map satisfying the required ideal equalities has the same value at each $a$, by distinctness of the $P_i$. This proves uniqueness of the bijection and completes every clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AG0 (lemma-regular-local-UFD), opening parameter-primality argument; agent prime-family matching argument using the stated closed-set equality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-transverse-prime-ideal-parameters"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AG0 (lemma-regular-local-UFD), opening parameter-primality argument; agent prime-family matching argument using the stated closed-set equality. Parameter-product algebra supplied by etale.tex Tag 0BIA (lemma-strict-normal-crossings), via the cited reviewed node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Distinct primes minimal over an ideal are bijective with the parameter principal primes if their extended prime closed sets cover the zero locus of a product of regular parameters and contractions agree",
+   "results": "8 hits: PrimeSpectrum.toPiLocalization_bijective, PrimeSpectrum.piLocalizationToMaximal_bijective, Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes, Ideal.primeSpectrumQuotientOrderIsoZeroLocus, Localization.AtPrime.mapPiEvalRingHom_bijective, Ideal.exists_comap_eq_of_mem_minimalPrimes, IsLocalization.AtPrime.coe_primeSpectrumOrderIso_symm_apply_asIdeal, IsLocalization.primeSpectrumOrderIso. No returned declaration matches the bijection with the specified contracted prime family. Minimal-prime localization and height theorems do not give this matching.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"minimalPrimes\", \"span\"",
+   "results": "6 hits: Ideal.height_le_encard_of_mem_minimalPrimes_span, Ideal.height_le_card_of_mem_minimalPrimes_span, Ideal.height_le_ncard_of_mem_minimalPrimes_span, Ideal.height_le_card_of_mem_minimalPrimes_span_finset, Ideal.height_le_spanRank_toENat_of_mem_minimalPrimes, Ideal.mem_minimalPrimes_span_of_mem_minimalPrimes_span_insert. No returned declaration matches the bijection with the specified contracted prime family. Minimal-prime localization and height theorems do not give this matching.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes.*(prod|span)|span.*minimalPrimes|IsRegularSystemOfParameters",
+   "results": "7 hits: Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean, Mathlib/RingTheory/Ideal/UFD.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean. No returned declaration matches the bijection with the specified contracted prime family. Minimal-prime localization and height theorems do not give this matching.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal primes of a product of distinct regular parameters identify a finite prime family with prescribed distinct minimal prime contractions",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular local ring the minimal primes of a product of a subset of a regular system of parameters form a bijective labeling of prime ideals with incomparable distinct contractions",
+   "results": "8 hits: PrimeSpectrum.piLocalizationToMaximal_bijective, Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes, PrimeSpectrum.toPiLocalization_bijective, Ideal.minimalPrimes_eq_comap, Ideal.exists_comap_eq_of_mem_minimalPrimes, Localization.AtPrime.mapPiEvalRingHom_bijective, Ideal.exists_comap_eq_of_mem_minimalPrimes_of_injective, Ideal.mem_minimalPrimes_sup. No returned declaration matches the bijection with the specified contracted prime family. Minimal-prime localization and height theorems do not give this matching.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes.*(prod|comap)|prod.*minimalPrimes|IsRegularSystemOfParameters",
+   "results": "11 hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean, Mathlib/RingTheory/KrullDimension/Zero.lean. Read the returned types and inspected the minimal-prime localization/basic candidates. None gives the parameter-prime and prescribed contracted-family matching assertion; primary decomposition results require additional decomposition data.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"minimalPrimes\", \"prod\"",
+   "results": "0 hits: . Read the returned types and inspected the minimal-prime localization/basic candidates. None gives the parameter-prime and prescribed contracted-family matching assertion; primary decomposition results require additional decomposition data.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of prime ideals whose contractions are distinct minimal primes matches the pairwise incomparable prime factors of a parameter product when their closed sets have the same union",
+   "results": "8 hits: Ideal.IsMinimalPrimaryDecomposition, Ideal.IsMinimalPrimaryDecomposition.distinct, Ideal.IsMinimalPrimaryDecomposition.minimal, Ideal.subset_union_prime_finite, PrimeSpectrum.exists_primeSpectrum_prod_le, Ideal.IsLasker.exists_isMinimalPrimaryDecomposition, Ideal.exists_minimal_isPrimary_decomposition_of_isPrimary_decomposition, Ideal.mem_minimalPrimes_sup. Read the returned types and inspected the minimal-prime localization/basic candidates. None gives the parameter-prime and prescribed contracted-family matching assertion; primary decomposition results require additional decomposition data.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal primes of a product of regular parameters match primes with distinct minimal contractions and equal union of vanishing sets",
+   "results": "8 hits: minimalPrimes, Ideal.minimalPrimes, PrimeSpectrum.primeSpectrumProd, Ideal.minimalPrimes_eq_subsingleton_self, PrimeSpectrum.isMin_iff, associatedPrimes.prod, Ring.KrullDimLE.mem_minimalPrimes_iff, PrimeSpectrum.primeSpectrumProdOfSum. Read the returned types and inspected the minimal-prime localization/basic candidates. None gives the parameter-prime and prescribed contracted-family matching assertion; primary decomposition results require additional decomposition data.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular local ring the minimal primes of a product of regular parameters give the unique labeling of an incomparable family of prime ideals with the same closed union",
+   "results": "8 hits: Ideal.mem_minimalPrimes_sup, Ideal.exists_mul_mem_of_mem_minimalPrimes, Ideal.exists_minimal_isPrimary_decomposition_of_isPrimary_decomposition, Ideal.mem_minimalPrimes_span_of_mem_minimalPrimes_span_insert, Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes, Ideal.IsMinimalPrimaryDecomposition, Ideal.IsMinimalPrimaryDecomposition.minimal, Ring.KrullDimLE.mem_minimalPrimes_iff. Read the returned types and inspected the minimal-prime localization/basic candidates. None gives the parameter-prime and prescribed contracted-family matching assertion; primary decomposition results require additional decomposition data.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-component-coordinate-identification",
+  "date": "2026-10-22",
+  "group": "Q152"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the local strict-normal-crossings criterion after the étale coordinate calculation in Lemma 4.2.9; returned steps 4--6: prime parameters, cotangent independence, and the two-sided minimal-prime matching",
+   "via": [
+    "lem-trf-etale-component-coordinate-identification",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-parameter-product-prime-family-matching",
+  "worker": "stage1",
+  "summary": "Retained the complete statement. Reused reviewed clause (b) of lem-sfb-transverse-prime-ideal-parameters for coordinate-product algebra; wrote the remaining two-sided prime matching, contraction minimality, injection, surjection and uniqueness explicitly. No new nodes. Checked empty families, dimension zero and the necessity of distinct minimal contractions. Exact project attachment search was negative; recorded fresh Mathlib searches in addition to inherited searches.",
+  "blueprint": "Realizes the inherited from.place: returned parent lem-trf-etale-component-coordinate-identification steps 4--6, the local strict-normal-crossings parameter matching below lem-trf-local-term-locality. The latest blueprint ancestor concerns contracting local terms and does not itself contain this extracted commutative-algebra argument; no claim of a literal parameter argument there is made.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-transverse-prime-ideal-parameters",
+    "why": "Clause (b) is a generic regular-local commutative-algebra tool giving parameter primes, incomparability and minimal primes; it does not replace the trace-formula unit route. No statement in this unit supplies all these coordinate-product facts independently."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-transverse-prime-ideal-parameters"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-76be04802",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-76be04802 (reviewer sub-agent of L); spot-checked: No new nodes and no repair note. The statement and stmt_deps are unchanged; both defs are cited (regular local ring; regular system of parameters). Source: Stacks 0AG0 (lemma-regular-local-UFD, more-algebra.tex l.36801), whose opening argument shows a parameter element is prime; proof_origin=agent is correct. Step 1 cites the statement of clause (b) of lem-sfb-transverse-prime-ideal-parameters (split, reviewed PASS by Q93): the (t_i) are pairwise incomparable primes and exactly the primes minimal over (T), including r=0. The item's hypotheses cover it. Steps 2-5 are genuinely elementary. Step 2: r=0 gives V(R)=∅, so F=∅. Step 3: T∈q_a gives t_i∈q_a; P_i∈V(T) gives some q_b⊆P_i; contracting gives I⊆p_b⊆p_a; minimality and distinctness give b=a, so q_a=P_i. Step 4 (injectivity via contraction) and step 5 (surjectivity via incomparability, then uniqueness) are correct. φ needs no injectivity, flatness or locality. Edge cases checked: d=0; r>0 with F=∅ (impossible); k[x,y]_(x,y) with T=xy; the redundant prime (x,y) is excluded by minimality; repeated labels are excluded by distinctness. The parent etale-component-coordinate-identification step 2 uses exactly this statement. The tool_use of the sfb node is accepted as generic commutative algebra. Nearest overlap is lem-trf-parameter-product-reduced-cartier (radical part only), not a duplicate. No cycle and no SGA. Mathlib searches cover all three kinds."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ParameterProductPrimeFamilyMatching",
+  "declaration": "IsLocalRing.parameterProductPrimeFamilyMatching",
+  "file": "lean/Sheaf/RingTheory/ParameterProductPrimeFamilyMatching.lean",
+  "statement": "theorem parameterProductPrimeFamilyMatching {A : Type u} {R : Type v} [CommRing A] [CommRing R] [IsRegularLocalRing R] (φ : A →+* R) {d r : ℕ} (t : Fin d → R) (ht : IsRegularSystemOfParameters (List.ofFn t)) (hr : r ≤ d) (I : Ideal A) (F : Type w) [Finite F] (p : F → Ideal A) (q : F → Ideal R) (hp : ∀ a : F, p a ∈ I.minimalPrimes) (hp_distinct : Function.Injective p) (hq : ∀ a : F, (q a).IsPrime) (hcontraction : ∀ a : F, Ideal.comap φ (q a) = p a) (hV : PrimeSpectrum.zeroLocus (Ideal.span {∏ i : Fin r, t (Fin.castLE hr i)} : Set R) = ⋃ a : F, PrimeSpectrum.zeroLocus (q a : Set R)) : (∀ i : Fin r, (Ideal.span {t (Fin.castLE hr i)}).IsPrime) ∧ (Pairwise fun i j : Fin r ↦ ¬ Ideal.span {t (Fin.castLE hr i)} ≤ Ideal.span {t (Fin.castLE hr j)}) ∧ (Ideal.span {∏ i : Fin r, t (Fin.castLE hr i)}).minimalPrimes = Set.range (fun i : Fin r ↦ Ideal.span {t (Fin.castLE hr i)}) ∧ (∃! e : F ≃ Fin r, ∀ a : F, q a = Ideal.span {t (Fin.castLE hr (e a))}) ∧ (r = 0 → IsEmpty F)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-684c287c5",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Every node hypothesis matches the Lean exactly: φ with no extra hypotheses; IsRegularLocalRing; regular system of parameters on List.ofFn t, which fixes d = dim R; r ≤ d with the Fin.castLE initial product (empty product = 1); distinct p a in I.minimalPrimes via Injective; q a prime with comap = p a; zeroLocus equality. Every conclusion clause matches: (t_i) prime, Pairwise not-≤, minimalPrimes = range, ∃! e : F ≃ Fin r with the ideal equalities, r = 0 → IsEmpty F. Edge cases d=0, r=0, r>0 with F empty, and φ with a kernel are consistent with the node and clause (b) of lem-sfb-transverse-prime-ideal-parameters. No duplicate in Mathlib or the project and no parallel landing. Docstrings carry source and blueprint tag; the theorem docstring carries the proof steps; sorry only; lean.statement verbatim; the node changed only in its lean field; report has Worker report and Second reading sections. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,264 @@
+{
+ "id": "lem-asd-derived-monoidal-braided-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "the Lean proof of thm-asd-smooth-tensor's declarations uses (or, for the batch import closure, sits beside) CategoryTheory.DerivedMonoidal.braidedCategory (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: the derived braiding of D(C) used by the smooth duality map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A derived monoidal localization of a braided category is braided",
+ "statement": "Let $L:C\\to D$ be a localization at a class $W$ containing identities [lem-weil-pbc-localization-universal-property], with $C$ braided monoidal and $D$ equipped with its derived monoidal structure. More precisely, write $\\otimes,\\alpha$ for the tensor and associator of $C$, $\\star,a$ for those of $D$ [def-sfb-monoidal-category], and assume that its binary comparison $q$ has the binary and ternary derived monoidal comparison data of [def-asd-derived-monoidal-comparison-data]. This includes that $a$ is the associator induced from $\\alpha$, as in the canonical derived monoidal structure, rather than an independently chosen associator for the same tensor.\n\nA braiding of $C$ means natural isomorphisms $\\beta_{X,Y}:X\\otimes Y\\cong Y\\otimes X$ satisfying both hexagon identities. Lift $q_{X,Y};L(\\beta_{X,Y})$ and $q_{X,Y};L(\\beta_{Y,X}^{-1})$ through the binary universal property, reindexing the two variables, to natural transformations $b,c:(-\\star-)\\Rightarrow(-\\star-)^{\\mathrm{flip}}$. Then $b_{U,V}$ and $c_{V,U}$ are mutually inverse. The resulting natural isomorphism $b_{U,V}:U\\star V\\cong V\\star U$ satisfies both hexagon identities for $a$, so $D$ is braided monoidal. Composition $f;g$ means first $f$, then $g$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
+  "place": "thm-asd-smooth-tensor: the derived braiding of D(C) used by the smooth duality map; Lean: upstream file lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean, declaration CategoryTheory.DerivedMonoidal.braidedCategory (module WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided, lines 304-305, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-localization-universal-property",
+  "def-sfb-monoidal-category",
+  "def-asd-derived-monoidal-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Use $T(U,V)=U\\star V$ and $R_l,R_r,q^l,q^r$ from [def-asd-derived-monoidal-comparison-data]. Reindexing its binary universal bijection by $(X,Y)\\mapsto(Y,X)$ supplies the same bijection with target $T^{\\mathrm{flip}}$ and counit $q_{Y,X}$. Indeed precomposition with this swap is its own inverse on both categories of tuples and natural transformations, and commutes with $L\\times L$. Apply this bijection to the natural families $q_{X,Y};L\\beta_{X,Y}$ and $q_{X,Y};L(\\beta_{Y,X}^{-1})$. It gives natural $b,c:T\\Rightarrow T^{\\mathrm{flip}}$ with\n$$b_{LX,LY};q_{Y,X}=q_{X,Y};L\\beta_{X,Y},\\qquad c_{LX,LY};q_{Y,X}=q_{X,Y};L(\\beta_{Y,X}^{-1}).$$\nThis constructs actual transformations, with no assumption that $q$ is invertible.",
+   "uses": [
+    "def-asd-derived-monoidal-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Binary derived functor and descending constraints: existence of the two lifts; expanded abstract transport of lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:250-305"
+   }
+  },
+  {
+   "text": "For $X,Y\\in C$, substitute the two factorization equations of step 1 to get\n$$(b_{LX,LY};c_{LY,LX});q_{X,Y}=q_{X,Y};L\\beta_{X,Y};L(\\beta_{X,Y}^{-1})=q_{X,Y}.$$\nInjectivity of the binary universal bijection in [def-asd-derived-monoidal-comparison-data], with test functor $T$, gives $b_{U,V};c_{V,U}=1_{U\\star V}$. Likewise\n$$(c_{LX,LY};b_{LY,LX});q_{X,Y}=q_{X,Y};L(\\beta_{Y,X}^{-1});L\\beta_{Y,X}=q_{X,Y},$$\nso $c_{U,V};b_{V,U}=1_{U\\star V}$. Swapping $U,V$ in this last equation gives $c_{V,U};b_{U,V}=1_{V\\star U}$. Thus $c_{V,U}$ is the inverse of $b_{U,V}$. This uses inverses of the original braiding, not a symmetry assumption.",
+   "uses": [
+    "def-asd-derived-monoidal-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Binary derived functor and descending constraints: inverse equations; expanded abstract transport of lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:250-305"
+   }
+  },
+  {
+   "text": "The ternary universal properties of [def-asd-derived-monoidal-comparison-data] remain valid after any permutation of variables: given a test functor $V$, precompose $V$ and its proposed comparison transformation with the inverse permutation, apply the original bijection, and precompose the resulting lift with the permutation. These operations are inverse because the permutations commute with $L^3$. Consequently maps into $(U,V,Z)\\mapsto V\\star(Z\\star U)$ are determined by their composites with $q^r_{Y,Z,X}$ on $L$-tuples, and maps into $(U,V,Z)\\mapsto(Z\\star U)\\star V$ by their composites with $q^l_{Z,X,Y}$. Only injectivity is used below. The associator comparison also gives\n$$a^{-1}_{LX,LY,LZ};q^l_{X,Y,Z}=q^r_{X,Y,Z};L(\\alpha^{-1}_{X,Y,Z}),$$\nby multiplying $a;q^r=q^l;L\\alpha$ by the two inverse associators.",
+   "uses": [
+    "def-asd-derived-monoidal-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Ternary derived tensors and descended constraints: permuted extensionality and inverse associator equation; expanded abstract transport of lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:250-305"
+   }
+  },
+  {
+   "text": "Fix $X,Y,Z\\in C$ and abbreviate $x=LX,y=LY,z=LZ$. Let $H=a_{x,y,z};b_{x,y\\star z};a_{y,z,x}$ be the first forward hexagon path. Naturality of $b$ and its factorization equation, followed by the associator comparison from [def-asd-derived-monoidal-comparison-data], give\n$$\\begin{aligned}\nH;q^r_{Y,Z,X}\n&=a_{x,y,z};b_{x,y\\star z};(q_{Y,Z}\\star1_x);q_{Y\\otimes Z,X};L\\alpha_{Y,Z,X}\\\\\n&=a_{x,y,z};(1_x\\star q_{Y,Z});q_{X,Y\\otimes Z};L\\beta_{X,Y\\otimes Z};L\\alpha_{Y,Z,X}\\\\\n&=q^l_{X,Y,Z};L(\\alpha_{X,Y,Z};\\beta_{X,Y\\otimes Z};\\alpha_{Y,Z,X}).\n\\end{aligned}$$\nIn the second equality use $b_{x,y\\star z};(q_{Y,Z}\\star1_x)=(1_x\\star q_{Y,Z});b_{x,L(Y\\otimes Z)}$, then the binary factorization with the pair $(X,Y\\otimes Z)$.",
+   "uses": [
+    "def-asd-derived-monoidal-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Ternary derived tensors and coherence: first forward path; expanded abstract transport of lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:250-305"
+   }
+  },
+  {
+   "text": "For the other forward path $K=(b_{x,y}\\star1_z);a_{y,x,z};(1_y\\star b_{x,z})$, bifunctoriality and naturality of $q$ give\n$$\\begin{aligned}\nK;q^r_{Y,Z,X}\n&=(b_{x,y}\\star1_z);a_{y,x,z};q^r_{Y,X,Z};L(1_Y\\otimes\\beta_{X,Z})\\\\\n&=(b_{x,y}\\star1_z);q^l_{Y,X,Z};L\\alpha_{Y,X,Z};L(1_Y\\otimes\\beta_{X,Z})\\\\\n&=q^l_{X,Y,Z};L((\\beta_{X,Y}\\otimes1_Z);\\alpha_{Y,X,Z};(1_Y\\otimes\\beta_{X,Z})).\n\\end{aligned}$$\nFor the first equality combine $(1_y\\star b_{x,z});(1_y\\star q_{Z,X})=1_y\\star(q_{X,Z};L\\beta_{X,Z})$ and move $L\\beta_{X,Z}$ through $q_{Y,-}$. For the last, combine $(b_{x,y}\\star1_z);(q_{Y,X}\\star1_z)=(q_{X,Y};L\\beta_{X,Y})\\star1_z$ and move $L\\beta_{X,Y}$ through $q_{-,Z}$. The middle equality is precisely the associator equation of [def-asd-derived-monoidal-comparison-data].",
+   "uses": [
+    "def-asd-derived-monoidal-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Ternary derived tensors and coherence: second forward path; expanded abstract transport of lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:250-305"
+   }
+  },
+  {
+   "text": "The forward hexagon for the assumed braiding of $C$ says that the two morphisms inside $L$ at the ends of steps 4 and 5 are equal. Hence $H;q^r_{Y,Z,X}=K;q^r_{Y,Z,X}$ for every $X,Y,Z$. Both paths are natural transformations, because tensor, $a$ and $b$ are natural. Apply the permuted ternary injectivity established in step 3 from [def-asd-derived-monoidal-comparison-data], with target $R_r(V,Z,U)$ and test functor $R_l(U,V,Z)$. It gives $H=K$ on all of $D^3$. This proves the forward hexagon without cancelling any component of $q$.",
+   "uses": [
+    "def-asd-derived-monoidal-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Ternary derived tensors and coherence: forward hexagon by injectivity; expanded abstract transport of lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:250-305"
+   }
+  },
+  {
+   "text": "For the first reverse path $H'=a^{-1}_{x,y,z};b_{x\\star y,z};a^{-1}_{z,x,y}$, the inverse associator equation and naturality of $b$ give\n$$\\begin{aligned}\nH';q^l_{Z,X,Y}\n&=a^{-1}_{x,y,z};b_{x\\star y,z};(1_z\\star q_{X,Y});q_{Z,X\\otimes Y};L\\alpha^{-1}_{Z,X,Y}\\\\\n&=a^{-1}_{x,y,z};(q_{X,Y}\\star1_z);q_{X\\otimes Y,Z};L\\beta_{X\\otimes Y,Z};L\\alpha^{-1}_{Z,X,Y}\\\\\n&=q^r_{X,Y,Z};L(\\alpha^{-1}_{X,Y,Z};\\beta_{X\\otimes Y,Z};\\alpha^{-1}_{Z,X,Y}).\n\\end{aligned}$$\nThe second equality uses $b_{x\\star y,z};(1_z\\star q_{X,Y})=(q_{X,Y}\\star1_z);b_{L(X\\otimes Y),z}$, then the binary factorization. The final equality uses $a^{-1};q^l=q^r;L\\alpha^{-1}$ from [def-asd-derived-monoidal-comparison-data] and step 3.",
+   "uses": [
+    "def-asd-derived-monoidal-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Ternary derived tensors and coherence: first reverse path; expanded abstract transport of lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:250-305"
+   }
+  },
+  {
+   "text": "For the other reverse path $K'=(1_x\\star b_{y,z});a^{-1}_{x,z,y};(b_{x,z}\\star1_y)$, the corresponding calculation is\n$$\\begin{aligned}\nK';q^l_{Z,X,Y}\n&=(1_x\\star b_{y,z});a^{-1}_{x,z,y};q^l_{X,Z,Y};L(\\beta_{X,Z}\\otimes1_Y)\\\\\n&=(1_x\\star b_{y,z});q^r_{X,Z,Y};L\\alpha^{-1}_{X,Z,Y};L(\\beta_{X,Z}\\otimes1_Y)\\\\\n&=q^r_{X,Y,Z};L((1_X\\otimes\\beta_{Y,Z});\\alpha^{-1}_{X,Z,Y};(\\beta_{X,Z}\\otimes1_Y)).\n\\end{aligned}$$\nIn the first equality combine $(b_{x,z}\\star1_y);(q_{Z,X}\\star1_y)=(q_{X,Z};L\\beta_{X,Z})\\star1_y$ and use naturality of $q_{-,Y}$. In the last combine $(1_x\\star b_{y,z});(1_x\\star q_{Z,Y})=1_x\\star(q_{Y,Z};L\\beta_{Y,Z})$ and use naturality of $q_{X,-}$. The middle equality is the inverse associator equation of [def-asd-derived-monoidal-comparison-data].",
+   "uses": [
+    "def-asd-derived-monoidal-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Ternary derived tensors and coherence: second reverse path; expanded abstract transport of lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:250-305"
+   }
+  },
+  {
+   "text": "The reverse hexagon in $C$ equates the expressions inside $L$ in steps 7 and 8. Thus the natural reverse paths satisfy $H';q^l_{Z,X,Y}=K';q^l_{Z,X,Y}$ on every $L$-tuple. Apply step 3's permuted ternary injectivity from [def-asd-derived-monoidal-comparison-data] with target $R_l(Z,U,V)$ and test functor $R_r(U,V,Z)$ to obtain $H'=K'$ everywhere. Together with naturality and the two inverse identities of step 2, these are exactly the data and axioms of a braiding on the given monoidal category $D$.",
+   "uses": [
+    "def-asd-derived-monoidal-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Ternary derived tensors and coherence: reverse hexagon and braided structure; expanded abstract transport of lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:250-305"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-derived-monoidal-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+  "place": "Abstract universal-property expansion of the paragraph on ternary derived tensors and descended coherence, following the audited Braided.lean transport docstring. The explicit two hexagon calculations are supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homotopy category of complexes in a braided monoidal category is braided, Koszul sign braiding hexagon",
+   "results": "GradedObject.Monoidal.hexagon_forward (Mathlib.CategoryTheory.GradedObject.Braiding), BraidedCategory.ofBifunctor (Mathlib.CategoryTheory.Monoidal.Braided.Multifunctor), BraidedCategory.hexagon_forward: graded objects and generic API only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory (HomotopyCategory _ _)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'BraidedCategory \\(HomotopyCategory|SymmetricCategory \\(DerivedCategory|BraidedCategory \\(DerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A braided category induces a braiding on a derived monoidal localization using binary and ternary left derived functor universal properties",
+   "results": "{\"t\": \"2026-10-22T05:43:24Z\", \"tool\": \"leanfinder\", \"query\": \"A braided category induces a braiding on a derived monoidal localization using binary and ternary left derived functor universal properties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.instBraidedCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instBraidedLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.braidingNatIso_hom_app\", \"CategoryTheory.Localization.Monoidal.β_hom_app\", \"CategoryTheory.Localization.Monoidal.braidingNatIso\", \"CategoryTheory.Localization.Monoidal.map_hexagon_forward_assoc\", \"CategoryTheory.Localization.Monoidal.map_hexagon_forward\", \"CategoryTheory.Localization.Monoidal.map_hexagon_reverse_assoc\"], \"digest\": \"3758b14831dd5acf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal localization requires tensor-stable weak equivalences and invertible comparisons; Kan-extension APIs supply individual universal properties, not this combined derived monoidal datum"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory, CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "{\"t\": \"2026-10-22T05:43:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.BraidedCategory, CategoryTheory.Functor.IsLeftDerivedFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal localization requires tensor-stable weak equivalences and invertible comparisons; Kan-extension APIs supply individual universal properties, not this combined derived monoidal datum"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedMonoidal|HasDerivedMonoidalCategory|leftDerived₃_ext",
+   "results": "{\"t\": \"2026-10-22T05:43:25Z\", \"tool\": \"grep\", \"query\": \"DerivedMonoidal|HasDerivedMonoidalCategory|leftDerived₃_ext\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal localization requires tensor-stable weak equivalences and invertible comparisons; Kan-extension APIs supply individual universal properties, not this combined derived monoidal datum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Braiding hexagon identities descend through a left derived tensor monoidal localization",
+   "results": "{\"t\": \"2026-10-22T05:43:25Z\", \"tool\": \"leansearch\", \"query\": \"Braiding hexagon identities descend through a left derived tensor monoidal localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.map_hexagon_forward_assoc\", \"CategoryTheory.GradedObject.Monoidal.hexagon_forward\", \"CategoryTheory.MonoidalCategory.DayConvolution.hexagon_forward\", \"CategoryTheory.Localization.Monoidal.map_hexagon_reverse\", \"CategoryTheory.BraidedCategory.hexagon_forward_iso\", \"CategoryTheory.Localization.Monoidal.instBraidedLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.BraidedCategory.hexagon_forward\", \"CategoryTheory.BraidedCategory.ofBifunctor\"], \"digest\": \"5871adfd655b1b20\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal localization requires tensor-stable weak equivalences and invertible comparisons; Kan-extension APIs supply individual universal properties, not this combined derived monoidal datum"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.DerivedMonoidal.braidedCategory"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "CategoryTheory.DerivedMonoidal.braidedCategory",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided",
+     "lines": [
+      302,
+      305
+     ],
+     "kind": "instance",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided",
+  "file": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean",
+  "declaration": "CategoryTheory.DerivedMonoidal.braidedCategory",
+  "declarations": [
+   "CategoryTheory.DerivedMonoidal.braidedCategory"
+  ],
+  "statement": "noncomputable instance braidedCategory : BraidedCategory (DerivedMonoidal L W) :=\n  .ofBifunctor (braiding L W) sorry sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; the hexagons are identities of natural transformations in three variables; they follow by ternary left derived extensionality (upstream docstring)"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-asd-derived-monoidal-braided-transport",
+  "worker": "stage1",
+  "summary": "Corrected the insufficient binary-only description of the derived monoidal hypothesis to include ternary universal properties and the induced associator, as required by the actual upstream HasDerivedMonoidalCategory. Introduced one definition of these comparison data and wrote both inverse calculations and all four postcomposed hexagon paths explicitly. No flat-resolution hypothesis, symmetry, or invertibility of comparison maps is used.",
+  "blueprint": "thm-asd-smooth-tensor, opening displayed transposition through derived tensor; the ancillary transport identified by the maintainer audit is realized by steps 1-2 (binary lift and inverse), 3 (ternary extensionality) and 4-9 (both hexagons). The current blueprint's lem-sfb-derived-monoidal proof explains the multivariable constraints; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NO-175ffce25",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-175ffce25 (reviewer sub-agent of L); spot-checked: I read the item, the new def-asd-derived-monoidal-comparison-data node and the sources in full: Braided.lean 250-305 and its file docstring, FromJoel Derived.lean 100-200 (HasDerivedMonoidalCategory, counit12/23, associator_hom_fac_app_app_app), the main-20261015 lem-sfb-derived-monoidal proof and the master thm-asd-smooth-tensor. The worker's STATEMENT-DISPUTED repair is correct. On Z/2-graded spaces, twisting the associator by (-1)^{ijk} still satisfies the pentagon (both sides expand to ijk+ijl+ikl+jkl), but the forward hexagon at (1,1,1) gives +1 against -1, so the binary-only reading is false. The repaired item assumes the binary and ternary right-Kan universal properties and the associator equation a;q^r=q^l;Lα. These match the Lean exactly: the Kan property runs in the IsLeftDerivedFunctor direction, and q^l/q^r are counit12/counit23. The Lean instance satisfies every hypothesis, so this is not a weakening, and the item is not a target. I recomputed all 9 steps. The lifts b,c come from the swapped universal property, and the inverse identities hold without assuming a symmetry. Permuted ternary injectivity holds. Forward paths 4 and 5 reduce to q^l;L(α;β_{X,Y⊗Z};α) and q^l;L((β⊗1);α;(1⊗β)), reverse paths 7 and 8 to q^r;L(α^{-1};β_{X⊗Y,Z};α^{-1}) and q^r;L((1⊗β);α^{-1};(β⊗1)). The hexagons of C plus injectivity then give the hexagons of D. Each elementary mark is justified. The new node is statement-only and self-contained, with no existence claim and no restated clause of the item. Its searches were run, and no duplicate exists: I checked lem-sfb-multivariable-derived-calculus, lem-sfb-braided-monoidal-localization, lem-sfb-derived-monoidal, def-sfb-left-derived-functor, def-sfb-ringed-derived-comparison-data and lem-asd-derived-category-braided. The item is still unsplit in live and side-live, is not dropped, and carries no re-split note. The route is clean (definition only, no tool_uses) and no SGA source is cited. Advisory: the new node's blueprint.from.node is null because the ancestor tool returns null for a maintainer item with created.item null, while from.place names thm-asd-smooth-tensor; the maintainer may set it. The citer thm-asd-smooth-tensor has this item only in proof_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261024T185335-L-3513497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "DerivedCategory.symmetricCategory"
+  ],
+  "sorry_after": []
+ }
+}

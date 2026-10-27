@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-closed-support-relative-pseudocoherence",
+ "kind": "statement",
+ "title": "Relative pseudo-coherence is invariant under closed immersions",
+ "statement": "Let $X$ and $Y$ be schemes locally of finite type over a scheme $S$ [def-pc-scheme], [def-pc-morphism-conventions], and let $i:X\\to Y$ be a closed immersion over $S$ [def-weil-closed-immersion]. For every integer $m$ and every $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], $E$ is $m$-pseudo-coherent relative to $S$ if and only if $Ri_*E$ is $m$-pseudo-coherent relative to $S$ [def-sfb-relative-pseudo-coherent-complex], [def-pc-derived-direct-image]. No quasi-coherence hypothesis on the cohomology of $E$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09VG, lemma-closed-morphism-relative-pseudo-coherence, restricted to closed immersions; its proof with T = affine n-space over S (the broader topological-embedding assertion is false; see report Source error)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-derived-direct-image",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $f_X:X\\to S$, $f_Y:Y\\to S$, and $F=Ri_*E$; fix $m$. By [lem-weil-pbc-affine-opens-basis] choose an affine cover $S=\\bigcup_a V_a$ and affine covers $f_Y^{-1}(V_a)=\\bigcup_b W_{ab}$. Put $U_{ab}=i^{-1}(W_{ab})$. The affine quotient characterization in [def-weil-closed-immersion] makes $U_{ab}$ affine and the induced $i_{ab}:U_{ab}\\to W_{ab}$ a closed immersion; these opens cover $f_X^{-1}(V_a)$. The embedding-existence clause of [lem-sfb-relative-pseudocoherence-all-affine-charts], applied to the locally finite type morphism $f_Y$ and the pair $(W_{ab},V_a)$, supplies $j_{ab}:W_{ab}\\hookrightarrow\\mathbf A^{n_{ab}}_{V_a}$. The composite $k_{ab}=j_{ab}\\circ i_{ab}$ is a closed immersion by [lem-weil-pbc-closed-immersion-comp].",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-closed-immersion",
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VG, lemma-closed-morphism-relative-pseudo-coherence, affine reduction restricted to a closed immersion; Tag 09UJ and Tag 09VC for affine-space presentations"
+   }
+  },
+  {
+   "text": "For each $(a,b)$, [lem-pc-restrict-derived-direct-image-open] gives $F|_{W_{ab}}\\cong R(i_{ab})_*(E|_{U_{ab}})$. Apply [lem-pc-derived-direct-image-composition] to $i_{ab}$ and $j_{ab}$ to obtain the derived-category isomorphism $$R(j_{ab})_*(F|_{W_{ab}})\\cong R(k_{ab})_*(E|_{U_{ab}}).$$ Both cited results concern arbitrary objects of the unbounded module derived category, so this uses no quasi-coherence or boundedness. Absolute $m$-pseudo-coherence is invariant under this isomorphism: compose each local strictly perfect approximation with the isomorphism or its inverse; the cohomology isomorphism and surjectivity conditions in [def-sfb-m-pseudo-coherent-complex] are unchanged.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-derived-direct-image-composition",
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08FE (lemma-restrict-direct-image-open) and 0D5T (lemma-derived-pushforward-composition); cohomology.tex Tag 08CB (definition-pseudo-coherent)"
+   }
+  },
+  {
+   "text": "Assume $E$ is relatively $m$-pseudo-coherent over $S$. Apply [lem-sfb-relative-pseudocoherence-all-affine-charts] to $f_X$ with the affine pair $(U_{ab},V_a)$ and the particular embedding $k_{ab}$. It gives absolute $m$-pseudo-coherence of $R(k_{ab})_*(E|_{U_{ab}})$. By step 2 the same holds for $R(j_{ab})_*(F|_{W_{ab}})$. The covers $\\{V_a\\}$, $\\{W_{ab}\\}_b$ and embeddings $j_{ab}$ are precisely witnesses for relative $m$-pseudo-coherence of $F$ in [def-sfb-relative-pseudo-coherent-complex].",
+   "uses": [
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VG, closed-immersion case using one common polynomial ambient scheme; Tags 09UJ, 09VC, and 09UI (definition-relative-pseudo-coherence)"
+   }
+  },
+  {
+   "text": "Conversely assume $F$ is relatively $m$-pseudo-coherent over $S$. Apply [lem-sfb-relative-pseudocoherence-all-affine-charts] to $f_Y$ with $(W_{ab},V_a)$ and $j_{ab}$. Its conclusion and step 2 give absolute $m$-pseudo-coherence of $R(k_{ab})_*(E|_{U_{ab}})$. Since $\\{U_{ab}\\}_b$ covers $f_X^{-1}(V_a)$, the base cover $\\{V_a\\}$, these source covers and the embeddings $k_{ab}$ are witnesses in [def-sfb-relative-pseudo-coherent-complex] for relative $m$-pseudo-coherence of $E$. This proves the equivalence for the arbitrary fixed integer $m$. All covers may be infinite and empty source opens cause no exception.",
+   "uses": [
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VG, closed-immersion case using one common polynomial ambient scheme; Tags 09UJ, 09VC, and 09UI (definition-relative-pseudo-coherence)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-closed-immersion",
+  "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-derived-direct-image-composition",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-sfb-relative-pseudo-coherent-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09VG, lemma-closed-morphism-relative-pseudo-coherence, valid closed-immersion case: take T = affine n-space over S and no extra nilpotent generators; globalization by 09UJ/09VC and 09UI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of locally finite type schemes inducing a homeomorphism onto a closed subset preserves and reflects relative m pseudo coherence under derived pushforward",
+   "results": "{\"t\": \"2026-10-23T13:39:06Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of locally finite type schemes inducing a homeomorphism onto a closed subset preserves and reflects relative m pseudo coherence under derived pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.LocallyQuasiFinite\"], \"digest\": \"77ca517c84a720a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T13:39:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*pseudo|pseudo.*coher",
+   "results": "{\"t\": \"2026-10-23T13:39:04Z\", \"tool\": \"grep\", \"query\": \"relative.*pseudo|pseudo.*coher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"Mathlib/CategoryTheory/Bicategory/Coherence.lean\", \"Mathlib/CategoryTheory/Bicategory/Coherence.lean\"], \"digest\": \"67d43dc76d379310\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image under a closed topological embedding preserves and reflects relative pseudo coherence",
+   "results": "{\"t\": \"2026-10-23T13:39:05Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image under a closed topological embedding preserves and reflects relative pseudo coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsClosedEmbedding.locallyCompactSpace\", \"Topology.IsEmbedding.isCompact_iff\", \"Topology.IsClosedEmbedding.weaklyLocallyCompactSpace\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding\", \"Topology.IsClosedEmbedding.paracompactSpace\", \"Topology.IsClosedEmbedding.quasiSober\", \"IsRetrocompact.image_of_isEmbedding\"], \"digest\": \"35a0cef4ecc147b6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative finite free approximations are invariant under a scheme morphism that is a homeomorphism onto a closed subset",
+   "results": "{\"t\": \"2026-10-23T13:39:08Z\", \"tool\": \"leanfinder\", \"query\": \"Relative finite free approximations are invariant under a scheme morphism that is a homeomorphism onto a closed subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyIsClosedEmbedding\", \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyIsClosedMap\", \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyIsEmbedding\", \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyGeneralizingMap\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.specializingMap_respectsIso\", \"AlgebraicGeometry.topologically_iso_le\"], \"digest\": \"343a562fa64b56c8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T15:51:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits state closed-immersion morphism properties or underived module pushforward properties, not relative m-pseudo-coherence of arbitrary derived complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*pseudo|pseudo.*coher",
+   "results": "{\"t\": \"2026-10-23T15:51:05Z\", \"tool\": \"grep\", \"query\": \"relative.*pseudo|pseudo.*coher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"Mathlib/CategoryTheory/Bicategory/Coherence.lean\", \"Mathlib/CategoryTheory/Bicategory/Coherence.lean\"], \"digest\": \"67d43dc76d379310\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits state closed-immersion morphism properties or underived module pushforward properties, not relative m-pseudo-coherence of arbitrary derived complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative pseudo coherence is equivalent for a complex and its derived pushforward along a closed immersion",
+   "results": "{\"t\": \"2026-10-23T15:51:05Z\", \"tool\": \"leansearch\", \"query\": \"Relative pseudo coherence is equivalent for a complex and its derived pushforward along a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\"], \"digest\": \"2ca2a27be9308bf1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits state closed-immersion morphism properties or underived module pushforward properties, not relative m-pseudo-coherence of arbitrary derived complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion of schemes locally of finite type over S preserves and reflects relative m pseudo coherence of arbitrary derived complexes under derived direct image",
+   "results": "{\"t\": \"2026-10-23T15:51:06Z\", \"tool\": \"leanfinder\", \"query\": \"A closed immersion of schemes locally of finite type over S preserves and reflects relative m pseudo coherence of arbitrary derived complexes under derived direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\"], \"digest\": \"d10c2060506112b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits state closed-immersion morphism properties or underived module pushforward properties, not relative m-pseudo-coherence of arbitrary derived complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion invariance of relative finite strictly perfect approximations over an arbitrary base scheme",
+   "results": "{\"t\": \"2026-10-23T15:51:07Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersion invariance of relative finite strictly perfect approximations over an arbitrary base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.comp_iff\"], \"digest\": \"45cce619dbccf5cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits state closed-immersion morphism properties or underived module pushforward properties, not relative m-pseudo-coherence of arbitrary derived complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?[Cc]oher|relative.*[Pp]seudo",
+   "results": "{\"t\": \"2026-10-23T17:51:49Z\", \"tool\": \"grep\", \"query\": \"pseudo.?[Cc]oher|relative.*[Pp]seudo\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\"], \"digest\": \"122289fcf847c23b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern morphism properties, underived pushforward, complex-shape extension, or pseudometric spaces; none states relative m-pseudo-coherence for arbitrary derived scheme modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complex is relatively m pseudo coherent if and only if its direct image by a closed immersion is relatively m pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T17:51:49Z\", \"tool\": \"leansearch\", \"query\": \"A derived complex is relatively m pseudo coherent if and only if its direct image by a closed immersion is relatively m pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\"], \"digest\": \"b394ce8b4303f2a0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern morphism properties, underived pushforward, complex-shape extension, or pseudometric spaces; none states relative m-pseudo-coherence for arbitrary derived scheme modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T17:51:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern morphism properties, underived pushforward, complex-shape extension, or pseudometric spaces; none states relative m-pseudo-coherence for arbitrary derived scheme modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions of schemes preserve and reflect relative m pseudo coherence of arbitrary complexes under derived direct image",
+   "results": "{\"t\": \"2026-10-23T17:51:50Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersions of schemes preserve and reflect relative m pseudo coherence of arbitrary complexes under derived direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.IsImmersion.instHasOfPostcompPropertySchemeTopMorphismProperty\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.comp_iff\", \"AlgebraicGeometry.Scheme.Modules.pushforward\"], \"digest\": \"580abd8ea83df9d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern morphism properties, underived pushforward, complex-shape extension, or pseudometric spaces; none states relative m-pseudo-coherence for arbitrary derived scheme modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative finite strictly perfect approximation of complexes is unchanged by extension along a closed subscheme",
+   "results": "{\"t\": \"2026-10-23T17:52:27Z\", \"tool\": \"leanfinder\", \"query\": \"Relative finite strictly perfect approximation of complexes is unchanged by extension along a closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instIsStrictlySupportedExtend\", \"ComplexShape.Embedding.liftExtend.f\", \"ComplexShape.Embedding.liftExtend\", \"ComplexShape.Embedding.homRestrict_hasLift\", \"HomologicalComplex.extendXIso\", \"HomologicalComplex.isZero_extend_X'\", \"HomologicalComplex.isZero_extend_X\", \"HomologicalComplex.extend_exactAt\"], \"digest\": \"cb9ddc7f5d1af531\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern morphism properties, underived pushforward, complex-shape extension, or pseudometric spaces; none states relative m-pseudo-coherence for arbitrary derived scheme modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 09UU (lemma-check-relative-pseudo-coherence-on-charts, equivalence (1) and (3) for every integer m). Supporting prerequisite of 09UU proof, equivalence (1) and (2): use 09VG for the closed immersion, retaining arbitrary E rather than imposing the quasi-coherence hypothesis of 09UK. Corrected closed-immersion case only: the broader topological-embedding assertion of 09VG is false.",
+   "via": [
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-support-relative-pseudocoherence",
+  "worker": "stage1",
+  "summary": "Proved both implications using common polynomial embeddings on induced affine covers. Reused the existing all-affine criterion, affine basis, closed-immersion composition, derived open restriction, and derived direct-image composition. No new nodes, no quasi-coherence assumption, no statement change. Retained the prior correction of the false topological version of 09VG.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, (3), direct-image stability; supporting coherent-image route inherited through flat-ambient-relative-pseudocoherence and 09UU. This realizes the closed-immersion prerequisite, not an alteration of the unit route. The ancestor search returns None; the inherited null from.node and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Generic unbounded ringed-space open-restriction comparison used on each induced affine closed immersion; no same-unit node supplies this module-derived identification."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "Generic unbounded scheme module-derived composition theorem used for two closed immersions; no same-unit node states this comparison without extra presentations or coefficient hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-derived-direct-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-89267479d",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-89267479d (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. Source checks: Stacks 09VG at more-morphisms.tex lines 16949-16995, and 09UJ, 09VC, 09UI at 16610-16900. I also read 08FE and 0D5T in cohomology.tex. The statement matches live (unchanged, still unsplit there, no repair note). It is 09VG restricted to closed immersions for arbitrary E, which was already in the base and is exactly what the citer lem-sfb-flat-ambient-relative-pseudocoherence needs. The topological 09VG claim is false, and the report gives a counterexample. Step 1: affine-basis leaf; the affine quotient clause of def-weil-closed-immersion makes U_ab = i^{-1}W_ab affine; the U_ab cover f_X^{-1}(V_a) because f_X = f_Y∘i; j_ab comes from the existence clause in the all-affine-charts statement (C3 ok); k_ab is a closed immersion over V_a by 01QS. Step 2: 08FE and 0D5T hold for arbitrary unbounded objects, giving Rj_*(F|W) ≅ Rk_*(E|U); invariance of m-pseudo-coherence under an isomorphism is a one-line consequence of the definition. Steps 3 and 4 apply the all-affine criterion to f_X or f_Y and produce exactly the 09UI witnesses for each direction. This is Stacks' own argument with T = A^n and no nilpotent variables. No cycle: the unsplit all-affine-charts node rests on 09UJ/09VC, whose proofs do not use 09VG. No duplicate found by rg -L. There are no new nodes. I accept the two declared generic tool_uses: lem-pc-restrict-derived-direct-image-open and lem-pc-derived-direct-image-composition. The null blueprint.from.node is inherited from the base node, not introduced here. Edge cases checked: empty opens, i = id, non-finitely-generated ideals, infinite covers, m fixed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportRelativePseudoCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.isMPseudoCoherentRelativeTo_iff_closedImmersion_pushforward",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSupportRelativePseudoCoherence.lean",
+  "statement": "theorem isMPseudoCoherentRelativeTo_iff_closedImmersion_pushforward [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] {X Y S : Scheme.{u}} (fX : X ⟶ S) (fY : Y ⟶ S) [LocallyOfFiniteType fX] [LocallyOfFiniteType fY] (i : X ⟶ Y) [IsClosedImmersion i] (_hi : i ≫ fY = fX) (m : ℤ) (E : schemeDerivedCategory X) : IsMPseudoCoherentRelativeTo fX m E ↔ IsMPseudoCoherentRelativeTo fY m ((schemeDerivedDirectImage i).obj E)",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02ae5c475",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Lean matches node (09VG restricted to closed immersions): Scheme.{u} X Y S; LocallyOfFiniteType fX, fY (both node hypotheses, needed by predicate); IsClosedImmersion i with i ≫ fY = fX; arbitrary m : ℤ and E : schemeDerivedCategory X, no qcoh/bounded hypothesis; iff of IsMPseudoCoherentRelativeTo fX m E and IsMPseudoCoherentRelativeTo fY m ((schemeDerivedDirectImage i).obj E). Dependency defs read (RelativePseudoCoherentComplex, MPseudoCoherentComplex, SchemeDerivedDirectImage); HasDerivedCategory.{w} family = definition's convention; no extra universe constraint. Node differs from side-live only in lean; statement verbatim; single sorry; source+blueprint docstrings with 4-step proof; report has Worker report and Second reading by Q29. No duplicate (rg over lean/Sheaf, lean/WeilConjectures; ring-level RelativeMPseudoCoherent is a different notion). Edge cases (empty schemes, i = id, m ≤ 0, zero object, infinite covers) fine. No compile run (no changes)."
+ }
+}

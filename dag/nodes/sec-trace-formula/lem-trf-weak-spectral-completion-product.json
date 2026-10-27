@@ -1,0 +1,444 @@
+{
+ "id": "lem-trf-weak-spectral-completion-product",
+ "kind": "statement",
+ "title": "Completion of a weakly cartesian spectral extension as an isometric product",
+ "statement": "Let $F$ be a field [def-weil-field] with a nontrivial real-valued multiplicative nonarchimedean absolute value and let $H=\\widehat F$ be its metric completion [lem-sfb-normed-field-completion], the complete field of equivalence classes of Cauchy sequences with its extended absolute value. Let $E/F$ be a finite field extension, of dimension $n\\ge1$, and let $s=s_{E/F}$ be its minimal-polynomial spectral norm [lem-trf-incomplete-spectral-algebra-norm]. Suppose there are an $F$-basis $w_1,\\ldots,w_n$ of $E$ and real constants $c,C>0$ with $$c\\max_i|a_i|\\le s\\left(\\sum_i a_iw_i\\right)\\le C\\max_i|a_i|\\qquad(a_i\\in F).$$ Let $\\widehat E$ be the metric completion of the normed vector space $(E,s)$: equivalence classes of Cauchy sequences for $s(x-y)$, with the extended norm $\\widehat s([(x_m)])=\\lim_m s(x_m)$. Termwise multiplication and scalar multiplication by Cauchy sequences from $F$ make $\\widehat E$ a commutative $H$-algebra; the canonical map $E\\to\\widehat E$ is an isometric $F$-algebra embedding with dense image, and $\\dim_H\\widehat E=n$. There exist $r\\ge1$ finite field extensions $L_1,\\ldots,L_r$ of $H$ and an $H$-algebra isomorphism $$\\theta:\\widehat E\\xrightarrow{\\sim}\\prod_{j=1}^rL_j$$ such that $$\\widehat s(z)=\\max_{1\\le j\\le r}s_{L_j/H}(\\theta(z)_j)\\qquad(z\\in\\widehat E),\\qquad\\sum_j[L_j:H]=n.$$ No stability of $F$ or $H$, and no separability of $E/F$, is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.6.2/3, printed p.158 (scan PDF p.166), completion criterion; proof supplied by the agent because the local archival document is absent.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-sfb-normed-field-completion",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "Write $N([(x_m)])=\\lim_m s(x_m)$. The norm axioms of [lem-trf-incomplete-spectral-algebra-norm] give $|s(x)-s(y)|\\le s(x-y)$, so this limit exists and is unchanged by an equivalent Cauchy sequence. It vanishes exactly on the zero class: $N([(x_m)])=0$ means $s(x_m)\\to0$. Sums, negatives and products of representatives define operations on $A=\\widehat E$. For products, Cauchy sequences have bounded norms, and $$s(x_my_m-x_ky_k)\\le\\max(s(x_m)s(y_m-y_k),s(y_k)s(x_m-x_k)).$$ This tends to zero; the same estimate with equivalent representatives proves independence. All commutative ring identities hold termwise. Constant sequences preserve $1$, and their norm is $s(x)$, so $E\\to A$ is an injective isometric algebra map. Its image is dense since the constants $x_m$ converge to $[(x_m)]$. Taking limits gives the ultrametric inequality, submultiplicativity and $N(1)=1$.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "Agent argument using spectralAlgNorm (663–671), isPowMul_spectralNorm (632), spectralNorm_unique (699), and the Cauchy-sequence construction in the statement."
+   }
+  },
+  {
+   "text": "The field $H=\\widehat F$ is complete and contains $F$ isometrically by [lem-sfb-normed-field-completion]. Its absolute value remains nontrivial and ultrametric by restriction and passage to limits. For $h=[(a_m)]\\in H$ and $z=[(x_m)]\\in A$, define $hz=[(a_mx_m)]$. The estimate in step 1 and scalar homogeneity of $s$ prove that this is well-defined and $N(hz)=|h|N(z)$. The scalar and algebra laws hold termwise. Now write $x_m=\\sum_i a_{im}w_i$. The lower bound $c\\max_i|a_{im}-a_{ik}|\\le s(x_m-x_k)$ shows each coordinate sequence is Cauchy. The upper bound shows conversely that coordinatewise Cauchy sequences give an $s$-Cauchy sequence, and that two such sequences are equivalent exactly when all coordinate differences tend to zero. Thus $$A\\longrightarrow H^n,\\quad [(x_m)]\\longmapsto ([(a_{im})])_i$$ is a bijection, linear for the scalar action just constructed. Surjectivity follows by choosing representatives for the finitely many coordinates. Consequently $\\dim_H A=n$, with basis the constant classes of $w_i$. The inequalities extend to $H^n$ by limits, so this model is complete as well: an $N$-Cauchy sequence has Cauchy coordinates, whose limits converge for $N$ by the upper bound.",
+   "uses": [
+    "lem-sfb-normed-field-completion",
+    "lem-trf-incomplete-spectral-algebra-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "Agent argument using spectralAlgNorm (663–671), isPowMul_spectralNorm (632), spectralNorm_unique (699), and the Cauchy-sequence construction in the statement."
+   }
+  },
+  {
+   "text": "By [lem-trf-algebraic-spectral-norm-powers], $s(x^m)=s(x)^m$ for every $x\\in E$ and $m\\ge1$. For $z=[(x_k)]$, the product construction in step 1 gives $z^m=[(x_k^m)]$, hence $$N(z^m)=\\lim_k s(x_k^m)=\\lim_k s(x_k)^m=N(z)^m.$$ If $z^m=0$, this implies $N(z)^m=0$ and therefore $z=0$. Thus $A$ is reduced. It is Artinian by [lem-weil-pbc-finite-dim-algebra-artinian], applied to the $H$-algebra of dimension $n$ from step 2. Apply [lem-sfb-reduced-artinian-residue-product] to obtain its canonical product of residue fields $L_j=A/\\mathfrak m_j$. Give each $L_j$ the $H$-structure induced by $H\\to A\\to L_j$; the product isomorphism $\\theta$ is then $H$-linear and multiplicative. Each quotient is spanned over $H$ by the images of the $n$ basis vectors, so each $L_j/H$ is finite. There is at least one factor: otherwise $A$ would be the zero ring, contrary to $N(1)=1$. Finally a basis in each product slot gives a basis of the product, proving $\\sum_j[L_j:H]=\\dim_H A=n$.",
+   "uses": [
+    "lem-trf-algebraic-spectral-norm-powers",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-reduced-artinian-residue-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00J6 (lemma-finite-dimensional-algebra); Tags 00J7 (lemma-artinian-finite-nr-max) and 00JB (lemma-artinian-finite-length), reduced product form; spectral power identity from SpectralNorm.lean:632."
+   }
+  },
+  {
+   "text": "Let $e_j\\in A$ be the preimage under $\\theta$ of $1$ in slot $j$ and $0$ elsewhere. It is a nonzero idempotent. Step 3 gives $N(e_j)^2=N(e_j^2)=N(e_j)$, and definiteness implies $N(e_j)=1$. For $b\\in L_j$, let $\\iota_j(b)$ be its image in that single slot, pulled back to $A$, and set $N_j(b)=N(\\iota_j(b))$. This injection is additive, multiplicative and $H$-linear, with $\\iota_j(1)=e_j$. Thus $N_j$ is definite, ultrametric, submultiplicative, homogeneous over $H$, normalized at $1$, and power-multiplicative, by steps 1–3. The field $H$ is complete, nontrivially valued and ultrametric by step 2, and $L_j/H$ is algebraic since it is finite. The hypotheses of [lem-trf-power-multiplicative-algebra-norm-unique] therefore hold, giving $N_j(b)=s_{L_j/H}(b)$ for all $b$.",
+   "uses": [
+    "lem-trf-power-multiplicative-algebra-norm-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "Agent argument using spectralAlgNorm (663–671), isPowMul_spectralNorm (632), spectralNorm_unique (699), and the Cauchy-sequence construction in the statement."
+   }
+  },
+  {
+   "text": "For $z\\in A$, one has $z=\\sum_j ze_j$ and $ze_j=\\iota_j(\\theta(z)_j)$. The ultrametric inequality gives $N(z)\\le\\max_j N(ze_j)$. Conversely submultiplicativity and $N(e_j)=1$ give $N(ze_j)\\le N(z)$ for every $j$. Combining these two inequalities and step 4 proves $$\\widehat s(z)=N(z)=\\max_j N_j(\\theta(z)_j)=\\max_j s_{L_j/H}(\\theta(z)_j).$$ This proves the required isometry together with the dimension and dense-embedding assertions already established. No step imposed separability or stability.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "Agent argument using spectralAlgNorm (663–671), isPowMul_spectralNorm (632), spectralNorm_unique (699), and the Cauchy-sequence construction in the statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "lem-sfb-normed-field-completion",
+  "lem-trf-algebraic-spectral-norm-powers",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-trf-power-multiplicative-algebra-norm-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "place": "Cauchy-sequence and coordinate argument, with isPowMul_spectralNorm (632) and spectralNorm_unique (699); algebraic decomposition uses Stacks Tags 00J6, 00J7 and 00JB. BGR 3.6.2/3 remains WANTED, not read locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Ss]pectral.*[Pp]roduct|[Pp]roduct.*[Ss]pectral",
+   "results": {
+    "t": "2026-10-24T15:33:41Z",
+    "tool": "grep",
+    "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Ss]pectral.*[Pp]roduct|[Pp]roduct.*[Ss]pectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/InnerProductSpace/Spectrum.lean"
+    ],
+    "digest": "e4b52ba66c3bb250"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give the isometric finite product decomposition and dimension preservation for a possibly inseparable extension of an incomplete base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"IsProduct\"",
+   "results": {
+    "t": "2026-10-24T15:33:42Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"IsProduct\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give the isometric finite product decomposition and dimension preservation for a possibly inseparable extension of an incomplete base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a finite spectral normed field extension decomposes into finite extensions of the complete base with the maximum norm",
+   "results": {
+    "t": "2026-10-24T15:33:42Z",
+    "tool": "leansearch",
+    "query": "Completion of a finite spectral normed field extension decomposes into finite extensions of the complete base with the maximum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NormedField.instCompletableTopField",
+     "spectralNorm.completeSpace",
+     "AbsoluteValue.Completion",
+     "spectralNorm.normedSpace",
+     "spectralNorm_eq_invariantExtension",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.normedField",
+     "spectralNorm"
+    ],
+    "digest": "688c169e43a64ee9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give the isometric finite product decomposition and dimension preservation for a possibly inseparable extension of an incomplete base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite field extension with spectral norm equivalent to a coordinate maximum norm completes isometrically to a finite product of finite extensions of the completed base with maximum spectral norm",
+   "results": {
+    "t": "2026-10-24T15:33:43Z",
+    "tool": "leanfinder",
+    "query": "A finite field extension with spectral norm equivalent to a coordinate maximum norm completes isometrically to a finite product of finite extensions of the completed base with maximum spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "spectralNorm.normedField",
+     "spectralNorm.metricSpace",
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm.normedSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedAddCommGroup",
+     "spectralNorm_unique_field_norm_ext"
+    ],
+    "digest": "54525f9530ea0b59"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give the isometric finite product decomposition and dimension preservation for a possibly inseparable extension of an incomplete base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional reduced commutative Banach algebra over a complete nonarchimedean field is a product of finite field extensions and its power multiplicative norm is their maximum spectral norm",
+   "results": {
+    "t": "2026-10-24T15:33:45Z",
+    "tool": "leanfinder",
+    "query": "Finite dimensional reduced commutative Banach algebra over a complete nonarchimedean field is a product of finite field extensions and its power multiplicative norm is their maximum spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralMulAlgNorm",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "spectralNorm_unique_of_finiteDimensional_normal",
+     "spectralMulAlgNorm_def",
+     "spectralNorm_eq_invariantExtension"
+    ],
+    "digest": "4b6b8179aea950ca"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give the isometric finite product decomposition and dimension preservation for a possibly inseparable extension of an incomplete base."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]educed.*[Bb]anach|[Bb]anach.*[Rr]educed|[Ss]pectral.*[Cc]omplet|[Cc]omplet.*[Ss]pectral",
+   "results": {
+    "t": "2026-10-24T15:35:18Z",
+    "tool": "grep",
+    "query": "[Rr]educed.*[Bb]anach|[Bb]anach.*[Rr]educed|[Ss]pectral.*[Cc]omplet|[Cc]omplet.*[Ss]pectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/InnerProductSpace/Rayleigh.lean",
+     "Mathlib/Analysis/InnerProductSpace/Rayleigh.lean"
+    ],
+    "digest": "3833a8637a66c3ce"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give the isometric finite product decomposition and dimension preservation for a possibly inseparable extension of an incomplete base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional reduced commutative nonarchimedean Banach algebra is a product of finite field extensions with its spectral maximum norm",
+   "results": {
+    "t": "2026-10-24T15:35:18Z",
+    "tool": "leansearch",
+    "query": "A finite dimensional reduced commutative nonarchimedean Banach algebra is a product of finite field extensions with its spectral maximum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralAlgNorm",
+     "Prod.normedAlgebra",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "Pi.normedAlgebra",
+     "isNonarchimedean_spectralNorm",
+     "IsUltrametricDist.invariantExtension",
+     "norm_le_spectralNorm"
+    ],
+    "digest": "7c13948b7e4d8d3b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give the isometric finite product decomposition and dimension preservation for a possibly inseparable extension of an incomplete base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralAlgNorm\", \"Basis\"",
+   "results": {
+    "t": "2026-10-24T15:35:19Z",
+    "tool": "loogle",
+    "query": "\"spectralAlgNorm\", \"Basis\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion structures and spectral norm axioms do not give the isometric finite product decomposition and dimension preservation for a possibly inseparable extension of an incomplete base."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Ss]pectral.*[Pp]roduct|[Pp]roduct.*[Ss]pectral",
+   "results": {
+    "t": "2026-10-24T15:57:53Z",
+    "tool": "grep",
+    "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Ss]pectral.*[Pp]roduct|[Pp]roduct.*[Ss]pectral",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/InnerProductSpace/Spectrum.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "a3aa693a5e399189"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the completion-product statement: hits concern already complete base fields, extension norms, or unrelated complex Banach algebras. The separate power and uniqueness matches are recorded as leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional reduced commutative Banach algebra over a complete nonarchimedean field decomposes as a product of finite field extensions isometrically for the spectral norm",
+   "results": {
+    "t": "2026-10-24T15:57:53Z",
+    "tool": "leansearch",
+    "query": "A finite dimensional reduced commutative Banach algebra over a complete nonarchimedean field decomposes as a product of finite field extensions isometrically for the spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NormedRing.algEquivComplexOfComplete",
+     "spectrum.isCompact",
+     "spectralNorm.normedSpace",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralAlgNorm",
+     "spectralAlgNorm_mul",
+     "isNonarchimedean_spectralNorm",
+     "spectralNorm.completeSpace"
+    ],
+    "digest": "99442e3eded7f213"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the completion-product statement: hits concern already complete base fields, extension norms, or unrelated complex Banach algebras. The separate power and uniqueness matches are recorded as leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"Completion\"",
+   "results": {
+    "t": "2026-10-24T15:57:53Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"Completion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the completion-product statement: hits concern already complete base fields, extension norms, or unrelated complex Banach algebras. The separate power and uniqueness matches are recorded as leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a finite dimensional field extension whose spectral norm is equivalent to a coordinate norm is a product of fields with the maximum spectral norm",
+   "results": {
+    "t": "2026-10-24T15:57:54Z",
+    "tool": "leanfinder",
+    "query": "Completion of a finite dimensional field extension whose spectral norm is equivalent to a coordinate norm is a product of fields with the maximum spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm.normedField",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm_unique_field_norm_ext",
+     "NumberField.InfinitePlace.Completion.instNormedField",
+     "IsUltrametricDist.invariantExtension"
+    ],
+    "digest": "f2c380769a65970a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the completion-product statement: hits concern already complete base fields, extension norms, or unrelated complex Banach algebras. The separate power and uniqueness matches are recorded as leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-dense-weak-stability-transfer",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Proposition 3.6.2/3, printed p.158 (scan PDF p.166), applied through the common completion of a dense isometric field inclusion; this is the generic dense-field transfer used explicitly in the proof of Proposition 5.3.2/3, printed p.214 (scan PDF p.220). Finite spectral extension completion comparison underlying the BGR criterion.",
+   "via": [
+    "lem-trf-dense-weak-stability-transfer",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-weak-spectral-completion-product",
+  "worker": "stage1",
+  "summary": "Preserved the full statement. Constructed operations and H^n coordinates explicitly, passed the Mathlib power identity to completion, reused reduced Artinian residue decomposition, and proved the exact maximum formula with idempotents and spectralNorm_unique. Added two Mathlib leaves, neither a product/completion clause. BGR is absent locally; proof is agent-written and the missing source is reported.",
+  "blueprint": "Historical analytic support beneath lem-trf-local-term-locality as inherited in blueprint.from: the finite spectral completion input in BGR 3.6.2/3 beneath the Temkin distinguished-presentation branch. Read latest/ contracting-correspondence proof; no change to the chapter or unit route. All five steps realize this auxiliary completion comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-248a8569f",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-248a8569f (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and SpectralNorm.lean lines 370–710. BGR 3.6.2/3 is absent from literature/; the report records it as WANTED and the proof is marked agent-written. lem-trf-algebraic-spectral-norm-powers is an exact match for isPowMul_spectralNorm at line 632; its section needs only a NormedField, IsUltrametricDist (581) and IsAlgebraic, with no completeness. lem-trf-power-multiplicative-algebra-norm-unique specializes spectralNorm_unique at line 699 in one line: its listed axioms give an AlgebraNorm, and the base is complete, nontrivial and ultrametric. Neither has a duplicate: the other DAG nodes use spectralNorm_unique_field_norm_ext, which is about multiplicative absolute values, and neither new node restates a clause of the item. I checked every step. Step 1: the Cauchy-class ring, with the product estimate. Step 2: the scalar action and the coordinate bijection with H^n, using c for well-definedness and injectivity and C for surjectivity and completeness, giving dimension n. Step 3: power identity, reducedness, Artinian, then equivPi as an H-algebra isomorphism, finite factors, r≥1 from N(1)=1, and the degree sum. Step 4: N(e_j)=1, and the slot norm meets every hypothesis of the uniqueness leaf. Step 5: the max formula from the ultrametric and submultiplicative bounds. Edge cases: n=1 is consistent; the separable case matches the maximum over embeddings into the algebraic closure of H; in the inseparable non-reduced case the c,C hypothesis cannot hold, so the statement is vacuous there, not false. All cited nodes are Mathlib leaves, so there is no route or tool_uses issue. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Normed.WeakSpectralCompletionProduct",
+  "declaration": "exists_weak_spectral_completion_product",
+  "declarations": [
+   "SpectralNormedExtension",
+   "SpectralNormedExtension.instField",
+   "SpectralNormedExtension.instAlgebra",
+   "SpectralNormedExtension.instNormedCommRing",
+   "SpectralNormedExtension.instNormedAlgebra",
+   "SpectralNormedExtension.toCompletion",
+   "exists_weak_spectral_completion_product"
+  ],
+  "file": "lean/Sheaf/Analysis/Normed/WeakSpectralCompletionProduct.lean",
+  "statement": "theorem exists_weak_spectral_completion_product (F : Type u) (E : Type v) [NontriviallyNormedField F] [IsUltrametricDist F] [Field E] [Algebra F E] [FiniteDimensional F E] (n : ℕ) (hn : 0 < n) (w : Module.Basis (Fin n) F E) (c C : ℝ) (hc : 0 < c) (hC : 0 < C) (hw : ∀ a : Fin n → F, c * ‖a‖ ≤ spectralNorm F E (∑ i, a i • w i) ∧ spectralNorm F E (∑ i, a i • w i) ≤ C * ‖a‖) : Isometry (SpectralNormedExtension.toCompletion F E) ∧ DenseRange (SpectralNormedExtension.toCompletion F E) ∧ ∃ (_ : Algebra (UniformSpace.Completion F) (UniformSpace.Completion (SpectralNormedExtension F E))), (∀ h : UniformSpace.Completion F, algebraMap (UniformSpace.Completion F) (UniformSpace.Completion (SpectralNormedExtension F E)) h = UniformSpace.Completion.extension (fun a : F ↦ ((algebraMap F (SpectralNormedExtension F E) a) : UniformSpace.Completion (SpectralNormedExtension F E))) h) ∧ FiniteDimensional (UniformSpace.Completion F) (UniformSpace.Completion (SpectralNormedExtension F E)) ∧ Module.finrank (UniformSpace.Completion F) (UniformSpace.Completion (SpectralNormedExtension F E)) = n ∧ ∃ (r : ℕ) (_ : 0 < r) (L : Fin r → Type v) (_ : ∀ j, Field (L j)) (_ : ∀ j, Algebra (UniformSpace.Completion F) (L j)) (_ : ∀ j, FiniteDimensional (UniformSpace.Completion F) (L j)) (θ : UniformSpace.Completion (SpectralNormedExtension F E) ≃ₐ[ UniformSpace.Completion F] (∀ j, L j)), (∀ z : UniformSpace.Completion (SpectralNormedExtension F E), ‖z‖ = ⨆ j : Fin r, spectralNorm (UniformSpace.Completion F) (L j) (θ z j)) ∧ (∑ j : Fin r, Module.finrank (UniformSpace.Completion F) (L j)) = n",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-280f9fd36",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches: F is NontriviallyNormedField+IsUltrametricDist with no completeness; H = Completion F; s = spectralNorm F E; c,C bounds use the Pi sup norm; Ê = Completion of the spectralAlgNorm type synonym; the H-algebra exists with algebraMap pinned to Completion.extension of the isometric base map (smul pinned, no competing global instance); toCompletion is Isometry and DenseRange; finrank = n; r>0 fields L_j : Type v with an H-algebra iso and ‖z‖ = finite ⨆ (= max) of spectralNorm H (L j); degree sum = n. Helpers are real data and no duplicate was found in lean/Sheaf or lean/WeilConjectures. Node differs from side-live only in its lean field; lean.statement is verbatim; stmt_deps cover the notions; docstrings and the 5-step proof plan are present; only sorry. No change, so no compile."
+ }
+}

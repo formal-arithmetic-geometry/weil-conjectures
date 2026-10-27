@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-fermat-finite-chart-cover",
+ "kind": "statement",
+ "title": "Finite two-root charts of the relative Fermat hypersurface",
+ "statement": "Let $S$ be any scheme [def-pc-scheme], let $n\\geq1$ be an integer, and let $D_n\\subset\\mathbf P^2_S$ be the closed subscheme defined by the homogeneous equation $A^n-B^n-C^n=0$ [def-pc-proj, def-nagata-projective-space-base-change, def-pc-zero-scheme, def-pc-projective-space-twist]. The opens $D_+(C)\\cap D_n$ and $D_+(A)\\cap D_n$ cover $D_n$. There is a unique $S$-morphism $q_n:D_n\\to\\mathbf P^1_S$ with inverse images of the standard target charts $\\mathbf A^1_S(x)$ and $\\mathbf A^1_S(y)$ equal to those two opens, respectively, and with $x=(A/C)^n$ and $y=(C/A)^n$ there. On every affine open $V=\\operatorname{Spec}R\\subset S$, its two chart rings, as algebras over the indicated target chart rings, are\n$$S_C=R[x,a,b]/(a^n-x,b^n-(x-1)),\\qquad S_A=R[y,u,v]/(v^n-y,u^n-(1-y)),$$\nwhere $a=A/C$, $b=B/C$, $u=B/A$, $v=C/A$. The overlap substitutions are $v=a^{-1}$, $u=b/a$, $y=x^{-1}$. The $R[x]$-module $S_C$ has basis $\\{a^ib^j:0\\leq i,j<n\\}$ and the $R[y]$-module $S_A$ has basis $\\{u^iv^j:0\\leq i,j<n\\}$ (basis means that every element has a unique finite linear combination in these monomials). The morphism $q_n$ is finite [def-weil-finite-integral-morphism] and surjective on all scheme points. These chart descriptions, overlap maps and the morphism commute with every base change $T\\to S$: $D_n\\times_ST$ is the closed hypersurface $A^n-B^n-C^n=0$ in $\\mathbf P^2_T$, with the displayed charts and maps over $T$ [def-pc-fibre-product]. No normality, reducedness, characteristic, invertibility or roots-of-unity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYA, section-plane-curves, standard affine pieces of the Fermat equation; explicit relative chart, gluing, two monic power bases and residue-field lifting arguments of returned lem-sfb-fermat-kummer-relative-curve proof steps 1--3, extended to arbitrary positive n."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-proj",
+  "def-nagata-projective-space-base-change",
+  "def-pc-zero-scheme",
+  "def-pc-projective-space-twist",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-projective-space-standard-charts] over each affine $V=\\operatorname{Spec}R\\subset S$. On the $C$-chart the twist $\\mathcal O(n)$ has frame $C^n$ by [def-pc-projective-space-twist], so the coefficient of the defining section is $a^n-b^n-1$. The local zero-scheme formula [lem-pc-zero-scheme-properties] gives $R[a,b]/(a^n-b^n-1)$. Likewise the $A$-chart has ring $R[u,v]/(1-u^n-v^n)$. The ambient three standard charts cover. A point outside both the $A$- and $C$-charts would lie on the $B$-chart with $A/B=C/B=0$ in its residue field; the equation there would give $-1=0$. Thus the two claimed opens cover, without any reducedness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-pc-zero-scheme-properties",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NG (lemma-standard-covering-projective-space), Tag 01MS (lemma-when-invertible); zero scheme as in divisors.tex, lemma-zero-scheme; explicit dehomogenization of curves.tex Tag 0BYA."
+   }
+  },
+  {
+   "text": "On their intersection, the degree-zero fraction restrictions of [def-pc-proj] give $v=C/A=a^{-1}$ and $u=B/A=b/a$. Indeed inverting $a$ in the first chart gives $R[a,a^{-1},b]/(a^n-b^n-1)$; substituting $v=a^{-1},u=b/a$ sends $1-u^n-v^n$ to $(a^n-b^n-1)/a^n=0$. Conversely $a=v^{-1},b=u/v$ sends the first equation to $(1-u^n-v^n)/v^n=0$. The substitutions are inverse on every generator, including coefficients of $R$. These formulas agree under restriction to every smaller affine base open, since the homogeneous fractions are the same sections.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M3, section-proj, standard degree-zero localization charts; Tag 01NG, lemma-standard-covering-projective-space; explicit overlap calculation."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-projective-space-standard-charts] applied to $\\mathbf P^1_S$, over each affine $V=\\operatorname{Spec}R\\subset S$ the standard target charts are $\\operatorname{Spec}R[x]$ and $\\operatorname{Spec}R[y]$, with $y=x^{-1}$ on their overlap. Define maps from the two source opens to these charts by $x\\mapsto a^n$ and $y\\mapsto v^n$. On affine base pieces these ring maps give scheme morphisms by [def-weil-affine-spectrum]; they agree on base overlaps because $a=A/C$ and $v=C/A$ are global chart sections. Glue over $S$ using [lem-weil-pbc-scheme-morphism-gluing]. On the intersection, $v^n=a^{-n}$, so the two maps agree under the target transition $y=x^{-1}$, again the standard fractions of [def-pc-proj]. Glue once more to obtain $q_n$. In the $A$-chart, lying in the other target chart means $y=v^n$ is invertible, equivalent to $v$ invertible, hence to membership in the $C$-chart. The reverse assertion uses $x=a^n$ in the same way. Thus the inverse images are exactly the stated opens. Any morphism satisfying the specified formulas agrees on this cover, so the same gluing uniqueness proves uniqueness.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I2 (lemma-category-affine-schemes), Tag 01JJ (lemma-glue-functors), morphism gluing; target overlaps from constructions.tex Tag 01NG."
+   }
+  },
+  {
+   "text": "Adjoin a redundant coordinate $x=a^n$ in the $C$-chart: the map from $R[x,a,b]/(a^n-x,b^n-(x-1))$ to $R[a,b]/(a^n-b^n-1)$ sends $x$ to $a^n$ and fixes $a,b$. Its inverse fixes $a,b$, and the relations make both composites identity. Similarly $y=v^n$ identifies the $A$-chart with the displayed $S_A$. The overlap of step 2 therefore also satisfies $y=v^n=a^{-n}=x^{-1}$. For $S_C$, apply [lem-sfb-monic-quotient-faithful-tensor-coordinates] first to $R[x][a]/(a^n-x)$ and then, over that ring, to $b^n-(x-1)$. Each element has a unique expression $\\sum_{j<n}(\\sum_{i<n}r_{ij}a^i)b^j$, with $r_{ij}\\in R[x]$: uniqueness follows first in the $b$-basis, then in the $a$-basis. This is exactly the claimed product basis. For $S_A$ first adjoin $u$ with $u^n=1-y$, then $v$ with $v^n=y$, and repeat. The cited lemma includes the zero ring and uses the specified positive integer $n$, so no polynomial-degree claim over the zero ring is needed.",
+   "uses": [
+    "lem-sfb-monic-quotient-faithful-tensor-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), monic quotient finite free; Tag 00HB (definition-flat), positive-rank monic quotients; two successive applications and coefficient comparison."
+   }
+  },
+  {
+   "text": "Over the two target charts above each affine base open, step 3 identifies the inverse images with the affine schemes of step 4. Each coordinate algebra is generated as a module by its $n^2$ basis monomials, hence its structural ring map is finite. These target affines cover $\\mathbf P^1_S$ by clauses (a) and (c) of [lem-weil-pbc-projective-space-standard-charts]. Applying condition (2) of [lem-weil-pbc-finite-local-on-target] proves that $q_n$ is finite in the precise sense of [def-weil-finite-integral-morphism], even when $S$ has no finite affine cover.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-finite-local-on-target",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WI (lemma-finite-local), condition (2) implies (1); Tag 01WH (definition-integral)."
+   }
+  },
+  {
+   "text": "Each of the two successive monic quotient maps in step 4 is faithfully flat by [lem-sfb-monic-quotient-faithful-tensor-coordinates], since $n\\geq1$. Apply [lem-weil-pbc-faithfully-flat-surjective-spectrum] separately to the two maps: every prime of $R[x]$ lifts first to a prime of $R[x][a]/(a^n-x)$ and then to a prime of $S_C$. Their composite contraction is the original prime, so the $C$-chart map is surjective on all points. The same two lifts using $u,v$ prove surjectivity over the $y$-chart. Since the target charts over all affine base opens cover, every point of $\\mathbf P^1_S$ has a preimage under $q_n$. This argument includes inseparable and nonreduced charts; over an empty base it is vacuous.",
+   "uses": [
+    "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HQ (lemma-ff-rings), (1) implies (2), applied twice; Tag 04GG (lemma-characterize-henselian), finite free monic quotient."
+   }
+  },
+  {
+   "text": "For a ring map $R\\to R'$, [lem-weil-pbc-fibre-product-affine-spectra] computes affine base change by tensor product. Explicitly, $R'\\otimes_R R[a,b]/(a^n-b^n-1)\\cong R'[a,b]/(a^n-b^n-1)$: send $r'\\otimes\\overline{P}$ to $r'\\overline{P_{R'}}$; the inverse sends $r'$, $a$, $b$ to $r'\\otimes1$, $1\\otimes a$, $1\\otimes b$. The relations vanish and both composites fix the generators, so this is an isomorphism with no flatness assumption. The identical generator argument works for the $A$-chart and both redundant-coordinate presentations. Projective space itself base-changes by the fibre-product definition [def-nagata-projective-space-base-change, def-pc-fibre-product]. By [lem-weil-pbc-projective-space-standard-charts] over $T$, the ambient charts of $\\mathbf P^2_T$ over $\\operatorname{Spec}R'$ are $\\operatorname{Spec}R'[a,b]$ and $\\operatorname{Spec}R'[u,v]$, with the pulled-back coordinate sections. On these ambient charts the zero scheme of the pulled section has exactly these quotient rings by [lem-pc-zero-scheme-properties], using only its local formula. The overlap substitutions still send $v$ to $a^{-1}$, $u$ to $b/a$, and $y$ to $x^{-1}$, and the maps still send $x$ to $a^n$, $y$ to $v^n$, because scalar extension fixes these monomials and fractions. For an arbitrary $T\\to S$, cover $T$ by affine opens mapping into affine opens of $S$; the computed isomorphisms agree on overlaps on coefficients and coordinates and hence glue uniquely by [lem-weil-pbc-scheme-morphism-gluing]. They identify the base-changed closed subscheme with the stated hypersurface and identify its morphism with $q_n$ over $T$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-nagata-projective-space-base-change",
+    "def-pc-fibre-product",
+    "lem-pc-zero-scheme-properties",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes); constructions.tex Tag 01N2 (lemma-base-change-map-proj); divisors.tex lemma-zero-scheme, local principal equation; explicit generators and relations, then Tag 01JJ gluing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-pc-zero-scheme-properties",
+  "def-pc-projective-space-twist",
+  "def-pc-proj",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+  "lem-weil-pbc-finite-local-on-target",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYA (section-plane-curves): explicit arbitrary-base Fermat calculation, using the cited general chart, monic quotient, gluing and spectrum lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over any scheme the Fermat plane hypersurface A^n-B^n=C^n has a finite surjective map to the projective line with free two-root affine chart algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime_or_zero\", \"module\": \"Mathlib/FieldTheory/AxGrothendieck\", \"type\": \"∀ {ι : Type u_1} {α : Type u_2} [inst : Finite α] [inst_1 : Finite ι] {p : ℕ},\\n  Nat.Prime p ∨ p = 0 →\\n    ∀ (φ : FirstOrder.Language.ring.Formula (α ⊕ ι)) (mons : ι → Finset (ι →₀ ℕ)),\\n      FirstOrder.Language.Theory.ACF p ⊨ᵇ FirstOrder.genericPolyMapSurjOnOfInjOn φ mons\", \"doc\": \"In algebraically closed fields of characteristic $ p $ (a prime or zero), any injective polynomial map defined by monomials over a finite set of variables is necessarily surjective. This model-theoret\"}\n  {\"name\": \"FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime\", \"module\": \"Mathlib/FieldTheory/AxGrothendieck\", \"type\": \"∀ {ι : Type u_1} {α : Type u_2} [inst : Finite α] [inst_1 : Finite ι] {p : ℕ},\\n  Nat.Prime p →\\n    ∀ (φ : FirstOrder.Language.ring.Formula (α ⊕ ι)) (mons : ι → Finset (ι →₀ ℕ)),\\n      FirstOrder.Language.Theory.ACF p ⊨ᵇ FirstOrder.genericPolyMapSurjOnOfInjOn φ mons\", \"doc\": \"For any prime number $ p $, in an algebraically closed field of characteristic $ p $, every injective polynomial map defined by monomials on a domain specified by a first-order formula is necessarily \"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"ax_grothendieck_of_locally_finite\", \"module\": \"Mathlib/FieldTheory/AxGrothendieck\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {R : Type u_3} [inst : Field K] [Finite K] [inst_2 : CommRing R] [Finite ι]\\n  [inst_4 : Algebra K R] [alg : Algebra.IsAlgebraic K R] (ps : ι → MvPolynomial ι R) (S : Set (ι → R)),\\n  Set.MapsTo (fun v i => (MvPolynomial.eval v) (ps i)) S S →\\n    Set.InjOn (fun v i => (\", \"doc\": \"Let $ K $ be a finite field, $ R $ a commutative ring algebraic over $ K $, and $ \\\\iota $ a finite type. For any family of multivariate polynomials $ p_i \\\\in R[\\\\iota] $ and a subset $ S \\\\subseteq \\\\iot\"}\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"ax_grothendieck_zeroLocus\", \"module\": \"Mathlib/FieldTheory/AxGrothendieck\", \"type\": \"∀ {K : Type u_1} {ι : Type u_2} [inst : Field K] [IsAlgClosed K] [Finite ι] (I : Ideal (MvPolynomial ι K))\\n  (p : ι → MvPolynomial ι K),\\n  have S := MvPolynomial.zeroLocus K I;\\n  Set.MapsTo (fun v i => (MvPolynomial.eval v) (p i)) S S →\\n    Set.InjOn (fun v i => (MvPolynomial.eval v) (p i)) S → Set.\", \"doc\": \"Let $ K $ be an algebraically closed field, $ \\\\iota $ an index type, and $ I $ an ideal in the polynomial ring $ K[\\\\iota] $. Let $ S $ denote the zero locus of $ I $, i.e., the set of all functions $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-space surjectivity, monic-root rings or Weierstrass equations; none gives these two Fermat charts, their gluing and cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective Fermat curve maps to P1 by nth powers and on affine charts has a basis a^i b^j over R[x]",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (x : W'.CoordinateRing),\\n  ∃ p q, p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X = x\", \"doc\": \"Let $W$ be an affine Weierstrass curve over a commutative ring $R$, and let $A(W)$ be its coordinate ring. Any element $x \\\\in A(W)$ can be expressed as $x = p + qY$, where $p$ and $q$ are polynomials \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.basis_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (n : Fin 2),\\n  (WeierstrassCurve.Affine.CoordinateRing.basis W') n = (AdjoinRoot.powerBasis' ⋯).gen ^ ↑n\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a base ring $ R $, defined as $ R[X,Y]/(Y^2 + (a_1 X + a_3) Y - (X^3 + a_2 X^2 + a_4 X + a_6)) $, admits a basis as a free $ R[X] $-module of ra\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.coe_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R},\\n  ⇑(WeierstrassCurve.Affine.CoordinateRing.basis W') = ![1, (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X]\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a base ring $ R $, defined as the quotient of $ R[X, Y] $ by the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1 X + a_3) Y - (X^3 + \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] → (W' : WeierstrassCurve.Affine R) → Module.Basis (Fin 2) (Polynomial R) W'.CoordinateRing\", \"doc\": \"A basis for the coordinate ring $ R[X,Y]/(Y^2 + (a_1 X + a_3) Y - (X^3 + a_2 X^2 + a_4 X + a_6)) $ as a free $ R[X] $-module of rank 2, constructed by reindexing the power basis from the adjoin root r\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.basis_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R},\\n  (WeierstrassCurve.Affine.CoordinateRing.basis W') 1 = (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X\", \"doc\": \"The coordinate ring $ R[X,Y]/(Y^2 + (a_1 X + a_3) Y - (X^3 + a_2 X^2 + a_4 X + a_6)) $ of an affine Weierstrass curve is a free $ R[X] $-module of rank 2 with basis $\\\\{1, Y\\\\}$ when the base ring $ R $\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.basis_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R},\\n  (WeierstrassCurve.Affine.CoordinateRing.basis W') 0 = 1\", \"doc\": \"The zeroth basis element of the coordinate ring $ R[X,Y]/(Y^2 + (a_1 X + a_3) Y - (X^3 + a_2 X^2 + a_4 X + a_6)) $ as a free $ R[X] $-module is equal to $ 1 $.\"}\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.toProjective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Projective R\", \"doc\": \"The function that maps a Weierstrass curve $ W $ over a ring $ R $ to its projective counterpart, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-space surjectivity, monic-root rings or Weierstrass equations; none gives these two Fermat charts, their gluing and cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fermat\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Meta.MatcherApp.inferMatchType\", \"module\": \"Lean.Meta.Match.MatcherApp.Transform\", \"type\": \" (matcherApp : Lean.Meta.MatcherApp) : Lean.MetaM Lean.Meta.MatcherApp\", \"doc\": \"Given a `MatcherApp`, replaces the motive with one that is inferred from the actual types of the\\nalternatives.\\n\\nFor example, given\\n```\\n(match (motive := Nat → Unit → ?) n with\\n 0 => 1\\n _ => true) ()\\n`\"}\n  {\"name\": \"Nat.FermatPsp\", \"module\": \"Mathlib.NumberTheory.FermatPsp\", \"type\": \" (n b : ℕ) : Prop\", \"doc\": \"`n` is a Fermat pseudoprime to base `b` if `n` is a probable prime to base `b` and is composite. By\\nthis definition, all composite natural numbers are pseudoprimes to base 0 and 1. This definition\\nals\"}\n  {\"name\": \"Nat.coprime_of_fermatPsp\", \"module\": \"Mathlib.NumberTheory.FermatPsp\", \"type\": \" {n b : ℕ} (h : n.FermatPsp b) (h₁ : 1 ≤ b) : n.Coprime b\", \"doc\": \"If `n` is a Fermat pseudoprime to base `b`, then `n` is coprime with `b`, assuming that `b` is\\npositive.\\n\\nThis lemma is a small wrapper based on `coprime_of_probablePrime`\"}\n  {\"name\": \"Nat.frequently_atTop_fermatPsp\", \"module\": \"Mathlib.NumberTheory.FermatPsp\", \"type\": \" {b : ℕ} (h : 1 ≤ b) : ∃ᶠ (n : ℕ) in Filter.atTop, n.FermatPsp b\", \"doc\": \"\"}\n  {\"name\": \"Nat.fermatPsp_base_one\", \"module\": \"Mathlib.NumberTheory.FermatPsp\", \"type\": \" {n : ℕ} (h₁ : 1 < n) (h₂ : ¬Nat.Prime n) : n.FermatPsp 1\", \"doc\": \"All composite numbers are Fermat pseudoprimes to base 1.\"}\n  {\"name\": \"FermatLastTheorem\", \"module\": \"Mathlib.NumberTheory.FLT.Basic\", \"type\": \" : Prop\", \"doc\": \"Statement of Fermat's Last Theorem: `a ^ n + b ^ n = c ^ n` has no nontrivial natural solution\\nwhen `n ≥ 3`.\\n\\nThis is now a theorem of Wiles and Taylor--Wiles; see\\nhttps://github.com/ImperialCollegeLo\"}\n  {\"name\": \"FermatLastTheoremFor\", \"module\": \"Mathlib.NumberTheory.FLT.Basic\", \"type\": \" (n : ℕ) : Prop\", \"doc\": \"Statement of Fermat's Last Theorem over the naturals for a given exponent.\"}\n  {\"name\": \"FermatLastTheoremWith\", \"module\": \"Mathlib.NumberTheory.FLT.Basic\", \"type\": \" (R : Type u_1) [Semiring R] (n : ℕ) : Prop\", \"doc\": \"Statement of Fermat's Last Theorem over a given semiring with a specific exponent.\"}\n  {\"name\": \"FermatLastTheoremWith'\", \"module\": \"Mathlib.NumberTheory.FLT.Basic\", \"type\": \" (R : Type u_2) [CommSemiring R] (n : ℕ) : Prop\", \"doc\": \"A relaxed variant of Fermat's Last Theorem over a given commutative semiring with a specific\\nexponent, allowing nonzero solutions of units and their common multiples.\\n\\n1. The variant `FermatLastTheore\"}\n  {\"name\": \"fermatLastTheoremFor_zero\", \"module\": \"Mathlib.NumberTheory.FLT.Basic\", \"type\": \" : FermatLastTheoremFor 0\", \"doc\": \"\"}\n  {\"name\": \"not_fermatLastTheoremFor_one\", \"module\": \"Mathlib.NumberTheory.FLT.Basic\", \"type\": \" : ¬FermatLastTheoremFor 1\", \"doc\": \"\"}\n  {\"name\": \"not_fermatLastTheoremFor_two\", \"module\": \"Mathlib.NumberTheory.FLT.Basic\", \"type\": \" : ¬FermatLastTheoremFor 2\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-space surjectivity, monic-root rings or Weierstrass equations; none gives these two Fermat charts, their gluing and cover."
+  },
+  {
+   "tool": "grep",
+   "query": "Fermat|fermat|Kummer",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-space surjectivity, monic-root rings or Weierstrass equations; none gives these two Fermat charts, their gluing and cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite map from Fermat plane curve to projective line with explicit two monic root coordinate rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.Monic.roots_map_of_card_eq_natDegree\", \"module\": \"Mathlib.Algebra.Polynomial.Roots\", \"type\": \"[IsDomain A] [IsDomain B] {p : A[X]} (hm : p.Monic) (f : A →+* B) (hroots : p.roots.card = p.natDegree) :\\n  p.roots.map f = (p.map f).roots\", \"doc\": \"Let $ A $ and $ B $ be integral domains, $ p $ a monic polynomial over $ A $, and $ f : A \\\\to B $ a ring homomorphism. If the multiset of roots of $ p $ has cardinality equal to the natural degree of \"}\n  {\"name\": \"AlgebraicClosure.finEquivRoots.congr_simp\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure\", \"type\": \"∀ {k : Type u} [inst : Field k] {K : Type u_1} [inst_1 : Field K] [inst_2 : DecidableEq K] {i : k →+* K}\\n  {f : AlgebraicClosure.Monics k} (hf : (Polynomial.map i ↑f).Splits),\\n  AlgebraicClosure.finEquivRoots hf = AlgebraicClosure.finEquivRoots hf\", \"doc\": \"For any field $k$ and its extension field $K$, if a monic polynomial $f$ over $k$ splits into linear factors in $K$, then the explicit bijection between the finite set $\\\\mathrm{Fin}(\\\\deg(f))$ and the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.basis\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \": Basis (Fin 2) R[X] W'.CoordinateRing\", \"doc\": \"A basis for the coordinate ring $ R[X,Y]/(Y^2 + (a_1 X + a_3) Y - (X^3 + a_2 X^2 + a_4 X + a_6)) $ as a free $ R[X] $-module of rank 2, constructed by reindexing the power basis from the adjoin root r\"}\n  {\"name\": \"WeierstrassCurve.Projective.toAffine\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(W' : Projective R) : Affine R\", \"doc\": \"The function maps a projective Weierstrass curve defined by $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ to its affine counterpart $ Y^2 = X^3 + aX + b $ by dehomogenizing with respect to the $ Z $-coordinate.\"}\n  {\"name\": \"IsAdjoinRootMonic.coeff\", \"module\": \"Mathlib.RingTheory.IsAdjoinRoot\", \"type\": \": S →ₗ[R] ℕ → R\", \"doc\": \"The $ R $-linear map from the semiring $ S $ (obtained by adjoining a root of a monic polynomial over a commutative semiring $ R $) to the space of functions $ \\\\mathbb{N} \\\\to R $, which sends each ele\"}\n  {\"name\": \"AlgebraicClosure.finEquivRoots\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure\", \"type\": \"{K} [Field K] [DecidableEq K] {i : k →+* K} {f : Monics k} (hf : (f.1.map i).Splits) :\\n  Fin f.1.natDegree ≃ (f.1.map i).roots.toEnumFinset\", \"doc\": \"For a monic polynomial $ f $ over a field $ k $, if $ f $ splits into linear factors in an extension field $ K $, there exists an explicit bijection between the standard finite set $ \\\\mathrm{Fin}(\\\\deg\"}\n  {\"name\": \"AdjoinRoot.modByMonicHom\", \"module\": \"Mathlib.RingTheory.AdjoinRoot\", \"type\": \"(hg : g.Monic) : AdjoinRoot g →ₗ[R] R[X]\", \"doc\": \"The linear map from the quotient ring $ R[X]/(g) $ to $ R[X] $ that sends each equivalence class of polynomials to its remainder when divided by the monic polynomial $ g $. This map is well-defined be\"}\n  {\"name\": \"WeierstrassCurve.Projective.Equation.map\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(h : W'.Equation P) : (W'.map f).toProjective.Equation (f ∘ P)\", \"doc\": \"Given a ring homomorphism $ f : A \\\\to B $ and a point $ P = [X:Y:Z] $ in projective space over $ A $ satisfying the projective Weierstrass curve equation $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - a_2X^2Z - a_\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-space surjectivity, monic-root rings or Weierstrass equations; none gives these two Fermat charts, their gluing and cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fermat hypersurface has a finite surjective morphism to projective line with two monic root charts",
+   "results": "AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective; WeierstrassCurve.Projective; WeierstrassCurve.toProjective; AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective; ax_grothendieck_zeroLocus; AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass; ax_grothendieck_univ; ax_grothendieck_of_locally_finite",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned types concern general Proj/localization, Weierstrass curves, or root algebras; none states this relative Fermat chart cover with all clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProjectiveSpectrum, AlgebraicGeometry.Finite",
+   "results": "No hits; loogle: unknown identifier 'AlgebraicGeometry.ProjectiveSpectrum'",
+   "date": "2026-10-23",
+   "verdict": "invalid query: unknown identifier; superseded by the successful query AlgebraicGeometry.Proj, Polynomial.Monic, and both semantic searches."
+  },
+  {
+   "tool": "grep",
+   "query": "Fermat|fermat|Kummer",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned types concern general Proj/localization, Weierstrass curves, or root algebras; none states this relative Fermat chart cover with all clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Fermat hypersurface finite cover of projective line with affine chart algebra adjoining two nth roots",
+   "results": "CyclotomicRing; IsAdjoinRoot.mk.noConfusion; IsAdjoinRoot.casesOn; CyclotomicRing.instAlgebraCyclotomicField; IsAdjoinRoot.ctorIdx; IsCyclotomicExtension.adjoin_roots_cyclotomic_eq_adjoin_nth_roots; IsCyclotomicExtension.iff_singleton; IsAdjoinRootMonic.noConfusion",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned types concern general Proj/localization, Weierstrass curves, or root algebras; none states this relative Fermat chart cover with all clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projective plane curve A power n minus B power n minus C power n has charts R[a,b] modulo a power n minus b power n minus one and finite map x equals a power n",
+   "results": "WeierstrassCurve.Projective; WeierstrassCurve.toProjective; WeierstrassCurve.Projective.toAffine; WeierstrassCurve.Projective.NonsingularLift; WeierstrassCurve.Projective.Point; WeierstrassCurve.Jacobian; WeierstrassCurve.Projective.Point.toAffine; WeierstrassCurve.Projective.Point.fromAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned types concern general Proj/localization, Weierstrass curves, or root algebras; none states this relative Fermat chart cover with all clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Polynomial.Monic",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned types concern general Proj/localization, Weierstrass curves, or root algebras; none states this relative Fermat chart cover with all clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fermat-kummer-relative-curve",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Returned proof steps 1--3: degree-zero Proj fractions, two-chart gluing, two monic bases and lifting all residue-field points; step 5: coefficient base change of the hypersurface.",
+   "via": [
+    "lem-sfb-fermat-kummer-relative-curve",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fermat-finite-chart-cover",
+  "worker": "stage1",
+  "summary": "Verified the arbitrary-base Fermat statement. Constructed and glued both chart maps, proved the precise inverse images and monic product bases, checked finiteness on the target cover and pointwise surjectivity through successive faithfully flat monic quotients, and proved arbitrary base change by explicit generator maps. Reused all general lemmas; no new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Returned proof steps 1--3: degree-zero Proj fractions, two-chart gluing, two monic bases and lifting all residue-field points; step 5: coefficient base change of the hypersurface.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Standard affine chart and coordinate-section interface for projective space over an arbitrary scheme. This is a generic algebraic-geometric tool, not a replacement of the unit alteration route; no node of this unit supplies this interface."
+   },
+   {
+    "node": "lem-pc-zero-scheme-properties",
+    "why": "Only its affine local quotient formula is used, never its flat-base-change clause. This is a generic algebraic-geometric tool, not a replacement of the unit alteration route; no node of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Unique gluing of maps on open covers, both in constructing the morphism and comparing base changes. This is a generic algebraic-geometric tool, not a replacement of the unit alteration route; no node of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-finite-local-on-target",
+    "why": "General affine-cover criterion for a finite morphism. This is a generic algebraic-geometric tool, not a replacement of the unit alteration route; no node of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Lifting every prime along each of the two monic quotient maps. This is a generic algebraic-geometric tool, not a replacement of the unit alteration route; no node of this unit supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Affine base change computed by tensor products for arbitrary coefficient maps. This is a generic algebraic-geometric tool, not a replacement of the unit alteration route; no node of this unit supplies this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-bea0719f1",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-bea0719f1 (reviewer sub-agent of L); spot-checked: The delivery is mathematically sound, with one repaired fault: a missing citation (C4). Live has the item unsplit and unreviewed, so the delivery is not superseded. The statement and stmt_deps match live verbatim. No new nodes and no SGA. The steps carry all of the parent's old steps 1-3 and the base-change part of old step 5. Checks: chart equations a^n-b^n-1 and 1-u^n-v^n; redundant coordinates x=a^n (b^n=x-1) and y=v^n (u^n=1-y); overlap v=1/a, u=b/a, y=1/x, with the fraction identities checked both ways. The covering argument (B-chart gives -1=0 in the residue field) uses clause (b) of the chart lemma. Product bases come from applying lem-sfb-monic-quotient-faithful-tensor-coordinates twice (d>=1, includes the zero ring). Finiteness uses condition (2) of finite-local-on-target, with no quasi-compactness of S. Surjectivity lifts primes twice through faithfully flat maps. Base change uses explicit tensor inverse maps with no flatness, and only the local formula of zero-scheme-properties. Edge cases tested: n=1, R=0 or S empty, characteristic dividing n, characteristic 2, nonreduced R. Tag 0BYA (curves.tex l.1565) is background only; proof_origin agent is correct. No duplicates: the Fermat siblings (binomial-chart-smooth, two-root-normal-model, fermat-domination-fibre-genus) state different things. Tool_uses accepted: the chart lemma and zero-scheme-properties are generic geometry; the other four are Mathlib leaves. FIX (C4): steps 3, 5 and 7 used the standard charts of P^1_S and P^2_T (Spec R[x], Spec R[y] with y=1/x, the cover of P^1_S, and Spec R'[a,b]) without citing lem-weil-pbc-projective-space-standard-charts; step 3 cited only def-pc-proj, which is about Proj of a graded ring. The node is now in the uses of all three steps, each with one explanatory sentence. proof_deps is unchanged and equals the union of the uses; every step is under 2000 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FermatFiniteChartCover",
+  "declaration": "AlgebraicGeometry.RelativeFermatCurve.finite_chart_cover",
+  "declarations": [
+   "AlgebraicGeometry.RelativeFermatCurve.chartDenominator",
+   "AlgebraicGeometry.RelativeFermatCurve.chartNumerator",
+   "AlgebraicGeometry.RelativeFermatCurve.chartOpen",
+   "AlgebraicGeometry.RelativeFermatCurve.chartCoordinate",
+   "AlgebraicGeometry.RelativeFermatCurve.lineDenominator",
+   "AlgebraicGeometry.RelativeFermatCurve.lineNumerator",
+   "AlgebraicGeometry.RelativeFermatCurve.lineOpen",
+   "AlgebraicGeometry.RelativeFermatCurve.lineCoordinate",
+   "AlgebraicGeometry.RelativeFermatCurve.HasPowerChartFormula",
+   "AlgebraicGeometry.RelativeFermatCurve.localChartOpen",
+   "AlgebraicGeometry.RelativeFermatCurve.chartRelations",
+   "AlgebraicGeometry.RelativeFermatCurve.chartRing",
+   "AlgebraicGeometry.RelativeFermatCurve.chartRingCommRing",
+   "AlgebraicGeometry.RelativeFermatCurve.chartRingAlgebra",
+   "AlgebraicGeometry.RelativeFermatCurve.chartRoot",
+   "AlgebraicGeometry.RelativeFermatCurve.chartMonomial",
+   "AlgebraicGeometry.RelativeFermatCurve.HasLocalChartPresentation",
+   "AlgebraicGeometry.RelativeFermatCurve.overlapC",
+   "AlgebraicGeometry.RelativeFermatCurve.overlapA",
+   "AlgebraicGeometry.RelativeFermatCurve.HasChartOverlap",
+   "AlgebraicGeometry.RelativeFermatCurve.HasTwoRootCharts",
+   "AlgebraicGeometry.RelativeFermatCurve.finite_chart_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FermatFiniteChartCover.lean",
+  "statement": "theorem finite_chart_cover (S : Scheme.{u}) (n : ℕ) (hn : 1 ≤ n) : chartOpen S n false ⊔ chartOpen S n true = ⊤ ∧ ∃ q : curve S n ⟶ ProjectiveLine S, HasPowerChartFormula S n q ∧ (∀ q' : curve S n ⟶ ProjectiveLine S, HasPowerChartFormula S n q' → q' = q) ∧ HasTwoRootCharts S n ∧ IsFinite q ∧ Surjective q ∧ ∀ (T : Scheme.{u}) (g : T ⟶ S), ∃ (t : curve T n ⟶ curve S n) (qT : curve T n ⟶ ProjectiveLine T), IsPullback t (π T n) (π S n) g ∧ IsPullback t (ι T n) (ι S n) (ProjectiveSpace.map (ULift.{u} (Fin 3)) g) ∧ HasPowerChartFormula T n qT ∧ HasTwoRootCharts T n ∧ t ≫ q = qT ≫ ProjectiveSpace.map (ULift.{u} (Fin 2)) g ∧ ∀ c : Bool, ∃ h : t ⁻¹ᵁ chartOpen S n c = chartOpen T n c, ∀ j : Fin 2, t.appLE (chartOpen S n c) (chartOpen T n c) h.ge (chartCoordinate S n c j) = chartCoordinate T n c j",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the existing arbitrary-degree equation, ideal, curve, embedding and structure map in RelativeFermatKummerCurve; the only postponed theorem is finite_chart_cover. Bool false/true denotes C/A. Ring equivalences prescribe coefficients, the target parameter, and both root variables; the basis is the specified monomial family, including the zero ring. Base change preserves the embedded hypersurface, chart coordinates, chart presentations, overlaps, and the map to the line."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf8a4948f",
+  "group": "ND",
+  "result": "pass",
+  "note": "Every clause matches the node. Hypersurface reuses RelativeFermatCurve.curve (zero locus of A^n-B^n-C^n, A,B,C=coordinates 0,1,2, not reduced); coordRatio i j = T_j/T_i gives a=A/C, b=B/C, u=B/A, v=C/A. q=[A^n:C^n]: x=a^n, y=v^n, inverse images are the C- and A-charts, map over S, unique among maps with these formulas. Over every affine V: literal quotients S_C and S_A, ring identification fixed on coefficients, parameter and both roots, bases indexed by Fin n x Fin n. Overlap a*v=1, a*u=b, a^n*v^n=1. IsFinite and Surjective. Base change: both pullback squares, the map over T, charts and coordinates pulled back. No extra hypotheses; n=1, empty scheme/zero ring, char | n, char 2, nonreduced base all fine. Only the item's lean field changed; dependency records identical to live; statement verbatim; 22 declarations match; only sorry is the main proof; docstrings carry source and 7 steps. Maintainer note: equation/ideal/curve/ι/π belong to the module of downstream theorem lem-sfb-fermat-kummer-relative-curve, whose proof cites this item, so stage 3 has an import cycle; no definition node owns them -> PASS plus split note (move them to a data module owned by a new definition node). No compile, since no file changed."
+ }
+}

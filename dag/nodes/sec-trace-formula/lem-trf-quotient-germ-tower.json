@@ -1,0 +1,141 @@
+{
+ "id": "lem-trf-quotient-germ-tower",
+ "kind": "statement",
+ "title": "Normalized finite germ comparisons assemble into the strict quotient tower",
+ "statement": "Fix the finite-field coefficient datum [def-trf-coefficient-conventions], T a scheme and v:Spec(k)→T. For every n≥0, point sections with finite coefficient ring A_(n+1) identify naturally with the identity geometric stalk, and finite inverse image followed by point sections identifies naturally with the v-stalk. The first map is the germ at the identity neighbourhood. The second sends a pulled-back unit generator, restricted along a pointed lift, to the original v-germ. These finite maps assemble, after restriction to the integral constants, into a natural isomorphism of the entire strict quotient section and stalk tower functors on all unbounded complexes of completed modules. Its degree-i component at level n is exactly the finite comparison on the degree-i quotient module. All towers and transitions are those of [def-pur-integral-derived-operations]; germs and their normalization mean [def-weil-proetale-geometric-stalk] and [lem-trf-proetale-pullback-stalk-coherence].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0993, lemma-classical-point, specialized to the algebraically closed point; sites.tex Tag 05V1, lemma-point-morphism-sites. Parent proof Steps 3–4."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-pur-integral-derived-operations",
+  "def-weil-proetale-geometric-stalk",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof": [
+  {
+   "text": "At the identity geometric point, the pointed identity neighbourhood is initial. The germ map from sections is inverse to [U,u,x]↦u*x: the pointed restriction morphism identifies the latter representative with the identity germ, and at the identity both maps are identity. The colimit relations prove well-definedness and naturality, and constant sections give coefficient linearity.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "lem-cbc-proetale-classical-stalk",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point, specialized to the algebraically closed point; sites.tex Tag 05V1, lemma-point-morphism-sites. Parent proof Steps 3–4."
+   }
+  },
+  {
+   "text": "Compose the identity-point identification with the finite pullback-stalk comparison. Its specified unit-generator formula gives exactly the displayed pulled-back generator equation. Apply it in every degree. Naturality with respect to differentials and complex maps makes chain isomorphisms natural on all unbounded complexes.",
+   "uses": [
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point, specialized to the algebraically closed point; sites.tex Tag 05V1, lemma-point-morphism-sites. Parent proof Steps 3–4."
+   }
+  },
+  {
+   "text": "A quotient transition replaces the section of a germ by its reduced section and changes neither its neighbourhood nor its pointed lift. Comparison then reduction and reduction then comparison give the same germ, including the first positive quotient. Thus the chain isomorphisms commute with every transition and assemble into a natural tower isomorphism. Their scalar actions agree after restricting along completed-ring constants, since those actions factor through the same finite constant germs.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point, specialized to the algebraically closed point; sites.tex Tag 05V1, lemma-point-morphism-sites. Parent proof Steps 3–4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-geometric-stalk",
+  "lem-cbc-proetale-classical-stalk",
+  "def-weil-finite-coefficient-point",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0993, lemma-classical-point, specialized to the algebraically closed point; sites.tex Tag 05V1, lemma-point-morphism-sites. Parent proof Steps 3–4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalks of finite coefficient sheaves commute with pullback and quotient transitions to give a natural isomorphism of towers",
+   "results": "TopCat.Presheaf.stalkPullbackIso and germ_stalkPullbackHom, and Scheme.Modules.restrictStalkNatIso; different sites and no coefficient tower.",
+   "date": "2026-10-26",
+   "verdict": "no match: constituent APIs only; the stated comparison is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Point sections of a finite coefficient proetale sheaf identify with its geometric stalk, compatibly with quotient tower transitions",
+   "results": "ModuleCat.Tilde stalk-to-fibre germ formulas and projective spectrum germs; no proetale finite quotient tower.",
+   "date": "2026-10-26",
+   "verdict": "no match: constituent APIs only; the stated comparison is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPullbackIso|stalkPullbackHom|homologyFunctor.*map",
+   "results": "Inspected Mathlib topological stalk APIs; no proetale integral coefficient quotient tower comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match: constituent APIs only; the stated comparison is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TraceBoundedQuotientStalkRealization",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers (b); Tag 0993, lemma-classical-point, specialized to the algebraically closed point; sites.tex Tag 05V1, lemma-point-morphism-sites. Parent proof Steps 3–4.",
+   "via": [
+    "lem-trf-bounded-quotient-stalk-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientGermTower",
+  "file": "lean/Sheaf/Paper/QuotientGermTower.lean",
+  "declaration": "WeilConjectures.quotientGermTower",
+  "statement": "theorem quotientGermTower (D : FiniteFieldDatum.{u}) {T : Scheme.{u}}\n    (v : Spec (.of D.k) ⟶ T) :\n  ∃ (γ : ∀ n : ℕ, pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1)) ≅\n      finiteCoefficientModuleStalkFunctor (𝟙 (Spec (.of D.k)))\n        (Padic.coefficientExtensionRing l E (n + 1)))\n    (δ : ∀ n : ℕ, integralOperationsLevelPullback l E v n ⋙\n      pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1)) ≅\n        finiteCoefficientModuleStalkFunctor v (Padic.coefficientExtensionRing l E (n + 1)))\n    (e : (integralOperationsPullbackTowerFunctor l E v ⋙\n      (Functor.whiskeringRight ℕᵒᵖ _ _).obj\n        ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ))) ≅ ((Functor.ofOpSequence\n      (X := fun n ↦ unrestrictedIntegralComplexFunctor l E T n)\n      (unrestrictedIntegralTransition l E T)).flip ⋙\n      (Functor.whiskeringRight ℕᵒᵖ _ _).obj\n        ((integralCoefficientModuleStalkFunctor l E v).mapHomologicalComplex (.up ℤ)))),\n(∀ (n : ℕ) (F : integralOperationsFiniteModules l E (Spec (.of D.k)) n)\n      (x : F.val.obj (op (ProEt.mk (𝟙 (Spec (.of D.k)))))),\n    (γ n).hom.app F x =\n      proEtaleCoefficientModuleGerm (𝟙 (Spec (.of D.k)))\n        (Padic.coefficientExtensionRing l E (n + 1)) F\n          (proEtaleConstantGermNeighbourhood (𝟙 (Spec (.of D.k)))) x) ∧\n  (∀ (n : ℕ) (F : integralOperationsFiniteModules l E T n)\n      (N : ProEtaleGeometricNeighbourhood v)\n      (θ : ProEt.mk (𝟙 (Spec (.of D.k))) ⟶ (proEtaleBaseChange v).obj N.right)\n      (x : F.val.obj (op N.right)),\n    θ.left ≫ pullback.fst N.right.hom v = N.hom.left →\n      (δ n).hom.app F\n        (((integralOperationsLevelPullback l E v n).obj F).val.map θ.op\n          (integralOperationsPullbackGenerator l E v n F N.right x)) =\n        proEtaleCoefficientModuleGerm v (Padic.coefficientExtensionRing l E (n + 1)) F N x) ∧\n  (∀ (P : CochainComplex (integralTowerModules l E T) ℤ) (n : ℕ) (i : ℤ)\n      (x : ((((integralOperationsPullbackTowerFunctor l E v ⋙\n      (Functor.whiskeringRight ℕᵒᵖ _ _).obj\n        ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)))).obj P).obj (op n)).X i),\n    (((e.hom.app P).app (op n)).f i) x =\n      (δ n).hom.app (((unrestrictedIntegralFiniteComplex l E T n).obj P).X i) x)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T071346-L-3919417",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T071346-L-3919417",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

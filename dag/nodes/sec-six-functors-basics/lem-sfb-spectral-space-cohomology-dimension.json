@@ -14,58 +14,32 @@
  ],
  "proof": [
   {
-   "text": "We may apply the cited ringed-space lemmas to abelian sheaves as follows. On any space $Y$ give every abelian sheaf its canonical module structure over the constant integer sheaf $\\underline{\\mathbf Z}_Y$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]: an integer acts by repeated addition, and a locally constant integer section acts by gluing these operations on opens where it is constant. Conversely any such module structure is forced by the action of $1$. Every additive sheaf map respects this action. Thus forgetting this structure and supplying it back are inverse on objects and maps, commute with sections and open restriction, and preserve injectivity because their lifting problems are identical. Computing the two cohomologies on the same injective resolution identifies the ringed-space cohomology [def-sc-ringed-space-module-cohomology] with the abelian-sheaf cohomology [def-sc-topological-abelian-cohomology], including the restriction maps. In the remaining steps, ringed-space citations always use this integer structure.",
+   "text": "Induct on the natural-number upper bound d, retaining vanishing for all sheaves and all degrees greater than d. At d=0, any proper inclusion of two irreducible point closures contradicts the dimension bound, so T0 implies T1. The proved spectral T1 characterization (Stacks Topology 0905) gives a compact Hausdorff totally disconnected space, and profinite vanishing gives all positive degrees, including the empty case.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-sheaf-of-modules-category",
-    "def-sc-ringed-space-module-cohomology",
+    "def-kun-topological-krull-dimension",
+    "def-weil-spectral-space",
+    "lem-cbc-profinite-topological-cohomology-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral; finite-cover Mayer-Vietoris version of the proof of (1) from (2), and Tag 01EB."
+   }
+  },
+  {
+   "text": "At bound n+1 and compact open U, put Z=X\\U. The punctured generalization subspace S is spectral and has dimension at most n. Apply the induction hypothesis to the inverse-image abelian sheaf on S in degree n+1.",
+   "uses": [
+    "lem-sfb-punctured-spectral-neighborhood-dimension",
     "def-sc-topological-abelian-cohomology"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section 01DZ, equations defining abelian-sheaf and module-sheaf cohomology; canonical integer-module convention for the lemmas used in Tag 0A3G."
-   }
-  },
-  {
-   "text": "For the empty space all sheaf sections, hence all terms of a global-sections resolution, are zero. This proves the stated empty case in every degree. For nonempty spaces we prove simultaneously by induction on $n\\geq0$: (A$_n$) for every spectral $X$ with $\\dim X\\leq n$ and every abelian sheaf $F$, $H^q(X,F)=0$ for $q>n$; and (B$_n$) for the same $X,F$ and every quasi-compact open $U\\subseteq X$, restriction $H^n(X,F)\\to H^n(U,F|_U)$ is surjective. Both assertions are also retained for the empty space. This is an induction on an upper bound, so it applies directly to the given $d$; there is no assumption that $\\dim X=d$.",
-   "uses": [
-    "def-sc-topological-abelian-cohomology",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, opening induction on dimension, phrased with upper bounds."
-   }
-  },
-  {
-   "text": "For $n=0$ and $X$ nonempty, there are no nontrivial specializations. Indeed, if $x$ specializes to $y\\ne x$, the irreducible closed sets $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x\\}}$ give a chain of length one, contradicting $\\dim X\\leq0$; strictness follows from sobriety, hence the $T_0$ property. Thus $\\overline{\\{x\\}}=\\{x\\}$ for every $x$: the set $X^c$ of closed points is all of $X$, in particular closed, and its subspace topology is that of $X$. Clause 1 of [det-pe-wlocal-components], applied with $T=X$, says that $X^c=X$ is profinite: compact, Hausdorff and totally disconnected. Then [lem-cbc-profinite-topological-cohomology-vanishing] gives (A$_0$). Every quasi-compact open $U$ is a compact subset of the Hausdorff space $X$, hence closed, so $U$ is clopen. A section of $F$ on $U$ extends by the zero section on $X\\setminus U$, using the sheaf gluing axiom for the disjoint open covering $X=U\\sqcup(X\\setminus U)$. This proves (B$_0$).",
-   "uses": [
-    "det-pe-wlocal-components",
-    "lem-cbc-profinite-topological-cohomology-vanishing",
-    "def-kun-topological-krull-dimension",
-    "def-weil-spectral-space"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, base case; Topology Tag 0905 (lemma-characterize-profinite-spectral, (5)⇒(1)) through det-pe-wlocal-components clause 1, and Cohomology Tag 0A3F."
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral; finite-cover Mayer-Vietoris version of the proof of (1) from (2), and Tag 01EB."
    }
   },
   {
-   "text": "Let $n\\geq1$, assume (A$_{n-1}$) and (B$_{n-1}$) for all spectral spaces of dimension at most $n-1$, and fix $X,F$ with $\\dim X\\leq n$. To prove (B$_n$), let $U\\subseteq X$ be quasi-compact open and $\\xi\\in H^n(U,F|_U)$. Set $Z=X\\setminus U$, $W=\\{x:\\overline{\\{x\\}}\\cap Z\\ne\\varnothing\\}$ and $S=W\\setminus Z$. The hypotheses of [lem-sfb-punctured-spectral-neighborhood-dimension] hold: $Z$ is closed and its open complement is exactly the quasi-compact $U$. Thus $S$ is spectral of dimension at most $n-1$. Applying (A$_{n-1}$) to $F|_S$ in degree $n$ yields $H^n(S,F|_S)=0$. The case $S=\\varnothing$ uses the empty case already proved.",
-   "uses": [
-    "lem-sfb-punctured-spectral-neighborhood-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, induction step proving (2), punctured generalization neighborhood."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-punctured-neighborhood-cohomology-colimit] to this closed $Z$ and its quasi-compact open complement. Its indexing category consists of the quasi-compact open neighborhoods $N$ of $Z$, with reverse inclusion; it is small (a set of subsets of $X$), nonempty (contains $X$), and directed (intersections are quasi-compact). The class $\\xi$ is at the stage $N=X$, since $X\\setminus Z=U$. Its image in the colimit is zero by the preceding step and the comparison isomorphism to $H^n(S,F|_S)$. The filtered-colimit zero criterion [lem-sc-filtered-colimit-map-zero] gives a quasi-compact open neighborhood $V$ of $Z$ at which this class vanishes: $\\xi|_{V\\setminus Z}=0$. Here $V\\setminus Z=V\\cap U$.",
+   "text": "The canonical punctured-neighborhood cocone is a colimit by the existing comparison theorem. Its vertex is zero by the preceding step. The stage N=X is U. Mathlib Limits.IsColimit.eq_iff' gives a smaller neighborhood V of Z on which the given class restricts to zero on U intersect V. This uses the same-universe general concrete filtered-colimit criterion, avoiding the older universe-u+1 wrapper.",
    "uses": [
     "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
     "lem-sc-filtered-colimit-map-zero"
@@ -73,88 +47,74 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, induction step proving (2), displayed colimit and shrinking V; Tag 0A3D(2)."
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral; finite-cover Mayer-Vietoris version of the proof of (1) from (2), and Tag 01EB."
    }
   },
   {
-   "text": "Since $Z\\subseteq V$, the opens $U,V$ cover $X$. The pair $(\\xi,0)\\in H^n(U,F|_U)\\oplus H^n(V,F|_V)$ restricts to zero under the difference map to $H^n(U\\cap V,F|_{U\\cap V})$, by the preceding step. The exact Mayer–Vietoris sequence [lem-sc-mayer-vietoris-ringed-space], applied with the integer coefficients of step 1, therefore supplies $\\widetilde\\xi\\in H^n(X,F)$ restricting to $(\\xi,0)$. In particular it restricts to $\\xi$ on $U$. This proves (B$_n$) before it is used to prove (A$_n$).",
+   "text": "The opens U and V cover X. Apply Mathlib's GrothendieckTopology.MayerVietorisSquare.sequence_exact to Opens.mayerVietorisSquare U V directly for abelian-sheaf Ext cohomology. The pair (x,0) has zero difference on the intersection, hence lifts to X. Thus degree n+1 restriction from X onto every compact open is surjective.",
    "uses": [
-    "lem-sc-mayer-vietoris-ringed-space"
+    "def-sc-topological-abelian-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, conclusion of the proof of (2), using Tag 01EB."
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral; finite-cover Mayer-Vietoris version of the proof of (1) from (2), and Tag 01EB."
    }
   },
   {
-   "text": "Choose an injective resolution $0\\to F\\to I^0\\to I^1\\to\\cdots$ in abelian sheaves, using [lem-weil-pbc-site-sheaves-enough-injectives] on the site of opens and the resolution definition [def-sp-injective-resolutions], and set $G=\\ker(I^n\\to I^{n+1})=\\operatorname{im}(I^{n-1}\\to I^n)$. The latter equality uses exactness of the resolution and $n\\geq1$. Kernels of sheaves are computed on sections, so for every open $A\\subseteq X$ the degree-$n$ cycles are $G(A)$. Restricting the injective resolution to $A$ remains an injective resolution by [lem-sc-ringed-space-restrict-injective-resolution] and step 1. Consequently the definition of degree-$n$ cohomology gives the exact row $I^{n-1}(A)\\to G(A)\\to H^n(A,F|_A)\\to0$. These rows for $A=X,U$ form a commuting restriction diagram, because all their maps are induced by the same differential and restriction maps.",
+   "text": "Every positive cohomology class x on an open vanishes locally: efface x by an epimorphism G onto the free abelian sheaf of the open, lift its universal section locally using local surjectivity of an epimorphism of abelian sheaves, and use the sheafification/free/Yoneda adjunction to factor the smaller free-open map through G. Associativity of Ext composition kills the restriction.",
    "uses": [
-    "def-sc-topological-abelian-cohomology",
-    "def-weil-sheaf-of-modules-category",
-    "lem-sc-ringed-space-restrict-injective-resolution",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "def-sp-injective-resolutions"
+    "lem-sc-ext-epi-effacement",
+    "def-sc-topological-abelian-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, proof of (1) assuming (2), definition of G and displayed diagram; Tag 01E1 for restriction of resolutions."
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral; finite-cover Mayer-Vietoris version of the proof of (1) from (2), and Tag 01EB."
    }
   },
   {
-   "text": "For a quasi-compact open $U\\subseteq X$ and $g\\in G(U)$, let $c$ be its image in $H^n(U,F|_U)$. By (B$_n$), lift $c$ to $\\widetilde c\\in H^n(X,F)$ and then, by exactness of the top row, to $h\\in G(X)$. The difference $g-h|_U$ maps to zero in $H^n(U,F|_U)$, hence equals the differential of some $b\\in I^{n-1}(U)$. The injective-sheaf restriction theorem [lem-weil-pbc-injective-sheaf-mono-restriction], on the small site of opens of $X$, lifts $b$ to $\\widetilde b\\in I^{n-1}(X)$; the inclusion $U\\hookrightarrow X$ is a monomorphism. Then $h+d\\widetilde b$ restricts to $g$. Thus $G(X)\\to G(U)$ is surjective for every quasi-compact open $U$. If $U\\subseteq V$ are both quasi-compact open, this also makes $G(V)\\to G(U)$ surjective: first lift to $X$, then restrict to $V$.",
+   "text": "For a global degree n+2 class, refine local zero neighborhoods to compact opens and take a finite subcover. Induct on finite unions of that cover. For two opens, the Mayer-Vietoris sequence makes restriction in degree n+2 injective when the degree n+1 restriction to their intersection is surjective. The intersection is compact open by spectrality; restriction onto it from X is surjective by step 4 and factors through either member, so the required surjectivity holds. The class therefore vanishes on each finite union and hence on X. The empty-union base follows because the free abelian sheaf of the empty open is projective: every section group of a sheaf on the empty open is zero.",
    "uses": [
-    "lem-weil-pbc-injective-sheaf-mono-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, diagram chase using flasqueness of I^{n-1}; injective restriction Tag 01EA."
-   }
-  },
-  {
-   "text": "The quasi-compact opens of $X$ form a basis stable under binary intersections by spectrality. The surjectivities just proved therefore satisfy every hypothesis of [lem-sfb-quasi-compact-restriction-acyclicity], so $G$ is acyclic for global sections (take $V=X$, which is quasi-compact). The exact augmented complex $0\\to F\\to I^0\\to\\cdots\\to I^{n-1}\\to G\\to0$ is a resolution in degrees $0,\\ldots,n$; its earlier terms are injective and hence acyclic by part 1 of [lemma-weil-pbc-leray-acyclicity]. Apply part 2 of that lemma to global sections on abelian sheaves, whose source category has enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]; the target abelian groups have enough injectives by [lem-weil-pbc-ring-modules-enough-injectives] with $R=\\mathbf Z$, since the integer action is uniquely determined by the additive group. It identifies $H^q(X,F)$ with the degree-$q$ cohomology of $I^0(X)\\to\\cdots\\to I^{n-1}(X)\\to G(X)$. This complex has zero terms above degree $n$, hence zero cohomology there. This proves (A$_n$), closes the simultaneous induction, and taking $n=d$ proves the item.",
-   "uses": [
-    "lem-sfb-quasi-compact-restriction-acyclicity",
     "def-weil-spectral-space",
-    "lemma-weil-pbc-leray-acyclicity",
-    "def-sc-topological-abelian-cohomology",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lem-weil-pbc-ring-modules-enough-injectives"
+    "def-sc-topological-abelian-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, proof of (1) assuming (2), acyclicity of G and truncated acyclic resolution; Tags 0A36, 01EW, 015E."
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral; finite-cover Mayer-Vietoris version of the proof of (1) from (2), and Tag 01EB."
+   }
+  },
+  {
+   "text": "For every larger degree, embed F into an injective I and use the short exact sequence with its cokernel Q. Positive Ext into I vanishes; the Ext long exact sequence expresses any class of F as the boundary of a class of Q one degree lower. Induction on degree, starting at n+2 from step 6, proves all degrees above n+1. This closes the dimension induction and specializes to d.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-sp-injective-resolutions",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral; finite-cover Mayer-Vietoris version of the proof of (1) from (2), and Tag 01EB."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category",
-  "def-sc-ringed-space-module-cohomology",
-  "def-sc-topological-abelian-cohomology",
   "def-kun-topological-krull-dimension",
-  "det-pe-wlocal-components",
-  "lem-cbc-profinite-topological-cohomology-vanishing",
   "def-weil-spectral-space",
+  "lem-cbc-profinite-topological-cohomology-vanishing",
   "lem-sfb-punctured-spectral-neighborhood-dimension",
+  "def-sc-topological-abelian-cohomology",
   "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
   "lem-sc-filtered-colimit-map-zero",
-  "lem-sc-mayer-vietoris-ringed-space",
-  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sc-ext-epi-effacement",
   "lem-weil-pbc-site-sheaves-enough-injectives",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-injective-sheaf-mono-restriction",
-  "lem-sfb-quasi-compact-restriction-acyclicity",
-  "lemma-weil-pbc-leray-acyclicity",
-  "lem-weil-pbc-ring-modules-enough-injectives"
+  "def-sp-injective-resolutions"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0A3G, proposition-cohomological-dimension-spectral: simultaneous induction on parts (1) and (2); part (3) is not needed."
+  "place": "Tag 0A3G: same punctured-neighborhood induction, replacing the truncated-resolution acyclicity argument by local Ext effacement, finite-cover Mayer-Vietoris induction, and dimension shifting. Formalized by T6, 2026-10-23."
  },
  "mathlib_searches": [
   {
@@ -304,16 +264,10 @@
   ]
  },
  "tool_uses": [
-  "det-pe-wlocal-components",
   "lem-cbc-profinite-topological-cohomology-vanishing",
   "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
   "lem-sc-filtered-colimit-map-zero",
-  "lem-sc-mayer-vietoris-ringed-space",
-  "lem-sc-ringed-space-restrict-injective-resolution",
-  "lem-weil-pbc-injective-sheaf-mono-restriction",
-  "lemma-weil-pbc-leray-acyclicity",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lem-weil-pbc-ring-modules-enough-injectives"
+  "lem-weil-pbc-site-sheaves-enough-injectives"
  ],
  "reviewed": {
   "date": "2026-10-22",
@@ -340,5 +294,27 @@
   "group": "NE",
   "result": "pass",
   "note": "The signature is identical to the node's lean.statement and matches Stacks 0A3G(1) clause by clause: SpectralSpace T, a natural-number bound d with topologicalKrullDim T ≤ d (upper bound, ⊥ allowed, so the empty space is included), every abelian sheaf F, Sheaf.H' F q ⊤ with the same explicit HasExt instance as subsingleton_H'_top_of_profinite, q > d, Subsingleton. No Noetherian, Nonempty or sheaf assumptions; space and coefficients share universe u, the established convention. The delivered node differs from the live node only in lean, and there was no prior lean record. No definitions or helpers, only sorry; docstrings carry the source place, the blueprint id and the 9 proof steps; all 11 project imports exist. The only nearby project theorem (GrothendieckVanishing) needs a Noetherian space. Report has the Worker report and Second reading sections. No compile run, since no file was changed. No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261024T020601-L-2622073",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

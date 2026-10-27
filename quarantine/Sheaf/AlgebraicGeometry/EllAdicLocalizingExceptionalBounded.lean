@@ -17,6 +17,7 @@ import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 import Sheaf.Paper.IntegralLfpConstantModelComparison
 import Sheaf.Paper.LocalizingClosureExistence
 import Sheaf.Paper.ExceptionalInverseImageExistence
+import Sheaf.Paper.RationalExceptionalInverseImageExistence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
@@ -565,7 +566,7 @@ private theorem certified_comparison
       (Or.inr (Or.inr (Or.inl ⟨F, Or.inl he⟩)))).1.2.2.1
     exact ht.trans (integral_generators ℓ E X)
   | algebraicClosure =>
-    refine ⟨Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))), ?_⟩
+    refine ⟨Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩)))), ?_⟩
     have ht := (localizingClosure_ctf_equals_bc ℓ X
       (Profinite.padicAlgClRingObj ℓ)
       (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩)))).1.2.2.1
@@ -617,6 +618,65 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   (g : Z ⟶ Y) [IsProper g.left]
   (hΛ : IsEllAdicCoefficient ℓ Λ inferInstance)
 
+/-- The exceptional-inverse-image data the restriction arguments use: the lower shriek of the
+chosen compactification on the localizing closures, its comparison with every
+compactification, and a right adjoint preserving `D_ctf`
+(blueprint: sk-thm-existence, clauses (2)--(4)). -/
+private def ExceptionalKey : Prop :=
+  ∃ h : ∀ K, localizingClosureProEtale Λ Z.left K → localizingClosureProEtale Λ Y.left
+      ((rightDerivedLowerShriekOfCompactification Λ (compactificationOverField g)).obj K),
+    (∀ c : Compactification g.left, Nonempty
+      ((localizingLowerShriek Λ (compactificationOverField g) h) ⋙
+          (localizingClosureProEtale Λ Y.left).ι ≅
+        (localizingClosureProEtale Λ Z.left).ι ⋙ rightDerivedLowerShriekOfCompactification Λ c)) ∧
+    ∃ H : (localizingClosureProEtale Λ Y.left).FullSubcategory ⥤
+        (localizingClosureProEtale Λ Z.left).FullSubcategory,
+      Nonempty (localizingLowerShriek Λ (compactificationOverField g) h ⊣ H) ∧
+      ∀ N : (localizingClosureProEtale Λ Y.left).FullSubcategory,
+        (constantModelBoundedConstructible Λ Y.left ⊓
+          DerivedCategory.finiteTorAmplitude _) N.obj →
+        (constantModelBoundedConstructible Λ Z.left ⊓
+          DerivedCategory.finiteTorAmplitude _) (H.obj N).obj
+
+/-- An ell-adic coefficient is localizing-admissible. -/
+private theorem ellAdic_admissible (hc : IsEllAdicCoefficient ℓ Λ inferInstance) :
+    IsLocalizingAdmissibleCoefficient ℓ Λ := by
+  cases hc with
+  | continuous E =>
+    obtain ⟨F, he⟩ := continuous_coefficient_iso.{u} ℓ E
+    exact Or.inr (Or.inr (Or.inr (Or.inl ⟨F, he⟩)))
+  | integral E =>
+    obtain ⟨F, he⟩ := integral_coefficient_iso.{u} ℓ E
+    exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨F, he⟩))))
+  | algebraicClosure => exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))
+
+/-- The data for every ell-adic coefficient, from the general existence theorem. -/
+private theorem exceptionalKey_general (hc : IsEllAdicCoefficient ℓ Λ inferInstance) :
+    ExceptionalKey Λ g := by
+  obtain ⟨_, _, _, _, h, _, _, hex⟩ := exceptionalInverseImage_exists Λ ℓ k g
+    (ellAdic_admissible Λ ℓ hc)
+  obtain ⟨_, _, _, _, _, hcomp, ⟨H, _, _, ⟨adjH⟩, hH⟩, _⟩ := hex
+  exact ⟨h, hcomp, H, ⟨adjH⟩, hH⟩
+
+/-- The data for `E` and `Q̄_ℓ`, from Brown representability and the rational restriction
+theorem alone (blueprint: sk-thm-restriction). -/
+private theorem exceptionalKey_rational
+    (hr : ((∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)))) :
+    ExceptionalKey Λ g :=
+  rationalExceptionalInverseImage_exists Λ ℓ k g hr
+
+/-- A continuous finite-extension coefficient is one of the rational coefficients. -/
+theorem continuousMapRingObj_rationalCoefficient
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    (∃ F : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk (Profinite.continuousMapRingObj.{u} E) ≅
+          Mon.mk (Profinite.continuousMapRingObj F))) ∨
+      Nonempty (Mon.mk (Profinite.continuousMapRingObj.{u} E) ≅
+        Mon.mk (Profinite.padicAlgClRingObj ℓ)) :=
+  Or.inl (continuous_coefficient_iso.{u} ℓ E)
+
 /-- The canonical Brown right adjoint has finite cohomological amplitude on bounded
 constructible inputs.  This is the geometric restriction step of the blueprint proof.
 
@@ -627,7 +687,7 @@ image on finite affine charts, apply the rational and integral restriction theor
 take a common bound over the finite affine cover.
 (blueprint: lem-sfb-adic-localizing-exceptional-bounded-canonical)
 -/
-theorem ellAdic_localizing_canonical_rightAdjoint_obj_isBounded
+private theorem canonical_isBounded_of_key (hkey : ExceptionalKey Λ g)
     (hF : (ellAdicLocalizingLowerStar Λ ℓ g hΛ).IsLeftAdjoint)
     (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
     ∃ a b : ℤ, ∀ i : ℤ, (i < a ∨ b < i) →
@@ -642,7 +702,7 @@ theorem ellAdic_localizing_canonical_rightAdjoint_obj_isBounded
   have : QuasiSeparatedSpace Y.left := quasiSeparatedSpace_of_quasiSeparated Y.hom
   have : IsNoetherian Z.left := ⟨⟩
   have : IsNoetherian Y.left := ⟨⟩
-  obtain ⟨hadm, hX⟩ := certified_comparison Λ ℓ hΛ Z.left
+  obtain ⟨_, hX⟩ := certified_comparison Λ ℓ hΛ Z.left
   have hY := (certified_comparison Λ ℓ hΛ Y.left).2
   classical
   let LX := localizingClosureProEtale Λ Z.left
@@ -655,9 +715,7 @@ theorem ellAdic_localizing_canonical_rightAdjoint_obj_isBounded
   let F := ellAdicLocalizingLowerStar Λ ℓ g hΛ
   let H := @Functor.rightAdjoint _ _ _ _ F hF
   let adjH : F ⊣ H := @Adjunction.ofIsLeftAdjoint _ _ _ _ F hF
-  have ex := exceptionalInverseImage_exists Λ ℓ k g hadm
-  rcases ex with ⟨triX, triY, hSX, hSY, h, sumsX, sumsY, hex⟩
-  obtain ⟨_, _, _, _, _, hcomp, ⟨G, _, _, ⟨adjG⟩, hG⟩, _⟩ := hex
+  obtain ⟨h, hcomp, G, ⟨adjG⟩, hG⟩ := hkey
   let eShriek : openImmersionLowerShriek Λ (𝟙 Z.left) ≅ 𝟭 _ :=
     ((openImmersionLowerShriekUpperStarAdjunction Λ (𝟙 Z.left)).ofNatIsoRight
       (upperStarId Λ Z.left)).leftAdjointUniq Adjunction.id
@@ -722,7 +780,7 @@ finite affine cover gives a common pair of cohomological bounds; uniqueness of r
 adjoints transports these bounds from the geometric construction to the supplied `G`.
 (blueprint: lem-sfb-adic-localizing-exceptional-bounded)
 -/
-theorem ellAdic_localizing_rightAdjoint_obj_isBounded
+private theorem isBounded_of_key (hkey : ExceptionalKey Λ g)
     (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤
       (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory)
     (adj : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ G)
@@ -734,12 +792,58 @@ theorem ellAdic_localizing_rightAdjoint_obj_isBounded
   let hF : F.IsLeftAdjoint := ellAdic_isLeftAdjoint_localizingLowerStar Λ ℓ g hΛ
   let H := @Functor.rightAdjoint _ _ _ _ F hF
   let adjH : F ⊣ H := @Adjunction.ofIsLeftAdjoint _ _ _ _ F hF
-  obtain ⟨a, b, hb⟩ := ellAdic_localizing_canonical_rightAdjoint_obj_isBounded
-    Λ ℓ g hΛ hF K
+  obtain ⟨a, b, hb⟩ := canonical_isBounded_of_key Λ ℓ g hΛ hkey hF K
   let e := adjH.rightAdjointUniq adj
   refine ⟨a, b, fun i hi ↦ ?_⟩
   let e' := (boundedConstructibleLocalizingClosure Λ Z.left).ι.mapIso
     (e.app ((boundedConstructibleToLocalizing Λ Y.left).obj K))
   exact (hb i hi).of_iso ((DerivedCategory.homologyFunctor _ i).mapIso e'.symm)
+
+/-- The canonical Brown right adjoint has finite cohomological amplitude on bounded
+constructible inputs (blueprint: lem-sfb-adic-localizing-exceptional-bounded-canonical). -/
+theorem ellAdic_localizing_canonical_rightAdjoint_obj_isBounded
+    (hF : (ellAdicLocalizingLowerStar Λ ℓ g hΛ).IsLeftAdjoint)
+    (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
+    ∃ a b : ℤ, ∀ i : ℤ, (i < a ∨ b < i) →
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj
+        (((@Functor.rightAdjoint _ _ _ _ (ellAdicLocalizingLowerStar Λ ℓ g hΛ) hF).obj
+          ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj)) :=
+  canonical_isBounded_of_key Λ ℓ g hΛ (exceptionalKey_general Λ ℓ g hΛ) hF K
+
+/-- The supplied localizing right adjoint has finite cohomological amplitude on a bounded
+constructible input.
+
+Source: blueprint `sk-thm-existence` (4), `det-existence-restriction.proof.md`, Part (2).
+Proof: use the finite affine factorization of the proper map and the boundedness part of
+the rational restriction theorem, or its compatible integral torsion-level analogue.  A
+finite affine cover gives a common pair of cohomological bounds; uniqueness of right
+adjoints transports these bounds from the geometric construction to the supplied `G`.
+(blueprint: lem-sfb-adic-localizing-exceptional-bounded)
+-/
+theorem ellAdic_localizing_rightAdjoint_obj_isBounded
+    (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤
+      (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory)
+    (adj : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ G)
+    (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
+    ∃ a b : ℤ, ∀ i : ℤ, (i < a ∨ b < i) →
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj
+        ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj)) :=
+  isBounded_of_key Λ ℓ g hΛ (exceptionalKey_general Λ ℓ g hΛ) G adj K
+
+/-- The bound of `ellAdic_localizing_rightAdjoint_obj_isBounded` for the coefficients `E`
+and `Q̄_ℓ`, through the rational restriction theorem only.
+(blueprint: lem-sfb-adic-localizing-exceptional-bounded) -/
+theorem ellAdic_localizing_rightAdjoint_obj_isBounded_rational
+    (hr : ((∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))))
+    (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤
+      (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory)
+    (adj : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ G)
+    (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
+    ∃ a b : ℤ, ∀ i : ℤ, (i < a ∨ b < i) →
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj
+        ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj)) :=
+  isBounded_of_key Λ ℓ g hΛ (exceptionalKey_rational Λ ℓ g hr) G adj K
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -1,0 +1,287 @@
+{
+ "id": "lem-fd-integral-inverse-scalar-cocycle",
+ "kind": "statement",
+ "title": "Inverse scalar cocycle and units for the specified integral associators",
+ "statement": "Fix a finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a noetherian finite-dimensional scheme $T$ on which $\\ell$ is invertible. For every finite $F\\subset\\Omega$ over $\\mathbf Q_\\ell$, let $\\mathcal I_F^s(T)$ and $\\mathcal I_F^p(T)$ be the framework and PBC integral full categories underlying [def-weil-rationalization-karoubi, def-weil-pbc-rational-category]. Let $I_F$ be their exact integral identity identification, as in [lem-weil-pbc-integral-stratified-perfect-characterization]. Put $R_F=\\widehat{\\mathcal O}_{F,T}$, and for $E\\subseteq L$ write $C_{L/E}(K)=K\\otimes^L_{R_E}R_L$ for ordinary derived extension and $U_{L/E}$ for the strict quotient-tower extension [lem-weil-finite-free-completed-scalar-comparison]. Integral formulas below are written in the common full categories using $I_F$.\nSuppose the actual maps $b_{L/E}=\\chi_{L/E}$ restrict to natural isomorphisms $C_{L/E}\\to U_{L/E}$, with ordinary coefficient-presentation transport fixing tensor generators. Write $A^C_{M,L,E}:C_{M/L}C_{L/E}\\to C_{M/E}$ for ordinary derived tensor balancing, and $A^U_{M,L,E}$ for the specified integral framework associator, normalized by conjugation of that same balancing by these same completion maps [lem-trf-integral-pullback-comparison-realization, lem-fix-scalar-completion-associator]. For $E\\subseteq L\\subseteq M$ and every integral $K$, the equations in the derived category are\n$$A^U_K\\,U_{M/L}(b_{L/E,K})\\,b_{M/L,C_{L/E}K}=b_{M/E,K}\\,A^C_K,$$\n$$A^C_K\\,C_{M/L}(b_{L/E,K}^{-1})\\,b_{M/L,U_{L/E}K}^{-1}=b_{M/E,K}^{-1}\\,A^U_K.$$\nHere composition is read right to left. The first equation uses the actual quotient cocones, is independent of K-flat representatives, and is an equation for the chosen framework associator. Under ordinary presentation transport, $A^C$ is the integral balancing whose rationalization is the specified PBC associator [prop-weil-pbc-scalar-extension].\nLet $\\mu_E:C_{E/E}\\xrightarrow{\\sim}\\mathrm{id}$ be tensor multiplication and $\\eta_E:\\mathrm{id}\\xrightarrow{\\sim}U_{E/E}$ the completeness unit. Then $b_{E/E}=\\eta_E\\mu_E$, so $\\mu_E b_{E/E}^{-1}=\\eta_E^{-1}$ is the normalized inverse unit. The inverse equation respects the two associator unit laws for these multiplication/completeness identifications. In particular its substitutions $L=E$ and $M=L$ are the two unit comparison squares, and $E=L=M$ is their identity square. All statements allow repeated fields adjacent to strict extensions.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final coefficient-category sentence; agent-written auxiliary extraction from lem-fd-completion-inverse-scalar-coherence, Old proof steps 4–6: specified associator normalization, inverse cocycle cancellation and unit substitutions"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-fix-scalar-completion-associator",
+  "prop-weil-pbc-scalar-extension",
+  "def-fd-coefficient-comparison-datum",
+  "def-fd-complete-input-comparison",
+  "def-weil-pbc-finite-completed-coefficient-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-fix-scalar-completion-associator] on $T$ to the actual maps $b=\\chi$. Its normalization is precisely $A^U_K U_{M/L}(b_{L/E,K})b_{M/L,C_{L/E}K}=b_{M/E,K}A^C_K$, after the given identity identifications. Its statement supplies actual quotient cocones, independence of K-flat representatives, and unit laws. Its derived-complete-input hypothesis holds because the given integral categories consist of derived-complete objects. The assumed normalization identifies the chosen framework associator with this one; it does not replace it by an arbitrary isomorphic map.",
+   "uses": [
+    "lem-fix-scalar-completion-associator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; agent-written expansion of old proof steps 4–6: integral associator, inverse cancellation and units."
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-scalar-extension], integral ordinary change of completed coefficient rings restricts and rationalizes to the PBC scalar functor, whose specified associator is derived tensor balancing. Under the assumed ordinary presentation transport, balancing sends $(x\\otimes l)\\otimes m$ to $x\\otimes lm$ on either presentation: the transport fixes the generators and coefficient multiplication. Thus the $A^C$ in step 1 rationalizes to that specified PBC associator.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; agent-written expansion of old proof steps 4–6: integral associator, inverse cancellation and units."
+   }
+  },
+  {
+   "text": "For this step abbreviate $C_1=C_{L/E}$, $C_2=C_{M/L}$, $U_1=U_{L/E}$, $U_2=U_{M/L}$, and $b_1=b_{L/E}$, $b_2=b_{M/L}$, $b_3=b_{M/E}$. Naturality of $b_2$ at $b_{1,K}^{-1}:U_1K\\to C_1K$ gives $b_{2,C_1K}C_2(b_{1,K}^{-1})=U_2(b_{1,K}^{-1})b_{2,U_1K}$. Hence, putting $D=U_2(b_{1,K})b_{2,C_1K}$, we obtain $C_2(b_{1,K}^{-1})b_{2,U_1K}^{-1}=b_{2,C_1K}^{-1}U_2(b_{1,K}^{-1})=D^{-1}$. Step 1 says $A^U_KD=b_{3,K}A^C_K$. Multiplying on the left by $b_{3,K}^{-1}$ and on the right by $D^{-1}$ gives $A^C_KC_2(b_{1,K}^{-1})b_{2,U_1K}^{-1}=b_{3,K}^{-1}A^U_K$, exactly the claimed inverse equation. This uses only functoriality, naturality and inverse cancellation in the common derived category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; agent-written expansion of old proof steps 4–6: integral associator, inverse cancellation and units."
+   }
+  },
+  {
+   "text": "The identity-extension clause of [lem-weil-finite-free-completed-scalar-comparison] identifies $\\chi_{E/E}$, after tensor multiplication, with the natural completeness map. As $b=\\chi$ and this input is complete, this says $b_{E/E}=\\eta_E\\mu_E$ as natural isomorphisms. Inverting gives $b_{E/E}^{-1}=\\mu_E^{-1}\\eta_E^{-1}$ and therefore $\\mu_Eb_{E/E}^{-1}=\\eta_E^{-1}$. This uses the independently specified completeness unit, not a new choice of it.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; agent-written expansion of old proof steps 4–6: integral associator, inverse cancellation and units."
+   }
+  },
+  {
+   "text": "For $L=E$, write $C=C_{M/E}$, $U=U_{M/E}$ and $b=b_{M/E}$. The stated unit laws of [lem-fix-scalar-completion-associator] and [prop-weil-pbc-scalar-extension] identify $A^C_K=C(\\mu_{E,K})$ and $A^U_K=U(\\eta_{E,K}^{-1})$. The left side of the inverse equation is consequently $C(\\mu_E)C(b_{E/E}^{-1})b_{M/E,U_{E/E}K}^{-1}=C(\\eta_E^{-1})b_{M/E,U_{E/E}K}^{-1}$. Naturality of $b^{-1}$ at $\\eta_{E,K}^{-1}:U_{E/E}K\\to K$ identifies this with $b_{M/E,K}^{-1}U(\\eta_{E,K}^{-1})$, its right side. This is the first unit comparison square.",
+   "uses": [
+    "lem-fix-scalar-completion-associator",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; agent-written expansion of old proof steps 4–6: integral associator, inverse cancellation and units."
+   }
+  },
+  {
+   "text": "For $M=L$, write $C=C_{L/E}$, $U=U_{L/E}$ and $b=b_{L/E}$. The same unit laws give $A^C_K=\\mu_{L,CK}$ and $A^U_K=\\eta_{L,UK}^{-1}$. Substituting step 4, the left side of the inverse equation becomes $\\mu_{L,CK}C_{L/L}(b_K^{-1})\\mu_{L,UK}^{-1}\\eta_{L,UK}^{-1}$. Naturality of $\\mu_L$ at $b_K^{-1}$ reduces this to $b_K^{-1}\\eta_{L,UK}^{-1}$, its right side. This is the second unit comparison square. With all three fields equal, step 4 identifies $b^{-1}$ with $\\mu^{-1}\\eta^{-1}$; after these multiplication/completeness identifications both unit squares have identity edges, giving the identity square. No argument used strictness of an inclusion: all repeated-field cases, including repetitions adjacent to a strict inclusion, are covered.",
+   "uses": [
+    "lem-fix-scalar-completion-associator",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; agent-written expansion of old proof steps 4–6: integral associator, inverse cancellation and units."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-scalar-completion-associator",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final coefficient-category sentence; old proof steps 4–6, with the inverse equation obtained by categorical cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completion.*associator|associator.*completion|inverse.*cocycle",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor associators and their naturality do not give the chosen completion-conjugated integral scalar associator and normalized inverse unit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse of the completed scalar comparison satisfies the cocycle with derived tensor associators and identity coefficient extension units",
+   "results": "8 hits; CategoryTheory.Mathlib.Tactic.MonTauto.associator_inv_comp_tensorHom_tensorHom_comp_assoc, Coalgebra.TensorProduct.assoc_symm_tmul, CategoryTheory.MonoidalCategory.tensorRightTensor_inv_app, Algebra.TensorProduct.assoc_symm_tmul, Bimod.AssociatorBimod.hom_inv_id, UniformSpace.Completion.hatInv, CategoryTheory.MonoidalCategory.leftUnitor_tensor_inv', CategoryTheory.FreeMonoidalCategory.Hom.α_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor associators and their naturality do not give the chosen completion-conjugated integral scalar associator and normalized inverse unit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality",
+   "results": "1 hits; CategoryTheory.MonoidalCategory.associator_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor associators and their naturality do not give the chosen completion-conjugated integral scalar associator and normalized inverse unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary derived tensor associativity compared with strict tower completed tensor by the canonical completion isomorphisms inverse coherence including equal coefficient fields",
+   "results": "8 hits; TensorProduct.AlgebraTensorModule.assoc_symm_tmul, Algebra.TensorProduct.tensorTensorTensorComm_tmul, Algebra.TensorProduct.assoc_symm_tmul, TensorProduct.assoc_tensor'', TensorProduct.AlgebraTensorModule.rTensor_tensor, TensorProduct.tensorTensorTensorAssoc, Algebra.TensorProduct.tensorTensorTensorComm_toLinearEquiv, Algebra.TensorProduct.assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor associators and their naturality do not give the chosen completion-conjugated integral scalar associator and normalized inverse unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical completed scalar associators conjugated by quotient completion maps give the inverse comparison cocycle and normalized identity extension unit on constructible adic sheaves",
+   "results": "8 hits; AdicCompletion.val_smul_eq_evalₐ_smul, AdicCompletion.eval_comp_of, IsAdicComplete.of_comp_lift, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.smul_eval, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.instIsScalarTower_1, AdicCompletion.of_ofLinearEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor associators and their naturality do not give the chosen completion-conjugated integral scalar associator and normalized inverse unit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.naturality_2",
+   "results": "1 hits; CategoryTheory.NatIso.naturality_2",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic naturality, ordinary module scalar extension and module adic completion do not identify the specified derived sheaf quotient-cocone associator and completeness units"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*associator|associator.*completion|inverse.*cocycle",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic naturality, ordinary module scalar extension and module adic completion do not identify the specified derived sheaf quotient-cocone associator and completeness units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical completion isomorphism from derived scalar extension to strict quotient tower extension satisfies inverse associator cocycle and completeness unit",
+   "results": "8 hits; ModuleCat.extendScalarsComp, IsAdicComplete.StrictMono.of_comp_lift, ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc_assoc, AdicCompletion.instIsScalarTower, ModuleCat.extendScalars_assoc, AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.ofLinearEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic naturality, ordinary module scalar extension and module adic completion do not identify the specified derived sheaf quotient-cocone associator and completeness units"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse natural isomorphism between derived scalar extension and adic completion respects chosen tensor associators and identity units",
+   "results": "8 hits; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, CategoryTheory.Iso.instIsMonoidalInvFunctor, Bimod.AssociatorBimod.inv_hom_id, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, Bimod.AssociatorBimod.invAux, Bimod.AssociatorBimod.hom_inv_id, ModuleCat.hom_inv_associator, Bimod.AssociatorBimod.inv",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic naturality, ordinary module scalar extension and module adic completion do not identify the specified derived sheaf quotient-cocone associator and completeness units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible comparison of functors with conjugated composition constraints has inverse composition compatibility by naturality",
+   "results": "8 hits; CategoryTheory.Iso.inv_hom_id_app_app_app, CategoryTheory.Iso.hom_inv_id_app_app_app, CategoryTheory.Iso.hom_inv_id_app_app, CategoryTheory.Iso.inv_hom_id_app_app, CategoryTheory.Iso.inv_hom_id_app_app_assoc, CategoryTheory.Iso.inv_hom_id_app_app_app_assoc, CategoryTheory.Iso.hom_inv_id_app_app_assoc, CategoryTheory.NatIso.naturality_2",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic naturality, ordinary module scalar extension and module adic completion do not identify the specified derived sheaf quotient-cocone associator and completeness units"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality_2|instIsMonoidalInvFunctor|def extendScalarsComp",
+   "results": "24 hits; Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Basic.lean, Mathlib/CategoryTheory/NatIso.lean, Mathlib/CategoryTheory/NatIso.lean, Mathlib/CategoryTheory/NatIso.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: generic naturality, ordinary module scalar extension and module adic completion do not identify the specified derived sheaf quotient-cocone associator and completeness units"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-completion-inverse-scalar-coherence",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final coefficient-category sentence; old proof steps 4–6: specified associator normalization, inverse cocycle cancellation and unit substitutions",
+   "via": [
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-integral-inverse-scalar-cocycle",
+  "worker": "stage1",
+  "summary": "Proved the chosen forward identity using the existing general quotient-cocone associator; expanded naturality and cancellation to obtain the inverse equation; identified the actual identity unit through the finite-free comparison; checked both repeated-field unit squares explicitly. No new nodes and no statement changes. Existing broader associator and completion nodes are reused rather than duplicated.",
+  "blueprint": "def-fd-trace-function, final coefficient-category sentence; old proof steps 4–6: associator normalization, inverse cancellation, and unit substitutions",
+  "tool_uses": [
+   {
+    "node": "lem-fix-scalar-completion-associator",
+    "why": "Generic completion-normalized scalar associator on any scheme, including actual cocones, representative independence and units; no sk-def-trace node supplies this general construction."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic identification of ordinary integral balancing with the specified PBC scalar associator and its unit laws; used as a coefficient tool, not as a geometric proof route."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic normalization of the actual quotient completion map for an identity coefficient extension; no sk-def-trace node is needed to re-prove this broader tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-scalar-completion-associator",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-7d5703a93",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-7d5703a93 (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes, and the statement, stmt_deps and source are identical to the node Q14 created. Its only citer is the parent lem-fd-completion-inverse-scalar-coherence (step 2), and there is no cycle. Step 1: the normalization of lem-fix-scalar-completion-associator is literally the first equation, with a^I=A^U, a^C=A^C and chi=b. The inputs (K, C_{L/E}K, U_{L/E}K) are derived-complete, and the node needs no hypothesis on W. Step 2: prop-weil-pbc-scalar-extension makes T_{E'/E} the constructible restriction and rationalization of the integral C, with the balancing associator. Step 3: I checked the naturality of b2 at b1^{-1}, the identity D^{-1}=C2(b1^{-1}) b2_{U1K}^{-1}, the cancellation, and the sources and targets. Step 4: the L=E sentence of lem-weil-finite-free-completed-scalar-comparison gives b_{E/E}=eta mu, so mu b^{-1}=eta^{-1}. Steps 5 and 6: I recomputed both unit squares by naturality of b^{-1} at eta^{-1} and of mu_L at b^{-1}. The unit-law form A^U=U(eta^{-1}) is forced by the forward normalization together with step 4. The E=L=M case and repeated fields next to strict inclusions are covered. Source def-fd-trace-function.md (main-20261015): the final sentence is the Q-bar coefficient category, so this is an agent-written auxiliary; no SGA is used. No duplicate in the DAG. The worker wrote split_report.tool_uses itself (C8 reserves this for L), but the three entries are correct and I accept them: lem-fix-scalar-completion-associator, prop-weil-pbc-scalar-extension and lem-weil-finite-free-completed-scalar-comparison are generic coefficient tools that no sk-def-trace node supplies. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FdIntegralInverseScalarCocycle",
+  "declaration": "WeilConjectures.fdIntegralInverseScalarCocycle",
+  "declarations": [
+   "WeilConjectures.fdIntegralInverseScalarCocycle",
+   "WeilConjectures.fdIntegralInverseScalarUnits",
+   "WeilConjectures.fdIntegralCoefficientMap_eq",
+   "WeilConjectures.fdIntegralOrdinaryPresentation_existsUnique",
+   "WeilConjectures.fdIntegralOrdinaryPresentation",
+   "WeilConjectures.fdIntegralCoefficientInclusion_comp",
+   "WeilConjectures.fdIntegralOrdinaryBalancingMap",
+   "WeilConjectures.fdIntegralOrdinaryBalancing"
+  ],
+  "file": "lean/Sheaf/Paper/FdIntegralInverseScalarCocycle.lean",
+  "statement": "theorem fdIntegralInverseScalarCocycle (_D : FiniteFieldDatum.{d}) (_hl : l ≠ _D.p) (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (_e : M →ₐ[ℚ_[l]] Ω) [IsNoetherian T] [_hdim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [_hinv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] (A : ScalarCompletionAssociatorData.{u, u} l T) (K : sfIntegralConstructibleCategory l E T) : ((completedScalarComparison l L M κ T).app ((completedDerivedScalarExtension l E L ι T).obj K.obj) ≫ (integralScalarExtensionOfUniverses l L M κ T).map ((completedScalarComparison l E L ι T).app K.obj) ≫ (A.associator E L M ι κ).hom.app ⟨K.obj, CompletedLineTensor.intrinsic_complete l E T K⟩ = (A.ordinary E L M ι κ).hom.app K.obj ≫ (completedScalarComparison l E M (κ.comp ι) T).app K.obj) ∧ ((CompletedLineTensor.chi l L T M κ _ (A.preserves E L ι K.obj (CompletedLineTensor.intrinsic_complete l E T K))).inv ≫ (completedDerivedScalarExtension l L M κ T).map (CompletedLineTensor.chi l E T L ι K.obj (CompletedLineTensor.intrinsic_complete l E T K)).inv ≫ (A.ordinary E L M ι κ).hom.app K.obj = (A.associator E L M ι κ).hom.app ⟨K.obj, CompletedLineTensor.intrinsic_complete l E T K⟩ ≫ (CompletedLineTensor.chi l E T M (κ.comp ι) K.obj (CompletedLineTensor.intrinsic_complete l E T K)).inv)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Forward and inverse equations for the actual chi, normalized identity and inverse units, both ordinary/completed associator unit laws, the two comparison squares and all-equal identity square. Companion declarations retain generator/counit-normalized ordinary presentation transport and its integral and raw-rational PBC balancing identification. The existing definition node def-fd-complete-input-comparison records the chi and intrinsic-completeness helpers without citing the line-tensor coherence theorem as a statement dependency; the completed PBC coefficient map is cited through its owning definition node. No source statement correction; Lean source and lean.statement unchanged from returned head 35dbc2f85d32."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b22579f63",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 of 35dbc2f8. Lean module byte-identical to 35dbc2 and lean.statement unchanged. Item node differs only in stmt_deps and lean.note: theorem lem-pur-completed-line-tensor-coherence removed; added new existing:true def node def-fd-complete-input-comparison (module CompletedLineTensorCoherence, decls CompletedLineTensor.chi [signature verbatim matches live l.376-381, asIso of completedScalarComparison] + intrinsic_complete [l.928]) and def-weil-pbc-finite-completed-coefficient-map (owner of pbcCompletedScalarMap, advisory followed). New node: statement matches the Lean, all 7 stmt_deps exist in live DAG, source Bhatt-Scholze 3.5.1/3.5.2, three kinds of search, no duplicate owner. Spot-check: forward conjunct = A.normalization; unit_normalization gives b=mu>>unit.inv and b^-1>>mu=unit.hom; left_unit/right_unit match. No proof_deps change, no statement change, gates OK. No file changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T180552-L-4005959",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.fdIntegralCoefficientInclusion_comp",
+   "WeilConjectures.fdIntegralCoefficientMap_eq",
+   "WeilConjectures.fdIntegralInverseScalarCocycle",
+   "WeilConjectures.fdIntegralInverseScalarUnits",
+   "WeilConjectures.fdIntegralOrdinaryBalancing",
+   "WeilConjectures.fdIntegralOrdinaryPresentation_existsUnique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.fdIntegralOrdinaryBalancing",
+   "WeilConjectures.fdIntegralOrdinaryPresentation_existsUnique"
+  ]
+ }
+}

@@ -1,0 +1,208 @@
+{
+ "id": "lem-trf-block-straightening-projection-transport",
+ "kind": "statement",
+ "title": "One block of derivative straightening and transport of exact projections",
+ "statement": "Let $k$ be a characteristic-zero field and $B$ a smooth finite-type $k$-scheme with etale coordinates $(w,y)$ and distinguished point $a$ [def-sbc-smooth-morphisms] [def-weil-finite-type-morphism] [def-weil-etale-morphism]. Let $T$ be previously formal transverse variables and $f_i=\\sum_\\gamma c_{i\\gamma}(w,y)T^\\gamma$ have regular coefficients on $B$ [def-weil-pbc-multivariate-power-series]. At $a$ suppose their first exponents, for ascending total-degree lexicographic order with complementary variables first, are the minimal vertices $\\alpha_i$ of a monotone diagram: $\\alpha-\\alpha_u e_u+\\alpha_u e_v$ belongs to the diagram whenever $\\alpha$ does and $u<v$. Order the vertices and group them by equal degree; $s_\\ell$ is the last index of block $\\ell$, and $Z^\\ell$ is the set of variables occurring in its prefix. Assume $T=Z^{\\ell-1}$, $y$ is precisely the newly essential block, and earlier stages are smooth closed coefficient schemes with their derivative equations and invertible transverse Jacobians. Fix $Q\\ge\\max_i|\\alpha_i|-1$. For every earlier $h<\\ell$ and $i>s_h$, assume the coefficients of $(Z^h)^\\beta$ vanish identically as series in all other variables whenever $\\beta$ lies in the prefix diagram restricted to $Z^h$ and $|\\beta|\\le Q$. Suppose the $f_i$ belong to, and generate, an ideal $K_b$ in each centered Taylor ring, with the identifications inherited from the earlier stages. Choose for each newly essential variable $j$ a vertex $\\alpha_{i(j)}=\\beta_j+e_j$ in its first block, with $\\beta_j$ supported in $Z^\\ell$; derivatives in $y$ are coordinate derivations and those in $T$ are formal derivatives [def-trf-formal-power-series-partial-derivative].\nThen the functions $h_j=(\\partial^{\\beta_j}f_{i(j)})|_{T=0}$ are regular, vanish at $a$, and have invertible $y$-Jacobian at $a$. After one shrinking their zero scheme $C\\subset B$ is smooth closed, has coordinates $w$, and at every $b\\in C$, $L=\\kappa(b)$, the substitution $y=\\phi_b(W)+Y$ identifies its extended ideal with $(Y)$ [def-weil-closed-immersion] [def-weil-residue-field]. The transformed generators retain their first exponents at $a$, ideal membership and generation. All their coefficients in $(Y,T)$ are regular on this same $C$, namely the restrictions of $\\partial_y^\\delta c_{i\\gamma}/\\delta!$. The old and new vertex derivatives lie in $(Z^\\ell)$ and have invertible joint transverse Jacobian on $C$.\nIn addition suppose an $\\mathcal O(B)$-linear operator $P$ on the $T$-series is given by finitely many coefficient extractions, full-series correction columns, and inverses of finite matrices with regular coefficients. Assume it projects onto the common kernel of the earlier tests, $P-1$ has image in the ideal of $f_1,\\ldots,f_{s_{\\ell-1}}$, it fixes all later $f_i$, and at $a$ preserves the first exponent of any series whose first monomial passes those tests. After the substitution, $P$ extends coefficientwise to an $\\mathcal O(C)[[Y]]$-linear operator $P^-$ with all these properties for the earlier tests, including zero coefficients in every $Y$ degree. Every coefficient of its matrices, inverses and correction columns is regular on one common neighbourhood of $a$ in $C$. Empty old tests mean $P=1$; an empty newly essential block requires no equation.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997 Theorem 9.6, (9.7)--(9.8)(a)--(c), Remarks 9.9--9.11, pp.279--280; agent refinement transporting stored exact projections. Returned steps 1--4. ILO VIII 2.3.11--2.3.13 is the route reference; BM is read online, absent locally. No single Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-trf-formal-initial-diagram",
+  "def-trf-supported-homogeneous-division",
+  "def-trf-finite-coefficient-expression",
+  "def-trf-regular-hilbert-coefficient-datum",
+  "def-trf-implicit-taylor-coordinate-data",
+  "def-trf-block-straightening-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-trf-block-straightening-initial-jet for the equations and evaluated Jacobian entries. The Jacobian matrix is lower triangular. RingHom.map_det and Matrix.det_of_isLowerTriangular identify its determinant with the product of its nonzero diagonal entries, including the empty product for r=0.",
+   "uses": [
+    "lem-trf-block-straightening-initial-jet"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-trf-block-straightening-geometric-chart to the vanishing and nonzero determinant, obtaining the common affine chart, all geometric fields, and its Noetherian global ring. Copy these geometric fields into the full output.",
+   "uses": [
+    "lem-trf-block-straightening-geometric-chart"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each stored operator use the coefficient-operator base-change theorem to transport its common-kernel projection. Enumerate the finite subset of earlier generator indices and apply hasIdealCorrection_map to the regular Y-series coefficient ring and to each pointwise formal coefficient ring; both are Noetherian. eval_map transports later-generator fixing. The transported kernel-image identity gives zero in every T and Y coefficient. The geometric chart residue surjection and center equality allow lem-trf-block-projection-first-transport to give the centered first-exponent clause. When old tests are empty every input is in the common kernel, so pointwise fixing proves both operators equal identity. Assemble all clauses into the unchanged output structure.",
+   "uses": [
+    "lem-trf-formal-coefficient-operator-base-change",
+    "lem-trf-block-projection-first-transport",
+    "lem-weil-pbc-power-series-noetherian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-block-straightening-initial-jet",
+  "lem-trf-block-straightening-geometric-chart",
+  "lem-trf-formal-coefficient-operator-base-change",
+  "lem-trf-block-projection-first-transport",
+  "lem-weil-pbc-power-series-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://mahalex.net/teaching/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf",
+  "place": "Bierstone--Milman, Invent. Math. 128 (1997), pp.279--280, (9.7)--(9.8), Remarks 9.9--9.11; stored-projection refinement recorded in the parent node. Read online 2026-10-26.; reduction into initial jets, a projection-free geometric chart, and first-exponent conjugacy. Generic projection transport and determinant computation are proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-block-straightening-projection-transport: Implicit derivative equations straighten a block of essential variables in formal standard bases and transport regular coefficient normalization projections",
+   "results": "{\"t\": \"2026-10-22T06:41:43Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-block-straightening-projection-transport: Implicit derivative equations straighten a block of essential variables in formal standard bases and transport regular coefficient normalization projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.compChangeOfVariables_blocksFun\", \"Algebra.PreSubmersivePresentation.aevalDifferential\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.basisDeriv_apply\", \"Algebra.SubmersivePresentation.jacobianRelations\", \"FormalMultilinearSeries.compChangeOfVariables\", \"Algebra.PreSubmersivePresentation.differential\"], \"digest\": \"33ad293356846a95\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.SubmersivePresentation, MvPowerSeries",
+   "results": "{\"t\": \"2026-10-22T06:41:44Z\", \"tool\": \"loogle\", \"query\": \"Algebra.SubmersivePresentation, MvPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "implicit.*[Tt]aylor|[Tt]aylor.*implicit|[Ss]tandard[Bb]asis|initialExponent",
+   "results": "{\"t\": \"2026-10-22T06:41:44Z\", \"tool\": \"grep\", \"query\": \"implicit.*[Tt]aylor|[Tt]aylor.*implicit|[Ss]tandard[Bb]asis|initialExponent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-block-straightening-projection-transport: Etale change of coordinates preserves earlier exact coefficient tests and leading exponents in block triangular formal power series normalization",
+   "results": "{\"t\": \"2026-10-22T06:41:44Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-block-straightening-projection-transport: Etale change of coordinates preserves earlier exact coefficient tests and leading exponents in block triangular formal power series normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.hasFiniteFPowerSeriesOnBall_changeOrigin\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"FormalMultilinearSeries.hasFPowerSeriesOnBall_changeOrigin\", \"FormalMultilinearSeries.nnnorm_changeOriginSeriesTerm\", \"FormalMultilinearSeries.norm_changeOriginSeriesTerm\", \"Trivialization.coordChangeL.congr_simp\", \"Trivialization.coordChange_apply_snd\", \"StandardEtalePresentation.mapEquiv\"], \"digest\": \"ad4d9abfb5b27ba2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-block-straightening-projection-transport: Etale change of coordinates preserves earlier exact coefficient tests and leading exponents in block triangular formal power series normalization",
+   "results": "{\"t\": \"2026-10-22T06:41:48Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-block-straightening-projection-transport: Etale change of coordinates preserves earlier exact coefficient tests and leading exponents in block triangular formal power series normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.compChangeOfVariables_blocksFun\", \"FormalMultilinearSeries.compChangeOfVariables\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"FormalMultilinearSeries.compChangeOfVariables_length\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.toSubmersivePresentation\"], \"digest\": \"f6bea661a85525a0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "implicit.*Taylor|Taylor.*implicit|initialExponent|monotone.*diagram",
+   "results": "{\"t\": \"2026-10-23T11:37:29Z\", \"tool\": \"grep\", \"query\": \"implicit.*Taylor|Taylor.*implicit|initialExponent|monotone.*diagram\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; coefficient maps, analytic implicit functions and finite free tensor base change do not state extension of these operators on unrestricted formal series, preservation of coordinate kernels, and ideal-valued corrections in a complete formal target"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-block-straightening-projection-transport: transport a finite coefficient extraction projection on formal series along a Taylor homomorphism preserving its kernel and ideal corrections",
+   "results": "{\"t\": \"2026-10-23T11:37:30Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-block-straightening-projection-transport: transport a finite coefficient extraction projection on formal series along a Taylor homomorphism preserving its kernel and ideal corrections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.map\", \"PowerSeries.mapAlgHom\", \"PowerSeries.coeff_map\", \"Polynomial.taylorLinearEquiv\", \"Polynomial.taylorAlgHom\", \"Polynomial.coe_taylorEquiv\", \"Polynomial.taylorLinearEquiv_apply_coe\", \"Polynomial.taylor\"], \"digest\": \"58db155662daa9ac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; coefficient maps, analytic implicit functions and finite free tensor base change do not state extension of these operators on unrestricted formal series, preservation of coordinate kernels, and ideal-valued corrections in a complete formal target"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, LinearMap",
+   "results": "{\"t\": \"2026-10-23T11:37:30Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, LinearMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff\", \"MvPowerSeries.monomial\", \"MvPowerSeries.coeff_apply\", \"MvPowerSeries.monomial_def\", \"MvPowerSeries.coeff_comp_monomial\", \"MvPowerSeries.X_def\", \"MvPowerSeries.coeff_index_single_self_X\", \"MvPowerSeries.coeff_zero\"], \"digest\": \"2829b4be16904768\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; coefficient maps, analytic implicit functions and finite free tensor base change do not state extension of these operators on unrestricted formal series, preservation of coordinate kernels, and ideal-valued corrections in a complete formal target"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-block-straightening-projection-transport: derivative equations of monotone initial exponent vertices give an invertible triangular transverse Jacobian and preserve leading terms under an implicit graph shift",
+   "results": "{\"t\": \"2026-10-23T11:37:31Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-block-straightening-projection-transport: derivative equations of monotone initial exponent vertices give an invertible triangular transverse Jacobian and preserve leading terms under an implicit graph shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasStrictFDerivAt.mem_implicitToPartialHomeomorph_target\", \"HasStrictFDerivAt.implicitToOpenPartialHomeomorph_fst\", \"HasStrictFDerivAt.implicitToOpenPartialHomeomorph_self\", \"ImplicitFunctionData.isInvertible_fderiv_prodFun\", \"HasStrictFDerivAt.implicitToPartialHomeomorph_self\", \"FormalMultilinearSeries.compChangeOfVariables_blocksFun\", \"HasStrictFDerivAt.implicitToPartialHomeomorph_fst\", \"ImplicitFunctionData.leftDeriv_fderiv_implicitFunction\"], \"digest\": \"455baac80df48d3c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; coefficient maps, analytic implicit functions and finite free tensor base change do not state extension of these operators on unrestricted formal series, preservation of coordinate kernels, and ideal-valued corrections in a complete formal target"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-regular-hilbert-coefficient-data",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 2.3.11--2.3.13, pp.93--94: local Hilbert--Samuel presentation input; refined by BM 1997 Chapter III, Theorem 9.6 and its block induction (9.7)--(9.14), with the five formal conditions (7.2). Subargument: BM 1997 Theorem 9.6, (9.7)--(9.8)(a)--(c), Remarks 9.9--9.11, pp.279--280; agent refinement transporting stored exact projections. Returned steps 1--4.",
+   "via": [
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-block-straightening-projection-transport",
+  "worker": "Q11",
+  "summary": "Seven explicit steps: triangular derivative Jacobian, existing algebraic implicit graph theorem, monomial first-exponent comparison, regular coefficients, old-test and block Jacobian preservation, scalar extension of the stored operator, and formal conjugacy/one common open. One new generic operator lemma; no Lean edits and no statement change.",
+  "blueprint": "Retains the inherited local-term-locality ancestry through the Hilbert--Samuel coefficient presentation. Realizes BM 1997 block induction (9.7)--(9.8)(a)--(c), Remarks 9.9--9.11; the operator transport is the explicit agent refinement already requested by the item. No chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-13db14fb3",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-13db14fb3 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new node, every cited statement (implicit-taylor-coordinate-calculus, def-trf-formal-power-series-partial-derivative), the citer lem-trf-regular-hilbert-coefficient-data step 2, lem-trf-exact-block-coefficient-projection, lem-trf-generic-monotone-diagram (its order convention), ILO VIII 2.3.11-13 (local PDF pp.99-100, route context only) and Stacks 0306 and 00IP/00IQ. BM 1997 is absent locally; the report records WANTED and proof_origin is agent. No SGA is cited. The item statement is byte-identical to live, live still has the item unsplit, and this is the first delivery. Steps 1-5 and 7 are correct: I checked the triangular Jacobian under the ascending (|a|,a_1..a_n) lex order (exponent beta_j+e_k is earlier for k>j), first exponents preserved by the W-before-y graph substitution, the rho Leibniz homomorphism, the zero old-row/new-column block, and the conjugacy theta P theta^-1 at a. One gap, repaired: in step 6 the ideal clause for P^- was proved only in the Taylor rings L[[W,Y,T]], via the new node's formal-target clause. The item ('all these properties') and its parent (exact-block projection needs P^- - 1 valued in (f_1..f_{s_{l-1}}) inside O(C)[[Y,T]]) need it in S[[T]]. FIX: the new node's ideal clause now covers any Noetherian S (S[[T]] is Noetherian by 0306, (T) lies in its Jacobson radical, ideals are closed by 00IQ(2), and truncations converge T-adically); the L[[X]] case stays as an instance. It gains stmt_dep def-weil-pbc-noetherian-ring and an updated source.place. Step 6 now shrinks C to an affine open, gets O(C) and O(C)[[Y]] Noetherian from the mathlib leaves lem-weil-pbc-finite-type-algebra-noetherian and lem-weil-pbc-power-series-noetherian (added to uses and proof_deps), and proves the S[[T]]-level ideal clause. The new node is true (row-finite matrix argument, no flatness needed), statement-only, not a duplicate after rg searches of sec-trace-formula, sec-proper-base-change and live, and not a restatement of an item clause.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BlockStraighteningProjectionTransport",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.blockStraighteningProjectionTransport",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.blockStraighteningProjectionTransport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BlockStraighteningProjectionTransport.lean",
+  "statement": "theorem blockStraighteningProjectionTransport {k : Type u} [Field k] [CharZero k] (B : Scheme.{u}) {m r t s : ℕ} (c : MvPolynomial (Fin m ⊕ Fin r) k →+* Γ(B, ⊤)) (a : B) (D : ImplicitCoordinateDerivations B c) (α : Fin s → Fin ((m + r) + t) →₀ ℕ) (d Q : ℕ) (f : Fin s → MvPowerSeries (Fin t) Γ(B, ⊤)) (pick : Fin (r + t) → Fin s) (β : Fin (r + t) → Fin ((m + r) + t) →₀ ℕ) (A : BlockStraighteningInput B c a D α d Q f pick β) : (∀ j : Fin r, B.Γevaluation a (blockEquations D f pick β j) = 0) ∧ B.Γevaluation a (implicitJacobian D (blockEquations D f pick β)) ≠ 0 ∧ Nonempty (BlockStraighteningOutput A)",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "Existing theorem statement unchanged. The concrete definitions and structures are publicly reexported from BlockStraighteningData; their attachment is def-trf-block-straightening-data. The proof combines three strict substeps and proves all remaining determinant and projection glue."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58f63a4f7",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after the 0da0f305 landing refusal (names blockFlatten and blockNewExponent collided with ExactBlockCoefficientProjection). Only two renames: blockNewVariableExponent keeps the same body; blockFlattenChart = rename finSumFinEquiv ∘ flattenFormalCoefficients ∘ map renameEquiv, the same reindexing as the old rename blockVariableEquiv body (w,y,T order kept) and now reusing the cited def-trf-finite-coefficient-expression. The theorem signature and the other declarations are byte-identical. Grep of side-live 1bcb300 lean/Sheaf and lean/WeilConjectures: none of the 22 names is declared elsewhere. Item statement, proof and proof_deps equal live; lean.statement is verbatim in the file; all 12 stmt_deps exist (def-trf-implicit-taylor-coordinate-data is in this delivery, unchanged from 0da0, and its 15 existing:true declarations are present). Mathematics, edge cases (r,t,m,Q=0, unit ideal, nonclosed points) and gates re-checked as in the 0da0/52e0 readings. Report has Worker report and Second reading by Q42. No compile (no file changed). Advisory: implicitTransverseCoeff is reached through the def node's stmt_deps only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3c1ef",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261026T092330-L-3424116",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs old item head in clone (verbatim move; only blueprint tags and proof-only imports differ), item theorem signature vs clone (identical), three new sorried statements vs their nodes and DegLex/ImplicitTaylorPoint definitions, item node proof_deps vs Lean proof"
+ }
+}

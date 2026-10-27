@@ -1,0 +1,104 @@
+{
+ "id": "def-trf-completed-scalar-identity-unit",
+ "kind": "definition",
+ "title": "Canonical identity scalar quotient-completion chain unit",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite with its fixed valuation ring and uniformizer [def-weil-l-adic-coefficient-extension], and let $Y$ be a scheme with its small pro-etale site [def-weil-pbc-proetale-site]. Put $R_E=\\varprojlim_{n\\ge0}(\\mathcal O_E/\\varpi_E^{n+1})_Y$ [def-weil-completed-integral-coefficients]. Use the identity-extension quotient tower $T(P)$ and its strict Roos complex $C(P)$ for every unbounded complex $P$ of $R_E$-module sheaves [def-trf-integral-scalar-tower-functors]. In the mapping-cocone coordinates $C(P)^i=(\\prod_nT(P)_n^{i-1})\\oplus(\\prod_nT(P)_n^i)$ [def-sf-strict-roos-functor], define the canonical natural chain map $\\eta:\\operatorname{Id}\\to C$ to be the unique map with zero shifted coordinate and whose unshifted coordinate, after every product projection, sends every section $x\\in P^i(U)$ to the sheafified tensor section $1\\otimes x\\in T(P)_n^i(U)$. Its existence and uniqueness are the already proved constructor theorem completedScalarIdentityUnit_existsUnique; completedScalarIdentityUnit is its unique selected map. There is no K-flatness, completeness, constructibility or boundedness condition on $P$, and the scheme and coefficient universes are independent. This definition is before localization and assumes no finite-free completed scalar comparison theorem.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-trf-integral-scalar-tower-functors",
+  "def-sf-strict-roos-functor"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), quotient-completion realization; Bhatt--Scholze Definition 3.5.2 and Proposition 3.5.1, canonical unit before localization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical identity coefficient completion unit sends a complex section to its compatible quotient tensor units with zero shifted Roos coordinate",
+   "results": "8 hits: UniformSpace.Completion.coe_one, UniformSpace.Completion.coe', CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero, UniformSpace.Completion.coe_toComplₗᵢ, UniformSpace.Completion.one, UniformSpace.Completion.toCompl, UniformSpace.Completion.coe_zero, AdicCompletion.instOne. No exact Mathlib match; these are generic completion, tensor, sheaf or augmentation constructions. Project search finds the exact existing declarations in Sheaf.Paper.FiniteFreeCompletedScalarComparison (lines 1071-1118). No definition DAG node owns them; blueprint_refs search returns no match.",
+   "date": "2026-10-22",
+   "verdict": "existing project declaration; new definition-node ownership only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural augmentation from a complex to the strict Roos complex of its quotient reductions is uniquely determined by the tensor units and zero shifted coordinate",
+   "results": "8 hits: HomologicalComplex.tensorUnit, ChainComplex.augmentTruncate, AlgebraicTopology.AlternatingFaceMapComplex.ε, ChainComplex.augment, ChainComplex.augment_X_succ, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ, ChainComplex.augment_X_zero, CochainComplex.augment. No exact Mathlib match; these are generic completion, tensor, sheaf or augmentation constructions. Project search finds the exact existing declarations in Sheaf.Paper.FiniteFreeCompletedScalarComparison (lines 1071-1118). No definition DAG node owns them; blueprint_refs search returns no match.",
+   "date": "2026-10-22",
+   "verdict": "existing project declaration; new definition-node ownership only"
+  },
+  {
+   "tool": "grep",
+   "query": "completedScalarIdentityUnit|integralScalarTowerFunctor|integralScalarOnGood|integralScalarTransition",
+   "results": "0 hits: . No exact Mathlib match; these are generic completion, tensor, sheaf or augmentation constructions. Project search finds the exact existing declarations in Sheaf.Paper.FiniteFreeCompletedScalarComparison (lines 1071-1118). No definition DAG node owns them; blueprint_refs search returns no match.",
+   "date": "2026-10-22",
+   "verdict": "existing project declaration; new definition-node ownership only"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-quotient-augmentation-diagram",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), quotient tower and normalized completion augmentation",
+   "via": [
+    "lem-trf-point-quotient-augmentation-diagram",
+    "lem-trf-point-sections-completion-cone",
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeCompletedScalarComparison",
+  "declaration": "WeilConjectures.completedScalarIdentityUnit",
+  "declarations": [
+   "WeilConjectures.completedScalarIdentityUnit_existsUnique",
+   "WeilConjectures.completedScalarIdentityUnit"
+  ],
+  "statement": "def completedScalarIdentityUnit :\n    𝟭 (CochainComplex (integralTowerModules l E Y) ℤ) ⟶\n      integralScalarComplexFunctor l E E (AlgHom.id ℚ_[l] E) Y",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "H2 ownership repair requested by the independent return of 677d8cb2e92f. Owns completedScalarIdentityUnit_existsUnique and the plain definition completedScalarIdentityUnit selected from this proved uniqueness constructor, not from finiteFreeCompletedScalarComparison. No module or declaration is added or changed; the enclosing comparison/well-definedness theorem is not a statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7740ef618",
+  "group": "ND",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7740ef618",
+  "group": "ND",
+  "result": "pass",
+  "note": "Second re-delivery after RETURN 677d8cb2e92f (H2 ownership). Lean module byte-identical (sha256 a9b038e5…); item node differs only in stmt_deps: theorem lem-weil-finite-free-completed-scalar-comparison replaced by new def-trf-completed-scalar-identity-unit, and def-trf-integral-scalar-tower-functors added. Both new nodes are existing:true on unchanged modules (live = side-live). Unit node matches completedScalarIdentityUnit_existsUnique (l.1071): zero mappingCocone.snd, fst/π_n = integralScalarTensorSection … 1 x, unique .choose, any P, independent universes; statement verbatim l.1115-1117. Tower node matches integralScalarRho/OrdinaryLevel/Level/TensorSection/Transition_existsUnique/TowerFunctor/ComplexFunctor/OnGood (l.259-650); statement verbatim l.631-633. Its theorem stmt_dep lem-pur-derived-change-of-rings is accepted: derivedChangeRingIndependentCoefficients is tagged to it, and the parent def-weil-integral-scalar-extension and about 20 def nodes cite it the same way. Acyclic: neither new node reaches the item; no missing records; no other def owner; no parallel collision. Item math unchanged from the prior clause-by-clause check (RoosCoordinates, a_P, χ pin, m = cΓ(ι), whole-arrow/chain/roof/descent/IsDerivedLimit; edge cases K=0, n=1, non-invertible χ). Report sections present; only sorry is the main theorem. Advisories: intermediate helpers (QuotientMap, Reduction*, OrdinaryLevel, completedScalarRoosEndomorphism) stay listed only under the theorem node; branch field sheaf-dag. No compile (no FIX)."
+ }
+}

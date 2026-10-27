@@ -1,0 +1,259 @@
+{
+ "id": "lem-trf-iterated-return-transport-scalar-calculus",
+ "kind": "statement",
+ "title": "Iteration and scalar calculus for point return transport",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], with $q=p^a$ and $k$ the fixed algebraic closure of $k_0$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ in a fixed algebraic closure, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$ and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $X_0$ be separated of finite type over $k_0$, put $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and put $g=g_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ and $g_s=\\operatorname{Spec}(\\gamma)$ for geometric Frobenius [def-weil-frobenius-detailed]. Use the derived pullbacks of [def-weil-derived-pullback-tensor-hom] and the point functor $\\operatorname{Fib}_{s,\\Lambda}$ of [def-weil-finite-coefficient-point], on the small pro-etale sites [def-weil-pbc-proetale-site].\n\nFix $m\\geq1$ and a $k$-point $z:s\\to X$ satisfying $g^mz=zg_s^m$. For $\\Lambda=A_{E,n}$ ($n\\geq1$), $\\mathcal O_E$, or $E$, put $P_\\Lambda=Lz_\\Lambda^*$, $U_\\Lambda=Lg_{s,\\Lambda}^*$ and $G_\\Lambda=Lg_\\Lambda^*$. The finite category is $D^b_c(-,A_{E,n})$ [def-weil-finite-torsion-constructibility], the integral category is derived-complete $D^b_c(-,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], and the rational category is its raw rationalization [def-weil-rationalization-karoubi]. At integral level use the composition and pullback scalar families specified by [lem-trf-integral-pullback-comparison-realization]; at finite level use [lem-weil-pbc-proetale-derived-pullback-composition], and at rational level use their rationalizations [def-weil-rationalization-karoubi]. Let $v_{\\Lambda,K}:U_\\Lambda^mP_\\Lambda K\\xrightarrow{\\sim}P_\\Lambda G_\\Lambda^mK$ be the return-square comparison. Define $I_N^{(0)}=1$ and $I_N^{(j+1)}=\\iota_{U_\\Lambda^jN}I_N^{(j)}$ using [def-weil-frobenius-point-transport]. Then $I^{(m)}$ is natural in every point-category morphism $u:N\\to N'$:\n$$\\operatorname{Fib}_{s,\\Lambda}(U_\\Lambda^mu)I_N^{(m)}=I_{N'}^{(m)}\\operatorname{Fib}_{s,\\Lambda}(u).$$\nThe maps $t_{\\Lambda,K}=\\operatorname{Fib}_{s,\\Lambda}(v_{\\Lambda,K})I_{P_\\Lambda K}^{(m)}$ are natural in $K$ at all three coefficient stages.\n\nFor any finite extension $E\\subset M$ in the chosen algebraic closure, let $T_X,T_s$ be the scalar extensions in the raw rationalized categories. Let $a_K:T_sP_EK\\xrightarrow{\\sim}P_MT_XK$, $d_K:T_XG_E^mK\\xrightarrow{\\sim}G_M^mT_XK$ and $\\delta_N:T_sU_E^mN\\xrightarrow{\\sim}U_M^mT_sN$ be the specified pullback scalar comparisons, the latter two iterated through the specified compositors. Let $\\beta_N:\\operatorname{Fib}_{s,E}N\\otimes_E M\\xrightarrow{\\sim}\\operatorname{Fib}_{s,M}T_sN$ be the inverse of the rational point-sections comparison [lem-weil-point-sections-scalar-extension]. The following are identities of these actual comparisons:\n$$v_{M,T_XK}U_M^m(a_K)\\delta_{P_EK}=P_M(d_K)a_{G_E^mK}T_s(v_{E,K}),$$\n$$\\operatorname{Fib}_{s,M}(\\delta_N)\\beta_{U_E^mN}(I_N^{(m)}\\otimes_E M)=I_{T_sN}^{(m)}\\beta_N.$$\nThe first equation holds already for the specified transformations of simultaneous quotient diagrams and their integral realizations before rationalization. The second uses the same point pullback comparisons as the first. Both respect identity extensions and successive finite extensions with the completion-normalized tensor associator of [lem-trf-integral-pullback-comparison-realization] and the point-sections associator of [lem-weil-point-sections-scalar-extension]. No idempotent completion or finite Tor-amplitude hypothesis is used.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 2, 8, 9."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-local-frobenius-trace",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-derived-field-scalar-extension-tower",
+  "def-trf-finite-pullback-presentation-comparison",
+  "def-trf-realized-pullback-comparisons",
+  "def-trf-iterated-return-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the point iteration using one-step point transport naturality. Assemble the return comparison as a natural isomorphism from natural power and composition comparisons. At rational level extend integral naturality by tensor-product induction. This proves finite, integral and rational transport naturality. For the finite transport square, pullback preserves the finite support and intrinsic constructibility. Use the proved finite-ring sheaf argument and exact homology comparison, transported along the canonical finite pullback coordinate comparison.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-rationalization-karoubi",
+    "def-trf-finite-pullback-coordinate-comparison",
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-isomorphism-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the three return scalar squares from the strictly lower return-word calculation. Use the one-step point scalar square, then induct with pointIterate_scalar: expand both recursions, apply the one-step square, commute point transport with the preceding scalar comparison by naturality, and apply the induction hypothesis.",
+   "uses": [
+    "lem-trf-return-scalar-squares",
+    "lem-trf-point-scalar-single-step-coherence",
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove unit and tower identities for scalarIterate by induction. In the tower step naturality of the second scalar comparison interchanges it with the preceding iterated first comparison, then the preceding tower identity and the one-step tower equation finish. The system and integral one-step equations come from realization coherence; obtain integral scalar naturality from the natural Lambda and Mu families. The rational one-step equations are isolated in the lower normalization statement. Take the point normalization from the one-step point statement.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-rational-scalar-single-step-normalization",
+    "lem-trf-point-scalar-single-step-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-rationalization-karoubi",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-trf-return-scalar-squares",
+  "lem-trf-point-scalar-single-step-coherence",
+  "lem-trf-rational-scalar-single-step-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 2, 8, 9. Explicit specialization and Lean induction by H3, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius.*(scalar|[Tt]ransport)|[Pp]ullback.*[Cc]oefficient",
+   "results": "{\"hits\": 2, \"top\": [\"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"hits\": 9, \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation iterates scalar extension compatibility pseudofunctor pullback commutative square",
+   "results": "{\"hits\": 8, \"top\": [\"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare\", \"CategoryTheory.Limits.CategoricalPullback.catCommSq\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjTransformObjSquare\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.w_app\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjPrecomposeObjSquare_iso_hom_id\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjPrecomposeObjSquare_iso_hom_app_fst_app\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjPrecomposeObjSquare_iso_hom_app_snd_app\", \"CategoryTheory.CatCommSq.iso_hom_naturality_assoc\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated natural point Frobenius transport commutes with extension of coefficient fields and return square pullback composition",
+   "results": "{\"hits\": 8, \"top\": [\"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base\", \"IsPurelyInseparable.iterateFrobeniusₛₗ\", \"IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ\", \"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap\", \"IsPurelyInseparable.iterateFrobenius\", \"IsPurelyInseparable.iterateFrobenius_algebraMap\", \"IsPurelyInseparable.algebraMap_iterateFrobenius\", \"RingHom.map_iterate_frobeniusEquiv_symm\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commuting scalar comparison with iterated pullback compositors along equal scheme maps yields coefficient compatibility of local transport",
+   "results": "{\"hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.t'_snd_snd\", \"AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst\", \"AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.t'_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.p_comm\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "whisker.*(iterate|[Pp]ow)|[Nn]at[Tt]rans.*iterate",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*(scalar|transport)|return.*pullback",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, field Frobenius and Zariski module pullback do not state the specified completed pro-etale return transport or its actual-comparison identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"hits\": 9, \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, field Frobenius and Zariski module pullback do not state the specified completed pro-etale return transport or its actual-comparison identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of iterated natural transformations and scalar extension of derived pullback compositors",
+   "results": "{\"hits\": 8, \"top\": [\"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjTransformObjSquare_iso_hom_naturality₂\", \"CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty\", \"CategoryTheory.NatTrans.app_smul\", \"CategoryTheory.NatTrans.leftDerived_comp\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.Idempotents.FunctorExtension₁.map\", \"CategoryTheory.bifunctorComp₁₂FunctorMap\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, field Frobenius and Zariski module pullback do not state the specified completed pro-etale return transport or its actual-comparison identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated natural point Frobenius transport and return square pullback commute with coefficient field extension",
+   "results": "{\"hits\": 8, \"top\": [\"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base\", \"IsPurelyInseparable.iterateFrobeniusₛₗ\", \"IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ\", \"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap\", \"RingHom.map_iterate_frobeniusEquiv_symm\", \"IsPurelyInseparable.iterateFrobenius\", \"IsPurelyInseparable.algebraMap_iterateFrobenius\", \"IsPurelyInseparable.iterateFrobenius_algebraMap\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, field Frobenius and Zariski module pullback do not state the specified completed pro-etale return transport or its actual-comparison identities"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|leftDerived_comp",
+   "results": "{\"hits\": 5, \"top\": [\"16\", \"19\", \"50\", \"56\", \"57\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, field Frobenius and Zariski module pullback do not state the specified completed pro-etale return transport or its actual-comparison identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudofunctor scalar comparison is compatible with the canonical pullback isomorphism for equal composite scheme morphisms",
+   "results": "{\"hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, field Frobenius and Zariski module pullback do not state the specified completed pro-etale return transport or its actual-comparison identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-frobenius-transport-normalization",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 2, 8, 9.",
+   "via": [
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-iterated-return-transport-scalar-calculus",
+  "worker": "stage1",
+  "summary": "Q86 writes explicit naturality and scalar inductions and a cancellation proof of the return-square identity. Existing point-automorphism and whole-diagram pullback comparison statements supply every non-elementary input. No new nodes or statement changes.",
+  "blueprint": "prop-trf-karoubi-independence.proof.md, last sentence: transport of Frobenius endomorphisms; realizes the local-normalization Steps 2, 8, 9 by iteration and scalar calculus.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Generic one-step naturality for every derived point morphism, before iteration."
+   },
+   {
+    "node": "lem-weil-point-automorphism-transport-scalar-extension",
+    "why": "Generic point-automorphism compatibility with the actual one-step tensor/completion comparisons."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Specifies the sections comparison and its identity and successive-extension associators."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Canonical finite derived compositor for the two words in the return square."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-point-automorphism-transport-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-dc87878a3",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-dc87878a3 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with the item and its report, no new nodes, statement and stmt_deps unchanged, no repair note, no SGA citation, and every proof_deps id appears in some step's uses. Step 1: I checked the induction for I^(m) against lem-weil-frobenius-point-transport-natural(2), which covers rational morphisms. Step 2: v=s r^{-1} has the right direction (L(zg_s^m)^*≅U^mP, L(g^mz)^*≅PG^m). Its naturality comes from the finite compositor node and the integral realization node, and extends to the rational stage because rational Hom is Hom⊗E with no Karoubi completion. Step 3: I instantiated the mixed equation of lem-trf-integral-pullback-comparison-realization myself, with (h,k)=(g_s^m,z) and (z,g^m). Both give the same b because the node respects equality of scheme maps and finite iterations, and the cancellation correctly gives the return-square identity, also before realization. Step 4: σ^g of lem-weil-point-automorphism-restriction-natural is the σ of def-weil-frobenius-point-transport, so t^F=ι^F, and α is the specified a_{g_s}. Rearranging with β=φ^{-1} gives the one-step equation. Step 5: I recomputed the induction δ^{j+1}=U(δ^j)α, using naturality of ι^M at δ^j. Step 6: the identity and tower clauses follow by formal substitution of the associator clauses of the two cited nodes. Edge cases checked: m=1, X=s with z=id, E=M, zero objects. The proof closure has no cycle. Accepted tool_uses: point-transport-natural, point-automorphism-transport-scalar-extension, point-sections-scalar-extension, pbc derived pullback composition; all are generic and none replaces a unit step. Duplicates: lem-trf-finite-return-frobenius-cancellation is a different finite-level claim. lem-fd-local-frobenius-weil-morphism-naturality overlaps only the rational-stage naturality part, so it is not a duplicate. Maintainer note: the two could later cite each other."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IteratedReturnTransportScalarCalculus",
+  "declaration": "WeilConjectures.iteratedReturnTransportScalarCalculus",
+  "declarations": [
+   "WeilConjectures.iteratedReturnTransportScalarCalculus"
+  ],
+  "file": "lean/Sheaf/Paper/IteratedReturnTransportScalarCalculus.lean",
+  "statement": "theorem iteratedReturnTransportScalarCalculus (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (F G H : Padic.FiniteCoefficientFields c.l c.Qbar) (hFG : F ≤ G) (hGH : G ≤ H) (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] (C : IntegralComparisonSystem.{u} c.l) (_hC : IntegralComparisonRealizationCoherence c.l F.val G.val (IntermediateField.inclusion hFG) C) (r : ℕ) (z : Over.mk (𝟙 (Spec (.of D.k))) ⟶ D.geometricFiber X₀) (w : ((End.of (frobeniusPointIso D).hom) ^ (r + 1)) ≫ z.left = z.left ≫ ((End.of (D.geometricFrobenius X₀).hom) ^ (r + 1))) : IteratedReturnTransport.Properties D c.l c.different F.val X₀ C G.val (IntermediateField.inclusion hFG) H.val (IntermediateField.inclusion hGH) r z.left w",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The positive period is r+1, finite level is n+1, and z is a morphism over Spec k. Real constructions give I, v, t and the iterated scalar comparisons at all three coefficient stages. The return scalar identity is stated already on whole quotient diagrams and then on the specified integral and raw rational realizations; the second identity uses the same rational point comparison and the inverse normalized sections map. Unit and tower clauses use completion-normalized and module tensor associators. No Tor-amplitude or perfectness restriction, no idempotent completion. The new definition node def-trf-realized-pullback-comparisons owns the four constructible/rational comparison helpers; the existing integral comparison node and all 20 of its declarations retain their record unchanged. The finite pullback presentation comparison is cited through its own definition node, using the published declaration without copying it."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e81ad7445",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Item module unchanged since ed72 (PASS). The repair of the L duplicate return made def-trf-realized-pullback-comparisons publicly import Sheaf.Paper.LocalFrobeniusTransportNormalization and use LocalFrobeniusTransport.rationalScalar_existsUnique. That module's node lem-trf-local-frobenius-transport-normalization has this item in proof_deps: an import cycle at stage 3, plus an uncited owner (H12) whose citation closes a DAG cycle (C6). FIX: fixes/RealizedPullbackComparisons.lean drops the import and defines integralComparisonRationalScalar as NatIso.ofComponents of integralComparisonRationalScalarComponent (eqToIso of the recorded rationalDerivedPullback/sfRationalScalarExtension object clauses, Q_M.mapIso of isoMk(integralComparisonScalar C f), eqToIso), the same components as the old HEq pin, with a named sorry theorem …Component_naturality (not a duplicate). fixes/def-trf-realized-pullback-comparisons.json updates the statement sentence, declarations (+2), full signature and note; stmt_deps unchanged and cover all uses. nt_compile --json: fixed module 20.3 s clean; with the unchanged item module 19.0 s + 18.0 s clean. Mechanical theorem-stmt_dep finding: sfRationalScalarUnit/Comp and fieldScalarUnit are .choose of ∃! theorems, objects constructed → PASS on that point. Mathematics re-checked (m=r+1, v via eqToIso w, I recursion, naturality at 3 stages, both scalar identities incl. whole systems, unit/tower, edge cases m=1, z=id, E=M, n=0)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70682",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261025T163644-L-752613",
+  "kind": "interface",
+  "note": "independent cc review: Moved data module vs old item block (verbatim except finiteComposition ascription, isDefEq true); item theorem proof vs node proof steps; three lower sorry statements vs item clauses (return scalar squares, r=0 point square + PointScalarNormalization, one-step rational unit/tower); importer RationalReturnBlockPower compiled against delivered modules (exit 0); #print axioms item = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-qcoh-presentation-tensor-equivalence",
+ "kind": "statement",
+ "title": "Quasi-coherent module descent on an etale stack presentation, with tensor compatibility",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal X$ be a Deligne--Mumford stack over $S$ in the conventions of [def-sfb-stable-pointed-moduli-groupoids]. A cartesian quasi-coherent module on $\\mathcal X$ means an assignment $x\\mapsto\\mathcal F_x$ of a quasi-coherent $\\mathcal O_U$-module to every scheme $U$ and $x\\in\\mathcal X(U)$, with specified isomorphisms $u^*\\mathcal F_x\\simeq\\mathcal F_y$ for every arrow $y\\to x$ over $u:V\\to U$, satisfying the identity and composition compatibilities. Morphisms are families of module maps compatible with these isomorphisms. Quasi-coherence is [pqf-def-coherent], module pullback is [def-pc-module-pullback], and tensor products of sheaves of modules are [def-pur-sheaf-tensor-product]. Let $a:T\\to\\mathcal X$ be a surjective etale scheme atlas and put $R=T\\times_{\\mathcal X}T$ and $T_3=T\\times_{\\mathcal X}T\\times_{\\mathcal X}T$. On an algebraic space these modules and maps are interpreted on its etale scheme charts [def-trf-algebraic-space]. Restriction to $T$ induces an equivalence from cartesian quasi-coherent modules on $\\mathcal X$ to pairs $(M,\\delta)$ consisting of a quasi-coherent $\\mathcal O_T$-module and an isomorphism $\\delta:p_1^*M\\simeq p_2^*M$ on $R$ satisfying $p_{23}^*\\delta\\circ p_{12}^*\\delta=p_{13}^*\\delta$ on $T_3$; morphisms on the right are all module maps commuting with $\\delta$. This equivalence carries $\\mathcal O_{\\mathcal X}$ to $\\mathcal O_T$ with its canonical datum and carries $\\mathcal F\\otimes\\mathcal G$ to $a^*\\mathcal F\\otimes_{\\mathcal O_T}a^*\\mathcal G$ with the tensor-product datum. These identifications respect the associativity, unit and symmetry constraints; in particular restriction is faithful on maps from any tensor power as well as full on the compatible maps.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WV (lemma-quasi-coherent-algebraic-stack), parts (1) and (5), and Tag 06WT (proposition-quasi-coherent), with Tag 0EM8 (lemma-characterize-quasi-coherent-bis) for cartesian scheme-chart and etale-site conventions. The tensor-compatible formulation uses the pointwise tensor products in these chart descriptions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $t\\in\\mathcal X(T)$ for the atlas object. For a cartesian module $\\mathcal F$, its value $M=\\mathcal F_t$ is quasi-coherent by definition. The universal isomorphism between the two pullbacks of $t$ to $R$ induces $\\delta:p_1^*M\\to p_2^*M$. On a scheme chart of $T_3$, composition of the arrows from the first lift to the second and from the second to the third is the arrow from the first to the third. The composition axiom for $\\mathcal F$ gives $\\delta_{23}\\delta_{12}=\\delta_{13}$. A compatible family of module maps restricts to a map commuting with $\\delta$. Thus restriction is the asserted functor; all assertions on the algebraic spaces $R,T_3$ mean the corresponding assertions on their scheme charts.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, proposition-quasi-coherent, first construction; chart conventions of Tag 0EM8."
+   }
+  },
+  {
+   "text": "For $x\\in\\mathcal X(U)$ put $W_x=U\\times_{\\mathcal X}T$. It is an algebraic space, etale and surjective over $U$, since it is the base change of the atlas. Choose an etale surjective scheme chart $V\\to W_x$; the composite $q:V\\to U$ is etale and surjective. It supplies a map $b:V\\to T$ and an isomorphism $\\lambda:q^*x\\simeq b^*t$. This uses the base-change and composition clauses of the atlas calculus, applied also to schemes as Deligne--Mumford stacks. On $V\\times_U V$ the two lifts and $\\lambda_2\\lambda_1^{-1}$ give a map $r:V\\times_U V\\to R$ with $p_i r=b\\operatorname{pr}_i$. Three lifts give a map $V\\times_U V\\times_U V\\to T_3$. These maps follow directly from the definition of 2-fibre product; no claim that $W_x$ itself is a scheme is used.",
+   "uses": [
+    "lem-sfb-dm-etale-atlas-calculus",
+    "def-trf-algebraic-space",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, proposition-quasi-coherent, inverse construction, expressed on local lifts of an atlas."
+   }
+  },
+  {
+   "text": "Given $(M,\\delta)$, the module $b^*M$ on $V$ is quasi-coherent by quasi-coherent pullback. Its descent isomorphism on $V\\times_U V$ is $r^*\\delta$, formed as follows since $r$ need not be etale. Put $Z=V\\times_U V$, so $p_ir=b\\operatorname{pr}_i$, and choose a surjective etale scheme chart $W\\to R$. By the algebraic-space definition $Z\\times_RW$ and $W\\times_RW$ are schemes and $Z\\times_RW\\to Z$ is etale and surjective, hence an fpqc covering. The chart value $\\delta_W$ pulls back to $Z\\times_RW$; its two pullbacks to $(Z\\times_RW)\\times_Z(Z\\times_RW)=Z\\times_R(W\\times_RW)$ agree because $\\delta$ is compatible with the two etale maps $W\\times_RW\\to W$. Full faithfulness of fpqc descent gives a unique $r^*\\delta:\\operatorname{pr}_1^*b^*M\\simeq\\operatorname{pr}_2^*b^*M$ restricting to it; by the same uniqueness it does not depend on $W$ and is compatible with further pullback. Its cocycle equation is the pullback of the equation on $T_3$, formed in the same way on the triple product. The singleton $q:V\\to U$ is an etale covering of the small etale site of $U$, hence an fpqc covering. Effective fpqc descent produces a quasi-coherent module $F_x$ on $U$ with an isomorphism $q^*F_x\\simeq b^*M$ inducing this datum. Full faithfulness of the same descent equivalence says that a morphism of these descended modules is uniquely determined by its map on $V$, and that every map compatible on $V\\times_U V$ descends. For two choices $V,V'$ use $V\\times_U V'$ and the arrow between the corresponding lifts to obtain a comparison of the two local modules. The equation on three lifts says this comparison commutes with the two descent data; full faithfulness therefore gives a unique isomorphism between the two $F_x$. For three choices the comparison isomorphisms compose, since their pullbacks are $\\delta_{23}\\delta_{12}=\\delta_{13}$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-pc-fpqc-descent",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, proposition-quasi-coherent, inverse construction; Descent Tag 023T, proposition-fpqc-descent-quasi-coherent; Topologies Tag 022C."
+   }
+  },
+  {
+   "text": "For an arrow $y\\to x$ over $u:U'\\to U$, base change the cover $V\\to U$ to $V'=U'\\times_U V\\to U'$. This is still etale and surjective by atlas calculus. The arrow identifies $y|_{V'}$ with the pullback of the chosen lift of $x$, so $u^*F_x$ and $F_y$ have identical local modules and descent isomorphisms there, using the comparison between choices just constructed. Quasi-coherent pullback and full faithfulness of fpqc descent give a unique isomorphism $u^*F_x\\simeq F_y$ with that local description. For the identity arrow it is the identity. For two composable arrows, use the pullback of $V$ along their composite as a common cover: the two comparison maps are equal there by pullback composition, so faithfulness of descent makes them equal globally. Thus $x\\mapsto F_x$ is a cartesian quasi-coherent module, with its identity and composition compatibilities specified rather than merely asserted.",
+   "uses": [
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-pc-fpqc-descent",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, proposition-quasi-coherent, functoriality and omitted quasi-inverse verification, expanded by Tag 023T."
+   }
+  },
+  {
+   "text": "A datum morphism $h:(M,\\delta)\\to(N,\\epsilon)$ pulls back to $b^*h$ on every cover $V\\to U$ above. The equation $\\epsilon p_1^*h=p_2^*h\\delta$ makes it a descent morphism, so fpqc full faithfulness gives a unique map $F_x\\to G_x$. On the pulled-back cover for an arrow $y\\to x$ these maps commute with the cartesian isomorphisms; faithfulness gives compatibility on $U'$. Identities and composites follow by the same uniqueness. Starting from $\\mathcal F$, its cartesian isomorphisms identify the local module used to reconstruct $F_x$ with $q^*\\mathcal F_x$, and its original arrow composition identifies their descent data. Hence descent gives $F_x\\simeq\\mathcal F_x$, natural in $x$ and in $\\mathcal F$. Conversely, over $U=T,x=t$ there is the global lift $\\operatorname{id}_T$ with identity isomorphism of $t$; using this lift as the identity cover makes the construction return $M$. On $R$ the transition between the two lifts is exactly $\\delta$, so the recovered datum, including its arrows, is the original one. These are natural quasi-inverse identifications. Equivalently, every compatible map on $T$ extends uniquely to a cartesian family, and every datum is effective.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, proposition-quasi-coherent, the omitted verification that the functors are quasi-inverse, written using Tag 023T."
+   }
+  },
+  {
+   "text": "For cartesian $\\mathcal F,\\mathcal G$ define $(\\mathcal F\\otimes\\mathcal G)_x=\\mathcal F_x\\otimes_{\\mathcal O_U}\\mathcal G_x$. This is quasi-coherent by quasi-coherent tensor closure. For $y\\to x$ over $u$, use the normalized natural comparison $u^*(\\mathcal F_x\\otimes\\mathcal G_x)\\simeq u^*\\mathcal F_x\\otimes u^*\\mathcal G_x$ followed by the two cartesian structure maps. Identity and composition compatibility can be checked on local tensor generators: for composable base maps with local ring maps $A\\to B\\to C$, both comparisons send $c\\otimes(b\\otimes(m\\otimes n))$ to $(cb\\otimes m)\\otimes(1\\otimes n)$ after the canonical pullback identifications. Such elements locally generate by the tensor-formula definition and sheafification. Thus these are cartesian transition maps. The unit family is $x\\mapsto\\mathcal O_U$, with $u^*\\mathcal O_U\\simeq\\mathcal O_{U'}$ given locally by $c\\otimes a\\mapsto ca$. Evaluation at $t$ returns $\\mathcal F_t\\otimes\\mathcal G_t$ and $\\mathcal O_T$. Evaluation at the two lifts on $R$ gives precisely $\\delta_{\\mathcal F}\\otimes\\delta_{\\mathcal G}$ and the canonical unit datum, since the tensor comparison is natural. These evaluations are the required natural tensor and unit identifications.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WV, lemma-quasi-coherent-algebraic-stack (5); Modules Tags 01CD, lemma-tensor-product-pullback, and 01CE, lemma-tensor-product-permanence; tensor formulas expanded."
+   }
+  },
+  {
+   "text": "Use the scheme-module associator, unitors and symmetry chartwise. They commute with the preceding transition maps: on local generators the associator takes $((m\\otimes n)\\otimes p)$ to $m\\otimes(n\\otimes p)$, the symmetry takes $m\\otimes n$ to $n\\otimes m$, and the left unitor takes $a\\otimes m$ to $am$. Pullback sends a tensor generator to the tensor of its pulled-back factors, so applying any of these formulas before or after pullback gives the same element. The right unitor is checked by $m\\otimes a\\mapsto am$. Equality on these local generators gives equality of module-sheaf maps. Consequently these maps define cartesian families, and their coherence equations hold chartwise by the symmetric monoidal equations for scheme modules. Restriction to $t$ evaluates the same formulas, so its tensor and unit identifications respect all three constraints. Repeated tensor closure gives every finite tensor power (power zero being the unit). The full faithfulness proved in step 5 therefore applies to maps with any such tensor power as source, proving both faithfulness and fullness on compatible maps.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Modules Tag 01CA, section-tensor-product; Tag 01CD, lemma-tensor-product-pullback; Tag 06WT for the full faithfulness already proved."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-dm-etale-atlas-calculus",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06WT and 06WV, inverse descent construction and tensor clause, expanded via scheme fpqc descent; the source omits functoriality/quasi-inverse verifications and does not spell out symmetric monoidal coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on an algebraic stack are equivalent to modules with descent datum on a smooth or etale presentation, compatibly with tensor product",
+   "results": "Hits read: SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.mk.inj, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract stack descent assumes an IsStack instance and does not construct quasi-coherent module descent on an algebraic-stack atlas or its tensor comparison; scheme affine results do not apply to arbitrary stacks",
+   "digest": "ceb921d5d8624d43"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCoherent\", \"Stack\"",
+   "results": "Hits read: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract stack descent assumes an IsStack instance and does not construct quasi-coherent module descent on an algebraic-stack atlas or its tensor comparison; scheme affine results do not apply to arbitrary stacks",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "(QuasiCoherent|Quasicoherent).*(descent|equivalence)|(descent|equivalence).*(QuasiCoherent|Quasicoherent)",
+   "results": "Hits read: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract stack descent assumes an IsStack instance and does not construct quasi-coherent module descent on an algebraic-stack atlas or its tensor comparison; scheme affine results do not apply to arbitrary stacks",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an etale atlas of a Deligne Mumford stack is a symmetric monoidal equivalence on quasi coherent modules with cocycle descent data",
+   "results": "Hits read: CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Pseudofunctor.isStackFor_iff, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, ModuleCat.MonoidalCategory.symmetricCategory, CategoryTheory.Pseudofunctor.IsStackFor.mk, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract stack descent assumes an IsStack instance and does not construct quasi-coherent module descent on an algebraic-stack atlas or its tensor comparison; scheme affine results do not apply to arbitrary stacks",
+   "digest": "ae5a3a5a406b094c"
+  },
+  {
+   "tool": "grep",
+   "query": "(QuasiCoherent|Quasicoherent|quasicoherent).*(descent|stack)|(descent|stack).*(QuasiCoherent|Quasicoherent|quasicoherent)",
+   "results": "Hits read: ",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data for an arbitrary sheaf are not stack-atlas descent of quasi-coherent modules; abstract isEquivalence_toDescentData assumes the effective-descent IsStack instance rather than proving it or tensor coherence.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\", \"Module\"",
+   "results": "Hits read: ",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data for an arbitrary sheaf are not stack-atlas descent of quasi-coherent modules; abstract isEquivalence_toDescentData assumes the effective-descent IsStack instance rather than proving it or tensor coherence.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaves on a Deligne Mumford stack are equivalent to modules with cocycle descent datum on an etale atlas, respecting tensor products",
+   "results": "Hits read: SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data for an arbitrary sheaf are not stack-atlas descent of quasi-coherent modules; abstract isEquivalence_toDescentData assumes the effective-descent IsStack instance rather than proving it or tensor coherence.",
+   "digest": "01401f5b4132c1f9"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent for quasi coherent modules along a surjective etale scheme covering, including descent of module homomorphisms",
+   "results": "Hits read: SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.X, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data for an arbitrary sheaf are not stack-atlas descent of quasi-coherent modules; abstract isEquivalence_toDescentData assumes the effective-descent IsStack instance rather than proving it or tensor coherence.",
+   "digest": "45c0bcec12aa27ee"
+  },
+  {
+   "tool": "grep",
+   "query": "isEquivalence_toDescentData|isEquivalence.*Descent|isStackFor_iff",
+   "results": "Hits read: Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data for an arbitrary sheaf are not stack-atlas descent of quasi-coherent modules; abstract isEquivalence_toDescentData assumes the effective-descent IsStack instance rather than proving it or tensor coherence.",
+   "digest": "dadc5e60c43ffbaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction functor from cartesian quasi coherent modules on a stack to a Cech nerve of an atlas is fully faithful and essentially surjective",
+   "results": "Hits read: CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, LightCondMod.LocallyConstant.fullyFaithfulFunctor, SheafOfModules.fullyFaithfulForget, CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondSet.LocallyConstant.functorFullyFaithful, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful, lightProfiniteToLightCondSetFullyFaithful",
+   "date": "2026-10-23",
+   "verdict": "no match: presentation data for an arbitrary sheaf are not stack-atlas descent of quasi-coherent modules; abstract isEquivalence_toDescentData assumes the effective-descent IsStack instance rather than proving it or tensor coherence.",
+   "digest": "62827e0275df78d3"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-schemes-etale-stack-descent",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: Effective descent of finite schemes on an etale stack presentation. Module descent underlying the multiplication and unit of the finite algebra. Anchor repaired to the existing detailed blueprint node: latest blueprint proof paragraph (3), the inherited alteration/moduli branch, finite-algebra descent prerequisite.",
+   "via": [
+    "lem-sfb-finite-schemes-etale-stack-descent",
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qcoh-presentation-tensor-equivalence",
+  "worker": "stage1",
+  "summary": "Proved the atlas restriction equivalence by explicit chartwise effective fpqc descent and unique descent of all morphisms, including arbitrary-base-change cartesian transitions and natural quasi-inverses. Constructed tensor and unit chartwise and checked their coherence by normalized local tensor formulas. Reused all inputs from existing nodes; no new nodes or Mathlib leaves. Retained the full statement and previous search history.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/moduli input: tensor-compatible module descent used to descend the finite algebra in lem-sfb-finite-schemes-etale-stack-descent. The imported created.item chain breaks above lem-sfb-admissible-direct-image; restored the explicit existing blueprint anchor without editing any ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Quasi-coherent closure under arbitrary scheme pullback is needed for local lifts and cartesian transitions."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Canonical identity/composition isomorphisms for ordinary scheme-module pullback identify the local descent data."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Converts the chosen scheme etale cover to an fpqc cover for module descent, without a quasi-compactness assumption on its morphism."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Effective descent and full faithfulness for quasi-coherent modules on scheme fpqc covers; the stack atlas argument needs this generic tool, which the unit does not replace."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "Ordinary quasi-coherent tensor closure on each scheme chart, independent of the six-functor unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Normalized natural ordinary-module tensor comparison, including its pure-section formula, for the chart transition maps."
+   },
+   {
+    "node": "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "why": "Ordinary scheme-module associativity, unit and symmetry constraints and their coherence, used chartwise."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-8f88cda0b",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-8f88cda0b (reviewer sub-agent of L); spot-checked: Read in full: the item and all 7 steps (it is still unsplit on live and side-live, so not superseded). The statement and stmt_deps are byte-identical to base, so no target is weakened, and the delivery adds no new nodes. Read every cited statement and Stacks 06WT proposition-quasi-coherent (stacks-sheaves.tex l.2134) and 06WV lemma-quasi-coherent-algebraic-stack (l.2384, parts 1 and 5). One fault, repaired (E5/C4), in step 3. The step wrote 'r^*δ after the pullback composition identifications', but δ is given only on étale scheme charts of the algebraic space R, and r: V×_U V→R is not étale, because V→T factors through the base change of x. Forming r^*δ therefore needs one descent of a morphism, which is the role of r_small^* in 06WT. The FIX builds it explicitly from a surjective étale chart W→R: Z×_R W and W×_R W are schemes by def-trf-algebraic-space, Z×_R W→Z is an fpqc covering, and full faithfulness of lem-pc-fpqc-descent gives a unique r^*δ, independent of W; the cocycle is built the same way. def-trf-algebraic-space is added to step 3 uses (it was already in proof_deps). Other steps checked: step 1 is an elementary instance of the 2-fibre-product and cartesian definitions; step 2's local lifts use the atlas-calculus base-change and composition clauses and never claim W_x is a scheme; step 4 allows an arbitrary, non-flat base map; step 5 descends all morphisms and proves both quasi-inverses (the verification 06WT omits); steps 6 and 7 check tensor, unit, associator, symmetry and unitors on local generators through the normalized pullback-tensor node and the symmetric-monoidal node. Small cases: identity atlas, BG of a finite étale group (stabilizers kept), empty stack. The parent lem-sfb-finite-schemes-etale-stack-descent uses exactly the clauses provided. No duplicate: the affine-groupoid and affine-action descent nodes and lem-a1-etale-atlas-presentation are narrower or different. The 7 declared cross-unit tool_uses are generic scheme-module and descent tools and are accepted. Batch-5: the citation of lem-sfb-dm-etale-atlas-calculus reaches def-trf-algebraic-space, which is the general definition of an algebraic space and no part of the trace-formula or Poincaré-duality proofs; the item already cited it on base, so the citation is outside the assumptions and accepted. No SGA cited.; 1 file(s) fixed by the reviewer"
+ }
+}

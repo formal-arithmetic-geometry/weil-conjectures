@@ -1,0 +1,157 @@
+{
+ "id": "lem-sfb-bounded-classical-abelian-counit",
+ "kind": "statement",
+ "title": "Comparison counit on bounded classical abelian complexes",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Let $X$ be any scheme [def-pc-scheme], and let $\\nu_X$ be its small pro-etale to etale comparison morphism [def-weil-pbc-site-comparison-morphism]. Let $K$ be a bounded-below ordinary derived complex of abelian pro-etale sheaves with cohomology concentrated in a finite interval $[a,b]$ [def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories]. Suppose every cohomology sheaf $H^q(K)$ is isomorphic to $\\nu_X^*F_q$ for some abelian etale sheaf $F_q$. Then there is an isomorphism $\\nu_X^* R\\nu_{X,*}K\\cong K$ in the ordinary unbounded abelian derived category. No coefficient completion, finiteness, torsion or geometric hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-relative-comparison (099V); finite truncation induction for its classical essential image, as in lem-pe-classical-derived-counit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof": [
+  {
+   "text": "Apply the generic Grothendieck-valued comparison unit and acyclicity of comparison pullbacks of injectives to derive invertibility of the bounded-below unit, directly for abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-comparison-grothendieck-unit",
+    "lem-pe-comparison-injective-left-modules-acyclic",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A classical abelian sheaf has an etale antecedent. Exact inverse image commutes with single complexes. The triangle identity and invertible derived unit make the counit invertible on these singles. Finite truncation induction, using the single cohomology sheaves as successive distinguished-triangle quotients, makes it invertible on K. This is the bounded specialization of the classical counit argument, implemented with the generic PlusDevissage lemma for the essential-image object property.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The compatibility isomorphisms for exact inverse image and for ordinary right derived direct image identify the resulting D+ counit isomorphism with the displayed unbounded-category isomorphism.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-grothendieck-unit",
+  "lem-pe-comparison-injective-left-modules-acyclic",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-relative-comparison (099V); finite truncation induction for its classical essential image, as in lem-pe-classical-derived-counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image pro etale comparison nonpositive for a bounded classical complex",
+   "results": "{\"t\": \"2026-10-25T06:29:13Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image pro etale comparison nonpositive for a bounded classical complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsLE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\"], \"digest\": \"4f1e6e21c5e061b1\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.isZero_double_X",
+   "results": "{\"t\": \"2026-10-25T06:31:37Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.isZero_double_X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomologicalComplex.isZero_double_X\"], \"digest\": \"3c0ed3379a4f29e8\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*HomologyFunctorIso",
+   "results": "{\"t\": \"2026-10-25T06:31:37Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategory.*HomologyFunctorIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex with classical abelian cohomology has invertible pro etale comparison counit",
+   "results": "{\"t\": \"2026-10-25T06:55:00Z\", \"tool\": \"leansearch\", \"query\": \"A bounded complex with classical abelian cohomology has invertible pro etale comparison counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_hom\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f\", \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_inv\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso_inv_app_f\", \"HomologicalComplex.dgoEquivHomologicalComplex_counitIso\", \"HomologicalComplex.opEquivalence_counitIso\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\"], \"digest\": \"adf832dd448ce5ea\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "classical.*(Koszul|koszul)|Koszul.*classical",
+   "results": "{\"t\": \"2026-10-25T06:55:46Z\", \"tool\": \"grep\", \"query\": \"classical.*(Koszul|koszul)|Koszul.*classical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classical cohomology of a scalar two term complex is preserved by open extension zero closed direct image and pullback",
+   "results": "{\"t\": \"2026-10-25T06:55:47Z\", \"tool\": \"leansearch\", \"query\": \"Classical cohomology of a scalar two term complex is preserved by open extension zero closed direct image and pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instQuasiIsoExtendMap\", \"HomologicalComplex.extend.instHasHomology\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left\", \"CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass\", \"CochainComplex.HomComplex.CohomologyClass.mk_zero\", \"groupCohomology.instPreservesZeroMorphismsRepCochainComplexModuleCatNatCochainsFunctor\", \"CategoryTheory.ShortComplex.hasHomology_of_preserves\", \"CategoryTheory.ShortComplex.hasRightHomology_of_preserves\"], \"digest\": \"7bf8c6721c782e0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "results": "{\"t\": \"2026-10-25T06:55:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.essImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImage\", \"CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage\", \"CategoryTheory.Functor.essImage.witness\", \"CategoryTheory.Functor.obj_mem_essImage\", \"CategoryTheory.Functor.EssSurj.mem_essImage\", \"CategoryTheory.Functor.EssSurj.mk\", \"CategoryTheory.Functor.toEssImage\", \"CategoryTheory.Functor.essImage.ofIso\"], \"digest\": \"a1dbd04fd41f719d\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a uniformizer Koszul complex of the image of a map of constructible integral sheaves is classical",
+   "results": "{\"t\": \"2026-10-25T06:55:48Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a uniformizer Koszul complex of the image of a map of constructible integral sheaves is classical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"Algebra.H1Cotangent\", \"Algebra.Extension.h1Cotangent\\u03b9_apply\", \"Algebra.H1Cotangent.isLocalizedModule\", \"Algebra.Extension.H1Cotangent\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.Extension.H1Cotangent.map\"], \"digest\": \"10ecae7a40fb68db\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these geometric comparison statements; generic homology and essential-image interfaces used in the proved assembly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageKoszulComparisonNonpositive",
+  "date": "2026-10-25",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Proof of compactification coherence: local comparison prerequisite, bounded abelian counit (original step 5).",
+   "via": [
+    "lem-sfb-supported-image-koszul-comparison-nonpositive"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BoundedClassicalAbelianCounit",
+  "file": "lean/Sheaf/Paper/BoundedClassicalAbelianCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.bounded_classical_abelian_counit",
+  "statement": "theorem bounded_classical_abelian_counit (X : Scheme.{u})\n    (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}))\n    (a b : ℤ) [K.IsGE a] [K.IsLE b]\n    (hK : ∀ q : ℤ, (comparisonUpperStar Ab.{u + 1} X).essImage\n      ((DerivedCategory.Plus.homologyFunctor _ q).obj K)) :\n    Nonempty ((comparisonUpperStar Ab.{u + 1} X).mapDerivedCategory.obj\n      ((comparisonLowerStar Ab.{u + 1} X).rightDerivedFunctor.obj K.obj) ≅ K.obj)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T095316-L-3353513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T095316-L-3353513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-diagram-tensor-pullback-shift-descent",
+ "kind": "statement",
+ "title": "Whole-system chain comparison and normalized derived pullback shift descent",
+ "statement": "For an arbitrary natural-number ring sequence A with maps δ, schemes X,Y, a morphism v:X→Y, a Pullback P presenting its geometric inverse image, a representative-normalized TensorPullback mu for P, and TensorConstraints TY,TX on Y and X as in [def-pur-diagram-pullback-shift-data], the following hold: ChainPullbackCoherence P (the bidegree summand equation and signed two-shift chain square), and TensorPullback.ShiftCoherence mu TY TX (the corresponding simultaneous-shift square intrinsically in the ordinary derived category). No existence of these presentations or tensor constraints is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), Tag 0FPT (lemma-symmetric-monoidal-derived); more-algebra.tex item-shift-tensor. Parent proof step 3 and pullback portion of 6."
+ },
+ "stmt_deps": [
+  "def-pur-diagram-pullback-shift-data"
+ ],
+ "proof": [
+  {
+   "text": "The canonical total comparison is the module pure-tensor comparison on each bidegree, followed by the target summand inclusion. It preserves bidegrees and coefficient transitions. For simultaneous shifts both routes multiply by (-1)^(bp); additivity and direct-sum extensionality give the chain square.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve both inputs on the whole site, then shift and tensor those models; their pullbacks are still resolving. Insert the normalizations of mu, TY and TX. The exact factorization commutes with shifts; naturality at chainShift cancels its components and the tensor representative isomorphisms, leaving the localized chain square just proved.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-tensor-additive-constraints",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both sides are natural transformations of derived bifunctors. Faithful restriction to resolving pairs extends equality to all inputs. Every representative map already belongs to the whole system category, so no evaluation, cartesianness or boundedness assumption is used.",
+   "uses": [
+    "lem-pur-derived-tensor-additive-constraints"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), Tag 0FPT (lemma-symmetric-monoidal-derived); more-algebra.tex item-shift-tensor. Parent proof step 3 and pullback portion of 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized derived tensor product on ringed site modules has coherent simultaneous integer shifts associator symmetry and unitors",
+   "results": "Eight results: presheaf monoidal structures, NatTrans.CommShift.associator, and module tensor facts. None gives this resolving-normalized diagram-site statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor comparison of an exact pullback functor commutes with total cochain shifts and preserves total tensor summands",
+   "results": "Eight hits in Mathlib/Algebra/Homology/BifunctorShift: single-slot shift maps and summand formulas. These supply chain ingredients, not the geometric presentation or normalized derived descent.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftUnitor.*shift|shift.*leftUnitor|mapHomologicalComplexCompIso",
+   "results": "13 hits: shift-functor unitors and mapHomologicalComplexCompIso in Additive.lean. No normalized derived-tensor/site presentation result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.DiagramPullbackMonoidalShiftModels",
+  "date": "2026-10-26",
+  "group": "F7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Maps-used sentence: primitive pullback and tensor identifications; retains original item steps 1-3 and the intrinsic-equality part of step 7; Whole-system chain comparison and normalized derived pullback shift descent",
+   "via": [
+    "lem-pur-diagram-pullback-monoidal-shift-models",
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.DiagramTensorPullbackShiftDescent",
+  "file": "lean/Sheaf/SixFunctors/DiagramTensorPullbackShiftDescent.lean",
+  "declaration": "WeilConjectures.DiagramPullbackShift.diagramTensorPullbackShiftDescent",
+  "statement": "theorem diagramTensorPullbackShiftDescent {X Y : Scheme.{u}} {v : X ⟶ Y} (P : Pullback A δ v) (mu : TensorPullback A δ P) (TY : TensorConstraints A δ Y) (TX : TensorConstraints A δ X) : ChainPullbackCoherence A δ P ∧ mu.ShiftCoherence A δ TY TX",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a9b2",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T205446-L-3251048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a9b2",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T205446-L-3251048",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean+node files vs reviewed head e47c86c6c2cd (byte-identical; only change record/report differ); item node vs earlier reviewer fix; reader gate: delivered modules + direct importer SystemTensorShiftCoherence compiled (exit 0)"
+ }
+}

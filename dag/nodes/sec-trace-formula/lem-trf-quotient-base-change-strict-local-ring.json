@@ -1,0 +1,150 @@
+{
+ "id": "lem-trf-quotient-base-change-strict-local-ring",
+ "kind": "statement",
+ "title": "Strict local rings after a quotient base change",
+ "statement": "Let $A$ be a commutative ring, $I\\subset A$ an ideal, $p:X\\to\\operatorname{Spec}A$ a morphism of schemes [def-pc-scheme, def-weil-affine-spectrum]. Let $Z=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ with projection $i:Z\\to X$ [def-pc-fibre-product]. Let $\\Omega$ be algebraically closed and $\\bar z:\\operatorname{Spec}\\Omega\\to Z$ be a geometric point [def-weil-geometric-point]. Put $\\bar w=i\\bar z$ and $H=\\mathcal O^{sh}_{X,\\bar w}$ [def-weil-pbc-strict-henselization-limit]. The structural morphism $\\operatorname{Spec}H\\to X\\to\\operatorname{Spec}A$ gives $\\alpha:A\\to H$. There is a canonical ring isomorphism $H/\\alpha(I)H\\simeq\\mathcal O^{sh}_{Z,\\bar z}$ whose composite with the quotient map equals the ring map induced by strict-henselization functoriality [lem-weil-pbc-strict-henselization-functoriality].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+  "place": "Tag 05WS (lemma-quotient-strict-henselization), and Tag 01JO (section-fibre-products)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "The base change of a quotient spectrum is a closed immersion. The closed-immersion strict-localization comparison identifies Spec of the strict local ring of Z with Z times_X Spec H, through the lift whose second leg is the canonical strict-local morphism.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-trf-closed-immersion-strict-localization-cartesian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine quotient-base-change model to the affine morphism Spec H to X (the model does not require an open immersion). Compose the two scheme isomorphisms. Full faithfulness of Spec gives the ring equivalence in the opposite direction. The affine projection equation and the second projection of the lift identify the composite with the quotient map with the prescribed functorial ring map.",
+   "uses": [
+    "lem-trf-quotient-base-change-affine-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-trf-quotient-base-change-affine-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+  "place": "Tag 05WS (lemma-quotient-strict-henselization), and Tag 01JO (section-fibre-products)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The base change of Spec of a ring quotient is Spec of the quotient by the extended ideal",
+   "results": "8 hits including AlgebraicGeometry.pullbackSpecIso. This supplies the affine fibre-product formula but not the pasted quotient/projection assertion. Local source search found CommRingCat.isPushout_quotient, which the Lean proof uses.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base change of a closed subscheme Spec A/I along a morphism Spec D to Spec A is Spec of D divided by the extended ideal",
+   "results": "8 hits including closed-immersion base change, liftQuotient, spec_of_quotient_mk, IdealSheafData.comapIso and IsClosedImmersion.Spec_iff. None is the full stated arbitrary-affine-morphism projection equation.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\", \"IsPullback\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotIdealMapEquivTensorQuot|isPullback_SpecMap_of_isPushout",
+   "results": "14 hits including AlgebraicGeometry.isPullback_SpecMap_of_isPushout (Mathlib/AlgebraicGeometry/Pullbacks.lean:794) and Algebra.TensorProduct.quotIdealMapEquivTensorQuot (Mathlib/RingTheory/TensorProduct/Quotient.lean:51). Used through the proved source-library quotient-pushout theorem.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the strict local ring of a closed subscheme is the quotient of the ambient strict henselization by the extended ideal",
+   "results": "8 hits about ordinary scheme stalks, residue fields and stalkClosedPointIso. No strict-henselization quotient statement. The existing project Cartesian theorem is used instead.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothStrictLocalClosedFibreModel",
+  "date": "2026-10-26",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Re-split of lem-trf-smooth-geometric-stalk-algebra: old step 4 (closed fibre as a smooth residue-field strict local ring). Stage-3 refinement: closed-fibre model old step 4: use the actual Cartesian comparison to obtain the quotient map equation.",
+   "via": [
+    "lem-trf-smooth-strict-local-closed-fibre-model",
+    "lem-trf-smooth-geometric-stalk-algebra",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuotientBaseChangeStrictLocalRing",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuotientBaseChangeStrictLocalRing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.quotient_base_change_strict_local_ring",
+  "statement": "theorem quotient_base_change_strict_local_ring {X : Scheme.{u}} (A : CommRingCat.{u})\n    (p : X ⟶ Spec A) (I : Ideal A)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (z : Spec (.of Ω) ⟶ pullback p (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :\n    ∃ e : (strictHenselizationRing (z ≫ pullback.fst _ _) ⧸\n        Ideal.map (Spec.preimage\n          (strictHenselizationStructuralMap (z ≫ pullback.fst _ _) ≫ p)).hom I) ≃+*\n        strictHenselizationRing z,\n      e.toRingHom.comp (Ideal.Quotient.mk _) =\n        (Spec.preimage (strictHenselizationMap (pullback.fst _ _) z)).hom",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T105332-L-1160430",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T105332-L-1160430",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

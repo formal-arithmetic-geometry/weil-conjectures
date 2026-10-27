@@ -1,0 +1,124 @@
+{
+ "id": "lem-zl-native-quasi-finite-punctual-weights",
+ "kind": "statement",
+ "title": "Existing native quasi-finite punctual weight calculation",
+ "statement": "Let k₀ be a finite field, l a different prime, ι : PadicAlgCl l →+* ℂ, and f : X → Y a separated, locally quasi-finite, locally finite-type, quasi-compact morphism over k₀. Assume Y is locally finite type, quasi-compact and quasi-separated over k₀. For a native Weil sheaf F on X, R⁰f!F preserves both punctual upper weight bounds and punctual purity of any real weight w [def-weil-punctual-weights]. No absolute separatedness of X or Y, and no surjectivity of ι, is needed.",
+ "source": {
+  "document": "lean/WeilConjectures/DeligneLaumon/Reduction/QuasiFiniteWeights.lean",
+  "place": "HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite and IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite; source proofs already complete"
+ },
+ "stmt_deps": [
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use compact-support base change and composition from [prop-functor-package] at Spec κ(y). The fibre is finite, so its compactly supported cohomology is concentrated in degree zero. The Frobenius trace formula [thm-trf-grothendieck-lefschetz-qbar] on that fibre determines its reverse characteristic polynomial as the product of the expanded local reverse characteristic polynomials. This is implemented, without local sorry, by exists_charpolyRev_stalk_higherLowerShriek_zero in QuasiFiniteStalk.lean.",
+   "uses": [
+    "prop-functor-package",
+    "thm-trf-grothendieck-lefschetz-qbar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The root of a factor expanded by e gives a nonzero e and a closed x above y for which β^e is an eigenvalue of F_x and deg(x)=deg(y)*e. This is the proved source theorem exists_hasEigenvalue_stalk_of_hasEigenvalue_stalk_higherLowerShriek_zero. Hence q_x=q_y^e. The upper bound (respectively purity) in [def-weil-punctual-weights] gives ‖ι(β)‖^e ≤ (q_y^(w/2))^e (respectively equality); injectivity and order reflection of positive integral powers on nonnegative real numbers gives the result. The source proofs use pow_le_natCast_pow_rpow_iff and pow_eq_natCast_pow_rpow_iff. Zero fibres have no eigenvalues.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "prop-functor-package",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "def-weil-punctual-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/DeligneLaumon/Reduction/QuasiFiniteWeights.lean",
+  "place": "HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite and IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite; source proofs already complete"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HasWeightsAtMost.*lowerStar|lowerStar_of_isFinite",
+   "results": "; ",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match for native Weil sheaf weights; source library contains complete proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "HasWeightsAtMost",
+   "results": "loogle: unknown identifier 'HasWeightsAtMost'; ",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match for native Weil sheaf weights; source library contains complete proofs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite pushforward of Weil sheaves preserves punctual purity and upper weight bounds",
+   "results": "; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits, TopCat.Sheaf.pushforward_sheaf_of_sheaf, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts, SheafOfModules.bijective_pushforwardSections, CategoryTheory.presheafIsFinite_of_epi, CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp, CategoryTheory.Presieve.FamilyOfElements.Compatible.functorPushforward",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match for native Weil sheaf weights; source library contains complete proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi finite direct image with compact support preserves upper Frobenius weight bounds",
+   "results": "; RingHom.QuasiFinite, Algebra.QuasiFinite.recOn, Algebra.QuasiFinite.finite_fiber, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme, Algebra.QuasiFinite.casesOn, Algebra.QuasiFinite.rec, QPF.SuppPreservation, Algebra.QuasiFiniteAt.of_surjectiveOnStalks",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match for native Weil sheaf weights; source library contains complete proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.Reduction.FinitePushforwardPunctual",
+  "date": "2026-10-22",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-finite-pushforward-punctual",
+   "place": "Reuse the already-proved native source calculation, avoiding a cycle through the planned parent lem-zl-quasi-finite.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-quasifinite",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights",
+  "declaration": "AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite",
+   "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite"
+  ],
+  "statement": "theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}\n    {F : WeilSheaf k₀ l X} (h : F.HasWeightsAtMost ι w) :\n    ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).HasWeightsAtMost ι w",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-22",
+  "note": "Existing source declarations only: no Lean declaration is added or duplicated. The displayed signature is verbatim with the section variables in QuasiFiniteWeights.lean."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261022T143632-L-1259111",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261022T143632-L-1259111",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

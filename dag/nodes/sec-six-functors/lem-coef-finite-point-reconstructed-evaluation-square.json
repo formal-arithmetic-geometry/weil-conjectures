@@ -1,0 +1,274 @@
+{
+ "id": "lem-coef-finite-point-reconstructed-evaluation-square",
+ "kind": "statement",
+ "title": "Signed evaluation square for reconstructed finite-point Hom",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$, a uniformizer $\\varpi$, and $n\\ge1$. Put $A=R/\\varpi^n$ [def-weil-l-adic-coefficient-extension], $s=\\operatorname{Spec}k$ and $B=A_s$ on the small pro-etale site [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf].\nLet $C\\in D^b_{ctf}(s,A)$ [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude], $c=\\Gamma(s,C)$ [def-weil-finite-coefficient-point], and let $V\\in D(s_{\\mathrm{proet}},B)$ have a specified isomorphism $\\alpha:V\\xrightarrow{\\sim}B$. Use derived internal Hom and signed Hom complexes [def-pur-derived-internal-hom, def-pur-hom-complex]. Let $e_C:Lc\\to C$ and $Q_{C,B}$ be the actual reconstructed Hom comparison of [lem-coef-finite-point-reconstructed-hom-model]. Put $H=R\\mathcal Hom_B(C,V)$ and\n$$\\beta_{C,\\alpha}=Q_{C,B}\\circ\\Gamma R\\mathcal Hom_B(C,\\alpha):\\Gamma H\\longrightarrow R\\operatorname{Hom}_A(c,A),$$\nusing $\\Gamma B=A$ by constant values. Then $H\\in D^b_{ctf}(s,A)$. Let $\\mu:\\Gamma H\\otimes_A^Lc\\xrightarrow{\\sim}\\Gamma(H\\otimes_B^LC)$ be the inverse of the canonical point-fibre tensor comparison [lem-sf-point-fibre-derived-tensor]. With the same unit comparison, the equality of pairings in $D(A)$ is\n$$\\operatorname{ev}_c\\circ(\\beta_{C,\\alpha}\\otimes1_c)=\\Gamma(\\alpha\\circ\\operatorname{ev}_{C,V})\\circ\\mu.$$\nOn a K-flat representative $P$ of $c$ and a K-injective representative of $B$, the input-first evaluation on homogeneous $x\\in P^i$ and $h$ of degree $j$ is $(-1)^{ij}h(1\\otimes x)$ on both sides; the Hom-first formula is obtained by the Koszul braiding. For fixed $(V,\\alpha)$ and every derived morphism $f:C\\to C'$, the comparisons satisfy\n$$R\\operatorname{Hom}_A(\\Gamma f,A)\\,\\beta_{C',\\alpha}=\\beta_{C,\\alpha}\\,\\Gamma R\\mathcal Hom_B(f,V).$$\nThis includes morphisms represented by inverses of quasi-isomorphisms, and both the pairing equality and this square use the specified tensor and unit maps. Equivalently, $\\beta_{C,\\alpha}$ is the coefficient tensor-Hom transpose of this specified pairing, with transposition taken in the closed tensor-Hom structure [def-coef-ringed-tensor-hom-model].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: the displayed point-duality identification uses signed evaluation; reconstructed evaluation and derived naturality (old item steps 4 and 5)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-coefficient-point",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-coef-finite-point-reconstructed-hom-model",
+  "lem-sf-point-fibre-derived-tensor",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "The unit $B=A_s$, concentrated in degree zero, is constructible and has Tor amplitude $[0,0]$: it is the rank-one constant module and $B\\otimes_B^LM=M$. Hence $V\\simeq B$ is also in $D^b_{ctf}$. Apply [cor-weil-finite-constructible-hom] on $X=s$, with $d=0$, to $(C,V)$ and $(C,B)$. It puts both $H=R\\mathcal Hom_B(C,V)$ and $F=R\\mathcal Hom_B(C,B)$ in $D^b_{ctf}$. Thus the tensor comparison used in the statement is defined.",
+   "uses": [
+    "cor-weil-finite-constructible-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: the displayed point-duality identification uses signed evaluation; reconstructed evaluation and derived naturality (old item steps 4 and 5)."
+   }
+  },
+  {
+   "text": "Use [lem-coef-finite-point-reconstructed-hom-model] for the exact adjunction $L\\dashv\\Gamma$, its unit $u_c$ and isomorphism $e_C$, and its flat-term K-flat and K-injective models. Apply the finite case of [lem-pod-point-derived-hom-evaluation] to $c$ and $B\\to J$. Its comparison is precisely $q_{c,B}$: both use $q(h)(x)=h(1\\otimes x)$ and the same derived representative maps. It identifies evaluation for $Lc$ with coefficient evaluation. By [lem-sf-point-ringed-evaluation-model], the inverse sections-tensor comparison is the section tensor map, its unit is $\\Gamma B=A$, and its localization is the canonical point pullback comparison. The comparison of [lem-sf-point-fibre-derived-tensor] is canonical in the finite sense of [def-sf-point-fibre-tensor-finite-models]: on K-flat models it is the chain isomorphism sending a section tensor generator $x\\otimes y$ to the tensor of the final-object sections, which is the map $b$ above. Therefore the balancing map in this evaluation identity is the inverse of [lem-sf-point-fibre-derived-tensor], with $c$ identified with $\\Gamma Lc$ by $u_c$, rather than an independently chosen tensor isomorphism.",
+   "uses": [
+    "lem-coef-finite-point-reconstructed-hom-model",
+    "lem-pod-point-derived-hom-evaluation",
+    "lem-sf-point-ringed-evaluation-model",
+    "lem-sf-point-fibre-derived-tensor",
+    "def-sf-point-fibre-tensor-finite-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: the displayed point-duality identification uses signed evaluation; reconstructed evaluation and derived naturality (old item steps 4 and 5)."
+   }
+  },
+  {
+   "text": "Write $T=R\\mathcal Hom_B(e_C,B):F\\to R\\mathcal Hom_B(Lc,B)$. The closed adjunction supplied by [lem-sf-ringed-derived-tensor-hom-adjunction], with evaluation as in [def-coef-ringed-tensor-hom-model], gives its counit naturality identity\n$$\\operatorname{ev}_{Lc,B}(T\\otimes1_{Lc})=\\operatorname{ev}_{C,B}(1_F\\otimes e_C).$$\nPrecompose the evaluation identity of step 2 by $\\Gamma T\\otimes1_c$. Naturality of the specified tensor comparison rewrites its right side as\n$$\\Gamma(\\operatorname{ev}_{C,B})\\,\\mu_{F,C}(1_{\\Gamma F}\\otimes\\Gamma(e_C)u_c).$$\nThe triangle identity $\\Gamma(e_C)u_c=1_c$ of [lem-coef-finite-point-reconstructed-hom-model] removes the last factor. Since $Q_{C,B}=q_{c,B}\\Gamma T$, this proves\n$$\\operatorname{ev}_c(Q_{C,B}\\otimes1_c)=\\Gamma(\\operatorname{ev}_{C,B})\\mu_{F,C}.$$\nOnly naturality and the adjunction triangle are used in this substitution; no new reconstruction or evaluation map is selected.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-point-fibre-derived-tensor",
+    "lem-coef-finite-point-reconstructed-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: the displayed point-duality identification uses signed evaluation; reconstructed evaluation and derived naturality (old item steps 4 and 5)."
+   }
+  },
+  {
+   "text": "Put $a=R\\mathcal Hom_B(C,\\alpha):H\\to F$. Evaluation naturality in its target, for the closed structure of [lem-sf-ringed-derived-tensor-hom-adjunction, def-coef-ringed-tensor-hom-model], says $\\operatorname{ev}_{C,B}(a\\otimes1_C)=\\alpha\\operatorname{ev}_{C,V}$. Precompose step 3 by $\\Gamma a\\otimes1_c$ and use naturality of [lem-sf-point-fibre-derived-tensor]. This gives exactly the stated pairing equality with $\\beta_{C,\\alpha}=Q_{C,B}\\Gamma a$ and $\\mu=\\mu_{H,C}$. On the representatives of step 2, after applying $a$ and $T$, [lem-pod-point-derived-hom-evaluation] gives the input-first value $(-1)^{ij}h(1\\otimes x)$. The braiding in [lem-sf-point-ringed-evaluation-model] is $x\\otimes h\\mapsto(-1)^{ij}h\\otimes x$; hence the Hom-first convention has the corresponding braided value. The same unit map $a\\mapsto a\\cdot1$ is used throughout.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-point-fibre-derived-tensor",
+    "lem-pod-point-derived-hom-evaluation",
+    "lem-sf-point-ringed-evaluation-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: the displayed point-duality identification uses signed evaluation; reconstructed evaluation and derived naturality (old item steps 4 and 5)."
+   }
+  },
+  {
+   "text": "For $f:C\\to C'$ in the stated constructible finite-Tor domain, naturality of $Q$ for all derived morphisms in [lem-coef-finite-point-reconstructed-hom-model] gives\n$$R\\operatorname{Hom}_A(\\Gamma f,A)Q_{C',B}=Q_{C,B}\\Gamma R\\mathcal Hom_B(f,B).$$\nBifunctoriality of [def-pur-derived-internal-hom] gives\n$$R\\mathcal Hom_B(f,B)R\\mathcal Hom_B(C',\\alpha)=R\\mathcal Hom_B(C,\\alpha)R\\mathcal Hom_B(f,V).$$\nCompose these two equalities to obtain the displayed naturality square for $\\beta$. These are equalities of derived functors, so they apply to inverse images of quasi-isomorphisms as well; no assertion that every derived morphism is a chain map is needed.",
+   "uses": [
+    "lem-coef-finite-point-reconstructed-hom-model",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: the displayed point-duality identification uses signed evaluation; reconstructed evaluation and derived naturality (old item steps 4 and 5)."
+   }
+  },
+  {
+   "text": "Finally, the coefficient closed tensor-Hom adjunction of [lem-sf-ringed-derived-tensor-hom-adjunction], specialized to the one-object ringed site with ring $A$, is a bijection on morphism sets. Its inverse sends $b:\\Gamma H\\to R\\operatorname{Hom}_A(c,A)$ to $\\operatorname{ev}_c(b\\otimes1_c)$, by [def-coef-ringed-tensor-hom-model]. Step 4 identifies that inverse image for $b=\\beta_{C,\\alpha}$ with the specified pairing. Applying the bijection proves the claimed transpose characterization and its uniqueness.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: the displayed point-duality identification uses signed evaluation; reconstructed evaluation and derived naturality (old item steps 4 and 5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-weil-finite-constructible-hom",
+  "lem-coef-finite-point-reconstructed-hom-model",
+  "lem-pod-point-derived-hom-evaluation",
+  "lem-sf-point-ringed-evaluation-model",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-derived-internal-hom",
+  "def-sf-point-fibre-tensor-finite-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: explicit assembly of the point-extension evaluation comparison, reconstruction counit and closed tensor-Hom naturality; checked against Stacks sites-cohomology.tex Tags 0A8X, 0A90 and 08J9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "transport derived internal Hom evaluation along adjunction counit constant realization sections tensor comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.ihomPoints_apply\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite) (x : ↑((A ⟹ B).val.obj (Opposite.op S))),\\n  (LightCondensed.ihomPoints R A B S) x =\\n    CategoryTheory.MonoidalClosed.uncurry\\n      (((LightCondensed.freeForgetAdjunction R).homEquiv ((CategoryTheory.coherentTopology Ligh\", \"doc\": \"For any commutative ring $ R $, light condensed $ R $-modules $ A $ and $ B $, and a light profinite space $ S $, the points of the internal hom-object $ [A, B] $ at $ S $ are given by uncurrying the \"}\n  {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A B : LightCondMod R) →\\n      (S : LightProfinite) →\\n        ↑((A ⟹ B).val.obj (Opposite.op S)) ≃\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_apply\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite)\\n  (x : CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R A B S).symm x =\\n    (CategoryTheory.coherentTopology LightProfinite).yonedaEquiv\\n  \", \"doc\": \"For any objects $A, B$ in the category of light condensed $R$-modules and a light profinite space $S$, the inverse of the internal hom points map $\\\\text{ihomPoints}_R(A, B, S)$ evaluated at a morphism\"}\n  {\"name\": \"LightCondensed.ihom_map_val_app\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B P : LightCondMod R) (S : LightProfinite) (e : A ⟶ B)\\n  (x : ↑((P ⟹ A).val.obj (Opposite.op S))),\\n  (CategoryTheory.ConcreteCategory.hom (((CategoryTheory.ihom P).map e).val.app (Opposite.op S))) x =\\n    (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryT\", \"doc\": \"For any light condensed $ R $-modules $ A $, $ B $, $ P $, a light profinite space $ S $, a morphism $ e: A \\to B $, and an element $ x $ in the hom-set $ [P, A](S) $, the application of the internal h\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"CategoryTheory.Over.coreHomEquivToOverSections\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.CartesianMonoidalCategory C] →\\n      (I : C) →\\n        [inst_2 : CategoryTheory.Closed I] →\\n          [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.curryRightUnitorHom I)] →\\n            [Cate\", \"doc\": \"In a Cartesian closed category with chosen pullbacks, this defines a natural equivalence between hom-sets $\\\\mathrm{Hom}_{\\\\mathcal{C}/I}(A \\\\times I, X)$ and $\\\\mathrm{Hom}_{\\\\mathcal{C}}(A, \\\\Gamma(X))$ f\"}\n  {\"name\": \"CategoryTheory.FunctorToTypes.adj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorToTypes\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (F : CategoryTheory.Functor C (Type (max w v u))) →\\n      CategoryTheory.MonoidalCategory.tensorLeft F ⊣ CategoryTheory.FunctorToTypes.rightAdj F\", \"doc\": \"The functor tensoring with $ F $ on the left is left adjoint to the Hom-functor from $ F $, establishing the Hom-tensor adjunction in the category of functors from $ \\\\mathcal{C} $ to $ \\\\mathrm{Type}\\\\,\"}\n  {\"name\": \"CategoryTheory.Types.tensorProductAdjunction\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Types\", \"type\": \"(X : Type v₁) → CategoryTheory.MonoidalCategory.tensorLeft X ⊣ CategoryTheory.coyoneda.obj (Opposite.op X)\", \"doc\": \"The tensor product with a type $X$ is left adjoint to the internal hom functor from $X$ to another type, establishing an adjunction between the product functor $X \\times -$ and the exponential functor \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic currying and Cartesian closed-functor comparisons do not give this non-Cartesian derived tensor evaluation square on reconstructed pro-etale objects or its signed model."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] : (CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X) → (Y ⟶ A ⟹ X)\", \"doc\": \"Currying in a monoidal closed category.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_injective\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] : Function.Injective CategoryTheory.MonoidalClosed.curry\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.uncurry_curry\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] (f : CategoryTheory.MonoidalCategoryStruct.tensorObj A X ⟶ Y) : CategoryTheory.MonoidalClosed.uncurry (CategoryTheory.MonoidalClosed.curry f) = f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_uncurry\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] (f : X ⟶ A ⟹ Y) : CategoryTheory.MonoidalClosed.curry (CategoryTheory.MonoidalClosed.uncurry f) = f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.id_eq\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (x : C) [CategoryTheory.Closed x] : CategoryTheory.MonoidalClosed.id x = CategoryTheory.MonoidalClosed.curry (CategoryTheory.MonoidalCategoryStruct.rightUnitor x).hom\", \"doc\": \"Unfold the definition of `id`.\\nThis exists to streamline the proofs of `MonoidalClosed.id_comp` and `MonoidalClosed.comp_id`\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_eq_iff\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] (f : CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X) (g : Y ⟶ A ⟹ X) : CategoryTheory.MonoidalClosed.curry f = g ↔ f = CategoryTheory.MonoidalClosed.uncurry g\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.eq_curry_iff\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y : C} [CategoryTheory.Closed A] (f : CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X) (g : Y ⟶ A ⟹ X) : g = CategoryTheory.MonoidalClosed.curry f ↔ CategoryTheory.MonoidalClosed.uncurry g = f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.comp_eq\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (x y z : C) [CategoryTheory.Closed x] [CategoryTheory.Closed y] : CategoryTheory.MonoidalClosed.comp x y z = CategoryTheory.MonoidalClosed.curry (CategoryTheory.MonoidalClosed.compTranspose x y z)\", \"doc\": \"Unfold the definition of `comp`.\\nThis exists to streamline the proof of `MonoidalClosed.assoc`\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_natural_left\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X X' Y : C} [CategoryTheory.Closed A] (f : X ⟶ X') (g : CategoryTheory.MonoidalCategoryStruct.tensorObj A X' ⟶ Y) : CategoryTheory.MonoidalClosed.curry (CategoryTheory.CategoryStruct.comp (CategoryTheory.Monoidal\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_natural_right\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {A X Y Y' : C} [CategoryTheory.Closed A] (f : CategoryTheory.MonoidalCategoryStruct.tensorObj A X ⟶ Y) (g : Y ⟶ Y') : CategoryTheory.MonoidalClosed.curry (CategoryTheory.CategoryStruct.comp f g) = CategoryTheory.Cat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.curry_id_eq_coev\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (A X : C) [CategoryTheory.Closed A] : CategoryTheory.MonoidalClosed.curry (CategoryTheory.CategoryStruct.id (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((CategoryTheory.Functor.id C).obj X))) = (CategoryTheor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (A X : C) {Y : C} [CategoryTheory.Closed A] (g : CategoryTheory.MonoidalCategoryStruct.tensorObj A Y ⟶ X) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft A (CategoryTheory.Mon\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic currying and Cartesian closed-functor comparisons do not give this non-Cartesian derived tensor evaluation square on reconstructed pro-etale objects or its signed model."
+  },
+  {
+   "tool": "grep",
+   "query": "curry.*natur|natur.*curry|ihom.*ev",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic currying and Cartesian closed-functor comparisons do not give this non-Cartesian derived tensor evaluation square on reconstructed pro-etale objects or its signed model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact sections functor comparison internal Hom evaluation transpose reconstruction counit signed Hom complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.eval\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \"(i : ι) : HomologicalComplex V c ⥤ V\", \"doc\": \"The functor that maps a homological complex $ C $ in category $ V $ with shape $ c $ to its object $ C_i $ at index $ i $, and maps a chain map $ f : C \\to D $ to the component morphism $ f_i : C_i \\to \"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply\", \"module\": \"Mathlib.Algebra.Homology.Double\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] {ι : Type u_2} (c : ComplexShape ι) (i : ι) [inst_3 : DecidableEq ι]\\n  (hi : ∀ (j : ι), ¬c.Rel i j) (X : C) {K : HomologicalComplex C \", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms, index type $\\\\iota$, complex shape $c$, and index $i \\\\in \\\\iota$ with no outgoing relations, the composition of the evaluation functor at $i$ with the C\"}\n  {\"name\": \"CategoryTheory.ShortComplex.FunctorEquivalence.functor\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence\", \"type\": \": ShortComplex (J ⥤ C) ⥤ J ⥤ ShortComplex C\", \"doc\": \"The functor constructs an equivalence between the category of short complexes of functors $\\\\mathcal{J} \\\\to \\\\mathcal{C}$ and the functor category $\\\\mathcal{J} \\\\to \\\\text{ShortComplex}(\\\\mathcal{C})$. For\"}\n  {\"name\": \"HomologicalComplex.opCounitIso\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \": opInverse V c ⋙ opFunctor V c ≅ 𝟭 (HomologicalComplex Vᵒᵖ c.symm)\", \"doc\": \"The natural isomorphism between the composition of the opInverse and opFunctor functors for homological complexes in opposite categories and the identity functor on homological complexes with symmetri\"}\n  {\"name\": \"HomologicalComplex.opEquivalence_counitIso\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \"∀ {ι : Type u_1} (V : Type u_2) [inst : CategoryTheory.Category.{v_1, u_2} V] (c : ComplexShape ι)\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V],\\n  (HomologicalComplex.opEquivalence V c).counitIso = HomologicalComplex.opCounitIso V c\", \"doc\": \"The counit isomorphism establishes a natural isomorphism between the composition of the inverse and forward opposite functors for homological complexes and the identity functor on complexes with symme\"}\n  {\"name\": \"CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.counitIso\", \"module\": \"Mathlib.CategoryTheory.Idempotents.HomologicalComplex\", \"type\": \": inverse ⋙ functor ≅ 𝟭 (HomologicalComplex (Karoubi C) c)\", \"doc\": \"The composition of the inverse equivalence functor and the forward functor for Karoubi homological complexes is naturally isomorphic to the identity functor on the category of homological complexes in\"}\n  {\"name\": \"CategoryTheory.ShortComplex.FunctorEquivalence.counitIso\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence\", \"type\": \": inverse J C ⋙ functor J C ≅ 𝟭 _\", \"doc\": \"The natural isomorphism witnessing the counit of the equivalence between the category of short complexes of functors $\\\\mathcal{J} \\\\to \\\\mathcal{C}$ and the functor category $\\\\mathcal{J} \\\\to \\\\text{Short\"}\n  {\"name\": \"HomologicalComplex.unopEquivalence_counitIso\", \"module\": \"Mathlib.Algebra.Homology.Opposite\", \"type\": \"∀ {ι : Type u_1} (V : Type u_2) [inst : CategoryTheory.Category.{v_1, u_2} V] (c : ComplexShape ι)\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V],\\n  (HomologicalComplex.unopEquivalence V c).counitIso = HomologicalComplex.unopCounitIso V c\", \"doc\": \"The counit isomorphism of the equivalence between the opposite category of homological complexes in $\\\\mathcal{V}^\\\\text{op}$ with shape $c$ and homological complexes in $\\\\mathcal{V}$ with symmetric sha\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic currying and Cartesian closed-functor comparisons do not give this non-Cartesian derived tensor evaluation square on reconstructed pro-etale objects or its signed model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed monoidal functor Hom comparison counit reconstruction evaluation compatibility Koszul sign derived category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MonoidalClosedFunctor.comparison_iso\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {D : Type u'} {inst_1 : CategoryTheory.Category.{v, u'} D}\\n  {inst_2 : CategoryTheory.CartesianMonoidalCategory C} {inst_3 : CategoryTheory.CartesianMonoidalCategory D}\\n  {F : CategoryTheory.Functor C D} {inst_4 : CategoryTheory.MonoidalClosed\", \"doc\": \"Given a product-preserving functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between closed monoidal categories and an object $ A \\\\in \\\\mathcal{C} $, the natural transformation arising from the adjunction $ \"}\n  {\"name\": \"CategoryTheory.coev_expComparison\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) [inst_4 : CategoryTheory.MonoidalClosed\", \"doc\": \"For a product-preserving functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between closed monoidal categories and objects $A, B \\\\in \\\\mathcal{C}$, the composition of $F$ applied to the coevaluation map $\\\\eta_A\"}\n  {\"name\": \"CategoryTheory.expComparison_ev\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) [inst_4 : CategoryTheory.MonoidalClosed\", \"doc\": \"For a product-preserving functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between closed monoidal categories and objects $A,B \\\\in \\\\mathcal{C}$, the evaluation morphism $\\\\text{ev}_{F(A),F(B)}$ composed with t\"}\n  {\"name\": \"CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [inst_\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be monoidal closed categories, and let $L: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ be a functor that is left adjoint to a functor $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$. For an obje\"}\n  {\"name\": \"CategoryTheory.expComparison\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u'} →\\n      [inst_1 : CategoryTheory.Category.{v, u'} D] →\\n        [inst_2 : CategoryTheory.CartesianMonoidalCategory C] →\\n          [inst_3 : CategoryTheory.CartesianMonoidalCategory D] →\\n            (F : CategoryTheory.Func\", \"doc\": \"Given a product-preserving functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between closed monoidal categories and an object $ A \\\\in \\\\mathcal{C} $, this establishes a natural equivalence between two constr\"}\n  {\"name\": \"CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [inst_\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be closed monoidal categories, and let $L: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ and $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a pair of adjoint functors, where $L$ is left adjoin\"}\n  {\"name\": \"CategoryTheory.Functor.closedCounit_app_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid\", \"type\": \"∀ {D : Type u} {C : Type u_1} [inst : CategoryTheory.Groupoid D] [inst_1 : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_2 : CategoryTheory.MonoidalCategory C] [inst_3 : CategoryTheory.MonoidalClosed C]\\n  (F G : CategoryTheory.Functor D C) (X : D),\\n  (F.closedCounit.app G).app X = (CategoryTheory.ih\", \"doc\": \"For any groupoid $\\\\mathcal{D}$, monoidal closed category $\\\\mathcal{C}$, functors $F, G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and object $X \\\\in \\\\mathcal{D}$, the component of the counit natural transformation\"}\n  {\"name\": \"CategoryTheory.Functor.closedCounit\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid\", \"type\": \"{D : Type u} →\\n  {C : Type u_1} →\\n    [inst : CategoryTheory.Groupoid D] →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_2 : CategoryTheory.MonoidalCategory C] →\\n          [inst_3 : CategoryTheory.MonoidalClosed C] →\\n            (F : CategoryTheory.Functor D C) →\\n            \", \"doc\": \"For a groupoid $\\\\mathcal{D}$ and a monoidal closed category $\\\\mathcal{C}$, this defines the counit natural transformation of the adjunction between the internal hom-functor $[F, -]$ and the left tenso\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic currying and Cartesian closed-functor comparisons do not give this non-Cartesian derived tensor evaluation square on reconstructed pro-etale objects or its signed model."
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison_ev|curry_natural|whiskerLeft_curry_ihom_ev_app",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\"]}; subdirectory Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sections adjunctions and generic currying do not state this reconstructed pro-etale derived evaluation square with the specified tensor/unit and Koszul model; expComparison_ev assumes Cartesian monoidal categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of reconstructed derived internal Hom agrees with coefficient tensor Hom transpose of signed evaluation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"transpose_dualTensorHom\", \"CategoryTheory.ihom.ihom_adjunction_counit\", \"FGModuleCat.FGModuleCatEvaluation\", \"CategoryTheory.presheafHomSectionsEquiv\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.sheafHomSectionsEquiv\", \"LightCondensed.ihomPoints_symm_comp\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sections adjunctions and generic currying do not state this reconstructed pro-etale derived evaluation square with the specified tensor/unit and Koszul model; expComparison_ev assumes Cartesian monoidal categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry_natural_left",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.curry_natural_left\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sections adjunctions and generic currying do not state this reconstructed pro-etale derived evaluation square with the specified tensor/unit and Koszul model; expComparison_ev assumes Cartesian monoidal categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom over an algebraically closed pro-etale point commutes with sections and signed evaluation through the actual constant reconstruction counit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Γevaluation_naturality_apply\", \"AlgebraicGeometry.Scheme.Γevaluation_naturality\", \"AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply\", \"AlgebraicGeometry.Scheme.evaluation_naturality\", \"AlgebraicGeometry.Scheme.evaluation_naturality_apply\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sections adjunctions and generic currying do not state this reconstructed pro-etale derived evaluation square with the specified tensor/unit and Koszul model; expComparison_ev assumes Cartesian monoidal categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact constant sheaf realization and sections adjunction compatibility of derived Hom evaluation and naturality for quasi-isomorphism inverses",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\", \"CategoryTheory.Sheaf.ΓHomEquiv\", \"CategoryTheory.Sheaf.ΓObjEquivHom_naturality\", \"CategoryTheory.Sheaf.H\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sections adjunctions and generic currying do not state this reconstructed pro-etale derived evaluation square with the specified tensor/unit and Koszul model; expComparison_ev assumes Cartesian monoidal categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-point-internal-hom-evaluation",
+  "date": "2026-10-22",
+  "group": "Q147"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second paragraph: finite derived mapping-complex adjunction transported through the point identification; Second sentence: the displayed point-duality identification uses signed evaluation; reconstructed evaluation and derived naturality (old item steps 4 and 5).",
+   "via": [
+    "lem-coef-finite-point-internal-hom-evaluation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-finite-point-reconstructed-evaluation-square",
+  "worker": "stage1",
+  "summary": "Reused existing finite-Hom preservation, normalized point-extension signed evaluation, actual point tensor models and the native closed adjunction. Wrote the reconstruction-counit cancellation and target-alpha/naturality calculations explicitly. No statement change and no new nodes. Checked the dependency closure has no path back to this item.",
+  "blueprint": "Realizes the second sentence of lem-pod-point-dualizing-complex.proof.md (point internal Hom is computed over coefficients), as used in the second paragraph of prop-coef-integral-dualizing through lem-coef-finite-point-internal-hom-evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-point-derived-hom-evaluation",
+    "why": "Generic exact point-extension calculation supplies the signed evaluation identity before reconstruction; no same-unit node supplies its representative formula."
+   },
+   {
+    "node": "lem-sf-point-ringed-evaluation-model",
+    "why": "Generic ringed-point tensor model identifies section tensor with the stipulated derived comparison, unit and Koszul braiding."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Canonical coefficient-point tensor comparison supplies the specific natural tensor map used in the statement and in the cancellation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-point-derived-hom-evaluation",
+  "lem-sf-point-ringed-evaluation-model",
+  "lem-sf-point-fibre-derived-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-c658824a9",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-c658824a9 (reviewer sub-agent of L); spot-checked: Read in full: the item, its six steps and every cited statement (cor-weil-finite-constructible-hom, lem-coef-finite-point-reconstructed-hom-model, lem-pod-point-derived-hom-evaluation, lem-sf-point-ringed-evaluation-model, lem-sf-point-fibre-derived-tensor with def-sf-point-fibre-tensor-finite-models/system/models, lem-sf-ringed-derived-tensor-hom-adjunction, def-coef-ringed-tensor-hom-model, def-pur-derived-internal-hom, def-weil-finite-coefficient-point), plus the main-20261015 lem-pod-point-dualizing-complex proof sentence ('R Hom at the point computed over the coefficient ring'). The statement is unchanged and there are no new nodes. Step 1: B and V≅B are in D^b_ctf, and the corollary applies with X=s, d=0 on the pro-étale site. Step 2: the two q maps agree (h↦(x↦h(1⊗x)), same unit a↦a·1), and lem-pod's hypotheses are exactly those supplied by the reconstructed-Hom model. Steps 3 and 4: I re-derived the extranaturality and target-naturality chases, the triangle identity Γ(e_C)u_c=1 and μ naturality; μ is applied only to D^b_ctf objects. The sign check is correct: Hom-first evaluation is a chain map for dh=d h-(-1)^j h d, so input-first gives (-1)^{ij}h(1⊗x). Step 5: the β square follows from Q's derived naturality composed with RHom bifunctoriality. Step 6: one-object specialization of the closed adjunction; the inverse transpose is ev_c(b⊗1). Small cases checked: C=B with α=1 or a unit multiple, C=0, C=B[1], n=1 and n>1. There is no cycle and no duplicate in the DAG. The three tool_uses (lem-pod-point-derived-hom-evaluation, lem-sf-point-ringed-evaluation-model, lem-sf-point-fibre-derived-tensor) are generic point and tensor models and are accepted. FIX (C4): step 2 identified lem-pod's balancing map with the inverse of the fibre tensor comparison only from the word 'canonical'. That identity is the finite canonicality of def-sf-point-fibre-tensor-finite-models (x⊗y ↦ tensor of final-object sections, which is b of the ringed model). Step 2 now cites it with one sentence, and proof_deps is updated. Advisory: the existence of a flat-term K-flat model of c rests on reconstructed-hom-model (lem-pc-source-module-kflat-resolution states it).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FinitePointReconstructedEvaluationSquare",
+  "declaration": "WeilConjectures.FinitePointEvaluation.finite_point_reconstructed_evaluation_square",
+  "declarations": [
+   "WeilConjectures.FinitePointEvaluation.reconstructedMap",
+   "WeilConjectures.FinitePointEvaluation.beta",
+   "WeilConjectures.FinitePointEvaluation.pairing",
+   "WeilConjectures.FinitePointEvaluation.pairingTranspose",
+   "WeilConjectures.FinitePointEvaluation.finite_point_reconstructed_evaluation_square"
+  ],
+  "file": "lean/Sheaf/Paper/FinitePointReconstructedEvaluationSquare.lean",
+  "statement": "theorem finite_point_reconstructed_evaluation_square (_hl : l ≠ D.p) (hobj : ∀ M : ModuleCat.{u + 1} (FinitePointHom.A l E (n + 1)), L.obj M = PointDerivedHom.extensionObject.{u, u} D.k (FinitePointHom.B D l E (n + 1)) (𝟙 _) M) (_hmap : ∀ {M N : ModuleCat.{u + 1} (FinitePointHom.A l E (n + 1))} (f : M ⟶ N), L.map f = eqToHom (hobj M) ≫ PointDerivedHom.extensionMorphism.{u, u} D.k (FinitePointHom.B D l E (n + 1)) (𝟙 _) f ≫ eqToHom (hobj N).symm) (_hex : PointDerivedHom.ExplicitAdjunction.{u, u} D.k (FinitePointHom.B D l E (n + 1)) (𝟙 _) L hobj adj) (_hq : FinitePointHom.Comparison D l E (n + 1) L hobj q) (_hrec : FinitePointHom.ReconstructedComparison D l E (n + 1) L (Nat.succ_le_succ (Nat.zero_le n)) adj q (fun C hC ↦ (hr C hC).1)) (S : PointFiniteTensorData D l E n) (_hsource : PointFiniteSourceConstraints D l E n S) (_hcanonical : PointFiniteTensorCanonical D l E n S) (V : DerivedCategory (FinitePointHom.Mod D l E (n + 1))) (α : V ≅ (finiteIntrinsicClosed l E (Spec (.of D.k)) n).monoidal.tensorUnit) : (∃ hH : ∀ C : finiteTorConstructibleCategory l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k)), finiteTorConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k)) ((FinitePointHom.H D l E (n + 1)).obj (op C.obj, V)), (∀ C, (beta D l E n L adj hr q S C V α ▷ (finitePointFibreTensorSource D l E n).obj C) ≫ DerivedCategory.perfectTraceEvaluation ((finitePointFibreTensorSource D l E n).obj C) = pairing D l E n S C V α (hH C)) ∧ (∀ C, beta D l E n L adj hr q S C V α = pairingTranspose D l E n S C V α (hH C))) ∧ (∀ (C C' : finiteTorConstructibleCategory l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k))) (f : C ⟶ C'), (FinitePointHom.G D l E (n + 1)).mapDerivedCategory.map ((FinitePointHom.H D l E (n + 1)).map (Prod.mkHom f.hom.op (𝟙 V))) ≫ beta D l E n L adj hr q S C V α = beta D l E n L adj hr q S C' V α ≫ (ordinaryModuleDerivedInternalHom (FinitePointHom.A l E (n + 1))).map (Prod.mkHom (((FinitePointHom.G D l E (n + 1)).mapDerivedCategory.map f.hom).op) (𝟙 _))) ∧ (∀ (C : finiteTorConstructibleCategory l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k))) (P : CochainComplex (ModuleCat.{u + 1} (FinitePointHom.A l E (n + 1))) ℤ) (_eP : DerivedCategory.Q.obj P ≅ (FinitePointHom.G D l E (n + 1)).mapDerivedCategory.obj C.obj) (_hP : ∀ F : CochainComplex (ModuleCat.{u + 1} (FinitePointHom.A l E (n + 1))) ℤ, F.Acyclic → (PointDerivedHom.moduleTotal F P).Acyclic) (_hflat : ∀ i : ℤ, Module.Flat (FinitePointHom.A l E (n + 1)) (P.X i)) (J : CochainComplex (FinitePointHom.Mod D l E (n + 1)) ℤ) [J.IsKInjective] (ι : (CochainComplex.singleFunctor (FinitePointHom.Mod D l E (n + 1)) 0).obj (SheafOfModules.unit (PointDerivedHom.ring.{u, u} D.k (FinitePointHom.B D l E (n + 1)))) ⟶ J) [QuasiIso ι] (qPJ : (PointDerivedHom.sectionComplex.{u, u} D.k (FinitePointHom.B D l E (n + 1)) (𝟙 _)).obj (PointDerivedHom.sheafHom.{u, u} D.k (FinitePointHom.B D l E (n + 1)) ((PointDerivedHom.extensionComplex.{u, u} D.k (FinitePointHom.B D l E (n + 1)) (𝟙 _) L adj).obj P) J) ≅ CochainComplex.moduleHomComplex P ((PointDerivedHom.sectionComplex.{u, u} D.k (FinitePointHom.B D l E (n + 1)) (𝟙 _)).obj J)), PointDerivedHom.IsComparison.{u, u} D.k (FinitePointHom.B D l E (n + 1)) (𝟙 _) L hobj adj P J qPJ → PointDerivedHom.EvaluationCompatible.{u, u} D.k (FinitePointHom.B D l E (n + 1)) (𝟙 _) L hobj adj P J qPJ)",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The positive exponent is indexed by n+1. Uses the exact normalized reconstruction data from FinitePointReconstructedHomModel, the fixed intrinsic closed structure and the canonical finite point tensor and unit maps. EvaluationCompatible retains both signed chain evaluations and their actual balancing square; the theorem also states the derived pairing, transpose and naturality for every derived morphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a55b5db6a",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Single module + item lean record only (other snapshot nodes identical to live; statement verbatim). Checked each clause: L/hobj/hmap/adj/hex/hr/q/hq/hrec mirror finite_point_reconstructed_hom_model (∃! q pins Q); S pinned by PointFiniteSourceConstraints+PointFiniteTensorCanonical; beta = Γ H(𝟙,α) ≫ reconstructedMap(counit e_C, q) ≫ RHom(c,S.unitIso); hH (H ∈ D^b_ctf) in the conclusion; pairing = tensorComparison.inv ≫ Γ(ev≫α) ≫ unitIso, with perfectTraceEvaluation = braid≫ihom.ev (Hom-first); naturality square for all derived f in the correct direction; transpose = curry(braid≫pairing), consistent; representative clause concludes the landed EvaluationCompatible (eB/balancing/eR pinned on generators with (-1)^{pj}). Edge cases n+1, C=0, shifts, universes OK. No hollow defs, sorry only in the theorem, docstrings/H8 present. Advisories: owner def nodes (def-sf-point-fibre-tensor-system, -finite-models, -finite-source-constraints, def-trf-categorical-trace) reached through theorem stmt_dep lem-sf-point-fibre-derived-tensor; stmt_deps date from stage 1 and are unchanged; flat-term K-flat convention as in lem-pod; curry+braiding rendering of the transpose. No recompile (no FIX); worker reports clean scompile."
+ }
+}

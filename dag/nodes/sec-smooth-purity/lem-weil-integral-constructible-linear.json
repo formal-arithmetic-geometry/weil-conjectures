@@ -25,6 +25,33 @@
  ],
  "proof": [
   {
+   "text": "For the legacy ambient interface, reuse integralScalarConstant and its finite-residue specification from lem-weil-integral-scalar-extension-well-defined. The ring-sheaf limit projections are jointly injective on sections. Check preservation of one, multiplication, zero and addition after every projection, where these are the ring laws of the quotient map followed by toSheafify. The naturality squares of the projections and toSheafify prove compatibility with restriction. This constructs the coefficient ring map to compatible global sections without identifying the completion with a discrete constant sheaf.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the global-section Hom module structure of def-pur-sheaf-modules-hom-module along the constructed coefficient ring map. Its component formula is definitionally multiplication by integralScalarConstant, and composition bilinearity follows from homLinear. On cochain complexes, extensionality and integralScalarChainAction_existsUnique identify the specified chain action with scalar times identity. Use the fully faithful whiskering universal property to identify integralScalarDerivedAction with the localized center endomorphism. Mathlib Localization.linear then gives the derived Hom action with exactly the required scalar formula. Two such linear structures coincide by Module.ext on every Hom, proving integralCoefficientLinear_existsUnique.",
+   "uses": [
+    "def-pur-sheaf-modules-hom-module",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-weil-linear-category",
+    "lem-weil-linear-abelian-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib Localization.functor_linear makes Q linear for this constructed action, and Shift.linear_of_localization gives linear integer shifts. The unique scalar characterization identifies the chosen integralCoefficientLinear with that action. For the legacy full subcategory use inherited Hom modules, its recorded triangulated closure and the inclusion commShiftIso. Transfer linearity across this isomorphism and reflect the scalar equation through the faithful inclusion. This proves integralConstructible_linear, integralCoefficientShift_linear and integralConstructibleShift_linear without changing their statements.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-linear-abelian-derived-category"
+   ],
+   "elementary": true
+  },
+  {
    "text": "Reuse the published canonical ambient structure integralCoefficientLinear on the definitionally identical scalarReductionSource. The theorem integralCoefficientLinear_existsUnique characterizes precisely its scalar action; Exists.choose_spec gives the constant-section formula for every ambient derived morphism. The constant-section construction and derived localization arguments of the original Steps 1-4 remain in that legacy interface rather than being repeated here.",
    "uses": [
     "def-weil-completed-integral-coefficients",
@@ -51,15 +78,18 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-integral-scalar-extension-well-defined",
   "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-modules-hom-module",
   "def-weil-linear-category",
+  "lem-weil-linear-abelian-derived-category",
   "def-weil-derived-complete-integral-detailed",
   "lem-weil-integral-constructible-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
-  "place": "V8 stage 3: reuse the canonical ambient action and shift statements already in IntegralConstructibleLinear, then prove inherited intrinsic shift linearity by the faithful linear inclusion and its commutation with shifts. No unit statement or step changes."
+  "place": "E6 stage 3: prove the four legacy IntegralConstructibleLinear holes by compatible constant sections, the existing global-section Hom action and Mathlib localization linearity. Preserve the existing intrinsic SfIntegralConstructibleLinear proof and active Lean attachment. Generic localization lemmas read in Mathlib/CategoryTheory/Localization/Linear.lean, Center/Localization.lean and Shift/Linear.lean; no unit statement or step changes."
  },
  "mathlib_searches": [
   {
@@ -134,7 +164,18 @@
   "item": "def-weil-rationalization-karoubi",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
@@ -223,13 +264,13 @@
   "note": "Statement, intrinsic dependency interfaces, canonical scalar action, docstrings, edge cases, and per-file compilation all checked successfully; no findings."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V8",
+  "group": "E6",
   "result": "pass",
-  "landing": "20261019T034332-L-422588",
-  "kind": "proof",
+  "landing": "20261025T060810-L-2373043",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

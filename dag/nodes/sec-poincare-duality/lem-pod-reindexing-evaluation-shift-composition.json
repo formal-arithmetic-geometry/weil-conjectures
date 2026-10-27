@@ -1,0 +1,281 @@
+{
+ "id": "lem-pod-reindexing-evaluation-shift-composition",
+ "kind": "statement",
+ "title": "Evaluation normalization and signed coherence of the reindexed Hom complex",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $B_{W,n}=(\\mathcal O_E/\\varpi^n)_W$, $R_W=\\lim_n B_{W,n}$ for a scheme $W$ [def-weil-l-adic-coefficient-extension, def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients]. Let $g:X\\xrightarrow{\\sim}Y$ be a scheme isomorphism, with $\\ell$ invertible on both schemes [def-weil-scheme-morphism-properties]. Put $F=g^{-1}$, with the coefficient identifications induced by all quotient projections. Use the coefficient-stage derived operations of [def-weil-derived-pullback-tensor-hom].\n\nFor $T_W=B_{W,n}$ or $R_W$ use ordinary ambient derived tensor and internal Hom, their K-flat representative model [def-coef-ringed-tensor-hom-model], and the product-Hom comparison $c^0$ of [lem-pod-reindexing-hom-resolution-model]. Let $\\mu^0:F(U\\otimes^L V)\\xrightarrow{\\sim}FU\\otimes^L FV$ be the total-tensor comparison. Then $c^0$ is the unique map with\n$$\\operatorname{ev}_{FM,FN}(1\\otimes c^0_{g;M,N})\\mu^0_{M,H(M,N)}=F(\\operatorname{ev}_{M,N}).$$\nOn flat-term K-flat representatives evaluation is the ordinary Hom-complex evaluation followed by inverse localized augmentation of the K-injective target. With factors $f\\otimes x$ its local formula is $f(x)$; reversing to $x\\otimes f$ uses the same Koszul symmetry on each side. The ordinary derived tensor-Hom transposition is normalized by this formula. For $b:M\\otimes^L L\\to N$ its transported transpose is $c^0_{g;M,N}F(b^\\sharp)$, namely the transpose of $F(b)(\\mu^0_{M,L})^{-1}$. These equalities are natural contravariantly in $M$ and covariantly in $N$.\n\nFor all integers $a,b$, the square of $c^0$ with the canonical signed comparison $H(M[a],N[b])\\cong H(M,N)[\\,b-a\\,]$ commutes, using the differential $d_{K[a]}=(-1)^a d_K$ and the degreewise identity shift comparison for $F$. This holds already for Hom complexes, with their standard reindexing and integer signs. For $h:Z\\xrightarrow{\\sim}X$, under the canonical monoidal pullback compositor one has\n$$c^0_{gh;M,N}=c^0_{h;FM,FN}\\,F_h(c^0_{g;M,N}).$$\nThe identity map gives the identity comparison. The tensor compositor is the canonical one of [lem-sfb-ringed-derived-monoidal-comparisons]; the equations concern this specified comparison, not an independently chosen equivalence.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1, 2 and 4: evaluation, transposition, signed shifts and automorphism composition; Stacks Tag 0GMX (sites-modules-remark-pullback-internal-hom), enhanced on Hom-complex representatives."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pod-reindexing-hom-resolution-model",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a Comparison and its evaluation equation from evaluated_comparison_exists. The presentation definitions are unchanged and re-exported from the data module.",
+   "uses": [
+    "def-pod-reindexing-coherence-data",
+    "lem-pod-reindexing-evaluated-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse closed transpose sends d to tensor(d,1) followed by evaluation. Cancel the invertible tensor comparison and use injectivity of this inverse equivalence to prove uniqueness among all arrows. For transpose transport, apply inverse transposition to both arrows, use tensor-comparison naturality and the evaluation equation, and cancel the tensor isomorphism. Both-variance naturality is already the naturality of the specified derived Hom comparison. These arguments build all EvaluationLaws fields.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply signed_shift_laws to the constructed comparison and to every other normalized comparison. This gives both signed-shift clauses of comparison_exists.",
+   "uses": [
+    "lem-pod-reindexing-signed-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the recorded Comparison presentation, the chain comparison is unique by its product projection formula, and the tensor-chain comparison is unique on the sheafified pure generators of every total summand. The derived-model formula then fixes the derived Hom comparison on every localized pair (QP,QI) with I K-injective. Replace an arbitrary second complex by its functorial K-injective resolution and use naturality and cancellation of the localized augmentation. Localization extensionality proves equality of the two natural comparisons. Similarly the tensor-model formula fixes the tensor comparison on K-flat pairs; take independent K-flat resolutions in both variables and apply localization extensionality. Therefore EvaluationLaws for the comparison supplied by comparison_exists transport to every normalized Comparison, proving evaluation_laws without a further existence assertion. Total-tensor extensionality is the proved coefficient_total_ext helper of the coefficient tensor-curry normalization module; it uses sheafification and the total-summand universal property.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-coefficient-tensor-curry-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The flat-term representative evaluation formula is proved from the one-sided chain transpose for the identity of the actual Hom complex. Postcompose by the inverse localized target augmentation and use counit naturality.",
+   "uses": [
+    "lem-sfb-hom-kflat-chain-transpose"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For composition take the site/tensor compositor from tensor_compositor_exists. The successive Hom comparison satisfies the composite evaluation equation by naturality of the second tensor comparison and the two evaluation equations. Uncurry both proposed Hom maps. Naturality of evaluation in the source and target, the tensor compositor square, and naturality of the compositor identify these uncurries. Cancel the invertible source tensor map and apply injectivity of the closed transpose. This proves the Hom equation for that very compositor, without an additional Hom-coherence assumption.",
+   "uses": [
+    "lem-pod-reindexing-tensor-compositor",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For identity take the site/tensor identification from tensor_identity_exists. Apply the same evaluation transport calculation with the identity functor, identity tensor comparison and identity Hom comparison. Uncurrying and the tensor identity square show that the specified comparison becomes the identity.",
+   "uses": [
+    "lem-pod-reindexing-tensor-identity",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Retain the proved symmetry argument: use the tensorChain pure-generator formula and the canonical signed chain swap, cancel tensorChain inverses and apply total-tensor generator extensionality. Localize on K-flat pairs using tensor_model and naturality of podReindexingDerivedFactors. Extend to arbitrary pairs using independent K-flat resolutions and naturality of both braidings.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-reindexing-coherence-data",
+  "lem-pod-reindexing-evaluated-comparison",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pod-reindexing-signed-shifts",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-pod-reindexing-tensor-compositor",
+  "lem-pod-reindexing-tensor-identity",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "K8 Lean assembly of evaluation uniqueness, transpose and naturality; Hom composition and identity by uncurrying. Four strictly smaller construction/shift steps remain as named theorem nodes. Existing representative evaluation and symmetry proofs are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an isomorphism of ringed sites the product Hom comparison respects pure tensor evaluation tensor Hom transposition signed shifts and pullback composition",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an isomorphism of ringed sites the product Hom comparison respects pure tensor evaluation tensor Hom transposition signed shifts and pullback composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, SheafOfModules.pullbackComp, AlgebraicGeometry.LocallyRingedSpace.isoOfSheafedSpaceIso, SheafOfModules.pullbackIso, AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso, CategoryTheory.sheafHom'Iso, PresheafOfModules.Monoidal.tensorHom, TensorProduct.rTensorHomToHomRTensor",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "(curry|uncurry|evaluation).*(naturality|map)|ihom.*(shift|comp)",
+   "results": "25 hits: Mathlib/Algebra/Lie/TensorProduct.lean, Mathlib/Logic/Function/Defs.lean, Mathlib/Algebra/Lie/Weights/Basic.lean, Mathlib/Algebra/Module/LinearMap/Defs.lean, Mathlib/Algebra/Category/FGModuleCat/Basic.lean, Mathlib/Algebra/Category/FGModuleCat/Basic.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived sheaf Hom comparison from exact reindexing is the unique evaluation transpose and is coherent with shifts and composition",
+   "results": "8 hits: CategoryTheory.Functor.IsCoverDense.sheafHom_eq, CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf_hom_app_app_val, CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf_app_app, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed",
+   "results": "12 hits: CategoryTheory.MonoidalClosed, CategoryTheory.MonoidalClosed.closed, CategoryTheory.MonoidalClosed.mk, CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom, CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHom_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact reindexing of complexes of sheaf modules preserves derived internal Hom evaluation signed shifts and composition",
+   "results": "8 hits: CochainComplex.shiftEval, CochainComplex.HomComplex.Cochain.rightUnshift, CochainComplex.shiftEval_hom_app, CochainComplex.HomComplex.Cochain.shift, CochainComplex.shiftFunctorAdd_eq, CochainComplex.HomComplex.Cochain.rightShift, CategoryTheory.Functor.commShiftMapCochainComplex, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+   "date": "2026-10-22",
+   "verdict": "no match: component shift and abstract closed-category results do not state the specified derived sheaf-Hom representative comparison and all its normalization/coherence clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*(shift|map)|uncurry_natural|curry_natural",
+   "results": "25 hits: Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean, Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean. Subdirectory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: component shift and abstract closed-category results do not state the specified derived sheaf-Hom representative comparison and all its normalization/coherence clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom, CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHom_obj, CategoryTheory.MonoidalClosed.internalHom_map, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.cartesianClosedFunctorToTypes",
+   "date": "2026-10-22",
+   "verdict": "no match: component shift and abstract closed-category results do not state the specified derived sheaf-Hom representative comparison and all its normalization/coherence clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence on sheaf modules commutes with the signed reindexing isomorphism for Hom complexes of two shifted complexes",
+   "results": "8 hits: CochainComplex.HomComplex.Cochain.leftShiftAddEquiv, HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom, HomologicalComplex₂.ι_totalShift₂Iso_hom_f, HomologicalComplex₂.totalShift₁Iso_trans_totalShift₂Iso, CochainComplex.shiftShortComplexFunctor'_hom_app_τ₁, CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₁, CochainComplex.shiftShortComplexFunctorIso_add'_hom_app, CochainComplex.shiftShortComplexFunctor'_inv_app_τ₁",
+   "date": "2026-10-22",
+   "verdict": "no match: component shift and abstract closed-category results do not state the specified derived sheaf-Hom representative comparison and all its normalization/coherence clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along a ringed site isomorphism preserves derived internal Hom evaluation tensor Hom transposes signed shifts and composition",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, LightCondensed.ihomPoints_symm_comp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.freeFunctorCompPullbackIso, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-22",
+   "verdict": "no match: component shift and abstract closed-category results do not state the specified derived sheaf-Hom representative comparison and all its normalization/coherence clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-derived-automorphism-hom-evaluation",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1, 2 and 4: evaluation, transposition, signed shifts and automorphism composition; Stacks Tag 0GMX (sites-modules-remark-pullback-internal-hom), enhanced on Hom-complex representatives. Carries original item proof steps 4, 5, 6, 7.",
+   "via": [
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-reindexing-evaluation-shift-composition",
+  "worker": "stage1",
+  "summary": "Proves the evaluation, transpose, signed shift, composition and identity clauses directly from existing resolution, chain-transpose and monoidal/closed structure nodes. No new nodes and no statement changes. Explicitly checks both differential signs and uses the canonical pullback compositor.",
+  "blueprint": "prop-pod-dual-tate-data-compatibility proof Steps 1, 2 and 4: the automorphism-Hom comparison, evaluation and shift/Weil coherence; via lem-pod-derived-automorphism-hom-evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat representatives on arbitrary small ringed sites; generic resolution existence. This is a generic tool; the Weil-datum unit supplies no such general statement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "K-injective representatives on the small pro-etale ringed sites; generic resolution existence. This is a generic tool; the Weil-datum unit supplies no such general statement."
+   },
+   {
+    "node": "lem-sfb-hom-kflat-chain-transpose",
+    "why": "One-sided normalized chain evaluation with an arbitrary Hom-complex first factor; avoids assuming that factor K-flat. This is a generic tool; the Weil-datum unit supplies no such general statement."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Canonical symmetry-compatible tensorator, naturality, monoidal pullback compositor and identity normalization. This is a generic tool; the Weil-datum unit supplies no such general statement."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Natural derived adjunction bijection and evaluation needed to prove uniqueness and compare transposes. This is a generic tool; the Weil-datum unit supplies no such general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NO-7a349de11",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-7a349de11 (reviewer sub-agent of L); spot-checked: No new nodes. Statement, stmt_deps and blueprint are unchanged against the base (diffed vs the Q122 snapshot). The 8 steps carry the parent's original steps 4-7 in full: old 4 -> Steps 1-3, old 5 -> Steps 4-5, old 6 -> Steps 6-7, old 7 -> Step 8. proof_deps equals the union of uses, there is no cycle and no SGA. All nine cited statements were read; Stacks 0GMX (sites-modules l.3787) and 08J9 (sites-cohomology l.8896) were checked, as were blueprint prop-pod-dual-tate-data-compatibility Steps 1, 2 and 4. Recomputed: the chain identity e(d_A f⊗x+(-1)^r f⊗d_P x)=d_I(f(x)); the transpose and naturality uncurries via dinaturality of ev and naturality of mu; the shift comparison S=(-1)^{ar} commutes with both differentials for all integers a,b (cases a=0, b=0 and characteristic 2 checked); I[b] stays K-injective; the composition c_gh=c_h G(c_g) follows from the compositor equation of lem-sfb-ringed-derived-monoidal-comparisons with F_{gh}=GF and uniqueness. Accepted tool_uses: kflat-resolution, kinjective-resolutions-exist, hom-kflat-chain-transpose, ringed-derived-monoidal-comparisons, ringed-derived-closed-symmetric-monoidal, all generic black boxes. Advisory: lem-fix-internal-hom-comparison-composition states the abstract composition law; Step 8 writes the same argument directly, which is fine. Minor: Step 2 compresses the identification of mu^0 on the non-K-flat representative P⊗A into one sentence; accepted because F is an exact equivalence."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodReindexingEvaluationShiftComposition",
+  "declaration": "WeilConjectures.PodReindexingCoherence.comparison_exists",
+  "declarations": [
+   "WeilConjectures.PodReindexingCoherence.comparison_exists",
+   "WeilConjectures.PodReindexingCoherence.evaluation_laws",
+   "WeilConjectures.PodReindexingCoherence.composition",
+   "WeilConjectures.PodReindexingCoherence.identity",
+   "WeilConjectures.PodReindexingCoherence.TransposeModel",
+   "WeilConjectures.PodReindexingCoherence.representative_evaluation",
+   "WeilConjectures.PodReindexingCoherence.SymmetryModel",
+   "WeilConjectures.PodReindexingCoherence.symmetry"
+  ],
+  "file": "lean/Sheaf/Paper/PodReindexingEvaluationShiftComposition.lean",
+  "statement": "theorem comparison_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s) (TX : Models l E X s SX) (TY : Models l E Y s SY) : ∃ c : Comparison l E g s SX SY TX TY, EvaluationLaws l E g s SX SY TX TY c ∧ (∃ (sX : ChainShift l E X s) (sY : ChainShift l E Y s), ShiftLaws l E g s SX SY TX TY c sX sY) ∧ (∀ c' : Comparison l E g s SX SY TX TY, ∃ (sX : ChainShift l E X s) (sY : ChainShift l E Y s), ShiftLaws l E g s SX SY TX TY c' sX sY)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are in the recorded auxiliary presentation structures and named theorems. The Hom and tensor comparisons are fixed on product projections, pure total-tensor generators and their localization models. The compositor and identity maps are fixed by site restrictions and termwise localization, retaining the distinct site universes. K8: presentation definitions are now publicly re-exported from PodReindexingCoherenceData with identical signatures and bodies. Existence, evaluation consequences, composition and identity are assembled from the four strictly partial construction/shift statements."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a1fce546",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Theorem stmt_dep lem-weil-pbc-ringed-internal-hom-exact-restriction is genuine: sourceShift and homCommShift are .choose of leftShift_existsUnique and rightShift_existsUnique. Every clause matches the node. Comparison.derived is pinned at (QK,QI) by the dep's delta formula, chain on product factors, tensor on generators and K-flat models. ChainShift sign (-1)^{ar} rechecked against the HomComplex differential. Compositor and Identity pinned by siteComp/siteId restriction plus localization. Unique map over all arrows, transpose, naturality, shift squares, composition and identity all present. Only the item's lean and stmt_deps changed; statement verbatim; 24 decls listed; no hollow defs; all theorems sorry with proof docstrings. No compile (no FIX). Advisories: A1 OneKFlatChainTransposeData and RingedDerivedTensorCoherence owners not in stmt_deps (pinned, auxiliary decls only); A2 lem-sfb-ringed-derived-monoidal-comparisons decls unused, some imports unused; A3 parallel interfaces in parent DerivedAutomorphismHomEvaluation; A4 second reading is a disclosed self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-54610",
+  "group": "K8",
+  "result": "fix",
+  "landing": "20261027T135435-L-3707416",
+  "kind": "interface",
+  "note": "independent cc review: item + 5 new modules vs clone item (verbatim forced data split, statements unchanged), 4 leaves vs parent clauses, nodes vs Lean; reader gate: both direct importers compiled OK against delivered files"
+ }
+}

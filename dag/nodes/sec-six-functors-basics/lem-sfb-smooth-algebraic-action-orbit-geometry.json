@@ -1,0 +1,547 @@
+{
+ "id": "lem-sfb-smooth-algebraic-action-orbit-geometry",
+ "kind": "statement",
+ "title": "Smooth algebraic-group orbit geometry without affine or separated hypotheses",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $G$ be a smooth group scheme of finite type over $F$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], and let $X$ be a finite-type $F$-scheme [def-pc-scheme]. An action is a morphism $a:G\\times_F X\\to X$ satisfying the unit and multiplication identities [def-pc-fibre-product]. For $x\\in X(F)$ let $b_x:G\\to X$ be $g\\mapsto gx$, and let $G_x=G\\times_{X,b_x,x}\\operatorname{Spec}F$ be its scheme-theoretic stabilizer. Then $G_x$ is a closed finite-type subgroup scheme of $G$. The image $O_x=b_x(|G|)$ is locally closed and has a canonical reduced induced subscheme structure: it is the reduced induced closed subscheme in any open subscheme in which its support is closed [lem-weil-pbc-reduced-induced-closed-subscheme]. This reduced scheme is smooth and of finite type over $F$, is stable under $G$, and $b_x$ factors through a flat surjective locally finitely presented morphism $\\beta_x:G\\to O_x$ [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Every geometric fibre of $\\beta_x$ is a translate of the corresponding base change of $G_x$. The sets $O_x(F)$ partition $X(F)$, any two supports $|O_x|$ either coincide or are disjoint, and for every algebraically closed extension $E/F$, $G(E)$ acts transitively on $O_x(E)$. For topological Krull dimension [def-kun-topological-krull-dimension], $O_x$ is equidimensional and $\\dim O_x=\\dim G-\\dim G_x$. Its closure and its boundary $\\overline{O_x}\\setminus O_x$ are invariant; every orbit $O_y$ contained in that boundary satisfies $\\dim O_y<\\dim O_x$. If $G$ is connected [def-weil-connected-scheme], $O_x$ is irreducible. No affineness or connectedness of $G$, separatedness or reducedness of $X$, or reducedness of $G_x$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-kun-topological-krull-dimension",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "All schemes of finite type over $F$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Opens of them are Noetherian and quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so their inclusions are finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. Closed subschemes are finite type by [lem-weil-pbc-proper-fp-permanence]; finite type composes and survives base change by [lem-sfb-finite-type-composition-base-change]. Any $F$-map between the finite-type schemes here is locally of finite type by [lemma-nagata-finite-type-to-separated-target](a), which has no separatedness hypothesis. Its inverse image of each affine open is an open of a Noetherian source, hence quasi-compact, so the map is quasi-compact. Its affine coordinate maps are finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation]. Thus these maps are finite type and locally finitely presented, even when their target is not separated. The targets are quasi-separated since intersections of affine opens are opens of Noetherian schemes, hence quasi-compact. Smoothness gives geometric reducedness of $G$ by [sbc-lem-smooth-geometrically-reduced], in particular reducedness.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.11, A.14; Proposition 1.65, finiteness and reducedness hypotheses"
+   }
+  },
+  {
+   "text": "We use [lem-sc-lft-over-field-jacobson-space] and [lem-weil-pbc-closed-point-residue-field-base] to detect nonempty locally closed subsets by $F$-points. Indeed a locally closed subset, with its reduced induced structure, is of finite type by step 1; a closed point exists by the density statement, and its residue field is $F$. Conversely an $F$-point is closed in any $F$-scheme: in every affine neighbourhood its prime ideal is maximal because its residue field is $F$; if it had a proper specialization, an affine neighbourhood of that specialization would contain both points, a contradiction. Its morphism $\\operatorname{Spec}F\\to X$ is therefore a closed immersion, as is checked on affine opens by the surjection to this residue field. In particular the fibre $G_x$ is a closed subscheme of $G$ by [lem-weil-pbc-proper-fp-permanence](b). It is finite type by step 1. On test schemes its elements are precisely $g$ with $gx=x$; the action identities show that multiplication, identity and inverse restrict, making it a subgroup scheme.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.5, following paragraph defining the isotropy group; Appendix A.14"
+   }
+  },
+  {
+   "text": "Put $b=b_x$, $S=b(|G|)$ and $Z=\\overline S$. By [lem-weil-pbc-chevalley-constructible-image], $S$ is constructible. Choose an affine open $A$ meeting $S$. By [lem-wf-affine-constructible-open](2), $S\\cap A$ contains a nonempty open $U$ of its closure $Z\\cap A$, hence a relatively open subset of $Z$. For $g\\in G(F)$ the automorphism $t_g$ of $X$, with inverse $t_{g^{-1}}$, satisfies $t_gb=bL_g$ and preserves $S$ and $Z$. The union $V=\\bigcup_g t_gU$ is open in $Z$ and contained in $S$. Choose $u\\in U(F)$ by step 2. The nonempty finite-type fibre of $b$ over $u$ has an $F$-point $h$, again by step 2. For every $p\\in G(F)$, $b(p)=(ph^{-1})u\\in V$. Thus the open $b^{-1}(V)$ contains all closed points of $G$; its closed complement is empty by step 2. Hence $S=V$, proving local closedness. This argument does not require $G$ or $Z$ to be irreducible.",
+   "uses": [
+    "lem-weil-pbc-chevalley-constructible-image",
+    "lem-wf-affine-constructible-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(b), printed p.27"
+   }
+  },
+  {
+   "text": "Give $Z$ its reduced induced closed structure by [lem-weil-pbc-reduced-induced-closed-subscheme], and let $O$ be its open subscheme on $S$. Reducedness of $G$ and [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] factor $b$ through $Z$; [lem-weil-pbc-morphism-factors-through-open-subscheme] then factors it through $O$. Write the resulting surjection as $\\beta:G\\to O$. It is finite type and locally finitely presented by step 1. The radical ideals defining the reduced closed structure restrict to the same radical ideals on smaller opens, so the uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] shows that this is the reduced induced structure in every open in which $S$ is closed. Each $t_g$ restricts uniquely to an automorphism of $O$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(c), reduced image construction"
+   }
+  },
+  {
+   "text": "The Noetherian reduced $O$ has finitely many irreducible components by [lem-weil-pbc-noetherian-finite-components]. Delete all but one of these components and choose a nonempty affine open $D$ in the remaining open subset. This $D$ is reduced and irreducible, hence integral. Restrict $\\beta$ to $D$; it is locally of finite type and quasi-compact by step 1. By [lem-sbc-generic-flatness] it is flat over a nonempty open $W\\subseteq D$. For any $y\\in O(F)$ the fibre of $\\beta$ is nonempty finite type, so has an $F$-point. Consequently $G(F)$ is transitive on $O(F)$: if $y=\\beta(h)$ and $w=\\beta(p)$ then $y=(hp^{-1})w$. Choose $w\\in W(F)$. The translates $t_gW$ cover all closed points and hence all of $O$ by step 2. The squares $t_g\\beta=\\beta L_g$ identify stalk maps over $t_gW$ with those over $W$, so these stalk maps are flat. Thus $\\beta$ is flat, surjective and locally finitely presented. Only the auxiliary open $D$, not $O$, was assumed integral.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sbc-generic-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(a), generic flatness and translation argument"
+   }
+  },
+  {
+   "text": "The field $F$ is perfect: in characteristic $p>0$ every $a\\in F$ has a root of $T^p-a$. Therefore [lem-kun-geometric-reduced-perfect] makes the reduced finite-type $O$ geometrically reduced. By [lem-pur-geometrically-reduced-dense-smooth-open] it has a dense smooth open. Its smooth locus is invariant under every $F$-isomorphism $t_g$. Choose an $F$-point in that locus; the transitivity in step 5 puts every closed point of $O$ in the smooth locus. Its closed complement is empty by step 2. Hence $O$ is smooth over $F$. This proves no smoothness assertion for $\\beta$, whose stabilizer fibres can be nonreduced.",
+   "uses": [
+    "lem-kun-geometric-reduced-perfect",
+    "lem-pur-geometrically-reduced-dense-smooth-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.4(b), printed pp.139–140"
+   }
+  },
+  {
+   "text": "For $T=O,Z$, or $B=(Z\\setminus O)_{\\mathrm{red}}$, the product $G\\times_F T$ is reduced by [lem-sfb-flat-geometrically-reduced-pullback]: $G/F$ is flat by [lem-pc-smooth-flat], has geometrically reduced fibres by [sbc-lem-smooth-geometrically-reduced], and $T$ is reduced and Noetherian. The $F$-points of the product are pairs of $F$-points. Every $t_g$ preserves the supports of $O,Z,B$. First apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to the action into $Z$: its image is in $Z$, since the inverse image of the closed $Z$ contains every closed point by step 2. On $G\\times O$ its image avoids $B$, since the inverse image of the closed $B\\subset Z$ has no closed points. Thus [lem-weil-pbc-morphism-factors-through-open-subscheme] factors this action through $O$. On $G\\times B$, closed-point detection and reduced-source factorization similarly give an action into $B$. Restricted action identities hold because the inclusions are monomorphisms. This proves invariance as reduced subschemes, and in particular as supports.",
+   "uses": [
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "lem-pc-smooth-flat",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(c) and 7.5(a),(b), reduced-product argument"
+   }
+  },
+  {
+   "text": "For every algebraically closed extension $E/F$, [lem-weil-pbc-surjective-base-change] makes $\\beta_E$ surjective. Its fibres over $O(E)$ are nonempty finite-type $E$-schemes, so [lem-sc-lft-over-field-jacobson-space] and [lem-weil-pbc-closed-point-residue-field-base], applied over $E$, give lifts in $G(E)$. If $y=\\beta_E(h)$, multiplication by $h$ gives an isomorphism $(G_x)_E\\to(\\beta_E)^{-1}(y)$; its inverse is multiplication by $h^{-1}$. These maps are inverse on every test scheme because $\\beta_E(hs)=y$ exactly when $sx=x$. Thus all geometric fibres are stabilizer translates and $G(E)$ is transitive on $O(E)$. Taking $E=F$ shows $O_x(F)=G(F)x$, so these sets partition $X(F)$. If two orbit supports intersect, their intersection is a nonempty locally closed finite-type subset and has an $F$-point by step 2. The two rational orbits then agree; choosing $h\\in G(F)$ with $y=hx$, the identity $b_y(g)=b_x(gh)$ gives equality of their entire supports. Otherwise the supports are disjoint.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.4 and 7.5, isotropy paragraph; functorial fibre-translation calculation"
+   }
+  },
+  {
+   "text": "The smooth $O$ is regular by [lem-weil-pbc-smooth-scheme-over-field-regular]. On any affine open, [lem-wf-smooth-components-disjoint] makes distinct irreducible components disjoint. If two global components met, their intersections with an affine neighbourhood of a meeting point would be distinct affine components: each intersection is irreducible, dense in its global component, and maximal by closing any containing irreducible subset in $O$. This contradicts the affine statement. The finitely many components of $O$ are therefore disjoint, closed and open. Every component has an $F$-point by step 2. Transitivity on these points carries any one component onto any other (an automorphism preserves maximal irreducible subsets). All have the same finite dimension $d$, finite by [lem-kun-dimension-finite-type]. Finite-union dimension gives $\\dim O=d$: an irreducible closed subset of a finite union of closed sets is contained in one of them. Hence $O$ is equidimensional.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-wf-smooth-components-disjoint",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.4(b); Appendix A.47–A.50, equidimensionality under transitivity"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-flat-composite-fibre-dimension-at-point] to $G\\xrightarrow{\\beta}O\\to\\operatorname{Spec}F$ at $e\\mapsto x$. Local finite type holds by step 1 and flatness by step 5, so $\\dim_eG=\\dim_eG_x+\\dim_xO$. For $G$ and $G_x$, [lem-ag-group-identity-local-dimension] identifies identity stalk dimension with global dimension; [lem-ag-rational-point-stalk-topological-local-dimension] identifies those stalk dimensions with the topological local dimensions in the formula. By equidimensionality from step 9, [lem-sbc-equidimensional-open-local-dimension], with its open equal to $O$, gives $\\dim_xO=\\dim O$. All dimensions are finite by [lem-kun-dimension-finite-type], and all schemes here are nonempty. Thus $\\dim G=\\dim G_x+\\dim O$, or $\\dim O=\\dim G-\\dim G_x$. No regularity or reducedness of $G_x$ was used.",
+   "uses": [
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-ag-group-identity-local-dimension",
+    "lem-ag-rational-point-stalk-topological-local-dimension",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.72; Stacks morphisms.tex, Tag 02JS, lemma-dimension-fibre-at-a-point-additive, equality in the flat case"
+   }
+  },
+  {
+   "text": "Let $C_1,\\ldots,C_r$ be the components of $O$. Their closures $Z_i$ in $Z$ are exactly the irreducible components of $Z$: $Z=\\bigcup_iZ_i$ since $O$ is dense and this is a finite closed union; no $Z_i$ contains another, since intersecting back with $O$ would give $C_i\\subseteq C_j$. Each $C_i=Z_i\\cap O$ is dense open in $Z_i$. By [lem-weil-pbc-dense-open-dimension-comparison], $\\dim Z_i=\\dim C_i=d$. Each closed $B\\cap Z_i$ is proper. Any chain of irreducible closed subsets in it can be extended by appending $Z_i$, so its dimension is at most $d-1$. Finite-union dimension gives $\\dim B<d$ when $B$ is nonempty. Every boundary orbit is contained in $B$ by step 7. Subspace monotonicity gives $\\dim O_y\\leq\\dim B$: close a chain in the ambient space and intersect back to recover the chain, preserving strict inclusions. Hence $\\dim O_y<\\dim O_x$. If $B$ is empty there is no such orbit; in particular dimension zero causes no exception.",
+   "uses": [
+    "lem-weil-pbc-dense-open-dimension-comparison",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Orbit lemma 1.66 and Proposition 7.6, boundary dimension argument applied component by component"
+   }
+  },
+  {
+   "text": "Finally, if $G$ is connected, it is nonempty because of its identity and is regular by [lem-weil-pbc-smooth-scheme-over-field-regular]. Thus [lem-sc-regular-connected-integral] makes it integral and in particular irreducible. Its continuous surjective image $O$ is irreducible: a covering of $O$ by two closed subsets pulls back to such a covering of $G$, forcing one preimage and hence one subset to be the whole space. This establishes the last assertion while keeping all previous arguments valid for disconnected and nonaffine $G$ and nonseparated or nonreduced $X$.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.50; continuous image of the connected smooth group, using regularity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-wf-affine-constructible-open",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sbc-generic-flatness",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-wf-smooth-components-disjoint",
+  "lem-kun-dimension-finite-type",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-ag-group-identity-local-dimension",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-regular-connected-integral"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.65(a)–(c), Proposition 7.4(b), Proposition 7.5, orbit lemma 1.66; Appendix A.47–A.50 and A.72. Scheme-point arguments supplied with the cited Stacks lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "orbit|[Oo]rbit",
+   "results": "{\"t\": \"2026-10-24T14:41:53Z\", \"tool\": \"grep\", \"query\": \"orbit|[Oo]rbit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\"], \"digest\": \"f1e68e0497cf49be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Orbits of a smooth not necessarily affine algebraic group on a not necessarily separated scheme are smooth locally closed subschemes",
+   "results": "{\"t\": \"2026-10-24T14:41:54Z\", \"tool\": \"leansearch\", \"query\": \"Orbits of a smooth not necessarily affine algebraic group on a not necessarily separated scheme are smooth locally closed subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.isSmooth_iff\", \"MulAction.IsPartition.of_orbits\", \"MulAction.IsFixedBlock.orbit\"], \"digest\": \"ae95c00e1cb6d749\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orbit\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-24T14:41:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"orbit\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth algebraic group acting on any finite type scheme the reduced orbits are smooth locally closed equidimensional and boundaries have smaller dimension",
+   "results": "{\"t\": \"2026-10-24T14:41:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth algebraic group acting on any finite type scheme the reduced orbits are smooth locally closed equidimensional and boundaries have smaller dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"1ef14dae0709a679\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme orbit is a smooth equidimensional locally closed subscheme and the invariant boundary has smaller Krull dimension",
+   "results": "{\"t\": \"2026-10-24T14:42:22Z\", \"tool\": \"leanfinder\", \"query\": \"A group scheme orbit is a smooth equidimensional locally closed subscheme and the invariant boundary has smaller Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"MeasureTheory.sdiff_fundamentalFrontier\", \"MeasureTheory.fundamentalInterior_union_fundamentalFrontier\", \"MeasureTheory.sdiff_fundamentalInterior\", \"MeasureTheory.fundamentalFrontier\", \"Algebra.isOpen_smoothLocus\"], \"digest\": \"ac65c56d5a6bac32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit|stabilizer",
+   "results": "{\"t\": \"2026-10-24T15:15:59Z\", \"tool\": \"grep\", \"query\": \"orbit|stabilizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\"], \"digest\": \"f1e68e0497cf49be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are set-action or general scheme-infrastructure statements, not the scheme-theoretic orbit theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group scheme orbit locally closed smooth dimension stabilizer",
+   "results": "{\"t\": \"2026-10-24T15:15:59Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic group scheme orbit locally closed smooth dimension stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.stabilizer\", \"MulAction.index_stabilizer\", \"AddAction.stabilizer_orbit_eq\", \"AddAction.stabilizer\", \"AddAction.index_stabilizer\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"MulAction.stabilizer_orbit_eq\", \"AddAction.ofQuotientStabilizer_mem_orbit\"], \"digest\": \"c44f5c368cf38c80\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are set-action or general scheme-infrastructure statements, not the scheme-theoretic orbit theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, MulAction.orbit",
+   "results": "{\"t\": \"2026-10-24T15:15:59Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, MulAction.orbit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are set-action or general scheme-infrastructure statements, not the scheme-theoretic orbit theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth algebraic group acting on a finite type scheme has smooth locally closed orbits with faithfully flat orbit map and stabilizer dimension formula",
+   "results": "{\"t\": \"2026-10-24T15:16:00Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth algebraic group acting on a finite type scheme has smooth locally closed orbits with faithfully flat orbit map and stabilizer dimension formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"7fe24d694bdf7ae5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are set-action or general scheme-infrastructure statements, not the scheme-theoretic orbit theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a homogeneous reduced scheme under an equivariant morphism is locally closed and the map to its reduced image is faithfully flat",
+   "results": "{\"t\": \"2026-10-24T15:16:01Z\", \"tool\": \"leanfinder\", \"query\": \"The image of a homogeneous reduced scheme under an equivariant morphism is locally closed and the map to its reduced image is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Flat\"], \"digest\": \"6809c3e3861c1280\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are set-action or general scheme-infrastructure statements, not the scheme-theoretic orbit theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-equivariant-open-orbits",
+  "date": "2026-10-24",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait group descent; field orbit argument in Anantharaman Proposition 4.2.3, printed p.59: locally closed smooth reduced orbits, stabilizer dimensions and strictly smaller orbit boundaries.",
+   "via": [
+    "lem-sfb-finite-equivariant-open-orbits",
+    "lem-sfb-almost-homogeneous-potential-smooth-cover",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-algebraic-action-orbit-geometry",
+  "worker": "stage1",
+  "summary": "Expanded the complete orbit argument using only existing DAG nodes. Audited nonseparated finiteness, generic flatness on an integral open rather than the whole disconnected orbit, scheme invariance, geometric stabilizer fibres, equidimensionality, and componentwise boundary dimension. No statement change and no new nodes.",
+  "blueprint": "The inherited place det-thm-sf-ctf-stability-direct-images proof (3), strict-local trait group descent: field orbit geometry supporting Anantharaman Proposition 4.2.3. Current blueprint unit sk-thm-sf-ctf-stability is the six-functor stability proposition; this is a generic geometric tool below that route, not a replacement of a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic tool: Call a scheme Noetherian if it is locally Noetherian [pqf-def-locnoeth] and quasi-compact (Stacks Properties, Definition 01OV). Let $f:X\\to S$ be a mo; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic scheme-theoretic tool: Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions], and le; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic scheme-theoretic tool: Let $j:U\\to Y$ be a quasi-compact open immersion of schemes [def-pc-scheme] [def-weil-open-immersion]. Then $j$ is of finite type [def-weil-finite-typ; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme-theoretic tool: Let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of schemes [def-pc-scheme]. (a) If $f$ and $g$ are proper [def-weil-proper-morphism], so is $g\\circ f$. (b); used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme-theoretic tool: Let $f:X\\to Y$ and $h:Y\\to Z$ be morphisms of schemes [def-pc-scheme]. Finite type means locally of finite type and quasi-compact [def-weil-finite-typ; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Generic scheme-theoretic tool: Let $T,Y,B$ be schemes [def-pc-scheme], and let $f:T\\to Y$ and $p:Y\\to B$ be morphisms, so that $T\\to B$ is the composite $p\\circ f$. Then:\n\n(a) If $p; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic scheme-theoretic tool: Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $S$ an $R$-algebra of finite type ($S\\cong R[x_1,\\dots,x_n]/\\mathfrak a$ for some $n$ ; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme-theoretic tool: Let $f:X\\to Y$ be a smooth\nmorphism of schemes. Then $f$ has\ngeometrically reduced\nfibres.\n(*Stacks Project: the fibres are smooth over their residue ; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic scheme-theoretic tool: Let $k$ be a field and let $X$ be a scheme locally of finite type over $k$ [def-weil-finite-type-morphism]. For every closed subset $Z\\subseteq X$, th; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic scheme-theoretic tool: Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $X$ be a scheme locally of finite type over $k$ [def-weil-finite-type-mo; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-chevalley-constructible-image",
+    "why": "Generic scheme-theoretic tool: Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] which is quasi-compact [def-weil-pbc-scheme-conventions] and locally of finite presentation [d; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-wf-affine-constructible-open",
+    "why": "Generic scheme-theoretic tool: Let $k$ be a field. Use affine schemes and spectra as in [def-pc-scheme, def-weil-affine-spectrum], finite type over $k$ as in [def-weil-finite-type-m; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme-theoretic tool: Let $X$ be a scheme [def-pc-scheme] and $T\\subseteq X$ a closed subset. For an open $U\\subseteq X$ let $\\mathcal I_T(U)=\\{f\\in\\mathcal O_X(U): f(t)=0\\; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme-theoretic tool: Let X be a scheme [def-pc-scheme], let i:Z\\to X be a closed immersion [def-weil-closed-immersion], and let Y be a reduced scheme [def-pc-reduced-schem; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic scheme-theoretic tool: Let $h:T\\to X$ be a morphism of schemes [def-pc-scheme] and let $U\\subseteq X$ be an open subscheme with inclusion $j_U:U\\to X$ (an open immersion [de; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-components",
+    "why": "Generic scheme-theoretic tool: A Noetherian scheme has finitely many irreducible components.; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-sbc-generic-flatness",
+    "why": "Generic scheme-theoretic tool: Let $f : X \\to S$ be a morphism of schemes, with $S$ integral (nonempty, reduced and irreducible), and $f$ locally of finite type and quasi-compact. T; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic scheme-theoretic tool: Let $X$ be a reduced scheme of finite type over a perfect field\n$K$, where perfect means that $K$ has characteristic $0$, or has\ncharacteristic $p>0$ ; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-pur-geometrically-reduced-dense-smooth-open",
+    "why": "Generic scheme-theoretic tool: Let $K$ be a field and $h:Z\\to\\operatorname{Spec}K$ a locally finitely presented morphism of schemes [def-sbc-locally-finite-presentation]. Suppose $Z; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme-theoretic tool: A smooth morphism of schemes is flat and locally of finite\npresentation.; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme-theoretic tool: Let $f:Y\\to X$ be a surjective morphism of schemes [def-weil-surjective-morphism] and $g:X'\\to X$ any morphism of schemes [def-pc-scheme]. Then the pr; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic scheme-theoretic tool: Let $k$ be a field [def-weil-field], let $X$ be a scheme [def-pc-scheme], and let $f:X\\to\\operatorname{Spec}k$ be smooth [def-sbc-smooth-morphisms]. T; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-wf-smooth-components-disjoint",
+    "why": "Generic scheme-theoretic tool: Let $X$ be an affine scheme of finite type over a field $k$ whose local\nring at every closed point is regular (for instance a smooth affine\nvariety). ; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic scheme-theoretic tool: Let $K$ be a field and $X$ a scheme of finite type over $K$.\nThen $\\kundim X<\\infty$.; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "Generic scheme-theoretic tool: Let $a:U\\to X$ and $f:X\\to S$ be locally finite type morphisms of schemes [def-pc-scheme, def-weil-finite-type-morphism]. Let $u\\in U$, $x=a(u)$ and $; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Generic scheme-theoretic tool: Let $k$ be any field and $G$ a group scheme [def-sc-group-scheme] of finite type over $k$. Let $e\\in G$ be the image of the unique point of $\\operator; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-ag-rational-point-stalk-topological-local-dimension",
+    "why": "Generic scheme-theoretic tool: theorem ringKrullDim_stalk_rationalPoint_eq_topologicalKrullDimAt\n    {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [LocallyOfFin; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic scheme-theoretic tool: Let $k$ be a field [def-weil-field], $Y$ a scheme [def-pc-scheme] with a locally finite type morphism $g:Y\\to\\operatorname{Spec}k$ [def-weil-finite-ty; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-dense-open-dimension-comparison",
+    "why": "Generic scheme-theoretic tool: Let $k$ be a field [def-weil-field], let $Y$ be a scheme [def-pc-scheme], and let $f:Y\\to\\operatorname{Spec} k$ be locally of finite type and quasi-co; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "def-kun-topological-krull-dimension",
+    "why": "Generic scheme-theoretic tool: Let $X$ be a topological space. A *chain of irreducible closed subsets* of $X$ of *length* $n$ is a sequence $Z_0\\subsetneq Z_1\\subsetneq\\cdots\\subset; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic scheme-theoretic tool: Let $X$ be a regular scheme [def-weil-regular-scheme] (locally Noetherian, with every local ring $\\mathcal O_{X,x}$ a regular local ring) whose underl; used only for the explicit orbit construction, with no change to the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-wf-affine-constructible-open",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sbc-generic-flatness",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-wf-smooth-components-disjoint",
+  "lem-kun-dimension-finite-type",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-ag-group-identity-local-dimension",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-regular-connected-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NS-9bd35e3a8",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-9bd35e3a8 (reviewer sub-agent of L); spot-checked: I read the item, its 12 steps and the statements of all 32 cited nodes in full. The delivery adds no new nodes, makes no fixes and leaves the statement unchanged. It is not a re-split. Every [id] in a step is in that step's uses, the union of the uses equals proof_deps, and there is no cycle (closure of 309 nodes). Source checked: Milne iAG2017 Prop. 1.65(a)-(c) pp.26-27, orbit lemma 1.66, and 7.4(b), 7.5, the isotropy paragraph and 7.6 pp.139-140. Steps 3, 4, 5, 6, 7 and 11 follow 1.65(b), 1.65(c), 1.65(a), 7.4(b), 7.5 and 7.6 respectively. The dimension formula uses the flat fibre-additivity node (Stacks 02JS) at e->x; the dimension notions agree between def-kun-dimension, def-kun-topological-dimension-at-point and topologicalKrullDimAt. Hypotheses I verified: Chevalley (b qc and lfp, X Noetherian so qcqs); the affine constructible-open node on S∩A, with cl_A(S∩A)=Z∩A; generic flatness on an integral affine D, so the orbit itself is never assumed integral; the dense-smooth-open node needs lfp, which step 1 gives; the reduced-product node gets G flat with geometrically reduced fibres and T reduced and Noetherian; components are compared between global and affine; the boundary components Z_i are exactly the components of the closure with dim Z_i = d. Two inferences are left implicit but are one line each: constructibility of S∩A in Noetherian A, and the fibre identification through the monomorphism O->X. Small cases tested: G_m scaling the line with doubled origin (nonseparated X), G_a acting by x+g^p with stabilizer alpha_p, the trivial group on F[t]/t^2, and Z/2 swapping two points. Duplicate search over the DAG's orbit nodes (smooth-group-orbit-geometry, smooth-rational-orbit-arbitrary-field, homogeneous-orbit-quotient-geometry, git-orbit-closure-dimension): all assume affine G and/or separated or projective X, so none is a duplicate or a generalization. I accept the declared tool_uses: all are generic scheme and dimension lemmas used as black boxes. blueprint.from.node is null, inherited and not changed here. No SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAlgebraicActionOrbitGeometry",
+  "declaration": "AlgebraicGeometry.smooth_algebraic_action_orbit_geometry",
+  "declarations": [
+   "AlgebraicGeometry.SmoothActionOrbit.orbitArrow",
+   "AlgebraicGeometry.SmoothActionOrbit.support",
+   "AlgebraicGeometry.smooth_algebraic_action_orbit_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAlgebraicActionOrbitGeometry.lean",
+  "statement": "theorem smooth_algebraic_action_orbit_geometry {F : Type u} [Field F] [IsAlgClosed F] (G X : Over (Spec (.of F))) [GrpObj G] [ModObj G X] [Smooth G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] : ∃ (H O : (𝟙_ (Over (Spec (.of F))) ⟶ X) → Over (Spec (.of F))) (j : ∀ x, H x ⟶ G) (i : ∀ x, O x ⟶ X) (β : ∀ x, G ⟶ O x), (∀ x : 𝟙_ (Over (Spec (.of F))) ⟶ X, IsPullback (j x).left (H x).hom (orbitArrow (G := G) x).left x.left ∧ (∃ (_ : GrpObj (H x)), IsMonHom (j x) ∧ IsClosedImmersion (j x).left) ∧ LocallyOfFiniteType (H x).hom ∧ QuasiCompact (H x).hom ∧ IsLocallyClosed (support (G := G) x) ∧ IsImmersion (i x).left ∧ IsReduced (O x).left ∧ Set.range (i x).left = support (G := G) x ∧ (∀ (U : X.left.Opens) (_ : support (G := G) x ⊆ (U : Set X.left)) (hc : IsClosed (U.ι ⁻¹' support (G := G) x)), ∃ f : (O x).left ⟶ U.toScheme, f ≫ U.ι = (i x).left ∧ IsClosedImmersion f ∧ f.ker = Scheme.IdealSheafData.vanishingIdeal ⟨U.ι ⁻¹' support (G := G) x, hc⟩ ∧ ∃! φ : (O x).left ≅ (Scheme.IdealSheafData.vanishingIdeal ⟨U.ι ⁻¹' support (G := G) x, hc⟩).subscheme, φ.hom ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨U.ι ⁻¹' support (G := G) x, hc⟩).subschemeι = f) ∧ Smooth (O x).hom ∧ LocallyOfFiniteType (O x).hom ∧ QuasiCompact (O x).hom ∧ (∃ (_ : ModObj G (O x)), IsModHom G (i x)) ∧ β x ≫ i x = orbitArrow (G := G) x ∧ Flat (β x).left ∧ Surjective (β x).left ∧ LocallyOfFinitePresentation (β x).left ∧ (∀ (E : Type u) [Field E] [Algebra F E] [IsAlgClosed E] (y : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F E))) ⟶ O x), ∃ h : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F E))) ⟶ G, h ≫ β x = y ∧ ∃ φ : ((H x) ⊗ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F E)))).left ≅ pullback (β x).left y.left, φ.hom ≫ pullback.fst (β x).left y.left = (((snd (H x) (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F E))))) ≫ h) * (fst (H x) (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F E)))) ≫ j x)).left ∧ φ.hom ≫ pullback.snd (β x).left y.left = (snd (H x) (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F E))))).left) ∧ (∀ (E : Type u) [Field E] [Algebra F E] [IsAlgClosed E] (y z : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F E))) ⟶ O x), ∃ g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F E))) ⟶ G, g • (y ≫ i x) = z ≫ i x) ∧ (∀ y : 𝟙_ (Over (Spec (.of F))) ⟶ X, (∃ z : 𝟙_ (Over (Spec (.of F))) ⟶ O x, z ≫ i x = y) ↔ ∃ g : 𝟙_ (Over (Spec (.of F))) ⟶ G, g • x = y) ∧ (∀ C ∈ irreducibleComponents (O x).left, topologicalKrullDim C = topologicalKrullDim (O x).left) ∧ (∃ d e : ℕ, topologicalKrullDim (O x).left = (d : WithBot ℕ∞) ∧ topologicalKrullDim (H x).left = (e : WithBot ℕ∞) ∧ topologicalKrullDim G.left = ((d + e : ℕ) : WithBot ℕ∞)) ∧ (∃ (Z B : Over (Spec (.of F))) (iz : Z ⟶ X) (ib : B ⟶ X), IsReduced Z.left ∧ IsReduced B.left ∧ IsClosedImmersion iz.left ∧ IsClosedImmersion ib.left ∧ Set.range iz.left = closure (support (G := G) x) ∧ Set.range ib.left = closure (support (G := G) x) \\ support (G := G) x ∧ (∃ (_ : ModObj G Z), IsModHom G iz) ∧ (∃ (_ : ModObj G B), IsModHom G ib)) ∧ (∀ y : 𝟙_ (Over (Spec (.of F))) ⟶ X, support (G := G) y ⊆ closure (support (G := G) x) \\ support (G := G) x → topologicalKrullDim (O y).left < topologicalKrullDim (O x).left) ∧ (ConnectedSpace G.left → IrreducibleSpace (O x).left)) ∧ (∀ y : 𝟙_ (Over (Spec (.of F))) ⟶ X, ∃ (x : 𝟙_ (Over (Spec (.of F))) ⟶ X) (z : 𝟙_ (Over (Spec (.of F))) ⟶ O x), z ≫ i x = y) ∧ (∀ x y : 𝟙_ (Over (Spec (.of F))) ⟶ X, Set.range (fun z : 𝟙_ (Over (Spec (.of F))) ⟶ O x ↦ z ≫ i x) = Set.range (fun z : 𝟙_ (Over (Spec (.of F))) ⟶ O y ↦ z ≫ i y) ∨ Disjoint (Set.range (fun z : 𝟙_ (Over (Spec (.of F))) ⟶ O x ↦ z ≫ i x)) (Set.range (fun z : 𝟙_ (Over (Spec (.of F))) ⟶ O y ↦ z ≫ i y))) ∧ (∀ x y : 𝟙_ (Over (Spec (.of F))) ⟶ X, support (G := G) x = support (G := G) y ∨ Disjoint (support (G := G) x) (support (G := G) y))",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-c145d4e82"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c145d4e82",
+  "group": "Q93",
+  "result": "fix",
+  "note": "All node clauses checked against the Lean: stabilizer as fibre square G×_{X,b_x,x}Spec F; reduced immersed orbit with range = support and canonical vanishing-ideal description in every open where it is closed; smooth, finite type; G-stable via ModObj+IsModHom; β flat, surjective, lfp with β≫i = orbit map; geometric fibres are explicit translates h·(G_x)_E; G(E) transitive; O(F)=G(F)x, rational partition, supports equal or disjoint; equidimensional; additive dim formula (d+e); invariant reduced closure/boundary; smaller-dim boundary orbits; connected G gives irreducible orbit. No extra hypotheses; edge cases (empty X, empty boundary, dim 0, disconnected G, non-reduced stabilizer, E=F, universe u) fine; no hollow defs; docstrings and 12-step proof plan present; report sections present. Finding H2: IsClosedSubgroupScheme is owned by def-sc-group-scheme-subgroup, which is not in stmt_deps. FIX: inline IsMonHom (j x) ∧ IsClosedImmersion (j x).left (equivalent, since a closed immersion is mono), drop the now-unused GroupScheme.Defs import, update the report. Fixed module compiled clean via nt_compile --json (6.9 s, exit 0)."
+ }
+}

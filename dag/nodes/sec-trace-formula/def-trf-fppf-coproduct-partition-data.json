@@ -1,0 +1,137 @@
+{
+ "id": "def-trf-fppf-coproduct-partition-data",
+ "kind": "definition",
+ "title": "Clopen coproduct partition data for fppf sheaves",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], use its big fppf site [def-pc-fppf-site] and the universes of [def-weil-size-convention], and let $I$ be a small set in this convention. Let $(G_i)_{i\\in I}$ be sheaves of sets on this site [def-weil-pbc-sites-and-cohomology], and let $T\\to S$ be a site object. For an open subset $U\\subseteq T$, write $T_U\\to S$ for its open subscheme [def-weil-open-immersion] with its induced map to $S$, and $\\iota_U:T_U\\to T$ for the inclusion. A coproduct partition datum for $(G_i)$ on $T$ consists of open subsets $U_i\\subseteq T$ that are closed, pairwise disjoint and cover $T$, together with sections $s_i\\in G_i(T_{U_i})$. Empty pieces and an empty index set are allowed. For a sheaf of sets $C$, maps $c_i:G_i\\to C$, and $a\\in C(T)$, define the predicate that this datum maps to $a$ to mean $c_i(s_i)=\\iota_{U_i}^*a$ for every $i$. This is only the data and the component-image predicate: it asserts neither existence nor uniqueness of a partition for a given section.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0F15 (lemma-coproduct-sheaves-open-and-closed), proof: the disjoint clopen pieces and component sections; Tag 02WO (lemma-representable-sheaf-coproduct-sheaves), arbitrary indexed family."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Clopen partition of a scheme with a section in each fppf summand sheaf and a predicate that component sections map to a given section",
+   "results": "{\"t\": \"2026-10-22T12:01:13Z\", \"tool\": \"leansearch\", \"query\": \"Clopen partition of a scheme with a section in each fppf summand sheaf and a predicate that component sections map to a given section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsClopen\", \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"isClopen_range_sigmaMk\", \"AlgebraicGeometry.Scheme.basicOpen\", \"TopologicalSpace.Clopens.casesOn\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"PrimeSpectrum.isClopen_iff_mul_add\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\"], \"digest\": \"48ded345fcc2014e\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the project declarations found by the source grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A clopen partition of a scheme with a section in each summand fppf sheaf and component sections mapping to one given section",
+   "results": "{\"t\": \"2026-10-22T12:02:00Z\", \"tool\": \"leanfinder\", \"query\": \"A clopen partition of a scheme with a section in each summand fppf sheaf and component sections mapping to one given section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_J\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_U\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.GlueData.openCover_I₀\"], \"digest\": \"fc1741da9c19e734\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the project declarations found by the source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "FppfCoproductPartition|fppfPartitionOpen|fppfPartitionInclusion|fppf.*[Pp]artition",
+   "results": "{\"t\": \"2026-10-22T12:01:50Z\", \"tool\": \"grep\", \"query\": \"FppfCoproductPartition|fppfPartitionOpen|fppfPartitionInclusion|fppf.*[Pp]artition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the project declarations found by the source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l FppfCoproductPartition|fppfPartitionOpen|fppfPartitionInclusion in lean/WeilConjectures, lean/Sheaf, and dag/nodes; blueprint_refs.py search FppfCoproductPartition",
+   "results": "No upstream declaration; Sheaf.AlgebraicGeometry.FppfSheafCoproductPartition contains the exact definitions. DAG matches are theorem nodes lem-trf-fppf-labelled-cover-descent, lem-trf-fppf-sheaf-coproduct-partition, lem-trf-etale-open-chart-morphism-descent; no definition node owns the data. Blueprint search: 0 matching blueprint nodes.",
+   "date": "2026-10-22",
+   "verdict": "Existing project data need a definition node, not new Lean definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coproduct-equality-locus",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The same-label equality-locus comparison in the omitted diagonal verification of Tag 02WQ uses the clopen partitions of its two sections and their component-image equations.",
+   "via": [
+    "lem-trf-coproduct-equality-locus",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfSheafCoproductPartition",
+  "declaration": "AlgebraicGeometry.Scheme.FppfCoproductPartition",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fppfPartitionOpen",
+   "AlgebraicGeometry.Scheme.fppfPartitionInclusion",
+   "AlgebraicGeometry.Scheme.FppfCoproductPartition",
+   "AlgebraicGeometry.Scheme.FppfCoproductPartition.MapsTo"
+  ],
+  "statement": "structure FppfCoproductPartition {S : Scheme.{u}} {I : Type (max u v)}\n    (G : I → Sheaf (fppfTopology.over S) (Type (max u v))) (T : Over S)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "H2 repair: definition ownership for the existing plain data declarations in the published partition-theorem module. fppfPartitionOpen and fppfPartitionInclusion give the actual open subscheme over S and its inclusion; FppfCoproductPartition gives exactly the clopen covering with component sections; MapsTo gives their component-image equations. The theorem fppfSheaf_coproduct_partition and its existence, uniqueness, monicity and cartesian claims are not part of this definition node. Reuses the published declarations without copying or moving them."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bfd891bb",
+  "group": "Q75",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bfd891bb",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Re-delivery after the 1cc2afb8 H2 return; the Lean module is byte-identical. New definition node def-trf-fppf-coproduct-partition-data (existing:true on fppfPartitionOpen, fppfPartitionInclusion, FppfCoproductPartition, FppfCoproductPartition.MapsTo in the live module): its statement says exactly what the live structure and MapsTo say, its stmt_deps and source (0F15/02WO) are correct, its statement field matches the live file verbatim, and no other definition node owns these declarations. The item now cites this node in stmt_deps; the partition theorem is a proof_dep only. Every clause checked against the Lean: partitions and MapsTo, D_i = A.opens i ⊓ B.opens i with correct inf_le restrictions, the hE representing squares, the coproduct L with q = hL.desc (canonical), and the conclusion IsPullback h_L → C over h_T → C×C, which is the node's equivalent form with naturality, projection and summand clause. Edge cases hold (I empty, D_i empty, A≠B, infinite I). Statement field verbatim, sorry only, helpers carry real data, docstrings present, real Worker report and Second reading sections. No compile run (no file changed). Advisories: the coproduct L may not exist when v > u (the statement then covers only the hypothesised coproduct); Q56 df76bded9df5 creates the same node id with equivalent content, so whichever lands second is refused by merge_delivery.py:951 and must drop its copy and cite the landed node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261023T123517-L-1202122",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.fppfSheaf_coproduct_partition"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-diagonal-trace-geometric-model-existence",
+ "kind": "statement",
+ "title": "Normalized geometric model without coefficient or limit comparisons",
+ "statement": "Let l be prime, X and S noetherian schemes, f:X→S, m:X≅P¹_S with m.hom followed by the projection equal to f, and l invertible on S. Put E = ULift Q_l. Given normalized Chern data cS,cX and Twisting data tS,tX for their actual root lines [def-sp-tower-class-chern, def-sp-tower-class-twisting], there exist a coefficient tower Base b [def-sp-tower-shriek-data] and a Model g [def-sfb-diagonal-trace-models] for f with these Chern/twist data and with g.model=m. No scalar restrictions, coefficient cones, derived-limit comparisons, splitting or trace are asserted.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-twisting",
+  "def-sp-tower-shriek-data",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), geometric model and line twisting before formation of the splitting"
+ },
+ "proof": [
+  {
+   "text": "Choose b and geometry g with their normalized ordinary coefficient-unit comparison q and ordinary tensor comparison k. Pull back the normalized Chern root line using q, k and invertibility of l to obtain p.",
+   "uses": [
+    "lem-sfb-tower-class-tensor-geometry-existence",
+    "lem-sfb-tower-class-line-pullback-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize k to the base root line, then tensor in the second variable with p.iso. The universal sheaf tensor property gives the natural isomorphism tensorRight(p.iso). Its pure-section formula, k.normalization, and sectionAdjoint_postcomp prove the PositivePullback normalization. Transport through the two Twisting.forward equalities; every step here is proved in Lean.",
+   "uses": [
+    "def-sp-tower-class-twisting",
+    "def-sfb-tower-class-tensor-pullback",
+    "lem-sfb-tower-class-section-adjoint-naturality",
+    "def-pur-sheaf-tensor-product",
+    "def-sfb-tower-class-section-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the positive comparison. Both derived twist functors are equivalences, so the mate is invertible by the general equivalence-mate theorem. Expand homEquiv_unit and mateEquiv_apply to identify its component exactly with projection. Use m and hm for model and over_eq, and assemble all Model fields. No local-freeness or splitting theorem is used for this final step.",
+   "uses": [
+    "lem-weil-mate-iso-along-equivalences",
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-tower-class-tensor-geometry-existence",
+  "lem-sfb-tower-class-line-pullback-existence",
+  "def-sp-tower-class-twisting",
+  "def-sfb-tower-class-tensor-pullback",
+  "lem-sfb-tower-class-section-adjoint-naturality",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-tower-class-section-adjoint",
+  "lem-weil-mate-iso-along-equivalences",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "proof_origin": {
+  "by": "J8",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), ordinary unit/root/tensor construction followed by the invertible-line mate"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf gives an equivalence tensoring with that sheaf and internal Hom from it",
+   "results": "8 hits; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.unitHomEquiv_apply_coe, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-27",
+   "verdict": "No specialized constructor. Generic exact-functor unit comparisons are used in the combining proof where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\"",
+   "results": "12 hits; ContinuousLinearMap.IsInvertible, ContinuousLinearMap.IsInvertible.inverse, ContinuousLinearMap.IsInvertible.of_isInvertible_inverse, ContinuousLinearMap.isInvertible_inverse_iff, ContinuousLinearMap.isInvertible_equiv, ContinuousLinearMap.IsInvertible.inverse_inverse, ContinuousLinearMap.isInvertible_zero_iff, ContinuousLinearMap.IsInvertible.bijective",
+   "date": "2026-10-27",
+   "verdict": "No specialized constructor. Generic exact-functor unit comparisons are used in the combining proof where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_diagonalTraceChernTwist|exists_diagonalTraceGeometricModel|exists_diagonalTraceScalarComparisons",
+   "results": "0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No specialized constructor. Generic exact-functor unit comparisons are used in the combining proof where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceComparisonPartial",
+  "date": "2026-10-27",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), geometric model and line twisting before formation of the splitting"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceGeometricModelExistence",
+  "file": "lean/Sheaf/Paper/DiagonalTraceGeometricModelExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.exists_diagonalTraceGeometricModel",
+  "statement": "theorem exists_diagonalTraceGeometricModel (l : ℕ) [Fact l.Prime]\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    (f : X ⟶ S) (m : X ≅ ProjectiveLine S)\n    (hm : m.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (hS : IsUnit (l : Γ(S, ⊤)))\n    (cS : Chern l (ULift.{u} (Padic l)) S)\n    (cX : Chern l (ULift.{u} (Padic l)) X)\n    (nS : cS.Normalized l (ULift.{u} (Padic l)))\n    (nX : cX.Normalized l (ULift.{u} (Padic l)))\n    (tS : Twisting l (ULift.{u} (Padic l)) cS)\n    (tX : Twisting l (ULift.{u} (Padic l)) cX) :\n    ∃ b : SpTowerShriek.Base l (ULift.{u} (Padic l)),\n      ∃ g : Model l (ULift.{u} (Padic l)) b S X f cS cX tS tX,\n        g.model = m",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T235941-L-1473108",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T012856-L-2343048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

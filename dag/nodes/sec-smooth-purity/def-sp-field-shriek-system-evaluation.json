@@ -1,0 +1,120 @@
+{
+ "id": "def-sp-field-shriek-system-evaluation",
+ "kind": "definition",
+ "title": "Adjunction-normalized finite evaluation of coefficient-system comparisons",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the whole-system coefficient model family $D$ of [def-sp-field-shriek-system-models], the recorded exact evaluations of [det-sp-tower-shriek-levels], and finite scalar and compact-support operations of [det-sp-reduction-direct-image], with finite scalar extension $C_{T,n}$ and its adjunction from [det-sp-scalar-extension-functor]. For $E\\le F$, a scalar evaluation datum at $n$ consists of an ordinary restriction/evaluation isomorphism whose maps are identity on all sections, its exact derived localization, and an isomorphism $C_{T,\\bullet}\\operatorname{ev}_{F,n}\\simeq\\operatorname{ev}_{E,n}C_{T,n}$ (functors written in diagrammatic order). Its normalization is the equality of its right adjunction mate with that derived restriction/evaluation isomorphism, for the actual system and finite scalar adjunctions. Equivalently, evaluation commutes with their adjunction transposes. These are data and explicit definitions, without an existence assertion.",
+ "stmt_deps": [
+  "def-sp-field-shriek-system-models",
+  "det-sp-tower-shriek-levels",
+  "det-sp-reduction-direct-image",
+  "det-sp-scalar-extension-functor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), finite evaluation of the proper/open tower coefficient comparison and its adjunction normalization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of extension of scalars on derived strict coefficient systems, normalized by restriction of scalars adjunction transpose",
+   "results": "[leansearch] OK 8 hit(s): ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, evalAt, toRestrictScalars_hom_apply, fromExtendScalars; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, toRestriction_hom_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.restrictCoextendScalarsAdj.",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Iso",
+   "results": "[loogle] OK 5 hit(s): CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_apply; homEquiv_ofNatIsoRight_apply; homEquiv_ofNatIsoLeft_symm_apply; homEquiv_ofNatIsoRight_symm_apply; restrictFullyFaithful_homEquiv_apply.",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FieldShriekSystemEvaluation|field-shriek-system-evaluation dag/nodes lean/Sheaf lean/WeilConjectures lean/.lake/packages/mathlib/Mathlib",
+   "results": "No hits. Related SystemEvaluationScalarRestrictionNormalization constructs singleton evaluation in a different strict-system coordinate model; its generic exact localization and adjunction mate operations are reused instead of redefining those.",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep coefficient.*(shriek|compact)|shriek.*coefficient|semilinear.*system CategoryTheory",
+   "results": "[grep] OK 0 hit(s).",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search scalar evaluation compact support",
+   "results": "12 broad blueprint nodes matched; none is the normalized finite evaluation interface of FieldShriekSystem.Models.",
+   "date": "2026-10-25",
+   "verdict": "No exact normalized evaluation interface for the recorded ell-power coefficient model family; existing evaluation and scalar constructions are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-field-shriek-system-comparison",
+  "date": "2026-10-25",
+  "group": "O1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), finite evaluation and scalar adjunction compatibility",
+   "via": [
+    "lem-sp-field-shriek-system-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "lean": {
+  "module": "Sheaf.Paper.FieldShriekSystemEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.ScalarEvaluation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.RestrictionEvaluation",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.restrictionEvaluation",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.AdjunctionEvaluationNormalized",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.finiteScalarAdjunction",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.ScalarEvaluation"
+  ],
+  "file": "lean/Sheaf/Paper/FieldShriekSystemEvaluation.lean",
+  "statement": "structure ScalarEvaluation (D : Models P) {E F : Index P} (h : E ≤ F) (T : Scheme.{u}) (n : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Packages section-normalized restriction evaluation, its exact localization, and the actual adjunction-mate normalization of scalar evaluation. No datum is chosen from a bare existence statement."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b468cb0e5",
+  "group": "O1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b468cb0e5",
+  "group": "O1",
+  "result": "fix",
+  "note": "H3 repair checked: MixedLaw extends EvaluationLaw; quotientAfterComparison/comparisonAfterQuotient contain the actual comparison at n and m with systemReduction (transpose of SemilinearSections.derivedTransition, section-pinned QuotientRestriction); common word = reductionDirectImageComparison(R_n→S_m) then RΓc_{S_m}(assoc⁻¹ ≫ C_{a_m}(input reduction)), as in node step 8; HEq sources equal via coefficientSquare; system_square is the real transition square of b (follows from naturality, advisory). All other modules byte-identical to the accepted 8fa1 version: hypotheses, proper/open comparison, invertibility on N_A with ambient target, evaluation at every n, composition/identity on whole systems; ∃ Models follows the landed tower_shriek_levels pattern. Edge cases m=n, E=F, ramified, n=0, M=0/empty X, d=0, E⊂F⊂L. Gates OK (no hollow defs, only sorry is the theorem, docstrings, report sections). FIX (H12 field part): 7 new def nodes lacked stmt_deps on their def owners def-sp-coefficient-tower-shriek-interfaces (SpTowerCalculus.Coordinates/realization/quotient), def-sp-reduction-direct-image-comparison (reductionCompactSupport/reductionDirectImageComparison), det-sp-scalar-extension-functor (scalarExtensionFunctor/_composition); fixes/<id>.json add them to stmt_deps with bracketed cites in the statement; owners landed 10-16..10-20; no cycle. No Lean changed, so nothing compiled."
+ }
+}

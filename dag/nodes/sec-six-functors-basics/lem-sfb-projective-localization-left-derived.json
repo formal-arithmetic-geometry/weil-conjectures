@@ -1,0 +1,537 @@
+{
+ "id": "lem-sfb-projective-localization-left-derived",
+ "kind": "statement",
+ "title": "A localization with enough projective representatives computes left derived functors",
+ "statement": "Work in fixed universes [def-weil-size-convention], enlarged to contain the categories and functor categories below. Let $C,D,H$ be categories and $W$ a class of arrows of $C$. Let $Q:C\\to D$ be an essentially surjective localization at $W$: precomposition with $Q$ is fully faithful on functor categories, with essential image the functors that send every arrow in $W$ to an isomorphism. Let $\\mathcal P$ be a class of objects of $C$. Assume (i) for every $X\\in C$ there are $P_X\\in\\mathcal P$ and $q_X:P_X\\to X$ such that $Q(q_X)$ is an isomorphism; (ii) for every $P\\in\\mathcal P$ and every $X\\in C$, the map induced by $Q$ is a bijection\n$$\\operatorname{Hom}_C(P,X)\\longrightarrow\\operatorname{Hom}_D(QP,QX).$$\nFor any functor $F:C\\to H$ there exist a functor $LF:D\\to H$ and a natural transformation $\\varepsilon:LF\\circ Q\\to F$ with the following universal property: for every $G:D\\to H$, composition with $\\varepsilon$ gives a bijection\n$$\\operatorname{Nat}(G,LF)\\longrightarrow\\operatorname{Nat}(G\\circ Q,F),\\qquad \\beta\\longmapsto\\varepsilon\\circ(\\beta Q).$$\nFor every pair $(LF,\\varepsilon)$ with this universal property and every $P\\in\\mathcal P$, the component $\\varepsilon_P:LF(QP)\\to F(P)$ is an isomorphism. In particular these components give a natural isomorphism on the full subcategory of $C$ on $\\mathcal P$: for $f:P\\to P'$ one has $\\varepsilon_{P'}\\circ LF(Qf)=F(f)\\circ\\varepsilon_P$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN, lemma-find-existence-computes, left derived computation criterion; projective-representative form obtained directly from the universal property, with the full independent categorical argument in the delivery report. Compare dga.tex Tag 09LS, lemma-derived-bc, and Tag 09KY, lemma-hom-derived."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Fix $Y\\in D$. Essential surjectivity gives $X\\in C$ and an isomorphism $u:Y\\xrightarrow{\\sim}QX$; choose $q:P\\to X$ as in (i), and put $a=(Qq)^{-1}\\circ u:Y\\xrightarrow{\\sim}QP$. In the comma category $J_Y$ of [lem-sfb-pointwise-right-kan-from-limits], $(P,a)$ is initial: a map to $(Z,b)$ is exactly $f:P\\to Z$ with $Qf=b\\circ a^{-1}$. Hypothesis (ii), applied to $P,Z$, gives exactly one such $f$.",
+   "uses": [
+    "lem-sfb-pointwise-right-kan-from-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual conclusion); agent generalization to arbitrary categories via explicit comma limits, compared with Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:709-764"
+   }
+  },
+  {
+   "text": "For $T_Y$ as in [lem-sfb-pointwise-right-kan-from-limits], let $j_0=(P,a)$ be this initial object and $i_j:j_0\\to j$ its unique arrows. The cone with vertex $F(P)$ and legs $T_Y(i_j)$ is limiting: a cone $(V,v_j)$ factors by $v_{j_0}$, because $T_Y(i_j)v_{j_0}=v_j$; this factor is unique since $i_{j_0}=1$. Thus every required limit exists, without assuming that $H$ has any other limits.",
+   "uses": [
+    "lem-sfb-pointwise-right-kan-from-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual conclusion); agent generalization to arbitrary categories via explicit comma limits, compared with Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:709-764"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pointwise-right-kan-from-limits] to these comma-diagram limits. It gives $L_0:D\\to H$ and $e_0:L_0Q\\to F$ with the asserted bijection for every $G$, and with $(e_0)_X$ the projection indexed by $(X,1_{QX})$. This proves the existence clause.",
+   "uses": [
+    "lem-sfb-pointwise-right-kan-from-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual conclusion); agent generalization to arbitrary categories via explicit comma limits, compared with Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:709-764"
+   }
+  },
+  {
+   "text": "For $P\\in\\mathcal P$, the object $(P,1_{QP})$ is itself initial in $J_{QP}$: a map to $(Z,b)$ is the unique lift of $b$ supplied by (ii). For any limiting cone $(V,v_j)$ on $T_{QP}$, form the cone with vertex $F(P)$ and legs $T_{QP}(i_j)$. Its unique map $t:F(P)\\to V$ satisfies $v_{j_0}t=1$; moreover $v_j t v_{j_0}=T_{QP}(i_j)v_{j_0}=v_j$ for every $j$, so limit uniqueness gives $t v_{j_0}=1$. By the counit formula in [lem-sfb-pointwise-right-kan-from-limits], $v_{j_0}=(e_0)_P$, hence this component is invertible.",
+   "uses": [
+    "lem-sfb-pointwise-right-kan-from-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual conclusion); agent generalization to arbitrary categories via explicit comma limits, compared with Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:709-764"
+   }
+  },
+  {
+   "text": "Let $(LF,\\varepsilon)$ be any pair with the stated universal property. Apply [lem-sfb-right-kan-extension-unique-iso] to $(LF,\\varepsilon)$ and $(L_0,e_0)$, obtaining an isomorphism $v:LF\\xrightarrow{\\sim}L_0$ with $\\varepsilon=e_0\\circ(vQ)$. At $P\\in\\mathcal P$ this is a composite of two isomorphisms, so $\\varepsilon_P$ is invertible. Naturality of $\\varepsilon$ at $f:P\\to P'$ is exactly $\\varepsilon_{P'}\\circ LF(Qf)=F(f)\\circ\\varepsilon_P$. The component inverses obey the inverse naturality equation by multiplying this equality by those inverses, giving the natural isomorphism on the full subcategory on $\\mathcal P$.",
+   "uses": [
+    "lem-sfb-right-kan-extension-unique-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes (dual conclusion); agent generalization to arbitrary categories via explicit comma limits, compared with Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:709-764"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-pointwise-right-kan-from-limits",
+  "lem-sfb-right-kan-extension-unique-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN, lemma-find-existence-computes (dual conclusion); agent generalization to arbitrary categories via explicit comma limits, compared with Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:709-764"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|hasLeftDerivedFunctor",
+   "results": {
+    "t": "2026-10-24T01:11:53Z",
+    "tool": "grep",
+    "query": "IsLeftDerivedFunctor|hasLeftDerivedFunctor",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean"
+    ],
+    "digest": "46d6111642d84114"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Functor/Derived/LeftDerived.lean:48-75 and PointwiseLeftDerived.lean:166-201, and Functor/KanExtension/Pointwise.lean:426-461. These define universal/pointwise derived functors or assume F inverts W globally, or Q is fully faithful globally. None states the enough-projective-representatives criterion with bijectivity only for sources in P; constructing the initial comma objects is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localization with enough homotopically projective objects computes arbitrary left derived functors on the projective objects",
+   "results": {
+    "t": "2026-10-24T01:11:54Z",
+    "tool": "leansearch",
+    "query": "A localization with enough homotopically projective objects computes arbitrary left derived functors on the projective objects",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.leftDerived",
+     "CategoryTheory.Functor.IsLeftDerivedFunctor",
+     "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj",
+     "CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_of_inverts",
+     "CategoryTheory.Functor.leftDerivedToHomotopyCategory",
+     "CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor.mk'"
+    ],
+    "digest": "7ec520276e804d75"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Functor/Derived/LeftDerived.lean:48-75 and PointwiseLeftDerived.lean:166-201, and Functor/KanExtension/Pointwise.lean:426-461. These define universal/pointwise derived functors or assume F inverts W globally, or Q is fully faithful globally. None states the enough-projective-representatives criterion with bijectivity only for sources in P; constructing the initial comma objects is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "results": {
+    "t": "2026-10-24T01:11:54Z",
+    "tool": "loogle",
+    "query": "\"IsLeftDerivedFunctor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.IsLeftDerivedFunctor",
+     "CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit",
+     "CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension",
+     "CategoryTheory.Functor.IsLeftDerivedFunctor.mk",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso",
+     "CategoryTheory.Functor.instIsLeftDerivedFunctorCompCompInvAssociatorWhiskerRightOfIsRightAdjoint"
+    ],
+    "digest": "5538b6c713bb2d39"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Functor/Derived/LeftDerived.lean:48-75 and PointwiseLeftDerived.lean:166-201, and Functor/KanExtension/Pointwise.lean:426-461. These define universal/pointwise derived functors or assume F inverts W globally, or Q is fully faithful globally. None states the enough-projective-representatives criterion with bijectivity only for sources in P; constructing the initial comma objects is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization with enough projective objects whose Hom maps into the localization are bijections computes every total left derived functor on these objects",
+   "results": {
+    "t": "2026-10-24T01:11:55Z",
+    "tool": "leanfinder",
+    "query": "A localization with enough projective objects whose Hom maps into the localization are bijections computes every total left derived functor on these objects",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.HasLeftDerivedFunctor.mk'",
+     "CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac",
+     "CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit",
+     "CategoryTheory.Functor.IsLeftDerivedFunctor",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_of_inverts",
+     "CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ",
+     "CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective",
+     "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj"
+    ],
+    "digest": "aa3b32c6ec7ac87c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Functor/Derived/LeftDerived.lean:48-75 and PointwiseLeftDerived.lean:166-201, and Functor/KanExtension/Pointwise.lean:426-461. These define universal/pointwise derived functors or assume F inverts W globally, or Q is fully faithful globally. None states the enough-projective-representatives criterion with bijectivity only for sources in P; constructing the initial comma objects is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightKanExtension.*[Ii]nitial|[Ii]nitial.*rightKanExtension|[Pp]rojective.*[Ll]eftDerived|[Ll]eftDerived.*[Pp]rojective|IsRightKanExtension",
+   "results": {
+    "t": "2026-10-24T01:12:57Z",
+    "tool": "grep",
+    "query": "rightKanExtension.*[Ii]nitial|[Ii]nitial.*rightKanExtension|[Pp]rojective.*[Ll]eftDerived|[Ll]eftDerived.*[Pp]rojective|IsRightKanExtension",
+    "sub": "CategoryTheory/Functor",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean"
+    ],
+    "digest": "9abf02623d9d1234"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Functor/Derived/LeftDerived.lean:48-75 and PointwiseLeftDerived.lean:166-201, and Functor/KanExtension/Pointwise.lean:426-461. These define universal/pointwise derived functors or assume F inverts W globally, or Q is fully faithful globally. None states the enough-projective-representatives criterion with bijectivity only for sources in P; constructing the initial comma objects is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a localization Q has enough objects P for which Hom P X maps bijectively to Hom QP QX then any functor has a right Kan extension along Q whose counit is an isomorphism at P",
+   "results": {
+    "t": "2026-10-24T01:12:58Z",
+    "tool": "leanfinder",
+    "query": "If a localization Q has enough objects P for which Hom P X maps bijectively to Hom QP QX then any functor has a right Kan extension along Q whose counit is an isomorphism at P",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.RightExtension.isPointwiseRightKanExtensionOfIsIsoOfIsLocalization",
+     "CategoryTheory.Functor.isPointwiseRightKanExtensionAtOfIsoOfIsLocalization",
+     "CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsoOfIsLocalization",
+     "CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension",
+     "CategoryTheory.Functor.instIsIsoAppRanCounit",
+     "CategoryTheory.Functor.instIsIsoAppRanCounit_1",
+     "CategoryTheory.Functor.instIsIsoAppCounitRanAdjunctionOfHasPointwiseRightKanExtension",
+     "CategoryTheory.Functor.isPointwiseLeftKanExtensionAtOfIsoOfIsLocalization"
+    ],
+    "digest": "b2f13f63ac55a0e3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Functor/Derived/LeftDerived.lean:48-75 and PointwiseLeftDerived.lean:166-201, and Functor/KanExtension/Pointwise.lean:426-461. These define universal/pointwise derived functors or assume F inverts W globally, or Q is fully faithful globally. None states the enough-projective-representatives criterion with bijectivity only for sources in P; constructing the initial comma objects is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a localization with enough projective representatives computes left derived functors",
+   "results": {
+    "t": "2026-10-24T01:43:47Z",
+    "tool": "leanfinder",
+    "query": "a localization with enough projective representatives computes left derived functors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.HasLeftDerivedFunctor.mk'",
+     "CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac",
+     "CategoryTheory.Functor.IsLeftDerivedFunctor",
+     "CategoryTheory.Functor.hasLeftDerivedFunctor_of_hasPointwiseLeftDerivedFunctor",
+     "CategoryTheory.Functor.isLeftDerivedFunctor_of_inverts",
+     "CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit",
+     "CategoryTheory.Functor.HasPointwiseLeftDerivedFunctor",
+     "CategoryTheory.Functor.HasLeftDerivedFunctor"
+    ],
+    "digest": "ba8227686937795c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: the general pointwise Kan construction requires the comma-limit argument proved here; global-inversion and ordinary projective-resolution results do not supply these hypotheses. Read Pointwise.lean:56-61,709-804 and Derived/PointwiseLeftDerived.lean:116-201."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPointwiseRightKanExtensionAt, HasPointwiseRightKanExtension, StructuredArrow, IsInitial",
+   "results": {
+    "t": "2026-10-24T01:43:47Z",
+    "tool": "loogle",
+    "query": "IsPointwiseRightKanExtensionAt, HasPointwiseRightKanExtension, StructuredArrow, IsInitial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'IsPointwiseRightKanExtensionAt'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "unavailable: Loogle rejected the unqualified identifier IsPointwiseRightKanExtensionAt; corrected fully qualified query run subsequently."
+  },
+  {
+   "tool": "grep",
+   "query": "pointwiseRightKanExtension|HasPointwiseRightKanExtension|StructuredArrow.*IsInitial",
+   "results": {
+    "t": "2026-10-24T01:43:47Z",
+    "tool": "grep",
+    "query": "pointwiseRightKanExtension|HasPointwiseRightKanExtension|StructuredArrow.*IsInitial",
+    "sub": "CategoryTheory/Functor",
+    "ok": true,
+    "n_hits": 20,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean"
+    ],
+    "digest": "f3efc0a06dfc90ce"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: the general pointwise Kan construction requires the comma-limit argument proved here; global-inversion and ordinary projective-resolution results do not supply these hypotheses. Read Pointwise.lean:56-61,709-804 and Derived/PointwiseLeftDerived.lean:116-201."
+  },
+  {
+   "tool": "leansearch",
+   "query": "right Kan extension exists when every structured arrow category has an initial object",
+   "results": {
+    "t": "2026-10-24T01:43:48Z",
+    "tool": "leansearch",
+    "query": "right Kan extension exists when every structured arrow category has an initial object",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.hasPointwiseRightKanExtension",
+     "CategoryTheory.Functor.RightExtension.precomp",
+     "CategoryTheory.Functor.RightExtension",
+     "CategoryTheory.isRightAdjoint_iff_hasInitial_structuredArrow",
+     "CategoryTheory.Functor.HasRightKanExtension.mk",
+     "CategoryTheory.Functor.rightKanExtension",
+     "CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.hasRightKanExtension",
+     "CategoryTheory.Functor.HasRightKanExtension"
+    ],
+    "digest": "5cd705c285f1599b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: the general pointwise Kan construction requires the comma-limit argument proved here; global-inversion and ordinary projective-resolution results do not supply these hypotheses. Read Pointwise.lean:56-61,709-804 and Derived/PointwiseLeftDerived.lean:116-201."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pointwise right Kan extension from limits of structured arrow comma diagrams with counit evaluation at the identity",
+   "results": {
+    "t": "2026-10-24T01:52:35Z",
+    "tool": "leanfinder",
+    "query": "pointwise right Kan extension from limits of structured arrow comma diagrams with counit evaluation at the identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.pointwiseRightKanExtensionCounit_app",
+     "CategoryTheory.Functor.isPointwiseRightKanExtensionRanCounit",
+     "CategoryTheory.Functor.pointwiseRightKanExtension_map",
+     "CategoryTheory.Functor.instIsRightKanExtensionPointwiseRightKanExtensionPointwiseRightKanExtensionCounit",
+     "CategoryTheory.Functor.pointwiseRightKanExtensionCounit",
+     "CategoryTheory.Functor.pointwiseRightKanExtension_obj",
+     "CategoryTheory.Functor.pointwiseRightKanExtensionIsPointwiseRightKanExtension",
+     "CategoryTheory.Functor.pointwiseRightKanExtensionIsUniversal"
+    ],
+    "digest": "26ead9ee9b3cc774"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: the general pointwise Kan construction requires the comma-limit argument proved here; global-inversion and ordinary projective-resolution results do not supply these hypotheses. Read Pointwise.lean:56-61,709-804 and Derived/PointwiseLeftDerived.lean:116-201."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.pointwiseRightKanExtension",
+   "results": {
+    "t": "2026-10-24T01:52:36Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Functor.pointwiseRightKanExtension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.pointwiseRightKanExtension",
+     "CategoryTheory.Functor.instIsRightKanExtensionPointwiseRightKanExtensionPointwiseRightKanExtensionCounit",
+     "CategoryTheory.Functor.pointwiseRightKanExtensionIsPointwiseRightKanExtension",
+     "CategoryTheory.Functor.pointwiseRightKanExtensionCounit",
+     "CategoryTheory.Functor.pointwiseRightKanExtension_obj",
+     "CategoryTheory.Functor.pointwiseRightKanExtensionIsUniversal",
+     "CategoryTheory.Functor.pointwiseRightKanExtension_lift_app",
+     "CategoryTheory.Functor.pointwiseRightKanExtensionCounit_app"
+    ],
+    "digest": "16d93f856219b0ef"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: the general pointwise Kan construction requires the comma-limit argument proved here; global-inversion and ordinary projective-resolution results do not supply these hypotheses. Read Pointwise.lean:56-61,709-804 and Derived/PointwiseLeftDerived.lean:116-201."
+  },
+  {
+   "tool": "grep",
+   "query": "pointwiseRightKanExtension|IsPointwiseRightKanExtension.isUniversal",
+   "results": {
+    "t": "2026-10-24T01:52:36Z",
+    "tool": "grep",
+    "query": "pointwiseRightKanExtension|IsPointwiseRightKanExtension.isUniversal",
+    "sub": "CategoryTheory/Functor/KanExtension/Pointwise.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "56",
+     "61",
+     "74",
+     "75",
+     "76"
+    ],
+    "digest": "dd58a40cb2912a45"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: the general pointwise Kan construction requires the comma-limit argument proved here; global-inversion and ordinary projective-resolution results do not supply these hypotheses. Read Pointwise.lean:56-61,709-804 and Derived/PointwiseLeftDerived.lean:116-201."
+  },
+  {
+   "tool": "leansearch",
+   "query": "limits of comma diagrams assemble to a right Kan extension with counit the identity projection",
+   "results": {
+    "t": "2026-10-24T01:52:37Z",
+    "tool": "leansearch",
+    "query": "limits of comma diagrams assemble to a right Kan extension with counit the identity projection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.rightKanExtensionCounit",
+     "CategoryTheory.Functor.instIsRightKanExtensionPointwiseRightKanExtensionPointwiseRightKanExtensionCounit",
+     "CategoryTheory.Functor.ranCounit",
+     "CategoryTheory.Functor.pointwiseRightKanExtensionCounit_app",
+     "CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit",
+     "CategoryTheory.Functor.RightExtension.precomp",
+     "CategoryTheory.Functor.pointwiseRightKanExtensionCounit",
+     "CategoryTheory.Functor.isPointwiseRightKanExtensionRanCounit"
+    ],
+    "digest": "eddd9b7981a0ac24"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: the general pointwise Kan construction requires the comma-limit argument proved here; global-inversion and ordinary projective-resolution results do not supply these hypotheses. Read Pointwise.lean:56-61,709-804 and Derived/PointwiseLeftDerived.lean:116-201."
+  },
+  {
+   "tool": "grep",
+   "query": "def pointwiseRightKanExtension|def pointwiseRightKanExtensionCounit|def pointwiseRightKanExtensionIsUniversal|def pointwiseRightKanExtensionIsPointwiseRightKanExtension",
+   "results": {
+    "t": "2026-10-24T01:53:11Z",
+    "tool": "grep",
+    "query": "def pointwiseRightKanExtension|def pointwiseRightKanExtensionCounit|def pointwiseRightKanExtensionIsUniversal|def pointwiseRightKanExtensionIsPointwiseRightKanExtension",
+    "sub": "CategoryTheory/Functor/KanExtension",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean"
+    ],
+    "digest": "54f1b6582fd7f418"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: the general pointwise Kan construction requires the comma-limit argument proved here; global-inversion and ordinary projective-resolution results do not supply these hypotheses. Read Pointwise.lean:56-61,709-804 and Derived/PointwiseLeftDerived.lean:116-201."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-semifree-bimodule-tensor-computation",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09R9, lemma-tensor-with-compact-fully-faithful. Supporting computation in the proof of Tag 09R9: evaluating derived tensor on A[k] and on the multiplication maps A to A[k], using Tag 09LS, lemma-derived-bc, the property-(P) computation in its proof. General categorical input: computation of the universal left derived counit on objects whose outgoing Hom maps survive localization.",
+   "via": [
+    "lem-sfb-dg-semifree-bimodule-tensor-computation",
+    "lem-sfb-dg-compact-bimodule-full-faithfulness",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-projective-localization-left-derived",
+  "worker": "stage1",
+  "summary": "Q89 kept the statement, proved initiality directly from outgoing-Hom bijectivity and enough representatives, wrote the limit-cone argument, invoked a generic Mathlib pointwise right Kan assembly leaf, and transferred the computation to every universal pair by the existing uniqueness leaf. One new Mathlib leaf; no unresolved new lemma or Lean work.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited direct-image effectivity prerequisite chain in blueprint.from.place: supports the property-(P) computation in Stacks 09LS used by 09R9. The inherited ancestor command returns None because created.item terminates at Sheaf.SixFunctors.CtfStabilityDirectImages, not a DAG id; retained that inherited null ancestor and exact place, adding the item to new-node via. No unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-88cc59714",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-88cc59714 (reviewer sub-agent of L); spot-checked: I read the item, the new node and the cited lem-sfb-right-kan-extension-unique-iso in full. The item statement is unchanged. Stacks 06XN (derived.tex:5092-5117) is a comparison only: the item does not require q_X in W, so proof_origin=agent is correct. Step 1: (P,(Qq)^-1 u) is initial in (Y|Q) by (ii). Step 2: a diagram on a category with an initial object has a limit, so no completeness of H is needed. Step 3: the new leaf gives L0, e0 with the identity-indexed counit. Step 4: (P,1_QP) is initial; I checked both identities, v_j0 t=1 and t v_j0=1 by uniqueness, so (e0)_P is an iso. Step 5: unique-iso gives u:LF->L0 with e0(uQ)=eps, so eps_P is an iso for every universal pair; the last equation is naturality of eps. Only essential surjectivity is used from the localization hypothesis. Small cases tested: C={P->X} with W={q}, Q=id, and empty P. New node lem-sfb-pointwise-right-kan-from-limits: statement is self-contained with no proof. The Mathlib match is checked line by line: Pointwise.lean:56-61 (HasLimit on StructuredArrow, no smallness), 709-727 (obj = limit), 733-744 (counit = limit.pi at mk (1 (L.obj X)))), 758-764 (universal); Basic.lean:109-115 (homEquiv toFun = whiskerLeft then alpha). Four searches are recorded. Duplicate search over the whole DAG: lem-trf-small-pointwise-right-kan-adjunction needs small categories and a complete target; lem-pur-total-left-derived-localization gives existence only; lem-sfb-unary-left-derived-calculus is unsplit and needs a derivability structure (W-arrows plus finality), so it does not specialize. No new node restates a clause of the item. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProjectiveLocalizationLeftDerived",
+  "declaration": "CategoryTheory.exists_leftDerived_of_projective_localization",
+  "file": "lean/Sheaf/CategoryTheory/ProjectiveLocalizationLeftDerived.lean",
+  "statement": "theorem exists_leftDerived_of_projective_localization {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D] {H : Type uH} [Category.{vH} H] (W : MorphismProperty C) (Q : C ⥤ D) [Q.IsLocalization W] (S : ObjectProperty C) (hrep : ∀ X : C, ∃ P : C, S P ∧ ∃ q : P ⟶ X, IsIso (Q.map q)) (hhom : ∀ (P X : C), S P → Function.Bijective (Q.map : (P ⟶ X) → (Q.obj P ⟶ Q.obj X))) (F : C ⥤ H) : (∃ (LF : D ⥤ H) (ε : Q ⋙ LF ⟶ F), ∀ G : D ⥤ H, Function.Bijective (fun β : G ⟶ LF ↦ Functor.whiskerLeft Q β ≫ ε)) ∧ (∀ (LF : D ⥤ H) (ε : Q ⋙ LF ⟶ F), (∀ G : D ⥤ H, Function.Bijective (fun β : G ⟶ LF ↦ Functor.whiskerLeft Q β ≫ ε)) → (∀ P : C, S P → IsIso (ε.app P)) ∧ IsIso (Functor.whiskerLeft S.ι ε) ∧ ∀ (P P' : C), S P → S P' → ∀ f : P ⟶ P', LF.map (Q.map f) ≫ ε.app P' = ε.app P ≫ F.map f)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4aa80bc1c",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: arbitrary C/D/H with independent universes; [Q.IsLocalization W] (essSurj via Mathlib Localization.essSurj); hrep with image-invertible q; hhom bijection for P∈S, all X; existence with the exact bijection β↦whiskerLeft Q β ≫ ε; for every universal pair: ε.app P iso, IsIso (whiskerLeft S.ι ε), naturality LF.map(Q.map f)≫ε.app P' = ε.app P≫F.map f. Statement true (initial objects in StructuredArrow Y Q give the pointwise right Kan extension; uniqueness carries it to any universal pair). Node differs from live only in lean; lean.statement verbatim; sole stmt_dep is the size convention; no defs; sorry only; docstrings carry source and blueprint id; no duplicate in project lean/Mathlib; report has Worker report and Second reading by Q80 (author's own). No findings."
+ }
+}

@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-smooth-unipotent-extension",
+ "kind": "statement",
+ "title": "Extensions of smooth unipotent algebraic groups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $N,E,Q$ be smooth affine $k$-group schemes of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Let $i:N\\hookrightarrow E$ be a closed normal subgroup scheme [def-sc-group-scheme-subgroup], and let $q:E\\to Q$ represent the fppf quotient $E/N$ [def-sfb-solvable-group-structure]: $q$ is flat, surjective and locally of finite presentation, and $i$ identifies $N$ with its scheme-theoretic kernel. A smooth affine group is unipotent if it admits a faithful finite-dimensional matrix representation, a closed immersion into $\\operatorname{GL}_d$, in which every point over every algebraically closed extension is a unipotent matrix, meaning $(g-I_d)^m=0$ for some $m\\geq1$ [def-sfb-solvable-group-structure]. If $N$ and $Q$ are unipotent, then $E$ is unipotent. No connectedness, commutativity, centrality or characteristic-zero hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 6.45, printed p.135, closure of unipotent groups under extensions; the faithful-matrix interpretation is explained in the footnote there and Section 14(c), printed pp.286--287."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "Choose the faithful matrix representations in the hypotheses for $N$ and $Q$. A closed immersion is injective on points over every commutative $k$-algebra, and the geometric unipotence hypothesis applies in particular over the algebraically closed field $k$. Apply [lem-sfb-geometric-unipotence-unitriangular-embedding] separately to these two smooth affine finite-type groups. We obtain closed embeddings $N\\hookrightarrow\\mathcal U_a$ and $Q\\hookrightarrow\\mathcal U_b$ over $k$, with $a,b\\geq1$. In the remaining steps a fixed vector always means fixed over every commutative algebra, not just by rational points.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 6.45, printed p.135; Theorem 14.5 and Corollary 14.12, printed pp.281--283, translating the matrix hypothesis to rational-representation unipotence."
+   }
+  },
+  {
+   "text": "Let $V\\ne0$ be any finite-dimensional rational $E$-module. By [lem-sfb-rational-representation-comodule-dictionary], use interchangeably its group-scheme representation and its coaction $c_V:V\\to V\\otimes_k k[E]$. Restrict the representation to $N$ and choose a basis of $V$. The embedding of $N$ from step 1 and [lem-sfb-unitriangular-subgroup-rational-fixed-vector] give a nonzero $v\\in V$ fixed by $N(A)$ for every commutative $k$-algebra $A$. Thus its restricted coaction is exactly $v\\mapsto v\\otimes1$, as required for descent.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-unitriangular-subgroup-rational-fixed-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 6.45, printed p.135 (nonvanishing of the N-fixed space); Theorem 14.5(b) implies (a), printed pp.281--282; Remark 4.1, printed p.84."
+   }
+  },
+  {
+   "text": "The given $q$ represents $E/N$. The quotient of [lem-sfb-affine-normal-quotient-geometry] and the given $Q$ represent the same fppf sheaf, so their representing isomorphism identifies their quotient maps and kernels. In particular $q$ is faithfully flat in the coordinate-algebra sense. Apply [lem-sfb-central-kernel-cyclic-representation-descent] to $q$, $V$, and $v$. The smallest $E$-subcomodule $W\\subseteq V$ containing $v$ is nonzero and finite-dimensional, $N$ acts trivially on it, and its $E$-action is the pullback of a rational $Q$-action. This application requires neither centrality of $N$ nor connectedness of any group.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-central-kernel-cyclic-representation-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 6.45, printed p.135; Lemma 5.15 and Theorem 5.13, printed pp.101--102; Proposition 5.25, printed p.105."
+   }
+  },
+  {
+   "text": "Choose a basis of $W$. Apply [lem-sfb-unitriangular-subgroup-rational-fixed-vector] to the descended $Q$-representation on $W$, using $Q\\hookrightarrow\\mathcal U_b$ from step 1. It gives $0\\ne w\\in W$ fixed by $Q(A)$ for every commutative $k$-algebra $A$. For each $e\\in E(A)$ its action on $W_A$ equals the action of $q_A(e)$, by the pullback identity in step 3. Consequently $w$ is fixed by $E(A)$ for every $A$. Its image in $V$ is nonzero and fixed. We have proved that every nonzero finite-dimensional rational $E$-module has a nonzero rationally fixed vector.",
+   "uses": [
+    "lem-sfb-unitriangular-subgroup-rational-fixed-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 6.45, printed p.135: the quotient acts on the invariant submodule and supplies a fixed vector."
+   }
+  },
+  {
+   "text": "By induction on $d=\\dim_k V$, every finite-dimensional rational $E$-module admits a full flag $0=V_0\\subset V_1\\subset\\cdots\\subset V_d=V$ by rational submodules, with trivial action on each $V_j/V_{j-1}$. For $d=0$ the empty flag suffices. If $d>0$, step 4 supplies a nonzero rationally fixed $w$, and $L=kw$ is a trivial one-dimensional submodule. Under [lem-sfb-rational-representation-comodule-dictionary], its coaction is $w\\mapsto w\\otimes1$. Therefore $(\\pi\\otimes1)c_V$, where $\\pi:V\\to V/L$, vanishes on $L$ and defines a coaction on $V/L$; the counit and coassociativity identities descend from those on $V$. Apply the induction hypothesis to this $(d-1)$-dimensional module. Inverse images of its flag under $\\pi$, preceded by $0\\subset L$, give the asserted flag. The induced quotient coactions are exactly the trivial coactions from the induction hypothesis. Scalar extension preserves these inclusions and quotients because vector-space exact sequences split linearly.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.3, printed p.280: finite-dimensional flag argument from the fixed-vector property."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-subgroup-representation-kernel] to the trivial closed normal subgroup of $E$. (It is cut out in $k[E]$ by the augmentation ideal, so its coordinate algebra is $k$.) We obtain $d\\geq1$ and $r:E\\to\\operatorname{GL}_{d,k}$ with trivial scheme-theoretic kernel. For any $k$-algebra $A$, if $r_A(x)=r_A(y)$ then $r_A(y^{-1}x)=I_d$, hence $y^{-1}x=1$ by the stated kernel equality on $A$-points. Thus $r_A$ is injective for every $A$. By [lem-sfb-geometric-unipotence-faithful-closed-immersion], $r$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-geometric-unipotence-faithful-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 5.19, printed p.103, with the trivial normal subgroup; Corollary 3.35, printed p.75 (equivalently Theorem 4.9, printed p.87)."
+   }
+  },
+  {
+   "text": "Apply the flag of step 5 to the representation $r$ from step 6 and choose a basis adapted to this flag. For every commutative $k$-algebra $A$, the matrix of $r_A(e)$ in that basis is upper triangular with all diagonal entries $1$: preservation of $V_j\\otimes_k A$ gives the zero entries below the diagonal, and triviality on each rank-one quotient gives the diagonal entries. Therefore $(r_A(e)-I_d)^d=0$, since each multiplication by this strictly upper triangular matrix lowers the flag by one step. In particular this identity holds for every point over every algebraically closed extension of $k$. Changing the basis conjugates the faithful closed immersion by an invertible constant matrix and preserves both closed immersion and nilpotence. This is precisely unipotence in the statement. The argument uses no connectedness or characteristic restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.3 and Theorem 14.5(a) implies (b), printed pp.280--281; Section 6.45, printed p.135."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-central-kernel-cyclic-representation-descent",
+  "lem-sfb-normal-subgroup-representation-kernel",
+  "lem-sfb-geometric-unipotence-faithful-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 6.45, printed p.135; with the matrix/fixed-vector translation and flag argument of Theorem 14.5, Corollary 14.12 and Proposition 14.3, printed pp.280--283."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An extension of smooth unipotent affine algebraic groups is unipotent",
+   "results": "{\"t\": \"2026-10-24T03:40:40Z\", \"tool\": \"leanfinder\", \"query\": \"An extension of smooth unipotent affine algebraic groups is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNilpotent_prod\", \"Group.isNilpotent_top\", \"CommGroup.nilpotencyClass_le_one\", \"TrivSqZeroExt.isUnit_or_isNilpotent_of_isMaximal_isNilpotent\", \"instLieAddGroupOfTopWithTopENat\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"isNilpotent_pi\", \"instLieAddGroupOfNatWithTopENatOfIsTopologicalAddGroup\"], \"digest\": \"1f7b4a22da89a8a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent/solvable group extensions or exact module sequences, not unipotent affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T03:40:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent/solvable group extensions or exact module sequences, not unipotent affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|Unipotent",
+   "results": "{\"t\": \"2026-10-24T03:40:41Z\", \"tool\": \"grep\", \"query\": \"unipotent|Unipotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent/solvable group extensions or exact module sequences, not unipotent affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the kernel and quotient of an exact sequence of affine algebraic groups are unipotent then the middle group is unipotent",
+   "results": "{\"t\": \"2026-10-24T03:41:14Z\", \"tool\": \"leansearch\", \"query\": \"If the kernel and quotient of an exact sequence of affine algebraic groups are unipotent then the middle group is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"LinearMap.injective_range_liftQ_of_exact\", \"CategoryTheory.ComposableArrows.Exact.cokerIsoKer'\", \"AddGroupExtension.quotientKerRightHomEquivRight\", \"Function.Exact.linearMap_ker_eq\", \"GroupExtension.range_inl_eq_ker_rightHom\", \"AddMonoidHom.exact_iff\", \"Function.Exact.addMonoidHom_ker_eq\"], \"digest\": \"be72378de108f872\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent/solvable group extensions or exact module sequences, not unipotent affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unipotent algebraic group schemes are closed under group extensions",
+   "results": "{\"t\": \"2026-10-24T03:41:57Z\", \"tool\": \"leanfinder\", \"query\": \"Unipotent algebraic group schemes are closed under group extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.normal_inl_range\", \"GroupExtension\", \"Group.IsNilpotent\", \"isNilpotent_prod\", \"solvable_of_ker_le_range\", \"IsSolvable\", \"SemidirectProduct.toGroupExtension\", \"Group.IsNilpotent.nilpotent\"], \"digest\": \"60c323e12b9d2354\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent/solvable group extensions or exact module sequences, not unipotent affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "IsUnipotent|isUnipotent",
+   "results": "{\"t\": \"2026-10-24T03:41:57Z\", \"tool\": \"grep\", \"query\": \"IsUnipotent|isUnipotent\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent/solvable group extensions or exact module sequences, not unipotent affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension of smooth unipotent affine algebraic groups is unipotent",
+   "results": "{\"t\": \"2026-10-24T04:04:24Z\", \"tool\": \"leanfinder\", \"query\": \"An extension of smooth unipotent affine algebraic groups is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNilpotent_prod\", \"Group.isNilpotent_top\", \"CommGroup.nilpotencyClass_le_one\", \"TrivSqZeroExt.isUnit_or_isNilpotent_of_isMaximal_isNilpotent\", \"instLieAddGroupOfTopWithTopENat\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"isNilpotent_pi\", \"instLieAddGroupOfNatWithTopENatOfIsTopologicalAddGroup\"], \"digest\": \"1f7b4a22da89a8a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract nilpotent groups, quotient homomorphisms, Lie-module primitive vectors and topological Lie groups do not state extension closure for unipotent affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T04:04:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract nilpotent groups, quotient homomorphisms, Lie-module primitive vectors and topological Lie groups do not state extension closure for unipotent affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|Unipotent",
+   "results": "{\"t\": \"2026-10-24T04:04:25Z\", \"tool\": \"grep\", \"query\": \"unipotent|Unipotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract nilpotent groups, quotient homomorphisms, Lie-module primitive vectors and topological Lie groups do not state extension closure for unipotent affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If kernel and quotient are unipotent then an affine algebraic group is unipotent",
+   "results": "{\"t\": \"2026-10-24T04:04:41Z\", \"tool\": \"leansearch\", \"query\": \"If kernel and quotient are unipotent then an affine algebraic group is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_quotient_of_nilpotent\", \"QuotientGroup.kerLift\", \"QuotientAddGroup.kerLift\", \"Con.kerLift\", \"QuotientAddGroup.lift.congr_simp\", \"QuotientGroup.ker_mk'\", \"QuotientAddGroup.ker_mk'\", \"QuotientAddGroup.preimage_mk_zero\"], \"digest\": \"ae3d704cb9b904c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract nilpotent groups, quotient homomorphisms, Lie-module primitive vectors and topological Lie groups do not state extension closure for unipotent affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every rational representation of an extension of unipotent algebraic groups has a nonzero invariant vector",
+   "results": "{\"t\": \"2026-10-24T04:04:45Z\", \"tool\": \"leanfinder\", \"query\": \"Every rational representation of an extension of unipotent algebraic groups has a nonzero invariant vector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.Hilbert90.aux_ne_zero\", \"IsSl2Triple.HasPrimitiveVectorWith.ne_zero\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"LieModule.exists_isRegular\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\", \"Matrix.GeneralLinearGroup.parabolicFixedPoint\"], \"digest\": \"34add58a7d310289\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract nilpotent groups, quotient homomorphisms, Lie-module primitive vectors and topological Lie groups do not state extension closure for unipotent affine group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-affine-space-quotient",
+  "date": "2026-10-24",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Brion Lemma 2.3 proof, printed p.118, first three sentences (unipotent radical, affine-space variety and trivial torsor); Remark 2.2(v), p.117, for splitting over an algebraically closed field. Geometric integrality of a connected smooth algebraic group is included explicitly as a structural prerequisite. Supporting lemma: Section 6.45, printed p.135, closure of unipotent groups under extensions; the faithful-matrix interpretation is explained in the footnote there and Section 14(c), printed pp.286--287.",
+   "via": [
+    "lem-sfb-split-reductive-affine-space-quotient",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-unipotent-extension",
+  "worker": "stage1",
+  "summary": "Checked Milne 6.45 against the unchanged smooth geometric-matrix statement. Reused all supporting facts from the DAG, in particular unitriangular fixed vectors and descent of a cyclic kernel-fixed rational subrepresentation. Wrote the full dimension induction and the passage to geometric matrices. No new nodes, no new assumptions, no Lean attachment.",
+  "blueprint": "The inherited from.place traces the supporting algebraic-group input to the direct-image finiteness proof, alteration reduction, via split reductive affine-space quotients. The latest main-20261024 blueprint (ef6f9619fdbffa59e88528fb56483d76c70258c8), sk-thm-sf-ctf-stability-direct-images.proof.md, is the current route. The item supplies the extension-closure input in its recorded Milne/Brion prerequisite chain. Its nearest imported ancestor is null (blueprint_refs.py ancestor output), retained as inherited. Whole-blueprint searches for unipotent and fixed vector found no same-statement node. Steps 1--4 realize Milne 6.45 and steps 5--7 explicitly translate its conclusion back to the given matrix formulation."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NW-0001284b7",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-0001284b7 (reviewer sub-agent of L); spot-checked: I read the 7-step split in full; there are no new nodes. The item's statement and stmt_deps are identical to the live record, which is still unsplit, so no other group has split it first and no re-split note applies. Source: Milne iAG2017 6.45 (p.135; V^N argument) plus 14.3, 14.5 and 14.12 (pp.280-283), all read. Step 1: the unitriangular-embedding hypotheses hold because closed immersions are injective on R-points, k is algebraically closed, and N and Q are smooth. Step 2: the fixed-vector node applies to the restriction to N; the dictionary formula gives the coaction v⊗1. Step 3: by Yoneda, q is identified with the faithfully flat quotient map of the quotient-geometry node, with kernel N; the descent node explicitly needs no centrality. Step 4: the explicit formula gives r^E_A(e)=r^Q_A(q_A(e)), so w is fixed by E(A). Step 5: the flag induction is genuinely elementary and set up explicitly. Step 6: the kernel node applied to the trivial subgroup plus the all-R injectivity criterion gives a faithful closed immersion. Step 7: in a flag-adapted basis the matrices are unitriangular, so (r-I)^d=0. Edge cases checked: N=E, N=1, finite p-groups, dim V=1. No duplicate in the DAG; no cycle (911-node closure); all citations are in the item's unit, so no tool_uses; no SGA. Batch-5: the four flagged citations (unitriangular-embedding, normal-quotient-geometry, representation-kernel, faithful-closed-immersion) reach only generic trf nodes: flat tensor preserves injections, fppf descent-datum and algebraic-space definitions, vector-subspace complement. None is a step of the trace formula or of Poincaré duality, so I accepted them. One inaccuracy in the report only: it says source.place was corrected, but only proof_origin changed; the old 14(c) locator is still valid, so I made no fix."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SmoothUnipotentExtension",
+  "declaration": "AlgebraicGeometry.SolvableGroupStructure.isUnipotent_of_isFppfQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SmoothUnipotentExtension.lean",
+  "statement": "theorem isUnipotent_of_isFppfQuotient {k : Type u} [Field k] [IsAlgClosed k] (N E Q : Grp (Over (Spec (.of k)))) [Smooth N.X.hom] [IsAffine N.X.left] [LocallyOfFiniteType N.X.hom] [QuasiCompact N.X.hom] [Smooth E.X.hom] [IsAffine E.X.left] [LocallyOfFiniteType E.X.hom] [QuasiCompact E.X.hom] [Smooth Q.X.hom] [IsAffine Q.X.left] [LocallyOfFiniteType Q.X.hom] [QuasiCompact Q.X.hom] (i : N ⟶ E) (q : E ⟶ Q) [IsClosedSubgroupScheme i.hom.hom] [IsNormalSubgroupScheme i.hom.hom] (hq : IsFppfQuotient i.hom.hom q) (hN : IsUnipotent N) (hQ : IsUnipotent Q) : IsUnipotent E",
+  "branch": "sheaf-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d427d579",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Statement matches node and Milne iAG2017 §6.45 p.135 (+footnote, 14.3/14.5/14.12) clause by clause: k alg. closed; N,E,Q : Grp (Over Spec k) smooth/affine/LocallyOfFiniteType+QuasiCompact; i closed+normal via upstream IsClosedSubgroupScheme/IsNormalSubgroupScheme; hq : IsFppfQuotient = flat ∧ surjective ∧ lfp ∧ N ≅ ker q compatible with i; hN hQ ⊢ IsUnipotent E with the recorded geometric-matrix predicate. No extra hypotheses (no connectedness/commutativity/centrality/char). Edge cases N=1, Q=1, trivial, char p finite nonabelian, GL_0 covered; universe u only. Node differs from live only in lean; statement verbatim; proof sorry; docstrings with source place and blueprint id plus the 7 proof steps; proof-dep imports exist on side-live. No duplicate in Sheaf/WeilConjectures/DAG/Mathlib. Report has Worker report and Second reading by Q70. No compile needed (no changes)."
+ }
+}

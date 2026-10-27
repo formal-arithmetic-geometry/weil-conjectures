@@ -1,0 +1,441 @@
+{
+ "id": "lem-trf-framed-symmetric-twist-comparison",
+ "kind": "statement",
+ "title": "Framed tensor twists of the symmetric algebra",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\mathcal E$ a finite type quasi-coherent $\\mathcal O_S$-module [pqf-def-coherent], $\\mathcal L$ an invertible $\\mathcal O_S$-module [def-sc-invertible-module], and $n\\in\\mathbb N$. Put $\\mathcal E_n=\\mathcal E\\otimes\\mathcal L^{\\otimes n}$, with $\\mathcal L^{\\otimes0}=\\mathcal O_S$ [def-pur-sheaf-tensor-product]. Then $\\mathcal E_n$ is quasi-coherent and of finite type. Give $\\mathcal A=\\operatorname{Sym}(\\mathcal E)$ and $\\mathcal B=\\operatorname{Sym}(\\mathcal E_n)$ their symmetric-degree gradings and canonical degree-one inclusions $j$ [lem-weil-pbc-quasi-coherent-symmetric-algebra; lem-weil-pbc-symmetric-algebra-graded].\nFor every open $U\\subseteq S$ and frame $e\\in\\Gamma(U,\\mathcal L)$ (meaning $a\\mapsto ae$ is an isomorphism $\\mathcal O_U\\to\\mathcal L|_U$), the map $\\tau_e:v\\mapsto v\\otimes e^{\\otimes n}$ is a module isomorphism $\\mathcal E|_U\\to\\mathcal E_n|_U$, with inverse $v\\otimes ae^{\\otimes n}\\mapsto av$. There is a unique graded $\\mathcal O_U$-algebra isomorphism $\\beta_e:\\mathcal A|_U\\to\\mathcal B|_U$ fixing scalars and satisfying $\\beta_e(j(v))=j(v\\otimes e^{\\otimes n})$. Its inverse extends $\\tau_e^{-1}$. On each affine $V\\subseteq U$, the canonical affine-section identifications identify $\\beta_e(V)$ with the symmetric-algebra map of $\\tau_e(V)$, and the maps in both directions commute with restriction to every smaller open subset. Under the canonical restriction identifications, $\\beta_e|_V=\\beta_{e|_V}$.\nIf $u\\in\\Gamma(U,\\mathcal O_S)^\\times$ and $e'=ue$, then $\\tau_{e'}=u^n\\tau_e$ and, for every $k\\geq0$ and every local homogeneous section $a\\in\\mathcal A_k$, one has $\\beta_{e'}(a)=u^{nk}\\beta_e(a)$. For $n=0$, the maps $\\tau_e$ and $\\beta_e$ are the canonical unit identifications.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 02NC, label lemma-twisting-and-proj, proof: trivialize the invertible module and glue; symmetric-algebra specialization"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "def-trf-canonical-symmetric-graded-algebra"
+ ],
+ "proof": [
+  {
+   "text": "First fix the restriction identifications. For an open $U$, the inclusion of the site of opens contained in $U$ into the site of opens of $S$ is continuous and cocontinuous: a cover of any $W\\subseteq U$ is the very same family on both sites. Both sites are small (their objects are sets of opens). Thus [lem-weil-pbc-module-sheafification-restriction] identifies restriction of a sheafification with sheafification of the restricted presheaf, preserving its unit sections. Apply this to the tensor presheaf [def-pur-sheaf-tensor-product] and to the symmetric-algebra presheaf [lem-weil-pbc-symmetric-algebra-sheaf-construction]. This gives $(F\\otimes G)|_U=F|_U\\otimes G|_U$ and $\\operatorname{Sym}(F)|_U=\\operatorname{Sym}(F|_U)$. The latter identification preserves scalars, generators and multiplication: on original presheaf sections these are the identical operations, and the comparison's hom-ext clause verifies the multiplication equality one linear variable at a time. The item's $\\operatorname{Sym}(F)$ with $j_F$ [lem-weil-pbc-quasi-coherent-symmetric-algebra] is identified with this explicit sheafification by the unique algebra maps in both directions preserving the degree-one maps: the explicit model has the same universal property by [lem-weil-pbc-quasi-coherent-symmetric-algebra-core], so both composites fix $j_F$ and are identities by uniqueness; the same holds over $U$. These are the canonical identifications used below.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-restriction",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04B8, label lemma-almost-cocontinuous-sheafification; module slice application Tag 04IY, sites-modules-lemma-relocalize"
+   }
+  },
+  {
+   "text": "Fix a frame $e$ over $U$ and write $c:\\mathcal L|_U\\to\\mathcal O_U$ for its inverse, so $c(ae)=a$ [def-sc-invertible-module]. The balanced map $(v,ae)\\mapsto av$ gives an inverse to $v\\mapsto v\\otimes e$: on pure tensors the composites are $v\\mapsto v$ and $v\\otimes ae\\mapsto av\\otimes e=v\\otimes ae$. These formulas commute with restrictions. They therefore descend through the sheafification in [def-pur-sheaf-tensor-product], by [def-weil-presheaf-modules-sheafification]; the same uniqueness checks the composite identities after sheafification. Induct on $m$: start with the identity frame of $\\mathcal L^{\\otimes0}=\\mathcal O_U$, and repeat this tensor calculation with $e$ to obtain the frame $e^{\\otimes(m+1)}$ from $e^{\\otimes m}$. Applying the identical calculation to $\\mathcal E|_U$ and the resulting frame of $\\mathcal L^{\\otimes n}|_U$ gives $\\tau_e$ and its asserted inverse. No tensor-section comparison on a nonaffine open is assumed.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section Tag 03EK, label section-tensor-product, presheaf tensor and sheafification formulas; Tag 03CY, label lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "Frames cover $S$ by [def-sc-invertible-module]. On each framed open the previous step identifies $\\mathcal E_n$ with $\\mathcal E$. Let $x\\in S$ and let $W\\ni x$ be a framed open with frame $e$. Restriction of quasi-coherent modules to an open is quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits], so $\\mathcal E|_W$ is quasi-coherent; by the definition [pqf-def-coherent] applied on the scheme $W$, $x$ has an affine neighbourhood $V\\subseteq W$ (affine opens of $W$ are affine opens of $S$, [lem-weil-pbc-affine-opens-basis]) with $\\mathcal E|_V\\cong\\widetilde M$. Composing with $\\tau_e|_V$ gives $\\mathcal E_n|_V\\cong\\widetilde M$. For finite type choose a neighbourhood $N$ of $x$ and a surjection $\\mathcal O_N^{\\oplus r}\\to\\mathcal E|_N$; its restriction to $N\\cap W$ is still surjective (surjectivity of sheaf maps is local) and composing with $\\tau_e$ gives a surjection onto $\\mathcal E_n|_{N\\cap W}$. This proves both required properties of $\\mathcal E_n$ [pqf-def-coherent]. The same restriction lemma makes $\\mathcal E|_U$ and $\\mathcal E_n|_U$ quasi-coherent, so the symmetric-algebra universal property may now be applied over $U$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 02NC, label lemma-twisting-and-proj, proof: choose an open covering trivializing the invertible sheaf; finite type and quasi-coherence transported locally"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-quasi-coherent-symmetric-algebra] on the scheme $U$ to the linear map $j_{\\mathcal E_n}\\tau_e$ and, in the other direction, to $j_{\\mathcal E}\\tau_e^{-1}$. It gives algebra maps $b$ and $b'$ fixing scalars. Their composites send every generator $j(v)$ to itself, since $\\tau_e^{-1}\\tau_e=1$ and $\\tau_e\\tau_e^{-1}=1$. Uniqueness in that same universal property makes the composites identities and makes $b$ the unique algebra map with the stated normalization. Set $\\beta_e=b$ under step 1's restriction identifications. For an affine $V\\subseteq U$, the affine comparison in the cited node identifies $b(V)$ with the unique ring-level symmetric-algebra map extending $\\tau_e(V)$: both maps agree on degree-one generators, so [lem-weil-pbc-symmetric-algebra-universal-property] makes them equal. The identical argument applies to $b'(V)$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Section Tag 01CF, label section-symmetric-exterior; canonical affine comparison of Schemes Section Tag 01LA, item (9)"
+   }
+  },
+  {
+   "text": "On an affine open $V\\subseteq U$, a degree-$k$ symmetric element is a sum of scalar multiples of products $j(v_1)\\cdots j(v_k)$ by [lem-weil-pbc-symmetric-algebra-graded], using the affine comparison of [lem-weil-pbc-quasi-coherent-symmetric-algebra]. The generator formula in step 4 sends each such product to $j(\\tau_e v_1)\\cdots j(\\tau_e v_k)$, again in degree $k$. The inverse has the same property. Use the canonical affine-basis graded algebra [def-trf-canonical-symmetric-graded-algebra]: its degree components are precisely these submodules, its restrictions preserve them, and its rings identify with the affine sections of the sheaf. The calculation therefore proves degree preservation on every member of the affine basis; for an arbitrary local homogeneous section restrict to an affine cover inside its domain [lem-weil-pbc-affine-opens-basis]. The images belong to the same degree on that cover, hence belong to the corresponding degree subsheaf on the original open by its sheaf condition. Hence $\\beta_e$ is graded; its uniqueness among graded algebra isomorphisms follows from its already established uniqueness among algebra maps.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Section Tag 01CF, label section-symmetric-exterior, graded quotient construction; Tag 01CG, label lemma-local-tensor-algebra, symmetric-degree sheafification"
+   }
+  },
+  {
+   "text": "The tensor formulas of step 2 commute with all restrictions, for $e$, $e^{\\otimes n}$ and the inverse coefficient map $c$. Moreover $b$ and $b'$ are morphisms of algebra sheaves by step 4 [lem-weil-pbc-quasi-coherent-symmetric-algebra], so for every smaller open $W\\subseteq V\\subseteq U$ and section $a$ one has $b(a)|_W=b(a|_W)$, and likewise for $b'$. To check the stronger normalization $\\beta_e|_V=\\beta_{e|_V}$ even when $V$ is nonaffine, use the canonical restriction identification from step 1 [lem-weil-pbc-module-sheafification-restriction]. Both maps fix scalars and send $j(v)$ to $j(v\\otimes(e|_V)^{\\otimes n})$. The sheaf universal property's uniqueness over the scheme $V$ identifies them. This also proves the claimed restriction compatibility under the affine-section identifications of step 4.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-module-sheafification-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Section Tag 01CF, label section-symmetric-exterior; restriction comparison Tag 04B8, sites-lemma-almost-cocontinuous-sheafification"
+   }
+  },
+  {
+   "text": "Let $e'=ue$. Tensor balancing gives $(ue)^{\\otimes n}=u^n e^{\\otimes n}$ by induction on $n$, with base $1=u^0$ [def-pur-sheaf-tensor-product]; hence $\\tau_{e'}=u^n\\tau_e$. The unit hypothesis ensures $ue$ is a frame, since its coefficient inverse is $u^{-1}c$. On a product of $k$ generators the normalization of step 4 now gives $\\beta_{e'}(j(v_1)\\cdots j(v_k))=(u^n)^k\\beta_e(j(v_1)\\cdots j(v_k))=u^{nk}\\beta_e(j(v_1)\\cdots j(v_k))$. Scalar linearity extends this to the whole degree-$k$ component on each affine open by [lem-weil-pbc-symmetric-algebra-graded] and the affine comparison [lem-weil-pbc-quasi-coherent-symmetric-algebra]. For a local homogeneous section restrict to an affine cover [lem-weil-pbc-affine-opens-basis], apply this equality, and use uniqueness of sections of a sheaf to obtain it on the original open. When $k=0$ this is the scalar identity. When $n=0$, step 2 is $v\\mapsto v\\otimes1$ with inverse $v\\otimes a\\mapsto av$; uniqueness of the symmetric-algebra extension makes $\\beta_e$ the induced canonical unit identification, independent of $e$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 02NC, label lemma-twisting-and-proj, expansion of trivialization changes; algebra.tex Section Tag 00DM, label section-tensor-algebra, degree-k products"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheafification-restriction",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "def-sc-invertible-module",
+  "def-weil-presheaf-modules-sheafification",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-trf-canonical-symmetric-graded-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 02NC, label lemma-twisting-and-proj, details-omitted local trivialization argument expanded for symmetric algebras using Modules Tags 01CF/01CG, Modules on Sites Tag 03EK and the existing restriction comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ss]ymmetric.*[Tt]ensor|[Tt]ensor.*[Ss]ymmetric",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "directory": "Mathlib/AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary symmetric-algebra universal properties and free sheaf maps do not state the sheaf graded comparison with frame transitions and restrictions"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra, TensorProduct",
+   "results": {
+    "count": 1,
+    "hits": [
+     "SymmetricAlgebra.comul_ι"
+    ],
+    "digest": "66c37ee8b4d1e37a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary symmetric-algebra universal properties and free sheaf maps do not state the sheaf graded comparison with frame transitions and restrictions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The symmetric algebra of a quasi coherent sheaf tensor a trivialized line bundle is graded isomorphic to the original symmetric algebra",
+   "results": {
+    "count": 8,
+    "hits": [
+     "SymmetricAlgebra",
+     "SymAlg",
+     "SymmetricAlgebra.ι",
+     "IsSymmetricAlgebra.of_equiv",
+     "TensorAlgebra.gradedAlgebra",
+     "SymmetricAlgebra.lift",
+     "GradedTensorProduct.of_symm_of",
+     "SymAlg.unsym"
+    ],
+    "digest": "ce749d09b98a9af9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary symmetric-algebra universal properties and free sheaf maps do not state the sheaf graded comparison with frame transitions and restrictions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local frame of an invertible sheaf induces a graded symmetric algebra isomorphism for tensor powers, compatible with restriction and unit changes of frame",
+   "results": {
+    "count": 8,
+    "hits": [
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "SheafOfModules.sectionMap_freeMap_freeSection",
+     "SheafOfModules.ιFree_mapFree_inv",
+     "SheafOfModules.freeHomEquiv_freeMap",
+     "SymmetricPower.Rel",
+     "SheafOfModules.ιFree_mapFree_inv_assoc",
+     "GradedTensorProduct.symm_of_of",
+     "SheafOfModules.freeSection"
+    ],
+    "digest": "4bc3571784078ec6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary symmetric-algebra universal properties and free sheaf maps do not state the sheaf graded comparison with frame transitions and restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra|[Ss]ymmetric[Aa]lgebra",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "directory": "Mathlib/Algebra/Category/ModuleCat/Sheaf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary symmetric-algebra universal properties and free sheaf maps do not state the sheaf graded comparison with frame transitions and restrictions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf symmetric algebra comparison for tensoring by a framed line bundle: degree k is multiplied by the kth power of the frame transition unit",
+   "results": {
+    "count": 8,
+    "hits": [
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "SymmetricPower.Rel",
+     "SymmetricPower.mk",
+     "SheafOfModules.sectionMap_freeMap_freeSection",
+     "SheafOfModules.ιFree_mapFree_inv",
+     "SheafOfModules.freeHomEquiv_symm_comp",
+     "SheafOfModules.unitHomEquiv_symm_comp",
+     "SheafOfModules.Presentation.mapGenerators"
+    ],
+    "digest": "e0449f663be69ab6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary symmetric-algebra universal properties and free sheaf maps do not state the sheaf graded comparison with frame transitions and restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric.*twist|twist.*symmetric|framed.*symmetric",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "directory": "Mathlib/AlgebraicGeometry"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary ring symmetric algebras, tensor unit maps, or free sheaf generators; none states this framed graded sheaf comparison and its transition and restriction clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a quasi coherent sheaf with a trivialized line bundle gives a symmetric algebra isomorphism compatible with homogeneous degrees and restrictions",
+   "results": {
+    "count": 8,
+    "hits": [
+     "SymmetricAlgebra.ι",
+     "SymmetricAlgebra.lift",
+     "Subalgebra.lTensorBot",
+     "Subalgebra.rTensorBot_symm_apply",
+     "TensorPower.algebraMap₀",
+     "Subalgebra.rTensorBot",
+     "Algebra.TensorProduct.rid",
+     "lTensorHomEquivHomLTensor"
+    ],
+    "digest": "d5c7403f391730f5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary ring symmetric algebras, tensor unit maps, or free sheaf generators; none states this framed graded sheaf comparison and its transition and restriction clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra, TensorProduct",
+   "results": {
+    "count": 1,
+    "hits": [
+     "SymmetricAlgebra.comul_ι"
+    ],
+    "digest": "66c37ee8b4d1e37a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary ring symmetric algebras, tensor unit maps, or free sheaf generators; none states this framed graded sheaf comparison and its transition and restriction clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local frame of an invertible sheaf induces a graded symmetric algebra isomorphism after tensoring a quasi coherent module by a power of that line bundle",
+   "results": {
+    "count": 8,
+    "hits": [
+     "SheafOfModules.ιFree_mapFree_inv",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData_generators",
+     "SheafOfModules.Presentation.mapGenerators",
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "SheafOfModules.ιFree_mapFree_inv_assoc",
+     "SheafOfModules.freeHomEquiv_symm_comp",
+     "GradedTensorProduct.symm_of_of",
+     "CommRing.Pic.mapAlgebra_apply"
+    ],
+    "digest": "0d9e83cc3265ac48"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary ring symmetric algebras, tensor unit maps, or free sheaf generators; none states this framed graded sheaf comparison and its transition and restriction clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of the symmetric algebra sheaf under module isomorphisms, with scalar multiplication acting by its kth power on degree k",
+   "results": {
+    "count": 8,
+    "hits": [
+     "IsSymmetricAlgebra.comp_equiv",
+     "IsSymmetricAlgebra.of_equiv",
+     "SymAlg.sym_smul",
+     "SheafOfModules.freeHomEquiv_symm_comp",
+     "SymAlg.instSMul",
+     "SymmetricAlgebra.isSymmetricAlgebra_ι",
+     "SymAlg.instModule",
+     "SymmetricAlgebra"
+    ],
+    "digest": "eef4848c494a5d15"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary ring symmetric algebras, tensor unit maps, or free sheaf generators; none states this framed graded sheaf comparison and its transition and restriction clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSymmetricAlgebra|sym_smul|def lift|theorem.*ext",
+   "results": {
+    "count": 7,
+    "hits": [
+     "Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean",
+     "Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean",
+     "Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean",
+     "Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean",
+     "Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean",
+     "Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean",
+     "Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean"
+    ],
+    "digest": "367df48b60ce0d82",
+    "directory": "Mathlib/LinearAlgebra/SymmetricAlgebra"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary ring symmetric algebras, tensor unit maps, or free sheaf generators; none states this framed graded sheaf comparison and its transition and restriction clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-proj-invertible-twist",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The 087S projectivity-conversion argument used by the projective-bundle step of the trace-formula reduction. The 02NC twisting input: the module and graded-algebra constructions of old steps 1-2, the degree-scaling computation of old step 5, and the algebra-restriction comparison of old step 6.",
+   "via": [
+    "lem-trf-relative-proj-invertible-twist",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-framed-symmetric-twist-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the framed tensor construction, the local quasi-coherence/finite-type argument, both symmetric-algebra maps, their inverseness, grading, affine formulas, arbitrary-open restriction and the u^(nk) transition calculation. Reused existing generic nodes; no new nodes, attachments or statement changes. Searched project declarations and Mathlib; checked empty opens, zero modules, degree zero, n=0 and nonfree finite-type modules.",
+  "blueprint": "The 087S projectivity-conversion argument used by the projective-bundle step of the trace-formula reduction. The 02NC twisting input: the module and graded-algebra constructions of old steps 1-2, the degree-scaling computation of old step 5, and the algebra-restriction comparison of old step 6. This split supplies the framed algebra input only; it does not change the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheafification-restriction",
+    "why": "Open-subsite restriction commutes with module sheafification, preserving unit sections and testing equality on those sections; generic sheaf tool not supplied by this trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+    "why": "Explicit presheaf/sheafification model fixes the symmetric sheaf and its restrictions; generic algebra construction, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "why": "Quasi-coherence survives open restriction, allowing the symmetric-algebra theorem on U; generic scheme-module tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Sheaf universal property and affine sections construct and characterize the two inverse algebra maps; no trace-formula node provides this generic algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "Ring symmetric-degree components are spanned by degree-k monomials; used to calculate grading and frame scalars, not to replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+    "why": "The explicit sheafified symmetric algebra satisfies the algebra universal property, identifying it with Sym(F) of the quasi-coherent symmetric-algebra node so that step 1's restriction comparison applies; generic algebra-sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheafification-restriction",
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-b29a8d958",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-b29a8d958 (reviewer sub-agent of L); spot-checked: Read the item, its parent lem-trf-relative-proj-invertible-twist, every cited node's statement, and Stacks 02NC (constructions.tex lemma-twisting-and-proj; its proof says 'trivialize and glue, details omitted', so by D5 the details are the split). The delivery is one commit with the report and no new nodes; the statement and stmt_deps are unchanged. It is not a 2026-10-21 re-split. The statement is true; I checked n=0, k=0, E=0, empty U, e'=ue for a unit u, and non-free finite-type E. The rg -L search found no duplicate, so same_as=[] stands. Mathlib has only the ring-level SymmetricAlgebra.lift/algHom_ext. Steps 2 and 4-7 check against their cited statements: the balanced inverse descends through module sheafification; the qc-symmetric-algebra clauses (a)/(b) plus ring-level extensionality give the maps; degree-k monomial spanning and the canonical graded algebra give the grading; the unit change is (u^n)^k=u^(nk). Two repairs are in fixes/dag/nodes/sec-trace-formula/lem-trf-framed-symmetric-twist-comparison.json. (1) Step 1 (C3/C4): the identification of the explicit P^# with the item's Sym(F) appeared only in the proof of lem-weil-pbc-quasi-coherent-symmetric-algebra. I added lem-weil-pbc-quasi-coherent-symmetric-algebra-core, whose universal property gives the identification by uniqueness, to step 1's uses and proof_deps and declared it as a tool use. (2) Step 3 (E5): shrinking an M~ presentation to a smaller affine was an uncited fact. I rewrote the step through clause (2) of the open-restriction lemma it already cites: E|_W is quasi-coherent, giving an affine V⊆W with E|_V≅M~, then τ_e; for finite type, the surjection restricted to N∩W. proof_deps is recomputed as the union of uses. The declared tool uses (pbc sheafification-restriction, sheaf-construction, open-restriction, qc-symmetric-algebra, ring grading) are accepted as generic tools. Minor and left as is: step 1's source document is sites.tex while 04IY is in sites-modules.tex.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FramedSymmetricTwistComparison",
+  "declaration": "AlgebraicGeometry.exists_framedSymmetricTwistComparison",
+  "declarations": [
+   "AlgebraicGeometry.framedTensorPowerSection",
+   "AlgebraicGeometry.IsLocallySymmetricHomogeneous",
+   "AlgebraicGeometry.FramedSymmetricTwistComparison",
+   "AlgebraicGeometry.exists_framedSymmetricTwistComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FramedSymmetricTwistComparison.lean",
+  "statement": "theorem exists_framedSymmetricTwistComparison (S : Scheme.{u}) (E L : S.Modules) [E.IsQuasicoherent] [E.IsFiniteType] [L.IsInvertible] : (∀ n : ℕ, (E ⊗ L.tensorPow n).IsQuasiCoherentFiniteType) ∧ Nonempty (FramedSymmetricTwistComparison E L)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The conclusion is bundled as sectionwise linear and ring equivalences on every subopen, with both-direction naturality, all normalization equations, grading, uniqueness and change-of-frame laws. Helpers only express the local tensor-power formula, membership in the existing symmetric-degree subsheaf, and the conjunction of the node's conclusions. The two added landed statement dependencies fix the canonical sheafification model and affine-basis grading."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa11f29e6",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read item node vs side-live (only lean record + 2 added stmt_deps; statement unchanged), the module, report (Worker report + Second reading by Q24 present), and dep decls: IsInvertible/MonoidalCategory X.Modules = SheafOfModules.monoidalCategory, identical to def-pur cochainModulesMonoidal; IsFreeGenerator = frame (bijective r•e|V), units_smul/map; tmulSection/unitSectionsEquiv; SymmetricAlgebraSheaf plain defs; exists_quasiCoherentSymmetricAlgebra; graded_by_tensor_images; gradedAlgebraData grade (range ι)^k. All node clauses rendered (tau_apply/inverse/naturality, beta scalar/generator/inverse/affine both directions/natural/graded/unique among graded natural ring equivs, beta_restrict, tau/beta change of frame u^n, u^(nk) on local homogeneous sections, n=0 right unitor + frame independence). Nonempty structure is pinned (tau by tau_apply, beta by beta_unique). Helpers real (recursive framed tensor power; local affine degree-k membership). Mechanical theorem-stmt_dep finding is a false positive: lem-weil-pbc-symmetric-algebra-sheaf-construction is kind definition with plain defs; def-trf-canonical-symmetric-graded-algebra also a landed def node. Edge cases empty U, E=0, n=0, k=0, nonaffine opens, single universe u. Docstrings with source/blueprint and 7 proof steps; sorry only; statement verbatim; dep records unchanged. No compile (nothing changed); worker reports scompile clean and deliver2 --no-push OK."
+ }
+}

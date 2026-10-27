@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-common-quotient-insertion-composition",
+ "kind": "statement",
+ "title": "Composition normalization of scalar insertion",
+ "statement": "For composable geometric inverse images g:J→K and g2:K→L, their composite presentation g12, normalized scalar extensions nY,nX,nZ, R→B, compatible coefficient maps a,a2,a12 and ordinary inverse-image and ring compositors theta,rho, let i1,i2,i12 be the three normalized insertions and d the CompositionData of [def-weil-pbc-common-quotient-pullback-data]. Assume the two inverse-image functors preserve finite limits. Then for every M in D(J,B), i12(M) followed by the target derived compositor equals the source derived compositor followed by restriction along rho of the composite of the g2-derived inverse image of i1(M) with i2 evaluated at the first derived pullback of M. No quotient or flat coefficient extension is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived base change), 0G7E (K-flat pullback), 0D6D (composition); sites-modules.tex Tags 03D7, 03EK, 03EL."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-quotient-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "On underlying sheaves insertion is the module-underlying comparison followed by the ordinary pullback unit. Naturality and the specified source and target compositor section formulas give the ordinary insertion composition square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A flat-term K-flat complex remains K-flat with flat terms after the first ringed pullback, so both insertion representative squares apply.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste those squares with the ModelIso compositor squares. Naturality of the second insertion at the first pullback computation, and naturality of the exact inverse-image and restriction factor maps, identify the pasted equation with the ordinary square. The final computation maps are invertible; cancel them.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The resolving flat-term K-flat subcategory localizes to the derived category. Equality on its objects detects equality of natural transformations, giving the asserted equation for every M.",
+   "uses": [
+    "lem-pur-coefficient-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-coefficient-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived base change), 0G7E (K-flat pullback), 0D6D (composition); sites-modules.tex Tags 03D7, 03EK, 03EL.",
+  "note": "Explicit normalization and localization argument, with source formulas as written in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar insertion for derived pullbacks of ringed topoi commutes with composition normalized on K flat complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  conjugateEquiv ((pullbackPushforwardAdjunction.{v} φ).comp (pullbackPushforwardAdjunction.{v} ψ))\\n      (pullbackPushforwardAdjunction.{v} _) (pullbackComp.{v} φ ψ).inv =\\n    (pushforwardComp.{v} φ ψ).hom\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫\\n      pullbackComp.{v} (G := G ⋙ G') φ (ψ ≫ (G.sheafPushforwardContinuous RingCat.{u} K K').map ψ') =\\n    (associator _ _ _).symm ≪≫\\n      isoWhiskerRight (pullbackComp.{v} φ ψ) _ ≪≫\\n        pullbackComp.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinu\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"CategoryTheory.Over.pullbackComp\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Pullback\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [HasPullbacksAlong f] [HasPullbacksAlong g] :\\n  pullback (f ≫ g) ≅ pullback g ⋙ pullback f\", \"doc\": \"Let $f: X \\\\to Y$ and $g: Y \\\\to Z$ be composable morphisms in a category $\\\\mathcal{C}$ which has pullbacks along $f$ and $g$. For a morphism $h: A \\\\to B$, the pullback functor $\\\\text{pullback } h$ maps\"}\n  {\"name\": \"PresheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullbackComp.{v} (F := 𝟭 C) (𝟙 S) φ = isoWhiskerRight (pullbackId S) (pullback φ) ≪≫ Functor.leftUnitor _\", \"doc\": \"The composition of the pullback functor associated to the identity natural transformation with another pullback functor is naturally isomorphic to the original pullback functor, via the left unitor is\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"RingHom.Flat.stableUnderComposition\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": StableUnderComposition Flat\", \"doc\": \"If $ f : R \\\\to S $ and $ g : S \\\\to T $ are flat ring homomorphisms between commutative rings, then their composition $ g \\\\circ f : R \\\\to T $ is also a flat ring homomorphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar insertion for derived pullbacks of ringed topoi commutes with composition normalized on K flat complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {E : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$, $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of pullba\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso|leftDerived.*[Cc]omp|[Cc]omp.*leftDerived",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"144\", \"text\": \"noncomputable def derived [G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"98\", \"text\": \"noncomputable def isPointwiseRightKanExtensionOfHasPointwiseLeftDerivedFunctor\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"74\", \"text\": \"noncomputable def leftDerivedLift (G : D ⥤ H) (β : L ⋙ G ⟶ F) : G ⟶ LF :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"98\", \"text\": \"noncomputable def leftDerivedNatTrans (τ : F' ⟶ F) : LF' ⟶ LF :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"122\", \"text\": \"lemma leftDerivedNatTrans_comp (τ' : F'' ⟶ F') (τ : F' ⟶ F) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"130\", \"text\": \"noncomputable def leftDerivedNatIso (τ : F' ≅ F) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"136\", \"text\": \"noncomputable abbrev leftDerivedUnique [LF'.IsLeftDerivedFunctor α'₂ W] : LF ≅ LF' :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"17\", \"text\": \"`F.leftDerivedToHomotopyCategory : C ⥤ HomotopyCategory D (ComplexShape.down ℕ)` which is\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"23\", \"text\": \"Then, the left-derived functors `F.leftDerived n : C ⥤ D` are obtained by composing\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"64\", \"text\": \"noncomputable def Functor.leftDerivedToHomotopyCategory (F : C ⥤ D) [F.Additive] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"69\", \"text\": \"an isomorphism between `F.leftDerivedToHomotopyCategory.obj X` and the complex\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"line\": \"71\", \"text\": \"noncomputable def ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj {X : C}\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCommonQuotientPullbackComparison",
+  "date": "2026-10-22",
+  "group": "D3"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current blueprint order 1329, equality with the finite-level pullback tower and comparison from ordinary pullback; original item steps 4 and 5. Composition normalization of scalar insertion.",
+   "via": [
+    "lem-weil-pbc-ringed-common-quotient-pullback-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonQuotientInsertionComposition",
+  "file": "lean/Sheaf/Paper/CommonQuotientInsertionComposition.lean",
+  "declaration": "SheafOfModules.CommonQuotientPullback.insertion_composition",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-22",
+  "statement": "theorem insertion_composition [PreservesFiniteLimits uInv] [PreservesFiniteLimits vInv]\n    (i1 : Insertion g nY nX φ a)\n    (i2 : Insertion g2 nX nZ (g.rings.map φ ≫ a) a2)\n    (i12 : Insertion g12 nY nZ φ a12)\n    (d : CompositionData g nY nX φ a g2 g12 nZ a2 a12 θ ρ) (M : D J B) :\n    i12.derived.app M ≫ d.target.derived.hom.app M =\n      d.source.derived.hom.app M ≫\n        (nZ.right (ρ.hom.app R)).map\n          ((g2.left (g.rings.obj R)).map (i1.derived.app M) ≫\n            i2.derived.app ((derivedPullback g (pX := pX) a).obj M))"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-2adb1",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T143033-L-933120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-2adb1",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T143033-L-933120",
+  "kind": "interface",
+  "note": "independent cc review: delivered CommonQuotientPullbackData.lean vs live item module (verbatim apart from blueprint tags/imports); item signature vs live; sandbox build of all 6 modules + #print axioms + import-deletion variants; unit sk-thm-properbasechange realized vs dropped FlatCommonQuotientReductionTower; node proof fields vs Lean"
+ }
+}

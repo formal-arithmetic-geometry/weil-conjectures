@@ -1,0 +1,129 @@
+{
+ "id": "def-sf-strict-tensor-ordinary-model-data",
+ "kind": "definition",
+ "title": "Ordinary strict tensor-model and evaluation comparison data",
+ "status": "split",
+ "statement": "For a small site $\\mathcal C$, a commutative ring sheaf $R$, its module category [def-weil-sheaf-of-modules-category], and strict algebra towers [def-weil-inverse-system], [def-sf-localized-strict-tensor-comparison-data], use the existing ordinary direct-sum total tensor [def-pc-tensor-complex-sheaves] and strict reduction $T_S(P)$ [def-sf-strict-tensor-reduction-termwise]. Define the following comparison data, without asserting existence. An ordinary evaluation datum at level $n\\ge1$ consists of cochain isomorphisms $e_n\\operatorname{Tot}(A\\otimes B)\\cong\\operatorname{Tot}(e_nA\\otimes e_nB)$, natural in both strict diagram complexes, whose map on each total-degree summand is the identity on local pure tensors. An ordinary tensor-model datum for $S$ consists of cochain isomorphisms $\\operatorname{Tot}(\\Delta P\\otimes S[0])\\cong T_S(P)$, natural in $P$, sending the $(i,0)$ local generator $p\\otimes s$ to $p\\otimes s$. All tensors and section generators are the existing sheaf tensor followed by its sheafification unit; $S[0]$ is the actual degree-zero complex. The target is the actual strict tower with differential $d_P\\otimes1$ and transitions $1\\otimes s_n$, not merely separate derived objects.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-strict-tensor-reduction-termwise",
+  "def-sf-localized-strict-tensor-comparison-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YM, 06YU; sites-modules.tex Tags 03EK, 03CY; strict tensor model evaluation proof Steps 1–2 and 6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized ordinary total tensor comparison of a constant cochain complex with a strict sheaf algebra tower, with evaluation identity on local pure tensors and naturality",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.DoldKan.η\", \"CategoryTheory.Abelian.DoldKan.N\", \"CochainComplex.shiftEval.congr_simp\", \"AlgebraicTopology.normalizedMooreComplex_obj\", \"CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f\", \"AlgHom.tensorEqualizer\", \"CochainComplex.shiftEval\", \"CategoryTheory.Functor.mapCochainComplexSingleFunctor\"]}",
+   "date": "2026-10-22",
+   "verdict": "LeanSearch finds Dold-Kan, shift evaluation, equalizer tensors, and single-functor comparisons; no such normalized strict tensor data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized ordinary total tensor comparison of a constant cochain complex with a strict sheaf algebra tower, with evaluation identity on local pure tensors and naturality",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"CategoryTheory.Sheaf.monoidalCategory\", \"PresheafOfModules.Monoidal.tensorObj\", \"CategoryTheory.sheafToPresheaf_μ\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.sheafToPresheaf_δ\"]}",
+   "date": "2026-10-22",
+   "verdict": "Ordinary total-tensor inclusions and monoidal sheaf infrastructure only; these are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*tensor|tensor.*strict",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib Algebra/Homology hits."
+  },
+  {
+   "tool": "grep",
+   "query": "OrdinaryEvaluation|OrdinaryModel|OneSidedFamily|OneSidedConditions|StrictTensorEvaluation in WeilConjectures and Sheaf; strict tensor in dag/nodes; blueprint_refs.py search strict tensor",
+   "results": "No exact namespace or comparison-data declarations. CompletionUnit.OrdinaryModel concerns quotient-system tensor adjunctions, completion units and limits on a pro-etale site, not these cochain evaluation maps. Existing LocalizedStrictTensor.ReductionModel and LinearEvaluation concern universal reduction counits and scalar-linear localized projection maps; reused underlying data, no duplicate diagram-tensor computation package. Blueprint search: 0 matching nodes. Proposed new ids absent.",
+   "date": "2026-10-22",
+   "verdict": "The ordinary cochain comparison and the normalized two-sided/one-sided diagram-evaluation interfaces are missing; existing tensor, localization and strict reduction definitions are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-cbc-strict-tensor-model-evaluation",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Tags 06YM, 06YU; sites-modules.tex Tags 03EK, 03CY; strict tensor model evaluation proof Steps 1–2 and 6.",
+   "via": [
+    "lem-sf-cbc-strict-tensor-model-evaluation",
+    "lem-sf-cbc-localized-strict-tensor-descent",
+    "lem-sf-cbc-extension-zero-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.StrictTensorOrdinaryData",
+  "declaration": "SheafOfModules.StrictTensorEvaluation.OrdinaryModel",
+  "declarations": [
+   "SheafOfModules.StrictTensorEvaluation.diagonal",
+   "SheafOfModules.StrictTensorEvaluation.diagonalAdditive",
+   "SheafOfModules.StrictTensorEvaluation.diagonalLimits",
+   "SheafOfModules.StrictTensorEvaluation.diagonalColimits",
+   "SheafOfModules.StrictTensorEvaluation.TowerComplex",
+   "SheafOfModules.StrictTensorEvaluation.towerColimits",
+   "SheafOfModules.StrictTensorEvaluation.towerTensor",
+   "SheafOfModules.StrictTensorEvaluation.towerTensorZero",
+   "SheafOfModules.StrictTensorEvaluation.towerTensorObjZero",
+   "SheafOfModules.StrictTensorEvaluation.towerHasMapBifunctor",
+   "SheafOfModules.StrictTensorEvaluation.towerTotal",
+   "SheafOfModules.StrictTensorEvaluation.baseTotal",
+   "SheafOfModules.StrictTensorEvaluation.coefficient",
+   "SheafOfModules.StrictTensorEvaluation.strictComplex",
+   "SheafOfModules.StrictTensorEvaluation.towerGenerator",
+   "SheafOfModules.StrictTensorEvaluation.baseGenerator",
+   "SheafOfModules.StrictTensorEvaluation.coefficientZero",
+   "SheafOfModules.StrictTensorEvaluation.evaluationComplex",
+   "SheafOfModules.StrictTensorEvaluation.OrdinaryEvaluation",
+   "SheafOfModules.StrictTensorEvaluation.OrdinaryModel"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/StrictTensorOrdinaryData.lean",
+  "statement": "structure OrdinaryModel (S : AlgebraTowers.{c, v, r} R)",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04a724cf7",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04a724cf7",
+  "group": "NK",
+  "result": "pass",
+  "note": "Item node unchanged vs live except lean + stmt_deps; stmt_deps gain only landed def-sf-localized-strict-tensor-comparison-data and the 2 new def nodes. comparison = derivedTensor.mapIso(diagonalFactors⊗1) ≪≫ normalized one-sided family ≪≫ Qh(θ), exactly proof Step 3. All Computation fields pinned: one-sided families = δ⁻¹ on resolving objects plus NatIso naturality; θ and ordinary maps fixed on local pure tensors (only the (i,0) summand is nonzero); homotopy and derived evaluation fixed by representative squares. natural_first (every homotopy map, Good P/P'), natural_coefficient (actual coefficientMap/strictMap) and evaluation_normalized (unrestricted S) present. extensionFirst/extensionSecond are the Step 7 composites with exactly the four K-flatness hypotheses. No flatness/surjectivity of S, independent universes, empty site handled by the inner slice binder. Single sorry, verbatim statements, docstrings with all 7 steps, lines <=100, no duplicate of ReductionModel/EvaluationModel. Advisories: (A1) new def node cites theorem nodes, incl. lem-weil-pbc-kflat-fixed-tensor-triangulated only for the plain TensorPresentation, which has no def owner (maintainer: add an existing:true def node); (A2) naturality and evaluated normalization of the extension composites are derivable but not stated as clauses; (A3) slice conjunct redundant; (A4) report miscounts the added stmt_deps; (A5) second reading disclaims independence under the dispatcher policy. No compile run: no file changed; the worker reports 43.6/41.1/35.8 s clean."
+ }
+}

@@ -1,0 +1,190 @@
+{
+ "id": "lem-trf-critical-coset-infimum-calculus",
+ "kind": "statement",
+ "title": "Critical cosets, unrestricted infima and coefficient bounds",
+ "statement": "Let $F$ be a complete field [def-weil-field] with a nontrivial nonarchimedean real absolute value, with nondiscrete value group and residue characteristic $p>0$. Here $F^\\circ=\\{x:|x|\\le1\\}$ [def-trf-valuation-ring] and the residue field is $F^\\circ/\\{x:|x|<1\\}$. For $a,b\\in F$ and $s>0$ put $S_{a,s}(F)=\\{c^p-ac+e:c,e\\in F,\\ |pc^p|<s,\\ |e|<s\\}$. This is an additive subgroup. Call $C=b+S_{a,s}(F)$ critical if $0\\notin C$ and $\\inf_{v\\in C}|v|=s$. Then $C$ is critical if and only if $|pb|<s=\\inf_{c\\in F}|c^p-ac+b|$. For a critical coset, $|a|\\le s^{(p-1)/p}$ and every $v\\in C$ satisfies $|pv|<s$. If $v\\in C$, then $C=v+S_{a,s}(F)$, and $\\inf_{c\\in F,\\ |pc^p|<s}|c^p-ac+v|=s$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Definition before Lemma 6.1.2 and Lemma 6.1.2(i)--(ii), printed pp. 37--38; translated critical representatives.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $q=|p\\cdot1_F|<1$ and $P(c)=c^p-ac$. Since the residue field has characteristic $p$, $p$ is prime. Integers have norm at most $1$, and $p\\mid\\binom pi$ for $0<i<p$. Thus $|(c+d)^p-c^p-d^p|\\le q\\max(|c|,|d|)^p$. For admissible $c,d$ this error has norm $<s$, and $q|c+d|^p<s$. Therefore $(P(c)+e)+(P(d)+e^\\prime)=P(c+d)+(e+e^\\prime-((c+d)^p-c^p-d^p))$ is in $S_{a,s}(F)$. Zero is in it. For inverses use $-c$; the error $-c^p-(-c)^p$ is zero for odd $p$, and is $-2c^2$ for $p=2$, of norm $<s$. This proves the additive-subgroup assertion, also when $q=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Definition before Lemma 6.1.2, printed p. 37; explicit binomial and inverse calculations."
+   }
+  },
+  {
+   "text": "Put $S=S_{a,s}(F)$ and $f_v(c)=P(c)+v$. For every $v\\in C$, the subgroup identity gives $C=v+S$. Moreover $0\\in C$ if and only if some member has norm $<s$: subtract that member using $c=0$ in $S$. If $0\\notin C$, every admissible $f_v(c)$ has norm at least $s$; hence $|f_v(c)+e|=|f_v(c)|$ for $|e|<s$. Consequently $\\inf_{w\\in C}|w|=\\inf_{q|c|^p<s}|f_v(c)|$. Both sets are nonempty and bounded below by zero, so these are ordinary real infima. This proves the asserted restricted infimum for every representative of a critical coset.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Definition before Lemma 6.1.2, printed p. 37, removing the small error term and changing representatives."
+   }
+  },
+  {
+   "text": "Assume $C$ is critical. To prove the coefficient bound, suppose $|a|>s^{(p-1)/p}$ and set $A=|a|^{p/(p-1)}>s$. Choose $v\\in C$ with $|v|<A$ and $q|v|<s$; such a choice follows from $\\inf|C|=s$ and $q<1$ (if $q>0$, use the upper bound $\\min(A,s/q)>s$; if $q=0$, use $A$). Since $v\\ne0$ and $a\\ne0$, $c=v/a\\ne0$. Since $|v|<A$, we have $|v|^{p-1}<|a|^p$; hence $|c|^p=|v|^p/|a|^p<|v|$ and $|c|^{p-1}<|a|$. Thus $|f_v(c)|=|c|^p<|v|=|ac|$. Apply [lem-trf-binomial-root-correction] with constant coefficient $v$ to obtain a root $z$ with $|z|=|v/a|$. Thus $q|z|^p<q|v|<s$ when $q>0$, and it is zero when $q=0$. Hence $P(z)=-v\\in S$, contradicting $0\\notin C$. This proves $|a|\\le s^{(p-1)/p}$.",
+   "uses": [
+    "lem-trf-binomial-root-correction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 6.1.2(ii), printed pp. 37–38; small-root argument also treats an attained infimum."
+   }
+  },
+  {
+   "text": "For critical $C$ and $v\\in C$, if $|v|=s$ then $q|v|<s$. If $|v|>s$, step 2 supplies $c$ with $q|c|^p<s$ and $|f_v(c)|<|v|$, so $|P(c)|=|v|>s$. If $|c|^p\\le s$, then step 3 gives $|ac|\\le s^{(p-1)/p}s^{1/p}=s$, contradicting $|P(c)|>s$. Hence $|c|^p>s$. The coefficient bound now gives $|ac|\\le s^{(p-1)/p}|c|<|c|^p$. Thus $|v|=|P(c)|=|c|^p$, and $q|v|=q|c|^p<s$. This includes $v=b$ and proves the strict $p$-bound for every representative, also when $q=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 6.1.2(i), direct implication, printed p. 38; representative bound assembled from the coefficient estimate of (ii)."
+   }
+  },
+  {
+   "text": "For critical $C$, the unrestricted infimum is at most the restricted one, which is $s$. If $|f_b(c)|<s$, $c$ cannot be admissible by step 2. Thus $q|c|^p\\ge s$, so $q>0$ and $|c|^p>s$. The coefficient bound of step 3 gives $|ac|<|c|^p$. Since $|f_b(c)|<s<|c|^p$, it follows that $|b|=|c|^p$, contradicting $q|b|<s$ from step 4. Thus every unrestricted value has norm at least $s$, and its infimum is $s$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 6.1.2(i), direct implication, printed p. 38."
+   }
+  },
+  {
+   "text": "Conversely assume $q|b|<s=\\inf_{c\\in F}|f_b(c)|$, so $|b|\\ge s>0$ and $f_b$ has no root in $F$. If $|b|=s$, $c=0$ realizes the restricted infimum. Otherwise fix $s<r<|b|$ and choose $c$ with $|f_b(c)|<r$, using the unrestricted infimum. Suppose $q|c|^p\\ge s$. Then $q>0$ and $|c|^p\\ge s/q>|b|$. Since $|f_b(c)|<|b|$, cancellation forces $|ac|=|c|^p>|b|$, so $c\\ne0$ because $|c|^p>|b|>0$. Dividing $|ac|=|c|^p$ by $|c|$ gives $|c|^{p-1}=|a|$, and $|f_b(c)|<|ac|$. Now [lem-trf-binomial-root-correction] produces a root of $f_b$, a contradiction. Thus $c$ is admissible. For every $t>s$ choose $r$ with $s<r<\\min(t,|b|)$; the admissible $c$ just obtained has $|f_b(c)|<t$. Hence the restricted infimum is at most every $t>s$ and therefore at most $s$, while the unrestricted lower bound makes it at least $s$. Also every $f_b(c)+e$, with $c$ admissible and $|e|<s$, has the same norm as $f_b(c)$, so $0\\notin C$ and $\\inf|C|=s$. This proves criticality, without using the coefficient bound before criticality is known.",
+   "uses": [
+    "lem-trf-binomial-root-correction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 6.1.2(i), converse, printed p. 38; replaces its premature application of (ii) by the preliminary root-lifting claim."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-binomial-root-correction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Definition preceding Lemma 6.1.2 and its proof, printed pp. 37–38; explicit binomial calculations and root-lifting repair of the converse."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Critical cosets of x to the p minus a x over a complete nonarchimedean field coefficient bound and infimum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.coeff_bdd_of_roots_le\", \"module\": \"Mathlib.Topology.Algebra.Polynomial\", \"type\": \"{B : ℝ} {d : ℕ} (f : F →+* K) {p : F[X]} (h1 : p.Monic) (h2 : Splits (p.map f)) (h3 : p.natDegree ≤ d)\\n  (h4 : ∀ z ∈ (map f p).roots, ‖z‖ ≤ B) (i : ℕ) : ‖(map f p).coeff i‖ ≤ max B 1 ^ d * d.choose (d / 2)\", \"doc\": \"Let $ F $ and $ K $ be fields, $ f : F \\\\to K $ a ring homomorphism, and $ p \\\\in F[X] $ a monic polynomial of degree $ \\\\leq d $. If the roots $ z $ of $ p $ in $ K $ satisfy $ \\\\|z\\\\| \\\\leq B $, then for \"}\n  {\"name\": \"Polynomial.coeff_le_of_roots_le\", \"module\": \"Mathlib.Topology.Algebra.Polynomial\", \"type\": \"{p : F[X]} {f : F →+* K} {B : ℝ} (i : ℕ) (h1 : p.Monic) (h2 : Splits (p.map f)) (h3 : ∀ z ∈ (map f p).roots, ‖z‖ ≤ B) :\\n  ‖(map f p).coeff i‖ ≤ B ^ (p.natDegree - i) * p.natDegree.choose i\", \"doc\": \"Let $ p $ be a monic polynomial over a field $ F $, and let $ f : F \\\\to K $ be a ring homomorphism to a normed field $ K $. If the polynomial $ p $ splits over $ K $ and all roots $ z $ of $ f(p) $ sa\"}\n  {\"name\": \"Polynomial.cauchyBound_zero\", \"module\": \"Mathlib.Analysis.Polynomial.CauchyBound\", \"type\": \": cauchyBound (0 : K[X]) = 1\", \"doc\": \"For any non-zero polynomial $ p $ over a normed division ring $ K $, every root $ \\\\alpha $ of $ p $ satisfies $ \\\\|\\\\alpha\\\\| \\\\leq 1 + \\\\frac{\\\\sup_{0 \\\\leq i < \\\\deg p} \\\\|\\\\text{coeff}_i(p)\\\\|}{\\\\|\\\\text{leadin\"}\n  {\"name\": \"IsNonarchimedeanLocalField.instCompleteSpace\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": CompleteSpace K\", \"doc\": \"A field $ K $ equipped with a valuative relation and a uniform space structure is a non-Archimedean local field if it is complete and its additive group operations are uniformly continuous.\"}\n  {\"name\": \"NumberField.Embeddings.coeff_bdd_of_norm_le\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Embeddings\", \"type\": \"{B : ℝ} {x : K} (h : ∀ φ : K →+* A, ‖φ x‖ ≤ B) (i : ℕ) :\\n  ‖(minpoly ℚ x).coeff i‖ ≤ max B 1 ^ finrank ℚ K * (finrank ℚ K).choose (finrank ℚ K / 2)\", \"doc\": \"Let $ K $ be a number field (a finite algebraic extension of $ \\\\mathbb{Q} $) and $ x \\\\in K $. Suppose that for every ring homomorphism $ \\\\varphi: K \\\\to A $ into a normed field $ A $, the norm $ \\\\|\\\\var\"}\n  {\"name\": \"Polynomial.cauchyBound\", \"module\": \"Mathlib.Analysis.Polynomial.CauchyBound\", \"type\": \"(p : K[X]) : ℝ≥0\", \"doc\": \"The Cauchy bound of a polynomial $ p $ over a normed division ring $ K $ is defined as $ 1 + \\\\frac{\\\\sup_{0 \\\\leq i < \\\\deg p} \\\\|\\\\text{coeff}_i(p)\\\\|}{\\\\|\\\\text{leadingCoeff}(p)\\\\|} $, where $ \\\\sup $ denotes\"}\n  {\"name\": \"norm_root_le_spectralValue\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \"{f : AlgebraNorm K L} (hf_pm : IsPowMul f) (hf_na : IsNonarchimedean f) {p : K[X]} (hp : p.Monic) {x : L}\\n  (hx : aeval x p = 0) : f x ≤ spectralValue p\", \"doc\": \"Let $K$ be a normed field and $L$ be a $K$-algebra. Let $f: L \\\\to \\\\mathbb{R}$ be an algebra norm that is non-Archimedean (i.e., satisfies the strong triangle inequality $f(a+b) \\\\le \\\\max(f(a), f(b))$) \"}\n  {\"name\": \"PadicInt\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": Type\", \"doc\": \"The set of p-adic numbers with p-adic norm less than or equal to 1.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root/coefficient bounds and p-adic Hensel lemmas do not assert the critical-coset calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean additive polynomial positive infimum bounds its linear coefficient using Hensel lemma",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"hensels_lemma\", \"module\": \"Mathlib/NumberTheory/Padics/Hensel\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u_1} [inst_1 : CommSemiring R] [inst_2 : Algebra R ℤ_[p]]\\n  {F : Polynomial R} {a : ℤ_[p]},\\n  ‖(Polynomial.aeval a) F‖ < ‖(Polynomial.aeval a) (Polynomial.derivative F)‖ ^ 2 →\\n    ∃ z,\\n      (Polynomial.aeval z) F = 0 ∧\\n        ‖z - a‖ < ‖(Polynomial.a\", \"doc\": \"For a polynomial $ F $ over the p-adic integers $ \\\\mathbb{Z}_p $ and an element $ a \\\\in \\\\mathbb{Z}_p $, if the p-adic norm of $ F(a) $ is strictly less than the p-adic norm of the derivative $ F'(a) $\"}\n  {\"name\": \"norm_root_le_spectralValue\", \"module\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm\", \"type\": \"∀ {K : Type u_2} [inst : NormedField K] {L : Type u_3} [inst_1 : Field L] [inst_2 : Algebra K L] {f : AlgebraNorm K L},\\n  IsPowMul ⇑f →\\n    IsNonarchimedean ⇑f → ∀ {p : Polynomial K}, p.Monic → ∀ {x : L}, (Polynomial.aeval x) p = 0 → f x ≤ spectralValue p\", \"doc\": \"Let $K$ be a normed field and $L$ be a $K$-algebra. Let $f: L \\\\to \\\\mathbb{R}$ be an algebra norm that is non-Archimedean (i.e., satisfies the strong triangle inequality $f(a+b) \\\\le \\\\max(f(a), f(b))$) \"}\n  {\"name\": \"PreTilt.coeff_nat_find_add_ne_zero\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {O : Type u₂} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p] {f : PreTilt O p}\\n  {h : ∃ n, (PreTilt.coeff n) f ≠ 0} (k : ℕ), (PreTilt.coeff (Nat.find h + k)) f ≠ 0\", \"doc\": \"Let $ O $ be a commutative ring and $ p $ a prime. For any sequence $ (f_n) $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, if there exists some $ n $ such that the $ n $-th coefficient $ f_n \\\\neq 0 $ in\"}\n  {\"name\": \"Polynomial.gaussNorm_intAdicAbv_le_one\", \"module\": \"Mathlib/RingTheory/DedekindDomain/GaussLemma\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  {b : NNReal} (hb : 1 < b) (p : Polynomial R), Polynomial.gaussNorm (v.intAdicAbv hb) 1 p ≤ 1\", \"doc\": \"For any polynomial $ p $ over a Dedekind domain, the Gauss norm of $ p $ with respect to the adic absolute value associated to a height one prime ideal and a real base $ b > 1 $, evaluated at $ 1 $, i\"}\n  {\"name\": \"Polynomial.cauchyBound\", \"module\": \"Mathlib/Analysis/Polynomial/CauchyBound\", \"type\": \"{K : Type u_1} → [inst : NormedDivisionRing K] → Polynomial K → NNReal\", \"doc\": \"The Cauchy bound of a polynomial $ p $ over a normed division ring $ K $ is defined as $ 1 + \\\\frac{\\\\sup_{0 \\\\leq i < \\\\deg p} \\\\|\\\\text{coeff}_i(p)\\\\|}{\\\\|\\\\text{leadingCoeff}(p)\\\\|} $, where $ \\\\sup $ denotes\"}\n  {\"name\": \"Polynomial.le_gaussNorm\", \"module\": \"Mathlib/RingTheory/Polynomial/GaussNorm\", \"type\": \"∀ {R : Type u_1} {F : Type u_2} [inst : Semiring R] [inst_1 : FunLike F R ℝ] (v : F) {c : ℝ} (p : Polynomial R)\\n  [ZeroHomClass F R ℝ] [NonnegHomClass F R ℝ], 0 ≤ c → ∀ (i : ℕ), v (p.coeff i) * c ^ i ≤ Polynomial.gaussNorm v c p\", \"doc\": \"For any polynomial $ p $ over a semiring $ R $, valuation $ v $ (preserving zero and non-negative), non-negative real number $ c $, and natural number $ i $, the product $ v(a_i) \\\\cdot c^i $ (where $ \"}\n  {\"name\": \"one_le_pow_mul_abs_eval_div\", \"module\": \"Mathlib/Algebra/Polynomial/DenomsClearable\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : LinearOrder K] [IsStrictOrderedRing K] {f : Polynomial ℤ} {a b : ℤ},\\n  0 < b →\\n    Polynomial.eval (↑a / ↑b) (Polynomial.map (algebraMap ℤ K) f) ≠ 0 →\\n      1 ≤ ↑b ^ f.natDegree * |Polynomial.eval (↑a / ↑b) (Polynomial.map (algebraMap ℤ K) f)|\", \"doc\": \"For any linearly ordered field $ K $ with strict ordered ring structure, given a non-zero polynomial $ f \\\\in \\\\mathbb{Z}[X] $, integers $ a, b $ with $ b > 0 $, and assuming $ f\\\\left(\\\\frac{a}{b}\\\\right)\"}\n  {\"name\": \"Polynomial.coeff_le_of_roots_le\", \"module\": \"Mathlib/Topology/Algebra/Polynomial\", \"type\": \"∀ {F : Type u_3} {K : Type u_4} [inst : CommRing F] [inst_1 : NormedField K] {p : Polynomial F} {f : F →+* K} {B : ℝ}\\n  (i : ℕ),\\n  p.Monic →\\n    (Polynomial.map f p).Splits →\\n      (∀ z ∈ (Polynomial.map f p).roots, ‖z‖ ≤ B) →\\n        ‖(Polynomial.map f p).coeff i‖ ≤ B ^ (p.natDegree - i) * ↑(p.natD\", \"doc\": \"Let $ p $ be a monic polynomial over a field $ F $, and let $ f : F \\\\to K $ be a ring homomorphism to a normed field $ K $. If the polynomial $ p $ splits over $ K $ and all roots $ z $ of $ f(p) $ sa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root/coefficient bounds and p-adic Hensel lemmas do not assert the critical-coset calculus"
+  },
+  {
+   "tool": "grep",
+   "query": "critical.*coset|critical.*polynomial|inf.*eval",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/PrimesCongruentOne.lean\", \"line\": \"41\", \"text\": \"  let p := minFac (eval (↑b) (cyclotomic k ℤ)).natAbs\"}\n  {\"file\": \"Mathlib/NumberTheory/PrimesCongruentOne.lean\", \"line\": \"48\", \"text\": \"    exact mod_cast minFac_dvd (eval (↑b) (cyclotomic k ℤ)).natAbs\"}\n  {\"file\": \"Mathlib/NumberTheory/Height/NumberField.lean\", \"line\": \"51\", \"text\": \"noncomputable def multisetInfinitePlace : Multiset (AbsoluteValue K ℝ) :=\"}\n  {\"file\": \"Mathlib/NumberTheory/Height/NumberField.lean\", \"line\": \"55\", \"text\": \"lemma mem_multisetInfinitePlace {v : AbsoluteValue K ℝ} :\"}\n  {\"file\": \"Mathlib/NumberTheory/Height/NumberField.lean\", \"line\": \"60\", \"text\": \"lemma count_multisetInfinitePlace_eq_mult [DecidableEq (AbsoluteValue K ℝ)] (v : InfinitePlace K) :\"}\n  {\"file\": \"Mathlib/NumberTheory/Height/NumberField.lean\", \"line\": \"68\", \"text\": \"private lemma prod_multisetInfinitePlace_eq {M : Type*} [CommMonoid M] (f : AbsoluteValue K ℝ → M) :\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"57\", \"text\": \"def InfinitePlace := { w : AbsoluteValue K ℝ // ∃ φ : K →+* ℂ, place φ = w }\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"68\", \"text\": \"def IsInfinitePlace (w : AbsoluteValue K ℝ) : Prop :=\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"74\", \"text\": \"lemma isInfinitePlace_iff (v : AbsoluteValue K ℝ) :\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"141\", \"text\": \"theorem pos_iff {w : InfinitePlace K} {x : K} : 0 < w x ↔ x ≠ 0 := AbsoluteValue.pos_iff w.1\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/AdeleRing.lean\", \"line\": \"35\", \"text\": \"open InfinitePlace AbsoluteValue.Completion InfinitePlace.Completion IsDedekindDomain\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean\", \"line\": \"42\", \"text\": \"open InfinitePlace AbsoluteValue.Completion InfinitePlace.Completion IsDedekindDomain\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsUniformGroup/Constructions.lean\", \"line\": \"76\", \"text\": \"  exact isUniformGroup_iInf fun i ↦ .comap (Pi.evalMonoidHom G i)\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit.lean\", \"line\": \"44\", \"text\": \"    rw [subsingleton_iff.mp inferInstance (Products.eval ∅ l) 0]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean\", \"line\": \"51\", \"text\": \"The informal notation `p(a)` stands for `Polynomial.aeval a p`.\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparablyGenerated.lean\", \"line\": \"153\", \"text\": \"  have := mt (H F.support inferInstance (fun s ↦ aeval a (monomial (σ' s) (1 : k)))) (by\"}\n  {\"file\": \"Mathlib/FieldTheory/Minpoly/IsConjRoot.lean\", \"line\": \"187\", \"text\": \"    exists_algHom_of_splits_of_aeval (normal_iff.mp inferInstance) (h ▸ minpoly.aeval K x)\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/NormalBasis.lean\", \"line\": \"87\", \"text\": \"  /- Since `K` is infinite, we may evaluate `det M` at some point with coordinates in `K`\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Ultra/Constructions.lean\", \"line\": \"78\", \"text\": \"  exact .iInf fun i ↦ .comap (h i) (Function.eval i)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/MvPolynomial.lean\", \"line\": \"15\", \"text\": \"infinite field `k` are equal if their evaluations agree at every invertible matrix. The proof\"}\n  {\"file\": \"Mathlib/Topology/Bases.lean\", \"line\": \"622\", \"text\": \"  simpa only [Set.pi_def] using! IsTopologicalBasis.iInf_induced cond eval\"}\n  {\"file\": \"Mathlib/LinearAlgebra/BilinearForm/Hom.lean\", \"line\": \"82\", \"text\": \"/-- The linear map obtained from a `BilinForm` by fixing the right co-ordinate and evaluating in\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"line\": \"359\", \"text\": \"  inferInstanceAs <| Decidable (eval a p = 0)\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Roots.lean\", \"line\": \"156\", \"text\": \"theorem eq_of_infinite_eval_eq (p q : R[X]) (h : Set.Infinite { x | eval x p = eval x q }) :\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Roots.lean\", \"line\": \"168\", \"text\": \"  obtain ⟨rfl⟩ : p = C x := p.eq_of_infinite_eval_eq (C x) (by simpa)\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root/coefficient bounds and p-adic Hensel lemmas do not assert the critical-coset calculus"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUltrametricDist, Polynomial.eval",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Critical cosets of a p-th power minus a linear term over a complete nonarchimedean field and unrestricted polynomial infimum",
+   "results": "8 hits; IsNonarchimedeanLocalField.instCompleteSpace, LaurentSeries.exists_Polynomial_intValuation_lt, PowerSeries.instIsDiscreteValuationRing, PadicInt.instIsAdicCompleteMaximalIdeal, Padic, PadicInt.completeSpace, Irreducible.maximalIdeal_pow_eq_closedBall_pow, PowerSeries.WithPiTopology.instCompleteSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: no critical-coset infimum equivalence; returned facts concern p-adic completeness, unrelated valuations, or elementary nonarchimedean estimates"
+  },
+  {
+   "tool": "grep",
+   "query": "critical.*coset|critical.*polynomial|infimum.*polynomial",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: no critical-coset infimum equivalence; returned facts concern p-adic completeness, unrelated valuations, or elementary nonarchimedean estimates"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUltrametricDist, Polynomial.eval",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: no critical-coset infimum equivalence; returned facts concern p-adic completeness, unrelated valuations, or elementary nonarchimedean estimates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete nonarchimedean field p-th power minus linear polynomial critical additive cosets infimum",
+   "results": "8 hits; PreTilt.valAux, IsNonarchimedean.finset_powerset_image_add, hensels_lemma, PreTilt.valAux_eq, PerfectClosure.R, PadicAlgCl.isNonarchimedean, IsNonarchimedean.add_pow_le, AddChar.tendsto_eval_one_sub_pow",
+   "date": "2026-10-24",
+   "verdict": "no match: no critical-coset infimum equivalence; returned facts concern p-adic completeness, unrelated valuations, or elementary nonarchimedean estimates"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-critical-polynomial-minimum",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: Lemma 6.1.2(i), pp. 37–38, and type 2/3 clause of Proposition 6.2.4, p. 42, proved pp. 47–48. The former identifies the unrestricted polynomial infimum with the critical coset infimum. Supporting input for critical-polynomial minimization: Definition before Lemma 6.1.2 and Lemma 6.1.2(i)--(ii), printed pp. 37--38; translated critical representatives.",
+   "via": [
+    "lem-trf-analytic-critical-polynomial-minimum",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-critical-coset-infimum-calculus",
+  "worker": "stage1",
+  "summary": "Six-step proof of the subgroup, representative and infimum calculus, coefficient bound and both directions of the critical-coset criterion. One strictly smaller analytic root-correction input is left statement-only. Repairs the source proof's premature use of (ii) in the converse; the statement and hypotheses are unchanged. Repair of returned head 7dd67f709c0: refreshed against the current DAG, reread all statement dependencies and the new root-correction statement, and replaced the second root-lifting application in step 4 by a direct consequence of the coefficient bound; only steps 3 and 6 now require root correction. The reported side/live completion discrepancy is maintainer-owned and is documented in the repair report. Further repair after returned head e460d52e6bc: reread unchanged cited statements against the current DAG; made the converse approximation argument explicit for every real t>s and documented why the repeated landing diagnostic is a queue-admission/tool issue, rather than evidence that the current node is complete. Retry after returned head e88839d9266: exposed the norm-power comparison establishing admissibility in step 3 and the nonzero and division checks for root correction in step 6; statements and citations remain unchanged.",
+  "blueprint": "Realizes the Temkin Lemma 6.1.2 input below the semistable-modification branch of lem-trf-local-term-locality, proof (1)–(2); the current latest blueprint local-term node itself states the contracting theorem and the inherited branch is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-9f71b8c3c",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-9f71b8c3c (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-binomial-root-correction and Temkin, Stable modification (author's PDF, printed pp. 36-38: the S_{a,s}/critical-coset definition, Lemma 6.1.2(i)-(ii) and the preliminary Hensel claim on p. 37); the local PDF is absent, which the report records as WANTED. The item statement is unchanged and matches the source; the delivery is a first split of an unsplit node (created 2026-10-24 by Q23), not a re-split. I re-derived all six steps: (1) subgroup, using |C(p,i)|<=q and the p=2 inverse error -2c^2; (2) representative change and restricted infimum; (3) |a|<=s^{(p-1)/p}: with v of norm < min(A,s/q) and c=v/a, the node's hypotheses hold and its root z is admissible, so 0 is in C; (4) |pv|<s, using the coefficient bound and the case |c|^p<=s; (5) unrestricted infimum equals s; (6) converse: a non-admissible near-root has |c|^{p-1}=|a| and |f(c)|<|ac|, so root correction gives a root of f_b, a contradiction. Step 6 also avoids Temkin's premature use of (ii) in the converse, which I confirm is a real gap in the source. Edge cases checked: q=0, p=2, |v|=s, |b|=s, attained and unattained infima. The new node is true: rescaling gives alpha U^p-U+beta with |alpha|<=1, |H(1)|<1, |H'(1)|=1, and Hensel in a complete rank-one field applies. I tested it on Q_2 and Q_p examples and on the trivial absolute value. It is equivalent to Temkin's p.37 claim, is not a clause of the item, and is self-contained and statement-only. The DAG duplicate search (rg -L over snapshot/dag/nodes for Hensel/complete/root/T^p-aT) found no equivalent node. proof_deps equals the union of the uses; the new node is in the same unit, so no tool_uses are needed. No fixes."
+ }
+}

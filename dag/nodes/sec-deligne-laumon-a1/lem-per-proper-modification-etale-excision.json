@@ -1,0 +1,529 @@
+{
+ "id": "lem-per-proper-modification-etale-excision",
+ "kind": "statement",
+ "title": "Ordinary etale derived excision for a proper modification",
+ "statement": "Let $f:B\\to X$ be a proper morphism of Noetherian schemes [def-weil-proper-morphism, pqf-def-locnoeth], let $i:Y\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and suppose $f$ induces an isomorphism over $U=X\\setminus Y$. Put $P=B\\times_XY$, with projections $k:P\\hookrightarrow B$ and $p:P\\to Y$ [def-pc-fibre-product]. Let $A$ be a finite commutative ring and use bounded-below derived categories of sheaves of constant-$A$ modules on the small etale sites [def-weil-pbc-derived-categories]. For every $K\\in D^+(X_{\\mathrm{et}},A)$ the canonical square\n$$\\begin{matrix}K&\\longrightarrow&i_*i^*K\\\\ \\downarrow&&\\downarrow\\\\ Rf_*f^*K&\\longrightarrow&i_*Rp_*p^*i^*K\\end{matrix}$$\nis homotopy cartesian: the natural comparison\n$$\\operatorname{Cone}(K\\to Rf_*f^*K)\\xrightarrow{\\sim}i_*\\operatorname{Cone}(i^*K\\to Rp_*p^*i^*K)$$\nis an isomorphism in $D^+(X_{\\mathrm{et}},A)$, or equivalently the square gives the distinguished triangle\n$$K\\longrightarrow Rf_*f^*K\\oplus i_*i^*K\\longrightarrow i_*Rp_*p^*i^*K\\longrightarrow K[1],$$\nwith the unit as first components and difference of restrictions as second map. Here $i_*$ is exact and denotes also its derived functor; the right lower vertex uses proper base change. For every closed subset $C\\subset X$ and $L\\in D^+(B_{\\mathrm{et}},A)$, there is a canonical isomorphism\n$$R\\Gamma_C(X,Rf_*L)\\xrightarrow{\\sim}R\\Gamma_{f^{-1}C}(B,L).$$\nFor $C\\subset Y$ and $M\\in D^+(Y_{\\mathrm{et}},A)$ there is likewise $R\\Gamma_C(X,i_*M)\\cong R\\Gamma_C(Y,M)$. The supported functors are the derived kernel of restriction to the open complement [def-pur-etale-derived-supported-sections]. These isomorphisms identify the unit-induced map with pullback on supported cohomology and carry restriction to $Y$ to restriction to $P$. The cone square and comparisons are natural in $K,L,M$ and for morphisms of constant coefficient sheaves induced by a homomorphism of finite coefficient rings, with its canonical derived direct-image comparison; they do not assert that scalar extension commutes with every direct image.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Lemma 2.2.2.2 and proof, pp. 231-232 (properness and being an isomorphism off Y are the only geometry used); supported direct-image comparison from the same injective-resolution model. Also Stacks Tag 0EW5, etale-cohomology.tex, lemma-blow-up-square-cohomological-descent, proof by stalks, applied to an arbitrary proper morphism isomorphic off the closed locus; Tag 0D6E, sites-cohomology.tex, lemma-derived-pushforward-composition, and Tag 072X, section-leray."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-pbc-derived-categories",
+  "def-pur-etale-derived-supported-sections",
+  "def-weil-abstract-derived-category",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-open-immersion",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "All operations below are on ordinary small-etale constant-$A$ module sheaves. Inverse image is exact and left adjoint to direct image by [prop-weil-pbc-inverse-image-modules-exact]. A closed immersion is finite by [lem-weil-pbc-closed-immersion-finite], and finite direct image is exact on abelian sheaves by [lemma-weil-pbc-finite-direct-image-exact]. The module direct image has this same underlying abelian direct image, so it too is exact: exactness of a sequence of module sheaves is detected after forgetting its action. In particular $i_*$ can be applied termwise to represent $Ri_*$. Proper base change applies in the module category: after the unit-compatible forgetting comparison [lem-weil-pbc-exchange-forget-coefficients], it is the abelian proper-base-change isomorphism [thm-weil-pbc-bounded-below]. Its torsion hypothesis holds because a finite unital ring $A$ has some positive integer $NA=0$, hence every $A$-module sheaf and each of its cohomology sheaves is killed by $N$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "thm-weil-pbc-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 035C (morphisms.tex, lemma-closed-immersion-finite); Tag 03QP, proposition-finite-higher-direct-image-zero; Tag 0DDE, lemma-proper-base-change; sites-cohomology.tex Tag 0D6J(3), lemma-modules-abelian-unbounded."
+   }
+  },
+  {
+   "text": "Choose a bounded-below complex $F$ of injective $A$-module sheaves representing $K$, and a bounded-below complex $I$ of injective $A$-module sheaves with an isomorphism $Q(f^*F)\\cong QI$, using [lem-weil-pbc-dplus-injective-representative]; $I$ is K-injective by part (2) there. By [lem-weil-pbc-kinjective-hom-derived] this isomorphism is the class of a chain map $f^*F\\to I$, which is therefore a quasi-isomorphism. The adjoint chain map $u:F\\to f_*f^*F\\to f_*I$ (termwise unit of the exact adjunction of [prop-weil-pbc-inverse-image-modules-exact], followed by $f_*$ of the resolution) represents the derived unit $K\\to Rf_*f^*K$: $f_*I$ computes the right derived direct image [lem-weil-pbc-right-derived-plus-injective], and the derived unit is characterized by exactly this chain description in part (2) of [prop-weil-pbc-derived-inverse-image-adjunction]; for $A$-module sheaves the same characterization applies to the $A$-linear adjunction, whose sheaf-level unit and counit are those on abelian sheaves by part (3) of [prop-weil-pbc-inverse-image-modules-exact]. Put $Q=\\operatorname{Cone}(u)$ with the explicit cone convention of [def-weil-abstract-derived-category]. This specifies the cone and its maps on a resolution model, rather than choosing a cone of an unspecified morphism in a triangulated category.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-weil-pbc-derived-inverse-image-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232: open-closed rows and the proper-modification square; generalized from the constant complex to K."
+   }
+  },
+  {
+   "text": "Write $j:U\\hookrightarrow X$, $j_B:f^{-1}U\\hookrightarrow B$, and $h:f^{-1}U\\xrightarrow{\\sim}U$. These open immersions are etale by [lem-weil-pbc-open-immersion-etale]. Etale inverse image is restriction and its unit is restriction [lem-weil-pbc-etale-inverse-image-restriction]; the same identification for constant modules follows by [prop-weil-pbc-inverse-image-modules-exact]. The evaluation formula for direct image gives $j^*f_*I=h_*j_B^*I$ termwise: at $V\\to U$ both sides are $I(V\\times_XB)$. Under this equality $j^*u$ is the adjoint of $h^*j^*F\\to j_B^*I$. That map is a quasi-isomorphism, being the restriction of $f^*F\\to I$. Since $h$ is an isomorphism, its direct image is an exact equivalence, inverse to its inverse image (the two scheme inverse maps give inverse functors by the same evaluation formula). Thus $j^*u$ is a quasi-isomorphism and $j^*Q$ is acyclic.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "def-weil-abstract-derived-category",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232: open-closed rows and the proper-modification square; generalized from the constant complex to K."
+   }
+  },
+  {
+   "text": "Apply the open-closed short exact sequence [lem-weil-pbc-open-closed-short-exact] in every degree of $Q$:\n$$0\\to j_!j^*Q\\to Q\\xrightarrow{v}i_*i^*Q\\to0.$$\nBy [lem-weil-pbc-extension-by-zero-exact] the first complex is acyclic, since $j^*Q$ is acyclic by Step 3. The cone comparison [lem-pc-cone-short-exact-quasi-iso] identifies $i_*i^*Q$ with the cone of $j_!j^*Q\\to Q$; its cone triangle therefore shows that the unit $v:Q\\to i_*i^*Q$ is a quasi-isomorphism. This proves the support assertion about this particular cone; no excision statement is being assumed.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232: open-closed rows and the proper-modification square; generalized from the constant complex to K."
+   }
+  },
+  {
+   "text": "Proper base change for the cartesian square $(k,p,f,i)$ identifies $i^*Rf_*f^*K$ with $Rp_*k^*f^*K=Rp_*p^*i^*K$ (Step 1). It identifies the restriction of the unit with the unit for $p$. Indeed the base-change mate is $\\eta_p$ followed by $Rp_*k^*\\varepsilon_f$, with the pullback composition identification. After precomposing with $i^*\\eta_f$, naturality of $\\eta_p$ moves $p^*i^*\\eta_f$ next to $k^*\\varepsilon_f$, and their composite is the identity by the triangle identity for $f^*\\dashv Rf_*$. This leaves $\\eta_p$. The unit-compatible module/abelian comparison is precisely [lem-weil-pbc-exchange-forget-coefficients]. Because $i^*$ and $i_*$ are exact, applying them to the explicit cone commutes with its differential. Consequently Step 4 is the asserted isomorphism\n$$\\operatorname{Cone}(K\\to Rf_*f^*K)\\simeq i_*\\operatorname{Cone}(i^*K\\to Rp_*p^*i^*K).$$",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "def-weil-pbc-derived-exchange",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-abstract-derived-category",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232: open-closed rows and the proper-modification square; generalized from the constant complex to K."
+   }
+  },
+  {
+   "text": "For the equivalent triangle use the strictly commutative resolution square with vertices $F,f_*I,i_*i^*F,i_*i^*f_*I$. Put $a:F\\to f_*I$ and $c:F\\to i_*i^*F$, and let $b,d$ be the respective maps from those latter vertices to $i_*i^*f_*I$. Its total complex is the cone of $\\operatorname{Cone}(a)\\to\\operatorname{Cone}(d)$, up to shift and the sign on the shifted summand. It is acyclic by Steps 4-5. Equivalently the chain map $\\operatorname{Cone}((a,c):F\\to f_*I\\oplus i_*i^*F)\\to i_*i^*f_*I$, equal to $b-d$ on the middle direct sum and zero on $F[1]$, is a quasi-isomorphism: its cone is that same total complex with its summands reordered and signs changed. The defining cone triangle of [def-weil-abstract-derived-category] gives exactly the displayed distinguished triangle, with unit components and difference of restrictions.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232: open-closed rows and the proper-modification square; generalized from the constant complex to K."
+   }
+  },
+  {
+   "text": "We next compute supported sections, without using properness. Let $g:T\\to S$ be any scheme morphism, let $D\\subset S$ be closed, and take a bounded-below injective complex $J$ representing $N\\in D^+(T_{\\mathrm{et}},A)$. By the exact inverse-image adjunction [prop-weil-pbc-inverse-image-modules-exact] and [lem-sp-right-adjoint-preserves-injectives], $g_*J$ is termwise injective, so it represents $Rg_*N$. For the open immersion $w:S\\setminus D\\hookrightarrow S$, the functor $w^*$ preserves injectives: it is right adjoint to the exact functor $w_!$ by [lem-weil-pbc-extension-by-zero-adjunction, lem-weil-pbc-extension-by-zero-exact] and the same injective-preservation lemma. Thus $R\\Gamma(S,Rg_*N)$ and $R\\Gamma(S\\setminus D,w^*Rg_*N)$ are represented by $(g_*J)(S)$ and $(g_*J)(S\\setminus D)$. By [lem-pur-ringed-site-injective-mono-restriction] their restriction map is degreewise surjective. Its kernel computes $R\\Gamma_D(S,Rg_*N)$ by the definition [def-pur-etale-derived-supported-sections]. The same assertions apply on $T$ to $g^{-1}D$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-pur-ringed-site-injective-mono-restriction",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective; injective models for Tag 0D6E, lemma-derived-pushforward-composition, with the supported kernel of restriction."
+   }
+  },
+  {
+   "text": "The direct-image formula [def-weil-pbc-direct-image] now gives an identity of kernel complexes:\n$$\\begin{aligned}\\ker((g_*J)(S)\\to(g_*J)(S\\setminus D))&=\\ker(J(T)\\to J(g^{-1}(S\\setminus D)))\\\\&=\\Gamma_{g^{-1}D}(T,J).\\end{aligned}$$\nBy Step 7 and [def-pur-etale-derived-supported-sections], this identity yields $R\\Gamma_D(S,Rg_*N)\\simeq R\\Gamma_{g^{-1}D}(T,N)$. It commutes with the inclusions into the ordinary section complexes and with restriction, since every map in the identity is the same restriction map of $J$. Apply it with $(g,D,N)=(f,C,L)$ for the first supported comparison. Apply it with $(g,D,N)=(i,C,M)$ and $C\\subset Y$ for the second: $i^{-1}C=C$ as a closed subset of $Y$, and $Ri_*=i_*$ by Step 1. These are isomorphisms of derived $A$-modules, rather than just isomorphisms on their individual cohomology groups.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232: open-closed rows and the proper-modification square; generalized from the constant complex to K."
+   }
+  },
+  {
+   "text": "The supported pullback along $f$ is the composite of $R\\Gamma_C$ of the adjunction unit $K\\to Rf_*f^*K$ with Step 8. On resolutions it sends a section in the restriction kernel to its inverse image followed by the resolution map; if its restriction outside $C$ is zero, the inverse image restricts to zero outside $f^{-1}C$. Hence it is precisely pullback with supports. For arbitrary $C$, restriction uses the closed supports $C\\cap Y$ and $f^{-1}C\\cap P$ (and these are $C$ and $p^{-1}C$ when $C\\subset Y$). Restriction from $X$ to $Y$ and from $B$ to $P$ is induced by the units for $i$ and $k$. The square of their composites with the units for $f$ and $p$ commutes: these are the two units of the same composite inverse-image/direct-image adjunction; the mate calculation in Step 5 is the derived identification of the lower path. Evaluating and taking restriction kernels preserves this commutative diagram. This proves the asserted compatibility of supported pullback with restriction to $Y$ and $P$, including the connecting maps obtained from these kernel/cone complexes.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-direct-image",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232: open-closed rows and the proper-modification square; generalized from the constant complex to K."
+   }
+  },
+  {
+   "text": "For naturality, use [lem-weil-pbc-ring-sheaves-grothendieck] to know that each module-sheaf category is Grothendieck, [lem-weil-pbc-grothendieck-functorial-injective-embedding] for functorial injective embeddings, and [lem-weil-pbc-functorial-bounded-injective-resolution] for a single functorial injective resolution on all bounded-below complexes and diagrams. Thus choose $F$ and $I$ in Step 2 functorially. The chain square, cones and restriction-kernel complexes in Steps 2-9 are then actual functors on complexes and chain maps. They send quasi-isomorphisms to quasi-isomorphisms: the resolutions do so by their natural quasi-isomorphisms, the direct images are computed on injective models, and their cone or kernel comparisons are the isomorphisms already proved. They therefore descend through localization to the derived categories [def-weil-abstract-derived-category]. A change of injective models gives the same derived maps by [lem-weil-pbc-kinjective-hom-derived] and the normalized derived-functor uniqueness of [lem-weil-pbc-right-derived-plus-injective]. This proves naturality of the square and supported comparisons, retaining their actual arrows and the difference sign; it does not invoke functoriality of an arbitrary choice of cones in an abstract triangulated category.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232: open-closed rows and the proper-modification square; generalized from the constant complex to K."
+   }
+  },
+  {
+   "text": "For a homomorphism $A\\to A'$ view an $A'$-module complex and a coefficient-induced map as $A$-module data by restriction of scalars. This is exact and commutes termwise with evaluation, restriction, the open and closed units, direct image and kernels, since underlying groups and maps are unchanged. Its canonical derived direct-image and inverse-image comparisons are the isomorphisms of [lem-sbc-canonical-restrict-scalars-functor-comparisons]; [lem-sbc-restrict-scalars-injective-direct-image-acyclic] supplies the needed acyclicity of restricted injectives. The supported restriction-kernel comparisons are isomorphisms as well: apply [lem-pur-module-restriction-kernel-comparison] with $A'$ and with $A$ to compare both sides with the identical underlying abelian kernel. Both comparisons are normalized by the identity in degree zero, so their composite is the canonical scalar restriction comparison. On these acyclic resolution models every coefficient square in Steps 3-9 commutes termwise, as it is the same restriction or unit map on underlying groups. This proves coefficient naturality with the canonical derived comparisons. It asserts no tensor/direct-image commutation. A coefficient map presented through derived scalar extension is treated by its adjoint map into restriction of scalars, whenever its displayed objects belong to $D^+$.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-sbc-restrict-scalars-injective-direct-image-acyclic",
+    "lem-pur-module-restriction-kernel-comparison",
+    "def-weil-pbc-direct-image",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232: open-closed rows and the proper-modification square; generalized from the constant complex to K."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "thm-weil-pbc-bounded-below",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-pbc-derived-exchange",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "def-pur-etale-derived-supported-sections",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-restrict-scalars-injective-direct-image-acyclic",
+  "lem-pur-module-restriction-kernel-comparison",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Lemma 2.2.2.2, pp. 231-232; arbitrary-K cone argument and supported injective-kernel refinement, compared with Stacks Tags 0EW5, 095L, 0DDE, 093X and 0D6E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properExcision|proper_excision|blowup.*[Cc]ohomology|[Cc]ohomology.*blowup|homotopyCartesian",
+   "results": "Actual service response: 0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme or sheaf infrastructure does not state proper-modification excision or its derived supported comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper excision distinguished triangle etale cohomology abstract blowup square torsion coefficients",
+   "results": "Actual service response: 8 hits; CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.triangleOfSES_distinguished, CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished, DerivedCategory.triangleOfSES, DerivedCategory.mem_distTriang_iff, CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished, HomotopyCategory.Pretriangulated.isomorphic_distinguished, DerivedCategory.triangleOfSES_obj₃; ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme or sheaf infrastructure does not state proper-modification excision or its derived supported comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"cohomology\"",
+   "results": "Actual service response: 0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme or sheaf infrastructure does not state proper-modification excision or its derived supported comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper morphism isomorphic outside a closed subscheme gives a homotopy cartesian square of derived etale direct images and cohomology with supports",
+   "results": "Actual service response: 8 hits; AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.IsClosedImmersion.isIso_lift, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme or sheaf infrastructure does not state proper-modification excision or its derived supported comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale Mayer Vietoris distinguished triangle for a proper modification square with torsion coefficients",
+   "results": "Actual service response: 8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib CategoryTheory/Sites/MayerVietorisSquare.lean:88-91 assumes a sheafified representable pushout; its shortComplex_shortExact does not supply proper etale excision or derived supported direct-image comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "structure MayerVietorisSquare|def shortComplex|lemma shortComplex_shortExact|theorem shortComplex_shortExact|isPushout|IsPushout",
+   "results": "Actual service response: 5 hits; 88, 91, 111, 112, 151; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib CategoryTheory/Sites/MayerVietorisSquare.lean:88-91 assumes a sheafified representable pushout; its shortComplex_shortExact does not supply proper etale excision or derived supported direct-image comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections with closed support commute with derived direct image along a morphism of schemes",
+   "results": "Actual service response: 8 hits; AlgebraicGeometry.Scheme.Hom.appLE_map, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc; ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme or sheaf infrastructure does not state proper-modification excision or its derived supported comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported Leray isomorphism R Gamma Z of R f star equals R Gamma inverse image Z",
+   "results": "Actual service response: 8 hits; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality, AlgebraicGeometry.IsOpenImmersion.ΓIso, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc, AlgebraicGeometry.Scheme.SpecΓIdentity_inv_app, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.IsOpenImmersion.ΓIso_inv; ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme or sheaf infrastructure does not state proper-modification excision or its derived supported comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\", \"rightDerived\"",
+   "results": "Actual service response: 0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme or sheaf infrastructure does not state proper-modification excision or its derived supported comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*[Ll]eray|[Ll]eray.*supported|sectionsWithSupport|sections_with_support|supportedSections",
+   "results": "Actual service response: 0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme or sheaf infrastructure does not state proper-modification excision or its derived supported comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology with supports has a derived direct image comparison RΓ_C Rf_* equals RΓ_f inverse C",
+   "results": "Actual service response: 8 hits; CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, SheafOfModules.pushforwardNatIso, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc; ",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme or sheaf infrastructure does not state proper-modification excision or its derived supported comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper modification isomorphism outside closed subset gives etale derived excision homotopy cartesian square and cohomology with support",
+   "results": "Actual search response: 8 hits; AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: general etale-site and Mayer-Vietoris infrastructure does not assert proper-modification derived excision; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:88-91 requires a sheafified-representable pushout and does not supply this proper square or supported comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper modification etale Mayer Vietoris distinguished triangle and supported derived sections",
+   "results": "Actual search response: 8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.noConfusion, CategoryTheory.ShortComplex.ShortExact.singleTriangle, Opens.mayerVietorisSquare, DerivedCategory.triangleOfSES_distinguished, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished, Opens.mayerVietorisSquare'",
+   "date": "2026-10-24",
+   "verdict": "no match: general etale-site and Mayer-Vietoris infrastructure does not assert proper-modification derived excision; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:88-91 requires a sheafified-representable pushout and does not supply this proper square or supported comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"cohomology\"",
+   "results": "Actual search response: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: general etale-site and Mayer-Vietoris infrastructure does not assert proper-modification derived excision; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:88-91 requires a sheafified-representable pushout and does not supply this proper square or supported comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "properExcision|proper_excision|blowup.*[Cc]ohomology|homotopyCartesian",
+   "results": "Actual search response: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: general etale-site and Mayer-Vietoris infrastructure does not assert proper-modification derived excision; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:88-91 requires a sheafified-representable pushout and does not supply this proper square or supported comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology proper excision Mayer Vietoris triangle abstract blowup torsion modules",
+   "results": "Actual search response: 8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-24",
+   "verdict": "no match: general etale-site and Mayer-Vietoris infrastructure does not assert proper-modification derived excision; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:88-91 requires a sheafified-representable pushout and does not supply this proper square or supported comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "structure MayerVietorisSquare|shortComplex_shortExact|isPushout",
+   "results": "Actual search response: 5 hits; 88, 91, 111, 112, 151; subdirectory CategoryTheory/Sites/MayerVietorisSquare.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: general etale-site and Mayer-Vietoris infrastructure does not assert proper-modification derived excision; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:88-91 requires a sheafified-representable pushout and does not supply this proper square or supported comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-modified-blowup-generalized-class",
+  "date": "2026-10-24",
+  "group": "Q111"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Kummer regular-immersion fundamental classes and their operations. Supporting input: Generalized supported class characterized on the modified blowup. ILO XVI Lemma 2.2.2.2: the proper-modification square preceding the split supported-class construction.",
+   "via": [
+    "lem-per-modified-blowup-generalized-class",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-proper-modification-etale-excision",
+  "worker": "stage1",
+  "summary": "Checked ILO XVI 2.2.2.2 and Stacks 0EW5. Proved the arbitrary bounded-below constant-module version by the cone supported on Y, then proper base change; computed both supported comparisons by the identical restriction-kernel complexes. Retained every clause and the coefficient-comparison qualification. All inputs already have DAG nodes; no new nodes.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Kummer regular-immersion fundamental classes and their operations. Supporting input: Generalized supported class characterized on the modified blowup. ILO XVI Lemma 2.2.2.2: the proper-modification square preceding the split supported-class construction.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-pc-cone-short-exact-quasi-iso",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "def-weil-pbc-derived-exchange",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-pur-ringed-site-injective-mono-restriction",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "def-pur-etale-derived-supported-sections",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-sbc-restrict-scalars-injective-direct-image-acyclic",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "Generic ordinary etale or homological-algebra input for proper-modification excision and supported injective models; no node of this perverse unit provides this input."
+   },
+   {
+    "node": "prop-weil-pbc-derived-inverse-image-adjunction",
+    "why": "Generic ordinary etale input: chain-level description of the derived inverse-image/direct-image unit used to represent the unit K -> Rf_*f^*K in Step 2; no node of this perverse unit provides it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "thm-weil-pbc-bounded-below",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-pbc-derived-exchange",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "def-pur-etale-derived-supported-sections",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-restrict-scalars-injective-direct-image-acyclic",
+  "lem-pur-module-restriction-kernel-comparison",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-ae89a1c3e",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-ae89a1c3e (reviewer sub-agent of L); spot-checked: Read the item's statement and all 11 proof steps, every cited statement, ILO XVI Lemma 2.2.2.2 and its proof (pp. 231-232), and Stacks 0EW5 (etale-cohomology.tex around line 23315). The statement is true. I tested Y empty, Y=X, f=id, K=0, A=0, C empty, C=X, and the parent's nonflat coefficient map Z/l^N to Z/l^n; the parent (modified-blowup class) uses exactly the clauses stated. There is no re-split note, so a split with no new nodes is allowed. Searching the DAG for proper modification, blow-up square, 0EW5, homotopy cartesian and supported Leray found no duplicate. Steps 1 and 3-11 check out: forget-coefficients plus proper base change with N*A=0; j^*f_*I = h_*j_B^*I; the open-closed sequence applied to the cone Q; the mate calculation identifying i^*(unit for f) with the unit for p; the b-d triangle; injective models for supports via the right adjoints g_* and w^* and surjective restriction; identical kernels for supports; functorial resolutions; restriction of scalars. Step 5 leaves the chain-level base-change model implicit; this is advisory only. FIX (C3/C4, Step 2): lem-weil-pbc-dplus-injective-representative gives only an abstract isomorphism in the derived category, not a chain quasi-isomorphism f^*F -> I, and nothing cited identified the adjoint u with the derived unit. Step 2 now cites lem-weil-pbc-kinjective-hom-derived for the chain quasi-isomorphism and part (2) of prop-weil-pbc-derived-inverse-image-adjunction for the unit, with the A-linear version via part (3) of prop-weil-pbc-inverse-image-modules-exact; proof_deps and tool_uses are updated, and adding these leaves the batch-5 closure unchanged. Batch-5 flag on thm-weil-pbc-bounded-below: ordinary proper base change is neither assumption nor a step of either proof, and the path reaches only the generic node lem-pod-lisse-module-sheaves-as-module-objects, so the citation is accepted. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ }
+}

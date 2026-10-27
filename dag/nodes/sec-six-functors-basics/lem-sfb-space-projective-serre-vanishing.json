@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-space-projective-serre-vanishing",
+ "kind": "statement",
+ "title": "Serre twist vanishing for projective embeddings of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X,Y$ algebraic spaces over $S$ [def-trf-algebraic-space]. Work on their small etale ringed sites, with quasi-coherent modules [def-trf-space-quasi-coherent-module], module direct images and tensor pullbacks [def-trf-space-etale-module-functors], and tensor products [def-pur-sheaf-tensor-product]. Suppose $Y$ is Noetherian: its etale scheme charts are locally Noetherian [pqf-def-locnoeth], $|Y|$ is quasi-compact, and its diagonal is quasi-compact. A module on such a space is coherent if it is quasi-coherent and its pullback to every etale scheme chart is coherent [pqf-def-coherent]. Let $n\\geq0$ and let $i:X\\hookrightarrow\\mathbf P^n_Y$ be a closed immersion over $Y$, with structure morphism $f:X\\to Y$. Here $\\mathbf P^n_Y=Y\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ is the sheaf fibre product [lem-trf-space-fibre-products-etale-covers, def-nagata-projective-space-base-change]; a closed immersion is representable and is a closed immersion of schemes after every scheme test [def-weil-closed-immersion]. The twisting line module $\\mathcal O_{\\mathbf P^n_Y}(1)$ is the pullback of the standard projective-space twist over $\\mathbf Z$ [def-pc-projective-space-twist], equivalently the line module with the standard transition functions on every etale scheme chart. Put $L=i^*\\mathcal O_{\\mathbf P^n_Y}(1)$. For every coherent $\\mathcal O_X$-module $F$, there is an integer $d_0\\geq0$ such that\n$$R^qf_*(F\\otimes_{\\mathcal O_X}L^{\\otimes d})=0\\qquad(d\\geq d_0,\\ q>0).$$\nHigher direct images are right derived functors in all module sheaves, computed by injective resolutions [def-sp-injective-resolutions].",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AQ, lemma-kill-by-twisting, entire statement; the nonnegative threshold is obtained by increasing the integer threshold to its maximum with zero."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-nagata-projective-space-base-change",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sp-injective-resolutions",
+  "def-sfb-space-projective-twist",
+  "def-sfb-space-derived-module-calculus",
+  "def-a1-space-point-topology",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-trf-space-module-scheme-restriction",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $a:U\\to Y$ with $U$ affine, using quasi-compactness of $|Y|$. Write $U=\\operatorname{Spec}A$. Since every etale scheme chart of $Y$ is locally Noetherian, $U$ is locally Noetherian and, being affine, is a Noetherian scheme. If $Y$ is empty, every module sheaf on it is zero and $d_0=0$ suffices; henceforth the same atlas argument also permits the empty atlas.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-noetherian-affine-atlas-relation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AQ, lemma-kill-by-twisting, entire statement; the nonnegative threshold is obtained by increasing the integer threshold to its maximum with zero."
+   }
+  },
+  {
+   "text": "Put $X_U=X\\times_YU$ and write $b:X_U\\to X$, $f_U:X_U\\to U$. The fibre-product identity gives $\\mathbf P^n_Y\\times_YU=\\mathbf P^n_U$. By the representable closed-immersion hypothesis in the statement, $i_U:X_U\\hookrightarrow\\mathbf P^n_U$ is a closed immersion of schemes: test $i$ on the scheme $\\mathbf P^n_U$. Projective space is proper over $U$, and its composite with the closed immersion is proper. Thus $f_U$ is proper, in particular quasi-compact and separated, hence quasi-separated.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-nagata-projective-space-base-change",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AQ, lemma-kill-by-twisting, entire statement; the nonnegative threshold is obtained by increasing the integer threshold to its maximum with zero."
+   }
+  },
+  {
+   "text": "Let $F_U$ denote the coherent Zariski module corresponding to $b^*F$ on the scheme $X_U$, and let $L_U=i_U^*\\mathcal O_{\\mathbf P^n_U}(1)$. Coherence of $F_U$ is exactly the chartwise coherence required of $F$ in the statement. The etale/Zariski equivalence identifies line modules and commutes with pullback. Since the twisting module is pulled back from $\\mathbf P^n_{\\mathbf Z}$, its further pullback is the same standard twist on $\\mathbf P^n_U$. The twist of the statement is the glued module of [def-pc-projective-space-twist] over $\\mathbf Z$; the glued-twist identification gives the unique isomorphism $\\theta:\\mathcal O_{\\mathbf P^n_{\\mathbf Z}}(1)\\to\\widetilde{S(1)}$, $S=\\mathbf Z[T_0,\\dots,T_n]$, with $\\theta(e_i)=T_i/1$ and $\\theta(T^{\\mathrm{gl}}_k)=T_k$ (the index set $\\{0,\\dots,n\\}$ is nonempty). Pulling $\\theta$ back along $\\rho_U:\\mathbf P^n_U\\to\\mathbf P^n_{\\mathbf Z}$ and then along $i_U$ identifies $L_U$ with $i_U^*\\rho_U^*\\widetilde{S(1)}$, the module $\\mathcal L$ of the projective-ample lemma, and carries the coordinate sections to its sections $s_k$. The projective-ample lemma makes $L_U$ invertible. For each affine open $V\\subseteq U$, the closed immersion after restriction is into $\\mathbf P^n_V$ by base change; applying that lemma to $V=\\operatorname{Spec}B$ says that $L_U|_{f_U^{-1}V}$ is ample. These are precisely the relative ampleness hypotheses needed below.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-projective-space-twist-glued-identification",
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AQ, lemma-kill-by-twisting, entire statement; the nonnegative threshold is obtained by increasing the integer threshold to its maximum with zero."
+   }
+  },
+  {
+   "text": "Apply scheme relative Serre vanishing to the Noetherian scheme $U$, proper morphism $f_U$, coherent quasi-coherent module $F_U$, and invertible module $L_U$ ample over every affine open of $U$. It gives an integer $e$ such that $R^q(f_U)_{\\mathrm{Zar},*}(F_U\\otimes L_U^{\\otimes d})=0$ for every $q>0$ and $d\\ge e$. Set $d_0=\\max(0,e)$. This is one bound for the entire atlas, independent of $q$.",
+   "uses": [
+    "lem-pc-relative-kill-by-twisting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02O1, lemma-kill-by-twisting, applied to the scheme atlas base."
+   }
+  },
+  {
+   "text": "Fix $d\\ge d_0$ and $q>0$, and put $M_d=F\\otimes L^{\\otimes d}$. Locally $L$ is free of rank one, so $M_d$ is locally isomorphic to $F$ and is quasi-coherent. The canonical pullback-tensor isomorphism, iterated $d$ times (with the structure module in degree zero), identifies $b^*M_d$ with the etale module of $F_U\\otimes L_U^{\\otimes d}$. Apply higher-image restriction along $a$ and then the scheme etale/Zariski higher-image comparison for the proper, hence qcqs, morphism $f_U$. They identify $(R^qf_*M_d)|_U$ with the associated etale module of the zero Zariski module obtained in step 4. Therefore $(R^qf_*M_d)|_U=0$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-higher-image-etale-restriction",
+    "lem-sfb-scheme-etale-higher-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AQ, lemma-kill-by-twisting, entire statement; the nonnegative threshold is obtained by increasing the integer threshold to its maximum with zero."
+   }
+  },
+  {
+   "text": "Write $N=R^qf_*M_d$. For any etale scheme object $T\\to Y$, the projection $T\\times_YU\\to T$ is a surjective etale cover by a scheme, and the restriction of $N$ to it is zero since it factors through $U$. A section in $N(T)$ restricts to zero on this cover, so the uniqueness part of the sheaf axiom makes it zero. Thus $N(T)=0$ for every object, and $N=0$. This holds for every $d\\ge d_0$ and $q>0$, proving the assertion.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AQ, lemma-kill-by-twisting, entire statement; the nonnegative threshold is obtained by increasing the integer threshold to its maximum with zero."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-noetherian-affine-atlas-relation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-nagata-projective-space-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-proper-morphism",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-projective-space-twist-glued-identification",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pc-relative-kill-by-twisting",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-sfb-space-higher-image-etale-restriction",
+  "lem-sfb-scheme-etale-higher-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AQ, lemma-kill-by-twisting, proof by etale scheme reduction; atlas and topology comparisons made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Serre|serre|kill_by_twist|killByTwist",
+   "results": "Mathlib/AlgebraicGeometry: No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Proj properness, affine localization, projective-object Ext and additive pushforward do not assert coherent twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of a coherent sheaf twisted by high powers of a projective embedding vanish over a Noetherian algebraic space",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Proj properness, affine localization, projective-object Ext and additive pushforward do not assert coherent twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"ProjectiveSpace\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Proj properness, affine localization, projective-object Ext and additive pushforward do not assert coherent twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion of algebraic spaces into projective space over a Noetherian algebraic space has Serre vanishing for coherent sheaves twisted by O(1)",
+   "results": "Hits: AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Proj properness, affine localization, projective-object Ext and additive pushforward do not assert coherent twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|higherDirectImage.*twist|twist.*higherDirectImage",
+   "results": "Mathlib/AlgebraicGeometry: No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Proj properness, affine localization, projective-object Ext and additive pushforward do not assert coherent twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre vanishing for relatively ample invertible sheaves and projective morphisms of algebraic spaces",
+   "results": "Hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Proj properness, affine localization, projective-object Ext and additive pushforward do not assert coherent twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|AlgebraicSpace|higherDirectImage.*twist|twist.*higherDirectImage",
+   "results": "; hits: none (grep in Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of sections, projective objects, Serre classes or unrelated Proj operations, not twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre vanishing for projective morphisms of algebraic spaces with relatively ample line bundles",
+   "results": "; hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.Proj.ext, ProjectiveSpectrum.mem_vanishingIdeal, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, ProjectiveSpectrum.coe_vanishingIdeal",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of sections, projective objects, Serre classes or unrelated Proj operations, not twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"higherDirectImage\", \"twist\"",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'; hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: rejected query, unknown identifier; replaced by the successful second Loogle query and semantic searches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre vanishing for coherent sheaves twisted by a projective embedding on Noetherian algebraic spaces",
+   "results": "; hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, isZero_Ext_succ_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of sections, projective objects, Serre classes or unrelated Proj operations, not twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Serre\"",
+   "results": "; hits: Lean.Parser.ParserResolution, Lean.Parser.ParserResolution.alias, Lean.Parser.ParserResolution.category, Lean.Parser.ParserResolution.parser, CategoryTheory.ObjectProperty.IsSerreClass, CategoryTheory.ObjectProperty.instIsSerreClassIsZero, CategoryTheory.ObjectProperty.IsSerreClass.toContainsZero, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderQuotients",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of sections, projective objects, Serre classes or unrelated Proj operations, not twist vanishing on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of a coherent module tensor sufficiently high powers of a relatively ample line bundle vanish in all positive degrees",
+   "results": "; hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, DerivedCategory.isZero_of_isGE, AlgebraicGeometry.Scheme.Modules.instAbelian, DerivedCategory.isGE_iff, Rep.isZero_Tor_succ_of_projective",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern localization of sections, projective objects, Serre classes or unrelated Proj operations, not twist vanishing on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-chow-acyclic-full-support-witness",
+  "date": "2026-10-23",
+  "group": "Q115"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: coherence of the entries R^p f_* H^q(E), using the proper case Tag 08AR. Supporting input: Tag 08AR (lemma-proper-pushforward-coherent), construction for condition (3), from weak Chow to the full-support calculation; projective inputs Tags 089J (lemma-weak-chow) and 08AQ (lemma-kill-by-twisting); coherent.tex Tag 02O4 (lemma-locally-projective-pushforward). This is an existential projective-twist witness, not the universal proper direct-image theorem. Supporting projective input: Tag 08AQ, lemma-kill-by-twisting, used for both the Chow map and its affine-base composite.",
+   "via": [
+    "lem-sfb-space-chow-acyclic-full-support-witness",
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-proper-space-coherent-derived-image",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-projective-serre-vanishing",
+  "worker": "stage1",
+  "summary": "Expanded Tag 08AQ into an affine etale atlas reduction, projective/proper scheme geometry and relative ampleness, scheme relative Serre vanishing, the precise higher-image site comparisons, and sheaf descent of zero. Reused existing nodes throughout; no new nodes or statement changes.",
+  "blueprint": "Supporting input in the existing from.place chain for det-thm-sf-ctf-stability-direct-images proof (3), the projective twisting input of the coherent proper-image argument. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md checked; no alternative statement of this algebraic-space lemma found.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic atlas, projective scheme geometry, module tensor/site comparison, or scheme Serre-vanishing input in the etale reduction of Tag 08AQ; the present unit supplies no replacement."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic atlas, projective scheme geometry, module tensor/site comparison, or scheme Serre-vanishing input in the etale reduction of Tag 08AQ; the present unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic atlas, projective scheme geometry, module tensor/site comparison, or scheme Serre-vanishing input in the etale reduction of Tag 08AQ; the present unit supplies no replacement."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic atlas, projective scheme geometry, module tensor/site comparison, or scheme Serre-vanishing input in the etale reduction of Tag 08AQ; the present unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Generic atlas, projective scheme geometry, module tensor/site comparison, or scheme Serre-vanishing input in the etale reduction of Tag 08AQ; the present unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic atlas, projective scheme geometry, module tensor/site comparison, or scheme Serre-vanishing input in the etale reduction of Tag 08AQ; the present unit supplies no replacement."
+   },
+   {
+    "node": "lem-pc-relative-kill-by-twisting",
+    "why": "Generic atlas, projective scheme geometry, module tensor/site comparison, or scheme Serre-vanishing input in the etale reduction of Tag 08AQ; the present unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic atlas, projective scheme geometry, module tensor/site comparison, or scheme Serre-vanishing input in the etale reduction of Tag 08AQ; the present unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-twist-glued-identification",
+    "why": "Step 3 takes from its statement the isomorphism between the glued twist def-pc-projective-space-twist of the item and the graded-module twist used by lem-weil-pbc-projective-ample-invertible; generic Proj comparison, no node of sk-thm-sf-ctf-stability gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pc-relative-kill-by-twisting",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-projective-space-twist-glued-identification"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-d4053b1b8",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-d4053b1b8 (reviewer sub-agent of L); spot-checked: Read Tag 08AQ, its proof, 03H6 and 071N, the item, all 14 cited statements and the twist definitions. Statement, stmt_deps and blueprint are unchanged from live (status unsplit there; no supersession); no new nodes. Steps 1-6 are correct: one affine atlas (Noetherian via noetherian-affine-atlas-relation), so the bound is uniform; P^n_U proper and closed immersion composite proper; chartwise coherence; relative ampleness over every affine V by base change plus the projective-ample lemma; lem-pc-relative-kill-by-twisting (02O1) hypotheses all met, d0=max(0,e); 03LX higher-image restriction plus 071N etale/Zariski comparison, both with module derived images; elementary descent of zero. Edge cases Y or X empty, n=0, d=0 checked. One fault, C1/C4: step 3 identifies the item's glued twist def-pc-projective-space-twist with the S(1)~ twist of lem-weil-pbc-projective-ample-invertible without a node. FIX: cite lem-weil-pbc-projective-space-twist-glued-identification in step 3, proof_deps and split_report.tool_uses (no cycle; its closure has no trf or Poincare node). Batch 5: the 5 flagged cites (qc affine atlas, Noetherian atlas relation, trf Zariski/etale QCoh equivalence 03DX, 03LX restriction, 071N comparison) are generic foundations reaching sec-trace-formula only through general definitions or generic descent, not trace-formula or duality content; accepted. The worker's 8 tool_uses (generic geometry and module tools) are accepted. Inherited blueprint.from.node=null is a base-node matter.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProjectiveSerreVanishing",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_isZero_projective_higherDirectImage_twist",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.projectiveSerreTensorPower",
+   "AlgebraicGeometry.AlgebraicSpace.exists_isZero_projective_higherDirectImage_twist"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProjectiveSerreVanishing.lean",
+  "statement": "theorem exists_isZero_projective_higherDirectImage_twist {S : Scheme.{u}} {X Y : AlgebraicSpace S} (hln : ∀ T : Y.EtaleSite, IsLocallyNoetherian (Y.etaleForget.obj T)) (hqc : CompactSpace (Point Y.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated Y) (n : ℕ) (i : X ⟶ projectiveSpaceOver Y n) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) (F : X.Modules) (hF : F.IsQuasicoherent) (hFc : ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) : ∃ d₀ : ℕ, ∀ d : ℕ, d₀ ≤ d → ∀ q : ℕ, 0 < q → IsZero (Y.smallModuleEquivalence.inverse.obj ((@Functor.rightDerived X.SmallModules _ Y.SmallModules _ _ (@InjectiveResolution.instHasInjectiveResolutions X.SmallModules _ _ (@IsGrothendieckAbelian.enoughInjectives _ _ _ (SheafOfModules.isGrothendieckAbelianOfUniverses.{u, u, u, u} X.smallEtaleModelTopology X.smallStructureRings))) _ (smallModuleDirectImage (i ≫ projectiveSpaceProjection Y n)) _ q).obj (X.smallModuleRestriction.obj F ⊗ projectiveSerreTensorPower X (X.smallModuleRestriction.obj ((moduleTensorPullback i).obj (projectiveSpaceTwistOne Y n))) d)))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-6d9432b52"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d9432b52",
+  "group": "NQ",
+  "result": "fix",
+  "note": "Statement matches Stacks 08AQ and the node clause by clause: hln/hqc/IsAbsolutelyQuasiSeparated (Noetherian Y), standard IsRepresentableWith closed immersion into projectiveSpaceOver Y n (product sheaf = Y x_S P^n_S), f = i ≫ projection, O(1) = pullback of the existing integral ProjectiveSpace.twist via the canonical representedSchemeModuleExtension, chartwise RingedSpace.IsCoherent plus quasi-coherent F, tensor powers with unit in degree 0, ∃ d₀ ∀ d ≥ d₀ ∀ q > 0 IsZero of the classical injective rightDerived of smallModuleDirectImage. Edge cases covered; no extra hypotheses. New def node def-sfb-space-projective-twist: fields OK, real data, algebraicity is a named sorry theorem, no existing owner. Mechanical theorem stmt_dep lem-weil-pbc-ring-sheaves-grothendieck: genuine, since its conclusion is needed for HasInjectiveResolutions to type rightDerived, so PASS on that point. FIX: the statement used upstream SheafOfModules.isGrothendieckAbelian, leaving the cited node's public import unused; replaced by the recorded isGrothendieckAbelianOfUniverses.{u,u,u,u} X.smallEtaleModelTopology X.smallStructureRings (same instance) in fixes/SpaceProjectiveSerreVanishing.lean plus <item>.lean-record.json statement verbatim; nt_compile --json rc=0, no errors or warnings. Advisories: def-sfb-space-small-ringed-model only reached through def-sfb-space-derived-module-calculus; new node cites two theorem nodes; inherited blueprint.from.node null."
+ }
+}

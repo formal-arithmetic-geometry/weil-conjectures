@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-singular-point-jet-weight-bounds",
+ "kind": "statement",
+ "title": "Jet-filtration weight estimates for singular points",
+ "statement": "Let $k$ be algebraically closed and $X\\subset\\mathbf P^{r-1}_k$ a connected generically reduced closed subscheme of dimension one whose reduced support $D=X_{\\mathrm{red}}$ is nondegenerate. Use the weighted flags and coefficients $a_F$ of [lem-sfb-bounded-hilbert-weight-polynomials]. Assume every reduced irreducible component of degree at most three is a rational normal curve. The following estimates hold.\n(1) If $p\\in D$ has multiplicity $t\\ge3$ (the leading coefficient of $n\\mapsto\\operatorname{length}(\\mathcal O_{D,p}/\\mathfrak m_p^{n+1})$), the flag of forms vanishing at $p$, with weights zero there and one on its one-dimensional quotient, satisfies $\\sum_iw_i=1$ and $a_F\\ge t/2$.\n(2) If the normalization of a reduced component $Y$ is ramified at a point $q$ above $p$ (its tangent map is zero there), then $\\deg Y\\ge4$. There is a weighted flag with $0\\le w_i\\le4$, $\\sum_iw_i\\le7$, and $a_F\\ge8$. It is the jet flag giving weights $0,1,2,4$ to forms whose pullbacks to the normalized branch have orders at least $4$, at least $3$, at least $2$, and the remaining forms, respectively, with empty graded pieces omitted.\n(3) Suppose every normalization map is unramified and every singular point of $D$ has multiplicity two. If such a point $p$ is not an ordinary node, there is a flag with weights in $\\{0,1,2\\}$, $\\sum_iw_i\\le3$, and $a_F\\ge7/2$; when neither local branch belongs to a line component one has $a_F\\ge4$. The flag assigns weight zero to forms vanishing on the common tangent line, weight one to the additional forms vanishing at $p$, and weight two to the remaining forms.\nAn ordinary node here means that the completed local ring is $k[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The estimates are unchanged by a finite-length nilradical. No Hilbert semistability is assumed. A rational normal curve of degree $e$ means a smooth rational curve whose embedding in its own linear span is the complete degree-$e$ embedding of $\\mathbf P^1$. Component degrees below are degrees of the pulled-back hyperplane line on the smooth normalized components [def-sc-normalization, def-pc-degree-line-bundle].",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2, Theorem 8 proof steps (4)--(6) and the cusp/tangent-line calculations, printed pp.14--15. Coefficients here are a_F=e_F/2, not e_F. The two tangent-line cases are also in Gieseker Proposition 1.0.6, printed pp.49--55. Local PDFs WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-degree-line-bundle",
+  "lem-sfb-bounded-hilbert-weight-polynomials",
+  "def-pc-reduced-scheme",
+  "def-sc-normalization",
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-connected-scheme",
+  "def-sc-scheme-tangent-space",
+  "def-sc-divisor",
+  "def-sfb-projective-curve-jet-weight-data",
+  "def-sfb-projective-curve-branch-data",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Work first on $D$ and write $L=\\mathcal O_D(1)$. Finite type over the Noetherian field makes $D$ Noetherian and gives finitely many components. A zero-dimensional component would be a closed point disjoint from every other component (otherwise it is contained in one), hence an isolated open-and-closed point. Connectedness and dimension one exclude it, so $D$ is pure one-dimensional. For any chosen flag with maximum integral weight $B$, put $H_m=H^0(D,L^{\\otimes m})$ and let $E_{m,j}$ be the span of restricted degree-$m$ monomials of weight at most $j$. For large $m$ the weight-polynomial node gives spanning and $w_F(m)=a_Fm^2+O(m)$. Sorting monomials by weight and retaining each vector that increases the span gives a basis whose number of weights greater than $j$ is exactly $\\dim H_m-\\dim E_{m,j}$. Any basis has at least that many. Thus\n$$w_F(m)=\\sum_{j=0}^{Bm-1}(\\dim H_m-\\dim E_{m,j}).$$\nThis is just the finite-dimensional greedy-basis argument, with each basis weight counted once for each smaller nonnegative integer.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sfb-bounded-hilbert-weight-polynomials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 2.1 Proposition 1 and Lemma 2, and Section 3.2 before step (4); agent expansion; local PDF WANTED, read online."
+   }
+  },
+  {
+   "text": "For (1), let $V_p$ be the kernel of evaluation of ambient linear forms at $p$. Evaluation has rank one, so its zero/one flag has weight sum one. Every monomial of degree $m$ and weight at most $j<m$ has at least $m-j$ factors in $V_p$. At a normalized point $q$ above $p$ its order is therefore at least $b_q(m-j)$. The branch lemma gives $\\sum_qb_q=t$ and $\\sum_{q\\in C_i}b_q\\le e_i$, so these simultaneous jet orders have total at most $me_i$ on every component. The jet-codimension lemma gives $\\operatorname{codim}E_{m,j}\\ge t(m-j)-C$. Sum over $0\\le j<m$ using step 1:\n$$w_F(m)\\ge t\\,m(m+1)/2-Cm.$$\nAfter division by $m^2$ and passage to the leading coefficient, $a_F\\ge t/2$.",
+   "uses": [
+    "lem-sfb-branch-multiplicity-tangent-criterion",
+    "lem-sfb-normalization-jet-codimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, Theorem 8 step (5), multiplicity flag; agent expansion; local PDF WANTED, read online."
+   }
+  },
+  {
+   "text": "For (2), a component of degree at most three is a rational normal curve by hypothesis. On the degree-$e$ complete embedding of $\\mathbf P^1$, on either standard affine chart ratios of consecutive monomial coordinates include the affine parameter, so the embedding and its normalization have nonzero tangent map. Thus the ramified component $Y$ has degree $e\\ge4$. Trivialize $L$ near $p$ by an ambient linear form nonzero there and use a parameter $z$ on its normalized branch. Zero tangent map means every form vanishing at $p$ has order at least two, by the branch lemma. Successive conditions order at least $2,3,4$ have jumps of dimension at most one, since each records one coefficient of $k[[z]]$; evaluation at $p$ has rank one. Therefore the displayed jet flag has one weight-$4$ quotient, at most one weight-$2$ quotient, at most one weight-$1$ quotient, and weight sum at most seven. For every basis vector, its order plus its weight is at least four, including vectors that vanish identically on $Y$.",
+   "uses": [
+    "lem-sfb-branch-multiplicity-tangent-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, Theorem 8 step (4), cusp flag and higher ramification; agent expansion; local PDF WANTED, read online."
+   }
+  },
+  {
+   "text": "A degree-$m$ monomial of weight at most $j<4m$ in the flag of step 3 has order at least $4m-j$ at the chosen normalized point. Since $e\\ge4$, the jet-codimension lemma applies to this single point for every such $j$ and gives $\\operatorname{codim}E_{m,j}\\ge4m-j-C$. Hence step 1 yields\n$$w_F(m)\\ge\\sum_{j=0}^{4m-1}(4m-j-C)=8m^2+O(m).$$\nIt follows that $a_F\\ge8$. Missing jet graded pieces only decrease the sum of weights, and the argument does not require an ordinary cusp or characteristic zero.",
+   "uses": [
+    "lem-sfb-normalization-jet-codimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, cusp Riemann--Roch calculation, printed pp.14--15; agent expansion; local PDF WANTED, read online."
+   }
+  },
+  {
+   "text": "For (3), at a nonnodal point of multiplicity two the branch lemma, applied to the nonzero tangent maps, gives exactly two normalized points and a common projective tangent line $T$. Forms vanishing on $T$ have order at least two at both points. The inclusions of the codimension-two space $V_T$ in the codimension-one space $V_p$ and then in $k^r$ give the specified weights $0,1,2$, with sum $1+2=3$. If neither branch is on a line component, the two component degrees are at least two when they are distinct. If the two points belong to one normalized component, that component has degree at least four: a degree-at-most-three rational normal component has only one preimage of each point. Thus on each component the simultaneous orders $2m-j$ at the selected points sum to at most its degree times $m$. Every weight-at-most-$j$ monomial has at least these orders. The jet-codimension lemma and step 1 give\n$$w_F(m)\\ge\\sum_{j=0}^{2m-1}(2(2m-j)-C)=4m^2+O(m),$$\nso $a_F\\ge4$.",
+   "uses": [
+    "lem-sfb-branch-multiplicity-tangent-criterion",
+    "lem-sfb-normalization-jet-codimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, Theorem 8 step (6), tangent branches with neither on a line; agent expansion; local PDF WANTED, read online."
+   }
+  },
+  {
+   "text": "If a branch belongs to a line component, this component is $T$ itself. The other branch is on a different component of degree at least two: two distinct projective lines through $p$ cannot have the same tangent line. On $T$ all weight-zero forms vanish identically, so any monomial nonzero on $T$ has weight at least $m$. For $0\\le j<m$, $E_{m,j}$ therefore vanishes identically on $T$; impose only order $m$ at its preimage of $p$, and order $2m-j$ on the other branch. For $m\\le j<2m$, impose order $2m-j$ on each branch. The totals respect the degree bounds on both components. The jet-codimension lemma gives respective codimension lower bounds $3m-j-C$ and $4m-2j-C$. Summing gives\n$$w_F(m)\\ge\\sum_{j=0}^{m-1}(3m-j-C)+\\sum_{j=m}^{2m-1}(4m-2j-C)=\\tfrac72m^2+O(m).$$\nThus $a_F\\ge7/2$ also in this exceptional tangent-line case.",
+   "uses": [
+    "lem-sfb-normalization-jet-codimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, tangent-line exception after the cusp calculation, printed p.15; agent expansion; local PDF WANTED, read online."
+   }
+  },
+  {
+   "text": "Finally compare $X$ and $D$ for any of these fixed flags. For large $m$ the ambient monomials span both section spaces, by the weight-polynomial node, and their restriction $H^0(X,\\mathcal O_X(m))\\to H^0(D,L^m)$ is surjective. If the nilradical $N$ has finite length $\\ell$, its twisted global sections have dimension at most $\\ell$: the finite-support skyscraper lemma identifies them with the direct sum of the finitely many nonzero stalks, each twist is locally free of rank one, and a composition series at a closed $k$-point has one-dimensional factors. Left exactness of sections bounds the restriction kernel by $\\ell$. From a minimum-weight monomial basis on $X$, select a subset mapping to a basis on $D$, which proves $w_{F,D}(m)\\le w_{F,X}(m)$. Conversely lift a minimum-weight monomial basis on $D$ by the same monomials and extend it to a monomial basis on $X$. At most $\\ell$ further monomials are needed, each of weight at most $Bm$. Therefore\n$$0\\le w_{F,X}(m)-w_{F,D}(m)\\le B\\ell m.$$\nTheir quadratic coefficients agree. This proves precisely the finite-length-nilradical invariance asserted, and transfers all three bounds to $X$, without any semistability assumption.",
+   "uses": [
+    "lem-sfb-bounded-hilbert-weight-polynomials",
+    "lem-trf-coherent-finite-support-skyscrapers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2, generically reduced curves before step (8); elementary bounded-kernel basis comparison; agent expansion; local PDF WANTED, read online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bounded-hilbert-weight-polynomials",
+  "lem-sfb-branch-multiplicity-tangent-criterion",
+  "lem-sfb-normalization-jet-codimension",
+  "lem-trf-coherent-finite-support-skyscrapers",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2 Theorem 8 proof steps (4)--(6), printed pp.14--15; source read online, local PDF WANTED. Agent supplies the multiplicity and tangent-line summations and the finite-length comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert weight estimates at a ramified normalization point, a triple point and a nonnodal double point of a projective curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsMinimal.val_Δ_maximal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsMinimal R W],\\n  MaximalFor (fun C => WeierstrassCurve.IsInteg\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (P : Fin 3 → R),\\n  W'.Nonsingular P ↔\\n    W'.Equation P ∧\\n      (W'.a₁ * P 1 * P 2 - (3 * P 0 ^ 2 + 2 * W'.a₂ * P 0 * P 2 + W'.a₄ * P 2 ^ 2) ≠ 0 ∨\\n        2 * P 1 * P 2 + W'.a₁ * P 0 * P 2 + W'.a₃ * P 2 ^ 2 ≠ 0 ∨\\n          P 1 ^\", \"doc\": \"A point $ P = [X:Y:Z] $ on a projective Weierstrass curve over a ring $ R $ is nonsingular if and only if it satisfies the curve's homogeneous cubic equation $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - a_2X^2Z \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_iff_of_Y_eq_negY\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P : Fin 3 → F},\\n  P 2 ≠ 0 → P 1 = W.negY P → (W.Nonsingular P ↔ W.Equation P ∧ (MvPolynomial.eval P) W.polynomialX ≠ 0)\", \"doc\": \"For a point $ P = [X:Y:Z] $ on a projective Weierstrass curve satisfying $ Z \\neq 0 $ and $ Y = -Y - a_1X - a_3Z $, the point $ P $ is nonsingular if and only if it satisfies the curve's homogeneous eq\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F},\\n  W.Nonsingular x y →\\n    WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C (W.negY x y)) *\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C y) =\\n      WeierstrassCurve.Affine.Coordinate\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$, the product of the ideals generated by $(X - x, Y - (-y - a_1 x - a_3))$ and $(X - x, Y - y)$ in the coordinate rin\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x₂ (Polynomial.C y₂) =\\n          WeierstrassCurve.Af\", \"doc\": \"For two distinct points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ that are not symmetric with respect to the curve's group law (i.e., $y_1 \\neq -y_2 - a_1 x_2 - \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic nonsingularity tests and cusp forms of modular-form theory do not give curve-jet Hilbert-weight estimates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cusp jet filtration has sum of weights at most seven and leading Hilbert weight at least eight",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CuspFormClass.qExpansion_isBigO\", \"module\": \"Mathlib/NumberTheory/ModularForms/Bounds\", \"type\": \"∀ {k : ℤ} {Γ : Subgroup (GL (Fin 2) ℝ)} [Γ.IsArithmetic] {F : Type u_2} [inst : FunLike F UpperHalfPlane ℂ]\\n  [CuspFormClass F Γ k] (f : F),\\n  (fun n => (PowerSeries.coeff n) (ModularFormClass.qExpansion Γ.strictWidthInfty f)) =O[Filter.atTop] fun n =>\\n    ↑n ^ (↑k / 2)\", \"doc\": \"For any arithmetic subgroup $\\\\Gamma \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$, integer weight $k$, and cusp form $f$ of weight $k$ with respect to $\\\\Gamma$, the coefficients of the $q$-expansion of $f$ sat\"}\n  {\"name\": \"CuspFormClass.exists_bound\", \"module\": \"Mathlib/NumberTheory/ModularForms/Bounds\", \"type\": \"∀ {k : ℤ} {Γ : Subgroup (GL (Fin 2) ℝ)} [Γ.IsArithmetic] {F : Type u_2} [inst : FunLike F UpperHalfPlane ℂ]\\n  [CuspFormClass F Γ k] (f : F), ∃ C, ∀ (τ : UpperHalfPlane), ‖f τ‖ ≤ C / τ.im ^ (↑k / 2)\", \"doc\": \"For any cusp form $ f $ of weight $ k $ with respect to an arithmetic subgroup $ \\\\Gamma \\\\subseteq \\\\mathrm{GL}(2, \\\\mathbb{R}) $, there exists a constant $ C > 0 $ such that for all $ \\\\tau $ in the uppe\"}\n  {\"name\": \"EisensteinSeries.isBoundedAtImInfty_eisensteinSeries_SIF\", \"module\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty\", \"type\": \"∀ {N : ℕ} [NeZero N] (a : Fin 2 → ZMod N) {k : ℤ},\\n  3 ≤ k →\\n    ∀ (A : Matrix.SpecialLinearGroup (Fin 2) ℤ),\\n      UpperHalfPlane.IsBoundedAtImInfty (SlashAction.map k A (EisensteinSeries.eisensteinSeries_SIF a k).toFun)\", \"doc\": \"For any positive integer $N$, non-zero element $a$ in $(\\\\mathbb{Z}/N\\\\mathbb{Z})^2$, integer weight $k \\\\geq 3$, and matrix $A \\\\in \\\\text{SL}(2,\\\\mathbb{Z})$, the Eisenstein series of weight $k$ for the c\"}\n  {\"name\": \"ModularForm.bdd_at_cusps'\", \"module\": \"Mathlib/NumberTheory/ModularForms/Basic\", \"type\": \"∀ {Γ : Subgroup (GL (Fin 2) ℝ)} {k : ℤ} (self : ModularForm Γ k) {c : OnePoint ℝ},\\n  IsCusp c Γ → c.IsBoundedAt self.toFun k\", \"doc\": \"For any modular form $ f $ of integer weight $ k $ and subgroup $ \\\\Gamma \\\\subseteq \\\\mathrm{GL}(2, \\\\mathbb{R}) $, if $ c $ is a cusp for $ \\\\Gamma $, then $ f $ is bounded at $ c $. This means that for \"}\n  {\"name\": \"ModularFormClass.bdd_at_cusps\", \"module\": \"Mathlib/NumberTheory/ModularForms/Basic\", \"type\": \"∀ {F : Type u_2} {Γ : outParam (Subgroup (GL (Fin 2) ℝ))} {k : outParam ℤ} {inst : FunLike F UpperHalfPlane ℂ}\\n  [self : ModularFormClass F Γ k] (f : F) {c : OnePoint ℝ}, IsCusp c Γ → c.IsBoundedAt (⇑f) k\", \"doc\": \"For any modular form $ f : \\\\mathbb{H} \\\\to \\\\mathbb{C} $ of integer weight $ k $ associated with a subgroup $ \\\\Gamma \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R}) $, if $ c $ is a cusp for $ \\\\Gamma $, then $ f $ \"}\n  {\"name\": \"Function.Periodic.boundedAtFilter_cuspFunction\", \"module\": \"Mathlib/Analysis/Complex/Periodic\", \"type\": \"∀ {h : ℝ} {f : ℂ → ℂ},\\n  0 < h →\\n    (Filter.comap Complex.im Filter.atTop).BoundedAtFilter f →\\n      (nhdsWithin 0 {0}ᶜ).BoundedAtFilter (Function.Periodic.cuspFunction h f)\", \"doc\": \"If a function $ f $ is bounded at infinity, then the cusp function $ \\\\text{cuspFunction}_h(f) $ is bounded in a punctured neighborhood of $ 0 $ in the complex plane. Formally, given $ 0 < h $ and the \"}\n  {\"name\": \"ModularFormClass.qExpansion_isBigO\", \"module\": \"Mathlib/NumberTheory/ModularForms/Bounds\", \"type\": \"∀ {k : ℤ},\\n  0 ≤ k →\\n    ∀ {Γ : Subgroup (GL (Fin 2) ℝ)} [Γ.IsArithmetic] {F : Type u_2} [inst : FunLike F UpperHalfPlane ℂ]\\n      [ModularFormClass F Γ k] (f : F),\\n      (fun n => (PowerSeries.coeff n) (ModularFormClass.qExpansion Γ.strictWidthInfty f)) =O[Filter.atTop] fun n =>\\n        ↑n ^ k\", \"doc\": \"For a modular form $ f $ of non-negative integer weight $ k $ associated with an arithmetic subgroup $ \\\\Gamma \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R}) $, the coefficients of its $ q $-expansion satisfy the\"}\n  {\"name\": \"UpperHalfPlane.IsZeroAtImInfty.cuspFunction_apply_zero\", \"module\": \"Mathlib/NumberTheory/ModularForms/QExpansion\", \"type\": \"∀ {h : ℝ} {f : UpperHalfPlane → ℂ},\\n  UpperHalfPlane.IsZeroAtImInfty f → 0 < h → SlashInvariantFormClass.cuspFunction h f 0 = 0\", \"doc\": \"For a function $ f $ from the upper half-plane $ \\\\mathbb{H} $ to $ \\\\mathbb{C} $ that tends to zero at imaginary infinity, and for any positive real number $ h $, the associated cusp function evaluated\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic nonsingularity tests and cusp forms of modular-form theory do not give curve-jet Hilbert-weight estimates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ramification\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic nonsingularity tests and cusp forms of modular-form theory do not give curve-jet Hilbert-weight estimates."
+  },
+  {
+   "tool": "grep",
+   "query": "jet.*weight|cusp.*weight|tacnod|Hilbert.*singular|singular.*Hilbert",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"61\", \"text\": \"/-- The linear equivalence between cusp forms of weight `k` and modular forms of weight `k - 12`,\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"93\", \"text\": \"/-- Divide a cusp form by the discriminant to get a modular form of weight `k - 12`. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"152\", \"text\": \"/-- Cusp forms of weight `k < 12` for `𝒮ℒ` are zero-dimensional. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"153\", \"text\": \"lemma CuspForm.rank_eq_zero_of_weight_lt_twelve (hk : k < 12) :\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"155\", \"text\": \"  CuspForm.discriminantEquiv.rank_eq.trans (levelOne_neg_weight_rank_zero (by lia))\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"62\", \"text\": \"  obtain ⟨c, hc⟩ := CuspForm.exists_smul_discriminant_of_weight_eq_twelve g\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"line\": \"236\", \"text\": \"/-- The modular discriminant `Δ` as a cusp form of weight 12 and level 1. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"19\", \"text\": \"* `CuspFormClass.exists_bound`: a cusp form of weight `k` (for an arithmetic subgroup `Γ`)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"23\", \"text\": \"* `CuspFormClass.qExpansion_isBigO`: **Hecke's bound** for a a cusp form of weight `k` (for\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"308\", \"text\": \"/-- **Hecke's bound** for the coefficients of a cusp form: if `f` is a weight `k` modular form for\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic nonsingularity tests and cusp forms of modular-form theory do not give curve-jet Hilbert-weight estimates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gieseker cusp tacnode and multiplicity filtrations on sections of a curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Filtration.casesOn\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {motive : I.Filtration M → Sort u} →\\n              (t : I.Filtration M) →\\n                ((N : ℕ → Submodule R M) →\\n                 \", \"doc\": \"Given a filtration $ t $ on an $ R $-module $ M $ associated with an ideal $ I $, this function allows defining a property or constructing an object by specifying its behavior on the decreasing sequen\"}\n  {\"name\": \"Ideal.Filtration.noConfusion\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{P : Sort u} →\\n  {R : Type u_1} →\\n    {inst : CommRing R} →\\n      {I : Ideal R} →\\n        {M : Type u_3} →\\n          {inst_1 : AddCommGroup M} →\\n            {inst_2 : Module R M} →\\n              {t : I.Filtration M} →\\n                {R' : Type u_1} →\\n                  {inst' : CommRing R'} →\\n      \", \"doc\": \"Given a filtration $ t $ on an $ R $-module $ M $ associated with an ideal $ I $, this function allows defining a property or constructing an object by specifying its behavior on the decreasing sequen\"}\n  {\"name\": \"Ideal.Filtration.rec\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {motive : I.Filtration M → Sort u} →\\n              ((N : ℕ → Submodule R M) →\\n                  (mono : ∀ (i : ℕ), N (i + 1) ≤ N i) →\\n\", \"doc\": \"Given a filtration structure on an $ R $-module $ M $ defined by a decreasing sequence of submodules $ N_i $ satisfying $ N_{i+1} \\\\subseteq N_i $ and $ I \\\\cdot N_i \\\\subseteq N_{i+1} $, this recursor a\"}\n  {\"name\": \"Ideal.Filtration.noConfusionType\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"Sort u →\\n  {R : Type u_1} →\\n    [inst : CommRing R] →\\n      {I : Ideal R} →\\n        {M : Type u_3} →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              I.Filtration M →\\n                {R' : Type u_1} →\\n                  [inst' : CommRing R'] →\\n                  \", \"doc\": \"Given a filtration $ t $ on an $ R $-module $ M $ associated with an ideal $ I $, this function allows defining a property or constructing an object by specifying its behavior on the decreasing sequen\"}\n  {\"name\": \"Ideal.Filtration.mk.noConfusion\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} →\\n  {inst : CommRing R} →\\n    {I : Ideal R} →\\n      {M : Type u_3} →\\n        {inst_1 : AddCommGroup M} →\\n          {inst_2 : Module R M} →\\n            {P : Sort u} →\\n              {N : ℕ → Submodule R M} →\\n                {mono : ∀ (i : ℕ), N (i + 1) ≤ N i} →\\n                  {smul_l\", \"doc\": \"Given a filtration $ t $ on an $ R $-module $ M $ associated with an ideal $ I $, this function allows defining a property or constructing an object by specifying its behavior on the decreasing sequen\"}\n  {\"name\": \"IsCusp\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"(c : OnePoint ℝ) (𝒢 : Subgroup (GL (Fin 2) ℝ)) : Prop\", \"doc\": \"A point $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, \\\\mathbb{R} $ is a cusp for a subgroup $ \\\\mathcal{G} $ of $ \\\\mathrm{GL}(2, \\\\mathbb{R}) $ if there exists a parabolic element $ g \\\\in \"}\n  {\"name\": \"CuspForm.instModularFormClassOfCuspFormClass\", \"module\": \"Mathlib.NumberTheory.ModularForms.Basic\", \"type\": \"[FunLike F ℍ ℂ] [CuspFormClass F Γ k] : ModularFormClass F Γ k\", \"doc\": \"Every cusp form of weight $k$ with respect to a subgroup $\\\\Gamma \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ is also a modular form of the same weight $k$ and subgroup $\\\\Gamma$.\"}\n  {\"name\": \"IsModuleFiltration.casesOn\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [inst_2 : PartialOrder ιM] →\\n                  [inst_3 : VAdd ι ιM] →\\n   \", \"doc\": \"A function enabling case analysis on the structure of a module filtration by decomposing it into its underlying filtration properties and graded scalar multiplication compatibility conditions, allowin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: elliptic nonsingularity tests and cusp forms of modular-form theory do not give curve-jet Hilbert-weight estimates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert weight lower bounds for cusp jet filtrations and tacnodal double points of curves",
+   "results": "8 hits: WeierstrassCurve.valuation_Δ_aux, WeierstrassCurve.IsMinimal, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.minimal, WeierstrassCurve.IsMinimal.val_Δ_maximal, MvPowerSeries.le_weightedOrder, WeierstrassCurve.isMinimal_iff, MvPowerSeries.weightedOrder_le",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction and division-polynomial degrees, power-series orders, weighted polynomial components and Selberg sieve weights do not give any of the item clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weighted flags at a multiple point of a projective curve force leading coefficient at least half its multiplicity",
+   "results": "8 hits: WeierstrassCurve.leadingCoeff_preΨ', WeierstrassCurve.coeff_preΨ'_ne_zero, WeierstrassCurve.coeff_preΨ_ne_zero, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_preΨ'_pos, WeierstrassCurve.coeff_ΨSq_ne_zero, WeierstrassCurve.coeff_Φ_ne_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction and division-polynomial degrees, power-series orders, weighted polynomial components and Selberg sieve weights do not give any of the item clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hilbert\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction and division-polynomial degrees, power-series orders, weighted polynomial components and Selberg sieve weights do not give any of the item clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "jet.*weight|tacnod|Hilbert.*singular|singular.*Hilbert",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction and division-polynomial degrees, power-series orders, weighted polynomial components and Selberg sieve weights do not give any of the item clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gieseker singular point jet filtration Hilbert weight estimates",
+   "results": "8 hits: BoundingSieve.weights, MvPolynomial.weightedHomogeneousComponent_eq_zero, Ideal.Filtration.instInfSet, MvPowerSeries.weightedHomogeneousComponent_of_lt_weightedOrder_eq_zero, MvPolynomial.IsWeightedHomogeneous, MvPowerSeries.IsWeightedHomogeneous, MvPolynomial.weightedHomogeneousComponent_mem, MvPolynomial.IsWeightedHomogeneous.weighted_total_degree",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction and division-polynomial degrees, power-series orders, weighted polynomial components and Selberg sieve weights do not give any of the item clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-potential-stability",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2, Theorem 8 proof steps (4)--(6) and the cusp/tangent-line calculations, printed pp.14--15. Coefficients here are a_F=e_F/2, not e_F. The two tangent-line cases are also in Gieseker Proposition 1.0.6, printed pp.49--55. Local PDFs WANTED.",
+   "via": [
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-singular-point-jet-weight-bounds",
+  "worker": "stage1",
+  "summary": "Retained the statement and explicitly calculated the multiplicity, ramified-branch and two tangent-branch flags. Created two smaller statement-only inputs: normalization jet codimension and branch multiplicity/tangent criterion. Kept the tangent-line exceptional coefficient 7/2, allowed two branches on one component, and proved invariance under a finite-length nilradical by bounded-weight bases. No project declaration or Mathlib match found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2, Theorem 8 proof steps (4)--(6) and the cusp/tangent-line calculations, printed pp.14--15. Coefficients here are a_F=e_F/2, not e_F. The two tangent-line cases are also in Gieseker Proposition 1.0.6, printed pp.49--55. Local PDFs WANTED. Ancestor command returns None: this is a created prerequisite of the Gieseker potential-stability input, serving the direct-image alteration route. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) read; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherianity of a finite-type scheme over a field, to justify finite component and pure dimension arguments."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-components",
+    "why": "Generic finite-component fact needed for the elementary connectedness argument, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-trf-coherent-finite-support-skyscrapers",
+    "why": "Generic coherent finite-support decomposition, used only to bound a finite-length nilradical section-space kernel by its length."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-trf-coherent-finite-support-skyscrapers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-76b40c6b4",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-76b40c6b4 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The statement is unchanged from the base, which (like clones/live and clones/side-live) has the item unsplit; no repair note; first delivery. stmt_deps gains connected/tangent-space/divisor, all used by the statement. Source: Morrison arXiv 0810.2340 (local PDF WANTED; fetched read-only and checked) §3.2, Thm 8 steps (4)-(6), pp.14-15. The cusp flag 0/1/2/4 with e_F>=16 gives a_F>=8 with sum 7. The tacnode flag 4/2/0 with e_F>=16, halved to 0/1/2, gives a_F>=4 with sum 3. The line-tangent case drops degree by 3, giving 7/2. The multiplicity>=3 bound t/2 is the agent's own correct derivation. All 7 steps checked: the greedy codimension formula; the order sums t*m(m+1)/2, 8m^2, 4m^2 and 5/2m^2+m^2; the degree constraints, including e>=4 when two branches lie on one component (rational normal curves of degree <=3 are smooth); the nilradical comparison with error at most B*l*m. New node normalization-jet-codimension is true, with C=delta+sum g_i (normalization codim<=delta, Riemann-Roch and h0<=deg+1). New node branch-multiplicity-tangent-criterion is true: e=sum b_q, a hyperplane bounds sum b_q by e_i, tangent zero iff b>=2, and k[[u,v]]/(uv) iff distinct tangent lines. Both are statement-only, smaller than the item and not restatements of its clauses; the rg duplicate search over the DAG found no duplicate. Batch-5: lem-trf-coherent-finite-support-skyscrapers is a generic decomposition of coherent sheaves with finite support into skyscrapers, used only for dim H0 of the nilradical. Neither the trace-formula nor the Poincare-duality assumption gives it, and it is not a step of either, so the citation is accepted. Tool uses accepted: that node and two Mathlib-leaf Noetherian facts. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingularPointJetWeightBounds",
+  "declaration": "AlgebraicGeometry.ProjectiveCurveJets.singular_point_jet_weight_bounds",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingularPointJetWeightBounds.lean",
+  "statement": "theorem singular_point_jet_weight_bounds (k : Type u) [Field k] [IsAlgClosed k] (n : ℕ) (X : Scheme.{u}) [ConnectedSpace X] (i : X ⟶ Ambient k (n + 2)) [IsClosedImmersion i] (hdim : topologicalKrullDim X = 1) (hgeneric : ∀ x : genericPoints X, _root_.IsReduced (X.presheaf.stalk x.val)) (hspan : ∀ f : LinearForms k n, (∀ p : Reduction X, VanishesAt ((reductionMap X ≫ i) p) f) → f = 0) (hlow : ∀ Z : irreducibleComponents (Reduction X), componentDegree k (n + 2) (Reduction X) (reductionMap X ≫ i) Z ≤ 3 → IsRationalNormal ((Scheme.IdealSheafData.vanishingIdeal ⟨Z.val, isClosed_of_mem_irreducibleComponents _ Z.property⟩).subschemeι ≫ reductionMap X ≫ i)) : ∃ (ρX : ∀ m : ℕ, ModuleCat.of k (MvPolynomial.homogeneousSubmodule (HilbertPlucker.Coordinates.{u} n) k m) ⟶ sections k n i m) (ρD : ∀ m : ℕ, ModuleCat.of k (MvPolynomial.homogeneousSubmodule (HilbertPlucker.Coordinates.{u} n) k m) ⟶ sections k n (reductionMap X ≫ i) m), IsRestriction i ρX ∧ IsRestriction (reductionMap X ≫ i) ρD ∧ (∀ (p : Reduction X) (t : ℕ), HasMultiplicity (Reduction X) p t → 3 ≤ t → ∃ (b : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ) (a : ℚ), IsPointFlag ((reductionMap X ≫ i) p) b w ∧ (∑ j, w j) = 1 ∧ HasCoefficient ρX b w a ∧ (t : ℚ) / 2 ≤ a) ∧ (∀ (p : Reduction X) (q : Branch (Reduction X) p), tangentImage k (n + 2) (Reduction X) (reductionMap X ≫ i) p q = {0} → 4 ≤ componentDegree k (n + 2) (Reduction X) (reductionMap X ≫ i) q.1 ∧ ∃ (b : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ) (a : ℚ), IsRamifiedFlag (reductionMap X ≫ i) p q b w ∧ (∑ j, w j) ≤ 7 ∧ HasCoefficient ρX b w a ∧ 8 ≤ a) ∧ ((∀ (p : Reduction X), ∀ q : Branch (Reduction X) p, tangentImage k (n + 2) (Reduction X) (reductionMap X ≫ i) p q ≠ {0}) → (∀ (p : Reduction X), ¬ IsRegularLocalRing ((Reduction X).presheaf.stalk p) → HasMultiplicity (Reduction X) p 2) → ∀ (p : Reduction X), HasMultiplicity (Reduction X) p 2 → ¬ HasSplitNodeCompletion k (n + 2) (Reduction X) (reductionMap X ≫ i) p → ∃ (q : Branch (Reduction X) p) (b : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ) (a : ℚ), (∀ q' : Branch (Reduction X) p, lineEquations k (n + 2) (Reduction X) (reductionMap X ≫ i) p q' = lineEquations k (n + 2) (Reduction X) (reductionMap X ≫ i) p q) ∧ IsTangentFlag (reductionMap X ≫ i) p q b w ∧ (∑ j, w j) ≤ 3 ∧ HasCoefficient ρX b w a ∧ 7 / 2 ≤ a ∧ ((∀ q' : Branch (Reduction X) p, componentDegree k (n + 2) (Reduction X) (reductionMap X ≫ i) q'.1 ≠ 1) → 4 ≤ a)) ∧ (∀ (b : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ) (a : ℚ), HasCoefficient ρX b w a ↔ HasCoefficient ρD b w a)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af5ebdd01",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 21038f6b457d (H2+H12). Lean files byte-identical to 21038f. New node def-sfb-projective-curve-branch-data: existing:true on Sheaf.AlgebraicGeometry.BranchMultiplicityTangentCriterion; its 12 declarations exist as plain abbrev/def (lines 55-166), none chooses from branch_multiplicity_tangent_criterion; statement 'def Branch (D : Scheme.{u}) (p : D) : Type u' verbatim; no other owner; fields complete. It replaces the theorem in the stmt_deps of the item and of def-sfb-projective-curve-jet-weight-data; the theorem stays in proof_deps. Against base, item changes only lean and stmt_deps (+ the 2 new def nodes and def-weil-pbc-scheme-reduction). Mathematics re-read: hypotheses (alg. closed, closed immersion into P^{n+1}, connected, dim 1, generically reduced, hspan nondegenerate, hlow rational normal = P^1 + complete linear system); (1) 0/1 flag, sum 1, a>=t/2; (2) deg>=4, 0/1/2/4 jet flag, sum<=7, a>=8, not met at generic points; (3) 0/1/2 tangent flag, sum<=3, 7/2, and 4 off lines; nilradical iff. Edge cases n=0, empty X, generic points, same-component branches, any characteristic, universes. Single sorry, docstrings, verbatim statements, report sections. zeroSections is a canonical iso inherited via the landed def-sfb-weighted-monomial-basis-weight, not a new H2. Not recompiled (no file changed)."
+ }
+}

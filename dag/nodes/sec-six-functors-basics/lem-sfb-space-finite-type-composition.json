@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-space-finite-type-composition",
+ "kind": "statement",
+ "title": "Composition of finite-type morphisms of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of algebraic spaces over $S$ [def-trf-algebraic-space], with the universe convention [def-weil-size-convention]. Use the morphism properties [def-sfb-space-morphism-properties]: locally of finite type is tested on compatible etale scheme charts, and finite type means locally of finite type and quasi-compact. If $f$ and $g$ are of finite type, then $g\\circ f$ is of finite type. No separatedness, representability, finite-presentation, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XG, lemma-composition-finite-type, finite-type clause."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Write $P$ for locally of finite type of scheme morphisms. By [lem-sfb-scheme-etale-source-target-properties], $P$ is etale local on source-and-target. Choose a surjective representable etale scheme atlas $W\\to Z$. Form $Y_W=Y\\times_ZW$, choose a surjective representable etale scheme atlas $V\\to Y_W$, form $X_V=X\\times_YV$, and choose a surjective representable etale scheme atlas $U\\to X_V$ [def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers]. A representable map from a scheme is surjective on every scheme base change exactly when its point map is surjective [lem-a1-space-point-open-calculus], so these atlases are singleton etale coverings. Pullback of coverings and composition of etale coverings [lem-trf-space-chartwise-etale-permanence] show that $V\\to Y$ and $U\\to X$ are chartwise etale and surjective on point classes; as their sources are schemes they are representable etale, and by the same point criterion they are surjective representable etale. For the last assertion, $U\\to X$ factors through $X_V\\to X$, the base change of $V\\to Y$. Thus we have compatible scheme maps $u:U\\to V$ and $v:V\\to W$, with $f(U\\to X)=(V\\to Y)u$ and $g(V\\to Y)=(W\\to Z)v$. The chart tests in [def-sfb-space-morphism-properties] give $P(u)$ and $P(v)$, since finite type of $f,g$ includes local finite type.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XG (lemma-composition-finite-type), through Tag 0AML (remark-composition-P); compatible atlases as in Tag 03MJ"
+   }
+  },
+  {
+   "text": "Apply the locally-of-finite-type clause (e) of [lem-weil-pbc-proper-fp-permanence] to the scheme maps $u,v$. It gives $P(vu)$ without any quasi-compactness assumption on these atlas maps. The square with top map $vu:U\\to W$, bottom map $gf:X\\to Z$, and surjective etale left map $U\\to X$ is a presentation diagram. The criterion [lem-sfb-space-etale-presentation-property-criterion], applied to $P$, which is isomorphism-invariant since local finite type is defined by affine open covers of preimages of affine opens with finitely generated coordinate algebras, which isomorphisms carry to such covers [def-weil-finite-type-morphism], with its locality supplied by [lem-sfb-scheme-etale-source-target-properties], implies that every presentation diagram of $gf$ has locally finite type top map. This is precisely local finite type of $gf$ in [def-sfb-space-morphism-properties].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-sfb-space-morphism-properties",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03XG (lemma-composition-finite-type), 0AML (remark-composition-P), 03MJ (lemma-local-source-target); morphisms.tex Tag 01T3"
+   }
+  },
+  {
+   "text": "We prove quasi-compactness using exactly the affine-test convention in [def-sfb-proper-curve-moduli], which [def-sfb-space-morphism-properties] uses. Fix an affine scheme $T\\to Z$ and put $A=Y\\times_ZT$, $B=X\\times_ZT$. Quasi-compactness of $g$ says that $|A|$ is quasi-compact. By [lem-sfb-qc-space-affine-etale-atlas], choose an affine scheme $E$ with a surjective representable etale map $E\\to A$. The composite $E\\to Y$ is a scheme test for $f$, so $D=X\\times_YE$ has quasi-compact point space by quasi-compactness of $f$. There is a canonical isomorphism $D\\simeq B\\times_AE$: on a test scheme a section on either side is a section of $X$ together with a section of $E$ having the same image in $Y$, since the $T$-coordinate of the $B$-section is forced by that of $E$. Forgetting this forced coordinate and inserting it are inverse and commute with restriction. By pullback of etale coverings [lem-trf-space-fibre-products-etale-covers], $D\\to B$ is a surjective etale cover. Its point map is surjective and continuous [lem-a1-space-point-open-calculus].",
+   "uses": [
+    "def-sfb-proper-curve-moduli",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03HE (definition-quasi-compact), 03HG (lemma-composition-quasi-compact), transitivity hint expanded with affine tests"
+   }
+  },
+  {
+   "text": "To check compactness of $|B|$ explicitly, pull an arbitrary open cover of $|B|$ back along $|D|\\to|B|$. Continuity makes this an open cover of $|D|$, which has a finite subcover. Surjectivity implies that the corresponding finitely many original opens cover $|B|$. Thus the pullback of $gf$ over every affine $T\\to Z$ has quasi-compact point space. The definition [def-sfb-proper-curve-moduli] therefore makes $gf$ quasi-compact. Combining this with step 2 gives finite type of $gf$ by [def-sfb-space-morphism-properties]. The construction also covers empty spaces: the affine atlas of an empty $A$ can be empty, and compactness and surjectivity above remain valid.",
+   "uses": [
+    "def-sfb-proper-curve-moduli",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03HG (lemma-composition-quasi-compact) and 03XG (lemma-composition-finite-type), finite-type assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XG (lemma-composition-finite-type), Tag 0AML (remark-composition-P), Tag 03MJ (lemma-local-source-target), and Tag 03HG (lemma-composition-quasi-compact); compatible atlases and the omitted transitivity argument expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyOfFiniteType_comp|IsStableUnderComposition.*LocallyOfFiniteType|QuasiCompact.*comp",
+   "results": "Logged msearch.py result: OK, 25 hits; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or finite morphisms; none states finite-type composition for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A composition of finite type morphisms of algebraic spaces is finite type",
+   "results": "Logged msearch.py result: OK, 8 hits; AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.locallyOfFiniteType_of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or finite morphisms; none states finite-type composition for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.QuasiCompact",
+   "results": "Logged msearch.py result: OK, 8 hits; AlgebraicGeometry.locallyQuasiFinite_iff_finite_preimage_singleton, AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType, AlgebraicGeometry.instIsOpenImmersionCompSchemeιQuasiFiniteLocusToNormalization, AlgebraicGeometry.Scheme.Hom.exists_isIso_morphismRestrict_toNormalization, AlgebraicGeometry.Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization, AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.IsProper.eq_valuativeCriterion",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or finite morphisms; none states finite-type composition for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type algebraic space morphisms are stable under composition without finite presentation or Noetherian hypotheses",
+   "results": "Logged msearch.py result: OK, 8 hits; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or finite morphisms; none states finite-type composition for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of two finite type morphisms of algebraic spaces is of finite type",
+   "results": "Logged msearch.py result: OK, 8 hits; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.IsFinite.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or finite morphisms; none states finite-type composition for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "Logged msearch.py result: OK, 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or finite morphisms; none states finite-type composition for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composition of finite type morphisms of algebraic spaces is finite type",
+   "results": "Logged msearch.py: OK, 8 hits; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.IsFinite.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme composition is covered by existing Mathlib leaf lem-weil-pbc-proper-fp-permanence; no AlgebraicSpace result found"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|locallyOfFiniteType_comp",
+   "results": "Logged msearch.py: OK, 1 hits; Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme composition is covered by existing Mathlib leaf lem-weil-pbc-proper-fp-permanence; no AlgebraicSpace result found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition preserves finite type for morphisms of algebraic spaces",
+   "results": "Logged msearch.py: OK, 8 hits; AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme composition is covered by existing Mathlib leaf lem-weil-pbc-proper-fp-permanence; no AlgebraicSpace result found"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "Logged msearch.py: OK, 12 hits; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.locallyOfFiniteType_comp",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme composition is covered by existing Mathlib leaf lem-weil-pbc-proper-fp-permanence; no AlgebraicSpace result found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of two locally finite type morphisms of schemes is locally of finite type",
+   "results": "Logged msearch.py: OK, 8 hits; AlgebraicGeometry.locallyOfFiniteType_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_comp",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme composition is covered by existing Mathlib leaf lem-weil-pbc-proper-fp-permanence; no AlgebraicSpace result found"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFiniteType_comp|instIsStableUnderCompositionSchemeLocallyOfFiniteType",
+   "results": "Logged msearch.py: OK, 1 hits; 68",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme composition is covered by existing Mathlib leaf lem-weil-pbc-proper-fp-permanence; no AlgebraicSpace result found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type algebraic spaces morphisms are closed under composition with no separatedness assumption",
+   "results": "Logged msearch.py: OK, 8 hits; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.comp_iff",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: scheme composition is covered by existing Mathlib leaf lem-weil-pbc-proper-fp-permanence; no AlgebraicSpace result found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-henselian-proper-clopen-lift",
+  "date": "2026-10-23",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Properness of flat separated families with connected proper fibres. Present split: Lifting a proper clopen fibre part over a henselian pair. Supporting input for 0CWI: composition of finite-type maps, to apply the scheme lifting result on a weak Chow cover and to prove finite type of the descended clopen part.",
+   "via": [
+    "lem-sfb-space-henselian-proper-clopen-lift",
+    "lem-sfb-connected-proper-fibres-proper",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-finite-type-composition",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 03XG through compatible etale scheme atlases, reused the existing scheme local-finite-type composition leaf, and proved quasi-compactness on affine tests using an affine etale atlas of the intermediate pullback. No new nodes and no change of mathematical statement.",
+  "blueprint": "Supporting finite-type-composition input of lem-sfb-space-henselian-proper-clopen-lift, as recorded in blueprint.from.place; this serves direct-image stability (3) of the current sk-thm-sf-ctf-stability-direct-images proof. The current blueprint proof has changed to compactification assembly; this foundational input changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product, etale-covering or point-topology calculus needed for the atlas construction and affine-test proof; no six-functor theorem is used."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space fibre-product, etale-covering or point-topology calculus needed for the atlas construction and affine-test proof; no six-functor theorem is used."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic algebraic-space fibre-product, etale-covering or point-topology calculus needed for the atlas construction and affine-test proof; no six-functor theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-8f7af1c13",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-8f7af1c13 (reviewer sub-agent of L); spot-checked: Read in full: the item (4 steps, no new nodes), every cited node's statement, Stacks spaces-morphisms 03XG (l.4376), 0AML (l.4204) and 03HG (l.1084, proof omitted: 'transitivity of fibre products'). Statement and stmt_deps are byte-identical to side-live; the live item is unsplit and has no repair note. Step 1: I checked the compatible atlases and the identities f(U->X)=(V->Y)u and g(V->Y)=(W->Z)v; P(u) and P(v) follow from the chart test. C4 gap fixed: coverings are surjective on point classes, while atlases and the presentation criterion need surjectivity on scheme base changes. I added lem-a1-space-point-open-calculus, which states that the two notions agree. Step 2: P(vu) comes from clause (e) of lem-weil-pbc-proper-fp-permanence, then the presentation criterion (2)=>(1) gives the chart test. The criterion's isomorphism-invariance hypothesis was missing from the step; I added it, citing def-weil-finite-type-morphism. Step 3: uses the affine-test quasi-compactness of def-sfb-proper-curve-moduli and lem-sfb-qc-space-affine-etale-atlas, which needs no quasi-separatedness. D=XxY E ~ (XxZ T)x(YxZ T)E checked on sections. D->B is point-surjective and continuous. Step 4 is genuinely elementary (continuous surjective image of a compact space). Empty spaces are fine, and u, v are never assumed quasi-compact. Duplicate search (03XG, 03HG, composition): only scheme or finite-presentation nodes, no duplicate. tool_uses for lem-trf-space-fibre-products-etale-covers, lem-trf-space-chartwise-etale-permanence and lem-a1-space-point-open-calculus accepted as generic space calculus. Batch-5: every flagged citation is a general definition or foundational algebraic-space or scheme fact (def-trf-algebraic-space, lem-trf-smooth-composition, fibre products and coverings), not part of the trace formula or Poincaré duality, so no RETURN. No SGA. The fix file changes only steps 1-2 uses/text and proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFiniteTypeComposition",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.mapIsFiniteType_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFiniteTypeComposition.lean",
+  "statement": "theorem mapIsFiniteType_comp {S : Scheme.{u}} {X Y Z : AlgebraicSpace S} (f : X ⟶ Y) (g : Y ⟶ Z) (hf : MapIsFiniteType f) (hg : MapIsFiniteType g) : MapIsFiniteType (f ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cfc75f8e0",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Only the lean field changes vs side-live; the live item has no Lean record yet. The statement mapIsFiniteType_comp {S : Scheme.{u}} {X Y Z : AlgebraicSpace S} (f g) (hf hg : MapIsFiniteType) : MapIsFiniteType (f ≫ g) matches the node clause by clause and Stacks 03XG (spaces-morphisms.tex l.4376). MapIsFiniteType = MapIsQuasiCompact ∧ MapIsLocally LocallyOfFiniteType (def-sfb-space-morphism-properties), read in side-live. No extra hypotheses, one universe u, empty and identity cases allowed. No definitions, so nothing hollow; no existing declaration found. lean.statement is verbatim; docstrings carry the source place, the blueprint id and the 4 proof steps; only sorry. Plain imports are proof_dep modules, all present. Both report sections are present. No compile needed (no file changed)."
+ }
+}

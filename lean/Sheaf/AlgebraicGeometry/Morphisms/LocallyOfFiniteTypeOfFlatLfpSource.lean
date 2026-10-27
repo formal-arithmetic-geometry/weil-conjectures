@@ -12,10 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Sheaf.AlgebraicGeometry.Morphisms.FppfSourceFiniteAffineCharts
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteAffineFamilyFppfAlgebra
 import Sheaf.RingTheory.FiniteTypeFppfSourceDescent
 
 /-!
@@ -74,6 +72,38 @@ theorem locallyOfFiniteType_of_flat_lfp_source
     {X Y S : Scheme.{u}} (q : X ⟶ Y) (h : Y ⟶ S)
     [Flat q] [LocallyOfFinitePresentation q] [Surjective q]
     [LocallyOfFiniteType (q ≫ h)] : LocallyOfFiniteType h := by
-  sorry
+  apply (HasRingHomProperty.iff_exists_appLE (P := @LocallyOfFiniteType)
+    (RingHom.finiteType_stableUnderComposition.stableUnderCompositionWithLocalizationAway
+      RingHom.finiteType_holdsForLocalizationAway).left).mpr
+  intro y
+  obtain ⟨V, W, hV, hW, _, hy, eWV, n, U, hU, hcover, eUW, _, hmaps⟩ :=
+    exists_fppf_source_finite_affine_charts q h y
+  refine ⟨⟨V, hV⟩, ⟨W, hW⟩, hy, eWV, ?_⟩
+  let α := (h.appLE V W eWV).hom
+  let B : ULift.{u} (Fin n) → CommRingCat.{u} := fun i ↦ Γ(X, U i.down)
+  let β : ∀ i : ULift.{u} (Fin n), Γ(Y, W) →+* B i :=
+    fun i ↦ (q.appLE W (U i.down) (eUW i.down)).hom
+  have hspec : ∀ z : Spec Γ(Y, W), ∃ (i : ULift.{u} (Fin n)) (x : Spec (B i)),
+      Spec.map (CommRingCat.ofHom (β i)) x = z := by
+    intro z
+    have hz : hW.fromSpec z ∈ (W : Set Y) := by
+      rw [← hW.range_fromSpec]
+      exact ⟨z, rfl⟩
+    rw [hcover] at hz
+    obtain ⟨i, x, hx, hqx⟩ := Set.mem_iUnion.mp hz
+    have hx' : x ∈ Set.range (hU i).fromSpec := by
+      rwa [(hU i).range_fromSpec]
+    obtain ⟨t, rfl⟩ := hx'
+    refine ⟨⟨i⟩, t, hW.fromSpec.isOpenEmbedding.injective ?_⟩
+    change (Spec.map (q.appLE W (U i) (eUW i)) ≫ hW.fromSpec) t = _
+    rw [IsAffineOpen.SpecMap_appLE_fromSpec]
+    exact hqx
+  obtain ⟨_, _, _, _, _, hcomp, _, _, _, _, hflat, hfp, hft, _⟩ :=
+    finiteAffineFamily_fppfAlgebra Γ(S, V) Γ(Y, W) α (ULift.{u} (Fin n)) B β
+      (fun i ↦ (hmaps i.down).1) (fun i ↦ (hmaps i.down).2.1)
+      (fun i ↦ (hmaps i.down).2.2.1) hspec
+  rw [hcomp] at hft
+  exact RingHom.finiteType_of_comp_faithfullyFlat_finitePresentation α
+    (RingHom.pi β) hft hflat hfp
 
 end AlgebraicGeometry

@@ -19,7 +19,8 @@
   "def-sc-generic-point",
   "def-pc-scheme-fibre",
   "def-pc-field-extension",
-  "lem-weil-pbc-reduced-induced-closed-subscheme"
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-per-dominant-reduced-part"
  ],
  "proof": [
   {
@@ -323,5 +324,34 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-ba3c5dc3f (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, every cited node statement, and ILO II 1.2.5-1.2.6 (p.25) and III 3.1(i),(iii) with its proof (pp.37-38). The statement is byte-identical to the live base. The 4 added stmt_deps (generic point, scheme fibre, field extension, reduced induced subscheme) are all used in the statement, and no stmt_dep was dropped. The delivery has no new nodes and no SGA, and the dependency closure (130 nodes) contains no cycle. Step 1: the coreflection X_md equals T^dom for integral S; finite type via closed-immersion-proper (a) and composition. Step 2: B/p is a field (finite-dimensional domain), every prime is maximal, dim<=0 via 00ES, and 00KH-node discreteness applies with finite type. Step 3: 01JT gives the point plus the residue-field iso through the tensor field kappa(t)(x)_K K, and a closed immersion preserves residue fields. Step 4: (V_j)_eta is finite type from the V_j->S hypothesis; the base change is etale (02GO); 02G7 makes w isolated in the fibre, which is open because {t} is open, so W is discrete with no separatedness used. Step 5: the 04MU bridge from topological to local-ring dimension feeds 06LH (non-proper); the empty case is handled. Step 6: the tensor kappa(z)(x)_{kappa(t)}kappa(t') is isomorphic to kappa(t') via beta∘alpha^{-1}, so the zero prime gives a residue-preserving lift and the family stays completely decomposed. Tested cases: T empty; Spec k[e]/e^2 over k; Spec Z ⊔ Spec F_p over Z; etale V over Spec Z. No duplicates: generic-fibre-finiteness-criterion is the converse, and alteration-cover-calculus and etale-covering-base-change lack the residue clause. Accepted the 12 generic Stacks tool_uses. Advisory only: generic point and field extension are not bracketed inline in the statement, but stmt_deps carry them."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGenericDominantParts",
+  "declaration": "AlgebraicGeometry.finite_generic_dominant_parts",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGenericDominantParts.lean",
+  "statement": "theorem finite_generic_dominant_parts {S T : Scheme.{u}} [IsIntegral S] [IsNoetherian S] (f : T ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (η : S) (hη : IsGenericPoint η Set.univ) (hfinite : IsFinite (f.fiberToSpecResidueField η)) : LocallyOfFiniteType ((dominantReducedPartIdeal f).subschemeι ≫ f) ∧ QuasiCompact ((dominantReducedPartIdeal f).subschemeι ≫ f) ∧ (∀ ξ : (dominantReducedPartIdeal f).subscheme, closure ({ξ} : Set (dominantReducedPartIdeal f).subscheme) ∈ irreducibleComponents (dominantReducedPartIdeal f).subscheme → ((dominantReducedPartIdeal f).subschemeι ≫ f) ξ = η ∧ (((dominantReducedPartIdeal f).subschemeι ≫ f).residueFieldMap ξ).hom.Finite) ∧ ∀ (J : Type v) [Finite J] (V : J → Scheme.{u}) (a : ∀ j, V j ⟶ T), (∀ j, Etale (a j)) → (∀ j, LocallyOfFiniteType (a j ≫ f) ∧ QuasiCompact (a j ≫ f)) → (∀ j, IsFinite ((a j ≫ f).fiberToSpecResidueField η)) ∧ ((∀ t : T, ∃ (j : J) (z : V j), a j z = t ∧ IsIso ((a j).residueFieldMap z)) → ∀ t' : (dominantReducedPartIdeal f).subscheme, ∃ (j : J) (z' : ↥(pullback (a j) (dominantReducedPartIdeal f).subschemeι)), pullback.snd (a j) (dominantReducedPartIdeal f).subschemeι z' = t' ∧ IsIso ((pullback.snd (a j) (dominantReducedPartIdeal f).subschemeι).residueFieldMap z'))",
+  "branch": "sheaf-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73d7153f1",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Checked every clause against the node: IsIntegral/IsNoetherian S; IsGenericPoint η univ; LOFT+QC f; IsFinite on f.fiberToSpecResidueField η (fiber = T×_S Spec κ(η)); T^dom via the landed def-per-dominant-reduced-part (vanishingIdeal of the closure of dense-image components; closure redundant since T is Noetherian; empty case gives ⊤); finite type of ι≫f; component generic points map to η with finite residueFieldMap; finite étale family J:Type v, V_j finite type over S, IsFinite generic fibres; complete decomposition via residueFieldMap IsIso on pullback.snd. No extra hypotheses, no Nonempty, empty cases covered. lean.statement verbatim; only added stmt_dep is the landed def node, used by the Lean; docstrings carry source, blueprint and 6 steps; sorry only; imports exist; report sections present. No compile needed (no change)."
+ }
 }

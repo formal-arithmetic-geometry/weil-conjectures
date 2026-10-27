@@ -85,11 +85,22 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
-  "module": "Sheaf.Paper.FiniteSmoothGammaNormalization",
+  "module": "Sheaf.Paper.FiniteSmoothGammaConstructions",
   "declaration": "AlgebraicGeometry.Etale.FiniteSmoothComparisonNormalized",
   "declarations": [
    "AlgebraicGeometry.Etale.finiteSmoothPullbackNoetherian",
@@ -106,7 +117,8 @@
   "by": "Q07",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Definition ownership requested by the independent return on 68ed1d7d638a. These declarations stay in their existing module, byte-for-byte unchanged; nothing is moved or copied. This record makes no assertion of the owning theorem. The consumer keeps that theorem as a proof prerequisite."
+  "note": "The existing named coordinate constructions are relocated verbatim to Sheaf.Paper.FiniteSmoothGammaConstructions and publicly reexported by Sheaf.Paper.FiniteSmoothGammaNormalization. All names, types and data remain unchanged. The lower owner permits constituent normalization lemmas to depend on the constructions without a circular import.",
+  "file": "lean/Sheaf/Paper/FiniteSmoothGammaConstructions.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -123,5 +135,15 @@
   "group": "Q07",
   "result": "pass",
   "note": "Re-delivery after the 68ed RETURN (H2: theorem stmt_deps supplying only plain defs). All five Lean modules are byte-identical to 68ed, whose content was accepted at 7b61. Two new existing:true def nodes, def-pur-finite-ring-section-data and def-pur-finite-smooth-comparison-coordinates, record the unchanged owner modules. Their lean.statement fields match the live source verbatim. Every owner-module declaration the delivered Lean uses is listed. The item, canonical-maps and adjunction-data cite the new nodes in place of the two theorems; the theorems stay in proof_deps. Compared with live, the item adds no theorem stmt_dep. Citations equal stmt_deps, there is no cycle, and the statement_change archive equals live. nt_compile --json on all five files: rc 0, no errors or warnings, 3.8-17.4 s each. Advisory: bundleAdjoint uses vectorBundlePurityAdjunction, whose owning node is not cited by the new record (inherited)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8bfa2",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261027T131504-L-2945560",
+  "kind": "interface",
+  "note": "independent cc review: 16 moved defs byte-identical to the published item module; item statement unchanged; 3 holes = verbatim conjuncts of the item; direct importer FiniteSmoothPurityMaps compiled OK against the delivered files; axioms checked"
  }
 }

@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-density-integral-choice-independent",
+ "kind": "statement",
+ "title": "Choice independence of smooth density integration",
+ "statement": "Let $N$ be a compact Hausdorff second-countable smooth real $m$-manifold without boundary [def-sfb-smooth-real-manifold], and $\\omega$ a smooth section [def-sfb-smooth-bundle-sections] of $\\mathrm{Dens}_N$ [def-sfb-smooth-density-line]. For any two finite smooth chart covers $\\mathcal A,\\mathcal B$ and smooth subordinate partitions of unity $\\rho,\\sigma$ as in [def-sfb-smooth-density-integral], the chart-sum integrals satisfy $J_{\\mathcal A,\\rho}(\\omega)=J_{\\mathcal B,\\sigma}(\\omega)$. Thus the integral is independent of all chart and partition choices. For each such fixed cover and partition, $\\omega\\mapsto J_{\\mathcal A,\\rho}(\\omega)$ is a real-linear functional.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: inherited Part I §3.A–3.B, printed pp.11–13 (page attribution inherited, not independently verified). Agent-stated real density convention, supporting chart and partition independence needed to name the density integral. No claim of reading this unavailable source."
+ },
+ "stmt_deps": [
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-bundle-sections",
+  "def-sfb-smooth-density-line",
+  "def-sfb-smooth-density-integral"
+ ],
+ "proof": [
+  {
+   "text": "First dispose of the small cases directly from the chart-sum definition. If $N=\\varnothing$, every summand is zero. If $m=0$, each nonempty chart domain is one point, since $\\mathbf R^0$ is a singleton. A finite chart cover therefore makes $N$ a finite set. The empty determinant is $1$, so every density fibre has the same canonical generator; write its coefficient at $p$ as $a(p)$. By [def-sfb-euclidean-lebesgue-integral], zero-dimensional Lebesgue measure is the empty product measure, of mass $1$ on its singleton; the integral of the constant simple function $c$ is consequently $c\\cdot1=c$. Hence either chart sum is $\\sum_{p\\in N}a(p)\\sum_{i:p\\in U_i}\\rho_i(p)=\\sum_{p\\in N}a(p)$. This is independent of the cover and partition and is real-linear, including when charts repeat. Below assume $m\\geq1$.",
+   "uses": [
+    "def-sfb-smooth-real-manifold",
+    "def-sfb-smooth-density-line",
+    "def-sfb-smooth-bundle-sections",
+    "def-sfb-smooth-density-integral",
+    "def-sfb-euclidean-lebesgue-integral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent argument for the inherited analytic prerequisite; empty-space and dimension-zero cases from the definitions."
+   }
+  },
+  {
+   "text": "Write the two chart families as $x_i:U_i\\to V_i$ and $y_j:W_j\\to Z_j$, and the density coefficients as $a_i$ and $b_j$. Use the closed-support convention explicitly specified by [def-sfb-smooth-density-integral]: $\\operatorname{supp}\\rho_i=\\overline{\\{p:\\rho_i(p)\\neq0\\}}$. Let $K_i=\\operatorname{supp}\\rho_i\\subset U_i$ and $L_j=\\operatorname{supp}\\sigma_j\\subset W_j$. They are closed subsets of compact $N$, hence compact. In chart $x_i$, the coefficient of $\\rho_i\\omega$ is smooth and vanishes off the compact subset $x_i(K_i)\\subset V_i$. Its extension by zero is continuous on $\\mathbf R^m$: on $V_i$ it is already smooth; at any point outside $V_i$, the complement of the closed compact set $x_i(K_i)$ is a neighborhood on which the extension vanishes. The same argument applies to $\\sigma_j\\omega$, to $\\rho_i\\sigma_j\\omega$ in either chart, and to finite partial sums of these localized densities. For a product the supporting compact set is $K_i\\cap L_j\\subset U_i\\cap W_j$.",
+   "uses": [
+    "def-sfb-smooth-real-manifold",
+    "def-sfb-smooth-density-line",
+    "def-sfb-smooth-bundle-sections",
+    "def-sfb-smooth-density-integral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent argument for the inherited density-integration prerequisite: compact supports and zero extension."
+   }
+  },
+  {
+   "text": "Every zero-extended coefficient in the previous step is integrable. Indeed, regard its continuous compactly supported real function $f$ as the complex-valued function $f+0\\mathrm i$. Apply [lem-sfb-continuous-compact-support-integrable] to this complex function on $\\mathbf R^m$, using $m\\geq1$, then [lem-sfb-complex-integral-real-projection] to its real part, which is $f$. This proves the integrability hypotheses needed for all finite-sum linearity applications below, including their partial sums.",
+   "uses": [
+    "lem-sfb-continuous-compact-support-integrable",
+    "lem-sfb-complex-integral-real-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+    "place": "Continuous.integrable_of_hasCompactSupport, lines 622–625; real projection in Function/L1Space/Integrable.lean:1119–1121."
+   }
+  },
+  {
+   "text": "For each $i,j$, set $D=x_i(U_i\\cap W_j)$, $E=y_j(U_i\\cap W_j)$ and $\\phi=y_j\\circ x_i^{-1}:D\\to E$. These are open sets and a smooth diffeomorphism by the manifold definition. In the $x_i$ and $y_j$ generators let the coefficients of $\\rho_i\\sigma_j\\omega$ be $f$ and $g$. The current density-line definition gives $g_{x_i y_j}(p)=|\\det D\\phi(x_i(p))|$ and coefficient transport $a\\mapsto a/g_{x_i y_j}(p)$; equivalently, its density transition rule gives exactly $f(z)=|\\det D\\phi(z)|g(\\phi(z))$. Apply [lem-sfb-euclidean-jacobian-integral] to $g+0\\mathrm i$ on $E$. Use the inclusion identity of [lem-sfb-complex-integral-real-projection] for both restricted Lebesgue measures, and injectivity of $\\mathbf R\\hookrightarrow\\mathbf C$, to obtain $\\int_D f=\\int_E g$. Each coefficient vanishes outside the overlap in its larger chart. Thus its integral on the overlap is its full zero-extended integral: in both integrals it is the same function against Lebesgue measure, zero off the overlap. Denote these full chart integrals by $I_{x_i}(\\rho_i\\sigma_j\\omega)$ and $I_{y_j}(\\rho_i\\sigma_j\\omega)$. They are equal, also for an empty overlap.",
+   "uses": [
+    "def-sfb-smooth-real-manifold",
+    "def-sfb-smooth-density-line",
+    "lem-sfb-euclidean-jacobian-integral",
+    "lem-sfb-complex-integral-real-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/Jacobian.lean",
+    "place": "integral_target_eq_integral_abs_det_fderiv_smul, lines 1225–1232; density coefficient convention from def-sfb-smooth-density-line."
+   }
+  },
+  {
+   "text": "Pointwise $\\rho_i\\omega=\\sum_j\\rho_i\\sigma_j\\omega$ because $\\sum_j\\sigma_j=1$. Likewise $\\sigma_j\\omega=\\sum_i\\rho_i\\sigma_j\\omega$. In the fixed $x_i$ chart, apply real linearity from [lem-sfb-euclidean-bochner-integral-calculus] repeatedly to this finite sum; its terms and partial sums are integrable by steps 2–3. Here its target $\\mathbf R^1$ is identified with $\\mathbf R$, and its unused dimension parameter can be set to $1$. Do the same in each $y_j$ chart. Summing the equalities from step 4 and commuting finite sums gives $$J_{\\mathcal A,\\rho}(\\omega)=\\sum_i\\sum_j I_{x_i}(\\rho_i\\sigma_j\\omega)=\\sum_j\\sum_i I_{y_j}(\\rho_i\\sigma_j\\omega)=J_{\\mathcal B,\\sigma}(\\omega).$$ This compares arbitrary two choices directly, without choosing charts for a third atlas.",
+   "uses": [
+    "def-sfb-smooth-density-integral",
+    "lem-sfb-euclidean-bochner-integral-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+    "place": "integral_add, lines 237–240, and integral_smul, lines 275–278; finite induction and partition identities are written out in this step."
+   }
+  },
+  {
+   "text": "Fix one chart cover and partition. For smooth densities $\\omega,\\eta$ and real scalars $c,d$, pointwise vector-space operations on sections give chart coefficient $c a_i+d e_i$ for $c\\omega+d\\eta$, where $a_i,e_i$ are the coefficients of $\\omega,\\eta$. Multiplication by the fixed $\\rho_i$ and extension by zero preserve this equality. Each localized coefficient is integrable by steps 2–3, so [lem-sfb-euclidean-bochner-integral-calculus] gives $I_{x_i}(\\rho_i(c\\omega+d\\eta))=cI_{x_i}(\\rho_i\\omega)+dI_{x_i}(\\rho_i\\eta)$. Sum over the finite cover to obtain $J_{\\mathcal A,\\rho}(c\\omega+d\\eta)=cJ_{\\mathcal A,\\rho}(\\omega)+dJ_{\\mathcal A,\\rho}(\\eta)$. Together with step 1 this proves the asserted linearity in every dimension.",
+   "uses": [
+    "def-sfb-smooth-bundle-sections",
+    "def-sfb-smooth-density-integral",
+    "lem-sfb-euclidean-bochner-integral-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+    "place": "integral_add, lines 237–240, and integral_smul, lines 275–278; pointwise section operations from def-sfb-smooth-bundle-sections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-density-line",
+  "def-sfb-smooth-bundle-sections",
+  "def-sfb-smooth-density-integral",
+  "def-sfb-euclidean-lebesgue-integral",
+  "lem-sfb-continuous-compact-support-integrable",
+  "lem-sfb-complex-integral-real-projection",
+  "lem-sfb-euclidean-jacobian-integral",
+  "lem-sfb-euclidean-bochner-integral-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Agent-written analytic prerequisite for the inherited direct-image proof (3); unavailable Demailly attribution not used as evidence; analytical inputs read in local Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral of a smooth manifold density is independent of charts and subordinate smooth partition of unity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ae_eq_of_integral_contMDiff_smul_eq\", \"module\": \"Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [FiniteDimensional ℝ E] {F : Type u_2}\\n  [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace ℝ F] [CompleteSpace F] {H : Type u_3}\\n  [inst_6 : TopologicalSpace H] (I : ModelWithCorners ℝ E H) {M : Type u_4} [inst_7 : Topolog\", \"doc\": \"Let $ f $ and $ f' $ be locally integrable functions with respect to a measure $ \\\\mu $. If for every smooth function $ g $ with compact support, the integral $ \\\\int g(x) \\\\cdot f(x) \\\\, d\\\\mu $ equals $ \"}\n  {\"name\": \"ae_eq_of_integral_smooth_smul_eq\", \"module\": \"Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [FiniteDimensional ℝ E] {F : Type u_2}\\n  [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace ℝ F] [CompleteSpace F] {H : Type u_3}\\n  [inst_6 : TopologicalSpace H] (I : ModelWithCorners ℝ E H) {M : Type u_4} [inst_7 : Topolog\", \"doc\": \"Let $ M $ be a smooth manifold equipped with a measure $ \\\\mu $, and let $ f, f' : M \\\\to F $ be locally integrable functions into a Banach space $ F $. If for every smooth real-valued function $ g $ wi\"}\n  {\"name\": \"ae_eq_zero_of_integral_contMDiff_smul_eq_zero\", \"module\": \"Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [FiniteDimensional ℝ E] {F : Type u_2}\\n  [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace ℝ F] [CompleteSpace F] {H : Type u_3}\\n  [inst_6 : TopologicalSpace H] (I : ModelWithCorners ℝ E H) {M : Type u_4} [inst_7 : Topolog\", \"doc\": \"Let $ M $ be a sigma-compact space and $ \\\\mu $ a measure on $ M $. If $ f : M \\\\to \\\\mathbb{R} $ is a locally integrable function such that $ \\\\int_M g(x) \\\\cdot f(x) \\\\, d\\\\mu = 0 $ for every smooth functi\"}\n  {\"name\": \"ae_eq_zero_of_integral_smooth_smul_eq_zero\", \"module\": \"Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [FiniteDimensional ℝ E] {F : Type u_2}\\n  [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace ℝ F] [CompleteSpace F] {H : Type u_3}\\n  [inst_6 : TopologicalSpace H] (I : ModelWithCorners ℝ E H) {M : Type u_4} [inst_7 : Topolog\", \"doc\": \"Let $ E $ and $ F $ be finite-dimensional normed vector spaces over $ \\\\mathbb{R} $, with $ F $ complete. Let $ M $ be a $ \\\\sigma $-compact, Hausdorff, Borel measurable $ C^\\\\infty $-manifold modeled on\"}\n  {\"name\": \"ExistsContDiffBumpBase.w_integral\", \"module\": \"Mathlib/Analysis/Calculus/BumpFunction/FiniteDimension\", \"type\": \"∀ (E : Type u_1) [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  [inst_3 : MeasurableSpace E] [inst_4 : BorelSpace E] {D : ℝ},\\n  0 < D → ∫ (x : E), ExistsContDiffBumpBase.w D x ∂MeasureTheory.Measure.addHaar = 1\", \"doc\": \"For any positive real number $ D $, the integral of the weight function $ w(D, x) $ over the finite-dimensional normed space $ E $ with respect to the measure $ \\\\mu $ equals 1. The weight function is \"}\n  {\"name\": \"ContDiffBump.integral_normed\", \"module\": \"Mathlib/Analysis/Calculus/BumpFunction/Normed\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : HasContDiffBump E]\\n  [inst_3 : MeasurableSpace E] {c : E} (f : ContDiffBump c) {μ : MeasureTheory.Measure E} [BorelSpace E]\\n  [FiniteDimensional ℝ E] [MeasureTheory.IsLocallyFiniteMeasure μ] [μ.IsOpenPosMeasure], ∫ (\", \"doc\": \"For a continuously differentiable bump function $f$ on a normed vector space $E$ over $\\\\mathbb{R}$, the normalized function $f.\\\\text{normed}$ maps each $x \\\\in E$ to $\\\\frac{f(x)}{\\\\int_E f(x) \\\\, d\\\\mu}$,\"}\n  {\"name\": \"integral_withDensity_eq_integral_smul\", \"module\": \"Mathlib/MeasureTheory/Integral/Bochner/ContinuousLinearMap\", \"type\": \"∀ {X : Type u_1} {E : Type u_3} [inst : MeasurableSpace X] {μ : MeasureTheory.Measure X} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace ℝ E] {f : X → NNReal},\\n  Measurable f → ∀ (g : X → E), (∫ (x : X), g x ∂μ.withDensity fun x => ↑(f x)) = ∫ (x : X), f x • g x ∂μ\", \"doc\": \"For a non-negative measurable function $ f : X \\\\to \\\\mathbb{R}_{\\\\geq 0} $ and a function $ g : X \\\\to E $ into a Banach space $ E $, the Bochner integral of $ g $ with respect to the measure $ \\\\mu $ wit\"}\n  {\"name\": \"integral_withDensity_eq_integral_smul₀\", \"module\": \"Mathlib/MeasureTheory/Integral/Bochner/ContinuousLinearMap\", \"type\": \"∀ {X : Type u_1} {E : Type u_3} [inst : MeasurableSpace X] {μ : MeasureTheory.Measure X} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace ℝ E] {f : X → NNReal},\\n  AEMeasurable f μ → ∀ (g : X → E), (∫ (x : X), g x ∂μ.withDensity fun x => ↑(f x)) = ∫ (x : X), f x • g x ∂μ\", \"doc\": \"For any non-negative almost everywhere measurable function $ f : X \\\\to \\\\mathbb{R}_{\\\\geq 0} $ and function $ g : X \\\\to E $, the Bochner integral of $ g $ with respect to the measure $ \\\\mu $ transformed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: change-of-variables on Euclidean domains is a possible input but not the asserted manifold gluing theorem; partition-of-unity constructors do not assert integral independence. The two semantic formulations and grep found no one-line match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Partition of unity definition of integration of densities is invariant under changing the atlas",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PartitionOfUnity.mk\", \"module\": \"Mathlib.Topology.PartitionOfUnity\", \"type\": \"{ι : Type u_1} →\\n  {X : Type u_2} →\\n    [inst : TopologicalSpace X] →\\n      {s : optParam (Set X) Set.univ} →\\n        (toFun : ι → C(X, ℝ)) →\\n          (LocallyFinite fun i => Function.support ⇑(toFun i)) →\\n            0 ≤ toFun →\\n              (∀ x ∈ s, ∑ᶠ (i : ι), (toFun i) x = 1) → (∀ (x : X), ∑ᶠ\", \"doc\": \"Given a topological space $X$, an index type $\\\\iota$, and an optional open cover $s \\\\subseteq X$ (defaulting to the universal set), this constructor defines a partition of unity subordinate to $s$ as \"}\n  {\"name\": \"PartitionOfUnity\", \"module\": \"Mathlib.Topology.PartitionOfUnity\", \"type\": \"Type u_1 → (X : Type u_2) → [TopologicalSpace X] → optParam (Set X) Set.univ → Type (max u_1 u_2)\", \"doc\": \"A structure representing a partition of unity on a topological space $X$, subordinate to an open cover (defaulting to the universal set if none is specified). It consists of a family of continuous fun\"}\n  {\"name\": \"PartitionOfUnity.mk.injEq\", \"module\": \"Mathlib.Topology.PartitionOfUnity\", \"type\": \"∀ {ι : Type u_1} {X : Type u_2} [inst : TopologicalSpace X] {s : Set X} (toFun : ι → C(X, ℝ))\\n  (locallyFinite' : LocallyFinite fun i => Function.support ⇑(toFun i)) (nonneg' : 0 ≤ toFun)\\n  (sum_eq_one' : ∀ x ∈ s, ∑ᶠ (i : ι), (toFun i) x = 1) (sum_le_one' : ∀ (x : X), ∑ᶠ (i : ι), (toFun i) x ≤ 1)\\n  \", \"doc\": \"Two partitions of unity subordinate to an open cover are equal if and only if their families of continuous functions are equal. Specifically, if two partitions share the same locally finite family of \"}\n  {\"name\": \"SmoothPartitionOfUnity.single\", \"module\": \"Mathlib.Geometry.Manifold.PartitionOfUnity\", \"type\": \"(i : ι) (s : Set M) : SmoothPartitionOfUnity ι I M s\", \"doc\": \"Given an index `i` from an index set `ι` and a subset `s` of a smooth manifold `M` with model with corners `I`, this function constructs a smooth partition of unity `{\\\\rho_j}_{j \\\\in ι}`. This partitio\"}\n  {\"name\": \"BumpCovering.toSmoothPartitionOfUnity\", \"module\": \"Mathlib.Geometry.Manifold.PartitionOfUnity\", \"type\": \"(f : BumpCovering ι M s) (hf : ∀ i, ContMDiff I 𝓘(ℝ) ∞ (f i)) : SmoothPartitionOfUnity ι I M s\", \"doc\": \"Given a bump covering $\\\\{f_i\\\\}$ on a manifold $M$ with model space $H$ and a normed vector space $E$ over $\\\\mathbb{R}$, if each bump function $f_i$ is $C^\\\\infty$-differentiable with respect to the mod\"}\n  {\"name\": \"SmoothPartitionOfUnity.toFun\", \"module\": \"Mathlib.Geometry.Manifold.PartitionOfUnity\", \"type\": \"{ι : Type uι} →\\n  {E : Type uE} →\\n    [inst : NormedAddCommGroup E] →\\n      [inst_1 : NormedSpace ℝ E] →\\n        {H : Type uH} →\\n          [inst_2 : TopologicalSpace H] →\\n            {I : ModelWithCorners ℝ E H} →\\n              {M : Type uM} →\\n                [inst_3 : TopologicalSpace M] →\\n        \", \"doc\": \"Given a smooth partition of unity $\\\\{\\\\rho_i\\\\}$ on a manifold $M$ modeled on a space $H$ with corners, this function maps each index $i$ to the corresponding smooth function $\\\\rho_i : M \\\\to \\\\mathbb{R}$\"}\n  {\"name\": \"SmoothPartitionOfUnity.mk\", \"module\": \"Mathlib.Geometry.Manifold.PartitionOfUnity\", \"type\": \"{ι : Type uι} →\\n  {E : Type uE} →\\n    [inst : NormedAddCommGroup E] →\\n      [inst_1 : NormedSpace ℝ E] →\\n        {H : Type uH} →\\n          [inst_2 : TopologicalSpace H] →\\n            {I : ModelWithCorners ℝ E H} →\\n              {M : Type uM} →\\n                [inst_3 : TopologicalSpace M] →\\n        \", \"doc\": \"Given an index type ι, a manifold M modeled on H with corners, and a subset s of M, this constructor builds a smooth partition of unity subordinate to an open cover. It requires: (1) a family of smoot\"}\n  {\"name\": \"BumpCovering.toPartitionOfUnity\", \"module\": \"Mathlib.Topology.PartitionOfUnity\", \"type\": \": PartitionOfUnity ι X s\", \"doc\": \"Given a bump covering structure on a topological space $X$ with index type $\\\\iota$ and optional open cover $s \\\\subseteq X$, this constructs a partition of unity subordinate to $s$ by defining, for eac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: change-of-variables on Euclidean domains is a possible input but not the asserted manifold gluing theorem; partition-of-unity constructors do not assert integral independence. The two semantic formulations and grep found no one-line match."
+  },
+  {
+   "tool": "loogle",
+   "query": "MeasureTheory.integral, PartialHomeomorph",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: change-of-variables on Euclidean domains is a possible input but not the asserted manifold gluing theorem; partition-of-unity constructors do not assert integral independence. The two semantic formulations and grep found no one-line match."
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*partition|partition.*integral|integral.*density",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: change-of-variables on Euclidean domains is a possible input but not the asserted manifold gluing theorem; partition-of-unity constructors do not assert integral independence. The two semantic formulations and grep found no one-line match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral of a smooth density on a compact manifold is independent of charts and partition of unity",
+   "results": "8 hits: ae_eq_of_integral_contMDiff_smul_eq, ae_eq_of_integral_smooth_smul_eq, related distributional uniqueness statements.",
+   "date": "2026-10-24",
+   "verdict": "no match: these assume a fixed measure and do not construct or compare chart-sum integrals."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Partition of unity integration of manifold densities invariant under change of atlas",
+   "results": "8 hits: PartitionOfUnity and SmoothPartitionOfUnity constructors, SmoothPartitionOfUnity.sum_eq_one and sum_le_one.",
+   "date": "2026-10-24",
+   "verdict": "no match: partition identities alone do not state chart-sum integral independence."
+  },
+  {
+   "tool": "loogle",
+   "query": "MeasureTheory.integral, PartialHomeomorph",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match."
+  },
+  {
+   "tool": "grep",
+   "query": "density.*integral|integral.*density|integral.*partition|partition.*integral",
+   "results": "0 hits in Geometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: no density gluing/integration theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-smooth-bundle-test-distributions",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Symbol classes and real bundle pseudodifferential operators. Underlying notion: distributional bundle sections and their test-density pairing, used before local symbol quantization. Supporting input: chart and partition independence needed to name the density integral",
+   "via": [
+    "def-sfb-smooth-bundle-test-distributions",
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-density-integral-choice-independent",
+  "worker": "stage1",
+  "summary": "Compared arbitrary chart partitions using their pairwise products, proved support and integrability conditions explicitly, and applied the existing complex Euclidean change-of-variables result via a new Mathlib real-projection leaf. Reused existing real Bochner linearity. Handled empty manifolds, zero-dimensional charts, signed densities, and repeated charts. The inherited unavailable Demailly attribution is retained without claiming to have read it. Statement unchanged. Repair of returned head 60c71bba430: rebased owned fields onto the current item, re-read both changed definition statements, used the explicit closed-support and coefficient-transition conventions, added the existing Euclidean Lebesgue integral definition to the dimension-zero step, and regenerated every citation quote from the current DAG. The proof route and item statement are unchanged.",
+  "blueprint": "The inherited from.place traces the density-integration prerequisite of the analytic test-distribution definition back to det-thm-sf-ctf-stability-direct-images, proof (3). The current latest blueprint direct-image proof was read. Steps 1–6 supply the needed analytic prerequisite; no six-functor route is replaced. Ancestor tool returns null for this existing synthetic ancestry, preserved exactly.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-8b8ca69f8",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-8b8ca69f8 (reviewer sub-agent of L); spot-checked: Read the whole item, the new leaf and all nine cited statements in full; the item's statement is unchanged and true for all m≥0 and empty N. No repair note, so this is an ordinary one-level split. Step 1: empty N or m=0 (finite set, empty determinant 1, unit-mass empty product measure) is elementary from the cited definitions. Step 2: closed supports in compact N have compact chart images, so the zero extensions are continuous and compactly supported, products included. Step 3: integrable via lem-sfb-continuous-compact-support-integrable (m≥1) and then the real part via the new leaf. Step 4: the density-line rule a=b|det D(y∘x⁻¹)| gives f=|det Dφ|·g∘φ in the right direction; transitions are C^∞ diffeomorphisms of open overlaps; the complex Jacobian identity becomes a real one through the ofReal clause, which needs no integrability, plus injectivity; set integral equals full integral because the coefficients vanish off the overlap. Steps 5–6: pairwise-product exchange and chart-wise linearity via lem-sfb-euclidean-bochner-integral-calculus (r=1); integrability from steps 2–3. All cited nodes are in unit sk-thm-sf-ctf-stability, so no tool_uses; proof_deps equals the union of uses. New node lem-sfb-complex-integral-real-projection: an exact Mathlib leaf, read in source: Integrable.re (L1Space/Integrable.lean:1118–1121), integral_complex_ofReal (Bochner/ContinuousLinearMap.lean:162, no integrability hypothesis) and integral_re (:164–166). rg -L over dag/nodes finds no duplicate; it is not a restatement of the item; three search kinds are recorded. Demailly is WANTED and honestly marked, with proof_origin agent. No fixes."
+ }
+}

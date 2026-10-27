@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-direct-image-adjacent-presentation",
+ "kind": "statement",
+ "title": "The normalized ordinary direct-image adjacent coefficient identity",
+ "statement": "Fix a prime l, a finite extension E/Q_l, any scheme map p:X→Y, and any section- and K-injective-normalized DirectData d [lem-sf-compact-support-proper-image-tower]. For any K in the unbounded derived category of completed coefficient modules and n≥0, sfDirectImageTransition p K n equals Res_(n+1) applied to D_(n+1)(reductionMap K n) followed by d.comparison_n, and then the completed restriction-composition map. Here D_n is the finite right-derived direct image and reductionMap is the scalar-adjunction transpose of the lower reduction unit [def-weil-integral-reduction-tower]. The two ordinary finite direct-image functors are definitionally equal, as recorded by sfFiniteDirectImage_presentation. There is no open immersion, compactification, completeness, finite-field or constructibility hypothesis and no tower-isomorphism conclusion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6, with Stacks Project, sites-modules.tex, lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI, 03DJ), and sites-cohomology.tex, lemma-derived-pushforward-composition (0D6E); coefficient reductions use Definition 3.5.2 and Stacks 06YY."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCompactSupportTowerPresentation",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Finite coefficient presentation and specified quotient transitions; The normalized ordinary direct-image adjacent coefficient identity.",
+   "via": [
+    "lem-sf-compact-support-slice-intrinsic-towers",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image and exact restriction of scalars commute with composition of coefficient ring maps, normalized on K-injective resolutions",
+   "results": "8 hits: ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, ModuleCat.restrictScalars, PresheafOfModules.pushforward_obj_map_apply', PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalarsComp'.congr_simp, ModuleCat.restrictScalarsComp', ModuleCat.RestrictScalars.obj'",
+   "date": "2026-10-27",
+   "verdict": "General scalar restriction or natural-isomorphism tools only; none identifies the specified slice and intrinsic quotient arrows."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "12 hits. CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction, scalar restriction or derived-localization tools only; no comparison of these specified presentations. Use the existing tools for assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived direct image commutes with coefficient restriction and composition; naturality of the normalized K-injective comparison",
+   "results": "8 hits. CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction, scalar restriction or derived-localization tools only; no comparison of these specified presentations. Use the existing tools for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "sfDirectImageTransition|sfSupportTransition_presentation|finiteExtension.*sfIntrinsicExtensionByZero",
+   "results": "0 hits from msearch. Local rg found SfDirectImageReductionTransitions, IntegralProperTowerTransition and ProperSystemEvaluationTransitions; their hypotheses or conclusions do not match this arbitrary-scheme comparison.",
+   "date": "2026-10-27",
+   "verdict": "No existing matching comparison; retain the original normalized-operation dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-weil-derived-direct-image",
+  "lem-sf-compact-support-proper-image-tower",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "Identify the completed restriction of the actual normalized reductionMap with sfDerivedReductionTransition. Apply the normalized direct-image restriction pasting identity at the level-n scalar extension of K. Naturality of the level-(n+1) restriction comparison at reductionMap and functoriality of completed direct image then identify the two displayed composites after precomposition by the invertible comparison map. Cancel that map.",
+   "uses": [
+    "lem-sf-normalized-input-transition",
+    "lem-sf-direct-image-restriction-pasting"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-normalized-input-transition",
+  "lem-sf-direct-image-restriction-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6 and Stacks Tags 06YY, 07A6"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfDirectImageTransitionPresentation",
+  "file": "lean/Sheaf/Paper/SfDirectImageTransitionPresentation.lean",
+  "declaration": "WeilConjectures.sfDirectImageTransition_presentation",
+  "declarations": [
+   "WeilConjectures.sfFiniteDirectImage_presentation",
+   "WeilConjectures.sfDirectImageTransition_presentation"
+  ],
+  "statement": "theorem sfDirectImageTransition_presentation\n    (d : CompactSupportProperImageTower.DirectData l E p)\n    (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :\n    sfDirectImageTransition l E p K n =\n      (coefficientFiniteDerivedRestriction l E Y (n + 1)).map\n        ((compactSupportLevelDirectImage l E p (n + 1)).rightDerivedFunctor.map\n          (CompactSupportProperImageTower.reductionMap l E X K n) ≫\n          (d.comparison n).hom.app ((coefficientFiniteDerivedExtension l E X n).obj K)) ≫\n        (compactSupportSystemRestrictionComp l E Y (Nat.le_succ n)).hom.app\n          ((compactSupportLevelDirectImage l E p n).rightDerivedFunctor.obj\n            ((coefficientFiniteDerivedExtension l E X n).obj K))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T222755-L-694270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T021301-L-2752709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

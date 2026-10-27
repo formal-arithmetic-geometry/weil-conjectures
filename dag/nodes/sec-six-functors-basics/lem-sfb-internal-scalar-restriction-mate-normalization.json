@@ -1,0 +1,158 @@
+{
+ "id": "lem-sfb-internal-scalar-restriction-mate-normalization",
+ "kind": "statement",
+ "title": "Normalized geometric restriction mate agrees with the composite right-adjoint comparison",
+ "statement": "For a map a of commutative condensed rings and a scheme map f, use the functors, adjunctions and PullNormalized predicate of [def-sfb-internal-derived-scalar-comparisons]. Let b be the restriction/pullback isomorphism obtained by conjugating the termwise comparison of [def-sfb-derived-comap-upper-star-iso] with the canonical exact-left-derived comparisons. If lam : D_Y L_S ≅ L_R D_X is PullNormalized, then the geometric right mate of b inverse equals restrictPush(a,f,lam), the right-adjoint-uniqueness isomorphism for the two composite adjunctions. The equation includes the specified adjunction units and counits and requires no flatness.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-derived-comap-upper-star-iso",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-coefficient-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the proved generic ordinaryScalarUnit calculation from IntegralResiduePullOrdinaryUnit, now for arbitrary a. Apply it degreewise and descend to homotopy categories. It identifies the scalar-adjunction unit square for the ordinary pullIso and comapUpperStarIso.",
+   "uses": [
+    "new-integral-residue-pull-ordinary-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved generic mixedDerivedUnitFac, exactLeftSquareFac and mateModel calculations from IntegralResiduePullFlatModelMateNormalized. They compute the scalar mate of scalarRestrictionPull inverse against the derived computation counits, with the ordinary identity of step 1 as input.",
+   "uses": [
+    "new-integral-residue-pull-flat-model-comparison-mate-normalized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The functor D_Y followed by exact geometric pullback is a left derived functor of the ordinary composite: its pasted counit is an isomorphism on K-flat complexes. PullNormalized and cancellation of the ordinary pullIso identify the inverse of b with the scalar mate just computed, by the universal property of this left derived functor.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib iterated_mateEquiv_conjugateEquiv to the inverse normalized scalar/pullback comparison. Its iterated mate is the geometric restriction mate appearing in the statement, and its composite conjugate is restrictPush.hom. Expand rightAdjointUniq transported along lam to identify this conjugate.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-pull-ordinary-unit",
+  "new-integral-residue-pull-flat-model-comparison-mate-normalized",
+  "def-sfb-internal-derived-scalar-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.",
+  "note": "K2 reuses the proved generic private helper calculations underlying NormalizedScalarRestrictionPush; their argument is placed here without importing that downstream module, so there is no circular dependency on InternalScalarMateProjection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint mate of scalar extension restricts to the projection formula morphism",
+   "date": "2026-10-23",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.RestrictionCoextensionAdj.app'",
+   "verdict": "No normalized internal unbounded scalar comparison. The generic mate/counit lemma is used in the parent formal proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-23",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit",
+   "verdict": "No normalized internal unbounded scalar comparison. The generic mate/counit lemma is used in the parent formal proof."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Tt]ensor.*[Pp]ull|restriction.*[Mm]ate|[Mm]ate.*[Nn]ormaliz",
+   "date": "2026-10-23",
+   "results": "0 hits: ",
+   "verdict": "No normalized internal unbounded scalar comparison. The generic mate/counit lemma is used in the parent formal proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\", \"mateEquiv\"",
+   "date": "2026-10-23",
+   "results": "0 hits: ",
+   "verdict": "No normalized internal unbounded scalar comparison. The generic mate/counit lemma is used in the parent formal proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived scalar extension commutes with geometric pullback and the tensor comparison for the restricted regular coefficient",
+   "date": "2026-10-23",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc",
+   "verdict": "No normalized internal unbounded scalar comparison. The generic mate/counit lemma is used in the parent formal proof."
+  },
+  {
+   "tool": "rg",
+   "query": "residueOrdinaryTensorPull_module|residueOrdinaryTensorPull_homotopy in lean/Sheaf",
+   "date": "2026-10-23",
+   "results": "Sheaf.Paper.IntegralResidueOrdinaryTensorSquare and IntegralResidueOrdinaryTensorNormalization prove the ordinary and homotopy balanced square for arbitrary coefficient maps. Their residue names do not restrict their signatures.",
+   "verdict": "Use as the ordinary input. They do not identify arbitrary derived comparisons satisfying TensorNormalized and PullNormalized."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived extension of scalars commutes with geometric pullback and identifies the geometric restriction mate with the comparison between composite right adjoints",
+   "date": "2026-10-24",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgEquiv.restrictNormal_commutes\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \"[Normal F E] (x : E) : algebraMap E K₂ (χ.restrictNormal E x) = χ (algebraMap E K₁ x)\", \"doc\": \"For a normal field extension $E/F$, given algebra homomorphisms $\\\\chi: E \\\\to K_1$ and $\\\\chi: E \\\\to K_2$ compatible with scalar tower structures, the diagram commutes: applying the algebra map $E \\\\to K\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (X ⟶ (ModuleCat.restrictScalars f).obj Y) → ((ModuleCat.extendScalars f).obj X ⟶ Y)\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function establishes a natural bijection between $ R $-linear maps f\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → (f : R →+* S) → ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the extension of scalars functor from $ R $-modules to $ S $-modules is left adjoint to the restriction of scalars functor\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (Y ⟶ (ModuleCat.coextendScalars f).obj X) → ((ModuleCat.restrictScalars f).obj Y ⟶ X)\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n",
+   "verdict": "The results concern ordinary ModuleCat scalar adjunctions and presheaf/sheaf pullback; none identifies these normalized unbounded internal derived comparison maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarMateProjection",
+  "date": "2026-10-23",
+  "group": "J3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-sfb-internal-scalar-mate-projection",
+   "place": "The restriction comparison in step 4.",
+   "via": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InternalScalarRestrictionMateNormalization",
+  "file": "lean/Sheaf/Paper/InternalScalarRestrictionMateNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.scalar_restriction_mate_normalization",
+  "statement": "theorem scalar_restriction_mate_normalization (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)\n    (hlam : PullNormalized a f lam) :\n  let b := Functor.isoWhiskerRight\n      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ' f) (V a X) ≪≫\n    CondensedRing.derivedComapUpperStarIso a f ≪≫\n    Functor.isoWhiskerLeft (V a Y)\n      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm\n  (mateEquiv (adj Λ' f) (adj Λ f) (TwoSquare.mk _ _ _ _ b.inv)).natTrans =\n    (restrictPush a f lam).hom",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Restored by K2 from the existing recorded signature after the earlier proof packet was reverted. This is the original separate normalization step, not a new duplicate statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261024T190112-L-3934369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T202352-L-2711568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

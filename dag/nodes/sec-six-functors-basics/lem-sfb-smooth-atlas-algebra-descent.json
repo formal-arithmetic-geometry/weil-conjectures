@@ -1,0 +1,368 @@
+{
+ "id": "lem-sfb-smooth-atlas-algebra-descent",
+ "kind": "statement",
+ "title": "Quasi-coherent algebra descent along a general smooth scheme atlas",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes [def-weil-size-convention], and let $\\mathcal X$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack]. Let $p:U\\to\\mathcal X$ be a smooth surjective scheme atlas and put $R=U\\times_{\\mathcal X}U$, with projections $p_1,p_2:R\\to U$ and diagonal $e:U\\to R$. These are $2$-fibre products [def-sfb-stable-pointed-moduli-groupoids]; $R$ and the triple relation space are algebraic spaces [def-trf-algebraic-space], not required to be schemes. Restriction gives an equivalence between quasi-coherent commutative $\\mathcal O_{\\mathcal X}$-algebras [def-sfb-stack-quasi-coherent-algebra] and pairs $(C,\\delta)$ consisting of a quasi-coherent commutative $\\mathcal O_U$-algebra $C$ [def-trf-space-quasi-coherent-module] and an algebra isomorphism $\\delta:p_1^*C\\simeq p_2^*C$ satisfying $e^*\\delta=1$ and $p_{23}^*\\delta\\circ p_{12}^*\\delta=p_{13}^*\\delta$ on $U\\times_{\\mathcal X}U\\times_{\\mathcal X}U$. Pullbacks are tensor pullbacks [def-pc-module-pullback]. Morphisms on the right are all algebra maps commuting with $\\delta$; thus objects and maps descend uniquely up to the compatible isomorphism. This equivalence is compatible with restriction along smooth scheme tests and with tensor products, the unit algebra and their structural maps. A descended map is injective on the smooth-etale site if its map on $U$ is injective as a map of quasi-coherent sheaves; conversely injection on that site implies injection on $U$. This last assertion makes no claim of injectivity after nonflat big-site pullback. No quasi-compactness, finite presentation, affine-relation, or Deligne--Mumford hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WV (lemma-quasi-coherent-algebraic-stack), parts (1) and (5), and Tag 06WT (proposition-quasi-coherent). Algebra objects follow by the tensor-compatible equivalence; injection on smooth tests uses flatness of smooth pullback, as in stacks-cohomology.tex Tag 0GQF (lemma-quasi-coherent-check-exact)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-trf-space-quasi-coherent-module",
+  "def-pc-module-pullback",
+  "def-sfb-smooth-atlas-algebra-datum",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Put $s=p_1,t=p_2$. Smoothness implies flatness and local finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Thus [lem-sfb-fppf-groupoid-stack-presentations](2) applies to the given smooth surjective scheme atlas: its self-relation is an algebraic space, with groupoid operations given by composition of the specified isomorphisms, and $[U/R]\\simeq\\mathcal X$ compatibly with $U$. Let $\\mathcal P$ be the groupoid prestack with objects $u:T\\to U$ and arrows $(f,r):(T,u)\\to(T',u')$, where $f:T\\to T'$, $r:T\\to R$, $sr=u$ and $tr=u'f$. Its stackification is $[U/R]$. For an algebra on $\\mathcal X$, [lem-sfb-stack-quasi-coherent-scheme-restriction] gives the quasi-coherent algebra on each scheme test; the arrow $(u,v,\\alpha)$ in the self-relation induces its pullback isomorphism. Identity and composition of these arrows give exactly the displayed unit and triple-cocycle equations. This constructs restriction, including its action on all algebra maps.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06WT (proposition-quasi-coherent), first construction, and 06WK (lemma-quasi-coherent); algebraic.tex Tags 04T5 and 04WY."
+   }
+  },
+  {
+   "text": "Conversely, fix $(C,\\delta)$ on $U$. On $\\mathcal P$ set $H(T,u)=\\Gamma(T,u^*C)$, with its usual algebra structure. For $(f,r)$ define restriction as section pullback along $f$ followed by $r^*\\delta^{-1}:(u'f)^*C\\to u^*C$. The scheme section pullbacks and their composition comparisons are those of [lem-sfb-scheme-big-fppf-quasicoherent-equivalence]. Two successive arrows have transition $r_1^*\\delta^{-1}\\circ r_2^*\\delta^{-1}=(\\delta_{r_2}\\circ\\delta_{r_1})^{-1}=\\delta_{r_2r_1}^{-1}$ under these comparisons. This is the single restriction for their composite, by the given cocycle; the identity restriction is the identity by $e^*\\delta=1$. All restrictions are ring maps over pullback of functions, since $\\delta$ is an algebra isomorphism. These formulas therefore define a presheaf of commutative algebras, not just its values on objects.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), reverse construction, restriction formula and omitted presheaf check."
+   }
+  },
+  {
+   "text": "For $x=(T,u)$, its slice in $\\mathcal P$ is equivalent to schemes over $T$: an arrow to $x$ is uniquely isomorphic over $x$ to the chosen cartesian arrow over its base map, because all vertical arrows are invertible. Under this equivalence the restriction of $H$ is $A_T(u^*C)$, using the transition isomorphism in step 2. By [lem-sfb-scheme-big-fppf-quasicoherent-equivalence] this is an fppf sheaf with local free presentations. Hence $H$ is a sheaf: every covering and its matching sections lie in such a slice. It is quasi-coherent as defined in [def-trf-space-quasi-coherent-module]: the local free presentations on each slice give precisely a covering and presentation locally at every object of $\\mathcal P$. No descent theorem on a nonexistent scheme representing $R$ is used here; a map $T\\to R$ suffices for the restriction formula.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06WT (proposition-quasi-coherent), reverse construction, and 06WI (lemma-characterize-quasi-coherent), proof by the local-presentation definition."
+   }
+  },
+  {
+   "text": "Let $q:\\mathcal P\\to[U/R]\\simeq\\mathcal X$. By [lem-sfb-stackification-module-equivalence], precomposition gives an equivalence on all module sheaves, restricting to quasi-coherent ones. It therefore descends the underlying module of $H$ to a quasi-coherent module $F$, with $q^*F\\simeq H$. We also need its actual tensor comparison. For quasi-coherent $F,G$ on $\\mathcal X$, [lem-sfb-stack-qcoh-flat-atlas-exactness] ensures that $F\\otimes G$ and the unit are quasi-coherent. On the slice of $x\\in\\mathcal P(T)$, [lem-sfb-stack-quasi-coherent-scheme-restriction] identifies the restrictions with $A_T(F_{qx})$ and $A_T(G_{qx})$. Apply [lem-sfb-localized-site-tensor-restriction] on both sites and the tensor comparison of [lem-sfb-scheme-big-fppf-quasicoherent-equivalence]. Both $q^*(F\\otimes G)$ and $q^*F\\otimes q^*G$ then identify with $A_T(F_{qx}\\otimes G_{qx})$. The canonical comparison sends each local pure tensor to that same tensor, so it is this isomorphism on every slice, hence globally. The unit comparison is the identity on $\\Gamma(T,\\mathcal O_T)$. Associativity, symmetry and unit compatibility follow on local pure tensors: either composite sends $(a\\otimes b)\\otimes c$ to $a\\otimes(b\\otimes c)$, or exchanges the same factors, or multiplies the same scalar. Such sections locally generate the sheaf tensor.",
+   "uses": [
+    "lem-sfb-stackification-module-equivalence",
+    "lem-sfb-stack-qcoh-flat-atlas-exactness",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06WQ (lemma-stackification), 06WR (lemma-stackification-quasi-coherent), 06WV(5), 06WK; tensor comparisons on the localized scheme sites."
+   }
+  },
+  {
+   "text": "The multiplication of $H$ is bilinear and thus a module map $H\\otimes H\\to H$ by [lem-pc-sites-sheaf-tensor-bilinear-universal]. Using step 4's tensor and unit comparisons, full faithfulness of [lem-sfb-stackification-module-equivalence] gives unique maps $\\mu:F\\otimes F\\to F$ and $\\eta:\\mathcal O_{\\mathcal X}\\to F$ restricting to multiplication and unit of $H$. The two associativity maps from $F^{\\otimes3}$, the two unit diagrams and the commutativity diagram become the corresponding equalities for $H$ after $q^*$. Faithfulness makes these equalities hold on $\\mathcal X$. The same bilinear universal property interprets $\\mu$ as a sheaf multiplication; with $\\eta$ it makes $F$ a commutative algebra in exactly the sense of [def-sfb-stack-quasi-coherent-algebra]. Thus the construction descends its algebra operations as well as its module.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-sfb-stackification-module-equivalence",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent) applied to multiplication and unit, with Tag 06WR; sites-modules.tex Section 03EK, tensor universal property."
+   }
+  },
+  {
+   "text": "A compatible map $h:C\\to D$ gives $H_C(T,u)\\to H_D(T,u)$ by $\\Gamma(T,u^*h)$; compatibility with $\\delta$ is precisely commutation with the restriction along every $(f,r)$. Conversely a module map $H_C\\to H_D$ restricts on the slice of $(U,1)$, identified with $(\\mathit{Sch}/U)_{fppf}$, to a unique module map $h:C\\to D$ by [lem-sfb-scheme-big-fppf-quasicoherent-equivalence]. Naturality along $(f,e)$ forces its components to be $\\Gamma(T,u^*h)$; naturality along $(1,r)$ forces the descent equation. This tests the equation on all scheme maps to $R$, in particular on its etale scheme charts, so it is an equation on $R$. The map is an algebra map exactly when it preserves multiplication and unit on every slice, equivalently when $h$ does, by the tensor comparison and faithfulness of that scheme equivalence. Finally [lem-sfb-stackification-module-equivalence] descends these module maps uniquely; faithfulness and step 4 show that the descended maps preserve the operations of step 5. This proves full faithfulness on all algebra maps, not only isomorphisms.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-sfb-stackification-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), both functors, with the omitted morphism and quasi-inverse checks written explicitly."
+   }
+  },
+  {
+   "text": "Restriction of the constructed algebra to $U$ is $C$: on the slice $(U,1)$ the sheaf is $A_U(C)$, whose inverse comparison is the identity on Zariski opens by [lem-sfb-scheme-big-fppf-quasicoherent-equivalence]; the arrows $r$ recover $\\delta$ by the formula in step 2. Starting instead with an algebra $B$ on $\\mathcal X$, [lem-sfb-stack-quasi-coherent-scheme-restriction] identifies its value at every $(T,u)$ with $\\Gamma(T,u^*B_U)$, and its restrictions with the same $r^*\\delta^{-1}$ formula. Thus the presheaf constructed from its datum is canonically $q^*B$, on maps and operations. Full faithfulness of [lem-sfb-stackification-module-equivalence] descends this identification to the unique compatible algebra isomorphism with $B$. These identifications are natural by their section formulas, so the two constructions are quasi-inverse.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-stackification-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), final omitted quasi-inverse verification; Tags 06WK and 06WR."
+   }
+  },
+  {
+   "text": "For a scheme test $a:T\\to\\mathcal X$, [lem-sfb-stack-quasi-coherent-scheme-restriction] identifies restriction with tensor pullback and gives its natural identity and composition comparisons, preserving the structure module and tensors. Thus the restriction functor of step 1 carries an algebra tensor product to the tensor product of its two restrictions, with transition $\\delta_C\\otimes\\delta_D$, and carries the unit to the canonical unit datum. Multiplication on $C\\otimes D$ sends $(c\\otimes d)(c'\\otimes d')$ to $cc'\\otimes dd'$, and its unit is $1\\otimes1$; these are exactly the restrictions of the same structural maps on the descended algebras. The comparisons in step 4 respect these formulas. The composition comparisons for test pullback therefore show compatibility after every further smooth test and for every algebra map. No arbitrary ring of global sections is being asserted to commute with tensor: all these comparisons are sheaf tensors on the test sites.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06WV(5) and 06WK; the pullback-compatible scheme comparison underlying Tag 06WT."
+   }
+  },
+  {
+   "text": "Let $b:B\\to D$ be the descended map, and suppose $b_U$ is injective. Fix a smooth scheme test $a:T\\to\\mathcal X$. Choose a surjective etale scheme chart $W\\to Z=U\\times_{\\mathcal X}T$, possible by the atlas condition of [def-sfb-algebraic-moduli-stack] and [def-trf-algebraic-space]. The projections $W\\to T$ and $W\\to U$ are smooth, and the former is surjective, by [lem-sfb-stack-chartwise-smooth-etale-calculus]; for $W\\to U$ use the smoothness of $a$. In particular both scheme maps are flat. By [lem-sfb-stack-quasi-coherent-scheme-restriction] the two pullbacks of $b_T$ and $b_U$ to $W$ coincide. Exact flat pullback from [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective] makes this map injective. Put $K=\\ker b_T$, a quasi-coherent Zariski module by [lem-weil-pbc-quasi-coherent-module-kernel]. Exactness gives $K|_W=0$. Apply [lem-sc-flat-cover-module-isomorphism-reflection] to $0\\to K$ and the flat surjective scheme cover $W\\to T$: it is an isomorphism after pullback, hence before pullback. Therefore $K=0$ and $b_T$ is injective. This uses the reflection lemma only for isomorphisms, its stated conclusion.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-sc-flat-cover-module-isomorphism-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "stacks-cohomology.tex Tag 0GQF (lemma-quasi-coherent-check-exact), proof with etale scheme charts of the relation spaces."
+   }
+  },
+  {
+   "text": "The smooth-etale site here has objects smooth scheme maps $T\\to\\mathcal X$ and coverings etale covering families over each such object. By [lem-sfb-stack-quasi-coherent-scheme-restriction] its values are the sections of the quasi-coherent scheme modules $B_T,D_T$. Step 9 makes every section map on every smooth test injective; hence the restricted sheaf map is injective. Conversely, injectivity on this site gives injectivity on every open subscheme of $U$, since these remain smooth tests; therefore $b_U$ is injective. Equivalently one can use [lem-sfb-scheme-etale-module-exact-finiteness-comparison] to express the test injections on the small etale site. In step 9 both projections were flat because both $U$ and $T$ were smooth over $\\mathcal X$; no assertion about an arbitrary nonflat big-site test follows, or is needed.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "stacks-cohomology.tex Tag 0GQF, with the smooth-test rather than big-site interpretation; stacks-sheaves.tex Tag 06WV(3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-stackification-module-equivalence",
+  "lem-sfb-stack-qcoh-flat-atlas-exactness",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-sc-flat-cover-module-isomorphism-reflection",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WT (proposition-quasi-coherent), explicit prestack construction and omitted functor/quasi-inverse checks; Tags 06WQ/06WR and 06WV(1),(5). Algebra operations are descended explicitly; smooth-test injection follows stacks-cohomology.tex Tag 0GQF."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent algebras on an algebraic stack are equivalent to algebras on a smooth presentation with a cocycle descent datum",
+   "results": "{\"t\": \"2026-10-23T13:16:25Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent algebras on an algebraic stack are equivalent to algebras on a smooth presentation with a cocycle descent datum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\"], \"digest\": \"1eaeeeef365347ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: QuasicoherentData concerns local presentations of a module already on a ringed site, not descent from an algebraic-space smooth groupoid. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202. Other hits concern schemes, smooth functions or categorical descent without this quasi-coherent algebra equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth descent of commutative quasi coherent algebra sheaves from an algebraic space groupoid presentation of an algebraic stack",
+   "results": "{\"t\": \"2026-10-23T13:17:01Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth descent of commutative quasi coherent algebra sheaves from an algebraic space groupoid presentation of an algebraic stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheafCommRing\", \"SheafOfModules.QuasicoherentData.presentation\", \"smoothSheafCommRing.ι_forgetStalk_inv_assoc\", \"smoothSheafCommRing.ι_forgetStalk_hom_assoc\", \"smoothSheafRing\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData\", \"SheafOfModules.Presentation.map\"], \"digest\": \"598330f5d4f24415\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: QuasicoherentData concerns local presentations of a module already on a ringed site, not descent from an algebraic-space smooth groupoid. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202. Other hits concern schemes, smooth functions or categorical descent without this quasi-coherent algebra equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebras with cocycle descent data on a smooth groupoid in algebraic spaces give quasi coherent algebras on the quotient stack",
+   "results": "{\"t\": \"2026-10-23T13:17:42Z\", \"tool\": \"leansearch\", \"query\": \"Algebras with cocycle descent data on a smooth groupoid in algebraic spaces give quasi coherent algebras on the quotient stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.mk\", \"Algebra.Smooth.exists_finiteType\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData\"], \"digest\": \"58198f739c6c7814\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: QuasicoherentData concerns local presentations of a module already on a ringed site, not descent from an algebraic-space smooth groupoid. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202. Other hits concern schemes, smooth functions or categorical descent without this quasi-coherent algebra equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|descent.*[Aa]lgebra|[Aa]lgebra.*descent",
+   "results": "{\"t\": \"2026-10-23T13:17:42Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|descent.*[Aa]lgebra|[Aa]lgebra.*descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentDataAsCoalgebra.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentDataAsCoalgebra.lean\"], \"digest\": \"b009cdb81f7d454f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: QuasicoherentData concerns local presentations of a module already on a ringed site, not descent from an algebraic-space smooth groupoid. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202. Other hits concern schemes, smooth functions or categorical descent without this quasi-coherent algebra equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasicoherentData\"",
+   "results": "{\"t\": \"2026-10-23T13:26:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasicoherentData\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"SheafOfModules.QuasicoherentData.shrink\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.X\"], \"digest\": \"9e8e668485f77057\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: QuasicoherentData concerns local presentations of a module already on a ringed site, not descent from an algebraic-space smooth groupoid. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202. Other hits concern schemes, smooth functions or categorical descent without this quasi-coherent algebra equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasicoherentData|AlgebraicStack",
+   "results": "{\"t\": \"2026-10-23T13:47:06Z\", \"tool\": \"grep\", \"query\": \"QuasicoherentData|AlgebraicStack\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"57bc484dece2e171\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: QuasicoherentData concerns local presentations of a module already on a ringed site, not descent from an algebraic-space smooth groupoid. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202. Other hits concern schemes, smooth functions or categorical descent without this quasi-coherent algebra equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasicoherentData|IsQuasicoherent",
+   "results": "{\"t\": \"2026-10-23T15:58:55Z\", \"tool\": \"grep\", \"query\": \"QuasicoherentData|IsQuasicoherent\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"57bc484dece2e171\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are local quasi-coherent presentation data or the scheme module pseudofunctor, not algebraic-space groupoid descent or this algebra equivalence. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-250. Loogle and the groupoid/stack source grep returned no hits; the local-presentation grep returned only that module and locally free presentation data."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|QuotientStack|groupoid.*[Qq]uasi|[Qq]uasi.*groupoid",
+   "results": "{\"t\": \"2026-10-23T15:58:55Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|QuotientStack|groupoid.*[Qq]uasi|[Qq]uasi.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are local quasi-coherent presentation data or the scheme module pseudofunctor, not algebraic-space groupoid descent or this algebra equivalence. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-250. Loogle and the groupoid/stack source grep returned no hits; the local-presentation grep returned only that module and locally free presentation data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-23T15:58:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicoherent\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are local quasi-coherent presentation data or the scheme module pseudofunctor, not algebraic-space groupoid descent or this algebra equivalence. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-250. Loogle and the groupoid/stack source grep returned no hits; the local-presentation grep returned only that module and locally free presentation data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of quasi coherent modules on algebraic space groupoids with tensor product compatibility",
+   "results": "{\"t\": \"2026-10-23T15:58:56Z\", \"tool\": \"leansearch\", \"query\": \"Descent of quasi coherent modules on algebraic space groupoids with tensor product compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.IsQuasicoherent.recOn\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\"], \"digest\": \"a30ebdf704efa7c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are local quasi-coherent presentation data or the scheme module pseudofunctor, not algebraic-space groupoid descent or this algebra equivalence. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-250. Loogle and the groupoid/stack source grep returned no hits; the local-presentation grep returned only that module and locally free presentation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on the quotient stack of a groupoid in algebraic spaces are equivalent to equivariant modules on the object space",
+   "results": "{\"t\": \"2026-10-23T15:58:57Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent modules on the quotient stack of a groupoid in algebraic spaces are equivalent to equivariant modules on the object space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\"], \"digest\": \"2b27d143e3c0dd83\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are local quasi-coherent presentation data or the scheme module pseudofunctor, not algebraic-space groupoid descent or this algebra equivalence. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-250. Loogle and the groupoid/stack source grep returned no hits; the local-presentation grep returned only that module and locally free presentation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor compatible equivalence between quasi coherent sheaves on an algebraic stack and modules with cocycle descent data on a smooth presentation",
+   "results": "{\"t\": \"2026-10-23T15:58:58Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor compatible equivalence between quasi coherent sheaves on an algebraic stack and modules with cocycle descent data on a smooth presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"d617d11a4037941c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits are local quasi-coherent presentation data or the scheme module pseudofunctor, not algebraic-space groupoid descent or this algebra equivalence. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-250. Loogle and the groupoid/stack source grep returned no hits; the local-presentation grep returned only that module and locally free presentation data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-quasifinite-relative-normalization",
+  "date": "2026-10-23",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: the integral Zariski-main factorization in Alper Lemma 8.3.1, with its actual relative-normalization algebra retained. Supporting input: descent of the integral-closure algebra with its inclusion from a smooth atlas with algebraic-space relations.",
+   "via": [
+    "lem-sfb-stack-quasifinite-relative-normalization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-atlas-algebra-descent",
+  "worker": "stage1",
+  "summary": "No new nodes. Constructed the algebra on the presentation prestack with explicit inverse-datum restriction maps, proved its sheaf and local-presentation properties using the existing scheme big-fppf equivalence, and descended its module, multiplication, unit, all maps and tensor comparisons through the existing stackification equivalence. Checked the omitted functor and quasi-inverse verifications in 06WT. Proved the smooth-etale injection assertion using flat scheme charts, a scheme kernel and isomorphism reflection, keeping it separate from nonflat big-site restriction. Statement unchanged.",
+  "blueprint": "The ancestor command returns None, as does the inherited blueprint.from.node. Retained its precise from.place and via chain: det-thm-sf-ctf-stability-direct-images proof (3), alteration and stable pointed-curve route, relative-normalization algebra descent from a smooth atlas. Read the current latest blueprint unit and direct-images proof. These steps supply only the inherited algebra-descent prerequisite and do not alter the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic scheme, ringed-site or module-sheaf tool for the explicit atlas-descent construction or its flat-test injectivity check; no change to the constructible-stability/alteration route."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic scheme, ringed-site or module-sheaf tool for the explicit atlas-descent construction or its flat-test injectivity check; no change to the constructible-stability/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Generic scheme, ringed-site or module-sheaf tool for the explicit atlas-descent construction or its flat-test injectivity check; no change to the constructible-stability/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic scheme, ringed-site or module-sheaf tool for the explicit atlas-descent construction or its flat-test injectivity check; no change to the constructible-stability/alteration route."
+   },
+   {
+    "node": "lem-sc-flat-cover-module-isomorphism-reflection",
+    "why": "Generic scheme, ringed-site or module-sheaf tool for the explicit atlas-descent construction or its flat-test injectivity check; no change to the constructible-stability/alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-sc-flat-cover-module-isomorphism-reflection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-7cd803e4b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-7cd803e4b (reviewer sub-agent of L); spot-checked: First split of an unsplit item (live and side-live still show it unsplit, not superseded). Statement byte-identical to base; stmt_deps unchanged; no new nodes; no fixes. Checked against Stacks 06WT (stacks-sheaves l.2134-2230), 06WV(1),(5) and 0GQF (stacks-cohomology l.167). Step 1: atlas restriction via fppf-groupoid-presentations(2), with the flat+lfp hypotheses coming from the chartwise calculus. Step 2: H(T,u)=Γ(T,u*C) with restriction r*δ^{-1}, which is the correct orientation (s=p1; Stacks' α:t*→s* is the inverse). Composition is proved via the cocycle (c(r2 f1, r1)) and the identity via e*δ=1. Step 3: the CFG slice is equivalent to Sch/T, so H|_x ≅ A_T(u*C) is a quasi-coherent sheaf. Steps 4-7: stackification module equivalence on all maps; tensor comparison proved on local pure tensors; algebra operations descended by fullness and faithfulness; full faithfulness on all algebra maps via special arrows and (1,r); quasi-inverse via the A_U unit/counit and the scheme-restriction node. Step 9: Z=U×_X T is smooth over U by the definition of a smooth test; with an étale chart W, flat exact pullback, a quasi-coherent kernel and isomorphism-reflection on 0→K give injectivity. The nonflat counterexample (·2 on Spec Z pulled back to F_2) is correctly excluded. Step 10 uses left exactness of Γ. Small cases checked: identity atlas, BG, empty stack. No qc/fp/DM hypothesis is used anywhere. Duplicate scan of 06WT/06WV/0GQF hits found only narrower nodes (DM, scheme-groupoid, affine, action, field-base). No cycle. tool_uses accepted (5 generic sheaf/module tools). Batch 5: all 7 flagged citations reach sec-trace-formula only through def-trf-algebraic-space, def-trf-space-quasi-coherent-module or the generic Zariski/étale qcoh equivalence. None is trace-formula or Poincaré-duality content, so none needs the assumption leaves. No SGA. Minor: the inherited statement uses the scheme-level def-pc-module-pullback for pullback to the algebraic space R."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAtlasAlgebraDescent",
+  "declaration": "CategoryTheory.exists_smoothAtlasAlgebraDescent",
+  "declarations": [
+   "CategoryTheory.atlasDescentScalar",
+   "CategoryTheory.SmoothAtlasAlgebraDescent",
+   "CategoryTheory.SmoothAtlasAlgebraDescent.testComparison",
+   "CategoryTheory.exists_smoothAtlasAlgebraDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAtlasAlgebraDescent.lean",
+  "statement": "theorem exists_smoothAtlasAlgebraDescent {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F) (ha : IsSmoothModuliAtlas F U a) : Nonempty (SmoothAtlasAlgebraDescent F hF.1.1 U a)",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The equivalence is normalized on every scheme test of the atlas and every algebra map. Relation transitions use actual vertical two-isomorphisms, with p1-to-p2 orientation. The right algebra is encoded on the atlas big fppf site, canonically equivalent to the ordinary scheme algebra by the recorded scheme-test comparison; no global-sections tensor identity is assumed. Tensor and unit are finite coproducts of commutative algebras, including their universal structural maps. Injectivity is tested only on smooth scheme tests and on the Zariski opens of the atlas."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-197666a3c",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Every node clause matches. Relation encoded by its scheme points (vertical isos over 1_T), R never assumed a scheme. delta oriented p1→p2 per 06WT; delta_id and delta_comp are the diagonal and cocycle equations. Hom covers all equivariant algebra maps. coordinates*_ fields pin the equivalence to actual restriction on objects, scalars, restriction maps, algebra maps and relation arrows, so the outer Nonempty is normalized. injective_iff compares smooth tests (ModuliSpaceTest @Smooth) with open immersions into U; no nonflat claim. Universes u,v,w independent; both sides in CommRingCat.{max (u+1) v w}. No qc/fp/affine/DM hypotheses. lean.statement verbatim in both records. Item diff vs live: lean record plus two def-node stmt_deps; statement unchanged. New def node has real data, no name clashes. Sorried only: main theorem and atlasAlgebraTest_isFibred (existing proof is private). Docstrings and both report sections present. Notes: tensor_unit is automatic for an equivalence, which is acceptable because the node's tensor clause is equally automatic; the def node's lemma stmt_dep is a prose citation only. No file changed, so no compile."
+ }
+}

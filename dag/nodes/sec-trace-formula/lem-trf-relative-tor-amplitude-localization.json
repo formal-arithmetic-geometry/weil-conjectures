@@ -14,78 +14,45 @@
  ],
  "proof": [
   {
-   "text": "Fix an $R$-module $N$, placed in degree zero. By [lem-pc-source-module-kflat-resolution] choose K-flat quasi-isomorphisms $P^\\bullet\\to N[0]$ and $F^\\bullet\\to\\operatorname{Res}_R K^\\bullet$. The tensor-model theorem [lem-pc-source-kflat-module-tensor-model] computes $K^\\bullet\\otimes_R^{\\mathbf L}N$ by $\\operatorname{Tot}(F^\\bullet\\otimes_R N[0])$. K-flatness [def-pc-module-kflat-complex] says tensoring on either side preserves quasi-isomorphisms. Since $P^\\bullet$ is K-flat, the map $\\operatorname{Tot}(F^\\bullet\\otimes_R P^\\bullet)\\to\\operatorname{Tot}(K^\\bullet\\otimes_R P^\\bullet)$ is a quasi-isomorphism; since $F^\\bullet$ is K-flat, the map $\\operatorname{Tot}(F^\\bullet\\otimes_R P^\\bullet)\\to\\operatorname{Tot}(F^\\bullet\\otimes_R N[0])$ is also one. Hence $C_N^\\bullet=\\operatorname{Tot}(K^\\bullet\\otimes_R P^\\bullet)$ computes the desired derived tensor. This argument applies to any supplied K-flat resolution of the test module. With the total differential of [def-pc-tensor-complex-sheaves], multiplication on the unchanged $K$ factor commutes with both differential terms, making $C_N^\\bullet$ and $H^i(C_N^\\bullet)$ actual $A$-modules. The auxiliary $F^\\bullet$ is resolved over $R$; we never assert that an $A$-K-flat resolution is $R$-K-flat.",
+   "text": "For any $R$-module $N$, [lem-pc-source-module-kflat-resolution] supplies a K-flat resolution $P\\to N[0]$ over $R$. By [lem-trf-relative-tensor-test-model-restriction], $C_N=\\operatorname{Tot}(K\\otimes_R P)$ is an $A$-complex whose restriction represents $K\\otimes_R^{\\mathbf L}N$, including the $A$-action. For every ring $B$, multiplicative subset $T$ and $B$-complex $E$, localization is additive by fractions and exact by [lem-weil-pbc-localization-module-exact]. Hence [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^i(T^{-1}E)\\cong T^{-1}H^i(E)$, without boundedness; in particular it preserves quasi-isomorphisms.",
    "uses": [
     "lem-pc-source-module-kflat-resolution",
-    "lem-pc-source-kflat-module-tensor-model",
-    "def-pc-module-kflat-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0B67, proof: H^i is a module over the source algebra; expanded using Tag 06Y4 (lemma-K-flat-resolution) and more-algebra.tex definition-derived-tor and lemma-flip-douoble-tensor-product."
-   }
-  },
-  {
-   "text": "For any commutative ring $B$, multiplicative subset $T\\subseteq B$ and arbitrary $B$-complex $D^\\bullet$, [lem-weil-pbc-localization-module-exact] says that termwise localization is exact. It is additive by the fraction formulas, so [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^i(T^{-1}D^\\bullet)\\cong T^{-1}H^i(D^\\bullet)$ in every degree. In particular localization preserves quasi-isomorphisms. We will use this first over $R$ with $T=R\\setminus\\mathfrak p$ and then over $A$ with $T=A\\setminus\\mathfrak q$; neither application needs a bounded complex.",
-   "uses": [
+    "lem-trf-relative-tensor-test-model-restriction",
     "lem-weil-pbc-localization-module-exact",
     "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0B67, displayed localization of cohomology; algebra.tex Tag 00CS (proposition-localization-exact) and homology.tex Tag 010N (lemma-exact-functor)."
+    "place": "Tag 0B67, lemma-tor-amplitude-localization, equivalence of (1) and (2), renaming the base A to R and the algebra B to A."
    }
   },
   {
-   "text": "Fix a prime $\\mathfrak q\\subset A$, put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ for the given map $\\varphi:R\\to A$, and set $P_{\\mathfrak p}^\\bullet=R_{\\mathfrak p}\\otimes_R P^\\bullet$. The extension theorem [lem-pc-kflat-extension-of-scalars] makes this complex K-flat over $R_{\\mathfrak p}$. Step 2 makes its augmentation to $N_{\\mathfrak p}[0]$ a quasi-isomorphism. Here scalar extension equals termwise localization: $(r/t)\\otimes u\\mapsto ru/t$, with inverse $u/t\\mapsto(1/t)\\otimes u$, as the tensor and fraction relations verify. Consequently [lem-pc-source-kflat-module-tensor-model], with the two-resolution computation of Step 1 (now over $R_{\\mathfrak p}$), computes $K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}N_{\\mathfrak p}$ by $\\operatorname{Tot}(K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}P^\\bullet_{\\mathfrak p})$. The map $R_{\\mathfrak p}\\to A_{\\mathfrak q}$ sends $r/t$ to $\\varphi(r)/\\varphi(t)$; it exists because $t\\notin\\mathfrak p$ implies $\\varphi(t)\\notin\\mathfrak q$.",
+   "text": "Fix $\\mathfrak q\\subset A$, $\\mathfrak p=\\varphi^{-1}\\mathfrak q$. By [lem-trf-relative-tensor-localized-resolution-comparison], the localized augmentation $P_{\\mathfrak p}\\to N_{\\mathfrak p}[0]$ is a K-flat resolution over $R_{\\mathfrak p}$ and $Q((C_N)_{\\mathfrak q})\\cong Q(\\operatorname{Tot}(K_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}P_{\\mathfrak p}))$ in $D(A_{\\mathfrak q})$. Apply cohomology [def-weil-abstract-derived-category] and restrict scalars to $R_{\\mathfrak p}$: restriction leaves kernels and images unchanged, hence also cohomology. Now use Step 1's localization formula and [lem-trf-relative-tensor-test-model-restriction] over $R_{\\mathfrak p}\\to A_{\\mathfrak q}$. Thus $H^i(C_N)_{\\mathfrak q}\\cong H^i(K_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}N_{\\mathfrak p})$. Both sides use the stated contracted-prime structural map.",
    "uses": [
-    "lem-pc-kflat-extension-of-scalars",
-    "lem-pc-source-kflat-module-tensor-model",
-    "lem-pc-source-module-kflat-resolution"
+    "lem-trf-relative-tensor-localized-resolution-comparison",
+    "lem-trf-relative-tensor-test-model-restriction",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0B67, displayed tensor over the contracted-prime base localization; omitted forward implication expanded using Tag 06Y1 (lemma-base-change-K-flat)."
+    "place": "Tag 0B67, lemma-tor-amplitude-localization, equivalence of (1) and (2), renaming the base A to R and the algebra B to A."
    }
   },
   {
-   "text": "The ordinary tensor complexes in Steps 1 and 3 are related by an explicit $A_{\\mathfrak q}$-linear chain isomorphism $$(C_N^\\bullet)_{\\mathfrak q}\\longrightarrow\\operatorname{Tot}(K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}P^\\bullet_{\\mathfrak p}),\\qquad (k\\otimes u)/s\\longmapsto(k/s)\\otimes(u/1).$$ Its inverse on a homogeneous generator is $$(k/s)\\otimes(u/t)\\longmapsto(k\\otimes u)/(s\\varphi(t)),$$ where $s\\notin\\mathfrak q$ and $t\\notin\\mathfrak p$. The fraction relations of [def-weil-pbc-module-localization] and tensor balancing give well-defined maps: moving $r/t$ between the factors multiplies the numerator by $\\varphi(r)$ or $r$ and introduces the same denominator $\\varphi(t)$. The two composites fix every generator. Apply these formulas to finite sums of homogeneous generators; a common product of denominators puts any such sum over one denominator, so the maps also cover the direct sums in every total degree. Both maps commute separately with $d_K\\otimes1$ and $(-1)^r1\\otimes d_P$, with the same $r$ before and after localization. Thus they commute with the total differential, including for unbounded complexes.",
-   "uses": [
-    "def-weil-pbc-module-localization",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0B67, displayed derived-tensor localization identity: elementary fraction and total-differential verification."
-   }
-  },
-  {
-   "text": "Apply cohomology to the chain isomorphism of Step 4, use Step 2 on its left side, and use the tensor models of Steps 1 and 3. This gives, for every $R$-module $N$, prime $\\mathfrak q$ and integer $i$, the comparison $$H^i(K^\\bullet\\otimes_R^{\\mathbf L}N)_{\\mathfrak q}\\cong H^i(K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}N_{\\mathfrak p}).$$ The left side is localization of the actual $A$-module $H^i(C_N^\\bullet)$, and the right side uses the specific structural map $R_{\\mathfrak p}\\to A_{\\mathfrak q}$ of Step 3. This is a combination of the preceding computations, with no change from relative to absolute Tor amplitude.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0B67, the cohomology localization identity in its proof."
-   }
-  },
-  {
-   "text": "Assume (1), fix $\\mathfrak q$, and let $L$ be any $R_{\\mathfrak p}$-module. Use $N=L$ by restriction to $R$ in Step 5. Its localization satisfies $N_{\\mathfrak p}\\cong L$: send $l/t$ to $t^{-1}l$ and send $l$ back to $l/1$; these maps are inverse because each $t\\notin\\mathfrak p$ already acts invertibly. For $i\\notin[a,b]$, assumption (1) makes the left side of Step 5 zero. Its right side, after this module isomorphism, is exactly $H^i(K^\\bullet_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}L)$. It is zero. Since $\\mathfrak q$ and $L$ were arbitrary, this proves (2), including the implication omitted in the source.",
+   "text": "Assume (1). Given $\\mathfrak q$ and an $R_{\\mathfrak p}$-module $L$, use $N=\\operatorname{Res}_R L$ in Step 2. Then $N_{\\mathfrak p}\\cong L$: the inverse fraction maps are $l/t\\mapsto t^{-1}l$ and $l\\mapsto l/1$ [def-weil-pbc-module-localization]. Each denominator already acts invertibly. For $i\\notin[a,b]$, (1) makes $H^i(C_N)=0$, so Step 2 gives $H^i(K_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}^{\\mathbf L}L)=0$. This proves (2).",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0B67, omitted implication (1) implies (2), using restricted localized test modules."
+    "place": "Tag 0B67, lemma-tor-amplitude-localization, equivalence of (1) and (2), renaming the base A to R and the algebra B to A."
    }
   },
   {
-   "text": "Assume (2), fix $N$ and $i\\notin[a,b]$, and put $H=H^i(C_N^\\bullet)$. Step 5 and (2), tested with $L=N_{\\mathfrak p}$, give $H_{\\mathfrak q}=0$ for every prime $\\mathfrak q\\subset A$. To conclude without a finiteness hypothesis, suppose $0\\ne x\\in H$. Its annihilator $I=\\{a\\in A:ax=0\\}$ is a proper ideal. By [lem-weil-pbc-proper-ideal-contained-in-maximal] choose a maximal ideal $\\mathfrak m\\supseteq I$. It is prime: if $uv\\in\\mathfrak m$ and $u\\notin\\mathfrak m$, write $1=c+du$ with $c\\in\\mathfrak m$ and multiply by $v$ to get $v\\in\\mathfrak m$. As $H_{\\mathfrak m}=0$, the fraction criterion of [def-weil-pbc-module-localization] gives $s\\notin\\mathfrak m$ with $sx=0$, contradicting $s\\in I\\subseteq\\mathfrak m$. Hence $H=0$. All $N$ and all degrees outside the interval were arbitrary, so (1) holds. If $A$ is the zero ring, every $A$-module is zero already; the same argument is vacuous. The zero complex, $a=b$, and the identity ring map cause no exceptional step.",
+   "text": "Assume (2), and fix $N$ and $i\\notin[a,b]$. Step 2 with the test modules $N_{\\mathfrak p}$ gives $H_{\\mathfrak q}=0$ for every prime, where $H=H^i(C_N)$. If $0\\ne x\\in H$, its annihilator $I$ is proper. Choose a maximal ideal $\\mathfrak m\\supset I$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]. It is prime: if $uv\\in\\mathfrak m$ and $u\\notin\\mathfrak m$, maximality gives $1=c+du$ with $c\\in\\mathfrak m$; multiplying by $v$ gives $v\\in\\mathfrak m$. Since $H_{\\mathfrak m}=0$, the fraction criterion [def-weil-pbc-module-localization] supplies $s\\notin\\mathfrak m$ with $sx=0$, contrary to $s\\in I\\subset\\mathfrak m$. Thus $H=0$, proving (1). For $A=0$ every $A$-module is zero; the empty prime spectrum causes no exception.",
    "uses": [
     "lem-weil-pbc-proper-ideal-contained-in-maximal",
     "def-weil-pbc-module-localization"
@@ -93,18 +60,17 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0B67, proof of (3) implies (1), here using all primes; algebra.tex Tag 00HN (lemma-characterize-zero-local), proof of (1) and (2), with Tag 00E0 (lemma-Zariski-topology)."
+    "place": "Tag 0B67, lemma-tor-amplitude-localization, equivalence of (1) and (2), renaming the base A to R and the algebra B to A."
    }
   }
  ],
  "proof_deps": [
   "lem-pc-source-module-kflat-resolution",
-  "lem-pc-source-kflat-module-tensor-model",
-  "def-pc-module-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
+  "lem-trf-relative-tensor-test-model-restriction",
   "lem-weil-pbc-localization-module-exact",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-pc-kflat-extension-of-scalars",
+  "lem-trf-relative-tensor-localized-resolution-comparison",
+  "def-weil-abstract-derived-category",
   "def-weil-pbc-module-localization",
   "lem-weil-pbc-proper-ideal-contained-in-maximal"
  ],
@@ -234,38 +200,45 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-relative-tor-amplitude-localization",
   "worker": "stage1",
-  "summary": "Preserved the unrestricted relative statement of Stacks 0B67. Gave seven steps using resolutions over the actual tensor base, proving the localized tensor identity with explicit fractions and total differentials, proving the omitted forward implication, and proving detection by annihilators. Reused existing resolution, K-flat scalar-extension, exact-localization, cohomology and maximal-ideal nodes; no new nodes, Lean writing or compilation.",
+  "summary": "Rebased the retained Q137 repair onto the current seven-step DAG baseline, following the released stage-1 re-split order despite the historical passing review. The statement, statement dependencies and blueprint route are unchanged. Two independent statement-only comparison nodes retain the test-resolution restriction and simultaneous-localization arguments; the four-step parent assembly is below 3000 characters. Re-read every current cited statement and verified all ten exact quotation entries. Clarified that the localized augmentation is a K-flat resolution, hence a quasi-isomorphism as well as a K-flat source, and explicitly typed its comparison in D(A_q) before restriction to R_p. Retained all previous arguments, citations and search results in the report and log.",
   "blueprint": "Realizes the existing blueprint.from place: algebraic localization in the affine relative-Tor comparison (0DHY invoking 0B67), in the coherent relative-duality auxiliary branch of lem-trf-local-term-locality, proof (1)--(2). No unit route or blueprint ancestry changed.",
   "tool_uses": [
    {
     "node": "lem-pc-source-module-kflat-resolution",
-    "why": "Generic unbounded module-resolution existence over the actual tensor base, used for the test module and an auxiliary R-resolution in the explicit tensor-computation roof; the local-term unit has no ring-level replacement."
+    "why": "Generic module resolution or exact-localization/cohomology tool for arbitrary unbounded complexes; no local-term unit node replaces this algebraic input."
    },
    {
-    "node": "lem-pc-source-kflat-module-tensor-model",
-    "why": "Generic K-flat tensor computation with an arbitrary other complex, used over R and R_p; it supplies no Tor-amplitude assertion."
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Generic module resolution or exact-localization/cohomology tool for arbitrary unbounded complexes; no local-term unit node replaces this algebraic input."
    },
    {
-    "node": "lem-pc-kflat-extension-of-scalars",
-    "why": "Generic preservation of module K-flatness under any scalar extension, used for the resolution of N at R_p; it supplies no localization criterion."
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic module resolution or exact-localization/cohomology tool for arbitrary unbounded complexes; no local-term unit node replaces this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "why": "Generic module resolution or exact-localization/cohomology tool for arbitrary unbounded complexes; no local-term unit node replaces this algebraic input."
    }
   ]
  },
  "tool_uses": [
   "lem-pc-source-module-kflat-resolution",
   "lem-pc-source-kflat-module-tensor-model",
-  "lem-pc-kflat-extension-of-scalars"
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-N5-7d9561be4",
-  "group": "N5",
+  "reviewer": "NT-cc-Q137-239d625dc",
+  "group": "Q137",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-7d9561be4 (reviewer sub-agent of L); spot-checked: Read the complete item, packet, required guidance, unit/chapter route, Stacks 0B67 source, and every cited node statement. The seven-step proof correctly handles unbounded complexes, explicit base-change R_p→A_q, K-flat resolutions, localization, and annihilator detection without extra hypotheses. No new nodes, duplicates, circularity, route-pivot machinery, SGA violation, or batch-5 dependency found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-239d625dc (reviewer sub-agent of L); spot-checked: This is the 4th push of the 2026-10-22 human re-split (side-live repair note: at least 2 statement-only nodes, parent at most 3000 chars, old proof 6229 chars). The earlier heads 6b25945f9b7f, 097dbc6554ba and 680c7f727cbf all received PASS. Against 680c, both new nodes are byte-identical. The item changed only in split_report and in the wording of step 2 ('is a K-flat resolution', 'in D(A_q)'); its uses are unchanged. Statement, stmt_deps, source, blueprint and lean are unchanged. Live and side-live still hold the 7-step N5 proof, and neither new id exists in either clone, so nothing supersedes this delivery. Item vs source: Stacks more-algebra l.17184 0B67, (1)<=>(2) with A->B renamed to R->A; exact, nothing weakened. Node test-model-restriction holds old step 1. Res Tot(K(x)_R P) is isomorphic to Res K (x)^L N[0] in D(R), via lem-pc-source-kflat-module-tensor-model and the signed flip (l.14536). It is natural in (f,g,h) with e'h=g[0]e, and taking f = multiplication by a gives the A-action. True. Node localized-resolution-comparison holds old steps 3-4. P_p is K-flat by 06Y1 (l.14210) and is a resolution because localization is exact. (K(x)_R P)_q = K_q (x)_{R_p} P_p, since elements of R minus p act invertibly on K_q. I checked the inverse chain formulas and the Koszul sign. True. Parent (2639 chars): old steps 2, 5, 6 and 7 are kept essentially verbatim. Each application has its hypotheses, including the K-flat resolution over R_p supplied by the second node, and step 4 needs no finite generation. No old argument was dropped, and the two nodes are of comparable size (1263 vs 2156 chars). Edge cases A=0, K=0, N=0, a=b, id, and nonflat Z->Z/2 all pass. No SGA is cited, and there are no duplicates (second-factor-functor and mixed-restriction are tools only). Advisory: the item tool_uses entries for lem-pc-source-kflat-module-tensor-model and lem-pc-kflat-extension-of-scalars are stale."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.RelativeTorAmplitudeLocalization",
@@ -285,5 +258,16 @@
   "result": "pass",
   "note": "Clause-by-clause match with node and Stacks 0B67 (1)<->(2): R→A over CommRing, arbitrary unbounded K, a≤b, tensor over R after restricting along φ, all q : PrimeSpectrum A, p = comap φ q, localizedModuleFunctor then restrictScalars along the canonical Localization.localRingHom, test modules in degree 0, same (i<a ∨ b<i), ↔. Derived ⊗ synthesized as the project's single K-flat derived monoidal instance; (1) is torAmplitudeIn written out, so no duplicate. Common universe u follows the size convention; edge cases (A=0 vacuous, R=0, zero complex, a=b, id) covered. Only node lean field added; statement verbatim; docstrings carry source, blueprint id and 7 proof steps; only sorry; no hollow defs. Report has Worker report and Second reading by Q05 (brief but concrete). nt_compile --json clean in 4.3 s, no warnings. No fixes needed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

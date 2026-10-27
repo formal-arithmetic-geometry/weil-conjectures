@@ -54,160 +54,134 @@
  ],
  "proof": [
   {
-   "text": "Put $Q_n=L_0/\\pi_E^nL_0$. By [det-pe-derived-nakayama-resolution], derived reduction is the two-term complex $[L_0\\xrightarrow{\\pi_E^n}L_0]$ in degrees $-1,0$. On a covering trivializing $L_0$, multiplication by $\\pi_E^n$ is injective on each of its finitely many coefficient summands, by the same node's exact coefficient sequence. Thus its kernel sheaf is zero, its cokernel is $Q_n$, and $L_0\\otimes^{\\mathbf L}(A_n)_S\\simeq Q_n[0]$. On this covering $Q_n$ is finite free over the finite constant ring $A_n$, so it is locally constant with finite values. Finiteness of $A_n$ is supplied by [lem-weil-pbc-standard-quotients-perfect].",
+   "text": "The generator extension is fully faithful onto modules supported on the locally closed immersion. Tensoring an extended module with a pulled-back point module keeps that support. Restrict, use the coefficient pullback isomorphism, and reconstruct; uniqueness under the fully faithful restriction proves naturality. The extension of a lisse module is flat, so the single-object tensor comparison gives the natural derived reduction isomorphism.",
    "uses": [
-    "det-pe-derived-nakayama-resolution",
-    "lem-weil-pbc-standard-quotients-perfect"
+    "lem-sfb-locally-closed-generator-tensor-intersection",
+    "det-pe-derived-nakayama-resolution"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
-    "place": "Reduction paragraph: flat lattice and finite quotient"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+    "place": "Torsion reduction proof, Lean implementation step 1"
    }
   },
   {
-   "text": "The field $k$ has only two ideals and its one-point spectrum is quasi-compact. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $X$ a Noetherian scheme. By the affine-cover definition [pqf-def-locnoeth] and quasi-compactness choose finitely many affine opens with Noetherian coordinate rings. Each has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space]. Any ascending chain of opens of $X$ stabilizes on each chart, hence on $X$ by taking the maximum of these finitely many stabilization indices. The closed subspace $\\overline S$ is topologically Noetherian as well: if $O_m=\\overline S\\cap W_m$ is an ascending chain of opens there, replace $W_m$ by $\\bigcup_{j\\le m}W_j$ to obtain an ascending lifting chain in $X$. By [def-weil-constructible-subset], every subset of these topologically Noetherian spaces is retrocompact. In particular the complementary open of $i$ and the open $S\\subseteq\\overline S$ are retrocompact; hence their open immersions, including $u$, are quasi-compact.",
+   "text": "Finite type over the field and quasi-compactness make X Noetherian. The closed and open subspaces are topologically Noetherian, so the open immersion is quasi-compact. Extension of scalars sends a finite direct sum of regular modules to the corresponding finite free quotient module. The quotient thus has finite constant local models, and open extension and closed pushforward preserve its finite constructible stratification.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
     "pqf-def-locnoeth",
-    "lem-sc-affine-noetherian-underlying-space",
-    "def-weil-constructible-subset"
+    "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "def-sfb-coefficient-map"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
-    "place": "Reduction paragraph: extension, constructibility and classical origin"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+    "place": "Torsion reduction proof, Lean implementation step 2"
    }
   },
   {
-   "text": "Use the retrocompactness and quasi-compactness established in step 2. Apply [lem-weil-pbc-proetale-ringed-open-closed] with $A=\\mathcal O_{E,X}$ to $i$. The coefficient isomorphisms $f^{-1}\\mathcal O_{E,T}\\simeq\\mathcal O_{E,T'}$ of [sk-def-sfb-coefficient-morphisms] identify the theorem's inverse-image ring sheaves with the specified coefficients. Thus $i_*$ is exact for the integral coefficient ring; $u_!$ is exact by [sk-def-sfb-module-lower-shriek], so $a_!$ is exact as well. Apply the locally closed projection formula [det-lem-int-tensor-projection] with $\\Lambda=\\underline{\\mathcal O_E}$, $M=L_0$, and $L=(A_n)_X$. Its right side contains $a^*(A_n)_X=u^*i^*(A_n)_X$; the coefficient isomorphisms of [sk-def-sfb-coefficient-morphisms] for the condensed ring $A_n$, along $i$ and then $u$, identify it with $(A_n)_S$, compatibly with the $\\mathcal O_{E,S}$-action induced by $\\mathcal O_E\\to A_n$ since these isomorphisms are natural in the coefficient ring. Its displayed isomorphism and step 1 then give $(a_!L_0)\\otimes^{\\mathbf L}(A_n)_X\\simeq a_!Q_n$, with the right side in degree zero by exactness.",
+   "text": "The ordinary scalar-extension tensor isomorphism identifies the integral tensor quotient with restriction of the module over the actual quotient ring. Restriction of scalars commutes with the chosen open extension and closed pushforward. Apply the normalized finite discrete encoding. Its section-action formula and the constant-function map show that every integral scalar acts as its actual quotient. Transfer the finite constant stratification to ordinary module sheaves and apply constructible etale origin.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-module-lower-shriek",
-    "det-lem-int-tensor-projection"
+    "lem-weil-pbc-integral-reduction-tensor",
+    "def-sfb-comap-open-immersion-shriek-iso",
+    "def-sfb-comap-lower-star-iso",
+    "lem-sfb-regular-scalar-extension-multiplication",
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-pe-finite-discrete-encoding-pullback-fixed",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
-    "place": "Reduction paragraph: extension, constructibility and classical origin"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+    "place": "Torsion reduction proof, Lean implementation step 3"
    }
   },
   {
-   "text": "On the cover of step 1, $Q_n\\simeq(A_n)_S^{r}$, the finite constant local model with scalar module $A_n^r$; hence it is constructible on the one-stratum partition of $S$ by [sk-def-sfb-constructible]. Apply [lem-weil-pbc-condensed-constructible-open-closed-images] first to $u$ and then to $i$, using the finite discrete condensed ring $A_n$, the quasi-compact open $u$ and the quasi-compact open complementary to $i$ just checked. This gives a finite constructible stratification on whose pieces $a_!Q_n$ is locally finitely presented. Locally on each of these strata, a finite presentation writes the restricted sheaf as the cokernel of a morphism $(A_n)^s\\to(A_n)^t$ of finite constant free module sheaves. Apply [lem-weil-pbc-finite-constant-proetale-cokernel] on each scheme in this covering: both scalar modules are finite because $A_n$ is finite. The cokernel is therefore finite locally constant, including when either rank is zero. These local trivializations are exactly the finite-local-constancy condition on the stratum. Thus $a_!Q_n$ is intrinsically constructible, and [lem-weil-pbc-finite-ring-constructible-sheaf-origin] supplies $F_n$ and $\\nu_X^*F_n\\simeq a_!Q_n$.",
+   "text": "Apply invariance of finite-type dimension under extension of the residue field to its algebraic closure and the pullback associativity isomorphism. This turns the given geometric fibre bound into the ordinary fibre bound for p.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "lem-weil-pbc-condensed-constructible-open-closed-images",
-    "lem-weil-pbc-finite-constant-proetale-cokernel",
-    "lem-weil-pbc-finite-ring-constructible-sheaf-origin"
+    "lem-sf-field-extension-dimension-upper-bound",
+    "def-pc-base-change"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
-    "place": "Reduction paragraph: extension, constructibility and classical origin"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+    "place": "Torsion reduction proof, Lean implementation step 4"
    }
   },
   {
-   "text": "The base change $p_V$ is proper by [lem-pc-proper-base-change]. To verify its fibre-dimension hypothesis, let $T$ be any finite-type fibre over its residue field $K_0$ and let $K/K_0$ be a field extension. A finite affine cover $\\operatorname{Spec}B_j$ of $T$ pulls back to the cover $\\operatorname{Spec}(B_j\\otimes_{K_0}K)$ of $T_K$ by [lem-weil-pbc-fibre-product-affine-spectra], [lem-weil-pbc-open-fibre-product] and the fibre-product identities [def-pc-base-change]. The empty scheme stays empty. If $T$ is nonempty, a nonzero $B_j$ stays nonzero under this scalar extension (a $K_0$-basis becomes a $K$-basis), so $T_K$ is nonempty too. For both nonempty schemes, [lem-pc-dimension-affine-open-cover] and [lem-pc-scheme-dimension-local-rings] express topological dimension as the supremum of these chart ring dimensions. Each chart dimension is unchanged by [lem-pc-dim-base-change], so $\\dim T_K=\\dim T$. Applied first to $X_y$ and $\\overline{\\kappa(y)}/\\kappa(y)$, this turns the geometric-fibre bound into the ordinary-fibre bound. For $v\\in V$ mapping to $y$, the fibre-product identity identifies $(X_V)_v$ with $X_y\\times_{\\kappa(y)}\\kappa(v)$; another application gives the same bound $d$. Restriction compatibility [lem-weil-pbc-comparison-pullback] identifies $r^*a_!Q_n$ with $\\nu_{X_V}^*F_{n,V}$, where $F_{n,V}$ is the étale inverse image of $F_n$ along $r$. The underlying abelian étale sheaf $F_{n,V}$ is killed by the positive integer $|A_n|$: the finite additive group of $A_n$ is killed by its order, and its unit therefore satisfies $|A_n|\\cdot1=0$. Apply [lem-kun-proper-torsion-cd-bound] to $p_V$ and this torsion abelian sheaf to obtain $R^qp_{V,\\mathrm{et},*}F_{n,V}=0$ for $q>2d$. The theorem imposes no Noetherian condition on $V$.",
+   "text": "The additive group of the finite coefficient ring is killed by its positive order. Therefore every section of the underlying abelian etale module sheaf is killed by that order, hence the sheaf is torsion. The proper torsion relative cohomological-dimension theorem gives vanishing of its higher direct images in degrees greater than 2d.",
    "uses": [
-    "lem-pc-proper-base-change",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-pc-base-change",
-    "lem-pc-dimension-affine-open-cover",
-    "lem-pc-scheme-dimension-local-rings",
-    "lem-pc-dim-base-change",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-kun-proper-torsion-cd-bound",
-    "lem-weil-pbc-open-fibre-product"
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "lem-kun-proper-torsion-cd-bound"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095U, lemma-cohomological-dimension-proper; algebra.tex Tag 00P3, lemma-dimension-preserved-field-extension"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+    "place": "Torsion reduction proof, Lean implementation step 5"
    }
   },
   {
-   "text": "By [def-weil-proper-morphism], $p_V$ is separated and of finite type. Finite type includes quasi-compactness [def-weil-finite-type-morphism], and [lem-pc-separated-quasi-separated] makes it quasi-separated. Therefore [sk-thm-pe-direct-image-comparison] applies to $p_V$ and the bounded-below étale abelian complex $F_{n,V}[0]$, with discrete coefficients $\\mathbf Z$. It gives $Rp_{V,\\mathrm{proét},*}\\nu_{X_V}^*F_{n,V}\\simeq\\nu_V^*Rp_{V,\\mathrm{et},*}F_{n,V}$. Since comparison inverse image is exact, taking cohomology shows $R^qp_{V,\\mathrm{proét},*}(r^*a_!Q_n)=0$ for $q>2d$. Work here with the underlying abelian sheaves throughout; no change between integral condensed and constant coefficient categories occurs in this comparison.",
+   "text": "Properness gives the quasi-compactness and quasi-separatedness needed for etale/pro-etale direct-image comparison. Apply comparison to the sheaf in degree zero. Exact comparison commutes with homology and transfers higher direct-image vanishing to Y_proet.",
    "uses": [
+    "sk-thm-pe-direct-image-comparison",
     "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "lem-pc-separated-quasi-separated",
-    "sk-thm-pe-direct-image-comparison"
+    "lem-pc-separated-quasi-separated"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6, lemma-morphism-comparison"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+    "place": "Torsion reduction proof, Lean implementation step 6"
    }
   },
   {
-   "text": "The hypothesis on $V$ is categorical weak contractibility [sk-def-pe-weak-contractible]. It also holds for the terminal object of $V_{\\mathrm{proét}}$. Indeed [lem-weil-proetale-weakly-etale-localization] identifies that site with $Y_{\\mathrm{proét}}/V$, and [lem-weil-pbc-localized-sheaves-over-representable] identifies its set sheaves with $\\Sh(Y_{\\mathrm{proét}})/h_V$. An epimorphism $e:F\\to G$ in this latter slice is an epimorphism of underlying sheaves: given maps $b,c:G\\to T$ with $be=ce$, pair them with the structure map $G\\to h_V$ to obtain maps $G\\to T\\times h_V$ over $h_V$; the slice epimorphism gives their equality and hence $b=c$. For a section $t:h_V\\to G$ over $h_V$, projectivity of $h_V$ now gives a lift $s:h_V\\to F$ with $es=t$. Since $e$ is over $h_V$, the composite of $s$ with $F\\to h_V$ is the identity. The fibre formula of the equivalence identifies $t$ and $s$ precisely with sections over the terminal object of the localized site. Thus evaluation at that terminal object sends every set-sheaf epimorphism to a surjection. With the constant ring $\\mathbf Z$, [lem-weil-pbc-proetale-weakly-contractible-evaluation-exact] therefore makes $\\Gamma(V,-)$ exact on abelian sheaves on $V_{\\mathrm{proét}}$. No implication from categorical contractibility to a ring-theoretic criterion is used.",
+   "text": "Categorical weak contractibility lifts sections of every epimorphism of set sheaves at V. The affine weakly contractible abelian evaluation theorem makes evaluation at V exact. Sections of p_* at V identify with sections on the pullback X times_Y V, via weakly etale localization. This restriction preserves injectives, so derived composition, exact evaluation and compatibility between bounded-below and unbounded derived functors identify the asserted cohomology with evaluation of the vanishing higher direct image.",
    "uses": [
     "sk-def-pe-weak-contractible",
+    "lem-weil-pbc-proetale-abelian-evaluation-colimits",
+    "lem-weil-pbc-proetale-restriction-injectives",
     "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-localized-sheaves-over-representable",
-    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+    "src-sbc-exact-functor-plus-unit",
+    "def-sfb-finite-derived-global-sections"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00Y1, lemma-essential-image-j-shriek; section-localize-topoi; sites-cohomology.tex Tag 0946, lemma-w-contractible (1)"
-   }
-  },
-  {
-   "text": "Put $G=r^*a_!Q_n$. By [def-sfb-finite-derived-global-sections], $R\\Gamma$ is the right derived functor of sections. Derived direct-image composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied with constant ring $\\mathbf Z$ and the global-section morphism to the point, gives $R\\Gamma(X_V,G)\\simeq R\\Gamma(V,Rp_{V,*}G)$. Since $\\Gamma(V,-)$ is exact by the preceding step, the exact-functor clause of [sk-def-sfb-derived-categories] computes the right-hand side by applying $\\Gamma(V,-)$ termwise to any representative $C^\\bullet$ of $Rp_{V,*}G$. Exactness preserves the kernels, images and quotients defining $H^q(C^\\bullet)$, so $H^q(X_V,G)\\simeq\\Gamma(V,H^q(C^\\bullet))=\\Gamma(V,R^qp_{V,*}G)$. Step 6 makes this zero for $q>2d$.",
-   "uses": [
-    "def-sfb-finite-derived-global-sections",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "sk-def-sfb-derived-categories"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+    "place": "Torsion reduction proof, Lean implementation step 7"
    }
   }
  ],
  "proof_deps": [
   "def-pc-base-change",
+  "def-sfb-coefficient-map",
+  "def-sfb-comap-lower-star-iso",
+  "def-sfb-comap-open-immersion-shriek-iso",
   "def-sfb-finite-derived-global-sections",
-  "def-weil-constructible-subset",
-  "def-weil-finite-type-morphism",
   "def-weil-proper-morphism",
-  "det-lem-int-tensor-projection",
   "det-pe-derived-nakayama-resolution",
   "lem-kun-proper-torsion-cd-bound",
-  "lem-pc-dim-base-change",
-  "lem-pc-dimension-affine-open-cover",
-  "lem-pc-proper-base-change",
-  "lem-pc-scheme-dimension-local-rings",
   "lem-pc-separated-quasi-separated",
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-condensed-constructible-open-closed-images",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-finite-constant-proetale-cokernel",
-  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-localized-sheaves-over-representable",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-pe-finite-discrete-encoding-pullback-fixed",
+  "lem-sf-field-extension-dimension-upper-bound",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "lem-sfb-locally-closed-generator-tensor-intersection",
+  "lem-sfb-regular-scalar-extension-multiplication",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-integral-reduction-tensor",
+  "lem-weil-pbc-proetale-abelian-evaluation-colimits",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
   "lem-weil-proetale-weakly-etale-localization",
   "pqf-def-locnoeth",
   "sk-def-pe-weak-contractible",
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-constructible",
-  "sk-def-sfb-derived-categories",
-  "sk-def-sfb-module-lower-shriek",
-  "sk-thm-pe-direct-image-comparison"
+  "sk-thm-pe-direct-image-comparison",
+  "src-sbc-exact-functor-plus-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
-  "place": "Reduction, Étale vanishing, Comparison, Sections; expanded using cited Stacks lemmas"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+  "place": "A2: natural flat tensor reduction, normalized finite quotient encoding, proper torsion direct-image bound, exact evaluation at V"
  },
  "mathlib_searches": [
   {
@@ -480,7 +454,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-f8a9afe78 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 8 steps and every cited statement. I also read the unit and the blueprint torsion lemma and proof, plus Stacks 095U (no Noetherian hypothesis on the base), 09A6(2), 0946(1), 09BM, 09AK/099Y, 00P3 and 0D6E. The delivery has no new nodes and the DAG stays acyclic. The statement keeps the blueprint's content. Restoring the standing setting sk-def-sfb-dc-setting is justified: I checked the counterexample of a non-quasi-compact open in Spec k[x_1,x_2,...]. The integral condensed and finite constant coefficients are kept apart. The only citer (det-proper-heart-bound-lattice) uses H^q of the underlying abelian sheaf, which matches steps 6-8 over Z. Steps 1-8 all check: the cone gives Q_n[0]; the Noetherian and retrocompact argument; i_* and u_! are exact; constructibility goes through the arbitrary-morphism cokernel lemma, with strata constructible on Noetherian X; fibre dimension survives field extension twice, so 095U applies to p_V; the qcqs comparison 09A6; the categorical weak-contractibility argument on the slice site; the 0D6E composition. The blueprint's sk-cor-pe-wc-sections is not a DAG node, and its realized nodes need a ring-theoretic w-contractible hypothesis, so avoiding it is correct. FIX: step 3 did not identify a^*(A_n)_X with (A_n)_S, which is needed to combine the projection formula with step 1. I added that identification, from the coefficient isomorphisms of sk-def-sfb-coefficient-morphisms (already cited) for the condensed ring A_n, natural in the coefficient ring. I accept the 22 declared tool_uses and the cokernel lemma lem-weil-pbc-finite-constant-proetale-cokernel as a generic tool; it should be recorded in tool_uses at merge. The wrong source pointers in lem-sc-affine-noetherian-underlying-space (0052 instead of 00FQ) and lem-weil-pbc-condensed-constructible-open-closed-images (an archived Lean section) are only reported.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.ProperHeartBoundTorsion",
   "declaration": "AlgebraicGeometry.ProEtale.properHeartBoundTorsion",
@@ -508,5 +493,15 @@
   "group": "N2",
   "result": "pass",
   "note": "Read node, 16 stmt_deps, blueprint/Stacks places, module, report. All clauses match: char>0≠ℓ via ringChar; separated finite-type X,Y and proper p over k; geometric-fibre bound hd (inline pullback equal to geometricFiberAt with 𝟙 Y); V affine and weakly contractible (u+1), not Noetherian; S→S̄→X as j open, i closed; lisse = IsLisseCoefficientModule (finite-rank Mod.IsFree on a pro-etale cover); natural Nonempty functor iso reductionFunctor(=CondensedRing.derivedTensor with (A_n)_X[0])∘a_! ≅ single0∘a_!∘(−⊗A_n); classical origin by A_n-linear iso with comparisonUpperStar of a constructible etale ULift A_n-module sheaf; H^q vanishing for q>2d via rightDerivedGlobalSections Ab of proEtaleSheafInverseImage along pullback.fst. Helpers have real data; only sorry is the theorem; docstrings carry source, blueprint tag and 8 steps; statement field verbatim; only lean and the acyclic definition dep def-sfb-lisse-coefficient-module changed. nt_compile --json clean (rc 0, ~5 s); probe #print/#check/#print axioms clean. No blocking findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261023T230308-L-3407110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

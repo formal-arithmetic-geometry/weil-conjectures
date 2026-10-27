@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-nodal-derivation-local-descent",
+ "kind": "statement",
+ "title": "Local extension and descent of derivations across a node",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and $(A,\\mathfrak m)$ a reduced Noetherian local $k$-algebra with residue field $k$ [def-weil-pbc-noetherian-ring, def-weil-residue-field]; reduced means $a^n=0$ for $n\\ge1$ implies $a=0$. Let $Q(A)$ be the localization at all non-zero-divisors and $B\\subset Q(A)$ its integral closure [def-weil-pbc-integral-closure]. Assume $B$ is a finite $A$-module with exactly two maximal ideals $\\mathfrak n_1,\\mathfrak n_2$, each with residue field $k$ [def-weil-finitely-generated-module]. Assume compatible $k$-algebra identifications\n$$\\widehat A=k[[u,v]]/(uv),\\qquad \\widehat B:=\\varprojlim_nB/\\mathfrak m^nB=B\\otimes_A\\widehat A=P:=k[[u]]\\times k[[v]]$$\n[def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series, def-weil-module-base-change], under which the map $\\widehat A\\to P$ is $h\\mapsto(h(u,0),h(0,v))$ and the residue maps of $B$ are the two constant-term maps. A $k$-derivation is a $k$-linear map satisfying $D(ab)=aD(b)+bD(a)$. Every $k$-derivation $D:A\\to A$ has a unique extension $D_B:B\\to B$; it preserves both $\\mathfrak n_i$, and in fact its composite with each $B\\to k$ is zero. Conversely every $k$-derivation $D_B:B\\to B$ preserving both $\\mathfrak n_i$ restricts to a derivation $A\\to A$. Extension and restriction are inverse additive maps. They agree with extension to $Q(A)$, given by $D(a/s)=D(a)/s-aD(s)/s^2$, and commute with localization wherever defined. Under completion every such extension has the form of a pair of continuous derivations\n$$(uf(u)\\partial_u,\\,vg(v)\\partial_v),\\qquad f(u)\\in k[[u]],\\quad g(v)\\in k[[v]],$$\nwhose restriction preserves the equal-constant subring $\\widehat A$. Here $\\partial_t(\\sum a_nt^n)=\\sum_{n\\ge1}na_nt^{n-1}$. Moreover the completed inclusions detect membership: an element of $Q(A)$ lies in $B$ if its image in $Q(A)\\otimes_A\\widehat A$ lies in $P=B\\otimes_A\\widehat A$, and an element of $B$ lies in $A$ if its image in $P$ lies in $\\widehat A$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E68 (lemma-nodal-vector-fields), forward and reverse local derivation arguments, performed in completed rings; more-algebra.tex Tag 07PE (lemma-derivation-extends)."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-field",
+  "def-weil-finitely-generated-module",
+  "def-weil-module-base-change",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\widehat A$, and let $S$ be the multiplicative set of non-zero-divisors of $A$. The Noetherian local hypothesis gives faithful flatness of $A\\to R$. Tensor the inclusions $A\\subset B\\subset Q(A)$ with the flat module $R$: they remain inclusions $R\\subset P\\subset E:=Q(A)\\otimes_A R$. Explicitly $E=S^{-1}R$: the mutually inverse maps are $(a/s)\\otimes r\\mapsto ar/s$ and $r/s\\mapsto(1/s)\\otimes r$. Multiplication by each $s\\in S$ is injective on $A$ and on $B\\subset Q(A)$; tensoring these injections shows that $s$ remains a non-zero-divisor on $R$ and on $P$. Moreover $S^{-1}P=E$: both embed in $E$, and every $r/s\\in E$ has $r\\in R\\subset P$. These identifications use only the given completed inclusions, not a product description of the uncompleted branch stalks.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat) and 00HD (lemma-flat), applied to the indicated inclusions and multiplication maps"
+   }
+  },
+  {
+   "text": "Tensor the exact sequences $B\\to Q(A)\\to Q(A)/B$ and $A\\to B\\to B/A$ with $R$. Exactness identifies the kernels of $E\\to(Q(A)/B)\\otimes_A R$ and $P\\to(B/A)\\otimes_A R$ with $P$ and $R$, respectively. Faithful-flat universal injectivity applies to both quotient modules, without a finiteness hypothesis. Thus, if $q\\in Q(A)$ maps into $P$, its class in $Q(A)/B$ is zero after tensoring and hence zero already; similarly, if $b\\in B$ maps into $R$, its class in $B/A$ is zero. This proves both membership assertions, including their converses from the inclusions.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HD (lemma-flat) and 05CK (lemma-faithfully-flat-universally-injective), applied to quotient modules"
+   }
+  },
+  {
+   "text": "Given $D:A\\to A$, the derivation-extension lemma gives $\\delta:R\\to R$ and $D_Q:Q(A)\\to Q(A)$, with $D_Q(a/s)=D(a)/s-aD(s)/s^2$. The completed derivation is $k$-linear because its successive-quotient maps are $k$-linear. The Leibniz expansion gives $d(I^{r+1})\\subseteq I^r$ for every ideal $I$ and derivation $d$. The completion-modulo-powers lemma applies to $I=\\mathfrak m$ in $A$ and to $I=\\mathfrak mB$ in $B$: both are finitely generated since $A$ is Noetherian. It identifies the inverse-limit filtrations with $\\mathfrak m^rR$ and $(\\mathfrak mP)^r$, respectively. In particular $R/\\mathfrak mR=A/\\mathfrak m=k$, so $\\mathfrak mR$ is the unique maximal ideal of the displayed nodal ring, consisting of equal-constant pairs with constant zero. Extending that ideal to $P$ gives $\\mathfrak mP=(u)\\times(v)$. Thus the topologies are the usual nodal and product power-series topologies. Every derivation of either completed ring is continuous by the ideal-power estimate, and two continuous maps into these separated rings that agree on a dense subring agree everywhere. Density and separation here follow from the same quotient identifications. These observations justify all ensuing uses of polynomial truncation and completion.",
+   "uses": [
+    "lem-weil-pbc-derivation-extends",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), clauses (1) and (2); algebra.tex Tag 05GG (lemma-hathat-finitely-generated), completion quotient and kernel identifications"
+   }
+  },
+  {
+   "text": "Write $x=(u,0)$ and $y=(0,v)$ in the equal-constant ring $R$. Say $\\delta(x)=(a(u),b(v))$ and $\\delta(y)=(c(u),d(v))$. The equation $0=\\delta(xy)=y\\delta(x)+x\\delta(y)$ says $uc(u)=0$ and $vb(v)=0$. Shifting power-series coefficients shows $c=b=0$. Equality of constant terms in each element of $R$ then gives $a(0)=d(0)=0$. There are unique series $f,g$ with $\\delta(x)=(uf,0)$ and $\\delta(y)=(0,vg)$, obtained by shifting the coefficients of $a,d$ down one position. No characteristic restriction or division by an integer is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E68 (lemma-nodal-vector-fields), equation D(uv)=0, now in the assumed completed nodal presentation"
+   }
+  },
+  {
+   "text": "For a series $h(t)$ and its polynomial truncation $h_N(t)$ in degrees at most $N$, the Leibniz rule gives $d(h_N)=h_N'(t)d(t)$ and $d(h-h_N)\\in(t)^N$ for every derivation $d:k[[t]]\\to k[[t]]$. Passing through all finite quotients proves $d(h)=h'(t)d(t)$. Conversely the coefficient formula for $h'$ obeys $(ab)'=a'b+ab'$ by finite convolution, so $uf\\partial_u$ and $vg\\partial_v$ are continuous derivations. Their product $\\Delta:P\\to P$ has both constant terms zero on every input; hence it preserves $R$. Its restriction to $R$ agrees with $\\delta$ on $k,x,y$, then on polynomials in $x,y$, and finally on $R$ by continuity and polynomial truncation. This proves the required completed formula for the forward construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E68 (lemma-nodal-vector-fields), completed axis calculation; explicit power-series truncation argument"
+   }
+  },
+  {
+   "text": "Extend $\\Delta$ from $P$ to $S^{-1}P=E$ by the localization clause. Its restriction to $S^{-1}R$ is the unique localization extension of $\\delta$, since the two derivations agree on $R$. On $Q(A)\\subset E$ it therefore equals $D_Q$, as is seen by substituting $a,s\\in A$ in the quotient formula. For $b\\in B$, its image lies in $P$, so the image of $D_Q(b)$ equals $\\Delta(b)\\in P$. The membership test of step 2 implies $D_Q(b)\\in B$. Set $D_B=D_Q|_B$. Each of its two residues equals the corresponding constant term of $\\Delta(b)$ and is zero. In particular $D_B$ preserves both maximal ideals.",
+   "uses": [
+    "lem-weil-pbc-derivation-extends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), localization uniqueness; curves.tex Tag 0E68, forward extension, using step 2 for descent"
+   }
+  },
+  {
+   "text": "Conversely let $d:B\\to B$ preserve both $\\mathfrak n_i$. For $b\\in B$, write $b=c_i+b_i$ with $c_i\\in k$ and $b_i\\in\\mathfrak n_i$, using the assumed residue identification. Then $d(b)=d(b_i)\\in\\mathfrak n_i$, so both residue composites of $d$ vanish on all of $B$. Complete $d$ for the ideal $\\mathfrak mB$ by the derivation-extension lemma, giving $\\widehat d:P\\to P$. The two residue composites still vanish: for $p\\in P$ choose $b\\in B$ representing its coordinate modulo $(\\mathfrak mB)^2$; the explicit completion formula says that $\\widehat d(p)$ modulo $\\mathfrak mB$ is represented by $d(b)$, whose two residues are zero. For $e=(1,0)$, differentiating $e^2=e$ gives $(1-2e)\\widehat d(e)=0$; since $(1-2e)^2=1$, $\\widehat d(e)=0$, also in characteristic two. Thus $\\widehat d$ acts separately on the two factors. Its values on their parameters have zero constant term, so the truncation calculation of step 5 writes it as $(uf\\partial_u,vg\\partial_v)$. In particular it preserves the equal-constant subring $R$.",
+   "uses": [
+    "lem-weil-pbc-derivation-extends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), completion formula; curves.tex Tag 0E68, reverse fixed-branch argument"
+   }
+  },
+  {
+   "text": "For $a\\in A\\subset B$, the image of $d(a)$ in $P$ is $\\widehat d(a)\\in R$. The second membership test of step 2 gives $d(a)\\in A$. Restricting a $k$-linear Leibniz map to a subring it preserves is a $k$-derivation, so this gives the reverse map. The preceding construction also proves the completed formula and preservation of the equal-constant subring for every reverse input.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E68 (lemma-nodal-vector-fields), reverse direction; membership supplied by step 2"
+   }
+  },
+  {
+   "text": "Any derivation on $B$ extending $D$ localizes uniquely to $S^{-1}B=Q(A)$, where it must be $D_Q$ by uniqueness for the localization of $A$. Thus the forward extension is unique. Restricting it returns $D$; extending the restriction of a reverse input returns that input by this uniqueness. Addition commutes with restriction, and the quotient formula is additive in $D$, so both maps are additive. For any further multiplicative set on either ring, applying the same quotient formula to $b/t$ gives the localized derivation; uniqueness makes successive localizations and the extension/restriction maps agree whenever defined. Completion compatibility was proved by equality on dense subrings in steps 5 and 7.",
+   "uses": [
+    "lem-weil-pbc-derivation-extends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), localization uniqueness and quotient formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-derivation-extends",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-local-completion-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E68 (lemma-nodal-vector-fields), completed-ring repair of the local argument, using Tag 07PE and faithfully flat completion (00MC, 05CK, 00HD)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivation.*(normaliz|integralClosure)|nodal|Derivation.*completion",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"grep\", \"query\": \"derivation.*(normaliz|integralClosure)|nodal|Derivation.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derivation extensionality, square-zero lifts and smooth loci do not give extension and descent through a nodal normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derivations of a node correspond to derivations on its normalization vanishing on the branches",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"leansearch\", \"query\": \"Derivations of a node correspond to derivations on its normalization vanishing on the branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.noConfusion\", \"MvPolynomial.derivation_ext\", \"Derivation.ext\", \"Derivation.instAddMonoidHomClass\", \"Derivation.noConfusionType\", \"PointDerivation\", \"Derivation.mk.noConfusion\", \"PresheafOfModules.Derivation'.d_app\"], \"digest\": \"b618fa5bbf0dc747\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derivation extensionality, square-zero lifts and smooth loci do not give extension and descent through a nodal normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, AdicCompletion",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"loogle\", \"query\": \"Derivation, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derivation extensionality, square-zero lifts and smooth loci do not give extension and descent through a nodal normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derivations of a reduced nodal local algebra extend uniquely to its normalization and fix both branch points",
+   "results": "{\"t\": \"2026-10-22T06:00:40Z\", \"tool\": \"leanfinder\", \"query\": \"Derivations of a reduced nodal local algebra extend uniquely to its normalization and fix both branch points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale\", \"Differential.uniqueDifferentialAlgebraFiniteDimensional\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyUnramified.ext\", \"Algebra.Extension.homInfinitesimal\", \"derivationToSquareZeroEquivLift\", \"liftOfDerivationToSquareZero_mk_apply'\"], \"digest\": \"1889ea7e2ead1822\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derivation extensionality, square-zero lifts and smooth loci do not give extension and descent through a nodal normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of derivations preserving the conductor from a normalization to a nodal local ring using faithfully flat completion",
+   "results": "{\"t\": \"2026-10-22T06:00:40Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of derivations preserving the conductor from a normalization to a nodal local ring using faithfully flat completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"aeval_derivative_mem_differentIdeal\", \"Algebra.IsEtaleAt\", \"liftOfDerivationToSquareZero_mk_apply'\", \"Algebra.IsUnramifiedAt\", \"Algebra.smoothLocus\", \"Algebra.Etale\", \"Algebra.Generators.cMulXSubOneCotangent\"], \"digest\": \"aa376069cc23b070\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derivation extensionality, square-zero lifts and smooth loci do not give extension and descent through a nodal normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "Derivation|AdicCompletion",
+   "results": "{\"t\": \"2026-10-22T06:01:47Z\", \"tool\": \"grep\", \"query\": \"Derivation|AdicCompletion\", \"sub\": \"RingTheory/Derivation\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\"], \"digest\": \"960964a6078f8a14\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derivation extensionality, square-zero lifts and smooth loci do not give extension and descent through a nodal normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "derivation.*(normaliz|integralClosure)|nodal|Derivation.*completion",
+   "results": "{\"t\": \"2026-10-23T04:14:02Z\", \"tool\": \"grep\", \"query\": \"derivation.*(normaliz|integralClosure)|nodal|Derivation.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract derivations, polynomial derivations, square-zero lifts, etale algebras or interpolation; none asserts extension and descent at a completed node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derivations of a node correspond to derivations on its normalization vanishing on the branches",
+   "results": "{\"t\": \"2026-10-23T04:14:03Z\", \"tool\": \"leansearch\", \"query\": \"Derivations of a node correspond to derivations on its normalization vanishing on the branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.noConfusion\", \"MvPolynomial.derivation_ext\", \"Derivation.ext\", \"Derivation.instAddMonoidHomClass\", \"Derivation.noConfusionType\", \"PointDerivation\", \"Derivation.mk.noConfusion\", \"PresheafOfModules.Derivation'.d_app\"], \"digest\": \"b618fa5bbf0dc747\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract derivations, polynomial derivations, square-zero lifts, etale algebras or interpolation; none asserts extension and descent at a completed node"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, AdicCompletion",
+   "results": "{\"t\": \"2026-10-23T04:14:03Z\", \"tool\": \"loogle\", \"query\": \"Derivation, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract derivations, polynomial derivations, square-zero lifts, etale algebras or interpolation; none asserts extension and descent at a completed node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derivations of a reduced nodal local algebra extend uniquely to its normalization and fix both branch points",
+   "results": "{\"t\": \"2026-10-23T04:14:08Z\", \"tool\": \"leanfinder\", \"query\": \"Derivations of a reduced nodal local algebra extend uniquely to its normalization and fix both branch points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivationToSquareZeroEquivLift\", \"liftOfDerivationToSquareZero_mk_apply'\", \"liftOfDerivationToSquareZero_mk_apply\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"derivationToSquareZeroOfLift_apply\", \"Algebra.FormallyUnramified.lift_unique\", \"Differential.uniqueDifferentialAlgebraFiniteDimensional\", \"Algebra.IsStandardEtale\"], \"digest\": \"8d641faa6d4419db\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract derivations, polynomial derivations, square-zero lifts, etale algebras or interpolation; none asserts extension and descent at a completed node"
+  },
+  {
+   "tool": "grep",
+   "query": "Derivation|AdicCompletion",
+   "results": "{\"t\": \"2026-10-23T04:14:30Z\", \"tool\": \"grep\", \"query\": \"Derivation|AdicCompletion\", \"sub\": \"RingTheory/Derivation\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/MapCoeffs.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\"], \"digest\": \"01799786c0c5a85f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract derivations, polynomial derivations, square-zero lifts, etale algebras or interpolation; none asserts extension and descent at a completed node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of derivations preserving the conductor from a normalization to a nodal local ring using faithfully flat completion",
+   "results": "{\"t\": \"2026-10-23T04:14:32Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of derivations preserving the conductor from a normalization to a nodal local ring using faithfully flat completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"aeval_derivative_mem_differentIdeal\", \"liftOfDerivationToSquareZero_mk_apply'\", \"derivationToSquareZeroOfLift_apply\", \"derivationQuotKerSq_mk\", \"Algebra.IsUnramifiedAt\", \"derivationQuotKerSq\", \"Algebra.IsSmoothAt\", \"Algebra.Extension.infinitesimal\"], \"digest\": \"cb7687fe8d884eae\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract derivations, polynomial derivations, square-zero lifts, etale algebras or interpolation; none asserts extension and descent at a completed node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-marked-nodal-infinitesimal-fields",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Infinitesimal marked automorphisms and normalized vector fields; returned proof steps 4--6: faithful-flat membership and both directions for derivations",
+   "via": [
+    "lem-sfb-marked-nodal-infinitesimal-fields",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-derivation-local-descent",
+  "worker": "stage1",
+  "summary": "Proved both completed membership tests by faithfully flat quotient modules; calculated the nodal derivation and the reverse fixed-branch descent explicitly, and checked fraction-field uniqueness, additivity and localization. Reused five existing general algebra nodes; no new nodes or Lean changes.",
+  "blueprint": "Realizes the local rigidity prerequisite carried through marked-nodal-infinitesimal-fields in det-thm-sf-ctf-stability-direct-images, proof (3): its returned steps 4--6, forward normalization extension and reverse descent. The nearest imported ancestor is null in blueprint_refs.py, as in the existing item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derivation-extends",
+    "why": "The generic completion/localization extension theorem for derivations supplies continuity-compatible extensions and localization uniqueness; this unit has no duplicate general algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derivation-extends"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-aa4aa5455",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-aa4aa5455 (reviewer sub-agent of L); spot-checked: Read the full item (9 steps), the five cited node statements, Stacks curves 0E68 and more-algebra 07PE with their proofs, and the parent's step 3. The statement and stmt_deps are identical to Q32's creation, there are no new nodes, and there is no repair note, so this is an ordinary one-level split. Steps 1-2: faithful flatness of A->Â (00MC node), injectivity of flat tensor (00HD) and universal injectivity for arbitrary modules (05CK) applied to Q/B and B/A correctly prove both membership tests. Step 3: 05GG is applied to m in A and mB in B; mR=(u,v) and mP=(u)x(v); continuity comes from d(I^{r+1}) in I^r. Step 4: recomputed (uc,vb)=0, and the equal-constant condition gives a(0)=d(0)=0. Step 5: d(h)=h'd(t) by truncation, Δ preserves R, and Δ agrees with δ on a dense subring. Step 6: by uniqueness of the 07PE(2) localization on E=S^{-1}R=S^{-1}P, Δ_E equals δ_E, which restricts to D_Q; step 2 then gives D_Q(B) in B, with zero residues by the assumed constant-term residue maps. Step 7: residues vanish on all of B; the explicit 07PE(1) formula and P/mP=B/mB carry this to the completion; the idempotent argument works in characteristic 2; applied to D_B this also gives the completed form of the forward map. Steps 8-9: descent and uniqueness, inverse maps and additivity from localization uniqueness, using S^{-1}B=Q(A). The elementary marks on steps 4, 5 and 8 are justified. Edge cases: split node with x∂_x (extends) and (∂_x,0) (excluded); the irreducible node y^2=x^2(1+x); characteristic p. The worker's source-error note is correct: the uncompleted Stacks exact sequence fails for an irreducible node, the item's completed hypotheses avoid it, and nothing was weakened. No duplicate in the DAG; sibling lem-sfb-nodal-completed-normalization-model supplies the hypotheses only. Tool use lem-weil-pbc-derivation-extends (sk-thm-p1, generic 07PE) accepted; the other four citations are Mathlib leaves. proof_deps equals the union of uses; no SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NodalDerivationLocalDescent",
+  "declaration": "RingTheory.nodal_derivation_local_descent",
+  "declarations": [
+   "RingTheory.nodalAxes",
+   "RingTheory.nodalAxisAction",
+   "RingTheory.branchPreservingDerivations",
+   "RingTheory.nodal_derivation_local_descent"
+  ],
+  "file": "lean/Sheaf/RingTheory/NodalDerivationLocalDescent.lean",
+  "statement": "theorem nodal_derivation_local_descent {k : Type u} [Field k] [IsAlgClosed k] {A : Type v} [CommRing A] [Algebra k A] [IsLocalRing A] [IsNoetherianRing A] [IsReduced A] (B : Subalgebra A (FractionRing A)) (hB : B = integralClosure A (FractionRing A)) [Module.Finite A B] (ρA : (A ⧸ IsLocalRing.maximalIdeal A) ≃ₐ[k] k) (n₀ n₁ : Ideal B) (hn₀ : n₀.IsMaximal) (hn₁ : n₁.IsMaximal) (hne : n₀ ≠ n₁) (hmax : ∀ n : Ideal B, n.IsMaximal → n = n₀ ∨ n = n₁) (ρ₀ : (B ⧸ n₀) ≃ₐ[k] k) (ρ₁ : (B ⧸ n₁) ≃ₐ[k] k) (eA : AdicCompletion (IsLocalRing.maximalIdeal A) A ≃ₐ[k] (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1})) (eB : AdicCompletion ((IsLocalRing.maximalIdeal A).map (algebraMap A B)) B ≃ₐ[k] (PowerSeries k × PowerSeries k)) (eT : (B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A) ≃ₐ[k] (PowerSeries k × PowerSeries k)) (hBT : ∀ b : B, eB (algebraMap B _ b) = eT (b ⊗ₜ[A] 1)) (haxes : ∀ h : MvPowerSeries (Fin 2) k, eT (1 ⊗ₜ[A] eA.symm (Ideal.Quotient.mk _ h)) = nodalAxes h) (hρ₀ : ∀ b : B, ρ₀ (Ideal.Quotient.mk n₀ b) = PowerSeries.constantCoeff (eT (b ⊗ₜ[A] 1)).1) (hρ₁ : ∀ b : B, ρ₁ (Ideal.Quotient.mk n₁ b) = PowerSeries.constantCoeff (eT (b ⊗ₜ[A] 1)).2) : (∃ F : Derivation k A A ≃+ branchPreservingDerivations (k := k) n₀ n₁, (∀ (D : Derivation k A A) (a : A), (F D).val (algebraMap A B a) = algebraMap A B (D a)) ∧ (∀ (d : branchPreservingDerivations (k := k) n₀ n₁) (a : A), algebraMap A B (F.symm d a) = d.val (algebraMap A B a)) ∧ (∀ (D : Derivation k A A) (b : B), ρ₀ (Ideal.Quotient.mk n₀ ((F D).val b)) = 0 ∧ ρ₁ (Ideal.Quotient.mk n₁ ((F D).val b)) = 0) ∧ (∀ D : Derivation k A A, ∀ d : Derivation k B B, (∀ a : A, d (algebraMap A B a) = algebraMap A B (D a)) → d = (F D).val) ∧ (∀ D : Derivation k A A, ∃ DQ : Derivation k (FractionRing A) (FractionRing A), (∀ b : B, DQ b.val = ((F D).val b).val) ∧ (∀ (a : A) (s : nonZeroDivisors A), DQ (Localization.mk a s) = Localization.mk (D a) s - Localization.mk (a * D (s : A)) (s ^ 2))) ∧ (∀ D : Derivation k A A, ∃ f g : PowerSeries k, ∃ δ : Derivation k (PowerSeries k × PowerSeries k) (PowerSeries k × PowerSeries k), ∃ δA : Derivation k (AdicCompletion (IsLocalRing.maximalIdeal A) A) (AdicCompletion (IsLocalRing.maximalIdeal A) A), (∀ p, δ p = nodalAxisAction f g p) ∧ (∀ b : B, δ (eB (algebraMap B _ b)) = eB (algebraMap B _ ((F D).val b))) ∧ (∀ a : A, δA (algebraMap A _ a) = algebraMap A _ (D a)) ∧ (∀ r, δ (eT (1 ⊗ₜ[A] r)) = eT (1 ⊗ₜ[A] δA r)) ∧ (∀ p : PowerSeries k × PowerSeries k, PowerSeries.constantCoeff p.1 = PowerSeries.constantCoeff p.2 → PowerSeries.constantCoeff (δ p).1 = PowerSeries.constantCoeff (δ p).2) ∧ (∀ N : ℕ, ∃ M : ℕ, ∀ p q : PowerSeries k × PowerSeries k, (∀ j < M, PowerSeries.coeff j p.1 = PowerSeries.coeff j q.1 ∧ PowerSeries.coeff j p.2 = PowerSeries.coeff j q.2) → ∀ j < N, PowerSeries.coeff j (δ p).1 = PowerSeries.coeff j (δ q).1 ∧ PowerSeries.coeff j (δ p).2 = PowerSeries.coeff j (δ q).2)) ∧ (∀ (D : Derivation k A A) (S : Submonoid A) (T : Submonoid B), ∃ DS : Derivation k (Localization S) (Localization S), ∃ DT : Derivation k (Localization T) (Localization T), (∀ (a : A) (s : S), DS (Localization.mk a s) = Localization.mk (D a) s - Localization.mk (a * D (s : A)) (s ^ 2)) ∧ (∀ (b : B) (t : T), DT (Localization.mk b t) = Localization.mk ((F D).val b) t - Localization.mk (b * (F D).val (t : B)) (t ^ 2)) ∧ (∀ ℓ : Localization S →ₐ[k] Localization T, (∀ a : A, ℓ (algebraMap A _ a) = algebraMap B _ (algebraMap A B a)) → ∀ x, DT (ℓ x) = ℓ (DS x)))) ∧ (∀ q : FractionRing A, (∃ p : B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A, TensorProduct.map B.val.toLinearMap LinearMap.id p = q ⊗ₜ[A] 1) ↔ q ∈ B) ∧ (∀ b : B, (∃ r : AdicCompletion (IsLocalRing.maximalIdeal A) A, eT (b ⊗ₜ[A] 1) = eT (1 ⊗ₜ[A] r)) ↔ ∃ a : A, algebraMap A B a = b)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7bbf4c1d5",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read item node (only lean changed vs live; first S2 delivery), 9 Mathlib-leaf stmt_deps, module, report (Worker report + Second reading present; self second reading per dispatcher policy, advisory). lean.statement verbatim in file. Hypotheses match node: IsAlgClosed k, local Noetherian reduced A with ρA, B=integralClosure in FractionRing A, Module.Finite, two distinct exhaustive maximal ideals with k-residue isos, eA/eB/eT with hBT, haxes (nodalAxes kills uv), hρ constant terms; eB/eT agreement only on B is forced canonical by continuity/density, hypotheses satisfiable. Conclusions: additive equiv F onto branch-preserving subgroup with both restriction equations, uniqueness over all B-derivations (true via B⊂S^-1A), zero residues, DQ quotient formula, arbitrary S/T localization commutation (true), completed pair δ=nodalAxisAction f g with eB/eT/δA intertwining, equal-constant preservation, continuity, both faithful-flat membership iffs. Edge cases: char 2/p, zero derivation, 0∈S, non-domain A, independent universes u,v. Helpers nodalAxes/nodalAxisAction/branchPreservingDerivations are real data, docstrings with source+blueprint, listed in declarations; no existing owner found in live lean/Sheaf or Mathlib. Proof sorry only; imported proof-dep module exists. Not recompiled (no change). Advisory: docstring merges node steps 8-9."
+ }
+}

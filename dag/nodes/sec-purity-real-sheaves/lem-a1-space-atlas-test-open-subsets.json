@@ -1,0 +1,241 @@
+{
+ "id": "lem-a1-space-atlas-test-open-subsets",
+ "kind": "statement",
+ "title": "Scheme-test open-subset identities through a fixed etale atlas",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $E$ an algebraic space over $S$ [def-trf-algebraic-space]. All schemes are over $S$ in the universes of [def-weil-size-convention]. Write $|E|$ for its field-valued point classes and $|t|:|T|\\to|E|$ for the map of a scheme-source morphism, as in [def-a1-algebraic-space-point-classes]. Fix a representable surjective etale morphism $w:h_W\\to E$ from a scheme, and let $t:h_T\\to E$ be any morphism from a scheme. The sheaf fibre product $Q=T\\times_EW$ is represented by a scheme. Write $q:Q\\to T$ and $b:Q\\to W$ for its projections. The map $q$ is surjective etale [def-weil-etale-morphism], hence continuous and open on scheme points. For every subset $A\\subseteq|E|$, $$ |q|^{-1}(|t|^{-1}(A))=|b|^{-1}(|w|^{-1}(A)),\\qquad |q|\\bigl(|b|^{-1}(|w|^{-1}(A))\\bigr)=|t|^{-1}(A). $$ If $|w|^{-1}(A)$ is open, then $|t|^{-1}(A)$ is open. For every subset $B\\subseteq|T|$, $$ |b|\\bigl(|q|^{-1}(B)\\bigr)=|w|^{-1}(|t|(B)). $$ If $t$ is representable etale and $B$ is open in $T$, then $b$ is etale and the last displayed subset is open in $W$. These assertions use only the scheme topologies and assume no topology on $|E|$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03BX (lemma-topology-points), proof: the presentation pullback square, continuity and openness on scheme tests; Tag 03H4 (lemma-points-cartesian), point lifting for the image identity."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-algebraic-space-point-classes",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-a1-space-fibre-product-point] to choose the representing scheme Q and its projections q,b, retaining its explicit common-field point-lifting property. Apply the scheme-test predicates [def-trf-algebraic-space] for w to obtain etale and surjective representing squares. Yoneda full faithfulness and uniqueness of the representing pullback identify each of these squares with Q, so q is etale and surjective. Scheme morphisms are continuous [def-pc-scheme], and [lem-weil-pbc-etale-morphism-open-map] makes q open.",
+   "uses": [
+    "lem-a1-space-fibre-product-point",
+    "def-trf-algebraic-space",
+    "def-pc-scheme",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), proof: the presentation pullback diagram and scheme-topological openness; Tag 03H4 (lemma-points-cartesian), common-field lifting of compatible points."
+   }
+  },
+  {
+   "text": "The pullback square satisfies $t\\circ h_q=w\\circ h_b$. For $z\\in Q$, the residue-field maps $\\kappa(q(z))\\to\\kappa(z)$ and $\\kappa(b(z))\\to\\kappa(z)$ show that the classes defining $|t|(|q|(z))$ and $|w|(|b|(z))$ have equal representatives over $\\kappa(z)$, by that square. Thus $|t|\\circ|q|=|w|\\circ|b|$ by [def-a1-algebraic-space-point-classes].",
+   "uses": [
+    "def-a1-algebraic-space-point-classes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), proof: the presentation pullback diagram and scheme-topological openness; Tag 03H4 (lemma-points-cartesian), common-field lifting of compatible points."
+   }
+  },
+  {
+   "text": "For $A\\subseteq|E|$, membership in either $|q|^{-1}(|t|^{-1}(A))$ or $|b|^{-1}(|w|^{-1}(A))$ means that the common value in step 2 belongs to $A$, proving the first equality. Since $|q|$ is surjective, every $x\\in|t|^{-1}(A)$ has a lift $z\\in Q$; the first equality places $z$ in $|b|^{-1}(|w|^{-1}(A))$. Conversely the image of that subset under $|q|$ lies in $|t|^{-1}(A)$. This proves the second equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), proof: the presentation pullback diagram and scheme-topological openness; Tag 03H4 (lemma-points-cartesian), common-field lifting of compatible points."
+   }
+  },
+  {
+   "text": "If $|w|^{-1}(A)$ is open in $W$, its inverse image under the continuous $|b|$ is open in $Q$. Its image under the open map $|q|$ is open in $T$, and step 3 identifies that image with $|t|^{-1}(A)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), proof: the presentation pullback diagram and scheme-topological openness; Tag 03H4 (lemma-points-cartesian), common-field lifting of compatible points."
+   }
+  },
+  {
+   "text": "First bridge quotient equality to the explicit common-field witnesses accepted by [lem-a1-space-fibre-product-point]. The relation defining [def-a1-algebraic-space-point-classes] is reflexive and symmetric. For transitivity, form the fibre product of the two common field spectra over the middle representative [def-pc-fibre-product]. Their unique points have the same image. By the Mathlib leaf [lem-weil-pbc-scheme-pullback-compatible-point], this fibre product has a point; its residue field supplies a common extension. Functoriality of the presheaf maps proves the transitive relation. Therefore equality in the generated quotient implies one common-field relation. For residue-field representatives of x,y, compose its two maps with the residue-field maps to T,W; these have the required underlying points. Now for B in T, commutativity gives b(q-inverse(B)) contained in w-inverse(t(B)). Conversely choose x in B with t(x)=w(y), use the quotient bridge and the point-lifting clause of [lem-a1-space-fibre-product-point] to find z with q(z)=x and b(z)=y. This proves the image equality.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-pullback-compatible-point",
+    "lem-a1-space-fibre-product-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), proof: the presentation pullback diagram and scheme-topological openness; Tag 03H4 (lemma-points-cartesian), common-field lifting of compatible points."
+   }
+  },
+  {
+   "text": "If $t$ is representable etale, its scheme test along $w$ says that $b:Q\\to W$ is etale [def-trf-algebraic-space]. For open $B\\subseteq|T|$, the set $|q|^{-1}(B)$ is open by continuity of $|q|$, and its image under $|b|$ is open by [lem-weil-pbc-etale-morphism-open-map]. Step 5 identifies this image with $|w|^{-1}(|t|(B))$. Every openness assertion concerned only the scheme spaces $Q,T,W$; no topology on $|E|$ was used.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03WT (lemma-etale-open); applied to the scheme projections in the pullback of Tag 03BX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-fibre-product-point",
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-a1-algebraic-space-point-classes",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-pullback-compatible-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03BX (lemma-topology-points), proof: the presentation pullback diagram and scheme-topological openness; Tag 03H4 (lemma-points-cartesian), common-field lifting of compatible points. Lean realization by V4: use uniqueness of scheme-test pullbacks and prove the quotient/common-field bridge via the scheme pullback point lemma (Stacks 01JT)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schemePointMap",
+   "results": "{\"t\": \"2026-10-22T07:51:52Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|schemePointMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibre product point identities for a scheme mapping to an algebraic space prove continuity and etale openness on points",
+   "results": "{\"t\": \"2026-10-22T07:51:52Z\", \"tool\": \"leansearch\", \"query\": \"Fibre product point identities for a scheme mapping to an algebraic space prove continuity and etale openness on points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.Hom.fiberι_fiberHomeo_symm\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.mk\", \"AlgebraicGeometry.Scheme.Hom.fiberι_asFiber\", \"IsEvenlyCovered.continuousAt\", \"AlgebraicGeometry.Scheme.Hom.mem_preimage\", \"AlgebraicGeometry.Scheme.Hom.asFiber\"], \"digest\": \"2cc78914d4c27420\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsOpenMap\"",
+   "results": "{\"t\": \"2026-10-22T07:51:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsOpenMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme mapping to an algebraic space pull back a fixed surjective etale atlas; inverse images of atlas-open subsets are open and images of opens are atlas-open when the map is etale",
+   "results": "{\"t\": \"2026-10-22T07:52:03Z\", \"tool\": \"leanfinder\", \"query\": \"For a scheme mapping to an algebraic space pull back a fixed surjective etale atlas; inverse images of atlas-open subsets are open and images of opens are atlas-open when the map is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\"], \"digest\": \"20e0b9c7cc1607c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space etale chart detects continuity and open images from arbitrary scheme tests through point lifting in the fibre product",
+   "results": "{\"t\": \"2026-10-22T07:52:03Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space etale chart detects continuity and open images from arbitrary scheme tests through point lifting in the fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"9b0ad463e5b4d725\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schemePointMap",
+   "results": "{\"t\": \"2026-10-23T04:11:29Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|schemePointMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibre-product image identities, scheme etale sites and scheme point representatives do not state the assertion with an algebraic-space target and arbitrary field-valued point subsets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pull back a surjective etale scheme atlas of an algebraic space and compute inverse images and images of arbitrary subsets of its field valued point classes",
+   "results": "{\"t\": \"2026-10-23T04:11:30Z\", \"tool\": \"leansearch\", \"query\": \"Pull back a surjective etale scheme atlas of an algebraic space and compute inverse images and images of arbitrary subsets of its field valued point classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver\", \"AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Hom.inv_image\", \"AlgebraicGeometry.mem_range_iff_of_surjective\", \"AlgebraicGeometry.Scheme.Hom.iSup_preimage_eq_top\", \"AlgebraicGeometry.Scheme.Hom.preimage_iSup\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\"], \"digest\": \"3516f530d7fc9a59\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibre-product image identities, scheme etale sites and scheme point representatives do not state the assertion with an algebraic-space target and arbitrary field-valued point subsets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsOpenMap\"",
+   "results": "{\"t\": \"2026-10-23T04:11:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsOpenMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibre-product image identities, scheme etale sites and scheme point representatives do not state the assertion with an algebraic-space target and arbitrary field-valued point subsets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale atlas detects open subsets of an algebraic space through scheme fibre products and surjectivity on point pairs",
+   "results": "{\"t\": \"2026-10-23T04:11:35Z\", \"tool\": \"leanfinder\", \"query\": \"An etale atlas detects open subsets of an algebraic space through scheme fibre products and surjectivity on point pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"14725daf08896d31\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibre-product image identities, scheme etale sites and scheme point representatives do not state the assertion with an algebraic-space target and arbitrary field-valued point subsets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism to a sheaf with representable diagonal induces a map on field valued point classes; a scheme atlas detects preimages of subsets and open images of etale maps",
+   "results": "{\"t\": \"2026-10-23T04:12:45Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme morphism to a sheaf with representable diagonal induces a map on field valued point classes; a scheme atlas detects preimages of subsets and open images of etale maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.PartialMap\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover_map\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"623c75ac75e8a1ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibre-product image identities, scheme etale sites and scheme point representatives do not state the assertion with an algebraic-space target and arbitrary field-valued point subsets."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-affine-etale-cover",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent in the lissity/support argument of lem-a1-affine-hc0. Extraction of returned proof steps 4-5 (test-scheme inverse images and etale open images).",
+   "via": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-space-atlas-test-open-subsets",
+  "worker": "stage1",
+  "summary": "Split the scheme-test atlas argument into six steps using existing point lifting and the existing scheme etale-open Mathlib leaf. Scheme-test representability and etaleness are direct instances of the algebraic-space definition; write out point-map commutativity, both subset inclusions and descent of openness. The statement is unchanged. No new nodes. Searches in project Lean found no attachment; two semantic Mathlib phrasings found only scheme analogues.",
+  "blueprint": "Realizes the scheme-test continuity and etale openness input extracted from steps 4-5 of lem-a1-space-affine-etale-cover, on the lem-a1-affine-hc0 lissity/support branch recorded in blueprint.from.place. Uses Stacks 03BX and 03H4 below the fixed unit; neither chapter nor unit route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-68ad42b73",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-68ad42b73 (reviewer sub-agent of L); spot-checked: Ordinary one-level split of an unsplit node created by NY's PASSed split of lem-a1-space-affine-etale-cover; it is not a re-split order. The statement is byte-identical to the NY snapshot and stmt_deps are unchanged. The proof was empty; the six steps are correct, and proof_deps equals the union of the step uses. Source check: Stacks spaces-properties 03BX (lemma-topology-points), proof paragraph 2 (U''=U×_XU' square, 'follows formally'), plus 03H4 (lemma-points-cartesian) and morphisms 03WT. Step 1: def-trf-algebraic-space scheme tests give Q a scheme and q surjective étale; continuity comes from def-pc-scheme; openness of q comes from the Mathlib leaf Scheme.Hom.isOpenMap. Step 2: |t|∘|q|=|w|∘|b| follows by restricting both residue-field representatives to κ(z), using the point-class relation. That relation is the same as the one in def-trf-algebraic-space-jointly-surjective-family, which lem-a1-space-fibre-product-point uses, so the two |E| agree. Steps 3-4: elementary set identities; both inclusions use surjectivity of q, and openness is carried down through the open map q. Step 5: point lifting via lem-a1-space-fibre-product-point with C=T, U=W; it gives existence for the specified pair (x,y). Step 6: representable étale t makes b étale (test along w); b(q⁻¹B) is open. Edge cases checked: E a scheme with w=id, T or W empty, A and B empty or full, non-injective fibre-product points. No duplicate: the sibling atlas-point-comparison needs both maps surjective étale, and point-open-calculus presupposes the topology on |E| and is correctly avoided, which also rules out a cycle. Off-unit citations are Mathlib leaves or definitions only; no tool_uses are needed. Batch-5 flag: lem-a1-space-fibre-product-point reaches sec-trace-formula only via def-trf-algebraic-space, the general definition of an algebraic space, which is already a stmt_dep of the item and is not part of the trace formula or Poincaré duality proofs. Accepted. No SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceAtlasTestOpenSubsets",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_atlas_test_open_subsets",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceAtlasTestOpenSubsets.lean",
+  "statement": "theorem exists_atlas_test_open_subsets {S : Scheme.{u}} (E : AlgebraicSpace S) (W T : Over S) (w : yoneda.obj W ⟶ E.obj.obj) (t : yoneda.obj T ⟶ E.obj.obj) (hw : IsEtale w) (hs : IsSurjective w) : ∃ (Q : Over S) (q : Q ⟶ T) (b : Q ⟶ W), IsPullback (yoneda.map q) (yoneda.map b) t w ∧ Etale q.left ∧ Surjective q.left ∧ Continuous q.left ∧ IsOpenMap q.left ∧ (∀ A : Set (Point E.obj.obj), q.left ⁻¹' (schemePointMap t ⁻¹' A) = b.left ⁻¹' (schemePointMap w ⁻¹' A) ∧ q.left '' (b.left ⁻¹' (schemePointMap w ⁻¹' A)) = schemePointMap t ⁻¹' A ∧ (IsOpen (schemePointMap w ⁻¹' A) → IsOpen (schemePointMap t ⁻¹' A))) ∧ (∀ B : Set T.left, b.left '' (q.left ⁻¹' B) = schemePointMap w ⁻¹' (schemePointMap t '' B)) ∧ (IsEtale t → Etale b.left ∧ ∀ B : Set T.left, IsOpen B → IsOpen (schemePointMap w ⁻¹' (schemePointMap t '' B)))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17ebb8164",
+  "group": "NH",
+  "result": "pass",
+  "note": "Every node clause matches the Lean exactly: the IsEtale/IsSurjective scheme-test atlas w, an arbitrary t, an existential Q with an IsPullback (yoneda.map q) (yoneda.map b) t w square, q Etale/Surjective/Continuous/IsOpenMap, the two inverse-image/image identities and openness descent for all A, the image identity for all B, and IsEtale t → Etale b ∧ open image; no topology on Point. The statement is true (iso-invariance of the two squares, étale ⇒ open, 03H4 lifting of a compatible pair); edge cases with empty E/T/W, trivial A/B, the identity atlas, non-étale t and non-unique lifts all hold. lean.statement is verbatim; the 5 stmt_dep records are byte-identical to side-live; the node is otherwise unchanged; no landed record and no duplicate (representable_etale_scheme_tests and EtaleOpenImage differ or presuppose a topology on |E|). Single universe u, sorry-only proof, docstrings with source and blueprint and all 6 steps, no SGA, and the report has both required sections. Not compiled because no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T083314-L-2319860",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

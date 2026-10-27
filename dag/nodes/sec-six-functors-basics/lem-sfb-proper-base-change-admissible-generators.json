@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-proper-base-change-admissible-generators",
+ "kind": "statement",
+ "title": "Proper exchange on all admissible constant-model generators",
+ "statement": "Fix a prime ell and a field k of positive prime characteristic different from ell. Let Z,Y,Yprime be separated finite-type k-schemes, q:Z→Y proper and v:Yprime→Y a k-morphism. Let Lambda be any admissible commutative condensed ring of [sk-def-localizing-closure]. For every ordinary unbounded module-object complex K on Z with bounded constant-model constructible cohomology and finite Tor amplitude, the component at K of the specified ambient unit/square/counit proper exchange for any chosen Cartesian square of q along v is invertible. No invertibility is asserted for arbitrary unbounded inputs or for nonproper q.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Proof (2), proper exchange on the localizing generators; proof (3), identity on the open and mate pasting."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "For finite ell-primary rings use finite proper base change. For integer rings use integral proper base change; Dctf is contained in the recorded bounded constructible category. For finite coefficient fields and the finite-subextension algebraic closure use rational proper base change. The ground field and its integers are the degree-one cases.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-finite",
+    "det-thm-sfb-proper-base-change-integral",
+    "det-thm-sfb-proper-base-change-rational"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the full continuous-map algebraic closure, take the finite stratification and finite Postnikov filtration of K. Descend finite-rank lisse pieces and their profinite monodromy to finite coefficient fields. Proper finiteness supplies finite cochain models on an adapted target stratification. Extending scalars commutes with finite sums, their differentials and the actual counit exchange. Thus the finite-extension proper exchange yields the full-continuous exchange on each piece. Exactness and connecting squares extend invertibility through the two finite filtrations. This never identifies the two algebraic-closure coefficient topologies.",
+   "uses": [
+    "det-sf-comp-continuous-algcl-local-free",
+    "lem-real-compact-matrix-coefficient-descent",
+    "det-sf-comp-continuous-algcl-heart-finiteness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction along a coefficient ring-object isomorphism induces exact equivalences on module and derived categories and transports finite constant models and Tor amplitude. The scalar/pullback comparison cube and the proper counit equations give the commuting exchange square by coefficient mate calculus. Its other edges are invertible and the equivalence reflects isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-coefficient-exchange-mates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-thm-sfb-proper-base-change-finite",
+  "det-thm-sfb-proper-base-change-integral",
+  "det-thm-sfb-proper-base-change-rational",
+  "det-sf-comp-continuous-algcl-local-free",
+  "lem-real-compact-matrix-coefficient-descent",
+  "det-sf-comp-continuous-algcl-heart-finiteness",
+  "lem-weil-pbc-coefficient-exchange-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Proof (2), proper exchange on the localizing generators; proof (3), identity on the open and mate pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change condensed coefficients on bounded constructible finite Tor complexes; canonical base change mate commutes with a boundary preserving refinement of compactifications",
+   "results": "Eight hits per query, about algebraic scalar base change, condensed limits and tensor products. No pro-etale derived exchange or compactification-refinement assertion.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "results": "mateEquiv_vcomp, mateEquiv_hcomp and conjugate variants; general mate pasting is available.",
+   "date": "2026-10-24",
+   "verdict": "Useful categorical tools, not the geometric normalization or proper exchange assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|isIso)|baseChange.*[Pp]roper",
+   "results": "Mathlib contains mate pasting and stability of geometric properties under base change. Searches of both library roots found finite/integral/rational concrete coefficient results and no full admissible generator statement or compact-support refinement equation. blueprint_refs searches for base change refinement and proper base change admissible returned zero.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate of either required interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.DetSfCompCompositionBaseChange",
+  "date": "2026-10-24",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-composition-base-change",
+   "place": "Proof (2): proper base change on Dctf, before localizing extension; coefficient representatives transported to the stated admissibility predicate.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-comp-composition",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperBaseChangeAdmissibleGenerators",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.properBaseChange_admissible_generators",
+  "file": "lean/Sheaf/Paper/ProperBaseChangeAdmissibleGenerators.lean",
+  "statement": "theorem properBaseChange_admissible_generators\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {A Z Y Y' : Scheme.{u}}\n    [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Y'.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]\n    [IsSeparated (Z ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))]\n    [IsSeparated (Y' ↘ Spec (.of k))]\n    (q : Z ⟶ Y) [q.IsOver (Spec (.of k))] [IsProper q]\n    (v : Y' ⟶ Y) [v.IsOver (Spec (.of k))]\n    {a : A ⟶ Z} {q' : A ⟶ Y'} (sq : ChosenCartesianSquare a q' q v)\n    (K : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)))\n    (hK : constantModelBoundedConstructible Λ Z K ∧ DerivedCategory.finiteTorAmplitude _ K) :\n    IsIso ((condensedAmbientExchange Λ sq).app K)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-15846",
+  "group": "G1",
+  "result": "fix",
+  "landing": "20261025T060824-L-2375776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-15846",
+  "group": "G1",
+  "result": "fix",
+  "landing": "20261025T060824-L-2375776",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new sorry statements (generator proper base change; refinement pasting) and moved detSf* defs against node det-sf-comp-composition-base-change, change record, cited owners, and importer IntegralLocalizingCompactSupport (sandbox compile)"
+ }
+}

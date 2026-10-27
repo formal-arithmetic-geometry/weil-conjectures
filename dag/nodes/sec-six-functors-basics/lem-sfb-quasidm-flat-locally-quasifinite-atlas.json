@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+ "kind": "statement",
+ "title": "Scheme atlas for a quasi-Deligne--Mumford algebraic stack",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Algebraic stacks mean [def-sfb-algebraic-moduli-stack], fibred groupoids and $2$-fibre products mean [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces mean [def-trf-algebraic-space]. A representable map is representable by algebraic spaces; its local quasi-finiteness means local quasi-finiteness after every scheme base change on etale scheme charts [pqf-def-quasifinite]. Flatness and local finite presentation of representable maps are likewise tested after scheme base change on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $\\mathcal X/S$ be an algebraic stack. Its diagonal $\\Delta_{\\mathcal X/S}$ is locally quasi-finite if and only if there are a scheme $W/S$ and a representable morphism $q:W\\to\\mathcal X$ which is surjective, flat, locally of finite presentation and locally quasi-finite. Surjectivity means that every object of $\\mathcal X$ over a field acquires, after a field extension, a lift to $W$ together with an isomorphism of its image with that object. No separatedness, quasi-compactness, Noetherianity, or finite-inertia hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06MF (theorem-quasi-DM), equivalence (1)--(2); relative over S, as in the chapter conventions; quasi-DM expanded as locally quasi-finite diagonal."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "pqf-def-quasifinite",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-surjective-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "Assume the atlas $q:W\\to\\mathcal X$ exists. The $2$-fibre product $\\mathcal X\\times_S\\mathcal X$ is an algebraic stack by the fibre-product lemma, and $W\\times_SW$ is a scheme. The map $W\\times_SW\\to\\mathcal X\\times_S\\mathcal X$ is surjective, flat and locally of finite presentation: factor it as two base changes of $q$. The pullback of $\\Delta_{\\mathcal X/S}$ to this cover is $j:W\\times_{\\mathcal X}W\\to W\\times_SW$. Its composite with the first projection to $W$ is a base change of $q$, hence locally quasi-finite. Left cancellation for algebraic spaces makes $j$ locally quasi-finite. The fppf target test then gives local quasi-finiteness of the diagonal.",
+   "uses": [
+    "lem-sfb-representable-lqf-calculus-descent",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF, (2) implies (1), expanded proof of Tag 06MB (lemma-properties-covering-imply-diagonal), (2)."
+   }
+  },
+  {
+   "text": "Conversely assume $\\Delta_{\\mathcal X/S}$ locally quasi-finite. Fix a finite-type point $x$. Choose the affine smooth chart $U\\to\\mathcal X$, closed $u\\in U$, $k=\\kappa(u)$ and locally finite type field self-groupoid $R=u\\times_{\\mathcal X}u$ supplied by the closed-chart lemma. Put $F=U\\times_{\\mathcal X}u$. This is an algebraic space smooth over $k$. All maps from these scheme or space sources to $\\mathcal X$ are representable by its representable diagonal.",
+   "uses": [
+    "lem-sfb-stack-finite-type-smooth-closed-chart",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-diagonal-space-source-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF, first two forward-implication paragraphs."
+   }
+  },
+  {
+   "text": "Let $G=R\\times_{u\\times_Su}u$ be the stabilizer of this field groupoid. Its objects are automorphisms of the chosen object over $u$, so $G=\\mathcal X\\times_{\\mathcal X\\times_S\\mathcal X}u$. Thus $G\\to u$ is locally quasi-finite by base change of the diagonal. For every etale scheme chart $V\\to G$, the scheme map $V\\to\\operatorname{Spec}k$ is locally quasi-finite by the chart definition. The scheme relative-dimension-zero criterion gives $\\dim_vV=0$ for every $v$; hence $\\dim G=0$ by the chart definition of space dimension. The field-groupoid dimension lemma yields $\\dim R=\\dim G=0$. The identity $e:u\\to R\\to F$ gives a $k$-rational point $z$ with $p(z)=u$, and the defining square identifies $R$ with $F\\times_Uu$.",
+   "uses": [
+    "lem-sfb-representable-lqf-calculus-descent",
+    "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "lem-sfb-field-groupoid-stabilizer-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF, field groupoid and stabilizer paragraph."
+   }
+  },
+  {
+   "text": "Apply the smooth-fibre parameter lemma to $p:F\\to U$ and $z$. Its hypotheses hold: $F/k$ is smooth, $u$ is closed, $z$ is $k$-rational with $k=\\kappa(u)$, and its $p$-fibre $R$ is zero-dimensional. It gives functions $f_1,\\ldots,f_d$ on an affine neighbourhood $U'$ of $u$, regular at a point of an etale chart above $z$, and $Z=V(f_1,\\ldots,f_d)$ with $z\\in Z\\times_{\\mathcal X}u$ and $\\dim_z(Z\\times_{\\mathcal X}u)=0$. The restriction $U'\\to\\mathcal X$ of the smooth chart to the affine neighbourhood $U'$ is smooth by open-source locality, hence flat and locally of finite presentation, and the etale chart lies over its field fibre $U'\\times_{\\mathcal X}u=p^{-1}(U')$. Apply the stack regular-slice flatness lemma to $U'\\to\\mathcal X$ and these functions; after shrinking around $u$, $Z\\to\\mathcal X$ is flat and locally of finite presentation. This shrinking retains $z$ and the dimension-zero conclusion.",
+   "uses": [
+    "lem-sfb-smooth-fibre-image-parameters",
+    "lem-sfb-stack-fibre-regular-slice-flat",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF, local-ring and regular-slice paragraph, using Tag 06MD."
+   }
+  },
+  {
+   "text": "Local finite presentation gives local finite type for $Z\\to\\mathcal X$. Apply the fibre-neighbourhood lemma to the dimension-zero point $z$ of its fibre over $u$. Restrict $Z$ to the resulting open neighbourhood of $u$. The resulting scheme $Z_x$ still maps over $x$ and is locally quasi-finite, flat and locally of finite presentation over $\\mathcal X$; flatness and local finite presentation persist on this open source restriction.",
+   "uses": [
+    "lem-sfb-stack-quasifinite-fibre-neighbourhood",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF, end of slice paragraph, using Tag 06ME."
+   }
+  },
+  {
+   "text": "Choose one such $Z_x$ for each finite-type point and form the scheme $W=\\coprod_x Z_x$. This family is indexed by a set of the chosen universe: fix one smooth surjective scheme atlas $U_0\\to\\mathcal X$; by field-extension lifting every point of $|\\mathcal X|$ is the image of a point of $U_0$, so choosing such a point for each finite-type point embeds the index set into $|U_0|$. Each $Z_x$ is a scheme of the site, so the coproduct is a scheme in the chosen universe. The maps glue to an object over $W$ because the summands form a disjoint open cover and $\\mathcal X$ is a stack. The representable-diagonal lemma makes $q:W\\to\\mathcal X$ representable. By open-source locality, $q$ is flat, locally of finite presentation and locally quasi-finite. Its image contains every finite-type point, so the flat-lfp finite-type-surjectivity lemma makes $q$ surjective. If $\\mathcal X$ is empty, the empty family gives the empty scheme and the same conclusion.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-size-convention",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-representable-lqf-calculus-descent",
+    "lem-sfb-stack-flat-lfp-finite-type-surjectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06MF, final paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-representable-lqf-calculus-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-stack-finite-type-smooth-closed-chart",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "lem-sfb-field-groupoid-stabilizer-dimension",
+  "lem-sfb-smooth-fibre-image-parameters",
+  "lem-sfb-stack-fibre-regular-slice-flat",
+  "lem-sfb-stack-quasifinite-fibre-neighbourhood",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-flat-lfp-finite-type-surjectivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06MF (theorem-quasi-DM), full proof; Tag 06MB (lemma-properties-covering-imply-diagonal), reverse implication expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stack with finite inertia admits a flat locally finitely presented affine scheme chart with locally quasi finite separated scheme relation",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a surjective flat locally quasi finite scheme atlas of an algebraic stack with locally quasi finite diagonal",
+   "results": "OK; 8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi Deligne Mumford algebraic stack has a surjective flat locally finitely presented locally quasi finite morphism from a scheme",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, Algebra.QuasiFinite.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Flat\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?DM|AlgebraicStack|stack.*atlas",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack has locally quasi finite diagonal if and only if it admits a surjective flat locally finitely presented locally quasi finite scheme atlas",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.UniversallyInjective.iff_diagonal, AlgebraicGeometry.quasiSeparated_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi Deligne Mumford stack has a flat quasi finite presentation by a scheme",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack with locally quasi finite diagonal admits a surjective flat locally finitely presented locally quasi finite scheme atlas",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Flat\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?DM|AlgebraicStack|stack.*atlas",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme). Supporting input: Tag 06MF (theorem-quasi-DM), equivalence (1)--(2); relative over S, as in the chapter conventions; quasi-DM expanded as locally quasi-finite diagonal.",
+   "via": [
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+  "worker": "stage1",
+  "summary": "Expanded the two directions of Tag 06MF using the field self-groupoid and regular-slice route. Reused the existing stabilizer dimension, flat-slice and finite-type-point assembly statements. Four smaller supporting statements isolated and searched. No statement change.",
+  "blueprint": "Supporting local algebraic-stack input on the inherited alteration/moduli dependency chain, not a replacement of the unit route. Latest direct-images proof paragraph (3) no longer spells out the old alteration chain; current nodes retained as reusable generic tools. No chapter or unit changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "why": "Generic scheme criterion applied to etale charts of the field stabilizer to compute its dimension; this is not an alteration-route replacement and the unit has no scheme dimension-zero criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-locally-quasi-finite-relative-dimension-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-6cc59808e",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-6cc59808e (reviewer sub-agent of L); spot-checked: I read the item and all four new nodes in full, every cited statement, and Stacks at the cited places: 06MF whole proof, 06MB, 06MD, 06ME, 06FX, 06G3, algebra 06LC (only B must be Noetherian CM) and spaces-morphisms 03XN. The item statement is unchanged and matches 06MF (1)<=>(2) over S. The 6 steps follow 06MF faithfully: stabilizer dim via 0397 on charts plus 06FF; parameters at the rational point z with p-fibre R of dim 0; slice 06MD; neighbourhood 06ME; assembly with 06G2. All four new nodes are true, statement-only and strictly smaller than the item, with no duplicate in the DAG. I checked against finite-type-point-etale-self-relation, stack-locally-closed-finite-type-point, representable-stack-fppf-locality, space-four-property-fppf-descent, a1-space-separated-lqf-permanence, space-quasifinite-locus-open and the weil-pbc regular-sequence nodes. I tested the parameter node on small cases: the identity on A^d, d=0, and A^d->Spec k (hypothesis fails). Three FIXes, in the item only: (1) step 1 (C1): the stack-level target test and calculus needed X x_S X to be algebraic, so it now cites lem-sfb-algebraic-stack-fibre-products (same unit, reviewed, no cycle). (2) Step 4 (C1/E1): the slice lemma needs a flat lfp source, so the step now says the affine U' is smooth over X by open-source locality, hence flat and lfp, and cites the chartwise calculus. (3) Step 6: 'use the larger universe to index' would put W outside the site; the index set now embeds into |U_0| for one fixed smooth surjective atlas, so the coproduct stays in the chosen universe. Tool use lem-trf-locally-quasi-finite-relative-dimension-zero (0397, generic) is accepted. Batch-5: I computed the full closure of every flagged citation. The trf and pod nodes it reaches are definitions or generic foundations: algebraic spaces, projective bundles, fppf descent and 0397. None is a trace-formula or Poincare-duality step and none is sk-thm-trace-transport, so all flags are accepted as generic. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiDmFlatLocallyQuasiFiniteAtlas",
+  "declaration": "CategoryTheory.locallyQuasiFiniteModuliDiagonal_iff_flatLocallyQuasiFiniteAtlas",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiDmFlatLocallyQuasiFiniteAtlas.lean",
+  "statement": "theorem locallyQuasiFiniteModuliDiagonal_iff_flatLocallyQuasiFiniteAtlas {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) : ModuliSpaceTest @Scheme.Hom.IsLocallyQuasiFinite (moduliRelativeDiagonal (moduliBaseStructure F)) ↔ ∃ (W : Over S) (q : BasedFunctor (discreteModuli (yoneda.obj W)) F), IsRepresentableByAlgebraicSpaces q ∧ IsSurjectiveModuliMap q ∧ ModuliSpaceTest @Flat q ∧ ModuliSpaceTest @LocallyOfFinitePresentation q ∧ ModuliSpaceTest @Scheme.Hom.IsLocallyQuasiFinite q",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa1f226cd",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 3d0db828e1f0. Diff vs the returned snapshot: the only change is that stmt_dep lem-sfb-stack-chartwise-smooth-etale-calculus is replaced by def-sfb-surjective-moduli-map (definition node, existing:true, owns CategoryTheory.IsSurjectiveModuliMap in StackChartwiseSmoothEtaleCalculus, present live); Lean module byte-identical; report has Worker report, Second reading by NL and Returned delivery repair. Compared with the live node, only the lean record and three definition stmt_deps are added; nothing is reverted and the item has not landed. Maths re-read against Stacks 06MF (1)<=>(2): LHS ModuliSpaceTest IsLocallyQuasiFinite on moduliRelativeDiagonal(moduliBaseStructure F); RHS exists W : Over S and q : h_W -> F that is representable, IsSurjectiveModuliMap (field-extension lift with an actual ModuliTwoIso), and flat/lfp/lqf on charts. No extra hypotheses; universes free; empty stack covered by empty W. Docstrings carry the source place and 6 steps, proof is sorry. No change, so no compile."
+ }
+}

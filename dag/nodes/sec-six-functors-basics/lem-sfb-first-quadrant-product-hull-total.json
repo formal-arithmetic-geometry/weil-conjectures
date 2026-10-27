@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-first-quadrant-product-hull-total",
+ "kind": "statement",
+ "title": "Product-closed triangulated classes contain first-quadrant column totals",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with its ordinary derived category and localization $Q:\\operatorname{Ch}(\\mathcal A)\\to D(\\mathcal A)$ [def-weil-abstract-derived-category], in the indexing universe [def-weil-size-convention]. Assume countable products exist in $\\mathcal A$ and that, for every countable family of complexes, the termwise product represents their product in $D(\\mathcal A)$ [def-weil-category-product]. Let $\\mathcal H$ be a full replete class in $D(\\mathcal A)$ containing zero and closed under all integer shifts, distinguished-triangle extensions [def-weil-triangulated-subcategory], and countable derived products. Let $D^{p,q}$ be a first-quadrant double complex, with commuting horizontal and vertical differentials, and put\n$$T^r=\\bigoplus_{p+q=r}D^{p,q},\\qquad d_T=d_I+(-1)^p d_{II}$$\n[def-sp-double-complex-total]. If $Q(D^{p,\\bullet})\\in\\mathcal H$ for every $p\\geq0$, then $QT\\in\\mathcal H$. Zero columns and the zero double complex are included. No closure under truncations, cohomology objects, arbitrary inverse limits or arbitrary unbounded totalizations is assumed.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012Z, definition-associated-simple-complex, for the total and column filtration; agent consequence from the finite-column quotient tower and its degreewise split Roos sequence. Also extracted from lem-sfb-supported-hull-proetale-descent proof steps 8–9, without using that proof as a cited theorem."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "def-weil-category-product",
+  "def-weil-triangulated-subcategory",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Put $F^nT=\\bigoplus_{p\\ge n}D^{p,\\bullet-p}$ for $n\\ge0$ and $B_n=T/F^nT$. The filtration of [def-sp-double-complex-total] is by subcomplexes: $d_I$ raises the column index and $d_{II}$ preserves it. Thus $B_n^r=\\bigoplus_{0\\le p<n}D^{p,r-p}$, with the total differential followed by projection to these columns. The maps $\\pi_n:T\\to B_n$ and $f_n:B_{n+1}\\to B_n$ are chain maps and $f_n\\pi_{n+1}=\\pi_n$. Also $B_0=0$. For $r\\ge0$, $\\pi_n^r$ is the canonical identity on all nonzero summands once $n\\ge r+1$; for $r<0$ every term is zero.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex; explicit first-column filtration"
+   }
+  },
+  {
+   "text": "The kernel of $f_n$ is the single surviving column $C_n^r=D^{n,r-n}$ with differential $(-1)^nd_{II}$, so $C_n=D^{n,\\bullet}[-n]$ with the shift convention of [def-weil-abstract-derived-category]. The sequence $0\\to C_n\\to B_{n+1}\\xrightarrow{f_n}B_n\\to0$ is split in each degree by the inclusion of the first $n$ summands (these sections need not be chain maps). Apply [lem-weil-pbc-complex-ses-triangle]. Induct on $n$: $QB_0=0\\in\\mathcal H$; if $QB_n\\in\\mathcal H$, then $QC_n\\in\\mathcal H$ by the column hypothesis and shift closure, and the distinguished triangle $QC_n\\to QB_{n+1}\\to QB_n\\to QC_n[1]$ gives $QB_{n+1}\\in\\mathcal H$ by extension closure. This proves the assertion for every finite column quotient.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, applied to finite-column quotient sequences"
+   }
+  },
+  {
+   "text": "Form the termwise product complex $P=\\prod_{n\\ge0}B_n$, with componentwise differential; its square is zero after every product projection. Define $s:P\\to P$ by $\\operatorname{pr}_ns=f_n\\operatorname{pr}_{n+1}$ and $u=1-s$. The chain equations for the $f_n$ imply that $s$ and $u$ are chain maps. Compatibility of the $\\pi_n$ defines a chain map $i:T\\to P$ with $\\operatorname{pr}_ni=\\pi_n$ and $ui=0$. These constructions use only the product universal property. By the assumed representation of countable derived products by termwise products, $QP$ with these localized projections is the countable derived product of the $QB_n$. Hence $QP\\in\\mathcal H$.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070M, lemma-difficulty-K-injectives, product and transition-shift construction; agent specialization to the finite-column tower"
+   }
+  },
+  {
+   "text": "Fix a degree $r$. Let $\\sigma_n^r:B_n^r\\to B_{n+1}^r$ be the graded inclusion from step 2, so $f_n^r\\sigma_n^r=1$. Define maps $a_n:P^r\\to B_n^r$ recursively by $a_0=0$ and $a_{n+1}=\\sigma_n^r(a_n-\\operatorname{pr}_n)$. Then $a_n-f_n^ra_{n+1}=\\operatorname{pr}_n$. The product lift $a:P^r\\to P^r$ of the $a_n$ therefore satisfies $u^ra=1$, checked after every projection. Thus $u$ is split epi in every degree; no exactness of arbitrary products and no chain-level section is used.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070M, lemma-difficulty-K-injectives, split Roos sequence; explicit recursive splitting"
+   }
+  },
+  {
+   "text": "The map $i^r:T^r\\to P^r$ is a kernel of $u^r$. For $r<0$ all objects are zero. For $r\\ge0$, let $Z$ be any object and $b:Z\\to P^r$ satisfy $u^rb=0$, and write $b_n=\\operatorname{pr}_nb$. Then $b_n=f_n^rb_{n+1}$. Set $N=r+1$ and $c=(\\pi_N^r)^{-1}b_N:Z\\to T^r$. For $n<N$, repeated compatibility gives $b_n=\\pi_n^rc$. For $n\\ge N$ the transitions are identities under the canonical identifications $B_n^r=T^r$, so the same equality holds. Product uniqueness gives $b=i^rc$; uniqueness of $c$ follows from projection $N$. Together with step 4 this proves that $0\\to T\\xrightarrow{i}P\\xrightarrow{u}P\\to0$ is degreewise short exact in the abelian category.",
+   "uses": [
+    "def-weil-category-product",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070M, lemma-difficulty-K-injectives, split Roos sequence; agent kernel identification using degreewise stabilization"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to step 5 to get the distinguished triangle $QT\\to QP\\to QP\\to QT[1]$. Inverse rotation, which is (TR2) of [def-weil-triangulated-category], gives a distinguished triangle $QP[-1]\\to QT\\to QP\\to QP$. Both outside terms lie in $\\mathcal H$ by step 3 and shift closure; extension closure therefore gives $QT\\in\\mathcal H$. The same induction and product maps apply when any columns vanish, and when $D=0$ all complexes constructed above are zero.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor; Tag 05QM, definition-triangulated-subcategory; inverse rotation and extension closure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-triangulated-subcategory",
+  "def-weil-category-product",
+  "def-sp-abelian",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070M (lemma-difficulty-K-injectives, split Roos sequence) and 0152 (lemma-derived-canonical-delta-functor), specialized to the finite-column quotients of Tag 012Z; explicit agent assembly without injective hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a Grothendieck abelian category with exact products a replete triangulated class closed under products contains the total complex of a first quadrant double complex when it contains each column",
+   "results": "{\"t\": \"2026-10-24T17:50:43Z\", \"tool\": \"leanfinder\", \"query\": \"In a Grothendieck abelian category with exact products a replete triangulated class closed under products contains the total complex of a first quadrant double complex when it contains each column\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.IsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\"], \"digest\": \"359a8a0da0469612\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: derived t-structure, extension axioms, binary-product triangles and products of triangles do not state closure under infinite first-quadrant column totalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangulated subcategory closed under countable products contains a bounded below totalization if it contains every column complex",
+   "results": "{\"t\": \"2026-10-24T17:50:44Z\", \"tool\": \"leansearch\", \"query\": \"A triangulated subcategory closed under countable products contains a bounded below totalization if it contains every column complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Subcategory\", \"CategoryTheory.CountableAB4.of_countableAB5\", \"CategoryTheory.CountableAB4Star.of_countableAB5Star\", \"CategoryTheory.ObjectProperty.IsTriangulated.mk\", \"CategoryTheory.CountableAB4Star\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₁\", \"CategoryTheory.ObjectProperty.IsTriangulated\", \"CategoryTheory.instCountableAB4OfAB4OfSize\"], \"digest\": \"6f2aa70904cd12c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: derived t-structure, extension axioms, binary-product triangles and products of triangles do not state closure under infinite first-quadrant column totalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Triangulated\", \"prod\"",
+   "results": "{\"t\": \"2026-10-24T17:52:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Triangulated\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.binaryProductTriangle\", \"CategoryTheory.Pretriangulated.binaryBiproductTriangle\", \"CategoryTheory.Pretriangulated.binaryProductTriangle_obj₁\", \"CategoryTheory.Pretriangulated.binaryProductTriangle_obj₃\", \"CategoryTheory.Pretriangulated.binaryBiproductTriangle_obj₁\", \"CategoryTheory.Pretriangulated.binaryBiproductTriangle_obj₃\", \"CategoryTheory.Pretriangulated.binaryProductTriangle_obj₂\", \"CategoryTheory.Pretriangulated.binaryBiproductTriangle_obj₂\"], \"digest\": \"368352d5dc277978\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: derived t-structure, extension axioms, binary-product triangles and products of triangles do not state closure under infinite first-quadrant column totalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(total|bicomplex|doubleComplex).*(subcategory|IsTriangulated|ObjectProperty)|IsTriangulated.*(total|bicomplex)",
+   "results": "{\"t\": \"2026-10-24T17:52:35Z\", \"tool\": \"grep\", \"query\": \"(total|bicomplex|doubleComplex).*(subcategory|IsTriangulated|ObjectProperty)|IsTriangulated.*(total|bicomplex)\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: derived t-structure, extension axioms, binary-product triangles and products of triangles do not state closure under infinite first-quadrant column totalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First quadrant double complex total belongs to a product closed triangulated class if all columns belong to it via inverse limits of finite column quotients",
+   "results": "{\"t\": \"2026-10-24T17:52:36Z\", \"tool\": \"leanfinder\", \"query\": \"First quadrant double complex total belongs to a product closed triangulated class if all columns belong to it via inverse limits of finite column quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"CategoryTheory.Pretriangulated.productTriangle_distinguished\", \"CategoryTheory.Triangulated.TStructure.IsGE\", \"CategoryTheory.Triangulated.TStructure.IsLE\", \"CategoryTheory.Triangulated.TStructure.ge\", \"CategoryTheory.Triangulated.TStructure.le\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE\"], \"digest\": \"41a80da9fd359a33\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: derived t-structure, extension axioms, binary-product triangles and products of triangles do not state closure under infinite first-quadrant column totalization"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*(mem|prop|closure)|closure.*total|IsTriangulated.*prod",
+   "results": "{\"t\": \"2026-10-24T17:54:16Z\", \"tool\": \"grep\", \"query\": \"total.*(mem|prop|closure)|closure.*total|IsTriangulated.*prod\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"e5bd0729395f865a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: derived t-structure, extension axioms, binary-product triangles and products of triangles do not state closure under infinite first-quadrant column totalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated class closed under countable products contains the total of a first quadrant double complex if it contains all column complexes",
+   "results": "{\"t\": \"2026-10-24T18:22:32Z\", \"tool\": \"leanfinder\", \"query\": \"A triangulated class closed under countable products contains the total of a first quadrant double complex if it contains all column complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"HomologicalComplex.HasGoodTrifunctor₁₂Obj\", \"HomologicalComplex.HasGoodTrifunctor₂₃Obj\", \"DerivedCategory.IsGE\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.IsLE\", \"CategoryTheory.Pretriangulated.productTriangle_distinguished\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"b435418bf8ec9f4c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give t-structures, finite triangulated extensions, or the already-cited short-exact triangle construction; none gives first-quadrant product-hull totalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Triangulated\", \"prod\"",
+   "results": "{\"t\": \"2026-10-24T18:23:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Triangulated\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.binaryProductTriangle\", \"CategoryTheory.Pretriangulated.binaryBiproductTriangle\", \"CategoryTheory.Pretriangulated.binaryProductTriangle_obj₁\", \"CategoryTheory.Pretriangulated.binaryProductTriangle_obj₃\", \"CategoryTheory.Pretriangulated.binaryBiproductTriangle_obj₁\", \"CategoryTheory.Pretriangulated.binaryBiproductTriangle_obj₃\", \"CategoryTheory.Pretriangulated.binaryProductTriangle_obj₂\", \"CategoryTheory.Pretriangulated.binaryBiproductTriangle_obj₂\"], \"digest\": \"368352d5dc277978\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give t-structures, finite triangulated extensions, or the already-cited short-exact triangle construction; none gives first-quadrant product-hull totalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "First quadrant total complex belongs to a triangulated subcategory closed under countable products if each column does",
+   "results": "{\"t\": \"2026-10-24T18:23:15Z\", \"tool\": \"leansearch\", \"query\": \"First quadrant total complex belongs to a triangulated subcategory closed under countable products if each column does\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Subcategory\", \"CategoryTheory.instCountableAB4OfAB4OfSize\", \"CategoryTheory.CountableAB4Star\", \"CategoryTheory.instCountableAB4StarOfAB4StarOfSize\", \"CategoryTheory.Pretriangulated.productTriangle\", \"CategoryTheory.ObjectProperty.IsTriangulated.mk\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₁\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₃\"], \"digest\": \"13295ce820e24f9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give t-structures, finite triangulated extensions, or the already-cited short-exact triangle construction; none gives first-quadrant product-hull totalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(total|bicomplex|doubleComplex).*(subcategory|IsTriangulated|ObjectProperty)|IsTriangulated.*(total|bicomplex)",
+   "results": "{\"t\": \"2026-10-24T18:25:06Z\", \"tool\": \"grep\", \"query\": \"(total|bicomplex|doubleComplex).*(subcategory|IsTriangulated|ObjectProperty)|IsTriangulated.*(total|bicomplex)\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give t-structures, finite triangulated extensions, or the already-cited short-exact triangle construction; none gives first-quadrant product-hull totalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover a first quadrant total complex as the kernel of one minus shift on the product of its finite column quotients and use a distinguished triangle",
+   "results": "{\"t\": \"2026-10-24T18:25:08Z\", \"tool\": \"leanfinder\", \"query\": \"Recover a first quadrant total complex as the kernel of one minus shift on the product of its finite column quotients and use a distinguished triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CochainComplex.trianglehOfDegreewiseSplit\", \"CochainComplex.homologySequenceδ_quotient_mapTriangle_obj\", \"CochainComplex.cm5b\", \"HomologicalComplex.homotopyCofiber.XIsoBiprod\", \"CochainComplex.instHasHomotopyCofiberOfHasBinaryBiproductXHAddOfNat\", \"DerivedCategory.triangleOfSESδ\"], \"digest\": \"0d0eac09051e0d5e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give t-structures, finite triangulated extensions, or the already-cited short-exact triangle construction; none gives first-quadrant product-hull totalization"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*(mem|prop|closure)|closure.*total|IsTriangulated.*prod",
+   "results": "{\"t\": \"2026-10-24T18:26:00Z\", \"tool\": \"grep\", \"query\": \"total.*(mem|prop|closure)|closure.*total|IsTriangulated.*prod\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"e5bd0729395f865a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give t-structures, finite triangulated extensions, or the already-cited short-exact triangle construction; none gives first-quadrant product-hull totalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-norm-local-model-finite-field-derived-generation",
+  "date": "2026-10-25",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement (2), first paragraph: reconstruction of the supported norm local model from its nonnegative Čech direct-image columns.",
+   "via": [
+    "lem-sfb-norm-local-model-finite-field-derived-generation",
+    "lem-sfb-supported-norm-algcl-model-rigidity-transfer",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-first-quadrant-product-hull-total",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved finite-column quotient membership by induction and reconstructed the total through an explicitly degreewise split product sequence. Reused the existing short-exact-complex triangle theorem, with no new nodes. Searches found no exact project attachment or Mathlib leaf.",
+  "blueprint": "Realizes the first-quadrant reconstruction needed in the inherited refinement/coherence ancestry: current latest det-sf-comp-coherence-cocycle proof, Refinement isomorphisms paragraph. The exact finite-column/Roos argument is the agent expansion already indicated in this item source and in lem-sfb-supported-hull-proetale-descent steps 8–9, not a theorem taken from the ancestor. Latest blueprint searches first quadrant, column, total complex, Roos, product-closed found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "General short-exact-complex triangle theorem used for finite-column quotients and the product sequence; the compactification-coherence unit has no theorem replacing this homological algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NI-dfe2f75b7",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-dfe2f75b7 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full. There are no new nodes, and the item is not a 2026-10-21 re-split, since it had no proof on the base. The statement is unchanged and true; I tested D=0, a single column (T = D^{p,•}[-p]) and finitely many columns. Cited statements read: def-sp-double-complex-total (sign d_I+(-1)^p d_II, filtration by subcomplexes, graded piece D^{p,•-p} with differential (-1)^p d_II); def-weil-abstract-derived-category (K[1]^r = K^{r+1} with differential -d, so K[-n] has differential (-1)^n d, which matches C_n in step 2); lem-weil-pbc-complex-ses-triangle (status mathlib, Stacks 0152, any degreewise short exact sequence of complexes); def-weil-triangulated-subcategory (0, shifts, 2-out-of-3, and H is replete); def-weil-triangulated-category (TR2 is an iff, so the inverse rotation in step 6 holds); def-weil-category-product; def-sp-abelian. Steps checked: step 2's induction starts at B_0 = 0 and the kernel of f_n is column n. Step 3 gives pr_n(ui) = π_n - f_nπ_{n+1} = 0. Step 4's recursion a_{n+1} = σ_n(a_n - pr_n) gives ua = 1, and the sign matches Stacks 070M. Step 5's kernel argument uses N = r+1 and the identity transitions beyond N. Step 6 uses the triangle QP[-1] → QT → QP → QP. Sources checked: Stacks tags 012Z/0152/070M in tags/tags, and derived.tex lines 10589-10629 for the split product sequence; only its elementary part is used, with no K-injectivity. No SGA source. Duplicate search (rg -L for first-quadrant with product/closure) found no duplicate; lem-sp-first-quadrant-total-extend-short-exact and lem-weil-roos-split-comparison are different statements. I accept the tool use lem-weil-pbc-complex-ses-triangle (a general Mathlib-status lemma). No changes."
+ }
+}

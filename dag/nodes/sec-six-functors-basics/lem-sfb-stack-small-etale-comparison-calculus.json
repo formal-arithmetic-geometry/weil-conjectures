@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-stack-small-etale-comparison-calculus",
+ "kind": "statement",
+ "title": "Small-etale comparison calculus on algebraic-space tests of a stack",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme]. Algebraic spaces and their small etale sites are [def-trf-algebraic-space]; quasi-coherent modules on them are [def-trf-space-quasi-coherent-module], module sheaves are [def-weil-sheaf-of-modules-category], and all pullbacks below are tensor pullbacks [def-trf-space-etale-module-functors]. Let $\\mathcal Z/S$ be an algebraic stack [def-sfb-algebraic-moduli-stack] with big fppf site and structure sheaf [def-sfb-stack-quasi-coherent-algebra], and let $H$ be a module sheaf there. For a map $z:V\\to\\mathcal Z$ from an algebraic space, let $H_z$ be its small-etale restriction: on an etale scheme $T\\to V$ it has value $H(z|_T)$. For $a:V\\to W$ and a two-isomorphism $\\theta:z\\Rightarrow w\\circ a$, restriction induces a natural comparison $c_{a,\\theta}:a^*H_w\\to H_z$. These comparisons are natural in $H$, are identities for identity arrows, respect composition of arrows and their two-isomorphisms, and agree with restriction on etale scheme charts. In particular, for composable arrows $a:V\\to W$, $b:W\\to B$ with the prescribed two-isomorphisms, $$c_{ba}=c_a\\circ a^*c_b$$ under $(ba)^*\\cong a^*b^*$. They are isomorphisms if $a$ is etale. If every scheme-test restriction of $H$ is the associated etale sheaf of a quasi-coherent Zariski module [pqf-def-coherent, def-weil-pbc-etale-site], then every $H_z$ is quasi-coherent on $V_{\\mathrm{et}}$. If, in addition, the scheme-test comparisons are isomorphisms for flat scheme maps [def-weil-flat-morphism], then $c_{a,\\theta}$ is an isomorphism for every flat algebraic-space map $a$ [def-sfb-space-morphism-properties]. These assertions also apply to the canonical two-isomorphisms between maps coming from a groupoid presentation.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 075D (lemma-comparison), 076R (equation-comparison-algebraic-spaces-modules and the following sentence), 0GQC (lemma-compare-locally-quasi-coherent); stacks-cohomology.tex Tag 0762 (definition-flat-base-change), extension to algebraic-space tests by etale charts."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "pqf-def-coherent",
+  "def-weil-pbc-etale-site",
+  "def-weil-flat-morphism",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-pur-cochain-coefficient-universe-transport",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-chartwise-etale-morphism",
+  "def-sfb-space-ambient-module-operations",
+  "def-sfb-stack-space-etale-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-fibred-fppf-space-module-comparisons] to the underlying category fibred in groupoids of $\\mathcal Z$, its given fppf module $H$, and its algebraic-space tests. Its restriction formula is exactly $H_z(T)=H(z|_T)$, and its adjoint comparison gives $c_{a,\\theta}$. Its naturality, identity, composition and scheme-test clauses give the stated coherence and agreement on charts, including the displayed formula with the pasted two-isomorphism. Its etale clause gives invertibility for etale $a$. Only the clauses for arbitrary modules are used here; $H$ need not be quasi-coherent on the big site.",
+   "uses": [
+    "lem-sfb-fibred-fppf-space-module-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 075D (lemma-comparison), module paragraph following equation-comparison-modules, and 076R (equation-comparison-algebraic-spaces-modules)."
+   }
+  },
+  {
+   "text": "Assume the scheme-test quasi-coherence hypothesis. For every etale scheme chart $e:E\\to V$, the etale comparison identifies $e^*H_z$ with $H_{ze}$. Etale pullback is restriction to the localized site by [def-trf-algebraic-space]. By hypothesis $H_{ze}$ is associated to a quasi-coherent Zariski module, so [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] says it has local free presentations on $E_{\\mathrm{et}}$. Each etale cover and presentation on that slice is also a cover and presentation over the corresponding object of $V_{\\mathrm{et}}$. Thus every object of $V_{\\mathrm{et}}$ has a covering with the presentations required by [def-trf-space-quasi-coherent-module], and $H_z$ is quasi-coherent. This uses local quasi-coherence only, not quasi-coherence of $H$ on the big site.",
+   "uses": [
+    "lem-sfb-fibred-fppf-space-module-comparisons",
+    "def-trf-algebraic-space",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 0GQC (lemma-compare-locally-quasi-coherent), proof; local-presentation definition."
+   }
+  },
+  {
+   "text": "Now let $a:V\\to W$ be flat. Choose surjective etale scheme atlases $e:E\\to V$ and $t:T\\to W$. Set $P=E\\times_W T$, with $d:P\\to E$ and $f:P\\to T$. This is a scheme by [lem-trf-space-representable-etale-scheme-tests]. The base-change covering assertion of [lem-trf-space-fibre-products-etale-covers] says $d$ is surjective etale, and composition gives a surjective etale scheme chart $r=ed:P\\to V$. We have $ar=tf$. Both $r$ and $t$ are etale scheme charts; hence the chart definition of flatness in [def-sfb-space-morphism-properties] says that the scheme map $f$ is flat. This construction does not require $a$ to be representable by schemes.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0762 (definition-flat-base-change), extension to algebraic-space tests by scheme atlases; scheme fibre products over algebraic spaces."
+   }
+  },
+  {
+   "text": "Equip $z r$ and $w t$ with the two-isomorphism over $f$ obtained from $\\theta$ and $ar=tf$. Apply the comparison composition law twice. Under the canonical tensor-pullback identifications it gives $$c_r\\circ r^*c_{a,\\theta}=c_f\\circ f^*c_t:r^*a^*H_w\\longrightarrow H_{zr}.$$ Here $c_r$ and $c_t$ are invertible because $r,t$ are etale, and $c_f$ is invertible by the assumed flat scheme-test property since $P,T$ are schemes and $f$ is flat. Functors preserve inverse pairs, so $f^*c_t$ is invertible. Therefore $r^*c_{a,\\theta}=c_r^{-1}c_f f^*c_t$ is invertible. By [lem-trf-space-etale-module-pushforward-restriction], $r^*$ is ordinary restriction to $P_{\\mathrm{et}}$. To descend this isomorphism, for each etale scheme $A\\to V$ use its surjective etale scheme cover $A\\times_VP\\to A$. The locally defined inverses agree on overlaps: each is an inverse of the same restricted morphism, and inverses are unique. The sheaf gluing axiom glues their values on every target section, giving a module map inverse on $A$; uniqueness makes these inverses commute with restriction in $A$. Consequently $c_{a,\\theta}$ is an isomorphism on $V_{\\mathrm{et}}$.",
+   "uses": [
+    "lem-sfb-fibred-fppf-space-module-comparisons",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 075D and 076R (comparison composition); stacks-cohomology.tex Tag 0762 (definition-flat-base-change); etale sheaf gluing."
+   }
+  },
+  {
+   "text": "For maps supplied by a groupoid presentation, take the canonical two-isomorphisms as the two-isomorphisms of tests in the preceding construction. The naturality and pasted-composition clause of [lem-sfb-fibred-fppf-space-module-comparisons] applies to these very two-isomorphisms, so it gives the same identity, composition and chart formulas. The quasi-coherence and flat invertibility conclusions already proved apply whenever their respective hypotheses hold. No flatness assumption is asserted for an arbitrary presentation map.",
+   "uses": [
+    "lem-sfb-fibred-fppf-space-module-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 075D and 076R; specialization to the canonical two-isomorphisms of a groupoid presentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fibred-fppf-space-module-comparisons",
+  "def-trf-algebraic-space",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 075D, 076R and 0GQC; explicit etale-chart extension of stacks-cohomology.tex Tag 0762."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparison maps between small etale restrictions of modules on a stack commute with composition and two isomorphisms and are invertible for flat morphisms when flat base change holds",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The composition of two étale ring homomorphisms is again an étale ring homomorphism.\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Modules.pullbackComp and SheafOfModules.pullbackComp give composition for tensor pullbacks, not big/small etale comparisons for algebraic-space tests, their quasi-coherence or flat invertibility. Read PullbackContinuous.lean:60-105 and Sheaf/Pullback.lean; no matching stack comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparison maps from pullback of small etale restrictions to big site module restriction for algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.pullbackComparison\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [HasPullback f g] [HasPullback (G.map f) (G.map g)] :\\n  G.obj (pullback f g) ⟶ pullback (G.map f) (G.map g)\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$ with a pullback $P = X \\times_Z Y$, and a functor $G : \\\\mathcal{C} \\to \\\\mathcal{D}$ that preserves the pullback of $G(f)$ and $G\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrict_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) (V W e) :\\n  (f ∣_ U).appLE V W e =\\n    f.appLE (U.ι ''ᵁ V) ((f ⁻¹ᵁ U).ι ''ᵁ W) ((Set.image_mono e).trans (image_morphismRestrict_preimage f U V).le)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $U$ be an open subset of $Y$. Let $f|_U: X|_{f^{-1}(U)} \\\\to Y|_U$ be the restriction of $f$. Let $V$ be an open subset of the open subscheme $Y|_U$, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.map_appLE_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U U' : Y.Opens} {V : X.Opens}\\n  (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U) (i : Opposite.op U' ⟶ Opposite.op U) {Z : CommRingCat}\\n  (h : X.presheaf.obj (Opposite.op V) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (Y.presheaf.map i)\\n      (Catego\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Let $U, U'$ be open subsets of $Y$ such that $U \\\\subseteq U'$, and let $V$ be an open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Let $\\\\mathcal{O}_X$ an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(U : Y.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) : Γ(Y, U) ⟶ Γ(X, V)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Let $U$ be an open subset of $Y$, and $V$ be an open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. This defines a ring homomorphism from the ring of secti\"}\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens) {Z : AlgebraicGeometry.Scheme} (h : ↑U ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackRestrictIsoRestrict f U).hom\\n      (CategoryTheory.CategoryStruct.comp (f ∣_ U) h) =\\n    CategoryTheory.CategoryStruct.comp (Categ\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and $U$ be an open subset of $Y$. Let $Y|_U$ be the corresponding open subscheme with inclusion $\\\\iota_U: Y|_U \\\\to Y$. Let $X|_{f^{-1}(U)}$ be the restriction\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : (pullbackRestrictIsoRestrict f U).hom ≫ (f ⁻¹ᵁ U).ι = pullback.fst f _\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and $U$ be an open subset of $Y$. Let $\\\\phi$ be the canonical isomorphism `pullbackRestrictIsoRestrict f U` which identifies the pullback $X \\\\times_Y Y|_U$ w\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ≅ pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Modules.pullbackComp and SheafOfModules.pullbackComp give composition for tensor pullbacks, not big/small etale comparisons for algebraic-space tests, their quasi-coherence or flat invertibility. Read PullbackContinuous.lean:60-105 and Sheaf/Pullback.lean; no matching stack comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.pullbackId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (S : CategoryTheory.Sheaf J RingCat) : SheafOfModules.pullback (CategoryTheory.CategoryStruct.id S) ≅ CategoryTheory.Functor.id (SheafOfModules S)\", \"doc\": \"The pullback by the identity morphism identifies to the identity functor of the\\ncategory of sheaves of modules.\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"The pullback functor `SheafOfModules S ⥤ SheafOfModules R` induced by\\na morphism of sheaves of rings `S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`,\\ndefined as the left adjoint functor to \"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Given a continuous functor between sites `F`, and a morphism of sheaves of rings\\n`S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`, this is the adjunction\\nbetween the corresponding pullback a\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.She\", \"doc\": \"The composition of two pullback functors on sheaves of modules identifies\\nto the pullback for the composition.\"}\n  {\"name\": \"SheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"The pullback functor on sheaves of modules can be described as a composition\\nof the forget functor to presheaves, the pullback on presheaves of modules, and\\nthe sheafification functor.\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"The pullback of (pre)sheaves of modules commutes with the sheafification.\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (S : CategoryTheory.Sheaf J RingCat) : (CategoryTheory.conjugateEquiv CategoryTheory.Adjunction.id (SheafOfModules.pullbackPushforwardAdjunction (CategoryTheory.CategoryStruct.id S))) (SheafOfModules.pull\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.She\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Modules.pullbackComp and SheafOfModules.pullbackComp give composition for tensor pullbacks, not big/small etale comparisons for algebraic-space tests, their quasi-coherence or flat invertibility. Read PullbackContinuous.lean:60-105 and Sheaf/Pullback.lean; no matching stack comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]lat[Cc]omparison|flat_comparison|[Cc]omparison.*[Ee]tale|[Ee]tale.*[Cc]omparison",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Modules.pullbackComp and SheafOfModules.pullbackComp give composition for tensor pullbacks, not big/small etale comparisons for algebraic-space tests, their quasi-coherence or flat invertibility. Read PullbackContinuous.lean:60-105 and Sheaf/Pullback.lean; no matching stack comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Big to small etale sheaf module pullback comparison extends from schemes to algebraic spaces and is natural under composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).inv\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the homomorphism associated to the pseudofunctor's composition of pullback-pushforward adjunctions equals\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.conjugateEquiv\\n        ((AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction g).comp\\n          (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f))\\n        (AlgebraicGeometry.Scheme.Modules.pull\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.Modules.pullbackComp and SheafOfModules.pullbackComp give composition for tensor pullbacks, not big/small etale comparisons for algebraic-space tests, their quasi-coherence or flat invertibility. Read PullbackContinuous.lean:60-105 and Sheaf/Pullback.lean; no matching stack comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Modules on algebraic spaces small etale site comparison maps flat base change",
+   "results": "{\"t\": \"2026-10-23T21:15:16Z\", \"tool\": \"leansearch\", \"query\": \"Modules on algebraic spaces small etale site comparison maps flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"9e4d58e303a0d2d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give general tensor pullback composition or Zariski open restriction, not small-etale comparison calculus for algebraic-stack tests. Read Sheaf/PullbackContinuous.lean:167-174 and AlgebraicGeometry/Modules/Sheaf.lean:241-243,453-454."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small etale restrictions of module sheaves on algebraic stacks and their tensor pullback comparison maps",
+   "results": "{\"t\": \"2026-10-23T21:15:17Z\", \"tool\": \"leanfinder\", \"query\": \"Small etale restrictions of module sheaves on algebraic stacks and their tensor pullback comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"SheafOfModules.pullbackObjFreeIso\"], \"digest\": \"9667be3ad0f4212b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give general tensor pullback composition or Zariski open restriction, not small-etale comparison calculus for algebraic-stack tests. Read Sheaf/PullbackContinuous.lean:167-174 and AlgebraicGeometry/Modules/Sheaf.lean:241-243,453-454."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "{\"t\": \"2026-10-23T21:15:17Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullbackComp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"6d62dd74aaeb25fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give general tensor pullback composition or Zariski open restriction, not small-etale comparison calculus for algebraic-stack tests. Read Sheaf/PullbackContinuous.lean:167-174 and AlgebraicGeometry/Modules/Sheaf.lean:241-243,453-454."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|AlgebraicSpace|comparison.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T21:15:17Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|AlgebraicSpace|comparison.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give general tensor pullback composition or Zariski open restriction, not small-etale comparison calculus for algebraic-stack tests. Read Sheaf/PullbackContinuous.lean:167-174 and AlgebraicGeometry/Modules/Sheaf.lean:241-243,453-454."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a sheaf on a fibred category to small etale sites of algebraic spaces and cartesian module comparison",
+   "results": "{\"t\": \"2026-10-23T21:15:52Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a sheaf on a fibred category to small etale sites of algebraic spaces and cartesian module comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.pullbackObjFreeIso\", \"PresheafOfModules.restrictHomEquivOfIsLocallySurjective\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\"], \"digest\": \"6fda4bf88b31371c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give general tensor pullback composition or Zariski open restriction, not small-etale comparison calculus for algebraic-stack tests. Read Sheaf/PullbackContinuous.lean:167-174 and AlgebraicGeometry/Modules/Sheaf.lean:241-243,453-454."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-lqc-coherator",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1): interpreting f_*A and f_*B as quasi-coherent algebras before applying Lemma 4.1.7 to g; Q125 split: module right adjoint before adding multiplication; Q53 split: the quasi-coherator on locally quasi-coherent flat-compatible modules, used after ordinary direct image and before composing the Hom bijections. Q22 split: Tag 0778 proof, definition of q_2 and its omitted cocycle verification. Q73: comparison coherence on algebraic-space tests, local presentations on their etale charts, and the flat comparison used to cancel the maps defining q_2.",
+   "via": [
+    "lem-sfb-stack-lqc-coherator",
+    "lem-sfb-stack-qcqs-module-adjunction",
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-small-etale-comparison-calculus",
+  "worker": "stage1",
+  "summary": "Reused the existing general fibred-fppf comparison theorem rather than duplicating its clauses. Proved local quasi-coherence by chart presentations and flat invertibility by a two-atlas composition identity and explicit gluing of inverses. Clarified the definition references for algebraic-space tensor pullback and flatness; no mathematical hypothesis or conclusion changed. No new nodes.",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images (3) ancestry and Tag 0778 coherator application. These steps supply the comparison coherence and flat invertibility in the omitted cocycle verification for q_2; the newest blueprint direct-images proof (3) was read. Whole-blueprint searches for small etale comparison, flat base change property, 076R and locally quasi-coherent found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme comparison gives local presentations of an associated etale module; no same-unit node supplies this equivalence."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme-test representability and etale composition ensure P and the local test covers are schemes."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic base change of etale atlases supplies the jointly surjective source cover."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Only its etale tensor-pullback-equals-restriction clause is used to descend an inverse by sheaf gluing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-etale-module-pushforward-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-ce0e03dc9",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-ce0e03dc9 (reviewer sub-agent of L); spot-checked: PASS, no changes. Shape: the delivery is one commit with no new nodes. The base item was a new unsplit node with an empty proof; it is still unsplit in live and side-live, and there is no repair note. proof_deps equals the union of the step uses, and there is no SGA citation. The statement change is reported in the delivery's report. It replaces the Zariski-scheme def-pc-module-pullback by def-trf-space-etale-module-functors, which is the correct pullback for algebraic-space étale sites. It also adds def-sfb-space-morphism-properties for flat maps of algebraic spaces. Hypotheses, conclusions and the coefficient category are unchanged, and the only citer, lem-sfb-stack-lqc-coherator (c_s, c_t and the cocycle cancellation), is unaffected. Sources read in stacks-sheaves.tex: 075D (lemma-comparison (1)-(4)), 076R (equation-comparison-algebraic-spaces-modules and the sentence after it) and 0GQC (lemma-compare-locally-quasi-coherent with its proof); in stacks-cohomology.tex: 0762 at line 604. Step 1 is a correct specialization of the full statement of lem-sfb-fibred-fppf-space-module-comparisons: a CFG with the same fppf site, any module K, the same tests and pullback, and its identity, composition, scheme-test and étale clauses. That node does not cover the locally-QC or flat clauses, so this is not a relabelling. Step 2: for T in V_et, H_z restricted to T is H_{zT} = (F)_et, and lem-trf-scheme-zariski-etale-quasi-coherent-equivalence gives local presentations on slices of V_et; this is the 0GQC argument. Step 3: P = E x_W T is a scheme by representable-etale-scheme-tests. d and r are representable surjective étale by base change and composition, a r = t f, and f is flat by the chart test, which quantifies over all chart pairs. No representability of a is assumed. Step 4: composition gives c_r r^*c_a = c_f f^*c_t; c_r and c_t are isomorphisms because they are étale, and c_f is an isomorphism by the flat scheme-test hypothesis. The step then descends the inverse along the covers A x_V P -> A, using the étale-restriction clause of lem-trf-space-etale-module-pushforward-restriction and the sheaf axiom; the gluing is written out and correct. Step 5 is elementary. Edge cases checked: identity arrows, empty V, H = 0, the identity of a scheme, a non-representable flat automorphism, and the groupoid R ⇉ U with smooth s and t. Duplicate search over 075D/076R/0GQC/0762: the fibred-fppf, big-étale restriction, lqc-flat-local-structure and higher-images nodes do not state flat invertibility on algebraic-space tests. Batch-5 check: all six flagged citations are generic algebraic-space definitions or foundations, neither part of nor given by the trace formula or Poincaré duality assumption. Their closures contain no trace-formula or Poincaré-duality theorem nodes and do not contain the item, so there is no cycle. The four declared tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSmallEtaleComparisonCalculus",
+  "declaration": "CategoryTheory.stack_smallEtale_comparison_calculus",
+  "declarations": [
+   "CategoryTheory.stack_smallEtale_comparison_calculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSmallEtaleComparisonCalculus.lean",
+  "statement": "theorem stack_smallEtale_comparison_calculus {S : Scheme.{u}} (C : BasedCategory.{v, w} (Over S)) (hC : IsAlgebraicModuliStack C) : (∀ (V : AlgebraicSpace S) (z : BasedFunctor (discreteModuli V.obj.obj) C) (theta : ModuliTwoIso z ((discreteModuliMap (𝟙 (V.obj.obj))).comp z)), (∀ T : (discreteModuli V.obj.obj).obj, theta.val.hom.app T = z.map (CostructuredArrow.homMk (𝟙 T.left) (by simp))) → ∀ H : ringedSiteModules.{max (u + 1) v w} (moduliModuleRings C hC.1.1), (stackSpaceComparison hC.1.1 (𝟙 V) z z theta).app H = (stackSpaceTensorId.{u, max v w} V).hom.app ((stackSpaceRestriction hC.1.1 z).obj H)) ∧ (∀ (V W B : AlgebraicSpace S) (a : V ⟶ W) (b : W ⟶ B) (z : BasedFunctor (discreteModuli V.obj.obj) C) (t : BasedFunctor (discreteModuli W.obj.obj) C) (r : BasedFunctor (discreteModuli B.obj.obj) C) (theta : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)) (eta : ModuliTwoIso t ((discreteModuliMap b.hom.hom).comp r)) (gamma : ModuliTwoIso z ((discreteModuliMap (a ≫ b).hom.hom).comp r)), (∀ T : (discreteModuli V.obj.obj).obj, gamma.val.hom.app T = theta.val.hom.app T ≫ eta.val.hom.app ((discreteModuliMap a.hom.hom).obj T) ≫ r.map (eqToHom (CostructuredArrow.map_comp (f := a.hom.hom) (f' := b.hom.hom) (h := T)).symm)) → ∀ H : ringedSiteModules.{max (u + 1) v w} (moduliModuleRings C hC.1.1), (stackSpaceTensorComp.{u, max v w} a b).hom.app ((stackSpaceRestriction hC.1.1 r).obj H) ≫ (stackSpaceComparison hC.1.1 (a ≫ b) z r gamma).app H = (AmbientCoefficients.moduleTensorPullback.{u, max v w} a).map ((stackSpaceComparison hC.1.1 b t r eta).app H) ≫ (stackSpaceComparison hC.1.1 a z t theta).app H) ∧ (∀ (V W : AlgebraicSpace S) (a : V ⟶ W) (z : BasedFunctor (discreteModuli V.obj.obj) C) (t : BasedFunctor (discreteModuli W.obj.obj) C) (theta : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)) (H : ringedSiteModules.{max (u + 1) v w} (moduliModuleRings C hC.1.1)), IsChartwiseEtale a → IsIso ((stackSpaceComparison hC.1.1 a z t theta).app H)) ∧ (∀ H : ringedSiteModules.{max (u + 1) v w} (moduliModuleRings C hC.1.1), (∀ (T : Over S) (z : BasedFunctor (discreteModuli (schemeSpace T).obj.obj) C), ((stackSpaceRestriction hC.1.1 z).obj H).IsQuasicoherent) → (∀ (V : AlgebraicSpace S) (z : BasedFunctor (discreteModuli V.obj.obj) C), ((stackSpaceRestriction hC.1.1 z).obj H).IsQuasicoherent) ∧ ((∀ (U T : Over S) (a : U ⟶ T) (z : BasedFunctor (discreteModuli (schemeSpace U).obj.obj) C) (t : BasedFunctor (discreteModuli (schemeSpace T).obj.obj) C) (theta : ModuliTwoIso z ((discreteModuliMap (yoneda.map a)).comp t)), Flat a.left → IsIso ((stackSpaceComparison hC.1.1 (stackSpaceSchemeMap a) z t theta).app H)) → ∀ (V W : AlgebraicSpace S) (a : V ⟶ W) (z : BasedFunctor (discreteModuli V.obj.obj) C) (t : BasedFunctor (discreteModuli W.obj.obj) C) (theta : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)), MapIsFlat a → IsIso ((stackSpaceComparison hC.1.1 a z t theta).app H)))",
+  "branch": "sheaf-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53405109f",
+  "group": "Q56",
+  "result": "fix",
+  "note": "Re-delivery after the 72fd RETURN; all return items repaired: Q24 record untouched, ambient ops under new def-sfb-space-ambient-module-operations, H2 deps now def-trf-scheme-algebraic-space / def-sfb-space-module-tensor-composition / def-sfb-space-chartwise-etale-morphism, helpers moved to new def-sfb-stack-space-etale-comparisons (no cycle). Diff vs 72fd: same Lean apart from paths, blueprint tags and the dropped moduleChartPost copy; main theorem verbatim. Clause check (identity, pasted composition tensorComp≫c_ab = a^*c_b≫c_a, chartwise-etale iso, scheme-test QC ⇒ QC, flat scheme ⇒ MapIsFlat iso, groupoid 2-isos) correct; no hollow defs (all ∃!/universal-property pinned), no universe equalities, all proofs sorry, docstrings and report sections present. FIX: the new ambient node uses X.commStructureSheaf, owned by def-sfb-space-quasi-coherent-algebra, without a stmt_dep; fixes/def-sfb-space-ambient-module-operations.json adds the dep and cites it in the TeX. JSON only, no compile needed; worker compile evidence clean. Advisory: the item reaches def-sfb-stable-pointed-moduli-groupoids only transitively (accepted before; a stage-2 fix cannot change the item's stmt_deps)."
+ }
+}

@@ -131,7 +131,8 @@
   "lem-pur-integral-object-pullback-line",
   "def-coefficient-twists-detailed",
   "lem-pur-derived-pullback-tensor-iso",
-  "lem-pur-common-stage-tensor-line-coherence"
+  "lem-pur-common-stage-tensor-line-coherence",
+  "lem-route-coefficient-twist-line-exact"
  ],
  "proof_origin": {
   "by": "worker",
@@ -286,7 +287,18 @@
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.TateTwistLocallyFree",
   "declaration": "AlgebraicGeometry.Scheme.tateTwist_locallyFree",
@@ -304,7 +316,8 @@
    "AlgebraicGeometry.Scheme.tatePullbackInvertible",
    "AlgebraicGeometry.Scheme.TateRationalSignedLine",
    "AlgebraicGeometry.Scheme.TateQbarSignedLine",
-   "AlgebraicGeometry.Scheme.tateTwist_locallyFree"
+   "AlgebraicGeometry.Scheme.tateTwist_locallyFree",
+   "AlgebraicGeometry.Scheme.tateTwist_finite_locallyFree"
   ],
   "file": "lean/Sheaf/Paper/TateTwistLocallyFree.lean",
   "statement": "theorem tateTwist_locallyFree (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] [∀ x : X, Invertible (ℓ : X.residueField x)] (E : Type u) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (Ω : Type v) [Field Ω] [Algebra (Padic ℓ) Ω] [IsAlgClosure (Padic ℓ) Ω] (ι : E →ₐ[Padic ℓ] Ω) : ∃ (I : Type (u + 1)) (U : I → X.ProEt) (f : ∀ i : I, U i ⟶ ProEt.mk (𝟙 X)) (ζ : ∀ (n : ℕ) (i : I), (purTwistRootsModule X ℓ n).val.obj (op (U i))) (e : ∀ (n : ℕ) (i : I), (SheafOfModules.unit (purTwistRing X (purTwistFiniteRing X ℓ n))).over (U i) ≅ (purTwistRootsModule X ℓ n).over (U i)), Presieve.ofArrows U f ∈ (ProEt.precoverage X).coverings _ ∧ (∀ (n : ℕ) (i : I), (proEtaleRootsOfUnityTransition X (ℓ ^ (n + 1)) (ℓ ^ (n + 2)) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_dvd_pow ℓ (Nat.le_succ (n + 1)))).hom.app (op (U i)) (ζ (n + 1) i) = ζ n i) ∧ (∀ (n : ℕ) (i : I) (V : (Over (U i))ᵒᵖ) (a : ((purTwistRing X (purTwistFiniteRing X ℓ n)).over (U i)).obj.obj V), (e n i).hom.val.app V a = a • (purTwistRootsModule X ℓ n).val.map V.unop.hom.op (ζ n i)) ∧ (∀ (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ), (∀ a : A, (ℓ ^ (r + 1)) • a = 0) → ∃ a : ZMod (ℓ ^ (r + 1)) →+* A, (∀ (n : ℕ) (hrn : r ≤ n), ∃ k : tateFiniteLine X ℓ A n (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hrn)) (ZMod (ℓ ^ (r + 1))))) ⟶ tateFiniteLine X ℓ A r a, IsIso k ∧ ∀ (V : X.ProEt) (b : (tateFiniteCoefficient X A).obj.obj (op V)) (x : (proEtaleRootsOfUnitySheaf X (ℓ ^ (n + 1))).obj.obj (op V)), k.val.app (op V) (tateFiniteTensor X ℓ A n (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hrn)) (ZMod (ℓ ^ (r + 1))))) V b x) = tateFiniteTensor X ℓ A r a V b ((proEtaleRootsOfUnityTransition X (ℓ ^ (r + 1)) (ℓ ^ (n + 1)) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_dvd_pow ℓ (Nat.succ_le_succ hrn))).hom.app (op V) x)) ∧ (∃ hL : (tateFiniteLine X ℓ A r a).IsFiniteLocallyFreeOfRank 1, TateSignedLine X (tateFiniteCoefficient X A) (tateFiniteLine X ℓ A r a) U ∧ ∀ n : ℕ, TateInverseTwists (tateComplexTwist X (tateFiniteCoefficient X A) (tateFiniteLine X ℓ A r a) hL n) (tateComplexTwist X (tateFiniteCoefficient X A) (tateFiniteLine X ℓ A r a) hL (-(n : ℤ))))) ∧ TateSignedLine X (completedIntegralCommRingSheafUnrestricted ℓ E X) (purTwistIntegralModule X ℓ E) U ∧ ∀ (D : FiniteFieldDatum.{d}) (hD : ℓ ≠ D.p), TateRationalSignedLine D ℓ hD E X U ∧ TateQbarSignedLine D ℓ hD X Ω U ∧ ∀ n : ℕ, TateInverseTwists (tateIntegralTwist D ℓ hD E X n) (tateIntegralTwist D ℓ hD E X (-(n : ℤ))) ∧ TateInverseTwists (tateRationalTwist D ℓ hD E X n) (tateRationalTwist D ℓ hD E X (-(n : ℤ))) ∧ TateInverseTwists (intrinsicQbarComplexTwistFunctor D ℓ hD X Ω n) (intrinsicQbarComplexTwistFunctor D ℓ hD X Ω (-(n : ℤ)))",
@@ -349,5 +362,6 @@
   "landing": "20261022T002501-L-1933458",
   "kind": "interface",
   "note": "independent cc review: delivered TateTwistLocallyFree + 2 new sorry modules/nodes vs clones/live item and node, unit sk-prop-an realized (empty), DerivedPullbackTensorIso objectwise associator/unitors; sandbox compile of item, new modules and all 7 direct importers against the delivered olean, axioms probe"
- }
+ },
+ "lean_notes": "2026-10-26 (maintainer M, route audit 10-25): the finite clauses are also the separate theorem tateTwist_finite_locallyFree in Sheaf.Paper.TateTwistFiniteLocallyFree (with the finite definitions and helpers); the integral and rational part is in Sheaf.Paper.TateTwistIntegralLines; tateTwist_locallyFree (statement unchanged) stays in Sheaf.Paper.TateTwistLocallyFree. Finite-coefficient users cite the finite theorem."
 }

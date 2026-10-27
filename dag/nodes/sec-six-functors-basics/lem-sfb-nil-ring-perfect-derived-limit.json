@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-nil-ring-perfect-derived-limit",
+ "kind": "statement",
+ "title": "Perfect reconstruction over a surjective nil-kernel ring tower",
+ "statement": "Work in the universes of [def-weil-size-convention] with unbounded derived categories [def-weil-abstract-derived-category]. Let $(A_n)_{n\\ge1}$ be an inverse sequence of commutative rings whose transition maps $u_n:A_{n+1}\\to A_n$ are surjective and have locally nilpotent kernels, meaning every element of $\\ker u_n$ is nilpotent. Put $A=\\varprojlim_n A_n$, with its projection homomorphisms. Let $T_n\\in D(A_n)$ be perfect for every $n$, meaning isomorphic to a bounded complex of finitely generated projective $A_n$-modules [def-pc-perfect-ring-complex]. Suppose maps $t_n:T_{n+1}\\to T_n$ in $D(A_{n+1})$, with the target viewed by scalar restriction, have scalar-extension adjuncts\n$$\\gamma_n:T_{n+1}\\otimes_{A_{n+1}}^{\\mathbf L}A_n\\xrightarrow{\\sim}T_n.$$\nHere derived scalar extension is computed by K-flat resolutions [def-pc-module-kflat-complex] and is left adjoint to exact scalar restriction. Regard all $T_n$ and $t_n$ in $D(A)$ by scalar restriction, and let $(T,p,\\delta)$ be any derived limit of this tower in $D(A)$ [def-weil-derived-limit], with Roos triangle $T\\xrightarrow{p}\\prod_nT_n\\xrightarrow{1-s}\\prod_nT_n\\xrightarrow{\\delta}T[1]$ and projections $p_n=\\mathrm{pr}_n\\circ p$; write $T=R\\varprojlim_nT_n$. Then $T$ is perfect over $A$. For every $n$, the scalar-extension adjunct of the projection $p_n:T\\to T_n$ is an isomorphism in $D(A_n)$,\n$$\\rho_n:T\\otimes_A^{\\mathbf L}A_n\\xrightarrow{\\sim}T_n.$$\nThese comparisons are natural: if $(T'_n,t'_n)$ is a second such tower with a derived limit $(T',p',\\delta')$, $\\varphi_n:T_n\\to T'_n$ are maps in $D(A_n)$ with $\\varphi_nt_n=t'_n\\varphi_{n+1}$, and $u:T\\to T'$ satisfies $p'_nu=\\varphi_np_n$ for all $n$, then $\\rho'_n\\circ(u\\otimes_A^{\\mathbf L}A_n)=\\varphi_n\\circ\\rho_n$. They satisfy\n$$\\rho_n=\\gamma_n\\circ(\\rho_{n+1}\\otimes_{A_{n+1}}^{\\mathbf L}A_n)$$\nafter the canonical associativity identification of the sources. No presentation $A_n=A/I^n$, Noetherian hypothesis, or common exponent killing the transition kernels is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQG (lemma-Rlim-perfect-gives-perfect), case where all K_n are perfect; canonical reduction morphisms in its statement. Naturality and the displayed transition equality are the scalar-extension adjuncts of the limiting projections."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-weil-derived-limit",
+  "def-pc-module-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For each $n$, choose a bounded finite-projective representative of $T_n$ using [def-pc-perfect-ring-complex]. It is also bounded above finite projective, hence pseudo-coherent by the equivalence explicitly stated in [lem-pc-pseudo-coherent-bounded-finite-free-model]. Apply [lem-sfb-nil-ring-pseudocoherent-derived-limit] to the given tower and its specified Roos triangle. All its hypotheses hold: the transitions are surjective with elementwise nilpotent kernels, every level is pseudo-coherent, and the transition adjuncts are the given $\\gamma_n$. Thus $T$ is pseudo-coherent and every projection adjunct $\\rho_n$ is an isomorphism. These are the specified maps, rather than unspecified isomorphisms between the same objects.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "lem-sfb-nil-ring-pseudocoherent-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQG, first sentence; Tag 0CQF, all-pseudo-coherent branch."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nil-ring-tower-limit-henselian] to the same ring tower. Its statement gives surjectivity of $A\\to A_1$, the identification $A/I\\simeq A_1$ for $I=\\ker(A\\to A_1)$, and $I\\subseteq\\operatorname{Jac}(A)$. Every maximal ideal $\\mathfrak m$ of $A$ therefore contains $I$, so the residue map $A\\to\\kappa(\\mathfrak m)=A/\\mathfrak m$ factors through $A_1$: send the image of $a$ in $A_1$ to its class modulo $\\mathfrak m$. This is well-defined because two lifts differ by an element of $I$. Only the Jacobson-radical and surjectivity clauses are used, not henselian lifting.",
+   "uses": [
+    "lem-sfb-nil-ring-tower-limit-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQG, maximal-ideal factorization; Tag 0CT7, lemma-limit-henselian."
+   }
+  },
+  {
+   "text": "Choose a bounded finite-projective representative $P_1^\\bullet$ of $T_1$, supported in an interval $[a,b]$ with $a\\leq b$ (choose $a=b=0$ for a zero representative). Its terms are flat: each is a summand of a finite free module, and its tensor functor is the corresponding summand of a finite direct sum of the identity functor. Hence [lem-pc-module-bounded-flat-kflat] and [lem-pur-derived-change-of-rings] compute $T_1\\otimes^{\\mathbf L}_{A_1}M$ by $P_1^\\bullet\\otimes_{A_1}M$ for every $A_1$-module $M$. This complex is zero outside $[a,b]$, so its cohomology vanishes there, uniformly in $M$.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQG, finite Tor interval of K_1; Tag 0658, lemma-perfect, easy implication."
+   }
+  },
+  {
+   "text": "By pseudo-coherence choose a bounded-above finite-free representative $F^\\bullet$ of $T$ [def-pc-ring-pseudo-coherent-complex]. Both $F^\\bullet$ and $F^\\bullet\\otimes_A A_1$ are K-flat over their respective rings by [lem-pc-module-bounded-flat-kflat]. Thus [lem-pur-derived-change-of-rings] computes successive scalar extensions termwise. For each maximal $\\mathfrak m$, the factorization in step 2 and the chain isomorphism $(F^\\bullet\\otimes_A A_1)\\otimes_{A_1}\\kappa(\\mathfrak m)\\to F^\\bullet\\otimes_A\\kappa(\\mathfrak m)$, $(x\\otimes c)\\otimes z\\mapsto x\\otimes cz$, with inverse $x\\otimes z\\mapsto(x\\otimes1)\\otimes z$, identify $T\\otimes_A^{\\mathbf L}\\kappa(\\mathfrak m)$ with $T_1\\otimes_{A_1}^{\\mathbf L}\\kappa(\\mathfrak m)$ via $\\rho_1$. Step 3 supplies vanishing outside the same $[a,b]$ for every maximal ideal. Apply [lem-weil-pbc-pseudocoherent-maximal-fibre-perfect] to the pseudo-coherent object $T$ and that uniform interval. It gives perfectness of $T$ over $A$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQG, residue-field calculation and Tag 068V, lemma-check-perfect-pointwise, (3) implies (1)."
+   }
+  },
+  {
+   "text": "Let $\\eta_n$ be the unit of scalar extension along $A\\to A_n$. By [lem-pur-sheaf-ring-derived-coefficient-adjunction], the adjunct of a map $v:T\\otimes_A^{\\mathbf L}A_n\\to T'_n$ is $\\operatorname{Res}(v)\\eta_n(T)$. Naturality of the unit shows that the adjunct of $\\rho'_n(u\\otimes_A^{\\mathbf L}A_n)$ is $p'_nu$, whereas that of $\\varphi_n\\rho_n$ is $\\varphi_np_n$. The assumed equality of these two projections and injectivity of the adjunction bijection give the asserted naturality equation. This uses only the stated projection condition on $u$ and requires no functorial choice of derived limit.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQG, projection-induced maps; adjunct naturality, with sites-cohomology.tex Tag 07A6."
+   }
+  },
+  {
+   "text": "In the Roos triangle [def-weil-derived-limit], $(1-s)p=0$, as follows directly from TR1 and TR3 [def-weil-triangulated-category]: map the distinguished identity triangle $T\\xrightarrow{1}T\\to0\\to T[1]$ to the Roos triangle with first components $1_T,p$; the second square gives $(1-s)p=0$. Its $n$th coordinate is $p_n-t_np_{n+1}=0$. Take adjuncts successively along $A\\to A_{n+1}$ and $A_{n+1}\\to A_n$ using [lem-pur-sheaf-ring-derived-coefficient-adjunction]. The adjunct of $\\gamma_n(\\rho_{n+1}\\otimes^{\\mathbf L}_{A_{n+1}}A_n)$ is $t_np_{n+1}$: first the adjunct of $\\gamma_n$ is $t_n$, and then the adjunct of $\\rho_{n+1}$ is $p_{n+1}$. The composite adjunction is the $A\\to A_n$ adjunction under the termwise associativity identification of step 4 (with $A_n$ replacing the residue field). Thus the adjunct is $p_n$, whose unique transpose is $\\rho_n$. This proves the transition equality in the statement.",
+   "uses": [
+    "def-weil-derived-limit",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQG, canonical reduction maps; Roos triangle and adjunction identities, derived.tex Tag 08TC and sites-cohomology.tex Tag 07A6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-derived-limit",
+  "def-weil-triangulated-category",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-nil-ring-pseudocoherent-derived-limit",
+  "lem-sfb-nil-ring-tower-limit-henselian",
+  "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQG, lemma-Rlim-perfect-gives-perfect, all-perfect branch; naturality and transition compatibility by the defining scalar adjunction and the Roos triangle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inverse system of perfect complexes over surjective rings with locally nilpotent kernels and compatible derived reductions has perfect derived inverse limit",
+   "results": "{\"t\": \"2026-10-23T22:09:05Z\", \"tool\": \"leanfinder\", \"query\": \"An inverse system of perfect complexes over surjective rings with locally nilpotent kernels and compatible derived reductions has perfect derived inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"localCohomology.ofDiagram\", \"localCohomology.diagram\", \"BDeRham\", \"localCohomology\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion\"], \"digest\": \"a6f659d856ba28f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are ordinary adic completions, local cohomology and perfectoid rings; none states reconstruction of perfect derived complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of compatible finite projective complexes along a complete inverse system of rings with nil kernels and canonical derived reduction isomorphisms",
+   "results": "{\"t\": \"2026-10-23T22:09:42Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraization of compatible finite projective complexes along a complete inverse system of rings with nil kernels and canonical derived reduction isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.mkₐ_comp_liftAlgHom\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"IsAdicComplete.ofAlgEquiv_comp_liftRingHom\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\"], \"digest\": \"bd34d16e78c7d4f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits lift ordinary ring homomorphisms or concern formal smoothness and ordinary adic completion; none states the derived reconstruction assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"limit\"",
+   "results": "{\"t\": \"2026-10-23T22:09:02Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(limit|completion)|(limit|completion).*perfect",
+   "results": "{\"t\": \"2026-10-23T22:09:01Z\", \"tool\": \"grep\", \"query\": \"perfect.*(limit|completion)|(limit|completion).*perfect\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits in Algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(limit|adic)|(limit|adic).*perfect|Rlim",
+   "results": "{\"t\": \"2026-10-23T22:14:21Z\", \"tool\": \"grep\", \"query\": \"perfect.*(limit|adic)|(limit|adic).*perfect|Rlim\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Perfection.lean\", \"Mathlib/RingTheory/Teichmuller.lean\", \"Mathlib/RingTheory/WittVector/Complete.lean\", \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\"], \"digest\": \"4c53981ce427ae94\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: four RingTheory hits concern perfection of rings and perfectoid theory, not perfect complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes over a tower of nilpotent thickenings are recovered by their derived inverse limit",
+   "results": "{\"t\": \"2026-10-23T22:09:02Z\", \"tool\": \"leansearch\", \"query\": \"Perfect complexes over a tower of nilpotent thickenings are recovered by their derived inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"AdicCompletion.submodule\", \"HomologicalComplex.instHasLimit\", \"InverseSystem.invLimEquiv_apply_coe\", \"HomologicalComplex.instHasLimitsOfShape\", \"Profinite.isoAsLimitConeLift\", \"Profinite.asLimitConeIso\", \"CochainComplex.truncateAugment_inv_f\"], \"digest\": \"aa50ecc27e41e394\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary adic completion, ordinary complex limits and profinite limits do not assert perfectness or derived reductions."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]erfect.*(limit|[Cc]omplet)|(limit|[Cc]omplet).*[Pp]erfect|Rlim",
+   "results": "{\"t\": \"2026-10-23T22:41:10Z\", \"tool\": \"grep\", \"query\": \"[Pp]erfect.*(limit|[Cc]omplet)|(limit|[Cc]omplet).*[Pp]erfect|Rlim\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/HierarchyDesign.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Homology/CochainComplexPlus.lean\"], \"digest\": \"66e3a02748e6e615\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Algebra hits are generic limit closure declarations and a comment; the RingTheory search has zero hits. None concerns pseudo-coherent or perfect derived reconstruction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes are recovered from derived inverse limits over surjective rings with nil kernels",
+   "results": "{\"t\": \"2026-10-23T22:41:11Z\", \"tool\": \"leansearch\", \"query\": \"Perfect complexes are recovered from derived inverse limits over surjective rings with nil kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"PerfectionMap.lift_symm_apply\", \"RingHom.pNilradical_le_ker_of_perfectRing\", \"PerfectRing.ofFiniteOfIsReduced\", \"PerfectionMap.mk\", \"Perfection.lift_symm_apply\", \"Profinite.asLimitConeIso\", \"HomologicalComplexUpToQuasiIso\"], \"digest\": \"0e24d7840f055732\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring completion, ordinary inverse/direct limits and derived localization do not give this reconstruction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"limit\"",
+   "results": "{\"t\": \"2026-10-23T22:41:11Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible tower of perfect complexes over surjective commutative rings with locally nilpotent kernels has a perfect derived inverse limit and derived reduction isomorphisms",
+   "results": "{\"t\": \"2026-10-23T22:41:14Z\", \"tool\": \"leanfinder\", \"query\": \"A compatible tower of perfect complexes over surjective commutative rings with locally nilpotent kernels has a perfect derived inverse limit and derived reduction isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectionMap.map\", \"PerfectRing.ofSurjective\", \"PerfectionMap.surjective\", \"BDeRhamPlus\", \"BDeRham\", \"PreTilt.instPerfectRing\", \"PerfectionMap.lift\", \"PerfectionMap.comp_symm_equiv'\"], \"digest\": \"692235e84d28b0d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary ring completion, Frobenius perfection, formal smoothness or generic K-projective complexes, not derived reconstruction over a nil-kernel tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy limit of a cartesian system of bounded finite projective complexes over nil thickenings is a bounded finite projective complex",
+   "results": "{\"t\": \"2026-10-23T22:41:46Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy limit of a cartesian system of bounded finite projective complexes over nil thickenings is a bounded finite projective complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"HomotopyEquiv.isKProjective\", \"CategoryTheory.projectiveResolutions\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.IsKProjective\", \"HomologicalComplex.isLimitOfEval\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\"], \"digest\": \"a08c029a938a0052\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary ring completion, Frobenius perfection, formal smoothness or generic K-projective complexes, not derived reconstruction over a nil-kernel tower."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-perfect-test-reduction",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite; spaces-flat.tex lemma-compute-against-perfect: the invocation of More on Algebra lemma-Rlim-perfect-gives-perfect.",
+   "via": [
+    "lem-sfb-space-inverse-module-perfect-test-reduction",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nil-ring-perfect-derived-limit",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0CQG: reconstruct pseudo-coherently via the all-level locally nilpotent branch of 0CQF, factor every residue field through A_1, use one finite-projective model of T_1 for a uniform Tor interval, then apply the existing maximal-fibre perfectness criterion. Wrote the adjunct calculations for naturality and transition compatibility. Statement unchanged; one new statement-only auxiliary, no Lean changes.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited coherent-family/Quot effectivity chain: this node supplies the 0CQG algebra input to spaces-flat lemma-compute-against-perfect. The ancestor tool reports from.node = None; inherited null ancestry and via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module derived algebra used as a black box in Stacks 0CQG (finite-free models, K-flat scalar extension/adjunction, or the maximal-residue-field perfectness criterion); this does not replace a geometric step of the ctf-stability unit."
+   },
+   {
+    "node": "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "why": "Generic ordinary-module derived algebra used as a black box in Stacks 0CQG (finite-free models, K-flat scalar extension/adjunction, or the maximal-residue-field perfectness criterion); this does not replace a geometric step of the ctf-stability unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ordinary-module derived algebra used as a black box in Stacks 0CQG (finite-free models, K-flat scalar extension/adjunction, or the maximal-residue-field perfectness criterion); this does not replace a geometric step of the ctf-stability unit."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic ordinary-module derived algebra used as a black box in Stacks 0CQG (finite-free models, K-flat scalar extension/adjunction, or the maximal-residue-field perfectness criterion); this does not replace a geometric step of the ctf-stability unit."
+   },
+   {
+    "node": "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+    "why": "Generic ordinary-module derived algebra used as a black box in Stacks 0CQG (finite-free models, K-flat scalar extension/adjunction, or the maximal-residue-field perfectness criterion); this does not replace a geometric step of the ctf-stability unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-c664a56b2",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-c664a56b2 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-nil-ring-pseudocoherent-derived-limit and the statement of every cited node in full, against Stacks more-algebra 0CQF and 0CQG (statements and proofs) and 0BCB. The item is the all-perfect branch of 0CQG, with the statement unchanged; its added naturality and transition clauses are true. Step 1: the 'equivalently' clause in the statement of lem-pc-pseudo-coherent-bounded-finite-free-model gives perfect ⇒ pseudo-coherent, and the new node applies with all its hypotheses. Step 2: lem-sfb-nil-ring-tower-limit-henselian gives I_1 ⊆ Jac(A), so every residue field factors through A_1. Steps 3 and 4: a single bounded projective model of T_1 gives one interval [a,b] for all maximal ideals, then the associativity on a finite-free model F of T and lem-weil-pbc-pseudocoherent-maximal-fibre-perfect give perfectness. Minor: step 3 says 'every A_1-module M' where only the ring maps A_1→κ(m) are used; left as is. Steps 5 and 6: I checked the adjunct calculations, and TR1/TR3 do give (1-s)p=0. The new node is the true all-pseudo-coherent branch of 0CQF: the 0BCB lift needs 1+I invertible, which locally nilpotent kernels give, and holds for any Roos triangle. I tested it on constant, Z/p^n, zero and unbounded-field towers. It is not a duplicate: the existing pbc reconstruction nodes assume nilpotent ideals and pseudo-coherence of E_1 only. It does not restate the item, since it has weaker hypotheses and concludes pseudo-coherence only. Its form (B1–B9) is correct. The five declared generic derived-algebra tool_uses are accepted. No SGA source, no cycle, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NilRingPerfectDerivedLimit",
+  "declaration": "DerivedCategory.nilRingPerfectDerivedLimit",
+  "declarations": [
+   "DerivedCategory.nilRingRestrictionComp",
+   "DerivedCategory.nilRingTowerTransition",
+   "DerivedCategory.nilRingLimitReduction",
+   "DerivedCategory.nilRingExtensionAssoc",
+   "DerivedCategory.nilRingPerfectDerivedLimit"
+  ],
+  "file": "lean/Sheaf/RingTheory/NilRingPerfectDerivedLimit.lean",
+  "statement": "theorem nilRingPerfectDerivedLimit (hsurj : ∀ n, Function.Surjective (v n)) (hnil : ∀ n (x : R (n + 1)), x ∈ RingHom.ker (v n) → IsNilpotent x) (hring : ∀ (x : ∀ n, R n), (∀ n, v n (x (n + 1)) = x n) → ∃! a : A, ∀ n, q n a = x n) (B : ∀ n, DerivedCategory (ModuleCat.{u} (R (n + 1))) ⥤ DerivedCategory (ModuleCat.{u} (R n))) (badj : ∀ n, B n ⊣ (ModuleCat.restrictScalars (v n)).mapDerivedCategory) (K : ∀ n, DerivedCategory (ModuleCat.{u} (R n))) (t : ∀ n, K (n + 1) ⟶ (ModuleCat.restrictScalars (v n)).mapDerivedCategory.obj (K n)) (hperfect : ∀ n, IsPerfectRingComplex (K n)) (hbase : ∀ n, IsIso (((badj n).homEquiv (K (n + 1)) (K n)).symm (t n))) [HasProduct (fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (K n))] (T : DerivedCategory (ModuleCat.{u} A)) (p : T ⟶ ∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (K n)) (δ : (∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (K n)) ⟶ T⟦(1 : ℤ)⟧) (hlim : IsDerivedLimitTriangle (nilRingTowerTransition v q hq K t) T p δ) : IsPerfectRingComplex T ∧ (∀ n, IsIso (nilRingLimitReduction q L adj K T p n)) ∧ (∀ n, nilRingLimitReduction q L adj K T p n = (nilRingExtensionAssoc v q hq L adj B badj n).hom.app T ≫ (B n).map (nilRingLimitReduction q L adj K T p (n + 1)) ≫ ((badj n).homEquiv (K (n + 1)) (K n)).symm (t n)) ∧ ∀ (K' : ∀ n, DerivedCategory (ModuleCat.{u} (R n))) (t' : ∀ n, K' (n + 1) ⟶ (ModuleCat.restrictScalars (v n)).mapDerivedCategory.obj (K' n)), (∀ n, IsPerfectRingComplex (K' n)) → (∀ n, IsIso (((badj n).homEquiv (K' (n + 1)) (K' n)).symm (t' n))) → ∀ [HasProduct (fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (K' n))] (T' : DerivedCategory (ModuleCat.{u} A)) (p' : T' ⟶ ∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (K' n)) (δ' : (∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (K' n)) ⟶ T'⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (nilRingTowerTransition v q hq K' t') T' p' δ' → ∀ (φ : ∀ n, K n ⟶ K' n), (∀ n, t n ≫ (ModuleCat.restrictScalars (v n)).mapDerivedCategory.map (φ n) = φ (n + 1) ≫ t' n) → ∀ (f : T ⟶ T'), (∀ n, f ≫ p' ≫ Pi.π _ n = p ≫ Pi.π _ n ≫ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (φ n)) → ∀ n, (L n).map f ≫ nilRingLimitReduction q L adj K' T' p' n = nilRingLimitReduction q L adj K T p n ≫ φ n",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a05cf1b88",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and Stacks 0CQG (all-perfect case). Hypotheses: hsurj; hnil (elementwise nilpotent); hq plus hring characterize the limit ring with its projections; hperfect uses the dependency's IsPerfectRingComplex with an independent universe w; hbase is the adjunct of t_n. Scalar extension is any left adjoint L/B to exact restriction; this is equivalent by uniqueness of left adjoints and matches the landed RlimPerfectComplete pattern, since ordinaryDerivedChangeOfRings has no adjunction and only the standard derived category. The tower restriction uses the canonical restrictScalarsComp' compositor. IsDerivedLimitTriangle uses the 1-s convention. Conclusions: T perfect; the specific adjuncts rho_n of p_n are isomorphisms; the transition equation with the leftAdjointUniq associator was checked true by adjuncts and (1-s)p=0; naturality directions are correct. Edge cases (zero ring and complexes, index 0, universes) are covered. No duplicates in live Sheaf/WeilConjectures (sibling nodes have no Lean record) or Mathlib. Four real helper definitions with source and blueprint docstrings; theorem proof is sorry only; lean.statement verbatim; non-lean node fields and the checked stmt_dep records identical to live; imports exist. Worker report and second-reading sections present. No changes, no compile."
+ }
+}

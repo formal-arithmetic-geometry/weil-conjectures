@@ -1,0 +1,276 @@
+{
+ "id": "lem-weil-pbc-ringed-scalar-pullback-shift-normalization",
+ "kind": "statement",
+ "title": "Universal-counit normalization of the ringed scalar/pullback shift square",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "statement": "Let $g:\\operatorname{Sh}(\\mathcal C_X)\\to\\operatorname{Sh}(\\mathcal C_Y)$ be a morphism of topoi presented by sites small in the module universe [def-weil-pbc-ringed-topos-morphism, def-weil-size-convention]. Let $R_Y\\to S_Y$ and $R_X\\to S_X$ be maps of commutative ring sheaves, with structure maps $g^{-1}R_Y\\to R_X$ and $g^{-1}S_Y\\to S_X$ making the coefficient square commute. Work in the unbounded module-sheaf derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $C_W=-\\otimes^L_{R_W}S_W$ for scalar change, $L_g^R,L_g^S$ for the two ringed derived pullbacks. Use their fixed cochain shifts and their universal derived counits/units, computed from flat-term K-flat resolutions [lem-pur-derived-change-of-rings, lem-weil-pbc-ringed-topoi-derived-pullback]. The scalar shifts are normalized by the scalar universal derived counits [lem-pur-coefficient-scalar-shifts].\n\nLet $\\theta_g:L_g^S C_Y\\xrightarrow{\\sim}C_XL_g^R$ be the canonical balanced derived comparison: on resolving complexes it is the comparison between the two iterated sheaf tensor products induced by the commuting ring square, and its derived normalization is by these universal counits. Then $\\theta_g$ commutes with the fixed integer shifts. Explicitly, for $H_1=L_g^SC_Y,H_2=C_XL_g^R$ and every $n\\in\\mathbf Z$,\n$$\\sigma_{H_2,K,n}\\,\\theta_{g,K[n]}=(\\theta_{g,K})[n]\\,\\sigma_{H_1,K,n},$$\nusing the composite shift convention of [lem-weil-pbc-commshift-nattrans-comp-whisker]. No boundedness, coefficient flatness, properness or constructibility assumption is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Operations shift clause: current proof step 6, ordinary derived scalar/pullback comparison on nonexact ringed structure maps. Agent extraction; argument retained in report.md.",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat: flat-term K-flat pullback models; universal-counit-normalized shift descent is an agent refinement."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pur-coefficient-scalar-shifts",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "def-pur-cochain-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Apply cochainUniversalCounitTransport to the universal homotopy-category pair of lem-weil-pbc-ringed-topoi-derived-pullback. Its first clause gives universality of the prescribed derivedCochainCounit; its second clause transfers invertibility on every flat-term independently K-flat complex. Uniqueness of left derived pairs identifies this cochain pair with the supplied pair. Cancel the invertible comparison component to prove pull_counit_isIso for the supplied counit. This reuses the existing transport theorem and contains no separate proof of Kan precomposition or change along an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-cochain-universal-counit-transport",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the existing scalarAssociation termwise and use mapHomologicalComplexCompIso on its source and target. This gives a natural transformation beta whose component is exactly kappa. The standard termwise lift, composition comparisons, and their inverses commute with every integer shift. The supplied NatTrans.CommShift hypotheses on the four counits imply the same for their whiskered composites b1 and b2, and localization of beta.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Resolve a representative of K by a flat-term independently K-flat P using lem-pc-kflat-resolution. Convert the resolution flatness convention to IsFlatOnSite using siteSheafTensorRightIso from lem-weil-pbc-independent-sheaf-tensor-colimits. Quasi-isomorphism inversion and essential surjectivity give Q(P) isomorphic to K. Ringed pullback preserves flat terms and K-flatness. Apply step 1 to eR at P and eX at pull(f)(P), using extensionPullback for scalar extension. Hence b2 at P is invertible; b1 need not be shown invertible.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "def-pur-cochain-coefficient-arrows",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Shifts preserve independent K-flatness: for any acyclic A, tensor(A,P[n]) is isomorphic to tensor(A,P)[n] by the total-tensor integer-shift isomorphism. The latter is acyclic by shift closure of the homotopy acyclic subcategory. Flatness of terms of P[n] is flatness of P in degree i+n. Thus the normalization hypothesis applies to both P and P[n].",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private shift_on_model lemma writes the shift equation for b1 followed by localized beta. Substitute normalization at P and P[n], then the shift equation for b2 and naturality of theta along the shift comparison of Q. Cancel the shifted invertible component b2(P) and the image of the shift comparison of Q. This proves the required equation at Q(P). Both sides are components of natural transformations from shift followed by CY followed by LS to LR followed by CX followed by shift. Naturality transports their equality along Q(P) isomorphic to K, proving the stated equation for arbitrary K and n.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-cochain-universal-counit-transport",
+  "def-weil-abstract-derived-category",
+  "def-pur-cochain-coefficient-arrows",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-pur-homotopy-category-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 0G7E and 0D6D; derived.tex Tag 05SU. Lean assembly of the existing flat-term K-flat computation declarations, termwise shift compatibility, and universal-counit cancellation. Cochain universality and component invertibility are imported from CategoryTheory.cochainUniversalCounitTransport; the duplicated private Kan-transport helpers of returned head 0a527a9d9cf are removed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CommShift.*mate|mate.*CommShift|counit.*CommShift",
+   "results": "5 hits: Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean; candidates read as described in report.md.",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give abstract shift/adjunction compatibility or underived pullback composition, not the counit-normalized ringed derived scalar square together with the fixed K-injective shifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Adjunction",
+   "results": "4 hits: CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Adjunction.CommShift.commShift_unit, CategoryTheory.Adjunction.CommShift.mk', CategoryTheory.Adjunction.CommShift.mk; candidates read as described in report.md.",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give abstract shift/adjunction compatibility or underived pullback composition, not the counit-normalized ringed derived scalar square together with the fixed K-injective shifts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived scalar pullback comparison normalized by K flat resolution counits commutes with shifts",
+   "results": "8 hits: CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.PullbackShift.adjunction_counit, CategoryTheory.Adjunction.CommShift.compatibilityUnit_right, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit; candidates read as described in report.md.",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give abstract shift/adjunction compatibility or underived pullback composition, not the counit-normalized ringed derived scalar square together with the fixed K-injective shifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat derived tensor balancing natural isomorphism preserves shift normalized universal counit",
+   "results": "8 hits: HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.rightUnitor'_inv, HomologicalComplex.leftUnitor'_inv_comm, HomologicalComplex.leftUnitor'_inv, HomologicalComplex.leftUnitor'_inv_comm_assoc, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.shiftEquiv'_counitIso, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app; candidates read as described in report.md.",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give abstract shift/adjunction compatibility or underived pullback composition, not the counit-normalized ringed derived scalar square together with the fixed K-injective shifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived scalar extension pullback comparison commutes with integer shifts and its direct image adjunction mate commutes with shifts",
+   "results": "8 hits: PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp, CategoryTheory.Adjunction.commShiftPullback, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.PullbackShift.adjunction, SheafOfModules.pullbackIso, PresheafOfModules.pullback_comp_id; candidates read as described in report.md.",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give abstract shift/adjunction compatibility or underived pullback composition, not the counit-normalized ringed derived scalar square together with the fixed K-injective shifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatTrans, CategoryTheory.NatTrans.CommShift",
+   "results": "0 hits: ; source candidates inspected in the report.",
+   "date": "2026-10-23",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No match: general left-derived natural transformation construction and counit factorization, without the required shift equation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatTrans.*[Cc]ommShift|[Cc]ommShift.*leftDerivedNatTrans|leftDerivedNatIso.*[Cc]ommShift",
+   "results": "0 hits: ; source candidates inspected in the report.",
+   "date": "2026-10-23",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No match: the general left-derived comparison declarations do not include its shift equation or the ringed-topos K-flat hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison between composite left derived functors of module sheaf scalar extension and ringed pullback commutes with shifts",
+   "results": "8 hits: CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.leftDerived_fac_app, PresheafOfModules.pullback, CategoryTheory.Functor.leftDerivedNatIso; source candidates inspected in the report.",
+   "date": "2026-10-23",
+   "digest": "1f712326ada48d87",
+   "verdict": "No match: ordinary site-induced pullback composition and exact-functor results do not state this unbounded nonexact ringed-topos comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars and ringed topos pullback comparison commute with integer shifts normalized by universal derived counits",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, PresheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; source candidates inspected in the report.",
+   "date": "2026-10-23",
+   "digest": "85aa03156ff47763",
+   "verdict": "No match: ordinary site-induced pullback composition and exact-functor results do not state this unbounded nonexact ringed-topos comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatTrans|leftDerivedNatIso|rightKanExtension.*[Ss]hift",
+   "results": "5 hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; source candidates inspected in the report.",
+   "date": "2026-10-23",
+   "digest": "628d747d0ad52d47",
+   "verdict": "No match: the general left-derived comparison declarations do not include its shift equation or the ringed-topos K-flat hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatTrans",
+   "results": "10 hits: CategoryTheory.Functor.leftDerivedNatTrans_id, CategoryTheory.Functor.leftDerivedNatTrans, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatIso_inv, CategoryTheory.Functor.leftDerivedNatTrans_fac, CategoryTheory.Functor.leftDerivedNatTrans_app, CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.Functor.leftDerivedNatTrans_fac_assoc; source candidates inspected in the report.",
+   "date": "2026-10-23",
+   "digest": "e91b6b9ef5fdfb0b",
+   "verdict": "No match: general left-derived natural transformation construction and counit factorization, without the required shift equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation induced on total left derived functors by a shift compatible transformation is compatible with shift",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.NatTrans.leftDerived, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.leftDerivedNatTrans_app, CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.Functor.leftDerivedNatTrans_fac; source candidates inspected in the report.",
+   "date": "2026-10-23",
+   "digest": "6e4f85e594e47a48",
+   "verdict": "No match: exact-functor localization shift instances and homological derived transformations do not state the normalized nonexact ringed-topos square."
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def pullbackComp|lemma conjugateEquiv_pullbackComp_inv|def pullbackObjUnitToUnit",
+   "results": "3 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167 (SheafOfModules.pullbackComp), :177 (SheafOfModules.conjugateEquiv_pullbackComp_inv); Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:86 (SheafOfModules.pullbackObjUnitToUnit). Sources read.",
+   "date": "2026-10-23",
+   "digest": "410d21f5cbd551b7",
+   "verdict": "No match: ordinary site-induced pullback composition and ordinary pullback of the tensor unit; no total derived shift compatibility statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-scalar-extension",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Operations shift clause, current proof step 6 of prop-weil-pbc-scalar-extension: the ordinary scalar/pullback shift equation before taking its pushforward mate.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-weil-pbc-ringed-scalar-pullback-shift-normalization",
+  "worker": "stage1",
+  "summary": "Verified the nonexact ringed-topos case on one flat-term K-flat resolution. Existing pullback preservation and computation nodes supply both iterated models; the balanced map is checked explicitly against signed shifts, and the two normalized counits are cancelled to obtain the derived equality. No new nodes, hypothesis changes or Lean files.",
+  "blueprint": "Realizes the ordinary pullback/scalar shift equation in current assembly step 6 of prop-weil-pbc-scalar-extension, retaining its canonical ordinary comparison and universal-counit normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic scalar-change computation on K-flat resolutions; the unit does not replace the construction of derived scalar extension."
+   },
+   {
+    "node": "lem-pur-coefficient-scalar-shifts",
+    "why": "Generic universal-counit normalization of the scalar shifts fixed in the item."
+   },
+   {
+    "node": "lem-pur-right-kan-extension-coherent-shift",
+    "why": "Generic universal shift construction applied to the two ringed derived pullbacks; no exactness of ordinary ringed pullback is assumed."
+   },
+   {
+    "node": "lem-pur-homotopy-category-triangulated",
+    "why": "Generic shift compatibility of homotopy localization used in the representative counit equations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-homotopy-category-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NA-bed2847cc",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-bed2847cc (reviewer sub-agent of L); spot-checked: Read all 5 steps in full, every cited statement, the parent's proof step 6, the main-20261015 scalar-extension blueprint file and Stacks 0G7E/0D6D/06YY/06YS/03EL/05SU. The delivery adds a proof only: no new nodes, statement and stmt_deps unchanged. The proof follows the 0D6D pattern (flat-term K-flat representative, two iterated termwise pullbacks). Step 1: preserves-kflat allows u=id and a nonflat c, so both intermediate complexes are flat-term K-flat and the counits b_1, b_2 are invertible. Step 2: checked the balanced map and its inverse; A_0-balancing holds exactly by the commuting square v(a)=w(a), and both composites are the identity by B- and D-balancing. Step 3: F_i is additive, so the shifted differential is (-1)^n F_i(d) and t_i is the identity with no sign; P[n] stays K-flat via s^2_n. Step 4: both counits are shift-compatible (scalar by lem-pur-coefficient-scalar-shifts, pullback by the right-Kan lemma with Q and termwise pullback shift-compatible), then whiskered and composed. Step 5: the three-line cancellation and the transport to arbitrary K via h are correct. Advisory points, none of them a fault: (1) commshift-nattrans-comp-whisker is stated for [1]; extending to all integer n is a routine coherence induction. (2) 'Fixed cochain shifts' of L_g must be read as the counit-normalized (resolution-shift) structure; step 4 makes this explicit, it matches the sibling lem-weil-pbc-pullback-tensor-canonical-shift-unit, and a (-1)^n twist of one pullback's shifts would break the equation. Edge cases checked: n=0, n=±1, identity maps, zero ring, nonflat Z->Z/2. No duplicate found in the DAG (scalar-only, exact-inverse-image and tensor shift nodes are different statements). Off-unit kflat-resolution and kflat-complex are Lean-closed; the declared tool_uses are accepted. No SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedScalarPullbackShiftNormalization",
+  "declaration": "SheafOfModules.ringedScalarPullbackShiftNormalization",
+  "file": "lean/Sheaf/Paper/RingedScalarPullbackShiftNormalization.lean",
+  "statement": "theorem ringedScalarPullbackShiftNormalization {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C] {X : Type x} [Category.{z} X] [EssentiallySmall.{r} X] {J : GrothendieckTopology C} {T : GrothendieckTopology X} {R : Sheaf J CommRingCat.{r}} {S : Sheaf T CommRingCat.{r}} (f : RingedPullback R S) (k : Comparison f) (d : CoefficientSquare f) (k' : Comparison (changed f d)) [HasDerivedCategory.{w} (Modules R)] [HasDerivedCategory.{w} (Modules S)] [HasDerivedCategory.{w} (Modules d.R')] [HasDerivedCategory.{w} (Modules d.S')] (CY : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules d.R')) (CX : DerivedCategory (Modules S) ⥤ DerivedCategory (Modules d.S')) (LR : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S)) (LS : DerivedCategory (Modules d.R') ⥤ DerivedCategory (Modules d.S')) (eY : DerivedCategory.Q ⋙ CY ⟶ extend d.sourceMap ⋙ DerivedCategory.Q) (eX : DerivedCategory.Q ⋙ CX ⟶ extend d.targetMap ⋙ DerivedCategory.Q) (eR : DerivedCategory.Q ⋙ LR ⟶ pull f ⋙ DerivedCategory.Q) (eS : DerivedCategory.Q ⋙ LS ⟶ pull (changed f d) ⋙ DerivedCategory.Q) [CY.IsLeftDerivedFunctor eY (HomologicalComplex.quasiIso (Modules R) (.up ℤ))] [CX.IsLeftDerivedFunctor eX (HomologicalComplex.quasiIso (Modules S) (.up ℤ))] [LR.IsLeftDerivedFunctor eR (HomologicalComplex.quasiIso (Modules R) (.up ℤ))] [LS.IsLeftDerivedFunctor eS (HomologicalComplex.quasiIso (Modules d.R') (.up ℤ))] [CY.CommShift ℤ] [CX.CommShift ℤ] [LR.CommShift ℤ] [LS.CommShift ℤ] [NatTrans.CommShift eY ℤ] [NatTrans.CommShift eX ℤ] [NatTrans.CommShift eR ℤ] [NatTrans.CommShift eS ℤ] (theta : CY ⋙ LS ≅ LR ⋙ CX) (normalized : ∀ P : Complex R, CochainComplex.IsKFlatIndependentCoefficients (R := R) P → (∀ i : ℤ, IsFlatOnSite (J := J) (R := R) (P.X i)) → theta.hom.app (DerivedCategory.Q.obj P) ≫ CX.map (eR.app P) ≫ eX.app ((pull f).obj P) = LS.map (eY.app P) ≫ eS.app ((extend d.sourceMap).obj P) ≫ DerivedCategory.Q.map (kappa f k d k' P).hom) (K : DerivedCategory (Modules R)) (n : ℤ) : theta.hom.app (K⟦n⟧) ≫ ((LR ⋙ CX).commShiftIso n).hom.app K = ((CY ⋙ LS).commShiftIso n).hom.app K ≫ (theta.hom.app K)⟦n⟧'",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-076aea5ac",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read item module, node, all 9 stmt_dep records and the live sources of CoefficientSquare/changed/scalarAssociation/kappa/extend/pull/Comparison/ScalarShifts. Only change vs live node: lean record + stmt_dep def-pur-cochain-coefficient-arrows (landed owner of CoefficientSquare/kappa, needed). H1=CY⋙LS, H2=LR⋙CX; normalized hypothesis = b2∘θ = Q(kappa)∘b1 on flat-term K-flat P, with kappa the unique generator-normalized scalarAssociation, so θ is pinned (b2 invertible) and not arbitrary. The four CommShift instances are each constrained by NatTrans.CommShift of their universal counit over Mathlib's canonical termwise mapHomologicalComplex shift, which matches lem-pur-coefficient-scalar-shifts and step 4. Conclusion is the node's equation for all K and n:ℤ in Mathlib's composite convention. No extra flatness, bounds or universe equality; universes c v x z r w all bound; statement verbatim; docstrings carry source, blueprint id and 5 steps; single sorry, no defs. Advisory: the second reading was by the same worker. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261024T014514-L-2207687",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

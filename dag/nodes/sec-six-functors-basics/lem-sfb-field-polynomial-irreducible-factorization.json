@@ -1,0 +1,160 @@
+{
+ "id": "lem-sfb-field-polynomial-irreducible-factorization",
+ "kind": "statement",
+ "title": "Irreducible factorization of polynomials over a field",
+ "statement": "Let $K$ be a field [def-weil-field] and let $P\\in K[T]$ be a nonzero polynomial [def-weil-polynomial-ring]. There exist $u\\in K^\\times$, an integer $r\\geq0$ and irreducible polynomials $p_1,\\ldots,p_r\\in K[T]$, repetitions allowed, such that $P=u\\prod_{j=1}^rp_j$; for $r=0$ the product is $1$. Here $p$ is irreducible if it is nonzero, is not a unit of $K[T]$, and in every factorization $p=ab$ in $K[T]$ one of $a,b$ is a unit.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BC1 (lemma-polynomial-ring-UFD), the case of one variable over a field: existence of a factorization into irreducibles. Mathlib: WfDvdMonoid.exists_factors, Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean:77-78, with Polynomial.isUnit_iff, Mathlib/Algebra/Polynomial/Degree/Units.lean:48."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BC1, lemma-polynomial-ring-UFD, one-variable field case; Mathlib leaf realized by the declarations and source lines recorded in mathlib_match."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "theorem exists_factors|uniqueFactorizationMonoid|lemma isUnit_iff",
+   "results": "Defs.lean:77 WfDvdMonoid.exists_factors; Polynomial/UniqueFactorization.lean:92 Polynomial.uniqueFactorizationMonoid; Degree/Units.lean:48 Polynomial.isUnit_iff",
+   "date": "2026-10-24",
+   "verdict": "match: exists_factors on K[X] (a UFD, hence WfDvdMonoid) gives a multiset of irreducibles whose product is associated to P; units of K[X] are the constants C r with r a unit (isUnit_iff)"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_factors|uniqueFactorizationMonoid|lemma isUnit_iff",
+   "results": "{\"t\": \"2026-10-24T07:20:24Z\", \"tool\": \"grep\", \"query\": \"theorem exists_factors|uniqueFactorizationMonoid|lemma isUnit_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\"], \"digest\": \"6ccce211d29ccab0\"}",
+   "date": "2026-10-24",
+   "verdict": "related: search hits recorded as returned; targeted Loogle and grep searches identify the exact factorization and unit declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonzero polynomial over a field factors as a nonzero constant times irreducible polynomials",
+   "results": "{\"t\": \"2026-10-24T07:20:24Z\", \"tool\": \"leansearch\", \"query\": \"Every nonzero polynomial over a field factors as a nonzero constant times irreducible polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.fact_irreducible_factor\", \"Polynomial.factor\", \"Polynomial.irreducible_factor\", \"Polynomial.exists_monic_irreducible_factor\", \"Polynomial.factor_dvd_of_not_isUnit\", \"Polynomial.factor_dvd_of_degree_ne_zero\", \"Polynomial.exists_irreducible_of_natDegree_ne_zero\", \"Polynomial.factor_dvd_of_natDegree_ne_zero\"], \"digest\": \"f40489c931d4a07d\"}",
+   "date": "2026-10-24",
+   "verdict": "related: search hits recorded as returned; targeted Loogle and grep searches identify the exact factorization and unit declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "WfDvdMonoid.exists_factors",
+   "results": "{\"t\": \"2026-10-24T07:20:25Z\", \"tool\": \"loogle\", \"query\": \"WfDvdMonoid.exists_factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"WfDvdMonoid.exists_factors\"], \"digest\": \"4ac0de53ca2a04b7\"}",
+   "date": "2026-10-24",
+   "verdict": "match: exact declaration; source and hypotheses read locally"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonzero polynomial over a field is a unit times a finite product of irreducible polynomials",
+   "results": "{\"t\": \"2026-10-24T07:20:25Z\", \"tool\": \"leanfinder\", \"query\": \"Every nonzero polynomial over a field is a unit times a finite product of irreducible polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.fact_irreducible_factor\", \"Polynomial.irreducible_factor\", \"Polynomial.factor\", \"Polynomial.exists_monic_irreducible_factor\", \"Polynomial.Splits.def\", \"Polynomial.leadingCoeff_mul_prod_normalizedFactors\", \"Polynomial.splits_iff\", \"Polynomial.factor_dvd_of_not_isUnit\"], \"digest\": \"86d55b5d58b26f77\"}",
+   "date": "2026-10-24",
+   "verdict": "related: Polynomial.leadingCoeff_mul_prod_normalizedFactors supplies an alternative; exact match verified via WfDvdMonoid.exists_factors and Polynomial.isUnit_iff"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_factors|instance.*WfDvd|uniqueFactorizationMonoid",
+   "results": "{\"t\": \"2026-10-24T07:21:03Z\", \"tool\": \"grep\", \"query\": \"theorem exists_factors|instance.*WfDvd|uniqueFactorizationMonoid\", \"sub\": \"RingTheory/UniqueFactorizationDomain\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/Finsupp.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/Finsupp.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/Finsupp.lean\"], \"digest\": \"35f2b9c811c0646e\"}",
+   "date": "2026-10-24",
+   "verdict": "related: search hits recorded as returned; targeted Loogle and grep searches identify the exact factorization and unit declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "uniqueFactorizationMonoid",
+   "results": "{\"t\": \"2026-10-24T07:21:03Z\", \"tool\": \"grep\", \"query\": \"uniqueFactorizationMonoid\", \"sub\": \"RingTheory/Polynomial\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/UniqueFactorization.lean\", \"Mathlib/RingTheory/Polynomial/UniqueFactorization.lean\", \"Mathlib/RingTheory/Polynomial/UniqueFactorization.lean\", \"Mathlib/RingTheory/Polynomial/UniqueFactorization.lean\", \"Mathlib/RingTheory/Polynomial/UniqueFactorization.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean\", \"Mathlib/RingTheory/Polynomial/Radical.lean\"], \"digest\": \"90a0032a1b9f0e26\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Polynomial.uniqueFactorizationMonoid at Mathlib/RingTheory/Polynomial/UniqueFactorization.lean:92"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma isUnit_iff",
+   "results": "{\"t\": \"2026-10-24T07:21:03Z\", \"tool\": \"grep\", \"query\": \"lemma isUnit_iff\", \"sub\": \"Algebra/Polynomial/Degree\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Degree/Units.lean\"], \"digest\": \"675ec36e80192b29\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Polynomial.isUnit_iff at Mathlib/Algebra/Polynomial/Degree/Units.lean:48"
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem exists_factors",
+   "results": "{\"t\": \"2026-10-24T07:21:42Z\", \"tool\": \"grep\", \"query\": \"^theorem exists_factors\", \"sub\": \"RingTheory/UniqueFactorizationDomain\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean\"], \"digest\": \"dbe5655885b603e8\"}",
+   "date": "2026-10-24",
+   "verdict": "match: WfDvdMonoid.exists_factors at Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean:77"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.isUnit_iff",
+   "results": "{\"t\": \"2026-10-24T07:21:43Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.isUnit_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Polynomial.isUnit_iff\"], \"digest\": \"9d2d694a34da54ed\"}",
+   "date": "2026-10-24",
+   "verdict": "match: exact declaration; source and hypotheses read locally"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "WfDvdMonoid.exists_factors, Polynomial.isUnit_iff",
+  "file": "Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean",
+  "line": 77,
+  "how": "specializes in one line: WfDvdMonoid.exists_factors P hP (Mathlib/RingTheory/UniqueFactorizationDomain/Defs.lean:77-85, hypotheses at 43-49) gives a finite multiset f of irreducibles and Associated f.prod P, that is a polynomial unit v with f.prod * v = P (Associated, Mathlib/Algebra/GroupWithZero/Associated.lean:29-30). Polynomial.isUnit_iff (Mathlib/Algebra/Polynomial/Degree/Units.lean:48-53, hypotheses at 28-29) writes v = C u for a unit u of K; commutativity and an enumeration of f give exactly P = u product_j p_j, allowing f empty. The inferred polynomial UFD instance is Polynomial.uniqueFactorizationMonoid at Mathlib/RingTheory/Polynomial/UniqueFactorization.lean:92-94. The coefficient field is a UFD via Field.toEuclideanDomain (Mathlib/Algebra/EuclideanDomain/Field.lean:25), EuclideanDomain.to_principal_ideal_domain (Mathlib/RingTheory/PrincipalIdealDomain.lean:287), PrincipalIdealRing.to_uniqueFactorizationMonoid (same file:371-373); UniqueFactorizationMonoid extends well-founded divisibility (Defs.lean:135-137), supplying WfDvdMonoid. All indicated source lines were read on 2026-10-24. The node defines irreducibility inline by nonzero, nonunit, and the unit-factor property, which is Mathlib Irreducible in the nontrivial domain K[X]."
+ },
+ "mathlib_candidate": null,
+ "status": "mathlib",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-normal-domain-monic-prime-factorization",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4, proof of Theorem 21.14.1, final paragraph of the complete power-series case: factorization of the fraction-field polynomial into irreducibles; isolated here as step 1 of lem-sfb-normal-domain-monic-prime-factorization.",
+   "via": [
+    "lem-sfb-normal-domain-monic-prime-factorization",
+    "lem-sfb-complete-normal-horizontal-primes-principal",
+    "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-polynomial-irreducible-factorization",
+  "worker": "stage1",
+  "summary": "Verified and promoted the existing factorization candidate to a Mathlib leaf, keeping the statement and definition dependencies unchanged. Searched the project for an exact attachment and searched the whole DAG and latest blueprint for duplicates. Recorded fresh LeanFinder, Loogle, LeanSearch and targeted Mathlib grep searches, read the factorization theorem, polynomial unit characterization and instance chain, and checked constants, the empty product and repeated irreducible factors. No new nodes or proof steps are needed.",
+  "blueprint": "Supporting algebra for the fraction-field factorization in lem-sfb-normal-domain-monic-prime-factorization, on the inherited EGA IV4 Theorem 21.14.1 route. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and its direct-images proof (3). The inherited created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); retained from.node = null and its explicit EGA place and via chain. Whole-blueprint searches found no equivalent blueprint statement; same_as = []."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-50554e98c",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-50554e98c (reviewer sub-agent of L); spot-checked: I read the whole item, and the delivery is fine. It is one commit with the item JSON and the report. It creates no new nodes and does not touch the statement, stmt_deps, source, created or blueprint fields; I checked this by diffing against the side-live copy of the base node. The only changes are: status goes from unsplit to mathlib, mathlib_candidate becomes null, and it adds mathlib_match, the logged searches (LeanSearch, Loogle, LeanFinder and grep), proof_origin and split_report. Source: Stacks algebra.tex line 29578, lemma-polynomial-ring-UFD; the tags file confirms this is 0BC1, and its proof gives existence of factorizations into irreducibles. I read each Mathlib declaration at its cited line. WfDvdMonoid.exists_factors (UniqueFactorizationDomain/Defs.lean:77) gives a multiset of irreducibles whose product is Associated to P. Associated (GroupWithZero/Associated.lean:29) means x*u=y for a unit u. Polynomial.isUnit_iff (Degree/Units.lean:48, which assumes NoZeroDivisors) says that unit is C r. The instances that make K[T] a UFD are Polynomial.uniqueFactorizationMonoid (Polynomial/UniqueFactorization.lean:92), Field.toEuclideanDomain (Field.lean:25), EuclideanDomain.to_principal_ideal_domain (PrincipalIdealDomain.lean:287) and to_uniqueFactorizationMonoid (lines 371-373). WfDvdMonoid is an abbrev (Defs.lean:36) and comes from UniqueFactorizationMonoid's well-foundedness parent (lines 135-137). Mathlib's Irreducible matches the node's inline definition, since nonzero is automatic. So the item follows from two declarations plus inferred instances: a valid leaf. Edge cases check out: a nonzero constant gives r=0; T^2 gives a repeated factor; an irreducible P gives r=1; P=0 and the zero ring are excluded. Both stmt_deps (def-weil-field, def-weil-polynomial-ring) say what is used. The only citer, step 1 of lem-sfb-normal-domain-monic-prime-factorization, takes exactly this statement. Related nodes are not duplicates: lem-sfb-polynomial-field-ufd (multivariate prime factorization), lem-per-polynomial-ufd-prime-quotient (PID coefficients) and lem-trf-factorization-exists (Noetherian domain, nonunits only). No fixes; no tool_uses needed."
+ }
+}

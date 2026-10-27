@@ -1,0 +1,123 @@
+{
+ "id": "def-cbc-proetale-clopen-mate-data",
+ "kind": "definition",
+ "title": "The specified finite-level proetale clopen alpha and proper mate",
+ "statement": "Let $\\Lambda$ be a commutative ring and let $k:V\\hookrightarrow W$, $i:S\\hookrightarrow T$ be quasi-compact open immersions of schemes, with $r:V\\to S$, $p:W\\to T$ proper and $pk=ir$. On small proetale module sheaves write $G_f=f^{-1}$, $R_f=f_*$ and $J_j=j_!$ [def-weil-pbc-proetale-operations]. Let $b,q$ be the projections of $W\\times_T S$ and $s=(k,r)$ its clopen lift [def-cbc-strict-tower-proper-open-arrows]. Define $\\pi_s:\\mathrm{id}\\to J_sG_s$ to be the unit of $G_s\\dashv R_s$ followed by the inverse of the canonical $J_s\\to R_s$. Define $\\alpha_Q:G_pJ_i\\to J_kG_r$ by inverse cartesian open base change, then $J_b\\pi_sG_q$, then the canonical open and inverse-image compositors and equality transports $bs=k$, $qs=r$. On $D^+$ use exact-functor/right-derived comparison on $J_i,J_k$ to form the right-derived base-change map of this alpha. Define $\\gamma_Q:J_iR_r\\to R_pJ_k$ as its mate under the specified proper inverse-image/direct-image adjunctions [def-weil-pbc-adjunction-mate]. All six existing Lean definitions, including the two equality-transport isomorphisms, are unchanged constructions; no comparison property or invertibility of the proper mate is part of this definition.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R and 09AF, with more-etale.tex Tag 0F7B; the original finite-clopen-mate-site-transport construction and proof steps 2--4."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-adjunction-mate",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "lem-cbc-proetale-extension-zero-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale to proetale comparison preserves the clopen projection and canonical proper open alpha",
+   "results": "8 hits: TopologicalSpace.Clopens.coe_toOpens, TopologicalSpace.Clopens.Simps.coe, Profinite.exists_isClopen_of_cofiltered, AlgebraicGeometry.Scheme.Etale, TopologicalSpace.Clopens.toCloseds, DiscreteQuotient.isClopen_preimage, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.instTensorProduct.",
+   "date": "2026-10-23",
+   "verdict": "No site comparison, extension by zero, or derived clopen alpha statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale to proetale comparison preserves the clopen identity zero projection and the alpha for a proper open square",
+   "results": "8 hits, headed by StandardEtalePresentation.toSubmersivePresentation_map and AlgebraicGeometry.Scheme.Etale.forget; no site-comparison or clopen-alpha theorem.",
+   "date": "2026-10-23",
+   "verdict": "No matching construction or comparison theorem in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: mateEquiv, mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, unit_mateEquiv_symm and pasting/iterated mate formulas.",
+   "date": "2026-10-23",
+   "verdict": "Generic mate calculus is used for the parent proof; it does not construct or compare the geometric clopen alphas."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Cc]omparison|[Cc]omparison.*clopen",
+   "results": "0 Mathlib hits. Source-library/DAG searches found the original finite-clopen-mate item, the etale normalization, and proetale-internal strict-tower clopen projectors, but no separate etale/proetale alpha transport theorem. blueprint_refs.py search clopen found 12 blueprint nodes, none the site-comparison alpha assertion.",
+   "date": "2026-10-23",
+   "verdict": "No duplicate alpha transport or finite proetale clopen data node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteClopenMateSiteTransport",
+  "date": "2026-10-23",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "final compatibility paragraph: finite etale/pro-etale clopen comparison, alpha before proper adjunction mating",
+   "via": [
+    "lem-cbc-finite-clopen-mate-site-transport",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteClopenMateData",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClopenMateData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.cbcClopenAlphaPlus",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.cbcOpenCongr",
+   "AlgebraicGeometry.ProEtale.cbcPullCongr",
+   "AlgebraicGeometry.ProEtale.cbcClopenProjection",
+   "AlgebraicGeometry.ProEtale.cbcClopenAlphaSheaf",
+   "AlgebraicGeometry.ProEtale.cbcClopenAlphaPlus",
+   "AlgebraicGeometry.ProEtale.cbcClopenMatePlus"
+  ],
+  "statement": "def cbcClopenAlphaPlus (Λ : Type (u + 1)) [CommRing Λ]\n    {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :\n    (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus ⋙\n        (upperStar (ModuleCat.{u + 1} Λ) p).mapDerivedCategoryPlus ⟶\n      (upperStar (ModuleCat.{u + 1} Λ) r).mapDerivedCategoryPlus ⋙\n        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-23",
+  "note": "Six existing definitions moved verbatim from the item, with unchanged names, types, values and visibility. The old module publicly reexports this module. There is no new object choice and no sorry in a definition."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-eae58",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261024T020314-L-2580794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-eae58",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261024T020314-L-2580794",
+  "kind": "interface",
+  "note": "independent cc review: Verbatim move of 6 defs (diffed vs live) + item theorem (identical signature) proved from the split-off alpha conjunct; importer SystemCompatibleCompositorNormalization and all 3 modules compile rc 0; node records vs Lean"
+ }
+}

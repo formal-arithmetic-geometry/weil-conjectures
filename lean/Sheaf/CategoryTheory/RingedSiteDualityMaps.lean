@@ -8,16 +8,22 @@ module
 public import Sheaf.Paper.CoefficientRingedTensorHomModel
 public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
+public import Sheaf.CategoryTheory.RingedSiteOrdinaryHomComparison
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import WeilConjectures.Algebra.Homology.HomComplexComponents
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.CategoryTheory.RingedSiteHomComponentProjection
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
+import all Sheaf.Algebra.Homology.RingedTensorConstraintCompletion
+import Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose
+import Sheaf.Algebra.Homology.RingedSliceTensorConstraints
+import Sheaf.Algebra.Homology.RingedSliceScalarUnit
+import Sheaf.Algebra.Homology.RingedSignedBidualLocalization
+import Sheaf.Algebra.Homology.RingedOrdinaryEvaluationLocalization
 /-! # Canonical coefficient-duality maps on a ringed site
 
 Source: Stacks Project, sites-cohomology.tex, Tags 08JD, 08JE, 0A97 and 0A98
@@ -32,9 +38,9 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-universe c v r w w' a b
+universe c v r w w' a b x y
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
-open SheafOfModules
+open SheafOfModules WeilConjectures
 namespace CategoryTheory
 
 section Closed
@@ -188,7 +194,310 @@ def ringedSiteDualEvaluationLeftNatTrans (P : D) :
   app N := ringedSiteDualEvaluationLeft S s O u P N
   naturality _ _ f := ringedSiteDualEvaluationLeft_naturality S s O u P f
 
+
 end Closed
+
+section RestrictionAssembly
+variable {D : Type a} [Category.{x} D] {E : Type b} [Category.{y} E]
+  {H : Dᵒᵖ × D ⥤ D} {HU : Eᵒᵖ × E ⥤ E}
+  (S : CoefficientClosedStructure H) (SU : CoefficientClosedStructure HU)
+  (s : @SymmetricCategory D _ S.monoidal)
+  (sU : @SymmetricCategory E _ SU.monoidal)
+
+private theorem ringedSiteTranspose_target (T P : D) {Q Q' : D} (f : Q ⟶ Q')
+    (g : S.tensor.obj (T, P) ⟶ Q) :
+    S.transpose T P Q' (g ≫ f) =
+      S.transpose T P Q g ≫ H.map (𝟙 (op P), f) :=
+  (S.adjunction P).homEquiv_naturality_right g f
+
+private theorem ringedSiteEvaluation_target (P : D) {Q Q' : D} (f : Q ⟶ Q') :
+    S.tensor.map (H.map (𝟙 (op P), f), 𝟙 P) ≫ S.evaluation P Q' =
+      S.evaluation P Q ≫ f := by
+  let := S.monoidal
+  simpa only [CoefficientClosedStructure.tensor, tensor_map, tensorHom_id,
+    CoefficientClosedStructure.evaluation, Functor.comp_map, Prod.sectR,
+    tensorRight, curriedTensor, Functor.flip, Functor.id_map] using
+    (S.adjunction P).counit.naturality f
+
+private theorem ringedSiteBidual_coefficient (P O O' : D) (u : O ≅ O') :
+    ringedSiteBidual S s O P ≫ H.map (X := (op (H.obj (op P, O)), O))
+      (Y := (op (H.obj (op P, O)), O')) (𝟙 _, u.hom) ≫
+      H.map (X := (op (H.obj (op P, O)), O'))
+        (Y := (op (H.obj (op P, O')), O'))
+        ((H.map (X := (op P, O')) (Y := (op P, O)) (𝟙 (op P), u.inv)).op, 𝟙 O') =
+        ringedSiteBidual S s O' P := by
+  let := S.monoidal
+  let := s
+  unfold ringedSiteBidual
+  rw [← Category.assoc, ← ringedSiteTranspose_target S, ← ringedSiteTranspose_source S]
+  congr 1
+  simp only [Category.assoc]
+  change (𝟙 P ⊗ₘ H.map (X := (op P, O')) (Y := (op P, O)) (𝟙 (op P), u.inv)) ≫
+      ((β_ P (H.obj (op P, O))).hom ≫ S.evaluation P O ≫ u.hom) = _
+  simp only [id_tensorHom]
+  rw [BraidedCategory.braiding_naturality_right_assoc]
+  have hev := ringedSiteEvaluation_target S P u.inv
+  simp only [CoefficientClosedStructure.tensor, tensor_map, tensorHom_id] at hev
+  rw [← Category.assoc _ (S.evaluation P O), hev]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+
+variable {r : D ⥤ E} {K : Prop}
+
+/-- The natural tensor comparison, constructed from its given components. -/
+private def ringedSiteRestrictionTensorIso
+    (d : RingedSliceEvaluationComparisons H HU r S SU K) :
+    S.tensor ⋙ r ≅ (r.prod r) ⋙ SU.tensor :=
+  NatIso.ofComponents (fun X ↦ d.rho X.1 X.2)
+    (fun {X Y} f ↦ d.rho_naturality X.1 X.2 Y.1 Y.2 f.1 f.2)
+
+/-- The natural Hom comparison, constructed from its given components. -/
+private def ringedSiteRestrictionHomIso
+    (d : RingedSliceEvaluationComparisons H HU r S SU K) :
+    H ⋙ r ≅ (r.op.prod r) ⋙ HU :=
+  NatIso.ofComponents (fun X ↦ d.eta X.1.unop X.2)
+    (fun {X Y} f ↦ d.eta_naturality X.1.unop X.2 Y.1.unop Y.2 f.1.unop f.2)
+
+private theorem ringedSiteRestrictionTensorIso_hom_app
+    (d : RingedSliceEvaluationComparisons H HU r S SU K) (L M : D) :
+    (ringedSiteRestrictionTensorIso S SU d).hom.app (L, M) = (d.rho L M).hom := by
+  rfl
+
+private theorem ringedSiteRestrictionHomIso_hom_app
+    (d : RingedSliceEvaluationComparisons H HU r S SU K) (L M : D) :
+    (ringedSiteRestrictionHomIso S SU d).hom.app (op L, M) = (d.eta L M).hom := by
+  rfl
+
+private theorem ringedSiteRestrictionHomIso_inv_app
+    (d : RingedSliceEvaluationComparisons H HU r S SU K) (L M : D) :
+    (ringedSiteRestrictionHomIso S SU d).inv.app (op L, M) = (d.eta L M).inv := by
+  rfl
+
+private theorem ringedSiteBidual_restriction
+    (d : RingedSliceEvaluationComparisons H HU r S SU K)
+    (he : ∀ L M, (d.rho (H.obj (op L, M)) L).inv ≫ r.map (S.evaluation L M) =
+      SU.tensor.map ((d.eta L M).hom, 𝟙 (r.obj L)) ≫
+        SU.evaluation (r.obj L) (r.obj M))
+    (ht : ∀ V L M (f : S.tensor.obj (V, L) ⟶ M),
+      SU.transpose _ _ _ ((d.rho V L).inv ≫ r.map f) =
+        r.map (S.transpose V L M f) ≫ (d.eta L M).hom)
+    (hs : ∀ L M, r.map (s.braiding L M).hom ≫ (d.rho M L).hom =
+      (d.rho L M).hom ≫ (sU.braiding (r.obj L) (r.obj M)).hom)
+    (O P : D) :
+    r.map (ringedSiteBidual S s O P) ≫ (d.eta (H.obj (op P, O)) O).hom ≫
+      HU.map (X := (op (r.obj (H.obj (op P, O))), r.obj O))
+        (Y := (op (HU.obj (op (r.obj P), r.obj O)), r.obj O))
+        ((d.eta P O).inv.op, 𝟙 _) =
+      ringedSiteBidual SU sU (r.obj O) (r.obj P) := by
+  let := S.monoidal
+  let := SU.monoidal
+  let := s
+  let := sU
+  unfold ringedSiteBidual
+  rw [← Category.assoc, ← ht, ← ringedSiteTranspose_source SU]
+  congr 1
+  rw [Functor.map_comp]
+  have hb : (d.rho P (H.obj (op P, O))).inv ≫
+      r.map (β_ P (H.obj (op P, O))).hom =
+    (β_ (r.obj P) (r.obj (H.obj (op P, O)))).hom ≫
+      (d.rho (H.obj (op P, O)) P).inv := by
+    apply (cancel_mono (d.rho (H.obj (op P, O)) P).hom).mp
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [hs, Iso.inv_hom_id_assoc]
+  rw [← Category.assoc _ (r.map _) (r.map _), hb, Category.assoc, he]
+  simp only [CoefficientClosedStructure.tensor, tensor_map, id_tensorHom,
+    tensorHom_id]
+  rw [BraidedCategory.braiding_naturality_right_assoc]
+  simp only [← comp_whiskerRight_assoc, Iso.inv_hom_id, id_whiskerRight, Category.id_comp]
+
+private theorem ringedSiteDualEvaluation_restriction
+    (d : RingedSliceEvaluationComparisons H HU r S SU K)
+    (he : ∀ L M, (d.rho (H.obj (op L, M)) L).inv ≫ r.map (S.evaluation L M) =
+      SU.tensor.map (X := (r.obj (H.obj (op L, M)), r.obj L))
+        (Y := (HU.obj (op (r.obj L), r.obj M), r.obj L))
+        ((d.eta L M).hom, 𝟙 _) ≫ SU.evaluation (r.obj L) (r.obj M))
+    (ht : ∀ V L M (f : S.tensor.obj (V, L) ⟶ M),
+      SU.transpose _ _ _ ((d.rho V L).inv ≫ r.map f) =
+        r.map (S.transpose V L M f) ≫ (d.eta L M).hom)
+    (ha : ∀ X Y Z,
+      r.map (S.monoidal.associator X Y Z).hom ≫
+        (d.rho X (S.tensor.obj (Y, Z))).hom ≫
+        SU.tensor.map
+          (X := (r.obj X, r.obj (S.tensor.obj (Y, Z))))
+          (Y := (r.obj X, SU.tensor.obj (r.obj Y, r.obj Z)))
+          (𝟙 (r.obj X), (d.rho Y Z).hom) =
+      (d.rho (S.tensor.obj (X, Y)) Z).hom ≫
+        SU.tensor.map
+          (X := (r.obj (S.tensor.obj (X, Y)), r.obj Z))
+          (Y := (SU.tensor.obj (r.obj X, r.obj Y), r.obj Z))
+          ((d.rho X Y).hom, 𝟙 (r.obj Z)) ≫
+        (SU.monoidal.associator (r.obj X) (r.obj Y) (r.obj Z)).hom)
+    (O : D) (OU : E) (u : S.monoidal.tensorUnit ≅ O)
+    (uU : SU.monoidal.tensorUnit ≅ OU) (o : r.obj O ≅ OU)
+    (hr : ∀ N,
+      r.map (S.tensor.map (X := (N, O)) (Y := (N, S.monoidal.tensorUnit))
+        (𝟙 N, u.inv) ≫ (S.monoidal.rightUnitor N).hom) =
+        (d.rho N O).hom ≫ SU.tensor.map (X := (r.obj N, r.obj O))
+          (Y := (r.obj N, OU)) (𝟙 (r.obj N), o.hom) ≫
+          SU.tensor.map (X := (r.obj N, OU))
+          (Y := (r.obj N, SU.monoidal.tensorUnit)) (𝟙 (r.obj N), uU.inv) ≫
+            (SU.monoidal.rightUnitor (r.obj N)).hom)
+    (P N : D) :
+    r.map (ringedSiteDualEvaluation S O u P N) ≫ (d.eta P N).hom =
+      (d.rho N (H.obj (op P, O))).hom ≫
+        SU.tensor.map (X := (r.obj N, r.obj (H.obj (op P, O))))
+          (Y := (r.obj N, HU.obj (op (r.obj P), r.obj O)))
+          (𝟙 (r.obj N), (d.eta P O).hom) ≫
+        SU.tensor.map
+          (X := (r.obj N, HU.obj (op (r.obj P), r.obj O)))
+          (Y := (r.obj N, HU.obj (op (r.obj P), OU)))
+          (𝟙 (r.obj N), HU.map (X := (op (r.obj P), r.obj O))
+            (Y := (op (r.obj P), OU)) (𝟙 (op (r.obj P)), o.hom)) ≫
+        ringedSiteDualEvaluation SU OU uU (r.obj P) (r.obj N) := by
+  let := S.monoidal
+  let := SU.monoidal
+  let D := H.obj (op P, O)
+  let DU := HU.obj (op (r.obj P), OU)
+  unfold ringedSiteDualEvaluation
+  rw [← ht]
+  rw [← ringedSiteTranspose_left SU, ← ringedSiteTranspose_left SU,
+    ← ringedSiteTranspose_left SU]
+  congr 1
+  -- Compare the two composite evaluations before transposition.
+  let V := S.tensor.obj (N, D)
+  let action : S.tensor.obj (N, O) ⟶ N :=
+    S.tensor.map (X := (N, O)) (Y := (N, S.monoidal.tensorUnit)) (𝟙 N, u.inv) ≫
+      (ρ_ N).hom
+  have hn := d.rho_naturality N (S.tensor.obj (D, P)) N O (𝟙 N)
+    (S.evaluation P O)
+  have ha' := ha N D P
+  have hEv := he P O
+  have hr' := hr N
+  simp only [Functor.map_comp] at hr'
+  simp only [Functor.map_comp]
+  have htarg := ringedSiteEvaluation_target SU (r.obj P) o.hom
+  simp only [CoefficientClosedStructure.tensor, tensor_map, id_tensorHom, tensorHom_id]
+    at hn ha' hEv hr' htarg ⊢
+  -- Work after the invertible tensor restriction map on the triple tensor.
+  apply (cancel_epi (d.rho V P).hom).mp
+  dsimp only [V]
+  erw [Iso.hom_inv_id_assoc]
+  change r.map (α_ N D P).hom ≫ r.map (N ◁ S.evaluation P O) ≫
+      r.map (N ◁ u.inv) ≫ r.map (ρ_ N).hom = _
+  rw [hr']
+  simp only [Functor.map_id, id_tensorHom] at hn
+  have hEv' : r.map (S.evaluation P O) = (d.rho D P).hom ≫
+      (d.eta P O).hom ▷ r.obj P ≫ SU.evaluation (r.obj P) (r.obj O) := by
+    rw [← hEv, Iso.hom_inv_id_assoc]
+  erw [reassoc_of% hn, hEv']
+  simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
+  erw [reassoc_of% ha']
+  rw [← MonoidalCategory.whiskerLeft_comp_assoc _ (SU.evaluation _ _) o.hom]
+  erw [← htarg]
+  simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
+  rw [MonoidalCategory.associator_naturality_middle_assoc,
+    MonoidalCategory.associator_naturality_middle_assoc]
+  rfl
+
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- Closed tensor comparisons preserve the actual duality maps after coefficient transport. -/
+private theorem ringedSiteRestriction_assembly
+    (d : RingedSliceEvaluationComparisons H HU r S SU K)
+    (he : ∀ L M, (d.rho (H.obj (op L, M)) L).inv ≫ r.map (S.evaluation L M) =
+      SU.tensor.map (X := (r.obj (H.obj (op L, M)), r.obj L))
+        (Y := (HU.obj (op (r.obj L), r.obj M), r.obj L))
+        ((d.eta L M).hom, 𝟙 _) ≫ SU.evaluation (r.obj L) (r.obj M))
+    (ht : ∀ V L M (f : S.tensor.obj (V, L) ⟶ M),
+      SU.transpose _ _ _ ((d.rho V L).inv ≫ r.map f) =
+        r.map (S.transpose V L M f) ≫ (d.eta L M).hom)
+    (hs : ∀ L M, r.map (s.braiding L M).hom ≫ (d.rho M L).hom =
+      (d.rho L M).hom ≫ (sU.braiding (r.obj L) (r.obj M)).hom)
+    (ha : ∀ X Y Z,
+      r.map (S.monoidal.associator X Y Z).hom ≫
+        (d.rho X (S.tensor.obj (Y, Z))).hom ≫
+        SU.tensor.map
+          (X := (r.obj X, r.obj (S.tensor.obj (Y, Z))))
+          (Y := (r.obj X, SU.tensor.obj (r.obj Y, r.obj Z)))
+          (𝟙 (r.obj X), (d.rho Y Z).hom) =
+      (d.rho (S.tensor.obj (X, Y)) Z).hom ≫
+        SU.tensor.map
+          (X := (r.obj (S.tensor.obj (X, Y)), r.obj Z))
+          (Y := (SU.tensor.obj (r.obj X, r.obj Y), r.obj Z))
+          ((d.rho X Y).hom, 𝟙 (r.obj Z)) ≫
+        (SU.monoidal.associator (r.obj X) (r.obj Y) (r.obj Z)).hom)
+    (O : D) (OU : E) (u : S.monoidal.tensorUnit ≅ O)
+    (uU : SU.monoidal.tensorUnit ≅ OU) (o : r.obj O ≅ OU)
+    (hr : ∀ N,
+      r.map (S.tensor.map (X := (N, O)) (Y := (N, S.monoidal.tensorUnit))
+        (𝟙 N, u.inv) ≫ (S.monoidal.rightUnitor N).hom) =
+        (d.rho N O).hom ≫ SU.tensor.map (X := (r.obj N, r.obj O))
+          (Y := (r.obj N, OU)) (𝟙 (r.obj N), o.hom) ≫
+          SU.tensor.map (X := (r.obj N, OU))
+          (Y := (r.obj N, SU.monoidal.tensorUnit)) (𝟙 (r.obj N), uU.inv) ≫
+            (SU.monoidal.rightUnitor (r.obj N)).hom)
+    :
+    let t := ringedSiteRestrictionTensorIso S SU d;
+    let h := ringedSiteRestrictionHomIso S SU d;
+      (∀ P N, r.map (S.evaluation P N) =
+        t.hom.app (H.obj (op P, N), P) ≫
+          SU.tensor.map (Prod.mkHom (h.hom.app (op P, N)) (𝟙 _)) ≫
+            SU.evaluation (r.obj P) (r.obj N)) ∧
+      (∀ P, r.map (ringedSiteBidual S s O P) ≫
+        h.hom.app (op (H.obj (op P, O)), O) ≫
+          HU.map (Prod.mkHom (h.inv.app (op P, O)).op o.hom) ≫
+          HU.map (Prod.mkHom
+            (HU.map (Prod.mkHom (𝟙 (op (r.obj P))) o.inv)).op (𝟙 _)) =
+        ringedSiteBidual SU sU OU (r.obj P)) ∧
+      (∀ P N, r.map (ringedSiteDualEvaluation S O u P N) ≫ h.hom.app (op P, N) =
+        t.hom.app (N, H.obj (op P, O)) ≫
+          SU.tensor.map (Prod.mkHom (𝟙 _) (h.hom.app (op P, O))) ≫
+          SU.tensor.map (Prod.mkHom (𝟙 _)
+            (HU.map (Prod.mkHom (𝟙 (op (r.obj P))) o.hom))) ≫
+          ringedSiteDualEvaluation SU OU uU (r.obj P) (r.obj N)) := by
+  dsimp only
+  refine ⟨?_, ?_, ?_⟩
+  · intro P N
+    have hh := congrArg ((d.rho _ P).hom ≫ ·) (he P N)
+    simpa only [ringedSiteRestrictionTensorIso_hom_app,
+      ringedSiteRestrictionHomIso_hom_app, Category.assoc, Iso.hom_inv_id_assoc] using hh
+  · intro P
+    have hb := ringedSiteBidual_restriction S SU s sU
+      d he ht hs O P
+    have hc := ringedSiteBidual_coefficient SU sU (r.obj P)
+      (r.obj O) OU o
+    have hm : HU.map (X := (op (r.obj (H.obj (op P, O))), r.obj O))
+        (Y := (op (HU.obj (op (r.obj P), r.obj O)), OU))
+        ((d.eta P O).inv.op, o.hom) =
+      HU.map (X := (op (r.obj (H.obj (op P, O))), r.obj O))
+        (Y := (op (HU.obj (op (r.obj P), r.obj O)), r.obj O))
+        ((d.eta P O).inv.op, 𝟙 _) ≫
+      HU.map (X := (op (HU.obj (op (r.obj P), r.obj O)), r.obj O))
+        (Y := (op (HU.obj (op (r.obj P), r.obj O)), OU)) (𝟙 _, o.hom) := by
+      rw [← HU.map_comp]
+      congr 1
+      apply Prod.ext
+      · exact (Category.comp_id _).symm
+      · exact (Category.id_comp _).symm
+    simp only [ringedSiteRestrictionHomIso_hom_app,
+      ringedSiteRestrictionHomIso_inv_app]
+    change r.map (ringedSiteBidual S s O P) ≫
+      (d.eta (H.obj (op P, O)) O).hom ≫
+        HU.map (X := (op (r.obj (H.obj (op P, O))), r.obj O))
+          (Y := (op (HU.obj (op (r.obj P), r.obj O)), OU))
+          ((d.eta P O).inv.op, o.hom) ≫ _ = _
+    rewrite [hm]
+    simp only [Category.assoc]
+    rewrite [reassoc_of% hb]
+    exact hc
+  · intro P N
+    simp only [ringedSiteRestrictionTensorIso_hom_app,
+      ringedSiteRestrictionHomIso_hom_app]
+    exact ringedSiteDualEvaluation_restriction S SU
+      d he ht ha O OU u uU o hr P N
+
+
+end RestrictionAssembly
 
 section Site
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
@@ -215,6 +524,9 @@ def ringedSiteDualityUnit
 variable [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
   ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]
 
+-- These unused generated lemmas expand the native derived coefficient category.
+set_option genSizeOfSpec false in
+set_option genInjectivity false in
 /-- A presentation of the existing derived tensor and Hom, normalized on K-flats.
 The symmetry uses the Koszul sign. The right unitor is scalar multiplication;
 the associator reassociates pure tensors. Together with models.uncurry_model these
@@ -343,58 +655,7 @@ theorem ringedSiteDualityMaps_exists : Nonempty (RingedSiteDualityModel.{c, v, r
       exact he
 
 attribute [local irreducible] homComplexFunctor homComplexπ
-
-/-- The actual augmentation to the fixed K-injective replacement.
-Source: Stacks 079P (blueprint: lem-sfb-ringed-site-duality-maps). -/
-def ringedSiteHomAugmentation : 𝟭 _ ⟶ WeilConjectures.coefficientHomResolution.{r, c, v} J R :=
-  letI :=
-    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, r} J R).1
-  CochainComplex.toKInjectiveResolution.{max c v r} _
-
-/-- The action of the recorded Hom-complex bifunctor, with both variables explicit.
-Source: Stacks 0A8X (blueprint: lem-sfb-ringed-site-duality-maps). -/
-def ringedSiteHomComplexMap
-    {E E' F F' : CochainComplex (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ}
-    (f : E' ⟶ E) (g : F ⟶ F') :
-    homComplex.{c, v, max c v r, max c v r} (R := R) E F ⟶
-      homComplex.{c, v, max c v r, max c v r} (R := R) E' F' :=
-  ((homComplexFunctor.{c, v, max c v r, max c v r} (R := R)).map f.op).app F ≫
-    ((homComplexFunctor.{c, v, max c v r, max c v r} (R := R)).obj (op E')).map g
-
-/-- Ordinary Hom to derived Hom, using the fixed augmentation and localization factorization.
-Source: Stacks 0A95 (blueprint: lem-sfb-ringed-site-duality-maps). -/
-def ringedSiteOrdinaryHomComparison (E F : CochainComplex (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) :
-    DerivedCategory.Q.obj (homComplex.{c, v, max c v r, max c v r} (R := R) E F) ⟶
-      (derivedInternalHomOfUniverses.{c, v, r, w} J R).obj
-        (op (DerivedCategory.Q.obj E), DerivedCategory.Q.obj F) :=
-  DerivedCategory.Q.map
-    (ringedSiteHomComplexMap.{c, v, r} J R (𝟙 E) ((ringedSiteHomAugmentation.{c, v, r} J R).app F))
-      ≫
-      (WeilConjectures.coefficientHomResolutionIso.{r, c, v, w} J R E F).inv
-
-/-- The ordinary comparison is invertible precisely when its augmentation Hom map is.
-Source: Stacks 0A95 (blueprint: lem-sfb-ringed-site-duality-maps).
-Proof: the factorization comparison is an isomorphism. Q inverts the displayed
-quasi-isomorphism, so their composite is an isomorphism. -/
-theorem ringedSiteOrdinaryHomComparison_isIso (E F : CochainComplex (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)
-    (h : QuasiIso (ringedSiteHomComplexMap.{c, v, r} J R (𝟙 E)
-      ((ringedSiteHomAugmentation.{c, v, r} J R).app F))) :
-    IsIso (ringedSiteOrdinaryHomComparison.{c, v, r, w} J R E F) := by
-  let _ := h
-  unfold ringedSiteOrdinaryHomComparison
-  infer_instance
-
-/-- The specified comparison iso when ordinary Hom computes derived Hom.
-Source: Stacks 0A95 (blueprint: lem-sfb-ringed-site-duality-maps). -/
-def ringedSiteOrdinaryHomIso (E F : CochainComplex (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)
-    (h : QuasiIso (ringedSiteHomComplexMap.{c, v, r} J R (𝟙 E)
-      ((ringedSiteHomAugmentation.{c, v, r} J R).app F))) :=
-  letI := ringedSiteOrdinaryHomComparison_isIso.{c, v, r, w} J R E F h
-  asIso (ringedSiteOrdinaryHomComparison.{c, v, r, w} J R E F)
+  derivedInternalHomOfUniverses
 
 /-- Signed coefficient evaluation, specified on every localized Hom-product section.
 Source: Stacks 0A97, 0A8X (blueprint: lem-sfb-ringed-site-duality-maps). -/
@@ -417,20 +678,7 @@ def RingedSiteBidualFormula (E : CochainComplex (SheafOfModules.{max c v r}
           (op (Over.mk (𝟙 W.unop.left)))).hom
             ((E.X i).val.map W.unop.hom.op x)
 
-section OrdinaryBidualConstruction
-
-omit [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-    ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-      RingCat.{max c v r})).obj R))] in
-private theorem ringedSiteDualityUnit_d (n m : ℤ) :
-    (ringedSiteDualityUnitComplex.{c, v, r} J R).d n m = 0 := rfl
-
-omit [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-    ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-      RingCat.{max c v r})).obj R))] in
-private theorem ringedSiteDualityUnit_isZero_X (t : ℤ) (ht : t ≠ 0) :
-    IsZero ((ringedSiteDualityUnitComplex.{c, v, r} J R).X t) :=
-  HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 _ t ht
+section OrdinaryBidualComponents
 
 attribute [local irreducible] ringedSiteDualityUnitComplex
 
@@ -594,244 +842,25 @@ private theorem ringedSiteBidualDegree_eval
   exact he
 
 
-set_option backward.isDefEq.respectTransparency false
-
-
-private theorem ringedSitePresheafHomObjMap_zero_target
-    (𝒜 : Cᵒᵖ ⥤ CommRingCat.{max c v r})
-    (A B B' : PresheafOfModules.{max c v r} (𝒜 ⋙ forget₂ _ _)) :
-    PresheafOfModules.homObjMap (R := 𝒜) (𝟙 A) (0 : B ⟶ B') = 0 := by
-  ext U φ : 3
-  exact Limits.comp_zero (f := (PresheafOfModules.restrictOver 𝒜 U.unop).map (𝟙 A) ≫ φ)
-    (Z := (PresheafOfModules.restrictOver 𝒜 U.unop).obj B')
-
-omit [HasSheafify J AddCommGrpCat.{max c v r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-        RingCat.{max c v r})).obj R))] in
-private theorem ringedSiteHomObjMap_zero_target
-    (A B B' : SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) :
-    SheafOfModules.homObjMap (R := R) (𝟙 A) (0 : B ⟶ B') = 0 := by
-  apply SheafOfModules.hom_ext
-  have hz (M N : SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) :
-      (0 : M ⟶ N).val = (0 : M.val ⟶ N.val) :=
-    (SheafOfModules.forget
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)).map_zero M N
-  simp only [SheafOfModules.homObjMap_val, SheafOfModules.id_val, hz]
-  exact ringedSitePresheafHomObjMap_zero_target.{c, v, r} R.obj A.val B.val B'.val
-
-
-private theorem ringedSiteCompSub_zero {𝒟 : Type*} [Category 𝒟] [Preadditive 𝒟]
-    {X Y Z : 𝒟} {a b : X ⟶ Z} {f : X ⟶ Y} {g : Y ⟶ Z}
-    (h : a = f ≫ g - b) (hg : g = 0) : a = -b := by
-  rw [h, hg, comp_zero, zero_sub]
-
-omit [HasSheafify J AddCommGrpCat.{max c v r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-    ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-      RingCat.{max c v r})).obj R))] in
-private theorem ringedSiteHomZero_d_proj
-    (E F : RingedSiteComplex.{c, v, r} J R) (hF : ∀ n m, F.d n m = 0)
-    (n m p t p' : ℤ)
-    (hnm : n + 1 = m) (hpt : p + m = t) (hp' : p' + n = t) :
-    (homComplex.{c, v, max c v r, max c v r} (R := R) E
-        F).d n m ≫
-      homComplexπ.{c, v, max c v r, max c v r} (R := R) E
-        F m p t hpt =
-      -(n.negOnePow •
-        (homComplexπ.{c, v, max c v r, max c v r} (R := R) E
-          F n p' t hp' ≫
-            SheafOfModules.homObjMap (R := R) (E.d p p') (𝟙 _))) := by
-  have hd := homComplex_d_π.{c, v, max c v r, max c v r} (J := J) (R := R) E
-    F n m p t (p + n) p' hnm hpt rfl hp'
-  have hz : SheafOfModules.homObjMap (R := R) (𝟙 (E.X p))
-      (F.d (p + n) t) = 0 := by
-    rw [hF]
-    exact ringedSiteHomObjMap_zero_target.{c, v, r} J R (E.X p) _ _
-  exact ringedSiteCompSub_zero hd hz
-
-omit [HasSheafify J AddCommGrpCat.{max c v r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-    ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-      RingCat.{max c v r})).obj R))] in
-private theorem ringedSiteHomZero_d_eval
-    (E F : RingedSiteComplex.{c, v, r} J R) (hF : ∀ n m, F.d n m = 0)
-    (n m p t p' : ℤ)
-    (hnm : n + 1 = m) (hpt : p + m = t) (hp' : p' + n = t)
-    (U : Cᵒᵖ)
-    (φ : ((homComplex.{c, v, max c v r, max c v r} (R := R) E
-      F).X n).val.obj U)
-    (W : (Over U.unop)ᵒᵖ) (x : (E.X p).val.obj (op W.unop.left)) :
-    (((homComplexπ.{c, v, max c v r, max c v r} (R := R) E
-        F m p t hpt).val.app U
-      (((homComplex.{c, v, max c v r, max c v r} (R := R) E
-        F).d n m).val.app U φ)).app W).hom x =
-      -n.negOnePow •
-        ((((homComplexπ.{c, v, max c v r, max c v r} (R := R) E
-          F n p' t hp').val.app U φ).app W).hom
-            ((E.d p p').val.app (op W.unop.left) x)) := by
-  let e : (((homComplex.{c, v, max c v r, max c v r} (R := R) E
-      F).X n) ⟶
-        SheafOfModules.homObj (R := R) (E.X p)
-          (F.X t)) →+
-        (F.X t).val.obj (op W.unop.left) :=
-    { toFun f := ((f.val.app U φ).app W).hom x
-      map_zero' := rfl
-      map_add' _ _ := rfl }
-  have he := congrArg e
-    (ringedSiteHomZero_d_proj.{c, v, r} J R E F hF n m p t p' hnm hpt hp')
-  simp only [map_neg, Units.smul_def, map_zsmul] at he
-  exact he.trans (Units.neg_smul n.negOnePow _).symm
-
-private theorem ringedSiteBidualSigns {G : Type*} [AddCommGroup G]
-    (i q : ℤ) (b : G) :
-    -i.negOnePow • ((i * (q + 1)).negOnePow • (-q.negOnePow • b)) =
-      ((i + 1) * q).negOnePow • b := by
-  rw [smul_smul, smul_smul]
-  congr 1
-  rw [mul_add, mul_one, add_mul, one_mul,
-    Int.negOnePow_add, Int.negOnePow_add]
-  simp only [neg_mul, mul_neg, neg_neg]
-  calc
-    i.negOnePow * ((i * q).negOnePow * i.negOnePow) * q.negOnePow =
-        (i * q).negOnePow * (i.negOnePow * i.negOnePow) * q.negOnePow := by ac_rfl
-    _ = (i * q).negOnePow * q.negOnePow := by rw [Int.units_mul_self, mul_one]
-
-omit [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-    ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-      RingCat.{max c v r})).obj R))] in
-private theorem ringedSiteBidualDegree_comm
-    (E : RingedSiteComplex.{c, v, r} J R) (i : ℤ) :
-    ringedSiteBidualDegree.{c, v, r} J R E
-        (ringedSiteDualityUnitComplex.{c, v, r} J R) i ≫
-      (homComplex.{c, v, max c v r, max c v r} (R := R)
-        (homComplex.{c, v, max c v r, max c v r} (R := R) E
-          (ringedSiteDualityUnitComplex.{c, v, r} J R))
-        (ringedSiteDualityUnitComplex.{c, v, r} J R)).d i (i + 1) =
-      E.d i (i + 1) ≫ ringedSiteBidualDegree.{c, v, r} J R E
-        (ringedSiteDualityUnitComplex.{c, v, r} J R) (i + 1) := by
-  apply Fan.IsLimit.hom_ext (homComplexIsLimit.{c, v, max c v r, max c v r} (R := R)
-    (homComplex.{c, v, max c v r, max c v r} (R := R) E
-      (ringedSiteDualityUnitComplex.{c, v, r} J R))
-    (ringedSiteDualityUnitComplex.{c, v, r} J R) (i + 1))
-  intro q
-  simp only [fan_mk_proj]
-  apply SheafOfModules.hom_ext
-  ext U x : 3
-  apply PresheafOfModules.hom_ext
-  intro W
-  ext φ
-  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  have ho := ringedSiteHomZero_d_eval.{c, v, r} J R
-    (homComplex.{c, v, max c v r, max c v r} (R := R) E
-      (ringedSiteDualityUnitComplex.{c, v, r} J R))
-    (ringedSiteDualityUnitComplex.{c, v, r} J R)
-    (ringedSiteDualityUnit_d.{c, v, r} J R) i (i + 1) q (q + (i + 1)) (q + 1) rfl rfl (by omega)
-    U ((ringedSiteBidualDegree.{c, v, r} J R E
-      (ringedSiteDualityUnitComplex.{c, v, r} J R) i).val.app U x) W φ
-  have hl := ringedSiteBidualDegree_eval.{c, v, r} J R E
-    (ringedSiteDualityUnitComplex.{c, v, r} J R) i (q + 1) (q + (i + 1))
-    (by omega) U x W
-    (((homComplex.{c, v, max c v r, max c v r} (R := R) E
-      (ringedSiteDualityUnitComplex.{c, v, r} J R)).d q (q + 1)).val.app
-        (op W.unop.left) φ)
-  have hi := ringedSiteHomZero_d_eval.{c, v, r} J R E
-    (ringedSiteDualityUnitComplex.{c, v, r} J R)
-    (ringedSiteDualityUnit_d.{c, v, r} J R) q (q + 1) i
-    (q + (i + 1)) (i + 1) rfl (by omega) (by omega) (op W.unop.left) φ
-    (op (Over.mk (𝟙 W.unop.left))) ((E.X i).val.map W.unop.hom.op x)
-  have hr := ringedSiteBidualDegree_eval.{c, v, r} J R E
-    (ringedSiteDualityUnitComplex.{c, v, r} J R) (i + 1) q (q + (i + 1))
-    rfl U ((E.d i (i + 1)).val.app U x) W φ
-  have hx := PresheafOfModules.naturality_apply (E.d i (i + 1)).val W.unop.hom.op x
-  rw [← hx] at hr
-  exact ho.trans ((congrArg (fun z ↦ -i.negOnePow • z)
-    (hl.trans (congrArg (fun z ↦ (i * (q + 1)).negOnePow • z) hi))).trans
-      ((ringedSiteBidualSigns i q _).trans hr.symm))
-
-omit [HasSheafify J AddCommGrpCat.{max c v r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-        RingCat.{max c v r})).obj R))] in
-private theorem ringedSiteHomObj_isZero_target
-    (A B : SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
-    (hB : IsZero B) : IsZero (SheafOfModules.homObj (R := R) A B) := by
-  apply (IsZero.iff_id_eq_zero _).2
-  rw [← SheafOfModules.homObjMap_id (R := R), hB.eq_of_src (𝟙 B) 0]
-  exact ringedSiteHomObjMap_zero_target.{c, v, r} J R A B B
-
-omit [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-    ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-      RingCat.{max c v r})).obj R))] in
-private theorem ringedSiteBidualFormula_ext
-    (E : RingedSiteComplex.{c, v, r} J R)
-    (β γ : E ⟶ homComplex.{c, v, max c v r, max c v r} (R := R)
-      (homComplex.{c, v, max c v r, max c v r} (R := R) E
-        (ringedSiteDualityUnitComplex.{c, v, r} J R))
-      (ringedSiteDualityUnitComplex.{c, v, r} J R))
-    (hβ : RingedSiteBidualFormula.{c, v, r} J R E β)
-    (hγ : RingedSiteBidualFormula.{c, v, r} J R E γ) : β = γ := by
-  unfold RingedSiteBidualFormula at hβ hγ
-  simp only [WeilConjectures.coefficientHomComponent_eq_homComplexπ] at hβ hγ
-  apply HomologicalComplex.hom_ext
-  intro i
-  apply homComplex_hom_ext.{c, v, max c v r, max c v r}
-  intro q t h
-  by_cases ht : t = 0
-  · rcases ht with rfl
-    apply SheafOfModules.hom_ext
-    ext U x : 3
-    apply PresheafOfModules.hom_ext
-    intro W
-    ext φ
-    have h' : i + q = 0 := by omega
-    have hqi : q + i = 0 := by omega
-    exact (hβ i q h' hqi U x W φ).trans (hγ i q h' hqi U x W φ).symm
-  · exact (ringedSiteHomObj_isZero_target.{c, v, r} J R _ _
-      (ringedSiteDualityUnit_isZero_X.{c, v, r} J R t ht)).eq_of_tgt _ _
+end OrdinaryBidualComponents
 
 /-- The ordinary signed evaluation chain map is uniquely determined by its section formula.
 Source: Stacks 0A97, 0A8X (blueprint: lem-sfb-ringed-site-duality-maps).
-Proof: use the Hom-product universal property twice and evaluate each factor on
-sections to define the degree maps. The Koszul sign is (-1)^(i*q). Expanding both
-Hom differentials shows the two chain-map composites agree. All other target
-components have nonzero coefficient degree and hence vanish. The same product
-universal properties and sectionwise extensionality prove uniqueness. -/
+Proof: the existing signed-bidual localization theorem constructs an ordinary family
+with precisely this formula on all slice sections and proves uniqueness for that formula.
+Choose any of the existing normalized closed tensor models, apply that theorem, and
+retain the existence and uniqueness clauses for E. The coefficient complexes and
+product projections in the two formulas are definitionally the same. -/
 theorem ringedSiteOrdinaryBidual_existsUnique (E : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) :
     ∃! β : E ⟶ homComplex.{c, v, max c v r, max c v r} (R := R) (homComplex.{c, v, max c v r, max c
       v r} (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R))
       (ringedSiteDualityUnitComplex.{c, v, r} J R),
       RingedSiteBidualFormula.{c, v, r} J R E β := by
-  have hDerived : HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-    ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) :=
-    inferInstance
-  let β : E ⟶ homComplex.{c, v, max c v r, max c v r} (R := R)
-      (homComplex.{c, v, max c v r, max c v r} (R := R) E
-        (ringedSiteDualityUnitComplex.{c, v, r} J R))
-      (ringedSiteDualityUnitComplex.{c, v, r} J R) :=
-    { f := fun i ↦ ringedSiteBidualDegree.{c, v, r} J R E
-        (ringedSiteDualityUnitComplex.{c, v, r} J R) i
-      comm' := by
-        intro i j h
-        change i + 1 = j at h
-        subst j
-        exact ringedSiteBidualDegree_comm.{c, v, r} J R E i }
-  have hβ : RingedSiteBidualFormula.{c, v, r} J R E β := by
-    intro i q h h' U x W φ
-    simpa only [WeilConjectures.coefficientHomComponent_eq_homComplexπ] using
-      ringedSiteBidualDegree_eval.{c, v, r} J R E
-        (ringedSiteDualityUnitComplex.{c, v, r} J R) i q 0 h' U x W φ
-  exact ⟨β, hβ, fun γ hγ ↦ ringedSiteBidualFormula_ext.{c, v, r} J R E γ β hγ hβ⟩
-
-end OrdinaryBidualConstruction
+  obtain ⟨S, T, β, ⟨K⟩⟩ := ringedDerived_closed_symmetric_monoidal.{c, v, r, w} J R
+  obtain ⟨b, hb⟩ := ringed_signed_bidual_localization J R S T β K
+  obtain ⟨hformula, huniq, _, _, _⟩ := hb E
+  exact ⟨b E, hformula, huniq⟩
 
 /-- The actual ordinary signed bidual map, chosen from its unique section characterization.
 Source: Stacks 0A97 (blueprint: lem-sfb-ringed-site-duality-maps). -/
@@ -868,6 +897,142 @@ def RingedSiteEvaluationFormula (E F : CochainComplex (SheafOfModules.{max c v r
         (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R F (homComplex.{c, v, max c v r,
       max c v r} (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R)) p q k hpq U y φ)) = 0)
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)] in
+private theorem ringedSiteTensorGenerator_restrict
+    (P Q : RingedSiteComplex.{c, v, r} J R) (p q k : ℤ) (h : p + q = k)
+    {U V : Cᵒᵖ} (f : U ⟶ V) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :
+    (((WeilConjectures.coefficientTotalTensor.{r, c, v} J R).obj (P, Q)).X k).val.map f
+        (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R P Q p q k h U x y) =
+      WeilConjectures.coefficientTensorGenerator.{r, c, v} J R P Q p q k h V
+        ((P.X p).val.map f x) ((Q.X q).val.map f y) := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  let η := (PresheafOfModules.sheafificationAdjunction.{max c v r}
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat.{max c v r}
+      RingCat.{max c v r})).obj R).obj)).unit.app ((P.X p).val ⊗ (Q.X q).val) ≫
+    (SheafOfModules.tensorObjIsoSheafification (R := R) (P.X p) (Q.X q)).inv.val ≫
+    (HomologicalComplex.ιMapBifunctor P Q (MonoidalCategory.curriedTensor _)
+      (ComplexShape.up ℤ) p q k h).val
+  exact (PresheafOfModules.naturality_apply η f (x ⊗ₜ[R.obj.obj U] y)).symm
+
+attribute [local irreducible] coefficientTotalTensor
+
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
+    [HasSheafify J AddCommGrpCat.{max c v r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] in
+private theorem ringedSiteHomValue_restrict
+    (A B : SheafOfModules.{max c v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))
+    (U : Cᵒᵖ) (φ : (SheafOfModules.homObj (R := R) A B).val.obj U)
+    (W : (Over U.unop)ᵒᵖ) (x : A.val.obj (op W.unop.left)) :
+    (((SheafOfModules.homObj (R := R) A B).val.map W.unop.hom.op φ).app
+      (op (Over.mk (𝟙 W.unop.left)))).hom x = (φ.app W).hom x := by
+  change (φ.app (op (Over.mk (𝟙 W.unop.left ≫ W.unop.hom)))).hom x = _
+  exact PresheafOfModules.restrictOver_hom_app_congr φ (Category.id_comp _) x
+
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)] in
+private theorem ringedSiteEvaluationFormula_iff
+    (E F : RingedSiteComplex.{c, v, r} J R)
+    (ε : (WeilConjectures.coefficientTotalTensor.{r, c, v} J R).obj
+      (F, homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R)) ⟶
+        homComplex (R := R) E F) :
+    RingedSiteEvaluationFormula.{c, v, r} J R E F ε ↔
+      RingedOrdinaryEvaluationFormula.{c, v, r} J R E F ε := by
+  constructor
+  · intro h p q k a b hpq hab U y φ x
+    constructor
+    · intro haq hp
+      rcases hp with rfl
+      have he := h.1 p q k a hpq haq hab U y φ (op (Over.mk (𝟙 U.unop))) x
+      change _ = _ • (show (F.X p).val.obj U from (F.X p).val.map (𝟙 U) y) at he
+      have hid : (F.X p).val.map (𝟙 U) y = y := by
+        rw [PresheafOfModules.map_id]; rfl
+      exact he.trans (congrArg (fun z : (F.X p).val.obj U ↦
+        (ringedOrdinaryDualValue.{c, v, r} J R E q a haq U φ x) • z) hid)
+    · intro haq
+      have hz := h.2 p q k a b hpq hab haq U y φ
+      exact congrArg (fun z ↦ (z.app (op (Over.mk (𝟙 U.unop)))).hom x) hz
+  · intro h
+    constructor
+    · intro p q k a hpq haq hak U y φ W x
+      have hlocal := (h p q k a p hpq hak (op W.unop.left)
+        ((F.X p).val.map W.unop.hom.op y)
+        (((homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R)).X q).val.map
+          W.unop.hom.op φ) x).1 haq rfl
+      have hn := PresheafOfModules.naturality_apply
+        ((ε.f k) ≫ WeilConjectures.coefficientHomComponent.{r, c, v} J R E F k a p hak).val
+        W.unop.hom.op
+        (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R F
+          (homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R))
+          p q k hpq U y φ)
+      rw [ringedSiteTensorGenerator_restrict.{c, v, r} J R] at hn
+      have hn' := congrArg
+        (fun z ↦ (z.app (op (Over.mk (𝟙 W.unop.left)))).hom x) hn
+      have hr := ringedSiteHomValue_restrict.{c, v, r} J R
+        (E.X a) (F.X p) U
+        (((ε.f k) ≫ WeilConjectures.coefficientHomComponent.{r, c, v} J R E F k a p hak).val.app U
+          (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R F
+            (homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R))
+            p q k hpq U y φ)) W x
+      rw [hr] at hn'
+      change _ = _ at hn'
+      change (((WeilConjectures.coefficientHomComponent.{r, c, v} J R E F
+        k a p hak).val.app (op W.unop.left)
+          ((ε.f k).val.app (op W.unop.left)
+            (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R F
+              (homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R))
+              p q k hpq (op W.unop.left)
+              ((F.X p).val.map W.unop.hom.op y)
+              (((homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R)).X q).val.map
+                W.unop.hom.op φ)))).app (op (Over.mk (𝟙 W.unop.left)))).hom x =
+          (((WeilConjectures.coefficientHomComponent.{r, c, v} J R E
+            (ringedSiteDualityUnitComplex.{c, v, r} J R) q a 0 haq).val.app
+              (op W.unop.left)
+              (((homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R)).X q).val.map
+                W.unop.hom.op φ)).app (op (Over.mk (𝟙 W.unop.left)))).hom x •
+            (F.X p).val.map W.unop.hom.op y at hlocal
+      have hd := PresheafOfModules.naturality_apply
+        (WeilConjectures.coefficientHomComponent.{r, c, v} J R E
+          (ringedSiteDualityUnitComplex.{c, v, r} J R) q a 0 haq).val W.unop.hom.op φ
+      have hd' := congrArg
+        (fun z ↦ (z.app (op (Over.mk (𝟙 W.unop.left)))).hom x) hd
+      have hrd := ringedSiteHomValue_restrict.{c, v, r} J R (E.X a)
+        ((ringedSiteDualityUnitComplex.{c, v, r} J R).X 0) U
+        ((WeilConjectures.coefficientHomComponent.{r, c, v} J R E
+          (ringedSiteDualityUnitComplex.{c, v, r} J R) q a 0 haq).val.app U φ) W x
+      rw [hrd] at hd'
+      exact hn'.symm.trans (hlocal.trans (congrArg
+        (fun z ↦ z • (F.X p).val.map W.unop.hom.op y) hd'))
+    · intro p q k a b hpq hab haq U y φ
+      apply PresheafOfModules.hom_ext
+      intro W
+      ext x
+      have hlocal := (h p q k a b hpq hab (op W.unop.left)
+        ((F.X p).val.map W.unop.hom.op y)
+        (((homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R)).X q).val.map
+          W.unop.hom.op φ) x).2 haq
+      have hn := PresheafOfModules.naturality_apply
+        ((ε.f k) ≫ WeilConjectures.coefficientHomComponent.{r, c, v} J R E F k a b hab).val
+        W.unop.hom.op
+        (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R F
+          (homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R))
+          p q k hpq U y φ)
+      rw [ringedSiteTensorGenerator_restrict.{c, v, r} J R] at hn
+      have hn' := congrArg
+        (fun z ↦ (z.app (op (Over.mk (𝟙 W.unop.left)))).hom x) hn
+      have hr := ringedSiteHomValue_restrict.{c, v, r} J R
+        (E.X a) (F.X b) U
+        (((ε.f k) ≫ WeilConjectures.coefficientHomComponent.{r, c, v} J R E F k a b hab).val.app U
+          (WeilConjectures.coefficientTensorGenerator.{r, c, v} J R F
+            (homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R))
+            p q k hpq U y φ)) W x
+      rw [hr] at hn'
+      exact hn'.symm.trans hlocal
+
+
+
 /-- The ordinary evaluation chain map, uniquely specified on the actual tensor generators.
 Source: Stacks 08JE, 0A98 (blueprint: lem-sfb-ringed-site-duality-maps).
 Proof: define every Hom-product projection on a total-tensor summand by the
@@ -881,7 +1046,10 @@ theorem ringedSiteOrdinaryEvaluation_existsUnique (E F : CochainComplex (SheafOf
       r, max c v r} (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R)) ⟶ homComplex.{c, v,
       max c v r, max c v r} (R := R) E F,
       RingedSiteEvaluationFormula.{c, v, r} J R E F ε := by
-  sorry
+  obtain ⟨S, T, β, ⟨K⟩⟩ := ringedDerived_closed_symmetric_monoidal.{c, v, r, w} J R
+  obtain ⟨ε, hε, hu, _⟩ := ringedOrdinaryEvaluation_localization J R S T β K E F
+  exact ⟨ε, (ringedSiteEvaluationFormula_iff J R E F ε).2 hε,
+    fun γ hγ ↦ hu γ ((ringedSiteEvaluationFormula_iff J R E F γ).1 hγ)⟩
 
 /-- Ordinary tensor-Hom evaluation, with real data fixed by its unique pure-tensor formula.
 Source: Stacks 08JE (blueprint: lem-sfb-ringed-site-duality-maps). -/
@@ -889,6 +1057,108 @@ def ringedSiteOrdinaryEvaluation (E F : CochainComplex (SheafOfModules.{max c v 
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) :=
   (ringedSiteOrdinaryEvaluation_existsUnique.{c, v, r} J R E F).exists.choose
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)] in
+private theorem ringedSiteAugmentationMap_eq
+    (E F : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ) :
+    ringedSiteHomComplexMap.{c, v, r} J R (𝟙 E) ((ringedSiteHomAugmentation.{c, v, r} J R).app F) =
+      ((homComplexFunctor (R := R)).obj (op E)).map
+        ((SfbHomFilteredColimit.resolutionUnit.{c, v, r} J R).app F) := by
+  simp only [ringedSiteHomComplexMap, op_id, Functor.map_id, NatTrans.id_app]
+  rfl
+
+private theorem ringedSiteHomComparison_eq
+    (E F : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ) :
+    ringedSiteOrdinaryHomComparison.{c, v, r, w} J R E F =
+      ringedOrdinaryHomComparison.{c, v, r, w} J R E F := by
+  unfold ringedSiteOrdinaryHomComparison ringedOrdinaryHomComparison
+  rw [ringedSiteAugmentationMap_eq]
+  rfl
+
+section NormalizedSymmetry
+private theorem ringedSiteNormalizedSymmetry_eq
+  (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
+  (T : CoefficientTensorModels.{r, c, v, w} J R S)
+  (s : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, r} J R))
+    _ S.monoidal)
+  (K : RingedDerivedTensorCoherence.{c, v, r, w} J R S T s)
+    (σ : ∀ L N, S.tensor.obj (L, N) ≅ S.tensor.obj (N, L))
+    (hnat : ∀ L N L' N' f g, S.tensor.map (X := (L, N)) (Y := (L', N')) (f, g) ≫
+      (σ L' N').hom = (σ L N).hom ≫ S.tensor.map (g, f))
+    (hmodel : ∀ P Q hP hQ,
+      ∃ β : (coefficientTotalTensor.{r, c, v} J R).obj (P, Q) ≅
+          (coefficientTotalTensor.{r, c, v} J R).obj (Q, P),
+        (∀ p q k h h' V x y,
+          (β.hom.f k).val.app V
+            (coefficientTensorGenerator.{r, c, v} J R P Q p q k h V x y) =
+          (p * q).negOnePow •
+            coefficientTensorGenerator.{r, c, v} J R Q P q p k h' V y x) ∧
+        (T.iso J R S P Q hP hQ).hom ≫
+          (σ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom =
+        DerivedCategory.Q.map β.hom ≫ (T.iso J R S Q P hQ hP).hom)
+    (L N : DerivedCategory (RingedTensorModules.{c, v, r} J R)) :
+    (σ L N).hom = (s.braiding L N).hom := by
+  have base (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
+      (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)
+      (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) Q) :
+      (σ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom =
+        (s.braiding (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom := by
+    obtain ⟨β, hβ, heβ⟩ := hmodel P Q hP hQ
+    obtain ⟨γ, hγ, heγ⟩ := K.symmetry_model P Q hP hQ
+    have hh : β.hom = γ.hom := by
+      apply tensorGenerator_ext.{c, v, r} J R
+      intro p q k hpq V x y
+      exact (hβ p q k hpq (by omega) V x y).trans
+        (hγ p q k hpq (by omega) V x y).symm
+    apply (cancel_epi (T.iso J R S P Q hP hQ).hom).mp
+    rw [heβ, heγ, hh]
+  classical
+  obtain ⟨P, f, hP, _, hf, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R)
+      (DerivedCategory.Q.objPreimage L)
+  obtain ⟨Q, g, hQ, _, hg, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R)
+      (DerivedCategory.Q.objPreimage N)
+  have : QuasiIso f := hf
+  have : QuasiIso g := hg
+  have : IsIso (DerivedCategory.Q.map f) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hf
+  have : IsIso (DerivedCategory.Q.map g) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hg
+  let e := asIso (DerivedCategory.Q.map f) ≪≫ DerivedCategory.Q.objObjPreimageIso L
+  let e' := asIso (DerivedCategory.Q.map g) ≪≫ DerivedCategory.Q.objObjPreimageIso N
+  have : IsIso (Prod.mkHom e.hom e'.hom) :=
+    (CategoryTheory.isIso_prod_iff (f := Prod.mkHom e.hom e'.hom)).mpr
+      ⟨inferInstanceAs (IsIso e.hom), inferInstanceAs (IsIso e'.hom)⟩
+  apply (cancel_epi (S.tensor.map
+    (X := (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q))
+    (Y := (L, N)) (e.hom, e'.hom))).mp
+  rw [hnat]
+  let := S.monoidal
+  let := s
+  rw [show S.tensor.map
+    (X := (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q))
+    (Y := (L, N)) (e.hom, e'.hom) ≫ (β_ L N).hom =
+    (β_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom ≫
+      S.tensor.map
+      (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))
+      (Y := (N, L)) (e'.hom, e.hom) from
+    BraidedCategory.braiding_naturality e.hom e'.hom]
+  rw [base P Q hP hQ]
+
+end NormalizedSymmetry
+
+private theorem ringedSiteTensorCoherence
+    (M : RingedSiteDualityModel.{c, v, r, w} J R) :
+    ∃ K : RingedDerivedTensorCoherence.{c, v, r, w} J R M.closed M.models M.symmetric,
+      K.unitIso = M.unitIso := by
+  exact ringedTensorConstraint_completion J R M.closed M.models M.symmetric M.unitIso
+    { unitKFlat := M.unitKFlat
+      symmetry_model := M.symmetry_model
+      unit_model := M.unit_model
+      associator_model := M.associator_model }
+
+set_option maxHeartbeats 800000 in
+-- The fixed derived Hom comparisons have dependent instance arguments.
 /-- Biduality is the signed ordinary map under the two specified Hom comparisons.
 Source: Stacks 0A97, 08JJ (blueprint: lem-sfb-ringed-site-duality-maps).
 Proof: the closed transposition is pinned by models.uncurry_model. The normalized
@@ -915,7 +1185,28 @@ theorem ringedSiteBidual_normalization (M : RingedSiteDualityModel.{c, v, r, w} 
       (ringedSiteOrdinaryHomIso.{c, v, r, w} J R (homComplex.{c, v, max c v r, max c v r} (R := R)
       E (ringedSiteDualityUnitComplex.{c, v, r} J R)) (ringedSiteDualityUnitComplex.{c, v, r} J R)
       hD).hom := by
-  sorry
+  obtain ⟨K, _⟩ := ringedSiteTensorCoherence J R M
+  obtain ⟨β, hβ⟩ := ringed_signed_bidual_localization J R M.closed M.models M.symmetric K
+  obtain ⟨hβE, hu, _, _, hc⟩ := hβ E
+  have hβeq : ringedSiteOrdinaryBidual.{c, v, r} J R E = β E :=
+    hu _ (ringedSiteOrdinaryBidual_existsUnique.{c, v, r} J R E).exists.choose_spec
+  have hE' := hE
+  have hD' := hD
+  rw [ringedSiteAugmentationMap_eq] at hE' hD'
+  obtain ⟨γE, γD, he, hd, hn⟩ := hc hE' hD'
+  have he' : γE.hom = (ringedSiteOrdinaryHomIso.{c, v, r, w} J R E
+      (ringedSiteDualityUnitComplex.{c, v, r} J R) hE).hom := by
+    change _ = ringedSiteOrdinaryHomComparison.{c, v, r, w} J R E _
+    rw [ringedSiteOrdinaryHomComparison, ringedSiteAugmentationMap_eq]
+    exact he
+  have hd' : γD.hom = (ringedSiteOrdinaryHomIso.{c, v, r, w} J R
+      (homComplex (R := R) E (ringedSiteDualityUnitComplex.{c, v, r} J R))
+      (ringedSiteDualityUnitComplex.{c, v, r} J R) hD).hom := by
+    change _ = ringedSiteOrdinaryHomComparison.{c, v, r, w} J R _ _
+    rw [ringedSiteOrdinaryHomComparison, ringedSiteAugmentationMap_eq]
+    exact hd
+  rw [he', hd', ← hβeq] at hn
+  exact hn
 
 /-- Evaluation is the unsigned ordinary map under the specified tensor and Hom comparisons.
 Source: Stacks 08JE, 08JJ (blueprint: lem-sfb-ringed-site-duality-maps).
@@ -945,7 +1236,26 @@ theorem ringedSiteDualEvaluation_normalization
         M.unitIso (DerivedCategory.Q.obj E) (DerivedCategory.Q.obj F) =
     DerivedCategory.Q.map (ringedSiteOrdinaryEvaluation.{c, v, r} J R E F) ≫
       (ringedSiteOrdinaryHomIso.{c, v, r, w} J R E F hEF).hom := by
-  sorry
+  obtain ⟨K, hK⟩ := ringedSiteTensorCoherence J R M
+  obtain ⟨ε, hε, hu, hc⟩ := ringedOrdinaryEvaluation_localization
+    J R M.closed M.models M.symmetric K E F
+  have hεeq : ringedSiteOrdinaryEvaluation.{c, v, r} J R E F = ε :=
+    hu _ ((ringedSiteEvaluationFormula_iff.{c, v, r} J R E F _).1
+      (ringedSiteOrdinaryEvaluation_existsUnique.{c, v, r} J R E F).exists.choose_spec)
+  have hE' : QuasiIso (ringedHomAugmentationMap.{c, v, r} J R E
+      (ringedSiteDualityUnitComplex.{c, v, r} J R)) := by
+    rw [ringedSiteAugmentationMap_eq] at hE
+    exact hE
+  have hEF' : QuasiIso (ringedHomAugmentationMap.{c, v, r} J R E F) := by
+    rw [ringedSiteAugmentationMap_eq] at hEF
+    exact hEF
+  obtain ⟨_, _, hn⟩ := hc hF hD hE' hEF'
+  rw [hK, ← hεeq, ← ringedSiteHomComparison_eq, ← ringedSiteHomComparison_eq] at hn
+  change _ = _ at hn
+  simpa only [ringedSiteOrdinaryHomIso, asIso_hom,
+    ringedDualTensorHom, ringedSiteDualEvaluation,
+    CoefficientClosedStructure.tensor, tensor_map, id_tensorHom, tensorLeft, curriedTensor,
+    ringedSiteDualityUnit, ringedSiteDualityUnitComplex, ringedTensorUnitComplex] using hn
 
 /-- Slice restriction sends zero maps to zero, by its sectionwise construction.
 Source: Stacks 03DJ (blueprint: lem-sfb-ringed-site-duality-maps).
@@ -992,6 +1302,22 @@ def ringedSiteDualityRestrictionComplex (U : C) :=
         (ringedSiteDualityRestrictionCoefficient_eq.{c, v, r} J R U))).mapHomologicalComplex
           (ComplexShape.up ℤ)
 
+/-- Scalar transport along the definitional slice coefficient equality is the identity. -/
+private theorem ringedSiteRestrictionComplex_eq (U : C) :
+    ringedSiteDualityRestrictionComplex.{c, v, r} J R U =
+      ringedSliceComplexRestriction.{c, v, r} J R U := by
+  rfl
+
+attribute [local irreducible] ringedSliceDerivedRestriction
+
+attribute [local irreducible] DerivedCategory.Q ringedSliceComplexRestriction
+attribute [local irreducible] ringedSiteDualityRestrictionComplex
+attribute [local irreducible] ringedSiteRestrictionTensorIso ringedSiteRestrictionHomIso
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+set_option maxHeartbeats 1200000 in
+-- The natural comparison maps retain dependent localization and coefficient types.
 /-- Canonical maps commute with exact slice restriction. The functor F is specified
 by termwise restriction and localization. Its tensor and Hom comparisons are the
 closed evaluation-compatible comparisons, not separate choices of bidual/evaluation
@@ -1055,7 +1381,55 @@ theorem ringedSiteDualityMaps_restriction
       (Prod.mkHom (𝟙 (op (F.obj P))) o.hom))) ≫
           ringedSiteDualEvaluation MU.closed (ringedSiteDualityUnit.{max c v, v, r, w'} (J.over U)
       (R.over U)) MU.unitIso (F.obj P) (F.obj N)) := by
-  sorry
+  classical
+  exact
+    let coherence := ringedSiteTensorCoherence.{c, v, r, w} J R M
+    let K := coherence.choose
+    have hK : K.unitIso = M.unitIso := coherence.choose_spec
+    let coherenceU :=
+      ringedSiteTensorCoherence.{max c v, v, r, w'} (J.over U) (R.over U) MU
+    let KU := coherenceU.choose
+    have hKU : KU.unitIso = MU.unitIso := coherenceU.choose_spec
+    let F := ringedSliceDerivedRestriction.{c, v, r, w, w'} J R U
+    let A := ringedSliceLocalizationIso.{c, v, r, w, w'} J R U
+    have comparisons := ringedSlice_evaluation_transpose.{c, v, r, w, w'}
+      J R U M.closed M.models MU.closed MU.models
+    let normalized := Classical.choice comparisons.1
+    let d := normalized.val
+    have hd := normalized.property
+    have hrules := comparisons.2
+    have he (L N) :=
+      (hrules d hd ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj (op L, N))
+        L N (M.closed.evaluation L N)).1
+    have ht (V L N) (f : M.closed.tensor.obj (V, L) ⟶ N) :=
+      (hrules d hd V L N f).2.1
+    have hs (L N) : F.map (M.symmetric.braiding L N).hom ≫ (d.rho N L).hom =
+        (d.rho L N).hom ≫ (MU.symmetric.braiding (F.obj L) (F.obj N)).hom := by
+      have hσ := ringedSiteNormalizedSymmetry_eq J R M.closed M.models M.symmetric K
+        d.sigma d.sigma_naturality hd.2.2.1
+      have hσU := ringedSiteNormalizedSymmetry_eq.{max c v, v, r, w'}
+        (J.over U) (R.over U) MU.closed MU.models MU.symmetric KU
+        d.sigmaU d.sigmaU_naturality hd.2.2.2
+      rw [← hσ L N, ← hσU (F.obj L) (F.obj N)]
+      exact (hrules d hd _ L N (M.closed.evaluation L N)).2.2
+    have ha := ringedSlice_tensor_associator.{c, v, r, w, w'}
+      J R U M.closed M.models M.symmetric K MU.closed MU.models MU.symmetric KU d hd
+    have hunit := ringedSlice_scalar_unit.{c, v, r, w, w'}
+      J R U M.closed M.models M.symmetric K MU.closed MU.models MU.symmetric KU d hd
+    let o : F.obj (ringedSiteDualityUnit.{c, v, r, w} J R) ≅
+        ringedSiteDualityUnit.{max c v, v, r, w'} (J.over U) (R.over U) := hunit.choose
+    let t := ringedSiteRestrictionTensorIso M.closed MU.closed d
+    let h := ringedSiteRestrictionHomIso M.closed MU.closed d
+    have result := ringedSiteRestriction_assembly M.closed MU.closed M.symmetric MU.symmetric
+      d he ht hs ha _ _ M.unitIso MU.unitIso o (by
+        have hr := hunit.choose_spec
+        dsimp only [ringedTensorUnitComplex] at hr
+        set_option backward.isDefEq.respectTransparency false in
+        set_option backward.isDefEq.respectTransparency.types false in
+         simpa only [o, hK, hKU, ringedSiteDualityUnit,
+          ringedSiteDualityUnitComplex, RingedTensorModules] using hr)
+    ⟨F, ⟨by simpa only [F, ringedSiteRestrictionComplex_eq] using A⟩,
+      t, h, o, result⟩
 
 end Site
 end CategoryTheory

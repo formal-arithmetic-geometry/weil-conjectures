@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-torsion-cd-bounded-serre-coimage",
+ "kind": "statement",
+ "title": "The strict upper cohomology bound for the coimage",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Fix a prime ell, an affine scheme X, a bound d, and a commutative condensed ring Lambda isomorphic to Z_ell, O_E, Q_ell or E, with E/Q_ell finite [sk-def-localizing-closure, def-pc-scheme]. Use ordinary internal modules on the small pro-etale site and ordinary uncompleted derived sections [def-weil-pbc-proetale-site, def-weil-size-convention, sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. Suppose every affine etale V -> X has torsion etale cohomological dimension at most d [def-weil-pbc-etale-site, def-weil-etale-morphism, def-sc-etale-torsion-cd]. Let M,N lie in the weak Serre coproduct hull of finite constant scalar-model constructible modules [sk-def-sfb-constructible], with H^r RΓ(M[0]) = H^r RΓ(N[0]) = 0 for r>d+2, and f:M -> N any actual module map. Then H^q RΓ(coim(f)[0]) = 0 for every integer q>d+2. No vanishing in degree d+2 is asserted.",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-etale-morphism",
+  "def-sc-etale-torsion-cd",
+  "sk-def-sfb-constructible",
+  "def-sfb-condensed-module-sections"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Paragraph (2), first paragraph, affine coefficient-transfer obligation; the arbitrary-map relation-resolution step isolated in lem-sfb-weak-serre-supported-derived-generation. Agent formulation; exact full-generality reference WANTED."
+ },
+ "proof": [
+  {
+   "text": "For q>d+2 choose the natural number e=q-2, so e+2=q and d<=e. The torsion etale dimension hypothesis is monotone in its natural-number bound: a degree above e is above d. The input source and target vanishings above d+2 imply the corresponding vanishings above e+2.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sfb-torsion-cd-critical-coimage-surjectivity with the larger bound e. It gives an epimorphism H^(e+2) RGamma(M[0]) -> H^(e+2) RGamma(coim(f)[0]) along the actual coimage quotient.",
+   "uses": [
+    "lem-sfb-torsion-cd-critical-coimage-surjectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since e+2=q>d+2, the source of that epimorphism is zero by hMb. An epimorphism from a zero object has zero target (Mathlib IsZero.of_epi). Rewrite e+2=q to get the desired coimage vanishing.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-torsion-cd-critical-coimage-surjectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/TorsionCdCriticalCoimageSurjectivity.lean",
+  "place": "Specialization of torsionCd_critical_coimage_surjectivity at the larger bound e=(q-2).toNat, followed by Mathlib CategoryTheory.Limits.IsZero.of_epi; written by C1, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coimage|rightDerived",
+   "results": "25 hits: Mathlib/CategoryTheory/Abelian/NonPreadditive.lean; Mathlib/CategoryTheory/Abelian/NonPreadditive.lean; Mathlib/CategoryTheory/Abelian/NonPreadditive.lean; Mathlib/CategoryTheory/Abelian/NonPreadditive.lean; Mathlib/CategoryTheory/Abelian/NonPreadditive.lean; Mathlib/CategoryTheory/Abelian/Opposite.lean; Mathlib/CategoryTheory/Abelian/Opposite.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic coimage and exact-sequence APIs only; no geometric relation-comparison theorem in the required generality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.isZero_of_both_zeros",
+   "results": "1 hits: CategoryTheory.ShortComplex.Exact.isZero_of_both_zeros",
+   "date": "2026-10-25",
+   "verdict": "Generic coimage and exact-sequence APIs only; no geometric relation-comparison theorem in the required generality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epimorphism on cohomology in the critical cohomological dimension degree for the map from a proetale module sheaf to the coimage of an arbitrary morphism",
+   "results": "8 hits: LightCondensed.epi_π_app_zero_of_epi; SheafOfModules.GeneratingSections.opEpi_comp; groupCohomology.instEpiModuleCatH2π; groupCohomology.instEpiModuleCatH1π; groupCohomology.cochainsMap_f_map_epi; LightCondMod.epi_iff_locallySurjective_on_lightProfinite; CondensedMod.epi_iff_locallySurjective_on_compHaus; CategoryTheory.coherentTopology.epi_π_app_zero_of_epi",
+   "date": "2026-10-25",
+   "verdict": "Generic coimage and exact-sequence APIs only; no geometric relation-comparison theorem in the required generality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionCdBoundedSerreKernel",
+  "date": "2026-10-25",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-torsion-cd-bounded-serre-kernel",
+   "place": "Relation comparison in proof steps 2 and 3; separated into the strict high-degree estimate and the critical-degree lifting statement.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TorsionCdBoundedSerreCoimage",
+  "file": "lean/Sheaf/Paper/TorsionCdBoundedSerreCoimage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.torsionCd_bounded_serre_coimage",
+  "statement": "theorem torsionCd_bounded_serre_coimage\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (hΛ :\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))))\n    (X : Scheme.{u}) [IsAffine X] (d : ℕ)\n    (hcd : ∀ (V : Scheme.{u}) (v : V ⟶ X) [IsAffine V] [Etale v],\n      V.HasTorsionEtaleCohomologicalDimensionLE d)\n    (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (f : M ⟶ N)\n    (hM : ObjectProperty.weakSerreCoproductClosure.{u + 1}\n      (IsConstantModelConstructible Λ X) M)\n    (hN : ObjectProperty.weakSerreCoproductClosure.{u + 1}\n      (IsConstantModelConstructible Λ X) N)\n    (hMb : ∀ q : ℤ, (d : ℤ) + 2 < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj\n        ((condensedModuleSections Λ X).rightDerivedFunctor.obj\n          ((DerivedCategory.singleFunctor _ 0).obj M))))\n    (hNb : ∀ q : ℤ, (d : ℤ) + 2 < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj\n        ((condensedModuleSections Λ X).rightDerivedFunctor.obj\n          ((DerivedCategory.singleFunctor _ 0).obj N))))\n    (q : ℤ) (hq : (d : ℤ) + 2 < q) :\n    IsZero ((DerivedCategory.homologyFunctor _ q).obj\n      ((condensedModuleSections Λ X).rightDerivedFunctor.obj\n        ((DerivedCategory.singleFunctor _ 0).obj (Abelian.coimage f))))",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T162302-L-397571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261025T180500-L-3994451",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

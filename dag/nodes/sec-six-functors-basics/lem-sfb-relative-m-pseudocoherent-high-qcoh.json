@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-relative-m-pseudocoherent-high-qcoh",
+ "kind": "statement",
+ "title": "Quasi-coherent high cohomology of a relatively m-pseudo-coherent complex",
+ "statement": "Let $f:X\\to S$ be a locally finite type morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], let $m\\in\\mathbf Z$, and let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category]. If $E$ is $m$-pseudo-coherent relative to $S$ [def-sfb-relative-pseudo-coherent-complex], then $H^i(E)$ is a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent] for every $i>m$. No quasi-compactness, separatedness, Noetherian hypothesis, or lower bound on $E$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSU, lemma-relative-pseudo-coherence, first assertion; relative m-pseudo-coherence is Definition 09UI."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Fix $q>m$. Unpack [def-sfb-relative-pseudo-coherent-complex] to choose affine charts $U=U_{ab}$ covering $X$, affine $V=V_a\\subseteq S$, and closed immersions $i:U\\hookrightarrow Y=\\mathbf A^n_V$ such that $L=Ri_*(E|_U)$ is $m$-pseudo-coherent. It suffices to prove quasi-coherence on each $U$: [pqf-def-coherent] is an affine-local definition. Here $H^q(E|_U)=H^q(E)|_U$: on complexes restriction discards the opens not contained in $U$, so it commutes with sheaf kernels and sheaf images and hence with their quotient defining cohomology. This works in every degree without a boundedness assumption.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSU, lemma-relative-pseudo-coherence, proof of the first assertion"
+   }
+  },
+  {
+   "text": "For each such $Y,L$, [def-sfb-m-pseudo-coherent-complex] supplies an open cover $Y=\\bigcup W_c$ and maps $P_c^\\bullet\\to L|_{W_c}$ from strictly perfect complexes inducing isomorphisms on $H^q$, since $q>m$. A strictly perfect complex is perfect by [def-pc-perfect-complex], taking the one-member cover and the identity model. Thus [lem-sc-perfect-qcoherent] makes $H^q(P_c^\\bullet)$ quasi-coherent. The displayed isomorphisms identify these with $H^q(L)|_{W_c}$, using the restriction calculation of step 1. By the local definition [pqf-def-coherent], $H^q(L)$ is quasi-coherent on $Y$.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-perfect-complex",
+    "lem-sc-perfect-qcoherent",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E5, lemma-pseudo-coherent, proof of the high-degree assertion"
+   }
+  },
+  {
+   "text": "Choose a K-injective complex $J$ representing $E|_U$. By [def-pc-ringed-spaces-derived-direct-image], $Ri_*(E|_U)$ is represented by the termwise pushforward $i_*J$. Apply [lem-pc-closed-module-pushforward-homology] to $J^{q-1}\\to J^q\\to J^{q+1}$. Its canonical homology comparison gives $H^q(i_*J)\\cong i_*H^q(J)$, hence $H^q(L)\\cong i_*H^q(E|_U)$. This uses ordinary $\\mathcal O_Y$-module direct image, as the cited homology lemma specifies; it applies to this triple inside an unbounded complex.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-pc-closed-module-pushforward-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSU, lemma-relative-pseudo-coherence, proof of the first assertion"
+   }
+  },
+  {
+   "text": "Put $F=H^q(E|_U)$. Steps 2 and 3 show that $i_*F$ is quasi-coherent. Therefore $i^*i_*F$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. The counit $i^*i_*F\\to F$ is an isomorphism for every module $F$ by [lem-weil-pbc-closed-immersion-pushforward-fully-faithful], so $F$ is quasi-coherent. Applying this to every chart $U_{ab}$ and using [pqf-def-coherent] proves that $H^q(E)$ is quasi-coherent on $X$. Since $q>m$ was arbitrary, this is the assertion. Only the chosen local embeddings were used; none of the additional global hypotheses excluded in the statement is needed.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSU, lemma-relative-pseudo-coherence, proof of the first assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-pseudo-coherent-complex",
+  "pqf-def-coherent",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-pc-perfect-complex",
+  "lem-sc-perfect-qcoherent",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSU, lemma-relative-pseudo-coherence, first assertion; the 08E5 approximation argument and 08KS counit are made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme morphism an m relatively pseudo coherent complex has quasi coherent cohomology in degrees greater than m",
+   "date": "2026-10-24",
+   "results": "Hits read: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, DerivedCategory.isZero_of_isGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isGE_iff, SheafOfModules.IsFiniteType",
+   "verdict": "no match: no returned declaration gives this relative derived-complex assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed affine polynomial embedding of a derived complex implies its cohomology sheaves are quasi coherent above the pseudo coherence bound",
+   "date": "2026-10-24",
+   "results": "Hits read: SheafOfModules.IsQuasicoherent, SheafOfModules.isQuasicoherent, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData",
+   "verdict": "no match: no returned declaration gives this relative derived-complex assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "date": "2026-10-24",
+   "results": "Hits read: ",
+   "verdict": "no match: no returned declaration gives this relative derived-complex assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|relativelyPseudo",
+   "date": "2026-10-24",
+   "results": "Hits read: ",
+   "verdict": "no match: no returned declaration gives this relative derived-complex assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relatively m pseudo coherent complex on a scheme has quasi coherent cohomology in every degree greater than m",
+   "date": "2026-10-24",
+   "results": "Hits read: SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.IsQuasicoherent, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "verdict": "no match: no returned declaration gives this relative derived-complex assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion of schemes reflects quasi coherence of arbitrary modules: if i pushforward F is quasi coherent then F is quasi coherent",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.comp, AlgebraicGeometry.IsClosedImmersion.comp_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state relative m-pseudo-coherence or its high-degree cohomology assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of schemes i and any sheaf of modules F, if i_*F is quasi-coherent then F is quasi-coherent",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state relative m-pseudo-coherence or its high-degree cohomology assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\"",
+   "results": "OK: 12 hits; SheafOfModules.IsQuasicoherent, SheafOfModules.isQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.isQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent, SheafOfModules.instIsQuasicoherentObjIsQuasicoherent",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state relative m-pseudo-coherence or its high-degree cohomology assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|relativelyPseudo",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state relative m-pseudo-coherence or its high-degree cohomology assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative m pseudo coherence over a base scheme implies quasi coherence of high cohomology sheaves",
+   "results": "OK: 8 hits; SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsQuasicoherent.rec, SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state relative m-pseudo-coherence or its high-degree cohomology assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state relative m-pseudo-coherence or its high-degree cohomology assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme morphism, a relatively m pseudo coherent complex has quasi coherent cohomology in degrees strictly greater than m",
+   "results": "OK: 8 hits; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, DerivedCategory.isGE_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isZero_of_isGE, DerivedCategory.isLE_iff, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state relative m-pseudo-coherence or its high-degree cohomology assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local finite projective approximation to the derived pushforward along a closed polynomial embedding forces the source cohomology sheaves to be quasi coherent above the approximation degree",
+   "results": "OK: 8 hits; SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsQuasicoherent, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.isQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state relative m-pseudo-coherence or its high-degree cohomology assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Quasi-coherent high cohomology of a relatively m-pseudo-coherent complex.",
+   "via": [
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-m-pseudocoherent-high-qcoh",
+  "worker": "stage1",
+  "group": "Q20",
+  "summary": "Retained the statement of Stacks 0CSU without strengthening hypotheses. Unpacked relative and absolute m-pseudo-coherence, reused perfect quasi-coherence, computed the derived image on a K-injective representative with ordinary closed module pushforward preserving homology, and recovered source quasi-coherence by pullback and the closed counit. No new node is needed: every non-elementary ingredient already has an exact DAG statement. All search kinds and a second semantic phrasing were run and read; no exact project attachment or Mathlib match was found.",
+  "blueprint": "Realizes the inherited supporting prerequisite below det-thm-sf-ctf-stability-direct-images proof (3), through relative Noetherian cohomology approximation and Kiehl finiteness, exactly as recorded in blueprint.from.place. Read current literature/blueprint/latest chapter and unit and direct-images proof. The ancestor command returns None for the existing created.item chain; its null ancestor, precise place and via list are retained. No imported blueprint node states this assertion; same_as is empty. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-perfect-qcoherent",
+    "why": "Generic scheme-level perfect cohomology tool for the local strictly perfect approximations; the unit supplies no substitute for this coherent-algebra fact."
+   },
+   {
+    "node": "lem-pc-closed-module-pushforward-homology",
+    "why": "Generic ordinary closed module pushforward homology comparison, applied to one triple of a K-injective complex; not an etale or pro-etale coefficient statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+    "why": "Generic counit isomorphism for every ordinary structure-module sheaf along a scheme closed immersion; used solely to recover source quasi-coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-perfect-qcoherent",
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-dfbb9884e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-dfbb9884e (reviewer sub-agent of L); spot-checked: Read Stacks 0CSU (more-morphisms.tex l.16704-16731) and 08E5 (perfect.tex l.2205-2220). The item statement equals the first assertion of 0CSU (locally finite type, unbounded D(O_X), i>m strict) and is unchanged from the base and from side-live, where the item is still unsplit, so no other group supersedes this delivery. Step 1 (unpacking the definition, locality of quasi-coherence, restriction is exact) is genuinely elementary. Step 2 is the 08E5 argument: a strictly perfect complex is perfect, lem-sc-perfect-qcoherent applies on W_c, and Lj^* along an open immersion is restriction. Step 3: a K-injective representative and closed module pushforward preserving short-complex homology give H^q(L)≅i_*H^q(E|_U). def-pc-derived-direct-image is defined as the ringed-space functor cited, so the two derived images agree. Step 4: pullback preserves quasi-coherence, and the closed-immersion counit is an isomorphism for every module, so the argument is not circular. This is the counit form of 08KS, which replaces 0CSU's 01QY+08KS. Each cited statement says what its step takes from it. The union of uses equals proof_deps, a 348-node transitive walk finds no cycle, and no SGA source is cited. There are no new nodes. No duplicate exists: lem-sc-pseudo-coherent-qcoh and -qcoh-degree need full pseudo-coherence, and no node states the m-version of 08E5. sk-thm-picard-duality, sk-thm-p1 and sk-prop-av-pqf-finite are in the transitive uses closure of sk-thm-sf-ctf-stability, so all citations stay on the route. I accept the declared tool_uses. Edge cases checked: empty X, E=0, n=0, any m, H^m not quasi-coherent (consistent with strict i>m)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeMPseudoCoherentHighQCoh",
+  "declaration": "AlgebraicGeometry.Scheme.isQuasicoherent_homology_of_isMPseudoCoherentRelativeTo",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMPseudoCoherentHighQCoh.lean",
+  "statement": "theorem isQuasicoherent_homology_of_isMPseudoCoherentRelativeTo [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (m : ℤ) (E : schemeDerivedCategory X) (hE : IsMPseudoCoherentRelativeTo f m E) : ∀ i : ℤ, m < i → ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66516a0d9",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Matches Stacks 0CSU first assertion: LocallyOfFiniteType f, unbounded E : schemeDerivedCategory X, IsMPseudoCoherentRelativeTo f m E (declarations of def-sfb-relative-pseudo-coherent-complex, same binder family), ∀ i, m < i → Mathlib IsQuasicoherent of homologyFunctor i (pqf-def-coherent declarations; same carrier and predicate as schemeDerivedQCohProperty). No extra hypotheses beyond the HasDerivedCategory.{w} family the dependency already needs; universes u w bound. Edge cases empty X/S, E=0, any m, n=0 covered; i=m excluded as in source. Node differs from side-live only in lean; statement verbatim; imports exist; no name clash; docstrings carry source, blueprint id and 4-step proof; only proof is sorry; no defs/new nodes/§1 changes/pro-etale. Report sections present. No compile (no changes)."
+ }
+}

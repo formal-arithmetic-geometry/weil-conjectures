@@ -10,9 +10,76 @@
  "stmt_deps": [
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=\\ker u$ and $k=|K|$. For $x\\in K$, compatibility gives $\\pi a(x)=0$, so exactness supplies $j\\in J$ with $i(j)=a(x)$. The finite-group cardinality lemma gives $kx=0$. Therefore $i(kj)=a(kx)=0$, so injectivity of $i$ and of multiplication by $k$ gives $j=0$. Thus $a|_K=0$. Factor $a$ through the surjection $A\\to D=u(A)$ to obtain $\\alpha:D\\to E$ with $\\alpha u=a$. Compatibility gives $\\pi\\alpha=b_0|_D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof of the general abelian-group obstruction lemma supporting the chart-lifting argument cited in Expose XVI Proposition 3.6.3, printed p.252. This is a torsion-saturation variant of the reviewed sfb six-step proof: correct by the single integer |C_tors|, then split the torsion-free quotient. ILO supplies the chart context and the analogous cyclic correction of Lemma 3.6.4, printed pp.252--253, not this general group statement."
+   }
+  },
+  {
+   "text": "Put $C=B/D$, $T=C_{\\rm tors}$, $Q=C/T$, and let $q_2:B\\to Q$ be the composite quotient map. It is surjective. Applying the finite-module quotient theorem to $q_2$ proves that $Q$ is finitely generated over $\\mathbf Z$ [def-weil-finitely-generated-module]. The quotient of an abelian group by its torsion subgroup is torsion-free (Mathlib QuotientAddGroup.instIsAddTorsionFree). Hence [lem-trf-fg-torsionfree-group-free], implemented by Module.free_of_finite_type_torsion_free', makes $Q$ a free integer module. Free modules are projective by Module.Projective.of_free.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+    "place": "Module.free_of_finite_type_torsion_free', lines 387--390; Mathlib/GroupTheory/Torsion.lean, QuotientAddGroup.instIsAddTorsionFree; Mathlib/RingTheory/Finiteness/Basic.lean, Module.Finite.of_surjective; Mathlib/Algebra/Module/Projective.lean, Module.Projective.of_free."
+   }
+  },
+  {
+   "text": "Let $P\\subseteq B$ be the inverse image of $T$ and put $N=|T|$. For $p\\in P$, its class $q(p)\\in T$ is killed by $N$ (card_nsmul_eq_zero'). Therefore $Np\\in D$. The rule $n_D:P\\to D$, $p\\mapsto Np$, is an additive homomorphism. This uses the actual order of the finite torsion group, including $N=1$ when $T=0$; no selection of cyclic factors is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof of the general abelian-group obstruction lemma supporting the chart-lifting argument cited in Expose XVI Proposition 3.6.3, printed p.252. This is a torsion-saturation variant of the reviewed sfb six-step proof: correct by the single integer |C_tors|, then split the torsion-free quotient. ILO supplies the chart context and the analogous cyclic correction of Lemma 3.6.4, printed pp.252--253, not this general group statement."
+   }
+  },
+  {
+   "text": "For $p\\in P$, choose $e\\in E$ with $\\pi(e)=b_0(p)$. Since $\\pi(Ne-\\alpha(Np))=Nb_0(p)-b_0(Np)=0$, exactness gives $z\\in J$ with $i(z)=Ne-\\alpha(Np)$. Choose $t\\in J$ with $Nt=z$, using surjectivity of multiplication by $N$. Then $e-i(t)$ maps to $b_0(p)$ and its $N$-multiple is $\\alpha(Np)$. Such a lift is unique: the difference of two is $i(j)$ and is killed by $N$, so injectivity of $i$ and of multiplication by $N$ forces $j=0$. All choices here are from these proved existence assertions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof of the general abelian-group obstruction lemma supporting the chart-lifting argument cited in Expose XVI Proposition 3.6.3, printed p.252. This is a torsion-saturation variant of the reviewed sfb six-step proof: correct by the single integer |C_tors|, then split the torsion-free quotient. ILO supplies the chart context and the analogous cyclic correction of Lemma 3.6.4, printed pp.252--253, not this general group statement."
+   }
+  },
+  {
+   "text": "Define $\\gamma(p)$ to be this unique lift. Zero satisfies the defining conditions at zero. The sum $\\gamma(p)+\\gamma(p^{\\prime})$ satisfies them at $p+p^{\\prime}$, because $b_0$, $n_D$ and $\\alpha$ are additive; uniqueness proves additivity. Thus $\\gamma:P\\to E$ is a homomorphism and $\\pi\\gamma=b_0|_P$. For $d\\in D$, the element $\\alpha(d)$ satisfies both conditions: $\\pi\\alpha(d)=b_0(d)$ and $N\\alpha(d)=\\alpha(Nd)$. Uniqueness gives $\\gamma|_D=\\alpha$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written proof of the general abelian-group obstruction lemma supporting the chart-lifting argument cited in Expose XVI Proposition 3.6.3, printed p.252. This is a torsion-saturation variant of the reviewed sfb six-step proof: correct by the single integer |C_tors|, then split the torsion-free quotient. ILO supplies the chart context and the analogous cyclic correction of Lemma 3.6.4, printed pp.252--253, not this general group statement."
+   }
+  },
+  {
+   "text": "Projectivity of the free group $Q$ from Step 2 [lem-trf-fg-torsionfree-group-free] gives an integer-linear section $s:Q\\to B$ of $q_2$ and an integer-linear lift $v:Q\\to E$ of $b_0s$ across $\\pi$, by Module.projective_lifting_property. For $x\\in B$, put $r(x)=x-s(q_2x)$. Its class in $Q$ is zero, so $r(x)\\in P$; this defines a homomorphism $r:B\\to P$. Set $b(x)=\\gamma(r(x))+v(q_2x)$. For $y\\in A$ and $x=u(y)$, $q_2x=0$ and $r(x)=x\\in D$, so $b(u(y))=\\alpha(u(y))=a(y)$. Moreover $\\pi b(x)=b_0(x-s(q_2x))+b_0(s(q_2x))=b_0(x)$. These are the required two homomorphism equalities.",
+   "uses": [
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Module/Projective.lean",
+    "place": "Module.projective_lifting_property, lines 90--110, applied twice to Q; assembly and torsion correction written by J7 from the reviewed sfb argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-trf-fg-torsionfree-group-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-written proof of the general abelian-group obstruction lemma supporting the chart-lifting argument cited in Expose XVI Proposition 3.6.3, printed p.252. This is a torsion-saturation variant of the reviewed sfb six-step proof: correct by the single integer |C_tors|, then split the torsion-free quotient. ILO supplies the chart context and the analogous cyclic correction of Lemma 3.6.4, printed pp.252--253, not this general group statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +122,45 @@
    "results": "Read returned hits: Mathlib/RingTheory/Ideal/Maps.lean, Mathlib/RingTheory/Ideal/Maps.lean, Mathlib/Algebra/Module/CharacterModule.lean, Mathlib/Algebra/Module/Injective.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean. Only ordinary groups/differentials, not the compatible lifting or logarithmic sheaf statement.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift compatible homomorphisms of finitely generated abelian groups across a surjection when kernel and torsion cokernel orders act invertibly on the coefficient group",
+   "results": "{\"t\": \"2026-10-24T00:42:17Z\", \"tool\": \"leanfinder\", \"query\": \"Lift compatible homomorphisms of finitely generated abelian groups across a surjection when kernel and torsion cokernel orders act invertibly on the coefficient group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidHom.liftOfSurjective\", \"Abelianization.lift\", \"Module.Baer.extension_property_addMonoidHom\", \"ModN.liftEquiv\", \"FreeAbelianGroup.lift.map_hom\", \"ZMod.lift_comp_coe\", \"Abelianization.lift_of_comp\", \"ModN.liftEquiv'\"], \"digest\": \"1fcd2670e8cfbe70\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quotient factorization, abelianization, Baer extension, ModN and free abelian group universal properties do not state this compatible lift. Baer injectivity requires an additional global injectivity hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidHom\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T00:42:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AddMonoidHom\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddMonoidHom.liftOfRightInverseAux\", \"AddMonoidHom.liftOfSurjective\", \"AddMonoidHom.liftOfRightInverse\", \"AddMonoidHom.liftOfRightInverseAux_comp_apply\", \"AddMonoidHom.liftOfRightInverse_comp\", \"AddMonoidHom.eq_liftOfRightInverse\", \"AddMonoidHom.liftOfRightInverse_comp_apply\", \"AddMonoidHom.map_finsum_plift\"], \"digest\": \"faafcea4fa602287\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the quotient factorization equivalences require kernel containment and do not provide this relative lifting property."
+  },
+  {
+   "tool": "grep",
+   "query": "(lift|extend).*(AddMonoidHom|AddCommGroup)|(AddMonoidHom|AddCommGroup).*(lift|extend)",
+   "results": "{\"t\": \"2026-10-24T00:42:17Z\", \"tool\": \"grep\", \"query\": \"(lift|extend).*(AddMonoidHom|AddCommGroup)|(AddMonoidHom|AddCommGroup).*(lift|extend)\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/FreeAbelianGroup.lean\", \"Mathlib/GroupTheory/FreeAbelianGroup.lean\", \"Mathlib/GroupTheory/FreeAbelianGroup.lean\", \"Mathlib/GroupTheory/FreeAbelianGroup.lean\", \"Mathlib/GroupTheory/FreeAbelianGroup.lean\", \"Mathlib/GroupTheory/GroupAction/Hom.lean\"], \"digest\": \"6a7cf77627f43688\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the free abelian group universal property and action homomorphism definitions do not give the two compatible lift equations under the finite-order hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of a finitely generated abelian group splits if its kernel is uniquely divisible by the torsion order",
+   "results": "{\"t\": \"2026-10-24T00:42:18Z\", \"tool\": \"leansearch\", \"query\": \"An extension of a finitely generated abelian group splits if its kernel is uniquely divisible by the torsion order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroupExtension.Splitting.ctorIdx\", \"AddGroupExtension.Splitting\", \"GroupExtension.Splitting\", \"AddGroupExtension.Splitting.casesOn\", \"AddGroupExtension.Splitting.recOn\", \"AddGroupExtension.Splitting.mk\", \"AddGroupExtension.Splitting.rec\", \"GroupExtension.Splitting.mk\"], \"digest\": \"bbb876b0f9ef4849\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define splittings and their constructors and recursors; they do not assert existence under invertibility of the torsion order."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map between finitely generated abelian groups has the left lifting property against a surjection if its kernel order and torsion cokernel order are invertible on the kernel of the surjection",
+   "results": "{\"t\": \"2026-10-24T00:43:18Z\", \"tool\": \"leanfinder\", \"query\": \"A map between finitely generated abelian groups has the left lifting property against a surjection if its kernel order and torsion cokernel order are invertible on the kernel of the surjection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGrpCat.instIsSerreClassIsFinite\", \"isZGroup_of_coprime\", \"AddCommGrpCat.enoughInjectives\", \"AddGroup.isAddCyclic_of_coprime_card_ker\", \"Group.isCyclic_of_coprime_card_ker\", \"AddGroup.isAddCyclic_of_coprime_card_range_card_ker\", \"CategoryTheory.ShortComplex.Exact.ab_finite\", \"Group.isCyclic_of_coprime_card_range_card_ker\"], \"digest\": \"116046900236b310\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-group Serre classes, enough injectives, coprime cyclicity and exact-sequence finiteness are different statements."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-log-smooth-infinitesimal-calculus",
@@ -87,5 +189,66 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-compatible-abelian-group-lifting",
+  "worker": "stage1",
+  "summary": "Reused the existing reviewed lem-sfb-compatible-abelian-group-lifting, whose statement is byte-for-byte identical. One application proves both compatibility equalities without new nodes. Read the cited statement and its six-step proof; its entire dependency closure excludes this item. Retained the statement, statement dependencies, provenance, historical Mathlib searches and blueprint chain. Added five genuinely executed Mathlib searches and a verbatim statement citation. No Lean files or builds.",
+  "blueprint": "Realizes the inherited from.place: the abelian-group obstruction calculation for group-level chart lifting beneath lem-per-log-smooth-infinitesimal-calculus, ultimately serving the recorded regular finite-torsion local model under lem-per-artin-gabber-affine-curve. The current latest ancestor proof Step 3 is a duality/exchange argument and does not itself state this algebra lemma; the intermediate chart-calculus chain explains the inherited provenance. Whole-blueprint searches found no imported node stating this group theorem, so same_as remains empty. The reused sfb node is itself a created supporting lemma, not an imported blueprint duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-compatible-abelian-group-lifting",
+    "why": "Its statement is exactly this generic abelian-group lifting theorem, already split and independently reviewed; using it shares the algebra calculation across the two log-chart arguments. It has only elementary arithmetic and the Mathlib finitely-generated-abelian-group structure theorem below it, so no six-functor or alteration argument replaces a step of this unit. No distinct node of this unit supplies the same theorem."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-e22a0c227",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-e22a0c227 (reviewer sub-agent of L); spot-checked: Delivery: a one-step split with no new nodes, and the statement, stmt_deps, source and blueprint chain are unchanged. Duplicate check: the item's statement is string-equal (JSON compare) to the existing lem-sfb-compatible-abelian-group-lifting (status split, Q53 review pass 2026-10-23), and their stmt_deps match. Reusing that node is right; a second copy would be wrong. Step 1: it applies the sfb node to the same objects, every hypothesis matches (A, B finitely generated over Z; K and C_tors finite; the sequence is exact; |K| and |C_tors| are invertible on J; πa=b0u), and the conclusion gives exactly bu=a and πb=b0. Cited proof: I read all six steps and they are correct. a vanishes on K, so α on u(A) is well defined. C splits by the Mathlib leaf AddCommGroup.equiv_free_prod_directSum_zmod. d_j divides |C_tors|, so d_j is inverted on J. The cyclic correction w'=w−i(T_j z_j) works, and the formula on zero presentations proves b is well defined. Cycles: the closure is {sfb node, lem-sbc structure leaf, def-weil-finitely-generated-module, def-weil-finite-dimensional-subspace}, so there is none. Edge cases: trivial groups, u=·d on Z, and two counterexamples (A=Z/2, B=0, a=id; and B=Z/2, E=Z, J=2Z, b0=id) showing that both order hypotheses are needed. Source: ILO XVI Proposition 3.6.3 and Lemma 3.6.4 on PDF pp.258–259 give only the Kato 3.5 chart context, which the node states honestly with Kato WANTED. No SGA is cited. Tool use: the declared tool_use of the sfb node is a generic algebra black box and replaces no step of the route, so I accept it. No fixes. Maintainer note: merge the per node into the sfb node (merged_into) when the per route is retired."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.CompatibleAbelianGroupLifting",
+  "declaration": "AddCommGroup.exists_compatible_lift_of_bijective_nsmul",
+  "file": "lean/Sheaf/GroupTheory/CompatibleAbelianGroupLifting.lean",
+  "statement": "theorem exists_compatible_lift_of_bijective_nsmul {A : Type uA} {B : Type uB} {E : Type uE} {E₀ : Type uE₀} {J : Type uJ} [AddCommGroup A] [AddCommGroup B] [AddCommGroup E] [AddCommGroup E₀] [AddCommGroup J] [Module.Finite ℤ A] [Module.Finite ℤ B] (u : A →+ B) [Finite u.ker] [Finite (AddCommGroup.torsion (B ⧸ u.range))] (i : J →+ E) (π : E →+ E₀) (hi : Function.Injective i) (hπ : Function.Surjective π) (hexact : π.ker = i.range) (hK : Function.Bijective (fun j : J ↦ Nat.card u.ker • j)) (hC : Function.Bijective (fun j : J ↦ Nat.card (AddCommGroup.torsion (B ⧸ u.range)) • j)) (a : A →+ E) (b₀ : B →+ E₀) (hcompat : π.comp a = b₀.comp u) : ∃ b : B →+ E, b.comp u = a ∧ π.comp b = b₀",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6467861d0",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Only the item lean record changed; lean.statement is verbatim in Sheaf/GroupTheory/CompatibleAbelianGroupLifting.lean; one sorry theorem with source and blueprint docstrings; report has Worker report and Second reading by Q128. Clause check: Module.Finite ℤ A/B (def-weil-finitely-generated-module), Finite u.ker, Finite (AddCommGroup.torsion (B ⧸ u.range)), hi/hπ/hexact as an actual kernel=range equality, Bijective nsmul by Nat.card of K and C_tors on J, hcompat, ∃ b with b∘u=a ∧ π∘b=b₀; no extra assumptions; independent universes; edge cases (zero groups, order 1, u=·d on ℤ) covered. The duplicate sfb node has no lean record, so no H4 clash; the name is unused in Mathlib and the project. Not recompiled per instructions. Maintainer note: attach the sfb node existing:true to this declaration when it is stated."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T091841-L-3381016",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,144 @@
+{
+ "id": "def-sf-proper-open-mate",
+ "kind": "definition",
+ "title": "Canonical ordinary proper/open adjunction mate",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\Lambda$ be a finite commutative ring and, for a scheme $X$, let $D_\\Lambda(X)=D(\\operatorname{Sh}(X_{\\mathrm{proet}},\\operatorname{Mod}_\\Lambda))$ on the small pro-etale site [def-weil-pbc-proetale-site]. Use inverse image $f^*$ [def-sfb-finite-upper-star], direct image $f_*$ [def-sfb-finite-lower-star], and exact open extension $j_!$ [sk-def-sfb-finite-lower-shriek]. Put $P_f=Lf^*$ and $R_f=Rf_*$, with the canonical derived adjunction $P_f\\dashv R_f$ [sk-def-sfb-finite-derived-functors]. Identify $P_f$ with termwise inverse image by [def-sfb-finite-derived-pullback-iso]. Transport the open adjunction of [def-sfb-finite-derived-extension-by-zero-adjunction] across that identification to obtain $J_j\\dashv P_j$, where $J_j=D(j_!)$. For composable opens $j:U\\to V$, $k:V\\to X$, the open-extension compositor $J_kJ_j\\cong J_{k\\circ j}$ is the unique-left-adjoint comparison determined by these adjunctions and the derived inverse-image compositor induced by [def-sfb-finite-upper-star-comp]; equality transport of open maps is defined in the same way. For a clopen immersion $s$, define $\\pi_s:1\\to J_sP_s$ by the unit of $P_s\\dashv R_s$ followed by the canonical identification $R_s\\cong J_s$ (exact direct image for a clopen immersion); this is the identity on the image of $s$ and zero on its open complement. Let\n$$\\begin{array}{ccc}A&\\xrightarrow{k}&B\\\\r\\downarrow&&\\downarrow p\\\\C&\\xrightarrow{i}&D\\end{array}$$\nbe a commutative square with $k,i$ quasi-compact open immersions [def-weil-open-immersion] and $r,p$ proper [def-weil-proper-morphism]; write $h:p\\circ k=i\\circ r$. Form $B_C=B\\times_D C$ with projections $b:B_C\\to B$, $q:B_C\\to C$, and its canonical clopen lift $t=(k,r):A\\to B_C$ as in [def-cbc-strict-tower-proper-open-arrows]. Use the ordinary constant-coefficient open base-change isomorphism $\\beta:P_pJ_i\\xrightarrow{\\sim}J_bP_q$ of [lem-cbc-proetale-extension-zero-base-change], transported to total derived pullbacks. Define\n$$\\alpha:P_pJ_i\\xrightarrow{\\beta}J_bP_q\\xrightarrow{J_b\\pi_tP_q}J_bJ_tP_tP_q\\xrightarrow{\\sim}J_kP_r,$$\nwhere the last isomorphism uses $bt=k$, $qt=r$ and the specified open-extension and inverse-image compositors. Define the proper/open mate $\\gamma:J_iR_r\\to R_pJ_k$ to be the adjunction mate [def-weil-pbc-adjunction-mate] of this $\\alpha$ under $P_r\\dashv R_r$ and $P_p\\dashv R_p$: explicitly\n$$J_iR_r\\xrightarrow{\\eta_p}R_pP_pJ_iR_r\\xrightarrow{R_p\\alpha R_r}R_pJ_kP_rR_r\\xrightarrow{R_pJ_k\\varepsilon_r}R_pJ_k.$$\nThese definitions specify the actual ordinary-site comparison; they assert no tensor-compatibility or invertibility theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-lower-star",
+  "sk-def-sfb-finite-lower-shriek",
+  "sk-def-sfb-finite-derived-functors",
+  "def-sfb-finite-derived-pullback-iso",
+  "def-sfb-finite-derived-extension-by-zero-adjunction",
+  "def-sfb-finite-upper-star-comp",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, lemma-shriek-proper-and-open; ordinary constant-coefficient clopen-projection mate used in the latest blueprint lem-sf-kunneth-coherence symmetry paragraph (second-open substitution)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properOpenMate|properOpenAlpha|properOpenClopenProjection|mateEquiv in CategoryTheory",
+   "results": "{\"t\": \"2026-10-24T19:26:47Z\", \"tool\": \"grep\", \"query\": \"properOpenMate|properOpenAlpha|properOpenClopenProjection|mateEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\"], \"digest\": \"4e72a21dfdd999fa\"}",
+   "date": "2026-10-24",
+   "verdict": "Only generic adjunction or topological constructions; no geometric proper/open mate. Reuse the existing project construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical proper open derived direct image extension by zero interchange defined as the adjunction mate of open base change and clopen projection",
+   "results": "{\"t\": \"2026-10-24T19:26:47Z\", \"tool\": \"leansearch\", \"query\": \"Canonical proper open derived direct image extension by zero interchange defined as the adjunction mate of open base change and clopen projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpenMap.adjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"IsOpenMap.adjunctionNhds\", \"Topology.IsInducing.adjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"Topology.IsInducing.adjunctionNhds\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\"], \"digest\": \"555b4d195c81b641\"}",
+   "date": "2026-10-24",
+   "verdict": "Only generic adjunction or topological constructions; no geometric proper/open mate. Reuse the existing project construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "{\"t\": \"2026-10-24T19:26:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"mateEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-24",
+   "verdict": "Only generic adjunction or topological constructions; no geometric proper/open mate. Reuse the existing project construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"def-sf-proper-open-mate|AlgebraicGeometry.ProEtale.properOpenMate\" dag/nodes; blueprint_refs.py search \"proper open mate\"; rg -n \"properOpenMate|properOpenAlpha|properOpenClopenProjection\" lean/WeilConjectures lean/Sheaf",
+   "results": "DAG: only lem-sf-proper-open-projection-mate.json, a theorem owner; no definition node. Blueprint search: 0 matches. No matching definitions in WeilConjectures. Sheaf/SixFunctors/ProperOpenProjectionMate.lean defines ProperOpenDerived, ProperOpenPull, ProperOpenPush, ProperOpenShriek, properOpenAdj, properOpenShriekComp, properOpenShriekCongr, properOpenClopenProjection, properOpenBeta, properOpenAlpha and properOpenMate; other Sheaf hits are uses of these definitions.",
+   "date": "2026-10-24",
+   "verdict": "Existing plain definitions match exactly; new node supplies definition ownership, with no new Lean module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-kunneth-second-open-substitution",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-kunneth-coherence",
+   "place": "Symmetry paragraph, reduction to proper maps and second-open substitution: the normalized proper/open Gamma comparison.",
+   "via": [
+    "lem-sf-kunneth-second-open-substitution",
+    "lem-sf-product-compactification-identity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProperOpenProjectionMate",
+  "declaration": "AlgebraicGeometry.ProEtale.properOpenMate",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteRingIsNoetherian",
+   "AlgebraicGeometry.ProEtale.ProperOpenDerived",
+   "AlgebraicGeometry.ProEtale.ProperOpenPull",
+   "AlgebraicGeometry.ProEtale.ProperOpenPush",
+   "AlgebraicGeometry.ProEtale.ProperOpenShriek",
+   "AlgebraicGeometry.ProEtale.properOpenAdj",
+   "AlgebraicGeometry.ProEtale.properOpenShriekComp",
+   "AlgebraicGeometry.ProEtale.properOpenShriekCongr",
+   "AlgebraicGeometry.ProEtale.properOpenClopenProjection",
+   "AlgebraicGeometry.ProEtale.properOpenBeta",
+   "AlgebraicGeometry.ProEtale.properOpenAlpha",
+   "AlgebraicGeometry.ProEtale.properOpenMate"
+  ],
+  "statement": "def properOpenMate (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {A B C D : Scheme.{u}} (k : A ⟶ B) (r : A ⟶ C) (p : B ⟶ D) (i : C ⟶ D)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :\n    ProperOpenPush Λ r ⋙ ProperOpenShriek Λ i ⟶\n      ProperOpenShriek Λ k ⋙ ProperOpenPush Λ p",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair of returned immutable head 747a44a035d9: definition ownership for the existing ordinary-site properOpenMate and its plain helper definitions. All listed declarations have real data in the unchanged published module (lines 44-211) and source/blueprint docstrings under the original theorem node lem-sf-proper-open-projection-mate. No theorem conclusion, tensor-compatibility statement, new module, alias or data choice is used. The coefficient universe is u+1 over Scheme.{u}. Generic pullback compositors and equality transport, clopen direct-image identification, and adjunction mates are the existing upstream constructions; the strict-tower-arrows dependency supplies the canonical geometric clopen lift only."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90e4e1a2a",
+  "group": "Q30",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90e4e1a2a",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery after the 747a H2 RETURN. Lean module byte-identical (sha bd62f1c9); the item record differs only in stmt_deps (lem-sf-proper-open-tensor-compatibility → def-sf-proper-open-mate). New node def-sf-proper-open-mate is existing:true on the unchanged ProperOpenProjectionMate: check_existing clean, statement verbatim, 12 real decls, no owner race, no cycle; TeX α/γ/mate directions match the Lean. lem-cbc-proetale-extension-zero-base-change cited for its own ordinaryOpenExtensionBaseChangeIso, with def-sf-finite-open-tensor-operations as precedent. Advisory: rightDerivedLowerStarIsoOfIsClosedRange and leftDerivedUpperStarComp have no def-node owner. Gates OK; report sections present; no compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T023342-L-546669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.properOpenProjectionMate",
+   "WeilConjectures.IntegralSystemRealization.properOpenProjectionMateSystems"
+  ],
+  "sorry_after": []
+ }
+}

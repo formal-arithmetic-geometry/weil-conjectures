@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-space-affine-perfect-hom-base-change",
+ "kind": "statement",
+ "title": "Flat affine base change of global Hom out of a perfect space complex",
+ "statement": "Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived categories [def-weil-abstract-derived-category], in the universes of [def-weil-size-convention]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived pushforward is computed by K-injective resolutions and tensor pullback $Lh^*$ by K-flat resolutions. Quasi-compact means that every open cover has a finite subcover; quasi-separated means the diagonal is quasi-compact. A perfect complex is etale locally isomorphic to a bounded complex of direct summands of finite free structure-sheaf modules. Write $R\\operatorname{Hom}_Z(P,Q)=R\\Gamma(Z,R\\mathcal Hom_{\\mathcal O_Z}(P,Q))$ for global derived Hom, where internal Hom is [def-pur-derived-internal-hom] and $R\\Gamma$ is the right derived global-sections functor. If $Z$ is over $\\operatorname{Spec}A$, regard this as an object of $D(A)$ by restriction of scalars. Its degree-$j$ cohomology is canonically $\\operatorname{Hom}_{D(\\mathcal O_Z)}(P,Q[j])$. Let $A\\to B$ be a homomorphism of commutative rings, $Y=\\operatorname{Spec}A$, $Y'=\\operatorname{Spec}B$, and $g:Y'\\to Y$ its spectrum morphism. Let $f:X\\to Y$ be a flat morphism, with $X$ a quasi-compact quasi-separated algebraic space; flatness is tested on etale scheme charts. Form $X'=X\\times_Y Y'$ with projections $h:X'\\to X$ and $f':X'\\to Y'$. For every perfect $P\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and every $Q\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, the canonical map\n$$c_{P,Q}:R\\operatorname{Hom}_X(P,Q)\\otimes_A^{\\mathbf L}B\\xrightarrow{\\sim}R\\operatorname{Hom}_{X'}(Lh^*P,Lh^*Q)$$\nis an isomorphism in $D(B)$. It is natural in both arguments. The map is the $B$-linear extension, under derived extension/restriction of scalars, of the $A$-linear pullback-induced map of global Hom complexes. Under the unit $H\\to\\operatorname{Res}(H\\otimes_A^{\\mathbf L}B)$ its underlying map is precisely that pullback-induced map. No boundedness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0E4S (lemma-affine-morphism-and-hom-out-of-perfect), case (1), specialized to flat f; the preceding construction of the canonical map. Flatness implies Tor independence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-derived-internal-hom",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-pullback-tensor-comparison",
+  "def-zl-ring-derived-scalar-extension",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=R\\mathcal Hom_X(P,Q)$. The perfect case of [lem-sfb-space-pseudocoherent-rhom-quasicoherent] gives $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Since $Y$ is affine it is quasi-separated, so [lem-sfb-space-qcqs-permanence] makes $f$ quasi-compact and quasi-separated from the hypotheses on $X$. Thus the flat pushforward base-change theorem applies to $f$ and $E$.",
+   "uses": [
+    "lem-sfb-space-pseudocoherent-rhom-quasicoherent",
+    "lem-sfb-space-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E4S, lemma-affine-morphism-and-hom-out-of-perfect, case (1), using Tag 08IR, lemma-compare-base-change; perfect-source comparison and affine realization as specified in the cited nodes."
+   }
+  },
+  {
+   "text": "Regard $h$ as its canonical ringed-topos morphism using [lem-trf-space-enlarged-etale-ringed-site-model]. The evaluation-normalized comparison of [lem-sfb-ringed-perfect-internal-hom-pullback] gives an isomorphism $\\alpha:Lh^*E\\to R\\mathcal Hom_{X'}(Lh^*P,Lh^*Q)$, natural in $P,Q$. Only $P$ is required perfect; $Q$ remains unbounded.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-ringed-perfect-internal-hom-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E4S, lemma-affine-morphism-and-hom-out-of-perfect, case (1), using Tag 08IR, lemma-compare-base-change; perfect-source comparison and affine realization as specified in the cited nodes."
+   }
+  },
+  {
+   "text": "By [lem-sfb-flat-space-derived-pushforward-base-change], $\\beta_E:Lg^*Rf_*E\\to Rf'_*Lh^*E$ is invertible and $F=Rf_*E$ has quasi-coherent cohomology. For an affine scheme $Z$, write $G_Z=R\\Gamma(Z,-)$. Apply [lem-sc-mixed-extension-sections-unit] on the Zariski sites to $R\\epsilon_{Y,*}F$. Transport along [lem-sfb-derived-etale-zariski-equivalence], whose equivalence unit/counit and pullback comparisons preserve the scalar-insertion maps. This gives $s:G_Y(F)\\otimes_A^{\\mathbf L}B\\simeq G_{Y'}(Lg^*F)$ with $U(s)\\circ\\eta^T=\\sigma\\circ G_Y(\\eta^g_F)$; $U$ is scalar restriction and $\\sigma$ is derived sections/direct-image composition. No boundedness or flatness of $g$ is required. Applying $G_{Y'}$ to $\\beta_E$ gives an isomorphism $d:R\\Gamma(X,E)\\otimes_A^{\\mathbf L}B\\to R\\Gamma(X',Lh^*E)$, using [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for $f,f'$ followed by their maps to the one-point ringed topoi. Both equivalences use the actual derived global sections. The naturality of these identifications is part of the cited statements.",
+   "uses": [
+    "lem-sfb-flat-space-derived-pushforward-base-change",
+    "lem-sc-mixed-extension-sections-unit",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E4S, lemma-affine-morphism-and-hom-out-of-perfect, case (1), using Tag 08IR, lemma-compare-base-change; perfect-source comparison and affine realization as specified in the cited nodes."
+   }
+  },
+  {
+   "text": "Postcompose $d$ with $R\\Gamma(X',\\alpha)$ to obtain an isomorphism $\\Theta$ with the required endpoints. Its scalar-extension adjoint is the geometric pullback map: the unit equation for $s$ above gives $G_Y(\\eta^g_F)$ followed by $G_{Y'}(\\beta_E)$ and the composition comparisons. The mate $\\beta_E$ is adjoint to $Lf'^*Lg^*Rf_*E\\simeq Lh^*Lf^*Rf_*E\\xrightarrow{Lh^*\\epsilon^f_E}Lh^*E$. Substitute this formula: naturality moves $\\eta^f$ past $\\eta^g$, and $Rf_*\\epsilon^f\\circ\\eta^fRf_*=1$ cancels the adjacent unit and counit. The remaining arrow is $R\\Gamma(X,E)\\to R\\Gamma(X',Lh^*E)$ induced by $\\eta^h_E$. This is mate pasting [lem-weil-pbc-mate-pasting], with the adjunction-compatible composition comparisons of [lem-sfb-space-derived-etale-chart-calculus]. Postcomposing with $\\alpha$ gives exactly global-Hom pullback, by its pulled-back evaluation formula. Thus $U(\\Theta)\\eta^T$ is the stated pullback-induced map. The extension/restriction adjunction gives a unique $B$-linear extension, so $\\Theta=c_{P,Q}$. All factors are natural in both variables.",
+   "uses": [
+    "lem-sc-mixed-extension-sections-unit",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-flat-space-derived-pushforward-base-change",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-ringed-perfect-internal-hom-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E4S, lemma-affine-morphism-and-hom-out-of-perfect, case (1), using Tag 08IR, lemma-compare-base-change; perfect-source comparison and affine realization as specified in the cited nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-pseudocoherent-rhom-quasicoherent",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-ringed-perfect-internal-hom-pullback",
+  "lem-sfb-flat-space-derived-pushforward-base-change",
+  "lem-sc-mixed-extension-sections-unit",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sfb-space-derived-etale-chart-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0E4S(1): assembly via canonical flat pushforward base change (08IR), perfect internal Hom pullback, and affine derived realization. This reorganizes the same perfect-Hom and cohomology-base-change ingredients at the derived-object level."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global derived Hom out of a perfect complex commutes with derived extension of scalars in a Tor independent cartesian square of algebraic spaces over affine schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := R, commRing := inst } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpe\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-algebra structures on $S$ and $T$, is isomorph\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := S, commRing := inst_1 } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackS\", \"doc\": \"The fiber product (pullback) in the category of schemes of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-alg\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).hom\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R (TensorProduct R S\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X Y : AlgebraicGeometry.Scheme} (v : n → ↑(Y.presheaf.obj (Opposite.op ⊤))) (f : X ⟶ Y) (g : Y ⟶ S)\\n  {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.AffineSpace n S ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp f\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Affi\", \"doc\": \"For schemes $S, X, Y$ and an affine space $\\\\mathbb{A}^n_S$, given a vector $v$ of global sections of $Y$'s structure sheaf, morphisms $f: X \\\\to Y$, $g: Y \\\\to S$, and $h: \\\\mathbb{A}^n_S \\\\to Z$, the com\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] [inst_3 : HasDerivedCategory C] {X Y Z : C} (f : X ⟶ Y) {n : ℕ}\\n  (x : CategoryTheory.Abelian.Ext Y Z n),\\n  CategoryTheory.CategoryStruct.comp ((DerivedCategory.singleFun\", \"doc\": \"For objects $X, Y, Z$ in an abelian category $\\\\mathcal{C}$, a morphism $f : X \\\\to Y$, and an element $x \\\\in \\\\mathrm{Ext}^a(Y, Z)$, the composition of the single-term complex functor applied to $f$ wit\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] [inst_3 : HasDerivedCategory C] {X Y Z : C} {n : ℕ}\\n  (x : CategoryTheory.Abelian.Ext X Y n) (f : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp x.hom\\n      ((CategoryTheor\", \"doc\": \"For objects $X, Y, Z$ in an abelian category $\\\\mathcal{C}$ and a natural number $n$, composing the homomorphism $x : \\\\mathrm{Ext}^n(X, Y)$ with the image of a morphism $f : Y \\\\to Z$ under the single-t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.comp_homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X Y : AlgebraicGeometry.Scheme} (v : n → ↑(Y.presheaf.obj (Opposite.op ⊤))) (f : X ⟶ Y) (g : Y ⟶ S),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace.homOfVector g v) =\\n    AlgebraicGeometry.AffineSpace.homOfVector (CategoryTheory.CategoryStruct.comp f g)\\n     \", \"doc\": \"For schemes $X, Y$ over a base scheme $S$, given a vector $v$ of global sections of the structure sheaf of $Y$, and morphisms $f : X \\\\to Y$ and $g : Y \\\\to S$, the composition $f \\\\circ \\\\text{homOfVecto\"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of derived hom from a perfect complex on a flat quasi compact algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"baseChange\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr][Hh]om.*[Bb]ase[Cc]hange|[Hh]om.*[Pp]erfect.*[Bb]ase|[Pp]erfect.*[Hh]om.*[Bb]ase",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global derived Hom out of a perfect complex commutes with derived extension of scalars in a Tor independent cartesian square of algebraic spaces over affine schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.restrictScalars f).obj Y ⟶ X) → (Y ⟶ (ModuleCat.coextendScalars f).obj X)\", \"doc\": \"For ring homomorphism $ f : R \\\\to S $, this function establishes a natural isomorphism between the Hom set of $ R $-linear maps from the restricted $ S $-module $ Y $ to $ X $, and the Hom set of $ S \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homEquiv\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"{n : ℕ} : Ext.{w} X Y n ≃ ShiftedHom ((singleFunctor C 0).obj X) ((singleFunctor C 0).obj Y) (n : ℤ)\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is equivalent to the hom-set in the derived category between the $ n $-shifted single-term cochain com\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \": DerivedCategory.Qh ⋙ F.mapDerivedCategory ≅ F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (X ⟶ (ModuleCat.restrictScalars f).obj Y) → ((ModuleCat.extendScalars f).obj X ⟶ Y)\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function establishes a natural bijection between $ R $-linear maps f\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.smul_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear\", \"type\": \"(x : Ext X Y n) (r : R) [HasDerivedCategory C] : (r • x).hom = r • x.hom\", \"doc\": \"For any element $x \\\\in \\\\operatorname{Ext}^n(X, Y)$ and scalar $r \\\\in R$, the homomorphism component of the scalar multiplication $r \\\\cdot x$ in the Ext group equals the scalar multiplication of the ho\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"[HasDerivedCategory C] {n : ℕ} (f : R.complex.X n ⟶ Y) (m : ℕ) (hm : n + 1 = m) (hf : R.complex.d m n ≫ f = 0) :\\n  (R.extMk f m hm hf).hom =\\n    (ShiftedHom.mk₀ _ rfl\\n          ((DerivedCategory.singleFunctorIsoCompQ C 0).hom.app X ≫ inv (DerivedCategory.Q.map R.π'))).comp\\n      ((ShiftedHom.map\\n   \", \"doc\": \"In an abelian category with derived category structure, for a projective resolution $ R $ of an object $ X $, if a morphism $ f: R_n \\\\to Y $ satisfies $ d_{n+1,n} \\\\circ f = 0 $, then the extended homo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \": DerivedCategory.Q ⋙ F.mapDerivedCategory ≅ F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global derived Hom from a perfect complex on a flat quasi compact quasi separated algebraic space commutes with arbitrary affine base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.comp_homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X Y : AlgebraicGeometry.Scheme} (v : n → ↑(Y.presheaf.obj (Opposite.op ⊤))) (f : X ⟶ Y) (g : Y ⟶ S),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace.homOfVector g v) =\\n    AlgebraicGeometry.AffineSpace.homOfVector (CategoryTheory.CategoryStruct.comp f g)\\n     \", \"doc\": \"For schemes $X, Y$ over a base scheme $S$, given a vector $v$ of global sections of the structure sheaf of $Y$, and morphisms $f : X \\\\to Y$ and $g : Y \\\\to S$, the composition $f \\\\circ \\\\text{homOfVecto\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change for global derived Hom perfect complexes quasi coherent sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.Flat f]\\n  [hg : AlgebraicGeometry.Flat g], AlgebraicGeometry.Flat (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"baseChange\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]erfect.*[Hh]om.*[Bb]ase|[Rr][Hh]om.*[Bb]ase[Cc]hange",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global derived Hom from a perfect complex commutes with arbitrary affine base change for a flat algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": IsStableUnderBaseChange FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-flat-proper-adjoint-base-change",
+  "date": "2026-10-23",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Affine base change of the proper flat coherent right adjoint. Supporting input of Tag 0E5I(1): Tag 0E4S (lemma-affine-morphism-and-hom-out-of-perfect), case (1), specialized to flat f; the preceding construction of the canonical map. Flatness implies Tor independence.",
+   "via": [
+    "lem-sfb-affine-flat-proper-adjoint-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-perfect-hom-base-change",
+  "worker": "stage1",
+  "summary": "Split using existing flat pushforward base change, quasi-coherence of perfect internal Hom, affine scalar-extension unit normalization, and etale--Zariski comparison. Added one statement-only node for perfect internal Hom pullback on arbitrary ringed topoi; identified the assembled map by its scalar-extension adjoint. Removed the provisional affine-realization node after the full duplicate audit. Statement unchanged; no Lean written or compiled.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) stable-curve duality prerequisite, via the recorded created chain; specifically Tag 0E4S(1) used in affine base change of the proper flat right adjoint. The ancestor tool reports None because the chain terminates in a Lean module item.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-mixed-extension-sections-unit",
+    "why": "Generic affine scalar-extension/sections adjunction normalization, transported by the existing etale--Zariski equivalence; no constructibility or Picard-duality route is used."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic formal pasting identity for adjunction mates, used only to identify the specified comparison morphism."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic construction of the canonical ringed etale topoi of algebraic spaces, needed to apply the ringed-topos lemma; no trace-formula argument is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-mixed-extension-sections-unit",
+  "lem-weil-pbc-mate-pasting",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-7be7a321e",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-7be7a321e (reviewer sub-agent of L); spot-checked: FIX for one precision fault in the new node. (1) Item: I read the 4 steps against Stacks 0E4S(1) (spaces-perfect l.4924, proof via 08IR). The flat case is Tor-independent, and unbounded Q and arbitrary B are kept. Step 1: 0A8A case (i) gives E in D_QCoh, and 073B permanence makes f qcqs because affine Y is quasi-separated. Step 2: the enlarged-site lemma gives h as a ringed-topos morphism, and the new node applies. Step 3: flat base change (08IR) gives beta_E; the mixed extension/sections unit theorem is applied to R eps_* F, which is in D_QCoh by the etale-Zariski equivalence; the Leray identifications come from the pushforward-composition node. Step 4: mate pasting with a triangle-identity cancellation and the unit equation identifies Theta = c. All cited statements say what each step uses (C3/C4 checked), and there is no cycle (BFS over 13414 nodes). (2) New node lem-sfb-ringed-perfect-internal-hom-pullback is true. It is the ringed-topos analogue of 0GM7(1): localize, then a strictly perfect E and a K-flat F (08JH/08H3) give finite Hom sums. I tested u=id, and Z->F_p with P=Z/p, Q=Z (both sides F_p + F_p[-1]); a non-perfect P fails, so the hypothesis is needed. It is not a duplicate: lem-sc-mixed-perfect-internal-hom-pullback-isIso and lem-pc-perfect-internal-hom-pullback-isIso are for schemes, lem-sf-etale-finite-projective-pullback-hom is for constant coefficients, thm-trf-internal-hom-pullback is for finite coefficients, and lem-fix-monoidal-dual-hom-comparison is the abstract dual-pair form, a possible tool for later. It is strictly smaller than the item. FIX: the node wrote alpha as the transpose of LP ⊗ LH -> LQ, with ev: P⊗H -> Q called the counit. The cited lem-sf-ringed-derived-closed-symmetric-monoidal has counit RHom(L,M)⊗L -> M, so read literally the transpose had the wrong type. It is restated as the adjunct of LH ⊗ LP -t^{-1}-> L(H⊗P) -L(ev)-> LQ; same map, statement field only. (3) Batch-5: all five listed citations are foundations (algebraic-space and quasi-coherent definitions, 0A8A, 073B, 08IR, 071Q, the 03G0-03LP site construction). None is part of the trace formula, Poincare duality or their proofs, so all are accepted. tool_uses accepted: mixed-extension-sections-unit, mate-pasting, enlarged-site-model.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffinePerfectHomBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spaceAffinePerfectHomBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffinePerfectHomBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffinePerfectHomBaseChange.lean",
+  "statement": "theorem spaceAffinePerfectHomBaseChange {S : Scheme.{u}} [∀ Z : AlgebraicSpace S, HasDerivedCategory.{w} Z.SmallModules] {A B : Type u} [CommRing A] [CommRing B] [HasDerivedCategory.{w} (ModuleCat.{u} A)] [HasDerivedCategory.{w} (ModuleCat.{u} B)] {Y Y' : Over S} (e : Y.left ≅ Spec (.of A)) (e' : Y'.left ≅ Spec (.of B)) (g : Y' ⟶ Y) {X X' : AlgebraicSpace S} (f : X ⟶ schemeSpace Y) (h : X' ⟶ X) (f' : X' ⟶ schemeSpace Y') (hp : IsPullback h.hom f'.hom f.hom ((Scheme.fppfTopology.over S).yoneda.map g)) (hflat : MapIsFlat f) (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (P Q : X.DerivedQCoh) (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf P.obj) : IsIso ((spaceAffineHomBaseChangeNat e e' g f h f' (ObjectProperty.hom_ext _ hp.w)).app (op P.obj, Q.obj)) ∧ (Adjunction.ofIsRightAdjoint (RingDerivedScalarExtension.moduleDerivedRestriction (spaceAffineRingMap e e' g))).unit.app ((spaceGlobalHom Y e f).obj (op P.obj, Q.obj)) ≫ (RingDerivedScalarExtension.moduleDerivedRestriction (spaceAffineRingMap e e' g)).map ((spaceAffineHomBaseChangeNat e e' g f h f' (ObjectProperty.hom_ext _ hp.w)).app (op P.obj, Q.obj)) = spaceGlobalHomPullback e e' g f h f' (ObjectProperty.hom_ext _ hp.w) P.obj Q.obj",
+  "branch": "sheaf-dag",
+  "by": "Q98",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb5cf83ce",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Item and new def node def-sfb-space-affine-hom-comparison checked clause by clause against Stacks 0E4S(1). Any ring map A->B via spaceAffineRingMap; MapIsFlat; qc = CompactSpace Point; qs = affine-test criterion; IsPullback in fppf sheaves; P,Q in DerivedQCoh with local perfectness (08G5); IsIso of the component of a NatTrans in both variables; unit-normalization clause holds by homEquiv, as the node defines it. The map is Stacks' construction: RGamma(h-unit), then a sections/direct-image comparison fixed by chart projections and K-injective units, then the transpose of pulled evaluation; the derived adjunction is fixed by the ordinary unit; extension = leftAdjoint of restriction; all exists-unique normalizations checked for uniqueness. No hollow defs, sorry only in theorems, source/blueprint docstrings present, statements verbatim, 28 declarations present, proof-dep imports present, no duplicate in live trees, no parallel delivery. Advisories: hqs inlines IsAbsolutelyQuasiSeparated (same Prop, stmt_dep change not S2-fixable); spaceGlobalHom_cohomology is Nonempty, unused; section-variable derived-category instance auto-included; space internal-Hom pullback parallels the generic ringedPullbackHomComparison (same formula, stage-3 bridge). No compile run (no change)."
+ }
+}

@@ -1,0 +1,263 @@
+{
+ "id": "lem-trf-qcqs-arrow-absolute-approximation",
+ "kind": "statement",
+ "title": "Simultaneous absolute approximation of an arbitrary qcqs scheme morphism",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] with $X$ and $S$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. There exist a small nonempty directed partially ordered set $I$, schemes $X_i,S_i$ of finite type over $\\operatorname{Spec}\\mathbf Z$ [def-weil-finite-type-morphism], and morphisms $f_i:X_i\\to S_i$. The schemes $X_i$ and $S_i$ are quasi-compact and quasi-separated. For $j\\geq i$ there are affine transition maps $a_{ji}:X_j\\to X_i$ and $b_{ji}:S_j\\to S_i$ [pqf-def-affine-morphism], satisfying the identity and composition laws and $f_i a_{ji}=b_{ji}f_j$. There are compatible projections $p_i:X\\to X_i$, $q_i:S\\to S_i$ with $f_i p_i=q_i f$, such that $X$, with the $p_i$, and $S$, with the $q_i$, are the respective inverse limits in schemes: every compatible family from a test scheme has a unique factorization through the indicated limit. No finite-type hypothesis is imposed on $f$, and the stages $S_i$ are allowed to vary.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GS1, label lemma-approximate-morphism; simultaneous absolute approximation of a morphism (finite-type integer stages are in particular qcqs)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-type-morphism",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [prop-nagata-noetherian-inverse-system] separately to $X$ and $S$. Apply [lem-weil-pbc-cofiltered-limit-directed-reindex] to each resulting small cofiltered system. We obtain nonempty directed sets $A_0,B_0$, schemes $X_a,S_b$ of finite type over $\\operatorname{Spec}\\mathbf Z$, affine transition maps $h_{ca}:X_c\\to X_a$ and $g_{db}:S_d\\to S_b$ for $c\\geq a,d\\geq b$ satisfying the identity and composition laws, and limiting cones $p_a:X\\to X_a$, $q_b:S\\to S_b$. Reindexing retains the stages, their finite-type property and affine transitions. The cited node gives $A_0,B_0$ only as preordered sets, so we replace them by partial orders. Let $A=A_0\\times\\mathbf N$ with $(a,n)\\leq(c,m)$ iff $(a,n)=(c,m)$, or $a\\leq c$ and $n<m$. This is reflexive, transitive (if neither relation is an equality, $a\\leq c\\leq e$ and $n<m<k$), and antisymmetric (two distinct pairs below each other would give $n<m<n$); it is nonempty and directed, $(a,n),(a',n')\\leq(c,\\max(n,n')+1)$ for any $c\\geq a,a'$ in $A_0$. Put $X_{(a,n)}=X_a$, $h_{(c,m)(a,n)}=h_{ca}$ and $p_{(a,n)}=p_a$; the identity and composition laws, affineness and cone compatibility are inherited. The opposite of the order-preserving projection $(a,n)\\mapsto a$ is initial in the sense of [lem-weil-pbc-initial-functor-limit]: over $a_0$ lies $(a_0,0)$, and two pairs over $a_0$ have a common upper bound over $a_0$, giving the zigzag $i\\leftarrow k\\to i'$ of the opposite category, with commuting triangles since $A_0$ is a preorder. Clause (a) of that node shows that $X$ with the $p_{(a,n)}$ is a limit over $A$. Define $B=B_0\\times\\mathbf N$, $S_{(b,n)}=S_b$, $g$ and $q$ in the same way. From now on $a,c,\\dots$ denote elements of $A$ and $b,d,\\dots$ elements of $B$; $A$ and $B$ are nonempty directed partially ordered sets.",
+   "uses": [
+    "prop-nagata-noetherian-inverse-system",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-weil-pbc-initial-functor-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GS1, lemma-approximate-morphism, first paragraph; Tag 01ZA, proposition-approximate; Categories Tag 0032, lemma-directed-category-system; antisymmetrization by the product with $\\mathbf N$ (reviewer repair: the cited reindexing gives a directed preorder) and Categories Tag 002R"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-type-over-noetherian], all $X_a,S_b$ and $\\operatorname{Spec}\\mathbf Z$ are Noetherian, hence the stages are quasi-compact and locally Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated] they are quasi-separated. Applying [pqf-lem-lft-fp-locnoeth] to $S_b\\to\\operatorname{Spec}\\mathbf Z$ shows that every $S_b$ is locally of finite presentation over this common base. Thus the source stages are qcqs and the target stages have the precise presentation hypothesis needed below.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GS1, second paragraph, hypotheses for Tag 01ZC; supporting Tags 01T6, 01OY and 01TX"
+   }
+  },
+  {
+   "text": "For every $b\\in B$, apply [lem-weil-pbc-finite-presentation-map-limit-factorization] over $\\operatorname{Spec}\\mathbf Z$ to $q_b f:X\\to S_b$ and $X=\\varprojlim_aX_a$. It gives $a\\in A$ and $u:X_a\\to S_b$ with $up_a=q_bf$. Whenever an additional lower bound $a_0\\in A$ is prescribed, choose $c\\geq a,a_0$ and replace $u$ by $uh_{ca}$; then $uh_{ca}p_c=q_bf$. Thus a factorization exists for every target stage, with source index above any prescribed source bound.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-map-limit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GS1, second paragraph: factor the composite to each target stage by Tag 01ZC"
+   }
+  },
+  {
+   "text": "Let $I=\\{(a,b,u)\\mid a\\in A,\\ b\\in B,\\ u:X_a\\to S_b,\\ up_a=q_bf\\}$. This is a small set: it is a subset of the disjoint union of the morphism sets $\\operatorname{Hom}(X_a,S_b)$ over the small set $A\\times B$. It is nonempty by step 3. Define $(c,d,v)\\geq(a,b,u)$ to mean $c\\geq a$, $d\\geq b$, and $g_{db}v=uh_{ca}$. The identity and composition laws for $g,h$ prove reflexivity and transitivity. If two triples dominate each other, antisymmetry of $A,B$ gives identical indices; the displayed equation then gives identical maps, so this order is antisymmetric.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GS1, third paragraph: the set of triples and its displayed order"
+   }
+  },
+  {
+   "text": "To prove directedness, take $i=(a,b,u)$ and $i'=(a',b',u')$. Choose $d\\geq b,b'$ in $B$, and use step 3 to choose $e$ and $v:X_e\\to S_d$ with $vp_e=q_df$. Choose $c\\geq a,a',e$. The two maps $uh_{ca},g_{db}vh_{ce}:X_c\\to S_b$ become equal after $p_c$, since both composites equal $q_bf$. Apply [lem-weil-pbc-locally-finite-type-limit-map-equality] to obtain $c_1\\geq c$ where they agree. Apply the same node at $c_1$ to $u' h_{c_1a'},g_{db'}vh_{c_1e}:X_{c_1}\\to S_{b'}$, whose composites with $p_{c_1}$ both equal $q_{b'}f$, obtaining $c_2\\geq c_1$. The first equality persists by precomposition. Consequently $(c_2,d,vh_{c_2e})$ is in $I$ and dominates both original triples. Both applications use the original qcqs source system over $\\operatorname{Spec}\\mathbf Z$ and the locally finite type targets $S_b,S_{b'}$; neither assumes any finite-type property of $f$. Choosing an upper target stage $d$ repairs the lower-target comparison in the printed proof, which alone cannot give an upper bound in $I$.",
+   "uses": [
+    "lem-weil-pbc-locally-finite-type-limit-map-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GS1, third paragraph, directedness argument, with its target-index direction repaired using Tag 01ZC injectivity"
+   }
+  },
+  {
+   "text": "The order-preserving projections $r:I\\to A$ and $s:I\\to B$ are cofinal in the following explicit sense. For any $a_0$, step 3, using any $b\\in B$, gives a triple with $r(i)\\geq a_0$. For any $b_0$, it gives a triple with $s(i)=b_0$. For two triples whose $r$-indices are at least $a_0$, their common upper bound from step 5 also has $r$-index at least $a_0$. Thus the opposite projection $I^{op}\\to A^{op}$ meets both initial-functor conditions: an object over each $a_0$, and the length-two zigzag $i\\leftarrow k\\to i'$ over $a_0$. Exactly the same argument applies to $I^{op}\\to B^{op}$, with $b_0$ replacing $a_0$. All triangle compatibilities hold because these are poset categories.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GS1, third paragraph, cofinality of both projections; Categories definition-initial"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-initial-functor-limit] to these two initial functors and the original limiting cones. Its cone-restriction assertion gives $X=\\varprojlim_{i\\in I}X_{r(i)}$ with projections $p_{r(i)}$, and $S=\\varprojlim_{i\\in I}S_{s(i)}$ with projections $q_{s(i)}$. In particular, these are limits in schemes, with the required unique factorization for compatible maps from every test scheme.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GS1, final paragraph; Categories Tag 002R, lemma-initial"
+   }
+  },
+  {
+   "text": "For $i=(a,b,u)$ put $X_i=X_a$, $S_i=S_b$, $f_i=u$, $p_i=p_a$, $q_i=q_b$. For $j=(c,d,v)\\geq i$ put $a_{ji}=h_{ca}$, $b_{ji}=g_{db}$. The definition of the order gives $f_i a_{ji}=b_{ji}f_j$; membership in $I$ gives $f_ip_i=q_if$. The transition identities, compositions, affineness and projection compatibilities are those of the original systems. The finite-type and qcqs properties were verified in steps 1 and 2, and both limit properties in step 7. This supplies every asserted clause while allowing the target stages to vary.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GS1, last paragraph: assemble the inverse system of morphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-nagata-noetherian-inverse-system",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-finite-presentation-map-limit-factorization",
+  "lem-weil-pbc-locally-finite-type-limit-map-equality",
+  "lem-weil-pbc-initial-functor-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GS1, lemma-approximate-morphism; upper-target directedness repair, with Tags 01ZA, 01ZC and 002R"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism between quasi compact quasi separated schemes is a directed inverse limit of morphisms between finite type schemes over the integers with affine transitions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (AlgebraicGeometry.Scheme.Hom.normalizationDiagram f)).rightOp.comp\\n          AlgebraicGe\", \"doc\": \"The composition of the opposite of the affine Zariski site inclusion functor for a scheme $ Y $, the normalization diagram of a morphism $ f $, the right opposite functor, the contravariant Spec funct\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"{X : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.Cover.LocallyDirected X.directedAffineCover\", \"doc\": \"For any scheme $X$, the directed affine cover (consisting of all affine open subsets with inclusion morphisms) is equipped with a locally directed structure. This follows because the affine open subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}\nNo match: these hits concern descent or equality of maps from an existing limit, or standard finite-type/Noetherian properties; none constructs a simultaneous approximation of an arbitrary scheme arrow.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous absolute Noetherian approximation of an arrow of schemes by finite type integer schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\nNo match: these hits concern descent or equality of maps from an existing limit, or standard finite-type/Noetherian properties; none constructs a simultaneous approximation of an arbitrary scheme arrow.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of qcqs schemes is a limit of morphisms of schemes of finite type over the integers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsAffineHom : AlgebraicGeometry.IsAffineHom f],\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral) →\\n    AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is integral if it is affine and for every affine open subset $ U $ of $ Y $, the induced ring homomorphism on the sections over $ U $ and $ f^{-1}(U) $ is integral\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            (c : CategoryTheory.Limits.Cone D) →\\n    \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructor provi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\nNo match: these hits concern descent or equality of maps from an existing limit, or standard finite-type/Noetherian properties; none constructs a simultaneous approximation of an arbitrary scheme arrow.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, CategoryTheory.Limits.IsLimit",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme} (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S) (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), CompactSpace ↥(\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme} (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S) (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), CompactSpace ↥(\", \"doc\": \"Given a cofiltered diagram `D` of quasi-compact `S`-schemes with affine transition maps,\\nand another scheme `X` of finite type over `S`.\\nThen the canonical map `colim Homₛ(Dᵢ, X) ⟶ Homₛ(lim Dᵢ, X)` is\"}\nNo match: these hits concern descent or equality of maps from an existing limit, or standard finite-type/Noetherian properties; none constructs a simultaneous approximation of an arbitrary scheme arrow.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "approximate.*[Mm]orphism|[Mm]orphism.*[Aa]pproximat|[Nn]oetherianApproximation",
+   "results": "[grep] OK 0 hit(s)\nNo match: these hits concern descent or equality of maps from an existing limit, or standard finite-type/Noetherian properties; none constructs a simultaneous approximation of an arbitrary scheme arrow.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "approximate.*[Mm]orphism|[Mm]orphism.*[Aa]pproximat|[Nn]oetherianApproximation",
+   "results": "Search command returned 0 hits: . Read the factorization and equality declarations in Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean (635-642, 1232-1239); these concern maps from a given limit, not simultaneous construction of the two approximation systems. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every arrow of qcqs schemes is an inverse limit of arrows between schemes of finite type over Z with affine transitions",
+   "results": "Search command returned 8 hits: AlgebraicGeometry.Scheme.isAffine_of_isLimit, AlgebraicGeometry.AffineScheme.hasLimits, AlgebraicGeometry.instHasFiniteLimitsScheme, AlgebraicGeometry.AffineScheme.hasColimits, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk, AlgebraicGeometry.AffineScheme.createsLimitsForgetToScheme. Read the factorization and equality declarations in Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean (635-642, 1232-1239); these concern maps from a given limit, not simultaneous construction of the two approximation systems. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, CategoryTheory.Limits.IsLimit",
+   "results": "Search command returned 1 hits: AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation. Read the factorization and equality declarations in Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean (635-642, 1232-1239); these concern maps from a given limit, not simultaneous construction of the two approximation systems. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous inverse limit approximation of a morphism between quasi compact quasi separated schemes by finite type schemes over the integers",
+   "results": "Search command returned 8 hits: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.exists_map_preimage_eq_map_preimage. Read the factorization and equality declarations in Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean (635-642, 1232-1239); these concern maps from a given limit, not simultaneous construction of the two approximation systems. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute Noetherian approximation of an arrow using compatible finite type models for both source and target schemes",
+   "results": "Search command returned 8 hits: AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType. Read the factorization and equality declarations in Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean (635-642, 1232-1239); these concern maps from a given limit, not simultaneous construction of the two approximation systems. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-qcqs-relative-finite-presentation-approximation",
+  "date": "2026-10-23",
+  "group": "NG"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting 09NI proof, second paragraph: write the affine source as a directed limit of schemes of finite presentation over the target; serves the same affine-neighbourhood dependency of the ancestor as the item. Specifically, the absolute approximation of the arrow used in the proof of Tag 09MV (Tag 0GS1).",
+   "via": [
+    "lem-trf-qcqs-relative-finite-presentation-approximation",
+    "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+    "lem-trf-integral-codimension-one-affine-neighbourhood",
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-qcqs-arrow-absolute-approximation",
+  "worker": "stage1",
+  "summary": "Constructed the directed poset of compatible stage maps, checked both projections are initial after passage to opposites, and recovered both limit cones. Reused eight existing dependency nodes; created no nodes. Repaired the lower-target-index gap in the printed 0GS1 directedness argument. No statement change.",
+  "blueprint": "Supporting 09NI proof, second paragraph: write the affine source as a directed limit of schemes of finite presentation over the target; serves the same affine-neighbourhood dependency of the ancestor as the item. Specifically, the absolute approximation of the arrow used in the proof of Tag 09MV (Tag 0GS1). Steps 1-8 supply the absolute arrow approximation used by the relative-approximation prerequisite (09MV) in that supporting route. The latest local-term blueprint and its unit were read; this split is only the cited scheme-limit tool.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-0ca7a2737",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-0ca7a2737 (reviewer sub-agent of L); spot-checked: Read in full: Stacks 0GS1 (limits.tex:1593-1652), the base node in side-live (unsplit, empty proof) and all 8 cited statements. Statement, stmt_deps and blueprint are unchanged; there are no new nodes and no repair note. Route: 7 Mathlib leaves plus prop-nagata-noetherian-inverse-system, which is Lean-closed (Scheme.nonempty_noetherianApproximation, sorry-free). tool_uses stays empty. The worker's Stacks source error is confirmed: 'b'' <= min(b,b')' cannot give an upper bound in I, and the step-5 repair through an upper target index d with two applications of lem-weil-pbc-locally-finite-type-limit-map-equality is correct (composites recomputed). Steps 3, 6, 7 and 8 were checked against the factorization, initial-functor (002R) and definition-initial hypotheses. One fault (C4/C3): step 4 takes antisymmetry of I from antisymmetry of A and B, but lem-weil-pbc-cofiltered-limit-directed-reindex states only a 'directed set', which is a preorder in Stacks 002V. The partial order is only in its Mathlib match (IsFiltered.exists_directed), yet the item claims a partially ordered set. FIX: step 1 now replaces A_0 and B_0 by A_0×ℕ with (a,n)≤(c,m) iff equal or (a≤c and n<m). This is reflexive, transitive, antisymmetric and directed; stages are pulled back, and the opposite projection is initial, so the limit is kept by lem-weil-pbc-initial-functor-limit(a). That node is already in proof_deps and is now also in step 1 uses. Only step 1 changed (1791 chars). Edge cases checked: empty X, identity f, one-stage systems, f not of finite type, non-antisymmetric A_0. Advisory: def-nagata-noetherian-inverse-system omits 'small'; the Lean structure has it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsArrowAbsoluteApproximation",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_qcqs_arrow_absoluteApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsArrowAbsoluteApproximation.lean",
+  "statement": "theorem Scheme.Hom.exists_qcqs_arrow_absoluteApproximation {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S] : ∃ (I : Type u) (_ : PartialOrder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (D E : Iᵒᵖ ⥤ Scheme.{u}) (F : D ⟶ E) (p : (Functor.const Iᵒᵖ).obj X ⟶ D) (q : (Functor.const Iᵒᵖ).obj S ⟶ E), (∀ i : Iᵒᵖ, LocallyOfFiniteType (specULiftZIsTerminal.from (D.obj i)) ∧ QuasiCompact (specULiftZIsTerminal.from (D.obj i)) ∧ CompactSpace (D.obj i) ∧ QuasiSeparatedSpace (D.obj i) ∧ LocallyOfFiniteType (specULiftZIsTerminal.from (E.obj i)) ∧ QuasiCompact (specULiftZIsTerminal.from (E.obj i)) ∧ CompactSpace (E.obj i) ∧ QuasiSeparatedSpace (E.obj i)) ∧ (∀ (i j : Iᵒᵖ) (a : i ⟶ j), IsAffineHom (D.map a) ∧ IsAffineHom (E.map a)) ∧ (∀ i : Iᵒᵖ, p.app i ≫ F.app i = f ≫ q.app i) ∧ Nonempty (IsLimit (Cone.mk X p)) ∧ Nonempty (IsLimit (Cone.mk S q))",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-308523dee",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Theorem Scheme.Hom.exists_qcqs_arrow_absoluteApproximation matches node and Stacks 0GS1 clause by clause: qcqs X,S only, no condition on f; I : Type u nonempty directed PartialOrder; D,E : Iᵒᵖ ⥤ Scheme with F : D ⟶ E; both stage families LocallyOfFiniteType ∧ QuasiCompact over specULiftZIsTerminal (recorded finite-type conjunction) and qcqs; IsAffineHom transitions on both sides in the right direction; p,q cones with p ≫ F = f ≫ q; IsLimit with the actual vertices X and S. lean.statement verbatim; only the lean record differs from live; stmt_dep records checked; edge cases empty X/S, empty I, f not of finite type, universes handled. No existing arrow version (only single-scheme NoetherianApproximation). No definitions; docstring has source, blueprint and 8 proof steps; sorry only. Report has Worker report and Second reading by Q50 (self-reread by the worker, disclosed). Not recompiled: no changes made."
+ }
+}

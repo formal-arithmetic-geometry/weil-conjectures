@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-generated-field-scalar-character-order",
+ "kind": "statement",
+ "title": "Scalar characters on field generators and finite automorphism order",
+ "statement": "Let $E/F$ be a field extension [def-weil-field], [def-pc-field-extension], let $r\\geq0$, and let $b_1,\\ldots,b_r\\in E^\\times$ generate $E$ as a field over $F$: the smallest subfield containing the image of $F$ and all $b_j$ is $E$. Let $U\\subseteq F^\\times$ be finite, contain $1$, and be closed under multiplication and inversion, endowed with those operations. Put $G=\\operatorname{Aut}_F(E)$, the group of field automorphisms fixing $F$, with composition as multiplication. Suppose that for every $\\sigma\\in G$ and every $j$ there exists $u\\in U$ such that $\\sigma(b_j)=u b_j$ (scalars are read through $F\\hookrightarrow E$). Then there is a unique homomorphism of groups\n$$\\chi:G\\longrightarrow U^r$$\nsatisfying $\\sigma(b_j)=\\chi(\\sigma)_j b_j$ for all $\\sigma,j$. It is injective. The group $G$ is finite and\n$$|G|\\mid |U|^r.$$\nHere $U^r$ is the group of $r$-tuples with coordinatewise multiplication, and cardinalities are finite nonnegative integers. No algebraicity, normality or separability hypothesis on $E/F$ is imposed. The empty list is allowed: then the generating hypothesis says $E=F$ and $G$ and $U^0$ are trivial.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09I6, section-Kummer, opening paragraph; the injective scalar character and subgroup-order argument of the opening paragraph, generalized from one radical to a finite field-generating list with specified finite scalar group; extracted from returned proof steps 6--9, excluding the Galois-degree theorem"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Construct the character and prove its uniqueness. Identify $F$ with its image in $E$ using [def-pc-field-extension]. Since $U$ contains $1$ and is closed under multiplication and inverses, the field laws [def-weil-field] restrict to a commutative group on $U$; coordinatewise these laws give the group $U^r$. For each $\\sigma,j$ the hypothesized scalar $u\\in U$ is unique: $ub_j=vb_j$ implies $u=v$, by multiplying by $b_j^{-1}$ in the field [def-weil-field] and using the injectivity of $F\\to E$. Define $\\chi(\\sigma)_j$ to be this unique scalar. Identity has scalar $1$. For composition, write $u=\\chi(\\sigma)_j$ and $v=\\chi(\\tau)_j$. Since $v\\in F$, $\\sigma$ fixes $v$, so $(\\sigma\\tau)(b_j)=\\sigma(vb_j)=v\\sigma(b_j)=vu b_j=uv b_j$. Closure of $U$ under multiplication and uniqueness of the scalar give $\\chi(\\sigma\\tau)_j=\\chi(\\sigma)_j\\chi(\\tau)_j$. Thus $\\chi$ is a group homomorphism for coordinatewise multiplication. Any other map with the stated coordinate formula equals $\\chi$ at every $\\sigma,j$, again by cancellation; in particular it is the unique such homomorphism.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6 (section-Kummer), opening paragraph: scalar character and its subgroup-order argument, expanded for a finite generating family."
+   }
+  },
+  {
+   "text": "Prove injectivity directly. If $\\chi(\\sigma)=\\chi(\\tau)$, then $\\sigma(b_j)=\\tau(b_j)$ for every $j$. The equalizer $T=\\{x\\in E:\\sigma(x)=\\tau(x)\\}$ contains $F$ and all $b_j$ and is a subfield: it contains $0,1$, and preservation of addition, negatives, multiplication and inverses by the two field automorphisms gives closure under those operations. The smallest-subfield generating hypothesis therefore gives $E\\subseteq T$. Hence $\\sigma(x)=\\tau(x)$ for every $x\\in E$, which says $\\sigma=\\tau$. This proves injectivity without an algebraicity hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6 (section-Kummer), opening paragraph: scalar character and its subgroup-order argument, expanded for a finite generating family."
+   }
+  },
+  {
+   "text": "The group $U^r$ is finite and has cardinality $|U|^r$: for $r=0$ there is one empty tuple, and adjoining one coordinate bijects the next tuple set with $U^r\\times U$, multiplying its cardinality by $|U|$. Apply [lem-sfb-injective-hom-finite-group-order] with $A=G$, $B=U^r$, $f=\\chi$ and the injectivity just proved. Its two conclusions give that $G$ is finite and $|G|\\mid |U^r|=|U|^r$. If $r=0$, the generating hypothesis identifies $E$ with the image of $F$, so every $F$-automorphism is the identity, as asserted; the same conclusion follows from the injection into the singleton empty-tuple group.",
+   "uses": [
+    "lem-sfb-injective-hom-finite-group-order"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6 (section-Kummer), opening paragraph: scalar character and its subgroup-order argument, expanded for a finite generating family."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-field",
+  "lem-sfb-injective-hom-finite-group-order"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09I6 (section-Kummer), opening paragraph, finite-family extension of the scalar-character argument; cancellation, equalizer subfield and finite-tuple count written out by N7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "autEquivRootsOfUnity|autAdjoinRoot|adjoin.*ext|card_dvd_of_injective|card_dvd.*injective",
+   "results": "25 hits; Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field and fixed-field order results do not construct the scalar character; single-binomial Kummer equivalences assume irreducibility. Generator extensionality and group-order divisibility provide only individual parts, not this conditional finite-family theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar eigenvalues on field generators give a faithful diagonal character of the automorphism group and its order divides the size of a finite product of scalar groups",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgEquiv, MonoidHom, Function.Injective",
+   "results": "5 hits; AlgEquiv.restrictScalarsHom_injective, IsFractionRing.fieldEquivOfAlgEquivHom_injective, IntermediateField.restrictRestrictAlgEquivMapHom_injective, IntermediateField.restrictNormalHomSupProd_injective, IsPrimitiveRoot.autToPow_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field and fixed-field order results do not construct the scalar character; single-binomial Kummer equivalences assume irreducibility. Generator extensionality and group-order divisibility provide only individual parts, not this conditional finite-family theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphisms of a field generated by finitely many nonzero elements which multiply each generator by a scalar in a finite subgroup of the base field inject into the product of those subgroups and their order divides the product cardinality",
+   "results": "8 hits; AlgEquiv.card_le, FiniteField.natCard_algEquiv_extension, FiniteField.card_algEquiv_extension, FiniteField.card_algHom_of_finrank_dvd, FiniteField.natCard_algHom_of_finrank_dvd, IsGaloisGroup.card_fixingSubgroup_eq_finrank, fixedByFinite, FiniteField.Extension.exists_frob_pow_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field and fixed-field order results do not construct the scalar character; single-binomial Kummer equivalences assume irreducibility. Generator extensionality and group-order divisibility provide only individual parts, not this conditional finite-family theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithful field automorphism action on finitely many generating eigenvectors gives an injective homomorphism into a product of finite scalar subgroups",
+   "results": "8 hits; FixedPoints.toAlgHom_bijective, FixedPoints.toAlgAut_bijective, exists_linearIndependent_algEquiv_apply, FixedPoints.toAlgHomEquiv, Polynomial.Gal.galActionHom_injective, minpoly.aux_inj_roots_of_min_poly, IsGaloisGroup.faithful, groupCohomology.Hilbert90.aux",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field and fixed-field order results do not construct the scalar character; single-binomial Kummer equivalences assume irreducibility. Generator extensionality and group-order divisibility provide only individual parts, not this conditional finite-family theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "card_dvd_of_injective|autEquivRootsOfUnity|autAdjoinRootXPowSubCEquiv|adjoin_algHom_ext",
+   "results": "7 hits; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean; Mathlib/FieldTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field and fixed-field order results do not construct the scalar character; single-binomial Kummer equivalences assume irreducibility. Generator extensionality and group-order divisibility provide only individual parts, not this conditional finite-family theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let a field extension be generated by units b_j. Suppose every automorphism sends b_j to u_j b_j for a unique u_j in a fixed finite subgroup of the base field units. Then the coordinate scalars form an injective group homomorphism and the automorphism order divides the subgroup order to the number of generators",
+   "results": "8 hits; groupCohomology.exists_div_of_norm_eq_one, AlgEquiv.card_le, card_nthRoots_subgroup_units, FiniteField.natCard_algHom_of_finrank_dvd, FiniteField.card_algHom_of_finrank_dvd, IntermediateField.map_fixingSubgroup_index, exists_root_adjoin_eq_top_of_isCyclic, IsGaloisGroup.card_fixingSubgroup_eq_finrank",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-field and fixed-field order results do not construct the scalar character; single-binomial Kummer equivalences assume irreducibility. Generator extensionality and group-order divisibility provide only individual parts, not this conditional finite-family theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Field automorphisms multiplying finitely many field generators by elements of a finite subgroup of base field units give a unique faithful diagonal character into the product of that subgroup",
+   "results": "8 hits: groupCohomology.Hilbert90.aux, modularCyclotomicCharacter'.unique', groupCohomology.Hilbert90.aux_ne_zero, modularCyclotomicCharacter.unique, modularCyclotomicCharacter.toFun_unique', modularCyclotomicCharacter.toFun_unique, FixedPoints.toAlgHomEquiv, FixedPoints.toAlgAutMulEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: hits cover finite-dimensional automorphism bounds, one irreducible Kummer binomial, cyclotomic characters, normal compositum restrictions or generator extensionality, not the complete arbitrary field-extension scalar-character statement. KummerExtension.lean:166-167, 389-397 and IntermediateField/Adjoin/Defs.lean:498-511 read; the construction and hypothesis-free injectivity still require the argument above."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgEquiv, MonoidHom, Function.Injective",
+   "results": "5 hits: AlgEquiv.restrictScalarsHom_injective, IsFractionRing.fieldEquivOfAlgEquivHom_injective, IntermediateField.restrictRestrictAlgEquivMapHom_injective, IntermediateField.restrictNormalHomSupProd_injective, IsPrimitiveRoot.autToPow_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: hits cover finite-dimensional automorphism bounds, one irreducible Kummer binomial, cyclotomic characters, normal compositum restrictions or generator extensionality, not the complete arbitrary field-extension scalar-character statement. KummerExtension.lean:166-167, 389-397 and IntermediateField/Adjoin/Defs.lean:498-511 read; the construction and hypothesis-free injectivity still require the argument above."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Field automorphisms acting diagonally on a finite field generating family embed into a product of scalar groups",
+   "results": "8 hits: Representation.diagonal, CategoryTheory.PreGaloisCategory.autMulFiber, CategoryTheory.PreGaloisCategory.instSMulAutFintypeCatObjCarrier, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.Extension.frob, CategoryTheory.PreGaloisCategory.autEmbedding, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.instIsCyclicAlgEquivOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: hits cover finite-dimensional automorphism bounds, one irreducible Kummer binomial, cyclotomic characters, normal compositum restrictions or generator extensionality, not the complete arbitrary field-extension scalar-character statement. KummerExtension.lean:166-167, 389-397 and IntermediateField/Adjoin/Defs.lean:498-511 read; the construction and hypothesis-free injectivity still require the argument above."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCharacter|scalar_character|autEquivRootsOfUnity|adjoin_algHom_ext|restrictNormalHomSupProd",
+   "results": "7 hits: Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean. Source search under Mathlib/FieldTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: hits cover finite-dimensional automorphism bounds, one irreducible Kummer binomial, cyclotomic characters, normal compositum restrictions or generator extensionality, not the complete arbitrary field-extension scalar-character statement. KummerExtension.lean:166-167, 389-397 and IntermediateField/Adjoin/Defs.lean:498-511 read; the construction and hypothesis-free injectivity still require the argument above."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism is determined by its scalar eigenvalues on a finite generating list of a field extension and these eigenvalues form a group homomorphism into the finite product",
+   "results": "8 hits: AlgHom.card_le, groupCohomology.Hilbert90.aux, minpoly.AlgHom.fintype, PowerBasis.AlgHom.fintype, IsGaloisGroup.mulEquivAlgEquiv, AlgEquiv.fintype, algEquivEquivAlgHom, Algebra.prod_embeddings_eq_finrank_pow",
+   "date": "2026-10-23",
+   "verdict": "no match: hits cover finite-dimensional automorphism bounds, one irreducible Kummer binomial, cyclotomic characters, normal compositum restrictions or generator extensionality, not the complete arbitrary field-extension scalar-character statement. KummerExtension.lean:166-167, 389-397 and IntermediateField/Adjoin/Defs.lean:498-511 read; the construction and hypothesis-free injectivity still require the argument above."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiradical-galois-degree",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, adjoining finitely many roots; prime-to-characteristic degree is needed in the residue calculation.; the injective scalar character and subgroup-order argument of the opening paragraph, generalized from one radical to a finite field-generating list with specified finite scalar group; extracted from returned proof steps 6--9, excluding the Galois-degree theorem",
+   "via": [
+    "lem-sfb-multiradical-galois-degree",
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-generated-field-scalar-character-order",
+  "worker": "stage1",
+  "summary": "Constructed the unique scalar character by nonzero-generator cancellation, proved its composition law using base-field fixedness and commutativity, proved injectivity by the explicitly checked equalizer subfield, and applied a general Mathlib leaf for finite injective homomorphisms and order divisibility. The tuple count and empty-family case are explicit. Statement unchanged; no algebraicity, normality or separability added. Repair of return L: compared the retained split with the current live-DAG read clone and re-read every cited statement; the original statement, source, statement dependencies and blueprint ancestry agree with the current item. Made the inherited group structures on U and U^r explicit before constructing the homomorphism. The delivery tool rebases the owned split fields on freshly fetched origin/sheaf-dag, retaining current maintainer metadata.",
+  "blueprint": "Realizes the recorded det-thm-sf-ctf-stability-direct-images alteration prerequisite, through the inherited multiradical branch: precisely the scalar-character, injectivity and subgroup-order part of Stacks 09I6, not the Galois-degree theorem. tools/blueprint_refs.py ancestor returns None for the current inherited ancestry, retained as from.node=null; the exact inherited place and via chain are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-04246993f",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-04246993f (reviewer sub-agent of L); spot-checked: This is a re-push of the head b5e94fff3427. That head was PASSed but its landing was refused at 12:30:51: 'completed in this project's DAG but not in ...'. That refusal came from side-completion/promotion and was not a mathematical fault. In the live and side-live clones the item is still unsplit and the new leaf is absent. Compared with b5e9, the only changes are one added sentence at the start of step 1 and a longer split_report. The added sentence says U contains 1 and is closed under products and inverses, so it is a commutative group, and U^r is a group coordinatewise. The sentence is correct. The statement, source, stmt_deps and blueprint are unchanged, and there is no repair note for this item. I read the full item and the new leaf. The statement is true and is correctly marked as an agent-written generalisation of Stacks fields.tex Tag 09I6 (section-Kummer, lines 3215-3228: sigma -> sigma(b)/b is an injective homomorphism into mu_n(K), so |G| divides n). Step 1: u b_j = v b_j with b_j nonzero gives u = v, and F->E is injective, as def-pc-field-extension states. The composition law follows from (sigma tau)(b_j) = sigma(v b_j) = v u b_j because v is in F. Uniqueness follows by the same cancellation. Step 2: the equaliser of sigma and tau is a subfield containing F and every b_j, so the minimal-subfield hypothesis makes it all of E; no algebraicity is used. Step 3: |U^r| = |U|^r by recursion on r, then the leaf applies with A = G, B = U^r and f = chi. proof_deps is exactly the union of the uses, and there is no cycle. The leaf lem-sfb-injective-hom-finite-group-order is a correct mathlib node. I read Subgroup.card_dvd_of_injective (Mathlib/GroupTheory/Coset/Card.lean:79-84) and Finite.of_injective (Mathlib/Data/Fintype/EquivFin.lean:182-184); together they cover both clauses. Its stmt_dep def-sfb-finite-infinite-set is correct, and the leaf does not restate the item. Duplicate scan: I searched the snapshot and both live clones for card_dvd_of_injective, card_subgroup_dvd_card and Lagrange. The only hits are lem-sbc-field-torsor-galois-components, lem-sbc-root-normalization-generic-stalk-residue-degree-dvd-core, lem-weil-finite-field-pow-card and the parent; none of them is a duplicate. Small cases checked: r=0, U={1}, Q(sqrt2) with U={+-1}, the non-normal Q(cuberoot 2), characteristic 2, and for the leaf the trivial group, the identity map and the excluded non-injective map C2->1. No SGA, no unit-route change, no tool_uses, no fixes. Maintainer note: the earlier promotion/side-completion refusal may happen again at landing; it is not caused by the split fields."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GeneratedFieldScalarCharacterOrder",
+  "declaration": "AlgEquiv.generated_field_scalar_character_order",
+  "file": "lean/Sheaf/FieldTheory/GeneratedFieldScalarCharacterOrder.lean",
+  "statement": "theorem generated_field_scalar_character_order (F : Type u) [Field F] (E : Type v) [Field E] [Algebra F E] (r : ℕ) (b : Fin r → Eˣ) (hgen : IntermediateField.adjoin F (Set.range (fun j : Fin r ↦ (b j : E))) = ⊤) (U : Subgroup Fˣ) [Finite U] (hscalar : ∀ (σ : E ≃ₐ[F] E) (j : Fin r), ∃ a : U, σ (b j : E) = algebraMap F E ((a : Fˣ) : F) * (b j : E)) : ∃ χ : (E ≃ₐ[F] E) →* (Fin r → U), (∀ (σ : E ≃ₐ[F] E) (j : Fin r), σ (b j : E) = algebraMap F E ((χ σ j : Fˣ) : F) * (b j : E)) ∧ (∀ ψ : (E ≃ₐ[F] E) →* (Fin r → U), (∀ (σ : E ≃ₐ[F] E) (j : Fin r), σ (b j : E) = algebraMap F E ((ψ σ j : Fˣ) : F) * (b j : E)) → ψ = χ) ∧ Function.Injective χ ∧ Finite (E ≃ₐ[F] E) ∧ Nat.card (E ≃ₐ[F] E) ∣ Nat.card U ^ r",
+  "branch": "sheaf-dag",
+  "by": "Q154",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43bf366f6",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Node unchanged vs live/side-live except the lean record; stmt_deps def-weil-field/def-pc-field-extension are Mathlib leaves (Field, Algebra). Lean matches the node clause by clause: Field F (u), Field E (v), Algebra F E; b : Fin r → Eˣ; adjoin F (range b) = ⊤; U : Subgroup Fˣ with [Finite U]; G = E ≃ₐ[F] E; hscalar via algebraMap. Conclusions: ∃ χ : G →* (Fin r → U) with the coordinate formula, uniqueness among all homomorphisms satisfying the formula, injectivity, Finite G, and Nat.card G ∣ Nat.card U ^ r. No added hypotheses; universes independent. Edge cases r=0, U={1}, repeated generators, transcendental E/F and char p covered; statement true. Source Stacks fields.tex 09I6 section-Kummer opening paragraph, recorded as an agent generalization. No duplicate (multiradical_galois_degree and finite_canonical_kummer_character are narrower) and no name clash. Proof is sorry only, no definitions; docstrings carry the source place, blueprint tag and three proof steps; lean.statement verbatim; report has Worker report and Second reading sections. No fix, so no compile; the worker reports a clean scompile."
+ }
+}

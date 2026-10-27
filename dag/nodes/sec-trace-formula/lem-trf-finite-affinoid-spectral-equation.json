@@ -1,0 +1,400 @@
+{
+ "id": "lem-trf-finite-affinoid-spectral-equation",
+ "kind": "statement",
+ "title": "Spectral coefficient estimate for a finite map of affinoids",
+ "statement": "Let $K$ be a complete field [def-weil-field] with a nontrivial real-valued nonarchimedean absolute value. Let $B,A$ be nonzero affinoid $K$-algebras, that is, quotients of restricted-series rings in finitely many variables [def-trf-restricted-series-presentation]. Let $\\varphi:B\\to A$ be a $K$-algebra homomorphism making $A$ a finitely generated $B$-module. For $H=A,B$ define $\\rho_H(h)=\\sup_{\\mathfrak m\\in\\operatorname{Max}H}|h\\bmod\\mathfrak m|$, using the unique extensions of the absolute value to the finite residue fields, as in [lem-trf-affinoid-supremum-seminorm-calculus]. For every $a\\in A$ there exist an integer $n\\ge1$ and coefficients $b_1,\\ldots,b_n\\in B$ such that $a^n+\\sum_{i=1}^n\\varphi(b_i)a^{n-i}=0$ and $\\rho_A(a)=\\max_{1\\le i\\le n}\\rho_B(b_i)^{1/i}$. Neither injectivity of $\\varphi$ nor reducedness of either algebra is assumed.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.4, Lemma 13, printed pp.27-28, including its minimal-prime reduction and nilpotent-power argument. Primary PDF read online 2026-10-24; archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "lem-trf-affinoid-supremum-seminorm-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\sigma_H(Z^e+\\sum_{i=1}^e h_iZ^{e-i})=\\max_i\\rho_H(h_i)^{1/i}$ for $e\\ge1$. The residue-field definition gives $\\rho_H(x+y)\\le\\max(\\rho_H(x),\\rho_H(y))$, $\\rho_H(xy)\\le\\rho_H(x)\\rho_H(y)$, and $\\rho_H(1)=1$, by applying the corresponding absolute-value inequalities at every maximal ideal. If $q(a)=0$ for a monic $q\\in B[Z]$, then $\\rho_A(a)\\le\\sigma_B(q)$: at each maximal ideal of $A$, put $v=|a|$ and $S=\\sigma_B(q)$. Each coefficient has value at most $S^i$ by contraction of $\\rho$. If $v>S$, every nonleading term has value at most $S^iv^{e-i}<v^e$, contradicting the strong triangle inequality in the residue field applied to $q(a)=0$. Take the supremum of $v$. This includes $S=0$.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Proposition 5 and Lemma 13, reverse inequality; pointwise reconstruction avoiding division by a zero supremum"
+   }
+  },
+  {
+   "text": "Coefficient bounds multiply: if the coefficients at distance $i$ below the leading coefficient of monic $p$ and $q$ have $\\rho$ at most $R^i$, then the coefficient at distance $k$ of $pq$ is $\\sum_{i+j=k}p_iq_j$, with $p_0=q_0=1$. The inequalities of step 1 bound each summand by $R^{i+j}=R^k$ and hence bound the sum by $R^k$. Repetition gives the same bounds for any finite product and any positive power. For $R=0$ all the lower coefficients have seminorm zero, and the identical argument works, with $R^0=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Lemma 11, printed p.25: coefficient convolution argument"
+   }
+  },
+  {
+   "text": "First suppose $A$ is a domain. Choose a presentation $\\pi:T_r\\twoheadrightarrow B$ and put $I=\\ker(\\varphi\\pi)$. It is proper because $A\\ne0$. The lifted normalization gives $T=K\\langle U_1,\\ldots,U_d\\rangle\\to T_r\\to B$ whose composite with $B\\to B/\\ker\\varphi=T_r/I$ is injective and finite. Therefore $T\\to A$ is injective and finite: if $u_j$ span $B/\\ker\\varphi$ over $T$ and $v_k$ span $A$ over $B$, the products $u_jv_k$ span $A$ over $T$, since the $B$-action factors through this quotient. A nonzero $t\\in T$ has nonzero image in the domain $A$, so multiplication by it is injective. Thus $A$ is torsion-free over $T$.",
+   "uses": [
+    "lem-trf-tate-normalization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Lemma 13, first paragraph: normalize the image of B, using Section 1.2 Corollary 10"
+   }
+  },
+  {
+   "text": "Apply the maximal-fibre polynomial theorem to $T\\hookrightarrow A$ and $a$. Write its polynomial as $p=Z^r+\\sum t_iZ^{r-i}$. Every maximal ideal of $A$ contracts to a maximal ideal of $T$: its residue field is finite over $K$, so the image of $T$ in it is a finite-dimensional domain over $K$ and therefore a field (multiplication by a nonzero element is an injective, hence surjective, linear map). The nonempty fibres in that theorem therefore exhaust $\\operatorname{Max}A$. Its fibre formula yields $\\rho_A(a)=\\max_i\\rho_T(t_i)^{1/i}$. Explicitly, each fibre maximum is bounded by the latter maximum, giving one inequality. Conversely, $|t_i\\bmod\\mathfrak m|^{1/i}\\le\\rho_A(a)$ for every $\\mathfrak m$ and $i$; raising to the integer $i$ and taking suprema gives $\\rho_T(t_i)\\le\\rho_A(a)^i$, the other inequality.",
+   "uses": [
+    "lem-trf-tate-torsionfree-fibre-polynomial",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Lemma 12(ii)-(iii) and Lemma 13, domain case"
+   }
+  },
+  {
+   "text": "Let $b_i$ be the images of $t_i$ under the map $T\\to B$ from step 3. Evaluation commutes with this coefficient map, so $q=Z^r+\\sum b_iZ^{r-i}$ annihilates $a$. Contraction of the supremum seminorm gives $\\sigma_B(q)\\le\\max_i\\rho_T(t_i)^{1/i}=\\rho_A(a)$. Step 1 gives the reverse inequality. This proves the domain case for an arbitrary finite map $B\\to A$, including a map with kernel.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Lemma 13, domain case: coefficient map through the original B"
+   }
+  },
+  {
+   "text": "For general $A$, choose a fresh presentation $T_h\\twoheadrightarrow A$. Specialize the polynomial/affinoid comparison statement to $J=0$ in $h$ variables to obtain Noetherianity of $T_h$. Every ideal of its quotient $A$ is finitely generated: take finitely many generators of its inverse-image ideal in $T_h$ and map them to $A$. The minimal primes $\\mathfrak p_1,\\ldots,\\mathfrak p_s$ of $A$ are consequently finite. Every prime contains a minimal prime. They are nonempty: otherwise there are no primes at all, and the radical/intersection theorem gives $1\\in\\sqrt{(0)}$, contrary to $A\\ne0$. Each $A_j=A/\\mathfrak p_j$ is a nonzero affinoid domain, and $B\\to A_j$ is finite, using images of the original finite spanning set. Every maximal ideal of $A$ contains some $\\mathfrak p_j$, and the maximal ideals of $A_j$ are exactly those containing $\\mathfrak p_j$, with the same residue fields. Thus $R:=\\rho_A(a)=\\max_j\\rho_{A_j}(a_j)$.",
+   "uses": [
+    "lem-trf-affinoid-polynomial-closed-point-comparison",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Lemma 13, minimal-prime reduction; Stacks Tags 00FR and 00E0 (lemma-Noetherian-irreducible-components and lemma-Zariski-topology)"
+   }
+  },
+  {
+   "text": "Apply the domain argument of steps 3-5 to each $B\\to A_j$, obtaining monic $q_j\\in B[Z]$ of positive degree with $q_j(a_j)=0$ and $\\sigma_B(q_j)=\\rho_{A_j}(a_j)\\le R$. Put $P=\\prod_{j=1}^s q_j$. For each minimal prime $\\mathfrak p_j$, the factor $q_j(a)$ belongs to $\\mathfrak p_j$, so $P(a)$ belongs to all minimal primes. Every prime contains one of them, hence $P(a)$ lies in every prime. The radical/intersection theorem says precisely that $P(a)^N=0$ for some $N\\ge1$. Set $Q=P^N$; then $Q(a)=0$ and $Q$ is monic of degree $N\\sum_j\\deg q_j\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Lemma 13, final paragraph, nilpotent-power argument; Stacks Tag 00E0 (lemma-Zariski-topology), parts (4),(7)"
+   }
+  },
+  {
+   "text": "Each lower coefficient at distance $i$ of every $q_j$ has $\\rho_B$ at most $R^i$. Step 2 therefore gives this bound for $Q=P^N$, so $\\sigma_B(Q)\\le R$. Step 1 applied to $Q(a)=0$ gives $R\\le\\sigma_B(Q)$. Its lower coefficients and its positive degree give the required equation and equality. In particular when $R=0$ the argument uses no division and retains seminorm-zero coefficients.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Lemmas 11 and 13, final coefficient estimate and reverse bound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-tate-normalization-lift",
+  "lem-trf-tate-torsionfree-fibre-polynomial",
+  "lem-trf-affinoid-polynomial-closed-point-comparison",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.4 Lemma 13, printed pp.27-28; reconstruction checked against the primary online PDF, since the archival PDF is absent from literature/."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]ntegral.*(spectralNorm|supremum)|[Aa]ffinoid|[Tt]ateAlgebra",
+   "results": {
+    "t": "2026-10-24T08:04:10Z",
+    "tool": "grep",
+    "query": "[Ii]ntegral.*(spectralNorm|supremum)|[Aa]ffinoid|[Tt]ateAlgebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/BoxIntegral/Partition/Filter.lean",
+     "Mathlib/Analysis/BoxIntegral/Partition/Filter.lean",
+     "Mathlib/MeasureTheory/Integral/Average.lean",
+     "Mathlib/MeasureTheory/Integral/DominatedConvergence.lean"
+    ],
+    "digest": "1488d5072531628f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: norm_root_le_spectralValue bounds a root from a given polynomial over a field. Generic finite-module integrality gives no spectral coefficient control; the ideal-power coefficient lemmas do not give this affinoid equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite map of affinoid algebras admits integral equations with spectral norm estimates on the coefficients",
+   "results": {
+    "t": "2026-10-24T08:04:10Z",
+    "tool": "leansearch",
+    "query": "A finite map of affinoid algebras admits integral equations with spectral norm estimates on the coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.intNorm_eq_norm",
+     "LinearMap.isIntegral",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType",
+     "algebraMap_isIntegral_iff",
+     "AlgebraicGeometry.IsFinite.instIsIntegralHom",
+     "AlgebraicGeometry.isFinite_iff",
+     "AlgebraicGeometry.IsFinite.recOn"
+    ],
+    "digest": "16e1a0aa5f03a175"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: norm_root_le_spectralValue bounds a root from a given polynomial over a field. Generic finite-module integrality gives no spectral coefficient control; the ideal-power coefficient lemmas do not give this affinoid equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"norm\"",
+   "results": {
+    "t": "2026-10-24T08:04:10Z",
+    "tool": "loogle",
+    "query": "\"IsIntegral\", \"norm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Normal.isIntegral",
+     "QuadraticAlgebra.norm_mem_range_of_isIntegral",
+     "QuadraticAlgebra.isIntegral_of_trace_mem_range_of_norm_mem_range",
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization",
+     "AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc",
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback"
+    ],
+    "digest": "0fec065079321150"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: norm_root_le_spectralValue bounds a root from a given polynomial over a field. Generic finite-module integrality gives no spectral coefficient control; the ideal-power coefficient lemmas do not give this affinoid equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite homomorphism of affinoid algebras every element satisfies a monic equation whose coefficient spectral value equals its supremum norm",
+   "results": {
+    "t": "2026-10-24T08:04:12Z",
+    "tool": "leanfinder",
+    "query": "For a finite homomorphism of affinoid algebras every element satisfies a monic equation whose coefficient spectral value equals its supremum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "norm_root_le_spectralValue",
+     "max_norm_root_eq_spectralValue",
+     "spectralValueTerms_finite_range",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralAlgNorm_def",
+     "spectralValue_le_one_iff",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal"
+    ],
+    "digest": "c45374d271619ea9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: norm_root_le_spectralValue bounds a root from a given polynomial over a field. Generic finite-module integrality gives no spectral coefficient control; the ideal-power coefficient lemmas do not give this affinoid equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under a module finite map of analytic affinoid algebras there is a monic annihilating polynomial with optimal spectral coefficient bounds",
+   "results": {
+    "t": "2026-10-24T08:04:17Z",
+    "tool": "leanfinder",
+    "query": "Under a module finite map of analytic affinoid algebras there is a monic annihilating polynomial with optimal spectral coefficient bounds",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_mem_map",
+     "norm_root_le_spectralValue",
+     "Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map",
+     "LinearMap.exists_monic_and_coeff_mem_pow_and_aeval_eq_zero_of_range_le_smul",
+     "LinearMap.exists_monic_and_aeval_eq_zero",
+     "Polynomial.monic_annIdealGenerator",
+     "spectralValue_le_one_iff",
+     "Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_isIntegral"
+    ],
+    "digest": "3fb028b661246c00"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: norm_root_le_spectralValue bounds a root from a given polynomial over a field. Generic finite-module integrality gives no spectral coefficient control; the ideal-power coefficient lemmas do not give this affinoid equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a module finite map of affinoid algebras every element admits an annihilating monic equation with optimal spectral coefficient bounds",
+   "results": {
+    "t": "2026-10-24T08:47:18Z",
+    "tool": "leanfinder",
+    "query": "For a module finite map of affinoid algebras every element admits an annihilating monic equation with optimal spectral coefficient bounds",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "norm_root_le_spectralValue",
+     "Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_mem_map",
+     "Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map",
+     "LinearMap.exists_monic_and_coeff_mem_pow_and_aeval_eq_zero_of_range_le_smul",
+     "IsIntegral.of_finite",
+     "spectralValueTerms_finite_range",
+     "IsAlmostIntegral",
+     "Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_isIntegral"
+    ],
+    "digest": "a319adfe92084891"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module integrality alone provides no optimal coefficient bounds over an affinoid base; the field root inequalities neither supply the equation nor treat the nonreduced base seminorm. Read SpectralNorm.lean:240-330."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite homomorphism of affinoid algebras monic integral equation coefficient supremum norm equality",
+   "results": {
+    "t": "2026-10-24T08:47:19Z",
+    "tool": "leansearch",
+    "query": "Finite homomorphism of affinoid algebras monic integral equation coefficient supremum norm equality",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgHom.Finite",
+     "RingHom.IsIntegral.of_finite",
+     "RingHom.Finite.to_isIntegral",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "Polynomial.coeff_bdd_of_roots_le",
+     "Polynomial.coeff_le_of_roots_le",
+     "AlgebraicGeometry.IsFinite.instIsIntegralHom"
+    ],
+    "digest": "45071e21f05cfaa9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module integrality alone provides no optimal coefficient bounds over an affinoid base; the field root inequalities neither supply the equation nor treat the nonreduced base seminorm. Read SpectralNorm.lean:240-330."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralValue\"",
+   "results": {
+    "t": "2026-10-24T08:41:31Z",
+    "tool": "loogle",
+    "query": "\"spectralValue\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "spectralValue",
+     "spectralValueTerms",
+     "spectralValueTerms_finite_range",
+     "spectralValueTerms_bddAbove",
+     "spectralValue_nonneg",
+     "spectralValueTerms_nonneg",
+     "spectralValueTerms_of_natDegree_le",
+     "spectralValue_X_pow"
+    ],
+    "digest": "b5b5787dc7c0db18"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module integrality alone provides no optimal coefficient bounds over an affinoid base; the field root inequalities neither supply the equation nor treat the nonreduced base seminorm. Read SpectralNorm.lean:240-330."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|minpoly.*spectralValue",
+   "results": {
+    "t": "2026-10-24T08:41:31Z",
+    "tool": "grep",
+    "query": "TateAlgebra|affinoid|minpoly.*spectralValue",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "5b6075a2084b8bb7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module integrality alone provides no optimal coefficient bounds over an affinoid base; the field root inequalities neither supply the equation nor treat the nonreduced base seminorm. Read SpectralNorm.lean:240-330."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-powerbounded-integral",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Power-bounded elements are integral over a presentation unit ball. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic input: Spectral coefficient estimate for a finite map of affinoids.",
+   "via": [
+    "lem-trf-affinoid-powerbounded-integral",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-finite-affinoid-spectral-equation",
+  "worker": "stage1",
+  "summary": "Checked Bosch Lemma 13 against the primary online text; retained the statement and its unrestricted kernel/nonreduced hypotheses. Reused lifted Tate normalization, supremum calculus, the J=0 Noetherian clause of the existing analytic comparison, and three existing Mathlib algebra leaves. Added only the Tate torsion-free minimal-polynomial/fibre theorem. Wrote the coefficient convolution, component reduction and nilpotent-power argument explicitly, including zero seminorm.",
+  "blueprint": "Historical analytic supporting branch below lem-trf-local-term-locality via the existing created.item chain; realizes the spectral equation used for power-bounded integrality. Current latest ancestor proof is the contracting-correspondence argument, so this does not assert that its current proof contains analytic normalization or alter that unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NG-adecf096a",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-adecf096a (reviewer sub-agent of L); spot-checked: I read the mathematics in full. There is no local copy of the Bosch source, so I downloaded the primary Bosch PDF (read only, kept in /tmp) and read Section 1.4 Lemmas 11-13, printed pp.25-28. The item statement is Lemma 13 and is unchanged and faithful. Steps 1-8 follow Bosch's proof. Step 1 is the root bound, done pointwise and including S=0. Step 2 is the Lemma 11 coefficient convolution. Step 3 is normalization of B/ker phi through I=ker(phi pi) and gives a finite torsion-free T inside the domain A. Step 4 applies the new node; maximal ideals contract to maximal ideals (a finite-dimensional K-domain is a field), and both inequalities between the suprema are given. Step 5 maps the coefficients into B, with contraction plus the step-1 reverse bound. Step 6 gets Noetherianity from the J=0 clause of the closed-point comparison node, finitely many nonempty minimal primes from the 00FR/00E0 leaves, and Max A as a union of the Max A/p_j. Steps 7-8 give a nilpotent product, then a power Q=P^N with positive degree and equality, including R=0. The new node lem-trf-tate-torsionfree-fibre-polynomial is exactly Bosch Lemma 12(i)-(ii), with C also assumed affinoid, which is harmless here. I checked it independently: T_d is factorial, so the minimal polynomial has coefficients in T and generates the kernel (unique because it is monic); lying-over and the root/coefficient formula give the fibre equality. I tested it on d=0, on C=T[eps]/(eps^2) with c=eps, and on c in T. It does not restate a clause of its parent, since the item needs normalization, coefficient transport and the nilpotent-power argument. Duplicate search with rg -L found no duplicate; candidates read: normalization-lift, supremum-calculus, spectral-banach-norm (reduced C, algebraically closed K), finite-extension-bounded-powers, tate-unit criterion, powerbounded-integral. No SGA, tool_uses is empty, and this is not a re-split note. No changes made."
+ }
+}

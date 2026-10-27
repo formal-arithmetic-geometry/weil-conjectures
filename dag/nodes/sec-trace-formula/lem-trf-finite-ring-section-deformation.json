@@ -36,7 +36,7 @@
  ],
  "proof": [
   {
-   "text": "Apply the centred-coordinate lemma to $(g,s)$, obtaining a regular section, rank-$d$ conormal and its canonical symmetric-to-graded isomorphism. The Rees-geometry lemma then gives $D$, its closed section, the two pairs, smooth Noetherian geometry and all required compactifications.",
+   "text": "Apply the centred-coordinate lemma to $(g,s)$, obtaining a regular section, rank-$d$ conormal and its canonical symmetric-to-graded isomorphism. The Rees-geometry lemma then gives $D$, its closed section, the two pairs, smooth Noetherian geometry and all required compactifications. In Lean, transport finite type, separatedness and quasi-compactness to the zero fibre by its Cartesian square, and use Nagata. The canonical relative-Spec comparison is the published coneToBundle map, cancelled against reesConeComparison for its zero-section specification.",
    "uses": [
     "lem-trf-smooth-section-centred-coordinates",
     "lem-trf-section-rees-noetherian-geometry"
@@ -59,7 +59,7 @@
    }
   },
   {
-   "text": "The local dualizing-comparison lemma supplies the shifted rank-one sheaves, the specified fibre maps $\\theta,\\eta$, and normalized local maps. Apply normalized shifted-line descent with $m=2d$ to obtain the unique $\\kappa$ with $i_1^*\\kappa=\\theta$. Set $\\delta=\\eta\\circ(i_0^*\\kappa)^{-1}$; under the stipulated fibre identification this is the asserted inverse-zero formula.",
+   "text": "The local dualizing-comparison lemma supplies the shifted rank-one sheaves, the specified fibre maps $\\theta,\\eta$, and normalized local maps. Apply normalized shifted-line descent with $m=2d$ to obtain the unique $\\kappa$ with $i_1^*\\kappa=\\theta$. Set $\\delta=\\eta\\circ(i_0^*\\kappa)^{-1}$; under the stipulated fibre identification this is the asserted inverse-zero formula. The local comparison is formed from rawComparison, corrected by its inverse value at one using sectionRestrictionIso_trans_right, then supplied to normalized_descent. The fibre IsIso assertions use the canonical exceptional smooth base-change maps.",
    "uses": [
     "lem-trf-section-local-dualizing-comparisons",
     "lem-trf-etale-shifted-line-normalized-descent"
@@ -71,7 +71,7 @@
    }
   },
   {
-   "text": "For $v:S^{\\prime}\\to S$, fibre coherence gives $\\theta^{\\prime}i_1^{\\prime *}b_F=b_Cv^*\\theta$ and $\\eta^{\\prime}i_0^{\\prime *}b_F=b_Hv^*\\eta$. Hence $a^{\\prime *}b_C\\circ\\bar v^*\\kappa\\circ b_F^{-1}$ is normalized at $1$. Uniqueness identifies it with $\\kappa^{\\prime}$; restricting at $0$ and inverting yields $\\delta^{\\prime}b_C=b_Hv^*\\delta$.",
+   "text": "For $v:S^{\\prime}\\to S$, fibre coherence gives $\\theta^{\\prime}i_1^{\\prime *}b_F=b_Cv^*\\theta$ and $\\eta^{\\prime}i_0^{\\prime *}b_F=b_Hv^*\\eta$. Hence $a^{\\prime *}b_C\\circ\\bar v^*\\kappa\\circ b_F^{-1}$ is normalized at $1$. Uniqueness identifies it with $\\kappa^{\\prime}$; restricting at $0$ and inverting yields $\\delta^{\\prime}b_C=b_Hv^*\\delta$. The actual sectionFamily and ExceptionalFamilyBaseChange structures identify every comparison map with sectionMap; sectionExceptional_normalized_baseChange gives the two displayed identities.",
    "uses": [
     "lem-trf-section-exceptional-fibre-coherence",
     "lem-trf-etale-shifted-line-normalized-descent"
@@ -83,7 +83,7 @@
    }
   },
   {
-   "text": "For an etale map of pairs use the locality maps $b_C,b_F,b_H$. Fibre coherence makes $a^*b_C\\circ\\kappa\\circ b_F^{-1}$ normalized, so uniqueness gives $\\kappa_1$ and restriction at zero gives $\\delta_1b_C=b_H\\delta$. Step 2 identifies this $b_H$ with the comparison for the induced linear map.",
+   "text": "For an etale map of pairs use the locality maps $b_C,b_F,b_H$. Fibre coherence makes $a^*b_C\\circ\\kappa\\circ b_F^{-1}$ normalized, so uniqueness gives $\\kappa_1$ and restriction at zero gives $\\delta_1b_C=b_H\\delta$. Step 2 identifies this $b_H$ with the comparison for the induced linear map. The zero-fibre map is identified with the coefficientwise zeroPairData comparison using its composite with the closed zero-fibre immersion; flatness gives its Cartesian square. sectionExceptional_normalized_etale then supplies the required compatibility equations.",
    "uses": [
     "lem-trf-section-exceptional-fibre-coherence",
     "lem-trf-etale-shifted-line-normalized-descent"
@@ -95,27 +95,40 @@
    }
   },
   {
-   "text": "The coordinate-counit lemma says the local map obtained from the Kummer-normalized affine-space adjoint orientations is already normalized: its correction $h_i$ is the identity. Uniqueness therefore identifies its identity in Tate-line coordinates with the restriction of $\\kappa$ in every centred section chart.",
+   "text": "For coordinate_normalization, coordinateTowerAdjoint_isIso makes affineSectionAdjoint invertible, and the counit-normalized sectionLocality iso makes chartAdjoint invertible. Apply this to the source chart and to coordinateDeformationMap, whose geometry is already proved. The new one-fibre lemma identifies pullback of the actual family orientation followed by atOne with the section compositor followed by the source orientation; its v is instantiated with the actual extended-Rees coordinate map by reflexivity and proof irrelevance. Form mu as the inverse family orientation followed by pullback of the source orientation. Naturality of the section compositor and the one-fibre equation prove that mu is Normalized. The already proved existsUnique_normalized identifies mu with kappa. Cancel the family orientation to obtain the full family equation. No affine-base or affine-source hypothesis is added.",
    "uses": [
-    "lem-trf-section-coordinate-counit-normalization",
+    "lem-trf-coordinate-tower-adjoint-isomorphism",
+    "lem-trf-section-coordinate-tower-one-fibre",
     "lem-trf-etale-shifted-line-normalized-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Assembly of extracted arguments; 7, 5"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 3, compatibility of the actual coordinate-counit adjoints with the fibre at one; sk-thm-dnc Local construction and Gluing."
    }
   },
   {
-   "text": "Apply the bundle-section orientation lemma to $N_s$: its frame restrictions glue, linear changes preserve them, and for valuation-ring quotients it equals the section restriction of inverse vector-bundle purity. Its dimension-zero clause and the coordinate identity adjunction give the required standard-pair identities for $d=0$.",
+   "text": "The integration-unit adjunct is invertible by integration_unit_adjunct_isIso, and restriction to zero preserves its inverse. For every frame, vectorIntegration_frameAdjoint transposes integration normalization on the ambient chart, before restricting to any section. Apply sectionPullback_coefficient_naturality to that square, the actual zero sections and bundleFrame_zero. The ambient statement uses the projection compositor indexed by the given Cartesian square. Expanding the bundle adjoint gives exactly the coefficient-square hypothesis of the proved formal restriction theorem; expanding the canonical section maps gives bundleOrientation_frames. Thus the two independent remaining steps are ambient adjunction normalization and formal section-compositor naturality, rather than the original entire frame assertion.",
    "uses": [
-    "lem-trf-finite-ring-bundle-section-orientation",
-    "lem-trf-section-coordinate-counit-normalization"
+    "lem-amb-vector-integration-mate",
+    "lem-trf-vector-integration-frame-adjoint",
+    "lem-trf-section-pullback-coefficient-naturality"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Assembly of extracted arguments; 8, 7"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, frame integration transpose and restriction along the zero section; parent proof Step 7."
+   }
+  },
+  {
+   "text": "For bundleOrientation_purity, apply bundleSectionProjection_unit to identify p.inv followed by compact-support transport of the coefficient-unit isomorphism with the target left unitor. Cancel p.inv to identify p.hom, transport along the adjunction hom equivalence, and use naturality of the left unitor and equality of the two unitors at the unit. This proves equality of the actual adjunct maps; only the projection-unit coherence step remains as a separate strictly simpler theorem.",
+   "uses": [
+    "lem-trf-bundle-section-projection-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "Opening paragraph: projection followed by transposition; sk-thm-dnc final purity comparison"
    }
   }
  ],
@@ -126,13 +139,17 @@
   "lem-trf-section-local-dualizing-comparisons",
   "lem-trf-etale-shifted-line-normalized-descent",
   "lem-trf-section-exceptional-fibre-coherence",
-  "lem-trf-section-coordinate-counit-normalization",
-  "lem-trf-finite-ring-bundle-section-orientation"
+  "lem-trf-coordinate-tower-adjoint-isomorphism",
+  "lem-trf-section-coordinate-tower-one-fibre",
+  "lem-amb-vector-integration-mate",
+  "lem-trf-vector-integration-frame-adjoint",
+  "lem-trf-section-pullback-coefficient-naturality",
+  "lem-trf-bundle-section-projection-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-  "place": "Local construction and Gluing, regrouping the existing 16-step proof; orientation-charts proof Steps 1–4."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3, compatibility of the actual coordinate-counit adjoints with the fibre at one; sk-thm-dnc Local construction and Gluing."
  },
  "mathlib_searches": [
   {
@@ -357,51 +374,25 @@
   "note": "Read the node (statement, 16 steps), the full 974-line module (46 declarations), the report, and the dependency Lean (NoetherianEtaleSectionSpecialization, AffineSpaceTopTrace, OrdinaryFiniteP1Data/Arrows, VectorBundlePurity, EtaleAmbientAdjointLocality). Every clause matches: the main theorem has only the node's hypotheses (finite A in the u+1 coefficient convention, NA=0, Noetherian S with N invertible, smooth separated finite-type compactifiable g, closed section) and concludes Geometry (regularity, conormal rank d, Sym comparison, Noetherian smooth separated compactifiable Rees deformation and cone), shifted lines, iso atOne/atZero, a unique normalized kappa and iso delta. Base change (arbitrary nonflat Noetherian b), etale neighbourhoods (actual Rees map, induced normal iso, unique locality iso), coordinate normalization (adjoint of the Kummer-normalized tower counit), the frame-glued bundle orientation and agreement with the actual purity homEquiv map are separate theorems on canonical maps. The t/D parameters are pinned by the landed normalizations. Edge cases d=0, empty S, A=0, mixed characteristic and nonflat base change are covered. All 46 declarations have source and blueprint docstrings, all theorems are sorry, no definition is hollow, and lean.statement is verbatim. Only the node, report and module changed; the five added stmt_deps are landed, with no cycle. nt_compile rc=0 with no diagnostics (41.9 s; warn.sorry=false). Minor, non-blocking: global instance attributes on the Geometry fields; derivable extra instances in etale_compatibility; the second reading is the author's self-check."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261019T034322-L-420953",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.baseChange_compatibility",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.baseChange_geometry",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.baseChange_geometry_exists",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.bundleAdjoint_isIso",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.bundleFrame_zero",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.bundleOrientation_frames",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.bundleOrientation_purity",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.coneBundleIso_spec",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.coordinateDeformationMap_spec",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.coordinateTower_over",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.coordinate_normalization",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.etaleDeformationMap_spec",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.etaleNormalMap_condition",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.etaleNormalMap_spec",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.etalePair_ideal",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.etale_compatibility",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.existsUnique_normalized",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.finiteRingSectionDeformation",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.geometry",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.isIso_specialization",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.lines_and_fibres",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.standardZero_over"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.baseChange_compatibility",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.bundleAdjoint_isIso",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.bundleOrientation_frames",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.bundleOrientation_purity",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.coneBundleIso_spec",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.coordinate_normalization",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.etaleNormalMap_spec",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.etale_compatibility",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.existsUnique_normalized",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.geometry",
-   "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.lines_and_fibres"
-  ]
+  "landing": "20261027T094501-L-233855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

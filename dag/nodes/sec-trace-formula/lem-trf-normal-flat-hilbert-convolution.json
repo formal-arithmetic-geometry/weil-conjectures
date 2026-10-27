@@ -1,0 +1,270 @@
+{
+ "id": "lem-trf-normal-flat-hilbert-convolution",
+ "kind": "statement",
+ "title": "Hilbert convolution for a normally flat ideal with regular quotient",
+ "statement": "Let $(R,\\mathfrak m)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], and let $I\\subseteq\\mathfrak m$ be an ideal. Put $A=R/I$, $\\mathfrak n=\\mathfrak m/I$ and $k=R/\\mathfrak m=A/\\mathfrak n$. Assume that $A$ is a regular local ring of dimension $s\\geq0$ [def-weil-regular-scheme, def-weil-pbc-krull-dimension-ring]. Form\n$$G=\\operatorname{gr}_I R=\\bigoplus_{j\\geq0}I^j/I^{j+1},\\qquad F=G\\otimes_Ak$$\n[def-weil-pbc-associated-graded-ring, def-weil-pbc-module-tensor-product], and assume that $G$ is flat over $A$ [def-weil-pbc-flat-ring-map]. Each $F_j=(I^j/I^{j+1})\\otimes_Ak$ is finite-dimensional over $k$; set $h_j=\\dim_kF_j$ [def-weil-vector-space-dimension]. Then, for every integer $n\\geq0$,\n$$\\operatorname{length}_R(R/\\mathfrak m^{n+1})=\\sum_{j=0}^{n}h_j\\binom{n-j+s}{s}$$\nwith length as in [def-weil-pbc-module-length]. No reducedness, coefficient field, excellence or completeness hypothesis is imposed; $I=0$ and $I=\\mathfrak m$ are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Ancestor motivation only: ILO VIII 2.3.13, printed p.94. Precise ancillary source read online: Hironaka, Certain numerical characters of singularities, J. Math. Kyoto Univ. 10 (1970), section 2, printed p.153, and the paragraph after Example (4.2), printed p.157: the normal-flat tangent-cone product gives the numerical convolution. This node states only that numerical local-algebra consequence, including the passage to a regular ambient presentation after completion in the general Noetherian local case. Original cited there: Resolution of singularities (1964), Chapter II, Theorem 2. https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf. Archival source WANTED. No Stacks tag states this normal-flat Hilbert formula."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-module-length",
+  "def-trf-normal-cone-residue-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Write $G_j=I^j/I^{j+1}$. By [lem-trf-flat-graded-fibre-regular-lift] every $G_j$ is finite free over $A$. Choose an $A$-basis of $G_j$. Tensoring its basis expansion with $k$ identifies $F_j$ with $k^{r_j}$, where $r_j$ is the number of basis vectors; thus $r_j=h_j$, including $r_j=0$. Choose a minimal generating list $\\bar y_1,\\ldots,\\bar y_s$ of $\\mathfrak n$ and lifts $y_i\\in\\mathfrak m$; the definition of regular local ring gives its length $s$. By [lem-weil-pbc-regular-local-generators-regular-sequence] the list is regular on $A$. On each $G_j\\simeq A^{h_j}$, its successive multiplication maps are direct sums of those on $A/(\\bar y_1,\\ldots,\\bar y_{i-1})$, hence injective. Put $J=(y_1,\\ldots,y_s)$. Since the images generate $\\mathfrak m/I$, one has $\\mathfrak m=I+J$.",
+   "uses": [
+    "lem-trf-flat-graded-fibre-regular-lift",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NZ, lemma-finite-flat-local; Tag 00NQ, lemma-regular-ring-CM. Normal-flat graded freeness is supplied by the cited existing node."
+   }
+  },
+  {
+   "text": "For each $a\\geq0$, the ideal $I^a$ is a finite $R$-module by [lem-weil-pbc-noetherian-submodule-finite], applied inside the finite module $R$. Its $I$-adic graded piece in degree $p$ is $I^{a+p}/I^{a+p+1}=G_{a+p}$, so Step 1 checks all the successive multiplication-injectivity hypotheses for the parameters $y_i$. Apply [lem-trf-adic-degree-zero-regular-strict-powers] to $M=I^a$. It gives, inside $I^a$ and hence inside $R$,\n$$J^qI^a\\cap I^{a+p}=J^q I^{a+p}\\qquad(a,p,q\\geq0).$$\nIn particular this applies with $p=1$; it also covers $I^a=0$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-trf-adic-degree-zero-regular-strict-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Strict-power lemma applied to every shifted I-adic filtration; finite ideals by Noetherianity."
+   }
+  },
+  {
+   "text": "For $N\\geq j$, expand $\\mathfrak m^N=(I+J)^N=\\sum_{a=0}^N I^aJ^{N-a}$. Let $z\\in I^j\\cap\\mathfrak m^N$ and choose such a sum representation. Eliminate the terms indexed by $a<j$ in increasing order. After the earlier terms have been absorbed, write $z=u_a+\\sum_{b>a}u_b$, with $u_a\\in I^aJ^{N-a}$ and the tail contained in $I^{a+1}$. Since $z\\in I^j\\subseteq I^{a+1}$, Step 2 gives\n$$u_a\\in J^{N-a}I^a\\cap I^{a+1}=J^{N-a}I^{a+1}\\subseteq I^{a+1}J^{N-a-1}.$$\nThus absorb $u_a$ into the next term. Induction on $a=0,\\ldots,j-1$ leaves a representation using only terms with $a\\geq j$. Modulo $I^{j+1}$ only the $a=j$ term survives. Conversely $I^jJ^{N-j}\\subseteq I^j\\cap\\mathfrak m^N$. Hence the image of $I^j\\cap\\mathfrak m^N$ in $G_j$ is precisely $\\mathfrak n^{N-j}G_j$. The argument for $j=0$ has no elimination steps. We only assert equality of these images, not equality of the intersection with its single lowest term.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary finite induction on the ideal-sum expansion, using the strict intersections of Step 2."
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$, put $N=n+1$, and filter $R/\\mathfrak m^N$ by $L_j=(I^j+\\mathfrak m^N)/\\mathfrak m^N$, $0\\leq j\\leq N$. Then $L_0=R/\\mathfrak m^N$ and $L_N=0$ since $I^N\\subseteq\\mathfrak m^N$. For $0\\leq j<N$, the map $I^j\\to L_j/L_{j+1}$ is onto and its kernel is\n$$I^{j+1}+(I^j\\cap\\mathfrak m^N)=I^{j+1}+J^{N-j}I^j.$$\nIndeed, if $z\\in I^j$ belongs to $I^{j+1}+\\mathfrak m^N$, write $z=u+v$ with $u\\in I^{j+1}$; then $v=z-u\\in I^j\\cap\\mathfrak m^N$. Consequently\n$$L_j/L_{j+1}\\simeq G_j/\\mathfrak n^{N-j}G_j\\simeq(A/\\mathfrak n^{N-j})^{h_j}.$$\nThe action of $J$ on $G_j$ is that of $\\mathfrak n$, so these are isomorphisms of $R$-modules via $R\\to A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary quotient-kernel calculation using Step 3; no identification of a filtered ring with its graded ring is asserted."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-regular-sequence-graded-polynomial] to the parameters of $A$ from Step 1. It identifies $\\operatorname{gr}_{\\mathfrak n}A$ with $k[Y_1,\\ldots,Y_s]$ by the specified parameter map. For $t\\geq1$, filter $A/\\mathfrak n^t$ by its powers of $\\mathfrak n$. The successive factors have a $k$-basis consisting of the monomials of degrees $0,\\ldots,t-1$. Each basis vector contributes one simple $R$-module $k$: its submodules are $k$-subspaces because $R\\to k$ is surjective. Hence repeated [lem-weil-pbc-length-additive-short-exact] gives\n$$\\operatorname{length}_R(A/\\mathfrak n^t)=\\#\\{\\alpha\\in\\mathbf N^s:|\\alpha|<t\\}=\\binom{t-1+s}{s}.$$\nFor the last count adjoin a slack coordinate $\\alpha_{s+1}=t-1-|\\alpha|$ and encode the resulting tuple of sum $t-1$ by $t-1$ stars and $s$ separators. There is one tuple if $s=0$. Direct sums of $h_j$ such modules have $h_j$ times this length, by the same length-additivity theorem applied to split exact sequences.",
+   "uses": [
+    "lem-pur-regular-sequence-graded-polynomial",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular; Tag 00IV, lemma-length-additive. The stars-and-bars count and residue-field composition series are written explicitly."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-length-additive-short-exact] on $0\\to L_{j+1}\\to L_j\\to L_j/L_{j+1}\\to0$, starting at $L_N=0$. Steps 4 and 5 show all factors have finite length and give\n$$\\operatorname{length}_R(R/\\mathfrak m^{n+1})=\\sum_{j=0}^{n}h_j\\binom{n-j+s}{s}.$$\nThis is the stated formula with the original residue-field fibre ranks. For $I=0$, only $G_0=A$ contributes. For $I=\\mathfrak m$, the parameter list is empty and every binomial coefficient is $1$. At $n=0$ the sole summand is $h_0=1$. No coefficient-field section or completion was used.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IV, lemma-length-additive, finite filtration assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-flat-graded-fibre-regular-lift",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-trf-adic-degree-zero-regular-strict-powers",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-weil-pbc-length-additive-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Filtered-module proof of the numerical consequence motivating Hironaka (1970), pp.153,157; algebraic synthesis of Tags 00NZ, 00NQ, 00LN, 00IV and the strict-power lemma. The full numerical statement is not attributed to any Stacks tag."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-normal-flat-hilbert-convolution: Noetherian local ring ideal regular quotient flat associated graded Hilbert Samuel function equals convolution of normal fiber Hilbert function with polynomial ring",
+   "results": "{\"t\": \"2026-10-23T15:00:24Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-normal-flat-hilbert-convolution: Noetherian local ring ideal regular quotient flat associated graded Hilbert Samuel function equals convolution of normal fiber Hilbert function with polynomial ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"IsHausdorff.of_isLocalRing\", \"Ideal.iInf_pow_smul_eq_bot_of_isLocalRing\", \"localCohomology.ideal_powers_initial\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"d6e98200b01a2e22\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern regular-sequence dimension drops, separated ideal filtrations, ordinary flatness, or the numerical Hilbert polynomial; none compares maximal-ideal quotients with a normally flat normal-cone fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T15:00:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.*(flat|Flat)|[Nn]ormal.?[Ff]lat|[Bb]ifiltr|[Cc]onvolution.*[Ll]ength",
+   "results": "{\"t\": \"2026-10-23T15:01:38Z\", \"tool\": \"grep\", \"query\": \"Hilbert.*(flat|Flat)|[Nn]ormal.?[Ff]lat|[Bb]ifiltr|[Cc]onvolution.*[Ll]ength\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no normal-flatness or filtered Hilbert-convolution theorem; candidate rank_pow_quot_aux is a Dedekind-domain ramification rank recurrence, and hilbertPoly is a numerical polynomial construction, not a local-ring length comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-normal-flat-hilbert-convolution: Hilbert Samuel function normal flatness regular quotient associated graded flat convolution binomial length",
+   "results": "{\"t\": \"2026-10-23T15:01:39Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-normal-flat-hilbert-convolution: Hilbert Samuel function normal flatness regular quotient associated graded flat convolution binomial length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"RingHom.Flat\", \"Module.Flat.of_forall_isTrivialRelation\", \"Module.Flat.finsupp\", \"RingHom.Flat.stableUnderComposition\", \"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"Module.flat_of_localized_span\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"f050e9f0fd7296cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern regular-sequence dimension drops, separated ideal filtrations, ordinary flatness, or the numerical Hilbert polynomial; none compares maximal-ideal quotients with a normally flat normal-cone fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-normal-flat-hilbert-convolution: length of local ring modulo maximal ideal power equals sum of normal cone fiber graded dimensions times binomial coefficient when graded ideal pieces are free over regular quotient",
+   "results": "{\"t\": \"2026-10-23T15:01:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-normal-flat-hilbert-convolution: length of local ring modulo maximal ideal power equals sum of normal cone fiber graded dimensions times binomial coefficient when graded ideal pieces are free over regular quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Ideal.rank_pow_quot_aux\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\"], \"digest\": \"426d9e18b02e28f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern regular-sequence dimension drops, separated ideal filtrations, ordinary flatness, or the numerical Hilbert polynomial; none compares maximal-ideal quotients with a normally flat normal-cone fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "rank_pow_quot_aux|hilbertPoly|of_forall_isTrivialRelation",
+   "results": "{\"t\": \"2026-10-23T15:43:40Z\", \"tool\": \"grep\", \"query\": \"rank_pow_quot_aux|hilbertPoly|of_forall_isTrivialRelation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\"], \"digest\": \"96ea846e768e1972\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no normal-flatness or filtered Hilbert-convolution theorem; candidate rank_pow_quot_aux is a Dedekind-domain ramification rank recurrence, and hilbertPoly is a numerical polynomial construction, not a local-ring length comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "normal.?flat|Hilbert.*[Ff]lat|[Bb]ifiltration|[Cc]onvolution.*[Ll]ength",
+   "results": "{\"t\": \"2026-10-23T20:09:38Z\", \"tool\": \"grep\", \"query\": \"normal.?flat|Hilbert.*[Ff]lat|[Bb]ifiltration|[Cc]onvolution.*[Ll]ength\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence dimension formulas, scalar regularity and flatness criteria do not state the all-degrees local Hilbert convolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-normal-flat-hilbert-convolution: Hilbert Samuel length normally flat ideal regular local quotient convolution binomial coefficients",
+   "results": "{\"t\": \"2026-10-23T20:09:39Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-normal-flat-hilbert-convolution: Hilbert Samuel length normally flat ideal regular local quotient convolution binomial coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_quotient_add_card\", \"isFiniteLength_quotient_span_singleton\"], \"digest\": \"20d57d18323ff235\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence dimension formulas, scalar regularity and flatness criteria do not state the all-degrees local Hilbert convolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-normal-flat-hilbert-convolution: Hilbert Samuel normally flat regular quotient length formula",
+   "results": "{\"t\": \"2026-10-23T20:10:47Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-normal-flat-hilbert-convolution: Hilbert Samuel normally flat regular quotient length formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"Module.length_quotient\", \"isFiniteLength_quotient_span_singleton\", \"RingHom.Flat\", \"Module.Flat.of_forall_isTrivialRelation\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Algebra.Smooth.flat_of_isNoetherianRing\"], \"digest\": \"45ffc4b214716dd8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence dimension formulas, scalar regularity and flatness criteria do not state the all-degrees local Hilbert convolution."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T20:10:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence dimension formulas, scalar regularity and flatness criteria do not state the all-degrees local Hilbert convolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-normal-flat-hilbert-convolution: length modulo maximal ideal power for free graded pieces along a regular center",
+   "results": "{\"t\": \"2026-10-23T20:10:48Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-normal-flat-hilbert-convolution: length modulo maximal ideal power for free graded pieces along a regular center\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"HomogeneousLocalization.Away.eventually_smul_mem\", \"HomogeneousLocalization.deg\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"HomogeneousIdeal.mem_irrelevant_iff\"], \"digest\": \"feafb784621b30e7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular-sequence dimension formulas, scalar regularity and flatness criteria do not state the all-degrees local Hilbert convolution."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normal-flat-double-initial-ideal",
+  "date": "2026-10-23",
+  "group": "Q25"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: section 2, p.153, normal-flat tangent/normal-cone comparison, and the paragraph after Example (4.2), p.157; the cited underlying result is Resolution of singularities (1964), Chapter II, Theorem 2; numerical input: the Hilbert function of a normally flat local ring is the convolution of the normal-cone fibre Hilbert function with the Hilbert function of its regular centre.",
+   "via": [
+    "lem-trf-normal-flat-double-initial-ideal",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-normal-flat-hilbert-convolution",
+  "worker": "stage1",
+  "summary": "Q28 preserves the full general-Noetherian statement. Normal-flat graded pieces are finite free; lifted regular centre parameters act regularly degreewise. A new general strict-powers lemma supplies the intersection comparison. Explicit finite filtration factors and the existing regular-sequence polynomial theorem give the binomial lengths. No ambient regular presentation, coefficient section, completeness or characteristic hypothesis is used.",
+  "blueprint": "Historical normal-flat Hilbert-function input below lem-trf-local-term-locality; Hironaka 1970 pp.153,157. The latest ancestor now uses the contracting-correspondence route; this item repairs the already-created local-algebra branch without changing the unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic regular-local/regular-sequence algebra input for the centre-parameter calculation; the trace-formula unit states no replacement for this commutative-algebra tool."
+   },
+   {
+    "node": "lem-pur-regular-sequence-graded-polynomial",
+    "why": "Generic regular-local/regular-sequence algebra input for the centre-parameter calculation; the trace-formula unit states no replacement for this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-21d75875d",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-21d75875d (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. The item statement is unchanged and matches what its parent lem-trf-normal-flat-double-initial-ideal uses; I checked it on I=m, I=0 and k[[x,y]] with I=(x). Steps: S1 uses only the clause of lem-trf-flat-graded-fibre-regular-lift that every G_j is finite free; the lifted parameters are regular on A, hence their successive multiplications are injective on each G_j≅A^{h_j}, and m=I+J. S2 applies the new node to M=I^a, whose graded pieces are G_{a+p}, which gives J^qI^a∩I^{a+p}=J^qI^{a+p}. S3: I checked the elimination for a<j, using the case p=1, q=N-a; only the images in G_j are asserted equal. S4: the kernel of I^j→L_j/L_{j+1} follows by the modular law, and the factor is (A/n^{N-j})^{h_j}. S5: the graded-polynomial node with B=k plus length additivity gives length C(t-1+s,s). S6: the sum matches the formula exactly. New node lem-trf-adic-degree-zero-regular-strict-powers: I proved it true myself (Krull intersection, extension of regular sequences through the finite filtration, snake lemma, then quasi-regularity and induction on q). It is not a clause of the item (no flatness, length or binomial content). My rg -L duplicate search found no existing node stating it; regular-quotient-ideal-intersection covers only rings with q=p=1. All four search kinds are recorded and blueprint fields are present. ILO VIII 2.3.13 is motivation only, so proof_origin agent is right, and Hironaka 1970 is WANTED. There is no SGA citation and no repair note. I accept the two declared generic tool uses (lem-weil-pbc-regular-local-generators-regular-sequence, lem-pur-regular-sequence-graded-polynomial). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalFlatHilbertConvolution",
+  "declaration": "Ideal.normal_flat_hilbert_convolution",
+  "declarations": [
+   "Ideal.normalConeFibrePiece",
+   "Ideal.normal_flat_hilbert_convolution"
+  ],
+  "file": "lean/Sheaf/RingTheory/NormalFlatHilbertConvolution.lean",
+  "statement": "theorem normal_flat_hilbert_convolution {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) [IsRegularLocalRing (R ⧸ I)] (s : ℕ) (hs : ringKrullDim (R ⧸ I) = (s : WithBot ℕ∞)) [Module.Flat (R ⧸ I) (associatedGraded I)] : (∀ j : ℕ, Module.Finite (IsLocalRing.ResidueField R) (normalConeFibrePiece I hI j)) ∧ ∀ n : ℕ, Module.length R (R ⧸ (IsLocalRing.maximalIdeal R) ^ (n + 1)) = ∑ j ∈ Finset.range (n + 1), (Module.finrank (IsLocalRing.ResidueField R) (normalConeFibrePiece I hI j) : ℕ∞) * (Nat.choose (n - j + s) s : ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the canonical normalConeFibre, normalConeResidueAlgebra, normalConeFibreClass and their ring/algebra instances owned by def-trf-normal-cone-residue-fibre, recorded existing:true on the published module Sheaf.RingTheory.NormalConeDirectrixMinimalPrimes. No theorem from that module is a statement dependency. The helper is the degree-j vector subspace, canonically G_j tensor_A k; finite dimensionality is a conclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d51b15d7c",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN at b5eca057. The theorem stmt_dep lem-trf-normal-cone-directrix-minimal-primes is replaced by the new def node def-trf-normal-cone-residue-fibre, an existing:true record on the unchanged module Sheaf.RingTheory.NormalConeDirectrixMinimalPrimes owning normalConeResidueAlgebra, normalConeFibre, normalConeFibreCommRing, normalConeFibreAlgebra and normalConeFibreClass. These are real data (quotient factor, tensor product and its instances, 1⊗[a]) with binders CommRing/IsLocalRing/I/hI only; the statement field is verbatim and no other def node owns them. The item Lean is byte-identical to the returned head, and the item node differs from side-live only in lean and stmt_deps. Clause re-check: hypotheses exact and none stronger; normalConeFibrePiece = k⊗G_j via the split inclusion; finite dimensionality is a conclusion; the range/ℕ∞/choose formula is right; I=0, I=m, n=0 and s=0 are covered. Sorry only; docstrings carry the source place and six steps. Advisory: the theorem node record also lists the five decls and their docstrings still name it as blueprint; that cleanup is not S2-fixable. No compile (no file changed)."
+ }
+}

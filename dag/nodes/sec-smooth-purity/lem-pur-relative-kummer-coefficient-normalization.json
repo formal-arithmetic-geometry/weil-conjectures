@@ -1,0 +1,378 @@
+{
+ "id": "lem-pur-relative-kummer-coefficient-normalization",
+ "kind": "statement",
+ "title": "Finite Kummer coefficients and normalization of scalar-forgetting maps",
+ "statement": "Fix the finite-field and coefficient data of [def-pur-conventions], write $e=e(E/\\mathbf Q_\\ell)$, assume $e\\mid n$, and set $N=n/e\\geq1$, $r=\\ell^N$ and $R=\\mathbf Z/r\\mathbf Z$. Then $rA=0$, $A$ is a finite free $R$-algebra, and $r$ is invertible on every $k$-scheme. Choose a primitive $r$-th root $\\zeta\\in k$. For every $k$-scheme $T$, on its small etale site put $L_T=\\mu_{r,T}\\otimes_{R_T}A_T$, with the roots and tensor sheaves of [def-sc-kummer-sequence], [def-pur-sheaf-tensor-product]. There are isomorphisms\n$$R_T\\xrightarrow{\\sim}\\mu_{r,T},\\quad a\\longmapsto\\zeta^a,\\qquad A_T\\xrightarrow{\\sim}L_T,\\quad a\\longmapsto\\zeta\\otimes a,$$\ncompatible with every $k$-morphism $u:T'\\to T$ through the canonical inverse-image coefficient identifications. In particular $L_T$ is pulled back from $\\operatorname{Spec}k$ and its underlying finite abelian group has order a power of $\\ell$.\n\nFor a unit $v\\in\\Gamma(T,\\mathcal O_T)^\\times$, define $\\kappa_{T,A}(v)=H^1(z\\mapsto z\\otimes1_A)(\\delta_T(v))$, where $\\delta_T$ is the connecting map of the ordinary exact $r$-Kummer sequence, with the cohomology-pullback convention of [def-weil-pbc-cohomology-pullback]. Then\n$$u^*\\kappa_{T,A}(v)=\\kappa_{T',A}(u^*v).$$\nThe assertion concerns the ordinary Kummer sequence before extension of coefficients, and requires no $R$-module structure on $\\mathbf G_m$.\n\nAll these maps may be computed in module sheaves or in their underlying abelian sheaves: the canonical comparisons of [lem-weil-pbc-etale-module-cohomology-forget], [lem-sbc-higher-direct-image-forget-comparison] identify constants, coefficient maps, cohomology pullbacks and resolution-induced maps, for global cohomology and every higher direct image in all integer degrees. More explicitly, for a morphism $a:X\\to B$ and a sheaf $F$ of $A$-modules, they identify $U_B\\mathcal H^q(Ra_*F)$ with $\\mathcal H^q(Ra_*U_XF)$, where $U$ forgets scalars, and identify the underlying groups of $H^q(X,F)$ with $H^q(X,U_XF)$. For every cartesian square the comparisons intertwine the actual module-derived exchange with the abelian-derived exchange, as specified in [lem-weil-pbc-exchange-forget-coefficients]. They reflect invertibility of the module maps.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Opening paragraph: finite twist, primitive-root trivialization and computation on the small etale site; Step 3: naturality of the Kummer boundary. Old steps 1–3. Stacks Tag 03PL, etale-cohomology.tex, lemma-kummer-sequence."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sc-kummer-sequence",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-sc-mu-trivialization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-finite-kummer-level] with the given divisibility hypothesis: $N=n/e\\geq1$, $\\ell^NA=0$ and $A\\cong R^{ef}$ as $R$-modules. The quotient ring map makes this a finite free $R$-algebra. Since $k$ has characteristic $p\\ne\\ell$ [def-pur-conventions], the scalar $r$ has an inverse in $k$, whose image is an inverse on every $k$-scheme. [lem-sc-primitive-root] supplies $\\zeta$ and the distinct roots $\\zeta^a$, $a\\in R$.",
+   "uses": [
+    "lem-pur-finite-kummer-level",
+    "def-pur-conventions",
+    "lem-sc-primitive-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Opening paragraph: finite coefficient level and primitive root"
+   }
+  },
+  {
+   "text": "Here is the sheaf trivialization on an arbitrary $k$-scheme, including nonreduced schemes. The roots sheaf has the unit-valued description in [lem-asd-etale-finite-twist-pullback]. For any etale test $V$ and root $z$, the factorization $z^r-1=\\prod_{a\\in R}(z-\\zeta^a)=0$ gives the open cover $V_a=\\bigcap_{b\\ne a}D(z-\\zeta^b)$: in each residue field exactly one factor vanishes, because differences of distinct $\\zeta^a$ are units. On $V_a$ all the other factors are invertible, so $z=\\zeta^a$. Distinct labels cannot agree on a nonempty overlap. Thus roots are exactly locally constant labels in $R$, with powers corresponding to addition. By the constant-sheaf and sheafification descriptions [def-weil-pbc-constant-sheaf], [lem-pc-sites-sheafification-underlying-sets], this proves the claimed $R_T$-linear isomorphism $a\\mapsto\\zeta^a$. The factorization uses the $r$ distinct roots of [lem-sc-primitive-root].",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-weil-pbc-constant-sheaf",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-sc-primitive-root"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Opening paragraph: primitive root trivializes the finite root sheaf"
+   }
+  },
+  {
+   "text": "Tensor the preceding isomorphism with $A_T$ using [def-pur-sheaf-tensor-product]. The explicit inverse to $a\\mapsto\\zeta\\otimes a$ sends $\\zeta^b\\otimes a$ to $ba$; the tensor balancing relation proves that both composites are identities. For a $k$-morphism $u$, the canonical comparisons of [lem-asd-etale-finite-twist-pullback] pull a root back by its unit-section formula and pull constants back to the same constants. Hence they take $\\zeta^b$ to $\\zeta^b$ and $\\zeta^b\\otimes a$ to $\\zeta^b\\otimes a$. This proves compatibility of both trivializations. Apply this also to $T\\to\\operatorname{Spec}k$ to obtain the claimed pullback description. Its constant coefficient group is the additive group of $A\\cong R^{ef}$ from step 1, of order $r^{ef}$, a power of $\\ell$. This assertion is about the coefficient group, not all global sections on a disconnected $T$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Opening paragraph: trivialization after coefficient extension and its pullback compatibility"
+   }
+  },
+  {
+   "text": "By [lem-amb-kummer-any-base], the ordinary $r$-Kummer sequence is short exact on each small etale site, since $r$ is invertible. Let $c:u^{-1}\\mathbf G_{m,T}\\to\\mathbf G_{m,T'}$ be adjoint to pullback of units. Pulling back units commutes with $r$th powers: $(u^*z)^r=u^*(z^r)$. Consequently $(c_\\mu,c,c)$ is a morphism from the inverse-image Kummer sequence to the Kummer sequence on $T'$, where $c_\\mu$ is the canonical root comparison of [lem-asd-etale-finite-twist-pullback]. The pullback ladder [lem-weil-pbc-pullback-cohomology-long-exact-ladder] commutes with the first boundary. Naturality for the morphism $(c_\\mu,c,c)$, $H^1(c_\\mu)\\delta_{u^{-1}S}=\\delta_{S'}H^0(c)$ on $T'$, is clause (1) of [lem-weil-pbc-horseshoe-delta-functor] for the horseshoe connecting maps of $v=\\Gamma(T',-)$; by [lem-sc-p1-right-derived-triangle-connecting] these are the connecting maps of the triangle obtained by applying $R\\Gamma(T',-)$ to the triangle of the short exact sequence, i.e. the maps $\\delta_{T'}$ of the ladder. Composing these two identities, and using [lem-weil-pbc-cohomology-pullback-degree-zero] to identify $H^0(c)u^*$ on units, gives $H^1(c_\\mu)u^*\\delta_T(v)=\\delta_{T'}(u^*v)$. No inverse-image isomorphism for $\\mathbf G_m$ is asserted.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-sc-p1-right-derived-triangle-connecting",
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence; Tag 04I0, section-functoriality; cohomology.tex Tags 01F8 and 01FB"
+   }
+  },
+  {
+   "text": "Write $i_T:\\mu_{r,T}\\to L_T$, $z\\mapsto z\\otimes1_A$, and $c_L:u^{-1}L_T\\xrightarrow{\\sim}L_{T'}$. On the generators of the sheafified tensor product, $c_L\\circ u^{-1}i_T=i_{T'}\\circ c_\\mu$, by the root and coefficient identifications already established. Apply the naturality clause of [lem-weil-pbc-cohomology-pullback-functorial] to $i_T$, then substitute step 4: $H^1(c_L)u^*H^1(i_T)\\delta_T(v)=H^1(i_{T'})H^1(c_\\mu)u^*\\delta_T(v)=H^1(i_{T'})\\delta_{T'}(u^*v)$. These are exactly the two stated Kummer classes. The boundary was formed in abelian sheaves first; only its value is mapped by $i_T$. Thus no action of $R$ on $\\mathbf G_m$ occurs.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 3: Kummer boundary and coefficient extension commute with pullback"
+   }
+  },
+  {
+   "text": "Forgetting module structure is exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Constants and their maps agree with their abelian versions: apply [lem-cbc-module-sheafification-underlying-sets] to the constant module presheaf and [lem-pc-sites-sheafification-underlying-sets] to its underlying abelian presheaf. Both comparison maps extend the identity on constant sections; uniqueness of sheafification identifies them, including addition and scalar maps. The same argument applies to the sheafified insertion $i_T$, so its underlying coefficient map is precisely $z\\mapsto z\\otimes1_A$, rather than a map modified by an automorphism of the coefficient line.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-cbc-module-sheafification-underlying-sets",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YR, section-sheaves-algebraic-structures, clauses (gamma) and (epsilon); sites-modules.tex Tags 03DA and 03DB"
+   }
+  },
+  {
+   "text": "For global cohomology use the natural isomorphism [lem-weil-pbc-etale-module-cohomology-forget]. For $a:X\\to B$ use the fixed unit-compatible derived comparison [lem-weil-pbc-module-abelian-derived-direct-image-comparison]; its cohomology is the comparison of [lem-sbc-higher-direct-image-forget-comparison], in every integer degree. These choices fix the maps, as follows. If $F\\to I^\\bullet$ is a bounded-below module injective resolution and $UI^\\bullet\\to J^\\bullet$ an abelian K-injective replacement, the comparison is represented by $\\Gamma(I^\\bullet)\\to\\Gamma(J^\\bullet)$, respectively $a_*UI^\\bullet\\to a_*J^\\bullet$. Module injectives are underlying-global-section acyclic by [lem-weil-pbc-etale-module-injective-forget-acyclic], so the former computes the stated global comparison. For any chosen resolution lift $b$, naturality gives $\\chi_{F'}H^q(b)=H^q(Ub)\\chi_F$. For a pullback along $u$, [lem-weil-pbc-module-abelian-inverse-image-comparison] identifies the underlying module unit with the abelian unit; compose this unit identity with the unit-compatible direct-image comparison and the resolution maps defining $u^*$ in [lem-weil-pbc-cohomology-pullback-functorial]. Taking global sections and $H^q$ gives the same identity for cohomology pullback. Thus coefficient maps and all the resolution-induced maps agree under the specified comparisons. For $q<0$ the sheaves placed in degree zero and their right derived images have zero cohomology, so the same assertions hold there.",
+   "uses": [
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-weil-pbc-etale-module-injective-forget-acyclic",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 072W, lemma-higher-direct-images; Tag 0D6J, lemma-modules-abelian-unbounded, canonical comparison construction"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exchange-forget-coefficients] to each cartesian square with $\\Lambda=A$ and $K=F[0]$. Its equality identifies the actual module-derived exchange with the abelian-derived exchange under the very inverse- and direct-image comparisons used in step 7, and gives the exchange invertibility assertion. For any other module sheaf map, if its underlying abelian map is invertible, its sectionwise inverse is automatically $A$-linear: for $y=f(x)$, $f^{-1}(ay)=f^{-1}(f(ax))=ax$. Hence forgetting reflects invertibility. On complexes its exactness from step 6 identifies cohomology before and after forgetting; thus it reflects quasi-isomorphisms as well. This proves the final reflection assertion for the module-derived maps too.",
+   "uses": [
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Opening paragraph: scalar-forgetting normalization; Step 3: compatibility of the specified exchange maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-kummer-level",
+  "def-pur-conventions",
+  "lem-sc-primitive-root",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "def-pur-sheaf-tensor-product",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-sc-p1-right-derived-triangle-connecting",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-cbc-module-sheafification-underlying-sets",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-etale-module-injective-forget-acyclic",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "lem-weil-pbc-exchange-forget-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Opening paragraph and Step 3, filled out using Stacks Tags 03PL, 00YR, 03DA, 03DB, 03FD, 072W, 0D6J, 01F8 and 01FB and the cited existing DAG nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite roots of unity trivialization natural under pullback and Kummer boundaries with finite flat coefficients commute with forgetting module scalars",
+   "results": "{\"t\": \"2026-10-22T06:44:04Z\", \"tool\": \"leanfinder\", \"query\": \"Finite roots of unity trivialization natural under pullback and Kummer boundaries with finite flat coefficients commute with forgetting module scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"modularCyclotomicCharacter.spec\", \"modularCyclotomicCharacter'.spec'\", \"autAdjoinRootXPowSubCHom\", \"cyclotomicCharacter.spec\", \"cyclotomicCharacter.toFun_spec\", \"autAdjoinRootXPowSubC\", \"autAdjoinRootXPowSubCEquiv_symm_smul\", \"autAdjoinRootXPowSubCEquiv\"], \"digest\": \"f1377f3605b9311d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kummer\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T06:43:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"kummer\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|rootsOfUnity.*(Sheaf|sheaf)|cohomology.*forget",
+   "results": "{\"t\": \"2026-10-22T06:43:53Z\", \"tool\": \"grep\", \"query\": \"kummer|rootsOfUnity.*(Sheaf|sheaf)|cohomology.*forget\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/FLT/Three.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\"], \"digest\": \"32abce4b31fa06fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite roots of unity trivialization natural under pullback and Kummer boundaries with finite flat coefficients commute with forgetting module scalars",
+   "results": "{\"t\": \"2026-10-22T06:43:53Z\", \"tool\": \"leansearch\", \"query\": \"Finite roots of unity trivialization natural under pullback and Kummer boundaries with finite flat coefficients commute with forgetting module scalars\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale Kummer connecting classes are functorial in a scheme morphism and scalar extension preserving canonical module and abelian cohomology maps",
+   "results": "{\"t\": \"2026-10-22T06:44:04Z\", \"tool\": \"leanfinder\", \"query\": \"Etale Kummer connecting classes are functorial in a scheme morphism and scalar extension preserving canonical module and abelian cohomology maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.H1Cotangent.map_eq\", \"Algebra.Extension.H1Cotangent.map\", \"Algebra.H1Cotangent.map\", \"Algebra.Extension.H1Cotangent.map_apply_coe\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"Algebra.Extension.H1Cotangent.map_comp\", \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"StandardEtalePair.HasMap.map\"], \"digest\": \"1e01dc61b7b36541\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Primitive root trivializes finite etale roots of unity sheaf on any scheme over an algebraically closed field, naturally under pullback",
+   "results": "{\"t\": \"2026-10-22T08:23:25Z\", \"tool\": \"leanfinder\", \"query\": \"Primitive root trivializes finite etale roots of unity sheaf on any scheme over an algebraically closed field, naturally under pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"autEquivRootsOfUnity_smul\", \"autEquivRootsOfUnity_apply_rootOfSplit\", \"autEquivRootsOfUnity\", \"autAdjoinRootXPowSubCEquiv_root\", \"IsPrimitiveRoot.autToPow_spec\", \"AdjoinRootXPowSubCEquivToRootsOfUnity\", \"autAdjoinRootXPowSubCEquiv_symm_smul\", \"modularCyclotomicCharacter.spec\"], \"digest\": \"0d094553ccda4661\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field-theoretic roots, vector-bundle trivializations and general sheaf-module adjunction formulas do not state the etale coefficient and fixed derived-map package"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T08:26:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field-theoretic roots, vector-bundle trivializations and general sheaf-module adjunction formulas do not state the etale coefficient and fixed derived-map package"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity.*[Ss]heaf|[Kk]ummer|cohomology.*forget",
+   "results": "{\"t\": \"2026-10-22T08:26:27Z\", \"tool\": \"grep\", \"query\": \"rootsOfUnity.*[Ss]heaf|[Kk]ummer|cohomology.*forget\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\"], \"digest\": \"b1f254565874c4f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field-theoretic roots, vector-bundle trivializations and general sheaf-module adjunction formulas do not state the etale coefficient and fixed derived-map package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale Kummer coefficient trivializations and cohomology pullback compatible with forgetting module scalars",
+   "results": "{\"t\": \"2026-10-22T08:26:28Z\", \"tool\": \"leansearch\", \"query\": \"Finite etale Kummer coefficient trivializations and cohomology pullback compatible with forgetting module scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_restrictScalars\", \"Trivialization.pullback_linear\", \"groupCohomology.H1π_comp_H1IsoOfIsTrivial_hom\", \"Trivialization.instCoePretrivialization\", \"Trivialization.toPretrivialization.isLinear\", \"ModuleCon.toSMulCon\", \"RootPairing.restrictScalars_coe_root\", \"AlgebraicGeometry.Scheme.Etale.forget\"], \"digest\": \"17043117ac13fa2f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field-theoretic roots, vector-bundle trivializations and general sheaf-module adjunction formulas do not state the etale coefficient and fixed derived-map package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived direct image and global sheaf cohomology comparisons for module sheaves versus abelian sheaves preserve adjunction unit and base change exchange",
+   "results": "{\"t\": \"2026-10-22T08:28:53Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical derived direct image and global sheaf cohomology comparisons for module sheaves versus abelian sheaves preserve adjunction unit and base change exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjUnitToUnit\"], \"digest\": \"c3f11268c9d05ff6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field-theoretic roots, vector-bundle trivializations and general sheaf-module adjunction formulas do not state the etale coefficient and fixed derived-map package"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-gm-relative-kummer",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-gm-relative-kummer",
+   "place": "Opening paragraph: finite twist, primitive-root trivialization and computation on the small etale site; Step 3: naturality of the Kummer boundary. Old steps 1–3. Stacks Tag 03PL, etale-cohomology.tex, lemma-kummer-sequence.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-relative-kummer-coefficient-normalization",
+  "worker": "stage1",
+  "summary": "Reused existing arithmetic, root-pullback, derived cohomology and exchange nodes; wrote the primitive-root trivialization, actual Kummer boundary naturality, scalar insertion formula, and normalization of underlying resolution maps explicitly. No new nodes or statement changes.",
+  "blueprint": "prop-pur-gm-relative-kummer opening paragraph (finite root-line trivialization and computation on the small etale site) and Step 3 (naturality of the Kummer class); realizes the coefficient paragraph of sk-prop-a1-kummer without using smooth purity.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Sheafification of abelian groups and rings is computed on underlying sheaves of sets"
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Pullback maps form a morphism of long exact cohomology sequences"
+   },
+   {
+    "node": "lem-weil-pbc-horseshoe-delta-functor",
+    "why": "Generic derived-functor fact used for the Kummer boundary: naturality of the horseshoe connecting maps of R^n Gamma for a morphism of short exact sequences (clause (1)); no node of the unit states boundary naturality on an arbitrary k-scheme."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Degree-zero cohomology and the degree-zero pullback map"
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: The pullback on etale cohomology is well defined and functorial"
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Colimits of sheaves of modules and the forgetful functor to abelian sheaves"
+   },
+   {
+    "node": "lem-cbc-module-sheafification-underlying-sets",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Module sheafification commutes with underlying sets on a sieve site"
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Natural comparison of etale module cohomology with underlying abelian cohomology"
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Canonical derived direct image comparison for forgotten module coefficients"
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Underlying abelian sheaf commutes with higher direct image"
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-injective-forget-acyclic",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Underlying abelian acyclicity of injective module-valued etale sheaves"
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Canonical module-to-abelian inverse-image comparison is invertible"
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: The derived exchange morphism commutes with forgetting the coefficient ring"
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: Finite Tate lines on the small etale site and their pullback"
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic small-etale-site coefficient or derived-functor comparison used for the normalized maps; no new geometric purity route replaces any unit step. Specifically: The Kummer sequence on an arbitrary base"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-cbc-module-sheafification-underlying-sets",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-etale-module-injective-forget-acyclic",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-kummer-any-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-dbe915f15",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-dbe915f15 (reviewer sub-agent of L); spot-checked: Read in full: item statement (unchanged from Q160's base), all 8 steps, every cited statement, blueprint main-20261015 prop-pur-gm-relative-kummer opening paragraph and Step 3, unit sk-prop-a1-kummer, and Stacks 03PL (etale-cohomology.tex l.2842: n invertible gives exactness on any S). This is a first split of a node Q160 created; no new nodes and no SGA. Old parent steps 1-3 (Q160 handoff) map to new steps 1-3 (finite level, zeta factorization, tensor and pullback), 4-5 (Kummer boundary) and 6-8 (forget comparisons, exchange, reflection); no argument was dropped. Checks: e|n gives N>=1 and A=(Z/l^N)^{ef}; k algebraically closed with l!=p, so primitive-root applies and r is invertible on every k-scheme. Step 2 open-cover argument V_a=cap D(z-zeta^b) is valid on nonreduced and disconnected T. Step 3 inverse zeta^b⊗a↦ba holds by balancing, and pullback fixes zeta and constants. Step 5 uses functorial(3) naturality plus generators. Step 7 rests on functorial(2) (Gamma-acyclic comparison complex) with injective-forget-acyclic and the unit comparison. Step 8 applies exchange-forget (1)-(3) and A-linearity of the inverse. Edge cases tested: T empty, disconnected, Spec k[eps]; n=e; A=F_l. FIX (C4, step 4): the naturality of the boundary under the SES morphism (c_mu,c,c) was cited from lem-weil-pbc-right-derived-universal-delta-functor. That node gives only some delta making R^n v a universal delta-functor, not the ladder's triangle delta_T (-delta also works). Step 4 now cites lem-weil-pbc-horseshoe-delta-functor(1) plus lem-sc-p1-right-derived-triangle-connecting (horseshoe delta = triangle delta of RGamma), the same bridge as in Q05 9f203e54. proof_deps recomputed; the tool_uses entry is swapped to horseshoe (sk-thm-p1). triangle-connecting is in the route (sk-thm-picard-duality), and there is no cycle. Accepted tool_uses are generic site/derived-functor black boxes: asd finite-twist-pullback, amb kummer-any-base, sheafification-underlying-sets, pbc ladder, horseshoe, degree-zero, functorial, colimits-forgetful, cbc module-sheafification, module-cohomology-forget, derived-direct-image comparison, sbc higher-direct-image-forget, injective-forget-acyclic, inverse-image comparison, exchange-forget. Advisory: the existence-only comparison nodes are pinned through the resolution representative in steps 7-8. Fixed file: fixes/dag/nodes/sec-smooth-purity/lem-pur-relative-kummer-coefficient-normalization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeKummerCoefficientNormalization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.relativeKummerCoefficientNormalization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.relativeScalarForgetFiniteColimits",
+   "WeilConjectures.PurityFiniteSetting.relativeExponentNeZero",
+   "WeilConjectures.PurityFiniteSetting.relativeTwistPullback",
+   "WeilConjectures.PurityFiniteSetting.relativeGlobalSectionsForgetIso",
+   "WeilConjectures.PurityFiniteSetting.relativeDerivedGlobalForget",
+   "WeilConjectures.PurityFiniteSetting.relativeGlobalForgetMap",
+   "WeilConjectures.PurityFiniteSetting.relativeHigherForgetIso",
+   "WeilConjectures.PurityFiniteSetting.relativeRootPullback",
+   "WeilConjectures.PurityFiniteSetting.relativeKummerCoefficientNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeKummerCoefficientNormalization.lean",
+  "statement": "theorem relativeKummerCoefficientNormalization (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) : (1 ≤ P.kummerLevel) ∧ ((P.exponent : P.Coefficient) = 0) ∧ (∃ α : ZMod P.exponent →+* P.Coefficient, ∃ d : ℕ, ∃ b : P.Coefficient ≃+ (Fin d → ZMod P.exponent), ∀ (z : ZMod P.exponent) (x : P.Coefficient), b (α z * x) = z • b x) ∧ (∀ T : Over (Spec (.of P.field.k)), IsUnit (P.exponent : Γ(T.left, ⊤))) ∧ (∃ d : ℕ, Nat.card P.Coefficient = P.coefficients.l ^ d) ∧ (∀ (ζ : P.field.k) (hζ : IsPrimitiveRoot ζ P.exponent), ∃ τ : ∀ T : Over (Spec (.of P.field.k)), P.constantEtale T.left ≅ P.twistEtale h T.left, (∀ (T : Over (Spec (.of P.field.k))) (W : T.left.Etaleᵒᵖ) (b : ℕ), ((Additive.toMul ((kernel.ι (P.exponent • 𝟙 T.left.gmSheaf)).hom.app W ((T.left.constantZModIsoRootsOfUnitySheaf P.exponent T.hom hζ).hom.hom.app W ((toSheafify T.left.smallEtaleTopology ((Functor.const T.left.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod P.exponent))))).app W (ULift.up (b : ZMod P.exponent))))).down : Γ(W.unop.left, ⊤)ˣ) : Γ(W.unop.left, ⊤)) = W.unop.hom.appTop (((Scheme.ΓSpecIso (.of P.field.k)).inv ≫ T.hom.appTop) ζ) ^ b) ∧ (∀ (T : Over (Spec (.of P.field.k))) (W : T.left.Etaleᵒᵖ) (a : P.Coefficient), (τ T).hom.hom.app W ((toSheafify T.left.smallEtaleTopology ((Functor.const T.left.Etaleᵒᵖ).obj (ModuleCat.of P.Coefficient P.Coefficient))).app W a) = Scheme.finiteEtaleTateOneGenerator P.Coefficient P.exponent T.left (P.exponent_coefficient_eq_zero h) W a ((T.left.constantZModIsoRootsOfUnitySheaf P.exponent T.hom hζ).hom.hom.app W ((toSheafify T.left.smallEtaleTopology ((Functor.const T.left.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod P.exponent))))).app W (ULift.up 1)))) ∧ (∀ (T T' : Over (Spec (.of P.field.k))) (v : T' ⟶ T), (upperStar AddCommGrpCat.{u + 1} v.left).map (T.left.constantZModIsoRootsOfUnitySheaf P.exponent T.hom hζ).hom ≫ (P.relativeRootPullback h v.left T.hom).hom = ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} v.left).app (AddCommGrpCat.of (ULift.{u + 1} (ZMod P.exponent)))).hom ≫ (T'.left.constantZModIsoRootsOfUnitySheaf P.exponent T'.hom hζ).hom) ∧ (∀ (T T' : Over (Spec (.of P.field.k))) (v : T' ⟶ T), (upperStar (ModuleCat.{u + 1} P.Coefficient) v.left).map (τ T).hom ≫ (P.relativeTwistPullback h v.left T.hom).hom = ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} P.Coefficient) v.left).app (ModuleCat.of P.Coefficient P.Coefficient)).hom ≫ (τ T').hom)) ∧ (∀ (T T' : Scheme.{u}) (a : T ⟶ Spec (.of P.field.k)) (v : T' ⟶ T) (w : Γ(T, ⊤)ˣ), Sheaf.H.map ((moduleAbelianUpperStarComparison P.Coefficient v).app (P.twistEtale h T) ≫ (P.forgetEtale T').map (P.relativeTwistPullback h v a).hom) 1 (cohomologyMap v ((P.forgetEtale T).obj (P.twistEtale h T)) 1 (Sheaf.H.map (ordinaryFiniteRootMap P.Coefficient P.exponent (P.exponent_coefficient_eq_zero h) T) 1 (T.kummerδ₀ P.exponent (P.exponent_isUnit T a) (Additive.ofMul w)))) = Sheaf.H.map (ordinaryFiniteRootMap P.Coefficient P.exponent (P.exponent_coefficient_eq_zero h) T') 1 (T'.kummerδ₀ P.exponent (P.exponent_isUnit T' (v ≫ a)) (Additive.ofMul (Units.map v.appTop.hom.toMonoidHom w)))) ∧ (∀ (T : Scheme.{u}) (W : T.Etaleᵒᵖ) (z : (T.rootsOfUnitySheaf P.exponent).obj.obj W), (ordinaryFiniteRootMap P.Coefficient P.exponent (P.exponent_coefficient_eq_zero h) T).hom.app W z = Scheme.finiteEtaleTateOneGenerator P.Coefficient P.exponent T (P.exponent_coefficient_eq_zero h) W 1 z) ∧ (∀ (T : Scheme.{u}) (W : T.Etaleᵒᵖ) (a : P.Coefficient), ((constantCommuteCompose T.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1})).hom.app (ModuleCat.of P.Coefficient P.Coefficient)).hom.app W ((toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of P.Coefficient P.Coefficient))).app W a) = (toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj (AddCommGrpCat.of P.Coefficient))).app W a) ∧ (∀ T : Scheme.{u}, IsIso (P.relativeDerivedGlobalForget T)) ∧ (∀ (T : Scheme.{u}) (q : ℤ) (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))), IsIso (P.relativeGlobalForgetMap T q K)) ∧ (∀ (T T' : Scheme.{u}) (v : T' ⟶ T) (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))), (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1}).mapDerivedCategoryPlus.map (moduleDerivedCohomologyPullback P.Coefficient v K) ≫ (P.relativeDerivedGlobalForget T').app ((upperStar (ModuleCat.{u + 1} P.Coefficient) v).mapDerivedCategoryPlus.obj K) ≫ (Sheaf.Γ T'.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus.map ((moduleAbelianDerivedUpperStarIso P.Coefficient v).symm.app K).hom = (P.relativeDerivedGlobalForget T).app K ≫ abelianDerivedCohomologyPullback v ((P.forgetEtale T).mapDerivedCategoryPlus.obj K)) ∧ (∀ (X B : Scheme.{u}) (a : X ⟶ B), IsIso (moduleAbelianDerivedLowerStarComparison P.Coefficient a)) ∧ (∀ (X X' B B' : Scheme.{u}) (f : X ⟶ B) (f' : X' ⟶ B') (g' : X' ⟶ X) (g : B' ⟶ B) (sq : ChosenCartesianSquare g' f' f g) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))), ((P.forgetEtale B').mapDerivedCategoryPlus.map ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} P.Coefficient) sq.toCommSq).app K) ≫ (moduleAbelianDerivedExchangeTargetIso P.Coefficient g' f' K).hom = (moduleAbelianDerivedExchangeSourceIso P.Coefficient f g K).hom ≫ (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app ((P.forgetEtale X).mapDerivedCategoryPlus.obj K)) ∧ (IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} P.Coefficient) sq.toCommSq).app K) ↔ IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app ((P.forgetEtale X).mapDerivedCategoryPlus.obj K)))) ∧ (∀ (T : Scheme.{u}) (F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) (b : F ⟶ G), IsIso ((P.forgetEtale T).map b) ↔ IsIso b) ∧ (∀ (T : Scheme.{u}) (K L : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (b : K ⟶ L), IsIso ((P.forgetEtale T).mapDerivedCategoryPlus.map b) ↔ IsIso b)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of H2/H4 at returned head 5c4e19283f73: inline the ordinary abelian Kummer boundary followed by Sheaf.H.map of ordinaryFiniteRootMap, dropping the strict-local theorem dependency and import; use Scheme.constantZModIsoRootsOfUnitySheaf from def-sc-mu-trivialization in every root-trivialization clause. The nonzero-exponent instance packages the existing prime-power nonvanishing fact. No mathematical statement correction or new definition node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c631686d5",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Re-delivery after 5c4e RETURN. H2 repaired: κ now inlined as Sheaf.H.map (ordinaryFiniteRootMap) 1 (kummerδ₀ …) on T and T′, identical to the relativeKummerClass body; the strict-local theorem stmt_dep and its import were removed. H4 repaired: θ is the canonical Scheme.constantZModIsoRootsOfUnitySheaf (def-sc-mu-trivialization, added to stmt_deps) in the value, generator and naturality clauses; the ζ^b value clause matches the def's unit. New NeZero instance is an honest pow_ne_zero term with no added hypothesis and no competing instance. Mechanical finding: lem-asd-etale-finite-twist-pullback is genuine, since finiteEtaleTwistPullbackData = Classical.choice of nonemptiness obtained from etaleFiniteTwistPullback and the item uses its constructed r and c; PASS on that point. Statement verbatim (script). Live node still lean:null (Q12's FIX never landed), so not superseded. All other clauses unchanged from the head the previous reviewer read in full; edge cases (T empty/disconnected/nonreduced, n=e, ℓ=2, q<0) still covered. Advisory: relativeHigherForgetIso unused; base-era decls owned by nodes outside stmt_deps (finiteEtaleTateOneGenerator, moduleAbelian* comparisons, upperStarConstantSheafIso). No compile: no file changed."
+ }
+}

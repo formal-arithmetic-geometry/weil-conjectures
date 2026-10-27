@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-adic-short-complex-quotient-tower",
+ "kind": "definition",
+ "title": "Adic termwise quotient tower of a short complex and its cohomology tower",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring, $I$ an ideal, and $S=(U\\xrightarrow{u}V\\xrightarrow{v}W)$ a short complex of $R$-modules, so $vu=0$. Using the canonical quotient functors $Q_k$ and transitions $t_{m,k}$ [def-sf-adic-module-quotient-data], define a functor $\\mathbb N^{\\mathrm{op}}\\to\\operatorname{ShortComplex}(\\operatorname{Mod}_R)$ whose value at $n$ is the termwise quotient $Q_{n+1}(S)$, and whose map from $m$ to $n$ for $n\\le m$ is induced termwise by $t_{m+1,n+1}$. Define its cohomology tower by composing this functor with the short-complex homology functor: its value at $n$ is $\\ker(v_{n+1})/\\operatorname{im}(u_{n+1})$, with the maps induced by the quotient transitions. These are the existing AdicCohomology.shortComplexTower and AdicCohomology.tower definitions, with unchanged data. No Noetherian or finiteness hypothesis is part of either construction.",
+ "stmt_deps": [
+  "def-sf-adic-module-quotient-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EGU (lemma-consequence-Artin-Rees), definition of the termwise quotient complex and H_n with their canonical quotient transitions before assertion (2); indexed by n+1."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse system of termwise ideal power quotients of a short complex of modules and its cohomology tower",
+   "results": "[leansearch] OK 8 hit(s): groupCohomology.shortComplexH1; Ideal.Quotient.factorPowSucc; InverseSystem.limit; groupCohomology.H1InfRes; CategoryTheory.ShortComplex.pOpcycles_comp_moduleCatOpcyclesIso_hom; InverseSystem; Ideal.Quotient.factorPow; InverseSystem.mk",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing project definitions with existing:true; no new Lean definition. No existing definition node owns these two tower constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortComplex\", \"quotient\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing project definitions with existing:true; no new Lean definition. No existing definition node owns these two tower constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "shortComplexTower|AdicCohomology.tower",
+   "results": "msearch.py grep: [grep] OK 0 hit(s) in Mathlib. rg in lean/WeilConjectures/Algebra and lean/Sheaf/Algebra/Homology found AdicCohomology.shortComplexTower at AdicShortComplexCohomologyML.lean:101 and AdicCohomology.tower at :117; unrelated tower declarations have different namespaces and data. rg -l of these fully qualified names in dag/nodes found only lem-sfb-adic-short-complex-cohomology-ml and lem-sfb-constant-reductions-finite-projective-model, both theorem nodes. def-sf-adic-module-quotient-data owns power/quotient/projection/transition but not the tower definitions. blueprint_refs.py search \"adic short complex\": 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing project definitions with existing:true; no new Lean definition. No existing definition node owns these two tower constructions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-short-complex-adic-cohomology-limit",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Tangent comparison for N=P, before passing from the J-adic completion to its complete local factors. Supporting lemma: Supported pseudo-coherent Ext is unchanged by completing coefficients. Finite three-term Hom calculation: Artin–Rees comparison of quotient cohomology with completed cohomology. Ownership of the existing actual quotient short-complex diagram and its cohomology tower, needed to state the finite short-complex completion comparison.",
+   "via": [
+    "lem-sfb-finite-short-complex-adic-cohomology-limit",
+    "lem-sfb-supported-complex-ext-completion",
+    "lem-sfb-exal-completion-smooth-complement",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AdicShortComplexCohomologyML",
+  "declaration": "AdicCohomology.shortComplexTower",
+  "declarations": [
+   "AdicCohomology.shortComplexTower",
+   "AdicCohomology.tower"
+  ],
+  "statement": "def shortComplexTower (S : ShortComplex (ModuleCat.{u} R)) :\n    ℕᵒᵖ ⥤ ShortComplex (ModuleCat.{u} R)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Ownership record requested by the H2 return of caf70077b99e for existing plain definitions in the published module. shortComplexTower applies the canonical quotient and transitions termwise at exponent n+1; tower composes with the homology functor. No theorem conclusion or choice is used; no declaration is copied or replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f33bda0a",
+  "group": "Q53",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f33bda0a",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Third delivery, answering the c8d7952c refusal: the new node's blueprint.from.node is now null. Lean and item record are byte-identical to c8d7952c; besides that field, only the report and the regenerated blueprint-index.tsv changed. blueprint_refs.chain on live side-live plus snapshot gives ancestor None, and the computed via equals the recorded 18-node via, so the stage2_delivery check is met. Item differs from live only in lean and stmt_deps; all four stmt_deps are definition nodes, so H2 is resolved. def-sfb-adic-short-complex-quotient-tower matches the live plain defs shortComplexTower (S.map (quotient I (n+1)), mapNatTrans transition) and tower (⋙ homologyFunctor); no competing owner; lean.statements verbatim. Maths reread against Stacks 0EGU(2): Noetherian R, any I, three Module.Finite, compatible-sequence limits, component clause pins the canonical map (H_n is killed by I^(n+1); mkQ surjective), naturality for every f : S ⟶ T; edge cases I=0, I=R, U=0/v=p on ℤ. Gates: sorry only, docstrings with source and blueprint, private Artin–Rees import, no new defs, no pro-étale, report sections present. No compile (no file changed). Advisories: owner module docstrings name the theorem node and Tag 09C5; the item's stage-1 from.node differs from the resolver but is unchanged from live."
+ }
+}

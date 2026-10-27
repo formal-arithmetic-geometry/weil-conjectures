@@ -67,6 +67,13 @@ theorem inducedEndomorphism_pow
     (m : ℕ) (hm : 1 ≤ m) :
     (End.of (t.app K.a ≫ C.map K.str)) ^ m =
       repeated C G t K.a m ≫ C.map (structureComposite K m) := by
-  sorry
+  induction m, hm using Nat.le_induction with
+  | base =>
+    simp [repeated, structureComposite, power]
+  | succ m _ ih =>
+    rw [pow_succ', End.mul_def, ih]
+    simp only [repeated, structureComposite, C.map_comp, Category.assoc]
+    rw [← Category.assoc (C.map (structureComposite K m)), t.naturality]
+    simp only [Functor.comp_map, Category.assoc]
 
 end CategoryTheory.NaturalTransport

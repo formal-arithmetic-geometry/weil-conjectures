@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-field-ring-epimorphism-trivial-or-iso",
+ "kind": "statement",
+ "title": "A ring epimorphism from a field is trivial or an isomorphism",
+ "statement": "Let $k$ be a field [def-weil-field], $A$ a commutative ring with identity, and $\\varphi:k\\to A$ a unital ring homomorphism. Assume that $\\varphi$ is an epimorphism of commutative rings: for every commutative ring $B$ and every pair of unital ring homomorphisms $a,b:A\\to B$, the equality $a\\circ\\varphi=b\\circ\\varphi$ implies $a=b$. Then either $A$ is the zero ring (that is, $0=1$ in $A$), or $\\varphi$ is bijective and hence an isomorphism of rings. No finite-generation, finite-dimensionality or reducedness hypothesis is imposed on $A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04VV, lemma-epimorphism-over-field: If k to S is an epimorphism and k is a field, then S = k or S = 0."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If $0=1$ in $A$, then every $a\\in A$ satisfies $a=a\\cdot1=a\\cdot0=0$, so $A$ is the zero ring and the first alternative holds. Henceforth assume $0\\ne1$ in $A$. Give $A$ the $k$-algebra structure defined by $\\varphi$, namely $c\\cdot a=\\varphi(c)a$; the module and algebra identities follow from the ring-homomorphism identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04VV, lemma-epimorphism-over-field, proof: separate the zero algebra from the nonzero case."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nonzero-field-algebra-faithfully-flat] to the field $k$, the nonzero commutative ring $A$ and the given unital homomorphism $\\varphi$. It gives that $A$ with precisely the scalar action from step 1 is a faithfully flat $k$-module, equivalently that $\\varphi$ is faithfully flat. The result imposes no finite-dimensionality or domain condition.",
+   "uses": [
+    "lem-sfb-nonzero-field-algebra-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04VV, lemma-epimorphism-over-field, proof: \"as any nonzero algebra over k is faithfully flat\"."
+   }
+  },
+  {
+   "text": "The faithful flatness from step 2 and the ring-epimorphism hypothesis are exactly the two hypotheses of [lem-sfb-faithfully-flat-ring-epimorphism-isomorphism], with $R=k$, $S=A$ and $f=\\varphi$. Therefore $\\varphi$ is bijective. For completeness, its inverse as a function preserves addition, multiplication and the identity: applying the injective $\\varphi$ to each proposed ring identity reduces it to the corresponding identity in $A$. Thus $\\varphi$ is an isomorphism of rings, proving the second alternative.",
+   "uses": [
+    "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04VV, lemma-epimorphism-over-field, proof invoking Tag 04VU, lemma-faithfully-flat-epimorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nonzero-field-algebra-faithfully-flat",
+  "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04VV, lemma-epimorphism-over-field, first proof route through Tag 04VU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphism from a field to a nonzero commutative ring is bijective",
+   "results": "8 hits, including RingHom.rangeRestrictField_bijective, Field.localization_map_bijective, IsAlgClosed.ringHom_bijective_of_isIntegral, Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing. Read their returned types: none states this assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match: range restriction, localization, algebraic closure or finite-type hypotheses differ"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring epimorphism with source a field is surjective or its target is the zero ring",
+   "results": "8 hits, including RingHom.surjective_of_epi_of_finite and RingHom.surjective_iff_epi_and_finite (Mathlib/Algebra/Category/Ring/Epi.lean), and Algebra.instIsEpiOfIsDomainOfIsFractionRing. Read Epi.lean:44-56: module finiteness is required.",
+   "date": "2026-10-23",
+   "verdict": "no match: no module finiteness is assumed here; the fraction-ring instance has the opposite direction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"epi\", \"Field\"",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring epimorphism from a field to a nonzero commutative ring is an isomorphism",
+   "results": "8 hits: IsLocalRing.instIsLocalHomRingHomOfNontrivial; RingHom.surjective_of_epi_of_finite; CommRingCat.epi_iff_epi; Algebra.instIsEpiOfIsDomainOfIsFractionRing; IsAlgClosed.ringHom_bijective_of_isIntegral; RingHom.surjective_iff_epi_and_finite; CommRingCat.epi_iff_tmul_eq_tmul; RingHom.surjective_of_tmul_eq_tmul_of_finite. Read Algebra/Category/Ring/Epi.lean and Algebra/Algebra/Epi.lean; epi is identified with the tensor multiplication criterion but the surjectivity results require module finiteness.",
+   "date": "2026-10-23",
+   "verdict": "no match: no extra finiteness or algebraic-closure hypothesis available"
+  },
+  {
+   "tool": "grep",
+   "query": "epi|[Ff]ield",
+   "results": "Directory Algebra/Category/Ring. 22 hits: Epi.lean:26 CommRingCat.epi_iff_epi, :44 RingHom.surjective_of_epi_of_finite, :51 RingHom.surjective_iff_epi_and_finite; EqualizerPushout.lean:86 regularEpiOfFaithfullyFlat (on the opposite category). Read the ring-epi source: no field-specific conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match: the finite-module theorem cannot be specialized in one line without proving finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "isEpi|IsEpi|[Ff]ield",
+   "results": "Directory Algebra/Algebra. 25 hits, including Epi.lean:29 Algebra.IsEpi, :33 isEpi_iff_forall_one_tmul_eq and :52 reference to the finite-module theorem. Read Epi.lean:1-90, including the finite-module hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "no match: the tensor criterion alone does not prove the field classification in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat epimorphism of commutative rings is an isomorphism",
+   "results": "8 hits: RingHom.FaithfullyFlat.codescendsAlong_bijective, codescendsAlong_surjective, respectsIso, codescendsAlong_injective, of_bijective, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, RingHom.FaithfullyFlat and RingHom.FaithfullyFlat.injective.",
+   "date": "2026-10-23",
+   "verdict": "no match: these are descent, injectivity or flatness statements, not the classification"
+  },
+  {
+   "tool": "grep",
+   "query": "epimorph|IsEpi|isEpi",
+   "results": "Directory RingTheory/Flat. OK, 0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphism from a field to a nonzero commutative ring is bijective",
+   "results": "8 hits; directory (remote service). Rechecked actual current hits; existing detailed searches are retained.",
+   "date": "2026-10-24",
+   "verdict": "no match: no extra finiteness, localization or algebraic-closure hypothesis is available"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"epi\", \"Field\"",
+   "results": "0 hits; directory (remote service). Rechecked actual current hits; existing detailed searches are retained.",
+   "date": "2026-10-24",
+   "verdict": "no match: no extra finiteness, localization or algebraic-closure hypothesis is available"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring epimorphism from a field to a nonzero commutative ring is an isomorphism",
+   "results": "8 hits; directory (remote service). Rechecked actual current hits; existing detailed searches are retained.",
+   "date": "2026-10-24",
+   "verdict": "no match: no extra finiteness, localization or algebraic-closure hypothesis is available"
+  },
+  {
+   "tool": "grep",
+   "query": "epimorph|IsEpi|isEpi",
+   "results": "0 hits; directory RingTheory/Flat. Rechecked actual current hits; existing detailed searches are retained.",
+   "date": "2026-10-24",
+   "verdict": "no match: no extra finiteness, localization or algebraic-closure hypothesis is available"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-monomorphism-into-field-coproduct",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 03DP proof, algebraic step: the cited algebra-lemma-epimorphism-over-field (Tag 04VV) classifies the coordinate ring of a nonempty monomorphic field component. Supports the inherited direct-image/locally-separated-decent ancestry.",
+   "via": [
+    "lem-sfb-monomorphism-into-field-coproduct",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-ring-epimorphism-trivial-or-iso",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and followed the first proof of Stacks 04VV: dispose of the zero algebra, use faithful flatness of the nonzero field algebra, then apply the general faithfully-flat ring-epimorphism theorem 04VU. Created two independent smaller inputs, one a Mathlib leaf via the nontrivial-free-module instance; the general ring theorem remains statement-only. Checked zero, identity, product, nilpotent and infinite-dimensional examples, all citation statements, sources and recorded search results.",
+  "blueprint": "Preserved the inherited null nearest-blueprint ancestor and via chain reported by blueprint_refs.py ancestor. This split supplies the Tag 04VV algebraic step in Tag 03DP, hence the inherited locally-separated/direct-image prerequisite. Read latest sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and its direct-images proof (3); no unit or chapter route changed. Whole-blueprint searches for epimorphism, 04VV, 04VU, faithfully flat epimorphism, nonzero algebra, nonzero field algebra and faithfully flat module found no statement to reuse."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-a90c60ca8",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-a90c60ca8 (reviewer sub-agent of L); spot-checked: I read the full delivery: the item, both new nodes, def-weil-field, def-weil-pbc-faithfully-flat-ring-map, the citer lem-sfb-monomorphism-into-field-coproduct, and Stacks algebra.tex Tags 04VU (lemma-faithfully-flat-epimorphism) and 04VV (lemma-epimorphism-over-field). The item statement is unchanged and matches 04VV hypothesis by hypothesis. The proof follows 04VV's first proof. Step 1 is elementary: the case 0=1 gives A=0, otherwise the scalar action is φ(c)a. Step 2 cites lem-sfb-nonzero-field-algebra-faithfully-flat, the source's parenthetical. Step 3 cites lem-sfb-faithfully-flat-ring-epimorphism-isomorphism (04VU) with R=k, S=A, f=φ. proof_deps equals the union of uses and there is no cycle. The field-algebra node is a valid B8 one-line Mathlib leaf; I read the Mathlib source myself: FaithfullyFlat/Basic.lean:209-210 (instance [Nontrivial M] [Module.Free R M], auto-named instOfNontrivialOfFree), the inferred instance Module.Free.of_divisionRing at VectorSpace.lean:156, and RingHom/FaithfullyFlat.lean:25-33. The 04VU node is statement-only (B1 OK), self-contained, and true via 04VR(3). It holds in the edge cases 0→0 and the identity, and it correctly excludes R→R/I and R→R_f. It is a general ingredient, not a restated clause of the item (D1/D2 OK). rg -L over the snapshot DAG for 04VU, 04VV, the labels and the key phrases found no duplicate; lem-pur-field-vector-space-tensor-nontrivial and the trf flat-epimorphism nodes state other things. Both new nodes are in the same unit, there are no tool_uses and no SGA citations, and the blueprint fields are inherited consistently. The citer's use is compatible with the statement. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FieldRingEpimorphism",
+  "declaration": "RingHom.zero_eq_one_or_bijective_of_epi",
+  "file": "lean/Sheaf/RingTheory/FieldRingEpimorphism.lean",
+  "statement": "theorem zero_eq_one_or_bijective_of_epi {k : Type u} [Field k] {A : Type v} [CommRing A] (φ : k →+* A) (hφ : ∀ (B : Type (max u v)) [CommRing B] (a b : A →+* B), a.comp φ = b.comp φ → a = b) : (0 : A) = 1 ∨ Function.Bijective φ",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5eefd4a5d",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read node (identical to live apart from new lean record), Stacks 04VV/04VU (algebra.tex:25976-25998), module, report (Worker report + Second reading by Q22 present). Field k = Mathlib Field (def-weil-field match); CommRing A without Nontrivial keeps zero ring; φ : k →+* A; epi hypothesis over test rings in Type (max u v) is no stronger than the node's and is non-vacuous (A⊗_kA fits); the only citer (monomorphism-into-field-coproduct) proves unrestricted cancellation, so it supplies it. Conclusion (0:A)=1 ∨ Bijective φ matches 'zero ring or bijective hence iso'. lean.statement verbatim; stmt_deps complete; proof-dep Mathlib leaf FaithfullyFlat/Basic.lean:209 verified; no clash for RingHom.zero_eq_one_or_bijective_of_epi or the module path; docstrings carry source, blueprint id and the 3 proof steps; only sorry, no defs. Edge cases 0, id, k×k, k[ε]/ε², field extensions OK. No changes, no compile."
+ }
+}

@@ -1,0 +1,191 @@
+{
+ "id": "lem-dl-a1-residue-action-krull-continuity",
+ "kind": "statement",
+ "title": "Krull topology under algebraic base extension and continuity of residue actions",
+ "statement": "Let $K\\subseteq F\\subseteq\\Omega$ be fields with $\\Omega/K$ algebraic. Give their automorphism groups the Krull topologies, whose identity neighbourhood bases are pointwise stabilizers of finite subsets of $\\Omega$. Then the underlying-automorphism identification\n$$ \\operatorname{Aut}_F(\\Omega)\\xrightarrow{\\sim}\\{g\\in\\operatorname{Aut}_K(\\Omega):g|_F=1\\} $$\nis a homeomorphism when the right side has the subspace topology. No finiteness of $F/K$ is required. Moreover, let $\\Gamma\\leq\\operatorname{Aut}_K(\\Omega)$ have the subspace topology and preserve a local subring $T\\subseteq\\Omega$. Put $E=T/\\mathfrak m_T$, let $\\kappa$ be a subfield of $E$ fixed by its induced residue action, choose a separable closure $\\kappa_s/\\kappa$ [def-pd-separable-closure], and let $j:\\kappa_s\\hookrightarrow E$ be a $\\kappa$-embedding whose image is preserved by that action. The homomorphism $r:\\Gamma\\to\\operatorname{Gal}(\\kappa_s/\\kappa)$ characterized by $j(r(g)(a))=\\overline g(j(a))$ is continuous for the Krull topology on its codomain. For any finite Galois $e/\\kappa$ in $\\kappa_s$, generators $a_1,\\ldots,a_s$ of $e/\\kappa$, and lifts $z_i\\in T$ of $j(a_i)$, the open subgroup $\\{g\\in\\Gamma:g(z_i)=z_i\\text{ for all }i\\}$ is contained in $r^{-1}(\\operatorname{Gal}(\\kappa_s/e))$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSW, lemma-identify-inertia, topological interpretation of the decomposition and residue homomorphisms; fields.tex Tag 0BMJ, lemma-galois-profinite; finite-generator continuity argument."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=\\operatorname{Aut}_K(\\Omega)$ and $H=\\{g\\in G:g|_F=1\\}$. An $F$-automorphism is exactly a $K$-automorphism in $H$, with the same composition and inverse. For a finite subset $S\\subset\\Omega$, its pointwise stabilizer in $\\operatorname{Aut}_F(\\Omega)$ corresponds exactly to $H\\cap\\operatorname{Stab}_G(S)$. At every $h\\in H$, the corresponding basic neighbourhoods on both sides impose the identical equations $g(s)=h(s)$ for $s\\in S$. Thus the bijection and its inverse take basic open sets to basic open sets and are continuous. This uses no bound on $[F:K]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BMJ, lemma-galois-profinite, induced topology from finite evaluation conditions; elementary elaboration for this item."
+   }
+  },
+  {
+   "text": "Write $q:T\\to E$ for the quotient map. Every $g\\in\\Gamma$ restricts to an automorphism of $T$: preservation also holds for $g^{-1}$. Such an automorphism preserves units, hence preserves the set of nonunits $\\mathfrak m_T$. Consequently $\\overline g(q(z))=q(g(z))$ is well defined, with inverse induced by $g^{-1}$. The hypothesis that $j(\\kappa_s)$ is preserved, applied also to $g^{-1}$, lets us define $r(g)=j^{-1}\\circ\\overline g\\circ j$ on $\\kappa_s$. It fixes $\\kappa$ by hypothesis, and $\\overline{gh}=\\overline g\\circ\\overline h$ gives $r(gh)=r(g)r(h)$ and the required characterization. Here $j^{-1}$ denotes only the inverse on the image of $j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, lemma-identify-inertia, residue action; elementary quotient and restriction construction."
+   }
+  },
+  {
+   "text": "For the stated finite Galois field $e$, let $H_z=\\{g\\in\\Gamma:g(z_i)=z_i\\ \\forall i\\}$. This is a subgroup and is open: it is the intersection of $\\Gamma$ with the basic finite pointwise stabilizer in $G$. If $g\\in H_z$, then $j(r(g)(a_i))=q(g(z_i))=q(z_i)=j(a_i)$, so injectivity of $j$ gives $r(g)(a_i)=a_i$. A $\\kappa$-automorphism fixing the field generators $a_i$ fixes their sums, products, and inverses of nonzero elements, hence every element of $e$. This proves $H_z\\subseteq r^{-1}(\\operatorname{Gal}(\\kappa_s/e))$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BMJ, lemma-galois-profinite, induced topology from finite evaluation conditions; elementary elaboration for this item."
+   }
+  },
+  {
+   "text": "To check continuity without a cofinality theorem for finite Galois subextensions, take any finite subset $A\\subset\\kappa_s$ and choose $z_a\\in T$ with $q(z_a)=j(a)$ for every $a\\in A$; these lifts exist by the definition of $E=T/\\mathfrak m_T$. Its finite pointwise stabilizer $H_A$ in $\\Gamma$ is open, and the same quotient calculation gives $r(H_A)\\subseteq W_A$, where $W_A$ fixes $A$ pointwise. At any $g\\in\\Gamma$, $gH_A$ is the basic open set defined by $h(z_a)=g(z_a)$ for all $a\\in A$, and $r(gH_A)\\subseteq r(g)W_A$. The sets $r(g)W_A$ form a neighbourhood basis at $r(g)$ in the specified Krull topology. Every such neighbourhood therefore has an open neighbourhood of $g$ mapped into it. This is continuity at every $g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BMJ, lemma-galois-profinite, induced topology from finite evaluation conditions; elementary elaboration for this item."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 0BMJ, lemma-galois-profinite, finite evaluation topology; elementary finite-lift elaboration of the residue map in pione.tex Tag 0BSW, lemma-identify-inertia."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The residue homomorphism from automorphisms of an algebraic extension preserving a local subring to the Galois group of a separable residue closure is continuous for Krull topologies",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"InfiniteGalois.algEquivToLimit_continuous\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K],\\n  Continuous ⇑(InfiniteGalois.algEquivToLimit k K)\", \"doc\": \"The algebraic equivalence from the infinite Galois group $\\\\text{Gal}(K/k)$ to the limit of the profinite Galois group functor is continuous with respect to the Krull topology on $\\\\text{Gal}(K/k)$ and \"}\n  {\"name\": \"IsLocalRing.ResidueField.mapAut\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → [inst_1 : IsLocalRing R] → RingAut R →* RingAut (IsLocalRing.ResidueField R)\", \"doc\": \"For a commutative local ring $ R $, this defines a group homomorphism from the automorphism group $ \\\\text{Aut}(R) $ to the automorphism group of its residue field $ R/\\\\mathfrak{m} $ (where $ \\\\mathfrak\"}\n  {\"name\": \"InfiniteGalois.restrictNormalHom_continuous\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (L : IntermediateField k K)\\n  [inst_3 : Normal k ↥L], Continuous ⇑(AlgEquiv.restrictNormalHom ↥L)\", \"doc\": \"The restriction homomorphism from the Galois group $\\\\text{Gal}(K/k)$ to $\\\\text{Gal}(L/k)$, where $L$ is a normal intermediate field between $k$ and $K$, is continuous with respect to the Krull topolog\"}\n  {\"name\": \"IsLocalRing.ResidueField.mapAut_apply\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R] (f : R ≃+* R),\\n  IsLocalRing.ResidueField.mapAut f = IsLocalRing.ResidueField.mapEquiv f\", \"doc\": \"For any commutative local ring $ R $ and ring automorphism $ f : R ≃+* R $, the automorphism induced on the residue field $ R/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal) via th\"}\n  {\"name\": \"InfiniteGalois.mulEquivToLimit_symm_continuous\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K],\\n  Continuous ⇑(InfiniteGalois.mulEquivToLimit k K).symm\", \"doc\": \"The inverse of the isomorphism between the infinite Galois group $\\\\text{Gal}(K/k)$ and the inverse limit of the profinite Galois groups of its finite Galois subextensions is continuous with respect to\"}\n  {\"name\": \"instIsTopologicalGroupAlgEquiv\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L], IsTopologicalGroup Gal(L/K)\", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ equipped with the Krull topology is a topological group. The Krull topology is generated by subgroups fixing finite intermediate fields between $K$ and $L$, ensuring\"}\n  {\"name\": \"cyclotomicCharacter.continuous\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (K : Type u_1) (L : Type u_2) [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L], Continuous ⇑((cyclotomicCharacter L p).comp (MulSemiringAction.toRingAut Gal(L/K) L))\", \"doc\": \"The cyclotomic character homomorphism from the Galois group $\\\\mathrm{Gal}(L/K)$ to the multiplicative group of $p$-adic integers $\\\\mathbb{Z}_p^\\times$ is continuous with respect to the Krull topology o\"}\n  {\"name\": \"Field.instTopologicalSpaceAbsoluteGaloisGroup\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [inst : Field K] → TopologicalSpace (Field.absoluteGaloisGroup K)\", \"doc\": \"The absolute Galois group of a field $ K $ is equipped with the Krull topology, which is generated by a basis of subgroups fixing finite intermediate field extensions between $ K $ and its algebraic c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "loogle",
+   "query": "KrullTopology, Continuous",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'KrullTopology'",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ontinuous.*[Rr]esidue|[Rr]esidue.*[Cc]ontinuous|fixingSubgroupEquiv",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/LSeries/Nonvanishing.lean\", \"line\": \"185\", \"text\": \"  · simpa only [G, continuousAt_update_same] using riemannZeta_residue_one\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/PrimesInAP.lean\", \"line\": \"39\", \"text\": \"   see `ArithmeticFunction.vonMangoldt.continuousOn_LFunctionResidueClassAux`.\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/PrimesInAP.lean\", \"line\": \"56\", \"text\": \"* `ArithmeticFunction.vonMangoldt.continuousOn_LFunctionResidueClassAux` (see above).\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/PrimesInAP.lean\", \"line\": \"266\", \"text\": \"lemma continuousOn_LFunctionResidueClassAux' :\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/PrimesInAP.lean\", \"line\": \"267\", \"text\": \"    ContinuousOn (LFunctionResidueClassAux a)\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/PrimesInAP.lean\", \"line\": \"286\", \"text\": \"is continuous on `re s ≥ 1` except for a simple pole at `s = 1` with residue `(q.totient)⁻¹`.\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"201\", \"text\": \"    IntermediateField.fixingSubgroupEquiv F\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"268\", \"text\": \"def fixingSubgroupEquiv : fixingSubgroup K ≃* Gal(E/K) where\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"282\", \"text\": \"  exact (fixingSubgroupEquiv (fixedField H)).toEquiv.symm\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"289\", \"text\": \"  (MulEquiv.subgroupCongr (fixingSubgroup_fixedField H).symm).trans (fixingSubgroupEquiv _)\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"322\", \"text\": \"    Nat.card_congr (IntermediateField.fixingSubgroupEquiv K).toEquiv]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"99\", \"text\": \"      have := hx ((IntermediateField.fixingSubgroupEquiv L).symm σ)\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/MultiplePrimitivity.lean\", \"line\": \"66\", \"text\": \"    (fixingSubgroupEquivFixingSubgroup rfl).surjective\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"38\", \"text\": \"  * `SubMulAction.fixingSubgroupEquivFixingSubgroup`:\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"253\", \"text\": \"def fixingSubgroupEquivFixingSubgroup (hg : g • t = s) :\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"259\", \"text\": \"theorem fixingSubgroupEquivFixingSubgroup_coe_apply (hg : g • t = s) (x : fixingSubgroup M t) :\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"260\", \"text\": \"    (fixingSubgroupEquivFixingSubgroup hg x : M) = MulAut.conj g x := rfl\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"268\", \"text\": \"    ofFixingSubgroup M t →ₑ[fixingSubgroupEquivFixingSubgroup hg] ofFixingSubgroup M s where\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Use lifts of finite residue field generators and finite point stabilizers to prove continuity of a residue action between Krull topological Galois groups",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"krullTopology\", \"module\": \"Mathlib.FieldTheory.KrullTopology\", \"type\": \"(K L : Type*) [Field K] [Field L] [Algebra K L] : TopologicalSpace Gal(L/K)\", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ is equipped with the Krull topology, which is generated by a filter basis consisting of subgroups that fix finite intermediate fields between $K$ and $L$. Each basis\"}\n  {\"name\": \"galBasis\", \"module\": \"Mathlib.FieldTheory.KrullTopology\", \"type\": \"(K L : Type*) [Field K] [Field L] [Algebra K L] : FilterBasis Gal(L/K)\", \"doc\": \"The filter basis for the Krull topology on the Galois group $\\\\text{Gal}(L/K)$, consisting of subgroups that fix finite intermediate fields between $K$ and $L$. Each basis element is the subgroup of au\"}\n  {\"name\": \"instIsTopologicalGroupAlgEquiv\", \"module\": \"Mathlib.FieldTheory.KrullTopology\", \"type\": \"(K L : Type*) [Field K] [Field L] [Algebra K L] : IsTopologicalGroup Gal(L/K)\", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ equipped with the Krull topology is a topological group. The Krull topology is generated by subgroups fixing finite intermediate fields between $K$ and $L$, ensuring\"}\n  {\"name\": \"galGroupBasis\", \"module\": \"Mathlib.FieldTheory.KrullTopology\", \"type\": \"(K L : Type*) [Field K] [Field L] [Algebra K L] : GroupFilterBasis Gal(L/K)\", \"doc\": \"The structure equipping the Galois group $\\\\text{Gal}(L/K)$ with the Krull topology, defined by a filter basis consisting of subgroups that fix finite intermediate fields between $K$ and $L$. Each basi\"}\n  {\"name\": \"InfiniteGalois.mulEquivToLimit_symm_continuous\", \"module\": \"Mathlib.FieldTheory.Galois.Profinite\", \"type\": \"[IsGalois k K] : Continuous (mulEquivToLimit k K).symm\", \"doc\": \"The inverse of the isomorphism between the infinite Galois group $\\\\text{Gal}(K/k)$ and the inverse limit of the profinite Galois groups of its finite Galois subextensions is continuous with respect to\"}\n  {\"name\": \"InfiniteGalois.profiniteGalGrp\", \"module\": \"Mathlib.FieldTheory.Galois.Profinite\", \"type\": \"[IsGalois k K] : ProfiniteGrp\", \"doc\": \"The Galois group $\\\\text{Gal}(K/k)$ of an infinite Galois extension $K/k$, equipped with the Krull topology, is constructed as an object in the category of profinite groups. This topology ensures the g\"}\n  {\"name\": \"krullTopology_discreteTopology_of_finiteDimensional\", \"module\": \"Mathlib.FieldTheory.KrullTopology\", \"type\": \"(K L : Type*) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L] : DiscreteTopology Gal(L/K)\", \"doc\": \"For any finite field extension $ L/K $, the Krull topology on the Galois group $ \\text{Gal}(L/K) $ is discrete. This means that every subset of the Galois group is open when the extension has finite di\"}\n  {\"name\": \"Field.instTopologicalSpaceAbsoluteGaloisGroup\", \"module\": \"Mathlib.FieldTheory.AbsoluteGaloisGroup\", \"type\": \": TopologicalSpace (G_K K)\", \"doc\": \"The absolute Galois group of a field $ K $ is equipped with the Krull topology, which is generated by a basis of subgroups fixing finite intermediate field extensions between $ K $ and its algebraic c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixingSubgroup\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"fixingSubgroup\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) {α : Type u_2} [Group M] [MulAction M α] (s : Set α) : Subgroup M\", \"doc\": \"The subgroup fixing a set under a `MulAction`.\"}\n  {\"name\": \"fixingSubgroup_empty\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) (α : Type u_2) [Group M] [MulAction M α] : fixingSubgroup M ∅ = ⊤\", \"doc\": \"\"}\n  {\"name\": \"fixingSubgroup_antitone\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) (α : Type u_2) [Group M] [MulAction M α] : Antitone (fixingSubgroup M)\", \"doc\": \"\"}\n  {\"name\": \"fixingSubgroup_iUnion\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) (α : Type u_2) [Group M] [MulAction M α] {ι : Sort u_3} {s : ι → Set α} : fixingSubgroup M (⋃ i, s i) = ⨅ i, fixingSubgroup M (s i)\", \"doc\": \"Fixing subgroup of iUnion is intersection\"}\n  {\"name\": \"fixingSubgroup_union\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) (α : Type u_2) [Group M] [MulAction M α] {s t : Set α} : fixingSubgroup M (s ∪ t) = fixingSubgroup M s ⊓ fixingSubgroup M t\", \"doc\": \"Fixing subgroup of union is intersection\"}\n  {\"name\": \"mem_fixingSubgroup_iff_subset_fixedBy\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) {α : Type u_2} [Group M] [MulAction M α] {s : Set α} {m : M} : m ∈ fixingSubgroup M s ↔ s ⊆ MulAction.fixedBy α m\", \"doc\": \"\"}\n  {\"name\": \"mem_fixingSubgroup_compl_iff_movedBy_subset\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) {α : Type u_2} [Group M] [MulAction M α] {s : Set α} {m : M} : m ∈ fixingSubgroup M sᶜ ↔ (MulAction.fixedBy α m)ᶜ ⊆ s\", \"doc\": \"\"}\n  {\"name\": \"mem_fixingSubgroup_iff\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) {α : Type u_2} [Group M] [MulAction M α] {s : Set α} {m : M} : m ∈ fixingSubgroup M s ↔ ∀ y ∈ s, m • y = y\", \"doc\": \"\"}\n  {\"name\": \"fixingSubgroup_fixedPoints_gc\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) (α : Type u_2) [Group M] [MulAction M α] : GaloisConnection (⇑OrderDual.toDual ∘ fixingSubgroup M) ((fun P => MulAction.fixedPoints (↥P) α) ∘ ⇑OrderDual.ofDual)\", \"doc\": \"The Galois connection between fixing subgroups and fixed points of a group action\"}\n  {\"name\": \"orbit_fixingSubgroup_compl_subset\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) (α : Type u_2) [Group M] [MulAction M α] {s : Set α} {a : α} (a_in_s : a ∈ s) : MulAction.orbit (↥(fixingSubgroup M sᶜ)) a ⊆ s\", \"doc\": \"The orbit of the fixing subgroup of `sᶜ` (i.e. the moving subgroup of `s`) is a subset of `s`\"}\n  {\"name\": \"IsFractionRing.fixingSubgroup_range_algebraMap\", \"module\": \"Mathlib.RingTheory.Localization.FractionRing\", \"type\": \" (G : Type u_10) {A : Type u_11} {B : Type u_12} (K : Type u_13) (L : Type u_14) [Group G] [CommRing A] [CommRing B] [MulSemiringAction G B] [Algebra A B] [Field K] [Field L] [Algebra K L] [Algebra A K] [Algebra B L] [Algebra A L] [IsFractionRing A K] [IsFractionRing B L] [IsScalarTower A K L] [IsSc\", \"doc\": \"If `K` is the fraction field of `A` and `L` is the fraction field of `B` with `A ⊆ B`,\\nthen for `G` acting on `B` and `L`, the fixing subgroup of `A` in `B` equals the fixing subgroup\\nof `K` in `L`.\"}\n  {\"name\": \"IntermediateField.fixingSubgroup\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_2} [Field E] [Algebra F E] (K : IntermediateField F E) : Subgroup Gal(E/F)\", \"doc\": \"The subgroup fixing an intermediate field.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "grep",
+   "query": "fixingSubgroupEquiv|continuous.*residue|residue.*continuous|mapAut",
+   "results": "25 hits; Mathlib/NumberTheory/LSeries/Nonvanishing.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/FieldTheory/Galois/IsGaloisGroup.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: source inspection finds only algebraic fixing-subgroup equivalences, ordinary field restrictions, Krull topology infrastructure, and algebraic residue actions; none states the whole local-residue continuity comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of automorphisms fixing an intermediate field is a topological embedding for the Krull topology and residue actions of local ring stabilizers are continuous",
+   "results": "8 hits; InfiniteGalois.fixingSubgroup_isClosed, FiniteGaloisIntermediateField.mem_fixingSubgroup_iff, IntermediateField.fixingSubgroup, krullTopology, IntermediateField.fixingSubgroup_isOpen, IntermediateField.fixingSubgroup_isClosed, instIsTopologicalGroupAlgEquiv, Field.instTopologicalSpaceAbsoluteGaloisGroup",
+   "date": "2026-10-24",
+   "verdict": "no match: source inspection finds only algebraic fixing-subgroup equivalences, ordinary field restrictions, Krull topology infrastructure, and algebraic residue actions; none states the whole local-residue continuity comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixingSubgroup\", Continuous",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: source inspection finds only algebraic fixing-subgroup equivalences, ordinary field restrictions, Krull topology infrastructure, and algebraic residue actions; none states the whole local-residue continuity comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The residue action of a group of automorphisms preserving a local subring of an algebraic field extension is continuous for Krull topologies, by lifting finite subsets of the residue field",
+   "results": "8 hits; InfiniteGalois.algEquivToLimit_continuous, instIsTopologicalGroupAlgEquiv, krullTopology, cyclotomicCharacter.continuous, InfiniteGalois.restrictNormalHom_continuous, InfiniteGalois.mulEquivToLimit_symm_continuous, Field.instTopologicalSpaceAbsoluteGaloisGroup, IsLocalRing.ResidueField.instMulSemiringAction",
+   "date": "2026-10-24",
+   "verdict": "no match: source inspection finds only algebraic fixing-subgroup equivalences, ordinary field restrictions, Krull topology infrastructure, and algebraic residue actions; none states the whole local-residue continuity comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "fixingSubgroupEquiv|restrictNormalHom_continuous|mapAut|stabilizer_isOpen",
+   "results": "10 hits; Mathlib/FieldTheory/Galois/IsGaloisGroup.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/Galois/Profinite.lean, Mathlib/FieldTheory/Galois/Profinite.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: source inspection finds only algebraic fixing-subgroup equivalences, ordinary field restrictions, Krull topology infrastructure, and algebraic residue actions; none states the whole local-residue continuity comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For fields K contained in F contained in an algebraic extension Omega, Aut over F with its Krull topology is homeomorphic to the subgroup of Aut over K fixing F, without assuming F is finite over K",
+   "results": "8 hits; InfiniteGalois.algEquivToLimit_continuous, InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup, instIsTopologicalGroupAlgEquiv, IntermediateField.fixingSubgroupEquiv, krullTopology, InfiniteGalois.IntermediateFieldEquivClosedSubgroup, InfiniteGalois.limitToAlgEquiv, InfiniteGalois.mk_toAlgEquivAux",
+   "date": "2026-10-24",
+   "verdict": "no match: source inspection finds only algebraic fixing-subgroup equivalences, ordinary field restrictions, Krull topology infrastructure, and algebraic residue actions; none states the whole local-residue continuity comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-henselian-global-inertia-comparison",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph, equivalence of extension across infinity with trivial inertia: normal-local comparison used through lem-dl-a1-weil-kernel-inertia; returned comparison proof steps 15 and continuity portion of 16.",
+   "via": [
+    "lem-dl-a1-henselian-global-inertia-comparison",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-dl-a1-residue-action-krull-continuity",
+  "worker": "stage1",
+  "summary": "Q97 writes four elementary arguments from the finite-stabilizer topology and quotient definitions: identification of neighbourhoods for arbitrary intermediate F, construction of the residue homomorphism, finite-generator stabilizer containment, and continuity at every point using lifts of arbitrary finite residue subsets. No new nodes are needed; no finite-Galois-cofinality, primitive-element, compactness, or henselian lifting theorem is invoked. The statement is unchanged. The upstream continuous equivalence covers only the first clause, not the whole item.",
+  "blueprint": "The current rem-dl-a1-conventions paragraph equating extension across infinity with trivial inertia; this item supplies the topological residue comparison used through lem-dl-a1-weil-kernel-inertia and lem-dl-a1-henselian-global-inertia-comparison. It does not change the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-2cacddeba",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-2cacddeba (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, the parent's use and the sources. Delivery shape: one commit, item plus report only (with Review by Q97), no new nodes. The statement is unchanged and covers what parent lem-dl-a1-henselian-global-inertia-comparison step 5 takes from it: the Krull identifications for K^h/K^sh and continuity of the residue map of D on T=B_q. Steps check out: (1) for arbitrary F the basic neighbourhoods {g(s)=h(s), S finite} are the same sets on both sides, so the identification is a homeomorphism; (2) g preserves T and units, hence m_T, giving a well-defined residue automorphism; preservation of j(kappa_s) by g and g^{-1} makes r(g) bijective; kappa fixed pointwise makes it kappa-linear; it is a homomorphism; (3) H_z = Gamma ∩ Stab(z_i) is open; reducing g(z_i)=z_i and injectivity of j show r(g) fixes the a_i, hence e; (4) lifts of a finite A exist because T→E is surjective, r(gH_A) ⊆ r(g)W_A, so r is continuous at every point. All four steps are genuinely elementary and uses=[] is correct. Sources: fields.tex 0BMJ lemma-galois-profinite (l.2859) and pione.tex 0BSW lemma-identify-inertia (l.2883), tags checked in tags/tags; they are cited as motivation and the proof is correctly marked agent-written. Duplicate check: lem-exc-fixing-subgroup-krull-topology covers only clause 1 and only for finite L; lem-real-henselian-residue-galois-action (finite-field henselian) and lem-wf-strict-henselian-fraction-inertia (DVR) are special cases; none states the item. Small cases tested: F=K, F=Omega, Gamma trivial, T=Omega, A empty. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.ResidueActionKrullContinuity",
+  "declaration": "IntermediateField.residue_action_krull_continuity",
+  "file": "lean/Sheaf/FieldTheory/ResidueActionKrullContinuity.lean",
+  "statement": "theorem residue_action_krull_continuity (K : Type u) (Ω : Type v) [Field K] [Field Ω] [Algebra K Ω] [Algebra.IsAlgebraic K Ω] (F : IntermediateField K Ω) : (Continuous F.fixingSubgroupEquiv ∧ Continuous F.fixingSubgroupEquiv.symm) ∧ ∀ (Γ : Subgroup (Ω ≃ₐ[K] Ω)) (T : Subring Ω) [IsLocalRing T] (hT : ∀ (g : Γ) (x : Ω), x ∈ T ↔ (g : Ω ≃ₐ[K] Ω) x ∈ T) (k : Type w) [Field k] [Algebra k (IsLocalRing.ResidueField T)] (ks : Type z) [Field ks] [Algebra k ks] [IsSepClosure k ks] (j : ks →ₐ[k] IsLocalRing.ResidueField T), (∀ (g : Γ) (a : k), IsLocalRing.ResidueField.mapEquiv ((g : Ω ≃ₐ[K] Ω).toRingEquiv.restrict T T (hT g)) (algebraMap k (IsLocalRing.ResidueField T) a) = algebraMap k (IsLocalRing.ResidueField T) a) → (∀ g : Γ, Set.MapsTo (IsLocalRing.ResidueField.mapEquiv ((g : Ω ≃ₐ[K] Ω).toRingEquiv.restrict T T (hT g))) (Set.range j) (Set.range j)) → ∃ r : Γ →* (ks ≃ₐ[k] ks), (∀ (g : Γ) (a : ks), j (r g a) = IsLocalRing.ResidueField.mapEquiv ((g : Ω ≃ₐ[K] Ω).toRingEquiv.restrict T T (hT g)) (j a)) ∧ Continuous r ∧ ∀ (e : IntermediateField k ks) [FiniteDimensional k e] [IsGalois k e] (n : ℕ) (a : Fin n → e), IntermediateField.adjoin k (Set.range fun i ↦ (a i : ks)) = e → ∀ z : Fin n → T, (∀ i : Fin n, IsLocalRing.residue T (z i) = j (a i : ks)) → ∃ U : OpenSubgroup Γ, (∀ g : Γ, g ∈ U ↔ ∀ i : Fin n, (g : Ω ≃ₐ[K] Ω) (z i : Ω) = (z i : Ω)) ∧ U.toSubgroup ≤ e.fixingSubgroup.comap r",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51bd1fbbc",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Statement matches node clause by clause. Clause 1: continuity of F.fixingSubgroupEquiv and its inverse for arbitrary F with Ω/K algebraic; the upstream fixingSubgroupContinuousMulEquiv confirms it is true and on the right map. Residue action is the canonical ResidueField.mapEquiv of RingEquiv.restrict; κ is an injective algebra into the residue field and fixed by the action; κ_s via IsSepClosure (the dep def-pd-separable-closure); preservation of the image of j stated as MapsTo; r exists with the j-characterization (unique since j is injective), Continuous r; the open subgroup is exactly the lift stabilizer and lies in comap r of e.fixingSubgroup. Mathlib Krull topology equals the finite-stabilizer topology for algebraic extensions. Statement field verbatim; node changed only in lean; report has both sections; one sorry, no new defs, universes independent; edge cases F=K, F=Ω, trivial Γ, T a field, n=0 covered. No duplicate of the full statement (upstream and lem-exc cover clause 1 only). No compile needed (no change)."
+ }
+}

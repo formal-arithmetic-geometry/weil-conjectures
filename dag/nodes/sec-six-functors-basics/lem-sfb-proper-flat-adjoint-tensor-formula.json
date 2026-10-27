@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-proper-flat-adjoint-tensor-formula",
+ "kind": "statement",
+ "title": "Tensor formula for the right adjoint of a proper flat morphism",
+ "statement": "Let $S$ be a quasi-compact quasi-separated scheme and $f:X\\to S$ proper, flat and of finite presentation [def-pc-scheme], [def-weil-pbc-scheme-conventions], [def-weil-proper-morphism], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation]. Let $a$ be a supplied right adjoint to $Rf_*$ on unbounded quasi-coherent derived categories [def-pc-derived-category], [def-pc-derived-direct-image], with counit $\\epsilon$. For every $M\\in D_{\\mathrm{QCoh}}(S)$ the canonical comparison\n$$Lf^*M\\otimes^{\\mathbf L}_{\\mathcal O_X}a(\\mathcal O_S)\\longrightarrow a(M)$$\nis an isomorphism [def-pc-derived-pullback], [def-pc-scheme-derived-tensor-structure]. The comparison is the $Rf_*\\dashv a$ adjunct of the projection-formula composite $Rf_*(Lf^*M\\otimes^{\\mathbf L}a(\\mathcal O_S))\\simeq M\\otimes^{\\mathbf L}Rf_*a(\\mathcal O_S)\\xrightarrow{1\\otimes\\epsilon_{\\mathcal O_S}}M$. Thus the induced adjunction counit for the tensor functor is exactly this composite. No boundedness or Noetherian hypothesis is made.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E4K (lemma-compare-with-pullback-flat-proper) and Tag 0B6S (remark-relative-dualizing-complex)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=Rf_*$, $L=Lf^*$, $\\omega=a(\\mathcal O_S)$ and $T(M)=LM\\otimes^{\\mathbf L}\\omega$. Finite presentation includes quasi-compactness and quasi-separatedness of $f$. Thus $R$ preserves quasi-coherent cohomology, and pullback and tensor preserve it, so all these objects and functors lie in the indicated full subcategories. Choose the canonical strong monoidal pullback and its adjunction $L\\dashv R$. The canonical projection map $M\\otimes^{\\mathbf L}R(E)\\to R(LM\\otimes^{\\mathbf L}E)$ is, by its definition, the $L\\dashv R$ transpose of the tensor comparison followed by the pullback counit; it is invertible by the projection formula. Write $p_{M,E}$ for its inverse. Define $\\tau_M:T(M)\\to a(M)$ by transposing $R(T(M))\\xrightarrow{p_{M,\\omega}}M\\otimes^{\\mathbf L}R\\omega\\xrightarrow{1\\otimes\\epsilon_{\\mathcal O_S}}M$. Naturality of the tensor comparison and both counits, and naturality of the adjunction bijection, give $a(u)\\tau_M=\\tau_N T(u)$ for every $u:M\\to N$. Hence these are the components of a natural transformation $\\tau:T\\to a$.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-sc-derived-pullback-across-universes-monoidal-adjunction",
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9S, equation-compare-with-pullback and its preceding construction; projection formula Tag 08EU."
+   }
+  },
+  {
+   "text": "Let $K$ be perfect on $S$, with dual $K^\\vee$. Perfect tensor-Hom duality, including its pullback compatibility, and the supplied adjunction $R\\dashv a$ give, naturally in every $E\\in D_{\\mathrm{QCoh}}(X)$, the bijections $$\\operatorname{Hom}(E,TK)\\simeq\\operatorname{Hom}(LK^\\vee\\otimes^{\\mathbf L}E,\\omega)\\simeq\\operatorname{Hom}(R(LK^\\vee\\otimes^{\\mathbf L}E),\\mathcal O_S)\\simeq\\operatorname{Hom}(K^\\vee\\otimes^{\\mathbf L}RE,\\mathcal O_S)\\simeq\\operatorname{Hom}(RE,K)\\simeq\\operatorname{Hom}(E,aK).$$ The middle bijection uses the canonical projection isomorphism. Apply the existing counit calculation [lem-sc-perfect-right-adjoint-tensor-hom-comparison] with $c=a$, its $K,D$ equal to $K,K^\\vee$, and the two projection inverses pinned as in step 1: it says this composite sends each $q:E\\to TK$ to $\\tau_K\\circ q$. Thus postcomposition with $\\tau_K$ is bijective for every $E$. Surjectivity for $E=aK$ gives $s:aK\\to TK$ with $\\tau_Ks=1$; injectivity for $E=TK$ gives $s\\tau_K=1$, by composing both candidate endomorphisms with $\\tau_K$. Consequently $\\tau_K$ is an isomorphism. No properness or Noetherian hypothesis is needed for this perfect-object calculation.",
+   "uses": [
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-pc-projection-formula",
+    "lem-sc-perfect-right-adjoint-tensor-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9T, lemma-compare-with-pullback-perfect, the duality Hom calculation and identification of the comparison."
+   }
+  },
+  {
+   "text": "The proper-flat direct-sum theorem applies to exactly the given qcqs base and proper, flat, finitely presented $f$, and to the supplied right adjoint $a$, so $a$ preserves all small direct sums. Both quasi-coherent derived categories have such sums. The adjunction $L\\dashv R$ and preservation of colimits by left adjoints show that $L$ preserves them. Tensoring on the right by the fixed $\\omega$ preserves ambient direct sums. Ambient sums exist and remain quasi-coherent, so they also compute sums in the full quasi-coherent subcategories (their universal property restricts to the same Hom sets). It follows that $T=(-\\otimes^{\\mathbf L}\\omega)\\circ L$ preserves these sums as well, including the empty sum.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-direct-sums",
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sc-derived-tensor-right-coproducts",
+    "lem-pc-derived-ambient-has-coproducts",
+    "lem-pc-derived-qcoh-closed-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4I, lemma-proper-flat; first sentence of the proof of Tag 0E4K; ambient sums Tag 08DT."
+   }
+  },
+  {
+   "text": "The separate-exact-structures theorem equips $T$ and $a$ with coherent exact integer-shift structures; its closure assumptions were verified in step 1, and it imposes no Noetherian condition. Apply [lem-sc-perfect-localizing-iso-locus] to the natural $\\tau$ and these exact functors. Its coproduct hypotheses hold by step 3. Its perfect-shift hypothesis holds by step 2, because every integer shift of a perfect complex is perfect, as the same cited locus theorem states. Therefore $\\tau_M$ is invertible on every shift of every $M$ in the perfect localizing closure. This uses the shift-saturated isomorphism locus and does not assume any unproved compatibility of $\\tau$ with the independently chosen shifts.",
+   "uses": [
+    "lem-sc-derived-separate-exact-structures",
+    "lem-sc-perfect-localizing-iso-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4K, lemma-compare-with-pullback-flat-proper: localizing isomorphism locus, made precise by the existing shift-saturated locus theorem."
+   }
+  },
+  {
+   "text": "By definition [def-pc-perfect-localizing-closure], the perfect localizing closure of $S$ is the smallest strictly full subcategory of $D_{\\mathrm{QCoh}}(S)$ containing every perfect complex and closed under shifts, cones, retracts and arbitrary set-indexed direct sums. Since $S$ is quasi-compact and quasi-separated, perfect localizing generation says that this subcategory is all of $D_{\\mathrm{QCoh}}(S)$. Taking shift zero in step 4 proves that the stated canonical comparison $\\tau_M$ is an isomorphism for every unbounded quasi-coherent $M$.",
+   "uses": [
+    "def-pc-perfect-localizing-closure",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4K, final generation argument; Tag 09IS, perfect-theorem-bondal-van-den-Bergh."
+   }
+  },
+  {
+   "text": "Write $b_M:R(T(M))\\to M$ for the composite in step 1. The defining adjunction bijection gives $\\epsilon_M\\circ R(\\tau_M)=b_M$. Transfer $R\\dashv a$ along the natural isomorphism $\\tau:T\\xrightarrow{\\sim}a$: the transferred Hom bijection sends $h:RE\\to M$ to $\\tau_M^{-1}\\circ\\operatorname{adj}(h)$. Its counit at $M$ is therefore $\\epsilon_M\\circ R(\\tau_M)=b_M$. This proves the exact normalization of the induced counit, including the specified original counit rather than an arbitrary isomorphism of right adjoints.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6S, remark-relative-dualizing-complex, trace square; elementary adjunction bijection and transport along a natural isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-sc-derived-pullback-across-universes-monoidal-adjunction",
+  "lem-pc-projection-formula",
+  "lem-pc-perfect-tensor-hom-duality",
+  "lem-sc-perfect-right-adjoint-tensor-hom-comparison",
+  "lem-sc-proper-flat-right-adjoint-direct-sums",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sc-derived-tensor-right-coproducts",
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-sc-derived-separate-exact-structures",
+  "lem-sc-perfect-localizing-iso-locus",
+  "def-pc-perfect-localizing-closure",
+  "lem-pc-derived-qcoh-perfect-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0A9S, 0A9T, 0E4I, 0E4K and 0B6S; the localizing argument uses the existing shift-saturated exact-functor formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint of derived pushforward for a proper flat finitely presented scheme morphism equals derived pullback tensor the adjoint image of the structure sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract tensor adjunctions and ordinary module sheaf adjunctions do not give the unbounded proper-duality tensor formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality proper flat right adjoint tensor formula unbounded quasi coherent complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract tensor adjunctions and ordinary module sheaf adjunctions do not give the unbounded proper-duality tensor formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"tensor\", \"AlgebraicGeometry\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract tensor adjunctions and ordinary module sheaf adjunctions do not give the unbounded proper-duality tensor formula"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*[Tt]ensor|[Tt]ensor.*rightAdjoint|dualizing",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"32\", \"text\": \"* consider dualizing the results to right adjoints\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToDual.lean\", \"line\": \"27\", \"text\": \"  We may also want this feature for dualizing results about bicategories.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"20\", \"text\": \"This file was obtained by dualizing the definitions in\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"line\": \"190\", \"text\": \"and dualizing the result using `toDual`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"line\": \"12\", \"text\": \"# The dualizing functor on `Cat`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"22\", \"text\": \"by dualizing this file. These two files should be kept in sync.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"21\", \"text\": \"Note: this file was obtained by dualizing the definitions in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"27\", \"text\": \"(This file was obtained by dualizing the results in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"522\", \"text\": \"  dsimp [tensorLeftHomEquiv, rightAdjointMate]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"566\", \"text\": \"  dsimp [tensorRightHomEquiv, rightAdjointMate]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean\", \"line\": \"76\", \"text\": \"  { rightAdj := (tensorLeft F).rightAdjoint\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/TensorAlgebra.lean\", \"line\": \"66\", \"text\": \"  have := (tensorAlgebraAdj (Shrink.{u} R)).isRightAdjoint\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n  {\"file\": \"Mathlib/Data/Set/Defs.lean\", \"line\": \"60\", \"text\": \"Additionally, dualizing the order on sets would mean that a set is dual to its complement.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract tensor adjunctions and ordinary module sheaf adjunctions do not give the unbounded proper-duality tensor formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat right adjoint derived tensor pullback dualizing complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[F.IsRightAdjoint] : RepresentablyFlat F\", \"doc\": \"Every right adjoint functor between categories is representably flat.\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} φ).IsRightAdjoint\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"(right : C ⥤ D) [right.IsRightAdjoint] : right.leftAdjoint ⊣ right\", \"doc\": \"Given a right adjoint functor $ G : D \\to C $, this constructs an adjunction between its left adjoint functor $ F : C \\to D $ and $ G $, asserting that $ F $ is left adjoint to $ G $.\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Over.pullbackIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Pullback\", \"type\": \"{X Y : C} (f : X ⟶ Y) [HasPullbacksAlong f] : (pullback f).IsRightAdjoint\", \"doc\": \"Given a morphism $ f : X \\to Y $ in a category $\\\\mathcal{C}$ and the assumption that pullbacks along $f$ exist, the pullback functor from the over category $\\\\mathcal{C}/Y$ to the over category $\\\\mathca\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract tensor adjunctions and ordinary module sheaf adjunctions do not give the unbounded proper-duality tensor formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint of derived pushforward for a proper flat finitely presented morphism equals derived pullback tensor the relative dualizing complex",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module-sheaf adjunctions or abstract tensor duality, not proper-flat unbounded quasi-coherent Grothendieck duality"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*[Tt]ensor|[Tt]ensor.*rightAdjoint|dualizing",
+   "results": "14 hits; Mathlib/Algebra/Category/AlgCat/TensorAlgebra.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Data/Set/Defs.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module-sheaf adjunctions or abstract tensor duality, not proper-flat unbounded quasi-coherent Grothendieck duality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat right adjoint derived tensor pullback dualizing complex",
+   "results": "8 hits; CategoryTheory.RepresentablyFlat.of_isRightAdjoint, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, CategoryTheory.Adjunction.ofIsRightAdjoint, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Over.pullbackIsRightAdjoint",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module-sheaf adjunctions or abstract tensor duality, not proper-flat unbounded quasi-coherent Grothendieck duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"tensor\", \"AlgebraicGeometry\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module-sheaf adjunctions or abstract tensor duality, not proper-flat unbounded quasi-coherent Grothendieck duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality tensor formula unbounded quasi coherent complexes proper flat morphism",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pullbackPushforwardAdjunction, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module-sheaf adjunctions or abstract tensor duality, not proper-flat unbounded quasi-coherent Grothendieck duality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Tensor formula for the right adjoint of a proper flat morphism.",
+   "via": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-flat-adjoint-tensor-formula",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0E4K and 0B6S directly, expanded the perfect-object Hom bijections and counit normalization, and reused existing general coproduct, exactness and perfect-generation nodes. No new nodes. Avoided the neighboring Noetherian-only tensor-formula nodes; all unbounded and non-Noetherian hypotheses are retained. Removed one unused internal-Hom statement dependency.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/plurinodal prerequisite chain, specifically the proper-flat dualizing-polynomial-model tensor-formula input. Read the current latest blueprint and retained this generic supporting scheme-duality route. The inherited created.item ancestry currently yields no blueprint ancestor (blueprint_refs.py ancestor reports None); preserved its maintainer-owned from.node and via, with its already explicit place. No whole-blueprint statement match found.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "General qcqs structure-sheaf derived-image closure needed to form the restricted adjunction; the coefficient direct-image unit does not replace this scheme-derived input."
+   },
+   {
+    "node": "lem-pc-derived-pullback-tensor-qcoh",
+    "why": "General unbounded scheme-derived pullback/tensor closure, used to check the comparison objects are quasi-coherent."
+   },
+   {
+    "node": "lem-sc-derived-pullback-across-universes-monoidal-adjunction",
+    "why": "General canonical K-flat monoidal pullback and derived adjunction; specialize the two localization universes to the given ones."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "General unbounded quasi-coherent projection formula, not an etale finite-coefficient projection formula."
+   },
+   {
+    "node": "lem-pc-perfect-tensor-hom-duality",
+    "why": "Generic perfect-complex duality and preservation of its exact pair under pullback."
+   },
+   {
+    "node": "lem-sc-perfect-right-adjoint-tensor-hom-comparison",
+    "why": "Generic counit calculation identifying the perfect-object Hom bijection with the specified canonical comparison, with no Noetherian hypothesis."
+   },
+   {
+    "node": "lem-sc-proper-flat-right-adjoint-direct-sums",
+    "why": "Generic proper-flat Grothendieck-duality coproduct theorem, with exactly the present geometric hypotheses."
+   },
+   {
+    "node": "lem-pc-derived-qcoh-direct-sums",
+    "why": "Existence of direct sums in the scheme quasi-coherent derived category."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "General derived pullback/direct-image adjunction, restricted to quasi-coherent objects using step 1."
+   },
+   {
+    "node": "lem-sc-derived-tensor-right-coproducts",
+    "why": "General K-flat derived tensor preservation of sums, with an arbitrary fixed right tensor factor."
+   },
+   {
+    "node": "lem-pc-derived-ambient-has-coproducts",
+    "why": "Ambient derived sums exist; needed together with quasi-coherent closure, not inferred from existence of sums only in a subcategory."
+   },
+   {
+    "node": "lem-pc-derived-qcoh-closed-coproducts",
+    "why": "Ambient sums stay quasi-coherent, so the full-subcategory sums and ambient sums agree."
+   },
+   {
+    "node": "lem-sc-derived-separate-exact-structures",
+    "why": "General exact shift structures for the pullback-tensor functor and the supplied right adjoint, without Noetherianity."
+   },
+   {
+    "node": "lem-sc-perfect-localizing-iso-locus",
+    "why": "General triangulated localizing-locus tool; its use does not assert compatibility of the comparison with arbitrary chosen shift structures."
+   },
+   {
+    "node": "lem-pc-derived-qcoh-perfect-generation",
+    "why": "General qcqs perfect generation, used on the base S to extend from perfect objects to all unbounded objects."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-sc-derived-pullback-across-universes-monoidal-adjunction",
+  "lem-pc-projection-formula",
+  "lem-pc-perfect-tensor-hom-duality",
+  "lem-sc-perfect-right-adjoint-tensor-hom-comparison",
+  "lem-sc-proper-flat-right-adjoint-direct-sums",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-sc-derived-tensor-right-coproducts",
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-sc-derived-separate-exact-structures",
+  "lem-sc-perfect-localizing-iso-locus",
+  "lem-pc-derived-qcoh-perfect-generation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-270da7059",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-270da7059 (reviewer sub-agent of L); spot-checked: I read the whole delivery (no new nodes) against the Stacks sources. In duality.tex: the construction before 0A9S (l.1845-1866), 0A9T, 0E4I lemma-proper-flat, 0E4K lemma-compare-with-pullback-flat-proper and the trace square of 0B6S; in perfect.tex: 08DT, 08EU and 09IS. The statement matches 0E4K/0B6S: qcqs base; f proper, flat and of finite presentation; all of D_QCoh; same tensor order; no Noetherian or boundedness condition. It is not weakened. Small cases checked: identity, empty X, M=0, finite locally free f over a non-Noetherian affine base. Step-by-step checks: (1) finite presentation includes qcqs, so 08D5 and the projection formula apply; the monoidal adjunction needs no finiteness. (2) lem-sc-perfect-right-adjoint-tensor-hom-comparison: all its hypotheses hold, and by adjunction naturality its conclusion is q↦τ_K∘q, so the Yoneda argument is correct. (3) The proper-flat direct-sum lemma has exactly the item's hypotheses, and T preserves sums. (4) The separate-exact-structures node covers both a and Lf^*(-)⊗c(O); the iso-locus premises come from steps 2 and 3. (5) Fault C3/C4: the step identifies perfectLocalizingClosure with the subcategory of the Bondal–van den Bergh generation node without citing def-pc-perfect-localizing-closure. FIX: I added that citation to step 5's uses and to proof_deps, plus one sentence quoting the definition. It is a definition, so there is no cycle. (6) The counit normalisation is elementary and correct. Duplicate search: the existing tensor-formula nodes (lem-sc-right-adjoint-tensor-locus-localizing, lem-sc-smooth-proper-tensor-perfect-case) assume Noetherian schemes; no node states the item. I accept the declared tool_uses: these are generic coherent-duality tools from sec-picard-framework that the ℓ-adic unit does not give. No SGA source is used. Batch-5 finding: lem-sc-proper-flat-right-adjoint-direct-sums (coherent duality, the right adjoint commutes with sums, 0E4I) reaches def-trf-schematically-dense-open only through the Chow/Nagata chain. That node is a general definition, not part of the trace formula or Poincaré duality, so this is outside the assumptions and no RETURN. Maintainer notes: that lemma's source names Tag 0E4H instead of 0E4I; step 5's source file for 09IS is perfect.tex, not duality.tex.; 1 file(s) fixed by the reviewer"
+ }
+}

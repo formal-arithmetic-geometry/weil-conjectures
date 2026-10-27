@@ -1,0 +1,312 @@
+{
+ "id": "lem-trf-toric-chart-compatible-comparison",
+ "kind": "statement",
+ "title": "Compatible log morphism and affine toric chart comparison",
+ "statement": "Let $(Y,N)$ be a locally Noetherian fs log scheme [pqf-def-locnoeth, def-trf-fs-log-blowup] with $Y=\\operatorname{Spec}A$ and a global chart $P\\to N(Y)$ by an fs monoid $P$; write $\\alpha:P\\to A$ for its structural image [def-weil-affine-spectrum]. Let $Q$ be an fs monoid and $g:P\\to Q$ any monoid homomorphism. Write $\\mathbf Z[T]$ for the ring of finite sums of monomials $z^t$ with $z^tz^{t'}=z^{t+t'}$. Form $C=A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q]$ using $z^p\\mapsto\\alpha(p)$ and $z^p\\mapsto z^{g(p)}$, with tensor multiplication $(a\\otimes u)(b\\otimes v)=ab\\otimes uv$ [def-weil-pbc-module-tensor-product]. Assume $X=\\operatorname{Spec}C$ is locally Noetherian, and give it the associated log structure $M=L_X(Q,\\beta)$ for $\\beta(q)=1\\otimes z^q$ [lem-trf-associated-log-universal-stalks].\n\nThere is a morphism of fs log schemes $f:(X,M)\\to(Y,N)$ whose underlying scheme map is induced by $a\\mapsto a\\otimes1$, and whose log map sends each chart element $p$ to the canonical image of $g(p)$ and every local unit $u$ to $f^\\sharp(u)$. On any relative etale test $V\\to U$ over $f$, it sends the local chart representative $[p,u]$ to $[g(p),f^\\sharp(u)]$; these maps are compatible with restrictions and the structural maps. In particular the displayed $P,Q,g$ are compatible charts of $f$.\n\nPut $B=Y\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$ [def-pc-fibre-product]. Let $\\theta:B\\xrightarrow{\\sim}X$ be the canonical affine tensor-product identification [lem-weil-pbc-fibre-product-affine-spectra], with projections induced by $a\\mapsto a\\otimes1$ and $z^q\\mapsto1\\otimes z^q$. The comparison map $\\kappa:X\\to B$ determined by $f$ and the $Q$ chart satisfies $\\theta\\circ\\kappa=\\mathrm{id}_X$. Consequently $\\kappa$ is an isomorphism and is etale [def-weil-etale-morphism]. No group-completion condition on $g$ or log regularity hypothesis is imposed, and empty $X$ is allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, printed p.69 (associated-log chart conventions); VIII 3.3.8 and 3.3.11, printed pp.107--108 (log morphisms from chart base changes). Underlying comparison: Stacks schemes.tex Tags 01I4, lemma-fibre-product-affine-schemes, and 01JQ, lemma-fibre-product-affines; morphisms.tex Tag 02GI, definition-etale."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-trf-fs-log-blowup",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-associated-log-universal-stalks",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof": [
+  {
+   "text": "Let $i:A\\to C$, $a\\mapsto a\\otimes1$, and $j:\\mathbf Z[Q]\\to C$, $v\\mapsto1\\otimes v$. Tensor balancing gives\n$$i(\\alpha(p))=\\alpha(p)\\otimes1=1\\otimes z^{g(p)}=\\beta(g(p)).$$\nThe displayed tensor multiplication makes $i,j$ ring maps. Let $f_0=\\operatorname{Spec}(i):X\\to Y$ and $h=\\operatorname{Spec}(j)$. For an etale $U\\to Y$ put $X_U=X\\times_YU$. Etale base change makes $X_U$ an object of $X_{\\mathrm{Et}}$. The stalk formula for the associated log structure identifies $Q\\oplus_{\\beta_{\\bar x}^{-1}(\\mathcal O_{X,\\bar x}^{\\times})}\\mathcal O_{X,\\bar x}^{\\times}$ with $M_{\\bar x}$. Thus $Q$ is a chart of $M$ in the stated definition; since $Q$ is fs and $X$ is locally Noetherian by hypothesis, $(X,M)$ is an fs log scheme.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-trf-associated-log-universal-stalks",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, printed p.69; VIII 3.3.3--3.3.6, printed pp.106--107; explicit associated-log argument by Q04"
+   }
+  },
+  {
+   "text": "Write $\\iota_Q:Q\\to M(X)$ for the canonical chart. Set $H(U)=M(X_U)$ and $T(U)=\\Gamma(X_U,\\mathcal O_{X_U})$, with restrictions along the induced maps $X_{U'}\\to X_U$. The etale base-change continuity statement shows that their underlying set presheaves are sheaves: the matching and gluing conditions are exactly those for $M$ and $\\mathcal O_X$ on the pulled-back covering of $X_U$. Hence $H$ is a sheaf of commutative monoids and $T$ a sheaf of multiplicative monoids. Work on the small skeleton in the fixed larger universe. The structure map of $M$ gives $H\\to T$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "def-trf-fs-log-blowup",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, printed p.69; VIII 3.3.3--3.3.6, printed pp.106--107; explicit associated-log argument by Q04"
+   }
+  },
+  {
+   "text": "For $U\\to Y$, let $\\alpha_U:P\\to\\Gamma(U,\\mathcal O_U)$ be the restricted chart and put $E_U=\\alpha_U^{-1}(\\Gamma(U,\\mathcal O_U)^\\times)$. The associated-log node identifies $N$ with the monoid sheafification of $D(U)=P\\oplus_{E_U}\\Gamma(U,\\mathcal O_U)^\\times$. If $r_U:X_U\\to U$ and $s_U:X_U\\to X$ are the projections, define\n$$D(U)\\longrightarrow H(U),\\qquad [p,u]\\longmapsto s_U^*\\iota_Q(g(p))\\,j_M(r_U^\\sharp u),$$\nwhere $j_M$ is the inverse units isomorphism of $M$. For $e\\in E_U$, step 1 gives $\\alpha_M(s_U^*\\iota_Q(g(e)))=r_U^\\sharp\\alpha_U(e)$, a unit. The log axiom therefore gives $s_U^*\\iota_Q(g(e))=j_M(r_U^\\sharp\\alpha_U(e))$. Consequently the two representatives $[pe,u]$ and $[p,\\alpha_U(e)u]$ have the same image. The formula preserves products and identity, and commutes with restrictions because both $s_U^*$ and pullback of regular functions do. It is thus a natural homomorphism $D\\to H$.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, printed p.69; VIII 3.3.3--3.3.6, printed pp.106--107; explicit associated-log argument by Q04"
+   }
+  },
+  {
+   "text": "The monoid-sheafification universal property extends $D\\to H$ uniquely to $\\varphi:N\\to H$. Composing with $H\\to T$ agrees with pulling back $\\alpha_N:N\\to\\mathcal O_Y$: on $[p,u]$ both maps are $r_U^\\sharp(\\alpha_U(p)u)$ by step 1, so uniqueness in the same universal property gives equality on $N$. For a relative test $V\\to U$ with $V\\to X$ etale, the universal property of $X_U$ gives $V\\to X_U$ over $X$; restrict $\\varphi_U$ along this map. This defines the relative-test presentation of a log morphism $f:(X,M)\\to(Y,N)$ with scheme map $f_0$. For a further test restriction the two maps $V'\\to X_U$ are equal by their projections, hence the section maps agree by functoriality of $M$. Its value on a local representative is precisely $[p,u]\\mapsto[g(p),f^\\sharp(u)]$ by step 3; products with units and the structural maps are preserved. Thus these are the prescribed compatible charts. This uses sheafification over $Y$, rather than applying the associated-log universal property over the identity to a map between different schemes.",
+   "uses": [
+    "lem-trf-commutative-monoid-sheafification",
+    "def-trf-fine-log-scheme-morphisms",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, printed p.69; VIII 3.3.3--3.3.6, printed pp.106--107; explicit associated-log argument by Q04"
+   }
+  },
+  {
+   "text": "The maps $f_0:X\\to Y$ and $h:X\\to\\operatorname{Spec}\\mathbf Z[Q]$ have the same composite to $\\operatorname{Spec}\\mathbf Z[P]$: on every monomial $z^p$ their ring maps agree by step 1, and monomials additively generate $\\mathbf Z[P]$. Hence they determine $\\kappa:X\\to B$. The affine fibre-product isomorphism $\\theta:B\\to X$ satisfies $\\mathrm{pr}_Y=f_0\\theta$ and $\\mathrm{pr}_Q=h\\theta$. It follows that $\\kappa$ and $\\theta^{-1}$ have identical composites with both projections, namely $f_0$ and $h$. Uniqueness in the fibre-product property gives $\\kappa=\\theta^{-1}$, and therefore $\\theta\\kappa=\\mathrm{id}_X$. This checks the specified comparison map, including both projections.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines), 01JP (definition-fibre-product)"
+   }
+  },
+  {
+   "text": "Since $\\kappa=\\theta^{-1}$, it is a scheme isomorphism. Its image is all of $B$, an open subset, and its structure-sheaf map is invertible, so it is an open immersion by definition. The open-immersion lemma makes it etale. All constructions above use only the tensor balancing relation and homomorphism laws of $g$; no assertion about $g^{\\mathrm{gp}}$ or log regularity entered. If $C=0$, the same affine fibre-product isomorphism identifies $B$ with the empty $X$; section formulas and their sheafifications still exist, and the comparison is the unique isomorphism of empty schemes.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GP, lemma-open-immersion-etale"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-trf-associated-log-universal-stalks",
+  "def-trf-fs-log-blowup",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-weil-size-convention",
+  "lem-trf-commutative-monoid-sheafification",
+  "def-trf-fine-log-scheme-morphisms",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1 and VIII 3.3.3--3.3.6 (chart conventions and chart base change); explicit quotient, sheafification and projection argument by Q04, with Stacks Tags 01I4, 01JQ, 02GP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|logarithmic.*chart",
+   "results": "{\"t\": \"2026-10-22T06:04:05Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|logarithmic.*chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Ordinary affine pullback isomorphisms do not provide the compatible homomorphism of log sheaves with its specified section maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated logarithmic structures of compatible monoid charts induce a morphism on log schemes and the tensor product chart has identity comparison to the toric fiber product.",
+   "results": "{\"t\": \"2026-10-22T06:04:05Z\", \"tool\": \"leansearch\", \"query\": \"Associated logarithmic structures of compatible monoid charts induce a morphism on log schemes and the tensor product chart has identity comparison to the toric fiber product.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Ordinary affine pullback isomorphisms do not provide the compatible homomorphism of log sheaves with its specified section maps.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-22T06:04:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: <html> <head><title>502 Bad Gateway</title></head> <body> <center><h1>502 Bad Ga\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Ordinary affine pullback isomorphisms do not provide the compatible homomorphism of log sheaves with its specified section maps.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible affine monoid charts P to A and Q to A tensor Z[Q] construct a morphism of associated log schemes whose toric chart comparison is the canonical affine fiber product isomorphism.",
+   "results": "{\"t\": \"2026-10-22T06:04:16Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible affine monoid charts P to A and Q to A tensor Z[Q] construct a morphism of associated log schemes whose toric chart comparison is the canonical affine fiber product isomorphism.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc\"], \"digest\": \"6b85914f6e6d27ed\"}; Ordinary affine pullback isomorphisms do not provide the compatible homomorphism of log sheaves with its specified section maps.",
+   "date": "2026-10-22",
+   "verdict": "no match for the full logarithmic statement; ordinary algebra/scheme components only"
+  },
+  {
+   "tool": "grep",
+   "query": "logarithmic.*structure|logarithmic.*scheme|LogChart",
+   "results": "{\"t\": \"2026-10-22T06:05:33Z\", \"tool\": \"grep\", \"query\": \"logarithmic.*structure|logarithmic.*scheme|LogChart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Ordinary affine pullback isomorphisms do not provide the compatible homomorphism of log sheaves with its specified section maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine tensor product toric chart defines a log scheme morphism by sending a chart section and a unit to the monoid image and the pulled back unit; its comparison to the toric fiber product is etale.",
+   "results": "{\"t\": \"2026-10-22T06:05:50Z\", \"tool\": \"leanfinder\", \"query\": \"An affine tensor product toric chart defines a log scheme morphism by sending a chart section and a unit to the monoid image and the pulled back unit; its comparison to the toric fiber product is etale.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"AlgebraicGeometry.AffineSpace.map_Spec_map\", \"AlgebraicGeometry.AffineSpace.map_toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.map_SpecMap\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\"], \"digest\": \"fd430710ad1ab5ac\"}; Ordinary affine pullback isomorphisms do not provide the compatible homomorphism of log sheaves with its specified section maps.",
+   "date": "2026-10-22",
+   "verdict": "no match for the full logarithmic statement; ordinary algebra/scheme components only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible pair of monoid charts induces a homomorphism between their associated logarithmic sheaves on the small etale sites over a scheme morphism.",
+   "results": "{\"t\": \"2026-10-22T06:10:42Z\", \"tool\": \"leansearch\", \"query\": \"A compatible pair of monoid charts induces a homomorphism between their associated logarithmic sheaves on the small etale sites over a scheme morphism.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EtaleLogHom\"",
+   "results": "{\"t\": \"2026-10-22T06:10:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"EtaleLogHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-23T09:29:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read search hits: affine scheme morphisms, affine tensor-product pullbacks and structure sheaf maps are only components, not the log-morphism statement. No logarithmic chart declaration found.",
+   "date": "2026-10-23",
+   "verdict": "no match for full logarithmic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|logarithmic.*chart",
+   "results": "{\"t\": \"2026-10-23T09:29:16Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|logarithmic.*chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read search hits: affine scheme morphisms, affine tensor-product pullbacks and structure sheaf maps are only components, not the log-morphism statement. No logarithmic chart declaration found.",
+   "date": "2026-10-23",
+   "verdict": "no match for full logarithmic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoid map compatible with affine charts defines a morphism between associated log schemes.",
+   "results": "{\"t\": \"2026-10-23T09:29:16Z\", \"tool\": \"leansearch\", \"query\": \"A monoid map compatible with affine charts defines a morphism between associated log schemes.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isAffineHom_of_isAffine\", \"AlgebraicGeometry.AffineScheme.ofHom\", \"AlgebraicGeometry.IsAffineHom.mk\", \"AlgebraicGeometry.Scheme.AffineCover.map\", \"AlgebraicGeometry.IsAffineHom\", \"ContMDiffMonoidMorphism.toMonoidHom\", \"AlgebraicGeometry.AffineSpace.map\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\"], \"digest\": \"fcfc0cc0a808e716\"}; Read search hits: affine scheme morphisms, affine tensor-product pullbacks and structure sheaf maps are only components, not the log-morphism statement. No logarithmic chart declaration found.",
+   "date": "2026-10-23",
+   "verdict": "no match for full logarithmic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible monoid charts induce a morphism of associated logarithmic schemes whose affine tensor product comparison is an isomorphism.",
+   "results": "{\"t\": \"2026-10-23T09:29:27Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible monoid charts induce a morphism of associated logarithmic schemes whose affine tensor product comparison is an isomorphism.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.AffineSpace.mapSpecMap\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\", \"AlgebraicGeometry.diagonal_Spec_map\", \"AlgebraicGeometry.diagonal_SpecMap\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc\"], \"digest\": \"8940ab560c420bac\"}; Read search hits: affine scheme morphisms, affine tensor-product pullbacks and structure sheaf maps are only components, not the log-morphism statement. No logarithmic chart declaration found.",
+   "date": "2026-10-23",
+   "verdict": "no match for full logarithmic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible morphism from a monoid prelog chart extends to a morphism of associated logarithmic sheaves, sending the pair p u to g p times the pullback of u.",
+   "results": "{\"t\": \"2026-10-23T09:30:51Z\", \"tool\": \"leanfinder\", \"query\": \"A compatible morphism from a monoid prelog chart extends to a morphism of associated logarithmic sheaves, sending the pair p u to g p times the pullback of u.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"AlgebraicGeometry.Spec.sheafedSpaceMap\", \"AlgebraicGeometry.StructureSheaf.comap\", \"AlgebraicGeometry.Spec.sheafedSpaceMap_hom_c_app\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply\", \"AlgebraicGeometry.Scheme.Modules.Hom.mapPresheaf\", \"AlgebraicGeometry.Scheme.Modules.mapPresheaf_app\", \"AlgebraicGeometry.Scheme.Modules.Hom.app\"], \"digest\": \"46bd426c90dc1700\"}; Read search hits: affine scheme morphisms, affine tensor-product pullbacks and structure sheaf maps are only components, not the log-morphism statement. No logarithmic chart declaration found.",
+   "date": "2026-10-23",
+   "verdict": "no match for full logarithmic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "logarithmic.*scheme|logarithmic.*structure|EtaleLogHom",
+   "results": "{\"t\": \"2026-10-23T09:32:25Z\", \"tool\": \"grep\", \"query\": \"logarithmic.*scheme|logarithmic.*structure|EtaleLogHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read search hits: affine scheme morphisms, affine tensor-product pullbacks and structure sheaf maps are only components, not the log-morphism statement. No logarithmic chart declaration found.",
+   "date": "2026-10-23",
+   "verdict": "no match for full logarithmic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EtaleLogHom\"",
+   "results": "{\"t\": \"2026-10-23T09:32:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"EtaleLogHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read search hits: affine scheme morphisms, affine tensor-product pullbacks and structure sheaf maps are only components, not the log-morphism statement. No logarithmic chart declaration found.",
+   "date": "2026-10-23",
+   "verdict": "no match for full logarithmic assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-toric-refinement",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical lem-trf-local-term-locality proof (1)--(2), nearby-duality alteration branch, through log-blowup-normalization: ILO VIII 3.3.11 toric log-etale chart change; retained toric-refinement proof step 3 after the associated-log construction, and step 4 (log morphism, relation/restriction compatibility, and comparison with both projections).",
+   "via": [
+    "lem-trf-log-regular-toric-refinement",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-toric-chart-compatible-comparison",
+  "worker": "stage1",
+  "summary": "No statement changes and no new nodes. Constructed the log morphism by extending a natural map from the quotient-of-pairs chart presheaf into the etale direct-image monoid sheaf; checked the relations, restrictions and structure map. Identified the actual comparison with the inverse affine tensor-product isomorphism using both projections, then deduced etaleness. Audited every cited statement and the empty and noninjective-chart cases.",
+  "blueprint": "Historical local-term-locality proof (1)--(2), retained toric-refinement branch, step 3 chart construction and step 4 log morphism/comparison. Current latest local-term-locality has the contracting-correspondence proof instead and does not state this auxiliary chart lemma; this split completes the assigned auxiliary lemma without changing any unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Generic etale-site continuity, supplying the sheaf U ↦ M(X ×_Y U); this unit contains no replacement of that generic site fact."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Use the common larger universe and small site skeleton required by the monoid-sheafification theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-weil-size-convention"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-5c2e5ac2b",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-5c2e5ac2b (reviewer sub-agent of L); spot-checked: First stage-1 split. Live and side-live have the item unsplit with the identical statement and stmt_deps, and there is no repair note. The delivery has no new nodes and leaves the statement unchanged; proof_deps equals the union of the steps' uses. I read every cited statement in full. Step 1: the tensor balancing alpha(p)⊗1=1⊗z^{g(p)} is correct, and the stalk clause of associated-log-universal-stalks is exactly the chart predicate of fs-log-blowup (beta is multiplicative, X locally Noetherian by hypothesis). Step 2: H=f_{0*}M is a monoid sheaf by etale-base-change-continuous (3). Step 3 is a correct elementary check of the congruence: for e in E_U, alpha_M(s^*ι g(e))=r^♯alpha_U(e) is a unit, and the log axiom then identifies the two representatives. N≅D^# follows from the chart clause. Step 4: commutative-monoid-sheafification extends D→H to phi:N→H. Compatibility with the structure maps follows from uniqueness, T being a monoid sheaf. The relative-test family comes from restricting along V→X_U (fibre-product universal property); this is N→f_*M, adjoint to f^{-1}N→M, and def-trf-fine-log-scheme-morphisms takes such a family as its presentation of a morphism. fs implies fine. Step 5: the ring maps Z[P]→C agree on monomials; fibre-product-affine-spectra gives both projections, so kappa=theta^{-1} by fibre-product uniqueness. Step 6: an isomorphism is an open immersion, hence étale (02GP). Sources checked: ILO VI 1.1 (PDF p.75), VIII 3.3.4–3.3.6, 3.3.8 and 3.3.11 (PDF pp.113–114), Stacks 01I4, 01JQ, 02GP and 02GI checked against tags/tags; no SGA. Edge cases: P=Q=0, g=id, P=0 with Q=N, g:N→0 (C=A/(alpha(1)−1)), and alpha(1)=0 (C=0, empty X) all hold. rg -L found no duplicate (per-regular-log-smooth-monomial-chart and sbc-root-product-chart are different statements). Accepted tool_uses: etale-base-change-continuous (generic site fact) and size-convention (a definition). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ToricChartCompatibleComparison",
+  "declaration": "AlgebraicGeometry.toricChart_compatible_comparison",
+  "declarations": [
+   "AlgebraicGeometry.toricCompatibleRing",
+   "AlgebraicGeometry.toricCompatibleRingCommRing",
+   "AlgebraicGeometry.toricCompatibleLeft",
+   "AlgebraicGeometry.toricCompatibleRight",
+   "AlgebraicGeometry.toricCompatibleBeta",
+   "AlgebraicGeometry.toricCompatibleIso",
+   "AlgebraicGeometry.toricCompatiblePair",
+   "AlgebraicGeometry.toricChart_compatible_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ToricChartCompatibleComparison.lean",
+  "statement": "theorem toricChart_compatible_comparison (A P Q : Type u) [CommRing A] [CommMonoid P] [CommMonoid Q] [IsLocallyNoetherian (Spec (.of A))] (N : EtaleLogStructure (Spec (.of A))) (hN : N.IsFineSaturated) (hP : IsFineSaturatedMonoid P) (hQ : IsFineSaturatedMonoid Q) (α : P →* A) (g : P →* Q) (c : ULift.{u, u} P →* N.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 _)))) (hc : N.IsChart (Scheme.Etale.mk (𝟙 _)) c) (hα : ∀ p : P, N.alpha.app (op (Scheme.Etale.mk (𝟙 _))) (c (ULift.up p)) = (Scheme.ΓSpecIso (.of A)).inv (α p)) [IsLocallyNoetherian (Spec (.of (toricCompatibleRing α g)))] : ∃ (ηN : associatedLogPresheaf.{u, u} ((Scheme.ΓSpecIso (.of A)).inv.hom.toMonoidHom.comp α) ⟶ N.monoidSheaf.obj) (M : EtaleLogStructure (Spec (.of (toricCompatibleRing α g)))) (ηM : associatedLogPresheaf.{u, u} (toricCompatibleBeta α g) ⟶ M.monoidSheaf.obj) (hM : M.IsFineSaturated) (f : EtaleLogHom ⟨Spec (.of (toricCompatibleRing α g)), inferInstance, M, hM⟩ ⟨Spec (.of A), inferInstance, N, hN⟩), IsAssociatedLogPresentation ((Scheme.ΓSpecIso (.of A)).inv.hom.toMonoidHom.comp α) N ηN ∧ associatedLogIota _ N ηN = c ∧ IsAssociatedLogPresentation (toricCompatibleBeta α g) M ηM ∧ M.IsChart (Scheme.Etale.mk (𝟙 _)) (associatedLogIota _ M ηM) ∧ f.base = Spec.map (CommRingCat.ofHom (toricCompatibleLeft α g)) ∧ (∀ (W : (Spec (.of A)).Etale) (V : (Spec (.of (toricCompatibleRing α g))).Etale) (k : V.left ⟶ W.left) (hk : k ≫ W.hom = V.hom ≫ f.base) (p : P) (a : Γ(W.left, ⊤)ˣ), f.sectionMap W V k hk (toricCompatiblePair ((Scheme.ΓSpecIso (.of A)).inv.hom.toMonoidHom.comp α) N ηN W p a) = toricCompatiblePair (toricCompatibleBeta α g) M ηM V (g p) (Units.map k.appTop.hom.toMonoidHom a)) ∧ ∃ κ : Spec (.of (toricCompatibleRing α g)) ⟶ pullback (Spec.map (CommRingCat.ofHom (MonoidAlgebra.lift ℤ A P α).toRingHom)) (Spec.map (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom ℤ g))), κ ≫ pullback.fst _ _ = f.base ∧ κ ≫ pullback.snd _ _ = Spec.map (CommRingCat.ofHom (toricCompatibleRight α g)) ∧ κ ≫ (toricCompatibleIso α g).hom = 𝟙 _ ∧ IsIso κ ∧ Etale κ",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49dfb4713",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Matched every hypothesis and conclusion against the node and the dependencies' Lean (EtaleLogStructure/IsChart/IsFineSaturated/EtaleLogHom, associatedLogPresheaf/Iota/IsAssociatedLogPresentation, pullbackSpecIso, Etale). C is Mathlib's TensorProduct over MonoidAlgebra ℤ P with the lift α and mapDomain g algebras. M and ηN are pinned by the sheafification universal property, the α formula and iota = c (true by the dep's chart clause with hα). f has base a↦a⊗1, the [p,u]↦[g p, k♯u] formula on every relative test, and naturality/compatibility from EtaleLogHom. κ is fixed by both projections; κ≫θ.hom=𝟙, IsIso, Etale. Empty X and arbitrary g allowed; no extra universe restriction. No hollow defs, only the theorem proof is sorry, docstrings and six proof steps present, lines ≤100, node changed only in lean, statement verbatim. Advisory: toricCompatibleRing/Left/Beta repeat landed logIdealTensorRing (def-trf-log-ideal-chart-presentation) and Algebra.monoidChartTensor; owners are not stmt_deps and stage 2 cannot add them, so advisory as in Q65 afa3. No compile (no file changed)."
+ }
+}

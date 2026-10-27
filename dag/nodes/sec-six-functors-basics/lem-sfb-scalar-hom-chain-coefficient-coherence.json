@@ -35,10 +35,11 @@
    }
   },
   {
-   "text": "Construct the displayed formulas for $\\kappa_X$ and its proposed inverse by successive tensor linearization and sheafification [def-weil-pbc-module-tensor-product] [def-weil-presheaf-modules-sheafification]. Additivity is immediate. The outer $S$-balance for $\\kappa$ is $s'b(t)b(s)=s'b(ts)$; its inner $R$-balance is\n$$s'b(s)b\\varphi(r)\\otimes(1\\otimes x)=s'b(s)\\varphi'a(r)\\otimes(1\\otimes x)=s'b(s)\\otimes(1\\otimes rx).$$\nFor the inverse, outer $R'$-balance is multiplication by $\\varphi'(t')$; inner $R$-balance is the same equality $b\\varphi(r)=\\varphi'a(r)$ in reverse. Thus the two formulas define $S'$-linear maps. Their composites are\n$$s'\\otimes(s\\otimes x)\\longmapsto s'b(s)\\otimes(1\\otimes x)=s'\\otimes(s\\otimes x),$$\n$$s'\\otimes(r'\\otimes x)\\longmapsto s'\\varphi'(r')\\otimes(1\\otimes x)=s'\\otimes(r'\\otimes x).$$\nStep 1 promotes these to inverse sheaf maps. Replacing $x$ by $d_Xx$ on either side gives the chain equation; replacing it by $h(x)$ gives naturality for every chain map $h$. Restriction of sections preserves every formula, since the coefficient arrows are sheaf maps. This constructs the natural chain isomorphism $\\kappa$.",
+   "text": "Construct the displayed formulas for $\\kappa_X$ and its proposed inverse by successive tensor linearization and sheafification [def-weil-pbc-module-tensor-product] [def-weil-presheaf-modules-sheafification]. Additivity is immediate. The outer $S$-balance for $\\kappa$ is $s'b(t)b(s)=s'b(ts)$; its inner $R$-balance is\n$$s'b(s)b\\varphi(r)\\otimes(1\\otimes x)=s'b(s)\\varphi'a(r)\\otimes(1\\otimes x)=s'b(s)\\otimes(1\\otimes rx).$$\nFor the inverse, outer $R'$-balance is multiplication by $\\varphi'(t')$; inner $R$-balance is the same equality $b\\varphi(r)=\\varphi'a(r)$ in reverse. Thus the two formulas define $S'$-linear maps. Their composites are\n$$s'\\otimes(s\\otimes x)\\longmapsto s'b(s)\\otimes(1\\otimes x)=s'\\otimes(s\\otimes x),$$\n$$s'\\otimes(r'\\otimes x)\\longmapsto s'\\varphi'(r')\\otimes(1\\otimes x)=s'\\otimes(r'\\otimes x).$$\nStep 1 promotes these to inverse sheaf maps. Replacing $x$ by $d_Xx$ on either side gives the chain equation; replacing it by $h(x)$ gives naturality for every chain map $h$. Restriction of sections preserves every formula, since the coefficient arrows are sheaf maps. This constructs the natural chain isomorphism $\\kappa$. The Lean construction reuses the already defined scalarExtensionTowerIso and its pure-tensor forward and inverse formulas [def-sp-canonical-scalar-extension-maps] [lem-sp-scalar-extension-dual-tower-core], transports the supplied extension functors through their prescribed object and morphism equalities, and lifts termwise to complexes. Lean realization by A8: the already proved normalized coefficient-square construction in [lem-sfb-hom-scalar-chain-identification] supplies kappa and mu together with their forward formulas. Its isomorphism identity and tensor balance give the displayed inverse formula. Uniqueness of nu, theta, alpha and sigma identifies the supplied normalized family with the one in that construction.",
    "uses": [
     "def-weil-pbc-module-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sfb-hom-scalar-chain-identification"
    ],
    "elementary": true,
    "source": {
@@ -111,10 +112,11 @@
    }
   },
   {
-   "text": "For successive ring maps $u:K\\to L$, $v:L\\to M$, construct the extension associator by\n$$m\\otimes(l\\otimes x)\\longmapsto m v(l)\\otimes x,\\qquad m\\otimes x\\longmapsto m\\otimes(1\\otimes x).$$\nBoth are balanced, and their composites are the identity by the same relation $m v(l)\\otimes y=m\\otimes ly$ [def-weil-pbc-module-tensor-product]. They descend uniquely [def-weil-presheaf-modules-sheafification], commute with differentials and are natural by substitution in $x$. On three successive extensions, both contractions send $n\\otimes(m\\otimes(l\\otimes x))$ to $n w(m)w v(l)\\otimes x$, for $w:M\\to N$; thus associativity of multiplication proves coherence. For the identity ring map use $k\\otimes x\\mapsto kx$, inverse $x\\mapsto1\\otimes x$; its two unit equations follow from $1\\otimes kx=k\\otimes x$. These prove the specified associators and unit identifications without a separate associativity theorem.",
+   "text": "For successive ring maps $u:K\\to L$, $v:L\\to M$, construct the extension associator by\n$$m\\otimes(l\\otimes x)\\longmapsto m v(l)\\otimes x,\\qquad m\\otimes x\\longmapsto m\\otimes(1\\otimes x).$$\nBoth are balanced, and their composites are the identity by the same relation $m v(l)\\otimes y=m\\otimes ly$ [def-weil-pbc-module-tensor-product]. They descend uniquely [def-weil-presheaf-modules-sheafification], commute with differentials and are natural by substitution in $x$. On three successive extensions, both contractions send $n\\otimes(m\\otimes(l\\otimes x))$ to $n w(m)w v(l)\\otimes x$, for $w:M\\to N$; thus associativity of multiplication proves coherence. For the identity ring map use $k\\otimes x\\mapsto kx$, inverse $x\\mapsto1\\otimes x$; its two unit equations follow from $1\\otimes kx=k\\otimes x$. These prove the specified associators and unit identifications without a separate associativity theorem. The Lean construction reuses the already defined scalarExtensionTowerIso and its pure-tensor forward and inverse formulas [def-sp-canonical-scalar-extension-maps] [lem-sp-scalar-extension-dual-tower-core], transports the supplied extension functors through their prescribed object and morphism equalities, and lifts termwise to complexes. Lean realization by A8: use uniqueness of left adjoints for the ordinary scalar-extension/restriction adjunction of [lem-sfb-hom-scalar-chain-identification]. Its unit is x mapping to 1 tensor x. The unit formula of Mathlib Adjunction.leftAdjointUniq gives the forward unit and composition formulas; scalar linearity gives general scalars and the isomorphism identities give their inverse formulas. This realizes the same normalized maps described above. In the Lean record, the five inverse normalization fields are redundant and are derived as named theorems from the forward formulas and the isomorphism identities. Long equation fields are transparently named law predicates with their original formulas.",
    "uses": [
     "def-weil-pbc-module-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sfb-hom-scalar-chain-identification"
    ],
    "elementary": true,
    "source": {
@@ -166,6 +168,7 @@
   "def-weil-presheaf-modules-sheafification",
   "def-pur-hom-complex",
   "def-pur-sheaf-hom",
+  "lem-sfb-hom-scalar-chain-identification",
   "def-pc-sheaf-restrict-scalars",
   "lem-sfb-slice-scalar-hom-chain-adjunction",
   "lem-sfb-scalar-hom-chain-evaluation"
@@ -173,7 +176,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification."
+  "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03CZ (lemma-adjointness-tensor-restrict); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Explicit agent generator calculation for the coefficient-square clause extracted from old step 11 of lem-sfb-hom-scalar-chain-identification. Lean realization by A8 reuses the proved normalized coefficient-square theorem, uniquely identifies its normalized maps with the supplied family, constructs extension comparisons by uniqueness of left adjoints, and proves all pasting and Hom-iteration laws by local tensor and product-coordinate extensionality. No unit-level step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -292,12 +295,41 @@
    "SheafOfModules.StrictScalarHom.NormalizedCoefficientMaps.homComparison",
    "SheafOfModules.StrictScalarHom.NormalizedCoefficientSquare",
    "SheafOfModules.StrictScalarHom.NormalizedCoefficientSquare.tensorComparison",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientCompatibility.tensor_pure_law",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientCompatibility.nu_law",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientCompatibility.theta_law",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientCompatibility.alpha_law",
+   "SheafOfModules.StrictScalarHom.NormalizedCoefficientCompatibility.sigma_law",
    "SheafOfModules.StrictScalarHom.NormalizedCoefficientCompatibility",
    "SheafOfModules.StrictScalarHom.NormalizedCoefficientSquare.TensorNatural",
    "SheafOfModules.StrictScalarHom.CoefficientExtensionAssociators",
+   "SheafOfModules.StrictScalarHom.CoefficientExtensionAssociators.unit_inv",
+   "SheafOfModules.StrictScalarHom.CoefficientExtensionAssociators.resUnit_inv",
+   "SheafOfModules.StrictScalarHom.CoefficientExtensionAssociators.tensorUnit_inv",
+   "SheafOfModules.StrictScalarHom.CoefficientExtensionAssociators.comp_inv",
+   "SheafOfModules.StrictScalarHom.CoefficientExtensionAssociators.resComp_inv",
    "SheafOfModules.StrictScalarHom.CoefficientChainSquares",
+   "SheafOfModules.StrictScalarHom.CoefficientChainPasting.kappa_id_law",
+   "SheafOfModules.StrictScalarHom.CoefficientChainPasting.mu_id_law",
+   "SheafOfModules.StrictScalarHom.CoefficientChainPasting.tau_id_law",
+   "SheafOfModules.StrictScalarHom.CoefficientChainPasting.kappa_comp_law",
+   "SheafOfModules.StrictScalarHom.CoefficientChainPasting.mu_comp_law",
+   "SheafOfModules.StrictScalarHom.CoefficientChainPasting.tau_comp_law",
    "SheafOfModules.StrictScalarHom.CoefficientChainPasting",
    "SheafOfModules.StrictScalarHom.CoefficientExtensionAssociators.underlyingComp",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.associativity_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.left_unit_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.right_unit_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.nu_id_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.chi_id_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.theta_id_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.alpha_id_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.sigma_id_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.nu_comp_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.chi_comp_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.theta_comp_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.alpha_comp_law",
+   "SheafOfModules.StrictScalarHom.CoefficientHomIteration.sigma_comp_law",
    "SheafOfModules.StrictScalarHom.CoefficientHomIteration",
    "SheafOfModules.StrictScalarHom.exists_scalarHomChainCoefficientCoherence"
   ],
@@ -315,5 +347,27 @@
   "group": "Q68",
   "result": "pass",
   "note": "Only the lean record differs from side-live; lean.statement matches the file verbatim; first stage-2 delivery of the item. kappa (both directions), mu and tau are pinned by generator formulas (tau as A(nu);mu;U'(kappa);nu'^-1 with tensor_pure). I checked the types of the nu, theta, alpha and sigma equations in diagrammatic order and recomputed both sides on generators; sigma has premise kappa_J;q'=B(q);w with arbitrary q', w and N'. Associators and units (comp_pure t*psi(s), comp_inv inserts 1), kappa/mu/tau id and comp, and the HomIteration assoc/unit and nu/chi/theta/alpha/sigma id and comp laws all check on generators. Universes c, v, u independent; no flatness or boundedness; chi never required invertible; one sorry; docstrings present; Worker report and Second reading sections present. No compile since no file changed; worker reports a clean compile. Advisory: nu and nu_comp clauses are true by definition but their content is carried by tensor_pure and nu_pure; the new square structures repeat the parent's over the item's own input type; parent-helper import cycle risk as for siblings Q76/Q77; TensorProduct.Defs import appears unused."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261023T230356-L-3419170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

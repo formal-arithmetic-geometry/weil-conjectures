@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-space-relative-ampleness-fpqc-descent",
+ "kind": "statement",
+ "title": "Relative ampleness of spaces descends fpqc locally",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $f:X\\to T$ be a morphism of algebraic spaces [def-trf-algebraic-space], and let $L$ be a line module on $X$. A line module on an algebraic space is an $\\mathcal O$-module on its small etale site locally isomorphic to $\\mathcal O$ [def-trf-algebraic-space]. For a morphism $a:Z\\to W$, write $a^*M=\\mathcal O_Z\\otimes_{a^{-1}\\mathcal O_W}a^{-1}M$ using its canonical ringed etale topoi [lem-trf-space-enlarged-etale-ringed-site-model]; on schemes use the corresponding ordinary invertible module [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, def-sc-invertible-module]. For a line module $N$ on a space $Z$ over a scheme $B$, relatively ample means that $Z$ is a scheme and $N$ is ample on the inverse image of every affine open of $B$ [def-weil-pbc-ample-invertible-module]. Let $\\{T_i\\to T\\}_{i\\in I}$ be an fpqc covering by schemes [def-weil-pbc-fpqc-covering]. Put $X_i=X\\times_TT_i$ and let $L_i$ be the tensor pullback of $L$ to $X_i$. Then $L$ is relatively ample over $T$ if and only if every $L_i$ is relatively ample over $T_i$. This equivalence includes that $X$ is a scheme when all the $X_i$ are schemes with the indicated relative ampleness; it requires no properness or Noetherian hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C (lemma-descending-property-ample), specialized to scheme bases and scheme covering members; spaces-divisors.tex Tags 0D31 and 0D32 identify this with the stated scheme-base condition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-fpqc-covering",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-scheme-space-zariski-restriction"
+ ],
+ "proof": [
+  {
+   "text": "For the forward implication, $X$ is a scheme. The scheme relative-ample base-change theorem applies to each $T_i\\to T$, so $X_i$ is a scheme and the ordinary pulled-back invertible module is ample over $T_i$. The Zariski/etale quasi-coherent equivalence identifies that ordinary pullback with the tensor pullback $L_i$ in the statement. This proves the forward implication.",
+   "uses": [
+    "lem-trf-scheme-relative-ample-base-change",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample), implication (1) implies (2)."
+   }
+  },
+  {
+   "text": "Conversely assume every $L_i$ is relatively ample. Each $X_i$ is a scheme by hypothesis. Since absolute ampleness includes quasi-compactness, every inverse image of an affine open of $T_i$ is quasi-compact; hence $f_i$ is quasi-compact. The scheme canonical-Proj criterion implies that $f_i$ is separated. These scheme properties give the scheme-test meanings stated in the descent node. For an affine scheme $Z$ with a map $Z\\to T_i$, the space $X_i\\times_{T_i}Z$ is represented by the scheme fibre product, whose projection to $Z$ is quasi-compact by base change; so this scheme, the inverse image of the affine $Z$, is quasi-compact and is its own surjective etale atlas. For every scheme $W$ with a map $W\\to X_i\\times_{T_i}X_i$, the scheme test of the diagonal is the base change along it of the closed immersion $\\Delta_{f_i}$, hence a closed immersion. Apply fpqc descent of these two properties to $f:X\\to T$: it is quasi-compact and separated. Neither $X$ nor $T$ has been assumed quasi-compact as an absolute space.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-finite-type-morphism",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-space-fpqc-qc-separated-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample), quasi-compact and separated preparation."
+   }
+  },
+  {
+   "text": "Form $\\mathcal A_d=f_*L^{\\otimes d}$ and $\\mathcal A=\\bigoplus_{d\\geq0}\\mathcal A_d$. The graded quasi-coherent section-algebra theorem makes this a quasi-coherent graded Zariski algebra on $T$, interpreted on its small etale site by the scheme-site equivalence. The evaluation theorem supplies the graded homomorphism $\\psi:f^*\\mathcal A\\to\\bigoplus_dL^{\\otimes d}$; each degree is the counit of pullback/direct image, and on local tensors evaluation is $a\\otimes s\\mapsto a\\,s$. The line-module Proj-map theorem now supplies its open generation locus $U=U(\\psi)$ and the canonical map $r:U\\to P=\\operatorname{Proj}_T(\\mathcal A)$, where $P$ is a scheme.",
+   "uses": [
+    "lem-trf-graded-qc-section-algebra-construction",
+    "lem-trf-graded-evaluation-zariski-etale-comparison",
+    "lem-trf-space-line-module-proj-map",
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample), section-algebra and canonical-map paragraphs."
+   }
+  },
+  {
+   "text": "Every $g_i:T_i\\to T$ is flat. Apply flat direct-image base change to the quasi-coherent modules $L^{\\otimes d}$, obtaining $g_i^*\\mathcal A_d\\simeq(f_i)_*L_i^{\\otimes d}$. The canonical comparisons respect products and units: on local tensors the image of $(a\\otimes s)(b\\otimes t)$ is $ab\\,(st)$, the product of $a\\,s$ and $b\\,t$, and $1\\otimes1$ maps to $1$. They therefore assemble to a graded isomorphism $g_i^*\\mathcal A\\simeq\\mathcal A_i$. By the counit definition of this comparison, its adjoint is precisely the pulled-back evaluation; thus $\\psi$ pulls back to the evaluation $\\psi_i$. The scheme-site equivalence and evaluation comparison identify these with the ordinary Zariski section algebra and evaluation on the scheme $X_i$.",
+   "uses": [
+    "lem-sfb-space-flat-direct-image-base-change",
+    "lem-trf-graded-qc-section-algebra-construction",
+    "lem-trf-graded-evaluation-zariski-etale-comparison",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample), flat base change and identification of the natural maps psi_d."
+   }
+  },
+  {
+   "text": "The scheme canonical-Proj criterion applied to $(f_i,L_i)$ gives $U(\\psi_i)=X_i$ and an open immersion $r_i:X_i\\to\\operatorname{Proj}_{T_i}(\\mathcal A_i)$. The Proj-map theorem identifies $U(\\psi_i)$ with the inverse image of $U$, and $r_i$ with the base change of $r$ under $P\\times_TT_i\\simeq\\operatorname{Proj}_{T_i}(\\mathcal A_i)$. To see $U=X$, represent any point of $X$ by $\\operatorname{Spec}K\\to X$. The scheme fpqc base-change axiom makes $\\{\\operatorname{Spec}K\\times_TT_i\\to\\operatorname{Spec}K\\}$ an fpqc cover. Its joint surjectivity gives a point in some member; with its residue field $K'$ this is a map $\\operatorname{Spec}K'\\to\\operatorname{Spec}K\\times_TT_i$, hence by the fibre-product property a field-valued point $\\operatorname{Spec}K'\\to X_i$ whose composite to $X$ is $\\operatorname{Spec}K'\\to\\operatorname{Spec}K\\to X$, so it represents the chosen point of $|X|$ [lem-trf-space-fibre-products-etale-covers]. Since the inverse image of $U$ is all of $X_i$, that point of $X$ lies in $U$. All points lie in the open subspace $U$, so $U=X$: for every scheme $V\\to X$ the open immersion $U\\times_XV\\to V$ is surjective, since each point of $V$ gives a field-valued point of $X$ that factors through $U$ after a field extension, and a surjective open immersion is an isomorphism.",
+   "uses": [
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-space-line-module-proj-map",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "def-weil-pbc-fpqc-covering",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample), surjectivity loci and comparison of r with the local open immersions."
+   }
+  },
+  {
+   "text": "The same scheme fpqc base-change axiom applied to $P\\to T$ makes $\\{P\\times_TT_i\\to P\\}$ an fpqc cover. The base change of $r:X\\to P$ to its ith member is $r_i$, an open immersion with scheme source. Fpqc descent of open immersions from spaces now identifies $X$ with an open subscheme of $P$. Thus $X$ is a scheme. The evaluation comparison identifies $\\mathcal A$ and $\\psi$ with the ordinary section algebra and ordinary evaluation for this scheme and its invertible module. Since $f$ is quasi-compact separated in the scheme-test sense and $X$ is now a scheme, $f$ is a quasi-compact scheme morphism (each $f^{-1}(V)$, $V\\subseteq T$ affine, is the image of a quasi-compact etale atlas) and its diagonal is a closed immersion (test it on the scheme $X\\times_TX$ itself), hence affine and quasi-compact, so $f$ is quasi-separated [def-weil-closed-immersion, def-weil-quasi-separated-morphism]. As $U(\\psi)=X$ and its canonical map is an open immersion, the scheme canonical-Proj criterion implies that $L$ is ample over $T$. This proves the converse, including the asserted schematicity.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-sfb-space-fpqc-open-immersion-descent",
+    "lem-trf-graded-evaluation-zariski-etale-comparison",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample), descent of the open immersion and final application of the scheme ample criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-relative-ample-base-change",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-finite-type-morphism",
+  "lem-trf-scheme-ample-canonical-proj-criterion",
+  "lem-sfb-space-fpqc-qc-separated-descent",
+  "lem-trf-graded-qc-section-algebra-construction",
+  "lem-trf-graded-evaluation-zariski-etale-comparison",
+  "lem-trf-space-line-module-proj-map",
+  "lemma-nagata-relative-proj-exists",
+  "lem-sfb-space-flat-direct-image-base-change",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-space-fpqc-open-immersion-descent",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C (lemma-descending-property-ample), scheme-base case; generation-locus equality uses the arbitrary scheme pullback clause of spaces-divisors.tex Tag 0D2Z."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative ampleness including representability by schemes for a line module on an algebraic space descends along fpqc coverings of the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} [P.RespectsIso],\\n  (RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] => Q) fun {R S} [CommRing R] [CommRing S] => Q') →\\n    (∀ {R\", \"doc\": \"Given a pullback diagram of schemes involving the Spec functor and a codescent condition along ring homomorphisms, if a morphism property $P$ respects isomorphisms and satisfies certain implications w\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively ample invertible sheaf on an algebraic space after a faithfully flat quasi compact base change is relatively ample before base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) →\\n      (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [Comm\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.RespectsIso] [P'.IsStableUnderComposition]\\n  [P.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {S X : AlgebraicGeometry.Scheme} (f : AlgebraicGeometry.Spec R ⟶ S) (g : X ⟶ S),\\n      P' f → P (CategoryTheory.Limits.pullback.fst\", \"doc\": \"Let $ P' $ be a morphism property stable under composition and respecting isomorphisms, and let $ P $ be a property stable under base change. Suppose $ T $ is an affine scheme, and consider morphisms \"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n      ∀ {X Y S : AlgebraicGeometry.Scheme} [AlgebraicGeometry.I\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change and respects isomorphisms, then for affine schemes $ X, Y, S $ with morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $, the property $ P \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso],\\n  (∀ ⦃X Y S : AlgebraicGeometry.Scheme⦄ [inst : AlgebraicGeometry.IsAffine S] [inst_1 : AlgebraicGeometry.IsAffine X]\\n      (f : X ⟶ S) (g : Y ⟶ S), P g → P (CategoryTheory.Limits.pullback.fst f g)) →\\n    P.IsStableUn\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\\\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.RespectsIso fun {R S\", \"doc\": \"If $ Q $ is a ring homomorphism property that is invariant under ring isomorphisms and stable under base change, then the property of a morphism of schemes with affine target being affine and satisfyi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Ample\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*(fpqc|descen)|descen.*ample",
+   "results": "[grep] OK 0 hit(s)\nSearch directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness and schematic representability of algebraic spaces descend under fpqc base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[HasRingHomProperty P Q] (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, affine transition limits of schemes, or general descent of morphism properties; none states this result for algebraic spaces and line modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative ampleness of a line module on an algebraic space including schematicity descends fpqc locally over a scheme",
+   "results": "8 hits: AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.affineLocally, AlgebraicGeometry.targetAffineLocally_affineAnd_le, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.HasAffineProperty.affineAnd_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible module relatively ample after faithfully flat quasi compact scheme covering gives an open embedding of the algebraic space into its relative section Proj",
+   "results": "8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.Proj.openCoverOfISupEqTop",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness of algebraic spaces and schematicity descend under fpqc base change",
+   "results": "8 hits: AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Ample\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*(fpqc|descen)|descen.*ample",
+   "results": "0 hits:  ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-ample-locus",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3C: descend geometric-fibre ampleness to the residue field, and glue the relatively ample open pieces including schematicity. The existing etale-only node does not cover inseparable field extensions.",
+   "via": [
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0D3C through the section algebra and canonical relative Proj map. Reused existing construction, evaluation, arbitrary-pullback Proj map and scheme ample criterion nodes; added three statement-only general inputs for fpqc qc/separated descent, flat degree-zero direct-image base change, and fpqc open-immersion descent with algebraic-space source. Kept the item statement unchanged and used generation-locus pullback to avoid a redundant stalk-flatness lemma.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3) uses compactification and proper/open preservation. This is the existing geometric supporting chain recorded in the item ancestry, via the relative-ample-locus prerequisite to the plurinodal input. Realizes the Stacks 0D3C input of that helper without changing the unit route or claiming that its current proof explicitly mentions alterations.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-relative-ample-base-change",
+    "why": "Generic scheme/space section-algebra, Proj, ampleness or fpqc-covering tool used with its stated hypotheses in the Stacks 0D3C argument; this unit supplies no replacement for this geometric construction."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme/space section-algebra, Proj, ampleness or fpqc-covering tool used with its stated hypotheses in the Stacks 0D3C argument; this unit supplies no replacement for this geometric construction."
+   },
+   {
+    "node": "lem-trf-scheme-ample-canonical-proj-criterion",
+    "why": "Generic scheme/space section-algebra, Proj, ampleness or fpqc-covering tool used with its stated hypotheses in the Stacks 0D3C argument; this unit supplies no replacement for this geometric construction."
+   },
+   {
+    "node": "lem-trf-graded-qc-section-algebra-construction",
+    "why": "Generic scheme/space section-algebra, Proj, ampleness or fpqc-covering tool used with its stated hypotheses in the Stacks 0D3C argument; this unit supplies no replacement for this geometric construction."
+   },
+   {
+    "node": "lem-trf-graded-evaluation-zariski-etale-comparison",
+    "why": "Generic scheme/space section-algebra, Proj, ampleness or fpqc-covering tool used with its stated hypotheses in the Stacks 0D3C argument; this unit supplies no replacement for this geometric construction."
+   },
+   {
+    "node": "lem-trf-space-line-module-proj-map",
+    "why": "Generic scheme/space section-algebra, Proj, ampleness or fpqc-covering tool used with its stated hypotheses in the Stacks 0D3C argument; this unit supplies no replacement for this geometric construction."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Generic scheme/space section-algebra, Proj, ampleness or fpqc-covering tool used with its stated hypotheses in the Stacks 0D3C argument; this unit supplies no replacement for this geometric construction."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Generic scheme/space section-algebra, Proj, ampleness or fpqc-covering tool used with its stated hypotheses in the Stacks 0D3C argument; this unit supplies no replacement for this geometric construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-relative-ample-base-change",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-scheme-ample-canonical-proj-criterion",
+  "lem-trf-graded-qc-section-algebra-construction",
+  "lem-trf-graded-evaluation-zariski-etale-comparison",
+  "lem-trf-space-line-module-proj-map",
+  "lemma-nagata-relative-proj-exists",
+  "lem-weil-pbc-fpqc-covering-axioms"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-376985d5c",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-376985d5c (reviewer sub-agent of L); spot-checked: Read in full: Stacks 0D3C proof; tags checked 073K, 041L, 0421, 041X, 0D31, 0D32, 0D2Z. The six steps follow the source in order. Step 5 proves U(psi)=X by the 0D2Z pullback clause plus an fpqc point argument, which is valid; Stacks uses stalk faithful flatness instead. The statement is unchanged. This is a first split with no repair note, and in live the item is still unsplit. Three new statement-only nodes (spaces 041L+0421, 073K i=0, 041X): all true, tested on small cases (identity cover, empty base, M=0, a non-étale field extension), and none restates a clause of the item. They are not duplicates of lem-sfb-space-quasicompact-fppf-local or lem-sfb-space-four-property-fppf-descent (both need lfp), lem-a1-space-fpqc-separated-valuative-descent, lem-trf-space-section-algebra-etale-base-change (étale only), lem-galois-fpqc-descend-open-immersion (scheme source), lem-sfb-representable-fppf-etale-open-descent, lem-trf-algebraic-space-ample-local (étale analogue) or lem-trf-polarized-scheme-etale-descent. FIX, item steps only, three faults: (C1, step 2) going from scheme qc/separated of f_i to the scheme-test meanings needed by the descent node used 01K5/01QR uncited; I wrote it out and cited lem-pc-quasi-compact-base-change and lem-weil-pbc-closed-immersion-base-change. (C1/E5, step 5) the point argument and U=X used |X| without its node; I spelled out the K'-point and the surjective-open-immersion argument and cited lem-trf-space-fibre-products-etale-covers. (E1, step 6) the criterion's (2)=>(1) needs f qc and quasi-separated as a scheme morphism; I added the conversion from the space sense (diagonal closed immersion, hence affine and qc) with def-weil-closed-immersion and def-weil-quasi-separated-morphism. Batch-5: every flagged trf citation is a generic definition or a Stacks scheme/space tool (0893, 01VJ, 03M9, 0D2Z, counit, site models, 03KG/03KM), not part of the trace formula or Poincaré duality, so all are accepted. split_report.tool_uses (8 generic tools) accepted. No cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeAmplenessFpqcDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relative_ampleness_iff_fpqc_scheme_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeAmplenessFpqcDescent.lean",
+  "statement": "theorem relative_ampleness_iff_fpqc_scheme_cover {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (f : X ⟶ schemeSpace T) (L : X.Modules) (hL : X.IsLineModule L) {I : Type v} (Tᵢ : I → Over S) (g : ∀ i : I, Tᵢ i ⟶ T) (hg : Presieve.ofArrows (fun i ↦ (Tᵢ i).left) (fun i ↦ (g i).left) ∈ Scheme.fpqcPrecoverage T.left) : (∃ (Z : Over S) (a : schemeSpace Z ⟶ X) (p : Z ⟶ T), IsIso a ∧ a.hom.hom ≫ f.hom.hom = yoneda.map p ∧ ∀ V : T.left.Opens, IsAffineOpen V → ∃ h : ((Scheme.Modules.tensorPullback (p.left ⁻¹ᵁ V).ι).obj ((schemeSpaceZariskiRestriction Z).obj ((moduleTensorPullback a).obj L))).IsInvertible, @Scheme.Modules.IsAmple (p.left ⁻¹ᵁ V).toScheme ((Scheme.Modules.tensorPullback (p.left ⁻¹ᵁ V).ι).obj ((schemeSpaceZariskiRestriction Z).obj ((moduleTensorPullback a).obj L))) h) ↔ ∀ i : I, ∃ (Z : Over S) (a : schemeSpace Z ⟶ X) (p : Z ⟶ Tᵢ i), IsPullback a.hom.hom (yoneda.map p) f.hom.hom (yoneda.map (g i)) ∧ ∀ V : (Tᵢ i).left.Opens, IsAffineOpen V → ∃ h : ((Scheme.Modules.tensorPullback (p.left ⁻¹ᵁ V).ι).obj ((schemeSpaceZariskiRestriction Z).obj ((moduleTensorPullback a).obj L))).IsInvertible, @Scheme.Modules.IsAmple (p.left ⁻¹ᵁ V).toScheme ((Scheme.Modules.tensorPullback (p.left ⁻¹ᵁ V).ι).obj ((schemeSpaceZariskiRestriction Z).obj ((moduleTensorPullback a).obj L))) h",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3abb631d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 8458eb5d. New def node def-sfb-scheme-space-zariski-restriction: schemeSpaceZariskiRestriction = schemeRestriction (owned by def-trf-space-module-scheme-restriction) at the identity Yoneda chart; étaleness from clause 8 of representable_etale_scheme_tests. Real data, same sections and ring map as the old evaluationZariskiRestriction, no duplicate in side-live, record fields complete. Item cites the new node and def-trf-space-etale-module-functors in stmt_deps; graded-evaluation theorem moved to proof_deps; statement text unchanged; lean.statement verbatim. Clauses match 0D3C/0D32: IsIso plus compatibility on the left, IsPullback representing X×_T Tᵢ on the right, affine-open IsAmple with Prop-valued IsInvertible argument, any fpqc index type, no extra hypotheses. Edge cases and universes fine; only sorry is the theorem's; docstrings present; imports exist on base. Advisory: second reading was in-thread."
+ }
+}

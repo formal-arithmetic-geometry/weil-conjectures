@@ -217,7 +217,18 @@
    "where": "proof"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-trace-perfectness",
  "split_report": {
@@ -277,11 +288,16 @@
   "note": "Wrote review.md. Checked all eight statement dependencies, sources, exact declarations, hypotheses, both equivalences, universes, edge cases, report sections, and pilot gates. Immutable module reproduced cleanly through scompile.py in sandbox and library modes. No delivery errors or fixes required."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ be the\nfinite coefficient ring,\nso that $A$ is a local Artinian ring with maximal ideal\n$(\\varpi_E)$, and let $C$ be a bounded complex of $A$-modules\nwhose cohomology modules are finite, i.e. an object of the\nfinite-coefficient\ncategory over a point. Then $C$ has\nfinite Tor amplitude if and\nonly if $C$ lies in $D^b_{\\mathrm{fin}}(A)$ in the sense of\n[def-trf-categorical-trace], i.e. if and only if $C$ is\nquasi-isomorphic to a bounded complex of finitely generated free\n$A$-modules.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A=A_{E,n}=\\mathcal O_E/\\pi_E^n$ be the\nfinite coefficient ring,\nso that $A$ is a local Artinian ring with maximal ideal\n$(\\pi_E)$, and let $C$ be a bounded complex of $A$-modules\nwhose cohomology modules are finite, i.e. an object of the\nfinite-coefficient\ncategory over a point. Then $C$ has\nfinite Tor amplitude if and\nonly if $C$ lies in $D^b_{\\mathrm{fin}}(A)$ in the sense of\n[def-trf-categorical-trace], i.e. if and only if $C$ is\nquasi-isomorphic to a bounded complex of finitely generated free\n$A$-modules.",
   "proof": [
    {
-    "text": "Write $A=A_{E,n}$ for the finite coefficient ring of\n[def-trf-coefficient-conventions]: it is a local ring with\nmaximal ideal $(\\varpi_E)$.",
+    "text": "Write $A=A_{E,n}$ for the finite coefficient ring of\n[def-trf-coefficient-conventions]: it is a local ring with\nmaximal ideal $(\\pi_E)$.",
     "uses": [
      "def-trf-coefficient-conventions"
     ],
@@ -296,14 +312,14 @@
     "elementary": false
    },
    {
-    "text": "*(Only if.)* Suppose that $C$ has finite Tor amplitude, i.e. finite tor dimension in the sense of\n[Stacks, Tag 0652](https://stacks.math.columbia.edu/tag/0652)\n(Definition 15.68.1, in Section 15.68, Tor dimension).\nEach cohomology module $H^i(C)$ is finite by hypothesis, hence\n$0$-pseudo-coherent as an $A$-module by\n[Stacks, Tag 064T](https://stacks.math.columbia.edu/tag/064T);\nsince $C$ is bounded it lies in $D^-(A)$, so\n[Stacks, Tag 066B](https://stacks.math.columbia.edu/tag/066B)\nshows that the complex $C$ itself is pseudo-coherent. By\n[Stacks, Tag 0658](https://stacks.math.columbia.edu/tag/0658) a\npseudo-coherent complex of finite tor dimension over a ring is\nperfect, and if it has tor amplitude in $[a,b]$ it is\nquasi-isomorphic to a complex $E^\\bullet$ of finite projective\n$A$-modules with $E^i=0$ for $i\\notin[a,b]$. Since $A$ is a\nlocal ring, a finite projective $A$-module is free\n([Stacks, Tag 00NZ](https://stacks.math.columbia.edu/tag/00NZ),\nLemma 10.78.5: a finite flat module over a local ring is finite free;\nequivalently\n[Tag 00NX](https://stacks.math.columbia.edu/tag/00NX), Lemma 10.78.2,\nparts (2) and (5), together with Nakayama's lemma), so that\n$E^\\bullet$ is a bounded\ncomplex of finitely generated free $A$-modules quasi-isomorphic to\n$C$: $C$ lies in the category $D^b_{\\mathrm{fin}}(A)$ of\n[def-trf-categorical-trace].\n\nThe finite-Tor-amplitude hypothesis cannot be dropped in the second\ndirection: the module $A/(\\varpi_E)$, viewed as a complex\nconcentrated in degree $0$, has finite cohomology modules, while its\nminimal free resolution\n\n$$\n\\cdots\\to A\\xrightarrow{\\varpi_E}A\\xrightarrow{\\varpi_E}A\\to\nA/(\\varpi_E)\\to0\n$$\n\nis infinite, so that $\\operatorname{Tor}_i^A(A/(\\varpi_E), A/(\\varpi_E))\\cong A/(\\varpi_E)\\neq0$ for all $i\\geq0$ and\n$A/(\\varpi_E)$ is not quasi-isomorphic to a bounded complex of\nfinite free $A$-modules.",
+    "text": "*(Only if.)* Suppose that $C$ has finite Tor amplitude, i.e. finite tor dimension in the sense of\n[Stacks, Tag 0652](https://stacks.math.columbia.edu/tag/0652)\n(Definition 15.68.1, in Section 15.68, Tor dimension).\nEach cohomology module $H^i(C)$ is finite by hypothesis, hence\n$0$-pseudo-coherent as an $A$-module by\n[Stacks, Tag 064T](https://stacks.math.columbia.edu/tag/064T);\nsince $C$ is bounded it lies in $D^-(A)$, so\n[Stacks, Tag 066B](https://stacks.math.columbia.edu/tag/066B)\nshows that the complex $C$ itself is pseudo-coherent. By\n[Stacks, Tag 0658](https://stacks.math.columbia.edu/tag/0658) a\npseudo-coherent complex of finite tor dimension over a ring is\nperfect, and if it has tor amplitude in $[a,b]$ it is\nquasi-isomorphic to a complex $E^\\bullet$ of finite projective\n$A$-modules with $E^i=0$ for $i\\notin[a,b]$. Since $A$ is a\nlocal ring, a finite projective $A$-module is free\n([Stacks, Tag 00NZ](https://stacks.math.columbia.edu/tag/00NZ),\nLemma 10.78.5: a finite flat module over a local ring is finite free;\nequivalently\n[Tag 00NX](https://stacks.math.columbia.edu/tag/00NX), Lemma 10.78.2,\nparts (2) and (5), together with Nakayama's lemma), so that\n$E^\\bullet$ is a bounded\ncomplex of finitely generated free $A$-modules quasi-isomorphic to\n$C$: $C$ lies in the category $D^b_{\\mathrm{fin}}(A)$ of\n[def-trf-categorical-trace].\n\nThe finite-Tor-amplitude hypothesis cannot be dropped in the second\ndirection: the module $A/(\\pi_E)$, viewed as a complex\nconcentrated in degree $0$, has finite cohomology modules, while its\nminimal free resolution\n\n$$\n\\cdots\\to A\\xrightarrow{\\pi_E}A\\xrightarrow{\\pi_E}A\\to\nA/(\\pi_E)\\to0\n$$\n\nis infinite, so that $\\operatorname{Tor}_i^A(A/(\\pi_E), A/(\\pi_E))\\cong A/(\\pi_E)\\neq0$ for all $i\\geq0$ and\n$A/(\\pi_E)$ is not quasi-isomorphic to a bounded complex of\nfinite free $A$-modules.",
     "uses": [
      "def-trf-categorical-trace"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "reviewed_proof": {
   "date": "2026-10-18",

@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-finite-algebra-relative-m-pseudocoherence",
+ "kind": "statement",
+ "title": "Finite algebra restriction preserves and reflects relative degreewise pseudo-coherence",
+ "statement": "Let $R,A,B$ be commutative rings and let $R\\to A\\to B$ be compatible ring maps. Assume $A$ and $B$ are finitely generated $R$-algebras and $B$ is finitely generated as an $A$-module. Let $m\\in\\mathbf Z$ and $M\\in D(B)$ [def-weil-abstract-derived-category]. Then $M$ is $m$-pseudo-coherent relative to $R$ if and only if $\\operatorname{Res}_{A\\to B}M\\in D(A)$ is $m$-pseudo-coherent relative to $R$ [def-sfb-ring-relative-m-pseudocoherent]. Restriction of scalars is termwise, with the same groups and differentials and with $a$ acting through its image in $B$. The relative predicates on the two sides use the given $R$-algebra structures on $B$ and $A$, respectively. No Noetherian, finite-presentation, flatness or cohomological boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0673, lemma-finite-extension-pseudo-coherent, fixed-m clause"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sfb-ring-relative-m-pseudocoherent"
+ ],
+ "proof": [
+  {
+   "text": "If $R=0$, unitality forces $A=B=0$, and every unital module is zero since $x=1x=0x=0$. Thus every representing complex is zero; the polynomial presentation with no variables and the zero finite free approximation witness both relative predicates for every $m$. Hence assume $R\\ne0$. Choose a finite generating set of $A$ over $R$, giving $\\alpha:P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$. Choose $y_1,\\ldots,y_s\\in B$ generating $B$ as an $A$-module. They also generate it as an $A$-algebra: every element is already an $A$-linear combination of them. Evaluation therefore gives a surjection $\\gamma:T=P[Y_1,\\ldots,Y_s]\\twoheadrightarrow B$, sending $Y_j$ to $y_j$. This is a finite polynomial presentation over $R$.",
+   "uses": [
+    "def-sfb-ring-relative-m-pseudocoherent",
+    "def-pc-ring-m-pseudo-coherent",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0673, lemma-finite-extension-pseudo-coherent, first two sentences; zero-ring case made explicit."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-algebra-is-integral], each $y_j$ satisfies a monic equation over $A$. Lift its finitely many lower coefficients through $\\alpha$, keeping leading coefficient $1$, to obtain $f_j(Z)\\in P[Z]$ with $f_j(y_j)=0$ in $B$. We may take its degree $d_j\\geq1$: if the equation is the constant $1$, replace it by $Z$ times that equation before lifting. Put $C=T/(f_1(Y_1),\\ldots,f_s(Y_s))$. Here $(f_1,\\ldots,f_s)$ means all finite sums of ring multiples, and the quotient identifies elements whose difference is in this ideal. The evaluation $\\gamma$ factors through $C\\to B$, since it kills every generator of the ideal. The composite $P\\to C\\to B$ is the given $P\\to A\\to B$ on coefficients and generators.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0673, lemma-finite-extension-pseudo-coherent, monic polynomials and commutative diagram."
+   }
+  },
+  {
+   "text": "For $0\\leq j\\leq s$ put $T_j=T/(f_1(Y_1),\\ldots,f_j(Y_j))$, so $T_0=T$ and $T_s=C$. The polynomial universal property identifies $T_{j-1}$ with $E_j[Y_j]$, where $E_j=(P[Y_1,\\ldots,Y_{j-1}]/(f_1,\\ldots,f_{j-1}))[Y_{j+1},\\ldots,Y_s]$: the maps fixing all variables and coefficients are inverse. The image of $f_j$ is monic of positive degree in $Y_j$. Multiplication by it is injective, since a nonzero polynomial with top coefficient $c\\ne0$ has product with top coefficient $c$ in degree $d_j$ higher. Its cokernel is $T_j$ by definition. Hence $[T_{j-1}\\xrightarrow{f_j(Y_j)}T_{j-1}]$, in degrees $-1,0$ and augmented by the quotient, is a bounded finite free resolution of $T_j[0]$. Thus $T_j[0]$ is pseudo-coherent over $T_{j-1}$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0673, verification of the top right vertical map against Tag 064Z, expanded one monic equation at a time."
+   }
+  },
+  {
+   "text": "Put $D_j=P[Y_1,\\ldots,Y_j]/(f_1,\\ldots,f_j)$, including $D_0=P$ and $D_s=C$. Apply [lem-weil-pbc-monic-quotient-free] to $D_j=D_{j-1}[Y_j]/(f_j(Y_j))$. It gives the basis $1,Y_j,\\ldots,Y_j^{d_j-1}$ over $D_{j-1}$. Induction gives a $P$-basis of $D_j$ consisting of the products $Y_1^{e_1}\\cdots Y_j^{e_j}$ with $0\\leq e_i<d_i$: expand a vector in the new power basis and then expand each coefficient in the previous basis; uniqueness at these two stages proves independence. The induction starts with the basis $1$ of the nonzero ring $P$, and the nonempty basis at each stage also shows $D_j\\ne0$. Thus $C$ is finite free over $P$. Its degree-zero complex is itself a bounded finite free model, so $C[0]$ is pseudo-coherent over $P$. The empty list gives $C=P$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0673, verification of the top horizontal map against Tag 064Z: finite freeness over the polynomial base."
+   }
+  },
+  {
+   "text": "Regard $M$ as a $C$-complex through $C\\to B$. Apply [lem-sfb-m-pseudocoherent-algebra-scalar-restriction] first to each $T_{j-1}\\to T_j$, whose algebra is pseudo-coherent by step 3, and then to $P\\to C$, whose algebra is pseudo-coherent by step 4. This gives $$\\gamma_*M\\text{ is }m\\text{-pseudo-coherent over }T\\ \\Longleftrightarrow\\ M|_C\\text{ is }m\\text{-pseudo-coherent over }C\\ \\Longleftrightarrow\\ (P\\to B)_*M\\text{ is }m\\text{-pseudo-coherent over }P.$$ All restrictions have the same groups and differentials, and the scalar actions agree because the ring maps compose as in step 2. For $s=0$ the first equivalence is the identity. No tensor product or flatness of $A\\to B$ is used.",
+   "uses": [
+    "lem-sfb-m-pseudocoherent-algebra-scalar-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0673, final paragraph: two applications of the fixed-m equivalence in Tag 064Z; the quotient application is iterated."
+   }
+  },
+  {
+   "text": "By [def-sfb-ring-relative-m-pseudocoherent], relative $m$-pseudo-coherence is the existence of a polynomial presentation with the indicated absolute predicate, using ordinary-module derived restriction induced termwise. The revised definition explicitly supplies this functor; its underlying additive groups and differentials are unchanged. By [lem-sfb-polynomial-presentation-m-pseudocoherence-invariance], existence is equivalent to the predicate on any chosen presentation: compare a witnessing presentation with the chosen one for the forward implication, and use the chosen one as witness for the reverse. Apply this to $A$ with presentation $\\alpha$ and to $B$ with presentation $\\gamma$. The two resulting absolute predicates are exactly the rightmost and leftmost predicates in step 5, since restriction along $P\\to A\\to B$ agrees termwise with the composite. Step 5 therefore proves the required equivalence for the given integer $m$.",
+   "uses": [
+    "def-sfb-ring-relative-m-pseudocoherent",
+    "lem-sfb-polynomial-presentation-m-pseudocoherence-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 065H and 065I, lemma-relatively-pseudo-coherent and definition-relatively-pseudo-coherent; conclusion of Tag 0673."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ring-relative-m-pseudocoherent",
+  "def-pc-ring-m-pseudo-coherent",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sfb-m-pseudocoherent-algebra-scalar-restriction",
+  "lem-sfb-polynomial-presentation-m-pseudocoherence-invariance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0673, lemma-finite-extension-pseudo-coherent; the two 064Z hypotheses are verified explicitly using successive monic quotients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite type R algebras A and B with B finite over A a complex of B modules is m pseudo coherent relative to R if and only if its restriction of scalars to A is",
+   "results": "OK: 8 hits; Algebra.FinitePresentation.of_restrict_scalars_finitePresentation, Algebra.QuasiFinite.of_restrictScalars, Module.Finite.of_restrictScalars_finite, Module.Presentation.restrictScalars, Algebra.FormallyUnramified.projective_of_restrictScalars, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.FinitePresentation.trans, FinitePresentation.of_isBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded finite free approximations of a complex over a polynomial ring are unchanged under a finite extension of finite type algebras over the base ring",
+   "results": "OK: 8 hits; Algebra.FinitePresentation.of_restrict_scalars_finitePresentation, Algebra.SubmersivePresentation, Algebra.FormallyUnramified.finite_of_free, Algebra.EssFiniteType.of_comp, Algebra.Smooth.exists_finiteType, Algebra.EssFiniteType.comp_iff, Algebra.Generators.exists_presentation_of_free_cotangent, Algebra.Smooth.exists_subalgebra_finiteType",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite algebra extension restriction of scalars preserves and reflects relative degreewise pseudo coherence using finite polynomial presentations",
+   "results": "OK: 8 hits; IsAlgebraic.restrictScalars_of_isIntegral, Module.Presentation.RestrictScalarsData, Module.Presentation.restrictScalars, Algebra.FinitePresentation.baseChange, AlgHom.coe_restrictScalars, Algebra.FinitePresentation.of_restrict_scalars_finitePresentation, Algebra.FiniteType.of_restrictScalars_finiteType, IsAlgebraic.restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pseudo.?coher|pseudo.?coher.*finite",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite map of finite type R algebras preserves and reflects relative m pseudo coherence of derived modules",
+   "results": "{\"t\": \"2026-10-23T22:20:34Z\", \"tool\": \"leanfinder\", \"query\": \"A finite map of finite type R algebras preserves and reflects relative m pseudo coherence of derived modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"RingHom.finite_isStableUnderBaseChange\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"RingHom.finitePresentation_isStableUnderBaseChange\", \"Algebra.EssFiniteType.comp_iff\", \"AlgHom.FinitePresentation.of_comp_finiteType\", \"RingHom.QuasiFinite.isStableUnderBaseChange\", \"Algebra.FinitePresentation.trans\"], \"digest\": \"084816f303fa788f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar restriction relative degreewise pseudo coherent complex via monic equations and polynomial presentations",
+   "results": "{\"t\": \"2026-10-23T22:20:36Z\", \"tool\": \"leanfinder\", \"query\": \"Finite scalar restriction relative degreewise pseudo coherent complex via monic equations and polynomial presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.instFiniteUniversalFactorizationRing\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"Module.Presentation.restrictScalars\", \"Algebra.QuasiFinite.of_restrictScalars\", \"MvPolynomial.finitePresentation_universalFactorizationMap\", \"Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite\", \"RingHom.finitePresentation_isStableUnderBaseChange\", \"FinitePresentation.of_isBaseChange\"], \"digest\": \"448eca63d342ba26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex over a finite algebra is relatively m pseudo coherent if and only if its restriction is relatively m pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T22:20:30Z\", \"tool\": \"leansearch\", \"query\": \"A complex over a finite algebra is relatively m pseudo coherent if and only if its restriction is relatively m pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.restriction\", \"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"Algebra.QuasiFinite.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"Algebra.QuasiFinite.casesOn\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\"], \"digest\": \"dc8e13620e710081\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T22:20:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pseudo.?coher|pseudo.?coher.*finite",
+   "results": "{\"t\": \"2026-10-23T22:20:29Z\", \"tool\": \"grep\", \"query\": \"finite.*pseudo.?coher|pseudo.?coher.*finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-relative-pseudocoherent-pushforward",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, finite locally free case: applying lemma-finite-morphism-relative-pseudo-coherence to the pulled-back complex. Tag 09UK proof: the algebraic finite-extension input 0673, before translation into schemes.",
+   "via": [
+    "lem-sfb-finite-relative-pseudocoherent-pushforward",
+    "lem-sfb-relative-pseudocoherence-fppf-descent",
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-algebra-relative-m-pseudocoherence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Tag 0673 through lifted monic equations, explicit two-term resolutions for successive monic quotients, the existing monic power basis, fixed-m scalar restriction, and fixed-m polynomial-presentation independence. Two new statement-only nodes supply exactly the fixed-degree clauses absent from the existing pseudo-coherence nodes; no Mathlib leaves or attachments found. Repair of the returned landing: re-read the current relative definition, whose predicate is unchanged but whose derived restriction interface is now explicit; clarified step 6 and refreshed its quotes in steps 1 and 6. Revalidated every other cited statement against the current DAG; retained the existing proof route, new nodes, citations and logged searches.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite, through Tag 09UK and the finite locally free case of 0CSN: the algebraic Tag 0673 comparison. The newest blueprint direct-images proof and unit were read. Its inherited ancestor chain is broken: blueprint_refs.py ancestor returns None, which is preserved rather than inventing an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-34f1ff860",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-34f1ff860 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, every cited statement and Stacks more-algebra.tex 0673, 064Z, 065H and 065I with their proofs (labels checked against tags/tags). I made no fixes and accepted no tool_uses. Re-delivery after the landing return of the PASSed head 716507b9: only step 6 changed, now naming the derived restriction of the current def-sfb-ring-relative-m-pseudocoherent. All 7 cited statements and the item statement/stmt_deps equal the live clone, the live item is still unsplit, and there is no repair note. The item is exactly the fixed-m clause of 0673 with every hypothesis kept. Steps: (1) R=0 forces A=B=0; otherwise T=P[Y]->B is a finite polynomial presentation. (2) Integrality gives monic equations, lifted through alpha with degree forced >=1 (the degree-0 case means B=0). (3) T_{j-1}=E_j[Y_j]; a monic polynomial is a nonzerodivisor over any ring, so a two-term free resolution makes T_j[0] pseudo-coherent over T_{j-1}. (4) monic-quotient-free plus induction on the product basis makes C finite free over P. (5) Fixed-m 064Z is applied s+1 times with its hypotheses verified; the composites agree with gamma and with P->A->B. (6) Fixed-m 065H turns the existential definition into the chosen presentations alpha and gamma. Together these spell out the 064Z hypotheses that the 0673 proof leaves unchecked. New nodes: both are statement-only, self-contained and match 064Z and 065H hypothesis for hypothesis. Test S=k[x]->k with V[0], V infinite-dimensional: both sides hold at m=1 and both fail at m=0. They are not duplicates of the all-degrees nodes, which give no fixed-m conclusion: a finite, non-finitely-presented module is 0-pseudo-coherent but not pseudo-coherent. Advisory: the 09VC scheme node lem-sfb-affine-polynomial-embedding-pseudocoherence-invariance is a neighbour, not a duplicate (it is sheaf-level and would need 08E7 and a tilde translation), and the report does not discuss it. No SGA source; blueprint.from.node=null is inherited."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteAlgebraRelativeMPseudoCoherence",
+  "declaration": "DerivedCategory.isMPseudoCoherentRelativeTo_restrictScalars_finite_iff",
+  "file": "lean/Sheaf/RingTheory/FiniteAlgebraRelativeMPseudoCoherence.lean",
+  "statement": "theorem isMPseudoCoherentRelativeTo_restrictScalars_finite_iff (R : Type u) {A B : Type u} [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] [Algebra A B] [IsScalarTower R A B] [Algebra.FiniteType R A] [Algebra.FiniteType R B] [Module.Finite A B] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wB} (ModuleCat.{u} B)] [∀ n : ℕ, HasDerivedCategory.{wP} (ModuleCat.{u} (MvPolynomial (Fin n) R))] (m : ℤ) (M : DerivedCategory (ModuleCat.{u} B)) : IsMPseudoCoherentRelativeTo R m M ↔ IsMPseudoCoherentRelativeTo R m ((RingDerivedScalarExtension.moduleDerivedRestriction (algebraMap A B)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e95f0709",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Read item node, both stmt_deps (DerivedCategory; IsMPseudoCoherentRelativeTo in live RelativeMPseudoCoherent.lean), moduleDerivedRestriction (termwise restrictScalars, same functor as in the def), Stacks 0673 statement/proof. Clauses match: CommRing R A B, Algebra R A/R B/A B + IsScalarTower, FiniteType R A and R B, Module.Finite A B, m:ℤ, M:D(B); conclusion fixed-m iff with restriction along algebraMap A B; no Noetherian/fp/flat/bounded/Nontrivial assumptions. Edge cases R=0, B=0, M=0, Fin 0, negative m, unbounded M, k→k V[0] at m=0/1 OK. Snapshot item node = live except new lean; dep records identical to live; lean.statement verbatim; sorry only; source/blueprint docstrings with 6 proof steps; universes bound; no duplicate (only scheme-level predicate/theorem). Advisory: common universe u inherited from recorded interfaces. No file changed, no compile."
+ }
+}

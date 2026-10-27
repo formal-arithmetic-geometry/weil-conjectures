@@ -1,0 +1,325 @@
+{
+ "id": "lem-sfb-log-pullback-smooth-image-integrality",
+ "kind": "statement",
+ "title": "Integral logarithmic pullback at smooth and marked images",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $K$ and residue field $k$, and put $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-pc-field-extension, def-weil-affine-spectrum]. Let $X\\to S$ and $Y\\to S$ be projective flat finitely presented morphisms whose geometric fibres are nonempty connected reduced curves of pure dimension one with only ordinary double points. Give them pairwise disjoint sections $a_1,\\ldots,a_n$ and $b_1,\\ldots,b_n$ in the relative smooth loci, with $n\\geq0$. The meanings of marked nodal family and of its canonically normalized dualizing invertible module are those of [lem-sfb-nodal-log-canonical-reconstruction]. Put $D_X=\\sum_j a_j(S)$, $D_Y=\\sum_j b_j(S)$ and $L_X=\\omega_{X/R}(D_X)$, $L_Y=\\omega_{Y/R}(D_Y)$ [def-pc-divisor-line-bundle]. Let $p:Y\\to X$ be an $S$-morphism with $p b_j=a_j$ and assume $p_K:Y_K\\to X_K$ is an isomorphism. Let $M=(p^*L_X)^\\vee\\otimes L_Y$ [def-pc-module-pullback, def-sc-invertible-module], and let $s_K\\in\\Gamma(Y_K,M|_{Y_K})$ be the section corresponding to the canonical logarithmic-dualizing pullback isomorphism of $p_K$. For a generic point $\\eta$ of an irreducible component of $Y_k$, set $A=\\mathcal O_{Y,\\eta}$ and regard the germ of $s_K$ as an element of $M_\\eta[1/\\pi]$; this is restriction to the inverse image of $Y_K$ in $\\operatorname{Spec}A$. If $p(\\eta)$ belongs to the relative smooth locus of $X/S$, then $s_K$ belongs to the image of $M_\\eta\\to M_\\eta[1/\\pi]$. This includes both unmarked and marked images of $\\eta$, even if $p$ contracts its special-fibre component to a marked point. More explicitly, $\\eta$ is relatively smooth and unmarked, $A$ is a discrete valuation ring with uniformizer $\\pi$, and $A[1/\\pi]$ is its fraction field. For every nonzero $a\\in A$ there are $m\\geq0$ and $w\\in A^\\times$ with $a=\\pi^m w$, and the relative logarithmic differential $\\mathrm da/a$ in $\\Omega^1_{A[1/\\pi]/R}$ is the image of $w^{-1}\\mathrm dw\\in\\Omega^1_{A/R}$ [def-weil-pbc-kahler-differentials]. At a marked image, any centred etale coordinate $t$ with that section as zero scheme has logarithmic frame $\\mathrm dt/t$; its pullback $p^*t$ is nonzero and the generic image of this frame is the regular differential just specified. No properness of $p$, normality of the total spaces, positivity, or smoothness of the whole generic fibre is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 054L (lemma-smooth-etale-over-affine-space), centred smooth-section coordinates; agent logarithmic-integrality argument from old lem-sfb-nodal-log-dualizing-pullback Steps 2, 4 and 5, using algebra.tex lemma-intersection-powers-ideal-module and duality.tex lemma-fundamental-class-lci. Not a verbatim assertion of the tag."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "def-pc-divisor-line-bundle",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-pbc-kahler-differentials",
+  "def-sc-relative-differential-sheaf",
+  "def-a1-relative-differentials-pullback-map"
+ ],
+ "proof": [
+  {
+   "text": "Finite presentation over the Noetherian affine $S$ makes $Y$ locally Noetherian by [pqf-lem-locnoeth-lft]; quasi-compactness makes it Noetherian. Apply [lem-trf-generic-fibre-points-smooth] to $Y/S$: flatness, finite presentation and geometrically reduced fibres are hypotheses. Thus $\\eta$ has a relatively smooth open neighbourhood $W$. Its nonempty fibres are open parts of pure one-dimensional fibres. Apply [lem-sfb-smooth-trait-curve-local-properties] to $W/S$: $A$ is a Noetherian regular local domain and $\\dim A=1+\\dim\\mathcal O_{Y_k,\\eta}=1$. Indeed the fibre local ring is localization at a minimal prime, whose spectrum has just that prime, hence dimension zero.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-trf-generic-fibre-points-smooth",
+    "lem-sfb-smooth-trait-curve-local-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056V (lemma-geometrically-reduced-dense-smooth-open); morphisms.tex Tags 01V9 (lemma-smooth-at-point), 01T6; algebra.tex Tag 00ON (lemma-dimension-base-fibre-equals-total)."
+   }
+  },
+  {
+   "text": "[lem-sbc-scheme-fibre-stalk-quotient] identifies $A/\\pi A$ with the fibre local ring. This ring is reduced because $Y_k$ is reduced, and its only prime is its maximal ideal because $\\eta$ is a component generic point. That maximal ideal is its nilradical, hence zero. Thus $A/\\pi A$ is a field and $\\mathfrak m_A=\\pi A$. Flatness over $R$ makes $\\pi$ a non-zero-divisor, in particular $\\pi\\ne0$ in the domain $A$; the discrete valuation ring property is derived from the definition in step 3.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), condition (4); schemes.tex Tag 0HA1 (lemma-local-ring-fibre). Agent local calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-krull-intersection-jacobson] to the Noetherian local ring $A$, ideal $(\\pi)=\\mathfrak m_A$ and finite module $A$. For $a\\ne0$ there is therefore a largest $m\\ge0$ with $a\\in\\pi^mA$. Write $a=\\pi^m w$; maximality says $w\\notin\\mathfrak m_A$, hence $w$ is a unit. Consequently a nonzero ideal $I$ equals $\\pi^{m_0}A$, where $m_0$ is the least exponent of its nonzero elements. Thus the local domain $A$ has only principal ideals and nonzero maximal ideal $\\pi A$, so it is a discrete valuation ring with uniformizer $\\pi$ by [def-sc-discrete-valuation-ring]. Every nonzero denominator in $A$ is consequently invertible in $A[1/\\pi]$, so this localization is its fraction field $F$. This also identifies the inverse image of the generic fibre in $\\operatorname{Spec}A$ with $\\operatorname{Spec}F$.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ (lemma-intersection-powers-ideal-module), part (2); agent extraction of the valuation factorization as in Tag 00PD."
+   }
+  },
+  {
+   "text": "Use the universal relative derivation of [def-weil-pbc-kahler-differentials]. For $a=\\pi^m w$ the Leibniz rule and $\\mathrm d\\pi=0$ give $\\mathrm da=\\pi^m\\mathrm dw$. In $\\Omega^1_{F/R}$ we obtain $a^{-1}\\mathrm da=w^{-1}\\mathrm dw$. The right hand side is the image of the indicated element of $\\Omega^1_{A/R}$; the map to $\\Omega^1_{F/R}$ is induced by the derivation $A\\to F\\to\\Omega^1_{F/R}$. This includes $m=0$, arbitrary residue characteristic and nonzero constant $a$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 07BK (definition-differentials) and 00RO (lemma-universal-omega); agent Leibniz calculation."
+   }
+  },
+  {
+   "text": "No marking contains $\\eta$. On the special fibre each section is a closed rational point: on affine charts its augmentation has quotient $k$, hence maximal kernel. Such a point cannot be generic in a pure one-dimensional fibre. The marking divisors and the canonical identification $\\omega_{Y/R}|_{W}=\\Omega^1_{W/R}$ are supplied by [lem-sfb-nodal-log-canonical-reconstruction]. At $\\eta$, the marking twist is consequently canonically trivial and $(L_Y)_\\eta=\\Omega^1_{A/R}$. For the last equality use the affine-local sheaf description of [def-sc-relative-differential-sheaf]: extension of an $R$-derivation to a localization is uniquely $D(b/c)=c^{-1}D(b)-bc^{-2}D(c)$, which identifies the localized differential module with the stalk differential module.",
+   "uses": [
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Z (lemma-fundamental-class-lci), smooth locus; moduli-curves.tex Tag 0E6R; morphisms.tex Tag 01UT (lemma-differentials-affine). Agent localization calculation."
+   }
+  },
+  {
+   "text": "Put $x=p(\\eta)$ and first suppose $x\\notin D_X$. Near $x$ the marked twist is trivial and the canonical dualizing line is $\\Omega^1_{X/R}$ by [lem-sfb-nodal-log-canonical-reconstruction]. Apply the map of [def-a1-relative-differentials-pullback-map] on this smooth neighbourhood and near $\\eta$. It sends $1\\otimes\\mathrm df$ to $\\mathrm d(p^*f)$ and is defined integrally. On the generic fibre it is the canonical comparison for the isomorphism $p_K$, by the isomorphism compatibility in [lem-sfb-locnoeth-lci-curve-adjunction-gluing]. Its germ therefore supplies the required element of $M_\\eta$ in the unmarked-image case.",
+   "uses": [
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "def-a1-relative-differentials-pullback-map",
+    "lem-sfb-locnoeth-lci-curve-adjunction-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UV (lemma-functoriality-differentials); duality.tex Tag 0E9Z (lemma-fundamental-class-lci). Agent smooth-locus comparison."
+   }
+  },
+  {
+   "text": "Now suppose $x\\in a_j(S)$. Restrict to the smooth locus of $X/S$, which contains the section, and use [lem-sc-smooth-section-affine-coordinates] with relative dimension one. It supplies a centred etale coordinate $t$ whose zero scheme is exactly this section; remove the other disjoint markings. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], the chart algebra over $R[t]$ has vanishing relative differentials and first cotangent homology. Hence [lem-trf-formally-etale-differentials-base-change] and [lem-weil-pbc-polynomial-ring-kahler-basis] make $\\mathrm dt$ a basis of its relative differentials. The canonical smooth dualizing identification and the definition of the Cartier twist then give the frame $e_X=\\mathrm dt/t$ of $L_X$. The same conclusion holds for any centred etale coordinate with this zero scheme.",
+   "uses": [
+    "lem-sc-smooth-section-affine-coordinates",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-trf-formally-etale-differentials-base-change",
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L (lemma-smooth-etale-over-affine-space); etale.tex Tag 024T (proposition-properties-sections); algebra.tex Tags 0H93 (lemma-formally-etale-omega), 00RX (lemma-differentials-polynomial-ring); centred chart as in existing cited node."
+   }
+  },
+  {
+   "text": "Let $a=p^*t\\in A$. It is nonzero. Otherwise the generic point of $\\operatorname{Spec}A$ would map into $a_j(K)$; the marked isomorphism $p_K$ identifies its inverse image with $b_j(K)$. Since $b_j(S)$ is the closed divisor supplied by [lem-sfb-nodal-log-canonical-reconstruction], its inverse image in $\\operatorname{Spec}A$ is closed and would contain the generic point of the domain $A$, hence also its closed point $\\eta$. This contradicts step 5. By step 3 write $a=\\pi^m w$. Under [def-a1-relative-differentials-pullback-map] the generic image of $e_X$ is $a^{-1}\\mathrm da=w^{-1}\\mathrm dw$ by step 4. The isomorphism compatibility of [lem-sfb-locnoeth-lci-curve-adjunction-gluing] identifies this differential with the specified canonical generic logarithmic comparison, rather than an arbitrary scalar multiple.",
+   "uses": [
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "def-a1-relative-differentials-pullback-map",
+    "lem-sfb-locnoeth-lci-curve-adjunction-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UV (lemma-functoriality-differentials); duality.tex Tag 0E9Z; agent nonvanishing and marked-generic-frame calculation."
+   }
+  },
+  {
+   "text": "In the marked-image case define the germ of a homomorphism $(p^*L_X)_\\eta\\to(L_Y)_\\eta$ by $p^*e_X\\mapsto w^{-1}\\mathrm dw$. Step 5 makes its value integral, and step 8 proves that its localization is the prescribed generic homomorphism. A homomorphism from a free rank-one module $P$ to a rank-one module $Q$ is the element $e^\\vee\\otimes v$ of $P^\\vee\\otimes Q$ sending $e$ to $v$, directly from [def-sc-invertible-module]. This yields an element of $M_\\eta$ mapping to the germ of $s_K$. Together with step 6 this proves the assertion. For $n=0$ only step 6 occurs; a contracted marked image merely permits $m>0$ in step 8 and causes no pole.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent assembly from the explicit local maps; no additional theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-generic-fibre-points-smooth",
+  "lem-sfb-smooth-trait-curve-local-properties",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "def-sc-relative-differential-sheaf",
+  "def-a1-relative-differentials-pullback-map",
+  "lem-sfb-locnoeth-lci-curve-adjunction-gluing",
+  "lem-sc-smooth-section-affine-coordinates",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-trf-formally-etale-differentials-base-change",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "def-pc-divisor-line-bundle",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Local logarithmic-integrality argument using Tags 054L, 01UV, varieties.tex 056V, algebra.tex 00PD and 00IQ, with the canonical smooth-locus normalization of duality.tex 0E9Z. Not a verbatim theorem of 054L."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "At a generic point of the reduced special fibre of a marked nodal curve over a DVR, pullback of dt or dt/t along a generic isomorphism is a regular relative differential",
+   "results": "{\"t\": \"2026-10-22T07:18:46Z\", \"tool\": \"leanfinder\", \"query\": \"At a generic point of the reduced special fibre of a marked nodal curve over a DVR, pullback of dt or dt/t along a generic isomorphism is a regular relative differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"Algebra.IsStandardEtale\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.Generators.cMulXSubOneCotangent_eq\", \"Algebra.IsSmoothAt\", \"Algebra.IsEtaleAt\", \"StandardEtalePair.HasMap.isUnit_derivative_f\"], \"digest\": \"ba4e9ddaaa86c9d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Differential.logDeriv is a scalar derivation in a differential field; smooth/etale coordinate presentations and Weierstrass reduction do not assert integral pullback of the marked dualizing comparison at a vertical component generic point."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A marked smooth point logarithmic dualizing differential pulls back integrally at generic special fibre points of nodal curve models over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-22T07:18:38Z\", \"tool\": \"leansearch\", \"query\": \"A marked smooth point logarithmic dualizing differential pulls back integrally at generic special fibre points of nodal curve models over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Differential.logDeriv\", \"AlgebraicGeometry.IsSmooth.recOn\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"WeierstrassCurve.integralModel\"], \"digest\": \"20d88a33d7d5fae2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Differential.logDeriv is a scalar derivation in a differential field; smooth/etale coordinate presentations and Weierstrass reduction do not assert integral pullback of the marked dualizing comparison at a vertical component generic point."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "{\"t\": \"2026-10-22T07:18:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dualizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Differential.logDeriv is a scalar derivation in a differential field; smooth/etale coordinate presentations and Weierstrass reduction do not assert integral pullback of the marked dualizing comparison at a vertical component generic point."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|logarithmic.*differential|log.*canonical",
+   "results": "{\"t\": \"2026-10-22T07:18:37Z\", \"tool\": \"grep\", \"query\": \"dualizing|logarithmic.*differential|log.*canonical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"c88221d1f4885480\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Differential.logDeriv is a scalar derivation in a differential field; smooth/etale coordinate presentations and Weierstrass reduction do not assert integral pullback of the marked dualizing comparison at a vertical component generic point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat curve model over a discrete valuation ring a nonzero function factors as a uniformizer power times a unit at a reduced special fibre generic point and its logarithmic derivative has no pole",
+   "results": "{\"t\": \"2026-10-22T07:18:48Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat curve model over a discrete valuation ring a nonzero function factors as a uniformizer power times a unit at a reduced special fibre generic point and its logarithmic derivative has no pole\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.valuation_Δ_aux\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsMinimal\", \"PowerSeries.IsWeierstrassFactorization.map_ne_zero\"], \"digest\": \"27e69c7e2f4d98d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Differential.logDeriv is a scalar derivation in a differential field; smooth/etale coordinate presentations and Weierstrass reduction do not assert integral pullback of the marked dualizing comparison at a vertical component generic point."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|logarithmic.*differential|logCanonical",
+   "results": "{\"t\": \"2026-10-23T10:51:22Z\", \"tool\": \"grep\", \"query\": \"dualizing|logarithmic.*differential|logCanonical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar differential-field logDeriv, Weierstrass integrality and normalization do not state the logarithmic dualizing pullback germ assertion; universal derivations and etale differential bases are reused as existing nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a curve over a discrete valuation ring the logarithmic differential of a nonzero function is regular at a reduced special fibre component generic point",
+   "results": "{\"t\": \"2026-10-23T10:51:22Z\", \"tool\": \"leansearch\", \"query\": \"For a curve over a discrete valuation ring the logarithmic differential of a nonzero function is regular at a reduced special fibre component generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Differential.logDeriv\", \"Differential.logDeriv_mul\", \"Differential.logDeriv_zero\", \"Differential.logDeriv_prod\", \"Differential.logDeriv_eq_zero\", \"WeierstrassCurve.isGoodReduction_iff\", \"logDeriv\", \"Differential.logDeriv_algebraMap\"], \"digest\": \"10f1f07c1dacc661\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar differential-field logDeriv, Weierstrass integrality and normalization do not state the logarithmic dualizing pullback germ assertion; universal derivations and etale differential bases are reused as existing nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"DiscreteValuationRing\"",
+   "results": "{\"t\": \"2026-10-23T10:51:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"DiscreteValuationRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar differential-field logDeriv, Weierstrass integrality and normalization do not state the logarithmic dualizing pullback germ assertion; universal derivations and etale differential bases are reused as existing nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the logarithmic dualizing differential at a smooth marked image of a nodal curve model over a discrete valuation ring is integral",
+   "results": "{\"t\": \"2026-10-23T10:51:23Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of the logarithmic dualizing differential at a smooth marked image of a nodal curve model over a discrete valuation ring is integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.isIntegral_of_exists_lift\", \"WeierstrassCurve.IsIntegral\", \"WeierstrassCurve.integralModel\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"], \"digest\": \"b9e00db4df74c366\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar differential-field logDeriv, Weierstrass integrality and normalization do not state the logarithmic dualizing pullback germ assertion; universal derivations and etale differential bases are reused as existing nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a equals a uniformizer power times a unit in a DVR algebra then da divided by a is the regular relative differential dw divided by w",
+   "results": "{\"t\": \"2026-10-23T10:51:25Z\", \"tool\": \"leanfinder\", \"query\": \"If a equals a uniformizer power times a unit in a DVR algebra then da divided by a is the regular relative differential dw divided by w\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"algebraMap.coe_logDeriv\", \"Differential.logDeriv_algebraMap\", \"Algebra.Generators.basisCotangentAway_apply\", \"KaehlerDifferential.derivationQuotKerTotal\", \"StandardEtalePair.HasMap.isUnit_derivative_f\", \"Differential.instDifferentialAlgebraAdjoinRoot\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"Algebra.Generators.cMulXSubOneCotangent\"], \"digest\": \"fa09fb3a03a60cbd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar differential-field logDeriv, Weierstrass integrality and normalization do not state the logarithmic dualizing pullback germ assertion; universal derivations and etale differential bases are reused as existing nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-log-dualizing-pullback",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; re-split task: smooth and marked image integrality (old Steps 2, 4, 5)",
+   "via": [
+    "lem-sfb-nodal-log-dualizing-pullback",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-log-pullback-smooth-image-integrality",
+  "worker": "stage1",
+  "summary": "No new nodes: reuse generic fibre-point smoothness, smooth-trait local rings, centred section charts and etale differential comparison. Derive the specified uniformizer and valuation factorization, compute d(pi^m w)/(pi^m w)=dw/w, and compare the actual normalized generic maps in both image cases. Statement unchanged.",
+  "blueprint": "Inherited from.place identifies the old nodal log-dualizing pullback smooth-image Steps 2, 4, 5. Current latest blueprint direct-images proof (3) states compactification and proper/open preservation; this local auxiliary belongs to its inherited alteration prerequisite chain, not a change to that unit route. blueprint_refs.py ancestor reports None; preserve inherited null ancestor rather than invent one.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-generic-fibre-points-smooth",
+    "why": "Generic smoothness at component points for flat geometrically reduced fibres; the unit contains no replacement for this generic scheme tool."
+   },
+   {
+    "node": "lem-sc-smooth-section-affine-coordinates",
+    "why": "Centred etale coordinates with exact section zero scheme; generic geometric tool used without replacing the unit route."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic local algebra or scheme comparison: The local ring of a scheme-theoretic fibre is a quotient of the local ring. Used as a tool in the indicated step; no same-unit statement replaces it and no unit step is rerouted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-generic-fibre-points-smooth",
+  "lem-sc-smooth-section-affine-coordinates",
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-11f544d43",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-11f544d43 (reviewer sub-agent of L); spot-checked: Q07 lem-sfb-log-pullback-smooth-image-integrality @11f544d4. This is the first one-level split of the item: no new nodes, and the statement is unchanged; two definitions (def-sc-relative-differential-sheaf, def-a1-relative-differentials-pullback-map) were added to stmt_deps, which is harmless. The item is still unsplit in live and side-live, so it is not superseded, and there is no repair note. I read all 9 steps and every cited statement. I checked the step source tags against tags/tags: 054L, 00PD, 00IQ, 0HA1, 056V, 01V9, 01T6, 00ON, 0E9Z, 01UV, 0H93, 00RX, 024T. Small cases I tested: p=id; the blow-up of a smooth closed point, where p^*dx=π dv and dx/x ↦ dv/v is integral with m=1 on a contracted marked component; a=π^m; a a unit; mixed characteristic; n=0. All hold. Step 1: the Noetherian and generic-fibre-point smoothness hypotheses hold, and the trait lemma gives A regular of dimension 1+0. Step 2: m_A=πA through the fibre-stalk quotient. Steps 3–4: Krull intersection gives the factorization π^m w, and da/a=dw/w. Step 5: η is not a marked point (sections meet Y_k in closed rational points), and Ω localizes. Steps 6 and 8: the integral differential map d_{p/S}, together with the isomorphism compatibility stated explicitly in lci-gluing and canonical reconstruction, identifies the actual canonical generic comparison. In step 8, a=p^*t≠0 because b_j(S) is closed. Step 7: centred étale coordinate, étale cotangent vanishing, so dt is a basis and the frame is dt/t. Step 9: Hom equals dual tensor. FIX (C4): step 2 derived the DVR property from the parenthetical 00PD remark inside the definition node def-sc-discrete-valuation-ring, which is a theorem the definition does not bind. I rewrote steps 2–3 so the DVR property follows from the definition: every nonzero ideal is π^{m_0}A. That citation moves from step 2 to step 3; proof_deps are unchanged. I accept the three declared tool_uses (generic-fibre-points-smooth, smooth-section-affine-coordinates, scheme-fibre-stalk-quotient) as generic tools. Batch-5: all four flagged citations are generic algebra or curve geometry, or the definition def-trf-nodal-dualizing-datum, which the existing stmt_dep reconstruction already reaches. None is part of the trace formula or Poincaré duality or their proofs, so they are accepted. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogPullbackSmoothImageIntegrality",
+  "declaration": "AlgebraicGeometry.log_pullback_smooth_image_integrality",
+  "declarations": [
+   "AlgebraicGeometry.nodalLogChartScalar",
+   "AlgebraicGeometry.nodalLogStalkScalar",
+   "AlgebraicGeometry.nodalLogGenericOpen",
+   "AlgebraicGeometry.nodalLogSectionValue",
+   "AlgebraicGeometry.NodalLogDvrDifferentials",
+   "AlgebraicGeometry.log_pullback_smooth_image_integrality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogPullbackSmoothImageIntegrality.lean",
+  "statement": "theorem log_pullback_smooth_image_integrality (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (P Q : MultipointedCurve (Spec (.of R))) [IsHProjective P.x] [IsHProjective Q.x] (n : ℕ) (a : (∐ fun _ : Fin n ↦ Spec (.of R)) ≅ P.D) (b : (∐ fun _ : Fin n ↦ Spec (.of R)) ≅ Q.D) (ha : a.hom ≫ P.d = Sigma.desc (fun _ : Fin n ↦ 𝟙 (Spec (.of R)))) (hb : b.hom ≫ Q.d = Sigma.desc (fun _ : Fin n ↦ 𝟙 (Spec (.of R)))) (hPsmooth : ∀ z : P.D, P.i z ∈ P.x.smoothLocus) (hQsmooth : ∀ z : Q.D, Q.i z ∈ Q.x.smoothLocus) (hPnodal : HasNodalGeometricFibres P.x) (hQnodal : HasNodalGeometricFibres Q.x) (hPgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback P.x t) ∧ (pullback P.x t).IsPureDimension 1) (hQgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback Q.x t) ∧ (pullback Q.x t).IsPureDimension 1) (DP : MarkedNodalDualizingDegreesData P) (DQ : MarkedNodalDualizingDegreesData Q) (p : Q.Hom P) (hmarks : b.hom ≫ p.marking = a.hom) (hiso : IsIso (p.curveBaseChange (Spec.map (CommRingCat.ofHom (algebraMap R K))))) (s : Γ(((Scheme.Modules.tensorPullback p.curve).obj (markedNodalLine P DP.omega))ᵛ ⊗ₘ markedNodalLine Q DQ.omega, nodalLogGenericOpen R π Q.x)) (hsiso : IsIso ((Scheme.Modules.dualTensorHom ((Scheme.Modules.tensorPullback p.curve).obj (markedNodalLine P DP.omega)) (markedNodalLine Q DQ.omega)).app (nodalLogGenericOpen R π Q.x) s)) (hs : ∀ (W : P.X.Opens) (V : Q.X.Opens) (hVW : V ≤ p.curve ⁻¹ᵁ W) (hVG : V ≤ nodalLogGenericOpen R π Q.x) (r : Γ(P.X, W)), nodalLogSectionValue ((Scheme.Modules.tensorPullback p.curve).obj (markedNodalLine P DP.omega)) (markedNodalLine Q DQ.omega) (nodalLogGenericOpen R π Q.x) V hVG s (((Scheme.Modules.tensorPullback p.curve).obj (markedNodalLine P DP.omega)).presheaf.map (homOfLE hVW).op (((Scheme.Modules.tensorPullback p.curve).map (nodalLogFundamental P DP.omega DP.dualizing)).app (p.curve ⁻¹ᵁ W) (P.x.relativeDifferentialsPullbackGenerator p.curve W r))) = (markedNodalLine Q DQ.omega).presheaf.map (homOfLE hVW).op ((nodalLogFundamental Q DQ.omega DQ.dualizing).app (p.curve ⁻¹ᵁ W) (Q.x.relativeDifferentialsDerivation.d (X := op (p.curve ⁻¹ᵁ W)) (p.curve.app W r)))) (C : Set (Q.x.fiber (IsLocalRing.closedPoint R))) (hC : C ∈ irreducibleComponents (Q.x.fiber (IsLocalRing.closedPoint R))) (z : Q.x.fiber (IsLocalRing.closedPoint R)) (hz : IsGenericPoint z C) (himage : p.curve (Q.x.fiberι (IsLocalRing.closedPoint R) z) ∈ P.x.smoothLocus) : Q.x.fiberι (IsLocalRing.closedPoint R) z ∈ Q.x.smoothLocus ∧ Q.x.fiberι (IsLocalRing.closedPoint R) z ∉ Set.range Q.i ∧ NodalLogDvrDifferentials R (Q.X.presheaf.stalk (Q.x.fiberι (IsLocalRing.closedPoint R) z)) (nodalLogStalkScalar R Q.x (Q.x.fiberι (IsLocalRing.closedPoint R) z)) π ∧ (∃ (U : Q.X.Opens), Q.x.fiberι (IsLocalRing.closedPoint R) z ∈ U ∧ ∃ e : Γ(((Scheme.Modules.tensorPullback p.curve).obj (markedNodalLine P DP.omega))ᵛ ⊗ₘ markedNodalLine Q DQ.omega, U), (((Scheme.Modules.tensorPullback p.curve).obj (markedNodalLine P DP.omega))ᵛ ⊗ₘ markedNodalLine Q DQ.omega).presheaf.map (homOfLE (inf_le_left : U ⊓ nodalLogGenericOpen R π Q.x ≤ U)).op e = (((Scheme.Modules.tensorPullback p.curve).obj (markedNodalLine P DP.omega))ᵛ ⊗ₘ markedNodalLine Q DQ.omega).presheaf.map (homOfLE (inf_le_right : U ⊓ nodalLogGenericOpen R π Q.x ≤ nodalLogGenericOpen R π Q.x)).op s) ∧ ∀ (j : Fin n) (W : P.X.affineOpens) (hW : W.1 ≤ P.x.smoothLocus) (hx : p.curve (Q.x.fiberι (IsLocalRing.closedPoint R) z) ∈ W.1) (hmarked : p.curve (Q.x.fiberι (IsLocalRing.closedPoint R) z) ∈ Set.range (Sigma.ι (fun _ : Fin n ↦ Spec (.of R)) j ≫ a.hom ≫ P.i)) (t : Γ(P.X, W.1)), (Sigma.ι (fun _ : Fin n ↦ Spec (.of R)) j ≫ a.hom ≫ P.i).ker.ideal W = Ideal.span {t} → (∀ i : Fin n, i ≠ j → Disjoint (W.1 : Set P.X) (Set.range (Sigma.ι (fun _ : Fin n ↦ Spec (.of R)) i ≫ a.hom ≫ P.i))) → Etale (W.1.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (Polynomial.eval₂RingHom (nodalLogChartScalar R P.x W.1) t))) → (p.curve.stalkMap (Q.x.fiberι (IsLocalRing.closedPoint R) z)) (P.X.presheaf.germ W.1 _ hx t) ≠ 0 ∧ ∃ e : Γ(markedNodalLine P DP.omega, W.1), t • e = (nodalLogFundamental P DP.omega DP.dualizing).app W.1 (P.x.relativeDifferentialsDerivation.d (X := op W.1) t) ∧ (∀ (T : P.X.Opens) (hTW : T ≤ W.1), Function.Bijective (fun r : Γ(P.X, T) ↦ r • (markedNodalLine P DP.omega).presheaf.map (homOfLE hTW).op e)) ∧ ∀ (V : Q.X.Opens) (hVW : V ≤ p.curve ⁻¹ᵁ W.1) (hVG : V ≤ nodalLogGenericOpen R π Q.x) (v : Γ(Q.X, V)), v * Q.X.presheaf.map (homOfLE hVW).op (p.curve.app W.1 t) = 1 → nodalLogSectionValue ((Scheme.Modules.tensorPullback p.curve).obj (markedNodalLine P DP.omega)) (markedNodalLine Q DQ.omega) (nodalLogGenericOpen R π Q.x) V hVG s (((Scheme.Modules.tensorPullback p.curve).obj (markedNodalLine P DP.omega)).presheaf.map (homOfLE hVW).op (Scheme.Modules.tensorPullbackSection p.curve (markedNodalLine P DP.omega) W.1 e)) = (nodalLogFundamental Q DQ.omega DQ.dualizing).app V (v • Q.x.relativeDifferentialsDerivation.d (X := op V) (Q.X.presheaf.map (homOfLE hVW).op (p.curve.app W.1 t)))",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The actual dual-tensor generic section is normalized on pulled-back differentials via the existing log fundamental classes. Integral image membership is expressed equivalently by a neighbourhood representative with equal generic restriction. Includes the explicit DVR factorization, relative logarithmic differential identity and every centred marked-coordinate frame formula; no properness of the modification is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30bf7d28a",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node. The curves, Fin n marking split (n=0 allowed) and nodal/reduced geometric fibres are as in the reconstruction dependency. p : Q.Hom P with hmarks is equivalent to p b_j = a_j, with no properness; hiso says p_K is an iso. The generic section s is pinned by hs on pulled-back differentials: the canonical comparison satisfies it, and it determines s on the dense smooth unmarked locus of the reduced generic fibre. Integrality is stated as a neighbourhood section agreeing with s on the generic part, equivalent to the localized-stalk image for an invertible module. The DVR, factorization and da/a = w^-1 dw clauses are present. The marked clause covers the centred étale coordinate t (zero scheme exactly the section, chart disjoint from other markings, which is needed), p^*t ≠ 0, frame dt/t, and s(p^*e) = da/a. Edge cases checked: p=id, contracted-to-marking blow-up, m=0, a=π^m, n=0, mixed characteristic, persistent nodes. Only the item's lean field changed; the statement is verbatim (5996 chars); the dependency nodes match side-live; helpers are real; proof is sorry; docstrings and the nine steps present; lines ≤100; imports resolve. No compile run (no change). Advisory: nodalLogFundamental is a plain def in theorem node lem-sfb-nodal-log-canonical-reconstruction, which is cited by the stage-1 statement; accepted on the precedent of the landed sister item lem-sfb-nodal-log-dualizing-pullback."
+ }
+}

@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Canonical derived cup product of condensed internal invariants
 
@@ -84,12 +85,45 @@ Source: paragraph (3) (blueprint: def-sfb-condensed-derived-cup). -/
 instance trivialLeftAdjoint : (trivial (R := A.toMon) (P := G)).IsLeftAdjoint :=
   (invariants A G).adjunction.isLeftAdjoint
 
+private theorem flat_of_forget
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (U : C ⥤ D) [U.Monoidal] [U.Faithful]
+    [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+    {X : C} (hX : ObjectProperty.flat (U.obj X)) : ObjectProperty.flat X := by
+  have := hX.tensorLeft.preservesFiniteLimits
+  have := hX.tensorLeft.preservesFiniteColimits
+  have := hX.tensorRight.preservesFiniteLimits
+  have := hX.tensorRight.preservesFiniteColimits
+  have hll : PreservesFiniteLimits (tensorLeft X ⋙ U) := by
+    have := comp_preservesFiniteLimits U (tensorLeft (U.obj X))
+    exact preservesFiniteLimits_of_natIso (Functor.Monoidal.commTensorLeft U X)
+  have hlc : PreservesFiniteColimits (tensorLeft X ⋙ U) := by
+    have := comp_preservesFiniteColimits U (tensorLeft (U.obj X))
+    exact preservesFiniteColimits_of_natIso (Functor.Monoidal.commTensorLeft U X)
+  have hrl : PreservesFiniteLimits (tensorRight X ⋙ U) := by
+    have := comp_preservesFiniteLimits U (tensorRight (U.obj X))
+    exact preservesFiniteLimits_of_natIso (Functor.Monoidal.commTensorRight U X)
+  have hrc : PreservesFiniteColimits (tensorRight X ⋙ U) := by
+    have := comp_preservesFiniteColimits U (tensorRight (U.obj X))
+    exact preservesFiniteColimits_of_natIso (Functor.Monoidal.commTensorRight U X)
+  constructor <;> constructor
+  · exact ⟨fun J _ _ ↦ preservesLimitsOfShape_of_reflects_of_preserves (tensorLeft X) U⟩
+  · exact ⟨fun J _ _ ↦ preservesColimitsOfShape_of_reflects_of_preserves (tensorLeft X) U⟩
+  · exact ⟨fun J _ _ ↦ preservesLimitsOfShape_of_reflects_of_preserves (tensorRight X) U⟩
+  · exact ⟨fun J _ _ ↦ preservesColimitsOfShape_of_reflects_of_preserves (tensorRight X) U⟩
+
 /-- Trivial action carries flat modules to flat action modules.
 Source: paragraph (3) (blueprint: def-sfb-condensed-derived-cup).
 Proof: the underlying tensor with a trivial flat module is the flat ordinary module
 tensor, and forgetting the action detects exactness. -/
 @[instance] theorem trivialFlat : (trivial (R := A.toMon) (P := G)).PreservesFlat := by
-  sorry
+  let U := CondensedBar.forgetAction (A := A) (G := G)
+  let : U.Monoidal := (actionTensor A G).forgetCore.toMonoidal
+  have : U.Faithful := ⟨fun h ↦ Subtype.ext h⟩
+  have : PreservesFiniteLimits U := (forgetExact A G).1
+  have : PreservesFiniteColimits U := (forgetExact A G).2.1
+  exact ⟨fun hX ↦ flat_of_forget U hX⟩
 
 
 section ExactTensorNormalization

@@ -25,7 +25,7 @@ functor.
 @[expose] public noncomputable section
 set_option autoImplicit false
 
-universe r wR wS
+universe r wR wS wT
 
 open CategoryTheory
 
@@ -61,5 +61,36 @@ def moduleDerivedExtension {A B : Type r} [CommRing A] [CommRing B]
     [HasDerivedCategory.{wS} (ModuleCat.{r} B)] :
     DerivedCategory (ModuleCat.{r} A) ⥤ DerivedCategory (ModuleCat.{r} B) :=
   (moduleDerivedRestriction f).leftAdjoint
+
+/-- Canonical composition of exact derived scalar restrictions, including a specified
+identification of the composite ring map. This re-exposes the existing comparison
+without depending on the constant-realization theorem's conclusion.
+Source: Stacks Project Tag 0D6D (blueprint: def-zl-ring-derived-scalar-extension). -/
+def moduleDerivedRestrictionComposition
+    {A B D : Type r} [CommRing A] [CommRing B] [CommRing D]
+    (f : A →+* B) (g : B →+* D) (h : A →+* D) (hcomp : g.comp f = h)
+    [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
+    [HasDerivedCategory.{wS} (ModuleCat.{r} B)]
+    [HasDerivedCategory.{wT} (ModuleCat.{r} D)] :
+    moduleDerivedRestriction g ⋙ moduleDerivedRestriction f ≅ moduleDerivedRestriction h :=
+  ConstantScalarRealization.moduleDerivedRestrictionComposition f g ≪≫
+    eqToIso (congrArg (fun a : A →+* D ↦ moduleDerivedRestriction a) hcomp)
+
+/-- The unit-preserving scalar-extension associator, obtained by uniqueness of left
+adjoints from the specified exact-restriction composition. The composite ring map
+may be supplied with its defining equality, as for the projections of a ring limit.
+Source: Stacks Project Tags 06YY, 07A6 and 0D6D
+(blueprint: def-zl-ring-derived-scalar-extension). -/
+def moduleDerivedExtensionComposition
+    {A B D : Type r} [CommRing A] [CommRing B] [CommRing D]
+    (f : A →+* B) (g : B →+* D) (h : A →+* D) (hcomp : g.comp f = h)
+    [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
+    [HasDerivedCategory.{wS} (ModuleCat.{r} B)]
+    [HasDerivedCategory.{wT} (ModuleCat.{r} D)] :
+    moduleDerivedExtension f ⋙ moduleDerivedExtension g ≅ moduleDerivedExtension h :=
+  (((Adjunction.ofIsRightAdjoint (moduleDerivedRestriction f)).comp
+      (Adjunction.ofIsRightAdjoint (moduleDerivedRestriction g))).ofNatIsoRight
+        (moduleDerivedRestrictionComposition f g h hcomp)).leftAdjointUniq
+    (Adjunction.ofIsRightAdjoint (moduleDerivedRestriction h))
 
 end CategoryTheory.RingDerivedScalarExtension

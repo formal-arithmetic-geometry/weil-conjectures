@@ -3,11 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q69
 -/
+module
 
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Sheaf.AlgebraicGeometry.MonoschemeToricRealization
-import Sheaf.AlgebraicGeometry.SmoothFunctorialNormalizedToricDesingularization
-import Sheaf.AlgebraicGeometry.ToricMonoidComparison
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+import Sheaf.AlgebraicGeometry.ResolvingCenteredToricLiftRule
 import Sheaf.TraceFormula.SharpeningFanBijection
 
 /-!
@@ -17,6 +16,8 @@ Source: Illusie--Laszlo--Orgogozo, Travaux de Gabber, Exposé VIII, Theorems 3.1
 and 3.2.20, Remark 3.2.21, and construction 3.2.19, pp. 102 and 106
 (blueprint: lem-trf-functorial-fan-desingularization).
 -/
+
+@[expose] public section
 
 universe u
 
@@ -55,6 +56,35 @@ Proof plan:
    of rank zero by `def-trf-fine-fan-blowup`, so the same comparisons apply to them. -/
 theorem exists_smoothFunctorialDesingularization :
     Nonempty (SmoothFunctorialDesingularization.{u}) := by
-  sorry
+  classical
+  obtain ⟨F, T, hT⟩ := Monoscheme.TowerComparison.exists_resolvingLiftRule.{u}
+  obtain ⟨C⟩ := Monoscheme.TowerComparison.exists_coherentComparisons F T
+  let input (M : Monoscheme.ResolutionInput.{u}) : Monoscheme.TowerComparison.Input.{u} :=
+    ⟨M.monoscheme, M.torsionFree⟩
+  let resolution (M : Monoscheme.ResolutionInput.{u}) : Monoscheme.Resolution M := {
+    length := (F.tower (input M)).length
+    tower := (T.lift (input M)).tower
+    base := (T.lift (input M)).base
+    smooth := hT (input M) }
+  let comparison {M N : Monoscheme.ResolutionInput.{u}}
+      (g : Monoscheme.Hom N.monoscheme M.monoscheme) (hg : g.IsSmooth) :
+      Monoscheme.ResolutionComparison (resolution M) (resolution N) g := {
+    pulled := (C.comparison (M := input M) (N := input N) g hg).pulled.tower
+    base := (C.comparison (M := input M) (N := input N) g hg).pulled.base
+    pullback := (C.comparison (M := input M) (N := input N) g hg).pullback
+    baseMap := (C.comparison (M := input M) (N := input N) g hg).baseMap
+    contraction := (C.comparison (M := input M) (N := input N) g hg).contraction
+    baseIso := (C.comparison (M := input M) (N := input N) g hg).baseIso }
+  let R : Monoscheme.SmoothFunctorialDesingularization.{u} := {
+    resolution := resolution
+    comparison := comparison
+    identityIndex := fun M g hg h i ↦ C.identityIndex (input M) g hg h i
+    identityMap := fun M g hg h i ↦ C.identityMap (input M) g hg h i
+    compositionIndex := fun {M N P} g h k hg hh hk hc i ↦
+      C.compositionIndex (M := input M) (N := input N) (P := input P) g h k hg hh hk hc i
+    compositionMap := fun {M N P} g h k hg hh hk hc i ↦
+      C.compositionMap (M := input M) (N := input N) (P := input P) g h k hg hh hk hc i }
+  obtain ⟨e, _⟩ := sharpening_fan_bijection.{u}.2.2
+  exact ⟨e R⟩
 
 end AlgebraicGeometry.FineFan

@@ -66,10 +66,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-deligne-laumon-a1",
@@ -106,5 +110,19 @@
   "group": "NH",
   "result": "pass",
   "note": "5dddf992 fixes the da39d42e H13 return. Both dependency records (def-weil-pbc-adic-coefficient-datum, def-weil-pbc-completed-pullback) are cmp-identical to live. The CompletedTowerIndependent helpers moved unchanged (diffed with comments stripped) into the new def node def-a1-integral-completed-tower-pullback-universes with its own module, which the item cites; a specialisation is needed because the general interfaces fix the coefficient ring at universe t+1. The new node follows H12: no hollow data (limit lift, leftAdjoint, universal left-derived choices), sorry'd results are named theorems with proof docstrings, statement citations equal stmt_deps, statement verbatim, no live collision. Item Lean changes are cosmetic (abbrev to def with explicit types, same bodies). I re-read the Comparison structure: b on all of D(R_T), Koszul and balanced isomorphisms pinned on generators, actual augmentation, K-flat and quasi-isomorphism clauses, counit-descended shifts; only hX/hY assumed; universes u and t independent. Edge cases g=id, empty schemes, n=0 meaning exponent 1, all r, non-invertible c_g are covered. stmt_deps: 12 base kept, plus landed def nodes and the 2 new ones, no theorem. Report sections present, lines at most 100 chars. Advisories: new node does not cite def-weil-proetale-inverse-image (proEtaleBaseChange, coefficientProEtaleDirectRingMap) or def-pc-kflat-complex; helper module has two unused public imports (AdicCoefficientDatum, PbcQbarCompletedPullback); second reading by the same worker. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-14229",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261027T021406-L-2764545",
+  "kind": "interface",
+  "note": "independent cc review: delivered IntegralOperationsWellDefined.lean, its node, change record and report against the published module, the node and all 76 direct importers (each compiled against the delivered item and then the corrected item, with published baselines for failures and slow ones)",
+  "sorry_before": [
+   "WeilConjectures.integralOperationsTensorTransition_existsUnique"
+  ],
+  "sorry_after": []
  }
 }

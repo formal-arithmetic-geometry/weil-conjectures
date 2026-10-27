@@ -16,94 +16,100 @@
  ],
  "proof": [
   {
-   "text": "Fix an arbitrary scheme $T$ with a map $T\\to Y$. Put $X=F\\times_YT$, $T_i=Y_i\\times_YT$, and $X_i=X\\times_TT_i\\simeq F_i\\times_{Y_i}T_i$. By [lem-trf-space-fibre-products-etale-covers], $X$ is an algebraic space, and the base-changed families cover $T$ and $X$. The $T_i$ are schemes: the maps $Y_i\\to Y$ are representable etale maps. Their projections to $T$ form a jointly surjective etale family, and $X_i$ is a scheme since $F_i,T_i,Y_i$ are schemes. These assertions use the scheme-test definition of etale maps of algebraic spaces in [def-trf-algebraic-space] and associativity of sheaf fibre products. Let $N_i$ be the ordinary pullback of $M_i$ to $X_i$, invertible by [lem-weil-pbc-invertible-pullback-tensor]. By [lem-trf-scheme-relative-ample-base-change], $N_i$ is ample on the inverse image of every affine open of $T_i$. On $X_i\\times_XX_j$, pull back the restriction identifications of $M$ on $F_i\\times_FF_j$. Functoriality of tensor pullback [def-pc-module-pullback] makes these isomorphisms satisfy identity and triple-overlap cocycles. By [lem-trf-algebraic-space-invertible-descent] they descend to a line module $N$ on $X$. If $T\\to Y$ is etale, $N$ is canonically the restriction of $M$: that restriction has the same local identifications, and the full faithfulness in the same descent lemma glues the identity maps and their inverses.",
+   "text": "Use the proved point-cover/fppf-lifting equivalence to convert the given covering sieve hypothesis to the point-class cover required by the scheme-test preparation theorem. On each inverse-image open, the restriction/tensor-pullback isomorphism and invariance of ampleness under isomorphism convert the given literal restriction condition to the ordinary tensor form.",
    "uses": [
-    "def-trf-algebraic-space",
-    "def-pc-module-pullback",
-    "lem-trf-scheme-relative-ample-base-change",
-    "lem-trf-algebraic-space-invertible-descent",
-    "lem-trf-space-fibre-products-etale-covers",
-    "lem-weil-pbc-invertible-pullback-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-divisors.tex",
-    "place": "Tag 0D36 (lemma-relatively-ample-local), reduction to scheme tests; Tag 0893 for the scheme pullback; spaces-descent.tex Tag 04W8 for the auxiliary line module on X."
-   }
-  },
-  {
-   "text": "Write $f_T:X\\to T$ and $f_i:X_i\\to T_i$ for the projections. The forward implication of [lem-trf-scheme-ample-canonical-proj-criterion] makes each $f_i$ quasi-compact and separated, because $N_i$ is $f_i$-ample by Step 1. Now [lem-trf-space-qc-separated-etale-local] applies to the cover $\\{T_i\\to T\\}$ and gives that $f_T$ is quasi-compact and separated. This supplies the compactness and separation hypotheses needed for the section algebra; no representability of $f_T$ has been assumed.",
-   "uses": [
-    "lem-trf-scheme-ample-canonical-proj-criterion",
-    "lem-trf-space-qc-separated-etale-local"
+    "lem-trf-etale-point-cover-fppf-lifting",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-sc-ample-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-descent.tex",
-    "place": "Tag 0D3C (lemma-descending-property-ample), paragraph beginning By Divisors on Spaces; spaces-morphisms.tex Tags 03KG,03KM."
+    "place": "Tag 0D3C (lemma-descending-property-ample); scheme canonical maps use morphisms.tex Tag 01VJ."
    }
   },
   {
-   "text": "By [lem-trf-space-section-algebra-etale-base-change], $\\mathcal A=\\bigoplus_{d\\geq0}(f_T)_*N^{\\otimes d}$ is a quasi-coherent graded algebra on the scheme $T$. Let $\\psi:f_T^*\\mathcal A\\to\\bigoplus_{d\\geq0}N^{\\otimes d}$ be its evaluation homomorphism. The relative Proj existence theorem [lemma-nagata-relative-proj-exists] supplies the scheme $P=\\operatorname{Proj}_T(\\mathcal A)$. Apply [lem-trf-space-line-module-proj-map] to obtain an open $U=U(\\psi)\\subseteq X$ and a map $r:U\\to P$. For each $i$, the section-algebra lemma identifies $\\mathcal A_i=(T_i\\to T)^*\\mathcal A$ with $\\bigoplus_{d\\geq0}(f_i)_*N_i^{\\otimes d}$ and identifies the restricted $\\psi$ with the evaluation map $\\psi_i$. In degree $d$ this is precisely the restriction comparison $(f_T)_*N^{\\otimes d}|_{T_i}\\simeq(f_i)_*N_i^{\\otimes d}$; it sends a section to its restriction, so evaluation sends that section to the same local section of $N_i^{\\otimes d}$. Thus these are the canonical maps to which the scheme ampleness criterion applies.",
+   "text": "For every arbitrary scheme test T -> Y apply exists_ampleSchemeTestLinePreparation. Its cartesian square supplies X = F times_Y T, the etale base charts T_i, the source scheme charts X_i, the auxiliary line module N and its ordinary local identifications, local relative ampleness, quasi-compactness and separatedness. Retain its etale-test comparison with the restriction of M.",
    "uses": [
-    "lem-trf-space-section-algebra-etale-base-change",
-    "lemma-nagata-relative-proj-exists",
-    "lem-trf-space-line-module-proj-map"
+    "lem-trf-ample-scheme-test-line-preparation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-descent.tex",
-    "place": "Tag 0D3C, section-algebra and adjunction-map paragraphs; spaces-properties.tex Tag 03LX; spaces-divisors.tex Tag 0D2Z."
+    "place": "Tag 0D3C (lemma-descending-property-ample); scheme canonical maps use morphisms.tex Tag 01VJ."
    }
   },
   {
-   "text": "For each $i$, [lem-trf-scheme-ample-canonical-proj-criterion] applies to $(f_i,N_i)$ and its canonical algebra from Step 3: it gives $U(\\psi_i)=X_i$ and an open immersion $r_i:X_i\\to P_i=\\operatorname{Proj}_{T_i}(\\mathcal A_i)$. By [lem-trf-space-line-module-proj-map], $U\\times_TT_i=U(\\psi_i)=X_i$ and $P_i\\simeq P\\times_TT_i$, with $r_i$ equal to the base change of $r$. The complement of $U$ is empty: the maps $X_i\\to X$ cover, and its inverse image in each $X_i$ is empty. Therefore $U=X$. The maps $P\\times_TT_i\\to P$ are a jointly surjective etale scheme family, being base changes of $T_i\\to T$; the scheme covering base-change lemma [lem-weil-pbc-etale-covering-base-change] verifies this. Apply [lem-trf-space-open-immersion-etale-local] to $r:X\\to P$: its base changes are the open immersions $r_i$. Hence $r$ is an open immersion and $X$ is a scheme.",
+   "text": "On each X_i -> T_i apply the ample-chart SectionProjModel adapter to the literal tensor pullback module and its ordinary/etale identification. This gives a local canonical model, everywhere generation and an open immersion. Convert the prepared point-class base cover to fppf-local lifting on scheme tests: regard T as its actual schemeSpace using the existing representable-sheaf construction, apply the point-cover equivalence to its Yoneda charts, use the representable etale scheme test for their object predicates, and use Sieve.overEquiv to pass from the over-topology to the ordinary scheme topology. A generated factorization is flattened by composition and Yoneda faithfulness.",
    "uses": [
-    "lem-trf-scheme-ample-canonical-proj-criterion",
-    "lem-trf-space-line-module-proj-map",
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-trf-space-open-immersion-etale-local"
+    "lem-trf-ample-chart-section-proj-model",
+    "lem-trf-etale-point-cover-fppf-lifting",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-pc-yoneda",
+    "def-pc-fppf-site",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-descent.tex",
-    "place": "Tag 0D3C, final paragraphs; spaces-morphisms.tex Tag 03M4, open-immersion case."
+    "place": "Tag 0D3C (lemma-descending-property-ample); scheme canonical maps use morphisms.tex Tag 01VJ."
    }
   },
   {
-   "text": "Regard $N$ now as an ordinary invertible module on the scheme $X$, using the scheme-site interpretation of [lem-trf-algebraic-space-invertible-descent]. The compatibility clause of [lem-trf-space-section-algebra-etale-base-change] identifies the algebra and evaluation map of Step 3 with the ordinary Zariski section algebra and evaluation map. The canonical-map comparison of [lem-trf-space-line-module-proj-map] identifies $r$ with the ordinary canonical map. Since $f_T$ is quasi-compact and separated, $U=X$, and $r$ is an open immersion, the reverse implication of [lem-trf-scheme-ample-canonical-proj-criterion] gives that $N|_{f_T^{-1}(W)}$ is ample for every affine open $W\\subseteq T$. In particular $X=F\\times_YT$ is a scheme for every scheme test $T\\to Y$, proving representability. For an etale test $T\\to Y$, Step 1 identified $N$ with the restriction of $M$, so this proves precisely the requested ampleness on every $F\\times_YW$. Finally, when $Y$ is a scheme take $T=Y$ with its identity map: it is etale, and gives both that $F$ is a scheme and ampleness over every affine open of $Y$.",
+   "text": "Apply section_proj_etale_embedding to the prepared quasi-compact separated morphism, its descended line module, the etale base cover, the source cartesian squares and the chosen local models. Keep the returned global SectionProjModel, its agreement with schemes, everywhere generation, canonical representable open immersion and representing scheme isomorphism e:h_U isomorphic to X. This uses exactly the supplied local maps, not an unspecified existence statement.",
    "uses": [
-    "lem-trf-algebraic-space-invertible-descent",
-    "lem-trf-space-section-algebra-etale-base-change",
-    "lem-trf-space-line-module-proj-map",
-    "lem-trf-scheme-ample-canonical-proj-criterion"
+    "lem-trf-section-proj-etale-embedding"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-descent.tex",
-    "place": "Tag 0D3C, last sentence; morphisms.tex Tag 01VJ (5) implies (1)."
+    "place": "Tag 0D3C (lemma-descending-property-ample); scheme canonical maps use morphisms.tex Tag 01VJ."
+   }
+  },
+  {
+   "text": "Define the scheme projection p:U -> T by Yoneda preimage of e followed by the prepared projection. Transport the prepared pullback square along e; its second leg is h_p by Yoneda.map_preimage. This gives a scheme representing the fibre product on every arbitrary scheme test, proving IsRepresentable f.",
+   "uses": [
+    "lem-pc-yoneda",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample); scheme canonical maps use morphisms.tex Tag 01VJ."
+   }
+  },
+  {
+   "text": "For an etale test T -> Y the prepared projection X -> F is etale, and the comparison clause gives N isomorphic to its pullback of M. Compose e with this projection to obtain an object of F.EtaleSite. Apply the reverse section-Proj/ordinary-ampleness adapter to the global model and this specific comparison. It gives exactly ampleness of schemeRestriction F of M, with literal restrictFunctor on each inverse image of an affine open of T. Use the same transported cartesian square for the required witness.",
+   "uses": [
+    "lem-trf-section-proj-embedding-ordinary-ample",
+    "lem-trf-ample-scheme-test-line-preparation",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample); scheme canonical maps use morphisms.tex Tag 01VJ."
    }
   }
  ],
  "proof_deps": [
+  "lem-trf-etale-point-cover-fppf-lifting",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-sc-ample-iso",
+  "lem-trf-ample-scheme-test-line-preparation",
+  "lem-trf-ample-chart-section-proj-model",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-pc-yoneda",
+  "def-pc-fppf-site",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-section-proj-etale-embedding",
   "def-trf-algebraic-space",
-  "def-pc-module-pullback",
-  "lem-trf-scheme-relative-ample-base-change",
-  "lem-trf-algebraic-space-invertible-descent",
-  "lem-trf-space-fibre-products-etale-covers",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-trf-scheme-ample-canonical-proj-criterion",
-  "lem-trf-space-qc-separated-etale-local",
-  "lem-trf-space-section-algebra-etale-base-change",
-  "lemma-nagata-relative-proj-exists",
-  "lem-trf-space-line-module-proj-map",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-trf-space-open-immersion-etale-local"
+  "lem-trf-section-proj-embedding-ordinary-ample"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/spaces-descent.tex",
-  "place": "Tag 0D3C (lemma-descending-property-ample), direct section-algebra proof, restricted to etale covers; compare spaces-divisors.tex Tags 0D35,0D36. The arbitrary-test reduction and cocycle descent of its auxiliary line module are written out."
+  "place": "Tag 0D3C, the existing preparation and section-Proj embedding route. The Lean assembly explicitly converts the cover and open-module interfaces, builds the local models and transports the represented pullback squares. The forward and reverse ordinary/etale Proj adapters are the two remaining split statements."
  },
  "mathlib_searches": [
   {
@@ -201,38 +207,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-algebraic-space-ample-local",
   "worker": "stage1",
-  "summary": "Read Stacks 0D3C, 0D35, 0D36. Kept the statement; proved its full arbitrary-scheme representability test by a section-algebra/relative-Proj argument. Seven strictly supporting lemmas are stated and searched, rather than restating affine ampleness descent as a new node. For arbitrary tests a line module is constructed by the existing invertible-descent theorem; for etale tests full faithfulness identifies it with the given restriction. All scheme comparison and base-change compatibilities used are explicit in supporting statements.",
+  "summary": "Repair of the 4830-character proof: two independent, comparable statement-only tasks retain the arbitrary-test line-module preparation (old Steps 1-2) and canonical section-algebra embedding/comparisons (old Steps 3-4 and the comparison part of Step 5). The original statement is unchanged. The item now assembles these with both directions of the existing scheme canonical-Proj ampleness criterion; its complete proof text is below 3000 characters. The full old argument and its allocation are retained in report.md. Rebased delivery after the landing refusal at returned head f43fe8b1253: re-read current cited statements and verified the retained baseline against the shared DAG; made the absolute-ampleness definition an explicit Step 2 citation for local quasi-compactness. The six prior step/node quotes remain verbatim in the current DAG, and maintainer-owned metadata is preserved by the delivery overlay. Continuation repair for the latest return at dcb56a53611: compared all retained baseline fields with current DAG (identical), re-read every current cited statement, and explicitly matched the preparation module restrictions with the embedding input in Step 2. The resumed server dry run passed at 2c02d2d0ad2 before this clarification; final validation follows. Current landing-return repair (2026-10-23): the first resumed dry run passed at 571c1ecd263; the retained baseline remains identical to the current read clone. Re-read every assembly citation and supporting interface, retained the logged searches and all old argument allocation, and reordered Step 3 so its quasi-separatedness verification precedes the reverse criterion. Statement and new-node interfaces remain unchanged; delivery is rebuilt on current server main.",
   "blueprint": "Realizes the polarized-scheme descent input in the existing historical ancestry from lem-trf-local-term-locality, specifically the sentence that the descended ample module forces the quotient to be a scheme; no trace-formula or purity route is changed.",
-  "tool_uses": [
-   {
-    "node": "lemma-nagata-relative-proj-exists",
-    "why": "Existence of the relative Proj scheme is a generic construction used for the section-algebra embedding; this unit supplies no alternative construction."
-   },
-   {
-    "node": "lem-weil-pbc-etale-covering-base-change",
-    "why": "Generic scheme covering stability verifies the target cover on which the Proj map is an open immersion."
-   },
-   {
-    "node": "lem-weil-pbc-invertible-pullback-tensor",
-    "why": "The generic scheme pullback theorem ensures the local line modules on arbitrary scheme tests are invertible and their tensor pullbacks compose."
-   }
-  ]
+  "tool_uses": []
  },
- "tool_uses": [
-  "lemma-nagata-relative-proj-exists",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-invertible-pullback-tensor"
- ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q07-c3f7b6472",
-  "group": "Q07",
+  "reviewer": "NT-cc-Q133-bb9d55304",
+  "group": "Q133",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-c3f7b6472 (reviewer sub-agent of L); spot-checked: Read the item, all seven new nodes and every cited node's statement, against Stacks 0D3C/0D35/0D36/0D31/0D2Z (spaces-divisors, spaces-descent), 01VH/01VI/01VJ(1)<=>(5)/0893 (morphisms), 03KG/03KM/03M9/03M4 (spaces-morphisms), 03LX/03E3 (spaces-properties), 02X2/041F. The item statement and stmt_deps are byte-identical to the side DAG, so no target is weakened. The proof follows 0D35/0D3C over an arbitrary test T with the whole etale family. Step 1 builds N by the existing invertible-descent node, so M is never pulled back along a non-etale map, and identifies N with M|_X for etale T by full faithfulness. Step 2: qc+separated by the criterion's forward direction and the space locality node. Step 3: section algebra (03M9+03LX) and the Proj map (0D2Z). Step 4: U=X and r is an open immersion by etale descent (03M4), so X is a scheme. Step 5: ampleness by 01VJ reverse, using qc+separated from step 2. Every hypothesis matches. New statements are true: tested on P^1 with O(1), O and O(-1), and on empty, empty-family and infinite-family cases. None is a duplicate (checked lem-sc-ample-proj-open, lem-pc-quasi-compact-local-on-target, lem-galois-fpqc-descend-open-immersion, pqf-lem-pushforward-qcoh, and the 03M4 tag collisions) or a restated clause. Accepted tool_uses: lemma-nagata-relative-proj-exists, lem-weil-pbc-etale-covering-base-change, lem-weil-pbc-invertible-pullback-tensor. FIX (B3): lem-trf-space-qc-separated-etale-local defined quasi-compact morphisms of spaces via the undefined 'underlying topological space' of an algebraic space. I replaced it with Stacks 03E3: there is a surjective etale map from a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme], which is equivalent by 03KG(3). I added that stmt_dep and the source tag. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-space-qc-separated-etale-local.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-bb9d55304 (reviewer sub-agent of L); spot-checked: Fourth push of the 2026-10-21/22 re-split; the earlier heads f43fe8b12531, dcb56a536112 and ae0391595ef1 were all PASSed and then refused at landing (side completion not promoted). Diff against ae03 with json.tool: both new nodes (lem-trf-ample-scheme-test-line-preparation, lem-trf-section-proj-etale-embedding) are byte-identical. In the item, the statement, stmt_deps, proof_deps, steps 1, 2 and 4 and all uses lists are unchanged; split_report changed only its date and summary. The only content change is the order of Step 3: X is a scheme, then quasi-separatedness from the closed-immersion diagonal (def-weil-proper-morphism, def-weil-quasi-separated-morphism), then the reverse direction (2)⇒(1) of lem-trf-scheme-ample-canonical-proj-criterion. This is correct, and the criterion's statement requires that order. Supersession: on clones/live and side-live the item is still the 5-step base (1358/490/1018/862/1102 characters), so it is not superseded. Base drift: the 6 trf dependencies have the same statements as in the ae03 snapshot; the other dependencies, which the ae03 snapshot does not hold, were re-read in their current form. Re-split check: the old steps are fully allocated. Old 1–2 (base-changed covers, 0893 ample base change, invertible-module cocycle descent, N≅M|_X for étale T, f_T qc and separated) are now the preparation statement. Old 3–4 and the ordinary-object comparison of old 5 (A quasi-coherent with flat base change, ψ↔ψ_i, U(ψ)=X, r an open immersion via the étale cover P×_T T_i, X a scheme) are now the embedding statement. The rest of old 5 is assembly Steps 3–4. The two nodes are of comparable size, neither restates the item, and the assembly is under 3000 characters in 4 steps. I checked every step and node against Stacks spaces-descent.tex Tag 0D3C (lines 2125–2210) and morphisms 01VJ. Step 2 gets f_i quasi-compact from 01PS condition (1) of def-weil-pbc-ample-invertible-module. Edge cases checked: empty I, the identity cover, P^1 with O(1), O and O(-1), affine X with L=O, and infinite covers. Duplicate candidates read and rejected: qcqs-line-section-algebra-evaluation, proj-qc-open-twist-ample, space-etale-source-atlas-detection, the étale-tensor-sections nodes, etale-presented-module-effective-recovery, space-enlarged-etale-ringed-site-model, chartwise permanence. No SGA citation, no tool_uses, no fixes. Maintainer note: promotion loop; only landing/promotion is outstanding."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -246,11 +234,32 @@
   "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceAmpleLocal",
   "declaration": "AlgebraicGeometry.AlgebraicSpace.representable_and_ample_of_etale_cover",
   "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceAmpleLocal.lean",
-  "statement": "theorem representable_and_ample_of_etale_cover {S : Scheme.{u}} {F Y : AlgebraicSpace S} (f : F ⟶ Y) (M : F.Modules) (hM : F.IsLineModule M) (I : Type v) (Yᵢ : I → Y.EtaleSite) (Xᵢ : I → F.EtaleSite) (pᵢ : ∀ i : I, (Xᵢ i).obj.left ⟶ (Yᵢ i).obj.left) (hcover : ∀ (T : Over S) (a : yoneda.obj T ⟶ Y.obj.obj), Sieve.generate (fun (U : Over S) (k : U ⟶ T) ↦ ∃ (i : I) (b : U ⟶ (Yᵢ i).obj.left), yoneda.map k ≫ a = yoneda.map b ≫ (Yᵢ i).obj.hom) ∈ (Scheme.fppfTopology.over S) T) (hpb : ∀ i : I, IsPullback (Xᵢ i).obj.hom (yoneda.map (pᵢ i)) f.hom.hom (Yᵢ i).obj.hom) (hample : ∀ (i : I) (W : (Y.etaleForget.obj (Yᵢ i)).Opens), IsAffineOpen W → ∃ hL : ((Scheme.Modules.restrictFunctor (((pᵢ i).left ⁻¹ᵁ W).ι)).obj ((F.schemeRestriction (Xᵢ i)).obj M)).IsInvertible, @Scheme.Modules.IsAmple ((pᵢ i).left ⁻¹ᵁ W).toScheme ((Scheme.Modules.restrictFunctor (((pᵢ i).left ⁻¹ᵁ W).ι)).obj ((F.schemeRestriction (Xᵢ i)).obj M)) hL) : IsRepresentable f.hom.hom ∧ ∀ T : Y.EtaleSite, ∃ (X : F.EtaleSite) (p : X.obj.left ⟶ T.obj.left), IsPullback X.obj.hom (yoneda.map p) f.hom.hom T.obj.hom ∧ ∀ W : (Y.etaleForget.obj T).Opens, IsAffineOpen W → ∃ hL : ((Scheme.Modules.restrictFunctor ((p.left ⁻¹ᵁ W).ι)).obj ((F.schemeRestriction X).obj M)).IsInvertible, @Scheme.Modules.IsAmple (p.left ⁻¹ᵁ W).toScheme ((Scheme.Modules.restrictFunctor ((p.left ⁻¹ᵁ W).ι)).obj ((F.schemeRestriction X).obj M)) hL",
+  "statement": "theorem representable_and_ample_of_etale_cover\n    {S : Scheme.{u}} {F Y : AlgebraicSpace S} (f : F ⟶ Y)\n    (M : F.Modules) (hM : F.IsLineModule M)\n    (I : Type v) (Yᵢ : I → Y.EtaleSite) (Xᵢ : I → F.EtaleSite)\n    (pᵢ : ∀ i : I, (Xᵢ i).obj.left ⟶ (Yᵢ i).obj.left)\n    (hcover : ∀ (T : Over S) (a : yoneda.obj T ⟶ Y.obj.obj),\n      Sieve.generate (fun (U : Over S) (k : U ⟶ T) ↦\n        ∃ (i : I) (b : U ⟶ (Yᵢ i).obj.left),\n          yoneda.map k ≫ a = yoneda.map b ≫ (Yᵢ i).obj.hom) ∈\n            (Scheme.fppfTopology.over S) T)\n    (hpb : ∀ i : I, IsPullback (Xᵢ i).obj.hom (yoneda.map (pᵢ i))\n      f.hom.hom (Yᵢ i).obj.hom)\n    (hample : ∀ (i : I) (W : (Y.etaleForget.obj (Yᵢ i)).Opens), IsAffineOpen W →\n      ∃ hL : ((Scheme.Modules.restrictFunctor (((pᵢ i).left ⁻¹ᵁ W).ι)).obj\n          ((F.schemeRestriction (Xᵢ i)).obj M)).IsInvertible,\n        @Scheme.Modules.IsAmple ((pᵢ i).left ⁻¹ᵁ W).toScheme\n          ((Scheme.Modules.restrictFunctor (((pᵢ i).left ⁻¹ᵁ W).ι)).obj\n            ((F.schemeRestriction (Xᵢ i)).obj M)) hL) :\n    IsRepresentable f.hom.hom ∧\n      ∀ T : Y.EtaleSite, ∃ (X : F.EtaleSite) (p : X.obj.left ⟶ T.obj.left),\n        IsPullback X.obj.hom (yoneda.map p) f.hom.hom T.obj.hom ∧\n          ∀ W : (Y.etaleForget.obj T).Opens, IsAffineOpen W →\n            ∃ hL : ((Scheme.Modules.restrictFunctor ((p.left ⁻¹ᵁ W).ι)).obj\n                ((F.schemeRestriction X).obj M)).IsInvertible,\n              @Scheme.Modules.IsAmple (p.left ⁻¹ᵁ W).toScheme\n                ((Scheme.Modules.restrictFunctor ((p.left ⁻¹ᵁ W).ι)).obj\n                  ((F.schemeRestriction X).obj M)) hL",
   "branch": "newtargets-dag",
   "by": "Q75",
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T083001-L-2245491",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

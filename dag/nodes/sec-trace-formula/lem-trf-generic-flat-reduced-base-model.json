@@ -1,0 +1,291 @@
+{
+ "id": "lem-trf-generic-flat-reduced-base-model",
+ "kind": "statement",
+ "title": "Integral affine generic-flat model with unchanged fibres",
+ "statement": "Let $f:X\\to Y$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], where $Y$ is irreducible [def-weil-irreducible-components] with generic point $\\eta$ [def-sc-generic-point]. Let $r:Y_{\\mathrm{red}}\\to Y$ be the reduction [def-weil-pbc-scheme-reduction]. There exists a nonempty affine open subscheme $W\\subseteq Y_{\\mathrm{red}}$ such that $W$ is integral [def-pc-integral-scheme] and, for $q:W\\to Y$ the restriction of $r$, the pullback $g:X_W=X\\times_Y W\\to W$ [def-pc-fibre-product] is finite type, flat [def-weil-flat-morphism], and locally of finite presentation [def-sbc-locally-finite-presentation]. The map $q$ is a homeomorphism onto a nonempty open subset $V_0\\subseteq Y$ containing $\\eta$. For every $w\\in W$ the induced map $\\kappa(q(w))\\to\\kappa(w)$ is an isomorphism [def-weil-residue-field], and the canonical fibre comparison identifies $(X_W)_w$ with $X_{q(w)}$ over this field isomorphism [def-pc-scheme-fibre]. In particular the unique point $\\eta_W$ above $\\eta$ is generic in $W$, and the generic fibre of $g$ is locally of finite presentation over $\\kappa(\\eta_W)$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0578, lemma-geometrically-reduced-generic-fibre, first proof paragraph (reduction, affine restriction, generic flatness); morphisms.tex Tag 052A, proposition-generic-flatness; reduction Tag 054M"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-integral-scheme",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=Y_{\\mathrm{red}}$. The reduction theorem makes $S$ reduced and $r:S\\to Y$ a homeomorphism and a closed immersion. Let $\\eta_S=r^{-1}(\\eta)$. Since homeomorphisms preserve closures, $\\overline{\\{\\eta_S\\}}=S$, so $S$ is irreducible and nonempty. The reduced-and-irreducible characterization of integrality therefore makes $S$ integral.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-sc-generic-point",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, lemma-geometrically-reduced-generic-fibre, first proof paragraph; reduction Tag 054M and integral characterization Tag 01ON"
+   }
+  },
+  {
+   "text": "Form $h:X_S=X\\times_Y S\\to S$. Locally finite type and quasi-compactness are separately preserved by base change, so $h$ is finite type. Apply generic flatness with local finite presentation to $h$ over the integral scheme $S$. It gives a nonempty open $U\\subseteq S$ on which $h_U:X_S\\times_S U\\to U$ is flat and locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sbc-generic-flat-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 052A, proposition-generic-flatness, structure-sheaf case; lemma-base-change-finite-type and Tag 01K5 for finite type after base change"
+   }
+  },
+  {
+   "text": "The generic point $\\eta_S$ belongs to $U$: otherwise its closure would be contained in the proper closed subset $S\\setminus U$. Choose an affine open $W$ of $S$ with $\\eta_S\\in W\\subseteq U$, using the affine-open basis. Its local rings are those of $S$, so they are reduced. Also $\\overline{\\{\\eta_S\\}}^{\\,W}=W$; thus $W$ is nonempty and irreducible, hence integral. Write $\\eta_W$ for $\\eta_S$ viewed in $W$.",
+   "uses": [
+    "def-sc-generic-point",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, first proof paragraph, affine restriction and shrinking; Schemes Tag 01IT, lemma-basis-affine-opens; Properties Tag 01ON"
+   }
+  },
+  {
+   "text": "Let $q:W\\hookrightarrow S\\xrightarrow{r}Y$. The pullback $g:X_W=X\\times_Y W\\to W$ is finite type by the locally-finite-type and quasi-compact base-change assertions applied to $f$. By the universal property of fibre products, $X_W$ is canonically $(X_S\\times_S U)\\times_U W$, with the same projection to $W$. Consequently the flat base-change theorem and clause (3) of the finite-presentation permanence statement give flatness and local finite presentation of $g$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0578 preparation as used in more-morphisms.tex; Tags 01U9 (lemma-base-change-flat) and 01TS (lemma-base-change-finite-presentation)"
+   }
+  },
+  {
+   "text": "Because $r$ is a homeomorphism, $V_0=r(W)$ is open in $Y$ and $q$ is a homeomorphism from $W$ onto $V_0$. It contains $\\eta=q(\\eta_W)$; injectivity gives the asserted uniqueness above $\\eta$, and step 3 already proves genericity. For $w\\in W$, the map $\\kappa(r(w))\\to\\kappa(w\\text{ in }S)$ is an isomorphism because $r$ is a closed immersion. The open inclusion $W\\hookrightarrow S$ also induces a residue-field isomorphism. Their composite is exactly $\\kappa(q(w))\\to\\kappa(w)$: on local rings the map for the composite is the composite, and passing to the quotients by maximal ideals gives the residue maps.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, first proof paragraph, bijection on points and unchanged fibres; schemes.tex Tag 01HH (open immersions) and morphisms.tex Tag 01QO (closed immersions)"
+   }
+  },
+  {
+   "text": "Apply the fibre-of-base-change statement to $f$ and $q$ at $w$. It identifies $(X_W)_w$ canonically with $X_{q(w)}\\times_{\\operatorname{Spec}\\kappa(q(w))}\\operatorname{Spec}\\kappa(w)$. By step 5 the field map is an isomorphism, so this is precisely the claimed identification over that field isomorphism. Finally the generic fibre morphism $g_{\\eta_W}$ is the base change of the locally finitely presented morphism $g$ along $\\operatorname{Spec}\\kappa(\\eta_W)\\to W$; clause (3) of the permanence statement makes it locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, first proof paragraph, fibre identification; morphisms.tex Tag 01TS for local finite presentation of the generic fibre"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "def-sc-generic-point",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-reduced-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-weil-residue-field",
+  "lem-weil-pbc-fibre-of-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0578, lemma-geometrically-reduced-generic-fibre, first proof paragraph; generic flatness from Tag 052A, proposition-generic-flatness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism over an irreducible scheme admits after reduction and shrinking an integral affine base with flat locally finitely presented pullback and identical residue field fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(k(x)) \\\\to X$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a preimmersion, where $k(x)$ denotes the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.IsOver\\n    (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap (X ↘ Y) x)) Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic flatness over the reduction of an irreducible base preserves all fibres on a nonempty open affine subset",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat → GeneralizingMap (PrimeSpectrum.comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"LocallyOfFinitePresentation\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : (CategoryTheory.Over.pullback f).Faithful\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)] [AlgebraicGeometry.IsZariskiLocalAtTarget P] : P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @Alg\", \"doc\": \"fpqc descent implies fppf descent\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.LocallyOfFinitePresentation) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f] [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.Flat f] : CategoryTheory.EffectiveEpi f\", \"doc\": \"Any surjective, flat morphism locally of finite presentation is an effective epimorphism.\\nIn particular, étale surjections satisfy this.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*flat|flat.*generic|reduction.*residue",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"289\", \"text\": \"  simp only [reduction, map_Δ, isUnit_iff_ne_zero, ne_eq, residue_eq_zero_iff]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "After reducing an irreducible scheme a finite type family becomes flat locally of finite presentation on an integral affine open with unchanged fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyOfFinitePresentation f] : LocallyOfFinitePresentation (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is locally of finite presentation, then for any open subset $ V $ of $ Y $, the restriction $ f|_V $ is also locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [LocallyOfFinitePresentation f] :\\n  LocallyOfFinitePresentation (f.resLE V U e)\", \"doc\": \"If a morphism of schemes is locally of finite presentation, then its restriction to any open subsets is also locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsReduced X] [H : IrreducibleSpace X] : IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*flat|flat.*generic|reduction.*residue",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+   "digest": "796193016e546da1",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type morphism of schemes is flat locally of finite presentation over a nonempty affine open of the reduction of an irreducible base",
+   "results": "8 hits: AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.flat_iff, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.locallyOfFinitePresentation_iff",
+   "digest": "f0f02f0ff3c5a408",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"LocallyOfFinitePresentation\"",
+   "results": "4 hits: AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact, AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat",
+   "digest": "b7cbcb8abfee37a4",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism over an irreducible scheme becomes flat and locally finitely presented on a nonempty affine open of the reduced base with unchanged residue fields and fibres",
+   "results": "8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "digest": "d9848ee1e6814101",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic flatness and local finite presentation after shrinking an integral base scheme",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, RingHom.finitePresentation_isLocal, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "digest": "cb89f30a2a8114dc",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-fibre-geometrically-reduced-open",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "In the constructibility input, apply the generic-fibre alternative of Stacks 0579 on an irreducible closed subset; this node is the 0578 or 0577 alternative used there. In its descendant Stacks 0578 argument: old steps 1-2, reduction and generic-flat affine preparation with fibre comparisons.",
+   "via": [
+    "lem-trf-generic-fibre-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-generic-flat-reduced-base-model",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against Stacks 0578 and 052A. The proof reduces the base, applies the existing integral-base generic-flat finite-presentation theorem, chooses an affine generic neighbourhood, and separately verifies base-change stability, residue-field isomorphisms and canonical fibre comparisons. Existing nodes cover every non-elementary fact; no new nodes are needed. Project-source searches found no exact completed declaration.",
+  "blueprint": "The inherited ancestor is lem-trf-local-term-locality; this item serves its recorded constructibility descendant, specifically the first proof paragraph of Stacks 0578 (reduction, affine restriction, generic flatness and unchanged fibres). The current latest ancestor and sk-i-curve-zero texts were read; this remains a general scheme-theoretic tool below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-generic-flat-finite-presentation",
+    "why": "Generic flatness with local finite presentation for an arbitrary finite-type family over an integral scheme is the exact preparation cited by Stacks 0578; the trace-formula unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Uses reducedness and the closed-immersion/homeomorphism properties of reduction, a general scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Applies the residue-field isomorphism theorem to the reduction closed immersion; the trace-formula unit contains no theorem about these residue fields."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-bc5021e9a",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-bc5021e9a (reviewer sub-agent of L); spot-checked: First split of an item that is unsplit on live; there is no repair note and no re-split order. Statement and stmt_deps are unchanged against live, there are 0 new nodes, proof_deps equals the union of the step uses, and there is no cycle. The six steps follow the first proof paragraph of Stacks more-morphisms 0578 (reduction, then integral via 01ON, then affine shrink, then 052A generic flatness) and write out its implicit 'identifies fibres' with cited nodes. Each step's cited statements say what the step takes from them. Step 1: the reduction homeomorphism gives η_S generic, so S is integral. Step 2: finite type is preserved by base change through LFT base change and qcqs clause (3); lem-sbc-generic-flat-finite-presentation applies with exactly its hypotheses. Step 3: η_S lies in U, and W is an affine open from the affine-open basis, reduced with η_S generic, hence integral; no quasi-separatedness is used. Step 4: pullback pasting is elementary; flat and LFP base change are cited. Step 5: residue isomorphisms come from the closed-immersion and open-immersion nodes, not from 'universal homeomorphism'. Step 6: fibre-of-base-change gives a cartesian square, and Spec(r) is an isomorphism; the generic fibre is LFP by clause (3). Edge cases checked: empty source, Artinian base, non-noetherian base, nilradical not finitely generated. The sbc 'reduced-flat-affine-preparation' family reduces the source and gives no residue-field or fibre comparison, so it is not a duplicate. The three tool_uses (generic-flat-finite-presentation, reduction-universal-homeomorphism, closed-immersion-residue-field-iso) are generic scheme tools and are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericFlatReducedBaseModel",
+  "declaration": "AlgebraicGeometry.exists_integral_affine_genericFlat_reducedBase",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFlatReducedBaseModel.lean",
+  "statement": "theorem exists_integral_affine_genericFlat_reducedBase {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [IrreducibleSpace Y] (η : Y) (hη : IsGenericPoint η (Set.univ : Set Y)) : ∃ W : Y.nilradical.subscheme.Opens, (W : Set Y.nilradical.subscheme).Nonempty ∧ IsAffineOpen W ∧ IsIntegral W.toScheme ∧ LocallyOfFiniteType (pullback.snd f (W.ι ≫ Y.nilradical.subschemeι)) ∧ QuasiCompact (pullback.snd f (W.ι ≫ Y.nilradical.subschemeι)) ∧ Flat (pullback.snd f (W.ι ≫ Y.nilradical.subschemeι)) ∧ LocallyOfFinitePresentation (pullback.snd f (W.ι ≫ Y.nilradical.subschemeι)) ∧ (∃ V₀ : Y.Opens, η ∈ V₀ ∧ Topology.IsOpenEmbedding (W.ι ≫ Y.nilradical.subschemeι) ∧ Set.range (W.ι ≫ Y.nilradical.subschemeι) = (V₀ : Set Y)) ∧ (∀ w : W.toScheme, IsIso ((W.ι ≫ Y.nilradical.subschemeι).residueFieldMap w) ∧ ∃ e : (pullback.snd f (W.ι ≫ Y.nilradical.subschemeι)).fiber w ≅ f.fiber ((W.ι ≫ Y.nilradical.subschemeι) w), e.hom ≫ f.fiberι ((W.ι ≫ Y.nilradical.subschemeι) w) = (pullback.snd f (W.ι ≫ Y.nilradical.subschemeι)).fiberι w ≫ pullback.fst f (W.ι ≫ Y.nilradical.subschemeι) ∧ e.hom ≫ f.fiberToSpecResidueField ((W.ι ≫ Y.nilradical.subschemeι) w) = (pullback.snd f (W.ι ≫ Y.nilradical.subschemeι)).fiberToSpecResidueField w ≫ Spec.map ((W.ι ≫ Y.nilradical.subschemeι).residueFieldMap w)) ∧ (∃ ηW : W.toScheme, (W.ι ≫ Y.nilradical.subschemeι) ηW = η ∧ (∀ w : W.toScheme, (W.ι ≫ Y.nilradical.subschemeι) w = η → w = ηW) ∧ IsGenericPoint ηW (Set.univ : Set W.toScheme) ∧ LocallyOfFinitePresentation ((pullback.snd f (W.ι ≫ Y.nilradical.subschemeι)).fiberToSpecResidueField ηW))",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-035c180c1",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Lean statement exact against node/0578/052A: finite type = LocallyOfFiniteType+QuasiCompact, IrreducibleSpace + IsGenericPoint η, reduction = nilradical.subscheme/subschemeι, W nonempty affine open IsIntegral, g = pullback.snd f q LFT/QC/Flat/LFP, q IsOpenEmbedding with range = V₀ ∋ η (topological, not open immersion), IsIso residueFieldMap ∀ w, fibre iso e pinned by both pullback projections (Mathlib fiber = pullback f fromSpecResidueField, so canonical), unique generic ηW, generic fibre LFP; no extra hypotheses, single universe, lean.statement verbatim, docstrings/source/blueprint/6 steps, sole sorry, proof imports exist. Only fault H11: 'Second reading by Q80' is the worker's self-audit → FIX fixes/lem-trf-generic-flat-reduced-base-model.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean changed, no compile run."
+ }
+}

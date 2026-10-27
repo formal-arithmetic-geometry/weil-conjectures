@@ -1,0 +1,113 @@
+{
+ "id": "lem-sf-projection-identity-pullback-units",
+ "kind": "statement",
+ "title": "Fullness and faithfulness of identity inverse image",
+ "statement": "Fix a six-functor operation datum $S$ of [def-fix-six-functor-datum], including its finite field $k$, coefficient prime $\\ell$, finite extension $E/\\mathbf Q_\\ell$ and algebraic closure $\\overline{\\mathbf Q}_\\ell$. For each finite-type $k$-space $X$ in its space category, and each of its completed integral, rational and common coefficient stages $\\Lambda=\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell$, the supplied identity inverse-image functor $U_X=L\\operatorname{id}_X^*:D^b_c(X,\\Lambda)\\to D^b_c(X,\\Lambda)$ is full and faithful: it induces a bijection on every Hom set. There is no assertion about the supplied compositor, projection maps or support functors, and no identity isomorphism is chosen as data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, identity sentence: the identity adjunctions give the identity mate; proper-case sentence and compactification independence"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum"
+ ],
+ "proof": [
+  {
+   "text": "For each finite-type space X, apply lem-pod-isomorphism-field-transport to the scheme identity of X with the fixed coefficient prime and algebraic closure. Use the finite-type and quasi-compact witnesses in X.property. The theorem supplies residue invertibility data and equivalences for the canonical completed integral and rational identity pullbacks at E, and for the canonical common-stage identity pullback. The two supplied invertibility structures on the same scheme agree by subsingleton elimination.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the integralPullback, rationalPullback and commonStagePullback normalization fields of the operation datum to rewrite its three supplied identity pullbacks to the canonical functors. An equivalence is full and faithful. Regroup the pointwise conjunction into the three universal assertions. No identity isomorphism is chosen as operation data, and no additional scheme or coefficient hypotheses are imposed.",
+   "uses": [
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-fix-six-functor-datum",
+  "lem-pod-isomorphism-field-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Identity sentence, using the identity specialization of the already-stated isomorphism field transport theorem (lem-pod-isomorphism-field-transport)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor isomorphic to the identity has a unique unit compatible with its composition isomorphism",
+   "results": "Eight hits, including Adjunction.unitAsIsoOfIso, isIso_unit_of_iso and leftAdjointIdIso. These concern generic adjunctions, not the supplied coefficient-stage pullback units or tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the normalized six-functor operation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity pullback functors have a natural identity unit normalized by composition and the proper counit projection formula becomes identity under this unit",
+   "results": "Eight hits for Over.pullbackId and ChosenPullbacksAlong identity unit and counit lemmas; these concern ordinary over-category pullbacks.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for finite, completed, rationalized and common-stage sheaf operations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(assoc|identity|tensorAction)",
+   "results": "Mathlib search returned generic projection/identity hits only. Repository search found ProjectionSystemCoherence (an identity equation on explicit system models), CoherentRationalPullbackIdentity and CommonStagePullbackIdentity (units requiring a simultaneous comparison system), and the existing constructible proper-coincidence laws. None states either of these two assertions on an arbitrary supplied SixFunctorDatum.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the constructible proper-coincidence laws in the parent. State only the remaining normalized-unit and proper-counit steps. The source-library projection mate lemma remains available for their proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "date": "2026-10-27",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "First paragraph, identity sentence: the identity adjunctions give the identity mate; proper-case sentence and compactification independence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionIdentityPullbackUnits",
+  "file": "lean/Sheaf/Paper/ProjectionIdentityPullbackUnits.lean",
+  "declaration": "WeilConjectures.projectionIdentity_pullbackUnits",
+  "declarations": [
+   "WeilConjectures.projectionIdentity_pullbackUnits"
+  ],
+  "statement": "theorem projectionIdentity_pullbackUnits (S : SixFunctorOperationDatum D C E n hn) :\n    (∀ X : SixFunctorSpace D,\n      (S.higher.integral.pull (𝟙 X)).Full ∧ (S.higher.integral.pull (𝟙 X)).Faithful) ∧\n    (∀ X : SixFunctorSpace D,\n      (S.higher.rational.pull (𝟙 X)).Full ∧ (S.higher.rational.pull (𝟙 X)).Faithful) ∧\n    (∀ X : SixFunctorSpace D,\n      (S.closure.commonStage.pull (𝟙 X)).Full ∧\n        (S.closure.commonStage.pull (𝟙 X)).Faithful)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-00817",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T012828-L-2337118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261027T034814-L-3688390",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

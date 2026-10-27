@@ -1,0 +1,124 @@
+{
+ "id": "def-trf-implicit-transverse-coefficient",
+ "kind": "definition",
+ "title": "Extracting the transverse coefficient as a tangential formal power series",
+ "statement": "Let $L$ be a field, let $m,r\\geq0$, and use the formal power series rings of [def-weil-pbc-multivariate-power-series]. For $f\\in L[[W_1,\\ldots,W_m,Z_1,\\ldots,Z_r]]$ and $\\delta\\in\\mathbf N^r$, define its transverse coefficient $\\operatorname{implicitTransverseCoeff}_{\\delta}(f)\\in L[[W_1,\\ldots,W_m]]$ by $[W^{\\alpha}]\\operatorname{implicitTransverseCoeff}_{\\delta}(f)=[W^{\\alpha}Z^{\\delta}]f$ for every $\\alpha\\in\\mathbf N^m$. Thus it is the coefficient series of $Z^{\\delta}$ when $f$ is expanded in the transverse variables, with no convergence or finite-support condition on $f$.",
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "source": {
+  "document": "Bierstone--Milman, Canonical desingularization in characteristic zero by blowing up the maximum strata of a local invariant, Invent. Math. 128 (1997), 207--302",
+  "place": "Theorem 9.4 and Remarks 9.5, pp.277--278: coefficients in transverse variables, with the remaining variables retained; existing project realization ImplicitTaylorCoordinateCalculus.lean, step 9."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient of transverse variables of a multivariate formal power series is a power series in the remaining variables",
+   "results": "{\"t\": \"2026-10-22T08:07:27Z\", \"tool\": \"leansearch\", \"query\": \"coefficient of transverse variables of a multivariate formal power series is a power series in the remaining variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff\", \"PowerSeries.coeff\", \"MvPowerSeries.subst\", \"PowerSeries.coeff_subst\", \"PowerSeries.coeff_def\", \"MvPowerSeries.constantCoeff\", \"MvPowerSeries.X_def\", \"MvPowerSeries\"], \"digest\": \"6ed80a93bd5f0b10\"}",
+   "date": "2026-10-22",
+   "verdict": "No separate coefficient-series operator in Mathlib; reuse the existing project definition implicitTransverseCoeff."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.coeff, Finsupp.mapDomain",
+   "results": "{\"t\": \"2026-10-22T08:07:27Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.coeff, Finsupp.mapDomain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff_rename_eq_zero\", \"MvPowerSeries.coeff_rename\"], \"digest\": \"121174286f8ef6ce\"}",
+   "date": "2026-10-22",
+   "verdict": "No separate coefficient-series operator in Mathlib; reuse the existing project definition implicitTransverseCoeff."
+  },
+  {
+   "tool": "grep",
+   "query": "implicitTransverseCoeff|transverseCoeff|coeff.*Sum.inr",
+   "results": "{\"t\": \"2026-10-22T08:07:27Z\", \"tool\": \"grep\", \"query\": \"implicitTransverseCoeff|transverseCoeff|coeff.*Sum.inr\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No separate coefficient-series operator in Mathlib; reuse the existing project definition implicitTransverseCoeff."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n implicitTransverseCoeff|transverseCoeff lean/WeilConjectures lean/Sheaf; rg -l implicitTransverseCoeff|transverse.coefficient|transverse coefficient dag/nodes",
+   "results": "Only Sheaf/AlgebraicGeometry/ImplicitTaylorCoordinateCalculus.lean:175 defines implicitTransverseCoeff (uses at 273,327); no WeilConjectures match. The only DAG match is the calculus theorem, whose lean.declarations lists this helper but whose kind is statement; no owning definition node.",
+   "date": "2026-10-22",
+   "verdict": "Exact existing declaration, missing definition-node ownership."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search implicitTransverseCoeff; python3 tools/blueprint_refs.py search \"transverse coefficient\"",
+   "results": "0 blueprint nodes match 'implicitTransverseCoeff'; 0 blueprint nodes match 'transverse coefficient'",
+   "date": "2026-10-22",
+   "verdict": "No blueprint definition node owns this operation."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-coefficient-transform-criterion",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Formal coefficient-transform criterion: the transverse coefficient c_(l,gamma)(W) in the coefficient-order locus and weighted permissible transform, in the historical resolution/local-term branch.",
+   "via": [
+    "lem-trf-formal-coefficient-transform-criterion",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ImplicitTaylorCoordinateCalculus",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.implicitTransverseCoeff",
+  "statement": "def implicitTransverseCoeff {m r : ℕ} {L : Type u} [Field L] (δ : Fin r →₀ ℕ) (f : MvPowerSeries (Fin m ⊕ Fin r) L) : MvPowerSeries (Fin m) L",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Owns the existing plain definition implicitTransverseCoeff, rather than the calculus theorem. The defining coefficient formula is exactly the displayed series coefficient formula; no new Lean declaration or copy is introduced. H2 repair requested by the independent review of e388c4dc0f05."
+ },
+ "import_flags": [
+  "unreachable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6858b1a19",
+  "group": "NL",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6858b1a19",
+  "group": "NL",
+  "result": "pass",
+  "note": "Fourth push after three PASSes (958f, 7a24, 7a4c). The 7a4c landing was refused with 'reach: def-trf-implicit-transverse-coefficient is not reached from a target and is not flagged unreachable'. diff -rq vs the 7a4c snapshot: the delivery's only change is import_flags ['unreachable'] on that new def node, plus a report section. Other differences are base-only: blueprint-index, units, and blueprint_* metadata of def-nagata-strict-transform and def-sbc-smooth-morphisms. The item node is identical, and the Lean is byte-identical (sha 4d0455cd). stage2_delivery.py NEW_NODE_KEYS accepts import_flags since 2026-10-23, and check_dag validates it. The node's only citer is the item, on the historical alteration branch, so the flag is right. All 13 dep records equal side-live; the item is still split with no lean on live; the new node is still absent (no collision). implicitTransverseCoeff at ImplicitTaylorCoordinateCalculus.lean:175 matches the record verbatim. Lean re-scan: 9 theorems with bare sorry, 10 helpers with real data, source and blueprint docstrings. Mathematics unchanged since the PASSes. No file changed, so no compile. Advisories: H11 no second reading; H9 proof-only imports."
+ }
+}

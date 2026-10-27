@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-simple-module-dual-highest-weight",
+ "kind": "statement",
+ "title": "Highest-weight classification and contragredients of simple rational modules",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $G$ be a semisimple $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected solvable normal subgroup; solvable means that successive commutator subgroup schemes become trivial. A rational $G$-module is an $F$-vector space $V$ with a coaction $V\\to V\\otimes_F F[G]$ satisfying coassociativity and the counit identity. A submodule is a linear subspace whose coaction takes values in its tensor product with $F[G]$. Simple means nonzero with no proper nonzero submodule. Equivariance means a coaction identity, equivalently equivariance after every commutative $F$-algebra extension. Fix a split maximal torus $T\\subseteq G$ and a Borel subgroup $B\\supseteq T$ with unipotent radical $U$, character lattice $X=X^*(T)$ and positive roots $\\Phi^+$ as in [lem-sfb-reductive-borel-pair-structure]. Choose a longest Weyl element $w_0$, which sends $\\Phi^+$ onto $-\\Phi^+$; its action on $X$ is $(w\\lambda)(t)=\\lambda(n^{-1}tn)$ for a normalizer representative $n$. For every finite-dimensional simple rational $G$-module $V$, the subspace $V^U=\\{v:\\rho_V(v)|_U=v\\otimes1\\}$ is one-dimensional, and $T$ acts on it by a character $\\lambda(V)\\in X$, called its highest weight. The contragredient $V^\\vee=\\operatorname{Hom}_F(V,F)$, with $(g\\ell)(v)=\\ell(g^{-1}v)$ after every scalar extension, is simple and satisfies $\\lambda(V^\\vee)=-w_0\\lambda(V)$. Two finite-dimensional simple rational $G$-modules with the same highest weight are equivariantly linearly isomorphic.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 22.18 and Theorem 22.19, printed pp.467--468; The highest weight of the contragredient representation, following 22.31, printed p.471. Longest Weyl element: Definition 21.72 and Theorem 21.73(b), printed p.448."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sfb-rational-highest-weight-data",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $Q_+=\\sum_{\\alpha\\in\\Delta}\\mathbf N\\alpha$ and $\\mu\\le\\nu$ when $\\nu-\\mu\\in Q_+$. The simple-root base in [lem-sfb-reductive-borel-pair-structure] is linearly independent, so $Q_+\\cap(-Q_+)=\\{0\\}$ and this order is antisymmetric. For any finite-dimensional rational $T$-module, choose $T\\simeq\\mathbf G_m^r$ and apply [lem-sfb-gm-representation-weight-basis] to the first factor, then each subsequent factor on the preceding weight spaces; the factor actions commute and hence preserve these spaces. This gives the finite direct sum of character spaces. More explicitly, the coaction in Laurent monomials is $c(x)=\\sum_a x_a\\otimes t^a$; coassociativity and the counit give $c(x_a)=x_a\\otimes t^a$ and $x=\\sum_a x_a$. Comparing coefficients also shows that every $T$-stable subspace contains all weight components of its vectors. These observations apply to invariant subspaces, quotients and duals as well.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, printed pp.234–235; root order preceding 22.2, printed p.463"
+   }
+  },
+  {
+   "text": "The Borel-pair node gives $B=U\\rtimes T$ with $U$ smooth connected unipotent. By its unipotence hypothesis there is a faithful finite-dimensional representation of $U$ in which all geometric points are unipotent. Choose bases for this representation and for the nonzero $V$. Apply [lem-sfb-unipotent-rational-representation-fixed-vector] to the restriction of $V$ to $U$, and then [lem-sfb-geometric-unipotence-invariant-descent] with $k=K=F$. Thus $V^U\\ne0$ for the coaction notion of invariants. Normality of $U$ in $B$ makes $V^U$ $T$-stable: $u(tv)=t(t^{-1}ut)v=tv$, as an identity after every scalar extension. The weight decomposition of step 1 therefore supplies $0\\ne v\\in(V^U)_\\lambda$. Since every $b$ is $ut$, this line has $B$-character $\\lambda\\circ p$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-unipotent-rational-representation-fixed-vector",
+    "lem-sfb-geometric-unipotence-invariant-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.3, printed p.280; the split-solvable argument of Theorem 16.6, printed pp.325–326, and the primitive-vector argument in Theorem 22.18, printed pp.467–468"
+   }
+  },
+  {
+   "text": "Simplicity implies that $v$ generates $V$. Apply [lem-sfb-primitive-cyclic-weight-bound]: $V_\\lambda=Fv$ and every weight of $V$ is $\\le\\lambda$. If $(V^U)_\\nu\\ne0$, choose $0\\ne z$ there. The same semidirect-product calculation makes $z$ a $B$-eigenvector; it also generates $V$, so the cyclic weight bound applied to $z$ says that every weight of $V$, including $\\lambda$, is $\\le\\nu$. Since $\\nu\\le\\lambda$, antisymmetry gives $\\nu=\\lambda$. Step 1 decomposes $V^U$ into these weight spaces, hence $V^U=Fv$ and its character is $\\lambda(V)=\\lambda$.",
+   "uses": [
+    "lem-sfb-primitive-cyclic-weight-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.17 and Theorem 22.18, printed pp.467–468"
+   }
+  },
+  {
+   "text": "The dual is rational: in a basis its action matrix is the inverse transpose of the action matrix of $V$; inversion is supplied by the antipode of $F[G]$. For a rational submodule $0\\ne W\\subsetneq V^\\vee$, its annihilator $W^\\perp\\subset V$ has dimension $\\dim V-\\dim W$, strictly between $0$ and $\\dim V$. It is $G$-stable, since for every test algebra $A$, $g\\in G(A)$, $x\\in W^\\perp\\otimes A$ and $\\ell\\in W\\otimes A$ one has $\\ell(gx)=(g^{-1}\\ell)(x)=0$. Annihilators commute with extension to $A$ by choosing an adapted basis of the finite-dimensional vector space. This contradicts simplicity of $V$. Also $\\dim V^\\vee=\\dim V>0$. Thus $V^\\vee$ is simple, and steps 1–3 apply to it.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The highest weight of the contragredient representation, printed p.471: simplicity of the dual, with the annihilator argument written out"
+   }
+  },
+  {
+   "text": "If $n\\in N_G(T)(F)$ represents $w$, then $t(nx)=n(n^{-1}tn)x=(w\\mu)(t)nx$ for $x\\in V_\\mu$, after every scalar extension. The maps $n,n^{-1}$ therefore identify $V_\\mu$ with $V_{w\\mu}$, so the finite set of weights is Weyl invariant. Since every weight $\\mu\\le\\lambda$, and $w_0$ sends every positive root to a negative root, $w_0\\mu-w_0\\lambda\\in Q_+$. Every weight is $w_0\\mu$ for some weight $\\mu$, so $w_0\\lambda$ is the least weight of $V$, and it occurs. The weight decomposition of step 1 identifies the weights of $V^\\vee$ with the negatives of those of $V$: the dual of $V_\\mu$ has character $-\\mu$. Thus $-w_0\\lambda$ occurs and dominates every dual weight. By step 3 for the simple $V^\\vee$, its highest weight also occurs and dominates every dual weight. Antisymmetry gives $\\lambda(V^\\vee)=-w_0\\lambda$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.15, printed pp.466–467, and The highest weight of the contragredient representation, printed p.471"
+   }
+  },
+  {
+   "text": "Finally, suppose $V_1,V_2$ are simple with highest weight $\\lambda$, and choose nonzero highest vectors $v_1,v_2$ using steps 1–3. In $V_1\\oplus V_2$, let $C$ be the rational submodule generated by $v=(v_1,v_2)$. This is a $B$-eigenvector of weight $\\lambda$. The cyclic weight bound gives $C_\\lambda=F(v_1,v_2)$. Each projection $p_i:C\\to V_i$ is equivariant and has nonzero image, hence is surjective. The kernel of $p_2$ is $C\\cap(V_1\\oplus0)$, a submodule of the simple $V_1\\oplus0$. It cannot be all of that module: otherwise $(v_1,0)\\in C_\\lambda=F(v_1,v_2)$, impossible since both $v_i\\ne0$. Hence the kernel is zero. The same argument interchanging 1 and 2 proves $p_1$ bijective. The map $p_2p_1^{-1}:V_1\\to V_2$ is the required equivariant linear isomorphism; the inverse of a bijective coaction-compatible linear map is coaction-compatible by composing its coaction identity with its linear inverse.",
+   "uses": [
+    "lem-sfb-primitive-cyclic-weight-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 22.19 and its proof, printed p.468"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-unipotent-rational-representation-fixed-vector",
+  "lem-sfb-geometric-unipotence-invariant-descent",
+  "lem-sfb-primitive-cyclic-weight-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorems 22.18–22.19, printed pp.467–468; contragredient paragraph p.471, with the U-fixed-vector/torus-decomposition form of the split-solvable eigenline argument (14.3, 12.12 and 16.6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "highestWeight|highest_weight|opposition|simple.*socle|contragredient",
+   "results": "Search returned 6 hits: Mathlib/Combinatorics/Young/SemistandardTableau.lean, Mathlib/Combinatorics/Young/SemistandardTableau.lean, Mathlib/Combinatorics/Young/SemistandardTableau.lean, Mathlib/Combinatorics/Young/SemistandardTableau.lean, Mathlib/Combinatorics/Young/SemistandardTableau.lean, Mathlib/Tactic/FieldSimp.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"weight\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Highest weight classification dual representation minus longest Weyl group element induced module unique simple subrepresentation",
+   "results": "Search returned 8 hits: Representation.dual, RootPairing.isSimpleModule_weylGroupRootRep_iff, Representation.IsIrreducible.mk, RootPairing.isSimpleModule_weylGroupRootRep, RootPairing.weylGroupCorootRep, Rep.subrepresentation, LieModule.genWeightSpace, LieModule.Weight. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple representations of a split semisimple algebraic group are classified by highest weights and the contragredient has opposition highest weight",
+   "results": "Search returned 8 hits: RootPairing.isSimpleModule_weylGroupRootRep, RootPairing.isSimpleModule_weylGroupRootRep_iff, LieModule.exists_nontrivial_weightSpace_of_lieIdeal, LieModule.iSup_genWeightSpace_eq_top', LieModule.iSup_genWeightSpace_eq_top, LieModule.chainBot_neg, LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup, LieModule.chainTop_neg. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Highest weight theorem for rational algebraic group representations induced module unique simple socle and dual highest weight minus longest Weyl element",
+   "results": "Search returned 8 hits: RootPairing.isSimpleModule_weylGroupRootRep, LieModule.genWeightSpace_add_chainTop, LieModule.genWeightSpace_neg_add_chainBot, LieModule.chainTop_zero, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieModule.exists_nontrivial_weightSpace_of_lieIdeal, LieModule.coe_chainTop', LieModule.iSup_genWeightSpace_eq_top'. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple rational representations of a semisimple algebraic group have a unique highest weight line and dual highest weight minus the longest Weyl element",
+   "results": "8 hits: RootPairing.isSimpleModule_weylGroupRootRep, RootPairing.isSimpleModule_weylGroupRootRep_iff, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieModule.genWeightSpace_add_chainTop, LieModule.exists_nontrivial_weightSpace_of_lieIdeal, RootPairing.GeckConstruction.instIsIrreducible, LieModule.exists_nontrivial_weightSpace_of_isSolvable, LieModule.chainTop_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Weyl-group representations, Lie-algebra weight chains and Young tableaux do not state a theorem about rational algebraic-group modules in arbitrary characteristic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Highest weights classify irreducible rational representations of semisimple algebraic groups in arbitrary characteristic",
+   "results": "8 hits: LieModule.weightSpace.congr_simp, LieModule.coe_genWeightSpace_of_top, LieModule.instLinearWeightsOfIsLieAbelian, LieModule.genWeightSpace.congr_simp, LieModule.iSup_genWeightSpace_eq_top, Rep.instInjective, Representation.irreducible_iff_isSimpleModule_asModule, LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Weyl-group representations, Lie-algebra weight chains and Young tableaux do not state a theorem about rational algebraic-group modules in arbitrary characteristic"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-section-self-duality",
+  "date": "2026-10-23",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Duality step: the highest weight of a dual simple module is the opposition of the original highest weight, and highest weight determines the simple module.",
+   "via": [
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-simple-module-dual-highest-weight",
+  "worker": "stage1",
+  "summary": "Read Milne 22.17–22.19 and the duality paragraph p.471. Added only the cyclic Borel-eigenvector weight bound, retaining the arguments for U-fixed-line uniqueness, dual simplicity and opposition weight, and diagonal-generated-module comparison in the item. Reused the existing unipotent fixed-vector, scheme-invariant descent and G_m weight-decomposition nodes instead of creating a solvable eigenline duplicate. All cited statements were read and quoted in citations.json.",
+  "blueprint": "Realizes the representation-theoretic self-duality input along the existing blueprint.from.place chain, ultimately det-thm-sf-ctf-stability-direct-images proof (3), supporting the Haboush/Steinberg step. The nearest blueprint ancestor returned by blueprint_refs.py is null because the pre-existing created.item chain terminates at a non-blueprint root. The exact intended place is retained. No chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-f7747f708",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-f7747f708 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Item statement and stmt_deps are byte-identical to base; this is a first split with no re-split note. Source checks against Milne 2017: Prop 22.17 (p.467) is exactly the new node lem-sfb-primitive-cyclic-weight-bound (multiplicity 1 and weights λ−ΣN·Δ for a module generated by a B-eigenvector, with no simplicity assumed, so it holds in all characteristics). Thm 22.18 and 22.19 (pp.467-468) are steps 3 and 6. The contragredient paragraph on p.471 is step 5, with the w0 order calculation written out. Sign convention: in the Borel-pair node Φ+ is the set of roots in Lie(B), which agrees with Milne's lowering via U⁻ and with the item. Step 2 checks: the faithful-unipotent hypothesis for U comes from the definition in the Borel-pair node, the U(F)-fixed vector is turned into coaction invariants by the geometric-unipotence-invariant-descent node with k=K=F, and normality of U gives the T-stable V^U. Step 5 checks: (wμ)(t)=μ(n⁻¹tn) matches t(nx)=(wμ)(t)nx, and w0(Q+)⊆−Q+ follows from Δ⊂Φ+. Steps 4 and 6 are elementary and correct; in step 6 the kernel argument uses C_λ=F(v1,v2) from the new node. The new node is statement-only, self-contained and singly escaped, with the exact Milne reference. Small cases tested: trivial G, SL2, Frobenius twists in characteristic p, nonsimple cyclic modules. It is not a restated clause of the item; it is used twice, including on the nonsimple diagonal module. A grep -R search of the DAG found no duplicate (the nearest nodes, induced-module-primitive-line, dominant-character-highest-line and steinberg-induced-module-irreducible, state different facts). Batch-5 flag: the citation of lem-sfb-reductive-borel-pair-structure is accepted. It is the general reductive-group structure theorem, already a stmt_dep of the item, and the trf node it reaches (lem-trf-smooth-fpqc-base-descent) is generic fpqc descent of smoothness, not a step of the trace formula or Poincaré duality. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SimpleModuleDualHighestWeight",
+  "declaration": "AlgebraicGeometry.RationalHighestWeight.simple_module_dual_highest_weight",
+  "declarations": [
+   "AlgebraicGeometry.RationalHighestWeight.simple_module_dual_highest_weight"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SimpleModuleDualHighestWeight.lean",
+  "statement": "theorem simple_module_dual_highest_weight {F : Type u} [Field F] [IsAlgClosed F] (G T B U : Grp (Over (Spec (.of F)))) [IsAffine G.X.left] [IsAffine T.X.left] [IsAffine U.X.left] (hG : IsSemisimpleGroupScheme G.X) (iT : T ⟶ G) (iB : B ⟶ G) (j : T ⟶ B) (iU : U ⟶ B) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (hB : IsBorelGroupScheme iB.hom.hom) (hj : j ≫ iB = iT) (hUclosed : IsClosedSubgroupScheme iU.hom.hom) (hUnormal : IsNormalSubgroupScheme iU.hom.hom) (hUsmooth : Smooth U.X.hom) (hUconnected : ConnectedSpace U.X.left) (hUunipotent : SolvableGroupStructure.IsUnipotent U) (hUmax : ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) [IsCommMonObj (StandardGroupSchemes.multiplicative F)] [ModObj T.X B.X] (hconj : γ[T.X,B.X] = (fst T.X B.X ≫ j.hom.hom) * snd T.X B.X * (fst T.X B.X ≫ j.hom.hom)⁻¹) (Φplus : Set (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hΦplus : ∀ χ, χ ∈ Φplus ↔ χ ≠ 1 ∧ TorusCharacterTangent.weightSpace T B χ ≠ ⊥) (n : 𝟙_ (Over (Spec (.of F))) ⟶ G.X) (e : T ≅ T) (he : e.hom.hom.hom ≫ iT.hom.hom = (toUnit T.X ≫ n⁻¹) * iT.hom.hom * (toUnit T.X ≫ n)) (hlongest : (fun χ ↦ e.hom ≫ χ) '' Φplus = (fun χ ↦ χ⁻¹) '' Φplus) {V : Type v} [AddCommGroup V] [Module F V] [FiniteDimensional F V] (c : V →ₗ[F] V ⊗[F] coordinateAlgebra G) (hcoassoc : HopfAction.Coassociative F (coordinateAlgebra G) V c) (hcounit : HopfAction.Counital F (coordinateAlgebra G) V c) (hsimple : IsSimple c) : ∃ lam : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), HasHighestWeight c iT (iU ≫ iB) lam ∧ (∃ d : Module.Dual F V →ₗ[F] Module.Dual F V ⊗[F] coordinateAlgebra G, HopfAction.Coassociative F (coordinateAlgebra G) (Module.Dual F V) d ∧ HopfAction.Counital F (coordinateAlgebra G) (Module.Dual F V) d ∧ IsContragredient c d ∧ IsSimple d ∧ HasHighestWeight d iT (iU ≫ iB) ((e.hom ≫ lam)⁻¹)) ∧ ∀ (W : Type w) [AddCommGroup W] [Module F W] [FiniteDimensional F W] (cW : W →ₗ[F] W ⊗[F] coordinateAlgebra G), HopfAction.Coassociative F (coordinateAlgebra G) W cW → HopfAction.Counital F (coordinateAlgebra G) W cW → IsSimple cW → HasHighestWeight cW iT (iU ≫ iB) lam → ∃ f : V ≃ₗ[F] W, f.toLinearMap.rTensor (coordinateAlgebra G) ∘ₗ c = cW ∘ₗ f.toLinearMap",
+  "branch": "sheaf-dag",
+  "by": "Q85",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The longest Weyl element is specified by its actual normalizer point n and induced torus automorphism e. The positive roots are precisely the nonzero character weights of conjugation on Lie(B). In multiplicative character notation, (e.hom ≫ lam)⁻¹ is -w₀(lam). The canonical dual coaction is existentially asserted with its full antipode contraction characterization, which uniquely determines it; no arbitrary dual representation or chosen data is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81562f379",
+  "group": "Q85",
+  "result": "fix",
+  "note": "Item maths matches Milne 22.18-22.19 and p.471. Hypotheses match the Borel-pair theorem (T, B, U; conjugation pinned by hconj; Φ+ = nonzero Lie(B) weights; w0 via a normalizer F-point n and induced e with hlongest w0Φ+=−Φ+). Affine instances are implied, nothing stronger. Conclusions: highest line, contragredient by antipode contraction (unique, convention checked: (g f)(v)=f(g⁻¹v)), −w0λ = (e≫lam)⁻¹, uniqueness up to equivariant isomorphism. Edge cases trivial G and char p OK; universes OK. New def node is not a duplicate (no comodule notions in Mathlib or Sheaf), data explicit, fields OK. FIX (H2/H12, as in the NY 96741b6f and Q08 449c returns): new node def-sfb-rational-highest-weight-data cited theorem lem-sfb-hopf-coaction-linearization only for the instance HopfAction.coordinateHopfAlgebra; fixes/def-sfb-rational-highest-weight-data.json swaps it to def-sfb-coordinate-hopf-algebra (statement bracket and stmt_deps). If landing refuses this because that node postdates the base, drop the fix: the delivery is then a PASS with a maintainer note. No Lean changed, no compile."
+ }
+}

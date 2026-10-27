@@ -1,0 +1,157 @@
+{
+ "id": "lem-sf-etale-graph-interchange-projection",
+ "kind": "statement",
+ "title": "Projection compatibility of Cartesian proper/open graph interchange",
+ "statement": "Let A be a finite commutative ring and f:X→Y, g:Y→Z arbitrary scheme morphisms. Let a:X→W, r:V→Y, p:P→T, q:T→Z be proper, and e:W→V, k:V→P, i:Y→T open immersions, with a e r=f, i q=g, and the square (r,k,i,p) Cartesian [def-pur-etale-graph-interchange-data]. On the ordinary unbounded constant-A derived categories write S(M)=Rr_*(De_!(Ra_*M)), H(M)=R(p q)_*(D(e k)_!(Ra_*M)) and G(N)=Rq_*(Di_!N). Let I:S⋙G≅H be the specified proper/open exchange followed by the open and proper compositors, with the identity-direct-image normalization cancelled. For every M in D(X_et,A) and K in D(Z_et,A), the successive projection for G and the graph-word projection for S [def-sf-etale-graph-word-projection], followed by I at M tensor Lf*Lg*K, equals tensoring I_M with K, the graph-word projection for H, and H applied to M tensor the canonical pullback compositor L(fg)*K→Lf*Lg*K. This is the Cartesian interchange square alone: no compactification of f or fg, no neighborhood-shrinking comparison, and no quasi-compactness, boundedness or Noetherianity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, lemma-shriek-proper-and-open; tensor calculation from sites-cohomology.tex equation-projection-formula-map (0B56) and lemma-j-shriek-and-tensor (0GL1); proper/open interchange factors in LowerShriekComposition.lean e3."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-interchange-data",
+  "def-sf-etale-graph-word-projection"
+ ],
+ "proof": [
+  {
+   "text": "Put f0=e r and form the compactification c=(e,r) of f0 and ce=(e k,p) of f0 i. The Cartesian square and e k p=e r i provide a compatible compactification tower over (i,q). Apply the existing general tower_projection_canonical proof, with its explicit exchange/open-composition/proper-composition word, to Ra M and K. This is the proof underlying projectionMapOfCompactification_tower_comp; no compactification of f is required.",
+   "uses": [
+    "lem-amb-compactification-projection-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor each graph-word projection through the compactification (e,r), respectively (e k,p q), on Ra M, then the proper projection for a and the inverse pullback compositor. Expand the compactification projection using projectionMapOfCompactification_explicit. Proper-projection naturality at the inverse pullback compositor and inverse threefold pullback associativity turn this into exactly the successive three-factor graph word. This avoids dependent elimination of the compactification equality.",
+   "uses": [
+    "lem-sf-etale-graph-proper-prefix-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/SfGraphProjectionWord.lean",
+    "place": "sfGraphProjectionWord_proper_prefix, specialized to ModuleCat A"
+   }
+  },
+  {
+   "text": "Cancel the identity-direct-image normalization in I. The Cartesian normalization of etaleGraphNormalizedProperOpenExchange identifies the remaining comparison with the actual openImmersionLowerShriekLowerStarExchangeIso. Naturality of the proper compositor moves the open compositor to exactly the order used in the tower proof.",
+   "uses": [
+    "lem-r9-graph-compositor-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of this interchange to the proper projection for a. Substitute the tower equation. The mixed hom/inverse form of threefold pullback associativity gives La(c_f0,g) followed by c_a,f0 inverse equal to c_a,f0g inverse followed by c_f,g. Functoriality and coefficient naturality paste these equalities to give the displayed square.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarCompCoherence.lean",
+    "place": "map_leftDerivedUpperStarComp_hom_app_leftDerivedUpperStarComp_inv_app, together with ordinary naturality and functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-compactification-projection-composition",
+  "lem-sf-etale-graph-proper-prefix-projection",
+  "lem-r9-graph-compositor-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactificationProjectionComposition.lean",
+  "place": "D9: specialize the existing general compatible-tower calculation to (e,r),(e k,p),(i,q), then prepend the proper projection for a. This is the Cartesian interchange portion of the parent tail plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula compatibility with composition of compactifications via proper open graph comparison",
+   "results": "8 hits on Profinite.IndexFunctor, Profinite.NobelingProof and DiscreteQuotient projections. None concerns derived sheaves or proper/open graph comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula commutes with proper pushforward and extension by zero in a Cartesian square and composition",
+   "results": "8 hits, including SheafOfModules.pushforwardComp, Scheme.Modules.pushforwardComp, TopCat.Presheaf.Pushforward.comp and ExponentiableMorphism.pushforwardComp. These are underived pushforward composition maps, not this derived projection square.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Cc]omp|[Cc]omp.*projection",
+   "results": "25 unrelated Mathlib hits. Local project search finds CompactificationProjectionComposition and the already proved generic tower calculation used here, but no graph-word interchange projection theorem. Blueprint interchange search finds det-sf-comp-composition-interchange, which gives existence/invertibility on pro-etale localizing categories, not this ordinary etale tensor equation.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; reuse the compatible tower calculation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfGraphCompositionTailProjection",
+  "date": "2026-10-26",
+  "group": "D9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "thm-asd-smooth-tensor.proof.md paragraph 3, projection formula and composite counits; Cartesian proper/open interchange factors in the graph-composition tail",
+   "via": [
+    "lem-sf-etale-graph-composition-tail-projection",
+    "lem-sf-etale-compact-projection-coherence",
+    "lem-sf-exceptional-tensor-transitivity",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfGraphInterchangeProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfGraphInterchangeProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.sfGraphInterchange_projection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfGraphInterchange_projection"
+  ],
+  "statement": "theorem sfGraphInterchange_projection\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}\n    (d : EtaleGraphInterchangeDiagram f g)\n    (sq : IsPullback d.r d.k d.i d.p)\n    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Z) :\n    let I := Functor.isoWhiskerLeft (d.sourcePresentation.functor A)\n      (etaleGraphOpenNormalization A d.compactification).symm ≪≫\n        etaleGraphDiagramInterchange A d\n    sfCompactProjection A d.compactification ((d.sourcePresentation.functor A).obj M) K ≫\n        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)\n          d.compactification).map\n          (sfGraphWordProjection A d.sourcePresentation M\n            ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K)) ≫\n        I.hom.app (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj\n          ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj\n            ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K))) =\n      ((derivedTensor (ModuleCat.{u + 1} A) Z).map (I.hom.app M)).app K ≫\n        sfGraphWordProjection A d.compositePresentation M K ≫\n        (d.compositePresentation.functor A).map\n          (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map\n            ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f g).hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sf-etale-graph-interchange-projection",
+  "worker": "stage3 D9",
+  "summary": "Proved a strict component of the graph-composition tail calculation, using canonical supplied maps.",
+  "blueprint": "The projection and composition paragraph of thm-asd-smooth-tensor.proof.md, as recorded by the parent tail node.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-compactification-projection-composition",
+    "why": "Specialize the already proved compatible-tower projection calculation to the supplied Cartesian proper/open diagram; the assigned unit route remains unchanged."
+   },
+   {
+    "node": "lem-r9-graph-compositor-base-change",
+    "why": "Use the proof helpers identifying the specified Cartesian exchange and graph compositor, without using the base-change unit statement as a replacement for the projection calculation."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-30781",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T065448-L-2996235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-30781",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T065448-L-2996235",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs node lem-sf-etale-graph-composition-tail-projection; new sfGraphWordProjection body vs old (equal up to associator 𝟙 + isoWhiskerLeft components); new nodes' lean.statement vs Lean; 4 delivered modules + 8 unchanged consumers compiled in sandbox; #print axioms"
+ }
+}

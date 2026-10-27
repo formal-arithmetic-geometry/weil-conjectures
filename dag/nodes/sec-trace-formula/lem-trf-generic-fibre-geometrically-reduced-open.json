@@ -18,143 +18,66 @@
  ],
  "proof": [
   {
-   "text": "Base change to the reduction $r:Y_{\\mathrm{red}}\\to Y$. The cited reduction result makes $r$ a homeomorphism and $Y_{\\mathrm{red}}$ reduced. It is irreducible because its underlying space is that of $Y$, hence integral by the stated characterization of integrality. Residue fields are unchanged: locally the quotient $R\\to R/\\sqrt{0}$ induces $(R/\\sqrt{0})_{\\mathfrak p}/\\mathfrak p=\\kappa(\\mathfrak p)$. Associativity of the fibre product therefore identifies the old and new fibres over every point, including $\\eta$. Finite type is preserved by the cited base-change theorem. Any nonempty good open of $Y_{\\mathrm{red}}$ corresponds to a nonempty open of $Y$ with exactly the same fibres. It is therefore enough to prove the assertion with $Y$ integral. Restrict further to a nonempty affine open of $Y$; it contains $\\eta$, and an open found there is also open in the original base.",
+   "text": "Apply [lem-trf-generic-flat-reduced-base-model] to obtain $q:W\\to Y$, $g:X_W\\to W$, and its generic point $\\eta_W$. The base $W$ is integral affine, and $g$ is finite type, flat and locally finitely presented. The supplied residue-field and fibre isomorphisms identify the generic fibre with $X_\\eta$ as a scheme over the identified fields; testing on the same field extensions gives geometric reducedness of this generic fibre.",
    "uses": [
-    "lem-weil-pbc-reduction-universal-homeomorphism",
-    "def-weil-pbc-scheme-reduction",
-    "def-pc-integral-scheme",
-    "def-pc-scheme-fibre",
-    "lem-sfb-finite-type-composition-base-change"
+    "lem-trf-generic-flat-reduced-base-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0578, lemma-geometrically-reduced-generic-fibre, first paragraph; reduction Tag 054M"
+    "place": "Tag 0578, lemma-geometrically-reduced-generic-fibre, proof"
    }
   },
   {
-   "text": "Apply generic flatness and local finite presentation to $f$ over the integral base. This gives a nonempty open $W\\subseteq Y$ on which $f$ is flat and locally of finite presentation. Replace $Y$ by $W$ and $X$ by $X_W$. The generic point remains in $W$, its fibre is unchanged, and finite type persists by base change. These replacements suffice because any nonempty open obtained in $W$ is nonempty open in $Y$. The generic fibre is locally finitely presented: on each affine presentation $A\\to A[t_1,\\ldots,t_n]/(h_1,\\ldots,h_m)$, tensoring with $\\kappa(\\eta)$ gives $\\kappa(\\eta)[t_1,\\ldots,t_n]/(\\bar h_1,\\ldots,\\bar h_m)$. The affine fibre-product formula identifies these algebras with the fibre charts.",
+   "text": "Apply [lem-trf-smooth-open-schematic-generic-density] to $g$. For the specified smooth open $U\\subseteq X_W$, this gives injectivity of $\\mathcal O_{(X_W)_{\\eta_W}}\\to(j_{\\eta_W})_*\\mathcal O_{U_{\\eta_W}}$, and geometrically reduced $U_w$ for every $w\\in W$. It also gives that every $(X_W)_w$ is finite type over $\\kappa(w)$. Every open immersion into $(X_W)_w$, in particular $j_w$, is quasi-compact by the same cited statement.",
    "uses": [
-    "lem-sbc-generic-flat-finite-presentation",
-    "lem-sfb-finite-type-composition-base-change",
-    "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-fibre-product-affine-spectra"
+    "lem-trf-smooth-open-schematic-generic-density"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0578, first paragraph, using morphisms.tex Tag 052A, proposition-generic-flatness"
+    "place": "Tag 0578, lemma-geometrically-reduced-generic-fibre, proof"
    }
   },
   {
-   "text": "Record a finiteness fact for every fibre $X_y$, including $X_\\eta$. By finite-type base change it is of finite type over the field $\\kappa(y)$, so it has a finite affine cover $\\operatorname{Spec}B_i$ with each $B_i$ a finite type $\\kappa(y)$-algebra. A field is Noetherian, since its only ideals are $0$ and the whole field. The finite-type algebra theorem and the affine-space theorem cited here show that each $\\operatorname{Spec}B_i$ is topologically Noetherian. A descending chain of closed subsets of $X_y$ stabilizes after restriction to each of these finitely many affine charts; taking the maximum of the stabilization indices shows that it stabilizes on $X_y$. Thus $X_y$ is topologically Noetherian. Every subset of it is quasi-compact by the cited compactness theorem. In particular every open immersion into $X_y$ is quasi-compact: its inverse image of an affine open is such a subset. It is also quasi-separated, since the diagonal of an open immersion is an isomorphism. These facts will justify both density lemmas below without any quasi-separatedness hypothesis on $f$.",
-   "uses": [
-    "lem-sfb-finite-type-composition-base-change",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-sc-affine-noetherian-underlying-space",
-    "lem-sfb-noetherian-space-compact-subsets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0578, density argument with its implicit quasi-compactness hypotheses made explicit; algebra.tex Tag 00FN; topology.tex Tag 04ZA"
-   }
-  },
-  {
-   "text": "Let $U\\subseteq X$ be the union of the open subschemes on which $f$ is smooth. Apply the dense-smooth-locus theorem to the locally finitely presented geometrically reduced $\\kappa(\\eta)$-scheme $X_\\eta$. Its smooth locus is dense. At each point of that locus, the pointwise fibre criterion applies to $f$, because $f$ is flat and locally of finite presentation after step 2. It gives a smooth neighbourhood in $X$. Hence this dense locus lies in $U_\\eta$, so $U_\\eta$ is dense in $X_\\eta$. Also, every $U_y$ is geometrically reduced: it is covered by the fibres of the smooth opens defining $U$; those fibres are geometrically reduced by the smooth-fibre theorem. After any field extension their corresponding opens still cover, and reducedness on an open cover implies reducedness of the whole base-changed $U_y$. This last deduction uses only the cited open-cover criterion.",
-   "uses": [
-    "lem-pur-geometrically-reduced-dense-smooth-open",
-    "lem-trf-smooth-at-point-fibre-criterion",
-    "sbc-lem-smooth-geometrically-reduced",
-    "lem-trf-reduced-scheme-open-cover",
-    "def-pc-geometrically-irreducible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0578, second paragraph; varieties.tex Tag 056V and morphisms.tex Tags 01V9, 02V4"
-   }
-  },
-  {
-   "text": "The identity field extension in geometric reducedness shows that $X_\\eta$ is reduced. The inclusion $U_\\eta\\hookrightarrow X_\\eta$ has dense topological image by step 4, and is quasi-compact and quasi-separated by step 3. The reduced-target dense-image theorem therefore says that its scheme-theoretic image is all of $X_\\eta$. By the kernel description of that image, the sheaf map $\\mathcal O_{X_\\eta}\\to (j_\\eta)_*\\mathcal O_{U_\\eta}$ is injective. Thus $U_\\eta$ is scheme-theoretically dense in the sense required by the next step.",
-   "uses": [
-    "def-pc-geometrically-irreducible",
-    "lemma-nagata-reduced-dense-image-schematic",
-    "def-nagata-scheme-theoretic-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0578, second paragraph, invoking morphisms.tex Tag 056D, lemma-reduced-scheme-theoretically-dense"
-   }
-  },
-  {
-   "text": "Apply the schematic-density spreading lemma to the finite type morphism $f:X\\to Y$ and the open $U$ just constructed. Its base is irreducible with generic point $\\eta$, and its generic-fibre injectivity hypothesis was proved in step 5. It supplies a nonempty open $V\\subseteq Y$ such that $U_y$ is scheme-theoretically dense in $X_y$ for all $y\\in V$.",
+   "text": "Apply [lem-trf-schematic-density-generic-fibre-open] to $g$ and $U$. Its finite type and irreducible generic-point hypotheses follow from step 1, and its generic sheaf-injectivity hypothesis is step 2. Obtain a nonempty open $H\\subseteq W$ such that $\\mathcal O_{(X_W)_w}\\to(j_w)_*\\mathcal O_{U_w}$ is injective for all $w\\in H$.",
    "uses": [
     "lem-trf-schematic-density-generic-fibre-open"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0578, last sentence, invoking Tag 0573, lemma-scheme-theoretically-dense-generic-fibre"
+    "place": "Tag 0578, lemma-geometrically-reduced-generic-fibre, proof"
    }
   },
   {
-   "text": "Fix $y\\in V$ and a field extension $L/\\kappa(y)$. To verify density after this extension, work on an arbitrary affine open $C=\\operatorname{Spec}D\\subseteq X_y$. The restriction $U_y\\cap C\\to C$ is schematically dense by restriction of the injective sheaf map in step 6. It is quasi-compact and quasi-separated by step 3. The affine fibre-product formula identifies $C_L$ with $\\operatorname{Spec}(D\\otimes_{\\kappa(y)}L)$. The field-extension theorem makes $D\\to D\\otimes_{\\kappa(y)}L$ faithfully flat, hence flat; the flat affine criterion then makes $C_L\\to C$ flat. Apply flat pullback of dense images to obtain that $(U_y\\cap C)_L\\to C_L$ has scheme-theoretic image $C_L$. By the image-kernel description, this means that its structure-sheaf map is injective. Its source is an open of $(U_y)_L$, which is reduced by step 4.",
+   "text": "Fix $w\\in H$, put $k=\\kappa(w)$, and let $j_w:U_w\\hookrightarrow (X_W)_w$ and $p:(X_W)_w\\to\\operatorname{Spec}k$ be the fibre structure map. Step 2 makes $j_w$ quasi-compact and its composite with $p$ geometrically reduced. Step 3 makes the kernel of $\\mathcal O_{(X_W)_w}\\to(j_w)_*\\mathcal O_{U_w}$ zero. These are precisely the three hypotheses of [lem-sbc-geometrically-reduced-dominant-descent], applied with $h=j_w$. Hence $p$ is geometrically reduced, including when its source is empty.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-    "lemma-nagata-dense-flat-pullback",
-    "def-nagata-scheme-theoretic-image",
-    "def-pc-reduced-scheme"
+    "lem-sbc-geometrically-reduced-dominant-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 081I, lemma-flat-base-change-scheme-theoretic-image; geometric refinement of the Tag 0578 use of Tag 056E"
+    "place": "Tags 081I, lemma-flat-base-change-scheme-theoretic-image, and 056B, lemma-scheme-theoretic-image-reduced; geometric form of Tag 056E in the Tag 0578 argument"
    }
   },
   {
-   "text": "For any open $T\\subseteq C_L$, a nilpotent section of $\\mathcal O_{C_L}(T)$ maps to a nilpotent section on $T\\cap (U_y\\cap C)_L$. That section is zero because the open source is reduced. Injectivity from step 7 forces the original section to be zero. Hence $C_L$ is reduced by the section-wise definition. The affine opens $C$ cover $X_y$, so their pullbacks $C_L$ cover $(X_y)_L$, and the open-cover criterion proves that $(X_y)_L$ is reduced. Since $L/\\kappa(y)$ was arbitrary, $X_y$ is geometrically reduced. This holds for every $y\\in V$. The reductions in steps 1 and 2 transfer this same nonempty good open back to the original base. Empty fibres cause no exception: their sections have no nonzero nilpotents and all the covering/injectivity arguments are vacuous.",
+   "text": "Set $V=q(H)$. The homeomorphism $q:W\\to V_0$ supplied by [lem-trf-generic-flat-reduced-base-model] makes $V$ nonempty and open in $Y$. For $y\\in V$, its preimage $w\\in H$ has the supplied isomorphisms $\\kappa(y)\\simeq\\kappa(w)$ and $X_y\\simeq(X_W)_w$. Every extension $L/\\kappa(y)$ is an extension of $\\kappa(w)$ through the inverse field isomorphism; the fibre isomorphism identifies the two base changes to $L$. The latter is reduced by step 4, so $X_y$ is geometrically reduced.",
    "uses": [
-    "def-pc-reduced-scheme",
-    "lem-trf-reduced-scheme-open-cover",
-    "def-pc-geometrically-irreducible"
+    "lem-trf-generic-flat-reduced-base-model"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 056E, lemma-reduced-subscheme-closure; its two-line injectivity argument written explicitly, and Tag 0578 conclusion"
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, lemma-geometrically-reduced-generic-fibre, proof"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-reduction-universal-homeomorphism",
-  "def-weil-pbc-scheme-reduction",
-  "def-pc-integral-scheme",
-  "def-pc-scheme-fibre",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-sbc-generic-flat-finite-presentation",
-  "def-sbc-locally-finite-presentation",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "lem-pur-geometrically-reduced-dense-smooth-open",
-  "lem-trf-smooth-at-point-fibre-criterion",
-  "sbc-lem-smooth-geometrically-reduced",
-  "lem-trf-reduced-scheme-open-cover",
-  "def-pc-geometrically-irreducible",
-  "lemma-nagata-reduced-dense-image-schematic",
-  "def-nagata-scheme-theoretic-image",
+  "lem-trf-generic-flat-reduced-base-model",
+  "lem-trf-smooth-open-schematic-generic-density",
   "lem-trf-schematic-density-generic-fibre-open",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-  "lemma-nagata-dense-flat-pullback",
-  "def-pc-reduced-scheme"
+  "lem-sbc-geometrically-reduced-dominant-descent"
  ],
  "proof_origin": {
   "by": "document",
@@ -255,28 +178,29 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-generic-fibre-geometrically-reduced-open",
   "worker": "stage1",
-  "summary": "Followed Stacks 0578 exactly: reduce the base, use generic flatness/local finite presentation, take a dense smooth generic open, spread schematic density by 0573, and pass to every residue-field extension before inferring reducedness. Only the generic schematic-density spreading theorem is new; its source proof is not moved into this item. Reused all existing geometric, Noetherian, density and field-extension tools; the 056E injectivity argument is elementary and written out. The statement is unchanged.",
+  "summary": "Repair of the 6041-character proof: two independent statement-only tasks carry old steps 1-2 (integral affine generic-flat model with unchanged fibres) and old steps 3-5 (Noetherian fibre finiteness and a smooth open with schematically dense generic fibre). Old step 6 reuses Stacks 0573. The existing proved geometric-reducedness dominant-descent node supplies the entire arbitrary-field-extension argument of old steps 7-8, so no duplicate is created for it. The unchanged item is assembled in five short steps, and the report preserves the original argument verbatim with its task allocation. Landing-return repair: compared the retained delivery with the current live DAG and its released stage-1 repair note, re-read both existing proof dependencies and verified all five verbatim citation quotes. The live statement and metadata are retained; step 2 now explicitly exports quasi-compactness of the fibre open immersions, used in step 4. Delivery is rebuilt on the current DAG rather than the unpromoted side completion. Current-base retry: confirmed that returned-item.json equals the current DAG parent in every field, revalidated every citation against current statements, and made the field, structure map, zero kernel and all descent hypotheses explicit in step 4. Landing-return repair of 2026-10-23: rebased every untouched field from the current live parent, which still has the original eight-step proof; re-read all current statement dependencies and four cited proof statements. The initial dry run passed at e0de6e985ad. Steps 1 and 5 now spell out the transfer under residue-field and fibre isomorphisms by testing the same field extensions. Child statements, retained source argument and actual search logs are unchanged.",
   "blueprint": "The ancestor lem-trf-local-term-locality, proof (1)-(2) semistable-alteration branch, via the existing flattening/05FT Noetherian approximation chain: the generic-good alternative 0578 in the 0579 constructibility input. The item and child realize this descendant input; no chapter or unit route is replaced.",
   "tool_uses": [
    {
-    "node": "lem-sbc-generic-flat-finite-presentation",
-    "why": "Generic algebraic-geometry tool in the Stacks 0578 proof: Generic flatness and local finite presentation over an integral base. The item unit has no alternate node for this black-box input; no unit proof step is replaced."
+    "node": "lem-sbc-geometrically-reduced-dominant-descent",
+    "why": "General scheme-theoretic-dominance descent over a field, used on each fibre after Stacks 0573. It preserves the existing flat-field-extension and nilpotent-section argument of Stacks 0578; no unit step is replaced."
    }
   ]
  },
  "tool_uses": [
-  "lem-sbc-generic-flat-finite-presentation"
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sbc-geometrically-reduced-dominant-descent"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q51-eeebf5bef",
-  "group": "Q51",
+  "reviewer": "NT-cc-Q62-dc251002f",
+  "group": "Q62",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-eeebf5bef (reviewer sub-agent of L); spot-checked: I read the whole delivery and the sources: Stacks 0578 (more-morphisms 7215-7255), 0573 (6563-6641), and morphisms 01RE, 056D, 056E and 081I. The item statement is unchanged and matches 0578. Step-by-step check. Step 1: going to Y_red keeps the residue fields and the fibres; the calculation is written out. Step 2: generic flatness gives only flatness and local finite presentation, and only that is used. It is a declared off-unit tool use, which I accept. Step 3: every fibre is topologically Noetherian, so the inclusions of opens are quasi-compact and quasi-separated, which the Nagata lemmas need. Step 4: a dense smooth locus plus the pointwise fibre criterion makes U_eta dense; smooth opens give geometrically reduced U_y through the open-cover node. Step 5: 056D gives that U_eta is scheme-theoretically dense, i.e. the sheaf map is injective. Step 6: the new child applies with exactly its hypotheses. Steps 7-8: on affine charts, flat pullback (081I) through the faithfully flat D->D⊗L, then the section-wise 056E argument, give reducedness after every field extension. This correctly fills in what the source's bare 056E step leaves out. New node lem-trf-schematic-density-generic-fibre-open: it is Stacks 0573 with density written as sheaf injectivity (01RE). It is true; tested on Z[x]/(px) with U=D(p), on an empty generic fibre and on U=X. It has no proof sketch, cites its definitions, and records searches of all three kinds. It is not a clause of the item, and grep finds no existing 0573 node. The 0559, 0577 and preparation nodes are different statements. No SGA anywhere. Advisory: under the blueprint_update of def-nagata-scheme-theoretic-image, step 7 also needs (U_y∩C)_L->C_L quasi-compact; it is, because C_L is Noetherian. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-dc251002f (reviewer sub-agent of L); spot-checked: Fourth delivery of the 2026-10-22 re-split. Earlier heads (b32309cb, 59942d4f, 61f3ea16) were approved; the landing refused them because the side completion was not promoted, not because of the mathematics. Live and side-live still have the old 8-step split, the repair note is still released, and neither new id is in live, so the item is not superseded. Against live, only proof, proof_deps and split_report changed; the statement is unchanged. Against 61f3ea16, both new nodes are byte-identical and only item steps 1 and 5 changed. Those steps now spell out the transfer of geometric reducedness through the residue-field and fibre isomorphisms, and the transfer is correct. I read Stacks 0578 (more-morphisms.tex) in full. New node A (old steps 1-2) is true: Y_red is integral; lem-sbc-generic-flat-finite-presentation (052A) applies because finite type means lft+qc, and gives an affine integral W; q is a homeomorphism onto an open V0 containing eta; residue fields are unchanged; and the fibre isomorphism follows from associativity of the fibre product. New node B (old steps 3-5) is true. 056V and 01V9 (with f flat and lfp) give U_eta dense. Since X_eta is reduced, density gives the O-injection without any qcqs hypothesis. The fibres are Noetherian spaces, so open immersions into them are qcqs, and U_y is smooth, hence geometrically reduced. Old step 6 reuses the existing 0573 node, whose hypotheses all hold. Old steps 7-8 reuse the existing lem-sbc-geometrically-reduced-dominant-descent with h=j_w: quasi-compact, zero kernel from step 3, and h;p geometrically reduced from B. Step 5 is V=q(H). A and B are of comparable size and neither restates a clause of the parent. My rg -L search found no duplicates; I read the constancy, 0577-sibling, affine-density, radicial-preparation, dense-smooth-open and nodal-open-locus nodes. Edge cases checked: k[eps]/eps^2 base, empty X, and an imperfect-field t^p-a. No SGA. I accept the tool use of the descent node. Advisories: step 5 is flagged elementary but cites A; the stale top-level tool_uses entry lem-sbc-generic-flat-finite-presentation; B's LeanSearch is recorded as unavailable. Maintainer note: a repeated landing refusal for lack of promotion is a promotion-path issue, not a fault of this delivery. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.GenericFibreGeometricallyReducedOpen",
@@ -296,5 +220,16 @@
   "result": "pass",
   "note": "Lean statement matches node and Stacks 0578 clause by clause: LocallyOfFiniteType+QuasiCompact (finite-type dep node), IrreducibleSpace Y, IsGenericPoint η univ, GeometricallyReduced of fiberToSpecResidueField at η and at every y in a nonempty Y.Opens; no added hypotheses; universe-u field quantification equivalent; empty fibres/X covered. Node copy differs from side only in lean; statement verbatim. No defs, proof sorry, docstrings carry Tag 0578, blueprint id and all 8 proof steps; imports are proof-dep modules. No duplicate (GenericConstancyGeometricReducedness assumes finite presentation, is an iff and cites this item). nt_compile --json on snapshot: rc=0, 3.7 s, no warnings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

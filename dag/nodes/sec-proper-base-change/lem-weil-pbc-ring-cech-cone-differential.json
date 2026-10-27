@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-ring-cech-cone-differential",
+ "kind": "statement",
+ "title": "Alternating differential in the explicit cone coordinates",
+ "statement": "For a commutative ring A, natural r and f:Fin(r+1) to A, use the explicit equivalences E and augmented tail terms M of [lem-weil-pbc-ring-cech-cone-linear-equiv]. Let d^tail and d^full be the canonical augmented ordered-localization differentials, using the unique algebra maps at each deleted face and coefficients (-1)^j. For every natural q, x in M(q+1) and y in A[1/f(0)] tensor_A M(q), E_(q+1)(d^tail_(q+1)x,1 tensor x-(id tensor d^tail_q)y)=d^full_(q+1)(E_q(x,y)). Also E_0(d^tail_0 a,1 tensor a)=d^full_0 a for every a in A.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "section-alternating-cech, defining formulas (1)--(3); algebra.tex, localization base change (Tag 00DK)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ring-cech-cone-linear-equiv"
+ ],
+ "proof": [
+  {
+   "text": "Define the canonical differential by diagonal algebra maps in degree zero and a finite alternating sum of the face localization maps in positive degree. At a shifted subset, each deleted face is also shifted and the equivalence evaluates its first component. Thus the full differential there is exactly the tail differential.",
+   "uses": [
+    "lem-weil-pbc-ring-cech-cone-linear-equiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For input (x,0) at a subset containing zero, deleting zero evaluates x on the tail subset. The face map is the canonical localization map to the coordinate with zero adjoined. Every later deleted face still contains zero and hence evaluates to zero. The output equals the second-block evaluation of 1 tensor x. This proves differential_fst.",
+   "uses": [
+    "lem-weil-pbc-ring-cech-cone-linear-equiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For input (0,s tensor z), deleting zero contributes zero. A face with index j+1 is zero adjoined to the j-th tail face. Evaluate it by the pure-tensor formula. Both compositions from A[1/f(0)] agree by localization uniqueness; both compositions from the tail face localization agree by the same uniqueness. Each face therefore equals the image of s times the corresponding tail face of z. Its sign (-1)^(j+1) is -(-1)^j. Distribution over the sum yields minus the second-block image of s tensor d(z). In augmented degree zero, the same argument uses the two faces and the fact that localization maps commute with the algebra map. Tensor induction, using additivity at the induction step, extends this from pure tensors to y.",
+   "uses": [
+    "lem-weil-pbc-ring-cech-cone-linear-equiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Add the first-block and second-block identities using linearity of E and the full differential. In degree zero partition the singleton subsets into shifted tail singletons and the singleton zero, then use the shift formula and the right-unitor pure-tensor formula. This proves the displayed equality and its augmented identity.",
+   "uses": [
+    "lem-weil-pbc-ring-cech-cone-linear-equiv"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-cech-cone-linear-equiv"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R3",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "section-alternating-cech, explicit ordered-subset partition and alternating differential",
+  "note": "Complete Lean proof, using the source formulas and Mathlib localization and tensor-product APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The alternating ordered localization Cech differential splits as the cone of the localization at the first element",
+   "results": "8 hits: KaehlerDifferential.isLocalizedModule, CategoryTheory.ShortComplex.Splitting.isSplitMono_f, Algebra.tensorH1CotangentOfIsLocalization, SimplicialObject.Splitting.d, Algebra.Generators.cotangentCompAwaySec, CochainComplex.triangleOfDegreewiseSplit_obj₁, AlgebraicTopology.DoldKan.splitMonoInclusionOfMooreComplexMap, AlgebraicTopology.alternatingCofaceMapComplex",
+   "date": "2026-10-26",
+   "verdict": "Generic APIs, no ordered-localization cone coordinates theorem. Direct source inspection found TensorProduct.piRight, IsLocalization.Away.mul', IsLocalization.algEquiv and IsLocalization.algHom_ext, which the delivered constructions use."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordered Cech localization complex splitting subsets containing zero as mapping cone tensor localization",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Γ₀.splitting, AlgebraicTopology.DoldKan.Γ₀.Obj.summand, CochainComplex.mappingCone.triangleRotateShortComplexSplitting, HomologicalComplex.separatingFamily, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, HomologicalComplex.evalCompCoyonedaCorepresentative, CochainComplex.mappingCone.decomp_to, SimplicialObject.Splitting.nondegComplex",
+   "date": "2026-10-26",
+   "verdict": "Generic APIs, no ordered-localization cone coordinates theorem. Direct source inspection found TensorProduct.piRight, IsLocalization.Away.mul', IsLocalization.algEquiv and IsLocalization.algHom_ext, which the delivered constructions use."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorEquiv|piRight|prod_succAbove",
+   "results": "25 hits: Mathlib/RepresentationTheory/Action.lean, Mathlib/RepresentationTheory/Action.lean, Mathlib/RepresentationTheory/Action.lean, Mathlib/RepresentationTheory/Action.lean, Mathlib/RepresentationTheory/Action.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+   "date": "2026-10-26",
+   "verdict": "Generic APIs, no ordered-localization cone coordinates theorem. Direct source inspection found TensorProduct.piRight, IsLocalization.Away.mul', IsLocalization.algEquiv and IsLocalization.algHom_ext, which the delivered constructions use."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingCechAlgebraicConeCoordinates",
+  "date": "2026-10-26",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 1--3 of lem-weil-pbc-ring-cech-algebraic-cone-coordinates; the indicated localization and differential formulas.",
+   "via": [
+    "lem-weil-pbc-ring-cech-algebraic-cone-coordinates",
+    "lem-weil-pbc-ring-cech-coordinate-tensor-step",
+    "lem-weil-pbc-ring-tensor-cech-coordinates",
+    "lem-weil-pbc-global-section-ordered-cech-tensor",
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingCechConeDifferential",
+  "file": "lean/Sheaf/Paper/RingCechConeDifferential.lean",
+  "declaration": "CategoryTheory.ringCechConeEquiv_d",
+  "statement": "theorem ringCechConeEquiv_d (A : CommRingCat.{u}) (r q : ℕ)\n    (f : Fin (r + 1) → A)\n    (x : ringCechTailTerm A r (fun i ↦ f i.succ) (q + 1))\n    (y : Localization.Away (f 0) ⊗[A] ringCechTailTerm A r (fun i ↦ f i.succ) q) :\n    ringCechConeEquiv A r (q + 1) f\n      (ringCechDifferential A r (fun i ↦ f i.succ) (q + 1) x,\n        1 ⊗ₜ[A] x - TensorProduct.map\n          (LinearMap.id : Localization.Away (f 0) →ₗ[A] _)\n          (ringCechDifferential A r (fun i ↦ f i.succ) q) y) =\n      ringCechDifferential A (r + 1) f (q + 1) (ringCechConeEquiv A r q f (x, y))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.ringCechDifferential",
+   "CategoryTheory.ringCechDifferential_succ",
+   "CategoryTheory.ringCechConeEquiv_d",
+   "CategoryTheory.ringCechConeEquiv_d_zero"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aeb05",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T121118-L-2751194",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aeb05",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T121118-L-2751194",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new fully-proved modules/nodes vs node statements and clone; ringCechTailTerm relocation vs change record; importer RingCechCoordinateTensorStep compiled against delivery (exit 0); axioms clean"
+ }
+}

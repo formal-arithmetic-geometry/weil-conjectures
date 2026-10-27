@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-space-proper-hilbert-functor",
+ "kind": "definition",
+ "title": "The proper Hilbert presheaf of an algebraic-space morphism",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $a:A\\to B$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use the scheme tests $T\\to B$, sheaf fibres $A_T$, projections, and finite-presentation and morphism-property conventions of [def-sfb-space-proper-quot-functor]. Define $\\mathcal H_{A/B}(T)$ to be the subset of closed-subspace classes $C$ of $A_T$ [def-sfb-space-closed-subspace] such that $C\\to T$ is proper, flat and of finite presentation. The transition for every scheme map $h:T\\prime\\to T$ over $B$ is inverse image of the closed subspace along $A_{T\\prime}\\to A_T$: it is the unique closed-subspace class whose inclusion forms a cartesian square with the original inclusion. Base change preserves the three properties, and uniqueness gives identity and composition laws. This defines a set-valued presheaf on schemes over $B$, without a finite-degree, finite-fibre, flat-base-change or Noetherian restriction.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-closed-subspace"
+ ],
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "situation-hilb and equation-hilb, immediately preceding Tag 0D00, lemma-hilb-is-quot"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The presheaf of proper flat finitely presented closed subspaces of an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.sectionsOfPresieve\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \"{U : X.AffineZariskiSite} (P : Presieve U) : Set Γ(X, U.toOpens)\", \"doc\": \"The set of sections $ f $ of the structure sheaf over an affine open subset $ U $ of a scheme $ X $ such that the basic open subset $ D(f) $, considered as a morphism from $ D(f) $ to $ U $ in the aff\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"(f : X ⟶ Y) [UniversallyClosed f] : IsProperMap f\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.restrict_carrier\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {U : TopCat} (X : AlgebraicGeometry.PresheafedSpace C)\\n  {f : U ⟶ ↑X} (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)), ↑(X.restrict h) = U\", \"doc\": \"Given a presheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U$ of $X$'s underlying topological space, and an open embedding $f: U \\\\to X$, the carrier (underlying topological space) of \"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [LocallyOfFinitePresentation f] :\\n  LocallyOfFinitePresentation (f.resLE V U e)\", \"doc\": \"If a morphism of schemes is locally of finite presentation, then its restriction to any open subsets is also locally of finite presentation.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No algebraic-space Hilbert presheaf match; scheme Hilbert functors do not cover arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert functor naturally equals the Quot functor of the structure sheaf for algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Spec.sheafedSpaceObj_presheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCat),\\n  (AlgebraicGeometry.Spec.sheafedSpaceObj R).presheaf = (AlgebraicGeometry.Spec.structureSheaf ↑R).val\", \"doc\": \"For any commutative ring $ R $, the presheaf of the sheafed space object $ \\\\operatorname{Spec}(R) $ equipped with the structure sheaf $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)} $ is equal to the underlyin\"}\n  {\"name\": \"AlgebraicGeometry.Spec.toSheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"CategoryTheory.Functor CommRingCatᵒᵖ (AlgebraicGeometry.SheafedSpace CommRingCat)\", \"doc\": \"The functor that assigns to each commutative ring $ R $ its prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the structure sheaf $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)} $, and to each ring homom\"}\n  {\"name\": \"AlgebraicGeometry.Spec.toPresheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"CategoryTheory.Functor CommRingCatᵒᵖ (AlgebraicGeometry.PresheafedSpace CommRingCat)\", \"doc\": \"The functor from the opposite category of commutative rings to presheafed spaces over commutative rings, obtained by composing the Spec functor (which assigns a ring its prime spectrum with structure \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type vᵒᵖ) (S : AlgebraicGeometry.Scheme),\\n  (AlgebraicGeometry.AffineSpace.functor.obj n).obj S = AlgebraicGeometry.AffineSpace (Opposite.unop n) S\", \"doc\": \"For any type $ n $ in the opposite category of types and any scheme $ S $, the affine space $ \\\\mathbb{A}^n_S $ obtained by applying the affine space functor's object mapping to $ n $ and $ S $ is equa\"}\n  {\"name\": \"AlgebraicGeometry.Spec.toSheafedSpace_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCatᵒᵖ),\\n  AlgebraicGeometry.Spec.toSheafedSpace.obj R = AlgebraicGeometry.Spec.sheafedSpaceObj (Opposite.unop R)\", \"doc\": \"For any commutative ring $ R $ in the opposite category of commutative rings, the object mapping of the Spec functor applied to $ R $ yields the sheafed space constructed from the prime spectrum $ \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ_def\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.Γ =\\n  AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.op.comp AlgebraicGeometry.LocallyRingedSpace.Γ\", \"doc\": \"The contravariant functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition\"}\n  {\"name\": \"AlgebraicGeometry.Spec.locallyRingedSpaceObj_toSheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCat),\\n  (AlgebraicGeometry.Spec.locallyRingedSpaceObj R).toSheafedSpace = AlgebraicGeometry.Spec.sheafedSpaceObj R\", \"doc\": \"For any commutative ring $ R $, the underlying sheafed space of the locally ringed space $ \\\\operatorname{Spec}(R) $ coincides with the sheafed space structure on $ \\\\operatorname{Spec}(R) $.\"}\n  {\"name\": \"AlgebraicGeometry.Spec.toPresheafedSpace_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCatᵒᵖ),\\n  AlgebraicGeometry.Spec.toPresheafedSpace.obj R =\\n    (AlgebraicGeometry.Spec.sheafedSpaceObj (Opposite.unop R)).toPresheafedSpace\", \"doc\": \"For a commutative ring $ R $, the object mapping of the Spec functor from the opposite category of commutative rings to presheafed spaces assigns to $ R $ the presheafed space obtained by equipping th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No algebraic-space Hilbert presheaf match; scheme Hilbert functors do not cover arbitrary algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertFunctor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No algebraic-space Hilbert presheaf match; scheme Hilbert functors do not cover arbitrary algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "ProperHilbert|HilbertFunctor|properHilbert",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No algebraic-space Hilbert presheaf match; scheme Hilbert functors do not cover arbitrary algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i proper.*hilbert|hilbert.*proper|hilb.*quot lean/WeilConjectures/AlgebraicGeometry lean/Sheaf/AlgebraicGeometry; rg -n lem-sfb-space-hilbert-is-quot lean/WeilConjectures; rg -l -i hilbert.*(presheaf|functor)|proper hilbert|hilbfunctor dag/nodes; python3 tools/blueprint_refs.py search Hilbert",
+   "results": "WeilConjectures: finite-degree scheme Hilbert functors (Hilbert/Curve), no algebraic-space proper Hilbert presheaf or comparison. Sheaf: ProperHilbertPresheaf, GraphsOpenInHilbert and consumers concern schemes only. DAG: def-sfb-proper-hilbert-presheaf is scheme-only, def-pc-hilb-functor is finite-degree scheme-only; no node for arbitrary algebraic-space Hilbert presheaf. blueprint_refs search: 19 Hilbert blueprint nodes, none defining this algebraic-space presheaf.",
+   "date": "2026-10-24",
+   "verdict": "New algebraic-space notion needed; reuse ProperQuotTest, actual sheaf fibres, ClosedSubspace and morphism predicates."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-hilbert-is-quot",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 0D00, quot-lemma-hilb-is-quot, including naturality of the displayed mutually inverse constructions. The Hilbert presheaf defined in situation-hilb.",
+   "via": [
+    "lem-sfb-space-hilbert-is-quot",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperHilbertFunctor",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.properHilbertFunctor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperHilbertFunctor.lean",
+  "statement": "def properHilbertFunctor (a : A ⟶ B) : (ProperQuotTest B)ᵒᵖ ⥤ Type (u + 1)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.ProperHilbertFamily",
+   "AlgebraicGeometry.AlgebraicSpace.properHilbertPullback_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.properHilbertMap",
+   "AlgebraicGeometry.AlgebraicSpace.properHilbertMap_id",
+   "AlgebraicGeometry.AlgebraicSpace.properHilbertMap_comp",
+   "AlgebraicGeometry.AlgebraicSpace.properHilbertFunctor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-774256c7f",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-774256c7f",
+  "group": "NY",
+  "result": "pass",
+  "note": "Item statement verbatim equal to live; stmt_deps add only new def-sfb-space-proper-hilbert-functor (matches situation-hilb, Subobject classes of actual fibre A_T with proper/flat/fp composite, transitions pinned by ∃! cartesian square, no flatness restriction, not duplicate of scheme-only Hilbert nodes) and landed def-sfb-space-module-structure-map. Lean: Quot of literal unit O_A with sorried helper quasi-coherence theorem (generic isQuasicoherent_unit needs site instances unavailable; no project duplicate); unitIso pinned to adjunct of moduleStructureMap; forward class pinned to [O_{A_T}->i_*O_D] via θ equation; inverse by kernelSubobject equality; NatIso gives naturality for all test maps incl. non-flat. Types/orientation of IsPullback checked; ha is the Quot node's fp predicate; single universe u, Type (u+1). Edge cases (empty T/D, non-reduced, non-Noetherian) admitted. All theorems sorry, docstrings with source and blueprint present, report has Worker report and Second reading sections. No recompile (no file changed)."
+ }
+}

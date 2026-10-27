@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-finite-constant-unit-restriction",
+ "kind": "statement",
+ "title": "The finite constant-module open unit induces the actual abelian derived restriction",
+ "statement": "Let A be a finite commutative ring in the coefficient universe, X a scheme [def-weil-pbc-proetale-site], f a global function, j:X[1/f]→X the principal-open inclusion [def-weil-pbc-proetale-operations]. Suppose the actual unit of derivedUpperStarLowerStarAdjunction(ModuleCat A,j), evaluated at the constant regular module A_X[0] [def-weil-pbc-constant-sheaf], is invertible. For every object V→X of X_proet, set T=V[1/v*f], viewed over X, and let i:T→V be its canonical inclusion. Then the right-derived natural transformation of ordinary abelian section restriction E_V→E_T, evaluated at the constant underlying abelian sheaf A_X[0], is invertible in D(Ab) [def-weil-abstract-derived-category]. No affine or weak-contractibility hypothesis is required on V.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0D6H and 08BJ; sites-cohomology.tex Tags 03FD and 03F3; parent lem-sfb-torsion-open-test-devissage steps 1–2"
+ },
+ "proof": [
+  {
+   "text": "Resolve the constant regular module on the open by a nonnegative complex I of injective module sheaves. Exact inverse image is left adjoint to direct image, so j_*I is K-injective. The canonical derived composition comparison therefore computes evaluation of the actual unit at V by the ordinary restriction A_X(V)→I(T). Inverse image of a constant module is constant. The canonical pullback model V×_X X[1/f] identifies with the displayed principal open T, compatibly with its inclusion. Evaluation of the given invertible unit consequently makes this specified module-valued derived restriction invertible.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-fin-kinjective-derived-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting A-scalars commutes with constant sheafification and gives the constant abelian sheaf with value A. Localizing to V and T preserves injective module sheaves. The existing finite-ring injective acyclicity theorem then makes their underlying abelian sheaves evaluation-acyclic. The bounded-below comparison between the forgotten module resolution and abelian derived evaluation is induced by the identity on ordinary sections; it commutes with restriction. Thus it identifies the specified abelian arrow, rather than only its endpoints, with the forgotten invertible module arrow of the first step. This proves the assertion. All constructions also apply to the empty or identity open.",
+   "uses": [
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-sfb-finite-ring-injective-abelian-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-kinjective-derived-composition",
+  "lem-sfb-finite-ring-injective-abelian-acyclic",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0D6H and 08BJ; sites-cohomology.tex Tags 03FD and 03F3; parent lem-sfb-torsion-open-test-devissage steps 1–2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible derived open adjunction unit with finite constant ring coefficients induces an invertible restriction on abelian derived sections",
+   "results": "{\"t\": \"2026-10-23T13:28:32Z\", \"tool\": \"leansearch\", \"query\": \"An invertible derived open adjunction unit with finite constant ring coefficients induces an invertible restriction on abelian derived sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derivedη\", \"IsOpenMap.adjunction\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.unitAsIsoOfIso\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\"], \"digest\": \"b0480b3f90eec13a\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. General colimit, derived-adjunction or sheaf-cohomology infrastructure appears; the proof needs the stated specific comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant module derived adjunction unit isomorphism implies isomorphism on underlying abelian derived sections restriction",
+   "results": "{\"t\": \"2026-10-23T13:28:34Z\", \"tool\": \"leanfinder\", \"query\": \"Finite constant module derived adjunction unit isomorphism implies isomorphism on underlying abelian derived sections restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"CondensedMod.LocallyConstant.adjunction\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"LightCondMod.LocallyConstant.functorIsoDiscreteComponents\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZero\"], \"digest\": \"278271813492d846\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. General colimit, derived-adjunction or sheaf-cohomology infrastructure appears; the proof needs the stated specific comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Uu]nit.*[Ss]ections|[Ss]ections.*derived.*[Uu]nit",
+   "results": "{\"t\": \"2026-10-23T12:48:33Z\", \"tool\": \"grep\", \"query\": \"derived.*[Uu]nit.*[Ss]ections|[Ss]ections.*derived.*[Uu]nit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. General colimit, derived-adjunction or sheaf-cohomology infrastructure appears; the proof needs the stated specific comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionOpenTestDevissage",
+  "date": "2026-10-23",
+  "group": "R9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Direct-images paragraph (3), cyclic-to-bounded-primary open test: The finite constant-module open unit induces the actual abelian derived restriction.",
+   "via": [
+    "lem-sfb-torsion-open-test-devissage",
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantUnitRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantUnitRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteConstantUnit_isIso_derivedRestriction",
+  "statement": "theorem finiteConstantUnit_isIso_derivedRestriction\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (X : Scheme.{u}) (f : Γ(X, ⊤))\n    (hunit : IsIso ((derivedUpperStarLowerStarAdjunction\n      (ModuleCat.{u + 1} A) (X.basicOpen f).ι).unit.app\n        ((DerivedCategory.singleFunctor _ 0).obj\n          ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)).obj\n            (ModuleCat.of A A)))))\n    (V : X.ProEt) :\n    IsIso ((Functor.rightDerivedFunctorNatTrans\n      (F := sheafToPresheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} ⋙\n        (evaluation X.ProEtᵒᵖ AddCommGrpCat.{u + 1}).obj (op V))\n      (G := sheafToPresheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} ⋙\n        (evaluation X.ProEtᵒᵖ AddCommGrpCat.{u + 1}).obj\n          (op (Scheme.ProEt.mk\n            ((V.left.basicOpen (V.hom.appTop.hom f)).ι ≫ V.hom))))\n      ((sheafSections (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).map\n        (MorphismProperty.Over.homMk\n          (V.left.basicOpen (V.hom.appTop.hom f)).ι rfl :\n            Scheme.ProEt.mk ((V.left.basicOpen (V.hom.appTop.hom f)).ι ≫ V.hom) ⟶ V).op)).app\n      ((DerivedCategory.singleFunctor _ 0).obj\n        ((constantSheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).obj\n          (AddCommGrpCat.of A))))",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261023T135320-L-2868022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261023T135320-L-2868022",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

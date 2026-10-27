@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-trait-line-section-generic-germs-extension",
+ "kind": "statement",
+ "title": "Extension of a trait line section from integral special-fibre generic germs",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $K$ and residue field $k$, and put $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-pc-field-extension, def-weil-affine-spectrum]. Let $f:Y\\to S$ be flat and of finite type [def-weil-flat-morphism, def-weil-finite-type-morphism]. Assume its special fibre $Y_k$ is reduced and pure of dimension one, meaning every irreducible component has dimension one [def-pc-reduced-scheme, def-weil-pure-dimension]. Let $M$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module], let $U\\subseteq Y$ be an open containing the generic fibre $Y_K$, and let $s_U\\in\\Gamma(U,M|_U)$. For every generic point $\\eta$ of an irreducible component of $Y_k$, assume the germ of $s_U|_{Y_K}$ in $M_\\eta[1/\\pi]$ belongs to the image of $M_\\eta$. Then there is a unique $s\\in\\Gamma(Y,M)$ with $s|_U=s_U$. Moreover restriction $\\Gamma(V,M)\\to\\Gamma(V\\cap Y_K,M)$ is injective for every open $V\\subseteq Y$. There exists an open $W\\supseteq U$ containing every generic point of $Y_k$ on which the integral germs and $s_U$ agree and glue to a section; every $y\\notin W$ has $\\operatorname{depth}\\mathcal O_{Y,y}\\geq2$ and $\\operatorname{depth}M_y\\geq2$ [def-weil-pbc-depth]. No normality, integrality, properness, smoothness, nodal condition, marking, or connectedness of $Y$ is assumed. The empty scheme is allowed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0E9I (lemma-depth-2-hartog), combined with algebra.tex lemma-criterion-reduced and lemma-apply-grothendieck; agent generic-germ spreading and depth argument from old lem-sfb-nodal-log-dualizing-pullback Steps 1 and 8--10. The tag alone assumes the depth condition, whereas this statement derives it from the reduced curve special fibre."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-sc-invertible-module",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-flat-curve-line-depth] with $X=Y$ and $m=1$ (and $m=0$ for the structure sheaf). Thus $Y$ is Noetherian, multiplication by $\\pi$ on every stalk of $M$ is injective, and at closed points of $Y_k$ both required depths are at least two. We need injectivity on arbitrary opens, which we check next rather than applying this finite-type lemma to an arbitrary open.",
+   "uses": [
+    "lem-sfb-flat-curve-line-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0337, lemma-apply-grothendieck; existing flat-curve-line-depth statement"
+   }
+  },
+  {
+   "text": "On an affine open $T$, the generic part is $D(\\pi)$ and restriction is localization, as in [lem-sbc-generic-fibre-affine-ring-models]. If $t\\in\\Gamma(T,M)$ vanishes there, clause (2) of [lem-weil-pbc-affine-module-basic-open-localization] gives $\\pi^n t=0$. At each point $x\\in T$, injectivity of multiplication by $\\pi$ on $M_x$ gives $t_x=0$. Equality of germs means equality on some neighbourhood by [def-weil-pbc-module-stalk], so the sheaf uniqueness axiom gives $t=0$. Covering any open $V$ by affine opens proves the asserted injectivity on $V$; taking a difference proves equality detection for any pair of sections.",
+   "uses": [
+    "lem-sbc-generic-fibre-affine-ring-models",
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV (lemma-spec-sheaves), 01IA (lemma-quasi-coherent-affine); sheaves.tex section-stalks (Tag 0078, section-stalks)"
+   }
+  },
+  {
+   "text": "Fix a generic point $\\eta$ of $Y_k$. Choose an affine neighbourhood $T$ on which $M$ is trivial, using [def-sc-invertible-module]. Clause (1) of [lem-weil-pbc-affine-module-basic-open-localization] writes $s_U|_{T_K}=a/\\pi^n$ with $a\\in\\Gamma(T,M)$. The hypothesis gives $b_\\eta\\in M_\\eta$ mapping to this germ. Thus $\\pi^n b_\\eta=a_\\eta$ in $M_\\eta[1/\\pi]$, hence in $M_\\eta$ by Step 1: a localization equality is killed by some power of $\\pi$, and that power acts injectively. By [def-weil-pbc-module-stalk], represent $b_\\eta$ by a section $b$ near $\\eta$ and shrink to an open $T_\\eta\\subseteq T$ where $\\pi^n b=a$. On $(T_\\eta)_K$, $\\pi$ is a unit, so $b=s_U$. This explicitly spreads the prescribed integral germ.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV and 01IA; sheaves.tex section-stalks; agent spreading of the integral germ (Tag 0078)"
+   }
+  },
+  {
+   "text": "Put $W=U\\cup\\bigcup_\\eta T_\\eta$. On $T_\\eta\\cap U$ the sections $b$ and $s_U$ agree after restriction to the generic fibre, so agree by Step 2. The same argument on $T_\\eta\\cap T_{\\eta\\prime}$ proves pairwise compatibility, without assuming the intersections affine. The sheaf gluing axiom gives $s_W\\in\\Gamma(W,M)$ with these restrictions. It has the chosen integral germs at every $\\eta$. The integral lifts themselves are unique by Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 006T, definition-sheaf, and Tag 0077, definition-sheaf-modules; agent assembly of the preceding spreading and injectivity arguments"
+   }
+  },
+  {
+   "text": "Every $y\\notin W$ lies in $Y_k$ and is not a generic point of a component. Such a point is closed in $Y_k$: its closure $Z$ is a proper irreducible closed subset of a component $C$; if it had a distinct specialization $z$, then $\\overline{\\{z\\}}\\subsetneq Z\\subsetneq C$ would be a chain of length two, contradicting $\\dim C=1$. Here schemes are $T_0$, so the first inclusion is strict. This uses precisely the chain definition in [def-weil-pure-dimension] and [def-kun-topological-krull-dimension], not smoothness or normality. Step 1 therefore gives $\\operatorname{depth}\\mathcal O_{Y,y}\\ge2$ and $\\operatorname{depth}M_y\\ge2$ at every point outside $W$.",
+   "uses": [
+    "def-weil-pure-dimension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0337 via Step 1; elementary chain-of-irreducible-closed-subsets argument for the boundary; scheme T_0 property (Tag 01IS, schemes.tex lemma-scheme-sober)"
+   }
+  },
+  {
+   "text": "Cover $Y$ by affine opens $T$ trivializing $M$, and write $s_W|_{T\\cap W}=c_T e_T$ in the chosen basis [def-sc-invertible-module]. Apply [lem-sbc-depth-two-hartogs-restriction] to $L=T$, $N=\\mathcal O_T$ and the open $T\\cap W$. The scheme $T$ is locally Noetherian by Step 1; $\\mathcal O_T$ is quasi-coherent; its sections on every affine open and its stalks are free of rank one over their own rings, hence finite. Its boundary stalks have depth at least two by Step 5. The restriction unit is an isomorphism, so evaluating it on $T$ extends $c_T$ uniquely to $\\Gamma(T,\\mathcal O_T)$. Multiply by $e_T$. These local sections agree on overlaps by Step 2, since their generic restrictions are $s_U|_{Y_K}$, and hence glue to $s\\in\\Gamma(Y,M)$. On $U$ this section and $s_U$ agree by the same injectivity; any two extensions agree on $Y_K$ and hence on $Y$. If $Y$ or $Y_k$ is empty the construction has no missing germs or boundary and the same argument applies.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-sbc-depth-two-hartogs-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0E9I, lemma-depth-2-hartog, applied locally to the structure sheaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-curve-line-depth",
+  "lem-sbc-generic-fibre-affine-ring-models",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "def-weil-pbc-module-stalk",
+  "def-sc-invertible-module",
+  "def-weil-pure-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-sbc-depth-two-hartogs-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0E9I with affine localization (01HV, 01IA), stalk representatives, and the existing flat reduced curve depth lemma; the spreading and assembly are agent-written."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A section of an invertible sheaf on the generic fibre of a flat finite type curve over a discrete valuation ring extends uniquely if it is integral at generic points of the reduced special fibre",
+   "results": "{\"t\": \"2026-10-22T07:18:48Z\", \"tool\": \"leanfinder\", \"query\": \"A section of an invertible sheaf on the generic fibre of a flat finite type curve over a discrete valuation ring extends uniquely if it is integral at generic points of the reduced special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.functionField_isScalarTower\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\"], \"digest\": \"02baf90c8987c31c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field germ injectivity assumes an integral total scheme and gives no extension from vertical generic germs; sheaf section extensionality and germ representatives give neither the reduced-fibre depth bound nor Hartogs extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend an invertible sheaf section on an open containing the generic fibre of a flat curve over a DVR using integral germs and depth two Hartogs across closed special fibre points",
+   "results": "{\"t\": \"2026-10-22T07:18:38Z\", \"tool\": \"leansearch\", \"query\": \"Extend an invertible sheaf section on an open containing the generic fibre of a flat curve over a DVR using integral germs and depth two Hartogs across closed special fibre points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.section_ext\", \"AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen\", \"AlgebraicGeometry.StructureSheaf.germ_toOpen\", \"AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ\", \"TopCat.Presheaf.Sheafify.isGerm\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.injective_germ_basicOpen\"], \"digest\": \"7bc5a3841e3e4bfe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field germ injectivity assumes an integral total scheme and gives no extension from vertical generic germs; sheaf section extensionality and germ representatives give neither the reduced-fibre depth bound nor Hartogs extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"depth\"",
+   "results": "{\"t\": \"2026-10-22T07:18:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"depth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field germ injectivity assumes an integral total scheme and gives no extension from vertical generic germs; sheaf section extensionality and germ representatives give neither the reduced-fibre depth bound nor Hartogs extension."
+  },
+  {
+   "tool": "grep",
+   "query": "hartog|depth.*section|section.*generic.*fibre",
+   "results": "{\"t\": \"2026-10-22T07:18:37Z\", \"tool\": \"grep\", \"query\": \"hartog|depth.*section|section.*generic.*fibre\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field germ injectivity assumes an integral total scheme and gives no extension from vertical generic germs; sheaf section extensionality and germ representatives give neither the reduced-fibre depth bound nor Hartogs extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat curve over a discrete valuation ring with reduced pure dimension one special fibre has depth at least two at nongeneric special fibre points; integral generic germs of a line bundle section glue and extend",
+   "results": "{\"t\": \"2026-10-22T07:18:48Z\", \"tool\": \"leanfinder\", \"query\": \"A flat curve over a discrete valuation ring with reduced pure dimension one special fibre has depth at least two at nongeneric special fibre points; integral generic germs of a line bundle section glue and extend\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\"], \"digest\": \"6912deb19e7e91ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field germ injectivity assumes an integral total scheme and gives no extension from vertical generic germs; sheaf section extensionality and germ representatives give neither the reduced-fibre depth bound nor Hartogs extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"depth\"",
+   "results": "{\"t\": \"2026-10-23T09:57:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"depth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned germ-injectivity, fraction representation, affine localization and restriction-equality results do not give Hartogs extension across the special-fibre boundary with the stated reduced-curve depth hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "hartog|depth.*section|section.*generic.*fibre",
+   "results": "{\"t\": \"2026-10-23T09:57:44Z\", \"tool\": \"grep\", \"query\": \"hartog|depth.*section|section.*generic.*fibre\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned germ-injectivity, fraction representation, affine localization and restriction-equality results do not give Hartogs extension across the special-fibre boundary with the stated reduced-curve depth hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle section on a flat finite type scheme over a DVR extends from an open containing the generic fibre if integral at generic points of its reduced curve special fibre",
+   "results": "{\"t\": \"2026-10-23T09:57:44Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle section on a flat finite type scheme over a DVR extends from an open containing the generic fibre if integral at generic points of its reduced curve special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\"], \"digest\": \"14fa5415513e2a93\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned germ-injectivity, fraction representation, affine localization and restriction-equality results do not give Hartogs extension across the special-fibre boundary with the stated reduced-curve depth hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hartogs extension of invertible sheaf sections across points of depth at least two on a locally Noetherian scheme",
+   "results": "{\"t\": \"2026-10-23T09:57:45Z\", \"tool\": \"leansearch\", \"query\": \"Hartogs extension of invertible sheaf sections across points of depth at least two on a locally Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.Scheme.Modules.hom_ext\", \"ModuleCat.Tilde.const\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.StructureSheaf.comapFunIsLocallyFraction\"], \"digest\": \"111851569ff090b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned germ-injectivity, fraction representation, affine localization and restriction-equality results do not give Hartogs extension across the special-fibre boundary with the stated reduced-curve depth hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section regular at each generic point of a Cartier divisor extends over a reduced one dimensional divisor by Hartogs depth two",
+   "results": "{\"t\": \"2026-10-23T09:59:10Z\", \"tool\": \"leanfinder\", \"query\": \"A section regular at each generic point of a Cartier divisor extends over a reduced one dimensional divisor by Hartogs depth two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.germToFunctionField\"], \"digest\": \"cc5e4f15f0af4662\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned germ-injectivity, fraction representation, affine localization and restriction-equality results do not give Hartogs extension across the special-fibre boundary with the stated reduced-curve depth hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-log-dualizing-pullback",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; re-split task: generic restriction, spreading and Hartogs extension (old Steps 1, 8--10)",
+   "via": [
+    "lem-sfb-nodal-log-dualizing-pullback",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-trait-line-section-generic-germs-extension",
+  "worker": "stage1",
+  "summary": "Six-step proof with no new nodes: use the existing reviewed flat-curve-line-depth input, prove arbitrary-open injectivity, spread integral stalk representatives by explicit powers of the uniformizer, glue, identify the boundary as closed special points, and apply the existing Hartogs restriction theorem locally to the structure sheaf. Statement and inherited metadata retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; re-split task: generic restriction, spreading and Hartogs extension (old Steps 1, 8--10); realizes generic restriction, germ spreading and depth-two extension from the old nodal pullback proof. The current blueprint has no separate counterpart (searches Hartogs, depth, line section); blueprint_refs.py ancestor returns null, retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-module-basic-open-localization",
+    "why": "Affine quasi-coherent localization supplies denominators and detects sections killed after inverting the uniformizer; the unit has no replacement for this generic scheme tool."
+   },
+   {
+    "node": "lem-sbc-generic-fibre-affine-ring-models",
+    "why": "Identifies generic restriction on affine charts with localization; no change to the alteration route."
+   },
+   {
+    "node": "lem-sbc-depth-two-hartogs-restriction",
+    "why": "Depth-two extension across an open complement is a generic scheme tool; it is applied to O on trivializing charts, after the curve boundary depth has been proved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-sbc-generic-fibre-affine-ring-models",
+  "lem-sbc-depth-two-hartogs-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-c8cc5e880",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-c8cc5e880 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited node's statement in full. The delivery has no new nodes. The statement and stmt_deps are identical to the live copy, which is still unsplit, so no parallel group has split it. There is no repair note and no cycle, and proof_deps equals the union of the step uses. Step 1: lem-sfb-flat-curve-line-depth has exactly the item's hypotheses (m=1 and m=0) and gives Noetherian, pi-injective stalks, and depth ≥2 at closed points of Y_k. Step 2: injectivity on arbitrary opens follows from T∩Y_K=D(pi), basic-open-localization (2) giving pi^n t=0, stalk pi-injectivity and the sheaf axiom; nothing is assumed about the opens. Step 3: the integral germ spreads explicitly: a/pi^n by clause (1), pi^n b_eta=a_eta by stalk injectivity, a representative b, then shrinking. Step 4 (elementary): gluing, with compatibility from Step 2 on the generic parts. Step 5 (elementary): a non-generic point of Y_k is closed in Y_k by the chain argument plus sobriety (01IS), so it gets depth ≥2. Step 6: lem-sbc-depth-two-hartogs-restriction (0E9I) applied to O_T on trivializing affines, with all hypotheses checked; the local extensions glue via Step 2, which also gives uniqueness. Every statement clause (W, both depths, injectivity, the empty cases) is proved. Tested on Spec R[t] (the generic point of Y_k has depth 1, so spreading before Hartogs is needed), R[x,y]/(xy-pi), Y=∅ and Y_k=∅. The tags 0E9I/0337/01HV/01IA/01IS/0078/006T/0077 match their labels, and there is no SGA. Duplicate search (rg -L for hartog/depth-two/generic germ) found only nodes that assume depth; none states the item. The three split_report.tool_uses (affine-module basic-open localization, generic-fibre affine ring models, depth-two Hartogs) are generic scheme tools and accepted. Batch-5 flag: lem-trf-flat-module-torsionfree-domain, reached through flat-curve-line-depth, says only that a flat module over a domain is torsion-free. That is general algebra, not a trace-formula or Poincaré-duality assumption or a proof step, so it is not a RETURN. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitLineSectionGenericGermsExtension",
+  "declaration": "AlgebraicGeometry.trait_line_section_generic_germs_extension",
+  "declarations": [
+   "AlgebraicGeometry.traitLineGenericSection",
+   "AlgebraicGeometry.trait_line_section_generic_germs_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitLineSectionGenericGermsExtension.lean",
+  "statement": "theorem trait_line_section_generic_germs_extension {R : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of R)) [Flat f] [LocallyOfFiniteType f] [QuasiCompact f] (π : R) (hπ : Irreducible π) [IsReduced (f.fiber (IsLocalRing.closedPoint R))] (hpure : (f.fiber (IsLocalRing.closedPoint R)).IsPureDimension 1) (M : Y.Modules) [M.IsInvertible] (U : Y.Opens) (hU : (f ⁻¹ᵁ PrimeSpectrum.basicOpen π) ≤ U) (sU : Γ(M, U)) (hintegral : ∀ (Z : Set (f.fiber (IsLocalRing.closedPoint R))), Z ∈ irreducibleComponents (f.fiber (IsLocalRing.closedPoint R)) → ∀ η : f.fiber (IsLocalRing.closedPoint R), IsGenericPoint η Z → ((Scheme.Modules.pushforward ((f ⁻¹ᵁ PrimeSpectrum.basicOpen π)).ι).obj (M.restrict ((f ⁻¹ᵁ PrimeSpectrum.basicOpen π)).ι)).presheaf.germ ⊤ (f.fiberι (IsLocalRing.closedPoint R) η) (Set.mem_univ _) (traitLineGenericSection f π M U hU sU) ∈ Set.range (((TopCat.Presheaf.stalkFunctor Ab.{u} (f.fiberι (IsLocalRing.closedPoint R) η)).map (((Scheme.Modules.restrictAdjunction ((f ⁻¹ᵁ PrimeSpectrum.basicOpen π)).ι).unit.app M).mapPresheaf)))) : (∃! s : Γ(M, ⊤), M.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op s = sU) ∧ (∀ V : Y.Opens, Function.Injective (M.presheaf.map (homOfLE (inf_le_left : V ⊓ (f ⁻¹ᵁ PrimeSpectrum.basicOpen π) ≤ V)).op)) ∧ ∃ (W : Y.Opens) (hUW : U ≤ W) (sW : Γ(M, W)), M.presheaf.map (homOfLE hUW).op sW = sU ∧ (∀ (Z : Set (f.fiber (IsLocalRing.closedPoint R))), Z ∈ irreducibleComponents (f.fiber (IsLocalRing.closedPoint R)) → ∀ η : f.fiber (IsLocalRing.closedPoint R), IsGenericPoint η Z → ∃ hηW : f.fiberι (IsLocalRing.closedPoint R) η ∈ W, ∀ t : M.presheaf.stalk (f.fiberι (IsLocalRing.closedPoint R) η), ((TopCat.Presheaf.stalkFunctor Ab.{u} (f.fiberι (IsLocalRing.closedPoint R) η)).map (((Scheme.Modules.restrictAdjunction ((f ⁻¹ᵁ PrimeSpectrum.basicOpen π)).ι).unit.app M).mapPresheaf)) t = ((Scheme.Modules.pushforward ((f ⁻¹ᵁ PrimeSpectrum.basicOpen π)).ι).obj (M.restrict ((f ⁻¹ᵁ PrimeSpectrum.basicOpen π)).ι)).presheaf.germ ⊤ (f.fiberι (IsLocalRing.closedPoint R) η) (Set.mem_univ _) (traitLineGenericSection f π M U hU sU) → M.presheaf.germ W (f.fiberι (IsLocalRing.closedPoint R) η) hηW sW = t) ∧ (∀ y : Y, y ∉ W → (2 : ℕ∞) ≤ IsLocalRing.depth (R := Y.presheaf.stalk y) (Y.presheaf.stalk y) ∧ ∃ hfinite : Module.Finite (Y.presheaf.stalk y) (TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y) M.val.presheaf y), (2 : ℕ∞) ≤ @IsLocalRing.depth (Y.presheaf.stalk y) _ _ (TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y) M.val.presheaf y) _ _ hfinite)",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11bc96d70",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 39480c8457e3 (name collision traitLineGenericOpen with NA TraitLineSectionOrderNormalization): the wrapper is removed and every use is Mathlib's f ⁻¹ᵁ PrimeSpectrum.basicOpen π (its body). Diff against the previous head is only this. traitLineGenericSection is declared nowhere else. Clause check: DVR + Irreducible π; Flat+LocallyOfFiniteType+QuasiCompact; special fibre f.fiber closedPoint, IsReduced, IsPureDimension 1 (vacuous when empty); IsInvertible M; hU = Y_K ⊆ U. hintegral uses the restrictAdjunction unit stalk into (j_*j^*M)_η = M_η[1/π] (j affine, M qcoh), canonical, not stronger. Conclusions: ∃! extension; injectivity for every V; W ⊇ U with sW|U=sU and germs equal to every integral lift; both depths ≥2 off W via recorded IsLocalRing.depth with Mathlib stalk Module instance; Module.Finite existential is true and in the conclusion. Universes forced by Spec (.of R). Node differs from live only in lean; statement verbatim; imports exist; proof sorry; docstrings and both report sections present. Edge cases: empty Y, empty Y_k, Spec R[t], nodal model. No file changed, no compile."
+ }
+}

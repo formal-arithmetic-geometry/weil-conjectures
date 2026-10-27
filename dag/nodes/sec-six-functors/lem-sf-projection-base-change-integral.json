@@ -1,0 +1,245 @@
+{
+ "id": "lem-sf-projection-base-change-integral",
+ "kind": "statement",
+ "title": "Projection base change at integral coefficients",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$, an integer $n\\ge1$, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ containing $E$. Let $S$ be a six-functor datum at these coefficients [def-sf-datum], with the specified operation and comparison data [def-fix-six-functor-datum].\n\nWork at $\\Lambda=R$ in the bounded constructible derived-complete integral categories $D^b_c(T,R)$ [def-weil-derived-complete-integral-detailed].\n\nLet\n$$\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\\end{array}$$\nbe a Cartesian square of finite-type $k$-schemes. Assume $f$ is separated, and supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ with $j$ open, $p$ proper and $pj=f$, together with its Cartesian base change $c'=(j',p')$; all squares and factorizations are part of the specified compactified square. No separatedness of $g$ or of the structure morphisms is assumed. Write $U_u=Lu^*$, $F=Rf_!^c$, $F'=Rf'_!^{c'}$, and $P_f(K,L)=\\operatorname{PF}_{f,K,L}^c$, using the datum's recorded projection components [def-sf-constructible-projection-mates, def-exchange-projection]. Let $e_M:U_gFM\\to F'U_{g'}M$ be the specified compact-support exchange, with only the datum's endpoint identifications. Let $\\mu_u(A,B):U_u(A\\otimes B)\\xrightarrow{\\sim}U_uA\\otimes U_uB$ be the canonical normalized tensor-pullback comparison [def-pur-completed-pullback-tensor-comparison], and let $\\kappa_L:U_{g'}U_fL\\xrightarrow{\\sim}U_{f'}U_gL$ be the inverse pullback compositor to $U_{fg'}L$, transport through $fg'=gf'$, then the pullback compositor to $U_{f'}U_gL$. Tensor and pullback at $R$ are completed, at $E$ rationalized, and at $\\overline{\\mathbf Q}_\\ell$ represented over a common finite field. For the inputs specified below, the following equality holds:\n$$\\begin{aligned}\nF'\\bigl((1\\otimes\\kappa_L)\\circ\\mu_{g'}(K,U_fL)\\bigr)\\circ e_{K\\otimes U_fL}\\circ U_g(P_f(K,L))\n={}&P_{f'}(U_{g'}K,U_gL)\\circ(e_K\\otimes1)\\circ\\mu_g(FK,L).\n\\end{aligned}$$\nBoth sides have source $U_g(FK\\otimes L)$ and target $F'(U_{g'}K\\otimes U_{f'}U_gL)$, using exactly the specified maps, rather than independently chosen isomorphisms.\n\nHere $K\\in D^b_c(X,R)$ and $L\\in D^b_c(Y,R)$, and $L$ satisfies the specified uniform finite-reduction Tor-amplitude predicate: there exist integers $a\\le b$ such that every finite reduction of $L$ has Tor amplitude in $[a,b]$ [def-weil-finite-tor-amplitude].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph: proper/open factor square, integral coefficient specialization of the displayed square",
+  "module": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "file": "lean/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+  "line": 523,
+  "declaration": "WeilConjectures.sixFunctorProjection_baseChange_integral",
+  "note": "Construction material for a future worker, not a proof certification: retain the exact compactification and all endpoint conjugations in the source header below. At integral coefficients prove an equality of completed arrows before evaluation, not by assuming finite evaluations are faithful. The open-factor equation gives the completed domains and monoidality; transpose the proper-factor routes using the counit/mate identity, then paste. Rationalization transports the completed equation; the algebraically closed component must be represented over one common finite coefficient field, with the specified scalar transition cocycle. Do not reduce a field object. Refinement comparisons retain the actual exchange and projection maps.\n\nExact source docstring (unproved source):\n/-- The displayed base-change square for the integral projection transformation.\nSource: current blueprint prop-sf-pf-coherence, displayed square\n(blueprint: prop-sf-pf-coherence).\nProof: choose the compactification retained in Q. Apply the open-factor equation\nof lem-sf-pf-open-base-change-square. The proper-factor equation is the counit\nprojection/mate identity lem-sp-categorical-projection-mate-square, since the\ncanonical pullback square comparison is monoidal. The pasting lemma\nlem-sf-pf-compactification-pasting gives the two displayed composites. At integral\ncoefficients this is an equality of completed arrows before finite evaluation;\nrationalization and common-stage inclusion preserve the equality. The recorded\nrefinement comparisons remove dependence on the chosen compactification. -/\n\nVerbatim retained old parent argument, in source order:\nBy [def-sf-pf, def-exchange-projection], use $\\operatorname{PF}^c=Rp_*(\\gamma_j)\\pi_p$. The underlying operation datum of [def-sf-datum], on its domains $K\\in D^b_c$, $L\\in D^b_{ctf}$, satisfies the stage laws [lem-sf-projection-finite-stage-laws, lem-sf-projection-integral-stage-laws, lem-sf-projection-field-stage-laws] (mate calculus of the counit projection and the open tensor map at each coefficient stage, without invertibility of the projection maps), which give naturality in $K,L$, the $\\alpha_{g,f}$ pentagon, compactification compatibility and the proper identification. For the identity clause, use the four proved stage lemmas of [lem-sf-projection-identity-assembly] on the underlying operation datum. They construct the normalized units by full-faithful cancellation of the compositor, prove uniqueness by naturality and cancellation, and transport the proper counit identity to every compactification by the stage proper-coincidence laws. Their finite full-faithfulness calculation is proved directly from the derived intrinsic identity pullback; the remaining fullness and the proper counit calculations are the two smaller source obligations recorded below that node. Use proved private equations for the existing support and finite-Tor identity comparisons to match the statement here without repeated large coefficient-category unfolding. This retains the identity-adjunction and proper-coincidence route of the unit.\n\nChoose $f=pj$ and its Cartesian base change; by [def-exchange-projection] $\\operatorname{PF}^c=R(\\gamma_j)\\pi_p$ and $\\operatorname{Ex}_!^c=R'(\\beta)e$. Apply [lem-sf-pf-open-base-change-square] with $M=j_!K$, $Q=M\\otimes FL$: it supplies all completed constructible domains, monoidality of $\\theta:F'G\\cong HF$, and the open-factor equality. The ordinary adjunctions are [fix-prop-adjunctions](1). The proper exchange $e$ is their specified mate of $\\theta$ by [def-exchange-projection, fix-lem-exchanges], and $\\pi_p$ is the counit projection. Apply [lem-sp-categorical-projection-mate-square] with its adjunctions $Lp^*\\dashv Rp_*$, $Lp'^*\\dashv Rp'_*$, $N_D=G$, $N_C=H$, $\\alpha=\\theta$, $\\varphi=\\mu_F$, $\\varphi'=\\mu_{F'}$, $m_C=\\mu_H$, $m_D=\\mu_G$; its hypothesis ComparisonCompatible is the monoidality equation just cited. Its conclusion is $R'(d)e_QG(\\pi_{p;M,L})=\\pi_{p';HM,GL}(e_M\\otimes1)\\mu_{G;RM,L}$ with $d=(1\\otimes\\theta_L^{-1})\\mu_H$, the proper-factor hypothesis of [lem-sf-pf-compactification-pasting]; the open one is the equality above. That pasting identity gives the displayed square: its target comparison is $La^*JFL\\cong J'HFL\\to J'F'GL\\cong Lf'^*GL$. Refinement compatibility and square naturality in [fix-lem-exchanges](1),(4), with projection compatibility from step 1, remove the compactification choice; the naturality clause of the pasting lemma gives naturality in the morphism data. At finite coefficients apply [lem-sf-finite-base-change-transport]: its proof identifies each constructible-coordinate route under faithful realization, substitutes the existing fixed-scalar diamond equality, cancels the common target isomorphism, and reflects equality through the full inclusion. This retains the proper/open mate calculation and adds no separatedness of the horizontal map.\n\nExact sorried source theorem header:\ntheorem sixFunctorProjection_baseChange_integral (S : SixFunctorDatum D C E n hn) :\n    ∀ (Q : SixFunctorCompactifiedSquare D)\n      [IsSeparated Q.f.hom.left]\n      (K : sfIntegralConstructibleCategory C.l E Q.X.obj.left)\n      (L : sfIntegralConstructibleCategory C.l E Q.Y.obj.left),\n      S.toSixFunctorOperationDatum.integralFiniteTorDomain Q.Y L →\n      (S.higher.integral.pull Q.g).map ((S.higher.integralExchange Q).projectionComponent K L) ≫\n        sixFunctorProjectionExchange (S.higher.integralExchange Q)\n          (((S.higher.integralTensor Q.X).obj K).obj ((S.higher.integral.pull Q.f).obj L)) ≫\n        (S.higher.integral.support Q.f' Q.compactification').map\n          ((sixFunctorProjectionIntegralMu S Q.g' K\n            ((S.higher.integral.pull Q.f).obj L)).hom ≫\n            ((S.higher.integralTensor Q.X').obj ((S.higher.integral.pull Q.g').obj K)).map\n              (((S.higher.integral.pullComposition Q.g' Q.f).inv.app L) ≫\n                eqToHom (congrArg\n                  (fun f ↦ (S.higher.integral.pull f).obj L) Q.squareComm) ≫\n                (S.higher.integral.pullComposition Q.f' Q.g).hom.app L)) =\n      (sixFunctorProjectionIntegralMu S Q.g\n        ((S.higher.integral.support Q.f Q.compactification).obj K) L).hom ≫\n        ((S.higher.integralTensor Q.Y').map\n          (sixFunctorProjectionExchange (S.higher.integralExchange Q) K)).app\n            ((S.higher.integral.pull Q.g).obj L) ≫\n        (S.higher.integralExchange (compactSupportProjectionSquare Q.f'\n          Q.compactification')).projectionComponent\n          ((S.higher.integral.pull Q.g').obj K) ((S.higher.integral.pull Q.g).obj L)"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates",
+  "def-exchange-projection",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph: open-factor restriction identity, proper-factor counit transpose, and their compactification pasting; integral specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For completed integral adic constructible derived sheaves the canonical compact support projection formula commutes with Cartesian base change and monoidal pullback comparisons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"PresheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {E : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$, $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of pullba\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_id_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.map_η_comp_η\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] : \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.ε_comp_map_ε\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] : \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_η_comp_η_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] {Z\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.ε_comp_map_ε_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] {Z\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.NaturalTransformation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.NaturalTransformation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapAddMon\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : F\", \"doc\": \"An adjunction of monoidal functors lifts to an adjunction of their lifts to additive\\nmonoid objects.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : F\", \"doc\": \"An adjunction of monoidal functors lifts to an adjunction of their lifts to monoid objects.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapAddMon_counit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon_counit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapAddMon_unit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon_unit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*projection|compactSupportProjection",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Beck Chevalley exchange compatibility with counit projection and extension by zero for completed integral adic coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(x : M) : of I N (lift I ha f hf x) = AdicCompletion.lift I (extend ha f) (factorPow_comp_extend ha f hf) x\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n  {\"name\": \"CategoryTheory.Monad.MonadicityInternal.counitCoequalizerOfReflectsCoequalizer\", \"module\": \"Mathlib.CategoryTheory.Monad.Monadicity\", \"type\": \"(B : D) [ReflectsColimit (parallelPair (F.map (G.map (adj.counit.app B))) (adj.counit.app (F.obj (G.obj B)))) G] :\\n  IsColimit (counitCofork (adj := adj) B)\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ with counit $ \\\\epsilon $, if $ G $ reflects colimits of the parallel pair $ F(G(\\\\epsilon_B)) $ and $ \"}\n  {\"name\": \"IsAdicComplete.bot\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M], IsAdicComplete ⊥ M\", \"doc\": \"For any commutative ring $ R $ and any $ R $-module $ M $, the module $ M $ is adic complete with respect to the zero ideal $ \\\\{0\\\\} $.\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{m n : ℕ} (hle : m ≤ n) : factorPow I N hle ∘ₗ extend ha f n = extend ha f m\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $. This est\"}\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"[∀ A : adj.toComonad.Coalgebra, HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] (A : adj.toComonad.Coalgebra) :\\n  ((comparisonAdjunction adj).counit.app A).f = (beckEqualizer A).lift (counitFork A)\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ forming a comonad $ GF $, if every $ GF $-coalgebra admits an equalizer of $ G(A.\\\\alpha) $ and the un\"}\n  {\"name\": \"IsAdicComplete.of_comp_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(f : ∀ (n : ℕ), M →ₗ[R] N ⧸ (I ^ n • ⊤ : Submodule R N))\\n  (h : ∀ {m n : ℕ} (hle : m ≤ n), factorPow I N hle ∘ₗ f n = f m) : of I N ∘ₗ lift I f h = AdicCompletion.lift I f h\", \"doc\": \"Let $R$ be a commutative ring, $I$ be an ideal of $R$, and $M, N$ be $R$-modules. Assume that $N$ is $I$-adically complete. Let $(f_n : M \\\\to N/I^n N)_{n \\\\in \\\\mathbb{N}}$ be a compatible family of $R$\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib.Condensed.Solid\", \"type\": \": FintypeCat.toProfinite ⋙ profiniteSolid R ⟶ finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"AdicCompletion.map_zero\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \": map I (0 : M →ₗ[R] N) = 0\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and $ R $-modules $ M $ and $ N $, the induced linear map between the $ I $-adic completions of $ M $ and $ N $ corresponding to the zero linear map fro\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley exchange compatibility with counit projection and extension by zero for completed integral adic coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"AdicCompletion.eval_comp_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (n : ℕ), AdicCompletion.eval I M n ∘ₗ AdicCompletion.of I M = (I ^ n • ⊤).mkQ\", \"doc\": \"For each natural number $n$, the composition of the evaluation map from the $I$-adic completion of $M$ to $M/I^nM$ and the canonical linear map from $M$ to its $I$-adic completion equals the canonical\"}\n  {\"name\": \"AdicCompletion.factor_eval_eq_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {n : ℕ} (x : AdicCompletion I R) (h : I ^ n • ⊤ ≤ I ^ n),\\n  (Submodule.factor h) ((AdicCompletion.eval I R n) x) = (AdicCompletion.evalₐ I n) x\", \"doc\": \"For any natural number $n$, element $x$ in the $I$-adic completion of a commutative ring $R$, and hypothesis $h : I^n \\\\cdot \\\\top \\\\subseteq I^n$, the factor-adjusted evaluation of $x$ at level $n$ equa\"}\n  {\"name\": \"IsAdicComplete.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"Let $R$ be a commutative ring, $I$ be an ideal of $R$, and $M, N$ be $R$-modules. Assume that $N$ is $I$-adically complete. Let $(f_n : M \\\\to N/I^n N)_{n \\\\in \\\\mathbb{N}}$ be a compatible family of $R$\"}\n  {\"name\": \"AdicCompletion.factor_evalₐ_eq_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {n : ℕ} (x : AdicCompletion I R) (h : I ^ n ≤ I ^ n • ⊤),\\n  (Ideal.Quotient.factor h) ((AdicCompletion.evalₐ I n) x) = (AdicCompletion.eval I R n) x\", \"doc\": \"For any natural number $ n $, an element $ x $ in the $ I $-adic completion of a commutative ring $ R $, and the hypothesis $ I^n \\\\subseteq I^n \\\\cdot \\\\top $, the quotient factor map applied to the alg\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n  {\"name\": \"AdicCompletion.eval_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤)\\n  (h : ∀ {m n : ℕ} (hle : m ≤ n), AdicCompletion.transitionMap I N hle ∘ₗ f n = f m\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and $ R $-modules $ M $ and $ N $, given a compatible family of $ R $-linear maps $ f_n : M \\\\to N/I^nN $ satisfying $ \\\\text{transitionMap}_{m,n} \\\\circ f_n\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $. This est\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*projection|compactSupportProjection",
+   "results": "NW command returned 0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected hits concern ordinary adic completion, generic monoidal adjunctions or underived sheaf pullback composition, not this specified completed compact-support square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Beck Chevalley exchange compatibility with counit projection and extension by zero for completed integral adic coefficients",
+   "results": "NW command returned 8 hits: IsAdicComplete.StrictMono.of_lift, CategoryTheory.Monad.MonadicityInternal.counitCoequalizerOfReflectsCoequalizer, IsAdicComplete.bot, IsAdicComplete.StrictMono.factorPow_comp_extend, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f, IsAdicComplete.of_comp_lift, Condensed.profiniteSolidCounit, AdicCompletion.map_zero",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected hits concern ordinary adic completion, generic monoidal adjunctions or underived sheaf pullback composition, not this specified completed compact-support square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "NW command returned 12 hits: CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.map_η_comp_η_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.mapAddMon, CategoryTheory.Adjunction.mapMon",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected hits concern ordinary adic completion, generic monoidal adjunctions or underived sheaf pullback composition, not this specified completed compact-support square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For completed integral adic constructible derived sheaves the canonical compact support projection formula commutes with Cartesian base change and monoidal pullback comparisons",
+   "results": "NW command returned 8 hits: LightCondensed.ihomPoints_symm_comp, SheafOfModules.pullbackComp, PresheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_id_comp",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected hits concern ordinary adic completion, generic monoidal adjunctions or underived sheaf pullback composition, not this specified completed compact-support square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley exchange compatibility with counit projection and extension by zero for completed integral adic coefficients",
+   "results": "NW command returned 8 hits: IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.eval_comp_of, AdicCompletion.factor_eval_eq_evalₐ, IsAdicComplete.of_comp_lift, AdicCompletion.factor_evalₐ_eq_eval, IsAdicComplete.StrictMono.of_lift, AdicCompletion.eval_lift, IsAdicComplete.StrictMono.factorPow_comp_extend",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected hits concern ordinary adic completion, generic monoidal adjunctions or underived sheaf pullback composition, not this specified completed compact-support square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-pf-coherence",
+  "date": "2026-10-27",
+  "group": "NB"
+ },
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.sixFunctorProjection_baseChange_integral",
+   "module": "Sheaf.Paper.ProjectionFormulaCoherence",
+   "file": "lean/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+   "line": 523,
+   "quarantine_file": "quarantine/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+   "quarantine_line": 523,
+   "statement": "theorem sixFunctorProjection_baseChange_integral (S : SixFunctorDatum D C E n hn) :\n    ∀ (Q : SixFunctorCompactifiedSquare D)\n      [IsSeparated Q.f.hom.left]\n      (K : sfIntegralConstructibleCategory C.l E Q.X.obj.left)\n      (L : sfIntegralConstructibleCategory C.l E Q.Y.obj.left),\n      S.toSixFunctorOperationDatum.integralFiniteTorDomain Q.Y L →\n      (S.higher.integral.pull Q.g).map ((S.higher.integralExchange Q).projectionComponent K L) ≫\n        sixFunctorProjectionExchange (S.higher.integralExchange Q)\n          (((S.higher.integralTensor Q.X).obj K).obj ((S.higher.integral.pull Q.f).obj L)) ≫\n        (S.higher.integral.support Q.f' Q.compactification').map\n          ((sixFunctorProjectionIntegralMu S Q.g' K\n            ((S.higher.integral.pull Q.f).obj L)).hom ≫\n            ((S.higher.integralTensor Q.X').obj ((S.higher.integral.pull Q.g').obj K)).map\n              (((S.higher.integral.pullComposition Q.g' Q.f).inv.app L) ≫\n                eqToHom (congrArg\n                  (fun f ↦ (S.higher.integral.pull f).obj L) Q.squareComm) ≫\n                (S.higher.integral.pullComposition Q.f' Q.g).hom.app L)) =\n      (sixFunctorProjectionIntegralMu S Q.g\n        ((S.higher.integral.support Q.f Q.compactification).obj K) L).hom ≫\n        ((S.higher.integralTensor Q.Y').map\n          (sixFunctorProjectionExchange (S.higher.integralExchange Q) K)).app\n            ((S.higher.integral.pull Q.g).obj L) ≫\n        (S.higher.integralExchange (compactSupportProjectionSquare Q.f'\n          Q.compactification')).projectionComponent\n          ((S.higher.integral.pull Q.g').obj K) ((S.higher.integral.pull Q.g).obj L)",
+   "proposed_module": "Sheaf.Paper.ProjectionBaseChangeIntegral",
+   "status": "sorried",
+   "note": "Exact source allocation only; not a verified attachment or a separately extracted module. Source proof contains sorry; no compilation performed."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph: proper/open factor square, integral coefficient specialization of the displayed square",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "proof": [
+  {
+   "text": "Use the retained compactification and write h for its proper-factor horizontal map and a=g'. Adopt the notation F,F',G,H,A,J,J',R_p,R'_p of [lem-sf-pf-open-base-change-square], reserving R for the coefficient ring. The given uniform reduction predicate is precisely L in D^b_ctf(Y,R) by [def-weil-finite-tor-amplitude]. The integral clause of [lem-sf-pf-open-base-change-square] gives all completed intermediate domains, including M=j_!K, Q=M tensor FL and their four proper images, the monoidality equation for theta:F'G to HF, and the actual open equality z H(gamma_j)=gamma_j'(beta_K tensor 1) mu_H. It requires no finite-Tor hypothesis on K and no separatedness on g. Moreover [lem-pur-integral-operations-preserve-constructible](1) makes GL bounded constructible; [lem-coef-integral-residue-tor] makes GL integral finite-Tor, so the lower projection component has its required second input.",
+   "uses": [
+    "lem-sf-pf-open-base-change-square",
+    "def-weil-finite-tor-amplitude",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph: open-factor restriction identity, proper-factor counit transpose, and their compactification pasting; integral specialization."
+   }
+  },
+  {
+   "text": "By [def-sf-operation-stages], use the supplied ordinary adjunctions F left adjoint to R_p and F' left adjoint to R'_p, and the exchange-stage realizations of the proper counit projection pi and proper exchange e_p; these are the recorded maps, not replacement isomorphisms. Apply [lem-sp-categorical-projection-mate-square] with C=D^b_c(bar X,R), D=D^b_c(Y,R), C'=D^b_c(bar X',R), D'=D^b_c(Y',R), N_D=G, N_C=H, alpha=theta, phi=mu_F, phi'=mu_F', m_C=mu_H, m_D=mu_G, M=j_!K and L as given. The equation for theta from step 1 is exactly ComparisonCompatible. The conclusion is R'_p(d) e_{p,Q} G(pi_{p;M,L})=pi_{p';HM,GL}(e_{p,M} tensor 1) mu_{G;R_p M,L}, where d=(1 tensor theta_L^{-1}) mu_{H;M,FL}. Thus the proper-factor identity holds as an equality of completed morphisms. Only the two proper vertical adjunctions are used; no adjunction restriction along g or invertibility of e_p or pi is needed.",
+   "uses": [
+    "def-sf-operation-stages",
+    "lem-sp-categorical-projection-mate-square",
+    "lem-sf-pf-open-base-change-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph: open-factor restriction identity, proper-factor counit transpose, and their compactification pasting; integral specialization."
+   }
+  },
+  {
+   "text": "The two hypotheses of [lem-sf-pf-compactification-pasting] are now the open equality of step 1 and the proper equality of step 2 on its specified domains. Apply it with M=j_!K and Q=M tensor FL. Its conclusion has target comparison v=j'_!(1 tensor J'(theta_L^{-1})) z and compactified maps PF^c=R_p(gamma_j) pi_p and Ex_!^c=R'_p(beta)e_p. It equates the top/right route with the left/bottom route for these exact completed composites, retaining c and c'.",
+   "uses": [
+    "lem-sf-pf-compactification-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph: open-factor restriction identity, proper-factor counit transpose, and their compactification pasting; integral specialization."
+   }
+  },
+  {
+   "text": "Identify the pasted equation with the displayed one using [def-sf-operation-stages]: exchange-stage data realizes the specified proper/open composites, pullback compositors and endpoint comparisons. Substitute those defining composites and cancel each recorded intermediate endpoint isomorphism with its inverse. The composition compatibility of mu in [lem-pur-derived-pullback-tensor-iso] identifies the factor tensor comparisons with mu_g and mu_a. Write c_{u,v}:U_u U_v to U_{vu} for a pullback compositor. On the second tensor factor the target comparison is, in right-to-left order, t=(c_{j',p'} U_g) U_{j'}(theta^{-1}) sigma_{U_p L} U_a(c_{j,p}^{-1}), a map U_a U_f L to U_{f'} U_g L. Substitute theta=c_{h,p}^{-1} c_{p',g} and sigma=c_{j',h}^{-1} c_{a,j}, inserting the specified square equalities. The compositor associativity equations give c_{f',g} t=c_{a,f}; hence t=c_{f',g}^{-1} c_{a,f}=kappa_L. Thus the pasted target map is F'((1 tensor kappa_L) mu_{g'}), R'_p(beta)e_p is e, and the two projections are the recorded P_f and P_{f'}. This is the requested equality with exactly its stated source and target.",
+   "uses": [
+    "def-sf-operation-stages",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph: open-factor restriction identity, proper-factor counit transpose, and their compactification pasting; integral specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-integral-residue-tor",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-pf-compactification-pasting",
+  "lem-sf-pf-open-base-change-square",
+  "lem-sp-categorical-projection-mate-square"
+ ],
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-projection-base-change-integral",
+  "worker": "stage1",
+  "summary": "Checked the live statement against the retained sorried theorem and latest blueprint, then assembled the completed integral open/proper mate calculation using existing domain, monoidality and pasting statements. No new nodes, no statement change, no finite-evaluation faithfulness, no separatedness assumption on the horizontal map.",
+  "blueprint": "Realizes the base-change paragraph of prop-sf-pf-coherence.proof.md: open essential-image identity, proper counit transpose, and pasting, at the completed integral stage with the specified endpoints.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-categorical-projection-mate-square",
+    "why": "Generic adjunction/tensor mate equation supplies the proper-factor calculation prescribed by this unit; it assumes neither projection nor exchange invertibility."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic completed pullback closure checks the second input GL for an arbitrary horizontal map; no lemma of this unit supplies that domain fact."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic residue-field criterion gives the uniform reduction Tor predicate for GL after completed pullback; this is a coefficient domain check, not biduality."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic normalized tensor/pullback composition identity identifies the factor comparisons with the prescribed outer comparison."
+   },
+   {
+    "node": "def-sf-operation-stages",
+    "why": "Names the supplied operation-stage adjunctions, exchange-stage composites and normalization data used to read the equation in S coordinates."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "The coefficient-domain definition identifies the item uniform reduction predicate with the second-input hypothesis of the factor lemmas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-categorical-projection-mate-square",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-coef-integral-residue-tor",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-sf-operation-stages",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NW-812a1b4ce",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-812a1b4ce (reviewer sub-agent of L); spot-checked: I read the item, its four steps and every cited statement in full. The delivery has no new nodes and leaves the item's statement unchanged. The route is the blueprint's base-change paragraph (prop-sf-pf-coherence.proof.md lines 18-41). Step 1: lem-sf-pf-open-base-change-square gives, at R, all domains, the theta-monoidality equation and the open equation, with arbitrary g and no Tor condition on K; GL is ctf by preserve-constructible(1) and residue-tor. Step 2: the mate lemma, checked against ProjectionMapMate.lean:63-87; ComparisonCompatible is exactly the open lemma's theta equation, beta is Ex_{*,p} and P is pi per def-exchange-projection. Step 3: the pasting lemma's two hypotheses are literally the equations of steps 1 and 2. Step 4: I re-derived t=c_{f',g}^{-1}c_{a,f}=kappa from compositor associativity; the step is genuinely elementary. Edge cases checked: j=id, g=id, K=0, L=0, X empty. No duplicate or cycle. Batch-5 flag: lem-pod-unrestricted-normalized-reconstruction (unit sk-def-weil) is a general complete/normalized coefficient equivalence, not a step of Poincare duality, and it is already in the closure of the item's unchanged stmt_deps. The six chapter nodes newly reached are generic K-flat, tensor and Leray infrastructure, so no step should cite an assumption leaf instead. The tool_uses are accepted. No changes."
+ }
+}

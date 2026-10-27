@@ -1,0 +1,428 @@
+{
+ "id": "lem-sfb-affine-scheme-size",
+ "kind": "statement",
+ "title": "Size of an affine scheme",
+ "statement": "Let $Y$ be an affine scheme [def-pc-scheme], and let $A=\\Gamma(Y,\\mathcal O_Y)$ be its ring of global sections [def-weil-affine-spectrum]. Using the cardinal size [def-sfb-scheme-cardinal-size], for a scheme $Z$ put $s(Z)=\\max\\{\\aleph_0,|\\mathcal B(Z)|,\\sup_{V\\in\\mathcal B(Z)}|\\Gamma(V,\\mathcal O_Z)|\\}$, where $\\mathcal B(Z)$ is the set of affine open subschemes and $\\Gamma(V,\\mathcal O_Z)$ is the ring of sections of the structure sheaf on $V$. Then $s(Y)=\\max\\{\\aleph_0,|A|\\}$. The zero ring and the empty affine scheme are allowed.",
+ "source": {
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 000P, lemma-bound-affine; scheme size defined in section-categories-schemes preceding Tag 000I."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sfb-scheme-cardinal-size"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\kappa=\\max\\{\\aleph_0,|A|\\}$. Apply [lem-weil-pbc-affine-open-spec-points] to the top affine open of $Y$ to identify $Y$ with $\\operatorname{Spec}A$. A scheme isomorphism gives a bijection on affine opens and, by the inverse maps of structure sheaves, ring isomorphisms on their sections, so it preserves $s$. Since $Y$ itself is an affine open, the definition [def-sfb-scheme-cardinal-size] gives $s(Y)\\geq\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-sfb-scheme-cardinal-size"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000P, lemma-bound-affine, proof; section-categories-schemes defines size."
+   }
+  },
+  {
+   "text": "For an affine open $U\\subseteq\\operatorname{Spec}A$, [lem-weil-pbc-spec-localization-away-basic-open](i) gives the covering by those $D(f)$ contained in $U$. The affine scheme $U$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]; by [def-weil-pbc-quasi-compact-scheme] this cover has a finite subcover, say $U=D(f_1)\\cup\\cdots\\cup D(f_n)$. The empty list is allowed when $U=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000P, lemma-bound-affine, proof; section-categories-schemes defines size."
+   }
+  },
+  {
+   "text": "Assign to each finite list $(f_1,\\ldots,f_n)$ its union of principal opens. Step 2 says every affine open is among these images. Hence the set of affine opens has cardinal at most $|\\operatorname{List}(A)|\\leq\\kappa$ by [lem-weil-pbc-finite-list-cardinality]. Lists whose union is not affine cause no problem: restrict the domain to lists with affine union to obtain a surjection onto the affine opens.",
+   "uses": [
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000P, lemma-bound-affine, proof; section-categories-schemes defines size."
+   }
+  },
+  {
+   "text": "Let $f_1,\\ldots,f_n\\in A$ with $n\\geq0$. By [def-weil-ring-localization-away] every element of $A_{f_i}$ is a fraction $a/f_i^{m}$, and $a/f_i^{m}=af_i^{k}/f_i^{m+k}$ for every $k\\geq0$; taking the largest exponent and multiplying the numerators, every element of $\\prod_{i=1}^nA_{f_i}$ is $(a_1/f_1^{m},\\ldots,a_n/f_n^{m})$ with one common exponent $m\\geq0$. Hence the map sending a list $(a_1,\\ldots,a_n,b_1,\\ldots,b_m)$ of elements of $A$ of length $n+m\\geq n$ to $(a_1/f_1^{m},\\ldots,a_n/f_n^{m})$ is a surjection from a subset of $\\operatorname{List}(A)$ onto $\\prod_{i=1}^nA_{f_i}$, and [lem-weil-pbc-finite-list-cardinality] gives $|\\prod_{i=1}^nA_{f_i}|\\leq|\\operatorname{List}(A)|\\leq\\kappa$. For $n=1$ this is the bound $|A_f|\\leq\\kappa$ omitted in the source; for $n=0$ the product is a singleton. No hypothesis on $A$ or on the $f_i$ (nilpotents, $f_i=0$) is used.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000P, lemma-bound-affine, proof; section-categories-schemes defines size."
+   }
+  },
+  {
+   "text": "For the cover in step 2, [lem-weil-pbc-affine-open-section-vanishing-prime](b) identifies $\\Gamma(D(f_i),\\mathcal O)$ with $A_{f_i}$. The structure sheaf is a sheaf of rings by [def-weil-locally-ringed-space-morphism]. Its additive sheaf satisfies the uniqueness axiom for the open cover, as in [def-sc-zariski-site]: two sections with the same restrictions agree. Thus restriction is injective into $\\prod_{i=1}^n A_{f_i}$. Step 4 bounds this product by $\\kappa$, so $|\\Gamma(U,\\mathcal O)|\\leq\\kappa$. For $n=0$, the sheaf axiom on the empty cover makes $\\Gamma(\\varnothing,\\mathcal O)$ a singleton, agreeing with the empty product.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-locally-ringed-space-morphism",
+    "def-sc-zariski-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000P, lemma-bound-affine, proof; section-categories-schemes defines size."
+   }
+  },
+  {
+   "text": "Steps 3 and 5 bound both cardinal contributions in [def-sfb-scheme-cardinal-size] by $\\kappa$; also $\\aleph_0\\leq\\kappa$. Therefore $s(Y)\\leq\\kappa$, and step 1 gives equality. If $A$ is the zero ring, its spectrum is empty, its only open is empty and the sections on it form the singleton zero ring; both sides are $\\aleph_0$.",
+   "uses": [
+    "def-sfb-scheme-cardinal-size"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000P, lemma-bound-affine, proof; section-categories-schemes defines size."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-sfb-scheme-cardinal-size",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-finite-list-cardinality",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-locally-ringed-space-morphism",
+  "def-sc-zariski-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 000P, lemma-bound-affine, proof; section-categories-schemes defines size."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(cardinal|mk_le|small).*(affineOpens|IsAffineOpen)|(affineOpens|IsAffineOpen).*(cardinal|mk_le|small)",
+   "results": {
+    "t": "2026-10-23T11:45:47Z",
+    "tool": "grep",
+    "query": "(cardinal|mk_le|small).*(affineOpens|IsAffineOpen)|(affineOpens|IsAffineOpen).*(cardinal|mk_le|small)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cardinality size of an affine scheme Spec R counting affine open subsets and their rings of sections equals max aleph0 cardinal R",
+   "results": {
+    "t": "2026-10-23T11:45:47Z",
+    "tool": "leansearch",
+    "query": "The cardinality size of an affine scheme Spec R counting affine open subsets and their rings of sections equals max aleph0 cardinal R",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineScheme",
+     "AlgebraicGeometry.Scheme.AffineCover.mk.sizeOf_spec",
+     "AlgebraicGeometry.IsAffineOpen.isoSpec",
+     "AlgebraicGeometry.isAffine_Spec",
+     "AlgebraicGeometry.Scheme.instInhabitedOpenCover",
+     "AlgebraicGeometry.IsAffineOpen.Spec_basicOpen",
+     "AlgebraicGeometry.Scheme.affineBasisCoverOfAffine",
+     "AlgebraicGeometry.Scheme.affineCover"
+    ],
+    "digest": "0ebfcec1770ba4ed"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"affineOpens\", \"Cardinal\"",
+   "results": {
+    "t": "2026-10-23T11:45:48Z",
+    "tool": "loogle",
+    "query": "\"affineOpens\", \"Cardinal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The size of an affine scheme is max aleph0 cardinality of its coordinate ring counting affine opens and their sections",
+   "results": {
+    "t": "2026-10-23T11:45:49Z",
+    "tool": "leanfinder",
+    "query": "The size of an affine scheme is max aleph0 cardinality of its coordinate ring counting affine opens and their sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineScheme",
+     "AlgebraicGeometry.isAffine_affineScheme",
+     "AlgebraicGeometry.isAffine_Spec",
+     "AlgebraicGeometry.IsAffine",
+     "AlgebraicGeometry.AffineScheme.of",
+     "AlgebraicGeometry.AffineScheme.mk",
+     "AlgebraicGeometry.AffineScheme.mk_obj",
+     "AlgebraicGeometry.isAffineOpen_top"
+    ],
+    "digest": "8d4bc2c2299a79fd"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cardinality of all affine open subsets and regular functions of Spec R is bounded by max aleph0 cardinal R",
+   "results": {
+    "t": "2026-10-23T11:45:53Z",
+    "tool": "leanfinder",
+    "query": "Cardinality of all affine open subsets and regular functions of Spec R is bounded by max aleph0 cardinal R",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsAffineOpen.Spec_basicOpen",
+     "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx",
+     "AlgebraicGeometry.Scheme.affineBasisCoverRing",
+     "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+     "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀",
+     "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier"
+    ],
+    "digest": "1d134937c61df2b3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "grep",
+   "query": "(cardinal|mk_le|small).*(affineOpens|IsAffineOpen)|(affineOpens|IsAffineOpen).*(cardinal|mk_le|small)",
+   "results": {
+    "t": "2026-10-23T13:10:37Z",
+    "tool": "grep",
+    "query": "(cardinal|mk_le|small).*(affineOpens|IsAffineOpen)|(affineOpens|IsAffineOpen).*(cardinal|mk_le|small)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine constructions and structural SizeOf hits do not state the cardinal bound on affine opens and their section rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The size of Spec R counting affine open subsets and sections is max aleph0 cardinality R",
+   "results": {
+    "t": "2026-10-23T13:10:37Z",
+    "tool": "leansearch",
+    "query": "The size of Spec R counting affine open subsets and sections is max aleph0 cardinality R",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.affineBasisCoverOfAffine",
+     "MaximalSpectrum.mk.sizeOf_spec",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.isAffine_Spec",
+     "AlgebraicGeometry.basicOpen_eq_of_affine'",
+     "AlgebraicGeometry.Spec",
+     "AlgebraicGeometry.basicOpen_eq_of_affine",
+     "AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec"
+    ],
+    "digest": "3cab55ad05c66afa"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine constructions and structural SizeOf hits do not state the cardinal bound on affine opens and their section rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"affineOpens\", \"Cardinal\"",
+   "results": {
+    "t": "2026-10-23T13:10:37Z",
+    "tool": "loogle",
+    "query": "\"affineOpens\", \"Cardinal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine constructions and structural SizeOf hits do not state the cardinal bound on affine opens and their section rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme the cardinality of affine open subsets and their rings of regular functions is bounded by max aleph0 cardinality of the coordinate ring",
+   "results": {
+    "t": "2026-10-23T13:10:38Z",
+    "tool": "leanfinder",
+    "query": "For an affine scheme the cardinality of affine open subsets and their rings of regular functions is bounded by max aleph0 cardinality of the coordinate ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isAffine_affineScheme",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine",
+     "AlgebraicGeometry.IsAffine",
+     "AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset",
+     "AlgebraicGeometry.AffineScheme",
+     "AlgebraicGeometry.isAffineOpen_top",
+     "AlgebraicGeometry.IsAffineOpen"
+    ],
+    "digest": "09950832dfa40219"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine constructions and structural SizeOf hits do not state the cardinal bound on affine opens and their section rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cardinality bound on all affine opens of Spec R and the coordinate rings of those opens",
+   "results": {
+    "t": "2026-10-23T13:11:30Z",
+    "tool": "leanfinder",
+    "query": "Cardinality bound on all affine opens of Spec R and the coordinate rings of those opens",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isAffine_Spec",
+     "AlgebraicGeometry.Scheme.affineBasisCoverOfAffine",
+     "AlgebraicGeometry.IsAffineOpen.Spec_basicOpen",
+     "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx",
+     "AlgebraicGeometry.Scheme.affineBasisCoverRing",
+     "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop",
+     "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f",
+     "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier"
+    ],
+    "digest": "59ea3304c1eaf06e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine constructions and structural SizeOf hits do not state the cardinal bound on affine opens and their section rings."
+  },
+  {
+   "tool": "grep",
+   "query": "cardinal.*(Spec|affine)|mk_.*affine|affine.*mk_",
+   "results": {
+    "t": "2026-10-23T13:11:30Z",
+    "tool": "grep",
+    "query": "cardinal.*(Spec|affine)|mk_.*affine|affine.*mk_",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+     "Mathlib/AlgebraicGeometry/AffineSpace.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean"
+    ],
+    "digest": "2ec2a587da61328a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine constructions and structural SizeOf hits do not state the cardinal bound on affine opens and their section rings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qc-lft-scheme-size-bound",
+  "date": "2026-10-23",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: 04U0, the scheme size estimates ensuring that the coproducts of the refined bases and of their affine atlases belong to the original big site. Split prerequisite: the bound on each quasi-compact locally finite type affine atlas summand. Supporting input for 04T7: its second reduction, using 000P to replace scheme size by coordinate-ring cardinality.",
+   "via": [
+    "lem-sfb-qc-lft-scheme-size-bound",
+    "lem-sfb-bounded-affine-lft-coproduct",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-scheme-size",
+  "worker": "stage1",
+  "summary": "Q59: six-step proof of Tag 000P using existing Mathlib leaves for affine charts, principal-open bases, quasi-compactness, principal-open sections, and finite-list counting (reviewer FIX: the fraction and finite-product bounds go through finite lists, replacing the dropped-machinery node lem-coef-infinite-cardinal-square-power). Expanded the omitted fraction bound and included empty covers. No new nodes; mathematical statement unchanged.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), ordinary direct-image finiteness. The inherited alteration/moduli/atlas prerequisite chain uses Stacks 04T7 and then 000P. These six steps discharge that affine-size input; they do not replace the unit route. The ancestor command returns None because the inherited created.item chain terminates at a Lean module name, as recorded on lem-sfb-admissible-direct-image."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-4bfd8588d",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-4bfd8588d (reviewer sub-agent of L); spot-checked: Read Stacks sets.tex Tag 000P (lemma-bound-affine) and section-categories-schemes. The item's s(Z) is the Stacks size and the conclusion is the same. The only statement change is a citation of the existing def-sfb-scheme-cardinal-size, which defines the same s, so the statement is neither weakened nor strengthened. The item is still unsplit on live and side-live, so the delivery is not superseded, and no re-split note exists for it. Every step checked: step 1 identifies Y with Spec A through affine-open-spec-points (open immersion onto Y) and gets the lower bound from the top open. Step 2 uses the D(f) basis (i), qcqs and the quasi-compact definition, with no assumption that intersections of affine opens are affine. Step 3 is a surjection from lists with affine union, using mk_list_le_max. Step 5 uses section-vanishing-prime (b) with X=Spec A, U=top, R=A, plus sheaf uniqueness, and handles n=0. Step 6 is the assembly. Small cases tested: zero ring, F_q, an infinite field, Z, k[e]/e^2, f=0. Route-pivot point: step 4 cited lem-coef-infinite-cardinal-square-power, whose only stmt_dep is the dropped def-coef-presentable-infinity-category; the report gives no justification beyond reuse and nothing here needs it. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-affine-scheme-size.json: step 4 now bounds prod_{i<=n} A_{f_i} directly through a common exponent and a surjection from lists of length >= n, using only def-weil-ring-localization-away and lem-weil-pbc-finite-list-cardinality; this includes the |A_f| bound the source omits. Step 5 now refers to that bound, and the dropped node is removed from uses and proof_deps (proof_deps equals the union of step uses). No new nodes, no cycle, no SGA, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSchemeCardinalSize",
+  "declaration": "AlgebraicGeometry.Scheme.cardinalSize_of_isAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSchemeCardinalSize.lean",
+  "statement": "theorem cardinalSize_of_isAffine (Y : Scheme.{u}) [IsAffine Y] : Y.cardinalSize = max Cardinal.aleph0 (Cardinal.mk ↥Γ(Y, ⊤))",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5c874309",
+  "group": "Q68",
+  "result": "pass",
+  "note": "cardinalSize_of_isAffine (Y : Scheme.{u}) [IsAffine Y] : Y.cardinalSize = max ℵ₀ #Γ(Y,⊤) renders node and Stacks sets.tex lemma-bound-affine (l.503-507) exactly: uses landed def-sfb-scheme-cardinal-size (max ℵ₀ (max #affineOpens (⨆ #Γ(X,U)))), actual global sections, equality, no extra hypotheses, single universe u, empty scheme/zero ring covered. lean.statement verbatim; node differs from side-live only in lean; not superseded; docstrings carry source place, blueprint id and the 6-step proof; only sorry, no defs; proof-plan plain imports advisory. No file changed, no compile run per instructions."
+ }
+}

@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-deformation-marked-lift-torsor",
+ "kind": "statement",
+ "title": "Functorial tangent action on marked lifts",
+ "statement": "Let $k$ be a field [def-weil-field] and use $\\mathrm{Art}_k=\\mathcal C_{k,k}$ and the notions of predeformation category and (RS) from [def-sfb-artin-deformation-test-category]. Let $\\mathcal F$ be a groupoid-valued pseudofunctor on $\\mathrm{Art}_k$ with $\\mathcal F(k)$ equivalent to the groupoid with one object and one arrow. Assume that $\\mathcal F$ satisfies (RS): for $A_1\\to A\\leftarrow A_2$ with $A_2\\to A$ surjective, the canonical functor to the groupoid of pairs equipped with an isomorphism over $A$ is an equivalence\n$$\\mathcal F(A_1\\times_A A_2)\\simeq\\mathcal F(A_1)\\times_{\\mathcal F(A)}\\mathcal F(A_2).$$\nPut $T\\mathcal F=\\pi_0\\mathcal F(k[\\epsilon]/(\\epsilon^2))$ with its canonical deformation $k$-vector structure [lem-sfb-artin-rs-tangent-tensor]. Let $A'\\twoheadrightarrow A$ be a surjection in $\\mathrm{Art}_k$ with kernel $I$ annihilated by $\\mathfrak m_{A'}$, and let $x\\in\\mathcal F(A)$. Define $\\operatorname{Lift}_{\\mathcal F}(x,A')$ as the set of isomorphism classes of pairs $(x',\\alpha)$ with $x'\\in\\mathcal F(A')$ and $\\alpha:x'|_A\\xrightarrow{\\sim}x$; an isomorphism $u:(x',\\alpha)\\to(x'',\\alpha'')$ must satisfy $\\alpha''\\circ u|_A=\\alpha$. If this set is nonempty, it has a canonical action of the additive group $T\\mathcal F\\otimes_k I$ [def-weil-pbc-module-tensor-product] which is free and transitive: for any $z,w$ in it there is a unique $t$ with $w=z+t$. If $H:\\mathcal F\\to\\mathcal G$ is a morphism commuting coherently with base change and $\\mathcal G$ satisfies the same hypotheses, the induced map on marked lift classes obeys\n$$H(z+t)=H(z)+(dH\\otimes1_I)(t),$$\nwhere $dH:T\\mathcal F\\to T\\mathcal G$ is the map on isomorphism classes over the dual numbers.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06JI (lemma-free-transitive-action) and Tag 06JJ (remark-free-transitive-action-functorial); marked lift classes are those of definition-lifts."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-artin-rs-tangent-tensor",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $L=L_{\\mathcal F}(x,A')$ and $x_0=x|_k$. The marking definition agrees with $L_{\\mathcal F}$ in [lem-sfb-rs-marked-lift-pullback-bijections]. Put $k[I]=k\\oplus I$ with the multiplication of [def-sfb-artin-deformation-test-category]. Since $I\\subset\\mathfrak m_{A'}$, we have $I^2=0$. Every $k$-subspace of $I$ is an $A'$-ideal, since multiplication by $a$ acts on $I$ as its residue $\\bar a$. Thus $I$ is finite-dimensional: otherwise the spans of successive tails of a countably infinite independent sequence give a strictly descending chain of ideals of $A'$. All fibre rings below belong to $\\mathrm{Art}_k$: projection onto $A'$ has square-zero kernel a finite direct sum of $I$, with residue field $k$. For a descending ideal chain, its images in $A'$ and its intersections with this kernel stabilize, and then the chain itself stabilizes by subtraction of representatives. The nonunits are exactly the elements whose common residue is zero. As $\\mathcal F(k)$ is contractible, forgetting the unique marking to $x_0$ identifies $L_{\\mathcal F}(x_0,k[I])$ canonically with $\\pi_0\\mathcal F(k[I])$. Apply [lem-sfb-artin-rs-tangent-tensor] with $R=k$ and $V=I$ to identify this set with $M=T\\mathcal F\\otimes_k I$.",
+   "uses": [
+    "lem-sfb-rs-marked-lift-pullback-bijections",
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-rs-tangent-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06JI, opening; Tag 06JG (remark-tangent-space-lifting)."
+   }
+  },
+  {
+   "text": "Let $B=A'\\times_A A'$ and $C=A'\\times_k k[I]$. Define $g:B\\to k[I]$ by $g(a,b)=(\\bar a,b-a)$. To check multiplicativity, write $b=a+i$ and $d=c+j$; then $bd-ac=aj+ci+ij=\\bar a j+\\bar c i$, since $ij=0$. Hence\n$$s:B\\xrightarrow{\\sim}C,\\qquad (a,b)\\mapsto(a,(\\bar a,b-a))$$\nis a local $k$-algebra isomorphism, with inverse $(a,(\\bar a,i))\\mapsto(a,a+i)$. Both $s$ and its inverse commute with first projection to $A'$. For a representative $(z,\\alpha)$ of a class in $L$, apply the fixed-lift bijection of [lem-sfb-rs-marked-lift-pullback-bijections] to $A'\\to A\\leftarrow A'$ with fixed lift $(z,\\alpha)$, obtaining $L_{\\mathcal F}(z,B)\\cong L$. Apply it also to $A'\\to k\\leftarrow k[I]$ with fixed lift $z\\to x_0$, obtaining $L_{\\mathcal F}(z,C)\\cong L_{\\mathcal F}(x_0,k[I])$. Transport by $s$ identifies the middle marked lift sets. Their composite is a bijection $\\delta_z:L\\xrightarrow{\\sim}M$. Concretely $\\delta_z(w)$ is transport along $g$ of the (RS) gluing of $z,w$ with their markings to $x$. These comparisons are independent of representatives by the naturality in marked isomorphisms in the cited node.",
+   "uses": [
+    "lem-sfb-rs-marked-lift-pullback-bijections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06JI, equations (one), (two), (three) and the first-factor-preserving bijection."
+   }
+  },
+  {
+   "text": "For $z,w,v\\in L$, glue them over $x$ to an object over $E=A'\\times_A A'\\times_A A'$ using the first bijection of [lem-sfb-rs-marked-lift-pullback-bijections] twice. The projection $A'\\times_A A'\\to A$ is surjective, so both applications satisfy its hypotheses. Projection to a pair recovers the marked gluing used to define $\\delta$ by naturality. There are ring maps\n$$h:E\\to k[I\\oplus I],\\quad(a,b,c)\\mapsto(\\bar a,b-a,c-b),\\qquad \\sigma:k[I\\oplus I]\\to k[I],\\quad(r,i,j)\\mapsto(r,i+j).$$\nHere $k[I\\oplus I]=k[I]\\times_k k[I]$. Its two projections composed with $h$ are $g_{12}$ and $g_{23}$, and $\\sigma h=g_{13}$ because $(b-a)+(c-b)=c-a$. Consequently the transported class over $k[I\\oplus I]$ has components $\\delta_z(w),\\delta_w(v)$; [lem-sfb-artin-rs-tangent-tensor], applied to the two coordinate projections and to the linear sum $I\\oplus I\\to I$, sends it to their sum. Thus\n$$\\delta_z(v)=\\delta_z(w)+\\delta_w(v).$$",
+   "uses": [
+    "lem-sfb-rs-marked-lift-pullback-bijections",
+    "lem-sfb-artin-rs-tangent-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06JI, final triple-fibre-product diagram."
+   }
+  },
+  {
+   "text": "The cocycle identity with $z=w=v$ gives $\\delta_z(z)=0$ by cancellation in $M$. Define $z+t$ to be the unique $w$ with $\\delta_z(w)=t$, using the bijectivity from step 2. Then $z+0=z$. If $w=z+t$ and $v=w+u$, the cocycle identity gives $\\delta_z(v)=t+u$, hence $(z+t)+u=z+(t+u)$. This is an additive group action. For fixed $z,w$, its unique translation parameter is $\\delta_z(w)$, so the action is free and transitive. No initial element of $L$ has been chosen for its definition: the same rule defines it simultaneously for every $z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06JI, definition of the action and its final sentence."
+   }
+  },
+  {
+   "text": "Let $H:\\mathcal F\\to\\mathcal G$ be as in the statement. Naturality in the pseudofunctor of [lem-sfb-rs-marked-lift-pullback-bijections] makes the marked gluing and fixed-lift comparisons commute with $H$, and coherent commutation with transport makes the maps induced by $s,g$ commute on isomorphism classes. The induced map on the square-zero classes is $dH\\otimes1_I$: to check this, choose a basis of the finite-dimensional space $I$ and use its coordinate maps $k[I]\\to k[\\epsilon]$. By [lem-sfb-artin-rs-tangent-tensor] these detect the tensor coordinates, and in each coordinate the map is exactly $dH$ by definition. Moreover $dH$ is $k$-linear: scalar maps $(a,v)\\mapsto(a,cv)$ and the sum map $k[k\\oplus k]\\to k[k]$ define the canonical scalar and addition operations; $H$ commutes with these maps and with both projections. Thus\n$$\\delta^{\\mathcal G}_{H(z)}(H(w))=(dH\\otimes1_I)(\\delta^{\\mathcal F}_z(w)).$$\nSet $w=z+t$ and use the unique-parameter rule of step 4 in $\\mathcal G$ to obtain $H(z+t)=H(z)+(dH\\otimes1_I)(t)$.",
+   "uses": [
+    "lem-sfb-rs-marked-lift-pullback-bijections",
+    "lem-sfb-artin-rs-tangent-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06JJ (remark-free-transitive-action-functorial); Tag 06ID (lemma-morphism-tangent-spaces)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rs-marked-lift-pullback-bijections",
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-artin-rs-tangent-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tags 06JI and 06JJ; marked pullback comparison isolated as Tag 06JH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a deformation category satisfying Rim Schlessinger the isomorphism classes of marked lifts over a small extension form a tangent space torsor functorially",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.CotangentSpace.map P.toInfinitesimal)\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the linear map from the cotangent space of $ P $ to the cotangent space of its infinitesimal extension $ P/I^2 \"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    {B : Type w} →\\n      [inst : CommSemiring R] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : CommRing B] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra R B] →\\n                (I : Ideal B) →\\n                  [inst_5 : Algebra A B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.Extension.Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.Cotangent.map P.toInfinitesimal)\", \"doc\": \"The cotangent map induced by the canonical homomorphism from an algebra extension $ P $ to its infinitesimal extension $ P/I^2 $ is bijective, where $ I $ denotes the kernel ideal of the extension.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (a : P.toExtension.Cotangent)\\n  (a_1 : σ), P.cotangentEquiv a a_1 = P.cotangentComplexAux a a_1\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor pushouts, ordinary cotangent maps, manifold tangent spaces or abstract torsor structures; none states the ring-pullback module patching or marked deformation-lift torsor theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\", \"Torsor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor pushouts, ordinary cotangent maps, manifold tangent spaces or abstract torsor structures; none states the ring-pullback module patching or marked deformation-lift torsor theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|marked.*lift|Lift.*torsor|torsor.*deformation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor pushouts, ordinary cotangent maps, manifold tangent spaces or abstract torsor structures; none states the ring-pullback module patching or marked deformation-lift torsor theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent space of a deformation groupoid acts freely transitively on marked lifts over a small Artinian extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type u} [NormedAddCommGroup E] [NormedSpace 𝕜 E] {H : Type*}\\n  [TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) {M : Type*} [TopologicalSpace M] [ChartedSpace H M] (_x : M) :\\n  Type u\", \"doc\": \"The tangent space at a point $ x $ on a charted space $ M $ modeled on a normed vector space $ E $ via a model with corners $ I $ is identified with the normed vector space $ E $ itself. This definiti\"}\n  {\"name\": \"AddTorsor\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"(G : outParam (Type u_1)) → Type u_2 → [AddGroup G] → Type (max u_1 u_2)\", \"doc\": \"A structure on a type $\\\\alpha$ making it a torsor for an additive group $G$, i.e., a free and transitive action of $G$ on $\\\\alpha$\"}\n  {\"name\": \"instAddCommGroupTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The tangent space at a point $x$ on a manifold $M$ modeled on a normed vector space $E$ via a model with corners $I$ inherits the additive commutative group structure from the normed vector space $E$.\"}\n  {\"name\": \"instIsTopologicalAddGroupTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"∀ {𝕜 : Type u_2} [inst : NontriviallyNormedField 𝕜] {E : Type u_1} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] (_x : M), IsTopological\", \"doc\": \"The tangent space at a point on a manifold modeled on a normed vector space $E$ is equipped with the topology inherited from $E$, making the additive group operations (addition and negation) continuou\"}\n  {\"name\": \"instModuleTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, a model with corners $I$ on $E$, and a charted space $M$ modeled on $I$, this instance asserts that the tan\"}\n  {\"name\": \"instIsTopologicalAddTorsor\", \"module\": \"Mathlib.Topology.Algebra.Group.AddTorsor\", \"type\": \": IsTopologicalAddTorsor G\", \"doc\": \"Every topological additive group $G$ is a topological additive torsor for itself, meaning the free and transitive additive action of $G$ on itself is continuous with respect to its topology.\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.liftPropAt_chart\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"[HasGroupoid M G] (hG : G.LocalInvariantProp G Q) (hQ : ∀ y, Q id univ y) : LiftPropAt Q (chartAt (H := H) x) x\", \"doc\": \"If a property $ Q $ is invariant under the structure groupoid $ G $ and holds for the identity map on the universal set, then for any point $ x $ in the charted space $ M $, the property $ Q $ holds w\"}\n  {\"name\": \"mulInvariantVectorField\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"(v : GroupLieAlgebra I G) (g : G) : TangentSpace I g\", \"doc\": \"For a Lie group $G$ modeled on a normed vector space $E$ via a model with corners $I$, the left-invariant vector field associated to an element $v$ of the Lie algebra $\\\\mathfrak{g} = T_eG$ is defined \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor pushouts, ordinary cotangent maps, manifold tangent spaces or abstract torsor structures; none states the ring-pullback module patching or marked deformation-lift torsor theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of deformation functors with Schlessinger gluing is equivariant for tangent vector space actions on lifts across square zero Artinian extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_comp_apply\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For any algebra extension homomorphisms $ f : P \\\\to P' $ and $ g : P' \\\\to P'' $, the cotangent space map induced by the composition $ g \\\\circ f $ equals the composition of the cotangent space maps ind\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hb\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f), t.app self.i = CategoryTheory\", \"doc\": \"For any category $\\\\mathcal{I}$, diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, natural transformation $t:D\\\\Rightarrow\\\\text{const}_S$, and morphism $f:X\\\\to S$, the composition of the morphism $\\\\text{\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.ha\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f), t.app self.i = CategoryTheory\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation $t:D\\\\Rightarrow\\\\Delta_S$ to the constant diagram at $S$, and a morphism $f:X\\\\to S$, for any \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_eq\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {R' : Type u'}\\n  {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S'] {P' : Algebra.Extension R' S'}\\n  [inst_6 : Algebra R R'] [inst_7 : Algebra S S'] [inst_8 : Algebra R S']\", \"doc\": \"For algebra extension homomorphisms $ f, g : P \\\\to P' $, the induced linear maps on the first cotangent cohomology modules $ H^1(P) \\\\to H^1(P') $ are equal whenever $ f = g $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor pushouts, ordinary cotangent maps, manifold tangent spaces or abstract torsor structures; none states the ring-pullback module patching or marked deformation-lift torsor theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\", \"Torsor\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: square-zero ring-map lifts and cotangent modules do not state the tangent torsor of marked lifts for an arbitrary (RS) deformation groupoid."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a groupoid valued deformation functor satisfying Rim Schlessinger, marked lifts over a small extension form a functorial tangent space torsor",
+   "results": "Hits: Algebra.Extension.homInfinitesimal, derivationToSquareZeroEquivLift, Algebra.Extension.toInfinitesimal, derivationToSquareZeroOfLift, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, Algebra.Extension.CotangentSpace.map_cotangentComplex, Algebra.Extension.infinitesimal, Algebra.Extension.cotangentComplex",
+   "date": "2026-10-23",
+   "verdict": "no match: square-zero ring-map lifts and cotangent modules do not state the tangent torsor of marked lifts for an arbitrary (RS) deformation groupoid."
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|marked.*lift|deformation.*torsor",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: square-zero ring-map lifts and cotangent modules do not state the tangent torsor of marked lifts for an arbitrary (RS) deformation groupoid."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked deformations over an Artinian small extension are a torsor under the tangent space tensor the kernel",
+   "results": "Hits: Algebra.Extension.H1Cotangent, Algebra.Extension.cotangentEquiv, Algebra.Extension.ker_infinitesimal, Algebra.Extension.contangentEquiv_tmul, Algebra.Extension.Cotangent, AlgebraicGeometry.FormallyUnramified.recOn, Algebra.Generators.H1Cotangent.δ, KaehlerDifferential.kerToTensor",
+   "date": "2026-10-23",
+   "verdict": "no match: square-zero ring-map lifts and cotangent modules do not state the tangent torsor of marked lifts for an arbitrary (RS) deformation groupoid."
+  },
+  {
+   "tool": "grep",
+   "query": "def derivationToSquareZeroEquivLift",
+   "results": "Hits: Mathlib/RingTheory/Derivation/ToSquareZero.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: square-zero ring-map lifts and cotangent modules do not state the tangent torsor of marked lifts for an arbitrary (RS) deformation groupoid."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ring-deformation-smoothness-test",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. General marked smoothness criterion, used to combine the two independent completion comparisons rather than restating the isolated-singularity conclusion. Supporting input: the tangent-action argument in Tag 0DYP (lemma-easy-check-smooth), not its smoothness conclusion.",
+   "via": [
+    "lem-sfb-ring-deformation-smoothness-test",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-deformation-marked-lift-torsor",
+  "worker": "stage1",
+  "summary": "Followed Tags 06JI–06JJ with markings retained throughout; isolated only the general (RS) marked-lift pullback bijections of Tag 06JH, wrote out the ring difference isomorphism, cocycle computation, and functorial tangent-coordinate calculation. No statement change or Lean attachment.",
+  "blueprint": "Supports the tangent-action argument in Tag 0DYP used by lem-sfb-ring-deformation-smoothness-test, on the alteration/marked-curve deformation chain in the current direct-images blueprint proof (3). No change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-7a664297c",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-7a664297c (reviewer sub-agent of L); spot-checked: I read Stacks formal-defos.tex lines 5245-5465: definition-lifts, 06JG, 06JH, 06JI and 06JJ (tags checked in tags/tags). The item statement is verbatim unchanged from the base copy (unsplit, created by Q49) and matches 06JI/06JJ hypothesis by hypothesis: F(k) trivial plus (RS), I killed by m_{A'}, the marking convention a_2=a_1∘b, and functoriality via dH⊗1_I. Step 1: dim I < ∞ by DCC because subspaces of I are ideals; the fibre rings B, C, E and k[I⊕I] are in Art_k; over k the marking is unique, so the marked lift classes are π_0F(k[I]), identified with TF⊗I by lem-sfb-artin-rs-tangent-tensor. Step 2: I recomputed that g(a,b)=(ā,b−a) is multiplicative because ij=0 (I²⊂m_{A'}I=0), that s is an isomorphism commuting with pr_1, and that pr_2∘s=g; the fixed-lift bijection of the new node is applied to A'→A←A' and to A'→k←k[I], with surjectivity checked in both. Step 3: I checked pr_1h=g_12, pr_2h=g_23 (using ā=b̄) and σh=g_13; additivity comes from the tensor lemma's naturality (1⊗λ) and from f↦f⊗id being linear. Step 4: elementary torsor bookkeeping. Step 5: dH⊗1 checked in coordinates for a basis of I; linearity of dH follows from the tensor lemma's naturality for the sum and scalar maps; equivariance follows from uniqueness of the translation parameter. New node lem-sfb-rs-marked-lift-pullback-bijections is exactly Stacks 06JH, and I verified it directly from (RS): essential surjectivity glues, full faithfulness gives the marked isomorphism, and either map may be the surjective one by symmetry. It is statement-only, self-contained, has three kinds of recorded search, and is strictly smaller than the item (no tangent space or action). It is used in steps 1, 2, 3 and 5. It is not a duplicate: rg -L over dag/nodes for 06JH-06JJ, 06JG and marked lifts finds only the item, the new node and the citers. Route: everything stays inside unit sk-thm-sf-ctf-stability or uses definitions, so no tool_uses are needed; no SGA is cited. Edge cases checked: I=0, A=k, discrete groupoids, nontrivial automorphisms, TF infinite-dimensional. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DeformationMarkedLiftTorsor",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.deformation_marked_lift_torsor",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.MarkedLift",
+   "AlgebraicGeometry.ArtinDeformation.markedLiftClasses",
+   "AlgebraicGeometry.ArtinDeformation.markedLiftClass",
+   "AlgebraicGeometry.ArtinDeformation.liftKernel",
+   "AlgebraicGeometry.ArtinDeformation.markedDifferenceValue",
+   "AlgebraicGeometry.ArtinDeformation.MarkedLiftTangentData",
+   "AlgebraicGeometry.ArtinDeformation.IsCanonicalMarkedLiftAction",
+   "AlgebraicGeometry.ArtinDeformation.DeformationMorphism",
+   "AlgebraicGeometry.ArtinDeformation.markedLiftMorphismFunctor",
+   "AlgebraicGeometry.ArtinDeformation.markedLiftMorphism",
+   "AlgebraicGeometry.ArtinDeformation.deformationTangentMap",
+   "AlgebraicGeometry.ArtinDeformation.deformation_marked_lift_torsor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DeformationMarkedLiftTorsor.lean",
+  "statement": "theorem deformation_marked_lift_torsor (F : CofibredGroupoids.{u, v, w} k k) (G : CofibredGroupoids.{u, v', w'} k k) (hpreF : IsPredeformation F) (hrsF : IsRimSchlessinger F) (hpreG : IsPredeformation G) (hrsG : IsRimSchlessinger G) {A B : TestCategory k k} (p : B ⟶ A) (hs : Function.Surjective (map p)) (hk : ∀ b ∈ IsLocalRing.maximalIdeal (ring B), ∀ i ∈ RingHom.ker (map p).toRingHom, b * i = 0) : ∃ (_ : MarkedLiftTangentData F) (_ : MarkedLiftTangentData G) (_ : FiniteDimensional k (liftKernel p)) (actF : ∀ x : fibre F A, AddAction (TensorProduct k (tangentSet F) (liftKernel p)) (markedLiftClasses F p x)) (actG : ∀ x : fibre G A, AddAction (TensorProduct k (tangentSet G) (liftKernel p)) (markedLiftClasses G p x)), (∀ x : fibre F A, IsCanonicalMarkedLiftAction F p hs x (actF x)) ∧ (∀ x : fibre G A, IsCanonicalMarkedLiftAction G p hs x (actG x)) ∧ (∀ (x : fibre F A) (z w : markedLiftClasses F p x), ∃! t, (actF x).vadd t z = w) ∧ (∀ (x : fibre G A) (z w : markedLiftClasses G p x), ∃! t, (actG x).vadd t z = w) ∧ (∀ H : DeformationMorphism F G, ∃ dH : tangentSet F →ₗ[k] tangentSet G, (∀ t, dH t = deformationTangentMap H t) ∧ ∀ (x : fibre F A) (z : markedLiftClasses F p x) (t : TensorProduct k (tangentSet F) (liftKernel p)), markedLiftMorphism H p x ((actF x).vadd t z) = (actG ((H.app A).obj x)).vadd (TensorProduct.map dH (LinearMap.id : liftKernel p →ₗ[k] liftKernel p) t) (markedLiftMorphism H p x z))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Marked lifts are actual costructured arrows for the recorded push functor. The theorem supplies normalized tangent tensor data, proves finite-dimensionality of the actual kernel, and supplies the canonical actions simultaneously for F and G and every x, with unique translations and equivariance for every coherent morphism. The canonical-action predicate pins the algebra map pointwise to (residue(a), b-a) and identifies translation with its transport of the RS gluing. Empty lift sets carry the unique empty action; freeness and transitivity are expressed by unique parameters for every pair. The componentwise morphism interface retains independent source and target fibre universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5587408ca",
+  "group": "NL",
+  "result": "pass",
+  "note": "I read the module in full against node lem-sfb-deformation-marked-lift-torsor, Stacks 06JI/06JJ (formal-defos.tex), and the declarations in ArtinDeformationTestCategory/ArtinRSTangentTensor. The hypotheses match: Field k; CofibredGroupoids k k = Art_k; IsPredeformation = contractible F(k); IsRimSchlessinger; p surjective with hk = kernel killed by m_B; no smallness or finiteness assumed. Marked lifts are CostructuredArrow (push F p) x up to isomorphism. IsCanonicalMarkedLiftAction pins g pointwise to (residue a1, a2-a1) and characterises t+[z]=[w] by g_*(gluing of z,w with alpha_z then alpha_w inverse) = equiv t, which is Stacks' a(x',theta). (RS) supplies the gluing, so the predicate is not vacuous. MarkedLiftTangentData repackages the existential conclusion of artinRS_tangent_tensor; its pure/normalization/naturality fields plus (RS) injectivity force the canonical scalars, addition and equiv. Free and transitive is the exists-unique clause; equivariance uses a linear dH equal to deformationTangentMap and TensorProduct.map dH id. The DeformationMorphism unit/comp axioms and the map2 marking direction check out. Edge cases covered: I=0, empty lift sets, infinite-dimensional TF, char 2, independent fibre universes. The lean.statement field is verbatim the signature; the only sorry is the theorem; docstrings carry source, blueprint and the 5 proof steps; no name clash in lean/Sheaf; stmt_deps all used. The second reading was written by the author themself (noted). No changes, so no compile. No findings."
+ }
+}

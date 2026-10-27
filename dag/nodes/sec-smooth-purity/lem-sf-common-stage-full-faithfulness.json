@@ -1,0 +1,242 @@
+{
+ "id": "lem-sf-common-stage-full-faithfulness",
+ "kind": "statement",
+ "title": "Full faithfulness descends through coherent common-stage representatives",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and separated finite-type schemes $Z,X$ over a field $k$ on which $\\ell$ is invertible [def-weil-scheme-morphism-properties, def-weil-l-adic-coefficient-extension]. For each finite subextension $E\\subset\\Omega$ use the raw rationalized categories $\\mathcal C_E(W)=D^b_c(W,E)$ for $W=Z,X$ [def-weil-rationalization-karoubi]. For $E\\subset L$ let $T^W_{L/E}$ be their scalar extension, with normalized identity transitions and the associators $a^W_{M,L,E}$ of [lem-weil-scalar-extension-composition]. Form the literal common-stage pair categories $\\mathcal C_\\Omega(W)$ of [def-weil-algebraically-closed-coefficients]: objects are $(E,P)$, and a morphism from $(E,P)$ to $(E',Q)$ is a class $[L,u]$ with $L\\supset E,E'$ and $u:T^W_{L/E}P\\to T^W_{L/E'}Q$, two representatives being equal exactly when their scalar transports agree at a larger common finite extension.\n\nSuppose given fully faithful functors $\\Phi_E:\\mathcal C_E(Z)\\to\\mathcal C_E(X)$ and natural isomorphisms\n$$\\theta_{L/E}:\\Phi_LT^Z_{L/E}\\xrightarrow{\\sim}T^X_{L/E}\\Phi_E$$\nnormalized to the identity for $L=E$ and satisfying\n$$a^X\\circ T^X_{M/L}(\\theta_{L/E})\\circ\\theta_{M/L,T^Z_{L/E}P}\n=\\theta_{M/E,P}\\circ\\Phi_M(a^Z_P)\\qquad(E\\subset L\\subset M).$$\nThen the formulas\n$$\\Phi(E,P)=(E,\\Phi_EP),\\qquad\n\\Phi[L,u]=[L,\\theta_{L/E',Q}\\circ\\Phi_L(u)\\circ\\theta_{L/E,P}^{-1}]$$\ndefine a fully faithful functor $\\Phi:\\mathcal C_\\Omega(Z)\\to\\mathcal C_\\Omega(X)$. More precisely, put $b_L(u)=\\theta_{L/E',Q}\\Phi_L(u)\\theta_{L/E,P}^{-1}$. For every pair $(E,P),(E',Q)$ the inverse of the induced Hom map sends $[L,v]$ to $[L,b_L^{-1}(v)]$; this formula is independent of the representative and of enlarging $L$. No essential-surjectivity hypothesis on $\\Phi_E$, no fully faithful hypothesis on scalar extension, and no Karoubi completion is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+  "place": "Algebraically closed-stage paragraph, colimit of bijections; returned proof step 9 second paragraph, including conjugated common-stage bijections and the inverse on representatives"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "For arbitrary stage systems, conjugating F.mapAt(u) by the inverse beta at the source and beta at the target recovers Phi_L.map(u). Faithfulness of Phi_L therefore proves injectivity of F.mapAt. For any target arrow v, apply the finite-stage preimage to beta_source inverse followed by v followed by beta_target. Applying F.mapAt to this arrow gives v by the finite map-preimage equation and cancellation of beta components. These calculations are sfMapAt_injective and sfMapAt_preimage, proved private helpers in the item module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Algebraically closed-stage paragraph: bijections at a common finite stage"
+   }
+  },
+  {
+   "text": "The source-library theorem StageSystem.Morphism.tr_mapAt already proves that the representative map commutes with every scalar transport: T.tr h (F.mapAt u) = F.mapAt (S.tr h u). Its proof expands exactly the assumed coherence and naturality calculation of the original plan. Reuse this theorem rather than repeating that calculation.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Algebraically closed-stage paragraph: scalar-extension compatibility, expanded using the coherence hypothesis"
+   }
+  },
+  {
+   "text": "The existing StageSystem.Morphism.functor is the descended pair functor. Its functor_obj and functor_map_mkHom equations give precisely the literal pair and forward representative formulas in the conclusion. Its construction already proves independence of forward representatives and preservation of identities and composition. The extra unit-normalization assumption is not needed for these equations: conjugation preserves identity arrows directly.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Algebraically closed-stage paragraph: independence of the forward representative"
+   }
+  },
+  {
+   "text": "Prove faithfulness of the pair functor (sfPairFaithful). Induct on representatives of two source arrows. If their images agree, the quotient equality criterion mkHom_eq_mkHom_iff' from [def-weil-algebraically-closed-coefficients] supplies a larger common stage at which the transported images agree. Rewrite both transports with tr_mapAt, and apply sfMapAt_injective at that stage. The same quotient equality criterion then gives equality of the original source classes. This uses no faithfulness of a scalar transition.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Algebraically closed-stage paragraph: identities and composition on common-stage representatives"
+   }
+  },
+  {
+   "text": "Prove fullness of the pair functor (sfPairFull). Induct on a target representative [L,v] using hom_induction from [def-weil-algebraically-closed-coefficients]. The arrow [L, Phi_L.preimage(beta_source inverse followed by v followed by beta_target)] is a preimage: functor_map_mkHom and sfMapAt_preimage compute its image as [L,v]. Thus the descended Hom map is surjective without first choosing an inverse on quotient representatives.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Algebraically closed-stage paragraph: explicit inverse descends to equivalence classes"
+   }
+  },
+  {
+   "text": "The full and faithful pair functor has the standard FullyFaithful structure h. For every target representative [L,v], apply h.map_injective to the desired preimage equation. The left side maps to [L,v] by h.map_preimage, and the right side maps to [L,v] by functor_map_mkHom and sfMapAt_preimage. This proves the exact inverse formula for every representative and every enlargement at once; independence follows because each formula equals the same h.preimage. Combine with the object and forward-map equations from step 3. No new public statement or unproved helper is introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Algebraically closed-stage paragraph: mutual inverse Hom maps and full faithfulness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+  "place": "Common-stage colimit-of-bijections argument, implemented by finite conjugation, the existing tr_mapAt and quotient equality API, and direct full/faithful proofs; P8, 2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent family of fully faithful functors on a directed system of categories induces a fully faithful functor on the category with common stage morphism representatives",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Ind.inclusion.fullyFaithful, CategoryTheory.fullyFaithfulInducedFunctor, instFullLightDiagram'LightDiagramToLightFunctor, CategoryTheory.InducedCategory.full, instFullLightDiagramProfiniteLightDiagramToProfinite, CategoryTheory.Sigma.instFullSigmaIncl, CategoryTheory.IsCofiltered.SmallCofilteredIntermediate.instFullInclusion, CategoryTheory.instFullIndFunctorOppositeTypeInclusion",
+   "date": "2026-10-22",
+   "verdict": "no match: Ind inclusions, induced categories, cocone functoriality and filtered-category finality do not state full faithfulness of a coherent common-stage pair-category functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Functor.FullyFaithful.id, CategoryTheory.Functor.FullyFaithful, CategoryTheory.Functor.FullyFaithful.instSubsingleton, CategoryTheory.Functor.FullyFaithful.faithful, CategoryTheory.Functor.FullyFaithful.full, CategoryTheory.Functor.FullyFaithful.ofFullyFaithful, CategoryTheory.Functor.FullyFaithful.ofIso, CategoryTheory.Functor.FullyFaithful.preimageIso, CategoryTheory.Functor.FullyFaithful.isoEquiv, CategoryTheory.Functor.FullyFaithful.comp, CategoryTheory.Functor.FullyFaithful.ofCompFaithful, CategoryTheory.Functor.FullyFaithful.preimage",
+   "date": "2026-10-22",
+   "verdict": "no match: Ind inclusions, induced categories, cocone functoriality and filtered-category finality do not state full faithfulness of a coherent common-stage pair-category functor"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|commonStage|filtered.*[Ff]ully[Ff]aithful|[Ff]ully[Ff]aithful.*filtered",
+   "results": "[grep] OK 9 hit(s); Mathlib/CategoryTheory/ObjectProperty/Ind.lean:93, Mathlib/CategoryTheory/ObjectProperty/Ind.lean:96, Mathlib/CategoryTheory/Limits/FinallySmall.lean:183, Mathlib/CategoryTheory/Limits/FinallySmall.lean:211, Mathlib/CategoryTheory/Filtered/Final.lean:143, Mathlib/CategoryTheory/Filtered/Final.lean:144, Mathlib/CategoryTheory/Filtered/Final.lean:156, Mathlib/CategoryTheory/Filtered/Final.lean:157, Mathlib/CategoryTheory/Filtered/Final.lean:160",
+   "date": "2026-10-22",
+   "verdict": "no match: Ind inclusions, induced categories, cocone functoriality and filtered-category finality do not state full faithfulness of a coherent common-stage pair-category functor",
+   "directory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stagewise fully faithful functors induce full faithfulness on a filtered common stage category with coherent transition isomorphisms",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Functor.FullyFaithful.ofIso, CategoryTheory.Functor.FullyFaithful.ofCompFaithful, CategoryTheory.Functor.FullyFaithful.ofFullyFaithful, CategoryTheory.IsFilteredOrEmpty.of_exists_of_isFiltered_of_fullyFaithful, CategoryTheory.Functor.Full.comp, CategoryTheory.createsColimitOfFullyFaithfulOfLift', CategoryTheory.IsFiltered.of_exists_of_isFiltered_of_fullyFaithful, CategoryTheory.MorphismProperty.Comma.fullyFaithfulChangeProp",
+   "date": "2026-10-22",
+   "verdict": "no match: Ind inclusions, induced categories, cocone functoriality and filtered-category finality do not state full faithfulness of a coherent common-stage pair-category functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of category valued directed systems with invertible coherence maps and fully faithful components is fully faithful on the filtered two colimit",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.IsFiltered.SmallFilteredIntermediate.instFullInclusion, instFullLightDiagram'LightDiagramToLightFunctor, CategoryTheory.Ind.inclusion.fullyFaithful, CategoryTheory.IsFilteredOrEmpty.of_exists_of_isFiltered_of_fullyFaithful, CategoryTheory.instFullIndFunctorOppositeTypeInclusion, CategoryTheory.IsFiltered.of_exists_of_isFiltered_of_fullyFaithful, CategoryTheory.IsCofiltered.SmallCofilteredIntermediate.instFullInclusion, CategoryTheory.Limits.Cocones.functoriality_full",
+   "date": "2026-10-22",
+   "verdict": "no match: Ind inclusions, induced categories, cocone functoriality and filtered-category finality do not state full faithfulness of a coherent common-stage pair-category functor"
+  },
+  {
+   "tool": "grep",
+   "query": "2.colimit|TwoColimit|FilteredColimit|DirectLimit.*[Ff]ull|[Ff]ull.*DirectLimit",
+   "results": "[grep] OK 25 hit(s); Mathlib/CategoryTheory/ObjectProperty/Ind.lean:10, Mathlib/CategoryTheory/ObjectProperty/Ind.lean:110, Mathlib/CategoryTheory/Galois/Prorepresentability.lean:185, Mathlib/CategoryTheory/MorphismProperty/TransfiniteComposition.lean:285, Mathlib/CategoryTheory/MorphismProperty/TransfiniteComposition.lean:310, Mathlib/CategoryTheory/Functor/Flat.lean:11, Mathlib/CategoryTheory/Functor/Flat.lean:324, Mathlib/CategoryTheory/MorphismProperty/Limits.lean:640, Mathlib/CategoryTheory/MorphismProperty/Limits.lean:644, Mathlib/CategoryTheory/MorphismProperty/Limits.lean:646, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean:15, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean:40, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean:45, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean:49, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean:53, Mathlib/CategoryTheory/Types/Monomorphisms.lean:43, Mathlib/CategoryTheory/Types/Monomorphisms.lean:57, Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean:8, Mathlib/CategoryTheory/Limits/Preserves/Over.lean:44, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ColimCoyoneda.lean:243, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Types.lean:8, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Colim.lean:164, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Colim.lean:165, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:57, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:58",
+   "date": "2026-10-22",
+   "verdict": "no match: Ind inclusions, induced categories, cocone functoriality and filtered-category finality do not state full faithfulness of a coherent common-stage pair-category functor",
+   "directory": "CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|commonStage|filtered.*[Ff]ully[Ff]aithful|[Ff]ully[Ff]aithful.*filtered",
+   "results": "OK 9 hits; Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/Filtered/Final.lean, Mathlib/CategoryTheory/Filtered/Final.lean, Mathlib/CategoryTheory/Filtered/Final.lean, Mathlib/CategoryTheory/Filtered/Final.lean, Mathlib/CategoryTheory/Filtered/Final.lean, Mathlib/CategoryTheory/Limits/FinallySmall.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state the coherent common-stage full-faithfulness assertion; the proof is given directly on representatives",
+   "directory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful functors with coherent transition isomorphisms induce a fully faithful functor on a filtered two colimit of categories",
+   "results": "OK 8 hits; CategoryTheory.createsColimitOfFullyFaithfulOfLift', CategoryTheory.Functor.FullyFaithful.ofIso, CategoryTheory.createsColimitOfFullyFaithfulOfIso', CategoryTheory.Limits.IsColimit.ofFaithful, CategoryTheory.Functor.Full.comp, CategoryTheory.createsColimitOfFullyFaithfulOfIso, CategoryTheory.createsColimitOfFullyFaithfulOfLift, CategoryTheory.Limits.colimitLimitIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state the coherent common-stage full-faithfulness assertion; the proof is given directly on representatives"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful",
+   "results": "OK 12 hits; CategoryTheory.Functor.FullyFaithful.id, CategoryTheory.Functor.FullyFaithful, CategoryTheory.Functor.FullyFaithful.instSubsingleton, CategoryTheory.Functor.FullyFaithful.faithful, CategoryTheory.Functor.FullyFaithful.full, CategoryTheory.Functor.FullyFaithful.ofFullyFaithful, CategoryTheory.Functor.FullyFaithful.ofIso, CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state the coherent common-stage full-faithfulness assertion; the proof is given directly on representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent family of fully faithful functors between directed systems of categories induces a fully faithful functor on their common-stage categories",
+   "results": "OK 8 hits; instFullLightDiagram'LightDiagramToLightFunctor, CategoryTheory.instFullIndFunctorOppositeTypeInclusion, CategoryTheory.Ind.inclusion.fullyFaithful, CategoryTheory.InducedCategory.full, instFullLightDiagramProfiniteLightDiagramToProfinite, CategoryTheory.IsCofiltered.SmallCofilteredIntermediate.instFullInclusion, CategoryTheory.Limits.Cocones.functoriality_full, CategoryTheory.IsFiltered.SmallFilteredIntermediate.instFullInclusion",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state the coherent common-stage full-faithfulness assertion; the proof is given directly on representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of directed diagrams of Hom sets induces a bijection on the explicit eventual equality quotients of common stage morphisms",
+   "results": "OK 8 hits; CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap, CategoryTheory.Functor.IsEventuallyConstantTo.isoMap, CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap_hom, CategoryTheory.Functor.IsEventuallyConstantTo.isoMap_hom, CategoryTheory.Quotient.natIsoLift, CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq, DirectLimit.setoid, CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state the coherent common-stage full-faithfulness assertion; the proof is given directly on representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "2.colimit|TwoColimit|FilteredColimit|DirectLimit.*[Ff]ull|[Ff]ull.*DirectLimit",
+   "results": "OK 25 hits; Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Types/Monomorphisms.lean, Mathlib/CategoryTheory/Types/Monomorphisms.lean, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state the coherent common-stage full-faithfulness assertion; the proof is given directly on representatives",
+   "directory": "CategoryTheory"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-closed-unit-all-stages",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-closed-unit-all-stages",
+   "place": "Algebraically closed-stage paragraph, colimit of bijections; returned proof step 9 second paragraph, including conjugated common-stage bijections and the inverse on representatives",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-common-stage-full-faithfulness",
+  "worker": "stage1",
+  "summary": "Proved directly in six elementary representative calculations: stage Hom inverses, the explicit coherence/naturality calculation, forward descent, functor laws, inverse descent, and the two inverse identities. No new nodes, statement changes or completions. Fresh logged searches supplement the inherited searches.",
+  "blueprint": "The algebraically closed-stage paragraph of prop-sf-closed-unit-all-stages: its colimit of bijections is realized by conjugated Hom bijections commuting with scalar transport, with the explicit inverse and functor laws."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O4-a691cf041",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-a691cf041 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement, stmt_deps and source are identical to live; live has the item unsplit with no repair note, so this is not a re-split order and not superseded. I checked steps 1-6 against the statements of def-weil-algebraically-closed-coefficients (transitions via the associators, equality criterion, common-stage composition) and lem-weil-scalar-extension-composition (direction (K⊗L)⊗M→K⊗M). I redid step 2: substituting the coherence hypothesis at both endpoints and then applying naturality of θ_{M/L} gives exactly t^X(b_L u). Well-definedness of the forward and inverse maps (steps 3 and 5) uses only the witness N and injectivity of b_M, never of a transition. Identity and composition (step 4) use the normalizations T_{E/E}=id and θ_{E/E}=id. Step 6 gives mutual inverses. The proof realizes blueprint main-20261015 prop-sf-closed-unit-all-stages.proof.md lines 29-33 ('colimit of bijections'); proof_origin agent is correct; no SGA. Mathlib searches cover all three kinds and record no match. Duplicate check: lem-fd-common-stage-comparison-descent is an analogue for equivalences between different coefficient models, so it is neither a duplicate nor a source of a one-line specialization. Advisory for the maintainer: the inherited statement uses an arbitrary field k, while the cited definition is phrased within the finite-field datum; the proof is unaffected. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfCommonStageFullFaithfulness",
+  "declaration": "WeilConjectures.sfCommonStageFullFaithfulness",
+  "file": "lean/Sheaf/Paper/SfCommonStageFullFaithfulness.lean",
+  "statement": "theorem sfCommonStageFullFaithfulness (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (k : Type u) [Field k] (_hl : IsUnit (l : k)) (Z X : Scheme.{u}) (z : Z ⟶ Spec (.of k)) (x : X ⟶ Spec (.of k)) [IsSeparated z] [LocallyOfFiniteType z] [QuasiCompact z] [IsSeparated x] [LocallyOfFiniteType x] [QuasiCompact x] (F : StageSystem.Morphism (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Z) (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X)) (hΦ : ∀ E : Padic.FiniteCoefficientFields l Ω, (F.Φ E).FullyFaithful) (_hunit : ∀ (E : Padic.FiniteCoefficientFields l Ω) (P : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Z E), HEq ((F.β (le_refl E)).hom.app P) ((GeneralAlgebraicallyClosedCoefficients.unitor l Ω X E).hom.app ((F.Φ E).obj P) ≫ (F.Φ E).map ((GeneralAlgebraicallyClosedCoefficients.unitor l Ω Z E).inv.app P))) : ∃ h : F.functor.FullyFaithful, (∀ A : generalAlgebraicallyClosedConstructibleCategory l Ω Z, F.functor.obj A = ⟨A.stage, (F.Φ A.stage).obj A.obj⟩) ∧ (∀ (A B : generalAlgebraicallyClosedConstructibleCategory l Ω Z) (L : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (u : A.toStage hA ⟶ B.toStage hB), F.functor.map (StageSystem.PairCategory.mkHom L hA hB u) = StageSystem.PairCategory.mkHom (X := F.functor.obj A) (Y := F.functor.obj B) L hA hB ((F.β hA).hom.app A.obj ≫ (F.Φ L).map u ≫ (F.β hB).inv.app B.obj)) ∧ (∀ (A B : generalAlgebraicallyClosedConstructibleCategory l Ω Z) (L : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (v : (F.functor.obj A).toStage hA ⟶ (F.functor.obj B).toStage hB), h.preimage (StageSystem.PairCategory.mkHom L hA hB v) = StageSystem.PairCategory.mkHom L hA hB ((hΦ L).preimage ((F.β hA).inv.app A.obj ≫ v ≫ (F.β hB).hom.app B.obj)))",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded intrinsic rational stage systems and the upstream literal pair functor. F.beta is theta inverse, F.coh is precisely the inverse form of the stated tower square, and the unit hypothesis uses the published tensor multiplication units. The conclusion specifies the inverse on every common-stage representative, hence includes independence of representatives and enlargement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-035b12a80",
+  "group": "O2",
+  "result": "pass",
+  "note": "Node identical to live except lean; statement verbatim in file. Clause check: StageSystem.Morphism (Φ, β=θ⁻¹, coh) matches the node; coh is equivalent to the node's theta tower square after inversion (checked by hand); _hunit HEq is between propositionally equal types (stageSystem.T = transition via stageSystem_existsUnique), so it honestly encodes θ_EE = id through unitor. Conclusion: ∃ FullyFaithful of the upstream literal pair functor, object formula, forward formula (= mapAt, rfl) and inverse formula on every representative [L, preimage(β_A⁻¹ v β_B)] = b_L⁻¹, which is provable from the forward formula plus faithfulness. Stages are raw sfRationalConstructibleCategory (no Karoubi). Separated finite type = IsSeparated + LocallyOfFiniteType + QuasiCompact; IsUnit (l:k); Ω in its own universe v. No extra assumptions, no definitions, sorry only, docstrings with source place and blueprint tag, report sections present. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261026T092255-L-3418200",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

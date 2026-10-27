@@ -1,0 +1,129 @@
+{
+ "id": "lem-pbc-coefficient-pullback-factorization",
+ "kind": "statement",
+ "title": "Canonical coefficient pullback agrees with termwise localization",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism, $R,S$ commutative ring sheaves on their small pro-etale sites, and $c:f^{-1}R\\simeq S$ [def-weil-pbc-proetale-operations]. Let $C,I$ be ordinary module pullback with coefficients $c$ and the identity of $f^{-1}R$, let $U$ be scalar restriction along $c$, and let $Q$ denote localization of cochain complexes. Let $b:DC;DU\\simeq DI$ be the canonical exact-derived restriction/pullback comparison with base identity restriction removed [lem-weil-pbc-ring-sheaf-change-adjunction]. Let $\\beta:C_{\\rm Ch};U_{\\rm Ch}\\simeq I_{\\rm Ch}$ be the termwise ordinary comparison with the same base identity removed. Write $\\epsilon_C:Q;DC\\simeq C_{\\rm Ch};Q$, and analogously for $I,U$, for the specified exact-derived factorization isomorphisms [def-weil-pbc-derived-categories]. Then for every complex $P$, $b_{QP};\\epsilon_I(P)=DU(\\epsilon_C(P));\\epsilon_U(C_{\\rm Ch}P);Q(\\beta_P)$. No flatness or boundedness is assumed.",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Exact-functor localization and composition; Tag 07A6. Source-library mapDerivedCategoryCompIso_fac, mapDerivedCategoryNatIso_fac, mapDerivedCategoryIdIso_factorsh."
+ },
+ "proof": [
+  {
+   "text": "Apply the identity normalization mapDerivedCategoryIdIso_factorsh on the image of P in the homotopy category; the quotient comparison maps and all identity maps cancel. Combining this with mapDerivedCategoryNatIso_fac for the identity ordinary restriction gives its factorization.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand b into inverse exact-composition comparison, localized ordinary restriction mate and exact-composition comparison. Apply mapDerivedCategoryCompIso_fac on each side and mapDerivedCategoryNatIso_fac to the mate. Cancel inverse isomorphisms. The remaining localized termwise map is beta; its component is the ordinary mate component with identity composites removed.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Exact-functor localization and composition; Tag 07A6. Source-library mapDerivedCategoryCompIso_fac, mapDerivedCategoryNatIso_fac, mapDerivedCategoryIdIso_factorsh.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of sheaves of commutative rings induces a tensor equivalence on module sheaves compatible with inverse image and signed total complexes",
+   "results": "Eight hits including HomologicalComplex₂.total.mapIso, sheaf pullback on free modules, and PresheafOfModules.isoMk. No coefficient restriction tensor coherence theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of natural transformations can be checked on a fully faithful resolving subcategory of flat K-flat complexes",
+   "results": "Found Localization.natTrans_ext and derived-functor extensionality. Use the already proved project representative descent theorem for the derived step. No ordinary coefficient tensor square.",
+   "date": "2026-10-27",
+   "verdict": "generic extensionality only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": "Found exact-derived composition comparisons. The source library supplies their factorization normalization, used in the proved pullback_factors helper.",
+   "date": "2026-10-27",
+   "verdict": "used existing exact-derived comparison API"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*restrictScalars|restrictScalars.*tensor",
+   "results": "Mathlib hits on ordinary scalar tensor algebra, no sheaf chain restriction/pullback square. Project searches found FlatScalarRestrictionKFlat and the canonical geometric tensor comparison; no duplicate of the chain square.",
+   "date": "2026-10-27",
+   "verdict": "reuse canonical maps and flat scalar restriction"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCoefficientTensorCompatibility",
+  "date": "2026-10-27",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-coefficient-restriction-tensor-comparison-compatibility",
+   "place": "The exact-derived factorization used to compare the canonical b on flat K-flat representatives.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleCoefficientPullback",
+  "file": "lean/Sheaf/Paper/ProEtaleCoefficientPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientTensorTransport.pullback_factors",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CoefficientTensorChain.total",
+   "AlgebraicGeometry.Scheme.CoefficientTensorChain.ordinaryPullback",
+   "AlgebraicGeometry.Scheme.CoefficientTensorChain.complexPullback",
+   "AlgebraicGeometry.Scheme.CoefficientTensorTransport.identityRestriction",
+   "AlgebraicGeometry.Scheme.CoefficientTensorTransport.pullback",
+   "AlgebraicGeometry.Scheme.CoefficientTensorTransport.pullback_factors",
+   "AlgebraicGeometry.Scheme.CoefficientTensorTransport.pullback_pair_factors"
+  ],
+  "statement": "theorem pullback_factors {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (P : CochainComplex (proEtaleRingModules Y R) ℤ) :\n    (pullback f R S c).hom.app (DerivedCategory.Q.obj P) ≫\n        (proEtaleRingDerivedPullbackFactors f R\n          ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)\n          (Iso.refl _)).hom.app P =\n      (pbcDerivedRestrict c.hom).map\n          ((proEtaleRingDerivedPullbackFactors f R S c).hom.app P) ≫\n        (pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app\n          (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map ((CoefficientTensorChain.complexPullback f R S c).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dade8",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T072146-L-2804008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dade8",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T072146-L-2804008",
+  "kind": "interface",
+  "note": "independent cc review: item tensorComparison_compatibility (old ∀rho,b false → ∃rho with canonical pullback) against parent tensorComparison (unchanged) and change record; moved identityRestriction/pullback diffed verbatim vs clone a9fbd52; chain-square hole read against RingIsoTensorTransport pure_hom/total_summand and unique proEtaleOrdinaryTensorPullback; stmt_deps against DAG owners; 3b importer OK"
+ }
+}

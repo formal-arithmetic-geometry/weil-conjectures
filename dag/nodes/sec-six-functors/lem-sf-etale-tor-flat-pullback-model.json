@@ -1,0 +1,431 @@
+{
+ "id": "lem-sf-etale-tor-flat-pullback-model",
+ "kind": "statement",
+ "title": "Etale finite-Tor flat models with their termwise geometric pullback",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi_E$, and $n\\ge1$, and put $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a morphism of schemes on which $\\ell$ is invertible [def-pc-scheme]. Use ordinary constant-$A$ module derived categories on the small etale sites [def-weil-pbc-derived-categories]. Write $l=f_e^*$ for module inverse image, identified with $f_e^{-1}$ through $f_e^{-1}A_Y\\cong A_X$ [prop-weil-pbc-inverse-image-modules-exact], and also write $l$ for its induced derived functor. Let $u\\le v$ be integers, and let $M\\in D^b_c(Y_e,A)$ have Tor amplitude $[u,v]$, meaning that $\\mathcal H^j(M\\otimes_A^LN)=0$ for $j\\notin[u,v]$ and every degree-zero $A_Y$-module sheaf $N$ [def-weil-pbc-constructible-complexes, def-weil-finite-tor-amplitude].\nThere exists an integer-indexed cochain complex $V^\\bullet$ of $A_Y$-module sheaves [def-pc-cochain-complex-modules] such that $V^h=0$ for $h\\notin[u,v]$, every $V^h$ is flat, and $M\\cong Q_Y(V^\\bullet)$ in $D(Y_e,A)$, where $Q_W$ is cochain localization. Flat here means exactness of tensoring with that term [def-pc-flat-sheaf-modules], on either side of the sheafified tensor product [def-pur-sheaf-tensor-product]. For every such $V^\\bullet$, both $V^\\bullet$ and the termwise pullback $lV^\\bullet$ are K-flat [def-pc-kflat-complex]; the latter has flat terms, is zero outside $[u,v]$, and there is an isomorphism\n$$lM\\xrightarrow{\\sim}Q_X(lV^\\bullet)$$\nin $D(X_e,A)$, obtained by applying $l$ to the chosen representing isomorphism and the exact-functor localization comparison. No local freeness of the terms or finite-type, properness or closed-immersion condition on $f$ is assumed. Zero complexes, empty schemes and $u=v$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YQ, lemma-bounded-flat-K-flat; Tag 0G7E, lemma-pullback-K-flat. Input existence is lem-sf-flat-model, small-etale clause; exactness conversion uses sites-modules.tex Tag 03EP, lemma-tensor-commute-colimits, and Tag 04JC, lemma-flat-pullback-exact; derived.tex Tag 015F, lemma-right-derived-exact-functor."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-tor-amplitude",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-sf-etale-constant-module-realization"
+ ],
+ "proof": [
+  {
+   "text": "Apply finiteCoefficient_hasTorAmplitude_iff_flatModel from [lem-sf-flat-model] to the given finite coefficient complex. It supplies V, its support in [a,b], categorical flatness of every term, and the representing isomorphism. Convert categorical flatness to site-flatness using etaleConstantModule_flat_iff from [lem-pur-etale-constant-module-flat]. The realization is exactly etaleSumFlatModuleRealization; no terms or representing isomorphism are changed.",
+   "uses": [
+    "lem-sf-flat-model",
+    "lem-pur-etale-constant-module-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any complex with the stated flatness and support, realize it degreewise with etaleSumFlatModuleRealization. This functor preserves zero morphisms and zero objects. Its realized complex is strictly bounded above by b, because each degree h>b is zero. Apply [lem-weil-pbc-independent-bounded-flat-kflat] to this realized complex. This proves the first K-flatness assertion for every model, not only the model just constructed.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-pur-etale-constant-module-flat] backwards on each term. The existing upperStarPreservesFlat_moduleCat instance, proved in the module of [lem-sfb-etale-flat-geometric-fibers], makes each inverse-image term categorically flat: its geometric stalk is the original stalk at the composite geometric point. Convert back to site-flatness on X. The additive exact inverse-image functor preserves zero objects, hence the support in [a,b]. Apply the bounded-above flat criterion of [lem-weil-pbc-independent-bounded-flat-kflat] to the realized inverse-image complex. Thus the second K-flatness assertion follows without constructing a general ringed-topos pullback presentation.",
+   "uses": [
+    "lem-pur-etale-constant-module-flat",
+    "lem-sfb-etale-flat-geometric-fibers",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing definition etaleTorFlatPullbackModelIso to the chosen representing isomorphism e. It is the composite of mapIso e with mapDerivedCategoryFactors at V from [lem-weil-pbc-exact-functor-derived-factorization]. Package this specified isomorphism and the previous four assertions into the required conjunction. No further hypothesis on f is used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-constant-module-flat",
+  "lem-sf-flat-model",
+  "lem-sfb-etale-flat-geometric-fibers",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YQ, lemma-bounded-flat-K-flat, applied on both etale sites after the small-etale clause of lem-sf-flat-model. Constant-scalar tensor identification: Modules on Sites, Sections 03EK and 03ER; inverse-image flatness is the existing geometric-stalk criterion in lem-sfb-etale-flat-geometric-fibers. Localization: derived.tex Tag 015F. Lean assembly by R1, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hasTorAmplitudeIn|bounded.*flat|flat.*pullback",
+   "results": {
+    "t": "2026-10-22T06:46:52Z",
+    "tool": "grep",
+    "query": "hasTorAmplitudeIn|bounded.*flat|flat.*pullback",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and module flatness are partial ingredients; no hit constructs an etale Tor-window flat model and its K-flat termwise geometric inverse image together.",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite Tor amplitude complex of sheaves has a bounded flat model compatible with exact inverse image and K flat pullback",
+   "results": {
+    "t": "2026-10-22T06:46:52Z",
+    "tool": "leansearch",
+    "query": "A finite Tor amplitude complex of sheaves has a bounded flat model compatible with exact inverse image and K flat pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.rTensor_exact",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_exact",
+     "SheafOfModules.sheafificationCompPullback",
+     "Module.Flat.iff_lift_lsmul_comp_subtype_injective",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback",
+     "Module.Flat.iff_rTensor_exact"
+    ],
+    "digest": "799a9eff1e7e352b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and module flatness are partial ingredients; no hit constructs an etale Tor-window flat model and its K-flat termwise geometric inverse image together."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": {
+    "t": "2026-10-22T06:46:53Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Functor.mapDerivedCategory",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+     "CategoryTheory.Functor.mapDerivedCategoryIdIso",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId"
+    ],
+    "digest": "3c19c5efb5a73fc2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and module flatness are partial ingredients; no hit constructs an etale Tor-window flat model and its K-flat termwise geometric inverse image together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible etale complex of finite Tor amplitude has a flat K-flat representative in the same interval whose termwise inverse image along a scheme morphism is K-flat and represents derived pullback",
+   "results": {
+    "t": "2026-10-22T06:47:04Z",
+    "tool": "leanfinder",
+    "query": "A bounded constructible etale complex of finite Tor amplitude has a flat K-flat representative in the same interval whose termwise inverse image along a scheme morphism is K-flat and represents derived pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+     "AlgebraicGeometry.Flat.instFstScheme"
+    ],
+    "digest": "8de18bd9d784ee8c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and module flatness are partial ingredients; no hit constructs an etale Tor-window flat model and its K-flat termwise geometric inverse image together."
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat|KFlat|K.flat|TorAmplitude|tor.amplitude|flat.*model",
+   "results": {
+    "t": "2026-10-22T06:47:40Z",
+    "tool": "grep",
+    "query": "kFlat|KFlat|K.flat|TorAmplitude|tor.amplitude|flat.*model",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Computability/TuringMachine/Tape.lean",
+     "Mathlib/Computability/TuringMachine/Tape.lean",
+     "Mathlib/Computability/TuringMachine/Tape.lean"
+    ],
+    "digest": "1babea3c76287a53"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and module flatness are partial ingredients; no hit constructs an etale Tor-window flat model and its K-flat termwise geometric inverse image together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor dimension for complexes of sheaves of modules gives a bounded complex of flat sheaves, and inverse image with constant coefficients preserves its flatness, K-flatness and degree support",
+   "results": {
+    "t": "2026-10-22T06:47:51Z",
+    "tool": "leanfinder",
+    "query": "Finite Tor dimension for complexes of sheaves of modules gives a bounded complex of flat sheaves, and inverse image with constant coefficients preserves its flatness, K-flatness and degree support",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.isGE_iff"
+    ],
+    "digest": "4077856c43240104"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and module flatness are partial ingredients; no hit constructs an etale Tor-window flat model and its K-flat termwise geometric inverse image together."
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat|KFlat|TorAmplitude|flat.*model|flat.*pullback",
+   "results": {
+    "t": "2026-10-22T07:56:15Z",
+    "tool": "grep",
+    "query": "kFlat|KFlat|TorAmplitude|flat.*model|flat.*pullback",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: results concern ring/module flatness or exact-functor localization only; the latter is reused through the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tor amplitude complexes of sheaves admit bounded flat representatives and inverse image preserves their K-flatness",
+   "results": {
+    "t": "2026-10-22T07:56:15Z",
+    "tool": "leansearch",
+    "query": "Finite Tor amplitude complexes of sheaves admit bounded flat representatives and inverse image preserves their K-flatness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback",
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+     "CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat"
+    ],
+    "digest": "15159ae11396192f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: results concern ring/module flatness or exact-functor localization only; the latter is reused through the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite Tor amplitude complex of etale module sheaves has a bounded flat model whose termwise geometric inverse image is K-flat and represents derived pullback",
+   "results": {
+    "t": "2026-10-22T07:56:26Z",
+    "tool": "leanfinder",
+    "query": "A finite Tor amplitude complex of etale module sheaves has a bounded flat model whose termwise geometric inverse image is K-flat and represents derived pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Smooth.flat",
+     "Algebra.FormallyEtale.instTensorProduct",
+     "Algebra.FormallyEtale.comp",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale",
+     "Algebra.FormallyUnramified.flat_of_restrictScalars",
+     "Algebra.FormallyEtale.of_restrictScalars"
+    ],
+    "digest": "9ba5b65e0bec2cc9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: results concern ring/module flatness or exact-functor localization only; the latter is reused through the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|mapDerivedCategory",
+   "results": {
+    "t": "2026-10-22T07:56:44Z",
+    "tool": "grep",
+    "query": "mapDerivedCategoryFactors|mapDerivedCategory",
+    "sub": "Algebra/Homology/DerivedCategory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean"
+    ],
+    "digest": "e71bc7993d6dc2d5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: results concern ring/module flatness or exact-functor localization only; the latter is reused through the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization",
+   "subdirectory": "Algebra/Homology/DerivedCategory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded above complexes of flat sheaves are K-flat and ringed topos pullback preserves flat-term K-flat complexes",
+   "results": {
+    "t": "2026-10-22T07:56:52Z",
+    "tool": "leanfinder",
+    "query": "Bounded above complexes of flat sheaves are K-flat and ringed topos pullback preserves flat-term K-flat complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+     "CategoryTheory.compatiblePreservingOfFlat",
+     "AlgebraicGeometry.Flat.instFstScheme",
+     "AlgebraicGeometry.Flat.instSndScheme",
+     "CategoryTheory.lan_flat_of_flat",
+     "AlgebraicGeometry.Flat.comp",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE"
+    ],
+    "digest": "a5d44131338318a3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: results concern ring/module flatness or exact-functor localization only; the latter is reused through the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-boundary-bounded-tensor-comparison",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Second evaluation paragraph, restriction of the evaluation tensor to Z; bounded finite-Tor input and its exact etale pullback. This carries returned preparation steps 2 and 3, including the injection-preserving versus exact flatness conversion.",
+   "via": [
+    "lem-sf-boundary-bounded-tensor-comparison",
+    "lem-weil-boundary-proetale-projection-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-etale-tor-flat-pullback-model",
+  "worker": "stage1",
+  "summary": "Split into five short steps, reusing the existing small-etale flat-model, tensor-colimit, bounded-flat K-flat and ringed-topos pullback nodes plus exact module inverse image and the Mathlib localization factorization. Wrote out flatness conversion, support preservation and the specific representing composite; no new nodes and no statement change. Repair of return d0009e6995d: rebased onto the current unsplit live record, retained its updated blueprint provenance, corrected the moved source path, and made the small-site/coefficient-universe hypotheses explicit after rereading all eight proof dependencies.",
+  "blueprint": "Realizes the second evaluation paragraph of cor-weil-boundary-duality-discharge (current snapshot proof: restriction of the evaluation D_T L tensor L to Z), through the bounded tensor preparation in lem-sf-boundary-bounded-tensor-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Its small-etale equivalence supplies the Tor-window model. This is the existing flat-model tool needed for restriction of evaluation, not an alternative duality route."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Right exactness of the actual sheafified tensor converts injection-preserving flatness to exact flatness; the biduality unit does not state tensor colimit preservation."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "The ringed-site bounded-above flat criterion supplies K-flatness; the biduality unit has no such criterion."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "The general ringed-topos pullback theorem supplies both target K-flatness and flat terms; the biduality unit has no representative-level pullback lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-flat-model",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O1-c9e6eb1b8",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-c9e6eb1b8 (reviewer sub-agent of L); spot-checked: This re-delivery lost the earlier FIX, so I re-applied it to step 4. The delivery is the item and the report only: no new nodes, and the statement and stmt_deps are unchanged. It answers the d0009e6995d3 promotion return, but the worker rebuilt the item from the live unsplit record plus their own pre-FIX proof, so step 4 is back to the pre-FIX text. What did change: step 1 now cites the current main-20261015 sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-flat-model.md (the small-étale clause is at line 27), and steps 2 and 3 now fix a coefficient universe and make the site essentially small. There is no repair note and no SGA citation. Step 1: lem-sf-flat-model, small-étale clause, with T=Y, a=u, b=v gives a model whose terms preserve injections; the Noetherian variant is not used. Step 2: by lem-weil-pbc-independent-sheaf-tensor-colimits the tensor preserves finite cokernels, so it is right exact; with injection preservation it is exact, and the sectionwise flip gives the other side, which is def-pc-flat. Step 3: lem-weil-pbc-independent-bounded-flat-kflat applies with n=v (Stacks 06YQ, sites-cohomology.tex:3120). Step 4: lem-weil-pbc-ringed-topos-kflat-pullback (0G7E, sites-cohomology.tex:3508) needs small sites and a set-level morphism of topoi, which prop-weil-pbc-inverse-image-modules-exact does not state (C1/C4 gap). FIX, re-applied verbatim from the previous review: cite lem-weil-pbc-etale-inverse-image-algebraic-structures(1) for the set-level adjunction and finite limits, and def-weil-size-convention for small skeleta; both added to uses and proof_deps. Support follows from l(0)=0. Step 5: the exact-functor factorization leaf gives phi_V, and phi_V∘l(e) is the stated isomorphism (015F). Duplicate search: lem-exc-bounded-flat-pullback-test is the pro-étale analogue on a different site, so not a duplicate (maintainer note). lem-exc-unbounded-coefficient-pullback-model, lem-sf-pullback-tor-amplitude and the Noetherian flat-model nodes are not duplicates either. Edge cases M=0, u=v, empty schemes, non-reduced A and non-flat f all go through. I accept the four declared tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleTorFlatPullbackModel",
+  "declaration": "AlgebraicGeometry.Etale.etale_tor_flat_pullback_model",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleTorFlatPullbackModelIso",
+   "AlgebraicGeometry.Etale.etale_tor_flat_pullback_model"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleTorFlatPullbackModel.lean",
+  "statement": "theorem etale_tor_flat_pullback_model (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X Y : Scheme.{u}) (f : X ⟶ Y) [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (a b : ℤ) (_hab : a ≤ b) (M : DerivedCategoryModule (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) Y) (_hM : @DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) inferInstance ((Equiv.ulift : ULift.{u + 1} (Padic.coefficientExtensionRing l E n) ≃ Padic.coefficientExtensionRing l E n).finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) Y M) (_hTor : DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) Y a b M) : (fun (A : Type (u + 1)) [CommRing A] (K : DerivedCategoryModule A Y) ↦ (∃ V : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, (∀ h : ℤ, h < a ∨ b < h → IsZero (V.X h)) ∧ (∀ h : ℤ, SheafOfModules.IsFlatOnSite (J := Y.smallEtaleTopology) (R := (constantSheaf Y.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((Scheme.etaleSumFlatModuleRealization Y A).obj (V.X h))) ∧ Nonempty (K ≅ _root_.DerivedCategory.Q.obj V)) ∧ (∀ V : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, (∀ h : ℤ, h < a ∨ b < h → IsZero (V.X h)) → (∀ h : ℤ, SheafOfModules.IsFlatOnSite (J := Y.smallEtaleTopology) (R := (constantSheaf Y.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((Scheme.etaleSumFlatModuleRealization Y A).obj (V.X h))) → ∀ _e : K ≅ _root_.DerivedCategory.Q.obj V, CochainComplex.IsKFlatIndependentCoefficients ((Scheme.etaleSumFlatComplexRealization Y A).obj V) ∧ CochainComplex.IsKFlatIndependentCoefficients ((Scheme.etaleSumFlatComplexRealization X A).obj (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj V)) ∧ (∀ h : ℤ, SheafOfModules.IsFlatOnSite (J := X.smallEtaleTopology) (R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((Scheme.etaleSumFlatModuleRealization X A).obj ((((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj V).X h))) ∧ (∀ h : ℤ, h < a ∨ b < h → IsZero ((((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj V).X h)) ∧ Nonempty ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj K ≅ _root_.DerivedCategory.Q.obj (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj V)))) (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) M",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The canonical constant-module realization functors are owned by def-sf-etale-constant-module-realization, an existing:true definition-node attachment; no theorem about sum extension is a statement dependency. etaleTorFlatPullbackModelIso is exactly inverse image of the chosen representing isomorphism followed by mapDerivedCategoryFactors, with no choices."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03e31b174",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Re-delivery of the 1d2c37bb9c06 RETURN (R1: theorem node lem-pur-etale-sum-flat-kflat in stmt_deps for plain defs). Lean module byte-identical (sha256 597d09a0). The item's stmt_deps now cite the new definition node def-sf-etale-constant-module-realization: existing:true on Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat, declarations etaleSumFlatModuleRealization and etaleSumFlatComplexRealization, lean.statement verbatim. Its data is the constant-scalar realization followed by restriction of scalars along constantModuleHomRingIso.inv (direction checked), applied degreewise, with no theorem or choice. Its 7 stmt_deps are all definition nodes owning the used decls; no prior owner; no SGA citation. Item statement re-checked clause by clause against the node; edge cases M=0, u=v, empty schemes, n=1 and non-flat f are covered; one sorry; docstrings OK. Live item has no lean and no competing landing. Advisories: bare Nonempty final clause (the specified iso is the real def etaleTorFlatPullbackModelIso), beta-redex statement form, upperStar/hasTorAmplitudeIn owners not in stmt_deps (base-era pattern). No file changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261024T204650-L-3817320",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

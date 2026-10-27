@@ -98,7 +98,8 @@ private noncomputable def modelOnFactorization
     (Functor.mapDerivedCategoryCompIso _ _).app L ≪≫
     c.mapDerivedCategory.mapIso ep ≪≫ comparisonConstantDerivedIso R Y E
 
-private theorem singleProjectionIso {D : Type*} [Category D] [HasZeroMorphisms D]
+/-- The projection onto the sole possibly nonzero factor of a product is invertible. -/
+theorem singleProjectionIso {D : Type*} [Category D] [HasZeroMorphisms D]
     {I : Type*} (G : I → D) [HasProduct G] (i : I)
     (h : ∀ j, j ≠ i → IsZero (G j)) : IsIso (Pi.π G i) := by
   classical

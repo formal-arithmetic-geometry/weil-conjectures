@@ -15,6 +15,8 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.NormalIntegralFiniteSheafNorm
+import Sheaf.AlgebraicGeometry.FiniteNormInvertibleSections
 import Sheaf.AlgebraicGeometry.AmpleRestrictClosedImmersion
 import Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine
 import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
@@ -75,6 +77,70 @@ theorem exists_isAmple_of_finite_surjective_normal
       IsIntegrallyClosed (Z.presheaf.stalk z))
     (hX : ∃ L : X.Modules, ∃ hL : L.IsInvertible, @IsAmple X L hL) :
     ∃ N : Z.Modules, ∃ hN : N.IsInvertible, @IsAmple Z N hN := by
-  sorry
+  classical
+  obtain ⟨x, hx⟩ := f.surjective (genericPoint Z)
+  let T : TopologicalSpace.Closeds X := ⟨closure {x}, isClosed_closure⟩
+  let I := Scheme.IdealSheafData.vanishingIdeal T
+  let Y := I.subscheme
+  let i : Y ⟶ X := I.subschemeι
+  obtain ⟨_, _, hi, hYred, _, hiRange, _⟩ :=
+    Scheme.IdealSheafData.reduced_induced_closed_subscheme X T
+  have : IsClosedImmersion i := hi
+  have : IsReduced Y := hYred
+  have hrange : Set.range i = closure {x} := hiRange
+  have : IrreducibleSpace (closure ({x} : Set X)) :=
+    isIrreducible_iff_irreducibleSpace.mp isIrreducible_singleton.closure
+  have : IrreducibleSpace Y :=
+    ((i.isClosedEmbedding.isEmbedding.toHomeomorph.trans
+      (Homeomorph.setCongr hrange)).irreducibleSpace_iff).mpr inferInstance
+  have : IsIntegral Y := isIntegral_of_irreducibleSpace_of_isReduced Y
+  let p : Y ⟶ Z := i ≫ f
+  have : IsFinite p := inferInstance
+  have hp : Function.Surjective p := by
+    have hxrange : genericPoint Z ∈ Set.range p := by
+      obtain ⟨y, hy⟩ := hrange.symm ▸
+        (show x ∈ closure ({x} : Set X) from subset_closure (Set.mem_singleton x))
+      exact ⟨y, (congrArg f hy).trans hx⟩
+    have hclosure : closure ({genericPoint Z} : Set Z) ⊆ Set.range p :=
+      closure_minimal (Set.singleton_subset_iff.mpr hxrange)
+        (p.isClosedMap.isClosed_range)
+    rw [genericPoint_closure] at hclosure
+    exact Set.range_eq_univ.mp (Set.eq_univ_of_univ_subset hclosure)
+  have : Surjective p := ⟨hp⟩
+  obtain ⟨L, hL, hLamp⟩ := hX
+  let M := (tensorPullback i).obj L
+  have : M.IsInvertible := ((invertible_pullback_tensor i).1 L).2
+  have hM : IsAmple Y M := isAmple_tensorPullback_of_isClosedImmersion L hLamp i
+  obtain ⟨d, hd, ν, hνrestrict, hνpower, hνvanish⟩ :=
+    exists_normalIntegralFiniteSheafNorm p hZ
+  obtain ⟨N, hN, hsections⟩ :=
+    exists_invertible_norm_sections p d hd ν hνrestrict hνpower hνvanish M
+  have : CompactSpace Y := hM.1
+  refine ⟨N, hN, Function.Surjective.compactSpace p.continuous hp, ?_⟩
+  intro z
+  obtain ⟨V, hV, hzV, _⟩ :=
+    exists_isAffineOpen_mem_and_subset (show z ∈ (⊤ : Z.Opens) from trivial)
+  obtain ⟨n, hn, s, U, hEU, hUV, _, hU⟩ :=
+    exists_affine_section_neighbourhood_of_finite Y M hM (p ⁻¹' {z})
+      (p.finite_preimage_singleton z) (p ⁻¹ᵁ V) (by
+        intro y hy
+        change p y ∈ V
+        rw [Set.mem_singleton_iff.mp hy]
+        exact hzV)
+  obtain ⟨t, _, ht⟩ := hsections n hn s
+  have hzt : z ∈ nonvanishingLocus (N.tensorPow n) t := by
+    rw [ht]
+    intro y hy
+    exact (hU y).1 (hEU hy)
+  have htV : nonvanishingLocus (N.tensorPow n) t ⊆ (V : Set Z) := by
+    intro w hw
+    obtain ⟨y, rfl⟩ := hp w
+    rw [ht] at hw
+    exact hUV ((hU y).2 (hw (Set.mem_singleton (p y))))
+  obtain ⟨W, hW, hWmem⟩ :=
+    (affine_cap_section_open Z N (0 : Γ(N, ⊤)) V hV).2 n hn t
+  refine ⟨n, hn, t, W, (hWmem z).2 ⟨hzV, hzt⟩, hW, ?_⟩
+  intro w
+  exact (hWmem w).trans ⟨And.right, fun hw ↦ ⟨htV hw, hw⟩⟩
 
 end AlgebraicGeometry.Scheme.Modules

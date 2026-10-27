@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tag 0GL1, lemma-j-shriek-and-tensor. Agent-formulated consecutive-quotient normalization of the strict comparison recorded in lem-sf-integral-open-reduction-comparison, expanding parent proof Step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived reduction quotient transitions under evaluation of module systems",
+   "results": "8 hits, including AdicCompletion transition naturality and evaluation lemmas, Module.Dual.eval_naturality, and CategoryTheory.Quotient.natTransLift; no open-sheaf K-flat tensor square or strict-model evaluation formula.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"extensionByZero\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientSquare|restrictionComparison|scalar.*comparison",
+   "results": "10 hits in Mathlib ideal cotangent square files; none concerns open extension on module sheaves. Local rg found the existing comparison, calculus, and RingedOpenScalar interfaces, but neither of the two specialized model statements.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOpenReductionQuotientSquare",
+  "date": "2026-10-27",
+  "group": "T3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "id": "lem-sf-integral-open-tensor-representative",
+ "title": "Finite components of strict open reduction on K-flat representatives",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, independent scheme and coefficient universes, an open immersion $j:X\\hookrightarrow V$, its coefficient transports and exact open operations $o$, two reduction calculi $S_V,S_X$, a generator-normalized ordinary open tensor comparison $\\theta$, and a strict comparison $r$ [lem-sf-integral-open-reduction-comparison, def-trf-compact-support-system-evaluation-diagram]. Let $Q$ be an unbounded flat-term K-flat complex of completed coefficient modules on $X$, with $\\mathbf Q(Q)$ derived complete [def-pc-kflat-complex, def-pc-flat-sheaf-modules, def-weil-derived-complete]. Write $JQ$ for its termwise open extension. There is a proof of K-flatness of $JQ$ such that, for every positive coefficient level $n+1$, the evaluated comparison $\\alpha_n$ equals the following explicitly constructed isomorphism $\\beta_n(Q)$: apply finite reduction to the exact-localization isomorphism $j_!\\mathbf Q(Q)\\cong\\mathbf Q(JQ)$; apply the K-flat finite-reduction model of $JQ$; localize the degreewise ordinary isomorphism $\\theta_n$; invert the exact-localization isomorphism for finite open extension on the tensor complex of $Q$; finally apply finite open extension to the inverse K-flat finite-reduction model of $Q$. Here $\\alpha_n$ is evaluation of $r$ followed and preceded by the recorded reduction-evaluation and exact open-evaluation isomorphisms. This asserts an equality of whole isomorphisms at each finite level, with no claim about a quotient arrow.",
+ "proof": [
+  {
+   "text": "Apply r.strictModel to the given flat-term K-flat Q and its completeness. Retain its K-flatness witness for the extension, its representative isomorphisms, and its single chain comparison.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the whole-system representative equation. The first identities of the two CoefficientReductionPresentation predicates give the precise reductionEvaluation followed by coefficientFiniteReductionModel. The degreewise finite-component equation is an equality of cochain morphisms.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the exact-functor localization factor formula for the ordinary extension-evaluation square, proved by the compositor and natural-isomorphism factor identities. Apply derived finite evaluation to the strict representative equation. Naturality moves the extension and evaluation factors; the degreewise component identity replaces the localized chain comparison. The two presentation identities and naturality of reductionEvaluation identify the two sides. Cancel the source reduction-evaluation isomorphism and the target finite model and exact-localization factors, then use isomorphism extensionality.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "stmt_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "def-trf-compact-support-system-evaluation-diagram",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tag 0GL1, lemma-j-shriek-and-tensor. Agent-formulated consecutive-quotient normalization of the strict comparison recorded in lem-sf-integral-open-reduction-comparison, expanding parent proof Step 1. Explicit representative subargument, T3 2026-10-27. P7: direct exact-localization factor calculation, 2026-10-27; the general pasted-square composition theorem is not needed."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Integral construction: the specified compact-support quotient transitions equal those for the proper image after open extension, parent Step 1, the strict open-comparison quotient square. Finite tensor component identification.",
+   "via": [
+    "lem-sf-integral-open-reduction-quotient-square",
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOpenTensorRepresentative",
+  "file": "lean/Sheaf/SixFunctors/IntegralOpenTensorRepresentative.lean",
+  "declaration": "WeilConjectures.integralOpenTensorRepresentative",
+  "statement": "theorem integralOpenTensorRepresentative\n    (SV : CoefficientDerivedSystemCalculus l E V)\n    (SX : CoefficientDerivedSystemCalculus l E X)\n    (tensor : IntegralOpenReduction.TensorComparison l E j o)\n    (r : IntegralOpenReduction.Comparison l E j o SV SX tensor)\n    (Q : CochainComplex (scalarReductionSource l E X) ℤ)\n    (hQ : CochainComplex.IsKFlatIndependentCoefficients\n      (J := ProEt.topology X) (R := completedIntegralCommRingSheafUnrestricted l E X) Q)\n    (hflat : ∀ i : ℤ, SheafOfModules.IsFlatOnSite\n      (J := ProEt.topology X) (R := completedIntegralCommRingSheafUnrestricted l E X) (Q.X i))\n    (hc : IntegralOpenReduction.complete l E X (DerivedCategory.Q.obj Q)) :\n    ∃ hJQ : CochainComplex.IsKFlatIndependentCoefficients\n      (J := ProEt.topology V) (R := completedIntegralCommRingSheafUnrestricted l E V)\n      (((IntegralOpenReduction.extension l E j o).mapHomologicalComplex (.up ℤ)).obj Q),\n      ∀ n : ℕ,\n        integralOpenReductionAlpha l E j o SV SX tensor r ⟨DerivedCategory.Q.obj Q, hc⟩ n =\n          integralOpenTensorRepresentativeIso l E j o tensor Q hQ hJQ n",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.integralOpenReductionStep",
+   "WeilConjectures.integralOpenReductionAlpha",
+   "WeilConjectures.integralOpenTensorChainIso",
+   "WeilConjectures.integralOpenTensorRepresentativeIso",
+   "WeilConjectures.integralOpenTensorRepresentative"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T222758-L-695038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261027T012917-L-2346254",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

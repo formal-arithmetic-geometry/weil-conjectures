@@ -1,0 +1,76 @@
+# Stage-1 delivery: lem-asd-homotopy-category-koszul-braided
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-asd-homotopy-category-koszul-braided.json`: corrected and split statement; no exact Mathlib match.
+- `dag/nodes/sec-smooth-purity/lem-pur-shape-total-tensor-homotopies.json`: statement, Mathlib leaf. The two clauses are `HomologicalComplex.mapBifunctorMapHomotopy₁` (Mathlib/Algebra/Homology/BifunctorHomotopy.lean:178) and `HomologicalComplex.mapBifunctorMapHomotopy₂` (same file:190), specialized to the additive tensor bifunctor and the given shape.
+- `citations.json`: six verbatim statement quotations, one for each step/node citation.
+
+One new node, one Mathlib leaf. New-node proofs and proof dependencies are empty. No Lean, unit/chapter records, repository files or launcher files were changed. Auxiliary parsing/writing scripts and search log are confined to this item's sandbox.
+
+## Attachments
+
+No exact attachment for the general-shape item. `HomotopyCategory.braidedCategory` in `lean/WeilConjectures/Algebra/Homology/HomotopyCategory/Braided.lean:60` and the supporting `braiding` and `braiding_quotient` are sorry-free in their own bodies but have the fixed shape `ComplexShape.up ℤ`. The complex-side instance `CochainComplex.Monoidal.braidedCategory` in `WeilConjectures/Mathlib/Algebra/Homology/Monoidal.lean` likewise fixes integer cochain complexes. These cover the integer specialization, not every hypothesis and shape of this item. The general `HomotopyCategory.MonoidalCategory.braidedCategory` in `WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Braided.lean:243` still has two `sorry`s. Searching the project for the item docstring tag found no declaration carrying it.
+
+## WANTED
+
+None. All sources used were available locally.
+
+## STATEMENT-DISPUTED: general shape signs do not imply hexagon coherence
+
+The imported prose writes `(-1)^(pq)` for indices in an arbitrary additive monoid, where multiplication of indices is not defined. The corresponding upstream declaration also has a real hypothesis gap: its `TotalComplexShapeSymmetry c c c` instance supplies the two differential compatibility equations for a sign function σ, but **does not supply either multiplicativity identity for σ**. I read the actual fields at Mathlib/Algebra/Homology/ComplexShapeSigns.lean:294-302 and the tensor-sign fields at lines 119-126. The general upstream braiding is built from precisely that chosen σ using `mapBifunctorFlipIso`; the proof sketch silently treats it as the canonical integer sign.
+
+Explicit counterexample to that upstream generality: take C to be rational vector spaces with ordinary tensor and flip, I=ℤ, c the usual cochain shape, ε(p)=(-1)^p, but choose the perfectly valid shape-symmetry signs σ'(p,q)=-(-1)^(pq). Both differential compatibility equations survive multiplying every sign by -1, so all the upstream typeclass hypotheses still hold. For X=Y=Z=ℚ[0], the single-braiding side of either hexagon is -id and the two-braiding side is +id after the usual reassociation. They differ over ℚ. There are no nonzero homotopies between degree-zero complexes, so quotienting does not repair the failure. Even the customary symmetric-sign condition σ'(q,p)=σ'(p,q) would not repair it.
+
+Repair delivered: introduce σ for a general shape, explicitly assume
+σ(p,q+r)=σ(p,q)σ(p,r) and σ(p+q,r)=σ(p,r)σ(q,r), together with the existing differential compatibility equations. The conclusion is still the chain braiding and both quotient hexagons for the stated general shape. Retain and verify the exact integer Koszul specialization. The additive commutativity of I merely spells out the index equality p+q=q+p already imposed by the upstream shape-symmetry field. The usual total tensor monoidal structure and triple-summand universal properties are assumed, as in the item's pre-existing graded-tensor-availability hypothesis; I do not infer existence of unbounded integer totals from finite coproducts. No abelian, flatness, symmetry-of-C, localization or derived-tensor hypothesis has been added. The deficient upstream instance remains a statement mismatch for stage 2; this delivery does not alter Lean or pretend that it is now proved.
+
+## Sources and route
+
+I read the chapter `sec-smooth-purity` and unit `sk-prop-sf-cbc`, including the unit's current coefficient restrictions. This audit-created support lemma is not their key node, so their realization records are unchanged. I read the **current** main-20261015 blueprint `sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.md` and its `.proof.md`: the first projection-formula display in the transpose construction uses canonical tensor constraints. The historical source path recorded in this item's maintainer-owned source points to the older placement; the report and proof-origin identify the actual sources read. This is a generic prerequisite for the imported tensor route, without changing a unit or a chapter route.
+
+For the explicit mathematics I read `literature/stacks-project/more-algebra.tex`, section-symmetric-monoidal: the displayed chain-map sign computation, Tag 0FNI (`lemma-symmetric-monoidal-cat-complexes`), `lemma-derived-tor-homotopy`, and Tag 0GWP (`lemma-symmetric-monoidal-homotopy-category`), together with the `item-flip-tensor-product` sign convention. I also read the ringed-site version in `sites-cohomology.tex`, Tag 0FPQ (`lemma-symmetric-monoidal-cat-complexes`), which is only corroborating and is not used outside its scope. These sources omit coherence details; steps 4 and 5 provide the missing calculations instead of citing those omissions as a proof. The general braided/shape version and dispute repair are agent-written, so `proof_origin.by` is `agent`. No SGA source is used.
+
+For the new leaf I read **both** full declaration types in Mathlib/Algebra/Homology/BifunctorHomotopy.lean:178-192 and their common hypotheses at lines 25-37. Set C₁=C₂=D=C, F=curriedTensor C and all shapes equal to c. The epsilon homomorphism and relation conditions in the new statement give the standard `TotalComplexShape c c c`; the existence assumptions are exactly the required `HasMapBifunctor` instances for source and target. The constructors need only additive F, preadditive categories and the total-shape data, not a braiding or an abelian category. I also read their homotopy formulas and the two-input descent in the project's `FromJoel/Algebra/Homology/BifunctorHomotopy.lean`, plus the general homotopy monoidal construction and quotient associator formula in `FromJoel/Algebra/Homology/HomotopyCategory/Monoidal.lean`.
+
+The blueprint ancestor command returns `None` for this item because its maintainer creation record has `item: null`, despite its explicit pre-existing `blueprint.from.node = thm-asd-smooth-tensor`. I retained all those maintainer fields. The new leaf records the command's actual null ancestor, the intervening item in `via`, and the explicit known blueprint place in its `from.place`; the report and split_report repeat the semantic connection. No fabricated ancestry chain or maintainer-field change is used.
+
+## Searches and Not duplicates
+
+All new Mathlib searches were made with the required msearch.py command and read; searches.jsonl records their queries and results. The node records only searches actually run. Both semantic services and Loogle responded successfully in this session. For the new leaf, the first query about tensor on homotopy categories found mapBifunctorMapHomotopy₁; a second phrasing about an additive bifunctor found both required declarations as the first two hits. Loogle confirmed the first declaration, LeanSearch returned both, and the directory-level grep reported the two filenames and lines 178 and 190. An initial single-file grep omitted the filename in its raw output; the later directory-level grep supplies it correctly, and is the grep recorded on the node. For the item, two semantic phrasings and both homotopy/complex name queries found only generic localization/graded-braiding APIs and differential sign lemmas. I read the potential matches; none proves the repaired signed chain/homotopy braiding in one specialization. The old maintainer searches on the existing item were preserved.
+
+Whole-DAG searches included the declaration names, TensorSigns, TotalComplexShapeSymmetry, Koszul/braiding notions, tensor-homotopy and additive-bifunctor statements. Whole-blueprint searches used `braiding`, `homotopy`, `bifunctor`, `tensor`, `mapBifunctorMapHomotopy` and `homotopic`; they yielded no exact general-shape node. I read the closest existing statements, including the following distinctions.
+
+## Not duplicates
+
+lem-pur-shape-total-tensor-homotopies vs lem-sfb-total-tensor-homotopy: the latter assumes an abelian category with all small colimits and tensor preserving all of them, and treats only integer cochain complexes. The leaf needs neither abelian structure nor all colimits and treats arbitrary c/ε; it states only preservation of a specified input homotopy, not the construction and coherence of an entire monoidal structure.
+
+lem-pur-shape-total-tensor-homotopies vs lem-weil-pbc-total-tensor-homotopy-cone-signs: the latter is specific to module sheaves on a ringed site and integer cochain complexes, with additional cone, triangulated and K-flat assertions. It does not cover a preadditive braided C or a general shape.
+
+lem-pur-shape-total-tensor-homotopies vs lem-pur-total-tensor-signed-coherence: the latter is an integer-indexed ringed-site assertion about shift/tensor/braiding formulas and two shift diagrams, not preservation of input homotopies in an arbitrary preadditive category.
+
+lem-pur-shape-total-tensor-homotopies vs lem-asd-homotopy-category-koszul-braided: the leaf has no braiding or sign σ hypothesis and proves neither a Koszul chain isomorphism nor a hexagon. It is an independent, strictly smaller homotopy-congruence input. The item's actual construction and both coherence calculations remain in its own proof.
+
+## Review by O3
+
+I checked delivery-errors B–E against the written files, not only the mechanical fields. The new node introduces C, its additive tensor, the shape and signs, the total tensor, the maps, and homotopy itself, and has no proof sketch or hidden existence claim. Its two clauses are exactly the two Mathlib homotopy constructors after the specialization described above. The statement does not assume global coproducts that the declarations do not require. The one new node is a genuine Mathlib input; I kept the coproduct construction, inverse, chain-map equations and quotient image arguments as proof steps and did not create nodes restating the item's clauses.
+
+Step 1 uses the new leaf's **two explicit homotopy assertions** to make the quotient tensor independent of representatives; their hypotheses are the additive tensor and available totals in the item. The other citation is def-sfb-monoidal-category, whose statement actually lists the natural associator/unitors, pentagon and triangle being sent through Q. Composition of homotopies is written out, and no localization theorem is applied to a quotient. The complex monoidal structure is an explicit hypothesis, not taken from a node that proves it only for abelian cochain categories.
+
+Step 2 uses def-weil-preadditive-category for additive Hom groups and bilinear composition, hence for multiplication of maps by signs and for cancellation of the two inverse scalars. I checked its statement verbatim. All coproduct and shape data used are spelled out in the item. The proof writes both coefficients in the chain-map square, including the ε(p) factor in the second one. The inverse is σ(p,q) times the **inverse** of β(X^p,Y^q); I specifically checked that it never replaces this with β(Y^q,X^p), which would add an unjustified symmetry assumption. This is the elementary two-component calculation and coproduct universal property, not an omitted chain-complex lemma.
+
+Step 3 cites lem-sfb-braiding-naturality; I opened its statement, which is precisely the equation with both f and g. Here it is applied in the original braided C to the degree maps, where every hypothesis is in force. Step 4 cites the β(A,B⊗D) formula of lem-sfb-braiding-hexagon; step 5 cites its β(A⊗B,D) formula. I opened and type-checked both displayed statement formulas using the stated associator orientation and right-to-left composition. The steps use them only in C, never presume the desired braiding on complexes, and explicitly multiply their two scalar paths. They need both newly stated sign identities, and the given triple-summand comparison property covers unbounded complexes. These are Mathlib tools, so there is no off-unit non-Mathlib tool-use declaration to request.
+
+Step 6 applies the quotient functor to the equations already proved and uses surjectivity of the map-to-homotopy-class operation, directly from the quotient definition. It does not assume the quotient is faithful or infer chain-map equality from homotopy. Step 7 checks all four sign equations by distributivity and parity and retains negative degrees. I checked that each citation in steps 1–5 is used only for text that appears in its quoted statement; citations.json uses full relevant formulas/clauses rather than unrelated short substrings. Steps 6 and 7 need only earlier steps and definitions.
+
+Small-case checks: all complexes concentrated in degree zero give the original braiding in the standard Koszul case; an odd–odd pair gives its negative; zero complexes and empty coproduct degrees have their unique zero maps. Degree -1 and degree 1 behave by parity rather than truncated natural exponents. The negated-sign counterexample satisfies both differential equations but fails both multiplicativity and both hexagons already on ℚ[0]. I also tested the canonical sign identities for all p,q,r in [-3,3] by elementary integer arithmetic in the sandbox. In characteristic two the signs collapse and the formulas remain valid. None of these checks assumes β is involutive. Every proof step is under 2000 characters, so no long-step hidden lemma remains.
+
+What I corrected: the ill-typed general use of pq, the missing σ coherence hypotheses, the misleading finite-coproduct parenthesis for unbounded cochains, and the irrelevant dependency on the etale derived tensor definition. The source's omitted hexagon checks now have complete scalar arguments. I retained the maintainer-owned original source/Lean records and recorded their scope mismatch for review. No target statement or target-dependent definition was changed.
+
+## Unfinished work
+
+No unresolved mathematical step in this stage-1 split. The deficient general upstream Lean instance must eventually acquire the sign coherence hypotheses (or a canonical coherent sign choice); this stage is not authorized to edit it. The current cochain-only implementation is not reported as an exact attachment for the corrected general theorem. Server dry run and direct push results are recorded below after they finish.
+
+## Validation
+
+The first server dry run found one metadata omission: the new leaf's match described both verified lines in `how` but lacked the required numeric `line` field. Added `line: 178`; the second declaration and its line 190 remain explicit in `how`. No mathematical changes were needed.

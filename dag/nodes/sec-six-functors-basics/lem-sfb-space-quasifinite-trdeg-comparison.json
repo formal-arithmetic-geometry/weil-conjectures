@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-space-quasifinite-trdeg-comparison",
+ "kind": "statement",
+ "title": "Transcendence degrees in scheme charts of a locally quasi-finite space map",
+ "statement": "Let $k$ be a field [def-weil-field], let $Y$ be a scheme locally of finite type over $k$ [def-pc-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism], let $E$ be an algebraic space over $k$ [def-trf-algebraic-space], and let $g:E\\to Y$ be a morphism over $k$ which is locally quasi-finite, meaning that for every representable etale scheme chart $c:W\\to E$, the scheme morphism $g\\circ c:W\\to Y$ is locally quasi-finite [def-weil-etale-morphism, pqf-def-quasifinite]. Write $|E|$ for its field-valued point classes with atlas topology [def-a1-space-point-topology]. For every $e\\in|E|$, every such chart $c:W\\to E$, and every $w\\in W$ mapping to $e$, one has $$\\operatorname{trdeg}_k\\kappa(w)=\\operatorname{trdeg}_k\\kappa(g(e)).$$ The fields and their $k$-structures are [def-weil-residue-field], and transcendence degree is [def-kun-transcendence-degree]. Thus the left side is independent of the chart and its chosen point above $e$. No surjectivity of $c$, quasi-compactness, or separation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06RX (lemma-compare-tr-deg), specialized to E -> Y -> Spec k, evaluated in an arbitrary etale scheme chart; chart interpretation: definition-dimension-fibre and its following explanation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "pqf-def-quasifinite",
+  "def-a1-space-point-topology",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Fix $e$, a chart $c:W\\to E$, and $w$ above $e$, and set $f=g\\circ c$ and $y=f(w)=g(e)$. Give $W$ the $k$-structure induced by $c$. By the stated chartwise hypothesis, $f$ is locally quasi-finite in the scheme sense of [pqf-def-quasifinite]. Apply [lem-weil-pbc-lqf-locally-finite-type] to see that $f$ is locally of finite type. In particular $f$ is quasi-finite at $w$. This uses this particular chart only; its surjectivity is unnecessary.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-lqf-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RX, lemma-compare-tr-deg, proof specialized to E -> Y -> Spec k; scheme-chart interpretation after definition-dimension-fibre."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-quasi-finite-at-point-isolated] to $f$ and $w$: its local finite type hypothesis was established in step 1. The corresponding point of $W_y$ is isolated. Now [lem-weil-pbc-isolated-fibre-point-residue-finite], with the same $f,w,y$, gives a finite residue-field extension $\\kappa(y)\\to\\kappa(w)$. Its hypotheses are precisely local finite type and that isolated fibre point; neither global finite type nor finite fibres is required.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-isolated-fibre-point-residue-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RX, lemma-compare-tr-deg, proof specialized to E -> Y -> Spec k; scheme-chart interpretation after definition-dimension-fibre."
+   }
+  },
+  {
+   "text": "The residue-field maps of [def-weil-residue-field] give a tower $k\\to K\\to L$, where $K=\\kappa(y)$ and $L=\\kappa(w)$, with the composite equal to the given $k$-structure on $L$: $g$ is over $k$, and taking stalk maps and then residue quotients preserves composition. The maps are injective by [def-pc-field-extension]. If $n=\\dim_K L$, then for every $a\\in L$ the $n+1$ vectors $1,a,\\ldots,a^n$ are linearly dependent over $K$, producing a nonzero polynomial over $K$ that vanishes at $a$. Thus $L/K$ is algebraic. By both clauses of [lem-kun-transcendence-degree-tower], $$\\operatorname{trdeg}_k L=\\operatorname{trdeg}_k K+\\operatorname{trdeg}_K L=\\operatorname{trdeg}_k K+0=\\operatorname{trdeg}_k K.$$ This is the desired equality; cardinal addition also covers infinite transcendence degrees.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-field-extension",
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RX, lemma-compare-tr-deg, proof specialized to E -> Y -> Spec k; scheme-chart interpretation after definition-dimension-fibre."
+   }
+  },
+  {
+   "text": "For two charts and points above the same $e$, apply the equality just proved to each. Both left-hand sides equal $\\operatorname{trdeg}_k\\kappa(g(e))$, so they equal each other. If a chart has no point above $e$ there is nothing to check. The argument made no quasi-compactness or separation assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06RX, lemma-compare-tr-deg, proof specialized to E -> Y -> Spec k; scheme-chart interpretation after definition-dimension-fibre."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-residue-finite",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "lem-kun-transcendence-degree-tower"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06RX, lemma-compare-tr-deg, proof specialized to E -> Y -> Spec k; scheme-chart interpretation after definition-dimension-fibre."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally quasi finite morphism of algebraic spaces over a field preserves the residue transcendence degree at every point",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, RingHom.EssFiniteType.residueFieldMap, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, AlgebraicGeometry.LocallyQuasiFinite, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, Algebra.instFiniteResidueFieldOfFormallyUnramified. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale and quasi finite maps of algebraic spaces do not change point transcendence degrees over a ground field",
+   "results": "Actual hits: AlgebraicGeometry.IsEtale.of_comp, RingHom.Etale.toAlgebra, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.etale_algebraMap, Algebra.Etale.comp, Algebra.IsEtaleAt.comp, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally quasi finite maps of algebraic spaces over a field preserve transcendence degrees of points",
+   "results": "Actual hits: AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.recOn, RingHom.QuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, Algebra.QuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite.casesOn, AlgebraicGeometry.LocallyQuasiFinite.rec. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"trdeg\"",
+   "results": "Actual hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "compare.*tr.*deg|trdeg|AlgebraicSpace",
+   "results": "Actual hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give scheme or ring quasi-finiteness, Jacobson closed-point criteria, or field transcendence-degree identities; none states this assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|trdeg|residueField",
+   "results": "Read QuasiFinite.lean:211,215-216,222,224: fibreToSpecResidueField finiteness and a fibre criterion; the search wrapper printed line numbers as file names for the single-file query. No chart transcendence-degree assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned components do not give the algebraic-space chart statement by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally quasi finite morphism induces finite residue field extensions, hence equal transcendence degrees over a ground field",
+   "results": "Actual returned hits: Algebra.instFiniteResidueFieldOfQuasiFiniteAt, AlgebraicGeometry.LocallyQuasiFinite.recOn, RingHom.QuasiFinite, Algebra.QuasiFinite.instFiniteResidueField, Algebra.QuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.mk, Algebra.QuasiFinite.casesOn. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned components do not give the algebraic-space chart statement by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"trdeg\"",
+   "results": "Actual returned hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned components do not give the algebraic-space chart statement by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every etale scheme chart of an algebraic space locally quasi finite over a scheme over a field, residue transcendence degrees of a chart point and its image are equal",
+   "results": "Actual returned hits: AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.instFormallyUnramifiedResidueField_1. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned components do not give the algebraic-space chart statement by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|trdeg|transcendence",
+   "results": "The directory query returned zero hits. The separately read scheme QuasiFinite.lean defines Mathlib local quasi-finiteness (without local finite type); ring Basic.lean:427-438 supplies a finite residue-field instance. These are component results, not the algebraic-space chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned components do not give the algebraic-space chart statement by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finite maps of schemes over k preserve the transcendence degree of the residue field over k because the residue extension is finite",
+   "results": "Actual returned hits: Algebra.QuasiFinite.instResidueField, Algebra.QuasiFinite.instFiniteResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.finite_fiber, Algebra.quasiFinite_iff, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, RingHom.EssFiniteType.residueFieldMap, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned components do not give the algebraic-space chart statement by a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-field-etale-chart-quasifinite",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Etale presentation test for intrinsic stack local quasi-finiteness. Supporting input for the etale local-quasi-finiteness test: Etale scheme charts of a discrete finite-type DM stack over a field. Supporting input to the 06UC specialization argument: Transcendence degrees in scheme charts of a locally quasi-finite space map.",
+   "via": [
+    "lem-sfb-dm-field-etale-chart-quasifinite",
+    "lem-sfb-dm-lqf-atlas-test",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quasifinite-trdeg-comparison",
+  "worker": "stage1",
+  "summary": "Q50 follows the scheme-chart proof of Stacks 06RX using existing DAG inputs only. Explicitly repairs the omitted requirement that g be over k (without it the specified k-structures need not form a tower), and normalizes doubled TeX escapes. The report gives a counterexample, checks the sole citer, and records sources, actual searches, and citation/hypothesis checks. No new nodes.",
+  "blueprint": "Realizes the inherited alteration/moduli supporting input to the discrete-DM chart argument. The current latest blueprint sk-thm-sf-ctf-stability-direct-images proof paragraph (3) supplies the enclosing direct-image route; the inherited from.place names the supporting dimension induction and 06UC use. blueprint_refs.py ancestor reports None; that inherited provenance is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic scheme fact giving local finite type from the chartwise Stacks local quasi-finiteness hypothesis; no statement in this unit supplies that implication."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic scheme criterion giving the isolated fibre point needed for residue finiteness; this unit has no such criterion."
+   },
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-residue-finite",
+    "why": "Generic finite-residue-extension consequence for an isolated fibre point of a locally finite type scheme morphism, exactly the scheme input of 06RX; this unit does not restate it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-residue-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-677178b5f",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-677178b5f (reviewer sub-agent of L); spot-checked: I read the whole item. Its 4 steps follow Stacks 06RX (spaces-morphisms lemma-compare-tr-deg), specialized to E→Y→Spec k on an arbitrary étale scheme chart. The only change to the statement versus the live base is the added hypothesis that g is a morphism over k. The report's counterexample is correct: k=Q(t0,t1,...), L=k(u), the map t0↦u, t_{i+1}↦t_i is a field isomorphism, and trdeg_k L=1≠0. The added hypothesis is also implicit in def-trf-algebraic-space and restores the source's 'over S'. Both citers satisfy it: lem-sfb-dm-field-etale-chart-quasifinite step 4 (projections of A×_Z A over k) and lem-sfb-space-discrete-fibres-locally-quasifinite step 6 (projections of B×_Z B over k, identity chart; the report missed this second citer). Step 1: the chartwise hypothesis plus lem-weil-pbc-lqf-locally-finite-type give lft and quasi-finiteness at w. Step 2: 01TH isolation, then lem-weil-pbc-isolated-fibre-point-residue-finite gives κ(y)→κ(w) finite; the hypotheses match exactly. Step 3: the residue-field tower is compatible with the k-structures because g is over k; finite implies algebraic is shown in a few lines; both clauses of lem-kun-transcendence-degree-tower are used, with cardinal additivity. Step 4 is elementary. Tested cases: identity, finite inseparable residue extension, z↦z² on A^1, empty chart. No new nodes. No duplicate algebraic-space trdeg node: searched 06RX, compare-tr-deg, residue-field-quasi-finite, and trdeg together with quasi-finite. No SGA. I accept the 3 generic proper-base-change scheme tool_uses. No repair note applies, and the live node is still unsplit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQuasifiniteTrdegComparison",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.trdeg_eq_of_chartwise_isLocallyQuasiFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQuasifiniteTrdegComparison.lean",
+  "statement": "theorem trdeg_eq_of_chartwise_isLocallyQuasiFinite {k : Type u} [Field k] (Y : Over (Spec (CommRingCat.of k))) [LocallyOfFiniteType Y.hom] (E : AlgebraicSpace (Spec (CommRingCat.of k))) (g : E.obj.obj ⟶ yoneda.obj Y) (hg : ∀ (W : Over (Spec (CommRingCat.of k))) (c : yoneda.obj W ⟶ E.obj.obj), IsEtale c → (yoneda.preimage (c ≫ g)).left.IsLocallyQuasiFinite) (e : Point E.obj.obj) (W : Over (Spec (CommRingCat.of k))) (c : yoneda.obj W ⟶ E.obj.obj) (hc : IsEtale c) (w : W.left) (hw : schemePointMap c w = e) : @Algebra.trdeg k (W.left.residueField w) _ _ (W.hom.residueFieldAlgebraMap w).toAlgebra = @Algebra.trdeg k (Y.left.residueField ((yoneda.preimage (c ≫ g)).left w)) _ _ (Y.hom.residueFieldAlgebraMap ((yoneda.preimage (c ≫ g)).left w)).toAlgebra ∧ ∀ (W' : Over (Spec (CommRingCat.of k))) (c' : yoneda.obj W' ⟶ E.obj.obj), IsEtale c' → ∀ w' : W'.left, schemePointMap c' w' = e → @Algebra.trdeg k (W.left.residueField w) _ _ (W.hom.residueFieldAlgebraMap w).toAlgebra = @Algebra.trdeg k (W'.left.residueField w') _ _ (W'.hom.residueFieldAlgebraMap w').toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses Over (Spec k) throughout, so g and charts are over k. The image g(e) is evaluated by the scheme composite represented by c ≫ g at w. The second conjunct states independence of the chart and the point above e; all residue-field k-algebras are the canonical ones induced by the structure morphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d7ba4deb",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Only the lean field differs from live, and lean.statement matches the file signature verbatim. Clauses match Stacks 06RX specialized to E→Y→Spec k: Over(Spec k)/yoneda makes g and the charts over k; the IsEtale chart hypothesis uses Scheme.Hom.IsLocallyQuasiFinite (Stacks 01TD, includes lft) with no surjectivity; g(e) is evaluated canonically via yoneda.preimage(c≫g) at w with schemePointMap c w = e; Algebra.trdeg (cardinal) with the canonical residueFieldAlgebraMap k-structures; the second conjunct gives chart/point independence. No extra assumptions (no qc, separation or characteristic); single universe u; proof is sorry only; docstrings carry the source place, blueprint id and the 4 proof steps; proof-dep modules exist; no duplicate declaration (the Noetherian residue-trdeg lemma differs). Advisory: residueFieldAlgebraMap lives in ZetaSeries. No compile: no changes made."
+ }
+}

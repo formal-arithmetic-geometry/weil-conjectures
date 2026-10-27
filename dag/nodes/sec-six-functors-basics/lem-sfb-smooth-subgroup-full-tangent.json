@@ -1,0 +1,391 @@
+{
+ "id": "lem-sfb-smooth-subgroup-full-tangent",
+ "kind": "statement",
+ "title": "A smooth closed subgroup with full tangent space equals a connected algebraic group",
+ "statement": "Let $k$ be any field [def-weil-field]. Let $A$ be an affine $k$-group scheme of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], connected in the underlying topological space [def-weil-connected-scheme], and let $j:B\\hookrightarrow A$ be a closed subgroup scheme [def-sc-group-scheme-subgroup]. Suppose $B$ is smooth over $k$ [def-sbc-smooth-morphisms]. Write $\\operatorname{Lie}(J)=T_{J/k,e_J}$ for the tangent space at the identity of $J$ [def-sc-scheme-tangent-space]. If $dj_e:\\operatorname{Lie}(B)\\to\\operatorname{Lie}(A)$ is surjective, then $j$ is an isomorphism of $k$-group schemes. There is no hypothesis on the characteristic or perfectness of $k$, and no connectedness hypothesis on $B$ or smoothness hypothesis on $A$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 10.15, printed pp.190-191, including its proof; arbitrary ground field, smooth closed subgroup, connected ambient algebraic group."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-sc-scheme-tangent-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=\\operatorname{Spec}C$. By the affine description of a closed immersion, $B=\\operatorname{Spec}(C/I)$ for an ideal $I\\subset C$. The algebra $C$ is finite type over $k$, hence so is $C/I$ (the images of any finite algebra-generating set generate the quotient). In particular $B$ is an affine group scheme of finite type. Both identity points have residue field $k$: their maps to $\\operatorname{Spec}k$ have the identity sections as rational points. The rings $C$ and $C/I$ are Noetherian, since a field has just the ideals $0,k$ and finite-type algebras over a Noetherian ring are Noetherian. The local rings $R_J=\\mathcal O_{J,e_J}$, for $J=A,B$, are their localizations at the identity primes and are therefore Noetherian local rings.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.15, pp.190-191: finite-type closed subgroup setting; Proposition 1.37 and its rational-identity local-ring proof, p.18. Supporting algebra: Stacks Tags 01QO, 01T2, 00FN, 01HV."
+   }
+  },
+  {
+   "text": "For $J=A,B$, put $Q_J=\\mathfrak m_{R_J}/\\mathfrak m_{R_J}^2$. The Noetherian local cotangent-dimension theorem says that $Q_J$ is finite dimensional and $\\dim R_J\\leq\\dim_k Q_J$, with equality precisely when $R_J$ is regular. Rational tangent-cotangent duality identifies $T_{J/k,e_J}$ with $Q_J^*$. Finite-dimensional duality gives $\\dim_k Q_J^*=\\dim_k Q_J$; write this common finite integer as $t_J$. Finally the group identity-local-dimension theorem gives $d_J:=\\dim J=\\dim R_J$. Thus $d_J\\leq t_J$, and $d_J=t_J$ if and only if $R_J$ is regular. All dimensions here are finite nonnegative integers; nonemptiness follows from the identity section.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-sfb-linear-dual-dimension-rank",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.37, p.18, and the dimension paragraph after 1.36, p.17, as used in the first sentence of the proof of 10.15. Local ingredients: Stacks Tags 00KU, 0B2E."
+   }
+  },
+  {
+   "text": "Since $B\\to\\operatorname{Spec}k$ is smooth and affine, the ring map $k\\to C/I$ is smooth. Every localization of a smooth algebra over a field at a prime is regular. In particular $R_B$ is regular, so step 2 gives $d_B=t_B$. This argument requires neither connectedness of $B$ nor any restriction on $k$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-over-field-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.15, p.191: the equality dim(H)=dim(h); Proposition 1.37, p.18. Affine smoothness and regularity: Stacks Tags 02H6, 01V6, 00TT."
+   }
+  },
+  {
+   "text": "Surjectivity of $dj_e$ implies $t_A\\leq t_B$: lift a basis of $T_{A/k,e_A}$ to $T_{B/k,e_B}$; any relation between the lifts maps to a relation between that basis, so the lifts are independent. Also $d_B\\leq d_A$, because the closed embedding $|B|\\hookrightarrow|A|$ sends every strict chain of irreducible closed subsets to a strict chain of the same length. Combining these two elementary comparisons with steps 2 and 3 yields\n$$d_B=t_B\\ \\geq\\ t_A\\ \\geq\\ d_A\\ \\geq\\ d_B.$$\nAll entries are therefore equal. In particular $d_A=t_A$, $R_A$ is regular by step 2, and $d_A=d_B$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.15, p.191: the displayed dimension chain. Surjectivity suffices for the first comparison; tangent injectivity is not needed."
+   }
+  },
+  {
+   "text": "The regular ring $R_A$ is the localization of the finite-type algebra $C$ at its identity prime. Its residue field is $k$, a finite separable extension of itself. The regular-separable smooth-neighbourhood theorem therefore supplies a smooth open neighbourhood of $e_A$ in $A$. Apply the group smoothness-at-identity criterion over $S=\\operatorname{Spec}k$: this base is locally Noetherian (a field has only two ideals), and $A\\to S$ is flat, since every $k$-module is flat and flatness is checked on affine charts. The group is of finite type by hypothesis. The criterion now implies that $A\\to\\operatorname{Spec}k$ is smooth at every point, hence smooth. The separability used here is solely that of $k/k$, not perfectness of $k$.",
+   "uses": [
+    "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+    "lem-sfb-group-smoothness-identity-criterion",
+    "lem-weil-pbc-module-over-field-flat",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.15, p.191: equality forces G smooth, using 1.37 and Proposition 1.28, printed p.14. Rational-point smoothness: Stacks Tag 00TV (lemma-separable-smooth)."
+   }
+  },
+  {
+   "text": "The smoothness of the affine scheme $A$ makes $C$ a smooth $k$-algebra. Hence every local ring of $A$ at a closed point is regular, and $C$ is reduced. The smooth-components-disjoint theorem applies to this affine finite-type scheme and says that its finitely many irreducible components are its connected components. Since $A$ is connected, there is only one such component, so $A$ is irreducible. We have thus obtained an irreducible reduced affine finite-type scheme over the original field $k$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-sc-smooth-algebra-reduced-field",
+    "lem-wf-smooth-components-disjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.15, p.191, final parenthesis (G smooth and connected); compare Corollary 1.35, p.17. Supporting regularity and reducedness: Stacks Tags 00TT, 056T."
+   }
+  },
+  {
+   "text": "The image $Y=j(|B|)$ is a closed subset of the irreducible affine variety $A$, with coordinate algebra $C$ (finitely generated by step 1 and reduced by step 6). If it were proper, the affine dimension-drop theorem would give $\\dim Y<\\dim C$, where both sides are lengths of chains of primes of the coordinate algebras $C$ and $C/\\mathfrak a$, $\\mathfrak a$ the radical ideal with $V(\\mathfrak a)=Y$. By the comparison of the Krull dimension of a ring with the topological Krull dimension of its spectrum, $\\dim C=d_A$, and $\\dim C/\\mathfrak a$ is the topological dimension of $\\operatorname{Spec}C/\\mathfrak a$, which is homeomorphic to the subspace $V(\\mathfrak a)=Y$ of $\\operatorname{Spec}C$; so $\\dim Y<d_A$ in the topological sense. But a closed immersion is a homeomorphism onto its image, so $\\dim j(|B|)=d_B=d_A$ by step 4, a contradiction. Thus $j(|B|)=|A|$.",
+   "uses": [
+    "lem-wf-affine-dimension-drop",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.15, p.191, final inference dim(G)=dim(H) implies G=H; strict dimension drop for a proper closed subset."
+   }
+  },
+  {
+   "text": "Apply the reduced-source factorization theorem to $\\operatorname{id}_A:A\\to A$ and $j:B\\hookrightarrow A$. The source $A$ is reduced: by step 6 the ring $C$ is reduced, and each local ring $\\mathcal O_{A,x}$ is a localization of $C$ by the affine-open stalk description, and a localization of a reduced ring is reduced (if $(r/s)^n=0$ then $tr^n=0$ for some $t\\notin\\mathfrak p_x$, so $(tr)^n=0$, $tr=0$ and $r/s=0$). Its image is contained in $j(|B|)$ by step 7. We obtain $s:A\\to B$ with $j\\circ s=\\operatorname{id}_A$. In the affine quotient description from step 1, this gives a left inverse to $C\\twoheadrightarrow C/I$, which is consequently injective as well as surjective. Hence $I=0$ and $j$ is an isomorphism of $k$-schemes. Its inverse respects multiplication, identity and inverse: compose each required equality with the isomorphism $j$ and use the corresponding compatibility for $j$. It is therefore an isomorphism of $k$-group schemes.",
+   "uses": [
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.15, p.191, scheme-theoretic conclusion; Milne A.30 (reduced-source factorization), also Stacks Tag 0356."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-reduced-scheme",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "lem-ag-group-identity-local-dimension",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-smooth-algebra-reduced-field",
+  "lem-sfb-group-smoothness-identity-criterion",
+  "lem-sfb-linear-dual-dimension-rank",
+  "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-wf-affine-dimension-drop",
+  "lem-wf-smooth-components-disjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 10.15, printed pp.190-191, with Propositions 1.28 and 1.37 (pp.14,18); the dimension and final scheme-theoretic arguments are expanded using existing DAG nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GrpObj, IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-24T09:07:18Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GrpObj, IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GrpObj'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Lie.*(subgroup|factor)|differential.*subgroup|Cartier",
+   "results": "{\"t\": \"2026-10-24T09:07:19Z\", \"tool\": \"grep\", \"query\": \"Lie.*(subgroup|factor)|differential.*subgroup|Cartier\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth closed subgroup with the same tangent space as a connected algebraic group is the group",
+   "results": "{\"t\": \"2026-10-24T09:07:19Z\", \"tool\": \"leansearch\", \"query\": \"A smooth closed subgroup with the same tangent space as a connected algebraic group is the group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClosedSubgroup.mk.inj\", \"ClosedSubgroup.recOn\", \"ClosedSubgroup.ext\", \"ClosedSubgroup.ctorIdx\", \"ClosedSubgroup.mk.injEq\", \"ClosedSubgroup\", \"ClosedSubgroup.ext_iff\", \"ClosedAddSubgroup.mk.inj\"], \"digest\": \"2a64d3755b77e3a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth closed subgroup of a connected algebraic group with equal tangent Lie algebra is the whole group over any field",
+   "results": "{\"t\": \"2026-10-24T09:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth closed subgroup of a connected algebraic group with equal tangent Lie algebra is the whole group over any field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"GroupLieAlgebra\", \"instLieGroupOfTopWithTopENat\", \"instLieAddGroupOfNatWithTopENat\", \"instLieAddGroupOfTopWithTopENat\", \"instLieGroupOfNatWithTopENat\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\"], \"digest\": \"b748f91f84444c64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an arbitrary field a smooth closed algebraic subgroup with surjective tangent inclusion equals its connected ambient group",
+   "results": "{\"t\": \"2026-10-24T09:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"Over an arbitrary field a smooth closed algebraic subgroup with surjective tangent inclusion equals its connected ambient group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"instLieGroupOfTopWithTopENat\", \"Subgroup.coe_pathComponentOne\", \"Subgroup.Normal.pathComponentOne\", \"LieGroup\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"instLieGroupOfNatWithTopENat\"], \"digest\": \"fb010e0089eb68b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "(Lie|tangent).*(subgroup|closedImmersion)|same.*Lie",
+   "results": "{\"t\": \"2026-10-24T09:10:19Z\", \"tool\": \"grep\", \"query\": \"(Lie|tangent).*(subgroup|closedImmersion)|same.*Lie\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Affine.lean\"], \"digest\": \"8eadb81392555972\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-24T09:10:20Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\"], \"digest\": \"dde6e3f6ca46fb98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "differential.*surjective|surjective.*differential|Lie.*[sS]ubgroup",
+   "results": "{\"t\": \"2026-10-24T09:33:17Z\", \"tool\": \"grep\", \"query\": \"differential.*surjective|surjective.*differential|Lie.*[sS]ubgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or manifold Lie groups, affine schemes, or general closed immersions; none states the algebraic-group criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth closed subgroup with the same tangent space as a connected algebraic group is the whole group",
+   "results": "{\"t\": \"2026-10-24T09:33:18Z\", \"tool\": \"leansearch\", \"query\": \"A smooth closed subgroup with the same tangent space as a connected algebraic group is the whole group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClosedSubgroup.ext\", \"ClosedSubgroup.recOn\", \"ClosedSubgroup.ctorIdx\", \"ClosedSubgroup.mk.inj\", \"ClosedSubgroup.mk.injEq\", \"ClosedSubgroup.ext_iff\", \"ClosedSubgroup\", \"ClosedSubgroup.isClosed'\"], \"digest\": \"8210b2c603126c6c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or manifold Lie groups, affine schemes, or general closed immersions; none states the algebraic-group criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-24T09:33:18Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\"], \"digest\": \"dde6e3f6ca46fb98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or manifold Lie groups, affine schemes, or general closed immersions; none states the algebraic-group criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth closed subgroup with surjective tangent map equals a connected affine group scheme over a field",
+   "results": "{\"t\": \"2026-10-24T09:33:20Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth closed subgroup with surjective tangent map equals a connected affine group scheme over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieGroup\", \"AlgebraicGeometry.IsAffine\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"LieAddGroup\", \"instLieGroupOfTopWithTopENat\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"instLieAddGroupOfNatWithTopENat\", \"instLieAddGroupOfTopWithTopENat\"], \"digest\": \"130f0b2f331b61a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or manifold Lie groups, affine schemes, or general closed immersions; none states the algebraic-group criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "tangent.*[dD]im|finrank.*Lie|Lie.*finrank",
+   "results": "{\"t\": \"2026-10-24T09:40:09Z\", \"tool\": \"grep\", \"query\": \"tangent.*[dD]im|finrank.*Lie|Lie.*finrank\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or manifold Lie groups, affine schemes, or general closed immersions; none states the algebraic-group criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group with a smooth closed subgroup of full Lie algebra is smooth and equal to the subgroup when connected",
+   "results": "{\"t\": \"2026-10-24T09:40:12Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic group with a smooth closed subgroup of full Lie algebra is smooth and equal to the subgroup when connected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instLieRingGroupLieAlgebra\", \"LieGroup\", \"GroupLieAlgebra\", \"LieGroup.of_le\", \"instLieGroupOfTopWithTopENat\", \"Subgroup.connectedComponentOfOne\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"instLieGroupOfSomeENatTopOfLEInfty\"], \"digest\": \"9c9bbbee9f8e3700\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or manifold Lie groups, affine schemes, or general closed immersions; none states the algebraic-group criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-charzero-lie-detects-factorization",
+  "date": "2026-10-24",
+  "group": "Q158"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Proposition 17.80 proof, printed p.378, first reduction paragraph; Corollary 17.77, p.377 (central semisimple vectors are fixed by the group). The scalar-extension formulation makes explicit the geometric subspace needed in that reduction. Supporting prerequisite: Proposition 17.80 proof, printed p.378, characteristic-zero exclusion, read with additive Jordan decomposition (17.74, p.377), Proposition 10.15 (p.190), and descending central series (6.38, p.133). This is an agent-stated intermediate criterion implicit in the exclusion, not a separately numbered assertion in Milne. Springer 1998, 13.3.5, cited there for details, is WANTED. Supporting step: Integrating the lowering-operator subgroup of GL(g) using Cartier smoothness and Milne 10.14-10.15. Supporting equality criterion: Milne Proposition 10.15, pp.190-191, applied to the smooth inverse-image subgroup G times_H K inside G. Q85 split: Proposition 10.15, p.191, dimension chain and final smooth-connected equality argument, expanded through rational local rings and reduced-source factorization.",
+   "via": [
+    "lem-sfb-charzero-lie-detects-factorization",
+    "lem-sfb-charzero-ad-nilpotence-group-criterion",
+    "lem-sfb-central-semisimple-restricted-subalgebra",
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-subgroup-full-tangent",
+  "worker": "stage1",
+  "summary": "Read Milne 10.15 and supporting local geometry; retain the arbitrary-field statement and expand its dimension argument into eight steps using existing DAG nodes only. No new nodes. Surjectivity suffices for the tangent-dimension inequality. Regularity at the rational identity yields smoothness without perfectness. The final equality is scheme-theoretic, using reducedness, not only equality of supports.",
+  "blueprint": "The inherited provenance has no blueprint ancestor (blueprint_refs ancestor returns None). This supporting input realizes the Milne 10.15 equality criterion required by the parent charzero-lie-detects-factorization split, within the inherited direct-images alteration chain; no unit/chapter route is changed. Steps 1-4 expand Milne 10.15 dimension chain, step 5 its use of 1.37/1.28, steps 6-8 its final smooth-connected full-dimension argument.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Generic local algebra or affine-scheme geometry used in the Milne 10.15 dimension/smoothness argument; its exact statement is used, with hypotheses checked in report.md. It supplies a supporting fact, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic local algebra or affine-scheme geometry used in the Milne 10.15 dimension/smoothness argument; its exact statement is used, with hypotheses checked in report.md. It supplies a supporting fact, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Generic local algebra or affine-scheme geometry used in the Milne 10.15 dimension/smoothness argument; its exact statement is used, with hypotheses checked in report.md. It supplies a supporting fact, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-sc-smooth-algebra-reduced-field",
+    "why": "Generic local algebra or affine-scheme geometry used in the Milne 10.15 dimension/smoothness argument; its exact statement is used, with hypotheses checked in report.md. It supplies a supporting fact, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic local algebra or affine-scheme geometry used in the Milne 10.15 dimension/smoothness argument; its exact statement is used, with hypotheses checked in report.md. It supplies a supporting fact, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic local algebra or affine-scheme geometry used in the Milne 10.15 dimension/smoothness argument; its exact statement is used, with hypotheses checked in report.md. It supplies a supporting fact, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic local algebra or affine-scheme geometry used in the Milne 10.15 dimension/smoothness argument; its exact statement is used, with hypotheses checked in report.md. It supplies a supporting fact, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Generic local algebra or affine-scheme geometry used in the Milne 10.15 dimension/smoothness argument; its exact statement is used, with hypotheses checked in report.md. It supplies a supporting fact, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-wf-smooth-components-disjoint",
+    "why": "Generic local algebra or affine-scheme geometry used in the Milne 10.15 dimension/smoothness argument; its exact statement is used, with hypotheses checked in report.md. It supplies a supporting fact, not a replacement of any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-group-identity-local-dimension",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-smooth-algebra-reduced-field",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-wf-affine-dimension-drop",
+  "lem-wf-smooth-components-disjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-8eb7407a8",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-8eb7407a8 (reviewer sub-agent of L); spot-checked: Read in full: Milne iAG2017 Prop. 10.15 (printed pp.190-191, with the dim H=dim h=dim g>=dim G>=dim H chain and the alpha_p and G° remarks), the item and the statements of all 21 cited nodes. There are no new nodes. The statement is unchanged; it is the affine case of 10.15, since surjective dj_e means equal Lie algebras because dj_e is injective for a closed immersion. Step checks: step 1 (01QO, 01T2, 00FN, stalk localization) gives Noetherian local rings with residue field k. Step 2 (00KU, 0B2E with kappa=k, dual dimension, and the group identity-local-dimension over any field, which also holds for the possibly non-smooth A). Step 3 (01V6 and 00TT) makes R_B regular. Step 4 is elementary: t_A<=t_B by lifting a basis and d_B<=d_A by chains, so the sandwich makes R_A regular. Step 5 (00TV with kappa=k separable even for imperfect k, then the first clause of group-smoothness-identity-criterion over Spec k with flatness from vector spaces) makes A smooth. Step 6 (reduced, smooth-components-disjoint, A connected) makes A irreducible. Step 7 uses dimension-drop over any field. Step 8 (0356 applied to id_A) gives I=0. Edge cases checked: trivial group, imperfect k, disconnected B, Lie(A)=0; the alpha_p and non-connected counterexamples fail the hypotheses. Not duplicates: lem-wf-same-lie-closed-subgroup and lem-ag-equal-dimension-subgroup are over Q̄_ℓ only, and group-tangent-dimension-smoothness needs an algebraically closed field. FIX (2 citation gaps): (1) C1, step 7: dimension-drop measures prime-chain dimension but d_A and d_B are topological; I added lem-weil-pbc-spec-topological-krull-dimension-ring and wrote out dim C=d_A and dim C/a=dim Y. (2) Step 8: 0356 needs the scheme A to be reduced (every local ring reduced), not just the ring C; I added the localization argument and cited lem-weil-pbc-affine-open-stalk-localization and def-pc-reduced-scheme. Batch 5: lem-trf-smooth-at-point-fibre-criterion, reached through lem-sfb-scheme-flat-smooth-point-base-change, is the generic flat+lfp fibrewise smoothness criterion (Stacks 01V9 type). It is neither statement of the trace formula or Poincaré duality nor a step of their proofs, so it is outside the assumptions. The worker wrote the generic tool_uses itself, contrary to C8; I checked them and accept them. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SmoothSubgroupFullTangent",
+  "declaration": "AlgebraicGeometry.isIso_of_smooth_closedSubgroup_surjective_tangent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SmoothSubgroupFullTangent.lean",
+  "statement": "theorem isIso_of_smooth_closedSubgroup_surjective_tangent (k : Type u) [Field k] (A B : Over (Spec (.of k))) [GrpObj A] [GrpObj B] [IsAffine A.left] [LocallyOfFiniteType A.hom] [QuasiCompact A.hom] [ConnectedSpace A.left] (j : B ⟶ A) [IsClosedSubgroupScheme j] [Smooth B.hom] (hsurj : ∃ he : Function.Bijective (j.left.residueFieldMap (GrpObj.onePoint B)).hom, Function.Surjective (schemeTangentMap k B.left A.left B.hom A.hom j.left j.w (GrpObj.onePoint B) he)) : IsIso j",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-720b9ab28",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Statement verbatim in file; node changed only in lean. Clause check vs Milne iAG 10.15 and all 7 stmt_dep declarations: Field k (universe u), GrpObj on Over (Spec k), IsAffine + LocallyOfFiniteType + QuasiCompact (def-weil-finite-type-morphism), ConnectedSpace A, IsClosedSubgroupScheme j (Defs.lean:100), Smooth B.hom only, schemeTangentMap at GrpObj.onePoint B (target j(e_B)=e_A by IsMonHom). The ∃ residue-field bijectivity witness is automatic at k-rational identities, so it adds no restriction. Conclusion IsIso j in Over k = group-scheme iso. Surjective form equivalent to Lie(H)=Lie(G) since a closed immersion has injective dj_e. Edge cases: trivial group, dim 0, imperfect k, disconnected B; alpha_p and G° counterexamples excluded. No new defs, no duplicate theorem, all imports exist, docstrings carry source/blueprint and 8 proof steps, sorry-only proof, report has both required sections. Not recompiled: no file changed."
+ }
+}

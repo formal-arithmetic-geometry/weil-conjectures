@@ -16,92 +16,48 @@
  ],
  "proof": [
   {
-   "text": "Fix $\\mathfrak p\\in\\operatorname{Spec}R$, put $A=R_{\\mathfrak p}$, $\\mathfrak m=\\mathfrak pA$, $C=(R\\setminus\\mathfrak p)^{-1}B$, and $F=B\\otimes_R\\kappa(\\mathfrak p)$. By [def-weil-pbc-localization-at-prime], $A$ is local with maximal ideal $\\mathfrak m$ and $C/\\mathfrak mC=F$. By hypothesis $F$ is a nonzero domain. The map from the field $\\kappa(\\mathfrak p)$ into $F$ is injective: its kernel is an ideal of a field and cannot contain $1$. Thus the inverse image $\\mathfrak q=\\ker(B\\to F)$ is a prime with contraction $\\mathfrak p$. Every element of $R\\setminus\\mathfrak p$ therefore becomes a unit in $D=B_{\\mathfrak q}$, giving the canonical map $u:C\\to D$.",
+   "text": "Apply [lem-trf-affine-geometrically-integral-projective] to $R\\to B$. Its flatness and finite-presentation hypotheses are the stated hypotheses on $R\\to B$, and its geometric-integrality hypothesis is exactly the stated domain condition for every extension of each residue field. Thus $B$ is a projective $R$-module.",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0810, lemma-helper-blowup-affine-space, final paragraph; notation for the base-localized map in the displayed product injection"
-   }
-  },
-  {
-   "text": "Apply [lem-trf-affine-geometrically-integral-projective] to the given $R\\to B$. Its hypotheses are exactly the flatness, finite presentation and all-field-extension domain hypotheses of the item. Consequently choose a free $R$-module $E=\\bigoplus_{i\\in I}R$ and maps $j:B\\to E$, $s:E\\to B$ with $sj=1$, using [def-weil-pbc-projective-module]. Localize these maps at $R\\setminus\\mathfrak p$; the fraction formulas preserve $sj=1$. The localized free module is $\\bigoplus_{i\\in I}A$: the isomorphism sends $(r_i)/t$ to $(r_i/t)$, and its inverse uses the product of the denominators of the finitely many nonzero coordinates. Hence $C$ is a direct summand of a free $A$-module, and is projective over $A$ by the same definition.",
-   "uses": [
-    "lem-trf-affine-geometrically-integral-projective",
-    "def-weil-pbc-projective-module",
-    "def-weil-pbc-module-localization"
+    "lem-trf-affine-geometrically-integral-projective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FT, lemma-fibres-irreducible-flat-projective-nonnoetherian; projectivity input for the Tag 05FQ specialization of the Tag 0810 local injection"
+    "place": "Tag 05FT, lemma-fibres-irreducible-flat-projective-nonnoetherian."
    }
   },
   {
-   "text": "The $A$-module $D$ is flat. Indeed, for an injection of $A$-modules $L_1\\to L_2$, regard it as an injection of $R$-modules and tensor with the flat $R$-module $B$ [def-weil-pbc-flat-ring-map]. Localizing this injection of $B$-modules at $T=B\\setminus\\mathfrak q$ is still injective: if $x/t$ maps to zero, some $v\\in T$ kills its image numerator, so injectivity before localization gives $vx=0$ and $x/t=0$ [def-weil-pbc-module-localization]. Identify $T^{-1}(L_i\\otimes_R B)$ with $L_i\\otimes_A D$ by $(l\\otimes b)/t\\mapsto l\\otimes(b/t)$, with inverse $l\\otimes(b/t)\\mapsto(l\\otimes b)/t$. Balancing over $A$ follows because each $r\\notin\\mathfrak p$ acts invertibly on $L_i$, with $r^{-1}l\\otimes b=l\\otimes(b/r)$ in the localized tensor product. The maps are inverse on generators [def-weil-pbc-module-tensor-product]. The resulting injection is exactly the tensor of $L_1\\to L_2$ with $D$, proving the claim.",
+   "text": "For each $\\mathfrak p$, apply [lem-trf-fibre-generic-localization-residue-flat] with $F=B\\otimes_R\\kappa(\\mathfrak p)$, a nonzero domain by the hypothesis with $K=\\kappa(\\mathfrak p)$. The prime it constructs is $\\ker(B\\to F)$, exactly $\\mathfrak q_{\\mathfrak p}$ since the inverse image of the zero ideal is the kernel. It contracts to $\\mathfrak p$ and supplies the canonical map $u_{\\mathfrak p}:(R\\setminus\\mathfrak p)^{-1}B\\to D_{\\mathfrak p}=B_{\\mathfrak q_{\\mathfrak p}}$. The lemma gives flatness of $D_{\\mathfrak p}$ over $R_{\\mathfrak p}$. Its final clause asserts injectivity of the actual reduction of $u_{\\mathfrak p}$ modulo $\\mathfrak pR_{\\mathfrak p}$, using the stated quotient-to-localized-fibre comparison.",
    "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0810, final paragraph, flat localization at the fibre-generic prime; elementary tensor-and-fraction verification of the target-flatness hypothesis of Tag 05FQ"
-   }
-  },
-  {
-   "text": "The reduction of $u$ modulo $\\mathfrak m$ is injective. In fact $D/\\mathfrak mD$ is the localization of $F=C/\\mathfrak mC$ at the images of $B\\setminus\\mathfrak q$. The identification sends the class of $b/t$ to $\\bar b/\\bar t$; its inverse sends $\\bar c/\\bar t$, with $c=b/r\\in C$, to the class of $b/(rt)$. Changing $c$ by an element of $\\mathfrak mC$ changes this fraction by an element of $\\mathfrak mD$, and clearing denominators verifies both inverse equations [def-weil-pbc-localization-at-prime, def-weil-pbc-module-localization]. Every such $\\bar t$ is nonzero by the definition of $\\mathfrak q$. Thus $F\\to D/\\mathfrak mD$ is injective: $\\bar b/1=0$ means $\\bar t\\bar b=0$ for one nonzero $\\bar t$ in the domain $F$, whence $\\bar b=0$. This is the actual reduction map of $u$, not an arbitrary injection of the two rings.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0810, final paragraph; verification of the residue injection needed for Tag 05FQ, lemma-universally-injective-local"
-   }
-  },
-  {
-   "text": "Apply [lem-trf-local-universal-injective-residue] to $u:C\\to D$ over the local ring $(A,\\mathfrak m)$. Step 2 gives its projective source, step 3 its flat target, and step 4 its injective reduction. The criterion makes $u$ universally injective. Taking the tensor test module to be $A$ and identifying $A\\otimes_A C=C$, $A\\otimes_A D=D$ gives that $C\\to D$ itself is injective. This proves the local inclusion used in the final paragraph of the source without introducing another node for that inclusion.",
-   "uses": [
-    "lem-trf-local-universal-injective-residue"
+    "lem-trf-fibre-generic-localization-residue-flat"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05FQ, lemma-universally-injective-local, applied to the local inclusion in Tag 0810; this supplies its needed special case of Tag 05DH"
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, final paragraph: fibre-generic localization preparation."
    }
   },
   {
-   "text": "Let $b\\in B$ map to zero in every $B_{\\mathfrak q_{\\mathfrak p}}$. Step 5 shows that $b/1=0$ in $(R\\setminus\\mathfrak p)^{-1}B$ for every prime $\\mathfrak p\\subset R$. If $b\\ne0$, its $R$-annihilator $J=\\{r\\in R:rb=0\\}$ is proper, since $1\\notin J$. By [lem-weil-pbc-proper-ideal-contained-in-maximal] choose a maximal ideal $\\mathfrak p$ containing $J$; it is a prime. The fraction criterion [def-weil-pbc-module-localization] applied to $b/1=0$ supplies $r\\notin\\mathfrak p$ with $rb=0$. This puts $r\\in J\\subseteq\\mathfrak p$, a contradiction. Hence $b=0$. The kernel of the displayed product homomorphism is zero, which proves its injectivity (apply the zero-kernel assertion to the difference of two elements with equal images). If $R$ is the zero ring then so is its unital algebra $B$ and the empty-product map is injective as well.",
+   "text": "Use [lem-trf-projective-local-flat-family-injectivity] with $M=B$, $N_{\\mathfrak p}=D_{\\mathfrak p}$ and $v_{\\mathfrak p}:B\\to D_{\\mathfrak p}$ the localization homomorphism. Restrict scalars along $R\\to R_{\\mathfrak p}$; this makes $v_{\\mathfrak p}$ $R$-linear because $v_{\\mathfrak p}(rb)=v_{\\mathfrak p}(r)v_{\\mathfrak p}(b)$. Step 1 gives projectivity of $M$. The canonical $R_{\\mathfrak p}$-algebra structure from step 2 gives the required local module structure on $N_{\\mathfrak p}$ and its flatness. The induced map $M_{\\mathfrak p}\\to N_{\\mathfrak p}$ is exactly $u_{\\mathfrak p}$: both send $b/s$ to $s^{-1}v_{\\mathfrak p}(b)=b/s$. The denominator is invertible since $\\mathfrak q_{\\mathfrak p}$ contracts to $\\mathfrak p$. Hence step 2 also gives injectivity of its reduction. The family lemma now gives injectivity of $b\\mapsto(v_{\\mathfrak p}(b))_{\\mathfrak p}$, the underlying function of the displayed ring homomorphism. This proves the stated injectivity, including $R=0$, where a unital $R$-algebra $B$ is zero and the product is empty.",
    "uses": [
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
-    "def-weil-pbc-module-localization"
+    "lem-trf-projective-local-flat-family-injectivity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 0810, lemma-helper-blowup-affine-space, final paragraph, global product injection; the base-localization detection argument uses Algebra Tag 00E0 (lemma-Zariski-topology (2),(8))"
+    "place": "Tag 05FQ, lemma-universally-injective-local; Tag 0810, lemma-helper-blowup-affine-space, final paragraph: local-to-global assembly."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
   "lem-trf-affine-geometrically-integral-projective",
-  "def-weil-pbc-projective-module",
-  "def-weil-pbc-module-localization",
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-module-tensor-product",
-  "lem-trf-local-universal-injective-residue",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+  "lem-trf-fibre-generic-localization-residue-flat",
+  "lem-trf-projective-local-flat-family-injectivity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 0810, lemma-helper-blowup-affine-space, final paragraph. Its local injection is verified from the existing Tags 05FT and 05FQ nodes, instead of introducing the more general Tag 05DH theorem."
+  "place": "Tag 0810, lemma-helper-blowup-affine-space, final paragraph; assembly of fibre-generic localization preparation and a projective local-flat-family criterion, retaining the Tags 05FT and 05FQ route of the returned proof."
  },
  "mathlib_searches": [
   {
@@ -214,20 +170,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-affine-generic-localization-intersection",
   "worker": "stage1",
-  "summary": "Six-step proof of the fibre-generic product injection. Reuses the existing algebra-projectivity and local residue-injectivity criteria, with explicit localized splitting, flatness, residue-localization and annihilator arguments. No new nodes, no statement change, no Lean work.",
-  "blueprint": "Preserves the full via chain from the local-term-locality semistable-alteration branch; realizes the final localization-injectivity paragraph of Tag 0810 in the affine flattening helper. Whole-blueprint searches found no equivalent statement.",
+  "summary": "Repair rebased against the current shared DAG after the landing refusal. Preserves the statement, statement dependencies, source, blueprint and maintainer metadata. The live six-step proof is replaced by a three-step assembly using two statement-only nodes that retain all six original arguments in the report. Re-read every current cited statement and checked all citation quotes; none requires a changed hypothesis. Explicitly verifies scalar restriction and R-linearity of the localization maps, matches the induced local maps by their fraction formula, and identifies the resulting injective function with the displayed ring map. The original logged Mathlib searches and both extracted statements are unchanged.",
+  "blueprint": "Preserves the full via chain from the local-term-locality semistable-alteration branch; realizes the final localization-injectivity paragraph of Tag 0810 in the affine flattening helper. Whole-blueprint searches found no equivalent statement. The two new nodes retain the same ancestor and full via chain; no unit or chapter route changes.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q84-ebd7fba04",
-  "group": "Q84",
+  "reviewer": "NT-cc-O2-07f59fc5b",
+  "group": "O2",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-ebd7fba04 (reviewer sub-agent of L); spot-checked: I read the full item, all six steps and every cited statement, and checked them against Stacks flat.tex: Tag 0810 (lemma-helper-blowup-affine-space, final paragraph, the product inclusion S'_a ⊂ ∏ S'_q'' attributed to 05DH) and Tags 05DH (l.1907), 05FQ (l.1946) and 05FT (l.2247). The statement is unchanged and is not weaker than the source. The inverse image of the zero prime of the fibre equals pB, because B/pB is flat over R/p and so torsion-free. Step 1: the fibre ring is a nonzero domain, so q is a prime with contraction p and the map C→D exists. Step 2: the hypotheses of lem-trf-affine-geometrically-integral-projective (05FT) are exactly the item's, and the localized split gives C projective over A = R_p. Step 3: the flatness of D over A via T^{-1}(L⊗_R B) ≅ L⊗_A D checks out and is routine, so marking it elementary is acceptable. Step 4: the reduction map is F → F localized at nonzero elements of a domain, hence injective, with explicit inverses. Step 5: lem-trf-local-universal-injective-residue (05FQ) is used by its statement only, and taking L=A gives C→D injective. Step 6: the annihilator/maximal-ideal argument is correct, and R=0 is covered. proof_deps equals the union of uses. Both theorem inputs are unsplit nodes of the same unit sk-i-curve-zero with no dependency on the item, so there is no cycle and no off-route tool. No SGA source is used. Small cases tested: k[x]/k, Z[x]/Z, R[x] over R=k[ε]/ε² (nilpotents kept), a product of two fields, and R=0. The rg search over the DAG found no duplicate of the item. The worker's report that lem-trf-local-fibres-integral-projective duplicates lem-trf-affine-geometrically-integral-projective (05FT) is correct; that is a maintenance merge outside this delivery. There are no new nodes, no fixes and no tool_uses."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-07f59fc5b (reviewer sub-agent of L); spot-checked: PASS. This is the fourth push of the same re-split. The cc review passed the earlier heads e89fc783, 2cca05ed and fe4255b1. Ignoring split_report, both new node JSONs are identical to the 2cca05ed and fe4255b1 snapshots. In the item, only the wording of step 3 changed: it adds that v_p is R-linear after restricting scalars along R→R_p because it is a ring map, which is correct. The statement, stmt_deps and maintainer fields are unchanged. clones/live and side-live still hold the old 6-step proof, and neither new id exists there, so the delivery is not superseded. Source: Stacks flat.tex Tag 0810 (l.8668), whose final paragraph states S'_a⊂∏S'_{q''} via 05DH (l.8774, l.1907); 05FQ is at l.1946 and 05FT at l.2247. Assembly: (1) lem-trf-affine-geometrically-integral-projective (05FT) has exactly the item's hypotheses and makes B projective. (2) Node 1 with F=B⊗κ(p), a nonzero domain by taking K=κ(p), gives q=ker(B→F)=q_p, contraction to p, the map u, flatness of D over A and injectivity of the reduction of u. (3) Node 2 with M=B, N_p=B_{q_p} and v_p the localization map: its induced map equals u_p because s is a unit by the contraction; the conclusion is injectivity of the displayed map, and R=0 is covered. Node 1 is true: κ(p)→F is injective since F≠0, so q contracts to p; T^{-1}(L⊗_R B)=L⊗_A D; D is flat over A; θ comes from L=κ(p); the reduction of u is F→T̄^{-1}F, injective because F is a domain. Tested on k[x]/k, ℤ[x]/ℤ at (ℓ) and k[ε][x]. Node 2 is true: the splitting localizes; the DAG node for 05FQ gives universal injectivity; L=A_p plus the annihilator/maximal-ideal argument gives injectivity of the product map. Tested on R=0, M=0 and infinite free M; the residue hypothesis is necessary (v=0). Old steps 1, 3 and 4 went to node 1 and old steps 2, 5 and 6 to node 2. Nothing was dropped, the nodes are of comparable size, and neither restates the item. rg -L duplicate search found only partial neighbours: local-universal-injective-localization, projective-over-local-free, and local-universal-injective-residue (05FQ itself). No SGA, no tool_uses, no fixes. Maintainer note: this is the fourth identical push of a PASSed side completion; L should promote it."
  },
  "lean": {
   "module": "Sheaf.Paper.AffineGenericLocalizationIntersection",
@@ -251,5 +207,16 @@
   "result": "pass",
   "note": "Statement, dependencies, canonical helper, docstrings, edge cases, route-pivot constraints, and scompile evidence all checked; no findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

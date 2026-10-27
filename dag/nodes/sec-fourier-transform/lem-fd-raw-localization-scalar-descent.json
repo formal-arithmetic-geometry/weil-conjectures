@@ -1,0 +1,172 @@
+{
+ "id": "lem-fd-raw-localization-scalar-descent",
+ "kind": "statement",
+ "title": "Raw localization of the inverse integral scalar comparison and its three-field laws",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a noetherian finite-dimensional scheme $T$ with $\\ell$ invertible. Use the integral and rational scalar systems and comparison presentations of [def-fd-raw-localization-scalar-data]. Let $I_E$ be the supplied exact integral stage identifications. Suppose $b_{L/E}:I_E C_{L/E}\\cong U_{L/E}I_L$ commutes with the specified shifts, both endpoint composites are exact, ordinary transport is tensor-generator normalized, and b has the specified quotient-completion lift. Assume the integral inverse cocycle and the multiplication/completeness unit equation. Then there are a RationalFamily fixed by the supplied raw rational stage functors and their shifts, and natural isomorphisms $j_{L/E}:S_{L/E}J_L\\cong J_EP_{L/E}$. Their hom and inverse commute with the specified shifts, their endpoint composites are exact, and on every localized integral object their hom is exactly the localization of $b_{L/E}^{-1}$ followed by the inverse ordinary-scalar localization comparison. At equal fields j is J of the framework scalar unit. The three-field equation is $j_{M/L}P_{M/L}(j_{L/E})a^p_{M,L,E}=J_M(a^s_{M,L,E})j_{M/E}$, in Lean composition order. Both unit substitutions hold with the specified framework unit maps. This conclusion stops at the three-field and unit equations; it asserts neither four-field contraction. All inclusions are non-strict, so repeated fields, zero objects and empty schemes are included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Existing raw-localization scalar coherence argument, steps 1–3 only: semilinear raw localization, localized inverse cocycle and identity/unit equations."
+ },
+ "stmt_deps": [
+  "def-fd-raw-localization-scalar-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-scalar-extension-composition",
+  "prop-weil-pbc-scalar-extension",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-algebraically-closed-coefficients",
+  "def-per-common-stage-shift-structures",
+  "def-fd-integral-scalar-shift-structures"
+ ],
+ "proof": [
+  {
+   "text": "Use [def-weil-rationalization-karoubi, def-weil-pbc-rational-category, def-weil-linear-scalar-localization] for the raw Hom modules and their bilinear composition. For $E\\subseteq L$, ordinary and strict-tower integral extension are additive and semilinear for $\\mathcal O_E\\to\\mathcal O_L$: on an integral arrow $rf$, tensor extension sends the scalar $r$ to its image in $\\mathcal O_L$, and quotient maps and the strict tower preserve this equality. The image of $\\varpi_E$ is a unit in $L=\\mathcal O_L[1/\\varpi_L]$, since it is a nonzero element of the subfield $E$. Thus [lem-pur-semilinear-scalar-localization] applies to both extensions, the identity identifications and their composites. Their localized functors are the specified ones: $S_{L/E}$ is integral strict-tower extension followed by rationalization [def-weil-rationalization-karoubi], and $P_{L/E}$ is the rationalization of the constructible restriction of $C_{L/E}$ [prop-weil-pbc-scalar-extension]; on every generator $f\\otimes x$ the extension formula is $F(f)\\otimes x$, using $E\\subseteq L$, and $J$ fixes that generator. Consequently the localization of $b^{-1}:U_{L/E}\\to C_{L/E}$ has source $J_LS_{L/E}$ and target $P_{L/E}J_E$. The lemma gives the exact natural isomorphism $j_{L/E,K}=Q_L(b_{L/E,K}^{-1})$, its inverse $Q_L(b_{L/E,K})$, and compatibility with the specified shifts. The lift is precisely the given inverse quotient-map lift: this construction applies $Q_L$ to that map itself and makes no replacement of it. All objects of a raw localization are integral objects, so this defines every component.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-pbc-rational-category",
+    "def-weil-linear-scalar-localization",
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; extraction Old step 7: semilinear localization with the final-field denominators, exactness and specified lift"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-semilinear-scalar-localization] to the assumed integral inverse equation, using final localization $Q_M$. It preserves vertical composition and both whiskerings, so its left side becomes $a^p_{M,L,E}\\,P_{M/L}(j_{L/E})\\,j_{M/L,S_{L/E}K}$ and its right side becomes $j_{M/E}\\,J_M(a^s_{M,L,E})$. The identifications are fixed by Step 1 and by the hypothesis that $A^C,A^U$ rationalize to the specified $a^p,a^s$, respectively. This proves the required three-field equation with the stated arrow direction.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; extraction Old steps 7–8: localization of the inverse cocycle and specified associator pentagons"
+   }
+  },
+  {
+   "text": "For equal fields, $j_{E/E,K}=Q_E(b_{E/E,K}^{-1})$ is the inverse of the assumed completeness unit after multiplication, in exactly the prescribed integral normalization. Apply [lem-pur-semilinear-scalar-localization] to both assumed multiplication/completeness unit substitutions in the integral inverse equation and to the integral scalar unit laws. The localized equations are the two rational unit squares: all components are the localized original unit components, with the scalar functors identified in Step 1. This proves both unit equations, without declaring a nonidentity integral completeness map to be the identity.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; extraction Old step 7: identity-extension normalization and both unit substitutions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization",
+  "def-weil-pbc-rational-category",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-semilinear-scalar-localization",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Existing raw-localization scalar coherence argument, extracted steps 1–3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rationalization of semilinear natural isomorphisms preserves exactness shifts and scalar extension cocycles",
+   "results": "CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Free.ext; LinearMap.extendScalarsOfIsLocalizationEquiv. These do not identify the specified raw scalar functors and integral components.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison satisfying a three field scalar extension cocycle gives both four field associator contractions by naturality",
+   "results": "ModuleCat.extendScalars_assoc_assoc and monoidal associator naturality lemmas. They apply to module categories or monoidal categories, not the two recorded raw constructible scalar systems.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionNatIso|associator_cocycle; rg RawComparison|rawLocalization in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib/Algebra/Ring/Associator.lean associator_cocycle concerns ring associators; project SemilinearScalarLocalization gives generic extension, and GeneralAlgebraicallyClosedCoefficients.associator_cocycle gives the needed framework pentagon. No existing theorem supplies the specialized descent.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FdRawLocalizationScalarCoherence",
+  "date": "2026-10-25",
+  "group": "J3"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Coefficient comparison argument attached to the trace function; raw localization steps 1–3",
+   "via": [
+    "lem-fd-raw-localization-scalar-coherence",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdRawLocalizationScalarDescent",
+  "file": "lean/Sheaf/Paper/FdRawLocalizationScalarDescent.lean",
+  "declaration": "WeilConjectures.FdRawLocalization.rawLocalizationScalarDescent",
+  "declarations": [
+   "WeilConjectures.FdRawLocalization.rawLocalizationScalarDescent"
+  ],
+  "statement": "theorem rawLocalizationScalarDescent (_D : FiniteFieldDatum.{d}) (_hl : l ≠ _D.p) (hI : ∀ E : Padic.FiniteCoefficientFields l Ω, (I l Ω T stage E).IsTriangulated) (ordinary : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L), FdOrdinaryScalarTransport l Ω T h) (b : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L), I l Ω T stage E ⋙ C l Ω T h ≅ U l Ω T h ⋙ I l Ω T stage L) (hshift : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L), NatTrans.CommShift (b h).hom ℤ ∧ NatTrans.CommShift (b h).inv ℤ) (hexact : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L), (I l Ω T stage E ⋙ C l Ω T h).IsTriangulated ∧ (U l Ω T h ⋙ I l Ω T stage L).IsTriangulated) (hlift : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (V : (integralOperationsGoodComplex l (pbcFiniteField.{u} l Ω E) T).FullSubcategory) (hV : sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T (DerivedCategory.Q.obj V.obj)), HEq (((b h).hom.app ⟨DerivedCategory.Q.obj V.obj, hV⟩).hom ≫ eqToHom (congrArg (fun F ↦ F.obj ((U l Ω T h).obj ⟨DerivedCategory.Q.obj V.obj, hV⟩)) (stage L).integral_identity) ≫ (integralDetailedTransport T l (pbcFiniteField.{u} l Ω L)).map ((integralScalarExtensionComparison l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T).hom.app V) ≫ (fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω L) T).hom.app ((integralScalarComplexFunctor l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T).obj V.obj)) ((pbcAmbientScalarExtension l Ω T h).map ((fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω E) T).hom.app V.obj) ≫ pbcComplexCounit (pbcCompletedScalarMap l Ω T h) (((fdCoefficientTransport l (pbcFiniteField.{u} l Ω E) T).mapHomologicalComplex (.up ℤ)).obj V.obj) ≫ DerivedCategory.Q.map ((ordinary h).completion l Ω V.obj))) (hcocycle : ∀ {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M) (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T), (b k).inv.app ((U l Ω T h).obj K) ≫ (C l Ω T k).map ((b h).inv.app K) ≫ (pbcIntegralScalarAssociator l Ω T dT.out iT.out h k).hom.app ((I l Ω T stage E).obj K) = (I l Ω T stage M).map ((integralAssoc l Ω T h k).hom.app K) ≫ (b (h.trans k)).inv.app K) (hunit : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T), (b (le_refl E)).inv.app K ≫ (pbcIntegralScalarUnit l Ω T dT.out iT.out E).hom.app ((I l Ω T stage E).obj K) = (I l Ω T stage E).map ((integralUnit l Ω T E).hom.app K)) : ∃ family : RationalFamily l Ω T stage, ∃ j : RawComparison l Ω T stage family, (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L), NatTrans.CommShift (j h).hom ℤ ∧ NatTrans.CommShift (j h).inv ℤ ∧ (scalar l Ω T h ⋙ J l Ω T stage family L).IsTriangulated ∧ (J l Ω T stage family E ⋙ (P l Ω T).T h).IsTriangulated) ∧ (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T) (K' : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E), HEq K' ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) T).obj K) → HEq ((j h).hom.app K') ((pbcStageLocalization l Ω T L).map ((b h).inv.app K) ≫ (pbcScalarIntegralComparison l Ω T dT.out iT.out h).inv.app ((I l Ω T stage E).obj K))) ∧ (∀ (E : Padic.FiniteCoefficientFields l Ω) (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E), HEq ((j (le_refl E)).hom.app K) ((J l Ω T stage family E).map ((unit l Ω T E).hom.app K))) ∧ (∀ {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M) (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E), (j k).hom.app ((scalar l Ω T h).obj K) ≫ ((P l Ω T).T k).map ((j h).hom.app K) ≫ ((P l Ω T).assoc h k).hom.app ((J l Ω T stage family E).obj K) = (J l Ω T stage family M).map ((assoc l Ω T h k).hom.app K) ≫ (j (h.trans k)).hom.app K) ∧ (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E), (j h).hom.app ((scalar l Ω T (le_refl E)).obj K) ≫ ((P l Ω T).T h).map ((j (le_refl E)).hom.app K) ≫ ((P l Ω T).assoc (le_refl E) h).hom.app ((J l Ω T stage family E).obj K) = (J l Ω T stage family L).map ((scalar l Ω T h).map ((unit l Ω T E).hom.app K)) ≫ (j h).hom.app K) ∧ (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E), (j (le_refl L)).hom.app ((scalar l Ω T h).obj K) ≫ ((P l Ω T).T (le_refl L)).map ((j h).hom.app K) ≫ ((P l Ω T).assoc h (le_refl L)).hom.app ((J l Ω T stage family E).obj K) = (J l Ω T stage family L).map ((unit l Ω T L).hom.app ((scalar l Ω T h).obj K)) ≫ (j h).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-fd-raw-localization-scalar-descent",
+  "worker": "J3 stage3",
+  "summary": "Extracts raw-localization steps 1–3 only; both four-field contractions remain and are proved in the original module.",
+  "blueprint": "Existing coefficient-comparison auxiliary attached to trace definition, localization before four-field coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic semilinear localization of functors, comparisons and their equations."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Identifies the PBC scalar functor with the raw localization of ordinary integral extension."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e86cc",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261025T180803-L-4034382",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e86cc",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261025T180803-L-4034382",
+  "kind": "interface",
+  "note": "independent cc review: item statement+docstring byte-identical to clone; 18 moved defs verbatim vs clone; descent hole = item hypotheses + first 6 conclusion clauses verbatim (true iff reviewed item); scratch compile Data+Descent+item exit 0, axioms only sorryAx from descent; no importers; unit realized empty"
+ }
+}

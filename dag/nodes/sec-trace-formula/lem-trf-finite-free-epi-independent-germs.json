@@ -1,0 +1,160 @@
+{
+ "id": "lem-trf-finite-free-epi-independent-germs",
+ "kind": "statement",
+ "title": "A finite free epimorphism with independent germs is injective near the point",
+ "statement": "Let (X,O_X) be a ringed space [def-weil-locally-ringed-space-morphism], F an O_X-module sheaf [def-weil-sheaf-of-modules-category] of finite presentation [def-weil-pbc-module-finite-type-presentation], U an open subset, x in U and r a nonnegative integer. Let p : O_U^{⊕r} → F|_U be an epimorphism. Suppose the germs at x [def-weil-pbc-module-stalk] of its r standard generator images (evaluated as compatible sections at the terminal object U → U) are O_{X,x}-linearly independent. Then there is an open neighbourhood V of x contained in U such that for every open W contained in V the component p_W is injective on sections. The standard-generator family may be empty.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0B8J, lemma-finite-presentation-stalk-free, last two sentences of the proof; Tags 01BP(1) and 01B8"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the local finite presentations of F to U. Regard the slice-site modules as modules on the ringed open U; this is reindexing along the equivalence Opens(U) ≃ Over(U) and preserves sections, restrictions, kernels, epimorphisms and finite free modules. Apply 01BP(1) to the given finite free epimorphism p. Its kernel K is of finite type.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0B8J, lemma-finite-presentation-stalk-free, last two sentences of the proof; Tags 01BP(1) and 01B8"
+   }
+  },
+  {
+   "text": "A germ of K at x is represented by a kernel section over W contained in U. A section of the finite free source has r coordinates a_j. The germ of its image is the sum of germ(a_j) times the germs of the generator images displayed in the statement: naturality of the compatible freeHomEquiv sections identifies their restrictions. Since this sum is zero and those germs are linearly independent, all coordinate germs vanish. For each coordinate use equality of germs with zero and intersect the finitely many resulting neighbourhoods. The tuple, hence the kernel section, becomes zero there. Thus K_x = 0, including the empty tuple.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0B8J, lemma-finite-presentation-stalk-free, last two sentences of the proof; Tags 01BP(1) and 01B8"
+   }
+  },
+  {
+   "text": "Apply 01B8 to the zero morphism 0 → K on the ringed open U. It is surjective at x because K_x = 0. Obtain an open neighbourhood V of x contained in U on which every section of K locally lifts from zero. Every such section is locally zero and therefore zero by the sheaf uniqueness axiom. This holds on every W contained in V. Since kernels are computed sectionwise, the component p_W is injective as asserted.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0B8J, lemma-finite-presentation-stalk-free, last two sentences of the proof; Tags 01BP(1) and 01B8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-module-finite-type-surjective-on-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0B8J, lemma-finite-presentation-stalk-free, last two sentences of the proof; Tags 01BP(1) and 01B8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite free epimorphism onto a finitely presented module sheaf with linearly independent generator germs is injective on a neighbourhood",
+   "results": "8 hits: generatorsOfIsCokernelFree, LocalGeneratorsData.IsFiniteType.isFiniteType, GeneratingSections.ofEpi; these do not provide neighbourhood injectivity.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem; the kernel shrinking argument is still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.free",
+   "results": "12 hits: free, freeSection, freeHomEquiv, freeMap and their equations; no injectivity-near-one-stalk theorem.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem; the kernel shrinking argument is still required."
+  },
+  {
+   "tool": "grep",
+   "query": "independent.*germ|germ.*independent|injective.*neighbourhood",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem; the kernel shrinking argument is still required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free epimorphism onto a finitely presented sheaf with independent germs is injective near the point",
+   "results": "8 hits: TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective requires injectivity at ALL stalks; other hits concern germ-injective schemes or sheafification. No match.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem; the kernel shrinking argument is still required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationStalkBasisSpread",
+  "date": "2026-10-26",
+  "group": "Q3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The Stacks 0B8J basis-spreading subargument: kernel finite type, vanishing stalk, and final shrinking (steps 4–6 of lem-trf-finite-presentation-stalk-basis-spread).",
+   "via": [
+    "lem-trf-finite-presentation-stalk-basis-spread",
+    "lem-trf-flat-fibre-free-neighbourhood",
+    "lem-trf-generic-free-blowup",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeEpiIndependentGerms",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_injective_neighbourhood_of_independent_free_epi",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeEpiIndependentGerms.lean",
+  "statement": "theorem exists_injective_neighbourhood_of_independent_free_epi (X : RingedSpace.{u}) (F : ringedSiteModules (moduleRings X)) [F.IsFinitePresentation] (U : Opens X) (x : X) (hxU : x ∈ U) (r : ℕ) (p : SheafOfModules.free (R := (moduleRings X).over U) (ULift.{u} (Fin r)) ⟶ F.over U) [Epi p] (h : LinearIndependent (X.presheaf.stalk x) (fun j : Fin r ↦ TopCat.Presheaf.germ F.val.presheaf U x hxU (((F.over U).freeHomEquiv p (ULift.up j)).val (op (Over.mk (𝟙 U)))))) : ∃ (V : Opens X) (hVU : V ≤ U), x ∈ V ∧ ∀ (W : Opens X) (hWV : W ≤ V), Function.Injective (p.val.app (op (Over.mk (homOfLE (hWV.trans hVU)))))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T092309-L-3421130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T092309-L-3421130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

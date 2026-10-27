@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-space-affine-module-higher-image-vanishing",
+ "kind": "statement",
+ "title": "Affine space morphisms are acyclic for quasi-coherent module direct image",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $a:V\\to W$ be an affine morphism of algebraic spaces over $S$ [def-trf-algebraic-space], meaning that $a$ is representable and its base change by every scheme mapping to $W$ is affine. Let $M$ be a quasi-coherent $\\mathcal O_V$-module on the small etale ringed site [def-trf-space-quasi-coherent-module]. Use module direct image [def-trf-space-etale-module-functors] in the categories of all structure-module sheaves [def-weil-sheaf-of-modules-category], and compute its right derived functors by injective resolutions in these module categories [def-sp-injective-resolutions]. Then $R^qa_*M=0$ as an $\\mathcal O_W$-module for every integer $q>0$. No Noetherian, properness, finite-type or coherence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 073H (lemma-affine-vanishing-higher-direct-images), module interpretation; the underlying additive comparison is sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree), applied on localized sites."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose the small sites in a common sheaf universe. On each of $V_{\\mathrm{et}}$ and $W_{\\mathrm{et}}$, modules over the structure sheaf form a Grothendieck abelian category by the arbitrary-ring-sheaf theorem, hence have enough injectives. Choose an injective module resolution $0\\to M\\to I^0\\to I^1\\to\\cdots$. The forgetful functor to abelian sheaves is exact, so $0\\to M_{\\mathrm{ab}}\\to I^0_{\\mathrm{ab}}\\to I^1_{\\mathrm{ab}}\\to\\cdots$ is an exact resolution. The abelian sheaf categories also have enough injectives. No assertion that $I^n_{\\mathrm{ab}}$ is injective is made.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), proof: exact forgetting and a module injective resolution; injectives.tex Tag 079Q (remark-existence-D)"
+   }
+  },
+  {
+   "text": "For an etale scheme $T\\to W$, put $U_T=V\\times_WT$. Representability of $a$ makes $U_T$ a scheme; etale base change makes $U_T\\to V$ an object of $V_{\\mathrm{et}}$. Base change on objects and arrows therefore gives the continuous functor $u:W_{\\mathrm{et}}\\to V_{\\mathrm{et}}$, $T\\mapsto U_T$, presenting the small-etale morphism. For every module $N$, the chart-limit comparison identifies the specified module direct image with ringed direct image, so $(a_*N)(T)=N(U_T)$ with scalars restricted through $\\mathcal O_W(T)\\to\\mathcal O_V(U_T)$. Thus forgetting gives the identity of complexes $(a_*I^\\bullet)_{\\mathrm{ab}}=a_{*,\\mathrm{Ab}}(I^\\bullet_{\\mathrm{ab}})$, since the equality holds on sections, restrictions, and differentials.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-chart-limit-enlarged-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073H (lemma-affine-vanishing-higher-direct-images), representability; spaces-properties.tex Tags 03G8 (lemma-morphism-ringed-topoi) and 03H7 (remark-explain-equivalence)"
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$ and $r>0$. Injectivity of $I^n$ as a structure-module sheaf implies $H^r(U,I^n_{\\mathrm{ab}})=0$ for every object $U$ of $V_{\\mathrm{et}}$, by the ringed-site injective-module abelian-acyclicity statement. In particular it is zero at each $U_T$. Apply the general site higher-direct-image formula to $a_{*,\\mathrm{Ab}}$ presented by $u$: $R^r a_{*,\\mathrm{Ab}}(I^n_{\\mathrm{ab}})$ is the sheafification of $T\\mapsto H^r(U_T,I^n_{\\mathrm{ab}})$. This is the zero presheaf, whose sheafification is zero. Thus every term $I^n_{\\mathrm{ab}}$ is $a_{*,\\mathrm{Ab}}$-acyclic.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), proof giving objectwise abelian acyclicity; Tag 072W (lemma-higher-direct-images)"
+   }
+  },
+  {
+   "text": "The resolution from step 1 is concentrated in nonnegative degrees, exact after augmentation, and termwise $a_{*,\\mathrm{Ab}}$-acyclic by step 3. Apply clause (2) of the acyclic-resolution criterion to the left exact additive direct image between the abelian sheaf categories. It gives $H^q(a_{*,\\mathrm{Ab}}I^\\bullet_{\\mathrm{ab}})\\cong R^q a_{*,\\mathrm{Ab}}M_{\\mathrm{ab}}$ for every $q\\geq0$. In the module category, by the stipulated injective-resolution definition, $R^q a_*M=H^q(a_*I^\\bullet)$. Exactness of forgetting and its compatibility with complex cohomology identify the underlying abelian sheaf of this module with $H^q((a_*I^\\bullet)_{\\mathrm{ab}})$. Substituting the sectionwise identity of step 2 therefore identifies it with $R^q a_{*,\\mathrm{Ab}}M_{\\mathrm{ab}}$. This uses acyclicity, not preservation of injectives by forgetting.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), acyclic-resolution comparison; derived.tex Tag 0156 (lemma-acyclicity)"
+   }
+  },
+  {
+   "text": "Apply the existing additive affine-space vanishing theorem to $a:V\\to W$ and $M$. Its hypotheses are precisely that $a$ is representable with affine scheme base changes and that $M$ is quasi-coherent on the small etale ringed site. It yields $R^q a_{*,\\mathrm{Ab}}M_{\\mathrm{ab}}=0$ for every $q>0$. Step 4 consequently makes the underlying abelian sheaf of $R^q a_*M$ zero. Faithfulness of forgetting implies that the identity of $R^q a_*M$ equals its zero endomorphism, since their underlying abelian maps agree. Hence $R^q a_*M=0$ as a module sheaf. None of the cited comparison inputs assumes Noetherianity, properness, finite type, coherence, or flatness of the structural map.",
+   "uses": [
+    "lem-sfb-space-affine-higher-direct-image-vanishing",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073H (lemma-affine-vanishing-higher-direct-images), with sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "def-weil-pbc-sheafification",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-space-affine-higher-direct-image-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), proof and its objectwise injective-acyclicity argument; Tag 072W (lemma-higher-direct-images), applied to the representable morphism; spaces-cohomology.tex Tag 073H for the final additive vanishing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine morphism of algebraic spaces all positive right derived module direct images of a quasi coherent module on the small etale ringed site vanish",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that the image of $V$ under $f$ is contained in $U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (F : CategoryTheory.Functor X.AffineZariskiSiteᵒᵖ CommRingCat)\\n  (α : (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op.comp X.presheaf ⟶ F),\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization F α →\\n    ((F.rightOp.comp AlgebraicGeometr\", \"doc\": \"Given a scheme $X$, a functor $F : (X_{\\\\text{aff}})^{\\\\text{op}} \\\\to \\\\text{CommRing}$ equipped with a natural transformation $\\\\alpha : \\\\mathcal{O}_X \\\\Rightarrow F$ that preserves localization, the comp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affine scheme geometry, localization in limits, module pushforward adjunctions and quasi-coherence definitions do not give positive derived module vanishing for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\", \"rightDerived\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affine scheme geometry, localization in limits, module pushforward adjunctions and quasi-coherence definitions do not give positive derived module vanishing for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(higher|rightDerived|acyclic)|(higher|rightDerived|acyclic).*affine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affine scheme geometry, localization in limits, module pushforward adjunctions and quasi-coherence definitions do not give positive derived module vanishing for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine morphism of algebraic spaces has zero higher direct images of quasi coherent modules in the category of modules over the structure sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffine X] [IsAffine Y] : IsAffineHom f\", \"doc\": \"A morphism between affine schemes is an affine morphism. Specifically, if $ X $ and $ Y $ are affine schemes, then any morphism $ f : X \\to Y $ satisfies the predicate of being an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate on morphisms of schemes, asserting that a given morphism from scheme $ X $ to scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)) →\\n    AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If for every affine open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ under $ f $ is affine, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffineHom f] [IsAffine Y] : IsAffine X\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is an affine scheme, then $ X $ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : MorphismProperty Scheme) : AffineTargetMorphismProperty\", \"doc\": \"Given a morphism property $ P $ for schemes, this constructs a property that assigns to each morphism $ X \\\\to Y $ with affine target $ Y $ the proposition $ P(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $X$ is affine if the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, where $\\\\Gamma(X)$ denotes the ring of global sections of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsAffineHom f ↔\\n    ∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is affine if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is an affine open subset of $ X $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affine scheme geometry, localization in limits, module pushforward adjunctions and quasi-coherence definitions do not give positive derived module vanishing for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves on algebraic spaces are acyclic for module pushforward along representable affine morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affine scheme geometry, localization in limits, module pushforward adjunctions and quasi-coherence definitions do not give positive derived module vanishing for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Positive right derived direct images of quasi coherent modules vanish for affine morphisms of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine], X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give scheme affineness, underived module pushforward, local injectivity, or derived vanishing on an injective object; none states affine-space module vanishing or the ringed-site module/additive comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\", \"rightDerived\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give scheme affineness, underived module pushforward, local injectivity, or derived vanishing on an injective object; none states affine-space module vanishing or the ringed-site module/additive comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(higher|rightDerived|acyclic)|(higher|rightDerived|acyclic).*affine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give scheme affineness, underived module pushforward, local injectivity, or derived vanishing on an injective object; none states affine-space module vanishing or the ringed-site module/additive comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine morphism of algebraic spaces has vanishing higher direct images of quasi coherent structure modules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate on morphisms of schemes, asserting that a given morphism from scheme $ X $ to scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffine X] [IsAffine Y] : IsAffineHom f\", \"doc\": \"A morphism between affine schemes is an affine morphism. Specifically, if $ X $ and $ Y $ are affine schemes, then any morphism $ f : X \\to Y $ satisfies the predicate of being an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)) →\\n    AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If for every affine open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ under $ f $ is affine, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffineHom f] [IsAffine Y] : IsAffine X\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is an affine scheme, then $ X $ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsAffineHom f ↔\\n    ∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is affine if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.isAffine_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsAffineHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"Let $f : X \\\\to Y$ be an affine morphism of schemes, and let $U \\\\subseteq Y$ be an affine open subset. Then the preimage $f^{-1}(U) \\\\subseteq X$ is also an affine open subset of $X$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give scheme affineness, underived module pushforward, local injectivity, or derived vanishing on an injective object; none states affine-space module vanishing or the ringed-site module/additive comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed sites the underlying abelian sheaf of the higher module direct image agrees with higher direct image of the underlying abelian sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforward_obj_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betwee\"}\n  {\"name\": \"SheafOfModules.pushforward_map_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\phi : S \\\\to F_*R$ between \"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardCongr\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given continuous functors between sites with Grothendieck topologies and equal natural transformations $\\\\phi, \\\\psi : S \\\\to F_*R$ between sheaves of rings, this constructs a natural isomorphism between\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans_app_val_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\alpha: F \\\\Rightarrow G$, and\"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given continuous functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, and a morphism $ \\\\ph\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give scheme affineness, underived module pushforward, local injectivity, or derived vanishing on an injective object; none states affine-space module vanishing or the ringed-site module/additive comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give scheme affineness, underived module pushforward, local injectivity, or derived vanishing on an injective object; none states affine-space module vanishing or the ringed-site module/additive comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective structure module resolutions compute higher direct images after forgetting scalars on a ringed site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.IsLocallyInjective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    CategoryTheory.GrothendieckTopology C →\\n      {R : CategoryTheory.Functor Cᵒᵖ RingCat} → {M₁ M₂ : PresheafOfModules R} → (M₁ ⟶ M₂) → Prop\", \"doc\": \"A morphism $ f $ between presheaves of modules over a presheaf of rings $ R $ is locally injective if, after applying the forgetful functor to presheaves of abelian groups, the induced natural transfo\"}\n  {\"name\": \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The canonical morphism from a presheaf of modules $M_0$ to the restriction of scalars of its sheafification via a natural transformation $\\\\alpha: R_0 \\\\to R$ is locally injective with respect to the Gr\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallyInjective_forget\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] {J : CategoryTheory.GrothendieckTop\", \"doc\": \"If $\\\\phi: F_1 \\\\to F_2$ is a locally injective morphism between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$, then the induced morphism obtained by composing with the\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            {X : C} →\\n              (P : CategoryTheory.InjectiveRes\", \"doc\": \"Given an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ P $, and an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this constructs a canonical morphism from $ F(\"}\n  {\"name\": \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For any additive functor $ F : C \\\\to D $ between abelian categories, natural number $ n $, and injective object $ X $ in $ C $, the $(n+1)$-th right-derived functor of $ F $ evaluated at $ X $ yields \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (I : CategoryTheory.InjectiveResolution X)\\n \", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ I $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural transformation from $ F $ to its 0t\"}\n  {\"name\": \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the component of the natural transformation from $ F $ to its 0th right-derived functor $\"}\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits give scheme affineness, underived module pushforward, local injectivity, or derived vanishing on an injective object; none states affine-space module vanishing or the ringed-site module/additive comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-coherent-higher-images",
+  "date": "2026-10-23",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: coherence of the entries R^p f_* H^q(E), using the proper case Tag 08AR. Supporting input: Tag 073H (lemma-affine-vanishing-higher-direct-images), module interpretation; the underlying additive comparison is sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree), applied on localized sites.",
+   "via": [
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-proper-space-coherent-derived-image",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-module-higher-image-vanishing",
+  "worker": "stage1",
+  "summary": "Preserved the module statement. Proved its comparison with the existing additive affine vanishing result using exact forgetting, objectwise abelian acyclicity of injective modules, the site higher-direct-image formula and the acyclic-resolution criterion. Every prerequisite already has a node; no new node or Lean attachment.",
+  "blueprint": "The inherited from.place traces the proper coherent-image input to det-thm-sf-ctf-stability-direct-images (3). This split supplies its Tag 073H module-vanishing prerequisite without changing the unit route. The newest blueprint direct-images proof was read; its compactification route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Module sheaves over arbitrary ring sheaves are Grothendieck; used only for the module/additive comparison, site presentation, or existence of resolutions. The unit has no replacement for this general infrastructure and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves; used only for the module/additive comparison, site presentation, or existence of resolutions. The unit has no replacement for this general infrastructure and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic Chartwise etale permanence for algebraic spaces; used only for the module/additive comparison, site presentation, or existence of resolutions. The unit has no replacement for this general infrastructure and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic Enlarged etale ringed-site models of algebraic spaces; used only for the module/additive comparison, site presentation, or existence of resolutions. The unit has no replacement for this general infrastructure and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-chart-limit-enlarged-sections",
+    "why": "Generic All-chart module limits are enlarged-etale sections; used only for the module/additive comparison, site presentation, or existence of resolutions. The unit has no replacement for this general infrastructure and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Generic Injective module sheaves are acyclic after forgetting to abelian sheaves; used only for the module/additive comparison, site presentation, or existence of resolutions. The unit has no replacement for this general infrastructure and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "why": "Generic Higher direct images along a morphism of sites are sheafified cohomology presheaves; used only for the module/additive comparison, site presentation, or existence of resolutions. The unit has no replacement for this general infrastructure and its geometric route is unchanged."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic Leray acyclicity criterion; used only for the module/additive comparison, site presentation, or existence of resolutions. The unit has no replacement for this general infrastructure and its geometric route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-c0f71a93b",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-c0f71a93b (reviewer sub-agent of L); spot-checked: I read the item, all 14 cited statements and Stacks 073H (spaces-cohomology l.1305), 03FD (sites-cohomology l.1862) and 072W (l.747). The statement is byte-identical to the live node, which is still unsplit; there are no new nodes and no repair note. Step 1: Mod(O) is Grothendieck, so injective module resolutions exist, and forgetting is exact (clause 1); no claim is made that forgotten injectives are injective. Step 2: U_T=V×_W T is a scheme in V_et by representability and étale permanence. (U_T,pr) is terminal in the chart category A(a,T), so (a_*N)(T)=N(U_T) and forgetting matches u^s. This is the same base-change functor the additive node uses. Step 3: the abelian-acyclicity lemma for injective modules holds on any ringed site, and with the site formula and (0)^#=0 it makes every term acyclic. Step 4: the hypotheses of clause 2 of leray-acyclicity hold, and exact-functor cohomology gives (R^q a_*M)_ab ≅ R^q a_{*,Ab}M_ab. Step 5: the additive 073H node has the same hypotheses, and faithfulness gives the conclusion. No cycle. lem-sbc-higher-direct-image-forget-comparison covers only constant Λ, so it is no duplicate. Batch 5: the three lem-trf-space-* nodes and def-trf-algebraic-space (reached through the additive node) are generic algebraic-space infrastructure, with no trace-formula, Poincaré or nt-assume node in their closures; accepted. The generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineModuleHigherImageVanishing",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isZero_moduleHigherDirectImage_of_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineModuleHigherImageVanishing.lean",
+  "statement": "theorem isZero_moduleHigherDirectImage_of_affine {S : Scheme.{u}} {V W : AlgebraicSpace S} (a : V ⟶ W) (ha : IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) a.hom.hom) (M : V.Modules) (hM : M.IsQuasicoherent) (q : ℕ) (hq : 0 < q) : IsZero (W.smallModuleEquivalence.inverse.obj ((@Functor.rightDerived V.SmallModules _ W.SmallModules _ _ (@InjectiveResolution.instHasInjectiveResolutions V.SmallModules _ _ (@IsGrothendieckAbelian.enoughInjectives _ _ _ (SheafOfModules.isGrothendieckAbelian V.smallStructureRings))) _ (smallModuleDirectImage a) _ q).obj (V.smallModuleRestriction.obj M)))",
+  "branch": "sheaf-dag",
+  "by": "Q74",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the already landed small ringed-model equivalence and its canonical conjugate of moduleDirectImage. Mathlib Functor.rightDerived uses injective resolutions in all SmallModules, and the target inverse equivalence returns the higher image to W.Modules. Its resolution instance is explicitly supplied from the small module category Grothendieck theorem; no added hypothesis, localization choice, private cohomology definition, or arbitrary functor is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11cfce031",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_dep records with their landed Lean source (AlgebraicSpace, QCoh, ModuleOperations, SmallRingedModel, DerivedModules), the Mathlib/project Grothendieck and enough-injectives declarations, and the report (both sections present). Node delta is the lean record plus 2 stmt_deps (small-ringed-model, derived-module-calculus), both landed with reviewed_lean on the base and used in the signature; statement and proof unchanged; lean.statement verbatim; all imports resolve. Affine = IsRepresentableWith (IsAffineHom p.left), the project idiom matching the node; M with Mathlib IsQuasicoherent; smallModuleDirectImage is the restriction-equivalence conjugate of moduleDirectImage, rightDerived uses injective resolutions in all SmallModules (instance built from SheafOfModules.isGrothendieckAbelian, not assumed), and IsZero is taken in W.Modules after transport, which is iso-invariant, so this is the node's R^q a_*M. q>0 exact; no extra hypotheses or universe restriction; edge cases fine. One sorry theorem; docstrings have the source, blueprint id and 5 proof steps. No duplicate (only scheme-level vanishing exists). No compile run since no file was changed. No findings."
+ }
+}

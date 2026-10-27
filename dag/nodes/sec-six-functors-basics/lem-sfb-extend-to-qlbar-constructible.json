@@ -221,7 +221,22 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-868c9b7b8 (reviewer sub-agent of L); spot-checked: I read the whole delivery and its sources. It answers the 2026-10-21 human re-split note: compared with live, only the item's proof fields and split_report change, the statement, stmt_deps and the Q40 existing:true lean record are unchanged, the proof drops from 3851 to 1732 characters in 3 steps, and two new unsplit nodes are added. The item is not on the 2026-10-19 drop list. Source: the main-20261015 blueprint proof of the item (termwise extension, H^n formula, local presentations on strata). No SGA is used. Step 1: lem-sfb-qlbar-flat holds on every scheme, matching the hypothesis of lem-sfb-extend-scalars-preserves-homology. With change-of-scalars(2) it makes the extension exact, and def-sfb-left-derived-exact plus def-sfb-derived-extend-to-qlbar (equal to T^X of the condensed inclusion) give H^n(TK) ≅ A(H^n K). Step 2: the constructibility of the stmt_dep sk-def-sfb-bounded-constructible is def-sfb-constructible-module, i.e. a global finite stratification with mapMod(g_a^*) locally finitely presented over g_a^*R, then pro-étale covers u_i with finite presentation over u_i^*g_a^*R. Dropping the old constant-matrix model of sk-def-sfb-constructible is correct. Applying the inverse-image node to g_a and then to u_i, and then the finite-presentation node, gives exactly the iterated transports and rings the definition asks for, plus isomorphism invariance. Step 3 is elementary (A(0)=0, same interval). Both new nodes are true and strictly smaller than the item (D1 OK). The inverse-image comparison holds for any g, because g^* ⊣ g_* preserves the balancing coequalizer (side Lean pullbackExtendScalarsIso). Finite presentation needs no flatness: Ext is an additive left adjoint and lem-weil-pbc-regular-extension-comparison handles rank 1. I tested k=0, Z→Z/2 with M=Z/3, the zero ring and φ=id. Side fp_extend states only the first sentence, so it is not an exact attachment. Searches and blueprint fields are complete. No duplicate: def-sfb-pull-iso uses pulled-back condensed Λ with module f^*, the regular-extension comparison is rank 1, and the pbc local-presentation, lfp-model and gluing nodes, lfp-tensor-single and pur713-def-mapmod are all different. I accept the declared tool uses. FIX (B3): Ext_{F(φ)} is defined only for a commutative F(R), and the node cited only strong monoidality. I added [lem-sfb-finite-upper-star-braided] (symmetric monoidal, so F(R) and F(S) are commutative; Lean laxBraided_upperStar, closed) to the statement and stmt_deps of lem-sfb-internal-extension-inverse-image (fixes/dag/nodes/sec-six-functors-basics/). This also covers parent step 2's second application. Maintainer notes: the item's merge-owned top-level tool_uses still lists nodes the new proof no longer cites, so re-record it at merge; the report mentions a citations.json that is not in the commit.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj"
+   ]
+  }
+ },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit",
   "declaration": "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj",
@@ -241,13 +256,41 @@
   "note": "Exact existing declaration, dependencies, universes, edge cases, ordinary derived route, source confirmation, and required report sections verified."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F5",
+  "group": "Z6",
   "result": "pass",
-  "landing": "20261021T225118-L-3772049",
+  "landing": "20261024T223355-L-1602497",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj",
+   "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_homInj",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_homSurj"
+  ],
+  "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For a prime $\\ell$, a scheme $X$, a finite extension $E$ of $\\mathbf Q_\\ell$ inside $\\Qlb$ and a\nbounded constructible complex $K$ of $E_X$-modules ([det-def-sfb-bounded-constructible]), the\ncomplex $T_{E,\\Qlb}K$ ([def-sfb-derived-extend-to-qlbar]) is a bounded constructible complex of\n$\\overline{\\mathbf Q}_{\\ell,X}$-modules.",
+  "proof": [
+   {
+    "text": "As for [lem-sfb-extend-subfield-constructible], with [lem-sfb-qlbar-flat] in place of\nflatness of $F_X$: $T_{E,\\Qlb}$ is computed termwise, so it preserves boundedness and\n$H^n(T_{E,\\Qlb}K)=\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}H^n(K)$, and tensoring local finite presentations on\nthe strata of a finite stratification ([sk-def-sfb-constructible]) gives local finite\npresentations.",
+    "uses": [
+     "lem-sfb-extend-subfield-constructible",
+     "lem-sfb-qlbar-flat",
+     "sk-def-sfb-constructible"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

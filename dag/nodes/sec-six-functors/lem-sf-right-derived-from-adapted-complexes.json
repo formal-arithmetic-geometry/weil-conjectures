@@ -26,93 +26,56 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=K(\\mathcal A)$, $\\mathcal E=D(\\mathcal B)$, $Q=Q_{\\mathcal A}$ and let $S$ be the quasi-isomorphisms. By [lem-pc-quasi-isomorphisms-multiplicative-system], $S$ admits the left calculus of fractions. In particular its Ore axiom says that $s:X\\to Y$ in $S$ and $f:X\\to Z$ admit $a:Y\\to W$ and $b:Z\\to W$ with $b\\in S$ and $as=bf$. Quasi-isomorphisms also satisfy two out of three: applying each cohomology functor of [def-weil-abstract-derived-category] reduces this to cancellation and composition of isomorphisms. Choose once for each $K\\in\\mathcal C$ a quasi-isomorphism $r_K:K\\to I_K$ with $I_K\\in\\mathcal I$, as the hypothesis permits. These choices need not be functorial.",
+   "text": "Put C=K(A), W=quasi-isomorphisms and P(K)=(K in I). Let i:P.FullSubcategory→C be the full inclusion and W_P=i⁻¹W. The left calculus of fractions for W induces one for W_P: form each Ore square in C and postcompose its target by a replacement into P; likewise postcompose the target of an equalizing arrow by a replacement. These are the private helper adaptedCalculus and the explicit localizer adaptedLocalizer.",
    "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The induced functor F:W_P.Localization→W.Localization is faithful. It suffices to test actual arrows by Mathlib Functor.faithful_of_comp_of_hasLeftCalculusOfFractions. Equality of their images gives a common W-postcomposition equalizing them by MorphismProperty.map_eq_iff_postcomp (a consequence of left-fraction equality). Replace its target into P, giving the same equality already in W_P.Localization. Cancel the image of this W_P-arrow.",
+   "uses": [
+    "lem-pc-left-localization-fraction-equality",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "F is full. For a morphism between images of P-objects, use Localization.exists_leftFraction to write it as Q(a) Q(b)⁻¹, then replace the common target into P. The resulting numerator and denominator lie in the full subcategory, and the denominator is in W_P. Their fraction maps to the original morphism by naturality of the localization comparison and cancellation. The replacement hypothesis also makes i followed by Q essentially surjective, hence F is essentially surjective. Thus F is an equivalence (adaptedLocalizedEquivalence).",
+   "uses": [
+    "lem-pc-left-localization-fraction-representation",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right-resolution category of every object X is nonempty by replacements. Given two resolutions X→I and X→J, an Ore square and an adapted replacement of its target give a third resolution receiving arrows from both; hence this category is connected (adaptedConnected). To resolve any arrow X→Y, first replace X→I, apply the Ore axiom to this replacement and X→Y, and replace the common target into J. This gives an arrow I→J and a commutative square whose two vertical maps are in W (adaptedArrowResolutions).",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib LocalizerMorphism.IsRightDerivabilityStructure.mk′ from DerivabilityStructure/Constructor.lean to the localized equivalence, connected resolution categories and arrow resolutions. This proves that the full inclusion with W_P and W is a right derivability structure. All inputs have just been constructed, without any closure or invariance assumption on P (adaptedDerivability).",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The hypothesis h_inverts says exactly that this right derivability structure derives G. Mathlib LocalizerMorphism.Derives.hasPointwiseRightDerivedFunctor from DerivabilityStructure/Derives.lean supplies pointwise right-derived existence. Take Mathlib G.totalRightDerived Qh W and G.totalRightDerivedUnit Qh W. Their IsRightDerivedFunctor instance is precisely the required universal natural-transformation property at localization.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VC, definition-multiplicative-system, LMS1–LMS2; derived.tex Tag 05RT, lemma-acyclic, and Tag 06XN, lemma-find-existence-computes, hypothesis (1)."
-   }
+   "elementary": false
   },
   {
-   "text": "First define a map on each localized Hom set between adapted objects. For $I,J\\in\\mathcal I$ and $g:QI\\to QJ$, [lem-pc-left-localization-fraction-representation] gives $a_0:I\\to Z$, $b_0:J\\to Z$ with $b_0\\in S$ and $g=Q(b_0)^{-1}Q(a_0)$. Postcompose both maps with $r_Z:Z\\to I_Z$ and write $P=I_Z$, $a=r_Za_0$, $b=r_Zb_0$. Then $P\\in\\mathcal I$, $b\\in S$, and still $g=Q(b)^{-1}Q(a)$. Define $\\overline G(g)=G(b)^{-1}G(a):G(I)\\to G(J)$. The inverse exists because $b$ is a quasi-isomorphism with both endpoints in $\\mathcal I$, and $G$ inverts every such arrow by assumption.",
-   "uses": [
-    "lem-pc-left-localization-fraction-representation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VE, lemma-morphisms-left-localization; derived.tex Tag 06XN, lemma-find-existence-computes, use of replacements and hypothesis (2)."
-   }
-  },
-  {
-   "text": "This value is independent of every fraction and replacement choice. If $(a_i:I\\to P_i,b_i:J\\to P_i)$, $i=1,2$, are two such adapted fractions for $g$, [lem-pc-left-localization-fraction-equality] supplies $t_i:P_i\\to W$ with $t_1a_1=t_2a_2$, $t_1b_1=t_2b_2\\in S$. Each $t_i$ belongs to $S$ by two out of three, because $b_i$ and $t_ib_i$ do. Put $u_i=r_Wt_i:P_i\\to I_W$. All these objects are adapted, so $G(u_i)$ is invertible, and\n$$G(b_i)^{-1}G(a_i)=G(u_ib_i)^{-1}G(u_ia_i).$$\nThe right sides agree by the two equalities after postcomposition with $r_W$. This proves independence. For an actual arrow $f:I\\to J$ between adapted objects, the fraction $(f,1_J)$ gives $\\overline G(Qf)=G(f)$, including $\\overline G(1_{QI})=1_{G(I)}$.",
-   "uses": [
-    "lem-pc-left-localization-fraction-equality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VC, definition-multiplicative-system, following left-calculus construction: equivalence relation on arbitrary fractions (categories.tex lines 3971–3988); Tag 04VF, lemma-equality-morphisms-left-localization, treats the equal-denominator case. The cited Mathlib leaf supplies the arbitrary-denominator statement. Derived.tex Tag 06XN, lemma-find-existence-computes, explicit independence behind constancy on adapted replacements."
-   }
-  },
-  {
-   "text": "The maps $\\overline G$ respect composition. Let $g:QI\\to QJ$ have adapted fraction $(a:I\\to P,b:J\\to P)$ and let $h:QJ\\to QL$ have adapted fraction $(c:J\\to R,d:L\\to R)$. Here $b,d\\in S$. Apply the left Ore axiom of [lem-pc-quasi-isomorphisms-multiplicative-system] to $b$ and $c$ to obtain $e:P\\to V$, $t:R\\to V$ with $t\\in S$ and $eb=tc$. Postcompose by $r_V$ and put $e'=r_Ve$, $t'=r_Vt$, $U=I_V$. Then $t'\\in S$, all of $P,R,U$ are adapted, and $e'b=t'c$. In the localization, $(e'a:I\\to U,t'd:L\\to U)$ represents $hg$, since $Q(e')Q(b)=Q(t')Q(c)$. Thus, using Step 3 and cancelling the invertible $G(t')$ and $G(b)$,\n$$\\overline G(hg)=G(t'd)^{-1}G(e'a)=G(d)^{-1}G(t')^{-1}G(e')G(a)=G(d)^{-1}G(c)G(b)^{-1}G(a)=\\overline G(h)\\overline G(g).$$\nNo invertibility of $G(e')$ is used. Together with Step 3, this makes $I\\mapsto G(I)$ a functor on the category with objects $I\\in\\mathcal I$ and morphisms $\\operatorname{Hom}_{D(\\mathcal A)}(QI,QJ)$.",
-   "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VC, definition-multiplicative-system, LMS2 and the following left-fraction composition rule; derived.tex Tag 05SA, lemma-derived-functor, expanded functoriality calculation."
-   }
-  },
-  {
-   "text": "Define $H:\\mathcal C\\to\\mathcal E$ by $H(K)=G(I_K)$ and\n$$H(f)=\\overline G\\bigl(Q(r_L)Q(f)Q(r_K)^{-1}\\bigr)\\quad(f:K\\to L).$$\nThe identities and composition follow from Step 4 by cancelling adjacent $Q(r_L)^{-1}Q(r_L)$. If $f\\in S$, the argument of $\\overline G$ is an isomorphism, whose inverse is another morphism between adapted objects; Step 4 therefore makes $H(f)$ an isomorphism. Put $\\alpha^0_K=G(r_K)$. To prove naturality, apply the left Ore axiom of [lem-pc-quasi-isomorphisms-multiplicative-system] to $r_K:K\\to I_K$ and $r_Lf:K\\to I_L$. After replacing the common target by an adapted object $P$, obtain $a:I_K\\to P$, $b:I_L\\to P$ with $b\\in S$ and $ar_K=br_Lf$. This is an adapted fraction for $Q(r_L)Q(f)Q(r_K)^{-1}$, hence\n$$H(f)\\alpha^0_K=G(b)^{-1}G(a)G(r_K)=G(r_L)G(f)=\\alpha^0_LG(f).$$\nThus $\\alpha^0:G\\to H$ is natural. If $I\\in\\mathcal I$, then $r_I:I\\to I_I$ is a quasi-isomorphism between adapted objects, so $\\alpha^0_I$ is invertible. Moreover $H(r_K)=\\overline G(Qr_{I_K})=G(r_{I_K})=\\alpha^0_{I_K}$ by Step 3.",
-   "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 06XN, lemma-find-existence-computes, and 05SA, lemma-derived-functor; categories.tex Tag 04VC supplies the explicit Ore square."
-   }
-  },
-  {
-   "text": "Because $H$ inverts every member of $S$, clause (1) of [lem-weil-pbc-localization-universal-property] supplies $RG:D(\\mathcal A)\\to\\mathcal E$ and a natural isomorphism $\\phi:RG\\circ Q\\xrightarrow{\\sim}H$. Define $\\alpha_K=\\phi_K^{-1}\\alpha^0_K$. This is a natural transformation $G\\to RG\\circ Q$. For every $I\\in\\mathcal I$, Step 5 makes $\\alpha^0_I$ an isomorphism, so $\\alpha_I$ is an isomorphism as well.",
+   "text": "For I∈I, regard I as an object of P.FullSubcategory and apply Mathlib LocalizerMorphism.Derives.isIso_of_isRightDerivedFunctor to the canonical unit. This gives IsIso (α.app I) and completes the unchanged existential theorem.",
    "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization, (3), with natural isomorphism for a chosen localization; derived.tex Tag 06XN, computation on the adapted class."
-   }
-  },
-  {
-   "text": "Let $T:D(\\mathcal A)\\to\\mathcal E$ and $\\beta:G\\to TQ$ be arbitrary. Define $v_K:G(I_K)\\to T(QK)$ by $v_K=T(Qr_K)^{-1}\\beta_{I_K}$. For $f:K\\to L$, use the adapted Ore fraction $(a:I_K\\to P,b:I_L\\to P)$ from Step 5. Naturality of $\\beta$ at $a,b$, with $G(b)$ and $T(Qb)$ invertible, gives\n$$v_LH(f)=T(Qr_L)^{-1}\\beta_{I_L}G(b)^{-1}G(a)=T(Qr_L)^{-1}T(Qb)^{-1}\\beta_PG(a)=T(Qr_L)^{-1}T(Qb)^{-1}T(Qa)\\beta_{I_K}=T(Qf)v_K,$$\nwhere the last equality is $ar_K=br_Lf$ after applying $TQ$ and cancelling. Hence $v:H\\to TQ$ is natural. Also $v_K\\alpha^0_K=T(Qr_K)^{-1}\\beta_{I_K}G(r_K)=\\beta_K$ by naturality at $r_K$. Both $H$ and $TQ$ invert $S$. Clause (2) of [lem-weil-pbc-localization-universal-property], using $\\phi:RGQ\\cong H$ and the identity $TQ\\cong TQ$, now supplies $u:RG\\to T$ with $u_{QK}=v_K\\phi_K$. Therefore $u_{QK}\\alpha_K=v_K\\alpha^0_K=\\beta_K$ for all $K$, as required.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05SA, lemma-derived-functor, comparison compatibility expanded; equation-everywhere following definition-everywhere-defined; categories.tex Tag 04VG and the fully faithful natural-transformation localization property in the cited node."
-   }
-  },
-  {
-   "text": "For uniqueness, let $u':RG\\to T$ satisfy $u'_{QK}\\alpha_K=\\beta_K$, and put $w_K=u'_{QK}\\phi_K^{-1}$. Then $w:H\\to TQ$ is natural and $w_K\\alpha^0_K=\\beta_K$. Naturality at $r_K$, and the final equality of Step 5, yield\n$$T(Qr_K)w_K=w_{I_K}H(r_K)=w_{I_K}\\alpha^0_{I_K}=\\beta_{I_K}.$$\nSince $T(Qr_K)$ is invertible this forces $w_K=T(Qr_K)^{-1}\\beta_{I_K}=v_K$. Consequently $u'_{QK}=v_K\\phi_K=u_{QK}$ for every $K$. Clause (3) of [lem-weil-pbc-localization-universal-property] gives $u'=u$. This proves exactly the stated right-derived universal property and completes the computation assertion from Step 6.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05SA, lemma-derived-functor, uniqueness made explicit; categories.tex Tag 04VG together with the natural-transformation uniqueness of the cited localization node."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -125,7 +88,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 06XN, lemma-find-existence-computes: explicit left-fraction realization of its adapted-replacement argument, expanding the functoriality and comparison assertions of Tag 05SA using categories.tex Tags 04VC, 04VE, 04VF and 04VG."
+  "place": "Tag 06XN lemma-find-existence-computes. The adapted replacement argument is implemented using the equivalent full-subcategory right derivability structure; Mathlib DerivabilityStructure/Constructor.lean and Derives.lean discharge the Kan-extension transfer. Explicit Ore squares, fraction fullness and equality reflection are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -250,7 +213,18 @@
  },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-16",
   "item": "lem-sf-right-derived-from-adapted-complexes",
@@ -284,5 +258,15 @@
   "group": "Q03",
   "result": "pass",
   "note": "Wrote review.md. Checked all statement clauses, dependencies, source, universes, docstrings, duplicate searches, and signature equality. Snapshot module compiled successfully in sandbox and library modes. No faults or repairs required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T123805-L-1899610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

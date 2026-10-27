@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-normalized-cm-local-dualizing-concentration",
+ "kind": "statement",
+ "title": "Concentration of a normalized local dualizing complex in the Cohen–Macaulay case",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], with finite Krull dimension $d$ [def-weil-pbc-krull-dimension-ring]. Assume $\\operatorname{depth}_{\\mathfrak m}A=d$, with depth as in [def-weil-pbc-depth]. Let $\\kappa=A/\\mathfrak m$. Let $K\\in D(A)$ be a normalized algebraic dualizing complex, meaning that $K$ is isomorphic to a bounded complex of injective $A$-modules [def-sp-injective-resolutions], every $H^j(K)$ is finitely generated, the scalar-action map $A[0]\\to R\\operatorname{Hom}_A(K,K)$ is an isomorphism, and $R\\operatorname{Hom}_A(\\kappa[0],K)\\cong\\kappa[0]$ in $D(A)$. Here $R\\operatorname{Hom}_A$ is [def-pur-derived-internal-hom] on the one-object ringed site. Then, putting $W=H^{-d}(K)$, there is an isomorphism\n$$K\\cong W[d]$$\nin $D(A)$ [def-weil-abstract-derived-category], with shift convention $(L[d])^j=L^{j+d}$. The module $W$ is nonzero and finitely generated [def-weil-finitely-generated-module], has support all of $\\operatorname{Spec}A$ (its localization at every prime is nonzero), and $\\operatorname{depth}_{\\mathfrak m}W=d$.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0AWS (lemma-apply-CM), equivalence (1)–(3) and final maximal-Cohen–Macaulay assertion; full support: Tag 0AWE (lemma-depth-dualizing-module), (1), in this Cohen–Macaulay case."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-depth",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-sp-injective-resolutions",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Fix a bounded injective representative $J$ of $K$. The bounded-below injective-complex lemma makes $J$ K-injective. By the definition of derived Hom, $R\\operatorname{Hom}_A(A[0],K)$ is represented by $\\operatorname{Hom}^\\bullet_A(A[0],J)=J$, where evaluation at $1$ gives the equality. The support of the finite self-module $A$ is all of $\\operatorname{Spec}A$: its annihilator is zero, so the support-annihilator criterion applies. Its support dimension is therefore $d$. Apply the degree-bounds and depth-detection lemma to $M=A$. Its clause (1) gives $H^j(K)=0$ for $j<-d$ or $j>0$; its clause (2), using $\\operatorname{depth}A=d$, gives $H^{-d}(K)\\ne0$ and $H^{-t}(K)=0$ for $0\\leq t<d$. Thus $H^j(K)=0$ for every $j\\ne-d$.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "lem-sfb-normalized-dualizing-depth-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AWS via 0B5A (lemma-local-CM), implication (1) implies (3), using 0A7U(1),(3)."
+   }
+  },
+  {
+   "text": "Put $r=-d$ and $W=H^r(J)$. This module is nonzero by Step 1 and finite by the hypothesis on $K$. Define a complex $T$ with $T^j=J^j$ for $j<r$, $T^r=\\ker(d_J^r)$, and $T^j=0$ for $j>r$. Inclusion $T\\to J$ induces the identity on cohomology through degree $r$ and is an isomorphism on all other cohomology because those groups vanish by Step 1. The quotient map $T\\to W[d]$, equal in degree $r$ to $\\ker(d_J^r)\\to\\ker(d_J^r)/\\operatorname{im}(d_J^{r-1})$ and zero elsewhere, induces the identity in degree $r$ and an isomorphism between zero groups elsewhere. Both maps are quasi-isomorphisms. Inverting them in the derived category gives $K\\cong W[d]$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AWS, concentration implies shifted-module form; explicit good truncation."
+   }
+  },
+  {
+   "text": "If $a\\in A$ annihilates $W$, it annihilates every term of $\\operatorname{Hom}^\\bullet_A(W[d],J)$: for an $A$-linear map $f$ out of its only nonzero source term, $(af)(w)=f(aw)=0$. This complex computes $R\\operatorname{Hom}_A(K,K)$ by Step 2 and the K-injectivity of $J$. Thus $a$ acts as zero on $H^0R\\operatorname{Hom}_A(K,K)$. The scalar-action isomorphism in the hypothesis identifies that module $A$-linearly with $A$, so $a=a\\cdot1=0$. Hence $\\operatorname{Ann}_A(W)=0$. The support-annihilator criterion, applicable since $W$ is finite, now gives $W_{\\mathfrak p}\\ne0$ at every prime $\\mathfrak p$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-finite-module-support-annihilator"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Full-support clause of the item: elementary consequence of homothety after concentration (an alternative to 0AWE(1))."
+   }
+  },
+  {
+   "text": "Set $C=\\operatorname{Hom}^\\bullet_A(W[0],J)$, representing $R\\operatorname{Hom}_A(W[0],K)$. Degree $n$ of $\\operatorname{Hom}^\\bullet_A(W[d],J)$ is $\\operatorname{Hom}_A(W,J^{n-d})$. Multiplication by $(-1)^{dn}$ identifies it with degree $n$ of $C[-d]$; it commutes with differentials because the differential on $C[-d]$ is $(-1)^d d_C$. Consequently $C[-d]$ represents $R\\operatorname{Hom}_A(K,K)\\cong A[0]$, and $C\\cong A[d]$ in $D(A)$. Its cohomology is nonzero exactly in degree $-d$, since $A\\ne0$. Apply clause (2) of the depth-detection lemma to the nonzero finite module $W$: the least $t\\geq0$ with $H^{-t}(C)\\ne0$ is $d$, hence $\\operatorname{depth}_{\\mathfrak m}W=d$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-normalized-dualizing-depth-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AWS, final assertion, through 0B5A final paragraph and 0A7U(3); here the homothety for M=A supplies the double-dual identification directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-sfb-normalized-dualizing-depth-detection",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0AWS (lemma-apply-CM), 0B5A (lemma-local-CM) and 0A7U (lemma-sitting-in-degrees); explicit truncation, shift signs, and the homothety proof of full support supplied by NF."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"CohenMacaulay\"",
+   "results": "0 hits: . Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising|CohenMacaulay|Cohen.Macaulay",
+   "results": "0 hits: . Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen Macaulay local ring normalized dualizing complex has a single nonzero cohomology module in negative dimension",
+   "results": "8 hits: Module.supportDim_quotSMulTop_succ_eq_supportDim, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, Module.supportDim_le_supportDim_quotSMulTop_succ, IsLocalRing.finrank_CotangentSpace_eq_one, groupCohomology, CochainComplex.exists_iso_single, IsLocalRing.maximalIdeal_height_eq_ringKrullDim, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized dualizing complex of a Cohen Macaulay local ring is its canonical module shifted by Krull dimension",
+   "results": "8 hits: Module.supportDim_self_eq_ringKrullDim, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_add_length_eq_supportDim_of_isRegular, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, support_of_supportDim_eq_zero, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, Module.supportDim_le_supportDim_quotSMulTop_succ. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Cohen Macaulay local ring its normalized dualizing complex is concentrated in degree negative dimension and its canonical module is maximal Cohen Macaulay",
+   "results": "8 hits: support_of_supportDim_eq_zero, Module.supportDim_add_length_eq_supportDim_of_isRegular, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, Module.supportDim_self_eq_ringKrullDim, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized dualizing complex of a Cohen Macaulay local ring is concentrated in degree minus dimension and its canonical module has full support and maximal depth",
+   "results": "{\"t\": \"2026-10-23T12:56:44Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized dualizing complex of a Cohen Macaulay local ring is concentrated in degree minus dimension and its canonical module has full support and maximal depth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"support_of_supportDim_eq_zero\", \"Module.supportDim_self_eq_ringKrullDim\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"Module.supportDim_le_ringKrullDim\", \"Module.supportDim\"], \"digest\": \"2c2e5a33ba08b5d5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic dualizing complex on a local Cohen Macaulay ring is a shift of a faithful maximal Cohen Macaulay module",
+   "results": "{\"t\": \"2026-10-23T13:01:17Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic dualizing complex on a local Cohen Macaulay ring is a shift of a faithful maximal Cohen Macaulay module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.projective_of_localization_maximal'\", \"Module.subsingleton_of_localization_maximal\", \"CategoryTheory.HasInjectiveDimensionLT.mk'\", \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"CochainComplex.isKProjective_of_op\"], \"digest\": \"b79f97b732a0a083\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "{\"t\": \"2026-10-23T13:01:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"dualizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising|CohenMacaulay",
+   "results": "{\"t\": \"2026-10-23T12:56:42Z\", \"tool\": \"grep\", \"query\": \"dualizing|dualising|CohenMacaulay\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical module and normalized dualizing complex of a Cohen Macaulay local ring",
+   "results": "{\"t\": \"2026-10-23T12:56:42Z\", \"tool\": \"leansearch\", \"query\": \"Canonical module and normalized dualizing complex of a Cohen Macaulay local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.instIsScalarTowerResidueFieldCotangentSpace\", \"Ideal.instModuleQuotientCotangent\", \"IsLocalRing.instModuleResidueFieldCotangentSpace\", \"Module.Dual.instIsReflecive\", \"Module.Dual\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"FGModuleCat.FGModuleCatDual\", \"LinearMap.IsPerfPair.dualEval\"], \"digest\": \"6bc1ad4763e74503\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary dual modules, support dimension or abstract Ext dimension; none states depth detection or concentration for an algebraic normalized dualizing complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reduced-curve-dualizing-module",
+  "date": "2026-10-23",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: vanishing and length-one/length-two restriction: the support-of-dualizing-map obstruction of Stacks 0E3E; 0E3E proof: duality, generic rank one and absence of finite-support submodules, and the dualizing Euler characteristic; supporting input: Tag 0AWS (lemma-apply-CM), equivalence (1)–(3) and final maximal-Cohen–Macaulay assertion; full support: Tag 0AWE (lemma-depth-dualizing-module), (1), in this Cohen–Macaulay case.",
+   "via": [
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normalized-cm-local-dualizing-concentration",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Added one general finite-module node stating 0A7U(1) degree bounds and 0A7U(3) depth detection with the normalized dualizing complex defined inline (review FIX: the dropped 2026-10-19 lem-per Ext-bounds node and def-per normalized-dualizing definition are no longer cited), and wrote concentration, the truncation zigzag, faithfulness/full support and maximal depth explicitly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: vanishing and length-one/length-two restriction: the support-of-dualizing-map obstruction of Stacks 0E3E; 0E3E proof: duality, generic rank one and absence of finite-support submodules, and the dualizing Euler characteristic; supporting input: Tag 0AWS (lemma-apply-CM), equivalence (1)–(3) and final maximal-Cohen–Macaulay assertion; full support: Tag 0AWE (lemma-depth-dualizing-module), (1), in this Cohen–Macaulay case. Steps 1, 2 and 4 realize the local Cohen–Macaulay concentration and maximal-depth input; Step 3 proves full support directly from homothety. Read the latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), whose alteration prerequisites are recorded in the incoming ancestry. No unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic homological algebra to compute derived Hom using the bounded injective representative in the item hypothesis; no geometric unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-fac4f37fa",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-fac4f37fa (reviewer sub-agent of L); spot-checked: Read the item's 4 steps and the new node in full, the statement of every cited node, and Stacks dualizing.tex 0A7U (l.3015-3082, full proof), 0B5A, 0AWS and the definition of a normalized dualizing complex (l.2905-2913). The maths is sound. Step 1: J is bounded injective and hence K-injective; RHom(A[0],K)=J; Supp A=Spec A, so dim Supp A=d; 0A7U(1),(3) for M=A leave H^{-d} as the only nonzero cohomology. Step 2: the good truncation gives two quasi-isomorphisms, so K≅W[d]. Step 3: if aW=0, then a acts as zero on H^0 RHom(K,K)≅A, so Ann W=0 and W has full support. Step 4: the (-1)^{dn} sign identifies C[-d] with RHom(K,K)=A[0], and depth detection then gives depth W=d. I tested the field, k[[x,y]] with A/(x) and k, and the Artinian E(κ) case. The item statement is unchanged from base; it is not a re-split; there are no duplicates in the snapshot or side-live; no SGA source is used. Two route faults, both fixed. (1) Step 1 cited lem-per-algebraic-dualizing-ext-bounds, which is on the 2026-10-19 artin-gabber drop list (line 1404). The delivery does not justify it. (2) The new node's statement cited def-per-algebraic-normalized-dualizing (drop list line 1368). FIX in fixes/dag/nodes/sec-six-functors-basics/: the new node now defines the normalized dualizing complex inline, as the item does, and states 0A7U(1) degree bounds together with 0A7U(3) depth detection, which Stacks proves in one induction. The item's Step 1 cites only that node, and ext-bounds is removed from uses, proof_deps and tool_uses. Batch-5 flag: it came only through ext-bounds, reaching lem-trf-coherent-rhom-finite-injective-dimension. That node is generic algebra and not part of the trace formula or Poincaré duality, and the flag disappears with the cite. Artin-Gabber findings: both dropped ids are gone; this is ordinary commutative algebra on the alteration branch, with no Qbar, adic, t-structure or Gabber route. After the fix, no cited id in either file is on the drop list.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.NormalizedCMDualizingConcentration",
+  "declaration": "DerivedCategory.normalizedCMDualizing_concentration",
+  "file": "lean/Sheaf/Algebra/Homology/NormalizedCMDualizingConcentration.lean",
+  "statement": "theorem normalizedCMDualizing_concentration (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (d : ℕ) (hdim : ringKrullDim A = (d : WithBot ℕ∞)) (hdepth : IsLocalRing.depth (R := A) A = (d : ℕ∞)) (K : DerivedCategory (ModuleCat.{u} A)) (hKinjective : ∃ J : CochainComplex (ModuleCat.{u} A) ℤ, (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (J.X i)) ∧ (∀ i : ℤ, Injective (J.X i)) ∧ Nonempty (Q.obj J ≅ K)) (hKfinite : ∀ i : ℤ, Module.Finite A ((homologyFunctor (ModuleCat.{u} A) i).obj K)) (hKscalar : IsIso (MonoidalClosed.id K)) (hKnormalized : Nonempty ((ordinaryModuleDerivedInternalHom A).obj (op ((singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A (A ⧸ IsLocalRing.maximalIdeal A))), K) ≅ (singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A (A ⧸ IsLocalRing.maximalIdeal A)))) : Nonempty (K ≅ ((singleFunctor (ModuleCat.{u} A) 0).obj ((homologyFunctor (ModuleCat.{u} A) (-(d : ℤ))).obj K))⟦(d : ℤ)⟧) ∧ Nontrivial ((homologyFunctor (ModuleCat.{u} A) (-(d : ℤ))).obj K) ∧ ∃ hWfinite : Module.Finite A ((homologyFunctor (ModuleCat.{u} A) (-(d : ℤ))).obj K), (∀ p : PrimeSpectrum A, Nontrivial (LocalizedModule p.asIdeal.primeCompl ((homologyFunctor (ModuleCat.{u} A) (-(d : ℤ))).obj K))) ∧ @IsLocalRing.depth A _ _ ((homologyFunctor (ModuleCat.{u} A) (-(d : ℤ))).obj K) _ _ hWfinite = (d : ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f36c46ab",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read node, 7 stmt_dep records, module, report, Stacks 0AWS (dualizing.tex l.3625) and 0AWE (l.3359). Only change vs side-live: added lean record and new module; statement verbatim in file. Hypotheses: CommRing/IsNoetherianRing/IsLocalRing (nontrivial), ringKrullDim=d, IsLocalRing.depth A=d, strictly bounded injective representative, finite cohomology, IsIso (MonoidalClosed.id K)=curry ρ_K into the same ihom as ordinaryModuleDerivedInternalHom (canonical homothety), RHom(κ[0],K)≅κ[0]; identical to the landed depth-detection sibling. Conclusions: derived iso K≅(single 0 W)⟦d⟧ with W=H^{-d}K (shift convention matches), Nontrivial W, Module.Finite witness, nontrivial localization at every prime, depth W=d (argument order checked). Edge cases d=0, zero ring, integer negation, universe u fine; no extra hypotheses. Only sorry, docstrings with source/blueprint and 4 steps. Advisory: second reading done by the worker themself; Nontrivial W redundant. No compile (no change)."
+ }
+}

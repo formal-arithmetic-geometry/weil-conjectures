@@ -1,0 +1,150 @@
+{
+ "id": "def-sfb-rational-hopf-module-data",
+ "kind": "definition",
+ "title": "Rational Hopf modules and their symmetric and finite free dual coactions over a ring",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be a commutative ring and $C$ a commutative Hopf $A$-algebra, with comultiplication $\\Delta$, counit $\\epsilon$, and antipode $S$. Tensor products are [def-weil-pbc-module-tensor-product]. For an $A$-module $M$, a rational right coaction is an $A$-linear map $\\rho:M\\to M\\otimes_A C$ with $(1\\otimes\\epsilon)\\rho=1_M$ and $(\\rho\\otimes1)\\rho=(1\\otimes\\Delta)\\rho$, under the tensor unit and associativity identifications. Write $\\operatorname{Sym}_A M$ and $\\iota_M$ for [lem-weil-pbc-symmetric-algebra-universal-property]. Its degree-$n$ submodule is $(\\operatorname{im}\\iota_M)^n$, equivalently the span of all products of $n$ linear generators as in [lem-weil-pbc-symmetric-algebra-graded]. For any linear map $r:M\\to M\\otimes_A C$, the induced symmetric map is the algebra map $\\operatorname{Sym}_A M\\to\\operatorname{Sym}_A M\\otimes_A C$ extending $(\\iota_M\\otimes1)r$. When $A$ is nonzero and $M$ is finite free, its contragredient coaction on $M^\\vee$ is the linear map determined in any finite basis $e_i$, with dual basis $e^i$, by $e^i\\mapsto\\sum_j e^j\\otimes S(c_{ij})$, where $\\rho(e_j)=\\sum_i e_i\\otimes c_{ij}$. Use Mathlib's chosen finite basis to construct this map, rather than choosing unspecified data.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-graded"
+ ],
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf; literature/stacks-project/groupoids.tex",
+  "place": "Alper Lemma 9.2.5 and Remark 9.2.7 (pp.522--523), https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; Stacks Tag 03LF, affine coaction translation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coassociative counital linear coaction of a commutative Hopf algebra on a module over a commutative ring, with induced symmetric algebra and finite free dual coactions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Coalgebra.coassoc_symm_apply\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \"(a : A) : (TensorProduct.assoc R A A A).symm (comul.lTensor A (comul a)) = comul.rTensor A (comul a)\", \"doc\": \"For any element $ a $ in a coalgebra $ A $ over a commutative semiring $ R $, the coassociativity condition holds: applying the inverse associator to the tensor product of the comultiplication map $ \\\\\"}\n  {\"name\": \"Coalgebra.coassoc_symm\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \": (TensorProduct.assoc R A A A).symm ∘ₗ comul.lTensor A ∘ₗ comul = comul.rTensor A ∘ₗ (comul (R := R))\", \"doc\": \"For a coalgebra $ A $ over a commutative semiring $ R $, the coassociativity condition holds: the composition of the inverse associator isomorphism $ (A \\\\otimes_R A \\\\otimes_R A \\\\xrightarrow{\\\\sim} A \\\\o\"}\n  {\"name\": \"CoalgebraStruct.comul\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    {inst : CommSemiring R} →\\n      {inst_1 : AddCommMonoid A} → {inst_2 : Module R A} → [self : CoalgebraStruct R A] → A →ₗ[R] TensorProduct R A A\", \"doc\": \"The comultiplication map $ \\\\Delta: A \\\\to A \\\\otimes_R A $ in the coalgebra structure over a commutative semiring $ R $, which is an $ R $-linear map satisfying coassociativity and counit axioms.\"}\n  {\"name\": \"CoalgCat.instComonObjModuleCatOfCarrier\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → (X : CoalgCat R) → CategoryTheory.ComonObj (ModuleCat.of R ↑X.toModuleCat)\", \"doc\": \"Given a commutative ring $ R $ and a coalgebra $ X $ over $ R $, this constructs the comonoid structure on the underlying $ R $-module of $ X $ in the monoidal category of $ R $-modules. The comultipl\"}\n  {\"name\": \"CoalgCat.ofComonObj\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → (X : ModuleCat R) → [CategoryTheory.ComonObj X] → CoalgCat R\", \"doc\": \"Given a commutative ring $ R $, a left $ R $-module $ X $, and a comonoid structure on $ X $ in the monoidal category of $ R $-modules, this function constructs the corresponding coalgebra over $ R $ \"}\n  {\"name\": \"CoalgCat.ofComonObjCoalgebraStruct\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → (X : ModuleCat R) → [CategoryTheory.ComonObj X] → CoalgebraStruct R ↑X\", \"doc\": \"Given a commutative ring $ R $, a left $ R $-module $ X $, and a comonoid structure on $ X $ in the monoidal category of $ R $-modules, this function constructs the corresponding coalgebra structure o\"}\n  {\"name\": \"Coalgebra.toCoalgebraStruct\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    {inst : CommSemiring R} →\\n      {inst_1 : AddCommMonoid A} → {inst_2 : Module R A} → [self : Coalgebra R A] → CoalgebraStruct R A\", \"doc\": \"A coalgebra over a commutative semiring $ R $ is an $ R $-module $ A $ equipped with comultiplication $ \\\\Delta: A \\\\to A \\\\otimes A $ and counit $ \\\\epsilon: A \\\\to R $, satisfying coassociativity and cou\"}\n  {\"name\": \"CoalgCat.toComonObj\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → CoalgCat R → CategoryTheory.Comon (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and a coalgebra $ X $ over $ R $, this constructs the comonoid structure on the underlying $ R $-module of $ X $ in the monoidal category of $ R $-modules. The comultipl\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No rational Hopf-module, contragredient coaction, or symmetric induced coaction match; reuse Mathlib tensors, symmetric algebra, coalgebra and antipode."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dual coaction on a finite free module over a ring is the antipode transpose of its coordinate Hopf algebra coaction matrix",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HopfAlgebra.sum_antipode_mul_eq_smul\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : HopfAlgebra R A] {a : A}\\n  (repr : Coalgebra.Repr R a),\\n  ∑ i ∈ repr.index, (HopfAlgebraStruct.antipode R) (repr.left i) * repr.right i = CoalgebraStruct.counit a • 1\", \"doc\": \"For any element $a$ in a Hopf algebra $A$ over a commutative semiring $R$, the sum $\\\\sum_{i \\\\in I} S(a_{(1,i)}) \\\\cdot a_{(2,i)}$ over the coalgebra representation indices equals the counit $\\\\varepsilo\"}\n  {\"name\": \"HopfAlgebra.sum_mul_antipode_eq_smul\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : HopfAlgebra R A] {a : A}\\n  (repr : Coalgebra.Repr R a),\\n  ∑ i ∈ repr.index, repr.left i * (HopfAlgebraStruct.antipode R) (repr.right i) = CoalgebraStruct.counit a • 1\", \"doc\": \"For a Hopf algebra over a commutative semiring $ R $, and an element $ a $ in the algebra, the sum over the indices of the coalgebra representation of $ a $ of the product of the left component $ \\\\tex\"}\n  {\"name\": \"toMatrix_dualTensorHom\", \"module\": \"Mathlib/LinearAlgebra/Contraction\", \"type\": \"∀ {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommSemiring R] [inst_1 : AddCommMonoid M]\\n  [inst_2 : AddCommMonoid N] [inst_3 : Module R M] [inst_4 : Module R N] {m : Type u_7} {n : Type u_8}\\n  [inst_5 : Fintype m] [inst_6 : Finite n] [inst_7 : DecidableEq m] [inst_8 : DecidableEq n] (bM : \", \"doc\": \"For finite-dimensional modules $M$ and $N$ over a commutative semiring $R$ with bases indexed by finite types $m$ and $n$, the matrix representation of the linear map $\\\\phi_{j,i} \\\\in \\\\mathrm{Hom}_R(M,\"}\n  {\"name\": \"HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : HopfAlgebra R A] {a : A}\\n  (repr : Coalgebra.Repr R a),\\n  ∑ i ∈ repr.index, (HopfAlgebraStruct.antipode R) (repr.left i) * repr.right i =\\n    (algebraMap R A) (CoalgebraStruct.counit a)\", \"doc\": \"For any element $a$ in a Hopf algebra $A$ over a commutative semiring $R$, the sum over the coalgebra representation indices of the antipode $S$ applied to the left component multiplied by the right c\"}\n  {\"name\": \"HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : HopfAlgebra R A] {a : A}\\n  (repr : Coalgebra.Repr R a),\\n  ∑ i ∈ repr.index, repr.left i * (HopfAlgebraStruct.antipode R) (repr.right i) =\\n    (algebraMap R A) (CoalgebraStruct.counit a)\", \"doc\": \"For any element $ a $ in a Hopf algebra $ A $ over a commutative semiring $ R $, the sum over the coalgebra representation indices of the left component multiplied by the antipode of the right compone\"}\n  {\"name\": \"Pi.comul_comp_finsuppLcoeFun\", \"module\": \"Mathlib/RingTheory/Coalgebra/Basic\", \"type\": \"∀ {R : Type u_1} {n : Type u_2} [inst : CommSemiring R] [inst_1 : Fintype n] [inst_2 : DecidableEq n] {M : Type u_4}\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : CoalgebraStruct R M],\\n  CoalgebraStruct.comul ∘ₗ Finsupp.lcoeFun = TensorProduct.map Finsupp.lcoeFun Finsupp.lcoeFun ∘ₗ Co\", \"doc\": \"The composition of the comultiplication map $\\\\Delta$ with the canonical linear map $\\\\text{lcoeFun}$ from finite support functions to all functions is equal to the composition of the tensor product of \"}\n  {\"name\": \"HopfAlgebra.mul_antipode_lTensor_comul_apply\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : HopfAlgebra R A] (a : A),\\n  (LinearMap.mul' R A) ((LinearMap.lTensor A (HopfAlgebraStruct.antipode R)) (CoalgebraStruct.comul a)) =\\n    (algebraMap R A) (CoalgebraStruct.counit a)\", \"doc\": \"For any element $ a $ in a Hopf algebra $ A $ over a commutative semiring $ R $, the composition of the multiplication map with the tensor product of the antipode and identity map applied to the comul\"}\n  {\"name\": \"HopfAlgebra.mul_antipode_rTensor_comul_apply\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : HopfAlgebra R A] (a : A),\\n  (LinearMap.mul' R A) ((LinearMap.rTensor A (HopfAlgebraStruct.antipode R)) (CoalgebraStruct.comul a)) =\\n    (algebraMap R A) (CoalgebraStruct.counit a)\", \"doc\": \"For any element $ a $ in a Hopf algebra $ A $ over a commutative semiring $ R $, the composition of the multiplication map with the tensor product of the antipode $ S $ and the comultiplication $ \\\\Del\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No rational Hopf-module, contragredient coaction, or symmetric induced coaction match; reuse Mathlib tensors, symmetric algebra, coalgebra and antipode."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"coaction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No rational Hopf-module, contragredient coaction, or symmetric induced coaction match; reuse Mathlib tensors, symmetric algebra, coalgebra and antipode."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|contragredient|symmetricPowerCoaction",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No rational Hopf-module, contragredient coaction, or symmetric induced coaction match; reuse Mathlib tensors, symmetric algebra, coalgebra and antipode."
+  },
+  {
+   "tool": "grep",
+   "query": "rg Coaction|Comodule|dualMap|symmetricMap in Mathlib; rg rational coaction in lean/Sheaf and lean/WeilConjectures; rg in dag/nodes; blueprint_refs.py search rational module",
+   "results": "Mathlib has no module-comodule structure; existing HopfAction.ModuleCoaction and RationalRepresentation.CoordinateComodule require a field. RelativeHopf.Coaction likewise requires a field and adds a different relative action. No general ring rational coaction or induced dual/symmetric coaction exists. Blueprint search returned one unrelated stratified lattice module. No new node id or declaration name appears in the DAG or upstream-name index.",
+   "date": "2026-10-24",
+   "verdict": "A new definition node is needed for the ring-base notion; reuse all Mathlib tensor and symmetric-algebra constructions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-primitive-polynomial-lifting-criterion",
+  "date": "2026-10-24",
+  "group": "Q76"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemma 9.2.5(5),(5-double-prime), Remark 9.2.4(i), and Lemma 4.1.8, printed pp.502--504,521--523. Corrected primitive-vector form of Remark 9.2.7: dualize a surjection from a finite free module, rather than an arbitrary injection A into V. The resolution property over a DVR and Noetherian approximation remove all restrictions on M. Definition input: rational coaction over the DVR, homogeneous symmetric coaction, and finite free contragredient used in the polynomial hypothesis.",
+   "via": [
+    "lem-sfb-dvr-primitive-polynomial-lifting-criterion",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.RationalHopfModuleData",
+  "declaration": "RationalHopfModule.Coaction",
+  "declarations": [
+   "RationalHopfModule.Coaction",
+   "RationalHopfModule.degree",
+   "RationalHopfModule.symmetricMap",
+   "RationalHopfModule.dualMap"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/RationalHopfModuleData.lean",
+  "statement": "structure Coaction",
+  "branch": "sheaf-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c21b8684c",
+  "group": "Q76",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c21b8684c",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Read the item node, all stmt_dep records, the new def-sfb-rational-hopf-module-data and both modules. Item statement/proof are byte-identical to live; only lean and stmt_deps changed, and the added deps are definition nodes (the new node, and def-sfb-affine-coordinate-hopf-algebra, landed existing:true; its owner is inferInstance of the Mathlib Γ(G,⊤) HopfAlgebra the item uses). Clause match: DVR via IsDomain+IsDiscreteValuationRing; GrpObj over Spec A; IsAffine H (equivalent to an affine morphism over an affine base); Flat; LocallyOfFinitePresentation+affine = finite presentation; Coaction counit/coassoc correct; fixed = ρv=v⊗1; primitive = v∉m•⊤; contragredient e^i↦Σ e^j⊗S(c_ij), coassociativity checked by hand; degree=(ι.range)^n; invariance via the lifted symmetric coaction; f(v)=lift(eval v) f=1; arbitrary M:Type w; λ surjective and equivariant to the trivial module; conclusion lift lam q=1 = Sym^n λ under Sym^n A≅A; n≥1 both times. The V universe max u w is equivalent to the node's premise and puts no restriction on M. Edge cases V=0, M=0, n=0, rank 0 OK. No general-ring coaction exists elsewhere (project ones are field-only; RelativeHopf.Coaction is a different notion). Real data, docstrings with source and blueprint, one sorry, both report sections present. No file changed, so no compile."
+ }
+}

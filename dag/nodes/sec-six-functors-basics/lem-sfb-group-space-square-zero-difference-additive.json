@@ -1,0 +1,207 @@
+{
+ "id": "lem-sfb-group-space-square-zero-difference-additive",
+ "kind": "statement",
+ "title": "The square-zero difference coordinate of a group space is additive",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $G$ be a group algebraic space over $S$ [def-trf-algebraic-space], with identity $e:S\\to G$, multiplication $m:G\\times_SG\\to G$ and inverse satisfying the group identities; commutativity and smoothness are not assumed. Let $j:T_0\\hookrightarrow T=\\operatorname{Spec}A$ be a first order thickening of affine $S$-schemes [def-sbc-first-order-thickening], defined by an ideal $I\\subseteq A$ with $I^2=0$, so $T_0=\\operatorname{Spec}(A/I)$. Write $G(T)=\\operatorname{Mor}_S(T,G)$ with the product $xy=m\\circ(x,y)$, $e_T$ for its identity, $e_0:T_0\\to S\\xrightarrow{e}G$, and $K=\\ker(G(T)\\to G(T_0))$. On the small etale site of $T_0$, identified with that of $T$ along $j$, let $\\widetilde I$ be the module sheaf associated to the $A/I$-module $I$, and let $\\Omega^1_{G/S}$ be the module of relative differentials on the small etale site of $G$, representing $S$-derivations of its structure sheaf into module sheaves [def-weil-sheaf-of-modules-category]; $e_0^*\\Omega^1_{G/S}=\\mathcal O_{T_0}\\otimes_{e_0^{-1}\\mathcal O_G}e_0^{-1}\\Omega^1_{G/S}$. For $b\\in K$ the difference $b^\\sharp-e_T^\\sharp:e_0^{-1}\\mathcal O_G\\to\\widetilde I$ of the two ring-sheaf maps is an $S$-derivation; let $\\delta(b)\\in\\operatorname{Hom}_{\\mathcal O_{T_0}}(e_0^*\\Omega^1_{G/S},\\widetilde I)$ be the corresponding homomorphism. Then $\\delta(e_T)=0$ and $\\delta(xy)=\\delta(x)+\\delta(y)$ for all $x,y\\in K$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0BF5 (lemma-group-scheme-addition-tangent-vectors), generalized from field tangent vectors to arbitrary affine square-zero thickenings and group algebraic spaces, with the difference map of spaces-more-morphisms.tex Tags 0618 (lemma-difference-derivation) and 04D0 (lemma-action-by-derivations)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-first-order-thickening",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-group",
+  "def-sfb-space-relative-differentials-model",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-smooth-integral-group-space",
+  "def-sfb-space-square-zero-extension-data",
+  "def-sfb-space-square-zero-stalk-data",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Put $M=\\operatorname{Hom}_{\\mathcal O_{T_0}}(e_0^*\\Omega^1_{G/S},\\widetilde I)$. The $A$-action on $I$ factors through $A/I$, since $I^2=0$. Apply [lem-sfb-space-square-zero-lift-linearization] to $X=G$, $a=e_T$, and the given thickening, whose ideal sheaf is $\\widetilde I$. Its lift set $L_G(e_0)$ is exactly $K$. The resulting pointed bijection $\\delta_G:K\\to M$ is the map $\\delta$ of the statement: both are represented by $b^\\sharp-e_T^\\sharp$. In particular this difference is an $S$-derivation and $\\delta(e_T)=0$. No smoothness or presentation hypothesis is needed.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations), with trivial target thickening; agent application of their linearization to group multiplication."
+   }
+  },
+  {
+   "text": "Let $P=G\\times_SG$, $a_P=(e_T,e_T)$, and $p_0=(e_0,e_0)$. Apply [lem-sfb-space-square-zero-lift-linearization] to obtain $\\delta_P:L_P(p_0)\\to M_P$, where $M_P=\\operatorname{Hom}_{\\mathcal O_{T_0}}(p_0^*\\Omega^1_{P/S},\\widetilde I)$. Its naturality clause gives linear maps $q_i=(\\operatorname{pr}_i)_*:M_P\\to M$. The linear map $q=(q_1,q_2):M_P\\to M\\times M$ is bijective: under $\\delta_P$ and $\\delta_G$ it is the map taking a lift to its two components, whose inverse pairs any two lifts in $K$. Its inverse is additive, since applying injective $q$ to $q^{-1}(v+w)$ and $q^{-1}(v)+q^{-1}(w)$ gives $v+w$ in both cases; the identical argument proves scalar compatibility.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations), with trivial target thickening; agent application of their linearization to group multiplication."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-square-zero-lift-linearization] for $u=m:P\\to G$, postcomposition induces a linear map $m_*:M_P\\to M$, because $ma_P=e_T$. Define the linear map $F=m_*q^{-1}:M\\times M\\to M$. Naturality and the definition of $q$ give $\\delta(xy)=F(\\delta(x),\\delta(y))$. For $v\\in M$, choose $x=\\delta_G^{-1}(v)$; the unit identities $xe_T=x=e_Tx$ give $F(v,0)=v=F(0,v)$. Therefore $F(v,w)=F((v,0)+(0,w))=v+w$. This proves $\\delta(xy)=\\delta(x)+\\delta(y)$ for all $x,y\\in K$. The argument only uses linearity and the two unit identities, so it applies without commutativity of $G$.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0BF5 (lemma-group-scheme-addition-tangent-vectors), linearity and unit-identity proof; agent generalization using Tags 0618, 0619, 04D0 to arbitrary square-zero ideals and algebraic spaces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-square-zero-lift-linearization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0BF5 (lemma-group-scheme-addition-tangent-vectors), generalized using the canonical difference bijections and linear postcomposition of Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "square.?zero.*(group|mul).*(deriv|add)|deriv.*square.?zero.*mul (Mathlib, all .lean); theorem .*(tangent|infinitesimal).*(mul|add) in AlgebraicGeometry, RingTheory; GroupScheme|GrpObj in AlgebraicGeometry, CategoryTheory/Monoidal",
+   "results": "0 hits for the first two patterns; the third lists AlgebraicGeometry/Group/{Smooth,Affine,Abelian}.lean and CategoryTheory/Monoidal/Cartesian/Grp*.lean, which define group objects but state no square-zero difference coordinate.",
+   "date": "2026-10-24",
+   "verdict": "no match (grep only; LeanSearch/Loogle not reachable from the review machine; the existing node lem-sfb-group-space-square-zero-kernel-module records leanfinder searches of the same assertion, with no match)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a group algebraic space over a scheme, the difference from the identity on a square-zero thickening identifies multiplication of infinitesimal points with addition of derivations",
+   "results": "8 hits: derivationToSquareZeroEquivLift_apply_coe_apply, liftOfDerivationToSquareZero_apply, liftOfDerivationToSquareZero_mk_apply', derivationToSquareZeroEquivLift, derivationToSquareZeroEquivLift_symm_apply_apply_coe, liftOfDerivationToSquareZero, derivationToSquareZeroOfLift_apply, Algebra.Generators.H1Cotangent.δAux_mul",
+   "date": "2026-10-24",
+   "verdict": "no match: square-zero ring lifts, Jacobi-Zariski formulas or manifold derivations; no group-algebraic-space multiplication compatibility. Read RingTheory/Derivation/ToSquareZero.lean:115-126 and RingTheory/Kaehler/Basic.lean:327-332: these concern commutative algebras, not the stated geometric assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Derivation",
+   "results": "12 hits: KaehlerDifferential.D, Derivation.liftKaehlerDifferential, KaehlerDifferential.span_range_derivation, KaehlerDifferential.kerTotal_eq, KaehlerDifferential.linearMapEquivDerivation, KaehlerDifferential.linearCombination_surjective, Derivation.liftKaehlerDifferential_comp_D, KaehlerDifferential.map_D",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level universal differentials, not group algebraic spaces or compatibility of the difference coordinate with multiplication."
+  },
+  {
+   "tool": "grep",
+   "query": "square.?zero.*(group|mul).*(deriv|add)|deriv.*square.?zero.*mul",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent map of group multiplication at the identity is addition of tangent vectors over a square zero ideal",
+   "results": "8 hits: tangentMap, tangentMap_prod_left, tangentMapWithin, tangentMap_id, tangentMapWithin_eq_tangentMap, tangentMapWithin_id, tangentMap_prod_right, tangentMap_comp_at",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold tangent maps or ordinary additivity of derivations; not the square-zero group-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The differential of multiplication at the identity of a group scheme is the sum of the two tangent vectors, for any square-zero ideal",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δAux_mul, LeftInvariantDerivation.evalAt_mul, derivationToSquareZeroEquivLift_apply_coe_apply, liftOfDerivationToSquareZero_apply, PresheafOfModules.Derivation.d_mul, liftOfDerivationToSquareZero_mk_apply', derivationToSquareZeroOfLift, derivationToSquareZeroEquivLift",
+   "date": "2026-10-24",
+   "verdict": "no match: square-zero ring lifts, Jacobi-Zariski formulas or manifold derivations; no group-algebraic-space multiplication compatibility. Read RingTheory/Derivation/ToSquareZero.lean:115-126 and RingTheory/Kaehler/Basic.lean:327-332: these concern commutative algebras, not the stated geometric assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "tangent|infPoints|square.?zero|derivation",
+   "results": "0 hits: none; searched Mathlib/AlgebraicGeometry/Group",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication of infinitesimal points reducing to the identity of an algebraic group corresponds to addition of derivations",
+   "results": "8 hits: Derivation.map_add, LeftInvariantDerivation.left_invariant, LieDerivation.coe_add, Derivation.instAddMonoidHomClass, LeftInvariantDerivation.evalAt_mul, Derivation.instLieModule, LeftInvariantDerivation.left_invariant', Derivation.instAdd",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold tangent maps or ordinary additivity of derivations; not the square-zero group-space assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-diagonalizable-nilpotent-triviality",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None for the item). Serves steps 2 and 4 of lem-sfb-diagonalizable-nilpotent-triviality: the group law of the infinitesimal kernel is addition of the actual difference derivations b^sharp - e_T^sharp, natural under precomposition.",
+   "via": [
+    "lem-sfb-diagonalizable-nilpotent-triviality",
+    "lem-sfb-split-local-special-kernel-lifting",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-group-space-square-zero-difference-additive",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses unchanged. Reused the existing square-zero lift linearization with its actual difference formula and linear postcomposition. Derived the product comparison from pairing lifts, then computed multiplication from the unit identities. No new nodes or Mathlib leaves. Checked Stacks 0618/0619/04D0 and 0BF5, project declarations, blueprint and dependency acyclicity.",
+  "blueprint": "No imported blueprint ancestor, as confirmed by blueprint_refs.py ancestor. The inherited from.place identifies steps 2 and 4 of lem-sfb-diagonalizable-nilpotent-triviality; the three steps prove exactly their use of the actual difference coordinate as an additive map. Latest blueprint searched for square-zero, tangent, difference derivation and 0BF5; no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-d0f053061",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-d0f053061 (reviewer sub-agent of L); spot-checked: Statement, stmt_deps and blueprint fields are unchanged from live and side-live (unsplit, empty proof there); the delivery only adds the proof and provenance, with no new nodes. Step 1 applies lem-sfb-space-square-zero-lift-linearization (statement read in full, 6 proof steps read) with X=G, a=e_T, J=Ĩ: e_T∘j=e_0, so L_G(e_0)=K and δ=b^♯−e_T^♯, with δ(e_T)=0. Step 2: naturality for pr_i plus the universal property of the fibre product make q:M_P→M×M a linear bijection. Step 3: m∘a_P=e_T gives δ(xy)=m_*q^{-1}(δx,δy); the unit laws give F(v,0)=v=F(0,v), so F(v,w)=v+w. Commutativity is not used. Sources match: Stacks 0BF5 (groupoids.tex 687-712) and 0618/0619/04D0 (spaces-more-morphisms.tex 3689-3780). Checked cases I=0, A=0, G_a, G_m, GL_n and μ_p in characteristic p. No cycle (the cited closure of 11033 nodes does not contain the item); no SGA source. The existing lem-sfb-group-space-square-zero-kernel-module repeats the same argument but only asserts an unspecified 'canonical' isomorphism, so the item is not a restated clause of it; maintainer note: that node could cite this item instead. Batch-5 check: the flagged path ends at def-trf-algebraic-space, the general definition of an algebraic space, already a stmt_dep of the item on base. The other trf nodes in the closure are generic facts about differentials, not steps of the trace formula or Poincaré duality, so the citation is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupSpaceSquareZeroDifferenceAdditive",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.groupSpace_squareZero_difference_additive",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.squareZeroPointMap",
+   "AlgebraicGeometry.AlgebraicSpace.squareZeroGroupKernel",
+   "AlgebraicGeometry.AlgebraicSpace.IsGroupSquareZeroDifference",
+   "AlgebraicGeometry.AlgebraicSpace.groupSpace_squareZero_difference_additive"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupSpaceSquareZeroDifferenceAdditive.lean",
+  "statement": "theorem groupSpace_squareZero_difference_additive {S : Scheme.{u}} (G : AlgebraicSpace S) (H : SpaceGroup G) {T₀ T : Over S} (j : T₀ ⟶ T) [IsAffine T.left] [IsAffine T₀.left] (hj : IsFirstOrderThickening j.left) (W : ThickeningSiteModel (groupSchemeMap j)) (J : SquareZeroIdeal W) (D : SpaceRelativeDifferentialsModel (groupSpaceProjection G)) : ∃ δ : squareZeroGroupKernel H j → ((moduleTensorPullback (squareZeroPointMap (H.onePoint T₀))).obj D.omega ⟶ J.obj), (∀ b, IsGroupSquareZeroDifference H W J D b (δ b)) ∧ (∀ b : squareZeroGroupKernel H j, b.val = H.onePoint T → δ b = 0) ∧ ∀ x y z : squareZeroGroupKernel H j, z.val = H.mulPoint T x.val y.val → δ z = δ x + δ y",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coefficient ideal and site equivalence use the already landed normalized presentations; relative differentials are specified by their full sheaf universal property. The actual coordinate is characterized on every compatible lifted etale chart by b^sharp - e^sharp. Additional landed statement dependencies only expose these constructions. No statement correction, no smoothness or commutativity assumption, and no independent low universe of test schemes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bcd57e461",
+  "group": "O2",
+  "result": "fix",
+  "note": "Lean matches node clause by clause: SpaceGroup = general natural Group on G(T) (no comm/smooth); affine first-order thickening via IsFirstOrderThickening (IsAffine T₀ implied); K = subtype restricting to e₀; W/J = normalized étale-site equivalence and actual ideal Ĩ (injective, image = kernel, quotient scalar action); D = Ω¹_{G/S} by universal property over all module sheaves relative to pinned cotangentFullRingMap; δ pinned chartwise by inclusion(δb(1⊗dz)) = r♯z − s♯z with lifts existing uniquely by étaleness, sign b♯−e♯; δ(e_T)=0; δ(xy)=δx+δy via z=xy (products stay in K). Edge cases I=0, A=0, trivial G, G_a, G_m, GL_n, μ_p char p; single universe u. Statements verbatim; dep records byte-identical to side-live; no hollow defs; sorry only in theorem; docstrings with source and blueprint and 3 proof steps. Only fault H11: 'Second reading by O2' says no second reading was done → FIX: fixes/lem-sfb-group-space-square-zero-difference-additive.report.md (worker report verbatim + real clause-by-clause reading). Advisories: theorem stmt_dep lem-trf-space-enlarged-etale-ringed-site-model for cotangentFullRingMap (no def owner, accepted before); unused InverseImageDifferentials import; maintainer note: NP's unlanded FIX of lem-sfb-group-space-square-zero-kernel-module adds a parallel def-sfb-space-relative-differentials, to reconcile once both land. No Lean changed, so no compile."
+ }
+}

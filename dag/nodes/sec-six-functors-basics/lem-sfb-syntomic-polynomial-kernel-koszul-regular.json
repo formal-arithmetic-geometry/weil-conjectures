@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-syntomic-polynomial-kernel-koszul-regular",
+ "kind": "statement",
+ "title": "Syntomic polynomial presentation kernels are locally Koszul-regular",
+ "statement": "Let $R\\to E$ be a homomorphism of commutative rings which is syntomic: it is flat [def-weil-pbc-flat-ring-map], finitely presented [def-weil-pbc-finitely-presented-algebra], and for every prime $\\mathfrak p\\subset R$ the fibre $E\\otimes_R\\kappa(\\mathfrak p)$ is a local complete intersection over $\\kappa(\\mathfrak p)$ [def-weil-pbc-complete-intersection-over-field]; residue fields are as in [def-weil-residue-field]. Let $m\\geq0$ and $\\beta:P=R[y_1,\\ldots,y_m]\\twoheadrightarrow E$ be any surjective homomorphism of $R$-algebras [def-weil-pbc-mv-polynomial-ring], and put $J=\\ker\\beta$. For every prime ideal $\\mathfrak q\\subset P$ containing $J$, there exist $h\\in P\\setminus\\mathfrak q$, an integer $r\\geq0$, and $f_1,\\ldots,f_r\\in P_h$ such that $$JP_h=(f_1,\\ldots,f_r),\\qquad H_i(K_\\bullet(P_h;f_1,\\ldots,f_r))=0\\quad(i>0).$$ Here $P_h$ is localization at the powers of $h$ [def-weil-ring-localization-away], and the homology vanishing says that the sequence is Koszul-regular [def-weil-pbc-koszul-regular-sequence]. Equivalently, $J$ is a Koszul-regular ideal, with its meaning given by the displayed local condition. The empty sequence and the zero algebra are allowed; no Noetherian hypothesis on $R$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D3 (lemma-syntomic-lci), forward implication, with definition-local-complete-intersection and lemma-koszul-independence-presentation: the kernel of any finite polynomial presentation is a Koszul-regular ideal."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "For each prime $\\mathfrak s\\subset E$, put $\\mathfrak p=\\mathfrak s\\cap R$. By [lem-weil-pbc-flat-local-ring-maps], the given flat map induces a flat local map $R_{\\mathfrak p}\\to E_{\\mathfrak s}$. In the fibre $F=E\\otimes_R\\kappa(\\mathfrak p)$ the map to $\\kappa(\\mathfrak s)$ has prime kernel $\\mathfrak S$. The defining principal cover in [def-weil-pbc-complete-intersection-over-field] supplies $v\\notin\\mathfrak S$ with $F_v$ a global complete intersection. Apply [lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection] with the finite-presentation neighbourhood $E_1=E$. Its three hypotheses are exactly finite presentation of $E$, the local flatness just obtained, and this $v$. It supplies $g_{\\mathfrak s}\\notin\\mathfrak s$ and a specified relative global complete-intersection presentation of $E_{g_{\\mathfrak s}}$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D3 (lemma-syntomic-lci), forward proof; 00SY (algebra.tex lemma-syntomic)."
+   }
+  },
+  {
+   "text": "In each chart write $E_{g_{\\mathfrak s}}\\cong R[x_1,\\ldots,x_n]/(a_1,\\ldots,a_c)$ with its specified relative global presentation. By [lem-sfb-relative-global-ci-koszul-regular] the sequence $a_1,\\ldots,a_c$ is Koszul-regular. Its ideal is locally Koszul-regular: at every prime containing it take the principal neighbourhood $D(1)$ and the same sequence. Thus each chart has a polynomial presentation with locally Koszul-regular kernel.",
+   "uses": [
+    "lem-sfb-relative-global-ci-koszul-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D3 (lemma-syntomic-lci), forward proof; 07D2 (lemma-relative-global-complete-intersection-koszul)."
+   }
+  },
+  {
+   "text": "The opens $D(g_{\\mathfrak s})$ cover $\\operatorname{Spec}E$, because each chosen prime belongs to its own open. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] choose finitely many $g_1,\\ldots,g_t$ still covering and generating the unit ideal. The supplied map $\\beta$ already makes $E$ a finitely generated $R$-algebra. Apply [lem-sfb-koszul-polynomial-presentation-principal-gluing] to these charts and the presentations of Step 2. Obtain a surjection $\\alpha:R[x_1,\\ldots,x_n]\\twoheadrightarrow E$ whose kernel is locally Koszul-regular. If $E=0$, the empty cover satisfies the same hypotheses.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-sfb-koszul-polynomial-presentation-principal-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D3 (lemma-syntomic-lci), forward proof; 07D1 (lemma-lci-local)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-koszul-polynomial-presentation-independence] to $\\alpha$ and the given $\\beta:P\\twoheadrightarrow E$. It gives local Koszul regularity of $J=\\ker\\beta$. For the prime $\\mathfrak q$ in the statement, unpack that condition: it supplies $h\\notin\\mathfrak q$ and $f_1,\\ldots,f_r\\in P_h$ generating $JP_h$ with all positive Koszul homology zero. These are exactly the asserted witnesses, including $r=0$ when appropriate.",
+   "uses": [
+    "lem-sfb-koszul-polynomial-presentation-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D3 (lemma-syntomic-lci), forward proof; 07CZ (lemma-koszul-independence-presentation)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "lem-sfb-relative-global-ci-koszul-regular",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-sfb-koszul-polynomial-presentation-principal-gluing",
+  "lem-sfb-koszul-polynomial-presentation-independence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D3 (lemma-syntomic-lci), forward proof, with Tags 07D2, 07D1, 07CZ and algebra.tex Tag 00SY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of any finite polynomial presentation of a syntomic algebra is a Koszul regular ideal locally at every prime containing it",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ), Algebra.IsStandardSmooth R S\", \"doc\": \"Given a finite index set $\\\\iota$ and a submersive presentation $P$ of an $R$-algebra $S$ with generating set $\\\\sigma$, the algebra $S$ is standard smooth over $R$. This means $S$ is isomorphic to a lo\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.IsStandardSmooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.FinitePresentation R S\", \"doc\": \"Every standard smooth algebra over a commutative semiring is finitely presented over its base semiring. Specifically, if $ S $ is a standard smooth algebra over $ R $, then $ S $ admits a finite prese\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard smooth charts and flatness/finite presentation results do not assert that the kernel of an arbitrary finite polynomial presentation is locally Koszul-regular. No syntomic/Koszul-regular-ideal theorem was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat finitely presented algebra with complete intersection geometric fibres is a local complete intersection ring homomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"RingHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →+* B) : Prop\", \"doc\": \"Given a ring homomorphism $ f : A \\\\to B $ between commutative semirings, this proposition asserts that the algebra structure on $ B $ over $ A $ induced by $ f $ is finitely presented. An algebra is f\"}\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →ₐ[R] B) : Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"AlgHom.Finite\", \"module\": \"Mathlib.RingTheory.Finiteness.Defs\", \"type\": \"(f : A →ₐ[R] B) : Prop\", \"doc\": \"An algebra homomorphism $ f : A →ₐ[R] B $ is finite if the underlying ring homomorphism makes $ B $ a finitely generated $ A $-module under the algebra structure induced by $ f $.\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard smooth charts and flatness/finite presentation results do not assert that the kernel of an arbitrary finite polynomial presentation is locally Koszul-regular. No syntomic/Koszul-regular-ideal theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"Flat\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"CommRingCat.isRegularMono_of_faithfullyFlat\", \"module\": \"Mathlib.Algebra.Category.Ring.EqualizerPushout\", \"type\": \" {R S : CommRingCat} (f : R ⟶ S) (hf : (CommRingCat.Hom.hom f).FaithfullyFlat) : CategoryTheory.IsRegularMono f\", \"doc\": \"Any map `f : R ⟶ S` in `CommRingCat` with faithfully flat `f.hom : R ⟶ S` is a regular\\nmonomorphism.\"}\n  {\"name\": \"Module.Flat.isSMulRegular_of_isRegular\", \"module\": \"Mathlib.RingTheory.Flat.TorsionFree\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] {r : R} (hr : IsRegular r) [Module.Flat R M] : IsSMulRegular M r\", \"doc\": \"Scalar multiplication `m ↦ r • m` by a regular `r` is injective on a flat module.\"}\n  {\"name\": \"AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.EffectiveEpi\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y] (π : X ⟶ Y) [AlgebraicGeometry.Surjective π] [AlgebraicGeometry.Flat π] : CategoryTheory.IsRegularEpi π\", \"doc\": \"If `π : X ⟶ Y` is a flat and surjective morphism between affine schemes, then `π` is a\\nregular epimorphism in the category of schemes.\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"module\": \"Mathlib.RingTheory.Regular.Flat\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] {rs : List R} (reg : RingTheory.Sequence.IsRegular R rs) : RingTheory.Sequence.IsRegular S (List.map (⇑(algebraMap R S)) rs)\", \"doc\": \"\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Regular.Flat\", \"type\": \" {R : Type u_1} {S : Type u_2} {M : Type u_3} {N : Type u_4} [CommRing R] [CommRing S] [Algebra R S] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] [Module S N] [IsScalarTower R S N] [Module.FaithfullyFlat R S] {f : M →ₗ[R] N} (hf : IsBaseChange S f) {rs : List R} (reg : RingTheory.Sequ\", \"doc\": \"Let `R` be a commutative ring, `M` be an `R`-module, `S` be a faithfully flat `R`-algebra,\\n`N` be the base change of `M` to `S`. If `[r₁, …, rₙ]` is a regular `M`-sequence, then its image\\nin `N` is a \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard smooth charts and flatness/finite presentation results do not assert that the kernel of an arbitrary finite polynomial presentation is locally Koszul-regular. No syntomic/Koszul-regular-ideal theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]yntomic|[Ll]ocal[Cc]omplete[Ii]ntersection|[Kk]oszul[Rr]egular",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: standard smooth charts and flatness/finite presentation results do not assert that the kernel of an arbitrary finite polynomial presentation is locally Koszul-regular. No syntomic/Koszul-regular-ideal theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat ring maps of finite presentation with local complete intersection fibres have locally Koszul regular defining ideals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.Smooth.locally_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/LocallyStandardSmooth\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth → RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth) f\", \"doc\": \"If $ f : R \\\\to S $ is a smooth ring homomorphism, then there exists a covering of $ \\\\operatorname{Spec}(S) $ such that $ f $ is standard smooth on each open set of the covering. This means $ S $ is lo\"}\n  {\"name\": \"RingHom.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"{R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is standard smooth if the induced algebra structure on $ S $ over $ R $ satisfies the standard smoothness condition, meaning $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"RingHom.smooth_iff_locally_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/LocallyStandardSmooth\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth) f\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is locally standard smooth, meaning that smoothness (flatness and locally free differentials) is equivalent to being locally isomorphic \"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard smooth charts and flatness/finite presentation results do not assert that the kernel of an arbitrary finite polynomial presentation is locally Koszul-regular. No syntomic/Koszul-regular-ideal theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of any polynomial presentation of a flat finitely presented algebra with complete intersection fibres is locally generated by a Koszul regular sequence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ), Algebra.IsStandardSmooth R S\", \"doc\": \"Given a finite index set $\\\\iota$ and a submersive presentation $P$ of an $R$-algebra $S$ with generating set $\\\\sigma$, the algebra $S$ is standard smooth over $R$. This means $S$ is isomorphic to a lo\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.IsStandardSmooth.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmooth R S],\\n  ∃ ι σ, ∃ (x : Finite σ), Finite ι ∧ Nonempty (Algebra.SubmersivePresentation R S ι σ)\", \"doc\": \"If $ S $ is a standard smooth algebra over a commutative ring $ R $, then there exist finite sets $ \\\\iota $ and $ \\\\sigma $ such that $ S $ admits a submersive presentation: $ S $ is isomorphic to a qu\"}\n  {\"name\": \"Algebra.Generators.fg_ker_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] {α : Type u_1} (P : Algebra.Generators R S α) [Finite α], P.ker.FG\", \"doc\": \"If $ S $ is a finitely presented algebra over a commutative semiring $ R $ with a finite set of generators $ \\\\alpha $, then the kernel of the canonical ring homomorphism $ R \\\\to R[\\\\alpha] $ is a finit\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Algebra.IsStandardSmooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.FinitePresentation R S\", \"doc\": \"Every standard smooth algebra over a commutative semiring is finitely presented over its base semiring. Specifically, if $ S $ is a standard smooth algebra over $ R $, then $ S $ admits a finite prese\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern standard smoothness and finite generation of presentation kernels, not Koszul-regularity for syntomic algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Syntomic algebras are local complete intersection ring maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"RingHom.IsStandardSmooth\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is standard smooth if the induced algebra structure on $ S $ over $ R $ satisfies the standard smoothness condition, meaning $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \"[Smooth R S] : ∃ (s : Set S), Ideal.span s = ⊤ ∧ ∀ x ∈ s, IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern standard smoothness and finite generation of presentation kernels, not Koszul-regularity for syntomic algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"Regular\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern standard smoothness and finite generation of presentation kernels, not Koszul-regularity for syntomic algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]yntomic|[Kk]oszul[Rr]egular|[Ll]ocal[Cc]omplete[Ii]ntersection",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern standard smoothness and finite generation of presentation kernels, not Koszul-regularity for syntomic algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Syntomic ring homomorphism has Koszul regular defining ideal in every finite polynomial presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"{R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is standard smooth if the induced algebra structure on $ S $ over $ R $ satisfies the standard smoothness condition, meaning $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ), Algebra.IsStandardSmooth R S\", \"doc\": \"Given a finite index set $\\\\iota$ and a submersive presentation $P$ of an $R$-algebra $S$ with generating set $\\\\sigma$, the algebra $S$ is standard smooth over $R$. This means $S$ is isomorphic to a lo\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.FinitePresentation R S\", \"doc\": \"Every standard smooth algebra over a commutative semiring is finitely presented over its base semiring. Specifically, if $ S $ is a standard smooth algebra over $ R $, then $ S $ admits a finite prese\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"RingHom.IsStandardSmooth.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → Algebra.IsStandardSmooth R S\", \"doc\": \"If $ f : R \\\\to S $ is a standard smooth ring homomorphism, then the algebra structure on $ S $ induced by $ f $ satisfies the standard smoothness condition, meaning $ S $ is isomorphic to a localized \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern standard smoothness and finite generation of presentation kernels, not Koszul-regularity for syntomic algebras."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ind-etale-jacobi-zariski-left-injective",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, second half, the zero on the left of Jacobi-Zariski for A to B to its strict henselization. Component for the ind-etale left-injectivity argument: Syntomic polynomial presentation kernels are locally Koszul-regular.",
+   "via": [
+    "lem-sfb-ind-etale-jacobi-zariski-left-injective",
+    "lem-sfb-strict-henselization-naive-cotangent",
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-syntomic-polynomial-kernel-koszul-regular",
+  "worker": "stage1",
+  "summary": "Kept the statement, checked the non-Noetherian forward proof of Tag 07D3, reused the existing syntomic-at-a-prime chart theorem, and isolated the three general Koszul inputs 07D2, 07D1 and 07CZ as statement-only nodes. Searches found no Mathlib or project attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, second half, the zero on the left of Jacobi-Zariski for A to B to its strict henselization. Component for the ind-etale left-injectivity argument: Syntomic polynomial presentation kernels are locally Koszul-regular. The current latest blueprint direct-image proof (3) retains the direct-image stability route; these local algebra inputs serve its already recorded alteration/cotangent support chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-local-ring-maps",
+    "why": "Flatness passes to the prime-local map needed for the 00SY chart theorem; no same-unit general flat-localization result states this."
+   },
+   {
+    "node": "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "why": "Generic commutative algebra chart theorem 00SY supplies the relative global CI presentation; it is exactly the chart theorem cited in the source proof."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Generic affine-spectrum compactness and unit-ideal criterion select the finite cover for 07D1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-5c50dcf2b",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-5c50dcf2b (reviewer sub-agent of L); spot-checked: Read the item, the three new nodes and every cited statement in full, and the Stacks sources 07D3 (forward direction), 07D2, 07D1, 07CZ, 07D0, definition-regular-ideal and 00SV, with tags checked against the tags file. Steps: (1) flat-local-ring-maps gives flatness of R_p→E_s; the fibre's lci cover gives v with F_v a global complete intersection, and 𝔖=ker(F→κ(s)); the 00SY chart node then applies, its three hypotheses matching exactly (g=1). (2) The new 07D2 node makes the relative global CI equations Koszul-regular; with u=1 the local condition holds. (3) Quasi-compactness (iii) and the unit-ideal criterion (i) give a finite cover; β gives finite type; the new 07D1 node yields α, and the E=0 empty-cover case is consistent. (4) The new 07CZ node moves the condition from α to β, and unpacking it at q gives the witnesses the item asks for. The new statements match their sources without Noetherian hypotheses (00SV is general). Small cases tested: ℤ[x]/(2x−1); equation lists containing a unit; (x,x) excluded; id on k against k[y]→k. No duplicates in the DAG: 00SV(1) node is local regularity only, and the trf/sfb Koszul and lci nodes are over a field or scheme-level. No new node restates the item. Searches are recorded, nodes are statement-only, no SGA is cited, and the three cross-unit tool_uses are generic and accepted. blueprint.from.node is null, inherited from the item's chain. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SyntomicPolynomialKernelKoszulRegular",
+  "declaration": "Algebra.exists_koszulRegular_kernel_generators_of_syntomic",
+  "file": "lean/Sheaf/RingTheory/SyntomicPolynomialKernelKoszulRegular.lean",
+  "statement": "theorem exists_koszulRegular_kernel_generators_of_syntomic {R : Type u} {E : Type v} [CommRing R] [CommRing E] [Algebra R E] [Module.Flat R E] [FinitePresentation R E] (hci : ∀ p : PrimeSpectrum R, IsLocalCompleteIntersection p.asIdeal.ResidueField (p.asIdeal.Fiber E)) (m : ℕ) (β : MvPolynomial (Fin m) R →ₐ[R] E) (hβ : Function.Surjective β) (q : PrimeSpectrum (MvPolynomial (Fin m) R)) (hq : RingHom.ker β.toRingHom ≤ q.asIdeal) : ∃ h : MvPolynomial (Fin m) R, h ∉ q.asIdeal ∧ ∃ (r : ℕ) (f : Fin r → Localization.Away h), (RingHom.ker β.toRingHom).map (algebraMap (MvPolynomial (Fin m) R) (Localization.Away h)) = Ideal.span (Set.range f) ∧ RingTheory.Sequence.IsKoszulRegular f",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bcbaafbb",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 07D3 + definition-regular-ideal(2) clause by clause: Module.Flat, FinitePresentation, ∀ p lci fibre via Ideal.Fiber (=κ(p)⊗E, same encoding as landed syntomic siblings; FiniteType instance from FiniteStability, no extra premise), m:ℕ, surjective β : MvPolynomial (Fin m) R →ₐ[R] E, q ⊇ ker β, ∃ h∉q, r, f : Fin r → P_h with (ker β)P_h = span(range f) ∧ IsKoszulRegular f (∀ i≠0 homology zero). No extra assumptions; universes u,v independent; edge cases E=0 (vacuous), R=0, m=0, r=0 covered. Only the item's lean field changed vs live; lean.statement verbatim in file; no defs, proof sorry, docstrings with source/blueprint/4-step proof; no duplicate in lean/Sheaf, WeilConjectures or Mathlib. Advisory: unused public import Mathlib.AlgebraicGeometry.ResidueField."
+ }
+}

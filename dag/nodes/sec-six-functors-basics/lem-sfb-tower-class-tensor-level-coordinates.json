@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-tower-class-tensor-level-coordinates",
+ "kind": "statement",
+ "title": "Compatible finite tensor coordinates for normalized geometric pullback",
+ "statement": "Fix Base b and Geometry g for f:X→Y [def-sp-tower-shriek-data]. Suppose every levelPushUnderlying comparison acts identically on sections. For all actual coefficient systems M,N and n, there are finite isomorphisms from the n-th evaluation of g.pull(tensorRight N M) to that of tensorRight (g.pull N) (g.pull M) [def-sfb-tower-class-tensor-pullback]. These commute with quotient transitions and are natural in M. The finite constant-ring adjoint of ordinaryPullEvaluation.inv followed by this comparison sends a pure tensor x tensor y to the pure tensor of sectionAdjoint(id)(x) and sectionAdjoint(id)(y). The result is finite-level: it does not supply a system natural isomorphism.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sfb-tower-class-tensor-pullback",
+  "def-coef-semilinear-geometry-base"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes"
+ },
+ "proof": [
+  {
+   "text": "Use finite-limit preservation of the set-valued pro-etale inverse image and apply geometricOrdinaryTensor_exists to the ordinary fields of g.generic. Use comparison(g,T) to conjugate its existing natural system tensor comparison by the explicit-site/monoidal tensor bridges and transport to the given actual coefficient coordinates. Define delta(M,N,n) by evaluation of this constructed system isomorphism.",
+   "uses": [
+    "lem-coef-semilinear-geometric-ordinary-tensor",
+    "def-sfb-tower-class-tensor-comparison",
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the ordinary horizontal transition with respect to the constructed system comparison is precisely the required horizontal equation after reversing its sides. Apply evaluation to the naturality equation for comparison(g,T,N) to obtain naturality in M.",
+   "uses": [
+    "def-sfb-tower-class-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the finite adjunction normalization of the explicitly constructed comparison. Its statement is exactly the final sectionwise clause for these evaluated isomorphisms.",
+   "uses": [
+    "lem-sfb-tower-class-tensor-comparison-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-geometric-ordinary-tensor",
+  "def-sfb-tower-class-tensor-comparison",
+  "lem-sfb-tower-class-tensor-comparison-normalization",
+  "det-pe-topos-functoriality-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "F6",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2): reuse the existing ordinary system comparison, then evaluate"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules preserves tensor product and the tensor unit",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.sheafToPresheaf_μ, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.monoidalCategory, SheafOfModules.pushforwardNatIso_inv, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.sheafToPresheaf_δ, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf.",
+   "date": "2026-10-27",
+   "verdict": "Generic sheaf and monoidal results; no quotient-compatible normalized tower coordinates. The later loogle query finds the finite unit API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackObjUnitToUnit\"",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit.",
+   "date": "2026-10-27",
+   "verdict": "Finite unit map only, no compatible maps on the actual tower or the required geometric coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit|geometricOrdinaryTensor_exists|systemIsoOfEvaluation_exists",
+   "results": "5 Mathlib hits in Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Local search finds geometricOrdinaryTensor_exists and systemIsoOfEvaluation_exists under Sheaf/Paper.",
+   "date": "2026-10-27",
+   "verdict": "Reuse local tensor and system-assembly lemmas, separating finite comparison construction from assembly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassTensorGeometryExistence",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "clause (2), finite unit and tensor maps and their transposes",
+   "via": [
+    "lem-sfb-tower-class-tensor-geometry-existence",
+    "lem-sfb-diagonal-trace-geometric-model-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassTensorLevelCoordinates",
+  "file": "lean/Sheaf/Paper/TowerClassTensorLevelCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.exists_tensorLevelCoordinates",
+  "statement": "theorem exists_tensorLevelCoordinates {b : SpTowerShriek.Base l E}\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)\n    (hpush : ∀ (n : ℕ)\n      (N : SemilinearSections.Mod.{u + 1, u, u + 1} (Scheme.ProEt.topology X)\n        (g.generic.coefficients n)) (U : Y.ProEtᵒᵖ)\n      (x : ((SemilinearSections.underlying.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n)).obj\n          ((g.generic.levelPush n).obj N)).obj.obj U),\n      HEq (((g.generic.levelPushUnderlying n).hom.app N).hom.app U x) x) :\n    ∃ δ : ∀ (M N : Systems Y (Arings l E Y)) (n : ℕ),\n      (SpTowerShriek.ev l E X n).obj (g.pull.obj ((tensorRight l E Y N).obj M)) ≅\n        (SpTowerShriek.ev l E X n).obj\n          ((tensorRight l E X (g.pull.obj N)).obj (g.pull.obj M)),\n      (∀ (M N : Systems Y (Arings l E Y)) {m n : ℕ} (h : n ≤ m),\n        (SemilinearSections.transition (Scheme.ProEt.topology X)\n            (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h).app\n            (g.pull.obj ((tensorRight l E Y N).obj M)) ≫\n          (SemilinearSections.res (SemilinearSections.coefficientMap\n            (Scheme.ProEt.topology X) (SpTowerShriek.B l E X)\n            (SpTowerShriek.tau l E X) h)).map (δ M N n).hom =\n        (δ M N m).hom ≫ (SemilinearSections.transition (Scheme.ProEt.topology X)\n          (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h).app\n            ((tensorRight l E X (g.pull.obj N)).obj (g.pull.obj M))) ∧\n      (∀ (N : Systems Y (Arings l E Y)) {M M' : Systems Y (Arings l E Y)}\n        (a : M ⟶ M') (n : ℕ),\n        (SpTowerShriek.ev l E X n).map\n            (g.pull.map ((tensorRight l E Y N).map a)) ≫ (δ M' N n).hom =\n          (δ M N n).hom ≫ (SpTowerShriek.ev l E X n).map\n            ((tensorRight l E X (g.pull.obj N)).map (g.pull.map a))) ∧\n      ∀ (M N : Systems Y (Arings l E Y)) (n : ℕ) (U : Y.ProEtᵒᵖ)\n        (x : M.val.obj (op (n, U.unop))) (y : N.val.obj (op (n, U.unop))),\n        HEq\n          ((((Scheme.proEtaleConstantRingAdjunction (SpTowerShriek.R l E n) f).homEquiv\n            _ _) ((g.ordinaryPullEvaluation n).inv.app ((tensorRight l E Y N).obj M) ≫\n              (δ M N n).hom)).val.app U\n                (tensorPure l E Y M N (op (n, U.unop)) x y))\n          (tensorPure l E X (g.pull.obj M) (g.pull.obj N)\n            (op (n, (chart f U).unop))\n            (sectionAdjoint l E g (𝟙 (g.pull.obj M)) n U x)\n            (sectionAdjoint l E g (𝟙 (g.pull.obj N)) n U y))",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T034655-L-3673153",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T094405-L-221900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

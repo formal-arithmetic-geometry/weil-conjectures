@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-relative-diagonalizable-character-duality",
+ "kind": "statement",
+ "title": "Characters and quotients of split diagonalizable groups over rings",
+ "statement": "Let $A$ be a nonzero commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $M,N$ finitely generated abelian groups. Write $D_A(M)=\\operatorname{Spec}A[M]$ with the Hopf operations of [def-sfb-ring-diagonalizable-group]. Every $S$-group homomorphism $D_A(M)\\to D_A(N)$ is, on a Zariski open cover of $S$, uniquely of the form $D_A(u)$ for a homomorphism $u:N\\to M$, with Hopf map $e_n\\mapsto e_{u(n)}$; the corresponding $u$ is locally constant on $S$. Such a homomorphism is a closed immersion [def-weil-closed-immersion] exactly when these local $u$ are surjective. For a fixed $u$, its kernel is $D_A(\\operatorname{coker}u)$ and its fppf sheaf image is $D_A(\\operatorname{im}u)$, embedded in $D_A(N)$ by $N\\twoheadrightarrow\\operatorname{im}u$. In particular, if $L\\subseteq M$ is an additive subgroup, the fppf sheaf quotient of $D_A(M)$ by $D_A(M/L)$ is $D_A(L)$; the quotient map is faithfully flat and finitely presented. Fppf sheaf image and quotient are the sheafifications of the pointwise image and quotient for faithfully flat finitely presented coverings. All displayed kernel, image and quotient descriptions commute with arbitrary base change. Two homomorphisms between these split diagonalizable groups that agree on every geometric fibre are equal. These assertions include torsion in $M,N$, and nonreduced $A$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Appendix B.1, opening discussion and Remark B.1.2, printed pp.280--281; character antiequivalence and quotients of diagonalizable groups; used explicitly in Theorem 5.1.8, printed p.140. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative structural theorem."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-closed-immersion",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-point",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Translate an $S$-morphism into its $A$-algebra map $\\varphi:A[N]\\to A[M]$ by the natural affine adjunction. The affine product is the spectrum of the tensor product. The tensor-product universal property gives $A[M]\\otimes_AA[M]\\cong A[M\\oplus M]$: send $e_m\\otimes e_{m'}$ to $e_{(m,m')}$; the inverse sends the basis symbol back to that tensor. The inverse formulas hold by bilinearity on finite sums. Thus the group and identity diagrams say exactly $\\Delta\\varphi=(\\varphi\\otimes\\varphi)\\Delta$ and $\\epsilon\\varphi=\\epsilon$. Conversely these equations and compatibility with the antipode give a group homomorphism. For the maps $e_n\\mapsto e_{u(n)}$, all three Hopf operations commute directly with this formula.",
+   "uses": [
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof."
+   }
+  },
+  {
+   "text": "If $z=\\sum_m c_me_m$ is group-like, comparison of the coefficients of $e_{(m,m')}$ in $\\Delta z=z\\otimes z$ gives $c_m^2=c_m$ and $c_mc_{m'}=0$ for $m\\ne m'$; the counit gives $\\sum_mc_m=1$. Conversely these equations give both group-like identities. The nonzero coefficients therefore give a finite partition of $S$ by clopen sets $D(c_m)$; on $D(c_m)$, $z=e_m$. This comparison uses the free finite-sum definition and the tensor basis just constructed, so no domain or reducedness hypothesis enters. The clopen-idempotent lemma supplies both the clopen interpretation and uniqueness of the idempotent belonging to each such open.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof."
+   }
+  },
+  {
+   "text": "Apply the preceding calculation to $\\varphi(e_{n_i})$ for a finite set of group generators $n_1,\\ldots,n_t$ of $N$. Their finitely many partitions have a common finite refinement: its idempotents are the products of one coefficient from each partition. Discard zero products. On each remaining piece $\\operatorname{Spec}A_c$, with $A_c=A/(1-c)$ nonzero, every generator maps to one basis vector $e_{m_i}$. Every relation $\\sum a_in_i=0$ then gives $e_{\\sum a_im_i}=e_0$, hence $\\sum a_im_i=0$ by uniqueness of coefficients over the nonzero ring $A_c$. Thus $n_i\\mapsto m_i$ determines a unique $u:N\\to M$. Equality on the generators proves $\\varphi(e_n)=e_{u(n)}$ for every $n$. Empty generators mean the unique map from $N=0$. The assignments agree on nonempty overlaps by the same basis comparison; they give a locally constant $u$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof."
+   }
+  },
+  {
+   "text": "On each nonempty piece of that partition, the image of $A_c[N]\\to A_c[M]$ is exactly the $A_c$-span of the basis vectors indexed by $\\operatorname{im}u$. This equals $A_c[M]$ if and only if $u$ is surjective: a missing basis vector has coefficient zero in every image. The affine-cover criterion for closed immersions applied to the opens $D_{A_c}(N)$ therefore proves the claimed criterion globally. The nonzero pieces are essential for the converse; they were ensured in the preceding step.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof."
+   }
+  },
+  {
+   "text": "For any $A$-algebra $B$, an $A$-algebra map $A[M]\\to B$ is exactly a group homomorphism $M\\to B^\\times$: take the values on $e_m$; conversely extend $e_m\\mapsto x(m)$ by finite sums. Thus the kernel of $D_A(u)$ on every test algebra consists of characters $x$ trivial on $\\operatorname{im}u$. Such $x$ factor uniquely through $M/\\operatorname{im}u$, by $[m]\\mapsto x(m)$. This identifies the scheme-theoretic kernel with $D_A(\\operatorname{coker}u)$, with its specified inclusion. Indeed the kernel is the fibre product with the identity section; the affine tensor-pushout formula and its universal property represent precisely these test-algebra solutions. This also proves that for every $L\\subseteq M$, the map $q:D_A(M)\\to D_A(L)$ has kernel $D_A(M/L)$, embedded by $M\\twoheadrightarrow M/L$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof."
+   }
+  },
+  {
+   "text": "The subgroup-algebra lemma applies to $L\\subseteq M$, since the quotient of the finitely generated group $M$ is finitely generated. It makes $A[M]$ a free $A[L]$-module with nonempty coset basis and gives an explicit finite algebra presentation. Tensoring an $A[L]$-module with this free module is the direct sum of one copy of that module per coset: $v\\otimes e_{t_c}\\mapsto v$ in coordinate $c$, with inverse given by the same formula backwards. Kernels and images of a direct sum of maps are computed coordinate by coordinate (each element has finite support); a nonempty direct sum of a complex is exact exactly when that complex is exact. Hence this ring map is faithfully flat by the stated definition. It follows that $q$ is flat by the affine flatness criterion and surjective by the faithfully-flat spectrum lemma. The finite presentation gives local finite presentation directly from its definition. Both schemes are affine, hence qcqs; permanence then gives that $q$ is of finite presentation. It is consequently a singleton fppf cover.",
+   "uses": [
+    "lem-sfb-subgroup-algebra-coset-presentation",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof."
+   }
+  },
+  {
+   "text": "All the representable functors here are fppf sheaves: an fppf covering is fpqc, and the representable descent lemma gives existence and uniqueness of glued morphisms. For $H=D_A(M/L)$ and $Q=D_A(L)$, the presheaf $P(T)=D_A(M)(T)/H(T)$ maps injectively to $Q(T)$: two lifts have the same image exactly when their ratio lies in the kernel computed above. Every $T\\to Q$ lifts after the fppf cover $T\\times_QD_A(M)\\to T$ obtained by base changing $q$. The local-bijection sheafification lemma therefore identifies $P^\\#$ with $Q$. These maps are homomorphisms and the inverse respects products since this holds after the covering lifts; the same uniqueness of sheaf gluing proves it globally. This proves the asserted quotient, rather than asserting that pointwise quotients are already representable.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-trf-fppf-covering-base-change",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof."
+   }
+  },
+  {
+   "text": "For fixed $u:N\\to M$, put $I=\\operatorname{im}u\\subseteq M$. Factor $u$ as $N\\twoheadrightarrow I\\hookrightarrow M$. Step 4 makes $D_A(I)\\to D_A(N)$ a closed immersion, while Step 6 makes $D_A(M)\\to D_A(I)$ an fppf cover; that proof only requires that $M/I$ be finitely generated. On every test scheme the pointwise image presheaf in $D_A(N)$ is a subpresheaf of $D_A(I)$, and every section of $D_A(I)$ belongs to it locally by the base-changed cover. The local-bijection criterion identifies its sheafification with $D_A(I)$. The same factorization with $u$ the inclusion $L\\to M$ recovers Step 7. All maps are the stated monomial maps, so these are canonical identifications.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof."
+   }
+  },
+  {
+   "text": "For $A\\to B$, the tensor-product universal property identifies $B\\otimes_AA[M]$ with $B[M]$ by $b\\otimes e_m\\mapsto be_m$, inverse $\\sum b_me_m\\mapsto\\sum b_m\\otimes e_m$. It sends each monomial map, counit and coproduct to the identically indexed one over $B$. The affine fibre-product formula therefore identifies base changes of all the displayed groups and maps with the same constructions over $B$. Steps 5--8 apply over $B$ as well (for $B=0$ all schemes are empty), proving compatibility for kernels, sheaf images and quotients even for nonflat base change. For a general scheme over $S$, apply this on affine opens and glue the explicit monomial identifications. Finally, if two homomorphisms agree on every geometric fibre, refine the two clopen partitions from Step 3 together. Choose a point of a nonempty piece and an algebraic closure of its residue field; the geometric-point description gives a geometric point over it. Equality on that fibre gives equality of all basis indices $u(n_i)$, so the two maps on that piece are the same. Scheme-morphism gluing gives equality globally. Torsion creates no extra basis relations, and nilpotents do not affect the idempotent comparison.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-fppf-affine-open-cover",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-geometric-point",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-sfb-subgroup-algebra-coset-presentation",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-fppf-covering-base-change",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-pc-fppf-affine-open-cover",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-geometric-point",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 12.4, Remark 12.6 and Theorem 12.9(a),(b), printed pp.232-234; agent extension to arbitrary rings, retaining orthogonal idempotents, and explicit fppf-local proof. Conrad Appendix B.1 read online; its omitted relative argument is supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms of diagonalizable group schemes over a ring correspond locally to homomorphisms of character groups and closed immersions to surjections",
+   "results": "{\"t\": \"2026-10-24T07:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms of diagonalizable group schemes over a ring correspond locally to homomorphisms of character groups and closed immersions to surjections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.diagonal_Spec_map\", \"AlgebraicGeometry.diagonal_SpecMap\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\"], \"digest\": \"ec49bf14ccd56213\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, HopfAlgebra",
+   "results": "{\"t\": \"2026-10-24T07:13:04Z\", \"tool\": \"loogle\", \"query\": \"MonoidAlgebra, HopfAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"MonoidAlgebra.instHopfAlgebra\", \"MonoidAlgebra.instHopfAlgebraStruct\", \"MonoidAlgebra.antipode_single\"], \"digest\": \"6fd93787ba548695\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|Diagonalizable|group.like|groupLike",
+   "results": "{\"t\": \"2026-10-24T07:13:04Z\", \"tool\": \"grep\", \"query\": \"diagonalizable|Diagonalizable|group.like|groupLike\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier duality for finitely generated diagonalizable group schemes over arbitrary rings homomorphisms character lattices fppf quotients",
+   "results": "{\"t\": \"2026-10-24T07:13:04Z\", \"tool\": \"leansearch\", \"query\": \"Cartier duality for finitely generated diagonalizable group schemes over arbitrary rings homomorphisms character lattices fppf quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.FGModuleCatDual\", \"CharacterModule.dual\", \"Lat.dualEquiv\", \"CharacterModule.congr\", \"CharacterModule.surjective_of_dual_injective\", \"AddChar.doubleDualEquiv\", \"CommRing.Pic.mk_dual\", \"CharacterModule.dual_surjective_iff_injective\"], \"digest\": \"9b0147c113940e20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|Diagonalizable|groupLike|IsGroupLike",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-24T07:53:37Z\", \"tool\": \"grep\", \"query\": \"diagonalizable|Diagonalizable|groupLike|IsGroupLike\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. No hits. None gives the relative diagonalizable-group Hom/kernel/image/quotient theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of split diagonalizable group schemes over rings correspond to locally constant maps between their character groups",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T07:53:37Z\", \"tool\": \"leansearch\", \"query\": \"Morphisms of split diagonalizable group schemes over rings correspond to locally constant maps between their character groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocallyConstant.instGroup\", \"LocallyConstant.instCommGroup\", \"AlgebraicGeometry.Scheme.instCoeFunHomForallCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.Hom\", \"CharacterModule.dual_apply\", \"AddChar.instCommGroup\", \"CharacterModule.instAddCommGroup\", \"AlgebraicGeometry.LocallyRingedSpace.Hom\"], \"digest\": \"e7086c5f6105e79f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. LocallyConstant.instGroup, LocallyConstant.instCommGroup, AlgebraicGeometry.Scheme.instCoeFunHomForallCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Hom, CharacterModule.dual_apply, AddChar.instCommGroup, CharacterModule.instAddCommGroup, AlgebraicGeometry.LocallyRingedSpace.Hom None gives the relative diagonalizable-group Hom/kernel/image/quotient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, HopfAlgebra",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T07:53:37Z\", \"tool\": \"loogle\", \"query\": \"MonoidAlgebra, HopfAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"MonoidAlgebra.instHopfAlgebra\", \"MonoidAlgebra.instHopfAlgebraStruct\", \"MonoidAlgebra.antipode_single\"], \"digest\": \"6fd93787ba548695\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. MonoidAlgebra.instHopfAlgebra, MonoidAlgebra.instHopfAlgebraStruct, MonoidAlgebra.antipode_single None gives the relative diagonalizable-group Hom/kernel/image/quotient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms between diagonalizable group schemes over arbitrary commutative rings are locally homomorphisms of character groups with kernels and fppf quotients",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T07:53:38Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms between diagonalizable group schemes over arbitrary commutative rings are locally homomorphisms of character groups with kernels and fppf quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"AlgebraicGeometry.diagonal_Spec_map\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion\", \"AlgebraicGeometry.diagonal_SpecMap\"], \"digest\": \"212dc462dd62f604\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.diagonal_Spec_map, AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion, AlgebraicGeometry.diagonal_SpecMap None gives the relative diagonalizable-group Hom/kernel/image/quotient theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*(Free|FinitePresentation)|AddMonoidAlgebra.*(Free|FinitePresentation)|groupLike",
+   "subdirectory": "RingTheory",
+   "results": "{\"t\": \"2026-10-24T07:55:30Z\", \"tool\": \"grep\", \"query\": \"MonoidAlgebra.*(Free|FinitePresentation)|AddMonoidAlgebra.*(Free|FinitePresentation)|groupLike\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/GroupLike.lean\", \"Mathlib/RingTheory/Bialgebra/GroupLike.lean\", \"Mathlib/RingTheory/Bialgebra/GroupLike.lean\"], \"digest\": \"c108814b4fb32864\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean, Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean, Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean, Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean, Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean, Mathlib/RingTheory/Bialgebra/GroupLike.lean, Mathlib/RingTheory/Bialgebra/GroupLike.lean, Mathlib/RingTheory/Bialgebra/GroupLike.lean None gives the relative diagonalizable-group Hom/kernel/image/quotient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Group-like elements in an abelian group algebra over a commutative ring are finite sums of basis elements with orthogonal idempotent coefficients",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T07:55:33Z\", \"tool\": \"leanfinder\", \"query\": \"Group-like elements in an abelian group algebra over a commutative ring are finite sums of basis elements with orthogonal idempotent coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"linearIndepOn_isGroupLikeElem\", \"IsGroupLikeElem\", \"GroupLike.isGroupLikeElem_val\", \"linearIndep_groupLikeVal\", \"GroupLike\", \"GroupLike.val\", \"GroupLike.valEquiv\", \"isGroupLikeElem_iff\"], \"digest\": \"d843734e90555398\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned hits. linearIndepOn_isGroupLikeElem, IsGroupLikeElem, GroupLike.isGroupLikeElem_val, linearIndep_groupLikeVal, GroupLike, GroupLike.val, GroupLike.valEquiv, isGroupLikeElem_iff None gives the relative diagonalizable-group Hom/kernel/image/quotient theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-rank-one-local-matrix-model",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: character duality over rings, needed for the graph of mu2 and its lattice normalization.",
+   "via": [
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-diagonalizable-character-duality",
+  "worker": "stage1",
+  "summary": "Unchanged statement, complete relative Hopf coefficient proof with finite clopen partitions; kernel by test-algebra factorization, closed immersion by basis support, fppf image and quotient by explicit local lifts. One strictly algebraic supporting node for coset freeness and finite presentation; no new group-duality clause nodes. All searches logged, sources read, edge cases checked.",
+  "blueprint": "The inherited ancestor is null, as blueprint_refs.py ancestor confirms. This supports the character-duality prerequisite in the proof of lem-sfb-relative-rank-one-local-matrix-model (graph of mu_2 and lattice normalization), at the exact inherited place. Latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3) was read; no unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-99ac4d4cb",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-99ac4d4cb (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps, the new node and every cited statement. All cited nodes are Mathlib leaves or definitions, so no tool_uses are needed. Step 2's group-like computation works over any ring: it gives orthogonal idempotents that sum to 1 and, through the clopen-idempotent leaf, a finite clopen partition, with no domain hypothesis. Step 3 refines the partitions finitely and determines u on nonzero pieces. Step 4 uses the closed-immersion affine-cover criterion in both directions on the opens D(c). Step 5 identifies the kernel as characters trivial on im u, using the fibre-product and tensor universal-property leaves. Step 6 proves faithful flatness from the definition using the nonempty coset basis, then gets flatness, surjectivity and finite presentation from the cited leaves. Steps 7 and 8 get the quotient and image from the local-bijection sheafification lemma, using covers obtained by base change. Step 9 gets base change from B⊗A[M]≅B[M] and the fibre clause from a geometric point of a nonzero piece. The new node lem-sfb-subgroup-algebra-coset-presentation is correct: the normal-form monomials map bijectively onto coset representatives. I tested it on R=0, L=M, 2Z⊂Z, 2Z/4⊂Z/4 and Z/6=Z/2⊕Z/3. It satisfies B1-B4/B9 and is strictly smaller than the item. A search for duplicates (diagonalizable, group algebra, coset) found only field-only, tame or square-zero nodes, none of which duplicates it. Milne 12.9 (pp.233-234) was read; the relative extension is honestly marked by=agent. No SGA is cited. Batch 5: lem-trf-fppf-covering-is-fpqc (Fpqc.lean:66) and lem-trf-fppf-covering-base-change (Precoverage.lean:132) are general Mathlib site leaves with no proof deps, not part of the trace formula or Poincaré duality, so both are accepted. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDiagonalizableCharacterDuality",
+  "declaration": "AlgebraicGeometry.relative_diagonalizable_character_duality",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDiagonalizableCharacterDuality.lean",
+  "statement": "theorem relative_diagonalizable_character_duality (A : Type u) [CommRing A] [Nontrivial A] (M N : Type u) [AddCommGroup M] [AddCommGroup N] [AddGroup.FG M] [AddGroup.FG N] : (∀ f : ringDiagonalizableGroup A M ⟶ ringDiagonalizableGroup A N, ∃! χ : LocallyConstant (Spec (.of A)) (N →+ M), (∀ x : Spec (.of A), ∃ U : (Spec (.of A)).Opens, x ∈ U ∧ (∀ y ∈ U, χ y = χ x) ∧ (Over.pullback U.ι).map f.hom.hom = (Over.pullback U.ι).map (ringDiagonalizableGroupMap A (χ x)).hom.hom) ∧ (∀ (x : Spec (.of A)) (U : (Spec (.of A)).Opens), x ∈ U → ∀ v : N →+ M, (Over.pullback U.ι).map f.hom.hom = (Over.pullback U.ι).map (ringDiagonalizableGroupMap A v).hom.hom → v = χ x) ∧ (IsClosedImmersion f.hom.hom.left ↔ ∀ x, Function.Surjective (χ x))) ∧ (∀ (u : N →+ M) (T : Over (Spec (.of A))), IsPullback ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A (QuotientAddGroup.mk' u.range)).hom.hom) (toUnit ((Over.pullback T.hom).mapGrp.obj (ringDiagonalizableGroup A (M ⧸ u.range))).X) ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A u).hom.hom) η[((Over.pullback T.hom).mapGrp.obj (ringDiagonalizableGroup A N)).X] ∧ IsClosedImmersion ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A u.rangeRestrict).hom.hom).left ∧ ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A u.range.subtype).hom.hom) ≫ ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A u.rangeRestrict).hom.hom) = (Over.pullback T.hom).map (ringDiagonalizableGroupMap A u).hom.hom ∧ Presheaf.IsSheaf (Scheme.fppfTopology.over T.left) (yoneda.obj ((Over.pullback T.hom).mapGrp.obj (ringDiagonalizableGroup A u.range)).X) ∧ (∃ ηi : (Subfunctor.range (yoneda.map ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A u).hom.hom))).toFunctor ⟶ yoneda.obj ((Over.pullback T.hom).mapGrp.obj (ringDiagonalizableGroup A u.range)).X, ηi ≫ yoneda.map ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A u.rangeRestrict).hom.hom) = (Subfunctor.range (yoneda.map ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A u).hom.hom))).ι ∧ ∀ Z : Sheaf (Scheme.fppfTopology.over T.left) (Type u), Function.Bijective (fun h : yoneda.obj ((Over.pullback T.hom).mapGrp.obj (ringDiagonalizableGroup A u.range)).X ⟶ Z.obj ↦ ηi ≫ h))) ∧ (∀ (L : AddSubgroup M) (T : Over (Spec (.of A))), IsFppfGroupQuotient ((Over.pullback T.hom).mapGrp.map (ringDiagonalizableGroupMap A (QuotientAddGroup.mk' L))) ((Over.pullback T.hom).mapGrp.map (ringDiagonalizableGroupMap A L.subtype)) ∧ Flat ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A L.subtype).hom.hom).left ∧ Surjective ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A L.subtype).hom.hom).left ∧ LocallyOfFinitePresentation ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A L.subtype).hom.hom).left ∧ QuasiCompact ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A L.subtype).hom.hom).left ∧ QuasiSeparated ((Over.pullback T.hom).map (ringDiagonalizableGroupMap A L.subtype).hom.hom).left) ∧ (∀ (B : Type u) [CommRing B] (ρ : A →+* B), ∃ e : ∀ (P : Type u) [AddCommGroup P] [AddGroup.FG P], (Over.pullback (Spec.map (CommRingCat.ofHom ρ))).mapGrp.obj (ringDiagonalizableGroup A P) ≅ ringDiagonalizableGroup B P, (∀ (P : Type u) [AddCommGroup P] [AddGroup.FG P], (e P).inv.hom.hom.left ≫ pullback.fst (ringDiagonalizableGroup A P).X.hom (Spec.map (CommRingCat.ofHom ρ)) = Spec.map (CommRingCat.ofHom (AddMonoidAlgebra.mapRingHom P ρ))) ∧ (∀ (P Q : Type u) [AddCommGroup P] [AddCommGroup Q] [AddGroup.FG P] [AddGroup.FG Q] (v : P →+ Q), ((Over.pullback (Spec.map (CommRingCat.ofHom ρ))).mapGrp.map (ringDiagonalizableGroupMap A v)) ≫ (e P).hom = (e Q).hom ≫ ringDiagonalizableGroupMap B v)) ∧ (∀ f g : ringDiagonalizableGroup A M ⟶ ringDiagonalizableGroup A N, (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of A)), (Over.pullback s).map f.hom.hom = (Over.pullback s).map g.hom.hom) → f = g)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd3340aad",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery of 52dd RETURN (H2): only change is stmt_deps lem-sfb-affine-normal-quotient-geometry -> def-sfb-fppf-group-quotient-presentation (Q95, existing:true, owns AlgebraicGeometry.IsFppfGroupQuotient in the already-imported AffineNormalQuotientGeometry module); Lean module byte-identical (sha256 78a34b2f), node differs from side-live only in lean+stmt_deps, statement verbatim, lean.statement verbatim. Parallel Q137 159416d2e LAND superseded, item unlanded live: no race. Maths re-read independently: Nontrivial A, FG M N in universe u; exists-unique LocallyConstant chi with x-in-U cover plus explicit local uniqueness (pins chi from the cover clause alone, avoiding the nested-exists-unique weakening of Q137) and closed immersion iff all chi x surjective; kernel IsPullback (D(mk' range), toUnit, D(u), eta) for every T; image via D(rangeRestrict) closed immersion, factorisation D(subtype)>>D(rangeRestrict)=D(u), representable sheaf, Subfunctor.range sheafification arrow; IsFppfGroupQuotient(D(mk' L), D(L.subtype)) + Flat/Surjective/LFP/QC/QS; ring base change iso pinned by mapRingHom and natural in v, B=0 allowed; geometric-fibre detection. Directions checked against ringDiagonalizableGroupMap. Edge cases M,N=0, L=0/M, torsion, nonreduced/disconnected A covered. No defs, proof sorry, docstrings with source/blueprint/9 steps; report has Worker report + Second reading by NM + repair section. Not compiled (no file changed). Advisory: second reading is a self-reading."
+ }
+}

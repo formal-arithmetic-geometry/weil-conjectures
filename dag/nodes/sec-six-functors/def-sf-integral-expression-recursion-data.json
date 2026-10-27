@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-integral-expression-recursion-data",
+ "kind": "definition",
+ "title": "Explicit natural coefficient recursion and adjunction transpose",
+ "statement": "Fix a prime l, finite extension E/Q_l, finite field datum D, strict-system operations o, and primitive comparisons d as in [lem-sf-integral-basic-realization, def-sf-integral-system-operations]. Retain verbatim the Unary, Primitives, Reconstruction, Comparisons, coefficientMap, Equations, and direct compactification specifications of the existing expression-recursion specifications, relocated into a publicly reexported data module. For a finite typed expression e satisfying its geometric conditions [def-sf-integral-system-expression-domain], construct coefficientTransformation on the entire input-family category by composing the given unary/tensor natural transformations with the recursively whiskered child transformations. Its component at K is exactly the prescribed coefficientMap. Restrict to e.domain and define transposeComparison: realizationTarget -> realizationSource as the actual adjunction unit followed by L of coefficientTransformation. The adjunction hom-set equivalence proves R(transposeComparison_K) followed by the actual counit is coefficientMap_K. No invertibility or direct compactification equality is assumed in this construction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; agent-formulated expression-tree refinement, lem-sf-integral-expression-recursion, proof steps 1--11."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "lem-sf-integral-basic-realization",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; agent-formulated expression-tree refinement, lem-sf-integral-expression-recursion, proof steps 1--11."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction transpose of a natural transformation is natural and satisfies the counit identity",
+   "results": "Adjunction.counit_naturality, unit_naturality, right_triangle. These supply the formal adjunction calculation, but no expression-domain invertibility or geometric normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction tools only; specialized expression statement absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms for expression trees transported through an adjunction with invertible unit and counit",
+   "results": "Adjunction.leftAdjointCompIso, Equivalence.adjointifyη, Adjunction.unitAsIsoOfIso, conjugateIsoEquiv. No theorem for these full recursive intermediate domains.",
+   "date": "2026-10-26",
+   "verdict": "No specialized theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientMap|integralExpressionRecursion|homEquiv_naturality_left",
+   "results": "Mathlib supplies Adjunction.homEquiv and its naturality; local rg finds only the assigned expression recursion and its downstream consumers, not a completed proof of the proposed steps.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate statement; use hom-set equivalence for the coefficient identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralExpressionRecursion",
+  "date": "2026-10-26",
+  "group": "T2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient-comparison sentence; agent-formulated expression-tree refinement, lem-sf-integral-expression-recursion, proof steps 1--11.",
+   "via": [
+    "lem-sf-integral-expression-recursion",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralExpressionRecursionData",
+  "file": "lean/Sheaf/SixFunctors/IntegralExpressionRecursionData.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.transposeComparison",
+  "statement": "def transposeComparison {D : FiniteFieldDatum.{u}} {o : Operations l E}\n    (d : Primitives l E D o) {I : Type u} {X : I → Over (Spec (.of D.k))}\n    {W : Over (Spec (.of D.k))} (e : Expression _ I X W) (g : e.geometric) :\n    e.realizationTarget l E o ⟶ e.realizationSource l E o",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.Unary",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.Unary.system",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.Unary.integral",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.Unary.primitiveHom",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.Primitives",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.Reconstruction",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.unaryA",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.tensorA",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.Comparisons",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.coefficientMap",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.supportExpression",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.DirectComparisonFamily",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.DirectNormalization",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.DirectProjection",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.DirectComparisons",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.geometricRoot",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.Equations",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.supportInput",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.SupportAgreement",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.coefficientTransformation",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.coefficientTransformation_app",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.transposeComparison",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.transposeComparison_coefficient"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe0fc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T201708-L-3409391",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe0fc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T201708-L-3409391",
+  "kind": "interface",
+  "note": "independent cc review: Item theorem type byte-identical to clones/live; 19 relocated declarations byte-identical (diff) and re-exported publicly; both direct importers compile against the delivered set (lcompile --all sandbox); the two open statements are each equivalent to a conjunct of the original item via the hom-set uniqueness of the transpose; unit realized empty; axioms show only pre-existing upstream sorryAx plus the two named holes"
+ }
+}

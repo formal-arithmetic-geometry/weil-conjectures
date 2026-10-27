@@ -62,7 +62,10 @@ Proof: the ell power belongs to the (n+1)-st power of the principal ideal (ell).
 Its image in that quotient is zero, including the zero coefficient ring. -/
 theorem coefficient_annihilates (n : ℕ) :
     ((l ^ (n + 1) : ℕ) : SpTowerShriek.R l E n) = 0 := by
-  sorry
+  have h := Ideal.pow_mem_pow
+    (Ideal.mem_span_singleton_self (l : Padic.coefficientExtensionIntegers l E)) (n + 1)
+  simpa only [map_pow, map_natCast, Nat.cast_pow] using
+    (Ideal.Quotient.eq_zero_iff_mem.mpr h)
 
 /-- The unique unital quotient map of the actual finite rings.
 Source: classes (2) (blueprint: def-sp-tower-class-coefficients). -/
@@ -81,7 +84,14 @@ this equality. -/
 theorem coefficientMap_transition (T : Scheme.{u}) (n : ℕ) :
     coefficientMap l E T (n + 1) ≫ SpTowerShriek.tau l E T n =
       (Rrings l T).map (homOfLE (Nat.le_succ n)).op ≫ coefficientMap l E T n := by
-  sorry
+  simp only [coefficientMap, SpTowerShriek.tau, Arings, spCoefficientCommRings,
+    Rrings, Functor.ofOpSequence_map_homOfLE_succ, Rtransition, ← Functor.map_comp]
+  congr 1
+  apply CommRingCat.hom_ext
+  apply (RingHom.cancel_right
+    (f := (ULift.ringEquiv.{0, u + 1} (R := ZMod (l ^ (n + 1 + 1)))).symm.toRingHom)
+    (fun x ↦ ⟨x.down, rfl⟩)).mp
+  exact Subsingleton.elim _ _
 
 /-- The canonical map of ring objects on the inverse-system topos.
 Source: classes (2) (blueprint: def-sp-tower-class-coefficients). -/
@@ -104,7 +114,30 @@ theorem scalarGenerator_existsUnique (T : Scheme.{u}) :
       ∀ (U : (ℕ × T.ProEt)ᵒᵖ)
         (x : (coefficient T (Rrings l T)).val.obj U),
         HEq (f.val.app U x) ((coefficientSystemMap l E T).hom.app U x) := by
-  sorry
+  let φ := (sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology T))
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (coefficientSystemMap l E T)
+  let f : coefficient T (Rrings l T) ⟶
+      (SemilinearSections.res.{u + 1, u, u + 1}
+        (coefficientSystemMap l E T)).obj (coefficient T (Arings l E T)) :=
+    { val :=
+      { app := fun U ↦ ModuleCat.homMk
+          ((forget₂ RingCat AddCommGrpCat).map (φ.hom.app U)) (fun r ↦ by
+            ext x
+            exact ((φ.hom.app U).hom.map_mul r x).symm)
+        naturality := fun {U V} g ↦ by
+          apply ModuleCat.hom_ext
+          apply LinearMap.ext
+          intro x
+          exact ConcreteCategory.congr_hom (φ.hom.naturality g) x } }
+  refine ⟨f, fun _ _ ↦ HEq.rfl, ?_⟩
+  intro g hg
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  exact eq_of_heq (hg U x)
 
 /-- The canonical map between coefficient units before deriving scalar extension.
 Source: classes (2) (blueprint: def-sp-tower-class-coefficients). -/

@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-complete-divisor-linear-system",
+ "kind": "definition",
+ "title": "Complete divisor linear system and its scheme of members",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field] [def-weil-algebraic-closure], and let $f:C\\to\\operatorname{Spec}k$ be a smooth connected curve [def-sc-curves]. For a divisor $D$ [def-sc-divisor], put $|D|=\\{E\\in\\operatorname{Div}(C): E\\geq0,\\ E-D\\in\\operatorname{im}(\\operatorname{div})\\}$. Its section space is $V_D=H^0(C,\\mathcal O_C(D))$, with scalars induced by $f$. A nonzero section $s$ represents $E$ when $E_P=D_P+v_P(s)$ at every closed point $P$. If $f$ is projective [def-kun-projective], its scheme of members is the projective space [def-nagata-projective-space-base-change] whose homogeneous coordinates are indexed by a basis of $V_D$, with coordinate vectors interpreted as sections in that basis; thus it is the projective space of lines in $V_D$ (in the quotient convention, $\\mathbf P(V_D^\\vee)$). The set of section lines uses the usual projectivization of $V_D$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-sc-divisor",
+  "def-kun-projective",
+  "def-nagata-projective-space-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCT, remark-classical-linear-series; Milne, Jacobian Varieties, III proof of Theorem 12.1(b), printed p.120"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The complete linear system of a divisor is the projective space of its global sections modulo nonzero scalars",
+   "results": "{\"t\": \"2026-10-24T05:05:43Z\", \"tool\": \"leansearch\", \"query\": \"The complete linear system of a divisor is the projective space of its global sections modulo nonzero scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"projectivizationSetoid\", \"Projectivization.Subspace\", \"Projectivization.rep\", \"Projectivization.mk'\", \"LinearAlgebra.Projectivization.termℙ\", \"Projectivization\", \"Projectivization.exists_smul_eq_mk_rep\", \"Projectivization.Subspace.noConfusionType\"], \"digest\": \"030a9f73a04d1cb3\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies Projectivization for section lines, but no divisor complete-system definition or scheme/dictionary. Project source searches find only completeLinearSystem_isClosedImmersion, a theorem about generating sections rather than the divisor set. No duplicate definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective divisors linearly equivalent to a fixed divisor form its complete linear system",
+   "results": "{\"t\": \"2026-10-24T05:05:49Z\", \"tool\": \"leanfinder\", \"query\": \"Effective divisors linearly equivalent to a fixed divisor form its complete linear system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClassGroup.mkMMem\", \"ClassGroup.exists_mk0_eq_mk0\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"WeierstrassCurve.Jacobian.PointClass\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Projective.PointClass\"], \"digest\": \"294034abda820185\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies Projectivization for section lines, but no divisor complete-system definition or scheme/dictionary. Project source searches find only completeLinearSystem_isClosedImmersion, a theorem about generating sections rather than the divisor set. No duplicate definition."
+  },
+  {
+   "tool": "grep",
+   "query": "completeLinearSystem|linearSystem|fiberDivisor|hyperelliptic",
+   "results": "{\"t\": \"2026-10-24T05:05:49Z\", \"tool\": \"grep\", \"query\": \"completeLinearSystem|linearSystem|fiberDivisor|hyperelliptic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies Projectivization for section lines, but no divisor complete-system definition or scheme/dictionary. Project source searches find only completeLinearSystem_isClosedImmersion, a theorem about generating sections rather than the divisor set. No duplicate definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-degree-two-pencil-uniqueness",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Uniqueness and basepoint freeness of a degree-two pencil. Section/divisor dictionary and scheme of members in the first two sentences.",
+   "via": [
+    "lem-sfb-degree-two-pencil-uniqueness",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.CompleteDivisorLinearSystem",
+  "declaration": "AlgebraicGeometry.Scheme.Divisor.completeLinearSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/CompleteDivisorLinearSystem.lean",
+  "statement": "def completeLinearSystem (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] (D : C.Divisor) : Set C.Divisor",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Divisor.completeLinearSystem",
+   "AlgebraicGeometry.Scheme.Divisor.linearSystemSections",
+   "AlgebraicGeometry.Scheme.Divisor.linearSystemScheme",
+   "AlgebraicGeometry.Scheme.Divisor.sectionRepresentsDivisor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ef306773",
+  "group": "NQ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ef306773",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read the item node, the 7 statement dependencies (6 unchanged vs side-live), the new node def-sfb-complete-divisor-linear-system (fields, 3 search kinds, Stacks 0CCT/Milne p.120 source, no existing notion: Bertini linearSystemMemberIdeal is a member subscheme) and both modules against the live declarations (DivisorModule sectionCondition, Divisor/div/principalDivisors/degree, DivisorPullback functionFieldMap/pullback with ramificationIndex, IsConnectedCurve, ProjectiveLine IsIntegral). The item changes only in lean and stmt_deps (+ the new node); both statements are verbatim. Clauses match: the projectivization ≃ |D| dictionary is pinned by E_P = D_P + ord_P s; finrank = 2; linearSystemScheme ≅ P¹; basepoint free; uniqueness of the moving degree-2 system; ∃! member through each closed point; a finite degree-2 k-map whose pullback-fibre range = |D|; the converse for every nonconstant total-degree-2 k-map; Aut P¹ over k relating any two. Edge cases: char 2/inseparable, 2Q multiplicity, g = 2, D = 0, universes uniform. No hollow definitions (.choose only of a Prop IsIntegral), sorry only, docstrings with source/blueprint/9 steps, no pro-étale substitute. Minor: an unused IsHProjective argument on linearSystemScheme; upstream ProjectiveLine/pullback are used without stmt_deps, which stage 2 cannot add. No file changed, so no compile."
+ }
+}

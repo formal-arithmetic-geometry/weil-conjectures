@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-nilpotent-borel-equals-group",
+ "kind": "statement",
+ "title": "A nilpotent Borel subgroup is the whole connected affine group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and let $B\\subseteq G$ be a Borel subgroup [def-sfb-borel-subgroup-scheme], thus a maximal smooth connected solvable closed subgroup scheme [def-sc-group-scheme-subgroup]. Assume that $B$ is nilpotent in the following group-scheme sense: there are an integer $m\\geq0$ and closed subgroup schemes $B=B_0\\supseteq B_1\\supseteq\\cdots\\supseteq B_m=1$ such that for every commutative $k$-algebra $A$, every $0\\leq i<m$, $b\\in B(A)$ and $x\\in B_i(A)$, the commutator $bxb^{-1}x^{-1}$ belongs to $B_{i+1}(A)$. Here $1=\\operatorname{Spec}k$ is the trivial subgroup. Then $B=G$ as closed subgroup schemes. No restriction on $\\operatorname{char}k$ or $\\dim G$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.23, printed p.359, implication (b) to (c): its proof establishes G=B for a nilpotent Borel B; Section 17b, printed p.353, supplies the connected group-variety and algebraically closed base hypotheses. Nilpotence is the descending central-series convention of Proposition 6.38, printed p.133."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the given central-series length $m$, for all pairs $(G,B)$ in the statement simultaneously. For $m=0$, $B=1$. The identity $G\\to G$ is the quotient by the trivial subgroup: its fibres are singleton cosets, it is faithfully flat of finite presentation, and every point lifts. Thus [lem-sfb-borel-quotient-proper-geometry], with $H=1$, makes $G$ proper and integral. Since $G$ is affine, [lem-sc-proper-affine-finite-general] makes $G=\\operatorname{Spec}C$ finite over $k$. The integral finite-dimensional $k$-algebra $C$ is a field: multiplication by any nonzero element is an injective endomorphism of a finite-dimensional vector space, hence surjective. Each element of $C$ is algebraic over the algebraically closed field $k$, so $C=k$. Consequently $G=B=1$.",
+   "uses": [
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-sc-proper-affine-finite-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.23(b) implies (c), printed p.359, base case; A.75(g). Stacks Tag 01WN (morphisms.tex, lemma-finite-proper) supplies proper plus affine implies finite."
+   }
+  },
+  {
+   "text": "Assume $m>0$ and set $N=B_{m-1}$. For every $k$-algebra $R$, $n\\in N(R)$ and every $R$-algebra $R\\prime$, the series hypothesis gives $[b,n_{R\\prime}]=1$ for all $b\\in B(R\\prime)$. Therefore the $R$-group automorphism $\\operatorname{Int}(n)$ of $G_R$ restricts to the identity of $B_R$. Apply [lem-sfb-borel-homomorphism-rigidity] with source and target $G$, homomorphisms $\\operatorname{Int}(n)$ and $\\mathrm{id}$, to obtain $\\operatorname{Int}(n)=\\mathrm{id}_{G_R}$. Hence $N$ commutes with $G$ on all test algebras, so $N$ is a closed central, in particular normal, subgroup of $G$.",
+   "uses": [
+    "lem-sfb-borel-homomorphism-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 17.21--17.22, printed pp.358--359; applying their centre-inclusion argument to the last central-series term."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-affine-normal-quotient-geometry] to form $q:G\\to Q=G/N$. It is faithfully flat and finitely presented, has scheme-theoretic kernel $N$, and $Q$ is affine of finite type and smooth and connected. Indeed $G$ is geometrically connected in the sense of that node because $k$ itself is an algebraic closure, and that property passes to $Q$. By [lem-sfb-quotient-borel-torus-images], $D=q(B)$ is a smooth connected Borel subgroup of $Q$. The subgroup correspondence identifies $B$ with $q^{-1}(D)$ because $N\\subseteq B$. No smoothness or connectedness of $N$ is required.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-quotient-borel-torus-images"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, printed pp.357--358, and Theorem 5.28, printed p.105; quotient by a central subgroup as in Proposition 17.23."
+   }
+  },
+  {
+   "text": "For $0\\leq i\\leq m-1$, the subgroup correspondence of [lem-sfb-affine-normal-quotient-geometry] gives a closed subgroup $D_i\\subseteq Q$ with $q^{-1}(D_i)=B_i$, since each $B_i$ contains $N$. Thus $D_0=D$ and $D_{m-1}=1$. The restrictions $B_i\\to D_i$ are base changes of $q$, so their sections lift fppf locally. For any $k$-algebra $A$, $d\\in D(A)$, $x\\in D_i(A)$ and $i<m-1$, lift both over a common fppf cover to $b\\in B$ and $y\\in B_i$. Then $[d,x]=q([b,y])$ belongs to $D_{i+1}$ there, because $[b,y]\\in B_{i+1}$. Membership in a closed subscheme descends along this cover: its defining ideal pulls back to zero after a faithfully flat extension only if it was zero already. Hence $[d,x]\\in D_{i+1}(A)$. The $D_i$ form a central series of length $m-1$ for $D$, including $D=1$ when $m=1$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.23(b) implies (c), printed p.359, quotient of the nilpotent Borel; explicit central-series image argument, using the quotient torsor and subgroup correspondence of Chapter 5."
+   }
+  },
+  {
+   "text": "The induction hypothesis now applies to $(Q,D)$ and the series of length $m-1$, giving $D=Q$. By the inverse-image correspondence in [lem-sfb-affine-normal-quotient-geometry], $B=q^{-1}(D)=q^{-1}(Q)=G$ as closed subgroup schemes. This is an equality on all test algebras, including nonreduced ones, and completes the induction.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.23(b) implies (c), printed p.359, final inverse-image argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-sc-proper-affine-finite-general",
+  "lem-sfb-borel-homomorphism-rigidity",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-quotient-borel-torus-images"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.23(b) implies (c), printed p.359, with Propositions 17.21--17.22 and 17.20. The central-quotient induction is indexed by the supplied series length instead of dimension; this writes quotient nilpotence explicitly and allows nonsmooth intermediate terms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Borel|nilpotent",
+   "results": "{\"t\": \"2026-10-23T22:57:20Z\", \"tool\": \"grep\", \"query\": \"Borel|nilpotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"9badb208acf6b549\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group or Lie-algebra results do not assert this scheme-theoretic algebraic-group theorem; grep hits concern nilpotent sections, not nilpotent group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group with a nilpotent Borel subgroup is nilpotent",
+   "results": "{\"t\": \"2026-10-23T22:57:20Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic group with a nilpotent Borel subgroup is nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.IsNilpotent\", \"CommGroup.isNilpotent\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieSubalgebra.instIsNilpotentSubtypeMemOfIsCartanSubalgebra\", \"IsNilpotent.to_isSolvable\", \"Group.isNilpotent_top\", \"of_quotient_center_nilpotent\", \"commGroupOfNilpotencyClass\"], \"digest\": \"17d5b42f118f8f66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group or Lie-algebra results do not assert this scheme-theoretic algebraic-group theorem; grep hits concern nilpotent sections, not nilpotent group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"IsNilpotent\"",
+   "results": "{\"t\": \"2026-10-23T22:57:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"IsNilpotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group or Lie-algebra results do not assert this scheme-theoretic algebraic-group theorem; grep hits concern nilpotent sections, not nilpotent group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nilpotent Borel subgroup of a connected affine algebraic group equals the whole group",
+   "results": "{\"t\": \"2026-10-23T22:57:21Z\", \"tool\": \"leanfinder\", \"query\": \"A nilpotent Borel subgroup of a connected affine algebraic group equals the whole group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.isNilpotent_top\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\", \"LieAlgebra.maxNilpotentIdeal_eq_top_of_isNilpotent\", \"Group.IsNilpotent.nilpotent\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"Group.isNilpotent_iff\"], \"digest\": \"6c53187e8f491a44\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group or Lie-algebra results do not assert this scheme-theoretic algebraic-group theorem; grep hits concern nilpotent sections, not nilpotent group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a maximal connected solvable closed subgroup of an algebraic group is nilpotent then it is the whole group",
+   "results": "{\"t\": \"2026-10-23T22:57:22Z\", \"tool\": \"leanfinder\", \"query\": \"If a maximal connected solvable closed subgroup of an algebraic group is nilpotent then it is the whole group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.isNilpotent_top\", \"frattini_nilpotent\", \"isSolvable_of_top_eq_bot\", \"IsNilpotent.to_isSolvable\", \"Group.IsNilpotent.nilpotent\", \"Group.IsNilpotent.nilpotent'\", \"LieAlgebra.maxNilpotentIdeal_eq_top_of_isNilpotent\", \"Group.IsNilpotent.isVirtuallyNilpotent\"], \"digest\": \"11bd0a13223c020a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group or Lie-algebra results do not assert this scheme-theoretic algebraic-group theorem; grep hits concern nilpotent sections, not nilpotent group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|nilpotent",
+   "results": "{\"t\": \"2026-10-23T23:45:36Z\", \"tool\": \"grep\", \"query\": \"Borel|nilpotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"9badb208acf6b549\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A maximal connected solvable algebraic subgroup which is nilpotent is the whole connected algebraic group",
+   "results": "{\"t\": \"2026-10-23T23:45:36Z\", \"tool\": \"leansearch\", \"query\": \"A maximal connected solvable algebraic subgroup which is nilpotent is the whole connected algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.maxNilpotentSubmodule_eq_top_of_isNilpotent\", \"LieAlgebra.maxNilpotentIdeal_eq_top_of_isNilpotent\", \"LieSubalgebra.instIsNilpotentSubtypeMemOfIsCartanSubalgebra\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"IsNilpotent.to_isSolvable\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieSubalgebra.IsCartanSubalgebra.casesOn\", \"LieAlgebra.isSolvable_of_isNilpotent\"], \"digest\": \"b2455c903044c4e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"IsNilpotent\"",
+   "results": "{\"t\": \"2026-10-23T23:45:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"IsNilpotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nilpotent Borel subgroup equals its smooth connected affine algebraic group",
+   "results": "{\"t\": \"2026-10-23T23:45:37Z\", \"tool\": \"leanfinder\", \"query\": \"A nilpotent Borel subgroup equals its smooth connected affine algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"Group.isNilpotent_top\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieSubalgebra.instIsNilpotentSubtypeMemOfIsCartanSubalgebra\", \"LieAlgebra.le_zeroRootSubalgebra\", \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\"], \"digest\": \"7e6f7ad8312af0ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme extensionality and abstract-group/Lie-algebra statements do not assert Borel restriction rigidity or nilpotent-Borel equality; Borel grep hits outside algebraic geometry concern measurable spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-group-dimension-two-solvable",
+  "date": "2026-10-24",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Corollary 17.27, printed p.360, together with the smooth reduction theorem over a perfect field and dimension three of PGL2; used in Theorem 20.16 (c) implies (d), printed p.413. General low-dimensional input: Corollary 17.27, before its application to the proper image subgroup in Theorem 20.16(c) implies (d). Supporting input in Corollary 17.27: Proposition 17.23(b) implies (c), whose proof establishes that a nilpotent Borel subgroup equals its ambient connected group.",
+   "via": [
+    "lem-sfb-connected-group-dimension-two-solvable",
+    "lem-sfb-pgl2-proper-connected-subgroup-solvable",
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nilpotent-borel-equals-group",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Read Milne 17.20--17.23 and reused quotient geometry, Borel image, homogeneous quotient properness and the existing proper-affine Mathlib leaf. One new statement-only node supplies Borel restriction rigidity. Induction on the supplied series length explicitly handles arbitrary subgroup schemes and fppf-local commutator lifts. No project attachment or Mathlib match for the item or the new rigidity node.",
+  "blueprint": "Read latest sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md (3). Preserves the inherited alteration/GIT/root-datum support chain for det-thm-sf-ctf-stability-direct-images, whose ancestor command returns None; fills the nilpotent-Borel prerequisite used in the dimension-two solvability argument. No unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N7-7643501b0",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-7643501b0 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the whole item, the new node, every cited statement and Milne iAG pp.357-359. Item vs Milne 17.23 (b)=>(c): the hypotheses match (§17b conventions: connected group variety over an algebraically closed k). The functorial central series is equivalent to Milne 6.38, because b x b^-1 = [b,x]x in B_i makes each B_i normal. The conclusion B=G is scheme-theoretic, so nothing is weakened. Steps: (1) m=0 applies borel-quotient-proper-geometry with H=1, p=id; id meets its quotient conditions, so G is integral and proper; then the Mathlib leaf proper+affine=>finite gives G finite, and a finite-dimensional domain over an algebraically closed k is k, so G=1. (2) N=B_{m-1} commutes with B on every algebra, so Int(n)=id on B_R and rigidity gives N central in G. This needs arbitrary R because N may be nonreduced. (3) The quotient node gives Q=G/N smooth and connected (geometrically connected since kbar=k). quotient-borel-torus-images makes D=q(B) Borel, and the correspondence clause gives B=q^-1(D). (4) D_i comes from the correspondence; D_{m-1}=1 since ker q=N; commutators are lifted over fppf covers and membership descends along an injective faithfully flat A->A'. This is genuinely elementary. (5) The induction on m is set up properly and finishes with B=q^-1(Q)=G. Edge cases tested: m=1, repeated trivial terms, G_a, G_m, unitriangular groups, nonreduced mu_p terms. New node vs Milne 17.21: it states the full arbitrary-R clause and is statement-only and self-contained. Duplicate search: the DAG already has lem-sfb-homomorphism-borel-rigidity (Q36), which is the R=k case only, and the report's not-duplicates list omits it. I accept the new node as a necessary strict generalization, since step 2 needs non-reduced R. Maintainer note: the Q36 node could become a corollary of the new one. Batch-5 check: the three flagged closure hits are lem-trf-smooth-fpqc-base-descent (Stacks 02VL descent, a Mathlib leaf), def-trf-scheme-cover-descent-datum and def-trf-scheme-algebraic-space (general definitions). None is the trace formula, Poincare duality or a step of their proofs, so they are outside the assumptions. No SGA is cited. lem-sc-proper-affine-finite-general is a Mathlib leaf from another unit, so no tool_uses entry is needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NilpotentBorelEqualsGroup",
+  "declaration": "AlgebraicGeometry.isIso_of_borel_of_nilpotent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NilpotentBorelEqualsGroup.lean",
+  "statement": "theorem isIso_of_borel_of_nilpotent {k : Type u} [Field k] [IsAlgClosed k] (G B : Grp (Over (Spec (.of k)))) (i : B ⟶ G) [IsAffine G.X.left] [Smooth G.X.hom] [ConnectedSpace G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (hB : IsBorelGroupScheme i.hom.hom) (hnil : ∃ (m : ℕ) (C : Fin (m + 1) → Grp (Over (Spec (.of k)))) (c : ∀ j : Fin (m + 1), C j ⟶ B), (∀ j : Fin (m + 1), IsClosedSubgroupScheme (c j).hom.hom) ∧ IsIso (c 0) ∧ Nonempty (C (Fin.last m) ≅ Grp.trivial _) ∧ (∀ j : Fin m, ∃ l : C j.succ ⟶ C j.castSucc, l ≫ c j.castSucc = c j.succ) ∧ ∀ (j : Fin m) (A : Type u) [CommRing A] [Algebra k A] (b : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A))) ⟶ B.X) (x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A))) ⟶ (C j.castSucc).X), ∃ z : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A))) ⟶ (C j.succ).X, z ≫ (c j.succ).hom.hom = b * (x ≫ (c j.castSucc).hom.hom) * b⁻¹ * (x ≫ (c j.castSucc).hom.hom)⁻¹) : IsIso i",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d543b7509",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement matches node and Milne 17.23(b)=>(c) clause by clause: alg. closed k; G smooth connected affine LOFT+QC; IsBorelGroupScheme i.hom.hom (landed def read); explicit finite central series identical in form to landed central_maximal_torus_nilpotent (C 0 iso B, last term ≅ Grp.trivial = 𝟙_, factorized descending inclusions, commutator over all Type-u k-algebras lands in next term); conclusion IsIso i = equality as closed subgroups. Only lean record differs from live node; statement verbatim; sorry only; docstrings with source/blueprint/proof plan; proof imports exist; report has Worker report and Second reading by Q35. Edge cases m=0, m=1, nonreduced terms/algebras, char p, universes fine. No file changed, no compile."
+ }
+}

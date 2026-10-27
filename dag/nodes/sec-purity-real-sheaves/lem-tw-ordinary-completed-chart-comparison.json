@@ -1,0 +1,151 @@
+{
+ "id": "lem-tw-ordinary-completed-chart-comparison",
+ "kind": "statement",
+ "title": "Normalized ordinary pullback comparison on represented charts",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, schemes T,S, a morphism g:T → S and a pro-etale object U over S [def-weil-l-adic-coefficient-extension, def-weil-scheme-morphism-properties, def-weil-pbc-proetale-site]. Let V be its base change and v:V.left → U.left. Use completed coefficient sheaves [def-weil-completed-integral-coefficients], projection-defined structural maps and the constant-section/projection normalized chart ring isomorphisms [lem-tw-completed-coefficient-ringed-coherence]. Write r_U,r_V for sectionwise chart restrictions with those coefficient identifications, P_g,P_v for ordinary module pullbacks and D_g,D_v their specified right adjoints [def-weil-sheaf-of-modules-category, def-weil-proetale-inverse-image]. There is an isomorphism beta:D_g;r_U ≅ r_V;D_v whose component on H and m is restriction of m along the canonical fibre-product isomorphism H ×_U V ≅ H ×_S T. There is an isomorphism lambda:r_U;P_v ≅ P_g;r_V, and lambda_M equals P_v(r_U(eta_g,M)) followed by P_v(beta_(P_g M)) and epsilon_v,(r_V(P_g M)). All universes of schemes and coefficients are independent. No derived functors are part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IF and 04J0; ordinary part of item steps 3-4"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "def-tw-ordinary-immersion-chart-models"
+ ],
+ "proof": [
+  {
+   "text": "The represented slice equivalences identify the over-sites at U,V with the pro-etale sites of U.left,V.left. The coefficient isomorphisms supplied by completedRingMap_slice are independent of the auxiliary morphism: constant-sheaf maps are determined by their constant-section equations, and completed-ring maps are determined by all finite projections. Thus they are exactly chartRingIso. Coefficient coherence identifies the restricted structural map with the completedRingMap of v.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-tw-completed-coefficient-ringed-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, localization of module pullback; Tags 04IF and 03CE"
+   }
+  },
+  {
+   "text": "Localize the ordinary module adjunction at U. The finite-product comparison for pro-etale base change identifies the localized module right adjoints. The coefficient equality in step 1 makes this a linear comparison after transport through the represented slice equivalences. Its section map on H is restriction along completedRingSlicePointIso, and its inverse is induced by the inverse point isomorphism. The localized pullback comparison is invertible by the module localization theorem. Its adjunct is restriction of the global unit followed by beta. Inverse adjunction gives the stated unit/beta/counit formula. Site and coefficient equivalences preserve the formula by their unit equations.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, localization of module pullback; Tags 04IF and 03CE"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "lem-pur-ringed-site-pullback-localization-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ordinary represented localization and its adjunction normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackComp|restrictFunctorIsoPullback",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ll]imit|[Ll]imit.*pullback|overFunctor|localComparison",
+   "results": "Mathlib/Topology/Gluing.lean; Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean; Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean; Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of module pullback to represented slices with the adjunction mate unit and counit equation",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackObjUnitToUnit; PresheafOfModules.pullbackComp; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; CategoryTheory.Adjunction.localization_unit_app; CategoryTheory.Adjunction.Localization.η_app; CategoryTheory.Adjunction.Localization.ε_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\"",
+   "results": "PresheafOfModules.pullbackId; PresheafOfModules.pullbackObjIsDefined; PresheafOfModules.pullback; PresheafOfModules.pullbackObjIsDefined_eq_top; PresheafOfModules.pullbackObjIsDefined_free_yoneda; PresheafOfModules.pullbackPushforwardAdjunction; PresheafOfModules.pullbackComp; PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to representable slice commutes with inverse image of sheaves of modules",
+   "results": "ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.Modules.restrict_obj; AlgebraicGeometry.Scheme.Modules.restrict_map; AlgebraicGeometry.Scheme.Modules.restrict; ModuleCat.Tilde.res_apply; AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict; SheafOfModules.over",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryImmersionChartComparison",
+  "date": "2026-10-23",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof, first sentence: the dual stalk is the dual representation. Proposition 6.6.11 and Remark 6.8.15: base-changed strata, covering slices and finite-projective ordinary pullback models. Agent extraction of original steps 2-3, with the model interfaces used by steps 1 and 4. Returned ordinary-model proof steps 4-5: ordinary derived square and representable chart comparison.",
+   "via": [
+    "lem-tw-ordinary-immersion-chart-comparison",
+    "lem-tw-ordinary-pullback-stratified-models",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryCompletedChartComparison",
+  "file": "lean/Sheaf/Paper/OrdinaryCompletedChartComparison.lean",
+  "declaration": "WeilConjectures.OrdinaryImmersionChart.ordinaryCompletedChartComparison",
+  "statement": "theorem ordinaryCompletedChartComparison {T S : Scheme.{t}} (g : T ⟶ S) (U : S.ProEt) : Nonempty (OrdinaryChart l E g U)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-23",
+  "declarations": [
+   "WeilConjectures.OrdinaryImmersionChart.OrdinaryChart",
+   "WeilConjectures.OrdinaryImmersionChart.ordinaryCompletedChartComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-5e58c",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261024T190502-L-4070171",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-5e58c",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261024T190502-L-4070171",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Models/two hole modules vs live OrdinaryImmersionChartComparison.lean (verbatim extraction except declared Rings/pull/adj irreducibility), hole statements vs their nodes and Stacks 04IF/04J0, sandbox compile + #print axioms (sorryAx only via the two new holes)"
+ }
+}

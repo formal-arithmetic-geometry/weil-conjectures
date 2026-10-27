@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-constant-perfect-dvr-torsion-calculation",
+ "kind": "statement",
+ "title": "DVR torsion calculation for one completed constant perfect value",
+ "statement": "Let l be prime, E/Q_l a finite extension, A=O_E its actual valuation ring and pi its uniformizer [def-weil-l-adic-coefficient-extension]. For schemes T and X and any map g:X -> T, put d=pbcPadicCoefficientDatum(l,E), B=pbcAdicCompletion(T,d) and B'=g^{-1}B [def-weil-pbc-adic-coefficient-datum]. Let C be a perfect A-complex [def-pc-perfect-ring-complex], let K=integralConstantDerived(T,d)(C) [def-weil-pbc-integral-stratified-perfect-models], and fix q. Then g^*H^q(K) is isomorphic to F direct-sum N, where F has a sectionwise basis of one finite rank over B'. There is a nilpotent endomorphism f of N and an index n such that cokernel(f) is an epimorphic image of g^*Tor_1^{R_(n+1)}(H^q(K_(n+1)),R_n), restricted along g^{-1}(B -> R_n). Here R_n denotes the actual quotient coefficient sheaf at exponent n+1 and K_n the derived reduction. No noetherian condition on T or X, constructibility predicate, stratification, or local-model existence is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8 and Proposition 6.6.11 (realization); parent normal-form steps 2--3, elementary divisors and explicit periodic quotient resolution. Stacks more-algebra.tex, lemma-modules-PID (Tag 0ASV), supplies the module normal form."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Represent C by a bounded finite-projective complex over the valuation DVR. All terms are finite free. At the highest degree, Smith-normal-form bases diagonalize the differential image in the highest term. Lift the free image basis to split its preceding term into the image lifts and the differential kernel. The incoming differential lands in that kernel, so the diagonal two-term blocks split as complexes. Iterate downward. Absorb diagonal units into basis vectors; discard contractible unit blocks. The degree-q one-term blocks give A^r and positive-power cokernel blocks give the finite torsion module. Completed realization and inverse image give F and N. A uniformizer power bounded by the maximum block exponent kills N. Finite free realization gives a basis on every object, including the empty object.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-saturation-line-smith-normal-form",
+    "lem-weil-pbc-completed-constant-finite-complex-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose n at least the largest positive torsion exponent. For S=A/(pi^(n+2)) -> R=A/(pi^(n+1)), the periodic free resolution of R has differential pi^(n+1) in degree -1 to zero, pi in degree -2 to -1, and then alternates. Cancellation in the DVR proves its exactness. Tensoring with each degree-q cokernel block A/(pi^s), where s<=n+1, gives Tor_1=(A/(pi^s))/pi. The bounded-complex block decomposition makes those blocks direct summands in H^q of the reduction; other blocks can contribute and are projected away. Thus their Tor_1 sum surjects onto N/pi N. Exact constant sheafification and completed finite-complex realization compare the actual quotient reductions with this calculation. Bounded-above free resolutions compute derived scalar extension; exact inverse image and tensor comparison give the stated source after coefficient restriction. Multiplication by pi is the nilpotent f. For no torsion take N=0 and the epimorphism to zero; no nonempty-chart assumption is needed.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-finite-complex-realization",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-finite-complex-realization",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8 and Proposition 6.6.11 (realization); parent normal-form steps 2--3, elementary divisors and explicit periodic quotient resolution. Stacks more-algebra.tex, lemma-modules-PID (Tag 0ASV), supplies the module normal form."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex over a discrete valuation ring is a direct sum of shifted free modules and two-term complexes with uniformizer-power differentials",
+   "results": "Eight DVR characterizations and instances, including IsDiscreteValuationRing.TFAE and PadicInt.instIsDiscreteValuationRing; no complex decomposition or Tor projection.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite free modules over a discrete valuation ring decomposes into free and uniformizer torsion blocks",
+   "results": "Eight PID and Dedekind module structure results, including Module.torsion_by_prime_power_decomposition and Submodule.exists_smith_normal_form_of_le. They concern modules, not derived sheaves.",
+   "date": "2026-10-27",
+   "verdict": "Algebraic building blocks only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.exists_smith_normal_form_of_le",
+   "results": "Exact submodule Smith-normal-form declaration in Mathlib.LinearAlgebra.FreeModule.PID; no derived sheaf realization or Tor statement.",
+   "date": "2026-10-27",
+   "verdict": "Only the matrix/submodule step is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion_normal_form|exists_smith_normal_form",
+   "results": "Five Mathlib matches for Submodule.exists_smith_normal_form_of_le and related documentation. Repository search found the two still-holed global normal-form theorems; neither is a constant-perfect-value calculation.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate local constant calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCohomologyTorsionNormalForm",
+  "date": "2026-10-27",
+  "group": "T6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-integral-truncations",
+   "place": "Lemma 6.5.8 and Proposition 6.6.11 (realization); parent normal-form steps 2--3, elementary divisors and explicit periodic quotient resolution. Stacks more-algebra.tex, lemma-modules-PID (Tag 0ASV), supplies the module normal form.",
+   "via": [
+    "lem-weil-pbc-adic-cohomology-torsion-normal-form",
+    "lem-weil-pbc-adic-tor-implies-flat-cohomology",
+    "lem-weil-pbc-adic-tor-flat-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantPerfectDvrTorsionCalculation",
+  "file": "lean/Sheaf/Paper/ConstantPerfectDvrTorsionCalculation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_constant_perfect_dvr_torsion_calculation",
+  "statement": "theorem pbc_constant_perfect_dvr_torsion_calculation\n    (T X : Scheme.{u}) (g : X ⟶ T)\n    (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (C : completedConstantDerived\n      (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E)))\n    (hC : @DerivedCategory.IsPerfectRingComplex _ _ (HasDerivedCategory.standard _) C)\n    (q : ℤ) :\n    let d := pbcPadicCoefficientDatum l E\n    let B := pbcAdicCompletion T d\n    let K := (integralConstantDerived T d).obj C\n    let B' := (adicTowerInverseImage g).obj B\n    let P := proEtaleRingModulePullback g B B' (Iso.refl _)\n    let tor (n : ℕ) := (DerivedCategory.homologyFunctor _ (-1)).obj\n      ((pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).obj\n        ((DerivedCategory.singleFunctor _ 0).obj\n          ((DerivedCategory.homologyFunctor _ q).obj\n            ((pbcCompletedReduction T d (n + 1)).obj K))))\n    ∃ (r : ℕ) (F N : pbcModules X B'),\n      (∀ U : X.ProEtᵒᵖ,\n        Nonempty (Module.Basis (Fin r) (B'.obj.obj U) (F.val.obj U))) ∧\n      Nonempty (P.obj ((DerivedCategory.homologyFunctor _ q).obj K) ≅ F ⊞ N) ∧\n      ∃ f : End N, IsNilpotent f ∧ ∃ n : ℕ,\n        ∃ t : (pbcRestrict ((adicTowerInverseImage g).map\n            (pbcAdicProjection T d n))).obj\n          ((proEtaleRingModulePullback g ((pbcAdicRings T d).obj (op n))\n            ((adicTowerInverseImage g).obj ((pbcAdicRings T d).obj (op n)))\n            (Iso.refl _)).obj (tor n)) ⟶ cokernel f,\n          Epi t",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261026T202048-L-3432748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261026T202048-L-3432748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

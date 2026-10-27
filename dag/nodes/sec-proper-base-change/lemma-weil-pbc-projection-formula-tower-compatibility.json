@@ -149,7 +149,18 @@
   "def-weil-pbc-projection-formula-arrows"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -166,5 +177,22 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-c46da5c28 (reviewer sub-agent of L); spot-checked: Read the full item, cited DAG statements, blueprint/unit route, Stacks sources, and report. Verified hypotheses, adjunction/tensor naturality, inverse-square typing, coefficient category, edge cases, searches, and absence of new nodes. Review written to review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative condensed ring, $f:X\\to Y$ a morphism and\n$K\\in D(X_{\\Proet},\\Lambda)$. The projection-formula map $\\pi_{f,K,P}$ of\n[def-weil-pbc-projection-formula-map] is natural in $P$: for every morphism\n$h:P\\to P'$ in $D(Y_{\\Proet},\\Lambda)$,\n\n$$\nRf_*(1_K\\otimes Lf^*h)\\circ\\pi_{f,K,P}=\\pi_{f,K,P'}\\circ(1_{Rf_*K}\\otimes h).\n$$\n\nIn particular, for $\\Lambda=\\mathcal O_E$, $P_n=(\\mathcal O_E/\\pi_E^n)_Y$ and\nthe quotient maps $q_n:P_{n+1}\\to P_n$, writing $\\pi_n=\\pi_{f,K,P_n}$, the\nsquare\n\n$$\n\\begin{CD}\n(Rf_*K)\\otimes^LP_{n+1} @>{\\pi_{n+1}}>>\nRf_*(K\\otimes^LLf^*P_{n+1})\\\\\n@V{1\\otimes q_n}VV @VV{Rf_*(1\\otimes Lf^*q_n)}V\\\\\n(Rf_*K)\\otimes^LP_n @>{\\pi_n}>> Rf_*(K\\otimes^LLf^*P_n)\n\\end{CD}\n$$\n\ncommutes; whenever $\\pi_n$ and $\\pi_{n+1}$ are isomorphisms, the square with\ntheir inverses as horizontal arrows and the same vertical arrows commutes as\nwell.",
+  "proof": [
+   {
+    "text": "Under the adjunction $Lf^*\\dashv Rf_*$, both composites\n$(Rf_*K)\\otimes^LP\\to Rf_*(K\\otimes^LLf^*P')$ correspond to\n\n$$\nLf^*(Rf_*K\\otimes^LP)\\cong Lf^*Rf_*K\\otimes^LLf^*P\n\\xrightarrow{\\epsilon_K\\otimes1}K\\otimes^LLf^*P\n\\xrightarrow{1\\otimes Lf^*h}K\\otimes^LLf^*P',\n$$\n\nby naturality of the monoidal comparison of $Lf^*$ and of adjunction in its\narguments. Hence the two composites are equal. For $h=q_n$ this is the\nsquare. If the horizontal arrows are isomorphisms, composing the equality\n$Rf_*(1\\otimes Lf^*q_n)\\,\\pi_{n+1}=\\pi_n\\,(1\\otimes q_n)$ with\n$\\pi_n^{-1}$ on the left and $\\pi_{n+1}^{-1}$ on the right gives the square\nof inverses.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

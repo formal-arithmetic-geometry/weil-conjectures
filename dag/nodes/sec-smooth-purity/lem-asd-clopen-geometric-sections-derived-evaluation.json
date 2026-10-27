@@ -25,114 +25,65 @@
  ],
  "proof": [
   {
-   "text": "Put $Z=V\\setminus j(U)$. Finiteness makes $j(U)$ closed as well as open, so $Z$ is open and closed. The disjoint open cover by $s_i(P)$ and $Z$ identifies $V$ with $\\coprod_iP\\amalg Z$: maps defined on its pieces glue uniquely, since all overlaps are empty. Apply [lem-weil-pbc-etale-sheaf-clopen-product] to this finite coproduct. Its abelian-sheaf equivalence lifts to constant-$A$ module sheaves: an $A$-action is a family of endomorphisms satisfying the ring identities, and both endomorphisms and their identities are recovered componentwise. Thus restriction is an additive equivalence\n$$\\mathcal M_V\\simeq\\bigl(\\prod_{i\\in I}\\mathcal M_P\\bigr)\\times\\mathcal M_Z,\\qquad \\mathcal M_T=\\operatorname{Mod}(T_{\\mathrm{et}},A).$$\nKernels and cokernels are determined by their universal properties; the equivalence therefore computes both componentwise and is exact. Applied degreewise it computes cycles, boundaries and cohomology componentwise. In particular acyclicity and quasi-isomorphisms are detected on these pieces. This includes $Z=\\varnothing$ and $I=\\varnothing$.",
+   "text": "The finite disjoint union of the section images is open and closed. Prove this using scheme coproduct injections, the finite union of closed sets, and the open-cover criterion for etaleness. Adjoin the open complement to obtain a finite coproduct presentation of V. The empty family is included.",
    "uses": [
-    "lem-weil-pbc-etale-sheaf-clopen-product",
     "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0A5B, lemma-constant-smooth-statements, first paragraph of proof: finite disjoint-union reduction; explicit module-action and complex extension"
-   }
+   "elementary": false
   },
   {
-   "text": "Under Step 1, inverse image along $j$ is projection to the $P$ components, and inverse image along $u$ is the diagonal family, since $rs_i=1_P$. Here [lem-weil-pbc-etale-inverse-image-restriction] identifies etale inverse image with actual restriction, including its unit; its formulas also respect $A$-linear maps and actions. By [lem-weil-pbc-extension-by-zero-adjunction], $j_!$ is left adjoint to the projection. The tuple $(F_i,0)$ is its left adjoint too, since\n$$\\operatorname{Hom}((F_i,0),(G_i,G_Z))=\\prod_i\\operatorname{Hom}(F_i,G_i).$$\nThe unique comparison of these left adjoints identifies $j_!F$ with $(F_i,0)$, with identity restriction on each component. Exactness [lem-weil-pbc-extension-by-zero-exact] gives the same description of $Dj_!$ on complexes and after localization. For a complex $C$ representing $K$, write $C_i$ for its component; then $QC_i=K_i$.",
+   "text": "Construct the module-valued clopen equivalence directly by the unit and counit of restriction/direct image: reconstruction is the product of component direct images. The off-diagonal restrictions vanish and each diagonal counit is invertible. The same argument works on the derived categories, since clopen direct image is exact and the derived restriction functors jointly reflect isomorphisms. This is the module-valued version of the finite-clopen product calculation, proved here rather than assuming a lifted abelian-sheaf equivalence. The sole-nonzero-factor projection is the existing Etale.singleProjectionIso from Sheaf.SixFunctors.WeaklyContractibleEtaleConstantModels, exposed for reuse; no duplicate projection theorem is introduced.",
    "uses": [
     "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-weil-pbc-extension-by-zero-adjunction",
     "lem-weil-pbc-extension-by-zero-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S2/03S3 (section-extension-by-zero, definition-extension-zero) and 03S4 (exercise-jshriek-direct); clopen left-adjoint calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "For complexes $E,J$ on $V$, Step 1 identifies the Hom complex of [def-weil-pbc-kinjective-resolutions] with\n$$\\operatorname{Hom}^{\\bullet}(E,J)=\\Bigl(\\prod_i\\operatorname{Hom}^{\\bullet}(E_i,J_i)\\Bigr)\\times\\operatorname{Hom}^{\\bullet}(E_Z,J_Z).$$\nIndeed interchange the degree-indexed product with the finite component product; the differential $d_Jf-(-1)^nf d_E$ is componentwise. A finite product of complexes of abelian groups has cycles and boundaries equal to the products of the corresponding cycles and boundaries (choose a preimage in each of the finitely many coordinates), hence is acyclic when all factors are. If each $J_i,J_Z$ is K-injective this formula proves that $J$ is K-injective. Conversely, test against acyclic $E$ supported on just one component, with zero complexes on the others; the Hom complex then equals that component's Hom complex. This proves the claimed equivalence, including for the two-piece decomposition $j(U)\\amalg Z$. The zero complex is K-injective because every such Hom complex is zero.",
+   "text": "K-injectivity restricts to each component by the exact extension/restriction adjunction. Conversely lift the component null homotopies through the fully faithful restriction equivalence; faithfulness proves the homotopy equations. Resolve a complex on U using the existing K-injective-resolution instance and extend the resolution through the clopen immersion. Clopen extension agrees with direct image, hence preserves K-injectivity; its complementary restriction is zero.",
    "uses": [
-    "def-weil-pbc-kinjective-resolutions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition 070H (definition-K-injective), expanded using the finite clopen Hom-complex formula"
-   }
-  },
-  {
-   "text": "Choose resolutions $\\rho_i:C_i\\to J_i$ by [prop-weil-pbc-kinjective-resolutions-exist]. Reassemble $(J_i,0)$ on $V$ and call it $J$. Steps 1–3 give a quasi-isomorphism $q:j_!C\\to J$ with $J$ K-injective. Thus [lem-weil-pbc-kinjective-total-derived] computes $Rr_*Dj_!K$ by $Q(r_*J)$. For every etale $W\\to P$, [def-weil-pbc-direct-image] gives $(r_*J)(W)=J(W\\times_PV)$. The decomposition in Step 1 pulls back to this object; on its $i$-th piece $W\\times_PP=W$, and its complement contributes zero. The sheaf axiom on this disjoint cover therefore gives, degreewise and with its actual restriction maps,\n$$r_*J\\xrightarrow{\\sim}\\prod_iJ_i.$$\nThe comparison is precisely restriction to the $s_i$ components. Finite products of complexes in $\\mathcal M_P$ preserve quasi-isomorphisms: by the exact equivalence [lem-weil-pbc-geometric-point-pullback-stalk] this reduces to the finite product cycle/boundary calculation of Step 3 for $A$-modules. Consequently $\\prod_i\\rho_i$ identifies $Q(\\prod_iJ_i)$ with $\\prod_iK_i$, proving the displayed isomorphism with the required zero complement normalization. No assumption on the cohomological dimension or properness of $r$ was used.",
-   "uses": [
+    "def-weil-pbc-kinjective-resolutions",
     "prop-weil-pbc-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived",
-    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an object with zero complementary restriction, the derived clopen equivalence identifies maps into it with families of maps into its section restrictions. Transport through the canonical derived adjunction r* ⊣ Rr*. Naturality of the section comparison and the counit formula identify this Hom bijection with postcomposition by the stated evaluation map. Yoneda proves evaluation invertible. Its naturality follows from the defining natural transformations. The existing point global-sections equivalence gives the module normalization.",
+   "uses": [
     "lem-weil-pbc-geometric-point-pullback-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); resolutions from injectives.tex Tag 079P; geometric-point equivalence in etale-cohomology.tex Tag 04JQ"
-   }
+   "elementary": false
   },
   {
-   "text": "These identifications are natural in the unbounded derived category. By [lem-weil-pbc-kinjective-hom-derived], a morphism between the chosen K-injective resolutions is represented by a unique homotopy class of chain maps; a change of resolution is a homotopy equivalence. Restriction and $r_*$ are additive, so preserve chain homotopies. The sectionwise restriction isomorphism of Step 4 commutes with every chain map, hence with its homotopy class and every derived morphism. This also proves independence of resolution choices. The exact global-sections equivalence of [lem-weil-pbc-geometric-point-pullback-stalk] can be applied to the complexes on $P$. By [lem-weil-pbc-exact-functor-derived-functor], its unbounded derived functor is its degreewise functor with the canonical comparison. Thus the final passage to $A$-module complexes introduces no further resolution or normalization choice.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-geometric-point-pullback-stalk",
-    "lem-weil-pbc-exact-functor-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I (lemma-K-injective), equivalence of homotopy and derived morphisms into K-injectives; Tag 015F (lemma-right-derived-exact-functor)"
-   }
-  },
-  {
-   "text": "Use [lem-weil-pbc-etale-restriction-injectives] for $u$: its sum extension is exact and left adjoint to inverse image. On the product decomposition of $U$, inverse image from $P$ is the diagonal functor. Its left adjoint is $(F_i)\\mapsto\\bigoplus_iF_i$, since maps out of that sum are exactly the families $F_i\\to M$. The comparison preserves the adjunction bijection and its injections, so degreewise sum extension represents $B$ by $D_C=\\bigoplus_iC_i$. Under Steps 1–2, $r^*D_C$ has component $D_C$ on every $s_i(P)$. The prescribed map $\\delta_K$ is represented by the chain map $r^*D_C\\to j_!C$ with components $\\pi_i:D_C\\to C_i$ and zero on $Z$. Its composite with $q$ has components $\\rho_i\\pi_i$ and zero on $Z$.",
+   "text": "For the exact etale sum adjunction on U, use the component equivalence to identify maps from its value with families of maps from the component restrictions. This proves the coproduct universal property for exactly the injections obtained from the adjunction unit and the section comparison. Transport by the component isomorphisms to Ki; uniqueness of colimits gives e. Naturality of the unit and comparisons proves e natural.",
    "uses": [
     "lem-weil-pbc-etale-restriction-injectives"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek): exact etale sum extension and its adjunction; finite diagonal/sum adjunction"
-   }
+   "elementary": false
   },
   {
-   "text": "By [prop-weil-pbc-inverse-image-modules-exact], the sheaf adjunction $r^*\\dashv r_*$ has exact left adjoint. Its canonical derived adjunction is supplied by [lem-pc-derived-adjoint-functors]. It is computed here by the degreewise adjunction: $J$ is K-injective, and $r_*J$ is K-injective because\n$$\\operatorname{Hom}^{\\bullet}(E,r_*J)=\\operatorname{Hom}^{\\bullet}(r^*E,J)$$\nand exact $r^*$ carries acyclic $E$ to acyclic complexes. Apply [lem-weil-pbc-kinjective-hom-derived] on both sides. Under the sheaf adjunction, the map of Step 6 sends a local section $b$ of $D_C$ to the family $(\\rho_i\\pi_i(b))_i$ of sections of $r_*J$: on $s_i(P)$ the pullback is along $rs_i=1_P$, so its adjunction is the identity adjunction; the complement contributes zero. Thus the adjunct is the localization of\n$$D_C\\xrightarrow{(\\rho_i\\pi_i)_i}\\prod_iJ_i.$$\nAfter the inverse comparison $Q(\\prod_i\\rho_i)$ from Step 4, its $i$-th projection is $\\pi_i$. It is therefore the canonical finite sum-to-product map. Its inverse is $ (x_i)_i\\mapsto\\sum_i\\iota_i(x_i)$: the component equations $\\pi_i\\iota_k=0$ for $i\\ne k$ and $\\pi_i\\iota_i=1$ verify both inverse identities. These equations hold for complexes and survive localization. After the canonical biproduct identification the adjunct is consequently the identity. For $I=\\varnothing$, both complexes and both maps are zero, and the unique endomorphism of zero is its identity.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-pc-derived-adjoint-functors",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5 (lemma-derived-adjoint-functors), computed via Tag 070I (lemma-K-injective); explicit component formula for the specified adjunct"
-   }
+   "text": "Use full faithfulness of the derived clopen restriction equivalence to construct delta with the prescribed projections and zero complementary component. Faithfulness proves naturality. For its adjunct, the counit identity proved in clopenSectionDerivedRestriction_adj gives each projection equal to e followed by the indicated biproduct projection. Product extensionality gives the required equality. The finite biproduct-to-product comparison and evaluation are isomorphisms, so the adjunct is invertible. All constructions include the empty family.",
+   "uses": [],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-sheaf-clopen-product",
   "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-etale-inverse-image-restriction",
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-exact",
   "def-weil-pbc-kinjective-resolutions",
   "prop-weil-pbc-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "def-weil-pbc-direct-image",
   "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-pc-derived-adjoint-functors"
+  "lem-weil-pbc-etale-restriction-injectives"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Finite-clopen calculation written explicitly from Tags 070H, 070I, 070K, 070Y, 015F and 09T5; module sheaf decomposition and etale extension as cited in each step; realizes prop-asd-smooth-base-change coherence (iii)."
+  "place": "P3 Lean proof, 2026-10-23: finite-clopen module and derived reconstruction, componentwise K-injectivity, canonical adjunction Hom bijection, and finite coproduct universal property; preserves the unit finite-fibre sum normalization. Repair of return 4c020aa80: reuse the existing singleProjectionIso instead of a duplicate private helper."
  },
  "mathlib_searches": [
   {
@@ -241,7 +192,18 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "lem-asd-clopen-geometric-sections-derived-evaluation",
@@ -304,19 +266,13 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-etale-sheaf-clopen-product",
   "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-etale-inverse-image-restriction",
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-exact",
   "prop-weil-pbc-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-pc-derived-adjoint-functors"
+  "lem-weil-pbc-etale-restriction-injectives"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -341,7 +297,7 @@
    "AlgebraicGeometry.Etale.clopenGeometricSections_derivedEvaluation"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/ClopenGeometricSectionsDerivedEvaluation.lean",
-  "statement": "theorem clopenGeometricSections_derivedEvaluation : letI : IsOpenImmersion j := (clopenGeometricSections_union Ω r s hclosed hdisjoint hs).1 letI : IsClosedImmersion j := (clopenGeometricSections_union Ω r s hclosed hdisjoint hs).2.1 let hv := (clopenGeometricSections_union Ω r s hclosed hdisjoint hs).2.2 let Z := Scheme.openComplementOfIsClosedImmersion j let E := D((j)_!open[ModuleCat A]) let B := clopenEtaleDerivedSum A v hv let Ki := fun K i ↦ (D((s i)^*[ModuleCat A])).obj (E.obj K) (∀ J : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat A)) ℤ, J.IsKInjective ↔ (∀ i, CochainComplex.IsKInjective ((((s i)^*[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj J)) ∧ CochainComplex.IsKInjective ((((Z.ι)^*[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj J)) ∧ (∀ C : CochainComplex (Sheaf (U).smallEtaleTopology (ModuleCat A)) ℤ, ∃ (J : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat A)) ℤ) (q : (((j)_!open[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj C ⟶ J), QuasiIso q ∧ J.IsKInjective ∧ IsZero ((((Z.ι)^*[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj J) ∧ (∀ i, CochainComplex.IsKInjective ((((s i)^*[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj J))) ∧ (∀ K, IsZero ((D((Z.ι)^*[ModuleCat A])).obj (E.obj K))) ∧ (∀ K, IsIso (clopenGeometricEvaluation A r s hs (E.obj K))) ∧ (∀ K L (f : K ⟶ L), (R((r)_*[ModuleCat A])).map (E.map f) ≫ clopenGeometricEvaluation A r s hs (E.obj L) = clopenGeometricEvaluation A r s hs (E.obj K) ≫ CategoryTheory.Limits.Pi.map (fun i ↦ (D((s i)^*[ModuleCat A])).map (E.map f))) ∧ ((sheafSections (P).smallEtaleTopology (ModuleCat A)).obj (op (Scheme.Etale.mk (𝟙 P)))).IsEquivalence ∧ ∃ (e : ∀ K, B.obj K ≅ ⨁ (Ki K)) (δ : ∀ K, (D((r)^*[ModuleCat A])).obj (B.obj K) ⟶ E.obj K), (∀ K i, biproduct.ι (Ki K) i ≫ (e K).inv = clopenGeometricSumInjection A (t i) j (s i) (Sigma.ι_desc s i) v hv (by rw [← Category.assoc, Sigma.ι_desc]; exact hs i) K) ∧ (∀ K L (f : K ⟶ L), B.map f ≫ (e L).hom = (e K).hom ≫ biproduct.map (fun i ↦ (D((s i)^*[ModuleCat A])).map (E.map f))) ∧ (∀ K i, (D((s i)^*[ModuleCat A])).map (δ K) = (clopenSectionPullbackIso A r (s i) (hs i)).hom.app (B.obj K) ≫ (e K).hom ≫ biproduct.π (Ki K) i) ∧ (∀ K, (D((Z.ι)^*[ModuleCat A])).map (δ K) = 0) ∧ (∀ K L (f : K ⟶ L), (D((r)^*[ModuleCat A])).map (B.map f) ≫ δ L = δ K ≫ E.map f) ∧ (∀ K, (mapDerivedUpperStarLowerStarAdjunction (ModuleCat A) r).homEquiv _ _ (δ K) ≫ clopenGeometricEvaluation A r s hs (E.obj K) = (e K).hom ≫ Pi.lift (fun i ↦ biproduct.π (Ki K) i)) ∧ (∀ K, IsIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat A) r).homEquiv _ _ (δ K)))",
+  "statement": "theorem clopenGeometricSections_derivedEvaluation : letI : IsOpenImmersion j := (clopenGeometricSections_union Ω r s hclosed hdisjoint hs).1 letI : IsClosedImmersion j := (clopenGeometricSections_union Ω r s hclosed hdisjoint hs).2.1 let hv := (clopenGeometricSections_union Ω r s hclosed hdisjoint hs).2.2 let Z := Scheme.openComplementOfIsClosedImmersion j let E := D((j)_!open[ModuleCat A]) let B := clopenEtaleDerivedSum A v hv let Ki := fun K i ↦ (D((s i)^*[ModuleCat A])).obj (E.obj K) (∀ J : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat A)) ℤ, J.IsKInjective ↔ (∀ i, CochainComplex.IsKInjective ((((s i)^*[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj J)) ∧ CochainComplex.IsKInjective ((((Z.ι)^*[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj J)) ∧ (∀ C : CochainComplex (Sheaf (U).smallEtaleTopology (ModuleCat A)) ℤ, ∃ (J : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat A)) ℤ) (q : (((j)_!open[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj C ⟶ J), QuasiIso q ∧ J.IsKInjective ∧ IsZero ((((Z.ι)^*[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj J) ∧ (∀ i, CochainComplex.IsKInjective ((((s i)^*[ModuleCat A]).mapHomologicalComplex (.up ℤ)).obj J))) ∧ (∀ K, IsZero ((D((Z.ι)^*[ModuleCat A])).obj (E.obj K))) ∧ (∀ K, IsIso (clopenGeometricEvaluation A r s hs (E.obj K))) ∧ (∀ K L (f : K ⟶ L), (R((r)_*[ModuleCat A])).map (E.map f) ≫ clopenGeometricEvaluation A r s hs (E.obj L) = clopenGeometricEvaluation A r s hs (E.obj K) ≫ CategoryTheory.Limits.Pi.map (fun i ↦ (D((s i)^*[ModuleCat A])).map (E.map f))) ∧ ((sheafSections (P).smallEtaleTopology (ModuleCat.{u + 1} A)).obj (op (Scheme.Etale.mk (𝟙 P)))).IsEquivalence ∧ ∃ (e : ∀ K, B.obj K ≅ ⨁ (Ki K)) (δ : ∀ K, (D((r)^*[ModuleCat A])).obj (B.obj K) ⟶ E.obj K), (∀ K i, biproduct.ι (Ki K) i ≫ (e K).inv = clopenGeometricSumInjection A (t i) j (s i) (Sigma.ι_desc s i) v hv (by rw [← Category.assoc, Sigma.ι_desc]; exact hs i) K) ∧ (∀ K L (f : K ⟶ L), B.map f ≫ (e L).hom = (e K).hom ≫ biproduct.map (fun i ↦ (D((s i)^*[ModuleCat A])).map (E.map f))) ∧ (∀ K i, (D((s i)^*[ModuleCat A])).map (δ K) = (clopenSectionPullbackIso A r (s i) (hs i)).hom.app (B.obj K) ≫ (e K).hom ≫ biproduct.π (Ki K) i) ∧ (∀ K, (D((Z.ι)^*[ModuleCat A])).map (δ K) = 0) ∧ (∀ K L (f : K ⟶ L), (D((r)^*[ModuleCat A])).map (B.map f) ≫ δ L = δ K ≫ E.map f) ∧ (∀ K, (mapDerivedUpperStarLowerStarAdjunction (ModuleCat A) r).homEquiv _ _ (δ K) ≫ clopenGeometricEvaluation A r s hs (E.obj K) = (e K).hom ≫ Pi.lift (fun i ↦ biproduct.π (Ki K) i)) ∧ (∀ K, IsIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat A) r).homEquiv _ _ (δ K)))",
   "branch": "newtargets-dag",
   "by": "Q29",
   "date": "2026-10-17",
@@ -355,5 +311,15 @@
   "group": "Q29",
   "result": "pass",
   "note": "Statement matches the node clause by clause, with no added hypotheses; A : Type (u+1) is the recorded convention and I has no Nonempty. The evaluation map is the canonical counit restriction; e and delta are uniquely fixed by their equations; the adjunct equation checked by hand, no direction swapped. Edge cases I=∅, Z=∅, V=∅, A=0 and unbounded complexes covered. 7 real defs, sorry-only theorems apart from a one-line equation argument needed to type the statement, docstrings and verbatim statement correct, only the item's lean field changed. nt_compile clean in 27.7 s; the private proof imports follow brief rule 7. Minor: one clause restates a dependency's equivalence, and the second reading is the author's own reread (accepted)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-db6d2",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261023T151914-L-422515",
+  "kind": "interface",
+  "note": "independent cc review: Item proofs (union + derivedEvaluation, 0 sorry, clean axioms) and the universe-pin statement change against the node lean record and change record; the singleProjectionIso visibility change against the live unclaimed module and its importer ConnectedEtalePerfectConstant (compiled in a sandbox)"
  }
 }

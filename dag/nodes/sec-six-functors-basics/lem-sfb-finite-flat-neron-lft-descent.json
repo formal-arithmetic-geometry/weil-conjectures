@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-finite-flat-neron-lft-descent",
+ "kind": "statement",
+ "title": "Néron lft-model existence descends through finite flat extensions",
+ "statement": "Let $D\\hookrightarrow D'$ be a finite faithfully flat map of Dedekind domains, $E=\\operatorname{Frac}(D)$, $E'=\\operatorname{Frac}(D')$, $S=\\operatorname{Spec}D$ and $S'=\\operatorname{Spec}D'$ [def-weil-affine-spectrum]. Finite means $D'$ is a finitely generated $D$-module [def-weil-finitely-generated-module], and faithfully flat has the meaning of [def-weil-pbc-faithfully-flat-ring-map]. Let $G$ be a smooth separated commutative finite-type $E$-group scheme and $H\\hookrightarrow G$ a smooth closed $E$-subgroup scheme [def-pc-scheme, def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-closed-immersion]. If $G_{E'}$ has a Néron lft-model over $S'$, then $H$ has a smooth separated commutative Néron lft-model over $S$. This includes $H=G$ with the identity closed immersion. A Dedekind domain here means a Noetherian integrally closed domain of Krull dimension one. A commutative group scheme has multiplication, inverse and identity morphisms satisfying the commutative group diagrams. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. For a domain $D$ with fraction field $E$ and $S=\\operatorname{Spec}D$, a Néron lft-model of a smooth $E$-group $V$ means a smooth separated $S$-group $\\mathcal V$, with an $E$-group isomorphism $\\mathcal V_E\\simeq V$ [def-pc-base-change], for which restriction is a bijection $\\operatorname{Hom}_S(X,\\mathcal V)\\simeq\\operatorname{Hom}_E(X_E,V)$ for every smooth $S$-scheme $X$ [def-sbc-smooth-morphisms]. Locally of finite type means that each affine source chart over an affine base chart has a finitely generated coordinate algebra [def-weil-finite-type-morphism]; finite type additionally requires quasi-compactness.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Proposition 4, printed pp.290–291 (PDF pages 296–297), Weil restriction, schematic closure and group smoothening Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-sfb-neron-lft-model"
+ ],
+ "proof": [
+  {
+   "text": "The group $H$ is of finite type: a finite affine cover of $G$ restricts to a finite cover of $H$ by spectra of quotients of finitely generated $E$-algebras. Choose the given Néron lft-model $M'$ of $G_{E'}$. Apply [lem-sfb-neron-lft-weil-restriction-geometry] to obtain $W=\\operatorname{Res}_{S'/S}M'$, smooth separated commutative, with $W_E$ and $W^0$ of finite type. The adjunction gives a generic group homomorphism $a:H\\to W_E$ corresponding to the inclusion $H_{E'}\\hookrightarrow G_{E'}$.",
+   "uses": [
+    "lem-sfb-neron-lft-weil-restriction-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 Proposition 4 proof, first paragraph; 7.6 Theorem 4 and Proposition 5 Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-base-change], $H_{E'}\\hookrightarrow G_{E'}$ is a closed immersion. The map $a$ is a monomorphism on functors of points: if two $T\\to H$ have equal composites with $a$, their base changes to $T_{E'}$ have equal composites with the given closed immersion $H_{E'}\\hookrightarrow G_{E'}$, hence are equal; equality descends along the faithfully flat finite cover $T_{E'}\\to T$ by [lem-a1-algebraic-space-fpqc-sheaf], viewing schemes as spaces by [def-trf-scheme-algebraic-space]. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $a$. Its scheme-theoretic kernel is the trivial group because of this monomorphism. The factorization's quotient sheaf is therefore $H/1=H$, so its faithfully flat factor is an isomorphism and $a$ identifies $H$ with a closed finite-type subgroup of $W_E$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 Proposition 4 proof, canonical generic closed immersion; expanded using the Homomorphism Theorem and fpqc equality Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+   }
+  },
+  {
+   "text": "For a smooth $S$-scheme $X$, [lem-pc-smooth-flat] makes $X$ flat and locally finitely presented. Its base change $X'=X\\times_SS'$ is smooth over $S'$ by [lem-sfb-scheme-lfp-smooth-flat-base-change], since $S'\\to S$ is flat. Adjunction, the Néron mapping property of $M'$, and generic base-change compatibility give natural bijections\n$$\\operatorname{Hom}_S(X,W)\\simeq\\operatorname{Hom}_{S'}(X',M')\\simeq\\operatorname{Hom}_{E'}(X'_{E'},G_{E'})\\simeq\\operatorname{Hom}_E(X_E,W_E).$$\nHere $X'_{E'}=X_E\\times_EE'$: localizing $D'$ at the nonzero elements of $D$ gives $E'$ because it is a finite domain over the field $E$. All three bijections send an integral morphism to its generic restriction.",
+   "uses": [
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-pc-smooth-flat",
+    "lem-sfb-scheme-lfp-smooth-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 Proposition 4 proof, functorial Néron property of the Weil restriction; 7.6 Proposition 6 Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+   }
+  },
+  {
+   "text": "Let $C\\hookrightarrow W$ be the schematic closure of $a(H)$ supplied by [lem-sfb-dedekind-lft-generic-subgroup-closure]. It is a flat separated commutative lft group with $C_E=a(H)\\simeq H$, hence has smooth finite-type generic fibre. The ambient $W$ is smooth separated and $W^0$ is of finite type by step 1, so [lem-sfb-lft-closed-subgroup-group-smoothening] gives $u:N\\to C$, with $N$ smooth separated commutative lft, $N_E\\simeq H$, and unique lifting of every smooth-test-scheme map to $C$.",
+   "uses": [
+    "lem-sfb-dedekind-lft-generic-subgroup-closure",
+    "lem-sfb-lft-closed-subgroup-group-smoothening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 Proposition 4 proof, flat closure and group smoothening; 7.1 Theorem 5 Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+   }
+  },
+  {
+   "text": "Given smooth $X/S$ and $f_E:X_E\\to H$, step 3 extends $a f_E$ uniquely to $b:X\\to W$. The flatness of $X$ and [lem-sfb-dedekind-lft-generic-subgroup-closure] factor $b$ uniquely through $C$; [lem-sfb-lft-closed-subgroup-group-smoothening] then lifts it uniquely to $N$. Conversely any lift has generic fibre $f_E$: its composite with the generic closed immersion $a$ agrees with $a f_E$, and $a$ is a monomorphism. Two lifts with the same generic fibre have the same composite to $W$ by step 3, then the same map to $C$ by the closed immersion, and finally coincide by the smoothening bijection. Thus restriction $\\operatorname{Hom}_S(X,N)\\to\\operatorname{Hom}_E(X_E,H)$ is bijective. The group structure and generic group isomorphism came from step 4. This proves the claimed Néron lft-model, including the identity inclusion $H=G$.",
+   "uses": [
+    "lem-sfb-dedekind-lft-generic-subgroup-closure",
+    "lem-sfb-lft-closed-subgroup-group-smoothening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 Proposition 4 proof, last sentence; expanded as in 7.1 Corollary 6 Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-neron-lft-weil-restriction-geometry",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-pc-smooth-flat",
+  "lem-sfb-scheme-lfp-smooth-flat-base-change",
+  "lem-sfb-dedekind-lft-generic-subgroup-closure",
+  "lem-sfb-lft-closed-subgroup-group-smoothening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Assembly follows BLR 10.1 Proposition 4 and 7.1 Corollary 6, read in the primary-source scan; local PDF WANTED. The generic embedding and mapping-property checks are expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|NeronModel",
+   "results": "{\"t\": \"2026-10-24T04:24:04Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|NeronModel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Neron locally finite type models descend along finite flat extensions of Dedekind domains",
+   "results": "{\"t\": \"2026-10-24T04:24:04Z\", \"tool\": \"leansearch\", \"query\": \"Neron locally finite type models descend along finite flat extensions of Dedekind domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\"], \"digest\": \"b896c61c6be62620\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: elliptic-curve reduction, abstract extensions, general smoothness, finite-type properties or Dedekind-ring structure do not construct or assert the Néron mapping property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T04:24:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a Neron model locally of finite type of a smooth group scheme along a finite flat extension of Dedekind schemes",
+   "results": "{\"t\": \"2026-10-24T04:24:10Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of a Neron model locally of finite type of a smooth group scheme along a finite flat extension of Dedekind schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"e72dca74776ee3a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: elliptic-curve reduction, abstract extensions, general smoothness, finite-type properties or Dedekind-ring structure do not construct or assert the Néron mapping property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil restriction and group smoothening construct the Neron model of a closed smooth subgroup after finite flat base extension",
+   "results": "{\"t\": \"2026-10-24T04:24:13Z\", \"tool\": \"leanfinder\", \"query\": \"Weil restriction and group smoothening construct the Neron model of a closed smooth subgroup after finite flat base extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.FormallySmooth.of_restrictScalars\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.Smooth.isStableUnderBaseChange\", \"Algebra.Smooth.comp\"], \"digest\": \"1c1e73d4faac05cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: elliptic-curve reduction, abstract extensions, general smoothness, finite-type properties or Dedekind-ring structure do not construct or assert the Néron mapping property."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|NeronModel",
+   "results": "{\"t\": \"2026-10-24T05:03:16Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|NeronModel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned finite-type/smoothness properties, elliptic-curve integral models and relative normalization, not the Néron mapping property or its descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Neron model existence for smooth closed subgroups after finite flat extension",
+   "results": "{\"t\": \"2026-10-24T05:03:17Z\", \"tool\": \"leansearch\", \"query\": \"Neron model existence for smooth closed subgroups after finite flat extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn\", \"Module.Flat.of_retract\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\"], \"digest\": \"c792ec80aacf4fff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned finite-type/smoothness properties, elliptic-curve integral models and relative normalization, not the Néron mapping property or its descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T05:03:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned finite-type/smoothness properties, elliptic-curve integral models and relative normalization, not the Néron mapping property or its descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Neron locally finite type group models descend through finite faithfully flat extensions of Dedekind domains",
+   "results": "{\"t\": \"2026-10-24T05:03:18Z\", \"tool\": \"leanfinder\", \"query\": \"Neron locally finite type group models descend through finite faithfully flat extensions of Dedekind domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"RingHom.finiteType_isLocal\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Module.Finite.of_isLocalized_maximal\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\"], \"digest\": \"8f58788083cf491d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned finite-type/smoothness properties, elliptic-curve integral models and relative normalization, not the Néron mapping property or its descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a Neron model by Weil restriction, schematic closure, and group smoothening",
+   "results": "{\"t\": \"2026-10-24T05:03:19Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a Neron model by Weil restriction, schematic closure, and group smoothening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.integralModel\", \"WeierstrassCurve.baseChange_integralModel_eq\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.exists_isMinimal\"], \"digest\": \"e807d3d77f5fc706\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned finite-type/smoothness properties, elliptic-curve integral models and relative normalization, not the Néron mapping property or its descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-neron-lft-existence",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Trait-extension input: construct the ambient Néron lft-model; BLR 10.1 Proposition 4, printed pp.290–291 (PDF pages 296–297), Weil restriction, schematic closure and group smoothening",
+   "via": [
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-flat-neron-lft-descent",
+  "worker": "stage1",
+  "summary": "Q58: retained the statement; searched live Lean, DAG, newest blueprint and Mathlib; exposed scheme-valued restriction geometry, flat lft subgroup closure and universal group smoothening. Used the existing Homomorphism Theorem and fpqc sheaf to prove the generic embedding. Verified the complete smooth-test-scheme mapping property, without quasi-compactness, excellence, separability or residue-field perfection assumptions.",
+  "blueprint": "The computed nearest blueprint ancestor is null, as on the live item. This is the BLR 10.1 Proposition 4 trait-extension input in the chain beginning at lem-sfb-admissible-direct-image; the current latest sk-thm-sf-ctf-stability ordinary-direct-image route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Preservation of the closed subgroup inclusion after field extension; generic geometric tool."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Equality after a finite faithfully flat cover; a generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Flatness and local finite presentation of an arbitrary smooth test scheme. No Néron theorem is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-pc-smooth-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-969331e37",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-969331e37 (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full. The local BLR copy is absent; I checked the claims of BLR 7.1/5, 7.6/4-5 and 10.1/4 directly. The item statement is unchanged, matches BLR 10.1/4, and the parent semiabelian-lft node uses it with G=H=P. Step 1: H is finite type (elementary); the restriction node gives W, with W_E and W^0 of finite type and a generic homomorphism a. Step 2: a is a monomorphism, since equality after composing with the closed immersion (01QR node) descends along the finite faithfully flat cover T_{E'}->T by the fpqc-sheaf node. The homomorphism theorem (Milne 5.39 node; H and W_E are separated and finite type) then gives a trivial kernel, H/1=H, and a closed immersion. Step 3: smooth implies flat and lfp, and the 02V4 node gives X' smooth. The chain of adjunction, Neron property of M' and base change is correct, and D' tensor E = E'. Steps 4-5: every hypothesis of the closure node (M=W, J=a(H)) and of the smoothening node (W^0 finite type, C flat with C_E=H) holds. Existence comes from the flat-test-scheme factorization and the smoothening lift; uniqueness from injectivity in step 3, then the closed immersion, then the smoothening bijection. The generic fibre is correct because a is a monomorphism. New nodes are statement-only, self-contained and have complete stmt_deps, and all three are true. Restriction node: W is commutative by Neron uniqueness. W^0 is quasi-compact, which I checked independently with a U*U covering argument. Closure node: torsion-free over a Dedekind domain gives flat, and formation commutes with localization. Smoothening node: the BLR lft extension, with universal property for all smooth X. They are not duplicates: the existing Weil-restriction and Hom nodes give algebraic spaces only, the existing closure node is DVR and finite type, and the existing normalization and finite-cover nodes change the base and have no universal property. No restatement of the item and no cycle. Batch 5: the four flagged closures reach only general definitions and facts (def-trf-algebraic-space, def-trf-scheme-algebraic-space, lem-trf-fppf-covering-base-change, lem-trf-smooth-at-point-fibre-criterion). None is part of the trace formula or Poincare duality, so no assumption leaf is needed. Accepted tool_uses: closed-immersion base change, fpqc sheaf and smooth-flat. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FiniteFlatNeronLftDescent",
+  "declaration": "AlgebraicGeometry.exists_neronLftModel_of_finite_faithfullyFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FiniteFlatNeronLftDescent.lean",
+  "statement": "theorem exists_neronLftModel_of_finite_faithfullyFlat (D D' : Type u) [CommRing D] [CommRing D'] [IsDedekindDomain D] [IsDedekindDomain D'] (hD : ringKrullDim D = 1) (hD' : ringKrullDim D' = 1) [Algebra D D'] [Module.Finite D D'] [Module.FaithfullyFlat D D'] (hinj : Function.Injective (algebraMap D D')) (G H : Grp (Over (Spec (.of (FractionRing D))))) [IsCommMonObj G.X] [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth H.X.hom] (i : H ⟶ G) [IsClosedImmersion i.hom.hom.left] (hmodel : ∃ (N' : Grp (Over (Spec (.of D')))) (e' : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D' (FractionRing D'))))).mapGrp.obj N' ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (IsFractionRing.map (K := FractionRing D) (L := FractionRing D') hinj)))).mapGrp.obj G), IsNeronLftModel N' ((Over.pullback (Spec.map (CommRingCat.ofHom (IsFractionRing.map (K := FractionRing D) (L := FractionRing D') hinj)))).mapGrp.obj G) e') : ∃ (N : Grp (Over (Spec (.of D)))) (e : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D (FractionRing D))))).mapGrp.obj N ≅ H), IsNeronLftModel N H e ∧ IsCommMonObj N.X",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-525237848",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery after the 5aeaf671 RETURN (H4/H12/H13). The duplicate NeronLftModel module and node are removed. The theorem uses Q92's IsNeronLftModel (on the base; the snapshot node is byte-identical to side-live) as ∃ N' e', IsNeronLftModel N' G_E' e' → ∃ N e, IsNeronLftModel N H e ∧ IsCommMonObj N.X, and the stmt_dep def-sfb-neron-lft-model is added. Against side-live the item node changes only in stmt_deps and the lean record; statement, proof and Q58's reviewed record are unchanged; no rebind. All clauses match: Dedekind with ringKrullDim = 1, Module.Finite, FaithfullyFlat, injective; canonical E→E' via IsFractionRing.map; G commutative, smooth, separated, LFT+QC; H smooth with a closed-immersion group map; smooth+separated inside the predicate. One universe throughout, no extra assumptions, edge cases fine. Proof is sorry only; docstrings present; lean.statement matches the file verbatim; report sections present. Nothing compiled because no file was changed."
+ }
+}

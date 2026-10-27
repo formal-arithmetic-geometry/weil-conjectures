@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-unipotent-normal-quotient-image",
+ "kind": "statement",
+ "title": "Normal unipotent images under quotient homomorphisms",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_a$ and $\\mathbf G_m$ for [def-sc-gm-ga]. Faithfully flat means that extension of scalars along the coordinate-algebra map is exact and detects zero modules. Let $f:A\\to D$ be a faithfully flat homomorphism, and let $N\\subseteq A$ be a smooth connected normal unipotent subgroup. Here unipotent means that every geometric point is a unipotent matrix in a faithful linear representation [def-sc-general-linear-group], that is, $(n-I)^m=0$ for some $m\\geq1$. Suppose $f|_N=j\\circ u$ with $u:N\\to I$ a faithfully flat homomorphism, $I$ an affine group scheme of finite type, and $j:I\\hookrightarrow D$ a closed immersion [def-weil-closed-immersion]. Then $I$ is smooth, connected and unipotent, and $j(I)$ is normal in $D$. Neither kernel is required to be smooth, finite or central.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.7, printed p.282 (quotients of unipotent groups); Proposition 1.62(b), printed p.25 (smooth quotients), and Proposition 5.59(b), printed p.114 (connected quotients); proof of Lemma 19.14, printed p.400 (normality of the image under a surjective homomorphism)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-sfb-solvable-group-structure",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=F[I]$, $B=F[N]$, $E=F[D]$, and $P=F[A]$. By [lem-weil-pbc-faithfully-flat-universally-injective], $u^*:C\\to B$ and $f^*:E\\to P$ are injective. Every injective $F$-linear map has an $F$-linear left inverse: extend a basis of its image and project. Tensoring these left inverses proves injectivity of $u^*\\otimes u^*$, $f^*\\otimes u^*$, and $u^*\\otimes_F1_L$ for any field extension $L/F$. Products and scalar extensions have the tensor coordinate rings of [lem-weil-pbc-fibre-product-affine-spectra]. By [def-weil-affine-spectrum] and [def-weil-closed-immersion], an affine map factors through a closed subscheme exactly when its coordinate map kills the defining ideal, by the universal property of a quotient ring. Thus injective coordinate pullback detects equality of affine morphisms and factorization through closed subschemes. In particular $j$ is a homomorphism: its multiplication compatibility holds after $u\\times u$, since $f|_N=j u$ and $u$ are homomorphisms, and $u^*\\otimes u^*$ is injective; its identity and inverse compatibilities follow from the same equation and injectivity of $u^*$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62(b), printed p.24, injective coordinate pullback; affine details expanded here. Stacks Tag 05CK (lemma-faithfully-flat-universally-injective)."
+   }
+  },
+  {
+   "text": "Smoothness of $N\\to\\operatorname{Spec}F$ gives geometrically reduced fibres by [sbc-lem-smooth-geometrically-reduced]; since the base is a field this says that $N_L$ is reduced for every field extension $L/F$. Its coordinate ring $B\\otimes_F L$ has no nonzero nilpotents by [def-pc-reduced-scheme]. The injection $C\\otimes_F L\\hookrightarrow B\\otimes_F L$ from step 1 implies that $C\\otimes_F L$ also has no nonzero nilpotents: a nilpotent maps to zero, and injectivity then makes it zero. Thus $I$ is geometrically reduced. The finite-type group scheme $I$ is smooth by [lem-sfb-geometrically-reduced-group-smooth]. This does not assert that $u$ or its kernel is smooth.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62(b), printed p.24, via geometrically reduced coordinate rings and Proposition 1.28; Stacks 056T (lemma-smooth-geometrically-normal), 047N and 047P."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-faithfully-flat-surjective-spectrum], $u:N\\to I$ is surjective on underlying spaces. If $I$ were partitioned into two nonempty clopen subsets, their inverse images would partition $N$ into two nonempty clopen subsets, contradicting [def-weil-connected-scheme]. The scheme $I$ is nonempty because it has its identity point. Hence $I$ is connected.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(b), printed p.114, by the elementary topological argument; Stacks Tag 00HQ (lemma-ff-rings)."
+   }
+  },
+  {
+   "text": "For every algebraically closed extension $K/F$, we first prove that $N(K)\\to I(K)$ is surjective. In affine coordinates $C_K=K\\otimes_F C$ and $B_K=K\\otimes_F B$ by [lem-weil-pbc-fibre-product-affine-spectra]. The map $C_K\\to B_K$ is faithfully flat by [lem-weil-pbc-faithfully-flat-base-change]: its target identifies with $C_K\\otimes_C B$ by the maps on pure tensors. The algebra $B$ is finitely generated over $F$ by [lem-weil-pbc-lft-affine-pairs], so the same finite generators generate $B_K$ over $K$. A point $x\\in I(K)$ is a surjective $K$-algebra map $C_K\\to K$; let $\\mathfrak m$ be its maximal kernel. The fibre algebra $T=B_K/\\mathfrak m B_K$ is nonzero by [lem-weil-pbc-faithfully-flat-maximal-ideal-nonzero], and is finitely generated over $K$, by the images of those generators. Choose a maximal ideal of $T$ by [lem-weil-common-extension-fields-maximal-ideal]. Its closed point has residue field $K$ over $K$ by [lem-weil-pbc-closed-point-residue-field-base]. The resulting $K$-algebra map $B_K\\to T\\to K$ restricts to $x$ on $C_K$, since that restriction factors through $C_K/\\mathfrak m=K$. It therefore gives a lift of $x$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-faithfully-flat-maximal-ideal-nonzero",
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.7, printed p.282, quotient input, expanded on geometric points; Stacks Tag 00FV (theorem-nullstellensatz), and faithfully flat fibres. This is an agent-written affine point-lifting argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-central-torus-faithful-weight-blocks] to $H=I$ and the trivial central subgroup $T=\\{1\\}\\simeq\\mathbf G_m^0$. It is closed because its coordinate map is the surjective counit $C\\to F$. This gives a closed-immersion representation $\\rho:I\\hookrightarrow\\operatorname{GL}(V)$ with $V$ finite-dimensional and nonzero; choose a basis to write its target as $\\operatorname{GL}_{d,F}$, $d\\geq1$. The closed-immersion coordinate quotient makes $\\rho(R)$ injective for every $F$-algebra $R$ by the quotient universal property. Let $i:N\\to\\operatorname{GL}_{m,F}$ be the faithful representation in the hypothesis. Fix any algebraically closed extension $K/F$ and any $x\\in I(K)$. Step 4 supplies $n\\in N(K)$ with $u(n)=x$. The representation $i_K$ is faithful on every $K$-algebra, since each is also an $F$-algebra, and $i_K(n)$ is unipotent by the hypothesis on all geometric points of $N$. Apply [lem-sfb-rational-representation-unipotent-point] over $K$ to $G=N_K$, faithful $i_K$, the representation $r=(\\rho u)_K$, and the point $n$. It yields $(\\rho(x)-I_d)^M=0$ for some $M\\geq1$. This holds for every geometric point $x$ in the same faithful representation $\\rho$, precisely the unipotence required in the statement.",
+   "uses": [
+    "lem-sfb-central-torus-faithful-weight-blocks",
+    "def-weil-closed-immersion",
+    "lem-sfb-rational-representation-unipotent-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.7, printed p.282, via preservation of unipotent elements under homomorphisms (§§9.19--9.21, printed p.171); Theorem 4.9 and Corollary 4.10, printed p.87, for the faithful representation (trivial-torus specialization of the cited existing node)."
+   }
+  },
+  {
+   "text": "Let $J=\\ker(j^*:E\\to C)$, the defining ideal of $j(I)\\subseteq D$, and let $c:D\\times I\\to D$ be $(d,x)\\mapsto d j(x)d^{-1}$. The composite $c\\circ(f\\times u):A\\times N\\to D$ sends $(a,n)$ to $f(a n a^{-1})$. Normality of $N$ in $A$, in the sense of [def-sc-group-scheme-subgroup], says that $a n a^{-1}$ belongs to $N(R)$ for every $F$-algebra $R$. Evaluate at the universal pair over $P\\otimes_F B$; the affine quotient criterion of step 1 then shows that the conjugation morphism $A\\times N\\to A$ factors through $N$. Consequently $c\\circ(f\\times u)$ factors through $I$ using $f|_N=j u$, so $(f^*\\otimes u^*)c^*(J)=0$. The tensor injection of step 1 gives $c^*(J)=0$. Thus $c$ factors through $I$ as a morphism of schemes, including on nonreduced test algebras. For every $R$ and $d\\in D(R)$ this yields $d j(I(R))d^{-1}\\subseteq j(I(R))$; applying the same inclusion to $d^{-1}$ gives equality. Hence $j(I)$ is normal in $D$. Together with steps 2, 3 and 5 this proves every clause, with neither kernel assumed smooth, finite or central.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 19.14, printed p.400, normality of a surjective image; expanded by the affine ideal test and Stacks Tag 05CK, without any inference from F-points alone."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-reduced-scheme",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-faithfully-flat-maximal-ideal-nonzero",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-central-torus-faithful-weight-blocks",
+  "lem-sfb-rational-representation-unipotent-point",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.62(b), Proposition 5.59(b), Corollary 14.7 and Lemma 19.14 proof; geometric-point unipotence via §§9.19--9.21. Affine lifting and ideal detection are expanded here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic image of a smooth connected unipotent normal subgroup under a faithfully flat homomorphism of algebraic groups is smooth connected unipotent normal",
+   "results": "Search returned 8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.Flat, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified, Algebra.Smooth.flat",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotients of smooth connected unipotent algebraic groups remain smooth connected unipotent",
+   "results": "Search returned 8 hits: nilpotent_quotient_of_nilpotent, solvable_quotient_of_solvable, QuotientGroup.Quotient.commGroup, Con.group, QuotientGroup.Quotient.group, Quotient.instConnectedSpace, QuotientGroup.instHasQuotientSubgroup, QuotientGroup.map_normal",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Unipotent.*quotient|unipotent.*quotient|quotient.*unipotent",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Images of normal smooth connected unipotent algebraic subgroups under quotient homomorphisms are normal smooth connected unipotent",
+   "results": "Search returned 8 hits: QuotientGroup.map_normal, nilpotent_quotient_of_nilpotent, solvable_quotient_of_solvable, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, QuotientAddGroup.map_normal, upperCentralSeriesStep_eq_comap_center, of_quotient_center_nilpotent, nilpotent_center_quotient_ind",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"GroupScheme\"",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a normal smooth connected unipotent algebraic subgroup under a faithfully flat group scheme homomorphism is smooth connected normal and unipotent",
+   "results": "{\"t\": \"2026-10-23T21:16:21Z\", \"tool\": \"leanfinder\", \"query\": \"The image of a normal smooth connected unipotent algebraic subgroup under a faithfully flat group scheme homomorphism is smooth connected normal and unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\"], \"digest\": \"639d2775eb989870\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group normality or generic flat/smooth morphisms do not state this affine group-scheme image theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*(quotient|normal|image)|(quotient|normal|image).*unipotent",
+   "results": "{\"t\": \"2026-10-23T21:17:01Z\", \"tool\": \"grep\", \"query\": \"unipotent.*(quotient|normal|image)|(quotient|normal|image).*unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group normality or generic flat/smooth morphisms do not state this affine group-scheme image theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient of a smooth connected unipotent affine group scheme is smooth connected unipotent and the image of a normal subgroup is normal",
+   "results": "{\"t\": \"2026-10-23T21:17:01Z\", \"tool\": \"leansearch\", \"query\": \"A quotient of a smooth connected unipotent affine group scheme is smooth connected unipotent and the image of a normal subgroup is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientAddGroup.map_normal\", \"QuotientAddGroup.quotientQuotientEquivQuotientAux_mk\", \"QuotientAddGroup.image_coe\", \"nilpotent_quotient_of_nilpotent\", \"QuotientGroup.map_mk'_self\", \"Subgroup.normal_unop\", \"QuotientAddGroup.map_mk'_self\", \"Subgroup.unop.instNormal\"], \"digest\": \"881648177af1ed32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group normality or generic flat/smooth morphisms do not state this affine group-scheme image theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-23T21:17:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unipotent\\\", \\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group normality or generic flat/smooth morphisms do not state this affine group-scheme image theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of affine algebraic groups sends a normal unipotent subgroup to a normal unipotent subgroup",
+   "results": "{\"t\": \"2026-10-23T21:18:06Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective homomorphism of affine algebraic groups sends a normal unipotent subgroup to a normal unipotent subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.Normal.map\", \"frattini_le_comap_frattini_of_surjective\", \"upperCentralSeries.map\", \"AddSubgroup.Normal.map\", \"solvable_of_surjective\", \"Subgroup.Normal.of_map_injective\", \"Subgroup.map_normalClosure\", \"Subgroup.comap_normalizer_eq_of_surjective\"], \"digest\": \"5f8ac010fe9159f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group normality or generic flat/smooth morphisms do not state this affine group-scheme image theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-isogeny-borel-root-compatibility",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Nonvanishing of rho section modules by a highest-weight matrix coefficient in the Steinberg endomorphism detection input. Milne 22.20 proof: Proof of Proposition 18.18 (inverse image Borel and quotient flag variety); Corollary 17.84 (centre in every maximal torus); Definitions 23.1--23.2 and Propositions 23.4--23.5 (central isogenies induce root data with q(alpha)=1). Product and Borel decompositions: 21.29--21.35, 21.60 and proof of 23.13. Supporting input: Corollary 14.7, printed p.282 (quotients of unipotent groups); Proposition 1.62(b), printed p.25 (smooth quotients), and Proposition 5.59(b), printed p.114 (connected quotients); proof of Lemma 19.14, printed p.400 (normality of the image under a surjective homomorphism).",
+   "via": [
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-sfb-dominant-character-highest-line",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unipotent-normal-quotient-image",
+  "worker": "stage1",
+  "summary": "Six explicit steps reuse existing faithful-flat, reducedness/smoothness and representation nodes. No new nodes. Checked all geometric extensions, scheme-theoretic normality and nonsmooth kernels. Clarified the omitted qualification that u is a homomorphism, as in the source quotient theorem; added the definitions for the representation and closed immersion.",
+  "blueprint": "Inherited supporting prerequisite below det-thm-sf-ctf-stability-direct-images (3), in the Milne central-isogeny Borel/root compatibility argument. Current latest blueprint direct-images proof (3) was read; the inherited null ancestor and via chain are preserved. Steps 1--3 realize quotient smoothness/connectedness, 4--5 unipotence, 6 normality.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic geometric reducedness of smooth fibres, used over the field F in Milne 1.62(b); it is not a change of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-0ac31d45b",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-0ac31d45b (reviewer sub-agent of L); spot-checked: I read the whole split. It has 6 steps and no new nodes, and is acyclic (graph walk reaches 154 nodes). proof_deps equals the union of the step uses, every cited node exists, and no SGA is cited. Against the Q142 base copy the statement changes only 'u faithfully flat' → 'u a faithfully flat homomorphism' and adds the GL and closed-immersion definition citations. Milne 14.7 and 1.62 are about quotient homomorphisms, both citers (central-isogeny step 1 via affine-homomorphism-flat-image, quotient-borel-torus-images step 5) supply u as a homomorphism, and step 5 needs it so that ρu is a homomorphism. It is not a weakening. Step 1: faithfully-flat-universally-injective with N=R makes u* and f* injective, so the tensor maps are injective; the closed-subscheme factorisation test is right; j is a homomorphism (checked after precomposing with u×u; the identity is preserved since e_I=u e_N). Step 2 matches Milne 1.62(b) (pdf printed p.24; the node's source.place still says p.25, cosmetic): sbc smooth⇒geometrically reduced fibres (unit sk-def-smooth) is accepted as a declared generic tool use; C⊗L sits inside the reduced ring B⊗L, then geometrically-reduced-group-smooth. Step 3: surjectivity on spectra plus a clopen partition and nonemptiness gives connectedness (5.59(b)). Step 4: for every algebraically closed K, base change of faithful flatness, nonzero fibre T, a maximal ideal, and closed-point-residue-field-base give a K-point lifting x; it uses no surjectivity on R-points. Step 5: central-torus-faithful-weight-blocks with r=0 (explicitly allowed) gives a closed-immersion ρ, and rational-representation-unipotent-point is applied to N_K, i_K, (ρu)_K and n, giving unipotence of I in one faithful representation. Step 6: normality of N on the universal point over P⊗B, then c∘(f×u)=f∘conj factors through I, and injectivity of f*⊗u* gives c*(J)=0, so normality holds on all R (Milne 19.14 written out). No duplicate: lem-sfb-solvable-normal-image-geometry is a sibling with a different conclusion. Searches: 3 kinds, timestamped, base searches retained. review.md written; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.UnipotentNormalQuotientImage",
+  "declaration": "AlgebraicGeometry.SolvableGroupStructure.unipotent_normal_quotient_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/UnipotentNormalQuotientImage.lean",
+  "statement": "theorem unipotent_normal_quotient_image {F : Type u} [Field F] [IsAlgClosed F] (A D N I : Grp (Over (Spec (.of F)))) [IsAffine A.X.left] [LocallyOfFiniteType A.X.hom] [QuasiCompact A.X.hom] [IsAffine D.X.left] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom] [IsAffine N.X.left] [LocallyOfFiniteType N.X.hom] [QuasiCompact N.X.hom] [IsAffine I.X.left] [LocallyOfFiniteType I.X.hom] [QuasiCompact I.X.hom] (f : A ⟶ D) (iN : N ⟶ A) [IsClosedSubgroupScheme iN.hom.hom] [IsNormalSubgroupScheme iN.hom.hom] [Smooth N.X.hom] [ConnectedSpace N.X.left] (hN : IsUnipotent N) (hf : f.hom.hom.left.appTop.hom.FaithfullyFlat) (uN : N ⟶ I) (j : I.X ⟶ D.X) [IsClosedImmersion j.left] (hu : uN.hom.hom.left.appTop.hom.FaithfullyFlat) (hfactor : iN.hom.hom ≫ f.hom.hom = uN.hom.hom ≫ j) : Smooth I.X.hom ∧ ConnectedSpace I.X.left ∧ IsUnipotent I ∧ IsNormalSubgroupScheme j",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed smooth geometric-matrix predicate IsUnipotent and the existing RingHom.FaithfullyFlat on coordinate pullbacks. The closed immersion j is only a scheme morphism in the hypotheses; IsNormalSubgroupScheme in the conclusion includes its homomorphism and subgroup properties. No kernel conditions are imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-703579457",
+  "group": "N7",
+  "result": "pass",
+  "note": "Checked unipotent_normal_quotient_image clause by clause against the node, Milne 1.62(b)/5.59(b)/14.7/19.14 and the declarations IsUnipotent, Is{Closed,Normal}SubgroupScheme and RingHom.FaithfullyFlat. Hypotheses: algebraically closed F; A,D,N,I affine of finite type; iN closed and normal on all R; N smooth, connected, IsUnipotent (its built-in smoothness duplicates a stated hypothesis); f and u faithfully flat on coordinate rings; j only a closed-immersion over-morphism; hfactor in the right order. Conclusion: Smooth, Connected and IsUnipotent of I, and IsNormalSubgroupScheme j (homomorphism and injectivity provable, scheme-level normality as in step 6). No kernel conditions. Edge cases N=I=1 (n=0 allowed), nonsmooth A/D, char p, single universe u. Statement verbatim; source and blueprint docstrings with the 6 steps; sorry only; no new defs; the only node diff is the lean record plus 2 landed stmt_deps, both used. No duplicate declaration in live Sheaf. Advisory: the second reading was done by the worker itself; p.25 vs pp.24-25 cosmetic. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "id": "def-sfb-pgl-two-triangular-presentation",
+ "kind": "definition",
+ "title": "Relative scalar-quotient presentation of PGL2 and its triangular subgroups",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $G,B,D$ be group schemes over $S$ [def-sc-group-scheme], with group homomorphisms $i_B:B\\to G$ and $i_D:D\\to B$. For an $S$-scheme $V$, put $Q(V)=\\operatorname{GL}_2(\\Gamma(V,\\mathcal O_V))/\\Gamma(V,\\mathcal O_V)^\\times$, where $\\operatorname{GL}_2(R)$ is the group of invertible $2\\times2$ matrices and units act by scalar matrices. A relative triangular presentation consists of injective group homomorphisms $q_V:Q(V)\\to G(V)$, natural for entrywise pullback along every $S$-morphism, such that every $G$-section fppf locally lifts to an invertible matrix. Here fppf locally [def-pc-fppf-site] means there is a covering sieve $R$ on $V$ such that the assertion holds after every $h:W\\to V$ in $R$. The maps $i_B,i_D$ are closed immersions [def-weil-closed-immersion]. A section $z\\in G(V)$ is in the image of $B(V)$ if and only if fppf locally $z|_W=q_W([m])$ with $m_{10}=0$; it is in the image of $D(V)$ under $i_B i_D$ if and only if fppf locally it has such a lift with both $m_{10}=m_{01}=0$. Thus these are exactly the represented fppf scalar quotient and its upper triangular and diagonal subgroup sheaf images, over arbitrary bases and with no assumption of global matrix lifts.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-pc-fppf-site",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Proposition 4.2.7, printed pp.123--124: PGL2, the upper triangular subgroup B_infinity, and diagonal D; relative fppf scalar-quotient formulation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "PGL2 as fppf scalar quotient of invertible matrices with upper triangular and diagonal subgroup functors",
+   "results": "{\"t\": \"2026-10-24T13:30:41Z\", \"tool\": \"leansearch\", \"query\": \"PGL2 as fppf scalar quotient of invertible matrices with upper triangular and diagonal subgroup functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MatrixGroups.termPSL(_,_)\", \"Matrix.ProjectiveSpecialLinearGroup\", \"MatrixGroups.termGL(_,_)⁺\", \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det\", \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular\", \"ModularGroup.SL_to_GL_tower\", \"Matrix.GeneralLinearGroup.isParabolic_conj_iff\"], \"digest\": \"d39b602c072bae86\"}",
+   "date": "2026-10-24",
+   "verdict": "No relative triangular configuration or transporter theorem. Reuse Matrix.ProjGenLinGroup and its mk/map; the landed IsProjectiveLinearQuotient is field-only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "PGL2 as fppf scalar quotient of invertible matrices with upper triangular and diagonal subgroup functors",
+   "results": "{\"t\": \"2026-10-24T13:30:42Z\", \"tool\": \"leanfinder\", \"query\": \"PGL2 as fppf scalar quotient of invertible matrices with upper triangular and diagonal subgroup functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.ProjectiveSpecialLinearGroup\", \"MatrixGroups.termPSL(_,_)\", \"OnePoint.instGLAction\", \"OnePoint.exists_mem_SL2\", \"ModularGroup.SLOnGLPos\", \"Projectivization.generalLinearGroup_smul_def\", \"SpecialLinearGroup\", \"SpecialLinearGroup.instDiv\"], \"digest\": \"4c46607f0c5224ff\"}",
+   "date": "2026-10-24",
+   "verdict": "No relative triangular configuration or transporter theorem. Reuse Matrix.ProjGenLinGroup and its mk/map; the landed IsProjectiveLinearQuotient is field-only."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjGenLinGroup|IsProjectiveLinearQuotient|triangular|transporter",
+   "results": "{\"t\": \"2026-10-24T13:36:46Z\", \"tool\": \"grep\", \"query\": \"ProjGenLinGroup|IsProjectiveLinearQuotient|triangular|transporter\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No relative triangular configuration or transporter theorem. Reuse Matrix.ProjGenLinGroup and its mk/map; the landed IsProjectiveLinearQuotient is field-only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.ProjGenLinGroup",
+   "results": "{\"t\": \"2026-10-24T13:36:47Z\", \"tool\": \"loogle\", \"query\": \"Matrix.ProjGenLinGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.ProjGenLinGroup\", \"Matrix.instGroupProjGenLinGroup\", \"Matrix.SpecialLinearGroup.toPGL\", \"Matrix.SpecialLinearGroup.toPGL_ker\", \"Matrix.ProjGenLinGroup.mk\", \"Matrix.ProjGenLinGroup.signDet\", \"Matrix.ProjGenLinGroup.map\", \"Matrix.ProjectiveSpecialLinearGroup.toPGL\"], \"digest\": \"762744a98d967a60\"}",
+   "date": "2026-10-24",
+   "verdict": "No relative triangular configuration or transporter theorem. Reuse Matrix.ProjGenLinGroup and its mk/map; the landed IsProjectiveLinearQuotient is field-only."
+  },
+  {
+   "tool": "grep",
+   "query": "PGLTwoTriangular|TriangularPresentation|quotient.*scalar|scalar.*quotient in lean/Sheaf/AlgebraicGeometry and lean/WeilConjectures/AlgebraicGeometry; blueprint_refs.py search PGL; blueprint_refs.py search transporter",
+   "results": "No triangular presentation declaration. Found field-only IsProjectiveLinearQuotient (read full signature and docstring), field-only ProjectiveMatrixCentralCover.Presentation, and matrix action interfaces. Blueprint search: 0 nodes match PGL; 0 nodes match transporter. DAG title search found no relative triangular configuration definition. No item-id occurrence in WeilConjectures.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate relative triangular configuration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-triangular-maximal-torus-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q95"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction. Specific supporting place: Proposition 4.2.7, final transporter paragraph, after constructing the group isomorphism and before concluding torus compatibility. Definition of the relative triangular PGL2 configuration used by the transporter statement.",
+   "via": [
+    "lem-sfb-triangular-maximal-torus-conjugacy",
+    "lem-sfb-relative-rank-one-semisimple-models",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.PGLTwoTriangularPresentation",
+  "declaration": "AlgebraicGeometry.PGLTwoTriangular.Presentation",
+  "declarations": [
+   "AlgebraicGeometry.PGLTwoTriangular.LocallyMatrix",
+   "AlgebraicGeometry.PGLTwoTriangular.Presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/PGLTwoTriangularPresentation.lean",
+  "statement": "structure Presentation {S : Scheme.{u}} (G B D : Grp (Over S)) (iB : B ⟶ G) (iD : D ⟶ B)",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdf96aeba",
+  "group": "Q95",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdf96aeba",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Item Lean matches the node clause by clause: nonzero Noetherian A; PGL2/B∞/D via the new Presentation (injective natural PGL2(Γ)→*G(V), fppf-locally surjective by sieve, upper_image m10=0, diagonal_image m10=m01=0, closed immersions); T closed with IsRelativeTorus, hmax IsMaximalTorus on every geometric fibre (Ω:Type u only weakens it); Conjugates is subfunctor equality over all W→V; conclusion D≅relativeSplitTorus 1, Mono j + iff representability, Smooth ∧ Surjective, act = left multiplication, IsIso(lift act snd), etale and Zariski local sections with persistence. New def node def-sfb-pgl-two-triangular-presentation is needed (only field-only PGL in Sheaf/WeilConjectures), real, and matches its statement. Item diff vs side-live: lean + 4 stmt_deps; statement and proof unchanged; lean.statement verbatim in both files; docstrings with source/blueprint and 7 steps; sorry only; private imports are recorded proof deps. Edge cases checked: nonreduced, empty, char 2, rank 0, nontrivial Pic, single universe. No change, no compile. Advisory: last Zariski clause is implied by Conjugates."
+ }
+}

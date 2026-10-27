@@ -13,57 +13,51 @@
  ],
  "proof": [
   {
-   "text": "The integral supported constant has stalk Z on D and zero off D. Derived reduction and further extension therefore have the actual supported A-constant as source, with normalized unit 1↦1. The roots line is locally free over Z/n, so extension of its degree-zero complex is the ordinary tensor line, including for nonflat A→B.",
+   "text": "Choose the normalized coefficient maps eta and theta and their two unbounded derived scalar-unit properties. This step uses no Cartier ideal or cycle class.",
    "uses": [
-    "lem-geo-cartier-coeff-extension",
-    "lem-asd-finite-etale-twist-line",
-    "lem-pur-derived-change-of-rings"
+    "lem-sfb-cartier-normalized-scalar-units"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-    "place": "Paragraph 4: finite coefficient extension and its functoriality"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Finite coefficient extension paragraph and opening comparison paragraph"
    }
   },
   {
-   "text": "The derived scalar adjunction gives the two universal properties against all unbounded complexes. Its transitivity comparison sends (x tensor a) tensor b to x tensor φ(a)b. It therefore preserves the required constant and pure-root normalizations. Naturality at the full pole boundary proves the coefficient square; the relative boundary uniqueness identifies its classes with the canonical ordinary ones.",
+   "text": "Take the two canonical ordinary classes. Their specifications give SupportedKummerBoundary; apply the boundary comparison square to these classes and the chosen normalized maps.",
    "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-asd-ordinary-supported-kummer"
+    "def-sfb-geo-cartier-canonical-etale",
+    "lem-sfb-cartier-boundary-scalar-square"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-    "place": "Paragraph 4: finite coefficient extension and its functoriality"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Finite coefficient extension paragraph and opening comparison paragraph"
    }
   },
   {
-   "text": "Comparison inverse image commutes with derived scalar extension and its units. Apply it to that square and use the canonical supported mates to obtain the pro-etale Ext square. No flatness of the coefficient map is assumed. Zero coefficients and empty support give zero objects.",
+   "text": "Precompose this square in Ext with the inverse R supported-source comparison. Reassociate Yoneda composition, distribute exact restriction over composition, and cancel the R source isomorphism. The resulting classes are the actual geoCartierCanonicalClass constructions. Combine this square with the normalization and derived-unit properties.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-sfb-geo-cartier-canonical-class"
+    "def-sfb-geo-cartier-canonical-class",
+    "lem-sfb-geo-cartier-source-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-    "place": "Paragraph 4: finite coefficient extension and its functoriality"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Finite coefficient extension paragraph and opening comparison paragraph"
    }
   }
  ],
  "proof_deps": [
-  "lem-geo-cartier-coeff-extension",
-  "lem-asd-finite-etale-twist-line",
-  "lem-pur-derived-change-of-rings",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-asd-ordinary-supported-kummer",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-sfb-geo-cartier-canonical-class"
+  "lem-sfb-cartier-normalized-scalar-units",
+  "def-sfb-geo-cartier-canonical-etale",
+  "lem-sfb-cartier-boundary-scalar-square",
+  "def-sfb-geo-cartier-canonical-class",
+  "lem-sfb-geo-cartier-source-comparison"
  ],
  "proof_origin": {
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-  "place": "Paragraph 4: finite coefficient extension and its functoriality",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Finite coefficient extension paragraph and opening comparison paragraph",
   "by": "agent"
  },
  "mathlib_searches": [
@@ -136,13 +130,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-3bab2",
-  "group": "T3",
-  "result": "fix",
-  "landing": "20261021T134548-L-1367600",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T064508-L-2190268",
   "kind": "interface",
-  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

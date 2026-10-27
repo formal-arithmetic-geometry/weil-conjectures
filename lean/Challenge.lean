@@ -19,7 +19,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 
 /-!
 # Challenge: upstream proper base change dependencies

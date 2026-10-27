@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-pro-affine-etale-residue-equalizer",
+ "kind": "statement",
+ "title": "Closed component-saturated residue equalizers for pro-affine etale targets",
+ "statement": "Let X be a scheme, let U and W be objects of its small pro-etale site [def-weil-pbc-proetale-site], and suppose that U to X is pro-affine etale [sk-def-pe-morphisms], namely a small cofiltered limit of absolutely affine etale X-schemes. For X-morphisms p,q:W to U, put E={x in W: fromSpecResidueField(x) followed by p equals fromSpecResidueField(x) followed by q}, with residue fields as in [def-weil-residue-field]. Then E is closed and contains the entire connected component of each of its points. Moreover, for every object V and X-morphism f:V to W whose underlying point map has image contained in E, the scheme morphisms f followed by p and f followed by q are equal. No reducedness assumption on V or W is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-morphisms",
+  "def-weil-residue-field"
+ ],
+ "source": {
+  "document": "lean/Sheaf/Paper/CompletedAffineFreeLocalDual.lean",
+  "place": "docstring of completedAffineFree_localDual_detect: clopen equality into each affine etale stage and equality into their limit; expanded by the explicit diagonal pullback in ProAffineEtaleResidueEqualizer.lean"
+ },
+ "proof": [
+  {
+   "text": "Unpack the pro-affine etale presentation of U as a limit D. Composing p and q with its limit projections gives pairs of maps over X to the absolutely affine etale stages D(j).",
+   "uses": [
+    "sk-def-pe-morphisms"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At a stage t:D(j) to X, pull its diagonal back along the paired map from W to D(j) times_X D(j). The diagonal is open by the Mathlib formally-unramified diagonal instance and closed by the separatedness instance for morphisms from absolutely affine schemes; both immersion properties persist under pullback. Hence the resulting map e is a clopen immersion. Its image is exactly the residue-field equality locus: a residue equality yields a lift by the pullback universal property, while a residue point in the image factors through the open immersion and therefore equalizes the arrows. Any map with image in this locus factors through e by IsOpenImmersion.lift and consequently equalizes the pair. This argument concerns scheme maps and does not assume reducedness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "By IsLimit.hom_ext, residue equality into U is equivalent to residue equality at every stage. Thus E is the intersection of the stage clopens. An intersection of closed sets is closed; a connected component meeting a clopen is contained in it, so E is component-saturated. A map into E equalizes every stage pair by the preceding open-immersion factorization. A second use of IsLimit.hom_ext proves equality into U. The argument also applies to empty test schemes and empty equality loci.",
+   "uses": [
+    "sk-def-pe-morphisms"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-pe-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R1",
+  "document": "lean/Sheaf/AlgebraicGeometry/ProAffineEtaleResidueEqualizer.lean",
+  "place": "etale_residue_equalizer and proAffineEtale_residue_equalizer",
+  "note": "Fully proved geometric sublemma, not a new hole. Pullback and open-immersion lifting use existing Mathlib APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite family of maps to an inverse limit of affine etale schemes, closed equality loci and finite pro-etale closed component restrictions give a cover on which classes agree",
+   "results": "{\"t\": \"2026-10-27T06:53:06Z\", \"tool\": \"leanfinder\", \"query\": \"Finite family of maps to an inverse limit of affine etale schemes, closed equality loci and finite pro-etale closed component restrictions give a cover on which classes agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"e001cdb778843a35\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match; inspected local Mathlib diagonal, open-immersion lifting, and limit-extensionality APIs instead."
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|fromSpecResidueField|ClopenRestriction|closed.*restriction|Restriction.*range",
+   "results": "{\"t\": \"2026-10-27T06:53:40Z\", \"tool\": \"grep\", \"query\": \"equalizer|fromSpecResidueField|ClopenRestriction|closed.*restriction|Restriction.*range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/Light/Explicit.lean\", \"Mathlib/Condensed/Light/Explicit.lean\", \"Mathlib/Condensed/Light/Explicit.lean\"], \"digest\": \"74dc0c0c5a836509\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match; inspected local Mathlib diagonal, open-immersion lifting, and limit-extensionality APIs instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proAffineEtale\"",
+   "results": "{\"t\": \"2026-10-27T06:53:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"proAffineEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match; inspected local Mathlib diagonal, open-immersion lifting, and limit-extensionality APIs instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedAffinePatternCover",
+  "date": "2026-10-27",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-diagonal-tower",
+   "place": "Functorial derived completion and passage to the limit: subordinate completed coefficient duality, the closed stage-equality assertion in the closed-pattern cover of completedAffineFree_localDual_detect",
+   "via": [
+    "lem-sfb-completed-affine-pattern-cover"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProAffineEtaleResidueEqualizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProAffineEtaleResidueEqualizer.lean",
+  "declaration": "AlgebraicGeometry.proAffineEtale_residue_equalizer",
+  "statement": "theorem proAffineEtale_residue_equalizer\n    (X : Scheme.{u}) (U W : X.ProEt) (hU : proAffineEtale U.hom) (p q : W ⟶ U) :\n    let E := {x : W.left | W.left.fromSpecResidueField x ≫ p.left =\n      W.left.fromSpecResidueField x ≫ q.left}\n    IsClosed E ∧ (∀ x ∈ E, connectedComponent x ⊆ E) ∧\n      ∀ (V : X.ProEt) (f : V ⟶ W), Set.range f.left ⊆ E → f ≫ p = f ≫ q",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T084443-L-3682331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T084443-L-3682331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-multiplicative-additive-vanishing-criterion",
+ "kind": "statement",
+ "title": "Multiplicative type detected by absence of additive homomorphisms",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be an affine $F$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Write $\\mathbf G_{a,F}$ for the additive group scheme [def-sc-gm-ga]. A zero homomorphism to $\\mathbf G_{a,F}$ means the constant group-scheme morphism with value its identity $0$. Call $G$ diagonalizable if it is isomorphic to $D_F(M)=\\operatorname{Spec}F[M]$ for some finitely generated abelian group $M$, where $F[M]$ has basis $e_m$, multiplication $e_me_n=e_{m+n}$ and comultiplication $e_m\\mapsto e_m\\otimes e_m$. Then $G$ is diagonalizable if and only if $G$ is commutative and every homomorphism of $F$-group schemes $G\\to\\mathbf G_{a,F}$ is zero. No smoothness, reducedness or connectedness assumption is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.18(a),(b),(d), printed pp.237–238; diagonalizable group convention from Theorem 12.9(a), pp.233–234. Over an algebraically closed field the separable closure in (d) is the field itself."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=F[G]$. The coordinate Hopf operations are those of [lem-sfb-affine-group-coordinate-hopf]. A group homomorphism $u:G\\to\\mathbf G_a$ has pullback $u^*:F[t]\\to H$ and $p=u^*(t)$ satisfies $\\Delta(p)=p\\otimes1+1\\otimes p$. Conversely this identity gives $\\epsilon(p)=0$: apply $\\epsilon\\otimes\\epsilon$ to obtain $\\epsilon(p)=2\\epsilon(p)$. The antipode identity then gives $S(p)=-p$. Polynomial substitution $t\\mapsto p$ therefore preserves comultiplication, counit and antipode, so [lem-sfb-hopf-spectrum-functor] produces a homomorphism to $\\mathbf G_a$. By the affine-spectrum morphism correspondence these constructions are inverse, and the zero homomorphism corresponds exactly to $p=0$. We will call elements satisfying this displayed comultiplication identity primitive.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum",
+    "lem-sfb-hopf-spectrum-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18, opening primitive-element identification, p.237; Proposition 3.6, pp.66–67."
+   }
+  },
+  {
+   "text": "First suppose $G\\simeq D_F(M)$. The comultiplication on $F[M]$ is unchanged by swapping tensor factors, hence the group is commutative by the affine-spectrum correspondence. For a primitive $p=\\sum_m c_m e_m$, compare coefficients in $\\Delta(p)=p\\otimes1+1\\otimes p$. For $m\\ne0$, the coefficient of $e_m\\otimes e_m$ is $c_m$ on the left and zero on the right. For $m=0$, the coefficient of $e_0\\otimes e_0$ gives $c_0=2c_0$, hence $c_0=0$ in every characteristic. The coefficient comparison is valid by applying the tensor products of the basis-coordinate linear maps. Thus $p=0$, and step 1 proves the required Hom vanishing.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18, (a) => (b), p.237, with the direct group-algebra coefficient calculation of Section 12(a), pp.230–231."
+   }
+  },
+  {
+   "text": "For the converse assume that $G$ is commutative and that all maps to $\\mathbf G_a$ vanish. Every $h\\in H$ lies in a finite-dimensional subcoalgebra, as follows. Apply [lem-sfb-comodule-finite-subrepresentation] to the regular coaction $\\Delta:H\\to H\\otimes H$ and $\\{h\\}$. Choose a finite basis $w_1,\\ldots,w_r$ of the resulting stable subspace $W$ and write $\\Delta(w_j)=\\sum_i w_i\\otimes c_{ij}$. Coassociativity and comparison of the $w_i$ coefficients give $\\Delta(c_{ij})=\\sum_l c_{il}\\otimes c_{lj}$, and the counit gives $\\epsilon(c_{ij})=\\delta_{ij}$. Thus $C=\\operatorname{span}_F\\{c_{ij}\\}$ is a finite-dimensional subcoalgebra. Applying $\\epsilon$ to the first tensor factor of $\\Delta(w_j)$ gives $w_j=\\sum_i\\epsilon(w_i)c_{ij}$, so $W\\subset C$ and $h\\in C$. All coefficient extractions are defined by the basis-coordinate maps and the tensor universal property. A basis of $W$ is finite: a finite spanning set uses only finitely many coordinates in any basis.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-comodule-finite-subrepresentation",
+    "lem-weil-pbc-vector-space-free",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9(d), coefficient coalgebras, pp.174–175; Proposition 4.7 and Corollary 4.8, pp.86–87; Theorem 12.18(c) => (d), p.238."
+   }
+  },
+  {
+   "text": "Fix such a finite-dimensional subcoalgebra $C\\subset H$. Define $A=C^\\vee=\\operatorname{Hom}_F(C,F)$, with $(xy)(c)=(x\\otimes y)(\\Delta c)$ and unit $\\epsilon|_C$. Coassociativity and the counit identities give associativity and a unit by evaluation on $c$; the commutativity of $G$ makes $\\Delta$ symmetric, hence makes $A$ commutative. In a finite basis of $C$, its coordinate functionals form a basis of $A$. Apply [lem-sfb-finite-algebra-split-or-dual-quotient]. In its dual-number alternative write a surjection $q:A\\twoheadrightarrow F[\\epsilon]$ as $q(x)=x(a)+x(b)\\epsilon$, with $a,b\\in C$; these elements exist by writing the two coordinate linear functionals on $A$ in the finite dual basis. Surjectivity implies $b\\ne0$. Multiplicativity gives $\\Delta a=a\\otimes a$ and $\\Delta b=a\\otimes b+b\\otimes a$ by evaluating on every pair of dual-basis functionals, and $q(1_A)=1$ gives $\\epsilon(a)=1$, $\\epsilon(b)=0$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-affine-spectrum",
+    "lem-sfb-finite-algebra-split-or-dual-quotient",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(b) => (c), pp.237–238, finite dual algebra and comparison of coefficients of 1 and epsilon."
+   }
+  },
+  {
+   "text": "The dual-number alternative is impossible. Indeed the antipode identity in [lem-sfb-affine-group-coordinate-hopf] applied to $a$ gives $S(a)a=1$ in $H$. Put $a^{-1}=S(a)$, so $a$ is a unit of $H$. Multiplicativity of $\\Delta$ gives $\\Delta(a^{-1})=a^{-1}\\otimes a^{-1}$, since multiplication by $\\Delta(a)$ shows that this is its inverse. Consequently\n$$\\Delta(ba^{-1})=(a\\otimes b+b\\otimes a)(a^{-1}\\otimes a^{-1})=1\\otimes ba^{-1}+ba^{-1}\\otimes1.$$\nThe element $ba^{-1}$ is nonzero, because multiplying it by the unit $a$ recovers $b\\ne0$. This is a nonzero primitive element, contradicting step 1 and our Hom-vanishing hypothesis. Therefore the other alternative of step 4 holds: $C^\\vee\\simeq F^n$. Notice that the inverse used here lies in $H$, not in $C$ or $C^\\vee$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(b) => (c), p.238; correcting the printed ambient-algebra notation for the unit a."
+   }
+  },
+  {
+   "text": "Choose the algebra isomorphism $C^\\vee\\simeq F^n$ from step 5. Its coordinate linear forms are evaluations at elements $a_1,\\ldots,a_n\\in C$, using a finite basis and its dual as in step 4. They form a basis of $C$: the coordinate linear forms form a basis of $(C^\\vee)^\\vee$, and the basis and dual basis identify this space with $C$. Each coordinate form is unital and multiplicative, so $\\epsilon(a_i)=1$ and $\\Delta(a_i)=a_i\\otimes a_i$ by evaluation on pairs of dual-basis vectors. Thus $C$ is spanned by group-like elements of $H$. The zero subcoalgebra corresponds to $n=0$ and has an empty basis. By step 3 every element of $H$ is in one of these $C$, so the set $M$ of all group-like elements spans $H$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(c) => (d), p.238, dual coordinate forms of a product of fields."
+   }
+  },
+  {
+   "text": "The elements of $M$ are linearly independent by [lem-sfb-coalgebra-group-like-independent], hence form a basis of $H$ by step 6. Products and the unit lie in $M$, because $\\Delta$ and $\\epsilon$ preserve products and units. If $a\\in M$, step 5 gives its inverse $S(a)$ in $H$, and multiplicativity of $\\Delta,\\epsilon$ gives $\\Delta(a^{-1})=a^{-1}\\otimes a^{-1}$ and $\\epsilon(a^{-1})=1$. Thus $M$ is a commutative group under multiplication in $H$, which we now write additively. The linear map $F[M]\\to H$ sending $e_m$ to $m$ is bijective by this basis, preserves products and unit by the group law on $M$, and preserves $\\Delta,\\epsilon,S$ by the displayed group-like formulas. It is therefore a Hopf-algebra isomorphism.",
+   "uses": [
+    "lem-sfb-coalgebra-group-like-independent",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.8 and its proof, p.233, with Proposition 4.23, p.93."
+   }
+  },
+  {
+   "text": "It remains to check that $M$ is finitely generated. Since $G$ is affine of finite type, apply [lem-weil-pbc-lft-affine-pairs] to its structure morphism, $U=G$ and $V=\\operatorname{Spec}F$, to obtain algebra generators $x_1,\\ldots,x_s$ of $H$. Expand each $x_i$ in the group-like basis from step 7; the union $T$ of the finite supports is finite. Let $N$ be the subgroup of $M$ generated by $T$. The span of $N$ contains $1$ and all $x_i$ and is closed under multiplication, so equals $H$. If $m\\in M\\setminus N$, expressing $m$ in that span contradicts the independence in step 7. Hence $M=N$ is finitely generated. Apply [lem-sfb-hopf-spectrum-functor] to the Hopf isomorphism of step 7 and its inverse, giving $G\\simeq\\operatorname{Spec}F[M]=D_F(M)$ as group schemes. This is the required diagonalizability.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-sfb-hopf-spectrum-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 12.8–12.9(a), pp.233–234: group-algebra identification and finite generation, after Theorem 12.18(c) => (d), p.238; affine finite-type dictionary is Stacks Tag 01T2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "lem-sfb-hopf-spectrum-functor",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-comodule-finite-subrepresentation",
+  "lem-weil-pbc-vector-space-free",
+  "def-weil-pbc-free-module",
+  "lem-sfb-finite-algebra-split-or-dual-quotient",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-coalgebra-group-like-independent",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.18(b) => (c) => (d), pp.237–238; coefficient coalgebras in Section 9(d), pp.174–175; group-algebra reconstruction in Theorem 12.8, p.233. The forward implication is the direct coefficient calculation rather than the equivalent representation-theoretic contradiction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A commutative affine algebraic group is diagonalizable if and only if every homomorphism to the additive group scheme is zero",
+   "results": "Available; 8 hits: AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal properties, abstract additive/multiplicative type tags, and Hopf group-like elements do not give this criterion. GroupLike.instCommGroup and linearIndepOn_isGroupLikeElem provide neither spanning by group-like elements nor the no-additive-homomorphism implication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative affine group scheme over an algebraically closed field is of multiplicative type exactly when Hom to Ga vanishes",
+   "results": "Available; 8 hits: AlgebraicGeometry.AffineScheme, AddCommGrpCat.toCommGrp, AlgebraicGeometry.IsAffine.recOn, AddEquiv.additiveMultiplicative, AlgebraicGeometry.isAffine_affineScheme, CommGrpCat.Hom, MulAutMultiplicative, AddCommGrpCat.toCommGrp_obj_coe. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal properties, abstract additive/multiplicative type tags, and Hopf group-like elements do not give this criterion. GroupLike.instCommGroup and linearIndepOn_isGroupLikeElem provide neither spanning by group-like elements nor the no-additive-homomorphism implication."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Hom\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal properties, abstract additive/multiplicative type tags, and Hopf group-like elements do not give this criterion. GroupLike.instCommGroup and linearIndepOn_isGroupLikeElem provide neither spanning by group-like elements nor the no-additive-homomorphism implication."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonaliz|diagonalis|multiplicative.?type|primitive",
+   "results": "Available; 0 hits: .  Searched Mathlib/AlgebraicGeometry/Group/",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal properties, abstract additive/multiplicative type tags, and Hopf group-like elements do not give this criterion. GroupLike.instCommGroup and linearIndepOn_isGroupLikeElem provide neither spanning by group-like elements nor the no-additive-homomorphism implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cocommutative commutative finitely generated Hopf algebra over an algebraically closed field absence of nonzero primitive elements implies it is a group algebra",
+   "results": "Available; 8 hits: GroupLike.instCommGroup, GroupLike.instGroup, GroupLike, linearIndepOn_isGroupLikeElem, MonoidAlgebra.instHopfAlgebra, MonoidAlgebra.instHopfAlgebraStruct, IsGroupLikeElem.antipode, HopfAlgebra. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal properties, abstract additive/multiplicative type tags, and Hopf group-like elements do not give this criterion. GroupLike.instCommGroup and linearIndepOn_isGroupLikeElem provide neither spanning by group-like elements nor the no-additive-homomorphism implication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonalizable algebraic group criterion no maps to additive group no primitive elements in coordinate Hopf algebra",
+   "results": "Available; 8 hits: MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra, AddChar.IsPrimitive, Field.primitive_element_iff_algHom_eq_of_eval, Field.primitive_element_iff_algHom_eq_of_eval', AddAction.isCoatom_stabilizer_iff_preprimitive, Matrix.diagAddMonoidHom, AddAction.IsPreprimitive.mk', AddAction.IsPreprimitive.of_isTrivialBlock_of_notMem_fixedPoints. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal properties, abstract additive/multiplicative type tags, and Hopf group-like elements do not give this criterion. GroupLike.instCommGroup and linearIndepOn_isGroupLikeElem provide neither spanning by group-like elements nor the no-additive-homomorphism implication."
+  },
+  {
+   "tool": "grep",
+   "query": "coetale|coétale|multiplicative.?type|[Dd]iagonali[sz]able.*[Gg]roup|[Gg]roup.*[Dd]iagonali[sz]able",
+   "results": "Available; 3 hits: Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/Algebra/Group/TypeTags/Hom.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal properties, abstract additive/multiplicative type tags, and Hopf group-like elements do not give this criterion. GroupLike.instCommGroup and linearIndepOn_isGroupLikeElem provide neither spanning by group-like elements nor the no-additive-homomorphism implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative affine algebraic group over an algebraically closed field is diagonalizable if every homomorphism to the additive group scheme is zero",
+   "results": "Available; 8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback, LieModule.instIsTriangularizableOfIsAlgClosed. ",
+   "date": "2026-10-23",
+   "verdict": "no match: geometric diagonal properties and additive/multiplicative type tags do not give the criterion; group-like group structures and monoid-algebra Hopf instances do not prove spanning from primitive-element vanishing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Hom\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: geometric diagonal properties and additive/multiplicative type tags do not give the criterion; group-like group structures and monoid-algebra Hopf instances do not prove spanning from primitive-element vanishing."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonaliz|diagonalis|multiplicative.?type|primitive",
+   "results": "Available; 0 hits: .  Searched Mathlib/AlgebraicGeometry/Group",
+   "date": "2026-10-23",
+   "verdict": "no match: geometric diagonal properties and additive/multiplicative type tags do not give the criterion; group-like group structures and monoid-algebra Hopf instances do not prove spanning from primitive-element vanishing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative finitely generated Hopf algebra over algebraically closed field with no nonzero primitive elements is a group algebra",
+   "results": "Available; 8 hits: GroupLike.instCommGroup, MonoidAlgebra.instHopfAlgebra, MonoidAlgebra.instHopfAlgebraStruct, GroupLike.instGroup, AddMonoidAlgebra.instHopfAlgebra, CommSemiring.toHopfAlgebra, AddMonoidAlgebra.instHopfAlgebraStruct, HopfAlgebra. ",
+   "date": "2026-10-23",
+   "verdict": "no match: geometric diagonal properties and additive/multiplicative type tags do not give the criterion; group-like group structures and monoid-algebra Hopf instances do not prove spanning from primitive-element vanishing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Commutative affine group scheme is of multiplicative type if and only if there are no nonzero maps to the additive group",
+   "results": "Available; 8 hits: AddGrpCat.toGrp_obj_coe, MulEquiv.toAdditiveLeft, Multiplicative.commGroup, AddEquiv.additiveMultiplicative, MulEquiv.toAdditiveRight, AddCommGrpCat.toCommGrp, MulAutMultiplicative, AddEquiv.toAdditive_toMultiplicative_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: geometric diagonal properties and additive/multiplicative type tags do not give the criterion; group-like group structures and monoid-algebra Hopf instances do not prove spanning from primitive-element vanishing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-commutative-multiplicative-type-extension",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel. Supporting input: Milne Corollary 12.22, multiplicative type of the now commutative kernel extension. Supporting criterion for the Hom(-, G_a) proof of Milne Corollary 12.22: Theorem 12.18(a),(b),(d).",
+   "via": [
+    "lem-sfb-commutative-multiplicative-type-extension",
+    "lem-sfb-multiplicative-isogeny-composition",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-multiplicative-additive-vanishing-criterion",
+  "worker": "stage1",
+  "summary": "Q85 checked Milne Theorem 12.18 and gave an eight-step coalgebra proof valid for nonreduced affine groups. One new statement-only finite-algebra input; finite coefficient coalgebras are constructed explicitly from the existing finite-subcomodule theorem; independent group-like elements and the affine finite-type dictionary are reused. The statement is unchanged. Corrected source typos concerning the ambient algebra of a unit and of a coefficient coalgebra. Every step is below 2000 characters.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel. Supporting input: Milne Corollary 12.22, multiplicative type of the now commutative kernel extension. Supporting criterion for the Hom(-, G_a) proof of Milne Corollary 12.22: Theorem 12.18(a),(b),(d). The current latest direct-image proof, paragraph (3), is realized through this retained alteration/moduli/reductivity prerequisite chain. Steps 1–6 implement Milne 12.18 and steps 7–8 reconstruct the split diagonal group in 12.8–12.9. The ancestor command returns None; inherited null ancestry is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-e6babb93d",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-e6babb93d (reviewer sub-agent of L); spot-checked: I read the item, the new node and all cited statements in full, and checked them against Milne iAG2017: Thm 12.18 pp.237-238 (whole proof), Def 12.7 and Thms 12.8-12.9 pp.233-234, and §9(d) pp.174-175. The item is not superseded: in live and side-live it is still unsplit with an empty proof, there is no repair note, and the statement is unchanged. The two added stmt_deps are both used by the statement. All 8 steps are correct; I recomputed each. Step 1: primitive p gives eps(p)=2eps(p) so eps(p)=0, then S(p)=-p, so primitives match homomorphisms to G_a. Step 2: in F[M], comparing the e_m⊗e_m coefficients gives c_m=0, and c_0=2c_0 holds in every characteristic. Step 3: the coefficient-coalgebra indices Δc_lj=Σ_i c_li⊗c_ij, eps(c_ij)=δ_ij and W⊂C all check out. Step 4: the convolution algebra C^∨ gives Δa=a⊗a, Δb=a⊗b+b⊗a, b≠0. Step 5: S(a)a=1 holds in H, not in C^∨, and ba^{-1} is a nonzero primitive. Steps 6-7: the group-like elements span H, are independent, and give F[M]≅H as Hopf algebras. Step 8: finite type of H makes M finitely generated. The direct calculation for (a)=>(b) replaces Milne's appeal to semisimplicity (12.12); this is a valid simplification and stays on the route. The two source-notation remarks in the report are correct (p.237 C_V⊂C, not ⊂V; p.238 a is a unit in O(G)). The new node lem-sfb-finite-algebra-split-or-dual-quotient is true: Artinian decomposition with residue field F, then Nakayama gives m≠m², then a functional on m/m² gives the map onto F[ε]. I tested A=0, F^n, F[x]/(x^r), F×F[ε], and a field extension (which shows algebraic closure is needed). It is statement-only, self-contained, sourced at Milne p.237, and all four search kinds are recorded. It is not a duplicate: I read finite-coalgebra-dual-base-change, coalgebra-finite-subcoalgebra, geometrically-diagonal-coalgebra-separable-basis, group-algebra-group-like-basis, diagonalizable-group-geometric-criteria, the antiduality node and the lem-ag dual-number nodes. It is strictly smaller than the item and creates no cycle. No off-unit citations (tool_uses empty), no SGA. Item edge cases checked: trivial group, μ_p in char p, α_p, G_a, constant Z/p in char p, Z/2 over C, non-commutative groups. FIX (a C1/C3-type citation gap): steps 3 and 4 used the Hopf coassociativity and counit identities, and step 4 also used the affine-spectrum correspondence for cocommutativity, without listing them. I added lem-sfb-affine-group-coordinate-hopf to step 3, and that node plus def-weil-affine-spectrum to step 4. proof_deps and the text are unchanged; the corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MultiplicativeAdditiveVanishingCriterion",
+  "declaration": "AlgebraicGeometry.diagonalizable_iff_commutative_and_additive_hom_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/MultiplicativeAdditiveVanishingCriterion.lean",
+  "statement": "theorem diagonalizable_iff_commutative_and_additive_hom_zero {F : Type u} [Field F] [IsAlgClosed F] (G : Over (Spec (.of F))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : (∃ (M : Type u) (_ : AddCommGroup M) (_ : AddGroup.FG M), Nonempty (Grp.mk G ≅ diagonalizableGroup F M)) ↔ IsCommMonObj G ∧ ∀ (f : G ⟶ StandardGroupSchemes.additive F), IsMonHom f → f = toUnit G ≫ MonObj.one (X := StandardGroupSchemes.additive F)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed def-sfb-diagonalizable-group for the group-algebra spectrum already described inline in the unchanged statement; stmt_deps gains that node only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3409c8b6a",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Node differs from side-live only by the lean record and the landed stmt_dep def-sfb-diagonalizable-group, which is used by the statement. Clause check against Milne 12.18(a),(b),(d) and 12.9(a): IsAlgClosed F; GrpObj on Over Spec F plus IsAffine; finite type = LocallyOfFiniteType+QuasiCompact per its dep record; G_a = StandardGroupSchemes.additive with its pinned GrpObj; zero = toUnit ≫ one (scheme-morphism equality); diagonalizable = ∃ M : Type u with AddGroup.FG and an iso in Grp(Over Spec F) to the Hopf-spectrum diagonalizableGroup F M; commutativity is a right-hand conjunct; no extra assumptions. Edge cases M=0, μ_p and α_p in char p, constant Z/p, non-commutative groups, char 2 and universes all OK. No duplicate in Mathlib or side-live Sheaf. One sorry; docstrings carry source, blueprint id and all 8 steps; lean.statement verbatim; report has both sections. No compile needed (no file changed)."
+ }
+}

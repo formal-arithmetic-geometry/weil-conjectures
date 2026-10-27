@@ -1,0 +1,112 @@
+{
+ "id": "lem-asd-compact-hom-mate-compatibility",
+ "kind": "statement",
+ "title": "Monoidal mate compatibility of compact internal adjunction",
+ "statement": "For a monoidal Grothendieck abelian coefficient category A with functorial flat resolutions and the concrete etale sheaf hypotheses, take compactifiable f:X→S and f-prime:X-prime→S-prime with exceptional right adjoints and invertible compact projection maps. Let TX:D(X,A)→D(X-prime,A) and TY:D(S,A)→D(S-prime,A) be lax monoidal functors, M∈D(X,A), sigma:TY ⋙ Lf-prime-star → Lf-star ⋙ TX, rho:TX ⋙ Rf-prime-! → Rf-! ⋙ TY, and b:Rf-prime-!(TX M)→TY(Rf-!M). Suppose the tensorator of TY followed by tensoring with b and the projection for f equals the vertical composite sigma, the tensorator of TX, rho, and the projection for f-prime. Then applying TY to compact internal adjunction [prop-asd-internal-adjunction], followed by its internal-Hom comparison and precomposition with b, equals the ordinary mate of sigma, the internal-Hom comparison for TX, the image under Rf-prime-star and internal Hom of the exceptional mate of rho, and compact internal adjunction for f-prime, at every Q∈D(S,A). No condition of invertibility on sigma, rho or b is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "Final paragraph: compatibility of compact projection, compact exchange, and the ordinary/exceptional adjunction pairings."
+ },
+ "stmt_deps": [
+  "prop-asd-internal-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Write the compact internal-adjunction isomorphisms as conjugates of the projection maps through the composite ordinary, tensor--Hom and exceptional adjunctions. Apply mateEquiv_whiskerTop_conjugateEquiv to the assumed compatibility of projection squares.",
+   "uses": [
+    "prop-asd-internal-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use mateEquiv_hcomp twice to identify the mate of the vertically composed left-adjoint squares with the horizontal composite of the three right-adjoint squares. Evaluate at Q.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The mate of the lax tensorator is ihomComparison. By mateEquiv_conjugateEquiv_vcomp, whiskering this tensorator with tensoring by b takes the mate to ihomComparison followed by precomposition with b. Substitute both identifications into the evaluated equality. All arguments are formal adjunction identities and apply unchanged to zero objects and empty schemes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "prop-asd-internal-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "Final paragraph, compact-adjunction mate compatibility; complete Lean proof by T4, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of conjugate adjunction isomorphisms with composition of mates",
+   "results": "Eight hits including mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp and iterated_mateEquiv_conjugateEquiv. These supply the general mate identities, not the compact-adjunction specialization.",
+   "date": "2026-10-26",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv_whiskerTop_conjugateEquiv",
+   "results": "No hits: unknown identifier in Mathlib search. The declaration is present in the adopted source library WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates and is used by the proof.",
+   "date": "2026-10-26",
+   "verdict": "adopted-source ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*conjugate|conjugate.*mateEquiv",
+   "results": "13 Mathlib hits, including iterated_mateEquiv_conjugateEquiv and uses of mateEquiv_conjugateEquiv_vcomp. Local source search also found the compact internal-adjunction construction in TensorHom.",
+   "date": "2026-10-26",
+   "verdict": "ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactInternalAdjunctionExchange",
+  "date": "2026-10-26",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-compact-internal-exchange",
+   "place": "Mate-calculus and canonical-map identification steps of the proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactHomMonoidalCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactHomMonoidalCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactHomMonoidalCompatibility",
+  "statement": "theorem compactHomMonoidalCompatibility\n    (TX : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤\n      _root_.DerivedCategory (Sheaf X'.smallEtaleTopology A)) [TX.LaxMonoidal]\n    (TY : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A) ⥤\n      _root_.DerivedCategory (Sheaf S'.smallEtaleTopology A)) [TY.LaxMonoidal]\n    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))\n    (σ : TwoSquare TY (L(upperStar A f)) (L(upperStar A f')) TX)\n    (ρ : TwoSquare TX (rightDerivedLowerShriek A f) (rightDerivedLowerShriek A f') TY)\n    (b : (rightDerivedLowerShriek A f').obj (TX.obj M) ⟶\n      TY.obj ((rightDerivedLowerShriek A f).obj M))\n    (h : ((Functor.LaxMonoidal.μTwoSquare TY ((rightDerivedLowerShriek A f).obj M)).whiskerRight\n      ((derivedTensor A S').map b)).whiskerLeft ((projectionMap A f).app M) =\n        (σ ≫ᵥ Functor.LaxMonoidal.μTwoSquare TX M ≫ᵥ ρ).whiskerRight\n          ((projectionMap A f').app (TX.obj M)))\n    (Q : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A)) :\n    TY.map ((((derivedHomRightDerivedLowerShriekIso A f).app (op M)).app Q).hom) ≫\n      (Functor.LaxMonoidal.ihomComparison TY ((rightDerivedLowerShriek A f).obj M)).app Q ≫\n      ((derivedHom A S').map b.op).app (TY.obj Q) =\n      (mateEquiv (derivedUpperStarLowerStarAdjunction A f)\n        (derivedUpperStarLowerStarAdjunction A f') σ).app\n          (((derivedHom A X).obj (op M)).obj ((rightDerivedUpperShriek A f).obj Q)) ≫\n      (R(lowerStar A f')).map\n        ((Functor.LaxMonoidal.ihomComparison TX M).app ((rightDerivedUpperShriek A f).obj Q)) ≫\n      (R(lowerStar A f')).map (((derivedHom A X').obj (op (TX.obj M))).map\n        ((mateEquiv (rightDerivedUpperShriekAdjunction A f)\n          (rightDerivedUpperShriekAdjunction A f') ρ).app Q)) ≫\n      (((derivedHomRightDerivedLowerShriekIso A f').app (op (TX.obj M))).app (TY.obj Q)).hom",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T111931-L-1780973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T111931-L-1780973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

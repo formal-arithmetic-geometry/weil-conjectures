@@ -1,0 +1,234 @@
+{
+ "id": "lem-exc-finite-quotient-constructible-reduction",
+ "kind": "statement",
+ "title": "Constructibility over a quotient ring from finite constant quotient labels",
+ "statement": "Let $T$ be any scheme [def-pc-scheme], let $A$ be a finite commutative ring, let $I\\subseteq A$ be an ideal, and put $B=A/I$. On the small pro-etale site [def-weil-pbc-proetale-site] use constant ring sheaves $A_T,B_T$ [def-weil-pbc-constant-sheaf]. Let $F$ be a sheaf of $B_T$-modules [def-weil-sheaf-of-modules-category] whose restriction of scalars to $A_T$ [def-pc-sheaf-restrict-scalars] is intrinsically constructible [def-weil-proetale-constructible-sheaf]. Then $F$ is intrinsically constructible as a $B_T$-module sheaf.\n\nMore precisely, take any witnessing finite constructible locally closed stratification of the underlying $A_T$-module sheaf, and any trivializing pro-etale covering on its strata with finite constant $A$-module labels $M$ [def-weil-proetale-locally-constant-sheaf]. The same strata and covers trivialize $F$ as a $B_T$-module sheaf with finite labels $M/IM$: on each such localized covering member there is a $B$-linear isomorphism $F|_U\\cong\\underline{M/IM}_U$. This includes empty strata and covering members and does not assert $IM=0$ for an arbitrary label on an empty member. No hypothesis on Tor amplitude or complexes is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093J, lemma-constant-exact; quotient-label M/IM argument for constructibility over B in blueprint thm-exc-explicit-preservation proof paragraph 2, expanded returned step 5"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-sp-proetale-constant-coefficient-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "For every scheme map f and coefficient quotient q:A→A/I, prove the square between f⁻¹(q), c_A and c_(A/I) by transposing to direct image and then to the constant presheaf. It is the naturality equation for the ring sheafification unit. Scalar extension along c_A and c_(A/I) is restriction along their inverses, by the extension/restriction adjunction and uniqueness of left adjoints in [def-weil-pbc-proetale-operations]. Compose this with the scalarIdentification isomorphism of [lem-pur-proetale-inverse-image-tensor-comparison]. Identity on sections, linear by the coefficient square, identifies the resulting two restricted actions. This gives pullbackRestrictIso: f_A^*(Res F) ≅ Res(f_(A/I)^* F). No immersion or finiteness hypothesis is required for this comparison.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a localized member U, let G be an A/I-module sheaf and e:Res(G)|_U ≅ constant(M). Transpose e inverse through the module-sheafification unit from [lem-cbc-sieve-module-sheafification], giving k:M→G(V) at every slice object V. Naturality of the ring unit with q gives k(am)=q(a)k(m). The additive map k kills I times the top submodule by Submodule.smul_induction_on: each generator a m with a∈I maps to zero, and sums map to sums. Descend k to t:M/IM→G(V) using QuotientAddGroup.lift. Lifting scalars through the surjection A→A/I and vectors through M→M/IM verifies A/I-linearity; naturality is checked on vector lifts. This constructs a morphism g from the constant quotient-module presheaf to the restricted presheaf of G, over the restricted constant ring, exactly as defined in [def-weil-proetale-locally-constant-sheaf].",
+   "uses": [
+    "lem-cbc-sieve-module-sheafification",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write c for the constant additive presheaf map M→M/IM. It is pointwise surjective, hence locally surjective, and c followed by the underlying g equals the underlying k. The latter is the sheafification unit followed by an isomorphism, so it is locally bijective. Mathlib Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac and Presheaf.isLocallySurjective_of_isLocallySurjective_fac now make g locally bijective. Transpose g by [lem-cbc-sieve-module-sheafification]. On underlying abelian sheaves the transpose is sheafification(g) followed by the sheafification counit; both are invertible. Reflection of isomorphisms by SheafOfModules.toSheaf makes the transpose an A/I-linear isomorphism. This replaces the planned exact-sequence calculation by local bijectivity and directly uses the restricted coefficient ring on the slice, so no independent localized-ring comparison is needed. Empty members are covered by the same argument; IM is never asserted to be zero as an abstract module.",
+   "uses": [
+    "lem-cbc-sieve-module-sheafification",
+    "def-weil-pbc-sheafification",
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unpack the constructibility witness [def-weil-proetale-constructible-sheaf] and retain its exact stratification, positive number of strata, and each trivializing cover. On each stratum compose each given chart with pullbackRestrictIso restricted to that member, then apply the quotient chart of steps 2–3, choosing label M/IM. This proves local constancy over A/I. Apply the stalk functor [def-weil-proetale-geometric-stalk] to pullbackRestrictIso to transfer finite stalks. Scalar restriction leaves the underlying additive stalk colimit definitionally unchanged, so these are the finite stalks of the A/I-pullback. Assemble the original stratification as the constructibility witness. For the specified-chart clause apply exactly the same construction to every supplied member; quotientLabelFinite follows from finiteness of a quotient of the finite underlying set M. This clause needs none of the supplied stalk, cover or positivity hypotheses, but keeps the exact original signature.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-proetale-geometric-stalk",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-sheafification",
+  "lem-cbc-sieve-module-sheafification",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section constant (Tag 093I) and lemma-constant-exact (Tag 093J), quotient-label argument formalized by local bijectivity of the descended constant-unit map; J6, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(quotient|scalar|annihilat)|locallyConstant.*quotient",
+   "results": "1 hit(s): Mathlib/Topology/DiscreteQuotient.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern quotient modules, quasi-coherent finite presentation or condensed sheaves; none transports intrinsic pro-etale constructibility and the localized M/IM labels"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsLocallyConstant\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern quotient modules, quasi-coherent finite presentation or condensed sheaves; none transports intrinsic pro-etale constructibility and the localized M/IM labels"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible finite ring module sheaf annihilated by an ideal is constructible over the quotient ring",
+   "results": "8 hit(s): Submodule.instModuleQuotientIdealSpanSingletonSetSubtypeMemTorsionBy, Submodule.instModuleQuotientIdealSubtypeMemTorsionBySetCoe, Submodule.instIsScalarTowerQuotientIdealSubtypeMemTorsionBySetCoe, Module.IsTorsionBySet.module.congr_simp, Module.IsTorsionBySet.module, Module.quotientAnnihilator, module_finite_of_liesOver, Module.instQuotientIdealSpanSingletonSetSubmoduleHSMulTop",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern quotient modules, quasi-coherent finite presentation or condensed sheaves; none transports intrinsic pro-etale constructibility and the localized M/IM labels"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf of modules over a finite ring whose action factors through a quotient ring is constructible over the quotient with local constant models M modulo I M",
+   "results": "8 hit(s): LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, localCohomology.ringModIdeals, CondensedMod.ofSheafCompHaus, CondensedMod.LocallyConstant.functor, CondensedMod, CondensedMod.ofSheafProfinite, Condensed.finFree",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern quotient modules, quasi-coherent finite presentation or condensed sheaves; none transports intrinsic pro-etale constructibility and the localized M/IM labels"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finite commutative quotient A to B and a B-module sheaf constructible after restricting scalars to A, retain its constructible strata and replace each constant finite module label M by M modulo kernel times M",
+   "results": "8 hit(s): CompHausLike.LocallyConstantModule.functor, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern quotient modules, quasi-coherent finite presentation or condensed sheaves; none transports intrinsic pro-etale constructibility and the localized M/IM labels"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible module sheaf over a finite constant ring whose action factors through A/I is constructible as an A/I module sheaf with constant quotient labels",
+   "results": "{\"t\": \"2026-10-22T11:14:37Z\", \"tool\": \"leanfinder\", \"query\": \"A constructible module sheaf over a finite constant ring whose action factors through A/I is constructible as an A/I module sheaf with constant quotient labels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.isFinitePresentation\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"localCohomology.ringModIdeals\", \"SheafOfModules.IsFinitePresentation\"], \"digest\": \"2142fb0ccd76729b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module quotient actions, finite presentation, or discrete condensed modules; none proves the intrinsic pro-etale quotient-constructibility assertion with unchanged covers."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(quotient|scalar)|locallyConstant.*quotient",
+   "results": "{\"t\": \"2026-10-22T11:15:04Z\", \"tool\": \"grep\", \"query\": \"constructible.*(quotient|scalar)|locallyConstant.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/DiscreteQuotient.lean\"], \"digest\": \"e8bd27180a121093\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module quotient actions, finite presentation, or discrete condensed modules; none proves the intrinsic pro-etale quotient-constructibility assertion with unchanged covers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible sheaf of modules annihilated by an ideal is constructible over the quotient coefficient ring",
+   "results": "{\"t\": \"2026-10-22T11:15:04Z\", \"tool\": \"leansearch\", \"query\": \"A constructible sheaf of modules annihilated by an ideal is constructible over the quotient coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.annihilator_quotient\", \"AlgebraicGeometry.Scheme.Modules\", \"Module.quotientAnnihilator\", \"Module.IsTorsionBySet.module\", \"Submodule.annihilator_quotient\", \"Module.instQuotientIdealSpanSingletonSetSubmoduleHSMulTop\", \"module_finite_of_liesOver\", \"Submodule.instModuleQuotientIdealSubtypeMemTorsionBySetCoe\"], \"digest\": \"f189c62b3749ec5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module quotient actions, finite presentation, or discrete condensed modules; none proves the intrinsic pro-etale quotient-constructibility assertion with unchanged covers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsLocallyConstant\"",
+   "results": "{\"t\": \"2026-10-22T11:15:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"IsLocallyConstant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module quotient actions, finite presentation, or discrete condensed modules; none proves the intrinsic pro-etale quotient-constructibility assertion with unchanged covers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf of modules annihilated by an ideal is locally constant over the quotient ring with the same trivializing cover",
+   "results": "{\"t\": \"2026-10-22T11:15:05Z\", \"tool\": \"leanfinder\", \"query\": \"A locally constant sheaf of modules annihilated by an ideal is locally constant over the quotient ring with the same trivializing cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"CondensedMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier\", \"CondensedMod.LocallyConstant.functorToPresheaves\"], \"digest\": \"d41149f5ab2bcf14\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module quotient actions, finite presentation, or discrete condensed modules; none proves the intrinsic pro-etale quotient-constructibility assertion with unchanged covers."
+  },
+  {
+   "tool": "grep",
+   "query": "def functor|IsFinitePresentation|def module|quotientAnnihilator",
+   "results": "{\"t\": \"2026-10-22T11:15:50Z\", \"tool\": \"grep\", \"query\": \"def functor|IsFinitePresentation|def module|quotientAnnihilator\", \"sub\": \"Condensed/Discrete/Module.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"42\", \"53\", \"79\", \"85\", \"108\"], \"digest\": \"f0540ce9f31680e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module quotient actions, finite presentation, or discrete condensed modules; none proves the intrinsic pro-etale quotient-constructibility assertion with unchanged covers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-exc-explicit-preservation",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "thm-exc-explicit-preservation",
+   "place": "Proof paragraph 2, finite-Tor bounded-constructibility clause: only the change from A-constructible cohomology to B-constructible cohomology via M/IM (returned step 5, middle quotient-label argument)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-exc-finite-quotient-constructible-reduction",
+  "worker": "stage1",
+  "summary": "Six-step quotient-label proof using existing constant exactness and the module-sheafification adjunction. No new nodes. Explicitly checks scalar restriction at stratum pullback, annihilation of the sheaf of IM rather than the abstract module, B-linearity of the quotient chart, unchanged finite stalks, and empty members. Statement unchanged.",
+  "blueprint": "Ancestor thm-exc-explicit-preservation, proof paragraph 2, bounded constructibility after quotient coefficient change: the middle M/IM argument extracted in Q34 returned step 5. Steps 1-2 keep the witnesses; steps 3-5 supply the quotient identification and B-linearity; step 6 assembles intrinsic constructibility.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-proetale-constant-coefficient-comparison",
+    "why": "Canonical constant-ring identifications for the stratum immersion, with no Noetherian or nonemptiness assumption; this is a generic site tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Exactness of constant module sheafification on any localized small site supplies the quotient cokernel identification. The unit does not contain a separate constant-sheaf exactness theorem."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NP-0ec6f9dde",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-0ec6f9dde (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all six steps and every cited statement. It adds no new nodes and leaves the statement unchanged. Sources checked: Stacks sites-modules 093J (l.8198), 093I, 093Q and 03D2, plus the master text of thm-exc-explicit-preservation (proof paragraph 2) and the citer's step 5. Step 1 is correct: c_A and c_B are isomorphisms by lem-pur-proetale-constant-coefficient-comparison (unit sk-def-sf-operations, which the unit cites), and the square with q holds by sheafification uniqueness and the adjunction, so i_A^*Res F = Res i_B^*F. Step 3 is correct: alpha(eta(sum a_k m_k)) = sum q(a_k)alpha(eta m_k) = 0, so the sheaf of IM vanishes; the module IM is not claimed to be zero. Steps 4-5 are correct but had one missing citation (C4). The cited exactness lemma and the cbc adjunction are about modules over the localized site's own constant ring sheaf, while the charts are over the restricted rings A_S|_U and B_S|_U, and the identification was used without a citation. The fix cites the Mathlib leaf lem-pur-ring-presheaf-sheafification-localization in steps 4 and 5 and recomputes proof_deps. Step 6 is correct: restriction of scalars leaves the stalk colimits unchanged and finite, B is finite, the partition is kept, M/IM is finite, and the empty-member remark holds. Small cases checked: I=0, I=A (B=0), Z/4->Z/2, an empty member with IM nonzero, T empty. Not duplicates: lem-weil-pbc-constructible-change-of-ring (etale site), lem-pe-finite-scalar-restriction-constructible (forward direction, Noetherian X). tool_uses: lem-weil-pbc-finite-type-constant-exact is accepted as a generic constant-sheaf exactness tool; the comparison lemma is on route anyway. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteQuotientConstructibleReduction",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_constructible_reduction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleQuotientRestrict",
+   "AlgebraicGeometry.Scheme.proEtaleQuotientLabel",
+   "AlgebraicGeometry.Scheme.finiteQuotient_constructible_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteQuotientConstructibleReduction.lean",
+  "statement": "theorem finiteQuotient_constructible_reduction (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] (I : Ideal A) (F : proEtaleRingModules T (proEtaleConstantRing T (A ⧸ I))) (hF : IsConstructibleProEtaleModuleSheaf T A ((proEtaleQuotientRestrict T A I).obj F)) : @IsConstructibleProEtaleModuleSheaf T (A ⧸ I) _ (Finite.of_surjective (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective) F ∧ ∀ (S : Stratification T), 0 < S.n → (∀ (i : Fin S.n) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ S.domain i), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing (S.domain i) A) (proEtaleConstantModulePullback (S.immersion i) A ((proEtaleQuotientRestrict T A I).obj F)))) → ∀ (J : Fin S.n → Type (u + 1)) (U : ∀ i : Fin S.n, J i → (S.domain i).ProEt) (f : ∀ (i : Fin S.n) (j : J i), U i j ⟶ ProEt.mk (𝟙 (S.domain i))), (∀ i : Fin S.n, Presieve.ofArrows (U i) (f i) ∈ (ProEt.precoverage (S.domain i)).coverings _) → ∀ (M : ∀ (i : Fin S.n) (j : J i), ModuleCat.{u + 1} (ULift.{u + 1, u} A)), (∀ (i : Fin S.n) (j : J i), Finite (M i j)) → (∀ (i : Fin S.n) (j : J i), Nonempty ((proEtaleConstantModulePullback (S.immersion i) A ((proEtaleQuotientRestrict T A I).obj F)).over (U i j) ≅ proEtaleConstantModuleSheafOverOfUniverses (S.domain i) A (U i j) (M i j))) → ∀ (i : Fin S.n) (j : J i), Finite (proEtaleQuotientLabel A I (M i j)) ∧ Nonempty ((proEtaleConstantModulePullback (S.immersion i) (A ⧸ I) F).over (U i j) ≅ proEtaleConstantModuleSheafOverOfUniverses (S.domain i) (A ⧸ I) (U i j) (proEtaleQuotientLabel A I (M i j)))",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96c29a58d",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery after the 9055f4d6 RETURN; both findings fixed. H13: def-weil-proetale-constructible-sheaf record = live Q150 superset byte for byte; only the item node differs from live. H4/H12: duplicate proEtaleQuotientCoefficientMap removed; restriction uses published proEtaleConstantRingMap (Ideal.Quotient.mk I) (same map); owner def-sp-proetale-constant-coefficient-ring-map added to stmt_deps and on base. Clause check redone: T any scheme, A finite (Type u as the dep predicate requires), B = A⧸I literal, canonical restrictScalars, intrinsic predicate in hypothesis and conclusion, Finite (A⧸I) via Finite.of_surjective, any S/covers J:Type(u+1)/finite labels, same S.immersion i and U i j with real M⧸(I•⊤) label and its finiteness. Empty members, I=0, I=A, T empty covered. Statement verbatim; only sorry is the theorem; docstrings carry the six steps. Advisories: OfUniverses vs same-universe constant sheaf (isomorphic at t=u); Stratification/pullback/stalk decls reached through the predicate's module. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261024T190140-L-3963325",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

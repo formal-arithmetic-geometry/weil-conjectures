@@ -1,0 +1,243 @@
+{
+ "id": "lem-trf-residue-injective-finite-free-stage-retractions",
+ "kind": "statement",
+ "title": "Residue-injective finite free maps have eventually split stage lifts",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative local ring. Let $I$ be a small nonempty directed partially ordered set, let $(F_i,t_{ij})_{i\\le j}$ be a system of finite free $R$-modules [def-weil-pbc-free-module], with $t_{ii}=1$ and $t_{jk}t_{ij}=t_{ik}$, and let compatible maps $q_i:F_i\\to N$ exhibit the $R$-module $N$ as its colimit [def-weil-pbc-category-colimit]. Let $P$ be a finite free $R$-module and $v:P\\to N$ an $R$-linear map whose induced quotient map $P/\\mathfrak mP\\to N/\\mathfrak mN$ is injective. Then there exist $i\\in I$ and an $R$-linear map $v_i:P\\to F_i$ such that $q_iv_i=v$ and, for every $j\\ge i$, there exists an $R$-linear map $s_j:F_j\\to P$ with $s_jt_{ij}v_i=1_P$. No compatibility among the $s_j$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FQ, lemma-universally-injective-local, proof: the factorization through a finite free stage, persistence of residue injectivity, and splitting at every later stage (returned steps 4--6)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite basis $(e_a)_{a\\in A}$ of $P$ [def-weil-pbc-free-module]. By clause (1) of [lem-weil-pbc-filtered-colimit-modules-elementwise], choose $i_a$ and $x_a\\in F_{i_a}$ with $q_{i_a}(x_a)=v(e_a)$. Starting from an arbitrary index of the nonempty $I$ and successively taking upper bounds with each $i_a$, choose $i\\ge i_a$ for every $a$. Define $v_i(\\sum_a r_ae_a)=\\sum_a r_at_{i_ai}(x_a)$. Uniqueness of basis coordinates makes this an $R$-linear map, and the cocone identities give $q_iv_i(e_a)=v(e_a)$, hence $q_iv_i=v$. If $A$ is empty, take any $i$ and the zero map.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FQ, lemma-universally-injective-local, proof: factorization through a finite free stage and splitting at every later stage"
+   }
+  },
+  {
+   "text": "Fix any $j\\ge i$ and set $w_j=t_{ij}v_i:P\\to F_j$. The cocone identity $q_jt_{ij}=q_i$ gives $q_jw_j=q_jt_{ij}v_i=q_iv_i=v$. Every linear map sends $\\mathfrak m$ times its source into $\\mathfrak m$ times its target, so this equality descends to $\\bar q_j\\bar w_j=\\bar v$ on the quotients modulo $\\mathfrak m$. If $\\bar w_j(z)=0$, then $\\bar v(z)=0$, hence $z=0$ by the hypothesis. Thus $\\bar w_j$ is injective for this arbitrary $j$; injectivity of $\\bar q_j$ is not required.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FQ, lemma-universally-injective-local, proof: factorization through a finite free stage and splitting at every later stage"
+   }
+  },
+  {
+   "text": "Put $k=R/\\mathfrak m$. By [lem-weil-pbc-local-ring-unit-criterion], every $s\\notin\\mathfrak m$ is a unit. Consequently the prime residue field $\\kappa(\\mathfrak m)=R_{\\mathfrak m}/\\mathfrak mR_{\\mathfrak m}$ is $k$: the maps are $[a/s]\\mapsto\\bar a\\bar s^{-1}$ and $\\bar a\\mapsto[a/1]$, whose composites are identities. Choose finite bases of $P,F_j$. For each coordinate module $R^d$, reduction identifies $R^d/\\mathfrak mR^d$ with $k^d$, since its kernel is exactly the vectors with all coordinates in $\\mathfrak m$. Scalar extension $k\\otimes_R R^d$ identifies with $k^d$ by $c\\otimes(r_a)\\mapsto(c\\bar r_a)_a$, with inverse $(c_a)\\mapsto\\sum_a c_a\\otimes e_a$; the inverse identities follow by expanding $(r_a)=\\sum_a r_ae_a$ and the tensor balancing relation. Both induced maps for $w_j$ are therefore its same reduced matrix. Step 2 supplies the injectivity on residue-field base change required for the finite-free residue criterion in the next step.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E9 (lemma-characterize-local-ring) and 00O0 (lemma-cokernel-flat), finite-free residue-field calculation used in Tag 05FQ"
+   }
+  },
+  {
+   "text": "Apply the injective clause of [lem-pc-finite-free-map-residue-localization-strong] to the matrix of $w_j$ and the prime $\\mathfrak m$. It gives $f\\notin\\mathfrak m$ and a left inverse $r_j$ to $(w_j)_f$. By [lem-weil-pbc-local-ring-unit-criterion], $f$ has an inverse in $R$. Evaluation $a/f^n\\mapsto af^{-n}$ is an inverse to $R\\to R_f$; on a localized module the corresponding maps are $x/f^n\\mapsto f^{-n}x$ and $x\\mapsto x/1$. Denote these isomorphisms by $E_P:P_f\\to P$ and $E_{F_j}:(F_j)_f\\to F_j$. The formula on fractions gives $E_{F_j}(w_j)_f=w_jE_P$. Hence $s_j=E_Pr_jE_{F_j}^{-1}$ is $R$-linear and $s_jw_j=E_Pr_j(w_j)_fE_P^{-1}=1_P$. The choice of $i,v_i$ was fixed in step 1 and $j\\ge i$ was arbitrary, which proves every asserted clause without any compatibility claim for the $s_j$.",
+   "uses": [
+    "lem-pc-finite-free-map-residue-localization-strong",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O0, lemma-cokernel-flat, finite-free unit-minor left inverse, specialized over a local ring; flat.tex Tag 05FQ, lemma-universally-injective-local, splitting sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-pc-finite-free-map-residue-localization-strong"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FQ, lemma-universally-injective-local, finite-free-stage argument; finite-free splitting supplied by algebra.tex Tag 00O0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "split_injective_iff_lTensor_residueField_injective|exists.*[Ll]ift|[Ll]azard",
+   "results": "25 hits; Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean; grep subdirectory Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: the finite-free residue splitting criterion does not provide a common finite stage and all its later retractions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.Free, IsLocalRing",
+   "results": "1 hits; Module.free_of_flat_of_isLocalRing",
+   "date": "2026-10-22",
+   "verdict": "no match: the finite-free residue splitting criterion does not provide a common finite stage and all its later retractions"
+  },
+  {
+   "tool": "grep",
+   "query": "split_injective_iff_lTensor_residueField_injective|[Ll]azard|[Cc]olimit",
+   "results": "2 hits; 33, 334; grep subdirectory Mathlib/RingTheory/LocalRing/Module.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the finite-free residue splitting criterion does not provide a common finite stage and all its later retractions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free module map to a flat module over a local ring with injective reduction has lifts which are split monomorphisms at all later stages of a directed finite free colimit presentation",
+   "results": "8 hits; Module.DirectLimit.lift_injective, Module.free_of_maximalIdeal_rTensor_injective, DirectLimit.Module.lift, LinearMap.split_surjective_of_localization_maximal, Module.Flat.of_forall_exists_factorization, Module.free_of_flat_of_isLocalRing, IsLocalRing.split_injective_iff_lTensor_residueField_injective, Module.Flat.exists_factorization_of_comp_eq_zero_of_free",
+   "date": "2026-10-22",
+   "verdict": "no match: the finite-free residue splitting criterion does not provide a common finite stage and all its later retractions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a commutative local ring a map from a finite free module to a flat module which is injective modulo the maximal ideal lifts to split injections at every sufficiently late stage of a directed finite free presentation",
+   "results": "8 hits; Module.Flat.exists_factorization_of_apply_eq_zero_of_free, IsLocalRing.split_injective_iff_lTensor_residueField_injective, Module.Flat.exists_factorization_of_comp_eq_zero_of_free, Module.free_of_lTensor_residueField_injective, Module.Flat.exists_factorization_of_isFinitelyPresented, Module.IsLocalRing.linearCombination_bijective_of_flat, Module.free_of_maximalIdeal_rTensor_injective, Module.Flat.of_forall_exists_factorization",
+   "date": "2026-10-22",
+   "verdict": "no match: the finite-free residue splitting criterion does not provide a common finite stage and all its later retractions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lazard flat module directed colimit finite free modules finite rank submodule residue field monomorphism eventually split lift local ring",
+   "results": "8 hits; Module.free_of_flat_of_finrank_eq, Module.free_of_flat_of_isLocalRing, Module.IsLocalRing.linearCombination_bijective_of_flat, Module.free_of_lTensor_residueField_injective, Module.nonempty_basis_of_flat_of_finrank_eq, IsLocalRing.split_injective_iff_lTensor_residueField_injective, Module.exists_basis_of_span_of_flat, Module.flat_of_isLocalized_maximal",
+   "date": "2026-10-22",
+   "verdict": "no match: the finite-free residue splitting criterion does not provide a common finite stage and all its later retractions"
+  },
+  {
+   "tool": "grep",
+   "query": "split_injective_iff_lTensor_residueField_injective",
+   "results": "2 hits; Mathlib/RingTheory/LocalRing/Module.lean, Mathlib/RingTheory/LocalRing/Module.lean; grep subdirectory Mathlib/RingTheory/LocalRing",
+   "date": "2026-10-22",
+   "verdict": "no match: the finite-free residue splitting criterion does not provide a common finite stage and all its later retractions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a small nonempty directed system of finite free modules over a local ring with colimit N, a map from a finite free P to N injective modulo maximal ideal lifts to a stage and every later lift has a left inverse",
+   "results": "8 hits; Module.DirectLimit.lift_injective, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.map_injective, Module.DirectLimit.exists_of₂, AdicCompletion.exists_smodEq_pow_add_one_smul, IsAdicComplete.StrictMono.mk_lift, IsAdicComplete.StrictMono.mkQ_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: the finite-free residue splitting criterion does not provide a common finite stage and all its later retractions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a local ring, a map from a finite free module into a directed colimit of finite free modules injective modulo the maximal ideal lifts to one stage with split injections at every later stage",
+   "results": "8 hits: AdicCompletion.map_injective, Module.FinitePresentation.exists_notMem_bijective, Module.DirectLimit.lift_injective, IsLocalRing.split_injective_iff_lTensor_residueField_injective, Module.free_of_lTensor_residueField_injective, injective_of_isLocalized_maximal, Module.free_of_maximalIdeal_rTensor_injective, Submodule.exists_injOn_mkQ_image_span_eq_of_span_eq_map_mkQ_of_le_jacobson_bot. Read the local-ring splitting declaration at Mathlib/RingTheory/LocalRing/Module.lean:334-337; it covers only the stage splitting criterion. The direct-limit and localization declarations do not state the common-stage lift and all later retractions together.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, IsLocalRing",
+   "results": "12 hits: Module.free_of_flat_of_isLocalRing, IsLocalRing.split_injective_iff_lTensor_residueField_injective, Module.free_of_lTensor_residueField_injective, Module.free_of_maximalIdeal_rTensor_injective, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.iff_injective_lTensor_residueField, IsLocalRing.finrank_quotient_map. Read the local-ring splitting declaration at Mathlib/RingTheory/LocalRing/Module.lean:334-337; it covers only the stage splitting criterion. The direct-limit and localization declarations do not state the common-stage lift and all later retractions together.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "split_injective_iff_lTensor_residueField_injective|isColimit_exists_rep|exists_lift_pi",
+   "results": "2 hits: Mathlib/RingTheory/LocalRing/Module.lean, Mathlib/RingTheory/LocalRing/Module.lean; grep subdirectory RingTheory/LocalRing. Read the local-ring splitting declaration at Mathlib/RingTheory/LocalRing/Module.lean:334-337; it covers only the stage splitting criterion. The direct-limit and localization declarations do not state the common-stage lift and all later retractions together.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free map into a directed colimit of free modules over a local ring with injective reduction modulo the maximal ideal factors at a stage and admits left inverses at all later stages",
+   "results": "8 hits: Module.free_of_maximalIdeal_rTensor_injective, Module.free_of_flat_of_isLocalRing, ModuleCat.directLimitIsColimit, IsLocalRing.split_injective_iff_lTensor_residueField_injective, ModuleCat.directLimitIsColimit_desc, ModuleCat.instProjectiveObjFree, DirectLimit.Module.of, DirectLimit.Module.lift. Read the local-ring splitting declaration at Mathlib/RingTheory/LocalRing/Module.lean:334-337; it covers only the stage splitting criterion. The direct-limit and localization declarations do not state the common-stage lift and all later retractions together.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map from a finite free module to a filtered colimit factors through a finite stage, where residue injectivity implies splitting over a local ring",
+   "results": "8 hits: Module.FinitePresentation.exists_notMem_bijective, LinearMap.split_surjective_of_localization_maximal, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, Module.Flat.exists_factorization_of_isFinitelyPresented, exists_bijective_map_powers, Module.FinitePresentation.exists_lift_of_isLocalizedModule, ModuleCat.FilteredColimits.M.mk_surjective, Module.Flat.exists_factorization_of_comp_eq_zero_of_free. Read the local-ring splitting declaration at Mathlib/RingTheory/LocalRing/Module.lean:334-337; it covers only the stage splitting criterion. The direct-limit and localization declarations do not state the common-stage lift and all later retractions together.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-universal-injective-residue",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), 'Hence by Lemmas 05FQ and 05FT the map S^{⊕r}→N_p is R-universally injective' (Tag 05FQ). Supporting proof of Tag 05FQ: the factorization through a finite free stage, persistence of residue injectivity, and splitting at every later stage (returned steps 4--6)",
+   "via": [
+    "lem-trf-local-universal-injective-residue",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-residue-injective-finite-free-stage-retractions",
+  "worker": "stage1",
+  "summary": "Expanded the finite-free factorization, residue injectivity at every later stage, and local left-inverse construction in Stacks 05FQ. Reused the existing elementwise filtered-colimit and stronger finite-free principal-localization splitting nodes; no new nodes and no statement changes. Wrote out quotient/base-change coordinates and the evaluation of the localized retraction at a unit.",
+  "blueprint": "Realizes the inherited supporting Tag 05FQ argument below lem-trf-local-term-locality, via lem-trf-local-universal-injective-residue: factorization through a finite free stage, persistence of residue injectivity, and splitting at every later stage (returned steps 4--6). The current latest blueprint no longer spells out the historical semistable-alteration route; this split stays on the assigned inherited algebraic auxiliary item.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-free-map-residue-localization-strong",
+    "why": "Generic finite-free residue-field splitting tool: its principal-localization left inverse evaluates back over the local ring because the localization element is a unit. The unit has no corresponding algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-free-map-residue-localization-strong"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-5394f68ca",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-5394f68ca (reviewer sub-agent of L); spot-checked: Read in full against Stacks flat.tex 05FQ (lemma-universally-injective-local): the item is that proof's 'factors through N_i / residue injectivity stays at every later i' / so M→N_{i'} splits' part. Statement and stmt_deps are unchanged from live, which is still unsplit with an empty proof. There is no repair note and no parallel split. No new nodes; proof_deps equals the union of the steps' uses; no SGA. Step 1 uses clause (1) of 00D6 elementwise; a nonempty directed poset is filtered, as the colimit node says; v_i is defined on a basis; the empty case is covered. Step 2's kernel argument is right, but its equation 'q_jw_j=q_it_{ii}v_i' hid the cocone identity it uses. FIX: rewritten as 'q_jt_{ij}=q_i gives q_jw_j=q_jt_{ij}v_i=q_iv_i=v'. Step 3 identifies kappa(m)=R/m (00E9) and k⊗R^d with R^d/mR^d, so the quotient map is the residue base change that step 4 needs; marking it elementary is fine. Step 4 uses the injective clause of lem-pc-finite-free-map-residue-localization-strong, whose statement gives the left inverse after inverting some f not in m. Since f is a unit, E_F(w_j)_f=w_jE_P, and I checked s_jw_j=1. The quantifiers match those the parent feeds to free-map-colimit-split-lifts-tensor-injective. The declared tool_use of this off-unit 00O0 node is accepted: 05FQ names no lemma for the splitting, and the in-unit residue-simultaneous-section-lift does not state a left inverse. Edge cases checked: P=0, a field, a nonunit multiplication (excluded), rank drop (excluded). No duplicate found among the 05FQ-chain and residue split/retraction nodes; Mathlib's IsLocalRing.split_injective_iff_lTensor_residueField_injective covers only one map.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ResidueInjectiveFiniteFreeStageRetractions",
+  "declaration": "IsLocalRing.exists_finite_free_stage_retractions_of_residue_injective",
+  "file": "lean/Sheaf/RingTheory/ResidueInjectiveFiniteFreeStageRetractions.lean",
+  "statement": "theorem exists_finite_free_stage_retractions_of_residue_injective {R : Type u} [CommRing R] [IsLocalRing R] {I : Type v} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{v} R) [∀ i : I, Module.Finite R (F.obj i)] [∀ i : I, Module.Free R (F.obj i)] (c : Cocone F) (hc : IsColimit c) (P : Type w) [AddCommGroup P] [Module R P] [Module.Finite R P] [Module.Free R P] (v : P →ₗ[R] c.pt) (hv : Function.Injective (v.reduceModIdeal (maximalIdeal R))) : ∃ (i : I) (vᵢ : P →ₗ[R] F.obj i), (c.ι.app i).hom.comp vᵢ = v ∧ ∀ (j : I) (hij : i ≤ j), ∃ sⱼ : F.obj j →ₗ[R] P, sⱼ.comp ((F.map (homOfLE hij)).hom.comp vᵢ) = LinearMap.id",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba2d08e00",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Node unchanged except lean. Every clause matches: local ring, small nonempty directed poset as a functor into ModuleCat.{v}, finite free stages, given cocone with IsColimit, finite free P in universe w, and the residue hypothesis via Mathlib reduceModIdeal (definition read, it is exactly P/mP→N/mN). The conclusion is one stage and lift with a retraction at every j≥i, no compatibility. Universes explicit, no extra assumptions. Edge cases P=0, field, N=0 fine. Docstrings carry the source place, the blueprint id and the 4 proof steps; sorry only. Upstream finiteFreeMap_residue_localization_strong exists with the needed injective clause. No duplicate found. Report has Worker report and Second reading sections. No files changed, so no compile."
+ }
+}

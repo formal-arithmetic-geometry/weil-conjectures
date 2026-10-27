@@ -1,0 +1,293 @@
+{
+ "id": "lem-trf-ringed-tor-amplitude-stalk-test",
+ "kind": "statement",
+ "title": "Ringed-space Tor amplitude stalk criterion and quasi-compact uniform finite bounds",
+ "statement": "Let $(Z,\\mathcal B)$ be a ringed space, meaning a topological space with a sheaf of commutative rings on its site of opens, and let $K^\\bullet$ be an arbitrary cochain complex of $\\mathcal B$-module sheaves [def-weil-sheaf-of-modules-category]. Work in unbounded derived categories, writing $Q$ for localization at quasi-isomorphisms [def-weil-abstract-derived-category], and compute sheaf derived-tensor vanishing using K-flat resolutions [def-trf-ringed-complex-derived-tensor-vanishing]; module derived tensors are likewise computed by K-flat resolutions [def-pc-module-kflat-complex]. For $z\\in Z$, let $K^\\bullet_z$ be the actual termwise module stalk complex over $\\mathcal B_z$ [def-pc-module-stalk-functor]. For any integers $a\\le b$, the following are equivalent: (1) $H^i(QK^\\bullet\\otimes^{\\mathbf L}_{\\mathcal B}\\mathcal F)=0$ for every $\\mathcal B$-module sheaf $\\mathcal F$ in degree zero and every $i\\notin[a,b]$; (2) $H^i(Q(K^\\bullet_z)\\otimes^{\\mathbf L}_{\\mathcal B_z}L)=0$ for every $z\\in Z$, every $\\mathcal B_z$-module $L$ in degree zero and every $i\\notin[a,b]$. The ringed space need not be a scheme or locally ringed, the test sheaves need not be quasi-coherent, and no boundedness or quasi-compactness is assumed. If $Z$ is quasi-compact, meaning that every open cover of $Z$ has a finite subcover, the following are also equivalent: (3) every $z\\in Z$ has an open neighbourhood $W$ and integers $a_W\\le b_W$ for which condition (1), with $K^\\bullet|_W$ and $\\mathcal B|_W$ in place of $K^\\bullet$ and $\\mathcal B$, holds on $W$; (4) condition (1) holds on all of $Z$ for one pair of integers $a\\le b$. No local-ring or quasi-separatedness assumption is imposed. For $Z=\\varnothing$, (4) holds with $[a,b]=[0,0]$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 09U9, lemma-tor-amplitude-stalk, both implications on arbitrary ringed spaces and the finite-subcover uniform-bound consequence on a quasi-compact underlying space."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-ringed-complex-derived-tensor-vanishing",
+  "def-pc-module-kflat-complex",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Prepare a comparison valid for any K-flat resolution $q:P^\\bullet\\to K^\\bullet$. Such resolutions exist by [lem-pc-kflat-resolution], applied to the site of opens of $Z$. By the kernel, image and cokernel clauses of [lem-weil-pbc-module-stalk-exact], taking stalks commutes with cohomology, so $q_z:P_z^\\bullet\\to K_z^\\bullet$ is a quasi-isomorphism. Its image under $Q$ is invertible by [def-weil-abstract-derived-category]. For any module sheaf $\\mathcal F$ and integer $i$, apply [lem-pc-stalk-kflat-tensor-homology] with $A=\\mathcal B_z$ and $e=\\mathrm{id}$. It identifies the underlying abelian group of $(H^i(\\operatorname{Tot}(P^\\bullet\\otimes\\mathcal F[0])))_z$ with that of $H^i(Q(P_z^\\bullet)\\otimes^{\\mathbf L}_{\\mathcal B_z}\\mathcal F_z)$. Applying the derived tensor functor to the invertible morphism $Q(q_z)$, then $H^i$, replaces $Q(P_z^\\bullet)$ here by $Q(K_z^\\bullet)$. Thus the two groups vanish together. This comparison holds for every resolution, test sheaf and degree; no boundedness has entered.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-abstract-derived-category",
+    "lem-pc-stalk-kflat-tensor-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U9, lemma-tor-amplitude-stalk, proof; Tag 06YB, lemma-check-K-flat-stalks, proof"
+   }
+  },
+  {
+   "text": "Assume (1). Fix $z$, an arbitrary $\\mathcal B_z$-module $L$, and $i\\notin[a,b]$. Construct $\\mathcal F=i_{z,*}L$ by [def-pc-ringed-module-skyscraper]. The degree-zero case of [lem-pc-skyscraper-complex-stalk-recovery] gives $\\mathcal F_z\\cong L$. By (1) and [def-trf-ringed-complex-derived-tensor-vanishing], choose a K-flat resolution $P^\\bullet\\to K^\\bullet$ for which $H^i(\\operatorname{Tot}(P^\\bullet\\otimes\\mathcal F[0]))=0$. Its stalk is zero, so Step 1 and the isomorphism $\\mathcal F_z\\cong L$ give $H^i(Q(K_z^\\bullet)\\otimes^{\\mathbf L}_{\\mathcal B_z}L)=0$. This proves (2) for every stalk module, without any requirement that $z$ be closed.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper",
+    "lem-pc-skyscraper-complex-stalk-recovery",
+    "def-trf-ringed-complex-derived-tensor-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U9, lemma-tor-amplitude-stalk, proof; Tag 06YB, lemma-check-K-flat-stalks, proof"
+   }
+  },
+  {
+   "text": "Assume (2), and choose one K-flat resolution $P^\\bullet\\to K^\\bullet$ as in Step 1. For any module sheaf $\\mathcal F$ and $i\\notin[a,b]$, (2), applied at $z$ to the actual module $\\mathcal F_z$, makes the right side of the Step 1 comparison zero for every $z$. Consequently every stalk of $\\mathcal H=H^i(\\operatorname{Tot}(P^\\bullet\\otimes\\mathcal F[0]))$ is zero. Apply clause (5) of [lem-weil-pbc-module-stalk-exact] to $0\\to\\mathcal H\\to0$: it is exact at $\\mathcal H$ precisely when $\\mathcal H=0$, and all its stalk complexes are exact. Hence $\\mathcal H=0$. The chosen resolution therefore witnesses (1) under [def-trf-ringed-complex-derived-tensor-vanishing]. This proves the fixed-interval equivalence on any ringed space, including every open subspace.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-trf-ringed-complex-derived-tensor-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U9, lemma-tor-amplitude-stalk, proof; Tag 06YB, lemma-check-K-flat-stalks, proof"
+   }
+  },
+  {
+   "text": "For an open $W\\subseteq Z$ and $z\\in W$, identify $(\\mathcal B|_W)_z$ with $\\mathcal B_z$ and $(K^\\bullet|_W)_z$ with $K_z^\\bullet$ using the germ description of [def-pc-module-stalk-functor]. Explicitly, send a representative on an open neighbourhood $V\\subseteq W$ to the same representative on $V\\subseteq Z$; the inverse restricts a representative on $U\\subseteq Z$ to $U\\cap W$. These maps are inverse because equality of germs is equality on a smaller neighbourhood. They respect ring operations, scalar action and each differential, since all use the same restrictions. Under these identifications the module derived tensor tests in (2) are the same tests for $Z$ and $W$. The equivalence proved in Steps 2--3 therefore shows that bounds on $W$ give those bounds for every $K_z^\\bullet$, $z\\in W$, and that bounds for all stalks on $Z$ give the same bounds on every $W$.",
+   "uses": [
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0098, lemma-stalk-pullback-modules, specialized to open restriction; explicit germ argument"
+   }
+  },
+  {
+   "text": "Assume $Z$ is nonempty and quasi-compact and (3) holds. Choose the indicated neighbourhoods and bounds, then a finite subcover $W_1,\\ldots,W_r$, with $r\\geq1$. Put $a=\\min_j a_{W_j}$ and $b=\\max_j b_{W_j}$. For any $z$, choose $j$ with $z\\in W_j$. Step 4 and the implication (1)$\\Rightarrow$(2) on $W_j$ give the stalk tensor vanishing outside $[a_{W_j},b_{W_j}]$. If $i<a$ then $i<a_{W_j}$, and if $i>b$ then $i>b_{W_j}$. Thus all stalks have the common bounds $[a,b]$; moreover $a\\leq a_{W_j}\\leq b_{W_j}\\leq b$. The implication (2)$\\Rightarrow$(1) on $Z$ gives (4). This uses only a finite subcover of the neighbourhoods supplied in (3), not a claim that pointwise finite bounds automatically extend to neighbourhoods.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U9, lemma-tor-amplitude-stalk; elementary finite-subcover consequence"
+   }
+  },
+  {
+   "text": "Conversely, if (4) holds, use $W=Z$ at every point, with its one global pair of bounds; this proves (3). If $Z=\\varnothing$, condition (2) is vacuous for $[0,0]$, and Steps 2--3 imply (1) with those bounds, hence (4); (3) is vacuous as well. These arguments establish (3)$\\Leftrightarrow$(4), while the fixed-interval equivalence (1)$\\Leftrightarrow$(2) was proved without quasi-compactness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U9, lemma-tor-amplitude-stalk; empty-space and neighbourhood consequences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-weil-abstract-derived-category",
+  "lem-pc-stalk-kflat-tensor-homology",
+  "def-pc-ringed-module-skyscraper",
+  "lem-pc-skyscraper-complex-stalk-recovery",
+  "def-trf-ringed-complex-derived-tensor-vanishing",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 09U9 (lemma-tor-amplitude-stalk), with its forward implication realized by the skyscraper argument of Tag 06YB; elementary finite-subcover consequence written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|tor.amplitude|tor.dimension",
+   "results": "{\"t\": \"2026-10-22T06:43:34Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|TorAmplitude|tor.amplitude|tor.dimension\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived t-structure bounds and projective Tor vanishing do not quantify over all coefficient modules at every stalk and do not prove the equivalence with tensor tests by arbitrary sheaves on a ringed space."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"torAmplitude\"",
+   "results": "{\"t\": \"2026-10-22T06:43:35Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"torAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived t-structure bounds and projective Tor vanishing do not quantify over all coefficient modules at every stalk and do not prove the equivalence with tensor tests by arbitrary sheaves on a ringed space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude of a complex on a ringed space is detected on all stalk modules",
+   "results": "{\"t\": \"2026-10-22T06:43:35Z\", \"tool\": \"leansearch\", \"query\": \"Tor amplitude of a complex on a ringed space is detected on all stalk modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"AlgebraicGeometry.LocallyRingedSpace\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"Module.rankAtStalk_tensorProduct\", \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalRing\", \"ModuleCat.Tilde.toOpen_germ_apply\"], \"digest\": \"e033a1adb8862654\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived t-structure bounds and projective Tor vanishing do not quantify over all coefficient modules at every stalk and do not prove the equivalence with tensor tests by arbitrary sheaves on a ringed space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves on an arbitrary ringed space has Tor amplitude in an interval if and only if every stalk complex has that Tor amplitude over its stalk ring",
+   "results": "{\"t\": \"2026-10-22T06:43:46Z\", \"tool\": \"leanfinder\", \"query\": \"A complex of sheaves on an arbitrary ringed space has Tor amplitude in an interval if and only if every stalk complex has that Tor amplitude over its stalk ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.IsGE\"], \"digest\": \"a1f17fa5514ac73b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived t-structure bounds and projective Tor vanishing do not quantify over all coefficient modules at every stalk and do not prove the equivalence with tensor tests by arbitrary sheaves on a ringed space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor vanishes outside fixed bounds against every sheaf of modules if and only if stalkwise derived tensor vanishes against every module over the local stalk ring",
+   "results": "{\"t\": \"2026-10-22T06:43:46Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor vanishes outside fixed bounds against every sheaf of modules if and only if stalkwise derived tensor vanishes against every module over the local stalk ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"Rep.isZero_Tor_succ_of_projective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\"], \"digest\": \"f2326ff55fc81f30\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived t-structure bounds and projective Tor vanishing do not quantify over all coefficient modules at every stalk and do not prove the equivalence with tensor tests by arbitrary sheaves on a ringed space."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|tor.amplitude|tor.dimension",
+   "results": "{\"t\": \"2026-10-22T06:43:56Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|TorAmplitude|tor.amplitude|tor.dimension\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned derived t-structure bounds and projective Tor vanishing do not quantify over all coefficient modules at every stalk and do not prove the equivalence with tensor tests by arbitrary sheaves on a ringed space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tor dimension locally on a quasi compact arbitrary ringed space implies one global finite Tor amplitude interval",
+   "results": "{\"t\": \"2026-10-22T06:47:28Z\", \"tool\": \"leansearch\", \"query\": \"Finite Tor dimension locally on a quasi compact arbitrary ringed space implies one global finite Tor amplitude interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.of_localizationSpan'\", \"RingHom.finiteType_ofLocalizationSpan\", \"RingHom.QuasiFinite.propertyIsLocal\", \"RingHom.finite_ofLocalizationSpan\", \"RingHom.finiteType_isLocal\", \"Module.Finite.of_localizationSpan_finite\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\"], \"digest\": \"389ffb319082b7ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local finite generation, finite-type ring maps and quasi-compact scheme restriction lemmas do not prove uniform finite Tor bounds for arbitrary ringed-space complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite Tor dimension is uniformly bounded on a quasi compact ringed topological space by a finite subcover of Tor amplitude neighborhoods",
+   "results": "{\"t\": \"2026-10-22T06:47:38Z\", \"tool\": \"leanfinder\", \"query\": \"Local finite Tor dimension is uniformly bounded on a quasi compact ringed topological space by a finite subcover of Tor amplitude neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\"], \"digest\": \"c8ae9ae5629a98b7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local finite generation, finite-type ring maps and quasi-compact scheme restriction lemmas do not prove uniform finite Tor bounds for arbitrary ringed-space complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|tor.amplitude|tor.dimension",
+   "results": "{\"t\": \"2026-10-23T14:13:11Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|TorAmplitude|tor.amplitude|tor.dimension\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern cohomological support bounds, ordinary module tensors, stalks on affine schemes or local finite generation; none gives the arbitrary-ringed-space Tor-amplitude equivalence or its quasi-compact uniform-bound consequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor vanishing against arbitrary sheaves of modules is equivalent to vanishing against all stalk modules on a ringed space",
+   "results": "{\"t\": \"2026-10-23T14:13:11Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor vanishing against arbitrary sheaves of modules is equivalent to vanishing against all stalk modules on a ringed space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.forall_vanishesTrivially_iff_forall_rTensor_injective\", \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective\", \"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.stalkIso_hom\", \"TensorProduct.sum_tmul_eq_zero_of_vanishesTrivially\", \"TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero\", \"ModuleCat.Tilde.stalkIso\"], \"digest\": \"9b9e377ce07618f8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern cohomological support bounds, ordinary module tensors, stalks on affine schemes or local finite generation; none gives the arbitrary-ringed-space Tor-amplitude equivalence or its quasi-compact uniform-bound consequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"torAmplitude\"",
+   "results": "{\"t\": \"2026-10-23T14:13:11Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"torAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern cohomological support bounds, ordinary module tensors, stalks on affine schemes or local finite generation; none gives the arbitrary-ringed-space Tor-amplitude equivalence or its quasi-compact uniform-bound consequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves on an arbitrary ringed space has Tor amplitude in a fixed interval if and only if every stalk complex has this amplitude over its stalk ring",
+   "results": "{\"t\": \"2026-10-23T14:13:13Z\", \"tool\": \"leanfinder\", \"query\": \"A complex of sheaves on an arbitrary ringed space has Tor amplitude in a fixed interval if and only if every stalk complex has this amplitude over its stalk ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_iff\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.IsGE\"], \"digest\": \"cb31e02e466e7efb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern cohomological support bounds, ordinary module tensors, stalks on affine schemes or local finite generation; none gives the arbitrary-ringed-space Tor-amplitude equivalence or its quasi-compact uniform-bound consequence."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|tor.amplitude|tor.dimension",
+   "results": "{\"t\": \"2026-10-23T14:13:33Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|TorAmplitude|tor.amplitude|tor.dimension\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern cohomological support bounds, ordinary module tensors, stalks on affine schemes or local finite generation; none gives the arbitrary-ringed-space Tor-amplitude equivalence or its quasi-compact uniform-bound consequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite Tor dimension on a quasi compact ringed space yields global uniform finite derived tensor cohomology bounds",
+   "results": "{\"t\": \"2026-10-23T14:13:42Z\", \"tool\": \"leanfinder\", \"query\": \"Local finite Tor dimension on a quasi compact ringed space yields global uniform finite derived tensor cohomology bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"0acc1e3bb6c32884\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern cohomological support bounds, ordinary module tensors, stalks on affine schemes or local finite generation; none gives the arbitrary-ringed-space Tor-amplitude equivalence or its quasi-compact uniform-bound consequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-relative-tor-amplitude-criterion",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Affine comparison for a given coherent relative dualizing pair. Relative Tor amplitude in the affine reduction, using the generic affine relative-Tor criterion. Re-split argument: Ringed-space stalk test of Tag 09U9, used for the relative affine criterion and on every open neighbourhood (former Steps 2 and 5). Includes the open-stalk restriction identification and finite-subcover uniform bound of former Step 5.",
+   "via": [
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-ringed-tor-amplitude-stalk-test",
+  "worker": "stage1",
+  "summary": "Proved the two fixed-interval implications using existing ringed-space K-flat resolution, stalk tensor homology, exactness and skyscraper-recovery nodes; wrote the open germ comparison, finite-subcover min/max bounds, converse and empty-space case explicitly. No statement change and no new nodes. Searched current project Lean, the entire DAG/blueprint and Mathlib; the existing scheme and etale results do not attach the arbitrary-ringed-space statement.",
+  "blueprint": "Auxiliary ringed-space Tor-amplitude input along the inherited semistable-modification / relative-duality chain below lem-trf-local-term-locality, proof clauses (1)--(2); realizes the former affine-relative-Tor criterion Steps 2 and 5 named in blueprint.from.place. Latest blueprint checked: it does not itself state this auxiliary criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of unbounded K-flat resolutions on the site of opens; the trace-formula unit supplies no such homological algebra tool."
+   },
+   {
+    "node": "lem-pc-stalk-kflat-tensor-homology",
+    "why": "Generic ringed-space K-flat tensor cohomology comparison at an actual stalk, with the identity stalk ring isomorphism; this is not a replacement of any unit step."
+   },
+   {
+    "node": "lem-pc-skyscraper-complex-stalk-recovery",
+    "why": "Generic stalk recovery for a degree-zero skyscraper realizes each arbitrary stalk module as a test sheaf; no trace-formula unit lemma states this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-stalk-kflat-tensor-homology",
+  "lem-pc-skyscraper-complex-stalk-recovery"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-f1a9bd600",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-f1a9bd600 (reviewer sub-agent of L); spot-checked: I read the item and all ten cited nodes in full; there are no new nodes. In live and side-live the item is still unsplit with an identical statement and no repair note, so the delivery is not superseded and the re-split rules do not apply. I read Stacks Tag 09U9 (lemma-tor-amplitude-stalk, cohomology.tex 12411-12444), Tag 06YB (lemma-check-K-flat-stalks, 5873-5895) and Tag 0098, and confirmed each tag against its label in the tags file. Clauses (1)⇔(2) match 09U9 for an arbitrary ringed space with no boundedness hypothesis. Step 1 is sound: the K-flat resolution exists on the site of opens; clauses 2-4 of lem-weil-pbc-module-stalk-exact (which covers ringed spaces) make q_z a quasi-isomorphism; lem-pc-stalk-kflat-tensor-homology with A=B_z and e=id gives the per-degree group comparison; replacing Q(P_z) by Q(K_z) only applies a functor to an isomorphism. Step 2 uses the 06YB skyscraper argument with degree-zero stalk recovery, which works at non-closed points. Step 3 uses clause 5 on 0→H→0 and the existential vanishing definition. Steps 4-6 are correctly marked elementary: the open-restriction germ identification, the finite subcover with min/max bounds (inequalities checked), and the cases W=Z and the empty space. The parent lem-trf-affine-relative-tor-amplitude-criterion uses (1)⇔(2) and (3)⇔(4) as stated, and applies them to (U, f^{-1}O_V), so the general ringed-space form is needed. Candidate duplicates are not the same statement: lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test (étale site), lem-pc-quasi-compact-finite-tor-dimension (schemes with O_X only), lem-pc-tor-amplitude-open-local and lem-sf-etale-stalk-tor-test. Every cited unit (picard-semicon, picard-duality, p1) is on the transitive route of sk-i-curve-zero, so the three declared tool_uses are acceptable. No SGA is used. Advisory only: open restriction K|_W has no definition node and is written inline. review_split.py reports the cited ids as missing because it does not follow the chapter symlinks; I checked that every cited id exists."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedTorAmplitudeStalkTest",
+  "declaration": "AlgebraicGeometry.RingedSpace.torAmplitude_iff_stalks",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.torAmplitude_iff_stalks",
+   "AlgebraicGeometry.RingedSpace.locallyFiniteTorAmplitude_iff_uniform",
+   "AlgebraicGeometry.RingedSpace.torAmplitude_zero_zero_of_isEmpty"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedTorAmplitudeStalkTest.lean",
+  "statement": "theorem torAmplitude_iff_stalks (Z : RingedSpace.{u}) [∀ z : Z, HasDerivedCategory.{v} (ModuleCat.{u} (Z.presheaf.stalk z))] (K : CochainComplex (Modules Z) ℤ) (a b : ℤ) (hab : a ≤ b) : (∀ (F : Modules Z) (i : ℤ), i < a ∨ b < i → CochainComplex.sheafDerivedTensorVanishes Z.sheaf K F i) ↔ ∀ (z : Z) (L : ModuleCat.{u} (Z.presheaf.stalk z)) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} (Z.presheaf.stalk z)) i).obj (DerivedCategory.Q.obj (((moduleStalkFunctor Z z).mapHomologicalComplex (.up ℤ)).obj K) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} (Z.presheaf.stalk z)) 0).obj L))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ad90fe4a",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read item node (only lean added vs live; still split, no Lean live), module (3 sorry theorems), the stmt_dep declarations sheafDerivedTensorVanishes, Modules and moduleStalkFunctor, moduleRings, the K-flat derived monoidal structure on DerivedCategory (ModuleCat stalk), Mathlib overFunctor (= pushforward 𝟙, the ordinary restriction), and the proof tool stalk_kFlat_tensor_homology_iso (same derived tensor shape). (1)⇔(2) arbitrary RingedSpace, unbounded K, a≤b, all F, all z/L, i∉[a,b]; (3)⇔(4) under CompactSpace with W-dependent bounds on (moduleRings Z).over W; empty-space [0,0] clause. HasDerivedCategory.{v} is only the localization choice. Universes consistent (Opens Z small, max u u = u). No extra hypotheses, no defs, sorry only, docstrings with source/blueprint/steps, lean.statement verbatim, imports used or proof_dep plain imports. No duplicate: torAmplitude_of_open_neighbourhoods is scheme-only. Advisory: open restriction has no DAG def node (Mathlib overFunctor used). No compile: no file changed."
+ }
+}

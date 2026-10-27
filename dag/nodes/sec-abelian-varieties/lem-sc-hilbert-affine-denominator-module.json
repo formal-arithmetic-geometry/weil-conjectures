@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "The set I is closed under addition and under multiplication by arbitrary elements of A: if x(a/b) and y(a/b) lie in A, then (x+y)(a/b) lies in A, and for r in A one has (rx)(a/b)=r(x(a/b)). Thus I is an ideal. Since A is Noetherian, every ideal is finitely generated.",
+   "text": "Since A embeds in its total quotient ring Q, the equation c=(a/b)x in Q is equivalent to bc=ax in A: multiply by b, using that its image is a unit. Define I as the inverse image under multiplication by a of the range of multiplication by b, and J as the inverse image under multiplication by b of the range of multiplication by a. These are actual ideals, with x in I iff there exists c with bc=ax, and c in J iff there exists x in I with bc=ax. Thus they have exactly the required denominator membership descriptions. I is finitely generated because A is Noetherian.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -33,7 +33,7 @@
    }
   },
   {
-   "text": "A non-zero-divisor c of A lies in no minimal prime of A by [lem-pc-minimal-prime-avoids-nonzerodivisor]; since every associated prime of M is a minimal prime of A, c lies in no associated prime of M, so by [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes] c is not a zerodivisor on M. Applied to c = a and c = b, a and b act injectively on M, and hence the canonical map M to M_b is injective. For x in I, the scalar (a/b)x belongs to A by definition of I, so multiplication by a/b sends IM into M inside M_b.",
+   "text": "A non-zero-divisor c of A lies in no minimal prime by [lem-pc-minimal-prime-avoids-nonzerodivisor]. The hypothesis on associated primes therefore shows that c lies in no associated prime of M. Using the equivalent regular-element form biUnion_associatedPrimes_eq_compl_regular of [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes], multiplication by c is injective on M. Apply this to a and b. Every power of b also acts injectively, so IsLocalizedModule.injective_iff_isRegular gives injectivity of M to M_b.",
    "uses": [
     "lem-pc-minimal-prime-avoids-nonzerodivisor",
     "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes"
@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "Multiplication gives the first A-linear map IM to M. The preceding localization construction gives the second A-linear map by sending x m to (a/b)(x m); it is injective because a acts injectively on M (step 2) and M embeds in M_b.",
+   "text": "Put N=IM and B=(multiplication by b on M). For x in I choose c with bc=ax. Then a(xm)=b(cm) lies in range(B). Induction over the sums of generators xm of IM proves aN is contained in range(B). The inverse of the injective linear map B onto its range, composed with multiplication by a on N, gives an A-linear map f:N to M with bf(z)=az. This is the unique division map of the source, since b is injective. If f(z)=f(w), multiply by b and cancel the injective action of a to deduce z=w. The first map is the submodule inclusion and is injective.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "The cokernel of the first map is M/IM. Every element of I kills this quotient because i m is in IM for i in I and m in M, so it is annihilated by I.",
+   "text": "For i in I and m in M, im belongs to IM, hence is in the range of its inclusion N to M. The annihilator-of-quotient criterion Submodule.annihilator_quotient therefore gives I contained in the annihilator of the first cokernel.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "The cokernel of the second map is M/s(IM). For i in I and m in M, the scalar (a/b)i belongs to A by the definition of I, and its product with the class of m is the class of s(i m), which is zero in this quotient. Hence the quotient is annihilated by the submodule (a/b)I of A.",
+   "text": "If c is in J, choose x in I with bc=ax. For every m in M, injectivity of b and the defining equation of f give f(xm)=cm: both sides become axm after multiplication by b. Thus cm lies in range(f). The same annihilator-of-quotient criterion gives J contained in the annihilator of the second cokernel.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -176,5 +176,26 @@
    "def-weil-pbc-module-finite-type-presentation"
   ]
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261023T124305-L-1362091",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

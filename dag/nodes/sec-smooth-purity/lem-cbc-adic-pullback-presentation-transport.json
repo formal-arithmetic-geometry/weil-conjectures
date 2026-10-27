@@ -22,14 +22,16 @@
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification",
   "lemma-weil-pbc-completed-pullback-reduction",
-  "lem-pur-site-restriction-module-adjunction-exact"
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-adic-pullback-presentation-models"
  ],
  "proof": [
   {
    "text": "The completed coefficient projections are jointly monic, so both presentations equal the published map. For finite quotient naturality, pass through the inverse-image/direct-image adjunction and sheafification adjunction: naturality of toSheafify on the constant presheaf gives the square. This also includes identity quotient maps.",
    "uses": [
     "def-weil-pbc-adic-coefficient-datum",
-    "prop-weil-pbc-proetale-constant-ring-map"
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-cbc-adic-pullback-presentation-models"
    ],
    "elementary": false,
    "source": {
@@ -42,7 +44,8 @@
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-completed-pullback"
+    "def-weil-pbc-completed-pullback",
+    "lem-cbc-adic-pullback-presentation-models"
    ],
    "elementary": true,
    "source": {
@@ -53,7 +56,8 @@
   {
    "text": "Transport the published constant comparison along the unique comparisons s:L→L₀ and t:T→T₀. The complex counit formula commutes with s and t. Naturality of t at the exact constant-functor comparison and cancellation of the isomorphisms identify the generalized normalization with the published one; the published unique normalization therefore gives both existence and uniqueness.",
    "uses": [
-    "def-weil-pbc-completed-pullback"
+    "def-weil-pbc-completed-pullback",
+    "lem-cbc-adic-pullback-presentation-models"
    ],
    "elementary": true,
    "source": {
@@ -68,7 +72,8 @@
     "lem-pc-kflat-resolution",
     "lem-weil-pbc-diagram-kflat-replacements",
     "lem-weil-pbc-reduction-pullback-derived-tower",
-    "def-weil-pbc-completed-pullback"
+    "def-weil-pbc-completed-pullback",
+    "lem-cbc-adic-pullback-presentation-models"
    ],
    "elementary": false,
    "source": {
@@ -151,7 +156,8 @@
   "def-weil-proetale-inverse-image",
   "lem-weil-sheaf-scalar-extension-ring-iso",
   "lem-weil-pbc-proetale-module-inverse-image-comparison",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-adic-pullback-presentation-models"
  ],
  "proof_origin": {
   "by": "agent",
@@ -330,24 +336,7 @@
   "module": "Sheaf.Paper.AdicPullbackPresentationTransport",
   "declaration": "AlgebraicGeometry.Scheme.adic_pullback_presentation_transport",
   "declarations": [
-   "AlgebraicGeometry.Scheme.adic_pullback_coefficient_presentations",
-   "AlgebraicGeometry.Scheme.adicPresentationPullback",
-   "AlgebraicGeometry.Scheme.adicPresentationIdentity",
-   "AlgebraicGeometry.Scheme.adicPresentationOrdinaryUniversal_proof",
-   "AlgebraicGeometry.Scheme.adicPresentationOrdinaryUniversal",
-   "AlgebraicGeometry.Scheme.adicPresentationTowerUniversal_proof",
-   "AlgebraicGeometry.Scheme.adicPresentationTowerUniversal",
-   "AlgebraicGeometry.Scheme.adicPresentationOrdinaryIso",
-   "AlgebraicGeometry.Scheme.adicPresentationTowerIso",
    "AlgebraicGeometry.Scheme.adic_pullback_presentation_transport",
-   "AlgebraicGeometry.Scheme.adicPresentationConstantIso",
-   "AlgebraicGeometry.Scheme.HasAdicPresentationConstantNormalization",
-   "AlgebraicGeometry.Scheme.adicPresentationConstantIso_normalized",
-   "AlgebraicGeometry.Scheme.adicPresentationEvaluationComplex_eq",
-   "AlgebraicGeometry.Scheme.HasAdicPresentationEvaluationNormalization",
-   "AlgebraicGeometry.Scheme.adicPresentationEvaluationIso_exists",
-   "AlgebraicGeometry.Scheme.adicPresentationEvaluationIso",
-   "AlgebraicGeometry.Scheme.adicPresentationFiniteIso",
    "AlgebraicGeometry.Scheme.adicPresentationCompletion",
    "AlgebraicGeometry.Scheme.adicPresentationUnit",
    "AlgebraicGeometry.Scheme.adicPresentationLimitComparison",
@@ -360,8 +349,7 @@
    "AlgebraicGeometry.Scheme.adicPresentationLocalizedComparison_isIso",
    "AlgebraicGeometry.Scheme.adicPresentationInverseMate",
    "AlgebraicGeometry.Scheme.adicPresentationInverseMate_counit",
-   "AlgebraicGeometry.Scheme.adicPresentationInverseMate_eq",
-   "CategoryTheory.Functor.HasRepresentativeNormalization"
+   "AlgebraicGeometry.Scheme.adicPresentationInverseMate_eq"
   ],
   "file": "lean/Sheaf/Paper/AdicPullbackPresentationTransport.lean",
   "statement": "theorem adic_pullback_presentation_transport : (∃! e : L₁ ≅ L₂, Functor.whiskerLeft DerivedCategory.Qh e.hom ≫ ε₂ = ε₁) ∧ (∃! e : T₁ ≅ T₂, Functor.whiskerLeft DerivedCategory.Qh e.hom ≫ τ₂ = τ₁)",
@@ -373,14 +361,25 @@
   "fixed_by": "NT-stage2-Codex-e27840fb7"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-98704",
+  "reviewer": "C-a20e6",
   "group": "J4",
   "result": "fix",
-  "landing": "20261022T023437-L-822290",
+  "landing": "20261027T131459-L-2941620",
   "kind": "interface",
-  "note": "independent cc review: finite_quotient_transition_compatibility = conjunct .1 of withdrawn derived_finite_quotient_coherence, the only part used by adicPresentationFiniteIso_transition; consumer diff vs live = 2 lines; new modules and consumer compiled (6.1/34.7/42.3 s); sorryAx traced only to the open upstream ConstantCompletion.flat_and_quotients"
+  "note": "independent cc review: item localBaseData_exists + new hole localOrdinaryResolving_exists against LocalBaseData/Local fields and node; Models+Transport and Model+ZeroCompletion concatenations vs published originals (verbatim); public decl type hashes published vs sandbox (identical); 12 delivered modules + 30 direct importers compiled in sandbox (all OK)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-space-perfect-uniform-tor",
+ "kind": "statement",
+ "title": "Uniform Tor interval and quasi-coherence of a perfect space complex",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ with its small etale structure sheaf $\\mathcal O_X$ [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category], and its full subcategory $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ of objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Assume $X$ is quasi-compact: every open cover of $|X|$ admits a finite subcover. A perfect object $E\\in D(\\mathcal O_X)$ means one etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Use the K-flat derived tensor product [lem-weil-pbc-site-derived-tensor-descent]. Then $E$ has quasi-coherent cohomology, and there exist integers $u\\leq v$ such that for every sheaf $M$ of $\\mathcal O_X$-modules placed in degree zero one has $\\mathcal H^i(E\\otimes^{\\mathbf L}_{\\mathcal O_X}M)=0$ whenever $i<u$ or $i>v$. No quasi-separatedness, Noetherian hypothesis, or uniform bound on the ranks of the local perfect models is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08JL, lemma-pseudo-coherent, combined with sites-cohomology.tex Tag 08G8, lemma-perfect, and Tag 08G1, lemma-tor-amplitude; finite etale-cover globalization of the local Tor intervals in the proof of Tag 09MB (lemma-ext-from-perfect-into-bounded-QCoh), sentence \"Say K^vee has tor amplitude in [a,b]\"."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale scheme atlas of $X$ using [def-trf-algebraic-space]. Apply the local perfectness condition of [def-weil-pbc-strict-perfect-coefficient-package] to this atlas object. Its covering members give a jointly surjective etale family $U_\\lambda\\to X$ and isomorphisms $E|_{U_\\lambda}\\simeq P_\\lambda^\\bullet$, where $P_\\lambda^r=0$ outside some integer interval $[a_\\lambda,b_\\lambda]$, $a_\\lambda\\le b_\\lambda$, and each term has maps $P_\\lambda^r\\xrightarrow{i_r}\\mathcal O_{U_\\lambda}^{N_r}\\xrightarrow{p_r}P_\\lambda^r$ with $p_ri_r=1$. A zero complex can be assigned $[0,0]$. The atlas followed by its covering family remains jointly surjective by the definition of a covering.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G5 (definition-perfect): locally strictly perfect; spaces-perfect.tex uses this ringed-site definition for algebraic spaces"
+   }
+  },
+  {
+   "text": "On each $U_\\lambda$, a finite free structure module is quasi-coherent: the presentation $0\\to\\mathcal O_{U_\\lambda}^{N}\\xrightarrow{1}\\mathcal O_{U_\\lambda}^{N}\\to0$ gives the required presentation in [def-trf-space-quasi-coherent-module]. For the degreewise splitting in Step 1, $i_r$ identifies $P_\\lambda^r$ with $\\ker(1-i_rp_r)$: $(1-i_rp_r)x=0$ means exactly $x=i_rp_rx$. The localized ringed site $(X_{\\mathrm{et}}/U_\\lambda,\\mathcal O_X|_{U_\\lambda})$ is the small etale ringed site of $U_\\lambda$: by [lem-trf-space-chartwise-etale-permanence], a scheme map $T\\to U_\\lambda$ over $X$ between etale $X$-schemes is representable etale, and conversely $T\\to U_\\lambda\\to X$ is representable etale; coverings are the jointly surjective families in both, and both rings are $T\\mapsto\\Gamma(T,\\mathcal O_T)$. Thus [lem-sfb-space-qcoh-kernels-colimits], applied to the scheme $U_\\lambda$ viewed as an algebraic space, gives quasi-coherence of every term, of $Z^r=\\ker d^r$, of $B^r=\\operatorname{im}d^{r-1}$, and of $H^r(P_\\lambda^\\bullet)=\\operatorname{coker}(B^r\\to Z^r)$. Slice module restriction is exact by [lem-weil-pbc-ringed-sheaf-slice-adjunction]; since cohomology is a kernel modulo an image, $H^r(E)|_{U_\\lambda}\\cong H^r(E|_{U_\\lambda})$. Hence these restrictions are quasi-coherent. The local-presentation definition descends this to $X$: for any etale object $V\\to X$, pull back the covering family using [lem-trf-space-fibre-products-etale-covers], and compose it with the covers supplying the local presentations. Therefore all $H^r(E)$ are quasi-coherent.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JL (lemma-pseudo-coherent), its strictly perfect computation; spaces-properties.tex Tag 03M1 (lemma-properties-quasi-coherent), (3)"
+   }
+  },
+  {
+   "text": "By [lem-a1-etale-scheme-map-open-image], each image $W_\\lambda=\\operatorname{im}(|U_\\lambda|\\to|X|)$ is open. They cover $|X|$ by Step 1. Quasi-compactness as assumed in the statement supplies a finite subfamily indexed by $F$ whose images cover $|X|$; thus the corresponding etale maps remain jointly surjective. Set $u=\\min(\\{0\\}\\cup\\{a_\\lambda:\\lambda\\in F\\})$ and $v=\\max(\\{0\\}\\cup\\{b_\\lambda:\\lambda\\in F\\})$. These finite nonempty sets give integers $u\\le0\\le v$, and $[a_\\lambda,b_\\lambda]\\subseteq[u,v]$ for all $\\lambda\\in F$. The added $0$ makes this construction valid also when the finite subcover is empty.",
+   "uses": [
+    "lem-a1-etale-scheme-map-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 06NF (lemma-etale-image-open); Tag 03H6 (lemma-quasi-compact-affine-cover), finite-subcover argument"
+   }
+  },
+  {
+   "text": "Fix any structure-module sheaf $M$ and any $q\\notin[u,v]$. The functor $A_\\lambda(T)=\\operatorname{Hom}_X(T,U_\\lambda)$ on $X_{\\mathrm{et}}$ is a sheaf: a covering of $X_{\\mathrm{et}}$ is an fppf covering [def-pc-fppf-site] since etale maps are flat and locally of finite presentation, and $h_{U_\\lambda}$ and $X$ are fppf sheaves [def-trf-scheme-algebraic-space, def-trf-algebraic-space], so compatible local maps over $X$ glue to a unique map over $X$. Its element site is exactly $X_{\\mathrm{et}}/U_\\lambda$. For this localization at $U_\\lambda$, [lem-weil-pbc-ringed-sheaf-slice-adjunction] with $A=A_\\lambda$ identifies module pullback with exact slice restriction, so its derived functor is termwise restriction and commutes with cohomology. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this localization, with target coefficient sheaf $\\mathcal O_X|_{U_\\lambda}$ and identity structural ring map. It gives an isomorphism in the slice derived category\n$$(E\\otimes^{\\mathbf L}M)|_{U_\\lambda}\\simeq E|_{U_\\lambda}\\otimes^{\\mathbf L}M|_{U_\\lambda}\\simeq P_\\lambda^\\bullet\\otimes^{\\mathbf L}M|_{U_\\lambda}.$$\nBy [lem-sfb-split-perfect-dual-tor-window] the last object has cohomology only in $[a_\\lambda,b_\\lambda]$. Thus $H^q(E\\otimes^{\\mathbf L}M)$ restricts to zero for every $\\lambda\\in F$. For any etale object $V\\to X$, [lem-trf-space-fibre-products-etale-covers] makes $V\\times_XU_\\lambda\\to V$ a covering family of schemes. Every section of this cohomology sheaf restricts to zero on the family, so the uniqueness part of the sheaf axiom makes it zero. This includes the empty cover when $X$ is empty. The cohomology sheaf is therefore zero. Since $M$ and $q\\notin[u,v]$ were arbitrary, the chosen interval proves the Tor assertion.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-scheme-algebraic-space",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-split-perfect-dual-tor-window",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), Tag 08G1 (lemma-tor-amplitude), implication (2) to (1); spaces-perfect.tex Tag 09MB (lemma-ext-from-perfect-into-bounded-QCoh), global interval input"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-split-perfect-dual-tor-window",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-trf-scheme-algebraic-space",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08JL (lemma-pseudo-coherent), strictly perfect computation; Tag 09MB (lemma-ext-from-perfect-into-bounded-QCoh), global interval input, expanded using spaces-properties.tex 06NF and sites-cohomology.tex 07A4, 08G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perfect.*(tor.?amplitude|quasi.?coherent)|finiteTorAmplitude.*perfect",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a quasi compact algebraic space any perfect object has finite Tor dimension with a single global interval",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace",
+     "AlgebraicGeometry.quasiCompact_of_noetherianSpace_source",
+     "AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.compactSpace_of_isAffine",
+     "NoetherianSpace.to_quasiSeparatedSpace",
+     "AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"torAmplitude\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded locally finite projective complex on an algebraic space has uniformly bounded derived tensor with all module sheaves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'",
+     "CategoryTheory.isZero_Tor'_succ_of_projective",
+     "CategoryTheory.isZero_Tor_succ_of_projective"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on a quasi compact algebraic space has quasi coherent cohomology and a uniform finite Tor amplitude",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "CochainComplex.IsKProjective",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.isGE_Q_obj_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on a quasi compact algebraic space has quasi coherent cohomology and uniform finite Tor amplitude",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "CochainComplex.IsKProjective",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.isLE_Q_obj_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: cohomological support and projective-dimension results do not give perfect structure-module objects on an algebraic space or their uniform Tor bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"torAmplitude\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: cohomological support and projective-dimension results do not give perfect structure-module objects on an algebraic space or their uniform Tor bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(tor.?amplitude|quasi.?coherent)|finiteTorAmplitude.*perfect",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: cohomological support and projective-dimension results do not give perfect structure-module objects on an algebraic space or their uniform Tor bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally bounded finite projective complex on a quasi compact algebraic space has one global Tor interval",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.instHasProjectiveDimensionLTBiprod",
+     "CategoryTheory.projectiveDimension_ne_top_iff",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt",
+     "CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE",
+     "AlgebraicGeometry.IsFinite.instLocallyOfFiniteType"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: cohomological support and projective-dimension results do not give perfect structure-module objects on an algebraic space or their uniform Tor bounds"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-ext-window",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the perfect dual has quasi-coherent cohomology and a single global finite Tor interval.",
+   "via": [
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-perfect-uniform-tor",
+  "worker": "stage1",
+  "summary": "Expanded the local strict-perfect computation of quasi-coherent cohomology and globalized its local Tor intervals by a finite subcover of the open images of etale model charts. Reused all supporting lemmas; no new nodes, no statement change, no additional separation or Noetherian hypotheses.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images, proof (3): supporting algebraic-space derived-coherent-duality input in the inherited provenance chain; specifically the global interval used in Stacks 09MB. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-etale-scheme-map-open-image",
+    "why": "Generic etale open-image theorem supplies open sets for the finite-subcover argument; no same-unit replacement is needed."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic exact slice pullback identifies restriction and its derived functor, hence restriction of cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived monoidality for a localization identifies restricted tensor with the tensor of the restricted objects."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic base-change stability of etale covering families supplies sheaf tests and local presentations on every etale object."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale permanence (Stacks 03FT/03FV) identifies the localization of X_et at a chart with the chart's own small etale site; added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-1452af1aa",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-1452af1aa (reviewer sub-agent of L); spot-checked: Read the item's four steps in full; there are 0 new nodes and the statement and stmt_deps are identical to live, where the item is still an unsplit, statement-only node with no repair note. Sources checked: spaces-perfect 08JL (proof: a strictly perfect complex has quasi-coherent cohomology), which Step 2 expands; 09MB ('Say K^vee has tor amplitude in [a,b]'), whose global interval Steps 3-4 supply by a finite subcover of the open images from 06NF plus local strict-perfect bounds (07A4/0G7E slice tensor pullback, then lem-sfb-split-perfect-dual-tor-window). Every hypothesis matches; edge cases checked: empty X gives [0,0], E=0, non-coherent rings, unbounded ranks across charts; no quasi-separatedness is used. No duplicate found in the DAG. Two C1/C4 citation gaps fixed in the item. (1) Step 2 applies the space kernel/cokernel lemma to U_lambda as an algebraic space, which silently identifies X_et/U_lambda with (U_lambda)_et; it now cites lem-trf-space-chartwise-etale-permanence. (2) Step 4 uses the slice adjunction for the sheaf A = Hom_X(-,U_lambda) without saying why it is a sheaf; a sentence now gives this via def-pc-fppf-site, def-trf-scheme-algebraic-space and def-trf-algebraic-space. proof_deps and split_report.tool_uses are updated. Batch-5: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers (02X2/041F), lem-a1-etale-scheme-map-open-image (06NF) and lem-trf-site-functorial-flat-resolution (reached through split-perfect-dual-tor-window) are generic foundations, not part of the trace formula or Poincare duality or their proofs; the same holds for the added permanence lemma. All are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectUniformTor",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfect_quasiCoherent_uniformTor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectUniformTor.lean",
+  "statement": "theorem perfect_quasiCoherent_uniformTor {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (E : X.DerivedModules) (hE : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E) : X.derivedQCohProperty E ∧ ∃ a b : ℤ, a ≤ b ∧ ∀ (M : X.SmallModules) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj ((SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, u, u, w} X.smallEtaleModelTopology X.smallStructureSheaf).obj (E, (DerivedCategory.singleFunctor X.SmallModules 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the already published small affine ringed model and its actual module restriction equivalence, preserving the original section universe. The three added statement dependencies own the small model, D(O_X)/D_QCoh, and the point topology used for quasi-compactness. No new definition or geometric hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf4790bad",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Item lem-sfb-space-perfect-uniform-tor matches the node clause by clause: quasi-compact X as CompactSpace (Point X.obj.obj); E perfect via IsPerfectOnRingedSiteOfUniverses.{u,u,u,w} on the landed small affine model, with bounds and ranks per chart; conclusion derivedQCohProperty E ∧ ∃ a ≤ b uniform over all M : SmallModules, H^i(E ⊗^L M[0]) = 0 for i<a or i>b, using the canonical siteDerivedTensorIndependentCoefficients. No extra hypotheses; u preserved, w free. Edge cases empty X / E=0 / rank 0 / a=b covered. Item node changes only lean plus 3 landed stmt_deps (allowed); all 11 dep lean records identical to side-live; statement verbatim; imports are stmt_dep and proof_dep modules; sorry only; docstrings carry source, blueprint tag and all four proof steps. Sources 08JL/09MB checked. No duplicate declaration. No file changed, so no compile."
+ }
+}

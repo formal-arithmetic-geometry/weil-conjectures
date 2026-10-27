@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-fibrewise-module-flatness-criterion",
+ "kind": "statement",
+ "title": "Fibrewise criterion for a nonzero finitely presented module stalk",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme] with morphisms $p:X\\to S$, $q:Y\\to S$, $f:X\\to Y$ satisfying $q\\circ f=p$. Suppose $p$ is locally of finite presentation [def-sbc-locally-finite-presentation], $q$ is locally of finite type [def-weil-finite-type-morphism], and $\\mathcal F$ is a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent] of finite presentation [def-weil-pbc-module-finite-type-presentation]. Fix $x\\in X$, set $y=f(x)$ and $s=p(x)$, and assume $\\mathcal F_x\\ne0$ [def-weil-pbc-module-stalk]. Let $i_s:X_s\\to X$ be the scheme-theoretic fibre projection and $f_s:X_s\\to Y_s$ the induced morphism [def-pc-scheme-fibre, def-pc-fibre-product]. Denote by $\\widetilde x\\in X_s$ the point mapping to $x$, and put $\\mathcal F_s=i_s^*\\mathcal F$ [def-pc-module-pullback]. If $\\mathcal F_x$ is flat over $\\mathcal O_{S,s}$ and $(\\mathcal F_s)_{\\widetilde x}$ is flat over $\\mathcal O_{Y_s,f_s(\\widetilde x)}$, then $\\mathcal F_x$ is flat over $\\mathcal O_{Y,y}$ and $q$ is flat at $y$ [def-weil-flat-morphism]. Module flatness means that tensoring with the module preserves exact sequences; all scalar actions are induced by the displayed scheme morphisms. No flatness of $p$ and no Noetherian hypothesis are assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 039C, theorem-criterion-flatness-fibre, implication (1) to (2), without the openness clause."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-module-stalk",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O_{S,s}$, $B=\\mathcal O_{Y,y}$, $C=\\mathcal O_{X,x}$ and $M=\\mathcal F_x$. The compatible-stalk-data lemma gives a tower of nonzero local rings $R\\to B\\to C$, with composite the stalk map of $p$, with $C$ essentially finitely presented over $R$ and $B$ essentially of finite type over $R$. It also identifies the fibre local rings with $C/\\mathfrak m_RC$ and $B/\\mathfrak m_RB$, and their map with the quotient of $B\\to C$. Choose a finite local presentation of $\\mathcal F$ at $x$, which exists by the finite-presentation hypothesis; the finite-presentation stalk lemma makes $M$ finitely presented over $C$. In particular it is finite over $C$. It is nonzero and $R$-flat by hypothesis.",
+   "uses": [
+    "lem-sfb-fibre-flatness-compatible-stalk-data",
+    "lem-weil-pbc-stalk-finite-presentation-of-local-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 039C, theorem-criterion-flatness-fibre, first paragraph of proof; modules Tag 01CP, finite local presentations on stalks."
+   }
+  },
+  {
+   "text": "The pullback-stalk formula for $i_s$ identifies $(\\mathcal F_s)_{\\widetilde x}$ with $M\\otimes_C\\mathcal O_{X_s,\\widetilde x}$. Using the quotient isomorphism of step 1 and the quotient-tensor lemma, this is $M/\\mathfrak m_RM$: explicitly $m\\otimes[c]\\mapsto[cm]$, with inverse $[m]\\mapsto m\\otimes1$. The submodule $(\\mathfrak m_RC)M$ equals $\\mathfrak m_RM$ because both consist of finite sums of products of images of elements of $\\mathfrak m_R$ with elements of $M$. The $B/\\mathfrak m_RB$-action is $[b][m]=[\\beta(b)m]$, by the compatible fibre stalk maps in step 1. Thus the given fibre flatness says precisely that $M/\\mathfrak m_RM$ is flat over $B/\\mathfrak m_RB$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-sfb-fibre-flatness-compatible-stalk-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 039C, theorem-criterion-flatness-fibre, first paragraph of proof; sheaves Tag 0098, lemma-stalk-pullback-modules; algebra Tag 00DF, lemma-tensor-product-exact, applied to the quotient presentation."
+   }
+  },
+  {
+   "text": "Apply the finite-type local closed-fibre approximation to $R\\to B$. It supplies a nonzero local, essentially finitely presented $R$-algebra $T$ and a surjective local $R$-algebra map $u:T\\to B$, with $T/\\mathfrak m_RT\\cong B/\\mathfrak m_RB$ via $[t]\\mapsto[u(t)]$. Give $C$ and $M$ their $T$-actions through $B$. The composite $T\\to B\\to C$ is local. Across the displayed isomorphism, the action on $M/\\mathfrak m_RM$ is $[t][m]=[\\beta(u(t))m]$, so its flatness in step 2 is flatness over $T/\\mathfrak m_RT$ as well. Apply the existing fibre criterion to $R\\to T\\to C$ and the $C$-module $M$. Both required algebras $T,C$ are essentially finitely presented over $R$; $M$ is finitely presented over $C$, nonzero, $R$-flat, and its closed fibre is flat over $T/\\mathfrak m_RT$. The criterion gives $T$ flat over $R$ and $M$ flat over $T$.",
+   "uses": [
+    "lem-sfb-finite-type-local-closed-fibre-approximation",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05UV, lemma-criterion-flatness-fibre-fp-over-ft, finite-presentation approximation and application of Tag 00R7, lemma-criterion-flatness-fibre."
+   }
+  },
+  {
+   "text": "Since $T\\to C$ is local, $\\mathfrak m_TM\\subseteq\\mathfrak m_CM$. If $\\mathfrak m_TM=M$, then $\\mathfrak m_CM=M$; Nakayama over the local ring $C$, applied to the finite $C$-module $M$, would give $M=0$, a contradiction. Therefore $M/\\mathfrak m_TM\\ne0$. The nonzero-closed-fibre criterion for a flat module now makes the $T$-flat module $M$ faithfully flat over $T$. Notice that finiteness is needed over $C$, not over $T$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-flat-module-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV, lemma-NAK, part (4), with zero submodule; Tag 00HP, lemma-ff, (4) implies (1)."
+   }
+  },
+  {
+   "text": "Let $K=\\ker(u)$. It annihilates $M$, since the $T$-action factors through $B$. Tensor the inclusion $K\\hookrightarrow T$ with $M$. Flatness makes $K\\otimes_TM\\to T\\otimes_TM\\cong M$ injective, and this map sends $k\\otimes m$ to $km=0$. Hence $K\\otimes_TM=0$. Faithful flatness reflects exactness of the complex $0\\to K\\to0$, so $K=0$. Thus the surjective map $u$ is an isomorphism. Under $T\\cong B$, the two scalar actions agree: $u(t)m=tm$ and the map $R\\to B$ is $u$ composed with $R\\to T$. Consequently the tensor functors testing $R$-flatness of $B$ and $B$-flatness of $M$ are isomorphic to those testing $R$-flatness of $T$ and $T$-flatness of $M$; the isomorphisms send pure tensors to the same tensors with $u$ or $u^{-1}$ on the ring factor. Step 3 therefore proves both required flatness assertions. The first says exactly that $q$ is flat at $y$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HB, definition-flat; elementary faithful-flat cancellation in the approximation of Tag 05UV; morphisms Tag 01U3, definition-flat."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fibre-flatness-compatible-stalk-data",
+  "lem-weil-pbc-stalk-finite-presentation-of-local-presentation",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-sfb-finite-type-local-closed-fibre-approximation",
+  "lem-weil-pbc-criterion-flatness-fibre",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-flat-module-faithfully-flat-maximal-ideals",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 039C, theorem-criterion-flatness-fibre, implication (1) to (2), using the finite-presentation approximation in Algebra Tag 05UV and its Tag 00R7 input. Faithful-flat module cancellation expands the final identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "criterion.*flat|flat.*fiber|flat.*fibre",
+   "results": "{\"t\": \"2026-10-23T14:51:41Z\", \"tool\": \"grep\", \"query\": \"criterion.*flat|flat.*fiber|flat.*fibre\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\"], \"digest\": \"a0f83291974fb863\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: localization tests, the equational criterion, and local finite-flat freeness do not give the non-Noetherian fibrewise criterion for a module over the source algebra. FormallyUnramified.flat_of_restrictScalars requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrewise criterion for flatness of a finitely presented quasi coherent module over a locally finitely presented source and locally finite type target",
+   "results": "{\"t\": \"2026-10-23T14:51:41Z\", \"tool\": \"leansearch\", \"query\": \"Fibrewise criterion for flatness of a finitely presented quasi coherent module over a locally finitely presented source and locally finite type target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.flat_of_localized_maximal\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.flat_of_localized_span\", \"RingHom.Flat\", \"Module.Flat.of_forall_isTrivialRelation\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"Module.Flat.tfae_equational_criterion\"], \"digest\": \"7c843c1140813a21\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: localization tests, the equational criterion, and local finite-flat freeness do not give the non-Noetherian fibrewise criterion for a module over the source algebra. FormallyUnramified.flat_of_restrictScalars requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalRing",
+   "results": "{\"t\": \"2026-10-23T14:51:42Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.free_of_flat_of_isLocalRing\", \"Module.exists_basis_of_span_of_flat\", \"Module.IsLocalRing.linearIndependent_of_flat\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"IsLocalRing.length_baseChange\", \"CovBy.length_baseChange\", \"Algebra.FormallySmooth.of_formallySmooth_residueField_tensor\"], \"digest\": \"46c630e4f87708ff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: localization tests, the equational criterion, and local finite-flat freeness do not give the non-Noetherian fibrewise criterion for a module over the source algebra. FormallyUnramified.flat_of_restrictScalars requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let R to B to C be local maps with C essentially finitely presented over R and B essentially finite type over R. A nonzero finitely presented C module flat over R with flat closed fibre over B is flat over B and B is flat over R",
+   "results": "{\"t\": \"2026-10-23T14:51:49Z\", \"tool\": \"leanfinder\", \"query\": \"Let R to B to C be local maps with C essentially finitely presented over R and B essentially finite type over R. A nonzero finitely presented C module flat over R with flat closed fibre over B is flat over B and B is flat over R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Algebra.Smooth.flat\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat.ofLocalizationPrime\", \"Algebra.HasGoingDown.of_flat\"], \"digest\": \"d411ad67f078ec12\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: localization tests, the equational criterion, and local finite-flat freeness do not give the non-Noetherian fibrewise criterion for a module over the source algebra. FormallyUnramified.flat_of_restrictScalars requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a module of finite presentation over a family flat at a point over S, flatness of its fibre over Y_s implies flatness over Y and flatness of Y over S at the image",
+   "results": "{\"t\": \"2026-10-23T14:53:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a module of finite presentation over a family flat at a point over S, flatness of its fibre over Y_s implies flatness over Y and flatness of Y over S at the image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"b747a693c94bbd9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: localization tests, the equational criterion, and local finite-flat freeness do not give the non-Noetherian fibrewise criterion for a module over the source algebra. FormallyUnramified.flat_of_restrictScalars requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented quasi coherent module nonzero at x, flat over S with flat fibre over Y_s implies flatness over Y and flatness of Y over S",
+   "results": "{\"t\": \"2026-10-23T18:58:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely presented quasi coherent module nonzero at x, flat over S with flat fibre over Y_s implies flatness over Y and flatness of Y over S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"fd18c8f8431a048d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization tests, flat base change, faithful flatness of local ring maps, equational criteria or smoothness; none proves the non-Noetherian module fibre criterion. The unramified restriction-of-scalars lemma requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalRing",
+   "results": "{\"t\": \"2026-10-23T18:58:44Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.free_of_flat_of_isLocalRing\", \"Module.exists_basis_of_span_of_flat\", \"Module.IsLocalRing.linearIndependent_of_flat\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"IsLocalRing.length_baseChange\", \"CovBy.length_baseChange\", \"Algebra.FormallySmooth.of_formallySmooth_residueField_tensor\"], \"digest\": \"46c630e4f87708ff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization tests, flat base change, faithful flatness of local ring maps, equational criteria or smoothness; none proves the non-Noetherian module fibre criterion. The unramified restriction-of-scalars lemma requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "criterion.*flat|flat.*fiber|flat.*fibre",
+   "results": "{\"t\": \"2026-10-23T18:58:44Z\", \"tool\": \"grep\", \"query\": \"criterion.*flat|flat.*fiber|flat.*fibre\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\"], \"digest\": \"a0f83291974fb863\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization tests, flat base change, faithful flatness of local ring maps, equational criteria or smoothness; none proves the non-Noetherian module fibre criterion. The unramified restriction-of-scalars lemma requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local ring maps R to B to C and a nonzero finitely presented C module flat over R and with flat closed fibre over B imply B flat over R and M flat over B",
+   "results": "{\"t\": \"2026-10-23T18:58:45Z\", \"tool\": \"leansearch\", \"query\": \"Local ring maps R to B to C and a nonzero finitely presented C module flat over R and with flat closed fibre over B imply B flat over R and M flat over B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.flat_of_isLocalized_maximal\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat\", \"Module.Flat.of_forall_exists_factorization\", \"Module.flat_of_isLocalized_span\", \"RingHom.flat_algebraMap_iff\"], \"digest\": \"a6ba928dc7ca3fef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization tests, flat base change, faithful flatness of local ring maps, equational criteria or smoothness; none proves the non-Noetherian module fibre criterion. The unramified restriction-of-scalars lemma requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre criterion for flatness: a finite presentation module over an essentially finitely presented local algebra is flat over an essentially finite type intermediate local ring if it is flat over the base and its quotient by the base maximal ideal is flat",
+   "results": "{\"t\": \"2026-10-23T18:59:12Z\", \"tool\": \"leanfinder\", \"query\": \"Fibre criterion for flatness: a finite presentation module over an essentially finitely presented local algebra is flat over an essentially finite type intermediate local ring if it is flat over the base and its quotient by the base maximal ideal is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_maximal\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RingHom.Flat.propertyIsLocal\", \"Module.flat_of_localized_maximal\", \"Module.flat_of_isLocalized_span\", \"Algebra.Smooth.flat\", \"Algebra.HasGoingDown.of_flat\", \"instFlatAtPrime\"], \"digest\": \"934470164e24648f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization tests, flat base change, faithful flatness of local ring maps, equational criteria or smoothness; none proves the non-Noetherian module fibre criterion. The unramified restriction-of-scalars lemma requires formal unramifiedness, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "fibre|fiber|quotient|residueField",
+   "results": "{\"t\": \"2026-10-23T19:01:46Z\", \"tool\": \"grep\", \"query\": \"fibre|fiber|quotient|residueField\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"60a5f36e611b0f1e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization tests, flat base change, faithful flatness of local ring maps, equational criteria or smoothness; none proves the non-Noetherian module fibre criterion. The unramified restriction-of-scalars lemma requires formal unramifiedness, absent here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-module-flat-locus-base-change",
+  "date": "2026-10-23",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Supporting stack-of-line-bundles input before passing to isomorphism classes. Algebraicity part: inclusion of line bundles into the ambient coherent stack. Supporting source-local input: Stacks 0D03 proof, the sentence invoking finite-free-open (0CZT); scheme version 0CZR. In the 0CZR proof, final sentence: apply the module flat-locus theorem 05VJ to the identity morphism of Y over T.; theorem-criterion-flatness-fibre, implication (1) to (2), without the openness clause",
+   "via": [
+    "lem-sfb-relative-module-flat-locus-base-change",
+    "lem-sfb-relative-finite-free-locus-base-change",
+    "lem-sfb-invertible-open-in-coherent-stack",
+    "lem-sfb-picard-stack-curve-geometry",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibrewise-module-flatness-criterion",
+  "worker": "stage1",
+  "summary": "Q18 checked Tag 039C and its algebra input 05UV. All supporting statements already exist: compatible stalk and fibre data, module pullback stalk, finite-presentation stalk, quotient tensor, finite-type approximation, 00R7, Nakayama, and module faithful flatness. Five steps retain the module argument and cancel the approximation using the nonzero finite C-module; no flatness of C over R is assumed. No new nodes.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), via the existing chain in blueprint.from.via. This is the relative module flat-locus prerequisite of that chain, precisely Stacks 039C implication (1) to (2); the current blueprint no longer spells out the older alteration argument in its top-level paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-stalk-finite-presentation-of-local-presentation",
+    "why": "Generic local algebra or module-stalk input used exactly as stated; the unit gives no replacement for this supporting flat-locus argument."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic local algebra or module-stalk input used exactly as stated; the unit gives no replacement for this supporting flat-locus argument."
+   },
+   {
+    "node": "lem-weil-pbc-criterion-flatness-fibre",
+    "why": "Generic local algebra or module-stalk input used exactly as stated; the unit gives no replacement for this supporting flat-locus argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-stalk-finite-presentation-of-local-presentation",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-criterion-flatness-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-493e6dffd",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-493e6dffd (reviewer sub-agent of L); spot-checked: The item matches Stacks 039C (more-morphisms.tex lines 4589-4612), implication (1)=>(2), hypothesis for hypothesis: p locally of finite presentation, q locally of finite type, F quasi-coherent of finite presentation, F_x nonzero. Only the openness clause and the converse are dropped, as source.place says. The delivery has no new nodes, an unchanged statement and stmt_deps, and proof_deps equal to the union of the uses. Step 1: the compatible-stalk-data node gives the local tower R->B->C, C essentially of finite presentation and B essentially of finite type over R, and the fibre rings as quotients by m_R. 01CP makes M finitely presented over C from a finite presentation of F on an open neighbourhood. Step 2: 0098 for i_s and the quotient-tensor lemma (1) with J=m_R C give (F_s) at x~ = M/m_R M, with the B/m_R B action through beta. Step 3: the approximation gives T, essentially finitely presented over R, with u:T->B surjective and T/m_R T = B/m_R B. All five hypotheses of 00R7 hold for R->T->C; the composite R->C is beta.a = p_x^sharp, and fibre flatness transports along u-bar. Result: T flat over R and M flat over T. Step 4: since m_T M is inside m_C M, Nakayama over C (N=0) and 00HP make M faithfully flat over T; finiteness is used only over C. Step 5 (elementary): ker u kills M, so (ker u) tensor M = 0 by flatness, and ker u = 0 by faithful flatness applied to 0->K->0. So u is an isomorphism, B is R-flat (q flat at y) and M is B-flat. Edge cases: residue-field base, F_x=0 excluded where needed, non-Noetherian rings, no R-flatness of C assumed (so the rigidity node is correctly not cited). Duplicate search over 039C, 05UV and criterion-flatness-fibre found no module version: the structure-sheaf node, the rigidity node and 00R7 are all different. The three generic off-unit tool_uses (01CP, 0098, 00R7) are accepted. The inherited null blueprint.from.node is a base-node matter. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibrewiseModuleFlatnessCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.module_flatAt_and_base_flatAt_of_fiber_module_flatAt",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibrewiseModuleFlatnessCriterion.lean",
+  "statement": "theorem Scheme.Hom.module_flatAt_and_base_flatAt_of_fiber_module_flatAt {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (hf : f ≫ q = p) [LocallyOfFinitePresentation p] [LocallyOfFiniteType q] (F : X.Modules) [SheafOfModules.IsQuasicoherent.{u} F] [SheafOfModules.IsFinitePresentation.{u} F] (x : X) [Nontrivial ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)] (hbase : Module.Flat (S.presheaf.stalk (p x)) ((ModuleCat.restrictScalars (p.stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F))) (hfibre : Module.Flat ((q.fiber (p x)).presheaf.stalk ((pullback.map p (S.fromSpecResidueField (p x)) q (S.fromSpecResidueField (p x)) f (𝟙 _) (𝟙 S) ((Category.comp_id p).trans hf.symm) ((Category.comp_id _).trans (Category.id_comp _).symm)) (p.asFiber x))) ((ModuleCat.restrictScalars ((pullback.map p (S.fromSpecResidueField (p x)) q (S.fromSpecResidueField (p x)) f (𝟙 _) (𝟙 S) ((Category.comp_id p).trans hf.symm) ((Category.comp_id _).trans (Category.id_comp _).symm)).stalkMap (p.asFiber x)).hom).obj ((RingedSpace.moduleStalkFunctor (p.fiber (p x)).toRingedSpace (p.asFiber x)).obj ((Scheme.Modules.tensorPullback (p.fiberι (p x))).obj F)))) : Module.Flat (Y.presheaf.stalk (f x)) ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)) ∧ (q.stalkMap (f x)).hom.Flat",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-566295c0d",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Matches Stacks 039C (1)=>(2) and the node clause by clause. Triangle hf : f ≫ q = p; LocallyOfFinitePresentation p, LocallyOfFiniteType q; IsQuasicoherent.{u}/IsFinitePresentation.{u} with u = site universe; Nontrivial on the module stalk (RingedSpace.moduleStalkFunctor, per the MODULE STALKS convention). hbase is module flatness only, no Noetherian assumption. Fibre map is pullback.map with correct squares; F_s is tensorPullback along fiberι; the fibre coefficient ring is the stalk at the actual image point. Conclusions: Module.Flat over Y.stalk (f x) along f.stalkMap and (q.stalkMap (f x)).hom.Flat. Only the lean field changed vs live; one theorem, by sorry, no defs; statement verbatim in the file; source/blueprint docstrings and five-step proof present; Worker report and Second reading sections present. No duplicate: the sibling flatAt_and_base_flatAt_of_fiber_flatAt is only F = O_X and RelativeFlatLocusBaseChange assumes a flat source. Edge cases: empty X, zero stalk, non-Noetherian, C not R-flat, universes all fine. No files changed, so no compile."
+ }
+}

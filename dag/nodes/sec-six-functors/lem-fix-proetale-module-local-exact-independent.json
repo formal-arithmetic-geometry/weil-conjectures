@@ -1,0 +1,136 @@
+{
+ "id": "lem-fix-proetale-module-local-exact-independent",
+ "kind": "statement",
+ "title": "Descent of sectionwise module exactness at independent universes",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with its small pro-etale site [def-weil-pbc-proetale-site], and let $R$ be a ring sheaf with values in rings of universe $\\max(u,t+1)$ [def-weil-sheaf-of-modules-category]. Assume abelian sheafification exists in this universe and its inverted morphisms are precisely the locally bijective ones [def-weil-presheaf-modules-sheafification]. Let $a:F\\to G$ and $b:G\\to H$ be morphisms of $R$-module sheaves whose section modules have universe $\\max(u,t+1)$. Suppose every pro-etale object $T$ has a covering family $V_j\\to T$, indexed in universe $t+1$ [def-weil-pbc-proetale-covering], such that on each $V_j$ the section map of $a$ is injective, that of $b$ is surjective, and the image of $a$ is the kernel of $b$. Then $a$ is monic, $b$ is epic, and their composable pair is exact [def-weil-pbc-exact-sequence]. No relation between $u$ and $t$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, final descent from local sectionwise short exactness; Modules on Sites Tag 03DA for the underlying abelian sheaf and local lifting."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "On each covering, injectivity descends by the sheaf separatedness axiom. The local section maps also show that the composite is zero. Local surjectivity of the last arrow makes its underlying abelian sheaf morphism epic; faithfulness of the underlying functor makes the module arrow epic.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any monomorphism K to G killed by b, a map F to K whose composite is a is epic if the local image-kernel conditions hold: a local kernel section is in the image of a, and injectivity of K to G identifies its lift. Prove this with K, its monomorphism and the lifting map as abstract parameters, avoiding any unfolding of the chosen kernel object.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding lifting argument to the actual kernel of b, its inclusion, and the canonical kernel lift of a. The kernel condition and lift-inclusion equation give its hypotheses. The short-complex epi-kernel-lift criterion gives exactness of the composable pair.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, final descent from local sectionwise short exactness; Modules on Sites Tag 03DA for the underlying abelian sheaf and local lifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an open and its complementary closed subset, sheaves of modules have a localization exact sequence and restrictions jointly detect isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrict_obj; ModuleCat.Tilde.toOpen; ModuleCat.Tilde.openToLocalization; AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic abelian-module, local-surjectivity and epi-kernel-lift APIs; no direct local covering criterion for these module sheaves was found."
+  },
+  {
+   "tool": "grep",
+   "query": "exact_iff_epi_kernel_lift|isLocallySurjective_iff_epi",
+   "results": "Mathlib/CategoryTheory/Abelian/Exact.lean; Mathlib/Algebra/Homology/SpectralObject/Cycles.lean; Mathlib/Algebra/Homology/LeftResolution/Basic.lean; Mathlib/CategoryTheory/Sites/Point/Conservative.lean; Mathlib/CategoryTheory/Sites/Point/Conservative.lean; Mathlib/CategoryTheory/Sites/EpiMono.lean; Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean; Mathlib/CategoryTheory/Sites/LocallySurjective.lean",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic abelian-module, local-surjectivity and epi-kernel-lift APIs; no direct local covering criterion for these module sheaves was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.exact_iff_epi_kernel_lift",
+   "results": "CategoryTheory.ShortComplex.exact_iff_epi_kernel_lift",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic abelian-module, local-surjectivity and epi-kernel-lift APIs; no direct local covering criterion for these module sheaves was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sequence of sheaves of modules is short exact if on a covering of each object the section maps are injective surjective and image equals kernel",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; SheafOfModules.instAbelian; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.sheafIsAbelian; CategoryTheory.ShortComplex.moduleCat_exact_iff; CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic abelian-module, local-surjectivity and epi-kernel-lift APIs; no direct local covering criterion for these module sheaves was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryCompletedOpenClosedDetection",
+  "date": "2026-10-27",
+  "group": "R8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison. The complementary open-closed localization argument.",
+   "via": [
+    "lem-fix-ordinary-completed-open-closed-detection",
+    "lem-fix-qcqs-ordinary-local-detection",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleLocalExactIndependent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleLocalExactIndependent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_module_shortExact_of_local_sections_independent",
+  "statement": "theorem proEtale_module_shortExact_of_local_sections_independent {X : Scheme.{t}}\n    [HasSheafify (ProEt.topology X) AddCommGrpCat.{max u (t + 1)}]\n    [(ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)}]\n    (R : Sheaf (ProEt.topology X) RingCat.{max u (t + 1)})\n    {F G H : SheafOfModules.{max u (t + 1)} R} (a : F ⟶ G) (b : G ⟶ H)\n    (h : ∀ T : X.ProEt, ∃ (I : Type (t + 1)) (V : I → X.ProEt)\n      (f : ∀ j, V j ⟶ T), Presieve.ofArrows V f ∈ ProEt.precoverage X T ∧\n        ∀ j, Function.Injective (a.val.app (op (V j))) ∧\n          Function.Surjective (b.val.app (op (V j))) ∧\n          Function.Exact (a.val.app (op (V j))) (b.val.app (op (V j)))) :\n    Mono a ∧ Epi b ∧ (ComposableArrows.mk₂ a b).Exact",
+  "branch": "sheaf-dag",
+  "by": "R8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T012930-L-2349270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T012930-L-2349270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-amb-affine-trace-unit-compact-base-change",
+ "kind": "statement",
+ "title": "Tower comparison intertwines affine exchange at the Tate unit",
+ "statement": "Let N>0, let A be a finite commutative ring with NA=0 and let t be normalized finite Tate transport. Let f:T→S be a morphism of Noetherian schemes, with N invertible on S, and d≥0. Use the ordered affine left and right functors, exchange and right base-change maps of [def-amb-affine-trace-construction], and the specified ordinary-compact-support comparison κ of [def-amb-affine-linear-trace-action]. Put K_S=R_S(1_S), K_T=R_T(1_T), and b:f_d* K_S≅K_T equal to affineTraceRightBaseChange at 1_S followed by R_T of the constant-unit pullback. Then f*(κ_S.inv), followed by affineTraceExchange(f,d,K_S) and L_T(b.hom), equals ordinary compact-support exchange for the Cartesian tower square at K_S, followed by R p_T!(b.hom) and κ_T.inv. No vector bundle, trivialization, inverse-chart square or integration counit is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation: transport of the ordered tower exchange through the bounded-below/unbounded compact-support comparisons."
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-construction",
+  "def-amb-affine-linear-trace-action"
+ ],
+ "proof": [
+  {
+   "text": "Use the constructed unbounded tower comparison and its bounded-below restriction identity. Affine-space top trace places each canonical Tate coefficient in D+, so the restriction identity identifies the specified endpoint comparison with the constructed unbounded comparison at that coefficient.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-amb-affine-trace-construction",
+    "def-amb-affine-linear-trace-action",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-affine-trace-compact-comparison-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove exchange compatibility of the constructed comparison for every unbounded coefficient by induction on the tower. For zero, derive identity exchange from the compact-support composition base-change equation for the identity pair, unit compatibility, cancellation of invertible exchange, and faithfulness of identity compact supports. For a successor, transport the ordinary exact-pullback composition equation through leftDerivedUpperStarIsoMapDerivedCategory. Compactification independence and transitivity identify line exchange with ordinary line exchange under the line comparison. Apply the induction hypothesis and naturality to paste the successor square.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-amb-affine-trace-construction",
+    "def-amb-affine-linear-trace-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify both endpoint comparisons at the canonical Tate coefficients using the restriction calculation. Apply naturality of the target tower comparison to the canonical coefficient isomorphism b, use the unbounded tower exchange equation, and cancel the comparison isomorphisms. This gives precisely the displayed equation for all dimensions, including zero, empty bases and the zero ring.",
+   "uses": [
+    "def-amb-affine-linear-trace-action"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "def-amb-affine-trace-construction",
+  "def-amb-affine-linear-trace-action",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-affine-trace-compact-comparison-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation; B3 proves the unbounded exchange induction and endpoint naturality, isolating only the comparison restriction identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedSquareUpperStarIso|affineTraceCompactSupportComparison|affineLinearCoefficientDescent|leftDerivedUpperStarComp",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No match: the results concern geometric affine-space base change, underived module pullback, or topological bundles, not the specified ordinary-etale derived coefficient and compact-support comparison morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of compact support base change with the ordered affine space tower comparison and pullback of the canonical Tate coefficient",
+   "results": "8 hits: WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.Affine.Point.map_baseChange, WeierstrassCurve.baseChange_preΨ', WeierstrassCurve.VariableChange.map_baseChange, WeierstrassCurve.Affine.baseChange_equation, WeierstrassCurve.baseChange_preΨ, WeierstrassCurve.Affine.baseChange_slope, WeierstrassCurve.Affine.Point.map_map",
+   "date": "2026-10-26",
+   "verdict": "No match: the results concern geometric affine-space base change, underived module pullback, or topological bundles, not the specified ordinary-etale derived coefficient and compact-support comparison morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An iterated compact support pushforward comparison commutes with Cartesian base change for affine space",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.map_Spec_map, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.AffineSpace.map, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.AffineSpace.functor_obj_map, AlgebraicGeometry.AffineSpace.map_comp, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom",
+   "date": "2026-10-26",
+   "verdict": "No match: the results concern geometric affine-space base change, underived module pullback, or topological bundles, not the specified ordinary-etale derived coefficient and compact-support comparison morphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationRestrictedChartTransport",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Overlap calculation: transport of the ordered tower exchange through the bounded-below/unbounded compact-support comparisons.",
+   "via": [
+    "lem-amb-vector-integration-restricted-chart-transport",
+    "lem-amb-vector-integration-overlap-chart-prefix",
+    "lem-amb-vector-integration-local-trace-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTraceUnitCompactBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTraceUnitCompactBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineTraceUnitCompactComparison_baseChange",
+  "statement": "theorem affineTraceUnitCompactComparison_baseChange\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {T S : Scheme.{u}} [IsNoetherian T] [IsNoetherian S]\n    (f : T ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :\n    let b := affineTraceRightBaseChange A N hA t f hS d (ordinaryFiniteUnit A S) ≪≫\n      (affineTraceRight A N hA T d).mapIso (ordinaryFiniteUnitPullback A f)\n    (ordinaryFinitePullback A f).map\n        (affineLinearCompactComparison N hN A hA S hS d).inv ≫\n      affineTraceExchange A f d\n        ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≫\n      (affineTraceLeft A T d).map b.hom =\n    (rightDerivedLowerShriekBaseChangeMap A (affineTraceMap_isPullback f d)).app\n        ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≫\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A)\n        (affineTraceProjection T d)).map b.hom ≫\n      (affineLinearCompactComparison N hN A hA T\n        (affineTracePullbackInvertible N f hS) d).inv",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T130441-L-3461706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T180745-L-3395565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

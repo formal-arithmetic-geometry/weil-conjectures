@@ -1,0 +1,153 @@
+{
+ "id": "def-pd-section-cochain-tensor-comparison",
+ "kind": "definition",
+ "title": "Shared canonical cochain tensor types for the section comparison",
+ "statement": "Let Λ be a commutative condensed ring and X a scheme. Use the internal and section module categories, the fixed section equivalence E_X, and its uniquely summand-normalized totalComparison of [def-pd-proetale-section-module-functors]. With the signed direct-sum cochain tensor of [def-pc-tensor-complex-sheaves], define cochainTensorComparison_X(A,B) : E_X(A ⊗ B) ≅ E_X(A) ⊗ E_X(B) to be precisely totalComparison_X(A,B), with these canonical cochain tensor source and target types made explicit. It has the same forward and inverse maps and the same summand normalization, for all integer-indexed complexes A and B; no boundedness or flatness is assumed. Retain the existing named ordinary, graded, and cochain tensor instances of def-pd-section-total-oplax-comparison-data in this foundational interface, with the same signed-total structures, so the localized and ordinary comparisons share their instance arguments. The cochainSectionEquivalence is the fixed termwise functor E_X.mapHomologicalComplex, cached with an explicit functor type; no functor is changed. Naturality is exposed for all pairs of chain maps, with these canonical cochain tensor types. Name the canonical internal and section cochain units as internalCochainUnit and sectionCochainUnit, retaining exactly the original canonical tensor unit objects. For any zero-preserving functor, retain the object and morphism maps of its termwise cochain lift as separately named functions, then assemble the same functor from those data and its original functor laws. The resulting retainedCochainFunctor equals mapHomologicalComplex definitionally. Use this identical functor for the fixed section equivalence. No resolution, total, module or differential is changed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, signed direct-sum tensor total; Modules on Sites, Tag 03EL. Agent interface refinement of the existing normalized totalComparison, not a new mathematical comparison. Derived localization: Tag 05RU."
+ },
+ "stmt_deps": [
+  "def-pd-proetale-section-module-functors",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Move the fifteen existing ordinary, graded and cochain tensor caches from the current SectionTotalOplaxComparisonData source verbatim, including the disabled ordinary instance and all priorities. Return the existing totalComparison in canonical cochain tensor types. Its object types agree definitionally, so its maps and unique summand normalization remain unchanged. Cache the existing termwise section functor with its explicit type.",
+   "uses": [
+    "def-pd-proetale-section-module-functors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By uniqueness of its pure-tensor normalization, ordinaryTensorComparison equals the natural ordinary comparison of internal_section_tensor_comparison. For the canonical cochain comparison, precompose the desired equality of chain maps with each direct-sum inclusion. The defining summand formula and ordinary naturality give equality on every inclusion. Coproduct extensionality after the faithful section equivalence proves equality of the chain maps. This proves cochainTensorComparison_naturality without importing any derived-category tensor data. The naturality calculation is expressed for arbitrary additive bifunctors before specialization to the relative tensor, avoiding expansion of monoidal coherence data.",
+   "uses": [
+    "def-pd-proetale-section-module-functors",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Return the existing canonical internal and section cochain tensor unit objects as explicitly typed implicit-reducible definitions. These names change no unit, differential or tensor structure. The total unit comparisons retain these endpoints from their construction onward.",
+   "uses": [
+    "def-pd-proetale-section-module-functors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define retainedCochainObject and retainedCochainMap by the original mapHomologicalComplex object and map fields. Assemble retainedCochainFunctor from them and the original map_id and map_comp laws. Reflexivity proves retainedCochainFunctor_eq, including its proof fields by proof irrelevance. The fixed cochainSectionEquivalence uses this representation of exactly the original functor. In the total naturality proof, normalize these component names once at the boundary and use the original signed-total summand calculation. This keeps concrete cochain constructions out of later diagram checking.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pd-proetale-section-module-functors",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; typed alias of the already constructed totalComparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cochainTensorComparison|totalComparison",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "The generic signed tensor construction exists, and totalComparison is already the normalized library comparison. This definition only gives that existing isomorphism explicit canonical cochain tensor types; no replacement comparison is introduced."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized total tensor comparison for an additive section equivalence, with canonical cochain tensor source and target",
+   "results": "{\"n_hits\": 8, \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.leftUnitor'\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"HomologicalComplex.instHasTensorTensorUnit_1\", \"HomologicalComplex.rightUnitor'\", \"HomologicalComplex.instHasTensorTensorUnit\", \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"HomologicalComplex.tensorObj\"], \"note\": \"\", \"digest\": \"514a945ab73e090d\"}",
+   "date": "2026-10-26",
+   "verdict": "The generic signed tensor construction exists, and totalComparison is already the normalized library comparison. This definition only gives that existing isomorphism explicit canonical cochain tensor types; no replacement comparison is introduced."
+  },
+  {
+   "tool": "loogle",
+   "query": "totalComparison",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'totalComparison'\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "The generic signed tensor construction exists, and totalComparison is already the normalized library comparison. This definition only gives that existing isomorphism explicit canonical cochain tensor types; no replacement comparison is introduced."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionResolutionConjugationIdentities",
+  "date": "2026-10-26",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-pd-section-resolution-conjugation-identities",
+   "place": "Existing specified total comparisons used in the input/output conjugation and ordinary total square.",
+   "via": [
+    "def-pd-section-derived-tensor-data",
+    "def-pd-section-total-oplax-comparison-data"
+   ]
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionCochainTensorComparison",
+  "file": "lean/Sheaf/Paper/SectionCochainTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.cochainTensorComparison",
+  "statement": "def cochainTensorComparison (X : Scheme.{u})\n    (P Q : CochainComplex (internalModules Λ X) ℤ) :\n    (cochainSectionEquivalence Λ X).obj (P ⊗ Q) ≅\n      (cochainSectionEquivalence Λ X).obj P ⊗\n        (cochainSectionEquivalence Λ X).obj Q",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionOrdinaryMonoidal",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalInternalGraded",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionGraded",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalInternalGoodLeft",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalInternalGoodRight",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalInternalTensorFour",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionGoodLeft",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionGoodRight",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionTensorFour",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalInternalHasTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionHasTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalInternalMonoidal",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionMonoidal",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalInternalMonoidalStruct",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionMonoidalStruct",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalCochainUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionCochainUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.retainedCochainObject",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.retainedCochainMap",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.retainedCochainFunctor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.retainedCochainFunctor_eq",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.cochainSectionEquivalence",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.cochainTensorComparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.cochainTensorComparison_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f206",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T182250-L-3543761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f206",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T182250-L-3543761",
+  "kind": "interface",
+  "note": "independent cc review: delivered SectionResolutionConjugationIdentities + 2 new modules + 4 adapted modules vs clone dce325f: old item predicates re-elaborated in scratch equal the new ones by with_unfolding_all rfl; #print axioms clean (no sorryAx); totalTensor/internalTotalTensor binders identical to published; sandbox chain plus 15 further users compiled OK; PESMF SLOW pre-existing (published 96 s concurrently)"
+ }
+}

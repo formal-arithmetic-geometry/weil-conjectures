@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-schubert-closure-cell-geometry",
+ "kind": "statement",
+ "title": "Schubert closure order, dimensions, and complementary cell tangent spaces",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]: smooth, connected, affine and of finite type with no nontrivial smooth connected solvable normal subgroup, such that every surjective homomorphism from a semisimple group with finite central kernel is an isomorphism. Solvable means that iterating the scheme-theoretic commutator subgroup becomes trivial; central means commuting after every scalar extension. Fix a split maximal torus $T\\subseteq B\\subseteq G$, with $B$ a Borel subgroup. Use $Q=G/B$, the root system $\\Phi$, the positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$ and the simple roots of [lem-sfb-reductive-borel-pair-structure], and the simple reflections $S=\\{s_1,\\ldots,s_r\\}$ of [lem-sfb-reductive-rank-one-reflections]. Let $W=N_G(T)(F)/T(F)$, representatives $n_w$, and $w_0$ be as in [lem-sfb-bruhat-longest-cell-charts]; put $B^-=n_{w_0}Bn_{w_0}^{-1}$, $N=|\\Phi^+|$, and $e_w=n_wB$. Every $w\\in W$ is a product of simple reflections; write $\\ell(w)$ for the least number of factors. Define $x\\leq w$ if a reduced expression of $x$ occurs as a subword of a reduced expression of $w$. This relation is a partial order, independent of the chosen reduced expression of $w$, and $x<w$ implies $\\ell(x)<\\ell(w)$. Put $C_w=Bn_wB/B$, $C^-_w=B^-n_wB/B$, and let $X_w$ and $X^-_w$ be their closures with reduced closed subscheme structures. The cells are smooth locally closed subschemes isomorphic respectively to $\\mathbf A_F^{\\ell(w)}$ and $\\mathbf A_F^{N-\\ell(w)}$ [def-sbc-affine-space]. Their closures are integral, of those dimensions, and their underlying sets satisfy\n$$|X_w|=\\coprod_{x\\leq w}|C_x|,\\qquad |X^-_w|=\\coprod_{x\\geq w}|C^-_x|.$$\nEach cell is open in its own closure. The two cell families stratify $Q$, $\\ell(w_0)=N$, and $C^-_1$ is open dense. Under the orbit-map identification $T_{e_w}Q=\\operatorname{Lie}(G)/\\operatorname{Ad}(n_w)\\operatorname{Lie}(B)$, the subspaces tangent to $C_w$ and $C^-_w$ are the sums of the root spaces of weights, respectively,\n$$\\Phi^+\\setminus w\\Phi^+,\\qquad (-\\Phi^+)\\setminus w\\Phi^+.$$\nIn particular they are complementary subspaces of $T_{e_w}Q$. Tangent space means the dual of $\\mathfrak m_{e_w}/\\mathfrak m_{e_w}^2$ [def-sc-scheme-tangent-space], and these are torus-character weights, not differentiated characters. All statements hold in every characteristic, also for $r=N=0$.",
+ "source": {
+  "document": "literature/brion-kumar-frobenius-splitting.pdf",
+  "place": "Section 2.1, printed pp.61--63, equations (2)--(6), subword description and opposite-cell paragraph. The cell tangent description is the orbit-map root-space calculation: Milne iAG2017 Theorem 21.73, printed p.447, with root-group products in Proposition 21.77, pp.448--449. Brion--Kumar local PDF WANTED; author-hosted primary PDF consulted online.",
+  "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/fbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-bruhat-longest-cell-charts",
+  "def-sbc-affine-space",
+  "def-sc-scheme-tangent-space"
+ ],
+ "proof": [
+  {
+   "text": "The semisimple group is reductive by [lem-sfb-reductive-borel-pair-structure]. By [lem-sfb-weyl-reflection-realization], its finite normalizer quotient is the reflection group on the rational root span. Extend scalars to $\\mathbf R$. Averaging any positive definite form over finite $W$ gives a positive definite $W$-invariant form. Each integral root reflection then is its orthogonal reflection: it fixes the hyperplane $\\langle-,\\alpha^\\vee\\rangle=0$ and negates $\\alpha$, so invariance makes that hyperplane orthogonal to $\\alpha$. The sign-coherent simple base is a real basis of the root span. Apply [lem-sfb-simple-root-reflection-generation] to obtain generation by the simple reflections. Moreover $s_i$ permutes $\\Phi^+\\setminus\\{\\alpha_i\\}$: reflection changes only the $\\alpha_i$-coordinate, and a positive root other than $\\alpha_i$ has a positive coordinate elsewhere, by reducedness. Hence its reflected root remains positive.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-weyl-reflection-realization",
+    "lem-sfb-simple-root-reflection-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.10--C.11 and C.21--C.22, pp.610--612; 21.41, p.436. Averaging and the sign-coordinate calculation are explicit elementary details."
+   }
+  },
+  {
+   "text": "Put $d(w)=|\\{\\beta\\in\\Phi^+:w\\beta\\in-\\Phi^+\\}|$. The preceding permutation property gives $d(ws_i)=d(w)+1$ if $w\\alpha_i>0$, and $d(w)-1$ otherwise. Prove $d(w)=\\ell(w)$ by induction on the length of a minimal word. If a minimal nonempty word is $u s_i$ and $u\\alpha_i<0$, [lem-sfb-root-sign-word-deletion] deletes one letter from the word for $u$ to express $u s_i$, contradicting minimality. Thus the sign is positive, and the induction gives the equality; the empty word has $d(1)=0$. Also $d(w)=d(w^{-1})$: $\\beta\\mapsto-w\\beta$ bijects their inversion sets. Consequently $|\\Phi^+\\setminus w\\Phi^+|=\\ell(w)$, $\\ell(w_0)=N$, and $\\ell(w_0w)=N-\\ell(w)$, since $w_0$ reverses every root sign. Finally every word has a reduced subword with the same product. Induct on its number of letters, replacing its prefix by such a subword. Appending $s_i$ gives a reduced word if the prefix sends $\\alpha_i$ positive, by the length formula. Otherwise apply the same deletion lemma to the reduced prefix and $\\alpha_i$, removing one prefix letter and omitting the final $s_i$. This leaves a reduced word of length one less than that prefix, with the required product. It is still a subword of the original word.",
+   "uses": [
+    "lem-sfb-root-sign-word-deletion",
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.10 exchange argument, p.610; 21.81--21.82, p.450. Length, inversion and deletion induction written explicitly."
+   }
+  },
+  {
+   "text": "Choose the regular cocharacter $\\lambda$ and equivariant projective embedding from [lem-sfb-flag-torus-fixed-geometry]. Apply [lem-sfb-projective-attracting-cells] to $Q$ and $\\lambda$, and also to $-\\lambda$. The hypotheses hold: $Q$ is nonempty smooth connected projective and its fixed subscheme is the finite reduced set $\\{e_w\\}$. For $b\\in B$, write $b=ut$; the $t$ factor fixes $e_w$. The product coordinates of [lem-sfb-borel-root-product-coordinates] and the root action in [lem-sfb-reductive-root-subgroup-parametrizations] show that $\\lambda(z)u\\lambda(z)^{-1}$ extends to $z=0$ with value $1$, because every root parameter is multiplied by $z^{\\langle\\alpha,\\lambda\\rangle}$ with positive exponent. Thus every point of $C_w$ tends to $e_w$. The disjoint Bruhat stratification from [lem-sfb-bruhat-longest-cell-charts] covers $Q$ after every algebraically closed extension, so its strata are exactly the attracting strata. Both are smooth reduced locally closed subschemes, and equality on geometric points identifies their structures. For $B^-$ use $n_{w_0}Bn_{w_0}^{-1}$, its negative-root coordinates, and $-\\lambda$. The positive tangent weights are respectively $\\Phi^+\\setminus w\\Phi^+$ and $(-\\Phi^+)\\setminus w\\Phi^+$. The attracting-cell theorem therefore gives $C_w\\simeq\\mathbf A^{\\ell(w)}$ and $C^-_w\\simeq\\mathbf A^{N-\\ell(w)}$, by step 2.",
+   "uses": [
+    "lem-sfb-flag-torus-fixed-geometry",
+    "lem-sfb-projective-attracting-cells",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.70--21.74, pp.446--447; 21.77--21.82, pp.448--450. Attracting-cell functors and root coordinates give the scheme structures."
+   }
+  },
+  {
+   "text": "Fix ANY reduced expression $\\mathbf i=(i_1,\\ldots,i_m)$ for $w$. Use [lem-sfb-bott-samelson-gallery-geometry] to form the integral projective gallery scheme $Z_{\\mathbf i}$, proper $B$-equivariant endpoint map $\\mu$, and dense open all-nonidentity gallery locus. For a nonempty word its image is $C_w$: successively multiply the simple double cosets using [lem-sfb-simple-bruhat-double-coset-product], since each suffix of a reduced word is reduced. For the empty word the endpoint is $e_1$ and $C_1$ is that point by step 3. The image $\\mu(Z_{\\mathbf i})$ is closed by properness [def-weil-proper-morphism], and contains $C_w$. Conversely every point of $Z_{\\mathbf i}$ is a specialization of its generic point in that dense open; continuity puts its endpoint in $\\overline{C_w}$. Hence $\\mu(Z_{\\mathbf i})=|X_w|$. Equivariance makes this closed subset $B$-stable.",
+   "uses": [
+    "lem-sfb-bott-samelson-gallery-geometry",
+    "lem-sfb-simple-bruhat-double-coset-product",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-kumar-frobenius-splitting.pdf",
+    "place": "Section 2.2.1, pp.64--66, especially the opening reduced-product paragraph and endpoint map (6). The argument identifies the proper image instead of assuming the closure formula."
+   }
+  },
+  {
+   "text": "For $x\\in W$, suppose $e_x\\in|X_w|$. The fibre $\\mu^{-1}(e_x)$ is a nonempty proper finite-type $F$-scheme, by [lem-weil-pbc-proper-fp-permanence]. It is $T$-stable since $e_x$ is fixed. The split torus is smooth connected and solvable (it is commutative), so [lem-sfb-solvable-proper-fixed-point] gives a $T$-fixed $F$-point of this fibre, without any reducedness assumption. The fixed-point clause of [lem-sfb-bott-samelson-gallery-geometry] writes its endpoint as $e_{s_{i_1}^{\\epsilon_1}\\cdots s_{i_m}^{\\epsilon_m}}$. Distinct indices give distinct fixed flags by [lem-sfb-flag-torus-fixed-geometry], hence $x$ is a product of a subexpression of this chosen reduced word. Conversely every such subexpression supplies a fixed gallery over $e_x$, so $e_x\\in|X_w|$. Since the proper image is $B$-stable, it contains precisely those Bruhat orbits with these indices. Apply the argument over every algebraically closed extension: every scheme point lifts over an algebraic closure of its residue field, so this orbit equality holds for the full underlying sets, not only for $F$-points.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-bott-samelson-gallery-geometry",
+    "lem-sfb-flag-torus-fixed-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-kumar-frobenius-splitting.pdf",
+    "place": "Section 2.2.1 endpoint map and subexpression embeddings, pp.65--66; Milne Corollary 17.3, p.353, applied to the proper endpoint fibre."
+   }
+  },
+  {
+   "text": "By step 2, a subexpression with product $x$ contains a reduced subword with product $x$. Conversely a reduced subword is a subexpression. Thus step 5 says $|X_w|=\\coprod_{x\\leq w}|C_x|$. It holds for every chosen reduced expression of $w$, proving expression independence. Reflexivity uses the full word. Transitivity follows from $x\\leq w\\Longleftrightarrow C_x\\subseteq X_w\\Longleftrightarrow X_x\\subseteq X_w$, the second implication being closure inside a closed set. For antisymmetry, equality of closures would give two nonempty open dense cells in one irreducible space; they meet and the disjoint Bruhat decomposition forces the indices to coincide. Here a locally closed subset is open in its closure, and the closure of the irreducible affine cell is irreducible. Finally if $x\\leq w$ and $\\ell(x)=\\ell(w)$, the reduced subword has as many letters as the whole word, so it is that word and $x=w$. Hence $x<w$ implies $\\ell(x)<\\ell(w)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/brion-kumar-frobenius-splitting.pdf",
+    "place": "Section 2.1 subword paragraph and equation (6), printed pp.62--63; elementary assembly from the preceding proper-image argument."
+   }
+  },
+  {
+   "text": "Each cell is open dense in its closure by local closedness. The reduced induced closure is reduced by [lem-weil-pbc-reduced-induced-closed-subscheme]; it is irreducible because the cell is an affine space, so it is integral. Apply [lem-weil-pbc-dense-open-dimension-comparison] to this finite-type reduced closed subscheme of $Q$: its dimension equals that of its cell. The affine-space dimensions are the integers computed in step 3; equivalently use [lem-sf-noetherian-polynomial-dimension] over $F$. This gives all the asserted closure dimensions for both cell families without a normality or smoothness assertion about their closures.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-dense-open-dimension-comparison",
+    "lem-sf-noetherian-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-kumar-frobenius-splitting.pdf",
+    "place": "Section 2.1, pp.62--63; Stacks Tag 0A21 (lemma-dimension-locally-algebraic, item-dimension-irreducible), and reduced induced closure."
+   }
+  },
+  {
+   "text": "Left translation by $n_{w_0}$ gives $n_{w_0}C_y=C^-_{w_0y}$: the possible discrepancy between representatives lies in $T\\subset B$, so does not change the flag. It is a scheme automorphism and takes reduced closures to reduced closures. Apply [lem-sfb-longest-subword-order-duality] to the real root system identified in step 1. Thus $x\\leq w_0w$ if and only if $w_0x\\geq w$. Translating the ordinary closure formula for $X_{w_0w}$ gives $|X^-_w|=\\coprod_{y\\geq w}|C^-_y|$. Translation also preserves the finite stratification. The ordinary longest cell is open dense by [lem-sfb-bruhat-longest-cell-charts]; translating it gives the open dense cell $C^-_1$.",
+   "uses": [
+    "lem-sfb-longest-subword-order-duality",
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-kumar-frobenius-splitting.pdf",
+    "place": "Section 2.1 opposite-cell paragraph, p.63; Milne 21.72--21.74, p.447."
+   }
+  },
+  {
+   "text": "The orbit-map tangent quotient follows directly from the local trivializations of the right $B$-torsor in [lem-sfb-bruhat-longest-cell-charts]. At $e_w$, the orbit map is $g\\mapsto gn_wB$, whose fibre at that point is $n_wBn_w^{-1}$. Differentiating a product trivialization makes its tangent map surjective with kernel $\\operatorname{Ad}(n_w)\\operatorname{Lie}(B)$, giving the stated identification. Now use the attracting functor in [lem-sfb-projective-attracting-cells], already identified with $C_w$ in step 3. A dual-number vector $v$ based at $e_w$ lies in its tangent space precisely when the orbit family $\\lambda(z)v$ extends polynomially to $z=0$ with value the constant point. In a weight-$a$ direction it is $\\epsilon z^a v$; this condition holds exactly for $a>0$, and for $a\\leq0$ forces $v=0$. The weight decomposition of [lem-sfb-flag-torus-fixed-geometry] therefore identifies $T_{e_w}C_w$ with the sum of the root lines in $\\Phi^+\\setminus w\\Phi^+$. Repeating with $-\\lambda$ gives $T_{e_w}C^-_w$ as the sum indexed by $(-\\Phi^+)\\setminus w\\Phi^+$. These are disjoint and exhaust $\\Phi\\setminus w\\Phi^+$, so they are complementary. No differentiation of torus characters was used.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-projective-attracting-cells",
+    "lem-sfb-flag-torus-fixed-geometry",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Milne 21.73 tangent calculation, p.447; 21.79, p.449; infinitesimal specialization of the attracting-cell functor."
+   }
+  },
+  {
+   "text": "If $N=r=0$, [lem-sfb-bruhat-longest-cell-charts] has a unique element reversing the empty positive-root set; every element does so, hence $W=\\{1\\}$. It then gives $Q\\simeq\\mathbf A^0_F=\\operatorname{Spec}F$ through its one-cell cover. The empty word and its sole subexpression give the reflexive order on one element. Both cells and closures are that point, all dimensions and tangent spaces are zero, and all formulas, including complementarity, hold. In every other case the arguments used only scheme-theoretic torus weights and root-group coordinates, so no characteristic was excluded.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Milne 21.80 and 21.86; empty-product conventions throughout."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-weyl-reflection-realization",
+  "lem-sfb-simple-root-reflection-generation",
+  "lem-sfb-root-sign-word-deletion",
+  "lem-sfb-bruhat-longest-cell-charts",
+  "lem-sfb-flag-torus-fixed-geometry",
+  "lem-sfb-projective-attracting-cells",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-bott-samelson-gallery-geometry",
+  "lem-sfb-simple-bruhat-double-coset-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-sfb-longest-subword-order-duality",
+  "def-sc-scheme-tangent-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/brion-kumar-frobenius-splitting.pdf",
+  "place": "Section 2.1, pp.61--63, and 2.2.1, pp.64--66, online primary PDF; local copy WANTED. Agent expands the closure proof using proper gallery fibres and Borel fixed points. Milne iAG2017 pp.436,446--451 and Appendix C.10--C.22 supply root and tangent inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bruhat closure order Schubert varieties dimension length longest Weyl group element",
+   "results": "OK: 8 hits; inspected hits include Order.krullDim_eq_length_of_finiteDimensionalOrder, LTSeries.longestOf_is_longest, LTSeries.longestOf_len_unique, CoxeterSystem.length_mul_ge_max, LieAlgebra.IsKilling.chainLength, CoxeterSystem.isRightDescent_iff, CoxeterSystem.length_mul_ge_length_sub_length', CoxeterSystem.isLeftDescent_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Coxeter, root-pairing, Lie-module, topological bundle or ring Picard declarations do not state scheme-theoretic flag-variety closures or tangent spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schubert\"",
+   "results": "OK: 0 hits; inspected hits include ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Coxeter, root-pairing, Lie-module, topological bundle or ring Picard declarations do not state scheme-theoretic flag-variety closures or tangent spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schubert variety closure is the union of Bruhat cells indexed by subwords and opposite cells have complementary tangent root spaces at Weyl fixed points",
+   "results": "OK: 8 hits; inspected hits include CoxeterSystem.subgroup_closure_range_simple, CoxeterSystem.submonoid_closure_range_simple, RootPairing.range_weylGroup_coweightHom, LieAlgebra.rootSpace, Topology.RelCWComplex.union, Submonoid.op_closure, Topology.RelCWComplex.Subcomplex.union, stableUnderSpecialization_iff_Union_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Coxeter, root-pairing, Lie-module, topological bundle or ring Picard declarations do not state scheme-theoretic flag-variety closures or tangent spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Schubert|Bruhat|flag.variety",
+   "results": "OK: 1 hits; inspected hits include Mathlib/Algebra/Module/Lattice.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Coxeter, root-pairing, Lie-module, topological bundle or ring Picard declarations do not state scheme-theoretic flag-variety closures or tangent spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite Bruhat cells in a flag variety have root tangent spaces complementary to ordinary Bruhat cells",
+   "results": "OK: 8 hits; inspected hits include RootPairing.isCompl_rootSpan_ker_rootForm, LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot, RootPairing.isCompl_corootSpan_ker_corootForm, RootPairing.IsBalanced.isPerfectCompl, LieAlgebra.InvariantForm.orthogonal_isCompl, LieAlgebra.InvariantForm.orthogonal_isCompl_toSubmodule, LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf, LieModule.isCompl_genWeightSpace_zero_posFittingComp",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Coxeter, root-pairing, Lie-module, topological bundle or ring Picard declarations do not state scheme-theoretic flag-variety closures or tangent spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closures of Bruhat cells are unions of cells in the subword order on the Weyl group of a reductive algebraic group",
+   "results": "OK: 8 hits; inspected hits include RootPairing.weylGroup_toSubmonoid, RootPairing.weylGroup.induction', RootPairing.weylGroup.induction, RootPairing.range_weylGroupToPerm, CoxeterSystem.subgroup_closure_range_simple, RootPairing.range_weylGroup_weightHom, MulAction.IwasawaStructure.is_generator, RootPairing.range_weylGroup_coweightHom",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Coxeter, root-pairing, Lie-module, topological bundle or ring Picard declarations do not state scheme-theoretic flag-variety closures or tangent spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Bruhat|Schubert|opposite.cell",
+   "results": "OK: 0 hits; inspected hits include ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Coxeter, root-pairing, Lie-module, topological bundle or ring Picard declarations do not state scheme-theoretic flag-variety closures or tangent spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schubert variety Bruhat subword closure dimension and complementary opposite cell tangent spaces",
+   "results": "OK: 8 hits; SSet.Subcomplex.PairingCore.type₁_dim, AmpleSet.of_one_lt_codim, SSet.Subcomplex.PairingCore.type₂_dim, SSet.Subcomplex.Pairing.dim_p, RootPairing.finrank_range_polarization_eq_finrank_span_coroot, Submodule.connectedComponentIn_eq_self_of_one_lt_codim, isConnected_compl_of_one_lt_codim, isPathConnected_compl_of_one_lt_codim",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives this combination of scheme-theoretic closure and tangent geometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CoxeterSystem\"",
+   "results": "OK: 12 hits; CoxeterSystem.alternatingWord, CoxeterSystem, CoxeterSystem.braidWord, CoxeterMatrix.toCoxeterSystem, CoxeterSystem.simple, CoxeterSystem.length_alternatingWord, CoxeterSystem.wordProd, CoxeterSystem.simple_determines_coxeterSystem",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives this combination of scheme-theoretic closure and tangent geometry"
+  },
+  {
+   "tool": "grep",
+   "query": "Schubert|Bruhat|Bott.Samelson",
+   "results": "OK: 1 hits; Mathlib/Algebra/Module/Lattice.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives this combination of scheme-theoretic closure and tangent geometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closure of Bruhat cells in flag varieties is given by the subword order and opposite cells have complementary tangent spaces",
+   "results": "OK: 8 hits; OrderClosedTopology, Submonoid.unop_closure, Submonoid.op_closure, Flag.instGradeOrderSubtypeMem, Topology.RelCWComplex.closure_openCell_eq_closedCell, HasUpperLowerClosure, Flag.instGradeMaxOrderSubtypeMem, Subtype.instOrderClosedTopology",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives this combination of scheme-theoretic closure and tangent geometry"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-opposite-schubert-picard-basis",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Geometry used before both characteristic cases: projectivity/smoothness and ampleness of M_(lambda+rho) and M_(lambda+2rho). Fundamental-weight divisor calculation used to construct affine nonvanishing opens. Supporting input: Opposite Schubert divisors form the degree-dual Picard basis. Supporting Bruhat closure order and complementary tangent spaces of the ordinary and opposite cells, before the Picard argument.",
+   "via": [
+    "lem-sfb-opposite-schubert-picard-basis",
+    "lem-sfb-fundamental-flag-boundary-sections",
+    "lem-sfb-strict-dominant-flag-line-ample",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-schubert-closure-cell-geometry",
+  "worker": "stage1",
+  "summary": "Expanded the previously empty proof using existing Bruhat and attracting-cell statements, a root-sign deletion argument, proper Bott--Samelson gallery fibres and Borel fixed points. Three strictly supporting inputs isolated: simple-double-coset multiplication, gallery geometry, and abstract longest-subword duality. All-characteristic tangent formula obtained from the attracting functor on dual numbers. No statement change. Empty-root case checked.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Geometry used before both characteristic cases: projectivity/smoothness and ampleness of M_(lambda+rho) and M_(lambda+2rho). Fundamental-weight divisor calculation used to construct affine nonvanishing opens. Supporting input: Opposite Schubert divisors form the degree-dual Picard basis. Supporting Bruhat closure order and complementary tangent spaces of the ordinary and opposite cells, before the Picard argument. Steps 1--10 supply the Schubert geometry prerequisite of the Picard-basis argument on the existing alteration/Haboush route; the current blueprint direct-image proof (3) is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dense-open-dimension-comparison",
+    "why": "Generic dimension equality for the dense open cell in its finite-type closure; the unit has no replacement for this dimension tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dense-open-dimension-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-8ef69805f",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-8ef69805f (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and every cited statement in full; the full review is in review.md. Sources checked: Milne iAG2017 21.70-21.75 (attracting cells, the cells are B_u-orbits, tangent space g/Ad(n)b, Tits system) and Cor 17.3 (Borel fixed point). Brion-Kumar is not in literature/ (WANTED, proof marked by: agent). Step checks: s1 Δ linearly independent (reductive-borel step 8), and the averaged form makes each reflection orthogonal, so simple-root-reflection-generation applies. s2 deletion-lemma hypotheses come from s1; I checked d=ℓ, ℓ(w0w)=N−ℓ(w) and the reduced-subword extraction. s3 λ(z)uλ(z)^-1→1 puts Bn_wB/B in the attracting cell; these sets cover Q by the chart node's G=⊔C_w, and the attracting cells are disjoint, so the two families agree. Positive weights Φ+∖wΦ+ and (−Φ+)∖wΦ+ give dimensions ℓ(w) and N−ℓ(w). s4 the image of the proper μ is closed and equals |X_w|. s5 the fibre over e_x is proper (by base change), nonempty and T-stable, so it has a Borel fixed point, which is a subexpression gallery; the argument also works over alg-closed K. s6-s7 order axioms and dimensions OK. s8 n0C_y=C^-_{w0y}, then duality with a=x, b=w0w. s9 the attracting functor on dual numbers gives the tangent spaces weight by weight, with no differentiated characters. s10 rank-0 case OK. New nodes are true, tested on SL2, (s,s) with 4 fixed points, m=0 and A2. None is a duplicate (rg of the DAG) and none restates an item clause; the double-coset node is redundant in step 4 but harmless, so kept. No cycle. The declared tool_use (dense-open-dimension) is accepted; both weil-pbc nodes are Lean-closed. Batch-5: every flagged path reaches trf only through generic lemmas (fppf covering base change, smooth composition, smooth fpqc descent, polynomial quotient dimension bound, split torus smooth), none of them part of the trace formula or Poincaré duality, so no assumption leaf is needed. FIX (B3): the gallery node said smooth/integral/projective/proper without citations; def-sbc-smooth-morphisms and def-pc-integral-scheme are added to its stmt_deps and the four definitions are cited in its text; the corrected node is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-bott-samelson-gallery-geometry.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SchubertClosureCellGeometry",
+  "declaration": "AlgebraicGeometry.Schubert.schubert_closure_cell_geometry",
+  "declarations": [
+   "AlgebraicGeometry.Schubert.wordLength",
+   "AlgebraicGeometry.Schubert.SubwordLE",
+   "AlgebraicGeometry.Schubert.reducedClosure",
+   "AlgebraicGeometry.Schubert.conjugateLie",
+   "AlgebraicGeometry.Schubert.schubert_closure_cell_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SchubertClosureCellGeometry.lean",
+  "statement": "theorem schubert_closure_cell_geometry {F : Type u} [Field F] [IsAlgClosed F] (G T B : Grp (Over (Spec (.of F)))) (hG : IsSemisimpleGroupScheme G.X) (hsc : ∀ (G' : Over (Spec (.of F))) [GrpObj G'], IsSemisimpleGroupScheme G' → ∀ (f : G' ⟶ G.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (g : StandardGroupSchemes.affine F A ⟶ G'), (x ≫ GrpObj.kerι f) * g = g * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (haG : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (D : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (base : D.Base) (hred : D.IsReduced) (hroot : ∀ α : Φ, D.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (D.toLinearMap χ ν)) (hΦ : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, base.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (Q : Over (Spec (.of F))) (π : G.X ⟶ Q) (hQ : IsProper Q.hom ∧ LocallyOfFiniteType Q.hom ∧ QuasiCompact Q.hom) (hπflat : Flat π.left) (hπsurj : Surjective π.left) (hπinv : (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) ≫ π = fst G.X B.X ≫ π) (hπtorsor : IsPullback (fst G.X B.X) (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) π π) (act : RankOneRoots.Weyl iT →* Aut T) (hact : ∀ (n : RankOneRoots.normalizer iT) (A : Over (Spec (.of F))) (t : A ⟶ T.X), t ≫ (act (QuotientGroup.mk n)).hom.hom.hom ≫ iT.hom.hom = (toUnit A ≫ n.val) * (t ≫ iT.hom.hom) * (toUnit A ≫ n.val)⁻¹) (s : base.support → RankOneRoots.Weyl iT) (hs : ∀ (α : base.support) (χ : RankOneRoots.Character T), (act (s α)).inv ≫ χ = (D.reflection α.val (Additive.ofMul χ)).toMul) (n : RankOneRoots.Weyl iT → RankOneRoots.normalizer iT) (hn : ∀ w, QuotientGroup.mk (n w) = w) (w₀ : RankOneRoots.Weyl iT) (hw₀ : Set.image (fun α : {α : Φ // base.IsPos α} ↦ (act w₀).inv ≫ α.val.val.toMul) Set.univ = Set.image (fun α : {α : Φ // base.IsPos α} ↦ (-α.val.val).toMul) Set.univ) : (∀ w : RankOneRoots.Weyl iT, ∃ l : List base.support, (l.map s).prod = w) ∧ (∀ x, SubwordLE s x x) ∧ (∀ x y z, SubwordLE s x y → SubwordLE s y z → SubwordLE s x z) ∧ (∀ x y, SubwordLE s x y → SubwordLE s y x → x = y) ∧ (∀ (w : RankOneRoots.Weyl iT) (b : List base.support), (b.map s).prod = w → b.length = wordLength s w → ∀ x : RankOneRoots.Weyl iT, SubwordLE s x w ↔ ∃ a : List base.support, a.Sublist b ∧ (a.map s).prod = x ∧ a.length = wordLength s x) ∧ (∀ x w : RankOneRoots.Weyl iT, SubwordLE s x w → x ≠ w → wordLength s x < wordLength s w) ∧ wordLength s w₀ = Nat.card {α : Φ // base.IsPos α} ∧ ∃ (C Cminus : RankOneRoots.Weyl iT → Over (Spec (.of F))) (c : ∀ w, C w ⟶ Q) (cminus : ∀ w, Cminus w ⟶ Q), (∀ w, IsImmersion (c w).left ∧ IsImmersion (cminus w).left ∧ Smooth (C w).hom ∧ Smooth (Cminus w).hom ∧ Nonempty (C w ≅ Over.mk (AffineSpace (ULift.{u} (Fin (wordLength s w))) (Spec (.of F)) ↘ Spec (.of F))) ∧ Nonempty (Cminus w ≅ Over.mk (AffineSpace (ULift.{u} (Fin (Nat.card {α : Φ // base.IsPos α} - wordLength s w))) (Spec (.of F)) ↘ Spec (.of F)))) ∧ (∀ (K : Type u) [Field K] [Algebra F K] [IsAlgClosed K] (w : RankOneRoots.Weyl iT) (x : StandardGroupSchemes.affine F K ⟶ Q), ((∃ z : StandardGroupSchemes.affine F K ⟶ C w, z ≫ c w = x) ↔ ∃ b : StandardGroupSchemes.affine F K ⟶ B.X, x = ((b ≫ iB.hom.hom) * (toUnit _ ≫ (n w).val)) ≫ π) ∧ ((∃ z : StandardGroupSchemes.affine F K ⟶ Cminus w, z ≫ cminus w = x) ↔ ∃ b : StandardGroupSchemes.affine F K ⟶ B.X, x = ((toUnit _ ≫ (n w₀).val) * (b ≫ iB.hom.hom) * (toUnit _ ≫ (n w₀).val)⁻¹ * (toUnit _ ≫ (n w).val)) ≫ π)) ∧ (∀ x : Q.left, ∃! w, x ∈ Set.range (c w).left) ∧ (∀ x : Q.left, ∃! w, x ∈ Set.range (cminus w).left) ∧ IsOpenImmersion (cminus 1).left ∧ DenseRange (cminus 1).left ∧ (∀ w, IsIntegral (reducedClosure (c w)) ∧ IsIntegral (reducedClosure (cminus w)) ∧ topologicalKrullDim (reducedClosure (c w)) = (wordLength s w : WithBot ℕ∞) ∧ topologicalKrullDim (reducedClosure (cminus w)) = (Nat.card {α : Φ // base.IsPos α} - wordLength s w : ℕ) ∧ closure (Set.range (c w).left) = ⋃ x : {x : RankOneRoots.Weyl iT // SubwordLE s x w}, Set.range (c x.val).left ∧ closure (Set.range (cminus w).left) = ⋃ x : {x : RankOneRoots.Weyl iT // SubwordLE s w x}, Set.range (cminus x.val).left ∧ IsOpen (Subtype.val ⁻¹' Set.range (c w).left : Set (closure (Set.range (c w).left))) ∧ IsOpen (Subtype.val ⁻¹' Set.range (cminus w).left : Set (closure (Set.range (cminus w).left)))) ∧ ∀ w : RankOneRoots.Weyl iT, ∃ E : (GrpObj.Lie G.X ⧸ conjugateLie iB (n w).val) ≃+ schemeTangentSpace F Q.left Q.hom (((n w).val ≫ π).left (IsLocalRing.closedPoint F)), (∀ (a : F) (v : GrpObj.Lie G.X ⧸ conjugateLie iB (n w).val), E (a • v) = ((StructureSheaf.toStalk F (Q.hom (((n w).val ≫ π).left (IsLocalRing.closedPoint F))) ≫ Q.hom.stalkMap (((n w).val ≫ π).left (IsLocalRing.closedPoint F)) ≫ Q.left.residue (((n w).val ≫ π).left (IsLocalRing.closedPoint F))).hom a) • E v) ∧ (∀ v : GrpObj.Lie G.X, (E ((conjugateLie iB (n w).val).mkQ v)).val = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom (StructureSheaf.toStalk F (Q.hom (((n w).val ≫ π).left (IsLocalRing.closedPoint F))) ≫ Q.hom.stalkMap (((n w).val ≫ π).left (IsLocalRing.closedPoint F)) ≫ Q.left.residue (((n w).val ≫ π).left (IsLocalRing.closedPoint F))).hom)) ≫ ((GrpObj.tangentPoint v * (toUnit _ ≫ (n w).val)) ≫ π).left) ∧ (∀ v : GrpObj.Lie G.X ⧸ conjugateLie iB (n w).val, (∃ t : Spec (.of (DualNumber (Q.left.residueField (((n w).val ≫ π).left (IsLocalRing.closedPoint F))))) ⟶ (C w).left, t ≫ (c w).left = (E v).val) ↔ v ∈ Submodule.map (conjugateLie iB (n w).val).mkQ (⨆ (α : Φ) (_ : base.IsPos α) (_ : ¬ ∃ β : Φ, base.IsPos β ∧ (act w).inv ≫ β.val.toMul = α.val.toMul), @TorusCharacterTangent.weightSpace F _ T G aG α.val.toMul)) ∧ (∀ v : GrpObj.Lie G.X ⧸ conjugateLie iB (n w).val, (∃ t : Spec (.of (DualNumber (Q.left.residueField (((n w).val ≫ π).left (IsLocalRing.closedPoint F))))) ⟶ (Cminus w).left, t ≫ (cminus w).left = (E v).val) ↔ v ∈ Submodule.map (conjugateLie iB (n w).val).mkQ (⨆ (α : Φ) (_ : ¬ base.IsPos α) (_ : ¬ ∃ β : Φ, base.IsPos β ∧ (act w).inv ≫ β.val.toMul = α.val.toMul), @TorusCharacterTangent.weightSpace F _ T G aG α.val.toMul)) ∧ IsCompl (Submodule.map (conjugateLie iB (n w).val).mkQ (⨆ (α : Φ) (_ : base.IsPos α) (_ : ¬ ∃ β : Φ, base.IsPos β ∧ (act w).inv ≫ β.val.toMul = α.val.toMul), @TorusCharacterTangent.weightSpace F _ T G aG α.val.toMul)) (Submodule.map (conjugateLie iB (n w).val).mkQ (⨆ (α : Φ) (_ : ¬ base.IsPos α) (_ : ¬ ∃ β : Φ, base.IsPos β ∧ (act w).inv ≫ β.val.toMul = α.val.toMul), @TorusCharacterTangent.weightSpace F _ T G aG α.val.toMul))",
+  "branch": "sheaf-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four data-complete helpers spell out the length, subword relation, existing reduced-closure construction and conjugated Lie subspace explicitly introduced by this node. The tangent equivalence is additive with an explicit base-field scalar law and its canonical dual-number orbit formula; tangent subspaces are specified by factorization through the cell immersion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-652167ad4",
+  "group": "Q42",
+  "result": "fix",
+  "note": "Lean exact vs node: hypotheses verbatim from the Borel-pair/Bruhat-chart/rank-one interfaces plus the landed simplyConnected_character_lattice hsc; act, s (reflection per simple root), w0 pinned; (act w).inv≫χ = w·χ so the Φ+∖wΦ+ exclusion is right; SubwordLE partial order, expression independence over every reduced b, strict length, ℓ(w0)=N; cells immersed, smooth, ≅ A^ℓ / A^{N-ℓ}, pinned on K-points as BnwB/B and (n0Bn0⁻¹)nwB/B, both families partition |Q|, C⁻₁ open dense; vanishingIdeal reduced closures integral with dims ℓ(w), N-ℓ(w), closure formulas ≤/≥ in the right directions, cell open in closure; tangent E F-linear and pinned by the orbit derivative, cell tangents = Φ+∖wΦ+ and (−Φ+)∖wΦ+ root sums, IsCompl; edge cases r=N=0, rank one, all characteristics, single universe u. Sole fault H11 (same-worker second reading) → fixes/lem-sfb-schubert-closure-cell-geometry.report.md = Worker report verbatim + independent second reading. Advisory: parallel unlanded Q50 simpleBruhatWordLength (no clash); GrpObj.Lie owner reached via torus-character-tangent-weights → sk-d-tangent."
+ }
+}

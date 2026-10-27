@@ -58,7 +58,7 @@
    }
   },
   {
-   "text": "Nagata applies by steps 1–2. Fix its dense compactification $f=pj$, with $j$ a quasi-compact open immersion and $p$ proper.",
+   "text": "Nagata applies by steps 1–2. Use its chosen compactification $f=pj$, with $j$ a quasi-compact open immersion and $p$ proper.",
    "uses": [
     "sk-thm-nagata-compactification"
    ],
@@ -102,9 +102,10 @@
    }
   },
   {
-   "text": "For finite $A$, the finite-coefficient preservation theorem applies to this general Brown adjoint and gives $f^!(\\Dctf(Y,A))\\subseteq\\Dctf(X,A)$.",
+   "text": "For finite A, identify its condensed ring with the continuous coefficient ring of ULift A by explicit sectionwise inverse maps. Conjugate the supplied adjunction along the coefficient equivalences, apply finite preservation, and transport it back.",
    "uses": [
-    "sk-prop-sf-rf-shriek-preservation"
+    "sk-prop-sf-rf-shriek-preservation",
+    "lem-sfb-shriek-coefficient-isomorphism"
    ],
    "elementary": false,
    "source": {
@@ -113,10 +114,11 @@
    }
   },
   {
-   "text": "For $\\Lambda=\\mathcal O_E$, the integral Brown identification identifies this adjunction with the integral one. Integral restriction therefore gives preservation of $\\Dctf$ for the same $f^!$.",
+   "text": "For $\\Lambda=\\mathcal O_E$, the integral Brown identification identifies this adjunction with the integral one. Integral restriction therefore gives preservation of $\\Dctf$ for the same $f^!$. Transport the preservation predicate across the comparison using its isomorphism invariance.",
    "uses": [
     "det-prop-int-brown-adjoint",
-    "sk-thm-int-restriction"
+    "sk-thm-int-restriction",
+    "det-def-sfb-constructible-tor-amplitude"
    ],
    "elementary": false,
    "source": {
@@ -125,9 +127,11 @@
    }
   },
   {
-   "text": "For $E$ and $\\overline{\\mathbf Q}_\\ell$, rational restriction gives preservation of $\\Dctf$ for this same general Brown adjoint.",
+   "text": "For finite extensions apply rational restriction to the same adjoint. For the finite-subextension-valued closure apply rational restriction glue and the equality Dctf=Dbc.",
    "uses": [
-    "sk-thm-restriction"
+    "sk-thm-restriction",
+    "det-thm-restriction-glue",
+    "det-def-localizing-closure-ctf-equals-bc"
    ],
    "elementary": false,
    "source": {
@@ -136,10 +140,11 @@
    }
   },
   {
-   "text": "The base-coefficient identification gives $\\underline{\\mathbf Z}_\\ell\\cong\\underline{\\mathcal O}_{E_0}$ and $\\underline{\\mathbf Q}_\\ell\\cong\\underline{E_0}$ for the bottom finite subextension $E_0$. Coefficient-isomorphism transport identifies the compactification functors and their given right adjoints. Thus steps 9–10 give preservation for $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ too.",
+   "text": "Use the base-coefficient identifications with the bottom finite extension for Z_l and Q_l. Exact coefficient transport preserves the ambient-intersection closures by minimality, so its compactification comparison conjugates the supplied adjunction. Apply integral or rational preservation and reflect Dctf under the equivalence.",
    "uses": [
     "lem-sfb-base-coefficient-condensed-identification",
-    "lem-sfb-shriek-coefficient-isomorphism"
+    "lem-sfb-shriek-coefficient-isomorphism",
+    "det-def-localizing-closure-existence"
    ],
    "elementary": false,
    "source": {
@@ -148,20 +153,21 @@
    }
   },
   {
-   "text": "Both functors now preserve the full $\\Dctf$ subcategories. Apply fully faithful adjunction restriction to their inclusions and the identity comparison isomorphisms. The resulting Hom bijections, unit and counit give (4).",
-   "uses": [
-    "lem-sp-fully-faithful-adjunction-restriction"
-   ],
-   "elementary": false,
+   "text": "The displayed preservation predicates express restriction to the full Dctf subcategories. Their Hom equivalences are those of the original adjunction; no additional adjunction witness is requested by the Lean conclusion.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
     "place": "final paragraph: formal restriction of the adjunction"
    }
   },
   {
-   "text": "For the five non-finite coefficients, the cited equality theorem applies to the qcqs schemes of step 1: $\\Dctf=\\Dbc$ and their localizing closures agree. Substitution gives the claimed $\\Dbc$ version.",
+   "text": "Apply the recorded Dctf=Dbc equality to the integral and finite-extension cases. For the all-continuous algebraic closure, the finite-type schemes are noetherian; transport bounded constructibility termwise, apply its separate finite-Tor theorem, and reflect Dctf along the coefficient equivalence.",
    "uses": [
-    "det-def-localizing-closure-ctf-equals-bc"
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-sf-comp-continuous-algcl-constructible-tor",
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "lem-sfb-shriek-coefficient-isomorphism"
    ],
    "elementary": false,
    "source": {
@@ -172,12 +178,16 @@
  ],
  "proof_deps": [
   "det-def-localizing-closure-ctf-equals-bc",
+  "det-def-localizing-closure-existence",
+  "det-def-sfb-constructible-tor-amplitude",
   "det-prop-int-brown-adjoint",
   "det-sf-comp-coherence-cocycle",
   "det-sf-comp-coherence-single",
+  "det-sf-comp-continuous-algcl-constructible-tor",
+  "det-thm-restriction-glue",
   "lem-sfb-base-coefficient-condensed-identification",
+  "lem-sfb-condensed-coefficient-iso-constructible",
   "lem-sfb-shriek-coefficient-isomorphism",
-  "lem-sp-fully-faithful-adjunction-restriction",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-qcqs-over-affine",
@@ -191,8 +201,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/sk-thm-existence.proof.md",
-  "place": "Current unit proof, compactness/Brown and restriction paragraphs, expanded by det-existence-localizing.proof.md and det-existence-restriction.proof.md; coefficient equality from the existing proetale-coefficients lemma."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/_section.md",
+  "place": "D3: compiled assembly of clauses 1–4 along det-existence-localizing.proof.md and det-existence-restriction.proof.md; explicit coefficient-conjugation and distinction between continuous and finite-subextension-valued algebraic closures."
  },
  "mathlib_searches": [
   {
@@ -264,7 +274,18 @@
  ],
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-existence",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "sk-thm-existence",
@@ -346,5 +367,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Re-delivery after L's 06:31 return of e8440f2ec593 ('also in LocalizingExceptionalAdjoint'). Delta (diff -rq of the snapshots): the duplicate LocalizingLowerShriek.lean and the edited LocalizingExceptionalAdjoint.lean are dropped; the item drops only its import of LocalizingLowerShriek, so the theorem is byte-identical to the version PASSed at 23cbcc/e8440; def-sf-localizing-lower-shriek is now existing:true on the live localizingLowerShriek (ObjectProperty.lift of ι⋙Rp_*D(j_!), real data) and localizingLowerShriekCommShift (inherited instance), the accepted resolution already used for NO fe34. Re-checked: setting, admissible Λ, clauses 1-4, Dctf=Dbc for the non-finite coefficients, no stronger hypotheses, edge cases and universes, lean.statement verbatim, one sorry, docstrings, Worker report and Second reading by NB. No cycle (the sk-prop-sf-existence proof_deps do not cite the item). nt_compile --json clean: rc 0, 11.3 s. Maintainer: NO det-sf-existence-brown fe34 delivers the same node id def-sf-localizing-lower-shriek (same declarations, different prose and deps); the second landing may collide."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T202012-L-1248969",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

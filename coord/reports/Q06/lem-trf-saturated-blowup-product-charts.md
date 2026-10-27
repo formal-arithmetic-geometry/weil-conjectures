@@ -1,0 +1,51 @@
+# Stage-1 worker report: lem-trf-saturated-blowup-product-charts
+
+1. Files written:
+   - dag/nodes/sec-trace-formula/lem-trf-saturated-blowup-product-charts.json: assigned statement, unchanged; split into eight steps; not a Mathlib leaf.
+   - dag/nodes/sec-trace-formula/lem-trf-affine-monoscheme-hom-universal.json: one new statement-only node, unsplit; no Mathlib match.
+   - citations.json: a verbatim statement quotation for each of the thirteen step/node citations.
+   - searches.jsonl: actual msearch.py log, retained in the sandbox.
+2. Attachments: none. Searching WeilConjectures for the blueprint tag, saturated monoidal blowups, monoid spectra and monoschemes found no project declaration stating this result. Ordinary scheme blowup files do not give root saturation or monoscheme pullbacks.
+3. WANTED: none. The ILO source PDF is available and was read.
+4. Issues found: the original item had no proof. The source Remark 3.1.23 says the smooth-product verification is easy but does not write the generator, root-saturation, tensor inverse or coherence calculations. Those are now explicit. No statement correction was needed. The existing affine fan Hom lemma assumes sharp source stalks and uses a sharpened target; applying it to arbitrary unsharpened monoschemes would be invalid. A separate unsharpened lemma is needed. The latest blueprint no longer follows the historical nearby-cycle/alteration branch: its local-term node uses contracting correspondences. I preserved the assigned auxiliary item's mathematics and recorded its historical role without claiming it replaces the latest unit route.
+5. Unfinished: no requested split work remains. The new general spectrum lemma is deliberately statement-only, as required for a one-level split; its proof belongs to a subsequent item.
+
+## New nodes
+
+lem-trf-affine-monoscheme-hom-universal states ILO VIII Lemma 3.1.8(i), printed p.99: local morphisms into the unsharpened affine monoid spectrum correspond to homomorphisms into global monoid sections, naturally in both arguments. It introduces the test space, monoid sheaf, local-stalk condition, and canonical sections. I read the statement and proof of 3.1.8(i), with definitions 3.1.2--3.1.6 on pp.98--99. The source's map sends a point to the inverse image of the nonunits of its stalk and factors through the localized monoid. Unlike 3.1.8(ii), it needs no sharpness. Searches by the precise bijection and a second phrasing by local stalk maps found only ringed-space Gamma/Spec adjunctions; Loogle found neither MonoidSpectrum nor MonoidalSpace; grep found no such notion (one earlier loose expression hit the unrelated IsDedekindDomain.HeightOneSpectrum identifier). Every query in its JSON is an actual msearch.py query, with its recorded result. No SGA source is used. It is not a blowup lemma and does not restate any clause of this item.
+
+## Not duplicates
+
+lem-trf-affine-monoscheme-hom-universal vs lem-trf-affine-fan-hom-universal: the existing lemma is ILO VIII 3.1.8(ii), for a sharp fine monoid, a sharpened target and sharp test stalks; the new lemma is (i), the unsharpened spectrum and arbitrary commutative-monoid stalks. One cannot recover arbitrary unit data from the sharp assertion.
+
+lem-trf-affine-monoscheme-hom-universal vs lem-trf-affine-fan-canonical-section-rigidity: the latter proves uniqueness/recovery for sharp fan maps, not existence or the unsharpened spectrum/global-sections bijection.
+
+lem-trf-affine-monoscheme-hom-universal vs lem-trf-affine-fan-basic-map-local-lift: the latter extends already supplied basic-open sharp quotient maps; it does not assert the bijection for arbitrary unsharpened target monoids or test stalks.
+
+I searched the whole DAG by monoid spectrum, unsharpened, monoidal-space and source 3.1.8 wording and inspected the matching statements. blueprint_refs.py searches for monoid, monomial, saturation, toric, blowup product, monoidal spaces, unsharpened and global sections gave no imported blueprint node stating either the item or this new unsharpened lemma. The existing toric chart normalization node supplies normalization and overlap descriptions, so no duplicate chart lemma is introduced. The tensor factorization is elementary and is proved as a step, not made into a new Mathlib node.
+
+## Review by Q06
+
+I read delivery-errors.md B--E in full, and checked the statements and sources rather than relying on imported dependency lists. The item follows ILO VIII Remark 3.1.23, printed p.101, using its blowup charts in 3.1.19--3.1.21 and toric comparison in Lemma 3.2.17/Corollary 3.2.18, printed p.105. I read all these passages in the PDF text, together with saturation 3.1.17 and the definition/coaction 3.2.14--3.2.15. The explicit calculation is agent-written and is labelled accordingly. No source needed for the new node is missing.
+
+Step 1 uses def-trf-fine-fan-blowup for ideal generation and difference-chart notation. Its statement defines exactly the submonoid generated by P and b-a, for all b in the ideal. I checked the two generator inclusions and that E times zero generates I times H. Enlarging E by the chosen a justifies the statement's quantifier over all a, not merely one initially chosen generating set.
+
+Step 2 uses that same definition's root-saturation formula. Integer-coordinate nonnegativity proves that H=N^r plus Z^t is saturated, so a witness n works without any converse cancellation assumption on P. This is an elementary membership calculation; no new saturation node is needed.
+
+Step 3 uses the finite-sum monoid-algebra definition in def-trf-monoscheme-toric-realization and the bilinear universal property/generation in def-weil-pbc-module-tensor-product. I wrote both maps and checked multiplication on basis elements. The tensor-product searches did find AddMonoidAlgebra.tensorEquiv and scalarTensorEquiv; these concern this elementary subcalculation, not the complete blowup product theorem, so I neither declared the item Mathlib nor made an unnecessary leaf.
+
+Step 4 cites the statement of lem-trf-toric-blowup-chart-normalization, which gives ordinary rings k[C_a], normalized rings k[C_a^sat], fineness and torsion-free group completions. I verified the hypotheses for Q: it is finitely generated, integral inside G plus Z^(r+t), and that group is torsion free. P need not be saturated or sharp; the cited statement does not require either. Applying it after adjoining a to E covers any a in I.
+
+Step 5 cites the tensor definition, monoid-algebra definition and the existing Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra. I read its entire statement: it gives the actual scheme fibre product and both projections, not just a ring isomorphism. F is balanced because a factor from k[P] adds the same exponent on either side; V on monomials is its inverse, with the balancing identity written out. The argument applies to the ordinary charts as well. This is the only theorem from another unit, and it is already a Mathlib leaf, so no off-route tool declaration is needed.
+
+Step 6 uses only the new affine-monoscheme Hom statement. Its naturality turns agreeing maps into agreeing monoid homomorphisms. I explicitly prove the amalgamated-sum property by f(c)+g(0,h), rather than inserting an uncited theorem about monoscheme base change. This is why the new lemma must permit arbitrary test stalks. Fineness of each target monoid is supplied in Step 4. Universal quantification over test spaces establishes the claimed categorical pullback, not just an equality of chart coordinates.
+
+Step 7 cites the chart-normalization statement for the precise denominators b-a and a-b and localization, and lem-trf-fine-monoid-finite-saturation for saturation commuting with localization. I checked that its localization formula applies to these fine integral chart monoids; it does not require sharpness or a normal base. The comparison sends a fraction to the image of its exponent x-nd, and so do both inverses, giving compatibility rather than merely asserting transport. Gluing uses exactly the compatible-tuples construction in def-trf-monoscheme-toric-realization. No affineness of arbitrary intersections is assumed.
+
+Step 8 uses the stated base/coaction convention of def-trf-monoscheme-toric-realization. I compute the total degree (c+p,h) explicitly. For composition, the next extension has a Q-component (p',u), so the output is (c+p+p',h+u,h'); this checks the full iterated tensor generating family, including u, rather than only the special case u=0. The identity is the zero-factor extension, with the canonical tensor identity map, and the fraction formula proves all localized variants.
+
+I tested small cases: H=0 (r=t=0) gives the identity comparison; P=0 and I=P give H unchanged; P=N and I=a+N give an ordinary identity blowup, with normalization retained if P was originally nonsaturated; P=<2,3> inside Z and I=P give C=P and C^sat=N, so the proof does not discard the nontrivial saturation stage; P=Z checks all-unit monoids. For P=N^2 and I generated by (1,0),(0,1), the first chart contains (0,1)-(1,0), and its overlap inverts exactly that difference; the product formulas retain an additional free coordinate unchanged. Empty ideals are excluded by hypothesis. Arbitrary field characteristics and zero ranks cause no division in the proof. The new spectrum lemma allows P=0, groups P, empty T and sheaves with nontrivial units: none requires sharp stalks or nonempty test spaces.
+
+All new-node proof and proof_deps fields are empty. Every cited node exists; each quote in citations.json is copied verbatim from its statement. All eight steps are shorter than 1000 characters, and no long step hides a separate comparison lemma. The only new non-elementary input is the universal property just described. No Lean source, build tools, repository files or launcher files were written.
+
+The first dry run found a citation-format error in the new statement: two ids shared one bracket. I changed them to separate node-reference brackets and regenerated its verbatim citation quote. The mathematics and dependencies are unchanged.

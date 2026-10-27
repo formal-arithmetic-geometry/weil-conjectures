@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-etale-configuration-free-sheaf-distinct-locus",
+ "kind": "definition",
+ "title": "Free represented abelian sheaf and distinct étale configuration locus",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention], and let $X$ be an algebraic space over $S$ with small étale site $X_{\\mathrm{et}}$ [def-trf-algebraic-space]. For an object $U$ of this site define $\\mathbf Z[U]$ to be the abelian sheafification [def-weil-pbc-sheafification] of the presheaf $V\\mapsto\\mathbf Z[\\operatorname{Hom}_{X_{\\mathrm{et}}}(V,U)]$ of free abelian groups, with restriction by precomposition; use the canonical universe lift to abelian groups in universe $u+1$. For any objects $U,T$ of this site, integer $n\\geq0$ and arrows $\\operatorname{pr}_i:T\\to U$ indexed by $i\\in\\{0,\\ldots,n-1\\}$, define the distinct-configuration subset of the underlying scheme of $T$ to be $\\{x\\in|T|:\\ x\\notin\\operatorname{im}(|\\operatorname{Eq}(\\operatorname{pr}_i,\\operatorname{pr}_j)|\\to|T|)\\text{ for every }i\\ne j\\}$, where each equalizer is taken between the underlying scheme morphisms. This defines the subset without asserting it is open or closed or imposing a product condition on $T$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0726, lemma-compute, definition of W_p and K^p preceding its Hom identification; Tag 0728, lemma-alternating-spectral-sequence, first paragraph. The free represented abelian sheaf is the f_! constant-integer sheaf appearing in Tag 0726."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Free abelian sheaf represented by an etale object and complement of pairwise equality loci of a finite tuple",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.ιFree\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"{I : Type u} (i : I) : unit R ⟶ free I\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"SheafOfModules.freeFunctor_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the free sheaf functor maps each index type $I$ to the free sheaf of $R$-modules constructed \"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : SheafOfModules.{u} R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"CategoryTheory.Sheaf.freeYoneda\", \"module\": \"Mathlib.CategoryTheory.Generator.Sheaf\", \"type\": \"(X : C) (M : A) : Sheaf J A\", \"doc\": \"The sheaf obtained by sheafifying the presheaf constructed via the free Yoneda functor, which for objects $X$ in category $\\\\mathcal{C}$ and $M$ in a category $\\\\mathcal{A}$ with coproducts, sends each \"}\n  {\"name\": \"Condensed.freeAb\", \"module\": \"Mathlib.Condensed.Module\", \"type\": \": CondensedSet ⥤ CondensedAb\", \"doc\": \"The functor from the category of condensed sets to the category of condensed abelian groups, constructed by composing the free abelian group functor (which sends a set to its free abelian group) with \"}\n  {\"name\": \"SheafOfModules.freeSection\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"{I : Type u} (i : I) : (free (R := R) I).sections\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this function associates to each index $ i \\\\in I $ the canonical section in the free \"}\n  {\"name\": \"SheafOfModules.freeCofan\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : Cofan (fun (_ : I) ↦ unit R)\", \"doc\": \"Given an index type $ I $, this constructs a cocone (cofan) for the diagram of $ I $-indexed copies of the unit sheaf. The apex of the cocone is the free sheaf of $ R $-modules constructed as their co\"}\n  {\"name\": \"SheafOfModules.freeHomEquiv_symm_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"{M N : SheafOfModules.{u} R} {I : Type u} (s : I → M.sections) (p : M ⟶ N) :\\n  M.freeHomEquiv.symm s ≫ p = N.freeHomEquiv.symm (fun i ↦ sectionsMap p (s i))\", \"doc\": \"For any sheaves of modules $M$ and $N$ over a sheaf of rings $R$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, an index type $I$, a family of global sections $s: I \\\\to \\\\Gamma(M)$, and a \"}\n",
+   "date": "2026-10-24",
+   "verdict": "General free sheaves exist in Mathlib; reuse the already landed configurationFreeSheaf and configurationDistinctSet, with their exact site and coefficient universes. No Mathlib configuration-locus declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the free abelian presheaf on represented sections and distinct configuration locus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.freeYoneda\", \"module\": \"Mathlib/CategoryTheory/Generator/Sheaf\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {A : Type u'} →\\n        [inst_1 : CategoryTheory.Category.{v', u'} A] →\\n          [CategoryTheory.Limits.HasCoproducts A] →\\n            [CategoryTheory.HasWeakSheafify J A] → C → A → \", \"doc\": \"The sheaf obtained by sheafifying the presheaf constructed via the free Yoneda functor, which for objects $X$ in category $\\\\mathcal{C}$ and $M$ in a category $\\\\mathcal{A}$ with coproducts, sends each \"}\n  {\"name\": \"CategoryTheory.Sheaf.isSeparating\", \"module\": \"Mathlib/CategoryTheory/Generator/Sheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] [inst_2 : CategoryTheory.Limits.HasCoproducts A]\\n  [inst_3 : CategoryTheory.HasWeakSheafify J A] {ι : Type w} {S : ι → A},\\n  (CategoryThe\", \"doc\": \"If $\\\\{S_i\\\\}_{i \\\\in \\\\iota}$ is a separating family of objects in a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$, then the family of free Yoneda sheaves $\\\\{\\\\text{FreeYoneda}_J(S_i)\"}\n  {\"name\": \"SheafOfModules.freeSection\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this function associates to each index $ i \\\\in I $ the canonical section in the free \"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"SheafOfModules.ιFree\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"SheafOfModules.relationsOfIsCokernelFree\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Let $R$ be a sheaf of rings on a site. Given a presentation of a sheaf of $R$-modules $M$ by free sheaves, that is, an exact sequence $F_\\\\iota \\\\xrightarrow{f} F_\\\\sigma \\\\xrightarrow{g} M \\\\to 0$ where $\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"SheafOfModules.Presentation.mapGenerators\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Given a presentation $ P $ of a quasicoherent sheaf $ M $ over a ring sheaf $ R $, and a colimit-preserving functor $ F $ between categories of sheaves of modules, this morphism maps the free $ R $-mo\"}\n",
+   "date": "2026-10-24",
+   "verdict": "General free sheaves exist in Mathlib; reuse the already landed configurationFreeSheaf and configurationDistinctSet, with their exact site and coefficient universes. No Mathlib configuration-locus declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "configurationFreeSheaf|configurationDistinctSet|free.*Sheaf|distinct.*[Ll]ocus",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"21\", \"text\": \"- `SheafOfModules.IsLocallyFree`: `M : SheafOfModules R` is locally free is there exists locally\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"47\", \"text\": \"class IsLocallyFreeData {M : SheafOfModules.{u} R} (q : M.LocalGeneratorsData) : Prop where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"52\", \"text\": \"instance IsLocallyFreeData.shrink {M : SheafOfModules.{u} R} (q : M.LocalGeneratorsData)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"61\", \"text\": \"class IsLocallyFree (M : SheafOfModules.{u} R) : Prop where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"line\": \"64\", \"text\": \"theorem LocalGeneratorsData.isLocallyFree {M : SheafOfModules.{u} R} (q : M.LocalGeneratorsData)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"74\", \"text\": \"def generatorsOfIsCokernelFree {M : SheafOfModules.{u} R}\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"82\", \"text\": \"theorem generatorsOfIsCokernelFree_π {M : SheafOfModules.{u} R}\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"92\", \"text\": \"def relationsOfIsCokernelFree {M : SheafOfModules.{u} R}\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"114\", \"text\": \"def presentationOfIsCokernelFree {M : SheafOfModules.{u} R}\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"16\", \"text\": \"`SheafOfModules.freeFunctor : Type u ⥤ SheafOfModules.{u} R` which sends\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"24\", \"text\": \"  `freeFunctor` is a left adjoint to `SheafOfModules.sectionsFunctor`.)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"38\", \"text\": \"/-- The free sheaf of modules on a certain type `I`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"39\", \"text\": \"noncomputable def free (I : Type u) : SheafOfModules.{u} R := ∐ (fun (_ : I) ↦ unit R)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"45\", \"text\": \"/-- The tautological cofan with point `free I : SheafOfModules R`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"26\", \"text\": \"More generally, the functor `pullback φ` sends the free sheaf\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"117\", \"text\": \"/-- The pullback of a free sheaf of modules is a free sheaf of modules. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"58\", \"text\": \"noncomputable def freeYonedaEquiv {M : PresheafOfModules.{v} R} {X : C} :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"64\", \"text\": \"lemma freeYonedaEquiv_symm_app (M : PresheafOfModules.{v} R) (X : C)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"69\", \"text\": \"lemma freeYonedaEquiv_comp {M N : PresheafOfModules.{v} R} {X : C}\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"76\", \"text\": \"def freeYoneda : ObjectProperty (PresheafOfModules.{v} R) := .ofObj (yoneda ⋙ free R).obj\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"116\", \"text\": \"free presheaf of modules on the Yoneda presheaf of types corresponding to the\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\", \"line\": \"12\", \"text\": \"# The free presheaf of modules on a presheaf of sets\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\", \"line\": \"16\", \"text\": \"`PresheafOfModules.free : (Cᵒᵖ ⥤ Type u) ⥤ PresheafOfModules.{u} R`\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\", \"line\": \"43\", \"text\": \"noncomputable def freeObj (F : Cᵒᵖ ⥤ Type u) : PresheafOfModules.{u} R where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\", \"line\": \"50\", \"text\": \"/-- The free presheaf of modules functor `(Cᵒᵖ ⥤ Type u) ⥤ PresheafOfModules.{u} R`. -/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "General free sheaves exist in Mathlib; reuse the already landed configurationFreeSheaf and configurationDistinctSet, with their exact site and coefficient universes. No Mathlib configuration-locus declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"configurationFreeSheaf|configurationDistinctSet\" dag/nodes; rg -n \"configurationFreeSheaf|configurationDistinctSet\" lean/WeilConjectures lean/Sheaf; blueprint_refs.py search \"configuration\"; inspect all definition-node Lean records",
+   "results": "dag/nodes/sec-six-functors-basics/lem-sfb-etale-configuration-exterior-hom.json\n\nlean/Sheaf/AlgebraicGeometry/EtaleConfigurationExteriorHom.lean:61:noncomputable def configurationFreeSheaf {S : Scheme.{u}} (X : AlgebraicSpace S)\nlean/Sheaf/AlgebraicGeometry/EtaleConfigurationExteriorHom.lean:70:    (U : X.EtaleSite) : configurationFreeSheaf X U ⟶\nlean/Sheaf/AlgebraicGeometry/EtaleConfigurationExteriorHom.lean:88:    ((configurationFreeSheaf X U).obj ⋙ AddCommGrpCat.integralExteriorPower n)\nlean/Sheaf/AlgebraicGeometry/EtaleConfigurationExteriorHom.lean:93:    (U V : X.EtaleSite) (a : V ⟶ U) : (configurationFreeSheaf X U).obj.obj (op V) :=\nlean/Sheaf/AlgebraicGeometry/EtaleConfigurationExteriorHom.lean:104:    ((configurationFreeSheaf X U).obj ⋙ AddCommGrpCat.integralExteriorPower n)).app (op V)\nlean/Sheaf/AlgebraicGeometry/EtaleConfigurationExteriorHom.lean:109:noncomputable def configurationDistinctSet {S : Scheme.{u}} (X : AlgebraicSpace S)\nlean/Sheaf/AlgebraicGeometry/EtaleConfigurationExteriorHom.lean:160:          configurationDistinctSet X U T (p + 1) pr ∧\n\nBlueprint search found only det-tf-blowup-configuration and det-tf-blowup-strict-transform, unrelated surface blowups. No definition-node Lean record owns either declaration; the existing theorem node lists them as helpers. No WeilConjectures hits.",
+   "date": "2026-10-24",
+   "verdict": "Add a definition owner of the existing declarations in EtaleConfigurationExteriorHom; no declaration is copied, moved or redefined."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-alternating-sign-cohomology-spectral",
+  "date": "2026-10-24",
+  "group": "Q43"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections. Ordinary-sheaf input: Stacks 072C, lemma-vanishing-quasi-separated, finite bound independent of the quasi-coherent module. Supporting input: Tag 072C proof, displayed E_1 page supplied by Tag 0728, using the unordered distinct-tuple quotients and sign line of Tag 0727. Supporting definitions for Tags 0726 and 0728: the free represented abelian sheaf and the complement of all pairwise equality loci.",
+   "via": [
+    "lem-sfb-space-alternating-sign-cohomology-spectral",
+    "lem-sfb-space-qcoh-cohomology-finite-bound",
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleConfigurationExteriorHom",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.configurationFreeSheaf",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.configurationFreeSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.configurationDistinctSet"
+  ],
+  "statement": "noncomputable def configurationFreeSheaf {S : Scheme.{u}} (X : AlgebraicSpace S)\n    (U : X.EtaleSite) : Sheaf X.etaleTopology AddCommGrpCat.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition owner for the two existing plain definitions at lines 61-65 and 109-115 of EtaleConfigurationExteriorHom. configurationFreeSheaf is actual sheafification of uliftYoneda followed by AddCommGrpCat.free. configurationDistinctSet is the complement of the ranges of the underlying scheme equalizer inclusions for distinct indices. Neither construction uses etale_configuration_exterior_hom or chooses data from its postponed proof. This existing:true ownership record introduces no module or duplicate declaration, following def-sfb-presheaf-map-separated-diagonal."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7471295b8",
+  "group": "Q43",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7471295b8",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Re-delivery of returned 5c90: Lean module byte-identical to 5c90; item node changes only lean+stmt_deps. Both H2 findings resolved: hsep now cites def-sfb-presheaf-map-separated-diagonal (IsSeparatedPresheafMap owner) instead of lem-trf-space-qc-separated-etale-local; new existing:true def node def-sfb-etale-configuration-free-sheaf-distinct-locus owns configurationFreeSheaf/configurationDistinctSet (read against Stacks 0726/0728: sheafified free Z[Hom(-,U)] with ulift; complement of pairwise scheme-equalizer images; no rival owner in live), theorem kept only in proof_deps. Tensor advisory answered in report (integral AddCommGrpCat sectionwise tensor + sheafification). Clause check vs node/Stacks 0727-0728: cover, separated diagonal, W_p via fibre-product limit + clopen distinct locus, free action pinned by coordinates, orbit presheaf + fppf sheafification universal property, torsor, g via triangle, sign line = sign part of pi_*Z with restriction compatibility and trivialisation on W, natural E1 iso, rightDerived Hom(Z,-), finite filtration endpoints, gr = E_{p+q+2}, stabilisation r>max(p,q+1): all correct. Edge cases (empty, p=0, id cover, m=0, p>m, disconnected tests) fine. Gates: only sorry is main theorem, docstrings with source/blueprint, statement verbatim, 15 decls present, no extra hypotheses or universe restriction, no pro-etale. No compile (no file changed)."
+ }
+}

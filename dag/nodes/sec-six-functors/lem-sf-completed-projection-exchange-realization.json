@@ -1,0 +1,309 @@
+{
+ "id": "lem-sf-completed-projection-exchange-realization",
+ "kind": "statement",
+ "title": "Completed projection exchange realization",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. Use the small pro-etale coefficient categories and the specified six operations of [def-fix-six-functor-datum]. Finite inputs used for compact support carry compatible etale-origin witnesses; integral inputs are derived complete with compatible witnessed finite reductions, rational operations are raw localization, and algebraically closed coefficients are represented at a common finite coefficient field. All operations below are restricted to their stated constructible domains; tensor factors and comparisons have their stated finite-Tor hypotheses. Let $(f',g',f,g)$ be a Cartesian square of separated finite-type morphisms of finite-type $k$-schemes as follows: $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$. Let $K\\in D^b_c(X,R)$ and $L\\in D^b_{ctf}(Y,R)$. In the derived categories of strict semilinear systems of $((A_n)_T)_n$-modules, take their normalized reduction systems and the canonical system adjunction, tensor, open maps, projection and exchange maps. All four words in the projection/base-change diamond have the uniform constructible finite-Tor and origin bounds needed for [lem-sf-integral-compactification-system-realization]. Their two composite arrows are equal in the derived system category, before total inverse limit or evaluation: the open-factor restrictions are the identical unit-normalized map, and the proper-factor transposes are $Lh^*\\varepsilon_{p,M}\\otimes1$ under the canonical tensor/square identifications for a base-changed compactification $f=pj$, $M=J_j\\mathcal R K$. The natural $c_V$ realizations identify all four words and generator arrows, including outer functor contexts, with the completed integral ones. Consequently\n$$\\operatorname{Ex}_{!,K\\widehat\\otimes^L Lf^*L}\\circ Lg^*\\operatorname{PF}_{f,K,L}=\\operatorname{PF}_{f',Lg'^*K,Lg^*L}\\circ(\\operatorname{Ex}_{!,K}\\widehat\\otimes1).$$\nAll integral tensor products and pullbacks here are completed. The uniform bounds hold locally on finite affine covers and their inverse images and hence globally by taking finite extrema; no extra finite-Tor hypothesis on $K$ is imposed since integral bounded constructibility equals constructible finite Tor amplitude. For rational inputs take integral presentations, and for algebraically closed rational inputs a common finite coefficient field. Raw localization and scalar transport send the same two system-realized composites to the specified field-coefficient diamond; thus it commutes at both field stages. No reduction functor from rational coefficients to a finite quotient, and no faithfulness of derived evaluation or reduction, is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Agent-formulated sub-obligation for projection/base-change diamond: strict-system equality and integral realization; returned proof steps 7,8"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-integral-system-operations",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-sf-integral-compactification-system-realization",
+  "def-exchange-projection",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "Apply the separate uniform-domain theorem to K,L to obtain all four geometric/input domains and bounded constructibility of the completed endpoints.",
+   "uses": [
+    "lem-sf-completed-projection-exchange-domains",
+    "def-sf-completed-projection-exchange-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strict-system coherence to the actual reduction objects, obtaining the system diamond and both open/proper normalization clauses.",
+   "uses": [
+    "lem-sf-completed-projection-exchange-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct canonical generator witnesses r1,r2 for the two system paths. Apply rho.coherence to each. Multiplication by the inverse source realization comparison identifies r1 with integralLeft and r2 with integralRight. Transport the canonical witnesses along these equalities.",
+   "uses": [
+    "lem-sf-completed-projection-exchange-paths",
+    "def-sf-integral-system-realization-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Functoriality of total limit sends the system equality to equality after conjugation by the common endpoint comparisons. Raw localization then preserves the equality of the full-subcategory homs. The outer-context clause is exactly rho.coherence.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-sf-integral-system-realization-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For completedProjectionExchangeRational, obtain invertibility of l in every residue field of Y by mapping finiteFieldDatumPrimeUnit along the structure map. The predicate equality in integral_residue_tor turns the assumed constructibility of L into finiteTorConstructibleIntegral. Apply completedProjectionExchangeRealization to K and L. Extract its four word domains, the source and target constructibility clauses, and its rational equality for the supplied endpoint proofs. These rational paths are already defined as raw localization images of the integral paths, so no additional transport comparison is needed. For completedProjectionExchangeCommonStage, specialize the rational theorem to the recorded small coefficient field of F and apply congrArg to the map function of GeneralAlgebraicallyClosedCoefficients.inclusion F. This proves equality of precisely the two common-stage arrows in the signature. The main integral theorem and its preceding proof steps remain unproved in this partial delivery; no stronger field assertion is inferred.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-rationalization-karoubi",
+    "lem-coef-integral-residue-tor",
+    "lem-weil-structure-direct-images-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Coefficient compatibility paragraph, specialized to the literal localization and inclusion images in the field-stage signatures."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-completed-projection-exchange-data",
+  "def-sf-integral-system-realization-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-completed-projection-exchange-domains",
+  "lem-sf-completed-projection-exchange-paths",
+  "lem-sf-completed-projection-exchange-system",
+  "lem-weil-structure-direct-images-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "P2, 2026-10-25: decomposition of the integral theorem into actual word domains (old steps 2--6), strict-system normalized coherence (7--10), and construction of canonical paths (generator portion of 11). The remaining realization, cancellation and localization argument is proved in Lean. Preserve the existing X3 field-stage proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completed.*projection|semilinear.*projection|adic.*exchange",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean\", \"line\": \"22\", \"text\": \"We prove that semilinear sets are closed under union, projection, set addition and additive closure.\"}\n  {\"file\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean\", \"line\": \"36\", \"text\": \"- `IsSemilinearSet` is closed under union, projection, set addition and additive closure.\"}\n  {\"file\": \"Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Defs.lean\", \"line\": \"211\", \"text\": \"/-- Semilinear sets are closed under projection (from `ι ⊕ κ → M` to `ι → M` by taking `Sum.inl` on\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed pullback tensor compact support exchange projection compatibility transported from normalized systems then rationalized",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the inverse of the pullback isomorphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, composing the inverse of the pullback isomorphism $\\\\operatorname{Spec}(\\\\\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).inv\\n      (CategoryTheory.Limits.pullback.fst (AlgebraicGeometry.Spec.map (CommRingCat.of\", \"doc\": \"The composition of the inverse of the pullback isomorphism $\\\\operatorname{Spec}(S \\\\otimes_R T) \\\\to \\\\operatorname{Spec}(S) \\\\times_{\\\\operatorname{Spec}(R)} \\\\operatorname{Spec}(T)$ with the first project\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorC\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any three pullback triplets $x,y,z$ with equalities $x=y$ and $y=z$, the composition of the isomorphisms $(T_1.tensor \\\\cong T_2.tens\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_inv_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).inv\\n      (CategoryTheory.Limits.pullback.fst (AlgebraicGeometry.Spec.map (CommRingCat.of\", \"doc\": \"The composition of the inverse of the pullback isomorphism $\\\\operatorname{Spec}(S \\\\otimes_R T) \\\\to \\\\operatorname{Spec}(S) \\\\times_{\\\\operatorname{Spec}(R)} \\\\operatorname{Spec}(T)$ with the first project\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).hom\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom ↑Algebra.TensorProduct.includeRi\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral adic projection base change diamond as equality of strict semilinear coefficient system maps before derived inverse limit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n),\\n  AdicCompletion.transitionMap I N hmn ∘ₗ ↑R (LinearMap.reduceModIdeal (I ^ n) f\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $ between modules over a commutative ring $ R $, and for natural numbers $ m \\\\leq n $, the composition of the transition map $ M/I^nM \\\\to M/I^mM $ with the reduc\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n) (x : AdicCompletion I M), (AdicCompletion.transitionMap I M hmn) (↑x n) = ↑x m\", \"doc\": \"For natural numbers $ m \\\\leq n $ and any element $ x $ in the $ I $-adic completion of an $ R $-module $ M $, applying the transition map from $ M/I^nM $ to $ M/I^mM $ to the $ n $-th component of $ x\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"IsAdicComplete.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"Let $R$ be a commutative ring, $I$ be an ideal of $R$, and $M, N$ be $R$-modules. Assume that $N$ is $I$-adically complete. Let $(f_n : M \\\\to N/I^n N)_{n \\\\in \\\\mathbb{N}}$ be a compatible family of $R$\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n), AdicCompletion.transitionMap I M hmn ∘ₗ AdicCompletion.eval I M n = AdicCompletion.eval I M m\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the transition map $M/I^nM \\\\to M/I^mM$ with the evaluation map at level $n$ equals the evaluation map at level $m$. In other words, projecting an ele\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n  {\"name\": \"AdicCompletion.map_val_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {n : ℕ} (x : AdicCompletion I M),\\n  ↑((AdicCompletion.map I f) x) n = (LinearMap.reduceModIdeal (I ^ n) f\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f : M \\to N $, the induced linear map between the $ I $-adic completions of $ M $ and $ N $ satisf\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the canonical factor map $M/I^nM \\\\to M/I^mM$ (induced by $I^nM \\\\subseteq I^mM$) with the linear map $f_n$ equals the linear map $f_m$, where $I$ is a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral adic projection base change diamond as equality of strict semilinear coefficient system maps before derived inverse limit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.lift.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f f_1 : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤)\\n  (e_f : f = f_1) (h : ∀ {m n : ℕ} (hle : m ≤ n), AdicCompletion.transitionMap \", \"doc\": \"If two families of $ R $-linear maps $ f, f_1 : M \\to N/I^nN $ are equal and satisfy the compatibility condition with transition maps between successive quotients, then their induced $ R $-linear maps \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderBaseChange @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"IsAdicComplete.StrictMono.lift.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f f_1 : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (e_f : f = f_1)\\n  (hf : ∀ {m : ℕ}, Submodul\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, a strictly monotonic sequence $ a : \\\\mathbb{N} \\\\to \\\\mathbb{N} $, and a compatible family of $ R $-linear maps $ f_n : M \\\\\"}\n  {\"name\": \"AdicCompletion.eval_lift_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(f : ∀ (n : ℕ), M →ₗ[R] N ⧸ (I ^ n • ⊤ : Submodule R N))\\n  (h : ∀ {m n : ℕ} (hle : m ≤ n), transitionMap I N hle ∘ₗ f n = f m) (n : ℕ) (x : M) : (lift I f h x).val n = f n x\", \"doc\": \"For any compatible family of $ R $-linear maps $ f_n : M \\\\to N/I^nN $ satisfying $ \\\\text{transitionMap}_{m,n} \\\\circ f_n = f_m $ for all $ m \\\\leq n $, the evaluation of the lifted map $ \\\\varprojlim f_n\"}\n  {\"name\": \"AdicCompletion.map_ext''_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f g : AdicCompletion I M →ₗ[R] N},\\n  f = g ↔ f ∘ₗ AdicCompletion.mk I M = g ∘ₗ AdicCompletion.mk I M\", \"doc\": \"Two $ R $-linear maps from the $ I $-adic completion of $ M $ to $ N $ are equal if and only if their compositions with the canonical $ R $-linear map from $ I $-adic Cauchy sequences to the completio\"}\n  {\"name\": \"IsBaseChange.toDual.congr_simp\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j j_1 : V\", \"doc\": \"Given commutative semirings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and $ R $-modules $ V $ and $ W $ with an $ A $-module structure on $ W $ compatible with scalar restriction, if t\"}\n  {\"name\": \"AdicCompletion.of_ofLinearEquiv_symm\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(x : AdicCompletion I M) : of I M ((ofLinearEquiv I M).symm x) = x\", \"doc\": \"For any element $x$ in the $I$-adic completion of an $R$-module $M$, applying the inverse of the $R$-linear equivalence between $M$ and its $I$-adic completion followed by the canonical $R$-linear map\"}\n  {\"name\": \"AdicCompletion.congr\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_2} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_3} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (M ≃ₗ[R] N) → AdicCompletion I M ≃ₗ\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and $ R $-modules $ M $ and $ N $, an $ R $-linear equivalence between $ M $ and $ N $ induces a linear equivalence between their $ I $-adic completions\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.map_comp",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Limits.limit.map_comp'",
+   "date": "2026-10-22",
+   "verdict": "query rejected: unknown identifier; no usable result; valid follow-up recorded separately"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit",
+   "results": "{'t': '2026-10-22T07:37:56Z', 'tool': 'loogle', 'query': 'CategoryTheory.Limits.limit', 'sub': '', 'ok': True, 'n_hits': 12, 'note': '', 'top': ['CategoryTheory.Limits.limit', 'CategoryTheory.Limits.limit.cone_x', 'CategoryTheory.Limits.limit.π', 'CategoryTheory.Limits.limit.lift', 'CategoryTheory.Limits.limit.isoLimitCone', 'CategoryTheory.Limits.lim_obj', 'CategoryTheory.Limits.limit.homIso', 'CategoryTheory.Limits.HasLimit.isoOfNatIso'], 'digest': 'ac4173183aeb1b28'}",
+   "date": "2026-10-22",
+   "verdict": "no match: only projections or ordinary categorical limit primitives, not the specified derived geometric diamond"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(baseChange|mate)|completed.*projection|semilinear.*projection",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion or categorical counit/limit primitives, not the specified strict-system geometric diamond and completed realizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"projection\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion or categorical counit/limit primitives, not the specified strict-system geometric diamond and completed realizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exchange mate of a monoidal pullback square commutes with the counit defined projection map in derived categories of sheaves",
+   "results": "8 hits: CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app, CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_hom_app_fst_app, CategoryTheory.Comon.monoidal_tensorObj_comon_counit, CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_hom_app_snd_app, CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_inv_app_fst_app, CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_inv_app_snd_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion or categorical counit/limit primitives, not the specified strict-system geometric diamond and completed realizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula commutes with compact support base change in the derived category of strict adic coefficient systems and is preserved by completed realization",
+   "results": "8 hits: IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.pi_apply_coe, AdicCompletion.eval_lift, IsAdicComplete.StrictMono.factorPow_comp_extend, AdicCompletion.transitionMap_comp_eval, AdicCompletion.transitionMap_comp_eval_apply, IsAdicComplete.of_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion or categorical counit/limit primitives, not the specified strict-system geometric diamond and completed realizations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-coherence",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: The projection diamonds and associativity are [fix-prop-projection-formula].",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sf-completed-projection-exchange-realization",
+  "worker": "stage1",
+  "summary": "NL returned-delivery repair: keep the statement unchanged and prove its asserted domains before invoking realization. Give finite-level constructor bounds, actual normalization by scalar mates, compatible etale-origin witnesses, reconstruction and finite-cover extrema. Correct the missing U-prime in both target words and write the sigma/theta/tensor compositor identities explicitly. Retain the proper transpose, naturality pasting, integral cancellation and coefficient-transport arguments. No new nodes.",
+  "blueprint": "fix-prop-coherence.proof.md: projection diamonds and tensor/evaluation/adjunction-units-and-counits coefficient comparisons; full domain verification precedes the system equality and its realization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic ringed-topos projection/exchange identity applied to the simultaneous ringed sequence sites; the compatibility unit does not itself state this mate-calculus tool."
+   },
+   {
+    "node": "lem-sf-pf-coefficient-realization-transport",
+    "why": "Generic comparison-functor transport of counit-defined projection/exchange composites; retains the unit route through the specified generators."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Uniform finite-reduction Tor interval for arbitrary integral bounded constructible K, with no extra hypothesis. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Finite-level pullback preservation with the same Tor interval; generic domain tool, not a replacement for the projection diamond. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Finite-level tensor constructibility and addition of Tor intervals for all intermediate tensor vertices. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-sf-open-finite-constructibility-interval",
+    "why": "Open-extension constructibility and unchanged cohomological interval on the hidden open intermediate. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-cbc-compactification-geometry-fibre-bound",
+    "why": "Finite dimensions and Noetherian affine covers for finite-type compactification schemes. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Bounded constructible etale origins of the actual intermediate finite objects. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Reflect the Tor interval to each chosen etale origin before invoking etale-origin proper-image bounds. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "cor-sf-direct-image-ctf-etale-origin",
+    "why": "Coefficient-independent proper-image Tor bound on the actual pro-etale finite inputs. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "cor-sf-direct-image-ctf-nonproper",
+    "why": "States the precise finite-ring/geometric hypotheses and the [a,b+2d] bound of the preceding corollary. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "Normalization of actual input reductions and actual reconstruction counit/completeness for each normalized intermediate. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-pur-system-normalized-tensor-closure",
+    "why": "Actual transition-adjoint normalization of system pullback and tensor, not just levelwise isomorphisms. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Identify the actual evaluated proper-system transitions and adjunctions for the scalar mate calculation. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-fix-proetale-scalar-mate-normalization",
+    "why": "Identify the actual proper-image transition-adjoint with the counit-defined coefficient projection map. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-fix-proper-etale-origin-scalar-isomorphism",
+    "why": "Invertibility of that proper scalar mate for A_m to A_n without a false flatness hypothesis. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-weil-pbc-normalized-etale-origin-witnesses",
+    "why": "Construct unique compatible origin witnesses and their cocycle for the actual normalized transitions. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-coef-compact-support-normalized-realization",
+    "why": "Actual normalized quotient transitions of compact-support outputs for complete constructible inputs. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Constructibility and completeness of the specified compact-support total limits. The compatibility unit supplies no such preservation or normalization theorem."
+   },
+   {
+    "node": "lem-sf-finite-cover-ctf-locality",
+    "why": "Global constructibility and Tor interval from the finite affine-cover bounds. The compatibility unit supplies no such preservation or normalization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-integral-residue-tor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-274f2829a",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-274f2829a (reviewer sub-agent of L); spot-checked: This re-delivery repairs the previous RETURN (5a986e6e, E1/C1/D5). The statement, stmt_deps and blueprint are byte-identical to the returned head, which was itself identical to the N8 base. There are no new nodes and no cycle (the item is not in its own 13k-node closure). The intermediate domain is now proved instead of stipulated. Step 2 uses residue-tor for K, the uniform Tor interval of L, pullback-tor, tensor-ctf, and the open-interval lemma; the Tor interval is preserved under j_! via gamma and H^t(j_!C)=j_!H^t(C). Step 3 bounds d_Z with the fibre-bound node over Spec k, takes an origin from constructible-origin(ii), reflects Tor with comparison-tor(ii), and applies cor-sf-direct-image-ctf-etale-origin in the nonproper setting, which gives [u,v+2d_Z] independent of n; the induction on expression trees is explicit. Step 4 gets normalization of pullback and tensor from tensor-closure and of open letters from gamma with N=A_n. For proper letters the transition-adjoint is Rr_*(alpha) after chi; chi is the scalar mate and is invertible by proper-etale-origin-scalar-isomorphism, whose hypothesis that E_e tensor A_n is bounded below holds because E_e has Tor amplitude [u,v]. Step 5 uses the origin-witness node with adic datum (R,(t)): R/t^n is finite and perfect. Reconstruction then gives completeness and membership in D^b_c. Step 6 applies finite-cover locality, so the realization proviso is discharged. Step 8 restores U' and rests on the sigma/theta monoidality equations written out in step 7; the full-faithfulness argument checks. Steps 9 to 12, which the previous review accepted, are unchanged: ringed coherence with transposes rechecked against def-exchange-projection, the naturality pasting, cancellation of c_V, and the localization and common-field transport. Edge cases checked: f=id, g=id, empty schemes, n=m, ramified E. Not a duplicate of prop-sf-pf-coherence (axiomatized datum), lem-sf-finite-projection-exchange-transposes (finite level) or lem-sf-projection-integral-coherence-realization (composition). Batch-5 flag on lem-fix-proper-etale-origin-scalar-isomorphism: the only trace-formula node reached is the Mathlib leaf lem-trf-localization-essentially-surjective (a localization functor is essentially surjective), which is generic category theory and part of neither the trace formula nor Poincare duality, so it is accepted. The 20 declared tool_uses are generic domain tools and all fall within the unit route. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompletedProjectionExchangeRealization",
+  "declaration": "WeilConjectures.CompletedProjectionExchange.completedProjectionExchangeRealization",
+  "declarations": [
+   "WeilConjectures.CompletedProjectionExchange.completedProjectionExchangeRealization",
+   "WeilConjectures.CompletedProjectionExchange.completedProjectionExchangeRational",
+   "WeilConjectures.CompletedProjectionExchange.completedProjectionExchangeCommonStage"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CompletedProjectionExchangeRealization.lean",
+  "statement": "theorem completedProjectionExchangeRealization (_hl : l ≠ D.p) [IsSeparated Q.f.hom.left] [LocallyOfFiniteType Q.f.hom.left] [QuasiCompact Q.f.hom.left] [IsSeparated Q.g.hom.left] [LocallyOfFiniteType Q.g.hom.left] [QuasiCompact Q.g.hom.left] [IsSeparated Q.f'.hom.left] [LocallyOfFiniteType Q.f'.hom.left] [QuasiCompact Q.f'.hom.left] [IsSeparated Q.g'.hom.left] [LocallyOfFiniteType Q.g'.hom.left] [QuasiCompact Q.g'.hom.left] (K : Integral l E Q.X.obj.left) (L : Integral l E Q.Y.obj.left) (_hK : sfIntegralConstructible l E Q.X.obj.left K) (_hL : finiteTorConstructibleIntegral l E Q.Y.obj.left L) : Statement l E o ρ Q K L",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-751d1a2d9",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Read item node, all 10 stmt_deps, module (670 lines), report, and dependency Lean (Realizations/CanonicalPair/BasicPair in IntegralCompactificationSystemRealization, Compositors/OpenComparisons pins, SixFunctorCompactifiedSquare with compactification.g:=Q.p, exchangeProjectionCoefficientRepresentative, sfRationalConstructibleLocalization). Clause match: l≠p, E, Cartesian square with base-changed compactification, separated finite-type on f,g,f',g' (f',g' redundant), K sfIntegralConstructible, L finiteTorConstructibleIntegral, no Tor condition on K; four words' geometric+domain are conclusions; diamondLeft=diamondRight in System Y' before limit, orientation and square isos traced; OpenLaw (unit-normalized openSource, U' kept) and ProperLaw (theta, h*mu_p, mu_h, h*eps_M ⊗ theta_N^-1) match steps 8-9; integral diamond pinned via CanonicalPair plus intertwining as in the landed sibling; rational/common-stage via localization/inclusion images, consistent with def-exchange-projection's representative definition. Edge cases: identity maps, empty schemes, n=1, ramified E, universes u/v. 26 docstrings with source and blueprint, 12 proof steps in main docstring, 3 sorry only, no hollow defs, no line >100, statement verbatim, only the lean field added. Advisories: theorem stmt_dep lem-sf-integral-compactification-system-realization is on the base (not added), with def owner def-sf-integral-system-realization-data uncited, not an H2 fault; rational clause omits endpoint conjugation (faithful but thin); rational theorem's weaker L hypothesis is justified by the node (integral D^b_c = ctf). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e559a",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163949-L-919939",
+  "kind": "interface",
+  "note": "independent cc review: Moved data block diffed byte-identical with the clone's original; item proof checked against ρ.coherence and the Realizations/OpenComparisons/Compositors fields; Domains/System/Paths statements read against Statement's conjuncts, the CanonicalPair/BasicPair constructors and Expression.domain/admissible; node lean records checked against signatures"
+ }
+}

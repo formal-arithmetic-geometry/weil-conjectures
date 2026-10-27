@@ -1,0 +1,296 @@
+{
+ "id": "lem-sf-pf-reduction-proper-open-identities",
+ "kind": "statement",
+ "title": "Proper and open coefficient identities for the compactification factors",
+ "statement": "Fix the finite-field and coefficient datum of [def-sf-datum], with $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ finite, $A=A_{E,n}$ and $B=A_{E,m}$, $1\\le m\\le n$. Let $f:X\\to Y$ be separated of finite type between separated finite-type $k$-schemes, and fix a compactification $X\\xrightarrow{j}Z\\xrightarrow{r}Y$, $rj=f$, with $j$ open and $r$ proper [def-weil-compactifications-refinements]. Work in the ordinary constant-ring module derived categories on small pro-etale sites [def-weil-pbc-proetale-modules, def-weil-pbc-proetale-operations]. Put $\\rho_T=-\\otimes_A^LB$ with its $B$-action. Let $s_{V,W}:\\rho(V\\otimes_A^LW)\\xrightarrow{\\sim}\\rho V\\otimes_B^L\\rho W$ and $t_u:\\rho Lu_A^*\\xrightarrow{\\sim}Lu_B^*\\rho$ be the canonical scalar tensor and pullback comparisons [lem-fix-operation-reduction]. Define\n$$a^u_{V,W}=(1\\otimes t_u)\\circ s_{V,Lu_A^*W}:\\rho(V\\otimes_A^LLu_A^*W)\\xrightarrow{\\sim}\\rho V\\otimes_B^LLu_B^*\\rho W.$$\nTake $K\\in D^b_{ctf}(X,A)$ and $L\\in D^b_{ctf}(Y,A)$ [def-weil-finite-tor-amplitude], each equipped with a bounded constructible finite-Tor etale-origin witness [def-weil-pbc-etale-origin-witness], and put $M=j_{!,A}K$ and $H=K\\otimes_A^LLf_A^*L$.\n\nWrite $\\pi_R:Rr_{*,R}M_R\\otimes_R^LL_R\\to Rr_{*,R}(M_R\\otimes_R^LLr_R^*L_R)$ for the counit-defined proper projection and $\\gamma_R:j_{!,R}K_R\\otimes_R^LLr_R^*L_R\\xrightarrow{\\sim}j_{!,R}(K_R\\otimes_R^LLf_R^*L_R)$ for the canonical open tensor map, including $Lj^*Lr^*\\cong Lf^*$, as defined in [def-exchange-projection]. In the reduced proper projection take $M_B=\\rho_ZM$; write $K_B=\\rho_XK$, $L_B=\\rho_YL$, and use the open coefficient comparison $d_V:\\rho_Zj_{!,A}V\\xrightarrow{\\sim}j_{!,B}\\rho_XV$ when identifying these proper inputs. Let $c_V:\\rho_YRr_{*,A}V\\to Rr_{*,B}\\rho_ZV$ be the adjunction mate of $t_r$, and let $c_f$ be the canonical compact-support coefficient map [lem-fix-compact-support-coefficient-change]. Then $c$ is natural, and\n$$c_f(V)=Rr_{*,B}(d_V)\\circ c_{j_{!,A}V}\\quad(V=K,H).$$\nThe proper and open factor identities, with right-to-left composition, are\n$$Rr_{*,B}(a^r_{M,L})\\circ c_{M\\otimes_A^LLr_A^*L}\\circ\\rho_Y(\\pi_A)=\\pi_B\\circ(c_M\\otimes1)\\circ s_{Rr_{*,A}M,L},$$\n$$j_{!,B}(a^f_{K,L})\\circ d_H\\circ\\rho_Z(\\gamma_A)=\\gamma_B\\circ(d_K\\otimes1)\\circ a^r_{M,L}.$$\nBoth are equalities of the specified maps in the derived categories. No flatness of $B$ over $A$ is assumed; no invertibility of a projection map is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/prop-sf-pf-reduction.proof.md",
+  "place": "Proof paragraph: transpose the proper counit-tensor composites, and compare the normalized open tensor maps before composing the compactification factors (returned proof steps 4, 5 and 6)",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram (proper projection/exchange identity); open normalization is supplied by the separately cited lem-sf-open-tensor-normalization, not by this tag"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "lem-fix-operation-reduction",
+  "def-weil-pbc-etale-origin-witness",
+  "def-exchange-projection",
+  "lem-fix-compact-support-coefficient-change",
+  "def-weil-finite-tor-amplitude",
+  "def-sp-open-scalar-tensor-data",
+  "def-sp-reduction-direct-image-comparison",
+  "pur713-def-pullback-comparison",
+  "def-weil-proetale-inverse-image",
+  "def-sf-intrinsic-compact-support-restriction",
+  "def-sf-compact-support-scalar-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "The specified properScalar is a natural transformation obtained by mateEquiv; its naturality field proves the first clause directly. No separate scalar-mate normalization theorem is used.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved abstract tensor_mate_coherence calculation to the two geometric adjunctions, the two scalar tensorators, the two restriction tensorators, and lambda. Its required monoidality equation is scalarPullbackTensorCoherence. The conclusion unfolds to the proper factor identity with exactly the counit-defined projections.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-sf-scalar-pullback-tensor-coherence",
+    "def-exchange-projection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Invert the scalar tensor coherence equation and apply the proved generic tensor_square under the two open adjunctions. beta_inverse_aux supplies the common-right-adjoint normalization for the chosen scalar coordinates; the supplied Projection.inverse_adjunct fields fix both projection maps.",
+   "uses": [
+    "lem-fix-open-scalar-tensor-normalization",
+    "lem-sf-scalar-pullback-tensor-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the preceding open square to Q=P_A(r)L. Naturality of beta and of the scalar tensorator moves the canonical A compositor through the left route. scalarPullbackCompositionCoherence identifies the combined lambda/compositor map. Naturality of the B projection moves lambda_r to the ambient tensor factor. Functoriality and pair composition give the open factor identity.",
+   "uses": [
+    "lem-sf-scalar-pullback-composition-coherence",
+    "def-exchange-projection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The generic scalar_unit_of_counit argument transposes a scalar counit square using adjunction injectivity and the triangle identities. Apply ProperScalarCounitSquare and transport by scalarIso; properScalar_coordinates identifies the chosen geometric mate. Apply OpenScalarCounitSquare and transport through reductionOpenModel and scalarIso to obtain the analogous open scalar-unit equation.",
+   "uses": [
+    "lem-sp-proper-scalar-counit-square",
+    "lem-sp-open-scalar-counit-square",
+    "def-sp-open-scalar-tensor-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transpose properScalar followed by direct image of beta under the scalar adjunction. Substitute the proper scalar-unit equation, use naturality of the restriction/direct-image isomorphism, then substitute the open scalar-unit equation. The resulting expression unfolds to compactRestriction after compact support of the scalar unit. Injectivity of the scalar Hom bijection gives compactScalar_factor, applied once to K and once to H.",
+   "uses": [
+    "def-sf-intrinsic-compact-support-restriction",
+    "def-sf-compact-support-scalar-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-scalar-pullback-tensor-coherence",
+  "def-exchange-projection",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-sf-scalar-pullback-composition-coherence",
+  "lem-sp-proper-scalar-counit-square",
+  "lem-sp-open-scalar-counit-square",
+  "def-sp-open-scalar-tensor-data",
+  "def-sf-intrinsic-compact-support-restriction",
+  "def-sf-compact-support-scalar-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/prop-sf-pf-reduction.proof.md",
+  "place": "Proper/open factor calculation; explicit scalar-unit pasting and normalized tensor/compositor equations, formalized by A9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For derived sheaves with finite coefficient ring change and a compactification, the counit mate coefficient comparison commutes with the proper projection transformation and the canonical open extension by zero tensor map.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For composed exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the whiskered composition of the pushforward functors' hom transformation with the pullback along $f \\\\ci\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_ev\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (Y : CategoryTheory.Over I),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.ExponentiableMorphism.coev f)\", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map $ \\\\text{coev}_f $ applied to the pushforward object $ f_*Y $ and the pushforward of t\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adju\"}\nAssessment: The hits concern ordinary sheaf adjunctions, structure-sheaf restriction or condensed sections; none states the two derived coefficient-change identities for the proper and open compactification factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"mate\"",
+   "results": "[loogle] OK 0 hit(s)\nAssessment: The hits concern ordinary sheaf adjunctions, structure-sheaf restriction or condensed sections; none states the two derived coefficient-change identities for the proper and open compactification factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|[Cc]oefficient.*[Mm]ate|[Mm]ate.*[Cc]oefficient",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists.lean\", \"line\": \"26\", \"text\": \"The proof needs a set of ordered coefficients, even though the ultimate existence statement does\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists.lean\", \"line\": \"31\", \"text\": \"(b) Introduce a second set of ordered coefficients (ultimately taken to be `ℚ`) and develop a\"}\nAssessment: The hits concern ordinary sheaf adjunctions, structure-sheaf restriction or condensed sections; none states the two derived coefficient-change identities for the proper and open compactification factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of derived ringed topos projection maps with change of coefficient rings, with the proper mate and open immersion tensor comparison specified.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u} [inst_1 : CommRing S] (f : R →+* S)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) {Z : CommRingCat}\\n  (h :\\n    {\\n        carrier :=\\n          ↑((AlgebraicGeometry.Spec.structureSheaf S).val.obj\\n              (Opposite.op\\n     \", \"doc\": \"Let $R$ and $S$ be commutative rings and let $f: R \\\\to S$ be a ring homomorphism. Let $f^*: \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ be the induced continuous map on the prime spectra. For a\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] : B ⊗[A] Ω[A⁄R] ≃ₗ[B] Ω[B⁄S]\", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.comap_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(f : R →+* S) (x : R) :\\n  comap f (PrimeSpectrum.basicOpen x) (PrimeSpectrum.basicOpen (f x)) (PrimeSpectrum.comap_basicOpen f x).le =\\n    IsLocalization.map (M := .powers x) (T := .powers (f x)) _ f (Submonoid.powers_le.mpr (Submonoid.mem_powers _))\", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism of commutative rings, and let $x \\\\in R$. The `comap` associated with $f$ provides a ring homomorphism from the ring of sections of the structure sheaf on $\\\\operatorn\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivBase\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] : (S ⊗[R] Ω[A⁄R]) ≃ₗ[S] Ω[B⁄S]\", \"doc\": \"Let $R \\\\to S$ and $R \\\\to A$ be homomorphisms of commutative rings. If $B$ is the pushout of these maps (i.e., $B$ is isomorphic to the tensor product algebra $S \\\\otimes_R A$), then there is a natural \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  (U : TopologicalSpace.Opens ↑X.toTopCat) (x : CategoryTheory.ToType (X.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (f.c.app (Opposite.op ((Alge\", \"doc\": \"For an open immersion $ f: X \\to Y $ of locally ringed spaces, the composition of the inverse of the presheaf isomorphism component at $ f(U) $ with the sheaf morphism induced by $ f $ equals the presh\"}\n  {\"name\": \"CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \"{Y Z : C} (f : Y ⟶ X) (g : Z ⟶ Y) (r₀ : R₀.obj (Opposite.op Y)) (r₀' : R₀.obj (Opposite.op Z))\\n  (m₀ : M₀.obj (Opposite.op Y)) (m₀' : M₀.obj (Opposite.op Z)) (hr₀ : α.app _ r₀ = R.map f.op r)\\n  (hr₀' : α.app _ r₀' = R.map (f.op ≫ g.op) r) (hm₀ : φ.app _ m₀ = A.map f.op m)\\n  (hm₀' : φ.app _ m₀' = A.m\", \"doc\": \"Given a presheaf of modules over a presheaf of rings on a category $\\\\mathcal{C}$, if elements $r_0$ and $m_0$ are compatible under restriction maps (via natural transformations $\\\\alpha$ and $\\\\varphi$)\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(f : R →+* S) (U : Opens (PrimeSpectrum.Top R)) :\\n  (toOpen R U ≫ CommRingCat.ofHom (comap f U (Opens.comap ⟨_, PrimeSpectrum.continuous_comap f⟩ U) fun _ => id)) =\\n    CommRingCat.ofHom f ≫ toOpen S _\", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism of commutative rings, and let $f^*: \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ be the induced continuous map on their prime spectra. For any open set $U \\\\sub\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\nAssessment: The hits concern ordinary sheaf adjunctions, structure-sheaf restriction or condensed sections; none states the two derived coefficient-change identities for the proper and open compactification factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two factor identities for scalar extension of compactly supported derived sheaves: proper direct image counit tensor interchange and normalized extension by zero monoidal comparison.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\nAssessment: The hits concern ordinary sheaf adjunctions, structure-sheaf restriction or condensed sections; none states the two derived coefficient-change identities for the proper and open compactification factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojection[Mm]ap|[Rr]inged.*[Tt]opos|[Tt]opos.*[Tt]ensor",
+   "results": "[grep] OK 0 hit(s)\nAssessment: The hits concern ordinary sheaf adjunctions, structure-sheaf restriction or condensed sections; none states the two derived coefficient-change identities for the proper and open compactification factors.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|rightAdjointProjectionMap|mateEquiv_counit",
+   "results": "4 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean. Read mateEquiv and mateEquiv_counit in Mathlib/CategoryTheory/Adjunction/Mates.lean lines 84 and 123. These give the general mate bijection/counit law only; the other hits are underived module scalar composition or unrelated ring-theoretic base change. None gives both specified derived proper/open coefficient identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base change mate for a change of coefficient rings preserves the derived projection map and open immersion projection isomorphism.",
+   "results": "8 hits: IsBaseChange.of_comp, LinearMap.baseChange_comp, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, KaehlerDifferential.mapBaseChange, LinearMap.baseChangeHom, RingHom.IsStableUnderBaseChange, IsBaseChange.linearMapLeftRightHom.congr_simp, LinearEquiv.baseChange_trans. Read mateEquiv and mateEquiv_counit in Mathlib/CategoryTheory/Adjunction/Mates.lean lines 84 and 123. These give the general mate bijection/counit law only; the other hits are underived module scalar composition or unrelated ring-theoretic base change. None gives both specified derived proper/open coefficient identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp. Read mateEquiv and mateEquiv_counit in Mathlib/CategoryTheory/Adjunction/Mates.lean lines 84 and 123. These give the general mate bijection/counit law only; the other hits are underived module scalar composition or unrelated ring-theoretic base change. None gives both specified derived proper/open coefficient identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension commutes with the proper counit-defined projection map and open extension by zero tensor isomorphism as equalities of natural transformations.",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_assoc', ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.ExtendRestrictScalarsAdj.counit. Read mateEquiv and mateEquiv_counit in Mathlib/CategoryTheory/Adjunction/Mates.lean lines 84 and 123. These give the general mate bijection/counit law only; the other hits are underived module scalar composition or unrelated ring-theoretic base change. None gives both specified derived proper/open coefficient identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism between a square of left adjoints induces a right mate compatible with the right adjoint projection morphism defined by the counit.",
+   "results": "8 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.Bicategory.mateEquiv_square, CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.unit_mateEquiv_symm. Read mateEquiv and mateEquiv_counit in Mathlib/CategoryTheory/Adjunction/Mates.lean lines 84 and 123. These give the general mate bijection/counit law only; the other hits are underived module scalar composition or unrelated ring-theoretic base change. None gives both specified derived proper/open coefficient identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-pf-reduction",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-reduction",
+   "place": "Proof paragraph: transpose the proper counit-tensor composites, and compare the normalized open tensor maps before composing the compactification factors (returned proof steps 4, 5 and 6)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-pf-reduction-proper-open-identities",
+  "worker": "stage1",
+  "group": "Q37",
+  "summary": "Proved the proper coefficient identity by specializing the existing arbitrary ringed-square projection/exchange theorem, the open identity by the normalized scalar/open tensor square and pullback composition, and the compact-support factorization by explicit scalar-unit transposes. Reused existing nodes throughout; no new nodes or statement changes.",
+  "blueprint": "Realizes prop-sf-pf-reduction proof sentences beginning Transpose both routes and Each route pulls back the first factor: proper counit mate, open tensor normalization and compactification factorization.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-open-scalar-tensor-normalization",
+    "why": "Generic normalized open/scalar tensor compatibility, applied at Q=Lr*L; no same-unit node states the primitive open square."
+   },
+   {
+    "node": "lem-fix-proetale-scalar-mate-normalization",
+    "why": "Uses the existing arbitrary-ring-map normalization of the proper coefficient mate, without invoking its invertibility or any finite-free route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Scalar-extension/restriction Hom bijection and its actual unit; used to identify B-linear morphisms, not to infer faithfulness of restriction."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Uses only the canonical proper/open factorization of the restriction comparison, not a change-of-coefficients isomorphism."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Uses the canonical open adjunction and its unit-normalized fully faithful extension, for the scalar/open Hom calculation."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Uses preservation of the scalar unit by the canonical tensor/pullback comparison; does not impose a flat coefficient map."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Canonical ringed pullback tensor and composition coherence applies to coefficient morphisms; the unit supplies no more primitive such coherence theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Uses compatibility of scalar restriction with the geometric adjunction in the scalar-unit calculation; no same-unit statement supplies these Hom bijections."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic projection/exchange identity for an arbitrary ringed square, specialized to the coefficient square; exactly the counit-transpose calculation prescribed by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-775e0c385",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-775e0c385 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, the 12 cited statements, the main-20261015 prop-sf-pf-reduction proof, the unit route and Stacks 0E48. No new nodes, statement unchanged, no re-split note, the item is not in dropped_edges, no cycle. Steps 1-4 and 6-7 are correct against their cited statements. The proper identity is lem-weil-pbc-ringed-exchange-tensor-coherence on the non-cartesian ringed square of r_A, r_B and the scalar changes h_Y, h_Z, whose Ex is the χ of lem-fix-proetale-scalar-mate-normalization. The open identity is the arbitrary-Q route equality of lem-fix-open-scalar-tensor-normalization. I reran the scalar-transpose calculations of steps 6-7 (U_Y(c)z=vG_A(z); U_Z(d)z=e I_A(z)). Two C4 repairs. (1) Step 5's compositor cocycle κ_B∘j_B^*(t_r)∘t_jP_A=t_f∘S_X(κ_A) is not in lem-sfb-ringed-derived-monoidal-comparisons; it is the composition law θ_{rj}=(j_B^*θ_r)(θ_j r_A^*) of lem-sfb-kflat-scalar-comparison-normalization (θ=t, χ=λ), now cited. (2) In step 8, ρ_c is built from the isomorphism of lem-weil-proetale-direct-image-restriction-of-scalars, while step 6 used v from lem-weil-pbc-ring-sheaf-change-adjunction. Step 8 now identifies the two on K-injective J and cites both; the new node was added to proof_deps and its closure reaches neither the item nor any pod/trf node. The c_f factorization agrees with lem-fix-compact-support-coefficient-change's own proof definition q_f=Rp_*(β)χ and with the def-coef universal map. Edge cases checked: m=n, r=id, j=id, empty X, and the non-flat Z/ℓ²→Z/ℓ. Batch-5 flag: both open-scalar and kflat-scalar reach lem-pod-derived-exact-square-composition, a generic mapDerivedCategory pasting lemma, plus generic trf site and localization lemmas. None is a step of the trace formula or of Poincaré duality, so the flag is accepted for both citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PfReductionProperOpenIdentities",
+  "declaration": "AlgebraicGeometry.ProEtale.PfReductionFactors.pfReductionProperOpenIdentities",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PfReductionFactors.properProjection",
+   "AlgebraicGeometry.ProEtale.PfReductionFactors.properScalar",
+   "AlgebraicGeometry.ProEtale.PfReductionFactors.mixedScalar",
+   "AlgebraicGeometry.ProEtale.PfReductionFactors.openTensor",
+   "AlgebraicGeometry.ProEtale.PfReductionFactors.Identities",
+   "AlgebraicGeometry.ProEtale.PfReductionFactors.input",
+   "AlgebraicGeometry.ProEtale.PfReductionFactors.pfReductionProperOpenIdentities"
+  ],
+  "file": "lean/Sheaf/Paper/PfReductionProperOpenIdentities.lean",
+  "statement": "theorem pfReductionProperOpenIdentities (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (m n : ℕ) (_hmn : m ≤ n) (models : Models.{u}) (choices : Choices.{u} models) {X Y : SixFunctorSpace D} [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] (f : X ⟶ Y) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] (d : Compactification f.hom.left) (pA : Projection.{u} models (Padic.coefficientExtensionRing C.l E (n + 1)) d.i) (pB : Projection.{u} models (Padic.coefficientExtensionRing C.l E (m + 1)) d.i) (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X.obj.left) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing C.l E (n + 1)))))) (L : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y.obj.left) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing C.l E (n + 1)))))) (wK : FixedEtaleOriginWitness X.obj.left (ULift.{u + 1, u} (Padic.coefficientExtensionRing C.l E (n + 1))) K) (wL : FixedEtaleOriginWitness Y.obj.left (ULift.{u + 1, u} (Padic.coefficientExtensionRing C.l E (n + 1))) L) (_hK : finiteTorConstructible C.l E (n + 1) (Nat.succ_pos n) X.obj.left (input X.obj.left (Padic.coefficientExtensionRing C.l E (n + 1)) K)) (_hL : finiteTorConstructible C.l E (n + 1) (Nat.succ_pos n) Y.obj.left (input Y.obj.left (Padic.coefficientExtensionRing C.l E (n + 1)) L)) (_hwK : finiteTorConstructibleEtale C.l E (n + 1) (Nat.succ_pos n) X.obj.left wK.complex.obj) (_hwL : finiteTorConstructibleEtale C.l E (n + 1) (Nat.succ_pos n) Y.obj.left wL.complex.obj) : Identities models choices (Ideal.Quotient.factor (S := Padic.coefficientExtensionIdeal C.l E (n + 1)) (T := Padic.coefficientExtensionIdeal C.l E (m + 1)) (Ideal.pow_le_pow_right (Nat.succ_le_succ _hmn))) d.i d.g pA pB (input X.obj.left (Padic.coefficientExtensionRing C.l E (n + 1)) K) (input Y.obj.left (Padic.coefficientExtensionRing C.l E (n + 1)) L)",
+  "branch": "sheaf-dag",
+  "by": "Q96",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The statement uses the existing normalized K-flat scalar/tensor and open-adjunction presentations. The canonical fixed-ring coefficient equivalence only transports inputs. Identities expands all five assertions: mate naturality, compact-support factorizations at K and H, proper identity and open identity. Positive exponents are parametrized by n+1,m+1. All helper definitions have actual data; the only postponed proof is the main theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f80db5e0b",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Re-delivery after RETURN c221b884 (H2); both findings repaired. (a) The theorem stmt_dep lem-sf-compact-support-restriction-of-scalars is replaced by the new def node def-sf-intrinsic-compact-support-restriction (existing:true on the unchanged live module; statement verbatim to the live def header); the theorem stays in proof_deps. (b) compactRestriction/compactScalar moved verbatim into the new module Sheaf.Paper.CompactSupportScalarCoordinates, owned by def-sf-compact-support-scalar-coordinates, which cites def-coef-compact-support-tensor-comparison. compactScalar = homEquiv.symm(G_A J_A(eta_X) then R) is def-coef's presentation-generic universal arrow in scalarPair/openExtension coordinates; reductionOpenModel directions checked; the recorded intrinsicCompactSupportCoefficientComparison is in pbcDerivedExtend/sfIntrinsicCompactSupport coordinates and cannot be used. Item module byte-identical apart from the moved defs and one added import; signature, five conjuncts, 8-step docstring and single sorry unchanged. 15 stmt_deps, 13 definitions; no def from the two remaining theorem-dep modules (lem-fix-operation-reduction, lem-fix-compact-support-coefficient-change) is used. Statements verbatim, lines <=95, new module has no sorry. Advisory: the new restriction node cites lem-weil-proetale-direct-image-restriction-of-scalars, while the Lean uses proEtaleRingRestrictionDerivedDirectImage (lem-weil-pbc-ring-sheaf-change-adjunction); step 8 identifies the two and the base theorem node cites the same way. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T122510-L-1777958",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

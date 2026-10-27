@@ -1,0 +1,128 @@
+{
+ "id": "lem-per-completed-lisse-rational-hom",
+ "kind": "statement",
+ "title": "Localization of Hom for completed lisse lattices",
+ "statement": "For a base P and an IntegralComparison I as in [def-per-lisse-completed-system-data], for two reconstructed lattices there is a unique additive map from E tensor_A Hom of their normalized etale systems to rational sheaf Hom, sending a pure tensor a tensor f to scalar extension of I.inverse(f) followed by multiplication by a. This additive map is bijective. It asserts no site descent or existence of an integral comparison.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1) and (4), with Corollary 5.1.5 for classical finite local systems; the comparison maps are reduction, inverse limit and localization. Their pullback and coefficient-extension compatibilities use these same maps. Etale-local existence of lattices is cited separately as an existing DAG node."
+ },
+ "stmt_deps": [
+  "def-per-lisse-completed-system-data",
+  "def-per-integral-lisse-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Ordinary scalar extension carries each finite local basis to the same basis over the rational coefficient sheaf. For integral lisse modules $M,N$, form $H=\\mathcal Hom_{B_X}(M,N)$ using [def-pur-sheaf-hom], so $H(X)=\\operatorname{Hom}_{B_X}(M,N)$. Let $H[1/\\varpi]$ denote the sheaf colimit of $H\\xrightarrow{\\varpi}H\\xrightarrow{\\varpi}\\cdots$, whose existence and sheafified sectionwise description are [lem-weil-pbc-module-sheaves-colimits-forgetful](2). There is a canonical map to $\\mathcal Hom_{E_X}(M[1/\\varpi],N[1/\\varpi])$, sending a map in stage $k$ to $\\varpi^{-k}$ times its scalar extension. It is an isomorphism: on a common trivializing covering for $M=B_X^r$ and $N=B_X^s$, it is the coordinate map from the localization of the finite matrix module $B_X^{sr}$ to $E_X^{sr}$, with inverse obtained by writing its finitely many entries as local fractions and taking a common exponent. The maps agree on overlaps because they are the specified scalar-extension map. This also treats $r=0$ or $s=0$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(4), p.59: internal Hom comparison"
+   }
+  },
+  {
+   "text": "A Noetherian underlying space is quasi-compact, and every open subspace is quasi-compact; in particular intersections of affine opens are quasi-compact. Thus $X$ satisfies the qcqs hypothesis of [det-pe-bounded-continuity-sections]. Apply it with $\\mathcal R=B_X$, $U=X$, $I=\\mathbf N$, and the diagram of degree-zero complexes $H\\xrightarrow{\\varpi}H\\to\\cdots$; the uniform lower bound is $a=0$ and take $q=0$. Together with step 5 it gives\n$$\\operatorname{Hom}_{B_X}(M,N)[1/\\varpi]\\cong H[1/\\varpi](X)\\cong\\operatorname{Hom}_{E_X}(M[1/\\varpi],N[1/\\varpi]).$$\nHere the first term is the module localization, equivalently $E\\otimes_A\\operatorname{Hom}_{B_X}(M,N)$. The map sends $\\varpi^{-k}f$ to $\\varpi^{-k}(1\\otimes f)$, so it is precisely the Hom map from the raw rational category of [def-pod-lisse-l-adic-sheaves](2), restricted to the finite-free towers in step 4. It respects identity and composition because scalar multiplication does. This proves full faithfulness; it requires no assertion that every rational lisse sheaf has a global integral lattice. The supplied integral equivalence identifies integral Hom groups, and its scalar projection equations make this identification A-linear. Extend the resulting balanced map to E tensor_A Hom. Generation by pure tensors proves uniqueness of the additive map, including zero rank.",
+   "uses": [
+    "det-pe-bounded-continuity-sections",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(4), p.59: sections of the localized internal Hom on a qcqs scheme"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "det-pe-bounded-continuity-sections",
+  "def-pod-lisse-l-adic-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1) and (4), with Corollary 5.1.5 for classical finite local systems; the comparison maps are reduction, inverse limit and localization. Their pullback and coefficient-extension compatibilities use these same maps. Etale-local existence of lattices is cited separately as an existing DAG node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On a quasi compact quasi separated site localization of hom between finite locally free module sheaves agrees with hom after extension of scalars",
+   "results": "8 hits: SheafOfModules.Hom, PresheafOfModules.homEquivOfIsLocallyBijective and IsLocalizedModule.map, among others. None states the global sheaf Hom localization result.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free sheaves modules scalar extension preserves local bases and localization hom on quasi compact quasi separated pro etale site",
+   "results": "8 hits, mostly formally etale localization facts and SheafOfModules.IsFinitePresentation; no Hom localization comparison.",
+   "date": "2026-10-25",
+   "verdict": "no specialized match"
+  },
+  {
+   "tool": "grep",
+   "query": "locally.*constant|[Ll]ocalization.*[Hh]om",
+   "results": "25 hits including Mathlib.Condensed.Discrete.Module, Mathlib.Topology.Algebra.Localization and locally constant germs. No specialized normalized etale/proetale tower equivalence or completed lattice Hom comparison. Local rg also inspected free pullback, module sheaf Hom, tensor and localization APIs.",
+   "date": "2026-10-25",
+   "verdict": "no specialized match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseCompletedPointwiseComparison",
+  "date": "2026-10-25",
+  "group": "R3"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Localization of Hom for completed lisse lattices in the completed lisse comparison used to construct adic geometric fibres.",
+   "via": [
+    "lem-per-lisse-completed-pointwise-comparison",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseCompletedRationalHom",
+  "file": "lean/Sheaf/Paper/LisseCompletedRationalHom.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompletedLisse.completed_lisse_rational_hom",
+  "statement": "theorem completed_lisse_rational_hom (P : Base.{u} l) (I : IntegralComparison l P) :\n    ∀ F G : RawRational l P,\n        ∃! h : (F.obj ⟶ G.obj) →+\n            (rationalizedLattice l P I F ⟶ rationalizedLattice l P I G),\n          Function.Bijective h ∧\n          ∀ (a : P.E) (f : F.obj.integral ⟶ G.obj.integral),\n            h (TensorProduct.tmul (Integers l P) a f) =\n              (completedAdicChange P.X\n                (I.coefficientIso.inv ≫ lisseIntegerToFieldSized l P.E P.X)).map\n                  (I.equivalence.inverse.map ⟨f⟩).hom ≫\n                    rationalScalar l P _ a",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261025T123635-L-1885715",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261025T123635-L-1885715",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

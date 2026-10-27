@@ -1,0 +1,457 @@
+{
+ "id": "lem-sfb-ringed-augmented-sequence-model",
+ "kind": "statement",
+ "title": "Complex models of a supplied sequential telescope",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the universes of [def-weil-size-convention], with $\\mathcal O$ commutative. Use module sheaves [def-weil-sheaf-of-modules-category], unbounded derived localization $Q$ [def-weil-abstract-derived-category], total tensor complexes [def-pc-tensor-complex-sheaves], K-flatness [def-pc-kflat-complex] and mapping-telescope triangles [def-kun-truncations]. Given any small sequence $(E_m,t_m)$ in $D(\\mathcal O)$, there are K-flat complexes $P_m$ with flat terms, chain maps $p_m:P_m\\to P_{m+1}$ and isomorphisms $QP_m\\simeq E_m$ carrying $Qp_m$ to $t_m$. Put $T=\\operatorname{Cone}(1-s:\\bigoplus_mP_m\\to\\bigoplus_mP_m)$, where $s\\iota_m=\\iota_{m+1}p_m$. Then $T$ is K-flat. For any supplied telescope triangle with vertex $K$ and legs $e_m:E_m\\to K$, there is an isomorphism $QT\\simeq K$ respecting the legs and the telescope triangle. For every complex $L$ of $\\mathcal O$-modules there is a chain isomorphism $\\operatorname{Tel}_m\\operatorname{Tot}(P_m\\otimes_{\\mathcal O}L)\\simeq\\operatorname{Tot}(T\\otimes_{\\mathcal O}L)$, with the standard cochain signs, respecting every telescope leg. It is natural in chain maps of $L$ and in compatible chain maps of the chosen strict sequence models, and induces the corresponding natural isomorphism in the derived category, also for morphisms represented by roofs of quasi-isomorphisms. If $R\\to\\mathcal O$ is a map from a constant commutative ring sheaf and $L$ has a commuting action of a commutative $R$-algebra $B$, the same comparison is $B$-linear, with $B$ acting only on $L$; no flatness of $B/R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived colimits: Tags 090Z, 0CRH and 0CRI; K-flat resolutions: Tag 06YS; tensor exactness: Tag 06YM. The simultaneous complex-model and tensor-naturality formulation is agent-stated from these constructions."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-kun-truncations",
+  "def-pc-flat-sheaf-modules",
+  "def-sf-ringed-kflat-tensor-representative-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose complexes $G_m$ representing $E_m$. By [prop-pur-kinjective-resolutions-exist] choose quasi-isomorphisms $G_m\\to I_m$ with $I_m$ K-injective. The equivalence of [lem-sf-kinjective-replacement-triangulated] represents each $t_m$ by a homotopy class between $I_m$ and $I_{m+1}$; choose a chain representative $f_m:I_m\\to I_{m+1}$. Thus $QI_m\\simeq E_m$ carries $Qf_m$ to $t_m$. A sequence is the free category on its successor arrows, so define its longer arrows by composition; no relations between different paths need to be lifted.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sf-kinjective-replacement-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, Hom computation (3); injectives.tex Tag 079P, theorem-K-injective-embedding-grothendieck; existence for module sheaves in sites-cohomology.tex Section 07A5"
+   }
+  },
+  {
+   "text": "Construct $P_m$ and quasi-isomorphisms $a_m:P_m\\to I_m$ inductively, maintaining K-flatness, flat terms and $Q(a_{m+1}p_m)=Q(f_ma_m)$. For $m=0$ take [lem-pc-kflat-resolution] applied to $I_0$. Given $P_m,a_m$, apply [lem-pur-kflat-map-factorization] to $f_ma_m:P_m\\to I_{m+1}$. It supplies a flat-term K-flat $P_{m+1}$, a chain map $p_m:P_m\\to P_{m+1}$ and a quasi-isomorphism $a_{m+1}:P_{m+1}\\to I_{m+1}$ with $f_ma_m$ homotopic to $a_{m+1}p_m$. Homotopic maps have the same image under $Q$ [def-weil-abstract-derived-category]. Set $v_m:QP_m\\simeq E_m$ to the composite of $Qa_m$ and the chosen identification. Then $v_{m+1}Qp_m=t_mv_m$. Countable dependent choice in the fixed universe supplies the entire induction.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-map-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 0G7D, lemma-factor-through-K-flat, including its flat-terms clause"
+   }
+  },
+  {
+   "text": "Put $A=\\bigoplus_mP_m$ and $u=1-s$, with $s\\iota_m=\\iota_{m+1}p_m$. By [lem-pc-kflat-cone-direct-sum], $A$ and $T=C(u)$ are K-flat. By [lem-kun-complex-colimit-hocolim], $QA$ with its displayed inclusions is the coproduct of the $QP_m$, and the localized cone triangle is their telescope triangle. The $v_m$ induce a coproduct isomorphism $v:QA\\simeq\\bigoplus_mE_m$; checking on $Q\\iota_m$ gives $vQ(s)=s_Ev$. Apply TR3 of [def-weil-triangulated-category] to $(v,v)$ and the supplied telescope triangle for $K$. This gives $w:QT\\to K$ commuting with the second and connecting maps. Both first maps are isomorphisms, hence [lem-sf-triangle-morphism-iso] makes $w$ an isomorphism. In particular $wQ(j_m)=e_mv_m$, where $j_m:P_m\\to T$ is $\\iota_m$ followed by the inclusion of the unshifted summand $A^n\\subset T^n=A^n\\oplus A^{n+1}$ of the cone (the second map of the cone triangle). No uniqueness of $w$ is asserted.",
+   "uses": [
+    "lem-pc-kflat-cone-direct-sum",
+    "lem-kun-complex-colimit-hocolim",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090Z, definition-derived-colimit; Tag 0CRH, remark-uniqueness-derived-colimit; Tag 014A, lemma-third-isomorphism-triangle; sites-cohomology.tex Tags 06YR and 07A3 for K-flat closure"
+   }
+  },
+  {
+   "text": "Write $\\otimes$ for the direct-sum total tensor. By [lem-weil-pbc-independent-sheaf-tensor-colimits], the canonical maps $\\bigoplus_m(P_m\\otimes L)\\to A\\otimes L$ are isomorphisms in every total degree: interchange the two coproduct indices and distribute sheaf tensor over coproducts. Here commutativity of $\\mathcal O$ gives the same assertion in either tensor variable, by the sheafified flip $x\\otimes y\\mapsto y\\otimes x$. On a generator $x\\otimes l$, $x\\in P_m^a,l\\in L^b$, the differential is $d_Px\\otimes l+(-1)^ax\\otimes d_Ll$ [def-pc-tensor-complex-sheaves], on both sides. Thus these maps form a chain isomorphism $\\beta$. Checking on each $m$ gives $\\beta s_{P\\otimes L}=(s\\otimes1)\\beta$. Consequently $\\beta$ induces the same isomorphism on both copies in the telescope endomorphism.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EP, lemma-tensor-commute-colimits (2); sites-cohomology.tex Tag 06YM, lemma-derived-tor-exact, explicit total tensor construction"
+   }
+  },
+  {
+   "text": "Define $\\Phi:\\operatorname{Tel}_m(P_m\\otimes L)\\to T\\otimes L$ by $\\beta$ on the unshifted cone copy, and by the same coproduct rearrangement on the shifted copy: a generator $x\\otimes l$ with $x\\in P_m^a,l\\in L^b$, in degree $a+b-1$, is sent to the summand $P_m^a\\subset A^a\\subset T^{a-1}$ tensored with $L^b$. No sign is inserted. On the unshifted copy the differentials agree by Step 4. On this shifted generator the left differential has terms $u(x)\\otimes l$ in the unshifted copy, $-d_Px\\otimes l$, and $-(-1)^ax\\otimes d_Ll$. On the right the same three terms have coefficients $1,-1,(-1)^{a-1}$, respectively, so agree. The inverse is the reverse coproduct rearrangement on both copies. These generator formulas determine maps of sheaves since tensor and coproduct are obtained by sheafifying their presheaf constructions. Thus $\\Phi$ is a chain isomorphism. The telescope leg lands in the unshifted copy, where the formula is precisely $j_m\\otimes1$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM, lemma-derived-tor-exact; derived.tex definition-cone, cone differential and total tensor signs"
+   }
+  },
+  {
+   "text": "For a compatible chain map $r_m:P_m\\to P'_m$ and $h:L\\to L'$, all squares for $\\Phi$ commute on the generators in both copies: both composites send $x\\otimes l$ to $r_m(x)\\otimes h(l)$. This proves strict naturality, including identities, compositions and all legs. For derived descent, the coefficient functors $P_m\\otimes-$ and $T\\otimes-$ preserve quasi-isomorphisms by [lem-weil-pbc-kflat-fixed-tensor-triangulated], since $P_m$ and $T$ are K-flat with flat terms: flatness of the terms of $T$ follows from [lem-pc-kflat-closure] and the cone formula $T^n=A^n\\oplus A^{n+1}$. The telescope on the left also preserves such maps: in the strict naturality square three sides become isomorphisms after $Q$, hence so does the fourth. Therefore the naturality equality extends to any coefficient roof $L\\leftarrow H\\to L'$ by inverting its quasi-isomorphism in that equality.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-pc-kflat-closure",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism; Tag 06YU, definition-derived-tor; total cone formula; derived.tex Tag 05RU, definition-unbounded-derived-category"
+   }
+  },
+  {
+   "text": "For an objectwise quasi-isomorphism $r$ of strict flat-term K-flat sequence models, $\\bigoplus_mr_m$ is a quasi-isomorphism. Indeed, [prop-pur-kinjective-resolutions-exist] makes $\\operatorname{Mod}(\\mathcal O)$ Grothendieck: its countable sums are filtered colimits of finite biproducts, hence exact; [src-weil-homology-preserves-exact-colimits] then gives $H^n(\\bigoplus r_m)=\\bigoplus H^n(r_m)$. The induced map $T\\to T'$ is a quasi-isomorphism by [lem-sf-triangle-morphism-iso] applied to the localized cone triangles. Its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic] and K-flat by [lem-pc-kflat-cone-direct-sum]. By [lem-pur-acyclic-kflat-tensor-arbitrary], tensoring that cone with any $L$ remains acyclic (that node places the K-flat factor on the right; the signed flip $x\\otimes l\\mapsto(-1)^{ab}l\\otimes x$, a chain isomorphism since $\\mathcal O$ is commutative, moves it to the left). The explicit two-copy formula of Step 5 applies to every cone map, and identifies this tensor with the cone of $T\\otimes L\\to T'\\otimes L$. Thus the latter map is a quasi-isomorphism. Naturality of $\\Phi$ proves the same for the left side. Invert these maps in the strict naturality equality to obtain naturality for roofs of compatible strict models as well. This is localization of the specified strict diagram maps, not a choice of functorial cones for arbitrary squares in $D(\\mathcal O)$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "src-weil-homology-preserves-exact-colimits",
+    "lem-sf-triangle-morphism-iso",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-kflat-cone-direct-sum",
+    "lem-pur-acyclic-kflat-tensor-arbitrary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT, lemma-derived-tor-quasi-isomorphism-other-side, and 06YM, lemma-derived-tor-exact; derived.tex Tag 05RT, lemma-acyclic; derived.tex lemma-direct-sums; injectives.tex Tag 079P"
+   }
+  },
+  {
+   "text": "Suppose $R\\to\\mathcal O$ and a commuting $B$-action on $L$ are supplied. On a tensor generator define $b(x\\otimes l)=x\\otimes bl$, on either cone copy. This is well-defined because the actions of $B$ and $\\mathcal O$ on $L$ commute and have the same $R$-action. Every differential commutes with $b$ since $L$ is a complex with that action, and every component of $\\Phi$ commutes with $b$ by its generator formula. The same holds for the inverse, the legs and naturality squares for action-preserving maps. Hence the comparison and its derived localization are $B$-linear. No tensoring over $R$ with $B$, and no exactness assertion for $B\\otimes_R-$, occurs, so flatness of $B/R$ is unnecessary.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Sheafified sectionwise balanced tensor; sites-cohomology.tex Tag 06YM total-complex construction; agent coefficient-action refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-kinjective-replacement-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-map-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-kun-complex-colimit-hocolim",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-kflat-closure",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YM (lemma-derived-tor-exact), 06YT (lemma-derived-tor-quasi-isomorphism-other-side); derived.tex Tags 090Z, 0CRH, 0CRI. Explicit induction, signed tensor-cone calculation and localization naturality supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An augmented sequential diagram in the derived category of sheaves of modules admits compatible K flat complex representatives and a mapping telescope natural under tensor",
+   "results": "Hits: localCohomology.diagram, CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.Functor.mapDerivedCategoryFactors, Ext, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Tor_obj, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Tor",
+   "date": "2026-10-24",
+   "verdict": "no match: mapping-cone functoriality on given complexes does not supply simultaneous representatives of a derived sequence or its tensor telescope."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strictification of augmented sequential derived diagrams by complexes with functorial tensor mapping cones",
+   "results": "Hits: CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone, CochainComplex.mappingCone.mapHomologicalComplexIso, HomotopyCategory.composableArrowsFunctor_obj, ChainComplex.augment, DerivedCategory.triangleOfSESIso, CochainComplex.mappingConeCompTriangle, HomotopyCategory.composableArrowsFunctor",
+   "date": "2026-10-24",
+   "verdict": "no match: mapping-cone functoriality on given complexes does not supply simultaneous representatives of a derived sequence or its tensor telescope."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"sequential\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: mapping-cone functoriality on given complexes does not supply simultaneous representatives of a derived sequence or its tensor telescope."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]trictif|[Aa]ugmented.*[Ss]equence|[Ss]equence.*[Aa]ugmented",
+   "results": "0 hits; subdirectory Mathlib/Algebra/Homology",
+   "date": "2026-10-24",
+   "verdict": "no match: mapping-cone functoriality on given complexes does not supply simultaneous representatives of a derived sequence or its tensor telescope."
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|hocolim|homotopyColimit|mappingCone.*[Tt]ensor|[Tt]ensor.*mappingCone",
+   "results": {
+    "t": "2026-10-23T22:55:28Z",
+    "tool": "grep",
+    "query": "telescope|hocolim|homotopyColimit|mappingCone.*[Tt]ensor|[Tt]ensor.*mappingCone",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary module flatness, total tensor or individual mapping cones, not the simultaneous ringed-site sequence model and telescope comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total tensor product of a mapping telescope of K flat complexes is the mapping telescope of their tensor products",
+   "results": {
+    "t": "2026-10-23T22:55:28Z",
+    "tool": "leansearch",
+    "query": "The total tensor product of a mapping telescope of K flat complexes is the mapping telescope of their tensor products",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.toDirectLimit",
+     "HomologicalComplex.tensorObj",
+     "PiTensorProduct.map_comp",
+     "TensorProduct.directLimitRight",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.tensorHom",
+     "PiTensorProduct.map",
+     "PiTensorProduct.mapMonoidHom"
+    ],
+    "digest": "87b45038e1cf5506"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary module flatness, total tensor or individual mapping cones, not the simultaneous ringed-site sequence model and telescope comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"tensor\"",
+   "results": {
+    "t": "2026-10-23T22:55:28Z",
+    "tool": "loogle",
+    "query": "\"mappingCone\", \"tensor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary module flatness, total tensor or individual mapping cones, not the simultaneous ringed-site sequence model and telescope comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every sequence of derived sheaves of modules has flat K flat complex models whose mapping telescope commutes naturally with total tensor product",
+   "results": {
+    "t": "2026-10-23T22:55:30Z",
+    "tool": "leanfinder",
+    "query": "Every sequence of derived sheaves of modules has flat K flat complex models whose mapping telescope commutes naturally with total tensor product",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+     "Module.Flat.lTensor_exact",
+     "Module.Flat.rTensor_exact",
+     "Module.Flat.iff_rTensor_exact'",
+     "Module.Flat.iff_rTensor_exact"
+    ],
+    "digest": "172988a29b59732a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary module flatness, total tensor or individual mapping cones, not the simultaneous ringed-site sequence model and telescope comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous strict cochain representatives of a sequence in the derived category and natural tensor product mapping cone comparison",
+   "results": {
+    "t": "2026-10-23T22:56:39Z",
+    "tool": "leanfinder",
+    "query": "Simultaneous strict cochain representatives of a sequence in the derived category and natural tensor product mapping cone comparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.mappingCone.liftCochain_v_descCochain_v",
+     "CochainComplex.mappingCone.liftCochain_descCochain",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+     "CochainComplex.mappingCone.descCochain",
+     "CochainComplex.mappingCone.liftCochain_v_snd_v",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
+     "CochainComplex.mappingCone.liftCochain",
+     "CochainComplex.mappingCone.inl_v_descCochain_v"
+    ],
+    "digest": "85c4367412745a4f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary module flatness, total tensor or individual mapping cones, not the simultaneous ringed-site sequence model and telescope comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-etale-sections-perfect-telescope",
+  "date": "2026-10-24",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, tensor preserves the sequential telescope; makes precise the supplied diagram maps rather than arbitrary cone maps.",
+   "via": [
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-augmented-sequence-model",
+  "worker": "stage1",
+  "summary": "Q73: reuse existing K-injective, K-flat factorization, telescope and localization nodes; strictify the free successor diagram by induction and prove the signed tensor-cone and B-linear formulas explicitly. No new nodes and no statement change.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited perfect-telescope input from spaces-perfect.tex 0CRW: tensor commutes with the chosen telescope. Preserve inherited from.node=null as returned by blueprint_refs.py ancestor; no blueprint node states this auxiliary lemma.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Grothendieck property and K-injective representatives on the given small ringed site. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-sf-kinjective-replacement-triangulated",
+    "why": "Full K-injective model of the derived category, used only to represent the successor arrows. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat initial representative for the induction. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-pur-kflat-map-factorization",
+    "why": "Extend the chosen K-flat source across one successor arrow without changing its derived arrow. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-pc-kflat-cone-direct-sum",
+    "why": "K-flatness of the actual sum, telescope and comparison cones. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-kun-complex-colimit-hocolim",
+    "why": "The termwise sum localizes to the derived coproduct and the actual cone realizes its telescope. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "A TR3 comparison with two isomorphisms has an isomorphic third vertex. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Distribute ordinary sheaf tensor over the small coproducts used in totalization. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Fixed flat-term K-flat tensor inverts coefficient quasi-isomorphisms. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Flatness of countable sums and hence of telescope terms. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Objectwise quasi-isomorphisms induce a quasi-isomorphism on exact countable sums. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Test the quasi-isomorphisms in the model-roof comparison by acyclic cones. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   },
+   {
+    "node": "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "why": "Tensoring the acyclic K-flat comparison cone with arbitrary L remains acyclic. This is general homological algebra; the constructible-finite-Tor unit has no internal replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-kinjective-replacement-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-map-factorization",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-kflat-closure",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pur-acyclic-kflat-tensor-arbitrary"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-21f57a781",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-21f57a781 (reviewer sub-agent of L); spot-checked: Read all 8 steps against the 17 cited statements and against Stacks 06YS (sites-cohomology l.3207), 0G7D (l.3418) and derived.tex 090Z/0CRH. Statement is identical to base; the item is still unsplit live (no supersession); there are no new nodes; added stmt_dep def-pc-flat-sheaf-modules is justified by 'flat terms'. Checks: v_{m+1}Qp_m=t_mv_m via the 0G7D factorization with its flat-terms clause; vQ(s)=s_Ev on insertions, then TR3 plus 2-of-3 gives w respecting legs and connecting map, existence only (0CRH); Step-5 sign on a shifted generator recomputed: (1,-1,(-1)^{a-1}) on both sides, and the formula holds for any cone; T flat-termed via T^n=A^n⊕A^{n+1} and lem-pc-kflat-closure; Step 7 uses exact countable sums, the cone-acyclic criterion and acyclic K-flat tensor with arbitrary L; B-action well-defined without flatness of B/R. Edge cases tested: zero ring/site, t=0, identity sequence, L=0, odd degree. No duplicate: kun-functor-preserves-hocolim, zl-evaluation-adapted-flat-telescope, sc-flat-telescope-stage-naturality and sfb-kflat-augmented-roos-comparison all differ. Batch-5: lem-trf-localization-essentially-surjective (reached through lem-sf-kinjective-replacement-triangulated) is a Mathlib leaf saying localizations are essentially surjective; it is general category theory, not part of the trace formula or Poincaré duality, so accepted. No SGA. Tool uses accepted. FIX (proof text only; uses, deps and statement unchanged): Step 3 j_m was called the 'second-copy cone inclusion', which could be read as the shifted copy; now the unshifted summand (second map of the cone triangle). Step 7 now names the signed flip that puts the K-flat factor in the position lem-pur-acyclic-kflat-tensor-arbitrary uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedAugmentedSequenceModel",
+  "declaration": "SheafOfModules.RingedSequenceModel.ringed_augmented_sequence_model",
+  "declarations": [
+   "SheafOfModules.RingedSequenceModel.sum",
+   "SheafOfModules.RingedSequenceModel.differential",
+   "SheafOfModules.RingedSequenceModel.sumMap",
+   "SheafOfModules.RingedSequenceModel.sumMap_comm",
+   "SheafOfModules.RingedSequenceModel.telescope",
+   "SheafOfModules.RingedSequenceModel.leg",
+   "SheafOfModules.RingedSequenceModel.telescopeMap",
+   "SheafOfModules.RingedSequenceModel.Modules",
+   "SheafOfModules.RingedSequenceModel.Resolving",
+   "SheafOfModules.RingedSequenceModel.tensorSequence",
+   "SheafOfModules.RingedSequenceModel.tensorSequenceMap",
+   "SheafOfModules.RingedSequenceModel.coefficientMap",
+   "SheafOfModules.RingedSequenceModel.sumTensor",
+   "SheafOfModules.RingedSequenceModel.sumTensor_comm",
+   "SheafOfModules.RingedSequenceModel.tensorConeMap",
+   "SheafOfModules.RingedSequenceModel.coneTensorIso",
+   "SheafOfModules.RingedSequenceModel.ringed_augmented_sequence_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedAugmentedSequenceModel.lean",
+  "statement": "theorem ringed_augmented_sequence_model (E : ℕ ⥤ DerivedCategory (Modules O)) : (∃ (P : ℕ ⥤ CochainComplex (Modules O) ℤ) (_hP : Resolving O P) (vP : P ⋙ DerivedCategory.Q ≅ E), (telescope P).IsKFlatIndependentCoefficients ∧ Nonempty (IsColimit (DerivedCategory.Q.mapCocone (Cofan.mk (sum P) (fun n : ℕ ↦ Sigma.ι (fun k : ℕ ↦ P.obj k) n)))) ∧ ∀ (B : Cofan (fun n : ℕ ↦ E.obj n)) (_hB : IsColimit B) (uE : B.pt ⟶ B.pt) (_huE : ∀ n : ℕ, B.inj n ≫ uE = B.inj n - E.map (homOfLE (Nat.le_succ n)) ≫ B.inj (n + 1)) (K : DerivedCategory (Modules O)) (g : B.pt ⟶ K) (c : K ⟶ B.pt⟦(1 : ℤ)⟧), Triangle.mk uE g c ∈ distTriang _ → ∃ (a : DerivedCategory.Q.obj (sum P) ≅ B.pt) (z : DerivedCategory.Q.mapTriangle.obj (mappingCone.triangle (differential P)) ≅ Triangle.mk uE g c), z.hom.hom₁ = a.hom ∧ z.hom.hom₂ = a.hom ∧ (∀ n : ℕ, DerivedCategory.Q.map (Sigma.ι (fun k : ℕ ↦ P.obj k) n) ≫ a.hom = (vP.app n).hom ≫ B.inj n) ∧ (∀ n : ℕ, DerivedCategory.Q.map (leg P n) ≫ z.hom.hom₃ = (vP.app n).hom ≫ B.inj n ≫ g)) ∧ (∃ Φ : ∀ (P : ℕ ⥤ CochainComplex (Modules O) ℤ), Resolving O P → ∀ L : CochainComplex (Modules O) ℤ, telescope (tensorSequence O P L) ≅ ((totalTensor O).obj (telescope P)).obj L, (∀ (P : ℕ ⥤ CochainComplex (Modules O) ℤ) (hP : Resolving O P) (L : CochainComplex (Modules O) ℤ), (Φ P hP L).hom ≫ (coneTensorIso O P L).hom = tensorConeMap O P L) ∧ (∀ (P : ℕ ⥤ CochainComplex (Modules O) ℤ) (hP : Resolving O P) (L : CochainComplex (Modules O) ℤ) (n : ℕ), leg (tensorSequence O P L) n ≫ (Φ P hP L).hom = ((totalTensor O).map (leg P n)).app L) ∧ (∀ (P : ℕ ⥤ CochainComplex (Modules O) ℤ) (hP : Resolving O P) (L L' : CochainComplex (Modules O) ℤ) (h : L ⟶ L'), telescopeMap (coefficientMap O P h) ≫ (Φ P hP L').hom = (Φ P hP L).hom ≫ (((totalTensor O).obj (telescope P)).map h)) ∧ (∀ (P P' : ℕ ⥤ CochainComplex (Modules O) ℤ) (hP : Resolving O P) (hP' : Resolving O P') (r : P ⟶ P') (L : CochainComplex (Modules O) ℤ), telescopeMap (tensorSequenceMap O r L) ≫ (Φ P' hP' L).hom = (Φ P hP L).hom ≫ (((totalTensor O).map (telescopeMap r)).app L)) ∧ (∀ (P : ℕ ⥤ CochainComplex (Modules O) ℤ) (hP : Resolving O P) (L L' : CochainComplex (Modules O) ℤ) (h : L ⟶ L'), QuasiIso h → IsIso (DerivedCategory.Q.map (telescopeMap (coefficientMap O P h))) ∧ IsIso (DerivedCategory.Q.map (((totalTensor O).obj (telescope P)).map h))) ∧ (∀ (P P' : ℕ ⥤ CochainComplex (Modules O) ℤ) (hP : Resolving O P) (hP' : Resolving O P') (r : P ⟶ P'), (∀ n : ℕ, QuasiIso (r.app n)) → ∀ L : CochainComplex (Modules O) ℤ, IsIso (DerivedCategory.Q.map (telescopeMap (tensorSequenceMap O r L))) ∧ IsIso (DerivedCategory.Q.map (((totalTensor O).map (telescopeMap r)).app L))) ∧ (∀ (P : ℕ ⥤ CochainComplex (Modules O) ℤ) (hP : Resolving O P) (L H L' : CochainComplex (Modules O) ℤ) (s : H ⟶ L) (f : H ⟶ L'), QuasiIso s → ∀ (i : DerivedCategory.Q.obj (telescope (tensorSequence O P L)) ⟶ DerivedCategory.Q.obj (telescope (tensorSequence O P H))) (j : DerivedCategory.Q.obj (((totalTensor O).obj (telescope P)).obj L) ⟶ DerivedCategory.Q.obj (((totalTensor O).obj (telescope P)).obj H)), i ≫ DerivedCategory.Q.map (telescopeMap (coefficientMap O P s)) = 𝟙 _ → j ≫ DerivedCategory.Q.map (((totalTensor O).obj (telescope P)).map s) = 𝟙 _ → i ≫ DerivedCategory.Q.map (telescopeMap (coefficientMap O P f)) ≫ (DerivedCategory.Q.mapIso (Φ P hP L')).hom = (DerivedCategory.Q.mapIso (Φ P hP L)).hom ≫ j ≫ DerivedCategory.Q.map (((totalTensor O).obj (telescope P)).map f)) ∧ (∀ (P H P' : ℕ ⥤ CochainComplex (Modules O) ℤ) (hP : Resolving O P) (_hH : Resolving O H) (hP' : Resolving O P') (s : H ⟶ P) (f : H ⟶ P'), (∀ n : ℕ, QuasiIso (s.app n)) → ∀ (L : CochainComplex (Modules O) ℤ) (i : DerivedCategory.Q.obj (telescope (tensorSequence O P L)) ⟶ DerivedCategory.Q.obj (telescope (tensorSequence O H L))) (j : DerivedCategory.Q.obj (((totalTensor O).obj (telescope P)).obj L) ⟶ DerivedCategory.Q.obj (((totalTensor O).obj (telescope H)).obj L)), i ≫ DerivedCategory.Q.map (telescopeMap (tensorSequenceMap O s L)) = 𝟙 _ → j ≫ DerivedCategory.Q.map (((totalTensor O).map (telescopeMap s)).app L) = 𝟙 _ → i ≫ DerivedCategory.Q.map (telescopeMap (tensorSequenceMap O f L)) ≫ (DerivedCategory.Q.mapIso (Φ P' hP' L)).hom = (DerivedCategory.Q.mapIso (Φ P hP L)).hom ≫ j ≫ DerivedCategory.Q.map (((totalTensor O).map (telescopeMap f)).app L)) ∧ (∀ (P : ℕ ⥤ CochainComplex (Modules O) ℤ) (hP : Resolving O P) (L : CochainComplex (Modules O) ℤ) (B : Type b) [CommRing B] (ρ : B →+* End L) (b : B), telescopeMap (coefficientMap O P (ρ b)) ≫ (Φ P hP L).hom = (Φ P hP L).hom ≫ (((totalTensor O).obj (telescope P)).map (ρ b))))",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Strict models, arbitrary supplied coproduct telescope triangles, signed chain comparison, both strict naturality variables, derived quasi-isomorphism inversion and explicit roof equations, and commuting coefficient actions. Helpers construct actual sums and cone maps. The extra statement dependency is the already-landed totalTensor interface used verbatim."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4042b9129",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 7d376d7a: stmt_deps now replace the theorem lem-weil-pbc-kflat-fixed-tensor-triangulated with the live existing:true def node def-sf-ringed-kflat-tensor-representative-data (on base; owns Modules/ordinaryTensor/totalTensor); the theorem stays in proof_deps. The only Lean delta is coneTensorIso's three Prop instances proved inline by the same unfold+infer_instance bodies; signature unchanged; only the item node differs from side-live; item still lean:null live. Clauses rechecked: Resolving (K-flat + IsFlatOnSite), vP natural iso, telescope = cone(1 - s) with the def-kun-truncations sign, arbitrary colimit-cofan triangle comparison (existence only), Φ pinned by tensorConeMap via mapBifunctorMappingCone₁Iso (leg clause consistent by mapBifunctorMap_inr_..._hom; shifted copy unsigned as in step 5), strict naturality in L and P, IsIso and roof clauses, B-action via ρ : B →+* End L. Statement verbatim; 17 declarations present; 3 sorries (sumMap_comm, sumTensor_comm, main). Advisories: local Modules abbrev has the same body as KFlatFixedTensor.Modules; B-clause = L-naturality at ρ b. No compile (no file changed)."
+ }
+}

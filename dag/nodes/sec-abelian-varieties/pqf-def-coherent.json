@@ -90,7 +90,40 @@
  "blueprint_kind": "definition",
  "blueprint_order": 526,
  "blueprint_uses": [],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.RingedSpace.IsCoherent",
+     "module": "WeilConjectures.AlgebraicGeometry.Coherent",
+     "lines": [
+      38,
+      48
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteTypeWithFiniteTypeKernels",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.FiniteFibre",
+     "lines": [
+      49,
+      64
+     ],
+     "kind": "structure",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
  "split_report": {
@@ -114,19 +147,25 @@
   "declaration": "AlgebraicGeometry.Scheme.Modules.IsQuasiCoherentFiniteType",
   "statement": "def Scheme.Modules.IsQuasiCoherentFiniteType {X : Scheme.{u}} (F : X.Modules) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q25",
-  "date": "2026-10-18",
+  "by": "Q24",
+  "date": "2026-10-24",
   "file": "lean/Sheaf/AlgebraicGeometry/CoherentFiniteType.lean",
   "existing": false,
-  "note": "The recorded IsCoherent declaration means quasi-coherent plus finite presentation, whereas this node states quasi-coherent plus finite type. This dependency module supplies exactly the node's finite-type notion."
+  "note": "§1(B), H13 repair: the landed Q25 IsQuasiCoherentFiniteType conjunction gives quasi-coherence and finite type, but alone does not expose the node's finite-type-kernel condition for coherence (Stacks 01BV). Preserve the Q25 module, file, declaration and definition unchanged, and publicly import WeilConjectures.AlgebraicGeometry.Coherent. The module now also exposes the exact RingedSpace.IsCoherent predicate and Mathlib's IsQuasicoherent and IsFiniteType, covering all three clauses without redefining any notion or removing the interface used by existing consumers.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.IsQuasiCoherentFiniteType",
+   "AlgebraicGeometry.RingedSpace.IsCoherent",
+   "SheafOfModules.IsQuasicoherent",
+   "SheafOfModules.IsFiniteType"
+  ]
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-edefc3812",
-  "group": "Q25",
-  "result": "fix",
-  "note": "Item statement matches Stacks 0GSJ/0GSI and the node clause by clause (LocallyOfFiniteType; relative assassin via fibre pullback (tensorPullback), annihilatorAssociatedPrimes and the moduleStalkFunctor stalk; pointwise stalk flatness over O_{S,f(x)}; canonical Mathlib reduced closure subschemes and subschemeMap; hflat over all s in T, all components and generic points; (i) membership in the relative assassin; (ii) ∃ d:ℕ with dim C = d for every component, empty fibres vacuous). No hollow defs, sorry only, docstrings fine, no stray universes, no duplicate helpers found. Fault H13/H4: the delivery re-pointed the record of pqf-def-coherent (~739 citers) from RingedSpace.IsCoherent (Stacks 01BV coherent; the note claiming finite presentation is false) to a new conjunction IsQuasiCoherentFiniteType duplicating Mathlib IsQuasicoherent ∧ IsFiniteType. Fix: fixes/FlatAssociatedEquidimensional.lean uses [F.IsQuasicoherent] [F.IsFiniteType] and drops the CoherentFiniteType import; land with --apply-fixes fixes/ --revert-nodes pqf-def-coherent (drops the CoherentFiniteType module); fixes also has a lean-record note and an updated report. nt_compile: delivered files clean (2.5 s, 3.2 s); fixed module clean (5.0 s); #check shows the expected binders. Removing the HilbertPolynomial/DirectImage.Basic imports breaks the compile, so they stay. merge_delivery.py was not run (landing tools are off-limits), so acceptance of the fix is unconfirmed."
+  "reviewer": "NT-stage2-cc-07d9094a4",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Re-delivery after 3535 H13 RETURN. Diff vs 3535 snapshot: item and new-node modules changed only by import (Coherent -> Sheaf.AlgebraicGeometry.CoherentFiniteType). pqf-def-coherent record is the requested superset: Q25 module/file/primary decl/verbatim statement/existing:false kept, declarations = [IsQuasiCoherentFiniteType, RingedSpace.IsCoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.IsFiniteType] + note; module = live Q25 file + public import WeilConjectures.AlgebraicGeometry.Coherent + docstring. Import-clash probe: import Coherent + each of the 100 side-live importers via nt_compile --json: 98 clean, 2 (FlatCurveDerivedStructureModel, ProperFibrewiseAmpleProjective) fail identically without the import (pre-existing KFlat Sheaf/WC closure clash). Independent re-read: field/finite-type/Noetherian hyps not stronger, topologicalKrullDim<=d, G0 quotient by actual ShortExact relations, F_k bot for k<0, T pinned on generators (unique), (k:Z)-1 target, B:Type v image filtration, Fin s combinations ^(d+1)=0; edge cases covered; docstrings carry source/blueprint/5 steps; new node def-sfb-coherent-grothendieck-support real data, no duplicate. No delivery file changed."
  },
  "lead_note": "L 2026-10-11 15:21 UTC (B-1521): source.external tag corrected 01DW -> 01BV (coherent modules, Sheaves of Modules; the statement already cites 01BV; E1 ceac4548f, R-pco).",
  "blueprint_update": {

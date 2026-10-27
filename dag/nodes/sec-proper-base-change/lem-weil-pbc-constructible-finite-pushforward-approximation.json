@@ -137,7 +137,32 @@
   "unit_realization": "The item is a proof dependency in sk-thm-p1 and does not realize the unit statement or a unit proof step; sk-thm-p1 is unchanged.",
   "mathlib": "Three searches recorded below found no exact theorem for constructible etale sheaf approximation or finite-pushforward embeddings."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_isNoetherian_mono_biproduct_lowerStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_isNoetherian_mono_biproduct_lowerStar",
+     "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
+     "lines": [
+      390,
+      415
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -171,5 +196,34 @@
    "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a Noetherian commutative ring, let $U$ be a quasi-compact and\nquasi-separated scheme and let $C$ be a constructible sheaf of $\\Lambda$-modules\non $U_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf], [def-weil-pbc-etale-sheaves].\nThere are a Noetherian scheme $U'$, a morphism $\\nu:U\\to U'$, a constructible\nsheaf of $\\Lambda$-modules $C'$ on $U'_{\\Et}$ with an isomorphism\n$\\nu^{-1}C'\\cong C$ [def-weil-pbc-inverse-image], finitely many morphisms\n$h_i:V_i\\to U'$ which are finite and locally of finite presentation, finitely\ngenerated $\\Lambda$-modules $M_i$, and a monomorphism of sheaves of\n$\\Lambda$-modules $C'\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$\n[def-weil-pbc-direct-image].",
+  "proof": [
+   {
+    "text": "*Step 1: the approximation.* A quasi-compact quasi-separated scheme is the\ninverse limit $U=\\varprojlim_\\lambda U_\\lambda$ of schemes of finite type over\n$\\mathbf Z$ (in particular Noetherian) with affine transition maps (absolute\nNoetherian approximation, Stacks Project, Limits of Schemes, Tag\n[01ZA](https://stacks.math.columbia.edu/tag/01ZA)).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 2: the sheaf descends.* Constructibility of $C$ gives a finite partition\nof $U$ into constructible locally closed subschemes on each of which $C$ is\nfinite locally constant with finitely generated (hence, $\\Lambda$ being\nNoetherian, finitely presented) values. Such a sheaf is specified by finitely\nmany etale objects of finite presentation, finitely many sections and finitely\nmany relations expressing the trivializations, the module structures and the\ncompatibilities on overlaps. By descent of finite-presentation data at an\ninverse limit with affine transition maps, all of this descends to one stage\n$U'=U_\\lambda$: there is a constructible sheaf of $\\Lambda$-modules $C'$ on\n$U'_{\\Et}$ with $\\nu^{-1}C'\\cong C$, where $\\nu:U\\to U'$ is the projection.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 3: the embedding on the Noetherian stage.* Apply\n[lem-weil-pbc-constructible-finite-pushforward-noetherian] to $C'$ on the\nNoetherian scheme $U'$: there are finite morphisms $h_i:V_i\\to U'$ and finitely\ngenerated $\\Lambda$-modules $M_i$ with a monomorphism\n$C'\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$. Since $U'$ is Noetherian,\nevery finite morphism $h_i$ is of finite type, hence of finite presentation,\nin particular locally of finite presentation.",
+    "uses": [
+     "lem-weil-pbc-constructible-finite-pushforward-noetherian"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

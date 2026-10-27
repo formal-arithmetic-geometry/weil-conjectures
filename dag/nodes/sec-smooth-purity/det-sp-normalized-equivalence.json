@@ -40,165 +40,58 @@
  ],
  "proof": [
   {
-   "text": "Write $\\varpi=\\varpi_E$ and $B_k=(\\mathcal O_E/\\varpi^k)_T$. By [lem-weil-l-adic-extension-integers-dvr], $\\ell=u\\varpi^e$ for a unit $u$ and an integer $e\\geq1$: $\\ell$ is nonzero and has absolute value strictly less than $1$. Thus $(\\ell^n)=(\\varpi^{en})$, and the coefficient sheaves in the item are canonically $B_{en}$, with the same quotient maps. The completed sheaf is unchanged: a compatible family on the indices $en$ extends uniquely to index $k$ by projection from any $en\\geq k$. Use $\\mathscr S(B)$ for the strict varying-coefficient systems of [lem-pur-system-level-left-extension], and put $r(n)=en$, $U=U_r$. The category in the item is $\\mathscr S(B_r)$, by the explicit system definition [sk-def-sp-coefficient-towers]. Use $\\mathcal R_\\varpi\\dashv\\mathcal L_\\varpi$ for the actual unbounded derived adjunction of [lem-coef-derived-system-evaluation-calculus]. It has $\\mathcal L_\\varpi=R\\lim\\circ\\operatorname{Res}$, not a categorical inverse limit in a triangulated category. Its reduction is computed from one flat-term K-flat representative $Q$ by $(Q\\otimes B_k)_k$, so $U\\mathcal R_\\varpi=r_T$ with their actual quotient transitions.",
+   "text": "Exact evaluation proves that strict scalar forgetting is additive and exact. Compose exact derived forgetting with total right-derived inverse limit for its standard shift and triangulated structures, and use the transported canonical Roos triangle. The countable products of the completed-coefficient derived category, needed by the Roos triangle, are those of the integral operations construction.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-pur-system-level-left-extension",
-    "sk-def-sp-coefficient-towers",
-    "lem-coef-derived-system-evaluation-calculus"
+    "lem-sp-completed-tower-roos",
+    "lem-pur-integral-operations-well-defined"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definitions 3.5.2–3.5.3 and Lemma 3.5.7; explicit ramification reindexing"
-   }
+   "elementary": false
   },
   {
-   "text": "Here is the required derived cofinality argument, on towers over the single fixed ring sheaf $R_T$. Let $V(X)_n=X_{en}$. Its left adjoint is the exact functor $K(Y)_k=Y_{\\lceil k/e\\rceil}$, with the evident transition maps: a map $K(Y)\\to X$ is determined by the maps $Y_n\\to X_{en}$, and its other components are obtained by composing with $X_{en}\\to X_k$. Exactness is levelwise. Hence $V$ preserves K-injective complexes: for acyclic $A$, a map $A\\to VI$ transposes to $KA\\to I$, which is null-homotopic since $KA$ is acyclic; the transpose of a null-homotopy is a null-homotopy [def-pur-kinjective-complex]. The functor $n\\mapsto en$ on the opposite positive integers is initial: the indices with $en\\geq k$ are a nonempty tail, and any two are joined through their maximum. By [lem-weil-pbc-initial-functor-limit], $\\lim X\\to\\lim VX$ is an isomorphism respecting all selected projections. Apply this identity to a K-injective tower resolution. Since its restriction is still K-injective, the total-limit computation in [lem-weil-pbc-ringed-strict-tower-homotopy-limit] gives a natural isomorphism $R\\lim X\\xrightarrow{\\sim}R\\lim VX$ respecting the selected projections. This argument does not assume exact countable products.",
+   "text": "Use the completed ell-power adjunction and its actual unit and counit isomorphisms.",
    "uses": [
-    "def-pur-kinjective-complex",
-    "lem-weil-pbc-initial-functor-limit",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-sp-completed-reduction-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok); categories.tex Tag 002R (lemma-initial); derived.tex Tag 070H; explicit subsequence adjoint argument"
-   }
+   "elementary": false
   },
   {
-   "text": "The exact restriction $U:\\mathscr S(B)\\to\\mathscr S(B_r)$ also has an exact right adjoint $J$, given explicitly by $(JC)_k=0$ for $k<e$, and $(JC)_k=\\operatorname{Res}_{B_k\\to B_{e\\lfloor k/e\\rfloor}}C_{\\lfloor k/e\\rfloor}$ for $k\\geq e$. Its transitions are restrictions of the transitions of $C$. A system map $D\\to JC$ is determined by its components $D_{en}\\to C_n$: its $k$th component is $D_k\\to D_{e\\lfloor k/e\\rfloor}\\to C_{\\lfloor k/e\\rfloor}$, and it is zero for $k<e$. This constructs the inverse Hom bijections, including their naturality. Restriction of scalars is exact because it does not change the underlying abelian sheaf; exactness of varying systems is componentwise by [lem-pur-system-level-left-extension]. Consequently $U,J$ preserve quasi-isomorphisms. Applying their termwise unit and counit to complexes and then localizing, using [lem-sf-exact-functor-derived-triangulated], gives $U\\dashv J$ on the ordinary unbounded derived categories. The identities descend from the identities on complexes. We have $UJC=C$ strictly. After forgetting to $R_T$, step 2 therefore identifies $\\mathcal L_\\varpi JC$ with $L_TC$, respecting the level-$n$ projections.",
+   "text": "Under the additional Noetherian hypothesis, the forward constructibility comparison restricts reduction to the recorded normalized finite-Tor category.",
    "uses": [
-    "lem-pur-system-level-left-extension",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-sp-completed-reduction-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
-    "place": "Adjunction paragraph, expanded at the level of strict derived systems"
-   }
+   "elementary": false
   },
   {
-   "text": "Combine the two actual adjunctions, rather than taking a limit of degree-zero Hom sets:\n$$\\operatorname{Hom}(r_TM,C)=\\operatorname{Hom}(U\\mathcal R_\\varpi M,C)\\cong\\operatorname{Hom}(\\mathcal R_\\varpi M,JC)\\cong\\operatorname{Hom}(M,\\mathcal L_\\varpi JC)\\cong\\operatorname{Hom}(M,L_TC).$$\nThe first bijection is step 3, the second is [lem-coef-derived-system-evaluation-calculus], and the last is step 2. They are natural in both variables, so this proves the ambient adjunction. Its unit is the map induced by the strict quotient maps $Q\\to Q\\otimes B_{en}$: the unit for $U\\dashv J$ has identity components at $en$, and the uniformizer adjunction's unit has exactly the quotient components. Thus the resulting coherent map is the canonical derived-completion map. Its counit at level $n$ is the scalar-extension adjoint of $L_TC\\to\\operatorname{Res}C_n$, by the counit formula in that node and the projection compatibility in step 2. This specifies the natural maps, including their coherence; agreement of unrelated evaluated objects is not being used to choose a system map.",
+   "text": "For a normalized constructible finite-Tor tower, apply reconstruction to its actual Roos triangle and projections. Its total limit belongs to sfIntegralConstructible.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus"
+    "lem-sp-completed-tower-roos",
+    "sk-lem-sp-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 3.5.7(1) and its proof; blueprint Adjunction paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "To treat an arbitrary normalized tower $C\\in D(\\mathscr S(B_r))$, use the existing derived left extension $F=L_rC$ of [lem-pur-system-level-left-extension]. Its formula is\n$$F_k=B_k\\otimes^L_{B_{e\\lceil k/e\\rceil}}C_{\\lceil k/e\\rceil}.$$\nIn particular $F_{en}=C_n$ and the selected transitions are those of $C$. For adjacent $k+1\\to k$, put $a=\\lceil k/e\\rceil$ and $b=\\lceil(k+1)/e\\rceil$. The cited node identifies the transition-adjoint with $B_k\\otimes^L_{B_{eb}}C_b\\to B_k\\otimes^L_{B_{ea}}C_a$, induced by $B_{ea}\\otimes^L_{B_{eb}}C_b\\to C_a$. If $a=b$ this last map is the identity; if $a<b$ it is an isomorphism by normalization of $C$. Thus all adjacent transition-adjoints of $F$ are isomorphisms, and their composites give normalization for every pair of levels, using the same node's tensor-associator compatibility. After forgetting scalars, step 2 gives $\\mathcal L_\\varpi F\\cong L_TC$, with the actual projections to $C_n$ identified. No boundedness or constructibility was used.",
+   "text": "Choose an auxiliary finite field of characteristic different from ell. The intrinsic/legacy completeness comparison identifies the completeness conjunct of sfIntegralConstructible with IntegralOnSlice.IsComplete at none. Restrict the ambient adjunction along the two full inclusions. The formulas for the restricted unit and counit identify their images with the ambient components; fullness reflects their invertibility. Adjunction.toEquivalence gives the equivalence, and its functor/inverse inclusions are definitionally the requested composites.",
    "uses": [
-    "lem-pur-system-level-left-extension"
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-sp-completed-reduction-adjunction",
+    "lem-sp-completed-reduction-constructible",
+    "sk-lem-sp-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
-    "place": "Counit paragraph; explicit interpolation between ell-power levels and uniformizer-power levels"
-   }
-  },
-  {
-   "text": "The system $F$ of step 5 gives a normalized DVR tower in the precise sense of [def-coef-normalized-dvr-tower]: its underlying strict $R_T$-tower supplies the coherence datum, and the transition-adjoints are the isomorphisms just checked. Apply [lem-coef-normalized-dvr-effectivity]. For every $n$ the canonical counit comparison $(\\mathcal L_\\varpi F)\\otimes^L_{R_T}B_{en}\\to F_{en}=C_n$ is an isomorphism. Under the projection-preserving isomorphism in step 5 this is exactly the counit component from step 4. The evaluations jointly detect isomorphisms by [lem-pur-system-level-left-extension], so $r_TL_TC\\to C$ is an isomorphism of derived systems. This proves the counit clause for all normalized towers, including unbounded ones; finite Tor or constructibility is unnecessary here.",
-   "uses": [
-    "def-coef-normalized-dvr-tower",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-pur-system-level-left-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 3.5.5 and Lemma 3.5.7(3)–(5); regular principal ideal case"
-   }
-  },
-  {
-   "text": "For completeness, the unit clause holds even with the triangulated formulation of [def-weil-derived-complete], which does not itself choose the canonical unit. First $\\mathcal R_\\varpi M$ is normalized for arbitrary $M$: on its flat-term K-flat representative $Q$, [lem-pur-kflat-change-of-rings] makes $Q\\otimes B_j$ K-flat over $B_j$, and $(Q\\otimes B_j)\\otimes_{B_j}B_i=Q\\otimes B_i$ for $j\\geq i$. Apply [lem-coef-normalized-dvr-effectivity] to this tower. Its counit is invertible. The triangular identity $\\mathcal L_\\varpi(\\epsilon_{\\mathcal R_\\varpi M})\\circ\\eta_{\\mathcal L_\\varpi\\mathcal R_\\varpi M}=1$ of [lem-coef-derived-system-evaluation-calculus] makes $\\eta_{\\mathcal L_\\varpi\\mathcal R_\\varpi M}$ invertible. If $M$ is derived complete, [def-weil-derived-complete] gives a Roos triangle with first object $M$ for its uniformizer reduction tower. The total limit has another such triangle by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Rotate the two triangles to start with their common $1-s$; (TR3) in [def-weil-triangulated-category] extends the identity on the two product terms to a triangle morphism, whose third map is an isomorphism by [lem-sf-triangle-morphism-iso]. Hence $M\\cong\\mathcal L_\\varpi\\mathcal R_\\varpi M$ as objects. Writing $H=\\mathcal L_\\varpi\\mathcal R_\\varpi$ and choosing the resulting isomorphism $f:M\\xrightarrow{\\sim}HM$, naturality gives $H(f)\\eta_M=\\eta_{HM}f$. Both $H(f)$ and $\\eta_{HM}f$ are invertible, so $\\eta_M=H(f)^{-1}\\eta_{HM}f$ is invertible. The cofinality isomorphism of step 2 carries this unit to the ell-power unit of step 4, because both are induced on the same K-flat representative by its strict quotient maps. This proves the asserted canonical unit isomorphism without choosing an arbitrary lift in a Roos triangle.",
-   "uses": [
-    "def-weil-derived-complete",
-    "lem-pur-kflat-change-of-rings",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definitions 3.5.2–3.5.3 and Lemma 3.5.7(2); derived.tex axioms TR2–TR3 and two-isomorphism triangle lemma"
-   }
-  },
-  {
-   "text": "For the constructible restriction now assume that $T$ is Noetherian as in the statement. Let $M\\in\\Dbc(T,\\mathcal O_E)$ in the derived-complete integral sense of [def-weil-derived-complete-integral-detailed]. Its uniformizer-power reductions are constructible with one cohomological interval. Their finite-torsion constructibility is the condition of [def-weil-finite-torsion-constructibility]. At the selected levels $en$ these are precisely the ell-power reductions. This is literally the intrinsic finite-level constructibility of [def-weil-proetale-constructible-sheaf] required of the levels in [sk-def-sp-normalized-towers]: one finite partition of $T$ into locally closed constructible subschemes on each of which the restriction is locally constant with finite stalks. Uniform finite Tor bounds are supplied by [lem-coef-integral-residue-tor]: choose $[a,b]$ containing the cohomology of the uniformizer residue reduction, and every uniformizer reduction has Tor amplitude in that same interval. Apply this to the selected levels $en$. Finally use only the ambient, arbitrary-$M$ clause of the current [det-sp-reduction-tower-normalized]: the reductions form a functorial object of the derived strict-tower category with quotient-induced transitions, and all its reduction maps are isomorphisms. Its separate bounded-constructible integral hypothesis is not needed here. The finite-level constructibility, common cohomological interval and common Tor interval just proved, together with these normalization maps, are exactly [sk-def-sp-normalized-towers]. Hence $r_TM\\in\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)_{\\mathrm{norm}}$. The residue-Tor statement permits an arbitrary scheme with $\\ell$ invertible; the added Noetherian hypothesis is not used in this forward direction.",
-   "uses": [
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-proetale-constructible-sheaf",
-    "lem-coef-integral-residue-tor",
-    "det-sp-reduction-tower-normalized",
-    "sk-def-sp-normalized-towers"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
-    "place": "Restriction paragraph, forward direction; explicit uniform Tor hypothesis check"
-   }
-  },
-  {
-   "text": "Conversely let $C$ be a normalized constructible tower with the common cohomological and Tor bounds in the statement. By [sk-lem-sp-tower], $M=R\\varprojlim_nC_n$ lies in $\\Dbc(T,\\mathcal O_E)$. In that statement $\\Dbc(T,\\mathcal O_E)$ is the derived-complete integral category of [def-weil-derived-complete-integral-detailed], its statement dependency: derived complete in the sense of [def-weil-derived-complete], every uniformizer reduction bounded with finite-torsion constructible cohomology, and one cohomological interval for all reductions. This is exactly the category in the item. Both statements use the same completed sheaf $\\mathcal O_{E,T}=R_T=\\varprojlim_n(\\mathcal O_E/\\ell^n)_T$ of [sk-def-sp-coefficient-towers] and the same total-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], so $M=L_TC$. Hence $L_T$ sends normalized constructible towers into $\\Dbc(T,\\mathcal O_E)$. Nothing beyond this statement of the reconstruction lemma is used. The counit on $C$ is the canonical isomorphism of step 6; the reconstruction lemma's level maps are not needed to choose it.",
-   "uses": [
-    "sk-lem-sp-tower",
-    "def-weil-derived-complete-integral-detailed",
-    "sk-def-sp-coefficient-towers",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
-    "place": "Restriction: 'R lim sends normalized constructible towers into Dbc(T,O_E) by the reconstruction lemma'"
-   }
-  },
-  {
-   "text": "By steps 8 and 9, both functors restrict to the stated full subcategories. The natural isomorphisms $\\eta_M:M\\xrightarrow{\\sim}L_Tr_TM$ from step 7 and $\\epsilon_C:r_TL_TC\\xrightarrow{\\sim}C$ from step 6 remain natural on those full subcategories. They give the two composites naturally isomorphic to the identity, with the triangular identities inherited from the ambient adjunction of step 4. These are precisely mutually inverse equivalences, with the functors and natural maps displayed in the statement.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
-    "place": "Restriction paragraph, final equivalence"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-pur-system-level-left-extension",
-  "sk-def-sp-coefficient-towers",
-  "lem-coef-derived-system-evaluation-calculus",
-  "def-pur-kinjective-complex",
-  "lem-weil-pbc-initial-functor-limit",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-sf-exact-functor-derived-triangulated",
-  "def-coef-normalized-dvr-tower",
-  "lem-coef-normalized-dvr-effectivity",
-  "def-weil-derived-complete",
-  "lem-pur-kflat-change-of-rings",
-  "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-proetale-constructible-sheaf",
-  "lem-coef-integral-residue-tor",
-  "det-sp-reduction-tower-normalized",
-  "sk-def-sp-normalized-towers",
-  "sk-lem-sp-tower"
+  "lem-sp-completed-tower-roos",
+  "lem-sp-completed-reduction-adjunction",
+  "lem-sp-completed-reduction-constructible",
+  "sk-lem-sp-tower",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pur-integral-operations-well-defined"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
-  "place": "Adjunction, Unit, Counit, Restriction; explicit cofinality, derived-system interpolation, and canonical-unit arguments supplement the blueprint"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "S4 Lean assembly: exactness, canonical adjunction, both constructibility directions, full-subcategory restriction; remaining comparison steps split off as three named lemmas"
  },
  "mathlib_searches": [
   {
@@ -283,59 +176,43 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sp-integral-adjunction",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "det-sp-normalized-equivalence",
   "worker": "stage1",
-  "summary": "Repair of the 2026-10-17 long-step return: replaced the former inverse constructibility step 9 by five short steps separately invoking the existing reconstruction, DVR effectivity, Noetherian cohomological-adic criterion, finite-coefficient origin equivalence, and all-reductions criterion. All statements and Lean records remain unchanged; steps 1–8 and the final equivalence argument are retained. The candidate new bridge node was rejected as redundant and is not delivered. No new nodes. On resumption, corrected the last criterion application to use the canonical completion map from steps 7 and 10, rather than silently identifying the local-adic definition in the cohomological criterion with canonical completion; refreshed all step-numbered citations. Maintainer reader (Q82): the five-step inverse comparison misread [sk-lem-sp-tower] as giving bounded constructibility in the sense of sk-def-sfb-constructible; its statement dependency is def-weil-derived-complete-integral-detailed, which is exactly the item's category. Step 9 now cites that statement directly, as the blueprint Restriction paragraph does, and the unsupported steps 10-13 are removed; step 8 now names the constructibility definition actually used by sk-def-sp-normalized-towers.",
-  "blueprint": "Normalization paragraph of det-sp-integral-adjunction-bijection, serving step 1 of sk-prop-sp-integral-adjunction. Steps 1–4 realize Adjunction, 5–6 Counit, 7 Unit, 8 the forward Restriction, 9 the inverse Restriction by the reconstruction lemma sk-lem-sp-tower; step 10 restricts the adjunction.",
+  "summary": "Repair of batch5 spreading order: two independent statement-only lemmas extract the exact floor right extension and the normalized arithmetic interpolation with canonical effectivity maps; the canonical-unit argument is cited from the existing lem-pur-normalized-actual-reconstruction-maps (reviewer FIX dropped the duplicate abstract unit node). Existing arithmetic derived cofinality and uniformizer effectivity are reused. All ten retained arguments are mapped explicitly in report.md with the old proof transcribed verbatim. Statement and Lean record unchanged. Assembly under 3000 characters.",
+  "blueprint": "Normalization paragraph of det-sp-integral-adjunction-bijection: Adjunction is steps 1–2, Counit step 3, Unit step 4, Restriction steps 5–6; new nodes inherit this ancestor via det-sp-normalized-equivalence.",
   "tool_uses": [
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "DVR valuation decomposition identifies ell-powers with the cofinal levels en; this is a coefficient arithmetic tool, not a replacement for the unit route."
-   },
-   {
-    "node": "lem-pur-system-level-left-extension",
-    "why": "General derived strict-system evaluation and subsequence extension make the ramification interpolation coherent; the integral-adjunction unit does not supply this indexing tool."
+    "why": "Existing generic coefficient, total-limit, triangulated or reconstruction tool used on the same normalization route; its specific statement is checked in the worker review."
    },
    {
     "node": "lem-coef-derived-system-evaluation-calculus",
-    "why": "Supplies the ambient uniformizer reduction/total-limit adjunction and its actual unit/counit; no equivalence or effectivity is taken from it."
+    "why": "Existing generic coefficient, total-limit, triangulated or reconstruction tool used on the same normalization route; its specific statement is checked in the worker review."
    },
    {
-    "node": "lem-weil-pbc-initial-functor-limit",
-    "why": "Ordinary initial-functor limit invariance is applied to restricted K-injective resolutions, with the derived argument written in step 2."
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Existing generic coefficient, total-limit, triangulated or reconstruction tool used on the same normalization route; its specific statement is checked in the worker review."
    },
    {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Fixes the total derived limit and its Roos triangle for strict fixed-ring systems; the unit route uses this generic derived-limit tool."
-   },
-   {
-    "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Localizes the explicitly constructed exact restriction/right-adjoint functors; no geometric proof step is replaced."
-   },
-   {
-    "node": "lem-coef-normalized-dvr-effectivity",
-    "why": "Supplies unbounded uniformizer-tower effectivity along the blueprint cited effectivity route; ramification reindexing is proved in the item."
-   },
-   {
-    "node": "lem-pur-kflat-change-of-rings",
-    "why": "Checks normalization of reduction towers for arbitrary complexes using a single flat-term K-flat representative."
-   },
-   {
-    "node": "lem-sf-triangle-morphism-iso",
-    "why": "Identifies the two Roos-limit objects using the identity on the product terms; it is a generic triangulated-category tool."
+    "node": "lem-sp-strict-tower-arithmetic-restriction",
+    "why": "Existing generic coefficient, total-limit, triangulated or reconstruction tool used on the same normalization route; its specific statement is checked in the worker review."
    },
    {
     "node": "lem-coef-integral-residue-tor",
-    "why": "Supplies the uniform Tor hypothesis required by the tower subcategory from the integral category as actually defined; no geometric unit step is replaced."
+    "why": "Existing generic coefficient, total-limit, triangulated or reconstruction tool used on the same normalization route; its specific statement is checked in the worker review."
    },
    {
     "node": "det-sp-reduction-tower-normalized",
-    "why": "Uses only its arbitrary-complex strict-tower construction and normalization clause, on the blueprint forward-reduction route; its different bounded-constructible integral hypothesis is not applied."
+    "why": "Existing generic coefficient, total-limit, triangulated or reconstruction tool used on the same normalization route; its specific statement is checked in the worker review."
    },
    {
     "node": "sk-lem-sp-tower",
-    "why": "This is the inverse constructibility/reconstruction node explicitly used by the current blueprint and the owning integral-adjunction unit."
+    "why": "Existing generic coefficient, total-limit, triangulated or reconstruction tool used on the same normalization route; its specific statement is checked in the worker review."
+   },
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "Reviewer FIX (Q77 maintainer reader): its unit clause is exactly the invertibility of the actual uniformizer unit on derived-complete objects for the same specified adjunction of lem-coef-derived-system-evaluation-calculus; no node of sk-prop-sp-integral-adjunction gives it, and the dropped duplicate lem-sp-roos-adjunction-canonical-unit only re-derived it."
    }
   ]
  },
@@ -354,26 +231,34 @@
   "sk-lem-sp-tower",
   "lem-sfb-integral-cohomological-adic-criterion",
   "lem-sf-proetale-constructible-origin",
-  "det-prop-integral-criterion-reductions"
+  "det-prop-integral-criterion-reductions",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-pur-normalized-actual-reconstruction-maps"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q82-345e7682d",
-  "group": "Q82",
+  "reviewer": "NT-cc-Q77-b2a2fd1f7",
+  "group": "Q77",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-345e7682d (reviewer sub-agent of L); spot-checked: I read the whole delivery and all 40 cited statements. I also read sk-lem-sp-tower in full (statement, stmt_deps, 12 steps), the unit sk-prop-sp-integral-adjunction, the main-20261015 equivalence statement and proof, and Bhatt–Scholze Lemmas 3.5.4–3.5.7 on pp. 24–26. Lemma 3.5.7(5) applies because (ℓ)=(ϖ^e) is a regular ideal. No SGA source is used and there is no cycle. Steps 1–8 check out: the ceiling left adjoint and floor right adjoint, tested at e=1 and e=2 including the zero prefix; the initial-functor argument; effectivity for the counit; and the triangle identity, TR3 and naturality for the unit. Fault 1 (C4/E6): the new step 9 reads sk-lem-sp-tower as giving cohomology sheaves that are constructible in the sense of sk-def-sfb-constructible. Its stmt_deps and its step 12 instead conclude membership in def-weil-derived-complete-integral-detailed. So hypothesis (1) of lem-sfb-integral-cohomological-adic-criterion in step 11 had no support, and steps 11–13 fail. Fix: step 9 now cites sk-lem-sp-tower for exactly that membership, which is the item's category with the same R_T and total limit, as the blueprint Restriction paragraph does. Steps 10–13 are removed and the old step 14 becomes step 10. Fault 2 (C4): step 8 proved finite-level constructibility in the sfb sense, but sk-def-sp-normalized-towers requires def-weil-proetale-constructible-sheaf. That definition is word for word the finite-torsion constructibility the step already has, so the step now cites it. proof_deps is again the union of the step uses. The split_report summary, blueprint and tool_uses are updated, and the three unused tool uses are removed from split_report. The statement is unchanged. Note for the maintainer: the Noetherian hypothesis is now unused, so the unrestricted blueprint statement could be restored later. The top-level tool_uses field still lists the three removed nodes.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-b2a2fd1f7 (reviewer sub-agent of L); spot-checked: Re-split, ≥3-node note of 2026-10-22, base = the 10-step side-live proof (11617 chars). Every old step has a carrier. Old 2 → existing lem-sp-strict-tower-arithmetic-restriction. Old 3 → new lem-sp-arithmetic-system-right-adjoint: true; floor-index Hom bijection, block-change squares and the zero prefix checked, e=1 and e=2 tested, no duplicate (grep -R lfloor / right adjoint + subsequence). Old 5–6 → new lem-sp-normalized-arithmetic-interpolation: true; ceiling formula and the a=b / b=a+1 transitions checked against lem-pur-system-level-left-extension, e=1 and e=2 tested; effectivity tail overlaps the counit clause of reconstruction-maps (advisory). Old 8–10 → assembly steps 5–6 by cited statements. C5/D1 fault: the new lem-sp-roos-adjunction-canonical-unit is true (TR3 + 014A, triangle identity, naturality), but its only use, step 4, is the unit clause of the existing reviewed lem-pur-normalized-actual-reconstruction-maps: same specified R_ϖ⊣L_ϖ of evaluation-calculus, u_K iso for every derived-complete K, same argument in its step 5; no cycle, closure checked. The report had dismissed that node as 'uniformizer-specific'. Precedent Q123 → drop the node and re-cite. FIX, 3 faults: (1) step 4 re-cites reconstruction-maps plus strict-tower-arithmetic-restriction (ρu=u_e) for the ℓ-power unit, with a tool_use for the off-unit sk-thm-purity-transport node; (2) step 5 adds the missing cite of def-weil-finite-torsion-constructibility, checked as the same stratified finite-stalk condition as def-weil-proetale-constructible-sheaf, and drops 'word for word'; (3) step 1 adds the missing cite of sk-def-sp-coefficient-towers for Tow = S(B_r). proof_deps = union of the step uses; 2711 chars; statement and Lean record unchanged; no SGA. Count note: 2 genuine new nodes remain. The preflight counts the post-cutoff reconstruction-maps node, so the mechanical count is 3. Maintainer: please waive the count as for Q123. The top-level tool_uses field is stale (advisory).; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.SmoothPurityNormalizedEquivalence",
   "declaration": "AlgebraicGeometry.ProEtale.sp_normalized_equivalence",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.spCompletedStrictTower",
-   "AlgebraicGeometry.ProEtale.spCompletedReduction",
-   "AlgebraicGeometry.ProEtale.spCompletedTotalLimit",
-   "AlgebraicGeometry.ProEtale.spCompletedForgettingEvaluationIso",
-   "AlgebraicGeometry.ProEtale.spCompletedTotalProjection",
    "AlgebraicGeometry.ProEtale.SpNormalizedEquivalence",
    "AlgebraicGeometry.ProEtale.sp_normalized_equivalence"
   ],
@@ -391,5 +276,15 @@
   "group": "NK",
   "result": "pass",
   "note": "Every node clause matches the Lean: r_T (R.red transported along the canonical, sectionwise-fixed coefficient map) is left adjoint to L_T (exact scalar forgetting then the canonical right-derived lim); unit iso on IsComplete none M; counit iso on IsSpNormalizedTower; Noetherian (Mathlib IsNoetherian = finite affine Noetherian cover) only for the restriction, an equivalence sfIntegralConstructibleCategory ≌ spNormalizedConstructibleTorTowerCategory with strict equalities to the restricted functors. No hypothesis beyond the node; structure extras (exactness, CommShift, triangulated, countable products, Roos triangle with canonical projections matching spTower_reconstruction) are true assertions, not assumptions. D and R are canonically fixed recorded constructions. Edge cases ok (empty scheme, zero objects, n+1 indexing, m=n, unbounded unit/counit, ramified). E and T share universe u, forced by the recorded sfIntegralConstructible; harmless. No hollow defs, one sorry, docstrings with source/blueprint and the 10 steps, lines <=100, imports per convention. Commit touches report, node (lean field only) and module; lean.statement verbatim; 7 declarations present. nt_compile --json exit 0, no warnings, 32.4 s at load ~142. Notes only: reuse of coefficientConstantTowerLimit outside stmt_deps is acceptable; stale top-level tool_uses and unused Noetherian hypothesis come from stage 1."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c225",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261025T095827-L-3486300",
+  "kind": "interface",
+  "note": "independent cc review: moved defs byte-identical to clone; item sig/structure unchanged; 3 sorry lemmas vs item fields (all implied by item statement; Roos w/o Invertible true via coefficientConstantTower_roos); 5 direct importers compiled against delivered interface OK; #print axioms clean"
  }
 }

@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-tensor-integral-reduction-tower",
+ "kind": "lemma",
+ "title": "Tensor associativity for the integral reduction tower",
+ "statement": "Let l be prime, E a finite extension of Q_l, S a scheme, and M,N objects of the derived category of internal integral modules [sk-def-pe-derived-completion, sk-def-sfb-derived-tensor-hom]. The canonical integral reduction tower of N followed by tensorLeft M is naturally isomorphic to the canonical integral reduction tower of M tensor N. This includes all transition morphisms, without completeness or dualizability hypotheses.",
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph: tensor commutes with reduction modulo powers of the uniformizer by associativity of the derived tensor product."
+ },
+ "proof": [
+  {
+   "text": "Choose a native K-flat representative P of each derived object K. The localization lax tensorator is invertible with K-flat left argument. Combine its naturality with the single-complex tensor isomorphism to obtain K tensor B[0] naturally isomorphic to Q(P tensor B).",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strict scalar realization for P supplies the isomorphism Q(P tensor B_n) to integralLevel(K,n) and its consecutive transition equation. Naturality of the preceding comparison and this equation give a natural isomorphism from the coefficient tower followed by tensorLeft K to derivedTower K.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "lem-pe-internal-kflat-scalar-tower-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the tower comparison to N and M tensor N. Whisker the inverse first comparison by tensorLeft M, then compose with the inverse associator M tensor (N tensor B[0]) ≅ (M tensor N) tensor B[0] and the second tower comparison. Naturality of the associator proves the required natural isomorphism.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-sfb-derived-monoidal",
+  "sk-def-pe-derived-completion",
+  "lem-pe-internal-kflat-scalar-tower-realization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J4",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "Associativity sentence of the first paragraph, with coherent finite-reduction realization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar reduction towers commute with derived tensor product by associativity",
+   "results": "8 hits concerning ordinary tensor associativity, tensor-product commutation and tensor tower lemmas. No derived internal-module reduction tower comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of derived tensor product identifies tensoring the finite coefficient reduction tower with the reduction tower of a tensor product",
+   "results": "8 hits concerning ordinary algebra tensor associativity; none identifies the native derived reduction tower and its transitions.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTower|integralStep",
+   "results": "No Mathlib hits. Local source search found the actual tower in DerivedCompletion and the coherent strictScalarRealization, used here; no existing tensor-tower theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.DualizableIntegralCompletion",
+  "date": "2026-10-25",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph, associativity of finite reduction with derived tensor.",
+   "via": [
+    "lem-sfb-dualizable-integral-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TensorIntegralReductionTower",
+  "file": "lean/Sheaf/SixFunctors/TensorIntegralReductionTower.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AdicCompletion.tensorIntegralReductionTower",
+  "statement": "theorem tensorIntegralReductionTower\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (S : Scheme.{u}) (M N : DerivedCategory (Modules l E S)) :\n    Nonempty (derivedTower l E S N ⋙ tensorLeft M ≅ derivedTower l E S (M ⊗ N))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-kflat-scalar-tower-realization",
+    "why": "Generic coherent native scalar-extension computation on a K-flat complex. The unit route still uses finite reduction and derived tensor associativity."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T143503-L-1031049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T143503-L-1031049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,356 @@
+{
+ "id": "lem-per-elkik-rational-smooth-models",
+ "kind": "statement",
+ "title": "Rational smooth models and finite-stage factorization of regular fibre maps",
+ "statement": "Let $k$ be a characteristic-zero field. A principal singularity pair $(X,I)$ means an affine finite-type $k$-scheme $X=\\operatorname{Spec}A$ [def-weil-finite-type-morphism], an ideal $I=(\\pi)$ with $\\pi$ a non-zero-divisor, and $X_{\\mathrm{sing}}\\subseteq V(I)$ [def-weil-regular-scheme]. Write $X_m=\\operatorname{Spec}(A/I^m)$ and $I_m=I\\mathcal O_{X_m}$. Maps of pairs preserve the distinguished ideals by extension. There is a small directed inverse system $(X_a,I_a)$ of affine finite-type $\\mathbf Q$-schemes with principal non-zero-divisor ideals and singular loci contained in $V(I_a)$, whose inverse limit as pairs is $(X,I)$. All transition maps are affine smooth maps preserving the ideals, and all projections from $X$ are regular [def-per-regular-scheme-morphism]. For each $m\\geq1$, $X_m=\\varprojlim_a X_{a,m}$, and the fibre projections are regular. The same holds for finite disjoint unions, allowing different fields on different components. Moreover, choose such a system for another principal singularity pair $(Y,J)$ over a possibly different characteristic-zero field and fix a target index $a$. Every regular map of pairs $h:(Y_m,J_m)\\to(X_m,I_m)$ has the following finite-stage factorization: for some source index $b$, the composite $Y_m\\to X_{a,m}$ factors as $Y_m\\to U_m\\xrightarrow{v_m}X_{a,m}$, where $U$ is an open neighborhood of the image of $Y_m$ in $Y_b$, $U_m=U\\cap Y_{b,m}$, and $v_m$ is a smooth $\\mathbf Q$-morphism preserving the distinguished ideals. Increasing $b$ is permitted, while $a$ remains fixed. No lift of $v_m$ to $U\\to X_a$ is asserted.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Proof of Proposition 3.3.5, printed p.25, using BMT 7.5, finite-presentation limit factorization, and Lemma 2.1.4. The printed proof reverses X and Y in its factorization paragraph; arrows here follow h:Y_m to X_m.; read online 2026-10-24, archival copy WANTED. No Stacks tag states this specialized assertion."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-regular-scheme",
+  "def-per-regular-scheme-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-category-colimit",
+  "def-per-principal-singularity-pair",
+  "def-per-rational-smooth-pair-system"
+ ],
+ "proof": [
+  {
+   "text": "Choose the coefficient system $k=\\varinjlim R_a$ from [lem-per-char-zero-smooth-coefficient-system]. The ring $A$ has a finite presentation over $k$: apply [lem-weil-pbc-finite-type-noetherian-finite-presentation], since a field is Noetherian (its only ideals are $0$ and $k$). By [lem-kun-fp-algebra-descent] there is $a_0$ and a finitely presented $R_{a_0}$-algebra $A_0$ with $A=A_0\\otimes_{R_{a_0}}k$. Lift the finitely many coefficients of a polynomial representing $\\pi$ to a common later coefficient ring; replace $a_0$ by that index and $A_0$ by its base change. We now have $\\pi_0\\in A_0$ mapping to $\\pi$. For $a\\geq a_0$ put $A_a=A_0\\otimes_{R_{a_0}}R_a$ and let $\\pi_a$ be the image of $\\pi_0$. Every $A_a$ is a finite type $\\mathbf Q$-algebra. The tensor-element colimit statement [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] shows $A=\\varinjlim A_a$: ring multiplication agrees on the tensor generators, so the module universal property is the ring universal property as well.",
+   "uses": [
+    "lem-per-char-zero-smooth-coefficient-system",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-kun-fp-algebra-descent",
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.5, first paragraph; finite-presentation model with its chosen equation, expanded using Stacks 05N9."
+   }
+  },
+  {
+   "text": "For $a'\\geq a$, the map $A_a\\to A_{a'}$ is the base change of the smooth inclusion $R_a\\to R_{a'}$, hence smooth by [lem-weil-pbc-smooth-ring-map-base-change-composition] (so the transition morphism of spectra is smooth by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]) and flat by [lem-weil-pbc-smooth-ring-map-flat]. The Noetherianity of $R_a$ and $A_a$ follows from [lem-weil-pbc-finite-type-algebra-noetherian], starting with $\\mathbf Q$. For a fixed $a$, the tail diagram thus consists of smooth $A_a$-algebras with colimit $A$. The ring $A$ is Noetherian by the same finite-type lemma over $k$; each fibre of $A_a\\to A$ is a quotient of a localization of $A$, hence Noetherian. Therefore [lem-per-smooth-colimit-regular] makes $A_a\\to A$ regular. Its scheme map is regular by the fibrewise definition [def-per-regular-scheme-morphism]. The affine flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] identifies scheme and ring flatness; [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] upgrades the purely inseparable test for a regular ring fibre to the finite-extension test in the scheme definition.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-per-smooth-colimit-regular",
+    "def-per-regular-scheme-morphism",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.5, regularity of projections; Stacks 07EP."
+   }
+  },
+  {
+   "text": "Make $\\pi_a$ a non-zero-divisor at a stage. At the current initial stage put $N=\\ker(\\pi_a:A_a\\to A_a)$. This is finite by [lem-weil-pbc-noetherian-submodule-finite]. The smooth coefficient transitions are flat, and $R_a\\to k$ is flat by [lem-per-char-zero-smooth-coefficient-system]. Thus [lem-weil-pbc-flat-tensor-exact] identifies $N\\otimes_{R_a}k$ with the kernel of multiplication by $\\pi$ on $A$, which is zero by hypothesis. Apply [lem-pc-finite-tensor-vanishing-colimit] to a finite list of $A_a$-module generators of $N$, regarding them as elements of the $R_a$-module $N$. At a common later coefficient stage all these generators have zero tensor image. They generate the base-changed module, so that module is zero. Applying the same flat exactness lemma identifies it with the kernel of multiplication by $\\pi_b$ on $A_b$. It follows that $\\pi_b$ is a non-zero-divisor. Every subsequent stage retains this property by flat exactness. Restrict to this cofinal tail.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-per-char-zero-smooth-coefficient-system",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pc-finite-tensor-vanishing-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.5, descent of the principal non-zero-divisor ideal; kernel descent expanded."
+   }
+  },
+  {
+   "text": "The open $X\\setminus V(\\pi)=\\operatorname{Spec}A[1/\\pi]$ is regular by the hypothesis on the singular locus. The field $k$ is perfect: all its algebraic extensions are separable by [lem-weil-pbc-char-zero-field-extension-separable]. Hence [lem-trf-regular-perfect-field-smooth] makes this open smooth over $k$, and by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] the ring map $k\\to A[1/\\pi]$ is smooth. Fix the current initial coefficient stage $a$ and apply [lem-sbc-smooth-pushout-filtered-colimit-stage] to the finitely presented map $R_a\\to A_a[1/\\pi_a]$ and the coefficient diagram $R_b$, $b\\geq a$. Its limit base change is exactly $k\\to A[1/\\pi]$; the tensor identification sends $x/\\pi_a^n\\otimes r$ to $r x/\\pi^n$, with inverse induced by the universal properties of tensor and inversion. We obtain $b$ such that $A_b[1/\\pi_b]$ is smooth over $R_b$. It remains so at all later stages by smooth base change. Compose with the smooth $\\mathbf Q\\to R_b$ using [lem-weil-pbc-smooth-ring-map-base-change-composition]. This ring map is smooth, and by [lem-weil-pbc-smooth-over-field-regular-local] the open complement of $V(\\pi_b)$ is regular. Restricting to this tail gives the required singular-locus condition on every model.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "lem-trf-regular-perfect-field-smooth",
+    "lem-sbc-smooth-pushout-filtered-colimit-stage",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.5, ensuring every rational model is a principal singularity pair; smooth open descent via Stacks 0C0B."
+   }
+  },
+  {
+   "text": "For $m\\geq1$ put $A_{a,m}=A_a/(\\pi_a^m)$. A compatible family of maps $A_{a,m}\\to C$ is exactly a compatible family of maps $A_a\\to C$ killing $\\pi_a^m$; the latter corresponds to a map $A\\to C$ killing $\\pi^m$. Thus $A/(\\pi^m)=\\varinjlim A_{a,m}$ as rings. By [lem-weil-pbc-limit-affine-transition] the corresponding spectra form the asserted limit, also for $m$ omitted. Extension of $(\\pi_a)$ gives $(\\pi_b)$ and $(\\pi)$ by construction. The transition $A_{a,m}\\to A_{b,m}$ is the base change of $A_a\\to A_b$, since $A_b\\otimes_{A_a}A_{a,m}=A_b/(\\pi_b^m)$, hence smooth by [lem-weil-pbc-smooth-ring-map-base-change-composition], and its spectrum morphism is smooth by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. The limit $A/(\\pi^m)$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], and its fibre rings over $A_{a,m}$ are Noetherian by localization and quotient. Apply [lem-per-smooth-colimit-regular] again to get regular fibre projections. The indexing sets are small; pass to a common universe containing both sets and rings before using any tensor-colimit node. The affine flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] identifies scheme and ring flatness; [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] upgrades the purely inseparable test for a regular ring fibre to the finite-extension test in the scheme definition.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-per-smooth-colimit-regular",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.5, thick fibres of the approximation; quotient universal property and Stacks 01YW, 07EP."
+   }
+  },
+  {
+   "text": "Fix $a,m$ and a regular pair map $h:Y_m\\to X_m$. Write $C=A_a/(\\pi_a^m)$ and $B=\\Gamma(Y_m,\\mathcal O)$; let $t\\in C$ be the image of $\\pi_a$. Fix a source index $b_0$ and a generator $\\sigma_{b_0}$ of its distinguished ideal; for $b\\ge b_0$ let $\\sigma_b$ be its image in $B_b$, which generates the extended distinguished ideal, and let $s\\in B$ be its image, a generator of $J_m$. The composite to $X_{a,m}$ corresponds to $f:C\\to B$. The pair condition gives $u,v\\in B$ with $f(t)=su$ and $s=f(t)v$. Form the finitely presented $\\mathbf Q$-algebra $E=C[S,U,V]/(t-SU,S-tV)$. Here $C$ is finitely presented because it is finite type over the field $\\mathbf Q$ [lem-weil-pbc-finite-type-noetherian-finite-presentation]. Send $S,U,V$ to $s,u,v$. Apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] to $E\\to B=\\varinjlim_b B_b/(\\sigma_b^m)$, where $\\sigma_b$ is the chosen source generator. At the resulting stage the image of $S$ and $\\sigma_b$ have the same image $s$ in the colimit. By the zero-detection assertion of [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise], with the base ring $\\mathbf Q$ and tensor factor $\\mathbf Q$, their difference becomes zero at a later stage. The two displayed equations then show $(f_b(t))=(\\sigma_b)$ there. Thus the descended map $g:Y_{b,m}\\to X_{a,m}$ is a morphism of pairs, and $gp_b$ is the original composite. All indices enlarged are source indices; $a$ is unchanged.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.5, finite-stage factorization (corrected arrow direction); Stacks 00QO, pair equations included."
+   }
+  },
+  {
+   "text": "Both $p_b:Y_m\\to Y_{b,m}$ and $q_a:X_m\\to X_{a,m}$ are regular by step 5. Thus $gp_b=q_ah$ is regular: on affine rings apply [lem-weil-pbc-regular-composition]; its composite fibre rings are Noetherian because the target algebra is $\\Gamma(Y_m,\\mathcal O)$, a Noetherian ring. The finite-stage $\\mathbf Q$-morphism $g$ is locally of finite presentation: on rings its target algebra is finite type over its source algebra (the finite list of rational generators still generates), and both are Noetherian, so [lem-weil-pbc-finite-type-noetherian-finite-presentation] applies. Now [lem-per-regular-precomposition-smooth-image] gives an open $W\\subseteq Y_{b,m}$ containing $p_b(|Y_m|)$ on which $g$ is smooth. Since $Y_{b,m}$ is the closed subscheme $V(\\sigma_b^m)$ of $Y_b$, its topology is the subspace topology. Choose an open $U\\subseteq Y_b$ with $U\\cap Y_{b,m}=W$. The image of $Y_m$ lies in $W$, so the map factors through this open by [lem-weil-pbc-morphism-factors-through-open-subscheme]; set $U_m=W$ and $v_m=g|_W$. Equality of the principal ideals persists after restriction. Smoothness is only asserted for $v_m$, not for a lift on $U$. The affine flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] identifies scheme and ring flatness; [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] upgrades the purely inseparable test for a regular ring fibre to the finite-extension test in the scheme definition.",
+   "uses": [
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-per-regular-precomposition-smooth-image",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Proposition 3.3.5, final shrinking paragraph, using Lemma 2.1.4; fixed target index and source-side open."
+   }
+  },
+  {
+   "text": "For a finite disjoint union, apply steps 1--5 to every component and take the product of their directed index sets. At a product index use the disjoint union of the component models; this is affine because a finite union of spectra is the spectrum of the product ring. Ring maps out of a product correspond to orthogonal idempotents summing to one: their images in a filtered ring colimit lift to a common stage, and the finitely many equations $e_i^2=e_i$, $e_ie_j=0$, $\\sum e_i=1$ hold at a later stage by the same finite-presentation factorization and zero-detection nodes used in step 6. This also proves that limits of these finite disjoint union systems are the desired union. Smoothness and regularity can be checked on its open-and-closed components from their local definitions. For a map from a union of source components to the fixed finite target union, step 6 applies directly to the finite product coordinate rings, so no component-preserving assumption on $h$ is needed. Steps 7 then apply to that descended map and the whole source union. Empty unions and empty thick fibres use the zero ring and the empty open; all the assertions remain valid.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "def-sbc-smooth-morphisms",
+    "def-per-regular-scheme-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Temkin category convention §2.1.14 and Proposition 3.3.5; finite union extension written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-char-zero-smooth-coefficient-system",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-kun-fp-algebra-descent",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-per-smooth-colimit-regular",
+  "def-per-regular-scheme-morphism",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-finite-tensor-vanishing-colimit",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-trf-regular-perfect-field-smooth",
+  "lem-sbc-smooth-pushout-filtered-colimit-stage",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-regular-composition",
+  "lem-per-regular-precomposition-smooth-image",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Proposition 3.3.5, printed p.25, route followed after online reading; proof expanded with local Stacks sources, unavailable archival copies requested in report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine varieties over arbitrary characteristic zero fields admit inverse systems of rational varieties with smooth transition maps, with regular maps of thick Cartier fibres factoring through smooth maps at finite stages",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, RingHom.IsRegular",
+   "results": "0 hits: . loogle: unknown identifier 'RingHom.IsRegular'",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Elkik|regular.*approximation|smooth.*transition|Gabber.Ramero",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Approximation of a variety over a characteristic zero field by varieties over the rational numbers with smooth transition maps",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.Smooth.baseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsSmooth.recOn, LibraryNote.Design_choices_about_smooth_algebraic_structures, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational smooth finite type models of a characteristic zero variety and finite stage factorization of regular morphisms of principal thick fibres",
+   "results": "8 hits: Algebra.Smooth.exists_finiteType, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and smooth algebra descent do not give the singular-pair system and pair-preserving fibre factorization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth",
+   "results": "12 hits: AlgebraicGeometry.instIsStableUnderCompositionSchemeSmooth, AlgebraicGeometry.smooth_isStableUnderBaseChange, AlgebraicGeometry.instRespectsSchemeSmoothIsOpenImmersion, AlgebraicGeometry.Smooth, AlgebraicGeometry.instHasRingHomPropertySmoothSmooth, AlgebraicGeometry.instFlatOfSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfSmooth, AlgebraicGeometry.instSmoothOfIsOpenImmersion; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and smooth algebra descent do not give the singular-pair system and pair-preserving fibre factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "Elkik|smooth.*transition|regular.*approximation",
+   "results": "0 hits: ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and smooth algebra descent do not give the singular-pair system and pair-preserving fibre factorization",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite stage smooth factorization near the image of a regular morphism between thickenings of Cartier divisors in characteristic zero varieties",
+   "results": "8 hits: RingHom.IsStandardSmooth.exists_etale_mvPolynomial, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and smooth algebra descent do not give the singular-pair system and pair-preserving fibre factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate principal Cartier divisor pairs over arbitrary characteristic zero fields by finite type Q schemes and factor regular maps of truncated pairs through smooth finite stage morphisms",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary smoothness and smooth algebra descent do not give the singular-pair system and pair-preserving fibre factorization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-formal-resolution-intrinsic",
+  "date": "2026-10-24",
+  "group": "Q156"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Temkin Proposition 3.3.5 and Lemma 3.3.3, printed pp.23--25: sufficiently thick fibres determine the desingularization, and Proposition 3.3.5 proves compatibility with regular morphisms; Proof of Proposition 3.3.5, printed p.25, using BMT 7.5, finite-presentation limit factorization, and Lemma 2.1.4. The printed proof reverses X and Y in its factorization paragraph; arrows here follow h:Y_m to X_m.",
+   "via": [
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-elkik-rational-smooth-models",
+  "worker": "stage1",
+  "summary": "Q159 separates a coefficient-field smooth-transition system and generic regular-precomposition image criterion, constructs rational pair models by explicit finite presentation and flat kernel descent, descends pair equations simultaneously with the fibre map, and shrinks only the source. Retains the statement and source-arrow correction; checked empty and finite-union cases.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, regular-model branch through the recorded via chain; Temkin Proposition 3.3.5 first paragraph and finite-stage/shrinking paragraph implement the rational-model input to lem-per-rig-formal-resolution-intrinsic.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "why": "Generic algebra/limit/smoothness tool used in rational-pair construction or finite-stage factorization; this unit has no replacement for its stated interface."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "why": "Generic algebra/limit/smoothness tool used in rational-pair construction or finite-stage factorization; this unit has no replacement for its stated interface."
+   },
+   {
+    "node": "lem-pc-finite-tensor-vanishing-colimit",
+    "why": "Generic algebra/limit/smoothness tool used in rational-pair construction or finite-stage factorization; this unit has no replacement for its stated interface."
+   },
+   {
+    "node": "lem-sbc-smooth-pushout-filtered-colimit-stage",
+    "why": "Generic algebra/limit/smoothness tool used in rational-pair construction or finite-stage factorization; this unit has no replacement for its stated interface."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic algebra/limit/smoothness tool used in rational-pair construction or finite-stage factorization; this unit has no replacement for its stated interface."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic algebra/limit/smoothness tool used in rational-pair construction or finite-stage factorization; this unit has no replacement for its stated interface."
+   },
+   {
+    "node": "lem-weil-pbc-regular-composition",
+    "why": "Generic algebra/limit/smoothness tool used in rational-pair construction or finite-stage factorization; this unit has no replacement for its stated interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-pc-finite-tensor-vanishing-colimit",
+  "lem-sbc-smooth-pushout-filtered-colimit-stage",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-regular-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-037f742a2",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-037f742a2 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Sources checked: Temkin arXiv 0904.1592v2 Lemma 2.1.4 (p.8) and Prop. 3.3.5 with its proof (pp.24-25); the printed X/Y reversal is real and the item corrects it. Also BMT 0905.3580 Def. 7.2, Rem. 7.3 and Thm 7.5 (pp.18-21). The item statement is unchanged from live; this is a first split, not a re-split. Mechanical point 1, batch 5: lem-trf-regular-perfect-field-smooth is Stacks 0B8X (regular scheme over a perfect field is smooth), generic smoothness algebra and not part of the trace formula or Poincare duality; it is already reached with the drop list excluded, so accepted. Mechanical point 2, dropped lem-per-smooth-colimit-regular (drop list line 1896): it is generic Stacks 07EP (Lean CommAlgCat.smooth_colimit_regular) with no Qbar_l, middle t-structure, Gabber or alteration content. The item is not on the drop list and is reached only through the Q36 chain sfb-field-log-smooth-gabber-modification -> dropped gabber-absolute-equivariant-modification -> complete-local-rigidification -> ... -> rig-formal-resolution-intrinsic. 07EP is already in that closure without the item's edges (via regular-strict-local-model), so 0 nodes are revived; accepted with a maintainer note, use justified at steps 2 and 5. Steps 1-8 checked: fp descent and lifting pi; 07EP with Noetherian fibre rings; flat kernel descent via 00IK/00HD/05LI; 0C0B on R_a->A_a[1/pi_a] plus 00TT; quotient colimits and 01YX; E=C[S,U,V]/(t-SU,S-tV) with 00QO and zero detection; 07QI plus the image lemma plus 01HI; product rings and idempotents for finite unions; empty cases covered. New node lem-per-char-zero-smooth-coefficient-system is true (I proved it independently: the order 'inclusion is smooth' is directed by generic smoothness of R_1[R_2] over each R_i in char 0, and the union is k). It is not a duplicate: lem-kun-separable-smooth-colimit has no smooth transitions, and lem-per-variety-rational-smooth-limit-models does not give Q-smoothness, which step 4 needs. New node lem-per-regular-precomposition-smooth-image is true (faithfully flat local descent of flatness and geometric fibre regularity, then 01V9); it is generic and not an item clause. FIX, two points. (C1) Steps 2, 4 and 5 passed between scheme smoothness and ring smoothness without a cite; step 4 needs b_L smooth as a ring map for the 0C0B node. Added lem-weil-pbc-smooth-ring-map-iff-smooth-affine (01V6) to steps 2, 4 and 5 and to proof_deps. (E5) Step 6 assumed the source generators sigma_b map compatibly to s; for an arbitrary system they agree only up to units. Fixed by taking sigma_b as the image of a fixed sigma_{b0} and s as its image in B. All steps stay under 2000 characters. Advisory: the item overlaps the Q13 lem-per-variety-rational-smooth-limit-models; archival Temkin/BMT copies are WANTED. The split_report tool_uses are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ElkikRationalSmoothModels",
+  "declaration": "AlgebraicGeometry.exists_rational_smooth_pair_models",
+  "declarations": [
+   "AlgebraicGeometry.exists_rational_smooth_pair_models"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ElkikRationalSmoothModels.lean",
+  "statement": "theorem exists_rational_smooth_pair_models : (∀ (X : Scheme.{u}) (I : X.IdealSheafData), IsFiniteCharZeroSingularityPair X I → Nonempty (RationalSmoothPairSystem X I)) ∧ (∀ (X Y : Scheme.{u}) (I : X.IdealSheafData) (J : Y.IdealSheafData), IsFiniteCharZeroSingularityPair X I → IsFiniteCharZeroSingularityPair Y J → ∀ (SX : RationalSmoothPairSystem X I) (SY : RationalSmoothPairSystem Y J) (m : ℕ), 1 ≤ m → ∀ (a : SX.Index) (b₀ : SY.Index) (h : (J ^ m).subscheme ⟶ (I ^ m).subscheme), IsRegularSchemeMorphism h → (I.comap (I ^ m).subschemeι).comap h = J.comap (J ^ m).subschemeι → ∃ b : SY.Index, b₀ ≤ b ∧ ∃ (U : (SY.diagram.obj (op b)).Opens) (p : (J ^ m).subscheme ⟶ (SY.fibreOpen m (op b) U).toScheme) (v : (SY.fibreOpen m (op b) U).toScheme ⟶ (SX.thickDiagram m).obj (op a)), (∀ y : (J ^ m).subscheme, ((SY.thickProjection m).app (op b) ≫ (SY.thickInclusion m).app (op b)) y ∈ U) ∧ p ≫ (SY.fibreOpen m (op b) U).ι = (SY.thickProjection m).app (op b) ∧ p ≫ v = h ≫ (SX.thickProjection m).app (op a) ∧ Smooth v ∧ (SX.thickIdeal m (op a)).comap v = (SY.thickIdeal m (op b)).comap (SY.fibreOpen m (op b) U).ι ∧ v ≫ (SX.thickInclusion m).app (op a) ≫ SX.rationalMap.app (op a) = (SY.fibreOpen m (op b) U).ι ≫ (SY.thickInclusion m).app (op b) ≫ SY.rationalMap.app (op b))",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5900f9f4a",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Statement correct clause by clause: the char-0 principal pair (affine, generated by a non-zero-divisor via ofIdealTop, regular complement), finite unions with different fields and n=0, the model system pinned to the canonical thick subschemes with limits and regular projections for m>=1, and the factorization (arbitrary SX/SY, fixed a, b>=b0, U open in Y_b, U_m its trace, v smooth, ideal-preserving and compatible with Q, no lift). Edge cases (empty union, unit ideal, m=0, universes) OK. lean.statement verbatim for the item and both new nodes; the item differs from live only in lean and in stmt_deps (+ the 2 new def nodes); proof sorry only; docstrings present. No compile run, no files changed. MAINTAINER NOTE: NA lem-per-elkik-smooth-span-lifting fd08dde0 (passed 15:24, not landed) creates the same node id def-per-principal-singularity-pair at the same path with a different declaration (structure PrincipalSingularityPair k). merge_delivery refuses whichever lands second; if NA lands first, Q65 must re-deliver on NA's node. Also advisory: Q106 def-per-elkik-pair-geometry (Elkik.Pair, e024ed2e, not landed) is the same notion as IsFiniteCharZeroSingularityPair; whichever lands second should reuse the other's."
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-per-rational-continuous-finite-free-criterion",
+ "kind": "statement",
+ "title": "Finite free criterion for continuous rational constructibility",
+ "statement": "Let l be prime, E a finite extension of Q_l, and X a noetherian finite-dimensional scheme with l invertible in every stalk [def-per-continuous-rational-realization-data]. Let e identify the continuous WithAbs(E) coefficient sheaf with the published rational coefficient sheaf, pointwise by the field equivalence. A module F is continuous constructible after restriction along e [def-weil-pbc-continuous-constructible-module] if and only if there is a finite locally closed stratification [def-constructible-stratification] on each of whose strata the site inverse image of F is finite locally free [def-weil-sheaf-of-modules-category].",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-constructible-stratification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.1, 6.8.6, 6.8.10; Lemma 6.8.13 and Proposition 6.8.14(2), pp. 60–62"
+ },
+ "proof": [
+  {
+   "text": "The spectral absolute value is nonarchimedean. Its WithAbs field is ultrametric and hence totally disconnected. The normalized inverse-image coefficient map is therefore invertible for every scheme morphism. Scalar-identification for module inverse image and the adjoint equivalence of restriction along a ring isomorphism identify continuous pullback after coefficient encoding with restriction of the site inverse image along a ring isomorphism. Finite local freeness is invariant under this restriction.",
+   "uses": [
+    "lem-sfb-continuous-coefficient-inverse-image-iso",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-lisse-lattice-coefficient-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A finitely presented module over a field is finite dimensional. Choose a finite basis and identify its continuous constant model with the finite coproduct of the coefficient unit, using additivity and the constant-change unit isomorphism. Conversely every finite free local model is the constant model of the finite product field module, which is finitely presented. The over functor carries these free-unit identifications to every covering object. This proves the equivalence between local constant finite presentation and finite local freeness, including rank zero.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget constructibility of strata in the forward direction. In the reverse direction locally closed subsets of the noetherian base are constructible, so equip the same finite stratification with that certificate. Apply the local equivalence to each immersion. The empty scheme and empty stratification are included.",
+   "uses": [
+    "lem-sf-constant-model-stratification-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-sf-constant-model-stratification-transport",
+  "lem-sfb-continuous-coefficient-inverse-image-iso",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "lem-weil-pbc-lisse-lattice-coefficient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "E6 complete Lean proof: finite bases and additive constant models, normalized scalar transport through totally disconnected coefficient pullback, and noetherian stratification transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible continuous rational module complexes are precisely the essential image of rationalized integral constructible complexes",
+   "results": "8 hits, including CondensedMod.isDiscrete_tfae and bounded continuous function module instances; no result for these project coefficient sheaves.",
+   "date": "2026-10-25",
+   "verdict": "No match for continuous rational module local models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous coefficient sheaf constructible modules over a field are locally finite free on a finite locally closed stratification",
+   "results": "8 hits, including SheafOfModules local generator data, finite type and finite presentation infrastructure; no coefficient model or stratum transport theorem.",
+   "date": "2026-10-25",
+   "verdict": "Generic local model infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteLocallyFree",
+   "results": "unknown identifier 'SheafOfModules.IsFiniteLocallyFree'",
+   "date": "2026-10-25",
+   "verdict": "The specific project predicate is not indexed by Loogle."
+  },
+  {
+   "tool": "grep",
+   "query": "IsContinuousConstructible|RationalConeModels.Filtration",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib theorem in the project presentations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousRationalDerivedRealization",
+  "date": "2026-10-25",
+  "group": "E6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "The continuous rational realization used to compare the standard cohomological support bounds.",
+   "via": [
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalContinuousFiniteFreeCriterion",
+  "file": "lean/Sheaf/Paper/RationalContinuousFiniteFreeCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.rationalContinuousFiniteFreeCriterion",
+  "statement": "theorem rationalContinuousFiniteFreeCriterion (X : Base.{u} l)\n    (e : AlgebraicGeometry.ProEtale.latticeCoefficientSheaf X.scheme\n      (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) ≅\n        rationalCoefficientSheaf l X.scheme E)\n    (he : ∀ (U : X.scheme.ProEtᵒᵖ)\n      (f : C(U.unop.left, WithAbs (Padic.coefficientExtensionAbsoluteValue l E)))\n      (x : U.unop.left),\n      rationalCoefficientValue l E X.scheme U (e.hom.hom.app U (ULift.up f)) x =\n        WithAbs.ofAbs (f x)) :\n    ∀ F : pbcModules X.scheme (rationalCoefficientSheaf l X.scheme E),\n      IsConstructible l E X.scheme e F ↔\n        ∃ s : FiniteLocallyClosedStratification X.scheme, ∀ i : Fin s.n,\n          ((proEtaleModuleInverseImage (s.immersion i)\n            (rationalCoefficientSheaf l X.scheme E)).obj F).IsFiniteLocallyFree",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2133",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T043222-L-1690703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2133",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T043222-L-1690703",
+  "kind": "interface",
+  "note": "independent cc review: data declarations byte-identical to clone a81abc13ee9 and publicly re-exported; item assembly checked against the node and the cone-model, localized t-structure and scalar-coherence dependencies; four sorried sub-statements checked as true against the At/Along/Family structures; 7 delivered modules + 24 direct importers compiled clean in a sandbox (max 42.6 s); axioms checked"
+ }
+}

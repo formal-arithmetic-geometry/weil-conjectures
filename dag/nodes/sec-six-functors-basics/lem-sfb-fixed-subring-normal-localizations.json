@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-fixed-subring-normal-localizations",
+ "kind": "statement",
+ "title": "Normality of fixed subrings and their prime localizations",
+ "statement": "Let $D$ be a commutative integrally closed domain [def-weil-pbc-normal-ring], let $G$ be a group, and let $\\alpha:G\\to\\operatorname{Aut}_{\\mathrm{Ring}}(D)$ be an action by unital ring automorphisms. Put $C=D^G=\\{c\\in D:\\alpha_g(c)=c\\text{ for every }g\\in G\\}$, with its inherited subring structure. Then $C$ is an integrally closed domain. For every prime ideal $\\mathfrak p\\subset C$, the localization $C_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is an integrally closed domain; consequently $C$ is a normal ring [def-weil-pbc-normal-ring]. No finiteness or faithfulness of the action, and no invertibility of a group order in $D$, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00GY, lemma-localize-normal-domain, including the common-denominator monic polynomial argument; the fixed-subring normality argument is agent-formulated for the existing quotients of ILO X 2.3 Step 2, p.151, and is retained from item proof step 6, followed by its step 7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Each $\\alpha_g$ fixes $0,1$ and preserves sums, negatives and products, so $C$ is a unital subring of $D$. In particular $0\\ne1$ in $C$ and a zero product in $C$ has a zero factor, since these facts hold in $D$. Thus $C$ is a domain. The rule $a/b\\mapsto a/b$, for $a,b\\in C$ and $b\\ne0$, embeds $\\operatorname{Frac}(C)$ into $\\operatorname{Frac}(D)$: equality on either side is exactly $ab'=a'b$ in $D$, equivalently in $C$; the fraction addition and multiplication formulas agree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0309 (definition-domain-normal), 00GV (definition-ring-normal), 00GY (lemma-localize-normal-domain); agent-written fixed-subring argument retained from the parent normal-quotient prerequisite."
+   }
+  },
+  {
+   "text": "Let $x\\in\\operatorname{Frac}(C)$ satisfy a monic equation $x^n+\\sum_{i<n}c_i x^i=0$, $c_i\\in C$. Its image $y\\in\\operatorname{Frac}(D)$ satisfies the same equation with coefficients included in $D$. Integral closedness of $D$, in the stated definition of normal domain, gives $d\\in D$ with $y=d$ in $\\operatorname{Frac}(D)$.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0309 (definition-domain-normal), 00GV (definition-ring-normal), 00GY (lemma-localize-normal-domain); agent-written fixed-subring argument retained from the parent normal-quotient prerequisite."
+   }
+  },
+  {
+   "text": "Write $x=a/b$ with $a,b\\in C$, $b\\ne0$. The equality $d=a/b$ implies $bd=a$ in $D$, by injectivity of $D\\to\\operatorname{Frac}(D)$. For any $g\\in G$, applying $\\alpha_g$ gives $b\\alpha_g(d)=a=bd$, since $a,b$ are fixed. Cancellation of the nonzero $b$ in the domain $D$ yields $\\alpha_g(d)=d$. Hence $d\\in C$, and the embedding of step 1 gives $x=d$ already in $\\operatorname{Frac}(C)$. Every such root is therefore in $C$, which is integrally closed by the normal-domain definition.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0309 (definition-domain-normal), 00GV (definition-ring-normal), 00GY (lemma-localize-normal-domain); agent-written fixed-subring argument retained from the parent normal-quotient prerequisite."
+   }
+  },
+  {
+   "text": "For a prime ideal $\\mathfrak p\\subset C$, put $S=C\\setminus\\mathfrak p$. Since $\\mathfrak p$ is proper and prime, $1\\in S$, $0\\notin S$ and $S$ is multiplicatively closed. The prime-localization definition identifies $C_{\\mathfrak p}=S^{-1}C$. Apply the localization-of-normal-domain lemma to the normal domain $C$ proved above and this $S$; it states that $S^{-1}C$ is a normal domain. Thus every $C_{\\mathfrak p}$ is an integrally closed domain.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0309 (definition-domain-normal), 00GV (definition-ring-normal), 00GY (lemma-localize-normal-domain); agent-written fixed-subring argument retained from the parent normal-quotient prerequisite."
+   }
+  },
+  {
+   "text": "The assertion that all prime localizations of $C$ are normal domains is precisely the definition of a normal ring. This proves the final conclusion. The only cancellation used a nonzero denominator in a domain; no step used finiteness or faithfulness of $G$, or division by its order.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0309 (definition-domain-normal), 00GV (definition-ring-normal), 00GY (lemma-localize-normal-domain); agent-written fixed-subring argument retained from the parent normal-quotient prerequisite."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-normal-domain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Fixed-subring fraction argument is agent-written, as in the item source and its parent extraction; localization is Stacks Tag 00GY (lemma-localize-normal-domain)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The subring fixed by a group of automorphisms of an integrally closed domain is integrally closed and its prime localizations are normal domains",
+   "results": "8 hit(s); top recorded results: Algebra.isInvariant_of_isGalois, instMulSemiringActionSubtypeMemSubalgebraIntegralClosure, Algebra.isInvariant_of_isGalois', instSMulCommClassSubtypeMemSubalgebraIntegralClosure, IsIntegralClosure.MulSemiringAction, Ring.instCommRingNormalClosure, IsGaloisGroup.iff_isFractionRing, Ring.instIsIntegrallyClosedNormalClosure",
+   "date": "2026-10-22",
+   "verdict": "no match: normal field extensions, integralClosure actions and IsInvariant.isIntegral do not prove integral closedness of a fixed subring of a normal domain; localization results require the fixed subring already to be integrally closed."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, FixedPoints.subring",
+   "results": "0 hit(s); top recorded results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: normal field extensions, integralClosure actions and IsInvariant.isIntegral do not prove integral closedness of a fixed subring of a normal domain; localization results require the fixed subring already to be integrally closed."
+  },
+  {
+   "tool": "grep",
+   "query": "(integrallyClosed|IsIntegrallyClosed|isIntegrallyClosed|normal).*(fixedPoints|FixedPoints|invariant)|(fixedPoints|FixedPoints|invariant).*(integrallyClosed|IsIntegrallyClosed|isIntegrallyClosed|normal)",
+   "results": "2 hit(s); top recorded results: Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Basic.lean; Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: normal field extensions, integralClosure actions and IsInvariant.isIntegral do not prove integral closedness of a fixed subring of a normal domain; localization results require the fixed subring already to be integrally closed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant subring under ring automorphisms of a normal integral domain is a normal domain and localization at any prime is integrally closed",
+   "results": "8 hit(s); top recorded results: isIntegrallyClosed_ofLocalizationMaximal, IsIntegrallyClosed.of_isLocalization_maximal, IsIntegrallyClosed.of_localization, IsIntegrallyClosed.of_equiv, IsIntegrallyClosed.of_localization_maximal, Ring.instIsIntegrallyClosedNormalClosure, instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure, IsDedekindRing.toIsIntegralClosure",
+   "date": "2026-10-22",
+   "verdict": "no match: normal field extensions, integralClosure actions and IsInvariant.isIntegral do not prove integral closedness of a fixed subring of a normal domain; localization results require the fixed subring already to be integrally closed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed subring of a group of ring automorphisms is integrally closed in its fraction field when the original commutative domain is integrally closed",
+   "results": "8 hit(s); top recorded results: FixedPoints.isIntegral, instMulSemiringActionSubtypeMemSubalgebraIntegralClosure, instSMulCommClassSubtypeMemSubalgebraIntegralClosure, Algebra.IsInvariant.isIntegral, Algebra.isInvariant_of_isGalois, integralClosure.coe_smul, instSMulDistribClassSubtypeMemSubalgebraIntegralClosure, Algebra.isInvariant_of_isGalois'",
+   "date": "2026-10-22",
+   "verdict": "no match: normal field extensions, integralClosure actions and IsInvariant.isIntegral do not prove integral closedness of a fixed subring of a normal domain; localization results require the fixed subring already to be integrally closed."
+  },
+  {
+   "tool": "grep",
+   "query": "ringEquivOfComm|FixedPoints.subring|isIntegrallyClosed.*[Ss]ubring|IsIntegrallyClosed.*[Ss]ubring|isIntegrallyClosed.*[Ff]ixed|[Ff]ixed.*[Ii]ntegrally",
+   "results": "11 hit(s); top recorded results: Mathlib/Algebra/Algebra/Subalgebra/Operations.lean, Mathlib/Algebra/Algebra/Subalgebra/Operations.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: normal field extensions, integralClosure actions and IsInvariant.isIntegral do not prove integral closedness of a fixed subring of a normal domain; localization results require the fixed subring already to be integrally closed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed subring of an arbitrary group of automorphisms of an integrally closed domain is integrally closed, and its localizations at prime ideals are integrally closed domains",
+   "results": "8 hit(s); IsIntegrallyClosed.of_isIntegrallyClosed_of_isIntegrallyClosedIn, instMulSemiringActionSubtypeMemSubalgebraIntegralClosure, Ring.instIsIntegrallyClosedNormalClosure, isIntegrallyClosed_of_isLocalization, IsIntegrallyClosed.of_isLocalization_maximal, Algebra.isInvariant_of_isGalois, IsIntegrallyClosed.of_isIntegrallyClosedIn, IsIntegrallyClosed.of_localization",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant-extension integrality assumes finite G and proves a different assertion; the descent lemma at IntegrallyClosed.lean:308 requires IsIntegrallyClosedIn C D, which is not an available hypothesis and is false for many fixed subrings; localization is already covered by the existing Mathlib leaf lem-weil-pbc-localization-normal-domain."
+  },
+  {
+   "tool": "grep",
+   "query": "(IsIntegrallyClosed|integrallyClosed|isIntegrallyClosed).*(fixed|Fixed|invariant)|(fixed|Fixed|invariant).*(IsIntegrallyClosed|integrallyClosed|isIntegrallyClosed)",
+   "results": "0 hit(s);  ; source subdirectory RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant-extension integrality assumes finite G and proves a different assertion; the descent lemma at IntegrallyClosed.lean:308 requires IsIntegrallyClosedIn C D, which is not an available hypothesis and is false for many fixed subrings; localization is already covered by the existing Mathlib leaf lem-weil-pbc-localization-normal-domain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The invariant subring of an integrally closed domain under any group action by automorphisms is integrally closed",
+   "results": "8 hit(s); Algebra.isInvariant_of_isGalois, Algebra.IsInvariant.isIntegral, Algebra.IsInvariant.isIntegral_of_profinite, IsInvariantSubring, IsIntegrallyClosed.instIsIntegralClosure, IsIntegrallyClosed.of_equiv, instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure, IsInvariantSubring.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant-extension integrality assumes finite G and proves a different assertion; the descent lemma at IntegrallyClosed.lean:308 requires IsIntegrallyClosedIn C D, which is not an available hypothesis and is false for many fixed subrings; localization is already covered by the existing Mathlib leaf lem-weil-pbc-localization-normal-domain."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, FixedPoints.subring",
+   "results": "0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant-extension integrality assumes finite G and proves a different assertion; the descent lemma at IntegrallyClosed.lean:308 requires IsIntegrallyClosedIn C D, which is not an available hypothesis and is false for many fixed subrings; localization is already covered by the existing Mathlib leaf lem-weil-pbc-localization-normal-domain."
+  },
+  {
+   "tool": "grep",
+   "query": "of_isIntegrallyClosed_of_isIntegrallyClosedIn|IsIntegrallyClosed.*[Ss]ubring|[Ff]ixed.*[Ii]ntegrally|[Ii]ntegrally.*[Ff]ixed",
+   "results": "9 hit(s); Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean ; source subdirectory RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant-extension integrality assumes finite G and proves a different assertion; the descent lemma at IntegrallyClosed.lean:308 requires IsIntegrallyClosedIn C D, which is not an available hypothesis and is false for many fixed subrings; localization is already covered by the existing Mathlib leaf lem-weil-pbc-localization-normal-domain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariants of a group acting on a normal ring are integrally closed in their fraction field",
+   "results": "8 hit(s); Algebra.IsInvariant.isIntegral, instMulSemiringActionSubtypeMemSubalgebraIntegralClosure, instSMulCommClassSubtypeMemSubalgebraIntegralClosure, FixedPoints.isIntegral, Algebra.isInvariant_of_isGalois', Algebra.isInvariant_of_isGalois, integralClosure.coe_smul, Ring.instIsIntegrallyClosedNormalClosure",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant-extension integrality assumes finite G and proves a different assertion; the descent lemma at IntegrallyClosed.lean:308 requires IsIntegrallyClosedIn C D, which is not an available hypothesis and is false for many fixed subrings; localization is already covered by the existing Mathlib leaf lem-weil-pbc-localization-normal-domain."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-quotient-normal-proper",
+  "date": "2026-10-22",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Normality prerequisite for the existing quotient in ILO X 2.3 Step 2 diagram (2.c), printed p.151; retained lem-sfb-finite-quotient-normal-proper proof steps 6--7: fixed-domain fraction cancellation and prime-localization denominator clearing.",
+   "via": [
+    "lem-sfb-finite-quotient-normal-proper",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fixed-subring-normal-localizations",
+  "worker": "stage1",
+  "summary": "Proved the fixed-subring clause by an explicit fraction embedding, ambient monic equation and fixed-denominator cancellation. Reused the existing localization-of-normal-domain Mathlib leaf for all prime localizations; no new nodes. Preserved the statement and existing searches, appended six actually logged searches after reading hits. Checked all cited statements and small cases.",
+  "blueprint": "Retains the ancestor computation from.node=null and the inherited via chain. Realizes the fixed-domain fraction cancellation and prime-localization argument extracted as parent lem-sfb-finite-quotient-normal-proper old steps 6--7; the current parent uses this item in step 3. This is a prerequisite below the direct-image preservation route of latest sk-thm-sf-ctf-stability.proof.md, proper/open direct-image paragraph; no chapter or unit route is altered."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-7136f290e",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-7136f290e (reviewer sub-agent of L); spot-checked: Read the item in full: it is a first split with 0 new nodes, the statement is unchanged, and base, live and side-live all still show it unsplit. There is no repair note and no other group has split it. Sources checked: Stacks 0309 (l.7979), 00GY with its proof (l.8048-8063) and 00GV (l.8206), all verified against tags/tags. No SGA is cited. Steps 1-3 are elementary and correct. Step 1 shows C=D^G is a unital subring and a domain, and that Frac(C) embeds in Frac(D), since ab'=a'b means the same in C and D. Step 2 sends a monic equation over C to D and uses normality of D to get the root y=d in D. Step 3 takes bd=a and applies alpha_g to get b alpha_g(d)=bd; cancelling b gives d in C. It uses no finiteness and no division by |G|. Step 4 notes that S=C\\p contains 1 and not 0 and is multiplicative, then cites the Mathlib leaf lem-weil-pbc-localization-normal-domain (00GY; isIntegrallyClosed_of_isLocalization, IntegrallyClosed.lean:379). Because that node is a Mathlib leaf, no tool_use is needed. Step 5 is the second sentence of def-weil-pbc-normal-ring. proof_deps equals the union of the step uses. Edge cases tested: trivial and non-faithful actions; sign action on Q[t], where C=Q[t^2], which also confirms that Mathlib of_isIntegrallyClosed_of_isIntegrallyClosedIn (l.308) does not apply because t is integral over Q[t^2] but not in it; Q^x scaling, giving C=Q; Artin-Schreier t->t+1 on F_p[t]; a field D; p=(0). The statement is true for arbitrary G and is not weakened. A DAG scan for fixed/invariant-ring normality statements found no duplicate; the only hits were field-invariant nodes. The parent lem-sfb-finite-quotient-normal-proper step 3 needs only the final normal-ring clause, which is a special case of this item. The blueprint fields and unit route are intact. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FixedSubringNormalLocalizations",
+  "declaration": "FixedPoints.isDomain_and_isIntegrallyClosed_subring_localizations",
+  "file": "lean/Sheaf/RingTheory/FixedSubringNormalLocalizations.lean",
+  "statement": "theorem isDomain_and_isIntegrallyClosed_subring_localizations (D : Type u) [CommRing D] [IsDomain D] [IsIntegrallyClosed D] (G : Type v) [Group G] [MulSemiringAction G D] : IsDomain (FixedPoints.subring D G) ∧ IsIntegrallyClosed (FixedPoints.subring D G) ∧ ∀ (p : Ideal (FixedPoints.subring D G)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8370a50fc",
+  "group": "NX",
+  "result": "pass",
+  "note": "Clause-by-clause match. D: CommRing+IsDomain+IsIntegrallyClosed (inline def-weil-pbc-normal-ring). G: Group+MulSemiringAction, universe independent, no finiteness/faithfulness/SMulCommClass. C = Mathlib FixedPoints.subring D G (read definition: carrier ∀g, g•b=b). Conclusions: IsDomain C ∧ IsIntegrallyClosed C ∧ ∀ prime p, IsDomain/IsIntegrallyClosed (Localization.AtPrime p), which is the recorded inline normal-ring form. Statement verbatim in file; node differs from side-live only in lean. Math is true for arbitrary G (fraction cancellation + Stacks 00GY). Edge cases: zero ring excluded, trivial/infinite actions, p=(0), field D, char p, Q[t^2]⊂Q[t]. No defs, sorry only, docstrings carry source+blueprint+5 steps, no duplicate in Mathlib/side-live Sheaf. Report has Worker report and Second reading by NX. Not recompiled per instructions (worker reports clean scompile)."
+ }
+}

@@ -1,0 +1,190 @@
+{
+ "id": "lem-sfb-square-zero-diagonalizable-hom-lift",
+ "kind": "statement",
+ "title": "Square-zero lifting of homomorphisms from split diagonalizable groups",
+ "statement": "Let $A$ be a commutative ring, let $J\\subseteq A$ be an ideal with $J^2=0$, put $A_0=A/J$ and $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. An $S$-group scheme is an $S$-scheme with multiplication, identity section and inverse satisfying the associativity, unit and inverse diagrams; a homomorphism preserves these three operations. For a finitely generated additive abelian group $M$, let $A[M]$ be the free $A$-module on symbols $e_m$, with $e_me_n=e_{m+n}$, unit $e_0$, comultiplication $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$ and antipode $e_m\\mapsto e_{-m}$. Write $D_A(M)=\\operatorname{Spec}A[M]$ with the resulting group operations. Let $G\\to S$ be a smooth affine group scheme [def-sbc-smooth-morphisms]. Every $\\operatorname{Spec}A_0$-group homomorphism $u_0:D_{A_0}(M)\\to G_{A_0}$ lifts to an $S$-group homomorphism $u:D_A(M)\\to G$ whose base change along $A\\to A_0$ is $u_0$. Here $G_{A_0}=G\\times_S\\operatorname{Spec}A_0$ [def-pc-base-change]. No locality, completeness, reducedness or torsion-freeness assumption on $A$ or $M$ is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes (2014), Corollary B.2.6 and Remark B.2.4, printed pp.285-287: square-zero homomorphism obstruction and its vanishing for diagonalizable groups. This node records their combined infinitesimal existence consequence, not the complete-local lifting theorem. WANTED local archive; online source read."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=D_A(M)$ and $C=A[M]$. Reduction of the basis and of the Hopf formulas identifies $C/JC$ with $A_0[M]$ and $H_0$ with $D_{A_0}(M)$. The kernel $JC$ has square zero: products of its coefficients lie in $J^2=0$. Apply the affine first-order lifting property in [def-sbc-smooth-morphisms] to $H_0\\hookrightarrow H$ and $u_0:H_0\\to G$. It gives an $S$-scheme morphism $f:H\\to G$ reducing to $u_0$. Moreover $C$ and all its tensor powers over $A$ are free, on tuples of elements of $M$. Tensoring with a free module is a direct sum of the original map, so these algebras are flat. Thus the flatness hypothesis needed for the regular defect is satisfied, without any restriction on torsion in $M$.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes (2014), proof of Corollary B.2.6, printed p.287, with Proposition B.2.5, printed pp.286-287, and Remark B.2.4, printed p.285. Online source read; WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-square-zero-hom-regular-defect] to $H,G,u_0,f$. It supplies the $A_0$-module $E=L\\otimes_{A_0}J$ with its $H_0$-coaction and the regular defect $c_f\\in E\\otimes_{A_0}A_0[M]^{\\otimes2}$ satisfying $h\\cdot c_f(k,l)-c_f(hk,l)+c_f(h,kl)-c_f(h,k)=0$. This is an identity of regular cochains, including over nonreduced bases; it is not a computation only on field-valued points.",
+   "uses": [
+    "lem-sfb-square-zero-hom-regular-defect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes (2014), proof of Corollary B.2.6, printed p.287, with Proposition B.2.5, printed pp.286-287, and Remark B.2.4, printed p.285. Online source read; WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-diagonalizable-regular-two-cocycle] over $R=A_0$, with the same $M$, the supplied coaction on $E$, and $c=c_f$. Obtain a regular $1$-cochain $b\\in E\\otimes_{A_0}A_0[M]$ satisfying $c_f(h,k)=h\\cdot b(k)-b(hk)+b(h)$. The correction clause of [lem-sfb-square-zero-hom-regular-defect] constructs $u=f_b=\\widetilde b f$ as an $S$-scheme morphism reducing to $u_0$. Its defect is $c_u=c_f-db=0$, so $u\\circ m_H=m_G\\circ(u\\times u)$.",
+   "uses": [
+    "lem-sfb-diagonalizable-regular-two-cocycle",
+    "lem-sfb-square-zero-hom-regular-defect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes (2014), proof of Corollary B.2.6, printed p.287, with Proposition B.2.5, printed pp.286-287, and Remark B.2.4, printed p.285. Online source read; WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "Multiplicativity also gives the identity and inverse diagrams. On the universal identity section, $u(1)=u(1)^2$ in the group $G(A)$, hence $u(1)=1$. On the universal $H$-point over $C$, multiplicativity gives $u(h)u(h^{-1})=u(1)=1=u(h^{-1})u(h)$; uniqueness of inverse gives $u(h^{-1})=u(h)^{-1}$. These are identities of the corresponding morphisms since they were tested on their universal affine points. Thus $u$ is the required $S$-group homomorphism and its reduction is exactly $u_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes (2014), proof of Corollary B.2.6, printed p.287, with Proposition B.2.5, printed pp.286-287, and Remark B.2.4, printed p.285. Online source read; WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-square-zero-hom-regular-defect",
+  "lem-sfb-diagonalizable-regular-two-cocycle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes (2014), proof of Corollary B.2.6, printed p.287, with Proposition B.2.5, printed pp.286-287, and Remark B.2.4, printed p.285. Online source read; WANTED local archive literature/conrad-reductive-group-schemes.pdf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HopfAlgebra.*(lift|smooth)|(diagonalizable|multiplicative.type).*lift",
+   "results": "{\"t\": \"2026-10-24T04:43:05Z\", \"tool\": \"grep\", \"query\": \"HopfAlgebra.*(lift|smooth)|(diagonalizable|multiplicative.type).*lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal smoothness supplies an algebra or scheme map, not a homomorphism of group schemes. None of the hits supplies the multiplicativity correction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split diagonalizable group homomorphisms into smooth group schemes lift across square zero thickenings",
+   "results": "{\"t\": \"2026-10-24T04:43:05Z\", \"tool\": \"leansearch\", \"query\": \"Split diagonalizable group homomorphisms into smooth group schemes lift across square zero thickenings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\", \"derivationToSquareZeroEquivLift\", \"Algebra.FormallySmooth.of_split\", \"liftOfDerivationToSquareZero\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"Algebra.FormallySmooth.iff_split_surjection\"], \"digest\": \"4d6bdb27bb9c38a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal smoothness supplies an algebra or scheme map, not a homomorphism of group schemes. None of the hits supplies the multiplicativity correction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"FormallySmooth\"",
+   "results": "{\"t\": \"2026-10-24T04:43:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"FormallySmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal smoothness supplies an algebra or scheme map, not a homomorphism of group schemes. None of the hits supplies the multiplicativity correction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a split diagonalizable group scheme into a smooth affine group lifts across a square zero ideal",
+   "results": "{\"t\": \"2026-10-24T04:43:06Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a split diagonalizable group scheme into a smooth affine group lifts across a square zero ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_split\", \"Algebra.Extension.homInfinitesimal\", \"retractionOfSectionOfKerSqZero\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.iff_split_surjection\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"Algebra.FormallySmooth.iff_split_injection\"], \"digest\": \"fdda6e26ff2ead73\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal smoothness supplies an algebra or scheme map, not a homomorphism of group schemes. None of the hits supplies the multiplicativity correction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift Hopf algebra homomorphisms to a group algebra modulo a square zero ideal when the source algebra is smooth",
+   "results": "{\"t\": \"2026-10-24T04:43:07Z\", \"tool\": \"leanfinder\", \"query\": \"Lift Hopf algebra homomorphisms to a group algebra modulo a square zero ideal when the source algebra is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallySmooth.lift\", \"TrivSqZeroExt.lift\", \"Algebra.FormallySmooth.exists_lift\", \"DualNumber.lift\", \"DualNumber.lift_comp_inlHom\", \"DualNumber.lift_apply_inl\", \"Algebra.FormallySmooth.mk_lift\"], \"digest\": \"454d6768a6d6b113\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal smoothness supplies an algebra or scheme map, not a homomorphism of group schemes. None of the hits supplies the multiplicativity correction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-complete-local-split-torus-hom-lift",
+  "by": "worker",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292: etale lifting of the multiplicative type subgroup followed by etale splitting, at a point with algebraically closed residue field; completion step in the proof of Conrad Proposition 3.1.6, using Corollary B.3.5 for the fixed split source. Supporting input to the complete-local torus lifting proof: Corollary B.2.6 and Remark B.2.4, printed pp.285-287: square-zero homomorphism obstruction and its vanishing for diagonalizable groups. This node records their combined infinitesimal existence consequence, not the complete-local lifting theorem.",
+   "via": [
+    "lem-sfb-complete-local-split-torus-hom-lift",
+    "lem-sfb-split-torus-etale-subgroup-lift",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-square-zero-diagonalizable-hom-lift",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split the square-zero lifting argument into a scheme-map lift, the regular multiplicativity defect, diagonalizable regular two-cocycle vanishing, and explicit correction. The two supporting nodes are statement-only, searched in Mathlib, and use no field or torsion-free hypotheses. Source read online; local Conrad archive requested in the report.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292: etale lifting of the multiplicative type subgroup followed by etale splitting, at a point with algebraically closed residue field; completion step in the proof of Conrad Proposition 3.1.6, using Corollary B.3.5 for the fixed split source. Supporting input to the complete-local torus lifting proof: Corollary B.2.6 and Remark B.2.4, printed pp.285-287: square-zero homomorphism obstruction and its vanishing for diagonalizable groups. This node records their combined infinitesimal existence consequence, not the complete-local lifting theorem. Steps realize the infinitesimal existence input to the complete-local torus lifting route; no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-c6008aacd",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-c6008aacd (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the cited definitions in full, and checked them against the source. Conrad's Reductive group schemes is not in literature/; I fetched it online and read printed pp.284-287: the complex on p.284, Lemma B.2.3 and Remark B.2.4 on p.285, Proposition B.2.5 on pp.286-287 and Corollary B.2.6 on p.287. The item's statement is unchanged and true: it is Corollary B.2.6 combined with Remark B.2.4 for H=D_A(M), which is flat and affine. Step 1: the affine first-order lifting clause of def-sbc-smooth-morphisms gives a scheme map lifting u0, and all A[M]^{⊗n} are free, so the test algebras are flat. Steps 2-3: the defect c_f(h,k)=f(hk)f(k)^{-1}f(h)^{-1}, the cocycle identity and c_{f_b}=c_f-db were verified by hand and agree with B.2.5; the coboundary convention matches Conrad p.284 and Milne 15.1. Step 4: unit and inverse follow from multiplicativity, which is elementary. Defect node: the kernel is Hom(P,JR)=E⊗R0 for flat R. The restriction to flat test algebras is a deliberate and correct choice, since JR is not J⊗R in general, and it suffices because every C^{⊗n} is flat. The kernel clause overlaps lem-sfb-group-space-square-zero-kernel-module; this is not a duplicate, and the node's later split should cite that node for it. Two-cocycle node: degree 2 of Remark B.2.4, true over any ring for any comodule via the M-grading. Tested on M=0 (b=c), E=0 and M=Z/p over F_p. No duplicates found in the DAG or blueprint, neither new node restates a clause of the item, both are statement-only, and all three search kinds are logged. Every step stays in unit sk-thm-sf-ctf-stability, no SGA source is used, proof_deps equals the union of the uses, and no tool_uses are needed. blueprint.from.node is null, inherited from the creating chain. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroDiagonalizableHomLift",
+  "declaration": "AlgebraicGeometry.squareZero_diagonalizable_hom_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroDiagonalizableHomLift.lean",
+  "statement": "theorem squareZero_diagonalizable_hom_lift (A : Type u) [CommRing A] (J : Ideal A) (hJ : J ^ 2 = ⊥) (M : Type u) [AddCommGroup M] [AddGroup.FG M] (G : Grp (Over (Spec (.of A)))) [Smooth G.X.hom] [IsAffineHom G.X.hom] (u₀ : (Over.pullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)))).mapGrp.obj (ringDiagonalizableGroup A M) ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)))).mapGrp.obj G) : ∃ u : ringDiagonalizableGroup A M ⟶ G, (Over.pullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)))).mapGrp.map u = u₀",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-321a092ac",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Item record differs from live only in lean + stmt_deps (+landed def-sfb-ring-diagonalizable-group, actually used); 4 dep records byte-identical to live; lean.statement verbatim in file. Clauses match: CommRing A, J^2=⊥, AddGroup.FG M (no torsion-free), G : Grp (Over Spec A) with Smooth + IsAffineHom (nothing stronger), u₀ on Over.pullback(Spec.map mk J).mapGrp of ringDiagonalizableGroup A M (canonically D_{A/J}(M), no added data or restriction), ∃ group hom u with mapGrp.map u = u₀ exactly. Conrad B.2.6 + B.2.4 (H=D_A(M) flat affine). Edge cases J=0, A=0, M=0, torsion M in char p, nonreduced A, universe via ULift ok. sorry-only proof, docstrings carry source/blueprint and 4 proof steps, report has both sections, no duplicate (CompleteLocalSplitTorusHomLift/CompleteDvrCocharacterLifting are different results). No file changed, no compile run."
+ }
+}

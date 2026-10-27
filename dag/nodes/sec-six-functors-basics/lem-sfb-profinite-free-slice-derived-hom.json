@@ -1,0 +1,445 @@
+{
+ "id": "lem-sfb-profinite-free-slice-derived-hom",
+ "kind": "statement",
+ "title": "Relative profinite free modules and the unbounded derived slice Hom identity",
+ "statement": "Let $X$ be a scheme with its small pro-etale site in compatible coefficient universes [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $p_X$ be the condensed-point morphism [lem-weil-pbc-profinite-point-pullback], and put $B=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Use internal modules [sk-def-sfb-module-objects], their ordinary unbounded derived categories [sk-def-sfb-derived-categories], K-injective total right derived direct image [sk-def-sfb-module-derived-pushpull], and derived internal Hom [def-pur-derived-internal-hom]. For a profinite set $P$, put $U=X[P]$, with projection $\\rho:U\\to X$ [def-sfb-profinite-test-objects], and write $h_P(Q)=C(Q,P)$ and $h_U(V)=\\operatorname{Hom}_X(V,U)$. Let $A=\\Lambda[P]$ be the free internal module on $h_P$ [def-sfb-condensed-free-module-generators]; similarly $B[h_U]$ means the left adjoint of forgetting $B$-modules to sheaves of sets, applied to $h_U$.\n\nThere are canonical generator-preserving identifications\n$$p_X^{-1}h_P\\cong h_U,\\qquad p_X^*A\\cong B[h_U].$$\nFor every $K\\in D(\\operatorname{Mod}_B)$ there is a canonical isomorphism in the ordinary unbounded derived category\n$$\\gamma_{X,P,K}:R\\mathcal Hom_B(p_X^*A,K)\\xrightarrow{\\sim}R\\rho_*\\rho^*K.$$\nHere $U_{\\mathrm{proet}}$ is identified with the slice $X_{\\mathrm{proet}}/U$ [def-pur-localized-ringed-site]. The normalization of $\\gamma$ is the free-generator evaluation: for a K-injective representative $J$ of $K$ and any test $V\\to X$, its representative is the identification $\\mathcal Hom_B(B[h_U],J)(V)=J(V\\times_XU)$ with the unchanged differential. This specifies an isomorphism of derived objects, not merely of their cohomology groups. It is natural in $K$. The internal-module isomorphism and this section-ring description agree under the canonical equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence], with its tensor and evaluation normalizations [lem-pe-internal-section-tensor-comparison, lem-sfb-module-object-ringed-site-derived-comparison, lem-sfb-internal-module-operations-transport]. In particular, for every $N\\in D(\\operatorname{Mod}_{\\Lambda})$, $\\rho^*p_X^*N=p_U^*N$ under the canonical pullback-composition comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI (lemma-restrict-K-injective-to-open) and 08J7 (section-internal-hom); agent free-generator slice calculation. Profinite representability: Hemo–Richarz–Scholbach, Example 3.1 and (4.1)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "lem-weil-pbc-profinite-point-pullback",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-pur-derived-internal-hom",
+  "def-sfb-profinite-test-objects",
+  "def-sfb-condensed-free-module-generators",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-internal-module-operations-transport"
+ ],
+ "proof": [
+  {
+   "text": "The functor $u_X:Q\\mapsto X[Q]$ preserves finite limits and covers by [lem-weil-pbc-profinite-test-object-functor]. Thus its sheaf inverse image is left adjoint to $G\\mapsto(Q\\mapsto G(X[Q]))$ by [lem-weil-pbc-left-exact-site-inverse-image-tensor]; it is the specified $p_X^{-1}$ of [sk-def-sfb-pullback-from-point]. Representables on $X_{\\mathrm{proet}}$ are sheaves by fpqc descent of maps [lem-weil-pbc-fpqc-representable-descent]. The two adjunction/Yoneda bijections give $\\operatorname{Hom}(p_X^{-1}h_P,G)=G(X[P])=\\operatorname{Hom}(h_U,G)$. Here Yoneda is used in its full evaluation form [lem-galois-yoneda-hom-bijection]. The resulting isomorphism $p_X^{-1}h_P\\cong h_U$ carries a generator indexed by $a:Q\\to P$ and $b:V\\to X[Q]$ to $X[a]b:V\\to U$; the inverse is induced by the unit at $P$. Their composites fix the universal generator and hence are identities.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "§3 preceding Example 3.1: p_X induced by profinite test objects; agent adjunction calculation"
+   }
+  },
+  {
+   "text": "Write $F_R$ for the free internal $R$-module functor on sheaves of sets. The free adjunction is the one defining $A=F_\\Lambda(h_P)$ [def-sfb-condensed-free-module-generators]. The monoidal adjunction for $p_X^{-1}$ lifts to modules by [sk-def-sfb-transport], applied with $F=p_X^{-1}$ and $R=\\Lambda$. For every $B$-module $M$, its adjunction followed by the free adjunction identifies maps $p_X^*F_\\Lambda(h_P)\\to M$ with maps $h_P\\to p_{X,*}(UM)$, hence with maps $p_X^{-1}h_P\\to UM$. Thus $p_X^*A$ has the defining universal property of $F_B(p_X^{-1}h_P)$, and step 1 gives $p_X^*A\\cong B[h_U]$. These bijections send a linear map to its values on the unit generators, so the isomorphism preserves generators.",
+   "uses": [
+    "def-sfb-condensed-free-module-generators",
+    "sk-def-sfb-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "§3: pulled-back coefficient modules; agent free-adjunction calculation"
+   }
+  },
+  {
+   "text": "For a $B$-module sheaf $M$ and a test $V$, the sheaf Hom definition gives $\\mathcal Hom_B(B[h_U],M)(V)=\\operatorname{Hom}_{B|_V}(B[h_U]|_V,M|_V)$ [def-pur-sheaf-hom]. The restricted free module is free on $h_U|_V$. Indeed, for $v:V\\to X$, restriction of sheaves of sets and of abelian groups to $X_{\\mathrm{proet}}/V\\simeq V_{\\mathrm{proet}}$ is the inverse image $v^{-1}$ [lem-sfb-proetale-object-inverse-image-restriction, clause 1], left adjoint to $v_*$ [def-weil-proetale-inverse-image]; with the coefficient isomorphism $\\alpha_v$ the module pullback $v^*$ is restriction of $B$-modules [lem-sfb-coefficient-sections-localization, sk-def-sfb-module-pushforward-pullback], left adjoint to $v_*$, and $v_*$ commutes sectionwise with forgetting to sheaves of sets. Composing left adjoints as in step 2 gives $B[h_U]|_V\\cong B|_V[h_U|_V]$, generators to generators; its sheafified presheaf model is that of [def-weil-presheaf-modules-sheafification]. In $X_{\\mathrm{proet}}/V$ this parameter sheaf is represented by $V\\times_XU\\to V$, by the fibre-product universal property. Free adjunction and Yoneda [lem-galois-yoneda-hom-bijection] therefore identify the displayed Hom with $M(V\\times_XU)$. Explicitly a map $\\phi$ goes to $\\phi([\\operatorname{pr}_U])$ on $V\\times_XU$; a section $m$ goes to the linear map sending $[a:W\\to U]$ to $(v_W,a)^*m$. These formulas are inverse, respect $B(V)$-multiplication and restriction along $V'\\to V$, and commute with maps of $M$. This is an isomorphism of module sheaves, not an assertion that free sheaf sections are always free section modules.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "def-weil-proetale-inverse-image",
+    "lem-sfb-coefficient-sections-localization",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7 (section-internal-hom), agent underived free-generator calculation"
+   }
+  },
+  {
+   "text": "The scheme $U=X[P]$ is weakly etale by [lem-weil-pbc-profinite-test-object-functor]. Its pro-etale site is the slice over $U$, using precisely the site-identification clause of [lem-weil-pbc-proetale-restriction-injectives], not its constant-coefficient injectivity assertion. Under it the abelian inverse image $\\rho^*_{\\mathrm{Ab}}$ is restriction to the slice and $\\alpha_\\rho:\\rho^*_{\\mathrm{Ab}}B\\to B_U$ is a ring isomorphism [lem-sfb-coefficient-sections-localization], so the module pullback $\\rho^*=\\operatorname{Ext}_{\\alpha_\\rho}\\circ\\operatorname{mapMod}(\\rho^*_{\\mathrm{Ab}})$ [sk-def-sfb-module-pushforward-pullback] is $M\\mapsto M|_U$ [def-pur-localized-ringed-site], $B_U$ acting through $\\alpha_\\rho$. It is exact: $\\rho^*_{\\mathrm{Ab}}$ is the abelian inverse image along the base-change functor [def-weil-proetale-inverse-image], exact by [lem-weil-pbc-left-exact-site-inverse-image-tensor], and extension along an isomorphism is an equivalence; so $L\\rho^*=D(\\rho^*)$ [sk-def-sfb-derived-categories]. Restriction is additive [lem-pur-kinjective-restrict-localized-adjunction-universes]. Choose a K-injective $J$ representing $K$ [prop-pur-kinjective-resolutions-exist]. The universe-general restriction theorem [lem-pur-kinjective-restrict-localized-universes] shows $J|_U$ is K-injective. All its assumptions hold on the chosen small site: ordinary abelian sheafification and its local characterization are used, and restriction sends a zero map to zero sectionwise. Therefore $R\\rho_*\\rho^*K$ is represented by $\\rho_*(J|_U)$, whose value at $V$ is $J(V\\times_XU)$ by the direct-image definition [def-sfb-finite-lower-star] and the K-injective definition of total direct image [sk-def-sfb-module-derived-pushpull]. No boundedness assumption is used.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "def-pur-localized-ringed-site",
+    "lem-pur-kinjective-restrict-localized-adjunction-universes",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-restrict-localized-universes",
+    "def-sfb-finite-lower-star",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-coefficient-sections-localization",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; preceding exact slice restriction and extension-by-zero discussion"
+   }
+  },
+  {
+   "text": "Use $B[h_U]$ concentrated in degree zero as the first representative. The K-injective model [def-pur-derived-internal-hom] represents $R\\mathcal Hom_B(B[h_U],K)$ by $\\mathcal Hom_B^\\bullet(B[h_U][0],J)$. The product Hom formula [def-pur-hom-complex] has only its $p=0$ factor nonzero, so its degree $n$ is $\\mathcal Hom_B(B[h_U],J^n)$ and its differential is postcomposition by $d_J^n$. Apply the evaluation maps of step 3 in each degree. They give an actual chain isomorphism to $\\rho_*(J|_U)$: on $V$ it is the identity of the complex $J(V\\times_XU)$. Localizing this chain isomorphism and using steps 2 and 4 constructs $\\gamma_{X,P,K}$. Each evaluation commutes with chain maps $J\\to J'$, so it is natural on K-injective representatives and hence in the ordinary derived category. Independence of representatives is precisely the K-injective independence in [def-pur-derived-internal-hom]. This gives the asserted differential and evaluation normalization on the whole derived object.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, section-internal-hom: arbitrary first representative and K-injective second representative"
+   }
+  },
+  {
+   "text": "The equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] leaves underlying sheaves, sections and maps unchanged. Its tensor comparison [lem-pe-internal-section-tensor-comparison] sends $m\\otimes n$ to the same local pure tensor. The derived Hom comparison [lem-sfb-module-object-ringed-site-derived-comparison] identifies the two Hom functors and their evaluation maps, also on every slice. Finally [lem-sfb-internal-module-operations-transport] identifies module pullback and direct image, with units and counits, under these exact equivalences. Applied termwise, an exact equivalence carries a K-injective complex to a K-injective complex: Hom from an acyclic complex identifies via its exact inverse with the original acyclic-Hom test. Consequently the direct-image models just used also identify. In particular the free generator $[a]$ and its evaluated value are unchanged on both sides, so these comparisons carry the constructed $\\gamma$ to exactly the asserted internal-module isomorphism, with the required evaluation normalization.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7; agent application of the existing internal/section-module comparisons"
+   }
+  },
+  {
+   "text": "For $\\rho:U\\to X$, [lem-weil-pbc-profinite-point-pullback] gives the canonical comparison $\\rho^{-1}p_X^*\\cong p_U^*$, including its lift to modules and the termwise derived functors. Apply this comparison to $N$ to obtain $\\rho^*p_X^*N\\cong p_U^*N$. It is the specified pullback-composition comparison, rather than an additional identification of coefficients.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "§3: f^{-1}Λ_X=Λ_Y and exact pullback; existing coherent condensed-point comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-yoneda-hom-bijection",
+  "def-sfb-condensed-free-module-generators",
+  "sk-def-sfb-transport",
+  "def-pur-sheaf-hom",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "def-pur-localized-ringed-site",
+  "lem-pur-kinjective-restrict-localized-adjunction-universes",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized-universes",
+  "def-sfb-finite-lower-star",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-coefficient-sections-localization",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI and 08J7; Hemo–Richarz–Scholbach §3; explicit free-generator evaluation and application of existing comparison lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a free condensed module on a profinite set is free on the relative profinite scheme and its derived internal Hom computes slice direct image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A B : LightCondMod R) →\\n      (S : LightProfinite) →\\n        ↑((A ⟹ B).val.obj (Opposite.op S)) ≃\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackObjFreeIso is underived and free on an ordinary index type; LightCondensed.ihomPoints is underived over a discrete scalar ring. None gives profinite representability plus the unbounded ringed-slice derived isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"free\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.freeObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (F : CategoryTheory.Functor Cᵒᵖ (Type u)) : PresheafOfModules R\", \"doc\": \"Given a presheaf of types `F : Cᵒᵖ ⥤ Type u`, this is the presheaf\\nof modules over `R` which sends `X : Cᵒᵖ` to the free `R.obj X`-module on `F.obj X`.\"}\n  {\"name\": \"PresheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type u)) (PresheafOfModules R)\", \"doc\": \"The free presheaf of modules functor `(Cᵒᵖ ⥤ Type u) ⥤ PresheafOfModules.{u} R`.\"}\n  {\"name\": \"PresheafOfModules.free_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (F : CategoryTheory.Functor Cᵒᵖ (Type u)) : (PresheafOfModules.free R).obj F = PresheafOfModules.freeObj F\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeObj_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (F : CategoryTheory.Functor Cᵒᵖ (Type u)) (X : Cᵒᵖ) : (PresheafOfModules.freeObj F).obj X = (ModuleCat.free ↑(R.obj X)).obj (F.obj X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeAdjunctionUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (F : CategoryTheory.Functor Cᵒᵖ (Type u)) : F ⟶ (PresheafOfModules.freeObj F).presheaf.comp (CategoryTheory.forget Ab)\", \"doc\": \"The unit of `PresheafOfModules.freeAdjunction`.\"}\n  {\"name\": \"PresheafOfModules.freeObjDesc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {F : CategoryTheory.Functor Cᵒᵖ (Type u)} {G : PresheafOfModules R} (φ : F ⟶ G.presheaf.comp (CategoryTheory.forget Ab)) : PresheafOfModules.freeObj F ⟶ G\", \"doc\": \"The morphism of presheaves of modules `freeObj F ⟶ G` corresponding to\\na morphism `F ⟶ G.presheaf ⋙ forget _` of presheaves of types.\"}\n  {\"name\": \"PresheafOfModules.freeHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {F : CategoryTheory.Functor Cᵒᵖ (Type u)} {G : PresheafOfModules R} : (PresheafOfModules.freeObj F ⟶ G) ≃ (F ⟶ G.presheaf.comp (CategoryTheory.forget Ab))\", \"doc\": \"The bijection `(freeObj F ⟶ G) ≃ (F ⟶ G.presheaf ⋙ forget _)` when\\n`F` is a presheaf of types and `G` a presheaf of modules.\"}\n  {\"name\": \"PresheafOfModules.freeAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : PresheafOfModules.free R ⊣ (PresheafOfModules.toPresheaf R).comp ((CategoryTheory.Functor.whiskeringRight Cᵒᵖ Ab (Type u)).obj (CategoryTheory.forget Ab))\", \"doc\": \"The free presheaf of modules functor is left adjoint to the forget functor\\n`PresheafOfModules.{u} R ⥤ Cᵒᵖ ⥤ Type u`.\"}\n  {\"name\": \"PresheafOfModules.freeAdjunctionUnit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (F : CategoryTheory.Functor Cᵒᵖ (Type u)) (X : Cᵒᵖ) : (PresheafOfModules.freeAdjunctionUnit R F).app X = TypeCat.ofHom fun x => ModuleCat.freeMk x\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.free_map_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) {F G : CategoryTheory.Functor Cᵒᵖ (Type u)} (φ : F ⟶ G) (X : Cᵒᵖ) : ((PresheafOfModules.free R).map φ).app X = (ModuleCat.free ↑(R.obj X)).map (φ.app X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeObjDesc_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {F : CategoryTheory.Functor Cᵒᵖ (Type u)} {G : PresheafOfModules R} (φ : F ⟶ G.presheaf.comp (CategoryTheory.forget Ab)) (X : Cᵒᵖ) : (PresheafOfModules.freeObjDesc φ).app X = ModuleCat.freeDesc (φ.app X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.freeAdjunction_homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (F : CategoryTheory.Functor Cᵒᵖ (Type u)) (G : PresheafOfModules R) : (PresheafOfModules.freeAdjunction R).homEquiv F G = PresheafOfModules.freeHomEquiv\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackObjFreeIso is underived and free on an ordinary index type; LightCondensed.ihomPoints is underived over a discrete scalar ring. None gives profinite representability plus the unbounded ringed-slice derived isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "(free|representable).*(internalHom|ihom|rightDerived)|(internalHom|ihom|rightDerived).*(free|representable)",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"line\": \"61\", \"text\": \"    ihomPoints R A B S x = (MonoidalClosed.uncurry (((freeForgetAdjunction R).homEquiv _ _).symm\"}\n  {\"file\": \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"line\": \"85\", \"text\": \"    (ihomPoints R P B S).symm (P ◁ (free R).map (lightProfiniteToLightCondSet.map π) ≫ f) =\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackObjFreeIso is underived and free on an ordinary index type; LightCondensed.ihomPoints is underived over a discrete scalar ring. None gives profinite representability plus the unbounded ringed-slice derived isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image along a slice projection equals derived internal Hom from the free module on its representing sheaf",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site and representable object U the derived sheaf Hom from the free module on U to K equals derived pushforward of K restricted to U",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C D : Type u} →\\n  [inst : CategoryTheory.SmallCategory C] →\\n    [inst_1 : CategoryTheory.SmallCategory D] →\\n      {F : CategoryTheory.Functor C D} →\\n        {R : CategoryTheory.Functor Dᵒᵖ RingCat} →\\n          {S : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n            (φ : S ⟶ F.op.comp R) →\\n          \", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, ring presheaves $R : \\\\mathcal{D}^{\\\\text{op}} \\\\to \\\\mathbf{Ring}$ and $S : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathb\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^\\\\mathrm{op}$ and any element $a$ in the presheaf $S.\\\\text{val}.\\\\text{obj}\\\\, X$, the application of the unit morphism $\\\\text{unitToPushforwardOb\"}\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For any presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a sheaf of modules $ F $ over the sheafified ring $ R $, there \"}\n  {\"name\": \"PresheafOfModules.sheafifyHomEquiv'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          (α : R₀ ⟶ R.val) →\\n            [inst_1 : CategoryTheory.Presheaf.IsLocallyInjec\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"PresheafOfModules.sheafificationHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          (α : R₀ ⟶ R.val) →\\n            [inst_1 : CategoryTheory.Presheaf.IsLocallyInjec\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackObjFreeIso is underived and free on an ordinary index type; LightCondensed.ihomPoints is underived over a discrete scalar ring. None gives profinite representability plus the unbounded ringed-slice derived isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerivedFunctor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackObjFreeIso is underived and free on an ordinary index type; LightCondensed.ihomPoints is underived over a discrete scalar ring. None gives profinite representability plus the unbounded ringed-slice derived isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Profinite).*(free|pullbackObjFreeIso)|(slice|Over).*(derivedHom|rightDerived)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean\", \"line\": \"22\", \"text\": \"  For `S : Profinite`, the `ℤ`-module `LocallyConstant S ℤ` is free.\"}\n  {\"file\": \"Mathlib/Condensed/Module.lean\", \"line\": \"27\", \"text\": \"  condensed set to the corresponding *free* condensed `R`-module.\"}\n  {\"file\": \"Mathlib/Condensed/Module.lean\", \"line\": \"53\", \"text\": \"def Condensed.free : CondensedSet ⥤ CondensedMod R :=\"}\n  {\"file\": \"Mathlib/Condensed/Module.lean\", \"line\": \"56\", \"text\": \"/-- The condensed version of the free-forgetful adjunction. -/\"}\n  {\"file\": \"Mathlib/Condensed/Module.lean\", \"line\": \"58\", \"text\": \"def Condensed.freeForgetAdjunction : free R ⊣ forget R := Sheaf.adjunction _ (ModuleCat.adj R)\"}\n  {\"file\": \"Mathlib/Condensed/Module.lean\", \"line\": \"71\", \"text\": \"noncomputable abbrev Condensed.freeAb : CondensedSet ⥤ CondensedAb := free _\"}\n  {\"file\": \"Mathlib/Condensed/Light/Module.lean\", \"line\": \"28\", \"text\": \"  adjoint, sending a light condensed set to the corresponding *free* light condensed `R`-module.\"}\n  {\"file\": \"Mathlib/Condensed/Light/Module.lean\", \"line\": \"70\", \"text\": \"def LightCondensed.free : LightCondSet ⥤ LightCondMod R :=\"}\n  {\"file\": \"Mathlib/Condensed/Light/Module.lean\", \"line\": \"73\", \"text\": \"/-- The condensed version of the free-forgetful adjunction. -/\"}\n  {\"file\": \"Mathlib/Condensed/Light/Module.lean\", \"line\": \"75\", \"text\": \"def LightCondensed.freeForgetAdjunction : free R ⊣ forget R := Sheaf.adjunction _ (ModuleCat.adj R)\"}\n  {\"file\": \"Mathlib/Condensed/Light/Module.lean\", \"line\": \"79\", \"text\": \"instance : (LightCondensed.free R).IsLeftAdjoint := freeForgetAdjunction R |>.isLeftAdjoint\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"84\", \"text\": \"    {S : LightProfinite} (p : (LightCondensed.free R).obj S.toCondensed ⟶ Y) :\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"85\", \"text\": \"      ∃ (T : LightProfinite) (π : T ⟶ S) (g : ((LightCondensed.free R).obj T.toCondensed) ⟶ X),\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"86\", \"text\": \"        Epi π ∧ (lightProfiniteToLightCondSet ⋙ (LightCondensed.free R)).map π ≫ p = g ≫ f := by\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"90\", \"text\": \"    (LightCondensed.freeForgetAdjunction R).homEquiv S.toCondensed Y p\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"91\", \"text\": \"  refine ⟨T, π, ((LightCondensed.freeForgetAdjunction R).homEquiv T.toCondensed X).symm\"}\n  {\"file\": \"Mathlib/Condensed/Light/Sequence.lean\", \"line\": \"206\", \"text\": \"    [Epi ((lightProfiniteToLightCondSet ⋙ free R).map <| cover π)]\"}\n  {\"file\": \"Mathlib/Condensed/Light/Sequence.lean\", \"line\": \"207\", \"text\": \"    (g : ((lightProfiniteToLightCondSet ⋙ free R).obj T) ⟶ X)\"}\n  {\"file\": \"Mathlib/Condensed/Light/Sequence.lean\", \"line\": \"213\", \"text\": \"      (lightProfiniteToLightCondSet.map (pullback.snd π π))) ⋙ free R) := by\"}\n  {\"file\": \"Mathlib/Condensed/Light/Sequence.lean\", \"line\": \"215\", \"text\": \"    (lightProfiniteToLightCondSet ⋙ free R).map\"}\n  {\"file\": \"Mathlib/Condensed/Light/Sequence.lean\", \"line\": \"217\", \"text\": \"    (lightProfiniteToLightCondSet ⋙ free R).map\"}\n  {\"file\": \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"line\": \"33\", \"text\": \"condensed module on a condensed set (`free_internallyProjective_iff_tensor_condition`,\"}\n  {\"file\": \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"line\": \"35\", \"text\": \"light profinite set (`free_lightProfinite_internallyProjective_iff_tensor_condition`/\"}\n  {\"file\": \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"line\": \"106\", \"text\": \"      (∀ (S : LightProfinite) (g : P ⊗ (free R).obj S.toCondensed ⟶ B), ∃ (S' : LightProfinite)\"}\n  {\"file\": \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"line\": \"108\", \"text\": \"          (P ◁ ((lightProfiniteToLightCondSet ⋙ free R).map π)) ≫ g = g' ≫ e) := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackObjFreeIso is underived and free on an ordinary index type; LightCondensed.ihomPoints is underived over a discrete scalar ring. None gives profinite representability plus the unbounded ringed-slice derived isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived internal Hom from the free module on a representable sheaf equals derived direct image from the slice site",
+   "results": "Actual msearch result: 8 hits; LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy, LightCondensed.ihomPoints_symm_apply, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.ihom_map_val_app, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.unitHomEquiv_comp_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates give underived presheaf/free-type or discrete-scalar LightCondensed statements, not this unbounded profinite slice derived isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|kinjective|[Ss]lice.*[Hh]om",
+   "results": "Actual msearch result: 0 hits; . Searched subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates give underived presheaf/free-type or discrete-scalar LightCondensed statements, not this unbounded profinite slice derived isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from free representable module sheaf is derived pushforward from slice",
+   "results": "Actual msearch result: 8 hits; PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, SheafOfModules.pushforwardSections, PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforward, PresheafOfModules.pushforward₀_obj_obj_isModule",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates give underived presheaf/free-type or discrete-scalar LightCondensed statements, not this unbounded profinite slice derived isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"free\"",
+   "results": "Actual msearch result: 12 hits; PresheafOfModules.freeObj, PresheafOfModules.free, PresheafOfModules.free_obj, PresheafOfModules.freeObj_obj, PresheafOfModules.freeAdjunctionUnit, PresheafOfModules.freeObjDesc, PresheafOfModules.freeHomEquiv, PresheafOfModules.freeAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates give underived presheaf/free-type or discrete-scalar LightCondensed statements, not this unbounded profinite slice derived isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective restriction to a localized ringed site and sheaf Hom from a free representable generator",
+   "results": "Actual msearch result: 8 hits; SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, PresheafOfModules.IsLocallyInjective, PresheafOfModules.instIsLocallyInjectiveToSheafify, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected candidates give underived presheaf/free-type or discrete-scalar LightCondensed statements, not this unbounded profinite slice derived isomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-constant-derived-functions",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: profinite parameter functions on the closed stratum, independently of a root tower or a normal crossings boundary; relative profinite test and slice evaluation (returned proof steps 1–3)",
+   "via": [
+    "lem-sfb-profinite-constant-derived-functions",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-profinite-free-slice-derived-hom",
+  "worker": "stage1",
+  "summary": "Reused existing site, free-adjunction, K-injective restriction and internal/section-module comparison statements. Gave explicit inverse generator-evaluation formulas and a chain isomorphism on arbitrary unbounded K-injective representatives. No new nodes or statement changes.",
+  "blueprint": "The inherited paragraph (3), open direct image, profinite parameter functions on the closed stratum: relative profinite test and slice evaluation (parent returned proof steps 1–3). The ancestor command returns None for this existing created-node chain; the inherited provenance is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-profinite-test-object-functor",
+    "why": "Generic construction of relative profinite test objects supplies weak etaleness and finite-limit/cover preservation. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "General finite-limit-preserving site functor theorem supplies the inverse image adjunction. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "General descent of scheme maps makes representables sheaves on the fpqc pro-etale site. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Full Yoneda evaluation on sheaves/presheaves, including slices, is a generic categorical tool. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Only the generic identification of a weakly etale pro-etale site with its slice is used. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized-adjunction-universes",
+    "why": "General exact slice restriction adjunction for arbitrary coefficient sizes. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General unbounded K-injective resolution theorem for module sheaves. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized-universes",
+    "why": "General unbounded K-injective restriction theorem, with coefficient universes independent of the site. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact tensor equivalence and pure-tensor normalization between internal and section modules. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Existing generic derived internal Hom comparison, including evaluation on slices. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Existing generic comparison of internal and section module pullback/direct image with adjunction normalizations. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Generic coherent pullback-composition comparison for coefficients from the condensed point. This unit has no separate statement supplying this general tool; its proof route is unchanged."
+   },
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "Generic weakly-etale localization clause only: the abelian inverse image along an object of the pro-etale site is restriction to the slice and the coefficient map alpha is an isomorphism (reviewer Q56 cc, step 3 and 4 repair). The item's unit has no statement giving this; route unchanged."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Clause (1) only: restriction of sheaves of sets/abelian groups to the slice is the inverse image, hence a left adjoint (reviewer Q56 cc, step 3 repair). Generic site tool; route unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-pur-kinjective-restrict-localized-adjunction-universes",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized-universes",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-sfb-coefficient-sections-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-36da0c335",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-36da0c335 (reviewer sub-agent of L); spot-checked: Read the item and all 23 cited statements, Stacks 08FI (sites-cohomology l.4314), Stacks 08J7 (l.8836) and HRS §3 p.5, Example 3.1 and (4.1). The statement is correct: it is RHom(j_!B_U,K)=Rj_*j^*K for U=X[P], together with p_X^{-1}h_P≅h_U. Small cases agree: P a point, P empty (initial sheaf, free module 0, empty scheme), P finite (product of copies of K), X empty or Λ=0. I found no duplicate, no cycle and no SGA. The statement is unchanged and the item is not a re-split, so no new nodes were needed. Steps 1, 2, 5, 6 and 7 are correct as written: the adjunction and Yoneda chain, the transport lift of p_X^*⊣p_{X*}, the Hom complex with only the p=0 factor and d=d_J∘f, the exact-equivalence preservation of K-injectives, and the point-pullback comparison for ρ. One fault, C4, in Steps 3 and 4. Step 4 cited def-pur-localized-ringed-site for ρ^*M=M|_U, but that node only defines restriction; it also took right exactness from an uncited adjunction restriction⊣ρ_*. Step 3 asserted that restriction of a free module is free, citing only the universal property of sheafification. FIX: Step 4 now cites lem-sfb-coefficient-sections-localization (ρ^*_Ab is restriction and α_ρ is an isomorphism) and sk-def-sfb-module-pushforward-pullback, takes exactness from def-weil-proetale-inverse-image and lem-weil-pbc-left-exact-site-inverse-image-tensor, and gets Lρ^*=D(ρ^*) from sk-def-sfb-derived-categories. Step 3 now uses lem-sfb-proetale-object-inverse-image-restriction clause 1 (restriction is v^{-1}, left adjoint to v_*) plus the module pullback, and composes left adjoints as in Step 2. Step 3 is now marked non-elementary. proof_deps were extended. The worker's 12 tool_uses are accepted, and two were added for the two localization lemmas, which come from other units and are used as generic tools. All steps are under 2000 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProfiniteFreeSliceDerivedHom",
+  "declaration": "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.exists_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.test",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.parameter",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.represented",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.pointModulePullback",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.freeParameter",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.pulledFree",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.derivedFree",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.localFree",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.localFreeAdjunction",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.freeOnTest",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.pointGenerator",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.testGenerator",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.setAdjunction",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.abelianAdjunction",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.restriction",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.directImage",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.restrictionComplex",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.sliceComplex",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.sliceDerived",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.freeComplex",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.sectionFreeComplex",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.baseChanged",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.product",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.productToTest",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.sectionToSlice",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.freeSectionGenerator",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.evaluateHomSection",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.derivedSliceModel",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.pointModulePullback_exact",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.pointModulePullback_additive",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.pointModulePullback_limits",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.pointModulePullback_colimits",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.pointDerivedComposition",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.homTransportNormalized",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.Comparison",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.exists_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/ProfiniteFreeSliceDerivedHom.lean",
+  "statement": "theorem exists_comparison : Nonempty (Comparison Λ X P)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The primary theorem supplies the complete generator-normalized Comparison: set and free-module identifications, a natural isomorphism of ordinary unbounded derived functors, chain-level free-generator evaluation and its fixed localization square, evaluation-normalized internal/section Hom transport, and the point pullback-composition comparison. Definitions construct real data from the recorded APIs; pointModulePullback_exact is the structural theorem needed for its termwise derived functor. All theorem proofs are sorry. No statement or dependency field changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab1e96833",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Q65 lem-sfb-profinite-free-slice-derived-hom ab1e9683, first S2 delivery: one module, only the lean field changed, statement verbatim, all 36 declarations recorded, Worker report + Second reading sections present. H3: every node clause rendered; setIso/freeIso pinned by generator transposes; gamma is a functor iso on unbounded D, pinned on every K-injective J by the localization square (Hom resolution augmentation, representative chain iso pinned sectionwise by (0,n)-projection + evaluation at [pr_U] + sectionToSlice); homComparison pinned by the dependency's reviewed evaluation/T/t normalization; Hom-complex sign d_M f-(-1)^n f d_L makes the identity-like chain iso consistent; sectionIdentification and restrictionKInjective are true consequences; pointComposition pinned by underlying upperStarFromPointComp. Edge cases P empty/point/finite, X empty, Lambda=0, universes ok. No hollow defs, docstrings + 7-step proof docstring present, imports = stmt/proof-dep modules, lines <=100. Not compiled (no file changed); worker reports clean deliver2 dry run 478487187f9. Advisories: statement uses decls of non-stmt_dep nodes (def-coef-hom-representative-evaluation, def-pur-hom-complex, prop-pur-kinjective-resolutions-exist, def-weil-proetale-inverse-image, sk-def-sfb-derived-tensor-hom); sorry'd pointModulePullback_exact follows directly from profinite_point_pullback + Functor.preservesFiniteLimits_mapMod/preservesFiniteColimits_mapMod."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261025T071125-L-93623",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.exists_comparison",
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.pointModulePullback_exact"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.ProfiniteFreeSlice.exists_comparison"
+  ]
+ }
+}

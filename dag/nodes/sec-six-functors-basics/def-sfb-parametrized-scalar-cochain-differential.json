@@ -1,0 +1,156 @@
+{
+ "id": "def-sfb-parametrized-scalar-cochain-differential",
+ "kind": "definition",
+ "title": "Parametrized trivial scalar cochain differential",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $P$ be a set, $G$ a group, $V$ a ring, $r\\in\\mathbf N$, and $c:P\\times G^r\\to V$ a function. The trivial-action scalar differential is the function on $P\\times G^{r+1}$ given by $$(d^rc)(s;g_1,\\ldots,g_{r+1})=c(s;g_2,\\ldots,g_{r+1})+\\sum_{a=1}^{r}(-1)^a c(s;g_1,\\ldots,g_ag_{a+1},\\ldots,g_{r+1})+(-1)^{r+1}c(s;g_1,\\ldots,g_r).$$ In degree zero the two terms cancel, so $d^0=0$. No topology, completeness or coefficient action is required by this coordinate formula.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated scalar tame-kernel expansion; the finite-quotient function definition and displayed trivial-action differential in lem-sfb-prime-to-ell-finite-quotient-sheaf-augmentation. Definition ownership extracted from the existing source declarations, as requested in return H4/H12."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarCochainDifferential|FactorsThroughFiniteQuotient",
+   "results": {
+    "t": "2026-10-24T11:26:19Z",
+    "tool": "grep",
+    "query": "scalarCochainDifferential|FactorsThroughFiniteQuotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Zero Mathlib hits. Project rg finds FactorsThroughFiniteQuotient at Sheaf/CategoryTheory/PrimeToEllCochainFiniteQuotientDescent.lean:49 and scalarCochainDifferential at Sheaf/Analysis/ScalarCochainAveragingPrimitives.lean:35; upstream WeilConjectures has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Parametrized trivial scalar cochain differential and continuous cochains factoring through an open normal finite group quotient",
+   "results": {
+    "t": "2026-10-24T11:26:19Z",
+    "tool": "leansearch",
+    "query": "Parametrized trivial scalar cochain differential and continuous cochains factoring through an open normal finite group quotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.d",
+     "groupHomology.H1CoresCoinfOfTrivial",
+     "ContinuousCohomology.MultiInd.complex",
+     "groupCohomology.π_comp_H0IsoOfIsTrivial_hom_apply",
+     "groupHomology.H1CoresCoinfOfTrivial_f",
+     "inhomogeneousCochains.d_hom_apply",
+     "groupCohomology.cocycles₁",
+     "groupCohomology.coboundaries₁_eq_bot_of_isTrivial"
+    ],
+    "digest": "a062a6ef17a1bad7"
+   },
+   "date": "2026-10-24",
+   "verdict": "Eight related continuous or abstract group cohomology hits; none defines these exact parametrized interfaces. Reuse the existing Sheaf declarations found by project search."
+  },
+  {
+   "tool": "loogle",
+   "query": "scalarCochainDifferential, FactorsThroughFiniteQuotient",
+   "results": {
+    "t": "2026-10-24T11:26:19Z",
+    "tool": "loogle",
+    "query": "scalarCochainDifferential, FactorsThroughFiniteQuotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'scalarCochainDifferential'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Zero hits; the index reports scalarCochainDifferential unknown. The published project source has the exact declarations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-finite-quotient-sheaf-augmentation",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), scalar tame-kernel input: finite-quotient function definition and trivial-action differential before sheafification. Existing-definition ownership repair requested by the maintainer.",
+   "via": [
+    "lem-sfb-prime-to-ell-finite-quotient-sheaf-augmentation",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Analysis.ScalarCochainAveragingPrimitives",
+  "declaration": "WeilConjectures.scalarCochainDifferential",
+  "declarations": [
+   "WeilConjectures.scalarCochainDifferential"
+  ],
+  "statement": "def scalarCochainDifferential {P : Type w} {G : Type u} {V : Type v}\n    [Group G] [Ring V] (r : ℕ) (c : P × (Fin r → G) → V)\n    (s : P) (g : Fin (r + 1) → G) : V",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H4/H12 ownership repair of returned head 1e687f985aea. This is the existing plain definition; its body does not invoke its source module's theorem. No declaration is copied, changed or moved. The two source definitions have separate nodes because they are exported by distinct existing modules, allowing each existing:true record to be independently imported and checked."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-384d080ac",
+  "group": "NX",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-384d080ac",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery after review_split return of 25bb6ace8586 (cc PASS there). Only change vs 25bb: item proof_deps drops the unused lem-sfb-prime-to-ell-cochain-finite-quotient-descent; delivered proof_deps now equal live side-live proof_deps and the union of step uses (no H7). Lean module byte-identical to 1e687f98/25bb; re-read by me against the node: hypotheses match (normed alg closure, finite E, F∈{E,Ω} as a conjunction, compact T2 totally disconnected K, prime-to-ℓ finite discrete quotients), e has exactly the FactorsThroughFiniteQuotient image, scalarCochainDifferential signs incl. last face and d0=0, eta pinned to toSheafify, scalar action, z, uL, extendMap, IsIso Q.map, ExactAt, local refinement with U≤U0, primitive (-1)^{n+1}|K/U|⁻¹ finite tsum checked in degrees 1/2/3, empty S, K=1. New existing:true def nodes def-sfb-finite-quotient-scalar-cochains / def-sfb-parametrized-scalar-cochain-differential: signatures verbatim in side-live (lines 49/35), H12 fields OK, no duplicate owner; added stmt_dep internal-abelian equivalence has landed. Single sorry, statement verbatim, report sections present. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T081418-L-1951781",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.scalar_cochain_averaging_primitives"
+  ],
+  "sorry_after": []
+ }
+}

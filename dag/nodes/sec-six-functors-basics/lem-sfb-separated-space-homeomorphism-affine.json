@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-separated-space-homeomorphism-affine",
+ "kind": "statement",
+ "title": "Separated universal homeomorphisms of algebraic spaces are affine",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $r:X\\to Y$ be an $S$-morphism. Suppose that $r$ is separated, meaning its diagonal $X\\to X\\times_YX$ is a closed immersion, and that $r$ is a universal homeomorphism, meaning that $|X\\times_YT|\\to|T|$ is a homeomorphism for every algebraic space $T\\to Y$. A closed immersion is tested on etale scheme charts and is given by quotienting by a quasi-coherent ideal. Then $r$ is representable by schemes and integral. More explicitly, for every scheme $T\\to Y$, $X\\times_YT$ is a scheme and its map to $T$ is affine: the inverse image of an affine open $\\operatorname{Spec}A\\subseteq T$ is $\\operatorname{Spec}B$ for an $A$-algebra $B$ integral over $A$, meaning that every element of $B$ satisfies a monic polynomial over $A$.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Rydh, Submersions and effective descent of etale morphisms, Corollary (5.22), printed pp.24--25, and Appendix B opening paragraph, printed p.38. Read author PDF online at https://davidrydh.se/papers/submersion20100305.pdf; local copy WANTED. The paper assumes quasi-separated spaces globally. For the stated arbitrary-space form one works etale locally over affine charts of Y: the source is quasi-compact by universal closedness and separated over the affine chart, hence quasi-separated, so Corollary (5.22) applies there and representability/integrality descend etale locally.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-a1-space-point-topology",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix any scheme $T\\to Y$ and put $Z=X\\times_YT$ [lem-trf-space-fibre-products-etale-covers]. For every $C\\to T$, $Z\\times_TC=X\\times_YC$ by the fibre-product universal property; thus $Z\\to T$ is a universal homeomorphism by the given hypothesis. It is separated by [lem-sfb-space-separated-fp-composition]. We may first take $T$ affine; the last step will handle arbitrary $T$. The homeomorphism $|Z|\\simeq|T|$ makes $|Z|$ quasi-compact since affine schemes are quasi-compact [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-sfb-qc-space-affine-etale-atlas] to choose an affine scheme $U'$ and a representable surjective etale map $u':U'\\to Z$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-qc-space-affine-etale-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03H6 (affine atlas for a quasi-compact space) and 03KL (base change of separatedness); Rydh Corollary (5.22), choosing the presentation after affine base change."
+   }
+  },
+  {
+   "text": "The affine schemes $T$ and $U'$ are absolutely separated by [lem-weil-pbc-affine-source-morphism-separated] and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. The scheme diagonal of $T$ is a closed immersion, and every scheme pullback of it remains a closed immersion [lem-weil-pbc-closed-immersion-base-change]; hence it is a closed immersion also under the scheme-test definition for spaces. Composing $Z\\to T$ with $T\\to\\operatorname{Spec}\\mathbf Z$ gives absolute separatedness of $Z$ [lem-sfb-space-separated-fp-composition]. Its absolute diagonal is therefore a closed immersion, hence proper and quasi-compact by [lem-sfb-space-closed-subspace-proper]. Thus $Z$ is quasi-separated. Finally, the absolutely separated scheme $U'$ has separated etale chart $u':U'\\to Z$ by [lem-a1-separated-etale-chart]. These verify all quasi-separated-space and separated-object hypotheses of the next step.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-a1-separated-etale-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 04ZH (separated over separated), 04XZ (closed immersions proper), and spaces-properties 03FZ (separated scheme charts). Rydh printed p.4 convention, made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-homeomorphism-separated-etale-equivalence] to $Z\\to T$ and its separated etale object $U'\\to Z$. It supplies a quasi-separated algebraic space $U$, a separated chartwise etale map $u:U\\to T$, and an isomorphism $U\\times_TZ\\simeq U'$ over $Z$. Since $T$ is a scheme, [lem-a1-separated-etale-space-scheme] makes $U$ a scheme and $u$ an etale scheme morphism. By [lem-a1-space-point-open-calculus], the surjective atlas $U'\\to Z$ is surjective on point spaces. Together with the homeomorphism $|Z|\\simeq|T|$, its composite $U'\\to Z\\to T$ is surjective on point spaces. It factors through $u$, so $|u|$ is surjective; thus $u$ is a surjective etale scheme morphism. No representability of a general etale space over $T$ was assumed before applying the separated-etale scheme criterion.",
+   "uses": [
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-a1-separated-etale-space-scheme",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Corollary (5.22), printed pp.24-25, using Theorem (5.21); the intermediate separated-etale object is represented using Stacks 03XX and 03XU."
+   }
+  },
+  {
+   "text": "The projection $U'=Z\\times_TU\\to U$ is a universal homeomorphism: after every further scheme base change its point map is one of the homeomorphisms in the hypothesis on $r$. Both $U'$ and $U$ are now schemes. Hence [lem-trf-universally-homeomorph-integral] makes this projection integral, and therefore affine by [def-weil-finite-integral-morphism]. Apply [lem-sfb-space-affine-locality] to the surjective etale scheme morphism $U\\to T$. It follows that $Z\\to T$ is affine. In particular $Z$ is a scheme (indeed affine since $T$ is affine). Applying [lem-trf-universally-homeomorph-integral] again, now to the scheme morphism $Z\\to T$, shows that it is integral.",
+   "uses": [
+    "lem-trf-universally-homeomorph-integral",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Corollary (5.22), printed p.25, representable universal homeomorphism and etale descent of affineness; Stacks 04DF and 03WG."
+   }
+  },
+  {
+   "text": "Let $T\\to Y$ be any scheme test and write $Z_T=X\\times_YT$. For every affine open $V\\subseteq T$, step 4 gives an affine scheme $Z_V=X\\times_YV$. If $W\\subseteq V$ is another affine open, fibre-product associativity identifies $Z_W$ with the open subscheme $Z_V\\times_VW$; these restriction maps have identity and composition laws by their projections. Thus [lem-weil-pbc-relative-glueing-affine-opens] gives a scheme $P\\to T$ with these restrictions. It represents $Z_T$: over any test scheme $C\\to T$, the opens $C\\times_TV$ cover $C$; maps into $P$ and sections of $Z_T$ both glue uniquely from these opens, and their local identifications are precisely the same $Z_V$. The local comparisons and their inverses therefore glue to mutually inverse natural transformations. Here the sheaf property is part of [def-trf-algebraic-space], and maps into schemes glue by [lem-weil-pbc-scheme-morphism-gluing]. Now $P\\to T$ has affine inverse image over every affine open, so [pqf-lem-affine-local-target] makes it affine. The base-change identity in step 1 makes it a universal homeomorphism; [lem-trf-universally-homeomorph-integral] makes it integral. Finally [def-weil-finite-integral-morphism] gives the required monic-polynomial description of every $\\operatorname{Spec}B\\to\\operatorname{Spec}A$. All scheme tests are therefore represented and integral.",
+   "uses": [
+    "lem-weil-pbc-relative-glueing-affine-opens",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "pqf-lem-affine-local-target",
+    "lem-trf-universally-homeomorph-integral",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LH (lemma-relative-glueing), followed by Morphisms Tag 01S8 (lemma-affine-local) and Tag 04DF (lemma-universal-homeomorphism); expansion of the affine-test reduction in Rydh Corollary (5.22)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-a1-separated-etale-chart",
+  "lem-sfb-homeomorphism-separated-etale-equivalence",
+  "lem-a1-separated-etale-space-scheme",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-universally-homeomorph-integral",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-space-affine-locality",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Corollary (5.22), printed pp.24-25, and quasi-separated convention p.4. Online author PDF read; unavailable local source requested in report. Affine reduction and the separated-etale scheme step expanded using the cited Stacks results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Separated universal homeomorphism of algebraic spaces is representable by schemes integral and affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.IsSeparated ↔ AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"A scheme $X$ is separated if and only if the unique morphism from $X$ to the terminal object in the category of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, differential submersions or fpqc descent; no theorem for the stated algebraic stacks/spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal homeomorphism separated algebraic space integral morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [IsIntegralHom (f ≫ g)] [IsSeparated g] : IsIntegralHom f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f $ is an integral morphism and $ g $ is a separated morphism, then $ f $ is an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsAffineHom : AlgebraicGeometry.IsAffineHom f],\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral) →\\n    AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is integral if it is affine and for every affine open subset $ U $ of $ Y $, the induced ring homomorphism on the sections over $ U $ and $ f^{-1}(U) $ is integral\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsIntegralHom @IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is an integral morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": HasAffineProperty @IsIntegralHom fun X _ f _ ↦ IsAffine X ∧ RingHom.IsIntegral (f.app ⊤).hom\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"{X Y : Scheme.{u}} {f : X ⟶ Y} : IsIntegralHom f ↔ UniversallyClosed f ∧ IsAffineHom f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if and only if it is universally closed and affine. That is, $ f $ is integral precisely when it satisfies both the universal closedness condition (ever\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, differential submersions or fpqc descent; no theorem for the stated algebraic stacks/spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalHomeomorph\", \"IsIntegralHom\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, differential submersions or fpqc descent; no theorem for the stated algebraic stacks/spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "[Uu]niversalHomeomorph|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, differential submersions or fpqc descent; no theorem for the stated algebraic stacks/spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|universalHomeomorph.*integral|integral.*universalHomeomorph",
+   "results": "{\"t\": \"2026-10-23T12:14:27Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|universalHomeomorph.*integral|integral.*universalHomeomorph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme integral/affine properties do not assert representability of this algebraic-space morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed universally injective surjective separated morphism of algebraic spaces is integral",
+   "results": "{\"t\": \"2026-10-23T12:14:28Z\", \"tool\": \"leansearch\", \"query\": \"A universally closed universally injective surjective separated morphism of algebraic spaces is integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsIntegralHom.of_comp\"], \"digest\": \"939de1adee4fc555\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme integral/affine properties do not assert representability of this algebraic-space morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUniversalHomeomorph\", \"IsIntegralHom\"",
+   "results": "{\"t\": \"2026-10-23T12:14:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsUniversalHomeomorph\\\", \\\"IsIntegralHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme integral/affine properties do not assert representability of this algebraic-space morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every separated universal homeomorphism of algebraic spaces is affine and representable integral",
+   "results": "{\"t\": \"2026-10-23T12:14:30Z\", \"tool\": \"leanfinder\", \"query\": \"Every separated universal homeomorphism of algebraic spaces is affine and representable integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.isIntegralHom_iff\", \"AlgebraicGeometry.AffineTargetMorphismProperty\"], \"digest\": \"d2df7927191b6a1c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme integral/affine properties do not assert representability of this algebraic-space morphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stein-submersive-reduced-descent",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Alper Proposition 7.1.1 proof, Hom exactness; expanded Rydh Theorem (7.4) graph construction, printed p.29, as a prerequisite of the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route. Supporting input: Separated universal homeomorphisms of algebraic spaces are affine.",
+   "via": [
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-separated-space-homeomorphism-affine",
+  "worker": "stage1",
+  "summary": "NS supplies the Rydh 5.22 presentation-descent proof with one statement-only input, Rydh 5.21 for etale algebraic spaces. The proof explicitly obtains quasi-separated spaces over affine tests, descends a separated atlas, makes the descended etale object a scheme, descends affineness, and applies the existing scheme universal-homeomorphism theorem. Statement unchanged.",
+  "blueprint": "Alper Proposition 7.1.1 proof, Hom exactness; expanded Rydh Theorem (7.4) graph construction, printed p.29, as a prerequisite of the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route. Supporting input: Separated universal homeomorphisms of algebraic spaces are affine. Realizes the supporting affineness input to the Stein graph construction; latest direct-images proof (3) remains the inherited route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space presentations, separatedness, or scheme universal-homeomorphism tool in the Rydh 5.22 reduction; no coefficient or six-functor route is replaced."
+   },
+   {
+    "node": "lem-a1-separated-etale-chart",
+    "why": "Generic algebraic-space presentations, separatedness, or scheme universal-homeomorphism tool in the Rydh 5.22 reduction; no coefficient or six-functor route is replaced."
+   },
+   {
+    "node": "lem-a1-separated-etale-space-scheme",
+    "why": "Generic algebraic-space presentations, separatedness, or scheme universal-homeomorphism tool in the Rydh 5.22 reduction; no coefficient or six-functor route is replaced."
+   },
+   {
+    "node": "lem-trf-universally-homeomorph-integral",
+    "why": "Generic algebraic-space presentations, separatedness, or scheme universal-homeomorphism tool in the Rydh 5.22 reduction; no coefficient or six-functor route is replaced."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "The atlas is surjective on point classes; this general algebraic-space topology tool supplies the surjectivity of the descended etale cover, independently of the six-functor unit."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing of scheme morphisms identifies the constructed scheme with the space on arbitrary scheme tests; this supplies no six-functor argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-separated-etale-chart",
+  "lem-a1-separated-etale-space-scheme",
+  "lem-trf-universally-homeomorph-integral",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-3326b4950",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-3326b4950 (reviewer sub-agent of L); spot-checked: Read in full: the item (5 steps) and the new node lem-sfb-homeomorphism-separated-etale-equivalence, checked against the author PDF of Rydh fetched read-only (not in literature/; WANTED stands). Sources: p.4 convention that all algebraic spaces are quasi-separated; Notation (5.1) E and E_sep; Thm (5.21); Cor (5.22) and its proof; Ex (5.20) and Rem (5.23). The new node states (5.21) faithfully: quasi-separatedness of X, Y and the objects is explicit, r is separated, universal homeomorphism is tested on algebraic spaces, and chartwise étale is defined inline. It is a descent equivalence, not a clause of the item (no D1/D2), and the duplicate search finds nothing. The item drops the quasi-separated convention correctly: over an affine T, Z is quasi-compact (|Z|=|T|) and absolutely separated (separated-fp-composition plus the closed-immersion base change of T's diagonal), so it is quasi-separated (04XZ node) and (5.21) applies. Steps: (1) fibre product node 02X2, base-change separatedness, affine atlas from quasi-compact |Z| (03H6, no quasi-separated hypothesis) are OK. (2) Separated chart (03FZ) is OK. (3) Essential surjectivity, then 03XX makes U a scheme with U→T étale, and 03H5 point surjectivity gives u surjective; OK. (4) 04DF makes U'→U integral hence affine; 03WG single-cover locality gives Z affine; 04DF gives integral; OK. (5) Relative glueing 01LH plus fppf sheaf and morphism gluing to represent X×_Y T; overlaps are checked on affine W, so T need not be quasi-separated; 01S8 gives affine and 04DF integral; OK. Edge cases checked: empty, identity, non-nilpotent nil thickening, purely inseparable extension, Knutson's (5.20) excluded by separatedness. proof_deps equals the union of uses; four kinds of Mathlib search are recorded; no SGA; no cycle. Declared tool_uses (trf/a1 space foundations, 04DF, scheme morphism gluing) are generic and accepted. Batch-5 flags are all accepted as generic: def-trf-algebraic-space, 02X2 fibre products, the a1 point topology/calculus and separated-chart nodes, the sfb space foundations (03KL/03KQ, 03H6, 04XZ, 03WG) and 04DF are definitions and general geometry, not given by the trace formula or Poincaré duality assumptions and not part of their proofs. Advisory only: step 2 leaves implicit that a representable étale chart is chartwise étale (elementary composition)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedSpaceHomeomorphismIntegral",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isRepresentableWith_isIntegralHom_of_separated_universally_isHomeomorph",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedSpaceHomeomorphismIntegral.lean",
+  "statement": "theorem isRepresentableWith_isIntegralHom_of_separated_universally_isHomeomorph {S : Scheme.{u}} {X Y : AlgebraicSpace S} (r : X ⟶ Y) (hsep : MapIsSeparated r) (hhome : ∀ (T : AlgebraicSpace S) (t : T ⟶ Y), IsHomeomorph (mapPoint (Limits.pullback.snd r.hom t.hom).hom)) : IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) r.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13131ed97",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Q157 lem-sfb-separated-space-homeomorphism-affine 1313: one sorried theorem; node diff = lean record + 4 landed def stmt_deps (space-morphism-properties MapIsSeparated, proper-curve-moduli mapPoint, a1 point topology, finite-integral IsIntegralHom), all used. S/X/Y/r match def-pc-scheme/def-trf-algebraic-space; separated = diagonal IsRepresentableWith closed immersion; universal homeomorphism = IsHomeomorph of canonical mapPoint of pullback.snd for every algebraic space T (same pattern as landed MapIsUniversallyOpen); conclusion IsRepresentableWith IsIntegralHom gives an actual IsPullback representing X×_Y T plus affine and integral on affine opens (monic polynomials), not weaker or stronger. lean.statement verbatim; single universe u; no quasi-separated assumption (node-consistent); edge cases empty/identity/nil thickening/inseparable OK; no duplicate space-level predicate in Sheaf/WeilConjectures; docstrings carry source + blueprint + 5 proof steps; sorry only; report sections present. No compile (no file changed)."
+ }
+}

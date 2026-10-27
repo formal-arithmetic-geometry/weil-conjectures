@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-invariant-power-base-change-descent",
+ "kind": "statement",
+ "title": "Base change and local descent for invariant symmetric-power lifting",
+ "statement": "For a commutative ring $A$ and a flat affine finitely presented group scheme $J$ over $\\operatorname{Spec}A$, put $A[J]=\\Gamma(J,\\mathcal O_J)$. A rational $J$-module is an $A$-module $M$ with coaction $\\rho:M\\to M\\otimes_A A[J]$ satisfying the counit and coassociativity identities for the coordinate Hopf algebra; an invariant satisfies $\\rho(m)=m\\otimes1$, and an equivariant map commutes with coactions. Define $P(A,J)$ to mean that for every rational $J$-module $M$ and every equivariant surjection $\\lambda:M\\twoheadrightarrow A$ to the trivial module there are $n\\geq1$ and $q\\in(\\operatorname{Sym}_A^n M)^J$ with $\\operatorname{Sym}^n(\\lambda)(q)=1$. Here $\\operatorname{Sym}_A^n M$ is the degree-$n$ piece of the free commutative $A$-algebra on $M$, with its induced coaction and $\\operatorname{Sym}_A^n A\\simeq A$. No finiteness or flatness is assumed for $M$. Group schemes and homomorphisms use the group-object diagrams of [def-sc-group-scheme] over the indicated affine base [def-weil-affine-spectrum]; affine, finite presentation, flatness, tensor product and symmetric algebra have the meanings of [pqf-def-affine-morphism, def-sbc-locally-finite-presentation, def-weil-flat-morphism, def-weil-pbc-module-tensor-product, lem-weil-pbc-symmetric-algebra-universal-property, lem-weil-pbc-symmetric-algebra-graded]. Let $H$ be such a group scheme over $A$. Then:\n(1) For every ring homomorphism $A\\to B$, $P(A,H)$ implies $P(B,H_B)$, where $H_B=H\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$.\n(2) If $A\\to B$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map], $P(B,H_B)$ implies $P(A,H)$.\n(3) If $P(A_{\\mathfrak m},H_{A_{\\mathfrak m}})$ holds for every maximal ideal $\\mathfrak m$ of $A$, then $P(A,H)$ holds; localization is as in [def-weil-pbc-localization-at-prime].\n(4) If $\\{\\operatorname{Spec}B_i\\to\\operatorname{Spec}A\\}_{i\\in I}$ is a finite jointly surjective family of etale morphisms [def-weil-etale-morphism] and $P(B_i,H_{B_i})$ holds for each $i$, then $P(A,H)$ holds. These assertions impose no Noetherian hypothesis on any base ring.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Lemma 9.2.5(2),(5), printed pp.522-523, and Proposition 9.3.1(i),(ii), p.524. Clauses (3),(4) are the affine localization and finite etale-cover forms of the same descent, with the coefficient-patching argument described in report.md. Local PDF WANTED; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-etale-morphism",
+  "def-sfb-invariant-symmetric-power-lifting"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=A[H]$. It is flat over $A$ by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. The base-changed group is again affine, flat and finitely presented, by [lem-weil-pbc-affine-morphism-permanence], [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). By [lem-weil-pbc-affine-chart-base-change-iso], its coordinate Hopf algebra is $B\\otimes_A C$, with structural maps obtained by tensoring those of $C$. For every rational module $T$, write $V_n(T)=\\ker(\\rho_n-u_n)$, where $u_n(x)=x\\otimes1$ on $\\operatorname{Sym}^n_A T$. The symmetric-algebra base-change isomorphism [lem-weil-pbc-symmetric-algebra-base-change] restricts to $B\\otimes_A\\operatorname{Sym}^n_A T\\simeq\\operatorname{Sym}^n_B(B\\otimes_A T)$: its map takes $b\\otimes(t_1\\cdots t_n)$ to $b(1\\otimes t_1)\\cdots(1\\otimes t_n)$, and its inverse has the same degree-preserving formula. These formulas and [lem-weil-pbc-symmetric-algebra-graded] show compatibility with degree, evaluation and coactions, since both coactions are multiplicative and agree on every generator.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-symmetric-algebra-base-change",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "lem-weil-pbc-affine-chart-base-change-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U5 (affine flatness), 01SD (affine base change), 01U9 (flat base change), 01TS (finite presentation base change); affine tensor coordinates, and algebra.tex Tags 0C6F and 00DM for symmetric algebras; explicit generator calculation"
+   }
+  },
+  {
+   "text": "To prove (1), let $N\\twoheadrightarrow B$ be any rational $H_B$-module quotient $\\lambda$. Regard it as a $C$-comodule over $A$, using $N\\otimes_B(B\\otimes_A C)=N\\otimes_A C$, and put $E=\\{(x,a)\\in N\\oplus A:\\lambda(x)=a\\cdot1_B\\}$. This is the kernel of $\\delta:N\\oplus A\\to B$, $(x,a)\\mapsto\\lambda(x)-a\\cdot1_B$. Tensoring its kernel sequence with $C$ is exact by [lem-weil-pbc-flat-tensor-exact]. Consequently the two coactions on $N\\oplus A$ restrict uniquely to $E\\to E\\otimes_A C$: their composite with $\\delta\\otimes1$ vanishes by equivariance of $\\lambda$ and the trivial coactions on $A,B$. The counit identity follows by composing with $E\\hookrightarrow N\\oplus A$. Coassociativity follows by composing with $E\\otimes C\\otimes C\\hookrightarrow(N\\oplus A)\\otimes C\\otimes C$, which is injective by applying the same flat-exactness assertion twice. Thus $E$ is a rational $H$-module, its projections are equivariant, and $E\\to A$ is surjective: for each $a$ choose $x$ with $\\lambda(x)=a\\cdot1_B$. No flatness of $B$ or $N$ is used.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat); agent fibre-product argument for Alper 9.3.1(i)"
+   }
+  },
+  {
+   "text": "Apply $P(A,H)$ to $E\\twoheadrightarrow A$, obtaining $n>0$ and invariant $q\\in\\operatorname{Sym}^n_A E$ evaluating to $1$. The projection $E\\to N$ followed by the degree-one inclusion into $\\operatorname{Sym}_B N$ extends to an $A$-algebra map by [lem-weil-pbc-symmetric-algebra-universal-property]. It preserves degree by [lem-weil-pbc-symmetric-algebra-graded]. The two maps expressing equivariance agree on the degree-one generators and hence agree on the symmetric algebra by that universal property. Its image $q_B\\in\\operatorname{Sym}^n_B N$ is therefore $H_B$-invariant. Evaluation commutes with this map because it does so on $E$, where $\\lambda(x)=a\\cdot1_B$; hence $q_B$ evaluates to $1_B$. This proves (1).",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-symmetric-algebra-graded"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM (section-tensor-algebra); explicit functoriality on generators"
+   }
+  },
+  {
+   "text": "For (2), fix $M\\twoheadrightarrow A$ and put $V_n=V_n(M)$, $\\epsilon_n:V_n\\to A$ its evaluation. The scalar extension $B\\otimes_A M\\to B$ is surjective, since a chosen lift of $1_A$ gives lifts of every $b\\in B$. As $B$ is flat, [lem-weil-pbc-flat-tensor-exact] applied to $0\\to V_n\\to\\operatorname{Sym}^n M\\xrightarrow{\\rho_n-u_n}\\operatorname{Sym}^n M\\otimes C$ identifies $B\\otimes_A V_n$ with the invariants of the base-changed symmetric power, under the comparison in step 1. The hypothesis $P(B,H_B)$ therefore gives some $n>0$ for which $B\\otimes_A\\epsilon_n:B\\otimes_A V_n\\to B$ is surjective. The complex $V_n\\xrightarrow{\\epsilon_n}A\\to0$ becomes exact after tensoring with $B$; faithful flatness, in the exactness-detecting definition [def-weil-pbc-faithfully-flat-ring-map], makes it exact already over $A$. Choose $q\\in V_n$ with $\\epsilon_n(q)=1$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD and Definition 00HB (faithfully flat exactness detection); agent invariant-kernel calculation for Alper 9.3.1(ii)"
+   }
+  },
+  {
+   "text": "For (3), fix $M\\twoheadrightarrow A$ and keep $V_n,\\epsilon_n$. Put $S=A\\setminus\\mathfrak m$. For an $A$-module $P$, [lem-weil-pbc-localization-tensor-product] with $\\ell_M=\\mathrm{id}$ on $A_{\\mathfrak m}$ and $\\ell_N:P\\to P_{\\mathfrak m}$, $p\\mapsto p/1$, makes $A_{\\mathfrak m}\\otimes_AP\\to P_{\\mathfrak m}$, $(a/s)\\otimes p\\mapsto ap/s$, a localization at $S$; as $S$ already acts bijectively on the source, it is an isomorphism, natural in $P$. So step 1 with $B=A_{\\mathfrak m}$ makes $M_{\\mathfrak m}\\twoheadrightarrow A_{\\mathfrak m}$ a rational $H_{A_{\\mathfrak m}}$-module quotient, to which $P(A_{\\mathfrak m},H_{A_{\\mathfrak m}})$ applies. Localization exactness [lem-weil-pbc-localization-module-exact] applied to the same kernel sequence, together with the degree-preserving comparison of step 1, identifies $(V_n)_{\\mathfrak m}$ with $(\\operatorname{Sym}^n_{A_{\\mathfrak m}}M_{\\mathfrak m})^{H_{A_{\\mathfrak m}}}$. Evaluation is $q/s\\mapsto\\epsilon_n(q)/s$. A local lift of $1$ consequently has a representative $q/s$, with $q\\in V_n$, $s\\notin\\mathfrak m$, and $\\epsilon_n(q)/s=1$. By the fraction equality in [def-weil-pbc-localization-at-prime], some $t\\notin\\mathfrak m$ satisfies $t(\\epsilon_n(q)-s)=0$. Thus $\\epsilon_n(q)\\notin\\mathfrak m$: otherwise $ts=t\\epsilon_n(q)$ would belong to the prime ideal $\\mathfrak m$, although $t,s\\notin\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DL (lemma-tensor-product-localization), 00CS (proposition-localization-exact), 00CO (fraction equality); explicit denominator clearing"
+   }
+  },
+  {
+   "text": "Let $I=\\sum_{n>0}\\operatorname{im}(\\epsilon_n)$, an ideal of $A$. Step 5 says $I$ is contained in no maximal ideal, so [lem-weil-pbc-proper-ideal-contained-in-maximal] gives $I=A$. Thus choose a finite list $q_j\\in V_{n_j}$, $n_j>0$, with $1=\\sum_j a_j c_j$, where $c_j=\\epsilon_{n_j}(q_j)$. If $A=0$, take $n=1,q=0$ and finish. Otherwise the list is nonempty. Let $n=\\prod_j n_j$ and $k_j=n/n_j$. The elements $q_j^{k_j}$ are invariant and have degree $n$, by multiplicativity of the coaction and [lem-weil-pbc-symmetric-algebra-graded]. The ideal generated by $c_j^{k_j}$ is the unit ideal: a maximal ideal containing it would contain every $c_j$, contradicting $\\sum_j a_jc_j=1$. Choose $b_j$ with $\\sum_j b_jc_j^{k_j}=1$. Then $q=\\sum_j b_jq_j^{k_j}\\in V_n$ evaluates to $1$, proving (3).",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-symmetric-algebra-graded"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), proper ideals lie in maximal ideals; Tag 00DM, homogeneous multiplication"
+   }
+  },
+  {
+   "text": "For (4), suppose first $A\\ne0$ and set $B=\\prod_i B_i$. Each $B_i$ is flat over $A$, by the flatness clause of [def-weil-etale-morphism] and [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Thus $B$ is flat by [lem-weil-pbc-finite-product-flat-modules]. For every maximal $\\mathfrak m\\subset A$, joint surjectivity supplies $i$ and a prime $\\mathfrak q\\subset B_i$ contracting to $\\mathfrak m$. The composite $B\\to B_i\\to B_i/\\mathfrak q$ kills $\\mathfrak m B$ and maps $1$ to $1\\ne0$, so $\\mathfrak m B\\ne B$. By [lem-weil-pbc-flat-faithfully-flat-maximal-ideals], $A\\to B$ is faithfully flat. This uses only the stipulated finite family and flatness, not finiteness as a module of any $B_i$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-finite-product-flat-modules",
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02GI (etale implies flat), 01U5, 00HB/00DD (finite products of flat modules), 00HP (lemma-ff)"
+   }
+  },
+  {
+   "text": "Fix $M\\twoheadrightarrow A$. For each $i$, $P(B_i,H_{B_i})$ gives an invariant $q_i$ of degree $n_i>0$ in the symmetric algebra of $B_i\\otimes_A M$ evaluating to $1$. Choose $n=\\prod_i n_i>0$ and replace $q_i$ by $q_i^{n/n_i}$. Step 1 and the flat-kernel argument of step 4, using [lem-weil-pbc-flat-tensor-exact], identify these invariants with elements of $B_i\\otimes_A V_n$ mapping to $1$. Because the family is finite, the explicit map $B\\otimes_A V_n\\to\\prod_i(B_i\\otimes_A V_n)$, $b\\otimes v\\mapsto(b_i\\otimes v)_i$, is invertible: its inverse sums the maps induced by the coordinate inclusions $B_i\\to B$ as $A$-modules. Assemble the $q_i$ to an element mapping to $1_B$. Exactness detection [def-weil-pbc-faithfully-flat-ring-map] for $V_n\\to A\\to0$ now supplies a global invariant of degree $n$ evaluating to $1$. If the family is empty, joint surjectivity forces $\\operatorname{Spec}A$ empty, hence $A=0$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]; for $A=0$ the lift $n=1,q=0$ works. This proves (4).",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD, Definition 00HB; finite-coordinate tensor formulas and the zero-ring case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+  "lem-weil-pbc-localization-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Direct comodule proof of the affine consequences of Lemma 9.2.5(2),(5) and Proposition 9.3.1(i),(ii), pp.522-524; PDF read online, local copy WANTED. Localization and finite-family arguments written explicitly from Stacks algebra.tex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"geometricallyReductive\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*reductiv|power.*reductiv|adequat.*invariant",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat descent and base change geometric reductivity of group schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": IsStableUnderBaseChange FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant symmetric power lifting for rational group scheme modules is preserved by arbitrary base change and descends faithfully flat",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.finitePow\", \"module\": \"Mathlib/RingTheory/TensorProduct/IsBaseChangePi\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (ι : Type u_3)\\n  [Finite ι] {M : Type u_4} {M' : Type u_5} [inst_4 : AddCommMonoid M] [inst_5 : AddCommMonoid M'] [inst_6 : Module R M]\\n  [inst_7 : Module R M'] [inst_8 : Module S M'] [inst_9 : I\", \"doc\": \"For any finite index type $\\\\iota$ and a linear map $f : M \\\\to_R M'$ that is a base change from $R$ to $S$, the component-wise extension of $f$ to functions $\\\\iota \\\\to M$ (defined by applying $f$ point\"}\n  {\"name\": \"SymmetricPower.module\", \"module\": \"Mathlib/LinearAlgebra/TensorPower/Symmetric\", \"type\": \"(R ι : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type v) → [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → Module R (SymmetricPower R ι M)\", \"doc\": \"Given a commutative semiring $ R $, an additive commutative monoid $ M $, and an $ R $-module structure on $ M $, the $ n $-th symmetric power $ \\\\text{Sym}^n(M) $ inherits an $ R $-module structure fr\"}\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n  {\"name\": \"IsBaseChange.lift\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  {M : Type v₁} →\\n    {N : Type v₂} →\\n      {S : Type v₃} →\\n        [inst : AddCommMonoid M] →\\n          [inst_1 : AddCommMonoid N] →\\n            [inst_2 : CommSemiring R] →\\n              [inst_3 : CommSemiring S] →\\n                [inst_4 : Algebra R S] →\\n                  [inst_5 \", \"doc\": \"Given a bilinear map $ f: M_1 \\\\times M_2 \\\\to M $ satisfying the tensor product's universal property (as witnessed by $ h $), and an $ R $-linear map $ g: M \\\\to Q $, this constructs the induced $ S $-l\"}\n  {\"name\": \"Module.FaithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"(R : Type u) → (M : Type v) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"The property that $ M $ is a faithfully flat module over the commutative ring $ R $, meaning it is flat and the functor $ -\\\\otimes_R M $ is faithful.\"}\n  {\"name\": \"IsBaseChange.of_lift_unique\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ {R : Type u_1} {M : Type v₁} {N : Type v₂} {S : Type v₃} [inst : AddCommMonoid M] [inst_1 : AddCommMonoid N]\\n  [inst_2 : CommSemiring R] [inst_3 : CommSemiring S] [inst_4 : Algebra R S] [inst_5 : Module R M] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] (f : M →ₗ[R] \", \"doc\": \"Given a scalar tower $ R \\\\to S \\\\to Q $ with $ Q $ an $ R $-module and $ S $-module, and an $ R $-linear map $ g : M \\\\to Q $, there exists a unique $ S $-linear map $ g' : N \\\\to Q $ such that $ g = (g'\"}\n  {\"name\": \"SymmetricPower.mk\", \"module\": \"Mathlib/LinearAlgebra/TensorPower/Symmetric\", \"type\": \"(R ι : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type v) →\\n      [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → (PiTensorProduct R fun x => M) →ₗ[R] SymmetricPower R ι M\", \"doc\": \"The canonical $ R $-linear map from the tensor product $ \\bigotimes_R M $ to the symmetric power $ \\text{Sym}^n(M) $, induced by quotienting the symmetric tensor relation that identifies tensors differi\"}\n  {\"name\": \"PolynomialLaw.exists_lift'\", \"module\": \"Mathlib/RingTheory/PolynomialLaw/Basic\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_1} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {S : Type v}\\n  [inst_3 : CommSemiring S] [inst_4 : Algebra R S] (t : TensorProduct R S M) (s : S),\\n  ∃ n ψ p q, (LinearMap.rTensor M ψ.toLinearMap) p = t ∧ ψ q = s\", \"doc\": \"Let $R$ be a commutative semiring, $S$ be an $R$-algebra, and $M$ be an $R$-module. For any $s \\\\in S$ and $t \\\\in S \\\\otimes_R M$, there exist a natural number $n$, a polynomial ring $P = R[X_1, \\\\dots, \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric reductivity of a flat affine group scheme is local on the base and stable under base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) →\\n      (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [Comm\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*[Rr]eductiv|power.*[Rr]eductiv|invariant.*symmetric|symmetric.*invariant",
+   "results": "OK 9 hit(s); Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean, Mathlib/LinearAlgebra/Matrix/InvariantBasisNumber.lean, Mathlib/Algebra/Lie/Loop.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/RootPositive.lean, Mathlib/LinearAlgebra/RootSystem/RootPositive.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; symmetric algebra/power constructions, abstract-group coinvariants, flatness, and Hopf operations do not state invariant power lifting under base change and descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric reductivity of a flat affine group scheme is preserved by arbitrary base change and descends faithfully flat",
+   "results": "OK 8 hit(s); AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; symmetric algebra/power constructions, abstract-group coinvariants, flatness, and Hopf operations do not state invariant power lifting under base change and descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra, Coalgebra, Module.FaithfullyFlat",
+   "results": "OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; symmetric algebra/power constructions, abstract-group coinvariants, flatness, and Hopf operations do not state invariant power lifting under base change and descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant symmetric power lifting of a surjection of group scheme comodules to the trivial module under arbitrary ring base change and faithfully flat descent",
+   "results": "OK 8 hit(s); SymAlg.sym_surjective, SymAlg.unsym_surjective, Rep.desc, SymmetricPower.range_mk, SymmetricPower.module, Representation.Coinvariants.lift_comp_mk, PolynomialLaw.π_surjective, Rep.indResAdjunction_counit_app_hom_hom",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; symmetric algebra/power constructions, abstract-group coinvariants, flatness, and Hopf operations do not state invariant power lifting under base change and descent."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|PowerReductive|GeometricallyReductive|geometricallyReductive",
+   "results": "OK 0 hit(s); ; subdirectory RepresentationTheory/",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; symmetric algebra/power constructions, abstract-group coinvariants, flatness, and Hopf operations do not state invariant power lifting under base change and descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Power reductivity for Hopf algebra comodules: invariant in a positive symmetric power mapping to one; locality on the coefficient ring",
+   "results": "OK 8 hit(s); GroupLike, TensorProduct.tacticHopf_tensor_induction_With__, HopfAlgebra, IsGroupLikeElem, GroupLike.instPowNat, CommSemiring.toHopfAlgebra, HopfAlgebra.sum_mul_antipode_eq_smul, HopfAlgebraStruct",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; symmetric algebra/power constructions, abstract-group coinvariants, flatness, and Hopf operations do not state invariant power lifting under base change and descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-symmetric-power-dvr-reduction",
+  "date": "2026-10-24",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: arbitrary base change from integral split models and descent from etale covers and local DVR extensions.",
+   "via": [
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-invariant-power-base-change-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave an eight-step direct comodule proof: arbitrary-base-change fibre product, faithfully flat invariant-kernel descent, maximal-local denominator clearing and common-degree patching, and finite etale-family faithful-flat detection. No new nodes: all non-elementary algebra inputs are existing nodes, with exact statement quotations in citations.json. No Lean or build commands.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability, direct-images proof (3), inherited alteration/GIT/Cartan chain, final Alper base-change/descent prerequisite in blueprint.from.place. The ancestor command returns None, as for the accepted parent; preserved the inherited null ancestor and full via chain. Whole-blueprint searches for geometrically reductive, symmetric power, and the item concept found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-base-change",
+    "why": "Generic symmetric-algebra base-change isomorphism, needed for invariant symmetric powers; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "Generic homogeneous direct-sum grading and multiplication of a symmetric algebra, needed to compare degrees and patch lifts."
+   },
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic projection-compatible coordinate presentation of a fibre product of affine schemes, used to identify the coordinate Hopf algebra after scalar extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-affine-chart-base-change-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-9a748c064",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-9a748c064 (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement and all 8 steps. I also read every cited node's statement, including the 3 declared tool_uses (symmetric-algebra base-change and graded, affine-chart base-change iso; all generic sk-thm-p1 nodes, accepted), and the parent's uses of clauses (1)-(4). The math checks out with no Noetherian hypotheses. (1) The fibre product E=ker(N⊕A→B) is a comodule because C is flat (flat-tensor-exact, applied twice for coassociativity), and the induced map Sym_A E→Sym_B N preserves invariants and evaluation. (2) A flat kernel plus the exactness-detecting definition of faithful flatness gives a lift over A. (3) Localization exactness, then t(ε(q)−s)=0 with t∉𝔪 forces ε(q)∉𝔪. Lifts are combined in a common degree, using the maximal-ideal node twice. (4) Π B_i is faithfully flat via the 𝔪B≠B criterion; the finite-product tensor comparison and the A=0 / empty-cover cases are also handled. Edge cases tested: A=0, empty cover, trivial group, non-flat A→A/I. No new nodes and no duplicates (grep for geometrically reductive / power lifting found only reductive/field-level nodes). Alper is not available locally (report records WANTED); proof_origin=agent is correct; no SGA. FIX (C1/E5): step 5 applied step 1, which is stated for A_𝔪⊗_A–, to fraction-localizations M_𝔪 without citing that A_𝔪⊗_A P≅P_𝔪. I added [lem-weil-pbc-localization-tensor-product] (Mathlib leaf, 00DL) with the two-line argument, plus the explicit application of P(A_𝔪) to M_𝔪→A_𝔪. proof_deps and source place updated. Fixed item file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-invariant-power-base-change-descent.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.InvariantPowerBaseChangeDescent",
+  "declaration": "AlgebraicGeometry.InvariantPower.invariantPower_baseChange_descent",
+  "declarations": [
+   "AlgebraicGeometry.InvariantPower.coordinateGroup",
+   "AlgebraicGeometry.InvariantPower.baseChange",
+   "AlgebraicGeometry.InvariantPower.affineBaseChange",
+   "AlgebraicGeometry.InvariantPower.baseChangeCoordinateHopf",
+   "AlgebraicGeometry.InvariantPower.invariantPower_baseChange_descent"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/InvariantPowerBaseChangeDescent.lean",
+  "statement": "theorem invariantPower_baseChange_descent (A : CommRingCat.{u}) (H : Grp (Over (Spec A))) [IsAffine H.X.left] [Flat H.X.hom] [LocallyOfFinitePresentation H.X.hom] : (∀ (B : CommRingCat.{u}) (f : A ⟶ B), InvariantSymmetricPower.HasInvariantPowerLifting.{u, v, u} A Γ(H.X.left, ⊤) → InvariantSymmetricPower.HasInvariantPowerLifting.{u, v, u} B Γ((baseChange f H).X.left, ⊤)) ∧ (∀ (B : CommRingCat.{u}) (f : A ⟶ B), f.hom.FaithfullyFlat → InvariantSymmetricPower.HasInvariantPowerLifting.{u, v, u} B Γ((baseChange f H).X.left, ⊤) → InvariantSymmetricPower.HasInvariantPowerLifting.{u, v, u} A Γ(H.X.left, ⊤)) ∧ ((∀ m : MaximalSpectrum A, let B : CommRingCat.{u} := .of (Localization.AtPrime m.asIdeal) let f : A ⟶ B := CommRingCat.ofHom (algebraMap A (Localization.AtPrime m.asIdeal)) letI : HopfAlgebra B Γ((baseChange f H).X.left, ⊤) := baseChangeCoordinateHopf f H InvariantSymmetricPower.HasInvariantPowerLifting.{u, v, u} B Γ((baseChange f H).X.left, ⊤)) → InvariantSymmetricPower.HasInvariantPowerLifting.{u, v, u} A Γ(H.X.left, ⊤)) ∧ (∀ (I : Type u) [Finite I] (B : I → CommRingCat.{u}) (f : ∀ i : I, A ⟶ B i), (∀ i : I, Etale (Spec.map (f i))) → (∀ x : Spec A, ∃ (i : I) (y : Spec (B i)), (Spec.map (f i)).base y = x) → (∀ i : I, InvariantSymmetricPower.HasInvariantPowerLifting.{u, v, u} (B i) Γ((baseChange (f i) H).X.left, ⊤)) → InvariantSymmetricPower.HasInvariantPowerLifting.{u, v, u} A Γ(H.X.left, ⊤))",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returns against 6643b486659f and 4a69d74b2fc4: directly imports the now-landed definition owner Sheaf.AlgebraicGeometry.GroupScheme.InvariantSymmetricPowerLifting and applies its HasInvariantPowerLifting to the canonical coordinate Hopf algebra. No private coaction or lifting predicate is defined, and no dependency-node fix or replacement module is delivered. The four mathematical assertions are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1a912399",
+  "group": "NO",
+  "result": "pass",
+  "note": "NO d1a9 re-delivery fixes the returns of 6643/4a69: no local coaction or lifting predicate copy; imports the landed Q31 owner Sheaf.AlgebraicGeometry.GroupScheme.InvariantSymmetricPowerLifting and uses HasInvariantPowerLifting.{u,v,u} on the canonical Mathlib Hopf algebra Γ(H.X.left,⊤), the same interface as the landed ReductiveSymmetricPowerDvrReduction consumer. Node vs side-live: only lean and stmt_deps differ (+def-sfb-invariant-symmetric-power-lifting); statement, proof and proof_deps unchanged; lean.statement verbatim in the file; single sorry. Hypotheses: Grp (Over (Spec A)) with IsAffine/Flat/LFP (= affine fp over an affine base), no Noetherian or nontrivial assumption. (1) unrestricted f; (2) RingHom.FaithfullyFlat; (3) MaximalSpectrum with Localization.AtPrime and the canonical baseChangeCoordinateHopf instance; (4) Finite I : Type u (empty allowed), Etale (Spec.map), pointwise joint surjectivity. H_B is the actual mapGrp pullback group. Module universe v is the same in premise and conclusion and every construction the proof needs stays inside it. Edge cases A=0, empty cover, no maximal ideals and n=0 are covered. Helpers are real, docstrings carry source place and blueprint tag, all imports exist, no duplicate in side-live. No compile run: no file changed; the worker reports a clean scompile."
+ }
+}

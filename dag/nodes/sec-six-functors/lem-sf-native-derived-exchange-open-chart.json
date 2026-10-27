@@ -1,0 +1,163 @@
+{
+ "id": "lem-sf-native-derived-exchange-open-chart",
+ "kind": "statement",
+ "title": "Native derived exchange commutes with restriction to an open chart",
+ "statement": "Fix a prime $l$ and a Cartesian square $v:X'\\to X$, $p':X'\\to Y'$, $p:X\\to Y$, $g:Y'\\to Y$ [def-weil-pbc-cartesian-square]. Let $i:A\\to Y$ and $j:B\\to Y'$ be open immersions [def-weil-open-immersion], and let $h:B\\to A$ satisfy $hi=jg$. Put $X_A=X\\times_Y A$, $p_A:X_A\\to A$, and $X_{AB}=X_A\\times_A B$. For every ordinary unbounded native adic complex $M$ on $X$ [def-sf-native-weil-derived-framework], exact restriction along $j$ of the specified native exchange for the original square [def-sf-native-derived-exchange-map] is isomorphic, in the arrow category of $D(\\operatorname{AdicSheaf}(l,B))$, to the native exchange for the canonical Cartesian square over $h$, evaluated on exact restriction of $M$ to $X_A$. There is no properness, finiteness, boundedness, constructibility, or field hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-adjunction-mate",
+  "def-sf-native-derived-exchange-map",
+  "def-weil-open-immersion",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "Form X_A = X times_Y A and X_AB = X_A times_A B. Use the universal property of the given Cartesian square to construct t:X_AB to X prime. Pullback pasting and cancellation show that the square with t and j is Cartesian; hence t and the projection X_A to X are open immersions. These constructions use the actual canonical pullback projections, not arbitrarily chosen witnesses.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  },
+  {
+   "text": "Identify each specified native derived exchange along an open pullback with the already constructed adicDerivedBaseChangeIso. On sheaves, taking the two consecutive mates of the native pullback compositor gives the native direct-image compositor, by iterated_mateEquiv_conjugateEquiv and the conjugate equations for adicUpperStarComp and adicUpperStarCongr. Apply derived_exact_forget_mate to this equality. Its exactness and K-injective-preservation hypotheses hold for open restriction. Thus both vertical derived exchange maps used below are isomorphisms.",
+   "uses": [
+    "def-sf-native-derived-exchange-map",
+    "def-sf-native-adic-derived-open-base-change",
+    "lem-sf-derived-exact-forget-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  },
+  {
+   "text": "Prove the six-face cube for native inverse images on sheaves. Normalize a triple inverse image through the inverse image of its composite. The native associativity law adicUpperStarComp_hom_app_comp_adicUpperStarComp_hom_app and compatibility with equality transport show that changing either the inner pair or the outer pair gives the same normalized map. The two routes around the cube both reach the normalized map for t, v, p. Cancel the initial normalization isomorphism. Apply mapDerivedCategory_exactCube to transport this equality to the exact derived inverse images.",
+   "uses": [
+    "def-sf-native-derived-exchange-map",
+    "lem-fix-site-open-exchange-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  },
+  {
+   "text": "Apply exchangeMate_cube to the six derived inverse-image faces and the four inverse/direct-image adjunctions for p, p prime, p_A and q. Its cube hypothesis is the preceding exact derived cube. The two open exchange maps are isomorphisms by the preceding identification. Compose them with the inverse-image comparison isomorphisms to obtain the source and target comparisons. The mate-cube equation is precisely Arrow.isoMk commutativity, giving the claimed isomorphism of arrows for every unbounded complex M.",
+   "uses": [
+    "def-sf-native-derived-exchange-map",
+    "def-sf-native-adic-derived-open-base-change",
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-open-immersion",
+  "def-sf-native-derived-exchange-map",
+  "def-sf-native-adic-derived-open-base-change",
+  "lem-sf-derived-exact-forget-mate",
+  "lem-fix-site-open-exchange-localization",
+  "lem-weil-pbc-exchange-mate-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps; E9: explicit native compositor cube, exact-derived mate identification, and mate-cube assembly (2026-10-27)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived base change for sheaves is compatible with open restriction and with an exact equivalence of coefficient modules",
+   "results": "8 hits: generic sheaf-module restriction and adjunction comparisons; none states compatibility for the native derived adic exchange.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"mate\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adicDerivedBaseChange|nativeDerivedExchange|adicChartSquare",
+   "results": "0 hits in Mathlib. The adopted source contains adicDerivedBaseChangeIso for open base change, but no compatibility theorem for the specified exact-pullback-derived mate.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "W3",
+  "item": "Sheaf.WeilSheaf.GeometricProperBaseChange",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps; no exact blueprint match in searches for native derived exchange, affine proper base change, adic cover isomorphism, or adic open base change.",
+   "via": [
+    "lem-sf-geometric-native-proper-base-change",
+    "lem-sf-native-weil-proper-natural-base-change",
+    "lem-sf-native-weil-compact-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeBaseChangeOpenChart",
+  "file": "lean/Sheaf/WeilSheaf/NativeBaseChangeOpenChart.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.adicDerivedBaseChange_openChart",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.adicChartSquare",
+   "AlgebraicGeometry.ProEtale.adicDerivedBaseChange_openChart"
+  ],
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-27",
+  "statement": "theorem adicDerivedBaseChange_openChart (l : ℕ) [Fact l.Prime]\n    {X' X Y' Y A B : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}\n    {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback v p' p g)\n    (i : A ⟶ Y) (j : B ⟶ Y') [IsOpenImmersion i] [IsOpenImmersion j]\n    (h : B ⟶ A) (w : h ≫ i = j ≫ g)\n    (M : DerivedCategory (AdicSheaf l X)) :\n    Nonempty (Arrow.mk ((adicUpperStar l j).mapDerivedCategory.map\n        ((adicDerivedBaseChange l sq.toCommSq).app M)) ≅\n      Arrow.mk ((adicDerivedBaseChange l (adicChartSquare p i h)).app\n        ((adicUpperStar l (pullback.fst p i)).mapDerivedCategory.obj M)))"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cbdd2",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261027T050651-L-251723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T123434-L-2298214",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

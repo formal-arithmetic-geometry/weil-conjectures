@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-pseudodifferential-asymptotic-sum",
+ "kind": "statement",
+ "title": "Asymptotic summation in the pseudodifferential order filtration",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $N$ be a compact oriented smooth manifold without boundary of dimension $m\\geq1$, with a smooth Riemannian metric and its positive volume form $dV$. Let $E,F,G$ be smooth finite-rank real vector bundles. Use the distribution spaces, symbol classes $S^r$ and operator classes $\\Psi^r$ of [def-sfb-symbol-pseudodifferential-operators]. Let $r\\in\\mathbf Z$ and let $(T_j)_{j\\geq0}$ be any sequence of real operators with $T_j\\in\\Psi^{r-j}(E,F)$. There is a single real operator $T\\in\\Psi^r(E,F)$ such that for every integer $L\\geq1$, $$T-\\sum_{j=0}^{L-1}T_j\\in\\Psi^{r-L}(E,F).$$ The differences are differences of continuous real-linear maps $\\mathcal D\\prime(E)\\to\\mathcal D\\prime(F)$ with the distributional actions in the cited definition. No convergence of the unmodified series $\\sum_jT_j$ is assumed.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Demailly, Part I §3.B, printed pp.12–14 (PDF pages 24–26); WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf; paragraph following Definition 3.8, printed pp.13–14: the instruction to choose a symbol asymptotic to the expansion; general decreasing-order operator formulation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite charts, cutoffs and compact sets of [lem-sfb-symbol-common-atlas] once for $E,F$. For a tuple of chart symbols write $Q(a)=\\sum_i\\chi_i\\operatorname{Re}\\operatorname{Op}(a_i)\\psi_i$. Each term is the operator of the amplitude $\\chi_i(x)a_i(x,\\xi)\\psi_i(y)$, extended by zero: it vanishes outside the compact set $\\operatorname{supp}\\chi_i\\times\\operatorname{supp}\\psi_i$, and its estimates are uniform because those of $a_i$ hold on the compact set $\\operatorname{supp}\\chi_i$. By [lem-sfb-compact-oscillatory-amplitude-reduction] the oscillatory limit exists on chart tests, the term and its transpose for the section–dual-density pairing are continuous, the transpose of a test is supported in $\\operatorname{supp}\\psi_i$, the action on all distributions is by transposition and so is continuous for the strong topologies, and the real part is the replacement $a\\mapsto(a+a^\\natural)/2$ on distributions. Hence $Q(a)\\in\\Psi^s$ by the definition when all $a_i\\in S^s$. Limits of sums are sums of limits, so on tests, on transposes and therefore on all distributions $Q$ is real-linear in finite real combinations of tuples, also of different orders. Finite sums and differences in $\\Psi^s$ follow directly by concatenating their defining finite representations and adding smooth kernels; $\\Psi^{s-1}\\subset\\Psi^s$ follows from $(1+|\\xi|)^{s-1-|\\beta|}\\leq(1+|\\xi|)^{s-|\\beta|}$. These observations apply to the given distributional maps.",
+   "uses": [
+    "lem-sfb-symbol-common-atlas",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally. Supplemental Demailly, Differential and pseudodifferential operators on manifolds, section 3, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf; 3.5–3.6, p.7; fixed-atlas localization."
+   }
+  },
+  {
+   "text": "Inductively construct tuples $a_j\\in\\prod_i S^{r-j}$ supported in the fixed $K_i$, and operators $R_j\\in\\Psi^{r-j}$, as follows. Set $R_0=0$. Given $R_j$, the sum $A_j=T_j+R_j$ is of order $r-j$ by concatenation of representations. Apply [lem-sfb-symbol-common-atlas] to $A_j$ with $s=r-j$ and define $R_{j+1}=A_j-Q(a_j)\\in\\Psi^{r-j-1}$. The base has order $r$ since zero has the empty representation. Summing the identities $Q(a_j)=T_j+R_j-R_{j+1}$ for $0\\leq j<L$ cancels the intermediate $R_j$ and gives $$\\sum_{j<L}Q(a_j)=\\sum_{j<L}T_j-R_L.$$ This is an identity of maps on all distributions, and it never requires summing the remainders infinitely.",
+   "uses": [
+    "lem-sfb-symbol-common-atlas",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally. Supplemental Demailly, Differential and pseudodifferential operators on manifolds, section 3, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf; 3.6–3.7, pp.7–8; agent-written order-by-order correction recurrence."
+   }
+  },
+  {
+   "text": "For each of the finitely many indices $i$, apply [lem-sfb-symbol-borel-cutoff] to $(a_{j,i})_{j\\geq0}$, using the common compact support $K_i$ and its global estimates supplied at every induction stage. Obtain one $b_i\\in S^r$ such that $c_{L,i}=b_i-\\sum_{j<L}a_{j,i}\\in S^{r-L}$ for every $L\\geq1$. Set $T=Q(b)$. By [lem-sfb-compact-oscillatory-amplitude-reduction] and the definition, as in step 1, $T$ is a continuous real-linear map on the strong distribution spaces, belongs to $\\Psi^r$, and real-linearity of $Q$ from step 1 gives $$T-\\sum_{j<L}Q(a_j)=Q(c_L)\\in\\Psi^{r-L}.$$ Real parts are taken only at quantization, so complex Borel symbols give real operators without any symmetry hypothesis.",
+   "uses": [
+    "lem-sfb-symbol-borel-cutoff",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally. Supplemental Demailly, Differential and pseudodifferential operators on manifolds, section 3, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf; 3.7, pp.7–8, matrix symbol summation, followed by 3.5 and transpose action."
+   }
+  },
+  {
+   "text": "For any $L\\geq1$, insert the telescoping identity of step 2 into step 3: $$T-\\sum_{j<L}T_j=Q(c_L)-R_L.$$ Both terms have order $r-L$; their difference has a defining representation obtained by concatenating those of the two terms and negating the second symbols and kernel. Thus it is in $\\Psi^{r-L}$. The same $T$ works for every $L$. Only finitely many operator identities were used for each $L$; no convergence of $\\sum_jT_j$ was asserted.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally. Supplemental Demailly, Differential and pseudodifferential operators on manifolds, section 3, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf; 3.7, pp.7–8; elementary assembly in the order filtration."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-symbol-common-atlas",
+  "lem-sfb-compact-oscillatory-amplitude-reduction",
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-symbol-borel-cutoff"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally. Follows the online supplemental Demailly course, section 3.7, pp.7–8; the recurrence handles arbitrary distributional operators and their changing local representations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Borel asymptotic summation of a sequence of pseudodifferential operators of decreasing orders on a compact manifold",
+   "results": "{\"t\": \"2026-10-24T03:28:40Z\", \"tool\": \"leanfinder\", \"query\": \"Borel asymptotic summation of a sequence of pseudodifferential operators of decreasing orders on a compact manifold\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.HasTemperateGrowth.sum\", \"contDiff_tsum_of_eventually\", \"ContDiffMapSupportedIn.seminorm_le_iff_withOrder\", \"Function.HasTemperateGrowth.add\", \"Function.HasTemperateGrowth.fun_add\", \"SchwartzMap.sum_apply\", \"SchwartzMap.decay_add_le_aux\", \"Asymptotics.IsBigO.comp_summable\"], \"digest\": \"2dc7079b2a36a924\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-series convergence, Taylor-series predicates and Landau asymptotics do not supply Borel summation of pseudodifferential symbols of decreasing orders."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"asymptotic\"",
+   "results": "{\"t\": \"2026-10-24T03:28:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"asymptotic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Asymptotics.«term_=O[_]_»\", \"Asymptotics.«term_=o[_]_»\", \"Asymptotics.«term_=Θ[_]_»\", \"Asymptotics.IsBigO\", \"Asymptotics.IsLittleO\", \"Asymptotics.IsTheta\", \"Asymptotics.IsBigOWith\", \"Asymptotics.IsBigO.of_norm_le\"], \"digest\": \"590fb3e846d870fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-series convergence, Taylor-series predicates and Landau asymptotics do not supply Borel summation of pseudodifferential symbols of decreasing orders."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|asymptoticSummation|symbol.*summation|summation.*symbol",
+   "results": "{\"t\": \"2026-10-24T03:28:38Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|asymptoticSummation|symbol.*summation|summation.*symbol\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-series convergence, Taylor-series predicates and Landau asymptotics do not supply Borel summation of pseudodifferential symbols of decreasing orders."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a pseudodifferential operator with a prescribed asymptotic expansion in symbols of successively lower order",
+   "results": "{\"t\": \"2026-10-24T03:28:39Z\", \"tool\": \"leansearch\", \"query\": \"There exists a pseudodifferential operator with a prescribed asymptotic expansion in symbols of successively lower order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFTaylorSeriesUpTo\", \"HasFTaylorSeriesUpToOn.of_le\", \"HasFTaylorSeriesUpToOn\", \"hasFTaylorSeriesUpTo_top_iff'\", \"hasFTaylorSeriesUpToOn_top_iff_right\", \"HasFPowerSeriesAt\", \"CPolynomialAt\", \"ContDiff\"], \"digest\": \"46ee3c44c60f9893\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-series convergence, Taylor-series predicates and Landau asymptotics do not supply Borel summation of pseudodifferential symbols of decreasing orders."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel lemma for matrix symbols of class S one zero with prescribed asymptotic expansion",
+   "results": "{\"t\": \"2026-10-24T03:28:41Z\", \"tool\": \"leanfinder\", \"query\": \"Borel lemma for matrix symbols of class S one zero with prescribed asymptotic expansion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HurwitzKernelBounds.isBigO_atTop_F_int_zero_sub\", \"WeakFEPair.hf_zero\", \"HurwitzKernelBounds.isBigO_atTop_F_nat_zero_sub\", \"WeakFEPair.hf_zero'\", \"HurwitzZeta.isBigO_atTop_evenKernel_sub\", \"Asymptotics.IsBigO.continuousMultilinearMap_apply_eq_zero\", \"FormalMultilinearSeries.taylorComp_sub_taylorComp_isBigO\", \"FormalMultilinearSeries.taylorComp_sub_taylorComp_isLittleO\"], \"digest\": \"60191bb798886e77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-series convergence, Taylor-series predicates and Landau asymptotics do not supply Borel summation of pseudodifferential symbols of decreasing orders."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Asymptotic summation of arbitrary pseudodifferential operators of decreasing integer orders on compact manifolds",
+   "results": "{\"t\": \"2026-10-24T04:14:19Z\", \"tool\": \"leanfinder\", \"query\": \"Asymptotic summation of arbitrary pseudodifferential operators of decreasing integer orders on compact manifolds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.isBigO_cocompact_zpow\", \"SchwartzMap.isBigO_cocompact_zpow_neg_nat\", \"SchwartzMap.compCLM\", \"SchwartzMap.isBigO_cocompact_rpow\", \"Function.HasTemperateGrowth.sum\", \"Function.HasTemperateGrowth.add\", \"Function.HasTemperateGrowth.fun_add\", \"SchwartzMap.sum_apply\"], \"digest\": \"7b7cdb587fdce0bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|quantization|SymbolClass",
+   "results": "{\"t\": \"2026-10-24T04:15:04Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|quantization|SymbolClass\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|asymptoticSummation|SymbolClass",
+   "results": "{\"t\": \"2026-10-24T04:15:04Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|asymptoticSummation|SymbolClass\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "oscillatory|quantization|pseudodifferential",
+   "results": "{\"t\": \"2026-10-24T04:15:04Z\", \"tool\": \"grep\", \"query\": \"oscillatory|quantization|pseudodifferential\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "ContDiffBump|HasTemperateGrowth.*mul",
+   "results": "{\"t\": \"2026-10-24T04:15:04Z\", \"tool\": \"grep\", \"query\": \"ContDiffBump|HasTemperateGrowth.*mul\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Convolution.lean\", \"Mathlib/Analysis/Convolution.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/TemperateGrowth.lean\", \"Mathlib/Analysis/Distribution/TemperateGrowth.lean\", \"Mathlib/Analysis/Calculus/BumpFunction/FiniteDimension.lean\", \"Mathlib/Analysis/Calculus/BumpFunction/FiniteDimension.lean\", \"Mathlib/Analysis/Calculus/BumpFunction/FiniteDimension.lean\"], \"digest\": \"dba48d0f124584ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sequence of pseudodifferential operators of orders r minus j has an asymptotic sum",
+   "results": "{\"t\": \"2026-10-24T04:15:05Z\", \"tool\": \"leansearch\", \"query\": \"Every sequence of pseudodifferential operators of orders r minus j has an asymptotic sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Asymptotics.IsLittleO.sum\", \"summable_of_isEquivalent_nat\", \"Asymptotics.IsLittleO.sum_range\", \"PowerSeries.le_order_prod\", \"FormalMultilinearSeries.order\", \"PowerSeries.WithPiTopology.summable_of_tendsto_order_atTop_nhds_top\", \"Asymptotics.IsBigOWith.sum\", \"PowerSeries.order_prod\"], \"digest\": \"d63bd2945696df3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudodifferential\"",
+   "results": "{\"t\": \"2026-10-24T04:15:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudodifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"oscillatory\"",
+   "results": "{\"t\": \"2026-10-24T04:15:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"oscillatory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContDiffBump, ContDiff",
+   "results": "{\"t\": \"2026-10-24T04:15:05Z\", \"tool\": \"loogle\", \"query\": \"ContDiffBump, ContDiff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"ContDiffBump.contDiff\", \"ContDiff.contDiffBump\", \"ContDiffBump.contDiff_normed\"], \"digest\": \"1aedd53d31c3d780\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing coordinates in a localized pseudodifferential operator preserves the symbol order modulo one lower order",
+   "results": "{\"t\": \"2026-10-24T04:15:05Z\", \"tool\": \"leansearch\", \"query\": \"Changing coordinates in a localized pseudodifferential operator preserves the symbol order modulo one lower order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffWithinAt.coordChange\", \"contMDiffOn_continuousLinearMapCoordChange\", \"ContMDiffAt.coordChange\", \"ContMDiff.coordChange\", \"contMDiffOn_coordChangeL\", \"ContMDiff.coordChangeL\", \"ContMDiffOn.coordChangeL\", \"MDifferentiable.coordChangeL\"], \"digest\": \"e97ad9aedddcad3d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An oscillatory integral operator with symbol estimates acts continuously on the strong dual of test functions",
+   "results": "{\"t\": \"2026-10-24T04:15:05Z\", \"tool\": \"leansearch\", \"query\": \"An oscillatory integral operator with symbol estimates acts continuously on the strong dual of test functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedSpace.Dual.continuousLinearMapToWeakDual\", \"NormedSpace.Dual.toWeakDual_continuous\", \"SchwartzMap.integralCLM\", \"VectorFourier.fourierIntegral_continuous\", \"SchwartzMap.fourierTransformCLM\", \"TestFunction.continuous_iff_continuous_comp\", \"SchwartzMap.instContinuousFourier\", \"ContinuousFourier\"], \"digest\": \"b3ea775fb5607c64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a symbol of order s the dilated high frequency cutoff has order s plus one seminorm bounded by epsilon",
+   "results": "{\"t\": \"2026-10-24T04:15:05Z\", \"tool\": \"leansearch\", \"query\": \"For a symbol of order s the dilated high frequency cutoff has order s plus one seminorm bounded by epsilon\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"approxOrderOf\", \"SchwartzMap.norm_iteratedFDeriv_le_seminorm\", \"SchwartzMap.seminorm_le_bound\", \"Seminorm.bound_of_shell_sup\", \"Asymptotics.IsBigO.of_norm_left\", \"Asymptotics.IsBigOWith.of_norm_left\", \"Function.hasTemperateGrowth_iff_isBigO\", \"Function.HasTemperateGrowth.isBigO_uniform\"], \"digest\": \"e4b72c2e7ae90b46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite fixed coordinate atlas represents any pseudodifferential operator modulo an operator one order lower",
+   "results": "{\"t\": \"2026-10-24T04:15:07Z\", \"tool\": \"leanfinder\", \"query\": \"A finite fixed coordinate atlas represents any pseudodifferential operator modulo an operator one order lower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffFiberwiseLinear.locality_aux₂\", \"Manifold.termCₛ^_⟮_;_,_⟯\", \"contDiffPregroupoid\", \"Manifold.termCMDiff____\", \"Continuous.exists_contMDiff_approx_and_eqOn\", \"Continuous.exists_contMDiff_approx\", \"ContMDiffFiberwiseLinear.locality_aux₁\", \"Manifold.termCMDiff[_]____\"], \"digest\": \"bacbf962185a3609\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localized quantization of a smooth symbol defines a continuous map on distributions by transposition",
+   "results": "{\"t\": \"2026-10-24T04:15:08Z\", \"tool\": \"leanfinder\", \"query\": \"Localized quantization of a smooth symbol defines a continuous map on distributions by transposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TemperedDistribution.smulLeftCLM\", \"Distribution.mapCLM\", \"Distribution.mapCLM_apply\", \"SchwartzMap.toTemperedDistributionCLM\", \"TestFunction.mkCLM_apply\", \"SchwartzMap.mkLM\", \"SchwartzMap.pairing\", \"TemperedDistribution.instContinuousLineDeriv\"], \"digest\": \"2dc18c26335752d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth high frequency cutoff makes a symbol arbitrarily small in the seminorm of order one higher",
+   "results": "{\"t\": \"2026-10-24T04:15:09Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth high frequency cutoff makes a symbol arbitrarily small in the seminorm of order one higher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffMapSupportedIn.seminorm_eq_bot_of_gt\", \"SchwartzMap.seminormAux\", \"SchwartzMap.le_seminormAux\", \"SchwartzMap.le_seminorm'\", \"SchwartzMap.seminormAux_le_bound\", \"SchwartzMap.norm_pow_mul_le_seminorm\", \"SchwartzMap.seminorm_le_bound'\", \"SchwartzMap.one_add_le_sup_seminorm_apply\"], \"digest\": \"cd74d3d1b10876de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any fixed finite atlas a pseudodifferential operator has compactly supported local symbols modulo one lower order",
+   "results": "{\"t\": \"2026-10-24T04:26:33Z\", \"tool\": \"leanfinder\", \"query\": \"For any fixed finite atlas a pseudodifferential operator has compactly supported local symbols modulo one lower order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExistsContDiffBumpBase.u_compact_support\", \"Continuous.exists_contMDiff_approx\", \"ContDiffMapSupportedInClass\", \"SmoothBumpFunction.hasCompactSupport\", \"ExistsContDiffBumpBase.w_compact_support\", \"Continuous.exists_contMDiff_approx_and_eqOn\", \"HasCompactSupport.toSchwartzMap\", \"TestFunction.hasCompactSupport\"], \"digest\": \"4e6ab252944c5943\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dilated smooth frequency cutoff times a symbol satisfies uniform weighted derivative bounds with a factor epsilon",
+   "results": "{\"t\": \"2026-10-24T04:26:34Z\", \"tool\": \"leanfinder\", \"query\": \"The dilated smooth frequency cutoff times a symbol satisfies uniform weighted derivative bounds with a factor epsilon\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.seminormAux\", \"Function.HasTemperateGrowth\", \"SchwartzMap.decay\", \"SchwartzMap.seminormAux_le_bound\", \"SchwartzMap.decay'\", \"SchwartzMap.le_seminormAux\", \"SchwartzMap.bounds_nonempty\", \"SchwartzMap.decay_smul_aux\"], \"digest\": \"dabd26ab508fc958\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of a localized matrix symbol quantization is continuous on smooth test densities and induces a strong dual continuous distribution operator",
+   "results": "{\"t\": \"2026-10-24T04:26:37Z\", \"tool\": \"leanfinder\", \"query\": \"The transpose of a localized matrix symbol quantization is continuous on smooth test densities and induces a strong dual continuous distribution operator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffMapSupportedIn.structureMapCLM\", \"Distribution.mapCLM\", \"TestFunction.mkCLM_apply\", \"TestFunction.mkCLM\", \"SchwartzMap.toTemperedDistributionCLM\", \"TemperedDistribution.instContinuousLineDeriv\", \"TemperedDistribution.instContinuousFourierInv\", \"TemperedDistribution.instContinuousFourier\"], \"digest\": \"438e209befe959ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|symbol.*summation|asymptoticSummation|SymbolClass",
+   "results": "{\"t\": \"2026-10-24T04:28:03Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|symbol.*summation|asymptoticSummation|SymbolClass\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a smooth matrix symbol asymptotic to every sequence of symbols of orders r minus j",
+   "results": "{\"t\": \"2026-10-24T04:28:04Z\", \"tool\": \"leansearch\", \"query\": \"There exists a smooth matrix symbol asymptotic to every sequence of symbols of orders r minus j\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.formallySmooth\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"SchwartzMap.term𝓢(_,_)\", \"contMDiffOn_infty\", \"RingHom.Smooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"instIsContMDiffRiemannianBundleOfSomeENatTopOfLEInfty\", \"minSmoothness_def\"], \"digest\": \"73ac10e5e0103165\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel asymptotic summation for matrix symbols of class S one zero with a fixed compact spatial support",
+   "results": "{\"t\": \"2026-10-24T04:28:05Z\", \"tool\": \"leanfinder\", \"query\": \"Borel asymptotic summation for matrix symbols of class S one zero with a fixed compact spatial support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeakFEPair.hg_top\", \"tendsto_integral_exp_inner_smul_cocompact_of_continuous_compact_support\", \"WeakFEPair.hf_zero'\", \"HurwitzKernelBounds.isBigO_atTop_F_int_zero_sub\", \"WeakFEPair.hf_zero\", \"isBigO_norm_restrict_cocompact\", \"Asymptotics.IsBigO.continuousMultilinearMap_apply_eq_zero\", \"summable_mul_of_bigO_atTop\"], \"digest\": \"655f70dc90a3d51e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sequence of smooth matrix symbols with decreasing orders admits an asymptotic expansion with prescribed terms",
+   "results": "{\"t\": \"2026-10-24T04:29:54Z\", \"tool\": \"leansearch\", \"query\": \"Every sequence of smooth matrix symbols with decreasing orders admits an asymptotic expansion with prescribed terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.apply_eq_zero_of_lt_order\", \"smoothingSeminormSeq\", \"HasFTaylorSeriesUpTo\", \"Asymptotics.term_=o[_]_\", \"HasFTaylorSeriesUpToOn\", \"HasFTaylorSeriesUpTo.of_le\", \"HasFTaylorSeriesUpToOn.of_le\", \"ContinuousMultilinearMap.hasFTaylorSeriesUpTo_iteratedFDeriv\"], \"digest\": \"92d31b2f90ecbb80\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide Landau or Taylor asymptotics, smooth bump functions, coordinate changes, and Fourier/test-space maps; none states asymptotic summation for the operator filtration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-distribution-parametrix",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: paragraph following Definition 3.8, printed pp.13–14: the instruction to choose a symbol asymptotic to the expansion; general decreasing-order operator formulation.",
+   "via": [
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pseudodifferential-asymptotic-sum",
+  "worker": "stage1",
+  "summary": "Split by a fixed-atlas order-by-order correction recurrence, matrix-symbol Borel summation, and localized distributional quantization through the existing amplitude-reduction node. Two statement-only supporting nodes (the maintainer reader dropped a third, a special case of lem-sfb-compact-oscillatory-amplitude-reduction). The item statement and its definition dependencies are unchanged. Explicit cancellation avoids summing arbitrary smoothing remainders.",
+  "blueprint": "The inherited from.place chain locates the analytic parametrix prerequisite beneath the direct-image construction. Steps 1–4 realize its asymptotic-summation input by Demailly section 3.7; whole-blueprint searches found no matching analytic node. blueprint_refs ancestor reports None, retained as imported."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-78efa59b9",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-78efa59b9 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, def-sfb-symbol-pseudodifferential-operators and the base neighbours (amplitude-reduction, local-quantization-coordinate-change, fourier-product-remainder, leading-calculus with its proof, residual-kernel) in full. Demailly's text is absent locally (recorded as WANTED, proofs marked agent-written), so I checked every statement against the standard S^m_{1,0} calculus (Hörmander 18.1.3, 18.1.7, 18.1.17). Item statement unchanged. Step 2's induction is correct: R_0=0 is in Ψ^r by the empty sum, A_j=T_j+R_j is in Ψ^{r-j}, R_{j+1} is in Ψ^{r-j-1}, and the finite telescoping sum gives Σ_{j<L}Q(a_j)=ΣT_j−R_L. Step 3: the Borel hypotheses (x-support in K_i, global S^{r-j} estimates) are exactly what common-atlas supplies, and T=Q(b) with T−ΣQ(a_j)=Q(c_L). Step 4: Q(c_L)−R_L is in Ψ^{r-L}; elementary. Small cases checked: L=1, all T_j smoothing, finitely many nonzero T_j, negative r, rank-0 bundles, empty N, empty K. symbol-borel-cutoff is true and not a duplicate. symbol-common-atlas is true (pseudolocality plus coordinate change plus amplitude-to-left-symbol reduction mod S^{s-1}), is not stated by any existing node, and is not a restated clause of the item. FIX for C5 (one repairable fault): localized-symbol-distribution-action is a special case of the existing base node lem-sfb-compact-oscillatory-amplitude-reduction applied to the amplitude χ(x)a(x,ξ)ψ(y). That node gives the continuous transpose supported in supp ψ, the strong-dual continuity, and Re=(a+a^♮)/2; Ψ^s membership then follows from the definition, and linearity follows from limits of sums. The approved leading-calculus split uses that node in exactly this way. The node is dropped; item steps 1 and 3 now cite amplitude-reduction with the specialization written out, proof_deps is the union of the uses, and the summary is updated. Statement and stmt_deps are unchanged. No SGA, no tool_uses, no cycle.; 1 file(s) fixed by the reviewer"
+ }
+}

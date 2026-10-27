@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-strong-grading-torsor-algebra",
+ "kind": "statement",
+ "title": "Strongly graded commutative algebras are diagonalizable torsors",
+ "statement": "Let $R$ be a commutative ring, $M$ a finitely generated additive abelian group, and $A$ a commutative $R$-algebra. Suppose $A$ has $R$-submodules $A_m$ for $m\\in M$ such that every element is a unique finite sum of elements of $A_m$, $1\\in A_0$, the image of $R$ lies in $A_0$, and $A_mA_n\\subseteq A_{m+n}$. Put $B=A_0$, with its induced commutative $R$-algebra structure. Assume that for every $m\\in M$ there are finitely many $u_{m,j}\\in A_m$, $v_{m,j}\\in A_{-m}$ with $\\sum_j u_{m,j}v_{m,j}=1$. Then $B\\hookrightarrow A$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map] and of finite presentation as a ring map [def-weil-pbc-finitely-presented-algebra]. For the group algebra $R[M]$ [def-sfb-ring-diagonalizable-group], the $A$-algebra map\n$$\\beta:A\\otimes_B A\\longrightarrow A\\otimes_R R[M],\\qquad a\\otimes b_m\\longmapsto ab_m\\otimes e_m\\quad(b_m\\in A_m)$$\nis an isomorphism; tensor products carry their usual commutative algebra structure [lem-weil-pbc-algebra-tensor-pushout-universal-property]. In geometric terms, with spectra as in [def-weil-affine-spectrum] and fibre products as in [def-pc-fibre-product], $q:\\operatorname{Spec}A\\to\\operatorname{Spec}B$ is affine, faithfully flat and finitely presented [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-pbc-scheme-conventions], and the right $D_R(M)$-action defined by $b_m\\mapsto b_m\\otimes e_m$ gives an isomorphism\n$$\\operatorname{Spec}A\\times_{\\operatorname{Spec}R}D_R(M)\\xrightarrow{\\sim}\\operatorname{Spec}A\\times_{\\operatorname{Spec}B}\\operatorname{Spec}A,\\qquad(x,t)\\mapsto(x,xt).$$\nFor every ring map $R\\to R'$, the natural maps $A_m\\otimes_RR'\\to A'=A\\otimes_RR'$ are injective and give a grading with degree-zero algebra $B'=B\\otimes_RR'$; the same hypotheses, conclusions and the displayed comparison hold for $A',B',R'$, with the comparison equal to the base change of $\\beta$. The zero ring and the trivial group $M$ are allowed. No Noetherian, reducedness, torsion-freeness or finite-presentation assumption on $R\\to A$ is made.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0EKK, label lemma-complete-reducibility-Gm, and example-Gm-on-affine supply the grading/action dictionary only. This strong-grading algebra theorem is an agent-formulated auxiliary, not the assertion of that tag; its full independent argument is retained in report.md. It supplies the affine quotient input assumed in Conrad, Reductive group schemes, Lemma 3.3.1(2) and Lemma 3.3.2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The degree-zero part $B$ is a unital subalgebra, and multiplication makes each $A_m$ a $B$-module. Write $a=\\sum_m a_m$ for the given unique finite decomposition; the maps $\\pi_m:a\\mapsto a_m$ are $B$-linear, because multiplication by $B=A_0$ preserves every degree. Choose the assumed finite unit expression $(u_{m,j},v_{m,j})_{j\\in J_m}$ for each $m$. Let $I=\\{(m,j):m\\in M,j\\in J_m\\}$ and let $F=\\bigoplus_I B$ be the free $B$-module of finite coefficient families. Define $i:A\\to F$ by $i(a)_{m,j}=v_{m,j}a_m\\in B$, and $p:F\\to A$ by $p(c)=\\sum_{m,j}c_{m,j}u_{m,j}$. Both are $B$-linear and $ (p\\circ i)(a)=\\sum_m a_m\\sum_jv_{m,j}u_{m,j}=a$. These formulas are finite because $a$ has finite homogeneous support and each $J_m$ is finite. Explicitly $F\\cong A\\oplus\\ker p$ by $c\\mapsto(p(c),c-ip(c))$, with inverse $(a,k)\\mapsto i(a)+k$. Thus $A$ is a direct summand of a free $B$-module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent argument from the stated grading and unit expressions; compare Tag 0EKK, lemma-complete-reducibility-Gm, for degree projections only."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-projective-module-flat] to the direct-summand presentation just constructed: $A$ is flat over $B$. For a maximal ideal $\\mathfrak m\\subset B$, if $1=\\sum_l b_l a_l$ with $b_l\\in\\mathfrak m$ and $a_l\\in A$, apply the $B$-linear projection $\\pi_0$ to obtain $1=\\sum_l b_l\\pi_0(a_l)\\in\\mathfrak m$, a contradiction. Hence $\\mathfrak m A\\ne A$ for every maximal ideal, and [lem-weil-pbc-flat-faithfully-flat-maximal-ideals] proves faithful flatness of $B\\to A$.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 051G (lemma-local-artinian-characterize-flat, projective modules are flat) and 00HP (lemma-ff), (4) implies (1)."
+   }
+  },
+  {
+   "text": "Use the basis and Hopf operations in [def-sfb-ring-diagonalizable-group]. Define $\\rho:A\\to A\\otimes_R R[M]$ by $\\rho(a)=\\sum_m a_m\\otimes e_m$. It is $R$-linear, preserves the unit, and is multiplicative: for homogeneous $a_m,b_n$, both $\\rho(a_mb_n)$ and $\\rho(a_m)\\rho(b_n)$ equal $a_mb_n\\otimes e_{m+n}$; expand finite sums for general inputs. Moreover $(\\rho\\otimes1)\\rho(a_m)=(1\\otimes\\Delta)\\rho(a_m)=a_m\\otimes e_m\\otimes e_m$, and $(1\\otimes\\epsilon)\\rho(a_m)=a_m$. Thus it defines the asserted right action. Since $\\rho(b)=b\\otimes e_0$ for $b\\in B$, the two $B$-algebra maps into $A\\otimes_RR[M]$ given by $a\\mapsto a\\otimes e_0$ and $\\rho$ agree on $B$. The tensor pushout [lem-weil-pbc-algebra-tensor-pushout-universal-property] therefore gives the $A$-algebra map $\\beta$ of the statement, with its displayed formula.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent finite-sum version of example-Gm-on-affine; the Hopf formulas are those of the cited definition."
+   }
+  },
+  {
+   "text": "The $A$-module $A\\otimes_RR[M]$ consists uniquely of finite sums $\\sum_m a_m\\otimes e_m$. Indeed the coefficient map $[e_m]:R[M]\\to R$ induces $a\\otimes h\\mapsto a[e_m](h)$, and these coefficient maps and the finite-sum map are mutual inverses, as is checked on a pure tensor by expanding $h$ in its basis. Define an $A$-linear map $\\gamma:A\\otimes_RR[M]\\to A\\otimes_B A$ by $\\gamma(a\\otimes e_m)=\\sum_{j\\in J_m}a v_{m,j}\\otimes u_{m,j}$. The free coefficient description makes this well-defined; it is not necessary to assume multiplicativity of $\\gamma$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent construction of the inverse from finite coefficient families and the assumed unit expressions."
+   }
+  },
+  {
+   "text": "For each basis tensor, $\\beta\\gamma(a\\otimes e_m)=\\sum_j av_{m,j}u_{m,j}\\otimes e_m=a\\otimes e_m$. Conversely, for $b_m\\in A_m$, the element $b_mv_{m,j}$ lies in $B$, so tensor balancing gives $\\gamma\\beta(a\\otimes b_m)=\\sum_j ab_mv_{m,j}\\otimes u_{m,j}=\\sum_j a\\otimes b_mv_{m,j}u_{m,j}=a\\otimes b_m$. Every tensor is a sum of such homogeneous pure tensors, so both composites are identities. This proves that $\\beta$ is bijective, hence an $A$-algebra isomorphism, its algebra structure having already been checked. Any choices of the unit expressions give its unique inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent calculation; only the grading, the unit sums and the defining balancing relation of tensor products are used."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-subgroup-algebra-coset-presentation] with coefficient ring $A$, group $M$ and subgroup $L=0$. Since $M$ is finitely generated, it states that $A[M]$ is a finitely presented $A[0]$-algebra; identify $A[0]$ with $A$ by $ae_0\\mapsto a$. The map $A\\otimes_RR[M]\\to A[M]$, $a\\otimes(re_m)\\mapsto ar e_m$, is an algebra isomorphism: its inverse sends $\\sum_m a_me_m$ to $\\sum_m a_m\\otimes e_m$, and the inverse identities and multiplication law follow by expansion. Therefore $A\\otimes_B A$, identified with $A[M]$ by $\\beta$, is finitely presented over its first $A$ factor. Apply [lem-weil-pbc-finite-presentation-descends-faithfully-flat] to the faithfully flat map $B\\to A$ from step 2 and the $B$-algebra $A$. Its scalar extension is exactly this $A\\otimes_B A$. Hence $B\\to A$ is finitely presented.",
+   "uses": [
+    "lem-sfb-subgroup-algebra-coset-presentation",
+    "lem-weil-pbc-finite-presentation-descends-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QQ, lemma-finite-presentation-descends; the group-algebra presentation is the existing subgroup/coset node specialized to the zero subgroup."
+   }
+  },
+  {
+   "text": "Both spectra are affine, so [lem-weil-pbc-morphism-affine-schemes-affine] makes $q$ affine. By [lem-weil-pbc-flat-ring-map-iff-flat-affine] and the flatness proved in step 2, $q$ is flat. The faithful flatness from step 2 also makes $q$ surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Thus $q$ is faithfully flat in the scheme sense (flat and surjective).",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01SH, lemma-morphism-affines-affine; 01U5, lemma-flat-characterize; algebra.tex Tag 00HQ, lemma-ff-rings."
+   }
+  },
+  {
+   "text": "The single pair of affine charts $\\operatorname{Spec}A,\\operatorname{Spec}B$ witnesses local finite presentation everywhere by [def-sbc-locally-finite-presentation], because $B\\to A$ is finitely presented. Since $q$ is affine, [lem-weil-pbc-affine-morphism-permanence](3) gives quasi-compactness and quasi-separatedness. These three properties are precisely finite presentation by the convention in [def-sbc-locally-finite-presentation].",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S7, lemma-affine-separated; the finite-presentation definition is the one recorded in def-sbc-locally-finite-presentation (Stacks Tag 01TP)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-product-affine-spectra], the source and target of the asserted geometric comparison have coordinate rings $A\\otimes_RR[M]$ and $A\\otimes_B A$, with their projections given by the two tensor inclusions. Under this identification $\\operatorname{Spec}\\beta$ has first projection $x$ because $\\beta(a\\otimes1)=a\\otimes e_0$, and second projection $xt$ because $\\beta(1\\otimes b_m)=\\rho(b_m)=b_m\\otimes e_m$. Thus it is exactly $(x,t)\\mapsto(x,xt)$. It is an isomorphism: apply the contravariant functoriality of spectra in [def-weil-affine-spectrum] to the inverse pair $\\beta,\\gamma$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; the identification of the actual action map follows from its two pullback maps on rings."
+   }
+  },
+  {
+   "text": "For any $R\\to R'$, let $j_m:A_m\\to A$ be the inclusion. The identities $\\pi_mj_m=1$ and $\\pi_nj_m=0$ for $n\\ne m$ remain identities after tensoring with $R'$. Hence $j_m\\otimes1$ is injective. Every $a\\otimes r'$ is the finite sum $\\sum_m j_m(a_m)\\otimes r'$, so the images span $A'=A\\otimes_RR'$. A finite relation among these images is zero only if each component is zero, by applying each $\\pi_m\\otimes1$. Thus they form the required direct grading, whose zero part is the image of the injective algebra map $B\\otimes_RR'\\to A'$; denote it by $B'$. Multiplication has degree sum since $(a_m\\otimes r')(a_n\\otimes s')=a_ma_n\\otimes r's'$, and $1$ has degree zero. Each unit expression persists as $\\sum_j(u_{m,j}\\otimes1)(v_{m,j}\\otimes1)=1$. No flatness of $R'$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent split-inclusion and finite-support calculation; Tag 0EKK supplies only the original degree-projection pattern."
+   }
+  },
+  {
+   "text": "Finally identify $(A\\otimes_B A)\\otimes_RR'$ with $A'\\otimes_{B'}A'$ by $(a\\otimes b)\\otimes r'\\mapsto(a\\otimes r')\\otimes(b\\otimes1)$. Its inverse sends $(a\\otimes r')\\otimes(b\\otimes s')$ to $(a\\otimes b)\\otimes r's'$. For example, balancing by $c\\otimes t\\in B'$ sends either $((ac\\otimes r't)\\otimes(b\\otimes s'))$ or $((a\\otimes r')\\otimes(cb\\otimes ts'))$ to the same element $(ac\\otimes b)\\otimes r'ts'=(a\\otimes cb)\\otimes r'ts'$. Balancing over $R$ follows by moving its scalar to the final $R'$ factor. The two composite formulas give the identity on pure tensors, so these are inverse algebra maps. Similarly identify $(A\\otimes_RR[M])\\otimes_RR'$ with $A'\\otimes_{R'}R'[M]$ by $(a\\otimes e_m)\\otimes r'\\mapsto(a\\otimes r')\\otimes e_m$, using finite basis expansions. Under these maps $(\\beta\\otimes1)((a\\otimes b_m)\\otimes r')=(ab_m\\otimes e_m)\\otimes r'$ corresponds to $(ab_m\\otimes r')\\otimes e_m$, exactly $\\beta'((a\\otimes r')\\otimes(b_m\\otimes1))$. These generators span, so $\\beta'$ is the base change of $\\beta$. Step 10 verifies all hypotheses for $(R',A',B')$, so steps 1--9 apply to them. If $B=0$, then $1_A=0$, all rings in the comparisons are zero, and the spectra are empty; the formulas remain valid. If $M=0$, then $A=B$ and the comparison is the identity after the canonical identifications. No argument excludes torsion in $M$ or uses a finiteness condition on $R\\to A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent verification on balanced pure tensors and finite group-algebra basis expansions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-subgroup-algebra-coset-presentation",
+  "lem-weil-pbc-finite-presentation-descends-faithfully-flat",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Independent strong-grading algebra argument, with the grading/action pattern of Tag 0EKK, example-Gm-on-affine and lemma-complete-reducibility-Gm; general algebra and affine-scheme results are the cited DAG nodes. The tag itself does not assert this torsor theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strongly graded commutative algebra for a finitely generated abelian group is faithfully flat and finitely presented over its degree zero ring and is a diagonalizable torsor",
+   "results": "{\"t\": \"2026-10-24T09:28:30Z\", \"tool\": \"leansearch\", \"query\": \"A strongly graded commutative algebra for a finitely generated abelian group is faithfully flat and finitely presented over its degree zero ring and is a diagonalizable torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat\", \"Module.FaithfullyFlat.finsupp\", \"Module.FaithfullyFlat\", \"GradedAlgebra\", \"RingHom.Flat\", \"Algebra.smooth_iff\", \"RingHom.faithfullyFlat_algebraMap_iff\", \"Algebra.IsStandardSmooth.finitePresentation\"], \"digest\": \"4a34288f43f6cbf0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary graded algebras, degree-zero modules, Hopf tensor products and general flatness; none proves strong-grading faithful flatness, finite presentation or the canonical torsor comparison. Read Mathlib/RingTheory/GradedAlgebra/Basic.lean, FiniteType.lean:28-53 and TensorProduct.lean:23-85."
+  },
+  {
+   "tool": "grep",
+   "query": "strongly.?graded|strong.?grading|hopf.?galois|diagonali[sz]able.*torsor",
+   "results": "{\"t\": \"2026-10-24T09:29:14Z\", \"tool\": \"grep\", \"query\": \"strongly.?graded|strong.?grading|hopf.?galois|diagonali[sz]able.*torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary graded algebras, degree-zero modules, Hopf tensor products and general flatness; none proves strong-grading faithful flatness, finite presentation or the canonical torsor comparison. Read Mathlib/RingTheory/GradedAlgebra/Basic.lean, FiniteType.lean:28-53 and TensorProduct.lean:23-85."
+  },
+  {
+   "tool": "loogle",
+   "query": "GradedAlgebra, Module.FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-24T09:29:15Z\", \"tool\": \"loogle\", \"query\": \"GradedAlgebra, Module.FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary graded algebras, degree-zero modules, Hopf tensor products and general flatness; none proves strong-grading faithful flatness, finite presentation or the canonical torsor comparison. Read Mathlib/RingTheory/GradedAlgebra/Basic.lean, FiniteType.lean:28-53 and TensorProduct.lean:23-85."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative algebra strongly graded by an abelian group is faithfully flat over the degree zero part and its canonical Hopf Galois tensor map is an isomorphism",
+   "results": "{\"t\": \"2026-10-24T09:29:17Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative algebra strongly graded by an abelian group is faithfully flat over the degree zero part and its canonical Hopf Galois tensor map is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.bijective_of_tensorProduct\", \"TensorProduct.tacticHopf_tensor_induction_With__\", \"CommSemiring.toHopfAlgebra\", \"HopfAlgCat.tensorObj_instRing\", \"HopfAlgCat.MonoidalCategory.inducingFunctorData_μIso\", \"HopfAlgCat.tensorObj_instHopfAlgebra\", \"HopfAlgCat.tensorObj_carrier\", \"TensorProduct.instHopfAlgebra\"], \"digest\": \"b65e7d610228d84d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary graded algebras, degree-zero modules, Hopf tensor products and general flatness; none proves strong-grading faithful flatness, finite presentation or the canonical torsor comparison. Read Mathlib/RingTheory/GradedAlgebra/Basic.lean, FiniteType.lean:28-53 and TensorProduct.lean:23-85."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a strongly group graded commutative ring each homogeneous component is an invertible module over the degree zero subring and the whole ring is a diagonalizable torsor",
+   "results": "{\"t\": \"2026-10-24T09:32:32Z\", \"tool\": \"leanfinder\", \"query\": \"In a strongly group graded commutative ring each homogeneous component is an invertible module over the degree zero subring and the whole ring is a diagonalizable torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectSum.GradeZero.module\", \"DirectSum.GradeZero.commRing\", \"SetLike.gcommRing\", \"DirectSum.GCommRing\", \"CommRing.directSumGCommRing\", \"SetLike.GradeZero.instCommRing\", \"SetLike.gring\", \"GradedModule.isModule\"], \"digest\": \"ce8c2e7b589d8e17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary graded algebras, degree-zero modules, Hopf tensor products and general flatness; none proves strong-grading faithful flatness, finite presentation or the canonical torsor comparison. Read Mathlib/RingTheory/GradedAlgebra/Basic.lean, FiniteType.lean:28-53 and TensorProduct.lean:23-85."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|grading",
+   "results": "{\"t\": \"2026-10-24T09:39:58Z\", \"tool\": \"grep\", \"query\": \"graded|grading\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\", \"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\", \"Mathlib/RingTheory/GradedAlgebra/FiniteType.lean\"], \"digest\": \"101aa43c9076f5a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary graded algebras, degree-zero modules, Hopf tensor products and general flatness; none proves strong-grading faithful flatness, finite presentation or the canonical torsor comparison. Read Mathlib/RingTheory/GradedAlgebra/Basic.lean, FiniteType.lean:28-53 and TensorProduct.lean:23-85."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T09:39:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"GradedAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"GradedAlgebra\", \"GradedAlgebra.proj\", \"instGradedAlgebraRestrictScalars\", \"DirectSum.IsInternal.gradedAlgebra\", \"GradedAlgebra.proj_apply\", \"GradedAlgebra.mem_support_iff\", \"GradedAlgebra.ofAlgHom\", \"GradedAlgebra.proj_recompose\"], \"digest\": \"e008dd087660a853\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary graded algebras, degree-zero modules, Hopf tensor products and general flatness; none proves strong-grading faithful flatness, finite presentation or the canonical torsor comparison. Read Mathlib/RingTheory/GradedAlgebra/Basic.lean, FiniteType.lean:28-53 and TensorProduct.lean:23-85."
+  },
+  {
+   "tool": "grep",
+   "query": "strongly.?graded|strong.?grading|hopf.?galois|diagonali[sz]able.*torsor",
+   "results": "{\"t\": \"2026-10-24T10:06:24Z\", \"tool\": \"grep\", \"query\": \"strongly.?graded|strong.?grading|hopf.?galois|diagonali[sz]able.*torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary grading constructors, homogeneous generators under an existing finite-type hypothesis, free-module flatness and abstract Hopf tensor maps do not state this strong-grading torsor theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strongly group graded commutative algebra is a finitely presented faithfully flat algebra over the degree zero subring",
+   "results": "{\"t\": \"2026-10-24T10:06:24Z\", \"tool\": \"leansearch\", \"query\": \"A strongly group graded commutative algebra is a finitely presented faithfully flat algebra over the degree zero subring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedAlgebra\", \"Algebra.directSumGAlgebra\", \"DirectSum.GAlgebra.commutes\", \"AddMonoidAlgebra.grade.gradedAlgebra\", \"Submodule.galgebra\", \"AddMonoidAlgebra.gradeBy.gradedMonoid\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"GradedAlgebra.ofAlgHom\"], \"digest\": \"8b21624ca76acdc0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary grading constructors, homogeneous generators under an existing finite-type hypothesis, free-module flatness and abstract Hopf tensor maps do not state this strong-grading torsor theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "GradedAlgebra, Module.FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-24T10:06:24Z\", \"tool\": \"loogle\", \"query\": \"GradedAlgebra, Module.FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary grading constructors, homogeneous generators under an existing finite-type hypothesis, free-module flatness and abstract Hopf tensor maps do not state this strong-grading torsor theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strongly graded commutative algebra is faithfully flat over its degree zero subalgebra and the canonical diagonalizable torsor tensor map is an isomorphism",
+   "results": "{\"t\": \"2026-10-24T10:06:25Z\", \"tool\": \"leanfinder\", \"query\": \"A strongly graded commutative algebra is faithfully flat over its degree zero subalgebra and the canonical diagonalizable torsor tensor map is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.gradedComm_algebraMap\", \"Module.FaithfullyFlat.bijective_of_tensorProduct\", \"TensorProduct.gradedComm_algebraMap_tmul\", \"Module.FaithfullyFlat.finsupp\", \"TensorProduct.algebraMap_gradedMul\", \"GradedTensorProduct.auxEquiv\", \"TensorProduct.gradedMul_algebraMap\", \"GradedTensorProduct.liftEquiv\"], \"digest\": \"3bb5ad68eb21fd5e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary grading constructors, homogeneous generators under an existing finite-type hypothesis, free-module flatness and abstract Hopf tensor maps do not state this strong-grading torsor theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative ring with strong group grading has projective homogeneous components and is a Hopf Galois extension of its zero degree ring",
+   "results": "{\"t\": \"2026-10-24T10:08:08Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative ring with strong group grading has projective homogeneous components and is a Hopf Galois extension of its zero degree ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum\", \"SetLike.GradeZero.instCommRing\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"Submodule.galgebra\", \"SetLike.gcommRing\", \"SetLike.GradeZero.instAlgebraSubtypeMemOfNat\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\"], \"digest\": \"6601a7c70b93a6f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary grading constructors, homogeneous generators under an existing finite-type hypothesis, free-module flatness and abstract Hopf tensor maps do not state this strong-grading torsor theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-affine-multiplicative-quotient",
+  "date": "2026-10-24",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Affine quotients of smooth connected groups by multiplicative normal subgroups. Lemma 3.3.2, quotient discussion, printed pp.97--98; smoothness and connected fibres by the fppf quotient. This is the smooth connected affine quotient prerequisite, without centre or maximal-torus conclusions. Algebraic input to the affine multiplicative quotient: faithful flatness, finite presentation and the tensor comparison for a strongly graded commutative algebra, after the closed subgroup gives homogeneous unit expressions.",
+   "via": [
+    "lem-sfb-relative-affine-multiplicative-quotient",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strong-grading-torsor-algebra",
+  "worker": "stage1",
+  "summary": "Retained the statement. Constructed an explicit free-module retraction from the homogeneous unit sums, applied existing flatness and faithful-flatness leaves, computed the inverse tensor map, and deduced finite presentation from the existing group-algebra presentation and faithfully-flat descent. Checked the actual geometric action comparison and arbitrary nonflat coefficient changes. No new nodes and no Lean attachment.",
+  "blueprint": "The inherited structural-prerequisite chain serves det-thm-sf-ctf-stability-direct-images, proof (3), through the relative affine multiplicative quotient. This split proves its strong-grading algebra input. The current ancestor tool returns None; the inherited null from.node and full via chain and the precise from.place are retained. Whole-blueprint searches for graded and strongly graded found no same statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-086773266",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-086773266 (reviewer sub-agent of L); spot-checked: PASS: the split is correct and needs no repair. It is a first split from an unsplit node, not a 2026-10-21 re-split: the statement, stmt_deps, blueprint and source are unchanged against the N0 snapshot. It adds no new nodes, makes no tool_uses and I wrote no fixes. I read all 11 steps. Step 1: v_{m,j}a_m lies in B, p∘i=id, so A is a direct summand of a free B-module. Step 2: projective-module-flat gives flatness; applying π_0 to a unit relation gives 𝔪A≠A, and the Stacks 00HP (4)⇒(1) node gives faithful flatness. Steps 3–5: ρ is multiplicative, coassociative and counital, and agrees with a↦a⊗e_0 on B, so the pushout node gives β with the stated formula. γ is well-defined on the free basis, and βγ and γβ are identities (b_m v lies in B, so it moves across the tensor). Step 6: the coset presentation with coefficient ring A and L=0 shows A[M]≅A⊗_R R[M]≅A⊗_B A is finitely presented over the first factor; checked against Stacks 00QQ (algebra.tex l.31464) with ρ=α=(B→A), so B→A is finitely presented. Steps 7–8: 01SH, 01U5 and 00HQ give affine, flat and surjective; one chart pair plus affine-permanence (3) give finite presentation in the 01TP sense. Step 9: Spec β is (x,xt) through the projections of the 01I4 node. Steps 10–11: the split identities survive ⊗R' without flatness, and β' is the base change of β (balancing checked). Edge cases checked: B=0, M=0, the G_m case R[t^{±1}], and the μ_2 case R[x]/(x²−u) in characteristic 2. A DAG search found no duplicate; graded-stabilizer-strong-products is the converse direction. The coset node does not depend on the item, so there is no cycle, and no SGA is used."
+ }
+}

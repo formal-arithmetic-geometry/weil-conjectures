@@ -16,18 +16,7 @@ public import Mathlib.CategoryTheory.Center.Linear
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
-import Sheaf.Paper.SfIntegralConstructibleLinear
-import Sheaf.Paper.CompleteResidueCohomologyBounds
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
-import Sheaf.Paper.SfScalarExtensionComposition
-import Sheaf.Algebra.Homology.DerivedTensorResolutionIndependent
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
-import Sheaf.Paper.SfCommonStageWeilCohomology
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.Paper.SfRationalizationKaroubi
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 
 /-! # Ordinary discrete constant-field realization
 
@@ -103,7 +92,15 @@ are sheafified sectionwise cokernels, with only the scalar action precomposed by
 theorem integralRestriction_exact :
     PreservesFiniteLimits (integralRestriction l E Y) ∧
       PreservesFiniteColimits (integralRestriction l E Y) := by
-  sorry
+  let A := integralConstantRingOfUniverses l E Y
+  let B := completedIntegralCoefficientSheafUnrestricted l E Y
+  let U := integralRestriction l E Y
+  have : PreservesFiniteLimits (U ⋙ SheafOfModules.toSheaf A) :=
+    inferInstanceAs (PreservesFiniteLimits (SheafOfModules.toSheaf B))
+  have : PreservesFiniteColimits (U ⋙ SheafOfModules.toSheaf A) :=
+    inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf B))
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves U (SheafOfModules.toSheaf A),
+    preservesFiniteColimits_of_reflects_of_preserves U (SheafOfModules.toSheaf A)⟩
 
 /-- Exactness supplies the required derived-restriction instance.
 Source: blueprint realization formula
@@ -131,6 +128,67 @@ def integralRealization : sfIntegralConstructibleCategory l E Y ⥤ Ambient Y E 
   (sfIntegralConstructible l E Y).ι ⋙ integralDerivedRestriction l E Y ⋙
     extend Y (algebraMap (Padic.coefficientExtensionIntegers l E) E)
 
+private def constantSections (Y : Scheme.{u}) (A : Type u) [CommRing A] :
+    A →+* RingCat.sectionsSubring
+      ((constantRing Y A).obj ⋙ forget₂ CommRingCat RingCat) where
+  toFun a := ⟨fun V ↦
+    ((toSheafify (ProEt.topology Y)
+      ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))).app V)
+        (ULift.up a), by
+      intro V W f
+      exact (congrArg (fun k ↦ k.hom (ULift.up a))
+        ((toSheafify (ProEt.topology Y)
+          ((Functor.const Y.ProEtᵒᵖ).obj
+            (CommRingCat.of (ULift.{u + 1} A)))).naturality f)).symm⟩
+  map_one' := by
+    apply Subtype.ext
+    funext V
+    exact map_one _
+  map_mul' a b := by
+    apply Subtype.ext
+    funext V
+    exact map_mul _ _ _
+  map_zero' := by
+    apply Subtype.ext
+    funext V
+    exact map_zero _
+  map_add' a b := by
+    apply Subtype.ext
+    funext V
+    exact map_add _ _ _
+
+@[instance_reducible]
+private def constantModuleLinear (Y : Scheme.{u}) (A : Type u) [CommRing A] :
+    Linear A (reductionModules Y (constantRing Y A)) := by
+  letI : Linear (RingCat.sectionsSubring
+      ((constantRing Y A).obj ⋙ forget₂ CommRingCat RingCat))
+      (reductionModules Y (constantRing Y A)) :=
+    SheafOfModules.homLinear (constantRing Y A).obj
+      ((sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (constantRing Y A)).property
+  exact
+    { homModule := fun M N ↦ Module.compHom (M ⟶ N) (constantSections Y A)
+      smul_comp := fun M N P a f g ↦
+        Linear.smul_comp M N P (constantSections Y A a) f g
+      comp_smul := fun M N P f a g ↦
+        Linear.comp_smul M N P f (constantSections Y A a) g }
+
+private theorem constantLinear_ext
+    {R : Type*} [Ring R] {C : Type*} [Category* C] [Preadditive C]
+    (s t : Linear R C)
+    (h : ∀ (M N : C) (a : R) (f : M ⟶ N),
+      (letI := s; a • f) = (letI := t; a • f)) : s = t := by
+  cases s with
+  | mk s sm sc =>
+    cases t with
+    | mk t tm tc =>
+      have heq : s = t := by
+        funext M N
+        exact Module.ext' _ _ (fun a f ↦ h M N a f)
+      cases heq
+      rfl
+
+set_option linter.unusedVariables false in
 /-- The standard constant-section linear structure, uniquely fixed sectionwise.
 Source: blueprint E-linearity clause (blueprint: lem-sf-field-stage-ordinary-realization).
 Proof: multiply each component by the image of a in the constant sheaf. Naturality
@@ -145,7 +203,27 @@ theorem constantLinear_existsUnique (Y : Scheme.{u}) (A : Type u) [CommRing A] :
             ((toSheafify (ProEt.topology Y)
               ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))).app V)
                 (ULift.up a) • f.val.app V x) (lin := s) := by
-  sorry
+  let s := constantModuleLinear Y A
+  have hs : (fun [lin : Linear A (reductionModules Y (constantRing Y A))] ↦
+      ∀ (M N : reductionModules Y (constantRing Y A)) (f : M ⟶ N)
+        (a : A) (V : Y.ProEtᵒᵖ) (x : M.val.obj V),
+        ((a • f).val.app V) x =
+          ((toSheafify (ProEt.topology Y)
+            ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))).app V)
+              (ULift.up a) • f.val.app V x) (lin := s) := by
+    intro M N f a V x
+    rfl
+  refine ⟨s, hs, ?_⟩
+  intro t ht
+  have h : ∀ (M N : reductionModules Y (constantRing Y A)) (a : A) (f : M ⟶ N),
+      (letI := t; a • f) = (letI := s; a • f) := by
+    intro M N a f
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro V
+    ext x
+    exact (ht M N f a V x).trans (hs M N f a V x).symm
+  exact constantLinear_ext t s h
 
 /-- Constant scalars act on module sheaves by the specified constant sections.
 Source: blueprint E-linearity clause (blueprint: lem-sf-field-stage-ordinary-realization). -/
@@ -227,7 +305,9 @@ Proof: lifted homomorphisms compose on each element; apply constantSheaf.map_com
 theorem coefficientMap_comp (Y : Scheme.{u}) {A B C : Type u}
     [CommRing A] [CommRing B] [CommRing C] (f : A →+* B) (g : B →+* C) :
     coefficientMap Y f ≫ coefficientMap Y g = coefficientMap Y (g.comp f) := by
-  sorry
+  unfold coefficientMap
+  rw [← Functor.map_comp]
+  congr 1
 
 /-- The ordinary derived scalar associator is uniquely fixed by balancing on K-flat models.
 Source: Stacks Tag 06YY; blueprint coefficient tower coherence
@@ -301,7 +381,8 @@ subfield inclusions compose literally. This includes equal coefficient fields. -
 theorem closureInclusion_comp (E L : Index l Ω) (h : E ≤ L) :
     (closureInclusion.{u} l Ω L).comp (coefficientInclusion l Ω E L h) =
       closureInclusion l Ω E := by
-  sorry
+  ext x
+  simp [closureInclusion, coefficientInclusion]
 
 /-- The recorded transition of the stage system is the specified rational scalar tensor.
 Source: blueprint common-stage construction

@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-coefficient-scalar-tensor-representative-internal",
+ "kind": "lemma",
+ "title": "Internal-image signed scalar tensor representative",
+ "statement": "For every pair of internal complexes whose reconstructed images satisfy the stated K-flat and flat-term hypotheses, the fixed signed equation holds on their section-equivalence images.",
+ "stmt_deps": [
+  "def-sfb-coefficient-scalar-tensor-realization-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, normalized signed total-complex representative argument."
+ },
+ "proof": [
+  {
+   "text": "The tensor of the two reconstructed K-flat flat-term complexes is K-flat with flat terms. Transport these properties across totalComparison, including its degreewise evaluation isomorphisms, to the reconstructed image of P tensor Q.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "def-pd-proetale-section-module-functors",
+    "def-pd-section-derived-realization",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply hscalar to P, Q and P tensor Q using the transported flatness facts. Apply the proved categorical pasting theorem to these three equations. The pasting theorem contains the ordinary generator, signed totalization and derived tensor counit arguments; no new unproved obligation is introduced.",
+   "uses": [
+    "lem-sfb-coefficient-scalar-tensor-representative-pasting",
+    "def-sfb-coefficient-scalar-tensor-representative-hypotheses"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-total-tensor-model",
+  "def-pd-proetale-section-module-functors",
+  "def-pd-section-derived-realization",
+  "def-pd-section-derived-tensor-data",
+  "lem-sfb-coefficient-scalar-tensor-representative-pasting",
+  "def-sfb-coefficient-scalar-tensor-representative-hypotheses"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YU: K-flat total models, transport of flatness, and the proved scalar tensor comparison pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalar tensor representative comparison",
+   "results": "No direct existing theorem; this is the declared substep.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory tensor comparison representative",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "signed total scalar tensor comparison",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientScalarTensorRepresentative",
+  "date": "2026-10-27",
+  "group": "X2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-coefficient-scalar-tensor-representative",
+   "place": "strict substep"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientScalarTensorRepresentativeInternal",
+  "file": "lean/Sheaf/Paper/CoefficientScalarTensorRepresentativeInternal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarTensorRepresentative_internal",
+  "statement": "theorem coefficientScalarTensorRepresentative_internal (Z : Scheme.{u}) (d : CoefficientScalarTensorRepresentativeBasicData a Z) (h : CoefficientScalarTensorRepresentativeHypotheses a Z d) : ∀ (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ), CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex (.up ℤ)).obj P) → CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex (.up ℤ)).obj Q) → (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) ((ModuleRingedComparison.equivalence R Z).functor.obj (P.X n))) → (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) ((ModuleRingedComparison.equivalence R Z).functor.obj (Q.X n))) → coefficientScalarTensorRepresentativeEquation a Z d (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex (.up ℤ)).obj P) (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex (.up ℤ)).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T203101-L-3502890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T034647-L-3671841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,205 @@
+{
+ "id": "lem-sfb-semihereditary-torsionless-flat",
+ "kind": "statement",
+ "title": "Chase flatness theorem for torsionless modules over semihereditary rings",
+ "statement": "Let $R$ be a commutative ring such that every finitely generated ideal is projective [def-weil-pbc-projective-module]. Let $M$ be an $R$-module. Suppose there are a set $A$ and an injective $R$-linear map $M\\hookrightarrow\\prod_{a\\in A}R$, where the product consists of all functions $A\\to R$ with componentwise module operations (this is the torsionless condition). Then $M$ is flat over $R$ [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 6.10, proof, last sentence: a torsionless module over a semihereditary ring is flat by Chase; HRS cites Lam, Lectures on modules and rings (1999), Definition 4.64 and Theorem 4.67. No Stacks tag for this theorem is asserted."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Write the given embedding as $e:M\\hookrightarrow R^A$. Fix $n\\ge0$, $f_1,\\ldots,f_n\\in R$ and $x_1,\\ldots,x_n\\in M$ with $\\sum_i f_ix_i=0$. Set $I=(f_1,\\ldots,f_n)$ and let $q:R^n\\to I$ send $(r_i)$ to $\\sum_i f_ir_i$. The map $q$ is surjective by the description of the generated ideal. By hypothesis $I$ is projective. Apply the lifting characterization in [def-weil-pbc-projective-module] to $q$ and $\\mathrm{id}_I$, obtaining $s:I\\to R^n$ with $qs=\\mathrm{id}_I$. Put $p=\\mathrm{id}_{R^n}-sq$. Then $qp=0$, and $p(v)=v$ whenever $q(v)=0$, directly from these formulas.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CF (lemma-characterize-projective), splitting a surjection onto a projective module; Tag 00HK (lemma-flat-eq), equational criterion. Agent-written matrix argument for the Chase assertion cited by HRS Lemma 6.10."
+   }
+  },
+  {
+   "text": "Let $b_j$ be the $j$th coordinate vector, and define $a_{ij}\\in R$ by $p(b_j)=(a_{ij})_i$. Since $qp(b_j)=0$, we have $\\sum_i f_i a_{ij}=0$ for every $j$. For each $\\alpha\\in A$ put $v_\\alpha=(e(x_i)(\\alpha))_i$. Applying evaluation at $\\alpha$ to the given relation yields $\\sum_i f_i e(x_i)(\\alpha)=0$, so $q(v_\\alpha)=0$. Thus $v_\\alpha=p(v_\\alpha)=\\sum_j e(x_j)(\\alpha)p(b_j)$ by linearity and the coordinate-vector expansion. Its $i$th coordinate says $e(x_i)(\\alpha)=\\sum_j a_{ij}e(x_j)(\\alpha)$. Therefore $e(x_i)=e(\\sum_j a_{ij}x_j)$ as functions on $A$. Injectivity of $e$ gives $x_i=\\sum_j a_{ij}x_j$. This argument uses only finite sums, linearity and equality of functions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CF (lemma-characterize-projective), splitting a surjection onto a projective module; Tag 00HK (lemma-flat-eq), equational criterion. Agent-written matrix argument for the Chase assertion cited by HRS Lemma 6.10."
+   }
+  },
+  {
+   "text": "Take $m=n$ and $y_j=x_j$. The two identities just established, $x_i=\\sum_j a_{ij}y_j$ and $\\sum_i f_i a_{ij}=0$, say exactly that the arbitrary relation $\\sum_i f_ix_i=0$ is trivial in the terminology of [lem-weil-pbc-flat-equational-criterion]. That node applies to any module over a commutative ring; it implies that $M$ is flat. The case $n=0$ uses the empty matrix and empty family and is included.",
+   "uses": [
+    "lem-weil-pbc-flat-equational-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CF (lemma-characterize-projective), splitting a surjection onto a projective module; Tag 00HK (lemma-flat-eq), equational criterion. Agent-written matrix argument for the Chase assertion cited by HRS Lemma 6.10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-flat-equational-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05CF (lemma-characterize-projective), splitting a surjection onto a projective module; Tag 00HK (lemma-flat-eq), equational criterion. Agent-written matrix argument for the Chase assertion cited by HRS Lemma 6.10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A module embedding linearly into a product of copies of a commutative semihereditary ring is flat",
+   "results": "8 hits: Module.Flat.of_forall_exists_factorization, Module.Flat.of_free, Module.Flat.self, Module.Flat, Module.FaithfullyFlat.finsupp, Module.Flat.iff_forall_exists_factorization, Module.flat_iff, Module.Flat.of_projective",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind, Bezout and valuation-domain torsion-free criteria impose extra domain hypotheses; free/projective flatness and tensor preservation of injections do not assert flatness of arbitrary torsionless modules over semihereditary rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Submodules of an arbitrary direct product of copies of a semihereditary ring are flat modules",
+   "results": "8 hits: Module.Flat.finsupp, Module.Flat.dfinsupp, Module.FaithfullyFlat.finsupp, Module.Flat.dfinsupp_iff, Module.Flat.self, Module.Flat.directSum, Module.Flat.of_forall_exists_factorization, Module.Flat.directSum_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind, Bezout and valuation-domain torsion-free criteria impose extra domain hypotheses; free/projective flatness and tensor preservation of injections do not assert flatness of arbitrary torsionless modules over semihereditary rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torsionless module over a semihereditary ring is flat by the theorem of Chase",
+   "results": "8 hits: IsDedekindDomain.flat_iff_torsion_eq_bot, Module.Flat.instOfIsDedekindDomainOfIsTorsionFree, Module.Flat.flat_iff_torsion_eq_bot_of_isBezout, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Module.Flat.of_projective, Module.Flat, Module.Flat.iff_lTensor_preserves_injective_linearMap, Module.Flat.iff_lTensor_injective'",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind, Bezout and valuation-domain torsion-free criteria impose extra domain hypotheses; free/projective flatness and tensor preservation of injections do not assert flatness of arbitrary torsionless modules over semihereditary rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Function.Injective",
+   "results": "12 hits: Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, TensorProduct.nontrivial_of_linearMap_injective_of_flat_left, TensorProduct.nontrivial_of_linearMap_injective_of_flat_right, Algebra.TensorProduct.includeRight_injective, Algebra.TensorProduct.includeLeft_injective, Module.Flat.lTensor_preserves_injective_linearMap, Module.Flat.rTensor_preserves_injective_linearMap",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind, Bezout and valuation-domain torsion-free criteria impose extra domain hypotheses; free/projective flatness and tensor preservation of injections do not assert flatness of arbitrary torsionless modules over semihereditary rings"
+  },
+  {
+   "tool": "grep",
+   "query": "Torsionless|torsionless|semihereditary|Semihereditary|[Ff]lat.*of.*[Ss]ubmodule|[Ff]lat.*of.*[Ii]njective",
+   "results": "2 hits: Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/PicardGroup.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: Dedekind, Bezout and valuation-domain torsion-free criteria impose extra domain hypotheses; free/projective flatness and tensor preservation of injections do not assert flatness of arbitrary torsionless modules over semihereditary rings"
+  },
+  {
+   "tool": "grep",
+   "query": "Torsionless|torsionless|semihereditary|Semihereditary|semi.hereditary",
+   "results": "{\"t\": \"2026-10-23T21:51:38Z\", \"tool\": \"grep\", \"query\": \"Torsionless|torsionless|semihereditary|Semihereditary|semi.hereditary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain torsion-free criteria add hypotheses; projective-flat and direct-sum results do not prove flatness of arbitrary submodules of products under the semihereditary hypothesis. The equational criterion is reused as a proof input, not a match for the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torsionless module over a commutative semihereditary ring is flat",
+   "results": "{\"t\": \"2026-10-23T21:51:38Z\", \"tool\": \"leanfinder\", \"query\": \"A torsionless module over a commutative semihereditary ring is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.flat_iff_torsion_eq_bot_of_isBezout\", \"Module.Flat.self\", \"IsDedekindDomain.flat_iff_torsion_eq_bot\", \"Module.Flat\", \"Module.Flat.torsion_eq_bot\", \"Module.FaithfullyFlat\", \"Module.FaithfullyFlat.toFlat\", \"Module.Flat.tfae_equational_criterion\"], \"digest\": \"7edee88b9867bb74\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain torsion-free criteria add hypotheses; projective-flat and direct-sum results do not prove flatness of arbitrary submodules of products under the semihereditary hypothesis. The equational criterion is reused as a proof input, not a match for the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every submodule of an arbitrary direct product of copies of a ring whose finitely generated ideals are projective is flat",
+   "results": "{\"t\": \"2026-10-23T21:52:20Z\", \"tool\": \"leanfinder\", \"query\": \"Every submodule of an arbitrary direct product of copies of a ring whose finitely generated ideals are projective is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.of_projective\", \"Module.FaithfullyFlat.finsupp\", \"Module.Flat.dfinsupp\", \"Module.Flat.dfinsupp_iff\", \"Module.Flat.iff_forall_exists_factorization\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.iff_rTensor_injective\"], \"digest\": \"b4bcb2acab4d65fb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain torsion-free criteria add hypotheses; projective-flat and direct-sum results do not prove flatness of arbitrary submodules of products under the semihereditary hypothesis. The equational criterion is reused as a proof input, not a match for the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Module.Flat",
+   "results": "{\"t\": \"2026-10-23T21:52:20Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Module.Flat.of_projective\", \"Module.Flat.projective_of_finitePresentation\"], \"digest\": \"82e36669b0b9614c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain torsion-free criteria add hypotheses; projective-flat and direct-sum results do not prove flatness of arbitrary submodules of products under the semihereditary hypothesis. The equational criterion is reused as a proof input, not a match for the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torsionless module over a semihereditary commutative ring is flat",
+   "results": "{\"t\": \"2026-10-23T21:52:21Z\", \"tool\": \"leansearch\", \"query\": \"A torsionless module over a semihereditary commutative ring is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.flat_iff_torsion_eq_bot\", \"Module.Flat.of_projective\", \"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"Module.Flat.flat_iff_torsion_eq_bot_of_isBezout\", \"Module.Flat\", \"Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal\", \"Module.FaithfullyFlat.toFlat\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\"], \"digest\": \"4aef4b16ff2497ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain torsion-free criteria add hypotheses; projective-flat and direct-sum results do not prove flatness of arbitrary submodules of products under the semihereditary hypothesis. The equational criterion is reused as a proof input, not a match for the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semihereditary-topological-coefficients-admissible",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), preservation of direct sums on the localizing hull: coefficient admissibility in the Noetherian finite scalar-model heart argument, via HRS Lemmas 6.7(1) and 6.10. Lemma 6.10, proof, last sentence: a torsionless module over a semihereditary ring is flat by Chase; HRS cites Lam, Lectures on modules and rings (1999), Definition 4.64 and Theorem 4.67. No Stacks tag for this theorem is asserted.",
+   "via": [
+    "lem-sfb-semihereditary-topological-coefficients-admissible",
+    "lem-sfb-noetherian-scalar-constructible-heart",
+    "lem-sfb-finite-complex-heart-filtered-approximation",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semihereditary-torsionless-flat",
+  "worker": "stage1",
+  "summary": "Read HRS Lemma 6.10 and Stacks 05CF/00HK; gave a direct finite-relation proof using the splitting of the generated ideal and an explicit projection matrix. Reused the two existing Mathlib leaves. Statement and statement dependencies unchanged; no new nodes. Lam is not present, so the supplied proof is marked agent-written.",
+  "blueprint": "Supporting coefficient-admissibility branch of det-sf-comp-coherence-cocycle through det-sf-comp-coherence-refinement (2), preservation of direct sums: HRS Lemma 6.10, the Chase torsionless-flatness assertion. Latest blueprint ancestor and its refinement references were read; no change to the compactification route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-f87e8ff69",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-f87e8ff69 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full; the delivery has no new nodes. The statement and stmt_deps are identical to live, where the item is still unsplit, so it is not superseded, and there is no re-split note. Step 1: q:R^n→I=(f_i) is onto and I is projective by hypothesis, so lifting id_I gives s with qs=id. This lifting property is explicit in the statement of def-weil-pbc-projective-module, matching the splitting argument of Stacks 05CF, algebra.tex line 18795. With p=id−sq we get qp=0 and p=id on ker q. Step 2 is genuinely elementary: a_ij are the entries of p(b_j), so Σ_i f_i a_ij=0; v_α=(e(x_i)(α)) lies in ker q, and v_α=p(v_α) gives x_i=Σ_j a_ij x_j by injectivity of e. I checked the index orientation. Step 3: the relation is trivial with m=n and y=x, so M is flat by lem-weil-pbc-flat-equational-criterion, which matches Stacks 00HK at algebra.tex line 8995 word for word. proof_deps equals the union of the steps' uses, and both are mathlib nodes. The source agrees with HRS Lemma 6.10, proof, last sentence (Chase via Lam 4.64/4.67, not in the local literature, so the proof is correctly marked agent-written). The statement covers the use in the parent lem-sfb-semihereditary-topological-coefficients-admissible step 3. Edge cases checked: n=0, all f_i=0, A empty, R=0, the non-domain R=k×k, and R=Z with M=Z^N; R=Z/4 with M=2R shows the hypothesis is needed. Duplicate search (torsionless, semihereditary, trivial relation) found no other node stating this. No SGA is used and there are no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SemihereditaryTorsionlessFlat",
+  "declaration": "Module.Flat.of_injective_pi_of_projective_fg_ideals",
+  "file": "lean/Sheaf/RingTheory/SemihereditaryTorsionlessFlat.lean",
+  "statement": "theorem of_injective_pi_of_projective_fg_ideals {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] (hR : ∀ I : Ideal R, I.FG → Module.Projective R I) {A : Type w} (e : M →ₗ[R] (A → R)) (he : Function.Injective e) : Module.Flat R M",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e237b0126",
+  "group": "NC",
+  "result": "pass",
+  "note": "Clean statement-only delivery, no findings. Every node clause matches the Lean: CommRing R; hR : ∀ I : Ideal R, I.FG → Module.Projective R I; M; A : Type w; e : M →ₗ[R] (A → R) with Function.Injective e (the full product, as explicit witnesses for the existential); Module.Flat R M. No extra assumptions, universes u v w independent, statement field verbatim. Source HRS Lemma 6.10 (Chase, Lam 4.64/4.67) matches; the proof docstring follows the three node steps with correct a_ij indices. The Mathlib names cited exist (projective_lifting_property, IsTrivialRelation, iff_forall_isTrivialRelation). Imports are correct and the only proof is sorry. The node changes only lean; side-live has lean null, so the item is not superseded. The parent step 3 and its Lean use the same hR form and their universes fit. Worker report and Second reading by NC are present. No compile run since nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261024T014846-L-2288987",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Module.Flat.of_injective_pi_of_projective_fg_ideals"
+  ],
+  "sorry_after": []
+ }
+}

@@ -87,7 +87,30 @@
   "def-pc-separably-closed"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable",
+     "module": "WeilConjectures.Mathlib.FieldTheory.PurelyInseparable.Basic",
+     "lines": [
+      156,
+      167
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-picard-dense-points",
  "split_report": {
@@ -104,5 +127,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kpi2413 (reviewer sub-agent of L); spot-checked: Read Mathlib Basic.lean:558 isSepClosed_iff_isPurelyInseparable_algebraicClosure (forward implication specialized to k-bar gives the final clause) and :211 isPurelyInseparable_iff_pow_mem (gives n with alpha^(p^n) in k, hence separable): one declaration per clause, B8 ok. Item states only the field clause (no topological-invariance clause), so no universal-homeomorphism node is needed; char 0 / n=0 cases fine. No repairs."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a separably closed field\nof exponential characteristic $p$ (so $p=1$ if $\\operatorname{char}k=0$),\nand let $K/k$ be an algebraic field extension, for instance $K=\\bar k$.\nThen every $\\alpha\\in K$ has an $n\\ge0$ with $\\alpha^{p^n}$ separable over\n$k$; hence $K/k$ is purely inseparable.",
+  "proof": [
+   {
+    "text": "If $p=1$ every algebraic element is separable, so $n=0$ works, and\n$K=k$ by [lem-pc-sepclosed-finite-sep-trivial]; assume\n$\\operatorname{char}k=p>0$. Let $\\alpha\\in K$ and $E=k(\\alpha)$ (finite over\n$k$). Let $L$ be the separable closure of $k$ inside $E$, i.e. the maximal\nseparable subextension (standard: among the subextensions\n$k\\subseteq k'\\subseteq E$ with $k'/k$ finite separable there is a maximal\none, obtained by compositum). Then $E/L$ is purely inseparable: for a\nfinite extension in characteristic $p$ this is the standard fact that a\nfinite extension is the compositum of a separable and a purely\ninseparable subextension (for $\\beta\\in E$ the minimal polynomial over $L$\nis $T^{p^f}-c$, a purely inseparable polynomial: this is the classical\nnormal-separable devissage; we use it as standard field theory). Let\n$[E:L]=p^e$. For every $\\beta\\in E$, $\\beta^{p^e}\\in L$: indeed the\nminimal polynomial $T^{p^f}-c$ of $\\beta$ over $L$ has $f\\le e$, and\n$\\beta^{p^e}=c^{p^{e-f}}\\in L$.\nApply this to $\\beta=\\alpha$: $\\alpha^{p^e}\\in L$, which is separable\nover $k$; take $n=e$. The last assertion: $\\alpha^{p^n}$ is separable\nalgebraic over $k$, so it lies in $k$ by\n[lem-pc-sepclosed-finite-sep-trivial] (applied to $k(\\alpha^{p^n})/k$).\nThus every element of $K$ lies in $k$ after taking a $p^n$-th power,\ni.e. $K/k$ is purely inseparable.",
+    "uses": [
+     "lem-pc-sepclosed-finite-sep-trivial"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

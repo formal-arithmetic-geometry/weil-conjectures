@@ -1,0 +1,130 @@
+{
+ "id": "lem-coef-tensor-reduction-finite-components",
+ "kind": "statement",
+ "title": "Horizontal compatibility of the fixed ordinary finite tensor maps",
+ "statement": "For every pair P,Q of integral cochain complexes, define the finite map from the vertical evaluation of ordinary coherent reduction of their total tensor to the evaluation of the tensor of their ordinary reductions by conjugating coefficientScalarTensorIso with pullbackTensorReductionEvaluationComplex and coefficientEvaluationTensorIso, all from [def-pur-completed-pullback-tower-core] and [lem-coef-derived-system-evaluation-calculus]. Transport them to literal system evaluation by [lem-coef-tensor-reduction-evaluation-identification]. These explicit maps commute in every degree with every actual quotient transition, as maps linear over restriction of scalars. The statement has no K-flatness, flat-term, derived-localization, or existential chain-map conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0941; steps 1 and 2 of lem-coef-tensor-reduction-ordinary-model"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-coef-tensor-reduction-evaluation-identification"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary reduction/evaluation comparison is adjunction-unit normalized. Transpose at each finite scalar adjunction; the unit followed by the inverse-limit projection commutes with the quotient maps by the limit cone equations. Consequently the reduction/evaluation identifications respect the actual horizontal restriction maps.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-tensor-reduction-evaluation-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a total tensor summand of bidegree (p,q), the finite scalar tensor comparison sends b tensor (x tensor y) to (b tensor x) tensor (1 tensor y). Both quotient-transition routes give this same expression after reducing b. Scalar balancing, sheafification and the total-summand universal property give equality of the finite maps in each degree. Transport across the literal-evaluation identification tensorReduction_evaluation_eq gives the displayed strict horizontal equation. For m=n the transition is the identity; zero complexes and the empty site give the zero equation.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-tensor-reduction-evaluation-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-tensor-reduction-evaluation-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Quotient-transition compatibility on pure tensors in step 1 of lem-coef-tensor-reduction-ordinary-model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary extension of scalars for sheaves commutes with the tensor product and quotient transition maps on total cochain complexes",
+   "results": "Eight hits, including ModuleCat.extendScalars, extendRestrictScalarsAdj and SheafOfModules.restrictScalars; none include strict sequence transitions or total tensor comparisons.",
+   "verdict": "No complete match.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars on sheaves commutes with tensor products of cochain complexes with normalized derived comparison",
+   "results": "Eight general condensed/sheaf monoidal and Tor results; none state this quotient compatibility.",
+   "verdict": "No complete match.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*tensor|tensor.*mapHomologicalComplex in Mathlib; coefficientScalarTensorIso and IntegralTensorTransitionCompatibility in project",
+   "results": "Two group homology Mathlib hits. Project IntegralTensorTransitionCompatibility gives compatibility for integral finite scalar tensor comparisons, but not transport to fixed ordinary coherent reduction/evaluation identifications.",
+   "verdict": "Existing integral transition theorem is related, but the fixed-model transport remains.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorReductionOrdinaryModel",
+  "date": "2026-10-27",
+  "group": "A2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence: primitive tensor coefficient comparison; Quotient-transition compatibility on pure tensors in step 1 of lem-coef-tensor-reduction-ordinary-model",
+   "via": [
+    "lem-coef-tensor-reduction-ordinary-model",
+    "lem-sf-tensor-quotient-augmentation-on-good",
+    "lem-sf-primitive-quotient-augmentations",
+    "lem-sf-primitive-reduction-transpose",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorReductionFiniteComponents",
+  "file": "lean/Sheaf/Paper/TensorReductionFiniteComponents.lean",
+  "declaration": "WeilConjectures.tensorReductionFiniteComponents_compatible",
+  "declarations": [
+   "WeilConjectures.tensorReductionFiniteComponent",
+   "WeilConjectures.tensorReductionSystemFiniteComponent",
+   "WeilConjectures.tensorReductionFiniteComponents_compatible"
+  ],
+  "statement": "theorem tensorReductionFiniteComponents_compatible (W : Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) :\n    let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)\n      (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)\n    let G := (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)\n    let B := (coefficientTotalTensor.{u, u + 1, u}\n      (coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (coefficientSequenceCommRingSheaf l E W)).obj (G.obj P, G.obj Q)\n    ∀ (i : ℤ) {m n : ℕ} (h : m ≤ n),\n      (tensorReductionSystemFiniteComponent l E W P Q n).f i ≫\n          SheafOfModules.sequenceSystemTransition\n            (coefficientSequenceCommRingSystem l E W) (B.X i) h =\n        SheafOfModules.sequenceSystemTransition\n            (coefficientSequenceCommRingSystem l E W) ((G.obj T).X i) h ≫\n          (SheafOfModules.systemRestriction (coefficientSequenceCommRingSystem l E W) h).map\n            ((tensorReductionSystemFiniteComponent l E W P Q m).f i)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T131447-L-2938524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T131447-L-2938524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

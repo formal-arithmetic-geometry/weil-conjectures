@@ -1,0 +1,261 @@
+{
+ "id": "lem-pur-tensor-mate-invertible-input",
+ "kind": "statement",
+ "title": "Canonical exceptional tensor mate on an invertible input",
+ "statement": "Fix the finite coefficient setting [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\ge1$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$. All schemes are finite-type $k$-schemes, without absolute separatedness; all arrows are $k$-morphisms. Use $D^b_{ctf}$, the bounded constructible finite-Tor subcategory [def-weil-finite-tor-amplitude], on small pro-etale sites, and the derived pullback and tensor [def-weil-derived-pullback-tensor-hom]. For a separated finite-type arrow $u:T\\to U$, write $F_u=Ru_!$, $G_u=Ru^!$ for compact supports and its transported constructible exceptional right adjoint [def-weil-exceptional-inverse-image], $\\varepsilon_u:F_uG_u\\to1$ for its counit, and $\\omega_u=G_u\\Lambda_U$. Use the specified canonical tensor map $\\theta_{u,P}:Lu^*P\\otimes^L\\omega_u\\to G_uP$ and dualizing base-change map $\\beta_{u,v}$ of [def-pur-co-smoothness]; these maps are defined without assuming cohomological smoothness. All unit, symmetry and reassociation maps are the canonical derived ones.\n\nLet $u:T\\to U$ be separated of finite type and let $P\\in D^b_{ctf}(U,\\Lambda)$ be tensor-invertible: there exists $P^{-1}\\in D^b_{ctf}(U,\\Lambda)$ with $P\\otimes^LP^{-1}\\cong\\Lambda_U$ and $P^{-1}\\otimes^LP\\cong\\Lambda_U$. Then the specified canonical tensor map\n$$\\theta_{u,P}:Lu^*P\\otimes^L\\omega_u\\xrightarrow{\\sim}G_uP$$\nis an isomorphism, natural in invertible inputs. In particular this asserts invertibility of the counit-defined mate of the projection formula, rather than just existence of an abstract isomorphism between its source and target. Neither cohomological smoothness of $u$ nor any dualizing base-change hypothesis is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+  "place": "Final base-change sentence: tensor formula on an invertible input, without smoothness of the base change; returned Step 4"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-co-smoothness"
+ ],
+ "proof": [
+  {
+   "text": "Write $F=Ru_!$, $G=Ru^!$, $H=Lu^*$, $\\mathbf1=\\Lambda_U$ and $\\omega=G\\mathbf1$. Work only on the full bounded constructible finite-Tor categories in the question. Their tensor closure is [lem-sf-tensor-ctf](ii). By [lem-pur-all-stage-ctf-pullback-unit], $Q=HP$ and $Q'=H(P^{-1})$ belong to the source category and $H\\mathbf1\\cong\\Lambda_T$. Applying the tensor comparison [lem-pur-derived-pullback-tensor-iso] to the two given inverse isomorphisms gives $Q\\otimes Q'\\cong\\Lambda_T$ and $Q'\\otimes Q\\cong\\Lambda_T$. Hence right tensor by $Q$ on $D^b_{ctf}(T,\\Lambda)$ has quasi-inverse right tensor by $Q'$, and right tensor by $P$ on the ambient category $D(U_{\\mathrm{proet}},\\Lambda)$ has quasi-inverse right tensor by $P^{-1}$: the two composite comparisons are the associator followed by the given evaluation and the right unitor. The $U$-side is taken in the ambient category because $Ru_!$ is defined there [def-weil-exceptional-inverse-image] and step 3 tests Hom sets out of $Ru_!B$; since $D^b_{ctf}(U,\\Lambda)$ is a full subcategory, its Hom sets are the ambient ones. All tensor symbols below mean derived tensor. The adjunction and $G\\mathbf1\\in D^b_{ctf}$ are exactly those specified in [def-weil-exceptional-inverse-image], not an ambient pro-etale adjunction.",
+   "uses": [
+    "lem-sf-tensor-ctf",
+    "lem-pur-all-stage-ctf-pullback-unit",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final base-change sentence; agent expansion by tensor cancellation, Stacks Tag 0FFM (categories-lemma-invertible) and the defining counit transpose"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-quasi-inverse-hom-bijection] to those two pairs of tensor functors. Thus $f\\mapsto f\\otimes1_Q$ and $a\\mapsto a\\otimes1_P$ are bijections on all relevant Hom sets. By [fix-prop-projection-formula], write $\\pi_{B,P}:FB\\otimes P\\xrightarrow{\\sim}F(B\\otimes Q)$ for the specified projection isomorphism, natural in $B$ and $P$. Its hypotheses hold for every $B\\in D^b_{ctf}(T,\\Lambda)$, since $B$ is bounded constructible and $P$ has finite Tor amplitude. No smoothness or absolute separatedness is needed.",
+   "uses": [
+    "lem-sf-quasi-inverse-hom-bijection",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final base-change sentence; agent expansion by tensor cancellation, Stacks Tag 0FFM (categories-lemma-invertible) and the defining counit transpose"
+   }
+  },
+  {
+   "text": "Define $t:\\omega\\otimes Q\\to GP$ by the adjunction transpose of $\\lambda_P\\circ(\\varepsilon_{\\mathbf1}\\otimes1_P)\\circ\\pi_{\\omega,P}^{-1}$, where $\\lambda_P:\\mathbf1\\otimes P\\cong P$. For each $B$ form the following bijection $\\Psi_B$: start with $\\operatorname{Hom}(B\\otimes Q,\\omega\\otimes Q)$, undo tensor by $Q$ to get $\\operatorname{Hom}(B,\\omega)$, transpose under $F\\dashv G$ to $\\operatorname{Hom}(FB,\\mathbf1)$, tensor by $P$ and apply $\\lambda_P$ to get $\\operatorname{Hom}(FB\\otimes P,P)$, precompose with $\\pi_{B,P}^{-1}$, and transpose back to $\\operatorname{Hom}(B\\otimes Q,GP)$. These are bijections by step 2 and the adjunction of [def-weil-exceptional-inverse-image]. The definition [def-pur-co-smoothness] specifies precisely $\\theta_{u,P}=t\\circ\\sigma_{Q,\\omega}$; this uses its displayed transpose, not the assertion of cohomological smoothness.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final base-change sentence; agent expansion by tensor cancellation, Stacks Tag 0FFM (categories-lemma-invertible) and the defining counit transpose"
+   }
+  },
+  {
+   "text": "Check the actual arrow underlying $\\Psi_B$. Every input is uniquely $f\\otimes1_Q$, with $f:B\\to\\omega$, by step 2. Its image under $\\Psi_B$ has transpose\n$$\\lambda_P\\circ((\\varepsilon_{\\mathbf1}\\circ Ff)\\otimes1_P)\\circ\\pi_{B,P}^{-1}.$$\nNaturality of the projection formula [fix-prop-projection-formula] gives\n$$(Ff\\otimes1_P)\\circ\\pi_{B,P}^{-1}=\\pi_{\\omega,P}^{-1}\\circ F(f\\otimes1_Q).$$\nConsequently that transpose is\n$$\\lambda_P\\circ(\\varepsilon_{\\mathbf1}\\otimes1_P)\\circ\\pi_{\\omega,P}^{-1}\\circ F(f\\otimes1_Q),$$\nwhich is the transpose of $t\\circ(f\\otimes1_Q)$ by the defining equation of $t$ and naturality of the adjunction. Injectivity of the adjunction bijection proves $\\Psi_B(h)=t\\circ h$ for every $h$. Thus postcomposition by this specified $t$ is bijective on tests $B\\otimes Q$.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final base-change sentence; agent expansion by tensor cancellation, Stacks Tag 0FFM (categories-lemma-invertible) and the defining counit transpose"
+   }
+  },
+  {
+   "text": "Every source object $A$ is isomorphic to $B\\otimes Q$ with $B=A\\otimes Q'$: use $\\alpha_{A,Q',Q}$, the evaluation $Q'\\otimes Q\\cong\\Lambda_T$ and the right unitor. Precomposition with this isomorphism identifies the Hom tests, so step 4 makes postcomposition by $t$ bijective for every $A$. For $A=GP$ choose $s:GP\\to\\omega\\otimes Q$ with $t\\circ s=1$. For $A=\\omega\\otimes Q$, injectivity and $t\\circ(s\\circ t)=t=t\\circ1$ imply $s\\circ t=1$. Hence $t$ is an isomorphism, and so is $\\theta_{u,P}=t\\circ\\sigma_{Q,\\omega}$. This is the elementary two-test Yoneda argument, written out rather than invoked as an uncited theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final base-change sentence; agent expansion by tensor cancellation, Stacks Tag 0FFM (categories-lemma-invertible) and the defining counit transpose"
+   }
+  },
+  {
+   "text": "For a morphism $a:P\\to\\widetilde P$ of invertible inputs, let $\\widetilde Q=H\\widetilde P$ and $\\widetilde t$ be the same transpose construction. Projection naturality in the second argument [fix-prop-projection-formula] says\n$$(F\\omega\\otimes a)\\circ\\pi_{\\omega,P}^{-1}=\\pi_{\\omega,\\widetilde P}^{-1}\\circ F(1_\\omega\\otimes Ha).$$\nAfter composing with the counit and unitors, both sides transpose to\n$$G(a)\\circ t=\\widetilde t\\circ(1_\\omega\\otimes Ha).$$\nHere the unitor equation is $a\\circ\\lambda_P=\\lambda_{\\widetilde P}\\circ(1_{\\mathbf1}\\otimes a)$, and transposition is natural by [def-weil-exceptional-inverse-image]. Finally naturality of symmetry gives $G(a)\\circ\\theta_{u,P}=\\theta_{u,\\widetilde P}\\circ(Ha\\otimes1_\\omega)$, proving the asserted naturality of the canonical isomorphisms.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final base-change sentence; agent expansion by tensor cancellation, Stacks Tag 0FFM (categories-lemma-invertible) and the defining counit transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-tensor-ctf",
+  "lem-pur-all-stage-ctf-pullback-unit",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-exceptional-inverse-image",
+  "lem-sf-quasi-inverse-hom-bijection",
+  "fix-prop-projection-formula",
+  "def-pur-co-smoothness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+  "place": "Final base-change sentence; agent expansion by tensor cancellation, Stacks Tag 0FFM (categories-lemma-invertible) and the defining counit transpose"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type scheme morphism the canonical map pullback of an invertible complex tensor the relative dualizing complex to exceptional inverse image is an isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl; AlgebraicGeometry.pullbackSpecIso_hom_base; AlgebraicGeometry.pullbackSpecIso_hom_base_assoc; AlgebraicGeometry.pullbackSpecIso_inv_fst'; AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc; AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc; AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc; AlgebraicGeometry.pullbackSpecIso_inv_fst; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula adjunction implies exceptional pullback of a tensor invertible object is ordinary pullback tensor exceptional pullback of the unit",
+   "results": "CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.Over.ε_pullback_left; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategorySnd_mapPullbackAdj_unit_app; CategoryTheory.Over.μ_pullback_left_snd; CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left; CategoryTheory.Over.μ_pullback_left_fst_snd; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_unit_app; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical exceptional pullback tensor map is invertible on tensor invertible inputs",
+   "results": "Module.Invertible.rTensorEquiv; Module.Invertible.instTensorProduct_2; VectorField.mpullback; Module.Invertible.lTensor_bijective_iff; Module.Invertible.rTensor_bijective_iff; Module.Invertible.lTensor_injective_iff; Module.Invertible.instTensorProduct; VectorField.fderivWithin_pullbackWithin; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTensorInvertible\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing.*tensor|tensor.*dualizing",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionTensorMap|tensorRightEquivalenceOfTensorIso|isIso_of_yoneda_map_bijective",
+   "results": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; Mathlib/CategoryTheory/Yoneda.lean; Mathlib/CategoryTheory/Yoneda.lean; Mathlib/CategoryTheory/Triangulated/Adjunction.lean CategoryTheory source search returned only the general Yoneda test; no exceptional tensor-mate theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "sub": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula implies exceptional tensor comparison is invertible for an invertible object",
+   "results": "Submodule.tensorInvEquiv; Module.Invertible.rTensorEquiv; CategoryTheory.CartesianMonoidalCategory.inv_prodComparison_map_snd; Module.Invertible.instTensorProduct_2; CategoryTheory.CartesianMonoidalCategory.inv_prodComparison_map_fst; CategoryTheory.Limits.inv_prodComparison_map_snd; CategoryTheory.Limits.inv_prodComparison_map_snd_assoc; CategoryTheory.Limits.inv_piComparison_comp_map_π Read returned names/results: these are reflective-monoidal, ordinary-module, or general adjunction identities, not the canonical exceptional comparison on the stated constructible categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionTensorMap\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit mate of a projection formula is an isomorphism on tensor invertible inputs for a left adjoint and its right adjoint",
+   "results": "CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom; CategoryTheory.mateEquiv_counit; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit Read returned names/results: these are reflective-monoidal, ordinary-module, or general adjunction identities, not the canonical exceptional comparison on the stated constructible categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adjunction L left adjoint to R and a functor F with natural projection isomorphism L(X tensor F(N)) iso L(X) tensor N, the canonical map R(M) tensor F(N) to R(M tensor N) is invertible when N and F(N) are invertible",
+   "results": "CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit; CategoryTheory.Monoidal.Reflective.isIso_tfae; CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom; CategoryTheory.frobeniusMorphism; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.frobeniusMorphism_mate Read returned names/results: these are reflective-monoidal, ordinary-module, or general adjunction identities, not the canonical exceptional comparison on the stated constructible categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-co-smooth-composition",
+  "date": "2026-10-22",
+  "group": "Q118"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-co-smooth-composition",
+   "place": "Final base-change sentence: tensor formula on an invertible input, without smoothness of the base change; returned Step 4",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-tensor-mate-invertible-input",
+  "worker": "stage1",
+  "group": "Q125",
+  "summary": "Proved the counit-defined mate by explicit Hom tests, tensor cancellation, projection naturality and the two-test inverse argument; verified naturality on morphisms. No new nodes. The statement and coefficient categories are unchanged.",
+  "blueprint": "lem-pur-co-smooth-composition, final sentence: the tensor formula on an invertible input needed after arbitrary base change. The six steps expand this formal point without assuming smoothness.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Tensor closure ensures all cancellation tests stay in the finite-Tor categories. The current unit supplies no replacement for this generic operation property."
+   },
+   {
+    "node": "lem-pur-all-stage-ctf-pullback-unit",
+    "why": "Uses only the finite-level pullback preservation and unit comparison, without absolute separatedness. The current unit supplies no replacement for this generic operation property."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Pullback of the inverse equations makes HP tensor-invertible. The current unit supplies no replacement for this generic operation property."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "The natural projection isomorphism on constructible finite-Tor inputs is the generic six-functor tool defining the mate. The current unit supplies no replacement for this generic operation property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-tensor-ctf",
+  "lem-pur-all-stage-ctf-pullback-unit",
+  "lem-pur-derived-pullback-tensor-iso",
+  "fix-prop-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-f0ac20d92",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-f0ac20d92 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The statement, stmt_deps and source are identical to the base. There are no new nodes and no repair note, so the re-split rule does not apply. There is no cycle; the only citer is lem-pur-co-smooth-composition. No existing DAG node duplicates the item. Source checked: main-20261015 lem-pur-co-smooth-composition.proof.md, final base-change sentence; the proof is agent-written and cites no SGA. Canonical map: def-pur-co-smoothness (2) gives θ = transpose of λ∘(ε⊗1)∘PF_{ω,K}^{-1}∘F(σ), and PF from fix-prop-projection-formula matches π_{B,P}, so θ = t∘σ exactly. I checked the naturality equations of steps 4 and 6 by hand (PF natural in K and in L, unitor naturality, interchange) and the two-test inverse of step 5. All are correct for arbitrary morphisms of invertible inputs, with no triangle identities needed because the proof uses lem-sf-quasi-inverse-hom-bijection. Fault, repaired: step 3 uses the tensor-by-P Hom bijection on Hom(Ru_!B, Λ_U), but step 1 built that equivalence only on D^b_ctf(U). No cited node puts Ru_!B there for schemes that are not separated over k (thm-sf-ctf-stability(iv) needs separated schemes). The FIX states the U-side equivalence ⊗P with quasi-inverse ⊗P^{-1} on the ambient D(U_proet,Λ), where Ru_! takes values; since D^b_ctf is a full subcategory, its Hom sets are the ambient ones. Edits are in step 1 only, in fixes/dag/nodes/sec-smooth-purity/lem-pur-tensor-mate-invertible-input.json. Edge cases checked: u = id, P = Λ, empty T, shifts and rank-one local systems. All four tool_uses are accepted as generic operation properties.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TensorMateInvertibleInput",
+  "declaration": "AlgebraicGeometry.ProEtale.tensorMate_invertibleInput",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.invertibleInputTensorSymmetry",
+   "AlgebraicGeometry.ProEtale.invertibleInputTensorMateSource",
+   "AlgebraicGeometry.ProEtale.invertibleInputTensorMateTarget",
+   "AlgebraicGeometry.ProEtale.invertibleInputTensorMate",
+   "AlgebraicGeometry.ProEtale.tensorMate_invertibleInput"
+  ],
+  "file": "lean/Sheaf/Paper/TensorMateInvertibleInput.lean",
+  "statement": "theorem tensorMate_invertibleInput (S : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of S.field.k))] [Y.Over (Spec (.of S.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of S.field.k))] [QuasiCompact (X ↘ Spec (.of S.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of S.field.k))] [QuasiCompact (Y ↘ Spec (.of S.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of S.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} S.Coefficient))) (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} S.Coefficient) Y ((comparisonUpperStar (ModuleCat.{u + 1} S.Coefficient) Y).mapDerivedCategory.obj K)) (hKi : finiteComparedInvertibilityClause S Y ((comparisonUpperStar (ModuleCat.{u + 1} S.Coefficient) Y).mapDerivedCategory.obj K)) : IsIso (@invertibleInputTensorMate S.Coefficient _ _ X Y f (S.finiteComparedCompactification f (Y ↘ Spec (.of S.field.k))).hasCompactification K) ∧ ∀ (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} S.Coefficient))), DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} S.Coefficient) Y ((comparisonUpperStar (ModuleCat.{u + 1} S.Coefficient) Y).mapDerivedCategory.obj L) → finiteComparedInvertibilityClause S Y ((comparisonUpperStar (ModuleCat.{u + 1} S.Coefficient) Y).mapDerivedCategory.obj L) → ∀ a : K ⟶ L, (@invertibleInputTensorMateSource S.Coefficient _ _ X Y f (S.finiteComparedCompactification f (Y ↘ Spec (.of S.field.k))).hasCompactification).map a ≫ @invertibleInputTensorMate S.Coefficient _ _ X Y f (S.finiteComparedCompactification f (Y ↘ Spec (.of S.field.k))).hasCompactification L = @invertibleInputTensorMate S.Coefficient _ _ X Y f (S.finiteComparedCompactification f (Y ↘ Spec (.of S.field.k))).hasCompactification K ≫ (@invertibleInputTensorMateTarget S.Coefficient _ _ X Y f (S.finiteComparedCompactification f (Y ↘ Spec (.of S.field.k))).hasCompactification).map a",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d29c04159",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Read node, all 5 stmt_dep records (identical to live), live def-pur-co-smoothness module, upstream dualizingComplexTensorMap/derivedBraidedCategory/derivedTensor. Hypotheses match node and the def-pur-co-smoothness étale-origin convention exactly (finite-type schemes over k without absolute separatedness; separated finite-type k-morphism; constructibleFiniteTor of ν^*K; finiteComparedInvertibilityClause with a Dctf inverse in both orders). θ = ν^*(canonical Koszul braiding ≫ Etale.dualizingComplexTensorMap), the specified counit/PF⁻¹ transpose in pullback-first order with the same canonical compactification; conclusion is IsIso of that arrow plus naturality for all a:K⟶L between invertible Dctf inputs (matches step 6). Helpers have real data; only sorry is the theorem proof; docstrings carry source place, blueprint tag and 6 proof steps; statement verbatim; universes as in def record; report has Worker report and Second reading. Edge cases id, Λ, empty schemes, shifts, n=1 covered. H4: upstream isIso_rightDerivedUpperShriekTensorMap_of_isInvertible is étale-invertible only, no naturality → not an existing binding (advisory for stage 3). No changes, no compile."
+ }
+}

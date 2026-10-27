@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-schwartz-cutoff-l2-approximation",
+ "kind": "statement",
+ "title": "Compact smooth approximation of Schwartz derivatives in L2",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and Lebesgue measure on Euclidean $\\mathbf R^m$, where $m\\geq1$. Write $\\mathcal S$ for the complex Schwartz class: smooth functions $\\psi$ such that $\\sup_x\\|x\\|^k\\|D^n\\psi(x)\\|<\\infty$ for every pair of integers $k,n\\geq0$. For a multi-index $\\beta\\in\\mathbf N^m$, put $|\\beta|=\\sum_j\\beta_j$ and $\\partial^\\beta=\\prod_j\\partial_{x_j}^{\\beta_j}$. For every $\\psi\\in\\mathcal S$ and integer $s\\geq0$, there is a sequence of smooth compactly supported complex functions $\\psi_n$ such that, for every $|\\beta|\\leq s$, $$\\|\\partial^\\beta\\psi_n-\\partial^\\beta\\psi\\|_2\\longrightarrow0.$$ Here $\\|f\\|_2=(\\int|f(x)|^2\\,dx)^{1/2}$, and all derivatives in the displayed expression are square-integrable.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; VI §2, the weak-derivative Sobolev setup before (2.1), printed p.289. Agent-stated compact-cutoff approximation prerequisite, not a separately numbered assertion of that source."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Choose a real smooth cutoff $\\chi$ with $0\\leq\\chi\\leq1$, equal to $1$ on $\\overline B(0,1)$ and with compact support $\\overline B(0,2)$, using [lem-sfb-euclidean-smooth-ball-bump]. Regard it as complex-valued. By [lem-sfb-schwartz-test-inclusion-integrability] it is Schwartz. Repeatedly apply the coordinate-derivative clause of [lem-sfb-schwartz-l2-coordinate-calculus]: every $\\partial^\\gamma\\chi$ is Schwartz, and its defining bound with weight zero supplies a finite $B_\\gamma\\geq0$ such that $|\\partial^\\gamma\\chi(y)|\\leq B_\\gamma$ for all $y$. Also every $\\partial^\\delta\\psi$ is Schwartz and square-integrable, by the same coordinate-calculus node.",
+   "uses": [
+    "lem-sfb-euclidean-smooth-ball-bump",
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-schwartz-l2-coordinate-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 weak-derivative Sobolev setup before (2.1), printed p.289. The following compact-cutoff proof is supplied by the agent, not attributed to a numbered assertion in Demailly."
+   }
+  },
+  {
+   "text": "For $n\\in\\mathbf N$ set $R_n=n+1$, $\\chi_n(x)=\\chi(x/R_n)$ and $\\psi_n(x)=\\chi_n(x)\\psi(x)$. These functions are smooth by composition with a linear dilation and multiplication. Their supports are contained in $R_n\\operatorname{supp}(\\chi)$: if $x/R_n$ is outside the support, $\\chi_n$ vanishes on a neighborhood of $x$. The dilation image of the compact support is compact, and the support of the product is closed in that image. Thus $\\psi_n$ is a smooth compactly supported complex function. By [lem-sfb-schwartz-test-inclusion-integrability] it is Schwartz, and iteration of [lem-sfb-schwartz-l2-coordinate-calculus] shows that every $\\partial^\\beta\\psi_n$ is square-integrable.",
+   "uses": [
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-schwartz-l2-coordinate-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 weak-derivative Sobolev setup before (2.1), printed p.289. The following compact-cutoff proof is supplied by the agent, not attributed to a numbered assertion in Demailly."
+   }
+  },
+  {
+   "text": "For a multi-index $\\beta$, write $\\gamma\\leq\\beta$ coordinatewise and $\\binom\\beta\\gamma=\\prod_j\\binom{\\beta_j}{\\gamma_j}$. Repeated first-order chain and product rules give $$\\partial^\\gamma\\chi_n(x)=R_n^{-|\\gamma|}(\\partial^\\gamma\\chi)(x/R_n),\\qquad \\partial^\\beta\\psi_n=\\sum_{\\gamma\\leq\\beta}\\binom\\beta\\gamma(\\partial^\\gamma\\chi_n)\\partial^{\\beta-\\gamma}\\psi.$$ Here is the induction: the formulas at order zero are their definitions. Applying $\\partial_{x_j}$ to the first formula introduces one factor $R_n^{-1}$. Applying it to each product in the second formula differentiates either factor; reindex the first contributions by $\\gamma+e_j$ and combine them with the second contributions using $\\binom{b}{c-1}+\\binom{b}{c}=\\binom{b+1}{c}$. This proves the formulas at the next order; all functions are smooth, so the coordinate derivatives commute.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 weak-derivative Sobolev setup before (2.1), printed p.289. The following compact-cutoff proof is supplied by the agent, not attributed to a numbered assertion in Demailly."
+   }
+  },
+  {
+   "text": "Fix $|\\beta|\\leq s$ and put $E_{n,\\beta}=\\partial^\\beta\\psi_n-\\partial^\\beta\\psi$. The expansion gives $$E_{n,\\beta}=(\\chi_n-1)\\partial^\\beta\\psi+\\sum_{0<\\gamma\\leq\\beta}\\binom\\beta\\gamma R_n^{-|\\gamma|}(\\partial^\\gamma\\chi)(x/R_n)\\partial^{\\beta-\\gamma}\\psi.$$ For fixed $x$, eventually $\\|x\\|<R_n$. Then $\\chi_n$ equals $1$ on a neighborhood of $x$, and every positive-order derivative of $\\chi_n$ vanishes there, so $E_{n,\\beta}(x)=0$. Consequently $|E_{n,\\beta}(x)|^2\\to0$ for every $x$. The difference is square-integrable since $|a-b|^2\\leq2|a|^2+2|b|^2$ and both derivatives are square-integrable by the preceding steps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 weak-derivative Sobolev setup before (2.1), printed p.289. The following compact-cutoff proof is supplied by the agent, not attributed to a numbered assertion in Demailly."
+   }
+  },
+  {
+   "text": "Put $I_\\beta=\\{\\gamma:\\gamma\\leq\\beta\\}$, $q_\\beta=|I_\\beta|\\geq1$, $A_0=1$ and $A_\\gamma=\\binom\\beta\\gamma B_\\gamma$ for $\\gamma>0$. Since $R_n\\geq1$ and $|\\chi_n-1|\\leq1$, the expansion and the finite-sum inequality $|\\sum_{j=1}^q z_j|^2\\leq q\\sum_{j=1}^q|z_j|^2$ imply $$|E_{n,\\beta}(x)|^2\\leq G_\\beta(x):=q_\\beta\\sum_{\\gamma\\leq\\beta} A_\\gamma^2|\\partial^{\\beta-\\gamma}\\psi(x)|^2.$$ Each squared derivative is integrable by repeated application of [lem-sfb-schwartz-l2-coordinate-calculus]. Thus $G_\\beta$ is integrable, being a finite nonnegative linear combination of these integrable functions. It is independent of $n$. All squared errors are continuous, hence Lebesgue measurable.",
+   "uses": [
+    "lem-sfb-schwartz-l2-coordinate-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 weak-derivative Sobolev setup before (2.1), printed p.289. The following compact-cutoff proof is supplied by the agent, not attributed to a numbered assertion in Demailly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-real-dominated-integral-convergence] with $F_n=|E_{n,\\beta}|^2$, $f=0$ and $g=G_\\beta$. The previous two steps verify measurability, integrable domination and pointwise convergence on all of $\\mathbf R^m$; in particular they verify the required almost-everywhere hypotheses. It follows that $\\int|E_{n,\\beta}|^2\\to0$. Taking square roots gives the required $L^2$ convergence: for any $\\varepsilon>0$, the integral is eventually less than $\\varepsilon^2$. The same sequence $\\psi_n$ was defined before $\\beta$ was chosen and therefore works for every $|\\beta|\\leq s$, including $\\beta=0$ when $s=0$.",
+   "uses": [
+    "lem-sfb-real-dominated-integral-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; VI §2 weak-derivative Sobolev setup before (2.1), printed p.289. The following compact-cutoff proof is supplied by the agent, not attributed to a numbered assertion in Demailly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-euclidean-smooth-ball-bump",
+  "lem-sfb-schwartz-test-inclusion-integrability",
+  "lem-sfb-schwartz-l2-coordinate-calculus",
+  "lem-sfb-real-dominated-integral-convergence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; VI §2 weak-derivative Sobolev setup before (2.1), printed p.289. The following compact-cutoff proof is supplied by the agent, not attributed to a numbered assertion in Demailly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every Schwartz function is a limit of smooth compactly supported functions with all derivatives converging in L2",
+   "results": "{\"t\": \"2026-10-24T03:40:16Z\", \"tool\": \"leanfinder\", \"query\": \"Every Schwartz function is a limit of smooth compactly supported functions with all derivatives converging in L2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.denseRange_toLpCLM\", \"MeasureTheory.Lp.dense_hasCompactSupport_contDiff\", \"HasCompactSupport.toSchwartzMap\", \"SchwartzMap.toLpCLM_apply\", \"SchwartzMap.toLpCLM\", \"TestFunction.ofSupportedInLM\", \"HasCompactSupport.toSchwartzMap_toFun\", \"TestFunction.toTestFunctionClass\"], \"digest\": \"02d941e7d2698e42\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.denseRange_toLpCLM and MeasureTheory.Lp.dense_hasCompactSupport_contDiff give density for the function alone, not simultaneous approximation of its derivatives. HasCompactSupport.toSchwartzMap only includes existing compact tests into Schwartz space. SchwartzMap.tendsto_cocompact concerns decay of one function. The second cutoff-specific semantic search likewise gives multiplication and convolution constructions, not the asserted derivative graph approximation. Source SmoothApprox.lean:87-99 and 114-126 read; no one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplying a Schwartz function by rescaled smooth cutoffs gives compactly supported smooth functions converging with all partial derivatives in L2",
+   "results": "{\"t\": \"2026-10-24T03:40:51Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplying a Schwartz function by rescaled smooth cutoffs gives compactly supported smooth functions converging with all partial derivatives in L2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.toSchwartzMap\", \"SchwartzMap.smulLeftCLM\", \"SchwartzMap.smulRightCLM\", \"ContDiffBump.convolution_tendsto_right\", \"ContDiffBump.ae_convolution_tendsto_right_of_locallyIntegrable\", \"ExistsContDiffBumpBase.y\", \"ExistsContDiffBumpBase.u\", \"SchwartzMap.compCLMOfAntilipschitz\"], \"digest\": \"4cac08c6c48d1fc5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.denseRange_toLpCLM and MeasureTheory.Lp.dense_hasCompactSupport_contDiff give density for the function alone, not simultaneous approximation of its derivatives. HasCompactSupport.toSchwartzMap only includes existing compact tests into Schwartz space. SchwartzMap.tendsto_cocompact concerns decay of one function. The second cutoff-specific semantic search likewise gives multiplication and convolution constructions, not the asserted derivative graph approximation. Source SmoothApprox.lean:87-99 and 114-126 read; no one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth compactly supported functions are dense in Schwartz space",
+   "results": "{\"t\": \"2026-10-24T03:40:14Z\", \"tool\": \"leansearch\", \"query\": \"Smooth compactly supported functions are dense in Schwartz space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.MemLp.exist_eLpNorm_sub_le\", \"MeasureTheory.Lp.dense_hasCompactSupport_contDiff\", \"ContinuousMap.dense_setOf_contDiff\", \"HasCompactSupport.toSchwartzMap\", \"SchwartzMap.denseRange_toLpCLM\", \"HasCompactSupport.toSchwartzMap_toFun\", \"ContDiffMapSupportedInClass.mk\", \"HasCompactSupport.exist_eLpNorm_sub_le_of_continuous\"], \"digest\": \"5194756b8d1149fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.denseRange_toLpCLM and MeasureTheory.Lp.dense_hasCompactSupport_contDiff give density for the function alone, not simultaneous approximation of its derivatives. HasCompactSupport.toSchwartzMap only includes existing compact tests into Schwartz space. SchwartzMap.tendsto_cocompact concerns decay of one function. The second cutoff-specific semantic search likewise gives multiplication and convolution constructions, not the asserted derivative graph approximation. Source SmoothApprox.lean:87-99 and 114-126 read; no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SchwartzMap\", \"tendsto\"",
+   "results": "{\"t\": \"2026-10-24T03:40:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SchwartzMap\\\", \\\"tendsto\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SchwartzMap.tendsto_cocompact\"], \"digest\": \"c1722645c9aac0b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.denseRange_toLpCLM and MeasureTheory.Lp.dense_hasCompactSupport_contDiff give density for the function alone, not simultaneous approximation of its derivatives. HasCompactSupport.toSchwartzMap only includes existing compact tests into Schwartz space. SchwartzMap.tendsto_cocompact concerns decay of one function. The second cutoff-specific semantic search likewise gives multiplication and convolution constructions, not the asserted derivative graph approximation. Source SmoothApprox.lean:87-99 and 114-126 read; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "dense|cutoff|cut.off|HasCompactSupport",
+   "results": "{\"t\": \"2026-10-24T03:40:14Z\", \"tool\": \"grep\", \"query\": \"dense|cutoff|cut.off|HasCompactSupport\", \"sub\": \"Analysis/Distribution/SchwartzSpace\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\"], \"digest\": \"9c84040e29713d32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.denseRange_toLpCLM and MeasureTheory.Lp.dense_hasCompactSupport_contDiff give density for the function alone, not simultaneous approximation of its derivatives. HasCompactSupport.toSchwartzMap only includes existing compact tests into Schwartz space. SchwartzMap.tendsto_cocompact concerns decay of one function. The second cutoff-specific semantic search likewise gives multiplication and convolution constructions, not the asserted derivative graph approximation. Source SmoothApprox.lean:87-99 and 114-126 read; no one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by rescaled smooth cutoffs approximates a Schwartz function and all its derivatives in L2",
+   "results": "{\"t\": \"2026-10-24T04:14:15Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplication by rescaled smooth cutoffs approximates a Schwartz function and all its derivatives in L2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.seminormAux\", \"SchwartzMap.seminormAux_le_bound\", \"SchwartzMap.decay_smul_aux\", \"SchwartzMap.smulRightCLM\", \"SchwartzMap.le_seminormAux\", \"SchwartzMap.bounds_nonempty\", \"SchwartzMap.integral_pow_mul_iteratedFDeriv_le\", \"SchwartzMap.decay\"], \"digest\": \"20bdb8b1b5ee8410\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits give Schwartz seminorm bounds, compact-test inclusion, or Lp density of functions alone. None produces a single sequence simultaneously approximating prescribed derivatives. Read SmoothApprox.lean:82-126 and SchwartzSpace/Basic.lean:550-567,1308-1325; these require the cutoff argument supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schwartz functions can be approximated in every Sobolev norm by smooth compactly supported functions",
+   "results": "{\"t\": \"2026-10-24T04:16:24Z\", \"tool\": \"leansearch\", \"query\": \"Schwartz functions can be approximated in every Sobolev norm by smooth compactly supported functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.exist_eLpNorm_sub_le_of_continuous\", \"MeasureTheory.Lp.dense_hasCompactSupport_contDiff\", \"MeasureTheory.MemLp.exist_eLpNorm_sub_le\", \"HasCompactSupport.toSchwartzMap\", \"SchwartzMap.denseRange_toLpCLM\", \"Continuous.exists_contDiff_approx\", \"exists_smooth_tsupport_subset\", \"HasCompactSupport.toSchwartzMap_toFun\"], \"digest\": \"98920d157a20ab33\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits give Schwartz seminorm bounds, compact-test inclusion, or Lp density of functions alone. None produces a single sequence simultaneously approximating prescribed derivatives. Read SmoothApprox.lean:82-126 and SchwartzSpace/Basic.lean:550-567,1308-1325; these require the cutoff argument supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "cutoff|cut.off|dense|tendsto",
+   "results": "{\"t\": \"2026-10-24T04:14:04Z\", \"tool\": \"grep\", \"query\": \"cutoff|cut.off|dense|tendsto\", \"sub\": \"Analysis/Distribution/SchwartzSpace\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\"], \"digest\": \"deff0bc3c66da943\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.tendsto_cocompact is decay at infinity of a fixed Schwartz function, not convergence of cutoff approximants. The source search found no derivative approximation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SchwartzMap\", \"tendsto\"",
+   "results": "{\"t\": \"2026-10-24T04:14:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"SchwartzMap\\\", \\\"tendsto\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SchwartzMap.tendsto_cocompact\"], \"digest\": \"c1722645c9aac0b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.tendsto_cocompact is decay at infinity of a fixed Schwartz function, not convergence of cutoff approximants. The source search found no derivative approximation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-l2-weak-derivative-fourier-identity",
+  "date": "2026-10-24",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, Sobolev lemma (2.1), printed p.289 (PDF page 289), including the preceding weak-derivative definition of the Sobolev spaces. Supporting Fourier argument: The Euclidean weighted-Fourier integrability input for (2.1), before inverse transformation. Supporting Fourier calculation: Plancherel transform of an L2 weak partial derivative. Supporting test-function prerequisite: Compact smooth approximation of Schwartz derivatives in L2.",
+   "via": [
+    "lem-sfb-l2-weak-derivative-fourier-identity",
+    "lem-sfb-weak-sobolev-fourier-moments",
+    "lem-sfb-bundle-sobolev-embedding",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-schwartz-cutoff-l2-approximation",
+  "worker": "stage1",
+  "summary": "Q124 constructs χ(x/(n+1))ψ(x), expands its derivatives with the multi-index product rule, proves pointwise eventual equality and an integrable squared-error bound, then applies the new Mathlib dominated-convergence leaf. Reuses existing ball-bump, compact-test-to-Schwartz and Schwartz L2 coordinate-calculus nodes. Statement unchanged; no Lean written or compiled.",
+  "blueprint": "Supporting cutoff prerequisite of det-thm-sf-ctf-stability-direct-images proof (3) along the inherited alteration/GAGA/Kodaira/Sobolev chain recorded in blueprint.from.place and via; the current blueprint contains no independent Schwartz or analytic cutoff assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-a37c68cb2",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-a37c68cb2 (reviewer sub-agent of L); spot-checked: I read the delivery in full, and review.md has the step-by-step checks. This is a first stage-1 delivery with no repair note, so the re-split rule does not apply. The item statement and stmt_deps are unchanged. Step 1: the ball-bump node with c=0, a=1, b=2 gives a smooth cutoff χ with 0≤χ≤1, equal to 1 on the closed unit ball, with compact support the closed ball of radius 2. The compact-test inclusion node makes χ Schwartz, iterating the coordinate-calculus node puts every ∂^γχ in S, and the Schwartz bound with k=n=0 gives each sup bound B_γ. Step 2: ψ_n=χ(x/(n+1))ψ is smooth with compact support, hence Schwartz, so all its derivatives are in L^2. Step 3: the Leibniz/dilation induction is written out (base case, the R^{-1} chain-rule factor, reindexing by γ+e_j, Pascal). Step 4: E_{n,β}(x)=0 once ‖x‖<R_n, because χ_n equals 1 on the open ball of radius R_n. Step 5: the integrable dominating function G_β is independent of n; the bound uses R_n≥1, |χ_n−1|≤1 and Cauchy–Schwarz over q_β terms. Step 6: the new leaf gives ∫|E|^2→0, then square roots give the L^2 convergence. I checked the edge cases ψ=0, β=0, s=0, n=0 and m=1. All cited nodes are Mathlib leaves in the item's unit sk-thm-sf-ctf-stability, so there are no tool_uses and no SGA citation. New node lem-sfb-real-dominated-integral-convergence: I read MeasureTheory.tendsto_integral_of_dominated_convergence at Mathlib/MeasureTheory/Integral/DominatedConvergence.lean:57-62, and it specializes in one line with α=EuclideanSpace ℝ (Fin m), G=ℝ, μ=volume. Lebesgue-measurable real functions are AEStronglyMeasurable for volume. The four searches are logged. The statement is self-contained and is not a restatement of the item. A duplicate search with rg -L over the DAG found only unrelated nodes (normal-series-interval-integration, a pushforward search log), and lem-sfb-euclidean-sobolev-graph-mollification handles compactly supported W^{s,2}, not Schwartz functions. Demailly is absent locally; the WANTED line and the agent proof_origin are correct. The citer lem-sfb-l2-weak-derivative-fourier-identity uses exactly this statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.SchwartzCutoffL2Approximation",
+  "declaration": "SchwartzMap.exists_compactlySupported_multiIndex_l2_approximation",
+  "file": "lean/Sheaf/Analysis/SchwartzCutoffL2Approximation.lean",
+  "statement": "theorem exists_compactlySupported_multiIndex_l2_approximation (m : ℕ) (hm : 1 ≤ m) (ψ : SchwartzMap (EuclideanSpace ℝ (Fin m)) ℂ) (s : ℕ) : ∃ φ : ℕ → EuclideanSpace ℝ (Fin m) → ℂ, (∀ n, ContDiff ℝ ∞ (φ n) ∧ HasCompactSupport (φ n)) ∧ ∀ β : Fin m → ℕ, (∑ j, β j) ≤ s → MemLp (fun x ↦ iteratedFDeriv ℝ (List.ofFn (fun j : Fin m ↦ List.replicate (β j) j)).flatten.length ψ x (fun i ↦ EuclideanSpace.single ((List.ofFn (fun j : Fin m ↦ List.replicate (β j) j)).flatten.get i) 1)) 2 volume ∧ (∀ n, MemLp (fun x ↦ iteratedFDeriv ℝ (List.ofFn (fun j : Fin m ↦ List.replicate (β j) j)).flatten.length (φ n) x (fun i ↦ EuclideanSpace.single ((List.ofFn (fun j : Fin m ↦ List.replicate (β j) j)).flatten.get i) 1)) 2 volume) ∧ Tendsto (fun n ↦ Real.sqrt (∫ x, ‖iteratedFDeriv ℝ (List.ofFn (fun j : Fin m ↦ List.replicate (β j) j)).flatten.length (φ n) x (fun i ↦ EuclideanSpace.single ((List.ofFn (fun j : Fin m ↦ List.replicate (β j) j)).flatten.get i) 1) - iteratedFDeriv ℝ (List.ofFn (fun j : Fin m ↦ List.replicate (β j) j)).flatten.length ψ x (fun i ↦ EuclideanSpace.single ((List.ofFn (fun j : Fin m ↦ List.replicate (β j) j)).flatten.get i) 1)‖ ^ 2 ∂volume)) atTop (𝓝 0)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5909de8e2",
+  "group": "NB",
+  "result": "pass",
+  "note": "Only change: new module Sheaf.Analysis.SchwartzCutoffL2Approximation plus the item's lean record; statement verbatim (script-checked), stmt_deps/proof unchanged, no new nodes. Clause match: EuclideanSpace ℝ (Fin m) + volume, hm : 1 ≤ m as in node, SchwartzMap … ℂ, s : ℕ, single φ chosen before ∀ β, ContDiff ℝ ∞ ∧ HasCompactSupport, |β| ≤ s, ∂^β = iteratedFDeriv on flattened replicate list of EuclideanSpace.single vectors (same order as the citer's multiIndexPartialDeriv foldr; equal to f at β=0), MemLp 2 of both derivatives as conclusions, √∫‖Δ‖² → 0 is exactly the node's norm. Edge cases s=0/β=0/ψ=0/m=1/n=0 fine; no universes. H4: no new definition; citer helper not reusable (import cycle); no Mathlib multi-index notion. Citer lem-sfb-l2-weak-derivative-fourier-identity step 1 is served exactly. Docstrings carry source place, blueprint id and 6 proof steps; sorry only; report has Worker report and Second reading by NB. No recompile per 2026-10-21 rule; worker compile clean."
+ }
+}

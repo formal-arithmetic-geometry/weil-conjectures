@@ -1,4 +1,4 @@
-"""Claims must recheck completed stage-2 nodes when queue.tsv is stale."""
+"""DAG claims must recheck publication and stage completion when queue.tsv is stale."""
 import contextlib
 import io
 import json
@@ -111,6 +111,45 @@ class Stage2ClaimTest(unittest.TestCase):
         self.write_node(self.item)
         self.write_queue((self.item, "1"))
         self.assertFalse(claim.take("NK", self.item))
+
+    def test_take_many_stage1_refuses_reviewed_split_and_claims_open_work(self):
+        fresh = "lem-stage1-fresh"
+        self.write_node(fresh, status="unsplit", reviewed=None)
+        self.write_queue((self.item, "1"), (fresh, "1"))
+        self.assertEqual(claim.take_many(
+            [("NA", self.item), ("NA", fresh)], stages=["1", "1"]), 0)
+        self.assertIn(f"NO\tNA\t{self.item}\t", self.output.getvalue())
+        self.assertIn(f"OK\tNA\t{fresh}\n", self.output.getvalue())
+        self.assertIsNone(claim.read(self.item))
+        self.assertEqual(claim.read(fresh)["who"], "NA")
+
+    def test_stage1_request_is_refused_after_queue_advances_to_stage2(self):
+        # Stage 2 still needs a Lean record; that cannot reopen the accepted split.
+        self.write_node(self.item)
+        self.assertFalse(claim.take("NA", self.item, stage="1"))
+        self.assertIsNone(claim.read(self.item))
+        self.assertTrue(claim.take("NA", self.item, stage="2"))
+
+    def test_released_stage1_repair_reopens_reviewed_split(self):
+        self.write_queue((self.item, "1"))
+        notes = self.work / "repair-notes"
+        notes.mkdir()
+        (notes / (self.item + ".json")).write_text(json.dumps({
+            "state": "released", "stage": "1", "reason": "repair accepted split",
+        }))
+        with patch.object(claim, "handoff_return") as handoff:
+            self.assertTrue(claim.take("NA", self.item, stage="1"))
+        handoff.assert_called_once_with("NA", self.item)
+
+    def test_stage3_repair_does_not_reopen_accepted_stage1_split(self):
+        self.write_queue((self.item, "1"))
+        notes = self.work / "repair-notes"
+        notes.mkdir()
+        (notes / (self.item + ".json")).write_text(json.dumps({
+            "state": "released", "stage": "3",
+        }))
+        self.assertFalse(claim.take("NA", self.item, stage="1"))
+        self.assertIsNone(claim.read(self.item))
 
     def test_stage1_split_with_withdrawn_review_is_claimable(self):
         self.write_node(self.item, reviewed=None)

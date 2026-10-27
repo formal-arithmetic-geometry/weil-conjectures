@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-section-fibre-squares",
+ "kind": "statement",
+ "title": "The one and zero fibre squares of the canonical section comparisons",
+ "statement": "For every finite purity datum P [def-pur-conventions], the actual family restriction of an etale map of smooth section pairs [def-pur-section-restriction-data] restricts at one to the original restriction and at zero to the induced normal restriction, through endpointOne and endpointZero. Under any Cartesian base change over separated finite-type k-schemes, endpointOne and endpointZero commute with the family and endpoint baseComparison maps through the specified endpointPull constraint. This statement asserts the four endpoint squares; it asserts no equation involving the normalized delta map.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3; composition-coherence Step 1; sk-thm-dnc Local construction and Gluing"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-section-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the one- and zero-fibre BaseChange structures from the actual Rees fibre pullback squares. The endpointOne and endpointZero formulas are definitionally the corresponding baseComparison maps, including all finite-site comparison factors.",
+   "uses": [
+    "def-pur-section-restriction-data",
+    "lem-pur-dnc-section-geometry"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the restriction-naturality clause of section_base_comparison_laws to the family etale map along the one section, with the original etale map as its fibre. Apply it along the zero section with normalEtaleMap as its fibre. The two upper-map commutations are exactly the endpoint equations in geometry. This proves both restriction squares.",
+   "uses": [
+    "def-pur-section-restriction-data",
+    "lem-pur-section-base-comparison-laws"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a commuting rectangle of four base-change squares, the two composite BaseChange structures have the same upper map. Transport along equality of the two composite base maps identifies their baseComparison maps. Expand both using the BasePasting clause of section_base_comparison_laws and cancel the first pullback compositor. This gives the rectangle equation with the inverse compositor, morphism-equality comparison, and second compositor in precisely the endpointPull order.",
+   "uses": [
+    "def-pur-section-restriction-data",
+    "lem-pur-section-base-comparison-laws"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the rectangle equation to familyBaseChange and the two one-fibre squares, using reesBaseGeometry for the upper-map equality. Apply it again to the two zero-fibre squares and normalBaseChange; its upper-map equality is the first projection equation of the defining normalBaseMap pullback lift. These are the two required endpoint base-change equations. No flatness, positive dimension, orientation, or nonemptiness assumption enters.",
+   "uses": [
+    "def-pur-section-restriction-data",
+    "lem-pur-dnc-section-geometry",
+    "lem-pur-section-base-comparison-laws"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-section-restriction-data",
+  "lem-pur-dnc-section-geometry",
+  "lem-pur-section-base-comparison-laws"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3 and composition coherence Step 1; specialize the already stated section base-comparison restriction and pasting laws to the actual Rees endpoint squares"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalized etale restriction of a smooth section invariant commutes with composition and deformation to the normal cone",
+   "results": "{\"t\": \"2026-10-25T07:22:29Z\", \"tool\": \"leanfinder\", \"query\": \"Counit normalized etale restriction of a smooth section invariant commutes with composition and deformation to the normal cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"StandardEtalePair.HasMap.map\", \"StandardEtalePair.homEquiv_symm_apply\", \"AlgebraicGeometry.Scheme.Hom.\\u03b9_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.\\u03b9_fromNormalization\", \"StandardEtalePair.lift\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"a26f07c6f0b48e86\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact section-coherence statement in Mathlib; use the existing finite coefficient and relative-Rees interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRestrictionIso",
+   "results": "{\"t\": \"2026-10-25T07:22:31Z\", \"tool\": \"grep\", \"query\": \"sectionRestrictionIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact section-coherence statement in Mathlib; use the existing finite coefficient and relative-Rees interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived pullback along etale maps is coherent with composition",
+   "results": "{\"t\": \"2026-10-25T07:23:38Z\", \"tool\": \"leansearch\", \"query\": \"Canonical derived pullback along etale maps is coherent with composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ChosenPullbacksAlong.pullbackMap_comp\", \"CategoryTheory.Limits.pullback.map_comp\", \"CategoryTheory.Over.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_\\u03c4l\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom\"], \"digest\": \"437749927b989913\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact section-coherence statement in Mathlib; use the existing finite coefficient and relative-Rees interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PuritySectionEtaleRestriction",
+  "date": "2026-10-25",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-section-etale-restriction-coherence",
+   "place": "Proof steps 2--8",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PuritySectionFibreSquares",
+  "file": "lean/Sheaf/Paper/PuritySectionFibreSquares.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.SectionRestriction.section_fibre_squares",
+  "statement": "theorem section_fibre_squares (P : PurityFiniteSetting.{u}) : (∀ (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aB] [LocallyOfFiniteType aB] [QuasiCompact aB] (d : ℕ) (X' X : Pair B d) (a : EtaleMap X' X), ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) (AffineSpace.oneSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor.mapIso (familyRestriction P aB a) ≪≫ endpointOne P aB X = endpointOne P aB X' ≪≫ restriction P aB a) ∧ ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor.mapIso (familyRestriction P aB a) ≪≫ endpointZero P aB X = endpointZero P aB X' ≪≫ restriction P aB (normalEtaleMap P aB a))) ∧ (∀ (B B₀ : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aB] [LocallyOfFiniteType aB] [QuasiCompact aB] (aB₀ : B₀ ⟶ Spec (.of P.field.k)) [IsSeparated aB₀] [LocallyOfFiniteType aB₀] [QuasiCompact aB₀] (b : B₀ ⟶ B) (_hb : b ≫ aB = aB₀) (d : ℕ) (X : Pair B d) (X₀ : Pair B₀ d) (sq : BaseChange b X₀ X), (endpointPull P b _ _ (AffineSpace.oneSection_comp_map b) (invariant P ((AffineSpace (ULift.{u} (Fin 1)) B ↘ B) ≫ aB) (familyPair X)) ≪≫ (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) (AffineSpace.oneSection (ULift.{u} (Fin 1)) B₀)).leftDerivedFunctor.mapIso (baseComparison P ((AffineSpace (ULift.{u} (Fin 1)) B ↘ B) ≫ aB) ((AffineSpace (ULift.{u} (Fin 1)) B₀ ↘ B₀) ≫ aB₀) (familyBaseChange P aB aB₀ sq)) ≪≫ endpointOne P aB₀ X₀ = (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.mapIso (endpointOne P aB X) ≪≫ baseComparison P aB aB₀ sq) ∧ (endpointPull P b _ _ (AffineSpace.zeroSection_comp_map b) (invariant P ((AffineSpace (ULift.{u} (Fin 1)) B ↘ B) ≫ aB) (familyPair X)) ≪≫ (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B₀)).leftDerivedFunctor.mapIso (baseComparison P ((AffineSpace (ULift.{u} (Fin 1)) B ↘ B) ≫ aB) ((AffineSpace (ULift.{u} (Fin 1)) B₀ ↘ B₀) ≫ aB₀) (familyBaseChange P aB aB₀ sq)) ≪≫ endpointZero P aB₀ X₀ = (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.mapIso (endpointZero P aB X) ≪≫ baseComparison P aB aB₀ (normalBaseChange P aB aB₀ sq)))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ddfa7",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261025T124427-L-2011778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T200417-L-3313872",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

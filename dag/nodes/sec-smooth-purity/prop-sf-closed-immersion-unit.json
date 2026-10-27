@@ -217,7 +217,82 @@
   "latex:proposition"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isIso_rightDerivedUpperShriekHomEquiv_id_of_isClosedImmersion",
+    "AlgebraicGeometry.ProEtale.isIso_derivedLowerStarClosedUpperShriekAdjunction_unit_app",
+    "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_rightDerivedUpperShriekHomEquiv_id_of_isClosedImmersion",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek",
+     "lines": [
+      82,
+      117
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_derivedLowerStarClosedUpperShriekAdjunction_unit_app",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion",
+     "lines": [
+      304,
+      317
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek",
+     "lines": [
+      45,
+      65
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity",
+     "lines": [
+      49,
+      64
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-grothendieck-cohomology-limit-vanishing"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic",
+     "lines": [
+      98,
+      110
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pe-comparison-injective-left-modules-acyclic",
+      "lem-cbc-abelian-comparison-injective-acyclicity"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-closed-unit",
  "split_report": {
@@ -286,5 +361,44 @@
   "group": "Q05",
   "result": "pass",
   "note": "Wrote review.md. Verified both canonical units, all eight dependencies, verbatim signature, universes and edge cases. Delivery probes compile cleanly. Recorded a separate inherited constructibility-origin import collision."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $T$ be a Noetherian scheme on which\n$\\ell$ is invertible (for instance a finite-type scheme over a field in which\n$\\ell$ is invertible), and let $i:Z\\hookrightarrow T$ be a closed immersion\n[def-weil-scheme-morphism-properties], with complementary\nopen immersion $j$, as in the open-closed recollement\n[def-weil-open-closed-recollement]. Let $Ri^!$ be the right adjoint of the\ndirect image $i_*=Ri_*$ on the ambient ordinary derived categories of the\nsmall pro-etale sites, as in [lem-exc-proetale-closed-support]. Then for\nevery $Q\\in D(Z_{\\mathrm{proet}},A)$ the adjunction unit is an isomorphism\n\n$$\nQ\\xrightarrow{\\ \\eta_i^!\\ }Ri^!Ri_*Q .\n$$\n\nNo boundedness or constructibility of $Q$ is required. In particular, for the\nconstructible exceptional adjoint $Ri^!$ of\n[def-weil-exceptional-inverse-image] — which exists without the ambient datum\nof [def-weil-ambient-exceptional-adjoint], that datum being false in general —\ncomputed with the compactification\n$Z\\xrightarrow{\\mathrm{id}}Z\\xrightarrow{i}T$ so that $Ri_{!,n}=Ri_*$,\nfor $Q\\in D^b_c(Z,A)$ the unit of the adjunction\n$\\Hom_T(Ri_!K,L)\\cong\\Hom_Z(K,Ri^!L)$ of\n[def-weil-exceptional-inverse-image] is an isomorphism\n$Q\\xrightarrow{\\sim}Ri^!Ri_*Q$.",
+  "proof": [
+   {
+    "text": "By [lem-exc-proetale-closed-exact], the closed direct image is exact (the\ncomplement of $Z$ is quasi-compact because $T$ is Noetherian), so $Ri_*$ is\ncomputed by $i_*$ on any complex, and [lem-exc-proetale-closed-support]\nprovides its right adjoint $Ri^!$ on the ambient derived categories.",
+    "uses": [
+     "lem-exc-proetale-closed-exact",
+     "lem-exc-proetale-closed-support"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By [prop-weil-open-closed-recollement-adjunctions], $i^*\\dashv Ri_*$ on the\nambient derived categories and the counit $i^*Ri_*\\to\\operatorname{id}$ is an\nisomorphism. A right adjoint whose counit is an isomorphism is fully\nfaithful, so for all $P,Q\\in D(Z_{\\mathrm{proet}},A)$ the map\n$g\\mapsto Ri_*g$ is a bijection\n\n$$\n\\Hom(P,Q)\\xrightarrow{\\ \\sim\\ }\\Hom(Ri_*P,Ri_*Q).\n$$",
+    "uses": [
+     "prop-weil-open-closed-recollement-adjunctions"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Now fix $Q$ and consider, for every $P$, the composite\n\n$$\n\\Hom(P,Q)\\xrightarrow{\\ \\eta^!_{i,Q}\\circ-\\ }\\Hom(P,Ri^!Ri_*Q)\n\\xrightarrow{\\ \\sim\\ }\\Hom(Ri_*P,Ri_*Q),\n$$\n\nthe second map being the adjunction bijection of $Ri_*\\dashv Ri^!$. By the\ntriangle identity, the adjoint of $\\eta^!_{i,Q}\\circ g$ is\n$\\epsilon^!_{Ri_*Q}\\circ Ri_*(\\eta^!_{i,Q})\\circ Ri_*g=Ri_*g$, so the\ncomposite is the bijection displayed above. Hence composition with\n$\\eta^!_{i,Q}$ is a bijection $\\Hom(P,Q)\\to\\Hom(P,Ri^!Ri_*Q)$, naturally in\n$P$, and the Yoneda lemma shows that $\\eta^!_{i,Q}$ is an isomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the last assertion no ambient datum is used. Write $Ri^!_c$ for the\nfunctor of [def-weil-exceptional-inverse-image]; its adjunction\n$\\Hom_T(Ri_*P,M)\\cong\\Hom_Z(P,Ri^!_cM)$ holds for every bounded-below $P$ of\netale origin and every bounded-below $M$ ([thm-sf-ambient-adjoint-class]),\nand $Ri^!_cM=\\nu_Z^*i^{\\times}R\\nu_{T,*}M$ is then again bounded below of\netale origin. Let $Q\\in D^b_c(Z,A)$, so that $Q$ and $Ri^!_cRi_*Q$ both\nlie in the full subcategory of bounded-below objects of etale origin. For\n$P$ in that subcategory the composite of composition with the unit\n$Q\\to Ri^!_cRi_*Q$ and the adjunction bijection is, by the triangle\nidentity as above, the map $g\\mapsto Ri_*g$, which is bijective by the full\nfaithfulness just shown. The Yoneda lemma in that full subcategory shows that\nthe unit $Q\\to Ri^!_cRi_*Q$ is an isomorphism.",
+    "uses": [
+     "def-weil-exceptional-inverse-image",
+     "thm-sf-ambient-adjoint-class"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

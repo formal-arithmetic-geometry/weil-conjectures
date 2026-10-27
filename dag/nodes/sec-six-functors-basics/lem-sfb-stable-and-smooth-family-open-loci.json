@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-stable-and-smooth-family-open-loci",
+ "kind": "statement",
+ "title": "Stable genus and smooth-family open loci in curve families",
+ "statement": "Let $k$ be a field [def-weil-field] and $g\\geq2$. Let $\\mathfrak C$ be the stack of flat proper finitely presented families of algebraic spaces with geometric fibres of dimension at most one. For every such family $X\\to T$, there is an open subscheme $T_g^{\\mathrm{st}}\\subset T$, commuting with arbitrary base change, characterized by the following property: a morphism $T'\\to T$ factors through it exactly when $X_{T'}\\to T'$ is an unpointed stable genus-$g$ curve with the projective-bundle convention and component stability condition in [def-sfb-stable-pointed-moduli-groupoids, def-sfb-stable-pointed-curve]. In particular, over this open, the algebraic space $X$ is a scheme and the family has a closed embedding into the projective bundle of a finite-rank locally free module on its base. The corresponding full subcategory is an open substack of $\\mathfrak C$, contained in its nodal substack. There is also a base-change-compatible open subscheme $T^{\\mathrm{sm}}\\subset T$ characterized by smoothness of the whole family after pullback [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E76 (lemma-stable-curves), 0E78 (lemma-stable-one-piece-per-genus), and the smooth-family open in lemma-smooth-dense (Tag 0E86); scheme/projective-bundle comparison uses the relatively ample dualizing sheaf in the stable-family discussion preceding 0E76 and its pluricanonical embedding. The projective-bundle formulation for arbitrary bases is the agent expansion of this comparison."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stable-pointed-curve",
+  "def-sbc-smooth-morphisms",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-curve-moduli-groupoids",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-nodal-curve-stack-smooth] to the classifying map of $X/T$. The current statement defines its nodal substack by nonempty pure one-dimensional geometric fibres with at worst ordinary nodes and explicitly imposes no connectedness. Its stated open-substack test gives an open pullback $N\\subset T$. Pulling back this defining square along $T'\\to T$ identifies the new nodal open with $T'\\times_TN$. Apply [lem-sfb-curve-h0-genus-strata] to $X_N/N$: intersect $N$ with its scalar-$H^0$ open and then with the rank-$g$ open-and-closed stratum for $R^1f_*\\mathcal O$. Call the resulting open $P$. Nodal fibres are geometrically reduced; the same cohomological lemma identifies the scalar-$H^0$ condition with geometric connectedness. Thus $P$ is characterized, after any base change, by connected nonempty nodal geometric fibres of arithmetic genus $g$. All three open constructions commute with arbitrary base change.",
+   "uses": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-nodal-relative-dualizing-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E6U (lemma-prestable-curves), 0E6V (lemma-prestable-one-piece-per-genus); nodal reducedness from 0E37, included in the cited dualizing-line statement."
+   }
+  },
+  {
+   "text": "On $X_P/P$ use [lem-sfb-nodal-relative-dualizing-line] to obtain the canonical line $\\omega$, whose pullback to each geometric fibre is its dualizing line and whose formation commutes with every base change. For a geometric fibre $C$, apply [lem-sfb-nodal-canonical-positivity-tricanonical]. Its equivalence says exactly that $\\omega_C$ is ample when and only when the genus-zero component normalizations have at least three branches over nodes and the genus-one normalizations have at least one. There are no markings. These are precisely the component inequalities of [def-sfb-stable-pointed-curve] for zero sections; their genera are the dimensions of $H^1$ on the smooth proper normalized components.",
+   "uses": [
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-nodal-canonical-positivity-tricanonical",
+    "def-sfb-stable-pointed-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E74 (lemma-stable), interpreted with component normalizations; Tag 0E6R for the relative line."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-relative-ample-locus] to $X_P\\to P$ and $\\omega$. It yields an open $A\\subset P$ characterized universally by relative ampleness of $\\omega$. Set $T_g^{\\mathrm{st}}=A$, viewed as an open of $T$. Its geometric points are, by the preceding fibre criterion, exactly the connected nodal genus-$g$ fibres with the required component inequalities. The ample-locus statement gives that $X_A$ is a scheme. Both the formation of $P$ and the dualizing-line identification commute with base change, and the ample-locus universal property therefore identifies the stable open after any $T'\\to T$ with $T'\\times_TA$.",
+   "uses": [
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-nodal-canonical-positivity-tricanonical",
+    "lem-sfb-curve-h0-genus-strata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E76 (lemma-stable-curves), proof via canonical ampleness; spaces-descent.tex Tag 0D3D."
+   }
+  },
+  {
+   "text": "Over $A$, take $L=\\omega^{\\otimes3}$. By [lem-sfb-nodal-canonical-positivity-tricanonical] every geometric fibre of $L$ is very ample and has vanishing $H^1$. The scheme family $X_A/A$ is still flat, proper and finitely presented with one-dimensional fibres. Thus [lem-sfb-fibrewise-very-ample-evaluation] gives a finite locally free module $E=f_*L$ and a closed embedding $X_A\\hookrightarrow\\mathbf P_A(E)$, compatible with all base changes. This supplies the projective-bundle convention of [def-sfb-stable-pointed-curve] without assuming the original space family was a scheme or projective, and without imposing a Noetherian or quasi-compact base.",
+   "uses": [
+    "lem-sfb-nodal-canonical-positivity-tricanonical",
+    "lem-sfb-fibrewise-very-ample-evaluation",
+    "def-sfb-stable-pointed-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E8X (lemma-tricanonical), followed by the relative evaluation consequence of spaces-perfect.tex Tag 0CTM."
+   }
+  },
+  {
+   "text": "For a morphism $T'\\to T$ factoring through $A$, steps 1--4 give a flat finitely presented projective-bundle scheme family, with connected nonempty reduced nodal geometric fibres of genus $g$ and the component inequalities. It is therefore an unpointed stable genus-$g$ family by [def-sfb-stable-pointed-moduli-groupoids, def-sfb-stable-pointed-curve]. Conversely, such a family has nodal fibres and satisfies the scalar-$H^0$ and genus conditions, hence its base map factors through $P$ by the open descriptions in step 1. Its component inequalities imply ample dualizing geometric fibres, so the universal ample-locus description forces factorization through $A$. These implications use only the cited equivalences: no choice of an embedding is part of a stable-family object. The full subcategory has the same isomorphisms as $\\mathfrak C$. Its 2-base change along any family over $T$ is the discrete fibred groupoid represented by $A\\hookrightarrow T$ (the isomorphism to the given family is part of the 2-fibre product, so it removes its automorphisms). This is precisely the scheme-pullback test for an open substack stated in [lem-sfb-nodal-curve-stack-smooth]. It lies in the nodal substack since $A\\subset N$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-stable-pointed-curve",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-nodal-canonical-positivity-tricanonical",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-nodal-curve-stack-smooth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E76 and 0E78: universal interpretation and genus-$g$ open substack; the categorical conclusion is by the open-immersion test."
+   }
+  },
+  {
+   "text": "For the smooth-family open, apply [lem-sfb-flat-space-smooth-locus] to the original flat finitely presented $f:X\\to T$ and let $W\\subset X$ be its smooth source locus. Put $Z=|X|\\setminus|W|$ and $T^{\\mathrm{sm}}=T\\setminus f(Z)$. Properness includes universal closedness, so $f(Z)$ is closed. For any $h:T'\\to T$, the cited source-locus theorem identifies the bad set of $f_{T'}$ with the inverse image $Z'$. Moreover $f_{T'}(Z')=h^{-1}(f(Z))$: for a point $t'$ over $t$, the bad fibre is empty exactly when the original bad fibre over $t$ is empty, since a nonempty fibre stays nonempty under a residue-field extension (choose a field-valued point and a prime of its nonzero tensor product with that extension). Hence the displayed complement is compatible with arbitrary base change, and $f_{T'}$ is smooth exactly when the image of $T'$ avoids $f(Z)$, equivalently when $h$ factors through $T^{\\mathrm{sm}}$. No condition on the genus or connectedness is used for this open.",
+   "uses": [
+    "lem-sfb-flat-space-smooth-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DZZ (lemma-smooth-curves), first paragraph of proof. Flat arbitrary-base-change source compatibility uses morphisms.tex Tag 02V4 (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-curve",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-curve-h0-genus-strata",
+  "lem-sfb-fibrewise-very-ample-evaluation",
+  "lem-sfb-flat-space-smooth-locus",
+  "lem-sfb-nodal-canonical-positivity-tricanonical",
+  "lem-sfb-nodal-curve-stack-smooth",
+  "lem-sfb-nodal-relative-dualizing-line",
+  "lem-sfb-space-relative-ample-locus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Proofs of Tags 0E76, 0E78 and 0DZZ; the explicit projective-bundle comparison uses curves.tex 0E8X and the cited evaluation lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The locus of stable geometrically connected genus g curves is open in families of nodal curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being universally open for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ becomes universally open after restricting to an open cover \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being universally open for a morphism of schemes is Zariski-local at the source. That is, if a morphism $ f: X \\to Y $ has an open cover $ \\\\{U_i\\\\} $ of $ X $ such that each restriction \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or unramified ring loci and stability under composition do not assert openness of stable-curve families"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ampleness of the dualizing sheaf defines the open stable locus in a family of nodal curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property of ring homomorphisms that is stable under composition with localization and preserved by localization. Let $x \\\\in X$ be a point.\\\\n\"}\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f]\\n  {U V : Y.AffineZariskiSite} (i : U ⟶ V),\\n  AlgebraicGeometry.IsOpenImmersion\\n    ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (Algebrai\", \"doc\": \"The composition of the opposite of the open subset functor, the right opposite of the normalization diagram, and the Spec functor yields an open immersion for morphisms in the affine Zariski site of a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n      (AlgebraicGeometry.Scheme.Hom.no\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or unramified ring loci and stability under composition do not assert openness of stable-curve families"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stable\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" : AlgebraicGeometry.IsOpenImmersion.IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" : AlgebraicGeometry.IsOpenImmersion.IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionPrecoverageOfIsStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.IsStableUnderComposition] : (AlgebraicGeometry.Scheme.precoverage P).IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] [P.IsStableUnderBaseChange] : (AlgebraicGeometry.Scheme.precoverage P).IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" (P : AlgebraicGeometry.AffineTargetMorphismProperty) : Prop\", \"doc\": \"A `P : AffineTargetMorphismProperty` is stable under base change if `P` holds for `Y ⟶ S`\\nimplies that `P` holds for `X ×ₛ Y ⟶ X` with `X` and `S` affine schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.IsStableUnderBaseChange] : P.HasOfPostcompProperty AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [AlgebraicGeometry.HasAffineProperty P Q] (hP' : Q.IsStableUnderBaseChange) : P.IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso] (H : ∀ ⦃X Y S : AlgebraicGeometry.Scheme⦄ [inst : AlgebraicGeometry.IsAffine S] [inst_1 : AlgebraicGeometry.IsAffine X] (f : X ⟶ S) (g : Y ⟶ S), P g → P (CategoryTheory.Limits.pullback.fst f g)) : P.IsStableUnderBaseCha\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P] (hP₂ : (AlgebraicGeometry.AffineTargetMorphismProperty.of P).IsStableUnderBaseChange) : P.IsStableUnderBaseChange\", \"doc\": \"If `P` is local at the target, to show that `P` is stable under base change, it suffices to\\ncheck this for base change along a morphism of affine schemes.\"}\n  {\"name\": \"AlgebraicGeometry.topologically_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \" (P : {α β : Type u} → [TopologicalSpace α] → [TopologicalSpace β] → (α → β) → Prop) (hP : ∀ {α β γ : Type u} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] [inst_2 : TopologicalSpace γ] (f : α → β) (g : β → γ), P f → P g → P (g ∘ f)) : (AlgebraicGeometry.topologically fun {α β} [Topologi\", \"doc\": \"If a property of maps of topological spaces is stable under composition, the induced\\nmorphism property of schemes is stable under composition.\"}\n  {\"name\": \"AlgebraicGeometry.injective_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \" : (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x => Function.Injective x).IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or unramified ring loci and stability under composition do not assert openness of stable-curve families"
+  },
+  {
+   "tool": "grep",
+   "query": "stableCurve|stable_curve|dualizing.*ample",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or unramified ring loci and stability under composition do not assert openness of stable-curve families"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus of stable geometrically connected genus g curves is open in families of nodal curves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  (U : X.Opens) (hU : (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U) {Z : CommRingCat}\\n  (h : R ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (X.presheaf.g\", \"doc\": \"For a scheme $ X $, the type of open subsets of its underlying topological space.\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet\", \"type\": \"{R : Type*} [CommRing R] {s : Set (PrimeSpectrum R)} (hs : StableUnderGeneralization s) (hs' : IsConstructible s) :\\n  IsOpen s\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative ring, any constructible set that is stable under generalization is necessarily an open set.\"}\n  {\"name\": \"IsOpen.stableUnderGeneralization\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \"{s : Set X} (hs : IsOpen s) : StableUnderGeneralization s\", \"doc\": \"If a set is open in a topological space, then it is stable under generalization. That is, for any points $x$ and $y$, if $y$ specializes to $x$ (i.e., every neighborhood of $x$ is a neighborhood of $y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Type*\", \"doc\": \"For a scheme $X$, the type of open subsets of its underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.isOpen_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"(U : Set D.glued.carrier) : IsOpen U ↔ ∀ i, IsOpen (D.ι i ⁻¹' U)\", \"doc\": \"A subset $ U $ of the underlying topological space of the glued scheme $ D.\\\\text{glued} $ is open if and only if for every index $ i $, the preimage of $ U $ under the inclusion morphism $ \\\\iota_i $ i\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : MorphismProperty Scheme) [P.IsStableUnderBaseChange] : P.HasOfPostcompProperty @IsOpenImmersion\", \"doc\": \"If a morphism property of schemes is stable under base change, then composing a morphism with an open immersion preserves the property. Specifically, whenever a morphism $ f $ has the property and an \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or unramified ring loci and stability under composition do not assert openness of stable-curve families"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a flat proper family of algebraic spaces the stable genus g curve locus and the locus where the whole family is smooth are open and commute with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smooth-locus and morphism-property permanence results do not give stable genus-g curve-family opens and the global projective-bundle comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a flat proper family of algebraic spaces the stable genus g curve locus and the locus where the whole family is smooth are open and commute with arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : MorphismProperty Scheme) [P.IsStableUnderBaseChange] : P.HasOfPostcompProperty @IsOpenImmersion\", \"doc\": \"If a morphism property of schemes is stable under base change, then composing a morphism with an open immersion preserves the property. Specifically, whenever a morphism $ f $ has the property and an \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smooth-locus and morphism-property permanence results do not give stable genus-g curve-family opens and the global projective-bundle comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stable\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" : AlgebraicGeometry.IsOpenImmersion.IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" : AlgebraicGeometry.IsOpenImmersion.IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionPrecoverageOfIsStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.IsStableUnderComposition] : (AlgebraicGeometry.Scheme.precoverage P).IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] [P.IsStableUnderBaseChange] : (AlgebraicGeometry.Scheme.precoverage P).IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" (P : AlgebraicGeometry.AffineTargetMorphismProperty) : Prop\", \"doc\": \"A `P : AffineTargetMorphismProperty` is stable under base change if `P` holds for `Y ⟶ S`\\nimplies that `P` holds for `X ×ₛ Y ⟶ X` with `X` and `S` affine schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.IsStableUnderBaseChange] : P.HasOfPostcompProperty AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [AlgebraicGeometry.HasAffineProperty P Q] (hP' : Q.IsStableUnderBaseChange) : P.IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso] (H : ∀ ⦃X Y S : AlgebraicGeometry.Scheme⦄ [inst : AlgebraicGeometry.IsAffine S] [inst_1 : AlgebraicGeometry.IsAffine X] (f : X ⟶ S) (g : Y ⟶ S), P g → P (CategoryTheory.Limits.pullback.fst f g)) : P.IsStableUnderBaseCha\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P] (hP₂ : (AlgebraicGeometry.AffineTargetMorphismProperty.of P).IsStableUnderBaseChange) : P.IsStableUnderBaseChange\", \"doc\": \"If `P` is local at the target, to show that `P` is stable under base change, it suffices to\\ncheck this for base change along a morphism of affine schemes.\"}\n  {\"name\": \"AlgebraicGeometry.topologically_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \" (P : {α β : Type u} → [TopologicalSpace α] → [TopologicalSpace β] → (α → β) → Prop) (hP : ∀ {α β γ : Type u} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] [inst_2 : TopologicalSpace γ] (f : α → β) (g : β → γ), P f → P g → P (g ∘ f)) : (AlgebraicGeometry.topologically fun {α β} [Topologi\", \"doc\": \"If a property of maps of topological spaces is stable under composition, the induced\\nmorphism property of schemes is stable under composition.\"}\n  {\"name\": \"AlgebraicGeometry.injective_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \" : (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x => Function.Injective x).IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smooth-locus and morphism-property permanence results do not give stable genus-g curve-family opens and the global projective-bundle comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "stableCurve|stable_curve|dualizing.*ample",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smooth-locus and morphism-property permanence results do not give stable genus-g curve-family opens and the global projective-bundle comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unpointed-stable-coarse-projective",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families.",
+   "via": [
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-stable-and-smooth-family-open-loci",
+  "worker": "stage1",
+  "summary": "Read the Stacks stable/prestable/genus and smooth-locus proofs, checked component stability and arbitrary non-Noetherian base change, and replaced the imported density reference by 0DZZ. Six strictly supporting statements expose cohomological genus strata, the nodal dualizing line, the field canonical criterion/tricanonical embedding, the algebraic-space ample locus, relative evaluation, and the flat-space source smooth locus. No Lean attachment or Mathlib leaf matches the full claims. Repair of returned head 96776017bc9: re-read the current nodal-stack statement, explicitly separated its disconnected nodal open from the subsequent connected-genus restriction, and revalidated the scheme-pullback test used in steps 1 and 5. Refreshed both verbatim quotations and checked every other cited statement against its retained quote; documented the two newly introduced 0ADD overlaps.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Steps 1--5 realize the stable genus open and the projective-bundle comparison; step 6 realizes the smooth-family open. The ancestor command returns None for this existing created-node chain; from.node is preserved as null.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-8a080a54b",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-8a080a54b (reviewer sub-agent of L); spot-checked: PASS for Q38 lem-sfb-stable-and-smooth-family-open-loci (8a080a54). This repairs the dd477445 delivery, which a reader passed but the landing refused on 'cited node' after Q36 restated lem-sfb-nodal-curve-stack-smooth. I diffed the files against dd477445. The six new nodes are byte-identical. In the item, only steps 1 and 5 and the split_report summary changed, and the statement did not. Against live base it adds def-pc-scheme and def-trf-algebraic-space to stmt_deps. The item, its parent and the nodal-stack node are not in the route-pivot drop list, and the item is still unsplit on side-live. Steps 1 and 5 now use the current nodal-stack statement correctly. It imposes no connectedness and states the open-substack pullback test, and connectedness comes later from the scalar-H0 clause of the h0 node, using reducedness from the dualizing node. Sources read: moduli-curves 0E6I/0E6Q (with its display)/0E74/0DZZ, curves 0E8X, spaces-descent 0D3D (universal property), spaces-more-morphisms 05XA, more-morphisms 0D4H (the fibre-dimension-1 locus is open and closed). I checked the component criterion by deg ω|_Z = 2g_Z-2+b_Z: a rational tail or bridge is excluded, and an elliptic tail and a rational component with one self-node plus one external node are allowed. Step 6's image identity under residue-field extension is correct, and flatness makes arbitrary base change valid. The evaluation node (0CTM+0BCD, Nakayama, 05XA) handles empty fibres. Duplicate search by tags 0D3D/0E6I/0E1J/0E6P/0E6R/0E8X/0E74/02V4/0DZI/0CTM/05XA/0E76 and 'tricanonical' found only Noetherian-projective, DVR, Isom or scheme-pointwise nodes, so there are no duplicates. Batch-5: def-trf-algebraic-space, def-trf-projective-bundle-morphism and def-trf-nodal-geometric-fibres are general definitions, and the last two are already stmt_deps of def-sfb-stable-pointed-curve. The closure of lem-sfb-nodal-curve-stack-smooth reaches only the def-trf-algebraic-space definition and generic trf geometry tool lemmas, not trace-formula or duality steps, so I accept them. No SGA, no tool_uses, no fixes. Maintainer note: from.node is null, inherited from the base chain."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StableAndSmoothFamilyOpenLoci",
+  "declaration": "AlgebraicGeometry.stable_and_smooth_family_open_loci",
+  "declarations": [
+   "AlgebraicGeometry.IsStableGenusSpaceFamily",
+   "AlgebraicGeometry.HasFiniteLocallyFreeProjectiveRealization",
+   "AlgebraicGeometry.stable_and_smooth_family_open_loci"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StableAndSmoothFamilyOpenLoci.lean",
+  "statement": "theorem stable_and_smooth_family_open_loci (k : Type u) [Field k] (g : ℕ) (hg : 2 ≤ g) : ∃ (stableOpen smoothOpen : (X : ProperCurveModuli (Spec (.of k))) → X.base.left.Opens), (∀ X : ProperCurveModuli (Spec (.of k)), (∀ (T : Over (Spec (.of k))) (h : T ⟶ X.base), ((∃ l : T.left ⟶ (stableOpen X).toScheme, l ≫ (stableOpen X).ι = h.left) ↔ IsStableGenusSpaceFamily g T (Limits.pullback X.family.projection (yoneda.map h)) (Limits.pullback.snd X.family.projection (yoneda.map h)))) ∧ (∀ (T : Over (Spec (.of k))) (h : T ⟶ X.base), ((∃ l : T.left ⟶ (smoothOpen X).toScheme, l ≫ (smoothOpen X).ι = h.left) ↔ ∀ (U : Over (Spec (.of k))) (a : yoneda.obj U ⟶ Limits.pullback X.family.projection (yoneda.map h)), AlgebraicSpace.IsEtale a → Smooth ((yoneda.preimage (a ≫ Limits.pullback.snd X.family.projection (yoneda.map h))).left))) ∧ (∀ (Y : ProperCurveModuli (Spec (.of k))) (a : Y ⟶ X), stableOpen Y = a.base.left ⁻¹ᵁ stableOpen X ∧ smoothOpen Y = a.base.left ⁻¹ᵁ smoothOpen X) ∧ HasFiniteLocallyFreeProjectiveRealization (Over.mk ((stableOpen X).ι ≫ X.base.hom)) (Limits.pullback X.family.projection (yoneda.map (Over.homMk (stableOpen X).ι rfl : Over.mk ((stableOpen X).ι ≫ X.base.hom) ⟶ X.base))) (Limits.pullback.snd X.family.projection (yoneda.map (Over.homMk (stableOpen X).ι rfl : Over.mk ((stableOpen X).ι ≫ X.base.hom) ⟶ X.base)))) ∧ ∃ A : OpenModuliSubstack (ProperCurveModuli.category (Spec (.of k))), (∀ X : ProperCurveModuli (Spec (.of k)), A.property X ↔ IsStableGenusSpaceFamily g X.base X.family.space.obj.obj X.family.projection) ∧ (∀ X : ProperCurveModuli (Spec (.of k)), A.property X → X.family.HasNonemptyNodalGeometricFibres)",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing algebraic-space ProperCurveModuli category, stable zero-marking moduli objects, and OpenModuliSubstack. The two helper predicates express representation over the specified base and the explicit finite locally free projective embedding. The TeX statement and proof are unchanged; four already landed definition nodes are added to statement dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b59e561e4",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Read item node (only lean+stmt_deps differ from live; TeX unchanged), the module, all stmt_dep records and the Lean of ProperCurveModuli/IsProperCurveFamily, StablePointedModuli(g,0)/IsStablePointedCurve/IsProjectiveBundle, OpenModuliSubstack, HasNonemptyNodalGeometricFibres, AlgebraicSpace.IsEtale, IsFiniteLocallyFree. Every clause rendered: stable open universal property via representation by StablePointedModuli S g 0 over the given base (iso b, presheaf iso e compatible with the projection); base change via ⁻¹ᵁ for every cartesian arrow; scheme source + closed immersion into relProj of a quasicoherent IsFiniteLocallyFree E; OpenModuliSubstack with predicate ↔ stable, implies HasNonemptyNodalGeometricFibres (= nodal open of nodal_curve_stack_smooth); smooth open ↔ Smooth on every étale chart (MapToSchemeIsLocally convention), no genus/connectedness. No extra hypotheses; one universe u; statement verbatim; added stmt_deps are landed def nodes used in the signature; helpers are real Props with source/blueprint docstrings; sorry only. Edge cases checked: empty base/source, 0-dim smooth fibres, varying rank. Advisory: IsStableGenusSpaceFamily is equivalent to the theorem-owned helper StablePointedModuli.RepresentsProperCurvePullback (lem-sfb-arithmetic-stable-open-bounded), which cannot be cited as a stmt_dep; the item uses varying-rank IsFiniteLocallyFree while def-amb records the constant-rank class, consistent with the TeX 'finite-rank locally free'. No compile (no change)."
+ }
+}

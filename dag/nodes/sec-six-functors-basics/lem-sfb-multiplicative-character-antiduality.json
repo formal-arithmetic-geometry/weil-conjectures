@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-multiplicative-character-antiduality",
+ "kind": "statement",
+ "title": "Character antiequivalence and scalar extension for groups of multiplicative type",
+ "statement": "Let $k$ be a field [def-weil-field]. Group schemes are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and closed subgroups mean [def-sc-group-scheme-subgroup]. Write $\\mathbf G_m$ for [def-sc-gm-ga]. A group scheme is of multiplicative type if its extension to an algebraic closure of $k$ [def-weil-algebraic-closure] is a closed subgroup of $\\mathbf G_m^n$ for some $n\\geq0$. Fix a separable closure $k^s$ of $k$ [def-pd-separable-closure] and put $\\Gamma_k=\\operatorname{Gal}(k^s/k)$, with open subgroups given by fixing finite separable intermediate extensions. For an additive abelian group $M$, the group algebra $k[M]$ has basis $e_m$ ($m\\in M$), multiplication $e_me_n=e_{m+n}$, and Hopf operations $\\Delta(e_m)=e_m\\otimes e_m$, $\\epsilon(e_m)=1$, $S(e_m)=e_{-m}$. Set $D_k(M)=\\operatorname{Spec}k[M]$ [def-weil-affine-spectrum] with these group operations when $M$ has trivial Galois action.\n\nEvery group $G$ of multiplicative type becomes isomorphic to $D_L(M)$ over some finite separable extension $L/k$ inside $k^s$, for a finitely generated abelian group $M$. More precisely, the character functor\n$$X^*(G)=\\operatorname{Hom}_{k^s\\text{-grp}}(G_{k^s},\\mathbf G_{m,k^s})$$\n(with pointwise multiplication written additively and Galois action by conjugation) is a contravariant equivalence from groups of multiplicative type to finitely generated abelian groups with continuous $\\Gamma_k$-action for the discrete topology. For such a module $M$, choose a finite Galois extension $L/k$ through which the action factors. A quasi-inverse is the group scheme $D_k(M)=\\operatorname{Spec}(L[M]^{\\operatorname{Gal}(L/k)})$, with semilinear action $\\sigma(ae_m)=\\sigma(a)e_{\\sigma m}$ and descended Hopf operations; its isomorphism class and its character identification are independent of $L$. There are natural identifications $G\\simeq D_k(X^*(G))$ and $X^*(D_k(M))\\simeq M$. Under this equivalence a homomorphism $f:G\\to H$ is a closed immersion if and only if $f^*:X^*(H)\\to X^*(G)$ is surjective.\n\nFor every field extension $K/k$ [def-pc-field-extension] and compatible choices of separable closures, extending characters gives a natural isomorphism $X^*(G_K)\\simeq X^*(G)$ of underlying abelian groups, where the Galois action on the right is restricted along $\\Gamma_K\\to\\Gamma_k$. These identifications are compatible with homomorphisms of groups and their character maps. In the split case they identify $(D_k(M))_K$ with $D_K(M)$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Sections 12(a)--(c), especially Theorems 12.8 and 12.9(a),(b), printed pp.230--234; Corollary 12.19, p.238; Section 12(g), Theorem 12.23 and its Galois-descent construction, pp.239--240; split scalar extension in the proof of Corollary 12.25, p.240."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum",
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "def-pd-separable-closure",
+  "def-sfb-multiplicative-character-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=k[G]$. The coordinate Hopf identities in [lem-sfb-affine-group-coordinate-hopf] translate the group laws. By the affine-spectrum Hom bijection, a character $G\\to\\mathbf G_m$ is precisely a Hopf map $k[t,t^{-1}]\\to A$: it is determined by $a=t\\mapsto a$, with $\\epsilon(a)=1$, $\\Delta(a)=a\\otimes a$. The inverse relation imposes no extra condition since the antipode identity gives $S(a)a=aS(a)=1$. Conversely these equations make the algebra map $t\\mapsto a$, $t^{-1}\\mapsto S(a)$ commute with the Hopf operations, hence its spectrum is a group homomorphism. Products of characters correspond to products of these elements. This also explains the same dictionary over every field extension.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-affine-spectrum",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Sections 12(a)–(b), pp.230–232: characters as group-like elements; affine dictionary in Sections 3(a)–(b)."
+   }
+  },
+  {
+   "text": "Over $\\bar k$, the defining closed embedding of $G_{\\bar k}$ into a split torus and [lem-sfb-split-torus-subgroups-diagonalizable] give $A_{\\bar k}\\simeq\\bar k[N]$. Thus its coalgebra has a group-like basis. Apply [lem-sfb-geometrically-diagonal-coalgebra-separable-basis] to $A$: all group-like elements form a basis of $A_{k^s}$. They form an abelian group $M$ under multiplication, inverse given by the antipode. The basis map $k^s[M]\\to A_{k^s}$ is an algebra and Hopf isomorphism, since every operation agrees on each basis element. To see $M$ is finitely generated, take finite algebra generators of $A_{k^s}$, expand them in this basis, and let $M_0$ be the subgroup generated by their finite supports. The subalgebra $k^s[M_0]$ contains all the generators, so equals $k^s[M]$; basis independence gives $M_0=M$. Finally choose group generators $m_i$ and their inverses. Each corresponding element of $A_{k^s}$ has finitely many coefficients in $k^s$ relative to a $k$-basis of $A$. Adjoin these coefficients and those expressing finite algebra generators of $A$ as polynomials in these elements. They lie in a finite separable $L/k$. The group-like equations already hold over $L$ by coefficient injectivity, and the resulting $L[M]\\to A_L$ is surjective by the chosen expressions and injective by extension to $k^s$. Hence $G_L\\simeq D_L(M)$. Apply [lem-weil-pbc-finite-set-in-finite-galois-subextension] to the finite coefficients in the Galois extension $k^s/k$ to take $L$ finite Galois from the outset.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-geometrically-diagonal-coalgebra-separable-basis",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 12.8 and 12.18(d), Corollary 12.19, pp.233,237–238; finite coefficient argument for the last sentence of Corollary 12.19."
+   }
+  },
+  {
+   "text": "For any field $F$, [lem-sfb-group-algebra-group-like-basis] says that the group-like elements of $F[M]$ are exactly $e_m$. Consequently a Hopf map $F[N]\\to F[M]$ is uniquely $e_n\\mapsto e_{u(n)}$ for a group homomorphism $u:N\\to M$: multiplication forces additivity, and each additive $u$ defines a Hopf map by the displayed basis formula. Step 1 translates this into $\\operatorname{Hom}(D_F(M),D_F(N))=\\operatorname{Hom}(N,M)$, including $X(D_F(M))=M$ by $m\\leftrightarrow(t\\mapsto e_m)$. The evaluation map $F[X(D_F(M))]\\to F[M]$ is the identity on its indexed basis. These formulas respect identities and composition.",
+   "uses": [
+    "lem-sfb-group-algebra-group-like-basis",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4 and Theorem 12.9(a), pp.232–233; basis calculation replacing the cyclic-case verification."
+   }
+  },
+  {
+   "text": "The canonical semilinear action on $A_{k^s}$ permutes its group-like basis. A finite Galois splitting field from step 2 fixes that basis pointwise, so this is a continuous action on $M=X^*(G)$. Conversely, let $M$ be finitely generated with continuous $\\Gamma_k$-action. For finitely many generators choose finite separable fields whose fixing subgroups fix each generator. By [lem-weil-pbc-finite-set-in-finite-galois-subextension], their finite generating coefficients lie in a finite Galois $L/k$ whose fixing subgroup fixes every generator and hence all of $M$. The formula $\\sigma(ae_m)=\\sigma(a)e_{\\sigma m}$ gives an action on $L[M]$ respecting multiplication, comultiplication, counit and antipode by direct evaluation on $ae_m$. Apply [lem-sfb-galois-hopf-algebra-descent]: $B=L[M]^{\\operatorname{Gal}(L/k)}$ is a Hopf $k$-algebra, $L\\otimes_k B\\simeq L[M]$, and $B$ is finitely generated. Thus $D_k(M)=\\operatorname{Spec}B$ is of finite type and is geometrically of multiplicative type: if $m_1,\\ldots,m_r$ generate $M$, the surjective Hopf map $\\bar k[\\mathbf Z^r]\\to\\bar k[M]$ gives a closed embedding into $\\mathbf G_m^r$ by [def-weil-closed-immersion]. Step 3 identifies its characters with $M$, equivariantly by the semilinear formula.",
+   "uses": [
+    "lem-sfb-galois-hopf-algebra-descent",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 12(g), pp.239–240, construction preceding Theorem 12.23; Appendix A.64, pp.580–581."
+   }
+  },
+  {
+   "text": "For two multiplicative-type groups choose a common finite Galois splitting field $L$. Under the basis description, an equivariant homomorphism of their character groups gives by step 3 an $L$-Hopf map; equivariance on each $e_m$ is exactly commutation with the semilinear action. Full faithfulness in [lem-sfb-galois-hopf-algebra-descent] descends it uniquely to $k$. Conversely every $k$-homomorphism yields this equivariance, proving full faithfulness of $X^*$. For $G$, evaluation $e_\\chi\\mapsto\\chi^*(t)$ is an equivariant Hopf isomorphism after splitting, and descends to $G\\simeq D_k(X^*(G))$. The other composite is the identification $m\\leftrightarrow e_m$ in step 3. Naturality follows from $e_m\\mapsto e_{u(m)}$. If two fields are chosen in step 4, pass to their finite Galois compositum. Their scalar-extended Hopf algebras are the same indexed group algebra with the same semilinear action; descent gives a unique isomorphism inducing its identity. It preserves the character labels, and uniqueness proves compatibility for three choices. This proves independence and the asserted natural quasi-inverse identifications.",
+   "uses": [
+    "lem-sfb-galois-hopf-algebra-descent",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.23 and its proof, p.240; Appendix A.64 and A.66, pp.580–581."
+   }
+  },
+  {
+   "text": "A map between affine schemes is a closed immersion exactly when its coordinate map is surjective, by [def-weil-closed-immersion]. Surjectivity of a $k$-linear map is detected after any field extension: choose a vector-space complement of its image; tensoring bases shows that its scalar extension is surjective exactly when that complement is zero. Over $k^s$, the coordinate map of $f:G\\to H$ is $k^s[X^*(H)]\\to k^s[X^*(G)]$, $e_n\\mapsto e_{f^*(n)}$. Its image is precisely the span of basis elements indexed by $\\operatorname{im}f^*$, so it is surjective exactly when $f^*$ is. This proves both directions without any smoothness or reducedness hypothesis.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(b)–(c), pp.233–234, and Theorem 12.23, p.240; surjectivity checked on the group-algebra basis."
+   }
+  },
+  {
+   "text": "Let $K/k$ be arbitrary and choose $k^s\\hookrightarrow K^s$ as in the statement. For every abelian $M$ the basis formula $\\lambda\\otimes e_m\\mapsto\\lambda e_m$ is an isomorphism $K\\otimes_k k[M]\\simeq K[M]$ of Hopf algebras: its inverse sends $\\lambda e_m$ to $\\lambda\\otimes e_m$, and all operations agree on these symbols. Apply the same formula from $k^s$ to $K^s$ to the split description of $G_{k^s}$ in step 2. By [lem-sfb-group-algebra-group-like-basis], extending a character keeps its label $m$ and every character over $K^s$ has such a label, so extension is a bijection on characters and respects their addition. For $\\tau\\in\\Gamma_K$, the conjugation formula on coefficients is the one for its restriction $\\tau|_{k^s}\\in\\Gamma_k$, giving exactly the claimed restricted action. For $f:G\\to H$, both orders of extending and pulling back send $e_n$ to $e_{f^*(n)}$; hence the character identifications are natural in $G$ and compatible with character maps. The same scalar formula proves the split-case group-scheme identification.",
+   "uses": [
+    "lem-sfb-group-algebra-group-like-basis",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.23, p.240; split scalar-extension calculation in the proof of Corollary 12.25, p.240, extended by the indexed-basis formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-weil-affine-spectrum",
+  "def-sc-gm-ga",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-geometrically-diagonal-coalgebra-separable-basis",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-sfb-group-algebra-group-like-basis",
+  "lem-sfb-galois-hopf-algebra-descent",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorems 12.8, 12.9(a), 12.18(d), 12.23; Corollary 12.19; Appendix A.64–A.66; pp.232–240,580–581. Basis and coefficient verifications made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant exact equivalence between group schemes of multiplicative type and finitely generated abelian groups with continuous Galois action",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    (F : CategoryTheory.Functor C FintypeCat) →\\n      [inst_1 : CategoryTheory.GaloisCategory C] →\\n        (G : Type u_1) →\\n          [inst_2 : Group G] →\\n            [inst_3 : (X : C) → MulAction G (F.obj X).carrier] →\\n              [C\", \"doc\": \"There is a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the functor $ F $, established by the bijective group homomorphism m\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst\", \"doc\": \"There exists a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $, establ\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction\", \"module\": \"Mathlib/CategoryTheory/Galois/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  (CategoryTheory.PreGaloisCategory.functorToContAction F).IsEquivalence\", \"doc\": \"The functor from a pre-Galois category $\\\\mathcal{C}$ to the category of continuous actions of its automorphism group $\\\\mathrm{Aut}(F)$ on finite types is an equivalence of categories. This means the f\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    (F : CategoryTheory.Functor C FintypeCat) →\\n      [CategoryTheory.GaloisCategory C] →\\n        (G : Type u_1) →\\n          [inst_2 : Group G] →\\n            [(X : C) → MulAction G (F.obj X).carrier] →\\n              [inst : TopologicalS\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CommGrpCat.coyonedaObjIsoForget\", \"module\": \"Mathlib/Algebra/Category/Grp/ForgetCorepresentable\", \"type\": \"CategoryTheory.coyoneda.obj (Opposite.op (CommGrpCat.of (ULift.{u, 0} (Multiplicative ℤ)))) ≅\\n  CategoryTheory.forget CommGrpCat\", \"doc\": \"A natural isomorphism between the coyoneda functor applied to the opposite of the universe-lifted multiplicative integers and the forgetful functor from the category of commutative groups to types, co\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autMulEquivAutGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    [inst_1 : CategoryTheory.GaloisCategory C] →\\n      (F : CategoryTheory.Functor C FintypeCat) →\\n        [CategoryTheory.PreGaloisCategory.FiberFunctor F] →\\n          CategoryTheory.Aut F ≃* (CategoryTheory.PreGaloisCategory.AutGalois\", \"doc\": \"There is a canonical monoid isomorphism between the automorphism group $\\\\text{Aut}(F)$ of a fiber functor $F$ and the opposite monoid $(\\\\text{AutGalois}(F))^\\\\text{op}$. This equivalence is constructed\"}\n  {\"name\": \"GrpCat.coyonedaObjIsoForget\", \"module\": \"Mathlib/Algebra/Category/Grp/ForgetCorepresentable\", \"type\": \"CategoryTheory.coyoneda.obj (Opposite.op (GrpCat.of (ULift.{u, 0} (Multiplicative ℤ)))) ≅ CategoryTheory.forget GrpCat\", \"doc\": \"A natural isomorphism between the Coyoneda embedding applied to the multiplicative integers and the forgetful functor from the category of groups to sets, constructed by composing the hom-set equivale\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_bijective\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"The group homomorphism from $ G $ to the automorphism group $ \\\\mathrm{Aut}(F) $ of a functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $, constructed by mapping each element $ g \\\\in G $ to the natural a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonalizable affine group schemes are classified by their character groups and closed immersions correspond to surjections of character groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}\\n  [inst : AlgebraicGeometry.IsAffine Y], Q.diagonal f ↔ P.diagonal f\", \"doc\": \"Given properties $P$ and $Q$ satisfying the affine-target relation, for any morphism $f: X \\to Y$ with affine target $Y$, the diagonal property of $Q$ holds for $f$ if and only if the diagonal property\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  (𝒱 : (i : 𝒰.I₀) → (CategoryTheory.Limits.pullback f (𝒰.f i)).OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  [∀ (i : 𝒰.I₀) (j : (𝒱 i).I₀), AlgebraicGeometry.IsAffine ((𝒱 i).X j)],\\n  AlgebraicGeometry.IsClosedImmersi\", \"doc\": \"Given a morphism $ f $ of schemes and affine open covers $ \\\\mathcal{U} $ and $ \\\\mathcal{V} $, the diagonal morphism $ \\\\Delta_f $ restricted to the diagonal cover's diagonal range (constructed from the\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y U V : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : U ⟶ Y}\\n  [inst : AlgebraicGeometry.IsAffine U] [AlgebraicGeometry.IsOpenImmersion g]\", \"doc\": \"Given a pullback square involving morphisms with affine targets, if the diagonal morphism of the original morphism satisfies property $P$, then the diagonal morphism of the pulled-back morphism satisf\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso], P.diagonal.toProperty.RespectsIso\", \"doc\": \"If a morphism property $P$ for schemes with affine targets respects isomorphisms, then the diagonal property derived from $P$ (which asserts preservation under pullbacks along open immersions from aff\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  (𝒰' : (i : 𝒰.\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Diagonalizable\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|diagonalisable|character.group|multiplicative.type",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois descent classifies group schemes of multiplicative type by discrete character modules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CharacterModule\", \"module\": \"Mathlib.Algebra.Module.CharacterModule\", \"type\": \": Type uA\", \"doc\": \"The character module of an additive commutative group $A$ is the additive monoid of homomorphisms from $A$ to the additive circle $\\\\mathbb{Q}/\\\\mathbb{Z}$, where the additive circle is defined as the q\"}\n  {\"name\": \"CharacterModule.int\", \"module\": \"Mathlib.Algebra.Module.CharacterModule\", \"type\": \": Type\", \"doc\": \"The character module of the additive commutative group $\\\\mathbb{Z}$ is the additive monoid of group homomorphisms from $\\\\mathbb{Z}$ to the additive circle $\\\\mathbb{Q}/\\\\mathbb{Z}$, where $\\\\mathbb{Q}/\\\\m\"}\n  {\"name\": \"instDiscreteTopologyMultiplicative\", \"module\": \"Mathlib.Topology.Constructions\", \"type\": \"[DiscreteTopology X] : DiscreteTopology (Multiplicative X)\", \"doc\": \"If a set $ X $ is equipped with the discrete topology, then the multiplicative type tag $ \\\\text{Multiplicative}\\\\, X $ also carries the discrete topology.\"}\n  {\"name\": \"CondensedMod.isDiscrete_tfae\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(M : CondensedMod.{u} R) :\\n  TFAE\\n    [M.IsDiscrete, IsIso ((Condensed.discreteUnderlyingAdj _).counit.app M), (Condensed.discrete _).essImage M,\\n      (CondensedMod.LocallyConstant.functor R).essImage M,\\n      IsIso ((CondensedMod.LocallyConstant.adjunction R).counit.app M),\\n      Sheaf.IsConstant \", \"doc\": \"For a condensed module $ M $ over a ring $ R $, the following are equivalent: (1) $ M $ is discrete; (2) the counit of the discrete-underlying adjunction at $ M $ is an isomorphism; (3) $ M $ lies in \"}\n  {\"name\": \"CharacterModule.instAddCommGroup\", \"module\": \"Mathlib.Algebra.Module.CharacterModule\", \"type\": \": AddCommGroup (CharacterModule A)\", \"doc\": \"The character module of an additive commutative group $ A $, consisting of homomorphisms from $ A $ to the additive circle $ \\\\mathbb{Q}/\\\\mathbb{Z} $, forms an additive commutative group under pointwis\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.GaloisCategory.getFiberFunctor\", \"module\": \"Mathlib.CategoryTheory.Galois.Basic\", \"type\": \": C ⥤ FintypeCat.{u₂}\", \"doc\": \"A Galois category is a category $\\\\mathcal{C}$ satisfying the axioms of a Galois category, which include: (1) objects form a Type $u₁$, (2) morphisms between objects reside in Type $\\\\max(u₂, u₁ + 1)$, \"}\n  {\"name\": \"IsGaloisGroup\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"(G : Type u_1) →\\n  (A : Type u_2) →\\n    (B : Type u_3) →\\n      [inst : Group G] →\\n        [inst_1 : CommSemiring A] → [inst_2 : Semiring B] → [Algebra A B] → [MulSemiringAction G B] → Prop\", \"doc\": \"G is the Galois group of B over A, given that B is an algebra over A and G acts on B as a multiplicative semiring action\"}\n  {\"name\": \"IsGaloisGroup.of_mulEquiv_algEquiv\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[IsGalois K L] (e : G ≃* Gal(L/K)) (he : ∀ g x, e g x = g • x) : IsGaloisGroup G K L\", \"doc\": \"Let $ L/K $ be a Galois field extension. If there exists a group isomorphism $ e : G \\\\to \\\\text{Gal}(L/K) $ such that for all $ g \\\\in G $ and $ x \\\\in L $, the action of $ e(g) $ on $ x $ equals the act\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonalizable affine group schemes are classified contravariantly by their character lattices with Galois action",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}\\n  [inst : AlgebraicGeometry.IsAffine Y], Q.diagonal f ↔ P.diagonal f\", \"doc\": \"Given properties $P$ and $Q$ satisfying the affine-target relation, for any morphism $f: X \\to Y$ with affine target $Y$, the diagonal property of $Q$ holds for $f$ if and only if the diagonal property\"}\n  {\"name\": \"Rep.diagonalHomEquiv_apply\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {n : ℕ} {A : Rep k G} (f : Rep.diagonal k G (n + 1) ⟶ A)\\n  (x : Fin n → G),\\n  (Rep.diagonalHomEquiv n A) f x = (CategoryTheory.ConcreteCategory.hom f.hom) (Finsupp.single (Fin.partialProd x) 1)\", \"doc\": \"For a commutative ring $ k $, group $ G $, natural number $ n $, and representation $ A $ of $ G $ over $ k $, there is a $ k $-linear equivalence between the set of $ G $-equivariant $ k $-linear map\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    {X : AlgebraicGeometry.Scheme} →\\n      [inst : X.Over S] → { f // AlgebraicGeometry.Scheme.Hom.IsOver f S } ≃ (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural equivalence between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections \"}\n  {\"name\": \"Rep.diagonalHomEquiv\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] → (n : ℕ) → (A : Rep k G) → (Rep.diagonal k G (n + 1) ⟶ A) ≃ₗ[k] (Fin n → G) → ↑A.V\", \"doc\": \"For a commutative ring $ k $, group $ G $, natural number $ n $, and representation $ A $ of $ G $ over $ k $, there is a $ k $-linear equivalence between the set of $ G $-equivariant $ k $-linear map\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso], P.diagonal.toProperty.RespectsIso\", \"doc\": \"If a morphism property $P$ for schemes with affine targets respects isomorphisms, then the diagonal property derived from $P$ (which asserts preservation under pullbacks along open immersions from aff\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G]\\n  {η₁ η₂ : CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G)},\\n  η₁.hom.hom.app TannakaDuality.FiniteGroup.rightFDRep = η₂.hom.hom.app TannakaDuality.FiniteGroup.rightFDRep → η₁ = η₂\", \"doc\": \"Given two automorphisms $\\\\eta_1$ and $\\\\eta_2$ of the forgetful functor from the category of finitely generated $k$-representations of a finite group $G$ to the category of finitely generated $k$-modul\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.AutGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    [CategoryTheory.GaloisCategory C] → CategoryTheory.Functor C FintypeCat → Type (max u₁ u₂)\", \"doc\": \"The type of sections of the composed functor from pointed Galois objects to types, obtained by first taking automorphism groups and then forgetting the group structure. This represents compatible fami\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract Galois categories, ordinary character duality, linear diagonalization or dual modules, not multiplicative-type group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Diagonalizable\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract Galois categories, ordinary character duality, linear diagonalization or dual modules, not multiplicative-type group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|diagonalisable|multiplicative.type|character.group",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"23\", \"text\": \"  triangularizable if and only if it is diagonalizable.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"77\", \"text\": \"/-- A finitely-semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"82\", \"text\": \"/-- A semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/Algebra/Group/TypeTags/Hom.lean\", \"line\": \"13\", \"text\": \"# Transport algebra morphisms between additive and multiplicative types.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"line\": \"139\", \"text\": \"  declaration when the first argument has no multiplicative type-class, but argument `α` does.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"line\": \"178\", \"text\": \"    If the first argument is not the argument with a multiplicative type-class, `@[to_additive]`\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\", \"line\": \"120\", \"text\": \"product space is simultaneously diagonalizable. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract Galois categories, ordinary character duality, linear diagonalization or dual modules, not multiplicative-type group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group schemes of multiplicative type are dual to finitely generated Galois modules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FGModuleCat.FGModuleCatDual\", \"module\": \"Mathlib.Algebra.Category.FGModuleCat.Basic\", \"type\": \": FGModuleCat K\", \"doc\": \"For a field $ K $ and a finitely generated $ K $-module $ V $, the dual module $ \\text{Hom}_K(V, K) $ is finite-dimensional over $ K $, hence itself a finitely generated $ K $-module. This constructs t\"}\n  {\"name\": \"FGModuleCat.FGModuleCatDual_obj\", \"module\": \"Mathlib.Algebra.Category.FGModuleCat.Basic\", \"type\": \": (FGModuleCatDual K V).obj = ModuleCat.of K (Module.Dual K V)\", \"doc\": \"For a field $ K $ and a finitely generated $ K $-module $ V $, the dual module $ \\\\operatorname{Hom}_K(V, K) $ is finite-dimensional over $ K $, hence itself a finitely generated $ K $-module. This est\"}\n  {\"name\": \"FGModuleCat.FGModuleCatDual_coe\", \"module\": \"Mathlib.Algebra.Category.FGModuleCat.Basic\", \"type\": \": (FGModuleCatDual K V : Type u) = Module.Dual K V\", \"doc\": \"For a field $ K $ and a finitely generated $ K $-module $ V $, the underlying type of the dual module $ \\\\mathrm{Hom}_K(V, K) $ in the category of finitely generated $ K $-modules is canonically identi\"}\n  {\"name\": \"Module.finite_dual_iff\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Free K V] : Module.Finite K (Dual K V) ↔ Module.Finite K V\", \"doc\": \"For a free module $ V $ over a semiring $ K $, the dual module $ \\\\text{Dual}_K(V) $ is finitely generated if and only if $ V $ itself is finitely generated.\"}\n  {\"name\": \"Module.dual_finite\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Projective R M] : Module.Finite R (Dual R M)\", \"doc\": \"If $ M $ is a projective module over a semiring $ R $, then its dual module $ \\text{Dual}_R(M) $ consisting of all $ R $-linear maps from $ M $ to $ R $ is a finitely generated $ R $-module.\"}\n  {\"name\": \"AddChar.doubleDualEquiv\", \"module\": \"Mathlib.Analysis.Fourier.FiniteAbelian.PontryaginDuality\", \"type\": \": α ≃+ AddChar (AddChar α ℂ) ℂ\", \"doc\": \"For any additive commutative group $\\\\alpha$, the double dual of $\\\\alpha$ (i.e., the group of additive characters from the character group $\\\\text{AddChar}(\\\\alpha, \\\\mathbb{C})$ to $\\\\mathbb{C}$) is natur\"}\n  {\"name\": \"MulAutMultiplicative\", \"module\": \"Mathlib.Algebra.Group.End\", \"type\": \"[AddGroup G] : MulAut (Multiplicative G) ≃* AddAut G\", \"doc\": \"There is a canonical group isomorphism between the multiplicative automorphism group of $\\\\text{Multiplicative}\\\\ G$ and the additive automorphism group of $G$. This isomorphism is established by conver\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.endMulEquivAutGalois\", \"module\": \"Mathlib.CategoryTheory.Galois.Prorepresentability\", \"type\": \": End F ≃* (AutGalois F)ᵐᵒᵖ\", \"doc\": \"There is a canonical multiplicative equivalence between the endomorphism set $\\\\text{End}(F)$ of a functor $F$ and the opposite of the automorphism Galois set $(\\\\text{AutGalois}(F))^{\\\\text{op}}$. This \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract Galois categories, ordinary character duality, linear diagonalization or dual modules, not multiplicative-type group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-type-largest-subtorus",
+  "date": "2026-10-23",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type. Supporting input: Milne Theorem 12.23: character description needed before forming the torsion quotient in Notation 12.29.",
+   "via": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-multiplicative-character-antiduality",
+  "worker": "stage1",
+  "summary": "Q108 read Milne 12.8–12.9, 12.18–12.23 and A.64–A.66. Reused the existing split-torus-subgroup and group-like-element nodes; isolated geometric coalgebra separable splitting and finite Galois Hopf descent as two statement-only prerequisites. Gave explicit finite-coefficient splitting, basis Hom calculation, equivariant invariant construction, independence, immersion detection and arbitrary scalar-extension compatibility. Statement unchanged; no Lean attachment or Mathlib match for the item.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting algebraic-group route, Milne Theorem 12.23 prerequisite of largest subtorus. The current latest direct-images proof (3) still concerns direct images; no unit route is replaced. The ancestor tool returns null for this pre-existing broken created.item chain; inherited null and via retained, with precise supporting places for the new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-e5952e418",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-e5952e418 (reviewer sub-agent of L); spot-checked: I read Milne Thm 12.18 with its proof, Cor 12.19, §12(g) with Thm 12.23, Cor 12.25 and A.64–A.66, and every cited statement. The item statement is unchanged from the base, where it was statement-only and unsplit (checked in clones/live and side-live). There is no repair note or re-split note. The split has seven steps, all checked and correct. Step 2: the split-torus node over k̄, then the new coalgebra node, gives a group-like basis over k^s. Finite generation is shown by supports, and the finite Galois L comes from the Mathlib finite-set lemma; k^s/k is normal as that lemma requires. Steps 3 and 7 use the group-like-basis node over any field. Step 4 builds the semilinear Hopf action and descends it, giving a closed subgroup of G_m^r. Step 5 gets full faithfulness and independence of L from the descent equivalence. Step 6 proves the closed-immersion criterion by surjectivity after field extension, with no smoothness used (so it holds for μ_p). No cycle, no tool_uses, no SGA. New nodes: the coalgebra separable-basis node is true; I proved it myself via cocommutativity, étale duals of finite subcoalgebras and the fundamental theorem of coalgebras, and tested it on C=0, k, k[Z/p] in char p, the norm-one torus and an inseparable dual. The Galois Hopf descent node is true (A.64/Speiser plus descent of finite generation). Neither node is a duplicate: I compared tensor-field-extension-galois-invariants (unit only), galois-stable-subspace-descent, galois-descent-affine-subgroups, fpqc-affine-descent and matrix-cocycle-split. FIX (B3): the descent node used 'finite Galois' and Gal(L/k) with no definition node. I defined them inline (finite, separable algebraic [def-weil-pbc-separable-algebraic-extension], normal; Π = automorphisms fixing k) and added that stmt_dep. File: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-galois-hopf-algebra-descent.json. Maintainer note: the item's own base statement also leaves 'finite Galois' undefined, and the inherited blueprint from.node is null.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MultiplicativeCharacterAntiduality",
+  "declaration": "AlgebraicGeometry.MultiplicativeType.multiplicative_character_antiduality",
+  "file": "lean/Sheaf/AlgebraicGeometry/MultiplicativeCharacterAntiduality.lean",
+  "statement": "theorem multiplicative_character_antiduality (k ks : Type u) [Field k] [Field ks] [Algebra k ks] [IsSepClosure k ks] : (∀ G : FiniteTypeGroups k, ∃ L : IntermediateField k ks, FiniteDimensional k L ∧ Algebra.IsSeparable k L ∧ ∃ M : AddCommGrpCat.{u}, AddGroup.FG M ∧ Nonempty ((baseChange (K := L)).obj G.obj ≅ diagonalizableGroup L M)) ∧ ∃ E : (FiniteTypeGroups k)ᵒᵖ ≌ CharacterModules k ks, ∃ e : ∀ G : FiniteTypeGroups k, (E.functor.obj (op G)).obj.V ≃ GeometricCharacters ks G.obj, (∀ (G : FiniteTypeGroups k) (x y : (E.functor.obj (op G)).obj.V), (e G (x + y)).hom.hom = (e G x).hom.hom * (e G y).hom.hom) ∧ (∀ (G : FiniteTypeGroups k) (σ : ks ≃ₐ[k] ks) (m : (E.functor.obj (op G)).obj.V), IsConjugate σ (e G m) (e G (((E.functor.obj (op G)).obj.ρ σ).hom m))) ∧ (∀ (G H : FiniteTypeGroups k) (f : G ⟶ H) (m : (E.functor.obj (op H)).obj.V), e G ((E.functor.map f.op).hom.hom.hom m) = (baseChange (K := ks)).map f.hom ≫ e H m) ∧ (∀ (G H : FiniteTypeGroups k) (f : G ⟶ H), IsClosedImmersion f.hom.hom.hom.left ↔ Function.Surjective (E.functor.map f.op).hom.hom.hom) ∧ (∀ M : CharacterModules k ks, ∃ L : FiniteGaloisIntermediateField k ks, ∃ ρ : (L ≃ₐ[k] L) →* End M.obj.V, ∀ σ : ks ≃ₐ[k] ks, M.obj.ρ σ = ρ (AlgEquiv.restrictNormalHom L.toIntermediateField σ)) ∧ (∀ (M : CharacterModules k ks) (L : IntermediateField k ks) [FiniteDimensional k L] [IsGalois k L] (ρ : (L ≃ₐ[k] L) →* End M.obj.V), (∀ σ : ks ≃ₐ[k] ks, M.obj.ρ σ = ρ (AlgEquiv.restrictNormalHom L σ)) → ∃ d : InvariantHopfModel M.obj.V ρ, ∃ i : (E.inverse.obj M).unop.obj ≅ invariantHopfGroup M.obj.V ρ d.hopf, ∃ s : (baseChange (K := ks)).obj (invariantHopfGroup M.obj.V ρ d.hopf) ≅ diagonalizableGroup ks M.obj.V, s.inv.hom.hom.left ≫ scalarProjection (invariantHopfGroup M.obj.V ρ d.hopf) = Spec.map (CommRingCat.ofHom ((AddMonoidAlgebra.mapRingHom M.obj.V (algebraMap L ks)).comp (invariantGroupAlgebra M.obj.V ρ).val.toRingHom)) ∧ ∀ m : M.obj.V, (Scheme.ΓSpecIso (.of (AddMonoidAlgebra ks M.obj.V))).hom (characterElement (s.inv ≫ (baseChange (K := ks)).map i.inv ≫ e (E.inverse.obj M).unop ((E.counitIso.app M).inv.hom.hom.hom m))) = AddMonoidAlgebra.single m 1) ∧ (∀ (K Ks : Type u) [Field K] [Field Ks] [Algebra k K] [Algebra K Ks] [IsSepClosure K Ks] [Algebra ks Ks] [Algebra k Ks] [IsScalarTower k K Ks] [IsScalarTower k ks Ks], ∃ ext : ∀ G : FiniteTypeGroups k, (E.functor.obj (op G)).obj.V ≃ ((baseChange (K := Ks)).obj ((baseChange (K := K)).obj G.obj) ⟶ (baseChange (K := Ks)).obj ((baseChange (K := K)).obj (Grp.mk (StandardGroupSchemes.multiplicative k)))), (∀ (G : FiniteTypeGroups k) (m : (E.functor.obj (op G)).obj.V), IsCharacterExtension (e G m) (ext G m)) ∧ (∀ (G : FiniteTypeGroups k) (x y : (E.functor.obj (op G)).obj.V), (ext G (x + y)).hom.hom = (ext G x).hom.hom * (ext G y).hom.hom) ∧ (∀ (G H : FiniteTypeGroups k) (f : G ⟶ H) (m : (E.functor.obj (op H)).obj.V), ext G ((E.functor.map f.op).hom.hom.hom m) = (baseChange (K := Ks)).map ((baseChange (K := K)).map f.hom) ≫ ext H m) ∧ (∀ (τ : Ks ≃ₐ[K] Ks) (σ : ks ≃ₐ[k] ks), (∀ a : ks, τ (algebraMap ks Ks a) = algebraMap ks Ks (σ a)) → ∀ (G : FiniteTypeGroups k) (m : (E.functor.obj (op G)).obj.V), IsConjugate τ (ext G m) (ext G (((E.functor.obj (op G)).obj.ρ σ).hom m)))) ∧ (∀ (K : Type u) [Field K] [Algebra k K] (M : AddCommGrpCat.{u}), ∃ s : (baseChange (K := K)).obj (diagonalizableGroup k M) ≅ diagonalizableGroup K M, s.inv.hom.hom.left ≫ scalarProjection (diagonalizableGroup k M) = Spec.map (CommRingCat.ofHom (AddMonoidAlgebra.mapRingHom M (algebraMap k K))))",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f5f6b5207",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Clause-by-clause check of multiplicative_character_antiduality against the node and Milne Thm 12.23 (PDF p.252): FiniteTypeGroups = affine + LocallyOfFiniteType ∧ QuasiCompact + recorded IsMultiplicativeType (n=0 included); CharacterModules = Action on f.g. AddCommGrp with open stabilizers in the Krull topology (torsion allowed). E is pinned to the actual character functor via e (bijection to G_ks ⟶ (G_m)_ks, + = pointwise product, Galois action = IsConjugate, naturality by pullback); computed on coordinates that IsConjugate gives σ applied to coefficients, a left action, with unique existing a,b. Closed immersion iff f^* surjective, in the correct direction. Finite Galois factorization exists; for every factoring finite Galois L there is an InvariantHopfModel on the actual equalizer invariants, i to E⁻¹M, s normalized by Spec(B→L[M]→ks[M]), and the counit label m maps to single m 1. The Hopf algebraMap is pinned by split_projection plus injectivity (HopfAlgebra extends Algebra), so nothing is hollow. Scalar extension: arbitrary K and compatible towers; ext pinned by IsCharacterExtension (unique comparison maps), additive, natural, Γ_K acting through restriction; split (D_k M)_K ≅ D_K M normalized. Edge cases M=0, torsion/μ_p, L=k, K=k, inseparable or transcendental K are covered; the single universe u comes from the baseChange interface. New def node fields conform, real data, no sorry, three search kinds; own rg found RankOneRoots.Character (target G_{m,F}) and Mathlib ContAction, neither replacing the interface. Item unchanged vs side-live except lean and the added stmt_dep; statement verbatim; sorry-only proof; lines ≤100; docstrings carry source, blueprint id and the 7-step proof; no supersession, first S2 delivery. Advisories: (G_m)_F vs G_{m,F} character target; redundant IsSepClosed public import and GaloisClosure plain import. Not recompiled (no file changed)."
+ }
+}

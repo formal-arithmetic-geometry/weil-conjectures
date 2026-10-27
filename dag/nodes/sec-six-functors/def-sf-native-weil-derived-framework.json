@@ -1,0 +1,442 @@
+{
+ "id": "def-sf-native-weil-derived-framework",
+ "kind": "definition",
+ "title": "The native derived category of pro-etale Weil sheaves and its operations",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ [def-weil-algebraic-closure], a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$ (Lean `PadicAlgCl ℓ`), with the topology of the absolute value extending $|\\cdot|_\\ell$ on $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers]: on each finite subextension $E$ it is the unique extension $|\\cdot|_E$ of [def-weil-l-adic-coefficient-extension], and these agree on $E\\subseteq E'$ by that uniqueness. For a $k_0$-scheme $W$ locally of finite type [def-weil-finite-type-morphism], put $\\bar W=W\\times_{k_0}k$ and $F_W=\\operatorname{id}_W\\times\\operatorname{Spec}(a\\mapsto a^{\\#k_0})^{-1}$, geometric Galois Frobenius. Work on the small pro-etale site [def-weil-pbc-proetale-site]. Let $B_W$ be the sheaf of locally finite continuous $\\Omega$-valued functions: on $V$ its sections are the continuous functions $t:|V|\\to\\Omega$, where $|V|$ is the whole underlying topological space, such that every point has a neighbourhood $N$ for which the $\\mathbf Q_\\ell$-span of $t(N)$ is finite dimensional, with restrictions by precomposition, and let $\\mathcal A_W$ be the category of $B_W$-module objects [sk-def-sfb-module-objects] in sheaves of $\\Omega$-vector spaces, that is sheaves of modules [def-weil-sheaf-of-modules-category] over the constant sheaf of rings $\\underline\\Omega$ of the discrete ring $\\Omega$ [def-weil-pbc-constant-sheaf], with the monoidal structure $\\otimes_{\\underline\\Omega}$ [def-pur-sheaf-tensor-product], of which $B_W$ (a sheaf of commutative $\\Omega$-algebras under pointwise operations) is a commutative monoid (Lean `ProEtale.AdicSheaf ℓ W̄`). Let $\\mathcal W_W=\\mathcal A_W^{F_W^*}$ be the category of fixed pairs [def-weil-endofunctor-fixed-pair-category]: a pair $(M,\\phi:F_W^*M\\xrightarrow{\\sim}M)$, with morphisms commuting with $\\phi$ (Lean `ProEtaleWeilSheaf k₀ ℓ W`). A sheaf in $\\mathcal A_W$ is called constructible here if, locally on $\\bar W$, it has a finite partition by locally closed [def-weil-locally-closed-subset] constructible [def-weil-constructible-subset] subschemes on each of which there is a pro-etale covering such that, over each covering member $U$, the restriction is $B_U^{\\oplus r_U}$ for some finite rank $r_U$, allowed to depend on that member. Define\n$$\\mathrm{WC}^{\\mathrm{der}}(W)=\\{K\\in D(\\mathcal W_W):H^a(K)=0\\text{ for all but finitely many }a,\\ \\operatorname{For}H^a(K)\\text{ is constructible for every }a\\}.$$\nHere $D$ is the ordinary derived category [def-weil-abstract-derived-category], and the subcategory is full (Lean `WeilComplex k₀ ℓ W`). Its shifts and distinguished triangles are inherited from $D(\\mathcal W_W)$ [def-weil-triangulated-category].\n\nFor a morphism $h:V\\to W$ of $k_0$-schemes, use the sheaf inverse and direct images of [def-weil-proetale-inverse-image]. Precomposition of functions gives $B_W\\to\\bar h_*B_V$, with adjoint $\\bar h^{-1}B_W\\to B_V$. The module inverse image means $B_V\\otimes_{\\bar h^{-1}B_W}\\bar h^{-1}(-)$ [def-pur-sheaf-tensor-product], and module direct image uses the displayed coefficient map for its action. Open extension by zero is along an open immersion $j:U\\to X$ [def-weil-open-immersion]: by [lem-weil-proetale-weakly-etale-localization] $\\bar U_{\\mathrm{proet}}$ is the localization $\\bar X_{\\mathrm{proet}}/\\bar U$, under which $B_{\\bar X}|_{\\bar U}=B_{\\bar U}$ (both are the locally finite functions on the same $V$), and $j_!M$ is the sheafification [def-weil-presheaf-modules-sheafification] of the extension-by-zero presheaf $P_M$ [def-weil-extension-by-zero-presheaf] of the ringed site $(\\bar X_{\\mathrm{proet}},B_{\\bar X})$ at $\\bar U$. These three sheaf functors are equipped with their Frobenius actions via the natural inverse-image, direct-image and extension-by-zero comparisons for $\\bar h F_V=F_W\\bar h$. Explicitly, for any one of these sheaf functors $G:\\mathcal A_S\\to\\mathcal A_T$, write $c:F_T^*G\\xrightarrow{\\sim}GF_S^*$ for its comparison. Its lift sends $(M,\\phi)$ to $(GM,G(\\phi)\\circ c_M)$ and sends a commuting morphism $u$ to $G(u)$. Write $h^*$ for termwise inverse image on $D(\\mathcal W)$, and $Rh_*$ for the total right derived functor [def-sfb-right-derived-functor] of this ordinary direct image in the abelian category of all pro-etale Weil sheaves. For separated [def-weil-proper-morphism] finite-type $h$ with $W$ quasi-compact and quasi-separated [def-weil-quasi-separated-morphism], choose the same Nagata compactification as Lean `HasCompactification.compactification`, $V\\xrightarrow{a}\\widetilde V\\xrightarrow{p}W$ [def-weil-compactifications-refinements], and write $Rh_{0!}=R\\bar p_*\\bar a_!$ on these equivariant derived categories, where $\\bar a_!$ is applied termwise before right derivation of $\\bar p_*$. The notation on $\\mathrm{WC}^{\\mathrm{der}}$ denotes the restriction of these actual ambient constructions when they preserve bounded constructible cohomology. These are the constructions of Lean `WeilComplex.upperStar`, `WeilComplex.derivedLowerStar`, and `WeilComplex.derivedLowerShriek`; preservation and exactness are separate assertions. No identification with the fixed pairs in $D^b_c(\\bar W,\\Omega)$ is stipulated.",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/Category.lean",
+  "place": "Category.lean lines 134-198, 237-247 and 437-479; Adic/ConstantSheaf.lean definition PadicAlgCl.locallyFiniteFunctions and adicConstantSheaf; Adic/Module.lean lines 50-56 and Adic/Constructible.lean definitions IsAdicLisseSheaf, IsAdicStratifiedLisseSheaf, IsAdicConstructibleSheaf; LowerStar.lean lines 79-85, 164-175 and LowerShriek.lean lines 81-94, 145-161. This is the native derived realization used by the item, not the category of pairs in def-weil-weil-sheaf-complex."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-compactifications-refinements",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-numbers",
+  "sk-def-sfb-module-objects",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset",
+  "def-weil-proetale-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-open-immersion",
+  "def-sfb-right-derived-functor",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-extension-by-zero-presheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible derived category of sheaves with invertible Frobenius action pro etale adic coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"CondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [Ring R] → Type (u + 2)\", \"doc\": \"The category of condensed modules over a ring $ R $, defined as the category of sheaves on the site of compact Hausdorff spaces equipped with the coherent Grothendieck topology, taking values in the c\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtaleWeilSheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|ProEtaleWeilSheaf|adicConstantSheaf",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivariant derived category of an abelian category with an automorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [HasDerivedCategory C] → Type (max u v)\", \"doc\": \"The derived category of homological complexes with integer-indexed shapes, obtained by localizing the category of such complexes at quasi-isomorphisms (morphisms inducing isomorphisms on all homology \"}\n  {\"name\": \"DerivedCategory.singleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → ℤ → CategoryTheory.Functor C (DerivedCategory C)\", \"doc\": \"For each integer $ n $, this defines a functor from category $ \\\\mathcal{C} $ to its derived category that maps objects of $ \\\\mathcal{C} $ to single-term chain complexes concentrated in degree $ n $. T\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.singleFunctors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.SingleFunctors C (DerivedCategory C) ℤ\", \"doc\": \"A family of functors from a category $\\\\mathcal{C}$ to its derived category, parameterized by integers $\\\\mathbb{Z}$, where each integer $n$ defines a functor that maps objects of $\\\\mathcal{C}$ to singl\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Category.{w, max u v} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}\n  {\"name\": \"DerivedCategory.instLinearSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C] (n : ℤ),\\n  CategoryTheory.Functor.Linear R (DerivedCategory.singleFunctor C n)\", \"doc\": \"For each integer $ n $, the single-term complex functor from an abelian category $ \\\\mathcal{C} $ to its derived category, which maps objects to chain complexes concentrated in degree $ n $, is $ R $-l\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category of Frobenius equivariant sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Category.{w} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}\n  {\"name\": \"DerivedCategory.instIsTriangulated\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": IsTriangulated (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $\\\\mathcal{C}$, obtained by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical triangulated structure. This struc\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      (c : ComplexShape ι) →\\n        [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [(HomologicalComplex.quasiIso C c).HasLocalizati\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.Q\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplex C c ⥤ HomologicalComplexUpToQuasiIso C c\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"DerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Type (max u v)\", \"doc\": \"The derived category of homological complexes with integer-indexed shapes, obtained by localizing the category of such complexes at quasi-isomorphisms (morphisms inducing isomorphisms on all homology \"}\n  {\"name\": \"DerivedCategory.instLinear\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Linear\", \"type\": \": Linear R (DerivedCategory C)\", \"doc\": \"For any abelian category $\\\\mathcal{C}$ and semiring $R$, its derived category inherits a canonical $R$-linear structure. This means that for any two objects in the derived category, the set of morphis\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible derived category of Frobenius equivariant pro etale adic sheaves",
+   "results": "8 hits: BDeRham, BDeRhamPlus, CondensedMod, Condensed.profiniteSolid, instCommRingBDeRhamPlus, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, Condensed.profiniteFree. These concern perfectoid period rings or condensed modules, not the specified native adic coefficient sheaf and Frobenius-equivariant derived category.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-compact-image-localization-triangle",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-zl-morphism-open-closed-reduction, open-closed reduction; prop-functor-package clause 3, applying compact support to localization. The seeded item's created.item is null, so blueprint_refs.py ancestor reports None; this node serves that item's proof through its recorded blueprint.from breadcrumb. Category.lean lines 134-198, 237-247 and 437-479; Adic/ConstantSheaf.lean definition PadicAlgCl.locallyFiniteFunctions and adicConstantSheaf; Adic/Module.lean lines 50-56 and Adic/Constructible.lean definitions IsAdicLisseSheaf, IsAdicStratifiedLisseSheaf, IsAdicConstructibleSheaf; LowerStar.lean lines 79-85, 164-175 and LowerShriek.lean lines 81-94, 145-161. This is the native derived realization used by the item, not the category of pairs in def-weil-weil-sheaf-complex.",
+   "via": [
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "def-sf-native-weil-derived-framework",
+  "worker": "stage1",
+  "summary": "Definition-only split with no new nodes. Read the live native coefficient, constructibility, fixed-pair and Weil derived declarations and all cited definition statements. Named the algebraic closure and adic topology, module-object category, locally closed and constructible subsets, pro-etale inverse/direct images, module tensor and total right derivation. Unpacked the coefficient map and the fixed-pair lift formula. Preserved the bounded constructible native derived realization and the chosen compactification, with preservation remaining separate. The actual constructible pushforward restrictions depend on the remaining affine adic finiteness sorry, so no whole-item closed attachment is claimed. Rechecked the Mathlib searches with the required helper; generic derived-category results do not state the full native framework. Repair after return at 47d34cfcb02: rebased split-owned fields onto the current unsplit live item and re-read all seventeen current dependency statements. Clarified that the locally finite free rank may depend on the pro-etale covering member, exactly as IsAdicLisseSheaf quantifies it; rechecked coefficient change, global boundedness and the order of compact support. No dependency replacement is needed.",
+  "blueprint": "Serves the recorded parent lem-sf-weil-compact-image-localization-triangle: applying native compact support to localization, the open-closed reduction of lem-zl-morphism-open-closed-reduction and prop-functor-package clause 3. This definition is not a unit key statement. The created.item chain terminates at the seeded parent; blueprint_refs.py ancestor reports None, retained as blueprint.from.node. The existing breadcrumb and same_as=[] are retained after whole-blueprint searches."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-87074d09b",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-87074d09b (reviewer sub-agent of L); spot-checked: This is a re-delivery after the 47d34cfcb022 FIX was refused at landing with 'completed in this project's DAG but not in the live DAG', which is the side-DAG promotion check and not a mathematical fault. The worker rebuilt the item from the live item, which is still unsplit with 8 stmt_deps in live and side-live. That rebuild lost the earlier FIX. The only new change is that the constructibility clause now writes B_U^{⊕r_U} with r_U per covering member. This is checked against Adic/Constructible.lean:84-87 (IsAdicLisseSheaf: ∃ n per member f, n=0 allowed); it is correct and weakens nothing. Re-read: ConstantSheaf.lean:79-80 locallyFiniteFunctions = B_W on the whole |V|; LowerShriek.lean:88-93,150-160 rightDerivedLowerShriek = termwise extensionByZero then lowerStar.rightDerivedFunctor, with the chosen HasCompactification.compactification on a qc+qs target. Preservation stays separate (sorry in finiteLowerStar_singleFunctor_of_isAffine). I re-opened all 17 cited statements. The same three B3/C4 faults are present again and are re-fixed with identical text on the new head: (1) def-weil-l-adic-numbers defines only Q_ℓ and is cited for the Q̄_ℓ topology → add def-weil-l-adic-coefficient-extension; (2) pro-étale open extension by zero of B-modules has no definition, and def-weil-extension-by-zero covers only finite constant A → add lem-weil-proetale-weakly-etale-localization, def-weil-extension-by-zero-presheaf and def-weil-presheaf-modules-sheafification; (3) sheaves of Ω-vector spaces and their monoidal structure were uncited → add def-weil-sheaf-of-modules-category and def-weil-pbc-constant-sheaf, with ⊗ from def-pur-sheaf-tensor-product. All six added nodes are in clones/live. There is no cycle (closure of 337 nodes excludes the item). The only trf node newly reached is the generic Stacks 0951 lemma. After the fix, inline citations equal stmt_deps. same_as=[] is correct against def-wf-weil-category and def-weil-weil-sheaf-complex. Edge cases checked: empty W, zero sheaf, single degree, infinite disjoint union with unbounded r_U, identity h, open immersion. Maintainer note: if the item's side completion is still unpromoted, landing may be refused again for the same non-mathematical reason.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.LowerShriek",
+  "declaration": "AlgebraicGeometry.WeilComplex.derivedLowerShriek",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.derivedLowerShriek",
+   "AlgebraicGeometry.WeilComplex",
+   "AlgebraicGeometry.WeilComplex.objectProperty",
+   "AlgebraicGeometry.ProEtaleWeilSheaf",
+   "AlgebraicGeometry.WeilSheaf.frobeniusPullback",
+   "AlgebraicGeometry.WeilSheaf.objectProperty",
+   "AlgebraicGeometry.ProEtale.AdicSheaf",
+   "AlgebraicGeometry.ProEtale.adicConstantSheaf",
+   "PadicAlgCl.locallyFiniteFunctions",
+   "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf",
+   "AlgebraicGeometry.ProEtale.IsAdicStratifiedLisseSheaf",
+   "AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.upperStar",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.lowerStar",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.extensionByZero",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriek",
+   "AlgebraicGeometry.WeilComplex.upperStar",
+   "AlgebraicGeometry.WeilComplex.derivedLowerStar"
+  ],
+  "statement": "def WeilComplex.derivedLowerShriek (f : X ⟶ Y)\n    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]\n    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]\n    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :\n    WeilComplex k₀ l X ⥤ WeilComplex k₀ l Y",
+  "branch": "slopmaster2",
+  "by": "Q36",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing native framework, not fixed pairs in a derived category. LowerShriek is the public entry module importing OpenImmersion, LowerStar and Category; the primary declaration is its final compact-support operation. The category itself is AlgebraicGeometry.WeilComplex in WeilConjectures.WeilSheaf.Category, with the bounded constructible object property. All coefficient, fixed-pair, ambient and restricted operations are recorded in declarations and mapped clause by clause in the report. Preservation theorems are not asserted proved by this stage-2 attachment."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1c89224f",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Existing-declaration attachment (lean.existing:true) to WeilConjectures.WeilSheaf.LowerShriek / AlgebraicGeometry.WeilComplex.derivedLowerShriek plus 17 declarations; snapshot differs from side-live only in the lean field. Verified against the source: B_W = PadicAlgCl.locallyFiniteFunctions on the whole |V|; AdicSheaf = Mod over adicConstantSheaf; ProEtaleWeilSheaf = IsoAlgebra of the Frobenius pullback; constructibility predicates with rank per covering member; WeilComplex.objectProperty = bounded ⊓ constructible homology inside the ordinary DerivedCategory; upperStar/lowerStar/extensionByZero via mapOfNatIso, i.e. (GM, G(phi)∘c_M); rightDerivedLowerShriek = termwise extension by zero then derived pushforward, with the chosen Nagata compactification; target hypotheses lft+qc+qs; preservation is a separate theorem. Statement verbatim to LowerShriek.lean:150-155; check_existing returned ([], []); no other node in live or side-live owns these declarations; def-weil-weil-sheaf-complex is bound to sfWeilComplex, so no duplicate. Edge cases (empty X, rank 0, varying ranks, non-qc X, identity h, universes) are fine. Advisory H11: the second-reading section says no worker second reading was done (dispatcher policy); the worker report's clause mapping was re-verified. No fixes; nothing compiled since no files changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex",
+     "module": "WeilConjectures.WeilObject.Defs",
+     "lines": [
+      126,
+      136
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.derivedLowerShriek",
+    "AlgebraicGeometry.WeilComplex.objectProperty",
+    "AlgebraicGeometry.ProEtaleWeilSheaf",
+    "AlgebraicGeometry.WeilSheaf.frobeniusPullback",
+    "AlgebraicGeometry.WeilSheaf.objectProperty",
+    "AlgebraicGeometry.ProEtale.AdicSheaf",
+    "AlgebraicGeometry.ProEtale.adicConstantSheaf",
+    "PadicAlgCl.locallyFiniteFunctions",
+    "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf",
+    "AlgebraicGeometry.ProEtale.IsAdicStratifiedLisseSheaf",
+    "AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf",
+    "AlgebraicGeometry.ProEtaleWeilSheaf.upperStar",
+    "AlgebraicGeometry.ProEtaleWeilSheaf.lowerStar",
+    "AlgebraicGeometry.ProEtaleWeilSheaf.extensionByZero",
+    "AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriek",
+    "AlgebraicGeometry.WeilComplex.upperStar",
+    "AlgebraicGeometry.WeilComplex.derivedLowerStar"
+   ],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+     "lines": [
+      223,
+      231
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+     "lines": [
+      270,
+      282
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+     "lines": [
+      19,
+      25
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-grothendieck-k-injective",
+      "sk-def-sfb-derived-categories"
+     ],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.derivedLowerShriek",
+     "module": "WeilConjectures.WeilSheaf.LowerShriek",
+     "lines": [
+      146,
+      160
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      173,
+      179
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.objectProperty",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      155,
+      160
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtaleWeilSheaf",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      140,
+      144
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.frobeniusPullback",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      127,
+      134
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.objectProperty",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      149,
+      153
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.AdicSheaf",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.Module",
+     "lines": [
+      51,
+      55
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.adicConstantSheaf",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf",
+     "lines": [
+      318,
+      326
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "PadicAlgCl.locallyFiniteFunctions",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf",
+     "lines": [
+      74,
+      111
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.Constructible",
+     "lines": [
+      81,
+      87
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.IsAdicStratifiedLisseSheaf",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.Constructible",
+     "lines": [
+      115,
+      124
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.Constructible",
+     "lines": [
+      141,
+      149
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtaleWeilSheaf.upperStar",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      444,
+      450
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtaleWeilSheaf.lowerStar",
+     "module": "WeilConjectures.WeilSheaf.LowerStar",
+     "lines": [
+      72,
+      79
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtaleWeilSheaf.extensionByZero",
+     "module": "WeilConjectures.WeilSheaf.OpenImmersion",
+     "lines": [
+      47,
+      54
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriek",
+     "module": "WeilConjectures.WeilSheaf.LowerShriek",
+     "lines": [
+      83,
+      93
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.upperStar",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      470,
+      480
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.derivedLowerStar",
+     "module": "WeilConjectures.WeilSheaf.LowerStar",
+     "lines": [
+      168,
+      179
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": false
+    }
+   ]
+  }
+ }
+}

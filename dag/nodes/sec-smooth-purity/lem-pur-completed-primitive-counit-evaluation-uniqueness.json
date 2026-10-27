@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-completed-primitive-counit-evaluation-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness of the unit-normalized evaluation comparison",
+ "statement": "theorem inverseEvaluation_unique {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) (ξ η : inverse l E f ⋙ coefficientSequenceEvaluation l E X n ≅ coefficientSequenceEvaluation l E Y n ⋙ integralOperationsLevelPullback l E f n) (hξ : ∀ M : coefficientSequenceModules l E Y, (coefficientSequenceEvaluation l E Y n).map ((Adjunction.ofIsRightAdjoint (direct l E f)).unit.app M) ≫ (eqToIso (directEvaluation_eq l E f n)).hom.app ((inverse l E f).obj M) ≫ (Scheme.coefficientProEtaleModuleDirectImage.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).map (ξ.hom.app M) = (Scheme.coefficientProEtaleModuleAdjunction.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).unit.app ((coefficientSequenceEvaluation l E Y n).obj M)) (hη : ∀ M : coefficientSequenceModules l E Y, (coefficientSequenceEvaluation l E Y n).map ((Adjunction.ofIsRightAdjoint (direct l E f)).unit.app M) ≫ (eqToIso (directEvaluation_eq l E f n)).hom.app ((inverse l E f).obj M) ≫ (Scheme.coefficientProEtaleModuleDirectImage.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).map (η.hom.app M) = (Scheme.coefficientProEtaleModuleAdjunction.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).unit.app ((coefficientSequenceEvaluation l E Y n).obj M)) : ξ = η",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 and the finite evaluation/counit assembly described in the item proof; this stage-3 decomposition isolates the existence and uniqueness/assembly subarguments."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "For each system M, let a be the evaluated system unit followed by the displayed direct-evaluation comparison. The two normalization equations say a followed by direct image of either comparison is the finite adjunction unit. Postcompose each equation with the direct image of its comparison inverse: functoriality and inverse cancellation show that both inverses have adjoint transpose a. Injectivity of the finite adjunction hom-equivalence makes the inverses equal. Inverting again gives equality of the component isomorphisms, and extensionality of natural transformations gives equality of the natural isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+    "place": "Adjunction.homEquiv_unit and injectivity of Adjunction.homEquiv; Mathlib/CategoryTheory/Iso.lean, Iso.ext"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "place": "K6: Adjunction.homEquiv_unit with inverse cancellation, componentwise."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit normalized natural isomorphism existence finite evaluation adjunction",
+   "results": "No direct declaration found; existing coefficient evaluation calculus is the closest interface.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction homEquiv unit natural isomorphism uniqueness",
+   "results": "Generic adjunction hom-equivalence lemmas only; no project-specific comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseEvaluation completedPrimitiveCounit RoosRealization Comparisons",
+   "results": "Only the current item declarations; no duplicate lower statement.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPrimitiveCounitComparison",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-primitive-counit-comparison",
+   "place": "Stage-3 lower statement extracted from the parent proof.",
+   "via": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrimitiveCounitEvaluation",
+  "file": "lean/Sheaf/Paper/PrimitiveCounitEvaluation.lean",
+  "declaration": "WeilConjectures.PrimitiveCounit.inverseEvaluation_unique",
+  "statement": "theorem inverseEvaluation_unique {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) (ξ η : inverse l E f ⋙ coefficientSequenceEvaluation l E X n ≅ coefficientSequenceEvaluation l E Y n ⋙ integralOperationsLevelPullback l E f n) (hξ : ∀ M : coefficientSequenceModules l E Y, (coefficientSequenceEvaluation l E Y n).map ((Adjunction.ofIsRightAdjoint (direct l E f)).unit.app M) ≫ (eqToIso (directEvaluation_eq l E f n)).hom.app ((inverse l E f).obj M) ≫ (Scheme.coefficientProEtaleModuleDirectImage.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).map (ξ.hom.app M) = (Scheme.coefficientProEtaleModuleAdjunction.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).unit.app ((coefficientSequenceEvaluation l E Y n).obj M)) (hη : ∀ M : coefficientSequenceModules l E Y, (coefficientSequenceEvaluation l E Y n).map ((Adjunction.ofIsRightAdjoint (direct l E f)).unit.app M) ≫ (eqToIso (directEvaluation_eq l E f n)).hom.app ((inverse l E f).obj M) ≫ (Scheme.coefficientProEtaleModuleDirectImage.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).map (η.hom.app M) = (Scheme.coefficientProEtaleModuleAdjunction.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).unit.app ((coefficientSequenceEvaluation l E Y n).obj M)) : ξ = η",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T211947-L-4174483",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-662ac",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T050615-L-243965",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules vs clone original (verbatim relocation diffed), new sorry statements vs Comparisons fields/nodes, node lean/proof fields vs Lean; 12 direct importers compiled OK against delivered .lbuild; axioms probe (roos_exists clean, comparisons_exists sorryAx only via the two new realization holes)"
+ }
+}

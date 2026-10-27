@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-discrete-constant-presentation-lifting",
+ "kind": "statement",
+ "title": "Lifting one constant finite matrix to discrete point matrices",
+ "statement": "Let X,Y be schemes in universe u, f:Y→X, A a commutative ring in universe u and k a commutative ring in universe u+1. Fix e:ULift A≃+*k and any ring-sheaf isomorphism c:underline k≅smallRing(X,p_X^*discreteObj A), using [def-sfb-integral-models-stacks-data]. Let N be an internal p_X^*discreteObj A-module and U an object of the coefficient-sized pro-etale site of Y [def-sfb-affine-locally-constructible-proetale-modules]. Put F=f^*(coefficientModelFixedScalars(smallModules(N) restricted along c)), and write u_V:V→Y for the scheme map of a site object. Fix natural numbers m,n and a k-linear map q:k^m→k^n. If F on the slice at U is isomorphic to the constant sheaf of coker q [def-weil-pbc-constant-sheaf], there is a covering sieve S on U such that for every g:V→U in S there exists a map d:(discreteObj A)^m→(discreteObj A)^n of regular point modules with (u_V≫f)^*N≅p_V^*coker d [det-def-sfb-constructible-local-model]. No Noetherian hypothesis on k or any scheme is imposed. No locally constant predicate or scheme covering family is assembled here. The returned point matrix has precisely the specified ranks m and n. The notation for the actual finite free module, inverse-image module and point pullback is fixed in [def-sfb-point-model-free-module], [def-sfb-point-model-restriction-module], [def-sfb-point-model-pullback-functor]; these are the existing constructions, not additional hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi. Reverse finite-matrix part of lem-sfb-discrete-coefficient-local-models, steps 1--2."
+ },
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-weil-pbc-constant-sheaf",
+  "def-sfb-point-model-free-module",
+  "def-sfb-point-model-restriction-module",
+  "def-sfb-point-model-pullback-functor"
+ ],
+ "proof": [
+  {
+   "text": "Apply constant_slice_internal_presentation to the given slice trivialization. This produces an internal free matrix a of the specified ranks on the underlying scheme of U and an isomorphism from its cokernel to the internal restriction of N.",
+   "uses": [
+    "lem-sfb-constant-slice-internal-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply discrete_internal_matrix_local_lifting to a. It supplies a covering sieve and, on each member, a point matrix d and an arrow isomorphism between the pulled-back matrix a and the point pullback of d.",
+   "uses": [
+    "lem-sfb-discrete-internal-matrix-local-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse images preserve finite colimits: for scheme pullback this is the existing instance; for point pullback lift the monoidal point inverse-image left adjunction to modules. Thus both preserve cokernels. Apply cokernel.mapIso to the arrow isomorphism. Compose these cokernel comparisons with the pullback of the internal presentation isomorphism. The site-morphism triangle g≫U.hom=V.hom and upperStarComp identify the source with pointModelRestriction at V. This gives the desired point cokernel with the unchanged ranks m,n.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-slice-internal-presentation",
+  "lem-sfb-discrete-internal-matrix-local-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi. Reverse finite-matrix part of lem-sfb-discrete-coefficient-local-models, steps 1--2. E8 separates encoding transport from local matrix descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite presentation over a constant ring sheaf is locally the constant sheaf of a finitely presented module",
+   "date": "2026-10-26",
+   "results": "8 hits including SheafOfModules.IsFinitePresentation and its quasicoherent presentation API.",
+   "verdict": "These give ordinary ringed-site presentations, not the internal condensed-point and small-site comparison required here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation.exists_fin",
+   "date": "2026-10-26",
+   "results": "1 hit: Module.FinitePresentation.exists_fin. The adjacent exists_fin' declaration was read in the pinned source.",
+   "verdict": "Use the ordinary finite-matrix presentation in the parent proof; it does not identify the two sheaf encodings."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*finite.*presentation|finite.*presentation.*constant|scalarNormalized",
+   "date": "2026-10-26",
+   "results": "4 Mathlib hits about locally constant rank of flat finitely presented modules. Local project searches found ScalarNormalizedConstantModels and FiniteConstantLocalModel.",
+   "verdict": "The project finite-matrix argument is the route; arbitrary c requires local refinement and cannot use an unverified global scalar normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscreteCoefficientLocalModels",
+  "date": "2026-10-26",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-model comparison (1)--(2), discrete residue finite-presentation step; Lifting one constant finite matrix to discrete point matrices",
+   "via": [
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiscreteConstantPresentationLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiscreteConstantPresentationLifting.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_constant_presentation_lifting",
+  "statement": "theorem discrete_constant_presentation_lifting\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k]\n    (e : ULift.{u + 1} A ≃+* k)\n    (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅\n      smallRing X (condensedRingObj (discreteObj A) X))\n    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (discreteObj A) X))\n    (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y)\n    (m n : ℕ)\n    (q : ModuleCat.of k (Fin m → k) ⟶ ModuleCat.of k (Fin n → k))\n    (hN : Nonempty (((Scheme.coefficientProEtaleFixedModulePullback.{u, u} f k).obj\n          ((coefficientModelFixedScalars _ k).obj\n            ((smallModules X (condensedRingObj (discreteObj A) X) ⋙\n              ConstantCompletion.res c.hom).obj N))).over U ≅\n      (constantSheaf ((Scheme.coefficientProEtaleModelTopology.{u, u} Y).over U)\n        (ModuleCat.{u + 1} k)).obj (cokernel q))) :\n    ∃ S : Sieve U, S ∈ Scheme.coefficientProEtaleModelTopology.{u, u} Y U ∧\n      ∀ (V : Scheme.coefficientProEtaleSiteModel.{u, u} Y) (g : V ⟶ U), S g →\n        ∃ d : pointModelFree (discreteObj A) m ⟶ pointModelFree (discreteObj A) n,\n          Nonempty\n            (pointModelRestriction (discreteObj A) f N (AsSmall.down.obj V).hom ≅\n              (pointModelPullbackFunctor (discreteObj A) (AsSmall.down.obj V).left).obj\n                (cokernel d))",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.AlgebraicGeometry.DiscreteCoefficientLocalModels",
+  "worker": "stage3",
+  "summary": "One fixed-rank matrix comparison left after proving the scheme-cover and covering-sieve assembly.",
+  "blueprint": "Integral-model comparison (1)--(2), discrete residue finite-presentation step; Lifting one constant finite matrix to discrete point matrices",
+  "tool_uses": [
+   {
+    "node": "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "why": "Use the canonical constant-sheaf inverse-image comparison on each scheme; no construction or step of its unit is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Use the existing generic equivalence between the slice site and the pro-etale site of its object, including its constant-ring identification. This is a localization tool, not a replacement of any unit step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261026T071302-L-3909786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T100244-L-4163590",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

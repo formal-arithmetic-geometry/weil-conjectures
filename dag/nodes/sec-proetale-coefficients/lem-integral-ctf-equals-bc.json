@@ -1,0 +1,265 @@
+{
+ "id": "lem-integral-ctf-equals-bc",
+ "kind": "statement",
+ "title": "$\\Dctf=\\Dbc$ for integral and rational coefficients",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite subextension $E/\\mathbf Q_\\ell$ with valuation ring $\\cO_E$. Use the commutative condensed coefficient rings [sk-def-sfb-condensed-ring], [sk-def-sfb-qlbar-condensed] and their pulled-back coefficient sheaves $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Let $X$ be a qcqs scheme and $\\Lambda\\in\\{\\cO_E,E,\\Qlb\\}$ (including $\\mathbf Z_\\ell,\\mathbf Q_\\ell$). In this statement constructible means the finite constant local model convention [sk-def-sfb-constructible]: there is a finite constructible locally closed stratification on each stratum of which the module is pro-étale locally $\\Lambda_U\\otimes_{\\Lambda(*)}P$ for a finitely presented scalar module $P$. Use $\\Dbc$, Tor amplitude and $\\Dctf$ in the ordinary uncompleted derived category exactly as in [det-def-sfb-constructible-tor-amplitude]; no derived-completeness assumption is imposed. Then:\n\n1. Every constructible $\\Lambda_X$-module in degree zero has Tor amplitude in $[-1,0]$, and in $[0,0]$ if $\\Lambda$ is a field.\n2. For integers $a\\leq b$, every $K\\in\\Dbc(X,\\Lambda)$ with cohomology in $[a,b]$ has Tor amplitude in $[a-1,b]$, and in $[a,b]$ if $\\Lambda=E$ or $\\Qlb$: for every degree-zero $\\Lambda_X$-module sheaf $M$,\n$$\\mathcal H^r(K\\otimes^{\\mathbf L}_{\\Lambda_X}M)=0\\quad\\text{for }r\\notin[a-1,b],\\quad\\text{respectively }r\\notin[a,b].$$\nConsequently $\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$ as full subcategories of the same ordinary derived category.\n\nFor finite nonregular coefficients the condition is necessary. For $A=\\mathbf Z/\\ell^2$, the scalar module $\\mathbf F_\\ell=A/(\\ell)$ has infinite projective dimension. The scalar complex $[A\\xrightarrow{\\ell}A]$ in degrees $[-1,0]$ is perfect [def-pc-perfect-ring-complex], while its two nonzero cohomology modules are $\\mathbf F_\\ell$, which is not perfect. These are also counterexamples as constant sheaves on $X=\\operatorname{Spec}k$ for any separably closed field $k$: the constant residue module is constructible but has no finite Tor amplitude, whereas the two-term constant free complex has finite Tor amplitude. For every qcqs scheme $X$ and every finite commutative ring $A$ with discrete condensed structure, $\\Dctf(X,A)$ is thick (triangulated and closed under direct summands), but it need not be stable under standard truncations.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.md",
+  "place": "node lem-integral-ctf-equals-bc, order 1245"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put $c=-1$ for $\\cO_E$ and $c=0$ for $E$ or $\\Qlb$. Apply the uniform p-adic scalar-model theorem to every scheme $S$: every module with a finite constant local model has Tor amplitude $[c,0]$. Its integral case allows torsion scalar modules, and its algebraic-closure case uses the finite-subextension-valued condensed ring fixed here.",
+   "uses": [
+    "lem-sfb-padic-constant-local-model-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+    "place": "Local models and Locality"
+   }
+  },
+  {
+   "text": "Apply finite-strata Tor dévissage with the common interval $[c,0]$ and the result of step 1 for every scheme $S$. Its constructibility predicate is precisely the finite constant local model convention fixed in the statement. Since $X$ is qcqs, it gives amplitude $[c,0]$ for every constructible module on $X$. The cited theorem permits arbitrary constructible locally closed strata: it uses an open–closed refinement, not an unsupported choice of an original open stratum. In the field cases enlarge $[0,0]$ to $[-1,0]$ by inclusion of intervals. This proves (1).",
+   "uses": [
+    "lem-sfb-stratified-tor-interval-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+    "place": "Strata; corrected finite open–closed refinement"
+   }
+  },
+  {
+   "text": "For $K$ as in (2), each $H^q(K)$ is constructible by the definition of $\\Dbc$. Step 2 therefore gives its degree-zero complex amplitude $[c,0]$. Apply the cohomology Tor-interval theorem with cohomology interval $[a,b]$ and module interval $[c,0]$. Its conclusion is amplitude $[a+c,b]$, hence $[a-1,b]$ integrally and $[a,b]$ over a field. This includes the universal test against every degree-zero module, exactly as claimed.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-sfb-cohomology-tor-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+    "place": "Complexes; finite truncation dévissage"
+   }
+  },
+  {
+   "text": "Every $K\\in\\Dbc$ has some finite cohomology interval, so step 3 puts it in the finite-Tor subcategory. Conversely $\\Dctf$ is defined as the full subcategory of $\\Dbc$ consisting of finite-Tor objects. Thus their object predicates, and therefore their full subcategories and morphisms, agree.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+    "place": "Complexes; equality of full subcategories"
+   }
+  },
+  {
+   "text": "For $A=\\mathbf Z/\\ell^2$ and $t=\\ell$, $t^2=0$ and $tr=0$ exactly when $r\\in tA$: for an integer representative, $\\ell^2\\mid\\ell r$ exactly when $\\ell\\mid r$. The periodic tensor theorem gives $\\operatorname{Tor}^A_q(A/tA,A/tA)\\cong A/tA=\\mathbf F_\\ell\\ne0$ for every $q\\geq0$. Thus there is no finite lower Tor bound. The existing scalar counterexample theorem also states infinite projective dimension and nonperfectness of this residue module, and perfectness of the two-term free complex. Directly, the latter complex has $H^{-1}=\\ker(t)=tA\\cong\\mathbf F_\\ell$ and $H^0=A/tA\\cong\\mathbf F_\\ell$.",
+   "uses": [
+    "lem-sfb-square-zero-periodic-tensor",
+    "det-def-localizing-closure-ctf-equals-bc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+    "place": "The examples; periodic scalar resolution"
+   }
+  },
+  {
+   "text": "The finite-ring clause of the existing closure theorem gives thickness of $\\Dctf(X,A)$ for every finite commutative discrete $A$ and qcqs $X$. On $\\operatorname{Spec}k$ the constant square-zero example theorem supplies a constructible residue module with no finite Tor amplitude and a bounded constructible finite-Tor complex whose standard upper truncation has no finite Tor amplitude. For the two-term constant free complex $C=[A_X\\xrightarrow{\\ell}A_X]$ in degrees $[-1,0]$ of step 5: its terms are the tensor unit of $\\Mod(\\Lambda_X)$, hence flat, and $\\Mod(\\Lambda_X)$ is a closed symmetric monoidal Grothendieck abelian category, so the bounded-above flat criterion makes $C$ K-flat. The relative derived tensor is computed by K-flat replacement, so $C\\otimes^{\\mathbf L}_{\\Lambda_X}N\\simeq[N\\xrightarrow{\\ell}N]$ in degrees $[-1,0]$ for every module $N$; thus $C$ has Tor amplitude $[-1,0]$. The failure of stability under standard truncations is the last conclusion of the example theorem, which proves the claim.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "lem-sfb-constant-square-zero-tor-example",
+    "lem-sfb-bounded-above-flat-kflat",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+    "place": "The examples; finite-ring thickness and truncation failure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-padic-constant-local-model-tor",
+  "lem-sfb-stratified-tor-interval-devissage",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-sfb-cohomology-tor-interval",
+  "lem-sfb-square-zero-periodic-tensor",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "lem-sfb-constant-square-zero-tor-example",
+  "lem-sfb-bounded-above-flat-kflat",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models, Locality, Strata, Complexes and The examples; corrected to the parent unit finite constant local model convention and finite open–closed refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every constructible module over O_E, E, or Qbar on a qcqs scheme has Tor amplitude [-1,0], and [0,0] over a field",
+   "results": "{\"t\": \"2026-10-26T03:23:53Z\", \"tool\": \"leanfinder\", \"query\": \"Every constructible module over O_E, E, or Qbar on a qcqs scheme has Tor amplitude [-1,0], and [0,0] over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"DerivedCategory.isGE_Q_obj_iff\", \"Rep.isZero_Tor_succ_of_projective\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"8a691c9e5fcdd26f\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned general module flatness, cohomological bounds, Tor of projectives, and sheaf finite-presentation declarations do not state the condensed scalar-model constructible Tor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.torAmplitudeIn, constructible, IsFlat, IsProjective",
+   "results": "{\"t\": \"2026-10-26T03:23:54Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.torAmplitudeIn, constructible, IsFlat, IsProjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DerivedCategory.torAmplitudeIn'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "invalid pattern: unknown identifier; replaced by the later valid quoted-name search"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|constructible.*Tor",
+   "results": "{\"t\": \"2026-10-26T03:23:54Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|TorAmplitude|constructible.*Tor\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned general module flatness, cohomological bounds, Tor of projectives, and sheaf finite-presentation declarations do not state the condensed scalar-model constructible Tor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible pro-etale sheaf over a DVR has finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-26T03:23:55Z\", \"tool\": \"leansearch\", \"query\": \"bounded constructible pro-etale sheaf over a DVR has finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Finite.hasFiniteLimits\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.hasLimitsOfSize\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFiniteType.mk\", \"SheafOfModules.IsFinitePresentation.mk\"], \"digest\": \"651562608e18678b\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned general module flatness, cohomological bounds, Tor of projectives, and sheaf finite-presentation declarations do not state the condensed scalar-model constructible Tor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant scalar models over discrete valuation rings have flat dimension at most one and bounded complexes inherit a uniform Tor interval",
+   "results": "{\"t\": \"2026-10-26T03:24:21Z\", \"tool\": \"leanfinder\", \"query\": \"Finite constant scalar models over discrete valuation rings have flat dimension at most one and bounded complexes inherit a uniform Tor interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_flat_of_finrank_eq\", \"Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal\", \"Module.free_of_flat_of_isLocalRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.Flat.tfae_equational_criterion\", \"Module.faithfullyFlat_iff\"], \"digest\": \"6579fe05b695b3d1\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned general module flatness, cohomological bounds, Tor of projectives, and sheaf finite-presentation declarations do not state the condensed scalar-model constructible Tor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"constructible\"",
+   "results": "{\"t\": \"2026-10-26T03:24:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"Tor\\\", \\\"constructible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned general module flatness, cohomological bounds, Tor of projectives, and sheaf finite-presentation declarations do not state the condensed scalar-model constructible Tor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTor|tor_amplitude|[Cc]onstructible.*[Ff]lat",
+   "results": "{\"t\": \"2026-10-26T03:24:22Z\", \"tool\": \"grep\", \"query\": \"finiteTor|tor_amplitude|[Cc]onstructible.*[Ff]lat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned general module flatness, cohomological bounds, Tor of projectives, and sheaf finite-presentation declarations do not state the condensed scalar-model constructible Tor theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "long_proof_few_deps",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1245,
+ "blueprint_uses": [
+  "def-weil-finite-tor-amplitude",
+  "det-def-sfb-bounded-constructible",
+  "def-sfb-constructible-module",
+  "det-def-sfb-constructible-local-model",
+  "def-weil-open-closed-recollement"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "lem-integral-ctf-equals-bc",
+  "from": null,
+  "same_as": [
+   "det-def-localizing-closure-ctf-equals-bc"
+  ]
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-integral-ctf-equals-bc",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported citations mix general local-finite-presentation constructibility with scalar constant-model constructibility and raw derived tensor with derived-complete finite-level Tor. Corrected the coefficient/constructibility/category references to the current parent unit and explicit raw scalar-model convention; all quantitative bounds and counterexamples retained. Reused six existing proof tools, no new nodes. Replaced the false globally open-stratum inference by the existing finite-refinement devissage. Ran seven logged Mathlib searches (including replacement of an invalid Loogle pattern); read every cited statement and tested the edge cases.",
+  "blueprint": "Steps 1–2 realize Local models, Locality and Strata; steps 3–4 realize Complexes, retaining the sharp field bound; steps 5–6 realize The examples and the finite-ring thickness clause. The unit itself fixes finite scalar local models in its opening paragraph; no Noetherian hypothesis is added to this auxiliary qcqs lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-padic-constant-local-model-tor",
+    "why": "Uniform scalar-model computation over the actual condensed DVR or field coefficients; this implements Local models and Locality without changing the integral criterion route."
+   },
+   {
+    "node": "lem-sfb-stratified-tor-interval-devissage",
+    "why": "Generic finite-strata Tor detection with a uniform bound on all schemes; it implements Strata through a valid open–closed refinement."
+   },
+   {
+    "node": "lem-sfb-cohomology-tor-interval",
+    "why": "Generic finite cohomology dévissage for relative derived tensor; it implements the Complexes paragraph, including the sharper field interval."
+   },
+   {
+    "node": "lem-sfb-square-zero-periodic-tensor",
+    "why": "Generic square-zero scalar resolution and its self-tensor calculation for the finite-ring example."
+   },
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Only its already stated scalar counterexamples and finite-ring thickness clause are used; the integral/rational Tor bounds are assembled independently from its constituent generic lemmas."
+   },
+   {
+    "node": "lem-sfb-constant-square-zero-tor-example",
+    "why": "The existing constant-sheaf realization of the square-zero example supplies the actual failure under standard truncation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-padic-constant-local-model-tor",
+  "lem-sfb-stratified-tor-interval-devissage",
+  "lem-sfb-cohomology-tor-interval",
+  "lem-sfb-square-zero-periodic-tensor",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "lem-sfb-constant-square-zero-tor-example"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NR-3b53c0526",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-3b53c0526 (reviewer sub-agent of L); spot-checked: 0 new nodes, 6 steps, all read against their cited statements. The statement change from the source's lfp predicate (def-sfb-constructible-module) to finite constant local models is accepted under E7. The parent sk-def-sfb-constructible, the unit text, the blueprint proof's Local-models paragraph and the sibling det-def-localizing-closure-ctf-equals-bc all use constant models. My own check shows the lfp reading is false. Take X=Spec C(βN,k), E=Q_2 and t extending n↦2^n. M=coker(t) is globally finitely presented. At the point for a nonprincipal ultrafilter, the stalk ring is not a field: t_p is neither a zero divisor nor a unit, so Tor_1(M,M)_p≠0 and the field clause [0,0] fails. All bounds are kept, including the field [a,b], qcqs X and the examples. The direct citer sk-def-sf-weil-complexes survives through lem-sfb-adic-constructibility-predicate-comparison. Checks: the open-stratum source error is confirmed (A^1⊔A^1). Steps 1–5: the premise quantifiers match (every scheme S, admissible rings including finite-subextension Q̄; intervals [c,0] and [a+c,b]; t²=0, ann t=tA for Z/4). Step 4 is elementary. No cycle. tool_uses accepted (six generic Tor tools). FIX (C3/C4): the item claims finite Tor amplitude for the two-term constant free complex, which only the example node's proof gives. Step 6 now cites lem-sfb-bounded-above-flat-kflat and sk-def-sfb-derived-tensor-hom (flat unit terms ⇒ K-flat ⇒ C⊗^L N=[N→N], amplitude [-1,0]), and both are added to proof_deps. Fixed item JSON is under fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCtfEqualsBc",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_ctf_equals_bc",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integral_ctf_equals_bc",
+   "AlgebraicGeometry.ProEtale.integralCriterionScalarResidue",
+   "AlgebraicGeometry.ProEtale.integralCriterionScalarTwoTerm",
+   "AlgebraicGeometry.ProEtale.integralCriterionScalarExample",
+   "AlgebraicGeometry.ProEtale.integral_ctf_scalar_counterexample",
+   "AlgebraicGeometry.ProEtale.integral_ctf_finite_ring_thick",
+   "AlgebraicGeometry.ProEtale.integralCriterionResidue",
+   "AlgebraicGeometry.ProEtale.integralCriterionTwoTerm",
+   "AlgebraicGeometry.ProEtale.integral_ctf_constant_counterexample"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCtfEqualsBc.lean",
+  "statement": "theorem integral_ctf_equals_bc (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (hΛ : Nonempty (Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ Nonempty (Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E)) ∨ Nonempty (Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨ Nonempty (Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) : (∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X), IsConstantModelConstructible Λ.X X M → DerivedCategory.torAmplitudeIn _ (-1) 0 ((DerivedCategory.singleFunctor _ 0).obj M)) ∧ (∀ (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) (a b : ℤ), a ≤ b → constantModelBoundedConstructible Λ.X X K → DerivedCategory.homologyConcentratedIn a b K → DerivedCategory.torAmplitudeIn _ (a - 1) b K) ∧ ((Nonempty (Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨ Nonempty (Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) → (∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X), IsConstantModelConstructible Λ.X X M → DerivedCategory.torAmplitudeIn _ 0 0 ((DerivedCategory.singleFunctor _ 0).obj M)) ∧ (∀ (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) (a b : ℤ), a ≤ b → constantModelBoundedConstructible Λ.X X K → DerivedCategory.homologyConcentratedIn a b K → DerivedCategory.torAmplitudeIn _ a b K)) ∧ (constantModelBoundedConstructible Λ.X X ⊓ DerivedCategory.finiteTorAmplitude _) = constantModelBoundedConstructible Λ.X X",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "H2 repair of returned head 8596e957a115: the three concrete scalar example definitions belong to this item module under distinct names; the sibling theorem is retained only in proof_deps and as a plain proof import. The four theorems together state every mathematical clause unchanged; all five helper definitions have real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f40eddf20",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery after the 8596 RETURN for H2 (theorem node det-def-localizing-closure-ctf-equals-bc in stmt_deps only for plain defs). Repaired: that stmt_dep is removed, so stmt_deps equal main and only the lean field differs; the sibling module is now a plain import. The scalar residue, cone [A-ℓ->A] and example predicate are inlined as integralCriterionScalarResidue/TwoTerm/Example and are definitionally the same as the sibling's scalarResidue/scalarTwoTermComplex/scalarFiniteRingExample, with real data and source/blueprint docstrings. The main theorem, finite-ring thick theorem and Spec k example are unchanged and were accepted clause by clause in the 8596 review. lean.statement is verbatim in the file; all 9 declarations exist; sorry only in the 4 theorem proofs; universes bound. Advisory: the inlined defs duplicate the sibling's (authorized by the return). No compile run, since no file was changed."
+ }
+}

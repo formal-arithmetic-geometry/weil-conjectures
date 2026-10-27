@@ -1,0 +1,307 @@
+{
+ "id": "lem-trf-model-fibre-ample-open",
+ "kind": "statement",
+ "title": "An ample limit fibre gives an ample affine neighbourhood at a Noetherian stage",
+ "statement": "Let $I$ be a small nonempty directed partially ordered set with least element $0$. Let $(f_i:Y_i\\to X_i)_{i\\in I}$ be an inverse system of proper morphisms [def-weil-proper-morphism] of schemes [def-pc-scheme], with affine transition morphisms $q_{ji}:Y_j\\to Y_i$ and $r_{ji}:X_j\\to X_i$ [pqf-def-affine-morphism] satisfying $f_iq_{ji}=r_{ji}f_j$. Assume every $X_i$ is Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Let $Y$ and $X$ be the respective limits with projections $a_i,b_i$ and induced morphism $f:Y\\to X$, so $f_i a_i=b_i f$; a limit here means that each compatible cone from any scheme factors uniquely through the given projections. Let $M_0$ be an invertible $\\mathcal O_{Y_0}$-module [def-sc-invertible-module], put $M_i=q_{i0}^*M_0$, and let $M$ be an invertible module on $Y$ with $a_0^*M_0\\cong M$ [def-pc-module-pullback]. For $x\\in X$ put $x_i=b_i(x)$ and let $Y_x,(Y_i)_{x_i}$ denote scheme-theoretic fibres [def-pc-scheme-fibre]. If $M|_{Y_x}$ is ample [def-weil-pbc-ample-invertible-module], then there exist $i\\in I$ and an affine open neighbourhood $V_i\\subseteq X_i$ of $x_i$ such that both $M_i|_{(Y_i)_{x_i}}$ and $M_i|_{f_i^{-1}(V_i)}$ are ample in the absolute sense.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D2S, lemma-ample-in-neighbourhood, proof: residue-field colimit, descent of fibre ampleness, and the Noetherian affine neighbourhood V_i."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $k_i=\\kappa(x_i)$ and $P_i=\\operatorname{Spec}k_i$. The residue-field limit theorem applied to $(X_i)$ and $x$ gives the compatible cone $P=\\operatorname{Spec}\\kappa(x)=\\varprojlim_iP_i$, including its compatibility with $P_i\\to X_i$. Put $Z_i=Y_i\\times_{X_i}P_i$. The transition $t_{ji}:Z_j\\to Z_i$ is induced by $q_{ji}$ and $P_j\\to P_i$; the fibre-product uniqueness gives its identity and composition laws.",
+   "uses": [
+    "lem-weil-pbc-limit-residue-field",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CUG, lemma-inverse-limit-irreducibles (1); construction of the fibre system"
+   }
+  },
+  {
+   "text": "Each $Z_i\\to P_i$ is proper by base change of $f_i$. Since $P_i$ is affine, proper-basic gives that $Z_i$ is quasi-compact and separated; the separated-implies-quasi-separated lemma gives quasi-separatedness of $Z_i$. Thus these are schemes to which affine-limit ampleness descent can apply once the transitions have been checked.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "pqf-lem-proper-basic",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6, lemma-base-change-proper; proper fibres over fields are quasi-compact and separated"
+   }
+  },
+  {
+   "text": "Fix $j\\ge i$. Choose an affine open $V\\subset X_i$ containing $x_i$, and cover $f_i^{-1}(V)$ by affine opens $U_\\alpha$. The open $V_j=r_{ji}^{-1}(V)$ and the opens $U_{j,\\alpha}=q_{ji}^{-1}(U_\\alpha)$ are affine by the hypotheses. Write $A=\\Gamma(V,\\mathcal O)$, $B_\\alpha=\\Gamma(U_\\alpha,\\mathcal O)$, $A_j=\\Gamma(V_j,\\mathcal O)$ and $B_{j,\\alpha}=\\Gamma(U_{j,\\alpha},\\mathcal O)$. The affine fibre-product formula identifies the opens $U_\\alpha\\times_VP_i$ of $Z_i$ with $\\operatorname{Spec}(B_\\alpha\\otimes_Ak_i)$, and their inverse images under $t_{ji}$ with $U_{j,\\alpha}\\times_{V_j}P_j=\\operatorname{Spec}(B_{j,\\alpha}\\otimes_{A_j}k_j)$. These identifications follow by matching the two projections in the fibre-product universal property. The former opens cover $Z_i$ and every displayed inverse image is affine. The affine-local-target criterion therefore says that $t_{ji}$ is affine. No square $Y_j\\to Y_i$ over $X_j\\to X_i$ is assumed Cartesian.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S6 and 01S8; schemes.tex Tag 01I4 (affine fibre products); direct chart verification of the fibre transitions"
+   }
+  },
+  {
+   "text": "The affine-transition limit theorem now ensures that $\\varprojlim_i Z_i$ exists. Apply the fibre-products-and-limits theorem to the compatible systems $Y_i\\to X_i\\leftarrow P_i$. Their limits are $Y$, $X$ and $P$ by hypothesis and Step 1; it identifies $\\varprojlim_iZ_i$ with $Y\\times_XP=Y_x$, compatibly with all projections. This checks the limit required for ampleness descent without replacing a stage fibre by a base change of $Y_0$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-kun-fibre-product-limits",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YX and 0CUG; fibre-product universal property (commutation of limits)"
+   }
+  },
+  {
+   "text": "Let $p_i:Z_i\\to Y_i$ be the first projection and put $L_0=p_0^*M_0$. Pullback preserves invertibility. The equality $q_{i0}p_i=p_0t_{i0}$ and the composition isomorphisms for tensor pullback give $t_{i0}^*L_0\\cong p_i^*q_{i0}^*M_0=M_i|_{Z_i}$. Likewise its pullback to the limit $Y_x$ is $M|_{Y_x}$, using $a_0^*M_0\\cong M$. This limit pullback is ample by assumption. Apply affine-limit ampleness descent to $(Z_i)$, whose quasi-compactness and quasi-separatedness are Step 2, affine transitions Step 3 and limit Step 4. It gives $i\\ge0$ such that $M_i|_{Z_i}$ is ample.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-ample-affine-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MT, lemma-limit-ample, applied to the fibre system; pullback-composition identifications"
+   }
+  },
+  {
+   "text": "The pullback $M_i=q_{i0}^*M_0$ is invertible. Apply the Noetherian fibre-ampleness neighbourhood lemma to the original proper morphism $f_i:Y_i\\to X_i$, this invertible module, and $x_i$. Its base is Noetherian by hypothesis and its fibre restriction is ample by Step 5. It gives an affine open $V_i$ containing $x_i$ on whose full inverse image $M_i$ is absolutely ample. Together with the fibre ampleness already obtained, this is both conclusions of the item. No further change of index is necessary.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-noetherian-fibre-ample-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, lemma-ample-in-neighbourhood; restriction to an affine neighbourhood"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "lem-kun-fibre-product-limits",
+  "lem-pc-separated-quasi-separated",
+  "lem-trf-ample-affine-limit-descent",
+  "lem-trf-noetherian-fibre-ample-neighbourhood",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-limit-residue-field",
+  "lem-weil-pbc-proper-base-change",
+  "pqf-def-affine-morphism",
+  "pqf-lem-affine-local-target",
+  "pqf-lem-proper-basic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D2S, lemma-ample-in-neighbourhood, middle paragraph; fibre-system hypotheses made explicit using Tags 0CUG, 09MT and 0D2N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an affine inverse system of proper morphisms over Noetherian schemes, a line bundle ample on a limit fibre is ample above an affine neighbourhood of the image point at some finite stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, given a compact open subset $U$ and an open subset $V$ in some object $i$ such that the preimage of $U$ under the cone's p\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (U : c.pt.\", \"doc\": \"In a cofiltered diagram of schemes with affine transition morphisms, every compact open subset of the limit scheme is the preimage of a compact open subset in some scheme of the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, if two compact open subsets $U$ and $V$ of an object $D(i)$ have equal preimages under the cone projection map $c.\\\\pi.app_\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine opens and sections on limits, affine fibres and generic morphism properties; none asserts descent and spreading of fibre ampleness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine opens and sections on limits, affine fibres and generic morphism properties; none asserts descent and spreading of fibre ampleness."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*(fiber|fibre|limit|neigh)|(fiber|fibre|limit).*ample",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine opens and sections on limits, affine fibres and generic morphism properties; none asserts descent and spreading of fibre ampleness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ampleness on a fibre of an inverse limit descends to an affine open neighbourhood at a Noetherian proper stage",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsAffineHom f] (y : Y) : IsAffine (f.fiber y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, QuasiSeparatedSpace (D.obj i)] (U : c.pt.Opens)\\n  (hU : IsAffineOpen U) : ∃ (i : I) (V : (D.obj i).Opens), IsAffineOpen V ∧ c.π.app i ⁻¹ᵁ V = U\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.restrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(hf : P f) (U : Y.affineOpens) : Q (f ∣_ U)\", \"doc\": \"If a morphism $ f $ of schemes satisfies property $ P $, then for every affine open subset $ U $ of the target scheme $ Y $, the restriction of $ f $ to $ U $ satisfies property $ Q $.\"}\n  {\"name\": \"AlgebraicGeometry.isBasis_preimage_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] :\\n  TopologicalSpace.Opens.IsBasis {(c.π.app i ⁻¹ᵁ V : c.pt.Opens) | (i : I) (V : (D.obj i).Opens) (_ : IsAffineOpen V)}\", \"doc\": \"Given a cofiltered diagram of schemes where all transition maps are affine morphisms, the collection of preimages of affine open subsets under the projection maps forms a basis for the topology on the\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(𝒰 : Y.OpenCover) [∀ i, IsAffine (𝒰.X i)] : P f ↔ ∀ i, Q (𝒰.pullbackHom f i)\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ such that each $ \\\\mathcal{U}_i $ is affine. Then $ f $ has the affine property if and only if for every in\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine opens and sections on limits, affine fibres and generic morphism properties; none asserts descent and spreading of fibre ampleness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue fields at a point of a limit are a filtered colimit, so fibrewise ampleness of compatible invertible sheaves eventually holds and spreads over a Noetherian neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine opens and sections on limits, affine fibres and generic morphism properties; none asserts descent and spreading of fibre ampleness."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*(fiber|fibre|limit|neigh)|(fiber|fibre|limit).*ample",
+   "results": "OK 25 hits: Mathlib/Algebra/Category/ModuleCat/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Colimits.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Topology/Continuous.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/Topology/Algebra/FilterBasis.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern general scheme limits, properness and sections, not fibre-ampleness descent or the Noetherian ample neighbourhood."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample line bundle on a limit fibre descends to a finite stage and spreads to an open neighbourhood for a proper morphism over a Noetherian base",
+   "results": "OK 8 hits: AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern general scheme limits, properness and sections, not fibre-ampleness descent or the Noetherian ample neighbourhood."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern general scheme limits, properness and sections, not fibre-ampleness descent or the Noetherian ample neighbourhood."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf ample on a fibre of an inverse limit of proper morphisms with affine transitions becomes ample on a stage fibre and an affine neighbourhood over a Noetherian stage",
+   "results": "OK 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern general scheme limits, properness and sections, not fibre-ampleness descent or the Noetherian ample neighbourhood."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(ample|ampleness|IsAmple)\\b",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern general scheme limits, properness and sections, not fibre-ampleness descent or the Noetherian ample neighbourhood."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ampleness of a line bundle on a proper fibre is open on the base and descends through inverse systems with affine transition maps",
+   "results": "OK 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.AffineSpace.isOpenMap_over, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern general scheme limits, properness and sections, not fibre-ampleness descent or the Noetherian ample neighbourhood."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ample-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Subsidiary ampleness argument: Tag 0D2S, lemma-ample-in-neighbourhood, proof: residue-field colimit, descent of fibre ampleness, and the Noetherian affine neighbourhood V_i.",
+   "via": [
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-model-fibre-ample-open",
+  "worker": "stage1",
+  "summary": "Checked the source proof of Tag 0D2S and reused the existing 09MT, 0D2N and residue-field nodes. Wrote out the affine-chart check for non-Cartesian fibre transitions and checked each hypothesis of ampleness descent. No statement change and no new nodes.",
+  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Subsidiary ampleness argument: Tag 0D2S, lemma-ample-in-neighbourhood, proof: residue-field colimit, descent of fibre ampleness, and the Noetherian affine neighbourhood V_i.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-residue-field",
+    "why": "Supplies the residue-field limit cone used in Tag 0D2S; no statement in this unit identifies residue fields of an affine-transition limit."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic stability of properness under formation of the stage fibres; no same-unit statement supplies this permanence fact."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic quasi-compactness and separatedness of proper schemes over affine bases, needed for Tag 09MT on the fibres."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product computation, needed to verify affineness of fibre transitions without a Cartesian assumption."
+   },
+   {
+    "node": "pqf-lem-affine-local-target",
+    "why": "Generic affine-cover criterion to pass from the explicit chart computations to affine fibre transitions."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic existence of the fibre-system limit once the transitions are proved affine."
+   },
+   {
+    "node": "lem-kun-fibre-product-limits",
+    "why": "Generic commutation of inverse limits and fibre products, identifying the fibre-system limit; it does not replace the ampleness route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic invertibility preservation and composition isomorphism for tensor pullbacks, identifying the line bundles on the fibre system."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-residue-field",
+  "lem-weil-pbc-proper-base-change",
+  "pqf-lem-proper-basic",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-kun-fibre-product-limits",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-fb8c936a3",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-fb8c936a3 (reviewer sub-agent of L); spot-checked: I read Stacks Tag 0D2S (more-morphisms.tex lines 14153-14198). The item is the middle paragraph of its proof: residue fields κ(y)=colim κ(y_i), then 09MT on the fibres, then 0D2N, with the Noetherian approximation taken as hypotheses. The statement is unchanged; live and side-live still have it unsplit with an empty proof, so no other group has superseded it. There is no re-split note and there are no new nodes. proof_deps equals the union of uses. No SGA is cited. Step checks: (1) lem-weil-pbc-limit-residue-field gives P=lim P_i compatibly with P_i→X_i and P→X; the fibre system Z_i=Y_i×_{X_i}P_i is well defined because f_i q_ji=r_ji f_j. (2) Proper base change, then pqf-lem-proper-basic's affine-base clause, then separated⇒quasi-separated make each Z_i qcqs. (3) I checked the charts: t_ji^{-1}(p_i^{-1}U_α)=U_{j,α}×_{V_j}P_j, which is affine by affineness of q and r and the affine fibre-product node; the affine-local-target criterion then makes t_ji affine with no Cartesian assumption. (4) The limit of the Z_i exists because the transitions are affine; lem-kun-fibre-product-limits, with all limits existing, identifies it with Y×_X P=Y_x. (5) The pullback composition identifications hold; lem-trf-ample-affine-limit-descent then makes M_i|_{Z_i} ample. (6) lem-trf-noetherian-fibre-ample-neighbourhood applied to f_i, M_i and x_i gives an affine V_i with absolute ampleness, at the same index i. Edge cases: I={0} reduces to 0D2N; an empty fibre is vacuous. I accept the 8 declared generic tool_uses. Duplicate search over 0D2S, 09MT and the ample-neighbourhood nodes found only the parent, the two siblings, the affine-square transfer node and the algebraic-space locus node, so the item is no duplicate and restates no parent clause. Advisory only: invariance of ampleness under isomorphism (the node lem-sc-ample-iso) is used implicitly in steps 5 and 6; I treat it as definition-level, so there is no change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModelFibreAmpleOpen",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_isAmple_of_limit_fiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModelFibreAmpleOpen.lean",
+  "statement": "theorem exists_affine_isAmple_of_limit_fiber {I : Type u} [PartialOrder I] [OrderBot I] [IsDirected I (· ≤ ·)] [Nonempty I] (DY DX : Iᵒᵖ ⥤ Scheme.{u}) (φ : DY ⟶ DX) [∀ i : I, IsProper (φ.app (op i))] (hYaff : ∀ {i j : I} (h : i ≤ j), IsAffineHom (DY.map (homOfLE h).op)) (hXaff : ∀ {i j : I} (h : i ≤ j), IsAffineHom (DX.map (homOfLE h).op)) [∀ i : I, IsLocallyNoetherian (DX.obj (op i))] [∀ i : I, CompactSpace (DX.obj (op i))] (cY : Cone DY) (hcY : IsLimit cY) (cX : Cone DX) (hcX : IsLimit cX) (f : cY.pt ⟶ cX.pt) (hf : ∀ i : I, cY.π.app (op i) ≫ φ.app (op i) = f ≫ cX.π.app (op i)) (M₀ : (DY.obj (op (⊥ : I))).Modules) [M₀.IsInvertible] (M : cY.pt.Modules) [M.IsInvertible] (eM : (tensorPullback (cY.π.app (op (⊥ : I)))).obj M₀ ≅ M) (x : cX.pt) (hM : ∃ h : ((tensorPullback (f.fiberι x)).obj M).IsInvertible, @IsAmple (f.fiber x) ((tensorPullback (f.fiberι x)).obj M) h) : ∃ (i : I) (V : (DX.obj (op i)).Opens), cX.π.app (op i) x ∈ V ∧ IsAffineOpen V ∧ (∃ h : ((tensorPullback ((φ.app (op i)).fiberι (cX.π.app (op i) x))).obj ((tensorPullback (DY.map (homOfLE (bot_le : (⊥ : I) ≤ i)).op)).obj M₀)).IsInvertible, @IsAmple ((φ.app (op i)).fiber (cX.π.app (op i) x)) ((tensorPullback ((φ.app (op i)).fiberι (cX.π.app (op i) x))).obj ((tensorPullback (DY.map (homOfLE (bot_le : (⊥ : I) ≤ i)).op)).obj M₀)) h) ∧ (∃ h : ((tensorPullback ((φ.app (op i)) ⁻¹ᵁ V).ι).obj ((tensorPullback (DY.map (homOfLE (bot_le : (⊥ : I) ≤ i)).op)).obj M₀)).IsInvertible, @IsAmple ((φ.app (op i)) ⁻¹ᵁ V).toScheme ((tensorPullback ((φ.app (op i)) ⁻¹ᵁ V).ι).obj ((tensorPullback (DY.map (homOfLE (bot_le : (⊥ : I) ≤ i)).op)).obj M₀)) h)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9182da0b3",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Read node, Stacks 0D2S (more-morphisms.tex 14154ff), all 9 stmt_dep records, module, report (Worker report + Second reading present). Clause-by-clause: I with PartialOrder/OrderBot/IsDirected/Nonempty; DY,DX:Iᵒᵖ⥤Scheme.{u}, φ naturality = f_i q_ji = r_ji f_j; IsProper; hYaff/hXaff variance correct; IsLocallyNoetherian+CompactSpace = Noetherian; cones+IsLimit; hf a_i≫f_i=f≫b_i, no Cartesian square; M_i = tensorPullback of q_{i0}; eM a_0^*M_0≅M; fibres via Hom.fiber/fiberι; absolute IsAmple for both conclusions at the same i with x_i∈V and V affine. ∃h:IsInvertible (a Prop) packaging matches the sibling AmpleAffineLimitDescent/NoetherianFibreAmpleNeighbourhood statements, as does Type u. Edge cases: singleton I reduces to 0D2N, empty fibre/limit fine. lean.statement verbatim, existing:false, node otherwise unchanged vs side-live, no live clash. Theorem with sorry only, docstrings carry source+blueprint tag and the 6 proof steps. No FIX, so no compile."
+ }
+}

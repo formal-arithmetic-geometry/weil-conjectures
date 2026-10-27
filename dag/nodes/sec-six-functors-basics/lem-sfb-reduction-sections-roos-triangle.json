@@ -1,0 +1,149 @@
+{
+ "id": "lem-sfb-reduction-sections-roos-triangle",
+ "kind": "statement",
+ "title": "Roos triangle for the actual derived reduction sections",
+ "statement": "Fix $\\ell,E,U,\\Gamma,R\\Gamma$ as in [def-sfb-complete-reduction-sections-model]. Let $K\\in D(\\mathcal M)$, $P$ be K-flat, and $e:Q(P)\\simeq K$. Let $I$ be K-injective in complexes of strict module towers and $j:T(P)\\to I$ a strict map from the actual tensor-reduction tower, each $j_n$ a quasi-isomorphism. Then $Q\\operatorname{Roos}(\\Gamma^{\\mathrm{Tow}}I)$ is a derived inverse limit [def-weil-derived-limit] of $R\\Gamma(K_n)$, with transitions $R\\Gamma$ of the actual canonical integral transitions of [sk-def-pe-derived-completion]. The product in the Roos triangle is any fixed categorical product; no completeness or vanishing hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; Tag 0A07, lemma-Rf-commutes-with-Rlim; Tag 0941, lemma-derived-limit-is-ok"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion",
+  "def-weil-derived-limit",
+  "def-weil-strict-roos-model",
+  "def-sfb-complete-reduction-sections-model"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation of a K-injective strict tower is K-injective. Thus ordinary sections of each I_n compute derived sections. The pointwise quasi-isomorphisms j_n and the scalar-extension computation on K-flat P give isomorphisms Q(Γ I_n) ≅ RΓ(K_n). Naturality of j and the scalar comparison makes these isomorphisms commute with all actual quotient transitions.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact countable products in abelian groups identify the localized termwise product of Γ I_n with its derived product. The inverse rotation of the mapping-cone triangle defining the strict Roos fibre is distinguished. Transport both product vertices by the product of the level isomorphisms. Their transition compatibility identifies the second arrow with one minus shift for the canonical reduction section tower. This is the defining derived-limit triangle.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-weil-derived-countable-products-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-pe-derived-completion",
+  "lem-weil-tower-evaluation-kinjective",
+  "def-weil-strict-roos-model",
+  "lem-weil-derived-countable-products-properties"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; Tag 0A07, lemma-Rf-commutes-with-Rlim; Tag 0941, lemma-derived-limit-is-ok"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of a tower of complexes with cohomology zero above h has cohomology zero above h+1",
+   "results": "8 hits: DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, CochainComplex.isZero_of_isLE, DerivedCategory.isLE_iff, CochainComplex.isZero_of_isGE, DerivedCategory.isGE_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, CategoryTheory.Limits.limit",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "grep",
+   "query": "milnor_shortExact|rightDerivedFunctorUnit.*roos|limitToRoos",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Milnor exact sequence for sections of the inverse limit of a strict tower of module complexes",
+   "results": "8 hits: SheafOfModules.sections, Module.DirectLimit.module, PresheafOfModules.sections, groupCohomology.H1InfRes, PresheafOfModules.sectionsMk, AdicCompletion, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, CategoryTheory.Abelian.Ext.covariantSequence_exact",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteReductionRgammaUpperBound",
+  "date": "2026-10-25",
+  "group": "T5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Current det-sf-comp-coherence-cocycle proof, Refinement isomorphisms paragraph: the use of det-sf-comp-coherence-refinement (2) on the localizing closure. This descendant supplies the scalar complete-reduction sections bound used below the proper direct-image coproduct argument; the ancestor does not itself state this estimate. This node isolates the roos triangle for the actual derived reduction sections.",
+   "via": [
+    "lem-sfb-complete-reduction-rgamma-upper-bound",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReductionSectionsRoosTriangle",
+  "file": "lean/Sheaf/Paper/ReductionSectionsRoosTriangle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteReductionSections.reduction_sections_roos_triangle",
+  "statement": "theorem reduction_sections_roos_triangle\n    (K : DerivedCategory (AdicCompletion.Modules l E U))\n    (P : CochainComplex (AdicCompletion.Modules l E U) ℤ)\n    (hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E U) (.up ℤ)).kFlat P)\n    (e : DerivedCategory.Q.obj P ≅ K)\n    (I : CochainComplex (ℕᵒᵖ ⥤ AdicCompletion.Modules l E U) ℤ)\n    (hI : I.IsKInjective)\n    (j : Functor.ofOpSequence\n      (X := fun n : ℕ ↦ (AdicCompletion.level l E U n).obj P)\n      (AdicCompletion.levelStep l E U P) ⟶ I.asFunctor)\n    (hj : ∀ n : ℕ, QuasiIso (j.app (op n)))\n    [HasProduct (fun n : ℕ ↦\n      (rgamma l E U).obj (AdicCompletion.integralLevel l E U K n))] :\n    IsDerivedLimit (K := fun n : ℕ ↦\n      (rgamma l E U).obj (AdicCompletion.integralLevel l E U K n))\n      (fun n : ℕ ↦ (rgamma l E U).map (AdicCompletion.integralStep l E U K n))\n      (DerivedCategory.Q.obj (roosF.obj (sectionTower l E U I)))",
+  "branch": "sheaf-dag",
+  "by": "T5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4974a",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261025T144105-L-1177264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4974a",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261025T144105-L-1177264",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 4 moved decls verbatim vs change record; new sorried statements read against their nodes and Stacks 0D6K/0941/BS products-exact; unit realized list vs removed imports; node proof_deps vs Lean"
+ }
+}

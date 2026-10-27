@@ -29,22 +29,11 @@
  ],
  "proof": [
   {
-   "text": "Work locally with $I=(f_1,\\ldots,f_c)$ on an affine piece of $P$. By [lem-weil-pbc-regular-sequence-koszul-regular] these equations are Koszul-regular; by [lem-weil-pbc-regular-sequence-conormal-free] their classes form a basis of $C=I/I^2$. On $P\\subset\\mathbf A^n_S$ the coordinate differentials $dx_1,\\ldots,dx_n$ form a basis of $\\Omega^1_{P/S}$, hence their pullbacks form a basis of $V$. Thus $C$ and $V$ have ranks $c$ and $n$, and $K_i=(\\bigwedge^c C)^\\vee\\otimes\\bigwedge^n V$ is locally free of rank one: the dual of $\\bar f_1\\wedge\\cdots\\wedge\\bar f_c$ tensored with $dx_1\\wedge\\cdots\\wedge dx_n$ is a local generator.",
+   "text": "The regular equations are Koszul-regular by [lem-weil-pbc-regular-sequence-koszul-regular], and their classes give the conormal basis by [lem-weil-pbc-regular-sequence-conormal-free]. Apply [lem-trf-lci-determinant-descent-smooth] to these presentations: set $K_{W/S}=\\det L_{W/S}$. Its specified maps $\\alpha_i$ identify the local $K_i$ with this invertible module, and its transitions give presentation independence and the cocycle condition on all overlaps, including for nonseparated $W/S$.",
    "uses": [
     "lem-weil-pbc-regular-sequence-koszul-regular",
-    "lem-weil-pbc-regular-sequence-conormal-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0B6V, local Koszul-regular immersion; conormal calculation in algebra.tex, Tag 00LN."
-   }
-  },
-  {
-   "text": "Use [lem-trf-lci-cotangent-presentation] to identify each two-term conormal complex $E_i=[C\\xrightarrow{d}V]$ with the restriction of the intrinsic $L=L_{W/S}$. These are perfect complexes of Tor amplitude $[-1,0]$, so [lem-trf-two-term-perfect-determinant] defines an invertible module $K=\\det L$ on $W$. Its local formula gives canonical isomorphisms $\\alpha_i:K_i\\to K|_U$. This definition is on the scheme $W$ itself, and requires neither separatedness of $W/S$ nor affine intersections of the chosen charts.",
-   "uses": [
-    "lem-trf-lci-cotangent-presentation",
-    "lem-trf-two-term-perfect-determinant"
+    "lem-weil-pbc-regular-sequence-conormal-free",
+    "lem-trf-lci-determinant-descent-smooth"
    ],
    "elementary": false,
    "source": {
@@ -53,20 +42,10 @@
    }
   },
   {
-   "text": "On the overlap of two presentation charts set $t_{ij}=\\alpha_j^{-1}\\alpha_i:K_i\\to K_j$. Then $t_{ii}=1$ and $t_{jk}t_{ij}=\\alpha_k^{-1}\\alpha_j\\alpha_j^{-1}\\alpha_i=t_{ik}$. Thus these are the required transition isomorphisms, and their glued line is $K$. Refining the charts or replacing a presentation inserts another canonical comparison with the same intrinsic $L$, so it leaves these transition maps unchanged after the canonical identifications. Set $K_{W/S}=K$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0FJX, functoriality of the determinant; cancellation of isomorphisms."
-   }
-  },
-  {
-   "text": "The finite free Koszul resolution and [lem-sc-derived-hom-finite-free-model] compute the derived internal Hom locally by the total dual Koszul complex. Apply [lem-sc-koszul-regular-sequence-dual-complex] to get cohomology only in degree $c$, with top term $\\bigwedge^c C^\\vee$. With coefficients in the ambient line $M=\\Omega^n_{P/S}$, use $\\operatorname{Hom}(K^q,M)=\\operatorname{Hom}(K^q,\\mathcal O_P)\\otimes M$ in every degree; this equality is evaluation on a finite basis, and tensoring by the locally free rank-one $M$ preserves exactness. The determinant pairing identifies $\\bigwedge^c C^\\vee$ with $(\\bigwedge^c C)^\\vee$, as is checked on a basis of $C$. The resulting top cohomology is $i_*K_i$ and the whole complex is $i_*K_i[-c]$. These comparisons glue: the cited Koszul theorem makes the top comparison independent of the chosen generators and compatible with localization, and changing a trivialization of $M$ multiplies both sides by the same unit. Restriction of derived internal Hom is justified by [lem-sc-derived-internal-hom-restrict-open]. Taking degree $c$ gives precisely $i_*K_i\\cong\\mathcal Ext^c_P(i_*\\mathcal O_U,\\Omega^n_{P/S})$.",
+   "text": "Apply [lem-trf-lci-koszul-duality-determinant-comparison] on each presentation. It identifies the full ambient derived Hom with $i_*K_i[-c]$. Its degree-$c$ consequence [lem-trf-lci-adjunction-top-ext] supplies precisely $i_*K_i\\cong\\mathcal Ext^c_P(i_*\\mathcal O_U,\\Omega^n_{P/S})$, with the normalized map.",
    "uses": [
-    "lem-sc-derived-hom-finite-free-model",
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-sc-derived-internal-hom-restrict-open"
+    "lem-trf-lci-koszul-duality-determinant-comparison",
+    "lem-trf-lci-adjunction-top-ext"
    ],
    "elementary": false,
    "source": {
@@ -75,22 +54,9 @@
    }
   },
   {
-   "text": "Now restrict to a separated open chart $T/S$. Its map is flat and locally finitely presented, and the base is Noetherian, so [lem-trf-relative-duality-polynomial-chart] supplies its relative dualizing object and its local model $R\\mathcal Hom_P(i_*\\mathcal O_U,\\Omega^n_{P/S}[n])$. The previous computation identifies this model, with its $\\mathcal O_U$-module structure, with $K_i[d]$, since $n-c=d$. It remains to check that these local identifications have the transition maps used to define $K$; this is done in the next step, rather than inferring a global derived isomorphism merely from local existence of isomorphisms.",
+   "text": "On any separated open chart $T/S$, flatness and local finite presentation restrict from $W/S$, and the base remains Noetherian. The conditional dualizing assertion of [lem-trf-lci-koszul-duality-determinant-comparison] therefore applies to $T$. Since $n-c=d$, its normalized derived comparisons identify the relative dualizing complex with $K_{W/S}|_T[d]$ and have exactly the transitions of step 1.",
    "uses": [
-    "lem-trf-relative-duality-polynomial-chart"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tags 0E9W and 0BV2, compared with the Koszul calculation of Tag 0BQZ."
-   }
-  },
-  {
-   "text": "The polynomial-refinement comparisons of [lem-trf-relative-duality-polynomial-chart] reduce the preceding check to restriction, change of regular generators, and adjoining a coordinate $t$ mapping to a lift $a$ of a function on $U$. The generator change is covered by the ideal-independent top Ext identification of [lem-sc-koszul-regular-sequence-dual-complex]. For adjoining $t$, the new equation is $t-a$ and the extra conormal-differential part is $[\\mathcal O_U\\xrightarrow{1}\\mathcal O_U]$, using $d(t-a)=dt-da$ for its degree-zero generator. Its determinant is trivialized by evaluation by [lem-trf-two-term-perfect-determinant]. The dualizing comparison contracts the dual of $t-a$ against $d(t-a)$ to $1$, which is exactly that evaluation. Iterating gives the same ordered wedge contractions, including the cohomological tensor signs. Locally any two polynomial presentations admit the combined-coordinate refinement: lift the second set of coordinate functions through the first quotient presentation, and conversely. Thus these checks compare any two charts, and the comparisons agree with $t_{ij}$. The local dualizing identifications therefore glue to $K|_T[d]$.",
-   "uses": [
-    "lem-trf-relative-duality-polynomial-chart",
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-trf-two-term-perfect-determinant"
+    "lem-trf-lci-koszul-duality-determinant-comparison"
    ],
    "elementary": false,
    "source": {
@@ -99,14 +65,10 @@
    }
   },
   {
-   "text": "For an arbitrary base change $S'\\to S$, choose affine base charts $\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ and principal affine pieces of the ambient polynomial charts, with ring $A$ and quotient $B=A/(f_1,\\ldots,f_c)$. Write $A=R[x_1,\\ldots,x_n]_h$. The polynomial ring is $R$-free on monomials, so tensoring an injection with it is a direct sum of injections. Hence $A$ is $R$-flat by [lem-pc-affine-flat-module-localization-preserves-flatness]. By [lem-weil-pbc-localization-away-polynomial-quotient], $A=R[x_1,\\ldots,x_n,z]/(hz-1)$, a finite presentation. By [lem-weil-pbc-flat-morphism-affine-criterion], flatness of $p$ makes $B$ flat over $R$. Apply [lem-pur-relative-regular-equations-base-change]: at every prime of $A'=A\\otimes_RR'$ containing the new equations $f'_j$, those equations are regular in the local ring. Their Koszul complex is consequently exact in positive degrees at these primes by [lem-weil-pbc-regular-sequence-koszul-regular]; at a prime outside their common zero locus it is contractible by contraction with an invertible equation. Exactness can be checked on stalks, so the pulled-back equations are Koszul-regular. By [lem-weil-pbc-regular-sequence-conormal-free] on those local rings, their classes give a basis of the conormal of $U'$. The natural map $g^*C\\to C'$ sends one such basis to the other, hence is an isomorphism. Coordinate differentials likewise identify $g^*V$ with $V'$. Thus the same determinant and Koszul adjunction construction is available after base change, without a Noetherian hypothesis on $S'$.",
+   "text": "For any $S'\\to S$, apply [lem-trf-flat-lci-presentation-base-change]. Its pulled-back equations are regular at source points and Koszul-regular on the ambient charts, and its conormal comparison gives the same rank $c$. Hence [lem-trf-lci-determinant-descent-smooth] also constructs $K_{W'/S'}=\\det L_{W'/S'}$ without a Noetherian assumption on $S'$. The specified coherent determinant comparison in the base-change node identifies $g^*K_{W/S}$ with this line; its local expression is exactly pullback of the adjunction formula. Its identity and composition laws give the required base-change compatibility.",
    "uses": [
-    "lem-pc-affine-flat-module-localization-preserves-flatness",
-    "lem-weil-pbc-localization-away-polynomial-quotient",
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-pur-relative-regular-equations-base-change",
-    "lem-weil-pbc-regular-sequence-koszul-regular",
-    "lem-weil-pbc-regular-sequence-conormal-free"
+    "lem-trf-flat-lci-presentation-base-change",
+    "lem-trf-lci-determinant-descent-smooth"
    ],
    "elementary": false,
    "source": {
@@ -115,23 +77,9 @@
    }
   },
   {
-   "text": "Flatness of $W/S$ makes every such square Tor-independent: on affine charts $B\\otimes_R^{\\mathbf L}R'=B\\otimes_RR'$. The natural cotangent comparison of [lem-trf-lci-cotangent-presentation] is therefore an isomorphism $Lg^*L_{W/S}\\simeq L_{W'/S'}$. Apply [lem-trf-two-term-perfect-determinant] to obtain $g^*K_{W/S}\\simeq\\det(Lg^*L_{W/S})\\simeq\\det L_{W'/S'}=K_{W'/S'}$. On each chart it is the tensor/exterior/dual comparison of the preceding step, so it is the base-change isomorphism of the stated adjunction construction. For two successive changes of base, the cotangent comparison for the composite is the composite of the two natural comparisons; the determinant preserves composition and its pullback comparison is coherent. Consequently the two resulting maps on $K$ agree, and identity base change gives the identity.",
+   "text": "Finally [lem-trf-lci-determinant-descent-smooth] identifies $K_{W/S}$ on each smooth open with $\\bigwedge^d\\Omega^1_{W/S}=\\Omega^d_{W/S}$, using its specified exact-conormal normalization. This is the canonical smooth comparison of the construction in step 1.",
    "uses": [
-    "lem-trf-lci-cotangent-presentation",
-    "lem-trf-two-term-perfect-determinant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QQ; perfect.tex, Tag 0FJY."
-   }
-  },
-  {
-   "text": "On the smooth locus the canonical cotangent comparison of [lem-trf-lci-cotangent-presentation] identifies $L_{W/S}$ with $\\Omega^1_{W/S}[0]$. This smooth restriction has relative dimension $d$, because the original nonempty geometric fibres are pure of dimension $d$. By [lem-sc-smooth-omega-finite-locally-free], $\\Omega^1_{W/S}$ there is locally free of rank $d$. The local determinant formula of [lem-trf-two-term-perfect-determinant], now with zero degree-minus-one term, gives $K_{W/S}=\\det(\\Omega^1_{W/S}[0])\\cong\\bigwedge^d\\Omega^1_{W/S}=\\Omega^d_{W/S}$. All maps are the canonical cotangent and determinant maps, so this identification is compatible with the preceding transitions and base changes.",
-   "uses": [
-    "lem-trf-lci-cotangent-presentation",
-    "lem-sc-smooth-omega-finite-locally-free",
-    "lem-trf-two-term-perfect-determinant"
+    "lem-trf-lci-determinant-descent-smooth"
    ],
    "elementary": false,
    "source": {
@@ -141,17 +89,10 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-flat-module-localization-preserves-flatness",
-  "lem-pur-relative-regular-equations-base-change",
-  "lem-sc-derived-hom-finite-free-model",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-koszul-regular-sequence-dual-complex",
-  "lem-sc-smooth-omega-finite-locally-free",
-  "lem-trf-lci-cotangent-presentation",
-  "lem-trf-relative-duality-polynomial-chart",
-  "lem-trf-two-term-perfect-determinant",
-  "lem-weil-pbc-flat-morphism-affine-criterion",
-  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "lem-trf-flat-lci-presentation-base-change",
+  "lem-trf-lci-adjunction-top-ext",
+  "lem-trf-lci-determinant-descent-smooth",
+  "lem-trf-lci-koszul-duality-determinant-comparison",
   "lem-weil-pbc-regular-sequence-conormal-free",
   "lem-weil-pbc-regular-sequence-koszul-regular"
  ],
@@ -216,6 +157,34 @@
    "results": "1 hits; top=['Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean']; note=; digest=e61b01fbbfbd663b. Read the returned types. Flatness criteria and dual base-change maps are not an adjunction determinant, coherent Ext formula, or relative dualizing line. No full project or Mathlib attachment.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat local complete intersection morphism the adjunction determinant is an invertible relative dualizing sheaf compatible with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T06:06:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat local complete intersection morphism the adjunction determinant is an invertible relative dualizing sheaf compatible with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"a8c5dc1a3a448550\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness and cotangent linear maps do not state the canonical adjunction determinant, dualizing-object, and coherent arbitrary-base-change clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "{\"t\": \"2026-10-22T06:06:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"dualizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness and cotangent linear maps do not state the canonical adjunction determinant, dualizing-object, and coherent arbitrary-base-change clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|determinant.*cotangent",
+   "results": "{\"t\": \"2026-10-22T06:06:00Z\", \"tool\": \"grep\", \"query\": \"dualizing|determinant.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Data/Set/Defs.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/Tactic/Translate/ToDual.lean\", \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\"], \"digest\": \"3938047c338f355c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness and cotangent linear maps do not state the canonical adjunction determinant, dualizing-object, and coherent arbitrary-base-change clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction determinant relative dualizing line for flat complete intersections with presentation independence and base change",
+   "results": "{\"t\": \"2026-10-22T06:06:00Z\", \"tool\": \"leansearch\", \"query\": \"Adjunction determinant relative dualizing line for flat complete intersections with presentation independence and base change\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
@@ -248,51 +217,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-flat-lci-canonical-adjunction",
   "worker": "stage1",
-  "summary": "Kept the statement and its full blueprint ancestry; supplied nine proof steps using the intrinsic two-term cotangent determinant, existing canonical Koszul duality, explicit one-variable comparison, and Tor-independent arbitrary base change. Created three general statement-only inputs, with recorded searches. Checked separatedness only where coherent relative duality is invoked, and used stalkwise regularity rather than a Noetherian-base-change assertion.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted.",
+  "summary": "Repair of the 2026-10-22 batch-5 re-split return. Statement unchanged. Distributed the entire nine-step argument among three independently actionable statement-only nodes (determinant descent/smooth locus; normalized derived Koszul duality/refinement; arbitrary presentation base change), plus the mandated separate top-Ext consequence. The parent is a five-step assembly; the complete former argument and its workload map are retained in report.md. All new nodes have real logged searches and empty proofs.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Old proof 1--3 and 9 are assigned to determinant descent/smooth; 4--6 to normalized Koszul duality plus its top-Ext consequence; 7--8 to arbitrary presentation base change.",
   "tool_uses": [
    {
-    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
-   },
-   {
-    "node": "lem-pur-relative-regular-equations-base-change",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
-   },
-   {
-    "node": "lem-sc-derived-hom-finite-free-model",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
-   },
-   {
-    "node": "lem-sc-derived-internal-hom-restrict-open",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
-   },
-   {
-    "node": "lem-sc-koszul-regular-sequence-dual-complex",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
-   },
-   {
-    "node": "lem-sc-smooth-omega-finite-locally-free",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
-   },
-   {
-    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
-   },
-   {
-    "node": "lem-weil-pbc-localization-away-polynomial-quotient",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic commutative-algebra input for the local regular-equation hypotheses of the determinant-descent node; the trace-formula unit has no replacement."
    },
    {
     "node": "lem-weil-pbc-regular-sequence-conormal-free",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
-   },
-   {
-    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
-    "why": "Generic algebra/sheaf tool used exactly as stated in the conormal, Koszul, arbitrary-base-change or smooth-differential calculation; sk-i-curve-zero has no replacement for this foundational result."
+    "why": "Generic commutative-algebra input for the local regular-equation hypotheses of the determinant-descent node; the trace-formula unit has no replacement."
    }
   ]
  },
@@ -309,12 +246,12 @@
   "lem-weil-pbc-regular-sequence-koszul-regular"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q13-48fce0051",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q84-718cba4f0",
+  "group": "Q84",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-48fce0051 (reviewer sub-agent of L); spot-checked: Full review written to review.md. The item and all three new nodes match their cited Stacks sources; all nine steps, hypotheses, arbitrary base change, determinant coherence, edge cases, duplicates, route-pivot restrictions, and generic tool uses were checked. No repairs are needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-718cba4f0 (reviewer sub-agent of L); spot-checked: Re-split delivery for the 2026-10-21 human note, read in full. The item statement is unchanged. Its proof is a five-step assembly of 2067 characters. All nine old steps (verbatim in the report, checked against live) became self-contained statement-only nodes of comparable size. lem-trf-lci-determinant-descent-smooth carries old steps 1–3 and 9: det L of the lci cotangent complex is invertible, α_i = det(λ_i), the transitions satisfy the cocycle with no separatedness, and the smooth clause gives rank d from Euler characteristic n−c, with the relation-first normalization. That order matches Stacks more-algebra section-determinants-complexes, whose γ^i puts the kernel first. lem-trf-lci-koszul-duality-determinant-comparison carries old steps 4–6: the derived Koszul duality of Stacks duality.tex 0BQZ (line 3544) tensored with Ω^n, the refinement comparisons equal det(λ_j⁻¹λ_i)[d], the t−a evaluation, combined refinements (dualizing.tex 0BZJ), and a conditional dualizing clause whose hypotheses are exactly those of lem-trf-relative-duality-polynomial-chart. lem-trf-flat-lci-presentation-base-change carries old steps 7–8: stalkwise regularity under arbitrary base change from flat A and B (divisors 0FUD line 5374, 0CEP), Koszul-regularity including away from U', conormal and differential isomorphisms, Tor-independence, and coherent determinant pullback. lem-trf-lci-adjunction-top-ext is the H^c node that brief-stage1 §3 requires, not a D1 relabel. Each item step's hypotheses were checked: regular implies Koszul-regular and a free conormal, a separated chart T is still covered by restricted presentations, and non-Noetherian S' feeds the descent node. Small cases tested: c=0, U empty, adjoining t (H^1 = dt|_U = (t−a)^∨⊗d(t−a)), Z[x]/(x²) over F_2, and the non-flat Z[x]/(2x) case, which flatness excludes. Advisory: the ordered-contraction sign of ρ_i against the kernel-first det is inherited from base step 6. Any mismatch is a (c,n)-coboundary that a normalization of ρ_i absorbs. Duplicate search: the sc scalar Koszul nodes have O coefficients and no refinement or determinant agreement, lem-sfb-adjunction-cotangent-determinant-normalization depends on the item (a cycle), lem-pur-relative-regular-equations-base-change gives local regularity only, and lem-trf-algebraic-shriek-calculus states no canonical orientation. Batch 5: the four flagged citations (presentation-base-change, adjunction-top-ext, determinant-descent-smooth, koszul-duality-determinant-comparison) are generic coherent algebraic geometry, not trace-formula or Poincaré-duality content. Their trf stmt_deps (cotangent-presentation, two-term-perfect-determinant, relative-duality-polynomial-chart) were already base proof_deps, so nothing is added to the closure; accepted. The tool uses lem-weil-pbc-regular-sequence-koszul-regular and lem-weil-pbc-regular-sequence-conormal-free are generic algebra; accepted. Form checks pass: stmt_deps are complete, searches are recorded (one LeanSearch unavailable), no SGA source, and the blueprint fields are correct. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FlatLCICanonicalAdjunction",
@@ -353,17 +290,29 @@
   "file": "lean/Sheaf/AlgebraicGeometry/FlatLCICanonicalAdjunction.lean",
   "statement": "theorem exists_flatLCICanonicalAdjunction {X S : Scheme.{u}} (p : X ⟶ S) [IsNoetherian S] [Flat p] [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] (d : ℕ) (hpure : HasPureFlatLCIGeometricFibres p d) (hlci : ∀ x : X, ∃ (U : X.Opens), x ∈ U ∧ Nonempty (FlatLCIPresentation p d U)) : ∃ F : FlatLCIAdjunctionSystem p d, F.IsNormalized ∧ (∀ (B : FlatLCIBaseChange p) (x : B.X'), ∃ (U : B.X'.Opens), x ∈ U ∧ Nonempty (FlatLCIPresentation B.p' d U)) ∧ (∀ (B : FlatLCIBaseChange p) (U : B.X'.Opens) (C : FlatLCIPresentation B.p' d U), C.HasExtIdentification ∧ C.HasDualityModel) ∧ (∀ (B : FlatLCIBaseChange p) (U : B.X'.Opens), Smooth (U.ι ≫ B.p') → ∃ e : (Scheme.Modules.tensorPullback U.ι).obj (F.line B) ≅ Scheme.Modules.exteriorSheaf (U.ι ≫ B.p').relativeDifferentials d, F.IsSmoothComparison B U e)",
   "branch": "newtargets-dag",
-  "by": "Q134",
-  "date": "2026-10-18",
-  "existing": false
+  "by": "Q33",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Dependency interface repair under brief-stage2 §1(B): the recorded IsFlatLCIDeterminantComparison omitted the sign (-1)^(a*(b+1)) for the ordered exact cone (f,-dA),(dB,g). Deleting [R --id--> R] then gave minus evaluation while inserting it gave evaluation, contradicting the identity and cocycle clauses. The module retains the full node statement and all existing constructions and signatures, with the corrected sign in that predicate so the dual-first determinant agrees with evaluation and the smooth ordered-wedge formula. The completion comparison consumer is compiled against this repaired interface in the same delivery. Copied exactly from the accepted Q131 repair b944131f76f4f5dc01fa55f7e9fe154ab7662b2f, rebased on the current module imports; its recorded lean interface is unchanged since the parent of that repair."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-553dcc099",
-  "group": "Q134",
+  "reviewer": "NT-stage2-cc-d440c054b",
+  "group": "Q33",
   "result": "pass",
-  "note": "Statement, dependencies, constructions, edge cases, route-pivot compliance, docstrings, report sections, and compiler evidence all check out."
+  "note": "Re-delivery after the 457b81a4 RETURN. The item Lean differs only by genSizeOf/genSizeOfSpec/genInjectivity options; the record adds 3 definition-node stmt_deps. F1 repaired: the dependency's IsFlatLCIDeterminantComparison gains exactly (-1)^(a*(b+1)) plus its docstring; the module is unmoved in live, side-live and the repo, and the dependency record changes only in lean (statement verbatim, note added). An exact-rational script check gives functoriality and identity = 1 in 500/500 random trials (c=0 and d=0 included), with 135 failures without the sign. The augmentation determinant is the relation-first delta inverse, consistent with IsSmoothComparison and the generic clause; the T versus T+(w,w) contradiction is gone. Importers do not use the predicate directly. F2 repaired: def-trf-completed-differential-extension is existing:true on the unchanged Q150 module, signature verbatim, statement matches the body, definition stmt_deps only; the LocalCompletion/CompletedDifferentials owners are cited. Gates pass: one sorry per module, no hollow definitions, docstrings and 11 steps present, report sections present. Advisories: plain FlatLCI definitions sit in a theorem module with no owning definition node; L : Type u; downstream sign conventions (e.g. the NE cofactor) need re-checking. No file changed, so no compile; worker reports clean compiles (33.5 s / 35.1 s) and a dry run OK."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

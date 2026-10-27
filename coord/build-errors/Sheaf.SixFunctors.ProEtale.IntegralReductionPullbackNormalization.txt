@@ -1,0 +1,42 @@
+# global build 2026-10-26T03:33:23Z of 21c8026de4: Sheaf.SixFunctors.ProEtale.IntegralReductionPullbackNormalization failed
+error: Sheaf/SixFunctors/ProEtale/IntegralReductionPullbackNormalization.lean:104:6: Type mismatch
+  inverseMate_app (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E X n))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E U n))
+    (CondensedRing.derivedComapUpperStarIso (DerivedNakayama.reductionRing l E (n + 1)) j).inv M
+has type
+  ((mateEquiv (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E X n))
+                (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E U n))).symm
+            (TwoSquare.mk (Mod.comap (AdicCompletion.quotient l E X n)).mapDerivedCategory
+              (CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) j).mapDerivedCategory
+              (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory
+              (Mod.comap (AdicCompletion.quotient l E U n)).mapDerivedCategory
+              (CondensedRing.derivedComapUpperStarIso (DerivedNakayama.reductionRing l E (n + 1)) j).inv)).natTrans.app
+      M =
+    ((Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E U n)).homEquiv
+          ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory.obj
+            ((𝟭
+                  (DerivedCategory
+                    (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab) (AdicCompletion.ring l E X)))).obj
+              M))
+          ((CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) j).mapDerivedCategory.obj
+            ((Mod.extendScalars (AdicCompletion.quotient l E X n)).leftDerivedFunctor.obj M))).symm
+      ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory.map
+          ((Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E X n)).unit.app M) ≫
+        (CondensedRing.derivedComapUpperStarIso (DerivedNakayama.reductionRing l E (n + 1)) j).inv.app
+          ((Mod.extendScalars (AdicCompletion.quotient l E X n)).leftDerivedFunctor.obj M))
+but is expected to have type
+  (integralReductionPullbackMap l E j n).app M =
+    FreeParameterEvaluation.scalarPullComparison
+      { X := DerivedNakayama.integerRing l E,
+        mon := Sheaf.monObj_sheafCompose_obj (coherentTopology Profinite) (DerivedNakayama.integerRingSheaf l E) }
+      { X := DerivedNakayama.quotientRing l E (n + 1),
+        mon :=
+          Sheaf.monObj_sheafCompose_obj (coherentTopology Profinite) (DerivedNakayama.quotientRingSheaf l E (n + 1)) }
+      (DerivedNakayama.reductionRing l E (n + 1)) j M
+
+Note: The following definitions were not unfolded because their definition is not exposed:
+  inv ↦ 12
+  equivShrink ↦ 552
+  Shrink ↦ 1
+  getColimitCocone ↦ 4
+error: Lean exited with code 1

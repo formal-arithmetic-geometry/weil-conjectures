@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-direct-image-coefficient-exchange-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the realized direct-image coefficient exchange",
+ "statement": "Let $\\ell$ be prime and $K_0$ a field in which $\\ell$ is invertible. Let $f:X\\to Y$ be a separated finite-type $K_0$-morphism between finite-type $K_0$-schemes [def-weil-scheme-morphism-properties]. Let $E,L$ be finite extensions of $\\mathbf Q_\\ell$ and $\\iota:E\\to L$ a $\\mathbf Q_\\ell$-algebra embedding. For every integral constructible object $K$ on $X$ [def-weil-derived-complete-integral-detailed], the component at $K$ of coefficientExchange for systemDirect at $E,L$ and its actual systemDirectScalar mate [def-weil-system-operation-exchange-realization] is an isomorphism. This is the realized direct-image coefficient map, before rationalization; it makes no claim on arbitrary nonconstructible systems and has no Frobenius or compactification data.",
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-system-operation-exchange-realization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Direct-image reduction paragraph and final coefficient-compatibility paragraph; the direct branch of modelScalarMap_isIso in def-weil-operation-exchange-coefficient-descent."
+ },
+ "proof": [
+  {
+   "text": "Use the normalized direct-image/limit comparison at E and L [lem-weil-direct-image-limit-comparison]. Its inverse after the actual reduction/limit unit defines reconstruction from ordinary completed direct image to the system realization. The unit is invertible on integral constructible objects by [def-weil-system-operation-exchange-realization], so reconstruction is invertible on K and on its integral scalar extension, which is constructible by [lem-weil-integral-scalar-extension-constructible].",
+   "uses": [
+    "lem-weil-direct-image-limit-comparison",
+    "def-weil-system-operation-exchange-realization",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite freeness from [lem-weil-finite-free-completed-scalar-comparison] supplies the finite-product unit decomposition. Apply the already proved [lem-pur-finite-free-proper-scalar-comparison] to the actual ordinary completed scalar mate; this needs no properness of f. The two completion maps chi are invertible: K and its realized direct image are complete, the latter by directImage_constructible in [def-weil-system-operation-exchange-realization]. Convert intrinsic completeness to the unrestricted predicate using [lem-sf-derived-complete-legacy-comparison], choosing any auxiliary finite-field characteristic distinct from l.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-finite-free-proper-scalar-comparison",
+    "def-weil-system-operation-exchange-realization",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equality of actual morphisms [lem-weil-direct-image-scalar-realization-square] identifies scalar image of reconstruction, then chi, then the assigned coefficientExchange with ordinary scalar mate, direct image of chi, and reconstruction after scalar extension. Every factor on the right is invertible by Steps 1 and 2. Cancel the first two invertible factors on the left to prove IsIso of the assigned component. The cancellation and functorial preservation of isomorphisms are elementary categorical facts.",
+   "uses": [
+    "lem-weil-direct-image-scalar-realization-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-direct-image-limit-comparison",
+  "def-weil-system-operation-exchange-realization",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-finite-free-proper-scalar-comparison",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-direct-image-scalar-realization-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Finite-free ordinary scalar comparison plus the normalized reconstruction square; a compiling categorical reduction with two separate lower obligations. R8, 2026-10-27."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of scalars commutes with derived direct image and derived inverse limit",
+   "results": "Eight hits: AdicCompletion tensor lemmas, Condensed.profiniteSolid, cotangent-complex base change, ModuleCat.preservesFiniteLimits_extendScalars_of_flat. No theorem about this normalized system realization.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension of coefficients commutes with derived direct image and homotopy inverse limits",
+   "results": "Eight hits, including ModuleCat.preservesFiniteLimits_extendScalars_of_flat, PresheafOfModules.free, SheafOfModules.pullbackObjFreeIso and Condensed.profiniteSolid; no direct-image whole-system coefficient map.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientExchange|systemDirectScalar|modelScalarMap_isIso",
+   "results": "msearch grep: OK 0 Mathlib hits. Project rg found definitions in SystemOperationExchangeRealization, the assigned modelScalarMap_isIso, and the distinct proper/open comparison lemma CompactSupportCoefficientExchangeInvertible. Blueprint exact-phrase search direct image coefficient exchange returned zero nodes.",
+   "date": "2026-10-27",
+   "verdict": "No existing exact theorem for the direct-image component; the proper/open lemma supplies the other branch."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusSquareExchange",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Coefficient passage for Frobenius direct images: integral coefficient invertibility used before localizing the source and target comparisons.",
+   "via": [
+    "def-weil-operation-exchange-coefficient-descent",
+    "def-weil-frobenius-square-exchange",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DirectImageCoefficientExchangeInvertible",
+  "file": "lean/Sheaf/Paper/DirectImageCoefficientExchangeInvertible.lean",
+  "declaration": "WeilConjectures.directImageCoefficientExchange_isIso",
+  "statement": "theorem directImageCoefficientExchange_isIso\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (K : sfIntegralConstructibleCategory l E X) :\n    IsIso ((FrobeniusExchange.coefficientExchange l E L ι\n      (FrobeniusExchange.systemDirect l E f) (FrobeniusExchange.systemDirect l L f)\n      (FrobeniusExchange.systemDirectScalar l E L ι f)).app K)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3c1b1",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T012820-L-2335181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T021402-L-2764041",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

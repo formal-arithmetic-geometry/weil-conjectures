@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-space-integral-extension-qc-open",
+ "kind": "statement",
+ "title": "Extension of an integral space across a quasi-compact open",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with atlas topology on field-valued point classes [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A geometric point is a map $\\operatorname{Spec}\\Omega\\to X$ from an algebraically closed field [def-weil-geometric-point], and its geometric fibre is the sheaf fibre product with this map. Quasi-compact means quasi-compact on scheme tests, or, for a space, that every open cover has a finite subcover. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. Separated for a morphism means that its diagonal is representable by closed immersions [def-weil-closed-immersion]. Etale means representable etale on scheme tests [def-trf-algebraic-space, def-weil-etale-morphism]. Integral means representable and integral on scheme tests [def-weil-finite-integral-morphism]; in particular its pullback to an affine scheme is affine. Open immersions are representable by open immersions on scheme tests [def-weil-open-immersion]. Let $V\\hookrightarrow B$ be a quasi-compact open immersion and let $Z\\to V$ be integral. There are an algebraic space $E$, an integral morphism $E\\to B$, and an isomorphism $E\\times_BV\\simeq Z$ over $V$. Under this isomorphism $Z\\hookrightarrow E$ is the pullback open immersion.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0G2D (lemma-extend-integral-morphism)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $j:V\\hookrightarrow B$ and $\\pi:Z\\to V$, and set $f=j\\pi$. By [lem-sfb-space-integral-qcqs-permanence], $\\pi$ is quasi-compact and separated. The open immersion $j$ is a monomorphism: on any scheme test two lifts have the same image in the open subscheme and hence are equal. Its diagonal is therefore an isomorphism, in particular a closed immersion; thus $j$ is separated. By [lem-sfb-space-separated-fp-composition], $f$ is separated.",
+   "uses": [
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0G2D, first sentence; Tag 03KQ (lemma-composition-separated)."
+   }
+  },
+  {
+   "text": "Quasi-compactness of $j$ and of $f$ is meant on scheme tests, as in the statement and in the hypothesis of the factorization node applied in step 3. Let $T$ be a quasi-compact scheme with a map $T\\to B$. Since $j$ is a representable open immersion that is quasi-compact on scheme tests, $V_T=V\\times_BT$ is a quasi-compact open subscheme of $T$. Since $\\pi$ is integral, $Z\\times_BT=Z\\times_VV_T$ is represented by a scheme integral, hence affine, over $V_T$ [def-weil-finite-integral-morphism]. Covering $V_T$ by finitely many affine opens, their inverse images are finitely many affine opens covering $Z\\times_BT$; so this scheme is quasi-compact, and its identity is a representable surjective etale map from a quasi-compact scheme. Hence $f$ is quasi-compact; this is the transitivity-of-fibre-products argument of Tag 03HG.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0G2D, first sentence; Tag 03HG (lemma-composition-quasi-compact), transitivity of fibre products."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-relative-integral-factorization] to the quasi-compact separated map $f$. Obtain $Z\\xrightarrow{i}E\\xrightarrow{\\nu}B$, with $\\nu i=f$, $\\nu$ integral, and the stated unique factorization property against every integral $B$-space. This is the relative normalization used in Tag 0G2D.",
+   "uses": [
+    "lem-sfb-space-relative-integral-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0G2D, normalization construction and integrality; Tags 0822 and 0823."
+   }
+  },
+  {
+   "text": "By [lem-a1-space-open-chart-tests], the representable open immersion $j$ is representable etale. Apply [lem-sfb-space-integral-factorization-etale-base-change] with $W=V$. Since $j$ is a monomorphism and $f=j\\pi$, the projection $Z\\times_B V\\to Z$ is an isomorphism, with inverse $z\\mapsto(z,\\pi(z))$ on scheme-valued sections. Therefore the pulled-back factorization is $Z\\xrightarrow{a}E_V\\xrightarrow{\\nu_V}V$, where $E_V=E\\times_BV$, $\\nu_V$ is integral, and this factorization has the same unique factorization property over $V$.",
+   "uses": [
+    "lem-a1-space-open-chart-tests",
+    "lem-sfb-space-integral-factorization-etale-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0G2D, final sentence; Tag 0ABP (lemma-properties-normalization), part (1)."
+   }
+  },
+  {
+   "text": "Use the universal property from [lem-sfb-space-integral-factorization-etale-base-change] in step 4 with the integral map $\\pi:Z\\to V$ and $\\mathrm{id}_Z$. It gives $h:E_V\\to Z$ with $ha=\\mathrm{id}_Z$ and $\\pi h=\\nu_V$. Both $ah$ and $\\mathrm{id}_{E_V}$ are maps to the integral $V$-space $E_V$, have composite $a$ with $a:Z\\to E_V$, and have composite $\\nu_V$ with $\\nu_V:E_V\\to V$. Uniqueness gives $ah=\\mathrm{id}_{E_V}$. Thus $a$ is an isomorphism over $V$, giving $E\\times_BV\\simeq Z$. Finally $E_V\\to E$ is the pullback of $j$: on a scheme test $T\\to E$ it is the open subscheme $T\\times_BV\\subseteq T$, so it is an open immersion by the definition of representable open immersion. Transport along $a$ identifies it with $Z\\hookrightarrow E$.",
+   "uses": [
+    "lem-sfb-space-integral-factorization-etale-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0G2D, final sentence; elementary uniqueness argument for Tag 0825 (lemma-normalization-in-integral) using Tag 0823."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-integral-qcqs-permanence",
+  "lem-sfb-space-separated-fp-composition",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-space-relative-integral-factorization",
+  "lem-a1-space-open-chart-tests",
+  "lem-sfb-space-integral-factorization-etale-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0G2D (lemma-extend-integral-morphism), proof; the last formal normalization-in-an-integral-morphism identification is expanded using the universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral morphism to a quasi compact open subspace of an algebraic space extends integrally to the whole algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [AlgebraicGeometry.IsIntegral Y]\\n  [Nonempty ↥X], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty scheme equipped with an open immersion into an integral scheme $Y$, then $X$ is also an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any integral morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism on the sections $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"If $ f : X \\\\to Y $ is an integral morphism of schemes and $ U \\\\subseteq Y $ is an affine open subset, then the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X] {U : X.Opens} [Nonempty ↥↑U],\\n  AlgebraicGeometry.IsIntegral ↑U\", \"doc\": \"Every non-empty open subset $ U $ of an integral scheme $ X $ is itself an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any integral morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.IsIntegralHom (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is an integral morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend an integral algebraic space over an open by relative normalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace, IsIntegralHom",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicSpace'",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|extend.*[Ii]ntegral|[Ii]ntegral.*extend",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/ExtendRight.lean\", \"line\": \"32\", \"text\": \"- `IntermediateField.extendRight.isIntegralClosure`: transfers the\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/ExtendRight.lean\", \"line\": \"137\", \"text\": \"    IsIntegralClosure S R (F.extendRight M) := by\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"line\": \"364\", \"text\": \"  ⟨.extendScalars (FaithfulSMul.algebraMap_injective ..), .restrictScalars_of_isIntegral _⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"line\": \"464\", \"text\": \"lemma extendScalars_of_isIntegral [Algebra.IsIntegral R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"line\": \"481\", \"text\": \"  ha.extendScalars_of_isIntegral _\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"line\": \"494\", \"text\": \"  ⟨(·.extendScalars_of_isIntegral _), (·.restrictScalars (FaithfulSMul.algebraMap_injective R S))⟩\"}\n  {\"file\": \"Mathlib/RingTheory/FractionalIdeal/Extended.lean\", \"line\": \"284\", \"text\": \"theorem le_one_of_extendedHom_le_one [IsIntegrallyClosed A] [IsIntegrallyClosed B]\"}\n  {\"file\": \"Mathlib/RingTheory/FractionalIdeal/Extended.lean\", \"line\": \"299\", \"text\": \"theorem extendedHom_le_one_iff [IsIntegrallyClosed A] [IsIntegrallyClosed B] :\"}\n  {\"file\": \"Mathlib/RingTheory/ClassGroup/ExtendedHom.lean\", \"line\": \"21\", \"text\": \"- `ClassGroup.extendedIdeal A B`: the extension of a nonzero integral ideal.\"}\n  {\"file\": \"Mathlib/RingTheory/ClassGroup/ExtendedHom.lean\", \"line\": \"26\", \"text\": \"- `ClassGroup.extendedHom_mk0`: compatibility with representatives as nonzero integral ideals.\"}\n  {\"file\": \"Mathlib/Probability/Kernel/Composition/IntegralCompProd.lean\", \"line\": \"40\", \"text\": \"almost all proofs about integrals against products of measures extend with minimal modifications\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Basic.lean\", \"line\": \"119\", \"text\": \"  extends IsNoetherian A A, DimensionLEOne A, IsIntegralClosure A A (FractionRing A)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"35\", \"text\": \"class IsIntegralHom {X Y : Scheme} (f : X ⟶ Y) : Prop extends IsAffineHom f where\"}\n  {\"file\": \"Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean\", \"line\": \"62\", \"text\": \"theorem extendScalars_of_isIntegral [Algebra.IsIntegral R S] : AlgebraicIndependent S x := by\"}\n  {\"file\": \"Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean\", \"line\": \"73\", \"text\": \"  hx.extendScalars_of_isIntegral _\"}\n  {\"file\": \"Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean\", \"line\": \"89\", \"text\": \"  ⟨(·.extendScalars_of_isIntegral _),\"}\n  {\"file\": \"Mathlib/Analysis/Complex/ValueDistribution/Proximity/IntegralPresentation.lean\", \"line\": \"37\", \"text\": \"The proof of the integral presentation of the proximity function relies on an extended computation,\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"251\", \"text\": \"the extended nonnegative reals, we consider an associated \\\"grid-lines quantity\\\", the integral of an\"}\n  {\"file\": \"Mathlib/MeasureTheory/VectorMeasure/Integral.lean\", \"line\": \"15\", \"text\": \"We extend the definition of the Bochner integral (of vector-valued function against `ℝ≥0∞`-valued\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Basic.lean\", \"line\": \"23\", \"text\": \"- `Path.extend γ t` instead of `γ t`, because both derivatives and `intervalIntegral`\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Basic.lean\", \"line\": \"119\", \"text\": \"The actual definition uses `curveIntegralFun` which uses `Path.extend γ`\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Basic.lean\", \"line\": \"137\", \"text\": \"    curveIntegralFun ω γ t = ω (γ.extend t) (derivWithin γ.extend I t) := by\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Basic.lean\", \"line\": \"182\", \"text\": \"  simp only [curveIntegralFun_def', Path.extend_cast]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Basic.lean\", \"line\": \"198\", \"text\": \"  simp [curveIntegralFun, γ.extend_symm, derivWithin_comp_const_sub]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Poincare.lean\", \"line\": \"154\", \"text\": \"      simpa [curveIntegral_def, curveIntegralFun_def, Path.extend] using hfi 0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral extension from a quasi compact open subspace",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsIntegralHom f] : IsIntegralHom (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is an integral morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any integral morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"If $ f : X \\\\to Y $ is an integral morphism of schemes and $ U \\\\subseteq Y $ is an affine open subset, then the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": HasAffineProperty @IsIntegralHom fun X _ f _ ↦ IsAffine X ∧ RingHom.IsIntegral (f.app ⊤).hom\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"integralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.Algebra.Basic\", \"type\": \": Subalgebra R A\", \"doc\": \"The subalgebra of $ A $ consisting of all elements integral over the subring $ R $, i.e., elements satisfying a monic polynomial equation with coefficients in $ R $. This subalgebra is closed under ad\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsAffineHom : AlgebraicGeometry.IsAffineHom f],\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral) →\\n    AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is integral if it is affine and for every affine open subset $ U $ of $ Y $, the induced ring homomorphism on the sections over $ U $ and $ f^{-1}(U) $ is integral\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any integral morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism on the sections $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"integralClosure.isIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \"(R A : Type*) [CommRing R] [CommRing A] [Algebra R A] : IsIntegralClosure (integralClosure R A) R A\", \"doc\": \"The integral closure of $ R $ in $ A $ is the integral closure of $ R $ in $ A $. This instance asserts that the subalgebra of $ A $ consisting of all elements integral over $ R $ satisfies the condit\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsOpenImmersion",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, not algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-integral-scheme-cover",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: extend the integral scheme obtained by induction over the open image V.",
+   "via": [
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-integral-extension-qc-open",
+  "worker": "Q35",
+  "summary": "Followed Tag 0G2D by universal integral factorization and etale restriction. Reused existing integral and separated permanence and open-chart tests. Wrote quasi-compact composition and the final inverse isomorphism as elementary arguments. Added only two general normalization inputs, searched in Mathlib; no statement change.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/de Jong/Tag 09YB chain: the integral extension over the quasi-compact open image. The nearest imported ancestor command returns None; retained that result and the full inherited via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-space-integral-qcqs-permanence",
+    "why": "Integral maps are quasi-compact and separated, needed before relative normalization."
+   },
+   {
+    "node": "lem-sfb-space-separated-fp-composition",
+    "why": "Separated morphisms of arbitrary algebraic spaces compose."
+   },
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "A representable open immersion is etale and a monomorphism, needed for etale base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-space-integral-qcqs-permanence",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-a1-space-open-chart-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-1917840aa",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-1917840aa (reviewer sub-agent of L); spot-checked: Read Stacks 0G2D in decent-spaces and 0822/0ABP/0823/0825 in spaces-morphisms, together with every cited statement. The item statement matches 0G2D and is unchanged; live still has the item unsplit and has no repair note. Step 1 checks: permanence gives π qc and separated, j is a monomorphism so its diagonal is an isomorphism, and separated-fp-composition gives f separated. Step 3 applies the new factorization node with its hypotheses met. Step 4 checks: open-chart-tests makes j representable étale, and Z×_B V≅Z by z↦(z,πz) via monicity. Step 5 checks: the uniqueness argument ah=id is correct, so 0825 is written out properly. Fault (C4/E6): step 2 mixed three quasi-compactness conventions (scheme tests in the item and permanence, a qc atlas in fppf-local, a qc point space on space tests in the new nodes) with no bridge. FIX: both new nodes now define qc morphisms on qc scheme tests (equivalent to Stacks); step 2 is an elementary scheme-test argument (V_T is a qc open subscheme of T, Z×_B T is affine over V_T, so it is a qc scheme; Tag 03HG) using def-weil-finite-integral-morphism; the fppf-local node is dropped from proof_deps and tool_uses. The new nodes (0822+0823 existence for qc separated maps; 0ABP(1)+0823 étale base change of the universal factorization) are true, statement-only, searched in Mathlib, not restatements of the item, and not duplicates (the existing relative-normalization nodes are for schemes only). Batch-5: the flagged citations reach only def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers, which are general algebraic-space foundations and not part of the proof of the trace formula or Poincaré duality, so they are accepted. Tool use lem-a1-space-open-chart-tests is accepted as a generic tool.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceIntegralExtensionQcOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_integral_extension_qcOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceIntegralExtensionQcOpen.lean",
+  "statement": "theorem exists_integral_extension_qcOpen {S : Scheme.{u}} {V B Z : AlgebraicSpace S} (j : V ⟶ B) (π : Z ⟶ V) (hj : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left ∧ QuasiCompact p.left) j.hom.hom) (hπ : IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) π.hom.hom) : ∃ (E : AlgebraicSpace S) (ν : E ⟶ B), IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) ν.hom.hom ∧ ∃ e : Limits.pullback ν.hom j.hom ≅ Z.obj, e.hom ≫ π.hom = Limits.pullback.snd ν.hom j.hom ∧ IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (e.inv ≫ Limits.pullback.fst ν.hom j.hom).hom",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92d4b85c7",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0G2D (decent-spaces.tex l.1785): hj = IsRepresentableWith(IsOpenImmersion ∧ QuasiCompact) on j, hπ = IsRepresentableWith IsIntegralHom on π; conclusion ∃ E, ν integral, e : pullback ν j ≅ Z with e.hom≫π = snd (over V), and e.inv≫fst open immersion (pinned pullback map). No extra hypotheses (no qcqs of spaces, no Nonempty, single universe u). Only the lean field differs from live (live lean null, no rebind); statement verbatim in file; all 10 stmt_dep records usable, imports exist in side-live; docstrings carry source place, blueprint id and 5 proof steps; sole theorem is sorry; report has Worker report + Second reading by Q18; no duplicate found. Not recompiled (no file changed)."
+ }
+}

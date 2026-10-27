@@ -1,0 +1,377 @@
+{
+ "id": "lem-sfb-space-affine-module-correspondence",
+ "kind": "statement",
+ "title": "Affine module correspondence on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $p:Y\\to X$ be an affine morphism of algebraic spaces over $S$ [def-trf-algebraic-space], meaning representable with affine scheme base changes. Use the small etale structure sheaves, module categories [def-weil-sheaf-of-modules-category], quasi-coherence [def-trf-space-quasi-coherent-module], tensor pullback and module direct image [def-trf-space-etale-module-functors]. Put $\\mathcal A=p_*\\mathcal O_Y$, a quasi-coherent commutative $\\mathcal O_X$-algebra. For any sheaf $M$ of $\\mathcal A$-modules, being quasi-coherent as an $\\mathcal A$-module (etale locally admitting a presentation by sums of $\\mathcal A$) is equivalent to its underlying $\\mathcal O_X$-module being quasi-coherent. Direct image, with its natural $\\mathcal A$-action, induces an additive equivalence from $\\operatorname{QCoh}(Y)$ to the category of these quasi-coherent $\\mathcal A$-modules, whose morphisms are $\\mathcal A$-linear module maps. This equivalence is compatible with etale base change on $X$. Explicitly, for an affine etale chart $U=\\operatorname{Spec}R\\to X$, put $C=\\mathcal A(U)$; then $Y_U=Y\\times_XU=\\operatorname{Spec}C$, and the inverse equivalence sends $M$ to the module whose restriction to $Y_U$ is the etale module associated to the $C$-module $M(U)$. On these charts morphisms are the corresponding $C$-linear maps, and the free module $\\mathcal A^{\\oplus n}$ corresponds to $\\mathcal O_Y^{\\oplus n}$ for each finite $n$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 08AI, lemma-affine-equivalence-modules; the affine chart description and etale compatibility spell out its equivalence using the affine algebra correspondence Tag 081V (lemma-affine-equivalence-algebras)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal A=p_*\\mathcal O_Y$. The relative-spectrum correspondence says that $\\mathcal A$ is quasi-coherent and that, for an affine etale $U=\\operatorname{Spec}R\\to X$, $Y_U=\\operatorname{Spec}C$ with $C=\\mathcal A(U)$. Its base-change clause identifies $C'=\\mathcal A(U')$ with $C\\otimes_RR'$ whenever $U'=\\operatorname{Spec}R'\\to U$ is a morphism of affine etale charts. Choose a surjective etale scheme atlas $U_0\\to X$ which is a disjoint union of affines. Then $V_0=Y\\times_XU_0\\to Y$ is a surjective etale scheme atlas, again a disjoint union of affines. Scheme representability follows from the assumed affineness of $p$.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 081V (spaces-morphisms, lemma-affine-equivalence-algebras), 03FX (lemma-cover-by-union-affines), 041F (spaces-topologies, lemma-etale)."
+   }
+  },
+  {
+   "text": "Suppose $M$ is quasi-coherent as an $\\mathcal A$-module. On an etale cover take a presentation $\\mathcal A^{(I)}\\to\\mathcal A^{(J)}\\to M\\to0$. Forgetting the action gives the same cokernel presentation of $\\mathcal O$-modules. Since $\\mathcal A$ is quasi-coherent, its direct sums and this cokernel are quasi-coherent by the kernels-and-colimits lemma. Quasi-coherence is local by its presentation definition, so the underlying $\\mathcal O_X$-module is quasi-coherent. No finiteness condition on $I,J$ is used.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M1 (lemma-properties-quasi-coherent); morphisms.tex Tag 0H88 (lemma-quasi-coherence-scalar-restriction), forward direction."
+   }
+  },
+  {
+   "text": "Conversely suppose the underlying $\\mathcal O_X$-module of $M$ is quasi-coherent. On $U=\\operatorname{Spec}R$ put $N=M(U)$. The chart correspondence identifies $\\mathcal A|_U$ with $\\widetilde C$ and $M|_U$ with $\\widetilde N$ on the etale site. The action gives a $C$-module structure on $N$. It recovers the sheaf action: the tensor chart formula identifies its source with the associated sheaf of $C\\otimes_RN$, and the tilde--sections bijection, transported through the scheme etale/Zariski equivalence, identifies the action map with $c\\otimes n\\mapsto cn$. Choose a free $C$-module presentation $C^{(I)}\\to C^{(J)}\\to N\\to0$. The chart correspondence computes coproducts and cokernels, so the associated sequence is an exact presentation $\\mathcal A|_U^{(I)}\\to\\mathcal A|_U^{(J)}\\to M|_U\\to0$. Its maps are $\\mathcal A$-linear because their $C$-linear section maps commute with the action, and the same tilde--sections bijection detects that equality. This proves quasi-coherence over $\\mathcal A$ on a cover, hence globally.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LZ (lemma-characterize-quasi-coherent-small-etale), Tag 03M1; morphisms.tex Tag 0H88, converse proof; schemes.tex Tags 01I7, 01IB; descent.tex Tag 03DX."
+   }
+  },
+  {
+   "text": "For $F\\in\\operatorname{QCoh}(Y)$ and an affine chart $U=\\operatorname{Spec}R$ of $X$, let $P=F(Y_U)$, a module over $C=\\mathcal A(U)$. Direct-image restriction identifies $(p_*F)|_U$ with the direct image from $Y_U$. On an affine etale $U'=\\operatorname{Spec}R'\\to U$, its sections are $F(Y_{U'})=P\\otimes_C(C\\otimes_RR')$, by affine pullback sections and the scheme etale/Zariski pullback comparison. The isomorphism to $P\\otimes_RR'$ sends $p\\otimes(c\\otimes r')$ to $cp\\otimes r'$; its inverse sends $p\\otimes r'$ to $p\\otimes(1\\otimes r')$. These formulas commute with further restrictions. Thus $(p_*F)|_U$ is the etale associated sheaf of the underlying $R$-module $P$, with the $\\widetilde C$-action induced by its $C$-action. Affine etale objects cover every object of $U_{\\mathrm{et}}$, so the section comparisons identify the sheaves. Consequently $p_*F$ is quasi-coherent over $\\mathcal O_X$, hence over $\\mathcal A$ by step 3. Module maps push forward to $\\mathcal A$-linear maps.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX (lemma-pushforward-etale-base-change-modules); schemes.tex Tag 01I9 (lemma-widetilde-pullback); descent.tex Tag 03LC (proposition-equivalence-quasi-coherent-functorial)."
+   }
+  },
+  {
+   "text": "For a quasi-coherent $\\mathcal A$-module $M$, set $N_U=M(U)$ and on $Y_U=\\operatorname{Spec}C$ take the etale associated sheaf $H_U=\\widetilde{N_U}$ over $C$. If $U'=\\operatorname{Spec}R'\\to U$, put $C'=C\\otimes_RR'$. The underlying $\\mathcal O_X$-module is quasi-coherent by step 2, so the affine pullback formula identifies $N_{U'}$ with $N_U\\otimes_RR'$. Under this identification $C'$ acts by $(c\\otimes r')(n\\otimes s')=cn\\otimes r's'$; this follows by restricting the original action map. Therefore the map $N_U\\otimes_CC'\\to N_{U'}$, $n\\otimes(c\\otimes r')\\mapsto cn\\otimes r'$, is an isomorphism, with inverse $n\\otimes r'\\mapsto n\\otimes(1\\otimes r')$. The affine pullback formula identifies it with a pullback isomorphism $H_U|_{Y_{U'}}\\simeq H_{U'}$. For two successive chart maps both composite isomorphisms send a pure tensor to the product of its scalars acting on $n$. Hence they agree; the identity chart map gives the identity. The construction commutes with every $C$-linear map of sections.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LZ; schemes.tex Tag 01I9; descent.tex Tag 03LC. Explicit chart calculation supplying the omitted proof of spaces-morphisms.tex Tag 08AI."
+   }
+  },
+  {
+   "text": "Use the atlas $V_0\\to Y$ from step 1. On its affine components take the modules $H_U$ of step 5, viewed as Zariski modules through the scheme etale/Zariski equivalence. The overlap is $V_0\\times_YV_0=Y\\times_X(U_0\\times_XU_0)$. Cover the scheme $U_0\\times_XU_0$ by affine opens, refining into the affine components of both projections to $U_0$. Step 5 identifies the two pullbacks of the local modules over each of these opens, using the common module of sections of $M$ on that chart of $X$. These identifications agree under refinement, so glue by the sheaf property. On a similarly refined triple overlap their cocycle is precisely the multiplication-of-scalars identity in step 5; along the diagonal it is the identity. The groupoid quasi-coherent equivalence now descends this datum to $H(M)\\in\\operatorname{QCoh}(Y)$. Compatible local maps descend uniquely, so $M\\mapsto H(M)$ is a functor. The same overlap argument, comparing any additional affine chart with the atlas, identifies its restriction to $Y_U$ with $H_U$. The overlap schemes need not themselves be affine.",
+   "uses": [
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M3 (proposition-quasi-coherent), descent for an etale scheme atlas; Tag 02X2 (spaces, lemma-fibre-product-spaces); descent.tex Tag 03LC."
+   }
+  },
+  {
+   "text": "For each affine $U$, the sections of $p_*H(M)$ are the sections of $H_U$ on $\\operatorname{Spec}C$, namely $N_U=M(U)$, by the tilde unit isomorphism. Step 5 makes these identities compatible with restrictions and with the $\\mathcal A$-action, giving $p_*H(M)\\simeq M$. Conversely, for $F\\in\\operatorname{QCoh}(Y)$, the restriction of $H(p_*F)$ to $Y_U$ is the associated sheaf of $F(Y_U)$; the tilde counit isomorphism identifies it with $F|_{Y_U}$. Naturality of the tilde unit and counit makes these maps agree on overlaps, and descent gives $H(p_*F)\\simeq F$. The isomorphisms are natural in maps. An $\\mathcal A$-linear map induces on $U$ exactly a $C$-linear map; the tilde--sections Hom bijection and descent give its unique corresponding map on $Y$. Composition, identities and addition are computed on those same section maps. Thus direct image and $H$ form the asserted additive equivalence with the specified morphisms.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Schemes, Tags 01I7, 01HV, 01IA, 01IB (tilde--sections unit, counit and Hom bijection); spaces-properties.tex Tags 03M3, 03LX."
+   }
+  },
+  {
+   "text": "Let $g:X'\\to X$ be etale and $Y'=Y\\times_XX'$, with projection $p'$. The direct-image restriction theorem identifies $g^*(p_*F)$ with $p'_*(F|_{Y'})$ as the identity on compatible sections, and likewise identifies $g^*\\mathcal A$ with $p'_*\\mathcal O_{Y'}$. The identifications respect multiplication and module action since both are defined by the same products of restricted sections. For the inverse, every affine etale chart $T\\to X'$ is also one of $X$; both constructions restrict on $Y'\\times_{X'}T=Y\\times_XT$ to the associated module of $M(T)$. The overlap maps are exactly those of step 5, so descent identifies the inverse functors and the unit and counit of step 7. For successive etale base changes these comparisons compose, because they are identities on the same compatible sections. This proves the claimed etale compatibility, including non-scheme $X'$.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX (lemma-pushforward-etale-base-change-modules), with Tag 03M3 for descent of the inverse comparison."
+   }
+  },
+  {
+   "text": "Finally, on an affine etale $U$, the module of sections of $\\mathcal A^{\\oplus n}$ is $C^{\\oplus n}$. Its associated module on $\\operatorname{Spec}C$ is $\\mathcal O^{\\oplus n}$, since tilde preserves these coproducts and sends $C$ to the structure module. The overlap identifications send each standard basis vector to the same standard basis vector. Hence these local identifications descend to $H(\\mathcal A^{\\oplus n})\\simeq\\mathcal O_Y^{\\oplus n}$. This includes $n=0$.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LZ; schemes.tex Tags 01HV, 01ID; spaces-properties.tex Tag 03M3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sfb-space-qcoh-groupoid-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 08AI (lemma-affine-equivalence-modules) has its proof omitted. Q18 supplies the chart-and-descent proof, following the scalar-presentation argument of Tag 0H88 in morphisms.tex and the descent theorem Tag 03M3 in spaces-properties.tex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affine.*[Ee]quiv|[Ee]quiv.*affine|[Qq]uasicoherent.*[Ee]quiv",
+   "results": "Returned Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "29297aa5746c40b6"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine pushforward equivalence for quasi coherent modules over the relative spectrum of an algebra on an algebraic space",
+   "results": "Returned AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, PresheafOfModules.pushforward₀_obj, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "4c1812b0ea253291"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"equivalence\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative spectrum quasi coherent module correspondence: a module is finite type precisely when the associated module over the affine algebra is finite type",
+   "results": "Returned AlgebraicGeometry.IsFinite.SpecMap_iff, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.IsFinite.finite_app, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "7128e0438106ad66"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine morphism of algebraic spaces direct image is an equivalence between quasi coherent modules on the source and modules over the direct image algebra and preserves finite type",
+   "results": "Returned AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "b4c7ec8fd8f91548"
+  },
+  {
+   "tool": "grep",
+   "query": "IsQuasicoherent|QuasicoherentData",
+   "results": "Returned Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme pushforwards, scheme affine geometry, generators and site equivalences do not state the algebraic-space affine module correspondence or proper graded cohomology finiteness.",
+   "digest": "500e9bda79c905b3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism of algebraic spaces identifies quasi coherent modules with modules over its direct image structure algebra",
+   "results": "Returned AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instCategory, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.QuasicoherentData.X",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme functors, spectra or localizing-module/tilde facts, not the affine algebraic-space module equivalence with its clauses.",
+   "digest": "a873f2061fad471b"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*[Ee]quiv|[Ee]quiv.*[Qq]uasi",
+   "results": "Returned Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme functors, spectra or localizing-module/tilde facts, not the affine algebraic-space module equivalence with its clauses.",
+   "digest": "1d99afcec5cd385f"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent modules on an affine algebraic space and sheaves of modules over the pushforward algebra are equivalent",
+   "results": "Returned SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.QuasicoherentData, SheafOfModules.IsQuasicoherent, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.QuasicoherentData.ctorIdx, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme functors, spectra or localizing-module/tilde facts, not the affine algebraic-space module equivalence with its clauses.",
+   "digest": "0c9f68a540ebda4b"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"equivalence\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme functors, spectra or localizing-module/tilde facts, not the affine algebraic-space module equivalence with its clauses.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative spectrum of a quasi coherent algebra: direct image identifies quasi coherent sheaves with modules over that algebra, with etale base change",
+   "results": "Returned AlgebraicGeometry.specTargetImage, AlgebraicGeometry.Spec.toSheafedSpace, AlgebraicGeometry.ΓSpec.adjunction, AlgebraicGeometry.specTargetImageRingHom, AlgebraicGeometry.Spec.sheafedSpaceObj, AlgebraicGeometry.Spec.sheafedSpaceMap, AlgebraicGeometry.Spec.preimage, AlgebraicGeometry.Scheme.Spec",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme functors, spectra or localizing-module/tilde facts, not the affine algebraic-space module equivalence with its clauses.",
+   "digest": "808e82044cbbc27d"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforward|def pullbackPushforwardAdjunction|def tilde|theorem.*[Qq]uasi|TODO",
+   "results": "Returned Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give scheme functors, spectra or localizing-module/tilde facts, not the affine algebraic-space module equivalence with its clauses.",
+   "digest": "0b52b31943896f07"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-graded-cohomology-finite",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3A: the Noetherian stage of the ampleness spreading argument, after schematic and ample fibre descent. First paragraph of the proof of 0D3A: lifting the chosen fibre coordinates by 0D39. Supporting input to 0D39: Tag 08AY (lemma-ML-cohomology-powers-ideal), part (3) at p = 0 and I = m, specialized to a line module; Situation 08AV. Proper over a Noetherian affine base makes Z Noetherian, so the line module is coherent. Supporting estimate used in the proof of 08AY(3): 08AX(2), decay of the map on cohomology of the submodules J^(n+m)F into J^nF. Supporting input: Tag 08AW, finite Rees module of ideal-power cohomology, used at the beginning of the proof of Tag 08AX. Supporting input: Tag 08AT (lemma-graded-finiteness), applied in the proof of Tag 08AW to the graded ideal-power module. The affine module correspondence in Tag 08AT: the sentence constructing the unique quasi-coherent module on the affine base change with prescribed direct image (Tag 08AI).",
+   "via": [
+    "lem-sfb-space-graded-cohomology-finite",
+    "lem-sfb-space-cohomology-powers-rees-finite",
+    "lem-sfb-space-ideal-power-cohomology-image-bound",
+    "lem-sfb-space-infinitesimal-section-image-stabilization",
+    "lem-sfb-space-ample-fibre-section-lifting",
+    "lem-sfb-space-noetherian-ample-neighbourhood",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-affine-module-correspondence",
+  "worker": "stage1",
+  "group": "Q18",
+  "summary": "Proved the unchanged algebraic-space statement in nine chart-and-descent steps, using existing nodes only. Established both notions of quasi-coherence by presentations, calculated direct image and the inverse on affine etale charts, checked overlap cocycles, descended objects and maps, and verified etale base change and finite free modules. No new nodes and no statement dispute. Project scheme declarations and Mathlib search hits do not state the algebraic-space item.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images clause (3) chain, specifically Tag 08AT construction of the module on the affine base change with prescribed direct image, via Tag 08AI. The current latest direct-images proof is unchanged in its compactification/direct-image route; no blueprint node states this auxiliary module equivalence. Retained the imported from.place and via chain, whose from.node is null as printed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Existence of an affine-component etale atlas, a generic algebraic-space foundation. No node particular to the constructibility unit replaces this foundational input; no trace-formula or Poincare-duality theorem is used."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Base change of etale covers and existence of fibre products, generic algebraic-space geometry. No node particular to the constructibility unit replaces this foundational input; no trace-formula or Poincare-duality theorem is used."
+   },
+   {
+    "node": "def-trf-space-quasi-coherent-module",
+    "why": "Generic module or algebraic-space foundation used as stated. No node particular to the constructibility unit replaces this foundational input; no trace-formula or Poincare-duality theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Affine tilde/sections Hom, unit, counit and coproduct facts; generic scheme module theory. No node particular to the constructibility unit replaces this foundational input; no trace-formula or Poincare-duality theorem is used."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "The scheme Zariski/etale dictionary, including pullback comparison, needed to use affine module calculations and scheme descent. No node particular to the constructibility unit replaces this foundational input; no trace-formula or Poincare-duality theorem is used."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Degree-zero direct image commutes with etale restriction, with the canonical identity-on-sections comparison. No node particular to the constructibility unit replaces this foundational input; no trace-formula or Poincare-duality theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "The affine tensor formula for scheme module pullback, used in the explicit chart computation. No node particular to the constructibility unit replaces this foundational input; no trace-formula or Poincare-duality theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-15e5aaf56",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-15e5aaf56 (reviewer sub-agent of L); spot-checked: PASS. Read the full item: 9 steps, 0 new nodes, and the statement and stmt_deps are byte-identical to the base (side-live). Live is still unsplit and there is no repair note. Source: Stacks 08AI (spaces-morphisms l.3868) has its proof omitted. The steps supply it from 081V, 0H88 (both directions, including its 'details omitted' action translation) and 03M3. All 17 step tags exist in tags/tags. Step checks: (1) the relative-spec chart clause and base change give A(U')=C⊗R'; the a1 atlas and the fibre-product cover give the scheme atlas V_0. (2) kernels-colimits plus the presentation definition give the forward implication. (3) The chart calculus with tensor products, the tilde Hom bijection and the Zariski/étale equivalence identify the action as c⊗n↦cn; a free C-presentation then gives an A-linear presentation. (4) Pushforward-restriction plus F_et(u)=Γ(u^*F) plus affine-pullback sections give P⊗_C C'≅P⊗_R R', with an explicit inverse. (5) The chart cocycle comes from scalar associativity. (6) Groupoid descent on R=Y×_X(U_0×_X U_0), glued over refining affine W, with no affine-overlap assumption (E1 avoided). (7) The tilde unit, counit and Hom bijection plus descent give the equivalence with A-linear morphisms. (8) Only étale base change is claimed, via 03LX, which allows space X'. (9) Finite free modules via the tilde coproduct clause. Edge cases checked: Y=∅, X=∅, p=id, p a closed immersion, M=0, n=0, infinite presentations. Duplicate search: rg -L for 08AI/01SB finds only the scheme Zariski analogue lem-weil-pbc-affine-module-correspondence, a special case and not a duplicate. Batch-5: all 8 flagged citations (relative-spec, affine-etale-cover, fibre-products, kernels-colimits, affine-chart-calculus, Zariski/étale qcoh equivalence, étale pushforward restriction, qcoh groupoid descent) are generic algebraic-space/quasi-coherent foundations that reach sec-trace-formula only through def-trf-algebraic-space or general module theory. None is a step of the trace formula or Poincaré duality, so they are accepted. The declared tool_uses (a1/trf/pbc foundations) are accepted. No SGA. Advisory: steps 1 and 9 give source.document as spaces-properties.tex while the place names spaces-morphisms or schemes tags (cosmetic). review_split.py could not resolve the symlinked chapter directories in the snapshot (tool limit), so I checked the citations by hand."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineModuleCorrespondence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_affine_module_correspondence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.CommAlgebraSheaf.moduleRing",
+   "AlgebraicGeometry.AlgebraicSpace.CommAlgebraSheaf.Modules",
+   "AlgebraicGeometry.AlgebraicSpace.CommAlgebraSheaf.moduleForget",
+   "AlgebraicGeometry.AlgebraicSpace.CommAlgebraSheaf.QCModules",
+   "AlgebraicGeometry.AlgebraicSpace.AffineModuleCorrespondence",
+   "AlgebraicGeometry.AlgebraicSpace.affineAlgebraRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.affineQCohRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.space_affine_module_correspondence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineModuleCorrespondence.lean",
+  "statement": "theorem space_affine_module_correspondence (S : Scheme.{u}) : ∃ c : ∀ (Y X : AlgebraicSpace S) (p : Y ⟶ X), IsRepresentableWith (fun _ _ a ↦ IsAffineHom a.left) p.hom.hom → AffineModuleCorrespondence p, ∀ (Y X Y' X' : AlgebraicSpace S) (p : Y ⟶ X) (p' : Y' ⟶ X') (hp : IsRepresentableWith (fun _ _ a ↦ IsAffineHom a.left) p.hom.hom) (hp' : IsRepresentableWith (fun _ _ a ↦ IsAffineHom a.left) p'.hom.hom) (g : X' ⟶ X) (h : Y' ⟶ Y) (hg : IsEtale g.hom.hom) (square : IsPullback h.hom p'.hom p.hom g.hom), ∃ (hh : IsEtale h.hom.hom) (hq : ∀ F : Y.QCoh, ((pullback h hh).obj F.obj).IsQuasicoherent) (e : (c Y' X' p' hp').algebra.algebra.moduleRing ≅ (etaleRingRestriction g hg).obj (c Y X p hp).algebra.algebra.moduleRing), (∀ (V : X'.EtaleSite) (q : ModuleChart p' V) (a : (c Y' X' p' hp').algebra.algebra.right.obj.obj (op V)), (c Y' X' p' hp').algebra.projection V q a = (c Y X p hp).algebra.projection ((etaleMap g hg).obj V) (moduleChartBaseChange p g h p' hg hh square.w V q) (e.hom.hom.app (op V) a)) ∧ ∃ beta : (c Y X p hp).equivalence.functor ⋙ ObjectProperty.ι _ ⋙ affineAlgebraRestriction g hg (c Y X p hp).algebra.algebra (c Y' X' p' hp').algebra.algebra e ≅ affineQCohRestriction h hh hq ⋙ (c Y' X' p' hp').equivalence.functor ⋙ ObjectProperty.ι _, ∀ (F : Y.QCoh) (V : X'.EtaleSite) (q : ModuleChart p' V) (s : ((c Y X p hp).equivalence.functor.obj F).obj.val.obj (op ((etaleMap g hg).obj V))), ((moduleDirectImageModel p').projection ((pullback h hh).obj F.obj) V).app (op q) (((c Y' X' p' hp').directImageIso.hom.app ((affineQCohRestriction h hh hq).obj F)).val.app (op V) ((beta.hom.app F).val.app (op V) s)) = ((moduleDirectImageModel p).projection F.obj ((etaleMap g hg).obj V)).app (op (moduleChartBaseChange p g h p' hg hh square.w V q)) (((c Y X p hp).directImageIso.hom.app F).val.app (op ((etaleMap g hg).obj V)) s)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c752597f",
+  "group": "Q145",
+  "result": "pass",
+  "note": "First S2 delivery: only the item's lean field differs from side-live, and the 5 stmt_dep nodes are byte-identical. Read Stacks 08AI (spaces-morphisms l.3868), the module and report (Worker report + Second reading present), and the dep decls (IsRepresentableWith, ModuleChart, ModuleDirectImageModel, QCoh, CommAlgebraSheaf/toModule, StructureAlgebraModel, etaleRingRestriction, moduleChartBaseChange, schemeRestriction). Every clause is rendered and pinned: algebra via StructureAlgebraModel projections; qcoh iff for every A-module (Mathlib IsQuasicoherent, arbitrary index sets); additive equivalence Y.QCoh ≌ A.QCModules with directImageIso to moduleDirectImage and action_projection; chart e pinned to toSpecΓ ≫ Spec.map projection, with a natural iso to tilde of M(V) over all A-linear maps (node gives no canonical map); finiteFree with ULift Fin n including n=0; etale base change with e and beta pinned by section equations, hp' binder harmless. No extra hypotheses or universe restriction; no hollow defs; one sorry; docstrings with source, blueprint and 9 steps; lines <=100; lean.statement verbatim; no H4 duplicate found. Not recompiled per instruction (worker clean 11.7/12.0 s). Advisories: decls owned by nodes outside stmt_deps (relative-spec and pushforward-restriction theorems, def-trf-space-module-scheme-restriction, def-sfb-space-quasi-coherent-algebra, def-sfb-space-comm-algebra-sheaf), no cycle, maintainer note only; Mathlib.CategoryTheory.Adjunction.Limits import probably redundant; stage-1 source.document cosmetic."
+ }
+}

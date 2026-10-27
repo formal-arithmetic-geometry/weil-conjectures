@@ -28,165 +28,76 @@
  ],
  "proof": [
   {
-   "text": "Apply Part (1) of [lem-weil-proetale-weakly-etale-localization] to identify $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$; no constant-ring assertion in its Parts (2)--(3) is used for the condensed coefficient. Instead use the actual ring-object isomorphism $\\alpha_j$ of [sk-def-sfb-coefficient-morphisms]. Write $A=E_U$, $B=E_X$, $J=j_{!,\\mathrm{int}}$, $P=j^*_{\\mathrm{int}}$, $J'=j_{!,\\mathrm{sec}}$, $P'=j^*_{\\mathrm{sec}}$. On the slice, inverse image of abelian sheaves is restriction. The module pullback formula of [sk-def-sfb-module-pushforward-pullback] therefore identifies $P$ with restriction followed by scalar extension along $\\alpha_j$. On an object $\\varphi:V\\to U$ the exact coefficient identification sends $a\\otimes m$ to $a\\cdot m$, where $m$ is regarded as an $R_U$-module element through $\\alpha_j^{-1}$. Since $A,B$ preserve the underlying sheaves and restrictions, this is also the section-module pullback comparison $t:AP\\cong P'B$ retained in [def-pd-section-module-operations-data]. Its inverse sends $m$ to $1\\otimes m$.",
+   "text": "Apply [lem-pd-section-open-generator-scalar] to the fixed abelian unit and actual coefficient morphism. This proves the first scalar equation; the second follows by the linearity of each component of ordinaryExtensionComparison.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-module-pushforward-pullback",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pd-section-open-generator-scalar",
     "def-pd-section-module-operations-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04IX, definition-localize-ringed-site; coefficient identification as specified in the blueprint coefficient-morphism and module-pullback definitions"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $F$ be an internal $R_U$-module. By [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint], its underlying abelian extension is the sheafification of the sum presheaf $\\bigoplus_{\\varphi:V\\to U}F(V,\\varphi)$. The underlying abelian extension of $JF$ is exactly this extension by [sk-def-sfb-module-lower-shriek]. This identifies its underlying sheaf with that of $J'AF$, whose module presheaf is [def-weil-extension-by-zero-presheaf]. Fix this identification by sending each presheaf generator $\\iota_\\varphi(m)$ to the same generator. The adjunction formula in the cited abelian lemma makes this the canonical identification: the inverse Hom map sends $a:F\\to G|_U$ to the unique sheaf map with value $a_{(V,\\varphi)}(m)$ on each generator. The unit on the slice sends $m$ to the generator indexed by the given structure map to $U$.",
+   "text": "The definition of ordinaryExtensionComparison chooses the unique comparison whose mate is pullComparison. Extract this property from openComparison_existsUnique. Apply the adjunction transpose identity [lem-pur-adjunction-mate-transpose] for the ordinary Hom equation. The unit_mateEquiv and mateEquiv_counit identities, cancelling the invertible comparison when necessary, give the ordinary unit and counit equations.",
    "uses": [
-    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-    "sk-def-sfb-module-lower-shriek",
-    "def-weil-extension-by-zero-presheaf"
+    "def-pd-section-module-operations-data",
+    "lem-pur-adjunction-mate-transpose"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, lemma-extension-by-zero, the direct-sum presheaf and both adjunction constructions"
-   }
+   "elementary": false
   },
   {
-   "text": "Compute the scalar action of $JF$ on these generators. In [sk-def-sfb-module-lower-shriek] it is the inverse of the canonical abelian projection map followed by extension of the action of $\\operatorname{Res}_{\\alpha_j}F$. The projection map is the adjoint-of-unit map of [sk-def-sfb-transport], Part (4). The unit from Step 2 sends $m$ to $\\iota_\\varphi(m)$, so on pure tensors that projection map sends $\\iota_\\varphi((r|_\\varphi)\\otimes m)$ to $r\\otimes\\iota_\\varphi(m)$. This computes the actual projection map, not an arbitrarily chosen isomorphism; equality can be checked before sheafification since the tensor in [sk-def-sfb-sheaf-tensor] is sheafified objectwise tensor. Its inverse followed by the action thus sends $r\\otimes\\iota_\\varphi(m)$ to $\\iota_\\varphi(\\alpha_j(r|_\\varphi)m)$, using the definition of restriction of scalars in [sk-def-sfb-change-of-scalars]. That is precisely the action in [def-weil-extension-by-zero-presheaf]. The unique extension of the presheaf action to sheafification in [def-weil-presheaf-modules-sheafification] shows that the generator identification of Step 2 is $R_X$-linear and gives $c_0:BJ\\cong J'A$.",
+   "text": "Infer exactness of the internal extension and inverse image and the section extension and inverse image from their existing finite-limit and finite-colimit instances. These are the exact operations used by the fixed derived realizations, with no boundedness hypotheses.",
    "uses": [
-    "sk-def-sfb-module-lower-shriek",
-    "sk-def-sfb-transport",
-    "sk-def-sfb-sheaf-tensor",
-    "sk-def-sfb-change-of-scalars",
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/_section.md",
-    "place": "Projection formula, linear extension, and coefficient restriction bullets; sites-modules.tex Tag 03DI, lemma-extension-by-zero, first proof paragraph, and Tag 03CY, lemma-sheafification-presheaf-modules"
-   }
-  },
-  {
-   "text": "The ordinary adjunction Hom maps also agree under $c_0$ and $t$. Indeed, for $q:JF\\to G$ its abelian adjunct on $(V,\\varphi)$ sends $m$ to $q_V(\\iota_\\varphi(m))$ by [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint]. It is linear for the restricted coefficient: $q_V(\\iota_\\varphi(\\alpha_j(r|_\\varphi)m))=r\\,q_V(\\iota_\\varphi(m))$ by Step 3. The internal lifted adjunction of [sk-def-sfb-transport] and its invertible coefficient change [sk-def-sfb-change-of-scalars] give this same map after the $1\\otimes m\\leftrightarrow m$ identification of Step 1. Conversely a linear map on the slice gives the map from the sum presheaf by this formula on every summand; it factors uniquely through module sheafification by [def-weil-presheaf-modules-sheafification]. The two procedures are inverse because their composites fix every summand generator, respectively every section on the slice. Thus, writing $h,h'$ for the ordinary Hom bijections, $h'(B(q)c_{0,F}^{-1})=t_G A(h(q))$. In particular $c_0$ is the uniquely mate-normalized comparison retained in [def-pd-section-module-operations-data], rather than merely an isomorphism of the endpoint functors.",
-   "uses": [
-    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-    "sk-def-sfb-transport",
-    "sk-def-sfb-change-of-scalars",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pd-section-module-operations-data"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, lemma-extension-by-zero, the maps alpha to alpha-prime and beta to beta-prime; the omitted inverse verifications are supplied here"
-   }
-  },
-  {
-   "text": "Denote the ordinary units by $\\eta,\\eta'$ and counits by $\\varepsilon,\\varepsilon'$. Substituting $q=1_{JF}$ into Step 4 and using $h(q)=P(q)\\eta_F$ gives $\\eta'_{AF}=P'(c_{0,F})\\,t_{JF}\\,A(\\eta_F)$. Substituting $q=\\varepsilon_G$ gives $\\varepsilon'_{BG}\\,J'(t_G)=B(\\varepsilon_G)c_{0,PG}^{-1}$, since $h(\\varepsilon_G)=1_{PG}$. These are exactly the unit and counit equations for the fixed comparisons. All compositions here and below are read right to left.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, lemma-extension-by-zero; elementary specialization of the Hom identity from Step 4 to identities and counits"
-   }
-  },
-  {
-   "text": "Both section-module functors are exact by [lem-pur-site-restriction-module-adjunction-exact], applied to the slice of Step 1 and the coefficient isomorphism $\\alpha_j$. Changing coefficients along an isomorphism is an equivalence by [sk-def-sfb-change-of-scalars], so it does not change exactness. On the internal side $J$ is exact by [sk-def-sfb-module-lower-shriek], and $P$ is exact by [det-prop-sfb-module-pullback-exact-main], with $f=j$. The section equivalences are exact by [lem-pe-internal-section-tensor-comparison]; its site-size and sheafified tensor hypotheses are the small-site convention of the statement and [sk-def-sfb-sheaf-tensor]. Thus these are additive exact functors between the module abelian categories; no injective or boundedness condition has been added.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "sk-def-sfb-change-of-scalars",
     "sk-def-sfb-module-lower-shriek",
     "det-prop-sfb-module-pullback-exact-main",
-    "lem-pe-internal-section-tensor-comparison",
-    "sk-def-sfb-sheaf-tensor"
+    "def-pd-section-module-operations-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DJ, lemma-extension-by-zero-exact; exact restriction on the localized site; internal exactness is the cited module-pullback theorem"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact functors of Step 6: their degreewise functors preserve quasi-isomorphisms and every complex represents their derived value. Apply [lem-sfb-adjunction-localization] to the degreewise ordinary adjunctions with the standard factorization isomorphisms. By [def-weil-exact-derived-adjunction] these are the independently specified localized adjunctions, with units and counits given by the formulas of that lemma. Localize $c_0$ and $t$ to comparisons $c:D(B)D(J)\\cong D(J')D(A)$ and $\\bar t:D(A)D(P)\\cong D(P')D(B)$. Existence and compatibility with composition of these localized transformations follow from Part (2) of [lem-weil-pbc-localization-universal-property]. This uses whole categories of unbounded cochain complexes, not only bounded-below or resolving representatives.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-sfb-adjunction-localization",
-    "def-weil-exact-derived-adjunction",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; adjunction descent and normalization formulas in Mathlib/CategoryTheory/Localization/Adjunction.lean:89,118,125"
-   }
-  },
-  {
-   "text": "Write $s:Lj^*_{\\mathrm{int}}\\cong D(P)$ and $s':Lj^*_{\\mathrm{sec}}\\cong D(P')$ for the canonical exact-functor comparisons used in the statement. Then the specified $b$ is $(s'D(B))^{-1}\\bar t\\,D(A)(s)$. To check this identification, precompose with cochain localization: the comparisons of [lem-pd-section-derived-pushpull-normalization] commute with the ordinary pullback comparison $t$ and the derived resolution comparison transformations. Because $P,P'$ are exact, every complex computes those functors by [lem-weil-pbc-exact-functor-derived-factorization]; the exact-functor comparison transformations are invertible and can be cancelled in that square. The result is precisely the localized component of $t$ on each complex. Part (3) of [lem-weil-pbc-localization-universal-property] then gives the displayed equality of natural transformations. This verifies the normalization of $b$ relative to $\\bar t$; it does not choose a new pullback comparison.",
-   "uses": [
-    "lem-pd-section-derived-pushpull-normalization",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor, and normalization by the factorization equations of the canonical derived pullback comparison"
-   }
-  },
-  {
-   "text": "Localize the two equations of Step 5 degreewise. By the unit/counit normalization formulas in [lem-sfb-adjunction-localization] and the definition [def-weil-exact-derived-adjunction], these give the unit and counit comparison equations on every localized cochain complex, with $\\bar t$ and $c$. Part (3) of [lem-weil-pbc-localization-universal-property] extends each equation to the entire derived category. Re-express the right adjoints through $s,s'$ and use Step 8. With $\\mathcal A=D(A)$, $\\mathcal B=D(B)$, $L=e_{\\mathrm{int}}$, $L'=e_{\\mathrm{sec}}$, $R=Lj^*_{\\mathrm{int}}$, $R'=Lj^*_{\\mathrm{sec}}$, the resulting equations for the specified derived units and counits are\n$$\\eta'_{\\mathcal A K}=R'(c_K)\\,b_{LK}\\,\\mathcal A(\\eta_K),\\qquad\n\\varepsilon'_{\\mathcal B M}L'(b_M)=\\mathcal B(\\varepsilon_M)c_{RM}^{-1}.$$\nIn particular the units and counits being compared are the localized original ones of the two independently given adjunctions.",
+   "text": "Use the unit formula of [lem-sfb-adjunction-localization] to compute the units of the independent exact localizations [def-weil-exact-derived-adjunction] after the standard exact-functor factors. On cochain complexes cancel the inverse factors. Pass to homotopy objects using quotientCompQhIso, then use localization extensionality to identify these adjunctions with the standard levelwise derived adjunctions. This verifies equality of the specified adjunction data, rather than replacing them by transported data.",
    "uses": [
     "lem-sfb-adjunction-localization",
     "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved source-library theorem Adjunction.mapDerivedCategoryAdjunction_mate to the ordinary comparison and its unit equation, with the two section equivalence functors as the vertical exact functors. Rewrite by Step 4. Expand the existing definition of derivedPullComparison: it is already the localized ordinary pull comparison preceded by the canonical exact left-derived comparison. In the unit of ofNatIsoRight the inverse comparison cancels that factor. Cancel the inverse extension comparison to obtain the displayed derived unit equation.",
+   "uses": [
+    "def-pd-section-module-operations-data",
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Exact termwise adjunction localization, Tag 015F; natural-transformation descent as in Mathlib/CategoryTheory/Localization/Adjunction.lean:118,125"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryMate.lean",
+    "place": "Adjunction.mapDerivedCategoryAdjunction_mate; the source lemma is proved, and its fixed adjunctions are identified with the independent exact localizations in Step 4."
    }
   },
   {
-   "text": "For any derived morphism $q:LK\\to M$, use the unit equation of Step 9 and naturality of $b$ to compute\n$$\\begin{aligned}\nh_{\\mathrm{sec}}(\\mathcal B(q)c_K^{-1})\n&=R'(\\mathcal B(q))R'(c_K^{-1})\\eta'_{\\mathcal A K}\\\\\n&=R'(\\mathcal B(q))b_{LK}\\mathcal A(\\eta_K)\\\\\n&=b_M\\mathcal A(R(q))\\mathcal A(\\eta_K)\n=b_M\\mathcal A(h_{\\mathrm{int}}(q)).\n\\end{aligned}$$\nThe cancellation is $R'(c_K^{-1})R'(c_K)=1$. This is the requested identity. It applies to arbitrary derived morphisms; no representation of $q$ by a single cochain map was assumed. The second equation of Step 9 gives the counit compatibility, completing all the assertions.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Elementary adjunction calculation from Step 9, using the formula h(q)=R(q) composed with the unit"
-   }
+   "text": "The derived unit equation determines the mate of the inverse extension comparison: apply the inverse mate equivalence and the injective section Hom bijection to its components, then cancel the extension comparison. Use [lem-pur-adjunction-mate-transpose] for every derived morphism to obtain the Hom equation. Apply mateEquiv_counit to obtain the final derived counit equation. Assemble these equations, the eight exactness instances, and the two scalar identities into the unchanged conjunction.",
+   "uses": [
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-module-pushforward-pullback",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pd-section-open-generator-scalar",
   "def-pd-section-module-operations-data",
-  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+  "lem-pur-adjunction-mate-transpose",
   "sk-def-sfb-module-lower-shriek",
-  "def-weil-extension-by-zero-presheaf",
-  "sk-def-sfb-transport",
-  "sk-def-sfb-sheaf-tensor",
-  "sk-def-sfb-change-of-scalars",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-pur-site-restriction-module-adjunction-exact",
   "det-prop-sfb-module-pullback-exact-main",
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-sfb-adjunction-localization",
   "def-weil-exact-derived-adjunction",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-pd-section-derived-pushpull-normalization"
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03DJ (lemma-extension-by-zero-exact); internal-action comparison and exact-adjunction localization calculation supplied by Q22, using existing DAG localization lemmas."
+  "place": "Tag 03DI, together with exact adjunction localization (derived.tex Tag 015F). C2 uses the existing mate-normalized ordinary comparison and the proved source-library derived-mate theorem; only the ordinary scalar-generator calculation is split off."
  },
  "mathlib_searches": [
   {
@@ -376,20 +287,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-module-pushforward-pullback",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
   "sk-def-sfb-module-lower-shriek",
-  "def-weil-extension-by-zero-presheaf",
-  "sk-def-sfb-transport",
-  "sk-def-sfb-sheaf-tensor",
-  "sk-def-sfb-change-of-scalars",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-pur-site-restriction-module-adjunction-exact",
   "det-prop-sfb-module-pullback-exact-main",
-  "lem-pe-internal-section-tensor-comparison",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-sfb-adjunction-localization",
   "def-weil-exact-derived-adjunction",
@@ -407,9 +306,6 @@
   "module": "Sheaf.Paper.SectionDerivedOpenAdjunctionNormalization",
   "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionDerivedOpenAdjunctionNormalization",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.openSectionObject",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalOpenGenerator",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.openCoefficientSection",
    "AlgebraicGeometry.ProEtale.ModuleRingedComparison.localizedInternalOpenAdjunction",
    "AlgebraicGeometry.ProEtale.ModuleRingedComparison.localizedSectionOpenAdjunction",
    "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionDerivedOpenAdjunctionNormalization"
@@ -429,5 +325,27 @@
   "group": "NH",
   "result": "pass",
   "note": "Read node, Stacks 03DI/03DJ (sites-modules.tex 2058ff/2160ff), all relevant deps and the delivered module. Statement verbatim, one sorry, real helpers built from canonical maps (abelian unit + upperStarIsoOpenImmersionRestriction; α_j=condensedPullbackHom). c0=ordinaryExtensionComparison (unique mate-normalized), b=derivedPullComparison, c=derivedExtensionComparison; both derived adjunctions = recorded exactDerivedAdjunction (internal via ofNatIsoRight leftDerivedUpperStarIsoMapDerivedCategory.symm). Ordinary/derived Hom, unit, counit clauses match Steps 5/9/10; 8 exactness conjuncts; no extra hypotheses or universe restriction; edge cases fine; only lean field changed. Not recompiled (2026-10-21 rule); worker reports clean compiles 19.0/12.7 s. Advisory: clause 1b follows from 1a by linearity; ordinary clauses repeat lem-sfb-internal-module-operations-transport (stage-1 accepted); new localized adjunctions equal existing derivedOpenAdjunction/internalOpenAdjunction but built differently; some decls from def nodes that are not direct stmt_deps."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d6ee9",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T081206-L-1861456",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs unchanged lem-pd-section-derived-open-adjunction-normalization statement; new sorry sectionOpenGenerator_scalar vs first conjunct of the item and its node; moved helpers vs clone (verbatim, re-exported, no importers)"
  }
 }

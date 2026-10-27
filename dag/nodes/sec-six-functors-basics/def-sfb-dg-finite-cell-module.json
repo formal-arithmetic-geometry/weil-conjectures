@@ -1,0 +1,133 @@
+{
+ "id": "def-sfb-dg-finite-cell-module",
+ "kind": "definition",
+ "title": "Finite-cell left dg modules and the integer coefficient sheaf on a point",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $B$ be a category essentially small in the coefficient universe $u$, $J$ a Grothendieck topology on $B$, $S$ a sheaf of commutative rings, $A$ a left sheaf dg $S$-algebra, and $P$ a left dg $A$-module, using [def-sfb-sheaf-dg-module-localization]. Say that $P$ has a finite-cell filtration if there are an integer $t\\geq0$, dg modules $F_{-1},F_0,\\ldots,F_t$, and injective dg maps $f_j:F_{j-1}\\to F_j$ for $0\\leq j\\leq t$, with $F_{-1}=0$, an isomorphism $F_t\\cong P$, and dg isomorphisms $\\operatorname{coker}(f_j)\\cong\\bigoplus_{a\\in\\{0,\\ldots,n_j-1\\}}A[k_{ja}]$ for natural numbers $n_j$ and integers $k_{ja}$. The inclusions into $P$ are the composites followed by the final isomorphism; thus these data are a filtration by dg submodules of $P$. The regular left module and integer shifts are those of the cited localization node, including the signed shifted left action. Empty sums, repeated stages and $P=0$ are allowed. For ordinary dg algebras over $\\mathbf Z$, use the terminal category $B$ with its trivial topology and the constant sheaf with sole value $\\operatorname{ULift}(\\mathbf Z)$; denote this coefficient sheaf by pointIntegers. This site presents sheaves on a point.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09R3, proposition-compact (2); Tag 0FQ0, lemma-left-right, and section-shift for left modules; sdga.tex definition-dga on a point."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A dg module with a finite filtration whose successive quotients are finite direct sums of shifts of the regular dg module",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsModuleFiltration.toIsFiltration\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"∀ {ι : Type u_1} {ιM : Type u_2} (R : Type u_3) {M : Type u_4} {σ : Type u_5} {σM : Type u_6} {inst : AddMonoid ι}\\n  {inst_1 : PartialOrder ι} {inst_2 : PartialOrder ιM} {inst_3 : VAdd ι ιM} {inst_4 : Semiring R} {inst_5 : SetLike σ R}\\n  {inst_6 : AddCommMonoid M} {inst_7 : Module R M} {inst_8 : Set\", \"doc\": \"If a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration (i.e., each $F_i$ is a submodule, the filtration is increasing, and compatible with additio\"}\n  {\"name\": \"Ideal.Filtration.submodule_fg_iff_stable\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"(hF' : ∀ i, (F.N i).FG) : F.submodule.FG ↔ F.Stable\", \"doc\": \"Assuming each submodule $ I^n M $ in the filtration is finitely generated, the Rees algebra submodule is finitely generated if and only if the filtration is stable.\"}\n  {\"name\": \"IsModuleFiltration.rec\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [inst_2 : PartialOrder ιM] →\\n                  [inst_3 : VAdd ι ιM] →\\n   \", \"doc\": \"A recursor for the module filtration predicate, allowing definition by recursion on the structure of an IsModuleFiltration by providing a constructor that uses the underlying IsFiltration and GradedSM\"}\n  {\"name\": \"IsModuleFiltration\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [PartialOrder ιM] →\\n                  [VAdd ι ιM] →\\n                    [\", \"doc\": \"A predicate asserting that a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration, where $\\\\iota$ is an ordered additive monoid. This requires that ea\"}\n  {\"name\": \"IsModuleFiltration.recOn\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [inst_2 : PartialOrder ιM] →\\n                  [inst_3 : VAdd ι ιM] →\\n   \", \"doc\": \"A recursor for the module filtration predicate, allowing definition by recursion on the structure of an IsModuleFiltration by providing a constructor that uses the underlying IsFiltration and GradedSM\"}\n  {\"name\": \"IsModuleFiltration.mk_int\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"(F : ℤ → σ) (mono : Monotone F) [SetLike.GradedMonoid F] (F' : ℤ → σM) (mono' : Monotone F')\\n  [SetLike.GradedSMul F F'] :\\n  letI := IsRingFiltration.mk_int F mono\\n  IsModuleFiltration F (fun n ↦ F (n - 1)) F' (fun n ↦ F' (n - 1))\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $ forming a graded monoid, and a monotone family $ F' : \\\\mathbb{Z} \\\\to \\\\sigma_M $ of subsets of an $ R $-module $ M $\"}\n  {\"name\": \"Ideal.Filtration.Stable\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \": Prop\", \"doc\": \"A filtration $\\\\{I^n M\\\\}_{n \\\\in \\\\mathbb{N}}$ of an $R$-module $M$ by powers of an ideal $I \\\\subseteq R$ is called stable if there exists an integer $n_0$ such that for all $n \\\\geq n_0$, the equality $I\"}\n  {\"name\": \"Module.Finite.instDirectSum\", \"module\": \"Mathlib.LinearAlgebra.DirectSum.Finite\", \"type\": \": Module.Finite R (⨁ i, M i)\", \"doc\": \"The direct sum of a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $ is a finitely generated $ R $-module. This means there exists a finite set of elements in the direct sum $ \\\\bigoplus_{i \\\\in \\\\iota}\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching dg finite-cell definition. Ordinary module/ideal filtrations do not impose a differential, dg action, or shifted regular dg quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cell differential graded module finite filtration quotients shifts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsModuleFiltration.mk_int\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {R : Type u_3} {M : Type u_4} {σ : Type u_5} {σM : Type u_6} [inst : Semiring R] [inst_1 : SetLike σ R]\\n  [inst_2 : AddCommMonoid M] [inst_3 : Module R M] [inst_4 : SetLike σM M] (F : ℤ → σ) (mono : Monotone F)\\n  [inst_5 : SetLike.GradedMonoid F] (F' : ℤ → σM),\\n  Monotone F' → ∀ [SetLike.GradedSMu\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $ forming a graded monoid, and a monotone family $ F' : \\\\mathbb{Z} \\\\to \\\\sigma_M $ of subsets of an $ R $-module $ M $\"}\n  {\"name\": \"IsModuleFiltration\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [PartialOrder ιM] →\\n                  [VAdd ι ιM] →\\n                    [\", \"doc\": \"A predicate asserting that a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration, where $\\\\iota$ is an ordered additive monoid. This requires that ea\"}\n  {\"name\": \"IsModuleFiltration.toGradedSMul\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {ιM : Type u_2} {R : Type u_3} {M : Type u_4} {σ : Type u_5} {σM : Type u_6} {inst : AddMonoid ι}\\n  {inst_1 : PartialOrder ι} {inst_2 : PartialOrder ιM} {inst_3 : VAdd ι ιM} {inst_4 : Semiring R} {inst_5 : SetLike σ R}\\n  {inst_6 : AddCommMonoid M} {inst_7 : Module R M} {inst_8 : Set\", \"doc\": \"If $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ is a module filtration on a module $M$ over a semiring $R$, then the family $\\\\{F_i\\\\}$ satisfies the graded scalar multiplication compatibility condition, ensuring that scala\"}\n  {\"name\": \"IsModuleFiltration.toIsFiltration\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {ιM : Type u_2} (R : Type u_3) {M : Type u_4} {σ : Type u_5} {σM : Type u_6} {inst : AddMonoid ι}\\n  {inst_1 : PartialOrder ι} {inst_2 : PartialOrder ιM} {inst_3 : VAdd ι ιM} {inst_4 : Semiring R} {inst_5 : SetLike σ R}\\n  {inst_6 : AddCommMonoid M} {inst_7 : Module R M} {inst_8 : Set\", \"doc\": \"If a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration (i.e., each $F_i$ is a submodule, the filtration is increasing, and compatible with additio\"}\n  {\"name\": \"IsRingFiltration.mk_int\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {R : Type u_2} {σ : Type u_3} [inst : Semiring R] [inst_1 : SetLike σ R] (F : ℤ → σ),\\n  Monotone F → ∀ [SetLike.GradedMonoid F], IsRingFiltration F fun n => F (n - 1)\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $, indexed by integers, that forms a graded monoid, the shifted family $ \\\\{F(n - 1)\\\\}_{n \\\\in \\\\mathbb{Z}} $ defines a \"}\n  {\"name\": \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"module\": \"Mathlib/Algebra/Homology/GrothendieckAbelian\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] {ι : Type t} (c : ComplexShape ι)\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] [CategoryTheory.Limits.HasFilteredColimitsOfSize.{w, w', v, u} C],\\n  CategoryTheory.Limits.HasFilteredColimitsOfSize.{w, w', max t v, max (max t u) v} (Hom\", \"doc\": \"If a category $ \\\\mathcal{C} $ has filtered colimits of size $ \\\\kappa $, then the category of homological complexes over $ \\\\mathcal{C} $ with shape $ c $ also has filtered colimits of size $ \\\\kappa $.\"}\n  {\"name\": \"Ideal.Filtration.submodule_fg_iff_stable\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  (F : I.Filtration M), (∀ (i : ℕ), (F.N i).FG) → (F.submodule.FG ↔ F.Stable)\", \"doc\": \"Assuming each submodule $ I^n M $ in the filtration is finitely generated, the Rees algebra submodule is finitely generated if and only if the filtration is stable.\"}\n  {\"name\": \"Ideal.Filtration.Stable.bounded_difference\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M},\\n  F.Stable → F'.Stable → F.N 0 = F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n ∧ F'.N (n + n₀) ≤ F.N n\", \"doc\": \"Given two stable filtrations $\\\\{I^n M\\\\}$ and $\\\\{I'^n M\\\\}$ of an $R$-module $M$ by powers of ideals $I$ and $I'$, if their initial submodules $I^0 M = I'^0 M$ coincide, then there exists an integer $n_\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching dg finite-cell definition. Ordinary module/ideal filtrations do not impose a differential, dg action, or shifted regular dg quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCell|FiniteCell|compact.*finite.*cell",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching dg finite-cell definition. Ordinary module/ideal filtrations do not impose a differential, dg action, or shifted regular dg quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l finite.cell|finite cell|finite filtration dag/nodes; python3 tools/blueprint_refs.py search finite cell; rg -n FiniteCellFiltration|HasFiniteCellFiltration|pointIntegers lean/Sheaf lean/WeilConjectures lean/.lake/packages/mathlib/Mathlib; rg -n finiteCell|FiniteCell|finite.cell.*retract|compact.*finite.cell lean/Sheaf lean/WeilConjectures dag/lean_names_upstream.json",
+   "results": "No named finite-cell predicate in Mathlib, WeilConjectures, Sheaf or the upstream name index. No existing definition node defines it. Existing dg finite-cell nodes are theorem statements; the complete dual-free filtration is a different decreasing filtration. Blueprint: 0 blueprint nodes match finite cell. SheafDg.Algebra, LeftModule, regular, shift, Derived and moduleQ give the reused algebra/module/localization notions.",
+   "date": "2026-10-24",
+   "verdict": "New filtration predicate needed; reuse all underlying dg definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-compact-finite-cell-retract",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: After proving global compactness from principal-cover descent, use only the compact-to-finite-cell implication. Missing definition interface: the finite filtration with finite shifted regular dg quotients in Tag 09R3 (2).",
+   "via": [
+    "lem-sfb-dg-compact-finite-cell-retract",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgFiniteCellModule",
+  "declaration": "CategoryTheory.SheafDg.HasFiniteCellFiltration",
+  "file": "lean/Sheaf/CategoryTheory/DgFiniteCellModule.lean",
+  "statement": "def HasFiniteCellFiltration (A : Algebra S) (P : LeftModule A) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SheafDg.pointIntegers",
+   "CategoryTheory.SheafDg.HasFiniteCellFiltration"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-266f9eaee",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-266f9eaee",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Item lem-sfb-dg-compact-finite-cell-retract matches the node and Stacks 09R3 (1)=>(2) clause by clause: A : Algebra pointIntegers.{u} (an arbitrary monoid in Koszul complexes of ULift Z sheaves on a point), LeftModule/Derived/moduleQ reused from def-sfb-sheaf-dg-module-localization, IsCompactObject.{u} M, exists P : LeftModule A with HasFiniteCellFiltration and i ≫ p = 𝟙 M; zero module covered (t=0, n=0); no extra boundedness, flatness or countability hypothesis. New def node def-sfb-dg-finite-cell-module is correct for 09R3 (2): Fin (t+2) stages, Mono inclusions, IsZero bottom, iso to P, dg-module isos from cokernel to a Fin n coproduct of signed shifts of regular A; pointIntegers is real data; no existing notion found in Sheaf/WeilConjectures/DAG. Item record differs from side-live only in lean and the added stmt_dep for the new node (§1(A)); both lean.statement fields verbatim; docstrings carry source, blueprint and the 5 proof steps; only proof is sorry; report has Worker report and Second reading sections. Advisory: the Preadditive(Derived A) instance parameter is unique given HasCoproducts (biproducts determine addition), the same rendering as IsCompactObject; pointIntegers leaves the PUnit universe free (more general); a similar onePointRingSheaf exists only in a theorem module (lem-pc-kflat-tensor-quasi-iso), so owning pointIntegers in a def node is correct. Not recompiled (no file changed)."
+ }
+}

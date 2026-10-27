@@ -1,0 +1,329 @@
+{
+ "id": "lem-sfb-keel-mori-stabilizer-preserving-etale",
+ "kind": "statement",
+ "title": "Stabilizer-preserving etale morphisms give cartesian moduli squares",
+ "statement": "Let $k$ be a field [def-weil-field]. Schemes, Deligne--Mumford stacks, representable morphisms and 2-fibre products have the meanings of [def-pc-scheme, def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces have the meaning of [def-trf-algebraic-space]. For a stack $\\mathcal Y$, its inertia $I_{\\mathcal Y}$ has objects $(y,\\alpha)$ over a scheme $T$, where $y\\in\\mathcal Y(T)$ and $\\alpha\\in\\operatorname{Aut}(y)$, and arrows $a:(y,\\alpha)\\to(z,\\beta)$ satisfying $a\\alpha=\\beta a$. Its projection sends $(y,\\alpha)$ to $y$. Finite inertia means that every scheme base change of this projection is a scheme finite over the base [def-weil-finite-integral-morphism]. Let $h:\\mathcal X_1\\to\\mathcal X_2$ be a representable-by-algebraic-spaces separated etale morphism of Deligne--Mumford stacks over $k$ with finite inertia. Assume that $I_{\\mathcal X_1}\\to\\mathcal X_1\\times_{\\mathcal X_2}I_{\\mathcal X_2}$ is an isomorphism. Let $p_j:\\mathcal X_j\\to M_j$ for $j=1,2$ be categorical moduli spaces over $k$: the $M_j$ are algebraic spaces over $k$, and composition gives a bijection $\\operatorname{Hom}_k(M_j,Z)\\xrightarrow{\\sim}\\operatorname{Hom}_k(\\mathcal X_j,Z)$ for every algebraic space $Z/k$. Then the unique $k$-morphism $\\bar h:M_1\\to M_2$ satisfying $\\bar h p_1=p_2h$ is separated etale, and the natural morphism $\\mathcal X_1\\to\\mathcal X_2\\times_{M_2}M_1$ is an equivalence of stacks. Etale is tested on scheme charts using [def-weil-etale-morphism]; separated for $h$ means proper relative diagonal [def-weil-proper-morphism], while separated for $\\bar h$ means closed-immersion diagonal (closed immersion means locally a surjection on affine coordinate rings).",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), restricted to Deligne--Mumford stacks over a field. Categorical moduli spaces are unique by their defining property, so the conclusion transports from the constructed moduli spaces to any categorical moduli spaces; the statement does not assume they already have flat-base-change compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-sfb-moduli-inertia",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-moduli-inertia-comparison"
+ ],
+ "proof": [
+  {
+   "text": "First the etale atlas of $\\mathcal X_2$ is smooth by [lem-sfb-stack-chartwise-smooth-etale-calculus], so [lem-sfb-etale-smooth-atlas-fppf-descent] makes it an algebraic stack in the source's fppf convention. By [lem-sfb-finite-inertia-etale-affine-charts] choose a small jointly surjective family $g_i:\\mathcal A_i\\to\\mathcal X_2$ of separated etale stabilizer-preserving maps, with presentations $\\mathcal A_i=[U_i/R_i]$ by affine finite locally free groupoids. Each $\\mathcal A_i$ is DM: pull the atlas of $\\mathcal X_2$ back along $g_i$ and refine the algebraic spaces by etale scheme atlases; [lem-sfb-dm-etale-atlas-calculus] supplies their compositions. Apply [lem-sfb-finite-flat-affine-groupoid-moduli] to the displayed presentations. It gives $f_i:\\mathcal A_i\\to B_i$ with $B_i$ affine, uniform categorical, quasi-compact, quasi-separated and a universal homeomorphism, and bijective on isomorphism classes over every algebraically closed extension. These are all the local vertical-map hypotheses of the gluing theorem used next. No finite-type hypothesis on $\\mathcal X_2$ is needed.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-sfb-finite-flat-affine-groupoid-moduli"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  },
+  {
+   "text": "Put $\\mathcal A_{ij}=\\mathcal A_i\\times_{\\mathcal X_2}\\mathcal A_j$. Its projections are separated etale and stabilizer-preserving by the permanence clause of [lem-sfb-etale-stabilizer-preserving-affine-moduli]. Apply that node over $f_i$ to obtain a scheme $B_{ij}$, a uniform categorical map $f_{ij}:\\mathcal A_{ij}\\to B_{ij}$, and a cartesian square with separated etale $B_{ij}\\to B_i$. Applying it over $f_j$ gives another categorical space; the two unique factorization maps are inverse because their composites with the categorical maps are identities. This identifies the two spaces and gives the second cartesian square $B_{ij}\\to B_j$. Thus every overlap hypothesis of [lem-sfb-etale-local-moduli-gluing] holds. That node produces $q_2:\\mathcal X_2\\to Q_2$, an etale cover $B_i\\to Q_2$, identifications $B_i\\times_{Q_2}B_j=B_{ij}$, and cartesian squares $\\mathcal A_i=\\mathcal X_2\\times_{Q_2}B_i$. Moreover $q_2$ is a universal homeomorphism.",
+   "uses": [
+    "lem-sfb-etale-stabilizer-preserving-affine-moduli",
+    "lem-sfb-etale-local-moduli-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  },
+  {
+   "text": "The constructed $q_2$ is uniform categorical. For a flat $T\\to Q_2$ and an algebraic space $Z/k$, a map $b:\\mathcal X_2\\times_{Q_2}T\\to Z$ restricts over $T_i=T\\times_{Q_2}B_i$ to a map from $\\mathcal A_i\\times_{B_i}T_i$. Uniform categoricality of $f_i$ gives a unique $c_i:T_i\\to Z$. On $T_{ij}=T\\times_{Q_2}B_{ij}$, the two restrictions have equal composites with the base change of $f_{ij}$, so are equal by its uniform categoricality [lem-sfb-etale-stabilizer-preserving-affine-moduli]. These applications are legitimate since $T_i\\to B_i$ and $T_{ij}\\to B_{ij}$ are base changes of the flat map $T\\to Q_2$, by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The $T_i$ cover $T$ etale by [lem-trf-space-fibre-products-etale-covers]. They glue the $c_i$ uniquely to $c:T\\to Z$ because $Z$ is a sheaf [def-trf-algebraic-space]. The equality $c q_{2,T}=b$ and uniqueness hold on the same cover, hence globally. Here categoricality is proved, not inferred from the gluing node's statement.",
+   "uses": [
+    "lem-sfb-finite-flat-affine-groupoid-moduli",
+    "lem-sfb-etale-stabilizer-preserving-affine-moduli",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  },
+  {
+   "text": "Pull $h$ back to $\\mathcal A_i$ and write $\\mathcal C_i=\\mathcal X_1\\times_{\\mathcal X_2}\\mathcal A_i$. Its map to $\\mathcal A_i$ is separated etale and stabilizer-preserving by [lem-sfb-etale-stabilizer-preserving-affine-moduli]; it is DM by [lem-sfb-dm-etale-atlas-calculus]. Apply [lem-sfb-affine-stack-stabilizer-etale-comparison] to $f_i$ and this map. Its hypotheses hold because $\\mathcal A_i$ has a finite flat affine cover and $f_i$ is uniform categorical with affine target. Obtain a scheme $N_i$, a separated etale $N_i\\to B_i$, and a cartesian equivalence $\\mathcal C_i\\simeq\\mathcal A_i\\times_{B_i}N_i$. The resulting $\\mathcal C_i\\to N_i$ is uniform categorical, since it is an etale, hence flat, base change of $f_i$ [lem-sfb-stack-chartwise-smooth-etale-calculus]. The same assertion remains true after every flat base change of $N_i$.",
+   "uses": [
+    "lem-sfb-etale-stabilizer-preserving-affine-moduli",
+    "lem-sfb-dm-etale-atlas-calculus",
+    "lem-sfb-affine-stack-stabilizer-etale-comparison",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-finite-flat-affine-groupoid-moduli"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  },
+  {
+   "text": "Over $B_{ij}$ the two spaces $N_i\\times_{B_i}B_{ij}$ and $B_{ij}\\times_{B_j}N_j$ are categorical spaces for the same stack $\\mathcal X_1\\times_{\\mathcal X_2}\\mathcal A_{ij}$. Indeed the pullback equivalences from steps 2 and 4 identify both stack maps with the corresponding flat base changes of $\\mathcal C_i\\to N_i$ and $\\mathcal C_j\\to N_j$. Flatness follows because $B_{ij}\\to B_i,B_j$ are etale [lem-sfb-stack-chartwise-smooth-etale-calculus]. Unique factorization in both directions gives inverse isomorphisms $\\theta_{ij}$ between the spaces. Each is over $B_{ij}$: the two structure maps have equal composites with the categorical map. On a triple overlap, both composites of these isomorphisms factor the same stack map, so uniqueness gives $\\theta_{jk}\\theta_{ij}=\\theta_{ik}$; likewise $\\theta_{ii}=1$. This is the cocycle calculation from the universal property, with no assertion that stabilizers are trivial.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  },
+  {
+   "text": "Form $U=\\coprod_iB_i$ and $V=\\coprod_iN_i$ using [lem-weil-pbc-scheme-coproduct-family] in the size bound of [def-weil-size-convention]. They are schemes, $U\\to Q_2$ is a surjective etale map, and $V\\to U$ is etale by the coproduct clause of [lem-sfb-stack-chartwise-smooth-etale-calculus]. The $\\theta_{ij}$ define descent data for this single cover: on the open-and-closed component $B_{ij}$ of $U\\times_{Q_2}U$ use exactly $\\theta_{ij}$. The cocycle of step 5 is the required cocycle on each triple component. Apply [lem-sfb-etale-space-single-cover-effective-descent] to obtain an algebraic space $Q_1$ and an etale map $u:Q_1\\to Q_2$, with $Q_1\\times_{Q_2}B_i\\simeq N_i$. Only the singleton covering $\\{U\\to Q_2\\}$ is used in that descent theorem.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-size-convention",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-etale-space-single-cover-effective-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  },
+  {
+   "text": "The maps $\\mathcal C_i\\to N_i\\to Q_1$ agree on overlaps by the construction of $\\theta_{ij}$, and glue to $q_1:\\mathcal X_1\\to Q_1$ since $Q_1$ is a sheaf [def-trf-algebraic-space]. The covers here really are etale covers: $\\mathcal C_i=\\mathcal X_1\\times_{Q_2}B_i$ and the family $B_i\\to Q_2$ covers. Scheme refinements and their compositions are supplied by [lem-sfb-dm-etale-atlas-calculus]. The comparison $F:\\mathcal X_1\\to\\mathcal X_2\\times_{Q_2}Q_1$ restricts over $B_i$ to the equivalence of step 4. To check full faithfulness on a scheme test, restrict an isomorphism of images to this cover; the local equivalences give unique source isomorphisms, which agree and glue by the isomorphism-sheaf condition. For an object of the target, choose local preimages under those equivalences; their unique overlap isomorphisms satisfy the cocycle by full faithfulness and glue to an object by effective etale descent in [def-sfb-stable-pointed-moduli-groupoids]. Thus $F$ is an equivalence, compatible with both projections.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-dm-etale-atlas-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  },
+  {
+   "text": "Because $u$ is etale it is flat by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The cartesian equivalence of step 7 makes $q_1$ a flat base change of $q_2$. For any further flat $T\\to Q_1$, its composite to $Q_2$ is flat by the same node; the uniform categorical property proved in step 3 therefore proves uniform categoricality of $q_1$ as well. Both $q_1$ and $q_2$ are universal homeomorphisms: this holds for $q_2$ by step 2 and is preserved by base change simply because two successive base changes are one base change. In particular $\\mathcal X_1\\times_{\\mathcal X_2}\\mathcal X_1\\simeq\\mathcal X_2\\times_{Q_2}(Q_1\\times_{Q_2}Q_1)$ maps universally homeomorphically to $Q_1\\times_{Q_2}Q_1$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  },
+  {
+   "text": "Consider the square with horizontal maps $\\Delta_h:\\mathcal X_1\\to\\mathcal X_1\\times_{\\mathcal X_2}\\mathcal X_1$ and $\\Delta_u:Q_1\\to Q_1\\times_{Q_2}Q_1$, and vertical maps from step 8. The top map is proper by the hypothesis that $h$ is separated, hence universally closed in the point-space sense of [def-sfb-dm-stack-morphism-properties]. After any algebraic-space base change $T\\to Q_1\\times_{Q_2}Q_1$, both vertical maps remain homeomorphisms. For a closed subset $C$ of the source of the bottom map, its inverse image under the left homeomorphism is closed; its image under the top map is closed; the right homeomorphism carries that image to precisely $\\Delta_{u,T}(C)$ by commutativity and bijectivity of the vertical maps. Thus $\\Delta_u$ is universally closed. By [lem-sfb-space-separated-diagonal-closed] it is a closed immersion. This proves separatedness of $u$ without any flat-base-change assertion about the originally given $p_j$.",
+   "uses": [
+    "def-sfb-dm-stack-morphism-properties",
+    "lem-sfb-space-separated-diagonal-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  },
+  {
+   "text": "Finally identify the constructed spaces with the spaces in the question. For $j=1,2$, categoricality of $q_j$ and $p_j$ gives unique maps $a_j:Q_j\\to M_j$ and $b_j:M_j\\to Q_j$ with $a_jq_j=p_j$ and $b_jp_j=q_j$. Then $(a_jb_j)p_j=p_j$ and $(b_ja_j)q_j=q_j$; injectivity in the respective universal properties gives $a_jb_j=1$ and $b_ja_j=1$. Thus $a_j$ is an isomorphism. The composite $a_2u b_1$ has composite $p_2h$ with $p_1$, hence is exactly $\\bar h$ by its defining uniqueness. Isomorphisms identify its chart tests and diagonal with those of $u$, so it is separated etale. Under $a_1,a_2$ the functor of step 7 is precisely the natural comparison in the statement, because both its projections are $h$ and $p_1$. Therefore that comparison is an equivalence. All factorizations are over $k$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori), local comparison and descent argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-sfb-affine-stack-stabilizer-etale-comparison",
+  "lem-sfb-dm-etale-atlas-calculus",
+  "lem-sfb-etale-local-moduli-gluing",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-etale-space-single-cover-effective-descent",
+  "lem-sfb-etale-stabilizer-preserving-affine-moduli",
+  "lem-sfb-finite-flat-affine-groupoid-moduli",
+  "lem-sfb-finite-inertia-etale-affine-charts",
+  "lem-sfb-space-separated-diagonal-closed",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUV (lemma-etale-separated-over-keel-mori); the local-square assertion is established explicitly from Tags 0DUE, 0DUS, 0DUT and singleton etale descent, rather than using a property only recorded inside the proof of 0DUT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Separated etale stabilizer preserving maps of stacks with finite inertia induce cartesian squares of categorical moduli spaces and separated etale maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, ordinary groupoids or manifold groupoids, not the stated moduli assertion for stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coarse moduli spaces commute with inertia preserving etale morphisms between Deligne Mumford stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk_comp\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkMap_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.stalkMap (CategoryTheory.CategoryStruct.comp f g) x =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Hom.stalkMap g ((CategoryTheory.ConcreteCategory.hom f.base) x))\\n      (A\", \"doc\": \"Let $X, Y, Z$ be schemes, and let $f: X \\\\to Y$ and $g: Y \\\\to Z$ be morphisms of schemes. For any point $x \\\\in X$, the ring homomorphism on stalks induced by the composite morphism $g \\\\circ f$ at $x$ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.stalkMap (CategoryTheory.CategoryStruct.comp f g) x =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Hom.stalkMap g ((CategoryTheory.ConcreteCategory.hom f.base) x))\\n      (A\", \"doc\": \"For schemes $X$, $Y$, $Z$ and morphisms $f : X \\\\to Y$ and $g : Y \\\\to Z$, the stalk map of the composition $g \\\\circ f$ at a point $x \\\\in X$ satisfies $(g \\\\circ f)_x = g_{f(x)} \\\\circ f_x$, where $f_x$ a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, ordinary groupoids or manifold groupoids, not the stated moduli assertion for stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, ordinary groupoids or manifold groupoids, not the stated moduli assertion for stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer.?preserv|coarseModuli|categoricalModuli|Keel.?Mori",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, ordinary groupoids or manifold groupoids, not the stated moduli assertion for stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local nature of Keel Mori moduli spaces stabilizer preserving morphisms",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated etale stabilizer preserving maps between finite inertia stacks induce cartesian coarse moduli squares",
+   "results": "Actual msearch result: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, general morphism-property descent or etale over-categories; no stack moduli theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coarse moduli spaces commute with inertia preserving etale morphisms between Deligne Mumford stacks",
+   "results": "Actual msearch result: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, general morphism-property descent or etale over-categories; no stack moduli theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer.?preserv|coarseModuli|categoricalModuli|Keel.?Mori",
+   "results": "Actual msearch result: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, general morphism-property descent or etale over-categories; no stack moduli theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"pullback\"",
+   "results": "Actual msearch result: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, general morphism-property descent or etale over-categories; no stack moduli theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated etale stabilizer preserving stack morphisms descend to cartesian coarse moduli squares",
+   "results": "Actual msearch result: 8 hits; CategoryTheory.MorphismProperty.instDescendsAlongOfIsStableUnderBaseChangeOfHasOfPrecompPropertyOfRespectsRight, AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSeparated.instMorphismRestrict, AlgebraicGeometry.IsEtale, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.instCompScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, general morphism-property descent or etale over-categories; no stack moduli theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-keel-mori-uniform-topological-moduli",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Coarse moduli schemes restrict to open substacks. The inherited creation chain ends at a Lean module rather than a DAG node; the explicit main-20261015 anchor is paragraph (3) of det-thm-sf-ctf-stability-direct-images, the alteration-moduli prerequisite below the Rj_* preservation input. Supporting input: Keel--Mori uniform categorical space and universal homeomorphism, before identifying it with the given coarse scheme. Local input: Stabilizer-preserving etale morphisms give cartesian moduli squares.",
+   "via": [
+    "lem-sfb-keel-mori-uniform-topological-moduli",
+    "lem-sfb-coarse-moduli-open-restriction",
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-keel-mori-stabilizer-preserving-etale",
+  "worker": "stage1",
+  "summary": "Q155 follows the local affine-chart proof of Stacks 0DUV, using existing finite-inertia charts, affine comparison and gluing nodes. Adds only singleton-cover effective descent of etale algebraic spaces. Proves uniform categoricality by explicit overlap gluing, separatedness by the diagonal and universal homeomorphisms, and transport to the supplied categorical spaces by inverse universal factorizations. No statement change or Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Coarse moduli schemes restrict to open substacks. The inherited creation chain ends at a Lean module rather than a DAG node; the explicit main-20261015 anchor is paragraph (3) of det-thm-sf-ctf-stability-direct-images, the alteration-moduli prerequisite below the Rj_* preservation input. Supporting input: Keel--Mori uniform categorical space and universal homeomorphism, before identifying it with the given coarse scheme. Local input: Stabilizer-preserving etale morphisms give cartesian moduli squares. The split realizes this supporting moduli input to paragraph (3) of the newest direct-images proof, leaving the alteration route unchanged. The historical ancestor is null, as blueprint_refs.py reports.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General scheme coproduct, algebraic-space fibre-product or diagonal criterion used as a foundation tool; it replaces no step of the constructible direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "General scheme coproduct, algebraic-space fibre-product or diagonal criterion used as a foundation tool; it replaces no step of the constructible direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-a6440426c",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-a6440426c (reviewer sub-agent of L); spot-checked: PASS: I read the item's ten steps and the new descent node in full, and made no fixes. Sources: I read Stacks 0DUT (whole proof, including the cartesian-square claim and the uniform-categorical paragraph whose details Stacks omits) and 0DUV (whole proof, including the last diagonal paragraph). For the new node I read 0ADV statement and proof of (1), and checked that the 0ADT and 042B labels exist. Route: the delivery takes a different route from Stacks. Stacks applies Keel-Mori to both stacks. The delivery instead charts X2 by the 0DUE charts, uses 0DUS/0DUR to compare each chart pullback C_i, glues with lem-sfb-etale-local-moduli-gluing, and descends N_i->B_i to Q1->Q2 with the new node. This avoids citing the parent Keel-Mori node, which would make a cycle; my closure check finds none. It also avoids using the cartesian squares that appear only inside the 0DUT proof. Checks by step: (1) the hypotheses of the chart and groupoid-moduli nodes match clause by clause the vertical hypotheses of the gluing node. (2) The permanence clause makes the overlap projections separated, etale and stabilizer-preserving; the factorizations over f_i and f_j are inverse. (3) Step 3 writes out the uniform categoricality that Stacks omits; the flat base changes, the etale cover from the trf fibre-product lemma and sheaf gluing are all correct. (4) The comparison node's hypotheses hold: A_i has a finite flat affine cover and f_i has affine target; evaluating the inertia isomorphism on T-objects gives the automorphism-sheaf isomorphism. (5) I recomputed X1 x A_ij = C_i x_{N_i}(N_i x B_ij); the cocycle follows from uniqueness. (6)-(7) Coproduct cover, descent, then target-local equivalence via the Isom sheaf and stack effectivity. (8) Uniform categoricality and the universal homeomorphism property pass to the base change. (9) The closed-set transfer uses only a commuting square with homeomorphic verticals, then the 04Y0 node. (10) Inverse universal factorizations, and h-bar is identified by uniqueness. Edge cases: empty X2, h=id, and pt->BG (excluded by the inertia hypothesis). New node: B1-B9 hold. I tested the identity cover, the empty case, a non-quasi-compact infinite disjoint union and a Galois twist. It is not a duplicate: lem-sfb-space-finite-type-fppf-effectivity needs finite type over a scheme base; the trf 02W5 nodes concern schemes over a scheme; 04S6 bootstrap gives representability only; the pbc descent-glue node works on a small etale site; the open-descent node descends properties only. Batch-5: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are generic algebraic-space foundations, not steps of the trace-formula or Poincare-duality proofs. The listed sfb nodes reach the trace-formula chapter only through that definition, so I accepted them. Tool uses: trf fibre products (sk-i-curve-zero), the pbc coproduct (a mathlib leaf), and the trf definition. Minor remarks only: the 076V citation in step 1 is redundant; the report mentions a citations.json that is not in the commit. The item is not superseded: in live it is still unsplit, and its statement is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KeelMoriStabilizerPreservingEtale",
+  "declaration": "AlgebraicGeometry.exists_keelMori_stabilizer_preserving_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/KeelMoriStabilizerPreservingEtale.lean",
+  "statement": "theorem exists_keelMori_stabilizer_preserving_etale (k : Type u) [Field k] (X₁ : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (X₂ : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))) (hX₁ : IsDeligneMumfordModuliStack X₁) (hX₂ : IsDeligneMumfordModuliStack X₂) (hfinite₁ : IsRepresentableFiniteModuliMap (moduliInertiaProjection X₁)) (hfinite₂ : IsRepresentableFiniteModuliMap (moduliInertiaProjection X₂)) (h : BasedFunctor X₁ X₂) (hrep : IsRepresentableByAlgebraicSpaces h) (het : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) X₂) (Z : AlgebraicSpace (Spec (.of k))) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange h T t Z a → SpaceMapIsEtale Z T a) (hsep : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) X₂) (Z : AlgebraicSpace (Spec (.of k))) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange h T t Z a → AlgebraicSpace.IsRepresentableWith (fun _ _ f ↦ IsProper f.left) (pullback.diagonal a)) (hstab : (moduliInertiaComparison h).toFunctor.IsEquivalence) (M₁ M₂ : AlgebraicSpace (Spec (.of k))) (p₁ : BasedFunctor X₁ (discreteModuli M₁.obj.obj)) (p₂ : BasedFunctor X₂ (discreteModuli M₂.obj.obj)) (hp₁ : ∀ Z : AlgebraicSpace (Spec (.of k)), Function.Bijective (fun a : M₁.obj.obj ⟶ Z.obj.obj ↦ p₁.comp (discreteModuliMap a))) (hp₂ : ∀ Z : AlgebraicSpace (Spec (.of k)), Function.Bijective (fun a : M₂.obj.obj ⟶ Z.obj.obj ↦ p₂.comp (discreteModuliMap a))) : ∃ hbar : M₁.obj.obj ⟶ M₂.obj.obj, p₁.comp (discreteModuliMap hbar) = h.comp p₂ ∧ (∀ b : M₁.obj.obj ⟶ M₂.obj.obj, p₁.comp (discreteModuliMap b) = h.comp p₂ → b = hbar) ∧ AlgebraicSpace.IsEtale hbar ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ f ↦ IsClosedImmersion f.left) (pullback.diagonal hbar) ∧ ∃ e : BasedFunctor X₁ (moduliTwoFiberProduct (discreteModuliMap hbar) p₂), e.toFunctor.IsEquivalence ∧ e.comp (moduliTwoFiberFst (discreteModuliMap hbar) p₂) = p₁ ∧ e.toFunctor ⋙ ObjectProperty.ι _ ⋙ Comma.snd (discreteModuliMap hbar).toFunctor p₂.toFunctor = h.toFunctor",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing inertia, representable-finite scheme tests and canonical inertia comparison. Adds their already-landed owning nodes to stmt_deps; no new notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-645f94087",
+  "group": "NX",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion matches the node and Stacks 0DUV: field, DM stacks, finite inertia for both stacks (X1 copy implied), h representable/etale/proper-diagonal, IsEquivalence of the canonical moduliInertiaComparison, categorical moduli spaces with universal property only, unique hbar etale with closed-immersion diagonal, equivalence pinned by projections p1 and h. lean.statement verbatim. Only lean and stmt_deps differ from live; added deps own the declarations used. New existing:true def-sfb-moduli-inertia-comparison records the plain defs in the unchanged DmStabilizerIsomorphismOpenLocus module (accepted H2 repair pattern, no cycle, no duplicate). Notes only: inline het/hsep instead of IsEtaleModuliMap (same form as landed sibling); representable IsEtale for hbar is fine (Stacks 0418). No hollow defs, docstrings and 10 proof steps present, both report sections present; not recompiled, worker compile clean 58.9 s."
+ }
+}

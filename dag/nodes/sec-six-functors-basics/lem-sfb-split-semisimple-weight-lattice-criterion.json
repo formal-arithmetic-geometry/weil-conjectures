@@ -1,0 +1,356 @@
+{
+ "id": "lem-sfb-split-semisimple-weight-lattice-criterion",
+ "kind": "statement",
+ "title": "Weight-lattice criterion for split semisimple groups over a characteristic-zero field",
+ "statement": "Let $k$ be a field of characteristic zero [def-weil-field], and fix an algebraic closure $\\bar k$ [def-weil-algebraic-closure]. Let $H$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme], semisimple in the sense that $H_{\\bar k}$ has no nontrivial smooth connected solvable normal closed subgroup, where solvable means that successive commutator subgroup schemes become trivial. Let $S\\subseteq H$ be a split maximal torus [def-sfb-tori-multiplicative-type]: $S\\simeq\\mathbf G_m^r$ and $S_{\\bar k}$ is maximal among tori in $H_{\\bar k}$, with $\\mathbf G_m(A)=A^\\times$. Put $X=\\operatorname{Hom}_{k\\text{-grp}}(S,\\mathbf G_m)$ and $Y=\\operatorname{Hom}_{k\\text{-grp}}(\\mathbf G_m,S)$, paired by $\\chi\\circ\\nu(t)=t^{\\langle\\chi,\\nu\\rangle}$. Let $\\Phi\\subset X$ be the nonzero characters in the adjoint action of $S$ on the tangent space $\\operatorname{Lie}(H)=T_eH$, and let $\\alpha^\\vee\\in Y$ be their coroots, normalized by the opposite rank-one root subgroups. Extend the pairing rationally to $V=X\\otimes_{\\mathbf Z}\\mathbf Q$ and define the full weight lattice by\n$$P(\\Phi)=\\{v\\in V:\\langle v,\\alpha^\\vee\\rangle\\in\\mathbf Z\\text{ for every }\\alpha\\in\\Phi\\}.$$\nThen every surjective homomorphism $H'\\to H$ from a connected semisimple $k$-group scheme with finite central scheme-theoretic kernel is an isomorphism if and only if $X=P(\\Phi)$, with $X$ embedded in $V$ by $x\\mapsto x\\otimes1$. Finite kernel means a finite-dimensional coordinate algebra, and central means commuting with all group elements after every commutative $k$-algebra extension. Rank zero is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 23.59, printed p.502, both directions; Proposition 23.29, p.493; Theorem 23.55 and Corollary 23.56, p.501; the central-isogeny definition of simply connected is Proposition 19.15, pp.400-401. The field in Chapter 23 is arbitrary; this node only needs characteristic zero. No Stacks tag states this algebraic-group classification criterion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-torus-character-tangent-weights"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=\\bar k$. Smoothness and affineness survive extension to $F$ by [lem-pc-proper-base-change](2) and [lem-weil-pbc-affine-morphism-permanence](1),(2). A finite list of algebra generators remains a generating list after tensoring, so finite type survives. The identity point and [lem-sbc-connected-rational-point-geometrically-connected] give connectedness. Thus $H_F$ is semisimple by the hypothesis, and reductive by [lem-sfb-reductive-borel-pair-structure]. For use over $k$, [lem-sfb-geometric-neutral-reductivity-field-invariance] gives reductivity of the geometric identity component over every algebraically closed extension; the same connectedness argument identifies that component with the full group. The affine smoothness criterion [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] gives finite presentation. Hence $H$ is reductive in the relative sense of [def-sfb-pinned-split-root-realization]. These observations apply equally to any connected semisimple $k$-group $H'$ occurring in the assertion.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-geometric-neutral-reductivity-field-invariance",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 19.13 and 19.15, pp.400-401; preliminary geometric group hypotheses. Base-change inputs: Stacks Tags 01V7, 01SD; affine smoothness Tags 01V6, 02H6."
+   }
+  },
+  {
+   "text": "Choose $S\\simeq\\mathbf G_m^r$. By [lem-sfb-relative-split-torus-matrix-sheaf], characters and cocharacters are integer row and column vectors. Extension $k\\to F$ leaves them unchanged, preserves their composition pairing, and identifies $Y$ with the integer dual of $X$. The tangent comparison of [lem-sfb-affine-group-lie-tangent-calculus] respects conjugation, since conjugating a dual-number point and extending its coefficients commute. Apply [lem-sfb-relative-torus-bundle-weights] to the adjoint coaction: each geometric weight space is $F\\otimes_k\\mathfrak h_\\alpha$. Extending a vector-space basis shows that it is nonzero precisely when the original space is nonzero. Thus the roots over $F$ are precisely the same characters $\\Phi$. By [lem-sfb-reductive-torus-self-centralizer], $C_H(S)=S$; evaluating this equality on algebras over any algebraically closed extension shows that any torus containing $S$ there equals $S$, since it is commutative. Therefore the relative maximal-torus hypotheses of [lem-sfb-arbitrary-base-root-lines-coroots] hold. That node identifies the normalized coroots under every scalar extension and gives their rank-one root modules. Consequently the pairings, root reflections and the defining integrality tests for $P(\\Phi)$ are identical over $k$ and $F$.",
+   "uses": [
+    "lem-sfb-relative-split-torus-matrix-sheaf",
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-relative-torus-bundle-weights",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-arbitrary-base-root-lines-coroots"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), pp.233-234; Theorem 21.11 and Corollary 21.12, pp.428-430; root data unchanged under field extension, proof of Corollary 23.27, p.493."
+   }
+  },
+  {
+   "text": "The root decomposition and rank-one reflections of [lem-sfb-reductive-rank-one-reflections] for $(H_F,S_F)$ supply a finite root set and a finite reflection group. To obtain a Borel containing the specified torus without changing it, choose an integer cocharacter regular for these finitely many nonzero characters: in integer coordinates use $(1,N,\\ldots,N^{r-1})$, choosing an integer $N$ outside the finite set of zeros of their nonzero coordinate polynomials. For $r=0$, take $0$. Then [lem-sfb-regular-cocharacter-borel-description] supplies a Borel containing $S_F$. For this pair, [lem-sfb-reductive-borel-pair-structure] gives its reduced root datum and a simple-root base $\\Delta$. By [lem-sfb-semisimple-roots-span], $\\Phi$ spans $V=X\\otimes\\mathbf Q$. Transporting the integer data by Step 2 gives a reduced based root datum on $X$ over the original field, and the original pair $(H,S)$ is a split realization in [def-sfb-pinned-split-root-realization]: the tangent zero part and the root-line conditions are exactly those of Step 2 and the cited root decomposition. By [lem-sfb-root-datum-lattice-embedding], $P=P(\\Phi)$ is free of rank $\\dim V$ and contains $Q=\\mathbf Z\\Phi$ with finite index. Since the integer pairing gives $Q\\subseteq X\\subseteq P$, also $P/X$ is finite.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-semisimple-roots-span",
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-root-datum-lattice-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.48, p.439; Appendix C.34-C.35, p.615; diagrams and their weight lattices before Theorem 23.58, p.501."
+   }
+  },
+  {
+   "text": "Suppose first $X=P$. Let $q:H'\\to H$ be any surjective homomorphism with finite central scheme-theoretic kernel as in the assertion. Its base change $q_F$ is still surjective: every nonempty affine fibre remains nonempty after a residue-field extension, because its nonzero coordinate vector space has nonzero scalar extension. Kernels are fibre products with the identity, so their coordinate algebras extend by tensor product and remain finite-dimensional. Centrality remains true by its definition on all algebra points. Step 1 makes both groups over $F$ semisimple, so [lem-sfb-semisimple-central-isogeny-multiplicative] makes $q_F$ faithfully flat. For the Borel pair containing $S_F$ from Step 3, [lem-sfb-central-isogeny-borel-root-compatibility] gives a maximal torus $S'$ in $H'_F$ mapping to $S_F$, with roots identified by pullback and with the coroot pairing preserved. By [lem-sfb-isogeny-root-power-laws], $h=q_{S'}^*:X\\hookrightarrow X'=X^*(S')$ has finite cokernel. Write $h_{\\mathbf Q}:V\\simeq X'\\otimes\\mathbf Q$ for its rational extension and $\\Phi'=h(\\Phi)$.",
+   "uses": [
+    "lem-sfb-semisimple-central-isogeny-multiplicative",
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-sfb-isogeny-root-power-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.29, p.493, starting with an arbitrary central cover; Proposition 23.5, pp.485-486; Proposition 19.15, pp.400-401."
+   }
+  },
+  {
+   "text": "For each $x'\\in X'$ and each corresponding coroot, pairing preservation gives $\\langle h_{\\mathbf Q}^{-1}(x'),\\alpha^\\vee\\rangle=\\langle x',(h\\alpha)^\\vee\\rangle\\in\\mathbf Z$. Hence $h_{\\mathbf Q}^{-1}(X')\\subseteq P=X$, while $h(X)\\subseteq X'$ holds by definition. Therefore $X'=h(X)$. All root exponents are $1$ by centrality in [lem-sfb-isogeny-root-power-laws]. The isomorphism criterion for every isogeny inducing these data in [lem-sfb-root-datum-isogeny-realization] now implies that the actual map $q_F$ is an isomorphism. Finally $q$ itself is an isomorphism: if $A=k[H]\\to B=k[H']$ is its coordinate map, tensoring with $F$ is bijective. Choose bases of its kernel and cokernel and extend these bases over $F$; exactness of scalar extension of vector spaces forces both to be zero. Thus $A\\to B$ is bijective, with inverse a ring map, and its spectrum is the inverse group-scheme map. This proves the asserted universal property over $k$, without assuming the cover is split over $k$.",
+   "uses": [
+    "lem-sfb-isogeny-root-power-laws",
+    "lem-sfb-root-datum-isogeny-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.29, p.493, the displayed lattice chain; Proposition 23.5, pp.485-486, isomorphism criterion; affine descent by scalar extension written explicitly."
+   }
+  },
+  {
+   "text": "Conversely suppose $X\\ne P$. Keep the roots $\\Phi\\subseteq P$, and regard each coroot as its rational functional restricted to $P$. By definition of $P$ these are integer-valued. For $v\\in P$, $s_\\alpha(v)=v-\\langle v,\\alpha^\\vee\\rangle\\alpha$ lies in $P$; the same involution formula gives equality $s_\\alpha(P)=P$. The rational root and coroot reflection identities therefore restrict to this lattice. Distinct coroots remain distinct since $P$ spans $V$; reducedness, the finite reflection group, and the same simple-root base are unchanged. Thus $(P,\\Phi,P^\\vee,\\Phi^\\vee,\\Delta)$ is a reduced based root datum in [def-sfb-pinned-split-root-realization]. Here $P^\\vee=\\operatorname{Hom}_{\\mathbf Z}(P,\\mathbf Z)$ and the coroots denote the restricted functionals.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.35, p.615; Proposition 23.59, p.502, inclusion into the weight-lattice datum."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pinned-split-root-classification] with $A=k$ to obtain a split realization $(H_P,S_P)$ of the datum on $P$. Its geometric fibre is reductive by the definition of split realization. The roots span $P\\otimes\\mathbf Q=V$, so [lem-sfb-semisimple-roots-span] makes $(H_P)_F$ semisimple. The group $H_P$ is smooth affine of finite type by its realization data and is connected: if it had a disconnection into two nonempty open-and-closed pieces, their scalar extensions would remain nonempty and disconnect its connected geometric fibre. Hence it is a connected semisimple $k$-group in the sense of the item. The inclusion $i:X\\hookrightarrow P$ has finite cokernel by Step 3, sends each root to itself, and its dual restricts each extended coroot to the original one. Apply [lem-sfb-split-central-isogeny-lifting] over $k$ to $(H_P,S_P)$ and the original split realization $(H,S)$. It gives a finite faithfully flat homomorphism $f:H_P\\to H$ with central kernel $D_k(P/X)$ and with character pullback exactly $i$.",
+   "uses": [
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-semisimple-roots-span",
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-split-central-isogeny-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.55 and Corollary 23.56, p.501; Proposition 23.59, p.502, construction of the obstructing central cover; Proposition 21.48, p.439."
+   }
+  },
+  {
+   "text": "This $f$ is not an isomorphism. Indeed $P/X\\ne0$, and the group algebra $k[P/X]$ has basis $e^c$ indexed by $c\\in P/X$, so its dimension is $|P/X|>1$. Thus the kernel $D_k(P/X)$ supplied by [lem-sfb-split-central-isogeny-lifting] is a nontrivial finite group scheme; an isomorphism has trivial kernel. This contradicts the universal property if that property were assumed. We have proved its contrapositive and hence the converse. In rank zero, Step 3 gives $V=0$ and $X=P=0$; the first implication still applies, while the assumption of this second implication never occurs.",
+   "uses": [
+    "lem-sfb-split-central-isogeny-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.59, p.502, nonisomorphic cover from a strict lattice enlargement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-geometric-neutral-reductivity-field-invariance",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-relative-split-torus-matrix-sheaf",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-relative-torus-bundle-weights",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-arbitrary-base-root-lines-coroots",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-semisimple-roots-span",
+  "lem-sfb-root-datum-lattice-embedding",
+  "lem-sfb-semisimple-central-isogeny-multiplicative",
+  "lem-sfb-central-isogeny-borel-root-compatibility",
+  "lem-sfb-isogeny-root-power-laws",
+  "lem-sfb-root-datum-isogeny-realization",
+  "lem-sfb-pinned-split-root-classification",
+  "lem-sfb-split-central-isogeny-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 23.29 and 23.59, pp.493,502; existence 23.55 and isogeny 23.9; field-extension details made explicit using existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "simply.connected|weight.lattice",
+   "results": "{\"t\": \"2026-10-24T13:27:10Z\", \"tool\": \"grep\", \"query\": \"simply.connected|weight.lattice\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract root pairings, Lie algebras, topological simple connectedness, Azumaya algebras or abstract groups, not central isogenies of semisimple algebraic group schemes; read RootSystem/Defs.lean:102-109 and BaseChange.lean:38-95 for the abstract-root-pairing candidates"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Central isogenies onto a split semisimple algebraic group are all isomorphisms if and only if every integral weight is a character of its split maximal torus",
+   "results": "{\"t\": \"2026-10-24T13:27:10Z\", \"tool\": \"leansearch\", \"query\": \"Central isogenies onto a split semisimple algebraic group are all isomorphisms if and only if every integral weight is a character of its split maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsCentral.instIsAzumaya\", \"LieAlgebra.IsKilling.corootSpace_eq_bot_iff\", \"CategoryTheory.IsSplitEpi.of_iso\", \"Subgroup.centerCongr_apply_coe\", \"LieAlgebra.IsKilling.coroot_eq_iff\", \"SpecialLinearGroup.centerEquivRootsOfUnity.congr_simp\", \"Algebra.IsCentral.of_algEquiv\", \"LieAlgebra.IsKilling.coroot.congr_simp\"], \"digest\": \"dab62eafa773de64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract root pairings, Lie algebras, topological simple connectedness, Azumaya algebras or abstract groups, not central isogenies of semisimple algebraic group schemes; read RootSystem/Defs.lean:102-109 and BaseChange.lean:38-95 for the abstract-root-pairing candidates"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootDatum\", \"weight\"",
+   "results": "{\"t\": \"2026-10-24T13:27:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"RootDatum\\\", \\\"weight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract root pairings, Lie algebras, topological simple connectedness, Azumaya algebras or abstract groups, not central isogenies of semisimple algebraic group schemes; read RootSystem/Defs.lean:102-109 and BaseChange.lean:38-95 for the abstract-root-pairing candidates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split semisimple algebraic group over an arbitrary field of characteristic zero is simply connected exactly when its character lattice is the weight lattice",
+   "results": "{\"t\": \"2026-10-24T13:27:12Z\", \"tool\": \"leanfinder\", \"query\": \"A split semisimple algebraic group over an arbitrary field of characteristic zero is simply connected exactly when its character lattice is the weight lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"LieAlgebra.IsKilling.instSemisimple\"], \"digest\": \"adfb345c81908b13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract root pairings, Lie algebras, topological simple connectedness, Azumaya algebras or abstract groups, not central isogenies of semisimple algebraic group schemes; read RootSystem/Defs.lean:102-109 and BaseChange.lean:38-95 for the abstract-root-pairing candidates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple group is simply connected if its root datum has the maximal character lattice, and conversely",
+   "results": "{\"t\": \"2026-10-24T13:27:13Z\", \"tool\": \"leanfinder\", \"query\": \"A semisimple group is simply connected if its root datum has the maximal character lattice, and conversely\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsSemisimple.booleanGenerators\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsKilling.instSemisimple\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"LieAlgebra.IsSemisimple\", \"LieAlgebra.IsSemisimple.sSup_atoms_eq_top\"], \"digest\": \"c85bb23200e601bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract root pairings, Lie algebras, topological simple connectedness, Azumaya algebras or abstract groups, not central isogenies of semisimple algebraic group schemes; read RootSystem/Defs.lean:102-109 and BaseChange.lean:38-95 for the abstract-root-pairing candidates"
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|Isogeny|weightLattice|WeightLattice",
+   "results": "{\"t\": \"2026-10-24T13:57:21Z\", \"tool\": \"grep\", \"query\": \"isogeny|Isogeny|weightLattice|WeightLattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras and abstract centers only; no classification of central isogenies of semisimple group schemes. Read Mathlib/LinearAlgebra/RootSystem/Defs.lean:102-109 (RootDatum) and :550-556 (coxeterWeight), which supply no algebraic-group criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every central isogeny onto a split semisimple group is an isomorphism exactly when every integral weight is a torus character",
+   "results": "{\"t\": \"2026-10-24T13:57:21Z\", \"tool\": \"leansearch\", \"query\": \"Every central isogeny onto a split semisimple group is an isomorphism exactly when every integral weight is a torus character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.centerCongr_apply_coe\", \"LieModule.weightSpace.congr_simp\", \"Subgroup.centerCongr_symm_apply_coe\", \"CategoryTheory.IsSplitEpi.of_iso\", \"Subgroup.centerCongr\", \"SpecialLinearGroup.centerEquivRootsOfUnity.congr_simp\", \"LieModule.map_genWeightSpace_eq\", \"Submonoid.centerCongr_apply_coe\"], \"digest\": \"619906f9f512f468\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras and abstract centers only; no classification of central isogenies of semisimple group schemes. Read Mathlib/LinearAlgebra/RootSystem/Defs.lean:102-109 (RootDatum) and :550-556 (coxeterWeight), which supply no algebraic-group criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"weight\"",
+   "results": "{\"t\": \"2026-10-24T13:57:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"RootPairing\\\", \\\"weight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.coxeterWeight\", \"RootPairing.coxeterWeight_swap\", \"RootPairing.coxeterWeight_flip\", \"RootPairing.coxeterWeight_zero_iff_isOrthogonal\", \"RootPairing.coxeterWeightIn\", \"RootPairing.algebraMap_coxeterWeightIn\", \"RootPairing.coxeterWeight_nonneg\", \"RootPairing.four_smul_rootForm_sq_eq_coxeterWeight_smul\"], \"digest\": \"5d115272d30b2ef5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras and abstract centers only; no classification of central isogenies of semisimple group schemes. Read Mathlib/LinearAlgebra/RootSystem/Defs.lean:102-109 (RootDatum) and :550-556 (coxeterWeight), which supply no algebraic-group criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split semisimple algebraic group is simply connected if and only if its torus character lattice is the full weight lattice",
+   "results": "{\"t\": \"2026-10-24T13:57:26Z\", \"tool\": \"leanfinder\", \"query\": \"A split semisimple algebraic group is simply connected if and only if its torus character lattice is the full weight lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"LieAlgebra.IsKilling.span_weight_eq_top\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"LieAlgebra.IsKilling.instSemisimple\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieAlgebra.IsKilling.instHasTrivialRadical\"], \"digest\": \"f3edebecc9e714fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras and abstract centers only; no classification of central isogenies of semisimple group schemes. Read Mathlib/LinearAlgebra/RootSystem/Defs.lean:102-109 (RootDatum) and :550-556 (coxeterWeight), which supply no algebraic-group criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Central coverings of semisimple group schemes correspond contravariantly to finite index enlargements of character lattices inside the integral weight lattice",
+   "results": "{\"t\": \"2026-10-24T14:00:49Z\", \"tool\": \"leanfinder\", \"query\": \"Central coverings of semisimple group schemes correspond contravariantly to finite index enlargements of character lattices inside the integral weight lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.indexEquiv\", \"RootDatum\", \"RootPairing.Equiv.coweightEquiv\", \"RootPairing.EmbeddedG2.indexEquivAllRoots\", \"RootPairing.EmbeddedG2.setOf_index_eq_univ\", \"RootPairing.Hom.coroot_coweightMap\", \"RootPairing.Equiv.coweightHom\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\"], \"digest\": \"ba01ec7bbeac8caf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras and abstract centers only; no classification of central isogenies of semisimple group schemes. Read Mathlib/LinearAlgebra/RootSystem/Defs.lean:102-109 (RootDatum) and :550-556 (coxeterWeight), which supply no algebraic-group criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev RootDatum|def coxeterWeight|def coroot_coweightMap|def indexEquiv",
+   "results": "{\"t\": \"2026-10-24T14:01:17Z\", \"tool\": \"grep\", \"query\": \"abbrev RootDatum|def coxeterWeight|def coroot_coweightMap|def indexEquiv\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn.lean\", \"Mathlib/LinearAlgebra/RootSystem/Finite/G2.lean\"], \"digest\": \"26ee89b6f9398268\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras and abstract centers only; no classification of central isogenies of semisimple group schemes. Read Mathlib/LinearAlgebra/RootSystem/Defs.lean:102-109 (RootDatum) and :550-556 (coxeterWeight), which supply no algebraic-group criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-semisimple-geometric-root-comparison",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 21.11--21.12, printed pp.428--430 (roots and normalized coroots); 21.29--21.35, printed pp.433--435 (chosen positive system and Borel); 23.56, 23.58--23.59, printed pp.501--502 (field-independent split root datum and simply connected weight lattice). Supporting numerical input to geometric scalar extension: Milne Proposition 23.59, the simply connected weight-lattice criterion over the original split field and over its algebraic closure.",
+   "via": [
+    "lem-sfb-split-semisimple-geometric-root-comparison",
+    "lem-sfb-split-charzero-weyl-character-identity",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-semisimple-weight-lattice-criterion",
+  "worker": "stage1",
+  "summary": "Proved the two directions by Milne’s lattice sandwich and by constructing the full-weight root datum over k. Reused existing generic group/root-datum statements; no new nodes. Kept statement and statement dependencies unchanged, including rank zero and arbitrary characteristic-zero k.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 21.11--21.12, printed pp.428--430 (roots and normalized coroots); 21.29--21.35, printed pp.433--435 (chosen positive system and Borel); 23.56, 23.58--23.59, printed pp.501--502 (field-independent split root datum and simply connected weight lattice). Supporting numerical input to geometric scalar extension: Milne Proposition 23.59, the simply connected weight-lattice criterion over the original split field and over its algebraic closure. Steps 1-3 identify the split-field diagram; steps 4-5 realize Milne 23.29; steps 6-8 realize Milne 23.59. The latest direct-images proof (3) remains the higher route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scalar-extension or geometric group/root-datum input stated independently of the six-functor unit; used in the explicit Milne 23.29/23.59 proof, not to replace the higher direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scalar-extension or geometric group/root-datum input stated independently of the six-functor unit; used in the explicit Milne 23.29/23.59 proof, not to replace the higher direct-image route."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic scalar-extension or geometric group/root-datum input stated independently of the six-functor unit; used in the explicit Milne 23.29/23.59 proof, not to replace the higher direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic scalar-extension or geometric group/root-datum input stated independently of the six-functor unit; used in the explicit Milne 23.29/23.59 proof, not to replace the higher direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NP-4e8508234",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-4e8508234 (reviewer sub-agent of L); spot-checked: This is a no-new-node split of Milne iAG Prop. 23.59 (p.502), with the forward direction following 23.29 (p.493); I read both in the PDF and the item statement matches, restricted to characteristic 0. I checked all 8 steps against all 22 cited statements. Step 1 verifies the relative reductivity of def-sfb-pinned-split-root-realization through base change, connectedness from the identity section, and field-invariance. Step 2 gets maximality of every geometric fibre from the scheme-theoretic C_H(S)=S, which is the hypothesis of the arbitrary-base coroot lemma; weights base-change by the torus-bundle lemma. Step 3 picks a regular integer cocharacter (1,N,...,N^{r-1}) to get a Borel; roots-span and lattice-embedding then give Q ⊆ X ⊆ P with P/X finite. Steps 4-5 run Milne's sandwich: central-isogeny compatibility gives the pairing identity, so h_Q^{-1}(X') ⊆ P = X, and root-datum-isogeny-realization ('every such isogeny') applied with q(T_H)=T makes q_F an isomorphism; descent to k is by exactness of scalar extension on vector spaces. Step 6 (the root datum on P) is genuinely elementary. Step 7 builds H_P by pinned classification over k and checks that it is semisimple and connected; split-central-isogeny-lifting with h=i and b=id then gives f with central kernel D_k(P/X). Step 8 (dim k[P/X] > 1) is elementary. Small cases SL2, PGL2 (kernel mu2), rank 0 and k=Q all check. There is no cycle, and no existing node states the k-criterion: central-lattice-enlargement and torus-simply-connected-cover are over F only. I accept the four generic base-change tool_uses. Batch-5: all 15 flagged citations reach sec-trace-formula only through generic sk-i-curve-zero lemmas (fppf covering base change and fppf-is-fpqc, smooth fpqc descent, smooth composition, split torus smoothness, fg torsion-free abelian groups are free, the descent-datum definition). None of these is the trace formula, Poincare duality or a step of their proofs, so all 15 are acceptable. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitSemisimpleWeightLatticeCriterion",
+  "declaration": "AlgebraicGeometry.splitSemisimple_weightLattice_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitSemisimpleWeightLatticeCriterion.lean",
+  "statement": "theorem splitSemisimple_weightLattice_criterion {k : Type u} [Field k] [CharZero k] (H S : Grp (Over (Spec (.of k)))) (hH : SolvableGroupStructure.IsAlgebraic H) (hHs : Smooth H.X.hom) (hHc : ConnectedSpace H.X.left) (hHss : IsSemisimpleGroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj H).X) (i : S ⟶ H) (hi : IsClosedSubgroupScheme i.hom.hom) (hsplit : ∃ r : ℕ, Nonempty (S ≅ MultiplicativeType.splitTorus k r)) (hmax : ReductiveTorusCentralizer.IsMaximalTorus ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).map i)) [IsCommMonObj S.X] [IsCommMonObj (StandardGroupSchemes.multiplicative k)] (a : ModObj S.X H.X) (ha : a.smul = (i.hom.hom ⊗ₘ 𝟙 H.X) ≫ GrpObj.conj H.X) (Φ : Finset (Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative k)))) (P : RootDatum Φ (Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative k))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ S))) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative k))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ S)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative k)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative k)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace k _ S H a χ.toMul ≠ ⊥) : (∀ (H' : Grp (Over (Spec (.of k)))), SolvableGroupStructure.IsAlgebraic H' → Smooth H'.X.hom → ConnectedSpace H'.X.left → IsSemisimpleGroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj H').X → ∀ q : H' ⟶ H, Surjective q.hom.hom.left → IsFinite (GrpObj.ker q.hom.hom).hom → (∀ (A : Type u) [CommRing A] [Algebra k A] (x : StandardGroupSchemes.affine k A ⟶ GrpObj.ker q.hom.hom) (g : StandardGroupSchemes.affine k A ⟶ H'.X), (x ≫ GrpObj.kerι q.hom.hom) * g = g * (x ≫ GrpObj.kerι q.hom.hom)) → IsIso q) ↔ ∀ v : ℚ ⊗[ℤ] Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative k)), (∃ χ : Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative k)), TensorProduct.mk ℤ ℚ _ 1 χ = v) ↔ ∀ α : Φ, ∃ n : ℤ, (((Int.castAddHom ℚ).toIntLinearMap.comp (P.coroot' α)).liftBaseChange ℚ) v = (n : ℚ)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d7bcffce",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. Hypotheses on H: affine finite type (IsAlgebraic), smooth, connected, and IsSemisimpleGroupScheme after extending to the algebraic closure; S is a closed split torus whose extension is maximal (IsMaximalTorus, not largest). X and Y are the actual Grp hom groups with Mathlib's pointwise CommGroup; the two IsCommMonObj binders are true Props. hpair is composition equal to the integer power map on G_m (integer exponent forces the pointwise group). Roots come from conjugation plus the recorded weightSpace; k-point testing suffices because k is infinite. The RootDatum P is canonical: roots span X⊗ℚ by semisimplicity, so reflections and hence coroots are unique (Bourbaki VI.1.1 L1), and the canonical datum exists so the hypotheses are not vacuous. The weight lattice is written inline (RootDatumLattice.weightLattice is lemma-owned, so citing it would be H2). The conclusion quantifies over all covers H' with finite scheme-theoretic kernel, central on all algebra points, concluding IsIso, iff the image of X in ℚ⊗X equals the full weight lattice. Rank 0 and non-algebraically-closed k are covered, with no universe restriction. Only lean plus three definition-node stmt_deps changed; lean.statement is verbatim in the file; proof is sorry only; docstrings carry source, blueprint and proof plan; all imports exist; report sections present. Not recompiled because no file changed."
+ }
+}

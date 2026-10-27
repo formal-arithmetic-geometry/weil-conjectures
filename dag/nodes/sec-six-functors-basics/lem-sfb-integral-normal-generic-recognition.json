@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-integral-normal-generic-recognition",
+ "kind": "statement",
+ "title": "Recognition of normalization without a Noetherian source",
+ "statement": "Let $T$ be a locally Noetherian scheme [pqf-def-locnoeth], and let $a:Z\\to T$ be an integral morphism [def-weil-finite-integral-morphism]. Assume that every local ring of $Z$ is an integrally closed domain [def-weil-pbc-normal-ring], that $a$ induces a bijection between the generic points of irreducible components of $Z$ and of $T$ [def-sc-generic-point, def-weil-irreducible-components], and that for every such generic point $z$ the induced map $\\kappa(a(z))\\to\\kappa(z)$ is an isomorphism [def-weil-residue-field]. Then there is a unique isomorphism of $T$-schemes $Z\\xrightarrow{\\sim}T^\\nu$, where $T^\\nu\\to T$ is the componentwise normalization [def-weil-pbc-reduced-normalization]. No local Noetherianity of $Z$, finiteness of $a$, excellence, or reducedness of $T$ is assumed. The empty scheme is allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035Q, lemma-normalization-normal (3), including its footnote on reductions, and Tag 0H7D, lemma-normalization-trivial; uniqueness from 035Q (4). The generic-point bijection gives finitely many components over each affine open of T, without assuming Z locally Noetherian."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "def-weil-pbc-reduced-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Every quasi-compact open $U\\subseteq T$ is a quasi-compact locally Noetherian scheme: open subschemes are locally Noetherian by [pqf-def-locnoeth]. Apply [lem-weil-pbc-noetherian-finitely-many-components] to $U$ to obtain finitely many irreducible components. Thus the normalization theorems apply to $T$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "035Q, hypothesis on X; verification using Properties 0BA8."
+   }
+  },
+  {
+   "text": "For any scheme $S$ and open $V\\subseteq S$, the irreducible components of $V$ are exactly $C\\cap V$ for components $C$ of $S$ meeting $V$: an open meeting $C$ contains its generic point, and closure in $S$ of a component of $V$ is a maximal irreducible closed subset of $S$. Hence their generic points are exactly the component-generic points of $S$ lying in $V$. Apply this to $U\\subseteq T$ and $a^{-1}U\\subseteq Z$. The assumed generic-point bijection restricts to a bijection between these two sets. Therefore $a^{-1}U$ has finitely many components for every quasi-compact open $U\\subseteq T$. For any quasi-compact open $W\\subseteq Z$, cover $W$ by finitely many opens $a^{-1}U_i$ with $U_i$ affine in $T$; each component-generic point of $W$ is a component-generic point of $Z$ in one of these opens. Their union is finite, so $W$ has finitely many components. This proves the required condition on $Z$ without local Noetherianity of $Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "035Q (3), verification of finiteness of components on inverse images; elementary open-set argument."
+   }
+  },
+  {
+   "text": "Domain local rings imply that $Z$ is reduced: a nilpotent section has zero germ at every point and is zero by the sheaf axiom. By [lem-weil-pbc-reduced-source-factors-through-closed-subscheme], $a$ factors through $T_{\\mathrm{red}}$. Reduction does not change the underlying space or residue fields: affine-locally it is $A\\to A/\\sqrt{0}$, and quotienting either ring by a prime and taking its fraction field gives the same field. For a quasi-compact open $U\\subseteq T$, both $U_{\\mathrm{red}}$ and $a^{-1}U$ are reduced. On affine neighborhoods their component-generic stalks are localizations at minimal primes. The field conclusion of [lem-weil-pbc-minimal-prime-reduced-localization-field] identifies these stalks canonically with their residue fields (the maximal ideals are zero). Under those identifications the generic local-ring maps are exactly the residue-field maps in the hypothesis. They are isomorphisms, and step 2 gives the generic-point bijections. Thus the induced maps on reductions have the required generic-point bijections and generic-local-ring isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "035Q (3), footnote on reductions; definition-birational; Algebra Tag 00EU, lemma-minimal-prime-reduced-ring."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normalization-integral-birational-factor] to $a:Z\\to T$. Step 1 verifies its target condition; step 2 verifies the finite-component condition on all inverse images; step 3 verifies its reduced generic local-ring condition. It gives $e:T^\\nu\\xrightarrow{\\sim}Z^\\nu$ with $a\\circ\\nu_Z\\circ e=\\nu_T$. This use of 035Q (3) does not require $Z$ normal, finite type, or locally Noetherian.",
+   "uses": [
+    "lem-sfb-normalization-integral-birational-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "035Q (3), normalization factorization."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normalization-normal-locally-finite] to $Z$, using the given integrally closed domain local rings and the quasi-compact-open finiteness proved in step 2. It makes $\\nu_Z:Z^\\nu\\to Z$ an isomorphism. Thus $b=\\nu_Z\\circ e:T^\\nu\\to Z$ is an isomorphism, and step 4 gives $a\\circ b=\\nu_T$. Its inverse $b^{-1}:Z\\xrightarrow{\\sim}T^\\nu$ satisfies $\\nu_T\\circ b^{-1}=a$, as required.",
+   "uses": [
+    "lem-sfb-normalization-normal-locally-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "0H7D, normalization of a normal scheme is trivial."
+   }
+  },
+  {
+   "text": "Each irreducible component of $Z$ dominates its corresponding component of $T$: its image contains the image of its generic point, which is the target generic point, and continuity places the image in the closure of that point. Apply [lem-sfb-component-dominant-normalization-lift] to $a$, with the normality of $Z$ and step 1 for $T$. There is at most one morphism $Z\\to T^\\nu$ over $T$, so the inverse from step 5 is the unique such isomorphism. If $T$ is empty then any morphism to it has empty source; all constructions above are empty and give the unique isomorphism. No finiteness of $a$, excellence or reducedness of $T$ has been introduced.",
+   "uses": [
+    "lem-sfb-component-dominant-normalization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "035Q (4), uniqueness for component-dominant normal sources."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-sfb-normalization-integral-birational-factor",
+  "lem-sfb-normalization-normal-locally-finite",
+  "lem-sfb-component-dominant-normalization-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035Q (3), including reductions footnote, 0H7D, and 035Q (4); elementary verification of local component finiteness and generic reduced local-ring hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral birational morphism from a normal scheme is the normalization without noetherian source",
+   "results": "{\"t\": \"2026-10-22T05:15:53Z\", \"tool\": \"leanfinder\", \"query\": \"An integral birational morphism from a normal scheme is the normalization without noetherian source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\"], \"digest\": \"a2aa2f8192f8a8a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib normalizes a supplied morphism; its integral-morphism toNormalization isomorphism does not identify the absolute componentwise normalization or assert this generic-point recognition theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\"",
+   "results": "{\"t\": \"2026-10-22T05:15:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Aesop.LocalRuleSet.applicableNormalizationRules\", \"Aesop.LocalRuleSet.applicableNormalizationRulesWith\", \"Aesop.NormalizationState\", \"Aesop.GoalState.provenByNormalization\", \"Aesop.NormalizationState.notNormal\", \"Aesop.instInhabitedNormalizationState\", \"Aesop.Goal.normalizationState\", \"Aesop.GoalState.isProvenByNormalization\"], \"digest\": \"de4b5d5ce469f615\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib normalizes a supplied morphism; its integral-morphism toNormalization isomorphism does not identify the absolute componentwise normalization or assert this generic-point recognition theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral normal schemes with generic fibres identical to the base are its normalization",
+   "results": "{\"t\": \"2026-10-22T05:15:50Z\", \"tool\": \"leansearch\", \"query\": \"Integral normal schemes with generic fibres identical to the base are its normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"55a2690497565d2a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib normalizes a supplied morphism; its integral-morphism toNormalization isomorphism does not identify the absolute componentwise normalization or assert this generic-point recognition theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|IsNormal",
+   "results": "{\"t\": \"2026-10-22T05:15:50Z\", \"tool\": \"grep\", \"query\": \"normalization|IsNormal\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"17\", \"19\", \"20\", \"24\"], \"digest\": \"e2f17bf45c1b6886\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib normalizes a supplied morphism; its integral-morphism toNormalization isomorphism does not identify the absolute componentwise normalization or assert this generic-point recognition theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal integral cover with unchanged generic points and residue fields is the absolute normalization",
+   "results": "{\"t\": \"2026-10-22T05:16:47Z\", \"tool\": \"leanfinder\", \"query\": \"A normal integral cover with unchanged generic points and residue fields is the absolute normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"5b1d70d410f6eae2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib normalizes a supplied morphism; its integral-morphism toNormalization isomorphism does not identify the absolute componentwise normalization or assert this generic-point recognition theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]irational|[Nn]ormalization.*[Nn]ormal|[Nn]ormal.*[Nn]ormalization",
+   "results": "{\"t\": \"2026-10-22T05:16:43Z\", \"tool\": \"grep\", \"query\": \"[Bb]irational|[Nn]ormalization.*[Nn]ormal|[Nn]ormal.*[Nn]ormalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"303612c0a2492df1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib normalizes a supplied morphism; its integral-morphism toNormalization isomorphism does not identify the absolute componentwise normalization or assert this generic-point recognition theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral normal scheme over a locally noetherian base with identical generic residue fields is its componentwise normalization",
+   "results": "{\"t\": \"2026-10-22T05:42:08Z\", \"tool\": \"leanfinder\", \"query\": \"An integral normal scheme over a locally noetherian base with identical generic residue fields is its componentwise normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\"], \"digest\": \"a08c37e0320eed29\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"IsIntegralHom\"",
+   "results": "{\"t\": \"2026-10-22T05:42:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"IsIntegralHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\"], \"digest\": \"ef4a5ac796d05bd0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Nn]ormal|[Bb]irational",
+   "results": "{\"t\": \"2026-10-22T05:42:03Z\", \"tool\": \"grep\", \"query\": \"normalization.*[Nn]ormal|[Bb]irational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"595bcf5af5c0cfbc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral morphism from a normal scheme inducing bijective generic points and equal residue fields is the normalization",
+   "results": "{\"t\": \"2026-10-22T05:42:04Z\", \"tool\": \"leansearch\", \"query\": \"An integral morphism from a normal scheme inducing bijective generic points and equal residue fields is the normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"86c7fc477a098f11\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recognition of absolute normalization by integral normal source and isomorphisms of generic residue fields",
+   "results": "{\"t\": \"2026-10-22T05:42:42Z\", \"tool\": \"leanfinder\", \"query\": \"Recognition of absolute normalization by integral normal source and isomorphisms of generic residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"29453622bdab0ca9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral normal scheme over a locally noetherian base with identical generic residue fields is its componentwise normalization",
+   "results": "{\"t\": \"2026-10-22T05:42:08Z\", \"tool\": \"leanfinder\", \"query\": \"An integral normal scheme over a locally noetherian base with identical generic residue fields is its componentwise normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\"], \"digest\": \"a08c37e0320eed29\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"IsIntegralHom\"",
+   "results": "{\"t\": \"2026-10-22T05:42:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"IsIntegralHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\"], \"digest\": \"ef4a5ac796d05bd0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Nn]ormal|[Bb]irational",
+   "results": "{\"t\": \"2026-10-22T05:42:03Z\", \"tool\": \"grep\", \"query\": \"normalization.*[Nn]ormal|[Bb]irational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"595bcf5af5c0cfbc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral morphism from a normal scheme inducing bijective generic points and equal residue fields is the normalization",
+   "results": "{\"t\": \"2026-10-22T05:42:04Z\", \"tool\": \"leansearch\", \"query\": \"An integral morphism from a normal scheme inducing bijective generic points and equal residue fields is the normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"86c7fc477a098f11\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recognition of absolute normalization by integral normal source and isomorphisms of generic residue fields",
+   "results": "{\"t\": \"2026-10-22T05:42:42Z\", \"tool\": \"leanfinder\", \"query\": \"Recognition of absolute normalization by integral normal source and isomorphisms of generic residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"29453622bdab0ca9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-componentwise-normalization-smooth-pullback",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence.",
+   "via": [
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-normal-generic-recognition",
+  "worker": "stage1",
+  "summary": "Checked Stacks 035Q (3), 0H7D and 035Q (4) against the exact non-Noetherian-source statement. Proved the inverse-open and arbitrary quasi-compact-open component finiteness explicitly, identified generic stalks after reduction using the existing minimal-prime localization lemma, and separated the three general normalization tools as statement-only nodes. No statement change or Lean attachment.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/nodal-model prerequisites: smooth pullback normalization comparison, generic-point recognition sentence (Stacks 07TD final sentence). This item supplies the general recognition argument used there.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "General Noetherian component finiteness needed for the target; no node in this alteration unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "General reduced-source factorization through reduction, needed to interpret the source footnote; not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "why": "General commutative-algebra tool identifying generic reduced local rings with residue fields; the alteration unit has no such algebra lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-240def022",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-240def022 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full. I checked them against Stacks morphisms.tex: 035E (l.14379), 035Q(1)-(4) and its footnote on reductions (l.14504), 0CDV (l.14588) and 0H7D (l.14649). The item is true and its scope is right. I proved it independently on affine charts: B is a finite product of normal domains, each integral over A/p_i with the same fraction field, so B equals A' (the 035K description), and uniqueness holds because nonzerodivisors map to nonzerodivisors. The citer, the smooth-pullback lemma, needs a source Z that may be non-Noetherian, so the item is a real generalization of lem-per-componentwise-normalization-properties (3), not a duplicate. Step by step: step 1 (open subschemes plus 0BA8) is correct. Step 2 is an elementary topological argument about components of opens and qc covers, and the elementary flag is right. Step 3 (0356, reduction, 00EU) gives exactly the footnote form of birationality in 035Q(3). Steps 4 to 6 meet every hypothesis of the factor, triviality and lift nodes. The dominance check in step 6 is correct. The new nodes are Stacks 035Q(3) with 0CDV, 0H7D and 035Q(4); each is true and strictly smaller than the item, so the split is not a restatement. Stacks omits the uniqueness proof in 035Q(4); I verified it. Edge cases tested: empty T; T=Spec k[eps] with Z=Spec k; nodal and cuspidal curves; a residue-field extension, which the hypotheses exclude. Duplicate search with rg -L over the dag for 035Q, 0H7D, 0CDV, the normalization labels and every citer of def-weil-pbc-reduced-normalization or def-sc-normalization found no node stating any of these at this generality. Accepted tool uses: lem-weil-pbc-noetherian-finitely-many-components, lem-weil-pbc-minimal-prime-reduced-localization-field and lem-weil-pbc-reduced-source-factors-through-closed-subscheme, all generic tools used as black boxes. No SGA citations and no cycle. The missing lean_audit on the new nodes is a maintainer field, not a delivery fault. Maintainer note: lem-per-componentwise-normalization-properties (3) is now a special case of this item and can cite it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralNormalGenericRecognition",
+  "declaration": "AlgebraicGeometry.Scheme.existsUnique_iso_reducedNormalization_of_integral_normal_generic",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralNormalGenericRecognition.lean",
+  "statement": "theorem existsUnique_iso_reducedNormalization_of_integral_normal_generic {T Z : Scheme.{u}} [IsLocallyNoetherian T] (a : Z ⟶ T) [IsIntegralHom a] (hZ : ∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) (hgeneric : Set.BijOn a {z : Z | ∃ C ∈ irreducibleComponents Z, IsGenericPoint z C} {t : T | ∃ C ∈ irreducibleComponents T, IsGenericPoint t C}) (hresidue : ∀ z : Z, (∃ C ∈ irreducibleComponents Z, IsGenericPoint z C) → IsIso (a.residueFieldMap z)) : ∃! e : Z ≅ T.reducedNormalization, e.hom ≫ T.fromReducedNormalization = a",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc91ee7ac",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Clause by clause: [IsLocallyNoetherian T], [IsIntegralHom a] (not finite), hZ normal-domain stalks in the recorded inline form, Set.BijOn on component generic points of Z and T, hresidue IsIso (a.residueFieldMap z) at generic z, conclusion ∃! e : Z ≅ T.reducedNormalization with e.hom ≫ fromReducedNormalization = a. This matches the node and Stacks 035Q(3)(4)/0H7D with no stronger hypotheses. Single explicit universe u, as the node and the citer reducedNormalization_smooth_pullback need. Edge cases checked: empty T, empty Z with nonempty T, nonreduced T (k[ε] vs k), infinitely many locally finite components. Node differs from side-live only in lean; lean.statement verbatim in the file; no definitions; proof is sorry only; source and blueprint docstrings and all 6 proof steps present; imports exist. No duplicate in Mathlib or the project; item not route-dropped. No changes, so no recompile. Note: the second reading was written by the same worker."
+ }
+}

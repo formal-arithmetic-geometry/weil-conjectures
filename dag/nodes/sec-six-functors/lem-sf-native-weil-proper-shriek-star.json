@@ -1,0 +1,284 @@
+{
+ "id": "lem-sf-native-weil-proper-shriek-star",
+ "kind": "statement",
+ "title": "Proper coincidence for native derived Weil direct images",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Use the categories $\\mathrm{WC}^{\\mathrm{der}}(-)$ and the actual equivariant derived operations $h^*,Rh_*,Rh_{0!}$ of [def-sf-native-weil-derived-framework]. Let $h:V\\to W$ be a proper morphism of $k_0$-schemes, with $W$ quasi-compact, quasi-separated [def-weil-quasi-separated-morphism] and locally of finite type [def-weil-finite-type-morphism] over $k_0$. Then there is a natural isomorphism\n$$Rh_{0!}\\cong Rh_*:\\mathrm{WC}^{\\mathrm{der}}(V)\\longrightarrow\\mathrm{WC}^{\\mathrm{der}}(W).$$",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+  "place": "derivedLowerShriekIsoDerivedLowerStar, lines 109-144; its object component derivedLowerShriekObjIsoDerivedLowerStar, lines 72-105. Actual source proofs have no local sorry; closure still needs the maintainer axiom audit. The native realization of proper coincidence in prop-functor-package clause 3."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-proper-morphism], $h$ is separated and finite type. By [def-weil-finite-type-morphism], finite type means quasi-compact and locally finite type. Together with the assumptions on $W$, these verify the hypotheses of the chosen compactification in [def-sf-native-weil-derived-framework]. Write it as $V\\xrightarrow{j}Z\\xrightarrow{p}W$, with $pj=h$, $j$ open and $p$ proper. The properness definition makes $p$ separated and finite type too. Applying part (e) of [lem-weil-pbc-proper-fp-permanence] to $h$ and $p$ followed by $W\\to\\operatorname{Spec}k_0$ shows that $V$ and $Z$ are locally of finite type over $k_0$. Apply [lem-weil-pbc-proper-over-separated] over the base $W$, with proper $h:V\\to W$, separated $p:Z\\to W$ and $j:V\\to Z$. It gives that $j$ is proper, hence universally closed. This needs no separatedness of $W$ over $k_0$.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+    "place": "derivedLowerShriekIsoDerivedLowerStar, lines 109-141; native compactification argument, expanded by the cited smaller statements."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-native-weil-clopen-sheaf-comparison] to this $j$. It gives an additive exact functor $j_!$ on the full abelian categories $\\mathcal W$ and a natural isomorphism $\\alpha_j:j_!\\xrightarrow{\\sim}j_*$. For $u:M\\to N$, naturality gives $j_*(u)=\\alpha_{j,N}j_!(u)\\alpha_{j,M}^{-1}$. Applying this to $u+v$ and using additivity of $j_!$ and bilinearity of composition proves additivity of $j_*$. For exactness put $G=j_!$, $H=j_*$ and $\\alpha=\\alpha_j$. If $k:A\\to M$ is a kernel of $u$, then $Gk$ is a kernel of $Gu$. Given $t:S\\to HM$ with $Hu\\,t=0$, the map $\\alpha_M^{-1}t$ is annihilated by $Gu$, hence factors uniquely through $Gk$; composing the factor with $\\alpha_A$ gives the unique factor of $t$ through $Hk$. If $q:N\\to C$ is a cokernel of $u$ and $t:HN\\to S$ satisfies $tHu=0$, then $t\\alpha_N$ factors uniquely through $Gq$, say as $bGq$; the required factor through $Hq$ is $b\\alpha_C^{-1}$. Thus $H$ preserves kernels and cokernels and is exact. These are assertions about the native equivariant sheaves themselves.",
+   "uses": [
+    "lem-sf-native-weil-clopen-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+    "place": "derivedLowerShriekIsoDerivedLowerStar, lines 109-141; native compactification argument, expanded by the cited smaller statements."
+   }
+  },
+  {
+   "text": "For $T=V,Z,W$ (locally of finite type by step 1) the native category $\\mathcal W_T$ is Grothendieck abelian by [lem-sf-native-weil-constructible-abelian]. Hence every complex there has a K-injective resolution by [lem-sfb-grothendieck-k-injective], so the hypothesis of [def-sfb-right-derived-exact] is available. Write $D(j_!)$ and $D(j_*)$ for termwise application localized at quasi-isomorphisms. For either exact functor $G=j_!,j_*$, preservation of kernels, images and cokernels gives a canonical isomorphism $H^a(GC)\\cong G(H^a(C))$, natural in $C$. For a quasi-isomorphism $u$, naturality identifies $H^a(Gu)$ with $G(H^a(u))$ up to these isomorphisms, so $Gu$ is a quasi-isomorphism. Let $G_K:K(\\mathcal W_V)\\to K(\\mathcal W_Z)$ be degreewise $G$ modulo chain homotopy and $Q_T:K(\\mathcal W_T)\\to D(\\mathcal W_T)$ the localization of [def-weil-abstract-derived-category]. The functor $Q_Z\\circ G_K$ therefore inverts quasi-isomorphisms; it factors through $Q_V$. Apply [def-sfb-right-derived-exact] to the exact functor $j_*$ to obtain $Rj_*\\cong D(j_*)$. The degreewise isomorphism $\\alpha_j$ of step 2 commutes with differentials by its naturality, so it defines an isomorphism of complexes natural in chain maps. Additivity of $j_!$ and $j_*$ makes both degreewise functors preserve chain homotopies: applying either functor $G$ to $u-v=ds+sd$ gives $G(u)-G(v)=G(d)G(s)+G(s)G(d)$. They therefore induce the required functors and comparison on homotopy categories. Apply $Q_Z$ to that comparison. Clause (2) of [lem-weil-pbc-localization-universal-property] lifts it and its inverse to mutually inverse natural transformations $D(j_!)\\cong D(j_*)$; they remain inverse because that clause respects identities and composition. Write $a:D(j_!)\\xrightarrow{\\sim}D(j_*)$ for this lift and $\\epsilon:Rj_*\\xrightarrow{\\sim}D(j_*)$ for exact derivation. Then $\\theta=\\epsilon^{-1}a:D(j_!)\\xrightarrow{\\sim}Rj_*$, with inverse $a^{-1}\\epsilon$, on the ambient derived categories.",
+   "uses": [
+    "def-sfb-right-derived-exact",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sfb-grothendieck-k-injective",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+    "place": "derivedLowerShriekIsoDerivedLowerStar, lines 109-141; native compactification argument, expanded by the cited smaller statements."
+   }
+  },
+  {
+   "text": "By [def-sf-native-weil-derived-framework], $Rh_{0!}=Rp_*D(j_!)$. Whisker $\\theta$ with $Rp_*$ and apply the inverse of the natural isomorphism $c_{p,j}:R(pj)_*\\xrightarrow{\\sim}Rp_*Rj_*$ of clause (a) of [lem-sf-native-weil-basic-comparisons], taken with $u=j$, $v=p$ between the locally finite-type schemes $V,Z,W$ of step 1 and on the whole unbounded native derived categories, using $pj=h$:\n$$Rp_*D(j_!)\\xrightarrow{\\beta=Rp_*\\theta}Rp_*Rj_*\\xrightarrow{\\delta=c_{p,j}^{-1}}Rh_*.$$\nThese are natural isomorphisms on $D(\\mathcal W_V)$. Put $A=Rp_*D(j_!)$, $B=Rp_*Rj_*$ and $C=Rh_*$. For $u:K\\to L$, the two naturality identities give\n$$C(u)\\delta_K\\beta_K=\\delta_L B(u)\\beta_K=\\delta_L\\beta_L A(u).$$\nThus $\\Phi_K=\\delta_K\\beta_K$ defines a natural transformation $Rh_{0!}\\to Rh_*$. Its inverse has components $\\beta_K^{-1}\\delta_K^{-1}$: composing in either order cancels the adjacent inverse factors and yields the identity. Its naturality follows from the same displayed identity by multiplying on the left by $\\Phi_L^{-1}$ and on the right by $\\Phi_K^{-1}$. This proves a natural isomorphism of functors, including its inverse, on the ambient derived categories.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-native-weil-basic-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+    "place": "derivedLowerShriekIsoDerivedLowerStar, lines 109-141; native compactification argument, expanded by the cited smaller statements."
+   }
+  },
+  {
+   "text": "As established in step 1, $h$ is separated and finite type. Thus it is quasi-compact and locally finite type by [def-weil-finite-type-morphism]; $W$ has exactly the quasi-compact, quasi-separated and locally finite-type hypotheses in [lem-sf-native-weil-shriek-triangulated]. Its preservation clause therefore puts $Rh_{0!}K$ in $\\mathrm{WC}^{\\mathrm{der}}(W)$ for every $K$ in $\\mathrm{WC}^{\\mathrm{der}}(V)$. Since $Rh_*K$ is isomorphic to $Rh_{0!}K$ by step 4, it also has bounded constructible cohomology: cohomology takes this isomorphism to isomorphisms, which preserve vanishing. On each member $U$ of a pro-etale covering in the constructibility definition, compose its given trivialization with the restricted cohomology isomorphism to obtain the same $B_U^{\\oplus r_U}$ trivialization for the new sheaf. The finite rank $r_U$ may depend on $U$, exactly as in the current framework; no uniform rank is required. The categories in [def-sf-native-weil-derived-framework] are full subcategories of their ambient derived categories. Hence each $\\Phi_K$ and its inverse are morphisms in those subcategories, and the naturality equation in step 4 is the same equation there. They give the asserted natural isomorphism between the restricted functors.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sf-native-weil-shriek-triangulated",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+    "place": "derivedLowerShriekIsoDerivedLowerStar, lines 109-141; native compactification argument, expanded by the cited smaller statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-sf-native-weil-clopen-sheaf-comparison",
+  "def-sfb-right-derived-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sf-native-weil-constructible-abelian",
+  "lem-sfb-grothendieck-k-injective",
+  "def-weil-abstract-derived-category",
+  "lem-sf-native-weil-basic-comparisons",
+  "lem-sf-native-weil-shriek-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+  "place": "Native compactification proof of derivedLowerShriekIsoDerivedLowerStar, lines 109-141; written as an explicit natural-language argument using exact derivation and the native ordinary derived compositor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism direct image with compact support is naturally isomorphic to derived direct image Weil sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardNatIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $, object $ U $ in $ \\\\mathcal{C}^\\\\mathrm{op} $, and element $ x $ in the module $ M(U) $, applying the inverse natural isomorphism of the composed pushforward functors $ \\\\\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousIso\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F F' : CategoryTheory.Functor C D} →\\n          (F ≅ F') →\\n            (A : Type u) →\\n              [inst_2 : CategoryTheory.Category.{t, u} A] →\\n        \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ equipped with Grothendieck topologies $J$ and $K$, and an isomorphism $e: F \\\\cong F'$ between continuous functors $F, F': \\\\mathcal{C} \\\\to \\\\mathcal{D}$,\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $ over a ring sheaf $ R $, object $ U $ in category $ \\\\mathcal{C} $, and element $ x $ in the module $ M(U) $, applying the natural isomorphism between composed pushforwar\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerShriek\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*shriek|shriek.*proper|derivedLowerStar",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper pushforward agrees with extraordinary pushforward for Frobenius equivariant complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"SheafOfModules.pushforward_map_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\phi : S \\\\to F_*R$ between \"}\n  {\"name\": \"PresheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {E : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$ and $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of \"}\n  {\"name\": \"SheafOfModules.pushforwardCongr\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given continuous functors between sites with Grothendieck topologies and equal natural transformations $\\\\phi, \\\\psi : S \\\\to F_*R$ between sheaves of rings, this constructs a natural isomorphism between\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $ over a ring sheaf $ R $, object $ U $ in category $ \\\\mathcal{C} $, and element $ x $ in the module $ M(U) $, applying the natural isomorphism between composed pushforwar\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphism compact support direct image equals ordinary direct image",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsProperMap\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \"{X : Type u_1} → {Y : Type u_2} → [TopologicalSpace X] → [TopologicalSpace Y] → (X → Y) → Prop\", \"doc\": \"A function $ f : X \\\\to Y $ between topological spaces is proper if for every compact subset $ K \\\\subseteq Y $, the preimage $ f^{-1}(K) $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X ⟶ Y) [QuasiCompact f] : f.ker.support = closure (Set.range f)\", \"doc\": \"For any quasi-compact morphism $ f: X \\\\to Y $ of schemes, the support of the kernel sheaf of $ f $ is equal to the closure of the image of $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"(I : X.IdealSheafData) (f : X ⟶ Y) [QuasiCompact f] : (I.map f).support = .closure (f '' I.support)\", \"doc\": \"Given an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and a quasi-compact morphism $f: X \\\\to Y$, the support of the ideal sheaf $\\\\mathcal{I}.\\\\text{map}(f)$ on $Y$ is equal to the topological closure of t\"}\n  {\"name\": \"isProperMap_iff_isCompact_preimage\", \"module\": \"Mathlib.Topology.Maps.Proper.CompactlyGenerated\", \"type\": \": IsProperMap f ↔ Continuous f ∧ ∀ ⦃K⦄, IsCompact K → IsCompact (f ⁻¹' K)\", \"doc\": \"A function $ f : X \\\\to Y $ between topological spaces is proper if and only if it is continuous and for every compact subset $ K \\\\subseteq Y $, the preimage $ f^{-1}(K) $ is compact in $ X $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived-category, sheaf-pushforward, triangulated-functor or topological results do not construct the specified pro-etale Frobenius-equivariant adic category or prove this assertion for its compact-support operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism compact support direct image equals derived direct image for pro-etale Weil sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardSections_coe\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For any section $ s $ of a sheaf of modules $ M $ over a ring sheaf $ R $, and for any object $ x $ in the opposite category $ \\\\mathcal{C}^{\\\\text{op}} $, the coercion of the pushforward section $ F_*\\\\\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) {U V : Y.Opens} (i : U ⟶ V),\\n  ((AlgebraicGeometry.Scheme.Modules.pushforward f).obj M).presheaf.map i.op =\\n    M.presheaf.map ((TopologicalSpace.Opens.map f.base).map i).op\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a sheaf of modules $ M $ over $ X $, the restriction map of the pushforward sheaf $ f_*M $ on an inclusion $ U \\\\subset V $ in $ Y $'s open sets is equal t\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appLE_map\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U : Y.Opens} {V V' : X.Opens}\\n  (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U) (i : Opposite.op V ⟶ Opposite.op V'),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.appLE f U V e) (X.presheaf.map i) =\\n    AlgebraicGeometry.Schem\", \"doc\": \"For a morphism $ f $ of schemes, given open sets $ U $ and $ V $ with $ V \\\\subseteq f^{-1}(U) $, and an inclusion $ i: V \\\\to V' $, the composition of $ f $'s action on sections over $ V $ followed by \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (M : X.Modules) (U : Y.Opens),\\n  ((AlgebraicGeometry.Scheme.Modules.pushforward f).obj M).presheaf.obj (Opposite.op U) =\\n    M.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map f.base).obj U))\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, any sheaf of modules $ M $ over the structure sheaf of $ X $, and any open subset $ U $ of $ Y $, the sections of the pushforward sheaf $ f_*M $ over $ U $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerShriek\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*shriek|shriek.*proper|derivedLowerStar",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper pushforward agrees with compactly supported pushforward on Frobenius equivariant complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforward_map_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\phi : S \\\\to F_*R$ between \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) (U : Y.Opens) : Γ((pushforward f).obj M, U) = Γ(M, f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, any sheaf of modules $ M $ over the structure sheaf of $ X $, and any open subset $ U $ of $ Y $, the sections of the pushforward sheaf $ f_*M $ over $ U $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(φ : M ⟶ N) (U : Y.Opens) : ((pushforward f).map φ).app U = φ.app (f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \":\\n  pushforward.{v} ψ ⋙ pushforward.{v} φ ≅\\n    pushforward.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"TopCat.Sheaf.pushforward_obj_val\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) (F : X.Sheaf C) : ((pushforward C f).obj F).1 = f _* F.1\", \"doc\": \"For a continuous map $ f: X \\to Y $ and a sheaf $ F $ on $ X $, the underlying presheaf of the pushforward sheaf $ f_*F $ is equal to the pushforward of the underlying presheaf of $ F $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(U) : ((pushforwardComp f g).hom.app M).app U = 𝟙 _\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"SheafOfModules.pushforward.congr_simp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"{M : SheafOfModules.{u} R} (f : unit R ⟶ M) :\\n  pushforwardSections φ (M.unitHomEquiv f) =\\n    ((pushforward φ).obj M).unitHomEquiv (unitToPushforwardObjUnit φ ≫ (pushforward φ).map f)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extraordinary direct image and ordinary direct image coincide for proper maps in equivariant derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardNatIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {E : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n            {F : CategoryTheory.Functor C D} →\\n              {G : CategoryTheory\", \"doc\": \"Given continuous functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ between sites with Grothendieck topologies $ J, K, L $, the composition of the sheaf pushforward f\"}\n  {\"name\": \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the hom component of the natural isomorphism between $ \\\\text{sheafify}_J \\\\cir\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $ over a ring sheaf $ R $, object $ U $ in category $ \\\\mathcal{C} $, and element $ x $ in the module $ M(U) $, applying the natural isomorphism between composed pushforwar\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {E : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n            (F : CategoryTheory.Functor C D) →\\n              (G : CategoryTheory\", \"doc\": \"Given continuous functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ between sites with Grothendieck topologies $ J, K, L $, the composition of the sheaf pushforward f\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D}\\n  {G : CategoryTheory.Functor D E} {FG : CategoryTheory.Functor C E} (eFG : F.comp G \", \"doc\": \"Given continuous functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ between sites with Grothendieck topologies $ J, K, L $, the composition of the sheaf pushforward f\"}\n  {\"name\": \"TopCat.Sheaf.pushforwardForgetIso\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : TopCat} →\\n      (f : X ⟶ Y) →\\n        (TopCat.Sheaf.pushforward C f).comp (TopCat.Sheaf.forget C Y) ≅\\n          (TopCat.Sheaf.forget C X).comp (TopCat.Presheaf.pushforward C f)\", \"doc\": \"For a continuous map $ f : X \\to Y $, the composition of the pushforward functor for sheaves on $ X $ followed by the forgetful functor to presheaves on $ Y $ is naturally isomorphic to the composition\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-compact-image-localization-triangle",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean_candidates": [
+  {
+   "declaration": "AlgebraicGeometry.WeilComplex.derivedLowerShriekIsoDerivedLowerStar",
+   "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+   "file": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+   "line": 109,
+   "how": "Exact native functor isomorphism; source proof read, no local sorry; transitive axiom audit left to maintainer."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package, clause 3, proper coincidence: the proof through a compactification uses the clopen open factor and the derived direct-image compositor. The seeded ancestor lem-sf-weil-compact-image-localization-triangle has created.item=null; blueprint_refs.py ancestor therefore returns None. Its recorded breadcrumb points to lem-zl-morphism-open-closed-reduction, open-closed reduction.",
+   "via": [
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-proper-shriek-star",
+  "worker": "stage1",
+  "summary": "Split proper coincidence through the chosen compactification, native clopen comparison, exact derivation and native ordinary derived composition, then restrict to bounded constructible cohomology. Repair of returned head 1e948063020: reread the current cited statements and compared them against the retained delivery audit; none changed. Step 3 now specifies the exact-derived comparison epsilon and explicitly defines theta and its inverse with their correct directions. Restored the current unchanged lean_audit metadata. Both statement-only helpers, authentic searches and citations are retained; the delivery tool rebuilds on current origin/sheaf-dag. Maintainer reader FIX (2026-10-23, re-applied a fifth time after the c04be3fc, afbc6d48, c0640b7b, 67740e41 and 1e948063 FIXes were lost in landing refusals): the statement-only helper lem-sf-native-weil-derived-star-composition duplicates the existing split lem-sf-native-weil-basic-comparisons (a) (same native unbounded compositor, same Lean rightDerivedLowerStarCompIso) together with lem-sf-native-weil-constructible-abelian plus lem-sfb-grothendieck-k-injective; it is dropped and steps 3 and 4 cite those nodes.",
+  "blueprint": "prop-functor-package, clause 3, proper coincidence: the proof through a compactification uses the clopen open factor and the derived direct-image compositor. The seeded ancestor lem-sf-weil-compact-image-localization-triangle has created.item=null; blueprint_refs.py ancestor therefore returns None. Its recorded breadcrumb points to lem-zl-morphism-open-closed-reduction, open-closed reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Generic proper-over-separated geometry applied over W to the open factor of a compactification; this does not replace the unit compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic composition of locally finite-type scheme maps, part (e), to type all native categories at V and Z; no coefficient operation or unit route is replaced."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic existence of K-injective resolutions in a Grothendieck abelian category, applied to the native categories of lem-sf-native-weil-constructible-abelian so that exact right derivation applies; no six-functor step of the unit is replaced (same tool use as lem-sf-native-weil-shriek-triangulated)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-a73a947b4",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-a73a947b4 (reviewer sub-agent of L); spot-checked: This is the tenth head of this split. Against 1e948063, both new nodes are byte-identical (shas e0e61cc8 and 5f3dd165). The item's statement, stmt_deps and steps 1, 2, 4 and 5 are unchanged. Only the end of step 3 changed: it now writes θ=ε^{-1}a with inverse a^{-1}ε, where a:D(j_!)≅D(j_*) and ε:Rj_*≅D(j_*), and the directions are correct. On base b8914d8 the item is still unsplit and there is no repair note. I reread the route. The item is main-20261015 prop-functor-package clause 3, 'proper Rf_!≃Rf_*', in the native fixed-pair category of the framework (Rh_{0!}=Rp̄_*ā_!, per-member rank r_U), and it is not weakened. Step 1: proper means separated, qc and lft; fp-permanence (e) makes V and Z lft; proper-over-separated is applied over W, so j is universally closed. Step 2: the clopen helper gives additivity and exactness of j_* by conjugation, and I checked the kernel and cokernel factorizations. Step 3: Stacks 015F (unbounded) plus localization clause (2). Step 4: the Rp_*θ and c^{-1} naturality identity holds. Step 5: the shriek-triangulated preservation clause plus full subcategories. The clopen helper is true (a universally closed open immersion has clopen image) and is not a duplicate: basic-comparisons (b) covers only quasi-compact j, open-proper-forgetting is a different statement, and the base nodes added since 1e948063 do not overlap. C5/D1: derived-star-composition restates the split lem-sf-native-weil-basic-comparisons (a), which comes from the same Lean rightDerivedLowerStarCompIso. Its K-injective clause is constructible-abelian plus lem-sfb-grothendieck-k-injective. FIX: I re-applied the drop on top of the new step-3 wording. Step 3 now cites constructible-abelian and grothendieck-k-injective (1981 characters), step 4 cites basic-comparisons (a) with u=j, v=p, proof_deps is the union of the step uses, and tool_uses gains grothendieck-k-injective. No citation of the dropped node remains and there is no cycle. Edge cases: U empty, j=id, a clopen component, and A¹∖0⊂A¹ (nothing claimed). Accepted tool_uses: proper-over-separated, proper-fp-permanence, grothendieck-k-injective. No SGA. Maintainer: this is the sixth consecutive head needing this same FIX; please land it or promote the split instead of returning the branch.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+  "declaration": "AlgebraicGeometry.WeilComplex.derivedLowerShriekIsoDerivedLowerStar",
+  "statement": "noncomputable def derivedLowerShriekIsoDerivedLowerStar :\n    derivedLowerShriek k₀ l f ≅ derivedLowerStar f",
+  "branch": "slopmaster2",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing natural isomorphism of the native bounded constructible derived Weil functors. The inherited section binders at lines 56 and 64-68 impose exactly finite k₀, prime ℓ different from ringChar k₀, k₀-schemes X and Y, an over-k₀ proper f, and a quasi-compact quasi-separated locally finite-type target. The conclusion at lines 109-110 is the functor isomorphism, not merely its object components. No extra source separatedness assumption is present. Read with the framework attachment in def-sf-native-weil-derived-framework."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95c5af4e0",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Existing attachment only (node differs from side-live/live in the lean field alone): AlgebraicGeometry.WeilComplex.derivedLowerShriekIsoDerivedLowerStar, LowerShriekFunctoriality.lean:109-139, a functor isomorphism derivedLowerShriek k₀ l f ≅ derivedLowerStar f with real data (chosen compactification, exact-derived extension by zero, extensionByZeroToLowerStar iso, lowerStarCompIso, lifted along fullyFaithfulι). Binders l.55/63-66 match the node exactly: finite k₀, ℓ prime ≠ char, k₀-schemes and morphism, IsProper f, target lft+qc+qs over k₀; target not assumed separated, source unconstrained; extra conditions required by derivedLowerShriek/derivedLowerStar come from IsProper. Single universe u as in the framework. No other side-live node owns this declaration or its per-object/Nonempty forms. Recorded statement verbatim (noncomputable prefix only produces a note); landed dep records unchanged; report has Worker report and Second reading sections. Advisory: line numbers in lean.note/source.place a few lines off; transitive axiom audit left to maintainer. Nothing compiled (no files changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261026T222552-L-669106",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso"
+  ],
+  "sorry_after": []
+ }
+}

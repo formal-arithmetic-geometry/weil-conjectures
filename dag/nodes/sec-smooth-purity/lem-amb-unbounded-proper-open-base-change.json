@@ -25,38 +25,57 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective J and a resolution rho:k!J -> I. For the base-changed square\nchoose resolutions j:d*J -> J1 and t:a*I -> I1. Both k1!j and the composite of t, a*rho,\nand the extension-zero base-change inverse are quasi-isomorphisms. The K-injective Hom\nbijection produces v:k1!J1 -> I1 compatible up to homotopy with these maps; two-out-of-three\nmakes v a quasi-isomorphism. Before resolutions, include the two sheaf cube paths into\nthe common direct image. The support comparison pullback formula and ordinary mate\npasting give the same restriction of each section, hence equality by monicity. The\nspecified extension-zero base-change maps restrict to the same open-unit identities, so\nthese are precisely the normalized maps in the statement. Compose this sheaf cube with\np1*v and k1!j. Naturality of theta1 and of ordinary exchange, and the defining homotopy\nof v, identify its two paths with the representative formulas for the two derived paths.\nUse the unbounded module-exchange representative theorem for the exact adjunction mate.\nEvery functor preserves the homotopies termwise. Localization therefore gives the claimed\nidentity for QJ, and naturality transports it to all derived inputs. No exchange map is\ncancelled and inverse image need not preserve K-injectives.",
+   "text": "For an arbitrary additive square with exact horizontal functors, convert normalization on every K-injective representative and every resolution of its exact image to the right-derived unit equation on every complex. Express the two sides as natural transformations out of the termwise functor. They agree on K-injectives by postcomposing with a K-injective resolution and using naturality of the derived unit. For a general complex use its quasi-isomorphism to a K-injective resolution and cancel the resulting isomorphism. This is the private normalization_of_representatives argument; it uses no boundedness.",
    "uses": [
-    "lem-weil-pbc-derived-exchange-module-termwise",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the ordinary sheaf cube. Use the shared mono_openImmersionLowerShriekToLowerStar_app corollary exposed from the existing UnboundedProperOpenPasting proof for monicity of k1! -> k1*. Postcompose both cube paths by p1* of this comparison and the direct-image compositor. The open base-change inverse followed by the comparison equals the inverse-image comparison followed by the ordinary base-change map. Naturality moves this comparison through the p-face; vertical mate pasting gives base change for k followed by p. Apply the support normalization, then paste the r- and i-faces instead. Naturality of the open comparison and the lower support normalization give the other path. Cancel only the support monomorphism, never an exchange map.",
+   "uses": [
     "lem-cbc-proper-support-sheaf-composition",
     "lem-cbc-extension-zero-base-change",
-    "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "lem-weil-pbc-extension-by-zero-exact",
     "lemma-weil-pbc-underived-exchange-naturality",
-    "lem-weil-pbc-underived-exchange-module-linear",
-    "def-kun-unbounded-exchange"
+    "lem-amb-unbounded-proper-open-pasting"
    ],
    "elementary": false
+  },
+  {
+   "text": "The specified unbounded exchange satisfies the right-derived unit equation by derivedExchangeUnitQ, the existing generic normalization calculation exposed in DerivedExchangeModuleTermwise. This applies the exact-derived mate factorization and identifies homotopy-localization comparisons and units with their complex-level versions. Import and use this existing proof instead of copying its private factorization helpers.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-module-termwise",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the abstract derived cube from the four unit equations. Precompose both paths on Q(M) by the twice-exact image of the right-derived unit of M. Move this unit across the upper exact comparison by naturality, apply the four unit equations, and use the exact-derived composition and natural-isomorphism factorization identities on the other two edges. The remaining composites are Q of the termwise ordinary cube, which agrees in every degree. If M is K-injective the precomposed unit is invertible and can be cancelled. Every derived object is isomorphic to Q(M) for such an M, so naturality yields the equality on all derived objects. Specialize to the geometric cube, using the given representative normalization and the ordinary cube from step 2. The two exact comparisons are definitionally the specified derived open-extension base-change isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-extension-zero-base-change"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-derived-exchange-module-termwise",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
   "lem-cbc-proper-support-sheaf-composition",
   "lem-cbc-extension-zero-base-change",
-  "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "lem-weil-pbc-extension-by-zero-exact",
   "lemma-weil-pbc-underived-exchange-naturality",
-  "lem-weil-pbc-underived-exchange-module-linear",
-  "def-kun-unbounded-exchange"
+  "lem-amb-unbounded-proper-open-pasting",
+  "lem-weil-pbc-derived-exchange-module-termwise",
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-extension-by-zero-exact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0F7F; the normalized unbounded representative calculation of the parent proof."
+  "place": "Tag 0F7F, lemma-shriek-proper-and-open-base-change; the sheaf cube is the source argument, and naturality of the right-derived unit replaces the explicit compatible-resolution diagram. Repair R3 (2026-10-24): reuse the exposed unit identity in DerivedExchangeModuleTermwise and the shared open-comparison monicity corollary exposed in UnboundedProperOpenPasting; no copied private proofs remain in this item."
  },
  "mathlib_searches": [
   {
@@ -127,14 +146,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261020T221342-L-4177350",
+  "landing": "20261024T190818-L-89890",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

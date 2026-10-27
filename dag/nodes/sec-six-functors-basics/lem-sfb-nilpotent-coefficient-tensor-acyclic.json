@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-nilpotent-coefficient-tensor-acyclic",
+ "kind": "statement",
+ "title": "Acyclic tensor for modules killed by a quotient-kernel power",
+ "statement": "Let $C$ be a small site with topology $T$, let $q:R\\to S$ be a morphism of commutative ring sheaves that is surjective on sections over every object, and let $b_1,\\ldots,b_r$ be global sections of $R$ generating $\\ker(q(U))$ for every object $U$. Let $P$ be a K-flat cochain complex with flat terms [def-pc-kflat-complex]. Suppose its ordinary sheaf scalar extension along $q$ [lem-weil-pbc-constant-completion-equivalence] is acyclic. Let $N$ be an $R$-module sheaf and $m\\in\\mathbf N$ such that $ax=0$ for every object $U$, every $a\\in(b_1(U),\\ldots,b_r(U))^m$ and every $x\\in N(U)$. Then $\\operatorname{Tot}(P\\otimes_R N[0])$ [def-pc-tensor-complex-sheaves] is acyclic. Exponent zero, empty lists and zero rings are allowed.",
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1T, lemma-derived-vanishing-mod-I, finite ideal-power filtration; Modules on Sites Tags 03DD and 05V4, scalar descent and balanced tensor cancellation."
+ },
+ "proof": [
+  {
+   "text": "For a module killed by the sectionwise kernel, transport the action through the quotient by the kernel and its isomorphism with S(U). Surjectivity shows that restrictions are semilinear for this S action. Thus it is an S-module sheaf with precisely the same underlying additive sheaf. Restriction is exact. Scalar extension of P is K-flat; since it is also acyclic, tensor with any S-module is acyclic. The natural balanced cancellation identifies its restriction with tensor over R, and the single-factor total comparison and braiding give the displayed tensor order.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "lem-pur-change-of-rings-tensor-cancellation-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ring of global sections acting on all module morphisms. The categorical image-cokernel filtration for its finite generator ideal reduces the exponent by one in the subobject, and kills the ideal in the quotient. The quotient is killed by the sectionwise kernel because the generator scalar maps vanish. The fixed K-flat tensor is exact on the derived category, so the single-module short-exact triangle and induction prove vanishing. At exponent zero, one times the identity is zero. Evaluation of global sections is a ring map carrying the global ideal power into each local ideal power, so the stated hypothesis starts the induction.",
+   "uses": [
+    "def-pur-sheaf-modules-hom-module",
+    "lem-sfb-finite-scalar-ideal-filtration",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "def-pur-sheaf-modules-hom-module",
+  "lem-sfb-finite-scalar-ideal-filtration",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1T, lemma-derived-vanishing-mod-I, finite ideal-power filtration; Modules on Sites Tags 03DD and 05V4, scalar descent and balanced tensor cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A K-flat sheaf complex whose extension to a quotient ring is acyclic has acyclic tensor with a module annihilated by a power of the finitely generated quotient kernel",
+   "date": "2026-10-26",
+   "results": "8 hits. HomologicalComplex.Acyclic; HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic; Module.Flat.lTensor_exact; Module.Flat.rTensor_shortComplex_exact",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat sheaf complex whose extension to a quotient ring is acyclic has acyclic tensor with a module annihilated by a power of the finitely generated quotient kernel",
+   "date": "2026-10-26",
+   "results": "8 hits. Module.Flat.tfae_equational_criterion; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Acyclic\"",
+   "date": "2026-10-26",
+   "results": "0 hits. No matching declaration.",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "(nilpotent|torsion).*(acyclic|tensor)|(acyclic|tensor).*(nilpotent|torsion)",
+   "date": "2026-10-26",
+   "results": "15 hits. Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteKoszulResidueAcyclic",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Coefficient-module step of the finite Tag 0G1T Koszul vanishing in the Tag 0G1U residue-zero detection proof: modules killed by a finite power of the generated kernel.",
+   "via": [
+    "lem-sfb-finite-koszul-residue-acyclic",
+    "lem-sfb-adic-residue-koszul-nakayama",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.NilpotentCoefficientTensorAcyclic",
+  "declaration": "CategoryTheory.tensor_acyclic_of_nilpotent_coefficient",
+  "statement": "theorem tensor_acyclic_of_nilpotent_coefficient\n    {C : Type u} [SmallCategory C] {T : GrothendieckTopology C}\n    {R S : Sheaf T CommRingCat.{u}} (q : R ⟶ S) (r : ℕ)\n    (b : Fin r → (R.obj ⋙ forget CommRingCat).sections)\n    (hq : ∀ U : C, Function.Surjective (q.hom.app (op U)))\n    (hker : ∀ U : C, RingHom.ker (q.hom.app (op U)).hom =\n      Ideal.span (Set.range (fun i ↦ (b i).val (op U))))\n    (P : ringedSiteComplex R) (hP : P.IsAcyclicTensorKFlat)\n    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (P.X i))\n    (hE : (((ConstantCompletion.change q).mapHomologicalComplex (.up ℤ)).obj P).Acyclic)\n    (N : ConstantCompletion.Mod R) (m : ℕ)\n    (hN : ∀ U : Cᵒᵖ, ∀ a ∈\n      (Ideal.span (Set.range (fun j : Fin r ↦ (b j).val U))) ^ m,\n      ∀ x : N.val.obj U, a • x = 0) :\n    (((ringedKoszulTensor R).obj P).obj\n      ((HomologicalComplex.single _ (.up ℤ) 0).obj N)).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26",
+  "file": "lean/Sheaf/Algebra/Homology/NilpotentCoefficientTensorAcyclic.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T092804-L-3466917",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T092804-L-3466917",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

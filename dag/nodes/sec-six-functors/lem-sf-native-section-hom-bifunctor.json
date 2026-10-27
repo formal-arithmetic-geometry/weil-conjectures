@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-native-section-hom-bifunctor",
+ "kind": "statement",
+ "title": "Bifunctor form and inverse of the normalized native section Hom comparison",
+ "statement": "For every scheme Y and prime l, form the actual native internal Hom bifunctor HD. For every normalized section Hom comparison H [lem-sf-adic-module-hom-comparison-core], its components and two-variable naturality give a natural isomorphism HD followed by the actual native section equivalence functor to the two-variable transport of the ordinary slice Hom bifunctor. Reversing this specified isomorphism along that equivalence gives a natural isomorphism from ordinary slice Hom followed by its inverse to native Hom of the two inverse images.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation."
+ },
+ "stmt_deps": [
+  "lem-sf-adic-module-hom-comparison-core",
+  "lem-sf-hom-comparison-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Define nativeHom by uncurrying native ihom and its source-variable ihomMap. Use H.homIso at each pair. The target ordinary curried Hom map is homObjMap(f,id) followed by homObjMap(id,g); normalize it with its composition equation and apply H.hom_naturality.",
+   "uses": [
+    "lem-sf-adic-module-hom-comparison-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved generic inverseHomComparison to the actual adicSectionModuleEquivalence and the forward comparison just constructed. The unit and counit factors give exactly the stated reverse comparison.",
+   "uses": [
+    "lem-sf-hom-comparison-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-module-hom-comparison-core",
+  "lem-sf-hom-comparison-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an equivalence of sites preserves the internal Hom of sheaves of modules",
+   "results": "sheafHom, restrictScalars, IsCoverDense.restrictHomEquivHom, sheafCongr component formulas, sheafifyHomEquiv, and PullbackConstruction.adjunction. None is the normalized module-slice Hom or native Frobenius comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use existing pushforward equivalence and construct the module-slice comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sheaves of modules induced by a site equivalence intertwines the pullback by a site automorphism and internal Hom",
+   "results": "sheafCongr, transportIsoSheafToPresheaf, pullbackIso, pushforwardCongr, and conjugateEquiv_pullbackComp_inv. No native module comparison.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; ordinary restriction is available."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonModuleFunctor|adicLowerStarCompIhomIso",
+   "results": "Remote grep returned zero hits. Local rg finds adicSectionModuleEquivalence, adicModuleHomComparisonCore and native adicLowerStarCompIhomIso; no Frobenius-compatible composite small model.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the explicit native comparison and construct only the missing transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeFrobeniusRingedModel",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation.",
+   "via": [
+    "lem-sf-native-frobenius-ringed-model",
+    "lem-sf-native-weil-ringed-presentation",
+    "lem-sf-native-weil-hom-closed-structure",
+    "lem-sf-native-weil-hom-right-adjoint",
+    "lem-sf-native-weil-tensor-adjoints",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.NativeHomBifunctorComparison",
+  "file": "lean/Sheaf/SixFunctors/NativeHomBifunctorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.NativeFrobenius.inverseNativeHomComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NativeFrobenius.nativeHom",
+   "AlgebraicGeometry.ProEtale.NativeFrobenius.forwardHomComparison",
+   "AlgebraicGeometry.ProEtale.NativeFrobenius.inverseNativeHomComparison"
+  ],
+  "statement": "def inverseNativeHomComparison (H : AdicModuleHomComparisonCore l Y) :\n    Functor.uncurry.obj (SheafOfModules.homFunctor (comparisonRing l Y)) ⋙\n        (adicSectionModuleEquivalence l Y).inverse ≅\n      (adicSectionModuleEquivalence l Y).inverse.op.prod\n        (adicSectionModuleEquivalence l Y).inverse ⋙ nativeHom Y l",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T064449-L-2182596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T064449-L-2182596",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

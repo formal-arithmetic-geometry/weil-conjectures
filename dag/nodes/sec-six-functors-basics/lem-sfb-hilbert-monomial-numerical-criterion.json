@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-hilbert-monomial-numerical-criterion",
+ "kind": "statement",
+ "title": "The monomial numerical criterion for Hilbert stability",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], let $r\\geq2$, let $E$ be an $r$-dimensional $k$-vector space, and let $X\\hookrightarrow\\mathbf P(E^\\vee)$ be a closed subscheme [def-weil-closed-immersion, def-pc-scheme] of admissible coordinate Hilbert polynomial $P$ [def-sfb-projective-coordinate-hilbert-polynomial]. Write $L=\\mathcal O_X(1)$ [def-pc-projective-space-twist], and take any integer $m\\geq M(P,r)$ for the Hilbert embedding in [lem-sfb-hilbert-plucker-pgl-linearization]. For an ordered basis $b=(b_0,\\ldots,b_{r-1})$ of $E$ and rational weights $u=(u_0,\\ldots,u_{r-1})$, give a degree-$m$ monomial $\\prod_i b_i^{\\alpha_i}$ weight $\\sum_i\\alpha_i u_i$. Define $W_{b,u}(m)$ to be the minimum of the sums of weights over all sets of degree-$m$ monomials whose restrictions form a $k$-basis of $H^0(X,L^{\\otimes m})$ [def-sc-ringed-space-module-cohomology]; these sets exist by the surjectivity in the Hilbert embedding. Then the $m$th Hilbert point is stable for $\\operatorname{SL}(E)$ with its Hilbert determinant line $\\Lambda_m$, in the geometric sense of [lem-sfb-hilbert-plucker-pgl-linearization], if and only if for every ordered basis $b$ and every nonconstant rational tuple $u$ one has\n$$W_{b,u}(m)<\\frac{\\sum_i u_i}{r}\\,mP(m).$$\nThe equivalence holds in every characteristic, with no smoothness, reducedness or dimension assumption on $X$. Constant tuples are excluded from this strict criterion.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sfb-hilbert-plucker-pgl-linearization"
+ ],
+ "proof": [
+  {
+   "text": "Put $q=P(m)$, $S=\\operatorname{Sym}^mE$, $Q=H^0(X,L^{\\otimes m})$ and $D=\\bigwedge^q S$. By [lem-sfb-hilbert-plucker-pgl-linearization], restriction $\\pi:S\\twoheadrightarrow Q$ is surjective, $\\dim Q=q$, and the Hilbert scheme has an SL-equivariant Pluecker closed immersion with hyperplane line $\\Lambda_m=\\det Q$. Its quotient Pluecker point is $\\bigwedge^q\\pi:D\\twoheadrightarrow\\det Q$. Equivalently, after choosing a nonzero trivialization of $\\det Q$, it is the line spanned by a nonzero functional $\\ell\\in D^*$; the lines-projective hyperplane line is precisely the quotient determinant line. Apply [lem-sfb-hilbert-mumford-projective-representation] to this Hilbert scheme, its closed immersion into $\\mathbf P_{\\mathrm{lines}}(D^*)$, and the induced SL representation on $D^*$. The embedding theorem gives exactly the geometric stability convention required by that criterion. No smoothness or reducedness is required by either input.",
+   "uses": [
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-hilbert-mumford-projective-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Morrison Section 2.2, equation (1), Proposition 1 and its proof, printed pp.5--7; determinant and weight-normalization argument read online at https://arxiv.org/pdf/0810.2340. Agent expansion for arbitrary characteristic; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For any homomorphism $\\lambda:\\mathbf G_m\\to\\operatorname{SL}(E)$, [lem-sfb-gm-representation-weight-basis] gives a basis $b_i$ of $E$ with integral weights $a_i$. In this basis its determinant character is $t^{\\sum_i a_i}$. Since it is identically one as a Laurent polynomial, $\\sum_i a_i=0$ as an integer, also in positive characteristic. The subgroup is nontrivial exactly when some $a_i\\ne0$. Conversely every ordered basis and nonzero integral tuple of sum zero defines such a nontrivial subgroup by $b_i\\mapsto t^{a_i}b_i$ over every $k$-algebra. Thus testing all nontrivial subgroups is equivalent to testing all these weighted bases.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Morrison Section 2.2, equation (1), Proposition 1 and its proof, printed pp.5--7; determinant and weight-normalization argument read online at https://arxiv.org/pdf/0810.2340. Agent expansion for arbitrary characteristic; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Fix such $(b,a)$. The degree-$m$ monomials form the usual basis of $S$; their weights are $\\alpha\\cdot a$. A wedge indexed by a $q$-element monomial set $I$ has weight $s_I=\\sum_{\\alpha\\in I}\\alpha\\cdot a$. Its image under $\\bigwedge^q\\pi$ is the determinant of the images of those monomials. Hence the coordinate $\\ell_I$ is nonzero exactly when their restrictions form a basis of $Q$. Surjectivity ensures at least one such $I$. Under the dual action of $\\lambda^{-1}$ on $D^*$, the dual wedge basis has weights $s_I$: dualization and inversion each negate the weight. Therefore $\\nu_{\\lambda^{-1}}([\\ell])=\\min_{\\ell_I\\ne0}s_I=W_{b,a}(m)$. Inversion permutes nontrivial one-parameter subgroups, so step 1 gives stability exactly when $W_{b,a}(m)<0$ for every basis and nonzero integral sum-zero tuple. When $q=0$, use $\\bigwedge^0S=k$ and the empty set: its coordinate is 1 and its weight 0. Thus this case fails the strict criterion, as it should.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Morrison Section 2.2, equation (1), Proposition 1 and its proof, printed pp.5--7; determinant and weight-normalization argument read online at https://arxiv.org/pdf/0810.2340. Agent expansion for arbitrary characteristic; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For a nonconstant rational tuple $u$ put $\\bar u=(\\sum_i u_i)/r$. Choose a positive integer $c$ clearing the denominators of all $u_i-\\bar u$ and set $a_i=c(u_i-\\bar u)$. Then $a$ is a nonzero integral tuple of sum zero. Every degree-$m$ monomial of $u$-weight $v$ has $a$-weight $c(v-m\\bar u)$. Every monomial basis has $q$ elements, so taking the minimum over the same finite nonempty collection gives\n$$W_{b,a}(m)=c\\bigl(W_{b,u}(m)-mP(m)\\bar u\\bigr).$$\nSince $c>0$, negativity in step 3 is exactly the required inequality. Conversely the stated rational test includes every nonzero integral sum-zero tuple. For a constant tuple $u_i=d$, all basis sums equal $dmP(m)$, so strict inequality is impossible; excluding it is exactly excluding the trivial subgroup. The calculation uses integer characters and determinants only, and is valid in every characteristic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Morrison Section 2.2, equation (1), Proposition 1 and its proof, printed pp.5--7; determinant and weight-normalization argument read online at https://arxiv.org/pdf/0810.2340. Agent expansion for arbitrary characteristic; local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-hilbert-mumford-projective-representation",
+  "lem-sfb-hilbert-plucker-pgl-linearization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Morrison Section 2.2, equation (1), Proposition 1 and its proof, printed pp.5--7; determinant and weight-normalization argument read online at https://arxiv.org/pdf/0810.2340. Agent expansion for arbitrary characteristic; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Mumford criterion Hilbert point stable if every nonconstant weighted basis has a monomial basis with weight less than the average",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ₁ χ₂ : L → R) [IsAddTorsionFree R] [IsDomai\", \"doc\": \"There exist integers $p < 0$ and $q > 0$ such that the generalized weight spaces of the Lie module $M$ associated to the weight functions $p \\\\cdot \\\\chi_1 + \\\\chi_2$ and $q \\\\cdot \\\\chi_1 + \\\\chi_2$ are bo\"}\n  {\"name\": \"LieModule.exists_genWeightSpace_smul_add_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ₁ χ₂ : L → R) [IsAddTorsionFree R] [IsDomai\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and given weight functions $\\\\chi_1, \\\\chi_2 : \\\\mathfrak{g} \\\\to R$, there exists a positive integer $k$\"}\n  {\"name\": \"LieModule.genWeightSpace_nsmul_add_ne_bot_of_le\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Let $ R $ be a commutative ring that is a domain and torsion-free, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free, Noetherian Lie module over $ L $. For any non-zero linear functio\"}\n  {\"name\": \"LieModule.genWeightSpace_zsmul_add_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Let $ R $ be a commutative ring that is a domain and torsion-free, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free, Noetherian Lie module over $ L $. For any non-zero linear functio\"}\n  {\"name\": \"LieModule.genWeightSpace_neg_zsmul_add_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Let $ R $ be a torsion-free commutative domain, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free Noetherian Lie module over $ L $. For any non-zero linear functional $ \\\\alpha: L \\\\to \"}\n  {\"name\": \"LieModule.finite_genWeightSpace_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"If $ M $ is a Noetherian $ R $-module over a nilpotent Lie algebra $ \\\\mathfrak{g} $, then the set of weight functions $ \\\\chi : \\\\mathfrak{g} \\\\to R $ for which the generalized weight space $ \\\\text{Gen}_\"}\n  {\"name\": \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"For a Noetherian module $ M $ over a commutative ring $ R $, and for any element $ x $ in a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $ acting on $ M $, the set of scalars $ \\\\chi \\\\in R $ for whi\"}\n  {\"name\": \"MvPolynomial.weightedDegree_eq_zero_iff\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"∀ {M : Type u_2} {σ : Type u_3} [inst : AddCommMonoid M] [inst_1 : PartialOrder M] {w : σ → M}\\n  [CanonicallyOrderedAdd M],\\n  MvPolynomial.NonTorsionWeight w → ∀ {m : σ →₀ ℕ}, (Finsupp.weight w) m = 0 ↔ ∀ (x : σ), m x = 0\", \"doc\": \"For a canonically ordered additive monoid $M$ and a non-torsion weight function $w : \\\\sigma \\\\to M$, the weighted degree $\\\\sum_{x \\\\in \\\\sigma} m(x) \\\\cdot w(x)$ of a finite support function $m : \\\\sigma \\\\\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lie weight spaces, exterior powers, projectivization constructions, stability of morphism properties under base change, and weighted homogeneous polynomials do not state the GIT numerical criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric invariant theory numerical stability criterion for Plucker points of quotients of symmetric powers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Configuration.ofField.instMembershipProjectivizationForallFinOfNatNat\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"{K : Type u_3} → [inst : Field K] → Membership (Projectivization K (Fin 3 → K)) (Projectivization K (Fin 3 → K))\", \"doc\": \"For a field $ K $, two points in the projective plane $ \\\\mathbb{P}(K^3) $ are orthogonal if their representatives as vectors in $ K^3 $ have a zero dot product. This relation is well-defined because s\"}\n  {\"name\": \"exteriorPower.ιMulti_family\", \"module\": \"Mathlib/LinearAlgebra/ExteriorPower/Basic\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (n : ℕ) →\\n      {M : Type u_1} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] → {I : Type u_4} → [LinearOrder I] → (I → M) → { s // s.card = n } → ↥(⋀[R]^n M)\", \"doc\": \"For a commutative ring $ R $, natural number $ n $, and $ R $-module $ M $, this function constructs an element in the $ n $-th exterior power $ \\\\Lambda_R^n(M) $ by taking a family $ v : I \\\\to M $ and\"}\n  {\"name\": \"Projectivization.cross\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Constructions\", \"type\": \"{F : Type u_1} →\\n  [inst : Field F] →\\n    [DecidableEq F] → Projectivization F (Fin 3 → F) → Projectivization F (Fin 3 → F) → Projectivization F (Fin 3 → F)\", \"doc\": \"The cross product operation on the projective space $\\\\mathbb{P}(F^3)$, defined by taking the cross product of two non-zero vectors in $F^3$ and returning their equivalence class in projective space. I\"}\n  {\"name\": \"ClassGroup.finsetApprox\", \"module\": \"Mathlib/NumberTheory/ClassNumber/Finite\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : EuclideanDomain R] →\\n      [inst_1 : CommRing S] →\\n        [IsDomain S] →\\n          [inst_3 : Algebra R S] →\\n            {abv : AbsoluteValue R ℤ} →\\n              {ι : Type u_5} →\\n                [DecidableEq ι] →\\n                  [Fintype ι] → Module\", \"doc\": \"The finite set is constructed by taking all pairwise differences of elements from the injective function $\\\\text{distinctElems}$ (which maps $\\\\text{Fin}(\\\\text{cardM} + 1)$ to $R$), forming the set $\\\\{ \"}\n  {\"name\": \"Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"∀ {K : Type u_3} [inst : Field K],\\n  Configuration.Nondegenerate (Projectivization K (Fin 3 → K)) (Projectivization K (Fin 3 → K))\", \"doc\": \"The projective plane over a field $ K $, constructed as the set of lines in $ K^3 $, forms a non-degenerate configuration of points and lines. This means the configuration avoids trivial arrangements \"}\n  {\"name\": \"ExteriorAlgebra.ιMulti_family\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic\", \"type\": \"(R : Type u1) →\\n  [inst : CommRing R] →\\n    {M : Type u2} →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          (n : ℕ) → {I : Type u_1} → [LinearOrder I] → (I → M) → { s // s.card = n } → ExteriorAlgebra R M\", \"doc\": \"Let $v: I \\\\to M$ be a family of vectors in an $R$-module $M$, indexed by a linearly ordered type $I$. For any finite subset $s \\\\subseteq I$ of size $n$, this function defines the wedge product of the \"}\n  {\"name\": \"exteriorPower.pairingDual_apply_apply_eq_one\", \"module\": \"Mathlib/LinearAlgebra/ExteriorPower/Pairing\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {ι : Type u_3}\\n  [inst_3 : LinearOrder ι] (x : ι → M) (f : ι → Module.Dual R M),\\n  (∀ (i : ι), (f i) (x i) = 1) →\\n    (∀ ⦃i j : ι⦄, i ≠ j → (f i) (x j) = 0) →\\n      ∀ (n : ℕ) (a : Fin n ↪o ι),\\n       \", \"doc\": \"For a commutative ring $ R $, $ R $-module $ M $, and order embedding $ a : \\\\mathrm{Fin}(n) \\\\hookrightarrow \\\\iota $, the evaluation of the canonical pairing between the $ n $-th exterior power $ \\\\Lamb\"}\n  {\"name\": \"Mathlib.Tactic.Linarith.CertificateOracle.simplexAlgorithmDense\", \"module\": \"Mathlib/Tactic/Linarith/Oracle/SimplexAlgorithm\", \"type\": \"Mathlib.Tactic.Linarith.CertificateOracle\", \"doc\": \"A certificate oracle implementation using the simplex algorithm with dense matrix representation. Given a list of linear arithmetic hypotheses and a maximum variable count, it constructs a dense const\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lie weight spaces, exterior powers, projectivization constructions, stability of morphism properties under base change, and weighted homogeneous polynomials do not state the GIT numerical criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stable\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" : AlgebraicGeometry.IsOpenImmersion.IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \" : AlgebraicGeometry.IsOpenImmersion.IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionPrecoverageOfIsStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.IsStableUnderComposition] : (AlgebraicGeometry.Scheme.precoverage P).IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] [P.IsStableUnderBaseChange] : (AlgebraicGeometry.Scheme.precoverage P).IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" (P : AlgebraicGeometry.AffineTargetMorphismProperty) : Prop\", \"doc\": \"A `P : AffineTargetMorphismProperty` is stable under base change if `P` holds for `Y ⟶ S`\\nimplies that `P` holds for `X ×ₛ Y ⟶ X` with `X` and `S` affine schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.IsStableUnderBaseChange] : P.HasOfPostcompProperty AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [AlgebraicGeometry.HasAffineProperty P Q] (hP' : Q.IsStableUnderBaseChange) : P.IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \" (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso] (H : ∀ ⦃X Y S : AlgebraicGeometry.Scheme⦄ [inst : AlgebraicGeometry.IsAffine S] [inst_1 : AlgebraicGeometry.IsAffine X] (f : X ⟶ S) (g : Y ⟶ S), P g → P (CategoryTheory.Limits.pullback.fst f g)) : P.IsStableUnderBaseCha\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P] (hP₂ : (AlgebraicGeometry.AffineTargetMorphismProperty.of P).IsStableUnderBaseChange) : P.IsStableUnderBaseChange\", \"doc\": \"If `P` is local at the target, to show that `P` is stable under base change, it suffices to\\ncheck this for base change along a morphism of affine schemes.\"}\n  {\"name\": \"AlgebraicGeometry.topologically_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \" (P : {α β : Type u} → [TopologicalSpace α] → [TopologicalSpace β] → (α → β) → Prop) (hP : ∀ {α β γ : Type u} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] [inst_2 : TopologicalSpace γ] (f : α → β) (g : β → γ), P f → P g → P (g ∘ f)) : (AlgebraicGeometry.topologically fun {α β} [Topologi\", \"doc\": \"If a property of maps of topological spaces is stable under composition, the induced\\nmorphism property of schemes is stable under composition.\"}\n  {\"name\": \"AlgebraicGeometry.injective_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \" : (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x => Function.Injective x).IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lie weight spaces, exterior powers, projectivization constructions, stability of morphism properties under base change, and weighted homogeneous polynomials do not state the GIT numerical criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.Mumford|HilbertMumford|monomial.*(semi)?stabl|numerical.*criterion.*stabl",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lie weight spaces, exterior powers, projectivization constructions, stability of morphism properties under base change, and weighted homogeneous polynomials do not state the GIT numerical criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Numerical criterion for stability of Hilbert points using minimum weights of monomial bases",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.hilbertPoly\", \"module\": \"Mathlib.RingTheory.Polynomial.HilbertPoly\", \"type\": \"(p : F[X]) : (d : ℕ) → F[X]\", \"doc\": \"For a polynomial $ p $ and natural number $ d $, the Hilbert polynomial is defined recursively as the sum over the support of $ p $ of $ (\\\\text{coefficient of } p \\\\text{ at } i) \\\\cdot \\\\text{preHilbert\"}\n  {\"name\": \"MvPolynomial.isWeightedHomogeneous_monomial\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"(w : σ → M) (d : σ →₀ ℕ) (r : R) {m : M} (hm : weight w d = m) : IsWeightedHomogeneous w (monomial d r) m\", \"doc\": \"For a weight function $ w : \\\\sigma \\\\to M $, a monomial $ r \\\\cdot X^d $ in the polynomial ring $ R[\\\\sigma] $, and a weight $ m \\\\in M $, if the weighted sum $ \\\\sum_{i \\\\in \\\\text{support } d} d(i) \\\\cdot w\"}\n  {\"name\": \"MvPolynomial.IsWeightedHomogeneous\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"(w : σ → M) (φ : MvPolynomial σ R) (m : M) : Prop\", \"doc\": \"A multivariate polynomial $\\\\varphi$ is weighted homogeneous of weight $m$ with respect to the weight function $w : \\\\sigma \\\\to M$ if every monomial $d$ with nonzero coefficient in $\\\\varphi$ satisfies $\"}\n  {\"name\": \"MvPolynomial.IsWeightedHomogeneous.inj_right\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"{w : σ → M} (hφ : φ ≠ 0) (hm : IsWeightedHomogeneous w φ m) (hn : IsWeightedHomogeneous w φ n) : m = n\", \"doc\": \"For any non-zero multivariate polynomial $\\\\varphi$ and weight function $w : \\\\sigma \\\\to M$, if $\\\\varphi$ is weighted homogeneous of weight $m$ and also of weight $n$ with respect to $w$, then $m = n$.\"}\n  {\"name\": \"MvPowerSeries.nat_le_weightedOrder\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{n : ℕ} (h : ∀ d, weight w d < n → coeff d f = 0) : n ≤ f.weightedOrder w\", \"doc\": \"For a multivariate power series $ f $ over a semiring $ R $ with variables indexed by $ \\\\sigma $ and a weight function $ w : \\\\sigma \\\\to \\\\mathbb{N} $, if every monomial $ d $ with weighted sum $ \\\\sum_{\"}\n  {\"name\": \"MvPolynomial.le_weightedTotalDegree\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"(w : σ → M) {φ : MvPolynomial σ R} {d : σ →₀ ℕ} (hd : d ∈ φ.support) : weight w d ≤ φ.weightedTotalDegree w\", \"doc\": \"For any multivariate polynomial $\\\\varphi$ over a commutative semiring $R$ with variables indexed by $\\\\sigma$, any weighting function $w : \\\\sigma \\\\to M$ where $M$ is a sup-semilattice, and any monomial\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousComponent_eq_zero\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"[SemilatticeSup M] [OrderBot M] (h : weightedTotalDegree w φ < n) : weightedHomogeneousComponent w n φ = 0\", \"doc\": \"For a multivariate polynomial $\\\\varphi$ over a commutative semiring with a weight function $w : \\\\sigma \\\\to M$ (where $M$ is a sup-semilattice with a bottom element), if the weighted total degree of $\\\\\"}\n  {\"name\": \"MvPolynomial.IsWeightedHomogeneous.weighted_total_degree\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"[SemilatticeSup M] {w : σ → M} (hφ : IsWeightedHomogeneous w φ n) (h : φ ≠ 0) : weightedTotalDegree' w φ = n\", \"doc\": \"Given a weight function $ w : \\\\sigma \\\\to M $ where $ M $ is a sup-semilattice, if a non-zero multivariate polynomial $ \\\\varphi $ is weighted homogeneous of weight $ n $ with respect to $ w $, then the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lie weight spaces, exterior powers, projectivization constructions, stability of morphism properties under base change, and weighted homogeneous polynomials do not state the GIT numerical criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.Mumford|HilbertMumford|monomial.*stabil|stabil.*monomial|numerical.*criterion",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "No match: weighted polynomial components, numerical inequalities and projectivization independence do not state Hilbert stability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projectivization\", \"stable\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "No match: weighted polynomial components, numerical inequalities and projectivization independence do not state Hilbert stability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert stability criterion minimum total weight monomial basis less than average times degree dimension",
+   "results": "8 hits; MvPolynomial.weightedHomogeneousComponent_eq_zero, Polynomial.hilbertPoly, MvPolynomial.isWeightedHomogeneous_monomial, MvPolynomial.le_weightedTotalDegree, MvPolynomial.IsWeightedHomogeneous, MvPowerSeries.weightedHomogeneousComponent_of_lt_weightedOrder_eq_zero, MvPolynomial.isWeightedHomogeneous_of_total_degree_zero, MvPowerSeries.IsHomogeneous",
+   "date": "2026-10-23",
+   "verdict": "No match: weighted polynomial components, numerical inequalities and projectivization independence do not state Hilbert stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert point monomial basis determinant weights numerical stability inequality average weight",
+   "results": "8 hits; descPochhammer_eval_div_factorial_le_sum_choose, descPochhammer_eval_le_sum_descFactorial, Matrix.det_sum_smul_le, ClassGroup.normBound, NumberField.hermiteTheorem.boundOfDiscBdd, Finset.sum_centroidWeightsIndicator_eq_one_of_card_eq_add_one, Finset.sum_centroidWeights_eq_one_of_card_eq_add_one, RCLike.wInner_cWeight_eq_smul_wInner_one",
+   "date": "2026-10-23",
+   "verdict": "No match: weighted polynomial components, numerical inequalities and projectivization independence do not state Hilbert stability."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-uniform-gieseker-codegree-criterion",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED).",
+   "via": [
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hilbert-monomial-numerical-criterion",
+  "worker": "stage1",
+  "summary": "Checked Morrison Proposition 1 and Milne Theorem 12.12; split off the general projective SL Hilbert--Mumford theorem and rational G_m weight decomposition. Wrote out the determinant coordinates, dual/inverse sign, sum-zero character identity, denominator normalization, constant and rank-zero cases. No statement change.",
+  "blueprint": "Supports the original direct-image alteration route through the Gieseker stability input: Morrison Proposition 1, diagonalization (equation (1)), determinant-coordinate observation, and rational-weight normalization in its proof. The ancestor tool reports null, preserved as inherited.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-a2267b571",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-a2267b571 (reviewer sub-agent of L); spot-checked: Read the item, all 4 steps, both new nodes, the cited statements (plucker-pgl-linearization, coordinate Hilbert polynomial, gm-ga, group-scheme, kun-projective) and Milne iAG Def 12.11, Thm 12.12 and Rem 12.13 (pp.234-235). Morrison Prop 1 and MFK Thm 2.1 are not local; they are declared WANTED and the node is marked agent-written. I checked them against the standard statements. Step 1: the linearization node gives the surjection to H^0(X,L^m), the Plücker immersion into P_lines(Λ^q S^*), the line Λ_m=det Q (which equals O(1) on P_lines(D^*)) and the same stability convention as the HM node. All HM hypotheses hold (k algebraically closed, r≥2, V=D^*≠0 even for q=0). The step takes the equivariance of the Plücker immersion from the linearization node's natural coordinate action; I accept this as naturality. Step 2: det λ = t^{Σa_i}=1 forces Σa_i=0 as an integer, so it holds in characteristic p; the converse diagonal construction is correct. Step 3: ℓ_I≠0 exactly when the monomials restrict to a basis; under the dual action of λ^{-1} the weights are s_I, so ν_{λ^{-1}}=W_{b,a}(m). The result cannot depend on the sign convention because the condition ranges over all bases and all tuples, and a→−a swaps min<0 with max>0. Step 4: the identity W_{b,a}=c(W_{b,u}−mP(m)ū) with c>0 is correct, and excluding constant tuples is right. Small cases agree with the criterion: one point and two points in P^1 are not stable, the empty scheme (q=0) is not stable, and inseparable subgroups in characteristic p are still counted. New nodes: the weight-basis node is true over any field. The HM node is the general MFK 2.1 criterion for SL(E) (true in all characteristics by Haboush); it is not a clause of the item, and its sign matches MFK. Duplicate searches over the snapshot DAG, live, side-live and the blueprint found no duplicate; there is no cycle, no SGA citation and no tool_uses needed. FIX (B3): lem-sfb-hilbert-mumford-projective-representation used 'projective k-scheme' with no definition node. I added def-kun-projective to its stmt_deps and inline citation, and defined GL(V) inline, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-hilbert-mumford-projective-representation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertMonomialNumericalCriterion",
+  "declaration": "AlgebraicGeometry.HilbertPlucker.stable_iff_monomial_numerical",
+  "declarations": [
+   "AlgebraicGeometry.HilbertPlucker.pointSections",
+   "AlgebraicGeometry.HilbertPlucker.basisMonomial",
+   "AlgebraicGeometry.HilbertPlucker.basisMonomialRestriction",
+   "AlgebraicGeometry.HilbertPlucker.IsMonomialBasis",
+   "AlgebraicGeometry.HilbertPlucker.monomialWeight",
+   "AlgebraicGeometry.HilbertPlucker.basisWeights",
+   "AlgebraicGeometry.HilbertPlucker.minimumBasisWeight",
+   "AlgebraicGeometry.HilbertPlucker.stable_iff_monomial_numerical"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertMonomialNumericalCriterion.lean",
+  "statement": "theorem stable_iff_monomial_numerical [IsAlgClosed k] (E : Presentation D m) (x : PGLLinearization.fieldTest k k ⟶ D.H) : E.sl_line.IsStable k x ↔ ∀ (b : Module.Basis (Fin (n + 2)) k (Fin (n + 2) → k)) (w : Fin (n + 2) → ℚ), (∃ i j : Fin (n + 2), w i ≠ w j) → minimumBasisWeight E x b w < ((∑ i : Fin (n + 2), w i) / (n + 2 : ℚ)) * (m : ℚ) * P.1.eval (m : ℚ)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The degree is supplied with the actual Hilbert embedding Presentation from the recorded bound theorem. A rational Hilbert point encodes its closed subscheme. Coordinates identify E with k^(n+2); every ordered basis is tested. Basis sums are minimized as a finite set, including the empty basis at rank zero."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5f953234",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read item node with its 4 steps, source place (Morrison 2.2 Prop 1), and the full live HilbertPluckerPGLLinearization module (Hilbert, sections, monomialRestriction, Presentation with all fields) plus GroupSchemeLinearization.IsStable. Every clause matches: k alg. closed; r=n+2; X as rational Hilbert point x of D; m≥M as Presentation D m (exactly what the existence theorem supplies); H^0 = Γ(x^* sections) via base_change; b-monomials expanded and restricted linearly over the full monomial enumeration; Module.Basis on the exact finite set; ℚ weights; finite min with unreachable 0 fallback; sl_line.IsStable k x iff, for all b and nonconstant w, W < (Σw/(n+2))·m·P(m) strictly. Sign matches Morrison and is symmetric under a→−a. Edge cases: q=0 gives 0<0 so not stable (correct), constant weights excluded, r=2, universes u. Only the item lean field changed; lean.statement matches the file verbatim; docstrings and 4-step proof present; sorry only. Report has Worker report and the standard Second reading placeholder. Possible duplicate def-sfb-weighted-monomial-basis-weight (Q112, created 2026-10-24) is not in the base, uses ℕ weights and an arbitrary ρ, lives in a different namespace and is not a stmt_dep: not an H4 fault; maintainer note to unify later. No file changed, no compile run."
+ }
+}

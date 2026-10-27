@@ -1,0 +1,252 @@
+{
+ "id": "lem-sp-nested-affine-orientation",
+ "kind": "statement",
+ "title": "Nested chart orientations equal the ordered affine composites",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X\\xrightarrow fY\\xrightarrow gZ$ be smooth separated morphisms of pure relative dimensions $d,e\\geq0$ between separated finite-type $k$-schemes, and put $h=gf$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms].\n\nFix $r\\ge1$ and $R=\\mathbf Z/\\ell^r$. Work in the ordinary constant-$R$ pro-etale derived categories, their bounded constructible finite-Tor subcategories [det-sp-finite-general-ring], derived tensor/pullback [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor] and Tate twists [def-coefficient-twists-detailed]. For $w=f,g,h$ put $\\omega_w=G_wR$, $G_w=w^!$, $L_w=R(d_w)[2d_w]$, with $d_f=d,d_g=e,d_h=d+e$. Use the inverse diagonal orientations $a_w:L_w\\simeq\\omega_w$, counit-defined tensor maps $t_{w,K}$, and exceptional compositor $c:G_h\\simeq G_fG_g$ [def-pur-smooth-purity-map, def-pur-co-smoothness, det-sp-composition-comparisons].\n\nLet $S\\subset Z,V\\subset g^{-1}S,U\\subset f^{-1}V$ be affine opens and let $v:V\\to\\mathbf A^e_S$, $u:U\\to\\mathbf A^d_V$ be separated etale maps of finite presentation with $g|_V=p_{e,S}v$, $f|_U=p_{d,V}u$ [def-weil-etale-morphism, def-sbc-affine-space]. Put $b=\\mathbf A^d(v)$ and $j:U\\hookrightarrow X$; identify $h|_U=p_{d+e,S}bu$ in that coordinate order. Denote by $\\Gamma_{p_m,H}:p_m^*H(m)[2m]\\to G_{p_m}H$ the ordered affine integration-transposed comparisons, with $\\Gamma_{p_0,H}=1_H$ and the recursive line normalization of [lem-pur-projection-purity-agreement]. Then, under the canonical open restriction, etale $u^!=u^*$, $v^!=v^*$, tensor/base-change and counit-preserving composition identifications,\n$$j^*(c_1a_h)=(bu)^*\\bigl(c^{\\mathrm{aff}}_1\\Gamma_{p_{d+e,S},R}\\bigr),$$\n$$j^*\\!\\left(t_{f,\\omega_g}(f^*a_g\\otimes a_f)\\right)=(bu)^*\\!\\left(\\Gamma_{p_d,G_{p_e}R}\\circ p_d^*(\\Gamma_{p_e,R})(d)[2d]\\right).$$\nHere $p_e:\\mathbf A^e_S\\to S$, $p_d:\\mathbf A^d_{\\mathbf A^e_S}\\to\\mathbf A^e_S$, and $c^{\\mathrm{aff}}:G_{p_{d+e}}\\simeq G_{p_d}G_{p_e}$ is the same adjunction-normalized compositor. The displayed right sides agree for all $d,e\\ge0$. Thus the two displayed restricted arrows agree. The formulas use $a_{p_m}=\\Gamma_{p_m,R}$ and $\\Gamma_{p_m,H}=t_{p_m,H}(1\\otimes\\Gamma_{p_m,R})$ also for $H=G_{p_e}R$; every such input is constructible finite-Tor. The coordinate block interchange is the even-degree sign $(-1)^{(2d)(2e)}=1$, and if a block is empty its comparison is the tensor-unit identity.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1), ordered affine integration on the nested charts, including empty blocks; former Steps 5-6"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "det-sp-finite-general-ring",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "def-pur-smooth-purity-map",
+  "def-pur-co-smoothness",
+  "det-sp-composition-comparisons",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "lem-pur-projection-purity-agreement",
+  "def-pur-diagonal-affine-trace-coordinates",
+  "def-pur-finite-exceptional-composition",
+  "def-pur-diagonal-dualizing-data",
+  "def-sp-nested-affine-orientation-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use the shared unchanged constructions and their four already proved geometric helpers. Instantiate nested_affine_normalized_inputs. Apply nested_affine_chart_formulas to obtain lhs = aff and rhs = it for each compact-support normalization. These two equations do not yet identify aff with it.",
+   "uses": [
+    "def-sp-nested-affine-formula-data",
+    "lem-sp-nested-affine-normalized-inputs",
+    "lem-sp-nested-affine-chart-formulas"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Instantiate nested_affine_integration_regrouping on S. Pull its equality back by chartPull, by substituting equal arguments in this actual function. Then lhs = aff = it = rhs by transitivity. This retains the exact common target, sources, compactification comparisons and zero-rank cases of Statement.",
+   "uses": [
+    "lem-sp-nested-affine-integration-regrouping"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the final two finite-Tor assertions directly by the adopted ordinary-etale constructibleFiniteTor_rightDerivedUpperShriek theorem at the coefficient unit and constructibleFiniteTor_leftDerivedUpperStar along f. The field structure map makes the finite coefficient exponent invertible (finiteComparedInvertibleExponent), and the coefficient unit is constructible finite-Tor (chartCoefficientUnit_finiteTor). These are already proved ordinary APIs underlying exceptional finite-Tor preservation and pullback stability; the condensed/pro-etale presentations are not needed for these ordinary output clauses.",
+   "uses": [
+    "sk-prop-sf-rf-shriek-preservation",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-pur-diagonal-dnc-chart-normalization",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exponent (2d)(2e) is even: it is (2d) times 2e and 2d is even. Even.neg_one_pow proves the sign is one. Assemble all nine conjuncts of Statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-nested-affine-formula-data",
+  "lem-sp-nested-affine-normalized-inputs",
+  "lem-sp-nested-affine-chart-formulas",
+  "lem-sp-nested-affine-integration-regrouping",
+  "sk-prop-sf-rf-shriek-preservation",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "def-pur-co-smoothness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1), Lean assembly of normalization, two chart formulas and affine regrouping; native ordinary finite-Tor APIs for the final domains"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal smooth purity orientations on nested etale charts agree with iterated ordered affine integration including rank zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent_coe\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For a finite-dimensional manifold $ M $ modeled on a normed vector space $ E $ over $ \\\\mathbb{R} $ with a model with corners $ I $, and a smooth bump covering $ f $, the embedding $ \\\\operatorname{embe\"}\n  {\"name\": \"SmoothBumpCovering.comp_embeddingPiTangent_mfderiv\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For a smooth bump covering $ f $ on a manifold $ M $ modeled on $ \\\\mathbb{R}^\\\\iota \\\\times \\\\mathbb{R} $, the composition of the first projection $ \\\\mathbb{R}^\\\\iota \\\\times \\\\mathbb{R} \\\\to \\\\mathbb{R}^\\\\iot\"}\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent_injective_mfderiv\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For a finite-dimensional manifold $ M $ modeled on a normed vector space $ E $ over $ \\\\mathbb{R} $ with a model with corners $ I $, and a smooth bump covering $ f $, the Fréchet derivative of the $ C^\"}\n  {\"name\": \"inTangentCoordinates_eq\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Tangent\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {E' : Type u_3} [inst_3 : NormedAddCommGroup E'] [inst_4 : NormedSpace 𝕜 E'] {H : Type u_4}\\n  [inst_5 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {H' : Type u_5} [in\", \"doc\": \"For smooth maps $ f:N\\\\to M $, $ g:N\\\\to M' $ and a family of continuous linear maps $ \\\\phi:N\\\\to L_\\\\mathbb{K}(E,E') $, the coordinate representation of the tangent map at points $ x_0,x\\\\in N $ is given \"}\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"{ι : Type uι} →\\n  {E : Type uE} →\\n    [inst : NormedAddCommGroup E] →\\n      [inst_1 : NormedSpace ℝ E] →\\n        [inst_2 : FiniteDimensional ℝ E] →\\n          {H : Type uH} →\\n            [inst_3 : TopologicalSpace H] →\\n              {I : ModelWithCorners ℝ E H} →\\n                {M : Type uM} →\\n     \", \"doc\": \"For a finite-dimensional manifold $ M $ modeled on a normed vector space $ E $ over $ \\\\mathbb{R} $ with a model with corners $ I $, and a smooth bump covering $ f $, this function defines a $ C^\\\\infty\"}\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent_ker_mfderiv\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For any point $x$ in the manifold $M$ and $x \\\\in s$, the kernel of the Fréchet derivative of the smooth embedding $f.\\\\text{embeddingPiTangent}: M \\\\to \\\\prod_{\\\\iota} (E \\\\times \\\\mathbb{R})$ at $x$ is the\"}\n  {\"name\": \"TangentBundle.coordChange_model_space\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Tangent\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {F : Type u_8} [inst_1 : NormedAddCommGroup F]\\n  [inst_2 : NormedSpace 𝕜 F] (b b' x : F),\\n  (tangentBundleCore (modelWithCornersSelf 𝕜 F) F).coordChange (achart F b) (achart F b') x = 1\", \"doc\": \"For the tangent bundle core constructed using the identity model on a normed vector space $ F $, the coordinate change between any two charts $ \\\\text{achart}(F, b) $ and $ \\\\text{achart}(F, b') $ at an\"}\n  {\"name\": \"ModelWithCorners.uniqueMDiffOn\", \"module\": \"Mathlib/Geometry/Manifold/MFDeriv/FDeriv\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_4} [inst_3 : TopologicalSpace H] (I : ModelWithCorners 𝕜 E H),\\n  UniqueMDiffOn (modelWithCornersSelf 𝕜 E) (Set.range ↑I)\", \"doc\": \"For a model with corners $ I : H \\to E $ over a nontrivially normed field $ \\\\mathbb{K} $, the differentiability structure is uniquely determined on the image of $ I $ (i.e., $ \\\\text{Set.range } I $) wh\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, AlgebraicGeometry.IsEtale",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation.*[Cc]hart|[Pp]urity.*[Ii]ntegration|[Ii]ntegration.*[Oo]rientation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized diagonal orientation for smooth composition agrees locally with affine space integration",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ContDiffBump.integral_normed_smul\", \"module\": \"Mathlib.Analysis.Calculus.BumpFunction.Normed\", \"type\": \"{X} [NormedAddCommGroup X] [NormedSpace ℝ X] [CompleteSpace X] (z : X) : ∫ x, f.normed μ x • z ∂μ = z\", \"doc\": \"For any vector $ z $ in a complete normed vector space $ X $ over $ \\\\mathbb{R} $, the integral of the normalized bump function $ f_{\\\\text{normed}} $ with respect to measure $ \\\\mu $, multiplied by $ z \"}\n  {\"name\": \"ContDiffBump.integral_normed\", \"module\": \"Mathlib.Analysis.Calculus.BumpFunction.Normed\", \"type\": \": ∫ x, f.normed μ x ∂μ = 1\", \"doc\": \"For a continuously differentiable bump function $f$ on a normed vector space $E$ over $\\\\mathbb{R}$, the normalized function $f.\\\\text{normed}$ maps each $x \\\\in E$ to $\\\\frac{f(x)}{\\\\int_E f(x) \\\\, d\\\\mu}$,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": ((((toOpensFunctor Y).op ⋙ f.normalizationDiagram).rightOp ⋙ Scheme.Spec) ⋙ Scheme.forget).IsLocallyDirected\", \"doc\": \"The composition of the opposite of the affine Zariski site inclusion functor for a scheme $ Y $, the normalization diagram of a morphism $ f $, the right opposite functor, the contravariant Spec funct\"}\n  {\"name\": \"MeasureTheory.Integrable.comp_snd_map_prod_id\", \"module\": \"Mathlib.Probability.Kernel.Condexp\", \"type\": \"[NormedAddCommGroup F] (hf : Integrable f μ) :\\n  Integrable (fun x : Ω × Ω => f x.2) (@Measure.map Ω (Ω × Ω) mΩ (m.prod mΩ) (fun ω => (id ω, id ω)) μ)\", \"doc\": \"Let $\\\\Omega$ be a measurable space equipped with a measure $\\\\mu$, and let $F$ be a normed additive commutative group. If $f : \\\\Omega \\\\to F$ is an integrable function with respect to $\\\\mu$, then the fu\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"{Q : AffineTargetMorphismProperty} [Q.IsLocal] : Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"ContDiffBump.contDiff_normed\", \"module\": \"Mathlib.Analysis.Calculus.BumpFunction.Normed\", \"type\": \"{n : ℕ∞} : ContDiff ℝ n (f.normed μ)\", \"doc\": \"For any continuously differentiable bump function $f$ on a normed vector space $E$ and a measure $\\\\mu$ on $E$, the normalized function $f_{\\\\text{norm}}(x) = \\\\frac{f(x)}{\\\\int_E f \\\\, d\\\\mu}$ is also cont\"}\n  {\"name\": \"Orientation.areaForm'\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \": E →L[ℝ] E →L[ℝ] ℝ\", \"doc\": \"The continuous bilinear form on a real normed space $ E $ defined by composing the linear map $ \\\\text{o.areaForm} $ with the canonical embedding of linear maps into continuous linear maps, producing a\"}\n  {\"name\": \"MeasureTheory.integrable_comp\", \"module\": \"Mathlib.MeasureTheory.Measure.Haar.NormedSpace\", \"type\": \"(g : F' → A) : Integrable (g ∘ f) ↔ Integrable g\", \"doc\": \"For a function $ g : F' \\\\to A $, the composition $ g \\\\circ f $ is integrable if and only if $ g $ is integrable.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of ordered affine space purity identifies both dualizing orientations on a nested coordinate chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"VectorField.mpullbackWithin_eq_pullbackWithin\", \"module\": \"Mathlib/Geometry/Manifold/VectorField/Pullback\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_3} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {E' : Type u_6} [inst_3 : NormedAddCommGroup E'] [inst_4 : NormedSpace 𝕜 E'] {f : E → E'}\\n  {V : E' → E'} {s : Set E},\\n  VectorField.mpullbackWithin (modelWithCornersSelf 𝕜\", \"doc\": \"For a smooth map $ f : E \\\\to E' $ between normed vector spaces over a nontrivially normed field $ \\\\mathbb{K} $, a vector field $ V : E' \\\\to E' $, and a subset $ s \\\\subseteq E $, the modified pullback \"}\n  {\"name\": \"modelWithCornersEuclideanHalfSpace\", \"module\": \"Mathlib/Geometry/Manifold/Instances/Real\", \"type\": \"(n : ℕ) → [inst : NeZero n] → ModelWithCorners ℝ (EuclideanSpace ℝ (Fin n)) (EuclideanHalfSpace n)\", \"doc\": \"For any non-zero natural number $ n $, this constructs a model with corners between the $ n $-dimensional Euclidean space $ \\\\mathbb{R}^n $ and its half-space $ \\\\{ x \\\\in \\\\mathbb{R}^n \\\\mid x_1 \\\\geq 0 \\\\}\"}\n  {\"name\": \"VectorField.mpullback_eq_pullback\", \"module\": \"Mathlib/Geometry/Manifold/VectorField/Pullback\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_3} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {E' : Type u_6} [inst_3 : NormedAddCommGroup E'] [inst_4 : NormedSpace 𝕜 E'] {f : E → E'}\\n  {V : E' → E'},\\n  VectorField.mpullback (modelWithCornersSelf 𝕜 E) (modelWithCorn\", \"doc\": \"For normed vector spaces $E$ and $E'$ over a nontrivially normed field $\\\\mathbb{K}$, when using the identity model with corners on both spaces, the model-dependent pullback $\\\\mathrm{mpullback}$ of a v\"}\n  {\"name\": \"modelWithCornersEuclideanQuadrant\", \"module\": \"Mathlib/Geometry/Manifold/Instances/Real\", \"type\": \"(n : ℕ) → ModelWithCorners ℝ (EuclideanSpace ℝ (Fin n)) (EuclideanQuadrant n)\", \"doc\": \"For a natural number $ n $, this constructs a model with corners over $ \\\\mathbb{R} $, where the normed vector space is $ \\\\mathbb{R}^n $ equipped with the $ L^2 $-norm, and the topological space is the\"}\n  {\"name\": \"VectorField.mpullbackWithin_univ\", \"module\": \"Mathlib/Geometry/Manifold/VectorField/Pullback\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] {H' : Type u_5} [inst_6\", \"doc\": \"For model with corners $I$ and $I'$, a smooth function $f$, and a vector field $V$, the pullback of $V$ within the universal set is equal to the standard pullback of $V$, i.e., $\\\\mathrm{mpullbackWithi\"}\n  {\"name\": \"ModelWithCorners.extChartAt_transContinuousLinearEquiv_target\", \"module\": \"Mathlib/Geometry/Manifold/Diffeomorph\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {E' : Type u_3} [inst_3 : NormedAddCommGroup E'] [inst_4 : NormedSpace 𝕜 E'] {H : Type u_5}\\n  [inst_5 : TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) {M : Type u_9} [ins\", \"doc\": \"For a point $x$ in the manifold $M$, the target of the extended chart at $x$ with respect to the model transformed by the continuous linear equivalence $e$ is equal to the preimage of the target of th\"}\n  {\"name\": \"Function.Injective.wOppSide_map_iff\", \"module\": \"Mathlib/Analysis/Convex/Side\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} {V' : Type u_3} {P : Type u_4} {P' : Type u_5} [inst : CommRing R]\\n  [inst_1 : PartialOrder R] [inst_2 : IsStrictOrderedRing R] [inst_3 : AddCommGroup V] [inst_4 : Module R V]\\n  [inst_5 : AddTorsor V P] [inst_6 : AddCommGroup V'] [inst_7 : Module R V'] [inst_8 : AddTo\", \"doc\": \"For an injective affine map $ f $, two points $ x $ and $ y $ lie on opposite sides of an affine subspace $ s $ if and only if their images $ f(x) $ and $ f(y) $ lie on opposite sides of the image $ f\"}\n  {\"name\": \"VectorField.mpullbackWithin_apply\", \"module\": \"Mathlib/Geometry/Manifold/VectorField/Pullback\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] {H' : Type u_5} [inst_6\", \"doc\": \"For manifolds $M$ and $M'$ modeled on normed vector spaces over a nontrivially normed field $\\\\mathbb{K}$, and a differentiable map $f : M \\\\to M'$, the pullback of a vector field $V$ on $M'$ within a s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|dualizing|exceptional",
+   "results": "[grep] OK 0 hit(s); top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general composition or affine-space geometry does not state the normalized purity comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth etale coordinate restriction identifies diagonal orientation and tensor purity with ordered integration over affine space",
+   "results": "[leansearch] OK 8 hit(s); top results: AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.FormallyEtale.instFormallySmooth, MDifferentiable.coordChangeL, mdifferentiableOn_coordChangeL, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsSmooth.recOn, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: general composition or affine-space geometry does not state the normalized purity comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.NatIso'; top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general composition or affine-space geometry does not state the normalized purity comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized smooth purity orientations on nested etale affine charts agree with ordered affine integration under the exceptional composition isomorphism",
+   "results": "[leanfinder] OK 8 hit(s); top results: AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage",
+   "date": "2026-10-23",
+   "verdict": "no match: general composition or affine-space geometry does not state the normalized purity comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "[loogle] OK 12 hit(s); top results: CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-23",
+   "verdict": "no match: general composition or affine-space geometry does not state the normalized purity comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional pullback purity comparison for a projection from affine space is compatible with composition and etale pullback",
+   "results": "[leanfinder] OK 8 hit(s); top results: AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.AffineSpace.map_over, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right",
+   "date": "2026-10-23",
+   "verdict": "no match: general composition or affine-space geometry does not state the normalized purity comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-composition-factors",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "proof (1), ordered affine integration on the nested charts, including empty blocks; former Steps 5-6",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-nested-affine-orientation",
+  "worker": "stage1",
+  "summary": "Q103: checked the latest unit route, found no complete project Lean attachment, and split the nested-chart comparison using existing nodes only. Explicitly instantiated the Cartesian-etale tower identity, separated the genuinely Cartesian square from the composite chart square, checked all finite-Tor inputs, and supplied rank-zero unit cases. No statement change and no new nodes.",
+  "blueprint": "det-sp-composition-factors, proof (1), nested charts and both orientations as ordered integration; the regrouping and empty-block details of the former Steps 5-6.",
+  "tool_uses": [
+   {
+    "node": "det-sp-purity-bc-factors",
+    "why": "Only clause (1), as a base-change tool for target-open restrictions and the Cartesian pullback of one affine projection along v; it does not replace the ordered integration proof of composition."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Constructible finite-Tor preservation by the existing exceptional functors, only to verify the input G_{p_e}R and intermediate affine-line inputs."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherian domains for restrictions of the finite-type schemes, a generic geometric tool."
+   },
+   {
+    "node": "lem-sfb-noetherian-open-immersion-qc",
+    "why": "Quasi-compactness of the open inclusions used when checking finite-type chart domains, a generic geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Finite type of the target and source open restrictions, a generic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-purity-bc-factors",
+  "thm-sf-preservation-class",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-qc-open-immersion-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-e321d234a",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-e321d234a (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps in full, every cited statement, blueprint main-20261015 sk-prop-sp-composition-factors proof (1) and the unit record. No new nodes. Step 4: I recomputed both factors of lem-pur-etale-cartesian-tower-tensor-comparison with (q,p,G,H,J,F)=(q,p,v,u,b,k). The first is u^*β^{-1}E_{u,q_V}a_{f|U}=k^*a_q and the second is (f|U)^*E_{v,p}a_{g|V}=k^*q^*a_p. The non-Cartesian (k,v) square is not treated as Cartesian. The square (q,q_V,b,v) is Cartesian because A^d_V=V×_T A^d_T. Steps 3-4 use the same target identification c∘E_{k,pq}∘c^aff, so the final equality is between arrows into one object. Step 2: projection-purity-agreement with def-pur-smooth-purity-map and the dualizing-unit-composite θ_{a,A}=unit gives a_P=Γ_{P,R}. With E=Q_ℓ, e=1 divides n, so the named-maps domain applies. The β of def-pur-co-smoothness is the e_1 of det-sp-purity-bc-factors(1). Step 6: the composition law covers d,e≥1. In the regrouping lemma with repeated endpoints, the recursion is literally the recursion of def-pur-affine-space-comparison, which covers d=0, e=0, both zero and the empty scheme. Sign: (−1)^{4de}=1. Step 5 is genuinely elementary. I accept tool_uses det-sp-purity-bc-factors(1) (target-open and Cartesian restriction only), thm-sf-preservation-class (ctf domain of G_pR) and the generic geometric nodes. The other citations belong to units on sk-prop-sp-composition's uses list. Batch 5: every trf/pod endpoint reached by the 8 flagged citations is already in the closure of the item's unchanged stmt_deps, and so are 5 of the 8 citations themselves. Each endpoint is a generic tool: stalk⊗ 008B, flat resolutions, iterated mates, Rees base change, 0F7L compact-support base change, 0D6D pullback coherence, lisse=FLC module objects. None is the trace formula, Poincaré duality, or a step of their proofs. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.NestedAffineOrientation",
+  "declaration": "WeilConjectures.PurityFiniteSetting.NestedAffine.nested_affine_orientation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.NestedAffine.nested_affine_orientation"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/NestedAffineOrientation.lean",
+  "statement": "theorem nested_affine_orientation (P : PurityFiniteSetting.{u}) (_hE : P.extension = ⊥) {X Y Z : Scheme.{u}} (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] (aZ : Z ⟶ Spec (.of P.field.k)) [IsSeparated aZ] [LocallyOfFiniteType aZ] [QuasiCompact aZ] (S : Z.Opens) (V : Y.Opens) (U : X.Opens) [IsAffine S.toScheme] [IsAffine V.toScheme] [IsAffine U.toScheme] (hV : V ≤ g ⁻¹ᵁ S) (hU : U ≤ f ⁻¹ᵁ V) (v : V.toScheme ⟶ AffineSpace (ULift.{u} (Fin e)) S.toScheme) (u : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) V.toScheme) [Etale v] [Etale u] (hv : (v ≫ (affineTraceAffineSpaceIso S.toScheme e).inv) ≫ affineTraceProjection S.toScheme e = g.resLE S V hV) (hu : (u ≫ (affineTraceAffineSpaceIso V.toScheme d).inv) ≫ affineTraceProjection V.toScheme d = f.resLE V U hU) : Statement P _hE d e f g aZ S V U hV hU v u hv hu",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The existing data, Statement and the four proved geometric helpers move verbatim to NestedAffineFormulaData, publicly reexported here. The assigned theorem is a complete assembly from three strictly partial comparison theorems; final finite-Tor clauses and parity are proved directly. No existing statement changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28d261c83",
+  "group": "NK",
+  "result": "fix",
+  "note": "Re-delivery of H2 RETURN 84288e79. Item module differs only by imports/5 alias call sites; statement, proof, proof_deps unchanged; lean.statement verbatim; item hypotheses, conclusions and edge cases (d=0, e=0, empty, non-Cartesian outer square, non-flat G_pR) re-checked OK. New def node def-sp-nested-affine-orientation-coordinates: 7 transparent abbrevs with identical signatures, docstrings OK, no sorry; it cites thm-pur-diagonal-dualizing-object legitimately (.choose of its exists-unique). F1 (H4/H12) FIX: chartDualizingUnit and chartTraceProjection_smooth were already owned at base 28d261c8 by landed def-pur-diagonal-dnc-chart-data and def-pur-diagonal-chart-transports; fixes/def-sp-nested-affine-orientation-coordinates.json cites both owners in stmt_deps and the statement (no cycle) and updates lean.note. JSON-only, no Lean change, no compile; worker reports clean compiles (5.5 s, 14.4 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d8366",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261026T065133-L-2707807",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item + 3 new sorried step modules + relocated FormulaData vs clone NestedAffineOrientation (verbatim diff) and item Statement conjuncts; nodes vs Lean proof; sandbox compile + #print axioms"
+ }
+}

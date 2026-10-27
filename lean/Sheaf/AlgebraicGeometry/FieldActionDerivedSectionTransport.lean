@@ -6,7 +6,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.NumberTheory.Padics.PadicNumbers
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientBasic
 
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars

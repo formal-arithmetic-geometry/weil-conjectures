@@ -1,0 +1,218 @@
+{
+ "id": "lem-sfb-space-derived-pushforward-upper-bound",
+ "kind": "statement",
+ "title": "Uniform upper bound for unbounded quasi-coherent space pushforward",
+ "statement": "Work in the fixed universes [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], quasi-coherence [def-trf-space-quasi-coherent-module], and the canonical module direct image [def-trf-space-etale-module-functors]. Suppose $f$ is quasi-compact (its pullback by every affine scheme over $Y$ has quasi-compact source) and quasi-separated (its relative diagonal is quasi-compact). Assume also that $Y$ is quasi-compact. In the unbounded derived categories [def-weil-abstract-derived-category], compute $Rf_*$ using K-injective resolutions, where a complex $I$ is K-injective if every map from an acyclic complex to $I$ is null-homotopic. Then there exists an integer $N\\geq1$, depending only on $f$, such that for every integer $b$ and every $E\\in D(\\mathcal O_X)$ with quasi-coherent cohomology and $H^q(E)=0$ for $q>b$, one has $H^m(Rf_*E)=0$ for all $m\\geq b+N$. No lower bound on $E$ and no Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08FA, lemma-quasi-coherence-direct-image, clause (2), shifted; its proof of (2) uses spaces-cohomology.tex Tag 073G (lemma-vanishing-higher-direct-images), Tag 08EX (lemma-quasi-coherence-higher-direct-images-application), and spaces-perfect.tex Tag 08F7 (lemma-application-nice-K-injective)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-size-convention",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-derived-module-calculus",
+  "def-a1-space-point-topology",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Choose $N\\geq1$ from [lem-sfb-space-affine-chart-uniform-qcoh-vanishing]. For every affine etale $V\\to Y$, this gives $R^pF_V(M)=0$ for all quasi-coherent $M$ and $p\\geq N$, with the same $N$ for every $V$. Here $F_V$ is evaluation at $W=X\\times_YV$ after extending to $\\mathcal C_X$. It is left exact and commutes with countable products: kernels and products of module sheaves are computed sectionwise (the sheaf condition glues each component), evaluation preserves these operations, and the extension equivalence preserves their universal properties. Thus $F_V$ meets the functor hypotheses of 08F7.",
+   "uses": [
+    "lem-sfb-space-affine-chart-uniform-qcoh-vanishing",
+    "def-weil-sheaf-of-modules-category",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FA, proof of (2), choice of N and the functor Gamma(V times_Y X, -)."
+   }
+  },
+  {
+   "text": "Fix $b$ and $E$ as in the statement. Apply [lem-sfb-space-product-preserving-derived-functor-upper-bound] on $X$ with the functor $F_V$ and the uniform integer $N$ from step 1. Its hypotheses concern exactly quasi-coherent modules and the cohomology of $E$, not the individual terms of a representative. It yields $H^m(RF_V(E))=0$ for every $m\\geq b+N$ and every affine etale $V\\to Y$, with no lower bound on $E$.",
+   "uses": [
+    "lem-sfb-space-product-preserving-derived-functor-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FA, proof of (2), application of Tag 08F7(3), with general upper endpoint b."
+   }
+  },
+  {
+   "text": "Use [lem-trf-space-enlarged-etale-ringed-site-model]: $v_f:\\mathcal C_Y\\to\\mathcal C_X$ sends $V$ to $X\\times_YV$ and induces the ringed morphism for $f$. By [lem-trf-space-chart-limit-enlarged-sections], its module direct image transported to the small sites is canonically the specified chart-limit direct image. Applying [lem-sfb-ringed-site-unbounded-leray-sections] therefore gives $R\\Gamma(V,Rf_*E)\\cong RF_V(E)$ in $D(\\operatorname{Ab})$. The extension equivalences transport K-injective resolutions, since they preserve acyclic complexes, homotopies and maps. Taking degree $m\\geq b+N$ cohomology gives $H^m(R\\Gamma(V,Rf_*E))=0$. Choose a K-injective representative $J$ of $Rf_*E$ using [prop-pur-kinjective-resolutions-exist], applicable to the small ringed site of $Y$ in the fixed universe.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "lem-sfb-ringed-site-unbounded-leray-sections",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FA, proof of (2), derived sections comparison; sites-cohomology.tex Tag 0D6H."
+   }
+  },
+  {
+   "text": "Use the representative $J$ chosen in step 3. On every affine etale $V\\to Y$, the complex $J(V)$ computes $R\\Gamma(V,Rf_*E)$; hence each degree-$m$ cycle in $J(V)$ is a boundary. Every scheme object of $Y_{\\mathrm{et}}$ has its affine open covering. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels, so $H^m(J)$ is locally represented by these cycle classes, all zero. Thus $H^m(Rf_*E)=0$ for all $m\\geq b+N$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV (lemma-sheafification-cohomology), direct kernel/cokernel argument on the affine basis, as at the end of 08FA(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-affine-chart-uniform-qcoh-vanishing",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-sfb-ringed-site-unbounded-leray-sections",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-trf-algebraic-space",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08FA (lemma-quasi-coherence-direct-image), proof of (2); upper endpoint b supplied by Tag 08F7(3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs morphism of algebraic spaces with quasi compact target, derived pushforward has a uniform upper cohomological bound on unbounded complexes with quasi coherent cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cohomological dimension extends from quasi coherent sheaves to unbounded above truncated derived complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsLE\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Category.{v_2, u_2} D} {inst✝² : CategoryTheory.Category.{v_3, u_3} H} (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (W : CategoryTheo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_3} {D : Type u_4} {H : Type u_1} {H' : Type u_2} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Category.{v_2, u_4} D] [CategoryTheory.Category.{v_3, u_1} H] [CategoryTheory.Category.{v_4, u_2} H'] (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryT\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.?dimension|uniform.*bound|rightDerived.*IsLE",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Harmonic/ZetaAsymp.lean\", \"line\": \"297\", \"text\": \"  -- We use dominated convergence, using `fun n ↦ term n 1` as our uniform bound (since `term` is\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/JacobiTheta/TwoVariable.lean\", \"line\": \"82\", \"text\": \"/-- A uniform upper bound for `jacobiTheta₂_term` on compact subsets. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/JacobiTheta/TwoVariable.lean\", \"line\": \"95\", \"text\": \"/-- A uniform upper bound for `jacobiTheta₂'_term` on compact subsets. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/JacobiTheta/TwoVariable.lean\", \"line\": \"105\", \"text\": \"/-- The uniform bound we have given is summable, and remains so after multiplying by any fixed\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/QExpansion.lean\", \"line\": \"84\", \"text\": \"  apply SummableLocallyUniformlyOn_of_locally_bounded isOpen_upperHalfPlaneSet\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/Deriv.lean\", \"line\": \"63\", \"text\": \"  -- we have a uniform summable bound on `‖term f z ·‖`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"109\", \"text\": \"an `O((im τ) ^ t)` bound at all cusps for some `0 ≤ t`, is in fact uniformly bounded by a multiple\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"140\", \"text\": \"an `O((im τ) ^ t)` bound at all cusps for some `0 ≤ t`, is in fact uniformly bounded by a multiple\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"160\", \"text\": \"is uniformly bounded. -/\"}\n  {\"file\": \"Mathlib/Probability/Kernel/Defs.lean\", \"line\": \"29\", \"text\": \"  uniform bound. This stronger condition is necessary to ensure that the composition of two finite\"}\n  {\"file\": \"Mathlib/Probability/Kernel/Defs.lean\", \"line\": \"153\", \"text\": \"/-- A kernel is finite if every measure in its image is finite, with a uniform bound. -/\"}\n  {\"file\": \"Mathlib/Algebra/Order/Field/Basic.lean\", \"line\": \"676\", \"text\": \"theorem uniform_continuous_npow_on_bounded (B : α) {ε : α} (hε : 0 < ε) (n : ℕ) :\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Basic.lean\", \"line\": \"381\", \"text\": \"  have ⟨δ, δ_pos, cont⟩ := uniform_continuous_npow_on_bounded (max 1 y)\"}\n  {\"file\": \"Mathlib/Probability/Martingale/BorelCantelli.lean\", \"line\": \"29\", \"text\": \"  a submartingale `f` with uniformly bounded differences, the set for which `f` converges is almost\"}\n  {\"file\": \"Mathlib/Probability/Martingale/BorelCantelli.lean\", \"line\": \"144\", \"text\": \"/-- One-sided martingale bound: If `f` is a submartingale which has uniformly bounded differences,\"}\n  {\"file\": \"Mathlib/Probability/Martingale/BorelCantelli.lean\", \"line\": \"279\", \"text\": \"/-- An a.e. monotone strongly adapted process `f` with uniformly bounded differences converges to\"}\n  {\"file\": \"Mathlib/Probability/Martingale/Convergence.lean\", \"line\": \"261\", \"text\": \"sense) directly implies L¹-uniform boundedness. We note that our definition of uniform\"}\n  {\"file\": \"Mathlib/Probability/Martingale/Upcrossing.lean\", \"line\": \"707\", \"text\": \"This inequality is central for the martingale convergence theorem as it provides a uniform bound\"}\n  {\"file\": \"Mathlib/Computability/TuringMachine/PostTuringMachine.lean\", \"line\": \"277\", \"text\": \"statements and so take 0 steps. (There is a uniform bound on how many statements can be executed\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"140\", \"text\": \"  · -- Show that the extensions are uniformly bounded\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"142\", \"text\": \"      apply LipschitzWith.uniformly_bounded (swap g) hgl a₀\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsUniformGroup/Order.lean\", \"line\": \"33\", \"text\": \"/-- If a sequence of functions converges uniformly on a set to a function `g` which is bounded above\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"line\": \"136\", \"text\": \"  (𝓝 (1 : α)).basis_sets.uniformity_of_nhds_one_inv_mul_swapped.totallyBounded_iff.trans <| by\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"line\": \"97\", \"text\": \"  uniformity_basis_dist.totallyBounded_iff\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/GromovHausdorff.lean\", \"line\": \"733\", \"text\": \"a uniformly bounded diameter, and for all `ε` the number of balls of radius `ε` required\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform cohomological bound for derived pushforward on quasi coherent complexes on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) (U : Y.Opens) : Γ((pushforward f).obj M, U) = Γ(M, f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, any sheaf of modules $ M $ over the structure sheaf of $ X $, and any open subset $ U $ of $ Y $, the sections of the pushforward sheaf $ f_*M $ over $ U $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(φ : M ⟶ N) (U : Y.Opens) : ((pushforward f).map φ).app U = φ.app (f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"{U V : Y.Opens} (i : U ⟶ V) : ((pushforward f).obj M).presheaf.map i.op = M.presheaf.map ((Opens.map f.base).map i).op\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a sheaf of modules $ M $ over $ X $, the restriction map of the pushforward sheaf $ f_*M $ on an inclusion $ U \\\\subset V $ in $ Y $'s open sets is equal t\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ restrictFunctor f ≅ 𝟭 _\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-derived-pushforward-coproducts",
+  "date": "2026-10-23",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Uniform upper bound for unbounded quasi-coherent space pushforward.",
+   "via": [
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-derived-pushforward-upper-bound",
+  "worker": "stage1",
+  "summary": "Followed 08FA(2) without a bounded-below spectral sequence; isolated the uniform sheaf bound, the 08F7 unbounded functor bound, and the derived Leray isomorphism, and wrote out the local kernel/cokernel detection. Reused the existing enlarged-etale site and chart-limit comparison. No statement or hypothesis changed.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images (3) chain through the space duality/Brown right-adjoint input, and the immediate parent coproduct proof: its uniform-upper-bound prerequisite is realized by 08FA(2), with 073G and 08EX before 08F7. Read the current latest blueprint unit and direct-images proof.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic enlarged-etale-site/direct-image realization needed to apply unbounded ringed-site Leray to the canonical module functor; it is not a replacement for the constructible-stability route."
+   },
+   {
+    "node": "lem-trf-space-chart-limit-enlarged-sections",
+    "why": "Generic enlarged-etale-site/direct-image realization needed to apply unbounded ringed-site Leray to the canonical module functor; it is not a replacement for the constructible-stability route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of K-injective representatives for arbitrary small ringed sites is a generic resolution tool, used on the target to carry out local cycle/boundary detection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-ab71cfea4",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-ab71cfea4 (reviewer sub-agent of L); spot-checked: Read the item and all 3 new nodes in full against spaces-perfect 08FA(2)/08F7/08F6, spaces-cohomology 073G/08EX and sites-cohomology 0D6H/0D6G. The item statement is unchanged (it differs from live only in the split fields), it is not superseded (live and side-live unsplit) and it has no repair note. Step 1: N comes from the new 073G+08EX node; F_V is left exact and preserves countable products because kernels and products are sectionwise and the extension equivalence preserves them. Step 2: the new 08F7(3) space node with a=-inf; the endpoint m>=b+N is correct. Step 3: enlarged model (v_f is the ringed morphism) plus chart-limit (D_f iso Q_f) plus the new 0D6H node give R Gamma(V,Rf_*E) iso RF_V(E); J comes from prop-pur-kinjective-resolutions-exist. Step 4: elementary local detection on affine charts, matching the last sentence of 08FA. All three new statements are true and tested on small cases (Y empty, identity f, F=0, E=M[-b]). None restates an item clause. No duplicates: the 073H affine nodes, the 08EX node, the scheme 08D4 node, global/ringed-space Leray variants and the 0DD8 D^+ pullback were all checked. Tool_uses accepted (generic enlarged-site foundations, K-injective existence). Batch-5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are definitions; the enlarged-site and chart-limit lemmas are 03G1/03G8/03M8 foundations whose closures contain no trace-formula or Poincare content, so they lie outside both assumptions. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedPushforwardUpperBound",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.derivedDirectImage_uniform_upper_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDerivedPushforwardUpperBound.lean",
+  "statement": "theorem derivedDirectImage_uniform_upper_bound {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} Y.SmallModules] (hqc : IsQuasiCompactPresheafMap f.hom.hom) (hqs : IsQuasiCompactPresheafMap (diagonalPresheafMap f.hom.hom)) (hY : CompactSpace (Point Y.obj.obj)) : ∃ N : ℤ, 1 ≤ N ∧ ∀ (b : ℤ) (E : X.DerivedModules), X.derivedQCohProperty E → (∀ q : ℤ, b < q → IsZero ((DerivedCategory.homologyFunctor X.SmallModules q).obj E)) → ∀ m : ℤ, b + N ≤ m → IsZero ((DerivedCategory.homologyFunctor Y.SmallModules m).obj ((derivedDirectImage f).obj E))",
+  "branch": "sheaf-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4818d4ab",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Re-delivery of 8ce5d2ab9bb4 (RETURN H2). Lean module byte-identical; only change is in the item's stmt_deps: lem-trf-space-qc-separated-etale-local replaced by def-sfb-space-quasi-compact-presheaf-map (owns IsQuasiCompactPresheafMap) and def-sfb-presheaf-map-separated-diagonal (owns diagonalPresheafMap), exactly as requested. Item statement/proof/source match side-live; all other snapshot node records are identical to side-live; no competing lean record. Re-read the clauses against Stacks 08FA(2) shifted via 08F7(3): qc+qs f, qc Y, ∃N≥1 before b and E, derivedQCohProperty, H^q(E)=0 for q>b ⇒ H^m(Rf_*E)=0 for m≥b+N, canonical derivedDirectImage = rightDerivedFunctor, no lower bound or Noetherian hypothesis; edge cases ok; lean.statement verbatim; sorry only; docstrings present; proof-dep imports exist. No compile (no file changed)."
+ }
+}

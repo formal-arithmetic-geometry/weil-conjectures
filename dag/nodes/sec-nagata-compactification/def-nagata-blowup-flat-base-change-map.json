@@ -113,7 +113,30 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.blowupFlatBaseChange",
+     "module": "WeilConjectures.Blowup.FlatBaseChange",
+     "lines": [
+      141,
+      146
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-blowups",
  "blueprint_update": {
@@ -137,5 +160,23 @@
   "group": "Q135",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-211dc3d6a (reviewer sub-agent of L); spot-checked: I read the whole definition-only split, which has no new nodes, against main-20261015 def-nagata-blowup-flat-base-change-map (order 124), the blueprint proof of thm-nagata-blowup-flat-base-change and Stacks 0805/01O3/01OG/0804. The hypotheses are unchanged (flat g, quasi-coherent I) and so are the source and target (Bl_{IO_Y}(Y) to Y x_X Bl_I(X), Y first). The composite is Bl_J(Y) = P_Y(R_Y(J)), then P_Y(beta_g), then c_g, then Y x_X P_X(R_X(I)) = Y x_X Bl_I(X). Proj is contravariant and the arrow direction is right; clause (2) of prop-nagata-relative-proj-functoriality needs beta_g to be a graded equivalence, which lemma-nagata-flat-pullback-rees provides, and in degree 0 beta_g is g*O_X = O_Y. c_g is clause (4), flat case. The blow-up/relative-Proj identifications use lemma-nagata-relative-proj-exists: Gamma(V,R_X(I)) is the sum of the I_V^n on affine V, so the all-affine-opens gluing data of def-nagata-global-blowup match. This is an elementary unfolding (advisory: no node states Bl = Proj_X(Rees)). The last map is induced by def-pc-fibre-product and is defined because the identifications are compatible with the structure maps to X. All 11 stmt_deps exist and none is merged. There is no cycle (the item is not in its 127-node closure). The off-unit statements are in the cited unit sk-def-nagata-sketch-data, so no tool_uses are needed. LeanFinder, LeanSearch, Loogle and grep searches are all recorded and none matches. Edge cases checked: I=O_X gives the identity, I=0 gives the empty map, g=id gives the identity, and ideals that are not of finite type need nothing extra. The blueprint metadata is preserved."
+ },
+ "lean": {
+  "module": "WeilConjectures.Blowup.FlatBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.blowupFlatBaseChange",
+  "statement": "noncomputable def blowupFlatBaseChange : (I.comap g).blowup ⟶ pullback I.blowupMap g",
+  "branch": "slopmaster2",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "§1(B) repair requested on returned head 91a215c9d744: the node had no lean record; its closed slopmaster2 audit already identifies this exact canonical definition. With {X Y : Scheme.{u}}, (I : X.IdealSheafData), (g : Y ⟶ X), and [Flat g], it constructs the coefficientwise Rees/relative-Proj comparison, rather than selecting an isomorphism via the flat-base-change theorem. The upstream fibre product has the blowup in its first factor and Y in its second, canonically the displayed target via pullback symmetry. The consumer uses this actual map with the upstream projection order."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ce448f24",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery of 91a215c9d744 repairs all returned points: (1) theorem-node stmt_dep lem-trf-strict-transform-sheaf-kernel removed and the global quotient inlined as cokernel.π (kernel.ι (moduleStrictTransformRestriction f P F)), the def-trf-module-strict-transform body; (2) zariskiGluingFirstBlowupMap is eqToHom ≫ blowupFlatBaseChange W.ι (a map, no Iso), and def-nagata-blowup-flat-base-change-map is cited with an existing:true record (WeilConjectures.Blowup.FlatBaseChange, statement verbatim from line 141, note present); stage2_delivery accepts the added stmt_dep because the delivery states that node and it is closed upstream; (3) lean.note explains the isFiniteType_toModules_sheaf proof argument. Diff against side-live: item changed only lean + that stmt_dep; dep node changed only lean. Clause by clause: qcqs S, quasi-compact U and V_a, finite cover, J_a finite type and unit on U∩V_a, unfolded flat hypothesis; ∃ extensions and ∀ extensions; B admissible with B.I = ∏ L_a (Mathlib product of ideals, empty = ⊤); global flatness; e over S; C admissible with centre the extended omitted product; eV over V_a with compatibility square; unique quotient-normalized θ and local flatness. Edge cases: empty/singleton cover, U=S, U=∅, F=0. No hollow defs, only the theorem proof is sorry, docstrings give source and blueprint, no line over 100, statement verbatim. Advisory: proof-only private imports. No compile run (no file changed)."
  }
 }

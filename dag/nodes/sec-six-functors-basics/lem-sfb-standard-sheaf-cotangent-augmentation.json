@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-standard-sheaf-cotangent-augmentation",
+ "kind": "statement",
+ "title": "Natural augmentation of standard sheaf cotangent complexes to differentials",
+ "statement": "Let $T$ be a topological space and $\\mathcal A\\to\\mathcal B$ a homomorphism of sheaves of commutative rings. Use the standard polynomial resolution $P_\\bullet\\to\\mathcal B$ with augmentation $\\epsilon$ and alternating complex $K_{\\mathcal B/\\mathcal A}$ of [lem-sfb-standard-sheaf-cotangent-flat-functorial-model]. Let $\\Omega^1_{\\mathcal B/\\mathcal A}$ be the sheafification of $U\\mapsto\\Omega^1_{\\mathcal B(U)/\\mathcal A(U)}$, with its universal derivation [lem-trf-sheafified-module-differentials-cokernel, def-weil-pbc-kahler-differentials]. The degree-zero formula $\\mathrm dp\\otimes r\\mapsto r\\,\\mathrm d(\\epsilon p)$, and zero in negative degrees, defines a canonical chain map\n$$\\epsilon_\\Omega:K_{\\mathcal B/\\mathcal A}\\longrightarrow\\Omega^1_{\\mathcal B/\\mathcal A}[0].$$\nIt induces an isomorphism $H^0(K_{\\mathcal B/\\mathcal A})\\xrightarrow{\\sim}\\Omega^1_{\\mathcal B/\\mathcal A}$. More explicitly, before sheafification, for rings $A\\to B$ on an open set, the cokernel of the first differential of $K_{B/A}$ is the $B$-module on symbols $\\delta_b$ modulo\n$$\\delta_{\\epsilon p}=\\sum_b\\epsilon(\\partial p/\\partial x_b)\\delta_b\\quad(p\\in A[x_b\\mid b\\in B]).$$\nThese relations generate exactly the additivity, Leibniz and vanishing-on-$A$ relations, and the isomorphism sends $\\delta_b$ to $\\mathrm db$. The augmentation and its $H^0$ isomorphism are natural in all commutative squares of sheaves of rings and under continuous inverse image. For $\\mathcal A\\to\\mathcal B\\to\\mathcal C$, the square consisting of the standard map $K_{\\mathcal B/\\mathcal A}\\otimes_{\\mathcal B}\\mathcal C\\to K_{\\mathcal C/\\mathcal A}$, the two augmentations and the differential map commutes; the bottom map is $r\\otimes\\mathrm db\\mapsto r\\,\\mathrm d(j(b))$, where $j:\\mathcal B\\to\\mathcal C$ is the given map. No flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QF (lemma-identify-H0), 08UR (lemma-H0-L-morphism-sheaves-rings), and 08UV (lemma-H0-L-morphism-ringed-spaces), with the standard face calculation of Tag 08PN (definition-cotangent-complex-ring-map); sites-modules.tex Tags 08TP (lemma-differentials-sheafify) and 08TQ (lemma-pullback-differentials)."
+ },
+ "stmt_deps": [
+  "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Work first with a ring map $A\\to B$. In the standard construction of [lem-trf-cotangent-resolution-coherence], write $P_0=A[x_b\\mid b\\in B]$, $P_1=A[y_p\\mid p\\in P_0]$, and $\\epsilon(x_b)=b$. The evaluation faces give $d_0(y_p)=p$ and $d_1(y_p)=x_{\\epsilon(p)}$. By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], $K^0$ is the free $B$-module on $\\delta_b=\\mathrm dx_b\\otimes1$, and $K^{-1}$ is free on $\\mathrm dy_p\\otimes1$. Thus the alternating differential sends this latter basis element to\n$$\\sum_b\\epsilon(\\partial p/\\partial x_b)\\delta_b-\\delta_{\\epsilon(p)}.$$\nEvery sum is finite. Since $K^1=0$, $H^0(K)$ is precisely the cokernel of this map. Its relations are exactly the relations displayed in the statement.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08PM (definition-standard-resolution), 08PN (definition-cotangent-complex-ring-map); the evaluation faces are also written explicitly in simplicial.tex, example-polynomial-algebra-maps."
+   }
+  },
+  {
+   "text": "The composite $P_0\\xrightarrow{\\epsilon}B\\xrightarrow{\\mathrm d}\\Omega_{B/A}$ is an $A$-derivation when the target is regarded as a $P_0$-module through $\\epsilon$. The universal property in [def-weil-pbc-kahler-differentials] therefore gives a $B$-linear map $K^0\\to\\Omega_{B/A}$ with $\\mathrm dp\\otimes r\\mapsto r\\,\\mathrm d(\\epsilon p)$. For $t\\in P_0$, the tensors $(t\\,\\mathrm dp)\\otimes r$ and $\\mathrm dp\\otimes\\epsilon(t)r$ both map to $r\\epsilon(t)\\,\\mathrm d(\\epsilon p)$, proving balancing explicitly. Its composites with the two faces on $\\mathrm dy_p\\otimes1$ are both $\\mathrm d(\\epsilon p)$, so it kills $d^{-1}$. Taking zero in all negative degrees makes a chain map to $\\Omega_{B/A}[0]$. It sends $\\delta_b$ to $\\mathrm db$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08PN (definition-cotangent-complex-ring-map) and 08QF (lemma-identify-H0), canonical differential map, computed here on the standard faces."
+   }
+  },
+  {
+   "text": "Let $F=\\bigoplus_{b\\in B}B\\delta_b$, let $R_{\\rm face}$ be the submodule generated by the relations in step 1, and let $R_{\\rm der}$ be generated by the additive, product and base-ring relations in [def-weil-pbc-kahler-differentials]. Substituting $p=x_b+x_c$, $p=x_bx_c$, and the constant polynomial $p=a$ gives respectively\n$$\\delta_{b+c}-\\delta_b-\\delta_c,\\qquad\\delta_{bc}-b\\delta_c-c\\delta_b,\\qquad\\delta_{\\varphi(a)}.$$\nEach belongs to $R_{\\rm face}$ (possibly with opposite sign). Hence $R_{\\rm der}\\subseteq R_{\\rm face}$. These substitutions remain valid when labels coincide, including $b=c$ and rings of characteristic two.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BK (definition-differentials), defining relation presentation; compared with the standard faces of cotangent.tex Tag 08PN."
+   }
+  },
+  {
+   "text": "Conversely, in $F/R_{\\rm der}$ the assignment $D(b)=[\\delta_b]$ is additive, satisfies $D(bc)=bD(c)+cD(b)$, and kills the image of $A$. For a monomial $p=a\\prod_{i=1}^m x_{b_i}$, repeated Leibniz gives\n$$D(\\epsilon p)=\\varphi(a)\\sum_{i=1}^m\\left(\\prod_{j\\ne i}b_j\\right)D(b_i)=\\sum_b\\epsilon(\\partial p/\\partial x_b)D(b).$$\nFor $m=0$ both sides are zero; additivity gives the formula for every polynomial. Repeated labels contribute once for each occurrence, as do formal partial derivatives. Thus every face relation vanishes modulo $R_{\\rm der}$, proving $R_{\\rm face}\\subseteq R_{\\rm der}$. By the quotient description in [def-weil-pbc-kahler-differentials], $F/R_{\\rm face}=F/R_{\\rm der}\\cong\\Omega_{B/A}$, with $[\\delta_b]\\mapsto\\mathrm db$. This is exactly the map induced by step 2, so its $H^0$ map is an isomorphism. The monomial differentiation formula agrees with [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables].",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 07BK (definition-differentials), 00RO (lemma-universal-omega) and 00RX (lemma-differentials-polynomial-ring), with the explicit monomial calculation above."
+   }
+  },
+  {
+   "text": "For $\\mathcal A\\to\\mathcal B$ on $T$, apply steps 1--4 over each open $U$, with $A=\\mathcal A(U)$ and $B=\\mathcal B(U)$. Restricting coefficients and variable labels carries both faces and $\\mathrm dp\\otimes r\\mapsto r\\,\\mathrm d(\\epsilon p)$ to the same formulas on a smaller open; thus these are maps of presheaves. By [lem-trf-affine-cotangent-comparison], sheafifying the sectionwise standard complex gives $K_{\\mathcal B/\\mathcal A}$. By [lem-trf-sheafified-module-differentials-cokernel], sheafifying the target gives $\\Omega_{\\mathcal B/\\mathcal A}$ and its universal derivation. Sheafify the chain map. To identify $H^0$, use [def-weil-presheaf-modules-sheafification]: maps from the sheafification of the presheaf cokernel to any sheaf module $M$ are exactly maps from the degree-zero presheaf to $M$ killing its first differential. The same condition characterizes maps from the cokernel of the sheafified differential. These identifications are natural in $M$, so the two cokernels represent the same functor and are canonically isomorphic. The isomorphism is induced by sheafifying the presheaf cokernel map. Since the complexes have zero positive terms, this identifies $H^0(K)$ with the sheafification of the ring cokernels, and step 4 gives the required isomorphism. This argument takes cokernels of presheaves and then sheafifies; it does not assert that sheaf cokernels are sectionwise cokernels.",
+   "uses": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SX (remark-map-sections-over-U) and 08UR (lemma-H0-L-morphism-sheaves-rings); sites-modules.tex Tags 03CY (lemma-sheafification-presheaf-modules) and 08TP (lemma-differentials-sheafify)."
+   }
+  },
+  {
+   "text": "For a commutative square $(\\mathcal A\\to\\mathcal B)\\to(\\mathcal A'\\to\\mathcal B')$ with upper coefficient map $\\beta:\\mathcal B\\to\\mathcal B'$, [lem-sfb-standard-sheaf-cotangent-flat-functorial-model] sends $\\mathrm dp\\otimes r$ to $\\mathrm d(p')\\otimes\\beta(r)$ and has $\\epsilon'(p')=\\beta(\\epsilon p)$. The induced differential map sends $\\mathrm db$ to $\\mathrm d(\\beta b)$: this is defined by the universal derivation of [lem-trf-sheafified-module-differentials-cokernel], since $b\\mapsto\\mathrm d(\\beta b)$ is additive and Leibniz with coefficients restricted along $\\beta$. Writing $\\alpha:\\mathcal A\\to\\mathcal A'$ and $\\varphi,\\varphi'$ for the two structure maps, the square gives $\\mathrm d(\\beta(\\varphi(a)))=\\mathrm d(\\varphi'(\\alpha(a)))=0$, so this derivation kills $\\mathcal A$. Both routes from degree zero to the target differentials therefore give\n$$\\beta(r)\\,\\mathrm d(\\beta(\\epsilon p)).$$\nIn negative degrees both give zero. This proves naturality of the chain augmentation, and passage to its degree-zero cokernel proves naturality of the $H^0$ isomorphism. Coefficients in the target are restricted along $\\beta$ when comparing the maps.",
+   "uses": [
+    "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+    "lem-trf-sheafified-module-differentials-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SS (definition-cotangent-complex-morphism-sheaves-rings and following commutative-square construction), together with sites-modules.tex Tag 08TP."
+   }
+  },
+  {
+   "text": "Let $u:T'\\to T$ be continuous. Take the sites of opens of $T$ and $T'$ in a common enlarged universe; their induced geometric morphism satisfies the small-site hypothesis of the differential comparison below. Use the inverse-image comparison of standard complexes from [lem-trf-affine-cotangent-comparison] and its compatibility with the standard maps in [lem-sfb-standard-sheaf-cotangent-flat-functorial-model]. Use [lem-trf-topos-inverse-image-differentials] for $u^{-1}\\Omega_{\\mathcal B/\\mathcal A}\\cong\\Omega_{u^{-1}\\mathcal B/u^{-1}\\mathcal A}$, which preserves universal derivations. Under these comparisons the degree-zero augmentation is still the map induced by the derivation $p\\mapsto\\mathrm d(\\epsilon p)$: the comparisons preserve the augmentation of the polynomial resolution and universal differentials. Thus its value on $\\mathrm dp\\otimes r$ is still $r\\,\\mathrm d(\\epsilon p)$, while all negative components are zero. This proves compatibility of the chain maps with inverse image. By [lem-pc-inverse-image-module-functor-exact], continuous module inverse image preserves finite colimits. A cokernel is the coequalizer of a map and zero, so inverse image preserves the cokernel $H^0$ of these nonpositive complexes. Taking this cokernel gives precisely the asserted inverse-image compatibility of the $H^0$ isomorphism. Here the coefficient sheaf is $u^{-1}\\mathcal B$; no additional scalar extension is being treated as exact.",
+   "uses": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-pc-inverse-image-module-functor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SV (lemma-pullback-cotangent-morphism-topoi); sites-modules.tex Tag 08TQ (lemma-pullback-differentials); sheaves.tex Tags 008X (lemma-pullback-module) and 008Y (lemma-adjoint-push-pull-modules)."
+   }
+  },
+  {
+   "text": "Finally take $\\mathcal A\\to\\mathcal B\\xrightarrow{j}\\mathcal C$. Tensor the first augmentation with $\\mathcal C$ and use the standard chain map of [lem-sfb-standard-sheaf-cotangent-flat-functorial-model]. The bottom arrow $\\mathcal C\\otimes_{\\mathcal B}\\Omega_{\\mathcal B/\\mathcal A}\\to\\Omega_{\\mathcal C/\\mathcal A}$ exists by the universal derivation in [lem-trf-sheafified-module-differentials-cokernel]: $b\\mapsto\\mathrm d(jb)$ is an $\\mathcal A$-derivation, so its linear extension sends $c\\otimes\\mathrm db$ to $c\\,\\mathrm d(jb)$. For a local section $b_0$ of $\\mathcal B$, the tensors $c\\,j(b_0)\\otimes\\mathrm db$ and $c\\otimes b_0\\mathrm db$ both map to $c\\,j(b_0)\\,\\mathrm d(jb)$, so this extension is balanced over $\\mathcal B$. On a local generator $(\\mathrm dp\\otimes r)\\otimes c$, the route through $K_{\\mathcal C/\\mathcal A}$ gives $c\\,j(r)\\,\\mathrm d(\\epsilon' p')=c\\,j(r)\\,\\mathrm d(j(\\epsilon p))$. The route through $\\Omega_{\\mathcal B/\\mathcal A}\\otimes_{\\mathcal B}\\mathcal C$ gives the same expression. These elements generate degree zero locally, and every negative component of either route is zero. Hence the square commutes as a square of chain maps. Only linear maps and ordinary tensor products were used; exactness of scalar extension, and therefore flatness of $\\mathcal C$ over $\\mathcal B$, was never required.",
+   "uses": [
+    "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+    "lem-trf-sheafified-module-differentials-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SS, commutative-square maps, specialized to the square with base map the identity; sites-modules.tex Tag 08TP for universal sheaf derivations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-pc-inverse-image-module-functor-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08PN, 08QF, 08SS, 08SV, 08SX and 08UR; explicit standard-face and monomial proof supplied by Q72 rather than the lower-shriek proof of 08QF; sheafification follows sites-modules.tex 08TP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical augmentation from the full standard simplicial cotangent complex of ring sheaves to Kahler differentials in degree zero induces an isomorphism on zeroth cohomology, naturally in ring squares",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n  {\"name\": \"KaehlerDifferential.quotientCotangentIdealRingEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (TensorProduct R S S ⧸ KaehlerDifferential.ideal R S ^ 2) ⧸ (KaehlerDifferential.ideal R S).cotangentIdeal ≃+*\\n            S\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $\\\\mu: S \\\\otimes_R S \\\\to S$. The module of Kähler differentials $\\\\Omega^1_{S/R}$ is de\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_comp_equiv\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"For algebra extensions $ P $ and $ P' $ generated by different index sets over a commutative ring $ R $, the composition of the connecting homomorphism $ \\\\delta_{Q,P} $ with the linear equivalence $ (\"}\n  {\"name\": \"Algebra.Extension.h1Cotangentι_apply\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  (self : ↥P.cotangentComplex.ker), Algebra.Extension.h1Cotangentι self = ↑self\", \"doc\": \"The canonical linear map from the first cotangent cohomology module $ H^1 $ (defined as the kernel of the cotangent complex map $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R} $) to the cotange\"}\n  {\"name\": \"Algebra.H1Cotangent.mapEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] → (S ≃ₐ[R] S') → Algebra.H1Cotangent R S ≃ₗ[R] Algebra.H1Cotangent R S'\", \"doc\": \"Given an $ R $-algebra isomorphism $ e : S ≃ₐ[R] S' $ between commutative $ R $-algebras $ S $ and $ S' $, this constructs an $ R $-linear equivalence between the first cotangent cohomology modules $ \"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (a : P.toExtension.Cotangent)\\n  (a_1 : σ), P.cotangentEquiv a a_1 = P.cotangentComplexAux a a_1\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_mk\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (x : ↥P.ker), P.cotangentComplex (Algebra.Extension.Cotangent.mk x) = 1 ⊗ₜ[P.Ring] (KaehlerDifferential.D R P.Ring) ↑x\", \"doc\": \"The module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$ inherits the structure of an additive commutative group from its module structure over $S$. This group operation is induced by \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zeroth cohomology of the polynomial simplicial differential complex is the module of Kahler differentials by the two face relations, compatible with sheafification and pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R) (X : Dᵒᵖ),\\n  (PresheafOfModules.DifferentialsConstruction.relativeDifferentials' φ').obj X =\\n    CommRingCat.KaehlerDifferential (φ'.app X)\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{D}^{\\\\text{op}}$, the presheaf of relative Kähler differentials assigns to $X$ the module of Kähler differentials $\\\\Omega_{S'(X)/R(X)}$, where $S'(\"}\n  {\"name\": \"KaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type v\", \"doc\": \"The module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$, which is the universal $S$-module generated by symbols $ds$ for $s \\\\in S$ subject to the relations $d(r) = 0$ for $r \\\\in R$, $\"}\n  {\"name\": \"KaehlerDifferential.polynomialEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Polynomial\", \"type\": \"(R : Type u) → [inst : CommRing R] → Ω[Polynomial R⁄R] ≃ₗ[Polynomial R] Polynomial R\", \"doc\": \"For any commutative ring $ R $, the module of Kähler differentials $ \\\\Omega_{R[X]/R} $ is isomorphic to the polynomial ring $ R[X] $ as an $ R[X] $-module. This isomorphism maps the differential $ dX \"}\n  {\"name\": \"CommRingCat.KaehlerDifferential\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Basic\", \"type\": \"{A B : CommRingCat} → (A ⟶ B) → ModuleCat ↑B\", \"doc\": \"For a homomorphism $ f : A \\\\to B $ of commutative rings, this constructs the module of Kähler differentials $ \\\\Omega_{B/A} $ as an object in the category of $ B $-modules. It is the universal $ B $-mo\"}\n  {\"name\": \"instInhabitedKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u_2) →\\n  (S : Type u_1) → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Inhabited Ω[S⁄R]\", \"doc\": \"This instance asserts that the module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$ is inhabited, meaning it contains at least one element (typically the differential forms $ds$ for $s\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) →\\n        PresheafOfModules.Derivation.Universal (PresheafOfModules.DifferentialsConstruction.derivation' φ')\", \"doc\": \"The relative Kähler differentials presheaf $\\\\Omega_{\\\\phi'}$ satisfies the universal property: for any derivation $d': S' \\\\to M'$ (where $M'$ is an $R$-module presheaf), there exists a unique $R$-linea\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) → (PresheafOfModules.DifferentialsConstruction.relativeDifferentials' φ').Derivation' φ'\", \"doc\": \"A derivation constructed for the relative differentials presheaf, defined by assigning to each object the Kähler differential derivation $d$ satisfying the Leibniz rule and annihilating the images of \"}\n  {\"name\": \"KaehlerDifferential.D_apply\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (s : S),\\n  (KaehlerDifferential.D R S) s = (KaehlerDifferential.ideal R S).toCotangent ⟨1 ⊗ₜ[R] s - s ⊗ₜ[R] 1, ⋯⟩\", \"doc\": \"For any element $ s $ in an $ R $-algebra $ S $, the Kähler differential $ d(s) $ is equal to the equivalence class of $ 1 \\\\otimes s - s \\\\otimes 1 $ in the cotangent module $ \\\\Omega_{S/R} $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"toKaehler\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {P : Algebra.Extension R S} : Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"\"}\n  {\"name\": \"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {ι : Type w} {P : Algebra.Generators R S ι} (i : ι) : P.toExtension.toKaehler (P.cotangentSpaceBasis i) = (KaehlerDifferential.D R S) (P.val i)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*[Aa]ugment|[Aa]ugment.*cotangent|cotangent.*[Hh]omology|cotangent.*[Cc]okernel|toKaehler",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"line\": \"30\", \"text\": \"of `Algebra.Extension.exact_cotangentComplex_toKaehler`\"}\n  {\"file\": \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"line\": \"67\", \"text\": \"`Algebra.Extension.exact_cotangentComplex_toKaehler`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"line\": \"70\", \"text\": \"lemma comm₂₃' : pres.toExtension.toKaehler.comp pres.cotangentSpaceBasis.repr.symm.toLinearMap =\"}\n  {\"file\": \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"line\": \"147\", \"text\": \"      (pres.toExtension.exact_cotangentComplex_toKaehler))\"}\n  {\"file\": \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"line\": \"150\", \"text\": \"    pres.toExtension.toKaehler.comp pres.cotangentSpaceBasis.repr.symm.toLinearMap =\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"203\", \"text\": \"    Extension.exact_cotangentComplex_toKaehler Extension.toKaehler_surjective hf (b := P.map)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"87\", \"text\": \"  obtain ⟨l, hl⟩ := ((P.toExtension.exact_cotangentComplex_toKaehler.split_tfae'.out 0 1 rfl rfl).mp\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"89\", \"text\": \"      Module.projective_lifting_property _ _ P.toExtension.toKaehler_surjective⟩).2\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"290\", \"text\": \"      P.toExtension.toKaehler.baseChange T (CotangentSpace.compEquiv Q P\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"316\", \"text\": \"        toKaehler_cotangentSpaceBasis, add_left_inj, LinearMap.coe_inl]\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"362\", \"text\": \"    (P.toExtension.toKaehler.baseChange T)\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"363\", \"text\": \"    (lTensor_exact T P.toExtension.exact_cotangentComplex_toKaehler\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"364\", \"text\": \"      P.toExtension.toKaehler_surjective)\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"line\": \"15\", \"text\": \"the cotangent spaces and the first homology of naive cotangent complex associated with\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"line\": \"28\", \"text\": \"- `h1CotangentExtendScalarsEquiv`: `P.extensScalars` can be used to compute the first homology of\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"51\", \"text\": \"see `Generators.disjoint_ker_toKaehler_of_linearIndependent` for one half.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"58\", \"text\": \"    (hk : Disjoint (LinearMap.ker P.toExtension.toKaehler)\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"64\", \"text\": \"  let g : (ι →₀ S) →ₗ[S] (Ω[S⁄R]) := P.toExtension.toKaehler ∘ₗ P.cotangentSpaceBasis.repr.symm\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"67\", \"text\": \"    exact Extension.exact_cotangentComplex_toKaehler\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"81\", \"text\": \"lemma disjoint_ker_toKaehler_of_linearIndependent\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"24\", \"text\": \"- `Algebra.Extension.toKaehler`: The projection `⨁ᵢ S dxᵢ → Ω[S/R]`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"25\", \"text\": \"- `Algebra.Extension.toKaehler_surjective`: The map `⨁ᵢ S dxᵢ → Ω[S/R]` is surjective.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"26\", \"text\": \"- `Algebra.Extension.exact_cotangentComplex_toKaehler`: `I/I² → ⨁ᵢ S dxᵢ → Ω[S/R]` is exact.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"29\", \"text\": \"- `Algebra.Extension.H1Cotangent`: The first homology of the (naive) cotangent complex\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"325\", \"text\": \"abbrev toKaehler : P.CotangentSpace →ₗ[S] Ω[S⁄R] := mapBaseChange _ _ _\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural zeroth cohomology identification of full cotangent complexes of sheaves of rings with their sheaf of Kahler differentials",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.isoHomologyπ₀\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \": K.cycles 0 ≅ K.homology 0\", \"doc\": \"For a cochain complex $ K $ in a category with zero morphisms, the cycles at index 0 are isomorphic to the homology at index 0. This follows because the differential map into index 0 is trivial (being\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"groupCohomology.H0Iso\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": H0 A ≅ ModuleCat.of k A.ρ.invariants\", \"doc\": \"For a commutative ring $ k $, group $ G $, and $ k $-representation $ A $, the zeroth group cohomology module $ H^0(G, A) $ is isomorphic to the submodule $ A^G $ of $ G $-invariant elements in $ A $.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Subsingleton Ω[S⁄R]\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is zero.\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"groupCohomology.shortComplexH0_g\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G),\\n  (groupCohomology.shortComplexH0 A).g = groupCohomology.d₀₁ A\", \"doc\": \"For any commutative ring $k$, group $G$, and representation $A$ of $G$ over $k$, the differential $g$ in the short complex for zeroth group cohomology is equal to the coboundary operator $d₀₁$.\"}\n  {\"name\": \"KaehlerDifferential.endEquivDerivation'\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          Derivation R S Ω[S⁄R] ≃ₗ[S] Derivation R S ↥(KaehlerDifferential.ideal R S).cotangentIdeal\", \"doc\": \"For commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, there is a linear equivalence between the space of $ R $-derivations from $ S $ to the module of Kähler differentials $ \"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmentation from the standard simplicial cotangent complex of sheaves of commutative rings to Kahler differentials induces an isomorphism on zeroth cohomology",
+   "results": "8 hits: KaehlerDifferential.quotientCotangentIdeal, Algebra.Extension.h1Cotangentι_apply, Algebra.H1Cotangent.mapEquiv, Algebra.Extension.cotangentComplex_mk, KaehlerDifferential.quotientCotangentIdealRingEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Extension.H1Cotangent, KaehlerDifferential.endEquivDerivation'.",
+   "date": "2026-10-22",
+   "verdict": "no match: ring naive-cotangent or universal-differential results do not state the full standard simplicial sheaf-complex assertion, H0 identification and all compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cokernel of the difference of two faces of the polynomial differential simplicial resolution is the module of Kahler differentials",
+   "results": "8 hits: Algebra.Extension.cotangentComplex_mk, Algebra.Generators.H1Cotangent.δAux, Algebra.Presentation.differentialsSolution, KaehlerDifferential.quotKerTotalEquiv, Algebra.H1Cotangent.δ, Algebra.Extension.toKaehler, KaehlerDifferential, Algebra.Presentation.differentials.comm₁₂.",
+   "date": "2026-10-22",
+   "verdict": "no match: ring naive-cotangent or universal-differential results do not state the full standard simplicial sheaf-complex assertion, H0 identification and all compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"toKaehler\"",
+   "results": "2 hits: Algebra.Extension.exact_cotangentComplex_toKaehler and Algebra.Generators.toKaehler_cotangentSpaceBasis, Mathlib/RingTheory/Extension/Cotangent/Basic.lean:330 and :523. Read lines 324--340 and 523--527: ordinary naive cotangent exactness and generator formula, not the full sheaf standard-resolution statement.",
+   "date": "2026-10-22",
+   "verdict": "no match: ring naive-cotangent or universal-differential results do not state the full standard simplicial sheaf-complex assertion, H0 identification and all compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*[Aa]ugment|[Aa]ugment.*cotangent|cotangent.*[Cc]okernel|toKaehler",
+   "results": "23 hits in RingTheory/Extension/Cotangent/{Free,Basic}.lean, RingTheory/Smooth/{Basic,StandardSmoothCotangent}.lean, RingTheory/Kaehler/JacobiZariski.lean and Algebra/Module/Presentation/Differentials.lean. Basic.lean:325,327,330 give toKaehler, surjectivity, naive exactness. None covers the full standard sheaf complex and its natural augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match: ring naive-cotangent or universal-differential results do not state the full standard simplicial sheaf-complex assertion, H0 identification and all compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth cohomology of the full cotangent complex of ring sheaves is naturally isomorphic to sheaf Kahler differentials",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-cotangent-transitivity",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; etale source locality of the adjunction line used in the codimension-one differential calculation of the regular-pullback input; general scheme cotangent transitivity supporting the source-etale determinant comparison; finer split of existing proof: Steps 10-11: the standard-face presentation of H0, sheafification and natural augmentation",
+   "via": [
+    "lem-sfb-scheme-cotangent-transitivity",
+    "lem-sfb-etale-source-adjunction-line",
+    "lem-sfb-nodal-log-dualizing-pullback",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-standard-sheaf-cotangent-augmentation",
+  "worker": "stage1",
+  "summary": "Q72 gives the explicit two-face cokernel calculation, proves equality with the derivation relation submodule in both directions, constructs the augmentation, sheafifies using the module-sheafification adjunction, and checks ring-square, inverse-image and scalar-extension compatibility on differentials. No new nodes and no statement change. Existing arbitrary-variable polynomial and sheaf comparison lemmas are reused. Repair of return at be92a9e91e5: reapplied the retained split to the current unsplit live node, reread all nine current cited statements, and checked all 17 literal citation entries. Clarified that the two sheaf cokernels are canonically isomorphic by their universal properties; the statement, route and dependencies are retained. Repair of returned head 20675d20a6f: rebased through the authorized delivery tool, reconfirmed every cited statement against its recorded fingerprint, made tensor balancing and annihilation of the changed base explicit, and specified the common universe for continuous inverse image. No statement or dependency change. Repair of returned head f4e35a8c81f: rebased by deliver.py onto current origin/sheaf-dag, reread all nine cited statements (unchanged), replaced the inverse-image exactness shorthand by its precise finite-colimit/cokernel argument, and added the explicit balancing check for the bottom scalar-extension map. All prior proof refinements and searches are retained.",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images proof (3) provenance. Realizes the parent lem-sfb-scheme-cotangent-transitivity steps 10--11: standard-face H0 presentation, sheafification and natural augmentation. The blueprint cotangent/differentials/08QF searches find no equivalent imported node; ancestor command returns None, retained in blueprint.from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-cotangent-resolution-coherence",
+    "why": "Provides the standard polynomial resolution and its evaluation faces for the low-degree calculation; the unit has no ring-resolution construction."
+   },
+   {
+    "node": "lem-trf-affine-cotangent-comparison",
+    "why": "Provides sectionwise sheafification of the standard complex and its continuous inverse-image comparison; this is a generic ring-sheaf tool."
+   },
+   {
+    "node": "lem-trf-sheafified-module-differentials-cokernel",
+    "why": "Provides the sheaf universal derivation and its sectionwise sheafification, needed to construct the augmentation."
+   },
+   {
+    "node": "lem-trf-topos-inverse-image-differentials",
+    "why": "Provides the canonical inverse-image differential isomorphism preserving universal derivations."
+   },
+   {
+    "node": "lem-pc-inverse-image-module-functor-exact",
+    "why": "Provides exact continuous inverse image with the transported coefficient sheaf, needed for the degree-zero cokernel comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-pc-inverse-image-module-functor-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-c2906af13",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-c2906af13 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I re-read the full item: statement, all 8 steps and all 9 cited statements; their SHA-256 values match the report. This is the 4th delivery (be92, 2067 and f4e3 were PASSed and then refused at landing because the side completion was not promoted). It has 0 new nodes, and the statement and stmt_deps are unchanged. The only change since f4e35a8c: step 7 now says 'preserves finite colimits, cokernel = coequalizer with 0', which is exactly what lem-pc-inverse-image-module-functor-exact states; step 8 adds the balancing check c j(b0)⊗db ~ c⊗b0 db. Checks: the faces d0(y_p)=p and d1(y_p)=x_{εp} match simplicial.tex example-polynomial-algebra-maps; the polynomial basis node (any set T, scalar extension) gives the differential Σε(∂p/∂x_b)δ_b−δ_{εp}; R_der⊆R_face via the substitutions x_b+x_c, x_bx_c and a (char 2, b=c OK), and the reverse inclusion via the monomial Leibniz expansion; step 5 compares cokernels by the presheaf-sheafification adjunction over B, not sectionwise; steps 6 and 8 hold without flatness (Z→F_p checked); the result matches Stacks 08QF/08UR/08UV. proof_deps are exactly the union of the step uses, there is no SGA citation, and the 5 tool_uses are generic. Batch 5: the flagged lem-trf-cotangent-resolution-coherence, lem-trf-affine-cotangent-comparison and lem-trf-topos-inverse-image-differentials are general cotangent/differential results (Stacks 08PM–08QL, 08SR–08SX, 08TP/08TQ). The first two were already in the item's statement closure through lem-sfb-standard-sheaf-cotangent-flat-functorial-model. Their closures contain only generic sk-i-curve-zero/additivity lemmas and definitions, with no trace or Poincaré theorem and no assumption leaf, so they are not proof steps of either assumption → accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.StandardSheafCotangentAugmentation",
+  "declaration": "TopCat.SheafCotangent.exists_standardCotangentAugmentation",
+  "declarations": [
+   "TopCat.SheafCotangent.cotangentSymbols",
+   "TopCat.SheafCotangent.cotangentFaceRelation",
+   "TopCat.SheafCotangent.cotangentFaceRelations",
+   "TopCat.SheafCotangent.cotangentDerivationRelations",
+   "TopCat.SheafCotangent.ringOmegaComplex",
+   "TopCat.SheafCotangent.ringOmegaZero",
+   "TopCat.SheafCotangent.sheafOmegaComplex",
+   "TopCat.SheafCotangent.sheafOmegaZero",
+   "TopCat.SheafCotangent.additiveOmegaComplex",
+   "TopCat.SheafCotangent.RingCotangentAugmentation",
+   "TopCat.SheafCotangent.StandardCotangentAugmentation",
+   "TopCat.SheafCotangent.exists_standardCotangentAugmentation"
+  ],
+  "file": "lean/Sheaf/Topology/StandardSheafCotangentAugmentation.lean",
+  "statement": "theorem exists_standardCotangentAugmentation (C : Coherence.{u}) (S : Comparison C) : Nonempty (StandardCotangentAugmentation C S)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The structured assertion uses the existing standard complexes and differential sheaf. All augmentation and differential arrows are normalized on generators; it records the actual first-differential image, equality of face and derivation relation submodules, cokernel property, H0 invertibility, chain naturality, inverse-image comparison and the ordinary scalar-extension square. No data are chosen from an existence theorem. Maintainer review FIX (2026-10-24): cotangentDerivationRelations is now an abbrev for Mathlib's KaehlerDifferential.kerTotal (same span of additivity, Leibniz and base relations), one definition per notion.",
+  "fixed_by": "NT-stage2-cc-9936a1b0c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9936a1b0c",
+  "group": "Q143",
+  "result": "fix",
+  "note": "Read the item node, the 3 stmt_dep records and the dependency Lean (Coherence/IsStandard/standardFace, FlatModel variableDifferential/StandardLinearization, Comparison SectionModel/MapModel/RingSquare/inverseAdjunction, SheafDifferentials omega/derivation, DerivedChangeOfRingsCochainModel E=ordinary extension). All clauses match: chain map fixed on generators and on sections via the sheafification unit; negative degrees zero; homologyMap 0 IsIso (sheaf and ring); first-differential sign checked (d0-d1 sends dy_p to -faceRelation); image equality, relation-span equality and cokernel; naturality over continuous squares with differential fixed by db->d(beta b); inverse-image differential iso and chain square; scalar square for general q with b fixed on r⊗ds; no flatness or extra universe restriction; edge cases covered; statement verbatim; docstrings present; sorry only. H4 finding: cotangentDerivationRelations duplicated Mathlib KaehlerDifferential.kerTotal. FIX replaces it with an abbrev for kerTotal using f.hom.hom.toAlgebra; names and signature unchanged; lean-record.json keeps the verbatim statement. nt_compile --json on the fixed module: exit 0, clean, 58.0 s then 40.2 s (60 s limit). Note: inverse-image H0 square is implied by the chain square, not stated separately."
+ }
+}

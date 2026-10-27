@@ -12,22 +12,16 @@ public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.Paper.CondensedAmbientExchange
 public import Sheaf.Paper.ModuleObjectProjectionMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
-import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
-import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
-import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.BasicOperationsCoefficientReduction
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Paper.CompletedDirectImageLimits
+import all Sheaf.AlgebraicGeometry.EllAdicProperConstructibleCohomology
+import Sheaf.SixFunctors.ProEtale.IntegralResidueCriterion
+import Sheaf.SixFunctors.ProEtale.IntegralDirectImageLimits
 import Sheaf.Paper.DerivedNakayamaFirstReduction
-import Sheaf.Paper.DerivedNakayamaResolution
-import Sheaf.Paper.FiniteProperBaseChange
-import Sheaf.Paper.IntegralCriterionReductions
-import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import Sheaf.Paper.IntegralModels
+import Sheaf.Paper.IntegralResidueProperFormulas
+import Sheaf.Paper.IntegralTensorProduct
+import Sheaf.AlgebraicGeometry.CondensedCoverRestrictionConservative
+import all Sheaf.Paper.FiniteStrataCompletionDetection
+import all Sheaf.Paper.QcqsIntegralFiniteModelCompleteness
+import all Sheaf.Paper.UnboundedLocalizingPullback
 /-!
 # Proper base change with integral adic coefficients
 
@@ -44,6 +38,14 @@ Source: blueprint main-20261015, sec-six-functors-basics,
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
+  CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.Functor.mapDerivedCategory
+  AlgebraicGeometry.ProEtale.upperStarFromPoint
+  AlgebraicGeometry.ProEtale.IsDerivedComplete
 
 universe u
 
@@ -52,44 +54,88 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+private theorem integral_complete_of_bounded_constructible
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
+    (K : DerivedCategory (AdicCompletion.Modules l E T))
+    (hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) T K) :
+    IsDerivedComplete l E T K := by
+  let := (constantModelConstructibleFiniteTor_wellDefined
+    (DerivedNakayama.integerRing l E) T).1
+  obtain ⟨hi, ht⟩ := complete_triangulated l E T
+  let := hi
+  let := ht
+  exact DerivedCategory.prop_of_bounded (IsDerivedComplete l E T)
+    (IsConstantModelConstructible (DerivedNakayama.integerRing l E) T)
+    (complete_sheaf l E T) K hK.1 hK.2
+
+private theorem integral_pull_complete
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {T S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (f : T ⟶ S)
+    (K : DerivedCategory (AdicCompletion.Modules l E S))
+    (hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) S K) :
+    IsDerivedComplete l E T
+      ((upperStar (DerivedNakayama.integerRing l E) f).mapDerivedCategory.obj K) := by
+  classical
+  let R := DerivedNakayama.integerRing l E
+  let C := T.affineCover.weaken Scheme.zariskiPrecoverage_le_proetalePrecoverage
+  obtain ⟨P, hP, _, _, hres⟩ :=
+    StrictCompletionRestriction.strict_completion_restriction_comparison l E
+  apply (FiniteStrataCompletion.presentation_complete l E T (P T) (hP T) _).mpr
+  apply ((condensed_cover_restriction_conservative (Mon.mk R) T C).1 _ _ _).mpr
+  intro i
+  let : IsAffine (C.X i) := by
+    change IsAffine (T.affineCover.X i)
+    infer_instance
+  let : IsOpenImmersion (C.f i) := by
+    change IsOpenImmersion (T.affineCover.f i)
+    infer_instance
+  have hi : IsImmersion (C.f i) := inferInstance
+  obtain ⟨_, ⟨cmp⟩⟩ := hres (C.f i)
+    (MorphismProperty.le_multiplicativeClosure _ _ (.inl hi))
+  have hbc := pullback_bounded_constructible R (C.f i ≫ f)
+    (fun M hM ↦ pullback_constructible R (C.f i ≫ f) M hM) K hK
+  have hc := integral_complete_of_bounded_constructible l E (C.X i) _ hbc
+  have he := (leftDerivedUpperStarIsoMapDerivedCategory R (C.f i ≫ f)).app K ≪≫
+    (profinitePointModuleDerivedComp R (C.f i) f).app K
+  have hc' := (FiniteStrataCompletion.complete_iso l E he).mp hc
+  have hu := (FiniteStrataCompletion.presentation_complete l E (C.X i)
+    (P (C.X i)) (hP (C.X i)) _).mp hc'
+  apply (isIso_comp_right_iff _ (cmp.derived.hom.app _)).mp
+  rw [cmp.unit]
+  exact hu
+
 /-- Proper direct image, derived Nakayama, and the two canonical proper formulas
 for bounded constructible integral adic complexes.
 Source: blueprint main-20261015, sec-six-functors-basics,
 `sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md`
 (blueprint: det-thm-sfb-proper-base-change-integral).
 
-Proof (the node's ten steps):
-1. The coefficients are the pulled-back continuous ring `O_E` of the adic datum
-   `(A, I) = (O_E, (π))`: `O_E` is a Noetherian complete DVR with finite residue field
-   `κ` killed by `ℓ`, the quotients `P_n = O_E/π^n` are finite and perfect, and the
-   pulled-back ring is identified with the completed coefficient sheaf.
-2. For `L ∈ Dbc(T, O_E)` put `L_n = L ⊗^L P_n`. By the integral-models lemma (2), `L`
-   is derived complete and `L_1` is bounded constructible, classical and of finite Tor
-   dimension, so `L_1 ∈ Dctf(T, κ)`; conversely a complete `L` with bounded
-   constructible classical `L_1` lies in `Dbc`. The reductions `L_n` are bounded
-   constructible in one interval independent of `n`.
-3. The completed direct-image theorem gives the canonical projection comparisons
-   `ρ_{p,n} : (Rp_*K) ⊗^L P_n ≅ Rp_*(K_n)`, compatible with the transitions, and
-   `Rp_*K ≅ R lim_n Rp_*K_n`. Hence `Rp_*K` is derived complete, and `n = 1` gives the
-   reduction isomorphism of clause (1); the two-term resolution identifies the
-   coefficient quotient with the cone of `π`.
-4. The finite theorem (1) gives `Rp_*K_1 ∈ Dctf(Y, κ)`, classical by the constructible
-   comparison. The direct-image reduction comparison identifies it with `(Rp_*K)_1`
-   in `D(κ_Y)`, so the converse integral criterion gives `Rp_*K ∈ Dbc(Y, O_E)`.
-5. Derived Nakayama: for complete `C` with `C_1 = 0`, the triangles
-   `C_1 → C_{n+1} → C_n → C_1[1]` give `C_n = 0` by induction, and completeness gives
-   `C ≅ R lim_n C_n = 0`; no boundedness is used.
-6. In the square, `p'` is proper by permanence, `X'` is a standing scheme, and the
-   integral-models lemma (3) with step 4 puts `g^*Rp_*K`, `Rp'_*g'^*K`,
-   `Rp_*K ⊗^L M` and `Rp_*(K ⊗^L p^*M)` in `Dbc`, hence derived complete.
-7. The ambient exchange `β_K` is the unit, pullback comparison, counit composite; the
-   operation-reduction lemma preserves units, counits and the comparison, so
-   `(β_K)_1` is the finite-coefficient exchange `β_{K_1}`.
-8. The projection map `α_{K,M}` is the adjunct of `(ε_K ⊗ 1) ∘ t_p`; the same lemma and
-   the balancing isomorphism identify `(α_{K,M})_1` with `α_{K_1,M_1}`.
-9. The finite theorem (2) and (3) make `β_{K_1}` and `α_{K_1,M_1}` isomorphisms.
-10. The cones of `β_K` and `α_{K,M}` are complete, with zero first reduction by
-    exactness of reduction and step 9; step 5 kills them, proving clause (3).
+Proof:
+1. The internal residue criterion gives completeness and a bounded constructible finite-Tor
+   first reduction for K. Internal direct-image limits gives completeness of Rp_*K and
+   the canonical first-reduction comparison. The existing proper integral finiteness proof
+   gives bounded constructibility of Rp_*K.
+2. The first-reduction Nakayama theorem gives vanishing of any complete complex with zero
+   first reduction, without a boundedness hypothesis.
+3. For an arbitrary map from a scheme T to a qcqs scheme, a bounded constructible integral
+   input has complete pullback: on every affine chart of T, bounded constructible pullback
+   and the qcqs completeness argument apply. The strict completion presentation commutes
+   with the covering open immersions and its unit. Covering restrictions detect whether
+   that unit is invertible, proving completeness on T. This does not require T to be
+   finite type or quasi-compact.
+4. Apply step 3 to g and g', and internal direct-image limits to p'. This makes both
+   exchange endpoints complete, even for arbitrary base-changed schemes. Bounded
+   constructible pullback, integral tensor closure, proper integral finiteness and qcqs
+   completeness similarly make both projection endpoints complete.
+5. The residue criterion puts the input first reductions in Dctf. The separate finite
+   reduction step integralResidueProperFormulas identifies reduction of each canonical
+   arrow with its finite-coefficient formula, through the normalized scalar, tensor,
+   pullback and direct-image comparisons, and applies finite proper base change.
+6. The first-reduction isomorphism criterion applied to the complete endpoints proves
+   invertibility of the actual ambient exchange and ordinary uncompleted projection map.
 -/
 theorem integralProperDirectImageAndFormulas
     (l : ℕ) [Fact l.Prime]
@@ -127,6 +173,63 @@ theorem integralProperDirectImageAndFormulas
       constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K →
       constantModelBoundedConstructible (DerivedNakayama.integerRing l E) Y M →
       IsIso (moduleObjectProjectionMap (DerivedNakayama.integerRing l E) p K M)) := by
-  sorry
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
+    (X ↘ Spec (.of k))
+  let : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian
+    (Y ↘ Spec (.of k))
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of k))
+  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of k))
+  let : IsNoetherian X := ⟨⟩
+  let : IsNoetherian Y := ⟨⟩
+  have hl (y : Y) : IsUnit (l : Y.presheaf.stalk y) :=
+    isUnit_natCast_stalk_of_ringChar_ne l Fact.out (Y ↘ Spec (.of k)) y
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro K hK
+    obtain ⟨hχ, hpush⟩ := internal_integral_direct_image_limits l E p
+    let := hχ
+    obtain ⟨hcomplete, hiso⟩ := hpush K
+    have hsource := ((internal_integral_residue_criterion l E X).1 K).mp hK
+    exact ⟨hcomplete hsource.1, ⟨@asIso _ _ _ _ _ hiso⟩,
+      proper_integralModel_bounded l E p hl K hK⟩
+  · intro C hC hzero
+    exact ((derived_nakayama_first_reduction l E X).1 C hC hzero).2
+  · intro X' Y' g p' g' sq K hK
+    have hpush := proper_integralModel_bounded l E p hl K hK
+    have hleft := integral_pull_complete l E g _ hpush
+    have hleft' := (FiniteStrataCompletion.complete_iso l E
+      ((leftDerivedUpperStarIsoMapDerivedCategory
+        (DerivedNakayama.integerRing l E) g).symm.app _)).mp hleft
+    have hpull := integral_pull_complete l E g' K hK
+    have hpull' := (FiniteStrataCompletion.complete_iso l E
+      ((leftDerivedUpperStarIsoMapDerivedCategory
+        (DerivedNakayama.integerRing l E) g').symm.app K)).mp hpull
+    obtain ⟨hχ, hpush'⟩ := internal_integral_direct_image_limits l E p'
+    let := hχ
+    have hright := (hpush' _).1 hpull'
+    apply (derived_nakayama_first_reduction l E Y').2.2.2 _ _
+      ((condensedAmbientExchange (DerivedNakayama.integerRing l E) sq).app K)
+      hleft' hright
+    exact (integralResidueProperFormulas l E k p).1 g p' g' sq K
+      (((internal_integral_residue_criterion l E X).1 K).mp hK).2
+  · intro K M hK hM
+    have htensor := (integralTensorProduct.{u, u + 1} l E k (ringChar k)
+      (Fact.out : (ringChar k).Prime).pos
+      (Fact.out : ringChar k ≠ l)).1
+    have hpush := proper_integralModel_bounded l E p hl K hK
+    have hleft := integral_complete_of_bounded_constructible l E Y _
+      (htensor Y _ M hpush hM)
+    have hpull := pullback_bounded_constructible (DerivedNakayama.integerRing l E) p
+      (fun N hN ↦ pullback_constructible (DerivedNakayama.integerRing l E) p N hN)
+      M hM
+    have hright := integral_complete_of_bounded_constructible l E Y _
+      (proper_integralModel_bounded l E p hl _ (htensor X K _ hK hpull))
+    apply (derived_nakayama_first_reduction l E Y).2.2.2 _ _
+      (moduleObjectProjectionMap (DerivedNakayama.integerRing l E) p K M)
+      hleft hright
+    exact (integralResidueProperFormulas l E k p).2 K M
+      (((internal_integral_residue_criterion l E X).1 K).mp hK).2
+      (((internal_integral_residue_criterion l E Y).1 M).mp hM).2
 
 end AlgebraicGeometry.ProEtale.CondensedRing

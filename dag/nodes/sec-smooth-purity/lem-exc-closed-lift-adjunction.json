@@ -165,7 +165,18 @@
   "def-weil-pbc-ind-etale-algebra"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-open-closed-triangle",
  "split_report": {
@@ -220,5 +231,31 @@
   "landing": "20261015T181522-L-748290",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $I\\subset A$ be an ideal and $\\overline C$ an ind-etale $A/I$-algebra.\nFor every ind-etale $A$-algebra $D$, the reduction $D/ID$ is ind-etale over\n$A/I$, and reduction induces a bijection, natural in $D$ and in $\\overline C$,\n$$\n \\operatorname{Hom}_A(D,H_A(\\overline C))\n \\xrightarrow{\\sim}\n \\operatorname{Hom}_{A/I}(D/ID,\\overline C).\n$$\nThis identifies $H_A$ as right adjoint to reduction on ind-etale algebras.",
+  "proof": [
+   {
+    "text": "First let $D$ be etale of finite presentation. A map $D/ID\\to\\overline C$\nmakes $D$ an object of [def-exc-ind-etale-closed-lift], hence gives its\ncanonical map to the colimit. Conversely any $D\\to H_A(\\overline C)$ factors\nthrough a stage $B$, by finite presentation and\n[lem-exc-closed-lift-filtered]. If its reduction is the specified map, this\nfactorization $D\\to B$ is a morphism in the indexing category. The colimit\nrelation then identifies it with the canonical map from the object $D$. This\nproves uniqueness as well as existence.",
+    "uses": [
+     "def-exc-ind-etale-closed-lift",
+     "lem-exc-closed-lift-filtered"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For general $D=\\varinjlim D_a$, apply this bijection to every $D_a$. The\nunique lifts commute with all transition maps, so pass to a unique map from\n$D$. This proves the bijection and its naturality. The reduction isomorphism\nof [lem-exc-closed-lift-reduction] is its adjunction counit. This supplies\nthe adjunction, including uniqueness, in [Stacks Project, Tag\n097P](https://stacks.math.columbia.edu/tag/097P).",
+    "uses": [
+     "lem-exc-closed-lift-reduction"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

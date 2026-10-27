@@ -12,11 +12,10 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import Sheaf.Paper.StrictDvrCoefficientSequence
+import Sheaf.Paper.StrictDvrFlatTensorSequence
 
 /-! # Simultaneous strict DVR reductions and residue-kernel triangles
 
@@ -38,6 +37,27 @@ set_option autoImplicit false
 universe t u
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
+
+private theorem transport_shortExact_triangle
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    (S : ShortComplex (CochainComplex A ℤ)) (hS : S.ShortExact)
+    {K₁ K₂ K₃ : DerivedCategory A}
+    (e₁ : DerivedCategory.Q.obj S.X₁ ≅ K₁)
+    (e₂ : DerivedCategory.Q.obj S.X₂ ≅ K₂)
+    (e₃ : DerivedCategory.Q.obj S.X₃ ≅ K₃) :
+    ∃ δ : K₃ ⟶ K₁⟦(1 : ℤ)⟧,
+      Triangle.mk (e₁.inv ≫ DerivedCategory.Q.map S.f ≫ e₂.hom)
+        (e₂.inv ≫ DerivedCategory.Q.map S.g ≫ e₃.hom) δ ∈
+          CategoryTheory.Pretriangulated.distinguishedTriangles := by
+  let δ := e₃.inv ≫ DerivedCategory.triangleOfSESδ hS ≫ e₁.hom⟦(1 : ℤ)⟧'
+  refine ⟨δ, ?_⟩
+  apply (distinguished_iff_of_iso
+    (Triangle.isoMk (DerivedCategory.triangleOfSES hS)
+      (Triangle.mk _ _ δ) e₁ e₂ e₃ ?_ ?_ ?_)).1
+    (DerivedCategory.triangleOfSES_distinguished hS)
+  · simp [DerivedCategory.triangleOfSES]
+  · simp [DerivedCategory.triangleOfSES]
+  · simp [DerivedCategory.triangleOfSES, δ]
 
 namespace WeilConjectures
 
@@ -175,6 +195,32 @@ theorem strictDvrReductionTriangles
                     (strictDvrReductionComparison l E X P hP e (n + 1)).hom)
                 (strictDvrDerivedQuotientTransition l E X P hP e n) δ ∈
                   CategoryTheory.Pretriangulated.distinguishedTriangles := by
-  sorry
+  classical
+  let G := DerivedCategory.Q.objPreimage K
+  let eG : DerivedCategory.Q.obj G ≅ K := DerivedCategory.Q.objObjPreimageIso K
+  obtain ⟨P, f, hP, hflat, hf, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E X) G
+  have : QuasiIso f := hf
+  let e : DerivedCategory.Q.obj P ≅ K := asIso (DerivedCategory.Q.map f) ≪≫ eG
+  have hflat' : ∀ j : ℤ, SheafOfModules.IsFlatOnSite
+      (J := AlgebraicGeometry.Scheme.ProEt.topology X)
+      (R := completedIntegralCommRingSheafUnrestricted l E X) (P.X j) := by
+    intro j
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso
+        (completedIntegralCommRingSheafUnrestricted l E X) (P.X j)).symm (hflat j)
+  obtain ⟨a, ha, hseq⟩ := strictDvrCoefficientSequence l E X
+  obtain ⟨i, hi, hrows⟩ := strictDvrFlatTensorSequence l E X P hflat' a hseq
+  refine ⟨P, e, hP, hflat', a, ha, i, hi, ?_⟩
+  intro n
+  obtain ⟨hz, hrow⟩ := hrows n
+  refine ⟨hz, hrow, ?_⟩
+  let S := ShortComplex.mk (i n) (unrestrictedTowerTransition l E X P n) hz
+  have hS : S.ShortExact := HomologicalComplex.shortExact_of_degreewise_shortExact S hrow
+  exact transport_shortExact_triangle S hS
+    (strictDvrReductionComparison l E X P hP e 0)
+    (strictDvrReductionComparison l E X P hP e (n + 1))
+    (strictDvrReductionComparison l E X P hP e n)
 
 end WeilConjectures

@@ -1,0 +1,280 @@
+{
+ "id": "lem-pur-relative-kummer-exchange-generators",
+ "kind": "statement",
+ "title": "Exchange preserves normalized global generators and detects invertibility",
+ "statement": "Let $A$ be a commutative ring and let\n$$\\begin{array}{ccc}X'&\\xrightarrow{v}&X\\\\ a'\\downarrow&&\\downarrow a\\\\ B'&\\xrightarrow{g}&B\\end{array}$$\nbe a cartesian square of schemes [def-weil-pbc-cartesian-square]. Work with constant-ring etale module sheaves and their ordinary derived categories [def-weil-pbc-derived-categories], [def-weil-pbc-etale-sheaves]. Let $L$ be a sheaf of $A$-modules on $B$, placed in degree zero, put $F=a^*L$ and $F'=v^*F=a'^*g^*L$, and let\n$$b:g^*Ra_*F\\longrightarrow Ra'_*F'$$\nbe the specified derived exchange [sbc-def-base-change-map], using the canonical inverse-image square identification. Let $\\eta_a(L)$ and $\\eta_{a'}(g^*L)$ be the adjunction units. Then, after that square identification,\n$$b\\circ g^*\\eta_a(L)=\\eta_{a'}(g^*L).$$\nFor $q\\geq0$, let $e_a^q$ send a global class to its Leray edge section in $\\Gamma(B,R^qa_*F)$, equivalently a global injective-resolution cocycle to its class in the direct-image cohomology sheaf. For every $x\\in H^q(X,F)$, the following equality of sections on $B'$ holds:\n$$\\mathcal H^q(b)\\bigl(g^*e_a^q(x)\\bigr)=e_{a'}^q(v^*x),$$\nwhere $v^*$ is the canonical cohomology pullback [def-weil-pbc-cohomology-pullback] and $\\mathcal H^q(g^*Ra_*F)=g^*R^qa_*F$. This is equality for the actual module-derived exchange, under the canonical module/abelian comparisons, not merely existence of a morphism taking one generator to the other.\n\nIn particular, suppose the degree-zero units $L\\to R^0a_*F$ and $g^*L\\to R^0a'_*F'$ are isomorphisms, and that all cohomology sheaves of both direct images vanish outside degrees $0,1$. If $x\\in H^1(X,F)$ has edge section generating an isomorphism $A_B\\to R^1a_*F$, and $v^*x$ similarly gives an isomorphism $A_{B'}\\to R^1a'_*F'$, then $b$ is an isomorphism. The same conclusion holds when both direct images have cohomology only in degree zero, without a degree-one class. No finite-type hypothesis on $g$ is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Step 3: mate-unit triangle identity, resolution cocycles for exchange on edge sections, and the cohomological invertibility criterion; geometric-point case. Old steps 10–12. Stacks Tag 0736, sites-cohomology.tex, lemma-base-change-map-flat-case; Tag 072W, lemma-higher-direct-images."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing exact derived inverse image and its canonical single and homology comparisons. For an exact functor G, prove exact_homology_class by naturality of mapDerivedCategoryHomologyFunctorIso, its single-degree compatibility and its shift compatibility. Transport this equality through leftDerivedUpperStarIsoMapDerivedCategory using naturality and NatTrans.shift_app_comm (iso_homology_class). These are proved private general categorical lemmas, without forgetting coefficients. Naturality of singleFunctorCompHomologyFunctorIso gives iso_homology_class_constant, incorporating any isomorphism from the pulled-back source to a specified constant object.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 3: unit compatibility, pullback of global classes, and the cohomological isomorphism criterion"
+   }
+  },
+  {
+   "text": "The specified exchange is the mate of derivedSquareUpperStarIso. Apply the existing map_unit_derivedBaseChangeMap_app to L placed in degree zero. This is exactly relativeKummerExchange_unit with the canonical square comparison still explicit.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "def-weil-pbc-adjunction-mate",
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 3: unit compatibility, pullback of global classes, and the cohomological isomorphism criterion"
+   }
+  },
+  {
+   "text": "Prove compatibility of the constant single-degree comparison with composition using leftDerivedUpperStar_map_singleFunctor_comp and Scheme.upperStarConstantSheafIso_comp. Cancelling the composition isomorphisms gives genericConstantIso_square. Naturality and unit_mateEquiv give adjunct_mate; compatibility of the actual exchange with shifts gives shifted_adjunct_mate. Apply this to the adjoint of the global class, and use the constant square equality to identify its source with the pulled-back constant sheaf. Apply H^0 and the shift comparison via iso_homology_class. Naturality of singleFunctorCompHomologyFunctorIso identifies the remaining source comparison. This proves relativeKummerExchange_edge directly for the specified module-derived exchange. The private calculation is made over a general abelian monoidal coefficient category and any object K, then specialized to ModuleCat A and the free rank-one object. The equation higher_eq records only reassociation of the canonical composites. The constructions and all four proofs are made over a general coefficient category, and the public module-valued declarations specialize them. One shared genericConstantIso fixes the constant/single comparison throughout and avoids repeated kernel conversions of concrete derived instances. The generic constant-square cancellation is proved once in arbitrary categories. The constant-square and shifted-adjunct calculations are local to kummer_edge_naturality, so that the kernel checks their combination without repeated concrete conversions. Public module-valued result abbreviations specialize the complete generic theorems; no proposition or mathematical construction changes.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "def-weil-pbc-adjunction-mate",
+    "lem-pur-mate-unit-compatibility",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 3: unit compatibility, pullback of global classes, and the cohomological isomorphism criterion"
+   }
+  },
+  {
+   "text": "Apply DerivedCategory.isIso_iff in the ordinary unbounded derived category. At degree zero, functoriality of the exact-pullback homology comparison transfers invertibility of the first unit; the mate-unit equality and invertibility of the second unit then give invertibility of H^0(exchange). At degree one, relativeKummerExchange_edge identifies the composite of the pulled-back invertible generator and kummerExchangeHigherMap with the invertible target generator. Cancel the generator and the canonical homology comparison. In every other degree exact pullback preserves IsZero and every map between zero objects is invertible. For the degree-zero-only theorem use the same degree-zero computation and the vanishing hypothesis in all other degrees. No boundedness, geometric finiteness or torsion assumption is introduced.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 3: unit compatibility, pullback of global classes, and the cohomological isomorphism criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-derived-cohomology-sheaves",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-adjunction-mate",
+  "lem-pur-mate-unit-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Step 3; direct canonical single/homology/shift and mate calculation, with generic coefficient interfaces (U6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale base change exchange preserves units and edge sections of pulled back global classes and is invertible when these generate all higher image sheaves",
+   "results": "{\"t\": \"2026-10-22T06:44:19Z\", \"tool\": \"leanfinder\", \"query\": \"Derived etale base change exchange preserves units and edge sections of pulled back global classes and is invertible when these generate all higher image sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.FormallyEtale.of_restrictScalars\"], \"digest\": \"a8cd4f2955893ab1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-22T06:44:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(edge|[Ee]dge|[Cc]ohom)|exchange.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-22T06:44:07Z\", \"tool\": \"grep\", \"query\": \"baseChange.*(edge|[Ee]dge|[Cc]ohom)|exchange.*[Ss]ection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale base change exchange preserves units and edge sections of pulled back global classes and is invertible when these generate all higher image sheaves",
+   "results": "{\"t\": \"2026-10-22T06:44:08Z\", \"tool\": \"leansearch\", \"query\": \"Derived etale base change exchange preserves units and edge sections of pulled back global classes and is invertible when these generate all higher image sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Unramified.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"CategoryTheory.Adjunction.derived_unit\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangePullbacks\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\"], \"digest\": \"9d35d7d490f0a56f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolution cocycle formula for higher direct image exchange sends a global cohomology edge section to the pullback class and yields a two degree generator criterion",
+   "results": "{\"t\": \"2026-10-22T06:44:21Z\", \"tool\": \"leanfinder\", \"query\": \"Resolution cocycle formula for higher direct image exchange sends a global cohomology edge section to the pullback class and yields a two degree generator criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.leftHomologyData'_H_coe\", \"CochainComplex.HomComplex.leftHomologyData'_i\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"groupCohomology.isoCocycles₁_inv_comp_iCocycles_apply\", \"groupCohomology.isoCocycles₁_inv_comp_iCocycles\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom\", \"groupCohomology.toCocycles_comp_isoCocycles₂_hom_apply\"], \"digest\": \"1d89b46e4b153e01\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(edge|[Ee]dge|[Cc]ohom)|exchange.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-22T07:57:10Z\", \"tool\": \"grep\", \"query\": \"baseChange.*(edge|[Ee]dge|[Cc]ohom)|exchange.*[Ss]ection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction, sheaf unit, or injective-resolution declarations do not assert the complete etale module exchange and normalized class statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change mate maps global cohomology edge sections to pullback classes and preserves adjunction units",
+   "results": "{\"t\": \"2026-10-22T07:57:10Z\", \"tool\": \"leansearch\", \"query\": \"Derived base change mate maps global cohomology edge sections to pullback classes and preserves adjunction units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.ExponentiableMorphism.coev\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"IsBaseChange.toDual_apply\", \"CategoryTheory.mateEquiv\", \"LinearMap.baseChange_comp\", \"KaehlerDifferential.mapBaseChange\"], \"digest\": \"b2bab48a969e4ec6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction, sheaf unit, or injective-resolution declarations do not assert the complete etale module exchange and normalized class statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-22T07:57:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction, sheaf unit, or injective-resolution declarations do not assert the complete etale module exchange and normalized class statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change mate maps global cohomology edge sections to pullback classes and preserves adjunction units",
+   "results": "{\"t\": \"2026-10-22T07:57:20Z\", \"tool\": \"leanfinder\", \"query\": \"Derived base change mate maps global cohomology edge sections to pullback classes and preserves adjunction units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"groupCohomology.map_H0Iso_hom_f_apply\", \"groupCohomology.H1π_comp_map_apply\", \"groupCohomology.cocyclesMap_cocyclesIso₀_hom_f\", \"groupCohomology.mapShortComplexH1_τ₂\", \"groupCohomology.resNatTrans\"], \"digest\": \"b928fc28027d2c96\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction, sheaf unit, or injective-resolution declarations do not assert the complete etale module exchange and normalized class statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective resolution formula for higher direct image base change carries a global cocycle to its inverse image cocycle",
+   "results": "{\"t\": \"2026-10-22T07:57:59Z\", \"tool\": \"leanfinder\", \"query\": \"Injective resolution formula for higher direct image base change carries a global cocycle to its inverse image cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc\", \"CategoryTheory.InjectiveResolution.Hom.hom'_f\", \"CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc\", \"CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.desc_commutes_assoc\", \"CategoryTheory.InjectiveResolution.descFOne_zero_comm\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles\"], \"digest\": \"7123ba9c3083d12b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction, sheaf unit, or injective-resolution declarations do not assert the complete etale module exchange and normalized class statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-gm-relative-kummer",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-gm-relative-kummer",
+   "place": "Step 3: mate-unit triangle identity, resolution cocycles for exchange on edge sections, and the cohomological invertibility criterion; geometric-point case. Old steps 10–12. Stacks Tag 0736, sites-cohomology.tex, lemma-base-change-map-flat-case; Tag 072W, lemma-higher-direct-images.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-relative-kummer-exchange-generators",
+  "worker": "stage1",
+  "summary": "Reused the general commutative-square chart formula, exact constant-module inverse image, canonical coefficient-forgetting comparisons, and cohomological isomorphism criterion. Wrote the mate-unit triangle calculation and normalized resolution/class comparisons explicitly; proved both generator criteria without geometric finiteness assumptions. No new node is needed. Repair of returned head a1e00ee3c6b: re-read every dependency on the current DAG, retain the unchanged statement and route, and explicitly identify the specified exchange with the chart exchange using the current inverse-image transpose formula.",
+  "blueprint": "prop-pur-gm-relative-kummer.proof.md Step 3: unit, pullback of global Kummer classes, and cohomology generator detection; unit sk-prop-a1-kummer Step 2.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic constant-ring module, exact-functor, or resolution comparison tool; this unit has no separate statement of this general input and its geometric proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic canonical coefficient-forgetting compatibility for the specified exchange; this unit has no separate statement of this general input and its geometric proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic constant-ring module, exact-functor, or resolution comparison tool; this unit has no separate statement of this general input and its geometric proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic constant-ring module, exact-functor, or resolution comparison tool; this unit has no separate statement of this general input and its geometric proof route is unchanged."
+   },
+   {
+    "node": "lem-kun-commutative-exchange-chart",
+    "why": "Generic commutative-square exchange formula on etale chart cohomology; applied only at the final object, without any continuity argument; this unit has no separate statement of this general input and its geometric proof route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-b643bb022",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-b643bb022 (reviewer sub-agent of L); spot-checked: This is the second delivery; it adds no new nodes, and the statement, stmt_deps, source and blueprint fields are unchanged. The first head, a1e00ee3, was reviewed as FIX: cite lem-pur-mate-unit-compatibility in Step 2, and justify the chart-exchange identification in Step 4. Landing then refused the side completion, so that fix was lost. A field diff against a1e00ee3 shows that Steps 1, 3, 5 and 6 are identical, and Step 2 again omits the same-unit Mathlib leaf lem-pur-mate-unit-compatibility, whose identity β_{L_1c}∘G(η_1)=R_2(α_c)∘η_2 with L_1=a^*, L_2=a'^*, G=g^*, H=v^*, α=θ, c=L is exactly the unit identity (C5). Step 4 adds a correct citation of sbc-def-base-change-map with (f,g,h,e)=(g,a,a',v) and the transpose v^*ε_a∘θ. But it only asserts that the chart lemma 'defines its exchange by this same transpose'. The chart's θ (def-kun-commutative-derived-exchange) is built from the composition isomorphisms c^D. Ex_□ in clause (3) of lem-weil-pbc-exchange-forget-coefficients uses θ^D_□, the termwise class of θ_□ (def-weil-pbc-derived-square-iso). They agree because θ_□ is the composite through av=ga' (blueprint_update of def-weil-pbc-cartesian-square), and this link is still unstated (C4/E5). I re-applied both fixes on the new head and kept the new sbc sentence; proof_deps is recomputed as the union of the uses (16 nodes, all present). The other steps are unchanged and were re-read; they are correct. Step 1 uses exact constant-ring pullback and exact-functor cohomology. Step 3 normalizes module/abelian edge sections through UI→J (072W). Step 5 settles degree 0 via the units and degree 1 by the generator of A_{B'} with gluing. Step 6 applies the D^+ isomorphism-on-cohomology criterion. Edge cases checked: a=id, g=id, A=0, empty schemes, the degree-zero-only case, and the parent's p and π cases. The route follows blueprint main-20261015 prop-pur-gm-relative-kummer Step 3 and unit step 2, with no SGA. Accepted tool_uses: inverse-image-modules-exact, exchange-forget-coefficients, module-abelian-derived-direct-image-comparison, etale-module-cohomology-forget and commutative-exchange-chart. Maintainer: re-apply this FIX if the item comes back after another promotion refusal.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeKummerExchangeGenerators",
+  "declaration": "AlgebraicGeometry.Etale.relativeKummerExchange_generators",
+  "declarations": [
+   "AlgebraicGeometry.Etale.kummerExchangeUpper",
+   "AlgebraicGeometry.Etale.kummerExchangeLower",
+   "AlgebraicGeometry.Etale.kummerExchangeUpperCommShift",
+   "AlgebraicGeometry.Etale.kummerExchangeLowerCommShift",
+   "AlgebraicGeometry.Etale.kummerExchangeAdjunction",
+   "AlgebraicGeometry.Etale.kummerExchangeArrow",
+   "AlgebraicGeometry.Etale.kummerExchangeConstant",
+   "AlgebraicGeometry.Etale.kummerExchangeClassPullback",
+   "AlgebraicGeometry.Etale.kummerExchangeEdge",
+   "AlgebraicGeometry.Etale.kummerExchangeSectionPullback",
+   "AlgebraicGeometry.Etale.kummerExchangeHigherMap",
+   "AlgebraicGeometry.Etale.kummerExchangeImage",
+   "AlgebraicGeometry.Etale.relativeKummerExchange_unit",
+   "AlgebraicGeometry.Etale.relativeKummerExchange_edge",
+   "AlgebraicGeometry.Etale.kummerExchangeTarget",
+   "AlgebraicGeometry.Etale.relativeKummerExchange_generators",
+   "AlgebraicGeometry.Etale.relativeKummerExchange_degreeZero",
+   "AlgebraicGeometry.Etale.genericConstantIso",
+   "AlgebraicGeometry.Etale.genericPullback",
+   "AlgebraicGeometry.Etale.genericEdge",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeUpper",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeLower",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeUpperCommShift",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeLowerCommShift",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeAdjunction",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeArrow",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeConstant",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeClassPullback",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeEdge",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeSectionPullback",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeHigherMap",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeImage",
+   "AlgebraicGeometry.Etale.generic_kummerExchangeTarget",
+   "AlgebraicGeometry.Etale.generic_relativeKummerExchange_unit",
+   "AlgebraicGeometry.Etale.generic_relativeKummerExchange_edge",
+   "AlgebraicGeometry.Etale.generic_relativeKummerExchange_generators",
+   "AlgebraicGeometry.Etale.generic_relativeKummerExchange_degreeZero"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeKummerExchangeGenerators.lean",
+  "statement": "theorem relativeKummerExchange_generators (A : Type (u + 1)) [CommRing A] {X' X B' B : Scheme.{u}} {v : X' ⟶ X} {a' : X' ⟶ B'} {a : X ⟶ B} {g : B' ⟶ B} (sq : ChosenCartesianSquare v a' a g) (L₀ : Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} A)) (h₀ : IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map ((kummerExchangeAdjunction A a).unit.app ((_root_.DerivedCategory.singleFunctor _ 0).obj L₀)))) (h₀' : IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map ((kummerExchangeAdjunction A a').unit.app ((kummerExchangeUpper A g).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L₀))))) (hvan : ∀ i : ℤ, i ≠ 0 → i ≠ 1 → IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj (kummerExchangeImage A a L₀)) ∧ IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj (kummerExchangeTarget A v a' a L₀))) (x : (_root_.DerivedCategory.singleFunctor _ 0).obj (kummerExchangeConstant A X) ⟶ (kummerExchangeUpper A a).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L₀)⟦(1 : ℤ)⟧) (hx : IsIso (kummerExchangeEdge A a _ 1 x)) (hx' : IsIso (kummerExchangeEdge A a' _ 1 (kummerExchangeClassPullback A v _ 1 x))) : IsIso (kummerExchangeArrow A sq ((kummerExchangeUpper A a).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L₀)))",
+  "branch": "newtargets-dag",
+  "by": "U6",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Four named theorem clauses cover the unit, all global edge classes, the two-degree generator criterion and the degree-zero-only variant. Helpers expand only canonical constant/single/shift/adjunction comparisons. Module cohomology classes use their derived-Hom realization; edge sections use Hom from the constant free rank-one module sheaf."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94f07dd9f",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read item node, all 6 stmt_dep records, the module, the report and the upstream declarations it uses (derivedBaseChangeMap, map_unit_derivedBaseChangeMap_app, upperStarConstantSheafIso, singleFunctorCompLeftDerivedUpperStarIso, leftDerivedUpperStarHomologyFunctorIso, Etale/Derived/Shift instances). Node differs from live only in lean; lean.statement verbatim; 17 decls present; imports exist on live. b is the actual module Etale.derivedBaseChangeMap (no arbitrary map). Unit clause has the square iso written out, equal to upstream map_unit_derivedBaseChangeMap_app at L in degree 0. Edge clause: every q:ℕ and every derived-Hom class; edge section and class pullback built only from canonical comparisons. Generator criterion: both degree-0 units, vanishing for i not 0 or 1 on both direct images, hx and hx' edge isos. Degree-zero variant has no class. No finite-type or other extra hypotheses; universes follow the recorded convention. Edge cases (A=0, empty schemes, id squares, q=0, negative degrees) covered. No hollow defs, all sorry, docstrings OK, no pro-etale substitute. Advisory: the cohomology-pullback stmt_dep decl Etale.cohomologyMap (abelian sheaves only) is not used; the item builds the same Ext recipe for A-modules, since the module/abelian comparison is only Nonempty. Second reading is an author self-check. No fix, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-57c07",
+  "group": "U6",
+  "result": "fix",
+  "landing": "20261025T034002-L-197176",
+  "kind": "interface",
+  "note": "independent cc review: delivered RelativeKummerExchangeGenerators (generic_* constructions + abbrev specializations) against the old definitions/statements in the change record, node lem-pur-relative-kummer-exchange-generators step 3, Etale.Derived.Shift instance bodies, and the three NormalizedKummer* users compiled in a sandbox chain"
+ }
+}

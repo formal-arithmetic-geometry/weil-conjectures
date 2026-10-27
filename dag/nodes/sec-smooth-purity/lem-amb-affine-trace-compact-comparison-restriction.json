@@ -1,0 +1,113 @@
+{
+ "id": "lem-amb-affine-trace-compact-comparison-restriction",
+ "kind": "statement",
+ "title": "Restriction of the unbounded affine compact-support comparison",
+ "statement": "For a finite commutative ring A and a Noetherian scheme S, define C_d from the affine tower left functor of [def-amb-affine-trace-construction] to ordinary unbounded compact supports by the inverse compact-support identity at d=0 and, at d+1, the standard line compactification comparison followed by C_d and the compact-support compositor of [lem-amb-unbounded-compact-support-comparisons]. For every bounded-below object K on the d-dimensional coordinate tower, affineTracePlusCompatibility.hom at K followed by C_d.hom at its unbounded inclusion equals the inclusion of affineTraceCompactSupportComparison.hom at K followed by rightDerivedLowerShriekPlusCompatibility.hom at K. This is an identity of comparisons; no base-change square or exchange equation is assumed or concluded.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation, bounded-below/unbounded compact-support comparison; first step of lem-amb-affine-trace-unit-compact-base-change."
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-construction",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Construct C_d by the unchanged recursion. For dimension zero, use the composition restriction equation for the identity pair and the left unit laws on D+ and D. Naturality of the inclusion comparison rewrites its left side. Cancel its invertible component and use faithfulness of the unbounded identity compact-support functor (naturally isomorphic to the identity) to obtain the forward unit restriction. Compose with the inverse identity comparisons and cancel to obtain the required inverse unit restriction. The private categorical helper restriction_identity implements this cancellation argument, and identity_restriction applies it to compact supports.",
+   "uses": [
+    "def-amb-affine-trace-construction",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a successor, let q be the last affine-line projection and c its standard compactification. Take components of the existing successor isomorphism equations to expand the three recursive comparisons. Combine the two consecutive maps under the preceding tower functor, and apply the compactification comparison restriction for c and the chosen compactification of q. Naturality of the preceding tower inclusion comparison moves the included bounded-below line comparison to the front. Naturality of the unbounded preceding tower comparison moves the chosen line inclusion comparison past it. Apply the induction hypothesis at the bounded-below q-pushforward of K. Finally apply the compact-support composition restriction equation for q and the preceding tower projection. Reassociation and functoriality identify the resulting composite with the included bounded-below successor comparison followed by the chosen inclusion comparison. The proved private helper restriction_paste carries out this calculation for abstract component morphisms; successor_composition first records the native composition equation, and successor_paste specializes the calculation to the existing restriction and naturality equations, avoiding repeated unfolding of the concrete derived functors.",
+   "uses": [
+    "def-amb-affine-trace-construction",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-trace-construction",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "The bounded-below/unbounded comparison step of the ordered-tower overlap calculation; implemented by W3 using existing comparison/composition restrictions, identity unit cancellation, and induction on the tower dimension. The recursive isomorphism equations are converted to component equations through proved private helpers; all public definitions are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affineTrace.*(Comparison|Compatibility)",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "The results give generic whiskering identities or ordinary sheaf pushforward composition, not the specified derived compact-support restriction. The project compact-support restriction equations supply the mathematical ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "12 hits: CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.Functor.isoWhiskerLeft_refl, CategoryTheory.Functor.isoWhiskerLeft_symm, CategoryTheory.Functor.isoWhiskerLeft_hom, CategoryTheory.Functor.isoWhiskerLeft_inv, CategoryTheory.Functor.isoWhiskerLeft_trans, CategoryTheory.Functor.triangleIso, CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight",
+   "date": "2026-10-26",
+   "verdict": "The results give generic whiskering identities or ordinary sheaf pushforward composition, not the specified derived compact-support restriction. The project compact-support restriction equations supply the mathematical ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism for iterated compactly supported pushforwards restricts to bounded below derived objects",
+   "results": "8 hits: PresheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, CategoryTheory.Functor.sheafPushforwardContinuousComp', SheafOfModules.pushforwardComp, TopCat.Presheaf.Pushforward.comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, CategoryTheory.Functor.sheafPushforwardContinuousComp, TopCat.Presheaf.Pushforward.comp_inv_app",
+   "date": "2026-10-26",
+   "verdict": "The results give generic whiskering identities or ordinary sheaf pushforward composition, not the specified derived compact-support restriction. The project compact-support restriction equations supply the mathematical ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineTraceUnitCompactBaseChange",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-affine-trace-unit-compact-base-change",
+   "place": "Restriction part of the first proof step.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTraceCompactComparisonRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTraceCompactComparisonRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineTraceUnboundedCompactComparison_restriction",
+  "statement": "theorem affineTraceUnboundedCompactComparison_restriction\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)\n    (K : DerivedCategory.Plus\n      (Sheaf (affineTraceTower S d).smallEtaleTopology (ModuleCat.{u + 1} A))) :\n    (affineTracePlusCompatibility A S d).hom.app K ≫\n        (affineTraceUnboundedCompactComparison A S d).hom.app\n          (DerivedCategory.Plus.ι.obj K) =\n      DerivedCategory.Plus.ι.map ((affineTraceCompactSupportComparison A S d).hom.app K) ≫\n        (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A)\n          (affineTraceProjection S d)).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T180745-L-3395565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T222805-L-696537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

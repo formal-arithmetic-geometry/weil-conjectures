@@ -1,0 +1,289 @@
+{
+ "id": "lem-coef-integral-dual-exceptional-system",
+ "kind": "statement",
+ "title": "Coherent finite exceptional system of integral dual-pullback-dual",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. On the small pro-etale site of a scheme $W$ put $B_{n,W}=(A_n)_W$ and $R_W=\\lim_nB_{n,W}$ [def-weil-completed-integral-coefficients]. Use ordinary derived categories of module sheaves and the Roos-complete constructible category $D^b_c(W,R)$, whose finite reductions are constructible with a common bounded cohomological support [def-weil-derived-complete-integral-detailed, def-weil-derived-complete]. Write $P_n=P\\otimes^L_{R_W}B_{n,W}$ [def-weil-integral-derived-reduction]. Use the strict semilinear coefficient-system category $\\mathscr S_W$, the adjunction $\\mathcal R_W\\dashv\\mathcal L_W$, its actual unit $u$ and counit $e$, and the mapping systems $\\mathcal H_W$ of [lem-coef-derived-system-evaluation-calculus]; here $\\mathcal R_WP=(P_n)_n$ with its coherent quotient maps and $\\mathcal L_W=R\\lim\\operatorname{Res}$. Let $f:X\\to Y$ be a separated finite-type morphism of separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], and fix a compactification $f=pj$, with $j$ open and $p$ proper [def-nagata-compactification]. Use the functorial normalized finite-operation realizations $\\mathcal F_f,\\mathcal E_f$, the dualizing systems $\\Omega_W$ and system duals $\\mathcal D_W=\\mathcal I_W(-,\\Omega_W)$ of [lem-coef-finite-adjunction-diagram-realization].\n\nFor $W=X,Y$ put $\\omega_{W,R}=\\mathcal L_W\\Omega_W$ with its specified reductions [prop-coef-integral-dualizing], and $D_{W,R}P=R\\mathcal Hom_{R_W}(P,\\omega_{W,R})$ [def-pur-derived-internal-hom]. Write $\\theta:\\mathcal E_f\\xrightarrow{\\sim}\\mathcal D_Xf^*\\mathcal D_Y$ for the specified system dual-formula comparison, where $f^*$ on systems is finite derived pullback [def-weil-derived-pullback-tensor-hom]. For every $L\\in D^b_c(Y,R)$ put $M=D_{Y,R}L$, $F=f^*_{\\mathrm{comp}}M=\\mathcal L_X f^*\\mathcal R_YM$ [def-pur-integral-derived-operations], and $H=D_{X,R}F$.\n\nThe objects $M,F,H$ belong to their integral constructible categories. The systems $\\mathcal R_WP$ for integral constructible $P$, $f^*\\mathcal R_YM$, and $\\mathcal E_f\\mathcal R_YL$ are normalized. The evaluation-defined maps $\\beta$ of the system calculus, composed with the dualizing counit $\\mathcal R_W\\omega_{W,R}\\to\\Omega_W$, give natural system isomorphisms\n$$v_{W,P}:\\mathcal R_WD_{W,R}P\\xrightarrow{\\sim}\\mathcal D_W\\mathcal R_WP.$$\nThe actual counit $e:\\mathcal R_XF\\to f^*\\mathcal R_YM$ is a natural system isomorphism; its evaluations are the canonical completed-pullback comparisons, adjoint to the finite projections. Define\n$$q_L=f^*(v_{Y,L})\\circ e,\\qquad b_L=\\theta_{\\mathcal R_YL}^{-1}\\circ\\mathcal D_X(q_L^{-1})\\circ v_{X,F}.$$\nThen $b_L:\\mathcal R_XH\\xrightarrow{\\sim}\\mathcal E_f\\mathcal R_YL$ is a specified natural isomorphism in $D(\\mathscr S_X)$; its evaluations are the canonical finite dual-formula maps, including both the completed-pullback and dualizing coefficient identifications. For integers $a\\le b$, if every $L_n$ has Tor amplitude in $[a,b]$, and $d_X,d_Y\\ge0$ are integer Krull-dimension bounds for $X,Y$ [def-weil-finite-tor-amplitude, def-kun-topological-krull-dimension], every reduction of $H$ has Tor amplitude in $[a-2d_X,b+2d_Y]$. These statements specify the comparison at system level; no integral exceptional adjunction is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 1, from \"Alternatively, consider the integral object H\" through \"compatibly with the transition maps\": constructibility, both dual Tor bounds and the coherent finite dual comparison; returned steps 1 and 3."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-scheme-morphism-properties",
+  "def-nagata-compactification",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "prop-coef-integral-dualizing",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-tor-amplitude",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "For an integral constructible P, integral_residue_tor supplies a common finite Tor interval for its reductions. Transport the finite constructibility and Tor assertions through S.reductionEvaluation, and use S.reduction_normalized. This proves that S.reduction(P) lies in the normalized finite-Tor domain on X and Y.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralSystemDualityCompatibility on X and Y to the specified DualizingOperations. This gives constructibility of the integral dual M, invertibility of the actual dualComparison at every constructible input, and the single-dual uniform Tor bounds.",
+   "uses": [
+    "lem-coef-integral-system-duality-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply completedSystemPullbackPreservation to M. Its actual total limit is exactly firstDualPullback, so F is constructible and the pulled-back reduction system is normalized. The preservation statement from step 2 on X then makes H constructible.",
+   "uses": [
+    "lem-coef-completed-system-pullback-preservation",
+    "lem-coef-integral-system-duality-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prime ell is a unit on each scheme by its structure map to Spec D.k. Apply purNormalizedReconstruction to the pulled-back normalized system and to both normalized dualizing systems. This proves invertibility of the specific completed-pullback and dualizing counits. Naturality of dualComparison follows from reduction_compatible.naturality and bifunctoriality of system internal Hom. Its finite evaluation follows from fiber_naturality followed by beta_evaluation.",
+   "uses": [
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define q using NatIso.ofComponents applied to qMap. Each component is invertible as the actual counit followed by pullback of the invertible dualComparison. Counit naturality followed by dualComparison naturality proves its naturality; its component equation is reflexivity.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define b by NatIso.ofComponents: v at F, then system dual applied to q inverse, then theta inverse. Each factor is an isomorphism. Naturality of v, the opposite of q inverse naturality, and theta inverse naturality prove the required square. Its component equation is reflexivity.",
+   "uses": [
+    "lem-coef-finite-adjunction-diagram-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Solve theta.finiteFormula for evaluation of theta inverse by cancelling evaluation of theta and the finite dual-formula isomorphism. Apply fiber_naturality to q inverse, and combine internal-Hom maps with map_comp. The first coefficient factor is the composite called finiteInverseQ, with the specified finite dualizing and pullback evaluations. This proves finite_component for the actual system comparison.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If L has Tor interval [a,b], the single-dual bound on Y gives [-b-2dY,-a]. The completed-pullback lemma preserves this interval for F. Apply the single-dual bound on X to F; a<=b and dY>=0 give the required ordered input interval. The output endpoints simplify to [a-2dX,b+2dY].",
+   "uses": [
+    "lem-coef-integral-system-duality-compatibility",
+    "lem-coef-completed-system-pullback-preservation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-completed-system-pullback-preservation",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-integral-system-duality-compatibility",
+  "lem-pur-normalized-actual-reconstruction-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "Integral dual preservation and reduction comparison, together with Bhatt--Scholze Lemma 6.5.9(4)-(5); actual system-isomorphism assembly follows the original parent steps 4--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral Verdier dual of completed pullback of the Verdier dual has a coherent reduction system isomorphism to finite exceptional inverse images, with uniform Tor amplitude bound",
+   "results": "8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE. No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality completed pullback finite coefficient exceptional inverse image normalized system comparison",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.conjugateEquiv_pullbackId_hom, CategoryTheory.Limits.pullbackComparison, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso. No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdier\"",
+   "results": "12 hits; CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite. No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Vv]erdier|exceptionalInverse|upperShriek",
+   "results": "25 hits; Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean. No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent adic reduction of dual pullback dual agrees with exceptional pullback on finite torsion coefficient sheaves",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv. No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|upperShriek|exceptionalInverseImage",
+   "results": "0 hits; . No result states the derived constructible coefficient-system assertion; ordinary adic modules, sheaf pullback adjunctions and Verdier localization have different objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral Verdier duality reduction comparison completed pullback dual exceptional inverse image of constructible pro etale sheaves",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, TopCat.Sheaf.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous. Inspected hits concern ordinary sheaf pullback, localization, local cohomology or underived adic completion, not this derived constructible Verdier-duality system comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|upperShriek|exceptionalInverseImage|normalized.*[Tt]ower",
+   "results": "3 hits: Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean. Inspected hits concern ordinary sheaf pullback, localization, local cohomology or underived adic completion, not this derived constructible Verdier-duality system comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Verdier dual completed inverse image coherent finite coefficient reduction system",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_obj, CategoryTheory.Functor.rightDerivedNatIso_inv, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_map, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, LinearEquiv.dualMap_symm, CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_inv_app_val_app. Inspected hits concern ordinary sheaf pullback, localization, local cohomology or underived adic completion, not this derived constructible Verdier-duality system comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdier\"",
+   "results": "12 hits: CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite. Inspected hits concern ordinary sheaf pullback, localization, local cohomology or underived adic completion, not this derived constructible Verdier-duality system comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic sheaf normalized coefficient systems reduction of internal Hom Verdier duality commutes with quotient coefficients",
+   "results": "8 hits: localCohomology.diagram, LightCondensed.ihom_map_val_app, SheafOfModules.Presentation.map_π_eq, LightCondensed.ihomPoints_symm_comp, localCohomology.ofDiagram, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints, AdicCompletion.transitionMap_comp_reduceModIdeal. Inspected hits concern ordinary sheaf pullback, localization, local cohomology or underived adic completion, not this derived constructible Verdier-duality system comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-coef-integral-exceptional-adjoint",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 1, from \"Alternatively, consider the integral object H\" through \"compatibly with the transition maps\": constructibility, both dual Tor bounds and the coherent finite dual comparison; returned steps 1 and 3.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-coef-integral-dual-exceptional-system",
+  "worker": "stage1",
+  "summary": "Checked the actual integral dual-pullback-dual object, finite-Tor domains, normalized systems, actual completed-pullback and dualizing counits, evaluation-defined beta comparison, contravariant direction and naturality of b, and both Tor bounds. Every required ingredient already has a DAG node; no new nodes or Mathlib leaves were needed. The statement is unchanged.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 1, from “Alternatively, consider the integral object H” through “compatibly with the transition maps”, using system maps before evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic exact inverse image on coefficient systems and its quotient-scalar compatibility prove normalization of the pulled-back system."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Constructibility of completed pullback, the basic operation used in the blueprint dual-pullback-dual route."
+   },
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "The generic actual reduction/limit counit theorem identifies the specific maps, before any exceptional adjunction."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Finite pullback preserves constructibility and the same Tor interval; no exceptional operation is used."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-complete",
+    "why": "Coefficient-field completeness verifies the complete coefficient-ring hypothesis of the generic system inverse-image tool."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Coefficient-ring fact verifying the non-zero-divisor hypothesis of the generic system inverse-image tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-normalized-actual-reconstruction-maps"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-d706cf137",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-d706cf137 (reviewer sub-agent of L); spot-checked: Q124 lem-coef-integral-dual-exceptional-system d706cf13: no new nodes; the statement is unchanged against live, which still has the item unsplit with no repair note. Source checked: main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 1, which gives the bound [a-2dim X,b+2dim Y] and the finite dual formula; the item matches it. Step 1: residue-tor (K_1 is bounded by the uniform support in the D^b_c definition) and reconstruction (R_W P is normalized) put R_W P in N_W; Verdier keeps M integral constructible. Step 2: the coefficient-system comparison hypotheses hold (R is a DVR so ϖ is a non-zero-divisor; R≅lim R/ϖ^n by the Cauchy-lift argument, which I checked). Inverse image commuting with change of rings makes N normalized, and pullback-tor-amplitude preserves [a,b]. Step 3: F=L_X f^*R_Y M equals def-pur Lf^*M after unwinding, so it is constructible by operations-preserve-constructible clause 1; Verdier on X covers H; E_f maps N_Y to N_X. Step 4: e_N is an isomorphism with the stated adjoint evaluation. Step 5: v=I_W(1,e_Ω)∘β is typed correctly, Ω_W is normalized and its limit is ω_{W,R} with the same projections; each level is the Verdier comparison, so joint detection applies. Step 6: every direction in the contravariant composite checked; elementary. Step 7: naturality and evaluation by functoriality; elementary. Step 8: recomputed [-b-2dY,-a] and then [a-2dX,b+2dY]; the point and identity case gives [a,b]. The declared tool_uses are generic and accepted. Preflight passed at the final dry run and the split adds no new cycle."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralDualExceptionalSystem",
+  "declaration": "WeilConjectures.IntegralDualExceptionalSystem.integralDualExceptionalSystem",
+  "declarations": [
+   "WeilConjectures.IntegralDualExceptionalSystem.integralDual",
+   "WeilConjectures.IntegralDualExceptionalSystem.dualComparison",
+   "WeilConjectures.IntegralDualExceptionalSystem.finiteDualComparison",
+   "WeilConjectures.IntegralDualExceptionalSystem.DualComparison",
+   "WeilConjectures.IntegralDualExceptionalSystem.firstDualPullback",
+   "WeilConjectures.IntegralDualExceptionalSystem.doubleDualPullback",
+   "WeilConjectures.IntegralDualExceptionalSystem.qSource",
+   "WeilConjectures.IntegralDualExceptionalSystem.qTarget",
+   "WeilConjectures.IntegralDualExceptionalSystem.qMap",
+   "WeilConjectures.IntegralDualExceptionalSystem.bSource",
+   "WeilConjectures.IntegralDualExceptionalSystem.finiteInverseQ",
+   "WeilConjectures.IntegralDualExceptionalSystem.Comparison",
+   "WeilConjectures.IntegralDualExceptionalSystem.integralDualExceptionalSystem"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralDualExceptionalSystem.lean",
+  "statement": "theorem integralDualExceptionalSystem : Nonempty (Comparison f SX SY D hl c r g aX aY βY θ)",
+  "branch": "sheaf-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12226ef39",
+  "group": "Q90",
+  "result": "fix",
+  "note": "Report-only FIX: the delivered '## Second reading by Q90' was the author's self-pass; fixes/lem-coef-integral-dual-exceptional-system.report.md keeps the worker report verbatim and adds an independent clause-by-clause second reading. Lean and node record unchanged and correct. Hypotheses: D (k IsAlgClosure), l≠p, finite E/Q_l, separated finite-type X,Y,f over k, Compactification c; SX/SY are arbitrary calculi without Coherence, a harmless generalisation (only Calculus fields are used and purNormalizedReconstruction takes any S). M, F = L_X f* R_Y M and H = D_X F are literal composites with correct variance; omega = L_W(E_{a_W} unit) with DualizingSpec. Conclusions: constructibility of M,F,H; R_W P in N_W, f*R_YM and E_fR_YL normalized; v = I(1,e_Omega)∘beta iso, natural, with stated evaluation; actual counit iso; q pinned by q_component, b pinned by b_component (directions checked, including D_X(q^-1) via .op); finite_component derived from theta.finiteFormula plus fiber naturality and IHom bifunctoriality; Tor bound [a-2dX,b+2dY] for all integers a<=b, dX,dY>=0 with Krull bounds. Edge cases: empty schemes, zero L, point gives [a,b], exponent n+1, ramified E; universes all u. Gates: no duplicate, no hollow def, only sorry, docstrings and blueprint tags present, statement verbatim. No compile: no Lean file changed; worker reports clean scompile and dry run (3009c8b0bcc). Advisory: uncited owners def-coef-finite-adjunction-system-data (Realization/Geometry/domain/evaluation/pullEvaluation), lem-coef-finite-exceptional (dualFormulaIso, ∃!.choose), def-trf-integral-comparison-sequence-systems (system pullback) and sequence-site defs are interface types of the cited realization/calculus theorems, which cite most of them; about 60 landed calculus users follow the same convention, so not returned."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T095812-L-3483727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

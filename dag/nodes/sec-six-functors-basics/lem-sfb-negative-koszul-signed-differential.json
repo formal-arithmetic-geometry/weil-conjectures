@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-negative-koszul-signed-differential",
+ "kind": "statement",
+ "title": "Signed erased-index boundary of the canonical negative Koszul basis",
+ "statement": "Let O be a commutative ring sheaf on a small site, A a commutative ring in the same universe, rho:A→End(O) a ring homomorphism, a:Fin r→A, and s_i global sections with rho(a_i)=ringedKoszulScalar O s_i. For fixed n, integer q, and I with q=-card I, the canonical negative basis map on I followed by its actual differential equals the sum over i in I of rho((-1)^(card of the selected indices earlier than i) times a_i^(n+1)), followed by the canonical negative basis map on I.erase i in degree q+1. No coproduct, duality, transition, exterior coefficient, or coordinate choice is asserted.",
+ "stmt_deps": [
+  "def-cbc-signed-koszul-completion-model",
+  "lem-sfb-exterior-koszul-basis-differential"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+ },
+ "proof": [
+  {
+   "text": "Evaluate endomorphisms of the regular sheaf at one, giving a ring homomorphism to global sections and identifying each supplied generator with s_i. Apply ringedNegativeKoszulSummand_D₂_succ to the coefficient complex O[0]. Its first tensor differential is zero. On a supported subset the coefficient degree q+card I is zero, so the additional coefficient-complex sign is positive. The left unitor identifies the specified summand inclusion, preceded by the inverse single-complex isomorphism, with ringedNegativeKoszulBasis. Naturality of scalar action and the equality transports then give the signed sum over i in I erasing i, with coefficient (-1)^(number of earlier selected indices) times a_i^(n+1). For no factors the complex is O[0] and its boundary is zero.",
+   "uses": [
+    "lem-cbc-signed-koszul-summand-differential",
+    "lem-sfb-negative-koszul-basis-unitor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-signed-koszul-summand-differential",
+  "lem-sfb-negative-koszul-basis-unitor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul differential on the ordered wedge basis is the signed sum over erased indices, with sign counting earlier indices",
+   "results": "Eight hits: exterior differential forms, bar-complex differential, polynomial Kaehler differentials, ExteriorAlgebra.ιMulti. No ringed-site Koszul basis equation.",
+   "verdict": "Use the existing Koszul-direction tensor differential with coefficient complex O[0], whose left unitor identifies its canonical inclusions with the specified negative basis. The comparison is proved here.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite ordered subset basis of a Koszul complex agrees with tensor product of two term complexes, differential contraction and diagonal transition maps",
+   "results": "Eight hits, including HomologicalComplex.unit_tensor_d₁ and tensor_unit_d₂, and unrelated tensor-generator calculations.",
+   "verdict": "Use the existing Koszul-direction tensor differential with coefficient complex O[0], whose left unitor identifies its canonical inclusions with the specified negative basis. The comparison is proved here.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"ιMulti\"",
+   "results": "Twelve hits including exteriorPower.ιMulti_family and its functoriality and spanning API.",
+   "verdict": "Use the existing Koszul-direction tensor differential with coefficient complex O[0], whose left unitor identifies its canonical inclusions with the specified negative basis. The comparison is proved here.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "Three Mathlib hits concerning regular sequences, covariant derivatives and a local-cohomology comment. Local repository search found the signed finite coordinates and actual exterior basis coefficient definitions, but no theorem asserting this specific boundary comparison.",
+   "verdict": "Use the existing Koszul-direction tensor differential with coefficient complex O[0], whose left unitor identifies its canonical inclusions with the specified negative basis. The comparison is proved here.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedKoszulDualBasis",
+  "group": "V1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1), finite Koszul models in Stacks 099M: the signed boundary of a specified ordered negative tensor.",
+   "via": [
+    "lem-sfb-negative-koszul-exterior-differential",
+    "lem-sfb-ringed-koszul-dual-basis",
+    "lem-sfb-exterior-koszul-scalar-realization",
+    "lem-sfb-adic-residue-koszul-coefficient-cone-comparison",
+    "lem-sfb-adic-residue-koszul-tensor-cone-pro-zero",
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedNegativeKoszulSignedDifferential",
+  "file": "lean/Sheaf/CategoryTheory/RingedNegativeKoszulSignedDifferential.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulBasis_signed_d",
+  "statement": "theorem ringedNegativeKoszulBasis_signed_d\n    {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}\n    (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]\n    (ρ : A →+* End (SheafOfModules.unit\n      ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)))\n    (r : ℕ) (a : Fin r → A)\n    (s : Fin r → (O.obj ⋙ forget CommRingCat).sections)\n    (hρ : ∀ i, ρ (a i) = ringedKoszulScalar O (s i))\n    (n : ℕ) (q : ℤ) (I : exteriorKoszulIndex r q) :\n    ringedNegativeKoszulBasis O r s n I.1 q ≫\n        (ringedNegativeKoszul O r s n).d q (q + 1) =\n      ∑ i ∈ I.1, ρ ((-1 : A) ^ (I.1.filter (fun j ↦ j < i)).card * a i ^ (n + 1)) ≫\n        ringedNegativeKoszulBasis O r s n (I.1.erase i) (q + 1)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T202447-L-3459649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T202447-L-3459649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

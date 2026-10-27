@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q34
 -/
 
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Sheaf.AlgebraicGeometry.FSStrictLogMorphism
+public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.AssociatedLogUniversalStalks
-import Sheaf.TraceFormula.FsFaceSharpening
+public import Sheaf.TraceFormula.FsFaceSharpening
 import Sheaf.AlgebraicGeometry.CoherentLogIdealChartConstruction
 import Sheaf.GroupTheory.FineMonoidFiniteSaturation
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-!
 # Fan charts and pullback of saturated fan blowup towers
@@ -24,6 +26,8 @@ The characteristic sheaf is the sheafified unit quotient of the Zariski restrict
 No global lift of a fan chart to a monoid chart is assumed. Cartesian squares below
 are universal squares of fs log schemes, rather than ordinary scheme pullbacks.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -75,32 +79,7 @@ def EtaleLogStructure.IsZariski {X : Scheme.{u}} (M : EtaleLogStructure X) : Pro
       ∃ a : (strictLocalRing X t)ˣ,
         M.toEtalePrelogStructure.germ t ((logOpenEtale X).obj U) w s * M.unitsIn t a = m
 
-/-- The relation induced on characteristic stalks by a log morphism. Representatives
-are compared on a pointed relative étale diagram, so this is the graph of the canonical
-map, without choosing presentations of stalk elements. Source: ILO VI 1.1, VIII 3.3.8
-(blueprint: lem-trf-log-fan-chart-blowup). -/
-def EtaleLogHom.CharacteristicRelation {Y X : FineSaturatedLogScheme.{u}}
-    (f : EtaleLogHom Y X) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (t : Spec (.of Ω) ⟶ Y.scheme)
-    (a : X.logStructure.characteristic (t ≫ f.base))
-    (b : Y.logStructure.characteristic t) : Prop :=
-  ∃ (W : X.scheme.Etale) (V : Y.scheme.Etale)
-    (w : (Scheme.pointSmallEtale (t ≫ f.base)).fiber.obj W)
-    (v : (Scheme.pointSmallEtale t).fiber.obj V)
-    (k : V.left ⟶ W.left) (hk : k ≫ W.hom = V.hom ≫ f.base)
-    (s : X.logStructure.monoidSheaf.obj.obj (op W)),
-    v.left ≫ k = w.left ∧
-      Associates.mk (X.logStructure.toEtalePrelogStructure.germ (t ≫ f.base) W w s) = a ∧
-      Associates.mk (Y.logStructure.toEtalePrelogStructure.germ t V v
-        (f.sectionMap W V k hk s)) = b
 
-/-- Strictness is the canonical characteristic-stalk isomorphism criterion for pullback
-log structures. Normalization by the graph excludes an arbitrary isomorphism.
-Source: ILO VI 1.1, VIII 3.3.8 (blueprint: lem-trf-log-fan-chart-blowup). -/
-def EtaleLogHom.IsStrict {Y X : FineSaturatedLogScheme.{u}} (f : EtaleLogHom Y X) : Prop :=
-  ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Y.scheme),
-    ∃ e : X.logStructure.characteristic (t ≫ f.base) ≃* Y.logStructure.characteristic t,
-      ∀ a b, f.CharacteristicRelation t a b ↔ e a = b
 
 /-- A fan chart is a local morphism of sharp monoidal spaces whose inverse-image
 characteristic-sheaf map is an isomorphism, tested on all stalks. Source: ILO VIII
@@ -229,15 +208,6 @@ structure LogFanSegment {m n : ℕ} (S : FineFan.Tower.{u} m) (T : FineFan.Tower
   arrow : ∀ i, HEq (T.arrow (step i)) (S.arrow i)
   center : ∀ i, HEq (T.center (step i)) (S.center i)
 
-/-- The identity log morphism, specified on all relative test sections. Source: ILO
-VI 1.1 and VIII 3.3.9 (blueprint: lem-trf-log-fan-chart-blowup). -/
-def EtaleLogHom.IsIdentity {X : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X X) : Prop :=
-  f.base = 𝟙 X.scheme ∧
-    ∀ (W V : X.scheme.Etale) (k : V.left ⟶ W.left)
-      (hk : k ≫ W.hom = V.hom ≫ f.base) (h : k ≫ W.hom = V.hom),
-      f.sectionMap W V k hk =
-        (X.logStructure.monoidSheaf.obj.map
-          (MorphismProperty.Over.homMk k h : V ⟶ W).op).hom
 
 /-- Inverse log morphisms, with both composites equal to the actual identity including
 all log-section maps. Source: ILO VI 1.1 and VIII 3.3.9

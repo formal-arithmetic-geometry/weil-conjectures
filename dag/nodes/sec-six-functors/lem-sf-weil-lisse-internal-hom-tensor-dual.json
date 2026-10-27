@@ -1,0 +1,208 @@
+{
+ "id": "lem-sf-weil-lisse-internal-hom-tensor-dual",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "place": "the Lean proof of this node's declaration uses AlgebraicGeometry.WeilComplex.nonempty_tensorLisse_dual_iso_derivedHom (found by the 2026-10-22 maintainer audit of the batch sorry route); in blueprint terms: the canonical map $P^\\vee\\otimes^LN\\to R\\mathcal Hom(P,N)$ is an isomorphism (stage $\\overline{\\mathbf Q}_\\ell$, Weil complexes) (lem-sf-hom-finite-projective)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Internal Hom out of a lisse Weil sheaf is tensor with its dual",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Qlb=\\overline{\\mathbf Q}_\\ell$. Let $X$ be a $k_0$-scheme locally of finite type, put $\\bar X=X\\times_{k_0}k$, and let $\\Phi=1_X\\times\\operatorname{Spec}(\\gamma)$ for inverse $q$-power Frobenius $\\gamma$ of $k$, where $q=\\#k_0$. On a small representative of $\\bar X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site, def-weil-size-convention], let $R$ be the ring sheaf whose sections on $U$ are continuous functions $|U|\\to\\Qlb$ whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-subspace. Write $\\mathcal A$ for the category of $R$-module sheaves $F$ with an isomorphism $\\theta_F:\\Phi^*F\\xrightarrow{\\sim}F$, and maps commuting with $\\theta_F$ (fixed pairs [def-weil-endofunctor-fixed-pair-category] in the sheaf category). Use the native derived category $D(\\mathcal A)$ [def-weil-abstract-derived-category], formed by inverting equivariant quasi-isomorphisms. Write $H(A,B)=\\mathcal Hom_R(A,B)$ with structure $h\\mapsto\\theta_B\\Phi^*(h)\\theta_A^{-1}$, and $H_A=H(A,-)$. For an additive functor $H_A$, its total right derived functor $RH_A$ is computed by applying $H_A$ termwise to a K-injective representative. Here a complex $I$ is K-injective if every map from an acyclic complex to $I$ is null-homotopic. The native bifunctor $\\operatorname{RHom}_{\\mathrm W}(K,N)$ is the image of $H^\\bullet(J,I)$ for the chosen K-injective representatives $J,I$ of $K,N$, with $H^\\bullet(J,I)^n=\\prod_p H(J^p,I^{p+n})$ and differential $d(f)=d_I f-(-1)^n f d_J$. A native Weil complex is an object of $D(\\mathcal A)$ with bounded constructible cohomology: locally on $\\bar X$, each cohomology sheaf has a finite locally closed stratification on each stratum of which it is pro-etale locally finite free over $R$. Let $P$ be a Weil sheaf whose underlying $R$-module is pro-etale locally finite free of finite rank (lisse), and let $P^\\vee=H(P,R)$, with the displayed contragredient structure, again lisse. Let $N$ be a native Weil complex. For lisse $G$ use precisely the upstream functor $T_G=RH_{G^\\vee}$ restricted to native Weil complexes (Lean `WeilComplex.tensorLisse G`), and regard its value in $D(\\mathcal A)$. Then there exists an isomorphism\n$$T_{P^\\vee}(N)\\cong\\operatorname{RHom}_{\\mathrm W}(P[0],N)$$\nin $D(\\mathcal A)$. This is the tensor-with-the-dual / internal-Hom identity as typed by `AlgebraicGeometry.WeilComplex.nonempty_tensorLisse_dual_iso_derivedHom`; $P$ is in degree zero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.md",
+  "place": "lem-sf-hom-finite-projective: the canonical map $P^\\vee\\otimes^LN\\to R\\mathcal Hom(P,N)$ is an isomorphism (stage $\\overline{\\mathbf Q}_\\ell$, Weil complexes); Lean: upstream file lean/WeilConjectures/WeilSheaf/VerdierDual.lean, declaration AlgebraicGeometry.WeilComplex.nonempty_tensorLisse_dual_iso_derivedHom (module WeilConjectures.WeilSheaf.VerdierDual, lines 213-217, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply native lisse sheaf biduality [lem-sf-weil-lisse-biduality] to obtain e:P isomorphic to its double dual. Forget only constructibility, retaining the Frobenius-equivariant sheaf isomorphism.",
+   "uses": [
+    "lem-sf-weil-lisse-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+   }
+  },
+  {
+   "text": "The existing contravariant ihomBifunctor takes the opposite of e to an isomorphism H_doubleDualP isomorphic to H_P. Functor.rightDerivedFunctorNatIso transports this natural isomorphism to right derived functors. By the unchanged tensorLisse definition its source at N.obj is precisely the source of the theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+   }
+  },
+  {
+   "text": "The boundedness property N.property.1.1 supplies a lower cohomological bound. The last clause of [lem-sf-weil-derived-hom-single-resolution] identifies native derivedHom(P[0],N) with the right derived functor of H_P at N. Compose the isomorphism of step 2 with the inverse of this comparison.",
+   "uses": [
+    "lem-sf-weil-derived-hom-single-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-weil-lisse-biduality",
+  "lem-sf-weil-derived-hom-single-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+  "place": "Native Lean assembly by G2, preserving the finite-projective evaluation and tensor-Hom route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dual of dual of finite locally free module sheaf isomorphism, internal hom from locally free sheaf is tensor with dual",
+   "results": "Module.IsReflexive.of_finite_of_free, Module.evalEquiv, dualTensorHomEquivOfBasis (Mathlib.LinearAlgebra.Dual.*, Contraction): module-level statements only, nothing for pro-étale Weil sheaves",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdierDual\" (name substring)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'IsReflexive ; WeilSheaf|WeilComplex|weilSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "IsReflexive: module-level only (RingTheory/PicardGroup.lean, LinearAlgebra/RootSystem/*); WeilSheaf: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse Weil sheaf tensor its dual with a Weil complex is isomorphic to the derived internal Hom",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints, LightCondensed.instMonoidalClosedLightCondMod, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat, LightCondensed.internallyProjective_iff_tensor_condition'; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weil\"",
+   "results": "11 hits: AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor, AlgebraicGeometry.AlgebraicCycle.weilDivisors, AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_zero, AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_single, AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.neg, AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_neg, AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_iff, AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.coheight_eq_one; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtaleWeilSheaf|tensorLisse|bifunctorRHom",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom from a finite locally free sheaf is tensor with the dual",
+   "results": "8 hits: dualTensorHomEquivOfBasis, dualTensorHomEquiv, lTensorHomEquivHomLTensor, dualTensorHom, CategoryTheory.ihom.adjunction, rTensorHomEquivHomRTensor, CategoryTheory.ihom, CategoryTheory.MonoidalClosed.internalHomAdjunction₂; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free module sheaf dual evaluation derived internal hom isomorphism",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, LightCondensed.ihomPoints, SheafOfModules.freeHomEquiv, SheafOfModules.freeHomEquiv_comp_apply, LightCondensed.ihomPoints_apply, FGModuleCat.FGModuleCatEvaluation; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration on the batch-5 stage-3 sorry route without a DAG node (maintainer audit 2026-10-22, approved by the human); recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.nonempty_tensorLisse_dual_iso_derivedHom"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_tensorLisse_dual_iso_derivedHom",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      210,
+      217
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.VerdierDual",
+  "file": "lean/WeilConjectures/WeilSheaf/VerdierDual.lean",
+  "declaration": "AlgebraicGeometry.WeilComplex.nonempty_tensorLisse_dual_iso_derivedHom",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.nonempty_tensorLisse_dual_iso_derivedHom"
+  ],
+  "statement": "theorem nonempty_tensorLisse_dual_iso_derivedHom (P : WeilSheaf k₀ l X) (hP : P.IsLisse)\n    (N : WeilComplex k₀ l X) :\n    Nonempty (((tensorLisse (P.dual hP) hP.dual).obj N).obj ≅\n      (ProEtaleWeilSheaf.derivedHom k₀ l X N.obj).obj (op (WeilSheaf.toComplex.obj P).obj)) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; on the batch-5 own sorry route (local/sorry-route*.json) with no node recording it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-lisse-internal-hom-tensor-dual",
+  "worker": "stage1",
+  "summary": "Corrected the imported fixed-pair/native-derived category conflation to the exact upstream types without adding geometric hypotheses. Wrote finite-free sheaf biduality and the termwise precomposition isomorphism explicitly, and isolated the native two-resolution/single-source derived-Hom comparison as one new unsplit lemma.",
+  "blueprint": "The recorded ancestor lem-a1-local-boundary-duality uses the identity D_U F = F^vee(1)[2] in its opening. The finite-projective Hom and bidual calculation of lem-sf-hom-finite-projective serves that identity; the present native source defines tensor via the dual and is handled by biduality and the resolution comparison. This is below a unit statement, not a replacement of the finite-coefficient f! unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-325eef718",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-325eef718 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the report, the upstream Lean and the cited sources in full; no fixes were needed. Statement change: the base statement was wrong against its own Lean binding. It typed N in the fixed-pair category of def-weil-weil-sheaf-complex but called that the Lean WeilComplex, which is actually the native derived category of ProEtaleWeilSheaf (Category.lean:142-176). The worker retyped the item to the native objects, and each one matches the Lean: R = adicConstantSheaf (locally finite functions, ConstantSheaf.lean:318); the dual and its conjugation structure (Dual.lean:205-231); tensorLisse G = ihomLisse G^∨, a right derived functor (Fourier.lean:1258-1279); derivedHom = bifunctorRHom with K-injective representatives in both variables (DerivedHom.lean:111, BifunctorHom.lean:94-126). No hypothesis was added, the conclusion matches the Lean Nonempty iso, and the item is a maintainer audit node, not a target. The only node naming the item, lem-a1-local-boundary-duality, has it in proof_deps but in no step's uses, so no written step breaks. Steps: (1) the evaluation biduality P to P^vv is elementary; I checked the local identity matrix, gluing, rank 0 and mixed ranks, and the equivariance square against dualStr (Stacks 08JJ, sites-cohomology.tex:13048). It is inlined rather than citing lem-sf-weil-lisse-biduality because that node is typed in the fixed-pair common-stage model, which is acceptable. (2) The termwise precomposition chain isomorphism holds: the source is in degree 0 and the maps are equivariant. (3) The step takes only the statement of the new node, and the bounded hypothesis on N is met. (4) The composite's directions and ambient category are correct. New node lem-sf-weil-derived-hom-single-resolution: statement only, self-contained, source Stacks 0A95 (lemma-RHom-well-defined, line 8754) correctly labelled as the agent's equivariant analogue, and the three kinds of search are recorded. It is true by my own check: the forgetful functor has the exact left adjoint ⊕_n (Φ^n)^*, so it preserves K-injectives; 0A95 then applies; products are preserved and acyclicity is reflected. Small cases A=0, N=0, A=R and shifts are consistent. It is not a clause of the item, and the DAG search for K-injective together with Weil, fixed-pair, bifunctorRHom or derivedHom finds no duplicate. No SGA is cited and the unit route is untouched. Maintainer notes: the report wrongly claims a statement_change record with holds:false, but none is in the delivered files. lem-sf-weil-lisse-biduality and lem-sf-weil-verdier-dual-preserves-weil-complexes have the same fixed-pair versus native mismatch as this item's base statement and need the same retyping."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T103442-L-1081015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso",
+   "AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso"
+  ]
+ }
+}

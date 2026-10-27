@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-scheme-colimit-upgrade-space-targets",
+ "kind": "statement",
+ "title": "Criterion for a scheme colimit to have algebraic-space targets",
+ "statement": "Let $B$ be a scheme and $J$ a small category in the universes of [def-weil-size-convention]. Let $(X_j)_{j\\in J}$ be a diagram of $B$-schemes [def-pc-scheme], and let $(X,X_j\\to X)$ be a colimit cocone in $B$-schemes, meaning that maps $X\\to Z$ correspond to compatible families $X_j\\to Z$ for every $B$-scheme $Z$. Assume (i) the maps $X_j\\to X$ are jointly surjective; (ii) for every etale scheme $V\\to X$ [def-weil-etale-morphism], its base changes $V_j=V\\times_X X_j$ have colimit $V$ in $B$-schemes [def-pc-fibre-product]; and (iii) every compatible family of etale schemes $V_j\\to X_j$ with separated structure maps is obtained by base change from an etale scheme $V\\to X$. Compatibility means an isomorphism $V_j\\simeq V_k\\times_{X_k}X_j$ for every arrow $j\\to k$, respecting identities and composition; separated means that the relative diagonal is a closed immersion [def-weil-closed-immersion]. Then the same cocone is a colimit in algebraic spaces over $B$ [def-trf-algebraic-space]: maps $X\\to Q$ correspond bijectively to compatible families $X_j\\to Q$ for every algebraic space $Q/B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 07SX, lemma-colimit-agrees, with the finite span diagram as the application in Tag 07SY."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Fix an algebraic space $Q/B$ and compatible maps $f_j:X_j\\to Q$. By [lem-a1-space-affine-etale-cover] choose a surjective etale atlas $w:W\\to Q$ with $W=\\coprod_a W_a$ and each $W_a$ affine. This atlas is separated; here are the details needed to apply (iii). The summands are disjoint open and closed subschemes by [lem-weil-pbc-scheme-coproduct-family]. Apply [lem-weil-pbc-separated-affine-cover-criterion] to $W\\to\\operatorname{Spec}\\mathbf Z$: for distinct summands their intersection is the empty affine scheme and its ring is zero; for a summand with ring $A$, the required multiplication $A\\otimes_{\\mathbf Z}A\\to A$ is surjective since $a$ is the image of $a\\otimes1$. Thus the absolute diagonal of $W$ is a closed immersion. The square with top arrow $\\Delta_w:W\\to W\\times_QW$, bottom arrow the absolute diagonal $W\\to W\\times_{\\mathbf Z}W$, and left arrow the identity, is cartesian: on every scheme test, two identical $W$-sections automatically have the same $Q$-image. Consequently $\\Delta_w$ is a closed immersion, being a base change of the closed immersion $W\\to W\\times_{\\mathbf Z}W$ [lem-weil-pbc-closed-immersion-base-change]. By the same lemma, for every scheme $T$ with a map $T\\to W\\times_QW$ the base change $T\\times_{W\\times_QW}W\\to T$ of $\\Delta_w$ is a closed immersion [def-weil-closed-immersion]; thus the diagonal of $w$ is a representable closed immersion, i.e. $w$ is separated. All the fibre products with two scheme sources over $Q$ are schemes by its representable diagonal [def-trf-algebraic-space].",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-separated-affine-cover-criterion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07SX, lemma-colimit-agrees, proof"
+   }
+  },
+  {
+   "text": "Put $U_j=X_j\\times_{Q,f_j}W$ and let $h_j:U_j\\to W$ be the second projection. These are schemes and their maps to $X_j$ are surjective etale by [lem-trf-space-fibre-products-etale-covers]; they are separated by base change of $w$, using [lem-sfb-space-separated-fp-composition]. For an arrow $j\\to k$, a pair $(x_j,z)$ maps to $(x_k,z)$, giving $U_j\\simeq X_j\\times_{X_k}U_k$; these identifications satisfy identities and composition because both coordinates do. Hence (iii) supplies an etale scheme $p:U\\to X$ and coherent identifications $U\\times_X X_j\\simeq U_j$. The $h_j$ form a compatible family of $B$-scheme maps. By (ii) applied to $U\\to X$ there is a unique $B$-scheme map $h:U\\to W$ restricting to all $h_j$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-separated-fp-composition",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07SX, lemma-colimit-agrees, proof"
+   }
+  },
+  {
+   "text": "Let $D=U\\times_XU$, with projections $p_1,p_2$, and $D_j=U_j\\times_{X_j}U_j$. Etale base change and composition [lem-sfb-scheme-etale-source-target-properties] show that $D\\to X$ is etale. Its base change to $X_j$ is $D_j$, by the fibre-product universal property [def-pc-fibre-product]. Thus (ii) makes $D$ the colimit of the $D_j$ in $B$-schemes. Put $R=W\\times_QW$, a scheme by the representable diagonal of $Q$ [def-trf-algebraic-space]. On $D_j$ the two maps $h_j\\operatorname{pr}_1,h_j\\operatorname{pr}_2$ have the same $Q$-image, namely $f_j$ composed with the structure map to $X_j$, so they define a compatible family $r_j:D_j\\to R$. The scheme-colimit property produces $r:D\\to R$. Its composite with $R\\to W\\times_BW$ equals $(hp_1,hp_2)$: both have the same restrictions to every $D_j$, and the target is a $B$-scheme. Therefore $whp_1=whp_2$.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07SX, lemma-colimit-agrees, proof"
+   }
+  },
+  {
+   "text": "The map $p:U\\to X$ is surjective. Indeed, for $x\\in X$, (i) supplies $j$ and $x_j\\in X_j$ mapping to $x$; surjectivity of $U_j\\to X_j$ supplies $u_j$ above $x_j$, whose image in $U$ maps to $x$. Since $p$ is etale, it is flat and locally of finite presentation [def-weil-etale-morphism], so $\\{p\\}$ is an fppf covering [def-pc-fppf-site]. The algebraic space $Q$ is an fppf sheaf [def-trf-algebraic-space]. Its sheaf equalizer [def-weil-pbc-sites-and-cohomology] for this covering, together with the equality on $D$ just proved, gives a unique section $f\\in Q(X)$ restricting to $wh\\in Q(U)$. A section of $Q$ on a scheme $T$ is the same as a morphism $h_T\\to Q$: its value on a map $a:T'\\to T$ is the restriction of the section along $a$, and conversely a natural transformation is determined by its value on $\\mathrm{id}_T$. Thus $f$ is a $B$-morphism $X\\to Q$. For every $j$, both $f|_{X_j}$ and $f_j$ restrict on the surjective etale map $U_j\\to X_j$ to $wh_j$. Applying the same sheaf equalizer on $X_j$ gives $f|_{X_j}=f_j$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07SX, lemma-colimit-agrees, proof"
+   }
+  },
+  {
+   "text": "To prove uniqueness, suppose $f,g:X\\to Q$ have equal restrictions on every $X_j$. Pull back the atlas $W\\to Q$ separately along $f$ and $g$ to get surjective etale schemes $A\\to X$ and $C\\to X$, with lifts $a:A\\to W$ and $c:C\\to W$ [lem-trf-space-fibre-products-etale-covers]. The scheme $T=A\\times_X C$ is surjective etale over $X$: its projection to $A$ is a base change of the covering $C\\to X$, and the composite of two surjective etale maps is surjective etale [lem-weil-pbc-etale-covering-composition]. Apply (ii) to $T\\to X$, so $T$ is the colimit of $T_j=T\\times_X X_j$. The pair of lifts $(a\\operatorname{pr}_A,c\\operatorname{pr}_C):T\\to W\\times_BW$ factors on each $T_j$ through the scheme $R=W\\times_QW$, because $f|_{X_j}=g|_{X_j}$. These maps to $R$ are compatible by their two projections. The colimit of the $T_j$ gives $T\\to R$, and uniqueness for the scheme target $W\\times_BW$ identifies its composite with that pair of lifts. Hence $f|_T=g|_T$. The etale covering $T\\to X$ is fppf by [def-weil-etale-morphism, def-pc-fppf-site], and the sheaf equalizer [def-weil-pbc-sites-and-cohomology] for $Q$ implies $f=g$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-covering-composition",
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07SX, lemma-colimit-agrees, proof"
+   }
+  },
+  {
+   "text": "Restriction along the given cocone always sends a map $X\\to Q$ to a compatible family. Step 4 proves that every compatible family is its restriction, and step 5 proves injectivity. This is the required bijection for every algebraic space $Q/B$, hence the claimed colimit universal property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07SX, lemma-colimit-agrees, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-separated-affine-cover-criterion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-etale-covering-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 07SX, lemma-colimit-agrees, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "colimit.*[Aa]lgebraic[Ss]pace|[Aa]lgebraic[Ss]pace.*colimit|colimit_agrees",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: open scheme gluing and colimits of ringed spaces do not upgrade arbitrary scheme colimits to algebraic-space colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme colimit is also an algebraic space colimit if etale base changes preserve it and compatible separated etale covers lift",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverSchemeTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOp\", \"doc\": \"For a functor $ F : J \\to \\text{Sch} $ from a small category $ J $ to the category of schemes, if the morphism property defining the colimit is Zariski-local at the source, then the colimit of $ F $ exi\"}\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverScheme\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (CategoryTheory.Over S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f).left]\\n  [(F.comp ((CategoryTheory.Over.forget S).comp AlgebraicGeometry.Schem\", \"doc\": \"The category of schemes admits colimits for functors defined on small categories.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n         \", \"doc\": \"The forgetful functor from schemes to locally ringed spaces preserves colimits of directed gluing diagrams: given a small thin category $ J $ and a locally directed functor $ F: J \\to \\text{Scheme} $ wi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] [Quiver.IsThin J] [Small.{u, w} J],\\n  CategoryTheor\", \"doc\": \"For any categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$, and a locally directed functor $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, the colimit of $F$ exists. This instance asserts that functors satisfying the loca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.instCreatesColimitLocallyRingedSpaceWalkingMultispanProdJMultispanDiagramForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) →\\n  CategoryTheory.CreatesColimit D.diagram.multispan AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces creates colimits for diagrams constructed from scheme gluing data. Specifically, for any gluing data $ D $, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n         \", \"doc\": \"Given a small thin category $ J $ and a functor $ F : J \\to \\text{Sch} $ (the category of schemes) such that: (1) every morphism in $ J $ is mapped by $ F $ to an open immersion of schemes, (2) the comp\"}\n  {\"name\": \"AlgebraicGeometry.instCreatesColimitOverSchemeTopMorphismPropertyOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"(P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) →\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] →\\n    {S : AlgebraicGeometry.Scheme} →\\n      {J : Type u_1} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} J] →\\n          (F : CategoryTheory.Functor J (P.Over ⊤ S)) →\\n            [∀\", \"doc\": \"The forgetful functor from the over category equipped with the top morphism property to the standard over category creates colimits for locally directed diagrams of open immersions in the category of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.instCreatesColimitLocallyRingedSpaceForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n          [Quiver.IsThin J]\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces creates colimits. This means that for any diagram in the category of schemes, if the image of the diagram un\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: open scheme gluing and colimits of ringed spaces do not upgrade arbitrary scheme colimits to algebraic-space colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upgrade a colimit of schemes to a colimit against fppf sheaf algebraic space targets via etale descent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n         \", \"doc\": \"The forgetful functor from schemes to locally ringed spaces preserves colimits of directed gluing diagrams: given a small thin category $ J $ and a locally directed functor $ F: J \\to \\text{Scheme} $ wi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n         \", \"doc\": \"Given a small thin category $ J $ and a functor $ F : J \\to \\text{Sch} $ (the category of schemes) such that: (1) every morphism in $ J $ is mapped by $ F $ to an open immersion of schemes, (2) the comp\"}\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverScheme\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (CategoryTheory.Over S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f).left]\\n  [(F.comp ((CategoryTheory.Over.forget S).comp AlgebraicGeometry.Schem\", \"doc\": \"The category of schemes admits colimits for functors defined on small categories.\"}\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverSchemeTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOp\", \"doc\": \"For a functor $ F : J \\to \\text{Sch} $ from a small category $ J $ to the category of schemes, if the morphism property defining the colimit is Zariski-local at the source, then the colimit of $ F $ exi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.instCreatesColimitLocallyRingedSpaceWalkingMultispanProdJMultispanDiagramForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) →\\n  CategoryTheory.CreatesColimit D.diagram.multispan AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces creates colimits for diagrams constructed from scheme gluing data. Specifically, for any gluing data $ D $, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] [Quiver.IsThin J] [Small.{u, w} J],\\n  CategoryTheor\", \"doc\": \"For any categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$, and a locally directed functor $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, the colimit of $F$ exists. This instance asserts that functors satisfying the loca\"}\n  {\"name\": \"AlgebraicGeometry.instCreatesColimitOverSchemeTopMorphismPropertyOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"(P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) →\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] →\\n    {S : AlgebraicGeometry.Scheme} →\\n      {J : Type u_1} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} J] →\\n          (F : CategoryTheory.Functor J (P.Over ⊤ S)) →\\n            [∀\", \"doc\": \"The forgetful functor from the over category equipped with the top morphism property to the standard over category creates colimits for locally directed diagrams of open immersions in the category of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    [inst : CategoryTheory.Category.{v_1, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        CategoryTheory.Limits.IsColimit (AlgebraicGeometry.Scheme.Cover.coconeOfLocallyDirected 𝒰)\", \"doc\": \"The statement asserts that the cocone associated to a locally directed open cover $\\\\mathcal{U}$ of a scheme $X$ satisfies the universal property of a colimit. This is established by showing that any c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: open scheme gluing and colimits of ringed spaces do not upgrade arbitrary scheme colimits to algebraic-space colimits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"colimit\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.instHasColimits\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasLimits C] : CategoryTheory.Limits.HasColimits (AlgebraicGeometry.PresheafedSpace C)\", \"doc\": \"When `C` has limits, the category of presheafed spaces with values in `C` itself has colimits.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.forget_preservesColimits\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasLimits C] : CategoryTheory.Limits.PreservesColimits (AlgebraicGeometry.PresheafedSpace.forget C)\", \"doc\": \"The underlying topological space of a colimit of presheafed spaces is\\nthe colimit of the underlying topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.colimit\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] [∀ (X : TopCat), CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ (TopCat.Presheaf C X)] (F : CategoryTheory.Functor J (AlgebraicGeometry.PresheafedSpace \", \"doc\": \"Auxiliary definition for `AlgebraicGeometry.PresheafedSpace.instHasColimits`.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.instHasColimitsOfShape\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] [∀ (X : TopCat), CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ (TopCat.Presheaf C X)] [CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ C] : CategoryTheory.L\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.colimitCocone\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] [∀ (X : TopCat), CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ (TopCat.Presheaf C X)] (F : CategoryTheory.Functor J (AlgebraicGeometry.PresheafedSpace \", \"doc\": \"Auxiliary definition for `AlgebraicGeometry.PresheafedSpace.instHasColimits`.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.instPreservesColimitsOfShapeTopCatForget\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] [∀ (X : TopCat), CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ (TopCat.Presheaf C X)] [CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ C] : CategoryTheory.L\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] [∀ (X : TopCat), CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ (TopCat.Presheaf C X)] [CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ C] (F : CategoryTheor\", \"doc\": \"Auxiliary definition for `AlgebraicGeometry.PresheafedSpace.instHasColimits`.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.colimitCocone_pt\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] [∀ (X : TopCat), CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ (TopCat.Presheaf C X)] (F : CategoryTheory.Functor J (AlgebraicGeometry.PresheafedSpace \", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.desc\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] [∀ (X : TopCat), CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ (TopCat.Presheaf C X)] [CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ C] (F : CategoryTheor\", \"doc\": \"Auxiliary definition for `AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit`.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.colimit_carrier\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] [∀ (X : TopCat), CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ (TopCat.Presheaf C X)] (F : CategoryTheory.Functor J (AlgebraicGeometry.PresheafedSpace \", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.pushforwardDiagramToColimit\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] (F : CategoryTheory.Functor J (AlgebraicGeometry.PresheafedSpace C)) : CategoryTheory.Functor J (TopCat.Presheaf C (CategoryTheory.Limits.colimit (F\", \"doc\": \"Given a diagram of presheafed spaces,\\nwe can push all the presheaves forward to the colimit `X` of the underlying topological spaces,\\nobtaining a diagram in `(Presheaf C X)ᵒᵖ`.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.colimitCocone_ι_app_base\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \" {J : Type u'} [CategoryTheory.Category.{v', u'} J] {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfShape J TopCat] [∀ (X : TopCat), CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ (TopCat.Presheaf C X)] (F : CategoryTheory.Functor J (AlgebraicGeometry.PresheafedSpace \", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: open scheme gluing and colimits of ringed spaces do not upgrade arbitrary scheme colimits to algebraic-space colimits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upgrade a colimit of schemes to a colimit against fppf sheaf algebraic space targets via etale descent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": IsColimit (coproductCofan F)\", \"doc\": \"For any small discrete category $\\\\mathcal{J}$ and diagram $F : \\\\mathcal{J} \\\\to \\\\mathrm{LocallyRingedSpace}$, the cocone constructed by taking the colimit of $F \\\\circ \\\\text{forget}$ in the category of \"}\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverScheme\", \"module\": \"Mathlib.AlgebraicGeometry.LimitsOver\", \"type\": \": HasColimit F\", \"doc\": \"The category of schemes admits colimits for functors defined on small categories.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": IsColimit (cocone F)\", \"doc\": \"Given a small thin category $ J $ and a functor $ F : J \\to \\text{Sch} $ (the category of schemes) such that: (1) every morphism in $ J $ is mapped by $ F $ to an open immersion of schemes, (2) the comp\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coproductCofan\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": Cocone F\", \"doc\": \"For a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathrm{LocallyRingedSpace} $, this cocone constructs the colimit in the category of locally ringed spaces by first taking the colimit in the category of sheafed sp\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instHasColimits\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": HasColimits LocallyRingedSpace\", \"doc\": \"The category of locally ringed spaces has all colimits. This means that for any small diagram in this category, there exists a colimit object that satisfies the universal property of colimits, constru\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \"(J : Type w) [Category.{w'} J] [Small.{v} J] [HasLimitsOfShape Jᵒᵖ C] : HasColimitsOfShape J (SheafedSpace.{_, _, v} C)\", \"doc\": \"If $ \\\\mathcal{J} $ is a small category and the opposite category $ \\\\mathcal{J}^{\\\\text{op}} $ has all limits of shape $ \\\\mathcal{J} $, then the category of sheafed spaces over a category $ \\\\mathcal{C} \"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.colimit\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits\", \"type\": \"(F : J ⥤ PresheafedSpace.{_, _, v} C) : PresheafedSpace C\", \"doc\": \"The colimit of a diagram of presheafed spaces $F: \\\\mathcal{J} \\\\to \\\\mathbf{PresheafedSpace}(\\\\mathcal{C})$ is defined as the presheafed space whose carrier is the colimit of the underlying topological s\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \"[HasLimits C] {X Y : SheafedSpace C} (f g : X ⟶ Y) : Epi (coequalizer.π f g).hom.base\", \"doc\": \"If $ \\\\mathcal{J} $ is a small category and its opposite category $ \\\\mathcal{J}^{\\\\text{op}} $ has all limits of shape $ \\\\mathcal{J} $, then the category of sheafed spaces over a category $ \\\\mathcal{C} \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: open scheme gluing and colimits of ringed spaces do not upgrade arbitrary scheme colimits to algebraic-space colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme colimit is also a colimit of algebraic spaces when etale base changes preserve the colimit and compatible separated etale schemes descend",
+   "results": "AlgebraicGeometry.instHasColimitOverScheme; AlgebraicGeometry.instHasColimitOverSchemeTopMorphismProperty; AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit; AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit; AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace; AlgebraicGeometry.Scheme.GlueData.instPreservesColimitWalkingMultispanProdJMultispanDiagramForget; AlgebraicGeometry.AffineScheme.hasColimits; AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open gluing, affine-scheme colimits, and ringed-space colimits do not give this arbitrary algebraic-space target criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*[Aa]lgebraic[Ss]pace|[Aa]lgebraic[Ss]pace.*colimit|colimit_agrees",
+   "results": "",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open gluing, affine-scheme colimits, and ringed-space colimits do not give this arbitrary algebraic-space target criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"colimit\"",
+   "results": "AlgebraicGeometry.PresheafedSpace.instHasColimits; AlgebraicGeometry.PresheafedSpace.forget_preservesColimits; AlgebraicGeometry.PresheafedSpace.colimit; AlgebraicGeometry.PresheafedSpace.instHasColimitsOfShape; AlgebraicGeometry.PresheafedSpace.colimitCocone; AlgebraicGeometry.PresheafedSpace.instPreservesColimitsOfShapeTopCatForget; AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit; AlgebraicGeometry.PresheafedSpace.colimitCocone_pt",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open gluing, affine-scheme colimits, and ringed-space colimits do not give this arbitrary algebraic-space target criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme colimit remains a colimit against algebraic space targets if etale base changes preserve it and separated etale objects descend",
+   "results": "AlgebraicGeometry.instHasColimitOverScheme; AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ; AlgebraicGeometry.LocallyRingedSpace.instHasColimits; AlgebraicGeometry.AffineScheme.hasColimits; AlgebraicGeometry.IsSeparated.isStableUnderBaseChange; AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.instHasColimitOverSchemeTopMorphismProperty",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open gluing, affine-scheme colimits, and ringed-space colimits do not give this arbitrary algebraic-space target criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upgrade a scheme colimit to algebraic space targets by lifting etale covers and descending a morphism from an atlas",
+   "results": "AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace; AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit; AlgebraicGeometry.instHasColimitOverScheme; AlgebraicGeometry.instHasColimitOverSchemeTopMorphismProperty; AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit; AlgebraicGeometry.instCreatesColimitOverSchemeTopMorphismPropertyOverForget; AlgebraicGeometry.Scheme.GlueData.instCreatesColimitLocallyRingedSpaceWalkingMultispanProdJMultispanDiagramForgetToLocallyRingedSpace; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open gluing, affine-scheme colimits, and ringed-space colimits do not give this arbitrary algebraic-space target criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-thickening-pushout",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Geometric pushout construction and the two canonical recovery maps preceding the flatness argument in Stacks Tag 07W3. Supporting input: Tag 07SY upgrades scheme pushouts to algebraic-space pushouts by Tag 07SX.",
+   "via": [
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-colimit-upgrade-space-targets",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 07SX using existing atlas, separation, fibre-product, etale and sheaf nodes. Wrote the separated-atlas calculation, coherent atlas pullbacks, overlap factorization, effective sheaf gluing, recovery of the family, and the double-atlas uniqueness proof. No new nodes are needed. Statement and all original metadata retained; repaired the null blueprint ancestor to the imported direct-image node identified by its existing from.place and via chain.",
+  "blueprint": "The inherited supporting route to det-thm-sf-ctf-stability-direct-images, proof (3), ends in Tag 07SY upgrading a scheme pushout by Tag 07SX. Steps 1--4 realize the separated-atlas and etale descent proof of 07SX; steps 5--6 supply its uniqueness and universal-property conclusion. The current latest blueprint proof (3) names the direct-image reduction but not these deeper prerequisites.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "The arbitrary algebraic-space atlas from a disjoint union of affines is the generic input to the first sentence of Tag 07SX; no specialized finiteness or curve statement replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Only the disjoint open-and-closed affine summands of an atlas are used to check its separatedness."
+   },
+   {
+    "node": "lem-weil-pbc-separated-affine-cover-criterion",
+    "why": "The separated affine-cover criterion is applied over Spec Z to the affine summands of an atlas, with empty or identical intersections."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only formation of scheme pullbacks of an etale atlas and stability of surjective etale covers under base change are used, as generic tools in Tag 07SX."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-composition",
+    "why": "The composite of the two surjective etale projections in the uniqueness cover is surjective etale; this is a generic covering calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-separated-affine-cover-criterion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-covering-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-4f36ebb5e",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-4f36ebb5e (reviewer sub-agent of L); spot-checked: I read the Stacks source, Tag 07SX (spaces-pushouts.tex lines 116-163). The item statement matches it hypothesis by hypothesis. The one change is that the item takes its colimits in B-schemes, where Stacks takes them in all schemes. That makes the item's hypotheses weaker for the same conclusion, and every target the proof uses is over B (W, W x_B W, R = W x_Q W), so the item is still proved. It still covers the Tag 07SY application. There are no new nodes. The statement is identical to live, where the item is still unsplit, so no other group has superseded it. Changing blueprint.from.node to det-thm-sf-ctf-stability-direct-images is consistent with the via chain. Steps 2-6 are correct as written. Step 2: atlas pullbacks via lem-trf-space-fibre-products-etale-covers and separated base change in the spaces sense. Step 3: D->X is étale by the etale-source-target clauses (i)/(ii), and the factorization through R uses uniqueness for the target W x_B W. Step 4: the single map U->X is surjective, so it is an fppf covering, and the sheaf equalizer gives existence; recovering f_j uses the cover U_j->X_j. Step 5: the double-atlas T = A x_X C is a surjective étale cover via base change and lem-weil-pbc-etale-covering-composition, which gives uniqueness. Edge cases with empty J or empty W work. FIX (C1/C4) in step 1: it took base-change stability of closed immersions from def-weil-closed-immersion, which does not state it, and it stopped at 'Delta_w is a closed immersion', while step 2 needs every scheme test of the diagonal to be one. Step 1 now cites the existing Mathlib leaf lem-weil-pbc-closed-immersion-base-change (Tag 01QR) for both base changes and concludes that w is separated in the representable sense. The node is also added to proof_deps. Batch-5: lem-a1-space-affine-etale-cover (03FX atlas), lem-trf-space-fibre-products-etale-covers (02X2/041F), lem-sfb-space-separated-fp-composition (03KL) and lem-sfb-scheme-etale-source-target-properties (04R1; it reaches only lem-trf-smooth-composition) are all general foundations on schemes and algebraic spaces. None is a step of the proof of the trace formula or of Poincaré duality, so all are accepted. No SGA citation. No duplicate of 07SX: grep finds only the parent node that cites it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeColimitSpaceTargets",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.schemeColimit_has_algebraicSpace_targets",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeColimitSpaceTargets.lean",
+  "statement": "theorem schemeColimit_has_algebraicSpace_targets {B : Scheme.{u}} {J : Type v} [SmallCategory J] (F : J ⥤ Over B) (c : Cocone F) (hc : IsColimit c) (hjoint : ∀ x : c.pt.left, ∃ (j : J) (y : (F.obj j).left), (c.ι.app j).left.base y = x) (hbaseChange : ∀ (E : J ⥤ Over B) (e : E ⟶ F) (d : Cocone E) (p : d.pt ⟶ c.pt), Etale p.left → (∀ j : J, IsPullback (d.ι.app j).left (e.app j).left p.left (c.ι.app j).left) → Nonempty (IsColimit d)) (hdescent : ∀ (E : J ⥤ Over B) (e : E ⟶ F), (∀ j : J, Etale (e.app j).left ∧ IsClosedImmersion (pullback.diagonal (e.app j).left)) → (∀ (j k : J) (a : j ⟶ k), IsPullback (E.map a).left (e.app j).left (e.app k).left (F.map a).left) → ∃ (d : Cocone E) (p : d.pt ⟶ c.pt), Etale p.left ∧ ∀ j : J, IsPullback (d.ι.app j).left (e.app j).left p.left (c.ι.app j).left) : ∀ (Q : AlgebraicSpace B) (f : ∀ j : J, yoneda.obj (F.obj j) ⟶ Q.obj.obj), (∀ (j k : J) (a : j ⟶ k), yoneda.map (F.map a) ≫ f k = f j) → ∃! g : yoneda.obj c.pt ⟶ Q.obj.obj, ∀ j : J, yoneda.map (c.ι.app j) ≫ g = f j",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96825d9fa",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Statement checked against Stacks 07SX (spaces-pushouts.tex 90-171) and the node. Colimit cocone taken in Over B as the node specifies; hjoint = joint surjectivity. hbaseChange = (ii) with arbitrary cartesian choices, equivalent because E.map is forced canonical by the cocone laws and naturality. hdescent = an object of lim X_et with separated (closed-immersion relative diagonal) étale components, cartesian transitions for every arrow, output an étale V with a cocone of cartesian squares; no separatedness required of V, matching the source. Conclusion ∃! over yoneda on Over B against Q.obj.obj (fppf sheaf, Type u), with no assumption on Q. Universe v of J arbitrary. Statement field verbatim in the file; the only change from the live node is the added lean record; the stmt_dep records match their use; proof imports exist in live and nothing imports the new module. No definitions, proof is sorry, docstrings carry the source and blueprint id, report has both sections. Edge cases checked: empty J, non-thin J, non-separated V in (ii), empty atlas or Q. No file changed, so no compile."
+ }
+}

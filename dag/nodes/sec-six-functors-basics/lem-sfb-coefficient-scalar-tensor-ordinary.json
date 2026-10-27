@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-coefficient-scalar-tensor-ordinary",
+ "kind": "lemma",
+ "title": "The ordinary scalar tensor comparison square",
+ "statement": "For commutative condensed rings R and S, an exact coefficient extension a, a scheme Z, the fixed basic scalar comparison data d and its normalization hypotheses h, and arbitrary internal R-modules M,N, the composite ES(delta_internal(M,N)), followed by the ordinary section tensor comparison and o_M tensor o_N, equals o_(M tensor N), followed by the section scalar image of the ordinary R tensor comparison and the ordinary scalar tensorator specified by d.m.",
+ "stmt_deps": [
+  "def-sfb-coefficient-scalar-tensor-representative-basic-data",
+  "def-sfb-coefficient-scalar-tensor-representative-hypotheses"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, degreewise ordinary tensor compatibility and signed direct-sum totalization; Modules on Sites, Tags 03EK and 03EL."
+ },
+ "proof": [
+  {
+   "text": "Precompose with the scalar extension coequalizer, the internal relative tensor coequalizer, and the sheaf tensor comparison maps. Local equivalence and tensor induction reduce equality to generators s tensor (x tensor y).",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized internal scalar tensorator sends the scalar unit on x tensor y to the tensor of the scalar units on x and y. Scalar linearity determines its value on every generator.",
+   "uses": [
+    "def-sfb-internal-scalar-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply hgenerator, naturality of the sheafified scalar pure generator, the ordinary section tensor pure formula, and hmonoidal. Both composites send s tensor (x tensor y) to (s tensor x) tensor (1 tensor y).",
+   "uses": [
+    "def-sfb-coefficient-scalar-tensor-representative-hypotheses",
+    "lem-pd-sheaf-scalar-extension-constraint-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-internal-scalar-tensor-comparison",
+  "def-sfb-coefficient-scalar-tensor-representative-hypotheses",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, the ordinary comparison and the passage to unbounded total complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized natural scalar extension comparison under an equivalence commutes with tensor products on pure tensors and hence on direct sum total cochain complexes",
+   "results": "Eight hits, including HomologicalComplex.ιTensorObj and elementary ModuleCat scalar extension formulas. No theorem for these internal-section comparison maps.",
+   "date": "2026-10-27",
+   "verdict": "Use coproduct inclusions and the existing scalar normalization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "mapBifunctorComparison",
+   "results": "Zero hits; the identifier is in the adopted source extension rather than the Mathlib index.",
+   "date": "2026-10-27",
+   "verdict": "No exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*tensor.*(ordinary|total)|mapBifunctorComparison_naturality",
+   "results": "Remote Mathlib search has zero hits. Local adopted source provides mapBifunctorComparison and summand formulas; geometric SectionOplaxTotalComparison supplies a model for the coproduct argument.",
+   "date": "2026-10-27",
+   "verdict": "The scalar ordinary and total squares need explicit proofs from the prescribed normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientScalarTensorRepresentativeInternal",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-coefficient-scalar-tensor-representative-internal",
+   "place": "ordinary tensor square"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientScalarTensorOrdinary",
+  "file": "lean/Sheaf/Paper/CoefficientScalarTensorOrdinary.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarTensor_ordinary",
+  "statement": "theorem coefficientScalarTensor_ordinary (Z : Scheme.{u})\n    (d : CoefficientScalarTensorRepresentativeBasicData a Z)\n    (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)\n    (M N : ModuleRingedComparison.internalModules R Z) :\n    let := internalScalarMonoidal a Z\n    (ModuleRingedComparison.equivalence S Z).functor.map\n        (Functor.OplaxMonoidal.δ (Mod.extendScalars (coefficientMap a Z)) M N) ≫\n      (ModuleRingedComparison.ordinaryTensorComparison S Z _ _).hom ≫\n      (d.o.hom.app M ⊗ₘ d.o.hom.app N) =\n    d.o.hom.app (M ⊗ N) ≫\n      d.b.extension.map (ModuleRingedComparison.ordinaryTensorComparison R Z M N).hom ≫\n      d.m.toOplaxMonoidal.δ\n        ((ModuleRingedComparison.equivalence R Z).functor.obj M)\n        ((ModuleRingedComparison.equivalence R Z).functor.obj N)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T034647-L-3671841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T034647-L-3671841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -22,96 +22,28 @@
  ],
  "proof": [
   {
-   "text": "First identify the coefficient categories, without changing the coefficient sheaf. A standing scheme is qcqs: finite type over a field includes quasi-compactness, and a separated diagonal is a closed immersion and hence quasi-compact. Apply [det-def-localizing-closure-ctf-equals-bc](2) with $\\Lambda=\\mathcal O_E$ on each scheme that occurs. It gives $\\Dctf=\\Dbc$ and $\\Loc(\\Dctf)=\\Loc(\\Dbc)$ as full subcategories of the same ordinary unbounded module-object derived category. Thus the admissible-coefficient localizing theorems can be applied integrally. In particular, no ordinary coproduct is replaced by a completed coproduct.",
+   "text": "Apply the integral preservation and pullback-preservation lemmas. Obtain one normalized comparison family, then obtain composition isomorphisms compatible with that family and the cartesian base-change assertions for that same family. Assemble all eight fields of Coherence from these witnesses. The coefficient-category identification is handled inside the preservation and comparison dependencies.",
    "uses": [
-    "det-def-localizing-closure-ctf-equals-bc"
+    "lem-sfb-total-derived-preservation",
+    "lem-sfb-total-derived-pullback",
+    "lem-sfb-total-derived-normalized-comparisons",
+    "lem-sfb-total-derived-compatible-composition",
+    "lem-sfb-total-derived-cartesian-compact-support"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
-    "place": "First paragraph: the integral specialization and the equality $D^b_{ctf}=D^b_c$."
-   }
-  },
-  {
-   "text": "Apply [det-cor-int-compactness-ii-extension-zero] to $j:X\\hookrightarrow\\overline X$. Its hypothesis is precisely the quasi-compact open immersion in the specified compactification. Its first clause says that extension by zero is exact and preserves all direct sums, its second that it preserves $\\Dbc$, and its third that it maps the source localizing category into the target one. The derived notation $D(j_!)$ applies this exact functor termwise, so the same triangle and coproduct assertions hold for it.",
-   "uses": [
-    "det-cor-int-compactness-ii-extension-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
-    "place": "Second paragraph, first bullet: extension by zero; only exactness, sums and the two preservation clauses are used."
-   }
-  },
-  {
-   "text": "Apply [det-proper-image-localizing-proper] to $p:\\overline X\\to Y$ with $\\Lambda=\\mathcal O_E$. Its final coefficient clause explicitly asserts that the required $\\Dctf$ preservation and direct-sum preservation hold for this coefficient. Its conclusion therefore supplies an exact, sum-preserving restriction of $Rp_*$ to the localizing categories, and its asserted preservation of $\\Dctf$ is preservation of $\\Dbc$ under step 1. Both categories here use the same pulled-back integral ring as in step 2.",
-   "uses": [
-    "det-proper-image-localizing-proper"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
-    "place": "Second paragraph, second bullet: the integral proper-image preservation input, using its existing coefficient-specific localizing formulation."
-   }
-  },
-  {
-   "text": "The composite restriction is well-defined because the target localizing category of step 2 is the source localizing category of step 3. A distinguished triangle is sent to a distinguished triangle twice, with the composite shift comparison, so $Rp_*D(j_!)$ is exact. For a small family $(K_a)$, the canonical comparisons of steps 2 and 3 give\n$$Rp_*j_!(\\bigoplus_a K_a)\\simeq Rp_*(\\bigoplus_a j_!K_a)\\simeq\\bigoplus_a Rp_*j_!K_a.$$\nIf $K\\in\\Dbc(X,\\mathcal O_E)$, then $j_!K\\in\\Dbc(\\overline X,\\mathcal O_E)$ and $Rp_*j_!K\\in\\Dbc(Y,\\mathcal O_E)$. This also includes the empty coproduct and the zero complex.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
-    "place": "Final paragraph, first sentence: form the composite and spell out its three properties."
-   }
-  },
-  {
-   "text": "For compactifications $c_1,c_2$, apply [det-sf-comp-coherence-cocycle] with $\\Lambda=\\mathcal O_E$ and use step 1 to read its domain as $\\Loc(\\Dbc(X,\\mathcal O_E))$. The hypothesis $Y$ qcqs was checked in step 1. The stated comparison $\\phi_{c_2,c_1}$ is independent of the common dense refinement; its identity and cocycle equations are exactly the compatibility needed to identify all choices. Since both functors preserve $\\Dbc$ by step 4, this same natural isomorphism restricts to $\\Dbc$. This uses the existing comparison statement, rather than attributing comparison maps to the right-adjoint existence theorem.",
-   "uses": [
-    "det-sf-comp-coherence-cocycle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
-    "place": "Final paragraph: independence of compactification and the comparison isomorphisms."
-   }
-  },
-  {
-   "text": "For composition, apply [lem-sfb-nonrational-localizing-lower-shriek-composition] with $\\Lambda=\\mathcal O_E$ to separated finite-type $k$-morphisms $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ of standing schemes. Its coefficient category is the one of the statement: module objects over the pulled-back condensed ring $\\mathcal O_{E,T}$ in the ordinary unbounded derived category, with $\\mathcal T_T=\\Loc(\\Dctf(T,\\mathcal O_E))$, which is $\\Loc(\\Dbc(T,\\mathcal O_E))$ by step 1. Its functors $Rh_!$, for $h=f,g,gf$, are computed as $Rr_*D(j_!)$ for a compactification $h=rj$ with $j$ quasi-compact open and $r$ proper, i.e. exactly the functors $Rh_!^c$ of steps 2--4, identified for different compactifications by the comparisons of [det-sf-comp-coherence-cocycle] used in step 5. The cited statement gives a natural isomorphism $Rg_!\\circ Rf_!\\xrightarrow{\\sim}R(gf)_!$ on $\\mathcal T_X$, compatible with these compactification comparisons and hence independent of the choices. Finally, $Rf_!,Rg_!,R(gf)_!$ map $\\Dbc$ into $\\Dbc$ by step 4, and $\\Dbc(T,\\mathcal O_E)$ is a full subcategory of $\\mathcal T_T$, so the components of this natural isomorphism at objects of $\\Dbc(X,\\mathcal O_E)$ are isomorphisms in $\\Dbc(Z,\\mathcal O_E)$: the composition isomorphism and its compatibility restrict to $\\Dbc$.",
-   "uses": [
-    "lem-sfb-nonrational-localizing-lower-shriek-composition",
-    "det-sf-comp-coherence-cocycle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
-    "place": "Final paragraph: 'The comparison isomorphisms between compactifications, the composition isomorphisms ... are first constructed ... then extended to the localizing categories'; the composition isomorphism on the localizing categories is the existing integral composition theorem (main-20261015 sk-thm-sf-comp-composition, clause (1); proof paragraphs 'The composition isomorphism' and 'Canonicity and associativity')."
-   }
-  },
-  {
-   "text": "For a cartesian square in the statement, $\\Lambda=\\mathcal O_E$ is admissible and $Y'$ is standing, hence qcqs. Apply [det-sf-comp-composition-base-change] to the specified compactification of $f$ and its pullback. Its clauses (1) and (2) supply precisely\n$$v^*Rp_*j_!\\xrightarrow{\\sim}Rp'_*v'^*j_!\\xrightarrow{\\sim}Rp'_*j'_!u^*,$$\nas functors on $\\Loc(\\Dctf)$, which is $\\Loc(\\Dbc)$ by step 1. Clause (3) makes this map compatible with comparisons to the chosen compactification of $f'$, giving the claimed base-change map independently of choices. Finally [sk-lem-int-tensor] asserts that $u^*,v^*$ preserve $\\Dbc$, while step 4 gives the same assertion for the compact-support functors. Thus the very same isomorphism restricts to $\\Dbc$. The base change is for the module-object pulled-back integral coefficient system throughout.",
-   "uses": [
-    "det-sf-comp-composition-base-change",
-    "sk-lem-int-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
-    "place": "Final paragraph: base-change isomorphisms and restriction to bounded constructible complexes; use the existing typed localizing base-change statement."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "det-def-localizing-closure-ctf-equals-bc",
-  "det-cor-int-compactness-ii-extension-zero",
-  "det-proper-image-localizing-proper",
-  "det-sf-comp-coherence-cocycle",
-  "lem-sfb-nonrational-localizing-lower-shriek-composition",
-  "det-sf-comp-composition-base-change",
-  "sk-lem-int-tensor"
+  "lem-sfb-total-derived-preservation",
+  "lem-sfb-total-derived-pullback",
+  "lem-sfb-total-derived-normalized-comparisons",
+  "lem-sfb-total-derived-compatible-composition",
+  "lem-sfb-total-derived-cartesian-compact-support"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
-  "place": "All paragraphs, expanded using the existing integral preservation, compactification-comparison, integral composition and base-change nodes."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Integral specialization and assembly; coherence transports separated into three strict portions."
  },
  "mathlib_searches": [
   {
@@ -350,50 +282,48 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-5835d4272 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's corrected statement and all 13 steps, both new nodes, every cited statement, the main-20261015 sources (sk-prop-int-brown-construction and its proof; sk-thm-sf-comp-composition.proof.md), the unit record and its route, and the duplicate candidates. Steps 1-5 and 13 are correct: ctf-equals-bc(2) for O_E on qcqs schemes; extension-zero (1)-(3); the O_E clause of proper-image-localizing; the cocycle with Y qcqs; base-change beta (1)-(3) plus sk-lem-int-tensor. The coefficients are module objects over pulled-back O_E in the ordinary unbounded D(Mod), and the base-change map is beta. Both helpers are true. Source helper: s^{-1}(aZ)=a_1Z_1, because a_1 into s^{-1}(aZ) is an open immersion that is proper over Z, hence closed and dense; both sides restrict over Y to Rp_*e_h. Target helper: both sides restrict to the identity over Y. Neither restates a clause of the item. Fault (C5): the composition clause, re-proved in old steps 6-12, is the Lambda=O_E case of the existing reviewed node lem-sfb-nonrational-localizing-lower-shriek-composition. That node uses the same coefficient category and the same Rr_*D(j_!) functors, is compatible with the det-sf-comp-coherence-cocycle comparisons, and its own steps 6-8 already contain both refinement arguments. A reachability walk over dependencies shows it does not reach the item, so there is no cycle. FIX: steps 1-5 are kept; old steps 6-12 become one step citing that node, with restriction to Dbc by step 4; old step 13 becomes step 7 unchanged. proof_deps, split_report.summary, split_report.blueprint and split_report.tool_uses are updated; the composition node is added as a tool use. Both helpers are dropped and nothing cites them. The statement is unchanged, and no SGA source or target is involved.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.SixFunctors.IntegralLocalizingCompactSupport",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralLocalizingCompactSupport",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralLocalizingCompactSupport",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Ambient",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.pull",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.push",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.extend",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.image",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.generators",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.localizing",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.openAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.pullSquare",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.pushExchange",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.openExchange",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.pushComp",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.refinementRestriction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.refinementIso",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.baseChange",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Spaces",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Compactifications",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.candidate",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.baseCompactification",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Preservation",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Comparisons",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Compositions",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Coherence"
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralLocalizingCompactSupport"
   ],
   "file": "lean/Sheaf/SixFunctors/IntegralLocalizingCompactSupport.lean",
-  "statement": "theorem integralLocalizingCompactSupport (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] : ∃ (h : Preservation (Profinite.padicIntegersRingObj ℓ E.val) k) (φ : Comparisons (Profinite.padicIntegersRingObj ℓ E.val) k) (μ : Compositions (Profinite.padicIntegersRingObj ℓ E.val) k), Coherence (Profinite.padicIntegersRingObj ℓ E.val) k h φ μ",
+  "statement": "theorem integralLocalizingCompactSupport (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :\n    ∃ (h : Preservation (Profinite.padicIntegersRingObj ℓ E.val) k)\n      (φ : Comparisons (Profinite.padicIntegersRingObj ℓ E.val) k)\n      (μ : Compositions (Profinite.padicIntegersRingObj ℓ E.val) k),\n      Coherence (Profinite.padicIntegersRingObj ℓ E.val) k h φ μ",
   "branch": "newtargets-dag",
-  "by": "NJ",
-  "date": "2026-10-18",
+  "by": "NC",
+  "date": "2026-10-25",
   "existing": false,
-  "note": "The theorem states preservation and a compatible family of natural comparison/composition isomorphisms. Canonical compactification maps are normalized by the actual proper counit and open unit; the base-change map is the actual proper exchange followed by inverse open exchange. Auxiliary declarations only abbreviate the recorded categories/functors or package these maps and the clauses of this same node. Dbc is the recorded finite-constant-model predicate, not the broader upstream predicate."
+  "note": "The construction interface is publicly re-exported from IntegralCompactSupportDefs; its original definitions are preserved verbatim. The theorem assembles preservation, pullback, normalized comparisons, composition and cartesian support."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "NT-stage2-cc-63b0d3828",
-  "group": "NJ",
+  "reviewer": "NT-stage2-cc-1c2a429cf",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the e965 H2 return. The item module is identical to e965 except that the IntegralLocalizingCompactSupport import is now non-public. The item node drops theorem stmt_dep det-prop-int-brown-construction and keeps def-pur-canonical-purity-source-transports; statement, proof and proof_deps are unchanged. Dependency repairs change only the lean records: pull/push are abbrevs of moduleDerivedPullback/Pushforward, checked literally equal to (upperStar Λ f).leftDerivedFunctor and (lowerStar Λ f).rightDerivedFunctor; @[no_expose] finiteProperExchange keeps its body and signature; FiniteProperBaseChange drops one local irreducible entry. Recorded signatures match the source. Independent reading of Result: SourceLocalizationNormalization pins hLocalization (good-line conjunct holds), so eta is the transport of Q(I.gamma); hShift is fixed by its shift compatibility; a = sourceScalar; b = system rationalComparison.b with the counit-transpose clause; scalarLocalization = Q(scalarBridge); the two PuritySquares match the node's displayed equations; unit, associator and shift clauses are present; edge cases E=F, chains, ramified extensions, d=0, empty schemes and integer shifts are covered; no hollow definitions; report sections present. Advisories: no_expose hides the mate body from stage-3 proofs in other modules (needs import all or an _eq lemma); uncited helper owners follow family precedent. No compile was run (no file changed); the worker reports a clean four-module compile and a passed dry run at 4ed7d68b928."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-49558",
+  "group": "D3",
   "result": "fix",
-  "note": "Statement matches node clause by clause: standing finite-type separated k-schemes as a full subcategory of Over Spec k; O_E = padicIntegersRingObj; Dbc = recorded constantModelBoundedConstructible; Loc = recorded generic localizingClosure with ordinary coproducts (index Type (u+2)); image = recorded rightDerivedLowerShriekOfCompactification; Preservation gives Loc, exactness, sums and Dbc; comparisons pinned by the open-unit/proper-counit normalization with identity and cocycle; compositions with compactification compatibility (existential, matching the node's wording); base change is the actual proper-exchange then inverse open-exchange mate (the open exchange iso is clause (1) of det-sf-comp-composition-base-change), compatible with comparisons; no extra hypotheses; edge cases and universes fine; node changed only in lean; statement verbatim; no hollow defs; single sorry; snapshot compiles clean via nt_compile (51.3 s / 42.8 s). Fixed H11: the Second reading section disclaimed any independent reading; replaced by a real clause-by-clause reading in fixes/det-prop-int-brown-construction.report.md (worker report kept verbatim)."
+  "landing": "20261025T163606-L-709450",
+  "kind": "interface",
+  "note": "independent cc review: Defs module vs published item (byte-identical extraction, public re-export); five sorried lemmas vs Coherence/Preservation fields and their nodes (verbatim lean records); 7 direct importers compiled against fixed modules (6 clean, AffinePurityInduction timeout pre-existing vs published control)"
  }
 }

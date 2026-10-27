@@ -1,0 +1,237 @@
+{
+ "id": "lem-sf-integral-sections-perfect-reduction",
+ "kind": "statement",
+ "title": "Integral ordinary and compact sections with perfect finite reductions",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi_E$, and put $A_n=R/\\varpi_E^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], let $a_X:X\\to s=\\operatorname{Spec}k$, and let $d\\geq0$ be an integer with $\\dim X\\leq d$ [def-kun-topological-krull-dimension]. Let $K\\in D^b_c(X,R)$ in the derived-complete integral category [def-weil-derived-complete-integral-detailed]; all integral tensors use its completed coefficient sheaf, rather than the discrete constant $R$. Suppose the derived reductions $K_n=K\\otimes_R^LA_n$ [def-weil-integral-derived-reduction] have one Tor interval $[a,b]$, independent of $n$ [def-weil-finite-tor-amplitude]. Define the ordinary module complexes $C_*=R\\Gamma(X,K)$ and $C_!=R\\Gamma_c(X,K)$ by [def-weil-ordinary-compact-cohomology], using the integral direct images of [def-weil-derived-direct-image, def-weil-integral-rational-qbar-compact-support]. Then $C_*$ and $C_!$ belong to $D^b_{\\mathrm{fg}}(R)$ [def-weil-point-fg-complete-complexes] and are perfect [def-pc-perfect-ring-complex]. For every $n\\geq1$, the canonical coefficient comparisons induce isomorphisms in $D(A_n)$\n$$C_*\\otimes_R^LA_n\\xrightarrow{\\sim}R\\Gamma(X,K_n),\\qquad C_!\\otimes_R^LA_n\\xrightarrow{\\sim}R\\Gamma_c(X,K_n).$$\nEach of these reductions is isomorphic to a complex of finite free $A_n$-modules vanishing outside $[a,b+2d]$, with this single interval independent of $n$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Proof Step 2: integral direct images, point reduction comparisons and perfectness; returned Step 7"
+ },
+ "stmt_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-perfect-ring-complex",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-point-fg-complete-complexes",
+  "def-weil-scheme-morphism-properties",
+  "def-trf-point-reduction-units",
+  "lem-pod-point-sections-derived-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "For every positive exponent n+1, integral constructibility supplies intrinsic bounded constructibility of K_n. Its prescribed Tor interval is [a,b], and the Tor predicate itself implies a <= b, including zero inputs. Apply finiteCoefficientDirectImage_boundedConstructible_torAmplitude to the structure map, bundled over Spec k, to obtain intrinsic constructibility and [a,b+2d] for its ordinary image. Apply finiteCompactSupport_uniformTor_after_denseRefinement to the given compactification: its conclusions for the original compactification give intrinsic constructibility and exactly the same interval for the finite compact image. No nonemptiness or properness of X is required.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "cor-sf-direct-image-ctf-proetale",
+    "lem-coef-finite-compact-support-uniform-tor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply point_tor_amplitude_realization to both finite point images in the interval [a,b+2d], using its finite-free-model clause. Rewrite the elementwise off-interval zero assertion as IsStrictlyGE a and IsStrictlyLE (b+2d). Its models use the small module localization, whereas the specified section comparison maps use the standard localization. Transport each model by Localization.uniq, the exact-section localization comparison sfSectionsCoefficientLiftIso, and Localization.compUniqFunctor. This retains the identical finite free complex and its bounds.",
+   "uses": [
+    "lem-sf-point-tor-amplitude-realization",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a constructible integral point object N and q:N->Res(T), pointReductionUnitNormalization supplies an isomorphism chi from tensor of sections to sections of reduction with the specified scalar-unit equation. Put f=adjoint(q). The sheaf adjunction gives q=eta_N followed by Res(f). Evaluate the unit equation at N and apply naturality of the identity-on-sections restriction comparison to f. Injectivity of the module adjunction identifies the module adjunct of sections(q) with chi_N followed by sections(f). Thus it is invertible whenever f is, and composing with the localization isomorphism gives the very sfSectionsReductionFromProjection. For ordinary sections, unfold the actual chosen SfIntegralDirectImage: sfIntegralDirectImage_constructible proves its projection adjunct invertible. For compact sections, recover p and delta from the same derived-limit existence proof used by sfIntegralCompactSupportValue and sfSectionsCompactProjection; integralCompactSupport_prescribedReductions proves that projection adjunct invertible. This proves isomorphy of the specified maps. Compose their asIso isomorphisms with the finite models of the previous step, and handle either choice of C by substitution.",
+   "uses": [
+    "lem-trf-point-reduction-unit-normalization",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-coef-integral-compact-support",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each recorded integral section value already lies in pointFgComplete, so its cohomology has finite support and is finitely generated. The coefficient DVR theorem makes O_E a PID; transport the PID structure across ULift.ringEquiv. For each cohomology module choose a finite free surjection, using finite generation; Noetherianity gives finite presentation. Apply the PID-model clause of scalar_perfect_cohomology_and_pid_models to obtain perfectness of that module in degree zero. Convert the finite support to lower and upper integer bounds and apply isPerfectRingComplex_of_perfect_cohomology. This works directly in the recorded small localization and proves perfectness of both integral section values. It replaces the longer pseudo-coherence and maximal-fibre detour without changing the unit route.",
+   "uses": [
+    "def-weil-point-fg-complete-complexes",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-scalar-perfect-cohomology-and-pid-models",
+    "lem-sf-perfect-cohomology-assembly"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-sf-direct-image-ctf-proetale",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-point-fg-complete-complexes",
+  "lem-coef-finite-compact-support-uniform-tor",
+  "lem-coef-integral-compact-support",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-perfect-cohomology-assembly",
+  "lem-sf-point-tor-amplitude-realization",
+  "lem-trf-point-reduction-unit-normalization",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-scalar-perfect-cohomology-and-pid-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Steps 1 and 2, using the existing normalized point-reduction unit theorem for the specified maps and the PID/perfect-cohomology assembly for integral perfectness; implemented by A5, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(adic|integral).*(cohomology|[Pp]erfect)|([Pp]erfect|cohomology).*(adic|integral)",
+   "results": "24 hits: Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/FieldTheory/Perfect.lean, Mathlib/FieldTheory/Perfect.lean.  No hit states this integral etale-cohomology assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral constructible finite Tor cohomology and compactly supported cohomology are perfect over a complete discrete valuation ring and commute with derived reduction",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, Algebra.tensorH1CotangentOfIsLocalization, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, IsDiscreteValuationRing.TFAE, IsLocalRing.finrank_CotangentSpace_eq_one_iff, Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField.  No hit states this integral etale-cohomology assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"reduction\"",
+   "results": "0 hits: .  No hit states this integral etale-cohomology assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral constructible finite Tor cohomology and compactly supported cohomology are perfect over a complete discrete valuation ring and commute with derived reduction",
+   "results": "8 hits: BDeRhamPlus, LightCondensed.instIsGrothendieckAbelianLightCondMod, Rep.isZero_Tor_succ_of_projective, localCohomology.isoSelfLERadical, Rep.Tor, Rep.torIso, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Rep.standardResolution.extIso.  No hit states this integral etale-cohomology assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic cohomology of a finite type scheme over an algebraically closed field has bounded finitely generated cohomology and canonical finite coefficient reduction",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit.  No hit states this integral etale-cohomology assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pod-point-perfectness",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-point-perfectness",
+   "place": "Proof Step 2: integral direct images, point reduction comparisons and perfectness; returned Step 7",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-integral-sections-perfect-reduction",
+  "worker": "stage1",
+  "summary": "Four-step assembly using existing ordinary/compact integral constructibility and reduction theorems, quantitative finite point realization, point sections, and the pseudo-coherent residue-field criterion. No new nodes or statement changes.",
+  "blueprint": "thm-pod-point-perfectness.proof.md Step 2: integral direct images, finite reductions, and integral perfectness; finite point models as in Step 1.",
+  "tool_uses": [
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Generic existing tool used for finite ordinary pushforward constructibility and quantitative Tor bound; no node of this unit provides that generic assertion, and it supports the prescribed integral point route."
+   },
+   {
+    "node": "lem-coef-integral-compact-support",
+    "why": "Generic existing tool used for integral compact pushforward and its uniform finite-reduction Tor bound; no node of this unit provides that generic assertion, and it supports the prescribed integral point route."
+   },
+   {
+    "node": "lem-pod-point-sections-derived-reduction",
+    "why": "Generic existing tool used for the ordinary-module scalar comparison for point sections; no node of this unit provides that generic assertion, and it supports the prescribed integral point route."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic existing tool used for integral ordinary pushforward and its canonical finite reductions; no node of this unit provides that generic assertion, and it supports the prescribed integral point route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic existing tool used for the local principal ideal domain structure of the coefficient ring; no node of this unit provides that generic assertion, and it supports the prescribed integral point route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic existing tool used for Noetherian pseudo-coherence from bounded finite cohomology; no node of this unit provides that generic assertion, and it supports the prescribed integral point route."
+   },
+   {
+    "node": "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+    "why": "Generic existing tool used for perfectness from pseudo-coherence and the single residue-field bound; no node of this unit provides that generic assertion, and it supports the prescribed integral point route."
+   },
+   {
+    "node": "lem-weil-point-sections-finiteness",
+    "why": "Generic existing tool used for bounded finitely generated derived-complete ordinary module sections at the point; no node of this unit provides that generic assertion, and it supports the prescribed integral point route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-coef-integral-compact-support",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NS-2c46fdd5d",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-2c46fdd5d (reviewer sub-agent of L); spot-checked: I read all four steps against the full statements of the cited nodes, blueprint thm-pod-point-perfectness Steps 1-2, and Stacks 066E/068V. The delivery creates 0 new nodes, keeps the statement and stmt_deps, and replaces an empty base proof (no re-split note applies). S1: lem-sf-integral-direct-image-constructible (field k, a_X:X->s, completed coefficients) and lem-coef-integral-compact-support (separated, dim<=d, uniform [a,b] -> [a,b+2d]) apply exactly. S2: K_n is in D^b_ctf by definition plus the hypothesis. cor-sf-direct-image-ctf-proetale gives the bound [a,b+2d], and lem-sf-point-tor-amplitude-realization gives the finite free model of Fib_s = Gamma(s,-), which equals RGamma by def-weil-ordinary-compact-cohomology and def-weil-finite-coefficient-point(2). S3: point-sections-finiteness (2) gives D^b_fg. The lem-pod natural iso composed with the canonical direct-image comparisons gives the D(A_n) isos. Minor C3 remark, no change: the sentence identifying the point comparison quotes lem-pod's proof, and the statement's 'natural in N' iso is enough for the item. S4: O_E is a PID with maximal ideal (varpi), hence Noetherian (elementary). 066E gives pseudo-coherent and 068V(3)=>(1) with the A_1 bound gives perfect. Edge cases checked: X empty, d=0, n=1, torsion R/varpi input, nonproper X. No cycle: no cited node's closure reaches the item or its parent. Route: cited units are in the sk-thm-sf-package uses list, except lem-pod (sk-thm-sf-compatibility), a generic point-reduction tool use that I accept. The route departs from blueprint Step 2: Nakayama is replaced by existing D^b_fg finiteness plus the Stacks criteria, and the DVR tower by the existing reduction-isomorphism node; both are valid. Batch 5: lem-pod-point-sections-derived-reduction is a generic computation (made for prop-cohomological-finiteness, Milne 19.2), not a step of Poincare duality or the trace formula. Its closure holds only pod point-reduction helpers, and it is already in the closure of the base stmt_dep def-weil-ordinary-compact-cohomology. Accepted. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralSectionsPerfectReduction",
+  "declaration": "WeilConjectures.integralSections_perfect_reduction",
+  "declarations": [
+   "WeilConjectures.sfSectionsCoefficientLift",
+   "WeilConjectures.sfSectionsCoefficientLiftIso",
+   "WeilConjectures.sfSectionsPointOver",
+   "WeilConjectures.sfSectionsFiniteCoefficient",
+   "WeilConjectures.sfSectionsOrdinaryHasProduct",
+   "WeilConjectures.sfSectionsOrdinaryProjection",
+   "WeilConjectures.sfSectionsCompactProjection",
+   "WeilConjectures.sfSectionsReductionFromProjection",
+   "WeilConjectures.sfOrdinarySectionsReductionComparison",
+   "WeilConjectures.sfCompactSectionsReductionComparison",
+   "WeilConjectures.integralSections_perfect_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralSectionsPerfectReduction.lean",
+  "statement": "theorem integralSections_perfect_reduction (c : Compactification (X ↘ Spec (.of D.k))) (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (K : sfIntegralConstructibleCategory l E X) (a b : ℤ) (_hTor : ∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E X n).obj K.obj) a b) : @DerivedCategory.IsPerfectRingComplex _ _ (HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _) (integralOrdinarySections D l hl E X K).obj ∧ @DerivedCategory.IsPerfectRingComplex _ _ (HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _) (integralCompactSections D l hl E X c K).obj ∧ ∀ n : ℕ, IsIso (sfOrdinarySectionsReductionComparison D l hl E X K n) ∧ IsIso (sfCompactSectionsReductionComparison D l hl E X c K n) ∧ ∀ C : (DerivedCategory.pointFgComplete (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)) (Ideal.span {ULift.up (Padic.coefficientExtensionUniformizer l E)})).FullSubcategory, (C = integralOrdinarySections D l hl E X K ∨ C = integralCompactSections D l hl E X c K) → ∃ P : CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) ℤ, P.IsStrictlyGE a ∧ P.IsStrictlyLE (b + 2 * (d : ℤ)) ∧ (∀ i : ℤ, Module.Free (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (P.X i) ∧ Module.Finite (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (P.X i)) ∧ Nonempty ((pointReductionModuleTensor l E n).obj ((sfSectionsCoefficientLift (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))).obj C.obj) ≅ DerivedCategory.Q.obj P)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the exact recorded ordinary and compact section values, whose return types carry bounded finite generation and derived completeness. Perfectness is stated in their small module localization. The coefficient arrows retain their defining Roos projections and use the normalized tensor/restriction adjunct. A canonical localization equivalence transports integral sections to the standard localization of the existing quotient-tensor API; finite sections already use that standard localization. Index n is exponent n+1, covering every positive quotient. Finite free representatives use one common interval [a,b+2d]."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cfb18a0c7",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery of 66fff895 (H2 RETURN). Diff vs that head: only stmt_dep lem-pod-point-sections-derived-reduction -> lem-pod-point-sections-derived-reduction-data, public import -> Sheaf.Paper.PointSectionsDerivedReductionData (theorem module now plain import), report. Mechanical theorem-stmt_dep finding is a false positive: that node is kind definition and owns pointReductionModuleTensor, the only declaration of its family used; all 14 stmt_deps are definition nodes. Clause check unchanged and correct: field/prime/E, A_{n+1} covers n>=1, separated finite type, dim<=d, derived-complete K, uniform Tor [a,b], perfectness, IsIso of actual adjunct arrows (projections reproduce integralImage/sfIntegralCompactSupportValue choices, unit-pinned adjunction), finite free models in a single [a,b+2d] uniform in n. Edge cases covered; statement verbatim; one sorry; docstrings OK; live item still open. Advisory: public import of IntegralCompactSupportPrescribedReductions could be plain. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T180410-L-3987450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

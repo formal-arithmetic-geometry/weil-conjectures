@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-groupoid-restriction",
+ "kind": "definition",
+ "title": "Canonical source and target of scheme-groupoid restriction",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $U,R,B$ be schemes [def-pc-scheme], and let $s,t:R\\to U$ and $g:B\\to U$ be morphisms. Using fibre products [def-pc-fibre-product], put $W=B\\times_{g,U,t}R$ with projections $p_B:W\\to B$ and $p_R:W\\to R$. Define the saturation morphism $h=p_R\\mathbin{;}s:W\\to U$. The restricted arrow scheme is $R_B=W\\times_{h,U,g}B$, with projections $\\pi_W:R_B\\to W$ and $\\pi_B:R_B\\to B$. Its canonical source is $s_B=\\pi_B$ and its canonical target is $t_B=\\pi_W\\mathbin{;}p_B$. Thus on test-scheme triples $(b,r,b^{\\prime})$ with $g(b)=t(r)$ and $s(r)=g(b^{\\prime})$, they send the triple to $b^{\\prime}$ and $b$, respectively. These constructions use only $s,t,g$; no groupoid laws or finiteness assumptions are required to define them.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VB (lemma-restrict-groupoid), restriction diagram, intermediate source morphism and two outer endpoint projections."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The source and target projections of a restricted scheme groupoid are projections from the iterated fiber product",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberι\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : f.fiber y ⟶ X\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme defined by the pullback $X_y := X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is\"}\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : (pullbackRestrictIsoRestrict f U).hom ≫ (f ⁻¹ᵁ U).ι = pullback.fst f _\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and $U$ be an open subset of $Y$. Let $\\\\phi$ be the canonical isomorphism `pullbackRestrictIsoRestrict f U` which identifies the pullback $X \\\\times_Y Y|_U$ w\"}\n  {\"name\": \"Pretrivialization.restrictPreimage'_target\", \"module\": \"Mathlib.Topology.FiberBundle.Trivialization\", \"type\": \"∀ {B : Type u_1} {F : Type u_2} {Z : Type u_4} [inst : TopologicalSpace B] [inst_1 : TopologicalSpace F] {proj : Z → B}\\n  (e : Pretrivialization F proj) (s : Set B) [inst_2 : Nonempty (↑s → F → ↑(proj ⁻¹' s))],\\n  (e.restrictPreimage' s).target = Prod.map Subtype.val id ⁻¹' e.target\", \"doc\": \"Given a pretrivialization $ e $ of a fiber bundle with base space $ B $, fiber $ F $, and projection map $ \\\\mathrm{proj}: Z \\\\to B $, and a subset $ s \\\\subseteq B $, the target of the restricted pretri\"}\n  {\"name\": \"idRestrGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \": StructureGroupoid H\", \"doc\": \"The structure groupoid on a topological space $ H $ consisting of open partial homeomorphisms that are equivalent to identity maps on open subsets of $ H $. It is closed under composition, inverses, c\"}\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : (pullbackRestrictIsoRestrict f U).hom ≫ f ∣_ U = pullback.snd _ _\", \"doc\": \"For any schemes $X$ and $Y$, a morphism $f: X \\to Y$, and an open subset $U$ of $Y$, the composition of the homomorphism from the pullback isomorphism with the restriction of $f$ to $U$ equals the seco\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"[IsOpenImmersion g] : IsOpenImmersion (limit.π (cospan f g) WalkingCospan.one)\", \"doc\": \"The projection from the fiber product of a morphism $ f $ and an open immersion $ g $ to the target scheme $ Y $ is an open immersion. Specifically, given an open immersion $ g: Z \\to Y $ and any morph\"}\n  {\"name\": \"FundamentalGroupoidFunctor.projLeft\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.Product\", \"type\": \": πₓ (TopCat.of (A × B)) ⥤ πₓ A\", \"doc\": \"The functor induced by the first projection map $\\\\pi_1 : A \\\\times B \\\\to A$ between fundamental groupoids, which sends each point $(a,b) \\\\in A \\\\times B$ to $a \\\\in A$ and each homotopy class of paths in\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.instFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenImmersion (pullback.fst g f)\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes and a morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes. This instance defines the first projec\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the three existing project definitions located by source grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a scheme groupoid along a morphism using two endpoint pullbacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{M S T : AlgebraicGeometry.Scheme} →\\n  [inst : M.Over S] →\\n    {f : T ⟶ S} →\\n      [CategoryTheory.GrpObj (M.asOver S)] → CategoryTheory.GrpObj ((CategoryTheory.Limits.pullback (M ↘ S) f).asOver T)\", \"doc\": \"Given a group object in the over category of schemes over a base scheme $ S $ and a morphism $ f : T \\to S $, the pullback of this group object along $ f $ forms a group object in the over category of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j k : 𝒰.I₀) →\\n            CategoryTheory.Limits.pullback (AlgebraicGeometr\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, this constructs a morphism from the pullback of $\\\\text{fV}(\\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.opensDiagram_map\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (i : I)\\n  (U : (D.obj i).Opens) {j k : CategoryTheory.Over i} (f : j ⟶ k),\\n  (AlgebraicGeometry.opensDiagram D i U).map f =\\n    AlgebraicGeometry.Scheme.Hom.resLE (D.map f.left) ((Topolog\", \"doc\": \"For a diagram $D : I \\to \\text{Sch}$ of schemes indexed by a category $I$, an open subset $U$ of $D(i)$, and a morphism $f : j \\to k$ in the over category $I/i$, the opensDiagram functor maps $f$ to the \"}\n  {\"name\": \"AlgebraicGeometry.isPullback_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  CategoryTheory.IsPullback (f ∣_ U) ((TopologicalSpace.Opens.map f.base).obj U).ι U.ι f\", \"doc\": \"Given a morphism $f: X \\\\to Y$ of schemes and an open subset $U \\\\subseteq Y$, the square formed by the restricted morphism $f|_U: f^{-1}(U) \\\\to U$, the inclusion morphism $f^{-1}(U) \\\\hookrightarrow X$,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.v\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          𝒰.I₀ → 𝒰.I₀ → AlgebraicGeometry.Scheme\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this constructs the pullback scheme of the composition $\\\\mathcal{U}.f(\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrictOpensRange\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X Y U : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : U ⟶ Y) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion g] →\\n        CategoryTheory.Arrow.mk (f ∣_ AlgebraicGeometry.Scheme.Hom.opensRange g) ≅\\n          CategoryTheory.Arrow.mk (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"Given schemes $X, Y, U$ with morphisms $f : X \\to Y$ and an open immersion $g : U \\to Y$, there is an isomorphism in the arrow category of schemes between the restriction of $f$ to the image of $g$ and \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.fV\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j : 𝒰.I₀) →\\n            AlgebraicGeometry.Scheme.Pullback.v 𝒰 f g i j ⟶\\n  \", \"doc\": \"For indices $i, j$ in the zeroth component of an open cover $\\\\mathcal{U}$ of a scheme $X$, this morphism maps the pullback scheme $v(\\\\mathcal{U}, f, g, i, j)$ to the pullback of the composed morphism \"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → (U : Y.Opens) → ↑((TopologicalSpace.Opens.map f.base).obj U) ⟶ ↑U\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and an open subset $U$ of $Y$, this defines the restriction of $f$ as a morphism from the open subscheme $X|_{f^{-1}(U)}$ to the open subscheme $Y|_U$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the three existing project definitions located by source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoidSaturationMap|groupoidRestrictionSource|groupoidRestrictionTarget",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the three existing project definitions located by source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"groupoidSaturationMap|groupoidRestrictionSource|groupoidRestrictionTarget\" lean/WeilConjectures",
+   "results": "No matches.",
+   "date": "2026-10-24",
+   "verdict": "Existing definitions are in Sheaf.AlgebraicGeometry.CohenMacaulayGroupoidDoubleRestriction; no duplicate construction is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"groupoidSaturationMap|groupoidRestrictionSource|groupoidRestrictionTarget\" lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:51:noncomputable def groupoidSaturationMap {U R B : Scheme.{u}}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:58:noncomputable def groupoidRestrictionSource {U R B : Scheme.{u}}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:59:    (s t : R ⟶ U) (g : B ⟶ U) : pullback (groupoidSaturationMap s t g) g ⟶ B :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:60:  pullback.snd (groupoidSaturationMap s t g) g\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:65:noncomputable def groupoidRestrictionTarget {U R B : Scheme.{u}}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:66:    (s t : R ⟶ U) (g : B ⟶ U) : pullback (groupoidSaturationMap s t g) g ⟶ B :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:67:  pullback.fst (groupoidSaturationMap s t g) g ≫ pullback.fst g t\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:74:    pullback j (groupoidRestrictionTarget s t g) ⟶ B :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:75:  pullback.snd j (groupoidRestrictionTarget s t g) ≫ groupoidRestrictionSource s t g\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:126:    [Flat (groupoidSaturationMap s t g)]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:127:    [LocallyOfFinitePresentation (groupoidSaturationMap s t g)]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:128:    (hcmB : ∀ (y : U) (x : (groupoidSaturationMap s t g).fiber y),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:129:      IsNoetherianRing (((groupoidSaturationMap s t g).fiber y).presheaf.stalk x) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:131:        (R := ((groupoidSaturationMap s t g).fiber y).presheaf.stalk x)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:132:        (((groupoidSaturationMap s t g).fiber y).presheaf.stalk x) : WithBot ℕ∞) =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:133:          ringKrullDim (((groupoidSaturationMap s t g).fiber y).presheaf.stalk x))\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:142:    Flat (groupoidSaturationMap s t (j ≫ g)) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:143:    LocallyOfFinitePresentation (groupoidSaturationMap s t (j ≫ g)) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:144:    ∀ (y : U) (x : (groupoidSaturationMap s t (j ≫ g)).fiber y),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:145:      IsNoetherianRing (((groupoidSaturationMap s t (j ≫ g)).fiber y).presheaf.stalk x) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:147:        (R := ((groupoidSaturationMap s t (j ≫ g)).fiber y).presheaf.stalk x)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:148:        (((groupoidSaturationMap s t (j ≫ g)).fiber y).presheaf.stalk x) : WithBot ℕ∞) =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean:149:          ringKrullDim (((groupoidSaturationMap s t (j ≫ g)).fiber y).presheaf.stalk x) := by\n",
+   "date": "2026-10-24",
+   "verdict": "Existing definitions are in Sheaf.AlgebraicGeometry.CohenMacaulayGroupoidDoubleRestriction; no duplicate construction is introduced."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-perfect-restriction",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting First proof paragraph of 04Q9: choose a perfect closure and restrict both groupoids; the two arrow projections are homeomorphisms. Definition of the two endpoint projections and intermediate saturation map in the restriction diagram.",
+   "via": [
+    "lem-sfb-field-groupoid-perfect-restriction",
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohenMacaulayGroupoidDoubleRestriction",
+  "declaration": "AlgebraicGeometry.groupoidSaturationMap",
+  "declarations": [
+   "AlgebraicGeometry.groupoidSaturationMap",
+   "AlgebraicGeometry.groupoidRestrictionSource",
+   "AlgebraicGeometry.groupoidRestrictionTarget"
+  ],
+  "statement": "noncomputable def groupoidSaturationMap {U R B : Scheme.{u}}\n    (s t : R ⟶ U) (g : B ⟶ U) : pullback g t ⟶ U",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Ownership of the three already landed plain definitions; no theorem or choice from the Cohen-Macaulay statement is used. groupoidSaturationMap is the intermediate outgoing source map, groupoidRestrictionSource is the last endpoint projection, and groupoidRestrictionTarget is the composite first endpoint projection. All three definitions have explicit pullback data."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15afdccfd",
+  "group": "Q19",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15afdccfd",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery of 4d98 (returned for H2 only). The theorem stmt_dep is replaced by a new existing:true node def-sfb-groupoid-restriction owning groupoidSaturationMap and groupoidRestrictionSource/Target (real pullback projections; its formulas match the Lean and Stacks 02VB; deps def-pc-scheme and def-pc-fibre-product exist; no clash in live dag). Item node vs live differs only in lean and the added stmt_dep. The Lean is unchanged and the lean.statement is verbatim. Statement re-checked: hypotheses (IsGroupoidScheme ×2, five compatibilities of a), PerfectField K with g pinned to Spec.map algebraMap, restricted e'/i'/c' pinned on all coordinates (the composition clause is not vacuous), a' pinned by hs'/ht' and the final square, IsHomeomorph of both projections. No finiteness assumption, single universe u. Edge cases covered: char 0 or perfect k, empty test scheme, s≠t. Helper groupoidRestrictionProjection is real data; proof is sorry only; the docstring carries the proof steps. No compile run (not required, no file changed)."
+ }
+}

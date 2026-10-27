@@ -1,0 +1,245 @@
+{
+ "id": "lem-per-completed-monomial-transverse-parameter",
+ "kind": "statement",
+ "title": "Transverse variables in completed monoid-ideal quotients",
+ "statement": "Let $Q$ be a fine saturated monoid, written additively [def-trf-fs-log-blowup], which is sharp: $0$ is its only invertible element; and let $H\\subset Q$ be an ideal ($H+Q\\subset H$), including $H=\\varnothing$ and $H=Q$. Let $n\\geq0$. Let $L$ be either a field $k$ or a Cohen ring $C$ with residue characteristic $p$ [def-weil-pbc-cohen-ring]. Write $L[Q][t_1,\\ldots,t_n]$ for the ring with basis monomials $z^qt^a$ and product $z^qz^{q'}=z^{q+q'}$. Let $B$ be its completion [def-weil-pbc-adic-completion] at $(\\mathfrak m_L,z^q\\ (q\\ne0),t_1,\\ldots,t_n)$, where $\\mathfrak m_k=0$ and $\\mathfrak m_C=pC$, and put $K=(z^h:h\\in H)B$.\n\nEvery class in $B/K$ has a unique expansion $\\sum_{q\\in Q\\setminus H}a_q(t)z^q$ with $a_q(t)\\in L[[t_1,\\ldots,t_n]]$ [def-weil-pbc-multivariate-power-series]; the displayed power series are formal sums with the usual coefficientwise addition and convolution multiplication. Equivalently, a formal monoid series belongs to $K$ exactly when all its coefficients indexed by $Q\\setminus H$ vanish. If $f\\in B$ has nonzero coefficient at $z^0$ as an element of the domain $L[[t_1,\\ldots,t_n]]$, multiplication by $f$ on $B/K$ is injective.\n\nIf $n\\geq1$, multiplication by $t_1$ on $B/K$ is injective. In the Cohen-ring case, for every $\\theta\\in B$ satisfying $\\theta-p\\in(z^q\\ (q\\ne0),t_1,\\ldots,t_n)B$, multiplication by $t_1$ on $B/(K+\\theta B)$ is also injective.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII proof of Lemma 3.4.13(i), printed p.113: monoid-series regular-element claim and transverse-parameter calculation in the mixed-characteristic completed chart; coefficient and parameter formulation of that local algebra input. Supports ancestor lem-per-artin-gabber-affine-curve proof Step 3 through the monoidal-center association argument."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-complete-toric-model"
+ ],
+ "proof": [
+  {
+   "text": "Sharpness makes $F=\\{0\\}$ a face of $Q$. Apply the face-sharpening theorem with this face: its sharpened monoid is $Q$ itself, so $Q^{\\rm gp}$ is free abelian of finite rank. Integrality embeds $Q$ in it, and $Q\\cap(-Q)=\\{0\\}$. The positive-grading lemma therefore gives a homomorphism $w:Q^{\\rm gp}\\to\\mathbf Z$ with $w(q)>0$ for $q\\ne0$. Give $P=Q\\oplus\\mathbf N^n$ the grading $W(q,e)=w(q)+\\sum_i e_i$; it is strictly positive off $(0,0)$. The coefficient ring $L$ is a complete Noetherian local domain: this is immediate for a field, and for a Cohen ring it follows from its definition and the PID-Noetherian lemma. Applying the completion-coefficient theorem to $P$ and $L$ identifies the displayed completion $B$ with coefficient families $(c_{q,e})_{(q,e)\\in P}$, with finite convolution product.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-weil-pbc-cohen-ring",
+    "lem-trf-fs-face-sharpening",
+    "lem-trf-sharp-monoid-positive-grading",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p.70, with the coefficient-family completion calculation; the positive grading is the explicit sharp-monoid separation used in that calculation."
+   }
+  },
+  {
+   "text": "Regroup the coefficients as $a_q(t)=\\sum_{e\\in\\mathbf N^n}c_{q,e}t^e\\in L[[t_1,\\ldots,t_n]]$. The power-series definition makes this regrouping bijective, and its convolution is exactly the product in the statement. Since $H+Q\\subseteq H$, multiplication by every monomial in $H$ has support in $H$. Conversely, the finite-generation theorem for sharp monoid ideals gives generators $s_1,\\ldots,s_r$ with $H=\\bigcup_i(s_i+Q)$; assign each coefficient indexed by $q\\in H$ to one such $s_i$ and divide the exponent by $s_i$. The resulting finite tuple of coefficient families shows that every family supported on $H$ lies in $(z^h:h\\in H)B$. Hence the quotient has, uniquely, precisely the coefficients indexed by $Q\\setminus H$, proving the expansion and the equivalent membership criterion (including $H=\\varnothing$ and $H=Q$).",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-trf-sharp-monoid-ideal-minimal-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII proof of Lemma 3.4.13(i), printed p.113, and the monomial-support calculation underlying VI 1.6."
+   }
+  },
+  {
+   "text": "Let $f$ have nonzero $z^0$ coefficient $g(t)\\in L[[t]]$, and suppose $fx=0$ in $B/K$. Represent $x$ by its unique family supported on $Q\\setminus H$. If $x\\ne0$, choose $q\\notin H$ of minimal $w(q)$ with coefficient $a_q(t)\\ne0$; such a minimum exists because the sets of bounded $w$-degree are finite. In the coefficient of $z^q$ in $fx$, a term with a positive $Q$-exponent from $f$ would require an $x$-coefficient of strictly smaller degree. It is either zero because its exponent lies in $H$, or zero by minimality. Thus that coefficient is $g(t)a_q(t)$. It must vanish because $q\\notin H$. The ring $L[[t_1,\\ldots,t_n]]$ is a domain when $L$ is a field or a Cohen ring: order exponent tuples by total degree and then lexicographically. This is a well-order preserved by addition. In a product of two nonzero series, the coefficient at the sum of their least exponents is the product of their two least nonzero coefficients: every other candidate pair has larger sum. That coefficient is nonzero because $L$ is a domain. Therefore $g(t)a_q(t)\\ne0$, a contradiction. Hence multiplication by $f$ is injective on $B/K$.",
+   "uses": [
+    "lem-trf-positive-monoid-adic-filtration",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, proof of Lemma 3.4.13(i), printed p.113: the regular-element claim for a series with nonzero free term."
+   }
+  },
+  {
+   "text": "If $n\\ge1$, take $f=t_1$. Its $z^0$ coefficient is the nonzero power series $t_1$, so Step 3 gives injectivity of multiplication by $t_1$ on $B/K$. This also covers the trivial monoid $Q=\\{0\\}$, where the same least-degree argument is just the usual power-series argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, proof of Lemma 3.4.13(i), printed p.113."
+   }
+  },
+  {
+   "text": "Assume now that $L=C$ and $\\theta-p\\in J=(z^q\\ (q\\ne0),t_1,\\ldots,t_n)B$, and write $N=B/K$. The coefficient description gives an evaluation map $N\\to N_0$ at $t_1=0$, whose kernel is $t_1N$; $N_0$ is the same coefficient quotient with variables $t_2,\\ldots,t_n$. The $z^0$ coefficient of the image $\\bar\\theta$ is $p+h(t_2,\\ldots,t_n)$ with $h$ in the ideal generated by those variables, so it is nonzero in the domain $C[[t_2,\\ldots,t_n]]$. The argument of Step 3, with $n-1$ variables, shows that multiplication by $\\bar\\theta$ on $N_0$ is injective. If $t_1x=\\theta y$ in $N$, reduction gives $\\bar\\theta\\bar y=0$, hence $y=t_1y_1$. Then $t_1(x-\\theta y_1)=0$; Step 4 gives $x=\\theta y_1$. Thus $t_1$ is injective on $N/\\theta N$. For $n=0$ the assertion is vacuous, and the cases $H=Q$ and $H=\\varnothing$ are already covered by the same coefficient argument.",
+   "uses": [
+    "def-weil-pbc-cohen-ring",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(ii), printed p.70, and Expose VIII, proof of Lemma 3.4.13(i), printed p.113."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-monoid-completion-coefficients",
+  "lem-trf-positive-monoid-adic-filtration",
+  "lem-trf-sharp-monoid-ideal-minimal-generators",
+  "lem-trf-sharp-monoid-positive-grading",
+  "lem-weil-pbc-pid-noetherian-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p.70, and Expose VIII proof of Lemma 3.4.13(i), printed pp.112--113; coefficient-family and mixed-characteristic parameter details are written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "formal monoid series quotient by monomial ideal multiplication by series with nonzero constant coefficient injective",
+   "results": "PowerSeries.X_mul_injective; PowerSeries.mul_X_injective; PowerSeries.X_pow_mul_injective; PowerSeries.mul_X_pow_injective; PowerSeries.rescale_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate power-series injectivity does not state completed fs monoid-ideal quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.mul_X_injective, MvPowerSeries.mem_nonZeroDivisorsLeft_of_constantCoeff",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.*nonZeroDivisor|nonZeroDivisor.*monomial|MvPowerSeries.*constantCoeff Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "multiplication by a formal monoid power series with nonzero constant coefficient is injective modulo a monomial ideal",
+   "results": "PowerSeries.X_pow_mul_cancel; PowerSeries.mul_X_pow_injective; PowerSeries.X_pow_mul_inj; PowerSeries.rescale_injective; PowerSeries.mul_X_pow_inj; PowerSeries.mul_X_inj; PowerSeries.X_pow_mul_injective; PowerSeries.mul_X_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: returned univariate power-series lemmas are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completion of a finitely generated sharp monoid algebra over a field or complete discrete valuation ring consists of all coefficient families with finite convolution",
+   "results": "LaurentSeries completion and MonoidAlgebra.finiteType_of_fg hits; no completed monoid coefficient-family theorem",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mem_nonZeroDivisorsLeft_of_constantCoeff|X_mem_nonzeroDivisors|X_mul_injective RingTheory",
+   "results": "MvPowerSeries.NoZeroDivisors.lean:75,132; PowerSeries.Basic.lean:306,310",
+   "date": "2026-10-24",
+   "verdict": "no match: these are ordinary power-series declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-log-monoidal-associated-points",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "VIII proof of Lemma 3.4.13(i), printed p.113: monoid-series regular-element claim and transverse-parameter calculation in the mixed-characteristic completed chart; coefficient and parameter formulation of that local algebra input. Supports ancestor lem-per-artin-gabber-affine-curve proof Step 3 through the monoidal-center association argument.",
+   "via": [
+    "lem-per-log-monoidal-associated-points",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-completed-monomial-transverse-parameter",
+  "worker": "stage1",
+  "summary": "No new nodes. Read ILO VI 1.6 and VIII 3.4.13, checked the exact hypotheses, and expanded the coefficient-family completion model into a five-step proof. The first three steps establish the quotient expansion and regularity by a positive monoid grading; the fourth specializes to t_1; the fifth proves the Cohen equation quotient by reducing modulo t_1 and applying the same regularity argument to the reduced equation. Edge cases n=0, H=empty, H=Q, and Q={0} were checked.",
+  "blueprint": "Supports the ancestor lem-per-artin-gabber-affine-curve proof Step 3, specifically the VIII 3.4.13(i) completed-chart monoid-series regular-element and transverse-parameter calculation (printed p.113), with the VI 1.6 mixed-characteristic model (printed p.70).",
+  "tool_uses": [
+   {
+    "node": "lem-trf-sharp-monoid-positive-grading",
+    "why": "Generic monoid-algebra tool: supplies a positive grading for the coefficient induction; the perverse unit has no replacement statement."
+   },
+   {
+    "node": "lem-trf-positive-monoid-adic-filtration",
+    "why": "Generic monoid-algebra tool: supplies finiteness of bounded-degree exponents and finite convolution decompositions."
+   },
+   {
+    "node": "lem-trf-monoid-completion-coefficients",
+    "why": "Generic completion tool: identifies the completed monoid algebra with coefficient families and finite convolution."
+   },
+   {
+    "node": "lem-trf-sharp-monoid-ideal-minimal-generators",
+    "why": "Generic monoid-ideal tool: supplies finite generators for H, needed to identify K with the supported coefficient families."
+   },
+   {
+    "node": "lem-weil-pbc-pid-noetherian-normal",
+    "why": "Generic coefficient-ring tool: a Cohen ring is a PID, hence Noetherian, as required by the completion-coefficient lemma."
+   },
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic monoid tool with F={0}: identifies the sharp fs monoid group completion as a finite free abelian group, needed for the positive grading."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-sharp-monoid-positive-grading",
+  "lem-trf-positive-monoid-adic-filtration",
+  "lem-trf-monoid-completion-coefficients",
+  "lem-trf-sharp-monoid-ideal-minimal-generators",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-trf-fs-face-sharpening"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-932cb0eed",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-932cb0eed (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes. The statement and stmt_deps equal live, where the item is still unsplit, and there is no re-split note. Source checks: ILO VI 1.6 (p.70) gives the model C(k)[[P]][[t]]/(f) with f≡p mod (P−0,t), matching B, K and θ. ILO VIII 3.4.13(i) (pp.112-113) contains the easy claim, which is Step 3. The source's depth bound is replaced by an agent-written check that t_1 is regular on B/(K+θB), which is exactly what the parent lem-per-log-monoidal-associated-points uses. Steps checked: Step 1 applies face-sharpening with F={0} to get Q^gp free, then the positive grading; L is complete Noetherian local (Cohen ring = DVR, a PID, so Noetherian), so the completion-coefficient lemma applies to Q⊕N^n with ideal (m,z^q,t). Step 2 identifies K with the families supported on H, using the finite generators and cancellativity. Step 3 takes the minimal w-degree coefficient off H and uses that L[[t]] is a domain (graded-lex leading terms). Step 5 uses that evaluation at t_1=0 has kernel t_1N and that θ̄ has constant term p≠0, then cancels. Small cases tested: Z_p[[t]] with θ=p−t and θ=p(1+t), plus Q=0, H=∅, H=Q, n=0. Duplicate check: lem-trf-cohen-monomial-quotient-regularity is strictly weaker (Cohen-only regularity of θ), so the item is no duplicate. Batch 5: the five sec-trace-formula citations are generic monoid algebra; their closures contain no trace-formula or Poincaré theorem node and no cycle, so they are outside both assumptions. I accept them as tool uses. Mathlib searches cover all three kinds and there is no SGA. Only remark: Step 5 reuses Steps 1-2 for n−1 variables without re-citing the coefficient lemma; this is an internal reference and needs no fix."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedMonomialTransverseParameter",
+  "declaration": "ToricMonoid.completedMonomial_transverse_parameter",
+  "declarations": [
+   "ToricMonoid.completedMonomialIdeal",
+   "ToricMonoid.parameter",
+   "ToricMonoid.completedMonomial_transverse_parameter"
+  ],
+  "file": "lean/Sheaf/RingTheory/CompletedMonomialTransverseParameter.lean",
+  "statement": "theorem completedMonomial_transverse_parameter (Q : Type u) [AddCommMonoid Q] (hQ : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative Q)) (hsharp : ∀ q : Q, IsAddUnit q → q = 0) (H : Set Q) (hH : ∀ h ∈ H, ∀ q : Q, h + q ∈ H) (n : ℕ) (L : Type v) [CommRing L] [IsLocalRing L] (hL : IsField L ∨ ∃ p : ℕ, IsCohenRing p L) : ∃ c : Complete L Q n ≃ₗ[L] (Q → MvPowerSeries (Fin n) L), (∀ (q r : Q) (a : L) (E : Fin n →₀ ℕ), c (algebraMap (PolynomialRing L Q n) (Complete L Q n) (MvPolynomial.monomial E (AddMonoidAlgebra.single q a))) r = if r = q then MvPowerSeries.monomial E a else 0) ∧ (∀ (x y : Complete L Q n) (q : Q), c (x * y) q = ∑ᶠ d : {d : Q × Q // d.1 + d.2 = q}, c x d.1.1 * c y d.1.2) ∧ ∃ e : (Complete L Q n ⧸ completedMonomialIdeal L Q n H) ≃ₗ[L] ({q : Q // q ∉ H} → MvPowerSeries (Fin n) L), (∀ (x : Complete L Q n) (q : {q : Q // q ∉ H}), e (Ideal.Quotient.mk (completedMonomialIdeal L Q n H) x) q = c x q.1) ∧ (∀ x : Complete L Q n, x ∈ completedMonomialIdeal L Q n H ↔ ∀ q : Q, q ∉ H → c x q = 0) ∧ (∀ f : Complete L Q n, c f 0 ≠ 0 → Function.Injective (fun x : Complete L Q n ⧸ completedMonomialIdeal L Q n H ↦ Ideal.Quotient.mk (completedMonomialIdeal L Q n H) f * x)) ∧ (∀ hn : 0 < n, Function.Injective (fun x : Complete L Q n ⧸ completedMonomialIdeal L Q n H ↦ Ideal.Quotient.mk (completedMonomialIdeal L Q n H) (parameter L Q n ⟨0, hn⟩) * x)) ∧ (∀ (p : ℕ), IsCohenRing p L → ∀ θ : Complete L Q n, θ - (p : Complete L Q n) ∈ completedChartIdeal L Q n → ∀ hn : 0 < n, Function.Injective (fun x : Complete L Q n ⧸ (completedMonomialIdeal L Q n H ⊔ Ideal.span {θ}) ↦ Ideal.Quotient.mk (completedMonomialIdeal L Q n H ⊔ Ideal.span {θ}) (parameter L Q n ⟨0, hn⟩) * x))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed def-trf-complete-toric-model constructions, added to stmt_deps. The two helper definitions only name the generated monomial ideal and the image of a polynomial parameter in that same completion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3ad4bb58",
+  "group": "Q63",
+  "result": "pass",
+  "note": "All node clauses match the Lean: fs+sharp Q, ideal H (empty or Q allowed), n:ℕ, L field or IsCohenRing with IsLocalRing implied; B = ToricMonoid.Complete at (m_L, z^q q≠0, t); K = span of monomials z^h; c : B ≃ₗ (Q → L[[t]]) normalized on polynomial monomials with finite convolution, which forces uniqueness (an automorphism fixing the dense Noetherian polynomial ring is adically continuous); e : B/K ≃ (Q∖H → L[[t]]) compatible with c; membership iff; nonzero z^0-series coefficient gives injectivity; t_1 injective for 0<n; Cohen θ−p ∈ completedChartIdeal gives t_1 injective on B/(K+θB). Mathematics checked (minimal-degree and domain argument; reduction mod t_1). Edge cases H=∅, H=Q, Q=0, n=0, n=1 Cohen OK. lean.statement verbatim; the item changes only lean and stmt_deps gaining the landed def-trf-complete-toric-model (allowed); dependency records identical to live; helpers are real, docstrings and proof steps present, sorry only, no SGA or pro-étale. Advisories: the Q63 second reading is a self-reread (dispatcher policy); IsFineSaturatedMonoid owner node not in stmt_deps (base-era usage). No recompile (no file changed)."
+ }
+}

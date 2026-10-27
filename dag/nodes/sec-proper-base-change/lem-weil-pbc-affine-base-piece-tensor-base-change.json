@@ -119,7 +119,32 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.affine_base_piece_tensor_base_change"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.affine_base_piece_tensor_base_change",
+     "module": "WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorBaseChange",
+     "lines": [
+      29,
+      83
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "existing": false,
   "module": "WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorBaseChange",
@@ -153,5 +178,27 @@
    "AlgebraicGeometry.affine_base_piece_tensor_base_change"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $d:T\\to S$ be a morphism of schemes [def-pc-scheme], $X_0,Y_0$ schemes over $S$, and $f_0:X_0\\to Y_0$ an $S$-morphism. Define $X_T,Y_T,f_T$ by base change. Let $V\\subset Y_0$, $W\\subset S$ be opens, $V_T=p_Y^{-1}(V)$, $U_T=f_T^{-1}(V_T)$ and $W_T=d^{-1}(W)$. Let $R,B,C$ be commutative rings with maps $a_B:R\\to B$, $a_C:R\\to C$ and an $R$-algebra map $\\varphi:B\\to C$. Suppose given $e_0:W_T\\cong\\operatorname{Spec}R$, $q:V_T\\to W_T$ with $q\\circ\\iota_{W_T}=p_T\\circ\\iota_{V_T}$, $e_B:V_T\\cong\\operatorname{Spec}B$ and $e_C:U_T\\cong\\operatorname{Spec}C$. Assume $\\operatorname{Spec}(a_B)\\circ e_B=e_0\\circ q$ and $\\operatorname{Spec}(\\varphi)\\circ e_C=e_B\\circ(f_T|_{V_T})$. Then for every $t:L\\to T$, commutative $R$-algebra $A$, and $e:t^{-1}(W_T)\\cong\\operatorname{Spec}A$ satisfying $e_0\\circ(t|_{W_T})=\\operatorname{Spec}(R\\to A)\\circ e$, the base change of $f_0$ along $t\\circ d$, restricted to the inverse image of $V$ under its target first projection, is isomorphic as an arrow to $\\operatorname{Spec}(\\mathrm{id}_A\\otimes_R\\varphi)$. No finite-type or limit hypothesis is needed.",
+  "proof": [
+   {
+    "text": "Let Y_T=Y₀×_S T and X_T=X₀×_S T. Write V_T=p_Y⁻¹(V) and U_T=f_T⁻¹(V_T). The equation for q factors the target chart through W_T=d⁻¹(W); the restricted f_T factors the source chart through the same open. For t:L→T, paste the original pullback squares and open restriction squares to identify the target chart over L with V_T×_{W_T}t⁻¹(W_T) and the source with U_T×_{W_T}t⁻¹(W_T). Both identifications commute with the chart map.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Transport the fibre products along e0,eB,eC and e. The target compatibility hB identifies its structure map with Spec(aB); source compatibility follows from hφ and φ commuting with R. Apply pullbackSpecIso R A B and pullbackSpecIso R A C to identify target and source with Spec(A tensor_R B) and Spec(A tensor_R C). The map is Spec(id tensor φ), because its composites with the A and B projections are the prescribed identity and φ maps. Pullback uniqueness proves equality, giving the arrow isomorphism. This includes zero rings.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

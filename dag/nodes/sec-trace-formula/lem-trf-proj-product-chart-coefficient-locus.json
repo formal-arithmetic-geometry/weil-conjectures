@@ -1,0 +1,225 @@
+{
+ "id": "lem-trf-proj-product-chart-coefficient-locus",
+ "kind": "statement",
+ "title": "Unit locus of the product-chart homogeneous coefficient",
+ "statement": "Let $A=\\bigoplus_{j\\geq0}A_j$ be a nonnegatively graded commutative ring, $P=\\operatorname{Proj}(A)$ [def-pc-proj], and $d,n\\geq1$. Let $\\alpha,\\beta\\geq0$ satisfy $\\alpha=\\beta+d$, and let $a\\in A_\\alpha$, $b\\in A_\\beta$, $f\\in A_{nd}$ be homogeneous. Set $h=ab$, $k=\\alpha+\\beta>0$, $V=D_+(h)=\\operatorname{Spec}R_0$, where $R=A_h$ is the graded localization and $R_0$ its degree-zero part [def-nagata-homogeneous-localization-degree-zero]. In $R$, the elements $a,b$ are units, the element $c=b^nf/a^n$ belongs to $R_0$, and $u=b^{2n\\alpha}/a^{2n\\beta}$ is a unit of $R_0$ with inverse $a^{2n\\beta}/b^{2n\\alpha}$. In $R_0$ one has $c^k=u f^k/h^{nd}$. For every $x\\in V$, the germ $c_x\\in\\mathcal O_{V,x}$ is a unit if and only if $(f^k/h^{nd})_x$ is a unit, and these equivalent conditions hold if and only if $x\\in D_+(f)$. Thus the principal open $D_V(c)=\\{x\\in V:c_x\\text{ is a unit}\\}$ equals $V\\cap D_+(f)$, including when $V$ is empty or $f$ is zero or nilpotent.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01MV (lemma-principal-open), last two sentences of proof, coefficient principal open; Tag 01MA (lemma-standard-open-proj), affine-chart interpretation of D_+(h) intersect D_+(f)."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [
+  {
+   "text": "In the ordinary localization $R=A_h$, the defining inverse $h^{-1}$ gives $a^{-1}=b/h$ and $b^{-1}=a/h$, since $a(b/h)=b(a/h)=1$. Thus $c=b^{2n}f/h^n$. Its numerator has degree $2n\\beta+nd=n(\\alpha+\\beta)=nk$, equal to the degree of $h^n$, so $c\\in R_0$ by [def-nagata-homogeneous-localization-degree-zero]. Similarly $u=b^{2nk}/h^{2n\\beta}$ and the proposed inverse $w=a^{2nk}/h^{2n\\alpha}$ have numerator and denominator degrees respectively $2nk\\beta$ and $2nk\\alpha$, hence belong to $R_0$. Their product is $a^{2nk}b^{2nk}/h^{2n(\\alpha+\\beta)}=1$. This includes $\\beta=0$, when the first denominator is $h^0=1$.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MV (lemma-principal-open), coefficient b^n f/a^n on D_+(ab); explicit elementary fraction calculation supplying the last sentence."
+   }
+  },
+  {
+   "text": "Put $v=f^k/h^{nd}$. Numerator and denominator both have degree $ndk$, so $v\\in R_0$ by [def-nagata-homogeneous-localization-degree-zero]. Since $d=\\alpha-\\beta$ and $k=\\alpha+\\beta$, the exponents satisfy $2n\\alpha-nd=nk$ and $2n\\beta+nd=nk$. Using only the units $a,b$ already constructed, compute in $R$: $$uv=\\frac{b^{2n\\alpha}f^k}{a^{2n\\beta}(ab)^{nd}}=\\frac{b^{nk}f^k}{a^{nk}}=(b^nf/a^n)^k=c^k.$$ All terms lie in the subring $R_0$, so this is the asserted equality there; no cancellation of a nonunit or nonzero-divisor is used.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MV (lemma-principal-open), coefficient b^n f/a^n on D_+(ab); explicit elementary fraction calculation supplying the last sentence."
+   }
+  },
+  {
+   "text": "For $x\\in V$, apply the germ ring map to $c^k=uv$ and $uw=1$. Then $c_x^k=u_xv_x$ and $u_xw_x=1$. If $c_x$ has inverse $t$, then $v_x=w_xc_x^k$ has inverse $u_xt^k$. Conversely, if $v_x$ has inverse $z$, then $c_x^{k-1}w_xz$ is an inverse of $c_x$, since $k\\geq1$ and $c_x^kw_xz=u_xv_xw_xz=1$. Commutativity gives the other inverse identities as well. These explicit formulas prove both implications without any additional local-ring criterion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MV (lemma-principal-open), coefficient b^n f/a^n on D_+(ab); explicit elementary fraction calculation supplying the last sentence."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proj-basic-open-intersection] to its first homogeneous element $h=ab\\in A_k$ and its second element $f\\in A_{nd}$. Its positive-degree hypotheses hold: $k=2\\beta+d>0$ and $nd>0$. Its chart is exactly $V=\\operatorname{Spec}R_0$, and its function is $f^k/h^{nd}=v$. The cited germ-unit characterization therefore gives $v_x$ a unit if and only if $x\\in V\\cap D_+(f)$. Together with the preceding step this proves the desired pointwise equivalences and $D_V(c)=V\\cap D_+(f)$.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MV (lemma-principal-open), coefficient b^n f/a^n on D_+(ab); explicit elementary fraction calculation supplying the last sentence."
+   }
+  },
+  {
+   "text": "If $V$ is empty, the pointwise claims and the equality of opens are vacuous, while all displayed ring identities still hold in the zero localization. If $f$ is zero or nilpotent, every prime ideal contains $f$ (if $f^N=0$, repeated primality gives $f\\in\\mathfrak p$). Thus $D_+(f)=\\varnothing$ by [def-pc-proj]. Also $c$ is nilpotent by its formula $b^{2n}f/h^n$; in any stalk at a point a nilpotent unit would give $1=0$, impossible for the nonzero local ring at a point of a scheme. Equivalently, the preceding pointwise equivalence already shows its unit locus is empty.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MV (lemma-principal-open), coefficient b^n f/a^n on D_+(ab); explicit elementary fraction calculation supplying the last sentence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "def-pc-proj"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01MV (lemma-principal-open), explicit verification of its final sentence, using the chart theorem of Tag 01M4 (lemma-standard-open) and Tag 01MA (lemma-standard-open-proj)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a standard affine chart D_+(h) in Proj, if e is a homogeneous unit of degree r and f has degree r then the regular function f/e is a unit precisely on D_+(f)",
+   "results": "{\"t\": \"2026-10-22T06:13:49Z\", \"tool\": \"leanfinder\", \"query\": \"On a standard affine chart D_+(h) in Proj, if e is a homogeneous unit of degree r and f has degree r then the regular function f/e is a unit precisely on D_+(f)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.mem_basicOpen_den\", \"HomogeneousLocalization.isUnit_iff_isUnit_val\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.one_mem'\", \"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\"], \"digest\": \"dd87beebf1680260\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For homogeneous a of degree alpha and b of degree beta with alpha=beta+d, the degree zero coefficient c=b^n*f/a^n satisfies c^(alpha+beta)=(b^(2*n*alpha)/a^(2*n*beta))*f^(alpha+beta)/(ab)^(n*d), and its unit locus on D_+(ab) is D_+(ab) intersect D_+(f)",
+   "results": "{\"t\": \"2026-10-22T06:15:51Z\", \"tool\": \"leanfinder\", \"query\": \"For homogeneous a of degree alpha and b of degree beta with alpha=beta+d, the degree zero coefficient c=b^n*f/a^n satisfies c^(alpha+beta)=(b^(2*n*alpha)/a^(2*n*beta))*f^(alpha+beta)/(ab)^(n*d), and its unit locus on D_+(ab) is D_+(ab) intersect D_+(f)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.eventually_smul_mem\", \"HomogeneousLocalization.NumDenSameDeg.deg_pow\", \"HomogeneousLocalization.awayMapAux_mk\", \"HomogeneousLocalization.awayMap_mk\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"HomogeneousLocalization.NumDenSameDeg\", \"HomogeneousLocalization.mk_pow\", \"HomogeneousLocalization.Away.isLocalization_mul\"], \"digest\": \"b3186cada13da367\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"basicOpen\"",
+   "results": "{\"t\": \"2026-10-22T06:13:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveSpectrum\\\", \\\"basicOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.basicOpen\", \"ProjectiveSpectrum.basicOpen_pow\", \"ProjectiveSpectrum.isOpen_basicOpen\", \"ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl\", \"ProjectiveSpectrum.basicOpen_mul_le_left\", \"ProjectiveSpectrum.basicOpen_mul_le_right\", \"ProjectiveSpectrum.mem_basicOpen\", \"ProjectiveSpectrum.mem_coe_basicOpen\"], \"digest\": \"06f4bbfe6a8a77e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "basicOpen.*[Uu]nit|[Uu]nit.*basicOpen|degreePart",
+   "results": "{\"t\": \"2026-10-22T06:13:35Z\", \"tool\": \"grep\", \"query\": \"basicOpen.*[Uu]nit|[Uu]nit.*basicOpen|degreePart\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit locus of a degree zero fraction f divided by a homogeneous unit is the standard open of f in Proj",
+   "results": "{\"t\": \"2026-10-22T06:13:35Z\", \"tool\": \"leansearch\", \"query\": \"The unit locus of a degree zero fraction f divided by a homogeneous unit is the standard open of f in Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.basicOpen\", \"ProjectiveSpectrum.basicOpen\", \"AlgebraicGeometry.Proj.opensRange_awayι\", \"AlgebraicGeometry.Proj.awayι_preimage_basicOpen\", \"ProjectiveSpectrum.zeroLocus\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_preimage_basicOpen\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec\"], \"digest\": \"c09ada24111a8c68\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "toSpec_preimage_basicOpen|awayι_preimage_basicOpen|isUnit_iff_isUnit_val",
+   "results": "{\"t\": \"2026-10-22T06:14:43Z\", \"tool\": \"grep\", \"query\": \"toSpec_preimage_basicOpen|awayι_preimage_basicOpen|isUnit_iff_isUnit_val\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\"], \"digest\": \"03fb566b37e21cf4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "toSpec_preimage_basicOpen|awayι_preimage_basicOpen|mem_basicOpen_iff_isUnit_val|isUnit_iff_isUnit_val",
+   "results": "{\"t\": \"2026-10-23T04:17:13Z\", \"tool\": \"grep\", \"query\": \"toSpec_preimage_basicOpen|awayι_preimage_basicOpen|mem_basicOpen_iff_isUnit_val|isUnit_iff_isUnit_val\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\"], \"digest\": \"03fb566b37e21cf4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state degree-zero localization, chart maps, or basic-open preimages, not the full coefficient-and-unit-power statement; the chart-intersection component is already the Mathlib leaf lem-weil-pbc-proj-basic-open-intersection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit locus of a degree zero homogeneous fraction on a product chart of Proj equals the standard open of its numerator",
+   "results": "{\"t\": \"2026-10-23T04:17:13Z\", \"tool\": \"leansearch\", \"query\": \"The unit locus of a degree zero homogeneous fraction on a product chart of Proj equals the standard open of its numerator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.basicOpen\", \"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_preimage_basicOpen\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.preimage_basicOpen\", \"ProjectiveSpectrum.zeroLocus\", \"ProjectiveSpectrum.zeroLocus_singleton_mul\", \"AlgebraicGeometry.sectionInBasicOpen\", \"ProjectiveSpectrum.zeroLocus_mul_homogeneousIdeal\"], \"digest\": \"dcd1b38462c952fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state degree-zero localization, chart maps, or basic-open preimages, not the full coefficient-and-unit-power statement; the chart-intersection component is already the Mathlib leaf lem-weil-pbc-proj-basic-open-intersection"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.Away, ProjectiveSpectrum.basicOpen",
+   "results": "{\"t\": \"2026-10-23T04:17:14Z\", \"tool\": \"loogle\", \"query\": \"HomogeneousLocalization.Away, ProjectiveSpectrum.basicOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.toFun\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.isPrime_carrier\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\"], \"digest\": \"416015b7363c6406\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state degree-zero localization, chart maps, or basic-open preimages, not the full coefficient-and-unit-power statement; the chart-intersection component is already the Mathlib leaf lem-weil-pbc-proj-basic-open-intersection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For homogeneous a and b with degrees alpha=beta+d and f of degree nd, on D_+(ab) the degree zero coefficient b^n*f/a^n has k-th power a degree zero unit times f^k/(ab)^(nd), where k=alpha+beta, and its unit locus is D_+(ab) intersect D_+(f)",
+   "results": "{\"t\": \"2026-10-23T04:17:17Z\", \"tool\": \"leanfinder\", \"query\": \"For homogeneous a and b with degrees alpha=beta+d and f of degree nd, on D_+(ab) the degree zero coefficient b^n*f/a^n has k-th power a degree zero unit times f^k/(ab)^(nd), where k=alpha+beta, and its unit locus is D_+(ab) intersect D_+(f)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.NumDenSameDeg\", \"HomogeneousLocalization.awayMap_mk\", \"HomogeneousLocalization.NumDenSameDeg.instPowNat\", \"HomogeneousLocalization.NumDenSameDeg.deg_pow\", \"HomogeneousLocalization.awayMapAux_mk\", \"HomogeneousLocalization.NumDenSameDeg.deg\", \"HomogeneousLocalization.NumDenSameDeg.num_pow\", \"HomogeneousLocalization.NumDenSameDeg.num\"], \"digest\": \"160230c642173790\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state degree-zero localization, chart maps, or basic-open preimages, not the full coefficient-and-unit-power statement; the chart-intersection component is already the Mathlib leaf lem-weil-pbc-proj-basic-open-intersection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a graded ring localized at a product of homogeneous elements, compute the unit power identity for b^n*f/a^n and identify its principal open using the affine Proj chart",
+   "results": "{\"t\": \"2026-10-23T04:18:23Z\", \"tool\": \"leanfinder\", \"query\": \"In a graded ring localized at a product of homogeneous elements, compute the unit power identity for b^n*f/a^n and identify its principal open using the affine Proj chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.basicOpen_pow\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.Proj.basicOpenToSpec\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\"], \"digest\": \"8a3c20da6e954d3e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state degree-zero localization, chart maps, or basic-open preimages, not the full coefficient-and-unit-power statement; the chart-intersection component is already the Mathlib leaf lem-weil-pbc-proj-basic-open-intersection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proj-twist-section-basic-open",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited Section-algebra/Proj ampleness input of lem-trf-local-term-locality: returned item proof Step 2, the explicit degree-zero unit-power identity and identification of its unit locus with a standard-open intersection.",
+   "via": [
+    "lem-trf-proj-twist-section-basic-open",
+    "lem-trf-proj-qc-open-twist-ample",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-proj-product-chart-coefficient-locus",
+  "worker": "stage1",
+  "summary": "Q104 verified the coefficient formula of Stacks 01MV, supplied homogeneous representatives for c, u and its inverse, calculated the power identity and explicit stalk inverses, and reused the existing general Mathlib chart-intersection leaf. No statement change and no new nodes. Checked beta=0, nilpotent f, zero localization and empty charts.",
+  "blueprint": "Inherited Proj ampleness input along the existing ancestry of lem-trf-local-term-locality, via lem-trf-proj-twist-section-basic-open proof step 2: expand the unit-power identity and coefficient unit locus of Stacks 01MV. The current main-20261015 locality proof itself does not state this auxiliary Proj assertion; its existing recorded ancestry is retained. Whole-blueprint searches for coefficient locus and homogeneous unit found no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-d99658d09",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-d99658d09 (reviewer sub-agent of L); spot-checked: Read the item in full. The delivery adds no new nodes, and the item's statement, stmt_deps and source match the version created by Q159 exactly, so nothing was weakened. This is a plain one-level split; there is no re-split note for this item. Source: Stacks constructions.tex Tag 01MV lemma-principal-open, lines 1919-1946. Its proof writes f/1=(b^nf/a^n)(a/b)^n and leaves the equality of the principal open with D_+(ab)∩D_+(f) as 'clear'; the item writes out that verification, with proof_origin=agent. I also checked the chart lemmas 01MA (l.1249) and 01M4 (l.955) against the tags file. No SGA source is used. Step 1 (def-nagata-homogeneous-localization-degree-zero): a^{-1}=b/h and b^{-1}=a/h; the representatives c=b^{2n}f/h^n, u=b^{2nk}/h^{2nβ} and w=a^{2nk}/h^{2nα} have the stated degrees, and uw=1. Step 2: v=f^k/h^{nd} lies in R_0. The exponents satisfy 2nα-nd=2nβ+nd=nk, so uv=c^k; I recomputed this. Step 3: the explicit inverses u t^k and c^{k-1}wz check out (uses k≥1). Step 4 (lem-weil-pbc-proj-basic-open-intersection, a Mathlib leaf): instantiated with its f:=h (degree k>0), g:=f (degree nd>0), d:=k, e:=nd, its function g^d/f^e is v. Its germ-unit clause gives V∩D_+(f), and its Proj and degree-zero localization are the same notions as the item's. Step 5 (def-pc-proj): nilpotent f gives an empty D_+(f), and an empty V makes the claims vacuous. Small cases (α,β,d,n)=(1,0,1,1) and (2,1,1,1) verify c^k=uv. β=0 and nilpotent h or f are consistent. Duplicate check: lem-sc-p1-homogeneous-section-tensor-powers-locus is only the P^1-over-a-field special case; product-chart-twist-frame and common-degree-twist-invertible state different things; nothing else in the DAG states this item. No tool_uses need recording. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjProductChartCoefficientLocus",
+  "declaration": "AlgebraicGeometry.Proj.productChartCoefficientLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjProductChartCoefficientLocus.lean",
+  "statement": "theorem productChartCoefficientLocus {A : Type u} {σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] (d n α β : ℕ) (hd : 0 < d) (hn : 0 < n) (hα : α = β + d) (a b f : A) (ha : a ∈ 𝒜 α) (hb : b ∈ 𝒜 β) (hf : f ∈ 𝒜 (n * d)) : 0 < α + β ∧ IsUnit (algebraMap A (Localization.Away (a * b)) a) ∧ IsUnit (algebraMap A (Localization.Away (a * b)) b) ∧ ∃ c u w : HomogeneousLocalization.Away 𝒜 (a * b), c.val = algebraMap A (Localization.Away (a * b)) b ^ n * algebraMap A (Localization.Away (a * b)) f * Ring.inverse (algebraMap A (Localization.Away (a * b)) a) ^ n ∧ u.val = algebraMap A (Localization.Away (a * b)) b ^ (2 * n * α) * Ring.inverse (algebraMap A (Localization.Away (a * b)) a) ^ (2 * n * β) ∧ w.val = algebraMap A (Localization.Away (a * b)) a ^ (2 * n * β) * Ring.inverse (algebraMap A (Localization.Away (a * b)) b) ^ (2 * n * α) ∧ IsUnit u ∧ u * w = 1 ∧ c ^ (α + β) = u * HomogeneousLocalization.Away.isLocalizationElem (SetLike.mul_mem_graded ha hb) hf ∧ (∀ x : basicOpen 𝒜 (a * b), (IsUnit ((Proj 𝒜).presheaf.germ (basicOpen 𝒜 (a * b)) x x.2 (awayToSection 𝒜 (a * b) c)) ↔ IsUnit ((Proj 𝒜).presheaf.germ (basicOpen 𝒜 (a * b)) x x.2 (awayToSection 𝒜 (a * b) (HomogeneousLocalization.Away.isLocalizationElem (SetLike.mul_mem_graded ha hb) hf)))) ∧ (IsUnit ((Proj 𝒜).presheaf.germ (basicOpen 𝒜 (a * b)) x x.2 (awayToSection 𝒜 (a * b) c)) ↔ (x : Proj 𝒜) ∈ basicOpen 𝒜 f)) ∧ (Proj 𝒜).basicOpen (awayToSection 𝒜 (a * b) c) = basicOpen 𝒜 (a * b) ⊓ basicOpen 𝒜 f",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95b9e2e4a",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: general GradedRing 𝒜 over ℕ with free universes u,v; hd/hn/hα/ha/hb/hf exactly the node hypotheses; k>0 as a conclusion; a,b units in Localization.Away (a*b); c,u,w ∈ HomogeneousLocalization.Away pinned by val formulas using Ring.inverse on asserted units; IsUnit u ∧ u*w=1; c^(α+β)=u*isLocalizationElem, and the Mathlib source (HomogeneousLocalization.lean:881) confirms that element is f^(α+β)/(ab)^(nd); pointwise germ iffs via the canonical awayToSection; Scheme.basicOpen equality with basicOpen(ab)⊓basicOpen f. Recomputed degrees and the identity c^k=uv; the claim holds via Proj.awayι_preimage_basicOpen. Edge cases β=0, empty chart/zero localization, nilpotent f are covered without extra hypotheses. Node diff vs side-live: only the lean field; lean.statement verbatim in file; no new defs, no duplicates found; docstrings carry source, blueprint id and proof plan; proof sorry; single Mathlib import. No changes, no compile needed."
+ }
+}

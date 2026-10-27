@@ -1,0 +1,373 @@
+{
+ "id": "lem-sfb-invariant-marked-generic-normalization",
+ "kind": "statement",
+ "title": "Invariant inseparable normalization of a marked generic curve",
+ "statement": "Let $K$ be a field, $X$ a proper geometrically integral finite-type $K$-scheme of dimension one, and $Z\\subset X$ a proper closed subset, possibly empty. Let a finite group $H$ act compatibly on $K$ and $X$ and preserve $Z$. Write $F=k(X)$. There exists a finite purely inseparable extension $K_0/K$ with an $H$-action extending that on $K$, such that the normalization $N$ of $(X\\times_KK_0)_{\\mathrm{red}}$ is a smooth proper geometrically integral $K_0$-curve. The reduced inverse image $D\\subset N$ of $Z$ is finite etale over $K_0$. The actions on $X$ and $K_0$ lift to $N$ and preserve $D$. The algebra $F\\otimes_KK_0$ is a field and identifies canonically with $k(N)$, with the two field embeddings induced by the maps $N\\to X$ and $N\\to\\operatorname{Spec}K_0$. For every further field extension $K'/K_0$, the normalization of $(X_{K'})_{\\mathrm{red}}$ is $N\\times_{K_0}K'$, and its reduced inverse image of $Z$ is $D\\times_{K_0}K'$. In characteristic zero one may take $K_0=K$. Purely inseparable means that in characteristic $p>0$ every element has a $p$-power in the smaller field, and means equality in characteristic zero.\n\nAll group actions are by automorphisms, may be nonfaithful, and commute with the displayed maps; they may act on the ground field. Normal means that all local rings are integrally closed domains. Schematic closure is the closed subscheme defined by the kernel of restriction of functions to the specified subscheme.\n\nNotions used: [def-weil-field], [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-pc-geometrically-irreducible], [def-kun-topological-krull-dimension], [def-sc-function-field], [def-pc-field-extension], [def-pc-field-tower], [def-weil-pbc-reduced-normalization], [def-sbc-smooth-morphisms], [def-weil-etale-morphism], [def-weil-finite-integral-morphism], [def-weil-closed-immersion], [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0BXT (lemma-finite-extension-geometrically-normal) and 04KT (lemma-finite-extension-geometrically-reduced), combined with the invariant perfect-closure compositum of de Jong, Families of curves and alterations (1997), §2.7 and Lemma 2.8, printed pp.603–604. The combined argument is agent-written; de Jong Lemma 2.8 omits its proof."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-geometrically-irreducible",
+  "def-kun-topological-krull-dimension",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-weil-pbc-reduced-normalization",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the geometric-normalization preparation to $X$ and obtain a finite purely inseparable $E/K$ whose normalized curve $N_E$ is geometrically normal. The scheme $X_E$ is already integral by geometric integrality, so its reduction does nothing and the componentwise normalization is its ordinary function-field normalization. Properness of $X_E$ follows by proper base change. The finite normalization theorem gives that $N_E$ is proper, finite type and one-dimensional (dimension of $X_E$ equals that of $X$ by the field-extension dimension theorem, applied on affine opens). The geometrically normal dimension-one criterion makes $N_E$ smooth.",
+   "uses": [
+    "lem-weil-pbc-normalization-geonormal-insep",
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "lem-weil-pbc-geonormal-dim-one-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BXT, 038X; normalization of the geometrically integral generic curve"
+   }
+  },
+  {
+   "text": "Put $D_E=(\\nu_E^{-1}Z)_{\\mathrm{red}}$. The finite birational map $\\nu_E$ sends the generic point to the generic point of $X_E$, which does not lie over the proper closed subset $Z$ of the integral curve $X$. The purely inseparable projection $X_E\to X$ is a homeomorphism. Thus $D_E$ is nowhere dense and closed. The dimension-zero and closed-subscheme finiteness lemmas imply $D_E$ is finite over $E$. Apply geometric-reduction preparation to $D_E$ to obtain a finite purely inseparable $L/E$ such that $(D_E\\times_E L)_{\\mathrm{red}}$ is geometrically reduced. The finite-type dimension-zero theorem makes its points a finite set, so it has finitely many irreducible components as required by geometric-reduction preparation. This also applies to $D_E=\\varnothing$.",
+   "uses": [
+    "lem-sc-normalization-exists",
+    "lem-pc-nowhere-dense-dim-zero",
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "lem-pur-finite-inseparable-geometric-reduction",
+    "lem-pc-homeo-pure-insep",
+    "lem-weil-pbc-finite-type-dim-zero-artinian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KT applied to the reduced inverse image of the marking"
+   }
+  },
+  {
+   "text": "Choose a perfect purely inseparable overfield $P/K$. Embed the finite purely inseparable extension $L/K$ into $P$: in characteristic $p$ each generator has $p^n$th power in $K$, whose unique $p^n$th root exists in $P$; these uniquely specified roots respect all equations, so give the embedding. Extend each $h\\in H$ uniquely to $P$ by sending the root of $a\\in K$ to the corresponding root of $h(a)$. Roots are unique, so these maps preserve addition and multiplication, have inverse indexed by $h^{-1}$, and satisfy the group law. Let $K_0$ be the compositum inside $P$ of the finitely many fields $h(L)$. It contains $L$, is $H$-stable, and is finite purely inseparable over $K$: take finite generators for each $h(L)$, and multiply their finite degrees; a common $p$-power sends every generator, and hence every element of their compositum, into $K$. In characteristic zero every extension just used is equality; take $P=L=E=K_0=K$.",
+   "uses": [
+    "lem-weil-pbc-perfect-purely-inseparable-overfield"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046W, lemma-perfection: unique roots and finite orbit compositum"
+   }
+  },
+  {
+   "text": "For every extension $T/E$, apply the integral-closure scalar-extension lemma on each nonempty affine open $\\operatorname{Spec}A$ of $X_E$. Its inverse image in $N_E$ is $\\operatorname{Spec}B$, with $B$ the finite integral closure of $A$; geometric normality supplies the local normality hypothesis after every extension. Thus $\\operatorname{Spec}(B\\otimes_E T)$ is the normalization over $\\operatorname{Spec}(A\\otimes_E T)$. The canonical identifications commute on principal opens, hence glue to an identification of the normalization of $X_T$ with $N_E\\times_E T$. Its affine charts are domains. The inverse images of any two nonempty affine opens intersect: choose a nonempty principal open in their intersection in $X_E$; it remains nonempty after field extension, and normalization is surjective. Hence this normalization is integral. This proves geometric integrality of $N_E$ and identifies $N=N_E\\times_E K_0$. Properness and dimension one follow from proper base change and the field-extension dimension theorem; geometric normality is preserved simply by quantifying over extensions $T/K_0$, so the dimension-one criterion gives smoothness of $N$.",
+   "uses": [
+    "lem-sfb-integral-closure-geonormal-scalar-extension",
+    "def-sc-normalization",
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "lem-weil-pbc-geonormal-dim-one-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, affine normal comparison, applied to the geometrically normal model of Tag 0BXT"
+   }
+  },
+  {
+   "text": "The reduced inverse image $D$ of $Z$ on $N=N_E\\times_E K_0$ is $((D_E)_L)_{\\mathrm{red}}\\times_L K_0$. To check the reductions, on an affine chart let $I$ define the inverse image before reduction and $J=\\sqrt I$. The finite-normalization-model theorem gives that $N_E$ is Noetherian; its closed subschemes are Noetherian, so applying the nilradical theorem to the chart quotient shows that $J/I$ is nilpotent. This remains nilpotent after scalar extension, so replacing $I$ by $J$ does not change the reduced inverse image. The same observation over $L$, together with geometric reducedness of $((D_E)_L)_{\\mathrm{red}}$, shows that its base change to $K_0$ is already reduced. Finiteness survives base change, and the displayed scheme is geometrically reduced by definition. The finite-geometrically-reduced criterion therefore makes $D$ finite etale.",
+   "uses": [
+    "lem-sc-reduction-nilradical-nilpotent",
+    "lem-trf-finite-radicial-basechange",
+    "def-pc-geometrically-irreducible",
+    "lem-sfb-finite-georeduced-etale",
+    "lem-sfb-finite-normalization-model-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KT: retain the geometrically reduced marking under enlargement of constants"
+   }
+  },
+  {
+   "text": "The actions on $X$ and $K_0$ give a compatible semilinear action on $X_{K_0}$ by the fibre-product universal property. Apply normalization functoriality with $V=X_{K_0}$ and $M=k(V)$ (degree one). It lifts each automorphism uniquely to $N$, and the identities and compositions are preserved, hence give an $H$-action. The inverse image of the invariant closed set $Z$ is invariant; its reduced structure is invariant as well since ring automorphisms preserve nilpotent elements. Consequently this lifted action preserves $D$ and commutes with the two structural maps.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-finite-normalization-model-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Normalization functoriality on integral-closure charts, as in Tag 0C3N"
+   }
+  },
+  {
+   "text": "For the generic-field assertion apply the flat-curve pullback function-field theorem with ground field $K$, base $B=\\operatorname{Spec}K$, total space $V=X$, and $P=\\operatorname{Spec}K_0$. The structure map of $X$ is flat because modules over a field are flat; it is dominant and finite type, and its geometric fibres are reduced and its generic fibre geometrically integral by hypothesis. The extension $k(P)/k(B)=K_0/K$ is finite. Thus $k(X_{K_0})=F\\otimes_K K_0$ is a field. Normalization is birational, so $k(N)$ equals this field; both identifications use the structural maps, giving precisely the two stated embeddings.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-sfb-flat-curve-pullback-function-field",
+    "lem-sc-normalization-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Generic-point calculation for finite field extension of a geometrically integral curve"
+   }
+  },
+  {
+   "text": "Let $K'/K_0$ be arbitrary. Apply step 4's affine argument to $T=K'$; it identifies the normalization of $X_{K'}$ with $N_E\\times_E K'=N\\times_{K_0}K'$. Geometric integrality of $X$ means $X_{K'}$ is already reduced, even for inseparable or transcendental $K'/K_0$. Repeat the nilpotent-ideal calculation of step 5 for the inverse image of $Z$. The scheme $D\\times_{K_0}K'$ is already reduced by the geometric reducedness established there, so it is the reduced inverse image, as required. Every identification agrees with the structural maps since on affine charts it is the natural inclusion into the fraction field.",
+   "uses": [
+    "lem-sfb-integral-closure-geonormal-scalar-extension",
+    "def-pc-geometrically-irreducible",
+    "lem-sc-reduction-nilradical-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N and the nilpotent-ideal description of reduced inverse image under further field extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-sc-normalization",
+  "lem-pc-homeo-pure-insep",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-sc-normalization-exists",
+  "lem-sc-reduction-nilradical-nilpotent",
+  "lem-sfb-finite-georeduced-etale",
+  "lem-sfb-finite-normalization-model-functoriality",
+  "lem-sfb-flat-curve-pullback-function-field",
+  "lem-sfb-integral-closure-geonormal-scalar-extension",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-geonormal-dim-one-smooth",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-normalization-geonormal-insep",
+  "lem-weil-pbc-perfect-purely-inseparable-overfield",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0BXT and 04KT, affine refinement of 0C3N, and the unique-root invariant compositum of algebra.tex 046W; assembly written by Q135"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Invariant purely inseparable extension giving a smooth normalized curve and etale marked points",
+   "results": "8 hits: IsPurelyInseparable.normal, IsPurelyInseparable.isAlgebraic, isPurelyInseparable_iff, separableClosure.isPurelyInseparable, IsPurelyInseparable.isIntegral, le_perfectClosure_iff, isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIntegral, IsPurelyInseparable, AlgebraicGeometry.Smooth",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper geometrically integral curve with a finite group acting semilinearly admits an invariant finite purely inseparable field extension with smooth normalization and finite etale reduced marking.",
+   "results": "8 hits: IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.to_isFractionRing, IsGaloisGroup.of_isFractionRing, Algebra.isInvariant_of_isGalois, Ring.instIsGaloisFractionRingNormalClosure, Algebra.isInvariant_of_isGalois', IsGaloisGroup.toFractionRing, IsArithFrobAt.exists_of_isInvariant",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After enlarging the ground field purely inseparably and taking all group conjugates, normalization of a curve is smooth and its closed marked points are separable.",
+   "results": "8 hits: WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.IsIntegral.integral, WeierstrassCurve.isIntegral_iff, WeierstrassCurve.Affine.baseChange_nonsingular, WeierstrassCurve.minimal, WeierstrassCurve.exists_variableChange_of_j_eq, WeierstrassCurve.Projective.comp_equiv_comp, WeierstrassCurve.Affine.Point.map",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a projective integral base and a proper curve family in finite purely inseparable function field extensions and find an equivariant projective birational model preserving the normalized generic curve.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, WeierstrassCurve.IsIntegral.integral, WeierstrassCurve.Affine.Point.map_some, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "PurelyInseparable",
+   "results": "25 hits: Mathlib/FieldTheory/IsSepClosed.lean, Mathlib/FieldTheory/CardinalEmb.lean, Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean, Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean, Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "purelyInseparable|purely_inseparable",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, Galois-action and Weierstrass results do not state the marked semilinear construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant normalization of a marked curve after purely inseparable scalar extension is smooth and the marking is finite etale.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"IsPurelyInseparable.normal\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, Galois-action and Weierstrass results do not state the marked semilinear construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, AlgebraicGeometry.Smooth",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, Galois-action and Weierstrass results do not state the marked semilinear construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper geometrically integral curve with semilinear finite group action has an invariant finite purely inseparable extension making its normalization smooth and its reduced marking etale.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.iff_isFractionRing\", \"WeierstrassCurve.exists_isIntegral\", \"IsGaloisGroup.to_isFractionRing\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"WeierstrassCurve.IsIntegral.integral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, Galois-action and Weierstrass results do not state the marked semilinear construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining a finite group orbit of purely inseparable constants makes the normalization of a geometrically integral curve smooth with separable marked points.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsIntegral\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization, Galois-action and Weierstrass results do not state the marked semilinear construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-flat-curve-preparation",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained flat-curve preparation Steps 1–4: smooth normalization, reduction of the marking, invariant compositum, separability and tensor-product function field.",
+   "via": [
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-invariant-marked-generic-normalization",
+  "worker": "stage1",
+  "summary": "Split into eight explicit steps using existing geometric-normal and geometric-reduced preparation, finite normalization and semilinear functoriality. Added two general tools for affine integral closure under geometrically normal scalar extension and finite geometrically reduced schemes being etale. Preserved the statement, including empty marking, arbitrary further extension and characteristic zero.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained flat-curve preparation Steps 1–4: smooth normalization, reduction of the marking, invariant compositum, separability and tensor-product function field.",
+  "tool_uses": [
+   {
+    "node": "def-sc-normalization",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   },
+   {
+    "node": "lem-pc-homeo-pure-insep",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   },
+   {
+    "node": "lem-pc-nowhere-dense-dim-zero",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   },
+   {
+    "node": "lem-pur-finite-inseparable-geometric-reduction",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   },
+   {
+    "node": "lem-sc-reduction-nilradical-nilpotent",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   },
+   {
+    "node": "lem-weil-pbc-geonormal-dim-one-smooth",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-geonormal-insep",
+    "why": "Generic algebraic-geometric tool for normalized marked generic curves, not a replacement of the constructible finite-Tor stability route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-normalization",
+  "lem-pc-homeo-pure-insep",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-sc-normalization-exists",
+  "lem-sc-reduction-nilradical-nilpotent",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-pbc-geonormal-dim-one-smooth",
+  "lem-weil-pbc-normalization-geonormal-insep"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-581253e94",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-581253e94 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all 21 cited statements in full, and the sources at 04KT (l.637), 0BXT (l.4994) and 0C3N (l.5027 with the affine A'⊗K→B' paragraph). The statement is true and unchanged. Steps 1–8 are correct and their hypotheses hold: X_E is integral by geometric integrality. The marking is nowhere dense, has dim ≤ 0 and finitely many points, as 04KT requires. The invariant compositum comes from unique p-power roots, an explicit elementary step. The normalization identification over every T/E goes through the new affine node, which gives geometric integrality and N=N_E×_E K0. In step 5 nilpotence of √I/I holds on a Noetherian chart, and D is geometrically reduced, hence étale. In step 6 the semilinear lift comes from normalization functoriality with M=k(V), degree 1. In step 7 the flat-curve function-field node applies with B=Spec K and P=Spec K0, which is finite over K. In step 8 an arbitrary K' goes through the affine node. New node lem-sfb-integral-closure-geonormal-scalar-extension is true: B⊗L sits between A⊗L and its fraction field, is finite, and is normal, so it is integrally closed. It is not a duplicate: the existing comparison nodes cover separable extensions or finite purely inseparable towers only. New node lem-sfb-finite-georeduced-etale is true via 030W and 02GL. It is not a duplicate of the perfect-field node (a1) or of the field-only separability nodes. Neither new node restates a clause of the item. The off-unit tool_uses are generic and accepted, and no SGA is cited. On the batch-5 flag: lem-trf-flat-module-torsionfree-domain (and lem-trf-geometric-reducedness-algebraic-closure-test, also in the closure) is general commutative algebra. Neither assumption gives it and it is not a step of either proof, so it is not grounds for RETURN. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantMarkedGenericNormalization",
+  "declaration": "AlgebraicGeometry.exists_invariant_marked_generic_normalization",
+  "declarations": [
+   "AlgebraicGeometry.InvariantMarkedGenericNormalization.genericTensor",
+   "AlgebraicGeometry.InvariantMarkedGenericNormalization.genericTensorLeft",
+   "AlgebraicGeometry.InvariantMarkedGenericNormalization.genericTensorRight",
+   "AlgebraicGeometry.InvariantMarkedGenericNormalization.Data",
+   "AlgebraicGeometry.exists_invariant_marked_generic_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantMarkedGenericNormalization.lean",
+  "statement": "theorem exists_invariant_marked_generic_normalization (K : Type u) [Field K] (X : Scheme.{u}) [IsIntegral X] (f : X ⟶ Spec (.of K)) [IsProper f] [GeometricallyIntegral f] (hdim : topologicalKrullDim X = 1) (Z : TopologicalSpace.Closeds X) (hZ : Z ≠ ⊤) (H : Type v) [Group H] [Finite H] (aK : H →* Aut (Spec (.of K))) (aX : H →* Aut X) (hcompat : ∀ h : H, (aX h).hom ≫ f = f ≫ (aK h).hom) (hmark : ∀ (h : H) (x : X), (aX h).hom x ∈ Z ↔ x ∈ Z) : ∃ (K₀ : Type u) (_ : Field K₀) (_ : Algebra K K₀), Nonempty (InvariantMarkedGenericNormalization.Data f Z H aK aX K₀) ∧ (∀ [CharZero K], Function.Surjective (algebraMap K K₀))",
+  "branch": "sheaf-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The Data structure packages exactly the existential witnesses and all compatibility clauses. Spectrum actions encode arbitrary semilinear field actions; inverse group elements give the equivalent usual ring action. genericTensor and its two maps are real tensor-product constructions using the scalar map induced on generic spectra."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7afe8060",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read item node, all stmt_dep records (ReducedNormalization, FunctionField, FieldTower, Mathlib GeometricallyIntegral), the module and report. Hypotheses match without strengthening ([IsIntegral X] implied by GeometricallyIntegral over a field; IsProper covers finite type; Z ≠ ⊤ allows empty; Spec-automorphism actions ≅ field actions via inverses; nonfaithful/constant-moving allowed). Data covers every clause: N pinned to reducedNormalization of X_K0 with ν; smooth/proper/geom integral/dim 1; D reduced closed immersion with support = preimage of Z, finite étale; lifted H-action commuting with both maps, preserving D; F⊗K0 field with comparison pinned by both generic Spec equations; arbitrary K'/K0 base change with e and j pinned by projection equations, D_K' reduced with correct support; char 0 surjective algebraMap. Statement verbatim; declarations match; helpers real; only sorry is the theorem; imports exist live. Advisory only: Second reading section is a non-reading (precedent Q86/Q97 advisory); docstring step 2 has tab from \\to inherited from the landed node text; finite-type dep rendered via IsProper. No compile needed (no change)."
+ }
+}

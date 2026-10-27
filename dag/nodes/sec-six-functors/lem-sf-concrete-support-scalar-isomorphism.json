@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-concrete-support-scalar-isomorphism",
+ "kind": "statement",
+ "title": "Invertibility of the specified finite quotient support comparison",
+ "statement": "In the finite-field and ℓ-adic coefficient setting [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension], let X,Y be finite type over the algebraic closure of the finite field, f:X→Y separated finite type, and c any compactification. For positive levels 1≤k≤n and a finite Tor constructible K [def-weil-finite-tor-amplitude] at level n, the specified supportComparison [def-sf-concrete-projection-reduction-data] for the quotient A_n→A_k is an isomorphism. This concerns the canonical scalar-adjunction mate in the chosen ringed proper/open coordinates, with the two scalarIso presentation changes. The schemes structure morphisms need not be separated.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0E48; more-etale.tex Tags 0GL1 and 0GL6. Concrete proper/open argument of fix-prop-projection-formula, proof sentence 2."
+ },
+ "stmt_deps": [
+  "def-sf-concrete-projection-reduction-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Finite Tor constructibility is preserved by the actual scalar quotient input. Apply the canonical intrinsic finite compact-support coefficient theorem.",
+   "uses": [
+    "lem-finite-compact-support-scalar-comparison",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the constant-ring proper/open presentation with the intrinsic one using the unit-preserving open comparison and separately derived canonical direct-image comparison. Their restriction squares agree by their ordinary unit and K-injective normalizations. Scalar-adjunction uniqueness identifies the resulting invertible map with PurCompactSupport.comparison. The two scalarIso factors are invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-finite-compact-support-scalar-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete finite coefficient-reduction square, proof sentence 2; the component argument recorded above."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and extension of scalar coefficients commute with tensor product and adjunction counit projection formula",
+   "results": "Ordinary ModuleCat unit/counit and Presheaf.pullbackComp hits; no normalized unbounded constant-ring proper/open square.",
+   "verdict": "No exact match.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"counit\"",
+   "results": "Eleven generic adjunction APIs; use Hom-equivalence naturality and mate equations.",
+   "verdict": "Useful generic glue, no exact scalar comparison.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|coefficient)|(scalar|coefficient).*projection",
+   "results": "One unrelated CStarProjection hit. Local rg located normalized scalar tensor, proper/open and compact-support comparisons used here.",
+   "verdict": "Use the stated library comparisons.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConcreteProjectionReductionSquare",
+  "date": "2026-10-25",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-concrete-projection-reduction-square",
+   "place": "Normalized concrete proper/open coefficient square, its components and coefficient cocycles."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConcreteSupportScalarIsomorphism",
+  "file": "lean/Sheaf/Paper/ConcreteSupportScalarIsomorphism.lean",
+  "declaration": "WeilConjectures.ConcreteProjectionReduction.supportComparison_quotient_isIso",
+  "declarations": [
+   "WeilConjectures.ConcreteProjectionReduction.supportComparison_quotient_isIso"
+  ],
+  "statement": "theorem supportComparison_quotient_isIso\n    (m : Models.{u}) (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E]\n    (n : ℕ) (hn : 1 ≤ n) (k : ℕ) (hk : 1 ≤ k) (hkn : k ≤ n)\n    (X Y : Over (Spec (CommRingCat.of D.k)))\n    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left]\n    (c : Compactification f.left)\n    (K : proEtaleDerivedCategory X.left (Padic.coefficientExtensionRing C.l E n))\n    (hK : finiteTorConstructible C.l E n hn X.left K) :\n    IsIso (supportComparison m (quotient C.l E hkn) c K)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-concrete-projection-reduction-square + 6 new/2 changed nodes vs delivered Lean (compiled set + 8 copied OpenScalarTensorData importers in sandbox, axioms printed); change records vs Lean diffs; claims lock of IntegralCompactSupportCoefficientComparison (F8)"
+ }
+}

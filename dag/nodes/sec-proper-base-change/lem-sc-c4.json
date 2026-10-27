@@ -141,7 +141,32 @@
   "def-sc-curves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      325,
+      396
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -182,5 +207,54 @@
    "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_ne_zero"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $k$ be algebraically closed, let $C$ be a\nsmooth separated connected curve over $k$, let\n$r$ be a prime different from $\\operatorname{char}k$, and let the constant sheaf\n$\\mathbf F_r$ be viewed as a\nconstructible sheaf. Then\n$\\mathbf F_r$ satisfies $\\mathcal C_4(C,\\mathbf F_r)$ of\n[def-weil-pbc-eight-curve-assertions]: $H^q(C_{\\Et},\\mathbf F_r)$\nis a finite abelian group for every $q\\geq0$.",
+  "proof": [
+   {
+    "text": "The constant sheaf $\\mathbf F_r$ is locally constant with finite stalks on $C$, so it is constructible by [def-weil-pbc-etale-sheaves]. This is the sheaf to which the assertion $\\mathcal C_4(C,\\mathbf F_r)$ applies.",
+    "uses": [
+     "def-weil-pbc-etale-sheaves"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By [lem-sc-compactification] and [lem-sc-affine-open-proper], the smooth separated connected curve $C$ is either proper or affine. These two cases exhaust the proof.",
+    "uses": [
+     "lem-sc-compactification",
+     "lem-sc-affine-open-proper"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "If $C$ is proper, [thm-sc-proper-cohomology] identifies the cohomology groups with $\\mathbf Z/r\\mathbf Z$ in degrees $0$ and $2$, with $(\\mathbf Z/r\\mathbf Z)^{2g}$ in degree $1$, and with $0$ in higher degrees. Since $r$ is finite, each of these abelian groups is finite.",
+    "uses": [
+     "thm-sc-proper-cohomology"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "If $C$ is affine, [thm-sc-affine-cohomology] gives $H^0(C,\\mathbf F_r)=\\mathbf Z/r\\mathbf Z$ and vanishing in degrees above $1$. In degree $1$ it gives an extension whose subquotient is the finite group $\\operatorname{Pic}(C)[r]$ from [lem-sc-pic-affine] and whose complementary unit quotient is finite by [lem-sc-affine-unit-quotient]. An extension of finite abelian groups is finite, so $H^1(C_{\\Et},\\mathbf F_r)$ is finite.",
+    "uses": [
+     "thm-sc-affine-cohomology",
+     "lem-sc-pic-affine",
+     "lem-sc-affine-unit-quotient"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The proper and affine cases establish finiteness of $H^q(C_{\\Et},\\mathbf F_r)$ for every $q\\geq0$, which is precisely $\\mathcal C_4(C,\\mathbf F_r)$ in [def-weil-pbc-eight-curve-assertions].",
+    "uses": [
+     "def-weil-pbc-eight-curve-assertions"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

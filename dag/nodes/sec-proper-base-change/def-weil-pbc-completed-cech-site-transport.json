@@ -1,0 +1,123 @@
+{
+ "id": "def-weil-pbc-completed-cech-site-transport",
+ "kind": "definition",
+ "title": "Canonical small completed ringed site and coefficient transport",
+ "statement": "For a scheme X and adic coefficient datum d, use AsSmall X.ProEt, the topology induced along the inverse of AsSmall.equiv, and the pullback of the actual completed coefficient ring. Use Mathlib pushforwardPushforwardEquivalence for modules and its derived equivalence. The scalar section of a in A is the actual compatible-residue scalar followed by the specified completed coefficient comparison and reindexing. The map from the small-site regular module to the transported original regular module is the map classified by the global section 1. These are [def-weil-pbc-intrinsic-completion, def-weil-pbc-bounded-constructible-complete, def-weil-sheaf-of-modules-category] in a common small-site universe.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E with the canonical equivalence of ringed sites; Modules on Sites, Tag 03DA."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The exterior Koszul complex on a finite sequence is the dual of the tensor product of two term complexes",
+   "results": "8 hits: tensorObj, PiTensorProduct.dualDistribInvOfBasis, ModuleCat.exteriorPower, PiTensorProduct.dualDistrib, ModuleCat.exteriorPower.iso₀, HasTensor, PiTensorProduct.dualDistribEquiv, ExteriorAlgebra. No comparison of these complex models.",
+   "date": "2026-10-25",
+   "verdict": "No direct theorem; use the existing exterior and tensor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"Iso\"",
+   "results": "10 hits, the degree-zero and degree-one natural isomorphisms only.",
+   "date": "2026-10-25",
+   "verdict": "No finite augmented tower comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(dual|tensor)|Koszul.*(dual|tensor)",
+   "results": "No Mathlib hits. Local source search found completedKoszulPowerSheaf, ringedKoszulDualTower, mapBifunctorComparison and sliceTensorIso; none states the required comparison across both coefficient restriction and this site equivalence.",
+   "date": "2026-10-25",
+   "verdict": "The finite coefficient comparison and the tensor transport are distinct missing ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedKoszulRoosComparison",
+  "date": "2026-10-25",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback: the displayed derived-inverse-limit formula and final sentence identifying its comparison with the completion map. Tag 0A0E compares the supporting finite Koszul model with augmented Cech internal Hom, including the prescribed unit.",
+   "via": [
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilCompletedKoszulSite",
+  "file": "lean/Sheaf/Paper/WeilCompletedKoszulSite.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedCechModulesEquiv",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedCechSite",
+   "AlgebraicGeometry.Scheme.completedCechSiteEquiv",
+   "AlgebraicGeometry.Scheme.completedCechTopology",
+   "AlgebraicGeometry.Scheme.completedCechRing",
+   "AlgebraicGeometry.Scheme.completedCechModulesEquiv",
+   "AlgebraicGeometry.Scheme.completedCechDerivedEquiv",
+   "AlgebraicGeometry.Scheme.completedCechScalarMap",
+   "AlgebraicGeometry.Scheme.completedCechScalar",
+   "AlgebraicGeometry.Scheme.completedCechCoefficientUnit"
+  ],
+  "statement": "def completedCechModulesEquiv : pbcModules X (pbcAdicCompletion X d) ≌ ringedSiteModules.{u + 1, u + 1, u + 1, u + 1} ((sheafCompose (completedCechTopology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (completedCechRing X d))",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-25",
+  "note": "Existing site/scalar/module/derived constructions moved verbatim from the comparison module; no duplicate definition. The comparison publicly re-exports this module."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70624",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T162026-L-211085",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70624",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T162026-L-211085",
+  "kind": "interface",
+  "note": "independent cc review: completedKoszulFiniteComparison (statement unchanged) proved from completedKoszulCoefficientComparison + completedCechTensorTransport, both read true against completedKoszulPower (degrees −r..0, f^(m+1)) and ringedKoszulDualTower (double factors in degrees 0,1, dual in −r..0) with diagonal transitions; moved completedCech* defs verbatim, public re-export; 4 delivered modules + 4 direct importers compiled; axioms only sorryAx from the new sorries"
+ }
+}

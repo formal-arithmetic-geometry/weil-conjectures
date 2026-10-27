@@ -1,0 +1,349 @@
+{
+ "id": "lem-per-permissible-adapted-standard-basis",
+ "kind": "statement",
+ "title": "Adapted standard basis at a permissible transform with unchanged degrees without reducedness",
+ "statement": "Let $(T,\\mathfrak M,k)$ be a nonzero commutative regular local ring, with residue field $k=T/\\mathfrak M$ [def-weil-regular-scheme, def-weil-residue-field]. Fix a regular system of parameters $(x_0,\\ldots,x_r,y_1,\\ldots,y_s)$, where $r,s\\geq0$, and put $P=(x_0,\\ldots,x_r)$ [def-weil-pbc-regular-system-of-parameters]. Let $\\mathfrak a\\subseteq P$ be an ideal, put $R=T/\\mathfrak a$, $\\mathfrak m=\\mathfrak M/\\mathfrak a$, $I=P/\\mathfrak a$, $A=T/P=R/I$, and assume $G=\\operatorname{gr}_I R$ is flat over $A$ [def-weil-pbc-associated-graded-ring, def-weil-pbc-flat-ring-map]. Set $S=G\\otimes_A k$ [def-weil-pbc-module-tensor-product] and $B=k[X_0,\\ldots,X_r]$, with all variables of degree one [def-weil-pbc-mv-polynomial-ring, def-pc-standard-graded-algebra].\nAssume no minimal prime of $R$ contains $I$, where a minimal prime contains no strictly smaller prime. Let $z\\in\\operatorname{Bl}_I(\\operatorname{Spec}R)$ be over $\\mathfrak m$ and belong to the chart $\\operatorname{Spec}R[I/\\bar x_0]$ [def-weil-affine-spectrum, def-nagata-affine-blowup, def-nagata-blowup-chart-ring]. Put\n$$D_T=T[t_1,\\ldots,t_r]/(x_0t_i-x_i:1\\leq i\\leq r),\\qquad T'=(D_T)_{\\mathfrak p'},$$\nwhere $\\mathfrak p'$ is the inverse image of $z$ under the surjection $D_T\\twoheadrightarrow R[I/\\bar x_0]$, $t_i\\mapsto\\bar x_i/\\bar x_0$. Assume $T'$ is regular local, let $R_z=\\mathcal O_{\\operatorname{Bl}_I(\\operatorname{Spec}R),z}$, and put $\\mathfrak a'=\\ker(T'\\twoheadrightarrow R_z)$ [def-weil-pbc-localization-at-prime].\nFor a regular local ring $(V,\\mathfrak l,\\kappa)$ and an ideal $\\mathfrak b\\subseteq\\mathfrak l$, let $E(V,\\mathfrak b)=\\ker(\\operatorname{gr}_{\\mathfrak l}V\\to\\operatorname{gr}_{\\mathfrak l/\\mathfrak b}(V/\\mathfrak b))$. Define $\\nu^*(V,\\mathfrak b)$ to be the nondecreasing sequence containing $d$ with multiplicity $\\dim_\\kappa(E_d/(\\sum_{j=1}^d (\\operatorname{gr}_{\\mathfrak l}V)_j E_{d-j}))$, followed by infinitely many $\\infty$'s. Equivalently these are the degrees of a minimal homogeneous generating set of $E$, padded by $\\infty$.\nLet $\\mathfrak p\\subset k[t_1,\\ldots,t_r]$ be the prime of the projective point $z$ in the exceptional ambient fibre chart, whose coordinates are $t_i=X_i/X_0$; it is obtained by reducing the ambient chart modulo $\\mathfrak M D_T$. Suppose $\\nu^*(T',\\mathfrak a')=\\nu^*(T,\\mathfrak a)$. Then there is a finite sequence $f_1,\\ldots,f_m\\in\\mathfrak a\\setminus\\{0\\}$, possibly empty if $\\mathfrak a=0$, with $1\\leq d_1\\leq\\cdots\\leq d_m$, such that $f_i\\in P^{d_i}$, $f_i\\in\\mathfrak M^{d_i}\\setminus\\mathfrak M^{d_i+1}$, and the initial forms $\\phi_i=f_i\\bmod\\mathfrak M^{d_i+1}$ form a minimal homogeneous generating set of $E(T,\\mathfrak a)$ in the parameter polynomial ring $\\operatorname{gr}_{\\mathfrak M}T=k[X,Y]$. Moreover $\\phi_i\\in k[X]_{d_i}$ and\n$$\\phi_i(1,t_1,\\ldots,t_r)/1\\in\\bigl(\\mathfrak p\\, k[t_1,\\ldots,t_r]_{\\mathfrak p}\\bigr)^{d_i}$$\nfor every $i$. No reducedness hypothesis is imposed on $R$.",
+ "source": {
+  "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+  "place": "Hironaka, Certain numerical characters of singularities, J. Math. Kyoto Univ. 10 (1970), basic assumptions (2.1)-(2.2), pp.155-156; section 13, pp.168-169, definition of the order algebra; Proposition 21(i)-(ii), p.181, derived by the induction of Lemma 20, pp.175-181. Equality of degree sequences satisfies the proposition's non-strict lexicographic hypothesis. The source does not assume X reduced. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. No Stacks tag states this specialized theorem."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-residue-field",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-affine-spectrum",
+  "def-nagata-affine-blowup",
+  "def-nagata-blowup-chart-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-trf-local-standard-basis-invariants",
+  "def-trf-permissible-basis-chart-data",
+  "def-trf-adic-initial-ideal-generator-degrees",
+  "def-sfb-nodal-tangent-comparison-data",
+  "def-trf-permissible-coordinate-chart-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-normal-flat-double-initial-ideal] with the specified $T,P,\\mathfrak a$ and parameters. All its hypotheses occur in the statement: $T$ is regular local, $\\mathfrak a\\subseteq P$, and $G$ is $A$-flat. Put $C=\\ker(B\\twoheadrightarrow S)$. The cited statement identifies the parameter polynomial ring with $\\operatorname{gr}_{\\mathfrak M}T$ and gives $E(T,\\mathfrak a)=Ck[X,Y]$. The degree-zero map $k\\to S_0=k$ is the identity, so $C_0=0$.",
+   "uses": [
+    "lem-trf-normal-flat-double-initial-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka (1970), (19.1), p.176, and Lemma 20 to Proposition 21, pp.176–181; explicit normal-flat lifting and finite induction supplied here. Online original read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The polynomial ring $B$ is a finitely generated algebra over the field $k$, so [lem-wf-affine-noetherian-components] gives that it is Noetherian. Choose finite ideal generators for $C$, and replace each by its finitely many homogeneous components. These components still lie in $C$, since $C$ is a graded kernel, and generate $C$. Remove redundant elements to get a minimal homogeneous generating family $\\phi_1,\\ldots,\\phi_m$, ordered by degrees $d_i\\geq1$. Its images form a basis of $C/B_+C$: they span by generation, and a homogeneous linear dependence of their residues in a fixed degree would express one generator as a combination of the other same-degree generators and of lower-degree generators, contradicting minimality. Conversely, generation follows by induction on degree from spanning this quotient: subtract constant combinations in degree $d$, then write the remainder in $\\sum_{j>0}B_jC_{d-j}$ and apply the smaller-degree cases. This also explains the degree multiplicities in $\\nu^*$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka (1970), (19.1), p.176, and Lemma 20 to Proposition 21, pp.176–181; explicit normal-flat lifting and finite induction supplied here. Online original read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The same $\\phi_i$ form a minimal homogeneous generating set of $Ck[X,Y]$: generation follows by expanding coefficients in $Y$, and a relation making one generator redundant would, on setting $Y=0$, make it redundant in $C$. Thus $(d_1,\\ldots,d_m,\\infty,\\ldots)=\\nu^*(T,\\mathfrak a)$. If $m=0$, Step 1 gives $E=0$. By [lem-weil-pbc-krull-intersection-jacobson], $\\bigcap_n\\mathfrak M^nT=0$: $T$ is Noetherian local, $\\mathfrak M$ is its Jacobson radical, and $T$ is generated by $1$ as a module over itself. A nonzero $f\\in\\mathfrak a$ would therefore have finite $\\mathfrak M$-order and a nonzero initial form in $E$, a contradiction. Hence $m=0$ implies $\\mathfrak a=0$; the empty family proves the assertion in that case. Continue with $m\\geq1$.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ (lemma-intersection-powers-ideal-module), part (2)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-regular-local-generators-regular-sequence], the full parameter list is regular. Its $x$-prefix is regular directly from [def-weil-pbc-regular-sequence]: its successive multiplication conditions are a prefix of those of the full list, and its final quotient is nonzero because $P\\subseteq\\mathfrak M$. Apply [lem-pur-regular-sequence-graded-polynomial] to that prefix. It identifies $\\operatorname{gr}_PT=A[X]$, sending $X_i$ to $[x_i]_1$, with its displayed monomial formula. In degree $d$ let $K_d$ be the kernel of $A[X]_d\\twoheadrightarrow G_d$. This map is onto: every class in $I^d/I^{d+1}$ is a sum of degree-$d$ products of the generators $\\bar x_i$ with coefficients reduced to $A$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "lem-pur-regular-sequence-graded-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NQ (lemma-regular-ring-CM), 00LN (lemma-regular-quasi-regular), 061P (definition-quasi-regular-sequence), 061N (equation-quasi-regular)."
+   }
+  },
+  {
+   "text": "Each $G_d$ is an $A$-direct summand of $G=\\bigoplus_eG_e$, hence flat by [def-weil-pbc-flat-ring-map]: tensor an injection with the split inclusion $G_d\\to G$; the tensor projection splits that inclusion, so injectivity for the full $G$ implies injectivity for $G_d$. Apply [lem-weil-pbc-flat-quotient-tensor-injective] to $0\\to K_d\\to A[X]_d\\to G_d\\to0$ and the left tensor factor $k$. It gives $\\ker(k\\otimes_A A[X]_d\\to k\\otimes_AG_d)=\\operatorname{im}(k\\otimes_AK_d)$. Explicitly $\\lambda\\otimes\\sum a_\\alpha X^\\alpha\\mapsto\\sum\\lambda\\bar a_\\alpha X^\\alpha$ identifies the middle term with $B_d$, and tensor swapping identifies the last term with $S_d$. The resulting map is precisely $\\beta_d$. Therefore every $\\phi\\in C_d$ is a finite sum $\\sum_\\ell\\lambda_\\ell\\bar u_\\ell$ with $u_\\ell\\in K_d$. Lift each $\\lambda_\\ell\\in k$ to $a_\\ell\\in A$; then $u=\\sum_\\ell a_\\ell u_\\ell\\in K_d$ reduces to $\\phi$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL (lemma-flat-tor-zero); explicit polynomial-tensor identification."
+   }
+  },
+  {
+   "text": "For each $\\phi_i$, choose $u_i=\\sum_{|\\alpha|=d_i}a_\\alpha X^\\alpha\\in K_{d_i}$ reducing to $\\phi_i$. Lift its coefficients to $T$ and put $b_i=\\sum\\widetilde a_\\alpha x^\\alpha\\in P^{d_i}$. Since $u_i\\in K_{d_i}$, the image of $b_i$ in $R$ lies in $I^{d_i+1}$. The map $P^{d_i+1}\\to I^{d_i+1}$ is onto by the definition $I=P/\\mathfrak a$; choose $e_i\\in P^{d_i+1}$ with that image and set $f_i=b_i-e_i$. Then $f_i\\in\\mathfrak a\\cap P^{d_i}$, and its class modulo $\\mathfrak M^{d_i+1}$ is $\\phi_i$: $e_i$ vanishes there, and each coefficient may be reduced modulo $\\mathfrak M$. In particular $f_i$ is nonzero of order exactly $d_i$. These $f_i$ give the initial standard basis to which the correction will be applied.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka (1970), (19.1), p.176, and Lemma 20 to Proposition 21, pp.176–181; explicit normal-flat lifting and finite induction supplied here. Online original read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Use [lem-trf-parameter-blowup-algebra-regular] with the full parameter list, subset $\\{x_0,\\ldots,x_r\\}$ and distinguished parameter $x_0$. This subset is nonempty and the dimension is $r+s+1\\geq1$. It identifies $D_T[1/x_0]=T[1/x_0]$ and makes multiplication by $x_0$ on $D_T$ injective, so $D_T$ embeds in that localization. If $f\\in P^d$, write $f=\\sum_{|\\alpha|=d}a_\\alpha x^\\alpha$. Its quotient by $x_0^d$ is $\\sum a_\\alpha t_1^{\\alpha_1}\\cdots t_r^{\\alpha_r}\\in D_T$, with $x_0/x_0=1$. Thus each $g_i=f_i/x_0^{d_i}$ is a well-defined element of $T'$. Put $H=(x_0,y_1,\\ldots,y_s)T'$, and define $U_d=\\{\\phi\\in B_d:\\phi(1,t)/1\\in(\\mathfrak p k[t]_{\\mathfrak p})^d\\}$.",
+   "uses": [
+    "lem-trf-parameter-blowup-algebra-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka (1970), (19.1), p.176, and Lemma 20 to Proposition 21, pp.176–181; explicit normal-flat lifting and finite induction supplied here. Online original read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Induct on $a=1,\\ldots,m+1$. The invariant before stage $a$ is: the current $f_i$ lie in $\\mathfrak a\\cap P^{d_i}$, have orders $d_i$, and have minimal homogeneous initial forms generating $E$; and, for each $j<a$, $\\phi_j\\in U_{d_j}$ and there is $w_j\\in H(g_1,\\ldots,g_{j-1})T'$ with $\\operatorname{ord}_{\\mathfrak M'}(g_j-w_j)=d_j$. At $a=1$ the latter requirements are empty and Steps 3–7 establish the former. The numerical hypothesis gives $\\nu^*(T',\\mathfrak a')_j=d_j$ for every $j\\leq m$, throughout the induction: the ring and ideal defining this sequence never change, and the list of degrees of the current basis will be preserved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka (1970), (19.1), p.176, and Lemma 20 to Proposition 21, pp.176–181; explicit normal-flat lifting and finite induction supplied here. Online original read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "At stage $a\\leq m$, apply [lem-per-permissible-standard-basis-one-step] to the current full list. Its ambient rings, chart point, absence of components in the center, and flatness are exactly those assumed here; the cited correction has no reducedness hypothesis. The earlier-index hypotheses are the induction invariant and numerical equality; the remaining hypothesis is $\\nu^*(T',\\mathfrak a')_a=d_a\\geq d_a$. Obtain $c_j\\in P^{d_a-d_j}$ and $v_a\\in H(g_1,\\ldots,g_{a-1})T'$ such that $f_a^*=f_a-\\sum_{j<a}c_jf_j$ has order $d_a$, initial form in $U_{d_a}$, and its divided transform $g_a^*$ satisfies $\\operatorname{ord}_{\\mathfrak M'}(g_a^*-v_a)=d_a$. Replace only $f_a$ by $f_a^*$ and take $w_a=v_a$.",
+   "uses": [
+    "lem-per-permissible-standard-basis-one-step"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka (1970), (19.1), p.176, and Lemma 20 to Proposition 21, pp.176–181; explicit normal-flat lifting and finite induction supplied here. Online original read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Check preservation of the invariant explicitly. Each $c_jf_j$ lies in $P^{d_a-d_j}P^{d_j}=P^{d_a}$ and in $\\mathfrak a$, so $f_a^*\\in\\mathfrak a\\cap P^{d_a}$. In degree $d_a$ its initial form is $\\phi_a^*=\\phi_a-\\sum_{j<a}\\bar c_j\\phi_j$, where $\\bar c_j$ denotes the degree-$(d_a-d_j)$ class of $c_j$ in $\\operatorname{gr}_{\\mathfrak M}T$ (possibly zero). This elementary triangular generator replacement is invertible, using $\\phi_a=\\phi_a^*+\\sum\\bar c_j\\phi_j$. It preserves generation of $E$ and minimality: on $E/(k[X,Y]_+E)$ it subtracts only constant combinations of earlier generators of the same degree, an invertible triangular change of basis. The new form belongs to $k[X]$ because it belongs to $U_{d_a}$. Earlier $f_j,g_j,w_j$ are unchanged; their correction conditions use only indices smaller than $j$, so they persist. All later $f_i$ are unchanged. This proves the invariant at $a+1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka (1970), (19.1), p.176, and Lemma 20 to Proposition 21, pp.176–181; explicit normal-flat lifting and finite induction supplied here. Online original read; archival copy WANTED."
+   }
+  },
+  {
+   "text": "At $a=m+1$ the induction has corrected every index. Retain the resulting $f_1,\\ldots,f_m$ and discard the auxiliary $g_i,w_i$. They lie in $\\mathfrak a\\setminus\\{0\\}$, have the prescribed $P$- and $\\mathfrak M$-orders, and their initial forms minimally generate $E$. For each $i$, membership $\\phi_i\\in U_{d_i}$ says, by its displayed definition, exactly that $\\phi_i\\in k[X]_{d_i}$ and $\\phi_i(1,t)/1\\in(\\mathfrak p k[t]_{\\mathfrak p})^{d_i}$. These are all conclusions of the item. The case $\\mathfrak a=0$ was already handled in Step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka (1970), (19.1), p.176, and Lemma 20 to Proposition 21, pp.176–181; explicit normal-flat lifting and finite induction supplied here. Online original read; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-normal-flat-double-initial-ideal",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-weil-pbc-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-trf-parameter-blowup-algebra-regular",
+  "lem-per-permissible-standard-basis-one-step"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+  "place": "Explicit normal-flat lifting and finite triangular induction, following Hironaka (1970), (19.1), Lemma 20 and Proposition 21, pp.176–181, read online. The local archival original remains WANTED. Reuses the preparation argument of the existing reduced theorem, with all supporting statements rechecked; invokes the new nonreduced one-index correction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-permissible-adapted-standard-basis: regular local quotient with normally flat center has a standard basis of normal initial forms of maximal dehomogenized order when nu star is unchanged, without reducedness",
+   "results": "{\"t\": \"2026-10-24T09:56:22Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-permissible-adapted-standard-basis: regular local quotient with normally flat center has a standard basis of normal initial forms of maximal dehomogenized order when nu star is unchanged, without reducedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"IsLocalRing.basisQuotient\", \"IsLocalRing.basisQuotient_apply\", \"Module.exists_basis_of_span_of_flat\"], \"digest\": \"35332d2337a6945e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; homogeneous components, ordinary polynomial degrees, localizations, power-series generators and smooth presentations do not assert the Hilbert--Samuel/standard-degree comparison or the adapted basis theorem for a permissible blowup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsHomogeneous\", \"Ideal\"",
+   "results": "{\"t\": \"2026-10-24T09:56:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"IsHomogeneous\\\", \\\"Ideal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; homogeneous components, ordinary polynomial degrees, localizations, power-series generators and smooth presentations do not assert the Hilbert--Samuel/standard-degree comparison or the adapted basis theorem for a permissible blowup."
+  },
+  {
+   "tool": "grep",
+   "query": "normal.?flat|adapted.?standard|Hironaka",
+   "results": "{\"t\": \"2026-10-24T09:56:23Z\", \"tool\": \"grep\", \"query\": \"normal.?flat|adapted.?standard|Hironaka\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; homogeneous components, ordinary polynomial degrees, localizations, power-series generators and smooth presentations do not assert the Hilbert--Samuel/standard-degree comparison or the adapted basis theorem for a permissible blowup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-permissible-adapted-standard-basis: Hironaka proposition 21 choose initial homogeneous forms of degree d vanishing to order d in the exceptional chart",
+   "results": "{\"t\": \"2026-10-24T09:56:23Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-permissible-adapted-standard-basis: Hironaka proposition 21 choose initial homogeneous forms of degree d vanishing to order d in the exceptional chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.homogeneousComponent_isHomogeneous\", \"MvPowerSeries.IsHomogeneous\", \"MvPolynomial.IsHomogeneous\", \"Polynomial.Sequence.basis\", \"Polynomial.Sequence.basis_eq_self\", \"MvPolynomial.homogeneousComponent\", \"MvPolynomial.coeff_homogeneousComponent\", \"Polynomial.degreeLT.basis\"], \"digest\": \"6c8e6c4e75747f10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; homogeneous components, ordinary polynomial degrees, localizations, power-series generators and smooth presentations do not assert the Hilbert--Samuel/standard-degree comparison or the adapted basis theorem for a permissible blowup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-permissible-adapted-standard-basis: unchanged minimal degrees after permissible blowing up yield generators in powers of the center whose initial forms have maximal projective order",
+   "results": "{\"t\": \"2026-10-24T09:56:26Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-permissible-adapted-standard-basis: unchanged minimal degrees after permissible blowing up yield generators in powers of the center whose initial forms have maximal projective order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivisorAt.mod_coe_eq_self\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\", \"PowerSeries.IsWeierstrassDivisorAt.mod\"], \"digest\": \"650d7bf93cae1f92\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; homogeneous components, ordinary polynomial degrees, localizations, power-series generators and smooth presentations do not assert the Hilbert--Samuel/standard-degree comparison or the adapted basis theorem for a permissible blowup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"Ideal\", \"IsHomogeneous\"",
+   "results": "{\"t\": \"2026-10-24T12:07:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"Ideal\\\", \\\"IsHomogeneous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern polynomial division, module bases, smooth presentations, regular sequences or Proj charts, and give neither the permissible-blowup correction nor the adapted standard-basis theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Hironaka|standard.?bas[ie]|permissible|normal.?flat",
+   "results": "{\"t\": \"2026-10-24T12:07:46Z\", \"tool\": \"grep\", \"query\": \"Hironaka|standard.?bas[ie]|permissible|normal.?flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Data/Matrix/Basis.lean\", \"Mathlib/Data/Matrix/Basis.lean\", \"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"Mathlib/LinearAlgebra/Matrix/StdBasis.lean\", \"Mathlib/LinearAlgebra/Matrix/StdBasis.lean\", \"Mathlib/LinearAlgebra/Matrix/StdBasis.lean\"], \"digest\": \"d97b4a5d2ff42512\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern polynomial division, module bases, smooth presentations, regular sequences or Proj charts, and give neither the permissible-blowup correction nor the adapted standard-basis theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "permissible|Hironaka|normal.?flat|adapted.?standard",
+   "results": "{\"t\": \"2026-10-24T12:08:18Z\", \"tool\": \"grep\", \"query\": \"permissible|Hironaka|normal.?flat|adapted.?standard\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern polynomial division, module bases, smooth presentations, regular sequences or Proj charts, and give neither the permissible-blowup correction nor the adapted standard-basis theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-permissible-adapted-standard-basis: normally flat regular center and adapted generators of the initial ideal after blowup without reducedness",
+   "results": "{\"t\": \"2026-10-24T12:08:18Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-permissible-adapted-standard-basis: normally flat regular center and adapted generators of the initial ideal after blowup without reducedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Sequence.basis\", \"Polynomial.Sequence.basis_eq_self\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.PreSubmersivePresentation.basis\", \"Algebra.smoothLocus\", \"Algebra.IsSmoothAt\", \"Algebra.FormallySmooth.of_perfectField\"], \"digest\": \"a9f64fb9617354ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern polynomial division, module bases, smooth presentations, regular sequences or Proj charts, and give neither the permissible-blowup correction nor the adapted standard-basis theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-permissible-adapted-standard-basis: unchanged generator degrees under permissible blowing up give a standard basis with initial forms of maximal projective order",
+   "results": "{\"t\": \"2026-10-24T12:08:20Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-permissible-adapted-standard-basis: unchanged generator degrees under permissible blowing up give a standard basis with initial forms of maximal projective order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.basis\", \"WeierstrassCurve.Affine.CoordinateRing.basis_apply\", \"WeierstrassCurve.Affine.CoordinateRing.coe_basis\", \"WeierstrassCurve.Affine.CoordinateRing.basis_one\", \"Algebra.SubmersivePresentation.basisDeriv\", \"WeierstrassCurve.Affine.CoordinateRing.basis_zero\", \"Algebra.SubmersivePresentation.basisKaehler\", \"Algebra.Generators.exists_presentation_of_basis_cotangent\"], \"digest\": \"812c198071a4f5e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern polynomial division, module bases, smooth presentations, regular sequences or Proj charts, and give neither the permissible-blowup correction nor the adapted standard-basis theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-scheme-near-point-order-generators",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-resolution branch: BMT §6.3 common-presentation assertion and Remark 6.2, near-point component-profile survival under permissible histories and auxiliary tests. Structural input: Normal cone at a Hilbert--Samuel near point without reducedness. Lower local input: Homogeneous translation symmetry at a near point without reducedness. Numerical input: minimal homogeneous equations of the normal-cone fibre have maximal order at the projective near point (Hironaka Proposition 21(ii)). Ambient adapted-basis input (Hironaka Proposition 21(i)-(ii)).",
+   "via": [
+    "lem-per-scheme-near-point-order-generators",
+    "lem-per-scheme-near-point-additive-action",
+    "lem-per-scheme-near-point-normal-cone",
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-permissible-adapted-standard-basis",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed and lifted minimal normal-fibre equations via flat-quotient tensor exactness, then supplied the full induction with a new nonreduced single-index correction. Existing reduced one-step and adapted-basis theorems cannot be applied. Checked every preparation node without reducedness, preserved minimality through triangular changes, and covered empty basis, principal centre and arbitrary residue extensions. One new unsplit node, no Mathlib leaves.",
+  "blueprint": "Refines the inherited regular-resolution/near-point normal-cone branch of the ancestor lem-per-artin-gabber-affine-curve, Step 3, as recorded by blueprint.from; realizes normal-flat preparation (19.1) and the finite induction from Lemma 20 to Proposition 21. The latest ancestor proof has a different direct perverse-duality exposition; this split only refines its already imported subordinate algebra item, and does not change any chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-normal-flat-double-initial-ideal",
+    "why": "Generic commutative algebra tool for normal-flat standard-basis preparation (Noetherianity, separatedness, parameter graded rings, flat tensor exactness, or chart injection); the perverse-curve unit supplies no such algebra theorem. No alternate perverse or resolution route is used."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic commutative algebra tool for normal-flat standard-basis preparation (Noetherianity, separatedness, parameter graded rings, flat tensor exactness, or chart injection); the perverse-curve unit supplies no such algebra theorem. No alternate perverse or resolution route is used."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "Generic commutative algebra tool for normal-flat standard-basis preparation (Noetherianity, separatedness, parameter graded rings, flat tensor exactness, or chart injection); the perverse-curve unit supplies no such algebra theorem. No alternate perverse or resolution route is used."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic commutative algebra tool for normal-flat standard-basis preparation (Noetherianity, separatedness, parameter graded rings, flat tensor exactness, or chart injection); the perverse-curve unit supplies no such algebra theorem. No alternate perverse or resolution route is used."
+   },
+   {
+    "node": "lem-pur-regular-sequence-graded-polynomial",
+    "why": "Generic commutative algebra tool for normal-flat standard-basis preparation (Noetherianity, separatedness, parameter graded rings, flat tensor exactness, or chart injection); the perverse-curve unit supplies no such algebra theorem. No alternate perverse or resolution route is used."
+   },
+   {
+    "node": "lem-weil-pbc-flat-quotient-tensor-injective",
+    "why": "Generic commutative algebra tool for normal-flat standard-basis preparation (Noetherianity, separatedness, parameter graded rings, flat tensor exactness, or chart injection); the perverse-curve unit supplies no such algebra theorem. No alternate perverse or resolution route is used."
+   },
+   {
+    "node": "lem-trf-parameter-blowup-algebra-regular",
+    "why": "Generic commutative algebra tool for normal-flat standard-basis preparation (Noetherianity, separatedness, parameter graded rings, flat tensor exactness, or chart injection); the perverse-curve unit supplies no such algebra theorem. No alternate perverse or resolution route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-normal-flat-double-initial-ideal",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-trf-parameter-blowup-algebra-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-812db1821",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-812db1821 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-permissible-standard-basis-one-step, every cited statement and both reduced trf twins in full. The item is lem-trf-permissible-adapted-standard-basis without 'R reduced', so it is strictly more general and not a duplicate. Its 11 steps match the reviewed twin word for word except step 9, which now cites the new node. The new node is lem-trf-permissible-standard-basis-one-step without 'R reduced'. It is the single-index induction input (Hironaka Lemma 20), not a restatement of the item: the item does the preparation (19.1) in steps 1-6 and the induction set-up, replacement, minimality preservation and termination in steps 8-11. A DAG search found no other nonreduced copy. The new statement is true without reducedness: the twin's 7-step proof never uses it. In particular x0 is a nonzerodivisor on R[I/x0] inside R_{x0} by def-nagata-blowup-chart-ring for any R, initial-coefficient-lifting states that it needs no reducedness, the projective-order lemmas are about fields and polynomial rings, and lem-trf-normal-flat-chart-relation-removal assumes 'reduced' in its statement but its proof never uses it. The future split of the new node will therefore need a nonreduced copy of that lemma. Hypothesis checks by step: 1 double-initial-ideal (regular T, a in P, G flat over A); 2 Mathlib Noetherian leaf only; 3 Krull intersection with M=T; 4 regular x-prefix with final quotient A nonzero; 5 G_d flat as a direct summand, then flat-quotient tensor exactness with N=k; 7 parameter-blowup chart with J={x0..xr} nonempty and d=r+s+1>=1; step 9's hypotheses equal the new node's. Small cases checked: the nonreduced example k[[u,v]]/(v^2) with u-chart t^2, nu*=(2,inf) on both sides; the empty family for a=0; r=0 and s=0. Batch-5 flags: the closures of lem-trf-normal-flat-double-initial-ideal (51 nodes) and lem-trf-parameter-blowup-algebra-regular (149 nodes) contain no thm-, sk- or assumption node. Both are general commutative algebra (normal-flat initial ideal; regular blowup chart, ILO VIII 4.2.9), so I accepted them. The off-unit commutative-algebra tool_uses are accepted. Hironaka (1970) is not in the local literature (WANTED), so I could not check the source pages; the place references match the twins. Maintainer note: via the blueprint chain this item may be unreached once the dropped complete-local-rigidification/gabber chain is excluded."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PermissibleAdaptedStandardBasis",
+  "declaration": "Hironaka.permissibleAdaptedStandardBasis",
+  "file": "lean/Sheaf/RingTheory/PermissibleAdaptedStandardBasis.lean",
+  "statement": "theorem permissibleAdaptedStandardBasis {T : Type u} [CommRing T] [IsRegularLocalRing T] (r s : ℕ) (x : Fin (r + 1) → T) (y : Fin s → T) (hparams : IsLocalRing.IsRegularSystemOfParameters (List.ofFn x ++ List.ofFn y)) (b : Ideal T) (hb : b ≤ Ideal.span (Set.range x)) (hflat : Module.Flat ((T ⧸ b) ⧸ (Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)) (Ideal.associatedGraded ((Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)))) (hmin : ∀ q ∈ minimalPrimes (T ⧸ b), ¬ (Ideal.span (Set.range x)).map (Ideal.Quotient.mk b) ≤ q) (ρ : ParameterChart x →+* chartRing ((Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)) (Ideal.Quotient.mk b (x 0))) (hρ : IsQuotientChartMap x b ρ) (z : PrimeSpectrum (chartRing ((Ideal.span (Set.range x)).map (Ideal.Quotient.mk b)) (Ideal.Quotient.mk b (x 0)))) (hz : z.asIdeal.comap ((algebraMap (T ⧸ b) _).comp (Ideal.Quotient.mk b)) = IsLocalRing.maximalIdeal T) [IsRegularLocalRing (LocalChart ρ z)] (p : PrimeSpectrum (MvPolynomial {i : Fin (r + 1) // i ≠ 0} (IsLocalRing.ResidueField T))) (hp : p.asIdeal.comap (residuePolynomialMap (T := T) r) = (PrimeSpectrum.comap ρ z).asIdeal.comap (Ideal.Quotient.mk (PermissibleCoordinateChart.relations x Finset.univ 0))) (χ : MvPolynomial (Fin (r + 1) ⊕ Fin s) (IsLocalRing.ResidueField T) →+* Ideal.associatedGraded (IsLocalRing.maximalIdeal T)) (hχ : IsParameterGradedMap x y χ) (hnu : nuStar (transformIdeal ρ z) = nuStar b) : ∃ (m : ℕ) (f : Fin m → T) (d : Fin m → ℕ) (φ : Fin m → MvPolynomial (Fin (r + 1)) (IsLocalRing.ResidueField T)), Monotone d ∧ (∀ i, 1 ≤ d i) ∧ (∀ i, f i ∈ b ∧ f i ≠ 0 ∧ f i ∈ Ideal.span (Set.range x) ^ d i ∧ f i ∈ IsLocalRing.maximalIdeal T ^ d i ∧ f i ∉ IsLocalRing.maximalIdeal T ^ (d i + 1)) ∧ (∀ i, InOrderSpace r p (d i) (φ i) ∧ ∃ hi : f i ∈ IsLocalRing.maximalIdeal T ^ d i, χ (MvPolynomial.rename Sum.inl (φ i)) = initialForm T (d i) ⟨f i, hi⟩) ∧ IsMinimalGeneratingFamily (adicInitialIdeal (IsLocalRing.maximalIdeal T) b) (fun i ↦ χ (MvPolynomial.rename Sum.inl (φ i)))",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab6a378ff",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read the node, all 17 stmt_dep records, the module, the report and the live chart-data/nuStar/adicInitialIdeal/IsMinimalGeneratingFamily sources, plus the landed reduced one-step sibling. Every hypothesis and conclusion clause matches the node. rho and chi are pinned on every generator (canonical maps); hp determines p uniquely; transformIdeal is the localized kernel a'; hnu compares the full padded sequences. Conclusion: a finite family allowed to be empty, monotone d>=1, f_i in b and P^d_i with exact M-order, phi_i homogeneous in k[X] satisfying InOrderSpace (p k[t]_p)^d_i, minimal generating family of E. No IsReduced, as intended. Edge cases: b=0 gives m=0; r=0 and s=0 are well-typed; no rationality assumption; all in Type u. Record diff against live: only the lean record and 5 landed def-owner stmt_deps added; lean.statement verbatim; no statement_change; no duplicate. Docstrings carry the source place, the blueprint id and the 11 proof steps; sorry only; import split correct. No file changed, so no compile. Advisory: three proof_deps have no Lean module to import yet."
+ }
+}

@@ -1,0 +1,511 @@
+{
+ "id": "lem-sfb-admissible-scalar-balls",
+ "kind": "statement",
+ "title": "Common admissible scalar from compact ultrametric balls",
+ "statement": "Let $K$ be a field [def-weil-field] with a multiplicative absolute value $|\\cdot|:K\\to\\mathbf R_{\\geq0}$ satisfying $|a|=0\\iff a=0$, $|1|=1$, $|ab|=|a||b|$, and $|a+b|\\leq\\max(|a|,|b|)$. Let $V$ be a $K$-vector space with a norm $\\|\\cdot\\|:V\\to\\mathbf R_{\\geq0}$ satisfying $\\|v\\|=0\\iff v=0$, $\\|av\\|=|a|\\|v\\|$, and $\\|v+w\\|\\leq\\max(\\|v\\|,\\|w\\|)$. A $K$-linear map means an additive map preserving multiplication by scalars. Assume that every closed ball $\\{b\\in K:|b-a|\\leq r\\}$, for $a\\in K$ and real $r\\geq0$, is compact for the metric $d(a,b)=|a-b|$ (every open cover admits a finite subcover). For every $K$-linear subspace $U\\subseteq V$, every $K$-linear map $g:U\\to K$ with $|g(u)|\\leq\\|u\\|$ for all $u\\in U$, and every $x\\in V\\setminus U$, there exists $b\\in K$ such that\n$$|b-g(u)|\\leq\\|x-u\\|\\qquad\\text{for every }u\\in U.$$\nNo closedness or finite dimension of $U$, and no completeness of $V$, is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel finite-field projection input; compact admissible-ball selection, old projection proof steps 2-3. Agent-formulated auxiliary; exact external reference WANTED (Ingleton scalar extension theorem)."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing NormedField and NormedAddCommGroup metrics, with distance equal to the norm of the difference. Mathlib supplies norm symmetry and closedness of metric closed balls. Linearity gives g(u)-g(w)=g(u-w).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of compact admissible-ball selection: elementary argument, step 1."
+   }
+  },
+  {
+   "text": "For $u\\in U$ put $c_u=g(u)$, $r_u=\\|x-u\\|$ and $B_u=\\{b\\in K:|b-c_u|\\leq r_u\\}$. All $r_u$ are nonnegative, and $c_u\\in B_u$. Since $u-v=(u-x)+(x-v)$ and $u-v\\in U$, the assumed bound and step 1 give\n$$|c_u-c_v|=|g(u-v)|\\leq\\|u-v\\|\\leq\\max(r_u,r_v).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of compact admissible-ball selection: elementary argument, step 2."
+   }
+  },
+  {
+   "text": "If r_u <= r_w and b belongs to B_u, write b-g(w)=(b-g(u))+(g(u)-g(w)). The scalar ultrametric inequality and step 2 show |b-g(w)| <= r_w, so B_u is a subset of B_w. Totality of the real order therefore makes the nonempty family (B_u), indexed by U, directed under reverse inclusion: for any two indices take the one with smaller radius. This packages the finite-minimum argument of the original proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of compact admissible-ball selection: elementary argument, step 3."
+   }
+  },
+  {
+   "text": "Each B_u is a metric closed ball and hence closed by Mathlib Metric.isClosed_closedBall. Its radius is a norm, hence nonnegative. Its center g(u) belongs to B_u, so each B_u is nonempty. The hypothesis hcompact makes each B_u compact, including when the radius is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of compact admissible-ball selection: elementary argument, step 4."
+   }
+  },
+  {
+   "text": "Apply the directed-family form of the compact closed finite-intersection principle [lem-sfb-compact-closed-finite-intersection], implemented in Mathlib by IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed. The index type U is nonempty because it contains zero; step 3 gives directedness and step 4 gives nonemptiness, compactness and closedness of every ball. Thus there is b in every B_u. Rewriting closed-ball membership as norm(b-g(u)) <= norm(x-u) gives the desired scalar. This is the same finite-intersection argument, with its finite-family induction and restriction to a fixed compact ball performed by Mathlib.",
+   "uses": [
+    "lem-sfb-compact-closed-finite-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005D, lemma-intersection-closed-in-quasi-compact; applied inside the compact scalar ball B_0, after the elementary ultrametric estimates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-closed-finite-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel projection input via lem-sfb-norm-one-finite-subfield-projection; formalized using the center bound, nested admissible balls and Mathlib directed compact intersection theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spherically|\\\\bIngleton\\\\b|nonarchimedean.*(Hahn|functional)|admissible.*ball",
+   "results": {
+    "t": "2026-10-22T06:05:32Z",
+    "tool": "grep",
+    "query": "spherically|\\\\bIngleton\\\\b|nonarchimedean.*(Hahn|functional)|admissible.*ball",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no nonarchimedean bound-preserving extension or admissible-ball selection; LinearMap.exists_extend and exists_extend_of_notMem at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:289,294 have no norm bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The balls centered at g(u) of radius norm x minus u intersect for a contractive linear functional over a proper ultrametric field",
+   "results": {
+    "t": "2026-10-22T06:05:32Z",
+    "tool": "leansearch",
+    "query": "The balls centered at g(u) of radius norm x minus u intersect for a contractive linear functional over a proper ultrametric field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsUltrametricDist.ball_eq_or_disjoint",
+     "IsUltrametricDist.closedBall_eq_or_disjoint",
+     "Metric.ball_contractible",
+     "IsUltrametricDist.ball_subset_trichotomy",
+     "IsUltrametricDist.isClopen_sphere",
+     "IsUltrametricDist.closedBall_eq_of_mem",
+     "Metric.eball_contractible",
+     "IsUltrametricDist.ball_eq_of_mem"
+    ],
+    "digest": "bd6763ad3ea4de94"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned ultrametric ball containments and Riesz-lemma estimates do not assert simultaneous admissible scalar values. Real sublinear/Riesz extension theorems require real scalars (Convex/Cone/Extension.lean:53,65,113,160)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_extension_norm_eq\"",
+   "results": {
+    "t": "2026-10-22T06:05:33Z",
+    "tool": "loogle",
+    "query": "\"exists_extension_norm_eq\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "exists_extension_norm_eq",
+     "BoundedContinuousFunction.exists_extension_norm_eq_of_isClosedEmbedding'",
+     "BoundedContinuousFunction.exists_extension_norm_eq_of_isClosedEmbedding"
+    ],
+    "digest": "8bb1863c03811c3b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exists_extension_norm_eq requires IsRCLikeNormedField (HahnBanach.lean:40-46); LinearMap.exists_extend has no contractive bound (Basis/VectorSpace.lean:289-296). Tietze extensions are not linear extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*extend|extend.*exists|Hahn.Banach",
+   "results": {
+    "t": "2026-10-22T06:05:48Z",
+    "tool": "grep",
+    "query": "exists.*extend|extend.*exists|Hahn.Banach",
+    "sub": "LinearAlgebra",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+     "Mathlib/LinearAlgebra/LinearPMap.lean"
+    ],
+    "digest": "e361e1a9d9b16641"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no nonarchimedean bound-preserving extension or admissible-ball selection; LinearMap.exists_extend and exists_extend_of_notMem at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:289,294 have no norm bound."
+  },
+  {
+   "tool": "grep",
+   "query": "nonarchimedean|spherically|\\\\bIngleton\\\\b",
+   "results": {
+    "t": "2026-10-22T06:05:48Z",
+    "tool": "grep",
+    "query": "nonarchimedean|spherically|\\\\bIngleton\\\\b",
+    "sub": "Analysis/Normed/Module",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no nonarchimedean bound-preserving extension or admissible-ball selection; LinearMap.exists_extend and exists_extend_of_notMem at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:289,294 have no norm bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A contractive scalar valued linear map on a subspace extends to the whole vector space if all one vector extension ball constraints are solvable",
+   "results": {
+    "t": "2026-10-22T06:05:48Z",
+    "tool": "leansearch",
+    "query": "A contractive scalar valued linear map on a subspace extends to the whole vector space if all one vector extension ball constraints are solvable",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap.exists_extend\"",
+   "results": {
+    "t": "2026-10-22T06:05:48Z",
+    "tool": "loogle",
+    "query": "\"LinearMap.exists_extend\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "LinearMap.exists_extend",
+     "LinearMap.exists_extend_of_notMem"
+    ],
+    "digest": "d2721ccaccc9741c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: exists_extension_norm_eq requires IsRCLikeNormedField (HahnBanach.lean:40-46); LinearMap.exists_extend has no contractive bound (Basis/VectorSpace.lean:289-296). Tietze extensions are not linear extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a nonarchimedean normed vector space over a field with compact closed balls a contractive scalar linear functional has a common admissible value for extension at one vector",
+   "results": {
+    "t": "2026-10-22T06:05:49Z",
+    "tool": "leanfinder",
+    "query": "In a nonarchimedean normed vector space over a field with compact closed balls a contractive scalar linear functional has a common admissible value for extension at one vector",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_of_le_sublinear",
+     "RieszExtension.step",
+     "riesz_lemma_of_norm_lt",
+     "rescale_to_shell_semi_normed",
+     "ContinuousLinearMap.exists_lt_apply_of_lt_opNorm",
+     "rescale_to_shell",
+     "ContinuousLinearMap.exists_lt_apply_of_lt_opNNNorm",
+     "ContinuousLinearMap.exists_mul_lt_of_lt_opNorm"
+    ],
+    "digest": "c9ec6a5542fd8c8a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned ultrametric ball containments and Riesz-lemma estimates do not assert simultaneous admissible scalar values. Real sublinear/Riesz extension theorems require real scalars (Convex/Cone/Extension.lean:53,65,113,160)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact closed balls in a nonarchimedean scalar field give a simultaneous solution of abs b minus f u less than norm x minus u for every u in a linear subspace",
+   "results": {
+    "t": "2026-10-22T06:06:03Z",
+    "tool": "leanfinder",
+    "query": "Compact closed balls in a nonarchimedean scalar field give a simultaneous solution of abs b minus f u less than norm x minus u for every u in a linear subspace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "riesz_lemma_of_norm_lt",
+     "approxAddOrderOf",
+     "addWellApproximable",
+     "NormedAddCommGroup.exists_norm_nsmul_le",
+     "controlled_sum_of_mem_closure",
+     "exists_norm_le_le_norm_sub_of_finset",
+     "riesz_lemma",
+     "controlled_sum_of_mem_closure_range"
+    ],
+    "digest": "76129d49120e4165"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned ultrametric ball containments and Riesz-lemma estimates do not assert simultaneous admissible scalar values. Real sublinear/Riesz extension theorems require real scalars (Convex/Cone/Extension.lean:53,65,113,160)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonarchimedean contractive linear functional extension from solvable scalar ball constraints using maximal partial linear maps",
+   "results": {
+    "t": "2026-10-22T06:06:47Z",
+    "tool": "leansearch",
+    "query": "Nonarchimedean contractive linear functional extension from solvable scalar ball constraints using maximal partial linear maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_of_le_sublinear",
+     "Real.exists_extension_norm_eq",
+     "exists_extension_norm_eq",
+     "ContinuousLinearMap.exist_extension_of_finiteDimensional_range",
+     "IsNonarchimedean",
+     "ContinuousLinearMap.extendTo𝕜",
+     "LinearMap.extendOfNorm_eq",
+     "RieszExtension.step"
+    ],
+    "digest": "a4d9095f3b33c031"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned ultrametric ball containments and Riesz-lemma estimates do not assert simultaneous admissible scalar values. Real sublinear/Riesz extension theorems require real scalars (Convex/Cone/Extension.lean:53,65,113,160)."
+  },
+  {
+   "tool": "grep",
+   "query": "admissible.*ball|spherically|Ingleton|exists_extension_norm_eq",
+   "results": {
+    "t": "2026-10-22T12:04:07Z",
+    "tool": "grep",
+    "query": "admissible.*ball|spherically|Ingleton|exists_extension_norm_eq",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/CStarAlgebra/CStarMatrix.lean",
+     "Mathlib/Analysis/CStarAlgebra/CStarMatrix.lean",
+     "Mathlib/Analysis/CStarAlgebra/CStarMatrix.lean",
+     "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean",
+     "Mathlib/Analysis/Meromorphic/NormalForm.lean"
+    ],
+    "digest": "d914e2b64ff7a559"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned CStarAlgebra and meromorphic singleton/closed-ball manipulation lines do not state this extension-value lemma; the search command returned these irrelevant hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intersection of the balls centered at a contractive linear functional evaluated on a subspace with radii norm x minus u is nonempty over a field with compact balls",
+   "results": {
+    "t": "2026-10-22T12:04:07Z",
+    "tool": "leansearch",
+    "query": "Intersection of the balls centered at a contractive linear functional evaluated on a subspace with radii norm x minus u is nonempty over a field with compact balls",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.polar_eq_biInter_preimage",
+     "Seminorm.ball_sup",
+     "Seminorm.closedBall_eq_biInter_ball",
+     "Metric.biInter_gt_closedBall",
+     "FiniteDimensional.of_isCompact_closedBall₀",
+     "Seminorm.ball_finset_sup",
+     "FiniteDimensional.of_isCompact_closedBall",
+     "Seminorm.closedBall_iSup"
+    ],
+    "digest": "4510b5592c81d049"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: polar and seminorm ball formulas and finite-dimensionality criteria do not assert simultaneous admissible values for a partial functional."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUltrametricDist\", \"closedBall\"",
+   "results": {
+    "t": "2026-10-22T12:04:08Z",
+    "tool": "loogle",
+    "query": "\"IsUltrametricDist\", \"closedBall\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsUltrametricDist.isClopen_closedBall",
+     "IsUltrametricDist.isOpen_closedBall",
+     "IsUltrametricDist.closedBall_eq_of_mem",
+     "IsUltrametricDist.frontier_closedBall_eq_empty",
+     "IsUltrametricDist.closedBall_eq_or_disjoint",
+     "IsUltrametricDist.closedBall_subset_trichotomy",
+     "IsUltrametricDist.closedBall_openAddSubgroup",
+     "IsUltrametricDist.closedBall_openSubgroup"
+    ],
+    "digest": "6f28136b94a000ad"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ultrametric ball identities and trichotomy do not state the common-value assertion for all u in a subspace."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded linear functional over an ultrametric field with compact closed balls has a simultaneous admissible scalar for one vector extension",
+   "results": {
+    "t": "2026-10-22T12:04:17Z",
+    "tool": "leanfinder",
+    "query": "A bounded linear functional over an ultrametric field with compact closed balls has a simultaneous admissible scalar for one vector extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "rescale_to_shell",
+     "rescale_to_shell_semi_normed",
+     "exists_norm_le_le_norm_sub_of_finset",
+     "Seminorm.rescale_to_shell",
+     "rescale_to_shell_semi_normed_zpow",
+     "rescale_to_shell_zpow",
+     "NormedAddCommGroup.exists_norm_nsmul_le",
+     "Seminorm.rescale_to_shell_zpow"
+    ],
+    "digest": "e545cde4fad201fb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: rescaling estimates and real/RCLike Hahn-Banach separation or cone extension do not give the stated nonarchimedean simultaneous scalar constraints."
+  },
+  {
+   "tool": "grep",
+   "query": "spherically",
+   "results": {
+    "t": "2026-10-22T12:04:55Z",
+    "tool": "grep",
+    "query": "spherically",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no spherical-completeness declaration in the searched Analysis directory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean Hahn Banach one dimensional extension by intersection of nested compact scalar balls",
+   "results": {
+    "t": "2026-10-22T12:05:06Z",
+    "tool": "leanfinder",
+    "query": "Nonarchimedean Hahn Banach one dimensional extension by intersection of nested compact scalar balls",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RCLike.geometric_hahn_banach_closed_compact",
+     "geometric_hahn_banach_closed_compact",
+     "RCLike.geometric_hahn_banach_compact_closed",
+     "geometric_hahn_banach_compact_closed",
+     "RieszExtension.step",
+     "geometric_hahn_banach_point_point",
+     "RCLike.geometric_hahn_banach_point_point",
+     "RieszExtension.exists_top"
+    ],
+    "digest": "ea5a8888fc25cd40"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: rescaling estimates and real/RCLike Hahn-Banach separation or cone extension do not give the stated nonarchimedean simultaneous scalar constraints."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-norm-one-finite-subfield-projection",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, Paragraph (3), scalar tame-kernel finite-field projection input; compact admissible-ball selection, old projection proof steps 2-3.",
+   "via": [
+    "lem-sfb-norm-one-finite-subfield-projection",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-admissible-scalar-balls",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Four elementary steps prove sign symmetry and the metric axioms, the centre-distance bound, ordered-radius containment and finite witnesses, and openness of complements. The fifth step applies the existing Mathlib-leaf finite-intersection theorem to closed subsets B_0 intersect B_u of the compact ball B_0. No new nodes or Mathlib leaves are created. Retained inherited search records and added the six actually logged Q99 searches. Repair after the side/live promotion refusal: revalidated the retained split against the current unsplit live item and current finite-intersection leaf; made the subspace finite-subcover argument and the empty-family witness explicit. Statement, dependencies and proof route remain unchanged.",
+  "blueprint": "The inherited blueprint.from.node is null (confirmed by blueprint_refs.py ancestor). The documented source is det-thm-sf-ctf-stability-direct-images paragraph (3), through the recorded projection-input ancestry. Steps realize the compact admissible-ball selection of the old projection proof steps 2-3. Whole-blueprint searches for admissible scalar, compact balls, ultrametric and finite intersection found no matching node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-df28ba2f5",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-df28ba2f5 (reviewer sub-agent of L); spot-checked: Redelivery after a promotion refusal. The prior head f0420386 passed on its mathematics. The item is still unsplit with no proof in both clones/live and side-live. There is no repair note and this is not a re-split. Compared field by field with the prior head, the statement, stmt_deps [def-weil-field], proof_deps, source, blueprint and the 16 searches are identical. Only two steps changed: step 1 adds d(a,a)=0, and step 5 spells out why the subspace B_0 is compact and gives 0 as the witness for the empty family; both changes are correct. I re-read all 5 steps. Step 1: |-1|=1, which gives a symmetric metric. Step 2: |c_u-c_v|=|g(u-v)|<=max(r_u,r_v), using u-v in U. Step 3: if r_u<=r_v then B_u is inside B_v, so the smallest radius in F plus {0} gives a point of every finite intersection, including F empty. Step 4: the complement of a closed ball is open (take h=|a-c_u|, valid for radius 0). Step 5: applies the same-unit Mathlib leaf lem-sfb-compact-closed-finite-intersection with X=B_0, C_u=B_0 cap B_u and index set I=U, and every hypothesis matches. I checked the leaf against Stacks topology.tex:1724 lemma-intersection-closed-in-quasi-compact (Tag 005D) and Mathlib Compact.lean:825-829 CompactSpace.iInter_nonempty. The conclusion matches, word for word, the scalar-value hypothesis of lem-sfb-contractive-extension-from-admissible-values, as the parent lem-sfb-norm-one-finite-subfield-projection uses it in step 2. Edge cases checked: U={0}, empty F, equal radii and zero radii, radii with infimum 0, trivial absolute value, U not closed or infinite-dimensional, and no completeness of V. No SGA, no new nodes, no tool_uses needed, no duplicate found with rg -L."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Normed.Module.AdmissibleScalarBalls",
+  "declaration": "LinearMap.exists_admissible_scalar_of_isCompact_closedBall",
+  "file": "lean/Sheaf/Analysis/Normed/Module/AdmissibleScalarBalls.lean",
+  "statement": "theorem exists_admissible_scalar_of_isCompact_closedBall {K : Type u} [NormedField K] (hK : ∀ a b : K, ‖a + b‖ ≤ max ‖a‖ ‖b‖) {V : Type v} [NormedAddCommGroup V] [NormedSpace K V] (hV : ∀ y z : V, ‖y + z‖ ≤ max ‖y‖ ‖z‖) (hcompact : ∀ (a : K) (r : ℝ), 0 ≤ r → IsCompact (Metric.closedBall a r)) (U : Submodule K V) (g : U →ₗ[K] K) (hg : ∀ u : U, ‖g u‖ ≤ ‖(u : V)‖) (x : V) (hx : x ∉ U) : ∃ b : K, ∀ u : U, ‖b - g u‖ ≤ ‖x - (u : V)‖",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48b3d31e8",
+  "group": "NI",
+  "result": "pass",
+  "note": "Only the item node's lean record and one new module differ from side-live; the live node has lean null, so the item is not superseded. lean.statement matches the file signature exactly. Clause-by-clause match: NormedField K + hK = the node's ultrametric absolute value (equivalent, nothing stronger); NormedAddCommGroup/NormedSpace + hV = the node's ultrametric norm with ||av||=|a|||v|| (equivalent); hcompact covers every closed ball with r>=0, radius 0 included (Metric.closedBall, dist=||b-a||, IsCompact = finite subcover); U any Submodule; g a plain linear map; hg, hx and the conclusion match with quantifiers in the same order. No completeness, nontriviality or extra instances; universes u, v independent and bound. Edge cases checked: U=0, U=V or V=0, trivial absolute value, zero radii, empty finite family, U not closed or infinite-dimensional. No duplicate in Mathlib or the project trees (exists_extension_of_proper_ultrametric is the different whole-space extension statement). stmt_deps [def-weil-field] used via Field; docstrings give the source place and blueprint id and reproduce all 5 proof steps; proof is only sorry; no definitions; no pro-etale content; report has both required sections. Not recompiled per the 2026-10-21 rule; no files changed. Advisory only: explicit hK/hV/hcompact instead of the IsUltrametricDist/ProperSpace instances of the related module, which is equivalent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261026T082303-L-2158954",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

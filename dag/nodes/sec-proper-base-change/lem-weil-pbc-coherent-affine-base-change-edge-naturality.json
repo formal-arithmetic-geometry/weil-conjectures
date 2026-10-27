@@ -32,118 +32,78 @@
  ],
  "proof": [
   {
-   "text": "Put $K_g=Rf_{T,*}(G_T[0])$. Choose an open cover $(V_i)$ of $S$ on which $K|_{V_i}\\cong A|_{V_i}[0]\\oplus E|_{V_i}[-1]$ and both modules are finite free. A free module is flat: tensoring with $\\mathcal O^{\\oplus r}$ is a finite direct sum of identity functors, hence preserves kernels and cokernels. Thus this two-term zero-differential model is a bounded-above complex of flat modules, hence K-flat by the bounded-above flat lemma. Put $T_i=g^{-1}(V_i)$ and let $g_i:T_i\\to V_i$ be the restricted morphism. The open-restriction lemma for derived pullback gives $(Lg^*K)|_{T_i}\\cong Lg_i^*(K|_{V_i})$, and since derived pullback is computed termwise on a K-flat complex, $Lg_i^*(K|_{V_i})\\cong g_i^*A[0]\\oplus g_i^*E[-1]$ with finite free terms. Use the assumed isomorphism $\\delta_g$ to compute the cohomology sheaves of $K_g$ on each $T_i$ (cohomology sheaves commute with restriction to opens). They are finite free in degrees zero and one and zero otherwise. In particular $K_g$ has no cohomology above one and each $R^qf_{T,*}G_T$ is quasi-coherent: locally it is a tilde of a finite free module, or zero. This reasoning applies to every $g$, with no flatness condition on $g$.",
+   "text": "The given local splitting shows K is in D≤1: above degree one the homology of both single summands vanishes. Exact open restriction commutes with homology, and a module sheaf zero on a covering is zero. The canonical projection τ is constructed by the bijection from maps K→H1(K)[-1] to maps on H1, so it induces the identity.",
    "uses": [
-    "def-sc-finite-locally-free-sheaf",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-bounded-above-flat-kflat",
-    "lem-pc-derived-pullback-open-restriction-universes",
-    "def-pc-derived-pullback",
-    "pqf-def-coherent"
+    "def-pc-derived-open-restriction-maps",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 06YD, lemma-bounded-flat-K-flat; derived pullback local K-flat construction; application of the assumed local splitting and delta_g"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the top-cohomology comparison with $n=1$ to $K$. Its specified truncation projection is exactly $\\tau$ in the statement, so $\\gamma_g=\\kappa_{g,K}$, including the canonical identification $H^1(Lg^*E[-1])=g^*E$. Hence $\\gamma_g$ is invertible; $H^1(\\delta_g)$ is invertible by hypothesis, and $\\beta_g=H^1(\\delta_g)\\kappa_{g,K}^{-1}$ is an isomorphism of $\\mathcal O_T$-modules.",
+   "text": "Apply the specified top-cohomology pullback theorem in degree one. Its κ is definitionally gamma for τ. The theorem makes gamma invertible; the base-change hypothesis makes H1(delta) invertible. Define beta as inverse gamma followed by H1(delta). The normalization equation follows by cancellation.",
    "uses": [
     "lem-weil-pbc-derived-pullback-top-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TC, dual truncation argument; the canonical top comparison applied in degree one"
-   }
+   "elementary": false
   },
   {
-   "text": "If $T$ is affine, the quasi-coherence in Step 1 gives $H^p(T,R^qf_{T,*}G_T)=0$ for every $p>0$ and $q\\geq0$ by affine vanishing. The degenerate Leray theorem therefore makes its cocycle-defined $\\varepsilon_T$ invertible. Its cocycle formula agrees with $\\theta_T$ in the higher-direct-image presheaf theorem: both send a section cocycle of $f_{T,*}I^\\bullet$ to its image in the cohomology sheaf. That theorem gives a morphism of presheaves of modules, so this map is $\\Gamma(T,\\mathcal O_T)$-linear. The section map of the module isomorphism $\\beta_g^{-1}$ is linear too. Their composite $e_g$ is consequently a linear isomorphism.",
+   "text": "For every affine base T, the base-changed map is qcqs and the tensor-pulled coefficient is quasi-coherent, via the unique adjunction-preserving tensor-to-ordinary pullback isomorphism. Affine higher-direct-image cohomology vanishing and the canonical Leray degeneration theorem make epsilon invertible. Naturality of epsilon at multiplication, the scalar-action formula for module cohomology and functoriality of higher direct image make epsilon linear after restricting scalars along f_T. Compose with sections of beta inverse to construct e.",
    "uses": [
-    "lem-pc-affine-vanishing",
+    "lem-pc-affine-higher-direct-image-cohomology-vanishing",
     "lem-pc-leray-degenerate-sections",
-    "lem-weil-pbc-higher-direct-image-presheaf"
+    "lem-pc-resolution-scalar-action",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 01F4(2) and 01E4, respective cocycle descriptions; affine vanishing Tag 01EO"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $h:T'\\to T$ over $S$, and write $m_h:Lh^*K_g\\to K_{gh}$ for the canonical module base-change map for $(f_T,h,G_T)$, with coefficient identified by $h_X^*G_T\\cong G_{gh}$. The derived-to-ordinary single-module comparisons $c_a$ of the module base-change definition (the value at $M[0]$ of the left-derived counit, followed by the single-complex identification) satisfy, for $w:X_{T'}\\to X_T$, $v:X_T\\to X$ and an $\\mathcal O_X$-module $M$, $c_{vw,M}\\circ\\mathrm{comp}=c^{\\rm ord}\\circ c_{w,v^*M}\\circ Lw^*(c_{v,M})$, where $\\mathrm{comp}:Lw^*Lv^*\\cong L(vw)^*$ is the canonical derived composition isomorphism and $c^{\\rm ord}:w^*v^*M\\cong(vw)^*M$ the ordinary one; this is exactly the canonical single-pullback composition lemma with $f=w$, $g=v$, $N=M$, and needs no flatness. Now apply derived horizontal pasting to the squares $(f,f_T,g,v)$ and $(f_T,f_{T'},h,w)$ at $E=G[0]$, then naturality of the second mate in its coefficient along $c_{v,G}:Lv^*(G[0])\\to(v^*G)[0]$, and finally the displayed identity: the inverse composition isomorphism $c(t,p)^{-1}$ produced by pasting cancels against $\\mathrm{comp}$. After the canonical fibre-product and pullback identifications, it gives\n$$\\delta_{gh}=m_h\\circ Lh^*(\\delta_g):Lh^*Lg^*K\\longrightarrow K_{gh}.$$\nThis is an equality of the specified maps, not a choice of an isomorphism.",
+   "text": "For h:T′→T, form the canonical base-change map m for f_T,h and h_X, followed by Rf_(gh),* of the specified coefficient isomorphism. Apply normalized tensor single-module horizontal pasting to obtain Lh*(delta_g) followed by m equals derived composition followed by delta_gh.",
    "uses": [
-    "def-pc-derived-module-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-canonical-single-pullback-composition",
-    "lem-pc-derived-base-change-horizontal-pasting"
+    "lem-weil-pbc-tensor-single-base-change-pasting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0ATM, remark-compose-base-change-horizontal, with remark-base-change; composition of the derived-to-ordinary single-module comparisons"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $F_g=H^1(K_g)$ and put $b_h=H^1(m_h)\\kappa_{h,K_g}^{-1}:h^*F_g\\to F_{gh}$, which is defined since Step 1 gives $K_g\\in D^{\\leq1}$. Naturality of $\\kappa$ at $\\delta_g:Lg^*K\\to K_g$ gives\n$$\\kappa_{h,K_g}H^1(Lh^*\\delta_g)=h^*H^1(\\delta_g)\\kappa_{h,Lg^*K}.$$\nThe composition formula gives $\\kappa_{gh,K}=c^{\\rm ord}_{g,h,E}\\,h^*\\kappa_{g,K}\\,\\kappa_{h,Lg^*K}$. Combining these two equations with Step 4, and substituting the definitions of $\\beta_g$ and $b_h$, yields\n$$\\beta_{gh}\\,c^{\\rm ord}_{g,h,E}=b_h\\,h^*\\beta_g.$$\nEvery factor in the substitution has the indicated source and target; in particular no inverse of $m_h$ is used.",
+   "text": "The top pullback theorem gives the upper bound for Lg*K, transported across delta_g to K_g. Naturality of κ at delta_g and the composition identity for κ imply h*(beta_g) followed by b_h equals ordinary composition followed by beta_gh, where b_h is inverse κ_(h,K_g) followed by H1(m). Precompose by the invertible κ_(h,Lg*K) followed by h*(κ_g), apply those equations and pasting, then cancel. A generic categorical calculation carries out this cancellation without unfolding the sheaf functors.",
    "uses": [
     "lem-weil-pbc-derived-pullback-top-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TC, natural top comparison; composition and naturality applied to delta_g"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the top-degree derived/presheaf comparison to $f_T$, $h$, $G_T$, $q=1$. Its upper-vanishing hypothesis holds by Step 1 and its $b_h^1$ is precisely $b_h$ of Step 5. At the whole open $T$, its cocycle maps are $\\varepsilon_T$ and $\\varepsilon_{T'}$ by Step 3. If $s_h(F):\\Gamma(T,F)\\to\\Gamma(T',h^*F)$ is the section map of the ordinary pullback unit, its adjunction formula therefore reads\n$$\\varepsilon_{T'}h_X^*=\\Gamma(T',b_h)\\,s_h(F_g)\\,\\varepsilon_T.$$\nThe coefficient on the left is exactly the canonical $h_X^*G_T\\cong G_{gh}$ used in the statement; thus this is the required module cohomology pullback, without an etale or underlying-abelian comparison.",
+   "text": "Apply the top-degree Leray commutative-square identity to f_T,f_(gh),h,h_X and the explicit canonical coefficient isomorphism. This gives epsilon_(gh) after the specified cohomology pullback equals sections of b_h after section pullback and epsilon_g.",
    "uses": [
-    "lem-weil-pbc-top-base-change-presheaf",
-    "lem-pc-module-pullback-adjunction"
+    "lem-weil-pbc-top-degree-leray-square"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01E4, cocycle sheafification applied to the whole open; the derived-mate/presheaf comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "For a class $x\\in H^1(X_T,G_T)$, substitute the last equation and Step 5 into the definition of $e_{gh}$. The result is\n$$e_{gh}(h_X^*x)=\\Gamma(T',c^{\\rm ord}_{g,h,E})\\,\\Gamma(T',h^*\\beta_g^{-1})\\,s_h(F_g)(\\varepsilon_Tx).$$\nNaturality of the ordinary pullback unit changes the middle two factors to $s_h(g^*E)\\,\\Gamma(T,\\beta_g^{-1})$. The whole expression is therefore $\\rho_h(e_gx)$, as asserted. All maps were defined by canonical truncation, mate, section, and cocycle maps; the local splittings were used only to verify hypotheses. Consequently one simultaneous family $e_g$ works for every affine $g$ and every arrow $h$.",
+   "text": "Postcompose the preceding equation with sections of beta_gh inverse. The beta composition identity replaces b_h followed by beta_gh inverse with h*(beta_g inverse) followed by ordinary composition. Naturality of the normalized tensor adjunction unit moves beta_g inverse across section pullback. The resulting expression is exactly rho_h after e_g.",
    "uses": [
     "lem-pc-module-pullback-adjunction",
     "lem-pc-module-pullback-identity-composition"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tags 0096 and 0097: naturality of the pullback unit and composition comparison; cancellation of the preceding two equations"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-module-base-change-map",
-  "def-pc-derived-pullback",
-  "def-pc-flat-sheaf-modules",
-  "def-sc-finite-locally-free-sheaf",
-  "lem-pc-affine-vanishing",
-  "lem-pc-bounded-above-flat-kflat",
-  "lem-pc-canonical-single-pullback-composition",
-  "lem-pc-derived-base-change-horizontal-pasting",
-  "lem-pc-derived-pullback-open-restriction-universes",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-affine-higher-direct-image-cohomology-vanishing",
   "lem-pc-leray-degenerate-sections",
   "lem-pc-module-pullback-adjunction",
   "lem-pc-module-pullback-identity-composition",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-resolution-scalar-action",
   "lem-weil-pbc-derived-pullback-top-cohomology",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-top-base-change-presheaf",
-  "pqf-def-coherent"
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-tensor-single-base-change-pasting",
+  "lem-weil-pbc-top-degree-leray-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Assembly from Tags 0ATM, 01F4, 01E4 and the dual of Derived Categories Tag 05TC. Explicit top-comparison and section-unit calculation."
+  "place": "Tags 0ATM, 01FB, 01E4 and 01F4(2), with top-cohomology comparison. Local splitting is used only for the upper bound; qcqs higher-direct-image vanishing replaces the local K-flat calculation."
  },
  "mathlib_searches": [
   {
@@ -250,7 +210,18 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
@@ -336,6 +307,14 @@
    "AlgebraicGeometry.coherentEdgeXMap",
    "AlgebraicGeometry.coherentEdgeCoefficientIso",
    "AlgebraicGeometry.coherentEdgePullback",
+   "AlgebraicGeometry.coherentEdge_cohomologyModule",
+   "AlgebraicGeometry.coherentEdge_sectionsModule",
+   "AlgebraicGeometry.coherentEdge_enoughInjectives",
+   "AlgebraicGeometry.coherentEdge_pullbackSectionsModule",
+   "AlgebraicGeometry.coherentEdge_baseCohomologyGroup",
+   "AlgebraicGeometry.coherentEdge_baseCohomologyModule",
+   "AlgebraicGeometry.coherentEdge_overSheafify",
+   "AlgebraicGeometry.coherentEdge_overLocalBijective",
    "AlgebraicGeometry.coherent_affine_base_change_edge_naturality"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/CoherentAffineBaseChangeEdge.lean",
@@ -353,5 +332,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Re-delivery after the RETURN on c19c2cada59d. Lean module byte-identical to the one judged faithful there; item changes only stmt_deps. H2 repaired: new existing:true def nodes def-weil-pbc-pinned-single-degree-tensor-comparison (pinnedSingleDegreeTensorComparison) and def-weil-pbc-single-degree-module-base-change-composite (singleDegreeBaseChangeSource/Target/Composite) replace theorem node lem-pc-open-pinned-single-degree-square. Signatures verbatim, texts match bodies, the theorem stmt_dep lem-pc-ringed-spaces-derived-pullback-composition is justified by .choose of exists_derivedPullbackComposition, citations equal stmt_deps, no other definition node owns the decls, no cycle, both decls used by coherentEdgeDelta/Gamma. H13 repaired: def-pc-derived-module-base-change-map record byte-identical to live. Compile: nt_compile 60 s and lcompile 600 s timed out under load ~155; relied on the identical file's clean 263 s lcompile in the prior review plus the delivery's clean scompile and passing dry run. Second reading is a labelled self-audit (observation only)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-53e2d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261022T114331-L-608771",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-weil-pbc-coherent-affine-base-change-edge-naturality and new nodes top-degree-leray-square / tensor-single-base-change-pasting against the delivered Lean; six re-bodied coherentEdge* defs checked defeq against the published module in a sandbox; axioms printed for the item, the pasting theorem and the square"
  }
 }

@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-rational-based-retract-universal-homotopy",
+ "kind": "statement",
+ "title": "Fixed rational cochain retracts admit universally extended based homotopies",
+ "statement": "Let $M$ be a set. For each $m\\in M$ let $(P_m^n,d_m^n)_{n\\geq0}$ be a cochain complex of rational vector spaces, meaning $d_m^{n+1}d_m^n=0$, with a specified basis in each degree and cohomology defined by kernel modulo image, using the cochain reindexing of [def-weil-pbc-module-chain-complex-homology]. Let $K_m^n$ be based rational vector spaces with zero differential. Extend all terms by zero to negative degrees. Suppose rational linear maps $i_m^n:K_m^n\\to P_m^n$ and $p_m^n:P_m^n\\to K_m^n$ satisfy $d_mi_m=0$, $p_md_m=0$, $p_mi_m=1$, and $p_m$ induces an isomorphism\n$$\\ker d_m^n/\\operatorname{im}d_m^{n-1}\\xrightarrow{\\sim}K_m^n$$\nin every degree. Put $C_m^n=\\ker p_m^n$ and $Z_m^n=\\ker(d_m^n|_{C_m^n})$. Then $P_m=i_m(K_m)\\oplus C_m$ as complexes, $C_m$ is acyclic, and there are rational subspaces $L_m^n$ with\n$$C_m^n=Z_m^n\\oplus L_m^n,\\qquad d_m^n:L_m^n\\xrightarrow{\\sim}Z_m^{n+1}.$$\nFor any such choices, let $s_m^n:Z_m^n\\to L_m^{n-1}$ be the inverse, with $s_m^0=0$ since $Z_m^0=0$. The prescription\n$$h_m^n(i_mk+z+l)=s_m^n(z)\\quad(k\\in K_m^n,\\ z\\in Z_m^n,\\ l\\in L_m^n)$$\ndefines rational linear maps on $P=\\bigoplus_mP_m$, preserving $m$, such that\n$$h^0=0,\\qquad dh+hd=1-ip,\\qquad hi=0,\\qquad ph=0,\\qquad h^2=0.$$\nEach basis vector has image a finite rational linear combination of basis vectors. For every commutative $\\mathbf Q$-algebra $B$, including the zero algebra, replace each based space by the free $B$-module on the same basis and replace every rational matrix entry of $d,i,p,h$ by its image under $\\mathbf Q\\to B$. All these maps are well defined, and the same identities $d^2=0$, $di=0$, $pd=0$, $pi=1$, $dh+hd=1-ip$, $hi=ph=h^2=0$ hold over $B$. No finite-dimensionality, boundedness, or nonzero-algebra assumption is imposed.\nFor the particular constant cochain complex $P^n=\\mathbf Q$ in every $n\\geq0$, with $d^n=0$ for even $n$ and $d^n=1$ for odd $n$, and $K=\\mathbf Q$ in degree zero, with $i,p$ identity in degree zero and zero otherwise, a choice of this homotopy is $h^n=1$ for even $n\\geq2$ and $h^n=0$ otherwise; its matrix extension works over every $B$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic obligation under the trivial lattice calculation; returned proof steps 7 and 8: the acyclic kernel of the fixed retraction, complements of cycles, inverse differential homotopy, direct sums and finite rational matrix scalar extension, including the constant-complex edge case. Agent-formulated; vector-space complements are already lem-trf-vector-subspace-complement, not a new complement lemma."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Fix $m$ and suppress it. The map $q^n=1-i^np^n$ has image in $C^n$, since $pq=p-pip=0$, and fixes every element of $C^n$. Every $x\\in P^n$ is $i(px)+q(x)$. If $i(k)\\in C^n$, then $k=pi(k)=0$, so the decomposition is unique. Since $di=0$ and $pd=0$, the differential kills $i(K)$ and maps $C^n$ to $C^{n+1}$; also $dq=d=qd$. Thus this is a decomposition of complexes, with the specified $i,p$, not merely a degreewise decomposition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image for continuous coefficients; agent-written rational linear-algebra obligation extracted in lem-sfb-rational-polynomial-bar-contraction, fixed retraction and scalar-extension subargument."
+   }
+  },
+  {
+   "text": "Let $z\\in C^n$ satisfy $dz=0$. Its class in $H^n(P)=\\ker d^n/\\operatorname{im}d^{n-1}$ maps to $p(z)=0$. Injectivity of the hypothesized cohomology map gives $z=dy$ for some $y\\in P^{n-1}$. Put $y_C=y-i(p(y))$; then $p(y_C)=0$ and $dy_C=dy=z$. Conversely $d^2=0$ makes every boundary in $C$ a cycle. Hence $Z^n=d(C^{n-1})$ and $C$ is acyclic. At $n=0$, the incoming term is zero, so the same argument gives $Z^0=0$. This uses the kernel-modulo-image meaning of cohomology in [def-weil-pbc-module-chain-complex-homology], with chain index $-n$.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image for continuous coefficients; agent-written rational linear-algebra obligation extracted in lem-sfb-rational-polynomial-bar-contraction, fixed retraction and scalar-extension subargument."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-vector-subspace-complement] over the field $\\mathbf Q$ to the subspace $Z_m^n\\subseteq C_m^n$, for every $(m,n)$, choosing complements $L_m^n$ simultaneously over this set of indices. It gives unique decompositions $C_m^n=Z_m^n\\oplus L_m^n$ without dimension restrictions. The restriction $d:L_m^n\\to Z_m^{n+1}$ is injective because its kernel is $L_m^n\\cap Z_m^n=0$. It is surjective: the preceding step gives $z=dc$, and writing $c=z_0+l$ gives $z=dl$. Its inverse is linear, since uniqueness of inverse images makes it preserve addition and rational scalar multiplication. Denote the inverse in degree $n$ by $s_m^n$; set $s_m^0=0$ on $Z_m^0=0$.",
+   "uses": [
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+    "place": "Submodule.exists_isCompl, lines 280–282; injectivity and surjectivity of the restricted differential computed explicitly from the preceding step."
+   }
+  },
+  {
+   "text": "For any of these complement choices, unique decomposition defines the linear map $h^n(ik+z+l)=s^n(z)$ in each $m$. For $n\\geq1$, $d^{n-1}h^n(ik+z+l)=z$, while $d^n(ik+z+l)=d^nl\\in Z^{n+1}$ and $h^{n+1}d^n(ik+z+l)=s^{n+1}(d^nl)=l$. Their sum is $z+l=(1-ip)(ik+z+l)$. For $n=0$, $z=0$, $h^0=0$, and the second calculation alone gives the identity. Moreover $hi=0$ because $ik$ has zero $Z$-coordinate, and $ph=0$ because the image of $h$ lies in $L^{n-1}\\subseteq C^{n-1}$. Finally $h^{n-1}s^n(z)=0$, since $s^n(z)$ lies in $L^{n-1}$ and has zero $Z^{n-1}$-coordinate; thus $h^2=0$, including the bottom degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image for continuous coefficients; agent-written rational linear-algebra obligation extracted in lem-sfb-rational-polynomial-bar-contraction, fixed retraction and scalar-extension subargument."
+   }
+  },
+  {
+   "text": "An element of $\\bigoplus_m P_m^n$ has only finitely many nonzero $m$-components. Define $d,i,p,h$ on the corresponding direct sums componentwise. Each sends a component into the same $m$, so its output again has finite $m$-support. Addition, composition, and the identities just proved are checked in each component, which proves all asserted rational identities on the direct sums. This also covers $M=\\varnothing$. In every specified basis the image of each basis vector under any of these linear maps is a finite rational linear combination, by the definition of a basis; the bases need not respect the chosen complements.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image for continuous coefficients; agent-written rational linear-algebra obligation extracted in lem-sfb-rational-polynomial-bar-contraction, fixed retraction and scalar-extension subargument."
+   }
+  },
+  {
+   "text": "Here is the scalar-extension calculation, for arbitrary sets of basis indices. Write a rational map $f:\\mathbf Q^{(I)}\\to\\mathbf Q^{(J)}$ as $f(e_a)=\\sum_{b\\in S_a}f_{ba}e_b$ with $S_a$ finite. For $\\alpha:\\mathbf Q\\to B$ define $f_B(\\sum_{a\\in T}b_ae_a)=\\sum_{a\\in T}\\sum_{b\\in S_a}b_a\\alpha(f_{ba})e_b$, where $T$ is finite. Unique basis coefficients make this well defined and $B$-linear. If $g(e_b)=\\sum_{c\\in U_b}g_{cb}e_c$, then the composite on $e_a$ has support in the finite union $\\bigcup_{b\\in S_a}U_b$ and coefficient $\\sum_{b\\in S_a}\\alpha(g_{cb})\\alpha(f_{ba})=\\alpha(\\sum_{b\\in S_a}g_{cb}f_{ba})$. Thus $(gf)_B=g_Bf_B$; the same finite calculation gives $(f+g)_B=f_B+g_B$, $0_B=0$ and $(1)_B=1$, and negatives follow from $\\alpha(-r)=-\\alpha(r)$. Apply these rules to each rational identity for $d,i,p,h$ proved above or assumed in the hypotheses. They give exactly all displayed identities over $B$. No injectivity of $\\alpha$ is used; in particular the calculation holds when $B$ is the zero algebra. No infinite sum, finite-dimensionality, or boundedness enters.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image for continuous coefficients; agent-written rational linear-algebra obligation extracted in lem-sfb-rational-polynomial-bar-contraction, fixed retraction and scalar-extension subargument."
+   }
+  },
+  {
+   "text": "For the specified constant complex, $H^0=\\mathbf Q$, and in positive even degrees the incoming differential is the identity while in odd degrees the outgoing differential is the identity, so all positive cohomology vanishes. The indicated $i,p$ therefore satisfy the hypotheses. Here $C^0=0$ and $C^n=\\mathbf Q$ for $n\\geq1$; $Z^n=C^n$ for even $n\\geq2$ and $Z^n=0$ for odd $n$, so the only complements are $L^n=0$ for even $n$ and $L^n=C^n$ for odd $n\\geq1$. Thus $s^n=(d^{n-1})^{-1}=1$ for even $n\\geq2$, and the prescription of step 4 gives exactly $h^n=1$ for even $n\\geq2$ and $h^n=0$ otherwise; this $h$ is therefore one (indeed the only) choice of the construction. With the stated $h$, in degree zero both $dh+hd$ and $1-ip$ are zero; in positive even degrees $d^{n-1}h^n=1$ and $h^{n+1}d^n=0$, while in odd degrees these are respectively $0$ and $1$. Every consecutive pair of homotopy components contains a zero map, so $h^2=0$; $hi=ph=0$ follows from $h^0=h^1=0$ and the degree support of $i,p$. All entries are $0$ or $1$, so the preceding finite-column calculation gives precisely this homotopy over every $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image for continuous coefficients; agent-written rational linear-algebra obligation extracted in lem-sfb-rational-polynomial-bar-contraction, fixed retraction and scalar-extension subargument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-trf-vector-subspace-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image for continuous coefficients; agent-written rational linear-algebra obligation extracted in lem-sfb-rational-polynomial-bar-contraction, fixed retraction and scalar-extension subargument. The blueprint supplies the obligation, not this detailed homotopy proof; complements use the existing Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(acyclic|quasiIso|quasi.isomorphism).*(contract|homotopyEquiv)|(contract|homotopyEquiv).*(acyclic|quasiIso)",
+   "results": "{\"t\": \"2026-10-22T06:05:13Z\", \"tool\": \"grep\", \"query\": \"(acyclic|quasiIso|quasi.isomorphism).*(contract|homotopyEquiv)|(contract|homotopyEquiv).*(acyclic|quasiIso)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\"], \"digest\": \"458add4c4e4c35a6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: null-homotopies of K-projective or K-injective complexes do not supply the specified retraction homotopy with its complements formula, multigrading preservation, and simultaneous finite-column scalar extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Choose complements to cycles in the acyclic kernel of a rational cochain retraction to obtain a contracting homotopy and extend its finite support matrix columns to arbitrary coefficient algebras",
+   "results": "{\"t\": \"2026-10-22T06:05:14Z\", \"tool\": \"leansearch\", \"query\": \"Choose complements to cycles in the acyclic kernel of a rational cochain retraction to obtain a contracting homotopy and extend its finite support matrix columns to arbitrary coefficient algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.mkCoinductiveAux₁\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"Homotopy.mkCoinductive\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"HomologicalComplex.Acyclic\", \"Homotopy.mkCoinductiveAux₂\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\"], \"digest\": \"eb123b8b0e30d285\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: null-homotopies of K-projective or K-injective complexes do not supply the specified retraction homotopy with its complements formula, multigrading preservation, and simultaneous finite-column scalar extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"IsSplit\"",
+   "results": "{\"t\": \"2026-10-22T06:05:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"IsSplit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: null-homotopies of K-projective or K-injective complexes do not supply the specified retraction homotopy with its complements formula, multigrading preservation, and simultaneous finite-column scalar extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-isomorphic retraction of based rational cochain complexes onto a zero differential complex there is a homotopy for the specified retraction whose column finite matrices extend to every rational algebra",
+   "results": "{\"t\": \"2026-10-22T06:05:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi-isomorphic retraction of based rational cochain complexes onto a zero differential complex there is a homotopy for the specified retraction whose column finite matrices extend to every rational algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instQFactorsThroughHomotopyDown\", \"ComplexShape.QFactorsThroughHomotopy_of_exists_prev\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.IsKProjective.homotopyZero\", \"instQFactorsThroughHomotopyIntUp\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CochainComplex.cm5b.homotopyEquiv\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\"], \"digest\": \"cd35305e143bbca4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: null-homotopies of K-projective or K-injective complexes do not supply the specified retraction homotopy with its complements formula, multigrading preservation, and simultaneous finite-column scalar extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fixed rational cochain retract with acyclic kernel admits a deformation homotopy compatible with scalar extension including infinite bases and the zero coefficient ring",
+   "results": "{\"t\": \"2026-10-22T06:05:29Z\", \"tool\": \"leanfinder\", \"query\": \"A fixed rational cochain retract with acyclic kernel admits a deformation homotopy compatible with scalar extension including infinite bases and the zero coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.homotopyZero\", \"CochainComplex.cm5b.homotopyEquiv\", \"CochainComplex.HomComplex.Cochain.ofHomotopy_refl\"], \"digest\": \"6e877e755be090fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: null-homotopies of K-projective or K-injective complexes do not supply the specified retraction homotopy with its complements formula, multigrading preservation, and simultaneous finite-column scalar extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"retract\"",
+   "results": "{\"t\": \"2026-10-23T09:48:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"retract\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general homotopy constructors, K-projective null homotopies, special cylinder/simplicial splittings, or quasi-isomorphism properties; none gives this specified retraction, complement formula, side identities and universal finite-column extension. Source signatures of Homotopy.mkCoinductive and IsKProjective.homotopyZero were read."
+  },
+  {
+   "tool": "grep",
+   "query": "(deformation.?retract|strong.?deformation|contracting.?homotopy|column.?finite)",
+   "results": "{\"t\": \"2026-10-23T09:48:20Z\", \"tool\": \"grep\", \"query\": \"(deformation.?retract|strong.?deformation|contracting.?homotopy|column.?finite)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Basis/Cardinality.lean\"], \"digest\": \"f0226abb35b6a649\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general homotopy constructors, K-projective null homotopies, special cylinder/simplicial splittings, or quasi-isomorphism properties; none gives this specified retraction, complement formula, side identities and universal finite-column extension. Source signatures of Homotopy.mkCoinductive and IsKProjective.homotopyZero were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-isomorphic retraction of rational cochain complexes onto its cohomology admits a square zero homotopy from identity to the retraction compatible with arbitrary scalar extension",
+   "results": "{\"t\": \"2026-10-23T09:48:21Z\", \"tool\": \"leansearch\", \"query\": \"A quasi-isomorphic retraction of rational cochain complexes onto its cohomology admits a square zero homotopy from identity to the retraction compatible with arbitrary scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"quasiIso_of_retractArrow\", \"retractionOfSectionOfKerSqZero\", \"Homotopy.mkCoinductive\", \"CategoryTheory.ShortComplex.quasiIso_iff_isIso_descOpcycles\", \"HomologicalComplex.quasiIso\", \"CategoryTheory.ShortComplex.QuasiIso.casesOn\", \"HomotopyCategory.quasiIso\", \"quasiIso_of_isIso\"], \"digest\": \"1b6a0eb4a591064d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general homotopy constructors, K-projective null homotopies, special cylinder/simplicial splittings, or quasi-isomorphism properties; none gives this specified retraction, complement formula, side identities and universal finite-column extension. Source signatures of Homotopy.mkCoinductive and IsKProjective.homotopyZero were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A based rational cochain retract inducing a cohomology isomorphism admits a homotopy from identity to inclusion projection, square zero and killed by inclusion and projection, whose column finite matrices extend to any rational algebra",
+   "results": "{\"t\": \"2026-10-23T09:48:29Z\", \"tool\": \"leanfinder\", \"query\": \"A based rational cochain retract inducing a cohomology isomorphism admits a homotopy from identity to inclusion projection, square zero and killed by inclusion and projection, whose column finite matrices extend to any rational algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"Homotopy.mkCoinductive\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.homotopyZero\", \"AlgebraicTopology.DoldKan.homotopyPToId\"], \"digest\": \"eca665a6bee18faf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general homotopy constructors, K-projective null homotopies, special cylinder/simplicial splittings, or quasi-isomorphism properties; none gives this specified retraction, complement formula, side identities and universal finite-column extension. Source signatures of Homotopy.mkCoinductive and IsKProjective.homotopyZero were read."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyZero|mkCoinductive|exists_isCompl",
+   "results": "{\"t\": \"2026-10-23T09:49:20Z\", \"tool\": \"grep\", \"query\": \"homotopyZero|mkCoinductive|exists_isCompl\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\"], \"digest\": \"e09b12a1fe97ca52\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general homotopy constructors, K-projective null homotopies, special cylinder/simplicial splittings, or quasi-isomorphism properties; none gives this specified retraction, complement formula, side identities and universal finite-column extension. Source signatures of Homotopy.mkCoinductive and IsKProjective.homotopyZero were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Split an acyclic complex of vector spaces using complements to cycles and invert the differential to produce a contracting homotopy",
+   "results": "{\"t\": \"2026-10-23T09:49:20Z\", \"tool\": \"leanfinder\", \"query\": \"Split an acyclic complex of vector spaces using complements to cycles and invert the differential to produce a contracting homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.cylinder.πCompι₀Homotopy.inrX_nullHomotopy_f\", \"HomologicalComplex.cylinder.πCompι₀Homotopy.nullHomotopy\", \"AlgebraicTopology.DoldKan.splitMonoInclusionOfMooreComplexMap\", \"CategoryTheory.ShortComplex.Splitting\", \"SimplicialObject.Splitting.nondegComplex\", \"HomologicalComplex.cylinder\", \"HomologicalComplex.cylinder.πCompι₀Homotopy.nullHomotopicMap_eq\", \"HomologicalComplex.cylinder.ι₀_π\"], \"digest\": \"f0b20e082c6eef1c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern general homotopy constructors, K-projective null homotopies, special cylinder/simplicial splittings, or quasi-isomorphism properties; none gives this specified retraction, complement formula, side identities and universal finite-column extension. Source signatures of Homotopy.mkCoinductive and IsKProjective.homotopyZero were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-polynomial-bar-contraction",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic obligation under the trivial lattice calculation; returned proof steps 7 and 8: the acyclic kernel of the fixed retraction, complements of cycles, inverse differential homotopy, direct sums and finite rational matrix scalar extension, including the constant-complex edge case. Agent-formulated; vector-space complements are already lem-trf-vector-subspace-complement, not a new complement lemma.",
+   "via": [
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rational-based-retract-universal-homotopy",
+  "worker": "stage1",
+  "summary": "Q129: retained the full statement and gave seven explicit steps. Decomposed the specified retraction, proved its kernel acyclic, used the existing arbitrary-dimensional complement leaf, computed all homotopy side identities, assembled direct sums, proved scalar extension by finite column sums, and checked the constant complex. No new nodes or Lean changes.",
+  "blueprint": "Latest blueprint direct-images proof (3), open direct image for continuous coefficients; realizes the fixed rational retract obligation inherited through lem-sfb-rational-polynomial-bar-contraction. The ancestor command returns None, so the inherited null anchor and exact from.place are retained. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-11223d32d",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-11223d32d (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full; there are no new nodes. The statement and stmt_deps are byte-equal to live and side-live, where the item is still unsplit, and there is no re-split note. Steps 1-6 are correct. Step 1: q=1-ip gives the decomposition P=i(K)+C as complexes. Step 2: the cited homology definition is kernel modulo image; injectivity of H(p) plus the correction y-ipy shows C is acyclic, and Z^0=0. Step 3: lem-trf-vector-subspace-complement is Submodule.exists_isCompl, checked at VectorSpace.lean lines 280-282, with no dimension hypothesis; d restricted to L is an isomorphism onto Z. Step 4: dh+hd=1-ip, hi=0, ph=0 and h^2=0 hold, including at n=0. Step 5: componentwise direct sums with finite support, M empty allowed. Step 6: the column-finite matrix calculus works for any ring map from Q to B, including the zero algebra. Fault (step 7): the statement calls the constant-complex h 'a choice of this homotopy', but the step only checked the identities. FIX: added that C, Z and L are forced, so s^n=1 for even n>=2 and the step-4 prescription gives exactly that h (the only choice). I also changed proof_origin.document from the moving latest/ symlink to main-20261015/; the paragraph (3) file is identical in both (cmp). Small cases tested: zero ring, M empty, C=0, an acyclic two-term block, the r=0 constant complex. Duplicate check: lem-trf-field-complex-cohomology-splitting does not fix the given i,p, has no side conditions and no scalar extension, so it is not a duplicate. Batch-5: lem-trf-vector-subspace-complement is a generic linear-algebra Mathlib leaf; it is not a statement or step of the trace formula or of Poincare duality, so citing it is accepted. No SGA source; tool_uses none. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RationalBasedRetract",
+  "declaration": "RationalBasedRetract.universal_homotopy",
+  "declarations": [
+   "RationalBasedRetract.extend",
+   "RationalBasedRetract.Identities",
+   "RationalBasedRetract.sumModule",
+   "RationalBasedRetract.SumIdentities",
+   "RationalBasedRetract.kernel",
+   "RationalBasedRetract.cycles",
+   "RationalBasedRetract.Complements",
+   "RationalBasedRetract.ExtendedIdentities",
+   "RationalBasedRetract.universal_homotopy",
+   "RationalBasedRetract.constantKIndex",
+   "RationalBasedRetract.constantD",
+   "RationalBasedRetract.constantI",
+   "RationalBasedRetract.constantP",
+   "RationalBasedRetract.constantH",
+   "RationalBasedRetract.constant_universal_homotopy"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RationalBasedRetract.lean",
+  "statement": "theorem universal_homotopy {IP IK : M → ℤ → Type w} (bP : ∀ m n, Module.Basis (IP m n) ℚ ((P m).X n)) (bK : ∀ m n, Module.Basis (IK m n) ℚ ((K m).X n)) (hPneg : ∀ m n, n < 0 → Subsingleton ((P m).X n)) (hKneg : ∀ m n, n < 0 → Subsingleton ((K m).X n)) (hKzero : ∀ m a b, (K m).d a b = 0) (hpi : ∀ m, i m ≫ p m = 𝟙 (K m)) (hH : ∀ m n, IsIso (HomologicalComplex.homologyMap (p m) n)) : (∀ m n, IsCompl (LinearMap.range ((i m).f n).hom) (kernel P K p m n)) ∧ (∀ m n, Set.MapsTo ((P m).d n (n + 1)) (kernel P K p m n) (kernel P K p m (n + 1))) ∧ (∀ m n, ((P m).d n (n + 1)).hom.comp ((i m).f n).hom = 0) ∧ (∀ m n, cycles P K p m n = (kernel P K p m (n - 1)).map ((P m).d (n - 1) n).hom) ∧ (∀ m, cycles P K p m 0 = ⊥) ∧ (∃ (L : ∀ m n, Submodule ℚ ((P m).X n)) (e : ∀ m n, L m (n - 1) ≃ₗ[ℚ] cycles P K p m n), Complements P K p L e) ∧ (∀ (L : ∀ m n, Submodule ℚ ((P m).X n)) (e : ∀ m n, L m (n - 1) ≃ₗ[ℚ] cycles P K p m n), Complements P K p L e → (∀ m, (e m 0).symm.toLinearMap = 0) ∧ ∃ h : ∀ m n, (P m).X n →ₗ[ℚ] (P m).X (n - 1), (∀ m n (k : (K m).X n) (z : cycles P K p m n) (l : L m n), h m n ((i m).f n k + (z : (P m).X n) + (l : (P m).X n)) = ((e m n).symm z : (P m).X (n - 1))) ∧ (∀ m, Identities ℚ (P m).X (K m).X (fun n ↦ ((P m).d n (n + 1)).hom) (fun n ↦ ((i m).f n).hom) (fun n ↦ ((p m).f n).hom) (h m)) ∧ SumIdentities ℚ (fun m n ↦ (P m).X n) (fun m n ↦ (K m).X n) (fun m n ↦ ((P m).d n (n + 1)).hom) (fun m n ↦ ((i m).f n).hom) (fun m n ↦ ((p m).f n).hom) h ∧ (∀ (B : Type t) [CommRing B] [Algebra ℚ B], ExtendedIdentities P K i p bP bK h B))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem states the general retract, complements, arbitrary-choice homotopy and scalar-extension clauses. constant_universal_homotopy states the final constant-complex clause. Other declarations are explicit formulas and packages belonging to this node, not alternative definitions of cohomology or complements. Negative degrees use zero modules up to the unique module isomorphism (Subsingleton)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b10c1ce32",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Clause-by-clause match of RationalBasedRetract.universal_homotopy against the node. Chain maps i,p with d_K=0 are exactly di=0 and pd=0. hH (IsIso homologyMap) is the node's cohomology isomorphism. Negative degrees are Subsingleton. Conclusions checked: IsCompl splitting with d-stability and d∘i=0; acyclicity Z=d(C) and Z^0=⊥; ∃ complements L with e forced to equal d; for every L and e, s^0=0 and ∃ h with h(ik+z+l)=e.symm z; Identities (h^0=0, d²=0, di, pd, pi=1, dh+hd=1-ip via index casts, hi, ph, h²); SumIdentities on Π₀ m; ExtendedIdentities over every B : Type t with no Nontrivial, using the real linearCombination/mapRange extend and the same rational h. No extra hypotheses; universes w,t,u,v free. Edge cases: M empty, empty or infinite bases, n=0, B=0. Constant clause: D,I,P,H index shifts verified; the 'a choice of this homotopy' tie to the complement construction is not stated, but the complements are forced (node step 7) and the only citer, polynomial-bar-contraction r=0, uses only the formula and identities, so noted, not a fault. lean.statement is verbatim the file signature; the node changes only the added lean record; no namespace collision; docstrings carry source and blueprint tag and the 7 proof steps; bodies only sorry; report has Worker report and Second reading by Q83. No fixes, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T091517-L-3349133",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "RationalBasedRetract.universal_homotopy"
+  ],
+  "sorry_after": []
+ }
+}

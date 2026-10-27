@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-integral-coefficient-square-normalization",
+ "kind": "statement",
+ "title": "Normalized constant-to-integral coefficient square and flat K-flat pullback",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A=\\mathcal O_E$ and uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be a morphism of separated finite-type $k$-schemes [sk-def-sfb-dc-setting]. On the small pro-étale sites put $C_Z=(A)_Z$, $R_Z=\\mathcal O_{E,Z}$ and $S_{n,Z}=(A/\\pi^n)_Z$ for $Z=X,Y$, $n\\geq1$ [def-weil-pbc-constant-sheaf, sk-def-sfb-pulled-back-coefficients]. Write $i_Z:C_Z\\to R_Z$ for the constant-function map, $r_Z=\\operatorname{Res}_{i_Z}$ for scalar restriction [def-pc-sheaf-restrict-scalars], and $g_R^*,g_C^*$ for module pullback along the canonical coefficient maps [sk-def-sfb-module-pushforward-pullback, sk-def-sfb-coefficient-morphisms].\n\nThe canonical projections identify $R_Z\\cong\\varprojlim_n S_{n,Z}$ as ring sheaves, $R_Z$ is flat over $C_Z$, and $R_Z/\\pi^nR_Z\\cong S_{n,Z}$ with the prescribed quotient projections. Put $a_C:g^{-1}C_Y\\cong C_X$ and $a_R:g^{-1}R_Y\\cong R_X$ for the canonical coefficient identifications. Then\n$$a_R\\,g^{-1}i_Y=i_Xa_C.$$\nFor every (possibly unbounded) cochain complex $H$ of $R_Y$-modules [def-pc-cochain-complex-modules], there is a natural chain isomorphism\n$$d_H:r_Xg_R^*H\\xrightarrow{\\sim}g_C^*r_YH.$$\nIts underlying abelian-sheaf map is the identity after both sides are identified with $g^{-1}H$: the completed scalar-extension identification sends $r\\otimes h$ to $a_R^{-1}(r)h$ and its inverse sends $h$ to $1\\otimes h$, with the analogous formulas over $C$. These identifications agree on the $C_X$-actions and specify $d_H$ on all scalar-extension generators. Both module pullbacks are exact. If $P$ is K-flat with flat terms over $R_Y$, then $r_YP$, $g_R^*P$, and $g_C^*r_YP$ are K-flat with flat terms over $C_Y,R_X,C_X$, respectively [def-pc-kflat-complex, def-pc-flat-sheaf-modules, def-pc-tensor-complex-sheaves]. No boundedness, constructibility or completeness hypothesis is imposed on $H$ or $P$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph: Cartesian inverse image is exact; Comparison with the Stacks Project: restriction commutes with inverse image. Returned proof steps 1–3: coefficient square, flatness and K-flat representatives. Agent-written strict cochain refinement; Stacks sites-modules.tex Tag 093M (lemma-completion-flat); sites-cohomology.tex Tag 0G7E (lemma-pullback-K-flat)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-constant-sheaf",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Use the integral assertion of admissible scalar realization for the spectral topology on O_E. The DVR uniformizer generates its maximal ideal. Its completed identification supplies the ring-sheaf isomorphism and exactly the constant-scalar residue normalization on X and Y.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-sfb-admissible-scalar-realization-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a Noetherian completed constant ring, each projection is surjective on sections and its kernel is generated locally by the constant ideal power. Apply the proved projection-surjectivity-and-kernel part of the completed constant algebra theorem. A compatible ring map annihilates that kernel by its linear version, and therefore factors uniquely through the projection. The factors are natural, giving the specified pushout of ring sheaves. Transport the pushout across the normalized completed identification. Exact internal scalar extension identifies, after forgetting, with tensoring by the restricted regular module. Since forgetting reflects finite limits, the restricted regular module is internally flat; the section tensor comparison makes it flat on the site.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-c2-internal-section-module-flatness",
+    "lem-sfb-admissible-scalar-realization-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of upperStarFromPointComp to the discrete-to-continuous scalar map. This is precisely the scalar square. Cancel the invertible coefficient comparisons to obtain the inverse square. Use the extension-along-isomorphism quotient formula to prove both generator formulas for each coefficient ring.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "def-sfb-finite-constant-model-data",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-extension-iso-quotient-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the Cartesian pullback isomorphism with scalar restriction. Between the two inverse-image lifts use the change-of-scalars-square isomorphism, whose underlying map is the identity, then the inverse Cartesian comparison. Cancellation gives the required normalization. Apply mapHomologicalComplex to this natural isomorphism; it is the required whole-chain comparison in every integer degree. The existing exactness instances give both exactFunctor assertions.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Encode scalar restriction as sectionwise restriction using the canonical sectionModuleComapIso and identify the regular module with the unit. Its established flatness is the hypothesis of flat scalar restriction preserving K-flatness. Transport K-flatness and termwise flatness through the same comparison, using invariance under isomorphism.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical Cartesian comparison identifies module pullback with inverse image followed by restriction along the inverse coefficient isomorphism. This preserves flat objects by the proved inverse-image flatness theorem. The section tensor comparison equates the recorded K-flatness test with internal K-flatness; the latter is equivalently the K-flat homotopy-category predicate. Apply the generic theorem that a flat-preserving additive colimit functor sends K-flat complexes with flat terms to K-flat complexes, and translate back. Apply this first to P and then to its scalar restriction. This includes unbounded complexes.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "new-proetale-inverse-image-module-flat",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-c2-internal-section-module-flatness",
+    "lem-sfb-flat-term-kflat-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sfb-admissible-scalar-realization-exact",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-c2-internal-section-module-flatness",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-finite-constant-model-data",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-extension-iso-quotient-formula",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "new-proetale-inverse-image-module-flat",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-flat-term-kflat-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "Y8 Lean proof: normalized completed identification and flatness via admissible scalar realization; ring quotient pushout from the completed-constant kernel theorem; canonical scalar naturality and extension-along-isomorphism generator formulas; termwise comparison; flat restriction and the generic flat-term K-flat functor theorem applied to module inverse image."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant and completed adic sheaf coefficients have a commuting inverse image square and normalized restriction of scalars pullback isomorphism preserving flat term K flat complexes",
+   "results": "unavailable: [leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism the discrete to continuous coefficient square commutes, and inverse image after scalar restriction identifies with restriction of inverse image by the identity on underlying sheaves",
+   "results": "AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc [Mathlib/AlgebraicGeometry/StructureSheaf]; AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE [Mathlib/AlgebraicGeometry/AffineScheme]; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap [Mathlib/AlgebraicGeometry/StructureSheaf]; AlgebraicGeometry.Spec.map_appLE [Mathlib/AlgebraicGeometry/Scheme]; ModuleCat.Tilde.toOpen_res [Mathlib/AlgebraicGeometry/Modules/Tilde]; AlgebraicGeometry.Scheme.Opens.toSpecΓ_naturality [Mathlib/AlgebraicGeometry/AffineScheme]; AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc [Mathlib/AlgebraicGeometry/Scheme]; AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_presheaf_map [Mathlib/AlgebraicGeometry/AffineScheme]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars [Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings]; SheafOfModules.instAdditiveRestrictScalars [Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings]; SheafOfModules.restrictScalars_obj_val [Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings]; SheafOfModules.restrictScalars_map_val [Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|pullback).*(KFlat|[Ff]lat)|[Cc]oefficient.*[Ss]quare",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat constant to completed ring sheaves give flat K flat scalar restriction; the scalar extension generator formula for geometric pullback is compatible with the coefficient square",
+   "results": "RingHom.Flat [Mathlib/RingTheory/RingHom/Flat]; Algebra.Smooth.flat [Mathlib/RingTheory/Smooth/Flat]; Algebra.FormallyUnramified.flat_of_restrictScalars [Mathlib/RingTheory/Unramified/Finite]; RingHom.Flat.ofLocalizationSpanTarget [Mathlib/RingTheory/RingHom/Flat]; Module.flat_of_isLocalized_span [Mathlib/RingTheory/Flat/Localization]; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat [Mathlib/AlgebraicGeometry/Morphisms/Flat]; RingHom.Flat.localRingHom [Mathlib/RingTheory/RingHom/Flat]; RingHom.Flat.isStableUnderBaseChange [Mathlib/RingTheory/RingHom/Flat]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant and completed adic ring sheaves form a natural coefficient square; inverse image commutes with restriction of scalars and preserves K-flat complexes",
+   "results": "AdicCompletion.flat_of_isNoetherian; AdicCompletion.map_of; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; AdicCompletion.eval_comp_of; AdicCompletion.ofTensorProduct_naturality; IsAdicComplete.of_comp_lift; AdicCompletion.module; localCohomology.diagram",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the combined normalized pro-étale coefficient square, quotient identifications and unbounded flat-term K-flat assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the combined normalized pro-étale coefficient square, quotient identifications and unbounded flat-term K-flat assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "(completion|[Kk]Flat|[Kk]_flat)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the combined normalized pro-étale coefficient square, quotient identifications and unbounded flat-term K-flat assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat completed constant ring sheaf on the proetale site and K flat inverse image",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.IsConstant.casesOn; CategoryTheory.constantSheaf; CategoryTheory.Sheaf.IsConstant.recOn; CategoryTheory.Sheaf.IsConstant.rec; CategoryTheory.Sheaf.IsConstant.mk; CategoryTheory.Sheaf.isConstant_iff_of_equivalence; LightCondensed.IsDiscrete",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the combined normalized pro-étale coefficient square, quotient identifications and unbounded flat-term K-flat assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi with invertible coefficient map, pullback is identity on inverse image sheaves and commutes with scalar restriction in a commutative square",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_id_comp; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the combined normalized pro-étale coefficient square, quotient identifications and unbounded flat-term K-flat assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|def pullback|theorem.*pullback",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state the combined normalized pro-étale coefficient square, quotient identifications and unbounded flat-term K-flat assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-pullback-strict-roos-normalization",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "First paragraph: Cartesian inverse image is exact; Comparison with the Stacks Project: restriction commutes with inverse image. Returned proof steps 1–3: coefficient square, flatness and K-flat representatives.",
+   "via": [
+    "lem-sfb-integral-pullback-strict-roos-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-coefficient-square-normalization",
+  "worker": "stage1",
+  "summary": "Q111: eight-step split, no new nodes. Reuse normalized compact-adic coefficient identification, completed constant flat algebra and quotient theorem, flat scalar restriction, and ringed-topos K-flat pullback. Write the coefficient naturality square, inverse scalar-extension maps, scalar-action equality and degreewise naturality explicitly. Statement unchanged.",
+  "blueprint": "det-lem-int-tensor-pullback, first paragraph (Cartesian coefficient identifications and exact inverse image), and final Comparison with the Stacks Project paragraph (restriction of scalars commutes with inverse image). The split supplies their strict chain normalization and unbounded flat-term K-flat justification.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Local-field topology and finite quotients, used only to check the hypotheses of the normalized coefficient presentation. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sfb-integers-coset-basis",
+    "why": "Quotient-fibre neighbourhood basis required by the normalized coefficient identification. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sfb-compact-adic-continuous-identification",
+    "why": "Canonical presentation and constant-normalized projections of the actual continuous coefficient ring; avoids assuming inverse image preserves countable limits. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sfb-admissible-scalar-realization-exact",
+    "why": "Only its Noetherian scalar-ring assertion for O_E is used to apply the general completed constant algebra theorem. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "why": "Generic degree-zero completed constant ring flatness and specified quotient formula, not an alternative proof of integral constructibility. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "The coefficient Cartesian identification and exactness invoked explicitly by the blueprint first paragraph. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic exact constant-ring inverse image and its scalar-normalized canonical ring comparison. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "why": "Generic flat change-of-rings restriction of possibly unbounded K-flat complexes. No statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ringed-topos pullback preservation of flat-term K-flat complexes, used for the two coefficient systems. No statement of this unit supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-admissible-scalar-realization-exact",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-c8b58a958",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-c8b58a958 (reviewer sub-agent of L); spot-checked: PASS with no changes. The delivery splits the item into 8 steps with no new nodes and leaves the statement unchanged. On the base the item was unsplit with no proof, no repair note exists, and it is not on a dropped list. Its only citer, lem-sfb-integral-pullback-strict-roos-normalization (O3), uses exactly the clauses it states, and the proof dependencies form no cycle. Sources read: blueprint det-lem-int-tensor-pullback, its first paragraph and the 'Comparison with the Stacks Project' paragraph; Stacks Tag 093M (sites-modules l.8261) and Tag 0G7E (sites-cohomology l.3508); Lean FiniteConstantModelResolution.lean:131-147, where scalarToContinuous is the sheafified constant-function map on Profinite. Step 1: the hypotheses of the compact-adic identification hold (compact Hausdorff domain, finite A/π^{n+1}, and the q_{n+1}-fibre basis from coset-basis), and the scalar-to-residue projections follow without commuting inverse image with a limit. Step 2: Noetherian O_E plus the completed-constant node with S=R_Z and c=i_Z gives flatness; the quotient clause at index n-1 gives R/π^nR ≅ S_n, and the explicit inverses check out (π^n s⊗1=0). Step 3: the square follows from naturality of α_g at the discrete-to-adic map j, with i_Z=p_Z^*(j)∘κ_Z. Identifying α at A_disc with a_C rests on both maps sending the constant scalar a to a. This short coherence is acceptable as an elementary step. Uniqueness alone would not be enough, because O_E can have nontrivial ring automorphisms, but the step argues through the scalar-preserving property. Steps 4-5: I checked the balancing and the two inverse maps; the C_X-actions agree by the square, and naturality and compatibility with differentials hold for unbounded complexes. Step 6: g_R^* is exact by the Cartesian-coefficients node; for g_C^* the underlying functor is g^{-1}, and the lem-pe constant-scalar lift covers any ring. Steps 7-8: flat scalar restriction preserves K-flatness, and the ringed-topos pullback lemma (= Stacks 0G7E) is applied twice with the correct inputs; no boundedness is needed. Edge cases g=id, n=1, X=∅ and the zero complex are fine. I accept the 9 generic tool_uses (coefficient, flatness and K-flat tools from other units); unit sk-lem-int-tensor has no node of its own for them. No SGA source and no direct trf citation."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCoefficientSquareNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.integral_coefficient_square_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.constantPoint",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.Modules",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.scalar",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.restriction",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.restrictComplex",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.pullComplex",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.underlyingIso",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.GeneratorNormalization",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.FlatKFlat",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.RingAssertions",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.Assertions",
+   "AlgebraicGeometry.ProEtale.IntegralCoefficientSquare.IntegralAssertions"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCoefficientSquareNormalization.lean",
+  "statement": "theorem integral_coefficient_square_normalization (l : ℕ) [Fact l.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hp : p ≠ l) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (g : X ⟶ Y) : IntegralAssertions l E g.left",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The clauses use actual pulled-back internal module objects, canonically identified with sectionwise sheaf modules by sectionModuleEquivalence. The normalized positive quotient pushout states R/pi^(n+1)R = S_(n+1), including the prescribed projection; the whole-chain natural isomorphism is normalized against the existing Cartesian scalar-extension identification. All helpers package this single node; no new mathematical notion or dependency replacement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b5cc387c",
+  "group": "NO",
+  "result": "pass",
+  "note": "Only the item's lean record and the new module IntegralCoefficientSquareNormalization.lean changed versus live (live lean was null); lean.statement is verbatim in the file. Setting matches the node (ℓ, p≠ℓ, CharP, finite E with the dep's topology/integers/uniformizer, separated finite-type X,Y over Spec k); E,k : Type u is the standard universe placement. Objects are the recorded canonical ones: C_Z = p_Z^* point constant sheaf; R_Z = pulled-back continuous ring; i_Z = scalarMap = upperStarFromPoint.map scalarToContinuous (canonicalAbelianMap = constantSchemeIso ≫ same); r_Z = Mod.comap; pullbacks = CondensedRing.upperStar. Ring clauses: ∃ e to adicLisseCompletedRing is pinned by the constant-scalar residue equation plus base_exists (∃!) and the pushout leg; quotient = IsPushout in sheaves of rings, R⊗_C A/π^{n+1} ≅ S_{n+1} with leg e≫π_n; flatness via IsFlatOnSite of the restricted regular module for X and Y. Coefficient square direction checked. GeneratorNormalization states both formulas against cartesianCoefficientPullbackIso. The natural chain iso d on unbounded ℤ-complexes is pinned by its degree-wise equation. Both pullbacks are exactFunctor; the three FlatKFlat conclusions use the recorded IsKFlatIndependentCoefficients and IsFlatOnSite. Edge cases (n=1, g=id, empty schemes, zero/unbounded complexes) are covered. No hollow definitions, sorry-only proof, docstrings carry source, blueprint tag and the 8 proof steps, proof-only deps are plain imports, no pro-etale substitute. No compile (no file changed); compile evidence is the worker's compile and passing dry run. Cosmetic only: the uniformizer argument is named p, same letter as the characteristic, separate binders."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261024T022547-L-3005716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

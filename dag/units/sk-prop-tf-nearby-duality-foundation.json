@@ -1,0 +1,62 @@
+{
+ "id": "sk-prop-tf-nearby-duality-foundation",
+ "kind": "unit",
+ "chapter": "sec-trace-formula",
+ "title": "Nearby cycles commute with Verdier duality",
+ "lean": [],
+ "uses": [
+  "sk-prop-tf-nearby-external-kunneth",
+  "sk-lem-tf-nearby-mate-coherences",
+  "sk-lem-pd-generic-restriction"
+ ],
+ "statement": "Let $S$ be the excellent strictly henselian trait of\n[sk-prop-tf-nearby-external-kunneth], with separably closed residue field $k$,\nspecial point $s$, generic point $\\eta$ and geometric generic point $\\bar\\eta$, and let $A$ be\na finite commutative $\\ell$-primary ring with $\\ell$ invertible on $S$. For a\nseparated finite-type $S$-scheme $X$ write $S_X=R\\Psi_{X/S}$ for its nearby-cycle\nfunctor, $\\mu_X:S_XM\\dt S_XN\\to S_X(M\\dt N)$ for the lax tensor map and\n$\\theta_X=\\beta_{a_X}(A):S_X\\omega_{X_\\eta}\\to\\omega_{X_s}$ for the map defined by the\nexceptional exchange $\\beta$ of the structure map $a_X$, as in\n[sk-lem-tf-nearby-mate-coherences]. The duality functors on the geometric generic and\nspecial fibres are relative to these fields. For $M\\in D^b_{\\mathrm{ctf}}(X_\\eta,A)$,\nthe morphism $\\delta_{X,M}:S_X\\mathbb D_{X_\\eta}M\\to\\mathbb D_{X_s}(S_XM)$ in\n$D^b_c(X_{s,\\mathrm{\\acute et}},A)$ is the tensor–Hom adjoint of the pairing\n\n$$\n S_XM\\otimes S_X\\mathbb D_{X_\\eta}M\n \\xrightarrow{\\mu_X}S_X(M\\otimes \\mathbb D_{X_\\eta}M)\n \\xrightarrow{S_X\\operatorname{ev}}S_X\\omega_{X_\\eta}\n \\xrightarrow{\\theta_X}\\omega_{X_s}.\n \\tag{1}\n$$\n\nFor every separated finite-type $S$-scheme $X$ and\n$M\\in D^b_{\\mathrm{ctf}}(X_\\eta,A)$, the normalized map\n\n$$\n \\delta_{X,M}:S_X\\mathbb D_{X_\\eta}M\n       \\xrightarrow{\\sim}\\mathbb D_{X_s}(S_XM)\n$$\n\nis an isomorphism in $D^b_c(X_{s,\\mathrm{\\acute et}},A)$.\n\nThe same holds for a constructible complex of finite Tor dimension given\ninitially on $X_{\\bar\\eta}$: such a complex descends to a finite\nextension of $\\eta$, and trait-change invariance identifies the\nresulting assertion with the one just stated.",
+ "steps": [
+  {
+   "text": "We work on the classical étale site and use the exchanges $\\chi_f$, $\\nu_f$, $\\beta_f$\nof [sk-lem-tf-nearby-mate-coherences]; recall that $\\beta_f$ is the exceptional adjoint\nof $Rf_{s!}S_Vf_\\eta^!\\xrightarrow{\\nu_f}S_WRf_{\\eta!}f_\\eta^!\\xrightarrow{S_W\\varepsilon_{f_\\eta}}S_W$\nand that $\\nu_f=\\chi_f^{-1}$ for proper $f$."
+  },
+  {
+   "text": "As for [sk-prop-tf-nearby-external-kunneth], global duality\nkills the global sections of the cone of $\\delta$ for projective $X$,\nand generic slicing with induction on dimension shows that the cone has\nfinite support. The two compatibilities that this argument needs, of\n$\\delta$ with proper direct image and with generic slicing, take up most\nof the proof; the slicing compatibility is where the twist $A(1)[2]$\nhas to be tracked on both fibres."
+  },
+  {
+   "text": "*Proper direct image and its normalization.*\nFor proper $f:X\\to Y$, proper exchange and the ordinary Verdier\nduality of the section on Poincaré duality identify\n\n$$\n Rf_{s*}\\delta_{X,M}\\quad\\text{with}\\quad\n \\delta_{Y,Rf_{\\eta*}M}.\n \\tag{2}\n$$\n\nUnder proper Verdier\nduality, evaluation on $Rf_{\\eta*}M$ is the composite of the lax\nproduct of $Rf_{\\eta*}$, $Rf_{\\eta*}\\operatorname{ev}_M$, and the\ntrace $Rf_{\\eta*}\\omega_{X_\\eta}\\to\\omega_{Y_\\eta}$.\nThus, after taking tensor–Hom adjoints, both sides of\n(2) are the pairing\n\n$$\n\\begin{aligned}\n Rf_{s*}S_XM\\otimes Rf_{s*}S_X\\mathbb D M\n &\\xrightarrow{\\chi_f^{-1}\\otimes\\chi_f^{-1}}\n S_YRf_{\\eta*}M\\otimes S_YRf_{\\eta*}\\mathbb DM\\xrightarrow{\\mu_Y}\n S_Y(Rf_{\\eta*}M\\otimes Rf_{\\eta*}\\mathbb DM)\\\\\n &\\longrightarrow S_YRf_{\\eta*}(M\\otimes \\mathbb DM)\n \\longrightarrow S_YRf_{\\eta*}\\omega_{X_\\eta}\n \\longrightarrow S_Y\\omega_{Y_\\eta}\n \\xrightarrow{\\theta_Y}\\omega_{Y_s}.\n\\end{aligned}\n$$\n\nTo identify the pairing obtained from $Rf_{s*}\\delta_{X,M}$ with this\none, commute the lax products through proper exchange and use the identity\n\n$$\n \\theta_X=f_s^!\\theta_Y\\circ\\beta_f(\\omega_{Y_\\eta})\n$$\n\nof [sk-lem-tf-nearby-mate-coherences].\nThe first identity follows by taking ordinary adjoints, since both\nmaps become the tensor product of the two generic-open counits.\nThe second follows by taking exceptional adjoints and composing the\ntwo compact-support counits. This proves\n(2). The same description shows that\n$\\delta$ restricts to its corresponding map on an open subset, because\nnearby smooth exchange is an isomorphism for an open immersion and\n$j^!=j^*$."
+  },
+  {
+   "text": "In particular, if $X$ is proper over $S$, proper exchange for $a$ and\nglobal Verdier duality identify\n\n$$\n R\\Gamma(X_s,\\delta_{X,M})\n \\quad\\text{with the identity of}\\quad\n R\\operatorname{Hom}_A(R\\Gamma(X_{\\bar\\eta},M),A).\n \\tag{3}\n$$\n\nThis also follows from (2) for $a$:\nnearby cycles on the trait itself are the underlying geometric-generic\ncomplex, and their normalized pairing is ordinary evaluation."
+  },
+  {
+   "text": "*The duality shift in a generic slice.*\nLet $b:X\\to\\mathbf A^1_S$ be a coordinate map and let\n$S'=(\\mathbf A^1_S)_{(s')}$ be the strict localization of $\\mathbf A^1_S$ at a geometric\ngeneric point $s'$ of the special fibre $\\mathbf A^1_k$, the trait used in the\ngeneric-slicing identification\n$(R\\Psi_{W/S}N)|_{W_s\\times_{\\mathbf A^1_k}s'}\\simeq(R\\Psi_{W'/S'}N')^P$ of the proof of\n[sk-prop-tf-nearby-external-kunneth]. Put $X'=X\\times_{\\mathbf A^1_S}S'$,\n$M'=M|_{X'_{\\bar\\eta'}}$, and write $g_s,g_\\eta$ for the two\ngeometric generic-coordinate pullbacks. Let $P$ be the pro-$p$ kernel\nin the generic-slicing calculation.\nThe group $P$ acts trivially on $A(1)[2]$: roots of unity of order prime to\nthe residue characteristic lift over a strictly henselian trait.\nGeometric generic restriction, including internal Hom, gives\n\n$$\n g_\\eta^*\\mathbb D_{X_{\\bar\\eta}}M\\simeq \\mathbb D_{X'_{\\bar\\eta'}}M'\\otimes A(1)[2],\n \\qquad\n g_s^*\\mathbb D_{X_s}E\\simeq \\mathbb D_{X'_{s'}}(g_s^*E)\\otimes A(1)[2].\n \\tag{4}\n$$\n\nThis is Lemma [sk-lem-pd-generic-restriction] applied on each geometric\nfibre. Its origin can also be seen locally by a closed embedding over\n$\\mathbf A^1$ into $\\mathbf A^r_{\\mathbf A^1}$: smooth purity gives\n$A(r+1)[2r+2]$ before generic restriction and $A(r)[2r]$ after it;\nthe closed-support comparison for the embedding preserves evaluation.\nThus the factor $A(1)[2]$ occurs on both fibres, and the comparison below\nkeeps it on both."
+  },
+  {
+   "text": "For a bounded constructible complex $E$ of finite Tor dimension with continuous\n$P$-action on a fixed special fibre there is a natural comparison\n\n$$\n (\\mathbb DE)^P\\xrightarrow{\\sim}\\mathbb D(E^P).\n \\tag{5}\n$$\n\nFor a finite $p$-group quotient, invariants are the image of the\nidempotent $e=|P|^{-1}\\sum_{h\\in P}h$. Verdier duality sends this\nidempotent to the same averaging idempotent on the contragredient\naction, since inversion permutes the summands. Its image is therefore\nthe dual of $\\operatorname{im}e$. Exactness of invariants and\ncontinuity give the assertion for a pro-$p$ group. The resulting\npairing is the restriction of evaluation to the two invariant direct\nsummands."
+  },
+  {
+   "text": "Under the generic-slicing identifications and\n(4), the restriction of $\\delta$\nis\n\n$$\n g_s^*\\delta_{X,M}\n \\ =\\ (\\delta_{X',M'})^P\\otimes A(1)[2],\n \\tag{6}\n$$\n\nwhere the target is identified using\n(5). The slicing calculation is obtained\nby factoring the geometric-generic inclusion and composing its\ndirect-image adjunctions. It therefore takes the lax product and\nevaluation in (1) to the corresponding\npairing on the slice, restricted to $P$-invariants. The dualizing\nmap $\\theta$ has the same compatibility. To check this, embed $X$, locally over\n$\\mathbf A^1_S$, as a closed subscheme of\n$\\mathbf A^r_{\\mathbf A^1_S}$. On $\\mathbf A^r_{\\mathbf A^1_S}$ and its slice, smooth purity\nand smooth nearby exchange identify $\\theta$ with the identity of\nthe smooth dualizing complex. Their identifications differ by $A(1)[2]$\nas just calculated. For the closed embedding $i:X\\hookrightarrow\\mathbf A^r_{\\mathbf A^1_S}$,\nthe definition of $\\beta_i$ says that $\\theta_X$ is uniquely specified\nby the pairing obtained after $Ri_{s*}$ and the exceptional counit\n$Ri_{s*}i_s^!\\to1$. Proper nearby exchange and the slicing\nfactorization commute with this counit: their ordinary adjoints are\nthe same composite of the generic-open counit and the counit for $i$.\nThe evaluation-compatible generic restriction for $i^!$ then gives the\nassertion on $X$. The exceptional pullback $i_{s'}^!$ commutes with\n$R\\Gamma(P,-)$, since both preserve limits; equivalently it preserves\nthe averaging direct summand. Thus the same closed-embedding check\napplies after taking $P$-invariants.\nThis gives the compatibility of $\\theta$. Together with the\nself-duality of the averaging projector, it proves\n(6). The even shift $[2]$ introduces\nno additional Koszul sign."
+  },
+  {
+   "text": "*Dimension induction.*\nInduct, for all traits $S$ as above, on\n$n=\\dim X_{\\bar\\eta}$. Open locality allows a projective\ncompactification and extension of $M$ by zero on its generic fibre.\nProper compatibility for the closure of that generic fibre, and\nnilpotent invariance, allow us to assume that $X$ is projective,\nreduced, and flat over $S$. These reductions do not increase $n$.\nLet $C$ be the cone of $\\delta_{X,M}$. It is bounded constructible\nby the finiteness theorem for nearby cycles and ordinary Verdier duality, and\n(3) gives $R\\Gamma(X_s,C)=0$."
+  },
+  {
+   "text": "As in the proof of [sk-prop-tf-nearby-external-kunneth], work on neighbourhoods with a\nquasi-finite relative coordinate map $X\\to\\mathbf A^q_S$, where\n$q\\leq n$. For $q>0$ take the generic slice in any one coordinate.\nIts generic-fibre dimension is at most $q-1<n$, so induction and\n(6) show that $C$ restricts to\nzero over that generic special-fibre coordinate. Its constructible\nsupport therefore projects to only finitely many closed points of\nthat coordinate line. Repeat for all $q$ coordinates. The support\nis contained in the inverse image of a finite product of finite\nsets, hence is finite because the coordinate map is quasi-finite.\nIf $q=0$, that finiteness already holds. A finite cover proves that\n$C$ has finite support on $X_s$."
+  },
+  {
+   "text": "This also supplies the base case $n=0$. A bounded constructible\ncomplex supported on finitely many closed geometric points is the\nclosed direct image of its stalk complexes; global sections are\ntheir finite direct sum and detect vanishing. Thus\n$R\\Gamma(X_s,C)=0$ forces $C=0$. This closes the induction and\nproves the proposition. Finally the finite constructible comparison\ntransports both the pairing and this isomorphism to the small\npro-étale site."
+  }
+ ],
+ "source": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-prop-tf-nearby-duality-foundation/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

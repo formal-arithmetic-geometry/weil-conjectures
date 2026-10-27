@@ -1,0 +1,108 @@
+{
+ "id": "def-sf-system-finite-evaluation-coordinates",
+ "kind": "definition",
+ "title": "Canonical fixed-scalar coordinates for a finite system evaluation",
+ "statement": "For a prime l, a finite extension E of Q_l, a system operation package o of [def-sf-integral-system-operations] and m≥0, define input(W,M) to be the canonical inverse coefficient realization of ev_m(M). Define push and shriek coordinates by composing the recorded o evaluation with the inverse coefficient counit and the specified fixed-scalar direct/open comparison. Define fixedPush and fixedShriek by inverse coefficient realization followed by its inverse unit. Define support by supportEvaluation, the inverse coefficient counit and sfIntrinsicCompactSupportComparison. These are actual composites of the specified isomorphisms, with no existence choices. The support coordinate equals the direct coordinate followed by the realized fixed open coordinate; the direct coordinates obey naturality.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluating right adjoint conjugate compositors commutes with adjunction preserving squares",
+   "results": "CategoryTheory.conjugateEquiv_comp and general adjunction-square lifting results; no coefficient-system geometric comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; abstract mate algebra does not identify the prescribed geometric comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of an adjunction mate commutes with functors preserving the unit and counit",
+   "results": "CategoryTheory.mateEquiv, unit_mateEquiv, mateEquiv_counit, iterated_mateEquiv_conjugateEquiv in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-27",
+   "verdict": "Generic algebra only; the actual normalized derived operation comparisons are project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "rg conjugate.*comp|mate.*comp in Mathlib/CategoryTheory/Adjunction; rg evaluation, canonicalBridge and pushComp in lean/Sheaf/SixFunctors and lean/WeilConjectures",
+   "results": "Mathlib conjugateEquiv_comp, mateEquiv_conjugateEquiv_vcomp; existing system unit/counit evaluations and semilinear gamma_evaluation. No declaration already compares the recorded fixed-scalar coordinates. Blueprint search for finite evaluation has no matching node.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; use existing evaluation and geometric model normalization declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemRefinementFiniteCoordinates",
+  "date": "2026-10-27",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. Individual-arrow integral system realization of these tensor and counit maps, before their compactification comparison square is deduced. The one-input support/refinement part of the individual-arrow normalization, independent of tensor and projection. Finite scalar coordinates of the one-input support/refinement argument. Operation-level finite-evaluation factor, before the two factors are pasted.",
+   "via": [
+    "lem-sf-system-refinement-finite-coordinates",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison",
+    "lem-sf-integral-support-reduction-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemFiniteEvaluationCoordinates",
+  "file": "lean/Sheaf/Paper/SystemFiniteEvaluationCoordinates.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.input",
+  "statement": "abbrev input (X : Scheme.{u}) (M : System l E X)",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.input",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.push",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.push_naturality",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.shriek",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.fixedShriek",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.fixedPush",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.support",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.fixed_square",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.fixedPush_naturality",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.support_eq",
+   "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.support_fixed_eq"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261027T103520-L-1095809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261027T103520-L-1095809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

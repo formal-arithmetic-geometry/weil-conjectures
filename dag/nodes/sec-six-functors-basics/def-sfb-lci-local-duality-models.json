@@ -1,0 +1,148 @@
+{
+ "id": "def-sfb-lci-local-duality-models",
+ "kind": "definition",
+ "title": "Local lci duality and scalar-equivariant Ext identification",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For a morphism $p:X\\to S$, a nonnegative integer $d$, an open $U\\subset X$ and a polynomial presentation $C$ of relative rank $d$ [def-sfb-flat-lci-adjunction-system], write $i:U\\to P$, $n=c+d$, and $L_C=(\\bigwedge^c C_{U/P})^\\vee\\otimes\\bigwedge^n i^*\\Omega^1_{P/S}$ for its specified adjunction line. For any $\\mathcal O_U$-module $M$ and endomorphism $s$ of $\\mathcal O_U$, define the scalar action $s_M:M\\to M$ by the left-unitor inverse, $s\\otimes\\mathrm{id}_M$, and the left unitor, using the sheaf tensor product [def-pur-sheaf-tensor-product].\n\nThe predicate $C.\\mathrm{HasDualityModel}$ says that for every derived-category instance at the standard universe $u+1$ on modules on $P$ [def-pc-derived-category], there exists an isomorphism in that ambient category\n$$i_*L_C[d]\\simeq R\\mathcal Hom_P(i_*\\mathcal O_U,\\Omega^n_{P/S}[n]),$$\nusing the actual direct image [def-pc-ringed-spaces-derived-direct-image], relative differentials [def-sc-relative-differential-sheaf], exterior powers [def-sc-sheaf-exterior-power], and derived internal Hom [def-pur-derived-internal-hom]. For every endomorphism $s$ of $\\mathcal O_U$, the isomorphism intertwines the shifted direct image of $s_{L_C}$ with the contravariant action of $i_*s$ on the first Hom argument. The predicate $C.\\mathrm{HasExtIdentification}$ likewise says, for every such derived-category instance, that there exists an isomorphism\n$$i_*L_C\\simeq\\mathcal Ext^c_P(i_*\\mathcal O_U,\\Omega^n_{P/S})$$\nof ordinary module sheaves, with sheaf Ext defined by [def-weil-pbc-sheaf-ext], intertwining $i_*s_{L_C}$ with the contravariant functorial action of $i_*s$. Each predicate asserts existence with the displayed closed-source scalar compatibility; neither selects an isomorphism nor imposes any geometric hypothesis beyond the supplied presentation. Specified signed normalizations are additional data, not part of either predicate. For a point $s\\in S$, the convenience construction $\\mathrm{flatLCIGeometricFibre}(p,s)$ is exactly the geometric fibre of [def-weil-geometric-fibre]: $X\\times_S\\operatorname{Spec}\\overline{\\kappa(s)}$, formed along the composite of the algebraic-closure inclusion with the canonical residue-field point of $S$. This is the actual Mathlib pullback of those morphisms, and its historical name imposes no flatness or lci hypothesis.",
+ "stmt_deps": [
+  "def-sfb-flat-lci-adjunction-system",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-sheaf-ext",
+  "def-weil-geometric-fibre"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0B6V (lemma-lci-shriek) and 0BQZ (lemma-regular-immersion-ext), local derived and Ext models with the natural closed-source scalar action; predicates only, without asserting their existence for a family. The geometric-fibre convenience construction uses schemes.tex Tag 01JO and the existing def-weil-geometric-fibre."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "openTensorIso|IsNormalizedAtlas|HasDualityModel|HasExtIdentification|flatLCIGeometricFibre",
+   "results": "{\"t\": \"2026-10-24T11:33:24Z\", \"tool\": \"grep\", \"query\": \"openTensorIso|IsNormalizedAtlas|HasDualityModel|HasExtIdentification|flatLCIGeometricFibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; attach the existing Sheaf definitions without copying or choosing theorem conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shifted signed Koszul duality comparison with normalized polynomial affine atlas and exact closed immersion direct image",
+   "results": "{\"t\": \"2026-10-24T11:33:24Z\", \"tool\": \"leansearch\", \"query\": \"Shifted signed Koszul duality comparison with normalized polynomial affine atlas and exact closed immersion direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shiftFunctor_obj_d\", \"CochainComplex.HomComplex.Cochain.δ_shift\", \"CochainComplex.ShiftSequence.shiftIso.congr_simp\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"CochainComplex.ShiftSequence.shiftIso_hom_app\", \"CochainComplex.ShiftSequence.shiftIso_inv_app\", \"CochainComplex.HomComplex.Cochain.leftShift\", \"CategoryTheory.Functor.mapCochainComplexShiftIso\"], \"digest\": \"ea0e979aeadc59ec\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; attach the existing Sheaf definitions without copying or choosing theorem conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local complete intersection presentation duality model and Ext identification with the conormal determinant line; geometric fibre over an algebraic closure of the residue field",
+   "results": "{\"t\": \"2026-10-24T11:33:25Z\", \"tool\": \"leanfinder\", \"query\": \"Local complete intersection presentation duality model and Ext identification with the conormal determinant line; geometric fibre over an algebraic closure of the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"Algebra.IsEtaleAt\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.smoothLocus\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"a3490a6f0613e3e0\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; attach the existing Sheaf definitions without copying or choosing theorem conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibre of a scheme morphism over the algebraic closure of the residue field and local complete intersection determinant line derived duality model with scalar equivariant Ext identification",
+   "results": "{\"t\": \"2026-10-24T11:34:29Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibre of a scheme morphism over the algebraic closure of the residue field and local complete intersection determinant line derived duality model with scalar equivariant Ext identification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberι\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\"], \"digest\": \"9e40e4bc6ded8d1b\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; attach the existing Sheaf definitions without copying or choosing theorem conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shifted signed Koszul duality comparison and normalized polynomial chart atlas",
+   "results": "{\"t\": \"2026-10-24T11:34:30Z\", \"tool\": \"leanfinder\", \"query\": \"Shifted signed Koszul duality comparison and normalized polynomial chart atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.CotangentSpace.compEquiv\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply\", \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"TangentBundle.coordChange_model_space\", \"tangentBundleCore_indexAt\", \"KaehlerDifferential.polynomialEquiv\", \"KaehlerDifferential.mvPolynomialEquiv\"], \"digest\": \"f29154a9c0172291\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; attach the existing Sheaf definitions without copying or choosing theorem conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n openTensorIso|IsNormalizedAtlas|HasDualityModel|HasExtIdentification|flatLCIGeometricFibre lean/WeilConjectures lean/Sheaf; rg -l the same pattern dag/nodes",
+   "results": "No upstream declarations. Sheaf declarations occur in TraceFormula/LciKoszulDualityDeterminantComparison.lean (62,78,88,100,115,209) and AlgebraicGeometry/FlatLCICanonicalAdjunction.lean (463,475,507,525). DAG definition nodes do not own these comparison/model predicates; the geometric-fibre node records the general Mathlib pullback and is repaired separately to its exact specialized construction.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing declarations; add definition owners only for the missing predicates."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "ancestor lem-sfb-locnoeth-lci-curve-adjunction-gluing; search 'Koszul duality'; search 'geometric fibre'",
+   "results": "Ancestor None. Koszul duality: 0 blueprint nodes. Geometric fibre: 50 matches, none owning the local-duality predicates or normalized shifted comparisons. def-weil-geometric-fibre already states the exact chosen-algebraic-closure fibre and is retained as the owner.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate definition nodes; use the existing fibre node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locnoeth-lci-curve-adjunction-gluing",
+  "date": "2026-10-24",
+  "group": "Q81"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; extraction of original item steps 4,5: Gluing normalized lci curve adjunction over a locally Noetherian base; definition-only interfaces used by the gluing statement",
+   "via": [
+    "lem-sfb-locnoeth-lci-curve-adjunction-gluing",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatLCICanonicalAdjunction",
+  "declaration": "AlgebraicGeometry.FlatLCIPresentation.HasDualityModel",
+  "declarations": [
+   "AlgebraicGeometry.FlatLCIPresentation.HasDualityModel",
+   "AlgebraicGeometry.FlatLCIPresentation.HasExtIdentification",
+   "AlgebraicGeometry.flatLCIScalarAction",
+   "AlgebraicGeometry.flatLCIGeometricFibre"
+  ],
+  "statement": "def FlatLCIPresentation.HasDualityModel {X S : Scheme.{u}} {p : X ⟶ S} {d : ℕ}\n    {U : X.Opens} (C : FlatLCIPresentation p d U) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only ownership of already-landed local-model predicates, scalar action and the geometric-fibre convenience construction. flatLCIGeometricFibre is literally the Mathlib pullback specified by def-weil-geometric-fibre, whose existing generic record is retained unchanged. No data are extracted from the module's existence theorem; no declarations are copied or modified. Returned H13 repair, option (a)."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-296bd480f",
+  "group": "Q81",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-296bd480f",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H13 (357840c4). The Lean module is byte-identical to the module accepted on substance by both earlier reviews. def-weil-geometric-fibre.json is cmp-identical to side-live (Mathlib pullback record restored). flatLCIGeometricFibre is now owned by def-sfb-lci-local-duality-models (option a): its TeX sentence matches the body at FlatLCICanonicalAdjunction.lean:525, and the node cites def-weil-geometric-fibre and 01JO. The item changes only lean and stmt_deps versus side-live, with additions only, including the advised def-trf-polynomial-duality-restriction-atlas (its snapshot copy is identical to live). Every notion in the signature has a definition owner. Only the two theorem stmt_deps inherited from the base remain. Clause, edge-case and H5/H6/H8 checks were redone with no new fault. No FIX, no compile."
+ }
+}

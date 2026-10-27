@@ -1,0 +1,245 @@
+{
+ "id": "lem-a1-space-lqf-atlas-refinement",
+ "kind": "statement",
+ "title": "Pulled-back atlas and common-refinement test for local quasi-finiteness",
+ "statement": "Let $S,T,B,U$ be schemes [def-pc-scheme], with $T,B,U$ over $S$, let $b:B\\to T$ be an $S$-morphism, let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $f:X\\to h_T$ be a morphism. Write $h_Z(H)=\\operatorname{Mor}_S(H,Z)$. Suppose $a:h_U\\to X$ is representable surjective etale. Form $X_B=X\\times_{h_T}h_B$ [lem-trf-space-fibre-products-etale-covers] and $U_B=U\\times_TB$ [def-pc-fibre-product], using the scheme map $U\\to T$ induced by $fa$. There is a canonical identification $h_{U_B}\\cong h_U\\times_X X_B$, compatible with both projections. The induced $a_B:h_{U_B}\\to X_B$ is representable surjective etale, and for every scheme $D\\to X_B$ there is a canonical isomorphism $h_D\\times_{X_B}h_{U_B}\\cong h_D\\times_Xh_U$ over $h_D$. For every representable etale chart $v:h_V\\to X_B$, the sheaf $h_V\\times_{X_B}h_{U_B}$ is represented by a scheme $W$; its projections $p:W\\to V$ and $q:W\\to U_B$ are respectively surjective etale and etale [def-weil-etale-morphism], and their composites to $B$ agree. If $U_B\\to B$ is locally quasi-finite in the scheme sense [pqf-def-quasifinite], then both $W\\to B$ and $V\\to B$ are locally quasi-finite. No separatedness or quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0ABM (lemma-base-change-quasi-finite-locus), atlas diagram in the proof; Tag 03MJ (lemma-local-source-target), common-refinement proof; Tag 03XJ (definition-locally-quasi-finite). Source-locality input: descent.tex Tag 03X4 (lemma-locally-quasi-finite-etale-local-source)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Regard $h_T,h_B$ as algebraic spaces by [def-trf-scheme-algebraic-space]. Apply [lem-trf-space-fibre-products-etale-covers] to $X\\to h_T\\leftarrow h_B$ to obtain the algebraic space $X_B$ with its projections. By full faithfulness in [lem-galois-yoneda-fully-faithful], $fa:h_U\\to h_T$ is induced by a unique $S$-scheme map $c:U\\to T$. Form $U_B=U\\times_T B$ using [def-pc-fibre-product].",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-galois-yoneda-fully-faithful",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02X2 (lemma-fibre-product-spaces); categories.tex Tag 001P (lemma-yoneda)."
+   }
+  },
+  {
+   "text": "For every $S$-scheme $H$, the universal property [def-pc-fibre-product] identifies $h_{U_B}(H)$ with pairs $(u,\\beta)$ satisfying $c u=b\\beta$. Send such a pair to $(u,(a(u),\\beta))$ in $(h_U\\times_X X_B)(H)$. Its inverse sends $(u,(x,\\beta))$ with $a(u)=x$ to $(u,\\beta)$. These are inverse because $x=a(u)$, and commute with restriction along every $H\\prime\\to H$ because restriction is precomposition. They therefore define the claimed sheaf isomorphism. Both projections have the asserted values; in particular $a_B(u,\\beta)=(a(u),\\beta)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABM (lemma-base-change-quasi-finite-locus), proof, pulled-back atlas diagram; explicit fibre-product universal-property calculation."
+   }
+  },
+  {
+   "text": "Fix $t:h_D\\to X_B$ and write its components as $t_X:h_D\\to X$ and $\\beta_D:h_D\\to h_B$. On $H$-sections, send $(d,(u,\\beta))$ in $h_D\\times_{X_B}h_{U_B}$ to $(d,u)$. The defining equations are exactly $a(u)=t_X(d)$ and $\\beta=\\beta_D(d)$; hence the inverse sends $(d,u)$ to $(d,(u,\\beta_D(d)))$. The compatibility with $T$ follows from $f t_X=b\\beta_D$. These formulas are natural and preserve the projection to $h_D$, proving the second canonical isomorphism. By the scheme-test definition in [def-trf-algebraic-space], $h_D\\times_X h_U$ is represented by a scheme $E$ and its projection $E\\to D$ is surjective etale, since $a$ is representable surjective etale. The displayed identification makes the test of $a_B$ this very projection. This holds for every $D,t$, so $a_B$ is representable surjective etale.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025V (definition-relative-representable-property); Tag 025Y (definition-algebraic-space), scheme-test meaning of representable surjective etale."
+   }
+  },
+  {
+   "text": "For $v:h_V\\to X_B$, apply the scheme-test definition [def-trf-algebraic-space] to $a_B$ at $h_V$ to obtain a representing scheme $W$ and a surjective etale projection $p:W\\to V$. The same fibre product with its factors interchanged is the scheme test of the representable etale map $v$ at $h_{U_B}$, so its other projection $q:W\\to U_B$ is etale. On sections its defining equality is $v(z)=a_B(u,\\beta)$; projecting to $h_B$ says that the two composites to $B$ agree. Full faithfulness [lem-galois-yoneda-fully-faithful] turns this equality of natural transformations into equality of scheme morphisms. Write $g:V\\to B$ and $r:U_B\\to B$ for these maps; then $gp=rq$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target), proof, common-refinement diagram; spaces.tex Tag 025V and categories.tex Tag 001P."
+   }
+  },
+  {
+   "text": "Assume $r:U_B\\to B$ is locally quasi-finite. Apply the forward implication of [lem-a1-scheme-lqf-etale-source-locality] to the etale map $q:W\\to U_B$ and $r$; it gives that $rq:W\\to B$ is locally quasi-finite. Since $gp=rq$, apply the converse of that same node to the surjective etale map $p:W\\to V$ and $g:V\\to B$ to conclude that $g$ is locally quasi-finite. Both applications concern schemes and have precisely the stated hypotheses. No separatedness or quasi-compactness is used.",
+   "uses": [
+    "lem-a1-scheme-lqf-etale-source-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03X4 (lemma-locally-quasi-finite-etale-local-source), precomposition and source descent; spaces-morphisms.tex Tag 03MJ, common refinement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-galois-yoneda-fully-faithful",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "lem-a1-scheme-lqf-etale-source-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 0ABM and 03MJ, atlas and common-refinement proofs, specialized to scheme target B; scheme source locality from descent.tex Tag 03X4. Explicit natural isomorphisms are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space over a scheme a surjective etale atlas and any etale scheme chart have a scheme common refinement which detects local quasi finiteness",
+   "results": "{\"t\": \"2026-10-22T07:56:59Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic space over a scheme a surjective etale atlas and any etale scheme chart have a scheme common refinement which detects local quasi finiteness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"0fe159f5653ff212\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, not pulled-back algebraic-space atlases with explicit scheme-test and common-refinement identifications. Mathlib LocallyQuasiFinite omits local finite type (QuasiFinite.lean lines 20-22), unlike the stated scheme notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local quasi finiteness of every etale scheme chart can be checked on one surjective etale scheme atlas using its fibre products",
+   "results": "{\"t\": \"2026-10-22T07:57:10Z\", \"tool\": \"leanfinder\", \"query\": \"Local quasi finiteness of every etale scheme chart can be checked on one surjective etale scheme atlas using its fibre products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"8b18f604cd4900b4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, not pulled-back algebraic-space atlases with explicit scheme-test and common-refinement identifications. Mathlib LocallyQuasiFinite omits local finite type (QuasiFinite.lean lines 20-22), unlike the stated scheme notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T07:57:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, not pulled-back algebraic-space atlases with explicit scheme-test and common-refinement identifications. Mathlib LocallyQuasiFinite omits local finite type (QuasiFinite.lean lines 20-22), unlike the stated scheme notion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space|atlas.*[Qq]uasi[Ff]inite",
+   "results": "{\"t\": \"2026-10-22T07:57:11Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic space|atlas.*[Qq]uasi[Ff]inite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, not pulled-back algebraic-space atlases with explicit scheme-test and common-refinement identifications. Mathlib LocallyQuasiFinite omits local finite type (QuasiFinite.lean lines 20-22), unlike the stated scheme notion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme atlas of an algebraic space detects locally quasi finite morphisms by etale descent on the source",
+   "results": "{\"t\": \"2026-10-22T07:57:11Z\", \"tool\": \"leansearch\", \"query\": \"A scheme atlas of an algebraic space detects locally quasi finite morphisms by etale descent on the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.rec\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite.casesOn\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"52b6f69073212cf2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, not pulled-back algebraic-space atlases with explicit scheme-test and common-refinement identifications. Mathlib LocallyQuasiFinite omits local finite type (QuasiFinite.lean lines 20-22), unlike the stated scheme notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling a scheme atlas of an algebraic space back along a map of schemes gives a scheme atlas; comparing its fibre products with any etale chart detects local quasi finiteness",
+   "results": "{\"t\": \"2026-10-22T08:10:26Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling a scheme atlas of an algebraic space back along a map of schemes gives a scheme atlas; comparing its fibre products with any etale chart detects local quasi finiteness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteSndScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\"], \"digest\": \"36983a84bcfedf8d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, not pulled-back algebraic-space atlases with explicit scheme-test and common-refinement identifications. Mathlib LocallyQuasiFinite omits local finite type (QuasiFinite.lean lines 20-22), unlike the stated scheme notion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space atlas pulled back to a scheme base change has scheme test pullbacks canonically isomorphic to the original atlas tests",
+   "results": "{\"t\": \"2026-10-22T08:10:27Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic space atlas pulled back to a scheme base change has scheme test pullbacks canonically isomorphic to the original atlas tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_X\", \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_I₀\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\"], \"digest\": \"824f7b9dc0c5edfa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, not pulled-back algebraic-space atlases with explicit scheme-test and common-refinement identifications. Mathlib LocallyQuasiFinite omits local finite type (QuasiFinite.lean lines 20-22), unlike the stated scheme notion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space|atlas.*[Qq]uasi[Ff]inite",
+   "results": "{\"t\": \"2026-10-23T04:11:47Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic space|atlas.*[Qq]uasi[Ff]inite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or scheme covers, not the algebraic-space atlas statement; source QuasiFinite.lean lines 18-22 explicitly omits local finite type, so its predicate alone is not the stated scheme notion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme atlas of an algebraic space detects locally quasi finite morphisms by etale descent on the source",
+   "results": "{\"t\": \"2026-10-23T04:11:47Z\", \"tool\": \"leansearch\", \"query\": \"A scheme atlas of an algebraic space detects locally quasi finite morphisms by etale descent on the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.rec\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite.casesOn\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"52b6f69073212cf2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or scheme covers, not the algebraic-space atlas statement; source QuasiFinite.lean lines 18-22 explicitly omits local finite type, so its predicate alone is not the stated scheme notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-23T04:11:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or scheme covers, not the algebraic-space atlas statement; source QuasiFinite.lean lines 18-22 explicitly omits local finite type, so its predicate alone is not the stated scheme notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling a scheme atlas of an algebraic space back along a map of schemes gives a scheme atlas and common etale chart refinements detect local quasi finiteness",
+   "results": "{\"t\": \"2026-10-23T04:11:53Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling a scheme atlas of an algebraic space back along a map of schemes gives a scheme atlas and common etale chart refinements detect local quasi finiteness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteSndScheme\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₂Scheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"299fad19168582d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or scheme covers, not the algebraic-space atlas statement; source QuasiFinite.lean lines 18-22 explicitly omits local finite type, so its predicate alone is not the stated scheme notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space atlas pulled back to a base change has scheme test pullbacks isomorphic to the original atlas tests",
+   "results": "{\"t\": \"2026-10-23T04:11:54Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space atlas pulled back to a base change has scheme test pullbacks isomorphic to the original atlas tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp'\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp\", \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOver'\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp_X\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'_X\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp_f\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'_f\"], \"digest\": \"3e985250daf9e7e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or scheme covers, not the algebraic-space atlas statement; source QuasiFinite.lean lines 18-22 explicitly omits local finite type, so its predicate alone is not the stated scheme notion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-separated-lqf-permanence",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "The geometric representability branch beneath lem-a1-affine-hc0, via 03XX and 03XW: third paragraph, base-change hypotheses in the induction diagram; fourth paragraph, separated locally quasi-finite structure of the saturated open over T′. Extraction of old permanence proof steps 1 and 2.",
+   "via": [
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-space-lqf-atlas-refinement",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Wrote the two natural pullback identifications on sections, verified each scheme-test projection directly, and applied the existing scheme etale-source-locality node twice on the common refinement. No new nodes. Searched project Lean for the tag and notions and searched Mathlib with two semantic phrasings, Loogle, grep and LeanSearch.",
+  "blueprint": "Realizes the geometric representability branch of lem-a1-affine-hc0 specified in blueprint.from.place, specifically the base-changed atlas and arbitrary-chart comparison extracted from old permanence steps 1 and 2. The current ancestor blueprint node states compact-support vanishing and has no geometric proof text; the explicit geometric route is the cited Stacks 0ABM/03MJ branch.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products supplies X_B; no statement in this unit replaces this construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-7ffb3eb6d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-7ffb3eb6d (reviewer sub-agent of L); spot-checked: I read the item in full: statement and stmt_deps are unchanged from N9's creation, there are 0 new nodes, and the five steps' uses equal proof_deps. Sources read: Stacks spaces-morphisms 0ABM (atlas diagram), 03MJ (common refinement), 03XJ, and descent 03X4. With target the scheme B, only locality on the source is needed, which is lem-a1-scheme-lqf-etale-source-locality used both ways. Step 1: h_T and h_B are spaces by def-trf-scheme-algebraic-space; X_B comes from lem-trf-space-fibre-products-etale-covers; c with (fa)(u)=c∘u comes from the Yoneda bijection on Sch/S; U_B is the scheme fibre product. Step 2: (u,β)↦(u,(a(u),β)) is well-defined and inverse because f a u = c u = bβ; I checked this on sections. Step 3: t(d)=(a(u),β) splits into t_X(d)=a(u) and β=β_D(d); the inverse needs c u = f t_X(d) = b β_D(d), which holds. So the test of a_B at D is E→D, which is surjective étale by def-trf-algebraic-space. Step 4: p comes from the a_B test and q from the v test with the factors swapped; on universal sections g p = β = r q, and Yoneda turns this into an equality of morphisms. Step 5: forward along q étale and converse along p surjective étale; no quasi-compactness or separatedness is used. Edge cases: U empty, B empty, the identity chart, and non-surjective v. No duplicate found (rg -L for lqf + algebraic space). Accepted tool_use: lem-trf-space-fibre-products-etale-covers, already a base stmt_dep. Batch-5 finding: def-trf-scheme-algebraic-space is a general definition. Its 128-node closure contains no trace-formula or Poincaré-duality theorem and no assume leaf, only def-trf-algebraic-space, so it is outside both assumptions and no RETURN follows. Minor point: the report mentions a citations.json that is not in the commit; this has no effect on the DAG. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceLqfAtlasRefinement",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_lqf_atlas_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceLqfAtlasRefinement.lean",
+  "statement": "theorem space_lqf_atlas_refinement {S : Scheme.{u}} (T B U : Over S) (b : B ⟶ T) (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T) (a : yoneda.obj U ⟶ X.obj.obj) (ha : IsEtale a) (hs : IsSurjective a) : ∃ aB : yoneda.obj (Limits.pullback (yoneda.preimage (a ≫ f)) b) ⟶ Limits.pullback f (yoneda.map b), (∃ e : yoneda.obj (Limits.pullback (yoneda.preimage (a ≫ f)) b) ≅ Limits.pullback a (Limits.pullback.fst f (yoneda.map b)), e.hom ≫ Limits.pullback.fst a (Limits.pullback.fst f (yoneda.map b)) = yoneda.map (Limits.pullback.fst (yoneda.preimage (a ≫ f)) b) ∧ e.hom ≫ Limits.pullback.snd a (Limits.pullback.fst f (yoneda.map b)) = aB) ∧ aB ≫ Limits.pullback.snd f (yoneda.map b) = yoneda.map (Limits.pullback.snd (yoneda.preimage (a ≫ f)) b) ∧ IsEtale aB ∧ IsSurjective aB ∧ (∀ (D : Over S) (t : yoneda.obj D ⟶ Limits.pullback f (yoneda.map b)), ∃ e : Limits.pullback t aB ≅ Limits.pullback (t ≫ Limits.pullback.fst f (yoneda.map b)) a, e.hom ≫ Limits.pullback.fst (t ≫ Limits.pullback.fst f (yoneda.map b)) a = Limits.pullback.fst t aB ∧ e.hom ≫ Limits.pullback.snd (t ≫ Limits.pullback.fst f (yoneda.map b)) a = Limits.pullback.snd t aB ≫ yoneda.map (Limits.pullback.fst (yoneda.preimage (a ≫ f)) b)) ∧ ∀ (V : Over S) (v : yoneda.obj V ⟶ Limits.pullback f (yoneda.map b)), IsEtale v → ∃ (W : Over S) (p : W ⟶ V) (q : W ⟶ Limits.pullback (yoneda.preimage (a ≫ f)) b), IsPullback (yoneda.map p) (yoneda.map q) v aB ∧ Etale p.left ∧ Surjective p.left ∧ Etale q.left ∧ p ≫ yoneda.preimage (v ≫ Limits.pullback.snd f (yoneda.map b)) = q ≫ Limits.pullback.snd (yoneda.preimage (a ≫ f)) b ∧ (Scheme.Hom.IsLocallyQuasiFinite (Limits.pullback.snd (yoneda.preimage (a ≫ f)) b).left → Scheme.Hom.IsLocallyQuasiFinite (q.left ≫ (Limits.pullback.snd (yoneda.preimage (a ≫ f)) b).left) ∧ Scheme.Hom.IsLocallyQuasiFinite (yoneda.preimage (v ≫ Limits.pullback.snd f (yoneda.map b))).left)",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00aee11ab",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Checked every clause against the node and the Stacks tags 0ABM/03MJ/03XJ/03X4. IsEtale/IsSurjective include scheme-test representability. U->T is yoneda.preimage(a≫f), not an arbitrary map. Both canonical isos are fixed uniquely by their projection equations, which also fix both components of aB. IsPullback square direction correct; p surjective étale, q étale; composites to B agree via the canonical g. LQF uses the recorded 01TD predicate Scheme.Hom.IsLocallyQuasiFinite. Edge cases (empty B/U/V, non-surjective chart) and a single universe u are fine. Node changes only the lean field; statement verbatim; not superseded live (no lean yet); no new nodes. Plain imports are proof_dep modules. Docstrings carry source, blueprint and proof steps; only proof is sorry; report sections present. No duplicate found. No findings; no compile run since no files changed."
+ }
+}

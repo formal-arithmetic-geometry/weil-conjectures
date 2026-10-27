@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-groupoid-coinduction-adjunction",
+ "kind": "statement",
+ "title": "Coinduction and its specified unit for quasi-coherent groupoid modules",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $(U,R,s,t,c,e,i)$ a groupoid in schemes over $S$ [def-a1-scheme-groupoid-laws]. Let $\\mathcal C$ have objects $(M,\\beta)$, where $M$ is a quasi-coherent $\\mathcal O_U$-module [pqf-def-coherent], $\\beta:t^*M\\xrightarrow{\\sim}s^*M$ [def-pc-module-pullback], $e^*\\beta=1$, and $c^*\\beta=\\operatorname{pr}_1^*\\beta\\circ\\operatorname{pr}_0^*\\beta$ under the canonical pullback identifications. Its morphisms $f:(M,\\beta)\\to(N,\\gamma)$ satisfy $s^*f\\circ\\beta=\\gamma\\circ t^*f$. Write $V:\\mathcal C\\to\\operatorname{QCoh}(U)$ for the forgetful functor. Assume $s,t$ are flat [def-weil-flat-morphism], quasi-compact (inverse images of affine opens are quasi-compact) and quasi-separated (their diagonals are quasi-compact). There is a functor $G:\\operatorname{QCoh}(U)\\to\\mathcal C$, with underlying object $VG(H)=s_*t^*H$ and underlying map $VG(h)=s_*t^*h$, right adjoint to $V$. The equivariant structure on $G(H)$ is natural in $H$. The underlying map of the unit $\\eta_{(M,\\beta)}:(M,\\beta)\\to G(M)$ is the composite $M\\to s_*s^*M\\xrightarrow{s_*(\\beta^{-1})}s_*t^*M$, whose first arrow is the ordinary pullback-pushforward adjunction unit.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 07TR (lemma-construct-quasi-coherent), and Tag 0GNF (remark-adjunction-map), including its explicit unit formula."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-scheme-groupoid-laws",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-weil-flat-morphism",
+  "def-sfb-scheme-groupoid-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q=R\\times_{t,U,t}R$ with projections $q_0,q_1$. The pair groupoid $\\mathcal P$ on $R$ has source $q_1$, target $q_0$, identity $a\\mapsto(a,a)$, inverse $(a,b)\\mapsto(b,a)$, and composition $((a,b),(b,z))\\mapsto(a,z)$. These are scheme morphisms by the fibre-product universal property, and the groupoid identities are the displayed coordinate identities. Define $f:\\mathcal P\\to\\mathcal R$ by $f_0=s$ and $f_1=d$, where $d(a,b)=a^{-1}b$. Its endpoints are $s(d(a,b))=s(b)$ and $t(d(a,b))=s(a)$; it preserves identity and inverse, and $d(a,b)d(b,z)=a^{-1}bb^{-1}z=a^{-1}z=d(a,z)$. Its target square is Cartesian: the mutually inverse morphisms $Q\\rightleftarrows R\\times_{s,U,t}R$ are $(a,b)\\mapsto(a,a^{-1}b)$ and $(a,r)\\mapsto(a,ar)$, compatible with $q_0$ and the first projection. The inverse identities follow from associativity and the inverse laws. All formulas hold naturally on every test scheme, and their composites are identities by the fibre-product universal property.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 07TR, second paragraph; Tags 0233 (lemma-equivalence-groupoid) and 03C6 (lemma-diagram-pull), explicit coordinate verifications"
+   }
+  },
+  {
+   "text": "Since $te=1_U$, $t$ is surjective on points. For every affine open $W\\subset U$, the quasi-compact scheme $t^{-1}W$ has a finite affine open cover whose images cover $W$. Together with flatness of $t$, this is precisely the definition of the singleton fpqc covering $\\{t:R\\to U\\}$. Apply fpqc descent to obtain an equivalence $E:\\operatorname{QCoh}(U)\\to\\operatorname{QCoh}(\\mathcal P)$, $H\\mapsto(t^*H,\\mathrm{can})$. Here $\\mathrm{can}:q_0^*t^*H\\to q_1^*t^*H$ is the identification from $tq_0=tq_1$. The descent-data orientation is exactly target $q_0$ to source $q_1$; its cocycle is the pair-groupoid cocycle. The equivalence includes full faithfulness on all quasi-coherent modules, not only invertible ones.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 07TR, second paragraph, invoking Descent Tag 023T (proposition-fpqc-descent-quasi-coherent)"
+   }
+  },
+  {
+   "text": "For $(M,\\beta)\\in\\mathcal C$, the pullback $f^*(M,\\beta)$ has underlying module $s^*M$ and datum $d^*\\beta$. Pull the given cocycle for $\\beta$ back along $Q\\to R\\times_{s,U,t}R$, $(a,b)\\mapsto(a,d(a,b))$. Since $ad(a,b)=b$, it reads $q_1^*\\beta=d^*\\beta\\circ q_0^*\\beta$, with the canonical identification of their $t^*M$ sources. Thus\n$$d^*\\beta=q_1^*\\beta\\circ\\mathrm{can}\\circ(q_0^*\\beta)^{-1}.$$\nConsequently $\\beta:t^*M\\to s^*M$ is an isomorphism $E(V(M,\\beta))\\xrightarrow{\\sim}f^*(M,\\beta)$ of descent data. For a morphism $a:(M,\\beta)\\to(N,\\gamma)$ the defining equality $s^*a\\circ\\beta=\\gamma\\circ t^*a$ is exactly naturality of this isomorphism. This establishes a natural isomorphism $EV\\cong f^*$ with its underlying map specified, rather than only an unspecified identification of functors.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 07TR, final paragraph, pullback of the cocycle along (pr_0,c(i,1))"
+   }
+  },
+  {
+   "text": "Apply the Cartesian groupoid adjunction to $f$. Its object map is the given qcqs morphism $s$; its target source and target maps are the given flat maps $s,t$; its target square is Cartesian by step 1. Set $G=f_*E$. This constructs its equivariant structures and their naturality, with underlying objects and maps exactly $s_*t^*H$ and $s_*t^*h$, and proves that they are quasi-coherent. The adjunction and the isomorphism of step 3 give the natural bijections\n$$\\operatorname{Hom}_{\\mathcal C}((M,\\beta),G(H))\\cong\\operatorname{Hom}_{\\operatorname{QCoh}(\\mathcal P)}(f^*(M,\\beta),E(H))\\cong\\operatorname{Hom}_{\\operatorname{QCoh}(\\mathcal P)}(E(M),E(H))\\cong\\operatorname{Hom}_{\\operatorname{QCoh}(U)}(M,H).$$\nThe middle bijection is precomposition by $\\beta$, and the last is the full faithfulness of $E$. Their inverse sends $h:M\\to H$ to the ordinary $s^*\\dashv s_*$ transpose of $t^*h\\circ\\beta^{-1}:s^*M\\to t^*H$: after precomposition by $\\beta$ this is precisely $t^*h$. Each constituent bijection is natural, so this specifies $V\\dashv G$.",
+   "uses": [
+    "lem-sfb-cartesian-groupoid-pushforward-adjunction",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 07TR, last two paragraphs; Tag 09VH (lemma-pushforward) and Descent Tag 023T"
+   }
+  },
+  {
+   "text": "The unit at $(M,\\beta)$ is the image of $1_M$ under the inverse Hom bijection in step 4. Since $t^*1_M=1_{t^*M}$, it is the ordinary transpose of $\\beta^{-1}:s^*M\\to t^*M$. By the unit formula for ordinary adjunction, that transpose is\n$$M\\xrightarrow{\\eta^s_M}s_*s^*M\\xrightarrow{s_*(\\beta^{-1})}s_*t^*M.$$\nIt is equivariant because it was obtained from the restricted adjunction, and its naturality is the naturality of the constructed Hom bijections. This is exactly the specified unit of the item and Tag 0GNF.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0GNF (remark-adjunction-map), filling in the omitted verification using the Hom bijection of Tag 07TR"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "lem-pc-fpqc-descent",
+  "def-pc-module-pullback",
+  "lem-sfb-cartesian-groupoid-pushforward-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 07TR (lemma-construct-quasi-coherent), descent proof; Tag 0GNF (remark-adjunction-map), with omitted coordinate and unit calculations supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from quasi coherent modules on a flat scheme groupoid has right adjoint s pushforward t pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coinduction of equivariant quasi coherent sheaves for flat quasi compact quasi separated groupoids",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Adjunction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc.*quasi|groupoid.*[Aa]dj|equivariant.*[Aa]dj",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The forgetful functor from quasi coherent modules on a flat scheme groupoid has right adjoint s pushforward t pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).r =\\n    (AlgebraicGeometry.Scheme.Modules.pushforward f.as.unop).toCatHom\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the right adjoint component of the pseudofunctor's action on $ f $ equals the pushforward functor $ f_* $ between the module categories of $ X $ and $ Y $.\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": X.Modules ⥤ Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Adjunction\"",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(pushforward|adjunction)|equivariant.*quasi|GroupoidObject",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant quasi coherent modules on flat scheme groupoids have coinduction s pushforward t pullback as right adjoint to the forgetful functor",
+   "results": "8 hits. SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, ModuleCat.instIsRightAdjointForget, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coinduction on a flat quasi compact quasi separated scheme groupoid is the right adjoint of forgetting equivariance and has underlying functor s pushforward t pullback",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc.*quasi|groupoid.*[Aa]dj|equivariant.*[Aa]dj",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetful functor for equivariant quasi coherent sheaves on a flat scheme groupoid admits the cofree equivariant module as right adjoint",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, LightCondensed.freeForgetAdjunction, Condensed.freeForgetAdjunction, CondensedMod.LocallyConstant.adjunction, ModuleCat.instIsRightAdjointForget, LightCondMod.LocallyConstant.adjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, PresheafOfModules.freeAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+  "date": "2026-10-23",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions. Supporting input to Tag 07UV: the invocation of Groupoids lemma-colimit-coherent in the last sentence; the equivariant approximation theorem, not the algebraic-space conclusion. Supporting input to Tag 07TU: Tag 07TR (lemma-construct-quasi-coherent), and Tag 0GNF (remark-adjunction-map), including its explicit unit formula.",
+   "via": [
+    "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-coinduction-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed the pair groupoid and Cartesian difference morphism, used existing fpqc descent, proved the beta identification by the cocycle, assembled the restricted ordinary adjunction, and computed its unit. One new general Cartesian groupoid adjunction node; no restated coinduction clause.",
+  "blueprint": "Current latest blueprint, det-thm-sf-ctf-stability-direct-images proof (3), supporting coherent approximation chain recorded in blueprint.from.place. Steps realize the Tag 07TR and 0GNF prerequisite of Tag 07TU; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic fpqc descent equivalence for all quasi-coherent modules, explicitly invoked by Tag 07TR; no theorem of this unit replaces that descent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-b7be1505c",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-b7be1505c (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against Stacks groupoids.tex 03LI (definition-groupoid-module), 03LJ (lemma-pullback), 09VH (lemma-pushforward), 07TR (lemma-construct-quasi-coherent, whole proof) and 0GNF (remark-adjunction-map), and checked every cited node's statement. The item statement is unchanged from base; removing the stmt_dep def-weil-pbc-category-colimit is correct because the statement uses no colimit. There is no repair note, so this is an ordinary first split. Step 1: the pair groupoid on R x_{t,U,t} R has source q1 and target q0, which is Stacks' (pr_1, pr_0, pr_02). For f = (s, d) with d(a,b) = a^{-1}b I checked the endpoints s(d) = s(b) and t(d) = s(a), that identity and inverse are preserved, the composition law, and that (a,b) -> (a, a^{-1}b) and (a,r) -> (a, ar) are inverse maps, so the target square is Cartesian. This only needs the identities in def-a1-scheme-groupoid-laws and the fibre-product universal property, so elementary is fine. Step 2: t is surjective because te = 1, and quasi-compactness of t gives the finite affine condition, so {t} is an fpqc covering exactly as def-weil-pbc-fpqc-covering defines it. The descent datum pr_1^* -> pr_2^* in lem-pc-fpqc-descent (1) is q0^* -> q1^*, matching the pair-groupoid convention, and the cocycles agree. Step 3: pulling the cocycle back along (a, d(a,b)) gives d^*beta = q1^*beta . can . (q0^*beta)^{-1}; I checked the source and target identifications. So beta is an isomorphism of descent data, natural in (M, beta). Step 4: the hypotheses of the child hold (s qcqs; s, t flat; Cartesian square from step 1). I recomputed the three Hom bijections: the inverse sends h to the ordinary transpose of t^*h . beta^{-1}. Step 5: the unit is s_*(beta^{-1}) . eta^s, matching 0GNF including the inverse. New node: it is the general 09VH with exactly its hypotheses (f_0 qcqs, Cartesian target square, s' and t' flat) and an explicit equivariant structure b_s^{-1} . f_{1*}gamma . b_t. The source square is Cartesian via the inversions, so it is true. It is statement-only and self-contained, with Mathlib searches of all three kinds recorded. It is not a restated clause of the item: the item still needs the pair-groupoid construction, the descent equivalence, the beta identification and the unit computation. Duplicate search (rg -L over the snapshot for groupoids.tex, 09VH and the key words; I read lem-sfb-groupoid-module-limits-colimits, lem-sfb-space-qcoh-groupoid-equivalence, lem-sfb-groupoid-module-descent-tensor-cokernel, lem-a1-groupoid-source-pullback-translation, lem-sfb-groupoid-source-cartesian-quotient-square, lem-sfb-affine-action-quasicoherent-descent and lem-sfb-stack-affine-algebra-direct-image) found no duplicate. Small cases: the trivial groupoid, a group scheme over a point (regular comodule coinduction; Maps(G,H) for a finite constant G), and the empty scheme. Accepted tool_use: lem-pc-fpqc-descent as the generic fpqc descent equivalence that 07TR itself invokes. No SGA citation, no route change. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidCoinductionAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.exists_groupoid_coinduction_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exists_groupoid_coinduction_adjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidCoinductionAdjunction.lean",
+  "statement": "theorem exists_groupoid_coinduction_adjunction (S : Scheme.{u}) {U R : Scheme.{u}} (p : U ⟶ S) (q : R ⟶ S) (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (_hs : s ≫ p = q) (_ht : t ≫ p = q) (hG : IsGroupoid s t e i c) [Flat s] [Flat t] [QuasiCompact s] [QuasiCompact t] [QuasiSeparated s] [QuasiSeparated t] : ∃ (G : (SheafOfModules.isQuasicoherent U.ringCatSheaf).FullSubcategory ⥤ GroupoidModule s t e i c hG) (adj : GroupoidModule.forgetToQuasiCoherent (hG := hG) ⊣ G) (h : G ⋙ GroupoidModule.forgetToQuasiCoherent (hG := hG) ⋙ (SheafOfModules.isQuasicoherent U.ringCatSheaf).ι = (SheafOfModules.isQuasicoherent U.ringCatSheaf).ι ⋙ Modules.tensorPullback t ⋙ Modules.pushforward s), ∀ M : GroupoidModule s t e i c hG, (SheafOfModules.isQuasicoherent U.ringCatSheaf).ι.map ((GroupoidModule.forgetToQuasiCoherent (hG := hG)).map (adj.unit.app M)) ≫ eqToHom (congrArg (fun F : (SheafOfModules.isQuasicoherent U.ringCatSheaf).FullSubcategory ⥤ U.Modules ↦ F.obj ((GroupoidModule.forgetToQuasiCoherent (hG := hG)).obj M)) h) = (Modules.tensorPullbackSectionAdjunction s).unit.app M.moduleObj ≫ (Modules.pushforward s).map (by simpa only [groupoidModulePullback, GroupoidModule.forgetToQuasiCoherent, ObjectProperty.ι_obj] using M.beta.inv)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-556e6777e",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Re-delivery after H4/H12 RETURN (6a1fa676081a): duplicate def-sfb-groupoid-quasi-coherent-module node and module dropped; stmt_deps adds the landed def-sfb-scheme-groupoid-module (on base: index 17:03 UTC > landing 16:40Z); only lean+stmt_deps differ from live. Theorem stated on Q31 GroupoidModule with forgetToQuasiCoherent; hypotheses = 07TR (flat, qc, qs s,t); conclusion: adj V ⊣ G, functor equality G⋙V⋙ι = ι⋙t^*⋙s_*, unit = tensorPullbackSectionAdjunction s unit ≫ s_*(β⁻¹) (0GNF, inverse correct), β.inv converted only via the definitional groupoidModulePullback unfolding. Single universe u; edge cases (empty, trivial groupoid, group over point, zero) covered. lean.statement verbatim; docstrings with source, blueprint id and 5 proof steps; sorry only; no defs; H9 proof-only imports advisory. No compile (no change)."
+ }
+}

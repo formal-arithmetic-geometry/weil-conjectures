@@ -18,7 +18,10 @@
   "def-weil-proetale-constructible-sheaf",
   "def-weil-proetale-tor-amplitude",
   "sk-def-sp-scalar-extension",
-  "sk-prop-sf-rf-shriek-preservation"
+  "sk-prop-sf-rf-shriek-preservation",
+  "sk-def-sp-normalized-towers",
+  "def-sp-reduction-direct-image-comparison",
+  "det-sp-scalar-extension-functor"
  ],
  "proof": [
   {
@@ -216,5 +219,34 @@
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sp-reduction",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.Reduction",
+  "file": "lean/Sheaf/SecSmoothPurity/Reduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_reduction",
+  "statement": "theorem sp_reduction (ℓ pchar : ℕ) [Fact ℓ.Prime] (hp : 0 < pchar) (hℓ : pchar ≠ ℓ) (k : Type u) [Field k] [CharP k pchar] {X Z Y : Scheme.{u}} [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (d : ℕ) [SmoothOfRelativeDimension d f] (j : X ⟶ Z) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] (p : Z ⟶ Y) [IsProper p] [p.IsOver (Spec (.of k))] (hf : j ≫ p = f) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0) (hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B) : ∃ (hFA : ∀ M : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor Y A ((reductionCompactSupport A j p).obj M.obj)) (hFB : ∀ M : spFiniteConstructibleTorCategory X B, spFiniteConstructibleTor Y B ((reductionCompactSupport B j p).obj M.obj)), ∃ (hb : ∀ M : spFiniteConstructibleTorCategory X A, IsIso ((reductionDirectImageComparison φ j p).app M.obj)), ∃ (GA : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A) (GB : spFiniteConstructibleTorCategory Y B ⥤ spFiniteConstructibleTorCategory X B) (adjA : (spFiniteConstructibleTor Y A).lift ((spFiniteConstructibleTor X A).ι ⋙ reductionCompactSupport A j p) hFA ⊣ GA) (adjB : (spFiniteConstructibleTor Y B).lift ((spFiniteConstructibleTor X B).ι ⋙ reductionCompactSupport B j p) hFB ⊣ GB), ∃! c : GA ⋙ scalarExtensionCtfFunctor ℓ hA hB φ X ⟶ scalarExtensionCtfFunctor ℓ hA hB φ Y ⋙ GB, (∀ K : spFiniteConstructibleTorCategory Y A, (reductionCompactSupport B j p).map (c.app K).hom ≫ (adjB.counit.app ((scalarExtensionCtfFunctor ℓ hA hB φ Y).obj K)).hom = @inv _ _ _ _ ((reductionDirectImageComparison φ j p).app (GA.obj K).obj) (hb (GA.obj K)) ≫ (scalarExtensionFunctor φ Y).map (adjA.counit.app K).hom) ∧ (∀ K : spFiniteConstructibleTorCategory Y A, IsIso (c.app K))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b802276f7",
+  "group": "NP",
+  "result": "pass",
+  "note": "Checked each hypothesis and clause against the node: char p>0 with ℓ≠p prime, separated finite-type X/Y/Z over k, SmoothOfRelativeDimension d f, open j and proper p with j≫p=f (every compactification, so the setting's one too), finite rings with independent ℓ-power exponents and no flatness. Dctf = spFiniteConstructibleTorCategory; (-)_B = scalarExtensionCtfFunctor. hb is IsIso of reductionDirectImageComparison (F_A⋙T_Y ⟶ T_X⋙F_B) at every M. c : GA⋙T_X ⟶ T_Y⋙GB is natural and invertible at every K. Counit equation types and order checked. Existential right adjoints are unique up to counit-compatible iso, so no weakening. Advisory: ∃! c, eq ∧ IsIso, but uniqueness among all solutions follows from adjB.homEquiv injectivity, same form as the landed reductionExceptional_isIso; no FIX. Records: only lean and stmt_deps changed; the 3 added stmt_deps are definition nodes owning every signature declaration; det-sp-reduction-exceptional is in proof_deps only; statement verbatim. Gates: no new definition, a single sorry, source/blueprint docstrings, autoImplicit false, universe u bound, real worker and NP second-reading sections. Edge cases: empty schemes, zero ring/complex, identity/non-flat φ, d=0 all covered. No file changed, so no compile."
+ }
 }

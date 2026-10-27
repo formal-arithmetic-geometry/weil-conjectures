@@ -1,0 +1,407 @@
+{
+ "id": "lem-sfb-composition-finite-affine-twist-bounds",
+ "kind": "statement",
+ "title": "Finite affine-cover data and eventual local ample-twist bounds",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to S$ be morphisms of schemes [def-pc-scheme], both of finite type [def-weil-finite-type-morphism], with $S$ quasi-compact [def-weil-pbc-quasi-compact-scheme]. Let $L$ on $X$ and $M$ on $Y$ be invertible modules [def-sc-invertible-module]. Assume that $L|_{f^{-1}(W)}$ is ample for every affine open $W\\subseteq Y$, and $M|_{g^{-1}(V)}$ is ample for every affine open $V\\subseteq S$ [def-weil-pbc-ample-invertible-module]. Put $h=g\\circ f$. Then $h$ is of finite type, hence quasi-compact, and there exist $r\\geq0$ and affine opens $V_1,\\ldots,V_r$ covering $S$ with the following properties. For every $i$, set $Y_i=g^{-1}(V_i)$, $X_i=h^{-1}(V_i)=f^{-1}(Y_i)$, let $f_i:X_i\\to Y_i$ be the restriction of $f$, and put $L_i=L|_{X_i}$ and $M_i=M|_{Y_i}$. The map $f_i$ is of finite type and quasi-compact, $L_i,M_i$ are invertible, $L_i|_{f_i^{-1}(W)}$ is ample for every affine open $W\\subseteq Y_i$, and $M_i$ is ample on $Y_i$. There are integers $a_i\\geq0$ such that $L_i\\otimes f_i^*(M_i^{\\otimes a})$ is ample on $X_i$ for every integer $a\\geq a_i$. Module pullback is [def-pc-module-pullback] and tensor product is [def-pur-sheaf-tensor-product], with zeroth power the structure module. The assertion permits $r=0$ when $S$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4K (lemma-ample-composition), finite affine-cover reduction and local application of Tag 0892(1) (lemma-pullback-ample-tensor-relatively-ample); finite type uses Tags 01T3 and 01T4; relative ampleness is Definition 01VH."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By clause (1) of [lem-sfb-finite-type-composition-base-change], $h=g\\circ f$ is of finite type, hence quasi-compact by [def-weil-finite-type-morphism]. Apply [lem-weil-pbc-qcqs-finite-affine-open-cover] to the quasi-compact scheme $S$ and enumerate its finite affine cover as $V_1,\\ldots,V_r$. If $S$ is empty choose the empty cover; then every assertion indexed by $i$ is vacuous.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), finite affine-cover reduction; Tags 01T3 (lemma-composition-finite-type), 01T4 (lemma-base-change-finite-type), and 0892(1) (lemma-pullback-ample-tensor-relatively-ample)."
+   }
+  },
+  {
+   "text": "Fix $i$ and set $Y_i=g^{-1}(V_i)$, $X_i=h^{-1}(V_i)$. The equality $X_i=f^{-1}(Y_i)$ is the identity for inverse images of a composite. The restricted map $f_i:X_i\\to Y_i$ is the base change of $f$ along $Y_i\\hookrightarrow Y$: a pair of maps to $X$ and $Y_i$ agreeing over $Y$ factors uniquely through the open $f^{-1}(Y_i)$. Thus clause (2) of [lem-sfb-finite-type-composition-base-change] makes $f_i$ finite type, and [def-weil-finite-type-morphism] makes it quasi-compact.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), finite affine-cover reduction; Tags 01T3 (lemma-composition-finite-type), 01T4 (lemma-base-change-finite-type), and 0892(1) (lemma-pullback-ample-tensor-relatively-ample)."
+   }
+  },
+  {
+   "text": "For each i put U = g^{-1}(V_i). Pullback invertibility in [lem-weil-pbc-invertible-pullback-tensor] makes L_i invertible; the hypothesis on M supplies invertibility and ampleness of M_i. For an affine open W in U, its image W_prime under U -> Y is affine by Mathlib IsAffineOpen.image_of_isOpenImmersion. Apply the hypothesis on L to W_prime. Mathlib image_morphismRestrict_preimage gives the canonical scheme isomorphism j from (f restricted to U)^{-1}(W) to f^{-1}(W_prime), with j followed by the latter inclusion equal to the two nested inclusions. Apply [lem-weil-pbc-pullback-ample-invertible] along j (an affine morphism because it is an isomorphism). The composition comparisons nonempty_tensorPullbackComp of [def-pc-module-pullback], together with this equality of composite inclusions, identify the resulting module with the nested tensor pullback of L. Transport invertibility by IsInvertible.of_iso in [def-sc-invertible-module] and ampleness by [lem-sc-ample-iso]. This proves the required relative ampleness of L_i for every affine W, without any separatedness assumption on U.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "def-pc-module-pullback",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), finite affine-cover reduction; Tags 01T3 (lemma-composition-finite-type), 01T4 (lemma-base-change-finite-type), and 0892(1) (lemma-pullback-ample-tensor-relatively-ample)."
+   }
+  },
+  {
+   "text": "For each $i$, apply [lem-sfb-relative-ample-absolute-twist] with $(Z,T,f,N,M)=(X_i,Y_i,f_i,L_i,M_i)$. Step 2 supplies quasi-compactness of $f_i$; step 3 supplies invertibility, ampleness of $M_i$, and ampleness of $L_i$ above every affine open of $Y_i$. It gives an integer $a_i\\geq0$ such that $L_i\\otimes f_i^*(M_i^{\\otimes a})$ is ample for every integer $a\\geq a_i$. Choosing these bounds for the finitely many indices completes all the stated data.",
+   "uses": [
+    "lem-sfb-relative-ample-absolute-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), finite affine-cover reduction; Tags 01T3 (lemma-composition-finite-type), 01T4 (lemma-base-change-finite-type), and 0892(1) (lemma-pullback-ample-tensor-relatively-ample)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "def-pc-module-pullback",
+  "lem-sc-ample-iso",
+  "lem-sfb-relative-ample-absolute-twist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P3",
+  "date": "2026-10-23",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4K finite affine-cover reduction, following the existing four-step route; nested restriction comparisons written explicitly using scheme isomorphisms and tensor-pullback composition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a composite of finite type scheme morphisms with relatively ample line bundles over a quasi compact base choose a finite affine cover and eventual absolute ampleness bounds on its inverse images",
+   "results": {
+    "t": "2026-10-22T07:32:29Z",
+    "tool": "leanfinder",
+    "query": "For a composite of finite type scheme morphisms with relatively ample line bundles over a quasi compact base choose a finite affine cover and eventual absolute ampleness bounds on its inverse images",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme",
+     "AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType",
+     "AlgebraicGeometry.quasiCompact_comp",
+     "AlgebraicGeometry.IsFinite.instCompScheme",
+     "AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite",
+     "AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite"
+    ],
+    "digest": "18f1095b49ad1866"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties and affine covers, not eventual ample twists on the finite cover"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]elativ.*[Aa]mple|[Aa]mple.*[Tt]wist|[Tt]wist.*[Aa]mple",
+   "results": {
+    "t": "2026-10-22T07:34:42Z",
+    "tool": "grep",
+    "query": "[Rr]elativ.*[Aa]mple|[Aa]mple.*[Tt]wist|[Tt]wist.*[Aa]mple",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties and affine covers, not eventual ample twists on the finite cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness on a finite affine cover yields eventual absolute ampleness of twists on each inverse image open",
+   "results": {
+    "t": "2026-10-22T07:34:43Z",
+    "tool": "leansearch",
+    "query": "Relative ampleness on a finite affine cover yields eventual absolute ampleness of twists on each inverse image open",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.HasAffineProperty.iff_of_openCover",
+     "AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top",
+     "AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top",
+     "AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover",
+     "AlgebraicGeometry.Scheme.AffineCover.ctorIdx",
+     "AlgebraicGeometry.HasAffineProperty.of_openCover",
+     "AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover",
+     "AlgebraicGeometry.of_affine_open_cover"
+    ],
+    "digest": "de16e2f0ae714606"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties and affine covers, not eventual ample twists on the finite cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAmple\"",
+   "results": {
+    "t": "2026-10-22T07:34:43Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"IsAmple\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties and affine covers, not eventual ample twists on the finite cover"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|RelativelyAmple|[Aa]mple.*[Ss]heaf|[Aa]mple.*[Ll]ine",
+   "results": {
+    "t": "2026-10-22T07:36:57Z",
+    "tool": "grep",
+    "query": "IsAmple|RelativelyAmple|[Aa]mple.*[Ss]heaf|[Aa]mple.*[Ll]ine",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties and affine covers, not eventual ample twists on the finite cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an ample line bundle on the target and a relatively ample line bundle on the source sufficiently large tensor twists are ample",
+   "results": {
+    "t": "2026-10-22T07:37:00Z",
+    "tool": "leanfinder",
+    "query": "Given an ample line bundle on the target and a relatively ample line bundle on the source sufficiently large tensor twists are ample",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor",
+     "AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
+     "AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange",
+     "AlgebraicGeometry.of_targetAffineLocally_of_isPullback",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget",
+     "AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk"
+    ],
+    "digest": "b70b30519980d2d6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties and affine covers, not eventual ample twists on the finite cover"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]elativ.*[Aa]mple|[Aa]mple.*[Tt]wist|[Tt]wist.*[Aa]mple",
+   "results": {
+    "t": "2026-10-23T04:06:17Z",
+    "tool": "grep",
+    "query": "[Rr]elativ.*[Aa]mple|[Aa]mple.*[Tt]wist|[Tt]wist.*[Aa]mple",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned cover, pullback, and tensor results do not assert eventual absolute ampleness of relatively ample twists"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relatively ample invertible sheaf tensored with pullbacks of sufficiently large powers of an ample invertible sheaf is ample",
+   "results": {
+    "t": "2026-10-23T04:06:18Z",
+    "tool": "leansearch",
+    "query": "A relatively ample invertible sheaf tensored with pullbacks of sufficiently large powers of an ample invertible sheaf is ample",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.tensorProd_isSheaf",
+     "AlgebraicGeometry.Scheme.Modules.instAdditivePullback",
+     "Module.Invertible.instTensorProduct_2",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackComp",
+     "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+     "SheafOfModules.sheafificationCompPullback",
+     "SheafOfModules.pullbackIso"
+    ],
+    "digest": "99d528146471b5b0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned cover, pullback, and tensor results do not assert eventual absolute ampleness of relatively ample twists"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"tensor\"",
+   "results": {
+    "t": "2026-10-23T04:06:18Z",
+    "tool": "loogle",
+    "query": "\"IsAmple\", \"tensor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned cover, pullback, and tensor results do not assert eventual absolute ampleness of relatively ample twists"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite affine cover of a quasi compact base gives eventual ampleness bounds for the tensor of a relatively ample line bundle and pullback of powers of an ample line bundle",
+   "results": {
+    "t": "2026-10-23T04:06:20Z",
+    "tool": "leanfinder",
+    "query": "A finite affine cover of a quasi compact base gives eventual ampleness bounds for the tensor of a relatively ample line bundle and pullback of powers of an ample line bundle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀",
+     "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+     "AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered",
+     "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+     "AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover"
+    ],
+    "digest": "1d65a08039576f6f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned cover, pullback, and tensor results do not assert eventual absolute ampleness of relatively ample twists"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite type scheme morphisms with relatively ample invertible modules a finite affine covering of the base admits local thresholds for absolute ampleness of tensor twists",
+   "results": {
+    "t": "2026-10-23T04:06:42Z",
+    "tool": "leanfinder",
+    "query": "For finite type scheme morphisms with relatively ample invertible modules a finite affine covering of the base admits local thresholds for absolute ampleness of tensor twists",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+     "AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan",
+     "AlgebraicGeometry.Proj.affineOpenCover",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover",
+     "AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top",
+     "AlgebraicGeometry.HasRingHomProperty.of_iSup_eq_top"
+    ],
+    "digest": "f8c521b7784b1c80"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned cover, pullback, and tensor results do not assert eventual absolute ampleness of relatively ample twists"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasiprojective-qc-composition",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Stacks 0C4P, second sentence: quasi-projectivity of the composite, by 0C4M; supplies a relatively ample module on the composite modification tower.; Tag 0C4K (lemma-ample-composition), finite affine-cover reduction and local application of Tag 0892(1) (lemma-pullback-ample-tensor-relatively-ample); finite type uses Tags 01T3 and 01T4; relative ampleness is Definition 01VH.",
+   "via": [
+    "lem-sfb-quasiprojective-qc-composition",
+    "lem-sfb-projective-bundle-composition",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-composition-finite-affine-twist-bounds",
+  "worker": "stage1",
+  "summary": "Verified the finite-cover reduction of Stacks 0C4K and its application of 0892(1), reusing existing nodes for finite type permanence, finite affine covers and eventual absolute ampleness. Wrote the restriction and hypothesis checks explicitly, including the empty-base case; no new nodes or statement changes.",
+  "blueprint": "Realizes the existing blueprint.from.place: the finite affine-cover reduction and local twist bounds used for composition of relatively ample modules in the alteration modification tower. The inherited blueprint ancestor is null (blueprint_refs.py ancestor reports None); its existing attribution is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-a1ef39267",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-a1ef39267 (reviewer sub-agent of L); spot-checked: I read the item in full; the statement is unchanged and identical to the item JSON in the three Q106 run snapshots. The delivery adds 0 new nodes, has no repair note (so it is not a re-split) and cites no SGA. I read Stacks morphisms.tex at 0892(1) (line 8829) and 0C4K (line 8888). The 0892(1) proof gives ampleness for every large a. The item is exactly 0C4K's local cover reduction; the max/gluing stays in the parent lem-sfb-quasiprojective-qc-composition, which cites the item, so there is no restatement or cycle. Step 1: clause (1) of lem-sfb-finite-type-composition-base-change (Mathlib leaf, no separatedness needed) plus lem-weil-pbc-qcqs-finite-affine-open-cover, which assumes only quasi-compactness despite its id; S empty gives r=0. Step 2: f_i is the base change of f along the open Y_i, via X×_Y Y_i = f^{-1}(Y_i); clause (2) gives finite type and the definition gives quasi-compactness. Step 3: the hypotheses are checked at the right schemes: invertibility by restricting trivializations, M_i ample because V_i is affine, and every affine W in Y_i is affine in Y with f_i^{-1}(W)=f^{-1}(W). Step 4: the hypotheses of the same-unit lem-sfb-relative-ample-absolute-twist match exactly, and it gives a_i for every a>=a_i. I checked the edge cases of empty S, empty pieces, a=0 and f=id. The only overlap in the DAG is the inline argument of lem-per-quasiprojective-qc-composition, which predates this delivery. Route: everything used from other units is a Mathlib leaf or a definition; tool_uses is empty and none are needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompositionFiniteAffineTwistBounds",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finite_affine_cover_eventually_isAmple_tensorPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompositionFiniteAffineTwistBounds.lean",
+  "statement": "theorem exists_finite_affine_cover_eventually_isAmple_tensorPullback {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType g] [QuasiCompact g] [CompactSpace S] (L : X.Modules) (M : Y.Modules) [L.IsInvertible] [M.IsInvertible] (hL : ∀ W : Y.Opens, IsAffineOpen W → ∃ h : ((tensorPullback (f ⁻¹ᵁ W).ι).obj L).IsInvertible, @IsAmple (f ⁻¹ᵁ W).toScheme ((tensorPullback (f ⁻¹ᵁ W).ι).obj L) h) (hM : ∀ V : S.Opens, IsAffineOpen V → ∃ h : ((tensorPullback (g ⁻¹ᵁ V).ι).obj M).IsInvertible, @IsAmple (g ⁻¹ᵁ V).toScheme ((tensorPullback (g ⁻¹ᵁ V).ι).obj M) h) : LocallyOfFiniteType (f ≫ g) ∧ QuasiCompact (f ≫ g) ∧ ∃ (r : ℕ) (V : Fin r → S.Opens), (∀ i : Fin r, IsAffineOpen (V i)) ∧ (⨆ i : Fin r, V i) = ⊤ ∧ ∀ i : Fin r, LocallyOfFiniteType (f ∣_ (g ⁻¹ᵁ V i)) ∧ QuasiCompact (f ∣_ (g ⁻¹ᵁ V i)) ∧ ((tensorPullback (f ⁻¹ᵁ (g ⁻¹ᵁ V i)).ι).obj L).IsInvertible ∧ ∃ hMi : ((tensorPullback (g ⁻¹ᵁ V i).ι).obj M).IsInvertible, (∀ W : (g ⁻¹ᵁ V i).toScheme.Opens, IsAffineOpen W → ∃ h : ((tensorPullback ((f ∣_ (g ⁻¹ᵁ V i)) ⁻¹ᵁ W).ι).obj ((tensorPullback (f ⁻¹ᵁ (g ⁻¹ᵁ V i)).ι).obj L)).IsInvertible, @IsAmple ((f ∣_ (g ⁻¹ᵁ V i)) ⁻¹ᵁ W).toScheme ((tensorPullback ((f ∣_ (g ⁻¹ᵁ V i)) ⁻¹ᵁ W).ι).obj ((tensorPullback (f ⁻¹ᵁ (g ⁻¹ᵁ V i)).ι).obj L)) h) ∧ @IsAmple (g ⁻¹ᵁ V i).toScheme ((tensorPullback (g ⁻¹ᵁ V i).ι).obj M) hMi ∧ ∃ a₀ : ℤ, 0 ≤ a₀ ∧ ∀ a : ℤ, a₀ ≤ a → ∃ h : (tensorObj ((tensorPullback (f ⁻¹ᵁ (g ⁻¹ᵁ V i)).ι).obj L) ((tensorPullback (f ∣_ (g ⁻¹ᵁ V i))).obj (((tensorPullback (g ⁻¹ᵁ V i).ι).obj M).tensorPow a.toNat))).IsInvertible, @IsAmple (f ⁻¹ᵁ (g ⁻¹ᵁ V i)).toScheme (tensorObj ((tensorPullback (f ⁻¹ᵁ (g ⁻¹ᵁ V i)).ι).obj L) ((tensorPullback (f ∣_ (g ⁻¹ᵁ V i))).obj (((tensorPullback (g ⁻¹ᵁ V i).ι).obj M).tensorPow a.toNat))) h",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40effae8d",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_dep records, Stacks 0C4K, the item module and the sibling RelativeAmpleAbsoluteTwist and parent QuasiprojectiveQCComposition modules. Every clause matches: finite type as LocallyOfFiniteType+QuasiCompact, CompactSpace S, invertible L and M, ampleness over affine opens via tensorPullback of the open inclusion with the sibling's invertibility-witness encoding, h=f≫g finite type and quasi-compact, Fin r affine cover with ⨆=⊤ (r=0 allowed), canonical Y_i/X_i/f_i via morphismRestrict, the local conditions, and ∃a₀:ℤ≥0 with tensorPow a.toNat over the whole tail. lean.statement equals the file signature verbatim; only the lean field differs from the live node. No duplicate (the parent is an existential relative-ample statement); no definitions; sorry only; docstrings carry the source place and 4 proof steps; the report sections are present. Edge cases: empty S, empty pieces, a=0, universes. No compile needed since no file was changed; the worker compile is clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261023T103137-L-3060234",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

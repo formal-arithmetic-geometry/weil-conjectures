@@ -1,0 +1,174 @@
+{
+ "id": "lem-pod-perfect-dual-derived-transport",
+ "kind": "statement",
+ "title": "Canonical perfect dual scalar comparison and its model compatibility",
+ "statement": "For scalar extension of complexes over commutative rings [def-weil-module-base-change], suppose signed evaluations on the product Hom complex [def-pur-hom-complex] and scalar-dual maps beta are given with their evaluation square, preservation of finite-projective terms under scalar extension and duality. Internal Hom into the derived unit preserves perfect objects [def-pc-perfect-ring-complex, def-sf-coefficient-duality]. Then there are natural isomorphisms B_f(P^vee) ≅ (B_f P)^vee on perfect derived objects [def-weil-abstract-derived-category], agreeing with beta through projective Hom evaluation models and modelMap, preserving derived evaluation, and satisfying the identity and tower equations with the normalized comparisons [lem-sf-perfect-scalar-tensor-coherence].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Coefficient-ring computation in the second sentence of point duality; perfect dual pairing and scalar model compatibility."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-module-base-change",
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-projective-module",
+  "def-weil-finitely-generated-module",
+  "def-pc-tensor-complex-sheaves",
+  "def-sc-module-total-hom-complex",
+  "def-sf-coefficient-duality",
+  "lem-sf-perfect-scalar-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Define delta by currying the composite of the inverse tensor comparison, scalar extension of derived evaluation, and the unit comparison. Perfect objects have exact internal-Hom dual pairings by the proved perfect-complex API. Restrict scalar extension to the full perfect subcategory. The normalized associativity and unit equations give it a monoidal structure, so it preserves exact pairings. The curried evaluation of the image pairing is invertible, proving delta is an isomorphism. This constructs delta directly without selecting a representative.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-sf-perfect-scalar-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Coefficient-ring computation in the second sentence of point duality; perfect dual pairing and scalar model compatibility."
+   }
+  },
+  {
+   "text": "Uncurry the naturality equation. Naturality of the inverse tensor comparison moves the precomposition maps inside scalar extension; the internal-Hom evaluation/precomposition identity then makes the two sides equal. Uncurry the identity equation and use the normalized identity tensor and unit equations. For composition, inverse tensor coherence, naturality of the composition comparison on evaluation, and unit composition coherence identify the two curried composites.",
+   "uses": [
+    "lem-sf-perfect-scalar-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Coefficient-ring computation in the second sentence of point duality; perfect dual pairing and scalar model compatibility."
+   }
+  },
+  {
+   "text": "For a bounded finite-projective complex, use the Hom-to-single degree equivalence to show that its dual is bounded with the reversed bounds. Apply the projective Hom evaluation model to both it and its scalar extension. The signed coordinate formula uniquely identifies the given evaluation with the evaluation in that model. Compose the model isomorphisms with internal Hom of the inverse unit comparison for Q; naturality of evaluation gives their stated evaluation equations.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pod-projective-hom-evaluation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Coefficient-ring computation in the second sentence of point duality; perfect dual pairing and scalar model compatibility."
+   }
+  },
+  {
+   "text": "Prove naturality of modelMap from its definition using the scalar counit naturality and the single-complex bifunctor comparison. Precompose the required model equation by the invertible scalar image of the Hom-model isomorphism, uncurry, and cancel the invertible unit comparison of Q. The assumed chain evaluation square, tensor and unit model coherence, naturality of modelMap on evaluation, and the two Hom-model evaluation equations reduce both sides to the scalar image of evaluation. Thus the canonical delta agrees with the chain beta comparison.",
+   "uses": [
+    "lem-sf-perfect-scalar-tensor-coherence",
+    "lem-pod-projective-hom-evaluation-model",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Coefficient-ring computation in the second sentence of point duality; perfect dual pairing and scalar model compatibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "lem-sf-perfect-scalar-tensor-coherence",
+  "def-pur-hom-complex",
+  "lem-pod-projective-hom-evaluation-model",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Canonical comparison obtained from preservation of perfect dual pairings; evaluation uniqueness proves the signed model equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of natural transformations from bounded projective complexes to the perfect derived category",
+   "results": "CochainComplex.IsKProjective.Qh_map_bijective; HasDerivedCategory.standard; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.Functor.mapProjectiveResolution; DerivedCategory.right_fac; CategoryTheory.projectiveResolutions; DerivedCategory.left_fac; CategoryTheory.hasExt_of_enoughProjectives",
+   "date": "2026-10-24",
+   "verdict": "No match for descent with the fixed signed model, evaluation, identity and tower comparisons. The K-projective and module-dual APIs supply parts of the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of finite projective dual complexes descends naturally to perfect derived categories",
+   "results": "Module.dual_finite; ModuleCat.ExtendRestrictScalarsAdj.homEquiv; Module.dual_projective; LinearMap.IsPerfPair.restrictScalars_of_field; LinearEquiv.extendScalarsOfIsLocalizationEquiv; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-24",
+   "verdict": "No match for descent with the fixed signed model, evaluation, identity and tower comparisons. The K-projective and module-dual APIs supply parts of the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective|ihomComparison_ev|modelMap",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean",
+   "date": "2026-10-24",
+   "verdict": "No match for descent with the fixed signed model, evaluation, identity and tower comparisons. The K-projective and module-dual APIs supply parts of the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "ExactPairing.map|isIso_curry_evaluation|CoreMonoidal.ofOplaxMonoidal",
+   "results": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence.ExactPairing.map; Mathlib.CategoryTheory.Monoidal.Closed.Basic; Mathlib.CategoryTheory.Monoidal.Functor.CoreMonoidal.ofOplaxMonoidal",
+   "date": "2026-10-24",
+   "verdict": "These component results give a shorter canonical evaluation construction; the fixed model and scalar coherence equations still require the argument of this node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.PerfectDualScalarCalculus",
+  "date": "2026-10-24",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Algebraic part of returned steps 2, 5, 6 and 7.",
+   "via": [
+    "lem-pod-perfect-dual-scalar-calculus",
+    "lem-pod-point-scalar-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.PerfectDualDerivedTransport",
+  "file": "lean/Sheaf/Algebra/Homology/PerfectDualDerivedTransport.lean",
+  "declaration": "CochainComplex.PerfectDualScalar.perfect_dual_derived_transport",
+  "statement": "theorem perfect_dual_derived_transport\n    [∀ R : CommRingCat.{u}, HasDerivedCategory.{u} (ModuleCat.{u} R)]\n    (ev : ∀ (R : CommRingCat.{u}) (P : CochainComplex (ModuleCat.{u} R) ℤ),\n        P ⊗ (moduleHomComplex P (coefficient R)) ⟶ coefficient R)\n    (beta : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S)\n        (P : CochainComplex (ModuleCat.{u} R) ℤ),\n        (E f).obj (moduleHomComplex P (coefficient R)) ⟶ (moduleHomComplex ((E f).obj P)\n          (coefficient S)))\n    (dualPerfect : ∀ (R : CommRingCat.{u}) (P : D.{u, u} R),\n        IsPerfectRingComplex P → IsPerfectRingComplex ((coefficientDerivedDual R).obj (op P)))\n    (hev : (∀ (R : CommRingCat.{u}) (P : CochainComplex (ModuleCat.{u} R) ℤ)\n          (p j : ℤ) (x : P.X p) (z : (moduleHomComplex P (coefficient R)).X j),\n        (ev R P).f (p + j)\n          (HomologicalComplex.ιTensorObj P (moduleHomComplex P (coefficient R)) p j (p + j) rfl\n            (x ⊗ₜ[R] z)) =\n            (p * j).negOnePow • (z.v p (p + j) rfl) x))\n    (heval : (∀ {R S : CommRingCat.{u}} (f : R ⟶ S)\n          (P : CochainComplex (ModuleCat.{u} R) ℤ),\n        ((ModuleCat.extendScalars f.hom).mapCochainComplexμIso P (moduleHomComplex P (coefficient\n          R))).hom ≫\n            (E f).map (ev R P) ≫\n            (ModuleCat.extendScalars f.hom).mapCochainComplexεIso.inv =\n          (E f).obj P ◁ beta f P ≫ ev S ((E f).obj P)))\n    (scalarTerms : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S)\n      (P : CochainComplex (ModuleCat.{u} R) ℤ),\n      (∀ n : ℤ, Module.Projective R (P.X n) ∧ Module.Finite R (P.X n)) →\n      ∀ n : ℤ, Module.Projective S (((E f).obj P).X n) ∧\n        Module.Finite S (((E f).obj P).X n))\n    (dualTerms : ∀ (R : CommRingCat.{u}) (P : CochainComplex (ModuleCat.{u} R) ℤ),\n      (∀ n : ℤ, Module.Projective R (P.X n) ∧ Module.Finite R (P.X n)) →\n      ∀ n : ℤ, Module.Projective R ((moduleHomComplex P (coefficient R)).X n) ∧\n        Module.Finite R ((moduleHomComplex P (coefficient R)).X n)) :\n    ∃ delta : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : D.{u, u} R),\n        IsPerfectRingComplex P →\n          ((B f).obj ((coefficientDerivedDual R).obj (op P)) ≅ ((coefficientDerivedDual S).obj\n            (op ((B f).obj P)))),\n      (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q : D.{u, u} R)\n          (hP : IsPerfectRingComplex P) (hQ : IsPerfectRingComplex Q) (v : P ⟶ Q),\n        (B f).map ((MonoidalClosed.pre v).app (𝟙_ (D R))) ≫ (delta f P hP).hom =\n          (delta f Q hQ).hom ≫\n            (MonoidalClosed.pre ((B f).map v)).app (𝟙_ (D S))) ∧\n      (∀ {R S : CommRingCat.{u}} (f : R ⟶ S)\n          (P : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ)\n          (_hlo : P.IsStrictlyGE a) (_hhi : P.IsStrictlyLE b)\n          (_ht : ∀ n : ℤ, Module.Projective R (P.X n) ∧ Module.Finite R (P.X n))\n          (hP : IsPerfectRingComplex (DerivedCategory.Q.obj P)),\n        ∃ (k : DerivedCategory.Q.obj (moduleHomComplex P (coefficient R)) ≅\n            ((coefficientDerivedDual R).obj (op (DerivedCategory.Q.obj P))))\n          (l : DerivedCategory.Q.obj (moduleHomComplex ((E f).obj P) (coefficient S)) ≅\n            ((coefficientDerivedDual S).obj (op (DerivedCategory.Q.obj ((E f).obj P))))),\n          (Functor.LaxMonoidal.μ DerivedCategory.Q P (moduleHomComplex P (coefficient R)) ≫\n              DerivedCategory.Q.map (ev R P) =\n            DerivedCategory.Q.obj P ◁ k.hom ≫\n              (ihom.ev (DerivedCategory.Q.obj P)).app (𝟙_ (D R)) ≫\n                Functor.LaxMonoidal.ε (DerivedCategory.Q (C := ModuleCat R))) ∧\n          (Functor.LaxMonoidal.μ DerivedCategory.Q ((E f).obj P)\n              (moduleHomComplex ((E f).obj P) (coefficient S)) ≫ DerivedCategory.Q.map (ev S ((E\n                f).obj P)) =\n            DerivedCategory.Q.obj ((E f).obj P) ◁ l.hom ≫\n              (ihom.ev (DerivedCategory.Q.obj ((E f).obj P))).app (𝟙_ (D S)) ≫\n                Functor.LaxMonoidal.ε (DerivedCategory.Q (C := ModuleCat S))) ∧\n          (B f).map k.inv ≫ modelMap f (moduleHomComplex P (coefficient R)) ≫\n              DerivedCategory.Q.map (beta f P) ≫ l.hom ≫\n              (MonoidalClosed.pre (modelMap f P)).app (𝟙_ (D S)) =\n            (delta f (DerivedCategory.Q.obj P) hP).hom) ∧\n      (∀ {R S : CommRingCat.{u}} (f : R ⟶ S)\n          (P : D.{u, u} R) (hP : IsPerfectRingComplex P),\n        (B f).map ((ihom.ev P).app (𝟙_ (D R))) ≫ (coherenceData.unit f).hom =\n          (coherenceData.tensor f P ((coefficientDerivedDual R).obj (op P))\n            hP (dualPerfect R P hP)).hom ≫\n              (B f).obj P ◁ (delta f P hP).hom ≫\n                (ihom.ev ((B f).obj P)).app (𝟙_ (D S))) ∧\n      (∀ (R : CommRingCat.{u}) (P : D.{u, u} R) (hP : IsPerfectRingComplex P),\n        (delta (𝟙 R) P hP).hom =\n          (coherenceData.identity R ((coefficientDerivedDual R).obj (op P)) (dualPerfect R P\n            hP)).hom ≫\n            (MonoidalClosed.pre (coherenceData.identity R P hP).hom).app (𝟙_ (D R))) ∧\n      (∀ {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T)\n          (P : D.{u, u} R) (hP : IsPerfectRingComplex P),\n        (B g).map (delta f P hP).hom ≫\n            (delta g ((B f).obj P) (coherenceData.preserves f P hP)).hom =\n          (coherenceData.comp f g ((coefficientDerivedDual R).obj (op P)) (dualPerfect R P\n            hP)).hom ≫\n            (delta (f ≫ g) P hP).hom ≫\n            (MonoidalClosed.pre (coherenceData.comp f g P hP).hom).app (𝟙_ (D T)))",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261024T232213-L-2314658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261024T232213-L-2314658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,52 @@
+## Worker report
+
+Files written (only in this item's sandbox):
+- `dag/nodes/sec-six-functors-basics/lem-sfb-projective-coordinate-ring-euler-polynomial.json`: item, split into six steps; no statement change.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-finite-graded-module-section-tail.json`: one new statement, unsplit; Mathlib searches found no match. No new Mathlib leaves.
+- `citations.json`: one exact statement quotation for each node cited by each numbered step.
+
+Attachments: none. I searched the project Lean source for the exact blueprint tag, Hilbert-polynomial/Euler terminology, and recovery of graded-module tails. `WeilConjectures/AlgebraicGeometry/Modules/HilbertPolynomial.lean` has Euler-polynomial and eventual Euler/H0 results, but no comparison with homogeneous coordinate rings. `ProjectiveSpectrum/Twist.lean:69` still lists arbitrary graded-module sheaves and their recovery as a TODO. The ProjGradedModuleSheaf files construct a sheaf and the canonical map only; they do not assert its eventual bijectivity. These do not cover the item exactly, so no attachment is claimed.
+
+WANTED: none; all sources used are available locally.
+
+The item had no proof and only an inherited grep search. Its statement is correct, including non-saturated ideals and the empty scheme. The polynomial depends on the indicated closed subscheme of the fixed projective space (hence on its twist); it is not claimed independent of a change of embedding. No clause was weakened or dropped. I kept all inherited fields and the historical search, and added the searches actually run for this delivery.
+
+Nothing remains unfinished in this one-level split. The new general module theorem is a statement-only node awaiting its own split. The route is the existing graph-Hilbert-polynomial prerequisite in the alteration branch of `sk-thm-sf-ctf-stability`; neither the chapter nor unit record is changed. `blueprint_refs.py ancestor` currently returns `None` for this item, as in its inherited `blueprint.from.node`; I retained that value and extended the existing via chain for the new node, rather than inventing a blueprint ancestor. Searches of the whole imported blueprint for `Hilbert polynomial`, `graded module`, `0AG7`, `recover`, `section tail`, and `section comparison` found no equivalent section-tail theorem. The degree/Hilbert-polynomial blueprint nodes do not compare graded module sections.
+
+## New nodes
+
+`lem-sfb-finite-graded-module-section-tail` states Stacks 0AG7 for an arbitrary finite graded module over a ring generated in degree one with Noetherian degree-zero part. Its target uses the associated sheaf of the shifted module. Constructions 01MT identifies this with the twist in 0AG7. It is strictly an input to the item: it has no Euler characteristics, ideal independence, or polynomial assertion. It does not restate one of the item's conclusions. It is not elementary: eventual injectivity and surjectivity of the canonical map are the substantive content of 0AG7.
+
+Mathlib searches were made exclusively through the required `msearch.py` command and are preserved in `searches.jsonl`. For the item, LeanSearch returned `Polynomial.hilbertPoly` and its coefficient formula together with structure-sheaf constructions; these have no coherent cohomology comparison. Loogle `AlgebraicGeometry.Proj, Module.finrank` and the AlgebraicGeometry grep returned no hits. For the new node, LeanSearch returned Proj maps, the structure sheaf, grading structures and generating-section predicates; Loogle `AlgebraicGeometry.Proj, Module.Finite` and the Proj grep returned no hits. The first LeanFinder phrasing returned affine Proj charts and properness constructions; the second returned localization maps and the structure presheaf. I read these outputs: neither is an eventual global-section bijection for a finite graded module. All services answered successfully; no unavailable service is represented as a negative result.
+
+## Not duplicates
+
+lem-sfb-finite-graded-module-section-tail vs lem-sfb-projective-coordinate-ring-euler-polynomial: both mention 0AG7, but the new node is the general canonical module-to-sections isomorphism, while the item proves a quotient-coordinate dimension equals an Euler characteristic and deduces polynomial independence.
+
+lem-sfb-finite-graded-module-section-tail vs lem-sfb-projective-curve-isom-graphs: the existing node represents a relative isomorphism functor by projective graphs, and cites the present item for its numerical index; it does not state section-tail recovery.
+
+lem-sfb-finite-graded-module-section-tail vs lem-weil-pbc-projective-space-twisting-sheaf-charts: both use 01MT, but the existing node describes the rank-one O(1) charts over the integers and their bases; it has no finite graded module and no eventual global-section assertion.
+
+I also read `lem-sfb-flat-graded-tail-proj`: its final field clause gives an eventual polynomial comparison inside a much larger relative-flatness theorem, not the module recovery statement. It is unsplit; using it to prove this item would hide the needed comparison. The existing `lem-trf-standard-graded-hilbert-function` already states the purely algebraic polynomial assertion, and the existing closed-immersion Serre theorem already states the required simultaneous vanishing, so I created neither again.
+
+## Review by Q22
+
+I read coherent.tex 0AG7, label `lemma-recover-tail-graded-module`, including its kernel/cokernel proof and finite-generation hypotheses; coherent.tex 01YS, label `lemma-coherent-projective`, especially clauses (2)--(4); varieties.tex 08AE, label `lemma-hilbert-polynomial-H0`; constructions.tex 01MT, label `lemma-apply-modules`; and algebra.tex 00K1, label `proposition-graded-hilbert-polynomial`. These give exactly the comparison route recorded in the item. For the only new node, 0AG7 assumes Noetherian S_0 and finitely many degree-one algebra generators, and allows any finite graded module; 01MT justifies using the sheaf of M(n) as its target. I did not assume the module torsion-free or the projective scheme nonempty.
+
+Step 1 uses the statements of `def-pc-proj`, `def-weil-pbc-proj-twisting-sheaf`, `def-pc-projective-space-twist`, and `def-pc-module-pullback`. I checked their chart, shift, transition and pullback formulas. The proof supplies the actual identification: the degree-m localization is generated by u_j^m, whose transition is (u_i/u_j)^m. This is a routine application of those definitions, not an unnamed comparison theorem. Both sides glue by precisely that transition, including on empty charts. The step is elementary and under 2000 characters.
+
+Step 2 cites the new module recovery statement, which explicitly asserts the canonical isomorphism this step needs. A_0 is k or zero; it is not blindly identified with k when J contains a constant. The ring is generated by the images of the finitely many variables, and the module A over itself is cyclic. The conclusion is first A_0-linear, then k-linear by restriction of scalars. The finite monomial spanning set directly proves finite dimension without invoking an uncited finiteness theorem.
+
+Step 3 cites `lem-weil-pbc-closed-immersion-serre-vanishing`. I opened its statement and source: it gives a single threshold for all positive cohomological degrees on a projective closed subscheme, exactly what is used. The base k is Noetherian, the immersion is supplied in the item, and F=O_Z is locally free of rank one, hence has the explicit finite presentation written in the step. This avoids silently appealing to a coherent-pushforward or projection-formula theorem. Tensoring with the structure sheaf is the unit identification.
+
+Step 4 uses only the definition of Euler characteristic from `def-pc-euler-characteristic` and the preceding results. Above the maximum threshold, all positive cohomology vanishes and H0 is finite-dimensional. The sum therefore reduces to H0. On the empty scheme every group is zero and the recovery isomorphism forces the coordinate tail to be zero as well.
+
+Step 5 cites `lem-trf-standard-graded-hilbert-function`. I read its statement: it allows any field, a standard graded algebra and a finite nonnegatively graded module, and explicitly allows the zero polynomial. I apply it to B, not to A viewed as a standard graded k-algebra: B_0=k even when J=B. The quotient A is a cyclic B-module, so the hypotheses hold in every case. This supplies the polynomial existence that cannot be inferred from vanishing alone.
+
+Step 6 uses no additional theorem: comparing the same embedded closed subscheme compares the same pulled-back twists; equality of the two eventual Euler functions gives infinitely many common polynomial values. The root-count proof is written out through division by a linear factor. There is no claim about different polarizations on an abstract scheme.
+
+The two reused theorem nodes are generic algebraic/coherent-cohomology tools from other units, and `split_report.tool_uses` explains their limited use; I did not write the maintainer's `tool_uses` field. All citations quote the actual statements, never their internal proofs. The new node has empty proof and proof_deps, complete introduced objects and TeX, and definition dependencies for Noetherianity, Proj, graded-module sheaf and cohomology. DAG/blueprint/project Lean searches preceded its creation. No proof step exceeds 2000 characters.
+
+Small cases checked: J=0 gives projective space and its usual monomial tail; N=0 and J=(z_0^r) gives an empty Proj and A_m=0 for m>=r, so the equality cannot hold in every small degree; J=B gives A=0 and empty Proj; in k[x,y], J=(x^2,xy) and its saturation (x) define the same point, with the extra degree-one x disappearing from the high tail. For the new theorem, S concentrated in degree zero has empty Proj and every finite graded module has only finitely many nonzero degrees; M=0 works with threshold zero; M=S/(S_+) is irrelevant torsion and is recovered as zero in positive degrees. Generation in degree one is explicitly retained, not extended without proof to weighted gradings. These checks require no extra hypotheses.
+
+The corrections made during this reading were to use the general section-tail fact rather than the whole quotient/Euler assertion as a new node, to check A_0 may be zero, and to obtain polynomiality from the existing algebraic theorem applied to B. There is no source or statement dispute.

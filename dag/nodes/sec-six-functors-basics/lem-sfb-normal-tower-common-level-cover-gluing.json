@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-normal-tower-common-level-cover-gluing",
+ "kind": "statement",
+ "title": "Common-level gluing of local finite etale covers on a normal tower",
+ "statement": "Let $p$ be a positive prime, let $V$ be a quasi-compact scheme, let $U\\subseteq V$ be open, and let $P\\to U$ be finite etale [def-weil-pbc-scheme-conventions, def-weil-pbc-finite-etale-category]. For each positive integer $m$ prime to $p$, let $X_m\\to V$ be a Noetherian normal scheme over $V$, and for each $m\\mid n$ let $q_{n,m}:X_n\\to X_m$ be a $V$-morphism with $q_{m,m}=\\mathrm{id}$ and $q_{n,m}q_{b,n}=q_{b,m}$ for $m\\mid n\\mid b$. Here Noetherian means locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme], and normal means that all local rings are integrally closed domains [def-weil-pbc-normal-ring]. Put $U_m=X_m\\times_V U$, and assume that $U_m$ contains the generic point of every irreducible component of $X_m$ [def-pc-fibre-product, def-weil-irreducible-components].\nSuppose that for each $v\\in V$ there are an open neighbourhood $W_v\\subseteq V$, a positive integer $m_v$ prime to $p$, a finite etale scheme $Y_v\\to X_{m_v}\\times_V W_v$, and a specified isomorphism over $U_{m_v}\\times_V W_v$\n$$\\theta_v:Y_v\\times_{X_{m_v}}U_{m_v}\\simeq P\\times_U(U_{m_v}\\times_V W_v).$$\nThen there are finitely many points $v_1,\\ldots,v_s$ with $V=\\bigcup_jW_{v_j}$ and, for $n=\\prod_{j=1}^s m_{v_j}$ (empty product $1$), a finite etale $Z\\to X_n$ and an isomorphism\n$$\\theta:Z\\times_{X_n}U_n\\simeq P\\times_U U_n.$$\nMore precisely, let $Z_j$ be the base change of $Y_{v_j}$ to $H_j=X_n\\times_VW_{v_j}$ along $q_{n,m_{v_j}}$, and let $\\theta_j$ be its induced identification with $P$ on $H_j\\cap U_n$. On each overlap $H_i\\cap H_j$ there is a unique isomorphism $\\alpha_{ij}:Z_i|_{H_i\\cap H_j}\\simeq Z_j|_{H_i\\cap H_j}$ whose restriction to $U_n$ is $\\theta_j^{-1}\\theta_i$. These isomorphisms satisfy $\\alpha_{ii}=\\mathrm{id}$ and $\\alpha_{jk}\\alpha_{ij}=\\alpha_{ik}$ on every triple overlap. There are isomorphisms $Z|_{H_j}\\simeq Z_j$ inducing these $\\alpha_{ij}$, and $\\theta$ restricts to each specified $\\theta_j$. Empty bases and covers are allowed. No assertion that integral closure commutes with the maps $q_{n,m}$ is required.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1 proof, printed pp.133-134: locality and extension of graphs; the explicit finite-subcover/common-level and overlap descent arguments in returned proof steps 11-13. Supporting Stacks Tag 0BQM (fundamental group of a normal integral scheme, generic-point full faithfulness)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-normal-ring",
+  "def-pc-fibre-product",
+  "def-weil-irreducible-components",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "By quasi-compactness [def-weil-pbc-quasi-compact-scheme], choose a finite subcover of the $W_v$ and enumerate its finite set by $\\operatorname{Fin}(s)$. Take $n$ to be the product of the selected levels. Finset.prod_pos proves positivity, Nat.coprime_prod_left_iff proves coprimality, and Finset.dvd_prod_of_mem proves divisibility of each selected level. The empty product gives $1$ without a separate nonemptiness assumption.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sfb-normal-tower-overlap-system] to $A=X_n$, the selected opens, covers and identifications, and the tower maps $q_{n,m_j}$. Its normality and generic-point assumptions are precisely the given hypotheses specialized to $n$. It supplies only overlap isomorphisms and their uniqueness, identity and cocycle equations.",
+   "uses": [
+    "lem-sfb-normal-tower-overlap-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The selected opens cover $V$, so [lem-sfb-normal-tower-overlap-descent] realizes this particular overlap system. Assemble its global fields and the overlap fields in the unchanged Gluing constructor [def-sfb-normal-tower-cover-gluing-data], obtaining every clause of the conclusion.",
+   "uses": [
+    "lem-sfb-normal-tower-overlap-descent",
+    "def-sfb-normal-tower-cover-gluing-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sfb-normal-tower-overlap-system",
+  "lem-sfb-normal-tower-overlap-descent",
+  "def-sfb-normal-tower-cover-gluing-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1, pp.133-134; original steps 2-3 and 4-6 split as overlap construction and effective descent, with finite-subcover/product selection and final assembly proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers on local finite stages of an inverse system of normal noetherian schemes glue at one common stage using a dense open and generic full faithfulness",
+   "results": "{\"t\": \"2026-10-22T06:04:48Z\", \"tool\": \"leanfinder\", \"query\": \"Finite etale covers on local finite stages of an inverse system of normal noetherian schemes glue at one common stage using a dense open and generic full faithfulness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\"], \"digest\": \"0f2bd96eee0a0e96\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition equality descent, relative gluing data and gluing compatible morphisms assume different input; none constructs unique overlap isomorphisms from only dense-open identifications and then a common-stage finite etale cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness and unique extension of isomorphisms of finite etale covers from a dense open give a global cover at a common root level",
+   "results": "{\"t\": \"2026-10-22T06:04:49Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi compactness and unique extension of isomorphisms of finite etale covers from a dense open give a global cover at a common root level\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.instCoverOfIsIso\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.QuasiCompactCover.of_hom\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.instUniqueI₀SchemeCover\", \"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans\"], \"digest\": \"6874abf2e91b26a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition equality descent, relative gluing data and gluing compatible morphisms assume different input; none constructs unique overlap isomorphisms from only dense-open identifications and then a common-stage finite etale cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteEtale\", \"IsGluing\"",
+   "results": "{\"t\": \"2026-10-22T06:04:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"FiniteEtale\\\", \\\"IsGluing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition equality descent, relative gluing data and gluing compatible morphisms assume different input; none constructs unique overlap isomorphisms from only dense-open identifications and then a common-stage finite etale cover"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale|Etale).*(common.?level|dense.*glu|glu.*dense)|(common.?level|dense.*glu|glu.*dense).*(etale|Etale)",
+   "results": "{\"t\": \"2026-10-22T06:04:39Z\", \"tool\": \"grep\", \"query\": \"(etale|Etale).*(common.?level|dense.*glu|glu.*dense)|(common.?level|dense.*glu|glu.*dense).*(etale|Etale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition equality descent, relative gluing data and gluing compatible morphisms assume different input; none constructs unique overlap isomorphisms from only dense-open identifications and then a common-stage finite etale cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers locally extending the same dense open cover glue uniquely on a normal noetherian base after a common finite stage",
+   "results": "{\"t\": \"2026-10-22T06:04:39Z\", \"tool\": \"leansearch\", \"query\": \"Finite etale covers locally extending the same dense open cover glue uniquely on a normal noetherian base after a common finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.noConfusion\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected.congr_simp\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_J\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOfLocallyDirected\"], \"digest\": \"40f43b4ea8819df3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition equality descent, relative gluing data and gluing compatible morphisms assume different input; none constructs unique overlap isomorphisms from only dense-open identifications and then a common-stage finite etale cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale schemes over open neighbourhoods on a normal scheme glue using unique extension of isomorphisms from a dense open, after pulling back to a common tower level",
+   "results": "{\"t\": \"2026-10-22T11:32:35Z\", \"tool\": \"leanfinder\", \"query\": \"Finite etale schemes over open neighbourhoods on a normal scheme glue using unique extension of isomorphisms from a dense open, after pulling back to a common tower level\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.GlueData.f_open\"], \"digest\": \"53545af73a805fe0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are gluing data, etale forgetful functors, or normalization open covers; none gives the dense-open extension and common-level conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "(FiniteEtale|finiteEtale).*(glue|dense|normal)|(glue|dense|normal).*(FiniteEtale|finiteEtale)",
+   "results": "{\"t\": \"2026-10-22T11:32:46Z\", \"tool\": \"grep\", \"query\": \"(FiniteEtale|finiteEtale).*(glue|dense|normal)|(glue|dense|normal).*(FiniteEtale|finiteEtale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits for the finite-etale/gluing-or-dense-or-normal expression."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers on open subsets with cocycle isomorphisms glue to a finite etale scheme",
+   "results": "{\"t\": \"2026-10-22T11:32:46Z\", \"tool\": \"leansearch\", \"query\": \"Finite etale covers on open subsets with cocycle isomorphisms glue to a finite etale scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Pullback.gluing\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\"], \"digest\": \"f0950d94b60d7504\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.GlueData and Cover.glueMorphisms consume overlap maps; they do not extend the dense-open identifications. Their gluing input is cited via existing nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteEtale\", \"GlueData\"",
+   "results": "{\"t\": \"2026-10-22T11:32:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"FiniteEtale\\\", \\\"GlueData\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits for the joint finite-etale/gluing pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of finite etale covers of a normal integral scheme to a dense open is fully faithful",
+   "results": "{\"t\": \"2026-10-22T11:32:50Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of finite etale covers of a normal integral scheme to a dense open is fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instFullOppositeIdealSheafDataOverSubschemeFunctor\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.AffineScheme.forgetToScheme_full\"], \"digest\": \"f1e3d93d8415aaad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are gluing data, etale forgetful functors, or normalization open covers; none gives the dense-open extension and common-level conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-tame-root-etale-extension",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), open direct image, inherited finite-cover Kummer input: IX Proposition 2.1 proof, printed pp.133-134: locality and extension of graphs; the explicit finite-subcover/common-level and overlap descent arguments in returned proof steps 11-13. Supporting Stacks Tag 0BQM (fundamental group of a normal integral scheme, generic-point full faithfulness).",
+   "via": [
+    "lem-sfb-snc-tame-root-etale-extension",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normal-tower-common-level-cover-gluing",
+  "worker": "stage1",
+  "summary": "Q41: split by finite subcover and common prime-to-p level; construct overlap maps componentwise using generic full faithfulness, check their actual dense-open restrictions by the same uniqueness theorem on the open, prove inverses and cocycles, glue schemes and structural maps, descend finite/etale target-locally, and glue the prescribed identifications and inverses. Reused existing DAG nodes throughout: zero new nodes. No change of hypotheses or conclusions; added explicit Noetherian convention citations. No completed Lean declaration states the item.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images, proof paragraph (3), open-direct-image finiteness, through the inherited Kummer-cover input lem-sfb-snc-tame-root-etale-extension, steps 11--13: local finite-stage covers are pulled to one common prime-to-p level, compared by normal generic full faithfulness, and glued. ILO IX 2.1 supplies the locality/full-faithfulness principle; this split writes the common-level assembly explicitly.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Clause (2) supplies the disjoint normal integral components of a Noetherian normal scheme; this is a generic scheme-theoretic tool, not a replacement for the unit finiteness route."
+   },
+   {
+    "node": "lem-sbc-normal-integral-generic-hom-full",
+    "why": "Unique extension of generic morphisms of finite etale covers is the generic normal-base comparison tool needed twice (over a component-open and its dense open); the unit has no replacement statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-sbc-normal-integral-generic-hom-full"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-5e06e600d",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-5e06e600d (reviewer sub-agent of L); spot-checked: Read in full: the item and all 7 steps (zero new nodes, no fixes). The statement is unchanged against the live base except one added sentence defining Noetherian as locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. That is the standard meaning and exactly the hypothesis of rem-pc-regular-normal(2); the parent's step 5 use (normal Noetherian X_a) is unaffected. Checked each step against the cited statements. Step 1: finite subcover; n=∏m_j is prime to p; q is a V-morphism, so q^{-1}(U_{m_j})=U_n and q^{-1}(X_{m_j}×W)=H_j; base change by 01WL and 02GO. Step 2: components C_a from rem(2); η_a∈U_n; a nonempty open T⊆C_a is integral and normal. lem-sbc-normal-integral-generic-hom-full (Stacks 0BQM proposition-normal read: FÉt_X→FÉt_η fully faithful) extends δ over T, and its uniqueness over D gives agreement on all of D. The disjoint component pieces glue. Step 3: inverses and cocycles follow from generic uniqueness on each component, then from gluing uniqueness. Step 4: I checked α_ij^{-1}(O_ji∩O_jk)=O_ij∩O_ik because α lies over the base, π^{-1}(H_j)=ℓ_j(Z_j), and the conditions of lem-weil-pbc-glue-schemes. Step 5: finite étale by the Zariski-local node (2),(3). Step 6: θ and its inverse glue, and are identities by uniqueness. Step 7: the empty cases are handled. Small cases: identity tower, repeated m (n=m², allowed since the item specifies the product), disconnected X_n. No hypothesis was assumed beyond those given (no affine or irreducible overlaps). Duplicate search: the nearest hit, lem-sfb-connected-abelian-tower-normalized-descent, is unrelated; nothing is restated. Accepted tool_uses: rem-pc-regular-normal and lem-sbc-normal-integral-generic-hom-full, both generic tools the unit lacks. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalTowerCommonLevelCoverGluing",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_normalTower_commonLevel_cover_gluing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteEtale_normalTower_commonLevel_cover_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalTowerCommonLevelCoverGluing.lean",
+  "statement": "theorem finiteEtale_normalTower_commonLevel_cover_gluing (p : ℕ) (hp : p.Prime) (V : Scheme.{u}) [CompactSpace V] (U : V.Opens) (P : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ U.toScheme) (X : {m : ℕ // 0 < m ∧ Nat.Coprime m p} → Over V) [hNoeth : ∀ m : {m : ℕ // 0 < m ∧ Nat.Coprime m p}, IsLocallyNoetherian (X m).left] [hCompact : ∀ m : {m : ℕ // 0 < m ∧ Nat.Coprime m p}, CompactSpace (X m).left] (hNormal : ∀ (m : {m : ℕ // 0 < m ∧ Nat.Coprime m p}) (x : (X m).left), IsDomain ((X m).left.presheaf.stalk x) ∧ IsIntegrallyClosed ((X m).left.presheaf.stalk x)) (q : ∀ (a b : {m : ℕ // 0 < m ∧ Nat.Coprime m p}) (_ : a.val ∣ b.val), X b ⟶ X a) (q_id : ∀ a : {m : ℕ // 0 < m ∧ Nat.Coprime m p}, q a a dvd_rfl = 𝟙 (X a)) (q_comp : ∀ (a b c : {m : ℕ // 0 < m ∧ Nat.Coprime m p}) (hab : a.val ∣ b.val) (hbc : b.val ∣ c.val), q b c hbc ≫ q a b hab = q a c (hab.trans hbc)) (hGeneric : ∀ (m : {m : ℕ // 0 < m ∧ Nat.Coprime m p}) (C : Set (X m).left), C ∈ irreducibleComponents (X m).left → ∀ η : (X m).left, IsGenericPoint η C → (X m).hom η ∈ U) (W : V → V.Opens) (hW : ∀ v : V, v ∈ W v) (m : V → {m : ℕ // 0 < m ∧ Nat.Coprime m p}) (Y : ∀ v : V, (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ (chart (X (m v)) (W v))) (θlocal : ∀ v : V, (MorphismProperty.Over.pullback _ ⊤ (chartInclusion (X (m v)) (inf_le_left : W v ⊓ U ≤ W v))).obj (Y v) ≅ (MorphismProperty.Over.pullback _ ⊤ (chartToOpen (X (m v)) (inf_le_right : W v ⊓ U ≤ U))).obj P) : ∃ (s : ℕ) (v : Fin s → V) (n : {n : ℕ // 0 < n ∧ Nat.Coprime n p}) (hd : ∀ j : Fin s, (m (v j)).val ∣ n.val), (⨆ j : Fin s, W (v j)) = ⊤ ∧ n.val = ∏ j : Fin s, (m (v j)).val ∧ Nonempty (Gluing (X n) U P (fun j ↦ X (m (v j))) (fun j ↦ W (v j)) (fun j ↦ q (m (v j)) n (hd j)) (fun j ↦ Y (v j)) (fun j ↦ θlocal (v j)))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c29343d2f",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_dep records, the module and the report. Hypotheses match the node: p.Prime; CompactSpace V; P in (IsFinite⊓Etale).Over ⊤ U as recorded in the finite-etale mathlib_match; levels positive and coprime to p; X : _ → Over V with IsLocallyNoetherian, CompactSpace and stalks IsDomain ∧ IsIntegrallyClosed (inline, correctly not IsNormalScheme, which adds IsIntegral); q_id and q_comp with directions checked; generic points of all components map into U; W/m/Y/θ as specified data over the canonical charts. Conclusion: s points covering V, n = product (s=0 gives 1), Gluing with Z, θ, e, identification, α, overlap_identification and overlap_unique (∃!), identity, cocycle on triple overlaps, induces; transports are canonical pullbackComp/pullbackCongr maps. Edge cases: empty V, empty levels/charts/overlaps, any p, one universe u, no extra assumptions. Statement verbatim; 12 declarations listed; sorry only; source and blueprint docstrings present (proof in 6 steps, node steps 5-6 combined); no name collision; only citer uses it as a proof dep. No compile run (no file changed). Minor: the Second reading section was written by the author."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-59159",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T082939-L-2243016",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 split sorried statements (overlap_system, overlap_descent) against node lem-sfb-normal-tower-common-level-cover-gluing and the new nodes; moved defs/Gluing compared word for word with the removed item text; importers searched in the clone (none)"
+ }
+}

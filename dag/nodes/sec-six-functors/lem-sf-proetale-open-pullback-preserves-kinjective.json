@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-proetale-open-pullback-preserves-kinjective",
+ "kind": "lemma",
+ "title": "Open pro-etale module pullback preserves K-injective complexes",
+ "statement": "Let $j:S\\to Z$ be an open immersion of schemes [def-pc-scheme; def-weil-open-immersion]. On their pro-etale sites [def-weil-pbc-proetale-site], let $R$ and $R'$ be sheaves of commutative rings, with a specified isomorphism $c:j^{-1}R\\simeq R'$. Use module sheaves [def-weil-sheaf-of-modules-category] and the native pullback $j_c^*$, namely inverse image followed by change of rings along $c$ [def-weil-proetale-inverse-image; def-weil-pbc-proetale-operations]. Then $j_c^*$ preserves K-injective complexes [def-pur-kinjective-complex]: for every unbounded K-injective complex $I$ of $R$-module sheaves on $Z$, the termwise image $j_c^* I$ is K-injective on $S$. This includes empty opens and arbitrary coefficient rings.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FI, lemma-restrict-K-injective-to-open; proetale.tex Tag 09A5, section-morphism; sites.tex Tag 00XZ, section-localize."
+ },
+ "proof": [
+  {
+   "text": "Identify the open inverse-image module functor with overFunctor followed by the inverse open-site equivalence. The ringed open comparison supplies this natural isomorphism. The exactness of overFunctor supplies its additive structure.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to the localized site preserves K-injectives: extension by zero is an exact left adjoint. The inverse site equivalence is additive and preserves K-injectives. Composition and transport along the comparison therefore give preservation for native module inverse image.",
+   "uses": [
+    "lem-pur-kinjective-restrict-localized-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Along the isomorphism c, scalar extension is naturally isomorphic to restriction along c inverse. The latter is the inverse scalar equivalence. Its additive inverse functor preserves K-injectives. Compose with native inverse image and transport preservation along this scalar-extension comparison. No witness is chosen from an unproved mere-existence theorem: the equivalences are the established canonical constructions and the comparison theorem determines the required natural isomorphism.",
+   "uses": [
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-pur-kinjective-restrict-localized-universes",
+  "lem-weil-sheaf-scalar-extension-ring-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FI; factorization of the complete K-injective preservation proof from step 6 of lem-sf-ringed-restriction-exchange-open-descent"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open inverse image of module sheaves preserves K-injective complexes by exact extension by zero",
+   "results": "8 hits, including Scheme.Modules.restrictFunctor, CochainComplex.isKInjective_of_iso, SheafOfModules.fullyFaithfulForget_preimage_val, and open-immersion section formulas.",
+   "date": "2026-10-27",
+   "verdict": "No native pro-etale functor-level preservation theorem; use the existing slice restriction and equivalence APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive open restriction functor of sheaves of modules preserves K-injective complexes",
+   "results": "8 hits, including InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.isKInjective_of_injective, SheafOfModules.instAbelian, and Sheaf.instIsGrothendieckAbelian.",
+   "date": "2026-10-27",
+   "verdict": "No native pro-etale preservation instance. The upper-square case follows from the same preservation theorem by open base change."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKInjectiveComplexes|isKInjective_restrict|open_inverseImage_isKInjective in Mathlib, lean/WeilConjectures and lean/Sheaf",
+   "results": "Mathlib has generic K-injective APIs; WeilConjectures RightDerivedFunctor.Comp has the preservation class, composition and complex-map instances; Sheaf has localized restriction preservation and the item has a complex-level open theorem. No native open or upper-square functor-level preservation instance.",
+   "date": "2026-10-27",
+   "verdict": "Factor the existing complete proof through functor-level instances, retaining the existing complex-level theorem signatures."
+  }
+ ],
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedRestrictionExchangeOpenDescent",
+  "date": "2026-10-27",
+  "group": "C5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Continuous-module proper exchange realization for prop-functor-package clause 2: returned proof steps 4, 5, 9 and 10 of lem-sf-continuous-adic-proper-base-change-restriction; independent normalized ringed restriction exchange and open descent argument. Functor-level formulation of the K-injective preservation part of step 6.",
+   "via": [
+    "lem-sf-ringed-restriction-exchange-open-descent",
+    "lem-sf-continuous-adic-proper-base-change-restriction",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenPullbackKInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenPullbackKInjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.RingedRestrictionExchange.open_pullback_preservesKInjectiveComplexes",
+  "statement": "theorem open_pullback_preservesKInjectiveComplexes {S Z : Scheme.{u}}\n    (j : S ⟶ Z) [IsOpenImmersion j]\n    (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})\n    (R' : Sheaf (ProEt.topology S) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj R ≅ R') :\n    (proEtaleRingModulePullback j R R' c).PreservesKInjectiveComplexes",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-285a2",
+  "group": "C5",
+  "result": "fix",
+  "landing": "20261026T222602-L-670542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-285a2",
+  "group": "C5",
+  "result": "fix",
+  "landing": "20261026T222602-L-670542",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules + 5 node files + 2 change records against clone master 20c80eb and the item node plan; set-compiled with the one direct importer NativeProperNaturalBaseChange (OK, sorry stub)"
+ }
+}

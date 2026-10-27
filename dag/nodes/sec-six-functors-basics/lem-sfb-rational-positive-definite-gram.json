@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-rational-positive-definite-gram",
+ "kind": "statement",
+ "title": "Rational positive definite matrices are sums of rational outer squares",
+ "statement": "Use the rational and real fields $\\mathbf Q,\\mathbf R$ [def-weil-field]. Let $n\\geq0$ be an integer and $H=(H_{ij})_{1\\leq i,j\\leq n}$ a symmetric matrix with entries in $\\mathbf Q$, meaning $H_{ij}=H_{ji}$. Suppose its entrywise image in the real matrices is positive definite, meaning $\\sum_{i,j}z_iH_{ij}z_j>0$ for every nonzero $z\\in\\mathbf R^n$. There are an integer $r\\geq0$ and vectors $v_1,\\ldots,v_r\\in\\mathbf Q^n$ such that\n$$H_{ij}=\\sum_{k=1}^r (v_k)_i(v_k)_j\\qquad(1\\leq i,j\\leq n).$$\nThe equality is an equality of rational entries. The empty matrix $n=0$ is allowed, and $r=0$ denotes an empty sum.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent auxiliary for the split-real sum-of-squares argument: replacing a rational positive definite Gram matrix by rational rank-one squares. Milne II §1, proof of Lemma 1.3, printed pp.77–78 motivates the ambient algebra only; this matrix lemma is not asserted there. Agent proof recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If $n=0$, take $r=0$; there are no entry equalities to check. Otherwise put $V=\\mathbf Q^n$ and $B(x,y)=\\sum_{i,j}x_iH_{ij}y_j$. Finite distributivity makes $B$ rational bilinear, and the assumed symmetry of $H$ makes $B$ symmetric. The coordinate vectors give a finite basis of $V$. Apply [lem-sfb-rational-symmetric-form-orthogonal-basis] to obtain a finite basis $u_1,\\ldots,u_s$ with $B(u_k,u_l)=0$ for $k\\ne l$.",
+   "uses": [
+    "lem-sfb-rational-symmetric-form-orthogonal-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent proof of the rational Gram auxiliary, using the existing orthogonal-basis Mathlib leaf. Milne II §1, proof of Lemma 1.3, printed pp.77–78 motivates the parent algebra argument only and does not assert this matrix theorem."
+   }
+  },
+  {
+   "text": "Put $d_k=B(u_k,u_k)\\in\\mathbf Q$. Each basis vector $u_k$ is nonzero, so at least one rational coordinate is nonzero and remains nonzero in $\\mathbf R$. Applying the given real positive-definiteness inequality to that vector gives $d_k>0$. For each standard coordinate vector $e_i$ write its rational basis expansion $e_i=\\sum_k c_{ki}u_k$, where $c_{ki}\\in\\mathbf Q$. Bilinearity and orthogonality give the rational identity $H_{ij}=B(e_i,e_j)=\\sum_{k,l}c_{ki}c_{lj}B(u_k,u_l)=\\sum_k d_k c_{ki}c_{kj}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent proof of the rational Gram auxiliary, using the existing orthogonal-basis Mathlib leaf. Milne II §1, proof of Lemma 1.3, printed pp.77–78 motivates the parent algebra argument only and does not assert this matrix theorem."
+   }
+  },
+  {
+   "text": "For each $k$ write the positive rational $d_k=a_k/b_k$ with positive integers $a_k,b_k$ (its positive numerator and denominator suffice). Set $m_k=a_kb_k$. In $\\mathbf Q$ the sum of $m_k$ copies of $1/b_k^2$ is $m_k/b_k^2=a_k/b_k=d_k$; the denominator is nonzero since $b_k>0$. Thus no rational square root of $d_k$ is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent proof of the rational Gram auxiliary, using the existing orthogonal-basis Mathlib leaf. Milne II §1, proof of Lemma 1.3, printed pp.77–78 motivates the parent algebra argument only and does not assert this matrix theorem."
+   }
+  },
+  {
+   "text": "Index a finite family by the pairs $(k,t)$ with $1\\le k\\le s$ and $1\\le t\\le m_k$, and define its vectors by $(v_{k,t})_i=c_{ki}/b_k\\in\\mathbf Q$. Its size is $r=\\sum_k m_k\\ge0$; list these pairs in increasing $k$, then increasing $t$, to label the vectors $v_1,\\ldots,v_r$. For every $i,j$, finite distributivity gives $\\sum_{k,t}(v_{k,t})_i(v_{k,t})_j=\\sum_k(m_k/b_k^2)c_{ki}c_{kj}=\\sum_k d_kc_{ki}c_{kj}=H_{ij}$. These are rational entry equalities, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent proof of the rational Gram auxiliary, using the existing orthogonal-basis Mathlib leaf. Milne II §1, proof of Lemma 1.3, printed pp.77–78 motivates the parent algebra argument only and does not assert this matrix theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-symmetric-form-orthogonal-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent proof of the rational Gram auxiliary, using the existing orthogonal-basis Mathlib leaf. Milne II §1, proof of Lemma 1.3, printed pp.77–78 motivates the parent algebra argument only and does not assert this matrix theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every positive definite symmetric matrix over the rational numbers is a finite sum of outer products of rational vectors",
+   "results": "8 hits: Matrix.PosDef.intCast, Matrix.PosDef.one, Matrix.PosDef.natCast, Matrix.posDef_intCast_iff, Matrix.PosDef.ofNat, Matrix.PosSemidef.intCast, Matrix.posDef_natCast_iff, Matrix.isPositive_toEuclideanLin_iff. Weighted quadratic-form diagonalization needs further positivity and rational-square arguments; the LDL and square Gram theorems require RCLike scalars, excluding Q. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive definite rational symmetric matrix has a rational rectangular Gram factorization A equals B transpose times B",
+   "results": "8 hits: LDL.lower, LDL.lowerInv, Matrix.posDef_iff_eq_conjTranspose_mul_self, LDL.diag, LDL.lowerInv_eq_gramSchmidtBasis, Matrix.posSemidef_iff_eq_conjTranspose_mul_self, LDL.lower_conj_diag, LDL.diagEntries. Weighted quadratic-form diagonalization needs further positivity and rational-square arguments; the LDL and square Gram theorems require RCLike scalars, excluding Q. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive definite quadratic form over the rationals is a sum of squares of rational linear forms",
+   "results": "8 hits: QuadraticMap.PosDef, QuadraticMap.posDef_iff_nonneg, Matrix.PosDef.of_toQuadraticForm', Matrix.PosDef.toQuadraticForm', RootPairing.posRootForm_rootFormIn_posDef, QuadraticMap.linMulLinSelfPosDef, Matrix.PosDef.dotProduct_mulVec_pos, QuadraticMap.basisRepr_eq_of_iIsOrtho. Weighted quadratic-form diagonalization needs further positivity and rational-square arguments; the LDL and square Gram theorems require RCLike scalars, excluding Q. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuadraticForm, IsSumSq",
+   "results": "0 hits: . Weighted quadratic-form diagonalization needs further positivity and rational-square arguments; the LDL and square Gram theorems require RCLike scalars, excluding Q. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sum.*[Ss]q|[Ss]um.*[Ss]quare|isSumSq|diagonal",
+   "results": "25 hits: Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean. Weighted quadratic-form diagonalization needs further positivity and rational-square arguments; the LDL and square Gram theorems require RCLike scalars, excluding Q. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cholesky|Cholesky|gram|Gram|sum.*vecMulVec|transpose.*mul_self",
+   "results": "22 hits: Mathlib/LinearAlgebra/Matrix/IsDiag.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/Matrix/Cartan.lean, Mathlib/LinearAlgebra/Matrix/Hermitian.lean, Mathlib/LinearAlgebra/Matrix/Symmetric.lean, Mathlib/LinearAlgebra/Matrix/DotProduct.lean, Mathlib/LinearAlgebra/Matrix/DotProduct.lean, Mathlib/LinearAlgebra/Matrix/DotProduct.lean. Weighted quadratic-form diagonalization needs further positivity and rational-square arguments; the LDL and square Gram theorems require RCLike scalars, excluding Q. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "posDef_iff_eq_conjTranspose_mul_self|exists_orthogonal_basis|sum.*vecMulVec",
+   "results": "Q44 actual search: 5 hits; Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/Basic.lean, Mathlib/LinearAlgebra/QuadraticForm/Basic.lean, Mathlib/LinearAlgebra/BilinearForm/Basic.lean. Read LinearMap.BilinForm.exists_orthogonal_basis at QuadraticForm/Basic.lean:1342–1343; it matches an existing DAG node, not the whole item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every positive definite quadratic form over the rationals is a sum of squares of rational linear forms",
+   "results": "Q44 actual search: 8 hits; QuadraticMap.basisRepr_eq_of_iIsOrtho, QuadraticMap.PosDef, Matrix.PosDef.of_toQuadraticForm', IsSquare.isSumSq, Nat.sum_four_squares, RootPairing.posRootForm_rootFormIn_posDef, Matrix.PosDef.dotProduct_mulVec_pos, QuadraticMap.linMulLinSelfPosDef. Weighted diagonalization is useful but does not itself give unweighted rational outer squares; four squares of naturals is only a scalar result. Existing orthogonal-basis leaf reused instead.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.PosDef, IsSumSq",
+   "results": "Q44 actual search: 0 hits; . No hit for the combined matrix positivity and sum-of-squares notions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every positive definite rational symmetric matrix is a finite sum of outer products of rational vectors",
+   "results": "Q44 actual search: 8 hits; Matrix.PosDef.intCast, Matrix.PosDef.one, Matrix.PosDef.natCast, Matrix.PosSemidef.intCast, Matrix.PosDef.ofNat, Matrix.posDef_intCast_iff, Matrix.PosDef.of_toQuadraticForm', LDL.diag. Positive scalar matrices and real/complex LDL or Gram factorizations do not assert the requested rational rectangular factorization; RCLike excludes Q.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive definite matrix over the rational numbers admits a rectangular rational Gram factorization",
+   "results": "Q44 actual search: 8 hits; LDL.lowerInv, LDL.lower, LDL.diag, LDL.lowerInv_eq_gramSchmidtBasis, Matrix.posSemidef_gram, LDL.diagEntries, Matrix.posDef_iff_eq_conjTranspose_mul_self, LDL.lower_conj_diag. Positive scalar matrices and real/complex LDL or Gram factorizations do not assert the requested rational rectangular factorization; RCLike excludes Q.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "posDef_iff_eq_conjTranspose_mul_self|variable.*RCLike|RCLike 𝕜",
+   "results": "Q44 actual search: 2 hits; 39, 277. The single-file rg output was parsed by the wrapper as file names 39 and 277; reading Order.lean:39 verifies its RCLike hypothesis. No rational theorem found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem posDef_iff_eq_conjTranspose_mul_self",
+   "results": "Q44 actual search: 0 hits; . The semantic-service square Gram factorization name is not present in this pinned local Analysis/Matrix directory.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "posDef_iff_eq_conjTranspose_mul_self",
+   "results": "Q44 actual search: 0 hits; . The semantic-service square Gram factorization name is not present in this pinned local Analysis/Matrix directory.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-real-algebra-positive-squares",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Step 4 of lem-sfb-split-real-algebra-positive-squares: factor the rational positive definite multiplication Gram matrix into rational outer squares before contracting with the algebra basis. Agent auxiliary; Milne II §1, Lemma 1.3, printed pp.77–78 is motivation only.",
+   "via": [
+    "lem-sfb-split-real-algebra-positive-squares",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-positive-definite-gram",
+  "worker": "stage1",
+  "summary": "Kept the full statement and its statement dependencies unchanged, including n=0. Reused the existing Mathlib leaf for symmetric rational orthogonal bases. Expanded standard coordinate vectors in that basis, proved every diagonal coefficient positive, and replaced a positive rational a/b by ab identical rational squares. The final double-indexed family proves every entry equality over Q. No new nodes or attachments.",
+  "blueprint": "The ancestor command returns None, as in the inherited blueprint.from.node; retained null ancestry and the full via chain. This auxiliary realizes the rational Gram factorization invoked in step 4 of lem-sfb-split-real-algebra-positive-squares. Searches over the whole imported blueprint for positive definite, positive-definite, orthogonal basis, and sum of squares, plus the current latest blueprint text search, found no equivalent imported statement. No chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-2729dc641",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-2729dc641 (reviewer sub-agent of L); spot-checked: Read the item in full, its parent step 4, the cited leaf lem-sfb-rational-symmetric-form-orthogonal-basis and Mathlib QuadraticForm/Basic.lean:1336-1343 (exists_orthogonal_basis: Field, Invertible 2, FiniteDimensional, IsSymm; no positivity needed). There are no new nodes, and the statement and stmt_deps are unchanged. The statement is true: it asks for a rectangular rational factor, and a square one would fail for [2]. Step 1 applies the cited leaf with all hypotheses met (Q^n with its coordinate basis, B(x,y)=x^T H y symmetric) and handles n=0 with r=0. Step 2 is elementary: the real positive-definiteness at the image of u_k gives d_k>0, and expanding in the basis gives H_ij=sum d_k c_ki c_kj. Step 3 writes d_k=a/b as ab copies of 1/b^2, with no square roots. Step 4 is the explicit finite family. proof_deps equals the union of uses, there is no cycle, and no SGA source is used. Milne II §1 L1.3 pp.77-78 is honestly recorded as motivation only. Small cases checked by hand: n=0, [2], [1/2], and [[2,1],[1,2]] (2x(1,1/2) + 6x(0,1/2) gives back the matrix). The duplicate search with rg -L over the DAG found only distinct nodes (the feasibility node, lattice-sublevels, the complex orthonormal basis). blueprint.from.place is filled with the parent step 4, the via chain is intact and same_as is []. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.RationalPositiveDefiniteGram",
+  "declaration": "Matrix.exists_sum_mul_self_of_rat_posDef",
+  "file": "lean/Sheaf/LinearAlgebra/RationalPositiveDefiniteGram.lean",
+  "statement": "theorem exists_sum_mul_self_of_rat_posDef {n : ℕ} (H : Matrix (Fin n) (Fin n) ℚ) (hH : H.IsSymm) (hpos : (H.map (fun x : ℚ ↦ (x : ℝ))).PosDef) : ∃ (r : ℕ) (v : Fin r → Fin n → ℚ), ∀ i j : Fin n, H i j = ∑ k : Fin r, v k i * v k j",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a77940f9f",
+  "group": "NP",
+  "result": "pass",
+  "note": "Only change vs live: item lean record + new module RationalPositiveDefiniteGram.lean (Matrix.exists_sum_mul_self_of_rat_posDef, sorry). Live item split with lean null, no parallel statement or name clash. Clauses checked: n:ℕ/Fin n incl. n=0; H rational, IsSymm = H_ij=H_ji; Mathlib PosDef (PosDef.lean:161, finsupp form = all vectors on Fin n, star=id on ℝ, Hermitian part follows from hH) of the real map = node positivity; ∃ r:ℕ, v:Fin r→Fin n→ℚ, ∀ i j rational equality, r unbounded, empty sum for r=0. Statement verbatim in file; no universes; docstrings carry source place (Milne as motivation, agent auxiliary) + blueprint tag + 4 proof steps; imports needed; stmt_deps def-weil-field unchanged; report has Worker report and Second reading by NP. No findings; no recompile (no file changed)."
+ }
+}

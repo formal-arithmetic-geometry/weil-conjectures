@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-quasiaffine-invertible-finite-set-section",
+ "kind": "statement",
+ "title": "A line-bundle section nonvanishing on a finite set of a quasi-affine scheme",
+ "statement": "Let $X$ be a quasi-compact scheme [def-pc-scheme], meaning that every open covering has a finite subcover, admitting an open immersion into an affine scheme [def-weil-open-immersion]. Let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module], and let $E\\subseteq |X|$ be a finite set of points, not necessarily closed. Then there exists $s\\in\\Gamma(X,L)$ whose germ has nonzero image in $L_x/\\mathfrak m_x L_x$ for every $x\\in E$, where $\\mathfrak m_x$ is the maximal ideal of the local ring $\\mathcal O_{X,x}$ and $\\kappa(x)=\\mathcal O_{X,x}/\\mathfrak m_x$ is the residue field [def-weil-residue-field]. Empty $X$ and empty $E$ are allowed; no Noetherianity, reducedness or irreducibility is assumed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0F20, lemma-quasi-affine-invertible-nonvanishing-section, with W=X and retaining the nonvanishing conclusion. Quasi-affine means quasi-compact and isomorphic to an open of an affine scheme, as in definition-quasi-affine."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix an open immersion $j:X\\hookrightarrow Y$ with $Y$ affine, as in the hypotheses. Apply [lem-a1-quasi-affine-open-principal-comparison-cover] with $U=V=X$ and the identity open immersion. Its last sentence gives a cover of $X$ by affine opens $X_g=\\{x:g_x\\in\\mathcal O_{X,x}^{\\times}\\}$ for global functions $g$. By [lem-weil-pbc-basic-open-function] these are exactly the nonvanishing loci of the sections $g$ of $\\mathcal O_X$. The module $\\mathcal O_X$ is invertible by the identity rank-one trivialization [def-sc-invertible-module]. Hence, taking tensor exponent $1$ at every point and using the assumed quasi-compactness, [def-weil-pbc-ample-invertible-module] says that $\\mathcal O_X$ is ample.",
+   "uses": [
+    "lem-a1-quasi-affine-open-principal-comparison-cover",
+    "lem-weil-pbc-basic-open-function",
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, base case: use of Tag 01QE (properties-lemma-quasi-affine-O-ample); its forward implication here follows directly from the basic-open cover supplied by Tag 0ARY (properties-lemma-cartesian-diagram-quasi-affine), proof"
+   }
+  },
+  {
+   "text": "By [def-sc-invertible-module], $L$ is quasi-coherent and isomorphic to $\\mathcal O$ on each trivializing open. Each such isomorphism is a surjection from one copy of $\\mathcal O$, so $L$ is of finite type by [pqf-def-coherent]. Apply [lem-weil-pbc-coherent-twist-global-generation] with ample module $\\mathcal O_X$ and finite type quasi-coherent module $L$. Choose an integer $d\\geq\\max(1,d_0)$. The conclusion gives a finite global generating family for $L\\otimes\\mathcal O_X^{\\otimes d}$. This module is canonically $L$: multiplication of the scalar factors sends $m\\otimes a_1\\otimes\\cdots\\otimes a_d$ to $(a_1\\cdots a_d)m$, with inverse $m\\mapsto m\\otimes1\\otimes\\cdots\\otimes1$. These balanced maps commute with restrictions, hence induce inverse maps of the sheaf tensor products [def-pur-sheaf-tensor-product]. Transporting the generating family through this isomorphism proves that $L$ is globally generated.",
+   "uses": [
+    "def-sc-invertible-module",
+    "pqf-def-coherent",
+    "lem-weil-pbc-coherent-twist-global-generation",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, base case: global generation from Tag 01Q3 (properties-proposition-characterize-ample), implication (1) to (7), with ample module O_X"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-global-generation-nonvanishing-cover] to $L$ and the global generation just obtained. Its asserted cover means that for every $z\\in X$ there is $t\\in\\Gamma(X,L)$ with $t_z\\notin\\mathfrak m_zL_z$, equivalently $t(z)\\ne0$ in $L_z/\\mathfrak m_zL_z$. Here and below $u(y)$ denotes the residue value of a section $u$ at $y$.",
+   "uses": [
+    "lem-sc-global-generation-nonvanishing-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, base case: global generation gives a section nonvanishing at x_1; Modules Tags 01AM (definition-globally-generated) and 01CY (lemma-s-open)"
+   }
+  },
+  {
+   "text": "We prove the conclusion by strong induction on the cardinality of the finite set $E$, keeping $X$ and $L$ fixed. If $E=\\varnothing$, choose the zero global section. Its required nonvanishing condition is vacuous. This also settles empty $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, proof, empty case and induction on the number of points"
+   }
+  },
+  {
+   "text": "Assume $E$ is nonempty and the conclusion holds for smaller finite subsets of $X$. If distinct $x,y\\in E$ satisfy $y\\in\\overline{\\{x\\}}$, apply induction to $E\\setminus\\{x\\}$. Its section $s$ is nonzero at $y$. By [lem-weil-pbc-nonvanishing-section-trivializes], $X_s=\\{w:s(w)\\ne0\\}$ is open. Since $y\\in\\overline{\\{x\\}}$, every open containing $y$ contains $x$, so $s(x)\\ne0$ as well. This proves the conclusion in this case. It remains to treat $E$ with no specializations between distinct points.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, induction step: remove x_i if x_i specializes to another point x_j; openness is Modules Tag 01CY (lemma-s-open)"
+   }
+  },
+  {
+   "text": "Choose $z\\in E$ and put $F=E\\setminus\\{z\\}$. By induction choose $s\\in\\Gamma(X,L)$ nonzero on $F$. If $s(z)\\ne0$ we are done, so assume $s(z)=0$. For every $x\\in F$ we have $z\\notin\\overline{\\{x\\}}$. The open immersion $j$ is a homeomorphism onto an open subset [def-weil-open-immersion]. An open neighborhood of $z$ missing $x$ therefore maps to an open neighborhood of $j(z)$ in $Y$ missing $j(x)$. Thus $j(z)\\notin\\overline{\\{j(x)\\}}$ in $Y$. Apply [lem-sfb-affine-finite-point-scalar-separation] on the affine scheme $Y$ to $j(F)$ and $j(z)$. It gives $a\\in\\Gamma(Y,\\mathcal O_Y)$ with $a(j(x))=0$ for $x\\in F$ and $a(j(z))\\ne0$. Set $f=j^\\#(a)\\in\\Gamma(X,\\mathcal O_X)$. By the open-subscheme identification in [def-weil-open-immersion], its germs are those of $a$ under the local-ring isomorphisms $\\mathcal O_{Y,j(w)}\\simeq\\mathcal O_{X,w}$. The induced residue-field isomorphisms [def-weil-residue-field] give $f(x)=0$ on $F$ and $f(z)\\ne0$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-sfb-affine-finite-point-scalar-separation",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, induction step: choose a section vanishing at the earlier points and nonvanishing at the new point; the scalar separator is obtained on the ambient affine scheme and restricted to X"
+   }
+  },
+  {
+   "text": "Choose $t\\in\\Gamma(X,L)$ with $t(z)\\ne0$ by step 3 and put $v=s+ft$. Germ maps and quotient maps respect addition and scalar multiplication, so $v(w)=s(w)+f(w)t(w)$ for every $w\\in X$. For $x\\in F$, this is $s(x)\\ne0$. At $z$ it is $f(z)t(z)$, since $s(z)=0$. The nonzero element $f(z)$ of the field $\\kappa(z)$ [def-weil-residue-field] is invertible; if $f(z)t(z)=0$, multiplying by its inverse would give $t(z)=0$, a contradiction. Thus $v(z)\\ne0$, and $v$ works on all of $E$. This completes the induction, including $F=\\varnothing$.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, induction step, final addition of sections, with the base-case section multiplied by the separating scalar"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-quasi-affine-open-principal-comparison-cover",
+  "lem-weil-pbc-basic-open-function",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "pqf-def-coherent",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "def-pur-sheaf-tensor-product",
+  "lem-sc-global-generation-nonvanishing-cover",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "def-weil-open-immersion",
+  "lem-sfb-affine-finite-point-scalar-separation",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0F20, properties-lemma-quasi-affine-invertible-nonvanishing-section, proof with W=X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a quasi-affine scheme and a line bundle there is a global section nonzero at each point in any finite subset",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: structure-sheaf basic-open and local-fraction results do not provide simultaneous nonvanishing of a section of an arbitrary line bundle on a quasi-affine scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an invertible sheaf on an open subscheme of an affine scheme find a section whose values in finitely many residue fields are nonzero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.exists_const\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U) (s : (structureSheaf R).1.obj (op U)) (x : PrimeSpectrum.Top R) (hx : x ∈ U) :\\n  ∃ (V : Opens (PrimeSpectrum.Top R)) (_ : x ∈ V) (i : V ⟶ U) (f g : R) (hg : _),\\n    const R f g V hg = (structureSheaf R).1.map i.op s\", \"doc\": \"For any open set $U$ in the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, any section $s$ of the structure sheaf $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}$ over $U$, and any point $x \"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U) (s : (tildeInModuleCat M).obj (op U)) (x : PrimeSpectrum.Top R) (hx : x ∈ U) :\\n  ∃ (V : Opens (PrimeSpectrum.Top R)) (_ : x ∈ V) (i : V ⟶ U) (f : M) (g : R) (hg : _),\\n    const M f g V hg = (tildeInModuleCat M).map i.op s\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) (hx : x ∈ U) (f : Γ(X, U)) : X.evaluation U x hx f ≠ 0 ↔ x ∈ X.basicOpen f\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, a point $x \\\\in U$, and a section $f$ of the structure sheaf over $U$, the evaluation of $f$ at $x$ is non-zero in the residue field $\\\\kappa(x)$ if and\"}\n  {\"name\": \"ModuleCat.Tilde.const\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(m : M) (r : R) (U : Opens (PrimeSpectrum.Top R)) (hu : ∀ x ∈ U, r ∈ (x : PrimeSpectrum.Top R).asIdeal.primeCompl) :\\n  (tildeInModuleCat M).obj (op U)\", \"doc\": \"Given an $R$-module $M$, an element $m \\\\in M$, an element $r \\\\in R$, and an open subset $U \\\\subseteq \\\\operatorname{Spec}(R)$ such that $r$ lies in the complement of every prime ideal corresponding to \"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (f : X.presheaf.obj (op U)) : IsUnit (X.presheaf.map (@homOfLE (Opens X) _ _ _ (X.basicOpen_le f)).op f)\", \"doc\": \"Let $ X $ be a ringed space, $ U $ an open subset of $ X $, and $ f $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. The basic open set $ V = \\\\{x \\\\in U \\\\mid f_x \\\\in \\\\mathcal{O}_{X,x}^\\\\\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsAffineOpen U) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": IsLocalization.Away f Γ(X, X.basicOpen f)\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a section $ f $ of the structure sheaf over $ U $, the ring of sections over the basic open set $ D(f) $ (where the germ of $ f $ is a unit) is ca\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(f : R) : IsIso (CommRingCat.ofHom (toBasicOpen R f))\", \"doc\": \"The canonical ring homomorphism from the localization $R_f$ of a commutative ring $R$ at an element $f$ to the ring of sections $\\\\mathcal{O}(D(f))$ in the structure sheaf over the basic open set $D(f)\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: structure-sheaf basic-open and local-fraction results do not provide simultaneous nonvanishing of a section of an arbitrary line bundle on a quasi-affine scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"section\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: structure-sheaf basic-open and local-fraction results do not provide simultaneous nonvanishing of a section of an arbitrary line bundle on a quasi-affine scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiAffine.*(section|generat|invertible)|nonvanishing.*section|exists.*[Ss]ection.*[Ff]inite",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: structure-sheaf basic-open and local-fraction results do not provide simultaneous nonvanishing of a section of an arbitrary line bundle on a quasi-affine scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf of a quasi-compact open subscheme of an affine scheme is an ample invertible sheaf",
+   "results": "Read actual hits: AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, AlgebraicGeometry.isLocalization_basicOpen_of_qcqs, AlgebraicGeometry.IsAffineOpen.basicOpen, AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: these basic-open, structure-sheaf and local-fraction results do not assert simultaneous nonvanishing of a section of an arbitrary invertible sheaf on a finite set."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"IsQuasiAffine\"",
+   "results": "Search completed successfully with no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: these basic-open, structure-sheaf and local-fraction results do not assert simultaneous nonvanishing of a section of an arbitrary invertible sheaf on a finite set."
+  },
+  {
+   "tool": "grep",
+   "query": "([Aa]mple.*[Qq]uasi[Aa]ffine|[Qq]uasi[Aa]ffine.*[Aa]mple|IsAmple.*(unit|structureSheaf))",
+   "results": "Search completed successfully with no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: these basic-open, structure-sheaf and local-fraction results do not assert simultaneous nonvanishing of a section of an arbitrary invertible sheaf on a finite set."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Bb]asicOpen|forall_exists_mem_basicOpen|isAffineOpen_basicOpen",
+   "results": "Read actual hits: 75, 95 Search subdirectory: Mathlib/AlgebraicGeometry/QuasiAffine.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: these basic-open, structure-sheaf and local-fraction results do not assert simultaneous nonvanishing of a section of an arbitrary invertible sheaf on a finite set."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi-affine scheme each point has an affine principal open neighborhood defined by a global function",
+   "results": "Read actual hits: AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.exists_isAffineOpen_mem_and_subset, AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.IsAffineOpen.basicOpen",
+   "date": "2026-10-24",
+   "verdict": "partial match: isBasis_basicOpen gives the affine basic-open preparation only; it does not state the finite-set line-bundle section conclusion. The needed preparation already has the DAG node lem-a1-quasi-affine-open-principal-comparison-cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-affine scheme has an ample structure sheaf or a covering by affine basic opens of global regular functions",
+   "results": "Read actual hits: AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.Scheme.openCoverBasicOpenTop, AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f",
+   "date": "2026-10-24",
+   "verdict": "no match: these basic-open, structure-sheaf and local-fraction results do not assert simultaneous nonvanishing of a section of an arbitrary invertible sheaf on a finite set."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible module sheaf on a quasi-affine scheme admits one global section generating its stalk at every point of a prescribed finite subset",
+   "results": "Read actual hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, ModuleCat.Tilde.isLocallyFraction_pred, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.exists_const, ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Γ_restrict_isLocalization, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+   "date": "2026-10-24",
+   "verdict": "no match: these basic-open, structure-sheaf and local-fraction results do not assert simultaneous nonvanishing of a section of an arbitrary invertible sheaf on a finite set."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"Invertible\"",
+   "results": "Search completed successfully with no hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: these basic-open, structure-sheaf and local-fraction results do not assert simultaneous nonvanishing of a section of an arbitrary invertible sheaf on a finite set."
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanish.*[Ff]inite|[Ff]inite.*nonvanish|exists.*section.*([Ii]nvertible|[Ll]ineBundle)",
+   "results": "Search completed successfully with no hits. Search subdirectory: Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: these basic-open, structure-sheaf and local-fraction results do not assert simultaneous nonvanishing of a section of an arbitrary invertible sheaf on a finite set."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle generated by global sections over a quasi-affine scheme has a section nonzero at finitely many points",
+   "results": "Read actual hits: AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion, AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.IsAffine.casesOn, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen",
+   "date": "2026-10-24",
+   "verdict": "no match: these basic-open, structure-sheaf and local-fraction results do not assert simultaneous nonvanishing of a section of an arbitrary invertible sheaf on a finite set."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasiaffine-line-effective-divisor",
+  "date": "2026-10-23",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: Extension of a generic-fibre line bundle over a smooth DVR scheme. Supporting divisor-construction input: Effective Cartier presentation of a line bundle on a Noetherian quasi-affine scheme. Choice of the nonvanishing section in the quasi-affine paragraph of Stacks 0AYM.",
+   "via": [
+    "lem-sfb-quasiaffine-line-effective-divisor",
+    "lem-sfb-smooth-dvr-generic-line-extension",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-quasiaffine-invertible-finite-set-section",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0F20 with W=X. Kept the statement unchanged and supplied the global-generation preparation, strong induction with comparable points removed, ambient affine scalar separation, and explicit residue-fibre addition. Reused existing DAG results throughout; no new nodes. Read the whole current blueprint route and all cited node statements. The auxiliary basic-open, twist-generation and fibre-openness facts are generic scheme tools, not changes to the unit route.",
+  "blueprint": "The inherited blueprint.from.place locates this auxiliary in the line-bundle/divisor prerequisite below det-thm-sf-ctf-stability-direct-images, proof (3). The current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), is the direct-image stability paragraph. This split only supplies the existing auxiliary finite-set section input: Stacks 0F20 base-case global generation is steps 1–3, its empty case is step 4, and its specialization reduction and induction are steps 5–7. Whole-blueprint searches for nonvanishing, finite set nonvanishing, quasi-affine and globally generated gave no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-quasi-affine-open-principal-comparison-cover",
+    "why": "Its affine global-function opens cover a quasi-affine scheme, applied to the identity open immersion. This is the generic basic-open input of Stacks 01QE; no node of the item unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-twist-global-generation",
+    "why": "Global generation of a finite type quasi-coherent module after twisting by an ample module, specialized to O_X. This is precisely the 01Q3 input of Stacks 0F20, not a proper-base-change argument."
+   },
+   {
+    "node": "lem-sc-global-generation-nonvanishing-cover",
+    "why": "Global generation of an invertible module supplies a section nonzero in each residue fibre. This is a generic module-sheaf fact used in the 0F20 base case, with no corresponding item-unit lemma."
+   },
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "Only the openness of the nonvanishing locus is used to remove a generalization from the finite set. This generic Modules 01CY fact is the specialization-reduction input of 0F20."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-quasi-affine-open-principal-comparison-cover",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "lem-sc-global-generation-nonvanishing-cover",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-20f336ff9",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-20f336ff9 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged from live, where the item is still unsplit with no proof, and there is no repair note. It is a faithful W=X, nonvanishing-only case of Stacks 0F20 (properties.tex line 5327). I read 0F20's statement and full proof, and steps 1-7 follow that proof. Step 1: lem-a1-quasi-affine-open-principal-comparison-cover is applied with U=V=X and the identity map, and only its last sentence (the cover by affine opens X_g) is used; with lem-weil-pbc-basic-open-function and n=1 this shows O_X is ample. Step 2: the twist-global-generation theorem applied to the finite-type quasi-coherent L shows L is globally generated. Step 3: the global-generation cover gives, for each point z, a section t with t(z)≠0. Step 4: strong induction, with empty base case. Step 5: the generalizing point of a comparable pair is dropped, using openness of the nonvanishing locus; the direction is correct. Step 6: an open neighbourhood of z missing x maps under j to an open of Y missing j(x), so scalar separation on the affine Y gives a, and f=j^#a has matching residue values. Step 7: v=s+ft, nonzero at z because kappa(z) is a field. Small cases checked: X or E empty, a specialization pair, incomparable points of A^2 minus the origin over F_2. No cycle and no duplicate; the affine-only finite-set node does not cover this item. The four tool_uses are generic 01QE/01Q3/01CY inputs that 0F20 itself uses; I accept them. Batch-5: the only trace-formula node in the closure is lem-trf-quasi-affine-canonical-affine-embedding, a Mathlib leaf for Stacks 01P9 (Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine). It is a general scheme fact that neither assumed statement gives and that carries none of their proofs' content, so the citation is acceptable. FIX: in step 2, d>=max(0,d_0) together with 'the identity for d=0' is wrong for d=0, because L⊗O^{⊗0}=L⊗O_X is not literally L. Changed to d>=max(1,d_0) and dropped the parenthesis; the corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiAffineInvertibleFiniteSetSection",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_section_nonvanishing_on_finite_set_of_quasiAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiAffineInvertibleFiniteSetSection.lean",
+  "statement": "theorem exists_section_nonvanishing_on_finite_set_of_quasiAffine (X : Scheme.{u}) [CompactSpace X] (hX : ∃ (Y : Scheme.{u}) (j : X ⟶ Y), IsAffine Y ∧ IsOpenImmersion j) (L : X.Modules) [L.IsInvertible] (E : Set X) (hE : E.Finite) : ∃ s : Γ(L, ⊤), ∀ (x : X), x ∈ E → L.presheaf.germ ⊤ x trivial s ∉ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) • (⊤ : Submodule (X.presheaf.stalk x) (L.presheaf.stalk x))",
+  "branch": "sheaf-dag",
+  "by": "Q147",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-731161366",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: CompactSpace; existential affine Y with IsOpenImmersion j (same universe u is no restriction, via Spec Γ(X)); L with IsInvertible; E a finite Set of arbitrary points; one global section with germ outside m_x•⊤, i.e. nonzero in L_x/m_xL_x; the stalk Module instance is the canonical one from FlatPullbackStalk; predicate identical to upstream nonvanishingLocus and the landed affine sibling. Edge cases (E empty, X empty, comparable or non-closed points, finite residue fields, universe u) are covered. No duplicate in Mathlib or the project (only the IsAffine special case exists). Proof is sorry, no definitions, docstrings carry 0F20/01P6, the blueprint id and the 7 proof steps; lean.statement verbatim; node changes only lean; report has Worker report and Second reading by Q147. No compile run (no change)."
+ }
+}

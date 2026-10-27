@@ -1,0 +1,199 @@
+{
+ "id": "lem-trf-maximal-adic-graded-length-bridge",
+ "kind": "statement",
+ "title": "Maximal-adic graded algebra and cumulative length-polynomial bridge",
+ "statement": "Let $(R,\\mathfrak m)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], and let $k=R/\\mathfrak m$. Form $S=\\operatorname{gr}_{\\mathfrak m}(R)=\\bigoplus_{i\\ge0}\\mathfrak m^i/\\mathfrak m^{i+1}$ with its degree-zero $k$-algebra structure [def-weil-pbc-associated-graded-ring]. Then $S$ is a standard graded $k$-algebra [def-pc-standard-graded-algebra]; for any finite generating list $y_1,\\ldots,y_t$ of $\\mathfrak m$, its degree-one classes generate $S$, and their degree-$i$ monomials span $S_i$ over $k$. Every $S_i$ is finite-dimensional, its composition length over $R$ equals $\\dim_k S_i$, and, for every integer $n\\ge1$, $R/\\mathfrak m^n$ has finite composition length [def-weil-pbc-module-length], with\n$$H_R(n):=\\mathrm{length}_R(R/\\mathfrak m^n)=\\sum_{i=0}^{n-1}\\dim_k S_i\\ge1.$$\nMoreover, if $P\\in\\mathbf Q[X]$ satisfies $\\dim_k S_i=P(i)$ for all sufficiently large integers $i$, there exist $Q\\in\\mathbf Q[X]$, $Q\\ne0$, with strictly positive leading coefficient and $N\\ge1$ such that $H_R(n)=Q(n)$ for every integer $n\\ge N$. The polynomial $P$ is allowed to be zero.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00K8, proposition-hilbert-function-polynomial, associated graded construction and the preceding power-filtration identity; Tag 00JZ, lemma-numerical-polynomial, binomial-basis telescoping. Specialization I=m, M=R, and exponent n rather than n+1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-associated-graded-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-noetherian-ring], choose generators $y_1,\\ldots,y_t$ of $\\mathfrak m$, allowing $t=0$. The ring and scalar laws of [lem-weil-pbc-associated-graded-ring-structure] give $S_0=k$ and $S_aS_b\\subseteq S_{a+b}$. For any such list, induction on $i$ shows that $\\mathfrak m^i$ is generated as an $R$-ideal by the degree-$i$ monomials in the $y_j$: degree zero uses the empty monomial $1$; multiply the asserted generating expressions by $\\mathfrak m=(y_1,\\ldots,y_t)$ for the successor step. Reducing their coefficients modulo $\\mathfrak m$ shows that their classes span $S_i$ over $k$, since $\\mathfrak m\\mathfrak m^i\\subseteq\\mathfrak m^{i+1}$. There are finitely many such monomials. Consequently every $S_i$ is finite-dimensional, and every homogeneous element is a polynomial in the degree-one classes. A direct-sum element has finitely many homogeneous components, so those classes generate $S$. This verifies precisely [def-pc-standard-graded-algebra].",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-associated-graded-ring-structure",
+    "def-pc-standard-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K8, proposition-hilbert-function-polynomial, graded ring S; Tag 05GH, lemma-completion-Noetherian, polynomial cover in its proof"
+   }
+  },
+  {
+   "text": "Put $d_i=\\dim_kS_i$. An $R$-submodule of $S_i$ is exactly a $k$-subspace: for a scalar $\\bar a\\in k$ choose any lift $a\\in R$, and use that $\\mathfrak m S_i=0$. Thus a basis flag has $d_i$ strict inclusions, and every strict submodule chain has at most $d_i$ inclusions because dimension strictly increases at each inclusion. The chain definition [def-weil-pbc-module-length] therefore gives $\\mathrm{length}_R(S_i)=d_i<\\infty$. This includes $i=0$, where $S_0=k\\ne0$ and $d_0=1$.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IY, lemma-dimension-is-length; Tag 00IX, lemma-length-independent"
+   }
+  },
+  {
+   "text": "For every $i\\ge0$ the maps sending $x\\bmod\\mathfrak m^{i+1}$ to its class in $R/\\mathfrak m^{i+1}$ and reducing a class modulo $\\mathfrak m^i$ give an exact sequence $0\\to S_i\\to R/\\mathfrak m^{i+1}\\to R/\\mathfrak m^i\\to0$: the first map is injective, the second is surjective, and its kernel is exactly the image of $\\mathfrak m^i$. Apply [lem-weil-pbc-length-additive-short-exact]. Starting with $R/\\mathfrak m^0=0$, induction gives finite length and $H_R(n)=\\sum_{i=0}^{n-1}d_i$. Since $d_0=1$ and all $d_i\\ge0$, this sum is at least one for $n\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IV, lemma-length-additive; the power-filtration identity immediately before Tag 00K8"
+   }
+  },
+  {
+   "text": "Choose an integer $a\\ge1$ such that $d_i=P(i)$ for all $i\\ge a$. Write $P(X)=\\sum_{p=0}^{D}c_pX^p$, taking $D=0,c_0=0$ if $P=0$. For each $p$, let $F_p(X)=\\sum_{j=0}^{p}b_j\\binom{p+1}{j}X^{p+1-j}/(p+1)$, using the rational numbers of [lem-trf-rational-power-sum-formula]. Its formula says $F_p(n)=\\sum_{i=0}^{n-1}i^p$. Set $A(X)=\\sum_{p=0}^{D}c_pF_p(X)$ and $Q(X)=A(X)+H_R(a)-A(a)$. Interchanging these finite sums gives $A(n)-A(a)=\\sum_{i=a}^{n-1}P(i)$ for $n\\ge a$. The preceding length identity therefore gives $Q(n)=H_R(n)$. This is the discrete summation of Tag 00JZ written with explicit power-sum polynomials, including $P=0$.",
+   "uses": [
+    "lem-trf-rational-power-sum-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JZ, lemma-numerical-polynomial; explicit power-sum formula sum_range_pow, Mathlib/NumberTheory/Bernoulli.lean:295–298"
+   }
+  },
+  {
+   "text": "Because $Q(n)=H_R(n)\\ge1$ for $n\\ge a$, $Q$ is nonzero. Let $d=\\deg Q$ and $c$ its nonzero leading coefficient. If $d=0$, then $c=Q(a)\\ge1$. If $d\\ge1$ and $c<0$, write $Q(X)=cX^d+\\sum_{j<d}q_jX^j$ and put $C=\\sum_{j<d}|q_j|$. For any integer $n\\ge1$, the absolute value of the lower-degree sum is at most $Cn^{d-1}$. Choose an integer $n\\ge a$ with $n>C/(-c)$. Then $Q(n)\\le n^{d-1}(cn+C)<0$, a contradiction. Hence $c>0$, and $N=a$ has all the required properties.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K8, proposition-hilbert-function-polynomial, positivity refinement from the elementary leading-term bound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-trf-rational-power-sum-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00K8, 00IY, 00IV and 00JZ, expanded maximal-adic monomial and filtration arguments; the discrete-summation step uses the explicit Mathlib power-sum formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian local ring the associated graded algebra of its maximal ideal is standard graded over the residue field and length of R modulo m to n is the sum of dimensions of graded pieces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → ringKrullDim R ≤ ringKrullDim (R ⧸ x • ⊤) + 1\", \"doc\": \"If $ x $ is an element of the maximal ideal of a commutative semiring $ R $, then the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R/(x) $ plus one, i.e., $ \\\\dim(R) \\\\\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_card\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {S : Finset R},\\n  ↑S ⊆ ↑(IsLocalRing.maximalIdeal R) → ringKrullDim R ≤ ringKrullDim (R ⧸ Ideal.span ↑S) + ↑S.card\", \"doc\": \"For a commutative ring $ R $ and a finite set $ S $ of elements in the maximal ideal of $ R $, the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R / I $ (where $ I $ i\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] {I : Ideal R},\\n  I ≠ ⊤ → ringKrullDim R ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a commutative ring $ R $ and a proper ideal $ I $ of $ R $, the Krull dimension of $ R $ is less than or equal to the sum of the Krull dimension of the quotient ring $ R/I $ and the finite rank of\"}\n  {\"name\": \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  IsSMulRegular R x → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a regular element in the maximal ideal of a local ring $ R $, then the Krull dimension of $ R $ satisfies $ \\\\dim(R) = \\\\dim(R/(x)) + 1 $, where $ R/(x) $ denotes the quotient ring of $ R $ \"}\n  {\"name\": \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  IsSMulRegular R x → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R\", \"doc\": \"For a local ring $ R $, if $ x $ is a regular element in its maximal ideal, then the Krull dimension of the quotient ring $ R / (x) $ satisfies $ \\\\dim(R / (x)) + 1 = \\\\dim(R) $.\"}\n  {\"name\": \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] (rs : List R),\\n  RingTheory.Sequence.IsRegular R rs → ringKrullDim (R ⧸ Ideal.ofList rs) + ↑rs.length = ringKrullDim R\", \"doc\": \"For a commutative ring $ R $ and a regular sequence $ rs $ in $ R $, the Krull dimension of the quotient ring $ R $ modulo the ideal generated by $ rs $ plus the length of $ rs $ equals the Krull dime\"}\n  {\"name\": \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  x ∈ nonZeroDivisors R → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a non-zero divisor in the maximal ideal of a local ring $ R $, then the Krull dimension of the quotient ring $ R / (x) $ satisfies $ \\\\dim(R / (x)) + 1 = \\\\dim(R) $, where $ (x) $ denotes th\"}\n  {\"name\": \"isFiniteLength_quotient_span_singleton\", \"module\": \"Mathlib/RingTheory/OrderOfVanishing\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [Ring.KrullDimLE 1 R] {x : R},\\n  x ∈ nonZeroDivisors R → IsFiniteLength R (R ⧸ Ideal.span {x})\", \"doc\": \"Let $ R $ be a Noetherian ring with Krull dimension at most 1. If $ x $ is a non-zero divisor in $ R $, then the quotient ring $ R/(x) $ has finite length as an $ R $-module.\"}\nNo exact or one-line match: Module.length_eq_finrank (Length.lean:295-298) identifies vector-space length only. It neither constructs the standard maximal-adic graded algebra nor sums its pieces or integrates an eventual polynomial. KrullDimension/Regular.lean gives dimension inequalities, not these length identities. HilbertPoly.lean:18-42 treats a supplied rational series and leaves graded-module Hilbert polynomials as TODO.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AssociatedGraded\", \"length\"",
+   "results": "[loogle] OK 0 hit(s)\nNo exact or one-line match: Module.length_eq_finrank (Length.lean:295-298) identifies vector-space length only. It neither constructs the standard maximal-adic graded algebra nor sums its pieces or integrates an eventual polynomial. KrullDimension/Regular.lean gives dimension inequalities, not these length identities. HilbertPoly.lean:18-42 treats a supplied rational series and leaves graded-module Hilbert polynomials as TODO.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|associated_graded|length.*finrank|finrank.*length",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Length.lean\", \"line\": \"276\", \"text\": \"    Module.length R M = Module.finrank R M * Module.length R R := by\"}\n  {\"file\": \"Mathlib/RingTheory/Length.lean\", \"line\": \"277\", \"text\": \"  rw [length_of_free, Cardinal.toENat_eq_natCast.mpr (finrank_eq_rank _ _).symm]\"}\n  {\"file\": \"Mathlib/RingTheory/Length.lean\", \"line\": \"295\", \"text\": \"lemma Module.length_eq_finrank\"}\n  {\"file\": \"Mathlib/RingTheory/Length.lean\", \"line\": \"297\", \"text\": \"    Module.length K M = Module.finrank K M := by\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"line\": \"62\", \"text\": \"  suffices length Sr A * finrank κp κr = finrank κp Sq by simpa using congr_arg ENat.toNat this\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"line\": \"63\", \"text\": \"  calc length Sr A * finrank κp κr = length Sr A * length κp κr := by rw [length_eq_finrank]\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"line\": \"67\", \"text\": \"    _ = finrank κp Sq := length_eq_finrank κp Sq\"}\nNo exact or one-line match: Module.length_eq_finrank (Length.lean:295-298) identifies vector-space length only. It neither constructs the standard maximal-adic graded algebra nor sums its pieces or integrates an eventual polynomial. KrullDimension/Regular.lean gives dimension inequalities, not these length identities. HilbertPoly.lean:18-42 treats a supplied rational series and leaves graded-module Hilbert polynomials as TODO.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded pieces of powers of the maximal ideal have finite residue field dimension and their sum is the length of the local ring quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.ResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [IsLocalRing R] → Type u_1\", \"doc\": \"The residue field of a local ring $ R $ is the quotient ring obtained by dividing $ R $ by its unique maximal ideal, which consists of all non-units of $ R $. This construction forms the field of equi\"}\n  {\"name\": \"IsLocalRing.residue\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \": R →+* ResidueField R\", \"doc\": \"The canonical ring homomorphism from a local ring $ R $ to its residue field, obtained by quotienting $ R $ by its unique maximal ideal consisting of all non-units.\"}\n  {\"name\": \"IsLocalRing.instInhabitedResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsLocalRing R] → Inhabited (IsLocalRing.ResidueField R)\", \"doc\": \"The residue field of a local ring $ R $ is the quotient ring $ R $ modulo its unique maximal ideal consisting of all non-units. This construction yields a field where elements are equivalence classes \"}\n  {\"name\": \"IsLocalRing.finite_residueField_of_compactSpace\", \"module\": \"Mathlib.Topology.Algebra.Ring.Compact\", \"type\": \": Finite (ResidueField R)\", \"doc\": \"If $ R $ is a compact local ring, then its residue field (the quotient of $ R $ by its unique maximal ideal) is a finite field.\"}\n  {\"name\": \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"[IsLocalRing R] (I : Ideal R) (hp : IsLocalRing.maximalIdeal R ∈ I.minimalPrimes) : IsArtinianRing (R ⧸ I)\", \"doc\": \"Let $ R $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ I $ be an ideal of $ R $ such that $ \\\\mathfrak{m} $ is a minimal prime ideal containing $ I $. Then the quotient ring $ R/I $ i\"}\n  {\"name\": \"IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient\", \"module\": \"Mathlib.RingTheory.LocalRing.Quotient\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R] (I : Ideal R) [IsArtinianRing (R ⧸ I)],\\n  ∃ n, IsLocalRing.maximalIdeal R ^ n ≤ I\", \"doc\": \"In a local ring $ R $ with maximal ideal $ \\\\mathfrak{m} $, if the quotient ring $ R/I $ is Artinian, then there exists a natural number $ n $ such that $ \\\\mathfrak{m}^n \\\\subseteq I $.\"}\n  {\"name\": \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[IsDiscreteValuationRing 𝒪[K]] (h : Finite 𝓀[K]) (n : ℕ) : Finite (𝒪[K] ⧸ 𝓂[K] ^ n)\", \"doc\": \"Let $\\\\mathcal{O}_K$ be the ring of integers of a discrete valuation field $K$ with maximal ideal $\\\\mathfrak{m}_K$ and residue field $k_K = \\\\mathcal{O}_K/\\\\mathfrak{m}_K$. If the residue field $k_K$ is \"}\n  {\"name\": \"IsLocalRing.finite_quotient_iff\", \"module\": \"Mathlib.RingTheory.LocalRing.Quotient\", \"type\": \"[IsNoetherianRing R] [Finite (ResidueField R)] {I : Ideal R} : Finite (R ⧸ I) ↔ ∃ n, (maximalIdeal R) ^ n ≤ I\", \"doc\": \"For a Noetherian local ring $ R $ with finite residue field, the quotient ring $ R/I $ is finite if and only if there exists a natural number $ n $ such that the $ n $-th power of the maximal ideal of\"}\nNo exact or one-line match: Module.length_eq_finrank (Length.lean:295-298) identifies vector-space length only. It neither constructs the standard maximal-adic graded algebra nor sums its pieces or integrates an eventual polynomial. KrullDimension/Regular.lean gives dimension inequalities, not these length identities. HilbertPoly.lean:18-42 treats a supplied rational series and leaves graded-module Hilbert polynomials as TODO.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition length of maximal ideal power quotients equals the cumulative Hilbert function of the standard graded tangent cone",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] (rs : List R),\\n  RingTheory.Sequence.IsRegular R rs → ringKrullDim (R ⧸ Ideal.ofList rs) + ↑rs.length = ringKrullDim R\", \"doc\": \"For a commutative ring $ R $ and a regular sequence $ rs $ in $ R $, the Krull dimension of the quotient ring $ R $ modulo the ideal generated by $ rs $ plus the length of $ rs $ equals the Krull dime\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] {I : Ideal R},\\n  I ≠ ⊤ → ringKrullDim R ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a commutative ring $ R $ and a proper ideal $ I $ of $ R $, the Krull dimension of $ R $ is less than or equal to the sum of the Krull dimension of the quotient ring $ R/I $ and the finite rank of\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_card\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {S : Finset R},\\n  ↑S ⊆ ↑(IsLocalRing.maximalIdeal R) → ringKrullDim R ≤ ringKrullDim (R ⧸ Ideal.span ↑S) + ↑S.card\", \"doc\": \"For a commutative ring $ R $ and a finite set $ S $ of elements in the maximal ideal of $ R $, the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R / I $ (where $ I $ i\"}\n  {\"name\": \"height_le_ringKrullDim_quotient_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {p I : Ideal R} [p.IsPrime],\\n  I ≤ p → ↑p.height ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ R $ containing an ideal $ I $, the height of $ p $ satisfies $ \\\\operatorname{ht}(p) \\\\leq \\\\dim(R/I) + \\\\operatorname{rank}(I) $, where $ \\\\dim(R/I) $ denot\"}\n  {\"name\": \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  IsSMulRegular R x → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R\", \"doc\": \"For a local ring $ R $, if $ x $ is a regular element in its maximal ideal, then the Krull dimension of the quotient ring $ R / (x) $ satisfies $ \\\\dim(R / (x)) + 1 = \\\\dim(R) $.\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → ringKrullDim R ≤ ringKrullDim (R ⧸ x • ⊤) + 1\", \"doc\": \"If $ x $ is an element of the maximal ideal of a commutative semiring $ R $, then the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R/(x) $ plus one, i.e., $ \\\\dim(R) \\\\\"}\n  {\"name\": \"Ideal.height_le_ringKrullDim_quotient_add_encard\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {p : Ideal R} [p.IsPrime],\\n  ∀ s ⊆ ↑p, ↑p.height ≤ ringKrullDim (R ⧸ Ideal.span s) + ↑s.encard\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a commutative ring $R$ and a subset $S \\\\subseteq \\\\mathfrak{p}$, the height of $\\\\mathfrak{p}$ satisfies $\\\\operatorname{ht}(\\\\mathfrak{p}) \\\\leq \\\\dim(R/\\\\langle S\\\\rangle\"}\n  {\"name\": \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  IsSMulRegular R x → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a regular element in the maximal ideal of a local ring $ R $, then the Krull dimension of $ R $ satisfies $ \\\\dim(R) = \\\\dim(R/(x)) + 1 $, where $ R/(x) $ denotes the quotient ring of $ R $ \"}\nNo exact or one-line match: Module.length_eq_finrank (Length.lean:295-298) identifies vector-space length only. It neither constructs the standard maximal-adic graded algebra nor sums its pieces or integrates an eventual polynomial. KrullDimension/Regular.lean gives dimension inequalities, not these length identities. HilbertPoly.lean:18-42 treats a supplied rational series and leaves graded-module Hilbert polynomials as TODO.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-hilbert-samuel-growth-dimension",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration algebra under lem-trf-local-term-locality proof (1)--(2), through lem-trf-log-smooth-log-regular: ILO VI 1.6(i)--(ii) formal chart models; this input expands the formal-monoid dimension argument. Hilbert--Samuel dimension theorem explicitly named in the dimension input to the completed formal models. Repair extraction of the Hilbert--Samuel argument: old steps 1--3, maximal-adic filtration, standard grading and discrete summation.",
+   "via": [
+    "lem-trf-hilbert-samuel-growth-dimension",
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-maximal-adic-graded-length-bridge",
+  "worker": "stage1",
+  "summary": "Q38 checked the complete statement against Stacks 00K8, 00IY, 00IV and 00JZ. Wrote monomial spanning and basis-flag length arguments, explicit quotient exact sequences, rational finite summation and coefficient positivity, retaining P=0. One new exact Mathlib leaf supplies Faulhaber summation. No statement change.",
+  "blueprint": "Expands the maximal-adic filtration and discrete summation in the recorded historical formal-monoid dimension input beneath lem-trf-local-term-locality; no change to its unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-associated-graded-ring-structure",
+    "why": "Generic algebraic structure and scalar laws for the associated graded ring, needed for the monomial argument; no trace-formula unit statement supplies them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-associated-graded-ring-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-866c73be0",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-866c73be0 (reviewer sub-agent of L); spot-checked: Read the item, the new node, all cited statements and the sources: Stacks algebra.tex 00K8 (l.14149), 00JZ (l.13853) and 00IY (l.12460); Mathlib NumberTheory/Bernoulli.lean l.197–226 and 295–298. The item is unsplit on live and in side-live with no repair note. Its statement and stmt_deps are byte-identical to live, so nothing was weakened. All five steps are correct. Step 1: induction shows m^i is generated by the degree-i monomials; the scalar law (3) and multiplication (2) of lem-weil-pbc-associated-graded-ring-structure (an accepted sk-thm-p1 tool use) give S_0=k and generation by S_1, with t=0 handled. Step 2: mS_i=0, so R-submodules are k-subspaces and length = d_i; d_0=1; accepted as elementary. Step 3: 0→m^i/m^{i+1}→R/m^{i+1}→R/m^i→0 with additivity gives H(n)=Σ_{i<n} d_i ≥ 1. Step 4: Q = A + H(a) − A(a) with a ≥ 1, and P=0 is covered. Step 5: the leading-coefficient bound n^{d-1}(cn+C) < 0; accepted as elementary. Tested on a field, k[ε]/ε² (Q=2, needs N ≥ 2) and k[[x]] (Q=X). New leaf lem-trf-rational-power-sum-formula: its recursion matches Mathlib's `bernoulli` (b_1 = −1/2), and F_p matches sum_range_pow. Checked p=0, 1, 2 and n=0. The statement is self-contained; four real searches are recorded; blueprint from/via are correct. No duplicate in the DAG: the Bernoulli/power-sum/00JZ searches find only geometric Hilbert-polynomial nodes, and graded-injective-multiplication-polynomial-lift needs an injective degree-one element. One repair, B6/B8: mathlib_match.how named only sum_range_pow, but identifying the recursively defined b_r with Mathlib's `bernoulli` needs bernoulli_zero (l.204) and sum_bernoulli (l.225–226). The corrected whole file is fixes/dag/nodes/sec-trace-formula/lem-trf-rational-power-sum-formula.json; it stays a Mathlib leaf. Base-era note: 'local ring' has no definition citation in the unchanged statement.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MaximalAdicGradedLengthBridge",
+  "declaration": "IsLocalRing.maximalAdicGradedLengthBridge",
+  "declarations": [
+   "IsLocalRing.maximalAdicResidueAlgebra",
+   "IsLocalRing.maximalAdicGradedLengthBridge"
+  ],
+  "file": "lean/Sheaf/RingTheory/MaximalAdicGradedLengthBridge.lean",
+  "statement": "theorem maximalAdicGradedLengthBridge (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] : ∃ 𝒜 : ℕ → Submodule (ResidueField R) (Ideal.associatedGraded (maximalIdeal R)), (∀ i : ℕ, (𝒜 i : Set (Ideal.associatedGraded (maximalIdeal R))) = Set.range (DirectSum.of (Ideal.associatedGradedPiece (maximalIdeal R)) i)) ∧ ∃ (_grading : GradedAlgebra 𝒜), GradedAlgebra.IsStandard (k := ResidueField R) 𝒜 ∧ (∀ (t : ℕ) (y : Fin t → ↥(maximalIdeal R ^ 1)), Ideal.span (Set.range (fun j : Fin t ↦ (y j).val)) = maximalIdeal R → Algebra.adjoin (ResidueField R) (Set.range (fun j : Fin t ↦ DirectSum.of (Ideal.associatedGradedPiece (maximalIdeal R)) 1 (Submodule.Quotient.mk (y j)))) = ⊤ ∧ ∀ i : ℕ, Submodule.span (ResidueField R) (Set.range (fun f : Fin i → Fin t ↦ ∏ j : Fin i, DirectSum.of (Ideal.associatedGradedPiece (maximalIdeal R)) 1 (Submodule.Quotient.mk (y (f j))))) = 𝒜 i) ∧ (∀ i : ℕ, Module.Finite (ResidueField R) (𝒜 i) ∧ Module.length R (Ideal.associatedGradedPiece (maximalIdeal R) i) = (Module.finrank (ResidueField R) (𝒜 i) : ℕ∞)) ∧ (∀ n : ℕ, 1 ≤ n → IsFiniteLength R (R ⧸ maximalIdeal R ^ n) ∧ Module.length R (R ⧸ maximalIdeal R ^ n) = ((∑ i ∈ Finset.range n, Module.finrank (ResidueField R) (𝒜 i)) : ℕ∞) ∧ 1 ≤ Module.length R (R ⧸ maximalIdeal R ^ n)) ∧ (∀ P : Polynomial ℚ, (∃ a : ℕ, ∀ i : ℕ, a ≤ i → (Module.finrank (ResidueField R) (𝒜 i) : ℚ) = P.eval (i : ℚ)) → ∃ Q : Polynomial ℚ, Q ≠ 0 ∧ 0 < Q.leadingCoeff ∧ ∃ N : ℕ, 1 ≤ N ∧ ∀ n : ℕ, N ≤ n → ((Module.length R (R ⧸ maximalIdeal R ^ n)).toNat : ℚ) = Q.eval (n : ℚ))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary instance exposes the existing degree-zero quotient algebra through the residue-field type wrapper. The theorem identifies its canonical homogeneous subspaces by their underlying summand ranges; no new graded ring is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a3d1f160",
+  "group": "Q63",
+  "result": "fix",
+  "note": "Lean statement correct clause by clause against the node and Stacks 00K8/00IY/00IV/00JZ: nonzero Noetherian local R; k = ResidueField R with helper instance = Ideal.associatedGradedAlgebra (real data); 𝒜 pinned to the DirectSum.of ranges; GradedAlgebra + IsStandard as conclusions; every finite generating list of m: adjoin = ⊤ and degree-i monomial span = 𝒜 i; finite dimension and length = finrank; for n≥1 finite length, cumulative sum, ≥1; polynomial clause Q≠0, leadingCoeff>0, N≥1, toNat lossless, P=0 allowed. Edge cases checked: field/t=0, n=1, P=0. Node identical to side-live apart from lean; statement verbatim; docstrings carry source and blueprint; body sorry only. Only fault H11: the report's Second reading is the first worker's self-reading → fixes/lem-trf-maximal-adic-graded-length-bridge.report.md = Worker report verbatim + independent second reading. Advisory: same instance exists as theorem-owned IsLocalRing.associatedGradedAlgebra (SmoothLocalTangentConeExtension), definitionally equal, harmless; associatedGradedGrading is also theorem-owned and cannot be cited. No Lean change, no compile."
+ }
+}

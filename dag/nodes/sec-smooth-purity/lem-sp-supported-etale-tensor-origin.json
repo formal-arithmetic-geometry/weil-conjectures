@@ -20,101 +20,62 @@
  ],
  "proof": [
   {
-   "text": "For every integer q apply [lem-weil-pbc-finite-ring-constructible-sheaf-origin] to the intrinsically constructible A-module sheaf H^q(M). It gives a globally constructible etale A-module sheaf F_q with nu_U^*F_q isomorphic to H^q(M). The ring A is finite and U is an arbitrary scheme, precisely the hypotheses of that node; no Noetherianity of U is used. Since M is bounded, [lem-weil-pbc-fixed-module-bounded-constructible-origin] now gives a bounded etale complex L with globally constructible cohomology and an isomorphism e:nu_U^*L -> M. Fix this witness e for the remaining canonical identifications.",
+   "text": "Apply supported_constructible_origin_comparison to the intrinsically bounded constructible M, obtaining a bounded constructible etale origin L and e, and bounded K = j! L. Use the canonical supportedComparison defined by the exact open comparison and e.",
    "uses": [
-    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-    "lem-weil-pbc-fixed-module-bounded-constructible-origin"
+    "lem-sp-supported-constructible-origin-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AK (lemma-compare-constructible) and 09AL (lemma-compare-constructible-derived); finite-ring global-stratification versions recorded in the cited nodes"
+    "place": "Tags 09AK (lemma-compare-constructible), 09AL (lemma-compare-constructible-derived), 09AF (lemma-jshriek-comparison); combined with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product) and sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact). Agent-written combination preserving returned steps 1-3 of lem-sp-supported-etale-tensor-origin."
    }
   },
   {
-   "text": "Set K=j_!^{et,A}L and N=j_!^{pro,A}M. Etale extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact]; pro-etale extension by zero is exact and acts degreewise by [lem-cbc-proetale-extension-zero]. Hence [lem-weil-pbc-exact-functor-complex-cohomology] gives H^q(K)=j_!^{et,A}H^q(L) and H^q(N)=j_!^{pro,A}H^q(M); in particular both are bounded. Apply [lem-cbc-proetale-extension-zero-comparison] degreewise to a representative of L. Its natural sheaf isomorphism is a chain isomorphism, and the exact functors on both sides preserve quasi-isomorphisms, so it gives nu_Z^*K isomorphic to j_!^{pro,A}nu_U^*L. Composing with j_!^{pro,A}(e) gives the required canonical identification nu_Z^*K isomorphic to N.",
+   "text": "Choose a <= b witnessing intrinsic Tor amplitude. Transport it to fixed pro-etale modules by intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn. Exact extension by zero preserves this interval, by torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek. Transport along supportedComparison and reflect across comparison using torAmplitudeIn_mapDerivedCategory_iff. Testing the resulting etale Tor bound on the scalar coefficient sheaf gives HomologyConcentratedIn H a b, hence bounded H. Boundedness gives both bounded-below conclusions. No Tor-dimension assumption on B is used.",
    "uses": [
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-cbc-proetale-extension-zero",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-cbc-proetale-extension-zero-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF (lemma-jshriek-comparison); exactness from sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact), cohomology from homology.tex Tag 010N (lemma-exact-functor)"
-   }
-  },
-  {
-   "text": "Regard the degree-zero constant sheaf B_{Z,et} as an A_{Z,et}-module and put H=K tensor^L_A B_{Z,et}. The constant-ring identification in [lem-sf-comparison-pullback-exact], applied to A and B, identifies nu_Z^*B_{Z,et} with B_Z, including its A-action: the identifications preserve constant sections and therefore the structural map A -> B. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the comparison morphism with the structural ring isomorphism nu_Z^{-1}A_{Z,et} -> A_Z. Its derived pullback is termwise nu_Z^*, since that functor is exact. It gives nu_Z^*H isomorphic to (nu_Z^*K) tensor^L_{A_Z} B_Z, hence to N tensor^L_{A_Z}B_Z by Step 2. This use of the tensor comparison is in the unbounded derived categories; no boundedness of H has yet been asserted.",
-   "uses": [
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-exc-intrinsic-tor-amplitude-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); constant-coefficient exactness as recorded in lem-sf-comparison-pullback-exact"
+    "place": "Tags 08FZ (definition-tor-amplitude), 0GL1 (lemma-j-shriek-and-tensor), 06YY (lemma-derived-base-change); comparison reflection from proetale.tex Tag 099T (lemma-fully-faithful). Agent-written combination preserving returned steps 4-6 of lem-sp-supported-etale-tensor-origin."
    }
   },
   {
-   "text": "Choose integers a <= b witnessing the finite Tor amplitude of M. By [def-weil-proetale-tor-amplitude], testing this very interval against the degree-zero A_U-module B_U gives H^q(Q)=0 for q outside [a,b], where Q=M tensor^L_{A_U}B_U is viewed as an A-complex. This tests M against B_U and imposes no flatness or projective-dimension condition on B.",
-   "uses": [
-    "def-weil-proetale-tor-amplitude"
-   ],
+   "text": "For the scalar/open square, the pointwise coextension triangle shows that scalar restriction commutes with open restriction as a mate. Conjugating the two ordinary shriek adjunctions gives open_restrict_mate. Descend the exact square with mapDerivedCategoryAdjunction_mate; the iterated-mate conjugacy identity makes the scalar/open mate invertible. Whiskering and the prescribed canonical comparison isomorphisms give supportedIntrinsicScalarMap invertible.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ (definition-tor-amplitude), degree-zero test module B_U"
+    "place": "Tags 08FZ (definition-tor-amplitude), 0GL1 (lemma-j-shriek-and-tensor), 06YY (lemma-derived-base-change); comparison reflection from proetale.tex Tag 099T (lemma-fully-faithful). Agent-written combination preserving returned steps 4-6 of lem-sp-supported-etale-tensor-origin."
    }
   },
   {
-   "text": "Apply [lem-cbc-extension-zero-projection-formula] with coefficient ring A, complex M on U and degree-zero complex B_Z on Z. Restriction of B_Z is canonically B_U by [prop-weil-pbc-proetale-constant-ring-map], so N tensor^L_{A_Z}B_Z is canonically j_!^{pro,A}Q. The scalar extension M_B of [det-sp-scalar-extension-functor](1) is computed by P tensor_A B_U for a K-flat representative P of M, with B_U acting on the right factor. Forgetting this B-action leaves exactly the complex computing Q. Thus Q is canonically Res_{A->B}M_B, with the identification induced by the identity on that tensor complex. The restriction-of-scalars compatibility in [lem-cbc-proetale-extension-zero] gives j_!^{pro,A}Q isomorphic to Res_{A->B}j_!^{pro,B}M_B. This proves the second claimed identification. Exactness of that same j_! and the cohomology formula of [lem-weil-pbc-exact-functor-complex-cohomology] show that j_!^{pro,A}Q, and consequently nu_Z^*H by Step 3, have cohomology only in [a,b].",
+   "text": "The normalized pro-etale scalar/tensor existence-uniqueness theorem is proved by left-derived uniqueness. Form the natural cochain representative arrow by transposing the localized ordinary scalar unit, then apply exact restriction and the termwise composition isomorphism. The exact-right-adjoint K-flat representative theorem makes this arrow invertible on K-flat complexes. The ordinary balancing transformation is exactly the existing sheafExtendScalarsProjection and is invertible. For the tensor functor, Q's lax tensorator followed by the tensor/single comparison is natural and invertible on a K-flat first input, even for nonflat B. K-flat left derivability makes these two functors left derived functors of the same ordinary extension-restriction composite. Functor.leftDerivedUnique gives the desired isomorphism with its equation on every cochain complex. Functor.leftDerived_ext proves uniqueness from that equation. The cochain adjunction-unit formula identifies the constructed representative arrow with the published proScalarRestrictedExtensionRepresentative verbatim.",
    "uses": [
-    "lem-cbc-extension-zero-projection-formula",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "det-sp-scalar-extension-functor",
-    "lem-cbc-proetale-extension-zero",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "lem-sfb-exact-right-adjoint-kflat-representative",
+    "lem-sfb-kflat-derivability",
+    "lem-sfb-derived-monoidal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor); the scalar extension is the K-flat construction in Tag 06YY (lemma-derived-base-change)"
-   }
-  },
-  {
-   "text": "For q outside [a,b], exactness and the cohomology comparison of [lem-sf-comparison-pullback-exact] identify nu_Z^*H^q(H) with H^q(nu_Z^*H)=0 by Step 5. By [det-pe-classical-sheaves-modules], nu_Z^* is faithful on A-module sheaves. Therefore nu_Z^*(id_{H^q(H)})=0 implies id_{H^q(H)}=0, so H^q(H)=0. Thus H is bounded in [a,b]. Together with Step 2, K and H are bounded etale A-complexes and in particular belong to D^+. All identifications were the canonical comparisons followed by the fixed origin witness e; no further choices of isomorphisms were made.",
-   "uses": [
-    "lem-sf-comparison-pullback-exact",
-    "det-pe-classical-sheaves-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099T (lemma-fully-faithful); exactness/cohomology compatibility as in sites-modules.tex Tag 04JC"
+    "place": "Tag 06YY, lemma-derived-base-change; sites-modules.tex Tag 03EK, lemma-adjointness-tensor-restrict; source-library sheafExtendScalarsProjection, DerivedMonoidal.isIso_counit_app_app_of_kFlat_left, and Mathlib Functor.leftDerivedUnique/leftDerived_ext."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-cbc-proetale-extension-zero",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-proetale-tor-amplitude",
-  "lem-cbc-extension-zero-projection-formula",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "det-sp-scalar-extension-functor",
-  "det-pe-classical-sheaves-modules"
+  "lem-sp-supported-constructible-origin-comparison",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-sfb-exact-right-adjoint-kflat-representative",
+  "lem-sfb-kflat-derivability",
+  "lem-sfb-derived-monoidal",
+  "lem-route-scalar-tensor-iso-exists-unique"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09AK, 09AL, 09AF and 099T, combined with sites-cohomology.tex Tags 07A4, 0GL1 and 08FZ; boundedness argument serving det-sp-reduction-direct-image Step 1 and its finite-window input"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+  "place": "Step 1. The existing constructible-origin, Tor-transport and scalar/open-mate argument is retained. M6 closes the remaining normalized scalar/tensor hole using the ordinary balancing projection, K-flat representative transpose, and uniqueness of left derived functors."
  },
  "mathlib_searches": [
   {
@@ -208,45 +169,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-supported-etale-tensor-origin",
   "worker": "stage1",
-  "summary": "Constructible sheaf comparison and the existing bounded derived-origin node provide L without a Noetherian hypothesis. Exact open extension gives K and its pro-etale comparison. The unbounded tensor comparison and open projection identify nu*H with j_!(M tensor_A^L B); the Tor interval of M bounds this object, and exact faithful comparison reflects that interval to H. All proof ingredients already have DAG nodes; no new node and no statement change.",
-  "blueprint": "det-sp-reduction-direct-image, Step 1: extension by zero and coefficient tensor; bounded etale origin supplies the D^+ inputs used in the repaired Steps 2-3 finite-window argument. This is a supporting lemma, not the unit key node.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-    "why": "Generic Constructible sheaves over a finite ring have etale origin used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
-   },
-   {
-    "node": "lem-weil-pbc-fixed-module-bounded-constructible-origin",
-    "why": "Generic Bounded fixed-module complexes with constructible sheaf origins have derived origin used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero",
-    "why": "Generic Extension by zero on the pro-etale site used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "Generic Comparison of extension by zero with the site morphism used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
-   },
-   {
-    "node": "lem-sf-comparison-pullback-exact",
-    "why": "Generic The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-ring-map",
-    "why": "Generic Constant coefficients on the pro-etale site used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
-   },
-   {
-    "node": "det-pe-classical-sheaves-modules",
-    "why": "Generic The module form of the classical equivalence used only for its stated comparison, exactness, or tensor property on the unchanged Step 1 open-support route; this unit has no substitute with these arbitrary-scheme hypotheses."
-   }
-  ]
+  "summary": "Repair of the 3983-character returned split: extract two independent statement-only tasks of comparable proof work (old steps 1-3: 2097 characters; old steps 4-6: 1886 characters). The first constructs the supported etale origin and compares its unbounded tensor; the second proves the supported scalar tensor interval and reflects it to any given etale complex. The unchanged statement is assembled in three short steps. Full old argument, its allocation, searches, citations, and B-E review are retained in the report.",
+  "blueprint": "det-sp-reduction-direct-image Step 1, extension by zero and coefficient tensor; the bounded etale inputs serve its Steps 2-3 finite-window argument. Both new statements stay in sk-lem-sp-reduction; this item is not its key node."
  },
  "tool_uses": [
   "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
@@ -259,14 +186,25 @@
   "det-pe-classical-sheaves-modules"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q61-4a84ce7c0",
-  "group": "Q61",
+  "reviewer": "NT-cc-Q10-5b858c6c7",
+  "group": "Q10",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-4a84ce7c0 (reviewer sub-agent of L); spot-checked: Read the full item proof (6 steps, no new nodes) and every cited statement; review.md lists the checks per step. Preliminaries: the item and its deps are not in route-pivot-dropped.txt; side-live still has the item unsplit; there is no re-split note for this item; no SGA source; proof_deps equal the union of the step uses; stmt_deps are unchanged and equal the statement's bracket citations. Step 1: Stacks 09AK holds for an arbitrary scheme, and the sheaf-origin node plus the fixed-module bounded-origin node give a bounded constructible L with nu*L≅M. Step 2: étale and pro-étale j_! are exact, and the 09AF comparison is natural, so it gives a chain isomorphism termwise; nu*K≅N. Step 3: nu*B_et=B_proet as an A-module; the ringed-topoi tensor pullback (07A4) holds unbounded, with Lu*=termwise nu* because nu* is exact. Step 4: the 08FZ definition tests every module sheaf, so B_U is a valid test; no flatness of B is needed. Step 5: projection formula (0GL1), then j^{-1}B_Z=B_U (constant-ring-map node), then Q=Res M_B by the K-flat model of det-sp-scalar-extension-functor(1), then the Res/j_! clause of lem-cbc-proetale-extension-zero; exactness keeps the bound [a,b]. Step 6: nu* is exact and fully faithful on module sheaves (099T), so it reflects zero cohomology and H is bounded. This matches parent det-sp-reduction-direct-image Steps 1 and 3 (D^+ inputs) and blueprint main-20261015 sk-lem-sp-reduction-direct-image Step 1. Edge cases checked: U=∅, B=0, A=B, and Z/ℓ²→F_ℓ (M=A gives bounded Q; M=F_ℓ is excluded by finite Tor). No duplicate of the whole item in the DAG. The declared tool_uses (pbc origin, cbc j_!, sf comparison, ringed-topoi tensor, constant ring map, pe classical) are generic tools and I accept them. Advisory: lem-weil-pbc-finite-ring-constructible-derived-origin alone would give Step 1 and the interval reflection."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-5b858c6c7 (reviewer sub-agent of L); spot-checked: Released human re-split note (2026-10-22, 3983-char proof); the item Lean still has a sorry and there is no stage-3 landing, so the note governs. Compared with live, only the split-owned fields of the item changed; the statement and stmt_deps are unchanged. All six old step texts are kept verbatim in the report: old steps 1-3 go to lem-sp-supported-constructible-origin-comparison (2097 chars) and old steps 4-6 go to lem-sp-supported-scalar-tor-interval (1886 chars). Both are statement-only and independent; neither restates the item (node 1 has no Tor bound and no bound on H, node 2 constructs no origin). The assembly is 1174 chars: E=H, r=t_e, then D^+. I read every step and its cited statements. Node 1 rests on finite-ring sheaf origin plus fixed-module bounded origin (any scheme, Stacks 09AK/09AL), exactness of both j_!, the 09AF comparison applied termwise, and the unbounded ringed-topoi tensor pullback (07A4) with the constant-ring identification. Node 2: the 08FZ definition tests every module sheaf, so B_U is a valid test; the 0GL1 projection formula holds on any ringed site; j^{-1}B_Z=B_U; det-sp-scalar-extension-functor(1) is computed on a K-flat model; the Res clause of lem-cbc-proetale-extension-zero applies; nu* is exact and fully faithful (Stacks 099T, any scheme), so it reflects zero cohomology for an arbitrary unbounded E. Edge cases: U empty, j=id, B=0, a=b, Z/l^2->F_l with M=A_U[0]. No SGA source; nothing is in route-pivot-dropped. Duplicates checked: finite-ring-constructible-derived-origin is only an ingredient; lem-fix-reduction-open-etale-origin is a narrower base-era specialization (advisory); bounded-below-constructible-reflection assumes D^+. Batch 5: det-sp-scalar-extension-functor reaches lem-trf-site-functorial-flat-resolution only through a generic K-flat construction that is not part of the trace formula or Poincare duality, and it was already a base dependency of the item, so I accept it. FIX (B3, 2 faults): node 2 cited the etale-only def-kun-derived-tensor for its pro-etale tensors Q and N⊗B; I replaced it with def-weil-derived-tensor. Node 1's pro-etale target N⊗B_Z of t_e had no citation; I added def-weil-derived-tensor. Advisory: the base item statement has the same missing pro-etale tensor citation; the item's tool_uses still lists the old step dependencies.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.SecSmoothPurity.SupportedEtaleTensorOrigin",
   "declaration": "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.supported_etale_tensor_origin",
@@ -318,5 +256,15 @@
   "group": "Q08",
   "result": "pass",
   "note": "Clause-by-clause match of the node with supported_etale_tensor_origin. Hypotheses: arbitrary schemes and open immersion; recorded fixed-module constructibility on every H^q; recorded intrinsic finite Tor amplitude (one interval, all degree-zero module tests); no flatness of B. Conclusion: bounded etale L with constructible cohomology and iso e : nu L ≅ M; K and H bounded and in D+. The identifications are canonical constructed isos: supportedComparison (descended 09AF comparison then j_!(e)) and fixedTensorComparison (tensorScalarSquare typing checked). IsIso is asserted for the mate-based map N⊗B → Res j_!^B scalarExtensionFunctor(E M), whose target is the recorded intrinsic objects; true and non-tautological. proScalarTensorIso is .choose of a true, uniquely pinning ∃! reusing the landed etale normalization; no Nonempty, arbitrary map or opaque. Statement verbatim; declarations list equals the file; only the item's lean field changed; three sorry theorems only; docstrings with source and blueprint; universes bound. Not in route-pivot-dropped; no re-split note. Edge cases covered: zero rings, empty U, M=0, j=id, B of infinite Tor dimension. No compile per instruction. Advisory only: the composite nu H ≅ N⊗B has no declaration of its own; the second-reading section is the worker's self-reading; the pro-etale scalar/tensor helpers duplicate the etale pattern on another site."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261025T095626-L-3454954",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

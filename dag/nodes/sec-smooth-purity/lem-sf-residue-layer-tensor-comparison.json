@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-residue-layer-tensor-comparison",
+ "kind": "statement",
+ "title": "Balanced comparison for tensoring with a restricted coefficient unit",
+ "statement": "For a scheme Y, ring sheaves R,A,T, a coefficient ring B, maps a:R→B_Y, b:B_Y→T, p:R→A and f:A→T with p;f=a;b, and a B-module U whose constant sheaf is b_*T, there is an isomorphism of complexes (B_Y tensor_R P) tensor_B U_Y ≅ b_* f^* p^* P for every cochain complex P. No flatness, constructibility, or interval hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; Serre, Local Fields",
+  "place": "Modules on Sites, tensor cancellation (Tag 05V4), and Local Fields, Chapter I, section 1; residue-layer multiplication argument."
+ },
+ "stmt_deps": [
+  "lem-sf-filtered-coefficient-tensor-bounds",
+  "lem-pur-change-of-rings-tensor-cancellation",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Tensor cancellation and the left unitor identify tensoring with the restricted T-unit with extension to T followed by restriction, naturally in the input module.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose ordinary scalar extensions using the uniqueness of left adjoints to the canonically composed scalar restrictions. The commuting coefficient triangle identifies the two extension composites. Apply the natural isomorphism in each degree.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-sf-filtered-coefficient-tensor-bounds",
+    "lem-sf-finite-field-local-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-change-of-rings-tensor-cancellation",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-sf-filtered-coefficient-tensor-bounds",
+  "lem-sf-finite-field-local-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "Direct formalization of tensor balancing and the principal-ideal layer argument; no interval or constructibility assumption used in these comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a nonzero element power identifies consecutive principal ideal power quotients with the first quotient in a domain",
+   "results": "Ideal.quotEquivPowQuotPowSucc and Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow cover the untruncated R-linear comparison. The proof below uses the first isomorphism theorem directly to retain the actual truncated-ring action.",
+   "date": "2026-10-26",
+   "verdict": "related infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotKerEquivOfSurjective\"",
+   "results": "LinearMap.quotKerEquivOfSurjective and its apply_mk and symm_apply lemmas. Used for the coefficient module isomorphism.",
+   "date": "2026-10-26",
+   "verdict": "used"
+  },
+  {
+   "tool": "grep",
+   "query": "powQuotPowSucc|leftAdjointCompIso|exists_changeOfRings_tensorCancellation",
+   "results": "Mathlib principal-power quotient comparisons and Adjunction.leftAdjointCompIso; project search found the proved natural tensor cancellation theorem.",
+   "date": "2026-10-26",
+   "verdict": "used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarResidueLayerVanishing",
+  "date": "2026-10-26",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-scalar-residue-layer-vanishing",
+   "place": "Coefficient comparison in the residue-layer vanishing argument.",
+   "via": [
+    "lem-sf-integral-scalar-residue-layer-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ResidueLayerTensorComparison",
+  "file": "lean/Sheaf/Paper/ResidueLayerTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ResidueLayerTensor.comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ResidueLayerTensor.comparison"
+  ],
+  "statement": "theorem comparison (B : Type (u + 1)) [CommRing B]\n    {A : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}\n    (a : R ⟶ adicLisseConstantRing Y B)\n    (b : adicLisseConstantRing Y B ⟶ T) (p : R ⟶ A) (f : A ⟶ T)\n    (h : p ≫ f = a ≫ b) (U : ModuleCat.{u + 1} B)\n    (e : (adicLisseConstantModules Y B).obj U ≅\n      (pbcRestrict b).obj (SheafOfModules.unit ((adicLisseForget Y).obj T)))\n    (P : CochainComplex (pbcModules Y R) ℤ) :\n    Nonempty (filteredCoefficientTensorComplex Y B R a P U ≅\n      ((pbcRestrict b).mapHomologicalComplex (.up ℤ)).obj\n        (((pbcExtend f).mapHomologicalComplex (.up ℤ)).obj\n          (((pbcExtend p).mapHomologicalComplex (.up ℤ)).obj P)))",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261026T023144-L-524429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261026T023144-L-524429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,268 @@
+{
+ "id": "lem-trf-formal-conormal-quotient-data",
+ "kind": "statement",
+ "title": "Complete relation quotient and descended differential maps",
+ "statement": "Let $F$ be a field, $n,s\\geq0$, $D=F[[t_1,\\ldots,t_n]]$ [def-weil-pbc-multivariate-power-series], $\\mathfrak n=(t_1,\\ldots,t_n)$, $I=(f_1,\\ldots,f_s)\\subseteq\\mathfrak n$, $R=D/I$, and $\\mathfrak m=\\mathfrak nR$. Write $M=\\widehat\\Omega_{D/F,\\mathfrak n}$ with canonical derivation $\\widehat{\\mathrm d}_D$ [def-trf-continuous-kahler-differentials]. Form the $R$-modules $T=M\\otimes_D R$ [def-weil-module-base-change], $L=\\sum_j R(\\widehat{\\mathrm d}_D(f_j)\\otimes1)\\subseteq T$, and $N=T/L$, and let $q:T\\to N$ be the quotient map. For $r\\geq1$ put $R_r=R/\\mathfrak m^r$, $C_r=\\Omega_{R_r/F}$ [def-weil-pbc-kahler-differentials], and let $p_r:M\\to\\Omega_{(D/\\mathfrak n^r)/F}$ be projection to the $r$th coordinate and $u_r:\\Omega_{(D/\\mathfrak n^r)/F}\\to C_r$ the map induced by $D/\\mathfrak n^r\\to R_r$. Then $N$ is a finitely generated $D$-module [def-weil-finitely-generated-module], and the elements $q(\\widehat{\\mathrm d}_D(t_i)\\otimes1)$ generate $N$ over $R$. The canonical map $\\iota:N\\to\\varprojlim_{r\\geq1}N/\\mathfrak m^rN$, $z\\mapsto(z\\bmod\\mathfrak m^rN)_r$, is an isomorphism of $R$-modules, and $\\mathfrak n^rN=\\mathfrak m^rN$ under restriction of scalars along $D\\to R$. The formula $\\delta(\\bar h)=q(\\widehat{\\mathrm d}_D(h)\\otimes1)$, for $h\\in D$, defines a well-defined $F$-derivation $\\delta:R\\to N$. For each $r\\geq1$, the formula $\\phi_r(q(m\\otimes\\bar a))=\\bar a\\,u_r(p_r(m))$, for $m\\in M$ and $\\bar a\\in R$, defines a well-defined $R$-linear map $\\phi_r:N\\to C_r$. These maps satisfy $\\phi_r\\delta(x)=\\mathrm d(x\\bmod\\mathfrak m^r)$ for $x\\in R$ and $\\tau_r\\phi_{r+1}=\\phi_r$, where $\\tau_r:C_{r+1}\\to C_r$ is induced by $R_{r+1}\\to R_r$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent auxiliary construction for Tag 00RU (lemma-differential-seq), quotient by relation differentials, with Tag 0306 (lemma-Noetherian-power-series) and Tag 00MA (lemma-completion-tensor), part (3), for finite-module completeness. Extracts returned conormal proof Steps 1-4; the original full argument is retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-continuous-kahler-differentials",
+  "def-weil-module-base-change",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-formal-power-series-continuous-free], $M$ has $D$-basis $e_i=\\widehat{\\mathrm d}_D(t_i)$ for $1\\leq i\\leq n$. For $v=\\sum_i b_i e_i$ and $a\\in R$, tensor balancing gives $v\\otimes a=\\sum_i(\\bar b_i a)(e_i\\otimes1)$. Every tensor is a finite sum of pure tensors, so the $e_i\\otimes1$ generate $T$ over $R$, and their images $g_i=q(e_i\\otimes1)$ generate $N$. Every coefficient in $R$ lifts to $D$ because $D\\to R$ is surjective; the same finite list therefore generates $N$ as a $D$-module. This uses the scalar action specified in [def-weil-module-base-change] and the meaning of finite generation in [def-weil-finitely-generated-module].",
+   "uses": [
+    "lem-trf-formal-power-series-continuous-free",
+    "def-weil-module-base-change",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RX (lemma-differentials-polynomial-ring) and 02HQ (lemma-differential-mod-power-ideal), through the cited continuous-free lemma; elementary tensor and quotient calculation."
+   }
+  },
+  {
+   "text": "A field is Noetherian, since its only ideals are $0$ and $F$. Thus [lem-weil-pbc-power-series-noetherian] makes $D$ Noetherian, and [lem-weil-pbc-power-series-variables-complete] makes it $\\mathfrak n$-adically complete. Apply [lem-weil-pbc-finite-module-complete-over-complete-noetherian] with ring $D$, ideal $\\mathfrak n$, and the finite $D$-module $N$ from Step 1. It gives bijectivity of $z\\mapsto(z\\bmod\\mathfrak n^rN)_r$. Under $D\\to R$ the image of $\\mathfrak n^r$ is $(\\mathfrak nR)^r=\\mathfrak m^r$: products and finite sums of images are images of products and finite sums. Each generator $az$ of $\\mathfrak n^rN$ is therefore in $\\mathfrak m^rN$, and conversely every coefficient in $\\mathfrak m^r$ lifts to $\\mathfrak n^r$, proving equality of these submodules. Hence the preceding canonical map is exactly $\\iota$. It is $R$-linear coordinatewise, since multiplication by any element of $R$ can be computed using a lift in $D$; its inverse is $R$-linear by bijectivity. This proves the asserted $R$-module isomorphism.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-variables-complete",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0306 (lemma-Noetherian-power-series) and 00MA (lemma-completion-tensor), part (3); application to the explicit finite quotient module."
+   }
+  },
+  {
+   "text": "The coordinate derivation of [def-trf-continuous-kahler-differentials] is additive, kills $F$, and satisfies Leibniz. Set $d_0(h)=q(\\widehat{\\mathrm d}_D(h)\\otimes1)$. Then $d_0(ab)=\\bar a\\,d_0(b)+\\bar b\\,d_0(a)$. If $h\\in I$, write $h=\\sum_j a_j f_j$. Since $\\bar f_j=0$ and $q(\\widehat{\\mathrm d}_D(f_j)\\otimes1)=0$ by the definition of $L$, Leibniz gives $d_0(h)=\\sum_j(\\bar a_j d_0(f_j)+\\bar f_j d_0(a_j))=0$. Therefore $d_0(h)$ depends only on $\\bar h\\in R$. Its descended map $\\delta$ is additive, kills $F$, and satisfies the same Leibniz equation, so is an $F$-derivation with the stated formula. In particular $\\delta(\\bar t_i)=g_i$.",
+   "uses": [
+    "def-trf-continuous-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RU (lemma-differential-seq), proof: Leibniz calculation for descent; the same calculation for the coordinatewise derivation."
+   }
+  },
+  {
+   "text": "Fix $r\\geq1$. The induced differential map $u_r$ exists by the universal property in [def-weil-pbc-kahler-differentials]: the derivation on $R_r$ composed with $D/\\mathfrak n^r\\to R_r$ is an $F$-derivation. Put $\\beta_r=u_rp_r:M\\to C_r$. It is $D$-linear for the action through $D\\to R_r$, and $I$ acts by zero on $C_r$. The assignment $(v,a)\\mapsto a\\beta_r(v)$ on $M\\times R$ is additive in both variables and balanced, since $a\\beta_r(bv)=a\\bar b\\beta_r(v)$. It therefore gives an $R$-linear map $\\gamma_r:T\\to C_r$ with $\\gamma_r(v\\otimes a)=a\\beta_r(v)$. The coordinate definition of $\\widehat{\\mathrm d}_D$ gives $\\beta_r(\\widehat{\\mathrm d}_D(f_j))=\\mathrm d(f_j\\bmod(I+\\mathfrak n^r))=\\mathrm d0=0$. Thus $\\gamma_r$ kills every generator of $L$, hence all of $L$, and descends uniquely through $q$ to $\\phi_r:N\\to C_r$. This proves well-definedness and precisely the required pure-tensor formula.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-trf-continuous-kahler-differentials",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega), equation-functorial-omega following it, and Tag 00RU (lemma-differential-seq), proof of the map from the tensor product."
+   }
+  },
+  {
+   "text": "For $x\\in R$ choose a lift $h\\in D$. By Step 4 and the coordinate formula in [def-trf-continuous-kahler-differentials], $\\phi_r\\delta(x)=u_rp_r(\\widehat{\\mathrm d}_D(h))=\\mathrm d(x\\bmod\\mathfrak m^r)$. The map $\\tau_r$ is obtained from the same universal property [def-weil-pbc-kahler-differentials] for $R_{r+1}\\to R_r$; by construction it sends $\\mathrm d(y)$ to $\\mathrm d(y\\bmod\\mathfrak m^r)$. Consequently $\\tau_r\\phi_{r+1}(g_i)=\\tau_r\\mathrm d(\\bar t_i\\bmod\\mathfrak m^{r+1})=\\mathrm d(\\bar t_i\\bmod\\mathfrak m^r)=\\phi_r(g_i)$. Both composites are $R$-linear. Step 1 says the $g_i$ generate $N$, so their equality on these generators proves $\\tau_r\\phi_{r+1}=\\phi_r$ on all of $N$.",
+   "uses": [
+    "def-trf-continuous-kahler-differentials",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega) and equation-functorial-omega: functorial differential maps checked on differential generators."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-formal-power-series-continuous-free",
+  "def-weil-module-base-change",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-variables-complete",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "def-trf-continuous-kahler-differentials",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Continuous analogue of the explicit quotient construction in Tag 00RU (lemma-differential-seq). The finite-module completeness input is Tag 00MA (lemma-completion-tensor), part (3), with Tag 0306 (lemma-Noetherian-power-series). The continuous free-module calculation is reused from lem-trf-formal-power-series-continuous-free, not inferred from ordinary algebraic differentials of D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A formal power series differential module modulo the differentials of a finite ideal generating set is a finite adically complete module with a descended derivation and compatible maps to truncated quotient differentials",
+   "results": "{\"t\": \"2026-10-22T06:45:06Z\", \"tool\": \"leanfinder\", \"query\": \"A formal power series differential module modulo the differentials of a finite ideal generating set is a finite adically complete module with a descended derivation and compatible maps to truncated quotient differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"derivationQuotKerSq\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"KaehlerDifferential.ideal_fg\", \"liftOfDerivationToSquareZero_mk_apply'\", \"KaehlerDifferential.derivationQuotKerTotal\", \"instR\", \"derivationQuotKerSq_mk\"], \"digest\": \"94fe7bc13c43be49\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary differential or completion constructions only, not the asserted continuous quotient data"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet|MvPowerSeries.*Kaehler|derivation.*[Aa]dic",
+   "results": "{\"t\": \"2026-10-22T06:45:09Z\", \"tool\": \"grep\", \"query\": \"continuous.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet|MvPowerSeries.*Kaehler|derivation.*[Aa]dic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary differential or completion constructions only, not the asserted continuous quotient data"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, AdicCompletion",
+   "results": "{\"t\": \"2026-10-22T06:45:10Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary differential or completion constructions only, not the asserted continuous quotient data"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite complete quotient of continuous differential module by differentials of ideal generators",
+   "results": "{\"t\": \"2026-10-22T06:45:22Z\", \"tool\": \"leansearch\", \"query\": \"finite complete quotient of continuous differential module by differentials of ideal generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Cotangent\", \"Module.Finite.quotient\", \"Ideal.instInhabitedCotangent\", \"Ideal.instIsNoetherianCotangentOfSubtypeMem\", \"KaehlerDifferential.quotKerTotalEquiv\", \"Module.instQuotientIdealSpanSubmoduleHSMulSetTop\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Ideal.instModuleQuotientCotangent\"], \"digest\": \"165c51f549c993ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary differential or completion constructions only, not the asserted continuous quotient data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of a finite free module of formal differentials by relation vectors is complete and has an induced quotient derivation",
+   "results": "{\"t\": \"2026-10-22T06:45:40Z\", \"tool\": \"leanfinder\", \"query\": \"quotient of a finite free module of formal differentials by relation vectors is complete and has an induced quotient derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.derivationQuotKerTotal\", \"liftOfDerivationToSquareZero_mk_apply'\", \"derivationQuotKerSq\", \"derivationQuotKerSq_mk\", \"derivationToSquareZeroOfLift\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"derivationToSquareZeroEquivLift\", \"KaehlerDifferential.endEquivDerivation'\"], \"digest\": \"e1f6399173acb991\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary differential or completion constructions only, not the asserted continuous quotient data"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBaseChange_surjective|exact_kerCotangentToTensor_mapBaseChange|liftKaehlerDifferential|AdicCompletion.of_apply",
+   "results": "{\"t\": \"2026-10-22T06:46:13Z\", \"tool\": \"grep\", \"query\": \"mapBaseChange_surjective|exact_kerCotangentToTensor_mapBaseChange|liftKaehlerDifferential|AdicCompletion.of_apply\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\"], \"digest\": \"34ac2cec1a998be8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary differential or completion constructions only, not the asserted continuous quotient data"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet|MvPowerSeries.*Kaehler",
+   "results": "{\"t\": \"2026-10-23T09:50:44Z\", \"tool\": \"grep\", \"query\": \"continuous.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet|MvPowerSeries.*Kaehler\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary differentials, formal derivatives, or other completions, and do not state this continuous quotient construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous differential module formal power series quotient finite complete derivation truncation maps",
+   "results": "{\"t\": \"2026-10-23T09:50:44Z\", \"tool\": \"leansearch\", \"query\": \"continuous differential module formal power series quotient finite complete derivation truncation maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.trunc\", \"PowerSeries.trunc_derivativeFun\", \"PowerSeries.trunc_derivative'\", \"PowerSeries.trunc_derivative\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.derivativeFun\", \"PowerSeries.derivative\", \"derivationQuotKerSq\"], \"digest\": \"427ec9855a817922\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary differentials, formal derivatives, or other completions, and do not state this continuous quotient construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, AdicCompletion",
+   "results": "{\"t\": \"2026-10-23T09:50:44Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary differentials, formal derivatives, or other completions, and do not state this continuous quotient construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of the continuous differentials of a formal power series ring by relation differentials is finite complete with a descended derivation and compatible maps to truncated differentials",
+   "results": "{\"t\": \"2026-10-23T09:50:45Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of the continuous differentials of a formal power series ring by relation differentials is finite complete with a descended derivation and compatible maps to truncated differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"KaehlerDifferential.derivationQuotKerTotal\", \"instCommRingBDeRhamPlus\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"KaehlerDifferential.quotKerTotalEquiv_symm_comp_D\", \"derivationToSquareZeroOfLift\", \"derivationQuotKerSq_mk\"], \"digest\": \"e5e482e5e4d7c59e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary differentials, formal derivatives, or other completions, and do not state this continuous quotient construction"
+  },
+  {
+   "tool": "grep",
+   "query": "derivationQuotKerTotal|mapBaseChange_surjective|exact_kerCotangentToTensor_mapBaseChange",
+   "results": "{\"t\": \"2026-10-23T09:51:52Z\", \"tool\": \"grep\", \"query\": \"derivationQuotKerTotal|mapBaseChange_surjective|exact_kerCotangentToTensor_mapBaseChange\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\"], \"digest\": \"e548ebd31de98e5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary differentials, formal derivatives, or other completions, and do not state this continuous quotient construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finite ideal in a multivariable formal power series ring over a field descend the universal continuous derivation to the quotient of the differential module by the differentials of the generators",
+   "results": "{\"t\": \"2026-10-23T09:51:54Z\", \"tool\": \"leanfinder\", \"query\": \"Given a finite ideal in a multivariable formal power series ring over a field descend the universal continuous derivation to the quotient of the differential module by the differentials of the generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.derivationQuotKerTotal\", \"liftOfDerivationToSquareZero_mk_apply'\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"Algebra.Presentation.differentialsSolution\", \"derivationQuotKerSq_mk\", \"derivationQuotKerSq\", \"Derivation.liftKaehlerDifferential_apply\", \"liftOfDerivationToSquareZero_mk_apply\"], \"digest\": \"caf4046cd2f8537c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary differentials, formal derivatives, or other completions, and do not state this continuous quotient construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-power-series-continuous-conormal",
+  "date": "2026-10-22",
+  "group": "Q31"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The Jacobian-cokernel/differential comparison in the first proof paragraph of the pointwise nodal ingredient (Curves 0C4D), specifically the quotient/conormal passage for continuous differentials. Extracted argument: Agent auxiliary construction for Tag 00RU (lemma-differential-seq), quotient by relation differentials, with Tag 0306 (lemma-Noetherian-power-series) and Tag 00MA (lemma-completion-tensor), part (3), for finite-module completeness. Extracts returned conormal proof Steps 1-4; the original full argument is retained in report.md.",
+   "via": [
+    "lem-trf-formal-power-series-continuous-conormal",
+    "lem-trf-formal-power-series-continuous-differentials",
+    "lem-trf-completed-jacobian-differentials",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-conormal-quotient-data",
+  "worker": "stage1",
+  "summary": "Reused the existing continuous-free, power-series Noetherianity and completeness, and finite-module completeness nodes; proved finite generation, restriction-of-scalars equality of adic powers, descent by the Leibniz rule, balanced tensor descent of every truncation map, and transition compatibility on generators. Statement unchanged; no new nodes or Mathlib leaves. Searched the live project for an exact attachment and repeated Mathlib searches with two semantic phrasings; retained all inherited searches.",
+  "blueprint": "Auxiliary algebra for the inherited chain from lem-trf-local-term-locality via the completed-Jacobian and continuous-conormal comparisons; realizes the quotient-data part of the parent continuous-conormal proof. Read latest blueprint ancestor and unit: the auxiliary formal differential assertion is not explicitly stated there, so the proof is marked agent-written from the cited Stacks algebra constructions, not attributed to a nonexistent paragraph of the current blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic finite-module completeness over a complete Noetherian ring, applied to D and N; no node of this unit provides that general commutative-algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-4d956c287",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-4d956c287 (reviewer sub-agent of L); spot-checked: I read the item, all 9 cited statements and Stacks algebra.tex 00RU (l.34103), 00MA(3) (l.22901) and 0306 (l.6028). The delivery has no new nodes. The statement and stmt_deps are identical to live, the item is still unsplit live and on side-live (not superseded), proof_deps equals the union of the step uses, there is no cycle (24 deps) and no SGA reference. Step 1: the continuous-free basis plus tensor balancing gives generators g_i over R, and over D by surjectivity. Step 2: the finite-module completeness node applies to (D,𝔫,N), with D Noetherian because F is and complete for the variables; 𝔫^rN=𝔪^rN because the image of 𝔫^r is 𝔪^r; ι is R-linear. Step 3: Leibniz descent through I=Σ(f_j) is written out. Step 4: u_r exists since 𝔫^r⊆I+𝔫^r; the balanced map gives γ_r, and β_r(d̂f_j)=d(0) gives φ_r. Step 5: coordinate formula with index n=r-1; τ_rφ_{r+1}=φ_r is checked on the generators δ(t̄_i) by R-linearity. Edge cases checked: n=0, s=0, r=1 (C_1=0), f=t^p and f=t in char p. No duplicate (lem-per-completed-differential-finite-conormal is a different completion). tool_uses: lem-weil-pbc-finite-module-complete-over-complete-noetherian is generic 00MA(3) algebra, accepted, though the worker wrote the entry, which C8 leaves to L. The inherited blueprint.from.place is inaccurate (the main-20261015 ancestor's first paragraph is about trace-class stalks), but the delivery did not introduce it and the split_report names the provenance honestly."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalConormalQuotientData",
+  "declaration": "RingTheory.FormalConormal.quotientData",
+  "declarations": [
+   "RingTheory.FormalConormal.variablesIdeal",
+   "RingTheory.FormalConormal.relationIdeal",
+   "RingTheory.FormalConormal.Ring",
+   "RingTheory.FormalConormal.maximalIdeal",
+   "RingTheory.FormalConormal.Differentials",
+   "RingTheory.FormalConormal.TensorModule",
+   "RingTheory.FormalConormal.relations",
+   "RingTheory.FormalConormal.QuotientModule",
+   "RingTheory.FormalConormal.Truncation",
+   "RingTheory.FormalConormal.quotientData"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormalConormalQuotientData.lean",
+  "statement": "theorem quotientData (hf : ∀ j : Fin s, f j ∈ variablesIdeal F n) : Module.Finite (MvPowerSeries (Fin n) F) (QuotientModule f) ∧ Submodule.span (Ring f) (Set.range fun i : Fin n ↦ (relations f).mkQ ((1 : Ring f) ⊗ₜ[MvPowerSeries (Fin n) F] KaehlerDifferential.continuousD F (MvPowerSeries (Fin n) F) (variablesIdeal F n) (MvPowerSeries.X i))) = ⊤ ∧ Function.Bijective (AdicCompletion.of (maximalIdeal f) (QuotientModule f)) ∧ (∀ r : ℕ, (variablesIdeal F n ^ (r + 1) • (⊤ : Submodule (MvPowerSeries (Fin n) F) (QuotientModule f))) = (maximalIdeal f ^ (r + 1) • (⊤ : Submodule (Ring f) (QuotientModule f))).restrictScalars (MvPowerSeries (Fin n) F)) ∧ ∃ u : ∀ r : ℕ, KaehlerDifferential F (MvPowerSeries (Fin n) F ⧸ variablesIdeal F n ^ (r + 1)) →ₗ[MvPowerSeries (Fin n) F] KaehlerDifferential F (Truncation f r), (∀ (r : ℕ) (h : MvPowerSeries (Fin n) F), u r (KaehlerDifferential.D F _ (Ideal.Quotient.mk (variablesIdeal F n ^ (r + 1)) h)) = KaehlerDifferential.D F (Truncation f r) (Ideal.Quotient.mk (maximalIdeal f ^ (r + 1)) (Ideal.Quotient.mk (relationIdeal f) h))) ∧ ∃ (δ : Derivation F (Ring f) (QuotientModule f)) (φ : ∀ r : ℕ, QuotientModule f →ₗ[Ring f] KaehlerDifferential F (Truncation f r)), (∀ h : MvPowerSeries (Fin n) F, δ (Ideal.Quotient.mk (relationIdeal f) h) = (relations f).mkQ ((1 : Ring f) ⊗ₜ[MvPowerSeries (Fin n) F] KaehlerDifferential.continuousD F (MvPowerSeries (Fin n) F) (variablesIdeal F n) h)) ∧ (∀ (r : ℕ) (m : Differentials F n) (a : Ring f), φ r ((relations f).mkQ (a ⊗ₜ[MvPowerSeries (Fin n) F] m)) = a • u r (m.val r)) ∧ (∀ (r : ℕ) (x : Ring f), φ r (δ x) = KaehlerDifferential.D F (Truncation f r) (Ideal.Quotient.mk (maximalIdeal f ^ (r + 1)) x)) ∧ (∀ (r : ℕ) (z : QuotientModule f), KaehlerDifferential.adicTransition F (Ring f) (maximalIdeal f) r (φ (r + 1) z) = φ r z)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bef604c12",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean; statement verbatim in file. Every clause matches the node, with the level shift r↦r+1 consistent with the def's coordinates and the AdicCompletion level 0 being zero. u, δ, φ are existentials pinned on generators, hence canonical. hf is equivalent to I⊆𝔫, there are no extra instances or universe restrictions, and n=0, s=0 and r=0 are covered. Helpers are real with source/blueprint docstrings; proof is sorry with steps 1-5. No name clash; similar helpers in the Q02 theorem module are not citable as definitions. Not recompiled per instructions; no fixes."
+ }
+}

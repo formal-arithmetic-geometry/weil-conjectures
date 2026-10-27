@@ -1,0 +1,156 @@
+{
+ "id": "lem-tw-ordinary-completed-pullback-exact",
+ "kind": "statement",
+ "title": "Left exactness of ordinary completed coefficient pullback",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, and schemes T,W in an independent scheme universe. Use their small pro-etale sites and completed coefficient sheaves B_T,B_W. Equip g:T → W with the projection-defined completedRingMap of [lem-tw-completed-coefficient-ringed-coherence], and let g_B^* be the specified sheaf-module left adjoint of its sectionwise direct image [def-weil-sheaf-of-modules-category, def-weil-proetale-inverse-image]. Then g_B^* preserves finite limits. The coefficient and scheme universes are independent. Coefficients and their quotients are those of [def-weil-l-adic-coefficient-extension, def-weil-completed-integral-coefficients]; sites and scheme morphisms are [def-weil-pbc-proetale-site, def-weil-scheme-morphism-properties].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3 and 04JC; profinite inverse image from proetale.tex Tags 098T and 097N"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "def-tw-ordinary-immersion-chart-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply Padic.finite_coefficientExtensionRing to the actual lifted finite quotient tower. Shrink each finite carrier to the scheme universe and use the finite-test-object construction and its preserved geometric limit from the finite-tower representation module. Transport the finite-constant representability isomorphism through ULift and sheafification to the independent coefficient universe. The lifted Yoneda comparison then shows that the constructed set inverse image preserves this tower limit. Forgetting commutative rings commutes with inverse image, since the pointwise Kan-extension indices are filtered and forgetting preserves filtered colimits and sheafification. Reflect the preserved tower limit to ring sheaves. Each constant-ring comparison is invertible by uniqueness of the constant-sheaf adjunction. The completed coefficient sheaf is a limit cone on this tower: verify it after forgetting to RingCat, where it is the defining limit. The completedMap_projection equations make completedRingMap a morphism between the two limiting cones, so it is invertible.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-proetale-finite-tower-representation",
+    "lem-weil-pbc-proetale-finite-constant-representable",
+    "lem-pur-signed-line-sheaf-pullback-forget",
+    "lem-tw-completed-coefficient-ringed-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 097D, 098T; sites.tex Tags 00YV, 04D3; sites-modules.tex Tags 03D2, 04JC"
+   }
+  },
+  {
+   "text": "Use the preceding coefficient isomorphism and the unit compatibility of the forgetful inverse-image comparison to present the underlying set sheaf of B_T as inverse image of B_W, with exactly the structural unit specified by directRingMap. The general-universe SignedLine inverse-image adjunction identifies the underlying abelian sheaf of the specified module pullback with constructed abelian inverse image. Set and abelian inverse image preserve finite limits by flatness of pro-etale base change and exactness of the relevant filtered colimits. Module forgetting preserves and reflects finite limits. Reflect this preservation to the specified pull functor, unfolding its recorded adjoint instance.",
+   "uses": [
+    "lem-pur-signed-line-module-inverse-image-adjunction",
+    "lem-pur-signed-line-sheaf-pullback-forget",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2, 03D3 and 04JC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-proetale-finite-tower-representation",
+  "lem-weil-pbc-proetale-finite-constant-representable",
+  "lem-pur-signed-line-sheaf-pullback-forget",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "lem-pur-signed-line-module-inverse-image-adjunction",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3 and 04JC; coefficient tower from proetale.tex Tags 097D and 098T. P4 proof assembly, 2026-10-27; independent coefficient and scheme universes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackComp|restrictFunctorIsoPullback",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ll]imit|[Ll]imit.*pullback|overFunctor|localComparison",
+   "results": "Mathlib/Topology/Gluing.lean; Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean; Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean; Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean; Mathlib/Topology/Category/CompHausLike/Limits.lean",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of module sheaves when the structural ring map is an isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.inv_app; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf; SheafOfModules.instReflectsIsomorphismsPresheafOfModulesValRingCatForget; SheafOfModules.ιFree_mapFree_inv; PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\"",
+   "results": "PresheafOfModules.pullbackId; PresheafOfModules.pullbackObjIsDefined; PresheafOfModules.pullback; PresheafOfModules.pullbackObjIsDefined_eq_top; PresheafOfModules.pullbackObjIsDefined_free_yoneda; PresheafOfModules.pullbackPushforwardAdjunction; PresheafOfModules.pullbackComp; PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module sheaf inverse image is exact when the structural ring map is an isomorphism",
+   "results": "AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; SheafOfModules.pullbackIso; AlgebraicGeometry.Scheme.Hom.appIso_inv_app; AlgebraicGeometry.Scheme.Hom.inv_app; AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryImmersionChartComparison",
+  "date": "2026-10-23",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof, first sentence: the dual stalk is the dual representation. Proposition 6.6.11 and Remark 6.8.15: base-changed strata, covering slices and finite-projective ordinary pullback models. Agent extraction of original steps 2-3, with the model interfaces used by steps 1 and 4. Returned ordinary-model proof steps 4-5: ordinary derived square and representable chart comparison.",
+   "via": [
+    "lem-tw-ordinary-immersion-chart-comparison",
+    "lem-tw-ordinary-pullback-stratified-models",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryCompletedPullbackExact",
+  "file": "lean/Sheaf/Paper/OrdinaryCompletedPullbackExact.lean",
+  "declaration": "WeilConjectures.OrdinaryImmersionChart.ordinaryCompletedPullbackExact",
+  "statement": "theorem ordinaryCompletedPullbackExact {T W : Scheme.{t}} (g : T ⟶ W) : PreservesFiniteLimits (pull l E g)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-5e58c",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261024T190502-L-4070171",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T084437-L-3680810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

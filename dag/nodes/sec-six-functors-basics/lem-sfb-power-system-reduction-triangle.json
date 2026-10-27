@@ -1,0 +1,171 @@
+{
+ "id": "lem-sfb-power-system-reduction-triangle",
+ "kind": "statement",
+ "title": "Variable-power coefficient reduction and its actual unit triangle",
+ "statement": "Let l be a prime and T any scheme. Let r be any Reduction T (Rrings l T), as in [def-sp-tower-class-reduction, def-sp-tower-class-coefficients], and let p:powerUnits l T → units T have components Scheme.proEtaleUnitsPower T (l^(n+1)) at every n, with the systems of [def-sp-tower-class-systems]. There exists a morphism δ making single(powerUnits) --single(p)--> single(units) --η--> r.forget.F.mapDerivedCategory(r.derived(single(units))) --δ--> single(powerUnits)[1] a distinguished triangle in the ordinary derived category of whole abelian towers. Here η is the actual unit of r.derivedAdjunction. No invertibility of l on T, no Kummer short exact sequence, no roots object, and no module-action or cohomology comparison is assumed or concluded.",
+ "stmt_deps": [
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-coefficients",
+  "def-sp-tower-class-systems"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), coefficient resolution and unit; parent lem-sfb-kummer-reduction-unit proof step 1"
+ },
+ "proof": [
+  {
+   "text": "Use the constructed transition functor and multiplication transformation. Resolve the constant units complex by the torsion-free counit-computing resolution. Its twisted resolution map is a quasi-isomorphism because twisting leaves every evaluated complex unchanged.",
+   "uses": [
+    "def-sfb-power-transition-functor",
+    "lem-sfb-power-system-acyclic-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary cokernel lemma to every degree of the resolution. Its multiplication map is monic at every level by the resolution properties, so the cokernel sequences are short exact. Assemble these into a short exact sequence of cochain complexes.",
+   "uses": [
+    "lem-sfb-power-system-ordinary-cokernel",
+    "lem-sfb-power-system-acyclic-resolution",
+    "def-sfb-power-transition-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The short exact cochain sequence gives its standard distinguished triangle. Specialize r.model.transpose to the identity of the ordinary extended complex. This identifies its actual derived unit followed by the counit and exact-forgetting comparison with the localized ordinary unit. Invert the counit and compose with the resolution quasi-isomorphism; naturality of the derived unit then supplies the second square of the triangle isomorphism.",
+   "uses": [
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The twisted constant units complex identifies with single(powerUnits). At degree zero the multiplication transformation is l^(n+1) times the identity, hence is exactly p by hp and natural-transformation extensionality. Naturality of multiplication at the resolution map gives the first square. The explicit connecting arrow e3.inv ≫ delta_SES ≫ shift(e1.hom) gives the last square. Transport distinguishedness along this three-vertex isomorphism.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sfb-power-transition-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-power-transition-functor",
+  "lem-sfb-power-system-acyclic-resolution",
+  "lem-sfb-power-system-ordinary-cokernel",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-systems"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H5",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "ordinary quotient and resolution steps isolated; transition functor, short-exact assembly and actual-unit transport proved in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an inverse system of quotient rings Z/l^(n+1), restriction of derived extension of scalars fits into the distinguished triangle with multiplication by l^(n+1) and its adjunction unit",
+   "results": "ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.unit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived′_unit; no variable-coefficient triangle.",
+   "date": "2026-10-27",
+   "verdict": "No matching system calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with Z/n of a divisible abelian group is its n torsion shifted by one, with unit the short exact sequence boundary",
+   "results": "CategoryTheory.Tor, Tor′ and short-exact homology-sequence boundary formulas; none computes variable-exponent scalar extension on the sequence site.",
+   "date": "2026-10-27",
+   "verdict": "No matching triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived extension of scalars to a system of quotient rings is a cone of the multiplication map from power-transition units to constant units, with the adjunction unit as second arrow",
+   "results": "AdicCompletion.liftAlgHom, transitionMapₐ and localCohomology.diagram; no derived scalar unit triangle for varying quotient coefficients.",
+   "date": "2026-10-27",
+   "verdict": "No matching variable-exponent triangle."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.ShortExact.singleδ",
+   "results": "No hits from remote Loogle. Local source inspection found the singleTriangle and singleTriangle_distinguished APIs, which supply the Kummer assembly after the coefficient triangle.",
+   "date": "2026-10-27",
+   "verdict": "Generic triangle API only."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj|complete_distinguished_triangle_morphism",
+   "results": "Mathlib provides complete_distinguished_triangle_morphism and generic cohomology APIs, used in the proved assembly. Additional local searches in lean/Sheaf and lean/WeilConjectures found DivisibleExtensionDerivedReduction.unit_triangle, ScalarReductionUnitTriangle and ReductionSingleCohomologyNormalization only for constant exponent; KummerStrictTargetTransport has a different constant p-adic endpoint. The blueprint search reduction unit triangle found no existing variable-exponent triangle node.",
+   "date": "2026-10-27",
+   "verdict": "No existing declaration has these variable-exponent ring-system endpoints."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KummerReductionUnit",
+  "date": "2026-10-27",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "coefficient-resolution and actual-unit portion of simultaneous Kummer reduction",
+   "via": [
+    "lem-sfb-kummer-reduction-unit",
+    "lem-sfb-normalized-kummer-reduction",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PowerSystemReductionTriangle",
+  "file": "lean/Sheaf/Paper/PowerSystemReductionTriangle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.powerSystem_reduction_triangle",
+  "statement": "theorem powerSystem_reduction_triangle (l : ℕ) [Fact l.Prime] (T : Scheme.{u})\n    (r : Reduction T (Rrings l T)) (p : powerUnits l T ⟶ units T)\n    (hp : ∀ n : ℕ, p.app (op n) = Scheme.proEtaleUnitsPower T (l ^ (n + 1))) :\n    ∃ δ, Triangle.mk ((DerivedCategory.singleFunctor (Ab T) 0).map p)\n      (r.derivedAdjunction.unit.app ((DerivedCategory.singleFunctor (Ab T) 0).obj (units T)))\n      δ ∈ distTriang (DerivedCategory (Ab T))",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.KummerReductionUnit",
+  "worker": "stage3",
+  "summary": "Only the coefficient-resolution and actual-unit triangle remains. The parent proves the Kummer boundary comparison and reconstructs a linear pure object from its cohomology.",
+  "blueprint": "clause (2), simultaneous scalar reduction",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic universal K-flat scalar extension on the sequence site supplies the cochain model and its counit."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of a degreewise-flat K-flat resolution on the sequence site, before computing the quotient."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261027T050556-L-239387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T094418-L-223465",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

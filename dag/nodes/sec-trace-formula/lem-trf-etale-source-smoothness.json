@@ -14,9 +14,9 @@
  ],
  "proof": [
   {
-   "text": "For the forward implication, each etale morphism h_i is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Since f is smooth, the composite f∘h_i is smooth by [lem-trf-smooth-composition].",
+   "text": "For the forward implication, each etale morphism h_i is smooth by the Mathlib Etale.instSmooth instance for [def-weil-etale-morphism]. Since f is smooth, the composite f∘h_i is smooth by [lem-trf-smooth-composition].",
    "uses": [
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-weil-etale-morphism",
     "lem-trf-smooth-composition"
    ],
    "elementary": false,
@@ -26,7 +26,7 @@
    }
   },
   {
-   "text": "For the reverse implication, each h_i is flat and locally of finite presentation by [def-weil-etale-morphism]. Hence its image W_i=h_i(U_i) is open by [lem-weil-pbc-flat-lfp-open], and the W_i cover X by joint surjectivity. By [lem-weil-pbc-morphism-factors-through-open-subscheme], h_i factors uniquely through a map q_i:U_i→W_i; this factor is surjective because W_i is the image. Restricting a flat, locally finitely presented morphism to an open source and open target preserves those properties by the local definitions. The open restriction f|_{W_i} is the $f_{U,V}$ construction of [lem-weil-pbc-smooth-restrict-open-subschemes] with target open $V=S$. The composite of q_i with f|_{W_i} is f∘h_i, so the hypothesis makes it smooth. Applying [lem-sbc-smooth-flat-surjective-source-descent] to q_i shows that f|_{W_i} is smooth.",
+   "text": "For the reverse implication, each h_i is flat and locally of finite presentation by [def-weil-etale-morphism]. Hence its image W_i=h_i(U_i) is open by [lem-weil-pbc-flat-lfp-open], and the W_i cover X by joint surjectivity. By [lem-weil-pbc-morphism-factors-through-open-subscheme], h_i factors uniquely through a map q_i:U_i→W_i; this factor is surjective because W_i is the image. Restricting a flat, locally finitely presented morphism to an open source and open target preserves those properties by the local definitions. The open restriction f|_{W_i} is the $f_{U,V}$ construction of [lem-weil-pbc-smooth-restrict-open-subschemes] with target open $V=S$. The composite of q_i with f|_{W_i} is f∘h_i, so the hypothesis makes it smooth. Applying [lem-sbc-smooth-flat-surjective-source-descent] to q_i shows that f|_{W_i} is smooth. In Lean the factor is IsOpenImmersion.lift. Etale.of_comp applied to its composite with the open immersion makes the factor etale, hence flat and locally of finite presentation. Its surjectivity is proved directly from membership in the range. This is the private proved helper smooth_on_range_of_etale.",
    "uses": [
     "def-weil-etale-morphism",
     "lem-weil-pbc-flat-lfp-open",
@@ -52,10 +52,9 @@
    }
   },
   {
-   "text": "For the pointwise clause, suppose first that f is smooth on an open neighbourhood of h(u). The open restriction of f to that neighbourhood is the restriction described in [lem-weil-pbc-smooth-restrict-open-subschemes]. Restricting h to the inverse image of that neighbourhood gives an etale map, hence a smooth map by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], and [lem-trf-smooth-composition] gives smoothness of f∘h near u. Conversely, if f∘h is smooth on an open neighbourhood V of u, then h(V) is open by [lem-weil-pbc-flat-lfp-open] and contains h(u). The restriction h|_V factors through h(V) by [lem-weil-pbc-morphism-factors-through-open-subscheme]; it is surjective, flat, and locally of finite presentation. Its composite with f|_{h(V)} is smooth, so [lem-sbc-smooth-flat-surjective-source-descent] gives smoothness of f|_{h(V)}. Thus f is smooth at h(u).",
+   "text": "For the pointwise clause, suppose first that f is smooth on an open neighbourhood of h(u). The open restriction of f to that neighbourhood is the restriction described in [lem-weil-pbc-smooth-restrict-open-subschemes]. Restricting h to the inverse image of that neighbourhood gives an etale map, hence a smooth map by the Mathlib Etale.instSmooth instance for [def-weil-etale-morphism], and [lem-trf-smooth-composition] gives smoothness of f∘h near u. Conversely, if f∘h is smooth on an open neighbourhood V of u, then h(V) is open by [lem-weil-pbc-flat-lfp-open] and contains h(u). The restriction h|_V factors through h(V) by [lem-weil-pbc-morphism-factors-through-open-subscheme]; it is surjective, flat, and locally of finite presentation. Its composite with f|_{h(V)} is smooth, so [lem-sbc-smooth-flat-surjective-source-descent] gives smoothness of f|_{h(V)}. Thus f is smooth at h(u). The forward Lean proof uses morphismRestrict_ι_assoc and smooth composition. For the reverse implication, apply smooth_on_range_of_etale to the etale composite of the source-open inclusion with h; the point u witnesses membership of h(u) in its range.",
    "uses": [
     "def-weil-etale-morphism",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
     "lem-trf-smooth-composition",
     "lem-weil-pbc-flat-lfp-open",
     "lem-weil-pbc-morphism-factors-through-open-subscheme",
@@ -73,7 +72,6 @@
   "def-weil-etale-morphism",
   "lem-sbc-smooth-flat-surjective-source-descent",
   "lem-trf-smooth-composition",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
   "lem-weil-pbc-flat-lfp-open",
   "lem-weil-pbc-morphism-factors-through-open-subscheme",
   "lem-weil-pbc-smooth-local-on-source",
@@ -82,7 +80,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 036U, lemma-smooth-smooth-local-source and proof"
+  "place": "Tag 036U, lemma-smooth-smooth-local-source; open-image proof using smooth descent Tag 05B5, implemented by H4 with Mathlib Etale.instSmooth, IsOpenImmersion.lift, and Zariski source locality."
  },
  "mathlib_searches": [
   {
@@ -172,8 +170,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sbc-smooth-flat-surjective-source-descent",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+  "lem-sbc-smooth-flat-surjective-source-descent"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -205,5 +202,26 @@
   "result": "pass",
   "note": "Read the node, its 3 statement dependencies and their lean records, Stacks descent.tex 036U and its proof, report.md and the module. The global theorem matches every clause: Scheme.{u} objects, an arbitrary index I : Type v, [∀ i, Etale (h i)], point-level joint surjectivity worded as in the node, Smooth f ↔ ∀ i, Smooth (h i ≫ f), and no extra assumptions. The pointwise theorem writes smoothness on an open neighbourhood as existentials over X.Opens/U.Opens, avoiding smoothLocus's LocallyOfFinitePresentation requirement, and is correct in both directions. Edge cases (empty I, empty or repeated members, non-surjective h, empty U) are covered. No definitions; sorry-only proofs (axioms: sorryAx plus standard); docstrings carry the source, the blueprint id and proof steps 1-4. The node diff versus the side clone is only the lean field, and lean.statement is verbatim in the file. No name collision or existing match. The proof-only imports Smooth.of_comp_of_flat_of_surjective and smooth_and_fibre_dimension_zero_of_etale exist (#check). nt_compile --json on the snapshot file against the side overlay: clean, 2.5 s, no errors or warnings. The Second-reading section holds the standard post-10-17 direct-delivery note, accepted in 599 landed reports. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261023T102908-L-3000949",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

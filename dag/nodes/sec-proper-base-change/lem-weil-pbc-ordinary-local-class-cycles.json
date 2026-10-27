@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-ordinary-local-class-cycles",
+ "kind": "statement",
+ "title": "The ordinary abelian sheafification class on module cycles",
+ "statement": "Let Y be a ringed space, I any integer cochain complex of module sheaves on Y, q an integer, F its abelian presheaf-section functor and U the inclusion of abelian sheaves into presheaves. Put P=(I.sc(q)).map(F), and let k:P.cycles→F((I.sc(q)).cycles) be the inverse canonical kernel comparison. Then P.homologyπ followed by the abelian sheafification unit and U(localSectionComplexSheafificationIso(Y,q,I).hom) is k followed by F((I.sc(q)).homologyπ). The ordinary comparison is the exact functor and counit construction in [lem-trf-unbounded-direct-image-section-presheaf].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images, bounded-below-complex local class calculation; Tags 0BKJ and 0D5X"
+ },
+ "stmt_deps": [
+  "lem-trf-unbounded-direct-image-section-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply the generic adjoint homology comparison on cycles, proved in the module of the section cycle formula, to abelian sheafification and the short complex of underlying abelian sheaves. Identify the displayed exact sheafification comparison with that adjoint map followed by the exact homology comparison for module-to-abelian-sheaf forgetting.",
+   "uses": [
+    "lem-weil-pbc-section-cohomology-cycle-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Commute the cycle quotient through the latter exact functor. The two inverse kernel comparisons agree after composing with the monic kernel inclusion, hence agree. Substitute this identity to obtain the displayed class formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-section-cohomology-cycle-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images, bounded-below-complex local class calculation; Tags 0BKJ and 0D5X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of the unit to a right derived functor agrees with the sheafification adjunction unit on a complex",
+   "results": "8 hits, including plusPlusAdjunction_unit_app, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, toSheafify_plusPlusIsoSheafify_hom, sheafificationAdjunction_unit_app, Sheaf.adjunction_unit_app_val, toSheafify_plusPlusIsoSheafify_hom_assoc, plusPlusAdjunction_counit_app_val and GrothendieckTopology.sheafToPresheaf_map_sheafComposeNatTrans_eq_sheafifyCompIso_inv. None gives the normalized homology comparison.",
+   "date": "2026-10-26",
+   "verdict": "related adjunction formulas; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "1 hit: CategoryTheory.Adjunction.homEquiv_unit, expressing homEquiv by the unit followed by the right adjoint of the map. Used in the ordinary cycle calculation; not the derived or extension comparison.",
+   "date": "2026-10-26",
+   "verdict": "useful elementary adjunction identity; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexHomologyIso",
+   "results": "0 Mathlib hits. Repository search locates the adopted definition in WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso; its exact comparison is used.",
+   "date": "2026-10-26",
+   "verdict": "adopted exact-functor API; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DirectImageComplexLocalClass",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. Generic ordinary-unit/local-cocycle comparison. Agreement of classical resolution classes and derived local classes; Local class computation for a nonnegative K-injective direct-image complex; The ordinary abelian sheafification class on module cycles",
+   "via": [
+    "lem-weil-pbc-direct-image-complex-local-class",
+    "lem-weil-pbc-square-resolution-local-class",
+    "lem-weil-pbc-derived-square-local-classes",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryLocalClassCycles",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryLocalClassCycles.lean",
+  "declaration": "AlgebraicGeometry.ordinaryLocalClass_cycles",
+  "declarations": [
+   "AlgebraicGeometry.ordinaryLocalClass_cycles"
+  ],
+  "statement": "theorem ordinaryLocalClass_cycles {Y : RingedSpace.{u}}\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ) (q : ℤ) :\n    let F := RingedSpace.localAbelianSections Y\n    let U := sheafToPresheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}\n    let P := (I.sc q).map F\n    let k := (P.isoCyclesOfIsLimit\n      (KernelFork.mapIsLimit _ (I.sc q).cyclesIsKernel F)).inv\n    P.homologyπ ≫\n        (sheafificationAdjunction (Opens.grothendieckTopology Y) AddCommGrpCat.{u}).unit.app\n          P.homology ≫\n        U.map (RingedSpace.localSectionComplexSheafificationIso Y q I).hom =\n      k ≫ F.map (I.sc q).homologyπ",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T121039-L-2746413",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T121039-L-2746413",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

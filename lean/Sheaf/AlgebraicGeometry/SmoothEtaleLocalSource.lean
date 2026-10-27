@@ -13,7 +13,6 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.AlgebraicGeometry.Morphisms.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 
 /-!
 # Smoothness is étale local on the source
@@ -35,6 +34,31 @@ universe v u
 open CategoryTheory
 
 namespace AlgebraicGeometry
+
+private theorem smooth_on_range_of_etale
+    {U X S : Scheme.{u}} (h : U ⟶ X) (f : X ⟶ S) [Etale h]
+    [Smooth (h ≫ f)] :
+    Smooth (Scheme.Opens.ι (⟨Set.range h, h.isOpenMap.isOpen_range⟩ : X.Opens) ≫ f) := by
+  let V : X.Opens := ⟨Set.range h, h.isOpenMap.isOpen_range⟩
+  change Smooth (V.ι ≫ f)
+  let q : U ⟶ V.toScheme :=
+    IsOpenImmersion.lift V.ι h (by rw [Scheme.Opens.range_ι]; exact Set.Subset.rfl)
+  have hq : q ≫ V.ι = h := IsOpenImmersion.lift_fac _ _ _
+  have : Etale q := by
+    have : Etale (q ≫ V.ι) := hq.symm ▸ inferInstance
+    exact Etale.of_comp q V.ι
+  have : Surjective q := by
+    constructor
+    intro z
+    obtain ⟨y, hy⟩ := z.property
+    refine ⟨y, ?_⟩
+    apply V.ι.isOpenEmbedding.injective
+    rw [← Scheme.Hom.comp_apply, hq]
+    exact hy
+  have : Smooth (q ≫ (V.ι ≫ f)) := by
+    rw [← Category.assoc, hq]
+    infer_instance
+  exact Smooth.of_comp_of_flat_of_surjective q (V.ι ≫ f)
 
 /-- Smoothness is equivalent to smoothness after a jointly surjective étale source family.
 The index type may be empty; joint surjectivity then forces the source to be empty.
@@ -60,7 +84,21 @@ theorem smooth_iff_of_jointly_surjective_etale
     (h : ∀ i : I, U i ⟶ X) [∀ i : I, Etale (h i)]
     (hcover : ∀ x : X, ∃ (i : I) (y : U i), h i y = x) :
     Smooth f ↔ ∀ i : I, Smooth (h i ≫ f) := by
-  sorry
+  constructor
+  · intro hf i
+    have : Smooth f := hf
+    infer_instance
+  · intro hf
+    let V : I → X.Opens := fun i ↦ ⟨Set.range (h i), (h i).isOpenMap.isOpen_range⟩
+    have hV : iSup V = ⊤ := by
+      apply top_le_iff.mp
+      intro x _
+      obtain ⟨i, y, hy⟩ := hcover x
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, y, hy⟩
+    apply IsZariskiLocalAtSource.of_iSup_eq_top (P := @Smooth) V hV
+    intro i
+    have : Smooth (h i ≫ f) := hf i
+    exact smooth_on_range_of_etale (h i) f
 
 /-- Étale precomposition preserves and detects smoothness at a point. Here smoothness at a
 point means smoothness on an open neighbourhood, expressed directly by the two existentials.
@@ -84,6 +122,17 @@ theorem smooth_at_iff_of_etale
     {U X S : Scheme.{u}} (h : U ⟶ X) (f : X ⟶ S) [Etale h] (u : U) :
     (∃ V : X.Opens, h u ∈ V ∧ Smooth (V.ι ≫ f)) ↔
       ∃ W : U.Opens, u ∈ W ∧ Smooth (W.ι ≫ h ≫ f) := by
-  sorry
+  constructor
+  · rintro ⟨V, hu, hV⟩
+    refine ⟨h ⁻¹ᵁ V, hu, ?_⟩
+    have : Smooth (V.ι ≫ f) := hV
+    rw [← morphismRestrict_ι_assoc]
+    infer_instance
+  · rintro ⟨W, hu, hW⟩
+    let g := W.ι ≫ h
+    have : Etale g := by dsimp [g]; infer_instance
+    have : Smooth (g ≫ f) := by simpa only [g, Category.assoc] using hW
+    refine ⟨⟨Set.range g, g.isOpenMap.isOpen_range⟩, ?_, smooth_on_range_of_etale g f⟩
+    exact ⟨⟨u, hu⟩, rfl⟩
 
 end AlgebraicGeometry

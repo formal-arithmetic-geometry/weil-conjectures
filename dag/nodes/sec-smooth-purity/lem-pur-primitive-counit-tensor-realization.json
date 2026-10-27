@@ -1,0 +1,147 @@
+{
+ "id": "lem-pur-primitive-counit-tensor-realization",
+ "kind": "statement",
+ "title": "Tensor realization on strict quotient models",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and arbitrary schemes, with independent site and coefficient universes. Use the actual coherent reduction/total-limit adjunction $S$, its system derived tensor and canonical reduction presentations [lem-coef-derived-system-evaluation-calculus], the completed integral operations on good flat-term K-flat representatives [lem-pur-integral-operations-well-defined], and a projection- and resolution-normalized Roos realization [def-sf-primitive-tensor-realization-data]. For every scheme $W$, reduction datum $S$ on $W$ and normalized Roos realization $\\rho$ on $W$, there exists a natural isomorphism $r:K\\widehat\\otimes_W H\\cong\\mathcal L_W(S(K)\\otimes S(H))$. It satisfies the predicate $\\operatorname{TensorModel}(S,\\rho,r)$ of [def-sf-primitive-tensor-realization-data]: simultaneous strict quotient representatives, their actual finite tensor components and all transitions, and the equality with the specified Roos realization on every pair of good complexes. No counit invertibility, beta comparison or beta naturality is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, with strict quotient-system models and the normalized functor-descent argument in steps 1--3 of lem-pur-completed-primitive-counit-comparison."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-integral-operations-well-defined",
+  "def-sf-primitive-tensor-realization-data",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Apply quotientSystemFlatModels to the actual coefficient ring map and use the reduction presentation of S. Its good and computes clauses give whole-system K-flat representatives of both reductions, with the canonical finite evaluation maps and quotient transitions. The system tensor model identifies their total tensor with the derived system tensor.",
+   "uses": [
+    "lem-pur-quotient-system-flat-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict scalars to the completed ring. Apply flatRoosFunctorDescent to the tensor tower and compare its two descents using integralCompletedTensorComparison and the specified reduction presentations. Localization uniqueness on the product of good categories gives r; its representative equality is exactly TensorModel. Normalize by the given Roos resolution equation, which identifies comparisons on resolutions and hence all inputs.",
+   "uses": [
+    "lem-pur-flat-roos-functor-descent",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-quotient-system-flat-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-flat-roos-functor-descent",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, with strict quotient-system models and the normalized functor-descent argument in steps 1--3 of lem-pur-completed-primitive-counit-comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between Roos complex and right derived inverse limit normalized on K-injective complexes",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the hits concern ordinary algebraic completion, tensor models of ring presentations or generic adjunction and derived-functor infrastructure, not the prescribed strict quotient-model normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"IsIso\"",
+   "results": "12 hits: CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1, CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful, CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit, CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit, CategoryTheory.Adjunction.mem_essImage_of_counit_isIso, CategoryTheory.Adjunction.instIsIsoAppCounitOfFullOfFaithful",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the hits concern ordinary algebraic completion, tensor models of ring presentations or generic adjunction and derived-functor infrastructure, not the prescribed strict quotient-model normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedCoefficientSequence|counit.*isIso",
+   "results": "20 hits: Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the hits concern ordinary algebraic completion, tensor models of ring presentations or generic adjunction and derived-functor infrastructure, not the prescribed strict quotient-model normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection normalized Roos realization for completed tensor and geometric inverse image on strict coefficient quotient systems",
+   "results": "8 hits: AdicCompletion.kerProj, Submodule.linearProjOfIsCompl, IsLprojection.mk, IsLprojection, Submodule.IsCompl.projection, Submodule.linearProjOfClosedCompl, PolynomialLaw.π, IsLprojection.rec",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the hits concern ordinary algebraic completion, tensor models of ring presentations or generic adjunction and derived-functor infrastructure, not the prescribed strict quotient-model normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "RoosRealization|TensorModel|PullModel",
+   "results": "7 hits: Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the hits concern ordinary algebraic completion, tensor models of ring presentations or generic adjunction and derived-functor infrastructure, not the prescribed strict quotient-model normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"limit\"",
+   "results": "12 hits: TensorProduct.fromDirectLimit, TensorProduct.toDirectLimit, TensorProduct.directLimitLeft, TensorProduct.directLimitRight, TensorProduct.fromDirectLimit_of_tmul, TensorProduct.toDirectLimit_tmul_of, TensorProduct.directLimitLeft_tmul_of, TensorProduct.directLimitRight_tmul_of",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the hits concern ordinary algebraic completion, tensor models of ring presentations or generic adjunction and derived-functor infrastructure, not the prescribed strict quotient-model normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between completed tensor or completed inverse image and the derived limit of strict coherent quotient reductions normalized on K-flat representatives",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-27",
+   "verdict": "No direct match: the hits concern ordinary algebraic completion, tensor models of ring presentations or generic adjunction and derived-functor infrastructure, not the prescribed strict quotient-model normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPrimitiveCounitComparison",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The natural Weil isomorphism commuting with finite reduction: strict quotient realization of completed tensor and inverse image, the realization subargument of lem-pur-completed-primitive-counit-comparison steps 1--3.",
+   "via": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrimitiveCounitTensorRealization",
+  "file": "lean/Sheaf/Paper/PrimitiveCounitTensorRealization.lean",
+  "declaration": "WeilConjectures.primitiveCounitTensorRealization",
+  "statement": "theorem primitiveCounitTensorRealization\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})\n    (S : CoefficientDerivedSystemReduction l E W)\n    (ρ : PrimitiveCounit.RoosRealization l E W) :\n    ∃ r : integralCompletedTensor l E W ≅\n      S.reduction.prod S.reduction ⋙ S.systemClosed.tensor ⋙ coefficientSequenceLimit l E W,\n      PrimitiveCounit.TensorModel l E W S ρ r",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-662ac",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T050615-L-243965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-662ac",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T050615-L-243965",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules vs clone original (verbatim relocation diffed), new sorry statements vs Comparisons fields/nodes, node lean/proof fields vs Lean; 12 direct importers compiled OK against delivered .lbuild; axioms probe (roos_exists clean, comparisons_exists sorryAx only via the two new realization holes)"
+ }
+}

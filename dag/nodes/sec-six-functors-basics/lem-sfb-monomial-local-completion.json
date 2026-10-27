@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-monomial-local-completion",
+ "kind": "statement",
+ "title": "Completion of a monomial quotient at its coordinate origin",
+ "statement": "Let $k$ be a field, let $r\\ge0$, and put $P=k[T_1,\\ldots,T_r]$ [def-weil-pbc-mv-polynomial-ring]. Let $\\alpha_1,\\ldots,\\alpha_s\\in\\mathbf N^r\\setminus\\{0\\}$ be a finite list, possibly empty, and set $J=(T^{\\alpha_1},\\ldots,T^{\\alpha_s})$, $A=P/J$ and $\\mathfrak m=(\\overline T_1,\\ldots,\\overline T_r)\\subset A$. Let $D=\\bigcup_{i=1}^s(\\alpha_i+\\mathbf N^r)$. With maximal-ideal-adic completion [def-weil-pbc-adic-completion] and localization [def-weil-pbc-localization-at-prime], the map sending each $T_i$ to its germ induces a canonical isomorphism\n$$k[[T_1,\\ldots,T_r]]/Jk[[T_1,\\ldots,T_r]]\\ \\xrightarrow{\\sim}\\ \\widehat{A_{\\mathfrak m}}$$\n[def-weil-pbc-multivariate-power-series]. Every class on the left has a unique representative $\\sum_{\\beta\\notin D}c_\\beta T^\\beta$. For every $N\\ge1$, truncation to $|\\beta|<N$ identifies both sides modulo the $N$th power of their coordinate maximal ideals with $P/(J+(T_1,\\ldots,T_r)^N)$; these identifications commute with all truncation maps and with the displayed isomorphism. For $r=0$ the list is necessarily empty and the assertion is the identity of $k$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent coefficientwise inverse-limit calculation extracted from inherited step 4, generalized to finitely generated monomial ideals; Tag 0315 (lemma-completion-generalities) is the supporting completion reference. This statement gives the explicit monomial quotient and localization comparison, not only completion of an exact sequence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak q=(T_1,\\ldots,T_r)\\subset P$ and $B_N=P/(J+\\mathfrak q^N)$. From the finite monomial expansion [def-weil-pbc-mv-polynomial-ring], $\\mathfrak q^N$ is spanned by monomials of total degree at least $N$: split off $N$ variable factors in each such monomial. Similarly $J$ is spanned by monomials with exponent in $D$: each is divisible by some $T^{\\alpha_i}$, and multiplication cannot leave this upper set. Thus every element of $B_N$ has unique coefficients on $\\{\\beta\\notin D:|\\beta|<N\\}$. Reduction $B_M\\to B_N$ for $M\\ge N$ deletes coefficients of degree at least $N$. Evaluation at zero gives $A/\\mathfrak m=k$, since all $\\alpha_i\\ne0$; hence $\\mathfrak m$ is maximal.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00M9 (section-completion), compatible quotient sequences, lines 22530--22555; agent-written monomial coefficient and fraction calculations, expanding the inherited completion calculation. Tag 0315 is supporting context, not a black-box quotient-completion theorem."
+   }
+  },
+  {
+   "text": "Write $S=k[[T_1,\\ldots,T_r]]$ and $K=(T^{\\alpha_1},\\ldots,T^{\\alpha_s})S$. By the convolution formula [def-weil-pbc-multivariate-power-series], every element of $K$ has coefficients zero outside $D$. Conversely, for $F=\\sum_{\\beta\\in D}c_\\beta T^\\beta$, assign each $\\beta$ to the least $i$ with $\\alpha_i\\le\\beta$ coordinatewise, and define $G_i$ to have coefficient $c_\\beta$ at $\\beta-\\alpha_i$ for assigned $\\beta$, and zero elsewhere. Then $F=\\sum_{i=1}^sT^{\\alpha_i}G_i$, coefficient by coefficient; the outer sum is finite. Deleting the $D$ coefficients of any series therefore gives its representative in $Q=S/K$, and two such representatives differ by $K$ only when all their coefficients agree. This proves the required unique representative without a closure-of-ideal assertion.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00M9 (section-completion), compatible quotient sequences, lines 22530--22555; agent-written monomial coefficient and fraction calculations, expanding the inherited completion calculation. Tag 0315 is supporting context, not a black-box quotient-completion theorem."
+   }
+  },
+  {
+   "text": "For a series supported in degrees at least $N$, assign each exponent $\\beta$ to one chosen degree-$N$ vector $\\gamma\\le\\beta$, for example by taking the first $N$ variable factors in coordinate order. There are finitely many such $\\gamma$. Factoring as in step 2 expresses the series as $\\sum_{|\\gamma|=N}T^\\gamma H_\\gamma$. Thus the series with zero coefficients in degrees below $N$ are exactly $(T_1,\\ldots,T_r)^NS$. The reverse inclusion follows from convolution. In $Q$ the corresponding statement is read on the unique representative of step 2, since $D$ is upward closed. In particular the kernel of constant coefficient on $Q$ is $\\mathfrak n=(\\overline T_1,\\ldots,\\overline T_r)Q$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00M9 (section-completion), compatible quotient sequences, lines 22530--22555; agent-written monomial coefficient and fraction calculations, expanding the inherited completion calculation. Tag 0315 is supporting context, not a black-box quotient-completion theorem."
+   }
+  },
+  {
+   "text": "Constant coefficient has quotient $k$. Every series $F=c+H$ with $c\\ne0$ and $H$ of zero constant coefficient is invertible: $c^{-1}\\sum_{j\\ge0}(-c^{-1}H)^j$ is a defined series, since each fixed coefficient receives contributions only from $j\\le|\\beta|$. The finite geometric identity in each degree proves it is an inverse. It descends to an inverse in $Q$. Therefore the nonunits of $Q$ are exactly $\\mathfrak n$, so $Q$ is local with coordinate maximal ideal $\\mathfrak n$. This uses the actual coefficient operations of [def-weil-pbc-multivariate-power-series], with no assertion about convergence in an unspecified topology.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00M9 (section-completion), compatible quotient sequences, lines 22530--22555; agent-written monomial coefficient and fraction calculations, expanding the inherited completion calculation. Tag 0315 is supporting context, not a black-box quotient-completion theorem."
+   }
+  },
+  {
+   "text": "Truncation defines $\\tau_N:S\\to B_N$, $F\\mapsto[\\sum_{|\\beta|<N}c_\\beta T^\\beta]$. The sum is finite. It is additive and multiplicative: in degree below $N$, each coefficient of a product uses only coefficients in degrees below $N$; all other polynomial terms lie in $\\mathfrak q^N$. It kills $K$. Steps 1--3 show that the induced surjection $Q\\to B_N$ has kernel $\\mathfrak n^N$, since it kills precisely the surviving coefficients of degree below $N$. It identifies $Q/\\mathfrak n^N$ with $B_N$. The formulas commute with reduction in $N$ and preserve constants and variables.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00M9 (section-completion), compatible quotient sequences, lines 22530--22555; agent-written monomial coefficient and fraction calculations, expanding the inherited completion calculation. Tag 0315 is supporting context, not a black-box quotient-completion theorem."
+   }
+  },
+  {
+   "text": "Put $L=A_{\\mathfrak m}$ with maximal ideal $\\mathfrak mL$ [def-weil-pbc-localization-at-prime]. The map $A\\to B_N=A/\\mathfrak m^N$ inverts every $s\\notin\\mathfrak m$: write its image as $c+h$, $c\\in k^\\times$, $h^N=0$, and use $c^{-1}\\sum_{j=0}^{N-1}(-c^{-1}h)^j$. Define $L\\to B_N$ on $a/s$ as $[a][s]^{-1}$. The fraction equality criterion makes it well defined, since every multiplier outside $\\mathfrak m$ also becomes a unit; addition and multiplication of fractions give a ring map. It kills $(\\mathfrak mL)^N$ and is inverse, on $a/1$ and on inverted denominators, to $B_N\\to L/(\\mathfrak mL)^N$. Thus $L/(\\mathfrak mL)^N\\cong B_N$, compatibly for all $N$, through the original polynomial maps.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00M9 (section-completion), compatible quotient sequences, lines 22530--22555; agent-written monomial coefficient and fraction calculations, expanding the inherited completion calculation. Tag 0315 is supporting context, not a black-box quotient-completion theorem."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-adic-completion], $\\widehat L$ consists of compatible elements of $L/(\\mathfrak mL)^N$. Compose step 5 with the inverse of step 6 at each $N$ to define $\\Phi:Q\\to\\widehat L$. This is a ring map because operations in the completion are coordinatewise. It is injective: a surviving coefficient $c_\\beta$ is read at any $N>|\\beta|$. For surjectivity, rewrite a compatible family using $B_N$ and step 1; for each $\\beta\\notin D$ take its coefficient at $N=|\\beta|+1$. Compatibility makes this coefficient the same at every larger level. Set all $D$ coefficients to zero. This series exists by [def-weil-pbc-multivariate-power-series], and its truncation at every $N$ is the prescribed element of $B_N$. It is a preimage. On every polynomial, $\\Phi$ is its germ followed by completion, so this is the asserted canonical isomorphism.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00M9 (section-completion), compatible quotient sequences, lines 22530--22555; agent-written monomial coefficient and fraction calculations, expanding the inherited completion calculation. Tag 0315 is supporting context, not a black-box quotient-completion theorem."
+   }
+  },
+  {
+   "text": "The images under $\\Phi$ of the generators of $\\mathfrak n$ are exactly the coordinate germs in $\\widehat L$. Thus $\\Phi(\\mathfrak n^N)$ is the $N$th power of their generated ideal: apply $\\Phi$ and its inverse to finite sums of products of these generators. By step 4 and the isomorphism, that ideal is the maximal ideal of $\\widehat L$. Steps 5--7 identify the quotient on either side with precisely $B_N$ through truncation, and the coordinate formula for $\\Phi$ makes the comparison commute with all transitions. If $r=0$, there is no nonzero vector in $\\mathbf N^0$, so $s=0$, $J=0$, $D=\\varnothing$, and $P=S=A=L=k$. All positive-level quotients and transition maps are identities, giving the identity of $k$. Empty or redundant generator lists in positive dimension are also allowed: the partitions above give zero or redundant summands without changing the coefficients.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00M9 (section-completion), compatible quotient sequences, lines 22530--22555; agent-written monomial coefficient and fraction calculations, expanding the inherited completion calculation. Tag 0315 is supporting context, not a black-box quotient-completion theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section Tag 00M9 (section-completion), compatible quotient sequences, lines 22530--22555; agent-written monomial coefficient and fraction calculations, expanding the inherited completion calculation. Tag 0315 is supporting context, not a black-box quotient-completion theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a field k and a monomial ideal J in finitely many variables contained in the coordinate maximal ideal, the completed local ring at the origin of k[x]/J is k[[x]]/J, with coefficient basis the monomials outside J.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.idealX\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → IsDedekindDomain.HeightOneSpectrum (PowerSeries K)\", \"doc\": \"The definition constructs the ideal generated by the formal variable $ X $ in the ring of univariate power series $ K⟦X⟧ $ over a field $ K $. This ideal is shown to be a prime ideal of height one (vi\"}\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : Polynomial A} →\\n      {I : Ideal A} →\\n        g.IsDistinguishedAt I →\\n          [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {g}) ≃ₐ[A] PowerSeries A ⧸ Ideal.span {↑g}\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"PowerSeries.maximalIdeal_eq_span_X\", \"module\": \"Mathlib/RingTheory/PowerSeries/Inverse\", \"type\": \"∀ {k : Type u_2} [inst : Field k], IsLocalRing.maximalIdeal (PowerSeries k) = Ideal.span {PowerSeries.X}\", \"doc\": \"If $ k $ is a local ring, then the maximal ideal of the ring of univariate power series $ k⟦X⟧ $ is equal to the ideal generated by the formal variable $ X $.\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A} (H : g.IsDistinguishedAt I)\\n  [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {g}),\\n  H.algEquivQuotient a = (Ideal.quotientMapₐ (Ideal.span {↑g}) (Polynomial.coeToPowerSeries.algHom A) ⋯) a\", \"doc\": \"For a commutative ring $ A $, a distinguished polynomial $ g $ at an ideal $ I $, and an element $ a $ in the quotient ring $ A[X]/(g) $, the algebra isomorphism $ H.\\\\text{algEquivQuotient} $ maps $ a\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {f}),\\n  H.algEquivQuotient a =\\n    (Ideal.quotientEquivAlgOfEq A ⋯) ((Ideal.quotient\", \"doc\": \"Let $A$ be a commutative ring that is $I$-adically complete for some ideal $I \\\\subseteq A$. Let $g \\\\in A⟦X⟧$ be a power series that has a Weierstrass factorization $g = \\\\hat{f} \\\\cdot h$, where $f \\\\in \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {f : Polynomial A} →\\n        {h : PowerSeries A} →\\n          {I : Ideal A} →\\n            g.IsWeierstrassFactorizationAt f h I →\\n              [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {f}) ≃ₐ[A] PowerSeries A ⧸ Ideal.sp\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A} (H : g.IsDistinguishedAt I)\\n  [inst_1 : IsAdicComplete I A] (a : PowerSeries A ⧸ Ideal.span {↑g}),\\n  H.algEquivQuotient.symm a = (Ideal.Quotient.mk (Ideal.span {g})) (⋯.mod' a)\", \"doc\": \"For a commutative ring $ A $, a polynomial $ g $ distinguished at an ideal $ I $, and an element $ a $ in the quotient ring $ A⟦X⟧ / (g) $, the inverse of the algebra equivalence $ \\\\phi $ satisfies $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"Ideal\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"MvPowerSeries.hasEvalIdeal\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Evaluation\", \"type\": \" {σ : Type u_1} {S : Type u_3} [CommRing S] [TopologicalSpace S] [IsTopologicalRing S] [IsLinearTopology S S] : Ideal (σ → S)\", \"doc\": \"The domain of evaluation of `MvPowerSeries`, as an ideal\"}\n  {\"name\": \"MvPowerSeries.mem_hasEvalIdeal_iff\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Evaluation\", \"type\": \" {σ : Type u_1} {S : Type u_3} [CommRing S] [TopologicalSpace S] [IsTopologicalRing S] [IsLinearTopology S S] {a : σ → S} : a ∈ MvPowerSeries.hasEvalIdeal ↔ MvPowerSeries.HasEval a\", \"doc\": \"\"}\n  {\"name\": \"MvPowerSeries.coe_hasEvalIdeal\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Evaluation\", \"type\": \" {σ : Type u_1} {S : Type u_3} [CommRing S] [TopologicalSpace S] [IsTopologicalRing S] [IsLinearTopology S S] : ↑MvPowerSeries.hasEvalIdeal = {a | MvPowerSeries.HasEval a}\", \"doc\": \"\"}\n  {\"name\": \"MvPowerSeries.hasSubstIdeal\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Substitution\", \"type\": \" {σ : Type u_1} {τ : Type u_4} {S : Type u_5} [CommRing S] : Ideal (σ → MvPowerSeries τ S)\", \"doc\": \"Families of `MvPowerSeries` that can be substituted, as an `Ideal`\"}\n  {\"name\": \"MvPowerSeries.truncTotal_sub_truncTotal_mem_pow_idealOfVars\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Equiv\", \"type\": \" {σ : Type u_1} {R : Type u_2} [CommRing R] [Finite σ] {l m n : ℕ} (h : l ≤ m) (h' : l ≤ n) (p : MvPowerSeries σ R) : (MvPowerSeries.truncTotal m) p - (MvPowerSeries.truncTotal n) p ∈ MvPolynomial.idealOfVars σ R ^ l\", \"doc\": \"\"}\n  {\"name\": \"MvPowerSeries.truncTotal_mul_sub_mul_truncTotal_mem_pow_idealOfVars\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Equiv\", \"type\": \" {σ : Type u_1} {R : Type u_2} {n : ℕ} [CommRing R] [Finite σ] (p q : MvPowerSeries σ R) : (MvPowerSeries.truncTotal n) (p * q) - (MvPowerSeries.truncTotal n) p * (MvPowerSeries.truncTotal n) q ∈ MvPolynomial.idealOfVars σ R ^ n\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]onomial.*([Ii]deal|[Qq]uotient)|([Cc]ompletion|[Aa]dic).*MvPolynomial|MvPolynomial.*([Cc]ompletion|[Aa]dic)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"220\", \"text\": \"    simp [AdicCompletion.algebraMap_apply, ← MvPolynomial.coe_X, toAdicCompletion_coe]\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"223\", \"text\": \"  exact AdicCompletion.isAdicComplete (MvPolynomial.idealOfVars_fg σ R)\"}\n  {\"file\": \"Mathlib/RingTheory/Nullstellensatz.lean\", \"line\": \"16\", \"text\": \"The main statement of the theorem is `MvPolynomial.vanishingIdeal_zeroLocus_eq_radical`.\"}\n  {\"file\": \"Mathlib/RingTheory/Nullstellensatz.lean\", \"line\": \"114\", \"text\": \"theorem radical_le_vanishingIdeal_zeroLocus (I : Ideal (MvPolynomial σ k)) :\"}\n  {\"file\": \"Mathlib/RingTheory/Nullstellensatz.lean\", \"line\": \"172\", \"text\": \"theorem vanishingIdeal_zeroLocus_eq_radical (I : Ideal (MvPolynomial σ k)) :\"}\n  {\"file\": \"Mathlib/RingTheory/ReesAlgebra.lean\", \"line\": \"74\", \"text\": \"theorem reesAlgebra.monomial_mem {I : Ideal R} {i : ℕ} {r : R} :\"}\n  {\"file\": \"Mathlib/RingTheory/ReesAlgebra.lean\", \"line\": \"79\", \"text\": \"theorem monomial_mem_adjoin_monomial {I : Ideal R} {n : ℕ} {r : R} (hr : r ∈ I ^ n) :\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"286\", \"text\": \"      AdicCompletion (MvPolynomial.idealOfVars σ R) (MvPolynomial σ R) :=\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"287\", \"text\": \"  AdicCompletion.liftAlgHom (MvPolynomial.idealOfVars σ R) (truncTotalAlgHom σ R)\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"306\", \"text\": \"theorem toAdicCompletion_coe (p : MvPolynomial σ R) :\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"307\", \"text\": \"    toAdicCompletion σ R p = .of (MvPolynomial.idealOfVars σ R) (MvPolynomial σ R) p := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"316\", \"text\": \"    (f : AdicCompletion (MvPolynomial.idealOfVars σ R) (MvPolynomial σ R)) :\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Monad.lean\", \"line\": \"15\", \"text\": \"This file defines two monadic operations on `MvPolynomial`. Given `p : MvPolynomial σ R`,\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Monad.lean\", \"line\": \"83\", \"text\": \"`join₁` is the monadic join operation corresponding to `MvPolynomial.bind₁`. Given a polynomial `p`\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Monad.lean\", \"line\": \"92\", \"text\": \"`join₂` is the monadic join operation corresponding to `MvPolynomial.bind₂`. Given a polynomial `p`\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Ideal.lean\", \"line\": \"19\", \"text\": \"Notably this contains results about monomial ideals.\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Ideal.lean\", \"line\": \"37\", \"text\": \"/-- `x` is in a monomial ideal generated by `s` iff every element of its support dominates one of\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Ideal.lean\", \"line\": \"52\", \"text\": \"/-- `x` is in a monomial ideal generated by variables `X` iff every element of its support\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Ideal.lean\", \"line\": \"85\", \"text\": \"    simpa [monomial_add_single] using Ideal.mul_mem_left _ _ (Ideal.subset_span (by simp))\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Ideal.lean\", \"line\": \"115\", \"text\": \"theorem monomial_mem_pow_idealOfVars_iff (n : ℕ) (x : σ →₀ ℕ) {r : R} (h : r ≠ 0) :\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Division.lean\", \"line\": \"24\", \"text\": \"  `divMonomial` and `modMonomial` are well-behaved as quotient and remainder operators.\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Quotient.lean\", \"line\": \"95\", \"text\": \"  rw [eval₂_monomial (C.comp (Quotient.mk I)) X]\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Quotient.lean\", \"line\": \"123\", \"text\": \"      simp only [← smul_X_eq_monomial, C_mul', Quotient.lift_mk, Submodule.Quotient.quot_mk_eq_mk,\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Quotient.lean\", \"line\": \"134\", \"text\": \"      simp only [← smul_X_eq_monomial, ← C_mul' a (X ^ n), Quotient.lift_mk,\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/ContentIdeal.lean\", \"line\": \"76\", \"text\": \"theorem contentIdeal_monomial (n : ℕ) (r : R) : (monomial n r).contentIdeal = span {r} := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of the localization of a monomial polynomial quotient at the origin equals the formal power series quotient.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalization.Away.mvPolynomialQuotientEquiv\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Localization\", \"type\": \": ((MvPolynomial Unit R) ⧸ Ideal.span {C r * X () - 1}) ≃ₐ[R] S\", \"doc\": \"The quotient ring $ R[X]/(rX - 1) $ is isomorphic to the localization $ R[1/r] $ as an $ R $-algebra, where the isomorphism is given by evaluating polynomials at $ X = r^{-1} $ and mapping $ rX $ to 1\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \": (A[X] ⧸ Ideal.span { g }) ≃ₐ[A] A⟦X⟧ ⧸ Ideal.span {(g : A⟦X⟧)}\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsAdicComplete I A] : (A[X] ⧸ Ideal.span { f }) ≃ₐ[A] A⟦X⟧ ⧸ Ideal.span { g }\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"LaurentSeries.powerSeries_ext_subring\", \"module\": \"Mathlib.RingTheory.LaurentSeries\", \"type\": \":\\n  Subring.map (LaurentSeriesRingEquiv K).toRingHom (powerSeries_as_subring K) =\\n    ((idealX K).adicCompletionIntegers (RatFunc K)).toSubring\", \"doc\": \"The image of the power series subring under the canonical embedding into the Laurent series ring equals the subring obtained by completing the polynomial ring $ K[X] $ with respect to the ideal genera\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R Rₘ\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a multiplicative set, then the algebra structure map $ R \\\\to S $ is formally étale, meaning it satisfies the infinitesimal lifting property ch\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \": FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}\n  {\"name\": \"LocalizedModule.Away\", \"module\": \"Mathlib.Algebra.Module.LocalizedModule.Away\", \"type\": \"{R : Type*} [CommSemiring R] (x : R) (M : Type*) [AddCommMonoid M] [Module R M]\", \"doc\": \"The module $ M $ localized with respect to the multiplicative set generated by all positive powers of $ x $, constructed as the Ore localization using the submonoid $ \\\\{x^n \\\\mid n \\\\in \\\\mathbb{N}\\\\} $.\"}\n  {\"name\": \"LaurentSeries.powerSeriesRingEquiv\", \"module\": \"Mathlib.RingTheory.LaurentSeries\", \"type\": \": K⟦X⟧ ≃+* (idealX K).adicCompletionIntegers (RatFunc K)\", \"doc\": \"There is a ring isomorphism between the formal power series ring $ K⟦X⟧ $ and the adic completion of the valuation subring of rational functions $ \\\\text{RatFunc}(K) $ at the ideal generated by $ X $. \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series quotient by a monomial ideal described by coefficients supported outside the ideal and completion of the polynomial local ring.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.weierstrassDiv\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      PowerSeries A → PowerSeries A → [IsPrecomplete (IsLocalRing.maximalIdeal A) A] → PowerSeries A\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, and power series $ f, g \\\\in A[[X]] $, the Weierstrass division of $ f $ by $ g $ is defined as follows: if the image of $ g $ \"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.div\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {I : Ideal A} → g.IsWeierstrassDivisorAt I → PowerSeries A → [IsPrecomplete I A] → PowerSeries A\", \"doc\": \"The power series obtained by taking the stabilized coefficients from the Weierstrass division sequence, constructed as the formal power series whose $i$-th coefficient is the stabilized value modulo $\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {I : Ideal A} →\\n        g.IsWeierstrassDivisorAt I → [IsAdicComplete I A] → PowerSeries A ⧸ Ideal.span {g} →ₗ[A] Polynomial A\", \"doc\": \"A linear map from the quotient ring of formal power series $ A⟦X⟧ $ modulo the ideal generated by a Weierstrass divisor $ g $ to the polynomial ring $ A[X] $. This map is constructed by lifting the qu\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : Polynomial A} →\\n      {I : Ideal A} →\\n        g.IsDistinguishedAt I →\\n          [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {g}) ≃ₐ[A] PowerSeries A ⧸ Ideal.span {↑g}\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {I : Ideal A} → g.IsWeierstrassDivisorAt I → PowerSeries A → [IsPrecomplete I A] → Polynomial A\", \"doc\": \"The polynomial remainder obtained by Weierstrass division of $ f $ by $ g $, truncated at degree equal to the order of the leading coefficient of $ g $ in the quotient ring $ R/I $. This constructs th\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {f : Polynomial A} →\\n        {h : PowerSeries A} →\\n          {I : Ideal A} →\\n            g.IsWeierstrassFactorizationAt f h I →\\n              [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {f}) ≃ₐ[A] PowerSeries A ⧸ Ideal.sp\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} → [inst : CommRing A] → PowerSeries A → Ideal A → Prop\", \"doc\": \"A power series $ g $ satisfies the Weierstrass divisor condition at an ideal $ I $ if the coefficient of $ X^{\\text{ord}(g)} $ in the image of $ g $ under the quotient map $ R \\to R/I $ is a unit in the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not give this full statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.*[Ii]deal|[Ii]deal.*monomial|equivAdicCompletion|ideal_span_X|idealOfVars",
+   "results": "Actual search returned 5 hits; top results: Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: full monomial quotient, localization, coefficient normal forms and truncation statement is not given by these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a monomial polynomial quotient localized at its coordinate maximal ideal, via compatible truncations.",
+   "results": "Actual search returned 8 hits; top results: AdicCompletion, isLocalRing_of_isAdicComplete_maximal, IsLocalization.Away.mvPolynomialQuotientEquiv, Polynomial.trunc_toLaurent, LaurentPolynomial.trunc, IsLocalization.AtPrime.equivQuotMaximalIdeal.congr_simp, PowerSeries.IsWeierstrassDivisorAt.mod, Polynomial.isIntegral_isLocalization_polynomial_quotient. ",
+   "date": "2026-10-23",
+   "verdict": "no match: full monomial quotient, localization, coefficient normal forms and truncation statement is not given by these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, AdicCompletion",
+   "results": "Actual search returned 10 hits; top results: MvPowerSeries.toAdicCompletionInv, MvPowerSeries.toAdicCompletion, MvPowerSeries.toAdicCompletionAlgEquiv, MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply, MvPowerSeries.toAdicCompletionAlgEquiv_apply, MvPowerSeries.toAdicCompletion_coe, MvPowerSeries.coeff_toAdicCompletionInv, MvPowerSeries.coeff_toAdicCompletion_val_apply_out. ",
+   "date": "2026-10-23",
+   "verdict": "no match: full monomial quotient, localization, coefficient normal forms and truncation statement is not given by these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization at the origin of a quotient of a polynomial ring by a finitely generated monomial ideal has completion the power series ring modulo that ideal, with unique coefficients outside the monomial upper set.",
+   "results": "Actual search returned 8 hits; top results: Polynomial.IsDistinguishedAt.algEquivQuotient, Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply, PowerSeries.algEquivQuotientWeierstrassDistinguished, Polynomial.IsDistinguishedAt.algEquivQuotient_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply, LaurentSeries.powerSeriesAlgEquiv, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: full monomial quotient, localization, coefficient normal forms and truncation statement is not given by these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal multivariate series are the inverse limit of polynomial quotients by powers of the variable ideal, and completion commutes with a finitely generated monomial quotient and localization at the origin.",
+   "results": "Actual search returned 8 hits; top results: PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply, Polynomial.IsDistinguishedAt.algEquivQuotient, LaurentSeries.powerSeriesAlgEquiv, LaurentSeries.powerSeriesRingEquiv, Polynomial.IsDistinguishedAt.algEquivQuotient_apply, Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient. ",
+   "date": "2026-10-23",
+   "verdict": "no match: full monomial quotient, localization, coefficient normal forms and truncation statement is not given by these hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; de Jong Lemma 3.13: explicit local equation and one singular-point blowup, before global resolution or domination; inherited step 4: the completed local ring at the crossing, via compatible monomial truncations",
+   "via": [
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-monomial-local-completion",
+  "worker": "stage1",
+  "summary": "Q149 supplies an explicit coefficientwise proof with finite generator partitions, finite geometric inverses in localized truncations and compatible coefficient reconstruction. Statement unchanged; no new nodes. Every step is an elementary calculation from the four existing definitions, with no exactness or Noetherian completion theorem invoked.",
+  "blueprint": "Retains the inherited null blueprint ancestor and full via chain from det-thm-sf-ctf-stability-direct-images proof (3), through the nodal chart calculation. Realizes the inherited step 4 completion argument: completed crossing via monomial truncations; steps 1--5 give the monomial normal forms and truncations, step 6 the localization comparison, steps 7--8 the completion and compatibility. The current parent uses this auxiliary result for the geometric nodal fibre J=(xy)."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-4503bc3e2",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-4503bc3e2 (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full. There are no new nodes; the statement is identical to the live and side-live nodes, which are still unsplit, so the delivery is not superseded and there is no repair note. Source checks: Stacks algebra.tex §00M9 (lines 22520-22555, completion as compatible sequences) and Tag 0315 lemma-completion-generalities (line 22571) are supporting context, and proof_origin is correctly agent-written. The four cited nodes (mv-polynomial-ring, multivariate-power-series, localization-at-prime, adic-completion) are Mathlib-leaf definitions, and each step takes exactly what their statements say. Mathematics checked: (1) monomial bases of B_N, and A/m=k because every alpha_i is nonzero; (2) K=JS is exactly the set of series supported in D, by a least-index partition that needs no closure; (3) n^N means vanishing in degrees below N on the representatives, which I checked through K's D-support; (4) the geometric inverse makes Q local; (5) truncation is a ring map that kills K, with Q/n^N≅B_N; (6) for s not in m, the image c+h with h^N=0 has a finite inverse, so L/(mL)^N≅B_N via the fraction criterion, with no Noetherian hypothesis; (7) Phi: Q→L^ is injective and surjective by levelwise coefficients; (8) maximal ideals, powers and the r=0 case. Edge cases tested: r=0; s=0; (T^2); (xy), which is the parent's use with k=Omega; (x^2,xy); redundant generators; N=1. The duplicate candidates lem-trf-nodal-polynomial-model-completion and lem-trf-rational-nodal-completion-algebra are different statements. Not a Mathlib leaf: toAdicCompletionAlgEquiv covers only the polynomial ring. No SGA, no tool_uses, proof_deps equals the union of uses. No faults."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonomialLocalCompletion",
+  "declaration": "MonomialLocalCompletion.monomial_local_completion",
+  "declarations": [
+   "MonomialLocalCompletion.polynomialIdeal",
+   "MonomialLocalCompletion.seriesIdeal",
+   "MonomialLocalCompletion.PolynomialQuotient",
+   "MonomialLocalCompletion.SeriesQuotient",
+   "MonomialLocalCompletion.polynomialOrigin",
+   "MonomialLocalCompletion.seriesOrigin",
+   "MonomialLocalCompletion.LocalRing",
+   "MonomialLocalCompletion.CompleteLocalRing",
+   "MonomialLocalCompletion.completedGerm",
+   "MonomialLocalCompletion.completedOrigin",
+   "MonomialLocalCompletion.FiniteQuotient",
+   "MonomialLocalCompletion.finiteTransition",
+   "MonomialLocalCompletion.monomial_local_completion"
+  ],
+  "file": "lean/Sheaf/RingTheory/MonomialLocalCompletion.lean",
+  "statement": "theorem monomial_local_completion (k : Type u) [Field k] (r s : ℕ) (α : Fin s → (Fin r →₀ ℕ)) (hα : ∀ i, α i ≠ 0) : (r = 0 → s = 0) ∧ (∀ x : SeriesQuotient k α, ∃! F : MvPowerSeries (Fin r) k, Ideal.Quotient.mk (seriesIdeal k α) F = x ∧ ∀ β : Fin r →₀ ℕ, (∃ i : Fin s, α i ≤ β) → MvPowerSeries.coeff β F = 0) ∧ ∃ p : PrimeSpectrum (PolynomialQuotient k α), p.asIdeal = polynomialOrigin k α ∧ p.asIdeal.IsMaximal ∧ (seriesOrigin k α).IsMaximal ∧ ∃ e : SeriesQuotient k α ≃+* CompleteLocalRing k α p, (∀ f : MvPolynomial (Fin r) k, e (Ideal.Quotient.mk (seriesIdeal k α) (f : MvPowerSeries (Fin r) k)) = completedGerm k α p (Ideal.Quotient.mk (polynomialIdeal k α) f)) ∧ (completedOrigin k α p).IsMaximal ∧ ∃ E : ∀ N : ℕ, 1 ≤ N → (SeriesQuotient k α ⧸ seriesOrigin k α ^ N) ≃+* FiniteQuotient k α N, ∃ F : ∀ N : ℕ, 1 ≤ N → (CompleteLocalRing k α p ⧸ completedOrigin k α p ^ N) ≃+* FiniteQuotient k α N, (∀ (N : ℕ) (hN : 1 ≤ N) (G : MvPowerSeries (Fin r) k), E N hN (Ideal.Quotient.mk (seriesOrigin k α ^ N) (Ideal.Quotient.mk (seriesIdeal k α) G)) = Ideal.Quotient.mk (polynomialIdeal k α ⊔ MvPolynomial.idealOfVars (Fin r) k ^ N) (MvPowerSeries.truncTotal N G)) ∧ (∀ (N : ℕ) (hN : 1 ≤ N) (x : SeriesQuotient k α), F N hN (Ideal.Quotient.mk (completedOrigin k α p ^ N) (e x)) = E N hN (Ideal.Quotient.mk (seriesOrigin k α ^ N) x)) ∧ (∀ (N M : ℕ) (hN : 1 ≤ N) (hM : 1 ≤ M) (h : N ≤ M) (x : SeriesQuotient k α ⧸ seriesOrigin k α ^ M), finiteTransition k α h (E M hM x) = E N hN (Ideal.Quotient.factor (Ideal.pow_le_pow_right h) x)) ∧ (∀ (N M : ℕ) (hN : 1 ≤ N) (hM : 1 ≤ M) (h : N ≤ M) (x : CompleteLocalRing k α p ⧸ completedOrigin k α p ^ M), finiteTransition k α h (F M hM x) = F N hN (Ideal.Quotient.factor (Ideal.pow_le_pow_right h) x))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-215656adf",
+  "group": "N8",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: field k (universe u free), r,s:ℕ, α:Fin s→(Fin r→₀ℕ) with α i≠0 (needed); J, A=P/J, m=image of idealOfVars, A_m via ∃p pinned by p.asIdeal=polynomialOrigin (maximality concluded), maximal-ideal AdicCompletion; unique representative ∃! with (∃i, α i≤β)→coeff=0 = support off D; ring iso e normalized on every polynomial via completedGerm (unique by continuity+density, not arbitrary); E,F for N≥1 into P/(J⊔(T)^N), E = truncTotal N (degree<N), F∘e=E, both transition squares correct; seriesOrigin/completedOrigin maximal; r=0→s=0. Edge cases r=0, s=0, redundant gens, N=1, (xy) ok. Only lean field differs from live node; statement verbatim; docstrings with source/blueprint and 8 proof steps; no hollow defs; only sorry; no H4 duplicate (toAdicCompletionAlgEquiv unquotiented; lem-trf-nodal-polynomial-model-completion different). No file changed, no recompile."
+ }
+}

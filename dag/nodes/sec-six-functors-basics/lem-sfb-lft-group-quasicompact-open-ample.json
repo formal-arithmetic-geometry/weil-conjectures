@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-lft-group-quasicompact-open-ample",
+ "kind": "statement",
+ "title": "Ample invertible module on a quasi-compact open in a locally finite type group",
+ "statement": "Let $k$ be any field [def-weil-field] and $H/k$ a separated group scheme locally of finite type [def-sc-group-scheme, def-weil-finite-type-morphism]; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. If $U\\subseteq H$ is a quasi-compact open subscheme [def-weil-open-immersion, def-weil-finite-type-morphism], then $U$ is a finite-type $k$-scheme and admits an absolutely ample invertible $\\mathcal O_U$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. The open $U$ need not be a subgroup or a union of connected components; $H$ need not be quasi-compact, smooth, reduced, connected or commutative, and $k$ need not be perfect.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 0B7R (proposition-connected-component) and 0BF7 (lemma-algebraic-quasi-projective), adapted from finite-type groups to quasi-compact opens of locally finite type groups; varieties.tex Tag 0BDC (lemma-ample-after-field-extension). Over an algebraic closure a quasi-compact open meets finitely many clopen translates of the finite-type neutral group; restrict the ample modules on those translates and descend existence of an ample module. This extension to opens is the auxiliary assertion, not the finite-type-group assertion itself."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "For $u\\in U$, choose an affine finite-type chart $\\operatorname{Spec}A\\subseteq H$ containing $u$. Principal opens are a basis, so choose $D(f)$ containing $u$ inside $U\\cap\\operatorname{Spec}A$. The ring $A_f$ is generated over $k$ by generators of $A$ and $f^{-1}$. Thus $U$ is locally of finite type. Quasi-compactness selects finitely many such charts, proving that $U/k$ is of finite type by [def-weil-finite-type-morphism]. This argument also applies when $U$ is empty, with the empty cover.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T0, definition-finite-type; principal-open localization calculation."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $K/k$ and form $H_K$ and $U_K$ using [def-pc-fibre-product]. Multiplication, inverse and unit of $H$ base change to $H_K$; their group diagrams still commute, since equality can be checked on both projections in the fibre-product universal property. Thus $H_K$ is a group scheme. It is locally of finite type by [lem-weil-pbc-lft-base-change]. By [lem-weil-pbc-open-immersion-base-change], $U_K$ is open in $H_K$, and by [lem-sfb-finite-type-composition-base-change] applied to the finite-type scheme $U/k$ of step 1, $U_K/K$ is finite type, hence quasi-compact.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-pc-fibre-product",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, lemma-algebraic-quasi-projective, first reduction; Morphisms Tag 01T4, lemma-base-change-finite-type."
+   }
+  },
+  {
+   "text": "By [lem-sfb-lft-field-group-neutral-component], $C=(H_K)^0$ is a clopen finite-type subgroup with its original open-subscheme structure. Every connected component $D$ of $H_K$ contains a $K$-point: for $x\\in D$, the nonempty closure $Z=\\overline{\\{x\\}}$ is connected and lies in $D$ by maximality of the component. The Jacobson statement [lem-sc-lft-over-field-jacobson-space] gives a point $z\\in Z$ closed in $H_K$. By [lem-weil-pbc-closed-point-residue-field-base], its residue field is $K$ over $K$, giving $g\\in H_K(K)$ in $D$. The translation $L_g$ is an isomorphism with inverse $L_{g^{-1}}$ by [lem-sc-translation-automorphism]; its defining formula gives $L_g(e)=g$. A homeomorphism carries a maximal connected subset to a maximal connected subset, so $L_g(C)=D$. Restricting the inverse scheme isomorphisms to these opens gives $C\\simeq D$. Hence all components are clopen finite-type schemes. They partition $H_K$: the union of connected subsets through a point is connected and maximal, and two such maximal sets that intersect coincide. Quasi-compactness of $U_K$ now gives finitely many components $D_1,\\ldots,D_r$ covering $U_K$.",
+   "uses": [
+    "lem-sfb-lft-field-group-neutral-component",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-sc-group-scheme-translate",
+    "lem-sc-translation-automorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0B7R, proposition-connected-component, and 0BF7, lemma-algebraic-quasi-projective, component reduction; Varieties Tag 0478 and Morphisms Tag 01TB."
+   }
+  },
+  {
+   "text": "The finite-type group $C/K$ is separated by [lem-sc-group-scheme-separated-field]. Thus [lem-sfb-finite-type-group-ample-line] supplies an ample invertible module $A$ on $C$. Put $U_j=U_K\\cap D_j$. It is closed in the quasi-compact space $U_K$ because $D_j$ is clopen, hence is quasi-compact. Under $D_j\\simeq C$, the inclusion $U_j\\subseteq D_j$ becomes an open immersion $a_j:U_j\\to C$. Apply [lem-sfb-ample-pullback-qc-immersion] to obtain the ample invertible module $B_j=a_j^*A$ on $U_j$. This is precisely where one must allow $U$ to cut a component in a proper open subset.",
+   "uses": [
+    "lem-sc-group-scheme-separated-field",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-ample-pullback-qc-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0B3E, lemma-ample-on-locally-closed, condition (2); Groupoids Tag 0BF7."
+   }
+  },
+  {
+   "text": "The $U_j$ form a finite disjoint clopen cover of $U_K$. Define $B(V)=\\prod_{j=1}^r B_j(V\\cap U_j)$ with componentwise module operations and restriction maps. The sheaf axiom holds factor by factor, and locally on $U_j$ this is $B_j$, so $B$ is invertible. For $x\\in U_j$, ampleness of $B_j$ gives $n\\geq1$ and a section $s_j$ of $B_j^{\\otimes n}$ with affine nonvanishing locus containing $x$. The componentwise description of tensor powers lets us extend $s_j$ by zero to a section of $B^{\\otimes n}$ on $U_K$. Its nonvanishing locus is exactly the same affine open of $U_j$. Since $U_K$ is quasi-compact, these witnesses verify [def-weil-pbc-ample-invertible-module], so $B$ is ample. For $r=0$, $U_K$ is empty and the unique module is locally invertible and ample by the same definition.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS, definition-ample, finite disjoint clopen gluing and zero extension."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ample-existence-field-extension] to the $k$-scheme $U$, the field extension $K/k$, and the ample invertible module $B$ on $U_K$. It supplies an absolutely ample invertible module on $U$; this descends existence and does not assert descent of the specified module $B$. Step 1 already proved the finite-type assertion.",
+   "uses": [
+    "lem-sfb-ample-existence-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BDC, lemma-ample-after-field-extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-translate",
+  "def-sc-invertible-module",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-group-scheme-separated-field",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-translation-automorphism",
+  "lem-sfb-ample-existence-field-extension",
+  "lem-sfb-ample-pullback-qc-immersion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-finite-type-group-ample-line",
+  "lem-sfb-lft-field-group-neutral-component",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Adaptation of Tags 0B7R and 0BF7 to quasi-compact opens of locally finite type groups; Properties Tag 0B3E(2), Varieties Tag 0BDC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "group.*[Qq]uasi[Pp]rojective|[Aa]mple.*group|group.*[Aa]mple",
+   "results": "{\"t\": \"2026-10-24T15:28:13Z\", \"tool\": \"grep\", \"query\": \"group.*[Qq]uasi[Pp]rojective|[Aa]mple.*group|group.*[Aa]mple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact open in a locally algebraic group over any field admits an ample line bundle",
+   "results": "{\"t\": \"2026-10-24T15:28:13Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact open in a locally algebraic group over any field admits an ample line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.isCompactOpen_iff_eq_basicOpen_union\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"AlgebraicGeometry.isCompact_basicOpen\"], \"digest\": \"a05723f3cb231c4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Ample\"",
+   "results": "{\"t\": \"2026-10-24T15:28:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Ample\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact open subscheme of a group scheme locally of finite type over a field is quasi projective and has an ample invertible sheaf",
+   "results": "{\"t\": \"2026-10-24T15:28:16Z\", \"tool\": \"leanfinder\", \"query\": \"Every quasi compact open subscheme of a group scheme locally of finite type over a field is quasi projective and has an ample invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\"], \"digest\": \"5d8f6cdddf68eb49\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|groupScheme|piZero|componentScheme",
+   "results": "{\"t\": \"2026-10-24T15:30:38Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|groupScheme|piZero|componentScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type open subscheme of a locally algebraic group is quasi projective even if the group is not quasi compact",
+   "results": "{\"t\": \"2026-10-24T15:30:40Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type open subscheme of a locally algebraic group is quasi projective even if the group is not quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\"], \"digest\": \"02bd0f341f868771\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact open of a separated group scheme locally of finite type over a field admits an ample invertible sheaf",
+   "results": "{\"t\": \"2026-10-24T16:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact open of a separated group scheme locally of finite type over a field admits an ample invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"5a564951ad1bad06\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern quasi-affine schemes, immersion geometry, compactness or unrelated convex ample sets, and do not assert ampleness of an invertible module."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"Ample\"",
+   "results": "{\"t\": \"2026-10-24T16:06:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"Ample\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern quasi-affine schemes, immersion geometry, compactness or unrelated convex ample sets, and do not assert ampleness of an invertible module."
+  },
+  {
+   "tool": "grep",
+   "query": "group.*quasi.?projective|ample.*group|group.*ample",
+   "results": "{\"t\": \"2026-10-24T16:06:28Z\", \"tool\": \"grep\", \"query\": \"group.*quasi.?projective|ample.*group|group.*ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern quasi-affine schemes, immersion geometry, compactness or unrelated convex ample sets, and do not assert ampleness of an invertible module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite type open in a locally algebraic group has an ample line bundle",
+   "results": "{\"t\": \"2026-10-24T16:06:29Z\", \"tool\": \"leansearch\", \"query\": \"Every finite type open in a locally algebraic group has an ample line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"AlgebraicGeometry.LocallyOfFiniteType.rec\", \"AlgebraicGeometry.Scheme.AffineZariskiSite\"], \"digest\": \"c295af1ff53698d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern quasi-affine schemes, immersion geometry, compactness or unrelated convex ample sets, and do not assert ampleness of an invertible module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type open subscheme of a locally algebraic group is quasi projective even for an infinite number of connected components",
+   "results": "{\"t\": \"2026-10-24T16:07:54Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type open subscheme of a locally algebraic group is quasi projective even for an infinite number of connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\"], \"digest\": \"4446f506cc1871d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No matching declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-fpqc-group-form-effectivity",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Ample invertible module on a quasi-compact open in a locally finite type group; field-fibre effectivity used in Anantharaman 4.1 before the trait component-envelope argument (inherited blueprint ancestry).",
+   "via": [
+    "lem-sfb-field-fpqc-group-form-effectivity",
+    "lem-sfb-trait-component-minimal-envelope",
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-lft-group-quasicompact-open-ample",
+  "worker": "stage1",
+  "summary": "Kept the statement; proved finite type by localized charts, reduced to an algebraic closure, proved component translations for the locally finite type ambient group without assuming it quasi-compact, restricted the neutral group ample line to finitely many clopen pieces, glued by zero extension, and descended existence. One new general immersion ampleness node; all group and descent inputs reused.",
+  "blueprint": "Ample invertible module on a quasi-compact open in a locally finite type group; field-fibre effectivity used in Anantharaman 4.1 before the trait component-envelope argument (inherited blueprint ancestry). The auxiliary is not explicitly present in the current blueprint; realizes the existing field-effectivity prerequisite along the inherited chain. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic Fibre product of schemes used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "def-sc-group-scheme",
+    "why": "Generic Group schemes over a field used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "def-sc-group-scheme-translate",
+    "why": "Generic Translations and conjugation used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "def-sc-invertible-module",
+    "why": "Generic Invertible modules and their duals used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "def-weil-algebraic-closure",
+    "why": "Generic Algebraic closure of a field used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic Morphisms of finite type used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Generic Open immersion of schemes used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "Generic Ample invertible module on a scheme (absolute ampleness) used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-sc-group-scheme-separated-field",
+    "why": "Generic A group scheme over a field is separated used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic Schemes locally of finite type over a field are Jacobson used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-sc-translation-automorphism",
+    "why": "Generic Translations are automorphisms used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic Finite-type morphisms are stable under composition and base change used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic Residue fields of closed points over an algebraically closed field used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic Locally of finite type is stable under base change used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic Base change of an open immersion is an open immersion (Stacks 01JY) used only in the component-and-ampleness assembly; this auxiliary unit has no replacement for its statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-translate",
+  "def-sc-invertible-module",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-group-scheme-separated-field",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-translation-automorphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-c66980897",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-c66980897 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node lem-sfb-ample-pullback-qc-immersion, and the statement of every cited node. Sources checked against the Stacks tex: 0B3E(2) at properties.tex:4759 (X' quasi-compact and i an immersion ⇒ i^*L ample) is stated exactly by the new node. 0BDC at varieties.tex:2740 matches lem-sfb-ample-existence-field-extension. 0BF7 at groupoids.tex:1365 and 0B7R at 1013: the proof follows their reduction, extended from finite-type groups to quasi-compact opens; proof_origin is correctly agent. Step 1: localizing a finite-type chart at a principal open plus quasi-compactness gives finite type, including U empty. Step 2: lft and open-immersion base change are mathlib leaves, and finite-type base change is applied to U, not to H. Step 3: the neutral-component lemma covers any field and non-quasi-compact lft groups. Every connected component contains a closed point by the Jacobson lemma, that point is K-rational by the residue-field lemma, and translation by it maps C onto the component; the quasi-compact U_K meets only finitely many components. Step 4: C is separated and of finite type, so the finite-type-group ample lemma applies. Each U_j is clopen in U_K, hence quasi-compact, so 0B3E(2) restricts the ample module to U_j; this is needed when U is a proper open of a component. Step 5: gluing on a finite disjoint clopen cover with zero-extended witnesses is elementary; the existing lem-trf-finite-coproduct-ample-with-points would also serve but citing it is optional. Step 6: 0BDC. The new node is not a duplicate: lem-trf-ample-restrict-closed-immersion covers closed immersions only, lem-weil-pbc-pullback-ample-invertible covers affine morphisms only, and lem-trf-proj-qc-open-twist-ample is about twisting sheaves on Proj; rg finds no other 0B3E node, and Mathlib has no notion of ampleness. Edge cases tested: empty U, alpha_p, an infinite constant group, an elliptic curve E times an infinite constant group with U a proper open of one component, identity and empty immersions. The off-unit citations declared in tool_uses are generic and accepted. Batch-5: the closure of lem-sfb-ample-existence-field-extension reaches lem-trf-invertible-affine-limit-descent (Limits 0B8W) and only other generic limit/finitely-presented-module descent lemmas. The closure of lem-sfb-finite-type-group-ample-line reaches lem-trf-smooth-geometrically-normal (Varieties 056T) and other generic UFD, flatness and fppf-descent lemmas, plus the mathlib leaf lem-pod-separated-finite-type-base-change. There is no trace-formula or Poincaré-duality statement, no trace-transport and no nt-target in either closure, so both are genuinely outside the assumptions. No SGA is cited. The statement is unchanged. No fixes were made."
+ }
+}

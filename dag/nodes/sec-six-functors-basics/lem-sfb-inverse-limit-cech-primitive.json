@@ -1,0 +1,447 @@
+{
+ "id": "lem-sfb-inverse-limit-cech-primitive",
+ "kind": "statement",
+ "title": "Continuous inverse-limit Cech primitive with prescribed first reduction",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $q:T\\to S$ be a continuous surjection of profinite spaces, meaning compact Hausdorff totally disconnected spaces. For $r\\geq1$, let $P_r=\\{(t_0,\\ldots,t_{r-1})\\in T^r:q(t_i)=q(t_j)\\text{ for all }i,j\\}$ with the subspace topology, as in [def-sfb-profinite-cech-tuples]. For a topological abelian group $M$, write $C^k(M)=C(P_{k+1},M)$ for all continuous maps, with pointwise addition, and for $k\\geq0$ define\n$$(d_k^M c)(t_0,\\ldots,t_{k+1})=\\sum_{j=0}^{k+1}(-1)^j c(t_0,\\ldots,\\widehat{t_j},\\ldots,t_{k+1}),$$\nwhere the signs act by the additive group law. Let $(A_m,p_m)_{m\\geq1}$ be a sequence of finite discrete abelian groups and surjective homomorphisms $p_m:A_{m+1}\\twoheadrightarrow A_m$. Give\n$$L=\\{(x_m)\\in\\prod_{m\\geq1}A_m:p_m(x_{m+1})=x_m\\text{ for all }m\\geq1\\}$$\nthe subspace topology of the product and coordinatewise addition, and write $\\rho_m:L\\to A_m$ for the projections. Fix $n\\geq1$, a continuous $f\\in C^n(L)$ satisfying $d_n^L f=0$, and a prescribed $u_1\\in C^{n-1}(A_1)$ satisfying $d_{n-1}^{A_1}u_1=\\rho_1\\circ f$. Then there exists a continuous $u\\in C^{n-1}(L)$ such that\n$$d_{n-1}^L u=f,\\qquad \\rho_1\\circ u=u_1.$$\nEquivalently, its reductions $u_m=\\rho_m\\circ u$ satisfy $p_m\\circ u_{m+1}=u_m$ and $d_{n-1}^{A_m}u_m=\\rho_m\\circ f$ for every $m\\geq1$. Empty spaces and zero groups are included. The conclusion concerns actual continuous maps into the specified inverse-limit topology.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.3.9(2), (4), printed page 33: compatible primitive induction and inverse-limit reconstruction; returned proof steps 4, 6 (induction conclusion) and 7. Agent-formulated pointwise Cech lemma, not asserted verbatim by the paper."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-profinite-cech-tuples"
+ ],
+ "proof": [
+  {
+   "text": "Put $f_m=\\rho_m\\circ f$. Each $\\rho_m$ is continuous, being a product projection restricted to $L$, so $f_m$ is continuous. An additive homomorphism $a:M\\to N$ commutes with every finite signed sum, hence $d_k^N(a\\circ c)=a\\circ d_k^M c$. In particular $d_n^{A_m}f_m=0$ and $p_m\\circ f_{m+1}=f_m$ for every $m\\geq1$, the latter equality being a defining equation of $L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(4), agent expansion of the compatible coefficient tower: coordinate naturality."
+   }
+  },
+  {
+   "text": "For each $m\\geq1$ let $X_m$ be the set of continuous $w:P_n\\to A_m$ satisfying $d_{n-1}^{A_m}w=f_m$. The prescribed $u_1$ belongs to $X_1$. For every $w\\in X_m$, apply [lem-sfb-finite-coefficient-cech-primitive-lift] with the same $q:T\\to S$, the same positive $n$, $A=A_m$, $B=A_{m+1}$, $p=p_m$, $c=f_{m+1}$ and prescribed primitive $w$. The tuple spaces and differentials in that statement are exactly the ones here. Both groups are finite discrete, $p_m$ is surjective, $f_{m+1}$ is a continuous cocycle, and $d_{n-1}^{A_m}w=f_m=p_m\\circ f_{m+1}$. It gives $v\\in X_{m+1}$ with $p_m\\circ v=w$. Choose such a successor for each pair $(m,w)$. Recursion starting at the given $u_1$ then extends a finite family $(u_1,\\ldots,u_m)$ by this successor of its last entry. Its invariant is $u_i\\in X_i$ for $1\\leq i\\leq m$, $p_i\\circ u_{i+1}=u_i$ for $1\\leq i<m$, and first entry equal to the prescribed $u_1$. The base case was checked; appending $v$ preserves the old entries and adds precisely the two equations just obtained. Thus the resulting sequence has all the required equations for every $m\\geq1$ and retains the prescribed first entry.",
+   "uses": [
+    "lem-sfb-finite-coefficient-cech-primitive-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(2),(4), agent expansion: compatible primitive induction using the existing finite-coefficient lifting statement."
+   }
+  },
+  {
+   "text": "Define $u(x)=(u_m(x))_{m\\geq1}$ for $x\\in P_n$. The compatibility just proved puts this tuple in the specified subset $L$. A basic open set of $L$ is the intersection with $L$ of a finite-coordinate cylinder $\\bigcap_{m\\in F}\\operatorname{pr}_m^{-1}(V_m)$, with $F$ finite and each $V_m\\subset A_m$ open. Its inverse image under $u$ is $\\bigcap_{m\\in F}u_m^{-1}(V_m)$, an open set. Arbitrary opens are unions of such basic opens, so $u:P_n\\to L$ is continuous for exactly the topology in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(4), agent expansion of inverse-limit reconstruction: explicit subspace/product basis calculation."
+   }
+  },
+  {
+   "text": "For every $m\\geq1$, evaluate the displayed differential coordinatewise: $\\rho_m\\circ d_{n-1}^L u=d_{n-1}^{A_m}(\\rho_m\\circ u)=d_{n-1}^{A_m}u_m=f_m=\\rho_m\\circ f$. Two elements of $L$ are equal precisely when all their coordinates agree, so $d_{n-1}^L u=f$. Construction gives $\\rho_1\\circ u=u_1$ and every claimed reduction identity. Conversely reductions of any such $u$ satisfy these identities by the defining equations of $L$ and the same finite-sum calculation. If $T=S=\\varnothing$, all domains $P_n$ used here are empty since $n\\geq1$, and the unique maps give the conclusion; zero groups also cause no exception.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(4), agent expansion: equality detected by coordinates, prescribed first reduction, and edge cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-coefficient-cech-primitive-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.3.9(2),(4), printed page 33: explicit pointwise Cech argument realizing its compatible discrete-coefficient inverse-limit route. The paper does not state this formulation verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]ech|[Cc]ocycle|[Pp]rimitive|exact",
+   "results": {
+    "t": "2026-10-22T06:08:34Z",
+    "tool": "grep",
+    "query": "[Cc]ech|[Cc]ocycle|[Pp]rimitive|exact",
+    "sub": "Topology/Algebra/Category/Profinite",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous Cech exactness for inverse limits of finite discrete abelian coefficient groups with surjective transitions and a prescribed initial primitive",
+   "results": {
+    "t": "2026-10-22T06:08:34Z",
+    "tool": "leansearch",
+    "query": "Continuous Cech exactness for inverse limits of finite discrete abelian coefficient groups with surjective transitions and a prescribed initial primitive",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "ContinuousCohomology.MultiInd.complex",
+     "CategoryTheory.CountableAB4Star.ofShape",
+     "continuousInv_of_discreteTopology",
+     "CategoryTheory.hasExactLimitsOfShape_discrete_of_hasExactLimitsOfShape_finset_discrete_op",
+     "ProfiniteGrp.isIso_toLimit",
+     "Profinite.lim",
+     "Profinite.asLimitConeIso"
+    ],
+    "digest": "2340e4e7d67803f5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"surjective\"",
+   "results": {
+    "t": "2026-10-22T06:08:35Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"surjective\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inverse sequence of finite abelian groups with surjective transition maps a continuous Cech cocycle on a profinite surjection has a continuous inverse limit primitive with a prescribed first reduction",
+   "results": {
+    "t": "2026-10-22T06:08:45Z",
+    "tool": "leanfinder",
+    "query": "For an inverse sequence of finite abelian groups with surjective transition maps a continuous Cech cocycle on a profinite surjection has a continuous inverse limit primitive with a prescribed first reduction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.NobelingProof.CC_exact",
+     "LightProfinite.surjective_transitionMap",
+     "ProfiniteGrp.toLimit_fun",
+     "Profinite.NobelingProof.iso_map",
+     "ProfiniteGrp.toLimit",
+     "ProfiniteGrp.toLimit_surjective",
+     "LightProfinite.surjective_transitionMapLE"
+    ],
+    "digest": "1740e80699fe948e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite coefficient Cech primitives can be chosen inductively and reconstruct a continuous function into the inverse limit",
+   "results": {
+    "t": "2026-10-22T06:08:45Z",
+    "tool": "leanfinder",
+    "query": "Compatible finite coefficient Cech primitives can be chosen inductively and reconstruct a continuous function into the inverse limit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.NobelingProof.iso_map",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "Profinite.exists_locallyConstant",
+     "Profinite.exists_locallyConstant_fin_two",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "Profinite.IndexFunctor.obj"
+    ],
+    "digest": "5f6984e3865bfd04"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "toLimit_fun_continuous|toLimit_surjective|isIso_toLimit",
+   "results": {
+    "t": "2026-10-22T06:09:15Z",
+    "tool": "grep",
+    "query": "toLimit_fun_continuous|toLimit_surjective|isIso_toLimit",
+    "sub": "Topology/Algebra/Category/ProfiniteGrp",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean"
+    ],
+    "digest": "46a52e900bc085f3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "CC_exact|fin_comap_jointlySurjective|exists_locallyConstant_finite_aux",
+   "results": {
+    "t": "2026-10-22T06:09:15Z",
+    "tool": "grep",
+    "query": "CC_exact|fin_comap_jointlySurjective|exists_locallyConstant_finite_aux",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Span.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Span.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean"
+    ],
+    "digest": "cacfb85cef938f40"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Stonean lifting, factorization of locally constant functions, Nobeling exact sequences, mapping-cone cocycles or the presentation of profinite groups as limits; none supplies this continuous Cech primitive with its prescribed coefficient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|[Cc]ech",
+   "results": {
+    "t": "2026-10-22T11:58:50Z",
+    "tool": "grep",
+    "query": "primitive|[Cc]ech",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/Projective.lean"
+    ],
+    "digest": "bee7cf4ad316e555"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe profinite quotient presentations, locally constant factorization, Nobeling exactness, or support of complexes; none states continuous Cech primitive lifting with a prescribed coefficient reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous Cech cocycle for profinite surjection with inverse limit finite abelian coefficients has a primitive with prescribed first reduction",
+   "results": {
+    "t": "2026-10-22T11:58:50Z",
+    "tool": "leansearch",
+    "query": "Continuous Cech cocycle for profinite surjection with inverse limit finite abelian coefficients has a primitive with prescribed first reduction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "Profinite.exists_locallyConstant",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+     "Profinite.lim",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.asLimit",
+     "Profinite.asLimitConeIso"
+    ],
+    "digest": "b932553268c1c04a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe profinite quotient presentations, locally constant factorization, Nobeling exactness, or support of complexes; none states continuous Cech primitive lifting with a prescribed coefficient reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"limit\"",
+   "results": {
+    "t": "2026-10-22T11:58:50Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"limit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "TopModuleCat.instPreservesLimitsTopCatForget₂ContinuousLinearMapIdCarrierContinuousMapCarrier",
+     "TopModuleCat.instPreservesLimitsOfShapeTopCatForget₂ContinuousLinearMapIdCarrierContinuousMapCarrierOfHasLimitsOfShapeOfModuleCatForgetLinearMap",
+     "TopModuleCat.instPreservesLimitTopCatForget₂ContinuousLinearMapIdCarrierContinuousMapCarrierOfHasLimitOfModuleCatCompLinearMapForget",
+     "LightProfinite.instPreservesLimitsOfShapeOppositeNatForgetContinuousMapCarrierToTopAndTotallyDisconnectedSpaceSecondCountableTopology",
+     "ProfiniteAddGrp.instPreservesLimitsProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteGrp.instPreservesLimitsProfiniteForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap",
+     "ProfiniteAddGrp.instAddGroupCarrierToTopTotallyDisconnectedSpacePtProfiniteLimitConeCompForget₂ContinuousAddMonoidHomToProfiniteContinuousMap",
+     "ProfiniteGrp.instGroupCarrierToTopTotallyDisconnectedSpacePtProfiniteLimitConeCompForget₂ContinuousMonoidHomToProfiniteContinuousMap"
+    ],
+    "digest": "bcaf0578315ad76f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe profinite quotient presentations, locally constant factorization, Nobeling exactness, or support of complexes; none states continuous Cech primitive lifting with a prescribed coefficient reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible sequence of continuous Cech primitives in finite abelian groups gives a continuous primitive into their inverse limit with prescribed first coordinate",
+   "results": {
+    "t": "2026-10-22T11:58:53Z",
+    "tool": "leanfinder",
+    "query": "A compatible sequence of continuous Cech primitives in finite abelian groups gives a continuous primitive into their inverse limit with prescribed first coordinate",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.continuous_CC'₁",
+     "Profinite.NobelingProof.continuous_CC'₀",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "ProfiniteGrp.toLimit_fun",
+     "ProfiniteGrp.toLimit",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "ProfiniteAddGrp.limitConePtAux",
+     "ProfiniteAddGrp.pi"
+    ],
+    "digest": "cafdb704a3e2fee4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe profinite quotient presentations, locally constant factorization, Nobeling exactness, or support of complexes; none states continuous Cech primitive lifting with a prescribed coefficient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "toLimit_fun_continuous|toLimit_surjective|isIso_toLimit",
+   "results": {
+    "t": "2026-10-22T11:59:45Z",
+    "tool": "grep",
+    "query": "toLimit_fun_continuous|toLimit_surjective|isIso_toLimit",
+    "sub": "Topology/Algebra/Category/ProfiniteGrp",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+     "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean"
+    ],
+    "digest": "46a52e900bc085f3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe profinite quotient presentations, locally constant factorization, Nobeling exactness, or support of complexes; none states continuous Cech primitive lifting with a prescribed coefficient reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of a countable inverse limit of cochain complexes when primitives lift along surjective bonding maps with prescribed initial primitive",
+   "results": {
+    "t": "2026-10-22T11:59:56Z",
+    "tool": "leanfinder",
+    "query": "Exactness of a countable inverse limit of cochain complexes when primitives lift along surjective bonding maps with prescribed initial primitive",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "Profinite.NobelingProof.CC_exact",
+     "CochainComplex.exactAt_of_isLE",
+     "CochainComplex.exactAt_of_isGE",
+     "CochainComplex.isKInjective_of_injective_aux",
+     "CochainComplex.exactAt_succ_single_obj",
+     "CochainComplex.isGE_iff",
+     "CochainComplex.isLE_iff"
+    ],
+    "digest": "3d013e7fcaed24f0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe profinite quotient presentations, locally constant factorization, Nobeling exactness, or support of complexes; none states continuous Cech primitive lifting with a prescribed coefficient reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normed-scalar-profinite-cech-exact",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), finite E open-direct-image branch: positive continuous-function Cech exactness underlying the profinite-parameter column; the paragraph itself delegates the open-coefficient theorem and does not state this agent-formulated analytic input; compatible primitive induction and inverse-limit reconstruction; returned proof steps 4, 6 (induction conclusion) and 7",
+   "via": [
+    "lem-sfb-normed-scalar-profinite-cech-exact",
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-inverse-limit-cech-primitive",
+  "worker": "stage1",
+  "summary": "Repair of returned head 6dd124e5777: rebased the retained split onto the current unsplit DAG node and reread all three dependency statements. The existing finite-coefficient lift still gives exactly the successor needed. Step 2 now explicitly identifies its tuple spaces and differentials and spells out the finite-family induction invariant, preserving the prescribed first primitive at every extension. The actual inverse-limit continuity and coordinate equations remain explicit. Statement, citations and recorded searches retained; no new nodes.",
+  "blueprint": "Inherited detached ancestry: blueprint_refs.py ancestor returns None. Retain from.node=null and the exact inherited place/via chain. Steps implement compatible primitive induction and inverse-limit reconstruction in the paragraph (3) finite-E open-direct-image analytic branch named by from.place; whole-blueprint Cech and inverse-limit searches found no exact statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-beecb26fa",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-beecb26fa (reviewer sub-agent of L); spot-checked: First split; the base proof was empty, so this does not answer a 2026-10-21 re-split note. There are no new nodes. The statement and stmt_deps are identical to the earlier head 6dd124e5777, which L returned for a rebase. Only step 2 changed: it now states the induction invariant and the shared q, n, P_r and d explicitly, so this is a real repair, not a byte-identical re-push. Statement: an agent-formulated continuous Čech primitive into L=lim A_m (finite discrete groups, surjective p_m) with prescribed first reduction. It is true by the Mittag-Leffler argument given the finite lift. Checked cases: n=1, T=S=∅, zero groups, identity tower. Source: Bhatt–Scholze 1309.1198 Lemma 4.3.9(2),(4), printed p.33, re-read; proof_origin is correctly marked as agent-written and no SGA is used. Step 1 is elementary (ρ_m is continuous and additive and commutes with d). Step 2 cites lem-sfb-finite-coefficient-cech-primitive-lift, whose full statement I read. Every hypothesis matches: same q, n≥1, A=A_m and B=A_{m+1} finite discrete, p_m surjective, c=f_{m+1} a cocycle, d w=f_m=p_m f_{m+1}. The conclusion p∘v=w, d v=c is exactly what the step uses. The recursion via dependent choice has its base and invariant stated (D4 OK, C3 OK). Step 3: continuity into the subspace of the product is checked via finite cylinders. Step 4: coordinatewise d gives d u=f and ρ_1 u=u_1. No cycle: the cited lemma is unsplit and does not depend on the item. The parent lem-sfb-normed-scalar-profinite-cech-exact uses the item exactly as stated. Duplicate grep of the DAG found no existing node stating this. The cited node is in the same unit, so no tool_uses are needed. No base-change or coefficient-category issue arises."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.InverseLimitCechPrimitive",
+  "declaration": "Profinite.exists_inverseLimit_cech_primitive",
+  "file": "lean/Sheaf/Topology/InverseLimitCechPrimitive.lean",
+  "statement": "theorem exists_inverseLimit_cech_primitive (S T : Profinite.{v}) (q : C(T, S)) (hq : Function.Surjective q) (A : ℕ → Type u) [∀ m : ℕ, AddCommGroup (A m)] [∀ m : ℕ, Finite (A m)] [∀ m : ℕ, TopologicalSpace (A m)] [∀ m : ℕ, DiscreteTopology (A m)] (p : ∀ m : ℕ, A (m + 1) →+ A m) (hp : ∀ m : ℕ, Function.Surjective (p m)) (n : ℕ) (f : C(scalarCechTuples q (n + 2), {a : (m : ℕ) → A m // ∀ m : ℕ, p m (a (m + 1)) = a m})) (hf : ∀ (m : ℕ) (x : scalarCechTuples q (n + 3)), ∑ j : Fin (n + 3), (-1 : ℤ) ^ j.val • (f (scalarCechDelete q (n + 2) j x)).val m = 0) (u₁ : C(scalarCechTuples q (n + 1), A 0)) (hu₁ : ∀ x : scalarCechTuples q (n + 2), ∑ j : Fin (n + 2), (-1 : ℤ) ^ j.val • u₁ (scalarCechDelete q (n + 1) j x) = (f x).val 0) : ∃ u : C(scalarCechTuples q (n + 1), {a : (m : ℕ) → A m // ∀ m : ℕ, p m (a (m + 1)) = a m}), (∀ (m : ℕ) (x : scalarCechTuples q (n + 2)), ∑ j : Fin (n + 2), (-1 : ℤ) ^ j.val • (u (scalarCechDelete q (n + 1) j x)).val m = (f x).val m) ∧ (∀ x : scalarCechTuples q (n + 1), (u x).val 0 = u₁ x)",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c50e2eb3",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Checked the statement clause by clause against the node through the recorded scalarCechTuples/scalarCechDelete interface (subtype of Fin r → T with product topology, deletion by succAbove). L is the literal compatible-sequence subtype with the subtype-of-product topology; index shifts A 0 = A_1 and Lean n = degree − 1 cover all positive degrees; hf, hu₁ and the conclusion are coordinatewise, equivalent to equality in L; the conclusion u is continuous into L with first reduction u₁, and the transition clauses come from subtype membership. Edge cases n=1, T=S=∅ and zero groups are covered; no extra assumptions; universes u, v are independent. Node unchanged apart from the lean record; lean.statement matches the file signature verbatim; docstrings carry source and blueprint; proof is sorry only; no new definitions or nodes. No duplicate declaration found. No fixes, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261025T033851-L-135562",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Profinite.exists_inverseLimit_cech_primitive"
+  ],
+  "sorry_after": []
+ }
+}

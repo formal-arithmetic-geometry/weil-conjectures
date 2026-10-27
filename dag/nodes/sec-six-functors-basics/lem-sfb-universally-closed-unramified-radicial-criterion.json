@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-universally-closed-unramified-radicial-criterion",
+ "kind": "statement",
+ "title": "Closed immersions among universally closed morphisms",
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes [def-pc-scheme] which is universally closed [def-weil-proper-morphism]. Then $g$ is a closed immersion [def-weil-closed-immersion] if and only if $g$ is unramified [def-weil-unramified-morphism] and universally injective [def-weil-radicial-morphism].",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 04XV, etale-lemma-characterize-closed-immersion, equivalence (1) and (5), with universal closedness fixed as a hypothesis; diagonal argument from Tag 05VH, etale-lemma-universally-injective-unramified."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-unramified-morphism",
+  "def-weil-radicial-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Assume $g$ is a closed immersion. By [lem-pc-proper-monomorphism-closed], it is proper and a monomorphism, hence locally of finite type by [def-weil-proper-morphism, def-weil-finite-type-morphism]. Put $P=X\\times_YX$ with projections $p_1,p_2$ [def-pc-fibre-product]. Since $gp_1=gp_2$, cancellation gives $p_1=p_2$. Thus $p_1\\Delta_g=\\mathrm{id}_X$ and $\\Delta_gp_1=\\mathrm{id}_P$, the latter checked on both projections. Therefore $\\Delta_g$ is an isomorphism, so identifies $X$ with the whole open subscheme $P$ [def-weil-open-immersion]. The definition [def-weil-unramified-morphism] gives unramifiedness. The diagonal is also surjective, so the equivalence in [def-weil-radicial-morphism] gives universal injectivity.",
+   "uses": [
+    "lem-pc-proper-monomorphism-closed",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "def-weil-unramified-morphism",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 04XV, (1) implies (2); Tag 05VH, (3) implies (1) and monomorphism criterion, expanded using the fibre-product universal property."
+   }
+  },
+  {
+   "text": "Conversely assume $g$ is unramified and universally injective. By [def-weil-unramified-morphism], $g$ is locally of finite type and $\\Delta_g:X\\to P$ is an open immersion. By the diagonal-surjectivity equivalence of [def-weil-radicial-morphism], $\\Delta_g$ is surjective. An open immersion identifies its source with the open subscheme on its image [def-weil-open-immersion]; here that image is all of $P$, so $\\Delta_g$ is an isomorphism.",
+   "uses": [
+    "def-weil-unramified-morphism",
+    "def-weil-radicial-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 05VH, proof of (2) implies (1): the diagonal is a surjective open immersion."
+   }
+  },
+  {
+   "text": "For any scheme $T$ and $a,b:T\\to X$ with $ga=gb$, form $(a,b):T\\to P$ by [def-pc-fibre-product]. Since $\\Delta_g$ is invertible, $(a,b)=\\Delta_gc$ for $c=\\Delta_g^{-1}(a,b)$. Its two projections give $a=c=b$. Thus $g$ is a monomorphism.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 05VH, proof of (2) implies (1), final assertion that an isomorphic diagonal gives a monomorphism."
+   }
+  },
+  {
+   "text": "By [lem-trf-scheme-monomorphism-separated], $g$ is separated. Its assumed universal closedness gives quasi-compactness by [lem-weil-pbc-universally-closed-quasi-compact]. Together with local finite type from step 2 this gives finite type [def-weil-finite-type-morphism]. Thus $g$ is proper by [def-weil-proper-morphism]. Apply the reverse implication of [lem-pc-proper-monomorphism-closed] to this proper monomorphism to obtain a closed immersion.",
+   "uses": [
+    "lem-trf-scheme-monomorphism-separated",
+    "lem-weil-pbc-universally-closed-quasi-compact",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 04XV, (6) implies (1), assembled through its equivalent proper-monomorphism criterion (2); Tag 04XU supplies quasi-compactness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-monomorphism-closed",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-unramified-morphism",
+  "def-weil-radicial-morphism",
+  "lem-trf-scheme-monomorphism-separated",
+  "lem-weil-pbc-universally-closed-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tags 04XV (lemma-characterize-closed-immersion) and 05VH (lemma-universally-injective-unramified), expanded through Tag 04XU and the existing proper-monomorphism criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Uu]nramified.*[Ii]njective|[Ii]njective.*[Uu]nramified|isClosedImmersion_iff|iff_isProper_and_mono",
+   "results": "{\"t\": \"2026-10-22T06:09:45Z\", \"tool\": \"grep\", \"query\": \"[Uu]nramified.*[Ii]njective|[Ii]njective.*[Uu]nramified|isClosedImmersion_iff|iff_isProper_and_mono\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"c1fd7328fde0b3da\"}; No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone.",
+   "date": "2026-10-22",
+   "verdict": "No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of schemes that is universally closed, being unramified and universally injective is equivalent to being a closed immersion",
+   "results": "{\"t\": \"2026-10-22T06:09:46Z\", \"tool\": \"leansearch\", \"query\": \"For a morphism of schemes that is universally closed, being unramified and universally injective is equivalent to being a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\"], \"digest\": \"72370f55a3ddb769\"}; No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone.",
+   "date": "2026-10-22",
+   "verdict": "No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"UniversallyInjective\"",
+   "results": "{\"t\": \"2026-10-22T06:09:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedImmersion\\\", \\\"UniversallyInjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone.",
+   "date": "2026-10-22",
+   "verdict": "No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally closed unramified universally injective morphism of schemes is a closed immersion",
+   "results": "{\"t\": \"2026-10-22T06:09:58Z\", \"tool\": \"leanfinder\", \"query\": \"A universally closed unramified universally injective morphism of schemes is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.UniversallyClosed.out\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\"], \"digest\": \"5cba06880e302169\"}; No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone.",
+   "date": "2026-10-22",
+   "verdict": "No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism is a closed immersion exactly when it is universally closed and its diagonal is a surjective open immersion and it is locally of finite type",
+   "results": "{\"t\": \"2026-10-22T06:10:47Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme morphism is a closed immersion exactly when it is universally closed and its diagonal is a surjective open immersion and it is locally of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.isClosedImmersion_iff\", \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.UniversallyClosed.out\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\"], \"digest\": \"382a368ec08bd292\"}; No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone.",
+   "date": "2026-10-22",
+   "verdict": "No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed locally finite type morphism with surjective open diagonal is a closed immersion",
+   "results": "{\"t\": \"2026-10-22T06:12:08Z\", \"tool\": \"leansearch\", \"query\": \"A universally closed locally finite type morphism with surjective open diagonal is a closed immersion\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; unavailable",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\", \"FormallyUnramified\"",
+   "results": "{\"t\": \"2026-10-22T06:12:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyClosed\\\", \\\"FormallyUnramified\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone.",
+   "date": "2026-10-22",
+   "verdict": "No match for the equivalence with unramifiedness and universal injectivity. ZariskisMainTheorem.lean:393 gives the different proper-and-monomorphism criterion; the missing diagonal-isomorphism and properness arguments are exactly the work isolated here. Other hits concern closed embeddings, affine criteria or universal closedness alone."
+  },
+  {
+   "tool": "grep",
+   "query": "unramified.*[Mm]ono|[Mm]ono.*unramified|isClosedImmersion.*iff|isIso_of_surjective",
+   "results": "{\"t\": \"2026-10-23T04:24:40Z\", \"tool\": \"grep\", \"query\": \"unramified.*[Mm]ono|[Mm]ono.*unramified|isClosedImmersion.*iff|isIso_of_surjective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/PointsPi.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"5dcb4b8655575d62\"}; Supporting hits read: proper-monomorphism criterion, finite-monomorphism criterion, properness definition and closed-immersion definitions; none states the requested unramified/universally-injective equivalence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally closed unramified universally injective morphism of schemes is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T04:24:47Z\", \"tool\": \"leanfinder\", \"query\": \"A universally closed unramified universally injective morphism of schemes is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.UniversallyClosed.out\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\"], \"digest\": \"47bbb13f651f5584\"}; Supporting hits read: proper-monomorphism criterion, finite-monomorphism criterion, properness definition and closed-immersion definitions; none states the requested unramified/universally-injective equivalence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed locally finite type scheme monomorphism is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T04:25:48Z\", \"tool\": \"leansearch\", \"query\": \"A universally closed locally finite type scheme monomorphism is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\"], \"digest\": \"31d104722b41664a\"}; Supporting hits read: proper-monomorphism criterion, finite-monomorphism criterion, properness definition and closed-immersion definitions; none states the requested unramified/universally-injective equivalence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\", \"FormallyUnramified\"",
+   "results": "{\"t\": \"2026-10-23T04:25:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyClosed\\\", \\\"FormallyUnramified\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Supporting hits read: proper-monomorphism criterion, finite-monomorphism criterion, properness definition and closed-immersion definitions; none states the requested unramified/universally-injective equivalence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For schemes a locally finite type morphism with isomorphic diagonal is a proper monomorphism if it is universally closed",
+   "results": "{\"t\": \"2026-10-23T04:28:00Z\", \"tool\": \"leanfinder\", \"query\": \"For schemes a locally finite type morphism with isomorphic diagonal is a proper monomorphism if it is universally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.IsProper.toIsSeparated\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.UniversallyClosed.out\"], \"digest\": \"550b9ba1ea149f10\"}; Supporting hits read: proper-monomorphism criterion, finite-monomorphism criterion, properness definition and closed-immersion definitions; none states the requested unramified/universally-injective equivalence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-universal-closed-immersion-open",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: second sentence, applying Tag 05XA to construct W_2; repair subdivision: returned proof steps 4--5: diagonal, monomorphism, properness, and both directions of the closed-immersion criterion",
+   "via": [
+    "lem-sfb-universal-closed-immersion-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-universally-closed-unramified-radicial-criterion",
+  "worker": "stage1",
+  "summary": "Proved both directions using the existing proper-monomorphism criterion and an explicit diagonal/fibre-product argument. Universal closedness is converted to quasi-compactness before assembling properness. No new nodes, no statement correction, no Lean attachment. Mathlib searches found supporting results but not this equivalence as a single declaration or one-line specialization.",
+  "blueprint": "Realizes the inherited from.place: Tag 05XA closed-immersion characterization in the universal closed-immersion locus argument, itself serving det-thm-sf-ctf-stability-direct-images proof (3). The ancestor tool reports no imported node (from.node null); its existing provenance chain is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-0033555ae",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-0033555ae (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement is Stacks etale.tex Tag 04XV (1)<=>(5) with universal closedness as a hypothesis, read at lines 618 and 664, together with the 05VH diagonal argument. It matches the only citer, step 3 of lem-sfb-universal-closed-immersion-open, verbatim. Step 1: lem-pc-proper-monomorphism-closed (exact Mathlib iff_isProper_and_mono) gives proper plus mono; cancelling p1=p2 makes Delta an isomorphism, which by the unramified definition and diagonal-surjectivity clause (4) of def-weil-radicial-morphism (01S4) gives unramified and universally injective. Step 2: an open, surjective Delta is an isomorphism; elementary is correct. Step 3: the fibre-product universal property gives a categorical monomorphism; elementary is correct. Step 4: 01L4 gives separated, 04XU (lem-weil-pbc-universally-closed-quasi-compact) gives quasi-compact, local finite type then gives finite type and hence proper, and the reverse direction of 04XV (1)<=>(2) gives a closed immersion. The step uses equal the 9 proof_deps. Edge cases checked: the empty scheme and identities satisfy both sides; a purely inseparable field extension fails unramified; a non-closed open immersion fails universal closedness. A duplicate search for 04XV/05VH/01L4 and unramified plus universally injective found no node stating this equivalence. All three cross-unit theorem cites are exact Mathlib leaves, so no tool_uses are needed. Batch-5 flag lem-trf-scheme-monomorphism-separated: generic Stacks 01L4 (mono implies separated), exact Mathlib isSeparated_of_mono with no dependencies; it is no part of the trace-formula or Poincare-duality statements or proofs, so accepted. No SGA citations. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversallyClosedUnramifiedRadicialCriterion",
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.iff_isUnramified_and_universallyInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversallyClosedUnramifiedRadicialCriterion.lean",
+  "statement": "theorem IsClosedImmersion.iff_isUnramified_and_universallyInjective {X Y : Scheme.{u}} (g : X ⟶ Y) [UniversallyClosed g] : IsClosedImmersion g ↔ IsUnramified g ∧ UniversallyInjective g",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1197d0a9f",
+  "group": "N8",
+  "result": "pass",
+  "note": "Statement = Stacks 04XV (1)<=>(5) with universal closedness as hypothesis; Lean `[UniversallyClosed g] : IsClosedImmersion g ↔ IsUnramified g ∧ UniversallyInjective g` over Scheme.{u}, each notion the recorded stmt_dep declaration (Mathlib UniversallyClosed/IsClosedImmersion/UniversallyInjective, Sheaf IsUnramified = LocallyOfFiniteType ∧ open-immersion diagonal); no extra hypotheses; lean.statement verbatim; node otherwise identical to live; no duplicate in Mathlib/project (iff_isProper_and_mono differs); docstrings with source+blueprint+4 proof steps; sorry only; imports exist; report sections present; edge cases (empty, iso, inseparable extension, fold map, open immersion) consistent. No findings, no fixes, no compile needed."
+ }
+}

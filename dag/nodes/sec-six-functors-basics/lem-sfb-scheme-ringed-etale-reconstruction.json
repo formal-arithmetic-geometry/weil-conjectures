@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-scheme-ringed-etale-reconstruction",
+ "kind": "statement",
+ "title": "Reconstruction and rigidity for schemes from locally ringed etale topoi",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $U,V$ be schemes [def-pc-scheme] with small etale sites [def-weil-pbc-etale-site] and structure sheaves $\\mathcal O_U(T)=\\Gamma(T,\\mathcal O_T)$. Use ringed-topos morphisms [def-weil-pbc-ringed-topos-morphism]. A locally ringed topos here means a ringed topos whose ring sheaf has locally $a$ or $1-a$ invertible for every section $a$, and whose equalizer of $0,1$ is the initial sheaf. A local morphism means that its square of ring sheaves and unit subsheaves is cartesian. These etale ringed topoi are locally ringed, and every scheme morphism $a:U\\to V$ induces a local ringed-topos morphism $(a_{\\mathrm{et}},a^\\sharp)$. For every local ringed-topos morphism $g:(\\operatorname{Sh}(U_{\\mathrm{et}}),\\mathcal O_U)\\to(\\operatorname{Sh}(V_{\\mathrm{et}}),\\mathcal O_V)$ there is a unique scheme morphism $a:U\\to V$ whose induced ringed-topos morphism is isomorphic to $g$. An isomorphism means a natural isomorphism of inverse-image functors commuting with the structural ring maps. Every ring-compatible natural endomorphism of $a_{\\mathrm{et}}^{-1}$ is the identity. In particular any two isomorphisms from $g$ to the morphism induced by $a$ coincide. There are no separation, quasi-compactness or finite-type hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04I7 (theorem-fully-faithful), 04IJ (lemma-2-morphism), 04LW (lemma-faithful), 04I5 (lemma-morphism-locally-ringed), 04HZ (lemma-etale-site-locally-ringed)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sfb-locally-ringed-topos",
+  "def-sfb-scheme-etale-ringed-presentation"
+ ],
+ "proof": [
+  {
+   "text": "First verify that the stated local-ringedness holds. For a section $s\\in\\Gamma(T,\\mathcal O_T)$ on an etale object $T\\to U$, the principal opens $D(s)$ and $D(1-s)$ cover $T$: in each local ring at least one of $s,1-s$ is a unit. On these two opens respectively $s$ and $1-s$ is invertible. If $0=1$ on $T$, then every local ring of $T$ is zero, so $T$ is empty. Conversely the empty scheme has its unique section. Thus the equalizer of $0,1$ is the initial sheaf, including when $U$ is empty.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HZ (lemma-etale-site-locally-ringed); direct sectionwise verification of its two conditions."
+   }
+  },
+  {
+   "text": "For a scheme morphism $a:U\\to V$, the cited algebraic inverse-image statement supplies the geometric adjunction on sets and its induced ring objects. Pullback of functions on $T\\to V$ to $U\\times_VT$ gives $\\mathcal O_V\\to a_*\\mathcal O_U$; its adjunct is $a^\\sharp$. It preserves the ring operations because pullback of functions does. On a geometric stalk $\\bar u$, the germ formula identifies its map with the local map of strict local rings attached to $a$ by strict-henselization functoriality: both send a function on a pointed etale neighbourhood to its pullback. To check the unit square, form the map from $a^{-1}\\mathcal O_V^\\times$ to the fibre product of $a^{-1}\\mathcal O_V$ with $\\mathcal O_U^\\times$. On each geometric stalk it is bijective, since a local ring homomorphism reflects units. Stalks commute with the finite products and equalizers defining units and this fibre product. The cited stalk detection makes that comparison an isomorphism; hence the square is cartesian. The same pullback formula identifies composites and identities.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I5 (lemma-morphism-locally-ringed); sites-modules.tex Tag 04H9 (lemma-locally-ringed-morphism), conservative-stalk verification."
+   }
+  },
+  {
+   "text": "Prove faithfulness before reconstructing anything. Suppose a ring-compatible isomorphism $t:a^{-1}\\cong b^{-1}$ is given for scheme maps $a,b:U\\to V$. On an open $H\\subset V$, the representable pullback formula identifies their images of $h_H$ with $h_{a^{-1}H}$ and $h_{b^{-1}H}$. These are subobjects of the terminal object; naturality at $h_H\\to1$ implies that their subobjects coincide. Thus $a^{-1}H=b^{-1}H$ for every open $H$. Scheme points are distinguished by opens: if two points lie in a common affine open they are prime ideals distinguished by a principal open, and if they do not lie in a common affine open, an affine neighbourhood of one already distinguishes them. Therefore $a,b$ have the same underlying map. A section $s\\in\\mathcal O_V(H)$ is the sheaf map $h_H\\to\\mathcal O_V$ given by pullback of $s$. Naturality of $t$ for this map, followed by ring compatibility, gives $a^\\sharp(s)=b^\\sharp(s)$ on the common inverse open. Hence the maps of structure sheaves agree and $a=b$ as scheme morphisms.",
+   "uses": [
+    "lem-galois-inverse-image-representable",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04LW (lemma-faithful), both paragraphs."
+   }
+  },
+  {
+   "text": "Next prove rigidity. For a ring-compatible natural endomorphism $t$ of $a^{-1}$ and an affine etale $T\\to V$, choose the coordinates and monomorphism $e_a$ supplied by the cited coordinate lemma. Naturality with the coordinate map, and $a^\\sharp t_{\\mathcal O_V}=a^\\sharp$, give $e_a t_{h_T}=e_a$, using that $a^{-1}$ preserves finite products. Since $e_a$ is monic, $t_{h_T}=1$. Take a small affine cover-dense set of etale objects using the cited smallness statement. Every sheaf has a coequalizer presentation by coproducts of these representables; they are already sheaves by subcanonicity. The inverse image is a left adjoint, so it preserves these small colimits. Naturality with the coproduct inclusions and the coequalizer map now forces $t_F=1$ for every sheaf $F$: first its components on the coproducts are identity, and then equality follows after the coequalizer map. This proves the endomorphism assertion for arbitrary $U,V$.",
+   "uses": [
+    "lem-sfb-etale-affine-coordinate-monomorphism",
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "lem-weil-pbc-sheaf-covering-representable-coequalizer-presentation",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04IJ (lemma-2-morphism), coordinate and generator arguments."
+   }
+  },
+  {
+   "text": "Let now $U=\\operatorname{Spec}A$, $V=\\operatorname{Spec}B$ and $g$ be local. Form $\\varphi:B\\to A$ on global sections and $a=\\operatorname{Spec}\\varphi$. The affine-solution comparison gives natural isomorphisms $g^{-1}h_T\\cong h_{U\\times_VT}$ on affine etale $T\\to V$. For any sheaf $F$ on $U_{\\mathrm{et}}$, evaluation and adjunction give\n$$(g_*F)(T)=\\operatorname{Hom}(h_T,g_*F)=\\operatorname{Hom}(g^{-1}h_T,F)\\cong F(U\\times_VT)=(a_*F)(T).$$\nThe evaluation bijection sends a map from $h_T$ to the image of $\\mathrm{id}_T$; its inverse pulls that section back along each arrow to $T$. Thus it is natural in both variables. Affine-site restriction is an equivalence, so these isomorphisms extend uniquely to a natural isomorphism $g_*\\cong a_*$. The adjunction bijections then give an isomorphism of their left adjoints. It respects the structural ring maps: on an affine etale $T=\\operatorname{Spec}C$, its equality on every $c\\in C$ is exactly the evaluation identity in the affine-solution comparison; these affine values determine a sheaf map by the same restriction equivalence. Consequently $g$ is ring-isomorphic to the morphism induced by $a$. Step 3 gives uniqueness of $a$, and step 4 gives uniqueness of the isomorphism, by composing one isomorphism with the inverse of the other.",
+   "uses": [
+    "lem-sfb-etale-affine-solution-comparison",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-etale-induced-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I6 (lemma-morphism-ringed-etale-topoi-affines), final three paragraphs."
+   }
+  },
+  {
+   "text": "Record how restrictions will be used. The localization equivalence identifies sheaves on the site $U_{\\mathrm{et}}/W$ with the topos slice over $h_W$. For an open subscheme $W\\subset U$, the cited etale-site localization identifies this site with $W_{\\mathrm{et}}$: an etale scheme over $U$ factoring through $W$ is precisely an etale scheme over $W$, with the same arrows and covering families. The structure rings coincide objectwise, both being $T\\mapsto\\Gamma(T,\\mathcal O_T)$. Thus these are identifications of ringed topoi. The cited ringed-slice functoriality restricts $g$ to these slices, keeps locality, and identifies successive restrictions and restrictions of ring-compatible isomorphisms. Composition with an open inclusion is the same restriction on the source. Indeed its inverse image on an etale object over the open is ordinary restriction, and its ring map is pullback of functions. Composition stays local: its unit square is the paste of the two cartesian unit squares, since inverse images preserve finite limits.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-sfb-ringed-topos-slice-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I7 (theorem-fully-faithful), restriction setup; sites-modules.tex Tags 04IH (lemma-localize-morphism-locally-ringed-topoi) and 04IG (lemma-composition-morphisms-locally-ringed-topoi)."
+   }
+  },
+  {
+   "text": "Suppose $V$ is affine and $U$ arbitrary. Choose a small affine open cover $U=\\bigcup_iU_i$. Apply step 5 to $g$ restricted to each $U_i$, using step 6, obtaining $a_i:U_i\\to V$ and ring-compatible isomorphisms to the restricted $g$. On $U_i\\cap U_j$, both restricted induced morphisms are ring-isomorphic to the same restriction of $g$. Step 3, which has no affineness hypothesis, gives equality of the scheme maps on this overlap. The cited scheme-morphism gluing produces $a:U\\to V$. Step 4 shows that the isomorphisms on $U_i\\cap U_j$ agree: their ratio is an automorphism of the induced morphism there. Glue their components explicitly: for a sheaf $F$ on $V_{\\mathrm{et}}$ and etale $T\\to U$, use the open cover $T\\times_UU_i$ of $T$. The local images of each section agree on double overlaps and hence give a unique section of $g^{-1}F(T)$. Gluing the inverses in the same way gives a bijection. Restriction maps, naturality in $F$ and ring compatibility hold locally and therefore globally by uniqueness in the sheaf axiom. This is the required ring-compatible isomorphism for affine $V$ and arbitrary $U$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I7 (theorem-fully-faithful), first existence paragraph and the following 2-isomorphism gluing diagram."
+   }
+  },
+  {
+   "text": "For arbitrary $V$, choose a small affine open cover $V=\\bigcup_\\lambda V_\\lambda$. Finite-limit preservation makes $g^{-1}h_{V_\\lambda}$ subterminal, so the cited subterminal classification writes it uniquely as $h_{W_\\lambda}$ for an open $W_\\lambda\\subset U$. These opens cover $U$. Indeed $1$ is the coequalizer of the two arrows from the coproduct of the pairwise intersections of the $h_{V_\\lambda}$ to their coproduct: sections glue uniquely on the open covering, which proves this coequalizer property directly. The left adjoint $g^{-1}$ preserves these small colimits and finite intersections; thus the analogous coproduct of the $h_{W_\\lambda}$ maps epimorphically to $1$. If their union were a proper open, this epimorphism would factor through the proper subterminal $h_{\\bigcup W_\\lambda}\\hookrightarrow1$, which must itself be an epimorphism since the composite is one. The cited mono-epi criterion makes this subterminal inclusion an isomorphism. Evaluating at the terminal etale object then says that $U$ factors through $\\bigcup W_\\lambda$. Hence their union is $U$. Steps 6 and 7 give a map $a_\\lambda:W_\\lambda\\to V_\\lambda$ and a ring-isomorphism with the localized $g$.",
+   "uses": [
+    "lem-weil-pbc-etale-subsheaf-final-open",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-sheaf-sets-mono-epi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I7 (theorem-fully-faithful), final paragraph, construction of W and localized g."
+   }
+  },
+  {
+   "text": "Regard $a_\\lambda$ as maps $W_\\lambda\\to V$. On $W_\\lambda\\cap W_\\mu$ their induced ringed morphisms are both isomorphic to the restriction of $g$ (step 6). Faithfulness (step 3) gives equality of these maps. Scheme gluing gives $a:U\\to V$. Rigidity (step 4) makes the ring-compatible isomorphisms agree on every overlap, so the componentwise sheaf gluing of step 7 produces $a_{\\mathrm{et}}^{-1}\\cong g^{-1}$ with compatible structure maps. This proves existence globally. If $b$ is another reconstructed map, compose its isomorphism with the inverse of the one for $a$ and apply step 3 to obtain $a=b$. If two isomorphisms from $g$ to the induced morphism are given, compose one with the inverse of the other to get an endomorphism of $a_{\\mathrm{et}}^{-1}$; step 4 makes it the identity, so the isomorphisms coincide. No step required affine overlaps or a finite cover.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I7 (theorem-fully-faithful), final gluing sentence and omitted-details completion using Tags 04IJ and 04LW."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-galois-inverse-image-representable",
+  "def-weil-affine-spectrum",
+  "lem-sfb-etale-affine-coordinate-monomorphism",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-sheaf-covering-representable-coequalizer-presentation",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-sfb-etale-affine-solution-comparison",
+  "lem-weil-pbc-affine-etale-induced-sheaf-equivalence",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-sfb-ringed-topos-slice-functoriality",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-etale-subsheaf-final-open",
+  "lem-weil-pbc-sheaf-sets-mono-epi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HZ, 04I5, 04LW, 04IJ, 04I6 and 04I7, including the explicit completion of source/target open-cover gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of locally ringed small etale topoi of schemes comes from a unique scheme morphism with no nontrivial two automorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ext'\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f g : X ⟶ Y},\\n  AlgebraicGeometry.Scheme.Hom.toLRSHom f = AlgebraicGeometry.Scheme.Hom.toLRSHom g → f = g\", \"doc\": \"For any two morphisms $f,g : X \\\\to Y$ between schemes, if their underlying morphisms of locally ringed spaces are equal ($f_{\\\\text{LRSHom}} = g_{\\\\text{LRSHom}}$), then the scheme morphisms themselves \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruction of scheme morphisms from their locally ringed etale topoi",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.Hom Y.toLocallyRingedSpace → X.Hom Y\", \"doc\": \"Given a morphism from a scheme $ X $ to the underlying locally ringed space of a scheme $ Y $, this constructs the corresponding morphism from $ X $ to $ Y $ as schemes.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace → AlgebraicGeometry.LocallyRingedSpace → Type u\", \"doc\": \"A continuous map between the underlying topological spaces together with a morphism of sheaves of commutative rings that induces local ring homomorphisms on stalks\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toLRSHom'\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.Hom Y → X.Hom Y.toLocallyRingedSpace\", \"doc\": \"The function that maps a morphism between two schemes to the corresponding morphism of their underlying locally ringed spaces, obtained by applying the forgetful functor from schemes to locally ringed\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toLRSHom\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme.{u}} (f : X.Hom Y) : X.toLocallyRingedSpace ⟶ Y.toLocallyRingedSpace\", \"doc\": \"The function that maps a morphism between two schemes to the corresponding morphism of their underlying locally ringed spaces, obtained by applying the forgetful functor from schemes to locally ringed\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.mk\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : AlgebraicGeometry.LocallyRingedSpace} →\\n  (toHom : X.Hom Y.toPresheafedSpace) →\\n    (∀ (x : ↑↑X.toPresheafedSpace), IsLocalHom (CommRingCat.Hom.hom (toHom.stalkMap x))) → X.Hom Y\", \"doc\": \"Given a morphism between the underlying presheafed spaces of two locally ringed spaces, if for every point in the domain the induced map on stalks is a local ring homomorphism, then this constructs a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"FullyFaithful\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" (X : AlgebraicGeometry.Scheme) : (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from schemes étale over `X` to schemes over `X` is fully faithful.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "locally.ringed.topo|ringed.etale|etale.*reconstruct",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidity and full faithfulness of the embedding of schemes into locally ringed etale topoi",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.FullyFaithful\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is fully faithful, meaning it induces a bijection between hom-sets of schemes and hom-sets of their underlyi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.Full\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is full, meaning that for any two schemes, every morphism between their underlying locally ringed spaces ari\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.Spec.toLocallyRingedSpace.FullyFaithful\", \"doc\": \"The functor $\\\\operatorname{Spec}$ from the opposite category of commutative rings to locally ringed spaces is fully faithful, as established by the fact that the counit of the $\\\\Gamma$-$\\\\operatorname{\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "locally.ringed.topo|ringed.etale|etale.*reconstruct",
+   "results": "[grep] OK 0 hit(s). No hits.",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary locally ringed spaces and the etale over-category are different objects; these hits do not state ringed-etale-topos reconstruction or rigidity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schemes are fully faithful in locally ringed etale topoi",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace; AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace; AlgebraicGeometry.AffineScheme.Spec_faithful; AlgebraicGeometry.Scheme.mk.noConfusion; AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace_preimage_toLRSHom; AlgebraicGeometry.Scheme.mk.inj; AlgebraicGeometry.Scheme.mk.injEq",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary locally ringed spaces and the etale over-category are different objects; these hits do not state ringed-etale-topos reconstruction or rigidity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"FullyFaithful\"",
+   "results": "[loogle] OK 1 hit(s). AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary locally ringed spaces and the etale over-category are different objects; these hits do not state ringed-etale-topos reconstruction or rigidity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reconstruction of scheme morphisms from locally ringed small etale topoi and rigidity of ring compatible inverse image transformations",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.Hom.ext'; AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Hom.ext; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary locally ringed spaces and the etale over-category are different objects; these hits do not state ringed-etale-topos reconstruction or rigidity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+  "date": "2026-10-23",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, reconstruct the scheme morphism attached to each (U,V,s); Tags 04M6 and 04KK, scheme uniqueness and rigidity input.",
+   "via": [
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-ringed-etale-reconstruction",
+  "worker": "stage1",
+  "summary": "Checked the scheme reconstruction source, searched project Lean and the whole DAG, reused representable pullback, density, stalk, slice and gluing inputs. Two new statement-only prerequisites isolate finite coordinate detection and affine solution sheaf comparison. The nine-step proof establishes local-ringedness, faithfulness, rigidity, affine reconstruction and two-stage open gluing without affine-overlap or finiteness hypotheses.",
+  "blueprint": "Supporting scheme reconstruction input in the inherited det-thm-sf-ctf-stability-direct-images (3) ancestry: Tags 04KL/04M6/04KK reduce to scheme Tags 04I7/04LW/04IJ. Read the latest ctf unit and direct-image proof; no unit or chapter route change. tools/blueprint_refs.py ancestor prints None, as recorded by the inherited from.node=null.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Generic scheme/small-etale-site or topos input for reconstruction from ringed etale topoi; used for its stated conclusion, not to replace a step of the ctf-stability unit. Inverse image of etale sheaves of sets, abelian groups and rings."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "why": "Generic scheme/small-etale-site or topos input for reconstruction from ringed etale topoi; used for its stated conclusion, not to replace a step of the ctf-stability unit. Stalk of the etale inverse image of a sheaf of sets, with germs."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic scheme/small-etale-site or topos input for reconstruction from ringed etale topoi; used for its stated conclusion, not to replace a step of the ctf-stability unit. Strict henselizations at a geometric point and their functoriality."
+   },
+   {
+    "node": "lem-galois-inverse-image-representable",
+    "why": "Generic scheme/small-etale-site or topos input for reconstruction from ringed etale topoi; used for its stated conclusion, not to replace a step of the ctf-stability unit. Inverse image of a representable etale sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-covering-representable-coequalizer-presentation",
+    "why": "Generic scheme/small-etale-site or topos input for reconstruction from ringed etale topoi; used for its stated conclusion, not to replace a step of the ctf-stability unit. Sheaf presentation by a covering set of sheafified representables."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic scheme/small-etale-site or topos input for reconstruction from ringed etale topoi; used for its stated conclusion, not to replace a step of the ctf-stability unit. Representable presheaves are sheaves on the small etale site."
+   },
+   {
+    "node": "lem-weil-pbc-localized-sheaves-over-representable",
+    "why": "Generic scheme/small-etale-site or topos input for reconstruction from ringed etale topoi; used for its stated conclusion, not to replace a step of the ctf-stability unit. Sheaves on a localized site as sheaves over a sheafified representable."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic scheme/small-etale-site or topos input for reconstruction from ringed etale topoi; used for its stated conclusion, not to replace a step of the ctf-stability unit. The localized small etale site at an etale open is the small etale site of the open."
+   },
+   {
+    "node": "lem-weil-pbc-etale-subsheaf-final-open",
+    "why": "Generic scheme/small-etale-site or topos input for reconstruction from ringed etale topoi; used for its stated conclusion, not to replace a step of the ctf-stability unit. Subsheaves of the final etale sheaf are open subfunctors."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-galois-inverse-image-representable",
+  "lem-weil-pbc-sheaf-covering-representable-coequalizer-presentation",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-subsheaf-final-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-c9a40f0a2",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-c9a40f0a2 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the Stacks sources: etale-cohomology.tex 04HZ, 04I5, 04IJ, 04LW, 04I6, 04I7; morphisms.tex 04II; algebra.tex 04GX. The item statement is unchanged and matches 04I7, 04IJ, 04LW and 04I5. There is no repair note, so the 10-21 re-split rule does not apply. The nine steps carry the whole Stacks argument. Step 3 is faithfulness via subterminal opens and section naturality. Step 4 is rigidity via the coordinate mono and a small coequalizer presentation, with no huge colimit. Step 5 is the affine case: g_*≅a_* by Yoneda, adjunction and the solution comparison, then the affine-site equivalence, with ring compatibility from the ev-identity. Steps 6-9 do slice localization and the two gluing stages; overlaps are not assumed affine, and the 04I7 covering claim is proved with the mono-epi leaf. proof_deps equals the union of the uses. The solution-comparison node is true (the generator part of 04I6 with 04GX at stalks) and does not restate the item. The coordinate node is true via 04II and 01JY. A whole-DAG search for these tags and for the coordinate and solution statements found no duplicates. The off-unit tool uses are generic and accepted, and no SGA source is used. FIX: the coordinate node's comparison clause used 'the natural identification [lem-galois-inverse-image-representable]', which pins no isomorphism. Read literally it is false: for S=Spec k, X=Spec k̄, V=Spec L Galois, composing with σ∈Gal is still natural in V and changes e_a by σ. The corrected node normalizes ι_V by its adjunct u↦id_X×_S u (the isomorphism lem-galois's proof constructs), defines a^♯ explicitly, states e_a∘ι_V=(a^♯)^n∘a^{-1}e, and adds lem-weil-pbc-etale-inverse-image-algebraic-structures to stmt_deps. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-etale-affine-coordinate-monomorphism.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeRingedEtaleReconstruction",
+  "declaration": "AlgebraicGeometry.Scheme.EtaleRinged.scheme_ringed_etale_reconstruction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.EtaleRinged.scheme_ringed_etale_reconstruction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeRingedEtaleReconstruction.lean",
+  "statement": "theorem scheme_ringed_etale_reconstruction : (∀ X : Scheme.{u}, IsLocallyRingedTopos (ring X)) ∧ (∀ (U V : Scheme.{u}) (a : U ⟶ V), ∃ h : Morphism U V, Induces h a ∧ h.IsLocal) ∧ (∀ (U V : Scheme.{u}) (g : Morphism U V), g.IsLocal → ∃! a : U ⟶ V, ∃ h : Morphism U V, Induces h a ∧ Nonempty (TwoIso g h)) ∧ (∀ (U V : Scheme.{u}) (a : U ⟶ V) (h : Morphism U V), Induces h a → ∀ t : h.inverse ⟶ h.inverse, t.app (ringSheafUnderlying (ring V)) ≫ h.ringMap = h.ringMap → t = 𝟙 h.inverse) ∧ (∀ (U V : Scheme.{u}) (g : Morphism U V) (a : U ⟶ V) (h : Morphism U V), Induces h a → Subsingleton (TwoIso g h))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ded2986d",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read item node (statement unchanged; only lean + stmt_deps def-sfb-locally-ringed-topos, def-sfb-scheme-etale-ringed-presentation added), all stmt_dep Lean (RingedToposMorphism, LocallyRingedTopos defs, smallEtaleTopology), both modules, report, etaleStructurePresheaf/Hom.Etale/AffineEtale. Clauses match 04HZ/04I5/04LW/04IJ/04I7: IsLocallyRingedTopos ∀X; ∃h Induces∧IsLocal; IsLocal g → ∃! a ∃h Induces h a ∧ Nonempty TwoIso; ring-compatible endo = 𝟙; Subsingleton TwoIso. Induces pins h up to ring-compatible 2-iso (representables generate; evaluations jointly epi fix ringMap; Galois-twist excluded by function equations). Small affine SmallModel presentation forced by SmallCategory in RingedToposMorphism, real setEquivalence, actual Γ ring sheaf; no hollow defs, no extra hypotheses, universe u throughout, empty scheme covered. lean.statement verbatim for both records; docstrings with tags/blueprint and nine-step proof; only sorry. No duplicate presentation found in Sheaf/WeilConjectures/Mathlib. No compile (no change)."
+ }
+}

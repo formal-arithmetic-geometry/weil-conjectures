@@ -1,0 +1,103 @@
+{
+ "id": "lem-pe-point-module-pullback-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-condensed-point-coefficients",
+   "place": "the geometric point: sheaves on (Spec Omega)_proet are condensed sets (via Omega[S]), and the coefficient sheaves pulled back from the point are the condensed coefficients; here for module objects (upstream declaration AlgebraicGeometry.ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod, recorded by the 2026-10-22 maintainer audit of upstream sorries without a DAG node)",
+   "via": []
+  },
+  "same_as": [
+   "det-pe-condensed-point-coefficients",
+   "det-pe-condensed-point-basis"
+  ]
+ },
+ "kind": "statement",
+ "title": "Pullback from the point is an equivalence on module objects over a separably closed field",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, that is a commutative monoid object in abelian condensed sheaves on profinite sets [sk-def-sfb-condensed-ring]. For a scheme $X$ let $p_X^*$ be the pullback from the point [sk-def-sfb-pullback-from-point], $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], and $p_X^*\\colon\\operatorname{Mod}_\\Lambda\\to\\operatorname{Mod}_{\\Lambda_X}$ the induced functor on module objects [sk-def-sfb-module-objects]. If $\\Omega$ is a separably closed field and $X=\\operatorname{Spec}\\Omega$, then $p_X^*\\colon\\operatorname{Mod}_\\Lambda\\to\\operatorname{Mod}_{\\Lambda_X}$ is an equivalence of categories (the pro-étale site of $\\operatorname{Spec}\\Omega$ being equivalent to profinite sets through $S\\mapsto\\operatorname{Spec}LC(S,\\Omega)$ [det-pe-condensed-point-basis]).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-coefficients.md",
+  "place": "det-pe-condensed-point-coefficients: the geometric point: sheaves on (Spec Omega)_proet are condensed sets (via Omega[S]), and the coefficient sheaves pulled back from the point are the condensed coefficients; here for module objects; Lean: upstream file lean/WeilConjectures/WeilObject/Sheaf/Stalk.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod (module WeilConjectures.WeilObject.Sheaf.Stalk, lines 132-134, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "det-pe-condensed-point-basis"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of condensed modules to the pro-etale site of a separably closed field is an equivalence",
+   "results": "SheafOfModules.pullback, pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), CondensedMod.isDiscrete_tfae (Mathlib.Condensed.Discrete.Characterization): no pro-etale point",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence, CondensedMod",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'upperStarFromPoint|ProEt|proEtale' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean (the pro-etale topology and site S.ProEt only), Sites/ElladicCohomology.lean; no comparison with condensed sets",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration without a DAG node (maintainer audit of dag/lean_audit.json, the human's order 2026-10-22: every sorried upstream declaration gets a node whether or not a target needs it); no sorry-free SHEAF declaration states it; recorded so that stage 1 splits it when a target reaches it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod",
+     "module": "WeilConjectures.WeilObject.Sheaf.Stalk",
+     "lines": [
+      132,
+      134
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-condensed-point",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilObject.Sheaf.Stalk",
+  "file": "lean/WeilConjectures/WeilObject/Sheaf/Stalk.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod"
+  ],
+  "statement": "instance isEquivalence_upperStarFromPointMod [IsSepClosed Ω] :\n    (upperStarFromPointMod Λ (Spec (.of Ω))).IsEquivalence :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; an instance; no other upstream or SHEAF declaration names it"
+ }
+}

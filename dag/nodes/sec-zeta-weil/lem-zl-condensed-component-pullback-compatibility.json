@@ -2,7 +2,7 @@
  "id": "lem-zl-condensed-component-pullback-compatibility",
  "kind": "statement",
  "title": "Component pullback coefficient and scalar comparison squares",
- "statement": "Let Lambda be a commutative condensed ring [sk-def-sfb-condensed-ring] and T a w-contractible affine scheme [sk-def-pe-wlocal]. For the fixed relative test inverse image [def-zl-condensed-lisse-evaluation-model], assume continuity, braidedness and preservation of finite limits and colimits. Then there is a ring-object coefficient isomorphism alpha and a monoidal factorization beta from restriction to pi_0(T) followed by component inverse image to the actual point inverse image, with alpha induced by beta at Lambda. The corresponding componentComparisons hold: triangulated strong symmetric component pullback preserves the unit, induces the lisse equivalence, and carries the actual section-ring realization and both point-scalar realizations to one another by the displayed natural isomorphisms.",
+ "statement": "Let Lambda be a commutative condensed ring [sk-def-sfb-condensed-ring] and T a w-contractible affine scheme [sk-def-pe-wlocal]. For the fixed relative test inverse image [def-zl-condensed-lisse-evaluation-model], assume continuity, braidedness and preservation of finite limits and colimits. Then there is a ring-object coefficient isomorphism alpha and a monoidal factorization beta from restriction to pi_0(T) followed by component inverse image to the actual point inverse image, with alpha induced by beta at Lambda. The corresponding componentComparisons hold: triangulated strong symmetric component pullback preserves the unit, induces the lisse equivalence, and carries the actual section-ring realization and both point-scalar realizations to one another by the displayed natural isomorphisms. The section-ring isomorphism in componentComparisons commutes with point scalars, with their images computed by the explicit monoidal point-inverse-image section affineScalarSection [def-zl-condensed-lisse-evaluation-model].",
  "source": {
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
   "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
@@ -14,60 +14,41 @@
  ],
  "proof": [
   {
-   "text": "Use the relative-site factorization and take its adjunction mate on abelian sheaves. Its uniqueness gives monoidal beta and its value at Lambda gives alpha.",
+   "text": "Lift the monoidal point factorization to monoid objects using mapMonCompIso and mapMonNatIso; its underlying hom is beta at Lambda, giving alpha with the required equality.",
    "uses": [
-    "lem-zl-component-relative-profinite-site",
-    "lem-zl-condensed-component-inverse-image",
-    "lem-trf-geometric-inverse-image-exact"
+    "lem-zl-component-point-monoidal-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the normalized section-ring realization comparisons and derived symmetry. Exact mapDerivedCategory is triangulated; its monoidal unit isomorphism gives unit preservation.",
+   "uses": [
+    "lem-zl-component-section-realization",
+    "lem-zl-component-derived-symmetry"
    ],
    "elementary": false
   },
   {
-   "text": "Termwise coefficient module pullback is exact. Canonical tensor pullback gives derived strong symmetry and the unit comparison. Clopen refinement and point-basis evaluation identify the two section rings with Lambda(pi_0 T), including constants.",
+   "text": "The proved lisse assembly conjugates perfect scalar transport by the two contractible evaluation equivalences. The proved final scalar assembly composes point realization and derived scalar comparisons. Combine these with the preceding comparisons to obtain every conjunct.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "det-pe-wcb-clopen-partition",
-    "lem-weil-pbc-condensed-point-basis-evaluation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On flat-term K-flat complexes compare pulled-back scalar realizations by the ordinary balanced tensor maps. K-flat preservation and tensor descent give the natural realization square on the whole unbounded derived category.",
-   "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-sfb-constant-realization-derived-scalar-extension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The component space is extremally disconnected. Apply contractible evaluation on both sites and identify the component functor with scalar transport between perfect categories. This gives the lisse equivalence. Compose the point factorization with the scalar square for the final scalar formula.",
-   "uses": [
-    "sk-def-pe-wlocal",
-    "lem-zl-contractible-derived-sections-tensor",
-    "lem-zl-contractible-lisse-evaluation",
-    "lem-zl-condensed-profinite-scalar-compatibility"
+    "lem-zl-component-lisse-equivalence",
+    "lem-zl-component-final-scalar-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-zl-component-relative-profinite-site",
-  "lem-zl-condensed-component-inverse-image",
-  "lem-trf-geometric-inverse-image-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "det-pe-wcb-clopen-partition",
-  "lem-weil-pbc-condensed-point-basis-evaluation",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-sfb-constant-realization-derived-scalar-extension",
-  "sk-def-pe-wlocal",
-  "lem-zl-contractible-derived-sections-tensor",
-  "lem-zl-contractible-lisse-evaluation",
-  "lem-zl-condensed-profinite-scalar-compatibility"
+  "lem-zl-component-point-monoidal-factorization",
+  "lem-zl-component-section-realization",
+  "lem-zl-component-derived-symmetry",
+  "lem-zl-component-lisse-equivalence",
+  "lem-zl-component-final-scalar-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "D8",
+  "date": "2026-10-25",
+  "reason": "Lean assembly of the original HRS argument, with factorization, derived symmetry and normalized realizations split off as strictly smaller obligations.",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
   "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
  },
@@ -138,13 +119,42 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-c6182",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "D8",
   "result": "pass",
-  "landing": "20261021T061639-L-1805080",
+  "landing": "20261025T095038-L-3286008",
   "kind": "interface",
-  "note": "independent cc review: c6182125 Lean files byte-identical to reviewed-PASS head 9b2e5f6694; delivered CondensedLisseEvaluationModel vs current live CondensedWContractibleLisseEvaluation (label-mapped diff: only plain imports and the theorem removed); item theorem signature vs live; item node vs live node (only proof/proof_deps/proof_origin/lean.declarations/note); compiled all 7 modules plus both direct importers; #print axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q3 stage 3",
+  "old_statement": "Let Lambda be a commutative condensed ring [sk-def-sfb-condensed-ring] and T a w-contractible affine scheme [sk-def-pe-wlocal]. For the fixed relative test inverse image [def-zl-condensed-lisse-evaluation-model], assume continuity, braidedness and preservation of finite limits and colimits. Then there is a ring-object coefficient isomorphism alpha and a monoidal factorization beta from restriction to pi_0(T) followed by component inverse image to the actual point inverse image, with alpha induced by beta at Lambda. The corresponding componentComparisons hold: triangulated strong symmetric component pullback preserves the unit, induces the lisse equivalence, and carries the actual section-ring realization and both point-scalar realizations to one another by the displayed natural isomorphisms.",
+  "what": "Make explicit the constant-scalar compatibility used in the existing proof step and source. The statement now includes the scalar normalization conjunct of the repaired componentComparisons definition; all prior conclusions remain.",
+  "source": {
+   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+   "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+  },
+  "citers": [
+   {
+    "id": "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   }
+  ]
  }
 }

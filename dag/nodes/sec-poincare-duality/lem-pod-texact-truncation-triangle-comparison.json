@@ -1,0 +1,224 @@
+{
+ "id": "lem-pod-texact-truncation-triangle-comparison",
+ "kind": "statement",
+ "title": "Normalized t-exact comparison of entire truncation triangles",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be triangulated categories [def-weil-triangulated-category] with bounded t-structures [def-weil-t-structure]. Let $F:\\mathcal C\\to\\mathcal D$ be an exact functor preserving both halves in every integer degree, equipped with its coherent shift comparison $s_{K,r}:F(K[r])\\xrightarrow{\\sim}(FK)[r]$. For $m\\in\\mathbf Z$ let $U_K=\\tau^{\\le m}_{\\mathcal C}K$, $V_K=\\tau^{\\ge m+1}_{\\mathcal C}K$ and write the canonical distinguished truncation triangle [lem-weil-heart-short-exact-triangles] as $U_K\\xrightarrow{\\iota_K}K\\xrightarrow{\\pi_K}V_K\\xrightarrow{\\delta_K}U_K[1]$. Let $c^-_K:FU_K\\simeq\\tau^{\\le m}_{\\mathcal D}FK$ and $c^+_K:FV_K\\simeq\\tau^{\\ge m+1}_{\\mathcal D}FK$ be the unique natural comparisons [lem-pod-texact-truncation-comparison] satisfying $\\iota_{FK}c^-_K=F(\\iota_K)$ and $c^+_KF(\\pi_K)=\\pi_{FK}$.\n\nThe triple $(c^-_K,1_{FK},c^+_K)$ is the unique isomorphism of distinguished triangles from $F(U_K)\\to FK\\to F(V_K)\\xrightarrow{s_{U_K,1}F(\\delta_K)}F(U_K)[1]$ to the canonical truncation triangle of $FK$, with middle component $1_{FK}$. In particular its last square is\n$$\\delta_{FK}c^+_K=c^-_K[1]s_{U_K,1}F(\\delta_K).$$\nFor any morphism $v:K\\to L$ of $\\mathcal C$, the triple $(\\tau^{\\le m}v,v,\\tau^{\\ge m+1}v)$ is a morphism of the canonical truncation triangles, so\n$$\\delta_L\\tau^{\\ge m+1}(v)=\\tau^{\\le m}(v)[1]\\delta_K.$$\nThe comparison triples are natural in $K$ as isomorphisms of triangles. All equations are in the underlying triangulated categories and include the shifted last arrow, with precisely the specified $s$.",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "BBD Proposition 1.3.3(i),(ii), printed pp. 29–30: uniqueness of the whole truncation triangle and its degree-one arrow; generic formal consequence extracted by Q25, serving prop-weil-operations.proof.md, sentence 2: Frobenius pullback commutes with truncations; final cohomology clause of prop-weil-operations.md. No Stacks tag states this general t-structure assertion."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pod-texact-truncation-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the already proved Functor.eTruncGEδLT_comm from WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject to the integer m+1. This gives exactly the boundary compatibility of the two canonical comparisons used in lem-pod-texact-truncation-comparison, with the specified F.commShiftIso 1 and the library composition order. No new boundary theorem or choice of a triangle is required.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison",
+    "def-weil-triangulated-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i),(ii), printed pp. 29–30; existing upstream and Mathlib formalizations of canonical truncations"
+   }
+  },
+  {
+   "text": "Apply Mathlib Pretriangulated.Triangle.functorIsoMk to Functor.eTruncLTIso at m+1, Iso.refl F, and Functor.eTruncGEIso at m+1. Their first two squares are Functor.eTruncLTIsoApp_hom_eTruncLTι_app and Functor.eTruncGEπ_app_eTruncGEIsoApp_hom. Their third square is Step 1 after reassociating. The constructor assembles the natural isomorphism of triangle-valued functors; its components are definitionally the three specified maps.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i),(ii), printed pp. 29–30; existing upstream and Mathlib formalizations of canonical truncations"
+   }
+  },
+  {
+   "text": "For any competing triangle isomorphism beta with middle component the identity, apply Iso.ext and Mathlib TStructure.triangle_map_ext, the truncation uniqueness argument of lem-weil-heart-short-exact-triangles(1). The image source triangle is distinguished by F.map_distinguished and triangleLTGE_distinguished. Its first object is at most m by isLE_truncLT_obj and Functor.IsTExact.isLE_obj. The target triangle is distinguished and its third object is at least m+1 by the truncGE bound. The two middle components agree by hypothesis. Hence beta equals the constructed component.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-triangulated-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i),(ii), printed pp. 29–30; existing upstream and Mathlib formalizations of canonical truncations"
+   }
+  },
+  {
+   "text": "The displayed comparison boundary equation is the symmetry of Step 1. The boundary equation for a morphism v is precisely NatTrans.naturality of tC.truncGEδLT (m+1); its target functor is truncLT (m+1) followed by shiftFunctor C 1. Thus both equations follow from the existing canonical construction without invoking TR3 a second time.",
+   "uses": [
+    "def-weil-t-structure",
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i),(ii), printed pp. 29–30; existing upstream and Mathlib formalizations of canonical truncations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "lem-pod-texact-truncation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Proposition 1.3.3(i),(ii), printed pp. 29–30; existing upstream and Mathlib formalizations of canonical truncations",
+  "note": "P3 assembles existing upstream normalized comparisons and eTruncGEδLT_comm via Mathlib Triangle.functorIsoMk, then uses Mathlib triangle_map_ext for uniqueness and naturality of truncGEδLT for the morphism boundary equation. All four original mathematical dependencies are retained, but the Sheaf comparison theorem and the source Homology module are unnecessary imports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "truncGEδLE|trunc.*[Cc]omm|[Cc]omm.*trunc",
+   "results": "9 hit(s): Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; searched Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned truncation/triangle/group-cohomology infrastructure; none gives the normalized t-exact triangle comparison or the equivariant absorption/cohomology identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncGEδLE\"",
+   "results": "1 hit(s): CategoryTheory.Triangulated.TStructure.truncGEδLE",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned truncation/triangle/group-cohomology infrastructure; none gives the normalized t-exact triangle comparison or the equivariant absorption/cohomology identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A t exact triangulated functor preserves the canonical truncation triangle including its boundary map and these comparisons are natural in morphisms",
+   "results": "8 hit(s): CategoryTheory.Functor.IsTriangulated.map_distinguished; CategoryTheory.Functor.map_distinguished; CategoryTheory.Functor.IsTriangulated; CategoryTheory.Functor.IsTriangulated.mk; CategoryTheory.Functor.IsHomological.mk; CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ'; CategoryTheory.Functor.IsTriangulated.recOn; CategoryTheory.Functor.IsTriangulated.rec",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned truncation/triangle/group-cohomology infrastructure; none gives the normalized t-exact triangle comparison or the equivariant absorption/cohomology identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact t exact functor commutes with the connecting morphism of canonical truncation triangles via the unit counit normalized truncation comparisons and its shift isomorphism",
+   "results": "8 hit(s): CategoryTheory.Functor.IsHomological.exact; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Functor.map_distinguished_op_exact; CategoryTheory.Functor.comp_homologySequenceδ_assoc; CategoryTheory.Functor.homologySequenceComposableArrows₅_exact; CategoryTheory.Functor.homologySequence_exact₂; CategoryTheory.Functor.comp_homologySequenceδ; CategoryTheory.Functor.homologySequence_exact₃",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned truncation/triangle/group-cohomology infrastructure; none gives the normalized t-exact triangle comparison or the equivariant absorption/cohomology identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical counit normalized truncation comparisons for an exact t exact functor form an isomorphism of distinguished triangles including the shifted last square",
+   "results": "8 hit(s): CategoryTheory.ShortComplex.ShortExact.singleTriangleIso; DerivedCategory.triangleOfSESIso; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₂; CochainComplex.mappingCone.mapTriangleIso; CategoryTheory.Triangulated.TStructure.truncGEδLT; CategoryTheory.Functor.map_distinguished_exact; CochainComplex.mappingCone.mapTrianglehIso",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned truncation/triangle/group-cohomology infrastructure; none gives the normalized t-exact triangle comparison or the equivariant absorption/cohomology identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "eTrunc.*(Triangle|δ)|[Tt]riangle.*[Tt]Exact|[Tt]Exact.*[Tt]riangle|truncGEδLE|triangleLEGE",
+   "results": "15 hit(s): Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean; searched Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected truncation triangle functors, mapTriangle and spectral-object infrastructure; these do not state the normalized comparison, its uniqueness, and all naturality clauses for an arbitrary t-exact functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trunc\", \"triangle\", \"Functor\"",
+   "results": "0 hit(s): none",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected truncation triangle functors, mapTriangle and spectral-object infrastructure; these do not state the normalized comparison, its uniqueness, and all naturality clauses for an arbitrary t-exact functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A t exact triangulated functor commutes with the truncation triangle and its connecting map naturally",
+   "results": "8 hit(s): CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ', CategoryTheory.Functor.IsTriangulated.recOn, CategoryTheory.Functor.IsTriangulated.rec",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected truncation triangle functors, mapTriangle and spectral-object infrastructure; these do not state the normalized comparison, its uniqueness, and all naturality clauses for an arbitrary t-exact functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact t exact functor sends canonical truncation triangles to canonically isomorphic truncation triangles including the connecting morphism",
+   "results": "8 hit(s): CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.isTriangulated_of_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected truncation triangle functors, mapTriangle and spectral-object infrastructure; these do not state the normalized comparison, its uniqueness, and all naturality clauses for an arbitrary t-exact functor"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTExact|eTruncLTIso|eTruncGEIso|mapTriangle",
+   "results": "6 hit(s): Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean; searched Mathlib/CategoryTheory/Triangulated/TStructure",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected truncation triangle functors, mapTriangle and spectral-object infrastructure; these do not state the normalized comparison, its uniqueness, and all naturality clauses for an arbitrary t-exact functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical isomorphisms F truncation and truncation F for a t exact functor commute with the boundary map and define a natural isomorphism of triangle valued functors",
+   "results": "8 hit(s): CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Triangulated.TStructure.truncGEδLT, CategoryTheory.Functor.mapTriangleCompIso, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Pretriangulated.Triangle.functorIsoMk', CategoryTheory.Triangulated.TStructure.truncLTι, CategoryTheory.Functor.mapTriangleCommShiftIso, CategoryTheory.Functor.distTriang_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected truncation triangle functors, mapTriangle and spectral-object infrastructure; these do not state the normalized comparison, its uniqueness, and all naturality clauses for an arbitrary t-exact functor"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-fixed-pair-truncation-cohomology",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "prop-weil-operations.proof.md, sentence 2: Frobenius pullback commutes with truncations; final cohomology clause of prop-weil-operations.md; BBD Proposition 1.3.3(i),(ii), printed pp. 29–30: uniqueness of the whole truncation triangle and its degree-one arrow",
+   "via": [
+    "lem-pod-fixed-pair-truncation-cohomology"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-texact-truncation-triangle-comparison",
+  "worker": "stage1",
+  "group": "Q22",
+  "summary": "Read BBD Proposition 1.3.3(i),(ii) and the current blueprint operations proof. Reuse the existing entire-triangle uniqueness and adjunction statement, identify both comparison components using their normalizations, and prove the last-arrow and naturality clauses explicitly. No new nodes; no statement change. Existing upstream eTruncGEδLT_comm covers the boundary equation only, not an exact attachment for all clauses.",
+  "blueprint": "prop-weil-operations.proof.md, sentence 2 (Frobenius pullback commutes with truncations), and the final cohomology clause of prop-weil-operations.md, via lem-pod-fixed-pair-truncation-cohomology; Steps 1–2 identify the entire image triangle, Steps 3–4 establish boundary naturality and comparison naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-b48f5c640",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-b48f5c640 (reviewer sub-agent of L); spot-checked: I read the item and every cited node: heart-short-exact-triangles(1), triangulated-category (TR3 and the exact-functor shift iso), t-structure, and texact-truncation-comparison (the normalizations and naturality). I also read BBD Prop. 1.3.3(i),(ii) on printed pp. 29-30 of the local PDF. The statement is unchanged from the node Q25 created; I diffed the whole JSON. There are no new nodes, no SGA and no cycle; I walked the proof_deps closure, and the only citer is fixed-pair-truncation-cohomology. Step 1 is elementary: exactness makes the image triangle distinguished with last arrow sF(δ), and preserving both halves puts its outer terms in the right halves. Step 2 is correct: the unique iso over 1_FK is identified with c^- because composing with ι is injective by the right adjunction; for c^+ it applies the left adjunction to b(c^+)^{-1}, so it never cancels against F(π) directly; its last square is the claimed equation with no sign. Step 3 is correct: the TR3 third component equals τ≥v because both have the same composite with π_K and V_L lies in C^{≥m+1}; its last square is the boundary-naturality equation. Step 4 is correct: naturality of s plus Step 3 makes F(T(v)) a morphism of triangles, and naturality of α^∓ gives naturality of the triples componentwise. Edge cases K in C^{≤m}, K in C^{≥m+1}, K=0, F=0 and v=0 all hold. The boundedness hypothesis is kept although no step uses it, so nothing is weakened. This is not a duplicate: the comparison node lacks the boundary and triangle clauses, and eTruncGEδLT_comm covers only the boundary square. The one minor point, which I did not repair: Step 4 does not list def-weil-triangulated-category for the naturality of s, though that node is in proof_deps. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.TExactTruncationTriangleComparison",
+  "declaration": "CategoryTheory.Triangulated.TStructure.texact_truncation_triangle_comparison",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/TExactTruncationTriangleComparison.lean",
+  "statement": "theorem texact_truncation_triangle_comparison {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] {D : Type uD} [Category.{vD} D] [Preadditive D] [HasZeroObject D] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [IsTriangulated D] (tC : TStructure C) (tD : TStructure D) (_hC : tC.bounded = ⊤) (_hD : tD.bounded = ⊤) (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [F.IsTExact tC tD] (m : ℤ) : (∃ e : tC.triangleLTGE (m + 1) ⋙ F.mapTriangle ≅ F ⋙ tD.triangleLTGE (m + 1), (∀ K : C, (e.hom.app K).hom₁ = (F.eTruncLTIso tC tD (m + 1 : ℤ)).hom.app K ∧ (e.hom.app K).hom₂ = 𝟙 (F.obj K) ∧ (e.hom.app K).hom₃ = (F.eTruncGEIso tC tD (m + 1 : ℤ)).hom.app K ∧ ∀ β : F.mapTriangle.obj ((tC.triangleLTGE (m + 1)).obj K) ≅ (tD.triangleLTGE (m + 1)).obj (F.obj K), β.hom.hom₂ = 𝟙 (F.obj K) → β = e.app K) ∧ (∀ K : C, (F.eTruncGEIso tC tD (m + 1 : ℤ)).hom.app K ≫ (tD.truncGEδLT (m + 1)).app (F.obj K) = F.map ((tC.truncGEδLT (m + 1)).app K) ≫ (F.commShiftIso (1 : ℤ)).hom.app ((tC.truncLT (m + 1)).obj K) ≫ ((F.eTruncLTIso tC tD (m + 1 : ℤ)).hom.app K)⟦(1 : ℤ)⟧')) ∧ (∀ (K L : C) (v : K ⟶ L), (tC.truncGE (m + 1)).map v ≫ (tC.truncGEδLT (m + 1)).app L = (tC.truncGEδLT (m + 1)).app K ≫ ((tC.truncLT (m + 1)).map v)⟦(1 : ℤ)⟧')",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ffee383d1",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Each hypothesis and conclusion clause matches the node and the dependency declarations: the canonical truncation triangle at m+1, F.mapTriangle's last arrow F(δ)≫commShiftIso 1, c⁻ and c⁺ as the dependency's eTruncLTIso/eTruncGEIso at m+1, the triangle isomorphism e pinned in all three components, objectwise uniqueness over the identity middle, the last square and boundary naturality in diagrammatic order, and naturality via e. Edge cases and the four universes are covered with no added assumptions. The recorded statement is verbatim in the file, the node differs from live only in its lean field, and there is no duplicate (the per-texact systems node and TExactCohomologyBoundaryComparison are different statements). No definitions, proof only sorry, docstrings and report sections present. I changed no file and did not compile; the worker reports a clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261024T190526-L-4082038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

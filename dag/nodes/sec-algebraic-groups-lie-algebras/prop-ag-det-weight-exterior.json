@@ -107,7 +107,104 @@
   "def-wf-weil-category"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
+     "lines": [
+      875,
+      949
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Monodromy.DegreeDatum.exists_detWeight_eq_sum_of_exteriorPower",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
+     "lines": [
+      624,
+      761
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Representation.exists_detWeight_eq_sum_of_exteriorPower",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
+     "lines": [
+      951,
+      1017
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Representation.CompositionSeries.exteriorPower_detWeight",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
+     "lines": [
+      1318,
+      1350
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-exterior"
+ "unit": "sk-p-exterior",
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix a real weight character $\\lambda$ as in [d-weights], and let $V$ be\na nonzero Weil representation of a degree datum ([d-monodromy]) over an\nalgebraically closed field of characteristic zero. Choose a\ncomposition series in the sense of\n[def-mg-weil-composition-series], with simple factors\n$A_1,\\ldots,A_t$. Write $d_a=\\dim A_a$ and let\n$\\gamma_a=\\dw_\\lambda(A_a)$.\nLet $R$ be the set of distinct values among the $\\gamma_a$, and put\n\n$$\nr(\\gamma):=\\sum_{\\gamma_a=\\gamma}d_a,\n$$\n\nThus $\\dim V=\\sum_{\\gamma\\in R}r(\\gamma)$. Let\n$0\\le r\\le\\dim V$, and assume that every $A_a$ and every\nJordan–Holder constituent of $\\bigwedge^rV$ has finite\ngeometric determinant. Then every Jordan–Holder constituent of\n$\\bigwedge^rV$ has\ndeterminant weight\n\n$$\n\\sum_{\\gamma\\in R}n_\\gamma\\gamma,\n\\qquad 0\\le n_\\gamma\\le r(\\gamma),\n\\qquad \\sum_{\\gamma\\in R}n_\\gamma=r.\n$$\n\nConversely every admissible tuple $(n_\\gamma)$ occurs as the\ndeterminant weight of at least one\nJordan–Holder constituent. The input factors\n$\\gamma_a$ are counted with multiplicity; the assertion concerns the\npossible weights and their non-emptiness, not an equality of output\nmultiplicities for coincident sums.",
+  "proof": [
+   {
+    "text": "Write $V$ for the Weil representation. The factors and their weights\nare those of\n[def-mg-weil-composition-series] and [d-weights]. The Weil\nsemisimplification $V^{\\mathrm{ss}}=\\bigoplus_aA_a$ of\n[def-mg-weil-semisimplification] is a semisimple Weil representation,\nso [lem-mg-common-positive-central-element] applies to it, giving\na central element $z$ of degree $d>0$ (in the monodromy data of\n[def-wf-monodromy-data]). For each simple\nfactor $A_a$, its image is\ncentral by [lem-mg-degree-component-functoriality]. Its matrix\ncommutes with the Weil-group image on $A_a$, so\n[lem-wf-schur-scalar] applies to this Weil-simple representation and\ngives a scalar $c_a$. The central-element formula\n[cor-mg-central-determinant-weight], applicable because $A_a$ has\nfinite geometric determinant, gives\n\n$$\n\\gamma_a=\\frac{\\lambda(c_a)}{d}.\n$$",
+    "uses": [
+     "def-mg-weil-composition-series",
+     "d-weights",
+     "def-mg-weil-semisimplification",
+     "lem-mg-common-positive-central-element",
+     "def-wf-monodromy-data",
+     "lem-mg-degree-component-functoriality",
+     "lem-wf-schur-scalar",
+     "cor-mg-central-determinant-weight"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By [lem-mg-filtered-exterior-power], $\\bigwedge^rV$ has a finite\nWeil-stable filtration with nonzero successive quotients\n\n$$\nQ_{\\boldsymbol n}=\\bigotimes_{a=1}^t\\bigwedge^{n_a}A_a,\n\\qquad 0\\le n_a\\le d_a,\n\\qquad \\sum_a n_a=r,\n$$\n\neach a tensor construction on subquotients of $V^{\\mathrm{ss}}$.\nThe refinement lemma [lem-mg-filtration-refinement] reduces all\ncomposition factors to these quotients. On $Q_{\\boldsymbol n}$, the\ncentral element acts by $c_{\\boldsymbol n}:=\\prod_a c_a^{n_a}$. Every\nsimple factor $C$ of this quotient receives a central degree-$d$ element\nby [lem-mg-degree-component-functoriality]; its matrix commutes with\nthe Weil-group image on $C$, and therefore is scalar by Schur's lemma.\nSince $C$ has finite geometric determinant by assumption,\n[cor-mg-central-determinant-weight] gives\n\n$$\n\\dw_\\lambda(C)=\\frac{\\lambda(c_{\\boldsymbol n})}{d}\n=\\sum_a n_a\\gamma_a.\n$$",
+    "uses": [
+     "lem-mg-filtered-exterior-power",
+     "lem-mg-filtration-refinement",
+     "lem-mg-degree-component-functoriality",
+     "cor-mg-central-determinant-weight"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Grouping equal $\\gamma_a$'s gives the asserted aggregate tuple and its\ncapacity bounds. Conversely, for an admissible tuple $(n_\\gamma)$,\ndistribute each $n_\\gamma$ among the indices with $\\gamma_a=\\gamma$,\nnever exceeding $d_a$. The resulting $Q_{\\boldsymbol n}$ is nonzero,\nso [lem-mg-composition-series-exists] gives a simple factor, whose\nweight is the required sum. This proves the converse.",
+    "uses": [
+     "lem-mg-composition-series-exists"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
+ }
 }

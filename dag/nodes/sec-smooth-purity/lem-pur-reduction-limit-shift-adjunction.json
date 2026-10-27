@@ -17,50 +17,40 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-sequence-adjoint-resolution-shifts] to the fixed quotient sequence on the small pro-etale site of $W$. It supplies the actual ringed-topos projection $p$, identifies $Lp^*\\dashv Rp_*$ with the supplied $\\mathcal R_W\\dashv\\mathcal L_W$ as adjunctions, and identifies their canonical resolution shifts with the prescribed termwise comparisons. In particular the right comparison is normalized by $j[r]$, not by choosing an unrelated shift on a right adjoint.",
+   "text": "Fix the canonical totalLimitCommShift. Apply [lem-pur-coefficient-roos-shift-normalization] for its replacement-model square, normalized triangles and signed shift equations. Its general replacement-shift argument uses the existing proved generic comparisonIso_shifts.",
    "uses": [
-    "lem-pur-sequence-adjoint-resolution-shifts"
+    "lem-pur-sequence-kinjective-comparison-shifts",
+    "lem-pur-coefficient-roos-shift-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 1–3 and the adjunction-identification part of step 4. Agent resolution-normalized specialization of Stacks sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-derived-adjunction-shift] to this $p$. Its sites are small and its rings commutative by step 1. With $\\rho_{P,r}:\\mathcal R(P[r])\\to\\mathcal R(P)[r]$ and $\\lambda_{N,r}:\\mathcal L(N[r])\\to\\mathcal L(N)[r]$, transport its unit and counit equations through the adjunction identification of step 1. They are $\\lambda_{\\mathcal RP,r}\\,\\mathcal L(\\rho_{P,r})\\,u_{P[r]}=u_P[r]$ and $e_{N[r]}=e_N[r]\\,\\rho_{\\mathcal LN,r}\\,\\mathcal R(\\lambda_{N,r})$, as natural system transformations for every integer $r$. No completeness of $P$ or normalization of $N$ is required.",
+   "text": "Give S.reduction the left-adjoint mate shift. Apply [lem-pur-reduction-finite-shift-normalization] to get finite shifts, finite_shift_model and shift compatibility of the actual evaluations. Mathlib Adjunction.commShift_of_rightAdjoint, shift_unit_app and commShiftIso_hom_app_counit_app_shift give unit_shift and counit_shift for the actual S.adjunction.",
    "uses": [
-    "lem-pur-sequence-adjoint-resolution-shifts",
-    "lem-weil-pbc-derived-adjunction-shift"
+    "lem-pur-reduction-finite-shift-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint); derived.tex Tag 0A8D (lemma-adjoint-is-exact), using the canonical integer-shift compatibility in the cited DAG theorem."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pur-injective-tower-roos-shifts] to constant-$\\widehat R_W$ towers after exact restriction of scalars. Its $\\eta_I$ compares the actual limit to the Roos cone, and $\\chi_{I,r}(y,x)=((-1)^r y,x)$ satisfies $\\chi_{I,r}\\eta_{I[r]}=\\eta_I[r]$. Step 1 fixes $\\lambda$ to this same total-limit shift, so the equations of step 2 use exactly the signed cone comparison, including the connecting-map sign. The child also gives naturality and addition of shifts. At $r=0$ the displayed formulas are identities; at $r=\\pm1$ only the first cone coordinate is negated. Zero objects, degree-zero coefficients and the empty scheme satisfy these formulas; indices remain $n\\ge1$.",
+   "text": "The ringed-site Grothendieck/K-injective theorem and the derived-category product construction supply countable products. Apply [lem-pur-coefficient-roos-shift-normalization] for the normalized Roos family and its two signed shift equations. Assemble these fields with the preceding comparisons into PurReductionLimitShiftData.",
    "uses": [
-    "lem-pur-sequence-adjoint-resolution-shifts",
-    "lem-pur-injective-tower-roos-shifts"
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-coefficient-roos-shift-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 5–6 and the cone boundary checks in step 7. Agent signed refinement of Stacks sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok)."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-injective-tower-roos-shifts",
-  "lem-pur-sequence-adjoint-resolution-shifts",
-  "lem-weil-pbc-derived-adjunction-shift"
+  "lem-pur-coefficient-roos-shift-normalization",
+  "lem-pur-reduction-finite-shift-normalization",
+  "lem-pur-sequence-kinjective-comparison-shifts",
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-  "place": "Coefficient-comparison sentence, specialized via the two extracted resolution/cone lemmas; Stacks derived.tex Tag 0A8D (lemma-adjoint-is-exact) through the existing generic canonical derived-adjunction shift theorem."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence: transport through the actual reduction/total-limit adjunction, with its unit and counit.",
+  "note": "Assembly uses the proved generic replacement-shift helper, canonical adjoint mate shifts, finite normalization and signed arbitrary-replacement Roos normalization. No geometric hypotheses are introduced."
  },
  "mathlib_searches": [
   {
@@ -149,7 +139,18 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "merged_into": null,
  "split_report": {
   "date": "2026-10-21",
@@ -166,17 +167,6 @@
  },
  "tool_uses": [
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-pbc-derived-adjunction-shift",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-kinjective-shift",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-roos-split-comparison",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-tower-evaluation-kinjective",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "reviewed": {
@@ -191,11 +181,6 @@
   "module": "Sheaf.Paper.PurReductionLimitShiftAdjunction",
   "declaration": "WeilConjectures.purReductionLimitShiftAdjunction",
   "declarations": [
-   "WeilConjectures.purCoefficientLimitModel",
-   "WeilConjectures.purCoefficientShiftedResolution",
-   "WeilConjectures.purCoefficientRoosProductShift",
-   "WeilConjectures.PurCoefficientRoosTriangle",
-   "WeilConjectures.PurReductionLimitShiftData",
    "WeilConjectures.purReductionLimitShiftAdjunction"
   ],
   "file": "lean/Sheaf/Paper/PurReductionLimitShiftAdjunction.lean",
@@ -230,5 +215,15 @@
    }
   ],
   "what": "The existential conclusion allowed choosing a new coefficient calculus S and its coherence witness, so it did not assert shift compatibility for each calculus already supplied by the cited evaluation-calculus statement. The source quantifies over the actual derived reduction/limit adjunction; the corrected statement makes that universal quantification explicit while retaining every hypothesis and clause."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5840a",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261025T205419-L-3232844",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembly from totalLimitCommShift, left-adjoint mate shift, the two new split lemmas, derived products, Mathlib unit/counit shift lemmas) against lem-pur-reduction-limit-shift-adjunction and the unchanged PurReductionLimitShiftData fields; the two new sorry statements against their nodes and def-coef-reduction-limit-shift-data; the moved declarations against the published module; all 9 direct importers compiled against the delivered modules"
  }
 }

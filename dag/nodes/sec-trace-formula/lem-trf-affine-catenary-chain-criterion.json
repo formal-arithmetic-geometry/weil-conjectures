@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-affine-catenary-chain-criterion",
+ "kind": "statement",
+ "title": "Affine catenarity as a criterion on irreducible-closed chains",
+ "statement": "Let $T$ be an affine scheme [def-pc-scheme] and put $R=\\Gamma(T,\\mathcal O_T)$. There is a homeomorphism $h:|T|\\longrightarrow|\\operatorname{Spec}R|$ [def-weil-affine-spectrum]. For any prime ideals $\\mathfrak p\\subseteq\\mathfrak q$ of $R$, the assignment $\\mathfrak r\\mapsto h^{-1}(V_R(\\mathfrak r))$, where $V_R(\\mathfrak r)=\\{\\mathfrak s\\in\\operatorname{Spec}R:\\mathfrak r\\subseteq\\mathfrak s\\}$, is an inclusion-reversing bijection from the entire prime interval $[\\mathfrak p,\\mathfrak q]$ to the entire interval of irreducible closed subsets [def-weil-irreducible-components] between $h^{-1}(V_R(\\mathfrak q))$ and $h^{-1}(V_R(\\mathfrak p))$. It induces, by reversing the order of the images, a length-preserving bijection between finite strict chains with those endpoints, and this bijection restricts to the saturated chains. Here chain length is the number of strict inclusions, and a chain is saturated if no intermediate member of the corresponding interval can be inserted between adjacent terms. Consequently $R$ is catenary [def-exc-excellent-ring] if and only if, for every pair $Z\\subseteq Z'$ of irreducible closed subsets of $|T|$, the lengths of finite strict chains from $Z$ to $Z'$ have a finite upper bound and all saturated chains from $Z$ to $Z'$ have the same length. Whenever these lengths are bounded there exists a saturated chain with the specified endpoints. The equivalence includes the empty affine scheme: its global section ring is the zero ring and both kinds of interval are absent.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02IH (lemma-catenary), using lemma-irreducible; affine presentation as in literature/stacks-project/schemes.tex Tag 01HW (definition-affine-scheme)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components",
+  "def-exc-excellent-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-affine-open-spec-points] with $X=T$ and $U=T$. Its isomorphism $T\\cong\\operatorname{Spec}\\Gamma(T,\\mathcal O_T)$ gives the required underlying homeomorphism $h$. This applies also to the empty affine scheme.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HW (definition-affine-scheme); affine-open identification in lem-weil-pbc-affine-open-spec-points."
+   }
+  },
+  {
+   "text": "A homeomorphism gives mutually inverse inclusion-preserving maps on closed subsets by inverse image and image. These preserve nonemptiness and irreducibility: a decomposition into two closed proper subsets pulls back to such a decomposition, and applying the inverse homeomorphism proves the converse. By [def-weil-irreducible-components], $h^{-1}$ therefore bijects the irreducible closed subsets of $\\operatorname{Spec}R$ with those of $T$.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IH (lemma-catenary), proof using Tag 00ES (lemma-irreducible) and Tag 00NI (definition-catenary)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], $\\mathfrak r\\mapsto V_R(\\mathfrak r)$ bijects primes with irreducible closed subsets and reverses and reflects inclusion. Compose with Step 2 to obtain $F$. Thus $\\mathfrak p\\subseteq\\mathfrak r\\subseteq\\mathfrak q$ implies $F(\\mathfrak q)\\subseteq F(\\mathfrak r)\\subseteq F(\\mathfrak p)$. Conversely, for any irreducible closed $W$ in this latter interval, take its unique preimage $\\mathfrak r=F^{-1}(W)$; inclusion reflection gives both $\\mathfrak p\\subseteq\\mathfrak r$ and $\\mathfrak r\\subseteq\\mathfrak q$. This proves bijectivity on the entire interval.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IH (lemma-catenary), proof using Tag 00ES (lemma-irreducible) and Tag 00NI (definition-catenary)."
+   }
+  },
+  {
+   "text": "For $\\mathfrak p=\\mathfrak r_0\\subsetneq\\cdots\\subsetneq\\mathfrak r_n=\\mathfrak q$, set $Z_i=F(\\mathfrak r_{n-i})$ for $0\\leq i\\leq n$. Inclusion reversal and injectivity give a strict chain of length $n$. The inverse is $\\mathfrak r_i=F^{-1}(Z_{n-i})$, so both composites are identities, also for $n=0$. Every possible insertion between adjacent $Z_i$ lies in the full endpoint interval; by Step 3 its unique preimage lies strictly between the corresponding adjacent primes. Conversely any prime insertion yields such a closed-subset insertion. Hence the bijection restricts to saturated chains.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IH (lemma-catenary), proof using Tag 00ES (lemma-irreducible) and Tag 00NI (definition-catenary)."
+   }
+  },
+  {
+   "text": "In either type of interval with comparable endpoints, there is a finite strict chain: the two endpoints when distinct, or the singleton when equal. If all lengths are at most $N$, the attained lengths form a nonempty subset of $\\{0,\\ldots,N\\}$ and hence have a greatest member $n$. Choose a chain attaining $n$. An insertion between adjacent terms would give length $n+1$, a contradiction. Thus there is a saturated chain; neither Noetherianity nor finiteness of the interval is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IH (lemma-catenary), proof using Tag 00ES (lemma-irreducible) and Tag 00NI (definition-catenary)."
+   }
+  },
+  {
+   "text": "Use the catenary clause of [def-exc-excellent-ring]: bounded finite strict chain lengths and equal saturated-chain lengths in each prime interval. Its Noetherian qualification concerns universal catenarity, not catenarity. Given $Z\\subseteq Z'$, the global bijection $F$ gives unique primes $\\mathfrak p\\subseteq\\mathfrak q$ with $Z=F(\\mathfrak q)$ and $Z'=F(\\mathfrak p)$. Step 4 identifies all chain lengths and all saturated-chain lengths in these intervals, so boundedness and equality hold on one side exactly when they hold on the other.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IH (lemma-catenary), proof using Tag 00ES (lemma-irreducible) and Tag 00NI (definition-catenary)."
+   }
+  },
+  {
+   "text": "If $T$ is empty, the sheaf axiom for its empty covering gives a unique global section, so its section ring is the zero ring. This ring has no proper prime ideal, since its only ideal is the whole ring, and the empty space has no nonempty irreducible closed subset. There are no intervals to quantify over and both conditions are vacuous. Equal endpoints in any nonempty interval give the singleton chain of length zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IH (lemma-catenary), proof using Tag 00ES (lemma-irreducible) and Tag 00NI (definition-catenary)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-exc-excellent-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02IH (lemma-catenary), proof using Tag 00ES (lemma-irreducible) and Tag 00NI (definition-catenary)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme, catenarity of its global section ring is equivalent to bounded lengths of chains of irreducible closed subsets between fixed endpoints and equality of saturated chain lengths",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R], topologicalKrullDim (PrimeSpectrum R) = ringKrullDim R\", \"doc\": \"For any commutative semiring $ R $, the Krull dimension of the prime spectrum $ \\\\operatorname{Spec}(R) $ as a topological space (with the Zariski topology) is equal to the Krull dimension of $ R $ as \"}\n  {\"name\": \"ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Basic\", \"type\": \"(R : Type u_1) → [CommSemiring R] → WithBot ℕ∞\", \"doc\": \"The Krull dimension of a commutative semiring $ R $ is defined as the supremum of the lengths of all strictly increasing chains of prime ideals in its prime spectrum $ \\text{Spec}(R) $, measured as an \"}\n  {\"name\": \"Ring.KrullDimLE\", \"module\": \"Mathlib/RingTheory/KrullDimension/Basic\", \"type\": \"ℕ → (R : Type u_1) → [CommSemiring R] → Prop\", \"doc\": \"For a commutative semiring $ R $, the proposition that the Krull dimension of its prime spectrum (ordered by inclusion) is less than or equal to a natural number $ n $. This means the longest chain of\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  topologicalKrullDim ↥X ≤ 0 → AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"Ideal.exists_ltSeries_length_eq_height\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (p : Ideal R) [inst_1 : p.IsPrime] [p.FiniteHeight],\\n  ∃ l, RelSeries.last l = { asIdeal := p, isPrime := ⋯ } ∧ ↑l.length = p.height\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in a commutative ring with finite height, there exists a strictly increasing chain of prime ideals in the prime spectrum ending at $\\\\mathfrak{p}$ such that the lengt\"}\n  {\"name\": \"Ring.krullDimLE_iff\", \"module\": \"Mathlib/RingTheory/KrullDimension/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {n : ℕ}, Ring.KrullDimLE n R ↔ ringKrullDim R ≤ ↑n\", \"doc\": \"For a commutative semiring $ R $ and a natural number $ n $, the proposition that the Krull dimension of $ R $ is less than or equal to $ n $ is equivalent to the Krull dimension of $ R $ being less t\"}\n  {\"name\": \"ringKrullDim_le_iff_height_le\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] (n : WithBot ℕ∞), ringKrullDim R ≤ n ↔ ∀ ⦃p : Ideal R⦄, p.IsPrime → ↑p.height ≤ n\", \"doc\": \"For a commutative ring $ R $ and an extended natural number $ n $ (with a bottom element), the Krull dimension of $ R $ is less than or equal to $ n $ if and only if every prime ideal $ \\\\mathfrak{p} $\"}\n  {\"name\": \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/LTSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] (p : LTSeries (PrimeSpectrum R)) {x : R},\\n  x ∈ (RelSeries.last p).asIdeal →\\n    ∃ q,\\n      x ∈ (q.toFun 1).asIdeal ∧\\n        p.length = q.length ∧ RelSeries.head p = RelSeries.head q ∧ RelSeries.last p = RelSeries.last q\", \"doc\": \"For any strict order relation series $ p $ in the prime spectrum of a commutative semiring $ R $, if an element $ x \\\\in R $ belongs to the last ideal of $ p $, then there exists another strict order r\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete criterion: spectrum/irreducible-closed order duality and RelSeries mapping are supporting tools, but no result asserts the affine global-sections catenary equivalence with both bounded lengths and equal saturated-chain lengths."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An order reversing correspondence from prime ideals to irreducible closed subsets of an affine scheme preserves lengths and saturation of finite chains",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.zeroLocusEquivIrreducibleCloseds\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"{R : Type u} →\\n  [inst : CommSemiring R] →\\n    (I : Set R) → ↑(PrimeSpectrum.zeroLocus I) ≃o (TopologicalSpace.IrreducibleCloseds ↑(PrimeSpectrum.zeroLocus I))ᵒᵈ\", \"doc\": \"For any subset $ I $ of a commutative semiring $ R $, the zero locus $ V(I) $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology admits a canonical order isomorphism w\"}\n  {\"name\": \"PrimeSpectrum.pointsEquivIrreducibleCloseds\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → PrimeSpectrum R ≃o (TopologicalSpace.IrreducibleCloseds (PrimeSpectrum R))ᵒᵈ\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, is order isomorphic to the order dual of its irreducible closed subsets. This isomorphism\"}\n  {\"name\": \"Ideal.exists_ltSeries_length_eq_height\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (p : Ideal R) [inst_1 : p.IsPrime] [p.FiniteHeight],\\n  ∃ l, RelSeries.last l = { asIdeal := p, isPrime := ⋯ } ∧ ↑l.length = p.height\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in a commutative ring with finite height, there exists a strictly increasing chain of prime ideals in the prime spectrum ending at $\\\\mathfrak{p}$ such that the lengt\"}\n  {\"name\": \"PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R], topologicalKrullDim (PrimeSpectrum R) = ringKrullDim R\", \"doc\": \"For any commutative semiring $ R $, the Krull dimension of the prime spectrum $ \\\\operatorname{Spec}(R) $ as a topological space (with the Zariski topology) is equal to the Krull dimension of $ R $ as \"}\n  {\"name\": \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/LTSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] (p : LTSeries (PrimeSpectrum R)) {x : R},\\n  x ∈ (RelSeries.last p).asIdeal →\\n    ∃ q,\\n      x ∈ (q.toFun 1).asIdeal ∧\\n        p.length = q.length ∧ RelSeries.head p = RelSeries.head q ∧ RelSeries.last p = RelSeries.last q\", \"doc\": \"For any strict order relation series $ p $ in the prime spectrum of a commutative semiring $ R $, if an element $ x \\\\in R $ belongs to the last ideal of $ p $, then there exists another strict order r\"}\n  {\"name\": \"ringKrullDim_quotient\", \"module\": \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R), ringKrullDim (R ⧸ I) = Order.krullDim ↑(PrimeSpectrum.zeroLocus ↑I)\", \"doc\": \"The Krull dimension of the quotient ring $ R/I $ is equal to the Krull dimension of the zero locus of the ideal $ I $ in the prime spectrum of $ R $. The zero locus is the set of all prime ideals cont\"}\n  {\"name\": \"Ideal.primeHeight\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → [hI : I.IsPrime] → ℕ∞\", \"doc\": \"The height of a prime ideal $ \\\\mathfrak{p} $ in a commutative ring $ R $ is defined as the supremum of the lengths of all finite chains of prime ideals strictly contained in $ \\\\mathfrak{p} $. The leng\"}\n  {\"name\": \"ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Basic\", \"type\": \"(R : Type u_1) → [CommSemiring R] → WithBot ℕ∞\", \"doc\": \"The Krull dimension of a commutative semiring $ R $ is defined as the supremum of the lengths of all strictly increasing chains of prime ideals in its prime spectrum $ \\text{Spec}(R) $, measured as an \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete criterion: spectrum/irreducible-closed order duality and RelSeries mapping are supporting tools, but no result asserts the affine global-sections catenary equivalence with both bounded lengths and equal saturated-chain lengths."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.pointsEquivIrreducibleCloseds",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"PrimeSpectrum.pointsEquivIrreducibleCloseds\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" (R : Type u) [CommSemiring R] : PrimeSpectrum R ≃o (TopologicalSpace.IrreducibleCloseds (PrimeSpectrum R))ᵒᵈ\", \"doc\": \"Zero loci of prime ideals are closed irreducible sets in the Zariski topology and any closed\\nirreducible set is a zero locus of some prime ideal.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete criterion: spectrum/irreducible-closed order duality and RelSeries mapping are supporting tools, but no result asserts the affine global-sections catenary equivalence with both bounded lengths and equal saturated-chain lengths."
+  },
+  {
+   "tool": "grep",
+   "query": "catenar|saturated.*chain|chain.*saturated",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete criterion: spectrum/irreducible-closed order duality and RelSeries mapping are supporting tools, but no result asserts the affine global-sections catenary equivalence with both bounded lengths and equal saturated-chain lengths."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The global sections of an affine scheme form a catenary ring if and only if its topological space has bounded equidimensional saturated chains of irreducible closed subsets",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable: LeanSearch rate limit; no absence verdict is inferred from this service."
+  },
+  {
+   "tool": "grep",
+   "query": "RelSeries.*map|map.*RelSeries|reverse|cover",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"369\", \"line\": \"def map (p \", \"text\": \" RelSeries r) (f : r.Hom s) : RelSeries s where\"}\n  {\"file\": \"374\", \"line\": \"@[simp] lemma map_apply (p \", \"text\": \" RelSeries r) (f : r.Hom s) (i : Fin (p.length + 1)) :\"}\n  {\"file\": \"377\", \"line\": \"@[simp] lemma head_map (p \", \"text\": \" RelSeries r) (f : r.Hom s) : (p.map f).head = f p.head := rfl\"}\n  {\"file\": \"379\", \"line\": \"@[simp] lemma last_map (p \", \"text\": \" RelSeries r) (f : r.Hom s) : (p.map f).last = f p.last := rfl\"}\n  {\"file\": \"441\", \"line\": \"A relation series `a₀ -r→ a₁ -r→ ... -r→ aₙ` of `r` gives a relation series of the reverse of `r`\", \"text\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete criterion: spectrum/irreducible-closed order duality and RelSeries mapping are supporting tools, but no result asserts the affine global-sections catenary equivalence with both bounded lengths and equal saturated-chain lengths."
+  },
+  {
+   "tool": "grep",
+   "query": "catenar|saturated.*chain|chain.*saturated",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; supporting statements reused or elementary arguments written explicitly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme is catenary exactly when its ring of global sections is catenary",
+   "results": "AlgebraicGeometry.IsAffine.casesOn, IsAffine.recOn, AffineScheme, IsLocallyArtinian.isArtinianRing_of_isAffine, affine_isIntegral_iff; no catenarity criterion.",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; supporting statements reused or elementary arguments written explicitly"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.pointsEquivIrreducibleCloseds",
+   "results": "PrimeSpectrum.pointsEquivIrreducibleCloseds : PrimeSpectrum R ≃o (TopologicalSpace.IrreducibleCloseds (PrimeSpectrum R))ᵒᵈ; reused through the existing Mathlib leaf.",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; supporting statements reused or elementary arguments written explicitly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Catenarity of a ring is equivalent to bounded equal lengths of saturated chains of irreducible closed subsets in its affine spectrum",
+   "results": "FiniteRingKrullDim, ringKrullDim, Ring.KrullDimLE, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; these concern dimension rather than catenarity.",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; supporting statements reused or elementary arguments written explicitly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Order reversing bijections preserve lengths and saturation of finite strict chains in intervals",
+   "results": "Flag.map, Set.chainHeight_eq_of_relIso, IsChain.image_iso_iff; supporting general order statements, not the affine criterion.",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; supporting statements reused or elementary arguments written explicitly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-catenary-affine-open-cover",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited excellence-locality support below lem-trf-local-term-locality: the universal-catenarity affine-cover subargument, through lem-trf-catenary-affine-open-cover. Extracts its former Steps 1 and 2 and the prime/irreducible-chain and saturated-chain-existence parts of Step 5.",
+   "via": [
+    "lem-trf-catenary-affine-open-cover",
+    "lem-trf-universally-catenary-affine-cover",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-trf-projective-inseparable-spread-normalization",
+    "lem-trf-generic-smooth-boundary-preparation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-catenary-chain-criterion",
+  "worker": "stage1",
+  "summary": "Repair of the live-DAG promotion return: continued the retained delivered split and repackaged it through deliver.py on the freshly fetched origin/sheaf-dag; the current read-clone item is still unsplit. Reread all cited statements and verified their saved quotations against the current DAG. Made the inverse on the entire interval and both inverse chain formulas explicit, including length-zero chains. Preserved the statement, all seven proof arguments, source route, blueprint ancestry, original report, citations and logged searches; no new nodes or Mathlib leaves.",
+  "blueprint": "Inherited excellence-locality support below lem-trf-local-term-locality via lem-trf-catenary-affine-open-cover: its former Steps 1, 2 and prime/irreducible-chain and saturation-existence portions of Step 5."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-fff01cccd",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-fff01cccd (reviewer sub-agent of L); spot-checked: Re-delivery of the split that passed at b9fc5ccf894f and 5736f4f21a19; those passes were returned because the split was never promoted into the live DAG. The JSON diff against b9fc5ccf894f touches only the wording of Steps 3, 4 and 6, plus the split_report date and summary; each of those steps is now more explicit and none lost an argument. Statement, stmt_deps, proof_deps, source and blueprint are unchanged. There are no new nodes and no re-split note applies. Sources read: Stacks algebra.tex 00NI (line 25463), 02IH (line 25472, whose proof is 'immediate from 00ES') and schemes 01HW. Citations checked against their statements: (a) Step 1 applies lem-weil-pbc-affine-open-spec-points with U=X=T, which gives the iso T≅Spec Γ(T,O_T). (b) Step 3 uses spec-irreducible-closed-subsets-primes clause (1) for inclusion reversal and reflection and clause (2) for the bijection with uniqueness, for any commutative ring. The pullback F⁻¹(W) is shown to stay in the whole interval. (c) Step 6 uses only the catenary clause of def-exc-excellent-ring; the Noetherian condition there belongs to universal catenarity. Elementary steps are correctly marked: Step 2 (homeomorphism transport), Step 4 (chain reversal with inverse and saturation in both directions, including n=0), Step 5 (greatest attained length in {0..N} gives a saturated chain, no Noetherian hypothesis) and Step 7 (Γ(∅)=0, no primes, vacuous). proof_deps equal the union of the step uses. Tested on equal endpoints, a field, a DVR (length 1 on both sides), the zero ring, and unbounded non-Noetherian intervals. A search of the snapshot for 'catenary' finds no duplicate node; the only citer is lem-trf-catenary-affine-open-cover. No SGA is cited and no fixes are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineCatenaryChainCriterion",
+  "declaration": "AlgebraicGeometry.affine_catenary_chain_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCatenaryChainCriterion.lean",
+  "statement": "theorem affine_catenary_chain_criterion (T : Scheme.{u}) [IsAffine T] : ∃ (h : T ≃ₜ PrimeSpectrum Γ(T, ⊤)) (F : PrimeSpectrum Γ(T, ⊤) → IrreducibleCloseds T), (∀ r : PrimeSpectrum Γ(T, ⊤), (F r : Set T) = h ⁻¹' PrimeSpectrum.zeroLocus (r.asIdeal : Set Γ(T, ⊤))) ∧ (∀ (p q : PrimeSpectrum Γ(T, ⊤)), p ≤ q → ∃ e : Set.Icc p q ≃o (Set.Icc (F q) (F p))ᵒᵈ, ∀ r : Set.Icc p q, (e r).val = F r.val) ∧ (∀ (p q : PrimeSpectrum Γ(T, ⊤)), p ≤ q → ∃ e : {s : LTSeries (PrimeSpectrum Γ(T, ⊤)) // s.head = p ∧ s.last = q} ≃ {s : LTSeries (IrreducibleCloseds T) // s.head = F q ∧ s.last = F p}, ∀ s : {s : LTSeries (PrimeSpectrum Γ(T, ⊤)) // s.head = p ∧ s.last = q}, (e s).val.length = s.val.length ∧ (e s).val.toList = (s.val.toList.map F).reverse ∧ ((∀ i : Fin s.val.length, s.val i.castSucc ⋖ s.val i.succ) ↔ ∀ i : Fin (e s).val.length, (e s).val i.castSucc ⋖ (e s).val i.succ)) ∧ (IsCatenaryRing Γ(T, ⊤) ↔ ∀ Z Z' : IrreducibleCloseds T, Z ≤ Z' → (∃ N : ℕ, ∀ s : LTSeries (IrreducibleCloseds T), s.head = Z → s.last = Z' → s.length ≤ N) ∧ ∀ s t : LTSeries (IrreducibleCloseds T), s.head = Z → s.last = Z' → t.head = Z → t.last = Z' → (∀ i : Fin s.length, s i.castSucc ⋖ s i.succ) → (∀ i : Fin t.length, t i.castSucc ⋖ t i.succ) → s.length = t.length) ∧ (∀ Z Z' : IrreducibleCloseds T, Z ≤ Z' → (∃ N : ℕ, ∀ s : LTSeries (IrreducibleCloseds T), s.head = Z → s.last = Z' → s.length ≤ N) → ∃ s : LTSeries (IrreducibleCloseds T), s.head = Z ∧ s.last = Z' ∧ ∀ i : Fin s.length, s i.castSucc ⋖ s i.succ) ∧ (∀ p q : PrimeSpectrum Γ(T, ⊤), p ≤ q → (∃ N : ℕ, ∀ s : LTSeries (PrimeSpectrum Γ(T, ⊤)), s.head = p → s.last = q → s.length ≤ N) → ∃ s : LTSeries (PrimeSpectrum Γ(T, ⊤)), s.head = p ∧ s.last = q ∧ ∀ i : Fin s.length, s i.castSucc ⋖ s i.succ) ∧ (IsEmpty T → Subsingleton Γ(T, ⊤) ∧ IsEmpty (PrimeSpectrum Γ(T, ⊤)) ∧ IsEmpty (IrreducibleCloseds T))",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf87de72f",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Only the lean field changed relative to side-live, and lean.statement is verbatim in the file. Read the item, the 4 stmt_deps (including IsPrimeChain/IsSaturatedPrimeChain/IsCatenaryRing in Sheaf.RingTheory.ExcellentRing) and Stacks 00NI/02IH/01HW. Every clause matches: the existential homeomorphism h; F tied by an equation to h⁻¹(zeroLocus r); an order isomorphism Icc p q ≃o (Icc (F q) (F p))ᵒᵈ on the whole intervals; an LTSeries subtype equivalence that keeps length, sends a chain to its reversed images (toList) and matches saturation via ⋖; the IsCatenaryRing iff with an endpoint-dependent bound and equal saturated lengths; saturated-chain existence in both kinds of interval (as in proof step 5); and the empty-T clause. No Noetherian or nonempty assumption, a single universe u, length-0 chains and the empty scheme covered. No definitions, one sorry, docstrings with source and blueprint id and the 7-step proof. No duplicate in Mathlib, Sheaf or WeilConjectures. Not recompiled (no FIX)."
+ }
+}

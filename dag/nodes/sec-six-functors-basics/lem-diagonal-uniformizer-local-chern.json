@@ -1,0 +1,149 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), applying coefficient extension to the positive section class; trace proof paragraph (1), its adjunction"
+ },
+ "proof_origin": {
+  "by": "D7",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), applying coefficient extension to the positive section class; trace proof paragraph (1), its adjunction",
+  "note": "Agent elaboration of the two independent parts of the source coefficient comparison; the main module proves their assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of a completed Kummer first Chern class to finite quotient coefficients",
+   "date": "2026-10-27",
+   "results": "8 hits, chiefly Selmer groups, Kummer extensions, and roots-of-unity maps; none is a sheaf-derived Chern reduction theorem.",
+   "verdict": "Use the project-specific completion, endpoint, and derived-unit normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-27",
+   "results": "1 hit: the generic adjunction naturality lemma in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "verdict": "Useful for formal assembly; does not identify the supplied derived squares."
+  },
+  {
+   "tool": "grep",
+   "query": "chern.*[Nn]atur|[Nn]atur.*[Cc]hern",
+   "date": "2026-10-27",
+   "results": "0 Mathlib hits; local search found finite tower Chern realization but no completed-to-uniformizer comparison.",
+   "verdict": "No duplicate of either new step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerChernNormalization",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), applying coefficient extension to the positive section class; trace proof paragraph (1), its adjunction",
+   "via": [
+    "lem-diagonal-uniformizer-chern-normalization",
+    "lem-diagonal-uniformizer-trace-chern-degree",
+    "lem-diagonal-uniformizer-trace-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "id": "lem-diagonal-uniformizer-local-chern",
+ "title": "The local completed Chern class reduces to the finite positive Kummer class",
+ "statement": "Let l be prime, Y and P=ProjectiveLine Y Noetherian schemes with DiagonalTraceLocalizations, and let s be UniformizerChernNormalizationData l Y [def-diagonal-uniformizer-chern-transport]. Retain its local coefficient data at P [def-sfb-diagonal-coefficient-reference, def-sfb-diagonal-coefficient-scalars, def-sfb-diagonal-coefficient-quotient-line, def-sfb-diagonal-coefficient-finite-realization] and its normalized strict Chern data [def-sp-tower-class-chern, def-sfb-diagonal-trace-coefficients, def-sfb-diagonal-trace-presentation]. Use the constructed endpoints [def-diagonal-uniformizer-local-endpoints]: localFunctor is completed realization on P, integral extension, quotient extension, and finite realization. Define localUnit as the composite of their four unit endpoints and localLine as the composite of their four shifted positive-line endpoints. localUnit is invertible. For z:completedUnit(P)→completedLine(P)[2], assume its constant-scalar restriction followed by the shifted root-limit comparison equals coefficientsX.unitMap followed by LX of restrictionX(firstChern(O(1))). Then localUnit inverse followed by localFunctor(z) followed by localLine equals the comparison inverse image of the positive finite Kummer Chern arrow geoP1EtaleChern [sk-lem-geo-p1-cohomology]. This is an equation on P, with no pushforward, no completed adjunct c, and no trace. The theorem uses LocalNormalized for its displayed root-limit hypothesis and LocalChernNormalized for its displayed local equality; both are explicit predicates with precisely those formulas [def-diagonal-uniformizer-adjunct-conditions].",
+ "stmt_deps": [
+  "def-diagonal-uniformizer-chern-transport",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-scalars",
+  "def-sfb-diagonal-coefficient-quotient-line",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sp-tower-class-chern",
+  "sk-lem-geo-p1-cohomology",
+  "def-diagonal-uniformizer-local-endpoints",
+  "def-diagonal-uniformizer-adjunct-conditions"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalization of z and the actual coefficient/root cone projections to express its finite reduction as the reduction of the simultaneous Kummer boundary of the line-bundle extension of O(1). Compute derived reduction using a common K-flat complex; completion reduction and its naturality identify the finite quotient map.",
+   "uses": [
+    "def-sp-tower-class-chern",
+    "def-sfb-diagonal-trace-coefficients",
+    "lemma-weil-pbc-adic-completion-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Associate the two scalar extensions. The quotient is annihilated by l^(n+1), so the finite coefficient map factors through that integral quotient. Endpoint adjunction normalizations send one to one and the root to its tensor with one. The realization and kernel-root normalizations identify these with localUnit and localLine.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-reference",
+    "def-sfb-diagonal-coefficient-scalars",
+    "def-sfb-diagonal-coefficient-quotient-line",
+    "def-sfb-diagonal-coefficient-finite-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the positive Kummer connecting map yields the finite Kummer boundary of O(1). The finite Chern specification determines the coefficient-linear arrow by its integral adjunct; this is geoP1EtaleChern.",
+   "uses": [
+    "sk-lem-geo-p1-cohomology",
+    "def-sp-tower-class-chern"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-chern",
+  "def-sfb-diagonal-trace-coefficients",
+  "lemma-weil-pbc-adic-completion-reduction",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-scalars",
+  "def-sfb-diagonal-coefficient-quotient-line",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "sk-lem-geo-p1-cohomology"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalUniformizerLocalChern",
+  "file": "lean/Sheaf/Paper/DiagonalUniformizerLocalChern.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerChernNormalizationData.localChern",
+  "statement": "theorem localChern\n    (s : UniformizerChernNormalizationData l Y)\n    (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶\n      (DiagonalTrace.completedLine l (ProjectiveLine Y))⟦(2 : ℤ)⟧)\n    (hz : s.LocalNormalized l Y\n      (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) s.tq.chernX\n        (SpTowerClasses.hyperplanePic Y)) z) : s.LocalChernNormalized l Y z",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerChernNormalizationData.localChern"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T123430-L-2297006",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T123430-L-2297006",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-finite-type-rational-heart-integral-image",
+ "kind": "statement",
+ "title": "Integral sheaf model for a rational direct image",
+ "statement": "Fix a prime ell and a characteristic-p field k, with p prime and p != ell. Let X and Y be separated finite-type k-schemes and f:X -> Y a k-morphism [sk-def-sfb-dc-setting]. Use the pulled-back condensed coefficient rings [sk-def-sfb-condensed-ring], stratified locally finitely presented constructible module objects [sk-def-sfb-bounded-constructible], and the ordinary ambient derived direct image [sk-def-sfb-module-derived-pushpull]. Let E be a finite-dimensional normed extension field of Q_ell, A its closed unit ball, and A_Z -> E_Z the continuous coefficient inclusion [def-weil-pbc-continuous-integral-coefficients]. For each constructible E_X-module F there is a constructible A_X-module N and an isomorphism L(E_Y tensor_{A_Y} -)(Rf_{*,A}(N[0])) ~= Rf_{*,E}(F[0]). No cohomological bound is asserted for either side.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.8.12--6.8.13; Proposition 6.8.14(2); Remark 6.8.15; rational paragraph"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Finite type and quasi-compactness over Spec k make X noetherian. Apply continuousConstructible_integral_single_model to obtain a bounded constructible integral complex M and an isomorphism between its derived localization and F[0].",
+   "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-single"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set N=H^0(M). It is constructible by the definition of bounded constructibility. Exactness of integral scalar extension and its derived homology comparison give E_X tensor N ≅ H^0(F[0]) ≅ F. Put N in degree zero; its other cohomology objects are zero, hence constructible, and its zeroth cohomology is N. This gives an integral bounded constructible K=N[0]. The single-functor comparison gives L(E_X tensor -)(K) ≅ F[0].",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-scalar-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The morphism f is qcqs (X is noetherian). Apply integralScalarPushHom_isIso to K, obtaining the canonical isomorphism from localization of Rf_{*,A} K to Rf_{*,E} of localization of K. Compose it with Rf_{*,E} applied to the isomorphism of the previous step. Return N and its constructibility proof.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-push-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-constructible-integral-single",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-continuous-integral-push-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F6",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.8.12–6.8.13; Proposition 6.8.14(2); Remark 6.8.15; exact localization and existing continuous integral push comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of a constructible sheaf in degree zero along a finite type morphism over a field is bounded above for ell adic coefficients",
+   "results": "Eight generic sheaf pushforward and condensed module hits; no finiteness theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLE\", \"rightDerivedFunctor\"",
+   "results": "Three generic derived-functor hits, no coefficient finiteness.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*rightDerived|rightDerived.*constructible|finite.*cohomological.*dimension",
+   "results": "No Mathlib matches. The source library has finite-coefficient finiteness; general integral/rational/algebraic-closure interfaces have import paths back to this item.",
+   "date": "2026-10-25",
+   "verdict": "No usable acyclic theorem for the new coefficient-specific obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search single bound; unit ball direct image; finite type cohomological bound",
+   "results": "All three searches returned zero matching blueprint nodes. Read the original planned integral, rational and finite-stage interfaces; the new statements specialize their argument to sheaves and abstract normed coefficients.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate acyclic interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTypeDirectImageSingleBound",
+  "date": "2026-10-25",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Lemmas 6.8.12--6.8.13; Proposition 6.8.14(2); Remark 6.8.15; rational paragraph",
+   "via": [
+    "lem-sfb-dc-lower-star-single-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeRationalHeartIntegralImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeRationalHeartIntegralImage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteTypeRationalHeart_integralImage",
+  "statement": "theorem finiteTypeRationalHeart_integralImage\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    [FiniteDimensional ℚ_[ℓ] E]\n    (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X.left))\n    (hF : IsConstructibleModuleObject\n      (condensedRingObj (Profinite.continuousMapRingObj E) X.left) F) :\n    ∃ N : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n        (condensedRingObj (integralCoeff ℓ E) X.left),\n      IsConstructibleModuleObject (condensedRingObj (integralCoeff ℓ E) X.left) N ∧\n      Nonempty (\n        ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) Y.left)).leftDerivedFunctor.obj\n          ((R((f.left)_*⟦integralCoeff ℓ E⟧)).obj\n            ((DerivedCategory.singleFunctor _ 0).obj N))) ≅\n        ((R((f.left)_*⟦Profinite.continuousMapRingObj E⟧)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261025T123705-L-1890145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261025T143253-L-976180",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

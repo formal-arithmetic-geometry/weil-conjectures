@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-constructible-left-compositor-coherence",
+ "kind": "statement",
+ "title": "Canonical left compact-support compositors: coefficient, refinement and shift coherence",
+ "statement": "For the constructible coefficient systems of [lem-sf-constructible-exceptional-adjunction-coefficients] and the canonical finite and integral maps of [def-sf-finite-exceptional-compositor-maps], composable separated finite-type maps between separated quasi-compact finite-type schemes over the algebraic closure of a finite field admit three such systems and a family of LeftCompositors [def-sf-exceptional-compositor-coefficient-data]. Its finite and integral components equal finiteAlpha and integralAlpha, its rational and common components satisfy the fixed coefficient equations, all components commute with their specified integer shifts, and the family commutes with the recorded compactification refinement comparisons. The normalization uses the fixed operation package [lem-sf-package-compactified-tower-comparisons].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Complement: composition law and mate; geometric left composition/coherence supplied by sk-thm-sf-comp-composition and the operation package, as expanded in the assigned parent node proof Steps 1, 5 and 6."
+ },
+ "stmt_deps": [
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-sf-finite-exceptional-compositor-maps",
+  "lem-sf-package-compactified-tower-comparisons",
+  "def-sf-exceptional-compositor-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose the three normalized coefficient systems using [lem-sf-constructible-exceptional-adjunction-coefficients]. Lift the finite and completed compact-support compositors through the full finite-Tor inclusions, retaining precisely finiteAlpha and integralAlpha. The completed realization equality is constructibleIntegralSupport_eq of [def-sf-constructible-exceptional-compositor-data].",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "thm-sf-comp-composition",
+    "lem-sf-package-compactified-tower-comparisons",
+    "def-sf-constructible-exceptional-compositor-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized tower comparison and its horizontal and vertical pasting identities give the left refinement square. Total derived limit of equal strict maps preserves this square; no faithfulness of derived finite-level evaluation is used.",
+   "uses": [
+    "lem-sf-package-compactified-tower-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite structural-map shift compatibility gives the finite equation. Apply integral realization shift coherence to each finite word with a common Tor and cohomological interval to obtain the integral equation.",
+   "uses": [
+    "lem-trf-finite-structural-maps-commshift",
+    "lem-pur-integral-realization-shift-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the integral maps to raw rational Hom modules by linearity and tensor generation; then descend compatible common-field representatives. Coefficient normalization and refinement/shift squares pass through these operations.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-constructible-exceptional-compositor-data",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "thm-sf-comp-composition",
+  "lem-sf-package-compactified-tower-comparisons",
+  "lem-trf-finite-structural-maps-commshift",
+  "lem-pur-integral-realization-shift-coherence",
+  "prop-weil-pbc-rational-transport",
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Steps 1, 5 and 6: left compact-support coherence, before taking exceptional mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical composition of compact support functors commutes with coefficient extension and shifts",
+   "results": "Found Functor.CommShift.comp, NatTrans.CommShift.whiskerRight and standard shift-composition declarations. These supply formal shift operations but no normalized geometric compact-support coefficient compositor.",
+   "date": "2026-10-25",
+   "verdict": "No applicable Mathlib statement; use the recorded source-library and project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition of left adjoints compatibility canonical compact support coefficients shifts refinements",
+   "date": "2026-10-25",
+   "verdict": "Mathlib mates gives the formal right-adjoint consequences but no geometric compact-support construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "conjugateIsoEquiv",
+   "date": "2026-10-25",
+   "verdict": "Found Mathlib.CategoryTheory.Adjunction.Mates; used for parent formal mate calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftCompositors|finiteStructuralMaps_commShift|sfPackageCompactifiedTower",
+   "date": "2026-10-25",
+   "verdict": "Published finite/integral definitions and stated geometric coherence dependencies; no theorem constructing this combined left data."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalCompositor",
+  "date": "2026-10-25",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-constructible-exceptional-compositor",
+   "place": "Steps 1, 5 and 6: left compositor construction and coherence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleLeftCompositorCoherence",
+  "file": "lean/Sheaf/Paper/ConstructibleLeftCompositorCoherence.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCompositor.constructibleLeftCompositorCoherence",
+  "statement": "theorem constructibleLeftCompositorCoherence\n    {D : FiniteFieldDatum.{u}} (B : D.CoefficientDatum)\n    (S : ∀ (E : FieldStage.{u} B.l) (n : ℕ+),\n      SixFunctorOperationDatum D B E.carrier n n.pos)\n    {X Y Z : SixFunctorSpace D}\n    [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] [IsSeparated Z.obj.hom]\n    (f : X ⟶ Y) (g : Y ⟶ Z)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left] :\n    ∃ (P : System B.l B.Qbar D B.different (f := f.hom.left))\n      (Q : System B.l B.Qbar D B.different (f := g.hom.left))\n      (R : System B.l B.Qbar D B.different (f := (f ≫ g).hom.left))\n      (A : LeftCompositors B f g P Q R S),\n      (∀ (cf : Compactification f.hom.left) (cg : Compactification g.hom.left)\n        (cx : Compactification (f ≫ g).hom.left) (s : Stage.{u} B.l),\n        (A.alpha cf cg cx s).hom.CommShift ℤ) ∧\n      (∀ (cf df : Compactification f.hom.left) (rf : cf.Refinement df)\n        (cg dg : Compactification g.hom.left) (rg : cg.Refinement dg)\n        (cx dx : Compactification (f ≫ g).hom.left) (rx : cx.Refinement dx)\n        (s : Stage.{u} B.l),\n        (A.alpha cf cg cx s).hom ≫ (R.refinements.refinement rx s).left.hom =\n          Functor.whiskerLeft (P.ring.operation cf s).F\n            (Q.refinements.refinement rg s).left.hom ≫\n          Functor.whiskerRight (P.refinements.refinement rf s).left.hom\n            (Q.ring.operation dg s).F ≫ (A.alpha df dg dx s).hom)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a1ee",
+  "group": "D8",
+  "result": "fix",
+  "landing": "20261025T122737-L-1801866",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a1ee",
+  "group": "D8",
+  "result": "fix",
+  "landing": "20261025T122737-L-1801866",
+  "kind": "interface",
+  "note": "independent cc review: lem-sf-constructible-exceptional-compositor + 5 nodes vs delivered Lean (item, Data, LeftCompositorCoherence, CompactSupportTermHomFinite) and published module; universe params [u] verified; 3 direct importers compiled"
+ }
+}

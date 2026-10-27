@@ -1,0 +1,216 @@
+{
+ "id": "lem-sfb-divisible-unit-lattice-extension",
+ "kind": "statement",
+ "title": "Finite-index free lattice enlargement through a divisible subgroup",
+ "statement": "Let $n\\geq1$ be an integer, let $L$ be a free abelian group of finite rank (a finite free $\\mathbf Z$-module [def-weil-pbc-free-module]), let $B$ be an abelian group, let $D\\subset B$ be a subgroup, and let $\\varphi:L\\to B$ be a group homomorphism. Suppose $D$ is $n$-divisible (for every $d\\in D$ there is $e\\in D$ with $ne=d$), $B/D$ is torsion-free (multiplication by every positive integer is injective), and $(B/D)/\\operatorname{im}(L)$ is finite and killed by $n$. Then there exist a free abelian group $G$ of finite rank, an injective homomorphism $i:L\\to G$ with $G/i(L)$ killed by a power of $n$, and a homomorphism $h:G\\to B$ with $h\\circ i=\\varphi$, such that $G\\to B/D$ is surjective. Free of finite rank means isomorphic to $\\mathbf Z^d$ for some finite $d\\geq0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Lemma 3.6.4, printed pp.252--253."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=B/D$, $p:B\\to C$, $f=p\\varphi$, and $S=f^{-1}(nC)\\subset L$. The map $i:L\\to S$, $x\\mapsto nx$, is injective since $n\\ne0$ and $L$ is torsion-free. The subgroup $S$ is finite free by [lem-weil-subgroup-finite-free-abelian-group-free]. Its inclusion in $L$ and the injection $i$ give opposite rank inequalities, so $S$ and $L$ have equal rank.",
+   "uses": [
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sfb-full-rank-pid-smith-bases] to $S\\subset L$, obtaining finite bases $e_j$ of $L$, $v_j$ of $S$ with $v_j=a_je_j$. Each $a_j$ is nonzero since $v_j$ is a basis vector. Put $t_j$ equal to the $j$th $S$-basis coordinate of $i(e_j)$. Comparing the $j$th $L$-basis coordinate gives $a_jt_j=n$. Consequently $i(e_j)=t_jv_j$.",
+   "uses": [
+    "lem-sfb-full-rank-pid-smith-bases"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "As $v_j\\in S$, choose $c_j\\in C$ with $nc_j=f(v_j)$, and lift it to $z_j\\in B$. The diagonal equation gives $a_j f(e_j)=n c_j=a_jt_jc_j$. Torsion-freeness of $C$ and $a_j\\ne0$ imply $f(e_j)=t_jc_j$. Thus $u_j=t_jz_j-\\varphi(e_j)$ lies in $D$. Choose $d_j\\in D$ with $nd_j=u_j$ by the given divisibility. Set $b_j=z_j-a_jd_j$; then $t_jb_j=t_jz_j-nd_j=\\varphi(e_j)$.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define $h:S\\to B$ by its basis values $h(v_j)=b_j$. On the basis of $L$, $h(i(e_j))=t_jb_j=\\varphi(e_j)$, hence $hi=\\varphi$. For every $y\\in S$, $ny=i(y)$ (with $y$ viewed in $L$), so $S/i(L)$ is killed by $n$; take exponent $s=1$. Finally $h_Q$ says that $nc=f(x)$ for some $x\\in L$, for each $c\\in C$. Then $y=x$ belongs to $S$, and $nph(y)=ph(i(x))=f(x)=nc$. Torsion-freeness cancels $n$, proving $ph(y)=c$. Take $G=S$, in the same universe as $L$. This also covers $n=1$, zero rank, $D=B$ and noninjective $\\varphi$; finiteness of the original cokernel is not needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "lem-sfb-full-rank-pid-smith-bases"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-23",
+  "document": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+  "place": "Smith normal form proof replacing the cyclic induction in ILO XVI Lemma 3.6.4; the Lean statement is unchanged. Full-rank diagonal bases and n-divisibility construct G=S=f^{-1}(nC) and yield exponent one."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extend a map from a finite free abelian group to a group with an n divisible subgroup by enlarging the lattice with n primary quotient",
+   "results": "{\"t\": \"2026-10-22T05:09:30Z\", \"tool\": \"leansearch\", \"query\": \"Extend a map from a finite free abelian group to a group with an n divisible subgroup by enlarging the lattice with n primary quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.homQuotientZPowOfHom\", \"ZMod.lift\", \"ModN.liftEquiv\", \"ModN.mkQ\", \"FreeAbelianGroup.map\", \"FreeAddGroup.map\", \"FreeAbelianGroup.lift\", \"FreeAbelianGroup.lift_ext_iff\"], \"digest\": \"247dbb04cb56d7ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Baer injectivity assumes divisibility by all integers; Smith normal form and lattice bases do not extend the map into B through its n-divisible subgroup"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]ivisible.*[Ll]attice|[Ll]attice.*[Dd]ivisible|[Dd]ivisible.*[Ee]xtension",
+   "results": "{\"t\": \"2026-10-22T05:09:38Z\", \"tool\": \"grep\", \"query\": \"[Dd]ivisible.*[Ll]attice|[Ll]attice.*[Dd]ivisible|[Dd]ivisible.*[Ee]xtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/CharacterModule.lean\"], \"digest\": \"d65ee0cd4852339f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Baer injectivity assumes divisibility by all integers; Smith normal form and lattice bases do not extend the map into B through its n-divisible subgroup"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Free\", \"Divisible\"",
+   "results": "{\"t\": \"2026-10-22T05:09:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.Free\\\", \\\"Divisible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Baer injectivity assumes divisibility by all integers; Smith normal form and lattice bases do not extend the map into B through its n-divisible subgroup"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lattice enlargement lifting a finite index sublattice through an abelian group extension with divisible kernel",
+   "results": "{\"t\": \"2026-10-22T05:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"Lattice enlargement lifting a finite index sublattice through an abelian group extension with divisible kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Baer.of_divisible\", \"Module.Baer.extension_property_addMonoidHom\", \"Int.submodule_toAddSubgroup_index_ne_zero_iff\", \"Module.Basis.extendOfIsLattice_apply\", \"Int.addSubgroup_index_ne_zero_iff\", \"Module.Basis.SmithNormalForm.toAddSubgroup_index_eq_ite\", \"Module.Basis.extendOfIsLattice\", \"Submodule.smithNormalFormOfLE\"], \"digest\": \"5ad1c35ff4aefabd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Baer injectivity assumes divisibility by all integers; Smith normal form and lattice bases do not extend the map into B through its n-divisible subgroup"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given B with n divisible subgroup D and torsion free quotient, a lattice mapping to B with finite n killed cokernel in B mod D extends to a larger lattice surjecting on B mod D",
+   "results": "{\"t\": \"2026-10-22T05:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"Given B with n divisible subgroup D and torsion free quotient, a lattice mapping to B with finite n killed cokernel in B mod D extends to a larger lattice surjecting on B mod D\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Baer.of_divisible\", \"Submodule.finiteQuotientOfFreeOfRankEq\", \"Submodule.quotientEquivPiZMod\", \"Submodule.finiteQuotient_iff\", \"ModN.liftEquiv'\", \"ModN.basis\", \"Module.exists_surjective_quotient_of_finite\", \"NumberField.Units.instFiniteIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion\"], \"digest\": \"22e485c6f98fee5e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Baer injectivity assumes divisibility by all integers; Smith normal form and lattice bases do not extend the map into B through its n-divisible subgroup"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]ivisible.*[Ll]attice|[Ll]attice.*[Dd]ivisible|extension_property_addMonoidHom",
+   "results": "{\"t\": \"2026-10-22T05:30:35Z\", \"tool\": \"grep\", \"query\": \"[Dd]ivisible.*[Ll]attice|[Ll]attice.*[Dd]ivisible|extension_property_addMonoidHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/CharacterModule.lean\", \"Mathlib/Algebra/Module/Injective.lean\"], \"digest\": \"eba42c5eb74ebc22\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Baer extension requires a Baer target and the divisible criterion assumes all integers, while quotient finiteness and free-group universal properties do not produce the simultaneous lattice enlargement and lift"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism from a finite free abelian group extends across a finite n primary index enlargement when the target has n divisible subgroup and torsion free quotient",
+   "results": "{\"t\": \"2026-10-22T05:30:36Z\", \"tool\": \"leansearch\", \"query\": \"A homomorphism from a finite free abelian group extends across a finite n primary index enlargement when the target has n divisible subgroup and torsion free quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAddGroup.map\", \"FreeAbelianGroup.liftMonoid\", \"FreeAbelianGroup.map\", \"FreeAbelianGroup.lift_ext_iff\", \"FreeAbelianGroup.lift\", \"FreeAbelianGroup.lift_ext\", \"FreeAddGroup.lift\", \"FreeAddGroup.map_eq_lift\"], \"digest\": \"4137ef5b31b05c0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Baer extension requires a Baer target and the divisible criterion assumes all integers, while quotient finiteness and free-group universal properties do not produce the simultaneous lattice enlargement and lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, DivisibleBy",
+   "results": "{\"t\": \"2026-10-22T05:30:36Z\", \"tool\": \"loogle\", \"query\": \"Module.Free, DivisibleBy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Baer extension requires a Baer target and the divisible criterion assumes all integers, while quotient finiteness and free-group universal properties do not produce the simultaneous lattice enlargement and lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enlarge a finite free abelian lattice mapping to B to surject onto B modulo an n divisible subgroup with torsion free quotient and finite cokernel killed by n",
+   "results": "{\"t\": \"2026-10-22T05:30:37Z\", \"tool\": \"leanfinder\", \"query\": \"Enlarge a finite free abelian lattice mapping to B to surject onto B modulo an n divisible subgroup with torsion free quotient and finite cokernel killed by n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModN.instFinite\", \"ModN.instModuleFinite\", \"ModN.natCard_eq\", \"Submodule.finiteQuotientOfFreeOfRankEq\", \"Module.Baer.of_divisible\", \"Module.Basis.SmithNormalForm.toAddSubgroup_index_ne_zero_iff\", \"Module.exists_surjective_quotient_of_finite\", \"AddGroup.fg_iff_exists_freeAddGroup_hom_surjective\"], \"digest\": \"b664625bfb068e4d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Baer extension requires a Baer target and the divisible criterion assumes all integers, while quotient finiteness and free-group universal properties do not produce the simultaneous lattice enlargement and lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a lattice homomorphism through an abelian extension with n divisible kernel and torsion free quotient by adjoining roots of cyclic cokernel generators",
+   "results": "{\"t\": \"2026-10-22T05:30:45Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a lattice homomorphism through an abelian extension with n divisible kernel and torsion free quotient by adjoining roots of cyclic cokernel generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.selmerGroup.fromUnitLift\", \"Module.Baer.extension_property_addMonoidHom\", \"QuotientGroup.homQuotientZPowOfHom\", \"IsDedekindDomain.selmerGroup.fromUnit\", \"QuotientAddGroup.homQuotientZSMulOfHom\", \"ModN.liftEquiv\", \"Module.Baer.of_divisible\", \"ZMod.lift_comp_coe\"], \"digest\": \"4c85e627cb00b259\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits; Baer extension requires a Baer target and the divisible criterion assumes all integers, while quotient finiteness and free-group universal properties do not produce the simultaneous lattice enlargement and lift"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fs-log-infinitesimal-criterion",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Infinitesimal characterization of logarithmic chart smoothness used in the two-stage lifting proof of composition and the strict pullback proof. Supporting input: Finite-index free lattice enlargement through a divisible subgroup.",
+   "via": [
+    "lem-sfb-fs-log-infinitesimal-criterion",
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-divisible-unit-lattice-extension",
+  "worker": "stage1",
+  "summary": "Read ILO XVI Lemma 3.6.4 in full and expanded its induction on the finite cokernel order: lift one cyclic cokernel class using d-divisibility for d dividing n, realize the cyclic pushout as the subgroup dL+Za of L, prove the extension formula well defined, and bound the composite exponent. The only non-elementary input is the live finite-free subgroup lemma. (Reviewer FIX: the delivered one-step reuse cited the identical sec-deligne-laumon-a1 copy, which was dropped on 2026-10-19; that copy's proof is ported here onto live nodes.)",
+  "blueprint": "The inherited ancestry serves det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction, through log-smooth composition and its infinitesimal chart criterion. The present algebraic input is exactly ILO XVI Lemma 3.6.4; reusing its existing node changes no geometric route. The ancestor command reports null for the inherited created.item chain, so blueprint.from.node and via are preserved; the existing precise from.place is retained. Whole-blueprint searches for divisible and divisible unit found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-subgroup-finite-free-abelian-group-free",
+    "why": "Generic abelian-group fact (subgroups of Z^J are free of finite rank, a Mathlib leaf) used in Step 5 to see that dL+Za is finite free; no geometric or cohomological step of the unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-subgroup-finite-free-abelian-group-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NM-ebd2fba3f",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-ebd2fba3f (reviewer sub-agent of L); spot-checked: Mechanical finding upheld. The delivery's single step cites lem-per-divisible-unit-lattice-extension, which is in the 2026-10-19 artin-gabber drop section (side-live route-pivot-dropped.txt line 1501) and is not justified at any named step. The item itself is live: an NI sfb copy for the live lem-sfb-fs-log-infinitesimal-criterion. Reusing the dropped per duplicate is circular, but the fault is repairable. The dropped node's 8-step proof uses only the live lem-weil-subgroup-finite-free-abelian-group-free (Mathlib leaf) and the stmt_dep def-weil-pbc-free-module. I checked it against ILO XVI Lemme 3.6.4 and proof (printed pp.252-253): the induction on the cokernel order, d | n giving d-divisibility, the relation calculation via torsion-freeness of B/D, L1 = dL+Za as an explicit model of ILO's cocartesian square, the well-defined extension, the cokernel shrinking from |Q| to |Q|/d, and the exponent n^{s+1}. Small cases checked: n=1, L=0, phi = n· on Z with D=0, and non-injective phi. The statement matches ILO hypothesis by hypothesis and is unchanged. FIX: ported the 8 steps into the item, proof_deps = [lem-weil-subgroup-finite-free-abelian-group-free], updated proof_origin, split_report and tool_uses (generic subgroup lemma, accepted). No drop-list id remains, no new nodes, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.DivisibleUnitLatticeExtension",
+  "declaration": "AddCommGroup.divisible_unit_lattice_extension",
+  "statement": "theorem divisible_unit_lattice_extension\n    (n : ℕ) (hn : 1 ≤ n)\n    (L : Type u) [AddCommGroup L] [Module.Free ℤ L] [Module.Finite ℤ L]\n    (B : Type v) [AddCommGroup B] (D : AddSubgroup B) (φ : L →+ B)\n    (hD : ∀ d : D, ∃ e : D, n • e = d)\n    [IsAddTorsionFree (B ⧸ D)]\n    [Finite ((B ⧸ D) ⧸ ((QuotientAddGroup.mk' D).comp φ).range)]\n    (hQ : ∀ q : (B ⧸ D) ⧸ ((QuotientAddGroup.mk' D).comp φ).range, n • q = 0) :\n    ∃ (G : Type u) (_ : AddCommGroup G),\n      Module.Free ℤ G ∧ Module.Finite ℤ G ∧\n      ∃ (i : L →+ G) (h : G →+ B),\n        Function.Injective i ∧\n        (∃ s : ℕ, ∀ q : G ⧸ i.range, n ^ s • q = 0) ∧\n        h.comp i = φ ∧ Function.Surjective ((QuotientAddGroup.mk' D).comp h)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing statement of ILO XVI Lemma 3.6.4, printed pp.252–253. This is a declaration attachment only: the live sfb node retains its independently reviewed eight-step proof and its live proof dependency; no citation of the dropped per node is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98b60616c",
+  "group": "NE",
+  "result": "pass",
+  "note": "existing:true attachment of AddCommGroup.divisible_unit_lattice_extension (Sheaf.GroupTheory.DivisibleUnitLatticeExtension, unchanged, sorry-only, source/proof docstrings present); only the lean field differs from the live node; statement verbatim in file; every hypothesis matches (n≥1, Module.Free+Module.Finite L, n-divisible D with witness in D, IsAddTorsionFree(B⧸D) = nsmul injective for n≠0, Finite cokernel killed by n) and every conclusion matches (finite free G, injective i, ∃s n^s kills G/i(L), h∘i=φ, B→B/D surjective from G); G in L's universe is harmless and B has independent universe v; edge cases n=1, L=0, non-injective φ, D=0, D=B covered; theorem was written for dropped lem-per-divisible-unit-lattice-extension (identical node statement), reuse satisfies H4, no other live owner; no compile needed (no file changed). Advisory: module docstring blueprint tag still names the dropped per node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261023T132428-L-2270854",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-relative-identity-component",
+ "kind": "definition",
+ "title": "Relative identity-component inclusion",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $B,N$ group schemes over $S$ (group objects, with homomorphisms preserving the multiplication and unit [def-sc-group-scheme]), and $j:B\\to N$ an $S$-morphism. Define $\\operatorname{IsRelativeIdentityComponent}(j)$ to mean that $j$ is a group homomorphism and an open immersion [def-weil-open-immersion], and for every algebraically closed field $\\Omega$ and morphism $s:\\operatorname{Spec}\\Omega\\to S$ [def-weil-affine-spectrum], the image of the base-changed morphism $j_s:B_s\\to N_s$ [def-pc-base-change] is exactly the connected component of the identity point of $N_s$ [def-weil-connected-scheme]. The identity point is the image of the unique point of $\\operatorname{Spec}\\Omega$ under the unit section. Thus the source has the full open-subscheme structure of the fibrewise identity component, not a reduced induced structure.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-weil-connected-scheme"
+ ],
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR §10.1, Definition 1 and Proposition 9, pp.289 and 294–295; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open subgroup scheme whose geometric fibres are the connected components of the identity",
+   "results": "{\"t\": \"2026-10-24T08:14:59Z\", \"tool\": \"leansearch\", \"query\": \"Open subgroup scheme whose geometric fibres are the connected components of the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OpenNormalSubgroup.pathComponentOne\", \"Subgroup.connectedComponentOfOne\", \"OpenSubgroup.mk\", \"OpenSubgroup\", \"OpenNormalSubgroup.pathComponentOne_carrier\", \"OpenSubgroup.mem_nhds_one\", \"AlgebraicGeometry.instIsAffineXSchemeCoverOfIsIsoIsOpenImmersionId\", \"OpenSubgroup.isOpen'\"], \"digest\": \"a45c31687dde9378\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: results are smooth morphisms, general open immersions, normalization or topological groups, not the relative Néron/group-scheme predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion of group schemes inducing identity components on all geometric fibres",
+   "results": "{\"t\": \"2026-10-24T08:15:00Z\", \"tool\": \"leanfinder\", \"query\": \"Open immersion of group schemes inducing identity components on all geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isIso_app\", \"AlgebraicGeometry.Scheme.Hom.isoOpensRange\", \"AlgebraicGeometry.Scheme.Hom.appIso_hom'\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.t_id\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.scheme_toScheme\", \"AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor\", \"AlgebraicGeometry.Scheme.Hom.appIso\"], \"digest\": \"bd1f2a15203cd144\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: results are smooth morphisms, general open immersions, normalization or topological groups, not the relative Néron/group-scheme predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRelativeIdentityComponent|IsNeronLftModel|Neron|Néron",
+   "results": "{\"t\": \"2026-10-24T08:15:00Z\", \"tool\": \"grep\", \"query\": \"IsRelativeIdentityComponent|IsNeronLftModel|Neron|Néron\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: results are smooth morphisms, general open immersions, normalization or topological groups, not the relative Néron/group-scheme predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i Neron|Néron|IsRelativeIdentityComponent lean/WeilConjectures lean/Sheaf; rg -l geometric.*identity component dag/nodes/*/def-*.json; tools/blueprint_refs.py search Neron / identity component",
+   "results": "No Néron-model definition node or project declaration. Relative identity component absent; GrpObj.identityComponent in GroupScheme.Basic is only for a finite-type group over a field. Existing def-sc-group-scheme supplies GrpObj, IsCommMonObj and IsMonHom. def-wf-algebraic-components is only for closed algebraic matrix subgroups. No blueprint Neron match; 36 general identity/component matches.",
+   "date": "2026-10-24",
+   "verdict": "New relative predicates needed; reuse the group-object and topological connected-component definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-connected-model-globalization",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "BLR §10.1 Proposition 9: the Néron mapping property and the common relative identity component in the hypotheses and conclusion.",
+   "via": [
+    "lem-sfb-neron-connected-model-globalization",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeIdentityComponent",
+  "declaration": "AlgebraicGeometry.IsRelativeIdentityComponent",
+  "declarations": [
+   "AlgebraicGeometry.IsRelativeIdentityComponent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeIdentityComponent.lean",
+  "statement": "def IsRelativeIdentityComponent {S : Scheme.{u}} {B N : Over S} [GrpObj B] [GrpObj N] (j : B ⟶ N) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c759338c",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c759338c",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read the item node, the landed IsNeronLftModel, the new def-sfb-relative-identity-component node and module, the item module and report. All hypotheses match: D Noetherian, integrally closed, dim 1, K=FractionRing; G and B smooth, separated, geometrically connected (fibres), lft+qc, commutative; L m Neron lft over D_m via the canonical Mathlib algebra/IsFractionRing/IsScalarTower instances; jL with IsRelativeIdentityComponent is equivalent to B_m ≅ N_m^0. hcompat and the q equation compare first projections of maps over Spec K, equivalent to the canonical-iso equation. All conclusion clauses present (N commutative Neron lft model, j onto N^0 with generic compatibility, local q isomorphisms) with no finiteness assumed. New predicate is non-hollow, no owner found (GrpObj.identityComponent and groupFibreNeutralComponent need finite type), H12 fields OK. Item JSON differs from main only in lean and the added def stmt_deps. Statements verbatim, lines ≤100, docstrings and 8-step proof plan present, imports exist. Advisory: def-sc-group-scheme not cited directly (inline in node text; cited via both def deps). No compile run (no change made)."
+ }
+}

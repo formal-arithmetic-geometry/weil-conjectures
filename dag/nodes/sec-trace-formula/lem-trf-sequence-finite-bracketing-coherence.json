@@ -1,0 +1,148 @@
+{
+ "id": "lem-trf-sequence-finite-bracketing-coherence",
+ "kind": "statement",
+ "title": "sequenceFiniteCoherence",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "Use the coefficient sequence module categories, chosen geometric and scalar comparisons, and bracketing interpretation of [def-trf-quotient-system-coherence-data]. For any scheme-indexed family of categories and contravariant functors U, let c be an invertible compositor and e an invertible identity comparison. Assume the explicitly transported three-arrow associativity equation and both unit equations. Then any two binary bracketings of the same finite path yield equal functors up to equality and equal comparisons after transport along that equality. Empty and singleton paths are included. The exact hypotheses and transport direction are those of the Lean signature below.\n\nLean statement:\ntheorem sequenceFiniteCoherence\n    (D : Scheme.{t} → Type a) [∀ X, Category.{v} (D X)]\n    (U : ∀ {X Y : Scheme.{t}}, (X ⟶ Y) → (D Y ⥤ D X))\n    (c : ∀ {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z), U (f ≫ g) ≅ U g ⋙ U f)\n    (e : ∀ X : Scheme.{t}, U (𝟙 X) ≅ 𝟭 (D X))\n    (hA : ∀ {T X Y Z : Scheme.{t}} (f : Z ⟶ Y) (g : Y ⟶ X) (h : X ⟶ T),\n      (c (f ≫ g) h).hom ≫ Functor.whiskerLeft (U h) (c f g).hom =\n        eqToHom (congrArg (fun f ↦ U f) (Category.assoc f g h)) ≫\n          (c f (g ≫ h)).hom ≫ Functor.whiskerRight (c g h).hom (U f))\n    (hL : ∀ {X Y : Scheme.{t}} (f : X ⟶ Y),\n      (c (𝟙 X) f).hom ≫ Functor.whiskerLeft (U f) (e X).hom =\n        eqToHom (congrArg (fun f ↦ U f) (Category.id_comp f)))\n    (hR : ∀ {X Y : Scheme.{t}} (f : X ⟶ Y),\n      (c f (𝟙 Y)).hom ≫ Functor.whiskerRight (e Y).hom (U f) =\n        eqToHom (congrArg (fun f ↦ U f) (Category.comp_id f)))\n    {X Y : Scheme.{t}} {p : Quiver.Path X Y} (a b : IntegralQuotientBracketing p) :\n    ∃ h : integralQuotientBracketFunctor D U a = integralQuotientBracketFunctor D U b,\n      integralQuotientBracketComparison D U c e a ≪≫ eqToIso h =\n        integralQuotientBracketComparison D U c e b",
+ "stmt_deps": [
+  "def-trf-quotient-system-coherence-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+ },
+ "proof": [
+  {
+   "text": "Define sequenceNormalFunctor by recursion on paths: the empty path is the identity functor and cons p f is U f followed by the normal functor of p. Define sequenceNormalMap from U(composePath p) recursively, using e for nil and c followed by left whiskering for cons. Induction on the second path identifies the normal functor of a concatenation with the composite of the two normal functors.",
+   "uses": [
+    "def-trf-quotient-system-coherence-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+   }
+  },
+  {
+   "text": "Prove that equality transports commute with left whiskering, with the compositor, and with horizontal composition of natural transformations, each by equality induction. Prove sequenceNormalMap_comp by induction on the second path. The nil case is the right-unit equation hR and whiskering interchange. In the cons case, whisker the inductive equality, move its source transport through c, apply hA, and use whiskering interchange; equality transports compose by proof irrelevance.",
+   "uses": [
+    "def-trf-quotient-system-coherence-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+   }
+  },
+  {
+   "text": "Induct on IntegralQuotientBracketing to identify its functor with the normal path functor and its comparison hom with sequenceNormalMap after transport. The nil case is reflexivity and the single case is hL. For comp, use the two inductive equalities, horizontal transport compatibility and sequenceNormalMap_comp, cancelling the normal-functor concatenation transport.",
+   "uses": [
+    "def-trf-quotient-system-coherence-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+   }
+  },
+  {
+   "text": "For the two given bracketings compose their functor identifications through the normal path functor. Apply Iso.ext and cancel the second identification. Both transported comparison homs equal sequenceNormalMap, so the resulting isomorphisms agree.",
+   "uses": [
+    "def-trf-quotient-system-coherence-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-quotient-system-coherence-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U9",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite path bracketing independence from associative and unital functor comparison isomorphisms; scalar pullback coherence descends by K-flat resolutions",
+   "results": "8 hits, exact derived functor factors and shift instances; no complete mixed sequence-system equation or finite assembly theorem.",
+   "date": "2026-10-25",
+   "verdict": "Partial tools only; no direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryCompIso_assoc",
+   "results": "0 hits: identifier not in Mathlib search index. The adopted source-library derived comparison API was read directly.",
+   "date": "2026-10-25",
+   "verdict": "Use source comparison compatibility for geometric associativity; remaining equality transport is the split step."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso_assoc|pullback_assoc|leftAdjointCompIso_assoc",
+   "results": "13 Mathlib hits, including Adjunction.leftAdjointCompIso_assoc and SheafOfModules.pullback_assoc.",
+   "date": "2026-10-25",
+   "verdict": "Ordinary three-arrow tools do not alone assert the displayed derived equations or arbitrary binary assembly theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coherence of associative unital inverse image comparisons and scalar change comparisons in derived categories",
+   "results": "8 hits: ModuleCat.extendScalars_assoc'; derived adjunction factors; coimageImageComparison_app; localizer derived comparison factors; quasi-isomorphism inversion.",
+   "date": "2026-10-25",
+   "verdict": "Partial ordinary scalar and localization APIs; no entire sequence-site mixed equation or arbitrary bracketing theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSystemMixedCoherence",
+  "date": "2026-10-25",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-quotient-system-mixed-coherence",
+   "place": "Explicit component of the finite-string or derived coherence argument.",
+   "via": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SequenceFiniteBracketingCoherence",
+  "file": "lean/Sheaf/Paper/SequenceFiniteBracketingCoherence.lean",
+  "declaration": "WeilConjectures.sequenceFiniteCoherence",
+  "statement": "theorem sequenceFiniteCoherence\n    (D : Scheme.{t} → Type a) [∀ X, Category.{v} (D X)]\n    (U : ∀ {X Y : Scheme.{t}}, (X ⟶ Y) → (D Y ⥤ D X))\n    (c : ∀ {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z), U (f ≫ g) ≅ U g ⋙ U f)\n    (e : ∀ X : Scheme.{t}, U (𝟙 X) ≅ 𝟭 (D X))\n    (hA : ∀ {T X Y Z : Scheme.{t}} (f : Z ⟶ Y) (g : Y ⟶ X) (h : X ⟶ T),\n      (c (f ≫ g) h).hom ≫ Functor.whiskerLeft (U h) (c f g).hom =\n        eqToHom (congrArg (fun f ↦ U f) (Category.assoc f g h)) ≫\n          (c f (g ≫ h)).hom ≫ Functor.whiskerRight (c g h).hom (U f))\n    (hL : ∀ {X Y : Scheme.{t}} (f : X ⟶ Y),\n      (c (𝟙 X) f).hom ≫ Functor.whiskerLeft (U f) (e X).hom =\n        eqToHom (congrArg (fun f ↦ U f) (Category.id_comp f)))\n    (hR : ∀ {X Y : Scheme.{t}} (f : X ⟶ Y),\n      (c f (𝟙 Y)).hom ≫ Functor.whiskerRight (e Y).hom (U f) =\n        eqToHom (congrArg (fun f ↦ U f) (Category.comp_id f)))\n    {X Y : Scheme.{t}} {p : Quiver.Path X Y} (a b : IntegralQuotientBracketing p) :\n    ∃ h : integralQuotientBracketFunctor D U a = integralQuotientBracketFunctor D U b,\n      integralQuotientBracketComparison D U c e a ≪≫ eqToIso h =\n        integralQuotientBracketComparison D U c e b",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2a332",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261025T164455-L-1022707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261027T084505-L-3685946",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

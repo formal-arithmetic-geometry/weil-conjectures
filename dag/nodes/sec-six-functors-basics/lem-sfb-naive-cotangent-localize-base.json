@@ -1,0 +1,390 @@
+{
+ "id": "lem-sfb-naive-cotangent-localize-base",
+ "kind": "statement",
+ "title": "Localization of the base of a naive cotangent complex",
+ "statement": "Let $A$ be a commutative ring, let $S\\subseteq A$ be a multiplicative subset (containing $1$ and closed under multiplication), and let $S^{-1}A\\to B$ be a homomorphism of commutative rings; $B$ is an $A$-algebra by composition. Ring localization is that of [def-weil-pbc-module-localization]. For a ring map $R\\to B$, let $C_{B/R}$ be its standard naive cotangent complex [def-weil-pbc-smooth-ring-map], written in cohomological degrees $-1,0$: with $P_R=R[x_b\\mid b\\in B]$ and $I_R=\\ker(P_R\\to B)$, it is $[I_R/I_R^2\\xrightarrow{[h]\\mapsto1\\otimes\\mathrm dh}B\\otimes_{P_R}\\Omega_{P_R/R}]$ [def-weil-pbc-kahler-differentials, def-weil-pbc-module-tensor-product]. The coefficient localization map $A[B]\\to(S^{-1}A)[B]$, $x_b\\mapsto x_b$, induces the canonical $B$-linear chain map\n$$C_{B/A}\\longrightarrow C_{B/S^{-1}A}.$$\nIts image is an isomorphism in $D(B)$ [def-weil-abstract-derived-category]; in fact this chain map is a homotopy equivalence, meaning that it admits a chain map inverse whose composites differ from the respective identities by maps $dh+hd$, with $h$ of degree $-1$. No injectivity, finite generation, or nonzero-ring hypothesis is imposed; $0\\in S$ is allowed whenever the displayed map to $B$ exists.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BS (lemma-NL-localize-bottom), including its canonical map; section-netherlander for the standard presentations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_S=S^{-1}A$, $P=A[x_b\\mid b\\in B]$, $P_S=A_S[x_b\\mid b\\in B]$, and let $T\\subseteq P$ be the image of $S$ as constant polynomials. The coefficient map identifies $P_S$ with $T^{-1}P$: a polynomial with finitely many coefficients in $A_S$ has a common denominator $s\\in S$, so is $p/s$; if $p/1=0$, each of its finitely many coefficients is annihilated by an element of $S$, and the product of these elements annihilates $p$. The fraction map $p/s\\mapsto s^{-1}p$ and the coefficientwise map back are inverse ring maps, fixing all variables. Write $\\epsilon:P\\to B$ for evaluation and $s_B$ for the image of $s\\in S$ in $B$. Each $s_B$ is a unit, since $A\\to B$ factors through $A_S$; hence evaluation on $P_S$ is $\\epsilon_S(p/s)=s_B^{-1}\\epsilon(p)$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BS (lemma-NL-localize-bottom), localized polynomial presentation; fraction construction in Section 00CM (section-localization)."
+   }
+  },
+  {
+   "text": "Let $I=\\ker\\epsilon$ and $J=\\ker\\epsilon_S$. The evaluation maps are surjective because the variable $x_b$ maps to $b$. For a fraction $p/s\\in P_S$, invertibility of $s_B$ gives $\\epsilon_S(p/s)=0$ if and only if $\\epsilon(p)=0$. Thus $J$ consists exactly of the fractions $i/s$ with $i\\in I$, and in particular $J=IP_S$. This verifies the kernel identification for these specific standard presentations, without any injectivity assumption on $A\\to A_S$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BS (lemma-NL-localize-bottom), the kernel of the localized presentation."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-localization-flat], the map $P\\to P_S=T^{-1}P$ is flat. Applying [lem-weil-pbc-ideal-cotangent-flat-base-change-ring] to $I\\subseteq P$ and using $J=IP_S$ gives the canonical isomorphism $(I/I^2)\\otimes_P P_S\\xrightarrow{\\sim}J/J^2$, $[i]\\otimes q\\mapsto q[i]$. Put $M=I/I^2$, a $B=P/I$-module. The multiplication map $M\\otimes_P P_S\\to M$, $m\\otimes(p/s)\\mapsto\\epsilon(p)s_B^{-1}m$, is an isomorphism with inverse $m\\mapsto m\\otimes1$. It is well defined by the fraction relation and tensor bilinearity: multiplication by every $s_B$ is invertible on $M$. For the second inverse identity, the balancing relation gives $s(m\\otimes p/s)=(\\epsilon(p)m)\\otimes1=s((\\epsilon(p)s_B^{-1}m)\\otimes1)$, and $s$ acts invertibly on the tensor through $P_S$, so it can be cancelled. Therefore the degree $-1$ map $u^{-1}:I/I^2\\to J/J^2$, $[i]\\mapsto[i/1]$, is a $B$-linear isomorphism, with inverse $[i/s]\\mapsto s_B^{-1}[i]$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BS (lemma-NL-localize-bottom), conormal calculation; Tag 00HT (lemma-flat-localization); Morphisms Tag 0473 (lemma-conormal-functorial-flat), affine calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] first to $P/A$ and then to $P_S/A_S$, in both cases with variable set $B$. The modules $B\\otimes_P\\Omega_{P/A}$ and $B\\otimes_{P_S}\\Omega_{P_S/A_S}$ are free $B$-modules on the respective elements $1\\otimes\\mathrm dx_b$. The canonical degree $0$ comparison $u^0$ sends each such basis element to the element with the same index. The reverse assignment on these bases is its $B$-linear inverse. Arbitrarily many variables cause no difficulty, since every polynomial and every vector has finite support.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BS (lemma-NL-localize-bottom), differential calculation; Tag 00RX (lemma-differentials-polynomial-ring), applied as the existing arbitrary-variable node."
+   }
+  },
+  {
+   "text": "The differential sends $[i]$ to $1\\otimes\\mathrm di$. The comparison commutes with it: for $i\\in I$, both routes give $1\\otimes\\mathrm d(i/1)$. Indeed, the polynomial differential formula expresses both as $\\sum_b\\epsilon(\\partial i/\\partial x_b)(1\\otimes\\mathrm dx_b)$; the coefficient map fixes the variables and commutes with these formal derivatives. Thus the two isomorphisms just proved are the components of the canonical chain map in the statement. Their inverses form a chain map, since $d_Su^{-1}=u^0d$ implies $d(u^{-1})^{-1}=(u^0)^{-1}d_S$. Both composites are exactly the identities, so the required homotopies are zero. Applying the functor from complexes to $D(B)$ preserves this inverse and proves that the specified map is an isomorphism there. If $0\\in S$, existence of $A_S\\to B$ forces $B=0$; the same formulas apply to its zero modules.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BS (lemma-NL-localize-bottom), conclusion; Section 00S0 (section-netherlander), canonical functoriality of presentations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BS (lemma-NL-localize-bottom), spelling out its direct computation on the standard presentations; conormal flat base change as in Morphisms Tag 0473."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a localization S inverse A mapping to B the canonical map from the naive cotangent complex of B over A to that of B over S inverse A is a homotopy equivalence",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl",
+     "Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl",
+     "Algebra.Generators.map_comp_cotangentCompAwaySec",
+     "Algebra.H1Cotangent.isLocalizedModule"
+    ],
+    "digest": "0f2f1ec1cab246a6",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.tensorH1CotangentOfIsLocalization and Algebra.H1Cotangent.isLocalizedModule localize the target algebra over a fixed base; the other hits concern principal target localization or differential modules, not the canonical full-complex comparison on changing the base to S inverse A"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the base ring at elements already invertible in the target preserves the two term conormal differential complex",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.H1Cotangent.isLocalizedModule",
+     "KaehlerDifferential.isLocalizedModule_map",
+     "KaehlerDifferential.isLocalizedModule_of_isLocalizedModule",
+     "KaehlerDifferential.isLocalizedModule",
+     "Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr"
+    ],
+    "digest": "0863f0fbeae3524b",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.tensorH1CotangentOfIsLocalization and Algebra.H1Cotangent.isLocalizedModule localize the target algebra over a fixed base; the other hits concern principal target localization or differential modules, not the canonical full-complex comparison on changing the base to S inverse A"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"H1Cotangent\", \"IsLocalization\"",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Algebra.tensorH1CotangentOfIsLocalization",
+     "Algebra.tensorH1CotangentOfIsLocalization_toLinearMap"
+    ],
+    "digest": "68dca145b878c7df",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.tensorH1CotangentOfIsLocalization and Algebra.H1Cotangent.isLocalizedModule localize the target algebra over a fixed base; the other hits concern principal target localization or differential modules, not the canonical full-complex comparison on changing the base to S inverse A"
+  },
+  {
+   "tool": "grep",
+   "query": "H1Cotangent.*[Ll]ocal|[Ll]ocal.*H1Cotangent|[Ll]ocal.*[Cc]otangent",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean",
+     "Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean",
+     "Mathlib/RingTheory/Kaehler/Basic.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean"
+    ],
+    "digest": "d67ea42cf1efb16c",
+    "subdirectory": "RingTheory"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.tensorH1CotangentOfIsLocalization and Algebra.H1Cotangent.isLocalizedModule localize the target algebra over a fixed base; the other hits concern principal target localization or differential modules, not the canonical full-complex comparison on changing the base to S inverse A"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The naive cotangent complex is unchanged up to homotopy on localizing the base ring at elements which map to units in the algebra",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.tensorH1CotangentOfIsLocalization",
+     "Algebra.Generators.map_comp_cotangentCompAwaySec",
+     "KaehlerDifferential.isLocalizedModule_map",
+     "Algebra.H1Cotangent.isLocalizedModule",
+     "Algebra.tensorH1CotangentOfIsLocalization.congr_simp",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv.congr_simp",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.tensorH1CotangentOfIsLocalization_toLinearMap"
+    ],
+    "digest": "37e33706becbe370",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.tensorH1CotangentOfIsLocalization and Algebra.H1Cotangent.isLocalizedModule localize the target algebra over a fixed base; the other hits concern principal target localization or differential modules, not the canonical full-complex comparison on changing the base to S inverse A"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*local|local.*cotangent|cotangent.*baseChange",
+   "results": {
+    "ok": true,
+    "n_hits": 21,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean"
+    ],
+    "digest": "e6c3bb2a3ab3e759",
+    "subdirectory": "RingTheory/Extension"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean and Mathlib/RingTheory/Etale/Kaehler.lean; flat base change provides component and H1 comparisons, and localization hits change the target over a fixed base or treat principal target localization. None states the canonical full-complex base-localization map, its chain inverse and the derived-category conclusion in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\", \"IsLocalization\"",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Algebra.tensorH1CotangentOfIsLocalization",
+     "Algebra.tensorH1CotangentOfIsLocalization_toLinearMap"
+    ],
+    "digest": "68dca145b878c7df",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean and Mathlib/RingTheory/Etale/Kaehler.lean; flat base change provides component and H1 comparisons, and localization hits change the target over a fixed base or treat principal target localization. None states the canonical full-complex base-localization map, its chain inverse and the derived-category conclusion in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naive cotangent complex is unchanged when localizing the base ring at elements invertible in the target algebra",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "KaehlerDifferential.isLocalizedModule_map",
+     "Algebra.H1Cotangent.isLocalizedModule",
+     "Algebra.tensorH1CotangentOfIsLocalization",
+     "Algebra.tensorH1CotangentOfIsLocalization.congr_simp",
+     "Algebra.Generators.map_comp_cotangentCompAwaySec",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv.congr_simp",
+     "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway"
+    ],
+    "digest": "6b638da6403c94d6",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean and Mathlib/RingTheory/Etale/Kaehler.lean; flat base change provides component and H1 comparisons, and localization hits change the target over a fixed base or treat principal target localization. None states the canonical full-complex base-localization map, its chain inverse and the derived-category conclusion in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient localization map induces an isomorphism of the two term naive cotangent complexes for an algebra over a localized base ring",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl",
+     "Algebra.tensorH1CotangentOfIsLocalization",
+     "Algebra.Generators.map_comp_cotangentCompAwaySec"
+    ],
+    "digest": "730a14d6dcf6b008",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean and Mathlib/RingTheory/Etale/Kaehler.lean; flat base change provides component and H1 comparisons, and localization hits change the target over a fixed base or treat principal target localization. None states the canonical full-complex base-localization map, its chain inverse and the derived-category conclusion in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring algebra B over a localization of A the canonical base ring comparison for the conormal differential complex is an isomorphism in both degrees",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.H1Cotangent.isLocalizedModule",
+     "Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv",
+     "KaehlerDifferential.isLocalizedModule",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl"
+    ],
+    "digest": "0dad84470fca159b",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean and Mathlib/RingTheory/Etale/Kaehler.lean; flat base change provides component and H1 comparisons, and localization hits change the target over a fixed base or treat principal target localization. None states the canonical full-complex base-localization map, its chain inverse and the derived-category conclusion in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zariski-naive-cotangent-affine-comparison",
+  "date": "2026-10-23",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. Assembly of coherent naive cotangent cohomology: Finite two-term etale local models of the naive cotangent complex. Supporting input: affine polynomial-presentation comparison, Tags 0D0X and 0D0I, with arbitrary presentations by Tag 00S1; no finite-model conclusion. Affine prerequisite: Tag 0D0I, standard ring presentation on the Zariski site; arbitrary polynomial presentations are handled separately by the existing Tag 00S1 node. Supporting input: Tag 07BS (lemma-NL-localize-bottom), including its canonical map; section-netherlander for the standard presentations.",
+   "via": [
+    "lem-sfb-zariski-naive-cotangent-affine-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-naive-cotangent-localize-base",
+  "worker": "stage1",
+  "summary": "Q58 expanded Tag 07BS on the standard all-elements presentations: coefficient localization and its kernel, flat conormal base change with explicit inverse, the arbitrary-variable differential bases, and a strict chain inverse. Statement and inherited provenance/searches retained; no new nodes required. Checked the zero ring, zero denominators, noninjective coefficient localization, and infinite variable sets.",
+  "blueprint": "The inherited from.place traces this prerequisite to the Zariski naive cotangent affine comparison under det-thm-sf-ctf-stability-direct-images, proof (3), through the nodal-curve tangent-finiteness input. Steps 1-5 realize precisely its Tag 07BS base-localization prerequisite; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-bba187f94",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-bba187f94 (reviewer sub-agent of L); spot-checked: Read the item's five steps and every cited node in full. All eight cited nodes are Mathlib leaves (LocalizedModule, MvPolynomial, IsLocalization.flat, Ideal.tensorCotangentEquiv, TensorProduct, KaehlerDifferential.mvPolynomialBasis, KaehlerDifferential, DerivedCategory), and each one states what its step takes from it. The statement and stmt_deps are byte-identical to the unsplit version Q87 created, so the citer lem-sfb-zariski-naive-cotangent-affine-comparison is not affected. Source: Stacks algebra.tex line 35590, Tag 07BS lemma-NL-localize-bottom. The hypotheses match (multiplicative S, a map S^{-1}A to B). The proof writes out the source's 'direct computation NL(alpha)=NL(beta)'. Step 1: P_S is T^{-1}P by common denominators and products of annihilators. Step 2: J={i/s : i in I}=IP_S because s_B is a unit. Step 3: flat conormal base change for P to P_S, plus a check of the explicit multiplication isomorphism M tensor_P P_S to M (well defined, both inverse identities; the cancellation of s via s/1 being a unit of P_S is valid). Step 4: the any-variables Kähler basis node, base-changed, applied with the same index set B on both sides. Step 5: commutation via dg = sum of partial derivatives times dx, so the strict inverse gives zero homotopies and an isomorphism in D(B). Edge cases checked: S={1}, Z to Q, a non-injective A to A_S, 0 in S (B=0), infinitely many variables. No new nodes, no repair note (so not a re-split), no SGA, every step under 2000 characters, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NaiveCotangentLocalizeBase",
+  "declaration": "Algebra.naiveCotangent_localize_base",
+  "declarations": [
+   "Algebra.naiveCotangentLocalizeBaseSquare",
+   "Algebra.naiveCotangentLocalizeBaseMap",
+   "Algebra.naiveCotangent_localize_base"
+  ],
+  "file": "lean/Sheaf/RingTheory/NaiveCotangentLocalizeBase.lean",
+  "statement": "theorem naiveCotangent_localize_base [HasDerivedCategory.{w} (ModuleCat.{max u v} B)] : IsIso (DerivedCategory.Q.map (naiveCotangentLocalizeBaseMap S B)) ∧ ∃ e : HomotopyEquiv _ _, e.hom = naiveCotangentLocalizeBaseMap S B",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2997270ba",
+  "group": "NF",
+  "result": "fix",
+  "note": "Lean and node record correct: 07BS clauses match (Submonoid S, Localization S, Algebra A B + IsScalarTower = by composition; Generators.self presentation with Mathlib Cotangent/CotangentSpace/cotangentComplex as recorded by def-weil-pbc-smooth-ring-map; homotopyCofiber of degree-0 single map = complex in degrees -1,0; defaultHom sends x_b to x_b; chain map from Cotangent.map/CotangentSpace.map + mapArrowHom, real data; IsIso (Q.map) and ∃ HomotopyEquiv with e.hom pinned). Edge cases 0∈S (B=0), S={1}, non-injective localization, infinite B; universes u,v independent, max u v modules, w free. Dep records identical to live, node changes only lean, statement verbatim; no clash; project Naive.complex is theorem-owned and single-universe, not a duplicate to reuse. Sole fault H11: dispatcher-wording second reading, replaced by fixes/lem-sfb-naive-cotangent-localize-base.report.md (worker report verbatim plus clause-by-clause reading). Advisory: homotopyCofiber vs mappingCone (defeq) differs from the landed ind-etale item. No Lean changed, so no compile run."
+ }
+}

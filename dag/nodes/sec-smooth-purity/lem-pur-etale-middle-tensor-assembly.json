@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-etale-middle-tensor-assembly",
+ "kind": "statement",
+ "title": "Elimination of an etale middle factor in a tensor comparison",
+ "statement": "Fix the finite coefficient setting of [def-pur-conventions] and the canonical exceptional composition, normalized etale comparison, tensor and derived pullback comparisons of [def-pur-finite-exceptional-composition], [lem-pur-finite-etale-dualizing-normalization], [lem-weil-pbc-proetale-derived-pullback-composition] and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. All schemes are finite-type schemes over $k$ and all morphisms below are separated finite-type $k$-morphisms [def-weil-scheme-morphism-properties]. Let $q:A\\to T$, $p:T\\to B$ and $q_Q:R\\to Q$ be smooth of pure relative dimensions $d_q,d_p,d_q$ [def-sbc-smooth-morphisms]. Let $G:Q\\to T$ and $J:R\\to A$ be etale [def-weil-etale-morphism], and let $w:Jq=q_QG$. Write $\\omega_f=Rf^!\\Lambda$, $E_{e,f}:\\omega_{ef}\\simeq Le^*\\omega_f$, and $\\sigma_{f,g}$ for the specified maps. Choose a morphism $x:\\omega_{q_Q}\\to LJ^*\\omega_q$ satisfying $\\operatorname{targetUnit}_{q_Q,G}^{-1}\\,\\sigma_{q_Q,G}\\,\\operatorname{congr}(w^{-1})\\,E_{J,q}=x$, where products here list maps in application order. Let $S:Lq_Q^*LG^*\\omega_p\\to LJ^*Lq^*\\omega_p$ be inverse canonical $(q_Q,G)$ pullback composition followed by the canonical $(J,q)$ composition using $w^{-1}$. Then $\\sigma_{q_Q,Gp}$ followed by the canonical exceptional transport from $q_Q(Gp)$ to $J(qp)$ and $E_{J,qp}$ equals the tensor of $x$ and $Lq_Q^*E_{G,p}$ followed by $S$, followed by the inverse canonical $J$ pullback-tensor comparison and $LJ^*\\sigma_{q,p}$. Thus both sides map $\\omega_{q_Q}\\otimes Lq_Q^*\\omega_{Gp}$ to $LJ^*\\omega_{qp}$. No Cartesian hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, etale localization; refinement lem-pur-etale-cartesian-tower-tensor-comparison"
+ },
+ "stmt_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-proetale-site",
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-finite-exceptional-composition",
+  "def-pur-co-smoothness",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-etale-morphism",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the smooth-triple cocycle to $(q_Q,G,p)$ and remove $\\omega_G$ using $\\eta_G$. The normalized identity $E_{G,p}\\sigma_{G,p}=\\eta_G\\otimes1$ then gives\n$$\\sigma_{q_Q,b}=\\sigma_{Gq_Q,p}(\\sigma_{q_Q,G}\\otimes1)(1\\otimes Lq_Q^*E_{G,p}).$$\nIndeed the cocycle first equates $\\sigma_{Gq_Q,p}(\\sigma_{q_Q,G}\\otimes1)$ with $\\sigma_{q_Q,b}(1\\otimes Lq_Q^*\\sigma_{G,p})$; compose on the right with the inverse of this last input map. All factors then have the reassociated source $\\omega_{q_Q}\\otimes Lq_Q^*\\omega_b$.",
+   "uses": [
+    "lem-pur-dualizing-sigma-cocycle-locality",
+    "lem-pur-finite-etale-dualizing-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1, etale localization; refinement lem-pur-etale-cartesian-tower-tensor-comparison"
+   }
+  },
+  {
+   "text": "Apply the etale-source sigma identity to (J,q,p). Replace J followed by q by qQ followed by G using w. Substitute the previous step and the assumed equation hfirst with its arbitrary x, retaining the target unit identification. Tensor functoriality combines the two first-input maps into x and the two second-input maps into qQ-pullback of E_G,p followed by the canonical square pullback comparison. Naturality of the tensor-pullback constraint gives precisely the displayed inverse J tensor comparison followed by J-pullback of sigma_q,p.",
+   "uses": [
+    "lem-pur-dualizing-sigma-cocycle-locality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1, etale localization; refinement lem-pur-etale-cartesian-tower-tensor-comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-dualizing-sigma-cocycle-locality",
+  "lem-pur-finite-etale-dualizing-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, etale localization; refinement lem-pur-etale-cartesian-tower-tensor-comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dualizing tensor cocycle and its transport along an etale source arrow",
+   "results": "IsBaseChange.toDual_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, dualTensorHomEquiv and Monoidal.transportStruct; none states the specified exceptional tensor comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of dualizing sigma under an etale commutative square with etale horizontal factors and normalized E maps",
+   "results": "Eight Scheme.Hom normalization associativity and coproduct identities; no exceptional sigma comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality",
+   "results": "CategoryTheory.MonoidalCategory.associator_naturality in Mathlib.CategoryTheory.Monoidal.Category; useful coherence law but not a geometric comparison.",
+   "date": "2026-10-26",
+   "verdict": "tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "sigma.*etale|etale.*sigma|sourceEtale",
+   "results": "msearch grep returned zero hits. Direct rg finds FiniteEtaleDualizingNormalization and DualizingSigmaCocycleLocality; their individual normalization and cocycle laws do not state the assembled square or the transport equation. blueprint_refs.py searches etale middle tensor and etale tensor source transport each returned zero blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCartesianTowerTensorComparison",
+  "date": "2026-10-26",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, coherence of the composition package and etale localization",
+   "via": [
+    "lem-pur-etale-cartesian-tower-tensor-comparison",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleMiddleTensorAssembly",
+  "file": "lean/Sheaf/Paper/EtaleMiddleTensorAssembly.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.etale_middle_tensor_assembly",
+  "statement": "theorem etale_middle_tensor_assembly\n    (P : WeilConjectures.PurityFiniteSetting.{u})\n    {B T A Q R : Scheme.{u}}\n    [B.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (B ↘ Spec (.of P.field.k))]\n    [QuasiCompact (B ↘ Spec (.of P.field.k))]\n    [T.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (T ↘ Spec (.of P.field.k))]\n    [QuasiCompact (T ↘ Spec (.of P.field.k))]\n    [A.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (A ↘ Spec (.of P.field.k))]\n    [QuasiCompact (A ↘ Spec (.of P.field.k))]\n    [Q.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (Q ↘ Spec (.of P.field.k))]\n    [QuasiCompact (Q ↘ Spec (.of P.field.k))]\n    [R.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (R ↘ Spec (.of P.field.k))]\n    [QuasiCompact (R ↘ Spec (.of P.field.k))]\n    (q : A ⟶ T) [q.IsOver (Spec (.of P.field.k))]\n    [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q]\n    (p : T ⟶ B) [p.IsOver (Spec (.of P.field.k))]\n    [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p]\n    (G : Q ⟶ T) [G.IsOver (Spec (.of P.field.k))]\n    [IsSeparated G] [LocallyOfFiniteType G] [QuasiCompact G]\n    [Etale G]\n    (qQ : R ⟶ Q) [qQ.IsOver (Spec (.of P.field.k))]\n    [IsSeparated qQ] [LocallyOfFiniteType qQ] [QuasiCompact qQ]\n    (J : R ⟶ A) [J.IsOver (Spec (.of P.field.k))]\n    [IsSeparated J] [LocallyOfFiniteType J] [QuasiCompact J]\n    [Etale J]\n    (dq dp : ℕ) [SmoothOfRelativeDimension dq q] [SmoothOfRelativeDimension dp p]\n    [SmoothOfRelativeDimension dq qQ]\n    (w : J ≫ q = qQ ≫ G)\n    (x : omega P qQ ⟶ (pull P J).obj (omega P q))\n    (hfirst : (targetUnit (ModuleCat.{u + 1} P.Coefficient) qQ G (cf := compactification P qQ)\n        (ce := compactification P G) (rho P G)).inv ≫\n      sigma (ModuleCat.{u + 1} P.Coefficient) qQ G (cf := compactification P qQ)\n        (cg := compactification P G) (cfg := compactification P (qQ ≫ G)) (comp P qQ G) ≫\n      (FiniteEtaleNormalization.congr P (qQ ≫ G) (J ≫ q) w.symm).hom.app\n        (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) T) ≫ (sourceEtale P J q).hom = x) :\n    sigma (ModuleCat.{u + 1} P.Coefficient) (qQ) (G ≫ p)\n        (cf := compactification P (qQ)) (cg := compactification P (G ≫ p))\n        (cfg := compactification P ((qQ) ≫ (G ≫ p))) (comp P (qQ) (G ≫ p)) ≫\n      (FiniteEtaleNormalization.congr P ((qQ) ≫ (G ≫ p)) ((J) ≫ (q ≫ p))\n        ((Category.assoc qQ G p).symm.trans\n          ((congrArg (fun f ↦ f ≫ p) w.symm).trans (Category.assoc J q p)))).hom.app\n        (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) B) ≫\n      (sourceEtale P (J) (q ≫ p)).hom =\n    ((Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) _).map (x)).app\n        ((pull P (qQ)).obj (omega P (G ≫ p))) ≫\n      ((Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) _).obj\n        ((pull P (J)).obj (omega P q))).map ((pull P qQ).map (sourceEtale P G p).hom ≫\n        (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) qQ G).inv.app\n          (omega P p) ≫\n        (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) J q\n          (qQ ≫ G) w.symm).hom.app\n          (omega P p)) ≫\n      (Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} P.Coefficient) (J) (omega P q)\n        ((pull P q).obj (omega P p))).inv ≫\n      (pull P (J)).map (sigma (ModuleCat.{u + 1} P.Coefficient) q p\n        (cf := compactification P q) (cg := compactification P p)\n        (cfg := compactification P (q ≫ p)) (comp P q p))",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T203523-L-2824393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T203523-L-2824393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

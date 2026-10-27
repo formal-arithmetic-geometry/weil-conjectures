@@ -110,7 +110,18 @@
   "def-weil-pbc-w-local"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -156,5 +167,29 @@
   "landing": "20261015T154206-L-163185",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For a w-local [def-weil-pbc-w-local] affine scheme $X$, its closed point set $X^c$ is a\nprofinite space, and restriction identifies clopen partitions of $X$ with\nclopen partitions of $X^c$. An open subset containing a part of $X^c$\ncontains the corresponding components of $X$.",
+  "proof": [
+   {
+    "text": "We recall explicitly the affine component fact being used. The intersection\nof all clopen neighbourhoods of a point is its connected component. Indeed\nthis intersection is the spectrum of the localization obtained by inverting\nall idempotents equal to one at the point. A nontrivial idempotent in that\nlocalization would descend, together with its idempotent equation, to a\nfinite stage, and then give a smaller clopen neighbourhood. Thus its spectrum\nis connected. In the w-local case each component contains exactly one closed\npoint [det-pe-wlocal-components].",
+    "uses": [
+     "det-pe-wlocal-components"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Write $X^c=V(J)$. The ring $A/J$ has all primes maximal. Its spectrum is\ncompact Hausdorff with a basis of clopen sets: after quotienting by its\nnilradical, every localization at a prime is a field, so for each $a$ the\nideals $(a)$ and its annihilator generate the unit ideal; this produces an\nidempotent with the same basic open as $a$. This proves the assertion about\nprofiniteness. Distinct closed points belong to distinct components, hence\nare separated by clopen subsets of $X$, by the component fact. If $E\\subset\nX^c$ is clopen, compactness first separates each point of $E$ from all of\n$X^c\\setminus E$ by finitely many clopen subsets of $X$, and then covers $E$\nby finitely many such subsets. Their union extends $E$. It is unique, because\nevery nonempty clopen subset contains a closed point. Finally an open set is\nstable under generalization, so it contains the whole component of each\nclosed point it contains.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

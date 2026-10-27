@@ -1,0 +1,113 @@
+{
+ "id": "lem-z8-projective-line-diagonal-alpha-units",
+ "kind": "statement",
+ "title": "Cached diagonal Alpha equals its supported-unit composite",
+ "statement": "For every commutative coefficient ring A and every scheme S, either canonical diagonal source map alpha is the composite of the constant-object supported unit for that projection with direct image of the supported unit for the diagonal. These are the original units and their original canonical constant-sheaf comparisons.\n\ntheorem projectiveLineDiagonalAlpha_units (A : Type (u + 1)) [CommRing A]\n    (S : Scheme.{u}) (a : Bool) :\n    projectiveLineDiagonalAlpha A S a =\n      supportedDerivedUnit A (projectiveLineDiagonalProjection S a) ≫\n        (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map\n          (supportedDerivedUnit A (pullback.diagonal (ProjectiveLine S ↘ S)))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/lem-amb-p1-diagonal-integrals.md",
+  "place": "The canonical source identification A_P = R(p_a)_* Delta_* A_P in the displayed composite"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-z8-projective-line-diagonal-alpha"
+ ],
+ "proof": [
+  {
+   "text": "Expand constantSingleSectionUnits and both supportedDerivedUnit factors. Each uses the same derivedSingleUnit for the inverse-image/direct-image adjunction, the same constant sheaf objects and the same canonical constant-sheaf pullback component at the free rank-one module. The two composites are definitionally equal.",
+   "uses": [
+    "def-asd-ordinary-supported-kummer-system",
+    "def-z8-projective-line-diagonal-alpha"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/lem-amb-p1-diagonal-integrals.md",
+    "place": "The canonical source identification A_P = R(p_a)_* Delta_* A_P in the displayed composite"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-supported-kummer-system",
+  "def-z8-projective-line-diagonal-alpha"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/lem-amb-p1-diagonal-integrals.md",
+  "place": "The canonical source identification A_P = R(p_a)_* Delta_* A_P in the displayed composite"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The composite of the two derived constant sheaf single-object units equals the pair of supported derived units for a section and its projection",
+   "results": "Returned generic constant-sheaf and sheaf-of-modules unit lemmas, not the project-specific equality. The two project definitions expand to the same composite.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project definitions and reflexivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedSingleUnit",
+   "results": "0 hits; project-specific identifier unknown to Mathlib search.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSingleSectionUnits|supportedDerivedUnit",
+   "results": "0 Mathlib hits. The source-library definitions were read directly.",
+   "date": "2026-10-27",
+   "verdict": "Definitional project comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "group": "Z8",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-z8-projective-line-diagonal-alpha",
+   "place": "Defining equation of the cached supported-unit pair",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineDiagonalAlphaUnits.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLineDiagonalAlpha_units",
+  "declarations": [
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalAlpha_units"
+  ],
+  "statement": "theorem projectiveLineDiagonalAlpha_units (A : Type (u + 1)) [CommRing A]\n    (S : Scheme.{u}) (a : Bool) :\n    projectiveLineDiagonalAlpha A S a =\n      supportedDerivedUnit A (projectiveLineDiagonalProjection S a) ≫\n        (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map\n          (supportedDerivedUnit A (pullback.diagonal (ProjectiveLine S ↘ S)))",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

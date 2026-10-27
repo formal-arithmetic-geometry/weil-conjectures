@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-coprime-congruence-kernel-rigidity",
+ "kind": "statement",
+ "title": "Coprime congruence images force equality of the integral representation kernels",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $\\mathcal O=\\mathcal O_E$, extending absolute value $|\\cdot|_E$ and chosen uniformizer $\\pi=\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Let $H$ be any group, let $r\\geq0$ be an integer, and let $A:H\\to\\operatorname{GL}_r(\\mathcal O)$ be a group homomorphism. Here matrices are as in [def-weil-matrix], and $\\operatorname{GL}_r(R)$ is the group of matrices admitting a two-sided matrix inverse. For $n\\geq1$, let $A_n:H\\to\\operatorname{GL}_r(\\mathcal O/\\pi^n\\mathcal O)$ be entrywise reduction, let $Q_n=A_n(H)$, and let $K_n=\\{h\\in H:A_n(h)=I_r\\}$. Assume that for every $n\\geq1$ the group $Q_n$ is finite and $\\gcd(|Q_n|,\\ell)=1$. Then $K_1=K_n=\\ker A$ for every $n\\geq1$, where $\\ker A=\\{h\\in H:A(h)=I_r\\}$. No topology or continuity is assumed on $H$ or $A$, and the rank-zero case is included.",
+ "source": {
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Agent algebraic corollary to Proposition 1.1.9, p. 3 (not stated in the notes): first-order matrix power congruence, induction on congruence depth, and norm separatedness (old item Steps 3-5)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Put I = span {π}, with the recorded coefficient uniformizer π. Extract the local-ring and DVR structures, maximal ideal m, its absolute-value membership criterion, and I = m from lem-weil-l-adic-extension-integers-dvr. Hence I is proper and the integer ring is Noetherian. Spectral norm extension and Padic.norm_p_lt_one show |ℓ|_E < 1, so ℓ belongs to m = I. No topology on H is needed.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-l-adic-numbers",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Agent algebraic supplement to Proposition 1.1.9, p. 3: coefficient normalization, not a theorem asserted in those notes."
+   }
+  },
+  {
+   "text": "For n ≥ 1 and h in K_n, quotient equality says every entry of B = A(h) - I_r lies in I^n. Reduce B modulo I^(n+1) to get X. Each summand of each entry of X*X is zero: the corresponding product belongs to I^(n+n), contained in I^(n+1). Also ℓX = 0 because ℓ belongs to I. Induction using distributivity and X*X = 0 gives (1+X)^m = 1 + m • X. Thus A_(n+1)(h)^ℓ = 1. The proof is a generic private congruence_power lemma for any ideal of a commutative ring and any exponent p belonging to that ideal.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Agent algebraic supplement to Proposition 1.1.9, p. 3: first-order power congruence (square-zero calculation)."
+   }
+  },
+  {
+   "text": "Induct on $n\\geq1$ to prove $K_1=K_n$. At $n=1$ this is reflexive. Suppose $K_1=K_n$ and let $h\\in K_1$. Then $h\\in K_n$, and Step 2 gives $x^\\ell=I_r$ for $x=A_{n+1}(h)\\in Q_{n+1}$. Apply [lem-sfb-finite-matrix-group-coprime-power] to the subgroup $Q_{n+1}\\subseteq\\operatorname{GL}_r(\\mathcal O/\\pi^{n+1}\\mathcal O)$ and exponent $\\ell$. Its finiteness and $\\gcd(|Q_{n+1}|,\\ell)=1$ are exactly the assumptions of the item. Injectivity of its power map, together with $I_r^\\ell=I_r$, gives $x=I_r$ and $h\\in K_{n+1}$. Conversely, $K_{n+1}\\subseteq K_1$ follows entrywise from $\\pi^{n+1}\\mathcal O\\subseteq\\pi\\mathcal O$. This completes the induction.",
+   "uses": [
+    "lem-sfb-finite-matrix-group-coprime-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Agent algebraic supplement to Proposition 1.1.9, p. 3: kernel induction; power-map input is Mathlib/GroupTheory/OrderOfElement.lean:1245-1247."
+   }
+  },
+  {
+   "text": "For h in K_1, Step 3 places every entry of A(h)-I_r in I^n for every n ≥ 1; level zero is automatic because I^0 is the unit ideal. The recorded integer ring is a DVR, hence Noetherian, and local by lem-weil-l-adic-extension-integers-dvr. Since I is its proper maximal ideal, apply Mathlib Ideal.iInf_pow_eq_bot_of_isLocalRing (RingTheory/Filtration.lean) to show the intersection of all its powers is zero. Every matrix entry of A(h)-I_r is therefore zero, giving A(h)=I_r. This replaces the longer unit-times-uniformizer factorization/norm estimate with Krull intersection.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Agent algebraic supplement to Proposition 1.1.9, p. 3: separatedness by the existing DVR factorization and unit-norm clauses."
+   }
+  },
+  {
+   "text": "Step 4 gives $K_1\\subseteq\\ker A$. The reverse inclusion follows by reducing the identity matrix modulo $\\pi$. Thus $K_1=\\ker A$, and Step 3 gives $K_n=K_1=\\ker A$ for every $n\\geq1$. If $r=0$, the unique empty matrix is the identity and every group $\\operatorname{GL}_0$ is trivial: all these kernels are $H$. The entrywise arguments above are also vacuous in that case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Agent algebraic supplement to Proposition 1.1.9, p. 3: assembly and rank-zero case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-l-adic-numbers",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-matrix",
+  "lem-sfb-finite-matrix-group-coprime-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Agent algebraic supplement to Proposition 1.1.9, p. 3, realized by Y7: square-zero matrix power, induction using Nat.Coprime.pow_left_bijective, and separatedness using Mathlib Ideal.iInf_pow_eq_bot_of_isLocalRing. The seminar notes supply the integral representation context, not the corollary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a representation by invertible matrices over the integers of a finite extension of Q p, if every image modulo a power of the uniformizer has order coprime to p then its first congruence kernel equals the kernel of the representation",
+   "results": "[leanfinder] OK 8 hit(s); PadicInt.ker_toZModPow: ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)] (n : ℕ), RingHom.ker (PadicInt.toZModPow n) = Ideal.span {↑p ^ n}; PadicInt.ker_toZMod: ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)], RingHom.ker PadicInt.toZMod = IsLocalRing.maximalIdeal ℤ_[p]; IsDedekindDomain.selmerGroup.valuation_ker_eq: ∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\n  [inst_4 : IsFractionRing R K] {S : Set (IsDedekindDomain.HeightOneSpectrum R)} {n : ℕ},\n  IsDedekindDomain.selmerGroup.valuation.ker = IsDedekindDomain.selmerGroup.subgroupOf IsD; IsDedekindDomain.selmerGroup.fromUnit_ker: ∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\n  [inst_4 : IsFractionRing R K] {n : ℕ} [hn : Fact (0 < n)],\n  IsDedekindDomain.selmerGroup.fromUnit.ker = (powMonoidHom n).range; CongruenceSubgroup.Gamma1': (N : ℕ) → Subgroup ↥(CongruenceSubgroup.Gamma0 N); DirichletCharacter.factorsThrough_iff_ker_unitsMap: ∀ {R : Type u_1} [inst : CommMonoidWithZero R] {n : ℕ} {χ : DirichletCharacter R n} {d : ℕ} [NeZero n] (hd : d ∣ n),\n  χ.FactorsThrough d ↔ (ZMod.unitsMap hd).ker ≤ (MulChar.toUnitHom χ).ker; Ideal.Quotient.ker_stabilizerHom: ∀ {A : Type u_3} {B : Type u_4} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (P : Ideal B)\n  (p : Ideal A) [inst_3 : P.LiesOver p] (G : Type u_6) [inst_4 : Group G] [inst_5 : MulSemiringAction G B]\n  [inst_6 : SMulCommClass G A B],\n  (Ideal.Quotient.stabilizerHom P p G).ker =\n   ; Representation.FiniteCyclicGroup.coinvariantsKer_eq_range: ∀ {k : Type u_1} {G : Type u_2} [inst : CommRing k] [inst_1 : Group G] {V : Type u_4} [inst_2 : AddCommGroup V]\n  [inst_3 : Module k V] (ρ : Representation k G V) (g : G) [Finite G],\n  (∀ (x : G), x ∈ Subgroup.zpowers g) → Representation.Coinvariants.ker ρ = (ρ g - LinearMap.id).range",
+   "date": "2026-10-22",
+   "verdict": "no match: p-adic scalar quotient kernels, arithmetic congruence groups and coprime power bijectivity do not give this filtered matrix-kernel rigidity; the power bijection is an existing auxiliary leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\", \"ker\"",
+   "results": "[loogle] OK 1 hit(s); Matrix.GeneralLinearGroup.kronecker:  {n : Type u} [DecidableEq n] [Fintype n] {R : Type u_3} {m : Type u_4} [CommSemiring R] [Fintype m] [DecidableEq m] (x : GL n R) (y : GL m R) : GL (n × m) R",
+   "date": "2026-10-22",
+   "verdict": "no match: p-adic scalar quotient kernels, arithmetic congruence groups and coprime power bijectivity do not give this filtered matrix-kernel rigidity; the power bijection is an existing auxiliary leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "(congruence|uniformizer).*(ker|coprime|matrix)|(ker|coprime|matrix).*(congruence|uniformizer)",
+   "results": "[grep] OK 25 hit(s); Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean:25:   CongruenceSubgroup Real Function SlashInvariantFormClass ModularFormClass Periodic MatrixGroups; Mathlib/NumberTheory/ModularForms/QExpansion.lean:51: open scoped Real MatrixGroups CongruenceSubgroup Topology Manifold; Mathlib/NumberTheory/ModularForms/EisensteinSeries/IsBoundedAtImInfty.lean:33: open ModularForm UpperHalfPlane Matrix SlashInvariantForm CongruenceSubgroup; Mathlib/NumberTheory/ModularForms/EisensteinSeries/Basic.lean:29: open EisensteinSeries CongruenceSubgroup MatrixGroups; Mathlib/NumberTheory/ModularForms/EisensteinSeries/Defs.lean:34: open ModularForm UpperHalfPlane Complex Matrix CongruenceSubgroup Set; Mathlib/NumberTheory/ModularForms/Identities.lean:22: open ModularForm UpperHalfPlane Matrix CongruenceSubgroup Matrix.SpecialLinearGroup MatrixGroups; Mathlib/Algebra/Module/Congruence/Defs.lean:141: /-- The kernel of a `MulActionHom` as a congruence relation. -/; Mathlib/Algebra/Module/Congruence/Defs.lean:142: @[to_additive /-- The kernel of an `AddActionHom` as a congruence relation. -/]; Mathlib/Algebra/Module/Congruence/Defs.lean:147: /-- The kernel of a `DistribMulActionHom` as a congruence relation. -/; Mathlib/CategoryTheory/Limits/Shapes/KernelPair.lean:30: - Internal equivalence relations (or congruences) and the fact that every kernel pair induces one,; Mathlib/GroupTheory/QuotientGroup/Defs.lean:76: The congruence relation defined by the kernel of a group homomorphism is equal to its kernel; Mathlib/GroupTheory/QuotientGroup/Defs.lean:80: /-- The additive congruence relation defined by the kernel of an additive group homomorphism is; Mathlib/GroupTheory/QuotientGroup/Defs.lean:81: equal to its kernel as an additive congruence relation. -/]; Mathlib/GroupTheory/Congruence/Hom.lean:18: * `Con.ker`: the kernel of a monoid homomorphism as a congruence relation; Mathlib/GroupTheory/Congruence/Hom.lean:20: * `Con.lift`: the homomorphism on the quotient given that the congruence is in the kernel; Mathlib/GroupTheory/Congruence/Hom.lean:50: /-- The kernel of a multiplicative homomorphism as a congruence relation. -/; Mathlib/GroupTheory/Congruence/Hom.lean:51: @[to_additive /-- The kernel of an additive homomorphism as an additive congruence relation. -/]; Mathlib/GroupTheory/Congruence/Hom.lean:61: /-- The definition of the congruence relation defined by a monoid homomorphism's kernel. -/; Mathlib/RingTheory/Finiteness/Cardinality.lean:134: /-- The kernel (as a congruence relation) of a random surjective linear map; Mathlib/RingTheory/Congruence/Hom.lean:24: * `RingCon.ker`: the kernel of a monoid homomorphism as a congruence relation; Mathlib/RingTheory/Congruence/Hom.lean:26:   on the quotient given that the congruence is in the kernel; Mathlib/RingTheory/Congruence/Hom.lean:60: /-- The kernel of a ring homomorphism as a ring congruence relation. -/; Mathlib/RingTheory/Congruence/Hom.lean:65: /-- The definition of the ring congruence relation defined by a ring homomorphism's kernel. -/; Mathlib/RingTheory/Congruence/Hom.lean:70: /-- The kernel of the quotient map induced by a ring congruence relation `c` equals `c`. -/; Mathlib/Order/Lattice/Congruence.lean:19: - `LatticeCon.ker`: The kernel of a lattice homomorphism as a lattice congruence.",
+   "date": "2026-10-22",
+   "verdict": "no match: p-adic scalar quotient kernels, arithmetic congruence groups and coprime power bijectivity do not give this filtered matrix-kernel rigidity; the power bijection is an existing auxiliary leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first congruence kernel of a matrix representation is trivial on its image if all finite congruence images have order prime to the residue characteristic",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; ",
+   "date": "2026-10-22",
+   "verdict": "unavailable: LeanSearch rate limit; no absence conclusion drawn from this request."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subgroup of GL over a complete discrete valuation ring with finite reductions of order prime to the residue characteristic injects under reduction modulo the maximal ideal since the principal congruence filtration is pro p",
+   "results": "[leanfinder] OK 8 hit(s); IsDedekindDomain.selmerGroup.fromUnitLift_injective: ∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\n  [inst_4 : IsFractionRing R K] {n : ℕ} [inst_5 : Fact (0 < n)],\n  Function.Injective ⇑IsDedekindDomain.selmerGroup.fromUnitLift; Ideal.torsionMapQuot_injective: ∀ {K : Type u_1} [inst : Field K] {I : Ideal (NumberField.RingOfIntegers K)} [inst_1 : NumberField K],\n  Ideal.absNorm I ≠ 1 →\n    (Ideal.absNorm I).Coprime (NumberField.Units.torsionOrder K) → Function.Injective ⇑I.torsionMapQuot; Ideal.rootsOfUnityMapQuot_injective: ∀ {K : Type u_1} [inst : Field K] {I : Ideal (NumberField.RingOfIntegers K)} [inst_1 : NumberField K] (n : ℕ)\n  [NeZero n], Ideal.absNorm I ≠ 1 → (Ideal.absNorm I).Coprime n → Function.Injective ⇑(I.rootsOfUnityMapQuot n); Ideal.quotientToQuotientRangePowQuotSucc_injective: ∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) (P : Ideal S) [inst_2 : Algebra R S]\n  [hfp : NeZero (Ideal.ramificationIdx (algebraMap R S) p P)] [IsDedekindDomain S] [P.IsPrime] {i : ℕ},\n  i < Ideal.ramificationIdx (algebraMap R S) p P →\n    ∀ {a : S} (a_mem : a; ZMod.lift_injective: ∀ (n : ℕ) {A : Type u_2} [inst : AddGroup A] {f : { f // f ↑n = 0 }},\n  Function.Injective ⇑((ZMod.lift n) f) ↔ ∀ (m : ℤ), ↑f m = 0 → ↑m = 0; ValuationSubring.principalUnitGroup_injective: ∀ {K : Type u} [inst : Field K], Function.Injective ValuationSubring.principalUnitGroup; ArchimedeanClass.FiniteResidueField.ofArchimedean_injective: ∀ {K : Type u_1} [inst : LinearOrder K] [inst_1 : Field K] [inst_2 : IsOrderedRing K] {R : Type u_2}\n  [inst_3 : LinearOrder R] [inst_4 : CommRing R] [inst_5 : IsStrictOrderedRing R] [inst_6 : Archimedean R]\n  (f : R →+*o K), Function.Injective ⇑(ArchimedeanClass.FiniteResidueField.ofArchimedean f); AddMonoidHom.toZModLinearMap_injective: ∀ (n : ℕ) {M : Type u_1} {M₁ : Type u_2} [inst : AddCommGroup M] [inst_1 : AddCommGroup M₁] [inst_2 : Module (ZMod n) M]\n  [inst_3 : Module (ZMod n) M₁], Function.Injective (AddMonoidHom.toZModLinearMap n)",
+   "date": "2026-10-22",
+   "verdict": "no match: p-adic scalar quotient kernels, arithmetic congruence groups and coprime power bijectivity do not give this filtered matrix-kernel rigidity; the power bijection is an existing auxiliary leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "(congruence|uniformizer).*(coprime|[Kk]ernel)|(coprime|[Kk]ernel).*(congruence|uniformizer)",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: p-adic scalar quotient kernels, arithmetic congruence groups and coprime power bijectivity do not give this filtered matrix-kernel rigidity; the power bijection is an existing auxiliary leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coprime\", \"pow_left_bijective\"",
+   "results": "[loogle] OK 1 hit(s); Nat.Coprime.pow_left_bijective:  {n : ℕ} {G : Type u_6} [Group G] (hn : (Nat.card G).Coprime n) : Function.Bijective fun x => x ^ n",
+   "date": "2026-10-22",
+   "verdict": "no match: p-adic scalar quotient kernels, arithmetic congruence groups and coprime power bijectivity do not give this filtered matrix-kernel rigidity; the power bijection is an existing auxiliary leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\", \"ker\"",
+   "results": "1 hits; Matrix.GeneralLinearGroup.kronecker",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence subgroup and scalar quotient-kernel facts do not state filtered matrix representation rigidity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a subgroup of invertible matrices over the integers of a finite extension of Q p whose finite reductions all have order coprime to p the first congruence kernel equals the kernel of the representation",
+   "results": "8 hits; CongruenceSubgroup.Gamma1', CongruenceSubgroup.Gamma1_mem', CongruenceSubgroup.Gamma, CongruenceSubgroup.Gamma1, CongruenceSubgroup.Gamma1_in_Gamma0, CongruenceSubgroup.Gamma1_is_congruence, CongruenceSubgroup.Gamma_is_cong_sub, CongruenceSubgroup.Gamma_mem'",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence subgroup and scalar quotient-kernel facts do not state filtered matrix representation rigidity."
+  },
+  {
+   "tool": "grep",
+   "query": "(congruence|uniformizer).*(coprime|kernel)|(coprime|kernel).*(congruence|uniformizer)",
+   "results": "20 hits; Mathlib/Algebra/Module/Congruence/Defs.lean, Mathlib/Algebra/Module/Congruence/Defs.lean, Mathlib/Algebra/Module/Congruence/Defs.lean, Mathlib/GroupTheory/Congruence/Hom.lean, Mathlib/GroupTheory/Congruence/Hom.lean, Mathlib/GroupTheory/Congruence/Hom.lean, Mathlib/GroupTheory/Congruence/Hom.lean, Mathlib/GroupTheory/Congruence/Hom.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence subgroup and scalar quotient-kernel facts do not state filtered matrix representation rigidity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representation over a local field with finite congruence images of order prime to the residue characteristic has the same kernel as its first reduction",
+   "results": "8 hits; AdicCompletion.kerProj.congr_simp, Module.Finite.kerReprₛ, IsLocalRing.ker_residue, PadicInt.toZMod_eq_residueField_comp_residue, BDeRhamPlus, RingCon.ker, ValuationSubring.ker_unitGroupToResidueFieldUnits, IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence subgroup and scalar quotient-kernel facts do not state filtered matrix representation rigidity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prime to p subgroup of a general linear group over a discrete valuation ring intersects the principal congruence subgroup trivially if all its reductions are finite of order coprime to p",
+   "results": "8 hits; CongruenceSubgroup.Gamma1', CongruenceSubgroup.Gamma1_in_Gamma0, CongruenceSubgroup.Gamma_is_cong_sub, CongruenceSubgroup.Gamma, CongruenceSubgroup.IsCongruenceSubgroup, CongruenceSubgroup.Gamma1, CongruenceSubgroup.Gamma0, CongruenceSubgroup.Gamma1_is_congruence",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence subgroup and scalar quotient-kernel facts do not state filtered matrix representation rigidity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-linear-image-finite",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images.proof.md, open direct image; agent tame-boundary expansion: old Steps 3-5, matrix power congruence, kernel induction and separatedness.",
+   "via": [
+    "lem-sfb-prime-to-ell-linear-image-finite",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coprime-congruence-kernel-rigidity",
+  "worker": "stage1",
+  "summary": "NE keeps the statement unchanged and gives the square-zero power calculation, induction using the existing finite coprime-power Mathlib leaf, and separatedness using the existing DVR theorem. No new nodes or Lean files. Each citation was checked against its statement and quoted in citations.json; no continuity or residue-field cardinality assumption is introduced.",
+  "blueprint": "Paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, open direct image, through the recorded tame-boundary expansion: Steps 1-2 realize the first-order congruence, Step 3 the kernel induction, Steps 4-5 separatedness and assembly. The inherited ancestor node is null (blueprint_refs.py ancestor agrees); no ancestry metadata is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic valuation-ring factorization and unit-norm tool for the fixed coefficient field; the direct-image unit supplies no replacement for this coefficient algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NE-0d78a3200",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-0d78a3200 (reviewer sub-agent of L); spot-checked: I read the full item, the five cited statements, L19 p.3 Prop 1.1.9 and the parent's step 2. The statement is unchanged and true: the coprime hypothesis is necessary (1+ℓZ_ℓ in GL_1 shows this), the Q_n-finite hypothesis is redundant but harmless, and the edge cases r=0, H trivial, n=1, ℓ=2 and ramified E all hold. Step 1: |ℓ|_E=ℓ^{-1} gives ℓ∈πO, and 0<|π|<1 from def clauses 1-3 and DVR clause 4. Step 2: X^2=0 since 2n≥n+1, (I+X)^m=I+mX by the recurrence (no commutativity needed), and ℓX=0. Step 3: a properly set-up induction using lem-sfb-finite-matrix-group-coprime-power (Mathlib Nat.Coprime.pow_left_bijective, OrderOfElement.lean:1245, which I read) applied to the finite subgroup Q_{n+1}. Step 4: separatedness via DVR clauses 1 and 5, valid for negative m. Step 5: assembly. proof_deps equals the union of the uses. I accept the declared tool use of lem-weil-l-adic-extension-integers-dvr (generic DVR structure of O_E). There are no new nodes. My rg -L search of the DAG found no duplicate; the nearest candidates are stable-lattice-finite-matrix-reductions, complete-nonarchimedean-matrix-group and the parent. The parent uses exactly ker A=K_1, and there is no cycle. No SGA is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.CoprimeCongruenceKernelRigidity",
+  "declaration": "Padic.coprime_congruence_kernel_rigidity",
+  "declarations": [
+   "Padic.coefficientExtensionRepresentationReduction",
+   "Padic.coprime_congruence_kernel_rigidity"
+  ],
+  "file": "lean/Sheaf/NumberTheory/Padics/CoprimeCongruenceKernelRigidity.lean",
+  "statement": "theorem coprime_congruence_kernel_rigidity (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (H : Type v) [Group H] (r : ℕ) (A : H →* Matrix.GeneralLinearGroup (Fin r) (coefficientExtensionIntegers l E)) (hfinite : ∀ n : ℕ, 1 ≤ n → Finite (coefficientExtensionRepresentationReduction l E H r A n).range) (hcoprime : ∀ n : ℕ, 1 ≤ n → (Nat.card (coefficientExtensionRepresentationReduction l E H r A n).range).Coprime l) : ∀ n : ℕ, 1 ≤ n → (coefficientExtensionRepresentationReduction l E H r A 1).ker = (coefficientExtensionRepresentationReduction l E H r A n).ker ∧ (coefficientExtensionRepresentationReduction l E H r A n).ker = A.ker",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7121a348b",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Item not on the drop list; live node differs from snapshot only in lean. Lean matches every clause: recorded coefficientExtensionIntegers/Ideal/Ring, H : Type v with no topology, r : ℕ via Fin r (rank 0 allowed), A_n = (GL.map (Ideal.Quotient.mk (coefficientExtensionIdeal l E n))).comp A, which is canonical and the same formula as StableLatticeFiniteMatrixReductions:80. hfinite/hcoprime over ∀ n ≥ 1 with Nat.card of the image subgroup; conclusion ker A1 = ker An ∧ ker An = ker A. The statement is true (ℓ∈πO, square-zero power, coprime power injectivity, separatedness); hfinite is redundant but faithful. One new real def, listed in declarations; theorem is sorry with a Steps 1-5 docstring and source/blueprint docstrings; lean.statement verbatim; no duplicate found. Advisory: OrderOfElement import unused by the statement. No compile: no file changed; worker's clean scompile evidence stands."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261023T132448-L-2279417",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-faithfully-flat-group-quotient-universal",
+ "kind": "statement",
+ "title": "Universal property of a faithfully flat affine group quotient",
+ "statement": "Let $F$ be a field [def-weil-field], and let $G,Q,H$ be affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Let $q:G\\to Q$ be a homomorphism such that $q^*:F[Q]\\to F[G]$ is faithfully flat, meaning extension of scalars is exact and detects zero modules. Put $N=\\ker q$, the scheme-theoretic kernel, and let $i:N\\to G$ be its inclusion. For every homomorphism $u:G\\to H$ satisfying $u\\circ i=e_H\\circ(N\\to\\operatorname{Spec}F)$, there is a unique homomorphism $v:Q\\to H$ with $u=v\\circ q$. The equality on $N$ is an equality of group-scheme morphisms, equivalently on points over every commutative $F$-algebra, and is not merely equality on $F$-points. No smoothness or connectedness assumption is made.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.13, printed p.101, with quotient-map hypothesis supplied by Definition 5.5 and Proposition 5.43, printed pp.99,107: faithfully flat affine group homomorphisms are quotient maps."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=F[Q]$ and $B=F[G]$. By the affine-spectrum correspondence, $q$ is the spectrum of $q^*:A\\to B$. Faithful flatness includes flatness; the affine flatness criterion therefore makes $q$ flat, and faithfully flat surjectivity on spectra makes $q$ surjective.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize), affine case; algebra.tex Tag 00HQ (lemma-ff-rings)."
+   }
+  },
+  {
+   "text": "The singleton $\\{q\\}$ is an fpqc covering. Indeed, for any affine open $V\\subset Q$, choose principal opens $D(a)\\subset V$ covering it, using the principal-open basis on $\\operatorname{Spec}A$. Quasi-compactness of the affine scheme $V$ gives finitely many $D(a_1),\\ldots,D(a_r)$ covering $V$. Their inverse images are the principal opens $D(q^*a_j)$ of the affine scheme $G$, hence are affine by clause (0) of the affine-open localization statement. Surjectivity of $q$ says their images cover $V$. Together with flatness from step 1, this is exactly the defining finite-affine-open condition for an fpqc covering.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-basic-open-pullback",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022B (definition-fpqc-covering), checked directly; affine basic opens and quasi-compactness: algebra.tex Tags 00E0, 00E8; schemes.tex affine structure sheaf on principal opens."
+   }
+  },
+  {
+   "text": "Put $P=G\\times_QG$ with projections $p_1,p_2$. All maps are over $F$. Define $d:P\\to G$ by $d=p_1^{-1}p_2$, using the inverse and multiplication morphisms of $G$. Since $q$ is a homomorphism and $qp_1=qp_2$, one has $qd=e_Q\\circ(P\\to\\operatorname{Spec}F)$. The universal property of the kernel fibre product therefore gives $a:P\\to N$ with $ia=d$. The assumption $ui=e_H$ gives $ud=e_H$. Applying $u$ to $p_2=p_1d$ now yields $up_2=(up_1)(ud)=up_1$. These are identities of scheme morphisms, obtained from group-object diagrams and the kernel universal property.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.13, printed p.101: kernel triviality makes the homomorphism constant on kernel cosets; here expressed on the kernel pair."
+   }
+  },
+  {
+   "text": "Apply representable fpqc descent to the cover $q:G\\to Q$ of step 2 and the compatible morphism $u:G\\to H$ of step 3. It gives a unique scheme morphism $v:Q\\to H$ with $vq=u$. It is over $F$: the two maps $Q\\to\\operatorname{Spec}F$ given by the structure map and by $v$ followed by the structure map of $H$ agree after $q$, since $u$ is over $F$; the uniqueness assertion of the same descent statement makes them equal.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms), existence and uniqueness; this spells out the descent assertion used in Milne Theorem 5.13."
+   }
+  },
+  {
+   "text": "By base change and composition of fpqc coverings, $q\\times_Fq:G\\times_FG\\to Q\\times_FQ$ is an fpqc covering: factor it as $G\\times_FG\\to Q\\times_FG\\to Q\\times_FQ$, each factor a base change of $q$. The two $F$-morphisms $v\\circ m_Q$ and $m_H\\circ(v\\times_Fv)$ agree after this cover, because their composites are respectively $u\\circ m_G$ and $m_H\\circ(u\\times_Fu)$, equal since $u$ is a homomorphism. Uniqueness in representable fpqc descent makes them equal on $Q\\times_FQ$. Thus $v$ preserves multiplication, which is the definition of a group-scheme homomorphism. Every other required homomorphism is also a scheme morphism factoring $u$, so equals $v$ by step 4.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-pc-fibre-product",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, uniqueness, with topologies.tex Tag 022D (lemma-fpqc), parts (2) and (3); Milne Theorem 5.13, final homomorphism assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-basic-open-pullback",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-fpqc-covering-axioms"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.13, printed p.101, expanding the representable descent in its proof using Stacks Tag 023Q; quotient-map definition 5.5, printed p.99."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from an affine group scheme which kills the kernel of a faithfully flat quotient factors uniquely through that quotient",
+   "results": "Available; 8 hits: AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, RingHom.FaithfullyFlat.codescendsAlong_surjective, RingHom.FaithfullyFlat.codescendsAlong_injective, Algebra.FormallyUnramified.lift_unique, AlgebraicGeometry.AffineSpace.hom_ext. ",
+   "date": "2026-10-23",
+   "verdict": "no match: Scheme.Hom.liftQuotient factors maps into a closed subscheme, not through a faithfully flat group quotient. Abstract QuotientGroup.kerLift and AddMonoidHom.liftOfSurjective do not provide group-scheme descent or algebra-valued local lifts. Flat.epi_of_flat_of_surjective only gives uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal property of a faithfully flat quotient of affine algebraic group schemes by its scheme theoretic kernel",
+   "results": "Available; 8 hits: RingHom.FaithfullyFlat, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, Module.FaithfullyFlat.toFlat, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, Module.FaithfullyFlat. ",
+   "date": "2026-10-23",
+   "verdict": "no match: Scheme.Hom.liftQuotient factors maps into a closed subscheme, not through a faithfully flat group quotient. Abstract QuotientGroup.kerLift and AddMonoidHom.liftOfSurjective do not provide group-scheme descent or algebra-valued local lifts. Flat.epi_of_flat_of_surjective only gives uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FaithfullyFlat\", \"hom\"",
+   "results": "Available; 12 hits: Module.FaithfullyFlat.isLocalHom, Module.FaithfullyFlat.of_flat_of_isLocalHom, RingHom.FaithfullyFlat.isStableUnderBaseChange, RingHom.FaithfullyFlat.respectsIso, RingHom.FaithfullyFlat.stableUnderComposition, RingHom.FaithfullyFlat, RingHom.FaithfullyFlat.flat, RingHom.faithfullyFlat_algebraMap_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: Scheme.Hom.liftQuotient factors maps into a closed subscheme, not through a faithfully flat group quotient. Abstract QuotientGroup.kerLift and AddMonoidHom.liftOfSurjective do not provide group-scheme descent or algebra-valued local lifts. Flat.epi_of_flat_of_surjective only gives uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|factor|FaithfullyFlat",
+   "results": "Available; 3 hits: Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean.  Searched Mathlib/AlgebraicGeometry/Group/",
+   "date": "2026-10-23",
+   "verdict": "no match: Scheme.Hom.liftQuotient factors maps into a closed subscheme, not through a faithfully flat group quotient. Abstract QuotientGroup.kerLift and AddMonoidHom.liftOfSurjective do not provide group-scheme descent or algebra-valued local lifts. Flat.epi_of_flat_of_surjective only gives uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic groups factors through a faithfully flat group quotient precisely when its restriction to the kernel is trivial",
+   "results": "Available; 8 hits: QuotientGroup.ker_le_range_iff, QuotientGroup.rangeKerLift_injective, QuotientGroup.kerLift, MonoidHom.range_le_ker_iff, QuotientGroup.kerLift_injective, QuotientGroup.kerLift_mk, QuotientGroup.kerLift_mk', QuotientGroup.rangeKerLift. ",
+   "date": "2026-10-23",
+   "verdict": "no match: Scheme.Hom.liftQuotient factors maps into a closed subscheme, not through a faithfully flat group quotient. Abstract QuotientGroup.kerLift and AddMonoidHom.liftOfSurjective do not provide group-scheme descent or algebra-valued local lifts. Flat.epi_of_flat_of_surjective only gives uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of a group homomorphism through a surjective flat map of affine group schemes with trivial restriction to the kernel",
+   "results": "Available; 8 hits: AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, RingHom.FaithfullyFlat.codescendsAlong_surjective, AddMonoidHom.liftOfSurjective, CategoryTheory.RegularEpi.desc'. ",
+   "date": "2026-10-23",
+   "verdict": "no match: Scheme.Hom.liftQuotient factors maps into a closed subscheme, not through a faithfully flat group quotient. Abstract QuotientGroup.kerLift and AddMonoidHom.liftOfSurjective do not provide group-scheme descent or algebra-valued local lifts. Flat.epi_of_flat_of_surjective only gives uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Gg]roup[Ss]cheme|[Gg]roup[Ss]cheme.*quotient|[Ff]aithfully[Ff]lat.*[Gg]rp|[Ff]aithfully[Ff]lat.*factor",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: Scheme.Hom.liftQuotient factors maps into a closed subscheme, not through a faithfully flat group quotient. Abstract QuotientGroup.kerLift and AddMonoidHom.liftOfSurjective do not provide group-scheme descent or algebra-valued local lifts. Flat.epi_of_flat_of_surjective only gives uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal factorization through faithfully flat affine group scheme quotients by the scheme theoretic kernel",
+   "results": "8 hits: AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.Scheme.Hom.ker, CategoryTheory.Limits.kernel.lift', AlgebraicGeometry.Scheme.Hom.liftQuotient, CategoryTheory.Abelian.factorThruCoimage, AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: affine flatness/surjectivity and ring descent are prerequisites; closed-subscheme liftQuotient is not a group quotient descent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of affine group schemes killing the kernel of a faithfully flat homomorphism factors uniquely through it",
+   "results": "8 hits: RingHom.FaithfullyFlat.codescendsAlong_injective, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, RingHom.FaithfullyFlat.codescendsAlong_surjective, RingHom.FaithfullyFlat.codescendsAlong_bijective, Algebra.FormallyUnramified.lift_unique', Algebra.FormallyUnramified.lift_unique_of_ringHom, AlgebraicGeometry.AffineSpace.hom_ext, AlgebraicGeometry.flat_and_surjective_SpecMap_iff",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: affine flatness/surjectivity and ring descent are prerequisites; closed-subscheme liftQuotient is not a group quotient descent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme homomorphism constant on fibres of a faithfully flat morphism descends uniquely to a group scheme homomorphism",
+   "results": "8 hits: RingHom.FaithfullyFlat.codescendsAlong_surjective, RingHom.FaithfullyFlat.codescendsAlong_injective, RingHom.FaithfullyFlat.codescendsAlong_bijective, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.Flat.flat_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: affine flatness/surjectivity and ring descent are prerequisites; closed-subscheme liftQuotient is not a group quotient descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+   "results": "1 hits: 170; directory AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: affine flatness/surjectivity and ring descent are prerequisites; closed-subscheme liftQuotient is not a group quotient descent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme map is flat and surjective if and only if the homomorphism on global sections is faithfully flat",
+   "results": "8 hits: AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, Module.FaithfullyFlat.of_specComap_surjective, RingHom.FaithfullyFlat, Module.FaithfullyFlat.of_comap_surjective, AlgebraicGeometry.Flat, PrimeSpectrum.specComap_surjective_of_faithfullyFlat",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: affine flatness/surjectivity and ring descent are prerequisites; closed-subscheme liftQuotient is not a group quotient descent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+   "results": "1 hits: AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: affine flatness/surjectivity and ring descent are prerequisites; closed-subscheme liftQuotient is not a group quotient descent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of affine schemes flat and surjective is equivalent to faithfully flat on global sections",
+   "results": "8 hits: AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, Module.FaithfullyFlat.of_specComap_surjective, Module.FaithfullyFlat.of_comap_surjective, AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.flat_iff, RingHom.FaithfullyFlat.codescendsAlong_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: affine flatness/surjectivity and ring descent are prerequisites; closed-subscheme liftQuotient is not a group quotient descent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-commutative-multiplicative-type-extension",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel. Supporting input: Milne Corollary 12.22, multiplicative type of the now commutative kernel extension. Supporting quotient universal property for the exact Hom sequence in Milne Corollary 12.22: Theorem 5.13 for the specified faithfully flat map.",
+   "via": [
+    "lem-sfb-commutative-multiplicative-type-extension",
+    "lem-sfb-multiplicative-isogeny-composition",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-faithfully-flat-group-quotient-universal",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved kernel-pair invariance by an explicit difference morphism through the scheme-theoretic kernel, descended the underlying map by existing representable fpqc descent, and checked the base structure and multiplication using descent uniqueness. The affine cover condition is written out from existing basic-open and quasi-compactness nodes. No new nodes.",
+  "blueprint": "Retains the inherited from.place: the quotient universal property used by the exact Hom sequence in Milne Corollary 12.22, below the central-cover prerequisites of det-thm-sf-ctf-stability-direct-images proof (3). Searches of the current blueprint found no same statement; no unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-c73ff2502",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-c73ff2502 (reviewer sub-agent of L); spot-checked: I read the item in full: 5 steps and no new nodes. The statement is unchanged and matches Milne iAG2017 Theorem 5.13 (printed p.101), with quotient map = faithfully flat from Def 5.5 (printed p.99). Step 1 is correct: flat by 01U5 and surjective by 00HQ, both Mathlib leaves. Step 2 is a correct elementary check of the fpqc definition 022B, using a basic-open basis, quasi-compactness of affine V, the preimage q^{-1}D(a)=D(q*a) and clause (0) affineness; the empty V case is fine. Step 3 is correct: d=p1^{-1}p2 lands in ker q = G×_{Q,e}Spec F, so ud=e and up1=up2 as scheme morphisms. Step 4 applies 023Q to {q}, and F-linearity follows from uniqueness with X=Spec F. Step 5 makes q×q a covering by factoring it into two base changes (022D (1)-(3)), and uniqueness gives v∘m_Q=m_H∘(v×v). All cited nodes are Mathlib leaves or definitions, so no tool_uses are needed. Small cases agree: q=id, Q=1, Frobenius with kernel alpha_p, and [n] on G_m. No duplicate exists: homomorphism-factorization (5.39) is a different statement, and the cyclic-representation-descent node only uses 5.13 in its proof. FIX: source.place gave Prop 5.43 as printed p.107; the PDF has it on printed p.109. It is corrected in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-faithfully-flat-group-quotient-universal.json, with the hypothesis attributed to Def 5.5 on p.99. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FaithfullyFlatQuotientUniversal",
+  "declaration": "AlgebraicGeometry.existsUnique_hom_of_faithfullyFlat_of_trivial_on_kernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FaithfullyFlatQuotientUniversal.lean",
+  "statement": "theorem existsUnique_hom_of_faithfullyFlat_of_trivial_on_kernel {F : Type u} [Field F] (G Q H : Over (Spec (.of F))) [GrpObj G] [GrpObj Q] [GrpObj H] [IsAffine G.left] [IsAffine Q.left] [IsAffine H.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (q : G ⟶ Q) [IsMonHom q] (hq : q.left.appTop.hom.FaithfullyFlat) (u : G ⟶ H) [IsMonHom u] (hu : GrpObj.kerι q ≫ u = toUnit (GrpObj.ker q) ≫ η[H]) : ∃! v : Q ⟶ H, IsMonHom v ∧ q ≫ v = u",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-662de5380",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Statement matches node and Milne Thm 5.13 clause by clause: Field F of any universe; G,Q,H in Over(Spec F) with GrpObj, IsAffine, LocallyOfFiniteType+QuasiCompact (finite-type encoding of def-weil-finite-type-morphism); q IsMonHom with q.left.appTop.hom.FaithfullyFlat on the canonical F[Q]->F[G] map, same encoding as consumer CommutativeMultiplicativeTypeExtension; N=GrpObj.ker q (pullback q η, side-live Grp.lean:84) and i=kerι; hu is a morphism equality kerι≫u=toUnit≫η[H], not an F-points condition; conclusion ∃! v, IsMonHom v ∧ q≫v=u (uniqueness among homomorphisms). No extra assumptions, proof is sorry, no definitions, docstrings carry source place, blueprint id and 5 proof steps, lean.statement verbatim, node unchanged except lean, no duplicate found in Sheaf/WeilConjectures. Edge cases (identity q, trivial Q, alpha_p/mu_p infinitesimal kernels, universes) checked. No compile run (instructed not to). Maintainer note: source.place still says Prop 5.43 is on printed p.107, but it is on p.109; the stage-1 FIX for this never landed. Bibliographic only."
+ }
+}

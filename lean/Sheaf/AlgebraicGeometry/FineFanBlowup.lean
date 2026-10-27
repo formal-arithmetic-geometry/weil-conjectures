@@ -2,15 +2,18 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
+module
 
-import Sheaf.TraceFormula.FsFaceSharpening
-import Mathlib.Algebra.Group.Ideal
+public import Sheaf.TraceFormula.FsFaceSharpening
+public import Mathlib.Algebra.Group.Ideal
 
 /-!
 # Fine fans and saturated blowup towers
 
 Source: ILO, Exposé VIII, 3.1.2--3.1.26 (blueprint: def-trf-fine-fan-blowup).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -522,3 +525,4 @@ structure SmoothFunctorialDesingularization where
 
 end FineFan
 end AlgebraicGeometry
+

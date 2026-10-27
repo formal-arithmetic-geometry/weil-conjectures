@@ -1,0 +1,242 @@
+{
+ "id": "lem-trf-finite-presentation-stalk-basis-spread",
+ "kind": "statement",
+ "title": "A prescribed finite stalk basis spreads to a free neighbourhood",
+ "statement": "Let $(Y,\\mathcal O_Y)$ be a ringed space [def-weil-locally-ringed-space-morphism], let $\\mathcal G$ be a sheaf of $\\mathcal O_Y$-modules of finite presentation [def-weil-sheaf-of-modules-category, def-weil-pbc-module-finite-type-presentation], let $y\\in Y$ and $r\\geq0$, and let $b_1,\\ldots,b_r\\in\\mathcal G_y$ be an $\\mathcal O_{Y,y}$-basis of the module stalk [def-weil-pbc-module-stalk]. Then there are an open neighbourhood $V$ of $y$ and sections $t_i\\in\\mathcal G(V)$ for $1\\leq i\\leq r$ such that $(t_i)_y=b_i$ and the morphism\n$$\\psi:\\mathcal O_V^{\\oplus r}\\longrightarrow\\mathcal G|_V,\\qquad e_i\\longmapsto t_i,$$\nis an isomorphism of $\\mathcal O_V$-modules. This includes $r=0$: if $\\mathcal G_y=0$, the empty basis yields $\\mathcal G|_V=0$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0B8J, lemma-finite-presentation-stalk-free, statement and proof (with the prescribed basis retained); the same basis, surjection and finite-type-kernel argument occurs in the final paragraph of the proof of flat-and-free-at-point-fibre in more-morphisms.tex."
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Lift the finitely many prescribed basis germs to sections on one common open U, by intersecting their representing neighbourhoods. Finite presentation implies finite type. Choose finite local generating sections of G at y using lem-weil-pbc-finite-type-local-coefficients. Express the germs of these generators as linear combinations of b, represent the finitely many coefficients on one common neighbourhood, and shrink until all those linear-combination identities hold as sections. The free sheaf on the restricted prescribed sections then maps epimorphically to G: local coefficients for the original generating family give local lifts through this free map. The freeHomEquiv formula pins its generator images to the chosen sections and restriction of germs gives the prescribed b.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-finite-type-local-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0B8J, lemma-finite-presentation-stalk-free, statement and proof (with the prescribed basis retained); the same basis, surjection and finite-type-kernel argument occurs in the final paragraph of the proof of flat-and-free-at-point-fibre in more-morphisms.tex."
+   }
+  },
+  {
+   "text": "The germs of the generator images of this epimorphism are the given b and therefore linearly independent. Apply lem-trf-finite-free-epi-independent-germs to obtain y in V contained in U on which all its section components are injective.",
+   "uses": [
+    "lem-trf-finite-free-epi-independent-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0B8J, lemma-finite-presentation-stalk-free, last two sentences of the proof; Tags 01BP(1) and 01B8"
+   }
+  },
+  {
+   "text": "Restrict the epimorphism along V → U using overMap, and compose with mapFreeIso on the source and overFunctorMap on the target. Restriction preserves epimorphisms. The sectionwise injectivity from the preceding step makes the restricted map a monomorphism. In the abelian category of module sheaves it is consequently an isomorphism. The standard-generator formula for mapFreeIso and naturality of the compatible freeHomEquiv sections identify its terminal generator images with the restrictions of the original t_i. Germ-res compatibility preserves the original b_i. All finite intersections and empty sums used here include r=0.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0B8J, lemma-finite-presentation-stalk-free, statement and proof (with the prescribed basis retained); the same basis, surjection and finite-type-kernel argument occurs in the final paragraph of the proof of flat-and-free-at-point-fibre in more-morphisms.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-finite-type-local-coefficients",
+  "lem-trf-finite-free-epi-independent-germs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0B8J proof; its 01B8 surjectivity argument expanded through finite local coefficients, its kernel argument isolated in lem-trf-finite-free-epi-independent-germs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(stalk.*(free|basis)|(free|basis).*stalk)|exists.*(free|basis).*neigh",
+   "results": "{\"t\": \"2026-10-22T06:42:48Z\", \"tool\": \"grep\", \"query\": \"(stalk.*(free|basis)|(free|basis).*stalk)|exists.*(free|basis).*neigh\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local generators and finite presentation do not assert a free neighbourhood; Localization/Free.lean:41,78 concerns localized ring modules, not sheaves on arbitrary ringed spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "{\"t\": \"2026-10-22T06:42:49Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.IsFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFinitePresentation.mk\"], \"digest\": \"993387cff4ffbc82\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local generators and finite presentation do not assert a free neighbourhood; Localization/Free.lean:41,78 concerns localized ring modules, not sheaves on arbitrary ringed spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a finitely presented sheaf of modules has a stalk basis then this basis extends to a finite free trivialization on an open neighbourhood of the point",
+   "results": "{\"t\": \"2026-10-22T06:42:49Z\", \"tool\": \"leansearch\", \"query\": \"If a finitely presented sheaf of modules has a stalk basis then this basis extends to a finite free trivialization on an open neighbourhood of the point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.basisAt\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"TopCat.Presheaf.germ_exist_of_isBasis\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFiniteType.mk\"], \"digest\": \"dd2990a6da861c6c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local generators and finite presentation do not assert a free neighbourhood; Localization/Free.lean:41,78 concerns localized ring modules, not sheaves on arbitrary ringed spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed finite basis of the stalk of a finitely presented sheaf of modules on a ringed space extends to a basis on an open neighbourhood, including rank zero",
+   "results": "{\"t\": \"2026-10-22T06:42:55Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed finite basis of the stalk of a finitely presented sheaf of modules on a ringed space extends to a basis on an open neighbourhood, including rank zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.generators\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"SheafOfModules.LocalGeneratorsData.I\"], \"digest\": \"f85ff560bb793f0a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local generators and finite presentation do not assert a free neighbourhood; Localization/Free.lean:41,78 concerns localized ring modules, not sheaves on arbitrary ringed spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_localizedModule_powers|exists_free_localizedModule_powers",
+   "results": "{\"t\": \"2026-10-22T06:43:00Z\", \"tool\": \"grep\", \"query\": \"exists_basis_localizedModule_powers|exists_free_localizedModule_powers\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\"], \"digest\": \"448be72e7756f2de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local generators and finite presentation do not assert a free neighbourhood; Localization/Free.lean:41,78 concerns localized ring modules, not sheaves on arbitrary ringed spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed space a finite basis of a finitely presented sheaf stalk lifts to local sections defining an isomorphism from a finite free sheaf",
+   "results": "{\"t\": \"2026-10-22T06:43:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a ringed space a finite basis of a finitely presented sheaf stalk lifts to local sections defining an isomorphism from a finite free sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.LocalGeneratorsData.I\"], \"digest\": \"2c4666d5e2a7fdd7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local generators and finite presentation do not assert a free neighbourhood; Localization/Free.lean:41,78 concerns localized ring modules, not sheaves on arbitrary ringed spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(basis|free)|(basis|free).*stalk",
+   "results": "{\"t\": \"2026-10-23T11:30:35Z\", \"tool\": \"grep\", \"query\": \"stalk.*(basis|free)|(basis|free).*stalk\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf hits supply presentations and finite local generators, not a free neighbourhood with prescribed stalk basis. The localization lemmas in Mathlib/RingTheory/Localization/Free.lean:41,78 concern modules localized from one ring; they do not specialize in one line to arbitrary ringed spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented sheaf of modules with a free stalk is finite free near that point",
+   "results": "{\"t\": \"2026-10-23T11:30:36Z\", \"tool\": \"leansearch\", \"query\": \"A finitely presented sheaf of modules with a free stalk is finite free near that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"Module.FinitePresentation.exists_free_localizedModule_powers\"], \"digest\": \"f7f7fb0bcb4c6eee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf hits supply presentations and finite local generators, not a free neighbourhood with prescribed stalk basis. The localization lemmas in Mathlib/RingTheory/Localization/Free.lean:41,78 concern modules localized from one ring; they do not specialize in one line to arbitrary ringed spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T11:30:36Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.IsFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFinitePresentation.mk\"], \"digest\": \"993387cff4ffbc82\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf hits supply presentations and finite local generators, not a free neighbourhood with prescribed stalk basis. The localization lemmas in Mathlib/RingTheory/Localization/Free.lean:41,78 concern modules localized from one ring; they do not specialize in one line to arbitrary ringed spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite basis of a stalk of a finitely presented sheaf of modules on a ringed space extends to a free trivialization on a neighbourhood",
+   "results": "{\"t\": \"2026-10-23T11:30:37Z\", \"tool\": \"leanfinder\", \"query\": \"A finite basis of a stalk of a finitely presented sheaf of modules on a ringed space extends to a free trivialization on a neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.Presentation.IsFinite.isFiniteType_generators\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.LocalGeneratorsData.generators\"], \"digest\": \"7879df54e83e6e1f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf hits supply presentations and finite local generators, not a free neighbourhood with prescribed stalk basis. The localization lemmas in Mathlib/RingTheory/Localization/Free.lean:41,78 concern modules localized from one ring; they do not specialize in one line to arbitrary ringed spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_localizedModule_powers|exists_free_localizedModule_powers",
+   "results": "{\"t\": \"2026-10-23T11:32:02Z\", \"tool\": \"grep\", \"query\": \"exists_basis_localizedModule_powers|exists_free_localizedModule_powers\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\"], \"digest\": \"b271a75b06bbf635\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf hits supply presentations and finite local generators, not a free neighbourhood with prescribed stalk basis. The localization lemmas in Mathlib/RingTheory/Localization/Free.lean:41,78 concern modules localized from one ring; they do not specialize in one line to arbitrary ringed spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented module sheaf any sections giving an isomorphism on one stalk induce an isomorphism on some open neighbourhood",
+   "results": "{\"t\": \"2026-10-23T11:32:03Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely presented module sheaf any sections giving an isomorphism on one stalk induce an isomorphism on some open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\"], \"digest\": \"85c8b487dd8a30da\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf hits supply presentations and finite local generators, not a free neighbourhood with prescribed stalk basis. The localization lemmas in Mathlib/RingTheory/Localization/Free.lean:41,78 concern modules localized from one ring; they do not specialize in one line to arbitrary ringed spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-fibre-free-neighbourhood",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: apply lemma-flatten-module-pre before subtracting a free module. Stacks 0811: Tag 080Q, lemma-flat-and-free-at-point-fibre. Re-split of the final basis-spreading paragraph of Tag 080Q: returned item Steps 4--7, from representing basis germs through surjectivity and the finite-type kernel to the final isomorphism (Modules lemma-finite-presentation-stalk-free).",
+   "via": [
+    "lem-trf-flat-fibre-free-neighbourhood",
+    "lem-trf-generic-free-blowup",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-presentation-stalk-basis-spread",
+  "worker": "stage1",
+  "summary": "Retained the complete statement, including the prescribed germs and rank zero. Followed Stacks 0B8J using existing 01B8 and 01BP nodes, with explicit finite-coordinate germ arguments and gluing. No new nodes. Read all cited statements and recorded verbatim citation witnesses.",
+  "blueprint": "Inherited ancestor lem-trf-local-term-locality, clauses (1)--(2), through the recorded flattening/free-neighbourhood auxiliary chain: this item realizes the final basis-spreading paragraph of Stacks 080Q used there. Steps 1--6 expand exactly Stacks 0B8J. The newest blueprint states the ancestor via the contracting-correspondence theorem and does not explicitly name this auxiliary flattening chain; this item preserves its assigned ancestry and changes no ancestor or unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+    "why": "Generic ringed-space stalk-surjectivity openness, used for the chosen free map and for 0 to its finite-type kernel; no replacement of a trace-formula unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+    "why": "Generic ringed-space finite-presentation kernel theorem 01BP(1), explicitly used by the assigned Stacks 0B8J proof; no node of this unit provides it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-b3b75fc87",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-b3b75fc87 (reviewer sub-agent of L); spot-checked: PASS: the split follows Stacks 0B8J (modules.tex l.1537) and keeps the prescribed basis and its germs, so the statement is unchanged and not weakened. It creates no new nodes. Steps 1–2 are elementary and correct. Step 1 shows the stalk of O^r at y is O_{Y,y}^r and ψ_y sends (a_i) to Σa_i b_i, which is bijective because the b_i form a basis. Step 2 shows that finite presentation gives finite type and that both restrict to opens. Step 3 applies 01B8 (lem-weil-pbc-module-finite-type-surjective-on-stalk) to get a sheaf surjection on U_1. Step 4 applies 01BP(1), which gives that the sectionwise kernel is of finite type. Step 5 shows K_y=0 by coordinatewise basis independence. Step 6 applies 01B8 to 0→K in place of the source's 01B9 citation, which is legitimate; it then shows ψ|_V is injective and that the local preimages glue in O^r, so ψ|_V is an isomorphism. Edge cases checked: r=0, zero stalk ring, a one-point space; no locally-ringed or Noetherian hypothesis is used. The parent lem-trf-flat-fibre-free-neighbourhood step 4 uses exactly this statement. Not a duplicate: lem-weil-pbc-coherent-local-isomorphism covers only coherent modules on locally Noetherian schemes, and no node exists for 01B9. Live and side-live still have the item unsplit, so it is not superseded. Only the split fields and the appended searches changed. Accepted tool_uses: 01B8 and 01BP(1), both in unit sk-thm-p1, are generic ringed-space tools used as Stacks 0B8J uses them. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationStalkBasisSpread",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_free_neighbourhood_prescribed_stalk_basis",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationStalkBasisSpread.lean",
+  "statement": "theorem exists_free_neighbourhood_prescribed_stalk_basis (Y : RingedSpace.{u}) (G : ringedSiteModules (moduleRings Y)) [G.IsFinitePresentation] (y : Y) (r : ℕ) (b : Module.Basis (Fin r) (Y.presheaf.stalk y) ((moduleStalkFunctor Y y).obj G)) : ∃ (V : Opens Y) (hyV : y ∈ V) (t : Fin r → G.val.obj (op V)) (ψ : SheafOfModules.free (R := (moduleRings Y).over V) (ULift.{u} (Fin r)) ⟶ G.over V), (∀ i : Fin r, TopCat.Presheaf.germ G.val.presheaf V y hyV (t i) = b i) ∧ IsIso ψ ∧ ∀ i : Fin r, ((G.over V).freeHomEquiv ψ (ULift.up i)).val (op (Over.mk (𝟙 V))) = t i",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3cd315fdb",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Node diff vs side-live: lean only; lean.statement verbatim; Worker report + Second reading by Q142 present. Clauses match Stacks 0B8J (modules.tex l.1535-1557) with the prescribed basis kept: Y : RingedSpace.{u}, G : ringedSiteModules (moduleRings Y) [IsFinitePresentation], y, r : ℕ, b : Module.Basis (Fin r) stalk; ∃ V ∋ y, t : Fin r → G(V), ψ : free(ULift (Fin r)) ⟶ G.over V with germ (t i) = b i, IsIso ψ, and freeHomEquiv ψ (up i) at the terminal object = t i (pins e_i ↦ t_i, no arbitrary iso). Edge cases: r=0 gives G|_V ≅ 0; empty Y vacuous; zero ring allowed; single universe u, same as the 01BP Lean. RingedSpace.moduleStalkFunctor (def-pc-module-stalk-functor) used under def-weil-pbc-module-stalk: accepted per that record's lean.note (same carrier, rfl) and the landed germ-lifting sibling precedent. No duplicate (rg: only private/Noetherian scheme helpers and the parent). Only proof is sorry, no defs, docstrings carry 0B8J, blueprint id and the 6 proof steps; lines <=100; 01B8/01BP proof imports exist. Not recompiled (no change). Advisory: PresheafModuleStalkFunctor import unused by the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T092309-L-3421130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-solvable-semisimple-centralizer-connected",
+ "kind": "statement",
+ "title": "Semisimple centralizers in smooth connected solvable groups are connected",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $G$ be smooth, connected and solvable, where solvable means that its successive scheme-theoretic commutator subgroup schemes eventually become trivial. A point $s\\in G(k)$ is semisimple if its image in every finite-dimensional algebraic representation $G\\to\\operatorname{GL}(V)$ is diagonalizable; here $V$ is a finite-dimensional $k$-vector space, $\\operatorname{GL}(V)$ is its group scheme of invertible linear maps, and an algebraic representation is a homomorphism of group schemes. For a semisimple point $s\\in G(k)$, let $C_G(s)$ be the closed subscheme of $G$ defined by equality of the morphisms $g\\mapsto gs$ and $g\\mapsto sg$, so that $C_G(s)(A)=\\{g\\in G(A):gs_A=s_Ag\\}$ for each commutative $k$-algebra $A$ [def-weil-closed-immersion, def-pc-fibre-product]. Then $C_G(s)$ is connected.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-semisimple-group-scheme-point"
+ ],
+ "proof": [
+  {
+   "text": "Write $G^{(0)}=G$ and $G^{(i+1)}=D_{G^{(i)}}$, where $D_H$ is the smallest closed subgroup through which the commutator morphism of $H$ factors. Use strong induction on the least $d\\geq0$ with $G^{(d)}=1$, simultaneously for all smooth connected solvable affine groups over $k$ and all their semisimple points. If $G$ is commutative (including the trivial group, $d=0$), both defining morphisms of $C_G(s)$ agree on every algebra, so $C_G(s)=G$ and the assertion is the assumed connectedness of $G$. Otherwise $d\\geq2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.40, printed p.339, induction and commutative base case; induction is indexed by derived length instead of dimension."
+   }
+  },
+  {
+   "text": "Repeated application of [lem-sfb-smooth-connected-derived-subgroup] shows that every $G^{(i)}$ is smooth and connected. Its minimal commutator-subgroup description is preserved by every automorphism: applying an automorphism and its inverse gives the two inclusions. Recursively, conjugation by each $g\\in G(k)$ preserves every $G^{(i)}$ as a subgroup scheme. Since $G$ is smooth, [lem-sfb-smooth-ambient-normality-geometric] makes each $G^{(i)}$ normal in $G$. Put $N=G^{(d-1)}$. It is nontrivial, smooth, connected and commutative, the last assertion because its commutator subgroup is $1$. The derived series itself is a solvable series as required by [lem-sfb-lie-kolchin-triangular-embedding]: the quotient by each successor is commutative, since quotient sections locally lift and their commutators map to $1$. Embed $G$ into $B_n$ using that node. The diagonal of every upper-triangular commutator is $1$, on every algebra, so the minimality of $G^{(1)}$ puts it inside $U_n$. Consequently $N\\subseteq G^{(1)}\\subseteq U_n$ is unipotent.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-smooth-ambient-normality-geometric",
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.40, first paragraph of proof, p.339; Theorem 16.30 (Lie–Kolchin), pp.335–336; derived subgroups as in Section 6(e). Quotient local lifting is Theorem 5.28."
+   }
+  },
+  {
+   "text": "By [lem-sfb-affine-normal-quotient-geometry], form the faithfully flat quotient $q:G\\to Q=G/N$; $Q$ is smooth, connected, affine and of finite type. Connectedness over the algebraically closed base is the geometric connectedness required there. The same node gives the closed subgroups $Q_i=G^{(i)}/N$ for $0\\leq i\\leq d-1$ and their successive quotients $Q_i/Q_{i+1}\\simeq G^{(i)}/G^{(i+1)}$. Each such quotient is commutative: commutators of local lifts from $G^{(i)}$ land in $G^{(i+1)}$. Thus, by the defining minimality of the derived subgroup, $D(Q_i)\\subseteq Q_{i+1}$, and recursively $Q^{(i)}\\subseteq Q_i$. In particular $Q^{(d-1)}=1$. This proves both solvability and the strict decrease of the induction index, without assuming that quotient maps are surjective on all algebras. The point $\\bar s=q(s)$ is semisimple because every representation of $Q$ pulls back to a representation of $G$. The induction hypothesis now gives connectedness of $D=C_Q(\\bar s)$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-smooth-connected-derived-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.40, quotient and induction paragraph, p.339; Theorems 5.28 and 5.55 for the quotient series."
+   }
+  },
+  {
+   "text": "Set $C=C_G(s)$ and $K=C_N(s)$. Apply [lem-sfb-semisimple-fixed-subscheme-smooth] to the conjugation actions of the smooth connected group $G$ on the smooth affine schemes $G$, $N$, and $Q$, where the last action is through $q$. Their fixed schemes for $s$ are respectively $C$, $K$, and $D$. Therefore all three are smooth. This uses the represented equalizers on every algebra, including nonreduced algebras. Apply [lem-sfb-semisimple-commutative-unipotent-commutator] to $N\\triangleleft G$ and $s$; all its hypotheses were established in step 2. It gives that $K$ is connected and the decomposition used in the next step.",
+   "uses": [
+    "lem-sfb-semisimple-fixed-subscheme-smooth",
+    "lem-sfb-semisimple-commutative-unipotent-commutator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.8, p.257, and Lemma 16.39, p.338, as used in Theorem 16.40."
+   }
+  },
+  {
+   "text": "Fix $y\\in D(k)$. Apply [lem-sfb-affine-group-homomorphism-image] to the faithfully flat map $q$ with smooth target $Q$: choose $z\\in G(k)$ with $q(z)=y$. Since $y$ centralizes $\\bar s$, the commutator $x=[s,z]$ belongs to $N(k)$. By [lem-sfb-semisimple-commutative-unipotent-commutator] write $[s,z]=[s,u]v$ with $u\\in N(k)$ and $v\\in K(k)$. Expanding commutators and using the commutativity of $N$ gives\n$$z s^{-1}z^{-1}=u s^{-1}u^{-1}v.$$\nThe element $v$ commutes with $u$ because both lie in $N(k)$, and with $s$ because $v\\in K(k)$. It therefore commutes with $u s^{-1}u^{-1}$.",
+   "uses": [
+    "lem-sfb-affine-group-homomorphism-image",
+    "lem-sfb-semisimple-commutative-unipotent-commutator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.40, middle paragraph, p.339; Lemma 16.39, p.338; rational-point lifting is Summary 1.71."
+   }
+  },
+  {
+   "text": "Use the faithful triangular representation from step 2. The matrices of $z s^{-1}z^{-1}$ and $u s^{-1}u^{-1}$ are diagonalizable: the inverse of a diagonalizable matrix is diagonalizable, and conjugation just changes its eigenbasis. The matrix of $v$ is unipotent, since $v\\in N(k)\\subseteq U_n(k)$, and it commutes with the second matrix. Thus the displayed equality in step 5 gives a semisimple-unipotent decomposition of its left side. By uniqueness in [lem-sfb-multiplicative-jordan-linear-compatibility], the unipotent matrix is the identity. Faithfulness gives $v=1$. Hence $[s,z]=[s,u]$, and direct cancellation gives $s(u^{-1}z)s^{-1}=u^{-1}z$. Also $q(u^{-1}z)=y$ because $u\\in N(k)$. We have produced a point of $C(k)$ above every $y\\in D(k)$.",
+   "uses": [
+    "lem-sfb-multiplicative-jordan-linear-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.40, Jordan-decomposition calculation, p.339; multiplicative Jordan uniqueness is Section 9(c)."
+   }
+  },
+  {
+   "text": "The restriction $f:C\\to D$ of $q$ is a group homomorphism. It is defined on every algebra because $q(cs)=q(sc)$ for $c\\in C(A)$. Its scheme-theoretic kernel is $K$: on each commutative $k$-algebra $A$, its kernel consists precisely of points of $N(A)$ commuting with $s_A$. Thus $K$ is normal in $C$. Both $C,D$ are affine finite-type groups and $D$ is smooth by step 4; the surjectivity on $k$-points proved in steps 5–6 therefore makes $f$ faithfully flat by [lem-sfb-affine-group-homomorphism-image].",
+   "uses": [
+    "lem-sfb-affine-group-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.40, exact sequence, p.339; Summary 1.71, p.28."
+   }
+  },
+  {
+   "text": "Form $\\pi:C\\to R=C/K$ by [lem-sfb-affine-normal-quotient-geometry]. Since $f$ kills $K$ on every algebra, the quotient sheaf property gives a homomorphism $h:R\\to D$ with $h\\pi=f$. Conversely [lem-sfb-faithfully-flat-group-quotient-universal] applied to $f$ and the map $\\pi$ gives $j:D\\to R$ with $jf=\\pi$. Uniqueness in the same universal property, applied first to $f$ and then to $\\pi$, yields $hj=1_D$ and $jh=1_R$. Hence $R\\simeq D$ is smooth and connected by steps 3–4. Now apply the inverse-image connectedness clause of [lem-sfb-affine-normal-quotient-geometry] to $\\pi$, its smooth connected kernel $K$, and the whole subgroup $S=R\\subseteq R$. Its inverse image is $C$, so $C$ is connected. This completes the induction.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-faithfully-flat-group-quotient-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.40, final connectedness inference, p.339; Proposition 5.59(a), p.114, as included in the quotient-geometry node, and quotient universal property (5.28, 5.79)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-smooth-ambient-normality-geometric",
+  "lem-sfb-lie-kolchin-triangular-embedding",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-semisimple-fixed-subscheme-smooth",
+  "lem-sfb-semisimple-commutative-unipotent-commutator",
+  "lem-sfb-affine-group-homomorphism-image",
+  "lem-sfb-multiplicative-jordan-linear-compatibility",
+  "lem-sfb-faithfully-flat-group-quotient-universal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.40, pp.338–339, connectedness proof via Lemma 16.39. Same last-derived-subgroup induction indexed by derived length; auxiliary smoothness from Corollary 13.8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Centralizer of a semisimple element in a smooth connected solvable algebraic group is connected",
+   "results": "8 hits; top: LieAlgebra.exists_isCartanSubalgebra_engel, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra, LieAlgebra.IsSemisimple.booleanGenerators, Module.End.IsSemisimple.of_mem_adjoin_pair, LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, LieAlgebra.IsSemisimple. Read the returned signatures: smooth-locus and basic smoothness assertions, abstract group actions/centralizers, Galois categories and Lie-algebra statements do not assert this algebraic-group-scheme result. Logged digest 3f295129ed449aca.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connectedness of semisimple centralizers in solvable linear algebraic groups",
+   "results": "8 hits; top: Subgroup.centralizer_eq_top_iff_subset, AddSubgroup.centralizer_eq_top_iff_subset, Subsemigroup.centralizer, AddSubsemigroup.centralizer, Subsemiring.le_centralizer_centralizer, Subsemigroup.centralizer_eq_top_iff_subset, Subalgebra.centralizer_eq_top_iff_subset, Subsemigroup.mem_centralizer_iff. Read the returned signatures: smooth-locus and basic smoothness assertions, abstract group actions/centralizers, Galois categories and Lie-algebra statements do not assert this algebraic-group-scheme result. Logged digest a8d8bbbd4ddfd956.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"connected\"",
+   "results": "0 hits; top: none. No matching source lines or declarations returned. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple|centralizer|solvable",
+   "results": "0 hits; top: none. No matching source lines or declarations returned. Mathlib/AlgebraicGeometry/ searched. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a connected solvable linear algebraic group over an algebraically closed field the subgroup commuting with a diagonalizable element is connected",
+   "results": "8 hits: RootPairing.GeckConstruction.instHasTrivialRadical, LieModule.instIsTriangularizableOfIsAlgClosed, LieAlgebra.exists_isCartanSubalgebra_engel, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, ConjAct.fixedPoints_eq_center, ConjClasses.mk_bijOn, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, LieAlgebra.zeroRootSubalgebra_normalizer_eq_self. Read returned signatures; these are abstract group actions, Lie algebras, linear Jordan decompositions or general smoothness statements, not this scheme-theoretic fixed-subscheme assertion. Logged digest 082e70a036092613.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-centralizer-smooth-connected",
+  "date": "2026-10-23",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed.",
+   "via": [
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-solvable-semisimple-centralizer-connected",
+  "worker": "stage1",
+  "summary": "Read Milne 16.39–16.40 and 13.8 and every cited node. Split the last-derived-subgroup argument into eight steps, with explicit induction decrease, rational-point lifts, the Jordan calculation, and the scheme-theoretic kernel/quotient comparison. Reused existing algebraic-group infrastructure; created two statement-only fixed-subscheme inputs, searched with all four services. Corrected imported doubled TeX escapes without changing the mathematical statement.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3) read, at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. Inherited chain supports torus centralizers in the algebraic-group prerequisites for the marked-curve/level-structure input; no unit or chapter route is changed. The inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor confirms it); preserved that metadata. Whole-DAG and blueprint searches centralizer, solvable, semisimple, commutator, unipotent, fixed smooth, connected kernel found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-c675b615a",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-c675b615a (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 Lemma 16.39 and Theorem 16.40 (pp.338–339), and Theorem 13.7 with Corollary 13.8 (pp.256–257). The item states the connectedness assertion of 16.40 with the same hypotheses; its statement changed only in TeX escapes. Milne's route is kept, with the induction indexed by derived length; step 3 proves the decrease (Q_i/Q_{i+1}≅G^(i)/G^(i+1) is commutative, so Q^(d-1)=1). Steps 2–8 match the cited statements. Step 2: the G^(i) are stable under conjugation by minimality, and the smooth-ambient normality node then makes them normal; the derived series satisfies the Lie–Kolchin series hypothesis; G^(1)⊆U_n by minimality, so N is unipotent. Step 4: the fixed-subscheme node is applied to G acting by conjugation on G, N and Q, which gives smoothness of C, K and D. Step 5: [s,z]∈N(k) and z s^{-1}z^{-1}=u s^{-1}u^{-1}v. Step 6: Jordan uniqueness in the faithful B_n embedding gives v=1. Steps 7–8: ker(C→D)=K, f is faithfully flat because D is smooth and f is onto on k-points, C/K≅D by the two universal properties, and the inverse-image clause of the quotient node gives C connected. New node commutative-unipotent-commutator is exactly Milne 16.39 (true; checked on G_a⋊G_m with λ=1 and λ≠1). New node semisimple-fixed-subscheme-smooth is 13.8 specialized (smooth connected acting group, affine X); it is true. Neither is a duplicate: the torus fixed-scheme node needs a torus, and the torus-centralizer node cites the item, so citing it would be circular. Neither node restates a clause of the item. Both are self-contained and have four Mathlib search records. There is no cycle and no off-unit citation. Batch 5: the 4 flagged paths end in generic lemmas (geometric connectedness from a point, fppf covering base change, a descent-datum definition, flat ⊗ preserves injections), none of which belongs to the trace formula or Poincaré duality; accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SolvableSemisimpleCentralizerConnected",
+  "declaration": "AlgebraicGeometry.solvable_semisimple_centralizer_connected",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SolvableSemisimpleCentralizerConnected.lean",
+  "statement": "theorem solvable_semisimple_centralizer_connected {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] (hsolv : IsSolvableGroupScheme G) (s : StandardGroupSchemes.affine k k ⟶ G) (hs : IsSemisimpleGroupSchemePoint G s) : ConnectedSpace (equalizer (𝟙 G * (Over.homMk G.hom (by simp only [StandardGroupSchemes.affine, algSpec_obj_hom, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id] exact Category.comp_id G.hom) ≫ s)) ((Over.homMk G.hom (by simp only [StandardGroupSchemes.affine, algSpec_obj_hom, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id] exact Category.comp_id G.hom) ≫ s) * 𝟙 G)).left",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10fa1467c",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Read item, all 11 stmt_dep records, live IsSolvableGroupScheme/GroupSchemeDerivedLength/IsDerivedGroupScheme, IsSemisimpleGroupSchemePoint, StandardGroupSchemes.affine, module and report. Clause by clause: alg-closed k; G : Over (Spec k) GrpObj, IsAffine, LOFT+QC, Smooth, ConnectedSpace; IsSolvableGroupScheme = scheme-theoretic derived series; s : affine k k ⟶ G with IsSemisimpleGroupSchemePoint (all reps, ι empty included); C_G(s) = equalizer (𝟙G * c) (c * 𝟙G) with c = canonical constant map G→Spec k→G (gs vs sg via GrpObj Hom law), nonreduced test algebras retained; conclusion ConnectedSpace of .left (nonempty included). Over-equalizer ≅ scheme equalizer (connected limits created). Edge cases trivial/commutative G, s=1, char p, universes ok. Node diff vs live = lean record + 2 used landed def stmt_deps; statement verbatim; no centralizer-of-point def node exists (centralizerPoints are cocharacter-specific); docstrings source/blueprint/8 steps; sorry only; report sections present. No compile (no change). No findings."
+ }
+}

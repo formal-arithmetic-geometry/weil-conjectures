@@ -1,0 +1,164 @@
+{
+ "id": "lem-trf-scheme-descent-chart-section-lifting",
+ "kind": "statement",
+ "title": "Gluing chart sections with prescribed quotient and base coordinates",
+ "statement": "Let S be a scheme, U_i and X_i S-schemes with f_i:X_i→U_i, and R_ij a pullback of f_i along U_i×_S U_j→U_i, with projections p_ij and b_ij. Suppose θ_ij:R_ij≅R_ji interchanges the first base coordinate with the second. Let V with injections ι_i be a specified coproduct of the X_i in Sch/S, let F be an fppf sheaf, and q:h_V→F representable surjective etale. Assume q identifies p_ij followed by ι_i with θ_ij followed by p_ji and ι_j. Suppose maps x,y:T→X_i with the same quotient section and f_i-coordinate are equal on every test T. Then for every i,T, z∈F(T), and a:T→U_i, there exists x:T→X_i with q_i(x)=z and f_i x=a. The statement asserts only existence, assuming injectivity, and no kernel-pair or transition-isomorphism conclusion.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0262, sectionwise kernel-pair formula and proof (3); Tags 02WV/02WW. The descent gluing uses the subcanonical fppf topology, equivalently Descent Tag 023Q restricted to fppf coverings."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof": [
+  {
+   "text": "Apply representable_etale_fppf_local_lifting to obtain v:P→T surjective etale and d:P→V lifting z. Pull back each coproduct injection along d to C_j=P×_V X_j, with e_j:C_j→X_j and l_j:C_j→P. The injections are open immersions even for arbitrary I. Each l_j is an open immersion, so w_j=v l_j is etale. Coverage of the coproduct and surjectivity of v prove joint coverage of T by the C_j, using existence of points in scheme pullbacks. The family is fppf.",
+   "uses": [
+    "lem-a1-representable-etale-fppf-local-lifting",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pair f_j e_j with a w_j in U_j×_S U_i. The pullback property gives r_j:C_j→R_ji. Set c_j=p_ij θ_ji r_j. The switched first base coordinate implies f_i c_j=a w_j. The quotient relation and the original lift d imply q_i(c_j)=z restricted to C_j.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On any overlap the restrictions of c_j have equal quotient section and f_i-coordinate, so the assumed injectivity makes them equal. Representables on the fppf over-site are sheaves by subcanonicity (in Mathlib this follows from fpqc subcanonicity and fppf≤fpqc). Apply the sheaf condition to h_Xi to glue the c_j into an S-morphism x:T→X_i. Separatedness of F gives q_i(x)=z and separatedness of h_Ui gives f_i x=a. This includes empty covers and tests.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0262, sectionwise kernel-pair formula and proof (3); Tags 02WV/02WW. The descent gluing uses the subcanonical fppf topology, equivalently Descent Tag 023Q restricted to fppf coverings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scheme coproduct components restrict kernel pairs and fppf sheaves glue unique local lifts",
+   "results": "Returned IsKernelPair.lift', locally-ringed-space coproducts, and scheme coproduct infrastructure; no combined statement.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use pullback and coproduct APIs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a scheme coproduct kernel pair to two components using disjoint open immersions; glue unique local maps into a scheme along an fppf covering",
+   "results": "Found isEmpty_pullback_sigmaι_of_ne, isPullback_inl_inl_coprodMap, Scheme.Cover.glueMorphisms. These supply geometric tools, but none states restriction of an arbitrary specified coproduct presheaf kernel pair or the prescribed-coordinate lifting conclusion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.IsSheafFor",
+   "results": "Found IsSheafFor.amalgamate, IsSheafFor.isSeparatedFor, isSheafFor_iff_generate. Used the equivalent isSheafFor_arrows_iff API in the proof.",
+   "date": "2026-10-26",
+   "verdict": "gluing tools, not the chart-specific conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "scheme_descent_quotient|chart_isomorphism|coproduct.*kernel; IsSheafFor|ofArrows_mem_precoverage_iff",
+   "results": "No existing component-kernel-pair or chart-section-lifting theorem in Sheaf or WeilConjectures. CoproductSchemePullback has proved private cofan_open/cofan_covers/cofan_disjoint helpers; their arguments are reused privately. Mathlib Sites/IsSheafFor.lean:840 and AlgebraicGeometry/Sites/MorphismProperty.lean:82 supply gluing and covering APIs.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeDescentQuotientChartIsomorphism",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Extracted from lem-trf-scheme-descent-quotient-chart-isomorphism: Gluing chart sections with prescribed quotient and base coordinates",
+   "via": [
+    "lem-trf-scheme-descent-quotient-chart-isomorphism",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeDescentChartSectionLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDescentChartSectionLifting.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.scheme_descent_chart_section_lifting",
+  "statement": "theorem scheme_descent_chart_section_lifting\n    {S : Scheme.{u}} {I : Type v} (U X : I → Over S) (f : ∀ i, X i ⟶ U i)\n    (R : I → I → Over S) (p : ∀ i j, R i j ⟶ X i)\n    (b : ∀ i j, R i j ⟶ U i ⨯ U j)\n    (hR : ∀ i j, IsPullback (p i j) (b i j) (f i) Limits.prod.fst)\n    (theta : ∀ i j, R i j ≅ R j i)\n    (hleft : ∀ i j, (theta i j).hom ≫ b j i ≫ Limits.prod.fst =\n      b i j ≫ Limits.prod.snd)\n    (V : Over S) (ι : ∀ i, X i ⟶ V) (hV : IsColimit (Cofan.mk V ι))\n    (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (q : yoneda.obj V ⟶ F.obj)\n    (hqet : IsEtale q) (hqsurj : IsSurjective q)\n    (hrel : ∀ i j, yoneda.map (p i j ≫ ι i) ≫ q =\n      yoneda.map ((theta i j).hom ≫ p j i ≫ ι j) ≫ q)\n    (hinj : ∀ (i : I) (T : Over S) (x y : T ⟶ X i),\n      (yoneda.map (ι i) ≫ q).app (op T) x =\n        (yoneda.map (ι i) ≫ q).app (op T) y →\n      x ≫ f i = y ≫ f i → x = y) :\n    ∀ (i : I) (T : Over S) (z : F.obj.obj (op T)) (a : T ⟶ U i),\n      ∃ x : T ⟶ X i, (yoneda.map (ι i) ≫ q).app (op T) x = z ∧ x ≫ f i = a",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-a1-representable-etale-fppf-local-lifting",
+    "why": "The existing generic local-lifting theorem supplies a scheme cover lifting a section of an arbitrary fppf sheaf. It replaces no step of the unit route and was already an approved tool of the parent."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Use the generic equalizer/gluing condition for sheaves of sets; it replaces no unit-level geometric input and was already an approved tool of the parent."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T092625-L-3447975",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T092625-L-3447975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

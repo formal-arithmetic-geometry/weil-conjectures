@@ -1,0 +1,170 @@
+{
+ "id": "lem-sf-integral-projection-proper-factor-reduction",
+ "kind": "statement",
+ "title": "Coefficient square for the proper projection factor",
+ "statement": "Fix a finite-field datum \\(D\\), its coefficient datum \\(C\\), a finite extension \\(E/\\mathbb Q_\\ell\\), \\(n\\ge1\\), and a normalized six-functor operation datum \\(S\\) at \\((E,n)\\) [def-fix-six-functor-datum]. Assume \\(\\ell\\) is invertible in \\(D.k\\). Let \\(o\\) be simultaneous-system operations and \\(z\\) their specified realization data. Let \\(f:X\\to Y\\) be a separated, locally finite-type, quasi-compact morphism of six-functor spaces, and fix a compactification \\(c=(j:X\\to\\bar X,p:\\bar X\\to Y)\\). Let \\(K\\) and \\(L\\) be bounded constructible derived-complete integral objects on \\(X\\) and \\(Y\\), with \\(L\\) of uniform finite-reduction Tor amplitude. Put \\(A=S.\\mathrm{higher}.\\mathrm{integralExchange}(\\mathrm{identitySquare}(f,c))\\). Use sourceMap and targetMap of [def-sf-integral-projection-coordinate-data], first and second of [def-sf-integral-projection-factor-data], and middleMap, systemFirst and systemSecond of [def-sf-integral-projection-middle-map]. Write \\(\\alpha\\gg\\beta\\) for first \\(\\alpha\\), then \\(\\beta\\). Then \\(\\mathrm{sourceMap}(K,L)\\gg\\mathrm{systemFirst}(\\mathrm{red}(K),\\mathrm{red}(L))=\\mathrm{red}(\\mathrm{first}(A,K,L))\\gg\\mathrm{middleMap}(K,L)\\). Both sides end at \\(p_*T_{\\bar X}(j_!\\mathrm{red}(K),p^*\\mathrm{red}(L))\\). This is the coefficient square for the proper projection mate alone; no open projection occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+ },
+ "stmt_deps": [
+  "def-sf-integral-projection-middle-map",
+  "def-sf-integral-projection-coordinate-data",
+  "def-sf-integral-projection-factor-data"
+ ],
+ "proof": [
+  {
+   "text": "Put M = A.stage.openExtension.obj K. Apply integralProjectionSupportFactorCoordinates to identify directReduction(M) followed by proper image of openReduction(K) with reduction of supportMap(K) followed by supportReduction(K). Naturality of the specified datumTensorReduction tensors this equation with the identity of L.",
+   "uses": [
+    "lem-sf-integral-projection-support-factor-coordinates",
+    "def-sf-integral-projection-coordinate-data",
+    "def-sf-integral-projection-local-factors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Curry the canonical tensor reduction natural isomorphisms. Transport ProperCoordinates.pullComparison along A.properPull, and transport the tensor comparisons along A.tensorBar and A.tensorY. integralTensorPullbackNormalization identifies A.stage.tensorPullback with ProperCoordinates.pullTensor on the proper factor. The existing integralProperTensorPullbackReduction gives ComparisonCompatible for these transported data after cancelling the inverse pull comparison.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-integral-proper-projection-coordinates",
+    "lem-sf-integral-proper-tensor-pullback-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply map_rightAdjointProjectionMap_comp_mateEquiv to the preceding tensor square. The counit formula for mateEquiv identifies its components with directReduction, since properPullReduction is exactly the transported pullComparison component. The tensor components are exactly barTensorReduction and datumTensorReduction, with the latter transported across A.tensorY. Cancel that tensor-source transport to obtain the proper projection coefficient square at arbitrary M. This is a private proved lemma, with no new obligation.",
+   "uses": [
+    "lem-sp-categorical-projection-mate-square",
+    "def-sf-integral-projection-middle-map",
+    "def-sf-integral-projection-coordinate-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the proper square to M = A.stage.openExtension.obj K and paste it with the tensor of the support-coordinate equation. Naturality of the system proper projection moves proper image of openReduction across the proper projection. Bifunctoriality combines openReduction and properPullReduction to give middleMap. The inverse support identification tensored with identity cancels first; its reduction is an isomorphism, so cancelling it gives the stated equation.",
+   "uses": [
+    "def-sf-integral-projection-factor-data",
+    "def-sf-integral-projection-middle-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-projection-support-factor-coordinates",
+  "def-sf-integral-projection-coordinate-data",
+  "def-sf-integral-projection-local-factors",
+  "def-sf-operation-stages",
+  "def-sf-integral-proper-projection-coordinates",
+  "lem-sf-integral-proper-tensor-pullback-reduction",
+  "lem-sp-categorical-projection-mate-square",
+  "def-sf-integral-projection-middle-map",
+  "def-sf-integral-projection-factor-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proper-factor counit transpose, paragraph beginning “On the p factor”: first normalize the support coordinates, then apply categorical mate transport to the existing completed tensor/pullback reduction square, and paste using tensor and proper-projection naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjunction projection formula compatibility reduction tensor comparison counit",
+   "results": "Eight general monoidal-adjunction results, including Adjunction.map_μ_comp_counit_app_tensor. None compares this normalized datum with its strict coefficient system.",
+   "date": "2026-10-27",
+   "verdict": "Use generic adjunction calculus; no matching normalized coefficient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projection formula is a composite of the right adjoint projection map and the direct image of an open projection isomorphism",
+   "results": "Eight geometric gluing, restriction, inducing-map and fiber-bundle results; none is a coefficient projection-factor comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]eduction|[Rr]eduction.*[Pp]rojection",
+   "results": "msearch Mathlib: zero hits. Local source search finds GeneratorReductionStatement, OpenTensorReductionSquare, and IntegralProjectionOperationPresentation. The first two use ordinary/completed expression coordinates; the last supplies an existential arrow isomorphism, not the explicit coordinate maps here. Blueprint searches for projection coefficient and proper counit find no duplicate factor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Existing modules provide the generic mates and normalizations, not these two squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionReductionNormalization",
+  "date": "2026-10-27",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. Individual-arrow integral system realization of these tensor and counit maps, before their compactification comparison square is deduced. The single-compactification projection-generator square, without the refinement assertions. Separate proper counit factor and open tensor factor.",
+   "via": [
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionProperFactorReduction",
+  "file": "lean/Sheaf/Paper/IntegralProjectionProperFactorReduction.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.integralProjectionProperFactorReduction",
+  "declarations": [
+   "WeilConjectures.FixProjectionCompactification.integralProjectionProperFactorReduction"
+  ],
+  "statement": "theorem integralProjectionProperFactorReduction\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k))\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    (c : Compactification f.hom.left)\n    (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n    (L : sfIntegralConstructibleCategory C.l E Y.obj.left)\n    (hL : finiteTorConstructibleIntegral C.l E Y.obj.left L.obj) :\n    Coordinates.sourceMap D C E S.higher hl o z f c K L ≫\n        ProjectionFactors.systemFirst D C E o f c\n          ((calculus C.l E X.obj.left).reduction.obj K.obj)\n          ((calculus C.l E Y.obj.left).reduction.obj L.obj) =\n      (calculus C.l E Y.obj.left).reduction.map\n        (ProjectionFactors.first (S.higher.integralExchange (identitySquare f c)) K L).hom ≫\n          ProjectionFactors.middleMap D C E n hn S hl o z f c K L",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "summary": "One genuine proper/open factor square of the parent, at an independently constructed intermediate coefficient map. No projection is used to define that map.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-generator-reduction-coherence",
+    "why": "Generic coefficient normalization/adjunction tool for the same strict-system operations; no replacement of a unit proof step."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic coefficient normalization/adjunction tool for the same strict-system operations; no replacement of a unit proof step."
+   }
+  ],
+  "blueprint": "The proper-counit and open-unit factor calculations in prop-sf-pf-coherence.proof.md, in their original order."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T222608-L-672305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261027T103504-L-1088849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

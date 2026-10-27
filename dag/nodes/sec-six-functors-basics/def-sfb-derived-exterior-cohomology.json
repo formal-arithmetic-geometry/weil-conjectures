@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-derived-exterior-cohomology",
+ "kind": "definition",
+ "title": "Canonical exterior cohomology of a derived algebra",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring and $K$ an object of $D(R)$ [def-weil-abstract-derived-category], with unit $u:R[0]\\to K$ and multiplication $\\mu:K\\otimes_R^{\\mathbf L}K\\to K$. Represent each $x\\in H^n(K)$ by the unique derived morphism $R[-n]\\to K$ inducing $1\\mapsto x$, and define its cup product with $y\\in H^q(K)$ by tensoring these representatives and composing with $\\mu$, using the canonical signed single-tensor identification. Define the empty product to be the class of $u$ and products of degree-one classes by iteration. The predicate $\\operatorname{IsExterior}(u,\\mu)$ means that negative cohomology vanishes and there are $R$-linear isomorphisms $e_n:\\bigwedge_R^n H^1(K)\\simeq H^n(K)$ for every $n\\ge0$, sending every pure wedge to the indicated product [def-weil-pbc-exterior-algebra]. For perfect $K$ [def-pc-perfect-ring-complex] and a ring map $R\\to S$, define the scalar-extended unit and product using the inverse canonical coefficient-unit and balanced tensor comparisons of [lem-sf-perfect-scalar-tensor-coherence], followed by scalar extension of $u$ and $\\mu$.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-exterior-algebra",
+  "def-pc-perfect-ring-complex",
+  "lem-sf-perfect-scalar-tensor-coherence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent-stated rigidity argument lem-sfb-perfect-derived-bialgebra-exterior-rigidity, induced-product and exterior-cohomology clauses; minimal-model input Tag 0BCC. Morphism convention: derived.tex Tag 064B; scalar comparisons: Tags 06Y6 and 0GWN."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical cup product cohomology derived category algebra object",
+   "results": "Eight hits, including DerivedCategory.instPreadditive, ShortComplex.HomologyData.canonical and general Ext results; no canonical cup or exterior-cohomology predicate for a derived algebra.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect derived bialgebra exterior algebra rigidity",
+   "results": "Eight hits: ExteriorAlgebra.lift, comp_ι_sq_zero, ι_sq_zero, GradedAlgebra.ι_sq_zero, algebraMapInv, toTrivSqZeroExt, ExteriorAlgebra and CommSemiring.toBialgebra. Exterior algebra is reused; no derived cohomology product or rigidity statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep homSingleEquivOfProjective|ExteriorCohomology|IsExterior Algebra/Homology/DerivedCategory; rg in WeilConjectures and Sheaf; blueprint_refs search exterior cohomology",
+   "results": "Mathlib grep: 0 hits. Blueprint search: 0 nodes. Project searches locate unrelated scalar-unit helpers; upstream homSingleEquivOfProjective is the reusable unique class representative, not an induced cup product. Scalar coherence exists and is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-derived-bialgebra-exterior-rigidity",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Auxiliary: The algebraic obstruction calculation that kills the minimal differential over nilpotent bases, before sheafification and universal base change. Definition of the induced cohomology product and normalized exterior comparison.",
+   "via": [
+    "lem-sfb-perfect-derived-bialgebra-exterior-rigidity",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ExteriorCohomology",
+  "declaration": "DerivedCategory.ExteriorCohomology.IsExterior",
+  "declarations": [
+   "DerivedCategory.ExteriorCohomology.singleUnitShift",
+   "DerivedCategory.ExteriorCohomology.singleDiagonal",
+   "DerivedCategory.ExteriorCohomology.representative",
+   "DerivedCategory.ExteriorCohomology.cup",
+   "DerivedCategory.ExteriorCohomology.unitClass",
+   "DerivedCategory.ExteriorCohomology.cupNat",
+   "DerivedCategory.ExteriorCohomology.product",
+   "DerivedCategory.ExteriorCohomology.IsExterior",
+   "DerivedCategory.ExteriorCohomology.scalarUnit",
+   "DerivedCategory.ExteriorCohomology.scalarMul"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ExteriorCohomology.lean",
+  "statement": "def IsExterior {K : DerivedCategory (ModuleCat.{u} R)} (η : 𝟙_ (DerivedCategory (ModuleCat.{u} R)) ⟶ K) (μ : K ⊗ K ⟶ K) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3aafe0542",
+  "group": "Q44",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3aafe0542",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Read item node, the 3 unchanged stmt_dep nodes, new def-sfb-derived-exterior-cohomology, both modules, report (Worker report / New nodes / Second reading by Q44), and upstream PerfectScalarTensorCoherence, HomSingleProjective, DerivedCategory monoidal/braided instances. Item changed only lean + stmt_deps (+new def node). Every clause matches: Noetherian local R, residue map algebraMap; IsPerfectRingComplex K; BimonObj+IsCommMonObj with braiding pinned to DerivedMonoidal.braidedCategory' (Koszul derived symmetry); residue K̄ = PerfectScalar.B with scalarUnit/scalarMul via ∃!-pinned coherenceData; hFinite; IsExterior hypothesis (n=0 gives H^0=k via u; normalized pure-wedge isos = graded-algebra iso given associativity); conclusion: ∃ P finite free, zero d, supported [0,g], K ≅ Q P in D(R), IsIso H^0(u), H^1 ≅ R^g with exact g, cup x x = 0, IsExterior over R. Def module canonical (representative = inverse of homSingleEquivOfProjective, singleDiagonal from unitor/shiftTensorShiftIso; sign convention cannot affect the predicates), no duplicate notion found, fields/searches/docstrings/verbatim statements OK, sorry-only, lines ≤100. Edge cases g=0, g=1, char 2, field, non-reduced/non-complete OK. No compile (no file changed). Advisories only: possibly unused import Sheaf DerivedBaseChange (and FlatModel) in ExteriorCohomology; item uses PerfectScalar.B/D owned by theorem node lem-sf-perfect-scalar-tensor-coherence, reached via the new def node's stmt_dep (B = .choose of lem-pc-derived-tensor-second-factor-functor), suggest a future def node owning D/E/B."
+ }
+}

@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-coherent-etale-restriction-composition",
+ "kind": "statement",
+ "title": "Successive normalized coherent etale restrictions and structural section pullback",
+ "statement": "For f:X→S, a quasi-coherent module G on X and h:V'→V in the small etale site of S, let b be the induced map X×S V'→X×S V and let j,j' be the projections to X. Let theta:lifted(j*G)→b_*lifted(j'*G) have the structural section formula qcoherentPullbackSection for tensorSectionsComp(b,j), transported along b.w. Then b^*(coherentEtaleRestrictionIso(j,G).hom) followed by the adjunct of theta equals the inverse upperStarComp coefficient map followed by coherentEtaleRestrictionIso(j',G).hom. This is an equality of sheaf maps, with no cohomological degree, raw classes, or raw evaluation. The coefficients and chart projections are those of [def-weil-pbc-coherent-higher-image-classes]; tensor section pullback is [lem-weil-pbc-qcoherent-pullback-sections-map].",
+ "source": {
+  "document": "literature/stacks-project/descent.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03DR, equation-quasi-coherent-presheaf; Tag 03Q8, lemma-higher-direct-images. Agent expansion of step 3 of lem-weil-pbc-affine-raw-evaluation-pullback."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-higher-image-classes",
+  "def-weil-pbc-coherent-etale-restriction",
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "transpose the proposed equality under b* adjoint to b_*. Identify b* with\nlocalization restriction, using uniqueness of left adjoints and its unit equation.\nAt an etale object U over Y this unit is restriction along the counit of the\nmap/pullback site adjunction, whose scheme map is pullback.fst. Insert the inverse\ntensorSectionsComp formulas defining the two coherentEtaleRestrictionIso maps.\nNaturality of the tensor section unit moves the comparison for j past the unit.\nAssociativity of unit-normalized tensor composition identifies the remaining two\nways of composing comparisons. Transport along w cancels the final equality\ncomparison. The resulting component is precisely qcoherentPullbackSection for\npsi. The hypothesis identifies it with theta on each ULift.up s. Every lifted\nsection is of that form, so sectionwise, natural-transformation and sheaf\nextensionality give equality of the adjuncts. The adjunction Hom equivalence\nis injective, proving the assertion. No affine or nonempty hypothesis enters\nthese equations.",
+   "uses": [
+    "def-weil-pbc-coherent-etale-restriction",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-qcoherent-pullback-sections-map",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-etale-restriction",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03DR, equation-quasi-coherent-presheaf; Tag 03Q8, lemma-higher-direct-images. Agent expansion of step 3 of lem-weil-pbc-affine-raw-evaluation-pullback."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of Ext cohomology via right derived global sections commutes with inverse image of sheaves and pullback of the constant integer generator",
+   "results": "8 hits: Sheaf.H, cohomologyPresheafFunctor, projective/injective-resolution Ext comparisons. None compares the fixed derivedExtEvaluation with the derived adjunction-unit pullback.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections Ext evaluation is natural under inverse image pullback of sheaves",
+   "results": "8 hits, primarily Sheaf.ΓHomEquiv_naturality and pullback of free module sheaves. These are underived statements and do not assert the fixed evaluation square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "results": "12 hits: standard H.map functoriality and degree-zero formulas. No fixed total-derived evaluation pullback square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHToDerived|coherentEtaleRestrictionIso|leftAdjointCompIso_assoc",
+   "results": "Mathlib returns leftAdjointCompIso_assoc and its module-pullback specializations, not either project comparison. Local source search finds proved coefficient naturality SheafHDerivedNaturality and DerivedSectionSingleUnit, but no pullback theorem for sheafHToDerived.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical restriction isomorphisms for quasicoherent tensor section sheaves compose under etale inverse image",
+   "results": "8 hits: restrictFunctorComp for open immersions, module pseudofunctor associativity, and SheafOfModules.conjugateEquiv_pullbackComp_inv. These do not identify the project lifted etale coefficient sheaf maps.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "results": "The generic adjunction coherence theorem exists; it is an ingredient, not the coefficient sheaf statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical isomorphism from etale inverse image of a quasi coherent tensor section sheaf to the associated sheaf of its tensor pullback is compatible with composition and the adjoint coefficient map",
+   "results": "8 hits: SheafOfModules.pullbackComp, scheme-module pullbackComp, sheafificationCompPullback, freeFunctorCompPullbackIso, and continuous sheaf-pushforward composition. These concern module pullbacks or continuous restriction alone, not their compatibility with the normalized lifted tensor-section sheaf.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineRawEvaluationPullback",
+  "date": "2026-10-26",
+  "group": "A8"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Tag 03DR, equation-quasi-coherent-presheaf; Tag 03Q8, lemma-higher-direct-images. Agent expansion of step 3 of lem-weil-pbc-affine-raw-evaluation-pullback.",
+   "via": [
+    "lem-weil-pbc-affine-raw-evaluation-pullback",
+    "lem-weil-pbc-affine-cohomology-raw-restriction",
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentEtaleRestrictionComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentEtaleRestrictionComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherentEtaleRestrictionIso_composition",
+  "statement": "theorem coherentEtaleRestrictionIso_composition {X S : Scheme.{u}} (f : X ⟶ S)\n    (G : X.Modules) [G.IsQuasicoherent] (V V' : S.Etale) (h : V' ⟶ V)\n    (θ : liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V) ⟶\n      (Etale.lowerStar AddCommGrpCat.{u + 1}\n        ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h).left).obj\n        (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V')))\n    (hθ : let b := (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h\n      let ψ : (tensorPullback b.left).obj (affineRealizationCoefficient f G V) ⟶\n          affineRealizationCoefficient f G V' :=\n        (tensorSectionsComp b.left (Limits.pullback.snd V.hom f)).hom.app G ≫\n          eqToHom (congrArg (fun j ↦ (tensorPullback j).obj G) b.w)\n      ∀ (U : (Limits.pullback V.hom f : Scheme.{u}).Etale)\n        (s : (etaleTensorSectionsSheaf (affineRealizationCoefficient f G V)).obj.obj (op U)),\n        θ.hom.app (op U) (ULift.up s) = ULift.up\n          (qcoherentPullbackSection b.left _ _ ψ U\n            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ b.left).obj U)\n            (pullback.fst U.hom b.left) pullback.condition s)) :\n    (Etale.upperStar AddCommGrpCat.{u + 1}\n        ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h).left).map\n        (coherentEtaleRestrictionIso (pullback.snd V.hom f) G).hom ≫\n      ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n        ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h).left).homEquiv\n        _ _ |>.symm θ) =\n    (Etale.upperStarComp AddCommGrpCat.{u + 1}\n      ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h).left\n      (pullback.snd V.hom f) (pullback.snd V'.hom f)\n      ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h).w.symm).inv.app\n        (liftedCoherentEtaleSheaf G) ≫\n      (coherentEtaleRestrictionIso (pullback.snd V'.hom f) G).hom",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T022800-L-440889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261026T105337-L-1163828",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Modules.coherentEtaleRestrictionIso_composition"
+  ],
+  "sorry_after": []
+ }
+}

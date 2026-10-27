@@ -16,49 +16,65 @@
  ],
  "proof": [
   {
-   "text": "Using the complementary-projective construction of Stacks Tag 064U, take a bounded-above finite-free complex F with a projection F → p whose kernel is the direct sum of two-term identity complexes. This is a homotopy equivalence, with the same upper bound b.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Good truncation l′ = truncGE l a is strictly bounded below and l → l′ is a quasi-isomorphism by [def-sbc-standard-tstructure-derived-category]. By [lem-sc-bounded-above-projective-kprojective], p is K-projective. Applying Hom(p,-) to the acyclic cone of l → l′ gives an acyclic Hom complex: its cocycles are chain maps into shifts of the cone, nullhomotopic by K-projectivity; homotopies are exactly coboundaries. Thus Hom(p,l) → Hom(p,l′) is a quasi-isomorphism. Hom(F,l′) and Hom(p,l′) are homotopy equivalent by precomposition with the homotopy equivalence of step 1.",
+   "text": "Apply the proved finite-projective-complex free-model theorem to obtain F strictly above-bounded by b, degreewise finite free, and a quasi-isomorphism f:F→p. Both complexes are K-projective, so f is a homotopy equivalence.",
    "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-sc-bounded-above-projective-kprojective"
+    "lem-pc-finite-projective-complex-free-model"
    ],
    "elementary": false
   },
   {
-   "text": "Set E = tilde(F), G = tilde(l′), and f = tilde(F → p), termwise. The affine sheaf construction [lem-weil-pbc-spec-module-tilde-sections] is additive and exact by [lem-weil-pbc-localization-module-exact]: on stalks it is exact module localization. Hence it preserves the homotopy equivalence, the bounds and the quasi-isomorphisms from step 2. The truncation gives Q(G) ≅ Q(tilde(l)); [lem-weil-pbc-spec-tilde-free-module] gives finite free terms of E.",
+   "text": "Use l′ = truncGE l a. Precomposition with f is a quasi-isomorphism of module Hom complexes because precomposition carries homotopies to signed homotopies. Postcomposition with l→l′ is a quasi-isomorphism because F is K-projective: under the explicit cocycle/homotopy-class description, each Hom cohomology map is postcomposition with an invertible derived arrow. Compose these two chain maps.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-trf-hom-dual-preserves-homotopies",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set E = tilde(F), G = tilde(l′), and f = tilde(F → p), termwise. Apply the existing tilde_preservesHomology theorem, whose proof uses the global-sections adjunction and injectivity of module localization, to transport quasi-isomorphisms. Termwise functors preserve strict bounds. The truncation gives Q(G) ≅ Q(tilde(l)); [lem-weil-pbc-spec-tilde-free-module] gives finite free terms of E.",
    "uses": [
     "lem-weil-pbc-spec-module-tilde-sections",
     "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-spec-tilde-free-module"
+    "lem-weil-pbc-spec-tilde-free-module",
+    "def-pc-affine-base-change-tilde-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "In degree n, only a-n ≤ i ≤ b contributes to Hom(F,l′). The internal sheaf Hom out of a finite free module is a finite power of its target: use [lem-weil-pbc-spec-tilde-free-module] and [lem-weil-pbc-spec-module-tilde-sections]. Finite products therefore identify the termwise tilde of module Hom with sheaf Hom. The differential d_l′ h - (-1)^n h d_F agrees under this identification by the matrix formulas for finite free modules and the definition [def-pur-hom-complex]. Localize this complex isomorphism and compose with the quasi-isomorphisms of step 2 after exact tilde, using e and hc to identify c with the module Hom complex.",
+   "text": "Each term of sheaf Hom(E,G) is a product supported in the finite interval a-n≤i≤b. Internal Hom from finite free sheaves is a finite biproduct of G terms, hence quasi-coherent; the finite-support product is itself a finite biproduct and is quasi-coherent. Its tilde/global-sections counit is therefore an isomorphism. Identify global sections of internal Hom(tilde M,tilde N) linearly with Hom_R(M,N), using restriction to Over(top), tilde full faithfulness, and the tilde global-sections unit. The product universal property gives degreewise module-cochain coordinates. Their naturality under pre/postcomposition and the Hom differential projection formula prove differential compatibility. Apply exact termwise tilde to the quasi-isomorphism in step 2, and compose the resulting derived isomorphisms with the chain isomorphism from e,hc.",
    "uses": [
     "lem-weil-pbc-spec-tilde-free-module",
     "lem-weil-pbc-spec-module-tilde-sections",
-    "def-pur-hom-complex"
+    "def-pur-hom-complex",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-sc-hom-complex-projections",
+    "def-sc-module-total-hom-complex"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-finite-projective-complex-free-model",
   "def-sbc-standard-tstructure-derived-category",
   "lem-sc-bounded-above-projective-kprojective",
+  "lem-trf-hom-dual-preserves-homotopies",
+  "def-sc-module-total-hom-complex",
   "lem-weil-pbc-spec-module-tilde-sections",
   "lem-weil-pbc-localization-module-exact",
   "lem-weil-pbc-spec-tilde-free-module",
-  "def-pur-hom-complex"
+  "def-pur-hom-complex",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-sc-hom-complex-projections",
+  "def-pc-affine-base-change-tilde-coordinates"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "G3",
+  "date": "2026-10-24",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A6H, affine calculation, with finite-free replacement as in Tag 064U"
+  "place": "Tag 0A6H; finite-free replacement Tag 064U; finite-support Hom and affine counit argument implemented in Lean"
  },
  "mathlib_searches": [
   {
@@ -125,14 +141,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T194141-L-465082",
+  "landing": "20261024T185750-L-3665705",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

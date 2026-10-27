@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-neron-strict-local-descent-base-change",
+ "kind": "statement",
+ "title": "Néron lft-models under ramification-one base change and strict-local descent",
+ "statement": "Let $R$ be a discrete valuation ring, $K=\\operatorname{Frac}R$, $S=\\operatorname{Spec}R$, and let $V/K$ be a smooth separated commutative finite-type group scheme [def-sc-discrete-valuation-ring, def-weil-affine-spectrum, def-pc-scheme, def-sbc-smooth-morphisms]. A commutative group scheme has multiplication, identity and inverse morphisms satisfying the commutative group diagrams. Separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Locally of finite type and finite type have the meanings of [def-weil-finite-type-morphism]. A Néron lft-model of a smooth separated finite-type group $V$ over the fraction field $F$ of a DVR $D$ means a smooth separated $D$-group $M$, with specified generic-fibre identification $M_F=V$, for which restriction $\\operatorname{Hom}_D(X,M)\\to\\operatorname{Hom}_F(X_F,V)$ is bijective for every smooth $D$-scheme $X$ [def-pc-base-change, def-sbc-smooth-morphisms]. (i) If $M/S$ is a Néron lft-model of $V$ and $R\\to A$ is a local injective extension of DVRs for which a uniformizer of $R$ generates the maximal ideal of $A$ and the residue-field extension is separable, then $M_A$ is a Néron lft-model of $V_{\\operatorname{Frac}A}$. This includes $A=R^{\\mathrm{sh}}$, a strict henselization [def-sc-ring-strict-henselization]. The open subgroups of fibrewise identity components commute with these base changes; an identity component means the connected component containing the identity in a geometric fibre [def-weil-connected-scheme]. (ii) Conversely, if $D=R^{\\mathrm{sh}}$, $F=\\operatorname{Frac}D$, and $M'/D$ is a Néron lft-model of $V_F$ with the specified generic identification, there is a smooth separated commutative Néron lft-model $M/S$ of $V$ and a group isomorphism $M_D\\simeq M'$ inducing that generic identification. The model and the isomorphism are unique up to unique group isomorphism inducing the identity on $V$. Neither $M$ nor $M'$ is required to be quasi-compact.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Proposition 3, printed p.290 (PDF p.296), and strict-henselian descent in Proposition 7 proof, printed p.293 (PDF p.299); compare 6.5 Theorem 1 and Corollary 3, printed pp.157–159, whose finite-type descent argument is applied to finite unions of components containing the generic fibre Primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf. Local PDF WANTED; agent-extracted formulation of the indicated argument."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-sc-ring-strict-henselization",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "First, smoothness and separatedness of $M_A$ follow by base change: apply the smooth base-change clause locally at the relative dimension of each point and pull back the closed diagonal. The group operations are the base changes of those of $M$; their identities are equalities of the corresponding composites, so are preserved. The generic fibre is $V_{\\operatorname{Frac}A}$ by associativity of fibre products. Let $A\\hookrightarrow B$ be an injective local extension of DVRs with $B\\cong\\mathcal O_{X,x}$ for a point $x$ of a smooth $A$-scheme $X$; locality puts $x$ over the closed point. [lem-sfb-essentially-smooth-dvr-index-one] gives $\\mathfrak m_AB=\\mathfrak m_B$ and a separably generated residue extension $\\kappa(B)/\\kappa(A)$, which is separable by [lem-weil-pbc-separably-generated-separable]. Then $\\mathfrak m_RB=(\\mathfrak m_RA)B=\\mathfrak m_AB=\\mathfrak m_B$, and [lem-sfb-separable-field-extension-transitivity] applied to $\\kappa(R)\\subseteq\\kappa(A)\\subseteq\\kappa(B)$ makes $\\kappa(B)/\\kappa(R)$ separable. Thus $R\\hookrightarrow B$ satisfies exactly the hypotheses of the valued-point approximation lemma; no separability of the fraction-field extension is inferred.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pc-closed-imm-base-change",
+    "lem-sfb-essentially-smooth-dvr-index-one",
+    "lem-weil-pbc-separably-generated-separable",
+    "lem-sfb-separable-field-extension-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 3 and 7.2 Theorem 1 second proof, pp.290,177"
+   }
+  },
+  {
+   "text": "Given $v\\in V(\\operatorname{Frac}B)$, apply [lem-sfb-index-one-valued-point-smooth-approximation] to $R\\hookrightarrow B$, $W=V$ and $v$. Obtain $a:\\operatorname{Spec}B\\to U$ with $U/R$ smooth and $h:U_K\\to V$ restricting to $v$. The mapping property of $M$ extends $h$ to $\\widetilde h:U\\to M$. The composite $\\widetilde h a$ is a $B$-point of $M_A$ over $A$ with generic point $v$. Hence every essentially smooth DVR test for $M_A$ is surjective. Apply [lem-sfb-neron-dvr-point-criterion] over $A$ to conclude that $M_A$ is a Néron lft-model. The construction uses only finite-type $V$ and one smooth affine approximation at a time, and never quasi-compactness of $M$.",
+   "uses": [
+    "lem-sfb-index-one-valued-point-smooth-approximation",
+    "lem-sfb-neron-dvr-point-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 3 via Proposition 2, printed p.290; 3.6 Proposition 4, printed p.79"
+   }
+  },
+  {
+   "text": "For $D=R^{\\mathrm{sh}}$ relative to the chosen separable closure $k^s$ of $\\kappa(R)$, fix an algebraic closure $\\Omega$ of $k^s$ and the geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ at the closed point. [lem-exc-affine-strict-local-ring-comparison], applied to $X=\\operatorname{Spec}R$ with the identity affine open, gives an $R$-algebra isomorphism $\\theta:\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}R,\\bar s}\\simeq D$ and identifies the residue field of $D$ with $k^s$; in particular $\\kappa(D)/\\kappa(R)$ is separable algebraic, hence separable in the possibly transcendental sense. Through $\\theta$, [lem-sc-strict-henselization-dvr] makes $D$ a DVR with injective local structural map. The maximal-ideal equality is [lem-sc-ring-strict-henselization-local-maximal-ideal]. Step 2 therefore applies to $A=D$. For any of the base changes in (i), [lem-sbc-section-component-cartesian] applied to the structure map and the identity section identifies its fibrewise identity-component locus with the inverse image of the original one.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-dvr",
+    "lem-sc-ring-strict-henselization-local-maximal-ideal",
+    "def-sc-ring-strict-henselization",
+    "lem-sbc-section-component-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.3 Proposition 10, printed p.50; 10.1 Proposition 3; Stacks more-morphisms.tex Tag 055M, lemma-base-change-connected-along-section"
+   }
+  },
+  {
+   "text": "The component loci just used are open even when the group is not quasi-compact. Around a point of the locus, choose a quasi-compact open $W$ of the smooth separated group containing that point and the entire identity section (the base trait is quasi-compact). Its structure map is quasi-compact and quasi-separated over the Noetherian trait. The identity section factors through $W$. Apply [lem-sbc-smooth-section-component-open]: its section-component locus is open in $W$, contains the chosen point if $W$ contains its whole fibre component, and is contained in the group component locus. Such a $W$ exists: on a geometric fibre [lem-sfb-locally-algebraic-group-identity-component] makes the identity component quasi-compact, and [lem-sbc-section-component-cartesian] says its image covers the original component (every original fibre point lifts: the tensor product of its residue field with an algebraic closure of the base field is a nonzero ring and has a prime); add finitely many affine neighbourhoods covering it. This proves openness. On geometric fibres the identity components are subgroups by the same group lemma; the operations therefore factor through these open loci. Step 3 identifies the loci under base change, and identical open subsets with their restricted structure sheaves give the same open subgroup schemes.",
+   "uses": [
+    "lem-sbc-smooth-section-component-open",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-open-immersion",
+    "lem-sbc-section-component-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "Stacks more-morphisms.tex Tags 055R and 055M; groupoids.tex Tag 0B7R; BLR 10.1 following Definition 1, p.290"
+   }
+  },
+  {
+   "text": "For (ii), fix a uniformizer $\\pi\\in R$. Put $T_n=\\operatorname{Spec}(D^{\\otimes_R n})$ and $U_n=T_n[1/\\pi]$. Since $D$ is a DVR with maximal ideal generated by $\\pi$, $D[1/\\pi]=F$. The mapping property of $M^{\\prime}/D$ is thus the generic-extension property in [lem-sfb-generic-extension-ind-etale-limits]. Its tensor-power clause gives that property for every pullback of $M^{\\prime}$ to $T_2$ or $T_3$. This applies over the entire tensor-product ring, which need not be a DVR; it would be invalid to apply the DVR base-change clause directly to that ring. The generic identification with $V_F$ gives a canonical group isomorphism $\\alpha_\\eta:p_0^*M^{\\prime}|_{U_2}\\simeq p_1^*M^{\\prime}|_{U_2}$.",
+   "uses": [
+    "lem-sfb-generic-extension-ind-etale-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Corollary 3 proof, printed p.159, ind-étale limit expansion"
+   }
+  },
+  {
+   "text": "Use the extension property of the target $p_1^*M^{\\prime}$ with the smooth test scheme $p_0^*M^{\\prime}$ to extend $\\alpha_\\eta$ to $\\alpha$ on $T_2$. Extend its inverse in the other direction. Their composites restrict to the identity; injectivity of restriction makes them identity globally. On $T_3$, both $p_{12}^*\\alpha\\circ p_{01}^*\\alpha$ and $p_{02}^*\\alpha$ restrict to the same canonical generic isomorphism, so they agree. Similarly compare the two maps from $(p_0^*M^{\\prime})^2$ expressing multiplication compatibility, the maps from $T_2$ expressing identity compatibility, and the maps from $p_0^*M^{\\prime}$ expressing inverse compatibility. Each source is smooth and each pair agrees on $U_2$, so injectivity gives all three identities. Thus $\\alpha$ is a group-compatible descent datum, including its cocycle.",
+   "uses": [
+    "lem-sfb-generic-extension-ind-etale-limits",
+    "def-pd-descent-datum",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Corollary 3 proof, printed p.159: construction, cocycle and group compatibility"
+   }
+  },
+  {
+   "text": "First, $M^{\\prime}$ is commutative: the multiplication of $M^{\\prime}$ and its composite with the swap of factors are two maps from the smooth $D$-scheme $M^{\\prime}\\times_DM^{\\prime}$ which agree on the generic fibre because $V_F$ is commutative, so they are equal by injectivity in the mapping property of $M^{\\prime}$. Thus $M^{\\prime}$ is a smooth separated commutative Néron lft-model over the DVR $D$, and by [lem-sfb-neron-lft-finite-set-affine] every finite subset of $M^{\\prime}$ has an affine open neighbourhood. Its generic fibre is $V_F$, of finite type by assumption and base change. Step 6 supplies the group-compatible datum with the prescribed generic datum. These are all the hypotheses of [lem-sfb-strict-henselian-lft-group-datum-effectivity]; apply it to obtain a smooth separated commutative $R$-group $M$ and $M_D\\simeq M^{\\prime}$ with $M_K\\simeq V$. This step uses effectivity for locally finite-type groups, not finite-type effectivity applied to the whole $M^{\\prime}$.",
+   "uses": [
+    "lem-sfb-neron-lft-finite-set-affine",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Theorem 1 with 10.1 Proposition 7 descent, printed pp.157–159,293"
+   }
+  },
+  {
+   "text": "Let $X/R$ be smooth and $f_K:X_K\\to V$. Its pullback to $F$ extends uniquely to $f_D:X_D\\to M^{\\prime}\\simeq M_D$. On the double overlap, the two pullbacks of $f_D$, compared by $\\alpha$, agree after inverting $\\pi$. They are equal by injectivity of the extension property from Step 5, with smooth source $X_{T_2}$. The faithfully flat map $R\\to D$ of [lem-sc-strict-henselization-faithfully-flat] is an affine fpqc cover; its base change $X_D\\to X$ is an fpqc cover by [lem-galois-fpqc-covering-base-change]. Apply [lem-weil-pbc-fpqc-representable-descent] to the compatible maps $X_D\\to M$ to obtain a unique map $X\\to M$. Its generic restriction equals $f_K$ because equality can be tested after the same fpqc base change of $X_K$. If two extensions existed, their pullbacks to $D$ would agree by the mapping property of $M^{\\prime}$, and fpqc uniqueness would make them equal. Hence $M$ has the full Néron mapping property for every smooth $X$, without quasi-compactness.",
+   "uses": [
+    "lem-sfb-generic-extension-ind-etale-limits",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Corollary 3 proof, p.159; Stacks descent.tex Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; more-algebra.tex Tag 07QM"
+   }
+  },
+  {
+   "text": "If $M_1,M_2$ are two models with their generic identifications, their mapping properties extend $1_V$ uniquely to maps $M_1\\to M_2$ and $M_2\\to M_1$. The composites are identities by uniqueness. The map commutes with multiplication by applying the same uniqueness to the smooth source $M_1\\times_R M_1$, and similarly to identity and inverse. Its pullback to $D$ agrees with the prescribed comparison to $M^{\\prime}$ because both induce the same generic map and $M^{\\prime}$ has the mapping property. This proves the asserted uniqueness of the model together with its comparison.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 after Definition 1, p.290; uniqueness from the mapping property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-descent-datum",
+  "def-sc-ring-strict-henselization",
+  "def-weil-open-immersion",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pc-closed-imm-base-change",
+  "lem-sbc-section-component-cartesian",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-section-component-open",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
+  "lem-sc-strict-henselization-dvr",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sfb-essentially-smooth-dvr-index-one",
+  "lem-sfb-generic-extension-ind-etale-limits",
+  "lem-sfb-index-one-valued-point-smooth-approximation",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-neron-dvr-point-criterion",
+  "lem-sfb-neron-lft-finite-set-affine",
+  "lem-sfb-separable-field-extension-transitivity",
+  "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-separably-generated-separable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Assembly of BLR 10.1 Propositions 2–3 and Proposition 7 descent; 3.6 Proposition 4 and 6.5 Corollary 3 proof. Local BLR PDF WANTED; primary scan read. Ind-étale and lft effectivity inputs stated separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Neron locally finite type group model preserved by ramification index one residue separable extensions and descent from strict henselization",
+   "results": "{\"t\": \"2026-10-24T07:49:09Z\", \"tool\": \"leanfinder\", \"query\": \"Neron locally finite type group model preserved by ramification index one residue separable extensions and descent from strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.IsUnramifiedAt\", \"Algebra.instFormallyUnramifiedResidueField_1\"], \"digest\": \"a35a8e988c2e246b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|neron|strictHensel.*[Dd]escent",
+   "results": "{\"t\": \"2026-10-24T07:50:46Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|neron|strictHensel.*[Dd]escent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth separated group schemes satisfying the Neron mapping property descend from a strict henselization",
+   "results": "{\"t\": \"2026-10-24T07:50:47Z\", \"tool\": \"leansearch\", \"query\": \"Smooth separated group schemes satisfying the Neron mapping property descend from a strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.FormallySmooth.of_perfectField\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"Algebra.smoothLocus\"], \"digest\": \"8efd2eed9c3e2a7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T07:50:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated group universal for extension of generic fibre morphisms remains universal under unramified extension of valuation rings",
+   "results": "{\"t\": \"2026-10-24T07:50:48Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth separated group universal for extension of generic fibre morphisms remains universal under unramified extension of valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"Algebra.FormallySmooth.of_restrictScalars\", \"Algebra.Unramified.comp\", \"Algebra.Unramified.formallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.of_comp\"], \"digest\": \"16c1687644ea96df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-translate-hull",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), existing alteration-route trait-extension prerequisite; BLR 10.1 Proposition 3, printed p.290 (PDF p.296), and strict-henselian descent in Proposition 7 proof, printed p.293 (PDF p.299); compare 6.5 Theorem 1 and Corollary 3, printed pp.157–159, whose finite-type descent argument is applied to finite unions of components containing the generic fibre",
+   "via": [
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neron-strict-local-descent-base-change",
+  "worker": "stage1",
+  "summary": "Proved base change by valued-point smooth approximation and the existing DVR point criterion; constructed the strict-local descent datum and its cocycle by the ind-étale generic extension property, applied a separately stated lft group effectivity input, and checked the descended mapping property by fpqc morphism descent. Four smaller statement-only inputs, no Mathlib leaves. Statement and statement dependencies unchanged; residue separability is read in the possibly transcendental BLR sense.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/trait-extension prerequisite via the existing created.item chain. Steps 1–4 provide base-change and neutral-component compatibility; Steps 5–9 provide strict-local descent. The ancestor command returns None; retained the inherited null ancestor and full via chain.",
+  "tool_uses": [
+   {
+    "node": "def-pd-descent-datum",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "def-sc-ring-strict-henselization",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "lem-sbc-section-component-cartesian",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "lem-sbc-smooth-section-component-open",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "lem-sc-ring-strict-henselization-local-maximal-ideal",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme/component/strict-henselization tool used exactly as stated; it supplies a prerequisite, not a different unit proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pd-descent-datum",
+  "def-sc-ring-strict-henselization",
+  "def-weil-open-immersion",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pc-closed-imm-base-change",
+  "lem-sbc-section-component-cartesian",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-section-component-open",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
+  "lem-sc-strict-henselization-dvr",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-9a8a5073d",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-9a8a5073d (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and every cited statement in full. The BLR PDF is not under literature/, so I checked the BLR-derived statements mathematically and on small cases. Stacks 030U/030W were read for the added node; no SGA is cited. Four faults, repaired in fixes/. (1) C5/D1: the first clause of new node lem-sfb-essentially-smooth-dvr-index-one-tower duplicates the existing base node lem-sfb-essentially-smooth-dvr-index-one (Q36, same unit). Step 1 now cites that node, plus lem-weil-pbc-separably-generated-separable and a new unsplit statement-only node lem-sfb-separable-field-extension-transitivity (reviewer-added, created.item = this item). m_R B = m_B is now derived inline, and the tower node is dropped. (2) C4: step 3 applied lem-sc-strict-henselization-dvr and the triples lemma, both stated for other constructions, to the def-sc strict henselization. Step 3 now uses lem-exc-affine-strict-local-ring-comparison: θ: O^sh ≅ D, residue field k^s, and DVR status transported through θ. The triples lemma is removed. (3) E1: step 7 used commutativity of M′, which both cited nodes require, without deriving it. It now proves it: m and m∘swap agree generically, so they are equal by Néron injectivity. (4) B2: the corollary sentence of lem-sfb-generic-extension-ind-etale-limits used R without introducing it; R is now introduced as a local ring, with no change of content. Other checks: steps 2 and 4–6, 8 and 9 are correct (DVR point criterion hypotheses, 055R on a qc open W containing the whole fibre identity component, cocycle and group compatibility on T_2/T_3, fpqc descent via 07QM, 022D and 023Q). The approximation, ind-étale and effectivity statements were tested (R→R̂ with an inseparable fraction field extension, t a unit or nilpotent, Galois orbits of components) and found plausible; none is a duplicate and none restates the item. The statement and base change are unchanged. Batch 5: the closure of lem-sfb-neron-dvr-point-criterion reaches lem-trf-smooth-reduced-dense-pullback, lem-trf-normal-topologically-noetherian-components and lem-pod-separated-finite-type-base-change. These are generic scheme theory, not steps of the trace formula or Poincaré duality proofs, so I accept them. The added cites add nothing to that closure and create no cycle. Tool uses to record: lem-exc-affine-strict-local-ring-comparison (sk-prop-a1-kummer) and lem-weil-pbc-separably-generated-separable (sk-thm-p1).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
+}

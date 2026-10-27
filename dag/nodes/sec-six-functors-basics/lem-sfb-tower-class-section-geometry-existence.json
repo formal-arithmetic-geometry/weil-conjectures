@@ -1,0 +1,200 @@
+{
+ "id": "lem-sfb-tower-class-section-geometry-existence",
+ "kind": "statement",
+ "title": "Choice of geometry with identity direct-image section comparisons",
+ "statement": "For every prime l, finite extension E of Q_l, schemes X,Y and f:X to Y, there exist Base b and Geometry g [def-sp-tower-shriek-data] such that generic.levelPushUnderlying acts identically on every underlying module section at every finite level. This does not construct any coefficient-unit map or assert any equation between such maps.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-coef-semilinear-geometry-base"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes"
+ },
+ "proof": [
+  {
+   "text": "Choose the Base from strictBaseCoordinates, retaining its calculus at both schemes. Use finite_sectionInverseImages to obtain the compatible prescribed finite pullbacks and canonical adjunctions. Define the level push-underlying isomorphism by identity components; its action on every section is reflexivity.",
+   "uses": [
+    "lem-sp-strict-base-coordinates",
+    "lem-sfb-tower-class-finite-section-inverse-images"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite-limit preservation of the set inverse image. Apply ordinaryInverseSystem_exists and ordinaryDirectSystem_exists to the supplied finite data. Their component Hom bijections are natural by levelwise naturality and faithful ordinary evaluation. Build the system adjunction from these bijections and derive its level unit formula from homEquiv_component. Assemble GeometryOrdinary, retaining all prescribed finite fields.",
+   "uses": [
+    "lem-coef-ordinary-inverse-system",
+    "lem-coef-ordinary-direct-system",
+    "lem-coef-semilinear-ordinary-geometric-realization",
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply semilinearGeometryEvaluation and semilinearGeometryTensor to this fixed ordinary realization and the two Base calculi. Assemble Geometry using the canonical derived adjunctions and their representative transpose formula. Derive the pull-transition formula, then its direct-image mate and the projection evaluation identity. Transport finite pull evaluation across the equality of its module functor with the canonical pullback; equality elimination proves that this preserves the generic comparison. Bundle the resulting Geometry in SpTowerShriek.Geometry. Its level push-underlying isomorphism is still identity, proving the claimed HEq by reflexivity.",
+   "uses": [
+    "lem-coef-semilinear-geometric-derived-evaluation",
+    "lem-coef-semilinear-geometric-tensor-localization",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations-transition-existence",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-strict-base-coordinates",
+  "lem-sfb-tower-class-finite-section-inverse-images",
+  "lem-coef-ordinary-inverse-system",
+  "lem-coef-ordinary-direct-system",
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "lem-coef-semilinear-geometric-derived-evaluation",
+  "lem-coef-semilinear-geometric-tensor-localization",
+  "lem-coef-semilinear-geometric-operations-base-existence",
+  "lem-coef-semilinear-geometric-operations-transition-existence",
+  "lem-coef-semilinear-derived-sections",
+  "det-pe-topos-functoriality-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes",
+  "note": "A8 formalized the ordinary adjunction and derived assembly; only the strictly finite algebraic normalization remains as a new node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the constant coefficient unit sheaf is the unit, compatible with coefficient quotient maps",
+   "results": "8 hits, including SheafOfModules.pullbackObjUnitToUnit, instIsIsoPullbackObjUnitToUnitOfFinal, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit and pullbackObjFreeIso.",
+   "date": "2026-10-27",
+   "verdict": "Use the global-section/Yoneda proof of the finite unit isomorphism with the actual project adjunction. No normalized inverse-system geometry or adjacent quotient square is supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image and direct image on sheaves of modules over a compatible inverse system of constant rings, with sectionwise direct image",
+   "results": "8 hits, including SheafOfModules.unitHomEquiv_symm_comp, freeHomEquiv_symm_comp, and PresheafOfModules.limitPresheafOfModules_map.",
+   "date": "2026-10-27",
+   "verdict": "Generic module-section and limit tools; no prescribed geometry or quotient-coherence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackObjUnitToUnit\"",
+   "results": "3 hits: SheafOfModules.pullbackObjUnitToUnit, instIsIsoPullbackObjUnitToUnitOfFinal, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree.",
+   "date": "2026-10-27",
+   "verdict": "Reuse its global-section/Yoneda argument for the actual project adjunction; no normalized geometry or quotient square is stated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv_naturality_right\"",
+   "results": "12 hits, including CategoryTheory.Adjunction.homEquiv_naturality_right in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-27",
+   "verdict": "Use adjunction naturality to compute the finite unit transpose."
+  },
+  {
+   "tool": "grep",
+   "query": "unitToPushforwardObjUnit|homEquiv_naturality_right|ordinaryPullTransition",
+   "results": "25 Mathlib hits. PullbackFree.lean lines 60 and 68 give the unit map and its section formula; Adjunction.Basic.lean line 238 gives right naturality. Local reads of GeometricOrdinaryRealization.lean and SemilinearGeometryDerived.lean give ordinaryPullTransition and restrictionPullback_underlying.",
+   "date": "2026-10-27",
+   "verdict": "Finite unit and adjunction APIs are reused. There is no supplied theorem asserting the prescribed normalized geometry choice or its adjacent quotient square."
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassUnitLevelCoordinates",
+  "date": "2026-10-27",
+  "group": "E7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "clause (2), finite unit and tensor maps and their transposes",
+   "via": [
+    "lem-sfb-tower-class-unit-level-coordinates",
+    "lem-sfb-tower-class-tensor-geometry-existence",
+    "lem-sfb-diagonal-trace-geometric-model-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassSectionGeometryExistence",
+  "file": "lean/Sheaf/Paper/TowerClassSectionGeometryExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.exists_sectionGeometry",
+  "statement": "theorem exists_sectionGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,\n      ∀ (n : ℕ)\n        (N : SemilinearSections.Mod.{u + 1, u, u + 1} (Scheme.ProEt.topology X)\n          (g.generic.coefficients n)) (U : Y.ProEtᵒᵖ)\n        (x : ((SemilinearSections.underlying.{u + 1, u, u + 1}\n          (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n)).obj\n            ((g.generic.levelPush n).obj N)).obj.obj U),\n        HEq (((g.generic.levelPushUnderlying n).hom.app N).hom.app U x) x",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.TowerClassUnitLevelCoordinates",
+  "worker": "E7",
+  "summary": "The first construction step of the parent proof, independent of all unit comparisons.",
+  "blueprint": "Clause (2): choose the actual level operations before deriving.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-strict-system-geometric-realization",
+    "why": "Generic coefficient-system or geometric realization tool used to construct the normalized geometry; it does not replace the diagonal-cycle unit route."
+   },
+   {
+    "node": "lem-coef-ordinary-inverse-system",
+    "why": "Generic coefficient-system or geometric realization tool used to construct the normalized geometry; it does not replace the diagonal-cycle unit route."
+   },
+   {
+    "node": "lem-coef-ordinary-direct-system",
+    "why": "Generic coefficient-system or geometric realization tool used to construct the normalized geometry; it does not replace the diagonal-cycle unit route."
+   },
+   {
+    "node": "lem-coef-semilinear-ordinary-geometric-realization",
+    "why": "Generic coefficient-system or geometric realization tool used to construct the normalized geometry; it does not replace the diagonal-cycle unit route."
+   },
+   {
+    "node": "lem-coef-semilinear-geometric-derived-evaluation",
+    "why": "Generic coefficient-system or geometric realization tool used to construct the normalized geometry; it does not replace the diagonal-cycle unit route."
+   },
+   {
+    "node": "lem-coef-semilinear-geometric-tensor-localization",
+    "why": "Generic coefficient-system or geometric realization tool used to construct the normalized geometry; it does not replace the diagonal-cycle unit route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic coefficient-system or geometric realization tool used to construct the normalized geometry; it does not replace the diagonal-cycle unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261027T050553-L-238877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T103406-L-1065685",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

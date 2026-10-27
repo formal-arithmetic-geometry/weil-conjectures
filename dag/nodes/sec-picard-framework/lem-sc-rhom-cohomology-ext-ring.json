@@ -23,9 +23,51 @@
   "def-weil-abstract-derived-category",
   "def-pc-ext"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Evaluation on the unique object of the bottom-topology one-point site is an exact equivalence with ModuleCat A, with inverse the constant module sheaf. Construct its unit and counit explicitly. Transfer the A-linear category structure along this equivalence; evaluation respects scalar multiplication.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose an injective resolution I of the constant sheaf associated to N. The K-injective comparison for the recorded derived internal Hom identifies RHom(M[0],N[0]) with the sheaf Hom complex from M[0] to I. Evaluation commutes with homology because it is an exact equivalence.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Maps from the rank-one free sheaf are evaluated sections. Compose this equivalence with normalizedHomGlobalCochains to identify evaluated terms of the sheaf Hom complex with ordinary cochains. Check scalar compatibility factorwise using the chosen product projections. The normalized differential formula gives an isomorphism of A-module complexes.",
+   "uses": [
+    "lem-pc-normalized-hom-complex-global-cochains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cocycles-to-Ext map furnished by the injective resolution is A-linear: scalar multiplication commutes with the map from a cocycle to its shifted derived-category morphism. It is surjective, and its kernel consists of coboundaries. Realize this as explicit kernel and cokernel data in ModuleCat A to identify the homology A-module with Ext in the one-point sheaf category.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation induces a linear bijection on Ext, since this exact equivalence preserves injectives. Compose it with the preceding homology identifications to obtain the claimed linear equivalence for every natural degree, including zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-pc-normalized-hom-complex-global-cochains",
+  "lem-weil-pbc-ext-via-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T4",
+  "date": "2026-10-23",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section section-RHom, equation equation-h0-RHom (Tag 0A64); explicit one-point evaluation and scalar-compatible cohomology comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -88,5 +130,36 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rce1706 (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 05:06:50 PM UTC 2026. Following the audit coord/audit-new-nodes.md 16:50, the item is a Mathlib leaf (B8, one-line specialization to R-modules): sed of Mathlib/CategoryTheory/Abelian/Injective/Ext.lean line 40 gives InjectiveResolution.extEquivCohomologyClass : Ext X Y n ≃ CohomologyClass ((singleFunctor C 0).obj X) R.cochainComplex n, line 35 the IsKInjective instance of the resolution; HomComplexCohomology.lean:216 homologyAddEquiv identifies CohomologyClass with H^n of HomComplex; ModuleCat/Ext/HasExt.lean:27 the HasExt instance. The item's LHS H^n(RHom_R(M[0],N[0])) on the one-point site is by def-pur-derived-internal-hom (canonical iso for any K-injective complex quasi-isomorphic to N[0]) the H^n of Hom^bullet(M[0],I^bullet); Ext^n is def-pc-ext (Abelian.Ext via Ext.homAddEquiv). Hypotheses agree (commutative ring R, modules M,N, n>=0). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-rhom-cohomology-ext-ring.json: status mathlib, mathlib_match {extEquivCohomologyClass, Ext.lean, 40, how}, proof/proof_deps/proof_origin emptied, my sed check appended to mathlib_searches, split_report.summary rewritten; the delivered bridge node lem-sc-rhom-one-point-hom-complex dropped with --drop-nodes (subsumed by the definition plus the Mathlib leaf). The delivered split itself was sound (steps cite def-pur-derived-internal-hom, def-sp-injective-resolutions, lem-weil-pbc-ext-via-injective-resolution, def-pc-ext correctly). End Sat Oct 10 05:08:03 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RHomCohomologyExtRing",
+  "file": "lean/Sheaf/Paper/RHomCohomologyExtRing.lean",
+  "declaration": "CategoryTheory.nonempty_rhom_cohomology_ext_ring",
+  "statement": "theorem nonempty_rhom_cohomology_ext_ring\n    (A : Type u) [CommRing A]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj\n        (CochainComplex.onePointRingSheaf A)))]\n    (M N : ModuleCat.{u} A) (n : ℕ) :\n    Nonempty\n      ((SheafOfModules.evaluation\n        ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj\n          (CochainComplex.onePointRingSheaf A))\n        (op (Discrete.mk PUnit.unit))).obj\n        ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u}\n            ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj\n              (CochainComplex.onePointRingSheaf A))) (n : ℤ)).obj\n          ((derivedInternalHom ⊥ (CochainComplex.onePointRingSheaf A)).obj\n            (op ((DerivedCategory.singleFunctor _ 0).obj\n              ⟨(PresheafOfModules.constFunctor\n                  {pt := RingCat.of A, ι := 𝟙 _}).obj M,\n               Presheaf.isSheaf_bot _⟩),\n             (DerivedCategory.singleFunctor _ 0).obj\n              ⟨(PresheafOfModules.constFunctor\n                  {pt := RingCat.of A, ι := 𝟙 _}).obj N,\n               Presheaf.isSheaf_bot _⟩))) ≃ₗ[A]\n        Abelian.Ext M N n)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-23"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261023T131815-L-2154489",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

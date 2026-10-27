@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-normal-line-bundle-power-linearization",
+ "kind": "statement",
+ "title": "Positive powers of line bundles on normal schemes admit connected affine group linearizations",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism]. Let $X$ be a separated finite-type $k$-scheme [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism] such that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $a:G\\times_k X\\to X$ be any action, satisfying identity and associativity as morphism equalities [def-pc-fibre-product], and let $L$ be any invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Then there is an integer $m\\geq1$ such that $L^{\\otimes m}$ [def-pur-sheaf-tensor-product] admits a $G$-linearization. A $G$-linearization of an invertible module $M$ means an isomorphism $\\theta:p_2^*M\\xrightarrow{\\sim}a^*M$ on $G\\times_k X$ of pulled-back modules [def-pc-module-pullback], whose restriction along the identity is $1_M$ and which satisfies $\\theta_{gh,x}=\\theta_{g,hx}\\theta_{h,x}$ as an equality of pulled-back module maps on $G\\times_kG\\times_kX$. These are sheaf-map identities and remain identities under arbitrary base change. Neither quasi-projectivity nor ampleness of $L$ is assumed. The scheme $X$ need not be connected or nonempty.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Supporting input, not asserted in Milne. WANTED: M. Brion, Algebraic group actions on normal varieties, arXiv:1703.09506v3, Lemma 2.9 (smooth case refers to Brion 2015, Theorem 2.14); finite disjoint-union extension supplied by the agent. The linearization and its cocycle are defined explicitly in the statement."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-sfb-equivariant-coherent-gzero",
+  "def-sfb-scheme-groupoid-module"
+ ],
+ "proof": [
+  {
+   "text": "The case $X=\\varnothing$ has the unique isomorphism and identities, with $m=1$; hence assume $X\\ne\\varnothing$. Since $\\operatorname{Spec}k$ is locally Noetherian (its ring has just two ideals), [pqf-lem-locnoeth-lft] makes $X$ locally Noetherian. For a quasi-compact open $V\\subseteq X$, choose a finite affine open cover. Each coordinate ring is Noetherian by [pqf-lem-affine-open-locnoeth], so each affine is a Noetherian space by [lem-sc-affine-noetherian-underlying-space], with finitely many irreducible components by [lem-sc-noetherian-finite-irreducible-components]. The closures in $V$ of these finitely many irreducible subsets cover $V$, so every maximal irreducible closed subset of $V$ is one of their maximal closures. Thus $V$ has finitely many components. Apply [lem-sfb-normal-locally-finite-components]: write $X$ as a disjoint open cover by normal integral schemes $X_i$. Each $X_i$ is clopen and therefore quasi-compact because $X$ is quasi-compact. Cover it by finitely many principal affine opens inside finite-type affine charts of $X$; adjoining the inverse of a principal-open equation preserves finite generation. Thus each $X_i$ is separated and finite type over $k$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sfb-normal-locally-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles; local Noetherian hypotheses checked explicitly."
+   }
+  },
+  {
+   "text": "The identity of $G$ is a $k$-point. By [lem-sbc-connected-rational-point-geometrically-connected], $G_K$ is connected for every field extension $K/k$, and remains connected after any further extension. Smooth maps are flat and locally finitely presented by [lem-pc-smooth-flat]; [lem-sfb-scheme-flat-smooth-point-base-change] therefore makes all projections $G\\times_kT\\to T$ smooth. Apply [lem-sbc-smooth-connected-generic-geometry-core] first over $\\operatorname{Spec}K$ and then over each $X_i$: its fibres are the geometrically connected $G_{\\kappa(t)}$, and the identity section ensures nonemptiness. This proves that every $G_K$ and every $Y_i=G\\times_kX_i$ is integral, and that $Y_i$ is normal. By [lem-sfb-finite-type-composition-base-change] the projections $p_i:Y_i\\to X_i$ and $Y_i\\to\\operatorname{Spec}k$ are finite type. Hence [pqf-lem-locnoeth-lft] gives local Noetherianity of $Y_i$. These products are separated: their diagonals impose the two factor-diagonal equations; on affine charts the corresponding defining surjections remain surjective after tensoring. Thus $G$ and $Y_i$ meet the integral separated finite-type hypotheses of Rosenlicht factorization.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-pc-smooth-flat",
+    "lem-sfb-scheme-flat-smooth-point-base-change",
+    "lem-sbc-smooth-connected-generic-geometry-core",
+    "lem-sfb-finite-type-composition-base-change",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, hypotheses for the product projection; geometry checked using the cited nodes."
+   }
+  },
+  {
+   "text": "Choose $m\\geq1$ from [lem-sfb-affine-group-picard-stable-exponent] and put $M=L^{\\otimes m}$. On $Y_i$ set $D_i=(a|_{Y_i})^*L\\otimes(p_i^*(L|_{X_i}))^\\vee$ and $E_i=D_i^{\\otimes m}$. Here the dual of a locally free rank-one sheaf is formed by the dual local frames, so evaluation identifies $D_i^{\\otimes m}$ with $(a|_{Y_i})^*M\\otimes(p_i^*(M|_{X_i}))^\\vee$. Tensor pullback preserves those frames and their transition functions [def-sc-invertible-module, def-pc-module-pullback, def-pur-sheaf-tensor-product]. If $\\eta_i$ is the generic point of $X_i$ and $K_i=\\kappa(\\eta_i)$, the generic fibre of $p_i$ is $G_{K_i}$. The new Picard-exponent node applied to $D_i|_{G_{K_i}}$ gives $E_i|_{G_{K_i}}\\cong\\mathcal O_{G_{K_i}}$. This uses an arbitrary function field $K_i$, rather than assuming it algebraically closed.",
+   "uses": [
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, hypothesis (5); field-uniform torsion input is the new node (Brion Lemma 2.3 / Proposition 2.5)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-noetherian-generic-line-pullback] to $p_i:Y_i\\to X_i$ and $E_i$. Both schemes are locally Noetherian; $X_i$ is normal integral; $p_i$ is smooth and therefore flat by [lem-pc-smooth-flat]; every fibre $G_{\\kappa(x)}$ is nonempty integral by step 2; $p_i$ is finite type and the generic restriction is trivial by step 3. Obtain an invertible $B_i$ with $p_i^*B_i\\cong E_i$. Pull back along $s_i:x\\mapsto(e,x)$. Since $p_is_i=1$ and $as_i$ is the inclusion of $X_i$, the pullback composition identities [def-pc-module-pullback] give $B_i\\cong s_i^*E_i\\cong\\mathcal O_{X_i}$. Consequently $E_i$ is trivial. Contracting its trivialization with the second line factor gives $\\theta_i:p_i^*(M|_{X_i})\\xrightarrow{\\sim}(a|_{Y_i})^*M$. The disjoint open cover $\\{Y_i\\}$ of $G\\times_kX$ glues these maps and their inverses to an isomorphism $\\theta:p_2^*M\\xrightarrow{\\sim}a^*M$. No assertion that the action preserves $X_i$ is needed here: $a|_{Y_i}$ has target $X$, and $M$ is defined on all of $X$.",
+   "uses": [
+    "lem-sfb-normal-noetherian-generic-line-pullback",
+    "lem-pc-smooth-flat",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, conclusion; identity-section restriction and disjoint-open gluing are written out."
+   }
+  },
+  {
+   "text": "Along $s:x\\mapsto(e,x)$, $s^*\\theta$ is an automorphism of $M$. In a local frame this is multiplication by a unit $b$; changing the frame cancels the frame factor, so the local units glue to $b\\in\\Gamma(X,\\mathcal O_X)^\\times$. Replace $\\theta$ by $\\theta\\circ p_2^*(b^{-1}\\operatorname{id}_M)$. Its restriction to $s$ is now $b b^{-1}\\operatorname{id}_M=\\operatorname{id}_M$. This modification is a global sheaf isomorphism, not a choice on closed-point fibres.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent local-frame normalization, as in Brion (2015), Lemma 2.9 (primary publisher PDF read online; local copy WANTED)."
+   }
+  },
+  {
+   "text": "On $Z=G\\times_kG\\times_kX$, put $r(g,h,x)=(gh,x)$, $t(g,h,x)=(g,hx)$, and $v(g,h,x)=(h,x)$. The action identity identifies the targets of $A=r^*\\theta$ and $B=(t^*\\theta)\\circ(v^*\\theta)$; both map the pulled-back line $M_x$ to $M_{ghx}$. Thus $A^{-1}B$ is an automorphism of one invertible sheaf. The same local-frame calculation as in step 5 yields a global unit $u\\in\\Gamma(Z,\\mathcal O_Z)^\\times$. Restricting to $h=e$ gives $A=B=\\theta_{g,x}$, and restricting to $g=e$ gives $A=B=\\theta_{h,x}$, by the normalization and the unit action identity. Hence $u(g,e,x)=u(e,h,x)=1$ as equalities of regular functions on those subschemes.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent cocycle-defect calculation; compares the actual three pulled-back maps, as in Brion (2015), Lemma 2.9."
+   }
+  },
+  {
+   "text": "Fix $i$. A closed point exists on the nonempty finite-type $X_i$ by [lem-sc-lft-over-field-jacobson-space], and is a $k$-point $x_i$ by [lem-weil-pbc-closed-point-residue-field-base]. Apply [lem-sfb-rosenlicht-product-unit-factorization] to the two nonempty integral separated finite-type schemes $G$ and $Y_i=G\\times_kX_i$, the unit $u|_{G\\times_kY_i}$, and the basepoints $e$ and $(e,x_i)$. Its regular-function identity yields\n$$u(g,h,x)=u(g,e,x_i)\\,u(e,h,x)\\,u(e,e,x_i)^{-1}=1.$$\nAll three factors are $1$ by step 6. Therefore $u=1$ on the disjoint open cover of $Z$ by these products. It follows that $A=B$ globally, which is exactly the required cocycle identity for $\\theta$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-rosenlicht-product-unit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, printed pp.246–247, formula (79); applied to G and G times one normal component."
+   }
+  },
+  {
+   "text": "The normalized isomorphism for $M=L^{\\otimes m}$ satisfies both required identities, so it is the asserted linearization. Applying any scheme base-change pullback functor preserves inverses, compositions and these equalities [def-pc-module-pullback]. Thus the identities remain identities after arbitrary base change, including nonreduced base changes; no pointwise-to-sheaf inference is involved. The construction used no ampleness, quasi-projectivity, or connectedness of $X$.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the sheaf-map conclusion and its arbitrary-base-change clause."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-normal-locally-finite-components",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-smooth-flat",
+  "lem-sfb-scheme-flat-smooth-point-base-change",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-proper-morphism",
+  "lem-sfb-affine-group-picard-stable-exponent",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-normal-noetherian-generic-line-pullback",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-rosenlicht-product-unit-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent assembly from Stacks 0BD7 and 0357 and Milne Proposition 12.48. Brion (2015) Lemma 2.3, Proposition 2.5, and Lemmas 2.9/2.12 were read online as a cross-check; local copy WANTED. Field-uniform Picard exponent isolated as an unsplit supporting node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a normal scheme with an action of a connected affine algebraic group a positive tensor power of each invertible sheaf admits a group linearization",
+   "results": "{\"t\": \"2026-10-24T01:34:34Z\", \"tool\": \"leanfinder\", \"query\": \"On a normal scheme with an action of a connected affine algebraic group a positive tensor power of each invertible sheaf admits a group linearization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.instMonoidalActionTypeLinearization\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"Rep.linearization_μ_hom\", \"Rep.linearization_δ_hom\", \"CommRing.Pic.mapAlgebra_apply\", \"AlgebraicGeometry.Proj.pow_apply\", \"CommRing.Pic.mk_tensor\", \"CommRing.Pic.mul_eq_tensor\"], \"digest\": \"c77a08a1f5828c29\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group free-module linearization, tensor powers, Picard classes, or ordinary scheme sections; none states power linearization of an invertible sheaf for an algebraic-group action."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"lineariz\"",
+   "results": "{\"t\": \"2026-10-24T01:34:34Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, \\\"lineariz\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle rejected the namespace-only identifier; the subsequent quoted-name query was valid and returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "lineariz|Sumihiro|equivariant.*projectiv",
+   "results": "{\"t\": \"2026-10-24T01:34:34Z\", \"tool\": \"grep\", \"query\": \"lineariz|Sumihiro|equivariant.*projectiv\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group free-module linearization, tensor powers, Picard classes, or ordinary scheme sections; none states power linearization of an invertible sheaf for an algebraic-group action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Some positive tensor power of any line bundle on a normal variety is linearizable under a connected affine algebraic group",
+   "results": "{\"t\": \"2026-10-24T01:34:53Z\", \"tool\": \"leansearch\", \"query\": \"Some positive tensor power of any line bundle on a normal variety is linearizable under a connected affine algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorPower.mulEquiv\", \"Rep.linearization\", \"TensorPower.gMul_def\", \"Rep.linearizationOfMulActionIso\", \"Rep.coe_linearization_obj_ρ\", \"LinearEquiv.lTensor_zpow\", \"Rep.linearization_δ_hom\", \"Rep.linearization_obj_ρ\"], \"digest\": \"e5ece1e229f3bb60\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group free-module linearization, tensor powers, Picard classes, or ordinary scheme sections; none states power linearization of an invertible sheaf for an algebraic-group action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"tensorPow\"",
+   "results": "{\"t\": \"2026-10-24T01:34:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Invertible\\\", \\\"tensorPow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group free-module linearization, tensor powers, Picard classes, or ordinary scheme sections; none states power linearization of an invertible sheaf for an algebraic-group action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sumihiro theorem linearization of tensor powers of line bundles under connected linear algebraic group actions",
+   "results": "{\"t\": \"2026-10-24T01:34:56Z\", \"tool\": \"leanfinder\", \"query\": \"Sumihiro theorem linearization of tensor powers of line bundles under connected linear algebraic group actions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.linearization_μ_hom\", \"Rep.linearization_δ_hom\", \"Rep.coinvariantsTensorFreeLEquiv_apply\", \"Rep.instLinearModuleCatObjFunctorCoinvariantsTensor\", \"Rep.coinvariantsTensorFreeLEquiv\", \"Representation.Coinvariants.mk_inv_tmul\", \"Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single\", \"Rep.finsuppToCoinvariantsTensorFree_single\"], \"digest\": \"23551071ca12575f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group free-module linearization, tensor powers, Picard classes, or ordinary scheme sections; none states power linearization of an invertible sheaf for an algebraic-group action."
+  },
+  {
+   "tool": "grep",
+   "query": "lineariz|Sumihiro",
+   "results": "{\"t\": \"2026-10-24T02:03:49Z\", \"tool\": \"grep\", \"query\": \"lineariz|Sumihiro\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a normal variety every line bundle has a positive tensor power linearizable under a smooth connected affine group action",
+   "results": "{\"t\": \"2026-10-24T02:03:50Z\", \"tool\": \"leansearch\", \"query\": \"On a normal variety every line bundle has a positive tensor power linearizable under a smooth connected affine group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.linearization\", \"Rep.linearizationOfMulActionIso\", \"Rep.linearizationTrivialIso\", \"Rep.linearization_obj_ρ\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"Projectivization.instMulAction\", \"ModularGroup.SLOnGLPos\", \"Projectivization.instMulAction.congr_simp\"], \"digest\": \"8caf0b35b3e4dffc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"linearization\"",
+   "results": "{\"t\": \"2026-10-24T02:03:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"linearization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Rep.linearization\", \"Rep.instLaxMonoidalActionTypeLinearization\", \"Rep.instMonoidalActionTypeLinearization\", \"Rep.instOplaxMonoidalActionTypeLinearization\", \"Rep.linearization_obj_V\", \"Rep.linearizationOfMulActionIso\", \"Rep.linearizationTrivialIso\", \"Rep.linearization_obj_ρ\"], \"digest\": \"3bdcb99ddda5dc23\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive tensor power of a line bundle on a normal scheme admits an algebraic group linearization",
+   "results": "{\"t\": \"2026-10-24T02:03:52Z\", \"tool\": \"leanfinder\", \"query\": \"A positive tensor power of a line bundle on a normal scheme admits an algebraic group linearization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pow_apply\", \"Rep.instMonoidalActionTypeLinearization\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"Rep.linearization_μ_hom\", \"CommRing.Pic.mapAlgebra_apply\", \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.Pic.mk_tensor\"], \"digest\": \"6ce5f884acdda645\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-quasiprojective-equivariant-immersion",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections.",
+   "via": [
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-line-bundle-power-linearization",
+  "worker": "stage1",
+  "summary": "Checked the full sheaf-map statement and empty/disconnected cases. Split via a field-uniform Picard exponent, the existing generic-line pullback criterion, identity normalization, and Rosenlicht unit factorization. Only one new statement-only node; no new linearization theorem restating the item. Read and quoted every cited node.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), through the inherited supporting prerequisite chain in blueprint.from.place. This item is not a key unit node. Its nearest imported ancestor remains null as reported by blueprint_refs.py ancestor; the full inherited via chain is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Uses connectedness after arbitrary field extension from the group identity section; this is a general geometric-connectedness tool, and no same-unit node states it."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Uses normal integrality of a smooth nonempty total space over a normal integral base with geometrically connected fibres, for G_K and G times X_i; no same-unit node gives the integral total-space assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sbc-smooth-connected-generic-geometry-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-aa01cec4f",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-aa01cec4f (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-affine-group-picard-stable-exponent and every cited statement in full. The item statement is unchanged from live; the base had no proof and there is no re-split note. Steps 1-8 check against the statements of the cited nodes (0357 components, 04KV connectedness, 02V4 smooth base change, the smooth-connected integral/normal core, 0BD7 generic-line pullback, Milne 12.48 Rosenlicht with formula (79), read in the local PDF), with all hypotheses verified. The normalization by s^*θ and the cocycle-defect argument (u=1 on the g=e and h=e slices, then Rosenlicht with basepoints e and (e,x_i)) are correct. The new node (one n killing Pic(G_K) for all K/k) is true: G_K is split, G ≅ G/R_u × A^d, and Pic is bounded through the Borel sequence; Milne Cor. 18.23 is local and the Brion 2015 source is WANTED. Tested on G_a, G_m and PGL_r. It is not a duplicate of the picard-trivial-cover, character-Picard, Borel-Picard or torus-torsor nodes, and it is not a clause of the item. Example PGL_2 on P^1 with O(1): m=2 is needed. Batch-5: the trf nodes reached are Stacks 01V9 (smooth-at-point fibre criterion) and flat⇒torsion-free over a domain, which is generic algebra outside the trace-formula and Poincaré assumptions, so accepted. tool_uses accepted: 04KV and smooth-generic-geometry-core. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalLineBundlePowerLinearization",
+  "declaration": "AlgebraicGeometry.exists_normal_line_bundle_tensorPow_linearization",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalLineBundlePowerLinearization.lean",
+  "statement": "theorem exists_normal_line_bundle_tensorPow_linearization {k : Type u} [Field k] [IsAlgClosed k] (G X : Over (Spec (.of k))) [GrpObj G] [ModObj G X] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (hX : ∀ x : X.left, IsDomain (X.left.presheaf.stalk x) ∧ IsIntegrallyClosed (X.left.presheaf.stalk x)) (L : X.left.Modules) [L.IsInvertible] : ∃ m : ℕ, 1 ≤ m ∧ ∃ D : ActionGroupoidModel G X, ∃ theta : (Scheme.groupoidModulePullback (source G X)).obj (L.tensorPow m) ≅ (Scheme.groupoidModulePullback (target G X)).obj (L.tensorPow m), Scheme.groupoidModuleUnitLaw (source G X) (target G X) (identityArrow G X) D.laws.source_id D.laws.target_id (L.tensorPow m) theta.symm ∧ Scheme.groupoidModuleCocycleLaw (source G X) (target G X) D.comp D.laws.source_comp D.laws.target_comp (L.tensorPow m) theta.symm",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c613f6cc",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Clause-by-clause match to node: k alg. closed field; G as GrpObj over Spec k with Smooth/ConnectedSpace/IsAffine/LocallyOfFiniteType+QuasiCompact; X separated finite type, stalks IsDomain ∧ IsIntegrallyClosed (recorded inline normal form); arbitrary ModObj action; arbitrary IsInvertible L; ∃ m ≥ 1. theta : tensorPullback(p2) L^m ≅ tensorPullback(a) L^m; read groupoidModuleUnitLaw/CocycleLaw: the laws on theta.symm (later-arrow-first convention) invert to theta_{gh,x}=theta_{g,hx}∘theta_{h,x}. ∃ D : ActionGroupoidModel is harmless: comp is uniquely pinned by group_coordinate + source_comp and exists for every action. Edge cases: X empty/disconnected, m=2 for PGL2 on P1, any characteristic, nonreduced bases. Added stmt_deps def-sfb-equivariant-coherent-gzero and def-sfb-scheme-groupoid-module are landed definition nodes (allowed); item node differs from live only in lean/stmt_deps; lean.statement verbatim; docstrings carry source places, blueprint tag and 8 proof steps; no new definitions, only sorry. H4: def-sfb-modobj-linearization and def-sfb-pgl-linearized-polarization are different notions. Advisory: tensorPow uses upstream monoidal structure (canonically iso to cochainModulesMonoidal; the existential conclusion is invariant); second reading written by the same worker. No compile run (no file changed)."
+ }
+}

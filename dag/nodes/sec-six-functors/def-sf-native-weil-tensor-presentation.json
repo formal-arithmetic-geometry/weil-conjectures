@@ -1,0 +1,115 @@
+{
+ "id": "def-sf-native-weil-tensor-presentation",
+ "kind": "definition",
+ "title": "Native tensor representatives before derived closedness",
+ "statement": "Fix a finite field k0, a prime l different from its characteristic, a k0-scheme X, native closed Hom models M, an ordinary closed structure S, a native derived monoidal structure m, and tensor-forgetting comparison t [def-sf-native-weil-closed-models]. NativeTensorKFlat(T,P) means total(T,P,N) is acyclic for every acyclic N. NativeWeilTensorPresentation consists of an additive underived tensor T, a parameterized adjunction to the specified native ihomBifunctor, evaluation-normalized ordinary forgetting, localization of K-flat complexes, preservation of K-flatness by forgetting, natural one-K-flat derived tensor models, ordinary models normalized for S, and a chain tensor-forgetting isomorphism whose homogeneous summands and localization agree with t. It asserts no existence and contains no native derived adjunction or derived Hom comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, representative formulation of steps 1 and 3; Stacks 06YS, 08J9, 0FPT"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, representative formulation of steps 1 and 3; Stacks 06YS, 08J9, 0FPT; native total-complex formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor product of modules with Frobenius descent data has K-flat representative models and a symmetric monoidal forgetful functor",
+   "results": "Found AlgCat.instBraidedModuleCatForget₂, CategoryTheory.Mod_.forget, Module.Flat.of_flat_tensorProduct, CategoryTheory.Comon.instMonoidalForget, QuadraticModuleCat.instBraidedModuleCatForget₂, CategoryTheory.Mon.instMonoidalForget, ModuleCat.MonoidalCategory.symmetricCategory, FGModuleCat.tensorObj_obj. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal.transport\"",
+   "results": "Found CategoryTheory.Functor.Monoidal.transport, CategoryTheory.Functor.Monoidal.transport_ε, CategoryTheory.Functor.Monoidal.transport_η, CategoryTheory.Functor.Monoidal.transport_ε_assoc, CategoryTheory.Functor.Monoidal.transport_η_assoc, CategoryTheory.Functor.Monoidal.transport_δ, CategoryTheory.Functor.Monoidal.transport_μ, CategoryTheory.Functor.Monoidal.transport_δ_assoc. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective.*(Hom|hom)|[Ee]valuation.*[Cc]ompat|ParametrizedAdjunction",
+   "results": "Found Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilRingedTensorModel",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native tensor model, representative formulation of steps 1 and 3; Stacks 06YS, 08J9, 0FPT Parent records cor-coef-verdier-weil-equivariance; blueprint_refs ancestor returns None.",
+   "via": [
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorPresentation",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.NativeWeilTensorPresentation",
+  "statement": "structure NativeWeilTensorPresentation\n    (M : NativeClosedHomModels k₀ l X)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (m : MonoidalCategory (DerivedCategory (ProEtaleWeilSheaf k₀ l X)))\n    (t : @MonoidalCategory.tensor _ _ m ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor)\n    extends NativeWeilTensorComplexData k₀ l X M S m",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-weil-ringed-tensor-model",
+  "worker": "stage3",
+  "summary": "Native tensor representatives before derived closedness. The Lean declaration and proof steps specify the exact representative interface needed by the parent tensor model.",
+  "blueprint": "Native tensor model, representative formulation of steps 1 and 3; Stacks 06YS, 08J9, 0FPT; serves the internal-Hom/evaluation/transposition paragraph of cor-coef-verdier-weil-equivariance through the parent chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T034614-L-3665275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T034614-L-3665275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

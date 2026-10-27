@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-space-coherent-formal-effectivity",
+ "kind": "statement",
+ "title": "Adic effectiveness of proper-support flat families",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $f:X\\to B$ be a finitely presented morphism of algebraic spaces over $S$ [def-trf-algebraic-space, def-sfb-space-morphism-properties]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. For an $S$-scheme $T$, let $\\mathcal C(T)$ be the groupoid of pairs $(b:T\\to B,M)$, where $M$ is a finitely presented quasi-coherent $\\mathcal O_{X\\times_BT}$-module, flat over $T$, with support proper over $T$. Here finite presentation means etale locally a cokernel of a map between finite rank free modules; flatness is stalkwise flatness over base local rings on etale charts [def-pc-scheme-module-flat-over]; proper support means $M\\simeq i_*N$ for a closed immersion $i:Z\\hookrightarrow X\\times_BT$ with $Z\\to T$ proper and $N$ finite type quasi-coherent [def-sfb-space-proper-quot-functor]. Modules and tensor pullback use [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Arrows over $v:T\\to T_1$ are isomorphisms $v_X^*M_1\\simeq M$ with $b=b_1v$; composition uses canonical pullback composition isomorphisms. Assume $S$ is locally Noetherian, meaning it has an affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring], and $f$ is separated. Let $(A,\\mathfrak m)$ be a complete Noetherian local $S$-algebra, with residue field of finite type over $S$, meaning that $\\operatorname{Spec}(A/\\mathfrak m)\\to S$ is of finite type [def-weil-finite-type-morphism]. Here local means there is a unique maximal ideal $\\mathfrak m$ and complete means $A\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}A/\\mathfrak m^n$. Restriction is an equivalence from $\\mathcal C(\\operatorname{Spec}A)$ to the groupoid of compatible systems $x_n\\in\\mathcal C(\\operatorname{Spec}(A/\\mathfrak m^n))$ with specified pullback isomorphisms for all transitions. In particular each such system is induced by an object over $A$.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08W9 (lemma-coherent-existence), Situation 08KB (situation-coherent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-type-morphism",
+  "def-sfb-formal-diagram-restriction",
+  "def-sfb-space-coherent-moduli-groupoid",
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Write $A_n=A/\\mathfrak m^n$ and let $(b_n,M_n)$ be a formal object, including its specified transition isomorphisms. Its base morphisms satisfy $b_n=b_{n+1}|_{\\operatorname{Spec}A_n}$. By [lem-sfb-space-complete-local-map-effectivity] there is a unique $b:\\operatorname{Spec}A\\to B$ restricting to every $b_n$: $A$ is complete, local and Noetherian, as this lemma requires. Thus all the modules live on the thickenings $Y_n$ of the single space $Y=X\\times_{B,b}\\operatorname{Spec}A$. Use the canonical fibre-product identifications; the given cocycle makes the transition data into a system on these $Y_n$.",
+   "uses": [
+    "lem-sfb-space-complete-local-map-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W9 (lemma-coherent-existence), first paragraph, reduction to a fixed map to B"
+   }
+  },
+  {
+   "text": "The morphism $p:Y\\to\\operatorname{Spec}A$ is separated by [lem-sfb-space-separated-fp-composition], and quasi-compact by [lem-sfb-space-quasicompact-affine-tests]. To verify local finite presentation, take surjective etale scheme charts $V\\to B$ and $U\\to X\\times_BV$. Put $V_A=V\\times_B\\operatorname{Spec}A$. Then $V_A\\to\\operatorname{Spec}A$ and $U\\times_VV_A\\to Y\\times_AV_A$ are surjective etale charts. The map $U\\to V$ is locally finitely presented by [lem-sfb-space-local-properties-chart-test]. On affine pieces its base change is a finitely presented algebra by [lem-weil-pbc-finite-presentation-base-change-composition](1). Thus the base-changed chart map is locally finitely presented, and [lem-sfb-space-local-properties-chart-test] gives the same for $p$. A finite algebra presentation is in particular a finite set of algebra generators, so $p$ is locally of finite type; together with quasi-compactness this is finite type. The identical argument applies to every $Y_n\\to\\operatorname{Spec}A_n$.",
+   "uses": [
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W9 (lemma-coherent-existence), second paragraph, hypotheses on the fixed base change"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-supported-adic-existence] to $Y$, $A$, and $I=\\mathfrak m$. Completeness and Noetherianity are hypotheses on $A$, and separatedness and finite type were verified in step 2. Each $M_n$ is finitely presented quasi-coherent and the first has proper support by the formal-object hypotheses. The theorem gives a finitely presented quasi-coherent module $M$ on $Y$, with support proper over $A$, and compatible isomorphisms $M|_{Y_n}\\simeq M_n$. It applies to all module homomorphisms, not just isomorphisms. We have not yet asserted that $M$ is flat.",
+   "uses": [
+    "lem-sfb-space-supported-adic-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W9 (lemma-coherent-existence), second paragraph, Grothendieck existence"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-adic-flatness-near-closed-fibre], the flat locus $U$ of $M/A$ is open and contains $p^{-1}(\\{\\mathfrak m\\})$: step 2 gives local finite presentation, step 3 gives finite presentation of $M$, and $M|_{Y_n}\\simeq M_n$ is flat over $A_n$ for every $n$. Let $C=|Y|\\setminus U$. By the proper-support convention [def-sfb-space-proper-quot-functor], write $M\\simeq i_*N$ for a closed $i:Z\\hookrightarrow Y$ with $Z\\to\\operatorname{Spec}A$ proper. Outside $|Z|$ this module is zero (restriction of the direct image of a closed immersion there is zero), hence flat. Therefore $C\\subseteq|Z|$. Its inverse image in $|Z|$ is closed, with image in the base equal to $p(C)$. Properness includes universal closedness [def-sfb-space-morphism-properties], so $p(C)$ is closed. A nonempty closed subset $V(J)$ of the spectrum of a local ring contains its maximal ideal, since every proper ideal $J$ lies in $\\mathfrak m$. This contradicts $C\\cap p^{-1}(\\mathfrak m)=\\varnothing$. Thus $C$ is empty, $M$ is flat everywhere, and $(b,M)$ algebraizes the given object with every specified transition.",
+   "uses": [
+    "lem-sfb-space-adic-flatness-near-closed-fibre",
+    "def-sfb-space-proper-quot-functor",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W9 (lemma-coherent-existence), last paragraph, flatness; proper-support globalization made explicit"
+   }
+  },
+  {
+   "text": "Restriction is well-defined by [lem-sfb-space-module-base-change-flat-proper-support], since $p$ is locally of finite type. For full faithfulness let $(b,M)$ and $(b',M')$ be two objects over $A$. If $b\\ne b'$, a formal arrow between their restrictions would imply $b|_{A_n}=b'|_{A_n}$ for every $n$, contradicting injectivity in [lem-sfb-space-complete-local-map-effectivity]; both arrow sets are therefore empty. If $b=b'$, full faithfulness in [lem-sfb-space-supported-adic-existence] lifts each compatible family of isomorphisms $M|_{Y_n}\\simeq M'|_{Y_n}$ to a unique module map $h:M\\to M'$. Lift their inverses to $k:M'\\to M$ by the same theorem. Faithfulness gives $kh=1_M$ and $hk=1_{M'}$, because these equalities hold after every restriction. Hence $h$ is an isomorphism, uniquely lifting the formal arrow. We have proved full faithfulness and essential surjectivity, which give the stated groupoid equivalence.",
+   "uses": [
+    "lem-sfb-space-module-base-change-flat-proper-support",
+    "lem-sfb-space-complete-local-map-effectivity",
+    "lem-sfb-space-supported-adic-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W9 (lemma-coherent-existence), the equivalences in the first two paragraphs, restricted to flat objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-complete-local-map-effectivity",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sfb-space-supported-adic-existence",
+  "lem-sfb-space-adic-flatness-near-closed-fibre",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-module-base-change-flat-proper-support"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08W9, lemma-coherent-existence; the final flatness assertion is expanded using proper support and the local base."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible flat coherent modules with proper support over powers of the maximal ideal of a complete noetherian local ring algebraize on a separated finite presentation algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  (Mₚ : (P : Ideal S) → [P.IsMaximal] → Type u_4) [inst_7 : (P : Ideal S) → [inst : P\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck existence equivalence for flat coherent sheaves with proper support on an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Equivalence.precoherent_isSheaf_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Equivalence\", \"type\": \"(e : C ≌ D) (F : Cᵒᵖ ⥤ A) :\\n  haveI := e.precoherent\\n  IsSheaf (coherentTopology C) F ↔ IsSheaf (coherentTopology D) (e.inverse.op ⋙ F)\", \"doc\": \"For equivalent categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$ satisfies the sheaf condition with respect to the coherent topology on $\\\\mathcal{C}$\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongrPrecoherent\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Equivalence\", \"type\": \"(e : C ≌ D) :\\n  haveI := e.precoherent\\n  Sheaf (coherentTopology C) A ≌ Sheaf (coherentTopology D) A\", \"doc\": \"Given an equivalence $ e : C ≌ D $ between precoherent categories $ C $ and $ D $, this constructs an equivalence between the sheaf categories $ \\\\text{Sh}(C, J_C, \\\\mathcal{A}) $ and $ \\\\text{Sh}(D, J_D\"}\n  {\"name\": \"CategoryTheory.Presheaf.coherentExtensiveEquivalence\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.SheafComparison\", \"type\": \"[Preregular C] [FinitaryExtensive C] [∀ (X : C), Projective X] :\\n  Sheaf (coherentTopology C) A ≌ Sheaf (extensiveTopology C) A\", \"doc\": \"In a preregular finitary extensive category $\\\\mathcal{C}$ where all objects are projective, the category of sheaves with respect to the coherent Grothendieck topology is equivalent to the category of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": Sheaf (grothendieckTopology X) A ≌ TopCat.Sheaf A X\", \"doc\": \"For a scheme $X$ and a category $\\\\mathcal{A}$, this establishes an equivalence between the category of sheaves on the affine Zariski site of $X$ (equipped with the Grothendieck topology induced by the\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology\", \"type\": \"[G.IsCoverDense K] [∀ (X : Dᵒᵖ), HasLimitsOfShape (StructuredArrow X G.op) A] :\\n  Sheaf (G.inducedTopology K) A ≌ Sheaf K A\", \"doc\": \"Given a cover-dense functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $ on $ \\\\mathcal{D} $, and assuming all limit diagrams exist in the structured arrow categori\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_map_val\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] [inst_2 : CategoryTheory.Preregular C]\\n  [inst_3 : CategoryTheory.FinitaryExtensive C] [inst_4 : ∀ (X : C), CategoryTheory.Projective X]\\n  {X Y : CategoryTheory.Sheaf (Categor\", \"doc\": \"In a preregular finitary extensive category $\\\\mathcal{C}$ with all objects projective, the equivalence between coherent and extensive sheaf categories acts as the identity on underlying presheaf morph\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*[Ee]xistence|coherent.*effectiv|Cohstack",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Condensed/Light/Explicit.lean\", \"line\": \"20\", \"text\": \"`Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean` and it says that for any effective epi\"}\n  {\"file\": \"Mathlib/Condensed/Explicit.lean\", \"line\": \"25\", \"text\": \"`Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean` and it says that for any effective epi\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"93\", \"text\": \"  rw [← coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily S]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"113\", \"text\": \"functor `F : C ⥤ D` to a precoherent category, which preserves and reflects effective epimorphic\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/LocallySurjective.lean\", \"line\": \"114\", \"text\": \"    rw [coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily] at h\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology.lean\", \"line\": \"18\", \"text\": \"* `coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily`: a sieve is a covering sieve for the\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology.lean\", \"line\": \"19\", \"text\": \"  coherent topology if and only if it contains a finite effective epimorphic family.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology.lean\", \"line\": \"30\", \"text\": \"For a precoherent category, any sieve that contains an `EffectiveEpiFamily` is a sieve of the\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology.lean\", \"line\": \"34\", \"text\": \"theorem coherentTopology.mem_sieves_of_hasEffectiveEpiFamily (S : Sieve X) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology.lean\", \"line\": \"69\", \"text\": \"    apply coherentTopology.mem_sieves_of_hasEffectiveEpiFamily\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-stack-general",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W9 (lemma-coherent-existence), Situation 08KB (situation-coherent).",
+   "via": [
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-coherent-formal-effectivity",
+  "worker": "stage1",
+  "summary": "Separated the map-to-B effectivity, non-flat proper-support Grothendieck existence and near-closed-fibre flatness criterion; proved the globalization of flatness using proper support and checked full faithfulness on isomorphisms. No statement change and no Lean attachment.",
+  "blueprint": "The inherited branch serves latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), via the stable-moduli/Quot prerequisite chain recorded in blueprint.from. The three new nodes expose the three cited inputs of Tag 08W9 without replacing the unit route. The ancestor tool reports None, matching the existing blueprint.from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic ring finite-presentation base-change lemma used on etale affine charts; it does not replace any unit argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-presentation-base-change-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-98debfab5",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-98debfab5 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and every cited statement in full. Item vs source: Stacks quot.tex 08KB/08W9; the statement is unchanged from base and live, where the item is still unsplit with no reviewed record, so there is no supersession. The five steps follow the 08W9 proof in order. Step 1: 07X8 Case II, i.e. formal-spaces 0AQH, which I checked. Step 2: separatedness, quasi-compactness and local finite presentation by base change, all checked; local finite presentation goes chart-wise through the Mathlib leaf for finitely presented algebras, against the pointwise def-sbc-locally-finite-presentation. Step 3: Grothendieck existence 08BE/08BF with I=m; all its hypotheses hold, and it correctly gives no flatness. Step 4: 08VP plus openness of the flat locus (theorem-openness-flatness); the globalization is written out and correct: the non-flat locus lies in the proper support, its image in Spec A is closed, so if nonempty it contains m, a contradiction. Step 5: full faithfulness, using injectivity on base maps and lifting both an arrow and its inverse. proof_deps equals the union of the uses. New nodes: 0AQH map effectivity (no separatedness on B, correct); 08BE existence with coherent written as finitely presented by lemma-coherent-Noetherian; 08VP, with the source's two typos corrected and reported. Each was tested on small cases, including the k[t], I=(t) example. They are not duplicates of the scheme Grothendieck-existence nodes, of lem-sfb-space-flat-proper-support-inverse-effectivity (0CXB: flat modules, existence only), or of the ring-level 00MK node. None restates a clause of the item, and all are statement-only, unsplit and searched. No SGA citation. The declared tool use of the Mathlib leaf lem-weil-pbc-finite-presentation-base-change-composition is accepted. Batch-5 flags: every flagged citation is a generic definition (def-trf-algebraic-space, the space quasi-coherent and module functors, morphism properties, point topology, the proper-support convention) or a generic permanence or fibre-product lemma that reaches sec-trace-formula only through def-trf-algebraic-space. None is a step of the trace-formula or Poincare-duality proofs, so all are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCoherentFormalEffectivity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherentFormalRestriction_isEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.coherentAdicBase",
+   "AlgebraicGeometry.AlgebraicSpace.coherentAdicInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.coherentAdicTransitionMap",
+   "AlgebraicGeometry.AlgebraicSpace.coherentAdicTransitionMap_inclusion",
+   "AlgebraicGeometry.AlgebraicSpace.coherentAdicTransition",
+   "AlgebraicGeometry.AlgebraicSpace.coherentAdicTransition_laws",
+   "AlgebraicGeometry.AlgebraicSpace.coherentAdicTower",
+   "AlgebraicGeometry.AlgebraicSpace.coherentAdicTowerInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.coherentFormalRestrictionModel_exists",
+   "AlgebraicGeometry.AlgebraicSpace.coherentFormalRestrictionModel",
+   "AlgebraicGeometry.AlgebraicSpace.coherentFormalRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.coherentFormalRestriction_isEquivalence"
+  ],
+  "statement": "theorem coherentFormalRestriction_isEquivalence [IsLocallyNoetherian S] [IsNoetherianRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (f : X ⟶ B) (hfp : ProperQuotFinitePresentation f) (hsep : MapIsSeparated f) (a : Spec (CommRingCat.of A) ⟶ S) (hres : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (IsLocalRing.maximalIdeal A))) ≫ a) ∧ QuasiCompact (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (IsLocalRing.maximalIdeal A))) ≫ a)) : (coherentFormalRestriction f hfp a).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCoherentFormalEffectivity.lean",
+  "note": "Exactly Tag 08W9, using the existing CoherentModuli category. The canonical restriction is characterized by its strongly cartesian arrows, their transition compatibility and naturality, and uniqueness preserving every arrow. All positive levels and all transition isomorphisms are retained by the fibre of a functor-category postcomposition functor. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b66c08cff",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Checked against quot.tex 08KB/08W9. Hypotheses match exactly: f finitely presented (lfp+qc+qs) and separated, S locally Noetherian, A complete Noetherian local with IsAdicComplete m, a: Spec A→S, Spec(A/m)→S lft+qc. Conclusion: IsEquivalence of restriction from the CoherentModuli fibre over Spec A to FormalDiagram over the tower Spec A/m^(n+1) (actual quotient-factor transitions; NatTrans over identity, so specified transition isos and automorphisms kept). Restriction is pinned by FormalRestrictionModel: strongly cartesian arrows over the actual inclusions, transition-compatible and natural, with ∃ model + unique compatible iso, so .choose is canonical. Item statement unchanged; lean.statement verbatim; added stmt_deps used. New def-sfb-formal-diagram-restriction is real data (Fiber of whiskeringRight + structure); the existing FormalSystem defs are Spec Z / Spec R-specialized theorem locals, so no H4. def-sfb-space-coherent-moduli-groupoid is existing:true on the CoherentModuli decls, matches 08KB, no live clash. Only sorry proofs; docstrings with source/blueprint; no pro-etale. No compile (no file changed). Advisories: M1 duplicate decl listing with the coherent-stack-general record + rule-7 import of the downstream module -> move the defs into a module owned by the def node; M2 consolidate with the Artin FormalSystem defs; M3 MapIsProper owner reached only via the proper-quot convention."
+ }
+}

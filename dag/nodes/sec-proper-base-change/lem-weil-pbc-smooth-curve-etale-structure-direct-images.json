@@ -43,77 +43,68 @@
  ],
  "proof": [
   {
-   "text": "Smoothness gives flatness and local finite presentation. Properness gives quasi-compactness and a closed-immersion diagonal, hence quasi-separatedness and finite presentation. Fibres are proper and geometrically reduced. Geometric connectedness and the $H^0$ criterion give the canonical bijection $\\kappa(s)\\to H^0(X_s,\\mathcal O)$. Their dimension is one by hypothesis.",
+   "text": "Smoothness gives flatness, local finite presentation and geometrically reduced fibres. Properness and geometric connectedness survive the relevant base changes. The proper-flat universal global-sections theorem makes the adjunction unit on the structural module invertible. Compose with the adjoint pulled-back-unit isomorphism; evaluate on top sections to obtain bijectivity of the actual structural ring map. Apply this on every etale base change to prove the structural degree-zero etale map is invertible.",
    "uses": [
     "lem-pc-smooth-flat",
-    "def-weil-proper-morphism",
-    "def-weil-pbc-scheme-conventions",
     "sbc-lem-smooth-geometrically-reduced",
     "lem-weil-pbc-proper-fp-permanence",
-    "lem-pc-h0-geom-connected"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0GKA, hypotheses for the perfect-complex argument"
-   }
-  },
-  {
-   "text": "Apply the flat-curve derived-model lemma to $f$. Thus $K=Rf_*\\mathcal O_X[0]$ has $H^0(K)=\\mathcal O_S$ by the structural map, $E=H^1(K)$ is finite locally free and quasi-coherent, locally $K\\cong\\mathcal O_S[0]\\oplus E[-1]$, and every canonical $\\delta_g$ is invertible. Apply the coherent affine-edge lemma with $G=\\mathcal O_X$ and $A=H^0(K)$: it supplies simultaneous linear bijections $e_v:H^1(X_V,\\mathcal O)\\cong\\Gamma(V,v^*E)$ with the required restriction equation.",
-   "uses": [
-    "lem-weil-pbc-flat-curve-derived-structure-model",
-    "lem-weil-pbc-coherent-affine-base-change-edge-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0GKA, local model and compatible base change"
-   }
-  },
-  {
-   "text": "Use the affine-cohomology realization lemma with $q=1$, $G=\\mathcal O_X$ and these $e_v$. Properness gives the required quasi-compact separated morphism. It yields $R^1f_*\\mathcal O_{X,\\mathrm{et}}\\cong E_{\\mathrm{et}}$ with the natural scalar action, simultaneous coefficient lift and normalized raw-class formula. This includes restriction compatibility and linearity on all etale objects.",
-   "uses": [
-    "lem-weil-pbc-affine-cohomology-etale-module-realization",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q8 with the simultaneous coherent comparison; affine restriction and sheafification"
-   }
-  },
-  {
-   "text": "For degree zero, universal proper-flat global sections applies because $f$ is proper flat finitely presented with geometrically reduced connected fibres. For affine etale $V$, it makes $B=\\Gamma(X_V,\\mathcal O)$ free of rank one over $R=\\Gamma(V,\\mathcal O_V)$. Write $B=Re$, $1_B=ce$, $e^2=de$. From $e=1_Be=cde$ follows $cd=1$, so the structural map $r\\mapsto rce$ is bijective. The degree-zero coherent comparison identifies it with the structural etale map, using the same lift. Affine opens cover every etale object; faithful affine restriction detects that this structural map is an isomorphism.",
-   "uses": [
     "lem-sc-proper-flat-global-sections",
-    "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
-    "lem-weil-pbc-affine-etale-site-topos"
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0GKA, (a); etale-cohomology.tex Tag 03P2, degree zero"
+   }
+  },
+  {
+   "text": "The same structural ring-map argument on residue-field fibres gives the constants hypothesis of the flat-curve derived structure model. Apply that model using the dimension-one hypothesis. Its E=H1(Rf_*O_X[0]) is quasi-coherent finite locally free, the H0 unit is invertible and the complex has the required local splitting.",
+   "uses": [
+    "lem-weil-pbc-flat-curve-derived-structure-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0GKA, perfect-complex and fibre argument"
+   }
+  },
+  {
+   "text": "Apply the split-structural-complex affine-edge lemma. It transports the localized-site splitting to the open subscheme, proves invertibility of the pinned tensor base-change composite, and applies the retained coherent affine-edge theorem. Obtain simultaneous affine linear comparisons and their actual restriction equation.",
+   "uses": [
+    "new-curve-split-affine-coherent-edge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0ATM, 01FB, 01F8 and 01F2"
+   }
+  },
+  {
+   "text": "Apply the structural-coordinate normalization of affine etale realization to these comparisons and E. It explicitly handles pullback symmetry, the section-normalized tensor adjunction and the canonical unit-sheaf isomorphism, and transports the scalar formula on actual raw classes. For each etale U and function a, conjugate multiplication on structural functions through localization to construct the required endomorphism. The all-section scalar formula follows from pullback of functions, so the normalized realization gives exactly the stated equality.",
+   "uses": [
+    "new-unit-affine-cohomology-etale-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03P2, degree zero; perfect.tex Tag 0E0L; topologies.tex Tag 04HR"
+    "place": "Tags 03P2 and 03Q8, structural scalars and canonical classes"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-smooth-flat",
-  "def-weil-proper-morphism",
-  "def-weil-pbc-scheme-conventions",
   "sbc-lem-smooth-geometrically-reduced",
   "lem-weil-pbc-proper-fp-permanence",
-  "lem-pc-h0-geom-connected",
-  "lem-weil-pbc-flat-curve-derived-structure-model",
-  "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
-  "lem-weil-pbc-affine-cohomology-etale-module-realization",
   "lem-sc-proper-flat-global-sections",
-  "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
-  "lem-weil-pbc-affine-etale-site-topos"
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-flat-curve-derived-structure-model",
+  "new-curve-split-affine-coherent-edge",
+  "new-unit-affine-cohomology-etale-realization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tag 0GKA perfect-complex/fibre route, retaining the existing coherent affine-edge lemma; Tag 03Q8 affine realization and Tag 03P2 structural degree-zero comparison."
+  "place": "Tag 0GKA model and affine-edge route, with explicit structural degree-zero map and unit-coefficient normalization through Tags 03P2 and 03Q8. No target or unit route changed."
  },
  "mathlib_searches": [
   {
@@ -257,7 +248,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-19ea5698e (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no fixes. Re-split per the 2026-10-21 human note, which was reopened because the landed 6-step proof (2947 chars) had only 1 new node. The item is not dropped and nothing supersedes it: the live and side-live clones still hold the 6-step base. The item statement, stmt_deps and lean record are unchanged. The delivered proof has 4 steps and 1837 chars. Every base argument has a home. Base steps 2-3 (0B91 perfect and base change, flat structure unit, 0E62 degree-zero criterion, Noetherian dim-1 vanishing by 02UZ, 0BCD residue model) are now lem-weil-pbc-flat-curve-derived-structure-model. I checked it against curves.tex l.5018 (0GKA proof); it is true without the nodal hypothesis. Edge cases: empty fibres are excluded by the κ(s)≅H⁰ hypothesis, dimension 0 gives E=0, and the rank is local. Base steps 5-6, degree one (03P2 comparison square and multiplication, 03Q8 presheaf, dense affine subsite, descent, faithful linearity), are now lem-weil-pbc-affine-cohomology-etale-module-realization. It is true for any q, G and E given compatible linear e_v. Base step 4 stays in item step 2 through the landed edge node; its compatibility equation matches node 2's hypothesis exactly. The degree-zero argument (0E0L, B=Re, cd=1, affine-site detection) stays explicit in item step 4. The two new nodes are of comparable size, neither restates the item, and I found no duplicate after searching for 0GKA, E[-1] and 0E62 and checking the sec-abelian-varieties and sbc raw-comparison nodes. Batch-5 finding: the realization node's citation of qcoherent-cohomology-comparison-pullback reaches def-pod-ring-scalar-extension, a general scalar-extension definition and not a Poincaré-duality proof step. The base item already cited that node, so the batch-5 closure does not change; accepted. Advisory: node 2 writes P(V) with L((G_V)_et) and leaves the canonical identification with r^{-1}L(G_et) implicit, as base step 5 already did."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
@@ -283,5 +285,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Module-linearity is expressed on the canonical raw local cohomology classes, with every local scalar endomorphism specified on all coefficient sections by structural pullback. The statement assumes no freely chosen scalar action or comparison map. The extra statement dependencies are already recorded nodes supplying the exact constructions used in this formulation."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261024T020641-L-2636577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,247 @@
+{
+ "id": "lem-trf-iterated-transform-exceptional-support",
+ "kind": "statement",
+ "title": "Absence of sections supported on the total exceptional locus after two transforms",
+ "statement": "Let $S$ be a scheme, $\\mathcal I\\subseteq\\mathcal O_S$ a finite-type quasi-coherent ideal, $b:S_1=\\operatorname{Bl}_{\\mathcal I}(S)\\to S$ its blowup, $\\mathcal J\\subseteq\\mathcal O_{S_1}$ a finite-type quasi-coherent ideal, and $c:S_2=\\operatorname{Bl}_{\\mathcal J}(S_1)\\to S_1$ its blowup [def-pc-scheme], [pqf-def-coherent], [def-nagata-global-blowup]. Write $Z=V(\\mathcal I)$, $Z_1=V(\\mathcal J)$, and $E=b^{-1}Z$. For any morphism $f:X\\to S$ and quasi-coherent $\\mathcal O_X$-module $\\mathcal F$, set $X_i=X\\times_SS_i$, let $f_2:X_2\\to S_2$ be the projection, let $\\mathcal F_1$ be the module strict transform along $b$, and let $\\mathcal F_2$ be the module strict transform of $\\mathcal F_1$ along $c$ [def-pc-fibre-product], [def-trf-module-strict-transform]. Then $\\mathcal F_2$ has no nonzero local sections supported on $f_2^{-1}c^{-1}(|Z_1|\\cup|E|)$: for every open $W\\subseteq X_2$, a section of $\\mathcal F_2(W)$ restricting to zero on $W\\setminus f_2^{-1}c^{-1}(|Z_1|\\cup|E|)$ is zero. Moreover the equality of subsets\n$$c^{-1}(|Z_1|\\cup|E|)=(bc)^{-1}(|Z|\\cup b(|Z_1|))$$\nholds on $S_2$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080I, lemma-strict-transform-composition-blowups, final proof paragraph and its equality of support sets; Tag 080H, lemma-strict-transform-different-centers (2); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-trf-module-strict-transform",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put f₁ = pullback.snd f I.blowupMap, F₁ = moduleStrictTransform f I F, and D = I.comap I.blowupMap. Principalization makes D invertible. The first strict-transform properties give quasi-coherence of F₁ and sectionwise injectivity of its restriction unit away from f₁⁻¹D. Sectionwise injectivity is equivalent to this unit being a monomorphism. The complement open agrees with moduleStrictTransformOpen f I by the support-comap formula.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "lem-trf-strict-transform-sheaf-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, final proof paragraph and its equality of support sets; Tag 080H, lemma-strict-transform-different-centers (2); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor."
+   }
+  },
+  {
+   "text": "Multiplication by the invertible ideal D gives an isomorphism φ : Bl_(JD)(S₁) ≅ Bl_J(S₁) over S₁. Apply the different-centres kernel comparison to f₁, J, D, φ and F₁, using the monomorphism from step 1. This identifies the kernels of restriction of the common ambient module P to the usual centre complement and to the transported product-centre complement. The latter open is exactly (pullback.snd f₁ J.blowupMap ≫ J.blowupMap)⁻¹(J.support.compl ∩ D.support.compl), by the projection equation for the induced fibre-product isomorphism and V(JD)=V(J)∪V(D).",
+   "uses": [
+    "lemma-nagata-blowup-invertible-factor",
+    "lem-trf-strict-transform-different-centers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, final proof paragraph and its equality of support sets; Tag 080H, lemma-strict-transform-different-centers (2); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor."
+   }
+  },
+  {
+   "text": "An equality of kernel subobjects identifies the cokernels of their inclusions. Thus F₂ before fibre-product reassociation is isomorphic to the coimage of restriction of P to the product-centre complement V. In an abelian category the coimage has a monomorphism to j_*j^*P. The restriction adjunction has invertible counit, so its unit on j_*j^*P is invertible. Naturality of the unit then shows its unit on the coimage, and hence on F₂, is mono: its composite with the induced map is the composite of two monomorphisms. This proves saturation without constructing the product-centre strict transform or proving its finite type.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, final proof paragraph and its equality of support sets; Tag 080H, lemma-strict-transform-different-centers (2); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor."
+   }
+  },
+  {
+   "text": "Transport the resulting unit monomorphism along the inverse fibre-product pasting isomorphism a. Tensor pullback along an open immersion is naturally isomorphic to restriction, by uniqueness of left adjoints to pushforward. Restriction carries sectionwise injectivity over V to sectionwise injectivity over a⁻¹V: the image of W∩a⁻¹V is a(W)∩V, and restriction maps commute. The pasting projection identity identifies a⁻¹V with moduleIteratedStrictTransformOpen. Evaluation preserves monomorphisms, giving the asserted implication for every W and section s.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, final proof paragraph and its equality of support sets; Tag 080H, lemma-strict-transform-different-centers (2); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor."
+   }
+  },
+  {
+   "text": "For the set equality, the forward inclusion sends a point of V(J) to its image under b, and a point over V(I) to V(I). Conversely, if b(c(t)) lies in V(I), then c(t) lies in b⁻¹V(I). Otherwise choose z∈V(J) with b(z)=b(c(t)). Both z and c(t) lie over the complementary open of V(I). The restriction of b there is an isomorphism, hence injective on points, so z=c(t). This proves the reverse inclusion.",
+   "uses": [
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, final proof paragraph and its equality of support sets; Tag 080H, lemma-strict-transform-different-centers (2); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-trf-strict-transform-different-centers",
+  "lem-trf-strict-transform-sheaf-kernel",
+  "lemma-nagata-blowup-invertible-factor",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080I, lemma-strict-transform-composition-blowups, final proof paragraph and its equality of support sets; Tag 080H, lemma-strict-transform-different-centers (2); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor. The Lean proof uses the abelian coimage embedding directly after the Cartier-factor kernel equality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The second strict transform of a quasi-coherent module has no local sections supported on the union of both exceptional loci",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform",
+   "results": "0 hits: ; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The second strict transform of a quasi-coherent module has no local sections supported on the union of both exceptional loci",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.IsQuasicoherent.recOn, AlgebraicGeometry.exists_of_res_eq_of_qcqs, SheafOfModules.Presentation.noConfusion, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits: ; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Saturating a sheaf successively along blowup centres removes sections supported on the total exceptional divisor",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, ModuleCat.Tilde.sectionsSubmodule, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; none states this scheme-module assertion. Localization, abstract quotient maps, structure-sheaf sections and scheme flatness do not supply the claimed sheaf comparison or relative-module support assertion in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform",
+   "results": "No hits. None states the iterated module strict-transform support assertion. Structure-sheaf localization and general quasicoherent presentations do not specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated strict transforms of quasi-coherent sheaves have no sections supported on the total exceptional divisor",
+   "results": "Hits: AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, SheafOfModules.IsQuasicoherent.recOn, AlgebraicGeometry.exists_of_res_zero_of_qcqs, SheafOfModules.IsQuasicoherent.casesOn, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, SheafOfModules.Presentation.noConfusion, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit. None states the iterated module strict-transform support assertion. Structure-sheaf localization and general quasicoherent presentations do not specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "No hits. None states the iterated module strict-transform support assertion. Structure-sheaf localization and general quasicoherent presentations do not specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The second strict transform of a quasi-coherent module has no local sections supported on the union of both exceptional loci",
+   "results": "Hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux. None states the iterated module strict-transform support assertion. Structure-sheaf localization and general quasicoherent presentations do not specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Saturating a sheaf successively along blowup centres removes sections supported on the total exceptional divisor",
+   "results": "Hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, ModuleCat.Tilde.sectionsSubmodule, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen. None states the iterated module strict-transform support assertion. Structure-sheaf localization and general quasicoherent presentations do not specialize to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-module-admissible-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "NG"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "via": [
+    "lem-trf-module-admissible-blowup-calculus",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ],
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 all successive-blowup reductions, using remark-successive-blowups and strict-transform permanence. Re-split of lem-trf-module-admissible-blowup-calculus, returned proof steps 5--6 (Cartier-factor removal and support-set equality)."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-iterated-transform-exceptional-support",
+  "worker": "stage1",
+  "group": "Q133",
+  "summary": "Verified Stacks 080I final support argument, 080H(2), 080D and 02OS. Retained the statement and all imported fields. Reused existing Cartier-factor comparison, strict-transform saturation and blowup complement nodes; gave the full pointwise support-set equality. No new nodes are needed. Rechecked the absence of a project attachment and searched Mathlib with two semantic phrasings.",
+  "blueprint": "Realizes the support-vanishing subargument in the existing from.place chain beneath lem-trf-local-term-locality: Stacks 080I final paragraph, its application of 080H(2) with divisor E, and its equality of support sets. The current main-20261015 ancestor does not itself restate this auxiliary algebraic lemma.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "Generic blowup geometry: the exceptional ideal is invertible and defines an effective Cartier divisor; no trace-formula node replaces this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-blowup-principalizes-center"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-9d273f8d4",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-9d273f8d4 (reviewer sub-agent of L); spot-checked: The item is exactly the last paragraph of the Stacks 080I proof (divisors.tex lemma-strict-transform-composition-blowups): 080H applied to F' over S' with Z' and the Cartier divisor b^{-1}Z, plus the support-set identity. The statement is unchanged and not weakened; no hypotheses were added. There are no new nodes. Step 1: principalizes-center makes I·O_{S1} locally generated by a non-zero-divisor, which is the effective Cartier ideal that different-centers needs. sheaf-kernel then gives F1 quasi-coherent with no sections supported on f1^{-1}E. Step 2: JL is finite type, with local generators e·a_i and V(JL)=Z1∪E. invertible-factor identifies the two blowups; every hypothesis of different-centers (080H(2)) is checked, and equal kernels give G≅F2. Step 3: sheaf-kernel for d gives no sections of G supported over V(JL); the S1-isomorphism and associativity of fibre products carry this to f2^{-1}c^{-1}(Z1∪E) for every open W. Step 4 is genuinely elementary and correct: injectivity of b over S∖Z (from blowup-complement) gives s1=z1. Edge cases checked: I or J the unit ideal, J zero (vacuous), I already Cartier (E nonempty but handled), F=0. Duplicate search: iterated-transform-quotient-support is the first half of the 080I proof and strict-transform-composition is the scheme version that cites this item, so neither is a duplicate. The parent module-admissible-blowup-calculus step 3 and strict-transform-composition step 3 use exactly what this item states. No SGA; blueprint from/same_as are correct. Accepted tool_use: thm-nagata-blowup-principalizes-center, a Lean-closed generic blowup fact. The worker recorded it although C8 leaves tool_uses to the maintainer; this is harmless here."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IteratedTransformExceptionalSupport",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleIteratedStrictTransform_no_exceptional_sections",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleIteratedStrictTransform",
+   "AlgebraicGeometry.Scheme.Modules.moduleIteratedStrictTransformOpen",
+   "AlgebraicGeometry.Scheme.Modules.moduleIteratedStrictTransform_no_exceptional_sections"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IteratedTransformExceptionalSupport.lean",
+  "statement": "theorem moduleIteratedStrictTransform_no_exceptional_sections {X S : Scheme.{u}} (f : X ⟶ S) (I : S.IdealSheafData) [I.toModules.IsFiniteType] (J : I.blowup.IdealSheafData) [J.toModules.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] : (∀ (W : (Limits.pullback f (J.blowupMap ≫ I.blowupMap)).Opens) (s : Γ(moduleIteratedStrictTransform f I J F, W)), ((restrictAdjunction (moduleIteratedStrictTransformOpen f I J).ι).unit.app (moduleIteratedStrictTransform f I J F)).app W s = 0 → s = 0) ∧ J.blowupMap ⁻¹' ((J.support : Set I.blowup) ∪ I.blowupMap ⁻¹' (I.support : Set S)) = (J.blowupMap ≫ I.blowupMap) ⁻¹' ((I.support : Set S) ∪ I.blowupMap '' (J.support : Set I.blowup))",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f417b97c",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Read the node, the 5 stmt_deps, the Stacks 080I proof (final paragraph and support identity), the module, the report and the dependency declarations (moduleStrictTransform, moduleStrictTransform_properties 4th conjunct, tensorPullback, Mathlib pullbackLeftPullbackSndIso, restrictAdjunction_unit_app_app). Each clause matches: F2 = the recorded strict transform applied twice, moved to X x_S S2 by tensor pullback along the canonical iso's inverse (right direction); the open is the complement of f2^-1 c^-1(Z1 u E); the no-sections clause covers every open W; the set equality uses plain preimage/image and c>>b = bc, and was checked by hand (b injective off Z). Hypotheses no stronger: finite type only on I and J; F is quasi-coherent; F1's quasi-coherence comes from the named sorried theorem, a Prop with no added hypothesis (H5 allows it). Only the item's lean record changed; the 5 deps are identical to the base; lean.statement is verbatim; imports are statement deps (public) plus proof_dep modules; docstrings, lines <=100, universe bound. Advisory: theorem-owned successiveModuleStrictTransform (comparison-epimorphism) exists; both helpers apply def-trf-module-strict-transform twice, so this is not an H4 duplicate. No compile run (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261026T081106-L-1809770",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

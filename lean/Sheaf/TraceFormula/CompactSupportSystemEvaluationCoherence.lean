@@ -4,12 +4,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.TraceFormula.CompactSupportSystemEvaluationDiagram
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.CoefficientRingedSequenceSite
-import Sheaf.Paper.SemilinearDerivedSections
+import Sheaf.TraceFormula.CompactSupportSystemNormalizedPresentation
+import Sheaf.TraceFormula.CompactSupportCompletedRestrictionTransition
+import Sheaf.TraceFormula.CompactSupportDirectImageRestrictionTransition
 
 /-! # Compact-support system evaluation coherence
 
@@ -24,7 +21,6 @@ supplies this witness and its presentation before any inverse limit is taken.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option warn.sorry false
 set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false
@@ -263,6 +259,52 @@ def CompactSupportSystemEvaluationWitness
     CompactSupportSystemDirectImageCounitCompatibility l E (D := D) }
 
 
+private theorem restriction_mate_transpose
+    {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
+    {L : C ⥤ D} {R : D ⥤ C} {L' : A ⥤ B} {R' : B ⥤ A}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') {G : C ⥤ A} {H : D ⥤ B}
+    (β : TwoSquare R H G R') {M : C} {N : D} (f : M ⟶ R.obj N) :
+    (adj'.homEquiv _ _)
+        (((mateEquiv adj adj').symm β).natTrans.app M ≫
+          H.map ((adj.homEquiv _ _).symm f)) =
+      G.map f ≫ β.natTrans.app N := by
+  have hu : G.map (adj.unit.app M) ≫ β.natTrans.app (L.obj M) =
+      adj'.unit.app (G.obj M) ≫
+        R'.map (((mateEquiv adj adj').symm β).natTrans.app M) :=
+    unit_mateEquiv_symm adj adj' β M
+  rw [adj'.homEquiv_unit, R'.map_comp, ← Category.assoc, ← hu, Category.assoc]
+  have hn := β.natTrans.naturality ((adj.homEquiv _ _).symm f)
+  dsimp only [Functor.comp_map] at hn
+  rw [← hn, ← Category.assoc, ← G.map_comp]
+  change G.map ((adj.homEquiv _ _) ((adj.homEquiv _ _).symm f)) ≫ _ = _
+  rw [Equiv.apply_symm_apply]
+
+private theorem evaluated_tower_square
+    {C D A : Type*} [Category C] [Category D] [Category A]
+    (R : C ⥤ A) (S : D ⥤ A) (Q : D ⥤ C) (q : Q ⋙ R ≅ S)
+    {a b c : C} {a' b' c' : D} {P P' : A}
+    (i : P ≅ R.obj a) (i' : P' ≅ S.obj a')
+    (j : a ≅ b) (j' : a' ≅ b') (k : b ≅ c) (k' : b' ≅ c')
+    (t : P ⟶ P') (v : a ⟶ Q.obj a') (w : b ⟶ Q.obj b')
+    (ht : t ≫ i'.hom = i.hom ≫ R.map v ≫ q.hom.app a')
+    (hv : v ≫ Q.map j'.hom = j.hom ≫ w) :
+    t ≫ i'.hom ≫ S.map j'.hom ≫ S.map k'.hom =
+      (i.hom ≫ R.map j.hom ≫ R.map k.hom) ≫
+        R.map (k.inv ≫ w) ≫ q.hom.app b' ≫ S.map k'.hom := by
+  calc
+    _ = i.hom ≫ R.map v ≫ q.hom.app a' ≫ S.map j'.hom ≫ S.map k'.hom := by
+      rw [← Category.assoc t, ht]
+      simp only [Category.assoc]
+    _ = i.hom ≫ R.map (v ≫ Q.map j'.hom) ≫ q.hom.app b' ≫ S.map k'.hom := by
+      rw [R.map_comp]
+      have hn := q.hom.naturality j'.hom
+      dsimp only [Functor.comp_map] at hn
+      simp only [Category.assoc]
+      rw [← reassoc_of% hn]
+    _ = i.hom ≫ R.map (j.hom ≫ w) ≫ q.hom.app b' ≫ S.map k'.hom := by rw [hv]
+    _ = _ := by
+      simp only [Functor.map_comp, Category.assoc, Iso.map_hom_inv_id_assoc]
+
 /-- Coherent evaluation of the actual strict compact-support system before any limit.
 Index `n : ℕ` denotes positive exponent `n+1`. The theorem supplies the canonical
 presentation and its natural level isomorphisms, the equation for every actual tower
@@ -307,6 +349,43 @@ theorem compactSupportSystemEvaluationCoherence
     [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))] :
     ∃ D : CompactSupportSystemEvaluationData l E X Z Y j p,
       Nonempty (CompactSupportSystemEvaluationWitness l E (D := D)) := by
-  sorry
+  obtain ⟨D, hcoef, hcoeff, hopen, hj, hp, hpn, hju, hjc, hpu, hpc⟩ :=
+    compactSupportSystemNormalizedPresentation l E (j := j) (p := p)
+  let := D
+  refine ⟨D, ⟨⟨fun n ↦ compactSupportSystemEvaluationIso l E (D := D) n,
+    hcoef, hcoeff, hopen, hj, hp, hpn, fun _ ↦ rfl, ?_, hju, hjc, hpu, hpc⟩⟩⟩
+  intro m n h M
+  let N := (compactSupportCanonicalJSystem l E j D.operations.instances.jOperations).obj M
+  let P := (integralComparisonSequenceDirectImage l E p).rightDerivedFunctor.obj N
+  have he := compactSupportCompletedRestrictionTransition l E Y h P
+  have hd := compactSupportDirectImageRestrictionTransition l E hcoef hcoeff hp hpn h N
+  have hm := restriction_mate_transpose (D.operations.scalarZ h) (D.operations.scalarY h)
+    (TwoSquare.mk _ _ _ _ (D.operations.derivedCoefficientComparison h).hom)
+    ((coefficientSequenceDerivedTransition l E Z h).app N)
+  have ht :
+      (coefficientSequenceDerivedTransition l E Y h).app P ≫
+        (normalizedDVRRes l E Y h).map ((D.pRightEvaluation n).hom.app N) =
+      (D.pRightEvaluation m).hom.app N ≫
+        ((D.operations.scalarY h).homEquiv _ _)
+          (compactSupportSystemExtensionTransition l E (D := D) h M) := by
+    rw [hd]
+    exact congrArg (fun f ↦ (D.pRightEvaluation m).hom.app N ≫ f) hm.symm
+  have hs := evaluated_tower_square
+    (coefficientFiniteDerivedRestriction l E Y m)
+    (coefficientFiniteDerivedRestriction l E Y n) (normalizedDVRRes l E Y h)
+    (compactSupportSystemRestrictionComp l E Y h)
+    ((coefficientRestrictedEvaluationIso l E Y m).app P)
+    ((coefficientRestrictedEvaluationIso l E Y n).app P)
+    ((D.pRightEvaluation m).app N) ((D.pRightEvaluation n).app N)
+    ((compactSupportLevelDirectImage l E p m).rightDerivedFunctor.mapIso
+      ((D.jLeftEvaluation m).app M))
+    ((compactSupportLevelDirectImage l E p n).rightDerivedFunctor.mapIso
+      ((D.jLeftEvaluation n).app M))
+    ((compactSupportConstantTowerTransition l E Y h).app
+      ((coefficientSequenceDerivedRestriction l E Y).obj P))
+    ((coefficientSequenceDerivedTransition l E Y h).app P)
+    (((D.operations.scalarY h).homEquiv _ _)
+      (compactSupportSystemExtensionTransition l E (D := D) h M)) he ht
+  exact hs
 
 end WeilConjectures

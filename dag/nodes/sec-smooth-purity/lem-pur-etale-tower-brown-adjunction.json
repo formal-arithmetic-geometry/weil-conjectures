@@ -1,0 +1,311 @@
+{
+ "id": "lem-pur-etale-tower-brown-adjunction",
+ "kind": "statement",
+ "title": "Brown adjunction for ordinary etale compact-support towers",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p$, and a $k$-morphism $f:X\\to Y$ between separated finite-type $k$-schemes [def-weil-pbc-scheme-conventions]. Fix a finite extension $E/\\mathbf Q_\\ell$, valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Choose a compactification $c=(X\\xrightarrow{j}\\overline X\\xrightarrow{g}Y)$, with $j$ open and $g$ proper [def-weil-compactifications-refinements].\n\nFor $T=X,\\overline X,Y$, let $\\mathsf S_T^{\\mathrm{et}}$ and $\\mathsf S_T^{\\mathrm{proet}}$ be the abelian categories of strict systems of $(A_n)_T$-module sheaves on the indicated small sites, with semilinear quotient transitions and componentwise exactness; use their ordinary unbounded derived categories and exact evaluations $e_n$ [lem-pur-coefficient-system-derived-comparison]. Put $F^{\\mathrm{et}}=Rg_{*,\\bullet}^{\\mathrm{et}}j_{!,\\bullet}^{\\mathrm{et}}$ and $F_n^{\\mathrm{et}}=Rg_{*,n}^{\\mathrm{et}}j_{!,n}^{\\mathrm{et}}$. Then $\\mathsf S_T^{\\mathrm{et}}$ is Grothendieck abelian; coproducts of derived systems are represented by termwise sums, and the evaluations preserve coproducts and jointly detect isomorphisms. The canonical comparisons $e_nF^{\\mathrm{et}}\\cong F_n^{\\mathrm{et}}e_n$ hold on the whole unbounded derived category and respect the quotient transitions. The functor $F^{\\mathrm{et}}$ is exact, $R$-linear and preserves arbitrary small coproducts. It consequently has an ordinary exact Brown right adjoint $G^{\\mathrm{et}}$, with actual unit and counit in the derived categories of systems [lem-grothendieck-derived-brown-right-adjoint]. Give $G^{\\mathrm{et}}$ the scalar action obtained by transposing scalar multiplication through $F^{\\mathrm{et}}$; then its adjunction bijections are $R$-linear. This assertion is on ordinary etale tower categories and does not assert an unbounded pro-etale exceptional adjoint.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 0F5Y, proposition-brown, with the agent-formulated application to ordinary etale strict coefficient towers; returned item proof Step 3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "def-per-strict-etale-system-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "The valuation-ring theorem gives that the given generator t of the coefficient maximal ideal is nonzero in the domain R, so multiplication by t is injective. The completeness proof coefficientIntegers_complete in AdicLimitFiniteModules identifies the valuation-ring topology with the maximal-ideal adic topology. Rewrite by the stated generator equality to get t-adic completeness. The residue field is finite by the DVR theorem, and Ideal.finite_quotient_pow gives finiteness of every positive quotient R/(t^(n+1)).",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coherent compact-support construction with O=R and this t. Retain its actual strict-system compact-support functor, derived evaluations, open restriction comparison, inverse-image mate equation and open transition equation. These data concern only the geometric construction and do not include a Brown adjoint, scalar linearity or coproduct preservation.",
+   "uses": [
+    "lem-pur-etale-compact-support-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each of X, Z and Y use the explicit equivalence from strict coefficient systems to strict systems over the quotient-ring sheaves. Transport the strict-system Grothendieck assertion and ordinary coproducts. The derived coproduct theorem proves that Q preserves the sheaf-universe coproducts. Exact evaluation preserves them termwise and hence on derived categories; compare to the package evaluation by its localization factorization. Joint detection follows from the coefficient evaluation comparison proved by exact cohomology and cones. Install the recorded standard HasDerivedCategory instances explicitly, since alternative equivalent localization models need not be definitionally equal.",
+   "uses": [
+    "lem-pur-system-grothendieck",
+    "lem-pur-system-coproducts",
+    "lem-pur-exact-derived-coproducts",
+    "lem-pur-ringed-site-grothendieck-coefficient-universe",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both ordinary inverse-image system functors are additive and exact. Identify their recorded unbounded derived inverse images with the exact mapDerivedCategory lifts via their representative factorization and localization uniqueness (the private exactDerivedIso construction). Give these lifts their standard shift and triangulated structures and transport them across this isomorphism. The open left adjoint and proper right adjoint then inherit additive, shift-compatible triangulated structures from their exact adjoints. Their composite is the required exact compact-support functor. This does not need a separate right-derived-triangulated-functor theorem.",
+   "uses": [
+    "lem-pur-exact-derived-adjunction-bounds",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The target Y is locally Noetherian and quasi-compact because it is finite type over Spec of a field. Properness of g makes Z locally Noetherian and quasi-compact as well. For each finite quotient coefficient ring, transport the proper direct-image coproduct theorem to the normalized ringed-site derived level. Open extension preserves coproducts because it is a left adjoint. Thus the level compact-support composites preserve coproducts. The evaluation comparisons give preservation after each evaluation of the system functor. Use joint reflection of isomorphisms to jointly reflect the colimit cocone; its images are colimit cocones because the level composites and evaluations preserve coproducts. This includes empty coproducts.",
+   "uses": [
+    "lem-pur-etale-coefficient-proper-coproducts",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the proper direct-image transition equation with the open transition equation. First distribute restriction over the composite evaluation map. Rewrite the proper transition equation, then move the open evaluation through the restricted proper direct-image comparison by its naturality. Apply the proper-level functor to the open transition equation. Functoriality and associativity give exactly the required compact-support transition equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Brown representability is stated for a Grothendieck derived category with Hom universe equal to the sheaf universe; our standard derived models live in a larger universe. Choose the Grothendieck-sized derived localizations and use exact identity functors to induce equivalences between the small and the recorded standard localizations. Conjugate compact support by these equivalences. Coproduct preservation and triangulatedness pass through the equivalences, so grothendieckDerived_hasRightAdjoint applies. Cancel the equivalences using isLeftAdjoint_comp_iff_left and isLeftAdjoint_comp_iff_right to obtain an actual adjunction on the original recorded derived categories.",
+   "uses": [
+    "lem-grothendieck-derived-brown-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the actual right adjoint and adjunction from IsLeftAdjoint. Transfer additivity, the canonical shift comparison and triangulatedness from compact support to this right adjoint by adjunction. Retain the supplied normalized coefficient scalar actions and compact-support preservation equation.",
+   "uses": [
+    "lem-pur-etale-compact-support-scalar-action",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For central scalar natural transformations s and t with F(s_K)=t_(FK), homEquiv naturality in its left input gives Phi(t_(FK) followed by a)=s_K followed by Phi(a). Applying this to the counit and using Phi(counit)=identity gives the required scalarTranspose equation. Naturality of the counit and centrality of t, followed by injectivity of the inverse homEquiv, gives G(t_L)=s_(GL). Finally homAddEquiv_add supplies additivity of each homEquiv. Assemble these facts and the preceding constructions into EtaleTowerBrownAdjunction without changing any existing statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-coefficient-proper-coproducts",
+  "lem-pur-etale-compact-support-construction",
+  "lem-pur-etale-compact-support-scalar-action",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-pur-exact-derived-coproducts",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "lem-pur-system-coproducts",
+  "lem-pur-system-grothendieck",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 0F5Y proposition-brown, combined with Zheng Construction 4.1; E3 formal proof uses the existing exact-adjoint route, explicit localization-size equivalences and three separate geometric interface lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact support on the ordinary derived category of etale varying coefficient towers preserves coproducts and has a linear Brown right adjoint",
+   "results": "[{\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}, {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}, {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}, {\"name\": \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R],\\n  (Condensed.profiniteSolid R).IsRightKanExtension (Condensed.profiniteSolidCounit R)\", \"doc\": \"The profinite solid module functor from profinite spaces to condensed $ R $-modules is defined as the right Kan extension of the embedding functor from finite types to profinite spaces along the free \"}, {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}, {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}, {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}, {\"name\": \"LightCondensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondensed.free R ⊣ LightCondensed.forget R\", \"doc\": \"The adjunction between the free light condensed $ R $-module functor (constructed by applying the free module functor and sheafifying with respect to the coherent Grothendieck topology on light profin\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: sheaf pushforward adjunctions and evaluation adjunctions do not construct the unbounded compact-support Brown adjoint of varying coefficient systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image followed by open extension on inverse systems of torsion sheaves admits a right adjoint by Brown representability",
+   "results": "[{\"name\": \"TopCat.Sheaf.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"∀ {X Y : TopCat} (f : X ⟶ Y) (A : Type u_1) [inst : CategoryTheory.Category.{w, u_1} A] {FA : A → A → Type u_2}\\n  {CA : A → Type w} [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)]\\n  [inst_2 : CategoryTheory.ConcreteCategory A FA] [CategoryTheory.Limits.HasColimits A]\\n  [CategoryTheory.Limits.H\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a topological space $X$, the sheaves on $X$ with values in $\\\\mathcal{C}$ form a category. In this category: (1) objects are sheaves on $X$ valued in $\\\\mathcal{C}$; (\"}, {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}, {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}, {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"module\": \"Mathlib/CategoryTheory/Sites/Pullback\", \"type\": \"∀ {C : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} C] {D : Type u₃} [inst_1 : CategoryTheory.Category.{v₃, u₃} D]\\n  (G : CategoryTheory.Functor C D) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v₁, u₁} A]\\n  (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopolog\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the induced sheaf pushforward functor $ F_* $ is a right adjoint, provided th\"}, {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}, {\"name\": \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"∀ {X Y : TopCat} (f : X ⟶ Y) (A : Type u_1) [inst : CategoryTheory.Category.{w, u_1} A] {FA : A → A → Type u_2}\\n  {CA : A → Type w} [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)]\\n  [inst_2 : CategoryTheory.ConcreteCategory A FA] [inst_3 : CategoryTheory.Limits.HasColimits A]\\n  [inst_4 : Categ\", \"doc\": \"For a continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ is a left adjoint to the sheaf pushforward functor $ f_* $, establishing an adjunction relationship be\"}, {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is an adjunction between the continuous sheaf pushforward functor $ G_*\"}, {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: sheaf pushforward adjunctions and evaluation adjunctions do not construct the unbounded compact-support Brown adjoint of varying coefficient systems."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftAdjoint\", \"DerivedCategory\"",
+   "results": "[]",
+   "date": "2026-10-22",
+   "verdict": "No match: sheaf pushforward adjunctions and evaluation adjunctions do not construct the unbounded compact-support Brown adjoint of varying coefficient systems."
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|brown|preserv.*coproduct",
+   "results": "[{\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"244\", \"text\": \"  have := PreservesFiniteCoproducts.of_preserves_binary_and_initial P.ι\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"line\": \"130\", \"text\": \"/-- A functor between preadditive categories which preserves cokernels preserves finite coproducts.\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"line\": \"145\", \"text\": \"lemma preservesCoproduct_of_preservesCokernels\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"line\": \"154\", \"text\": \"attribute [local instance] preservesCoproduct_of_preservesCokernels\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"line\": \"156\", \"text\": \"/-- A cokernel-preserving functor between preadditive categories preserves binary coproducts. -/\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"line\": \"157\", \"text\": \"lemma preservesBinaryCoproducts_of_preservesCokernels\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean\", \"line\": \"213\", \"text\": \"instance (priority := 100) preservesFiniteCoproductsOfAdditive [Additive F] :\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean\", \"line\": \"214\", \"text\": \"    PreservesFiniteCoproducts F where\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean\", \"line\": \"215\", \"text\": \"  preserves _ := preservesCoproductsOfShape_of_preservesBiproductsOfShape F\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean\", \"line\": \"322\", \"text\": \"attribute [local instance] preservesBinaryBiproducts_of_preservesBinaryCoproducts\"}, {\"file\": \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"line\": \"181\", \"text\": \"`[∀ (X : C), PreservesFiniteCoproducts ((curriedTensor C).obj X)]` and\"}, {\"file\": \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"line\": \"182\", \"text\": \"`[∀ (X : C), PreservesFiniteCoproducts ((curriedTensor C).flip.obj X)]`.\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"47\", \"text\": \"  the corresponding product if and only if it preserves the corresponding coproduct.\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"959\", \"text\": \"preserves finite coproducts. -/\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"960\", \"text\": \"lemma preservesCoproduct_of_preservesBiproduct {f : J → C} [PreservesBiproduct f F] :\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"971\", \"text\": \"attribute [local instance] preservesCoproduct_of_preservesBiproduct\"}, {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"974\", \"text\": \"preserves finite coproducts. -/\"}, {\"file\": \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"line\": \"21\", \"text\": \"preservation of certain coproducts by the tensor products in `C`, we\"}, {\"file\": \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"line\": \"623\", \"text\": \"`[∀ (X : C), PreservesFiniteCoproducts ((curriedTensor C).obj X)]` and\"}, {\"file\": \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"line\": \"624\", \"text\": \"`[∀ (X : C), PreservesFiniteCoproducts ((curriedTensor C).flip.obj X)]`.\"}, {\"file\": \"Mathlib/CategoryTheory/Extensive.lean\", \"line\": \"67\", \"text\": \"A functor preserves pullback of inclusions if it preserves all pullbacks along coproduct injections.\"}, {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"21\", \"text\": \"preserves binary coproducts. This means that, for all objects `X`, `Y`, and `Z` in `C`,\"}, {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"26\", \"text\": \"preserves binary coproducts. This means that, for all objects `X`, `Y`, and `Z` in `C`,\"}, {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"71\", \"text\": \"if the left tensor product functor preserves binary coproducts. -/\"}, {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"74\", \"text\": \"  preservesBinaryCoproducts_tensorLeft (X : C) :\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: sheaf pushforward adjunctions and evaluation adjunctions do not construct the unbounded compact-support Brown adjoint of varying coefficient systems."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support on the ordinary derived category of etale varying coefficient towers preserves coproducts and has a linear Brown right adjoint",
+   "results": "[{\"name\": \"CategoryTheory.Limits.preservesFiniteCoproducts_rightOp\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Opposites\", \"type\": \"(F : Cᵒᵖ ⥤ D) [PreservesFiniteProducts F] : PreservesFiniteCoproducts F.rightOp\", \"doc\": \"If a functor $ F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D} $ preserves finite products, then its right opposite functor $ F^{\\\\text{rightOp}} : \\\\mathcal{C} \\\\to \\\\mathcal{D}^{\\\\text{op}} $ preserves finit\"}, {\"name\": \"CategoryTheory.evaluationAdjunctionRight\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : evaluationLeftAdjoint D c ⊣ (evaluation _ _).obj c\", \"doc\": \"For a fixed object $c$ in category $\\\\mathcal{C}$, if category $\\\\mathcal{D}$ admits coproducts indexed by every hom-set $\\\\mathrm{Hom}_{\\\\mathcal{C}}(c, t)$ for objects $t \\\\in \\\\mathcal{C}$, then the eval\"}, {\"name\": \"instIsRightAdjointSheafSkyscraperSheafFunctorOfHasColimits\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \"[HasColimits C] : (skyscraperSheafFunctor p₀ : C ⥤ Sheaf C X).IsRightAdjoint\", \"doc\": \"Given a category $\\\\mathcal{C}$ with all colimits and a topological space $X$, the skyscraper sheaf functor at a fixed point $p_0 \\\\in X$ is a right adjoint functor in the category of sheaves on $X$ wit\"}, {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \"[F.Linear R] : F.mapDerivedCategory.Linear R\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}, {\"name\": \"DerivedCategory.instLinear\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Linear\", \"type\": \": Linear R (DerivedCategory C)\", \"doc\": \"For any abelian category $\\\\mathcal{C}$ and semiring $R$, its derived category inherits a canonical $R$-linear structure. This means that for any two objects in the derived category, the set of morphis\"}, {\"name\": \"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \": (sheafToPresheaf J D).IsRightAdjoint\", \"doc\": \"The inclusion functor from sheaves to presheaves is a right adjoint.\"}, {\"name\": \"CompHausLike.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] : functor.{u, w} P hs ⊣ (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩\", \"doc\": \"There is an adjunction between the functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces and the sections functor evaluated at the terminal object (the unit ty\"}, {\"name\": \"CategoryTheory.comonadicRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \"(L : C ⥤ D) [ComonadicLeftAdjoint L] : D ⥤ C\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and a functor $L: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that is a comonadic left adjoint, this constructs the corresponding right adjoint functor $R: \\\\mathcal{\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: sheaf pushforward adjunctions and evaluation adjunctions do not construct the unbounded compact-support Brown adjoint of varying coefficient systems."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftAdjoint\", \"DerivedCategory\"",
+   "results": "[]",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the etale compact-support tower Brown adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|brown|derivedSystemEvaluation",
+   "results": "[\"Mathlib/NumberTheory/SelbergSieve.lean\", \"Mathlib/NumberTheory/SelbergSieve.lean\", \"Mathlib/NumberTheory/Harmonic/Int.lean\", \"Mathlib/NumberTheory/Harmonic/Defs.lean\", \"Mathlib/Dynamics/FixedPoints/Support.lean\", \"Mathlib/Dynamics/FixedPoints/Support.lean\", \"Mathlib/NumberTheory/ArithmeticFunction/Liouville.lean\", \"Mathlib/NumberTheory/ArithmeticFunction/Liouville.lean\"]",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the etale compact-support tower Brown adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support on ordinary derived etale coefficient towers has a right adjoint",
+   "results": "[\"instIsRightAdjointSheafSkyscraperSheafFunctorOfHasColimits\", \"instIsRightAdjointPresheafSkyscraperPresheafFunctorOfHasColimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"CondensedMod.LocallyConstant.adjunction\", \"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"CategoryTheory.Adjunction.ofIsRightAdjoint\"]",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the etale compact-support tower Brown adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support on ordinary derived etale coefficient towers preserves coproducts and has a Brown right adjoint",
+   "results": "[\"CondensedSet.compactlyGeneratedAdjunction\", \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"CondensedMod.LocallyConstant.adjunction\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"Condensed.profiniteSolid\", \"Condensed.profiniteSolidCounit\", \"Condensed.profiniteSolidification\", \"Condensed.freeForgetAdjunction\"]",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the etale compact-support tower Brown adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "brown|BrownRepresentability|preservesCoproducts.*rightDerived",
+   "results": "[\"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean\"]",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the etale compact-support tower Brown adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability right adjoint of coproduct preserving exact functor from Grothendieck derived category",
+   "results": "[\"CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.IsGrothendieckAbelian.tensorObj\", \"CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint\"]",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the etale compact-support tower Brown adjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-condensed-exceptional-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Steps 2–3 and thm-pur-rational-and-qbar-purity proof Steps 1–2: the ordinary etale Brown tower adjunction used by the condensed exceptional reconstruction comparison.",
+   "via": [
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-tower-brown-adjunction",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Nine-step proof reuses existing system Grothendieck, coproduct, unbounded evaluation, proper etale coproduct and Brown nodes. Checks coefficient completeness, exactness, transition normalization and scalar-linearity by actual adjunction formulas. No new nodes.",
+  "blueprint": "Current main-20261015 sk-thm-purity-transport Steps 2–3 and thm-pur-rational-and-qbar-purity Steps 1–2; auxiliary ordinary etale tower adjunction below condensed reconstruction, with no smooth-purity or ambient pro-etale adjoint claim.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-proper-coproducts",
+    "why": "Generic Proper direct image preserves arbitrary coproducts: used exactly as quoted in citations.json to construct the ordinary etale system adjunction; the transport unit has no separate general-purpose result of this kind."
+   },
+   {
+    "node": "lem-grothendieck-derived-brown-right-adjoint",
+    "why": "Generic Grothendieck derived Brown right adjoint: used exactly as quoted in citations.json to construct the ordinary etale system adjunction; the transport unit has no separate general-purpose result of this kind."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic Derived direct image and evaluation of coefficient systems: used exactly as quoted in citations.json to construct the ordinary etale system adjunction; the transport unit has no separate general-purpose result of this kind."
+   },
+   {
+    "node": "lem-pur-exact-derived-coproducts",
+    "why": "Generic Coproduct preservation by exact derived functors: used exactly as quoted in citations.json to construct the ordinary etale system adjunction; the transport unit has no separate general-purpose result of this kind."
+   },
+   {
+    "node": "lem-pur-system-coproducts",
+    "why": "Generic Coproducts and derived evaluation for strict systems: used exactly as quoted in citations.json to construct the ordinary etale system adjunction; the transport unit has no separate general-purpose result of this kind."
+   },
+   {
+    "node": "lem-pur-system-grothendieck",
+    "why": "Generic Grothendieck abelian strict-system categories: used exactly as quoted in citations.json to construct the ordinary etale system adjunction; the transport unit has no separate general-purpose result of this kind."
+   },
+   {
+    "node": "lem-weil-kinjective-total-derived-linear",
+    "why": "Generic K-injective total right derived functors preserve scalar linearity: used exactly as quoted in citations.json to construct the ordinary etale system adjunction; the transport unit has no separate general-purpose result of this kind."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field: used exactly as quoted in citations.json to construct the ordinary etale system adjunction; the transport unit has no separate general-purpose result of this kind."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic K-injective resolutions in Grothendieck abelian categories (imported sfb derived-categories node): Steps 2, 3 and 5 take its statement as a black box for the system and level categories; the transport unit has no own node for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-proper-coproducts",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-exact-derived-coproducts",
+  "lem-pur-system-coproducts",
+  "lem-pur-system-grothendieck",
+  "lem-weil-kinjective-total-derived-linear",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O3-92a0980e8",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-92a0980e8 (reviewer sub-agent of L); spot-checked: I read the whole item. It has 9 steps and no new nodes. The statement is byte-equal to the live unsplit node, and neither the item nor its citers are on the route-pivot drop list. No SGA is cited. Sources checked: Stacks 0F5Y (injectives.tex:2804) matches lem-grothendieck-derived-brown-right-adjoint; 0F0D (etale-cohomology.tex:20141) underlies lem-amb-proper-coproducts, which is applied with Noetherian Y and X̄ (Spec k is Noetherian, then finite type, then proper); Zheng 4.1/4.10 is used only through the unbounded comparison in lem-pur-coefficient-system-derived-comparison, never its D+ clause. Steps 1 (t-adic completeness of R), 2, 4–9 are correct, including the Brown hypotheses, the unique shift structure and exactness of G, and linearity of the adjunction bijection Φ⁻¹(v)=ε∘F(v). Edge cases checked: n=1, ramified E, empty sums, a=0 or 1. Faults, all repaired: (C4/E1) Step 3 cited lem-pur-site-restriction-module-adjunction-exact and lem-cbc-localized-extension-zero-linear-derived, which are stated on the localized site C/U, not the small étale site of X, and no cited node identifies the two. I replaced them with def-weil-pbc-extension-by-zero, lem-weil-pbc-extension-by-zero-adjunction and lem-weil-pbc-extension-by-zero-exact, and checked that j_!Res=Res j_! on sections and that the level transposes are compatible with the transitions. (C1) Step 3 asserted R-linearity of the derived system j_! by 'exact termwise descent', which no cited node gives. It now follows from the factorization D(j_!)Q≅Q C(j_!), the R-linearity of Q (lem-weil-linear-abelian-derived-category) and the Mathlib leaf lem-pur-linear-localization-lift. Step 6 needs the level Grothendieck property, now cited as lem-weil-pbc-module-sheaves-grothendieck-abelian. (C1 minor) Step 2 used lem-pur-exact-derived-coproducts without its K-injective hypothesis. I added lem-sfb-grothendieck-k-injective there and declared it in split_report.tool_uses (it is off-route). I recomputed proof_deps and dropped the tool_uses entry of the node no longer cited. The new citations are in-route. Maintainer note: the item overlaps two same-day nodes. lem-pur-etale-system-brown-construction (Q116, unsplit) covers k=F̄_q with any nonzero nonunit t, and lem-pur-etale-coefficient-system-adjoint also has k=F̄_q. Neither generalizes the other, so consider merging them. This split's proof works for any nonzero nonunit t.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleTowerBrownAdjunction",
+  "declaration": "AlgebraicGeometry.etaleTowerBrownAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.EtaleTowerBrownSiteProperties",
+   "AlgebraicGeometry.etaleTowerBrownRestriction",
+   "AlgebraicGeometry.EtaleTowerBrownAdjunction",
+   "AlgebraicGeometry.etaleTowerBrownAdjunction"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleTowerBrownAdjunction.lean",
+  "statement": "theorem etaleTowerBrownAdjunction (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (_hpl : p ≠ l) (k : Type u) [Field k] [CharP k p] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (t : Padic.coefficientExtensionIntegers l E) (_ht : Ideal.span ({t} : Set (Padic.coefficientExtensionIntegers l E)) = Padic.coefficientExtensionMaximalIdeal l E) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (c : Compactification f) : ∃ S : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) t c, Nonempty (EtaleTowerBrownAdjunction S)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the already landed strict-system, compact-support and scalar-action definitions owned by def-per-strict-etale-system-interfaces (existing:true on Sheaf.Paper.EtaleCoefficientSystemAdjoint, reviewed N5). This definition node, rather than lem-pur-etale-coefficient-system-adjoint, is the added statement dependency: no theorem of that module is needed. All auxiliary predicates and data records are part of this node’s Brown adjunction assertion. The uniformizer is arbitrary subject to generating the recorded maximal ideal. No extra assumption on f is imposed. Repair of H2 on returned head 0731a6545a1d; the Lean module and theorem statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-479ae25f7",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 0731a6545a1d. Lean module byte-identical; item node differs only in stmt_deps (theorem lem-pur-etale-coefficient-system-adjoint replaced by def node def-per-strict-etale-system-interfaces, existing:true on Sheaf.Paper.EtaleCoefficientSystemAdjoint, reviewed pass; its declarations cover every top-level name used, the rest are fields of S) and lean.note/report. All 6 dep records byte-identical to live; item still S2-open live; statement verbatim; 4 declarations listed. Clauses re-read: arbitrary char-p field, any uniformizer, A_n index n+1, separated finite-type X/Y, Grothendieck/coproduct/joint-detection at X, X̄, Y, canonical evaluation and mate-pinned transitions, F exact/coproduct-preserving/R-linear, actual adjunction with linear homEquiv and scalarTranspose, no pro-etale. Docstrings and nine-step proof plan present; only sorry. Advisories: free CommShift instances; overlap with lem-pur-etale-system-brown-construction (maintainer note). No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261024T014529-L-2212573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

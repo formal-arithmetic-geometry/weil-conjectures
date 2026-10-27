@@ -15,221 +15,79 @@
  ],
  "proof": [
   {
-   "text": "Write $H=A^{\\mathrm h}$, $R=A^{\\mathrm{sh}}$ and $T=B_{\\mathfrak q}$. The separable closure $\\Omega/K$ is algebraic and separably closed. Apply [lem-weil-pbc-integral-closure-algebraic-extension-normal] to $A\\subset K\\subset\\Omega$: $B$ is a normal domain with fraction field $\\Omega$. Apply [lem-weil-pbc-localization-normal-domain] to obtain the embedding $T\\subset\\Omega$, normality of $T$, and $\\operatorname{Frac}(T)=\\Omega$. Apply [lem-weil-pbc-gabber-quotient-localizations] with normal domain $B$, ideal $(0)$ and prime $\\mathfrak q$; it says precisely that $T$ is strictly henselian. Its residue field is $E=B/\\mathfrak q$, because $\\mathfrak q$ is maximal. This is algebraic over $\\kappa=A/\\mathfrak m$: reducing a monic equation for any $b\\in B$ gives an algebraic equation for its class in $E$. The map $A\\to T$ is local since $\\mathfrak q\\cap A=\\mathfrak m$.",
+   "text": "Put $H=A^{\\mathrm h}$, $R=A^{\\mathrm{sh}}$, $T=B_{\\mathfrak q}$, $E=T/\\mathfrak m_T$. Apply [lem-dl-a1-separable-normalization-local-embeddings]. It gives the normal domains, ind-etale structural maps, residue identification, and unique compatible local embeddings for each residue embedding $j$. Fix any such $j$.",
    "uses": [
-    "def-pd-separable-closure",
-    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-    "lem-weil-pbc-localization-normal-domain",
-    "lem-weil-pbc-gabber-quotient-localizations"
+    "lem-dl-a1-separable-normalization-local-embeddings"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSD, setup; Tag 0BSQ, lemma-normal-local-domain-separablly-closed-fraction-field; algebra.tex Tags 0308 and 00GY. The existing quotient-localization node supplies 0BSQ with ideal zero."
+    "place": "Tag 0BSD, section-ramification, and Tag 0BSW, lemma-identify-inertia; assembly of the six extracted obligations."
    }
   },
   {
-   "text": "The universal property [def-weil-pbc-henselization-at-prime], applied to the local map $A\\to T$ and the henselian ring $T$, gives a unique local $A$-map $h:H\\to T$. By [lem-trf-henselization-prime-ind-etale], $A\\to H$ is ind-etale, since $A=A_{\\mathfrak m}$. By [lem-weil-pbc-etale-colimit-normal-local-domain], $H$ is a normal domain and $A\\to H$ is injective. Here the base really is normal as a ring: $A$ is a normal domain, and each prime localization $A_{\\mathfrak p}$ is a normal domain by [lem-weil-pbc-localization-normal-domain] applied with $S=A\\setminus\\mathfrak p$. Thus both the local-colimit hypothesis and the base-normality hypothesis of that node hold.",
+   "text": "Apply [lem-dl-a1-ind-etale-domain-generic-field] to $A\\hookrightarrow H$ and $H\\hookrightarrow R$. Their generic fibres are their fraction fields $K^{\\mathrm h}$ and $K^{\\mathrm{sh}}$, separable algebraic over $K$ and $K^{\\mathrm h}$ respectively. By [lem-weil-pbc-separable-closure-exists-galois], $\\Omega$ is a separable closure over both intermediate fields.",
    "uses": [
-    "def-weil-pbc-henselization-at-prime",
-    "lem-trf-henselization-prime-ind-etale",
-    "lem-weil-pbc-etale-colimit-normal-local-domain",
-    "lem-weil-pbc-localization-normal-domain"
+    "lem-dl-a1-ind-etale-domain-generic-field",
+    "lem-weil-pbc-separable-closure-exists-galois"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSD, henselization and its map to the strictly henselian normalization localization; algebra.tex Tags 04GQ and 04GN; more-algebra.tex Tag 06DI."
+    "place": "Tag 0BSD, section-ramification, and Tag 0BSW, lemma-identify-inertia; assembly of the six extracted obligations."
    }
   },
   {
-   "text": "Put $H_K=(A\\setminus\\{0\\})^{-1}H=K\\otimes_AH$. It is a nonzero domain, since $A\\hookrightarrow H$ and $H$ is a domain. By [lem-weil-pbc-ind-etale-stability] it is ind-etale, hence weakly etale, over $K$. By [lem-weil-pbc-weak-etale-field], every finitely generated $K$-subalgebra is finite etale. Each such subalgebra is a domain; [lem-weil-pbc-etale-algebra-over-field-product] identifies it with a product of finite separable fields, necessarily a single field since it is nonzero and has no nontrivial idempotents. Thus every nonzero element of $H_K$ has its inverse there, and every element is separable algebraic over $K$. Consequently $H_K=\\operatorname{Frac}(H)=K^{\\mathrm h}$. Composing $h$ with $T\\subset\\Omega$ extends to a unital map $H_K\\to\\Omega$, as all nonzero elements of $A$ stay nonzero; a unital map from a field is injective. This proves that $h$ embeds $H$, and identifies $K^{\\mathrm h}$ with a subfield of $\\Omega$.",
+   "text": "By [lem-dl-a1-henselian-normalization-localization], the integral closure $C$ of $H$ in $\\Omega$ equals $T$, and $D=\\operatorname{Aut}_{K^{\\mathrm h}}(\\Omega)$. Thus $D$ acts on $T$ over $H$. Apply [lem-dl-a1-ind-etale-residue-action-rigidity] with $\\Gamma=D$: residue restriction defines $r$ and its kernel is exactly the automorphisms fixing $R$. Fixing a domain is equivalent to fixing its fractions; hence $\\ker r=I=\\operatorname{Aut}_{K^{\\mathrm{sh}}}(\\Omega)$.",
    "uses": [
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-weak-etale-field",
-    "lem-weil-pbc-etale-algebra-over-field-product"
+    "lem-dl-a1-henselian-normalization-localization",
+    "lem-dl-a1-ind-etale-residue-action-rigidity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSD, injectivity of the displayed henselization maps; agent verification using the generic-fibre calculation, with Stacks Tag 092Q and algebra.tex Tag 00U3."
+    "place": "Tag 0BSD, section-ramification, and Tag 0BSW, lemma-identify-inertia; assembly of the six extracted obligations."
    }
   },
   {
-   "text": "Use [lem-wf-strict-henselization-finite-lifts] to identify the specified $R$ with the local filtered colimit of finite local etale $H$-algebras $B_e$, indexed by finite separable $e/\\kappa$ in $\\kappa^{\\mathrm{sep}}$, with residue field $\\kappa^{\\mathrm{sep}}$. In particular $H\\to R$ is ind-etale. Every prime localization of the normal domain $H$ is normal by [lem-weil-pbc-localization-normal-domain], so $H$ satisfies the normal-ring hypothesis of [lem-weil-pbc-etale-colimit-normal-local-domain]. That node applied over $H$ makes $R$ a normal domain and $H\\to R$ injective. This uses the finite-lift node's explicit comparison with the pointed-neighbourhood strict henselization, not an unproved identification between two conventions.",
+   "text": "By [lem-wf-strict-henselization-finite-lifts], $R$ is also the strict henselization of $H$ with the same residue identification. Given $\\tau\\in\\operatorname{Gal}(\\kappa^{\\mathrm{sep}}/\\kappa)$, [lem-dl-a1-strict-henselization-residue-automorphism-lift] lifts it to an $H$-automorphism of $R$ and then to $u\\in\\operatorname{Aut}_{K^{\\mathrm h}}(\\Omega)=D$. By step 3, $u$ preserves $T$; since $u|_R=t$, reduction gives $j(r(u)(a))=j(\\tau(a))$ for every residue element $a$. Injectivity of $j$ yields $r(u)=\\tau$, proving surjectivity.",
    "uses": [
     "lem-wf-strict-henselization-finite-lifts",
-    "lem-weil-pbc-localization-normal-domain",
-    "lem-weil-pbc-etale-colimit-normal-local-domain"
+    "lem-dl-a1-strict-henselization-residue-automorphism-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSD and Tag 0BSW; algebra.tex Tag 0BSL, remark-construct-sh-from-h; more-algebra.tex Tag 06DI."
+    "place": "Tag 0BSD, section-ramification, and Tag 0BSW, lemma-identify-inertia; assembly of the six extracted obligations."
    }
   },
   {
-   "text": "Choose a $\\kappa$-embedding $j:\\kappa^{\\mathrm{sep}}\\to E$. Such an embedding exists by [lem-exc-etale-embedding-extension-sepclosed]: take base $\\kappa$, extension $\\kappa^{\\mathrm{sep}}$, initial intermediate field $\\kappa$, and target $E$. The extension is algebraic and separable; all its minimal polynomials split in the separably closed field $E$, by repeatedly extracting a root from a separable polynomial [def-pc-separably-closed]. Apply [lem-weil-pbc-map-into-henselian-colimit] with base $H$, source $R$, target $T$, source prime $\\mathfrak m_R$ and residue map $j$. The target is henselian and local over $H$, the source is ind-etale over $H$, and $\\mathfrak m_R\\cap H=\\mathfrak m_H$ by the finite-lift description. This gives the unique local $H$-map $i:R\\to T$ inducing $j$.",
+   "text": "Apply [lem-dl-a1-residue-action-krull-continuity] to the two intermediate fraction fields and to the residue action of $D$ on $T$. This gives both claimed Krull-topology identifications and continuity of $r$. Because $C=T$, this residue action is the henselian local residue action, so its kernel maps to exactly $I\\subseteq G$. The initial choice of $j$ was arbitrary, and uniqueness in [lem-dl-a1-separable-normalization-local-embeddings] covers every compatible embedding in the statement.",
    "uses": [
-    "lem-exc-etale-embedding-extension-sepclosed",
-    "def-pc-separably-closed",
-    "lem-weil-pbc-map-into-henselian-colimit"
+    "lem-dl-a1-residue-action-krull-continuity",
+    "lem-dl-a1-separable-normalization-local-embeddings"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSD, choice of residue embedding and extension; algebra.tex Tag 08HR, lemma-map-into-henselian-colimit. This applies to the ind-etale presentation proved in Step 4."
-   }
-  },
-  {
-   "text": "Apply the same generic-fibre calculation as in Step 3 over the field $K^{\\mathrm h}$. Namely $R_{K^{\\mathrm h}}=(H\\setminus\\{0\\})^{-1}R$ is a domain and is ind-etale, hence weakly etale, over $K^{\\mathrm h}$ by [lem-weil-pbc-ind-etale-stability]. Each finitely generated subalgebra is finite etale by [lem-weil-pbc-weak-etale-field], and is a field by [lem-weil-pbc-etale-algebra-over-field-product] because it is a nonzero domain. Therefore $R_{K^{\\mathrm h}}$ is a field, equals $K^{\\mathrm{sh}}=\\operatorname{Frac}(R)$, and is separable algebraic over $K^{\\mathrm h}$. The map $i$ extends to this field since its restriction to $H$ is the embedding of Step 3, and so is injective. We now have the claimed compatible embeddings $A\\subset H\\subset R\\subset T\\subset\\Omega$, with the prescribed residue choice. Also [lem-weil-pbc-separable-closure-exists-galois] applied to $K\\subset K^{\\mathrm h}\\subset\\Omega$ says that $\\Omega/K^{\\mathrm h}$ is separable algebraic and normal. Since $\\Omega$ is separably closed, it is a separable closure of $K^{\\mathrm h}$.",
-   "uses": [
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-weak-etale-field",
-    "lem-weil-pbc-etale-algebra-over-field-product",
-    "lem-weil-pbc-separable-closure-exists-galois"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSD, embeddings of the fraction fields; Tag 0BSW. Agent verification of injectivity by the generic field calculation; fields.tex Tag 09H2."
-   }
-  },
-  {
-   "text": "For $\\sigma\\in D$, restriction and localization give an $A$-automorphism $\\sigma_T$ of $T$, sending $b/s$ to $\\sigma(b)/\\sigma(s)$. This is defined because a monic relation over $A$ remains one after applying $\\sigma$, so $B$ is preserved, and $\\sigma(\\mathfrak q)=\\mathfrak q$ preserves the allowed denominators. It is local since it is an automorphism of the local ring $T$. Both $h$ and $\\sigma_T h$ are local $A$-maps $H\\to T$. The uniqueness in [def-weil-pbc-henselization-at-prime] gives $\\sigma_T h=h$. Thus $\\sigma$ fixes $H$ and its fractions, proving $D\\subseteq\\operatorname{Aut}_{K^{\\mathrm h}}(\\Omega)$.",
-   "uses": [
-    "def-weil-pbc-henselization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, henselization-functoriality argument; algebra.tex Tag 04GS, lemma-henselian-functorial."
-   }
-  },
-  {
-   "text": "Let $C$ be the integral closure of the embedded $H$ in $\\Omega$. The field $\\Omega$ is algebraic over $K^{\\mathrm h}$ by Step 6. Thus [lem-weil-pbc-integral-closure-algebraic-extension-normal] makes $C$ a domain integral over $H$. A domain has only the idempotents $0,1$, since $x^2=x$ means $x(x-1)=0$. Apply [lem-trf-integral-component-henselian-permanence] to the henselian local ring $H$ and its integral domain algebra $C$. It makes $C$ henselian local and $H\\to C$ local; write $\\mathfrak n$ for its unique maximal ideal. No finiteness or Noetherian hypothesis is used.",
-   "uses": [
-    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-    "lem-trf-integral-component-henselian-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, decomposition-group comparison; alternative agent argument using more-algebra.tex Tag 092X, lemma-integral-over-henselian."
-   }
-  },
-  {
-   "text": "We claim $C=T$ inside $\\Omega$. If $x\\in C$, its monic equation over $H\\subset T$ makes it integral over $T$; normality of $T$ with fraction field $\\Omega$ from Step 1 gives $x\\in T$. Also $B\\subset C$ since a monic equation over $A$ is one over $H$. Put $\\mathfrak p=C\\cap\\mathfrak m_T$. It contracts to $\\mathfrak m_H$, since $H\\to T$ is local. The domain $C/\\mathfrak p$ is integral over $H/\\mathfrak m_H=\\kappa$, so is a field: for a nonzero element its minimal polynomial over $\\kappa$ has nonzero constant term, and the equation expresses its inverse as a polynomial in that element. Hence $\\mathfrak p$ is maximal and equals $\\mathfrak n$. For $s\\in B\\setminus\\mathfrak q$, we have $s\\notin\\mathfrak m_T$, hence $s\\notin\\mathfrak n$; it is a unit in the local ring $C$. Thus every $b/s\\in B_{\\mathfrak q}$ lies in $C$, proving the reverse inclusion and the claim. Moreover $B\\cap\\mathfrak n=\\mathfrak q$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, agent comparison of the two normalization rings, using Steps 1 and 8; elementary monic-equation and localization argument."
-   }
-  },
-  {
-   "text": "If $\\sigma\\in\\operatorname{Aut}_{K^{\\mathrm h}}(\\Omega)$, then $\\sigma$ fixes $H$ and preserves its integral closure $C$: apply $\\sigma$ and $\\sigma^{-1}$ to monic equations over $H$. It preserves the unique maximal ideal $\\mathfrak n$ of $C$. Since $\\sigma$ also fixes $A$, it preserves $B$, and therefore preserves $B\\cap\\mathfrak n=\\mathfrak q$. Hence $\\sigma\\in D$. Combined with Step 7, this proves $D=\\operatorname{Aut}_{K^{\\mathrm h}}(\\Omega)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, identification of the decomposition subgroup; elementary consequence of Steps 8-9."
-   }
-  },
-  {
-   "text": "Identify $\\kappa^{\\mathrm{sep}}$ with its image $j(\\kappa^{\\mathrm{sep}})\\subset E$. The algebraic extension $E/\\kappa^{\\mathrm{sep}}$ is purely inseparable: by [lem-weil-pbc-separable-first-purely-inseparable], it is separable followed by purely inseparable, and its separable part is just $\\kappa^{\\mathrm{sep}}$ by [lem-pc-sepclosed-finite-sep-trivial], applied to the finite field generated by each separable element. Every $\\kappa$-automorphism of $E$ preserves $\\kappa^{\\mathrm{sep}}$: for $a$ in that subfield, its $\\kappa$-minimal polynomial splits there by [lem-weil-pbc-separable-closure-exists-galois], so any image of $a$ is another root in the same subfield; use the inverse automorphism for equality. Restriction of the residue action on $E$ therefore defines a homomorphism $r:D\\to\\operatorname{Gal}(\\kappa^{\\mathrm{sep}}/\\kappa)$. Its kernel is $I$: if it fixes $\\kappa^{\\mathrm{sep}}$, it fixes $E$, since in characteristic $p>0$ each $x\\in E$ satisfies $x^{p^n}\\in\\kappa^{\\mathrm{sep}}$ and Frobenius is injective in a field; in characteristic zero $E=\\kappa^{\\mathrm{sep}}$. The reverse implication is immediate.",
-   "uses": [
-    "lem-weil-pbc-separable-first-purely-inseparable",
-    "lem-pc-sepclosed-finite-sep-trivial",
-    "lem-weil-pbc-separable-closure-exists-galois"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, residue automorphism restriction; fields.tex Tag 030K. Unlike the setup footnote, this argument includes the field case and needs only separable closedness of the residue field."
-   }
-  },
-  {
-   "text": "If $\\sigma\\in I$, its action on $T$ is local, fixes $H$ by Step 7, and acts identically on $E$. The two maps $i,\\sigma_T i:R\\to T$ thus have the same residue map $j$, contract $\\mathfrak m_T$ to $\\mathfrak m_R$, and are $H$-linear. The uniqueness assertion of [lem-weil-pbc-map-into-henselian-colimit], applied with base $H$, source $R$ and target $T$ as in Step 5, gives $\\sigma_T i=i$. Consequently $\\sigma$ fixes $R$ and $K^{\\mathrm{sh}}$. Conversely, if $\\sigma$ fixes $K^{\\mathrm{sh}}$, it fixes $K^{\\mathrm h}$ and lies in $D$ by Step 10, and its residue action fixes the image of $R/\\mathfrak m_R=\\kappa^{\\mathrm{sep}}$. Step 11 then puts it in $I$. This proves $I=\\operatorname{Aut}_{K^{\\mathrm{sh}}}(\\Omega)$.",
-   "uses": [
-    "lem-weil-pbc-map-into-henselian-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, inertia fixes the strict henselization; algebra.tex Tag 08HR. The reverse inclusion uses the purely inseparable residue argument of Step 11."
-   }
-  },
-  {
-   "text": "Let $\\tau\\in\\operatorname{Gal}(\\kappa^{\\mathrm{sep}}/\\kappa)$. For every finite Galois subextension $e/\\kappa$, $\\tau$ preserves $e$. Use the finite-lift diagram $B_e$ of [lem-wf-strict-henselization-finite-lifts]. Full faithfulness of [lem-weil-pbc-henselian-finite-etale-equivalence] gives a unique $H$-automorphism $t_e$ of $B_e$ reducing to $\\tau|_e$; its inverse is the unique lift of $\\tau^{-1}|_e$. For $e\\subset f$, the two composites $B_e\\to B_f$ formed with $t_e$ and $t_f$ have equal residue maps, so the same full faithfulness makes them equal. They induce an $H$-automorphism $t:R\\to R$ with inverse induced by $\\tau^{-1}$, and then a $K^{\\mathrm h}$-automorphism $t_L$ of $K^{\\mathrm{sh}}$. Its residue map is $\\tau$ since every residue element occurs at a finite stage.",
-   "uses": [
-    "lem-wf-strict-henselization-finite-lifts",
-    "lem-weil-pbc-henselian-finite-etale-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, finite Galois residue lifts; algebra.tex Tags 04GK and 0BSL."
-   }
-  },
-  {
-   "text": "Apply [lem-exc-etale-embedding-extension-sepclosed] with base $K^{\\mathrm h}$, extension $\\Omega$, intermediate field $K^{\\mathrm{sh}}$ and initial embedding $t_L$. Step 6 and [lem-weil-pbc-separable-closure-exists-galois] verify that $\\Omega/K^{\\mathrm h}$ is algebraic and that all its minimal polynomials split in $\\Omega$. We obtain a $K^{\\mathrm h}$-embedding $u:\\Omega\\to\\Omega$ extending $t_L$. It is surjective: for any $a\\in\\Omega$, $u$ maps the finite set of roots of its $K^{\\mathrm h}$-minimal polynomial injectively into itself, hence permutes that set, so $a$ has a preimage. Thus $u\\in\\operatorname{Aut}_{K^{\\mathrm h}}(\\Omega)=D$. Its residue action restricts to $\\tau$, because $u|_R=t$. Therefore $r$ is surjective.",
-   "uses": [
-    "lem-exc-etale-embedding-extension-sepclosed",
-    "lem-weil-pbc-separable-closure-exists-galois"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, surjectivity onto the residue Galois group; explicit extension from the finite-etale lift construction."
-   }
-  },
-  {
-   "text": "The subgroup identifications have the claimed topology. The Krull neighbourhood basis at the identity of an automorphism group of an algebraic field extension consists of pointwise stabilizers of finite subsets of its top field. For finite $S\\subset\\Omega$, the stabilizer in $\\operatorname{Aut}_{K^{\\mathrm h}}(\\Omega)$ is exactly $D\\cap\\{g\\in G:g|_S=1\\}$, and the stabilizer in $\\operatorname{Aut}_{K^{\\mathrm{sh}}}(\\Omega)$ is exactly $I\\cap\\{g\\in G:g|_S=1\\}$. Hence the intrinsic Krull topologies are the subspace topologies. Also $\\Omega/K^{\\mathrm{sh}}$ is separable algebraic by [lem-weil-pbc-separable-closure-exists-galois], so these are indeed its usual absolute Galois groups.",
-   "uses": [
-    "lem-weil-pbc-separable-closure-exists-galois"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, topological group identifications; comparison of defining finite-subset stabilizer bases."
-   }
-  },
-  {
-   "text": "For continuity of $r$, let $e/\\kappa$ be a finite Galois subextension of $\\kappa^{\\mathrm{sep}}$, choose field generators $a_1,\\ldots,a_s$ of $e/\\kappa$, and lift them to $z_1,\\ldots,z_s\\in R$ using the surjective residue map of Step 4. The open subgroup $D\\cap\\{g:g(z_i)=z_i\\text{ for all }i\\}$ is contained in $r^{-1}(\\operatorname{Gal}(\\kappa^{\\mathrm{sep}}/e))$. The latter is a subgroup, so it is a union of cosets of that open subgroup, hence open. These stabilizers of finite Galois residue subextensions form a Krull basis. This proves continuity. The residue action of the henselian field $K^{\\mathrm h}$ is the action of its absolute Galois group on this separable residue closure, computed in the integral closure $C=T$ of Step 9. By Steps 10-12 its kernel is precisely $I\\subset G$. The construction started with an arbitrary compatible residue embedding $j$; uniqueness in Step 5 identifies every compatible embedding in the statement with that construction for its own residue map. Thus the last assertion holds for any chosen compatible embedding as well.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BSW, continuous residue homomorphism and the local-inertia interpretation; elementary stabilizer-basis argument using Steps 4-15."
+    "place": "Tag 0BSD, section-ramification, and Tag 0BSW, lemma-identify-inertia; assembly of the six extracted obligations."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-separably-closed",
-  "def-pd-separable-closure",
-  "def-weil-pbc-henselization-at-prime",
-  "lem-exc-etale-embedding-extension-sepclosed",
-  "lem-pc-sepclosed-finite-sep-trivial",
-  "lem-trf-henselization-prime-ind-etale",
-  "lem-trf-integral-component-henselian-permanence",
-  "lem-weil-pbc-etale-algebra-over-field-product",
-  "lem-weil-pbc-etale-colimit-normal-local-domain",
-  "lem-weil-pbc-gabber-quotient-localizations",
-  "lem-weil-pbc-henselian-finite-etale-equivalence",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-  "lem-weil-pbc-localization-normal-domain",
-  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-dl-a1-henselian-normalization-localization",
+  "lem-dl-a1-ind-etale-domain-generic-field",
+  "lem-dl-a1-ind-etale-residue-action-rigidity",
+  "lem-dl-a1-residue-action-krull-continuity",
+  "lem-dl-a1-separable-normalization-local-embeddings",
+  "lem-dl-a1-strict-henselization-residue-automorphism-lift",
   "lem-weil-pbc-separable-closure-exists-galois",
-  "lem-weil-pbc-separable-first-purely-inseparable",
-  "lem-weil-pbc-weak-etale-field",
   "lem-wf-strict-henselization-finite-lifts"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 0BSD setup and Tag 0BSW, lemma-identify-inertia; alternative direct decomposition-group argument via Tag 092X and finite-etale residue lifts via Tags 04GK, 0BSL and 08HR, avoiding the invariant-ring maximality shorthand."
+  "place": "Tag 0BSD setup and Tag 0BSW, lemma-identify-inertia; short assembly of the retained proof through six extracted obligations."
  },
  "mathlib_searches": [
   {
@@ -315,6 +173,34 @@
    "results": "8 hits: IsFractionRing.stabilizerHom, IsFractionRing.stabilizerHom_surjective, Field.henselian, ValuationSubring.inertiaSubgroup, NumberField.InfinitePlace.isUnramified_iff_stabilizer_eq_bot, Algebra.isInvariant_of_isGalois, NumberField.InfinitePlace.isUnramified_iff_card_stabilizer_eq_one, NumberField.InfinitePlace.IsUnramified.stabilizer_eq_bot. Read the relevant source: these give general integral-closure facts, henselian definitions, finite Galois theory or valuation inertia definitions; none states the normal-local henselization comparison.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Decomposition and inertia subgroups at a prime of a normal local domain equal the Galois groups fixing its henselization and strict henselization fraction fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ValuationSubring.inertiaSubgroup\", \"module\": \"Mathlib/RingTheory/Valuation/RamificationGroup\", \"type\": \"(K : Type u_1) →\\n  {L : Type u_2} →\\n    [inst : Field K] →\\n      [inst_1 : Field L] →\\n        [inst_2 : Algebra K L] → (A : ValuationSubring L) → Subgroup ↥(ValuationSubring.decompositionSubgroup K A)\", \"doc\": \"The inertia subgroup of a valuation subring $ A $ is the subgroup of its decomposition subgroup consisting of all $ K $-algebra automorphisms of $ L $ that act trivially on the residue field of $ A $.\"}\n  {\"name\": \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For maximal ideals $\\\\mathfrak{p}$ in $B$ and $\\\\mathfrak{P}$ in $C$ such that $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, the product of the inertia degree $f_{\\\\mathfrak{p}/B}$ of $\\\\mathfrak{p}$ in $B$ an\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension, if $\\\\mathfrak{p}$ is a maximal ideal in $R$ and $\\\\mathfrak{P}, \\\\mathfrak{Q}$ are ideals in $S$ lying over $\\\\mathfrak{p}$, then the inertia degrees $[S/\\\\mathfrak{P} : R/\\\\mathfrak\"}\n  {\"name\": \"Ideal.inertiaDegIn_eq_inertiaDeg\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] [p.IsMaximal], p.inertiaDegIn B =\", \"doc\": \"If $ \\\\mathfrak{p} $ is a maximal ideal in a ring $ R $, then the inertia degree of $ \\\\mathfrak{p} $ in a ring extension $ B $ equals the inertia degree of $ \\\\mathfrak{p} $ in an ideal $ \\\\mathfrak{P} $\"}\n  {\"name\": \"Ideal.inertiaDeg_eq_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension $ B $ over $ A $ with finite Galois group $ G $, if $ P $ and $ Q $ are prime ideals in $ B $ lying over a maximal ideal $ p $ in $ A $, then the inertia degrees $ [B/P : A/p] $ \"}\n  {\"name\": \"IsDedekindDomain.primesOverEquivPrimesOver_inertiagDeg_eq\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Extension\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (Rₚ : Type u_3) [inst_4 : CommRing Rₚ] [inst_5 : Algebra R Rₚ]\\n  [inst_6 : IsLocalization.AtPrime Rₚ p] [inst_7 : IsLocalRing Rₚ] (Sₚ : Type u_4) [inst_8 : CommRing S\", \"doc\": \"In a Dedekind domain $ S $, for a nonzero prime ideal $ p $ of the base ring $ R $, the order-preserving bijection between the prime ideals of $ S $ lying over $ p $ and the prime ideals of the locali\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] (p : Ideal R) [p.IsMaximal]\\n  (P : Ideal S) [inst_8 : P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparabl\", \"doc\": \"For a maximal ideal $ p $ in a commutative ring $ R $ and a maximal ideal $ P $ in a commutative ring $ S $ lying over $ p $, if the algebra $ S/P $ is separable over $ R/p $, then the product of the \"}\n  {\"name\": \"Ideal.inertiaDegIn_ne_zero\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] {p : Ideal A} [p.IsMaximal]\\n  [IsDomain A] [Module.IsTorsionFree A B] [Module.Finite A B] [Nontrivial\", \"doc\": \"Let $ A $ be an integral domain, $ B $ a non-trivial finitely generated torsion-free $ A $-module, and $ p $ a maximal ideal of $ A $. Then the inertia degree $ \\\\text{inertiaDegIn}(p, B) $ is non-zero\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring.inertiaSubgroup",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"ValuationSubring.inertiaSubgroup\", \"module\": \"Mathlib.RingTheory.Valuation.RamificationGroup\", \"type\": \" (K : Type u_1) {L : Type u_2} [Field K] [Field L] [Algebra K L] (A : ValuationSubring L) : Subgroup ↥(ValuationSubring.decompositionSubgroup K A)\", \"doc\": \"The inertia subgroup defined as the kernel of the group homomorphism from\\nthe decomposition subgroup to the group of automorphisms of the residue field of `A`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*[Ii]nertia|[Ii]nertia.*henseli|henseli.*[Dd]ecomposition",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identify the absolute Galois group of the henselian fraction field with the stabilizer of a normalization prime and its residue kernel with global inertia",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Field.absoluteGaloisGroup\", \"module\": \"Mathlib.FieldTheory.AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The absolute Galois group of a field $ K $ is the group of all field automorphisms of its algebraic closure that fix $ K $ element-wise. This group captures the symmetries of the algebraic closure ove\"}\n  {\"name\": \"IsGaloisGroup.to_isFractionRing\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[Finite G] [hGAB : IsGaloisGroup G A B] : IsGaloisGroup G K L\", \"doc\": \"If $ G $ is a finite Galois group of $ B $ over $ A $, then $ G $ is also the Galois group of the fraction field $ L $ of $ B $ over the fraction field $ K $ of $ A $.\"}\n  {\"name\": \"IsGaloisGroup.of_isFractionRing\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[hGKL : IsGaloisGroup G K L] [IsIntegrallyClosed A] [Algebra.IsIntegral A B] : IsGaloisGroup G A B\", \"doc\": \"If $ G $ is the Galois group of $ L $ over $ K $, $ A $ is integrally closed, and $ B $ is integral over $ A $, then $ G $ is also the Galois group of $ B $ over $ A $.\"}\n  {\"name\": \"IsGaloisGroup.intermediateField\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[Finite G] [hGKL : IsGaloisGroup G K L] : IsGaloisGroup (fixingSubgroup G (F : Set L)) F L\", \"doc\": \"For a finite Galois extension $ L/K $ with Galois group $ G $, and an intermediate field $ F $ (i.e., $ K \\\\subseteq F \\\\subseteq L $), the subgroup of $ G $ consisting of all automorphisms that fix eve\"}\n  {\"name\": \"Field.instGroupAbsoluteGaloisGroup\", \"module\": \"Mathlib.FieldTheory.AbsoluteGaloisGroup\", \"type\": \": Group (G_K K)\", \"doc\": \"The absolute Galois group of a field $ K $, defined as the group of all field automorphisms of its algebraic closure that fix $ K $ element-wise, is equipped with a canonical group structure under com\"}\n  {\"name\": \"IsFractionRing.stabilizerHom\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \": MulAction.stabilizer G Q →* Gal(L/K)\", \"doc\": \"A monoid homomorphism from the stabilizer subgroup of an ideal $ Q $ in $ G $ to the Galois group $ \\text{Gal}(L/K) $, constructed by composing the homomorphism that maps stabilizer elements to automor\"}\n  {\"name\": \"ValuationSubring.inertiaSubgroup\", \"module\": \"Mathlib.RingTheory.Valuation.RamificationGroup\", \"type\": \"(A : ValuationSubring L) : Subgroup (A.decompositionSubgroup K)\", \"doc\": \"The inertia subgroup of a valuation subring $ A $ is the subgroup of its decomposition subgroup consisting of all $ K $-algebra automorphisms of $ L $ that act trivially on the residue field of $ A $.\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \": (primesOver p B).ncard * (ramificationIdxIn p B * inertiaDegIn p B) = Nat.card G\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a Dedekind domain $A$ with finite Galois extension $A \\\\to B$ having Galois group $G$, the cardinality of $G$ equals the product of: (1) the number of distinct prime\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -339,47 +225,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "item": "lem-dl-a1-henselian-global-inertia-comparison",
   "worker": "stage1",
-  "summary": "Proved the general normal-local comparison using existing nodes only. Constructed and checked injective compatible embeddings via generic ind-etale fields, identified B_q with the integral closure over the henselization, proved both subgroup equalities and the residue surjection, and checked the intrinsic Krull topologies and arbitrary compatible residue choices. The item statement is unchanged. The 0BSD footnote incorrectly calls the residue field algebraically closed when A is an imperfect field; the proof only requires the valid separably-closed statement and treats the remaining residue extension as purely inseparable.",
-  "blueprint": "rem-dl-a1-conventions, second paragraph: the equivalence of extension across infinity and trivial inertia, through lem-dl-a1-weil-kernel-inertia; this item supplies the comparison between local henselian inertia and the global separable-closure subgroup. No unit-level route changed.",
+  "summary": "Revalidated the retained repair against the current server DAG after the refused side-completion promotion. Preserve the statement, statement dependencies, provenance and all sixteen original arguments through six statement-only obligations. Re-read every assembly citation and external statement dependency; retain the explicit A-versus-H strict-henselization comparison and spell out why the lifted automorphism induces the prescribed residue action. The report records this repair pass and the server dry runs.",
+  "blueprint": "rem-dl-a1-conventions, second paragraph, equivalence of extension over infinity with trivial inertia, via lem-dl-a1-weil-kernel-inertia; preserves the normal-local Stacks 0BSD/0BSW route.",
   "tool_uses": [
    {
-    "node": "lem-trf-henselization-prime-ind-etale",
-    "why": "Ordinary henselization is ind-etale, used to prove its embedding is injective by the generic-field calculation. This is generic commutative algebra; the affine-line convention unit has no replacement for it."
-   },
-   {
-    "node": "lem-trf-integral-component-henselian-permanence",
-    "why": "The integral closure over a henselian local domain is henselian local, giving a unique prime. This is generic commutative algebra; the affine-line convention unit has no replacement for it."
-   },
-   {
-    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
-    "why": "Normality and injectivity of the local ind-etale henselization rings. This is generic commutative algebra; the affine-line convention unit has no replacement for it."
-   },
-   {
-    "node": "lem-weil-pbc-gabber-quotient-localizations",
-    "why": "With ideal zero, the normal integral closure localized at q is strictly henselian. This is generic commutative algebra; the affine-line convention unit has no replacement for it."
-   },
-   {
-    "node": "lem-weil-pbc-henselian-finite-etale-equivalence",
-    "why": "Lifts residue automorphisms uniquely and compatibly to finite etale H-algebras. This is generic commutative algebra; the affine-line convention unit has no replacement for it."
-   },
-   {
-    "node": "lem-weil-pbc-ind-etale-stability",
-    "why": "Generic base change preserves ind-etale maps and makes them weakly etale. This is generic commutative algebra; the affine-line convention unit has no replacement for it."
-   },
-   {
-    "node": "lem-weil-pbc-map-into-henselian-colimit",
-    "why": "Existence and uniqueness of the compatible local strict-henselization map, and uniqueness for the inertia action. This is generic commutative algebra; the affine-line convention unit has no replacement for it."
-   },
-   {
-    "node": "lem-weil-pbc-weak-etale-field",
-    "why": "Finitely generated subalgebras of the generic weakly etale domains are finite etale, hence fields. This is generic commutative algebra; the affine-line convention unit has no replacement for it."
+    "node": "lem-weil-pbc-separable-closure-exists-galois",
+    "why": "Generic separable-closure base-extension fact for the intermediate fraction fields; the affine-line unit does not replace this field-theoretic tool."
    },
    {
     "node": "lem-wf-strict-henselization-finite-lifts",
-    "why": "Compares the specified strict henselization with finite etale residue lifts over the henselization. This is generic commutative algebra; the affine-line convention unit has no replacement for it."
+    "why": "Generic local-algebra comparison: the same residue-compatible strict henselization is obtained over A and its henselization H, supplying the hypothesis of the residue-automorphism lift; the affine-line setup unit has no replacement for this tool."
    }
   ]
  },
@@ -392,15 +250,16 @@
   "lem-weil-pbc-ind-etale-stability",
   "lem-weil-pbc-map-into-henselian-colimit",
   "lem-weil-pbc-weak-etale-field",
-  "lem-wf-strict-henselization-finite-lifts"
+  "lem-wf-strict-henselization-finite-lifts",
+  "lem-weil-pbc-separable-closure-exists-galois"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q142-e72b7a5a8",
-  "group": "Q142",
+  "reviewer": "NT-cc-Q110-144f8abf6",
+  "group": "Q110",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-e72b7a5a8 (reviewer sub-agent of L); spot-checked: Read Stacks pione 0BSD/0BSW. The item's statement matches 0BSW (D=Aut_{K^h}(Omega), I=Aut_{K^sh}(Omega), continuous surjection D->Gal(kappa^sep/kappa) with kernel I) and adds the Krull-topology and arbitrary-compatible-embedding clauses. The delivery has 0 new nodes and the base proof was empty, so the re-split rule does not apply. I checked all 16 steps against the cited statements and found them sound. Step 1: Gabber quotient-localization with I=0 gives B_q strictly henselian. Steps 3 and 6: the generic fibre is a field via ind-etale-stability, weak-etale-field and etale-over-field-product, which proves both embeddings injective. Step 5: map-into-henselian-colimit hypotheses checked (m_R over m_H). Steps 8-10: 092X permanence makes C, the integral closure over H, local, C=B_q, and D is exact. Steps 11-12: E/kappa^sep is purely inseparable, ker r=I, and inertia fixes R by uniqueness. Steps 13-14: surjectivity via finite-etale full faithfulness and embedding extension. Steps 15-16: topology and continuity. Edge cases checked: A a field (including imperfect F_p(t)), A strictly henselian, non-Noetherian A. The worker's 0BSD footnote error (residue field 'algebraically closed' fails for A a field) is real and is not used by the proof. Batch-5 flags: lem-trf-henselization-prime-ind-etale, lem-trf-integral-component-henselian-permanence and lem-wf-strict-henselization-finite-lifts are generic henselization algebra. Their closures reach only def-weil-pbc-henselization-at-prime (a definition) and the generic lem-trf-henselization-prime-ind-etale, so they are not part of the trace formula or Poincare duality; accepted. Tool uses accepted; no cycle; no SGA. FIX (C1/C4): Step 2 applied lem-weil-pbc-etale-colimit-normal-local-domain, whose base must be a normal ring, without proving that the normal domain A is one. I added lem-weil-pbc-localization-normal-domain to Step 2's uses and text, as Step 4 already does for H; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-144f8abf6 (reviewer sub-agent of L); spot-checked: Third push of the human re-split (released note, keep_plan); the earlier pushes were 78a69f6c (FIX) and 9ed7ec70 (FIX, refused at promotion). Diffed against the 9ed7 snapshot: the six new nodes are byte-identical, and the item changes only in step 4, which now spells out r(u)=tau (u preserves T, u|_R=t, j injective), and in the split_report. Live and side-live still have the 16-step proof and none of the new ids, so no other group has taken the item. Re-split rule is met. Old steps 1,2,4,5 and the injectivity part of 6 -> separable-normalization-local-embeddings; 3,6 -> ind-etale-domain-generic-field; 7-10 -> henselian-normalization-localization; 11-12 -> ind-etale-residue-action-rigidity; 13-14 -> strict-henselization-residue-automorphism-lift; 15-16 -> residue-action-krull-continuity. The assembly is 5 steps of about 2k characters. No node restates the item, and all six are statement-only. I read Stacks pione 0BSW with its proof and 0BSD, and checked tags 0BSQ, 08HR, 092X, 092Q, 00U3, 04GK, 030K, 0BMJ and 0BSL in tags/tags. Each item step meets the hypotheses of the nodes it cites, and proof_deps is the union of the uses. All six statements are true: 0BSQ makes T strictly henselian; 08HR gives a unique i_j; the ind-etale generic fibre is a field; 092X gives C=T and B cap n=q, so D=Aut_{Frac H}(Omega); E/j(kappa_s) is purely inseparable and ker r = I; 04GK gives compatible Galois-stage lifts that extend to Omega; Krull stabilizer bases give continuity. Edge cases checked: A a field, imperfect F_p(t) (E only separably closed; the 0BSD footnote error is not used), characteristic 0, non-Noetherian A. Duplicates checked with rg -L: wf-strict-henselian-fraction-inertia (DVR only), wf-henselian-finite-galois-lift (finite level only), dl-a1-galois-prime-residue-lifting (global surjectivity, a different statement; advisory only), inertia-restriction-surjective and the strict-local-inertia/scheme presentation nodes. None duplicates a new node. Batch-5 flags: def-weil-pbc-henselization-at-prime (cited by N1 and N3) is a general universal-property definition, and lem-wf-strict-henselization-finite-lifts (cited by N5) is generic henselization algebra. Neither is part of the trace formula, Poincare duality or their proofs, so both are accepted. Tool uses accepted: separable-closure-exists-galois and wf-strict-henselization-finite-lifts. No SGA. FIX (B5, a lost fix re-applied a third time): the source.place of ind-etale-domain-generic-field now cites 092Q as more-algebra.tex lemma-absolutely-flat-over-field instead of proetale.tex, and adds the 00U3 label lemma-etale-over-field."
  },
  "lean": {
   "module": "Sheaf.RingTheory.HenselianGlobalInertiaComparison",
@@ -427,5 +286,17 @@
   "group": "NH",
   "result": "pass",
   "note": "Read node, 0BSD/0BSW, 4 stmt_dep records + the side-live declarations used (IsHenselizationAtPrime', strictHenselizationRing/Eval/ι/smallStrictHenselizationColimitIso, atPrimeToField/atPrimeMap, Ideal.inertia). All clauses match: normal local domain inline form, IsSepClosure K Ω, integralClosure + maximal q over m, D=stabilizer, I=q.inertia (= trivial on κ(q) since q maximal), canonical strict henselization at κs^alg with r pinned via eval (residue κs, no perfectness), domains, ∃ then ∀ compatible local injective embeddings for every κ-compatible j, fraction-field algebras pinned on ring elements, IsSepClosure Frac H Ω, eD/eI ≃ₜ* pinned pointwise, res continuous surjective with element formula and kernel I, final local-inertia clause. Edge cases: field A, henselian/strictly henselian A, imperfect κ, any characteristic. Statement verbatim; only lean changed; no new nodes; docstrings with 16 steps; imports = statement + proof-dep modules; no name clash; sorry only. Advisories: common universe u for Ω and H (essentially small, no loss); last conjunct mirrors the node's 'in particular'. No recompile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

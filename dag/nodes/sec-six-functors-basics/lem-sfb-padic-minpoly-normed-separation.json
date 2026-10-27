@@ -1,0 +1,511 @@
+{
+ "id": "lem-sfb-padic-minpoly-normed-separation",
+ "kind": "statement",
+ "title": "Extending norm and separated minimal-polynomial roots in a p-adic closure",
+ "statement": "Fix a prime $\\ell$ and put $k=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers]. Let $\\Omega/k$ be any algebraic closure [def-weil-algebraic-closure]. The base $k$ is complete, nontrivially normed, nonarchimedean and of characteristic zero, and $\\mathbf Q$ is dense in $k$: for $z\\in k$ and $r>0$ some $q\\in\\mathbf Q$ satisfies $|z-q|_\\ell<r$. There is a real-valued norm $\\|\\cdot\\|$ on $\\Omega$ extending $|\\cdot|_\\ell$, satisfying $\\|z\\|\\geq0$, $\\|z\\|=0\\Leftrightarrow z=0$, $\\|1\\|=1$, $\\|zw\\|=\\|z\\|\\|w\\|$ and $\\|z+w\\|\\leq\\max\\{\\|z\\|,\\|w\\|\\}$, and giving distance $d(z,w)=\\|z-w\\|$. For every $x\\in\\Omega$, its minimal polynomial $f\\in k[T]$ [def-weil-pbc-separable-algebraic-extension, def-weil-polynomial-ring] is monic, irreducible and separable [def-pc-separable-polynomial], has degree $n\\geq1$, satisfies $f(x)=0$ [def-weil-polynomial-root], and splits into $n$ distinct linear factors in $\\Omega[T]$. In particular the set $S=\\{y\\in\\Omega:f(y)=0,\\ y\\ne x\\}$ is finite. Define $\\delta=1$ if $S=\\varnothing$, and otherwise $\\delta=\\min\\{\\|x-y\\|:y\\in S\\}$. Then $\\delta>0$ and $\\delta\\leq\\|x-y\\|$ for every $y\\in S$.",
+ "source": {
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, first bullet, p. 3, countability input. Agent-supplied subargument of project WeilConjectures/NumberTheory/Padics/Extension.lean:82–127; Returned proof steps 1–3: norm extension, characteristic-zero separable minimal polynomial, and the conjugate-gap construction (Extension.lean:84–109). General extending-norm input: Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean:854–912; rational density: Mathlib/NumberTheory/Padics/PadicNumbers.lean:815–823."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial",
+  "def-weil-polynomial-root"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-l-adic-numbers], $k$ is the completion of $\\mathbf Q$ for $|\\cdot|_\\ell$, is complete and nonarchimedean, and has characteristic zero. Its norm is nontrivial since $|\\ell|_\\ell=\\ell^{-1}<1$. By the definition of completion, each $z\\in k$ is represented by a rational Cauchy sequence $q_j$ converging to $z$. For $r>0$, choose $j$ with $|z-q_j|_\\ell<r$. This proves the stated density.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+    "place": "Padic.rat_dense, lines 815–819; completion description in def-weil-l-adic-numbers."
+   }
+  },
+  {
+   "text": "The extension $\\Omega/k$ is algebraic by [def-weil-algebraic-closure]. Apply [lem-trf-spectral-norm-algebraic-extension] with $F=k$, $L=\\Omega$: step 1 checks completeness, nontriviality and the nonarchimedean hypothesis. Take its spectral norm as $\\|\\cdot\\|$. Its nonnegative real values, definiteness, unit, product and strong triangle laws give all the requested norm identities, and its stated distance is $d(z,w)=\\|z-w\\|$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-trf-spectral-norm-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "spectralNorm_extends, line 573; isNonarchimedean_spectralNorm, line 645; spectralNorm.normedField, lines 854–870."
+   }
+  },
+  {
+   "text": "Fix $x\\in\\Omega$. Algebraicity in [def-weil-algebraic-closure] permits its minimal polynomial $f$ in [def-weil-pbc-separable-algebraic-extension]; that statement gives monicity, irreducibility and $f(x)=0$. Write $n=\\deg f$. By [def-weil-polynomial-ring], a monic polynomial of degree zero is $1$, which evaluates to $1\\ne0$ by [def-weil-polynomial-root]. Hence $n\\geq1$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-polynomial-ring",
+    "def-weil-polynomial-root"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09G1, lemma-field-extension-generated-by-one-element; minimal polynomial definition, and Tag 09GN, lemma-degree-minimal-polynomial."
+   }
+  },
+  {
+   "text": "The derivative formula in [def-pc-separable-polynomial] shows that the coefficient of $T^{n-1}$ in $f\\prime$ is $n$, since $f$ is monic. This is nonzero in characteristic zero, so $f\\prime\\ne0$. The irreducibility from step 3 and [lem-trf-irreducible-separable-derivative] imply separability. Now [lem-pc-separable-polynomial-distinct-roots-alg-closed], applied to $F=k$, $P=f$ and the given algebraically closed $\\Omega$, supplies exactly $n$ distinct roots and the asserted factorization into linear factors.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "lem-trf-irreducible-separable-derivative",
+    "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09H0, lemma-irreducible-polynomials, characteristic-zero argument; distinct-root factorization as in the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "The root set in step 4 is finite, so its subset $S$ is finite. For $y\\in S$, $x-y\\ne0$, hence definiteness and nonnegativity give $\\|x-y\\|>0$. If $S$ is empty, $\\delta=1>0$ and the bound is vacuous. Otherwise its distance image is a finite nonempty set of positive reals: successive binary minima produce a member $a>0$ no larger than any member (start with a singleton and replace $a$ by $\\min(a,b)$ when adjoining $b$). Thus its minimum $\\delta$ exists, is positive, and satisfies $\\delta\\leq\\|x-y\\|$ for every $y\\in S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3, countability input; explicit finite-gap argument in project WeilConjectures/NumberTheory/Padics/Extension.lean:90–109."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-root",
+  "def-pc-separable-polynomial",
+  "lem-trf-irreducible-separable-derivative",
+  "lem-pc-separable-polynomial-distinct-roots-alg-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9 first bullet, countability input; expanded from project Extension.lean:84–109, using the existing spectral-norm and separable-root Mathlib leaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spectralNorm.*normedField|denseRange_ratCast|separable.*minpoly|[Mm]inpoly.*separable",
+   "results": {
+    "t": "2026-10-22T06:05:35Z",
+    "tool": "grep",
+    "query": "spectralNorm.*normedField|denseRange_ratCast|separable.*minpoly|[Mm]inpoly.*separable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+     "Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean",
+     "Mathlib/FieldTheory/Separable.lean",
+     "Mathlib/FieldTheory/Separable.lean",
+     "Mathlib/FieldTheory/Separable.lean",
+     "Mathlib/FieldTheory/Separable.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/Tower.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/Tower.lean"
+    ],
+    "digest": "362e58c748577df5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined normed minimal-polynomial and separation statement: spectralNorm.normedField/normedAlgebra, IsSeparable.of_integral and Padic.rat_dense are ingredients; the finite root-gap construction remains to prove. The single-file grep returned malformed file labels and is retained as raw output, not used as a declaration attribution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic closure of Q_p admits an extending norm and each minimal polynomial is separable and its distinct roots are separated by a positive distance",
+   "results": {
+    "t": "2026-10-22T06:05:35Z",
+    "tool": "leansearch",
+    "query": "An algebraic closure of Q_p admits an extending norm and each minimal polynomial is separable and its distinct roots are separated by a positive distance",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl.normedField",
+     "PadicAlgCl",
+     "PadicAlgCl.norm_extends",
+     "PadicAlgCl.valued",
+     "PadicAlgCl.isAlgebraic",
+     "PadicComplex.nnnorm_extends",
+     "PadicComplex.instNormedField",
+     "PadicAlgCl.valuation_coe"
+    ],
+    "digest": "a3beea8077c4e32a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined normed minimal-polynomial and separation statement: spectralNorm.normedField/normedAlgebra, IsSeparable.of_integral and Padic.rat_dense are ingredients; the finite root-gap construction remains to prove. The single-file grep returned malformed file labels and is retained as raw output, not used as a declaration attribution."
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly, Polynomial.Separable",
+   "results": {
+    "t": "2026-10-22T06:05:35Z",
+    "tool": "loogle",
+    "query": "minpoly, Polynomial.Separable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow",
+     "IsPrimitiveRoot.separable_minpoly_mod",
+     "IsKrasner.krasner"
+    ],
+    "digest": "9dd4e1def8f1190a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined normed minimal-polynomial and separation statement: spectralNorm.normedField/normedAlgebra, IsSeparable.of_integral and Padic.rat_dense are ingredients; the finite root-gap construction remains to prove. The single-file grep returned malformed file labels and is retained as raw output, not used as a declaration attribution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an element of an algebraic closure of Q_p there is an extending nonarchimedean norm and its separable minimal polynomial has a positive lower bound on distances to other roots",
+   "results": {
+    "t": "2026-10-22T06:05:55Z",
+    "tool": "leanfinder",
+    "query": "For an element of an algebraic closure of Q_p there is an extending nonarchimedean norm and its separable minimal polynomial has a positive lower bound on distances to other roots",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NumberField.Embeddings.coeff_bdd_of_norm_le",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "norm_le_spectralNorm",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "isNonarchimedean_spectralNorm",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots"
+    ],
+    "digest": "5cfcbbd75e6da6db"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined normed minimal-polynomial and separation statement: spectralNorm.normedField/normedAlgebra, IsSeparable.of_integral and Padic.rat_dense are ingredients; the finite root-gap construction remains to prove. The single-file grep returned malformed file labels and is retained as raw output, not used as a declaration attribution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose a norm on an arbitrary algebraic closure of a complete characteristic zero nonarchimedean field so that each algebraic element has a separable splitting minimal polynomial and a positive conjugate separation radius",
+   "results": {
+    "t": "2026-10-22T06:06:32Z",
+    "tool": "leanfinder",
+    "query": "Choose a norm on an arbitrary algebraic closure of a complete characteristic zero nonarchimedean field so that each algebraic element has a separable splitting minimal polynomial and a positive conjugate separation radius",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedField",
+     "spectralMulAlgNorm",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.normedAddCommGroup",
+     "IsUltrametricDist.invariantExtension",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "560a7ecee9311b1b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined normed minimal-polynomial and separation statement: spectralNorm.normedField/normedAlgebra, IsSeparable.of_integral and Padic.rat_dense are ingredients; the finite root-gap construction remains to prove. The single-file grep returned malformed file labels and is retained as raw output, not used as a declaration attribution."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralNorm.*normedField|normedField|normedAlgebra",
+   "results": {
+    "t": "2026-10-22T06:08:01Z",
+    "tool": "grep",
+    "query": "spectralNorm.*normedField|normedField|normedAlgebra",
+    "sub": "Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "231",
+     "370",
+     "376",
+     "683",
+     "685"
+    ],
+    "digest": "eac6a54b9662748a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined normed minimal-polynomial and separation statement: spectralNorm.normedField/normedAlgebra, IsSeparable.of_integral and Padic.rat_dense are ingredients; the finite root-gap construction remains to prove. The single-file grep returned malformed file labels and is retained as raw output, not used as a declaration attribution."
+  },
+  {
+   "tool": "grep",
+   "query": "denseRange_ratCast|rat_dense",
+   "results": {
+    "t": "2026-10-22T06:08:01Z",
+    "tool": "grep",
+    "query": "denseRange_ratCast|rat_dense",
+    "sub": "NumberTheory/Padics",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Padics/RingHoms.lean",
+     "Mathlib/NumberTheory/Padics/WithVal.lean",
+     "Mathlib/NumberTheory/Padics/WithVal.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean"
+    ],
+    "digest": "c20ca4b9d7e0b943"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined normed minimal-polynomial and separation statement: spectralNorm.normedField/normedAlgebra, IsSeparable.of_integral and Padic.rat_dense are ingredients; the finite root-gap construction remains to prove. The single-file grep returned malformed file labels and is retained as raw output, not used as a declaration attribution."
+  },
+  {
+   "tool": "grep",
+   "query": "def normedField|def normedAlgebra|theorem spectralNorm_extends",
+   "results": {
+    "t": "2026-10-22T06:08:26Z",
+    "tool": "grep",
+    "query": "def normedField|def normedAlgebra|theorem spectralNorm_extends",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "2617f2d587f057c4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined normed minimal-polynomial and separation statement: spectralNorm.normedField/normedAlgebra, IsSeparable.of_integral and Padic.rat_dense are ingredients; the finite root-gap construction remains to prove. The single-file grep returned malformed file labels and is retained as raw output, not used as a declaration attribution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic closure of Q_p has an extending ultrametric norm and the minimal polynomial of any element has distinct roots separated by a positive minimum distance",
+   "results": {
+    "t": "2026-10-22T11:11:54Z",
+    "tool": "leanfinder",
+    "query": "An algebraic closure of Q_p has an extending ultrametric norm and the minimal polynomial of any element has distinct roots separated by a positive minimum distance",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl.instIsUltrametricDist",
+     "PadicAlgCl.normedField",
+     "PadicComplex.instNormedField",
+     "PadicAlgCl.norm_extends",
+     "PadicComplex.norm_extends",
+     "PadicAlgCl.spectralNorm_eq",
+     "Padic.instNontriviallyNormedField",
+     "PadicAlgCl.isAlgebraic"
+    ],
+    "digest": "db9b53b9670ed1d0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined item: hits give ingredients, not the prescribed finite root-distance minimum. Existing Mathlib leaves are reused for norm extension and separable distinct roots; the remaining finite-minimum argument is elementary."
+  },
+  {
+   "tool": "grep",
+   "query": "normedField|isNonarchimedean_spectralNorm|spectralNorm_extends|minpoly.*separable",
+   "results": {
+    "t": "2026-10-22T11:12:26Z",
+    "tool": "grep",
+    "query": "normedField|isNonarchimedean_spectralNorm|spectralNorm_extends|minpoly.*separable",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 17,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/InvariantExtension.lean",
+     "Mathlib/Analysis/Normed/Unbundled/AlgebraNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/AlgebraNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/AlgebraNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/AlgebraNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/RingSeminorm.lean"
+    ],
+    "digest": "350ff3cb7a1ec639"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined item: hits give ingredients, not the prescribed finite root-distance minimum. Existing Mathlib leaves are reused for norm extension and separable distinct roots; the remaining finite-minimum argument is elementary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In the algebraic closure of a p-adic field minimal polynomials have distinct roots with a positive lower bound on distances to any other root",
+   "results": {
+    "t": "2026-10-22T11:12:26Z",
+    "tool": "leansearch",
+    "query": "In the algebraic closure of a p-adic field minimal polynomials have distinct roots with a positive lower bound on distances to any other root",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl",
+     "ConjRootClass.nodup_aroots_minpoly",
+     "Polynomial.nodup_aroots_iff_of_splits",
+     "Polynomial.nodup_roots",
+     "Polynomial.count_roots_le_one",
+     "Polynomial.nodup_roots_iff_of_splits",
+     "ConjRootClass.separable_minpoly",
+     "IsNormalClosure.splits"
+    ],
+    "digest": "39d6f8f2e4778271"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined item: hits give ingredients, not the prescribed finite root-distance minimum. Existing Mathlib leaves are reused for norm extension and separable distinct roots; the remaining finite-minimum argument is elementary."
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly, Polynomial.Separable",
+   "results": {
+    "t": "2026-10-22T11:12:26Z",
+    "tool": "loogle",
+    "query": "minpoly, Polynomial.Separable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow",
+     "IsPrimitiveRoot.separable_minpoly_mod",
+     "IsKrasner.krasner"
+    ],
+    "digest": "9dd4e1def8f1190a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined item: hits give ingredients, not the prescribed finite root-distance minimum. Existing Mathlib leaves are reused for norm extension and separable distinct roots; the remaining finite-minimum argument is elementary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite set of distinct roots in an algebraic extension of a complete nonarchimedean characteristic zero field has a positive minimum norm distance from a fixed root",
+   "results": {
+    "t": "2026-10-22T11:13:07Z",
+    "tool": "leanfinder",
+    "query": "A finite set of distinct roots in an algebraic extension of a complete nonarchimedean characteristic zero field has a positive minimum norm distance from a fixed root",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ClassGroup.exists_mem_finset_approx'",
+     "ClassGroup.normBound_pos",
+     "NumberField.house.exists_ne_zero_int_vec_house_le",
+     "ClassGroup.exists_mem_finsetApprox",
+     "NumberField.exists_conjugate_one_le_norm",
+     "ClassGroup.norm_lt",
+     "NumberField.Embeddings.finite_of_norm_le",
+     "NumberField.Embeddings.coeff_bdd_of_norm_le"
+    ],
+    "digest": "e6d75fa0a2be0837"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined item: hits give ingredients, not the prescribed finite root-distance minimum. Existing Mathlib leaves are reused for norm extension and separable distinct roots; the remaining finite-minimum argument is elementary."
+  },
+  {
+   "tool": "grep",
+   "query": "rat_dense|denseRange_ratCast",
+   "results": {
+    "t": "2026-10-22T11:14:01Z",
+    "tool": "grep",
+    "query": "rat_dense|denseRange_ratCast",
+    "sub": "NumberTheory/Padics",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Padics/RingHoms.lean",
+     "Mathlib/NumberTheory/Padics/WithVal.lean",
+     "Mathlib/NumberTheory/Padics/WithVal.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+     "Mathlib/NumberTheory/Padics/PadicNumbers.lean"
+    ],
+    "digest": "c20ca4b9d7e0b943"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the combined item: hits give ingredients, not the prescribed finite root-distance minimum. Existing Mathlib leaves are reused for norm extension and separable distinct roots; the remaining finite-minimum argument is elementary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-padic-rational-algebraic-generator",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md: arithmetic coefficient-topology input to the continuous algebraic-closure comparison; Rational-algebraic simple overfield for a p-adic algebraic element. Returned proof steps 1–3: norm extension, characteristic-zero separable minimal polynomial, and the conjugate-gap construction (Extension.lean:84–109). General extending-norm input: Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean:854–912; rational density: Mathlib/NumberTheory/Padics/PadicNumbers.lean:815–823.",
+   "via": [
+    "lem-sfb-padic-rational-algebraic-generator",
+    "lem-sfb-algcl-countable-closed-finite-cover",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-padic-minpoly-normed-separation",
+  "worker": "stage1",
+  "summary": "Q141: retained the statement and all inherited searches. Reused the existing spectral-norm, irreducible-derivative and distinct-root Mathlib leaves; supplied explicit completion-density, degree-positivity, characteristic-zero derivative, and finite-minimum arguments. No new nodes. Checked arbitrary algebraic closures and the linear/empty-conjugate case.",
+  "blueprint": "Realizes the norm, minimal-polynomial and root-gap input to paragraph (3) of main-20261015/sk-thm-sf-ctf-stability-direct-images.proof.md, along the inherited rational-algebraic-generator/countability branch. The ancestor command returns None, as already recorded in blueprint.from.node."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-b6a904501",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-b6a904501 (reviewer sub-agent of L); spot-checked: I read the item and its 5-step proof in full: 0 new nodes, statement and stmt_deps unchanged from base. Sources checked: L19.pdf p.3 Prop 1.1.9 bullet 1 is the countability context only, and proof_origin=agent is correct. Extension.lean:84-109 has the same minpoly/S/delta construction. I also read Mathlib Padic.rat_dense (PadicNumbers.lean:815), spectralNorm_extends (:573), isNonarchimedean_spectralNorm (:645), spectralNorm.normedField (:854) and separable_iff_derivative_ne_zero (Separable.lean:299). Steps: (1) density, completeness, nonarchimedean and nontrivial (|l|=1/l) from def-weil-l-adic-numbers; (2) the spectral-norm lemma's hypotheses (complete, nontrivial, nonarchimedean base; L/F algebraic) all hold, and its clauses give every norm property, including the extension via s(c*1)=|c|; (3) the minimal-polynomial def gives monic, irreducible and f(x)=0, and n>=1 because a monic constant is 1; (4) coeff_{n-1}(f')=n is nonzero in char 0, so the irreducible-derivative iff gives separability, and the distinct-roots leaf gives n distinct roots and the factorization; (5) the finite-minimum argument is elementary. Edge cases checked: x in k or x=0 (S empty, delta=1), quadratic x, repeated distances. Char 0 is used only in step 4. Batch-5 flag: lem-trf-spectral-norm-algebraic-extension and lem-trf-irreducible-separable-derivative are Mathlib leaves with no proof_deps. They are general field and valuation facts, not steps of the trace formula or Poincare duality, and their closure reaches neither, so I accepted them. No duplicates (rg -L search), no restated clauses, no SGA, route unaffected (only definitions and Mathlib leaves cited)."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.MinpolyNormedSeparation",
+  "declaration": "Padic.exists_absoluteValue_minpoly_separation_of_isAlgClosure",
+  "file": "lean/Sheaf/NumberTheory/Padics/MinpolyNormedSeparation.lean",
+  "statement": "theorem exists_absoluteValue_minpoly_separation_of_isAlgClosure (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic ell) Ω] [IsAlgClosure (Padic ell) Ω] : CompleteSpace (Padic ell) ∧ CharZero (Padic ell) ∧ IsUltrametricDist (Padic ell) ∧ (∃ z : Padic ell, 1 < ‖z‖) ∧ (∀ (z : Padic ell) (r : ℝ), 0 < r → ∃ q : ℚ, ‖z - q‖ < r) ∧ ∃ v : AbsoluteValue Ω ℝ, (∀ z : Padic ell, v (algebraMap (Padic ell) Ω z) = ‖z‖) ∧ IsNonarchimedean (v : Ω → ℝ) ∧ (∃ m : MetricSpace Ω, ∀ z w : Ω, @dist Ω m.toDist z w = v (z - w)) ∧ ∀ x : Ω, ∃ f : Polynomial (Padic ell), f = minpoly (Padic ell) x ∧ f.Monic ∧ Irreducible f ∧ f.Separable ∧ 1 ≤ f.natDegree ∧ f.aeval x = 0 ∧ (∃ roots : Fin f.natDegree → Ω, Function.Injective roots ∧ (∀ i : Fin f.natDegree, f.aeval (roots i) = 0) ∧ f.map (algebraMap (Padic ell) Ω) = ∏ i : Fin f.natDegree, (Polynomial.X - Polynomial.C (roots i))) ∧ ∃ S : Set Ω, S = {y : Ω | f.aeval y = 0 ∧ y ≠ x} ∧ S.Finite ∧ ∃ δ : ℝ, δ = (if S = ∅ then 1 else sInf ((fun y : Ω ↦ v (x - y)) '' S)) ∧ 0 < δ ∧ ∀ y ∈ S, δ ≤ v (x - y)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a83e4e4e",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Only the node's lean field changed; lean.statement matches the file verbatim. Every node clause is rendered: the base-field facts (complete, CharZero, IsUltrametricDist, exists z with 1<|z|, rat_dense form) are conclusions, not assumptions. The AbsoluteValue Omega R is chosen before all x, extends the l-adic norm, is nonarchimedean and comes with a metric of distance v(z-w). f = minpoly is monic, irreducible, separable, natDegree>=1 and vanishes at x; injective Fin natDegree roots give the product factorization. S is pinned to exactly the other roots and is finite; delta = if S=empty then 1 else sInf, which is the minimum on a finite set; 0<delta and the bound hold. Omega is an arbitrary IsAlgClosure in any universe with no extra assumption. stmt_dep records are used as recorded, with no copies and no existing combined declaration. Gates: only a sorry proof, source and blueprint docstrings, all 5 proof steps in the docstring, both report sections present (second reading by the same worker). Edge cases checked: x in k or x=0 (S empty, delta=1), quadratic x, l=2. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,353 @@
+{
+ "id": "lem-sfb-stack-qcoh-flat-atlas-exactness",
+ "kind": "statement",
+ "title": "Tensor closure, cokernels and faithful flat-atlas tests for quasi-coherent modules",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal X$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack]. Use its ringed big fppf site and local-presentation notion of quasi-coherence from [def-sfb-stack-quasi-coherent-algebra], module sheaves from [def-weil-sheaf-of-modules-category], and tensor products from [def-pur-sheaf-tensor-product]. The structure module and tensor products of quasi-coherent modules are quasi-coherent. The cokernel of a map between quasi-coherent modules, computed in all fppf module sheaves, is quasi-coherent and is also its cokernel in quasi-coherent modules. Let $(a_i:U_i\\to\\mathcal X)_{i\\in I}$ be a small jointly surjective family of flat scheme tests; flat means flat on scheme charts [def-weil-flat-morphism], and joint surjectivity means every field-valued point lifts after a field extension to some $U_i$. Restriction of quasi-coherent modules to $(U_i)_{\\mathrm{et}}$ uses the scheme-test identifications of [lem-sfb-stack-quasi-coherent-scheme-restriction] and the small etale sites [def-weil-pbc-etale-site]. The combined restriction functor is faithful and detects isomorphisms. A map of quasi-coherent modules is an epimorphism if and only if each restriction is a surjection of etale module sheaves, meaning that every section lifts after an etale covering. Each individual flat-test restriction preserves epimorphisms. In the big fppf module-sheaf category an epimorphism is equivalently local surjectivity for fppf coverings. No quasi-compactness of the atlas, finiteness of the modules, or exactness of the inclusion on kernels is asserted.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex; literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 06WV, lemma-quasi-coherent-algebraic-stack, parts (2)-(5) and proof (faithful exact atlas restriction); Tag 0GQF, lemma-quasi-coherent-check-exact, statement and proof. Module-sheaf cokernels are sheafified sectionwise cokernels."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-flat-morphism",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "def-weil-pbc-etale-site",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-stack-small-etale-restriction"
+ ],
+ "proof": [
+  {
+   "text": "The structure module has the presentation $0\\to\\mathcal O_{\\mathcal X}\\xrightarrow{1}\\mathcal O_{\\mathcal X}\\to0$ on every slice, so is quasi-coherent. We will use the local-presentation definition also in the following form: a module $H$ is quasi-coherent if its restriction to every slice over an object $x\\in\\mathcal X(T)$ is quasi-coherent. Indeed the covering and free presentation supplied on that slice for its terminal object are exactly the covering and presentation required at $x$ in the original site. All sets and sites below use the stipulated universe convention.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WI (lemma-characterize-quasi-coherent), sufficiency directly from the local-presentation definition"
+   }
+  },
+  {
+   "text": "For quasi-coherent $F,G$, fix any object $x\\in\\mathcal X(T)$. By scheme restriction their slice restrictions are $A_T(F_x)$ and $A_T(G_x)$, where $A_T(M)(u:T^\\prime\\to T)=\\Gamma(T^\\prime,u^*M)$. Localized restriction commutes with the sheaf tensor product. The big-fppf scheme equivalence identifies their tensor product with $A_T(F_x\\otimes G_x)$. The scheme tensor-closure theorem makes $F_x\\otimes G_x$ quasi-coherent, hence the slice tensor is quasi-coherent. Apply the local-presentation observation of step 1 at every $x$ to obtain quasi-coherence of $F\\otimes G$.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WN (lemma-qc-colimits)(2), proof by scheme slices; descent.tex Tag 06VE(7)"
+   }
+  },
+  {
+   "text": "Let $\\varphi:F\\to G$ be a map of quasi-coherent modules and form its ambient module-sheaf cokernel $q:G\\to C$. Precomposition to the slice over $x\\in\\mathcal X(T)$ preserves ambient cokernels by the fibred-fppf inverse-image theorem. The big-fppf scheme comparison therefore identifies $C|_x$ with $A_T(\\operatorname{Coker}\\varphi_x)$, including the quotient map, since it preserves ambient cokernels. The scheme cokernel theorem makes $\\operatorname{Coker}\\varphi_x$ quasi-coherent. Step 1 gives quasi-coherence of $C$. Its ambient universal property restricts to the full subcategory of quasi-coherent modules, so this same $q$ is its cokernel there. In particular for every test $x$, the Zariski module $C_x$ is canonically $\\operatorname{Coker}\\varphi_x$.",
+   "uses": [
+    "lem-sfb-fibred-fppf-ringed-inverse-image",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WN (lemma-qc-colimits)(1), proof; Tag 06WV(3),(4); descent.tex Tag 06VE(3),(4)"
+   }
+  },
+  {
+   "text": "For each scheme $T$, use the equivalence $M\\mapsto M_{\\mathrm{et}}$ from Zariski quasi-coherent modules to small-etale quasi-coherent modules. It is fully faithful, and it is exact into all small-etale module sheaves. It consequently identifies the ambient cokernel of $(\\varphi_x)_{\\mathrm{et}}$ with $(\\operatorname{Coker}\\varphi_x)_{\\mathrm{et}}=(C_x)_{\\mathrm{et}}$: factor $\\varphi_x$ through its quasi-coherent image, use the two short exact sequences with its quasi-coherent kernel and cokernel, and apply exactness to those sequences. The kernel is quasi-coherent by the scheme kernel theorem. Thus the small-etale restriction functor on our quasi-coherent modules preserves the cokernels of step 3. Full faithfulness also detects whether a quasi-coherent Zariski map is an isomorphism or an object is zero.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE (lemma-equivalence-quasi-coherent-limits)(1),(5), on the small etale site only"
+   }
+  },
+  {
+   "text": "For module sheaves on any of the sites in use, the underlying abelian-sheaf functor preserves cokernels and is faithful. It reflects zero objects, since a module sheaf with zero underlying groups has only zero sections. Hence a module map is epi precisely when its underlying abelian-sheaf map is epi (both mean that the common underlying cokernel is zero), and the general-site abelian-sheaf theorem identifies this with local lifting of every section. This proves the claimed fppf interpretation and the analogous small-etale interpretation. Moreover $\\varphi$ is epi in quasi-coherent modules exactly when it is epi in all module sheaves: an ambient epi cancels all maps in the full subcategory; conversely, if $\\varphi$ is epi there, its quasi-coherent cokernel map $q$ of step 3 satisfies $q\\varphi=0$ and hence $q=0$. The ambient cokernel map is epi, so $1_Cq=0q$ forces $1_C=0$, and $C=0$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), with Tag 03CN (lemma-abelian-abelian), local-surjectivity characterization"
+   }
+  },
+  {
+   "text": "Fix a scheme test $x:T\\to\\mathcal X$. The representable-diagonal theorem makes $P_i=T\\times_{\\mathcal X}U_i$ an algebraic space, regarding schemes as spaces. Choose a surjective etale scheme atlas $W_i\\to P_i$ for each $i$. The maps $g_i:W_i\\to T$ are flat by the hypothesis that each representable $a_i$ is flat on scheme-base-change charts: $W_i\\to P_i$ is precisely such an etale chart of its base change to $T$. They are jointly surjective. Indeed a residue-field point $t:\\operatorname{Spec}\\kappa(t)\\to T$ lifts, after a field extension, to some $U_i$ together with an isomorphism of its image with $x(t)$. This is a field-valued point of $P_i$. Pulling the surjective etale atlas back to that field gives a nonempty scheme; a residue field of one of its points gives a further field extension and a point of $W_i$ over $t$. This argument does not require the $g_i$ to be fppf covers or quasi-compact. By the cartesian scheme-test comparisons, $g_i^*\\varphi_x\\simeq h_i^*\\varphi_{a_i}$, where $h_i:W_i\\to U_i$ is the other projection, naturally on modules and arrows.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0GQF (lemma-quasi-coherent-check-exact), common-refinement paragraph (its V denotes the chosen scheme atlas U); scheme-chart flatness is the representable-flat hypothesis"
+   }
+  },
+  {
+   "text": "If every small-etale restriction $\\varphi_i$ is an isomorphism, step 4 makes each Zariski $\\varphi_{a_i}$ an isomorphism. Fix $x:T\\to\\mathcal X$ and the family $g_i$ of step 6. Each $g_i^*\\varphi_x$ is an isomorphism, since it identifies with the pullback $h_i^*\\varphi_{a_i}$ of an isomorphism. The scheme flat-cover reflection theorem, applied to the jointly surjective flat family $(g_i)$, gives that $\\varphi_x$ is an isomorphism. This holds for every $x$. The formula $F(x)=\\Gamma(T,F_x)$ then makes every component of the original sheaf map $\\varphi$ bijective. Their inverse maps commute with restrictions by the naturality equation for $\\varphi$, so define its module-sheaf inverse. Thus $\\varphi$ is an isomorphism. Restriction preserves any inverse, proving both directions.",
+   "uses": [
+    "lem-sc-flat-cover-module-isomorphism-reflection",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0GQF (lemma-quasi-coherent-check-exact), common flat scheme refinements and reflection of bijectivity"
+   }
+  },
+  {
+   "text": "The combined restriction is faithful. Given two maps with the same restrictions, subtract them to obtain $\\psi:F\\to G$ whose restrictions are zero. Its ambient cokernel $q:G\\to C$ is quasi-coherent by step 3. Step 4 identifies every restricted $q_i$ with the cokernel of the zero map, hence an isomorphism. Step 7 makes $q$ an isomorphism. Since $q\\psi=0$, composing with $q^{-1}$ gives $\\psi=0$, so the original two maps agree. This only uses cokernels, without using ambient kernels of quasi-coherent modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0GQF, faithful restriction consequence assembled from the preceding cokernel and isomorphism tests"
+   }
+  },
+  {
+   "text": "Finally, by step 5, $\\varphi$ is epi in quasi-coherent modules if and only if its ambient cokernel $C$ is zero. If $C=0$, steps 3 and 4 give zero cokernel for the restriction to every scheme test, hence each restriction is an epi and is locally surjective for the etale topology by step 5. This in particular proves preservation of epimorphisms by every individual flat-test restriction. Conversely, if each specified atlas restriction is locally surjective, its cokernel $(C_{a_i})_{\\mathrm{et}}$ is zero by steps 4 and 5. Thus the map $0\\to C$ restricts to an isomorphism at every $a_i$, and step 7 makes $C=0$. Apply step 5 again. This proves the requested atlas criterion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0GQF, surjectivity test via the common ambient cokernel; Tag 06WV(3),(4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-sfb-fibred-fppf-ringed-inverse-image",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "def-trf-algebraic-space",
+  "lem-sc-flat-cover-module-isomorphism-reflection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex; literature/stacks-project/stacks-cohomology.tex; literature/stacks-project/descent.tex",
+  "place": "Tags 06WN, 06WV(3)-(5), 0GQF and 06VE(1),(3)-(5),(7); the common-flat-refinement proof, with its isomorphism test applied to cokernels for faithfulness and epimorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on an algebraic stack surjectivity injectivity and isomorphisms can be checked on a flat surjective scheme atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk.inj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If two quasicoherent sheaf data structures constructed via local presentations are equal, then their index types are equal, their covering families are isomorphic, and their local presentations are is\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f] [CategoryTheory.Mono f], CategoryTheory.IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of quasi coherent sheaves on an Artin stack is abelian inclusion in fppf modules is right exact flat atlas restriction detects epimorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"instAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Abelian (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules forms an abelian category. This follows from the fact that the category of sheaves on the site of light profinite spaces (equipped wit\"}\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type v} [inst : CategoryTheory.SmallCategory C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁)\\n  [inst_1 : CategoryTheory.Category.{v, u₁} A] [inst_2 : CategoryTheory.Abelian A]\\n  [CategoryTheory.IsGrothendieckAbelian.{v, v, u₁} A] [inst_4 : CategoryTheory.HasSheafify J A],\\n  Categ\", \"doc\": \"Given a small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and an abelian category $\\\\mathcal{A}$ that is Grothendieck abelian with a sheafification functor, the category of sheaves on $\\\\ma\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"CategoryTheory.sheafIsAbelian\", \"module\": \"Mathlib/CategoryTheory/Sites/Abelian\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type w} →\\n      [inst_1 : CategoryTheory.Category.{w', w} D] →\\n        [CategoryTheory.Abelian D] →\\n          {J : CategoryTheory.GrothendieckTopology C} →\\n            [CategoryTheory.HasSheafify J D] → CategoryTheory.Abelian (Cat\", \"doc\": \"For any category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and an abelian category $\\\\mathcal{D}$, the category of sheaves on $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ inherits an abelia\"}\n  {\"name\": \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u₂} [inst : CategoryTheory.Category.{v, u₂} C] [inst_1 : CategoryTheory.EssentiallySmall.{v, v, u₂} C]\\n  (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v, u₁} A]\\n  [inst_3 : CategoryTheory.Abelian A] [CategoryTheory.IsGrothendieckAbelian.{v, \", \"doc\": \"Let $\\\\mathcal{C}$ be an essentially small category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a Grothendieck abelian category. If there exists a sheafification functor for pre\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"exact\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|QCoh|quasicoherent.*(exact|surject)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithful exact restriction of quasi coherent modules on algebraic stacks to flat scheme covers and right exact inclusion into fppf sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"Module.FaithfullyFlat.toFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommRing R} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : Module.FaithfullyFlat R M], Module.Flat R M\", \"doc\": \"If $ M $ is a faithfully flat module over a commutative ring $ R $, then $ M $ is flat over $ R $. Faithful flatness implies flatness as a module property.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.rec\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure, which is established via sheaf composition, weak she\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|quasicoherent.*(atlas|cokernel)|faithful.*flat.*sheaf",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract local-presentation predicates and scheme morphism flat descent do not state tensor/cokernel closure or faithful flat-atlas restriction for quasi-coherent modules on algebraic stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"cokernel\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract local-presentation predicates and scheme morphism flat descent do not state tensor/cokernel closure or faithful flat-atlas restriction for quasi-coherent modules on algebraic stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent modules on algebraic stacks tensor closure cokernel preservation and epimorphisms detected on flat covers",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, SheafOfModules.QuasicoherentData.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract local-presentation predicates and scheme morphism flat descent do not state tensor/cokernel closure or faithful flat-atlas restriction for quasi-coherent modules on algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves on algebraic stacks tensor products cokernels and faithful restriction to jointly surjective flat scheme tests",
+   "results": "8 hits: SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract local-presentation predicates and scheme morphism flat descent do not state tensor/cokernel closure or faithful flat-atlas restriction for quasi-coherent modules on algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithful flat atlas pullback detects isomorphisms and surjectivity for quasi coherent modules on Artin stacks",
+   "results": "8 hits: AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract local-presentation predicates and scheme morphism flat descent do not state tensor/cokernel closure or faithful flat-atlas restriction for quasi-coherent modules on algebraic stacks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-qcqs-algebra-direct-image",
+  "date": "2026-10-23",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1): interpreting f_*A and f_*B as quasi-coherent algebras before applying Lemma 4.1.7 to g; Q125 split: module tensor closure and flat-atlas detection before the smooth-etale surjectivity consequence",
+   "via": [
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-qcoh-flat-atlas-exactness",
+  "worker": "stage1",
+  "summary": "Proved structure/tensor and cokernel closure by scheme slices, then used small-etale exact comparison, common flat scheme refinements and the existing scheme reflection theorem for conservativity. Faithfulness and epi detection follow by applying conservativity to ambient quasi-coherent cokernels. Reused existing nodes throughout; no new nodes, no statement change, no use of exact big-fppf kernels.",
+  "blueprint": "Realizes the inherited supporting place for det-thm-sf-ctf-stability-direct-images proof (3), Q125 module tensor closure and flat-atlas detection in the adequate-moduli prerequisite chain. Read the current latest blueprint direct-images proof (3) and unit. blueprint_refs.py ancestor returns None for this inherited created-node chain, so the explicit inherited from.place and via are retained with from.node null; searches for flat atlas, 06WV, flat covering and quasi-coherent found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "General ringed-site localization/tensor comparison used on a scheme slice; no alternative six-functor route is taken."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "Scheme tensor closure used in the scheme-slice reduction of Stacks 06WN; no node of this unit gives the underlying scheme theorem."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Scheme quasi-coherent cokernel and image closure used in Stacks 06WN and the small-etale cokernel comparison; a general scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Scheme quasi-coherent kernel closure only, to factor a scheme map into short exact sequences; no big-fppf kernel identification is used."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "General scheme comparison, including full faithfulness, required to interpret the small-etale tests; same-unit exactness lemma alone does not state full faithfulness."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General ringed-site forgetful/cokernel theorem giving the underlying abelian-sheaf epi test."
+   },
+   {
+    "node": "lem-sc-flat-cover-module-isomorphism-reflection",
+    "why": "General scheme-module flat-family isomorphism reflection, exactly the scheme black box in the proof of Stacks 0GQF; no quasi-compactness is imposed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-flat-cover-module-isomorphism-reflection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-51e1e3ccd",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-51e1e3ccd (reviewer sub-agent of L); spot-checked: I read the item and all nine steps in full, together with every cited statement and Stacks 0GQF (stacks-cohomology.tex 167-222) and 06WV (stacks-sheaves.tex 2384-2434). The item is still unsplit with no proof on side-live and live, so the delivery is not superseded; the statement and stmt_deps are identical to live and nothing was weakened. The delivery creates no new nodes. Instead of the source's [U/R] groupoid route, the proof runs 0GQF's common flat refinement (W_i an étale atlas of T x_X U_i, flat and pointwise jointly surjective) at every scheme test T. It then applies lem-sc-flat-cover-module-isomorphism-reflection, which is stated for arbitrary modules with no quasi-compactness hypothesis, and concludes by F(x)=Gamma(T,F_x). Tensor and cokernel closure come from scheme slices (scheme-restriction, localized tensor restriction, the big-fppf equivalence, which preserves ambient cokernels, and the fibred inverse image). Step 4 gets étale cokernel preservation from the short-exact-sequence exactness node by splitting into the quasi-coherent kernel, image and cokernel, so no exactness of the inclusion is assumed. Step 5 shows that epi in QCoh is the same as ambient epi and that both mean the cokernel is zero. Steps 8 and 9 get faithfulness and the epi criterion by applying the iso test to cokernels. Edge cases: a single Spec Q test preserves epis but is not faithful, which matches the statement; a flat non-fppf family {Z[1/2], Z_(2)} still detects isos. No duplicate exists: the groupoid-module-descent node is about [U/R] only. The seven tool_uses are generic scheme or site black boxes and are accepted. The batch-5 trf citations are general definitions (space quasi-coherence, algebraic spaces) or foundational QCoh comparisons (03DX, 06VE), and are not part of the trace formula or Poincare duality or their proofs, so they are accepted. No SGA source is cited, and no changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackQCohFlatAtlasExactness",
+  "declaration": "CategoryTheory.moduliQCoh_flat_atlas_exactness",
+  "declarations": [
+   "CategoryTheory.moduliAtlasTest",
+   "CategoryTheory.moduliQCohEtaleRestriction",
+   "CategoryTheory.moduliQCohAtlasRestriction",
+   "CategoryTheory.IsLocallySurjectiveModuliEtaleMap",
+   "CategoryTheory.moduliQCoh_unit_tensor",
+   "CategoryTheory.moduliQCoh_cokernels",
+   "CategoryTheory.moduliModule_epi_iff_locallySurjective",
+   "CategoryTheory.moduliQCoh_flat_test_preserves_epi",
+   "CategoryTheory.moduliQCoh_flat_atlas_exactness"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackQCohFlatAtlasExactness.lean",
+  "statement": "theorem moduliQCoh_flat_atlas_exactness {S : Scheme.{u}} (C : BasedCategory.{v, w} (Over S)) (hC : IsAlgebraicModuliStack C) {I : Type (max (u + 1) v w)} (U : I → Over S) (a : ∀ i, BasedFunctor (discreteModuli (yoneda.obj (U i))) C) (hflat : ∀ i, ModuliSpaceTest (@Flat) (a i)) (hsurj : ∀ (K : Type u) [Field K] (b : Spec (.of K) ⟶ S) (y : BasedFunctor (discreteModuli (yoneda.obj (Over.mk b))) C), ∃ (L : Type u) (_ : Field L) (e : K →+* L) (i : I) (l : Over.mk (Spec.map (CommRingCat.ofHom e) ≫ b) ⟶ U i), Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map l)).comp (a i)) ((discreteModuliMap (yoneda.map (Over.homMk (Spec.map (CommRingCat.ofHom e))))).comp y))) : (moduliQCohAtlasRestriction C hC.1.1 U a).Faithful ∧ (moduliQCohAtlasRestriction C hC.1.1 U a).ReflectsIsomorphisms ∧ ∀ (F G : ModuliQCoh C hC.1.1) (f : F ⟶ G), Epi f ↔ ∀ i, IsLocallySurjectiveModuliEtaleMap (moduliAtlasTest (a i)) f",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Five theorem statements cover all clauses of the unchanged node. Cartesian small-etale restriction is imported from its new definition owner def-sfb-stack-small-etale-restriction, extracted without changing the helpers from StackLqcCoherator; this item does not depend on the quasi-coherator theorem. The chartwise flat predicate is the existing ModuliSpaceTest."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-319a3aff5",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after H2 return of b0eb. Module diff is one line: the StackLqcCoherator import is replaced by StackSmallEtaleRestriction, owned by the landed definition node def-sfb-stack-small-etale-restriction (reviewed pass on side-live). The node differs from side-live only in lean and in stmt_deps, which add two definition nodes (def-sfb-dm-stack-morphism-properties, def-sfb-stack-small-etale-restriction) and no longer cite the coherator theorem. The statement is unchanged. Clauses checked against Lean: unit/tensor quasi-coherence; ambient cokernel quasi-coherent and also the QCoh cokernel; ModuliSpaceTest Flat equals flat on charts; hsurj is field-extension lifting with a 2-iso; Faithful and ReflectsIsomorphisms of Functor.pi'; epi iff étale local surjectivity; single flat test preserves epi; fppf epi iff local surjectivity. lean.statement is verbatim. Edge cases checked: empty I, non-surjective single test, non-quasi-compact families, independent universes. Helpers are real compositions and theorems are sorry only. No name clashes and all imports present on side-live. Nothing compiled and no file changed."
+ }
+}

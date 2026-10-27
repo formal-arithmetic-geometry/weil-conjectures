@@ -15,109 +15,57 @@
  ],
  "proof": [
   {
-   "text": "Fix $t'\\in T'$ and put $t=g(t')$, $k=\\kappa(t)$, $L=\\kappa(t')$. The residue-field map in [def-weil-residue-field] makes $L$ an extension of $k$. Put $Y=X_t$ using [def-pc-scheme-fibre], and write $E=\\overline{k}$, $F=\\overline{L}$. By [def-weil-geometric-fibre], $X_{\\bar t}=Y\\times_k\\operatorname{Spec}E$ and $X'_{\\bar t'}\\cong Y\\times_k\\operatorname{Spec}F$. For the latter identification, the universal property [def-pc-fibre-product] says that a morphism into $(X\\times_TT')\\times_{T'}\\operatorname{Spec}F$ is a pair of maps into $X$ and $\\operatorname{Spec}F$ agreeing in $T$: its map into $T'$ is forced by $\\operatorname{Spec}F\\to T'$. The same pair specifies a map into $X\\times_T\\operatorname{Spec}F$, or into $(X\\times_T\\operatorname{Spec}k)\\times_k\\operatorname{Spec}F$, because $\\operatorname{Spec}F\\to T$ factors through $\\operatorname{Spec}k$. These identifications preserve all projections.",
+   "text": "Fix $t'\\in T'$, put $t=g(t')$, $k=\\kappa(t)$ and $L=\\kappa(t')$; the embedding $k\\to L$ is supplied by [def-weil-residue-field]. Choose algebraic closures $E/k$ and $F/L$ [def-weil-algebraic-closure]. Choose an affine open cover $X_t=\\bigcup_i\\operatorname{Spec}A_i$. Apply [lem-trf-geometric-fibre-affine-chart-test] first with $g=\\mathrm{id}_T$, point $t$ and $H=E$ (so its two residue fields are both $k$), then with the actual $g$, point $t'$ and $H=F$. For the identity base change, the first projection $X\\times_TT\\to X$ and the map $(1_X,f):X\\to X\\times_TT$ are inverse by the uniqueness in [def-pc-fibre-product]; hence its $E$-fibre is precisely $X_{\\bar t}$ up to the canonical isomorphism. Use the same affine cover of $X_t$ in both applications, and give $F$ its composite $k\\to L\\to F$ structure. It identifies the two reducedness conditions with, respectively, reducedness of every $A_i\\otimes_kE$ and of every $A_i\\otimes_kF$. In particular, it supplies the required fibre identifications and the covering assertion, without assuming either morphism flat.",
    "uses": [
     "def-weil-residue-field",
-    "def-pc-scheme-fibre",
-    "def-weil-geometric-fibre",
+    "def-weil-algebraic-closure",
+    "lem-trf-geometric-fibre-affine-chart-test",
     "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0576, first sentence of proof, with the affine chart test"
+   }
+  },
+  {
+   "text": "Both $E$ and $F$ are perfect. In characteristic $p>0$, for every $a$ the polynomial $Z^p-a$ has a root by algebraic closedness [def-weil-algebraic-closure], so Frobenius is surjective. Characteristic zero is the other case of perfectness. Regard $F$ as a $k$-field via $k\\to L\\to F$.",
+   "uses": [
+    "def-weil-algebraic-closure"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0576 (lemma-base-change-fibres-geometrically-reduced), first sentence of proof; fibre-product universal property, Tag 01JP"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00I4, perfect-field hypothesis verified from the definition"
    }
   },
   {
-   "text": "Regard $E$ and $F$ as extensions of $k$, with $k\\to F$ the composite $k\\to L\\to F$. Apply [lem-weil-common-extension-fields] to obtain a field $M$ and embeddings $E\\to M$, $F\\to M$ agreeing on $k$. Both $E$ and $F$ are perfect: in characteristic $p>0$, every $a$ has a $p$-th root because $Z^p-a$ has a root by [def-weil-algebraic-closure]; in characteristic zero this is the other case of the definition of perfectness. The field $M$ is reduced, since a nonzero nilpotent in a field would become $1=0$ on multiplication by a power of its inverse.",
+   "text": "For each $i$, apply [lem-trf-perfect-scalars-reducedness-comparison] to the $k$-algebra $A_i$ and the perfect extensions $E/k$ and $F/k$. It gives $A_i\\otimes_kE$ reduced if and only if $A_i\\otimes_kF$ reduced. Taking the conjunction over the same affine cover and using step 1 proves $X_{\\bar t}$ reduced if and only if $X'_{\\bar t'}$ reduced, in both directions.",
    "uses": [
-    "lem-weil-common-extension-fields",
-    "def-weil-algebraic-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 0H7K (lemma-common-extension-field); algebra.tex Tag 00I4 (lemma-perfect-reduced), perfectness hypothesis"
-   }
-  },
-  {
-   "text": "Choose an affine open cover $Y=\\bigcup_i U_i$, $U_i=\\operatorname{Spec}A_i$. For $H=E,F,M$, [lem-weil-pbc-open-fibre-product] identifies the inverse image of $U_i$ in $Y_H$ with $U_i\\times_k\\operatorname{Spec}H$; [lem-weil-pbc-fibre-product-affine-spectra] identifies this open with $\\operatorname{Spec}(A_i\\otimes_kH)$. The inverse images cover $Y_H$. Thus [lem-weil-pbc-affine-scheme-reduced-iff] and [def-pc-reduced-scheme] give: $Y_H$ is reduced if and only if every $A_i\\otimes_kH$ is reduced. Indeed reducedness of $Y_H$ gives reducedness on its open subschemes by the local-ring definition; conversely every point lies in one of these reduced opens and has the same local ring there.",
-   "uses": [
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-affine-scheme-reduced-iff",
-    "def-pc-reduced-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes), 01J2 (lemma-affine-reduced), 01J0 (definition-reduced)"
-   }
-  },
-  {
-   "text": "Assume $X_{\\bar t}$ is reduced. For every $i$, step 3 gives that $B_i=A_i\\otimes_kE$ is reduced. Apply [lem-weil-pbc-perfect-reduced-tensor] over the perfect field $E$ to the reduced $E$-algebras $B_i$ and $M$. It follows that $B_i\\otimes_EM$ is reduced. By [lem-weil-pbc-tensor-cancel-base-change] this ring is $C_i=A_i\\otimes_kM$. More explicitly, after exchanging the two tensor factors by $a\\otimes h\\mapsto h\\otimes a$, the cancellation map is $m\\otimes(e\\otimes a)\\mapsto me\\otimes a$, and its inverse is $m\\otimes a\\mapsto m\\otimes(1\\otimes a)$; both preserve multiplication. Thus each $C_i$ is reduced.",
-   "uses": [
-    "lem-weil-pbc-perfect-reduced-tensor",
-    "lem-weil-pbc-tensor-cancel-base-change"
+    "lem-trf-perfect-scalars-reducedness-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00I4 (lemma-perfect-reduced); Tag 00D2 (lemma-tensor-with-bimodule), base-change cancellation"
+    "place": "Tag 00I4, scalar comparison via a common overfield"
    }
   },
   {
-   "text": "Put $D_i=A_i\\otimes_kF$. By [lem-weil-pbc-field-extension-base-change-faithfully-flat], applied to $M/F$ and $D_i$, the map $D_i\\to D_i\\otimes_FM$ is faithfully flat. Apply [lem-weil-pbc-faithfully-flat-universally-injective] with $R=N=D_i$ and $S=D_i\\otimes_FM$: under $D_i\\otimes_{D_i}S\\cong S$, $d\\otimes s\\mapsto ds$, it says this ring map is injective. The cancellation isomorphism [lem-weil-pbc-tensor-cancel-base-change] identifies $S$ with the reduced ring $C_i$ of step 4, by $(a\\otimes f)\\otimes m\\mapsto a\\otimes fm$. If $d^n=0$ in $D_i$, its image in $C_i$ is nilpotent and hence zero, and injectivity forces $d=0$. Therefore every $D_i$ is reduced; by steps 1 and 3, $X'_{\\bar t'}$ is reduced.",
-   "uses": [
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-universally-injective",
-    "lem-weil-pbc-tensor-cancel-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HI (lemma-flat-base-change), faithful field extension; Tag 05CK (lemma-faithfully-flat-universally-injective); Tag 00D2 (lemma-tensor-with-bimodule)"
-   }
-  },
-  {
-   "text": "Conversely assume $X'_{\\bar t'}$ is reduced. Then every $D_i=A_i\\otimes_kF$ is reduced by steps 1 and 3. Apply [lem-weil-pbc-perfect-reduced-tensor] over the perfect field $F$ to $D_i$ and the field $M$: it gives that $D_i\\otimes_FM$ is reduced. By [lem-weil-pbc-tensor-cancel-base-change] this is $C_i=A_i\\otimes_kM$. Now apply [lem-weil-pbc-field-extension-base-change-faithfully-flat] to $M/E$ and $B_i=A_i\\otimes_kE$. By [lem-weil-pbc-faithfully-flat-universally-injective] with $R=N=B_i$, the map $B_i\\to B_i\\otimes_EM\\cong C_i$ is injective. A nilpotent $b\\in B_i$ has zero image in this reduced $C_i$, so $b=0$. Hence every $B_i$ is reduced and steps 1 and 3 show that $X_{\\bar t}$ is reduced.",
-   "uses": [
-    "lem-weil-pbc-perfect-reduced-tensor",
-    "lem-weil-pbc-tensor-cancel-base-change",
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-universally-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00I4 (lemma-perfect-reduced), 00D2 (lemma-tensor-with-bimodule), 00HI (lemma-flat-base-change), 05CK (lemma-faithfully-flat-universally-injective)"
-   }
-  },
-  {
-   "text": "For the arbitrary point $t'$, steps 4--6 establish that $X'_{\\bar t'}$ is reduced exactly when $X_{\\overline{g(t')}}$ is reduced. Membership in the right-hand inverse image in the statement means precisely the latter condition, so extensionality of subsets proves the asserted equality. If $Y$ is empty, the affine cover in step 3 may be empty; all its ring conditions and all local-ring reducedness conditions are vacuous, so the same argument includes empty fibres. Every use of faithful flatness was for an extension of fields, not for either of the morphisms $f$ and $g$.",
+   "text": "Membership in the inverse image on the right of the statement is exactly reducedness of $X_{\\overline{g(t')}}$. The pointwise equivalence therefore proves the equality by extensionality. The closures in step 1 were arbitrary. For an empty fibre the affine cover may be empty, and both conjunctions and all local-ring conditions are vacuous. No flatness, finite-presentation or surjectivity hypothesis was introduced.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0576 (lemma-base-change-fibres-geometrically-reduced), equality of loci"
+    "place": "Tag 0576, equality of loci"
    }
   }
  ],
  "proof_deps": [
   "def-weil-residue-field",
-  "def-pc-scheme-fibre",
-  "def-weil-geometric-fibre",
-  "def-pc-fibre-product",
-  "lem-weil-common-extension-fields",
   "def-weil-algebraic-closure",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-affine-scheme-reduced-iff",
-  "def-pc-reduced-scheme",
-  "lem-weil-pbc-perfect-reduced-tensor",
-  "lem-weil-pbc-tensor-cancel-base-change",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-universally-injective"
+  "lem-trf-geometric-fibre-affine-chart-test",
+  "def-pc-fibre-product",
+  "lem-trf-perfect-scalars-reducedness-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -229,45 +177,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-geometric-reduced-fibre-locus-base-change",
   "worker": "stage1",
-  "summary": "Kept the arbitrary-scheme statement unchanged. Wrote the pointwise argument using a common extension of the two residue-field algebraic closures, affine covers, perfect-field reduced tensor products, and injectivity after field extension. Every input is an existing node; no new nodes. Checked both directions and empty fibres.",
+  "summary": "Repair of the current live-DAG promotion return at b650ae74e9a: compared all current item fields with the retained returned baseline (identical), re-read the direct citations and source passages, and obtained fresh-base server preflight OK at 3961715fa17 before editing. Added the explicit inverse maps identifying identity base change with X, citing the existing fibre-product universal-property statement. Retained the unchanged statement, both independent statement-only nodes, all original arguments in report.md, and all eleven logged searches. Updated citations and repair provenance. The assembly has 2133 characters; no step exceeds 2000. No Lean written or compiled.",
   "blueprint": "Realizes the base-change invariance of the good locus required by Temkin Remark 3.1.1(i) in the noetherian reduction for Proposition 3.5.2 within the proof ancestry of lem-trf-local-term-locality. No change to the unit route.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-common-extension-fields",
-    "why": "Common overfield for the two algebraic closures; a generic field-theory tool, not a replacement for any unit step."
-   },
-   {
-    "node": "lem-weil-pbc-perfect-reduced-tensor",
-    "why": "Reducedness after extending an algebraically closed scalar field; generic algebra needed to compare geometric fibres."
-   },
-   {
-    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "why": "Faithful flatness only of scalar extension by a field; no unit-specific result supplies it."
-   },
-   {
-    "node": "lem-weil-pbc-faithfully-flat-universally-injective",
-    "why": "Injectivity needed to reflect absence of nilpotents; a generic module-theory tool."
-   },
-   {
-    "node": "lem-weil-pbc-tensor-cancel-base-change",
-    "why": "Identifies the successive scalar extensions with the common ring; generic tensor algebra."
-   },
-   {
-    "node": "lem-weil-pbc-open-fibre-product",
-    "why": "Identifies pullbacks of affine open charts; generic scheme-theory tool."
-   },
-   {
-    "node": "lem-weil-pbc-fibre-product-affine-spectra",
-    "why": "Computes the affine charts of geometric fibres as tensor products; generic scheme-theory tool."
-   },
-   {
-    "node": "lem-weil-pbc-affine-scheme-reduced-iff",
-    "why": "Passes between chart rings and reduced affine schemes; generic scheme-theory tool."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-common-extension-fields",
@@ -280,12 +195,12 @@
   "lem-weil-pbc-affine-scheme-reduced-iff"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q25-41e312379",
-  "group": "Q25",
+  "reviewer": "NT-cc-Q54-4bd0f33e5",
+  "group": "Q54",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-41e312379 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit route, dependencies, report, and cited Stacks/Mathlib sources. The arbitrary base-change morphism, residue-field extensions, affine tensor identifications, both directions of reducedness reflection, empty fibres, and edge cases are correct. No duplicate or restated node, hidden long-step lemma, route-pivot violation, SGA citation, or batch-5 forbidden dependency was found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-4bd0f33e5 (reviewer sub-agent of L); spot-checked: Fourth delivery of the human's 2026-10-21 re-split. The three earlier heads were PASSed with no fixes: b64393cf, a9e1b67c and b650ae74. The landings of a9e1b67c and b650ae74 were refused because they were not promoted to the live DAG; that is for L, not a fault in this delivery. The live item is still the old 7-step split, and its statement and stmt_deps match the live node byte for byte. Compared with b650ae74, both new nodes (lem-trf-geometric-fibre-affine-chart-test and lem-trf-perfect-scalars-reducedness-comparison) are identical in every field. In the item, only step 1, proof_deps and split_report changed. Step 1 now adds that p:X×_T T→X and (1_X,f) are inverse by the uniqueness clause of def-pc-fibre-product, and cites that node. This is correct: p∘(1,f)=1, and (1,f)∘p has projections p and f∘p=q, so it is the identity. With def-weil-geometric-fibre, the chart-test application at g=id_T therefore gives X_t̄ itself. I re-read the whole argument. Stacks 0576 is at more-morphisms l.7161. The chart test holds because Spec H→T factors through Spec k (Stacks 01JR, 01I4, 01J0, 01J2). The ring comparison holds: take a common M, use 00I4 because E is perfect, and A⊗F→A⊗M is injective because M is free over F; the converse is symmetric. Tested cases: A=0; k=F_p(a) with A=k[x]/(x^p−a), so perfectness is needed; characteristic 0; transcendental F; an empty fibre. All 7 old steps are distributed, the two new nodes are comparable in size and independent, and the assembly is 2133 characters. A fresh search of the current snapshot found no duplicate of either new node. No SGA citation."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange",
@@ -305,5 +220,16 @@
   "result": "pass",
   "note": "Reviewed packet, node, all dependencies, source citation, Lean module, and report; verified exact statement, hypotheses, universes, edge cases, docstrings, sorry-only theorem, and no route-pivot/pro-etale issues. Reproduced scompile successfully for sandbox and library overlays. Wrote review.md."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

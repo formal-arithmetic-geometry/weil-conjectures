@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-reduced-quasifinite-space-field-decomposition",
+ "kind": "statement",
+ "title": "Reduced locally quasi-finite spaces over a field are unions of finite field spectra",
+ "statement": "Let $k$ be a field [def-weil-field] and $X$ an algebraic space over $\\operatorname{Spec}k$ [def-trf-algebraic-space, def-weil-affine-spectrum]. Suppose $X$ is reduced, meaning an etale scheme atlas has local rings without nonzero nilpotents, and $X\\to\\operatorname{Spec}k$ is locally quasi-finite, meaning that every etale scheme chart has locally quasi-finite structural morphism [pqf-def-quasifinite]. There are a set $I$, field extensions $K_i/k$ with $\\dim_k K_i<\\infty$ for every $i\\in I$, and an isomorphism of algebraic spaces over $k$ $$X\\simeq\\coprod_{i\\in I}\\operatorname{Spec}K_i.$$ The coproduct is the disjoint union of the represented schemes, regarded as an algebraic space. No quasi-compactness, separatedness or perfectness of $k$ is assumed; $I$ may be empty or infinite.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 06S0 (lemma-locally-quasi-finite-over-field), (1) implies (5), specialized to reduced spaces: each local Artinian algebra in (5) is reduced and hence a field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "pqf-def-quasifinite",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale scheme atlas $U\\to X$. Let $V\\to X$ be any etale scheme chart; its structural map $f:V\\to\\operatorname{Spec}k$ is locally quasi-finite by hypothesis, hence locally of finite type by [lem-weil-pbc-lqf-locally-finite-type]. Let $v\\in V$. By the definition [pqf-def-quasifinite] there are an affine open $v\\in\\operatorname{Spec}A=W\\subseteq V$ and an affine open of $\\operatorname{Spec}k$ containing $f(W)$; the one-point space $\\operatorname{Spec}k$ has itself as only nonempty open, so the ring map is $\\varphi:k\\to A$, of finite type and quasi-finite at the prime $\\mathfrak q$ of $v$. Apply [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension] to $\\varphi$: here $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)=(0)$, $\\kappa(\\mathfrak p)=k$ and $F=A\\otimes_kk\\cong A$ with $\\overline{\\mathfrak q}\\mapsto\\mathfrak q$, so $\\dim_{\\mathfrak q}\\operatorname{Spec}A=0$. By [def-kun-topological-dimension-at-point] the open neighbourhoods of $v$ in $W$ are open neighbourhoods of $v$ in $V$ with the same subspace topology, so $0\\le\\dim_vV\\le\\dim_vW=0$. In the chart definition of dimension recalled in [lem-sfb-zero-dimensional-field-space-components] (the same infimum over open neighbourhoods), every local dimension of $X$ is therefore zero, so $\\dim X\\le0$; the empty case has empty supremum. Local finite type is likewise tested on these charts.",
+   "uses": [
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-sfb-zero-dimensional-field-space-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06S0 (lemma-locally-quasi-finite-over-field), proof of (1) implies (2); chartwise use of morphisms.tex Tag 0397 (lemma-locally-quasi-finite-rel-dimension-0) in its affine ring form over the field k."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-zero-dimensional-field-space-components] with $K=k$. The preceding step verifies its local finite type and dimension hypotheses, with no separation assumption. Obtain a scheme representing $X$ and an isomorphism over $k$, $X\\simeq\\coprod_{i\\in I}\\operatorname{Spec}A_i$, where every $A_i$ is nonzero, local, Artinian and finite-dimensional over $k$. This includes an arbitrary set of components, and the empty space gives $I=\\varnothing$.",
+   "uses": [
+    "lem-sfb-zero-dimensional-field-space-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06S0 (lemma-locally-quasi-finite-over-field), (2) implies (4) implies (5), through Tag 06LZ (lemma-locally-finite-type-dim-zero) and varieties.tex Tag 06LH (lemma-algebraic-scheme-dim-0)."
+   }
+  },
+  {
+   "text": "Retain the reduced atlas $U\\to X$ supplied by the hypothesis. Now that $X$ is a scheme this is an etale morphism of schemes, hence smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. It is still surjective. The descent assertion of [lem-sfb-space-smooth-reduced-locality] makes the represented scheme $X$ reduced. For every open component $\\operatorname{Spec}A_i$, its local rings are the local rings of $X$ there, and are reduced. The local-ring/section equivalence of [def-pc-reduced-scheme] makes $A_i=\\Gamma(\\operatorname{Spec}A_i,\\mathcal O)$ reduced.",
+   "uses": [
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sfb-space-smooth-reduced-locality",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06S0 (lemma-locally-quasi-finite-over-field), reduced specialization of (5); reducedness descent: spaces-descent.tex Tag 0GB3 (lemma-reduced-local-smooth); schemes.tex Tag 01J1 (lemma-reduced)."
+   }
+  },
+  {
+   "text": "For each $i$, apply [lem-sfb-reduced-artinian-residue-product] to $A_i$. Since it is nonzero and local, its set of maximal ideals consists of its unique maximal ideal $\\mathfrak m_i$. Thus the canonical product isomorphism is the quotient isomorphism $A_i\\simeq A_i/\\mathfrak m_i$ onto a field. Give the same ring $A_i$ the transported field structure and call it $K_i$. Its existing unital $k$-algebra map is injective: its kernel is an ideal of the field $k$, and cannot contain $1$ because $A_i\\ne0$. Hence $K_i/k$ is a field extension, and $\\dim_k K_i=\\dim_k A_i<\\infty$. The rings and structural maps have not changed, so the coproduct isomorphism of step 2 is exactly the required isomorphism over $k$. No separability of these extensions is claimed.",
+   "uses": [
+    "lem-sfb-reduced-artinian-residue-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06S0 (lemma-locally-quasi-finite-over-field), reduced specialization of (5); algebra.tex Tags 00J7 (lemma-artinian-finite-nr-max), 00JB (lemma-artinian-finite-length), reduced canonical product form."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-sfb-zero-dimensional-field-space-components",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sfb-space-smooth-reduced-locality",
+  "def-pc-reduced-scheme",
+  "lem-sfb-reduced-artinian-residue-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 06S0 (lemma-locally-quasi-finite-over-field), (1) implies (2) implies (5), followed by the reduced specialization of the local Artinian factors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced algebraic space locally quasi finite over a field is a disjoint union of spectra of finite field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] → Unique ↥(AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any field $ K $, the scheme $ \\\\operatorname{Spec}(K) $ has a unique carrier (underlying topological space), corresponding to the fact that the prime spectrum $ \\\\operatorname{Spec}(K) $ contains on\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, PrespectralSpace ↥X\", \"doc\": \"Every scheme, when considered as a topological space, is a prespectral space, meaning it satisfies the inductive conditions related to compactness and a basis of compact open sets specified by the pre\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {ι : Type u} [Finite ι] (R : ι → CommRingCat), CategoryTheory.IsIso (AlgebraicGeometry.sigmaSpec R)\", \"doc\": \"For any finite index set $\\\\iota$ and a family of commutative rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, the canonical morphism from the coproduct (disjoint union) of the affine schemes $\\\\operatorname{Spec}(R_i)$ \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zero dimensional reduced algebraic spaces locally of finite type over a field are schemes with finite residue fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Field ↑(X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.finite\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsArtinianScheme X], Finite ↥X\", \"doc\": \"Every Artinian scheme is a finite scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Unique ↥(AlgebraicGeometry.Spec (X.residueField x))\", \"doc\": \"For any point $ x $ in a scheme $ X $, the spectrum of the residue field at $ x $ has a unique underlying topological space. This follows because the residue field is a field, and the prime spectrum o\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"LocallyQuasiFinite\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|disjoint.*[Ff]ield|[Ff]ield.*disjoint",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"289\", \"text\": \"theorem disjoint_span_commMap_ker [NumberField K] :\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"line\": \"22\", \"text\": \"  Assume that `K₁` and `K₂` are two linear disjoint number fields with coprime different ideals.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"line\": \"134\", \"text\": \"theorem linearDisjoint_of_isGalois_isCoprime_discr (K₁ K₂ : IntermediateField ℚ L) [IsGalois ℚ K₁]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"line\": \"137\", \"text\": \"  apply IntermediateField.LinearDisjoint.of_inf_eq_bot\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.LinearDisjoint\"}\n  {\"file\": \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"line\": \"99\", \"text\": \"theorem IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"14\", \"text\": \"# Linearly disjoint fields\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"16\", \"text\": \"This file contains basics about the linearly disjoint fields.\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"23\", \"text\": \"- `IntermediateField.LinearDisjoint`: an intermediate field `A` of `E / F`\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"25\", \"text\": \"  (as a special case, two intermediate fields) are linearly disjoint over `F`,\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"31\", \"text\": \"`IntermediateField.LinearDisjoint` is also stated for two `IntermediateField`s\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Span/Basic.lean\", \"line\": \"661\", \"text\": \"/-- Version of `disjoint_span_singleton` that works when the scalars are not a field. -/\"}\n  {\"file\": \"Mathlib/RingTheory/LinearDisjoint.lean\", \"line\": \"74\", \"text\": \"  `Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective`:\"}\n  {\"file\": \"Mathlib/RingTheory/LinearDisjoint.lean\", \"line\": \"79\", \"text\": \"- `Subalgebra.LinearDisjoint.of_isField`, `Subalgebra.LinearDisjoint.of_isField'`:\"}\n  {\"file\": \"Mathlib/RingTheory/LinearDisjoint.lean\", \"line\": \"80\", \"text\": \"  if `A ⊗[R] B` is a field, then `A` and `B` are linearly disjoint, moreover, for any\"}\n  {\"file\": \"Mathlib/RingTheory/LinearDisjoint.lean\", \"line\": \"592\", \"text\": \"/-- If `A ⊗[R] B` is a field, then `A` and `B` are linearly disjoint. -/\"}\n  {\"file\": \"Mathlib/RingTheory/LinearDisjoint.lean\", \"line\": \"593\", \"text\": \"theorem of_isField (H : IsField (A ⊗[R] B)) : A.LinearDisjoint B := by\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.LinearDisjoint\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced locally quasi finite algebraic space over a field decomposes into finite field spectra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally quasi-finite if for every affine open subset $ U \\\\subseteq Y $, and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the \"}\n  {\"name\": \"Algebra.QuasiFinite.recOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure and satisfying the quasi-finite condition, meaning $ S $ is finitely generated\"}\n  {\"name\": \"Algebra.QuasiFinite.casesOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure such that for every prime ideal $ P $ in $ R $, the tensor product of the resi\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_primeSpectrum\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[Finite (PrimeSpectrum R)] [QuasiFinite R S] : Finite (PrimeSpectrum S)\", \"doc\": \"If $ R $ is a commutative ring with a finite prime spectrum and $ S $ is a quasi-finite $ R $-algebra (i.e., $ S $ is finitely generated as an $ R $-module), then the prime spectrum of $ S $ is also f\"}\n  {\"name\": \"Algebra.QuasiFinite.iff_finite_primesOver\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[FiniteType R S] : QuasiFinite R S ↔ ∀ I : Ideal R, I.IsPrime → (I.primesOver S).Finite\", \"doc\": \"A finite type $ R $-algebra $ S $ is quasi-finite over $ R $ if and only if, for every prime ideal $ I $ in $ R $, the set of prime ideals in $ S $ lying over $ I $ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings, ordinary stacks on sites or topological spaces; none states this assertion for algebraic stacks/spaces or specializes to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-singleton-stack-finite-field-homeomorphism",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Field-space classification after descent and the discrete-space criterion; not a statement about stacks.",
+   "via": [
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reduced-quasifinite-space-field-decomposition",
+  "worker": "stage1",
+  "summary": "Retained the statement and all prior searches. Reused the existing zero-dimensional field-space classification, reduced Artinian residue product, and chartwise scheme facts: local quasi-finiteness gives dimension zero (affine form of 0397 from the proper-base-change chapter), then the existing component classification gives local Artinian finite k-algebras; descent from the reduced atlas and the canonical residue product show each is a field. No new nodes or Lean changes.",
+  "blueprint": "The inherited creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor returns None). The current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) is the direct-image preservation paragraph named in the inherited place; this item is its subordinate field-space classification input in the recorded alteration/moduli chain. Four steps realize the field-space classification input without changing that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic scheme consequence of local quasi-finiteness applied to etale charts; this unit has no alternate statement of it."
+   },
+   {
+    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "why": "Generic affine form of Stacks 0397 (quasi-finite at a prime iff the fibre has dimension zero there), applied to finite type algebras over the field k in affine opens of etale charts, as in the proof of Stacks 06S0; replaces the sec-trace-formula copy of 0397, which the batch-5 closure must not cite."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Only its assertion that an etale scheme map is smooth is used to descend reducedness from the given atlas; no other clause or cohomological route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-5ed2e1b93",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-5ed2e1b93 (reviewer sub-agent of L); spot-checked: Read Stacks 06S0 (spaces-over-fields.tex, lines 1815-1842), the item, and every cited statement. There are no new nodes. The statement is the reduced case of 06S0 (1)=>(5); it adds no quasi-compactness, separatedness or perfectness assumption, and I may be empty or infinite. Step 2: lem-sfb-zero-dimensional-field-space-components (same unit, no cycle; I computed its closure) gives X as a disjoint union of Spec A_i with each A_i nonzero, local, Artinian and finite over k. Step 3: the given reduced atlas is etale, hence smooth, and surjective, so 0GB3 (lem-sfb-space-smooth-reduced-locality) makes X reduced, and 01J1 (def-pc-reduced-scheme) makes each A_i reduced. Step 4: lem-sfb-reduced-artinian-residue-product (IsArtinianRing.equivPi) with a single maximal ideal makes each A_i a field; k->A_i is injective because A_i is nonzero. Edge cases: X empty gives I empty; k[eps]/(eps^2) is excluded exactly at step 3; purely inseparable K_i are allowed. Batch-5 checks: (1) lem-trf-locally-quasi-finite-relative-dimension-zero is generic Stacks 0397, but the DAG already has the same fact outside sec-trace-formula: lem-weil-pbc-ring-quasifinite-zero-fibre-dimension (its closure reaches no trf or Poincare-duality node). FIX: step 1 now works in an affine open Spec A of the chart (exists by pqf-def-quasifinite), applies the pbc ring lemma to k->A with p=(0) and fibre ring A tensor_k k = A, and passes dimension zero to the chart via def-kun-topological-dimension-at-point. The trf citation is removed, proof_deps is recomputed, and the tool_uses entry is replaced. (2) The flag on lem-sfb-space-smooth-reduced-locality reaching def-trf-algebraic-space concerns a general definition, plus generic space calculus in its closure; accepted. Tool uses accepted: LQF=>LFT, the affine form of 0397, and the etale=>smooth clause. No duplicate of the item: the other 06S0 nodes are stack-level, and the citer lem-sfb-singleton-stack-finite-field-homeomorphism uses exactly the item's statement.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedQuasiFiniteSpaceFieldDecomposition",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_iso_coproduct_spec_finite_fields_of_reduced_locallyQuasiFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedQuasiFiniteSpaceFieldDecomposition.lean",
+  "statement": "theorem exists_iso_coproduct_spec_finite_fields_of_reduced_locallyQuasiFinite (k : Type u) [Field k] (X : AlgebraicSpace (Spec (.of k))) (hreduced : ∃ (U : Over (Spec (.of k))) (a : yoneda.obj U ⟶ X.obj.obj), IsEtale a ∧ IsSurjective a ∧ ∀ x : U.left, _root_.IsReduced (U.left.presheaf.stalk x)) (hquasifinite : ∀ (V : Over (Spec (.of k))) (a : yoneda.obj V ⟶ X.obj.obj), IsEtale a → V.hom.IsLocallyQuasiFinite) : ∃ (I : Type u) (K : I → Type u) (_ : ∀ i, Field (K i)) (_ : ∀ i, Algebra k (K i)), (∀ i, Module.Finite k (K i)) ∧ Nonempty (X.obj.obj ≅ yoneda.obj (Over.mk (Sigma.desc fun i : I ↦ Spec.map (CommRingCat.ofHom (algebraMap k (K i))))))",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1f470d1c",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Only the lean field changed; one theorem, proof `sorry`, no defs or new nodes. Checked against Stacks 06S0 (spaces-over-fields.tex l.1815-1842), (1)=>(5), reduced case. k: Field. X: AlgebraicSpace (Spec k), the def-trf-algebraic-space record on (Over S)^op => Type u. hreduced: ∃ étale surjective atlas (AlgebraicSpace.IsEtale/IsSurjective) with reduced stalks, the node's own existential convention. hquasifinite: every étale chart's V.hom satisfies Scheme.Hom.IsLocallyQuasiFinite (the Stacks 01TD predicate, includes finite type; Mathlib LocallyQuasiFinite correctly avoided). Conclusion: ∃ I : Type u, K i fields with Algebra k and Module.Finite k, and X.obj.obj ≅ yoneda of the scheme coproduct Sigma.desc Spec.map(algebraMap) in Over (Spec k), so over k automatically; no finite, nonempty or separability binder. Edge cases: empty X / empty I, infinite I, inseparable K_i, k[ε] excluded, A^1 excluded. Statement verbatim, docstrings carry source, blueprint id and the 4 proof steps; plain proof imports exist in side-live; zero-dimensional-field-space-components still unsplit, so its import is rightly omitted. No recompile and no files changed. Advisory: def-sfb-reduced-algebraic-space (Q09, 2026-10-23) now exists; the item's inline atlas reducedness is equivalent by 0GB3 (step 3), and a stage-2 fix cannot change stmt_deps."
+ }
+}

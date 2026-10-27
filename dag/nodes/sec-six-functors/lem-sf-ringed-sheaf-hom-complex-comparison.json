@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-ringed-sheaf-hom-complex-comparison",
+ "kind": "statement",
+ "title": "Product-total comparison for the actual sheaf-Hom complexes",
+ "statement": "Let (C,J,R) and (D,J′,R′) be small ringed sites, using module-section universes containing each site and its coefficient universe. Let U be an additive functor between their categories of sheaves of modules [def-weil-sheaf-of-modules-category], preserving integer-indexed products, and let h identify U applied to internal sheaf Hom with internal sheaf Hom of U in both variables [def-pur-sheaf-hom]. Then U HomComplex(K,I) is naturally chain-isomorphic to HomComplex(UK,UI) [def-pur-hom-complex]. Its projection at every integer triple p+n=q is U applied to the source product projection followed by precisely h.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Sections 0A8X and 08J7, Lemma 0A95; componentwise and localization assembly from steps 4–5 of lem-sf-ringed-forget-two-injective-hom."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-ringed-hom-complex-comparison] to the actual sheaf-Hom and Hom-complex bifunctors. Supply the product cones and differential equations from [lem-sc-hom-complex-projections]. Its map-projection equation becomes the abstract equation after composing the precomposition and postcomposition homObjMap factors. Thus the abstract theorem gives exactly the stated chain comparison and projection normalization.",
+   "uses": [
+    "lem-sf-ringed-hom-complex-comparison",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-hom-complex-comparison",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Formal categorical assembly of the product-total Hom and K-injective models in Sections 0A8X and 08J7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "A natural isomorphism of bifunctors on K-injective complexes descends to the derived category",
+   "results": [
+    "Functor.leftDerivedNatIso",
+    "Functor.mapHomologicalComplexUpToQuasiIsoFactorsh"
+   ],
+   "date": "2026-10-27",
+   "verdict": "Infrastructure only; not the projection-normalized two-variable statement."
+  },
+  {
+   "tool": "LeanFinder / Loogle",
+   "query": "An exact additive functor preserving products and internal Hom commutes with derived internal Hom; IsLimit.conePointUniqueUpToIso",
+   "results": [
+    "Functor.mapDerivedCategory",
+    "IsLimit.conePointUniqueUpToIso",
+    "IsLimit.conePointUniqueUpToIso_hom_comp"
+   ],
+   "date": "2026-10-27",
+   "verdict": "Use the product-limit and localization APIs; no existing complete comparison found."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(Iso|iso); bifunctor.*[Cc]omp; whiskerLeft.*Full; preimageIso; KInjectives",
+   "results": [
+    "homComplexIsLimit",
+    "homComplex_d_π",
+    "homComplexFunctor_map_f_π",
+    "Localization.fullyFaithfulWhiskeringLeft",
+    "CochainComplex.KInjectives.ι ⋙ DerivedCategory.Q is a localization"
+   ],
+   "date": "2026-10-27",
+   "verdict": "Existing component and localization APIs provide the proof ingredients; no duplicate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTwoInjectiveHom",
+  "date": "2026-10-27",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom comparison paragraph of cor-coef-verdier-weil-equivariance.proof.md, via steps 4–5 of lem-sf-ringed-forget-two-injective-hom.",
+   "via": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSheafHomComplexComparison",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSheafHomComplexComparison.lean",
+  "declaration": "CategoryTheory.sheafHomComplexComparison",
+  "statement": "theorem sheafHomComplexComparison :\n    ∃ chain : Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙\n        U.mapHomologicalComplex (.up ℤ) ≅\n      ((U.mapHomologicalComplex (.up ℤ)).op.prod (U.mapHomologicalComplex (.up ℤ))) ⋙\n        Functor.uncurry.obj (homComplexFunctor (R := R')),\n      ∀ (K I : CochainComplex (SheafOfModules.{max c v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)\n        (n p q : ℤ) (hpq : p + n = q),\n        (chain.hom.app (op K, I)).f n ≫\n            homComplexπ (R := R') ((U.mapHomologicalComplex (.up ℤ)).obj K)\n              ((U.mapHomologicalComplex (.up ℤ)).obj I) n p q hpq =\n          U.map (homComplexπ (R := R) K I n p q hpq) ≫\n            h.hom.app (op (K.X p), I.X q)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-35fba",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T222544-L-667647",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-35fba",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T222544-L-667647",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered Lean files vs clone item (pure relocation, identical bodies/signatures), new theorem statements vs their nodes, item node proof_deps vs step uses; both direct importers compiled against delivered files"
+ }
+}

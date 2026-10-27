@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-space-locally-separated-base-change",
+ "kind": "statement",
+ "title": "Local separatedness under base change and composition",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space], using their sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. An immersion of algebraic spaces means a representable morphism all of whose scheme base changes are immersions [def-weil-closed-immersion]. A morphism $f:X\\to Y$ is locally separated if its diagonal $X\\to X\\times_YX$ is an immersion. If $f$ is locally separated, then for every morphism $Y^{\\prime}\\to Y$ the projection $X\\times_YY^{\\prime}\\to Y^{\\prime}$ is locally separated. If $f:X\\to Y$ and $g:Y\\to Z$ are locally separated, then $g\\circ f$ is locally separated. Every morphism of schemes, regarded as a morphism of algebraic spaces, is locally separated.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KL (lemma-base-change-separated), 03KQ (lemma-composition-separated), 03KY (lemma-match-separated), with schemes.tex Tag 01KJ (lemma-diagonal-immersion)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "First note directly from the scheme-test definition that immersions of algebraic spaces compose. For immersions $A\\to B\\to C$ and a scheme test $h_T\\to C$, the sheaf $h_T\\times_CB$ is represented by a scheme $W$ with $W\\to T$ an immersion. Testing $A\\to B$ on $h_W\\to B$ gives a scheme $V=h_W\\times_BA$ with $V\\to W$ an immersion. On each test scheme the projection $(t,b,a)\\mapsto(t,a)$, with inverse $(t,a)\\mapsto(t,\\operatorname{image}(a),a)$, identifies $h_V$ with $h_T\\times_CA$. By clause (e) of [lem-weil-pbc-proper-fp-permanence], $V\\to W\\to T$ is an immersion. This proves both representability and the required immersion condition for the composite.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "spaces.tex Tag 02YV (lemma-composition-immersions), expanded scheme-test proof; schemes.tex Tag 02V0 (lemma-composition-immersion)."
+   }
+  },
+  {
+   "text": "For base change put $X'=X\\times_YY'$, $P=X\\times_YX$, and $P'=X'\\times_{Y'}X'$. These are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. The map $q:P'\\to P$ forgets the $Y'$-coordinate. On every test scheme a section of $P'\\times_PX$ consists of $((x_1,y'),(x_2,y'),x)$ with $x_1=x=x_2$ and $f(x)=\\operatorname{image}(y')$. Sending it to $(x,y')$ gives a natural bijection with $X'$, inverse $(x,y')\\mapsto((x,y'),(x,y'),x)$. Its projection to $P'$ is exactly $\\Delta_{X'/Y'}$. Thus this diagonal is the base change of $\\Delta_f$ along $q$. Since $\\Delta_f$ is an immersion, its base change is an immersion by [lem-sfb-space-immersion-affine-tests], proving local separatedness of $X'\\to Y'$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-immersion-affine-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "spaces-morphisms.tex Tag 03KL (lemma-base-change-separated), diagonal pullback formula."
+   }
+  },
+  {
+   "text": "For composition put $P=X\\times_YX$ and $Q=X\\times_ZX$. The map $r:Q\\to Y\\times_ZY$ sends $(x_1,x_2)$ to $(f(x_1),f(x_2))$. The pullback of $\\Delta_g:Y\\to Y\\times_ZY$ along $r$ has sections $(x_1,x_2,y)$ satisfying $f(x_1)=y=f(x_2)$. Forgetting $y$ is a natural bijection with $P$, inverse $(x_1,x_2)\\mapsto(x_1,x_2,f(x_1))$. Hence $j:P\\to Q$ is a base change of $\\Delta_g$, and is an immersion by [lem-sfb-space-immersion-affine-tests]. All products exist as algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. The composite $j\\circ\\Delta_f$ sends $x$ to $(x,x)$, so equals $\\Delta_{g\\circ f}$. Both factors are immersions by the two local-separatedness hypotheses; the scheme-test argument of step 1 makes their composite an immersion. This proves the composition assertion.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-immersion-affine-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "spaces-morphisms.tex Tag 03KQ (lemma-composition-separated), with the pullback diagram of lemma-fibre-product-after-map expanded on sections."
+   }
+  },
+  {
+   "text": "Finally let $f:X\\to Y$ be a morphism of schemes. By the universal property in [def-pc-fibre-product], maps $T\\to X\\times_YX$ are exactly compatible pairs of maps $T\\to X$; therefore $h_{X\\times_YX}=h_X\\times_{h_Y}h_X$, compatibly with diagonals. The scheme diagonal is an immersion by [lem-weil-pbc-diagonal-immersion]. For every scheme test $h_T\\to h_{X\\times_YX}$, Yoneda [lem-pc-yoneda] identifies the test with a scheme map $T\\to X\\times_YX$; its pullback is the scheme fibre product, and its projection to $T$ is an immersion by clause (1) of [lem-weil-pbc-immersion-base-change-lft]. Thus the diagonal of $h_f$ is representable with every scheme base change an immersion, exactly the required local separatedness.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-diagonal-immersion",
+    "lem-pc-yoneda",
+    "lem-weil-pbc-immersion-base-change-lft"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "spaces-morphisms.tex Tag 03KY (lemma-match-separated), scheme case; schemes.tex Tags 01KJ (lemma-diagonal-immersion), 01JY (lemma-base-change-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-immersion-affine-tests",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-diagonal-immersion",
+  "lem-pc-yoneda",
+  "lem-weil-pbc-immersion-base-change-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KL (lemma-base-change-separated), 03KQ (lemma-composition-separated), 03KY (lemma-match-separated); elementary sheaf-pullback and scheme-test details expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a base changed locally separated algebraic space morphism is an immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, the diagonal morphism $X \\to X \\times X$ defined by lifting the identity morphism on $X$ to the product is an immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated g] : IsClosedImmersion (pullback.lift (𝟙 _) f (Category.id_comp (f ≫ g)))\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallySeparated\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|LocallySeparated|locallySeparated",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The immersion diagonal condition for algebraic spaces is preserved by scalar extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsImmersion\", \"doc\": \"The property of being an immersion of schemes is stable under base change, meaning that if a morphism of schemes is an immersion, then any base change (pullback) of this morphism is also an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsPreimmersion\", \"doc\": \"The property of being a preimmersion of schemes is stable under base change; that is, any base change (pullback) of a preimmersion is also a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, the diagonal morphism $X \\to X \\times X$ defined by lifting the identity morphism on $X$ to the product is an immersion of schemes.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally separated morphisms of algebraic spaces are stable under base change and composition and every morphism of schemes is locally separated",
+   "results": "Eight scheme-separatedness hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme, AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.IsSeparated.instCompScheme, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated. These all concern schemes and separatedness, not algebraic-space local separatedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally separated morphisms of algebraic spaces are preserved by base change and composition",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.IsSeparated.instCompScheme, AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsSeparated.comp_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme-level results; no algebraic-space local-separatedness result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallySeparated\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme-level results; no algebraic-space local-separatedness result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|LocallySeparated|locallySeparated",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme-level results; no algebraic-space local-separatedness result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally separated morphisms of algebraic spaces are stable under arbitrary pullback and under composition",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.instCompScheme, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty, AlgebraicGeometry.quasiSeparated_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme-level results; no algebraic-space local-separatedness result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces with immersion diagonal keeps an immersion diagonal after scalar extension",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.IsImmersion.instMapDescScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme-level results; no algebraic-space local-separatedness result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-rational-point-closed-immersion",
+  "date": "2026-10-23",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: Preserve the immersion diagonal after scalar extension and pass from relative to absolute local separatedness.",
+   "via": [
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-locally-separated-base-change",
+  "worker": "stage1",
+  "summary": "Preserved every clause and hypothesis. Expanded the diagonal base-change and composition diagrams on sections, and reduced composition of representable immersions to scheme tests. Reused the existing algebraic-space immersion base-change node, scheme immersion-composition Mathlib leaf, and scheme-diagonal/base-change leaves. No new nodes. Checked every cited statement, arbitrary base changes, and empty/nonseparated cases.",
+  "blueprint": "Historical supporting geometric input below det-thm-sf-ctf-stability-direct-images (3), through the inherited alteration/moduli/adequate-universality chain ending in the rational-point closed-immersion helper. Steps 2 and 3 supply its local-separatedness permanence; step 4 supplies the scheme case. The latest blueprint proof of (3) is shorter and does not itself state these geometric helpers; no unit route is replaced. Repaired the inherited null blueprint.from.node using the explicit historical ancestor recorded by lem-sfb-admissible-direct-image.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only the universal property and existence of algebraic-space sheaf fibre products are used. This is the same foundational fibre-product input already in the item statement; no node of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-84a4ff1fd",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-84a4ff1fd (reviewer sub-agent of L); spot-checked: I read all four steps in full. Step 1 composes immersions of algebraic spaces through scheme tests: (t,b,a)↦(t,a) gives h_V≅h_T×_C A, and proper-fp-permanence (e) composes the scheme immersions (Stacks spaces.tex 02YV). Step 2 shows P'×_P X≅X' with the projection equal to Δ_{X'/Y'}, which is the correct relative diagonal; the base-change sentence of affine-tests then applies (Stacks 03KL). Step 3 shows X×_YX is the pullback of Δ_g along f×f, so Δ_{gf}=j∘Δ_f (Stacks 03KQ). Step 4 uses h_{X×_YX}=h_X×_{h_Y}h_X, Yoneda, 01KJ and lft (1) (Stacks 03KY(1)). I checked every cited statement for the clause used. The statement is unchanged from live, which is still unsplit with no repair note, so there is no supersession. No new nodes; a duplicate search over locally-separated, the tags and immersion-composition wording found none. The dependency closure (145 nodes) has no cycle. The off-unit tool use lem-trf-space-fibre-products-etale-covers (fibre-product clause, already a stmt_dep) is accepted. The from.node change null→det-thm-sf-ctf-stability-direct-images is a correct metadata repair that matches lem-sfb-admissible-direct-image; the siblings in the via chain still carry null, noted for the maintainer. Edge cases checked: empty X, identity base change, identity f or g, and non-separated schemes. No SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceLocallySeparated",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.locallySeparated_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.locallySeparated_baseChange",
+   "AlgebraicGeometry.AlgebraicSpace.locallySeparated_comp",
+   "AlgebraicGeometry.AlgebraicSpace.locallySeparated_yonedaMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceLocallySeparated.lean",
+  "statement": "theorem locallySeparated_baseChange {S : Scheme.{u}} {X Y Y' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y) (hf : IsRepresentableWith (fun _ _ p ↦ IsImmersion p.left) (pullback.diagonal f.hom.hom)) : IsRepresentableWith (fun _ _ p ↦ IsImmersion p.left) (pullback.diagonal (pullback.snd f.hom.hom g.hom.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three theorem signatures respectively render arbitrary base change, composition, and every scheme morphism. Local separatedness is expanded using the existing IsRepresentableWith predicate with scheme IsImmersion on the relative presheaf diagonal. No new notion or definition is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae060c002",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Node unchanged except the lean field. Three sorry'd theorems: locallySeparated_baseChange (arbitrary g : Y' ⟶ Y; diagonal of pullback.snd, relative to Y'), locallySeparated_comp (hf, hg ⇒ diagonal of f ≫ g), locallySeparated_yonedaMap (yoneda.map on Over S = a scheme morphism as an algebraic-space map). Local separatedness = IsRepresentableWith (IsImmersion p.left) on the relative presheaf diagonal; same expanded form as the landed group-space theorem; no def node or Lean predicate exists, so no H4 issue. Presheaf fibre products = underlying presheaves of the sheaf fibre products, consistent with IsAlgebraicSpace. No extra hypotheses; universe u is the interface's; empty, identity and non-separated cases covered. Docstrings carry tags 03KL/03KQ/03KY/01KJ, the blueprint id and proof steps; lean.statement verbatim; autoImplicit false. Second-reading section is a short self-check but clause-specific, not an H11 placeholder. Not recompiled (no file changed)."
+ }
+}

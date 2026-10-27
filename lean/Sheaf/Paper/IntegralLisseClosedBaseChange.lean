@@ -27,6 +27,8 @@ import Sheaf.RingTheory.HenselianWStrictLocalInvariance
 import Sheaf.Topology.ContinuousMapCondensedRing
 import Sheaf.CategoryTheory.Sites.ContractibleDerivedSectionsTensor
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Integral direct image and closed base change for lisse continuous coefficients

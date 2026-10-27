@@ -1,0 +1,432 @@
+{
+ "id": "lem-trf-etale-line-frame-transition-units",
+ "kind": "statement",
+ "title": "Etale line frames give ordinary unit-valued descent data",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $X_{\\mathrm{et}}$ be its small etale site [def-weil-pbc-etale-site]. Put $\\mathcal O_{X,\\mathrm{et}}(u:U\\to X)=\\Gamma(U,\\mathcal O_U)$. Modules on a site and their morphisms mean sheaves of modules and all module morphisms [def-weil-sheaf-of-modules-category]. Let $G$ be an $\\mathcal O_{X,\\mathrm{et}}$-module, let $(u_a:U_a\\to X)_{a\\in I}$ be an arbitrary set-indexed jointly surjective etale family, and suppose given module-sheaf frames $t_a:\\mathcal O_{U_a,\\mathrm{et}}\\simeq G|_{(U_a)_{\\mathrm{et}}}$. For $R_{ab}=U_a\\times_XU_b$, restrict both frames to $(R_{ab})_{\\mathrm{et}}$. There is a unique unit $g_{ab}\\in\\Gamma(R_{ab},\\mathcal O_{R_{ab}})^\\times$ such that $t_a^{-1}t_b$ acts on every etale $q:W\\to R_{ab}$ by $b\\mapsto bq^\\sharp(g_{ab})$. It is given by $g_{ab}=(t_a^{-1}t_b)_{\\mathrm{id}_{R_{ab}}}(1)$, and its inverse is $(t_b^{-1}t_a)_{\\mathrm{id}_{R_{ab}}}(1)$. On $U_a\\times_XU_b\\times_XU_c$, the functions satisfy $p_{ab}^*g_{ab}\\,p_{bc}^*g_{bc}=p_{ac}^*g_{ac}$; on the diagonal $\\Delta_a:U_a\\to R_{aa}$ they satisfy $\\Delta_a^*g_{aa}=1$. Multiplication by $g_{ab}$ gives ordinary module isomorphisms $p_b^*\\mathcal O_{U_b}\\simeq p_a^*\\mathcal O_{U_a}$ on $R_{ab}$, using tensor-unit identifications for scheme module pullback [def-pc-module-pullback]. These form descent data, in the orientation from the $b$ factor to the $a$ factor, with the stated cocycle and diagonal normalization. No assumption that $g_{aa}$ is identically $1$ on all of $R_{aa}$ is made.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX, proposition-equivalence-quasi-coherent (2), proof: the overlap isomorphisms and omitted verification of their cocycle, specialized to rank-one frames."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Restrict a frame by precomposition: on an etale $q:W\\to R_{ab}$, the two frames are evaluated at $p_aq:W\\to U_a$ and $p_bq:W\\to U_b$. Both targets are $G(W\\to X)$, because $u_ap_aq=u_bp_bq$. The source in either case is $\\Gamma(W,\\mathcal O_W)$. This uses the object and morphism description of [def-weil-pbc-etale-site]. Thus $f_{ab}=t_a^{-1}\\circ t_b$ and $h_{ab}=t_b^{-1}\\circ t_a$ are inverse natural module isomorphisms on $(R_{ab})_{\\mathrm{et}}$, with linear components as in [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof: overlap isomorphisms and omitted cocycle verification, specialized to the given rank-one frames."
+   }
+  },
+  {
+   "text": "Put $R=R_{ab}$ and $s=(f_{ab})_{\\mathrm{id}_R}(1)$. Naturality along $q:W\\to R$ gives $(f_{ab})_q(1)=q^\\sharp(s)$, since restriction sends $1$ to $1$. By componentwise $\\Gamma(W,\\mathcal O_W)$-linearity [def-weil-sheaf-of-modules-category], for every $b\\in\\Gamma(W,\\mathcal O_W)$ one has $(f_{ab})_q(b)=(f_{ab})_q(b\\cdot1)=bq^\\sharp(s)$. The identical calculation for $h_{ab}$ gives $(h_{ab})_q(b)=bq^\\sharp(r)$, where $r=(h_{ab})_{\\mathrm{id}_R}(1)$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof: overlap isomorphisms and omitted cocycle verification, specialized to the given rank-one frames."
+   }
+  },
+  {
+   "text": "Evaluate $f_{ab}\\circ h_{ab}=\\mathrm{id}$ and $h_{ab}\\circ f_{ab}=\\mathrm{id}$ at $\\mathrm{id}_R$ and $1$. The formulas in step 2 give $rs=1$ and $sr=1$. Therefore the pair $(s,r)$ defines a unit $g_{ab}$ with precisely the value and inverse asserted. If another unit has the asserted action, evaluation at $q=\\mathrm{id}_R$ and $b=1$ identifies its underlying element with $s$; inverses are unique, so the units agree. This is just the definition of a unit in the commutative ring $\\Gamma(R,\\mathcal O_R)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof: overlap isomorphisms and omitted cocycle verification, specialized to the given rank-one frames."
+   }
+  },
+  {
+   "text": "On $T=U_a\\times_XU_b\\times_XU_c$, evaluate the three pulled-back frames on the same etale object $W\\to T$. Cancellation gives $(t_a^{-1}t_b)\\circ(t_b^{-1}t_c)=t_a^{-1}t_c$. By step 2, at $W=T$ and $1$ the left side is $(p_{bc}^*g_{bc})(p_{ab}^*g_{ab})$ and the right side is $p_{ac}^*g_{ac}$. Commutativity gives the displayed cocycle in the stated order, as an equality of units. For the diagonal write $p_1,p_2:R_{aa}\\to U_a$ and $\\Delta=\\Delta_a$. Morphisms of $(U_a)_{\\mathrm{et}}$ are $U_a$-morphisms [def-weil-pbc-etale-site], so $\\Delta$ is a morphism from $\\mathrm{id}_{U_a}$ to $p_1$ and to $p_2$; both give the same restriction $\\rho$ of $G$ along the $X$-morphism $\\Delta$, since $u_ap_1=u_ap_2$. Step 2 gives $(t_a)_{p_2}(1)=(t_a)_{p_1}(g_{aa})$. Applying $\\rho$ and naturality of $t_a$ along $\\Delta$ gives $(t_a)_{\\mathrm{id}}(1)=(t_a)_{\\mathrm{id}}(\\Delta^\\sharp g_{aa})$, and $(t_a)_{\\mathrm{id}}$ is injective, so $\\Delta_a^*g_{aa}=1$. No etaleness of $\\Delta_a$ is used, and the two frames are not identified at arbitrary points of $R_{aa}$.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof: overlap isomorphisms and omitted cocycle verification, specialized to the given rank-one frames."
+   }
+  },
+  {
+   "text": "Use the canonical tensor-unit isomorphism of [lem-weil-pbc-module-pullback-structure-sheaf], adjoint to the structure-sheaf map under [def-pc-module-pullback]. Multiplication by the global unit g_ab and by its inverse are inverse ordinary structure-module maps (Modules.smulHom_mul and smulHom_one). Define the b-to-a overlap map as theta_pb followed by multiplication by g_ab followed by theta_pa inverse. Its overlap coordinates are multiplication by g_ab, by cancellation of theta with its inverse.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0095, definition-pushforward, tensor formula for pullback; explicit tensor-unit maps and their compatibility."
+   }
+  },
+  {
+   "text": "For a scheme map v and global function c, prove tensorPullback(v)(m_c) followed by theta_v equals theta_v followed by m_(v sharp c). Apply the tensor-pullback Hom adjunction [def-pc-module-pullback]. Since theta_v is adjoint to the structure map [lem-weil-pbc-module-pullback-structure-sheaf], naturality of the Hom equivalence reduces the equation to m_c followed by that structure map equals that structure map followed by pushforward(m_(v sharp c)). Modules.pushforward_map_smulHom identifies the latter multiplication with m_c on the pushforward; Modules.smulHom_naturality proves the square. Conjugation therefore sends the scalar automorphism to multiplication by the pulled-back unit. The scalar multiplication composition law then turns the cocycle and diagonal equalities of step 4 into exactly the two asserted ordinary descent identities.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0095, definition-pushforward, tensor formula for pullback; explicit tensor-unit maps and their compatibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "T4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (2), overlap-descent paragraph; sheaves.tex Tags 0095 and 0096. Naturality, linearity, and frame cancellation prove the unit identities. The ordinary tensor computation is replaced by its adjunction transpose using the existing scalar-multiplication API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]ransition.*[Uu]nit|[Ii]nvertible.*[Cc]ocycle|[Ll]ine.*[Cc]ocycle",
+   "results": {
+    "t": "2026-10-22T07:21:14Z",
+    "tool": "grep",
+    "query": "[Tt]ransition.*[Uu]nit|[Ii]nvertible.*[Cc]ocycle|[Ll]ine.*[Cc]ocycle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Lie/Loop.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean"
+    ],
+    "digest": "92fd769f07aa961a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Algebra/Category/ModuleCat/Sheaf.lean:178-184) identify maps from a unit module with compatible sections, but do not supply the ordinary overlap descent datum from etale frames. CategoryTheory/Sites/NonabelianCohomology/H1.lean:81-126 defines cochains and cocycles; its constructors require the cocycle equations rather than proving them from module frames. Other hits are ring etale presentations or group cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frames of a locally free rank one module sheaf on the small etale site determine a unit valued cocycle on pairwise overlaps",
+   "results": {
+    "t": "2026-10-22T07:21:14Z",
+    "tool": "leansearch",
+    "query": "Frames of a locally free rank one module sheaf on the small etale site determine a unit valued cocycle on pairwise overlaps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PresheafOfGroups.OneCochain.ctorIdx",
+     "CategoryTheory.PresheafOfGroups.OneCocycle.mk",
+     "SheafOfModules.ιFree",
+     "SheafOfModules.free",
+     "groupCohomology.cocycles₁",
+     "CategoryTheory.PresheafOfGroups.OneCochain.mk",
+     "groupCohomology.cocyclesOfIsCocycle₁",
+     "CategoryTheory.PresheafOfGroups.OneCocycle"
+    ],
+    "digest": "772e17d560fcdbec"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Algebra/Category/ModuleCat/Sheaf.lean:178-184) identify maps from a unit module with compatible sections, but do not supply the ordinary overlap descent datum from etale frames. CategoryTheory/Sites/NonabelianCohomology/H1.lean:81-126 defines cochains and cocycles; its constructors require the cocycle equations rather than proving them from module frames. Other hits are ring etale presentations or group cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"unit\"",
+   "results": {
+    "t": "2026-10-22T07:21:15Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"unit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModules.unit",
+     "PresheafOfModules.unitHomEquiv",
+     "PresheafOfModules.unitHomEquiv_apply_coe",
+     "PresheafOfModules.unit_map_one",
+     "PresheafOfModules.freeAdjunctionUnit",
+     "PresheafOfModules.freeAdjunctionUnit_app",
+     "PresheafOfModules.freeAdjunction_unit_app",
+     "PresheafOfModulesOfCommRing.unit"
+    ],
+    "digest": "95d08cd7c955969c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Algebra/Category/ModuleCat/Sheaf.lean:178-184) identify maps from a unit module with compatible sections, but do not supply the ordinary overlap descent datum from etale frames. CategoryTheory/Sites/NonabelianCohomology/H1.lean:81-126 defines cochains and cocycles; its constructors require the cocycle equations rather than proving them from module frames. Other hits are ring etale presentations or group cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line module trivialized on an etale covering has transition automorphisms given by units of the overlap coordinate rings satisfying the descent cocycle",
+   "results": {
+    "t": "2026-10-22T07:21:26Z",
+    "tool": "leanfinder",
+    "query": "A line module trivialized on an etale covering has transition automorphisms given by units of the overlap coordinate rings satisfying the descent cocycle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StandardEtalePair.homEquiv_symm_apply",
+     "StandardEtalePair.homEquiv_apply_coe",
+     "StandardEtalePair.homEquiv",
+     "Algebra.etaleLocus_eq_compl_support",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "StandardEtalePair.instFormallyEtaleRing",
+     "Algebra.FormallyEtale.subsingleton_h1Cotangent",
+     "StandardEtalePresentation.toPresentation_σ'"
+    ],
+    "digest": "76c38b3c4780b4d3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Algebra/Category/ModuleCat/Sheaf.lean:178-184) identify maps from a unit module with compatible sections, but do not supply the ordinary overlap descent datum from etale frames. CategoryTheory/Sites/NonabelianCohomology/H1.lean:81-126 defines cochains and cocycles; its constructors require the cocycle equations rather than proving them from module frames. Other hits are ring etale presentations or group cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frames of a sheaf of modules over a commutative structure sheaf give units on pairwise overlaps satisfying the cocycle equation",
+   "results": {
+    "t": "2026-10-23T09:29:36Z",
+    "tool": "leanfinder",
+    "query": "Frames of a sheaf of modules over a commutative structure sheaf give units on pairwise overlaps satisfying the cocycle equation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.LocalGeneratorsData.I",
+     "SheafOfModules.GeneratingSections.I",
+     "SheafOfModules.LocalGeneratorsData.X",
+     "SheafOfModules.LocalGeneratorsData",
+     "SheafOfModules.LocalGeneratorsData.generators",
+     "SheafOfModules.GeneratingSections",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData_generators",
+     "ModuleCat.tildeInType"
+    ],
+    "digest": "8a50b43922278bc2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:178-184) supply evaluation at 1, not the full etale-to-ordinary descent assertion. OneCocycle in Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean:123-126 requires the cocycle equation as input. Neither is a one-line specialization of the whole item; direct elementary computations supply the additional clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]rame.*[Cc]ocycle|[Tt]ransition.*[Uu]nit|[Ee]tale.*[Ll]ine",
+   "results": {
+    "t": "2026-10-23T09:30:41Z",
+    "tool": "grep",
+    "query": "[Ff]rame.*[Cc]ocycle|[Tt]ransition.*[Uu]nit|[Ee]tale.*[Ll]ine",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:178-184) supply evaluation at 1, not the full etale-to-ordinary descent assertion. OneCocycle in Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean:123-126 requires the cocycle equation as input. Neither is a one-line specialization of the whole item; direct elementary computations supply the additional clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphisms of the structure sheaf are multiplication by global units and changes of line module frames satisfy the Cech cocycle",
+   "results": {
+    "t": "2026-10-23T09:30:42Z",
+    "tool": "leansearch",
+    "query": "Automorphisms of the structure sheaf are multiplication by global units and changes of line module frames satisfy the Cech cocycle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.ofAlgebraAutOnUnits",
+     "SheafOfModules.unitHomEquiv_apply_coe",
+     "AlgebraicGeometry.StructureSheaf.globalSectionsIso",
+     "SheafOfModules.unit",
+     "PresheafOfModules.Sheafify.one_smul",
+     "AlgebraicGeometry.Scheme.Modules.Hom",
+     "PresheafOfModules.unitHomEquiv_apply_coe",
+     "AlgEquiv.instMulDistribMulActionUnits"
+    ],
+    "digest": "6e3c79550e2b3f5a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:178-184) supply evaluation at 1, not the full etale-to-ordinary descent assertion. OneCocycle in Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean:123-126 requires the cocycle equation as input. Neither is a one-line specialization of the whole item; direct elementary computations supply the additional clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"unit\"",
+   "results": {
+    "t": "2026-10-23T09:30:42Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"unit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModules.unit",
+     "PresheafOfModules.unitHomEquiv",
+     "PresheafOfModules.unitHomEquiv_apply_coe",
+     "PresheafOfModules.unit_map_one",
+     "PresheafOfModules.freeAdjunctionUnit",
+     "PresheafOfModules.freeAdjunctionUnit_app",
+     "PresheafOfModules.freeAdjunction_unit_app",
+     "PresheafOfModulesOfCommRing.unit"
+    ],
+    "digest": "95d08cd7c955969c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:178-184) supply evaluation at 1, not the full etale-to-ordinary descent assertion. OneCocycle in Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean:123-126 requires the cocycle equation as input. Neither is a one-line specialization of the whole item; direct elementary computations supply the additional clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural module sheaf automorphisms of a rank one free module are determined by their value at one and give multiplicative cocycles",
+   "results": {
+    "t": "2026-10-23T09:30:46Z",
+    "tool": "leanfinder",
+    "query": "Natural module sheaf automorphisms of a rank one free module are determined by their value at one and give multiplicative cocycles",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.unitHomEquiv_apply_coe",
+     "groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units",
+     "SheafOfModules.unitHomEquiv",
+     "groupCohomology.H1ofAutOnUnitsUnique",
+     "groupCohomology.cocycles₁IsoOfIsTrivial",
+     "CategoryTheory.PresheafOfGroups.OneCohomologyRelation",
+     "groupCohomology.cocycles₁IsoOfIsTrivial_hom_hom_apply_apply",
+     "CategoryTheory.PresheafOfGroups.H1"
+    ],
+    "digest": "f2f8b8171cda6149"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:178-184) supply evaluation at 1, not the full etale-to-ordinary descent assertion. OneCocycle in Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean:123-126 requires the cocycle equation as input. Neither is a one-line specialization of the whole item; direct elementary computations supply the additional clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "unitHomEquiv|OneCocycle|unit.*[Aa]ut",
+   "results": {
+    "t": "2026-10-23T09:34:23Z",
+    "tool": "grep",
+    "query": "unitHomEquiv|OneCocycle|unit.*[Aa]ut",
+    "sub": "Algebra/Category/ModuleCat",
+    "ok": true,
+    "n_hits": 16,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean"
+    ],
+    "digest": "f6d0c9985ab5525d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: SheafOfModules.unitHomEquiv and unitHomEquiv_apply_coe (Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:178-184) supply evaluation at 1, not the full etale-to-ordinary descent assertion. OneCocycle in Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean:123-126 requires the cocycle equation as input. Neither is a one-line specialization of the whole item; direct elementary computations supply the additional clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-etale-invertible-comparison",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: interpret the polarization on each scheme atlas and its overlaps as a line module on the small etale site, compatibly with pullback (Stacks 03DX, 05VG, 03LC). Returned comparison proof steps 5 (frame transitions and cocycle).",
+   "via": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-line-frame-transition-units",
+  "worker": "stage1",
+  "summary": "Gave the elementary rank-one overlap computation without invoking quasi-coherent descent or the parent equivalence: naturality and linearity determine frame changes, inverse cancellation produces units, and frame cancellation gives the cocycle and diagonal normalization. Explicit tensor formulas give ordinary descent maps and their pullback compatibility. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the rank-one overlap input created for lem-trf-scheme-etale-invertible-comparison step 5, along the recorded ancestry to lem-trf-local-term-locality. Read the latest ancestor and unit; the current ancestor has no literal line-module sentence. This is the existing DAG refinement of its polarized-descent input, with no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-c31395ca1",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c31395ca1 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, its five cited definitions (def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category, def-pc-module-pullback, def-pc-scheme, def-weil-size-convention), Stacks descent.tex 03DX (proposition-equivalence-quasi-coherent, where the proof says 'We omit the verification … cocycle condition'), sheaves.tex 0095, the citing parent lem-trf-scheme-etale-invertible-comparison (step 3) and the consumer lem-trf-etale-framed-line-effective-gluing. The statement is unchanged from the base (compared against the live clone, where the item is still unsplit with no proof). The delivery has no new nodes and there is no re-split note. proof_deps equals the union of the steps' uses. No SGA is cited and there is no cycle. Steps 1–3 (restriction by precomposition, naturality plus linearity giving f_q(b)=b q^♯ s, inverse identities giving a unique unit), the step-4 cocycle and the explicit tensor-unit computations in steps 5–6 are all correct and elementary. The b→a orientation is the inverse of Stacks' pr_0→pr_1 convention and matches the consumer's t_b=t_a m_{g_ab}. Small cases checked: Spec Q with a two-component self-cover scaled by 1 and 2 (g_aa restricts to 1 along Δ but is not identically 1), empty overlaps (zero ring) and nonreduced X. One fix (C1/C2, minor): the diagonal sentence in step 4 evaluated the restricted frames at Δ_a as an object of (R_aa)_et, which silently needs Δ_a to be étale (the diagonal of an étale map is an open immersion, or 02GW), a fact no cited node gives. I rewrote it to use naturality of t_a along the U_a-morphisms Δ: id→p_1 and Δ: id→p_2 in (U_a)_et, then injectivity of (t_a)_id, citing [def-weil-pbc-etale-site]. The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-etale-line-frame-transition-units.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLineFrameTransitionUnits",
+  "declaration": "AlgebraicGeometry.Scheme.etale_line_frame_transition_units",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.TrfEtaleFrame",
+   "AlgebraicGeometry.Scheme.trfEtaleFrameChange",
+   "AlgebraicGeometry.Scheme.trfFrameTensorUnit",
+   "AlgebraicGeometry.Scheme.trfFramePullUnit",
+   "AlgebraicGeometry.Scheme.trfFrameOverlapCoordinates",
+   "AlgebraicGeometry.Scheme.etale_line_frame_transition_units"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLineFrameTransitionUnits.lean",
+  "statement": "theorem etale_line_frame_transition_units (X : Scheme.{u}) (G : _root_.PresheafOfModules.{u} (X.etaleStructurePresheaf ⋙ forget₂ CommRingCat.{u} RingCat.{u})) (_hG : Presheaf.IsSheaf X.smallEtaleTopology G.presheaf) (I : Type w) (U : I → X.Etale) (_hU : X.smallEtaleTopology.CoversTop U) (t : ∀ a, TrfEtaleFrame G (U a)) : ∃! g : ∀ a b, (Γ((Limits.prod (U a) (U b)).left, ⊤))ˣ, (∀ (a b : I) (W : X.Etale) (q : W ⟶ Limits.prod (U a) (U b)) (s : Γ(W.left, ⊤)), trfEtaleFrameChange (t a) (t b) (q ≫ Limits.prod.fst) (q ≫ Limits.prod.snd) s = s * q.left.appTop (g a b : Γ((Limits.prod (U a) (U b)).left, ⊤))) ∧ (∀ a b, (g a b : Γ((Limits.prod (U a) (U b)).left, ⊤)) = trfEtaleFrameChange (t a) (t b) Limits.prod.fst Limits.prod.snd 1 ∧ ((g a b)⁻¹).val = trfEtaleFrameChange (t b) (t a) Limits.prod.snd Limits.prod.fst 1) ∧ (∀ a b c, Units.map (Limits.prod.fst : Limits.prod (Limits.prod (U a) (U b)) (U c) ⟶ _).left.appTop.hom.toMonoidHom (g a b) * Units.map (Limits.prod.lift (Limits.prod.fst ≫ Limits.prod.snd) Limits.prod.snd : Limits.prod (Limits.prod (U a) (U b)) (U c) ⟶ Limits.prod (U b) (U c)).left.appTop.hom.toMonoidHom (g b c) = Units.map (Limits.prod.lift (Limits.prod.fst ≫ Limits.prod.fst) Limits.prod.snd : Limits.prod (Limits.prod (U a) (U b)) (U c) ⟶ Limits.prod (U a) (U c)).left.appTop.hom.toMonoidHom (g a c)) ∧ (∀ a, Units.map (Limits.prod.lift (𝟙 (U a)) (𝟙 (U a))).left.appTop.hom.toMonoidHom (g a a) = 1) ∧ ∃ φ : ∀ a b, (Modules.tensorPullback (Limits.prod.snd : Limits.prod (U a) (U b) ⟶ U b).left).obj (SheafOfModules.unit (U b).left.ringCatSheaf) ≅ (Modules.tensorPullback (Limits.prod.fst : Limits.prod (U a) (U b) ⟶ U a).left).obj (SheafOfModules.unit (U a).left.ringCatSheaf), (∀ (a b : I) (V : (Limits.prod (U a) (U b)).left.Opens) (s : Γ((Limits.prod (U a) (U b)).left, V)), (trfFrameOverlapCoordinates (φ a b)).hom.val.app (op V) s = s * (Limits.prod (U a) (U b)).left.presheaf.map (homOfLE le_top).op (g a b : Γ((Limits.prod (U a) (U b)).left, ⊤))) ∧ (∀ a b c, trfFramePullUnit (Limits.prod.lift (Limits.prod.fst ≫ Limits.prod.snd) Limits.prod.snd : Limits.prod (Limits.prod (U a) (U b)) (U c) ⟶ Limits.prod (U b) (U c)).left (trfFrameOverlapCoordinates (φ b c)) ≪≫ trfFramePullUnit (Limits.prod.fst : Limits.prod (Limits.prod (U a) (U b)) (U c) ⟶ _).left (trfFrameOverlapCoordinates (φ a b)) = trfFramePullUnit (Limits.prod.lift (Limits.prod.fst ≫ Limits.prod.fst) Limits.prod.snd : Limits.prod (Limits.prod (U a) (U b)) (U c) ⟶ Limits.prod (U a) (U c)).left (trfFrameOverlapCoordinates (φ a c))) ∧ (∀ a, trfFramePullUnit (Limits.prod.lift (𝟙 (U a)) (𝟙 (U a))).left (trfFrameOverlapCoordinates (φ a a)) = Iso.refl (SheafOfModules.unit (U a).left.ringCatSheaf))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The module sheaf is supplied by its Mathlib PresheafOfModules data and IsSheaf proof, exactly the two fields of SheafOfModules; localized frames are isomorphisms of the underlying module presheaves, whose forgetful functor from sheaves is fully faithful. Ordinary descent is stated for actual b-to-a tensor-pullback isomorphisms, with their cocycle and diagonal equations in canonical tensor-unit coordinates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f996196a",
+  "group": "NE",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. G is given as the two SheafOfModules fields; frames are presheaf isos over Over U, which equal sheaf isos. The unit action is checked on every étale test object, with both value/inverse formulas, the cocycle with correct projections, and Δ^*g_aa=1 only on the diagonal. The φ are actual b-to-a tensorPullback isos fixed by multiplication by g in canonical tensor-unit coordinates, with real cocycle and diagonal equations. ∃! over the conjunction is not a weakening: uniqueness from the action alone follows by simp at q=𝟙, s=1. No extra hypotheses; I: Type w is free. Edge cases checked: empty I or scheme, zero-ring overlaps, repeated indices. Statement verbatim; node, stmt_deps and proof_deps unchanged from live. No hollow definitions, docstrings complete, sorry only, report sections present. Advisories: theorem-owned tensorPullbackObjUnitToUnit is not a stmt_dep (as passed before); the parent's trfTensorUnit should reuse trfFrameTensorUnit at stage 3; the RingedSiteModules import is unused. Not recompiled since nothing changed; the worker reports clean compiles (55.5 s / 27.1 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T083044-L-2260493",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

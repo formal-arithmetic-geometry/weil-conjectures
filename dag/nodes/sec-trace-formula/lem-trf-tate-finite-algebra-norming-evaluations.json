@@ -1,0 +1,426 @@
+{
+ "id": "lem-trf-tate-finite-algebra-norming-evaluations",
+ "kind": "statement",
+ "title": "Norm-attaining residue evaluations on a finite reduced Tate model",
+ "statement": "Let $k$ be a field [def-weil-field], complete for a nontrivial real-valued multiplicative nonarchimedean absolute value, and let $n\\ge0$. Put $T=k\\langle X_1,\\ldots,X_n\\rangle$, the ring of restricted series [def-trf-restricted-series-presentation], with Gauss norm $G(\\sum a_\\nu X^\\nu)=\\sup_\\nu|a_\\nu|$, and put $Q=\\operatorname{Frac}(T)$ with $|f/g|_Q=G(f)/G(g)$. Let $T\\hookrightarrow A$ be an injective homomorphism of commutative unital $k$-algebras such that $A$ is a finite $T$-module, reduced (no nonzero nilpotent), and torsion-free over $T$ (multiplication by each nonzero $t\\in T$ is injective). Put $M=(T\\setminus\\{0\\})^{-1}A$. For $z\\in M$ let $p_z(Z)=Z^r+\\sum_{i=1}^r a_iZ^{r-i}$ be its monic annihilating polynomial of least positive degree over $Q$, and set $\\sigma(z)=\\max_{1\\le i\\le r}|a_i|_Q^{1/i}$. For every $0\\ne a\\in A$, there exist a finite field extension $k_a/k$ and a unital $k$-algebra homomorphism $\\chi_a:A\\to k_a$ such that, for the spectral norm $s_{k_a/k}$ [lem-trf-incomplete-spectral-algebra-norm], $$s_{k_a/k}(\\chi_a(b))\\le\\sigma(b)\\quad(b\\in A),\\qquad s_{k_a/k}(\\chi_a(a))=\\sigma(a)>0.$$ Stability of $k$, normality of $A$, a domain hypothesis on $A$, and separability are not assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 3.8.1/7(a)-(c), printed pp.171-173 (scan PDF pp.179-181), and the spectral-localization remark on pp.173-174; applied with the normal Tate algebra using Theorem 5.2.6/2 and Corollary 5.1.4/6, exactly as in Proposition 5.3.3/2, p.215. Primary scan read 2026-10-25; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "The injection $T\\hookrightarrow A$ implies $A\\ne0$. Apply [lem-trf-finite-algebra-affinoid-presentation] to the identity presentation of $T$ and the finite $T$-algebra $A$. Thus $A$ has an affinoid quotient presentation. By [lem-trf-tate-gauss-multiplicative], $G$ is multiplicative. A nonzero series has a nonzero coefficient, so its Gauss norm is positive; hence $T$ is a domain, and $G(f)/G(g)$ is a well-defined absolute value on $Q$. Torsion-freeness makes $A\\to M$ injective: $b/1=0$ implies $tb=0$ for some $t\\ne0$, hence $b=0$. These facts justify the fraction-field and localization notation of the statement.",
+   "uses": [
+    "lem-trf-finite-algebra-affinoid-presentation",
+    "lem-trf-tate-gauss-multiplicative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.25-27, and Theorem 14 proof, printed p.28; Section 1.2 Corollary 4 and Proposition 5, printed p.10 (PDF pp.11,26-29). Read primary PDF online 2026-10-25; local archival copy WANTED. Agent assembly using the existing DAG interfaces."
+   }
+  },
+  {
+   "text": "For each $b\\in A$, apply [lem-trf-tate-torsionfree-fibre-polynomial] to obtain the monic generator $P_b(Z)=Z^r+\\sum_{i=1}^r t_iZ^{r-i}$ of the evaluation kernel $T[Z]\\to A$. It is also the monic least-degree annihilator of $b/1$ over $Q$. Indeed it annihilates there. If a nonzero $H\\in Q[Z]$ of degree less than $r$ annihilated $b/1$, multiply its finitely many coefficients by a common nonzero denominator $t\\in T$. Then $tH\\in T[Z]$ is nonzero of the same degree, and $(tH)(b)$ maps to zero in $M$. Step 1 makes it zero in $A$, contrary to kernel $(P_b)$, since every nonzero multiple of a monic degree-$r$ polynomial over a domain has degree at least $r$. Monic division over $Q$ also proves uniqueness. Consequently $p_b=P_b$ in $Q[Z]$ and $\\sigma(b)=\\max_iG(t_i)^{1/i}$. For every maximal $\\mathfrak m\\subset T$, the same cited theorem gives a finite nonempty fibre $Y_{\\mathfrak m}$ and $\\max_{\\mathfrak n\\in Y_{\\mathfrak m}}|b\\bmod\\mathfrak n|=\\max_i|t_i\\bmod\\mathfrak m|^{1/i}$.",
+   "uses": [
+    "lem-trf-tate-torsionfree-fibre-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.25-27, and Theorem 14 proof, printed p.28; Section 1.2 Corollary 4 and Proposition 5, printed p.10 (PDF pp.11,26-29). Read primary PDF online 2026-10-25; local archival copy WANTED. Agent assembly using the existing DAG interfaces."
+   }
+  },
+  {
+   "text": "Every residue field of $A$ or $T$ is finite over $k$ and has a unique extending absolute value by [lem-trf-affinoid-supremum-seminorm-calculus]. By [lem-trf-spectral-norm-algebraic-extension], the minimal-polynomial spectral norm on any of these finite extensions is a multiplicative extending absolute value; hence uniqueness identifies it with the residue absolute value. Given $\\mathfrak n\\in\\operatorname{Max}A$, its contraction $\\mathfrak m$ to $T$ is maximal: $T/\\mathfrak m$ injects into the finite-dimensional $k$-field $A/\\mathfrak n$, so it is a finite-dimensional domain and therefore a field (multiplication by any nonzero element is an injective, hence surjective, linear map). Apply step 2 to $b$ and this $\\mathfrak m$. The cited calculus says $\\rho_T=G$, so $|t_i\\bmod\\mathfrak m|\\le G(t_i)$. Thus for every $b\\in A$ and every maximal $\\mathfrak n$ one has $s_{(A/\\mathfrak n)/k}(b\\bmod\\mathfrak n)\\le\\sigma(b)$.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-trf-spectral-norm-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.25-27, and Theorem 14 proof, printed p.28; Section 1.2 Corollary 4 and Proposition 5, printed p.10 (PDF pp.11,26-29). Read primary PDF online 2026-10-25; local archival copy WANTED. Agent assembly using the existing DAG interfaces."
+   }
+  },
+  {
+   "text": "Fix $0\\ne a\\in A$. If $\\sigma(a)=0$, step 2 makes every coefficient $t_i$ of $P_a$ zero, since $G$ is definite. Then $P_a=Z^r$ and $a^r=0$ with $r\\ge1$, contradicting reducedness. Thus $\\sigma(a)>0$. Choose an index $i$ attaining the finite maximum in step 2 and put $f=t_i$. Then $G(f)^{1/i}=\\sigma(a)>0$, so $f\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.25-27, and Theorem 14 proof, printed p.28; Section 1.2 Corollary 4 and Proposition 5, printed p.10 (PDF pp.11,26-29). Read primary PDF online 2026-10-25; local archival copy WANTED. Agent assembly using the existing DAG interfaces."
+   }
+  },
+  {
+   "text": "We construct a maximal $\\mathfrak m\\subset T$ with $|f\\bmod\\mathfrak m|=G(f)$. Since the coefficients of $f$ tend to zero, one coefficient $c\\ne0$ attains $G(f)$: choose any positive coefficient value $v$, take the finite nonempty set of coefficients of value at least $v/2$, and maximize on it; all remaining values are smaller. Put $g=c^{-1}f$, so $G(g)=1$. In $T'=k\\langle X_1,\\ldots,X_n,Y\\rangle$, put $h=1-Yg$. Its constant coefficient is $1$ and $G(h-1)=1$. Therefore [lem-trf-tate-unit-coefficient-criterion] makes $h$ a nonunit. By [lem-weil-pbc-proper-ideal-contained-in-maximal], choose a maximal $\\mathfrak M\\subset T'$ containing $(h)$. The field $L=T'/\\mathfrak M$ is finite over $k$, complete, and has coordinate residues $(x_1,\\ldots,x_n,y)$ of absolute value at most $1$, by [lem-per-tate-maximal-residue-evaluation]. The restriction $e:T\\to L$ of the quotient is the convergent substitution at $x$, by that node's formula for every series; [lem-per-tate-banach-substitution] gives $|e(g)|\\le1$. Since $h$ vanishes, $y e(g)=1$, whence $|e(g)|=1$ and $|e(f)|=|c|=G(f)$. The image of $e$ is a finite-dimensional $k$-domain, hence a field by the multiplication argument of step 3. Thus $\\mathfrak m=\\ker e$ is maximal, and uniqueness of the extending residue absolute value in [lem-trf-affinoid-supremum-seminorm-calculus] identifies $|f\\bmod\\mathfrak m|$ with $|e(f)|$. This includes $n=0$.",
+   "uses": [
+    "lem-trf-tate-unit-coefficient-criterion",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-per-tate-maximal-residue-evaluation",
+    "lem-per-tate-banach-substitution",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.25-27, and Theorem 14 proof, printed p.28; Section 1.2 Corollary 4 and Proposition 5, printed p.10 (PDF pp.11,26-29). Read primary PDF online 2026-10-25; local archival copy WANTED. Agent assembly using the existing DAG interfaces."
+   }
+  },
+  {
+   "text": "Use [lem-trf-tate-torsionfree-fibre-polynomial] for $a$ at the maximal ideal $\\mathfrak m$ of step 5. Its finite nonempty fibre has an element $\\mathfrak n$ attaining $\\max_{\\mathfrak q\\in Y_{\\mathfrak m}}|a\\bmod\\mathfrak q|=\\max_j|t_j\\bmod\\mathfrak m|^{1/j}$. The right side is at least $|t_i\\bmod\\mathfrak m|^{1/i}=G(t_i)^{1/i}=\\sigma(a)$, and step 3 bounds every fibre value by $\\sigma(a)$. Hence $|a\\bmod\\mathfrak n|=\\sigma(a)>0$. Set $k_a=A/\\mathfrak n$ and let $\\chi_a$ be the quotient $k$-algebra homomorphism. It is unital; its target is a finite field extension by [lem-trf-affinoid-supremum-seminorm-calculus]. Step 3 identifies its residue absolute value with $s_{k_a/k}$ and proves contractivity for every $b\\in A$, while the equality just obtained gives the required attainment. No field structure on $M$, normality of $A$, stability, or separability was used.",
+   "uses": [
+    "lem-trf-tate-torsionfree-fibre-polynomial",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.25-27, and Theorem 14 proof, printed p.28; Section 1.2 Corollary 4 and Proposition 5, printed p.10 (PDF pp.11,26-29). Read primary PDF online 2026-10-25; local archival copy WANTED. Agent assembly using the existing DAG interfaces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-tate-banach-substitution",
+  "lem-per-tate-maximal-residue-evaluation",
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-finite-algebra-affinoid-presentation",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-trf-tate-gauss-multiplicative",
+  "lem-trf-tate-torsionfree-fibre-polynomial",
+  "lem-trf-tate-unit-coefficient-criterion",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.25-27, and Theorem 14 proof, printed p.28; Section 1.2 Corollary 4 and Proposition 5, printed p.10 (PDF pp.11,26-29). Read primary PDF online 2026-10-25; local archival copy WANTED. Agent assembly using the existing DAG interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Maximum modulus principle finite integral Tate algebra spectral norm finite residue field evaluation",
+   "results": {
+    "t": "2026-10-24T16:35:38Z",
+    "tool": "leansearch",
+    "query": "Maximum modulus principle finite integral Tate algebra spectral norm finite residue field evaluation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm",
+     "spectralNorm.normedSpace",
+     "spectralNorm",
+     "spectralMulAlgNorm",
+     "spectralNorm.normedField",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.nontriviallyNormedField"
+    ],
+    "digest": "a45e1c62e18b549f"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralAlgNorm constructs a field-extension norm; complex maximum-modulus hits concern complex holomorphic functions. None supplies norm-attaining finite residue evaluations on a finite reduced Tate model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite reduced algebra over the fraction field of a Tate algebra has spectral norm attained at algebraic residue evaluations on any finite integral Tate algebra model",
+   "results": {
+    "t": "2026-10-24T16:35:39Z",
+    "tool": "leanfinder",
+    "query": "A finite reduced algebra over the fraction field of a Tate algebra has spectral norm attained at algebraic residue evaluations on any finite integral Tate algebra model",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm",
+     "spectralAlgNorm_def",
+     "isNonarchimedean_spectralNorm",
+     "norm_le_spectralNorm",
+     "spectralMulAlgNorm_def",
+     "spectralMulAlgNorm",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm_unique"
+    ],
+    "digest": "5704072d7d23c3b5"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralAlgNorm constructs a field-extension norm; complex maximum-modulus hits concern complex holomorphic functions. None supplies norm-attaining finite residue evaluations on a finite reduced Tate model."
+  },
+  {
+   "tool": "grep",
+   "query": "maximumModulus|maximum.modulus|norming.*residue|TateAlgebra",
+   "results": {
+    "t": "2026-10-24T16:37:36Z",
+    "tool": "grep",
+    "query": "maximumModulus|maximum.modulus|norming.*residue|TateAlgebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/Geometry/Manifold/Complex.lean",
+     "Mathlib/Geometry/Manifold/Complex.lean",
+     "Mathlib/Geometry/Manifold/Complex.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean"
+    ],
+    "digest": "b444f0990b94659e"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralAlgNorm constructs a field-extension norm; complex maximum-modulus hits concern complex holomorphic functions. None supplies norm-attaining finite residue evaluations on a finite reduced Tate model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"AlgHom\"",
+   "results": {
+    "t": "2026-10-24T16:37:37Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"AlgHom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralAlgNorm constructs a field-extension norm; complex maximum-modulus hits concern complex holomorphic functions. None supplies norm-attaining finite residue evaluations on a finite reduced Tate model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Norming homomorphisms from a finite torsion free reduced Tate algebra to finite coefficient field extensions realize the generic minimal polynomial spectral norm",
+   "results": {
+    "t": "2026-10-24T16:37:39Z",
+    "tool": "leanfinder",
+    "query": "Norming homomorphisms from a finite torsion free reduced Tate algebra to finite coefficient field extensions realize the generic minimal polynomial spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralNorm",
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralNorm_unique_field_norm_ext",
+     "spectralAlgNorm_def"
+    ],
+    "digest": "309282627bf8f072"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralAlgNorm constructs a field-extension norm; complex maximum-modulus hits concern complex holomorphic functions. None supplies norm-attaining finite residue evaluations on a finite reduced Tate model."
+  },
+  {
+   "tool": "grep",
+   "query": "maximumModulus|maximum.modulus|norming.*residue|TateAlgebra",
+   "results": {
+    "t": "2026-10-24T17:13:16Z",
+    "tool": "grep",
+    "query": "maximumModulus|maximum.modulus|norming.*residue|TateAlgebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/AbsMax.lean",
+     "Mathlib/Analysis/Complex/PhragmenLindelof.lean",
+     "Mathlib/Analysis/Complex/PhragmenLindelof.lean",
+     "Mathlib/Analysis/Complex/Schwarz.lean"
+    ],
+    "digest": "688af42114c79887"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: field-extension spectralNorm declarations require a field target and give no norm-attaining residue evaluation for a finite torsion-free reduced Tate algebra. Complex maximum-modulus theorems are unrelated. Read SpectralNorm.lean lines 375-390, 627-681, 845-875."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximum modulus principle finite integral Tate algebra spectral norm finite residue field evaluation",
+   "results": {
+    "t": "2026-10-24T17:13:17Z",
+    "tool": "leansearch",
+    "query": "Maximum modulus principle finite integral Tate algebra spectral norm finite residue field evaluation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm",
+     "spectralNorm.normedSpace",
+     "spectralNorm",
+     "spectralMulAlgNorm",
+     "spectralNorm.normedField",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.nontriviallyNormedField"
+    ],
+    "digest": "a45e1c62e18b549f"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: field-extension spectralNorm declarations require a field target and give no norm-attaining residue evaluation for a finite torsion-free reduced Tate algebra. Complex maximum-modulus theorems are unrelated. Read SpectralNorm.lean lines 375-390, 627-681, 845-875."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"AlgHom\"",
+   "results": {
+    "t": "2026-10-24T17:13:17Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"AlgHom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: field-extension spectralNorm declarations require a field target and give no norm-attaining residue evaluation for a finite torsion-free reduced Tate algebra. Complex maximum-modulus theorems are unrelated. Read SpectralNorm.lean lines 375-390, 627-681, 845-875."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite reduced algebra over the fraction field of a Tate algebra has spectral norm attained at algebraic residue evaluations on any finite integral Tate algebra model",
+   "results": {
+    "t": "2026-10-24T17:13:18Z",
+    "tool": "leanfinder",
+    "query": "A finite reduced algebra over the fraction field of a Tate algebra has spectral norm attained at algebraic residue evaluations on any finite integral Tate algebra model",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm",
+     "spectralAlgNorm_def",
+     "isNonarchimedean_spectralNorm",
+     "norm_le_spectralNorm",
+     "spectralMulAlgNorm_def",
+     "spectralMulAlgNorm",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm_unique"
+    ],
+    "digest": "5704072d7d23c3b5"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: field-extension spectralNorm declarations require a field target and give no norm-attaining residue evaluation for a finite torsion-free reduced Tate algebra. Complex maximum-modulus theorems are unrelated. Read SpectralNorm.lean lines 375-390, 627-681, 845-875."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Norming homomorphisms from a finite torsion free reduced Tate algebra to finite coefficient field extensions realize the generic minimal polynomial spectral norm",
+   "results": {
+    "t": "2026-10-24T17:14:02Z",
+    "tool": "leanfinder",
+    "query": "Norming homomorphisms from a finite torsion free reduced Tate algebra to finite coefficient field extensions realize the generic minimal polynomial spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralNorm",
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralNorm_unique_field_norm_ext",
+     "spectralAlgNorm_def"
+    ],
+    "digest": "309282627bf8f072"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: field-extension spectralNorm declarations require a field target and give no norm-attaining residue evaluation for a finite torsion-free reduced Tate algebra. Complex maximum-modulus theorems are unrelated. Read SpectralNorm.lean lines 375-390, 627-681, 845-875."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-gauss-spectral-coefficient-cartesian",
+  "date": "2026-10-25",
+  "group": "O2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Proposition 5.3.3/2, printed pp.214–215 (scan PDF pp.220–221). Supporting input for Proposition 5.3.3/2: Proposition 3.8.1/7(a)-(c), printed pp.171-173 (scan PDF pp.179-181), and the spectral-localization remark on pp.173-174; applied with the normal Tate algebra using Theorem 5.2.6/2 and Corollary 5.1.4/6, exactly as in Proposition 5.3.3/2, p.215.",
+   "via": [
+    "lem-trf-gauss-spectral-coefficient-cartesian",
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-tate-finite-algebra-norming-evaluations",
+  "worker": "stage1",
+  "summary": "Statement preserved. Six-step assembly reuses the existing finite-affinoid presentation and torsion-free fibre-polynomial theorem. Identifies the localized least-degree polynomial by clearing finitely many denominators; proves residue contractivity and reducedness positivity; constructs a Gauss-norm-attaining base maximal ideal with 1-Yg and lifts through the finite fibre. No new nodes. Fresh logged Mathlib searches confirm no full match.",
+  "blueprint": "Preserves the inherited historical analytic ancestry under lem-trf-local-term-locality and the BGR 5.3.3/2 supporting input; the current Varshavsky contracting-correspondence unit argument is not replaced. Assembly realizes the finite-Tate-model norming evaluation input using Bosch 1.4 Lemma 12 and the Tate maximum principle.",
+  "tool_uses": [
+   {
+    "node": "lem-per-tate-maximal-residue-evaluation",
+    "why": "Generic Tate maximal-residue field and coordinate evaluation theorem for the auxiliary hypersurface; no same-unit theorem states its full coordinate/convergence interface."
+   },
+   {
+    "node": "lem-per-tate-banach-substitution",
+    "why": "Generic bounded convergent substitution into a complete finite residue field, used to bound the auxiliary evaluation; no same-unit node supplies this interface."
+   },
+   {
+    "node": "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "why": "Generic commutative-ring maximal-ideal existence for the nonunit auxiliary hypersurface; it is independent of the trace unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-tate-maximal-residue-evaluation",
+  "lem-per-tate-banach-substitution",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-37ccc09aa",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-37ccc09aa (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged and true. Tested: n=0 with A=k×k (a=(0,1), and contractivity for b=(x,y)); A=T[Z]/(Z^2-X); an inseparable residue field; a nilpotent a, which shows reducedness is needed. The delivery adds no new nodes, and proof_deps equals the union of the step uses. Step 1: the finite-algebra-affinoid-presentation node applies with base T (identity presentation) and B=A, and B≠0 because T↪A. Gauss-multiplicativity makes T a domain and |·|_Q well defined, and torsion-freeness makes A→M injective. Step 2: the torsion-free fibre-polynomial hypotheses all hold. Clearing denominators correctly shows that its monic P_b is the least-degree polynomial over Q, so σ(b)=max G(t_i)^{1/i}. Step 3: the calculus node gives finite residue fields with a unique extending absolute value and ρ_T=G. The algebraic-extension Mathlib leaf (F=k) makes s that same absolute value; its index form agrees with lem-trf-incomplete-spectral-algebra-norm under i=d-j. The contraction of a maximal ideal is maximal, which gives contractivity. Step 4 (σ(a)>0 from reducedness) is elementary and correct. Step 5 builds h=1-Yg, which is a nonunit by the unit-coefficient criterion (|c_0|=1 is not >1); a maximal ideal containing h exists; residue evaluation and Banach substitution (B=L, |x_i|≤1) give |e(g)|≤1; and y·e(g)=1 gives equality. This repeats the 1-Yg argument from inside the calculus node's proof, but that node's statement gives only the supremum, not attainment, so this is not a C3 use of another node's proof. Step 6 gives attainment on the finite fibre. The three off-unit tool uses (per-tate maximal residue, per-tate Banach substitution, pbc maximal ideal) are the same ones already accepted for the same-unit calculus node; I accept them. Searches for duplicates ('maximum principle', 'attain', 1-Yg) found none. BGR and Bosch are absent locally; WANTED is recorded and the proof is correctly marked agent. No SGA. No fixes."
+ }
+}

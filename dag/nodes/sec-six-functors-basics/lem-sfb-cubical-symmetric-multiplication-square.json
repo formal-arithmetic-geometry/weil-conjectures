@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-cubical-symmetric-multiplication-square",
+ "kind": "statement",
+ "title": "Multiplication pulls a symmetric cubical line back to its square-exponent power",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $p:G\\to S$ a commutative group scheme with identity $e$, meaning that its addition, inverse and identity are $S$-morphisms satisfying the commutative group identities. Let $(L,r,\\tau)$ be a cubical rigidified line [def-sfb-cubical-rigidified-line]. Assume a cubical rigidification-preserving isomorphism $\\iota:[-1]^*(L,r,\\tau)\\simeq(L,r,\\tau)$ is given. For every integer $d\\geq1$, write $[d]:G\\to G$ for the sum of $d$ copies of the identity homomorphism. There is a cubical rigidification-preserving isomorphism $[d]^*(L,r,\\tau)\\simeq(L,r,\\tau)^{\\otimes d^2}$. Tensor powers have the tensor product rigidification and cube section, and pullbacks are tensor inverse images [def-pc-module-pullback]. The assertion imposes no invertibility condition on $d$ on $S$.",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "I 5.5, quadratic multiplication formula, used in II 3.3.3. Local original WANTED. Agent specialization of the cubical finite-difference identity to symmetric rigidified lines."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-cubical-rigidified-line",
+  "def-pc-module-pullback",
+  "def-sfb-cubical-tensor-power-iso"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal L=(L,r,\\tau)$, $A_j=[j]^*\\mathcal L$ for $j\\geq0$, and $\\mathbf1$ for the trivial cubical line. Tensor products and homomorphism pullbacks are cubical: their defining symmetry, normalization and cocycle equations are obtained by multiplying or pulling back the equations of [def-sfb-cubical-rigidified-line]. The inverse line has the dual rigidification and inverse cube section. The underlying pullback/tensor and composite-pullback identifications are those of [lem-weil-pbc-invertible-pullback-tensor](1),(2). They preserve cube sections because each factor is pulled back along the same composite homomorphism. Cancellation $M\\otimes M^{-1}\\simeq\\mathbf1$ is evaluation: on a local frame it sends $u\\otimes u^\\vee$ to $1$, and on cube sections it multiplies a section by its inverse. Thus all these operations preserve rigidifications and cubes. The rigidification $r$ identifies $A_0=p^*e^*\\mathcal L$ with $\\mathbf1$: its cube section is the pullback of $\\tau(e,e,e)=1$. Also $A_1\\simeq\\mathcal L$.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/lem-sc-mult-n-pullback.proof.md",
+    "place": "Base cases and tensor cancellation; extension from field-valued underlying lines to the supplied cubical rigidification."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-cube-section-cubical-compatibility]. For any commutative $S$-group scheme $H$ and homomorphisms $a,b,c:H\\to G$, pull its cubical isomorphism back along the homomorphism $(a,b,c):H\\to G^3$. Cancel dual factors as in step 1, and use $r$ on the zero-map factor. The result is a cubical rigidification-preserving isomorphism\n$$(a+b+c)^*\\mathcal L\\otimes a^*\\mathcal L\\otimes b^*\\mathcal L\\otimes c^*\\mathcal L\\simeq(a+b)^*\\mathcal L\\otimes(a+c)^*\\mathcal L\\otimes(b+c)^*\\mathcal L.$$\nDenote it by $C(a,b,c)$. It is the actual pulled-back cube section with factors moved across by evaluation. This supplies preservation of cube sections, which the underlying theorem of the cube alone would not supply.",
+   "uses": [
+    "lem-sfb-cube-section-cubical-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/lem-sc-mult-n-pullback.proof.md",
+    "place": "The cube relation pulled back along three homomorphisms; cubical compatibility isolated in the cited supporting node."
+   }
+  },
+  {
+   "text": "Evaluate $C(a,b,c)$ at $H=G$, $a=b=\\mathrm{id}_G$, $c=[-1]$. Here $a+b+c=\\mathrm{id}_G$, $a+b=[2]$, and $a+c=b+c=0$. Consequently $\\mathcal L^{\\otimes3}\\otimes[-1]^*\\mathcal L\\simeq A_2\\otimes A_0^{\\otimes2}$. The cubical symmetry $\\iota$ in the hypothesis and the identification of $A_0$ in step 1 give $A_2\\simeq\\mathcal L^{\\otimes4}$. This uses neither division by $2$ nor uniqueness of a rigidification-preserving isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/lem-sc-mult-n-pullback.proof.md",
+    "place": "Substitution $(x,x,-x)$, giving the multiplication-by-two base case."
+   }
+  },
+  {
+   "text": "For $n\\geq1$ use $C(\\mathrm{id}_G,\\mathrm{id}_G,[n-1])$ from step 2; it is cubical by [lem-sfb-cube-section-cubical-compatibility]. The seven sum maps give\n$$A_{n+1}\\otimes\\mathcal L^{\\otimes2}\\otimes A_{n-1}\\simeq A_2\\otimes A_n^{\\otimes2}.$$\nProve simultaneously $A_{n-1}\\simeq\\mathcal L^{\\otimes(n-1)^2}$ and $A_n\\simeq\\mathcal L^{\\otimes n^2}$ by induction on $n\\geq1$. For $n=1$ these are $A_0\\simeq\\mathbf1$ and $A_1\\simeq\\mathcal L$. In the induction step insert these two isomorphisms and the $A_2$ isomorphism of step 3 into the displayed relation. Tensor both sides with the inverse of $\\mathcal L^{\\otimes(2+(n-1)^2)}$ and evaluate the inverse pairs. This gives\n$$A_{n+1}\\simeq\\mathcal L^{\\otimes(4+2n^2-2-(n-1)^2)}=\\mathcal L^{\\otimes(n+1)^2},$$\nsince $4+2n^2-2-(n-1)^2=(n+1)^2$. Together with the previous isomorphism for $A_n$ this is the next pair. Each map is a tensor product or composite of cubical rigidification-preserving maps. Taking $n=d$ proves the assertion for every $d\\geq1$. Only integer exponent arithmetic was used, so no integer was required to be a unit on $S$.",
+   "uses": [
+    "lem-sfb-cube-section-cubical-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/lem-sc-mult-n-pullback.proof.md",
+    "place": "Substitution $(x,x,[n-1]x)$ and the explicit simultaneous induction; same finite-difference route as the current blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-cubical-rigidified-line",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sfb-cube-section-cubical-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/lem-sc-mult-n-pullback.proof.md",
+  "place": "Adaptation of the cube substitutions and induction to arbitrary cubical rigidified lines; MB I §2 and I 5.5 requested but not locally available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a symmetric rigidified cubical line bundle L on a commutative group scheme the pullback by multiplication n is L to the tensor power n squared",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instBraidedCategoryScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.BraidedCategory AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes is endowed with the structure of a braided category. This structure is derived from its Cartesian monoidal structure, where the braiding isomorphism for two schemes $X$ and $Y$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y),\\n  (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).symm =\\n    AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, if two pullback triplets $T_1$ and $T_2$ are equal, then the inverse of the isomorphism between their tensor pushouts is equal to the te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.monObjAsOverPullback_mul\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {M S T : AlgebraicGeometry.Scheme} [inst : M.Over S] {f : T ⟶ S} [inst_1 : CategoryTheory.MonObj (M.asOver S)],\\n  CategoryTheory.MonObj.mul =\\n    CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.Functor.LaxMonoidal.μ (CategoryTheory.Over.pullback f) (CategoryTheory.Over.mk (M ↘ S))\\n       \", \"doc\": \"In the Cartesian monoidal category of schemes over a base scheme $ S $, the multiplication morphism of a monoidal object $ M $ is given by the composition of the lax monoidal structure map $ \\\\mu $ of \"}\n  {\"name\": \"Action.diagonalSuccIsoTensorTrivial_inv_hom_apply\", \"module\": \"Mathlib/CategoryTheory/Action/Monoidal\", \"type\": \"∀ {G : Type u} [inst : Group G] {n : ℕ} (g : G) (f : Fin n → G),\\n  (Action.diagonalSuccIsoTensorTrivial G n).inv.hom (g, f) = g • Fin.partialProd f\", \"doc\": \"For a group $G$ and natural number $n$, the inverse of the isomorphism between the diagonal action on $G^{n+1}$ and the tensor product of the left regular action on $G$ with the trivial action on $G^n\"}\n  {\"name\": \"Action.diagonalSuccIsoTensorTrivial_hom_hom_apply\", \"module\": \"Mathlib/CategoryTheory/Action/Monoidal\", \"type\": \"∀ {G : Type u} [inst : Group G] {n : ℕ} (f : Fin (n + 1) → G),\\n  (Action.diagonalSuccIsoTensorTrivial G n).hom.hom f = (f 0, fun i => (f i.castSucc)⁻¹ * f i.succ)\", \"doc\": \"For a group $G$ and natural number $n$, the forward direction of the natural isomorphism between the diagonal action of $G$ on $G^{n+1}$ and the tensor product of the left regular action on $G$ with t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isCommMonObj_asOver_pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {M S T : AlgebraicGeometry.Scheme} [inst : M.Over S] {f : T ⟶ S} [inst_1 : CategoryTheory.MonObj (M.asOver S)]\\n  [CategoryTheory.IsCommMonObj (M.asOver S)],\\n  CategoryTheory.IsCommMonObj ((CategoryTheory.Limits.pullback (M ↘ S) f).asOver T)\", \"doc\": \"For any scheme $ S $ and a commutative monoidal object in the over category $ \\\\mathbf{Sch}/S $, the pullback of this object along a morphism $ f $ to another scheme $ T $ results in a commutative mono\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.monObjAsOverPullback_one\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {M S T : AlgebraicGeometry.Scheme} [inst : M.Over S] {f : T ⟶ S} [inst_1 : CategoryTheory.MonObj (M.asOver S)],\\n  CategoryTheory.MonObj.one =\\n    CategoryTheory.CategoryStruct.comp (CategoryTheory.Functor.LaxMonoidal.ε (CategoryTheory.Over.pullback f))\\n      ((CategoryTheory.Over.pullback f).map C\", \"doc\": \"For any scheme $ S $ and a monoidal object $ M $ in the over category $ \\\\mathbf{Sch}/S $, the unit morphism $ \\\\eta: S \\\\to M $ satisfies the compatibility condition that its pullback along a morphism $\"}\n  {\"name\": \"CategoryTheory.Over.grpObjMkPullbackSnd_mul\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Over\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasPullbacks C]\\n  {X R S : C} {f : R ⟶ X} {g : S ⟶ X} [inst_2 : CategoryTheory.GrpObj (CategoryTheory.Over.mk f)],\\n  CategoryTheory.MonObj.mul =\\n    CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory\", \"doc\": \"Given a category $\\\\mathcal{C}$ with pullbacks, objects $X, R, S \\\\in \\\\mathcal{C}$, morphisms $f: R \\\\to X$ and $g: S \\\\to X$, and a group object structure on $f$ in the over category $\\\\mathcal{C}/X$, the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The theorem of the cube implies multiplication by n pulls back a symmetric line bundle to its n squared tensor power",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorPower.gMul_def\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{i j} (a : ⨂[R]^i M) (b : (⨂[R]^j) M) : a ₜ* b = @mulEquiv R M _ _ _ i j (a ⊗ₜ b)\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-module $ M $, the tensor product of the $ n $-th and $ m $-th tensor powers of $ M $ is linearly equivalent to the $ (n + m) $-th tensor power of $ M $.\"}\n  {\"name\": \"TensorPower.mulEquiv\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{n m : ℕ} : ⨂[R]^n M ⊗[R] (⨂[R]^m) M ≃ₗ[R] (⨂[R]^(n + m)) M\", \"doc\": \"The tensor product of the $ n $-th and $ m $-th tensor powers of a module $ M $ over a commutative semiring $ R $ is linearly equivalent to the $ (n + m) $-th tensor power of $ M $.\"}\n  {\"name\": \"LinearEquiv.rTensor_pow\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"(f : M ≃ₗ[R] M) (n : ℕ) : f.rTensor N ^ n = (f ^ n).rTensor N\", \"doc\": \"For any linear equivalence $ f : M \\\\simeq_R M $ over a commutative semiring $ R $ and natural number $ n $, the $ n $-th power of the tensor product $ f \\\\otimes_R N $ equals the tensor product of the \"}\n  {\"name\": \"LinearEquiv.rTensor_zpow\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"(f : M ≃ₗ[R] M) (n : ℤ) : f.rTensor N ^ n = (f ^ n).rTensor N\", \"doc\": \"For any linear equivalence $ f : M \\\\simeq_R M $ and integer $ n \\\\in \\\\mathbb{Z} $, the $ n $-th power of the tensor product $ f \\\\otimes N $ equals the tensor product of the $ n $-th power $ f^n $ with \"}\n  {\"name\": \"LinearEquiv.lTensor_pow\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"(f : N ≃ₗ[R] N) (n : ℕ) : f.lTensor M ^ n = (f ^ n).lTensor M\", \"doc\": \"For any linear equivalence $ f : N \\\\to N $ over a commutative semiring $ R $ and any natural number $ n $, the $ n $-th power of the tensor product of $ f $ with $ M $ is equal to the tensor product o\"}\n  {\"name\": \"TensorPower.mul_assoc\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{na nb nc} (a : (⨂[R]^na) M) (b : (⨂[R]^nb) M) (c : (⨂[R]^nc) M) :\\n  cast R M (add_assoc _ _ _) (a ₜ* b ₜ* c) = a ₜ* (b ₜ* c)\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-module $ M $, the multiplication operation on tensor powers satisfies associativity up to a canonical $ R $-linear isomorphism induced by the associativit\"}\n  {\"name\": \"LinearEquiv.lTensor_zpow\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"(f : N ≃ₗ[R] N) (n : ℤ) : f.lTensor M ^ n = (f ^ n).lTensor M\", \"doc\": \"For any linear equivalence $ f : N \\\\simeq_R N $ over a commutative semiring $ R $ and integer $ n \\\\in \\\\mathbb{Z} $, the $ n $-th power of the tensor product $ f \\\\otimes_R \\\\text{id}_M $ equals the tens\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pow_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"(n : ℕ) : (s ^ n).1 x = s.1 x ^ n\", \"doc\": \"For any natural number $ n $ and section $ s $ of the structure sheaf on the projective spectrum, the equality $ (s^n)(x) = (s(x))^n $ holds for all points $ x $, where $ s^n $ denotes the $ n $-th po\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Invertible\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|cubist|[Ss]ymmetric.*[Ll]ine[Bb]undle|[Ll]ine[Bb]undle.*[Ss]ymmetric",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quadratic tensor power formula for symmetric cubist invertible sheaves on commutative group schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"QuadraticModuleCat.instMonoidalCategory.tensorObj_form\", \"module\": \"Mathlib/LinearAlgebra/QuadraticForm/QuadraticModuleCat/Monoidal\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : Invertible 2] (X Y : QuadraticModuleCat R),\\n  (QuadraticModuleCat.instMonoidalCategory.tensorObj X Y).form = X.form.tmul Y.form\", \"doc\": \"Let $R$ be a commutative ring in which 2 is invertible. For any two quadratic modules $X$ and $Y$ over $R$, the quadratic form of the tensor product $X \\\\otimes Y$ is equal to the tensor product of the\"}\n  {\"name\": \"QuadraticForm.tmul_tensorRId_apply\", \"module\": \"Mathlib/LinearAlgebra/QuadraticForm/TensorProduct/Isometries\", \"type\": \"∀ {R : Type uR} {M₁ : Type uM₁} [inst : CommRing R] [inst_1 : AddCommGroup M₁] [inst_2 : Module R M₁]\\n  [inst_3 : Invertible 2] (Q₁ : QuadraticForm R M₁) (x : TensorProduct R M₁ R),\\n  Q₁ ((TensorProduct.rid R M₁) x) = (Q₁.tmul QuadraticMap.sq) x\", \"doc\": \"For any quadratic form $ Q_1 $ on an $ R $-module $ M_1 $ and any element $ x \\\\in M_1 \\\\otimes_R R $, the value of $ Q_1 $ at the image of $ x $ under the canonical isomorphism $ M_1 \\\\otimes_R R \\\\cong \"}\n  {\"name\": \"QuadraticForm.tmul_tensorLId_apply\", \"module\": \"Mathlib/LinearAlgebra/QuadraticForm/TensorProduct/Isometries\", \"type\": \"∀ {R : Type uR} {M₂ : Type uM₂} [inst : CommRing R] [inst_1 : AddCommGroup M₂] [inst_2 : Module R M₂]\\n  [inst_3 : Invertible 2] (Q₂ : QuadraticForm R M₂) (x : TensorProduct R R M₂),\\n  Q₂ ((TensorProduct.lid R M₂) x) = (QuadraticForm.tmul QuadraticMap.sq Q₂) x\", \"doc\": \"For any element $x$ in the tensor product $R \\\\otimes_R M_2$, the quadratic form $Q_2$ evaluated at the image of $x$ under the canonical left identity embedding $\\\\mathrm{lid}: M_2 \\\\to R \\\\otimes_R M_2$ \"}\n  {\"name\": \"QuadraticMap.tensorDistrib\", \"module\": \"Mathlib/LinearAlgebra/QuadraticForm/TensorProduct\", \"type\": \"(R : Type uR) →\\n  (A : Type uA) →\\n    {M₁ : Type uM₁} →\\n      {M₂ : Type uM₂} →\\n        {N₁ : Type uN₁} →\\n          {N₂ : Type uN₂} →\\n            [inst : CommRing R] →\\n              [inst_1 : CommRing A] →\\n                [inst_2 : AddCommGroup M₁] →\\n                  [inst_3 : AddCommGroup M₂] →\\n  \", \"doc\": \"A linear map that takes the tensor product of a quadratic map over a commutative ring $ A $ and a quadratic map over a commutative semiring $ R $, producing a quadratic map over $ A $ on the tensor pr\"}\n  {\"name\": \"QuadraticForm.tensorRId_symm_apply\", \"module\": \"Mathlib/LinearAlgebra/QuadraticForm/TensorProduct/Isometries\", \"type\": \"∀ {R : Type uR} {M₁ : Type uM₁} [inst : CommRing R] [inst_1 : AddCommGroup M₁] [inst_2 : Module R M₁]\\n  [inst_3 : Invertible 2] (Q₁ : QuadraticForm R M₁) (x : M₁), Q₁.tensorRId.symm x = (TensorProduct.rid R M₁).symm x\", \"doc\": \"Let $Q_1$ be a quadratic form on an $R$-module $M_1$ over a commutative ring $R$. Let $\\\\text{tensorRId}(Q_1)$ be the canonical isometry that identifies the tensor product quadratic form on $M_1 \\\\otime\"}\n  {\"name\": \"QuadraticModuleCat.instMonoidalCategory.tensorObj\", \"module\": \"Mathlib/LinearAlgebra/QuadraticForm/QuadraticModuleCat/Monoidal\", \"type\": \"{R : Type u} → [inst : CommRing R] → [Invertible 2] → QuadraticModuleCat R → QuadraticModuleCat R → QuadraticModuleCat R\", \"doc\": \"Given two quadratic modules $X$ and $Y$ over a commutative ring $R$, their tensor product is constructed by taking the tensor product of their underlying $R$-modules and equipping it with a quadratic \"}\n  {\"name\": \"QuadraticForm.tensorLId_symm_apply\", \"module\": \"Mathlib/LinearAlgebra/QuadraticForm/TensorProduct/Isometries\", \"type\": \"∀ {R : Type uR} {M₂ : Type uM₂} [inst : CommRing R] [inst_1 : AddCommGroup M₂] [inst_2 : Module R M₂]\\n  [inst_3 : Invertible 2] (Q₂ : QuadraticForm R M₂) (x : M₂), Q₂.tensorLId.symm x = (TensorProduct.lid R M₂).symm x\", \"doc\": \"For a quadratic form $ Q_2 $ on an $ R $-module $ M_2 $, the inverse of the isometry $ \\\\mathrm{tensorLId}(Q_2) $ applied to any element $ x \\\\in M_2 $ equals the inverse of the left identity embedding \"}\n  {\"name\": \"QuadraticForm.tensorRId_apply\", \"module\": \"Mathlib/LinearAlgebra/QuadraticForm/TensorProduct/Isometries\", \"type\": \"∀ {R : Type uR} {M₁ : Type uM₁} [inst : CommRing R] [inst_1 : AddCommGroup M₁] [inst_2 : Module R M₁]\\n  [inst_3 : Invertible 2] (Q₁ : QuadraticForm R M₁) (x : TensorProduct R M₁ R),\\n  Q₁.tensorRId x = (TensorProduct.rid R M₁) x\", \"doc\": \"The tensor product of a quadratic form $ Q_1 $ on an $ R $-module $ M_1 $ with the canonical quadratic form given by squaring elements of $ R $ is isometrically equivalent to $ Q_1 $ itself, where the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|cubist|symmetric.*line.?bundle|line.?bundle.*symmetric",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cubical\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a symmetric cubical invertible sheaf L on a group scheme multiplication by n pulls L back to L tensor power n squared",
+   "results": "8 hits: LinearEquiv.rTensor_pow, LinearEquiv.rTensor_zpow, LinearEquiv.lTensor_zpow, CategoryTheory.Grp.Hom.hom_hom_zpow, CategoryTheory.Grp.Hom.hom_zpow, zsmul_iterate, AlgebraicGeometry.Proj.pow_apply, LinearEquiv.lTensor_pow",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by an integer pulls a symmetric cubical rigidified line bundle on a commutative group scheme back to its square tensor power",
+   "results": "8 hits: CommRing.Pic.functor, AlgebraicGeometry.instBraidedCategoryScheme, Action.diagonalSuccIsoTensorTrivial_inv_hom_apply, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, CommRing.Pic.mul_eq_tensor, CategoryTheory.Grp.Hom.hom_zpow, CategoryTheory.Grp.Hom.hom_hom_zpow, Action.diagonalSuccIsoTensorTrivial_hom_hom_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The theorem of the cube gives quadratic tensor powers for symmetric cubist invertible sheaves over any base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.instBraidedCategoryScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-symmetric-cubical-extension",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Multiplication pulls a symmetric cubical line back to its square-exponent power",
+   "via": [
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cubical-symmetric-multiplication-square",
+  "worker": "stage1",
+  "summary": "Retained the full general-base cubical statement. Isolated the non-elementary compatibility of the cube section with the induced product-group cubical structure. Wrote the tensor/dual operations, both cube substitutions and simultaneous induction explicitly; searched the live Lean source, whole DAG, blueprint and Mathlib. Moret-Bailly is locally unavailable and is requested in the report.",
+  "blueprint": "Inherited direct-image alteration/Picard route, specifically normal-symmetric cubical extension step 3. The local multiplication argument follows the two cube substitutions of latest/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/lem-sc-mult-n-pullback.proof.md, without replacing the surrounding unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic pullback/tensor and composite-pullback identifications for invertible modules, used to manipulate the cubical factors; no node of this unit supplies those module identities."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-24fa137d9",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-24fa137d9 (reviewer sub-agent of L); spot-checked: I read the whole item and the one new node lem-sfb-cube-section-cubical-compatibility, every cited statement, the blueprint proof lem-sc-mult-n-pullback that the proof follows, and the caller lem-sfb-normal-symmetric-cubical-extension. The item statement is the same as on live and side-live, so it is not weakened, and no other group has done this item. Moret-Bailly is not in literature/; the report asks for it (WANTED) and both nodes are marked as agent-written. Step 1 (tensor, dual and homomorphism pullback of cubical lines; A_0 is the trivial line through r because tau(e,e,e)=1) is elementary and cites the definition and clauses (1),(2) of the pullback/tensor lemma. Step 2 pulls the new node's isomorphism back along (a,b,c), which is a homomorphism; the eight factors and the cancellations are correct. Step 3, C(id,id,[-1]), gives A_2 isomorphic to L^4 using iota. Step 4, C(id,id,[n-1]), is a stated induction on pairs with base A_0 and A_1, and the exponent check 4+2n^2-2-(n-1)^2=(n+1)^2 is right (checked for n=1,2,3). No step inverts d. The new node has only a statement and is self-contained, with the sign (-1)^{3-|I|} matching Theta_3. It is not a clause of the item (it has no d, no iota and no square exponent) and is strictly smaller. What it asserts is that the product over subsets I of tau at the column sums over I, on a 3x3 matrix of points, does not change when the matrix is transposed. I tested this by solving all symmetric, normalized cocycles tau:(Z/n)^3->Z/p and checking every 3x3 matrix, for n=2..5 and p=2,3,5: 0 failures, including cases that do not come from a function on G; for those that do, the identity is immediate. I found no duplicate in the DAG or the blueprint: the theorem-of-the-cube and multiplication-by-n nodes are only for abelian varieties over a field, and the semiabelian rigidification node needs extra hypotheses. The declared tool use lem-weil-pbc-invertible-pullback-tensor is a generic identity for invertible modules and is accepted. blueprint.from.node=null comes from the item, not from this delivery. review_split's 'no such node' messages come from the snapshot's symlinked chapter directories; find -L finds every cited file. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CubicalSymmetricMultiplicationSquare",
+  "declaration": "AlgebraicGeometry.CubicalRigidifiedLine.symmetric_multiplication_square",
+  "file": "lean/Sheaf/AlgebraicGeometry/CubicalSymmetricMultiplicationSquare.lean",
+  "statement": "theorem symmetric_multiplication_square {S : Scheme.{u}} (G : Over S) [CommGrpObj G] (L : CubicalRigidifiedLine G) (symmetry : Iso (L.pullback (𝟙 G)⁻¹) L) (d : ℕ) (hd : 1 ≤ d) : ∃ f : (L.pullback ((𝟙 (Grp.mk G) ^ d).hom.hom)).line ≅ L.line.tensorPow (d ^ 2), IsTensorPowerIso L (L.pullback ((𝟙 (Grp.mk G) ^ d).hom.hom)) (d ^ 2) f",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4034564c4",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Item: CommGrpObj G over S and the recorded CubicalRigidifiedLine; symmetry = Iso (L.pullback (𝟙 G)⁻¹) L, with ⁻¹ = 𝟙≫ι = [-1] and IsMonHom f⁻¹ from Mathlib Grp.lean:250; [d] = (𝟙 (Grp.mk G))^d via Hom.monoid/Grp.instMonObj, and Grp.Hom.hom_pow confirms the group-law power, not composition; conclusion ∃ f with IsTensorPowerIso, d≥1, no invertibility of d. New def-sfb-cubical-tensor-power-iso: rigidification clause e^*f≫boundaryPullbackPowIso≫boundaryTensorPowIso r≫powerUnitIso = r_M; cube clause transported tensor frames with value = n-th composition (scalar) power; n=0 is the unit; helpers are real recursive constructions; no live duplicate (CubicalLine occurs only in CubicalRigidifiedLine.lean), no Mathlib match. Item diff vs side-live: only the new stmt_dep and the lean record; both lean.statement fields verbatim; docstrings carry the source, blueprint tags and 4 proof steps; sorry only; report has Worker report and Second reading sections. No compile needed (no change)."
+ }
+}

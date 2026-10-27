@@ -1,0 +1,264 @@
+{
+ "id": "lem-trf-bounded-injective-rhom-amplitude",
+ "kind": "statement",
+ "title": "Uniform derived Hom bounds from a bounded injective target",
+ "statement": "Let $R$ be a commutative ring, and work in the ordinary module derived category $D(R)$ [def-weil-abstract-derived-category]. Fix integers $a\\leq b$, a cochain complex $J$ of injective $R$-modules [def-pc-cochain-complex-modules, def-sp-injective-resolutions] satisfying $J^i=0$ for $i<a$ and $i>b$, and an isomorphism $J\\cong L$ in $D(R)$. Use derived internal Hom [def-pur-derived-internal-hom] on the one-object ringed site and the Hom complex [def-pur-hom-complex]. For every $K\\in D(R)$ and every integer $c$, both of the following hold. If $H^i(K)=0$ for all $i>c$, there is a representative $P\\cong K$ with $P^p=0$ for $p>c$, an isomorphism $\\operatorname{Hom}^{\\bullet}_R(P,J)\\cong R\\operatorname{Hom}_R(K,L)$ in $D(R)$, and $\\operatorname{Hom}^{n}_R(P,J)=0$ for $n<a-c$; hence $H^n(R\\operatorname{Hom}_R(K,L))=0$ for $n<a-c$. If $H^i(K)=0$ for all $i<c$, there is a representative $Q\\cong K$ with $Q^p=0$ for $p<c$, an isomorphism $\\operatorname{Hom}^{\\bullet}_R(Q,J)\\cong R\\operatorname{Hom}_R(K,L)$ in $D(R)$, and $\\operatorname{Hom}^{n}_R(Q,J)=0$ for $n>b-c$; hence $H^n(R\\operatorname{Hom}_R(K,L))=0$ for $n>b-c$. The integers $a,b$ are fixed independently of $K,c$; no Noetherianity or finite-generation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A5S, definition-injective-dimension, bounded injective representatives, and dualizing.tex Tag 0A7C, lemma-dualizing, the boundedness clauses; explicit Hom-complex degree calculation after good truncation (old item Step 7)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-sp-injective-resolutions",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-bounded-below-injectives-kinjective] to $J$ in the abelian category of $R$-modules, with lower bound $a$. Its hypotheses are precisely the assumed injectivity of every $J^i$ and $J^i=0$ for $i<a$. Thus $\\operatorname{Hom}^\\bullet(A,J)$ is acyclic for every acyclic complex $A$ of $R$-modules; the upper bound $b$ is not needed for this step. This is K-injectivity in the sense of [def-pur-kinjective-complex] on the one-object site of Step 3: a degree-$0$ cocycle of $\\operatorname{Hom}^\\bullet(A,J)$ is a family $f^p:A^p\\to J^p$ with $d_Jf=fd_A$, i.e. a morphism of complexes, and the coboundary of a degree-$(-1)$ family $h=(h^p:A^p\\to J^{p-1})$ is $d_Jh+hd_A$, so $H^0(\\operatorname{Hom}^\\bullet(A,J))=0$ says exactly that every morphism of complexes $A\\to J$ is homotopic to zero.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070J, lemma-bounded-below-injectives-K-injective."
+   }
+  },
+  {
+   "text": "Choose any complex $C$ representing $K$. For the upper-cohomology hypothesis take $P=\\tau_{\\le c}C$: its terms are $C^p$ for $p<c$, $\\ker d_C^c$ at $c$, and zero above $c$. By [lem-weil-pbc-truncation-cohomology], $P\\to C$ induces isomorphisms below and at $c$, and above $c$ both cohomologies vanish by hypothesis, so it is a quasi-isomorphism and $P\\cong K$. For the lower-cohomology hypothesis take the lower good truncation $Q=\\tau_{\\ge c}C$ of [def-kun-truncations]: zero below $c$, $C^c/\\operatorname{im}d_C^{c-1}$ at $c$, and $C^p$ above $c$. The quotient map $C\\to Q$ induces the identity on cohomology above $c$, and at $c$ its cycles are $\\ker d_C^c/\\operatorname{im}d_C^{c-1}=H^c(C)$ with no incoming boundaries. Below $c$ both cohomologies are zero. Hence this map too is a quasi-isomorphism, so $Q\\cong K$. Here quasi-isomorphisms become isomorphisms by [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical cochain truncations in both directions."
+   }
+  },
+  {
+   "text": "For either representative $T=P$ or $T=Q$ constructed in its respective case, the K-injective target $J$ represents $L$, so the arbitrary-K-injective-representative clause of [def-pur-derived-internal-hom] gives $\\operatorname{Hom}^{\\bullet}_R(T,J)\\cong R\\operatorname{Hom}_R(K,L)$ in $D(R)$. This clause uses the quasi-isomorphism invariance of [lem-pur-rhom-well-defined], which is cited explicitly here. Apply these statements on the one-object site with trivial topology and coefficient ring $R$: its module sheaves are exactly $R$-modules, its products and sheaf Hom are the ordinary products and module Hom, and its complexes and quasi-isomorphisms are the ordinary ones. Thus the resulting comparison is an isomorphism of derived $R$-modules, not merely an identification of their cohomology groups.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, section-internal-hom, and Tag 0A95, lemma-RHom-well-defined, specialized to the one-object ringed site."
+   }
+  },
+  {
+   "text": "In the upper-cohomology case, [def-pur-hom-complex] gives $\\operatorname{Hom}^n_R(P,J)=\\prod_{p\\in\\mathbf Z}\\operatorname{Hom}_R(P^p,J^{p+n})$. If $n<a-c$, then for $p\\le c$ we have $p+n\\le c+n<a$, whence $J^{p+n}=0$; for $p>c$ we have $P^p=0$. Every factor is therefore the zero module, since a linear map from or to zero is zero. Their product is zero: its only element is the family of zero maps. This proves the requested termwise vanishing. Since the degree-$n$ term is zero, its kernel modulo its incoming image is zero, so the comparison in Step 3 gives $H^n(R\\operatorname{Hom}_R(K,L))=0$ for $n<a-c$.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes; elementary support calculation using its product formula."
+   }
+  },
+  {
+   "text": "In the lower-cohomology case the same definition gives $\\operatorname{Hom}^n_R(Q,J)=\\prod_{p\\in\\mathbf Z}\\operatorname{Hom}_R(Q^p,J^{p+n})$. If $n>b-c$, then for $p\\ge c$ we have $p+n\\ge c+n>b$, whence $J^{p+n}=0$; for $p<c$ we have $Q^p=0$. Again every factor and hence the product are zero, and its degree-$n$ cohomology is zero. Step 3 gives $H^n(R\\operatorname{Hom}_R(K,L))=0$ for $n>b-c$. Throughout, $a,b$ are the fixed support bounds of the original $J$; only the truncations depend on $K,c$. No finiteness or Noetherian hypothesis entered either calculation.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes; elementary support calculation using its product formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-truncation-cohomology",
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0118 canonical cochain truncations, combined with derived.tex Tag 070J and sites-cohomology.tex Tags 08J7, 0A95, 0A8X; explicit two-sided degree calculation for the bounded injective representative of more-algebra.tex Tag 0A5S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom into an injective complex supported in degrees a to b sends cohomology bounded above c to bounded below a minus c and bounded below c to bounded above b minus c",
+   "results": "8 hits; top=['CategoryTheory.Functor.rightDerivedToHomotopyCategory', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat', 'CochainComplex.isZero_of_isGE', 'DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE']; subdirectory=; note=; digest=bc5a8ef0951e09d8",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-injective vanishing, strict models and Hom cochains, not both sharp RHom bounds with a bounded injective target in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isLE.*[Hh]om|isGE.*[Hh]om|[Hh]om.*isLE|[Hh]om.*isGE|[Hh]om.*[Ii]njective",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/TotalComplex.lean', 'Mathlib/Algebra/Homology/TotalComplex.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean', 'Mathlib/Algebra/Homology/HomologicalComplex.lean']; subdirectory=Algebra/Homology; note=; digest=120f6cdff7cf682f",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-injective vanishing, strict models and Hom cochains, not both sharp RHom bounds with a bounded injective target in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, HomComplex",
+   "results": "0 hits; top=[]; subdirectory=; note=loogle: unknown identifier 'HomComplex'; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom of an arbitrary module complex into a bounded injective complex has reversed cohomological bounds a minus c and b minus c",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE', 'DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE', 'DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.isGE_Q_obj_iff', 'CochainComplex.IsKInjective', 'DerivedCategory.isLE_Q_obj_iff', 'CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE']; subdirectory=; note=; digest=76a604f6c6302a0b",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-injective vanishing, strict models and Hom cochains, not both sharp RHom bounds with a bounded injective target in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.Cochain",
+   "results": "12 hits; top=['CochainComplex.HomComplex.Cochain.diff', 'CochainComplex.HomComplex.Cochain', 'CochainComplex.HomComplex.Cochain.instAddCommGroup', 'CochainComplex.HomComplex.δ', 'CochainComplex.HomComplex.Cocycle.instCoeCochain', 'CochainComplex.HomComplex.Cochain.instSMulOfLinear', 'CochainComplex.HomComplex.cocycle', 'CochainComplex.HomComplex.Cochain.instModuleOfLinear']; subdirectory=; note=; digest=eac39a92f046f62e",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-injective vanishing, strict models and Hom cochains, not both sharp RHom bounds with a bounded injective target in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological amplitude of the derived internal Hom into a finite injective resolution computed by good truncation of the source complex",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex', 'CochainComplex.IsKInjective', 'CochainComplex.isKInjective_of_injective', 'CochainComplex.cm5b.instIsStrictlyGEI', 'DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE', 'DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE']; subdirectory=; note=; digest=9a2f2c8071ac0657",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-injective vanishing, strict models and Hom cochains, not both sharp RHom bounds with a bounded injective target in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*[Ii]sStrictly|[Ii]sStrictly.*HomComplex|HomComplex.*[Ii]sLE|HomComplex.*[Ii]sGE|RHom",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/BifunctorFlip.lean', 'Mathlib/Algebra/Homology/BifunctorFlip.lean', 'Mathlib/Algebra/Homology/BifunctorFlip.lean', 'Mathlib/Algebra/Homology/BifunctorFlip.lean', 'Mathlib/Algebra/Homology/BifunctorFlip.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean']; subdirectory=Algebra/Homology; note=; digest=c1ab7be7d2abdf8d",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-injective vanishing, strict models and Hom cochains, not both sharp RHom bounds with a bounded injective target in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*(isLE|isGE|IsStrictly)|RHom|rHom",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/Bifunctor.lean', 'Mathlib/Algebra/Homology/Bifunctor.lean', 'Mathlib/Algebra/Homology/Bifunctor.lean', 'Mathlib/Algebra/Homology/Bifunctor.lean', 'Mathlib/Algebra/Homology/Bifunctor.lean', 'Mathlib/Algebra/Homology/BifunctorHomotopy.lean', 'Mathlib/Algebra/Homology/BifunctorHomotopy.lean', 'Mathlib/Algebra/Homology/BifunctorHomotopy.lean']; subdirectory=Algebra/Homology; note=; digest=ac1f4000dc92fe5c",
+   "date": "2026-10-24",
+   "verdict": "no match: support predicates, strict representatives, or K-injectivity alone; none states both derived-module Hom models and both uniform amplitude bounds for arbitrary K."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.isKInjective_of_injective",
+   "results": "1 hits; top=['CochainComplex.isKInjective_of_injective']; subdirectory=; note=; digest=4ed0a36380632c72",
+   "date": "2026-10-24",
+   "verdict": "no match: support predicates, strict representatives, or K-injectivity alone; none states both derived-module Hom models and both uniform amplitude bounds for arbitrary K."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology amplitude derived Hom into bounded complex of injective modules",
+   "results": "8 hits; top=['CategoryTheory.injectiveResolutions', 'CategoryTheory.Functor.rightDerivedToHomotopyCategory', 'CategoryTheory.InjectiveResolution.hasHomology', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc', 'CategoryTheory.InjectiveResolution.extEquivCohomologyClass', 'CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom', 'CochainComplex.cm5b.instIsStrictlyGEI', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj']; subdirectory=; note=; digest=59a2b6d125f268f7",
+   "date": "2026-10-24",
+   "verdict": "no match: support predicates, strict representatives, or K-injectivity alone; none states both derived-module Hom models and both uniform amplitude bounds for arbitrary K."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom into a bounded injective complex reverses cohomological bounds with amplitude a minus c and b minus c",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE', 'DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE', 'DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'CochainComplex.cm5b.instIsStrictlyGEI']; subdirectory=; note=; digest=344e9160c1963d81",
+   "date": "2026-10-24",
+   "verdict": "no match: support predicates, strict representatives, or K-injectivity alone; none states both derived-module Hom models and both uniform amplitude bounds for arbitrary K."
+  },
+  {
+   "tool": "grep",
+   "query": "isKInjective_of_injective|exists_iso_Q_obj_of_isGE|exists_iso_Q_obj_of_isLE|def Cochain",
+   "results": "18 hits; top=['Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean', 'Mathlib/Algebra/Homology/ModelCategory/Injective.lean']; subdirectory=Algebra/Homology; note=; digest=74ea0113b40740c1",
+   "date": "2026-10-24",
+   "verdict": "no match: support predicates, strict representatives, or K-injectivity alone; none states both derived-module Hom models and both uniform amplitude bounds for arbitrary K."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For complexes P supported in degrees at most c and J supported in degrees a through b the Hom complex is zero below a minus c; with P supported at least c it is zero above b minus c",
+   "results": "8 hits; top=['HomologicalComplex.IsSupportedOutside', 'HomologicalComplex.IsStrictlySupportedOutside', 'DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE', 'CochainComplex.IsStrictlyLE', 'CochainComplex.IsGE', 'CochainComplex.IsStrictlyGE', 'HomologicalComplex.IsStrictlySupportedOutside.isZero', 'CochainComplex.IsLE']; subdirectory=; note=; digest=0f72d218fe734a9e",
+   "date": "2026-10-24",
+   "verdict": "no match: support predicates, strict representatives, or K-injectivity alone; none states both derived-module Hom models and both uniform amplitude bounds for arbitrary K."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-local-coherent-duality",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Old proof Step 7: good truncation of either end of the source, K-injective Hom models, and the uniform degree bounds a-c and b-c.",
+   "via": [
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-bounded-injective-rhom-amplitude",
+  "worker": "stage1",
+  "summary": "Retained the full statement. Reused the existing bounded-below injective K-injectivity, truncation, derived-Hom invariance and Hom-complex nodes. Constructed both good truncations, obtained derived-category Hom models and proved both sharp uniform bounds by explicit factorwise vanishing. No new nodes or Mathlib leaves.",
+  "blueprint": "Supporting algebraic input to the inherited local-term-locality branch, via complete-local-coherent-duality old Step 7: good truncation of either end of the source, K-injective Hom models, and degree bounds a-c and b-c. Latest blueprint ancestor searched; this auxiliary ordinary-module statement has no separate blueprint counterpart.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic quasi-isomorphism invariance of the Hom complex into K-injectives, used only to justify the derived Hom model in Step 3; not a replacement for a geometric step of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-1b6e91001",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-1b6e91001 (reviewer sub-agent of L); spot-checked: Read the item in full, all 9 cited statements, and the sources at Stacks 070J derived.tex l.9687, 0A95 sites-cohomology l.8754, 08J7/0A8X, homology 0118, more-algebra 0A5S l.17510 and dualizing 0A7C l.2601 (context only, Noetherian; proof_origin agent). Statement, stmt_deps, source, blueprint and created are byte-identical to live, so nothing was weakened. The item is still unsplit in live and side-live, there is no repair note, there are no new nodes and no SGA. Step 2 truncations checked by hand: H^c(tau>=c C)=ker d^c/im d^{c-1}, the image at c+1 is unchanged, and P->C and C->Q are qis. Step 3 uses the any-K-injective-representative clause of def-pur-derived-internal-hom plus lem-pur-rhom-well-defined on the one-object site, as the statement fixes; the tool_use is accepted as generic. Steps 4 and 5: the support arithmetic is correct (p<=c gives p+n<a; p>=c gives p+n>b). The field example K=k[-c], J=k[-a] shows both strict bounds are sharp. FIX: Step 1 got K-injectivity from lem-weil-pbc-bounded-below-injectives-kinjective in the sense that Hom^•(A,J) is acyclic, but Step 3 needs def-pur-kinjective-complex (chain maps from acyclics are null-homotopic). I added the bridge: degree-0 cocycles are chain maps and d(h)=d_J h + h d_A, so H^0=0 means null-homotopic. I added def-pur-kinjective-complex to the Step 1 uses and to proof_deps. Maintainer note: the existing split node lem-trf-bounded-injective-rhom-model-support (Q160, same unit) overlaps Steps 3 and 5 (model theta_M and the bound r>b-n). Both nodes predate this delivery, so this is not a delivery fault, but they could be merged or reused later.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedInjectiveRHomAmplitude",
+  "declaration": "CategoryTheory.boundedInjective_rhom_amplitude",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedInjectiveRHomAmplitude.lean",
+  "statement": "theorem boundedInjective_rhom_amplitude (R : Type u) [CommRing R] (a b : ℤ) (hab : a ≤ b) (J : CochainComplex (ModuleCat.{u} R) ℤ) (hinj : ∀ i : ℤ, Injective (J.X i)) (hlo : ∀ i : ℤ, i < a → IsZero (J.X i)) (hhi : ∀ i : ℤ, b < i → IsZero (J.X i)) (L : DerivedCategory (ModuleCat.{u} R)) (eJ : DerivedCategory.Q.obj J ≅ L) : ∀ (K : DerivedCategory (ModuleCat.{u} R)) (c : ℤ), ((∀ i : ℤ, c < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj K)) → (∃ P : CochainComplex (ModuleCat.{u} R) ℤ, (∀ p : ℤ, c < p → IsZero (P.X p)) ∧ Nonempty (DerivedCategory.Q.obj P ≅ K) ∧ Nonempty (DerivedCategory.Q.obj (CochainComplex.moduleHomComplex P J) ≅ (ordinaryModuleDerivedInternalHom R).obj (op K, L)) ∧ (∀ n : ℤ, n < a - c → IsZero ((CochainComplex.moduleHomComplex P J).X n))) ∧ (∀ n : ℤ, n < a - c → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) n).obj ((ordinaryModuleDerivedInternalHom R).obj (op K, L))))) ∧ ((∀ i : ℤ, i < c → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj K)) → (∃ Q : CochainComplex (ModuleCat.{u} R) ℤ, (∀ p : ℤ, p < c → IsZero (Q.X p)) ∧ Nonempty (DerivedCategory.Q.obj Q ≅ K) ∧ Nonempty (DerivedCategory.Q.obj (CochainComplex.moduleHomComplex Q J) ≅ (ordinaryModuleDerivedInternalHom R).obj (op K, L)) ∧ (∀ n : ℤ, b - c < n → IsZero ((CochainComplex.moduleHomComplex Q J).X n))) ∧ (∀ n : ℤ, b - c < n → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) n).obj ((ordinaryModuleDerivedInternalHom R).obj (op K, L)))))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-825904cd2",
+  "group": "N7",
+  "result": "pass",
+  "note": "Node identical to live except lean and the added stmt_dep def-sc-module-total-hom-complex (landed 2026-10-11, used by moduleHomComplex). lean.statement is verbatim in the file. All clauses match: R CommRing, a≤b fixed before ∀K c, J injective with IsZero outside [a,b], eJ iso, P/Q strict-support representatives with iso to K, derived iso Q(moduleHomComplex T J) ≅ ordinaryModuleDerivedInternalHom (the K-injective-computed derived closed internal Hom of the landed Q84 interface), termwise vanishing for n<a−c and n>b−c, and the cohomological bounds conjoined under each hypothesis. No extra hypotheses. Edge cases (R=0, J=0, K=0, a=b, any c, endpoint sharpness) fine. Proof is sorry only; docstrings carry the source and the 5 steps. No file changed, so no compile; worker compile clean. Advisory: overlap with lem-trf-bounded-injective-rhom-model-support (Q160), which predates this delivery."
+ }
+}

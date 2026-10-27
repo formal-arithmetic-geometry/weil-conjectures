@@ -41,7 +41,32 @@
   "lem-wf-affine-dimension-drop"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Matrix.GeneralLinearGroup.eq_of_le_of_ringKrullDim_eq"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Matrix.GeneralLinearGroup.eq_of_le_of_ringKrullDim_eq",
+     "module": "WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal",
+     "lines": [
+      1259,
+      1266
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-i-cartier",
  "lean": {
@@ -54,5 +79,37 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $G$ be a connected group scheme of finite type over an algebraically\nclosed field $L$ of characteristic zero, and let $J\\subseteq G$ be a\nclosed subgroup scheme with $\\dim J=\\dim G$. Then $J=G$.\n\n*Complement.* If $G\\subseteq\\operatorname{GL}(V)$ is an irreducible\nclosed matrix group over $L$ and $J\\subseteq G$ is a closed subgroup with\n$\\dim J=\\dim G$, then $J=G$.",
+  "proof": [
+   {
+    "text": "By Cartier's theorem [lem-ag-cartier-reduced], $G$ and $J$ are reduced.\nSince $G$ is connected, it equals its identity component, which is\nirreducible by [lem-wf-algebraic-component-cosets].",
+    "uses": [
+     "lem-ag-cartier-reduced",
+     "lem-wf-algebraic-component-cosets"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The closed subset $J$ of the finite-type scheme $G$ has finitely many\nirreducible components, and its dimension is the maximum of their\ndimensions, so some irreducible component $J_1$ of $J$ has\n$\\dim J_1=\\dim G$. Suppose $J_1\\subsetneq G$. The dimension of $J_1$ is\nthe maximum of the dimensions of $J_1\\cap U$ over a finite affine open\ncover of $G$, so there is an affine open $U\\subseteq G$ with\n$\\dim(J_1\\cap U)=\\dim J_1$. Being open in the irreducible reduced scheme\n$G$, $U$ is an irreducible affine variety. If $J_1\\cap U=U$, the closed\nset $J_1$ would contain the dense open $U$ of $G$ and hence equal $G$;\nso $J_1\\cap U\\subsetneq U$, and [lem-wf-affine-dimension-drop] gives\n$\\dim(J_1\\cap U)\\le\\dim U-1\\le\\dim G-1$, a contradiction. Hence the\nclosed subset $J_1$ equals $G$, and $G=J_1\\subseteq J\\subseteq G$ as\nsets. Since $J$ and $G$ are reduced closed subschemes of $G$ with the\nsame underlying set, $J=G$.",
+    "uses": [
+     "lem-wf-affine-dimension-drop"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the complement, the irreducible closed matrix group $G$ is closed in\nthe affine variety $\\operatorname{GL}(V)$, hence an irreducible affine\nvariety, and the same argument with $U=G$ applies directly.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

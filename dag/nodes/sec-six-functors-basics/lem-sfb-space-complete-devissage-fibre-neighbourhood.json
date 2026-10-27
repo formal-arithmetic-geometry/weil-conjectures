@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-space-complete-devissage-fibre-neighbourhood",
+ "kind": "statement",
+ "title": "Complete algebra devissages on finitely many etale charts covering a fibre",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space], the universes of [def-weil-size-convention], sheaf fibre products [lem-trf-space-fibre-products-etale-covers], quasi-coherent modules [def-trf-space-quasi-coherent-module], and tensor pullback [def-trf-space-etale-module-functors]. Use chartwise local finite type and local finite presentation [def-sfb-space-morphism-properties]. Finite presentation means locally of finite presentation, quasi-compact, with quasi-compact diagonal. A module of finite type is locally finitely generated on etale scheme charts; a finitely presented module has locally an exact presentation $\\mathcal O^r\\to\\mathcal O^s\\to M\\to0$ with $r,s$ finite. Let $f:X\\to Y$ be of finite presentation with $Y$ a scheme, let $M$ be a finitely presented quasi-coherent module on $X$, and let $y\\in Y$. There exist an affine etale neighbourhood $(Y\\prime,y\\prime)\\to(Y,y)$ and finitely many affine schemes $W_j$, representable etale maps $h_j:W_j\\to X_{Y\\prime}$, such that each $W_j\\to Y\\prime$ is of finite presentation, and the union of the images $h_j(W_j)$ contains the entire fibre $|(X_{Y\\prime})_{y\\prime}|$. Write $Y\\prime=\\operatorname{Spec}R$, $W_j=\\operatorname{Spec}A_j$ and $\\mathfrak p\\subset R$ for $y\\prime$ [def-weil-affine-spectrum]. If $M_j=h_j^*M_{Y\\prime}$ and $N_j=\\Gamma(W_j,M_j)$, then $N_j/A_j/R$ has a complete algebra devissage over $\\mathfrak p$ [def-trf-complete-algebra-devissage]. The empty family is allowed for an empty fibre.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex; literature/stacks-project/flat.tex",
+  "place": "Tag 0CWJ (spaces-flat-lemma-existence-complete), specialized to finite presentation; affine algebra formulation Tag 05HX (definition-complete-devissage-algebra), corresponding to Tags 05H4 and 05HH."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "def-trf-complete-algebra-devissage"
+ ],
+ "proof": [
+  {
+   "text": "Open immersions are etale by [lem-weil-pbc-etale-composition-cancellation]. Choose an affine open neighbourhood $Y_0=\\operatorname{Spec}R$ of $y$ and put $X_0=X\\times_Y Y_0$. Quasi-compactness of $f$ gives quasi-compactness of $X_0$ by [lem-sfb-space-quasicompact-affine-tests]. The atlas characterization there, together with the last clause of [lem-a1-space-finite-affine-subatlas], also gives quasi-compactness of its point space. Apply [lem-sfb-qc-space-affine-etale-atlas] to obtain an affine scheme $V=\\operatorname{Spec}A$ and a representable surjective etale map $V\\to X_0$. All maps $V\\to X$ in this construction are etale by base change and composition [lem-trf-space-chartwise-etale-permanence]. The chart test in [def-sfb-space-morphism-properties] makes $V\\to Y_0$ locally of finite presentation. Thus $A$ is finitely presented over $R$ by [lem-weil-pbc-lfp-affine-opens-finite-presentation].",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-a1-space-finite-affine-subatlas",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex; literature/stacks-project/flat.tex",
+    "place": "Tag 0CWJ (lemma-existence-complete), proof: reduce to affine base and an affine surjective etale atlas; finite-presentation specialization."
+   }
+  },
+  {
+   "text": "Let $F$ be the restriction of $M$ to $V$. It is the tensor pullback in the question: the etale restriction comparison of [lem-trf-space-chart-adjunction-tensor-realization] identifies them. The affine chart theorem [lem-sfb-space-qcoh-affine-chart-calculus] gives a finite $A$-module $N=F(V)$ and identifies $F$ with its associated module sheaf; in fact $N$ is finitely presented. Let $\\mathfrak p\\subset R$ correspond to $y$. For every $v\\in V_y$, corresponding to $\\mathfrak q\\subset A$ over $\\mathfrak p$, apply [lem-trf-complete-algebra-devissage-etale-existence] to $R\\to A,N,\\mathfrak q$. Write its output as $R_v,A_v,\\mathfrak p_v,\\mathfrak q_v$ and $U_v=\\operatorname{Spec}A_v$, $T_v=\\operatorname{Spec}R_v$. It supplies etale maps $U_v\\to V$, $T_v\\to Y_0$, residue-field isomorphisms at both chosen primes, and a complete algebra devissage of $(N\\otimes_A A_v)/A_v/R_v$ over $\\mathfrak p_v$.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-trf-complete-algebra-devissage-etale-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex; literature/stacks-project/flat.tex",
+    "place": "Tag 0CWJ and Tags 05HU (lemma-existence-complete), 05I1 (lemma-existence-algebra): choose pointwise algebra devissages on the atlas."
+   }
+  },
+  {
+   "text": "The map $U_v\\to V_{T_v}$ is etale: both $U_v$ and $V_{T_v}$ are etale over $V$, by [lem-weil-pbc-etale-scheme-base-change], so apply cancellation in [lem-weil-pbc-etale-composition-cancellation]. Pull it back to the chosen point $\\mathfrak p_v$ of $T_v$. Since $\\kappa(\\mathfrak p_v)=\\kappa(\\mathfrak p)$, this gives an etale map $(U_v)_{\\mathfrak p_v}\\to V_y$ whose image $O_v$ is open by [lem-a1-space-affine-etale-cover] (applied to scheme targets), and contains $v$ because of $\\mathfrak q_v$. The affine fibre formula [lem-weil-pbc-fibre-product-affine-spectra] identifies $V_y$ with $\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$, hence it is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Select finitely many $v_1,\\ldots,v_n$ for which the opens $O_{v_i}$ cover $V_y$. Here the finite-subcover assertion is exactly the definition of quasi-compactness. If $V_y$ is empty, take $n=0$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex; literature/stacks-project/flat.tex",
+    "place": "Tag 05HU, proof: finite subcover by the images on the chosen residue-field fibre. The elementary residue-field identifications ensure this is a cover of the whole fibre, not just selected points."
+   }
+  },
+  {
+   "text": "Abbreviate the chosen data by $R_i,A_i,\\mathfrak p_i,U_i,T_i$. Put $T=T_1\\times_{Y_0}\\cdots\\times_{Y_0}T_n=\\operatorname{Spec}C$, with $C=R_1\\otimes_R\\cdots\\otimes_R R_n$, and take $T=Y_0$ for $n=0$ [lem-weil-pbc-fibre-product-affine-spectra]. By etale base change and composition [lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-etale-composition-cancellation], $T\\to Y_0\\to Y$ is etale. The chosen maps $R_i\\to\\kappa(\\mathfrak p_i)=\\kappa(\\mathfrak p)$ agree on $R$, and their product on pure tensors defines $C\\to\\kappa(\\mathfrak p)$. Its kernel $\\mathfrak r$ is prime and contracts to $\\mathfrak p_i$ in every $R_i$. Its residue field is $\\kappa(\\mathfrak p)$: the image subring contains $R/\\mathfrak p$ inside its fraction field $\\kappa(\\mathfrak p)$, so its fraction field is that same field. Let $t\\in T$ denote this point. Thus $(T,t)\\to(Y,y)$ is the required common affine etale neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex; literature/stacks-project/flat.tex",
+    "place": "Tag 05HU, proof: finite fibre product of elementary etale base neighbourhoods and its distinguished residue-field point."
+   }
+  },
+  {
+   "text": "Set $W_i=U_i\\times_{T_i}T=\\operatorname{Spec}(A_i\\otimes_{R_i}C)$ [lem-weil-pbc-fibre-product-affine-spectra]. Each $W_i\\to V_T$ is the base change of $U_i\\to V_{T_i}$, hence etale; composing with the etale atlas $V_T\\to X_T$ gives a representable etale map $h_i:W_i\\to X_T$ [lem-trf-space-chartwise-etale-permanence]. On fibres at $t$ these maps to $V_t=V_y$ are the maps $(U_i)_{\\mathfrak p_i}\\to V_y$, since all distinguished base residue fields are $\\kappa(\\mathfrak p)$. Equivalently their images are the pullbacks of $O_{v_i}$ by [lem-weil-pbc-base-change-image]. They cover $V_t$ by Step 3. The atlas is still surjective on the fibre by [lem-trf-space-fibre-products-etale-covers], so their images in $X_t$ cover all of $|X_t|$. For $n=0$, surjectivity of the atlas implies $X_t$ is empty.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-base-change-image",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex; literature/stacks-project/flat.tex",
+    "place": "Tags 0CWJ and 05HU: base change the chosen charts and check that their images still cover the entire fibre."
+   }
+  },
+  {
+   "text": "It remains to check finite presentation of $W_i\\to T$. By [def-weil-etale-morphism], the affine etale map $U_i\\to V_{T_i}$ is locally of finite presentation, hence its coordinate algebra map $A\\otimes_R R_i\\to A_i$ is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. The algebra $A\\otimes_R R_i$ is finitely presented over $R_i$: tensor a fixed finite polynomial presentation of $A/R$ with $R_i$ to obtain exactly the same generators and relations with coefficients mapped to $R_i$. Composing the two locally finitely presented scheme maps is locally finitely presented by [lem-sbc-locally-finite-presentation-composition], so $A_i/R_i$ has a finite polynomial presentation by the same affine criterion. Tensor that presentation with $C$; it presents $A_i\\otimes_{R_i}C$ by finitely many generators and relations over $C$. Thus $W_i\\to T$ is locally of finite presentation, and it is affine: the affine target $T$ is separated by [lem-weil-pbc-affine-source-morphism-separated] applied to its structure map, so [lem-weil-pbc-affine-source-separated-target-affine-morphism] applies to $W_i\\to T$. Therefore it is quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence]. This is finite presentation with precisely the convention in the question.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex; literature/stacks-project/flat.tex",
+    "place": "Tag 0CWJ, finite-presentation specialization; Morphisms Tag 01TQ (lemma-locally-finite-presentation-characterize), composition and the explicit base change of polynomial presentations."
+   }
+  },
+  {
+   "text": "Write $N_i=N\\otimes_A A_i$. On $U_i$ this is the sections module of the restriction of $M$, and on $W_i$ its sections are $N_i\\otimes_{R_i}C$. These are affine scheme maps: use [lem-weil-pbc-affine-source-morphism-separated] for the affine target and [lem-weil-pbc-affine-source-separated-target-affine-morphism] for the map. Indeed [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies the etale and Zariski tensor pullbacks; the affine-section formula of [lem-weil-pbc-affine-pushforward-base-change] applied to $U_i\\to T_i$ gives exactly this tensor module. The composition comparison of [lem-trf-space-chart-adjunction-tensor-realization] identifies it with $\\Gamma(W_i,h_i^*M_T)$, with the pullback convention of the item. By Step 2, $N_i/A_i/R_i$ has a complete algebra devissage over $\\mathfrak p_i$. Apply [lem-sfb-complete-algebra-devissage-base-change] to $R_i\\to C$ and the prime $\\mathfrak r$ contracting to $\\mathfrak p_i$. It gives a complete algebra devissage of $(N_i\\otimes_{R_i}C)/(A_i\\otimes_{R_i}C)/C$ over $\\mathfrak r$, as required. Finally take $(Y\\prime,y\\prime)=(T,t)$ and rename the finitely many charts. No flatness of $M$ was used.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-sfb-complete-algebra-devissage-base-change",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex; literature/stacks-project/flat.tex",
+    "place": "Tag 05HU, last sentence; base-change lemma Tag 05HJ and affine translation Tags 05HX, 05I0; Tag 0CWJ, descent from the affine atlas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-morphism-properties",
+  "def-weil-etale-morphism",
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-complete-algebra-devissage-base-change",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-trf-complete-algebra-devissage-etale-existence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex; literature/stacks-project/flat.tex",
+  "place": "Tag 0CWJ (lemma-existence-complete), proof, expanded through Tag 05HU (lemma-existence-complete) using the existing pointwise algebra formulation Tag 05I1 and preservation under base change Tag 05HJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebraic space and finite type quasi coherent module there are finitely many etale affine charts covering a chosen fibre with complete algebra devissage after etale base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of complete devissage of a finite module locally in the etale topology on source and base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpan Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"devissage\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of complete devissage of a finite module locally in the etale topology on source and base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete algebra devissages of finite modules on finitely many affine etale charts covering a fibre after an etale base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern individual ring or scheme properties, not complete algebra devissages; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of complete devissage of a finite module locally in the etale topology on source and base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpan Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern individual ring or scheme properties, not complete algebra devissages; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"devissage\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern individual ring or scheme properties, not complete algebra devissages; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern individual ring or scheme properties, not complete algebra devissages; no one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pure-dimension-flatness-representability",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CWJ (spaces-flat-lemma-existence-complete), specialized to finite presentation; affine algebra formulation Tag 05HX (definition-complete-devissage-algebra), corresponding to Tags 05H4 and 05HH.",
+   "via": [
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-complete-devissage-fibre-neighbourhood",
+  "worker": "stage1",
+  "summary": "Checked Tags 0CWJ, 05HU, 05I1, 05HX, 05HJ and 05I0. Reused the existing pointwise algebra existence node; the item carries the finite-subcover and common-base argument. Added only the preservation of complete algebra devissages under pointed base change, with statement and searches. Verified affine finite presentation and the etale/Zariski sections comparison. No statement change.",
+  "blueprint": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CWJ (spaces-flat-lemma-existence-complete), specialized to finite presentation; affine algebra formulation Tag 05HX (definition-complete-devissage-algebra), corresponding to Tags 05H4 and 05HH.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic atlas, affine, etale, or quasi-coherent-module tool used in the explicit Stacks 0CWJ/05HU proof; the unit provides no replacement for this statement."
+   },
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Generic atlas, affine, etale, or quasi-coherent-module tool used in the explicit Stacks 0CWJ/05HU proof; the unit provides no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-complete-algebra-devissage-etale-existence",
+    "why": "Generic atlas, affine, etale, or quasi-coherent-module tool used in the explicit Stacks 0CWJ/05HU proof; the unit provides no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic atlas, affine, etale, or quasi-coherent-module tool used in the explicit Stacks 0CWJ/05HU proof; the unit provides no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic atlas, affine, etale, or quasi-coherent-module tool used in the explicit Stacks 0CWJ/05HU proof; the unit provides no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic atlas, affine, etale, or quasi-coherent-module tool used in the explicit Stacks 0CWJ/05HU proof; the unit provides no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic atlas, affine, etale, or quasi-coherent-module tool used in the explicit Stacks 0CWJ/05HU proof; the unit provides no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic atlas, affine, etale, or quasi-coherent-module tool used in the explicit Stacks 0CWJ/05HU proof; the unit provides no replacement for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-trf-complete-algebra-devissage-etale-existence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-pushforward-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-8671c14d7",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-8671c14d7 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full, against Stacks 0CWJ (spaces-flat l.423), 05HU (flat l.1576) and 05HJ (flat l.1271); tags checked in tags/tags. Shape: the item statement is identical to the base, the 5 base searches are kept, there is one new node, and the item is still unsplit on live and side-live (not superseded). There is no re-split note. Steps 1-7 follow 0CWJ/05HU and each cited statement says what the step uses. Step 1: X_0 is quasi-compact, an affine atlas V exists, and V→Y_0 is lfp by the chart test of def-sfb-space-morphism-properties, so A is finitely presented by 01TQ. Step 2: the 05I1 node's hypotheses hold. Step 3: the fibre images O_v are open in V_y and V_y is quasi-compact. Step 4: C=⊗R_i; the product map to κ(p) is well defined, its kernel r is prime, contracts to each p_i and has κ(r)=κ(p) (checked). Step 5: (W_i)_t=(U_i)_{p_i}, and atlas surjectivity covers X_t. Step 6: finite presentation, affineness and quasi-compact diagonal. Step 7: the sections are N_i⊗C via 02KG and the chart composition comparison, then the new node gives the conclusion. New node lem-sfb-complete-algebra-devissage-base-change is true: I checked every clause of def-trf-complete-algebra-devissage, including that p'B_i' is prime (geometrically integral smooth fibre, flatness of B_i), on identity, residue-field and non-flat quotient cases. It has a statement only, is not a duplicate (DAG grep for 05HJ/05HU/05HX/05I1/05H4/05HH plus neighbours) and is strictly smaller than the item. Batch 5: the new proof adds 1263 nodes to the item's dependency closure; its sec-trace-formula nodes are all foundational space, descent, quasi-coherent, chart-adjunction and dévissage nodes (05HX definition, 05I1 algebra). No trace-formula or Poincaré-duality step, nt- node or batch-4 target is reached, so all 10 flags are accepted as generic. The worker wrote tool_uses itself; I accept them. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCompleteDevissageFibreNeighbourhood",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_completeDevissage_fibre_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCompleteDevissageFibreNeighbourhood.lean",
+  "statement": "theorem exists_completeDevissage_fibre_neighbourhood {X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))} (Y : Over (Spec (.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace Y) (hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (Limits.pullback.diagonal f.hom.hom)) (M : X.QCoh) (hM : M.obj.IsFinitePresentation) (y : Y.left) : ∃ (R : CommRingCat.{u}) (g : affineDevissageScheme R ⟶ Y) (p : PrimeSpectrum R), Etale g.left ∧ g.left p = y ∧ ∃ (n : ℕ) (A : Fin n → CommAlgCat.{u} R) (h : ∀ j : Fin n, schemeSpace (affineDevissageScheme (A j)) ⟶ enlargedFibreProduct f (dimensionFlatBaseMap g)), (∀ j : Fin n, IsEtale (h j).hom.hom ∧ (h j).hom ≫ Limits.pullback.snd f.hom (dimensionFlatBaseMap g).hom = (dimensionFlatBaseMap (affineDevissageArrow R (A j))).hom ∧ ∃ hAfp : Algebra.FinitePresentation R (A j), ∃ hfinite : Module.Finite (A j) (affineDevissageSections (A j) ((moduleTensorPullback (h j ≫ enlargedFibreProductFst f (dimensionFlatBaseMap g))).obj M.obj)), Nonempty (@CompleteAlgebraDevissage R (A j) _ _ _ (@Algebra.FiniteType.of_finitePresentation R (A j) _ _ _ hAfp) p.asIdeal inferInstance (affineDevissageSections (A j) ((moduleTensorPullback (h j ≫ enlargedFibreProductFst f (dimensionFlatBaseMap g))).obj M.obj)) _ _ hfinite)) ∧ ∀ x : Point (enlargedFibreProduct f (dimensionFlatBaseMap g)).obj.obj, mapPoint (Limits.pullback.snd f.hom (dimensionFlatBaseMap g).hom).hom x = schemePointMap (𝟙 (yoneda.obj (affineDevissageScheme R))) p → ∃ j : Fin n, x ∈ pointImage (h j).hom.hom",
+  "branch": "sheaf-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13ca99920",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Every clause matches node and Stacks 0CWJ/05HU: étale (non-elementary) affine Y' with p over y; X_{Y'} as the sheaf fibre product; finitely many CommAlgCat R charts, each with representable étale h_j, an equation tying W_j→Y' to the algebra structure, and Algebra.FinitePresentation (equivalent to lfp+qc+qs for affine maps); a dévissage on the actual sections of the composite tensor pullback, with arguments in the right order; every point over p covered; n=0 allowed. Hypotheses are exactly fp (three clauses) plus finitely presented QCoh M, with no extra assumptions. Node differs only in lean; statement verbatim; docstrings carry source and blueprint and the 7 proof steps; one sorry theorem, no definitions; report has both sections. No file changed, no compile run. Advisory only: affineDevissage* helpers are owned only by the sibling theorem node lem-sfb-affine-complete-devissage-dimension-flattening (uncited, no import cycle); schemeSpace, enlargedFibreProduct, dimensionFlatBaseMap, Point, pointImage and mapPoint come from uncited definition nodes."
+ }
+}

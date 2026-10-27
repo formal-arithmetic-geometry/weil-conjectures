@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-flat-families-tor-independent",
+ "kind": "statement",
+ "title": "Changing the common base of two flat families gives a Tor-independent square",
+ "statement": "Let $S$ be any scheme and let $X\\to S$ and $Y\\to S$ be flat morphisms [def-pc-scheme, def-weil-flat-morphism]. Let $f:X\\to Y$ be any $S$-morphism, let $a:S'\\to S$ be arbitrary, and form $Y'=Y\\times_SS'$ and $X'=X\\times_SS'\\simeq X\\times_YY'$ with projections $b:Y'\\to Y$ and $a_X:X'\\to X$ [def-pc-fibre-product]. Then $f$ and $b$ are Tor independent in the stalkwise sense of [def-pc-pullback-stalk-tensor-comparison]: for every $x\\in X$ and $y'\\in Y'$ with common image $y\\in Y$, and every integer $i>0$,\n$$\\operatorname{Tor}^{\\mathcal O_{Y,y}}_i(\\mathcal O_{X,x},\\mathcal O_{Y',y'})=0.$$\nHere Tor is computed by a projective resolution [def-weil-pbc-tor-modules]. No flatness of $f$ or $a$, no properness, no finiteness and no reducedness of the base are required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0661 (lemma-base-change-comparison), the displayed free-resolution computation, applied to the two flat algebras over the common base; localization gives the stalkwise geometric statement. Agent-formulated common-base Tor-independence criterion, not the assertion that f itself is flat."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-pullback-stalk-tensor-comparison",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in X$ and $y'\\in Y'$ over the same $y\\in Y$, and let $s\\in S$, $s'\\in S'$ be their images. By [lem-weil-pbc-affine-opens-basis], choose $W=\\operatorname{Spec}R\\subset S$ around $s$, $V=\\operatorname{Spec}A\\subset Y$ around $y$ mapping into $W$, $U=\\operatorname{Spec}B\\subset X$ around $x$ mapping into $V$, and $W'=\\operatorname{Spec}C\\subset S'$ around $s'$ mapping into $W$. Put $E=A\\otimes_R C$. By [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra], $V\\times_W W'=\\operatorname{Spec}E$ is an open neighbourhood of $y'$ in $Y'$. The stalk identifications of [lem-weil-pbc-affine-open-stalk-localization] and [lem-weil-pbc-spec-map-stalk-localization] identify the structural stalk maps with localized ring maps. Flatness of $X\\to S$ and $Y\\to S$ in [def-weil-flat-morphism] therefore says, at every prime of $B$ and $A$, that the corresponding localization is flat over the base localization. Apply [lem-pc-affine-sections-flat-over-base], first to $B$ and then to $A$ as modules over themselves, to conclude that both are flat over $R$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "def-weil-flat-morphism",
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (lemma-basis-affine-opens), 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes), 01HV (lemma-spec-sheaves); flatness uses algebra.tex Tag 00HT (lemma-flat-localization), (6)."
+   }
+  },
+  {
+   "text": "Choose an augmented free $R$-module resolution $P_\\bullet\\to C$ as in [def-weil-pbc-tor-modules]. Since $A$ is $R$-flat, [lem-weil-pbc-flat-tensor-exact] makes $A\\otimes_R P_\\bullet\\to E$ exact. It is a free $A$-resolution: if $P_n$ has basis $(e_j)$, the maps $a\\otimes\\sum_j r_je_j\\mapsto(ar_j)_j$ and $(a_j)_j\\mapsto\\sum_j a_j\\otimes e_j$ identify $A\\otimes_RP_n$ with the free $A$-module on that basis. Tensor this resolution over $A$ with $B$. In every degree the mutually inverse formulas $(a\\otimes p)\\otimes b\\mapsto p\\otimes ab$ and $p\\otimes b\\mapsto(1\\otimes p)\\otimes b$ give $(A\\otimes_RP_n)\\otimes_AB\\cong P_n\\otimes_RB$ and commute with the differentials. The latter augmented complex is exact by $R$-flatness of $B$ and [lem-weil-pbc-flat-tensor-exact]. Thus the resolution definition gives $\\operatorname{Tor}^A_i(E,B)=0$ for every $i>0$, and [lem-weil-pbc-tor-symmetry] gives $\\operatorname{Tor}^A_i(B,E)=0$.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0661 (lemma-base-change-comparison), free-resolution computation; algebra.tex Tag 00HD (lemma-flat), Tag 00LY (section-tor), Tag 00M3 (lemma-tor-left-right)."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p\\subset B$, $\\mathfrak q\\subset A$, and $\\mathfrak r\\subset E$ represent $x,y,y'$. The contractions of $\\mathfrak p$ and $\\mathfrak r$ to $A$ are both $\\mathfrak q$. For each $i>0$, [lem-pc-tor-vanishing-localized-algebra], with base $A$, coefficient algebra $B$, multiplicative set $B\\setminus\\mathfrak p$, and other module $E$, gives $\\operatorname{Tor}^A_i(B_{\\mathfrak p},E)=0$. Apply [lem-trf-tor-localization-on-spec] with base $A$, module $B_{\\mathfrak p}$, algebra $E$ and prime $\\mathfrak r$; its isomorphism identifies $\\operatorname{Tor}^A_i(B_{\\mathfrak p},E_{\\mathfrak r})$ with the localization of this zero module. Both modules are $A_{\\mathfrak q}$-modules: an element outside $\\mathfrak q$ maps outside $\\mathfrak p$ and $\\mathfrak r$ and hence becomes a unit in each localization. With these actions, [lem-pc-tor-vanishing-localized-base] applied to $A\\to A_{\\mathfrak q}$ yields $\\operatorname{Tor}^{A_{\\mathfrak q}}_i(B_{\\mathfrak p},E_{\\mathfrak r})=0$.",
+   "uses": [
+    "lem-pc-tor-vanishing-localized-algebra",
+    "lem-trf-tor-localization-on-spec",
+    "lem-pc-tor-vanishing-localized-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67 (lemma-tor-amplitude-localization), source and base localization; algebra.tex Tag 00M8 (lemma-flat-base-change-tor), free-resolution argument for coefficient localization."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-open-stalk-localization] the three local rings just used are $\\mathcal O_{X,x}=B_{\\mathfrak p}$, $\\mathcal O_{Y,y}=A_{\\mathfrak q}$ and $\\mathcal O_{Y',y'}=E_{\\mathfrak r}$. By [lem-weil-pbc-spec-map-stalk-localization], their module actions are exactly the stalk maps of $f$ and $b$. Since the pair $(x,y')$ was arbitrary, step 3 is precisely the vanishing for every pair required by [def-pc-pullback-stalk-tensor-comparison]. Finally, [def-pc-fibre-product] identifies $X\\times_SS'$ with $X\\times_Y(Y\\times_SS')$: a map to either side is a pair of maps to $X,S'$ with equal composites to $S$, the map to $Y$ being forced to be the composite with $f$. The inverse identifications preserve projections by uniqueness in that universal property. All arguments were local at the chosen pair, so empty schemes impose no extra case and no finiteness, properness or reducedness was used.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "def-pc-pullback-stalk-tensor-comparison",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), (6), and the fibre-product universal property, Tag 01JP (definition-fibre-product); Tor-independence convention from perfect.tex Tag 08IB (lemma-compare-base-change)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "def-weil-flat-morphism",
+  "lem-pc-affine-sections-flat-over-base",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-pc-tor-vanishing-localized-algebra",
+  "lem-trf-tor-localization-on-spec",
+  "lem-pc-tor-vanishing-localized-base",
+  "def-pc-pullback-stalk-tensor-comparison",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0661 (lemma-base-change-comparison), its free-resolution argument applied to the flat R-algebras A and B; geometric localization written explicitly using Tags 00HT, 00M8, 0B67, 01JR, 01I4 and 01HV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]orIndependent|[Dd]erived[Bb]ase[Cc]hange|[Ff]lat[Ff]amil.*[Bb]ase",
+   "results": "Actual search: 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If A and B are flat R algebras and A maps to B, then Tor over A of B with A tensor R Rprime vanishes and proper derived pushforward has arbitrary R base change",
+   "results": "Actual search: 8 hits; Module.Flat.of_flat_tensorProduct, Module.Flat.isBaseChange, Module.FaithfullyFlat.instTensorProduct, LinearMap.rTensor_baseChange, TensorProduct.AlgebraTensorModule.distribBaseChange, Algebra.TensorProduct.includeLeft_injective, Module.Flat.instTensorProduct, RingHom.Flat. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"baseChange\"",
+   "results": "Actual search: 12 hits; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change from S to T is Tor independent for every morphism X to Y of flat S schemes, and derived quasi-coherent direct image commutes with this base change",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, RingHom.Flat.isStableUnderBaseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian square obtained by changing the common base of two flat families satisfies derived base change for any quasi-coherent complex",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.instDescScheme, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.instIsMultiplicativeScheme. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If X and Y are flat over S then every S morphism X to Y is Tor independent of the projection Y times S Sprime to Y",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, TensorProduct.map_injective_of_flat_flat', TensorProduct.map_injective_of_flat_flat_of_isDomain, TensorProduct.map_injective_of_flat_flat, RingHom.Flat.isStableUnderBaseChange, Module.Flat.of_flat_tensorProduct, RingHom.FaithfullyFlat.isStableUnderBaseChange, IsTensorProduct.map_injective_of_flat_left_right.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flat base change, tensor injectivity, exact scalar extension, generic Tor definitions or projective-input vanishing; none states common-base Tor independence for an arbitrary morphism of flat families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"Flat\"",
+   "results": "Actual search: 12 hits; Vector.flatten, Vector.flatMap, Vector.flatMapM, Vector.flatMap_id, Vector.flatMap_id', Vector.flatten_replicate_replicate, Vector.flatMap_def, Vector.flatMap_replicate.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flat base change, tensor injectivity, exact scalar extension, generic Tor definitions or projective-input vanishing; none states common-base Tor independence for an arbitrary morphism of flat families."
+  },
+  {
+   "tool": "grep",
+   "query": "torIndependent|tor_independent|Tor.*baseChange|Tor.*base_change",
+   "results": "Actual search: 25 hits; Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Basic.lean, Mathlib/RingTheory/Extension/Presentation/Basic.lean, Mathlib/RingTheory/Extension/Presentation/Basic.lean.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flat base change, tensor injectivity, exact scalar extension, generic Tor definitions or projective-input vanishing; none states common-base Tor independence for an arbitrary morphism of flat families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For flat R algebras A and B with a map A to B, the rings B and A tensor R C are Tor independent over A for any R algebra C",
+   "results": "Actual search: 8 hits; TensorProduct.LinearIndepOn.tmul_of_flat_left, Module.Flat.iff_flat_tensorProduct, LinearIndependent.tmul_of_flat_left, Module.Flat.of_flat_tensorProduct, LinearIndependent.tmul_of_flat_right, Module.FaithfullyFlat.instTensorProduct, TensorProduct.LinearIndepOn.tmul_of_flat_right, Algebra.TensorProduct.includeLeft_injective.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flat base change, tensor injectivity, exact scalar extension, generic Tor definitions or projective-input vanishing; none states common-base Tor independence for an arbitrary morphism of flat families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor groups over a flat algebra after extension of scalars equal the Tor groups over the original ring",
+   "results": "Actual search: 8 hits; Module.Flat.baseChange, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.isBaseChange, Module.Flat.iff_flat_tensorProduct, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.of_flat_tensorProduct, Module.FaithfullyFlat.instTensorProduct, Algebra.FormallyUnramified.flat_of_restrictScalars.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flat base change, tensor injectivity, exact scalar extension, generic Tor definitions or projective-input vanishing; none states common-base Tor independence for an arbitrary morphism of flat families."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor[^a-z]|tor[0-9_]|tor_independent",
+   "results": "Actual search: 25 hits; Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flat base change, tensor injectivity, exact scalar extension, generic Tor definitions or projective-input vanishing; none states common-base Tor independence for an arbitrary morphism of flat families."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor",
+   "results": "Actual search: 4 hits; CategoryTheory.Tor, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor_map.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flat base change, tensor injectivity, exact scalar extension, generic Tor definitions or projective-input vanishing; none states common-base Tor independence for an arbitrary morphism of flat families."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b|\\bTor\\x27",
+   "results": "Actual search: 0 hits; .",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give flat base change, tensor injectivity, exact scalar extension, generic Tor definitions or projective-input vanishing; none states common-base Tor independence for an arbitrary morphism of flat families."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-nodal-perfect-duality-trace",
+  "date": "2026-10-23",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: Tor independence of the square for c induced by arbitrary change of S; this is not the stronger and unjustified assertion that c is flat.",
+   "via": [
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-families-tor-independent",
+  "worker": "stage1",
+  "summary": "NQ: wrote the free-resolution calculation for arbitrary common-base change, then localized both factors and the coefficient ring separately. Reused existing affine-flatness, Tor-localization and geometric-coordinate nodes; created no new nodes. Preserved all mathematical hypotheses and normalized the inherited doubled TeX escapes.",
+  "blueprint": "Inherited provenance: det-thm-sf-ctf-stability-direct-images (3), through the recorded nodal-contraction duality chain. The latest blueprint paragraph (3) supplies the surrounding proper-image route; this subsidiary coherent-algebra input is realized by affine flatness (step 1), the free-resolution computation (step 2), all three localizations (step 3), and the stalkwise and cartesian identifications (step 4). The ancestor command returns None because the earlier chain ends in an upstream Lean-module item; retained blueprint.from.node=null and its existing precise place/via rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tor-vanishing-localized-algebra",
+    "why": "Generic algebra tool: localization of the first Tor input; the current unit has no such algebra statement."
+   },
+   {
+    "node": "lem-trf-tor-localization-on-spec",
+    "why": "Generic algebra tool: localization of the second Tor input, used only for the zero Tor module, with no trace-formula argument."
+   },
+   {
+    "node": "lem-pc-tor-vanishing-localized-base",
+    "why": "Generic algebra tool: change of the Tor coefficient ring to A_q once both inputs are A_q-modules."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tor-vanishing-localized-algebra",
+  "lem-trf-tor-localization-on-spec",
+  "lem-pc-tor-vanishing-localized-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-1935f28e5",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-1935f28e5 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged except TeX normalization, no new nodes), the statements of all 15 cited nodes, and Stacks more-algebra Tag 0661 with its free-resolution proof (proof_origin.by=agent is accurate). All 4 steps checked. Step 1: affine-basis choices inside the preimages; open fibre product V×_W W'=Spec(A⊗_R C) containing y'; pointwise flatness, then lem-pc-affine-sections-flat-over-base, gives A and B flat over R. Step 2: A⊗P• is an A-free resolution of E, (A⊗P_n)⊗_A B ≅ P_n⊗_R B is exact in positive degrees, so Tor^A_{>0}(E,B)=0, then symmetry. Step 3: localize the first algebra, then lem-trf-tor-localization-on-spec at r, then base localization to A_q; both modules contract to q, so all hypotheses hold. Step 4: stalks and stalk-map actions, matching the stalkwise clause of def-pc-pullback-stalk-tensor-comparison. Small cases: R=A=k[t], B=C=k shows the flatness hypotheses are needed (Tor_1=k); k[ε]/ε² with B=R (t↦0), C=k works with f non-flat. No duplicate among the DAG Tor-independence and base-change nodes. No SGA. Batch-5: lem-trf-tor-localization-on-spec is the generic Stacks 00M8 Tor-localization isomorphism; its 28-node closure is pure Tor/localization algebra, outside both assumptions and not a trace-formula step, so it is accepted as a tool_use, as are the two pc tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatFamiliesTorIndependent",
+  "declaration": "AlgebraicGeometry.flat_families_torIndependent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatFamiliesTorIndependent.lean",
+  "statement": "theorem flat_families_torIndependent {S X Y S' : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) [Flat p] [Flat q] (f : X ⟶ Y) (hf : f ≫ q = p) (a : S' ⟶ S) : PullbackStalkTensor.IsTorIndependent f (pullback.fst q a)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0aeede98d",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Read item node (only lean field changed vs side-live), module, all 5 stmt_deps incl. IsTorIndependent source (∀ x t, f x = g t, ∀ i>0, IsZero Tor' over O_{S,f x} with stalk-map actions, stalkCongr transport), Stacks 0661 (re-derived free-resolution argument; node true). Lean: [Flat p][Flat q], hf : f ≫ q = p, arbitrary a, b = pullback.fst q a, conclusion = node's stalkwise Tor vanishing; no flatness of f/a, no extra instances, single universe u. Edge cases: empty, i=0 excluded, nonflat f/a covered. No existing duplicate (FlatPullbackTorIndependent needs a flat leg), no landed parallel copy; no new defs, sorry only, docstrings with source + blueprint tag + proof steps; lean.statement verbatim; imported proof-dep modules live and not withdrawn; Worker report and Second reading sections present (second reading is a brief author self-check). No compile run (no file changed). No findings."
+ }
+}

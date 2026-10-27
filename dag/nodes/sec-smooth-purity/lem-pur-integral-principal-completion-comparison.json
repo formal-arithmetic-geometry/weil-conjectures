@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-integral-principal-completion-comparison",
+ "kind": "statement",
+ "title": "Unit-preserving comparison of supplied principal and actual integral completion",
+ "statement": "Let l be prime, E a finite extension of Q_l and W a scheme in the same universe as E. Let R be the actual completed integral commutative ring sheaf [def-weil-completed-integral-coefficients] and t its actual uniformizer section [lem-a1-principal-koszul-strict-replacement]. For any supplied universal principal quotient completion Model(R,t) with its specified augmentation, counit and unit [def-pur-principal-quotient-completion-model], and any Q in the unbounded derived category of R-module sheaves, there exists an isomorphism z from C.completion(Q) to IntegralOnSlice.completion(Q) [def-pur-integral-derived-operations] such that C.unit(Q) followed by z equals the specified IntegralOnSlice.completionUnit(Q). No completeness, boundedness, constructibility or nonemptiness hypothesis on Q or W is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Lemma 3.4.12; Stacks Tags 093M, 099B and 0941. This is the unit-preserving representative comparison used in the proof of the existing principal unit criterion, not a new completion construction."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-a1-principal-koszul-strict-replacement",
+  "def-pur-principal-quotient-completion-model",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Choose a good flat K-flat representative P of Q using the actual good-complex localization. Reuse the proved quotient_level_comparison and quotient_tower_comparison helpers of the principal unit criterion to identify the strict principal quotient tower of P with its actual residue tower, preserving every quotient map and transition. Reuse quotient_roos_comparison and integral_product_zero to obtain an isomorphism of the signed Roos cones preserving the augmentation, including its zero shifted coordinate.",
+   "uses": [
+    "lem-weil-completed-integral-principal-unit-criterion",
+    "def-pur-integral-derived-operations",
+    "def-pur-principal-quotient-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied Model counit is invertible on P. Compose that counit with the localized Roos comparison and the inverse of the actual completion representative comparison. The equation C.unit_computes and the actual integral_unit_computes equation identify the two units after the same invertible postcomposition. Cancel that postcomposition to obtain the unit equation on P. Finally conjugate by the source and target functors applied to the representative isomorphism P to Q; naturality of both units gives the asserted equation on Q. All categorical cancellation and naturality steps are proved in Lean.",
+   "uses": [
+    "lem-weil-completed-integral-principal-unit-criterion",
+    "def-pur-integral-derived-operations",
+    "def-pur-principal-quotient-completion-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-completed-integral-principal-unit-criterion",
+  "def-pur-integral-derived-operations",
+  "def-pur-principal-quotient-completion-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F6",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Lemma 3.4.12; Stacks Tags 093M, 099B and 0941. This is the unit-preserving representative comparison used in the proof of the existing principal unit criterion, not a new completion construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Any principal quotient derived completion model is isomorphic to the actual integral completion preserving its unit",
+   "results": "8 hits, headed by AdicCompletion.ofAlgEquiv_apply, AdicCompletion.ofAlgEquiv and AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ; the remaining hits concern ordinary adic rings and p-adic integers.",
+   "verdict": "Existing ordinary adic completion results do not supply this normalized sheaf-derived comparison; the existing project principal-unit proof supplies its representative calculations.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"completion\", \"unit\"",
+   "results": "3 hits: Lean.Lsp.CompletionItemKind.unit and two ordinary valuation-ring unit criteria.",
+   "verdict": "No matching derived sheaf completion comparison.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "PrincipalQuotientCompletion|completionComparison",
+   "results": "0 Mathlib hits.",
+   "verdict": "The relevant normalized representative comparisons are in the existing Sheaf library.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarProjectionIdentification",
+  "date": "2026-10-27",
+  "group": "F6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-scalar-projection-identification",
+   "place": "Proof Step 8: transport the finite-free scalar/completion exchange to the specified actual quotient completion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPrincipalCompletionComparison",
+  "file": "lean/Sheaf/Paper/IntegralPrincipalCompletionComparison.lean",
+  "declaration": "WeilConjectures.principalIntegralCompletionComparison",
+  "statement": "theorem principalIntegralCompletionComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})\n    (C : @CategoryTheory.PrincipalQuotientCompletion.Model.{u + 1, u, u + 1, u + 2}\n      W.ProEt inferInstance (essentiallySmallSelf.{u} _) (ProEt.topology W) inferInstance\n      (integralCoefficientAbSheafify.{u, u} W)\n      (integralCoefficientAbLocallyBijective.{u, u} W)\n      (completedIntegralCommRingSheafUnrestricted.{u, u} l E W)\n      (integralTowerHasDerivedCategory.{u, u} l E W)\n      (PrincipalKoszulStrictReplacement.uniformizer.{u, u} l E W))\n    : letI : EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{u} _\n      letI : HasSheafify (ProEt.topology W) AddCommGrpCat.{u + 1} :=\n        integralCoefficientAbSheafify.{u, u} W\n      letI : (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=\n        integralCoefficientAbLocallyBijective.{u, u} W\n      ∀ Q : DerivedCategory (integralTowerModules.{u, u} l E W),\n    ∃ z : C.completion.obj Q ≅ (IntegralOnSlice.completion.{u, u} l E W none).obj Q,\n      C.unit.app Q ≫ z.hom = (IntegralOnSlice.completionUnit.{u, u} l E W none).app Q",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a1d42",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T195134-L-2784901",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a1d42",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T195134-L-2784901",
+  "kind": "interface",
+  "note": "independent cc review: moved scalarCompletion_existsUnique/scalarCompletion vs published item (elaborated-type check in old and new contexts) and DAG nodes; new modules' signatures vs their node lean.statement; axioms via scratch compile"
+ }
+}

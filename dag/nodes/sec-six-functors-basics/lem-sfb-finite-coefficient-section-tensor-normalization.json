@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-finite-coefficient-section-tensor-normalization",
+ "kind": "statement",
+ "title": "Local pure-tensor normalization of the actual coefficient section encoding",
+ "statement": "Let A be a commutative topological ring, R a commutative condensed ring, e : R ≅ coefficient(A) a ring-object isomorphism, T a scheme, and c : realizationRing(T, ULift A) ≅ sectionRing(A,T) any ring-sheaf isomorphism. Suppose the induced inverse coefficient map on T is invertible. Let F be the actual composite Mod.comap(coefficientMap(e⁻¹,T)) followed by sectionEncoding(A,T,c) and fixedRestriction(A,T). There exists a strong monoidal structure on F for the native relative and fixed-scalar sheaf tensors whose forward tensorator takes every local fixed-scalar pure tensor x ⊗ y to the internal balanced pure tensor of those same two additive sections. No finiteness, nonzero-ring or scheme nonemptiness assumption is made. The coefficient and section encodings are those of [def-sfb-finite-coefficient-operation-encoding], the internal pure pairing is from [lem-pe-internal-section-tensor-comparison], and the fixed pairing is from [lem-sfb-constant-scalar-restriction-tensor].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Transport paragraph and clause (3), retaining the local pure-tensor normalization in step 1 of lem-sfb-finite-coefficient-heart-tensor-square."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-coefficient-operation-encoding",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-constant-scalar-restriction-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Use the internal/section comparison, including its local pure-tensor formula and all associator and unitor identities. Construct the monoidal structure with CoreMonoidal.mk' so its tensorator is definitionally the inverse of this particular comparison. Evaluate the inverse identity on a pure tensor to retain the inverse generator formula.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose with the normalized ring-isomorphism scalar restriction and the normalized constant-scalar restriction. Their tensorators take a local pure pair to that same pair. Restriction along the inverse condensed coefficient isomorphism also preserves the relative pairing, by the coequalizer projection formula for comapTensorIso. Thus the tensorator of the actual composite sends each local fixed-scalar pure tensor to the original internal pure tensor. The argument uses universal balanced pairings and is valid for the zero ring and the empty scheme.",
+   "uses": [
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "def-sfb-comap-iso-strong-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "def-sfb-comap-iso-strong-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Transport paragraph and clause (3), retaining the local pure-tensor normalization in step 1 of lem-sfb-finite-coefficient-heart-tensor-square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The equivalence between internal modules and sheaves of modules over a constant ring has a monoidal structure sending local pure tensors to local pure tensors",
+   "results": "PresheafOfModules.monoidalCategory, CategoryTheory.Sheaf.monoidalCategory and sectionwise presheaf tensor formulas; no internal/section equivalence or normalized coefficient encoding.",
+   "date": "2026-10-26",
+   "verdict": "No match. Reuse the existing project internal/section and scalar-restriction comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between internal modules and sheaves of modules over a constant ring has a monoidal structure sending local pure tensors to local pure tensors",
+   "results": "LightCondensed monoidal and free-module structures, PresheafOfModules.monoidalCategoryStruct and tensorObj; no matching coefficient encoding.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg sectionModuleEquivalence|fixedPure|comparison_internalTmul in Mathlib/CategoryTheory/Monoidal and Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "No matching declarations. Project search found InternalSectionTensorComparison, RingIsomorphismTensorTransport and ConstantScalarRestrictionTensor; their signatures supply the three separate normalized comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match. This proved lemma composes existing project comparisons while retaining their generator formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientHeartEncoding",
+  "group": "Y7",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Transport paragraph and clause (3), the normalized tensor encoding on abelian hearts.",
+   "via": [
+    "lem-sfb-finite-coefficient-heart-tensor-square",
+    "lem-sfb-finite-coefficient-tensor-pullback-encoding",
+    "lem-sfb-finite-coefficient-projection-encoding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientHeartTensor",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientHeartTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficientSectionTensor_normalized",
+  "statement": "theorem coefficientSectionTensor_normalized\n    (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u})\n    (c : realizationRing (Scheme.ProEt.topology T) (ULift.{u + 1} A) ≅ sectionRing A T)\n    [IsIso (coefficientMap e.inv.hom T)] :\n    let F := Mod.comap (coefficientMap e.inv.hom T) ⋙\n      (sectionEncoding A T c ⋙ fixedRestriction A T)\n    ∃ m : F.Monoidal,\n      ∀ (M N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))\n        (V : T.ProEtᵒᵖ) (x : M.X.obj.obj V) (y : N.X.obj.obj V),\n        ((m.toLaxMonoidal.μ M N).hom.app V)\n          (ConstantScalarRestriction.fixedPure (Scheme.ProEt.topology T) (ULift.{u + 1} A)\n            (F.obj M) (F.obj N) V x y) =\n          InternalAbelianSheafModule.comparison_internalTmul (Scheme.ProEt.topology T)\n            (condensedRingObj R T) M N V x y",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261026T071546-L-3949425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261026T071546-L-3949425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

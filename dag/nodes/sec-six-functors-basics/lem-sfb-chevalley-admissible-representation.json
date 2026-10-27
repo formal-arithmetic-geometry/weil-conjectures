@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-chevalley-admissible-representation",
+ "kind": "statement",
+ "title": "Chevalley Lie data with a full-weight admissible representation",
+ "statement": "Let $V$ be a finite-dimensional rational vector space and $R\\subset V\\setminus\\{0\\}$ a reduced crystallographic root system, with rational coroot functionals $\\bar c_\\alpha$ and weight lattice $P$ in the explicit conventions of [lem-sfb-root-datum-lattice-embedding]. There exist a finite-dimensional split semisimple Lie algebra $\\mathfrak g$ over $\\mathbf Q$ [def-wf-lie-algebra, def-wf-semisimple-lie-algebra], a Cartan subalgebra $\\mathfrak h$ (a maximal abelian subalgebra whose adjoint operators are simultaneously diagonalizable), an identification $\\mathfrak h^\\vee\\simeq V$, and root vectors $e_\\alpha\\in\\mathfrak g$ with $\\mathfrak g=\\mathfrak h\\oplus\\bigoplus_{\\alpha\\in R}\\mathbf Qe_\\alpha$. Under $\\mathfrak h\\simeq V^\\vee$, put $h_\\alpha=\\bar c_\\alpha$. For a simple-root base $\\Delta$ (a basis of $V$ such that every root has integral coefficients all nonnegative or all nonpositive), the $h_\\delta$ and $e_\\alpha$ form a Chevalley basis: $[e_\\alpha,e_{-\\alpha}]=h_\\alpha$, $[h,e_\\alpha]=\\alpha(h)e_\\alpha$, and, for $\\alpha+\\beta\\ne0$, the bracket is zero if $\\alpha+\\beta\\notin R$ and is $\\pm(p_{\\alpha,\\beta}+1)e_{\\alpha+\\beta}$ otherwise, where $p_{\\alpha,\\beta}$ is the largest integer $p\\geq0$ with $\\beta-p\\alpha\\in R$. There also exist a faithful Lie representation $\\rho:\\mathfrak g\\to\\operatorname{End}_{\\mathbf Q}(W)$ and a full lattice $\\Lambda\\subset W$ (a finite-rank free abelian subgroup with $\\Lambda\\otimes\\mathbf Q=W$). Its weight decomposition is $W=\\bigoplus_{\\lambda\\in\\Omega}W_\\lambda$, where $\\Omega\\subset P$ is finite, $W_\\lambda\\ne0$, and $\\rho(h)w=\\lambda(h)w$ on $W_\\lambda$. One has $\\mathbf Z\\Omega=P$ and $\\Lambda=\\bigoplus_{\\lambda\\in\\Omega}(\\Lambda\\cap W_\\lambda)$. Each $\\rho(e_\\alpha)$ is nilpotent and each divided power $D_{\\alpha,m}=\\rho(e_\\alpha)^m/m!$, $m\\geq0$, preserves $\\Lambda$. For $R=\\varnothing,V=0$, one may take $\\mathfrak g=0$, $W=\\mathbf Q$, $\\Lambda=\\mathbf Z$, $\\Omega=\\{0\\}$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511."
+ },
+ "stmt_deps": [
+  "lem-sfb-root-datum-lattice-embedding",
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "If $R=\\varnothing$, the spanning hypothesis gives $V=0$. Take $\\mathfrak g=\\mathfrak h=0$, $W=\\mathbf Q$, $\\Lambda=\\mathbf Z$ and $\\Omega=\\{0\\}$. The map from the zero Lie algebra is injective, the empty Chevalley basis is a basis of zero, and the only divided-power requirement is vacuous since there are no roots. All lattice and weight identities follow immediately. Henceforth $R\\ne\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, zero-rank conventions made explicit"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-serre-rational-presentation] to the given rational root system and choose a simple base $\\Delta$. Its actual Serre quotient $\\mathfrak g=\\mathfrak s(A)$ has splitting Cartan $\\mathfrak h$ with $H_i\\mapsto\\bar c_{\\alpha_i}$ and root spaces indexed by the given $R$. Prescribe the generator $E_i$ in each simple-root space, and apply [lem-sfb-chevalley-root-normalization] to extend these to $e_\\alpha$. This keeps the coroot identification and supplies the required bracket constants. Since the root spaces are one-dimensional, these vectors together with the $H_i$ are the required basis. Dualizing the supplied Cartan identification gives $\\mathfrak h^\\vee\\simeq V$.",
+   "uses": [
+    "lem-sfb-serre-rational-presentation",
+    "lem-sfb-chevalley-root-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, pp.503--504, characteristic-zero extension p.508; Chevalley bases and Theorem 23.71, pp.508--509"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rational-highest-weight-modules] to this split rational algebra and its simple base. Under the Cartan identification its weight lattice is exactly the prescribed $P$, since its coroot elements are $\\bar c_\\alpha$. The fundamental weights $\\omega_i$ form an integer basis of $P$. For each $i$ take $L_i=L(\\omega_i)$ and a highest vector $v_i$, and form $W=\\bigoplus_i L_i$ with componentwise Lie action $\\rho$. Its nonzero weight spaces are the sums of the corresponding summand weight spaces, so its finite weight set $\\Omega$ lies in $P$ and contains every $\\omega_i$. Therefore $\\mathbf Z\\Omega=P$.",
+   "uses": [
+    "lem-sfb-rational-highest-weight-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, p.508 (weight gradations) and proof of Corollary 23.73, p.511; highest-weight input made explicit"
+   }
+  },
+  {
+   "text": "The representation just constructed is faithful. Its kernel $I$ is an ideal, by the representation identity of [def-wf-lie-algebra]. It is stable under every $\\operatorname{ad}h$. Choose rational $h_0\\in\\mathfrak h$ on which the finitely many distinct functionals $0$ and $\\alpha\\in R$ have distinct values: on a rational basis use vectors $(1,t,\\ldots,t^{r-1})$, avoiding the finitely many integer roots of their nonzero difference polynomials. For each eigenvalue $a$, the polynomial $\\prod_{b\\ne a}(\\operatorname{ad}h_0-b)/(a-b)$ projects onto its eigenspace and preserves $I$. Thus $I=(I\\cap\\mathfrak h)\\oplus\\bigoplus_\\alpha(I\\cap\\mathbf Qe_\\alpha)$. An $h\\in I\\cap\\mathfrak h$ annihilates every $v_i$, so every $\\omega_i(h)=0$; their rational span is $\\mathfrak h^\\vee$, hence $h=0$. If $I$ contained a nonzero root component it would contain $e_\\alpha$, and therefore $[e_\\alpha,e_{-\\alpha}]=h_\\alpha\\ne0$, contradicting $I\\cap\\mathfrak h=0$. Hence $I=0$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, pp.509--511; elementary verification of faithfulness of the chosen direct sum"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-kostant-integral-pbw] for the Chevalley basis just fixed. For each $i$ define the actual subgroup $\\Lambda_i=U_{\\mathbf Z}v_i\\subset L_i$, where the enveloping action is the extension in that node. By its integral triangular basis, $\\Lambda_i$ is the integer span of the vectors $\\prod_j e_{-\\beta_j}^{(a_j)}v_i$. Indeed every nonidentity positive factor kills $v_i$, and each Cartan binomial acts on $v_i$ by $\\binom{\\omega_i(H_k)}{b_k}\\in\\mathbf Z$ (here $\\omega_i(H_k)$ is $0$ or $1$). Conversely each negative product belongs to $U_{\\mathbf Z}$. The rational span of $\\Lambda_i$ is all $L_i$: it contains $v_i$ and is stable under all root operators, hence their brackets $H_k$, which span $\\mathfrak g$ together with the root vectors; the highest-weight module is cyclic. By definition $U_{\\mathbf Z}\\Lambda_i\\subseteq\\Lambda_i$, so every divided root power preserves $\\Lambda_i$.",
+   "uses": [
+    "lem-sfb-kostant-integral-pbw",
+    "lem-sfb-rational-highest-weight-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, p.510, admissible lattice before equation (152); integral triangular-basis argument"
+   }
+  },
+  {
+   "text": "This generating family is finite after zero vectors are removed. A negative monomial of multi-degree $a$ applied to $v_i$ has weight $\\mu=\\omega_i-\\sum_j a_j\\beta_j$, by repeated use of $[h,e_{-\\beta_j}]=-\\beta_j(h)e_{-\\beta_j}$. In simple-root coordinates each positive $\\beta_j$ has height at least one. If the vector is nonzero, $\\mu$ is among the finite weights of $L_i$, so $\\sum_j a_j\\le\\operatorname{ht}(\\omega_i-\\mu)\\le B_i$, where $B_i$ is the maximum of these finitely many nonnegative integers. There are finitely many tuples $a$ with this bound. Moreover the surviving generators are homogeneous weight vectors. Grouping an integer linear combination by weight therefore proves $\\Lambda_i=\\bigoplus_\\mu(\\Lambda_i\\cap(L_i)_\\mu)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, p.510, construction of an admissible lattice and equation (152), with finite-generation bound written out"
+   }
+  },
+  {
+   "text": "Choose a rational basis of $L_i$. The finitely many generators of $\\Lambda_i$ have rational coordinates, so one positive integer $d$ clears all denominators and embeds $d\\Lambda_i$ as a subgroup of $\\mathbf Z^{\\dim L_i}$. By [lem-weil-subgroup-finite-free-abelian-group-free], $\\Lambda_i$ is free of finite rank. Its integer basis is rationally independent by clearing denominators in any rational relation, and rationally spans $L_i$ by Step 5. Consequently $\\Lambda_i\\otimes_{\\mathbf Z}\\mathbf Q\\simeq L_i$. Take $\\Lambda=\\bigoplus_i\\Lambda_i\\subset W$. The finite direct sum is full, free, preserved by every componentwise divided root power, and decomposes into its weight intersections by Step 6.",
+   "uses": [
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, p.510, definition of lattice and equation (152); finite-free subgroup input"
+   }
+  },
+  {
+   "text": "Finally $\\rho(e_\\alpha)W_\\mu\\subseteq W_{\\mu+\\alpha}$: for $w\\in W_\\mu$, the representation identity gives $\\rho(h)\\rho(e_\\alpha)w=\\rho(e_\\alpha)\\rho(h)w+\\alpha(h)\\rho(e_\\alpha)w=(\\mu+\\alpha)(h)\\rho(e_\\alpha)w$. Since $\\alpha\\ne0$, the weights $\\mu+n\\alpha$ are distinct as $n$ varies. The weight set is finite, so every sufficiently long iteration is zero, with one common bound for the finite set $\\Omega$. Thus every root operator is nilpotent. Its $m$th divided power is the enveloping action of $e_\\alpha^{(m)}$, already shown to preserve $\\Lambda$; $m=0$ is the identity. This supplies all remaining requirements.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, p.509, nilpotent root operators; p.510, admissibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra",
+  "lem-sfb-chevalley-root-normalization",
+  "lem-sfb-kostant-integral-pbw",
+  "lem-sfb-rational-highest-weight-modules",
+  "lem-sfb-serre-rational-presentation",
+  "lem-weil-subgroup-finite-free-abelian-group-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, pp.503--511; follows the Serre/Chevalley/highest-weight route, with the integral PBW construction and elementary assembly written by NZ. Missing deeper sources recorded WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational split semisimple Lie algebra has a faithful representation with weights generating the full weight lattice and a weight-decomposed lattice stable under all Chevalley divided powers",
+   "results": "{\"t\": \"2026-10-23T20:48:26Z\", \"tool\": \"leanfinder\", \"query\": \"A rational split semisimple Lie algebra has a faithful representation with weights generating the full weight lattice and a weight-decomposed lattice stable under all Chevalley divided powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instIsIrreducible\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsKilling.span_weight_eq_top\", \"LieModule.instLinearWeightsOfCharZero\", \"LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieModule.iSup_genWeightSpace_eq_top'\", \"LieModule.iSup_genWeightSpace_eq_top\", \"LieSubalgebra.root\"], \"digest\": \"a6b46b6d1d79e123\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Lie/Basis/Basic.lean:13--39 and 59--81 (read) defines weaker simple-root generators and explicitly lists Chevalley bases as TODO. GeckConstruction/Semisimple.lean supplies characteristic-zero matrix Lie algebras; its returned types do not construct full-weight representations or divided-power-stable integral lattices. Weight-space and triangularizability results do not give this existence statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley integral form of a semisimple Lie algebra admits fundamental highest weight modules with an integral lattice invariant under divided powers",
+   "results": "{\"t\": \"2026-10-23T20:51:17Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley integral form of a semisimple Lie algebra admits fundamental highest weight modules with an integral lattice invariant under divided powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.weightSpaceOfIsLieTower\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieModule.chainTop\", \"LieModule.instLinearWeightsOfCharZero\", \"LieModule.chainBot\", \"LieAlgebra.IsKilling.invtSubmoduleToLieIdeal\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\"], \"digest\": \"79df941abfe9f779\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Lie/Basis/Basic.lean:13--39 and 59--81 (read) defines weaker simple-root generators and explicitly lists Chevalley bases as TODO. GeckConstruction/Semisimple.lean supplies characteristic-zero matrix Lie algebras; its returned types do not construct full-weight representations or divided-power-stable integral lattices. Weight-space and triangularizability results do not give this existence statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chevalley\"",
+   "results": "{\"t\": \"2026-10-23T20:48:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Chevalley\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.degBound\", \"ChevalleyThm.numBound\", \"ChevalleyThm.MvPolynomialC.numBound_zero\", \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"_private.Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity.0.ChevalleyThm.PolynomialC.InductionObj.val\", \"ChevalleyThm.MvPolynomialC.degBound_zero\"], \"digest\": \"658f1779e0a04d76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Lie/Basis/Basic.lean:13--39 and 59--81 (read) defines weaker simple-root generators and explicitly lists Chevalley bases as TODO. GeckConstruction/Semisimple.lean supplies characteristic-zero matrix Lie algebras; its returned types do not construct full-weight representations or divided-power-stable integral lattices. Weight-space and triangularizability results do not give this existence statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of Chevalley bases and admissible lattices for faithful representations containing fundamental highest weights",
+   "results": "{\"t\": \"2026-10-23T20:50:08Z\", \"tool\": \"leansearch\", \"query\": \"Existence of Chevalley bases and admissible lattices for faithful representations containing fundamental highest weights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"RootPairing.Base.mk'\", \"LieModule.instLinearWeightsOfIsLieAbelian\", \"LieModule.exists_forall_lie_eq_smul\", \"RootPairing.Base.toWeightBasis\", \"LieAlgebra.IsKilling.span_weight_eq_top\", \"LieModule.iSup_genWeightSpace_eq_top\"], \"digest\": \"403ea322c1252c1e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Lie/Basis/Basic.lean:13--39 and 59--81 (read) defines weaker simple-root generators and explicitly lists Chevalley bases as TODO. GeckConstruction/Semisimple.lean supplies characteristic-zero matrix Lie algebras; its returned types do not construct full-weight representations or divided-power-stable integral lattices. Weight-space and triangularizability results do not give this existence statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley.basis|admissible.lattice|divided.power.*lattice",
+   "results": "{\"t\": \"2026-10-23T20:50:08Z\", \"tool\": \"grep\", \"query\": \"Chevalley.basis|admissible.lattice|divided.power.*lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Basis/Basic.lean\"], \"digest\": \"6a31538aa5678a27\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Lie/Basis/Basic.lean:13--39 and 59--81 (read) defines weaker simple-root generators and explicitly lists Chevalley bases as TODO. GeckConstruction/Semisimple.lean supplies characteristic-zero matrix Lie algebras; its returned types do not construct full-weight representations or divided-power-stable integral lattices. Weight-space and triangularizability results do not give this existence statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a faithful rational representation of a split semisimple Lie algebra whose weights generate the weight lattice and a lattice stable under divided root powers",
+   "results": "{\"t\": \"2026-10-23T21:36:04Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of a faithful rational representation of a split semisimple Lie algebra whose weights generate the weight lattice and a lattice stable under divided root powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieModule.weightSpaceOfIsLieTower\", \"LieModule.exists_forall_lie_eq_smul\", \"LieAlgebra.IsKilling.span_weight_eq_top\", \"LieModule.instLinearWeightsOfCharZero\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\"], \"digest\": \"e80b6c4344abc8af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the combined existence theorem is stronger than all returned declarations; see the four supporting nodes for separate candidate checks."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|admissible.lattice|Serre.relation|Kostant|highest.weight|PBW",
+   "results": "{\"t\": \"2026-10-23T21:33:33Z\", \"tool\": \"grep\", \"query\": \"Chevalley|admissible.lattice|Serre.relation|Kostant|highest.weight|PBW\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/Extension.lean\", \"Mathlib/Algebra/Lie/Extension.lean\"], \"digest\": \"9bd1481bfb0c1f10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the combined existence theorem is stronger than all returned declarations; see the four supporting nodes for separate candidate checks."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.Basis",
+   "results": "{\"t\": \"2026-10-23T21:33:34Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis\", \"LieAlgebra.Basis.e\", \"LieAlgebra.Basis.f\", \"LieAlgebra.Basis.h\", \"LieAlgebra.Basis.A\", \"LieAlgebra.Basis.symm\", \"LieAlgebra.Basis.nondegen\", \"LieAlgebra.Basis.cartan_eq_lieSpan\"], \"digest\": \"01cba2159de84219\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the combined existence theorem is stronger than all returned declarations; see the four supporting nodes for separate candidate checks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of normalized Chevalley bases with integral root string structure constants",
+   "results": "{\"t\": \"2026-10-23T21:33:34Z\", \"tool\": \"leansearch\", \"query\": \"Existence of normalized Chevalley bases with integral root string structure constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.mk'\", \"RootPairing.Base.toWeightBasis\", \"RootPairing.Base.exists_root_eq_sum_int\", \"RootPairing.Base.toWeightBasis.congr_simp\", \"LieAlgebra.IsKilling.rootSystem\", \"RootPairing.Base.toWeightBasis_apply\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.Base.toCoweightBasis_apply\"], \"digest\": \"6b2c243137a4e2cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the combined existence theorem is stronger than all returned declarations; see the four supporting nodes for separate candidate checks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-datum-realization",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511.",
+   "via": [
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-admissible-representation",
+  "worker": "stage1",
+  "summary": "Constructed the rational Serre algebra, normalized its root vectors, chose the sum of fundamental highest-weight modules and proved faithfulness directly. Constructed U_Z v lattices using an integral triangular PBW input, proved finite generation, weight decomposition, finite freeness and nilpotence explicitly. Four supporting statement-only nodes; no new definitions or Lean. Corrected source proof errors without changing the item statement.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/moduli/reductivity chain: the Lie-theoretic supporting construction used in root-datum realization. blueprint_refs ancestor reports None, matching the inherited from.node; the existing via chain is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-020dfcddd",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-020dfcddd (reviewer sub-agent of L); spot-checked: PASS: I read the item and all four new nodes in full, plus Milne 23h (pp.503–511). The statement and stmt_deps are byte-identical to live, which is still unsplit with no repair note; the only parent use (root-datum-realization step 2) relies on clauses that are kept. The four new nodes are true standard theorems over Q and none restates the item: (1) serre-rational-presentation: base existence plus the Serre quotient with corrected relations. Milne p.504 has letter errors ([X_i,X_i]=H_i, [H_i,X_j]=n Y_j, J_j) and possibly an exponent sign lost in extraction. Checked H_i↦c_{α_i}: the weight of E_j is α_j and the Cartan matrix is invertible. (2) chevalley-root-normalization: true, by twisting any rational Chevalley basis with a character χ: ZR→Q^× chosen on the simple roots; N_{α,β} and [e_α,e_{-α}]=h_α are preserved. (3) rational-highest-weight-modules: Verma-quotient construction over Q; ω_i is a Z-basis of P because every coroot is an integer combination of the simple coroots. (4) kostant-integral-pbw: the y–h–x order is valid by Steinberg Thm 2 or by applying the Chevalley automorphism to Humphreys 26.4. Steps checked: (1) the R=∅ case; (2) the Serre node supplies the normalization hypotheses, H_i is a coroot and E_i≠0; (3) ZΩ=P via L(ω_i), which fixes Milne's Lemma 22.24 gap (A1 adjoint weights generate only 2Zω); (4) faithfulness via Lagrange eigenprojectors, ω_i(h)=0 and h_α=[e_α,e_{-α}]; (5) U_Z v_i: the positive part kills v_i, binomial coefficients are integers, cyclicity; (6) a height bound uses Ω⊆λ−Z≥0Δ; (7) dΛ_i⊆Z^n, then the PID subgroup leaf; (8) uniform nilpotence. Duplicate search over all statements found none; group-theoretic highest-weight nodes differ in setting and would create a cycle. No SGA, all new nodes are statement-only, created.item is correct, no tool_uses needed. Advisory: three new nodes have WANTED primary sources (Serre, Kostant, Steinberg); Mathlib's GeckConstruction is a possible stage-2 alternative to the Serre route."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.ChevalleyAdmissibleRepresentation",
+  "declaration": "LieAlgebra.exists_chevalley_admissible_representation",
+  "file": "lean/Sheaf/Algebra/Lie/ChevalleyAdmissibleRepresentation.lean",
+  "statement": "theorem exists_chevalley_admissible_representation (V : Type u) [AddCommGroup V] [Module ℚ V] [FiniteDimensional ℚ V] (R : Set V) (c : R → Module.Dual ℚ V) (hfinite : R.Finite) (hne : ∀ a : R, (a : V) ≠ 0) (hspan : Submodule.span ℚ R = ⊤) (htwo : ∀ a : R, c a a = 2) (hint : ∀ a b : R, ∃ n : ℤ, c a b = (n : ℚ)) (hreflect : ∀ a : R, Set.BijOn (fun v : V ↦ v - c a v • (a : V)) R R) (hreduced : ∀ a : R, R ∩ (Submodule.span ℚ ({(a : V)} : Set V) : Set V) = {(a : V), -(a : V)}) (P : Submodule ℤ V) (hP : ∀ v : V, v ∈ P ↔ ∀ a : R, ∃ n : ℤ, c a v = (n : ℚ)) : ∃ (g : Type u) (_ : LieRing g) (_ : LieAlgebra ℚ g) (_ : FiniteDimensional ℚ g), HasTrivialRadical ℚ g ∧ ∃ H : LieSubalgebra ℚ g, IsLieAbelian H ∧ (∀ K : LieSubalgebra ℚ g, H ≤ K → IsLieAbelian K → K = H) ∧ ∃ (θ : H ≃ₗ[ℚ] Module.Dual ℚ V) (e : R → g), (∀ a : R, e a ≠ 0 ∧ ∀ h : H, ⁅(h : g), e a⁆ = θ h a • e a) ∧ DirectSum.IsInternal (Sum.elim (fun _ : Unit ↦ H.toSubmodule) (fun a : R ↦ Submodule.span ℚ ({e a} : Set g))) ∧ (∃ (r : ℕ) (b : Module.Basis (Fin r) ℚ V) (hb : ∀ i, b i ∈ R), (∀ a : R, (∀ i, ∃ n : ℤ, b.repr a i = (n : ℚ)) ∧ ((∀ i, 0 ≤ b.repr a i) ∨ (∀ i, b.repr a i ≤ 0))) ∧ ∃ B : Module.Basis (Fin r ⊕ R) ℚ g, (∀ i, B (Sum.inl i) = (θ.symm (c ⟨b i, hb i⟩) : g)) ∧ (∀ a : R, B (Sum.inr a) = e a)) ∧ (∀ a b : R, (b : V) = -(a : V) → ⁅e a, e b⁆ = (θ.symm (c a) : g)) ∧ (∀ a b k : R, (a : V) + (b : V) = (k : V) → ∃ p : ℕ, (b : V) - p • (a : V) ∈ R ∧ (∀ n : ℕ, (b : V) - n • (a : V) ∈ R → n ≤ p) ∧ ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ⁅e a, e b⁆ = ((ε : ℚ) * (p + 1 : ℚ)) • e k) ∧ (∀ a b : R, (a : V) + (b : V) ≠ 0 → (a : V) + (b : V) ∉ R → ⁅e a, e b⁆ = 0) ∧ ∃ (W : Type u) (_ : AddCommGroup W) (_ : Module ℚ W) (_ : LieRingModule g W) (_ : LieModule ℚ g W), FiniteDimensional ℚ W ∧ LieModule.IsFaithful ℚ g W ∧ ∃ (Λ : Submodule ℤ W) (Ω : Finset V), Submodule.IsLattice ℚ Λ ∧ Module.Free ℤ Λ ∧ (∀ μ ∈ Ω, μ ∈ P ∧ LieModule.weightSpace W (fun h : H ↦ θ h μ) ≠ ⊥) ∧ DirectSum.IsInternal (fun μ : Ω ↦ (LieModule.weightSpace W (fun h : H ↦ θ h μ)).toSubmodule) ∧ Submodule.span ℤ (Ω : Set V) = P ∧ DirectSum.IsInternal (fun μ : Ω ↦ ((LieModule.weightSpace W (fun h : H ↦ θ h μ)).toSubmodule.restrictScalars ℤ).comap Λ.subtype) ∧ (∀ a : R, IsNilpotent (LieModule.toEnd ℚ g W (e a))) ∧ (∀ (a : R) (m : ℕ) (w : W), w ∈ Λ → ((Nat.factorial m : ℚ)⁻¹ • (LieModule.toEnd ℚ g W (e a)) ^ m) w ∈ Λ) ∧ (R = ∅ → Subsingleton g ∧ ∃ ψ : W ≃ₗ[ℚ] ℚ, Λ.map (ψ.toLinearMap.restrictScalars ℤ) = LinearMap.range (Int.castAddHom ℚ).toIntLinearMap ∧ Ω = {0})",
+  "branch": "sheaf-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf6599cd6",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; statement verbatim in file, single sorry, docstrings with Milne 23h places + blueprint + proof steps 1-8. Hypotheses = root-datum-lattice-embedding root-system conventions (finite, nonzero, spanning, c(a)=2, integral, BijOn reflection, reduced), P characterized by its defining iff; nothing stronger, universe u free. All conclusion clauses present: f.d. HasTrivialRadical g, maximal abelian H, θ:H≃V^∨, e_a eigenvectors with H⊕⊕ℚe_a internal, simple base + basis {θ⁻¹c(b_i)}∪{e_a}, [e_a,e_-a]=θ⁻¹c_a, zero/±(p+1) brackets with maximal p, faithful f.d. W, IsLattice+Free Λ, Ω⊂P finite with nonzero weight spaces, internal sum, ℤΩ=P, integral decomposition inside Λ, nilpotence, all divided powers preserve Λ, R=∅ witnesses. Edge cases R=∅, A1, m=0, opposite roots, a=b, universes checked. Proof-dep plain imports required, no new defs, no pro-etale. Advisories: base is existential (matches proof step 2; ∀-base differs by a root-system fact); inline divided power equals rationalDividedPower; open Classical decidability; second reading by the same worker."
+ }
+}

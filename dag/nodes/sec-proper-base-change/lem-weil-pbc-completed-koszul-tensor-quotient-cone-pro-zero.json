@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-tensor-quotient-cone-pro-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Strict augmentation argument, order 1248; Pro-zero cones of the strict completed Koszul tensor augmentation",
+   "via": [
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pro-zero cones of the strict completed Koszul tensor augmentation",
+ "statement": "For a completed coefficient datum and a generating finite list, let beta be any natural strict tensor tower augmentation normalized on the Koszul units and zero on every total summand of nonzero exterior degree as in [lem-weil-pbc-completed-koszul-tensor-quotient-augmentation]. For every unbounded acyclic-tensor K-flat P, the strict tower of mapping cones of beta at P is pro-zero in the derived category of completed module sheaves: for each n there are m >= n and the actual induced cone successor m to n whose image under Q is zero. No assertion about products, Roos fibres or derived limits is made.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, proof of lemma-naive-completion; More on Algebra, sequence-Koszul-complexes (Tag 091N)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+  "def-weil-pbc-koszul-reconstruction-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the Noetherian Koszul augmentation theorem over ULift A, transporting Noetherianity along ULift.ringEquiv. Its specified strict augmentation, diagonal and quotient maps provide algebraic cone transitions which are eventually zero after localization.",
+   "uses": [
+    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite exact coefficient-cone realization to beta evaluated at the cochain unit. Its exact functor preserves quasi-isomorphisms. The localization universal property carries zero algebraic cone transitions to zero realized cone transitions; naturality of the specified level isomorphisms and cancellation of the source isomorphism give pro-zero for the actual coefficient cone tower.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-coefficient-cone-realization",
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite tensor-cone comparison identifies the actual cone tower at P with the coefficient cone tower followed by tensorLeft P. K-flatness and the signed tensor-cone isomorphism show this functor preserves quasi-isomorphisms. Localization therefore preserves its zero maps. Apply it to the coefficient-cone transition and transport along the tower isomorphism to obtain the required actual transition.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-tensor-cone-comparison",
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-koszul-coefficient-cone-realization",
+  "lem-weil-pbc-completed-koszul-tensor-cone-comparison",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Proof of lemma-naive-completion (099M), realized in Lean by exact-functor localization, K-flat tensor localization and two strictly finite model comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural chain map from Koszul tower Roos fibre to quotient tower Roos fibre with quasi-isomorphism and augmentation unit",
+   "results": "8 hits about normalized Moore complexes and general chain factorizations; no completed Koszul tower augmentation.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\"",
+   "results": "12 hits giving mapping-cocone definitions and cochain constructors, not the finite completed augmentation or its cone vanishing.",
+   "date": "2026-10-27",
+   "verdict": "generic APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "proZero.*[Rr]oos|[Rr]oos.*proZero",
+   "results": "Search service returned 0 hits. Local search found the AdicResidue coefficient augmentation and tensor cone comparison, whose coefficient-slice and dual Koszul models differ from the assigned exterior completed models.",
+   "date": "2026-10-27",
+   "verdict": "no exact model match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completed Koszul tensor quotient augmentation with strict transitions and pro zero mapping cones",
+   "results": "8 hits, including ChainComplex.augment and mappingCone.map, with no completed coefficient or strict tower theorem.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulQuotientRoosAugmentation",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulTensorQuotientConeProZero",
+  "file": "lean/Sheaf/Paper/CompletedKoszulTensorQuotientConeProZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulTensorQuotientConeProZero",
+  "statement": "theorem completedKoszulTensorQuotientConeProZero\n    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)\n    (β : completedKoszulTensorTower T d r a ⟶\n      (completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ))\n    (hu : ∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ),\n      completedAdicKoszulTensorUnit T d r a P n ≫\n        (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =\n          completedQuotientTensorUnit T d P n)\n    (hz : ∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),\n      completedKoszulTensorSummand T d r a P n p q ≫\n          ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n            (β.app P)).app (op n)).f (p + q) = 0)\n    (P : CochainComplex (CompletedAdicModules T d) ℤ)\n    (hP : CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d) P) :\n    ∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m), DerivedCategory.Q.map\n      ((CochainComplex.mappingCone (β.app P)).asFunctor.map (homOfLE h).op) = 0",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222724-L-686395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T012955-L-2354127",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,205 @@
+{
+ "id": "def-pur-canonical-tate-comparisons",
+ "kind": "definition",
+ "title": "Normalized unshifted Tate-line comparisons across the coefficient stages",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$. For schemes $X,Y$ [def-pc-scheme] on which $\\ell$ is invertible, use the existing nonnegative Tate lines and root generators [def-weil-frobenius-coefficient-twists], [def-coefficient-twists-detailed]. Define their unshifted single complexes. Define the canonical comparisons for (i) inverse image under every $f:X\\to Y$, (ii) the product of exponents $r,s\\geq0$, (iii) reduction $A_{E,m}\\to A_{E,n}$, including $m=n$, (iv) integral-to-finite reduction and (v) completed integral extension along $E\\to L$. The sheaf comparisons are uniquely normalized on all scalar/root generators: inverse image pulls each root and scalar; products multiply scalars and concatenate ordered root lists; scalar extension multiplies the two scalar factors. Use the arbitrary integral line comparison of [def-sf-orientation-integral-line-comparisons], the scalar line map of [lem-weil-integral-twist-base-change], and the normalized finite reduction of [lem-weil-signed-twist-reduction-comparison]. Use the actual flat K-flat degree-zero models, their canonical derived quotient counits [lem-coef-derived-system-evaluation-calculus], and their completed-operation augmentations [def-pur-completed-pullback-tensor-comparison], with the canonical tensor and scalar comparisons [lem-pur-derived-pullback-tensor-iso], [lem-pur-integral-operations-scalar-extension]. Define the rational comparisons as the localized integral maps and the algebraically closed comparisons as their common-stage classes in the categories of [def-weil-derived-pullback-tensor-hom], fixing the product map at every larger finite stage by the scalar line comparisons. At exponent zero use the coefficient unit. These are canonical comparisons, not new Tate lines or new pullback/tensor functors.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-frobenius-coefficient-twists",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-sf-orientation-integral-line-comparisons",
+  "lem-weil-integral-twist-base-change",
+  "lem-weil-signed-twist-reduction-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-canonical-tate-complex-comparisons",
+  "def-pur-canonical-tate-completed-comparisons",
+  "def-pur-canonical-tate-scalar-comparisons",
+  "def-pur-canonical-tate-common-comparisons"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Canonical roots-of-unity Tate factors and their tensor, coefficient and pullback comparisons in the source-of-purity composite."
+ },
+ "proof": [
+  {
+   "text": "Assemble the original unshifted comparisons by publicly re-exporting the complex, completed-operation, scalar and common-stage constructor modules. The original module retains the ordinary reduction-square constructions. All declaration names, signatures and public definition bodies remain unchanged. The subdivisions follow local opacity, canonical instance selection, and sharing of completeness proofs, which improved cost but did not reliably meet the per-file limit for the combined constructors.",
+   "uses": [
+    "def-pur-canonical-tate-complex-comparisons",
+    "def-pur-canonical-tate-completed-comparisons",
+    "def-pur-canonical-tate-scalar-comparisons",
+    "def-pur-canonical-tate-common-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For ordinaryReductionSquare_existsUnique, transport the integral and finite ordinary pullback adjunctions along the identity-on-sections direct-image comparisons. Compose with the specified scalar reduction adjunctions. The normalized direct-image restriction comparison identifies their right adjoints. The canonical leftAdjointUniq isomorphism then gives the desired comparison. Evaluating its unit equation on every section gives exactly the two-unit formula in the statement. Conversely the formula determines its image under each adjunction homEquiv on every section, hence determines the natural isomorphism uniquely.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "def-weil-frobenius-coefficient-twists",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For ordinaryPulledLine_kflat, map the normalized sfOrientationIntegralLineMaps inverse through the degree-zero single functor. Tensoring this isomorphism with each acyclic test complex gives an isomorphism of total tensor complexes. The K-flatness clause of integralGood and invariance of acyclicity under isomorphism prove the required K-flatness directly.",
+   "uses": [
+    "def-sf-orientation-integral-line-comparisons",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The four original remaining holes are unchanged in the complex, scalar and common-stage constructor modules; no local hole remains in this final reduction-square module. All original comparison statements and data are preserved, and no mathematical hole is added by relocating them.",
+   "uses": [
+    "def-pur-canonical-tate-common-comparisons",
+    "def-pur-canonical-tate-complex-comparisons",
+    "def-pur-canonical-tate-scalar-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-canonical-tate-complex-comparisons",
+  "def-pur-canonical-tate-completed-comparisons",
+  "def-pur-canonical-tate-scalar-comparisons",
+  "def-pur-canonical-tate-common-comparisons",
+  "def-weil-derived-direct-image",
+  "def-weil-frobenius-coefficient-twists",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-orientation-integral-line-comparisons",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "W4, 2026-10-26: the three existing proofs retained. B9, 2026-10-26: five further proofs by flat-single normalization, the specified Roos unit criterion, adjunction uniqueness and isomorphism transport of K-flatness. E9, 2026-10-26: integral product by degree-zero extraction from normalized sheaf multiplication; integral pullback augmentation by the ordinary-pullback comparison and normalized Roos completeness criterion. E9, 2026-10-27: split the existing comparison constructors into complex, completed and scalar compilation modules, preserving the original public interface and all remaining hole statements. E9: separate common-stage constructors from ordinary reduction squares after the latter combined file took 63 seconds in the second delivery preflight; no statement or data change."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived Tate line comparisons commute with pullback tensor and coefficient extension",
+   "results": "LinearMap.liftBaseChange_tmul; LineDeriv.tensorLineDerivTwo.congr_simp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo; KaehlerDifferential.cotangentComplexBaseChange_tmul; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.tensorH1CotangentOfIsLocalization",
+   "date": "2026-10-24",
+   "verdict": "No exact match; use the recorded underlying lines and operations and supply only their missing normalized comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparisons for positive Tate lines under arbitrary scheme pullback, derived tensor product, finite reduction and completed coefficient extension",
+   "results": "AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.tensor; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField",
+   "date": "2026-10-24",
+   "verdict": "No exact match; use the recorded underlying lines and operations and supply only their missing normalized comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Tate, tensor",
+   "results": "0 hits; loogle: unknown identifier 'Tate'",
+   "date": "2026-10-24",
+   "verdict": "No exact match; use the recorded underlying lines and operations and supply only their missing normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*(pullback|Scalar)|canonicalTate",
+   "results": "Mathlib/CategoryTheory/Subobject/Basic.lean:631; Mathlib/MeasureTheory/Function/ConditionalExpectation/PullOut.lean:21; Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean:561; Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:16; Mathlib/Dynamics/TopologicalEntropy/Semiconj.lean:31; Mathlib/Algebra/NoZeroSMulDivisors/Defs.lean:29; Mathlib/Geometry/Manifold/VectorField/LieBracket.lean:23,839; Mathlib/Analysis/Calculus/VectorField.lean:26",
+   "date": "2026-10-24",
+   "verdict": "No exact match; use the recorded underlying lines and operations and supply only their missing normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n CanonicalTate|finitePullSheaf|integralProductComplex|commonLineAtStage lean/WeilConjectures lean/Sheaf",
+   "results": "No matches in either source tree. Existing OrientationIntegralCoefficientTwists supplies shifted integral comparisons, and FrobeniusCoefficientTwistsCanonical supplies isomorphism pullbacks. Neither supplies this assembled unshifted arbitrary-pullback, quotient and common-stage comparison interface.",
+   "date": "2026-10-24",
+   "verdict": "No exact match; use the recorded underlying lines and operations and supply only their missing normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search canonical Tate; rg on dag/nodes for canonical Tate comparisons",
+   "results": "Blueprint matches def-amb-vector-integration, def-pod-dual-tate-datum, def-pur-tate-datum, lem-amb-affine-space-top-trace. DAG search finds the item, its structural-coherence and strict-system siblings and unrelated duality/trace nodes; no definition node for this normalized unshifted comparison family.",
+   "date": "2026-10-24",
+   "verdict": "No exact match; use the recorded underlying lines and operations and supply only their missing normalized comparisons."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-canonical-tate-arrow-naturality",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Normalized comparison maps required to type the canonical Tate-arrow equations.",
+   "via": [
+    "lem-pur-canonical-tate-arrow-naturality",
+    "lem-pur-weil-tate-datum-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "import_flags": [],
+ "lean": {
+  "module": "Sheaf.Paper.CanonicalTateComparisons",
+  "declaration": "WeilConjectures.CanonicalTate.reductionSquare",
+  "declarations": [
+   "WeilConjectures.CanonicalTate.reductionModel",
+   "WeilConjectures.CanonicalTate.ordinaryReductionSquare_existsUnique",
+   "WeilConjectures.CanonicalTate.ordinaryReductionSquare",
+   "WeilConjectures.CanonicalTate.ordinaryPulledLine_kflat",
+   "WeilConjectures.CanonicalTate.reductionSingle",
+   "WeilConjectures.CanonicalTate.reductionSquareSource",
+   "WeilConjectures.CanonicalTate.reductionSquareTarget",
+   "WeilConjectures.CanonicalTate.reductionSquare",
+   "WeilConjectures.CanonicalTate.constructibleReduction"
+  ],
+  "file": "lean/Sheaf/Paper/CanonicalTateComparisons.lean",
+  "statement": "def reductionSquare {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] (n r : ℕ) :\n    (scalarReductionDerivedExtension l E X n).obj\n        ((integralDerivedPullback l E g).obj (sfIntegralTwistingObject l E Y (r : ℤ))) ≅\n      (finiteDerivedPullback l E n g).obj\n        ((scalarReductionDerivedExtension l E Y n).obj\n          (sfIntegralTwistingObject l E Y (r : ℤ)))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ebf5ba28",
+  "group": "NZ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ebf5ba28",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Every clause of the node is rendered: pullback naturality, coefficient naturality (finite m>=n including m=n, integral-to-finite, integral extension, plus rational), additivity on X and Y, and the mixed identity with C_w^{-1} and a_w re-typed by hand, at finite/integral/rational/common stages (Omega in an independent universe), with root-tower and strict-system clauses. Hypotheses: l != p and separated finite-type models; w0 arbitrary; invertibility derived via sfWeilPrimeInvertible. All comparisons are canonical: every choose comes from an existsUnique fixed on generators; integralPull follows the completedToOrdinaryOnGood pattern; sfOrientationIntegralLineMaps and positiveLineMaps share one normalization; finitePullSheaf extends finitePositiveLineMaps to arbitrary f (no existing equivalent); no H4 duplicate found. Mechanical finding: PASS on both points. frobenius_square_cartesian supplies the proof of g' w = w g needed to type the compositor squares; signedTwistReduction_comparison constructs the reduction iso, fixed by nested existsUnique. Edge cases r=0, s=0, n=1, m=n, w=id, empty schemes, l=2 and ramified E in L are covered. Advisories: sign remark rendered only as arithmetic facts; NZ second reading is a self-check; some declarations come from modules whose nodes are not direct stmt_deps (base-era); comparisons module docstring repeats the item title. Not recompiled per instructions; no FIX."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-04037",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T021317-L-2756189",
+  "kind": "interface",
+  "note": "independent cc review: old CanonicalTateComparisons/CanonicalTateArrowNaturality/RationalPurityTraceCoherence (clone == delivery base) block-by-block against the 12 delivered modules; node lean records and stmt_deps against declaration usage; #print axioms of the new proofs and their cited helpers"
+ }
+}

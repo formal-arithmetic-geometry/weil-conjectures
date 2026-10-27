@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-integral-scalar-quotient-transition",
+ "kind": "statement",
+ "title": "The scalar tensor quotient comparison commutes with normalized reduction",
+ "statement": "Fix a finite-field datum D, a prime l≠D.p, finite extensions E,L of Q_l, an embedding iota:E→L, a scheme X, a derived complete integral E-complex K and n≤m. Let T be the completed scalar extension and Q_i:r_(L,i)(TK)≅T_(iota_i)(r_(E,i)K) the prescribed quotient comparison of [def-sf-integral-finite-extension-models]. Write d_F for the normalized reduction transition of [lem-coef-normalized-dvr-effectivity] and a for [def-sf-scalar-reduction-exchange]. Then Q_m;T_(iota_m)(d_E(K));a_(r_(E,n)K)=d_L(TK);Res_L(Q_n). This assertion is about every complete K and does not involve a dualizing datum or a finite exceptional counit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers."
+ },
+ "stmt_deps": [
+  "def-sf-scalar-reduction-exchange",
+  "def-sf-integral-finite-extension-models",
+  "lem-coef-normalized-dvr-effectivity"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate by completion and use naturality of normalized reduction transitions to move the completion maps to the same side. Expand the remaining quotient comparison into finiteReductionIso and tensorSquare.",
+   "uses": [
+    "def-sf-integral-finite-extension-models",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose under the target scalar adjunction at m. The mixed comparison is the mate of the section-normalized restriction square. The two leftAdjointUniq comparisons in tensorSquare and finiteReductionIso preserve precisely these units. Both transposes therefore send x to 1 tensor x at level n; the two pasted restriction maps are identity on sections. Sheafification and localization preserve this equality, and Hom adjunction injectivity gives the displayed square.",
+   "uses": [
+    "def-sf-scalar-reduction-exchange",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-models",
+  "def-sf-scalar-reduction-exchange",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of a commutative coefficient restriction square commutes with tensor quotient transition maps and exceptional counits",
+   "results": "mateEquiv, mateEquiv_counit, mateEquiv_square and mateEquiv_counit_symm provide general adjunction calculus; no normalized DVR or finite dualizing statement.",
+   "verdict": "generic ingredient only",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dualizing coefficient extension counit commutes with reduction quotient transitions",
+   "results": "Eight results: ordinary adic completion transition naturality and unrelated coalgebra counits; no sheaf derived coefficient comparison. Loogle finds Adjunction.homEquiv_naturality_right only.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizing|normalizedDVRReductionTransition|tensorSquare",
+   "results": "msearch Mathlib grep: zero hits. Project search: CoefIntegralFiniteExtensionModels defines quotient and finiteU; FiniteDualizing proves same-field cocycles, FiniteFreeCoefficientExtension provides a stage calculus; no mixed scalar restriction transition theorem.",
+   "verdict": "no duplicate; use existing model declarations",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteDualizingCoherence",
+  "date": "2026-10-26",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers.",
+   "via": [
+    "lem-sf-integral-finite-dualizing-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefIntegralScalarQuotientTransition",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralScalarQuotientTransition.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.quotient_reduction_transition",
+  "declarations": [
+   "WeilConjectures.IntegralFiniteExtension.quotient_reduction_transition"
+  ],
+  "statement": "theorem quotient_reduction_transition\n    (K : IntegralVerdier.Ambient l E X) (hK : IsSfDerivedComplete l E X K)\n    {m n : ℕ} (h : n ≤ m) :\n    (quotient l E L ι X m K hK).hom ≫\n        (pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X m)).map\n          (normalizedDVRReductionTransition l E X D hl h K) ≫\n        (scalarReductionExchange l E L ι X h).app\n          ((scalarReductionDerivedExtension l E X n).obj K) =\n      normalizedDVRReductionTransition l L X D hl h\n          ((integralScalarExtensionOfUniverses l E L ι X).obj K) ≫\n        (normalizedDVRRes l L X h).map (quotient l E L ι X n K hK).hom",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T202604-L-2732657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T202604-L-2732657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-theta-poincare-pullback",
+ "kind": "statement",
+ "title": "The normalized theta difference bundle pulls back to the Picard family",
+ "statement": "Let $k$ be algebraically closed [def-weil-field, def-weil-algebraic-closure], let $C/k$ be a smooth projective connected curve of genus $g\\geq1$ [def-sc-curves, def-kun-projective, def-sc-genus], let $P\\in C(k)$, and fix its Jacobian $J$ with the representing isomorphism [def-sc-jacobian]. Put $f_P(Q)=[\\mathcal O_C(Q-P)]$, and let $\\mathcal M_P$ be the universal degree-zero Picard sheaf normalized along $P\\times J$ and $C\\times0$. Let $\\Theta=W_{g-1}\\subset J$ be the scheme-theoretic image of the effective divisors $D$ of degree $g-1$ by $D\\mapsto[\\mathcal O_C(D-(g-1)P)]$, using the constructions of [lem-sfb-symmetric-abel-image-geometry]. Let $\\Theta^-=[-1]_J^*\\Theta$, let $L=\\mathcal O_J(\\Theta^-)$, and on $J\\times J$ put $L_0=m^*L\\otimes p_1^*L^{-1}\\otimes p_2^*L^{-1}$, normalized along the identity axes. Then there is an isomorphism of invertible sheaves, with the indicated normalizations,\n$$(f_P\\times[-1]_J)^*L_0\\cong\\mathcal M_P.$$\nHere $m$ is addition, $p_1,p_2$ the projections, and $[-1]_J$ inversion; all sheaves are invertible sheaves in the sense of [def-sc-invertible-module].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III Lemma 6.8(b), printed p.106, with Theta^- (the inversion image of Theta), not Theta. Its proof uses Lemma 6.7 and the see-saw theorem I 5.16 and I 5.19; the concluding equality is the bundle identity needed in Lemma 6.9."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-genus",
+  "def-sc-jacobian",
+  "lem-sfb-symmetric-abel-image-geometry",
+  "def-sc-invertible-module",
+  "def-sc-divisor",
+  "def-pc-module-pullback",
+  "def-pc-divisor-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "First check the product-family hypotheses used below. The curve $C$ is proper by [lem-pc-projective-proper]. Apply [lem-trf-smooth-component-pure-transcendental] to $C$ and the rational point $P$: its residue field is $k=k(u_1,\\ldots,u_0)$, and its connected component is all of $C$. Thus $C$ is geometrically integral. By the definitions of a Jacobian and an abelian variety, $J$ is proper and smooth over $k$; properness explicitly includes separatedness and finite type. Thus the parameter $T=J$ satisfies all three parameter hypotheses of the see-saw theorem used in step 5. For $q:C\\times J\\to J$ the section is $a\\mapsto(P,a)$, and the fibre over $s\\in J$ is the base change $C_{\\kappa(s)}$, which is integral by the definition of geometric integrality [def-pc-geometrically-irreducible]. The projection $q$ is the base change of the proper morphism $C\\to\\operatorname{Spec}k$ along $J\\to\\operatorname{Spec}k$, hence proper by [lem-weil-pbc-proper-base-change]; flatness follows on product affines because a $k$-basis of a coordinate algebra of $C$ makes its tensor product with a coordinate algebra of $J$ free over the latter. The smoothness of $C/k$ includes local finite presentation by [def-sbc-smooth-morphisms]; these local finite presentations base change to $J$ by tensoring their generators and relations. Hence $q$ is proper, flat, locally of finite presentation and has geometrically integral fibres.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-trf-smooth-component-pure-transcendental",
+    "def-sc-jacobian",
+    "def-sc-abelian-variety",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-base-change",
+    "def-pc-geometrically-irreducible",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.8, product C times J; geometric hypotheses for I 5.16 and I 5.19."
+   }
+  },
+  {
+   "text": "Put $h=f_P\\times[-1]_J$, $p:C\\times J\\to C$, and $\\mathcal A=h^*m^*L$. On the fibre at $a$, the composite with addition is $Q\\mapsto f_P(Q)-a=t_{-a}f_P(Q)$. Thus $\\mathcal A_a=f_P^*\\mathcal O_J(\\Theta^-+a)$: pull a local Cartier equation of $\\Theta^-$ back along the automorphism $t_{-a}$, so that $t_{-a}^*\\mathcal O_J(\\Theta^-)=\\mathcal O_J(t_{-a}^*\\Theta^-)$ for the associated invertible module of the effective Cartier divisor [def-pc-divisor-line-bundle], and then along $f_P$. Apply [lem-sfb-generic-theta-abel-cartier-pullback] to obtain $\\mathcal A_a\\cong\\mathcal O_C(D(a))$ for $a\\in U(k)$, where $[\\mathcal O_C(D(a)-gP)]=a$. Since $\\mathcal M_P$ represents the identity Picard family by [lem-sfb-symmetric-abel-image-geometry], its fibre at this point is $\\mathcal O_C(D(a)-gP)$. Consequently $\\mathcal A_a\\cong(\\mathcal M_P)_a\\otimes\\mathcal O_C(gP)$. The last tensor identity can be checked at each point by multiplying the local fractional generators $t^{-n}$ of the divisor sheaves; their exponents add.",
+   "uses": [
+    "lem-sfb-generic-theta-abel-cartier-pullback",
+    "lem-sfb-symmetric-abel-image-geometry",
+    "def-sc-divisor",
+    "def-pc-module-pullback",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7 and III 6.8, first paragraph and fibre calculation."
+   }
+  },
+  {
+   "text": "Consider the invertible sheaf $\\mathcal H=\\mathcal M_P\\otimes p^*\\mathcal O_C(gP)\\otimes\\mathcal A^{-1}$ on $C\\times J$. Its trivial-fibre locus $Z\\subseteq J$ is closed by [lem-sc-picard-fiber-triviality-closed], applied to $q$ with the hypotheses checked in step 1. Step 2 puts $U(k)\\subseteq Z$. The open subscheme $U$ of $J$ is smooth by [def-sbc-smooth-morphisms]: local finite presentation restricts to opens, and any lift across a first-order thickening still lands in $U$, since that thickening does not change the underlying topological space, so [lem-pc-rational-points-dense] says $U(k)$ is dense in $U$; since $U$ is dense in $J$, its closure in $J$ is $J$. Therefore $Z=J$. In particular, for every $a\\in J(k)$,\n$$\\mathcal A_a\\cong(\\mathcal M_P)_a\\otimes\\mathcal O_C(gP).$$",
+   "uses": [
+    "lem-sc-picard-fiber-triviality-closed",
+    "lem-pc-rational-points-dense",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.8(a), applying I 5.19 to the comparison sheaf."
+   }
+  },
+  {
+   "text": "At $a=0$, $\\mathcal A_0=f_P^*L$ and $(\\mathcal M_P)_0\\cong\\mathcal O_C$, so step 3 gives $f_P^*L\\cong\\mathcal O_C(gP)$. Now put $\\mathcal B=h^*L_0$. For any $a\\in J(k)$ the three tensor factors defining $L_0$ give\n$$\\mathcal B_a\\cong\\mathcal A_a\\otimes(f_P^*L)^{-1}\\otimes(L^{-1}|_{-a})_C.$$\nThe last factor is a constant one-dimensional $k$-line and is therefore isomorphic to $\\mathcal O_C$. Substitute step 3 and the identity at $0$ and cancel $\\mathcal O_C(gP)$ against its inverse. This gives $\\mathcal B_a\\cong(\\mathcal M_P)_a$ for every $a\\in J(k)$. Constant lines are retained in the global bundle; this fibre calculation does not discard a possible line bundle on $J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.8, the specialization a=0 and the three restrictions of the difference bundle."
+   }
+  },
+  {
+   "text": "Since $f_P(P)=0$, the map $h$ on $P\\times J$ lands in $0\\times J$. The stipulated identity-axis normalization of $L_0$ therefore trivializes $\\mathcal B|_{P\\times J}$. Use this trivialization and the stipulated trivialization of $\\mathcal M_P|_{P\\times J}$ to specify an isomorphism along $P\\times J$. Apply [lem-sfb-rigidified-product-seesaw] with $V=C$, $x=P$, $T=J$, $\\mathcal E=\\mathcal B$, and $\\mathcal F=\\mathcal M_P$. Step 1 supplies proper geometric integrality and smoothness of the parameter, and step 4 supplies all fibre isomorphisms. This yields an isomorphism $h^*L_0\\cong\\mathcal M_P$ extending precisely the chosen normalization along $P\\times J$.",
+   "uses": [
+    "lem-sfb-rigidified-product-seesaw"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.8(b), I 5.16 and restriction to P times J."
+   }
+  },
+  {
+   "text": "Finally $h(C\\times0)$ lies in $J\\times0$, so the other identity-axis normalization trivializes $\\mathcal B|_{C\\times0}$, as does the prescribed normalization of $\\mathcal M_P|_{C\\times0}$. The normalized isomorphism between these trivial sheaves and the restriction of the isomorphism of step 5 agree at $(P,0)$: the two axis normalizations are compatible there. Apply uniqueness in [lem-sfb-rigidified-product-seesaw] once more, with $V=C$, $T=\\operatorname{Spec}k$, and $x=P$. The two isomorphisms on $C\\times0$ are equal. Thus the global isomorphism respects both indicated normalizations.",
+   "uses": [
+    "lem-sfb-rigidified-product-seesaw"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.8(b), normalized conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-trf-smooth-component-pure-transcendental",
+  "def-sc-jacobian",
+  "def-sc-abelian-variety",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-generic-theta-abel-cartier-pullback",
+  "lem-sfb-symmetric-abel-image-geometry",
+  "def-sc-divisor",
+  "def-pc-module-pullback",
+  "lem-sc-picard-fiber-triviality-closed",
+  "lem-pc-rational-points-dense",
+  "lem-sfb-rigidified-product-seesaw",
+  "lem-weil-pbc-proper-base-change",
+  "def-pc-geometrically-irreducible",
+  "def-pc-divisor-line-bundle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III Lemma 6.8(a),(b), pp.105–106; I 5.16–5.19, p.26. Normalized uniqueness made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normalized Poincare line bundle on a curve times its Jacobian is the pullback along the Abel map times inversion of the theta difference line bundle",
+   "results": "8 hits; actual top results: AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.pullbackSpecIso_inv_fst', WeierstrassCurve.Affine.Point.toClass, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.Scheme.Pullback.carrierEquiv_symm_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jacobian autoduality calculation of the universal Poincare bundle using the theta divisor on the product of the Jacobian with itself",
+   "results": "8 hits; actual top results: WeierstrassCurve.Jacobian, Algebra.PreSubmersivePresentation.jacobian_ofAlgEquiv, Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian, MvPolynomial.universalFactorizationMapPresentation_jacobian, Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential, Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective, Algebra.PreSubmersivePresentation.baseChange_jacobian, WeierstrassCurve.Jacobian.eval_polynomialX",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Poincare\"",
+   "results": "0 hits; actual top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare|Poincaré|theta.*divisor|autoduality",
+   "results": "23 hits; actual top results: Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/Geometry/Manifold/PoincareConjecture.lean, Mathlib/Geometry/Manifold/PoincareConjecture.lean, Mathlib/Geometry/Manifold/PoincareConjecture.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|Poincare|Poincaré|AbelianVariety|theta.*divisor",
+   "results": "3 hits; actual top results: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized Poincare line bundle on a smooth projective curve times its Jacobian is the pullback of the theta difference line bundle along the Abel map times inversion",
+   "results": "8 hits; actual results: WeierstrassCurve.Affine.Point.toClass, AlgebraicGeometry.AffineSpace.isPullback_map, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.pullbackSpecIso_inv_fst', WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo",
+   "date": "2026-10-22",
+   "verdict": "no match: The actual hits concern Weierstrass coordinates, vector bundles, and scheme pullback maps; none states the theta–Picard bundle identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized universal Picard line bundle on a curve times its Jacobian is obtained from the addition difference bundle of the theta divisor by pullback along the Abel map and inversion",
+   "results": "8 hits; actual results: VectorBundle.pullback, WeierstrassCurve.Jacobian.addMap, instAddCommMonoidPullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, WeierstrassCurve.Jacobian.Point.add, ContMDiffVectorBundle.pullback, WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply, Trivialization.pullback_linear",
+   "date": "2026-10-22",
+   "verdict": "no match: The actual hits concern Weierstrass coordinates, vector bundles, and scheme pullback maps; none states the theta–Picard bundle identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Poincare\"",
+   "results": "0 hits; actual results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: The actual hits concern Weierstrass coordinates, vector bundles, and scheme pullback maps; none states the theta–Picard bundle identity."
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare|Poincaré|theta.*divisor|Abel.?Jacobi",
+   "results": "0 hits; actual results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: The actual hits concern Weierstrass coordinates, vector bundles, and scheme pullback maps; none states the theta–Picard bundle identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-polarized-jacobian-faithfulness",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: The normalized theta difference bundle pulls back to the Picard family.",
+   "via": [
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-theta-poincare-pullback",
+  "worker": "stage1",
+  "summary": "Followed Milne III 6.8: use the generic Cartier identity of III 6.7, extend the fibre comparison by the existing closed-triviality-locus theorem and rational-point density, specialize at zero, and apply a general rigidified see-saw theorem. Checked the negative-theta/inversion signs and both axis normalizations. Two new statement-only lemmas, no Lean or compiler use. Repair of the return at 55235f8dc95: rebased the retained split through the delivery tool onto current origin/sheaf-dag, re-read every cited statement, retained the still-verbatim citation witnesses, and made separatedness and finite type of J explicit in step 1 to check every parameter hypothesis of step 5. Further repair of the 2026-10-22 12:20 UTC return at 4a4c0bac952: reran the retained split on current origin/sheaf-dag (initial preflight passed at 4bfc7549775), reopened every cited statement, and explicitly cited the current smoothness definition for local finite presentation in step 1 and restriction to the smooth open in step 3. Retained both supporting statements and all logged searches; the item remains unsplit in the read-only live DAG. Repair of the 2026-10-22 16:21 UTC return at 7a70204a11d: the initial current-base dry run passed at bad5a841717. Reopened every cited current statement and retained source and searches; explicitly verified finite type of the product projection by a finite affine cover and the open-valued formal-smooth lift by the unchanged topology of a first-order thickening. The live item remains unsplit; no promotion is claimed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: The normalized theta difference bundle pulls back to the Picard family. The six steps supply this supporting theta/Picard identity by Milne III 6.8, below the fixed alteration route. The ancestor command reports None for this inherited ancestry; its node and via data are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic projective-implies-proper theorem to check the product-family hypotheses; not a replacement of any alteration step."
+   },
+   {
+    "node": "lem-trf-smooth-component-pure-transcendental",
+    "why": "Specialize the generic smooth-component geometric-integrality theorem at the rational point P (transcendence degree zero); the current unit has no separate statement supplying this geometric hypothesis."
+   },
+   {
+    "node": "lem-sc-picard-fiber-triviality-closed",
+    "why": "General proper-flat Picard triviality-locus closedness, exactly Milne I 5.19 used in III 6.8; no same-unit node states it."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Density of rational points on the smooth open U is a generic geometric tool, used only to extend the comparison by closedness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-trf-smooth-component-pure-transcendental",
+  "lem-sc-picard-fiber-triviality-closed",
+  "lem-pc-rational-points-dense"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-6e68259fd",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-6e68259fd (reviewer sub-agent of L); spot-checked: Fourth push. 55235f8d, 4a4c0bac and 7a70204a were all FIX, and each landing was then refused only for side-completion promotion. In the live and side-live clones the item is still unsplit with an empty proof, and neither new node is there, so nothing supersedes this delivery. Both new nodes are byte-identical to 7a70. The item lost the 7a70 FIX again: step 1 is reworded and argues properness of q inline, and step 2 is back to the text without def-pc-divisor-line-bundle. The step 3 rewording (U open in smooth J; a first-order thickening keeps the underlying space) is correct. I re-read Milne AV III 6.7–6.9 (pp.105–107) and I 5.16–5.19. The item is 6.8(b), and the fibre composite is t_{-a}∘f_P, so the pullback is f_P^*O_J(Θ⁻+a); the signs agree. Steps 1–6 check out: step 1 meets all five hypotheses of fiber-triviality-closed and the see-saw's parameter hypotheses; step 2 gets O(D(a)−gP) from the symmetric-abel family; step 3 gives Z = J by density of U(k); step 4's cancellation checks by hand; steps 5–6 use the see-saw's existence, then uniqueness with T = Spec k. Node generic-theta-abel-cartier-pullback is III 6.7 and holds at g = 1. Node rigidified-product-seesaw is I 5.16–5.18 and is true because T smooth makes T reduced and q_*O = O_T. Neither node duplicates an existing node or restates a clause of the item. Batch 5: none of the flagged citations is a step of the trace formula or Poincaré duality. def-sc-jacobian is a definition chain. symmetric-abel reaches only lem-trf-reduced-scheme-image, which is Stacks 056B. lem-trf-smooth-component-pure-transcendental is Stacks 057K, commutative algebra. picard-fiber-triviality-closed reaches only a definition (schematically dense open). All four are generic and accepted. The 7a70 fixes are re-applied on this head, keeping its step 3 and split_report. C1/C5: step 1 cites lem-weil-pbc-proper-base-change and def-pc-geometrically-irreducible. B3/C4: def-pc-divisor-line-bundle is cited in step 2, in the item's stmt_deps and proof_deps, and in node 1's statement and stmt_deps. proof_deps equals the union of the step uses; the statement is unchanged; the longest step is 1418 characters. No SGA source is used, and the generic tool_uses are accepted. Maintainer note: promotion loop; L must promote the side completion, and fixes/ must survive the rebuild (this fix has now been lost three times).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ThetaPoincarePullback",
+  "declaration": "AlgebraicGeometry.exists_theta_poincare_pullback_iso",
+  "declarations": [
+   "AlgebraicGeometry.negativeThetaModule",
+   "AlgebraicGeometry.thetaDifferenceModule",
+   "AlgebraicGeometry.thetaAbelPullbackModule",
+   "AlgebraicGeometry.thetaZeroAxis",
+   "AlgebraicGeometry.exists_theta_poincare_pullback_iso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ThetaPoincarePullback.lean",
+  "statement": "theorem exists_theta_poincare_pullback_iso {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsHProjective f] (g : ℕ) (hg : f.genus = g) (hgpos : 1 ≤ g) (P : Spec (.of k) ⟶ C) (hP : P ≫ f = 𝟙 _) (J : Over (Spec (.of k))) [GrpObj J] (hJ : @IsJacobian k _ C f _ _ _ (pointedAbelGeometricIntegrality f) J _) (eJ : (picardFunctorDegree f 0).obj.RepresentableBy J) (heJ : IsPicardZeroMul f eJ) (M : (pullback f J.hom).Pic) (hM : M ∈ (picardSubfunctorDegree f 0).obj (op J)) (hMnorm : M ∈ (picardFunctorNormalized f P hP).obj (op J)) (hMid : eJ.homEquiv (𝟙 J) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (op J) ⟨M, hM⟩) (hMzero : Scheme.Pic.map (baseChangeMap f η[J]) M = 1) (N : C.Pic) (hN : Nonempty ((fromSkeleton C.Modules).obj N.val ≅ P.ker.toModules)) (fP : Over.mk f ⟶ J) (hfP : ∀ (T : Over (Spec (.of k))) (Q : T ⟶ Over.mk f), ∃ (LQ : (pullback f T.hom).Pic), Nonempty ((fromSkeleton _).obj LQ.val ≅ (pullback.lift Q.left (𝟙 T.left) Q.w).ker.toModulesᵛ) ∧ ∃ hQ : LQ * Scheme.Pic.map (pullback.fst f T.hom) N ∈ (picardSubfunctorDegree f 0).obj (op T), eJ.homEquiv (Q ≫ fP) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (op T) ⟨LQ * Scheme.Pic.map (pullback.fst f T.hom) N, hQ⟩) (H : Over (Spec (.of k))) (eH : (hilbertPresheaf f (g - 1)).RepresentableBy H) (a : H ⟶ J) (ha : ∀ (T : Over (Spec (.of k))) (v : T ⟶ H), ∃ (L : (pullback f T.hom).Pic), Nonempty ((fromSkeleton _).obj L.val ≅ (eH.homEquiv v).val.toModulesᵛ) ∧ ∃ hL : L * Scheme.Pic.map (pullback.fst f T.hom) (N ^ (g - 1)) ∈ (picardSubfunctorDegree f 0).obj (op T), eJ.homEquiv (v ≫ a) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (op T) ⟨L * Scheme.Pic.map (pullback.fst f T.hom) (N ^ (g - 1)), hL⟩) (rP : (Scheme.Modules.tensorPullback (sectionBaseChange f P hP J)).obj (thetaAbelPullbackModule fP a) ≅ (Scheme.Modules.tensorPullback (sectionBaseChange f P hP J)).obj ((fromSkeleton _).obj M.val)) (r0 : (Scheme.Modules.tensorPullback (thetaZeroAxis f J)).obj (thetaAbelPullbackModule fP a) ≅ (Scheme.Modules.tensorPullback (thetaZeroAxis f J)).obj ((fromSkeleton _).obj M.val)) (hcorner : HEq (((Scheme.Modules.tensorPullbackSectionComp η[J].left (sectionBaseChange f P hP J)).hom.app (thetaAbelPullbackModule fP a)) ≫ (Scheme.Modules.tensorPullback η[J].left).map rP.hom ≫ (Scheme.Modules.tensorPullbackSectionComp η[J].left (sectionBaseChange f P hP J)).inv.app ((fromSkeleton _).obj M.val)) (((Scheme.Modules.tensorPullbackSectionComp P (thetaZeroAxis f J)).hom.app (thetaAbelPullbackModule fP a)) ≫ (Scheme.Modules.tensorPullback P).map r0.hom ≫ (Scheme.Modules.tensorPullbackSectionComp P (thetaZeroAxis f J)).inv.app ((fromSkeleton _).obj M.val))) : ∃ e : thetaAbelPullbackModule fP a ≅ (fromSkeleton _).obj M.val, (Scheme.Modules.tensorPullback (sectionBaseChange f P hP J)).map e.hom = rP.hom ∧ (Scheme.Modules.tensorPullback (thetaZeroAxis f J)).map e.hom = r0.hom",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d736db7e",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Item changed only in lean (live lean null, no parallel landing); statement verbatim; no other node changed. Clause check: alg-closed k, connected smooth H-projective curve, genus g>=1, P, Jacobian with eJ/heJ all match the reviewed symmetric-abel dependency interface. M_P pinned (degree 0, P-normalized, eJ.homEquiv(1)). fP pinned on all T by O(graph)*O(-P). a pinned by O(D)*N^(g-1), the dependency's tau clause substituted in. Theta = scheme-theoretic image via a.left.ker, O(Theta) = ker dual, L = iota^*O(Theta) = O(Theta^-) with the correct sign. L0 = mu^*L * fst^*L^v * snd^*L^v; h = (fP x iota).left. Normalizations as arbitrary axis isos rP/r0 plus an HEq corner condition: checked by hand that eta>>sectionBaseChange = P>>thetaZeroAxis = (P,0), so it is a genuine condition, and that the conclusion holds for all corner-compatible rP/r0 (global units of J are k^x, Isos on C x 0 form a k^x-torsor), i.e. it matches node step 6. Edge cases g=1 (Theta = origin), any characteristic, full universe u. No hollow defs; sorry-only proof; source/blueprint docstrings with 6 proof steps; imports match proof_deps modules; no existing theta or difference-bundle definition found. Advisory: hMzero redundant. No file changed, so no compile."
+ }
+}

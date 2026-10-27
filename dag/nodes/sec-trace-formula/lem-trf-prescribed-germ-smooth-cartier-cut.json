@@ -1,0 +1,346 @@
+{
+ "id": "lem-trf-prescribed-germ-smooth-cartier-cut",
+ "kind": "statement",
+ "title": "Realizing a prescribed fibre-regular germ as a smooth Cartier cut",
+ "statement": "Let $f:X\\to S$ be a smooth morphism of schemes [def-pc-scheme, def-sbc-smooth-morphisms], let $x\\in X$, put $s=f(x)$, and let $x_s\\in X_s$ denote the point over $x$ in the scheme-theoretic fibre [def-pc-scheme-fibre]. Write $R=\\mathcal O_{X_s,x_s}$, and let $h\\in\\mathfrak m_x\\subset\\mathcal O_{X,x}$ be a specified germ [def-weil-pbc-module-stalk, def-weil-residue-field]. Suppose its image $\\bar h\\in R$ is a nonzerodivisor, meaning that multiplication by $\\bar h$ is injective, and that the image of $dh$ in $\\Omega^1_{X/S,x}\\otimes_{\\mathcal O_{X,x}}\\kappa(x)$ is nonzero [def-sc-relative-differential-sheaf, def-weil-pbc-module-tensor-product]. For every open neighbourhood $W\\subseteq X$ of $x$ there exist an affine open neighbourhood $U=\\operatorname{Spec}H\\subseteq W$ [def-weil-open-immersion, def-weil-affine-spectrum] and $a\\in H$ with germ $a_x=h$ such that $D=\\operatorname{Spec}(H/(a))\\hookrightarrow U$ is an effective Cartier divisor [def-weil-closed-immersion, def-trf-effective-cartier-center], contains $x$, and $D\\to S$ is smooth. If $x_D\\in D$ is the unique point mapping to $x$, then the canonical local-ring map induces\n$$R/(\\bar h)\\xrightarrow{\\sim}\\mathcal O_{D_s,(x_D)_s},\\qquad [c/u]\\longmapsto [(c\\bmod a_s)/(u\\bmod a_s)],$$\nwhere the formula is read on any affine fibre chart through $x_s$, $a_s$ is the fibre equation, and denominators avoid the prime of $x_s$. This isomorphism induces the identity on the common residue field $\\kappa(x)$. The fibre closed immersion $D_s\\hookrightarrow U_s$ is also an effective Cartier divisor. No Noetherian condition on $X$ or $S$, no closed-point condition on $x_s$, and no separability hypothesis are imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057C, lemma-slice-smooth-given-element: affine realization of the given germ with smooth Cartier zero scheme; its proof uses the fibre quotient local ring. The explicit fibre-regular hypothesis is available from the preceding germ lemma.",
+  "external": [
+   {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 062Y, lemma-fibre-Cartier (3), locally principal case; relative effective Cartier divisors have effective Cartier fibres (lemma-relative-Cartier)."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-trf-effective-cartier-center",
+  "def-trf-fibre-stalk-map",
+  "def-trf-relative-differential-value"
+ ],
+ "proof": [
+  {
+   "text": "By [sbc-lem-smooth-criterion], $f$ is flat and locally of finite presentation. The definition [def-sbc-locally-finite-presentation] supplies affine neighbourhoods $V=\\operatorname{Spec}A$ of $s$ and $U_0=\\operatorname{Spec}B_0$ of $x$, with $f(U_0)\\subset V$ and $B_0$ finitely presented over $A$. Let $Q_0$ be the prime of $x$. By [lem-weil-pbc-affine-open-stalk-localization], write the specified $h$ as $r/t\\in (B_0)_{Q_0}$ with $t\\notin Q_0$. The basic-open basis [lem-weil-pbc-spec-localization-away-basic-open] gives $e\\notin Q_0$ with $D(e)\\subset U_0\\cap W$. Replace $U_0$ by $D(et)=\\operatorname{Spec}B$, $B=(B_0)_{et}$, using [lem-weil-pbc-affine-open-section-vanishing-prime]; both $e$ and $t$ are units, so $a=r/t\\in B$ has germ exactly $h$. This algebra is still finitely presented: adjoining one variable $T$ and the relation $(et)T-1$ to a finite presentation of $B_0$ presents $B$. The flat affine criterion [lem-weil-pbc-flat-morphism-affine-criterion] makes $B$ flat over $A$. Write $Q\\subset B$ for $x$.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057C, lemma-slice-smooth-given-element, initial affine shrinking; Tag 056Y, lemma-slice-given-element, initial germ representation"
+   }
+  },
+  {
+   "text": "Put $F=B\\otimes_A\\kappa(s)$. By [lem-weil-pbc-open-fibre-product], the fibre of the chosen open is open in $X_s$ through $x_s$. By [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-affine-open-stalk-localization], $(\\operatorname{Spec}B)_s=\\operatorname{Spec}F$ and $R=F_P$ for the prime $P$ of $x_s$, whose contraction is $Q$. The image of $a$ in $F_P$ is $\\bar h$. Since $h\\in\\mathfrak m_x$, its image lies in the maximal ideal of $F_P$; hence $F_P/(\\bar h)\\ne0$. Together with the assumed injective multiplication, this says the singleton list $(a)$ is regular in $F_P$, in the sense of [def-weil-pbc-regular-sequence]. Apply [lem-pur-fiber-regular-sequence-neighbourhood] to the flat finitely presented $A$-algebra $B$ and this singleton. It gives $g\\notin Q$ such that $a$ is a nonzerodivisor in $B_g$. Set $U_1=D(g)$ and $D_1=\\operatorname{Spec}(B_g/(a))$. These are the affine open and closed subscheme of [lem-weil-pbc-affine-open-section-vanishing-prime] and [def-weil-closed-immersion]. By [def-trf-effective-cartier-center], $D_1$ is effective Cartier in $U_1$. As $a\\in Q$, it contains the unique point over $x$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-regular-sequence",
+    "lem-pur-fiber-regular-sequence-neighbourhood",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-closed-immersion",
+    "def-trf-effective-cartier-center",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, proof of (1), singleton case via Tag 062Y(3)"
+   }
+  },
+  {
+   "text": "The restricted ambient map $U_1\\to S$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. View $a$ as a section of the trivial invertible module $\\mathcal O_{U_1}$. Its zero scheme is $D_1$ by [lem-pc-zero-scheme-properties]. The compatibility under restriction in [def-sc-relative-differential-sheaf] identifies its residue differential at $x$ with the specified $dh(x)$, which is nonzero. Apply [lem-zl-hypersurface-nonzero-relative-differential]: there is an open $O\\subset D_1$ containing $x$ on which $D_1\\to S$ is smooth. The closed immersion identifies $D_1$ with its subspace in $U_1$ [def-weil-closed-immersion], so choose an ambient open $N\\subset U_1$ with $O=D_1\\cap N$. Choose a basic affine open $U=D(v)\\ni x$ inside $N$ by [lem-weil-pbc-spec-localization-away-basic-open] and [lem-weil-pbc-affine-open-section-vanishing-prime]. Write $H=(B_g)_v$, and still denote the image of $a$ by $a$. Then $U\\subset W$, $a_x=h$, and $D=\\operatorname{Spec}(H/(a))$ is an open subscheme of $O$, hence smooth over $S$ by [lem-weil-pbc-smooth-restrict-open-subschemes]. Localization preserves the injection given by multiplication by $a$, by [lem-weil-pbc-localization-module-exact]; thus $D\\hookrightarrow U$ remains effective Cartier and contains $x$.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-zero-scheme-properties",
+    "def-sc-relative-differential-sheaf",
+    "lem-zl-hypersurface-nonzero-relative-differential",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-localization-module-exact",
+    "def-trf-effective-cartier-center"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057C, lemma-slice-smooth-given-element, nonzero differential and final shrinking; the differential implication is supplied by the existing hypersurface criterion"
+   }
+  },
+  {
+   "text": "All the final schemes lie over $V=\\operatorname{Spec}A$. The smooth restriction lemma gives $D\\to V$ smooth, so [sbc-lem-smooth-criterion] and [lem-weil-pbc-flat-morphism-affine-criterion] give $H/(a)$ flat over $A$. Apply [lem-weil-pbc-flat-quotient-tensor-injective] to the exact sequence $0\\to H\\xrightarrow{a}H\\to H/(a)\\to0$ and the $A$-module $\\kappa(s)$. It shows that multiplication by $a_s$ is injective on $C=H\\otimes_A\\kappa(s)$. The affine fibre-product formula and [lem-weil-pbc-tensor-quotient-base-change], applied to $H\\to C$ and $(a)\\subset H$, identify $U_s=\\operatorname{Spec}C$ and $D_s=\\operatorname{Spec}(C/(a_s))$ with their natural closed immersion. Thus [def-trf-effective-cartier-center] proves that $D_s\\hookrightarrow U_s$ is effective Cartier. The flatness of $H/(a)$ is what permits this base change of the injection.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "def-trf-effective-cartier-center"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 056Q, lemma-relative-Cartier, proof by tensoring the principal exact sequence"
+   }
+  },
+  {
+   "text": "Let $P\\subset C$ be the prime of $x_s$, and $\\widetilde P=P/(a_s)$ the corresponding prime of $C/(a_s)$. By [lem-weil-pbc-open-fibre-product], $U_s$ is open in $X_s$ through $x_s$, so [lem-weil-pbc-affine-open-stalk-localization] identifies $R=C_P$, with $\\bar h=a_s/1$. Apply [lem-weil-pbc-localization-at-prime-of-quotient] to $C$, $I=(a_s)$ and $\\widetilde P$. Its stated fraction formula gives the canonical isomorphism\n$$R/(\\bar h)=C_P/(a_s)C_P\\xrightarrow{\\sim}(C/(a_s))_{\\widetilde P}=\\mathcal O_{D_s,(x_D)_s},\\qquad[c/u]\\longmapsto[(c\\bmod a_s)/(u\\bmod a_s)].$$\nThe last equality is again the affine stalk identification. These maps are induced by the actual fibre closed immersion of the preceding step. On any other affine fibre chart the same localization-of-quotient statement applies to its equation and prime; the map is still induced by that closed immersion, so this proves the asserted chart-independent formula. The prime correspondence for the surjection $H\\to H/(a)$ in [def-weil-closed-immersion] also identifies $x_D$ uniquely.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT, proposition-localize-quotient, fraction formula; Schemes Tag 01HV, lemma-spec-sheaves, stalks"
+   }
+  },
+  {
+   "text": "Finally, for a local ring $L$ and ideal $I\\subseteq\\mathfrak m_L$, the residue field of $L/I$ is $(L/I)/(\\mathfrak m_L/I)=L/\\mathfrak m_L$: the induced map sends the class of $b$ to the same class of $b$. Apply this first to $\\mathcal O_{X,x}$ and the base maximal ideal (using [lem-sbc-scheme-fibre-stalk-quotient]), and then to $R$ and $(\\bar h)$. Apply the same fibre-stalk statement to $D\\to S$, and the closed-immersion affine local quotient description from Step 5 to $D\\hookrightarrow U$. Under all these identifications the residue fields are $\\kappa(x)$ [def-weil-residue-field]. The fraction isomorphism of Step 5 sends the residue of $c/u$ to the residue of the same fraction, so its residue-field map is the identity. No step used a closed-point, Noetherian-base or separability hypothesis.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057C, lemma-slice-smooth-given-element, fibre-local interpretation; residue-field quotient calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-sc-relative-differential-sheaf",
+  "def-trf-effective-cartier-center",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-residue-field",
+  "lem-pc-zero-scheme-properties",
+  "lem-pur-fiber-regular-sequence-neighbourhood",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-zl-hypersurface-nonzero-relative-differential",
+  "sbc-lem-smooth-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057C, lemma-slice-smooth-given-element: affine realization, Cartier shrinking, smoothness, fibre quotient. Assembly uses existing regular-fibre and nonzero-differential lemmas instead of re-expanding their proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(Cartier|hypersurface|nonzero.*differential|differential.*nonzero)",
+   "results": "{\"t\": \"2026-10-22T06:16:39Z\", \"tool\": \"grep\", \"query\": \"(Cartier|hypersurface|nonzero.*differential|differential.*nonzero)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The hits give smooth affine charts, smooth loci or extension of algebra maps. None realizes a prescribed germ as a smooth effective Cartier closed subscheme with the stated fibre quotient; the AlgebraicGeometry grep has no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local equation with nonzero differential on a smooth scheme defines a smooth effective Cartier hypersurface after shrinking",
+   "results": "{\"t\": \"2026-10-22T06:16:40Z\", \"tool\": \"leansearch\", \"query\": \"A local equation with nonzero differential on a smooth scheme defines a smooth effective Cartier hypersurface after shrinking\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.zeroLocus_singleton\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\"], \"digest\": \"0c47ea126526e81a\"}; The hits give smooth affine charts, smooth loci or extension of algebra maps. None realizes a prescribed germ as a smooth effective Cartier closed subscheme with the stated fibre quotient; the AlgebraicGeometry grep has no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-22T06:16:40Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The hits give smooth affine charts, smooth loci or extension of algebra maps. None realizes a prescribed germ as a smooth effective Cartier closed subscheme with the stated fibre quotient; the AlgebraicGeometry grep has no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed local function germ with nonzero relative differential in a smooth scheme morphism extends on an affine open to an effective Cartier divisor smooth over the base",
+   "results": "{\"t\": \"2026-10-22T06:16:44Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed local function germ with nonzero relative differential in a smooth scheme morphism extends on an affine open to an effective Cartier divisor smooth over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\"], \"digest\": \"c79853224cb9615d\"}; The hits give smooth affine charts, smooth loci or extension of algebra maps. None realizes a prescribed germ as a smooth effective Cartier closed subscheme with the stated fibre quotient; the AlgebraicGeometry grep has no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth hypersurface cut by a function with nonzero differential can be made an effective Cartier divisor near the point while preserving the prescribed germ",
+   "results": "{\"t\": \"2026-10-22T06:16:46Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth hypersurface cut by a function with nonzero differential can be made an effective Cartier divisor near the point while preserving the prescribed germ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.smoothLocus\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\"], \"digest\": \"98a0a17036800732\"}; The hits give smooth affine charts, smooth loci or extension of algebra maps. None realizes a prescribed germ as a smooth effective Cartier closed subscheme with the stated fibre quotient; the AlgebraicGeometry grep has no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|hypersurface|relativeDifferential",
+   "results": "{\"t\": \"2026-10-23T09:53:50Z\", \"tool\": \"grep\", \"query\": \"Cartier|hypersurface|relativeDifferential\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: standard-smooth charts and smooth-locus localization concern smoothness already established; germ-injective spreading requires an extra assumption. None gives the specified Cartier equation and fibre-local quotient. Local source Smooth.lean:62-103 and Smooth/Locus.lean:37-58 read.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth morphism admits a smooth principal hypersurface with a prescribed local equation having nonzero differential",
+   "results": "{\"t\": \"2026-10-23T09:53:50Z\", \"tool\": \"leansearch\", \"query\": \"A smooth morphism admits a smooth principal hypersurface with a prescribed local equation having nonzero differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.rec\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"AlgebraicGeometry.IsSmooth.mk\"], \"digest\": \"d13f10fdabf53048\"}; Read hits: standard-smooth charts and smooth-locus localization concern smoothness already established; germ-injective spreading requires an extra assumption. None gives the specified Cartier equation and fibre-local quotient. Local source Smooth.lean:62-103 and Smooth/Locus.lean:37-58 read.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-23T09:53:50Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: standard-smooth charts and smooth-locus localization concern smoothness already established; germ-injective spreading requires an extra assumption. None gives the specified Cartier equation and fibre-local quotient. Local source Smooth.lean:62-103 and Smooth/Locus.lean:37-58 read.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A function with nonzero relative differential on a smooth scheme cuts out a smooth effective Cartier divisor near a prescribed point",
+   "results": "{\"t\": \"2026-10-23T09:53:56Z\", \"tool\": \"leanfinder\", \"query\": \"A function with nonzero relative differential on a smooth scheme cuts out a smooth effective Cartier divisor near a prescribed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.isOpen_smoothLocus\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\"], \"digest\": \"4b7cb31266433903\"}; Read hits: standard-smooth charts and smooth-locus localization concern smoothness already established; germ-injective spreading requires an extra assumption. None gives the specified Cartier equation and fibre-local quotient. Local source Smooth.lean:62-103 and Smooth/Locus.lean:37-58 read.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a smooth algebra B over A and a function a whose differential is nonzero at a point, the quotient B modulo a is smooth on a neighbourhood and a is a regular element",
+   "results": "{\"t\": \"2026-10-23T09:55:49Z\", \"tool\": \"leanfinder\", \"query\": \"Given a smooth algebra B over A and a function a whose differential is nonzero at a point, the quotient B modulo a is smooth on a neighbourhood and a is a regular element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"Algebra.smoothLocus\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.Smooth\"], \"digest\": \"020548724e43df2b\"}; Read hits: standard-smooth charts and smooth-locus localization concern smoothness already established; germ-injective spreading requires an extra assumption. None gives the specified Cartier equation and fibre-local quotient. Local source Smooth.lean:62-103 and Smooth/Locus.lean:37-58 read.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-23T09:57:43Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: standard-smooth charts and smooth-locus localization concern smoothness already established; germ-injective spreading requires an extra assumption. None gives the specified Cartier equation and fibre-local quotient. Local source Smooth.lean:62-103 and Smooth/Locus.lean:37-58 read.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local germ extends to an affine neighbourhood where its zero scheme is smooth and is an effective Cartier divisor",
+   "results": "{\"t\": \"2026-10-23T09:57:47Z\", \"tool\": \"leanfinder\", \"query\": \"A local germ extends to an affine neighbourhood where its zero scheme is smooth and is an effective Cartier divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.Scheme.exists_germ_injective\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond\", \"AlgebraicGeometry.Scheme.exists_le_and_germ_injective\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero\"], \"digest\": \"f97c28893ed57b80\"}; Read hits: standard-smooth charts and smooth-locus localization concern smoothness already established; germ-injective spreading requires an extra assumption. None gives the specified Cartier equation and fibre-local quotient. Local source Smooth.lean:62-103 and Smooth/Locus.lean:37-58 read.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-separable-hypersurface-slice",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical auxiliary branch through lem-trf-relative-completion-etale-approximation: the application of the smooth immersion slice (Stacks 057G) after pointed finite-stage descent; its positive-dimensional induction step, choosing one smooth Cartier hypersurface before iterating. Specifically: old hypersurface-slice Steps 4--7: extend the germ, spread fibre regularity, apply the relative Cartier criterion, and shrink to the smooth affine zero scheme; the quotient identification from Step 8 is retained explicitly.",
+   "via": [
+    "lem-trf-smooth-separable-hypersurface-slice",
+    "lem-trf-smooth-point-etale-immersion",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-prescribed-germ-smooth-cartier-cut",
+  "worker": "stage1",
+  "group": "Q130",
+  "summary": "Kept the complete statement, represented the exact germ on a finitely presented affine chart inside the prescribed open, used the existing singleton fibre-regular lifting and hypersurface differential criteria, and proved the fibre Cartier and canonical local quotient clauses. No new nodes.",
+  "blueprint": "Historical auxiliary slicing branch recorded in blueprint.from.place: affine realization and smooth Cartier shrinking in the positive-dimensional induction (old hypersurface-slice Steps 4--7), with its Step 8 fibre quotient made explicit. The latest ancestor proof now follows contracting correspondences; this item remains the previously requested generic geometric tool.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-zero-scheme-properties",
+    "why": "Generic ingredient: Properties of the zero scheme. Used only for its stated assertion in the indicated proof step; the historical auxiliary slicing branch of this unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-fiber-regular-sequence-neighbourhood",
+    "why": "Generic ingredient: A specified regular fibre sequence lifts on a principal neighbourhood. Used only for its stated assertion in the indicated proof step; the historical auxiliary slicing branch of this unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic ingredient: The local ring of a scheme-theoretic fibre is a quotient of the local ring. Used only for its stated assertion in the indicated proof step; the historical auxiliary slicing branch of this unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-zl-hypersurface-nonzero-relative-differential",
+    "why": "Generic ingredient: Nonzero relative differential gives a smooth hypersurface point. Used only for its stated assertion in the indicated proof step; the historical auxiliary slicing branch of this unit has no replacement for this tool."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic ingredient: Smoothness by flatness and smooth fibres. Used only for its stated assertion in the indicated proof step; the historical auxiliary slicing branch of this unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-zero-scheme-properties",
+  "lem-pur-fiber-regular-sequence-neighbourhood",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-zl-hypersurface-nonzero-relative-differential",
+  "sbc-lem-smooth-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-83cff36c2",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-83cff36c2 (reviewer sub-agent of L); spot-checked: This is the first split of the Q48-created item. Statement and stmt_deps are byte-identical to the live node; there are no new nodes. I checked the proof against Stacks more-morphisms 057C (lemma-slice-smooth-given-element), and it follows the source route. Steps 1-2 spread the germ on a finitely presented flat chart Spec B ⊂ W. lem-pur-fiber-regular-sequence-neighbourhood is applied to the singleton (a): regularity in F_P holds because h is in m_x (nonzero quotient) and h-bar is injective. This gives a nonzerodivisor in B_g, so D_1 is Cartier. Step 3 identifies d(a)(x) with dh(x) ≠ 0 using the restriction compatibility of Omega. lem-zl-hypersurface-nonzero-relative-differential gives an open O of D_1 smooth over S, and the step shrinks to a basic D(v) inside an ambient N with O = D_1∩N. Localization exactness keeps a a nonzerodivisor. Step 4: smoothness gives flatness of H/(a), and flat-quotient-tensor-injective gives injectivity of a_s on C = H⊗κ(s). Tensor-quotient base change identifies D_s, so D_s is Cartier in U_s. Step 5: a_s lies in P, and localization-at-prime-of-quotient gives exactly the stated fraction formula. Step 6 is elementary and correctly marked: the residue fields are unchanged by I ⊆ m. Every cited statement was read and says what its step uses; there are no SGA citations and no long steps. Sibling lem-trf-fibre-regular-element-flat-hypersurface concludes only flat+lfp, so it is not a duplicate. Edge cases checked: A^1 with h = t, a non-closed point of A^2, and t^p in characteristic p (excluded by the dh hypothesis). No Noetherian assumption is used. I accept the 5 generic tool_uses. Two cosmetic points: the report cites citations.json and searches.jsonl, which are not in the commit, and tools/review_split.py does not resolve the symlinked chapter directories here, so it prints false 'no such node' lines. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PrescribedGermSmoothCartierCut",
+  "declaration": "AlgebraicGeometry.exists_prescribed_germ_smooth_cartier_cut",
+  "declarations": [
+   "AlgebraicGeometry.prescribedGermCut",
+   "AlgebraicGeometry.prescribedGermCutι",
+   "AlgebraicGeometry.prescribedGermFiberMap",
+   "AlgebraicGeometry.prescribedGermStalkMap",
+   "AlgebraicGeometry.exists_prescribed_germ_smooth_cartier_cut"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PrescribedGermSmoothCartierCut.lean",
+  "statement": "theorem exists_prescribed_germ_smooth_cartier_cut {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] (x : X) (h : X.presheaf.stalk x) (hh : h ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (hregular : Function.Injective (fun z : (f.fiber (f x)).presheaf.stalk (f.asFiber x) ↦ (f.fiberStalkMap x).hom h * z)) (hdiff : ∃ (V : X.Opens) (hxV : x ∈ V) (b : Γ(X, V)), X.presheaf.germ V x hxV b = h ∧ f.relativeDifferentialValue V x hxV b) (W : X.Opens) (hxW : x ∈ W) : ∃ (U : X.Opens) (hU : IsAffineOpen U) (hxU : x ∈ U) (a : Γ(X, U)), U ≤ W ∧ X.presheaf.germ U x hxU a = h ∧ IsEffectiveCartierCenter (prescribedGermCutι a) ∧ Smooth (prescribedGermCutι a ≫ hU.fromSpec ≫ f) ∧ (∃! xD : prescribedGermCut a, (prescribedGermCutι a ≫ hU.fromSpec) xD = x) ∧ IsEffectiveCartierCenter (prescribedGermFiberMap (hU.fromSpec ≫ f) (prescribedGermCutι a) (f x)) ∧ ∃ (y : ((prescribedGermCutι a ≫ hU.fromSpec) ≫ f).fiber (f x)) (hy : prescribedGermFiberMap f (prescribedGermCutι a ≫ hU.fromSpec) (f x) y = f.asFiber x) (e : ((f.fiber (f x)).presheaf.stalk (f.asFiber x) ⧸ Ideal.span {(f.fiberStalkMap x).hom h}) ≃+* (((prescribedGermCutι a ≫ hU.fromSpec) ≫ f).fiber (f x)).presheaf.stalk y), (∀ c : (f.fiber (f x)).presheaf.stalk (f.asFiber x), e (Ideal.Quotient.mk _ c) = prescribedGermStalkMap (prescribedGermFiberMap f (prescribedGermCutι a ≫ hU.fromSpec) (f x)) (f.asFiber x) y hy c) ∧ ∃ r : (((prescribedGermCutι a ≫ hU.fromSpec) ≫ f).fiber (f x)).residueField y ≃+* X.residueField x, ∀ b : X.presheaf.stalk x, r (((((prescribedGermCutι a ≫ hU.fromSpec) ≫ f).fiber (f x)).residue y) (e (Ideal.Quotient.mk _ ((f.fiberStalkMap x).hom b)))) = X.residue x b",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Canonical principal quotient, fibre pullback map and point-transported stalk map are constructed as helpers. Nonzero differential is expressed using a representative of the prescribed germ and the existing relativeDifferentialValue; the existing helper definitions are owned by def-trf-fibre-stalk-map and def-trf-relative-differential-value in stmt_deps; the accompanying theorem nodes remain in proof_deps. Equality of the quotient equivalence with the actual fibre immersion on every stalk element renders the chart-independent fraction formula. The residue equation identifies its residue map with the identity on the original residue field."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f76c03f2",
+  "group": "N6",
+  "result": "pass",
+  "note": "Re-delivery after H.2 RETURN at 012e58b75862. Lean module byte-identical (sha256 35ff583e). Item node differs from live only by stmt_deps adding new def nodes def-trf-fibre-stalk-map and def-trf-relative-differential-value, which replace the theorem nodes; the theorems stay in proof_deps. Both new nodes are existing:true owners of the plain live defs Scheme.Hom.fiberStalkMap (FibreStalkQuotient l.34) and Scheme.Hom.relativeDifferentialValue (HypersurfaceNonzeroRelativeDifferential l.151). Statements match the Lean, signatures are verbatim from `def`, sources 0HA1/057C/01UM verified, no competing owner in live, fields match landed precedent. Item mathematics re-checked against the node and Stacks 057C/062Y/00CT: exact germ, literal Spec(H/(a)), Cartier, smooth D→S, ∃! point, fibre Cartier via the actual pullback, quotient iso pinned by the actual stalk map, residue identity; no extra hypotheses. Helpers real, only the theorem proof is sorry. Report sections present. No file changed, no compile."
+ }
+}

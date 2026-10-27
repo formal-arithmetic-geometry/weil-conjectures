@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-strict-dvr-flat-tensor-sequence",
+ "kind": "statement",
+ "title": "Flat-term tensor realization of a strict DVR coefficient sequence",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and any scheme $X$ [def-weil-l-adic-coefficient-extension, def-pc-scheme]. On the small pro-etale site let $C_m=(\\mathcal O_E/\\pi^{m+1})_X$, $B=\\lim_m C_m$, and $q_n:C_{n+1}\\to C_n$ be the prescribed quotient map [def-weil-completed-integral-coefficients, def-sf-strict-dvr-coefficient-sequence-data]. Let $P$ be an unbounded cochain complex of $B$-module sheaves whose every term is flat [def-weil-sheaf-of-modules-category, def-pc-flat-sheaf-modules]. Suppose given $B$-linear $a_n:C_0\\to C_{n+1}$ and short exact sequences $0\\to C_0\\xrightarrow{a_n}C_{n+1}\\xrightarrow{q_n}C_n\\to0$ for every $n\\geq0$. Set $P_m=\\operatorname{Res}_{B\\to C_m}(P\\otimes_B C_m)$ using the recorded unrestricted scalar-extension complex and let $t_n:P_{n+1}\\to P_n$ be its prescribed quotient chain map [def-sf-unrestricted-reduction-complex-constructions, def-sf-scalar-reduction-categories-restriction]. There exist chain maps $i_n:P_0\\to P_{n+1}$ taking every local sheafified pure tensor $s\\otimes x$ in every degree to $a_n(s)\\otimes x$, and $0\\to P_0\\xrightarrow{i_n}P_{n+1}\\xrightarrow{t_n}P_n\\to0$ is degreewise short exact. No K-flatness, bound or geometric finiteness hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942, lemma-bounded, proof (1), coefficient ideal-quotient triangle; the indicated coefficient or tensor part of its construction"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-sf-strict-dvr-coefficient-sequence-data",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "def-sf-unrestricted-reduction-complex-constructions",
+  "def-sf-scalar-reduction-categories-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the already proved generic ordinaryExtension, tensorExtensionIso and normalized extensionTensorIso_tmul helpers from SuccessiveQuotientFlatTensorSequence. The object and map equations of scalarReductionExistence identify its chosen ordinary functor with ordinaryExtension. Compose the natural isomorphisms to obtain the normalized comparison C_m tensor - to recorded scalar extension followed by restriction.",
+   "uses": [
+    "lem-pe-successive-quotient-flat-tensor-sequence",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply sheaf tensor bifunctoriality to a_n and q_n, then transport through these functor isomorphisms and apply the induced functors on cochain complexes. The injection sends s tensor x to a_n(s) tensor x. The quotient sends s tensor x to q_n(s) tensor x; the unique pure-tensor characterization of the prescribed quotient transition identifies this chain map with t_n. Thus these are actual chain maps of the recorded complexes.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-sf-unrestricted-reduction-complex-constructions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor of the coefficient zero composite is zero. In each degree j, apply - tensor P^j to the assumed coefficient short exact sequence. Flatness is exactly exactness of this functor; the normalization comparisons transport its short exact image to the asserted evaluated row. No statement about pointwise flatness of sections is used.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-successive-quotient-flat-tensor-sequence",
+  "def-pur-sheaf-tensor-product",
+  "def-sf-unrestricted-reduction-complex-constructions",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942, lemma-bounded, proof (1); elementary DVR specialization, exact constant realization (Modules on Sites, lemma-constant-exact, Tag 093J), and flat tensor exactness (definition-flat, Tag 03ER)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*tensor.*[Ss]hort|[Ss]hort.*tensor.*flat",
+   "results": "{\"t\": \"2026-10-23T17:10:24Z\", \"tool\": \"grep\", \"query\": \"flat.*tensor.*[Ss]hort|[Ss]hort.*tensor.*flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\"], \"digest\": \"6c14f81a527a67ab\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: results concern ordinary coefficient modules or generic exact functors, and do not identify the prescribed constant sheaves, completed actions and normalized reduction maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact.map_of_exact\"",
+   "results": "{\"t\": \"2026-10-23T17:10:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"ShortExact.map_of_exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.map_of_exact\"], \"digest\": \"539c58d84869c6f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: results concern ordinary coefficient modules or generic exact functors, and do not identify the prescribed constant sheaves, completed actions and normalized reduction maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor a short exact sequence of coefficient module sheaves with a flat term complex, preserving the prescribed scalar extension models and all local pure tensor maps",
+   "results": "{\"t\": \"2026-10-23T17:10:26Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor a short exact sequence of coefficient module sheaves with a flat term complex, preserving the prescribed scalar extension models and all local pure tensor maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"f31e52b494f30755\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: results concern ordinary coefficient modules or generic exact functors, and do not identify the prescribed constant sheaves, completed actions and normalized reduction maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictDvrReductionTriangles",
+  "date": "2026-10-24",
+  "group": "B8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Supporting boundedness input for the residue-basis induction (Stacks 09C2(1),(2)). This node isolates the simultaneous quotient model, the explicit DVR coefficient kernel, its B-linearity, and the induced triangles (old proof steps 2-4).",
+   "via": [
+    "lem-sf-strict-dvr-reduction-triangles"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictDvrFlatTensorSequence",
+  "file": "lean/Sheaf/Paper/StrictDvrFlatTensorSequence.lean",
+  "declaration": "WeilConjectures.strictDvrFlatTensorSequence",
+  "declarations": [
+   "WeilConjectures.strictDvrFlatTensorSequence"
+  ],
+  "statement": "theorem strictDvrFlatTensorSequence\n    (P : CochainComplex (scalarReductionSource l E X) ℤ)\n    (hflat : ∀ j : ℤ, SheafOfModules.IsFlatOnSite\n      (J := AlgebraicGeometry.Scheme.ProEt.topology X)\n      (R := completedIntegralCommRingSheafUnrestricted l E X) (P.X j))\n    (a : ∀ n : ℕ, strictDvrFiniteCoefficient l E X 0 ⟶\n      strictDvrFiniteCoefficient l E X (n + 1))\n    (hseq : ∀ n : ℕ, ∃ hz : a n ≫ strictDvrCoefficientQuotient l E X n = 0,\n      (ShortComplex.mk (a n) (strictDvrCoefficientQuotient l E X n) hz).ShortExact) :\n    ∃ (i : ∀ n : ℕ, unrestrictedTowerComplex l E X 0 P ⟶\n        unrestrictedTowerComplex l E X (n + 1) P),\n      (∀ (n : ℕ) (j : ℤ) (U : X.ProEtᵒᵖ)\n        (s : (strictDvrFiniteCoefficient l E X 0).val.obj U)\n        (x : (P.X j).val.obj U),\n        ((i n).f j).val.app U (unrestrictedTowerTensorSection l E X 0 (P.X j) U s x) =\n          unrestrictedTowerTensorSection l E X (n + 1) (P.X j) U\n            ((a n).val.app U s) x) ∧\n      ∀ n : ℕ, ∃ hz : i n ≫ unrestrictedTowerTransition l E X P n = 0,\n        (∀ j : ℤ, ((ShortComplex.mk (i n) (unrestrictedTowerTransition l E X P n) hz).map\n          (HomologicalComplex.eval (scalarReductionSource l E X) (.up ℤ) j)).ShortExact)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261023T230500-L-3432650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261023T230500-L-3432650",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

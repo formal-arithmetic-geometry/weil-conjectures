@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-rational-point-tangent-unramified",
+ "kind": "statement",
+ "title": "Rational-point vanishing tangent criterion for a structure morphism",
+ "statement": "Let $k$ be a field and $p:Z\\to\\operatorname{Spec}k$ a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. Let $x:\\operatorname{Spec}k\\to Z$ satisfy $p\\circ x=\\mathrm{id}$, and let $w\\in Z$ be its image. Then $w$ is closed and the structural map $k\\to\\kappa(w)$ [def-weil-residue-field] is an isomorphism whose inverse is induced by $x$. Moreover, $p$ is unramified at $w$ [def-weil-unramified-morphism], meaning that it is unramified on some open neighbourhood of $w$, if and only if $T_{Z/k,w}=0$ [def-sc-scheme-tangent-space]. No algebraic closedness of $k$, flatness, or global finite type assumption on $Z$ is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0B2G (lemma-injective-tangent-spaces-unramified), specialized to the structure morphism over k; schemes.tex Tag 01J9 (lemma-characterize-points), for the section and its residue field."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-weil-unramified-morphism",
+  "def-sc-scheme-tangent-space"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\kappa(w)$, and let $r:k\\to K$ and $c:K\\to k$ be the field maps induced by $p$ and $x$. By the residue-field definition and composition of stalk maps, $p\\circ x=\\mathrm{id}$ gives $c\\circ r=\\mathrm{id}_k$ after quotienting the stalk maps by maximal ideals. The unital field map $c$ is injective. For $a\\in K$, $c(r(c(a)))=c(a)$, so $r(c(a))=a$. Thus $r$ is an isomorphism with inverse $c$.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-scheme-stalk-map-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J9, lemma-characterize-points and the following residue-field diagram; the section identity on local rings."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-residue-tower-local-geometry] with $C=D=Z$, with $C\\to\\operatorname{Spec}k$ equal to $p$, with $e=\\mathrm{id}_Z$, and with both chosen points equal to $w$. The morphism $p$ is locally of finite type by hypothesis, and the identity is locally of finite type directly from the affine definition. The two actual residue extensions are the isomorphism $r$ of Step 1 and the identity of $K$, hence have degree one. The cited statement therefore gives that $w$ is closed in $Z$.",
+   "uses": [
+    "lem-trf-finite-residue-tower-local-geometry",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TE, lemma-algebraic-residue-field-extension-closed-point-fibre, part (2), with the unique closed point of Spec k."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-rational-tangent-cotangent-duality] to the $k$-morphism $p:Z\\to\\operatorname{Spec}k$, using the structural residue identification of Step 1. The target local ring is $k$, so its maximal ideal is zero. Consequently the cotangent map is $u:0\\to\\mathfrak m_w/\\mathfrak m_w^2$, the target tangent space is zero, and $\\mathrm dp:T_{Z/k,w}\\to0$ is its dual. The map $\\mathrm dp$ is injective exactly when $T_{Z/k,w}=0$. By [lem-sc-dual-map-injective-iff-surjective], this is equivalent to surjectivity of $u$. Both points are closed (Step 2 and the one-point spectrum), their residue fields are $k$, and $p$ is locally of finite type. Thus [lem-sc-rational-unramified-cotangent-criterion] applies and says precisely that surjectivity of $u$ is equivalent to unramifiedness of $p$ at $w$. This proves the equivalence under exactly the stated hypotheses.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-sc-dual-map-injective-iff-surjective",
+    "lem-sc-rational-unramified-cotangent-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2G, lemma-injective-tangent-spaces-unramified, specialized to Y=S=Spec k; Tags 0B2E and 0B2F for the cotangent duality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-residue-field",
+  "lem-weil-pbc-scheme-stalk-map-composition",
+  "lem-trf-finite-residue-tower-local-geometry",
+  "def-weil-finite-type-morphism",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-dual-map-injective-iff-surjective",
+  "lem-sc-rational-unramified-cotangent-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2G specialized to the structure morphism; Schemes Tag 01J9 for the section residue maps and Morphisms Tag 01TE for closedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tangent.*unramified|unramified.*tangent|rational.*closed",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"grep\", \"query\": \"tangent.*unramified|unramified.*tangent|rational.*closed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational point of a scheme over a field is closed with residue field equal to the field, and its zero tangent space detects unramifiedness",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"leansearch\", \"query\": \"A rational point of a scheme over a field is closed with residue field equal to the field, and its zero tangent space detects unramifiedness\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"tangent\"",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"tangent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme over a field, at a rational point the tangent space vanishes if and only if the structure morphism is unramified",
+   "results": "{\"t\": \"2026-10-22T06:01:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally finite type scheme over a field, at a rational point the tangent space vanishes if and only if the structure morphism is unramified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.unramifiedLocus\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\"], \"digest\": \"d66856097cd1a29a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "grep",
+   "query": "tangentSpace|TangentSpace|unramifiedLocus_eq_univ_iff",
+   "results": "{\"t\": \"2026-10-22T06:01:57Z\", \"tool\": \"grep\", \"query\": \"tangentSpace|TangentSpace|unramifiedLocus_eq_univ_iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing Zariski tangent space at a field-valued section of a scheme locally of finite type over a field characterizes unramifiedness at that point",
+   "results": "{\"t\": \"2026-10-22T06:02:08Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing Zariski tangent space at a field-valued section of a scheme locally of finite type over a field characterizes unramifiedness at that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"Algebra.Unramified.formallyUnramified\"], \"digest\": \"b3117a50823c058b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern affine formal unramifiedness and its base change; they do not state the rational-point tangent criterion or the geometric-point test, respectively. Establishing those identifications and the source-point lifting is additional mathematics."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme over a field, at a rational point the tangent space vanishes if and only if the structure morphism is unramified",
+   "results": "{\"t\": \"2026-10-23T04:16:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally finite type scheme over a field, at a rational point the tangent space vanishes if and only if the structure morphism is unramified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.unramifiedLocus\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\"], \"digest\": \"d66856097cd1a29a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme rational-point tangent/unramified equivalence is absent; the returned formal-unramified algebra and scheme definitions do not supply the tangent comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"tangent\"",
+   "results": "{\"t\": \"2026-10-23T04:17:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"tangent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme rational-point tangent/unramified equivalence is absent; the returned formal-unramified algebra and scheme definitions do not supply the tangent comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tangent.*unramified|unramified.*tangent|rational.*closed",
+   "results": "{\"t\": \"2026-10-23T04:17:25Z\", \"tool\": \"grep\", \"query\": \"tangent.*unramified|unramified.*tangent|rational.*closed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme rational-point tangent/unramified equivalence is absent; the returned formal-unramified algebra and scheme definitions do not supply the tangent comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational point of a scheme over a field is closed with residue field equal to the field, and its zero tangent space detects unramifiedness",
+   "results": "{\"t\": \"2026-10-23T04:17:31Z\", \"tool\": \"leansearch\", \"query\": \"A rational point of a scheme over a field is closed with residue field equal to the field, and its zero tangent space detects unramifiedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"IsLocalRing.closedPoint\", \"Algebra.unramifiedLocus\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.FormallyUnramified\", \"IsLocalRing.closedPoint.congr_simp\", \"AlgebraicGeometry.Scheme.evaluation.congr_simp\"], \"digest\": \"c7c70d3f96b0ec15\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme rational-point tangent/unramified equivalence is absent; the returned formal-unramified algebra and scheme definitions do not supply the tangent comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing Zariski tangent space at a field-valued section of a scheme locally of finite type over a field characterizes unramifiedness at that point",
+   "results": "{\"t\": \"2026-10-23T04:21:07Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing Zariski tangent space at a field-valued section of a scheme locally of finite type over a field characterizes unramifiedness at that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"Algebra.unramifiedLocus\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"Algebra.IsUnramifiedAt\", \"AlgebraicGeometry.formallyUnramified_iff\", \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\"], \"digest\": \"3af2cfe63afbdfb8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme rational-point tangent/unramified equivalence is absent; the returned formal-unramified algebra and scheme definitions do not supply the tangent comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-tangent-unramified",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Unramified morphisms detected by geometric fibre tangent spaces; re-split of lem-sfb-geometric-tangent-unramified, old steps 1--2: closed rational section and tangent/cotangent calculation",
+   "via": [
+    "lem-sfb-geometric-tangent-unramified",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rational-point-tangent-unramified",
+  "worker": "stage1",
+  "summary": "Proved the structural residue-field isomorphism by the section identity, deduced closedness from the existing finite-residue tower lemma at the identity tower, and specialized the existing rational cotangent criterion using tangent/cotangent duality and dualMap_injective_iff. No new nodes or additional hypotheses.",
+  "blueprint": "Realizes the rational-section and tangent/cotangent input in the existing blueprint.from.place: the rigidity/unramified Isom prerequisite of det-thm-sf-ctf-stability-direct-images, proof (3), through lem-sfb-geometric-tangent-unramified. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-residue-tower-local-geometry",
+    "why": "Generic finite-residue closedness, specialized with the identity as the second arrow; the unit supplies no separate point-closedness lemma."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Generic rational tangent/cotangent comparison, specialized to the structure morphism; it implements the prescribed Stacks 0B2G rigidity route."
+   },
+   {
+    "node": "lem-sc-rational-unramified-cotangent-criterion",
+    "why": "Generic rational-point cotangent criterion for a locally finite type morphism, applied to p; it implements the same Stacks 0B2G criterion without duplicating it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-residue-tower-local-geometry",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-rational-unramified-cotangent-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-55911404e",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-55911404e (reviewer sub-agent of L); spot-checked: I read the item and its full split in full: 3 steps, no new nodes. The statement, stmt_deps and blueprint are byte-identical to live, where the item is unsplit with an empty proof. There is no repair note, no live supersession, no SGA and no cycle (the 347-node closure does not contain the item). Step 1 is elementary: lem-weil-pbc-scheme-stalk-map-composition(b) gives x^#∘p^#=id; on residue fields c∘r=id, c is injective, so r∘c=id and the inverse is induced by x. Step 2: lem-trf-finite-residue-tower-local-geometry with C=D=Z and e=id (locally of finite type by the affine definition); both residue extensions have degree 1, so w is closed, matching Stacks 01TE(2) with Spec k's single closed point. Step 3: lem-sc-rational-tangent-cotangent-duality makes dp:T_{Z/k,w}→0 the dual of u:0→m_w/m_w^2. lem-sc-dual-map-injective-iff-surjective gives T=0 ⇔ u surjective, and lem-sc-rational-unramified-cotangent-criterion gives u surjective ⇔ unramified at w; its hypotheses hold (both points closed, residue fields k, locally of finite type), and its 'unramified at' means an open neighbourhood, as the item says. Sources checked: varieties 0B2G, morphisms 01TE, schemes 01J9, with tags confirmed in the tags file. Edge cases: Spec k, A^1 at 0, k[t]/t^2 in all characteristics, an infinite disjoint union of Spec k, Spec L with no section, empty Z, the doubled-origin line. No duplicate in the DAG: the group-identity criterion, the closed-in-fibre lemma and the tangent/differential duality each state something else. The citer lem-sfb-geometric-tangent-unramified step 1 uses exactly the item's conclusions. Tool uses accepted, each used as stated: trf-finite-residue-tower (closedness), sc-rational-tangent-cotangent-duality and sc-rational-unramified-cotangent-criterion (the Stacks 0B2G route). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalPointTangentUnramified",
+  "declaration": "AlgebraicGeometry.rationalPoint_tangent_unramified",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalPointTangentUnramified.lean",
+  "statement": "theorem rationalPoint_tangent_unramified (k : Type u) [Field k] (Z : Scheme.{u}) (p : Z ⟶ Spec (.of k)) [LocallyOfFiniteType p] (x : Spec (.of k) ⟶ Z) (hx : x ≫ p = 𝟙 _) : IsClosed ({x (IsLocalRing.closedPoint k)} : Set Z) ∧ (∃ e : k ≃+* Z.residueField (x (IsLocalRing.closedPoint k)), e.toRingHom = (StructureSheaf.toStalk k (p (x (IsLocalRing.closedPoint k))) ≫ p.stalkMap (x (IsLocalRing.closedPoint k)) ≫ Z.residue (x (IsLocalRing.closedPoint k))).hom ∧ e.symm.toRingHom = (Z.descResidueField (Scheme.stalkClosedPointTo x)).hom) ∧ ((∃ U : Z.Opens, x (IsLocalRing.closedPoint k) ∈ U ∧ IsUnramified (U.ι ≫ p)) ↔ Subsingleton (schemeTangentSpace k Z p (x (IsLocalRing.closedPoint k))))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17c734042",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Checked every clause against the node and the 5 stmt_dep records (Scheme, LocallyOfFiniteType, residueField, IsUnramified, schemeTangentSpace). Section p∘x=id is hx : x ≫ p = 𝟙; closedness of the image point is stated; the residue iso is pinned to the canonical toStalk≫stalkMap≫residue map (same rX as lem-sc-rational-tangent-cotangent-duality), with inverse pinned to descResidueField(stalkClosedPointTo x), i.e. the map induced by x. Unramified at w = ∃ open U ∋ w with IsUnramified (U.ι ≫ p); T=0 as Subsingleton. No extra hypotheses; the common universe u is forced by Spec(.of k) and the recorded tangent-space API. Node copy differs from live only by the lean field; lean.statement appears verbatim in the file; existing:false is right. Proof is sorry only, no defs, docstrings carry the source tags, blueprint id and 3 proof steps. Worker report and second reading are present. Not recompiled (no change). No findings."
+ }
+}

@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-soft-abelian-sheaf-acyclic",
+ "kind": "statement",
+ "title": "Soft abelian sheaves on paracompact spaces are acyclic",
+ "statement": "Let $X$ be a paracompact Hausdorff topological space, where paracompact means that every open cover admits a locally finite open refinement. Let $G$ be a sheaf of abelian groups on its open-subset site [def-weil-pbc-sites-and-cohomology]. Assume that $G$ is soft: for every closed subset $S\\subseteq X$, the restriction map $\\Gamma(X,G)\\to\\Gamma(S,i^{-1}G)$ is surjective, where $i:S\\hookrightarrow X$ is inclusion with the subspace topology and $i^{-1}G$ is the sheaf of locally represented germs of $G$ along $S$. Then $H^r(X,G)=0$ for every integer $r>0$, where $H^r=R^r\\Gamma(X,-)$ is computed in abelian sheaves [def-weil-pbc-sites-and-cohomology].",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. IV §4, Definition (4.9), Proposition (4.14), Theorem (4.15), printed pp.204--205, applied to the closed subset X itself."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Fix $X$. We prove the assertion for all soft abelian sheaves on $X$, by induction on the positive degree. The opens of $X$ form a set-sized site (intersections give the covering pullbacks). By [lem-weil-pbc-site-sheaves-enough-injectives], embed an arbitrary soft $G$ into an injective abelian sheaf $I$. In that abelian category take the cokernel $Q$, giving $0\\to G\\to I\\to Q\\to0$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 01DP (theorem-sheaves-injectives); Demailly IV (4.15), dimension-shifting assembly"
+   }
+  },
+  {
+   "text": "The sheaf $I$ is flasque [def-sc-zariski-flasque]. To apply [lem-sc-ringed-space-injective-restriction-surjective], give $X$ the sheaf $\\mathbf Z_X$ of locally constant integer-valued functions. Every abelian sheaf has a unique $\\mathbf Z_X$-module structure: on an open where the integer function is $m$, act by repeated addition by $m$, and glue. Every abelian-sheaf morphism respects this action, since it respects integer multiples locally. Thus the module and abelian-sheaf categories have the same objects and morphisms under this identification; the extension property defining injectivity is identical. Apply the cited restriction theorem to $I$ as an injective $\\mathbf Z_X$-module, for every pair of nested opens.",
+   "uses": [
+    "def-sc-zariski-flasque",
+    "lem-sc-ringed-space-injective-restriction-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EA (lemma-injective-restriction-surjective), equivalently Tag 09SX (lemma-injective-flasque), for the ringed space (X, Z_X)"
+   }
+  },
+  {
+   "text": "For any closed $S\\subseteq X$ and $s\\in\\Gamma(S,I|_S)$, [lem-sfb-closed-section-neighborhood-extension] gives an open $U\\supseteq S$ and $t\\in I(U)$ restricting to $s$. Flasqueness [def-sc-zariski-flasque] gives $\\widetilde t\\in I(X)$ restricting to $t$. Its restriction to $S$ is $s$. Hence $I$ is soft. This proves the entire flasque-to-soft implication directly from the cited extension statement.",
+   "uses": [
+    "lem-sfb-closed-section-neighborhood-extension",
+    "def-sc-zariski-flasque"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Corollary (4.8) and Example (4.10), printed p.204"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-soft-kernel-closed-sections] to $0\\to G\\to I\\to Q\\to0$. The two first sheaves are soft, so $Q$ is soft. Taking the closed subset $S=X$ in its lifting assertion shows that $\\Gamma(X,I)\\to\\Gamma(X,Q)$ is surjective.",
+   "uses": [
+    "lem-sfb-soft-kernel-closed-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Proposition (4.14), printed p.205"
+   }
+  },
+  {
+   "text": "Global sections is additive and left exact, and $H^q=R^q\\Gamma(X,-)$ [def-weil-pbc-sites-and-cohomology]. Apply [lem-weil-pbc-derived-functor-long-exact] to the short exact sequence. Since $I$ is flasque, [lem-sc-topological-flasque-acyclic] gives $H^q(X,I)=0$ for all $q>0$. The segment $\\Gamma(X,I)\\to\\Gamma(X,Q)\\to H^1(X,G)\\to H^1(X,I)=0$ and Step 4 give $H^1(X,G)=0$. For $q\\ge1$ the segment $0=H^q(X,I)\\to H^q(X,Q)\\xrightarrow{\\delta^q}H^{q+1}(X,G)\\to H^{q+1}(X,I)=0$ makes $\\delta^q$ bijective.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sc-topological-flasque-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Theorem (4.15), assembled as in the proof of (4.4); long exact sequence IV (3.5); Stacks Tag 09SY (lemma-flasque-acyclic)"
+   }
+  },
+  {
+   "text": "The base degree $1$ holds for every soft $G$ by Step 5. Suppose degree $q\\ge1$ vanishes for every soft sheaf on $X$. For an arbitrary soft $G$, its quotient $Q$ from Steps 1--4 is soft, so $H^q(X,Q)=0$ by the induction hypothesis. The bijection of Step 5 gives $H^{q+1}(X,G)=0$. Induction proves the assertion for every positive integer degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Theorem (4.15), explicit induction underlying the resolution argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-sc-zariski-flasque",
+  "lem-sc-ringed-space-injective-restriction-surjective",
+  "lem-sfb-closed-section-neighborhood-extension",
+  "lem-sfb-soft-kernel-closed-sections",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sc-topological-flasque-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Demailly IV §4, Theorem (4.15), using Proposition (4.14); explicit injective dimension-shifting expansion of the proof indicated by comparison with (4.4). Source read online; local PDF remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every soft abelian sheaf on a paracompact Hausdorff space is acyclic for derived global sections",
+   "results": "OK 8 hits: CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.H, instAbelianCondensedMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.SheafOfTypes.balanced, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.Sheaf.cohomologyPresheaf. ",
+   "date": "2026-10-24",
+   "verdict": "no match: definitions of sheaf cohomology and flasque-sheaf lemmas do not prove acyclicity of soft sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "soft|flabby|flasque|fine.sheaf|sheaf.*fine",
+   "results": "OK 17 hits: Mathlib/CategoryTheory/Sites/Subsheaf.lean, Mathlib/CategoryTheory/Sites/InducedTopology.lean, Mathlib/CategoryTheory/Sites/InducedTopology.lean, Mathlib/CategoryTheory/Sites/InducedTopology.lean, Mathlib/CategoryTheory/Sites/InducedTopology.lean, Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean.  Source directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-24",
+   "verdict": "no match: definitions of sheaf cohomology and flasque-sheaf lemmas do not prove acyclicity of soft sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "soft|flabby|flasque|fine.sheaf|sheaf.*fine",
+   "results": "OK 16 hits: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Skyscraper.lean.  Source directory Mathlib/Topology/Sheaves",
+   "date": "2026-10-24",
+   "verdict": "no match: definitions of sheaf cohomology and flasque-sheaf lemmas do not prove acyclicity of soft sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A soft sheaf of abelian groups on a paracompact Hausdorff topological space has zero positive degree sheaf cohomology",
+   "results": "OK 8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.instAddCommGroupH, smoothSheafCommGroup, CategoryTheory.sheafIsAbelian, TopCat.Sheaf.forget, Condensed.ofSheafCompHaus. ",
+   "date": "2026-10-24",
+   "verdict": "no match: definitions of sheaf cohomology and flasque-sheaf lemmas do not prove acyclicity of soft sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"acyclic\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: definitions of sheaf cohomology and flasque-sheaf lemmas do not prove acyclicity of soft sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Soft abelian sheaves are acyclic for the right derived global sections functor on a paracompact space",
+   "results": "OK 8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.H, instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.SheafOfTypes.balanced. ",
+   "date": "2026-10-24",
+   "verdict": "no match: definitions of sheaf cohomology and flasque-sheaf lemmas do not prove acyclicity of soft sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bsoft\\b|flasque.*acyclic|acyclic.*flasque",
+   "results": "OK 1 hits: Mathlib/Tactic/Linter/Style.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: sheaf cohomology definitions and general categorical properties do not assert soft-sheaf acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A soft sheaf of abelian groups on a paracompact Hausdorff space is acyclic for global sections",
+   "results": "OK 8 hits: CategoryTheory.Sheaf.Γ, CategoryTheory.Sheaf.H, TopCat.Presheaf.IsSheaf, AlgebraicGeometry.SheafedSpace.Γ, CategoryTheory.sheafIsAbelian, TopCat.Sheaf.forget, AlgebraicGeometry.SheafedSpace.Γ_obj, CategoryTheory.Sheaf.instIsGrothendieckAbelian. ",
+   "date": "2026-10-24",
+   "verdict": "no match: sheaf cohomology definitions and general categorical properties do not assert soft-sheaf acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"soft\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: sheaf cohomology definitions and general categorical properties do not assert soft-sheaf acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every soft abelian sheaf on a paracompact Hausdorff space has vanishing higher cohomology",
+   "results": "OK 8 hits: CategoryTheory.Sheaf.H, instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact. ",
+   "date": "2026-10-24",
+   "verdict": "no match: sheaf cohomology definitions and general categorical properties do not assert soft-sheaf acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology vanishes in positive degrees for a soft sheaf on a paracompact space",
+   "results": "OK 8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, DerivedCategory.isZero_of_isGE, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.cohomologyPresheafFunctor, DerivedCategory.isZero_of_isLE, CochainComplex.IsKInjective. ",
+   "date": "2026-10-24",
+   "verdict": "no match: sheaf cohomology definitions and general categorical properties do not assert soft-sheaf acyclicity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-function-modules-acyclic",
+  "date": "2026-10-24",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: IV §4, discussion following Definition (4.4), printed p.203 (locally compact spaces with countable base are paracompact); Example (4.12), Theorem (4.15), Lemma (4.18), Corollary (4.19), printed pp.204--205. The soft-ring argument applies to the sheaf of complex-valued smooth functions and does not use a uniform dimension bound. Supporting input for smooth-module acyclicity: IV §4, Definition (4.9), Proposition (4.14), Theorem (4.15), printed pp.204--205, applied to the closed subset X itself.",
+   "via": [
+    "lem-sfb-smooth-function-modules-acyclic",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-soft-abelian-sheaf-acyclic",
+  "worker": "stage1",
+  "summary": "Expanded Demailly IV (4.15) into an injective dimension-shifting proof, retaining the exact statement. Used the existing ringed-space injective restriction theorem via the explicit locally constant integer action, and the existing closed-section neighborhood-extension and flasque-acyclicity nodes. Created only Proposition (4.14), a genuine lifting/quotient lemma, as a statement-only child. Searched the current DAG, latest blueprint, project Lean and Mathlib; recorded actual searches and exact citation quotes.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) auxiliary chain through smooth-module and Dolbeault acyclicity. Realizes the soft-sheaf input from Demailly IV (4.15); the latest blueprint direct-image compactification route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ringed-space-injective-restriction-surjective",
+    "why": "Generic injective-sheaf restriction theorem, specialized to the locally constant integer sheaf; the unit has no separate restriction theorem."
+   },
+   {
+    "node": "lem-sc-topological-flasque-acyclic",
+    "why": "Generic flasque acyclicity on arbitrary topological spaces, used only for the middle term in dimension shifting."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic long exact sequence of right derived functors, specialized to global sections; this homological-algebra tool does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ringed-space-injective-restriction-surjective",
+  "lem-sc-topological-flasque-acyclic",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-666980ada",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-666980ada (reviewer sub-agent of L); spot-checked: The item is still unsplit live, with the same statement and stmt_deps, so no other group has superseded it; this is a first split, not a re-split. Demailly is not available locally, so the item and the new node were checked against the structure of Demailly IV (4.9), (4.14), (4.15), together with Stacks 01EA, 09SX and 09SY. Steps: (1) enough injectives on the opens site, then a cokernel; (2) ℤ_X-module identification, and the restriction node needs only a ringed space, not a locally ringed one, which matters because the stalks of ℤ_X are ℤ; (3) flasque implies soft through the neighborhood-extension node, with the same paracompact Hausdorff hypotheses; (4) the new node gives that Q is soft and, with S=X, that Γ(I)→Γ(Q) is onto; (5) the long exact sequence plus flasque acyclicity, with H^0=Γ by def-weil-pbc-sites-and-cohomology (2); (6) the induction is set up properly, base case q=1 and step q to q+1 over all soft sheaves. New node lem-sfb-soft-kernel-closed-sections is statement-only and self-contained, and is the (4.14) lifting lemma, strictly smaller than the item rather than a restatement. A scan of the DAG for soft/flabby/paracompact found no duplicate. Small cases checked: a point, S empty, S=X, A=0, and the constant sheaf ℤ on [0,1] (not soft, so the hypothesis does real work). Accepted tool_uses: injective restriction, flasque acyclicity, derived long exact sequence. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SoftAbelianSheafAcyclic",
+  "declaration": "TopCat.Sheaf.subsingleton_H'_top_of_soft",
+  "file": "lean/Sheaf/Topology/SoftAbelianSheafAcyclic.lean",
+  "statement": "theorem subsingleton_H'_top_of_soft {X : TopCat.{u}} [ParacompactSpace X] [T2Space X] [HasExt.{u} (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})] (G : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (hG : ∀ (S : Set X), IsClosed S → Function.Surjective (((pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨(Subtype.val : S → X), continuous_subtype_val⟩)).unit.app G).hom.app (op (⊤ : Opens X)))) (r : ℕ) (hr : 0 < r) : Subsingleton (CategoryTheory.Sheaf.H' G r ⊤)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f41360c2a",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Clause-by-clause match: ParacompactSpace+T2Space, abelian sheaf on Opens site, ∀ closed S, subspace inclusion, softness = surjectivity of canonical pullbackPushforwardAdjunction unit at op ⊤ (codomain Γ(S,i⁻¹G), Mathlib sheafified inverse image), conclusion Subsingleton (Sheaf.H' G r ⊤) for r>0 per def-weil-pbc-sites-and-cohomology. HasExt.{u}/universe convention identical to landed IsFlasque.subsingleton_H'_top. Snapshot node differs from live only in lean; live item has no Lean record; statement verbatim in file. Edge cases X/S empty, S=X, G=0, r=1 fine. No defs, sorry only, docstrings with Demailly IV §4 place and blueprint tag, proof steps present; no existing soft predicate in project/Mathlib. Report has Worker report and Second reading sections. No findings; no file changed, no compile."
+ }
+}

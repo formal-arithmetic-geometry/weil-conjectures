@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-space-reduced-generic-flat-finite-presentation",
+ "kind": "statement",
+ "title": "Generic flatness and local finite presentation over a reduced algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Suppose $Y$ is reduced: every etale scheme chart of $Y$ has local rings without nonzero nilpotents. Suppose $f$ is of finite type, meaning quasi-compact [def-sfb-stack-qcqs-morphism] and locally of finite type on etale scheme charts [def-weil-finite-type-morphism]. Then there exists an open subspace $D\\subseteq Y$ [def-a1-space-open-subspace] whose underlying subset is dense in the atlas topology [def-a1-space-point-topology], such that $X\\times_YD\\to D$ is flat and locally of finite presentation, tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. No quasi-separatedness, Noetherianity, irreducibility, or quasi-compactness of $Y$ is assumed; the empty base and empty source are allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06QS (proposition-generic-flatness-reduced), the morphism conclusion, obtained by taking the structure sheaf in its finite-type module clause."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-qcqs-morphism",
+  "def-weil-finite-type-morphism",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-reduced-algebraic-space",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale atlas $V=\\coprod_i V_i\\to Y$ with each $V_i$ affine, using [lem-a1-space-affine-etale-cover]. Its components are etale over $Y$: their inclusions are open immersions, hence etale, and etale maps compose. Each $V_i$ is reduced by the hypothesis on the etale charts of $Y$. Put $X_i=X\\times_YV_i$. This is an algebraic space. Since $V_i$ is quasi-compact and $f$ is quasi-compact in the stated base-change sense, $X_i$ is quasi-compact. Choose any scheme atlas of $X_i$ and apply [lem-trf-space-qc-finite-affine-atlas-refinement] to obtain a representable surjective etale atlas $U_i\\to X_i$ with $U_i$ affine. This argument uses no quasi-separatedness of $X_i$ or $Y$.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-sfb-stack-qcqs-morphism",
+    "def-trf-algebraic-space",
+    "lem-trf-space-qc-finite-affine-atlas-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06QS (proposition-generic-flatness-reduced), proof, scheme-atlas and affine-base reductions; only the morphism conclusion."
+   }
+  },
+  {
+   "text": "The composite $g_i:U_i\\to V_i$ is locally of finite type: it is a presentation diagram for $f$, with both chart maps etale, so the etale source-and-target criterion applies to this property. Here [lem-sfb-scheme-etale-source-target-properties] supplies that locality and [lem-sfb-space-etale-presentation-property-criterion] identifies its extension with the chart meaning in the statement. Apply [lem-sfb-reduced-affine-generic-flat-finite-presentation] to $g_i$, whose source and reduced target are affine. It gives a dense open $D_i\\subseteq V_i$ such that $E_i=U_i\\times_{V_i}D_i\\to D_i$ is flat and locally of finite presentation. There is no need to assume that the entire atlas $V$ or the entire base $Y$ is quasi-compact.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-reduced-affine-generic-flat-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06QS (proposition-generic-flatness-reduced), proof, scheme-atlas and affine-base reductions; only the morphism conclusion."
+   }
+  },
+  {
+   "text": "The composite $D_i\\hookrightarrow V_i\\to Y$ is representable etale. Its image is an open subspace $W_i\\subseteq Y$ by [lem-a1-etale-scheme-map-open-image]. Let $D$ be the open subspace corresponding to $\\bigcup_i|W_i|$, using the open-subspace correspondence of [lem-a1-space-etale-open-image]. The maps $D_i\\to D$ are etale and jointly surjective: on every scheme test over $D$ their pullbacks are exactly their pullbacks over $Y$, and their point images cover $|D|$. The base changes $X\\times_YD_i\\to X\\times_YD$ form an etale covering family. Each $E_i\\to X\\times_YD_i$ is the base change of the surjective etale map $U_i\\to X_i$, so it is surjective etale. Consequently the composites $E_i\\to X_D=X\\times_YD$ are etale and jointly surjective. All these fibre products and etale base changes are covered by the two cited space fibre-product and scheme-test lemmas.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-etale-scheme-map-open-image",
+    "lem-a1-space-etale-open-image",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06QS (proposition-generic-flatness-reduced), proof, scheme-atlas and affine-base reductions; only the morphism conclusion."
+   }
+  },
+  {
+   "text": "We verify descent without assuming the charts $D_i\\to D$ are quasi-compact. Let $P$ be flatness or local finite presentation, and take any presentation diagram $A\\to X_D$, $B\\to D$, $h:A\\to B$ with $A,B$ schemes and both chart maps etale. Set $B_i=B\\times_DD_i$ and $C_i=A\\times_{X_D}E_i$, which are schemes by representability. The maps $C_i\\to E_i$ and $B_i\\to D_i$ are etale base changes of the given charts. There is a map $C_i\\to B_i$ induced by its maps to $A\\to B$ and $E_i\\to D_i$. The square with $E_i\\to D_i$ commutes. Since that last map has $P$, the scheme source-and-target lemma gives $P(C_i\\to B_i)$. The family $C_i\\to A$ is jointly surjective etale, and $B_i\\to B$ is etale. For every $a\\in A$ choose a point above it in one $C_i$; this supplies exactly the pointwise etale source-and-target test (iii) for $h$. Thus $h$ has $P$. Every presentation diagram has $P$, so [lem-sfb-space-etale-presentation-property-criterion] proves that $X_D\\to D$ is flat and locally of finite presentation. This uses the pointwise locality statement, not a quasi-compact descent assertion.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06QS (proposition-generic-flatness-reduced), proof, scheme-atlas and affine-base reductions; only the morphism conclusion."
+   }
+  },
+  {
+   "text": "Finally let $O\\subseteq|Y|$ be a nonempty open subset. Surjectivity of the atlas gives an $i$ for which the inverse image $O_i\\subseteq V_i$ is nonempty; it is open by continuity of the atlas point map. Density of $D_i$ gives a point of $O_i\\cap D_i$, whose image lies in $O\\cap|D|$. Hence every nonempty open meets $|D|$, proving density. If $Y$ is empty, take $D=Y$; the same conclusion is vacuous and the empty morphism has both properties by the empty pointwise chart test above. If $X$ is empty, the construction and the locality test also allow empty source charts. No irreducible-component decomposition or finiteness of the cover has been used.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06QS (proposition-generic-flatness-reduced), proof, image of a dense atlas open and unions of dense local opens; elementary density verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-sfb-stack-qcqs-morphism",
+  "def-trf-algebraic-space",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-reduced-affine-generic-flat-finite-presentation",
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-a1-space-etale-open-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06QS (proposition-generic-flatness-reduced), proof; omit module clauses, expand the etale descent and density arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism of algebraic spaces to a reduced algebraic space is flat and locally of finite presentation over a dense open subspace",
+   "results": "{\"t\": \"2026-10-23T14:55:11Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism of algebraic spaces to a reduced algebraic space is flat and locally of finite presentation over a dense open subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"63a934b69786734a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LeanFinder returns scheme finite-presentation, flatness and universal-openness declarations; Loogle returns scheme descent and openness; LeanSearch returns ring/module flatness; grep finds no generic-flatness theorem. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean lines 36-49, FinitePresentation.lean lines 42-65 and UniversallyOpen.lean lines 146-150. These provide predicates or assume flatness, and do not prove generic flatness for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact locally finite type map of algebraic spaces to a reduced base there is a dense open where the map is flat and locally finitely presented",
+   "results": "{\"t\": \"2026-10-23T14:56:48Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact locally finite type map of algebraic spaces to a reduced base there is a dense open where the map is flat and locally finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"0002e5d7d3bc455e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LeanFinder returns scheme finite-presentation, flatness and universal-openness declarations; Loogle returns scheme descent and openness; LeanSearch returns ring/module flatness; grep finds no generic-flatness theorem. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean lines 36-49, FinitePresentation.lean lines 42-65 and UniversallyOpen.lean lines 146-150. These provide predicates or assume flatness, and do not prove generic flatness for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T14:55:53Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\"], \"digest\": \"2c507d8605ee08b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LeanFinder returns scheme finite-presentation, flatness and universal-openness declarations; Loogle returns scheme descent and openness; LeanSearch returns ring/module flatness; grep finds no generic-flatness theorem. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean lines 36-49, FinitePresentation.lean lines 42-65 and UniversallyOpen.lean lines 146-150. These provide predicates or assume flatness, and do not prove generic flatness for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*flat|flat.*generic|GenericFlat",
+   "results": "{\"t\": \"2026-10-23T14:55:52Z\", \"tool\": \"grep\", \"query\": \"generic.*flat|flat.*generic|GenericFlat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LeanFinder returns scheme finite-presentation, flatness and universal-openness declarations; Loogle returns scheme descent and openness; LeanSearch returns ring/module flatness; grep finds no generic-flatness theorem. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean lines 36-49, FinitePresentation.lean lines 42-65 and UniversallyOpen.lean lines 146-150. These provide predicates or assume flatness, and do not prove generic flatness for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic flatness over a reduced algebraic space without a noetherian hypothesis",
+   "results": "{\"t\": \"2026-10-23T14:55:53Z\", \"tool\": \"leansearch\", \"query\": \"Generic flatness over a reduced algebraic space without a noetherian hypothesis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat\", \"Module.flat_of_isLocalized_span\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.FaithfullyFlat.toFlat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"Module.Flat.of_isLocalizedModule\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"345af8d37ce7f97c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LeanFinder returns scheme finite-presentation, flatness and universal-openness declarations; Loogle returns scheme descent and openness; LeanSearch returns ring/module flatness; grep finds no generic-flatness theorem. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean lines 36-49, FinitePresentation.lean lines 42-65 and UniversallyOpen.lean lines 146-150. These provide predicates or assume flatness, and do not prove generic flatness for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*flat|flat.*generic|GenericFlat",
+   "results": "{\"t\": \"2026-10-23T21:09:13Z\", \"tool\": \"grep\", \"query\": \"generic.*flat|flat.*generic|GenericFlat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and finite-presentation predicates and locality, smooth-implies-flat, and flat-implies-going-down do not assert generic flatness. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:36-49, FinitePresentation.lean:42-65, UniversallyOpen.lean:146-150; none supplies a dense good open over a reduced base. The RingTheory grep hits are generic polynomial notation in FreeCommRing.lean:40,83, not generic freeness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic flatness over a reduced algebraic space without noetherianity",
+   "results": "{\"t\": \"2026-10-23T21:09:14Z\", \"tool\": \"leansearch\", \"query\": \"Generic flatness over a reduced algebraic space without noetherianity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat\", \"Module.FaithfullyFlat.toFlat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.flat_of_isLocalized_span\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"Module.Flat.of_isLocalizedModule\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"96c5f28b8d2dd35e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and finite-presentation predicates and locality, smooth-implies-flat, and flat-implies-going-down do not assert generic flatness. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:36-49, FinitePresentation.lean:42-65, UniversallyOpen.lean:146-150; none supplies a dense good open over a reduced base. The RingTheory grep hits are generic polynomial notation in FreeCommRing.lean:40,83, not generic freeness."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T21:09:14Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\"], \"digest\": \"2c507d8605ee08b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and finite-presentation predicates and locality, smooth-implies-flat, and flat-implies-going-down do not assert generic flatness. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:36-49, FinitePresentation.lean:42-65, UniversallyOpen.lean:146-150; none supplies a dense good open over a reduced base. The RingTheory grep hits are generic polynomial notation in FreeCommRing.lean:40,83, not generic freeness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism of algebraic spaces to a reduced base is flat and locally finitely presented after restriction to a dense open",
+   "results": "{\"t\": \"2026-10-23T21:09:16Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism of algebraic spaces to a reduced base is flat and locally finitely presented after restriction to a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\"], \"digest\": \"a463c34b0d19c153\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and finite-presentation predicates and locality, smooth-implies-flat, and flat-implies-going-down do not assert generic flatness. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:36-49, FinitePresentation.lean:42-65, UniversallyOpen.lean:146-150; none supplies a dense good open over a reduced base. The RingTheory grep hits are generic polynomial notation in FreeCommRing.lean:40,83, not generic freeness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact locally finite type map of algebraic spaces to a reduced algebraic space there is a dense open with flat locally finite presentation",
+   "results": "{\"t\": \"2026-10-23T21:09:17Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact locally finite type map of algebraic spaces to a reduced algebraic space there is a dense open with flat locally finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\"], \"digest\": \"acd6a3ea4fb694ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and finite-presentation predicates and locality, smooth-implies-flat, and flat-implies-going-down do not assert generic flatness. Read Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:36-49, FinitePresentation.lean:42-65, UniversallyOpen.lean:146-150; none supplies a dense good open over a reduced base. The RingTheory grep hits are generic polynomial notation in FreeCommRing.lean:40,83, not generic freeness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+  "date": "2026-10-23",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited supporting chain below latest det-thm-sf-ctf-stability-direct-images, proof (3), via the spectral-point-space prerequisite: Tag 06RC proof, application of Tag 06QS to the stabilizer over a reduced atlas.",
+   "via": [
+    "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+    "lem-sfb-qc-stack-spectral-point-space",
+    "lem-sfb-finite-type-stack-closed-specialization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-reduced-generic-flat-finite-presentation",
+  "worker": "stage1",
+  "summary": "Preserved the exact statement of Tag 06QS. Reduced through affine etale charts to one new reduced-affine-scheme generic-flatness input (052B), then wrote out etale descent via arbitrary presentation diagrams and the density argument; reused the existing chart, atlas, topology and fibre-product nodes. Searched current project Lean, DAG, current blueprint and Mathlib; no exact attachment or leaf.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md, (3), open direct-image preservation; inherited supporting chain through the reduced-inertia generic open (Tag 06RC), whose proof uses 06QS. Realizes the chart and affine reductions of this supporting generic-flatness assertion. The inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor confirms None); retain that ancestry and fill exact supporting places.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic Affine etale cover by a disjoint union of affines used for the atlas or chart descent in Tag 06QS; no replacement of the constructible direct-image route."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic Scheme tests and comparison maps for representable etale morphisms used for the atlas or chart descent in Tag 06QS; no replacement of the constructible direct-image route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings used for the atlas or chart descent in Tag 06QS; no replacement of the constructible direct-image route."
+   },
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic Finite affine refinement of an atlas of a quasi-compact algebraic space used for the atlas or chart descent in Tag 06QS; no replacement of the constructible direct-image route."
+   },
+   {
+    "node": "lem-a1-etale-scheme-map-open-image",
+    "why": "Generic An etale scheme map to an algebraic space is surjective etale onto an open image used for the atlas or chart descent in Tag 06QS; no replacement of the constructible direct-image route."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic Open images of representable etale morphisms of algebraic spaces used for the atlas or chart descent in Tag 06QS; no replacement of the constructible direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-69f94505e",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-69f94505e (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged against live; stmt_deps kept; proof_deps = union of uses) and the one new node in full, against Stacks 06QS (spaces-morphisms, proposition-generic-flatness-reduced, statement, proof and qs warning) and 052B (morphisms, same label). The item's statement is the pre-existing one, which is part of 06QS with F=O. It does not add quasi-separatedness. Steps: (1) affine atlas ⊔V_i→Y, with V_i reduced chartwise; X_i quasi-compact via def-sfb-stack-qcqs-morphism, since the identity atlas of the affine V_i is quasi-compact; then 03H6 refinement to an affine U_i. (2) Presentation criterion (1) with lft local on source-and-target gives g_i lft; the new node gives a dense D_i. (3) Open images W_i, D=∪W_i by the order-preserving correspondence; D_i→D étale jointly surjective; I checked E_i = base change of U_i→X_i, so E_i→X_D is a covering. (4) For an arbitrary presentation diagram, B_i and C_i are schemes, the square clause transfers P, and pointwise test (iii) gives P(h); no qc/fpqc descent is used. (5) Density from continuity and surjectivity of the atlas: correct, and elementary. New node lem-sfb-reduced-affine-generic-flat-finite-presentation: true (052B with F=O; affine lft ⇒ finite type); edge cases Spec 0, empty U, Spec(k×k) and infinitely many minimal primes all hold; all notions are cited; it is statement only. It is not a restatement of the item, and it duplicates no existing node: the 052A/051T integral nodes and the trf irreducible/Noetherian nodes differ, and no other reduced dense-open node exists. The Mathlib searches cover 3+ tool kinds, and my own grep found no generic flatness. Batch-5: the 7 flagged cites (a1 affine-etale-cover, trf representable-etale-scheme-tests, trf qc-finite-affine-atlas-refinement, sfb scheme-etale-source-target, sfb presentation-criterion, a1 etale-scheme-map-open-image, a1 space-etale-open-image) are generic space foundations (03FX/03EC/03H6/04R1/03MJ/06NF/03BZ) reached only via def-trf-algebraic-space or lem-trf-smooth-composition; they are not trace-formula or Poincaré steps, so I accept them. I accept the 6 declared tool_uses as generic black boxes. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceReducedGenericFlatFinitePresentation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_dense_open_flat_locallyOfFinitePresentation_of_reduced",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceReducedGenericFlatFinitePresentation.lean",
+  "statement": "theorem exists_dense_open_flat_locallyOfFinitePresentation_of_reduced {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hred : IsReduced Y) (hft : MapIsFiniteType f) : ∃ D : OpenSubspace Y, Dense (pointImage D.val.ι) ∧ ∀ (U V : Over S) (a : yoneda.obj U ⟶ Limits.pullback f.hom.hom D.val.ι) (b : yoneda.obj V ⟶ D.val.toFunctor) (h : U ⟶ V), IsEtale a → IsEtale b → a ≫ Limits.pullback.snd f.hom.hom D.val.ι = yoneda.map h ≫ b → Flat h.left ∧ LocallyOfFinitePresentation h.left",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54c46bee4",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of d374997996f3: the theorem stmt_dep lem-sfb-space-etale-presentation-property-criterion and its import are dropped, and the chart test is written inline exactly as option (b) prescribed (MapIsLocally body applied to pullback.snd f.hom.hom D.val.ι). Node vs live: only lean and stmt_deps differ; the added stmt_deps def-sfb-reduced-algebraic-space and def-sfb-space-morphism-properties are landed definition nodes used directly; proof_deps unchanged; lean.statement verbatim. Clauses checked against the node and Stacks 06QS (spaces-morphisms.tex l.6354): IsReduced Y, MapIsFiniteType f, OpenSubspace Y, Dense (pointImage D.val.ι), Flat ∧ LocallyOfFinitePresentation on every compatible étale chart pair; no extra hypotheses; empty Y, empty X and empty charts covered; single universe u. No duplicate in lean/Sheaf or Mathlib; one sorry theorem; docstrings carry source, blueprint id and proof steps; no line over 100 characters. No files changed, not recompiled."
+ }
+}

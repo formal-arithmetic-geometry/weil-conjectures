@@ -16,7 +16,12 @@
   "sk-def-sfb-module-objects",
   "sk-def-sfb-derived-categories",
   "sk-def-sfb-derived-tensor-hom",
-  "sk-def-sfb-constructible"
+  "sk-def-sfb-constructible",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-modobj-extension",
+  "def-pd-section-module-operations-data",
+  "def-derived-cochain-counit",
+  "def-sfb-modobj-extend-restrict-adjunction"
  ],
  "proof": [
   {
@@ -27,7 +32,8 @@
     "sk-def-sfb-derived-tensor-hom",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-sfb-adic-constructibility-predicate-comparison"
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "lem-pe-internal-section-tensor-comparison"
    ],
    "elementary": false,
    "source": {
@@ -251,7 +257,8 @@
    "uses": [
     "lem-sfb-open-closed-internal-hom-formulas",
     "sk-def-sfb-derived-tensor-hom",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-derived-right-exact-tensor-comparison"
    ],
    "elementary": false,
    "source": {
@@ -318,7 +325,9 @@
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-zl-condensed-cover-restriction-conservative",
   "lem-sfb-rational-closed-support-constructible",
-  "lem-sfb-open-closed-internal-hom-formulas"
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-derived-right-exact-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -773,5 +782,48 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-f9010c0eb (reviewer sub-agent of L); spot-checked: I read the item's 19 steps and all 44 cited statements in full. There are no new nodes, and the costalk node returned at NH 093966b5 has been withdrawn. The statement, stmt_deps and created fields are byte-equal to live, and the live item is still unsplit. There is no repair note, nothing in the delivery is on the dropped list, and SGA is not cited. Circularity: a BFS over the snapshot DAG shows that none of the 44 cited nodes reaches the item, and the old circle (open-scalar -> proper-scalar -> topology-comparison -> defect -> item) is no longer cited. The inputs are existing split nodes with their own routes, not WANTED restatements of an ancestor: continuous-algcl finiteness and constructible-tor, the qbar generators, normed geometric fibres, the countable orthogonal basis, countable endomorphism-module reconstruction, the tame-boundary comparison and the tame-pair generators. Steps 6-9 prove the proper B-comparison with no proper base change for B. Proper finiteness makes each fibre H finite-dimensional over Omega, so H is countably dimensional over E. Continuous E-endomorphisms of Omega act A-linearly on B by postcomposition. The idempotent e = eta.rho identifies eH with the fibre of Rf_*P, and the reconstruction gives v(x)h -> v.eta(h), which is exactly the fibre of beta. The target is bounded first by degree-zero conservativity, and only then is bounded-constructible conservativity applied to beta. I checked the reconstruction node itself: the kernel is killed by the functionals phi_mu, and surjectivity follows from the almost-disjoint family. Steps 10-12 give the open case from jq=pj', mate pasting, the tame boundary and thick generation with retracts. Steps 13-14 run from beta to kappa, the non-circular direction. Steps 15-19 are the formal finite-free and internal-Hom formulas, evaluation normalization and cone induction; all hypotheses were checked. Edge cases checked: r=0, H=0, Z empty, Z=X, and the case Y -> Spec kbar with P=E. Batch 5: every flagged reach is a generic foundation (module/ringed-topos comparison, exact-square compositors, section push/pull), a definition (geometric morphism, SNC boundary), field algebra (09H0) or point sheafification. None is a trace-formula or Poincare-duality step, so all are accepted. Notes for the maintainer: (1) steps 6-9 independently prove the statement of lem-sfb-continuous-algcl-proper-scalar-comparison; I recommend re-routing P and O to this argument to break the old circle, after which the item can cite them. (2) det-sf-comp-continuous-algcl-heart-finiteness step 1 ('compute the coefficient comparison termwise on the finite model, extend to the full continuous coefficient') is a terse E5-kind coefficient-change step behind the cited finiteness node. That is the existing node's own obligation; the item cites only its statement. No fixes were needed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormAlgClInternalHomBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.normAlgClInternalHomBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.normHomModules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normHomScalar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normHomDerivedScalar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normHomScalarCounit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.NormHomScalarReassociation",
+   "AlgebraicGeometry.ProEtale.CondensedRing.NormHomScalarNormalized",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normHomComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.NormHomComparisonNatural",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normAlgClHomCoefficientMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normAlgClInternalHomBaseChange"
+  ],
+  "file": "lean/Sheaf/Paper/NormAlgClInternalHomBaseChange.lean",
+  "statement": "theorem normAlgClInternalHomBaseChange (ℓ : ℕ) [Fact ℓ.Prime] (p : ℕ) [Fact p.Prime] (_hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (E : IntermediateField ℚ_[ℓ] Ω) [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] : ∃ d : NormHomScalarReassociation X (normAlgClHomCoefficientMap ℓ Ω E), NormHomScalarNormalized X (normAlgClHomCoefficientMap ℓ Ω E) d ∧ (∀ K N : DerivedCategory (normHomModules X (Profinite.continuousMapRingObjOfUniverse.{u, u} E)), constantModelBoundedConstructible (Profinite.continuousMapRingObjOfUniverse.{u, u} E) X K → constantModelBoundedConstructible (Profinite.continuousMapRingObjOfUniverse.{u, u} E) X N → IsIso (normHomComparison X (normAlgClHomCoefficientMap ℓ Ω E) d K N)) ∧ NormHomComparisonNatural X (normAlgClHomCoefficientMap ℓ Ω E) d",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Returned-head repair: the normalization uses ModuleRingedComparison.internalPureTensor from def-pd-section-module-operations-data and the canonical derivedCochainCounit from def-derived-cochain-counit, instantiated with the actual leftDerivedFunctorCounit. Both are existing definition-owned constructions; no comparison theorem conclusion or arbitrary counit is used. Mod.extendRestrictAdjunction is cited through its owning definition node. The comparison theorems occur only in proof_deps. The theorem signature and natural-language statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f31f12cb",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Re-delivery of returned head 35a4402870a2; both faults fixed. Fault 1: internalPureTensor (abbrev in def-pd-section-module-operations-data, same body as comparison_internalTmul at the same universes), derivedCochainCounit (def-derived-cochain-counit) applied to the actual leftDerivedFunctorCounit, and Mod.extendRestrictAdjunction cited through def-sfb-modobj-extend-restrict-adjunction. No theorem node in stmt_deps; the three comparison theorems are proof deps only. Fault 2: a genuine independent Second reading by Q39 is present and covers the ownership check. Item node vs side-live: only lean and stmt_deps differ (5 landed def owners added, none removed); statement and proof byte-equal, no statement_change, live item has no lean record. Lean statement verbatim in the file, one sorry. Module unchanged apart from the two renames, so the earlier substance check stands; I re-checked hypotheses (no completeness or flatness), all-continuous A/B, actual derived extendScalars, constructibility on K and N, the evaluation transpose, the pinned reassociation and both variances. Edge cases admitted. No compile (no FIX); the delivery's dry run passed preflight and compile at 08:36 UTC. Advisory: the inherited stmt_dep sk-def-sfb-qlbar-condensed is unused in Lean."
  }
 }

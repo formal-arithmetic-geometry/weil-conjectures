@@ -1,0 +1,235 @@
+{
+ "id": "lem-pur-integral-scalar-tensor-level-exists-unique",
+ "kind": "statement",
+ "title": "Unique generator-normalized finite scalar tensor chain map",
+ "statement": "Let $\\ell$ be prime, let $E,L/\\mathbf Q_\\ell$ be finite extensions and let $\\iota:E\\to L$ be a $\\mathbf Q_\\ell$-embedding. For $F=E,L$, fix its valuation ring $\\mathcal O_F$ and a uniformizer $\\varpi_F$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, work on its small pro-etale site [def-weil-pbc-proetale-site], small relative to the universe of module sheaves. Put $R_{F,W}=\\varprojlim_{m\\geq1}(\\mathcal O_F/\\varpi_F^m)_W$ for $F=E,L$, with the canonical quotient projections [def-weil-completed-integral-coefficients]. Use the compatible quotient coefficient maps induced by the embedding [def-weil-integral-scalar-extension], and hence $j_W:R_{E,W}\\to R_{L,W}$. Let $S_W$ be ordinary, uncompleted change of rings $M\\mapsto R_{L,W}\\otimes_{R_{E,W}}M$, sheafified, applied termwise to cochain complexes with differential $1\\otimes d$ [def-pur-change-of-rings-complex, def-pur-sheaf-tensor-product]. Write $1\\otimes x$ for the canonical sheafification-unit tensor section, not an assertion that arbitrary sections are globally pure [def-sfb-scalar-extension-pure-tensor-section]. Let $W$ be any scheme and $n\\in\\mathbf N$, indexing quotient exponent $n+1$. For $F=E,L$ and cochain complexes $P,Q$ of $R_{F,W}$-modules, put $P_{F,n+1}=(\\mathcal O_F/\\varpi_F^{n+1})_W\\otimes_{R_{F,W}}P$ and\n$$T^F_{W,n}(P,Q)=\\operatorname{Res}_{\\pi^F_{n+1}}\\operatorname{Tot}^{\\oplus}(P_{F,n+1}\\otimes_{(\\mathcal O_F/\\varpi_F^{n+1})_W}Q_{F,n+1}),$$\nwith the sheafified tensor, direct-sum totalization, and differential $d(x\\otimes y)=dx\\otimes y+(-1)^p x\\otimes dy$ for $x$ of degree $p$ [lem-pur-integral-operations-well-defined, def-pc-tensor-complex-sheaves, def-pc-sheaf-restrict-scalars]. There exists exactly one natural transformation of bifunctors\n$$\\beta_n:S_W\\circ T^E_{W,n}\\longrightarrow T^L_{W,n}\\circ(S_W\\times S_W)$$\nwhose components are $R_{L,W}$-linear chain maps and which for every $P,Q$, degrees $p,q$, object $U\\in W_{\\mathrm{proet}}$ and sections $x\\in P^p(U)$, $y\\in Q^q(U)$ satisfies, in the $(p,q)$ summand of degree $p+q$,\n$$\\beta_n(P,Q)^{p+q}\\bigl(1\\otimes((1\\otimes x)\\otimes(1\\otimes y))\\bigr)=(1\\otimes(1\\otimes x))\\otimes(1\\otimes(1\\otimes y)).$$\nNaturality is with respect to every pair of chain maps, without flatness, K-flatness, boundedness, constructibility or invertibility of $\\ell$ on $W$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product (Tag 03EK), change-of-rings formula for the sheafified tensor product and its algebraic counterparts; direct-sum totalization as in sites-cohomology.tex lemma-pullback-tensor-product. Project specialization: IntegralOperationsScalarComparisonModels.lean:228-240 and normalization:201-225.",
+  "note": "Retained original parent proof step 2 (H1, 2026-10-26), as construction material for this unsplit statement, not a completed proof: For pullback at each finite quotient level, use the scalar tensor and inverse-image adjunction universal properties to define the map sending 1 tensor f*(1 tensor x) to f*(1 tensor (1 tensor x)). The balanced relations, restriction maps, and differentials commute with this formula. Pure tensors and the inverse-image adjunction force uniqueness and naturality. For tensor at each level, the balanced tensor universal property gives 1 tensor ((1 tensor x) tensor (1 tensor y)) mapping to (1 tensor (1 tensor x)) tensor (1 tensor (1 tensor y)). The signed total differential commutes by bidegree, and the coproduct universal property gives the total chain map and its uniqueness. These are exactly the two pre-existing holes; no new comparison assertion is introduced."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-change-of-rings-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-scalar-extension-pure-tensor-section",
+  "lem-pur-integral-operations-well-defined",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-integral-scalar-extension",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Take the normalized natural chain transformation constructed by lem-pur-integral-scalar-tensor-level-construction. Its functors and generator equation are literally those in the present statement.",
+   "uses": [
+    "lem-pur-integral-scalar-tensor-level-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a second normalized transformation, use natural-transformation extensionality and degreewise chain-map extensionality. The scalar adjunction first reduces equality to maps from the finite tensor complex. The finite_tensor_ext lemma from the existing tensor-level-reduction module tests them on the (p,q) total-tensor summands with p+q equal to the chosen degree, and on the two reduction unit generators. The scalar adjunction unit formula identifies these values with the normalization of the two transformations. Their equality on every such generator proves equality of the chain maps. Thus the constructed transformation is unique.",
+   "uses": [
+    "lem-pur-integral-scalar-tensor-level-reduction",
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-tensor-level-construction",
+  "lem-pur-integral-scalar-tensor-level-reduction",
+  "def-pur-cochain-coefficient-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ, 03D7 and 03EL; normalized finite construction followed by adjunction/generator extensionality.",
+  "note": "N4, 2026-10-27: complete Lean proof; existence factored into a proved construction module for compile time, uniqueness uses existing proved private extensionality helpers. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(pullback|extendScalars)|extendScalars.*tensor|changeOfRings",
+   "results": "{\"t\": \"2026-10-27T06:07:31Z\", \"tool\": \"grep\", \"query\": \"tensor.*(pullback|extendScalars)|extendScalars.*tensor|changeOfRings\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean\"], \"digest\": \"29bffbd564b64867\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique natural scalar extension comparison for the total tensor complex of two sheaves of modules reduced modulo a uniformizer power",
+   "results": "{\"t\": \"2026-10-27T06:07:31Z\", \"tool\": \"leansearch\", \"query\": \"Unique natural scalar extension comparison for the total tensor complex of two sheaves of modules reduced modulo a uniformizer power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.hom_ext\", \"IsLocalization.moduleLid\", \"IsLocalization.moduleTensorEquiv\", \"PiTensorProduct.instIsScalarTower\", \"TensorProduct.isScalarTower\", \"PiTensorProduct.isScalarTower'\", \"TensorProduct.isScalarTower_left\", \"PresheafOfModules.Sheafify.instSubsingletonSMulCandidate\"], \"digest\": \"5a477908d01be71e\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"t\": \"2026-10-27T06:07:32Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with sheaf tensor product and direct sum totalization as a unique natural transformation determined on pure tensors",
+   "results": "{\"t\": \"2026-10-27T06:07:33Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars commutes with sheaf tensor product and direct sum totalization as a unique natural transformation determined on pure tensors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.mapFree\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"SheafOfModules.ιFree_freeMap_assoc\"], \"digest\": \"569e2099d803e9d9\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "grep",
+   "query": "hom_ext|pullback|tensor",
+   "results": "{\"t\": \"2026-10-27T06:07:49Z\", \"tool\": \"grep\", \"query\": \"hom_ext|pullback|tensor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"43b36f0fd16cc9c8\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-27T06:07:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"extendScalars\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LieAlgebra.ExtendScalars.instBracketTensorProduct\"], \"digest\": \"e0a36c84cd2a1bfe\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique natural scalar extension chain map between finite quotient total tensor complexes of sheaves of modules determined on pure tensors",
+   "results": "{\"t\": \"2026-10-27T06:27:39Z\", \"tool\": \"leanfinder\", \"query\": \"Unique natural scalar extension chain map between finite quotient total tensor complexes of sheaves of modules determined on pure tensors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"ModuleCat.ExtendScalars.hom_ext\", \"ModuleCat.MonoidalCategory.tensor_ext\", \"ModuleCat.ExtendScalars.hom_ext_iff\", \"PresheafOfModules.Sheafify.instSubsingletonSMulCandidate\", \"PresheafOfModules.Sheafify.SMulCandidate.mk.inj\", \"ModuleCat.MonoidalCategory.tensor_ext₃'\", \"ModuleCat.MonoidalCategory.tensor_ext₃\"], \"digest\": \"6fe3ee0b1690a638\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: only scalar-unit extensionality, sheafification, ordinary module tensors or generic total-complex constructors; none states the complete specified quotient-level natural chain transformation with its uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(extendScalars|changeOfRings)|extendScalars.*tensor|hom_ext",
+   "results": "{\"t\": \"2026-10-27T06:27:56Z\", \"tool\": \"grep\", \"query\": \"tensor.*(extendScalars|changeOfRings)|extendScalars.*tensor|hom_ext\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\"], \"digest\": \"e56a5687eb0381f0\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: only scalar-unit extensionality, sheafification, ordinary module tensors or generic total-complex constructors; none states the complete specified quotient-level natural chain transformation with its uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars comparison for tensor complexes after reduction modulo an ideal is uniquely determined by unit tensor generators",
+   "results": "{\"t\": \"2026-10-27T06:27:57Z\", \"tool\": \"leansearch\", \"query\": \"Extension of scalars comparison for tensor complexes after reduction modulo an ideal is uniquely determined by unit tensor generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.hom_ext\", \"Algebra.Generators.extendScalars.congr_simp\", \"Algebra.Generators.extendScalars\", \"Algebra.Generators.extendScalars_val\", \"Algebra.TensorProduct.basisAux\", \"IsLocalization.moduleLid\", \"Algebra.Generators.toExtendScalars\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\"], \"digest\": \"f06571a329f95d35\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: only scalar-unit extensionality, sheafification, ordinary module tensors or generic total-complex constructors; none states the complete specified quotient-level natural chain transformation with its uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"t\": \"2026-10-27T06:27:57Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: only scalar-unit extensionality, sheafification, ordinary module tensors or generic total-complex constructors; none states the complete specified quotient-level natural chain transformation with its uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"desc\"",
+   "results": "{\"t\": \"2026-10-27T06:30:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapBifunctor\\\", \\\"desc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.GradedObject.mapBifunctorMapObjDesc\", \"CategoryTheory.GradedObject.ι_mapBifunctorMapObjDesc\", \"CategoryTheory.GradedObject.ι_mapBifunctorMapObjDesc_assoc\", \"CategoryTheory.GradedObject.mapBifunctor₁₂BifunctorDesc\", \"CategoryTheory.GradedObject.mapBifunctorBifunctor₂₃Desc\", \"CategoryTheory.GradedObject.ι_mapBifunctor₁₂BifunctorDesc\", \"CategoryTheory.GradedObject.ι_mapBifunctorBifunctor₂₃Desc\", \"CategoryTheory.GradedObject.ι_mapBifunctor₁₂BifunctorDesc_assoc\"], \"digest\": \"13eff64c9b2bcb4b\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: only scalar-unit extensionality, sheafification, ordinary module tensors or generic total-complex constructors; none states the complete specified quotient-level natural chain transformation with its uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear map of sheaves with a commutative coefficient square extends to a chain map on unbounded direct sum total tensor complexes",
+   "results": "{\"t\": \"2026-10-27T06:30:05Z\", \"tool\": \"leanfinder\", \"query\": \"Bilinear map of sheaves with a commutative coefficient square extends to a chain map on unbounded direct sum total tensor complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.tensorHom\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.ιMapBifunctor\", \"HomologicalComplex.mapBifunctorMap\"], \"digest\": \"b19164dd377695c7\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: only scalar-unit extensionality, sheafification, ordinary module tensors or generic total-complex constructors; none states the complete specified quotient-level natural chain transformation with its uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-scalar-finite-comparison-models",
+  "date": "2026-10-27",
+  "group": "NG"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.scalarTensorLevel_existsUnique",
+   "module": "Sheaf.Paper.IntegralOperationsScalarComparisonModels",
+   "file": "lean/Sheaf/Paper/IntegralOperationsScalarComparisonModels.lean",
+   "line": 234,
+   "state": "sorry_here",
+   "note": "Existing sorried declaration; assignment from released 2026-10-27 re-split order. Separate node for parallel stage-3 work; no Lean source moved in stage 1."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph: compatibility with reduction modulo pi_E^n and extension of scalars is a theorem (sk-prop-scalar-six). Finite tensor representative construction retained in lem-pur-integral-scalar-finite-comparison-models, original parent proof step 2.",
+   "via": [
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-integral-scalar-tensor-level-exists-unique",
+  "worker": "stage1",
+  "summary": "NG: unchanged statement, eight proof steps, no new nodes. Constructed the comparison from the ordinary scalar adjunction and sheaf tensor bilinear universal property, totalized via coproducts, checked the signed differential and all-chain-map naturality, and proved uniqueness using local quotient coefficient lifts and locally surjective reduction units. Existing source declaration has sorry; no attachment. Repaired the missing blueprint anchor from the recorded parent origin. Inherited Mathlib searches are preserved; new searches are logged separately.",
+  "blueprint": "Latest def-weil-derived-pullback-tensor-hom final coefficient-compatibility paragraph, through the finite comparison model parent; realizes the retained finite tensor argument of original parent step 2. The latest blueprint does not define integral operations by inverse limits; this item only constructs the specified auxiliary finite representative comparison and does not change that route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "The general ordinary sheafified scalar adjunction supplies both construction and equality detection; no derived or flatness assertion is used."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "The generic sheaf Hom=Bilin bijection constructs each bidegree map and detects its equality; the compatibility unit has no replacement for this site-level universal property."
+   },
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "The generic comparison permits application of the set-valued local-section theorem to a constant ring sheaf on the pro-etale site."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "The generic local-representative theorem lifts quotient coefficients locally; it is not an etale-only statement."
+   },
+   {
+    "node": "lem-sfb-integral-tensor-quotient-epimorphism",
+    "why": "The generic locally surjective quotient tensor unit reduces the uniqueness test to original P,Q sections; it is not a coefficient-heart route replacement."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NG-602d82fbf",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-602d82fbf (reviewer sub-agent of L); spot-checked: PASS: no new nodes and no fixes written; full notes in review.md. Statement and stmt_deps unchanged: byte-identical to the live sheaf-dag copy, which I only read; only the split fields and the blueprint anchor changed. blueprint.from.node was null and is now the parent's def-weil-derived-pullback-tensor-hom; via is consistent. The statement matches Lean scalarTensorLevel_existsUnique and scalarTensorLevelNormalization (IntegralOperationsScalarComparisonModels.lean:198-241); its proof is sorry, so nothing to attach. Each step checked against the statements it cites. Step 1: rho j = h pi from iota_m and rho_m in def-weil-integral-scalar-extension and the sectionwise limit. Step 2: u_M from the ordinary-adjunction Hom formula, u_M(a tensor x) = h(a)(1 tensor (1 tensor x)). Step 3: the Hom=Bilin bijection gives c^{p,q}; A-bilinear through h, B commutative. Step 4: Res_pi of the A-coproduct is the R-coproduct (both are the abelian sheafification of the sectionwise sum), then the j-adjunction gives beta^k. Step 5: differentials and the (-1)^p sign match on both sides; 1 tensor d_C on S tensor C. Step 6: naturality and the normalization at s=a=b=1. Step 7: pi locally surjective via 00WK local sections plus the underlying-sets lemma, a lift a in O_E and the sectionwise limit (no Mittag-Leffler); hypotheses of lem-sfb-integral-tensor-quotient-epimorphism verified. Step 8: A-linearity of the adjuncts by local lifts of coefficients, then Hom=Bilin, coproduct and adjunction injectivity; global pure tensors are never assumed. No cycle: none of the 560 nodes reachable from the item's dependencies is the item. No duplicate: the tensor-clause node and def-pod-scalar-completion-tensor-comparisons state other maps. Edge cases: P=0, n=0 (exponent 1), unbounded degrees, and the ramified case Q_l(sqrt l), where the map exists because varpi_E^{n+1}O_L is in varpi_L^{n+1}O_L but is not an isomorphism; the item claims only a chain map. Accepted generic tool_uses: lem-pur-sheaf-ring-coefficient-ordinary-adjunction, lem-pc-sites-sheaf-tensor-bilinear-universal, lem-pc-sites-sheafification-underlying-sets, lem-weil-pbc-site-sheafification-sections-local, lem-sfb-integral-tensor-quotient-epimorphism. The 2026-10-21 re-split rule does not apply: the item had no proof before this delivery."
+ },
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.IntegralOperationsScalarComparisonModels",
+  "declaration": "WeilConjectures.scalarTensorLevel_existsUnique",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-27",
+  "note": "The existing theorem and its scalarTensorLevelNormalization predicate state exactly this finite quotient-level natural transformation: existence and uniqueness of a natural chain map between the E and L tensor-level functors, normalized on all degreewise sheafification-unit pure tensors. The surrounding section variables provide prime l, finite Q_l-extensions E and L, and the Q_l-embedding ι; W and n are explicit theorem parameters. The theorem imposes no flatness, boundedness, K-flatness, constructibility, or invertibility assumptions.",
+  "statement": "theorem scalarTensorLevel_existsUnique (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ) :\n    ∃! α : integralOperationsTensorLevel l E W n ⋙\n        (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ) ⟶\n      ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)).prod\n        ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)) ⋙\n          integralOperationsTensorLevel l L W n,\n      scalarTensorLevelNormalization l E L ι W n α"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5464ce84",
+  "group": "NF",
+  "result": "pass",
+  "note": "existing:true attachment to WeilConjectures.scalarTensorLevel_existsUnique (IntegralOperationsScalarComparisonModels:234, sorry; verbatim at c5464 and sheaf-dag tip). Only the lean field changed; stmt_deps and statement byte-identical. Clauses checked: integralOrdinaryScalar fixed as changeOfRings along integralCompletedScalarMap (unique map compatible with quotient projections); integralOperationsTensorLevel = reduction then total tensor (sign (-1)^p) then Res along pi_n; level n = exponent n+1; normalization over all P,Q,p,q,U,x,y in the (p,q) summand matches 1⊗((1⊗x)⊗(1⊗y)) ↦ (1⊗(1⊗x))⊗(1⊗(1⊗y)); natural transformation on the product category with R_L-linear chain-map components; exists exactly one; no extra hypotheses. Edge cases n=0, empty W, zero and unbounded complexes, ramified embedding covered. Advisory: theorem still listed under parent node lem-pur-integral-scalar-finite-comparison-models (as sibling NB 8c0f PASS); uncited owners def-weil-integral-reduction-tower and integralOrdinaryTensorSection with stage-1 stmt_deps; E, L in W's universe u forced by integralOrdinaryScalar, no mathematical loss. Report has Worker report and the policy-accepted Second reading placeholder; no files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-05af7",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261027T112415-L-1580767",
+  "kind": "interface",
+  "note": "independent cc review: item proofs and 4 new construction modules vs nodes pullback/tensor-level-exists-unique and 4 new nodes; removed CoefficientExtensionFinite import vs import closure (still public via IntegralOperationsWellDefined) and unit sk-thm-sf-compatibility realized (empty)"
+ }
+}

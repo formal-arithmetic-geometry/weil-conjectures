@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-etale-proper-ambient-transport-composition",
+ "kind": "statement",
+ "title": "Composition of Cartesian proper ambient transports",
+ "statement": "Let $A$ be a finite commutative ring, and let $X,Y,U_0,U_1,U_2,P_0,P_1,P_2$ be schemes [def-pc-fibre-product]. For $i=0,1,2$, fix $a_i:X\\to U_i$, open immersions $e_i:U_i\\hookrightarrow P_i$, and morphisms $p_i:P_i\\to Y$. Suppose $r_{10}:P_1\\to P_0$ and $r_{21}:P_2\\to P_1$ are proper, and $q_{10}:U_1\\to U_0$ and $q_{21}:U_2\\to U_1$ make the corresponding squares with the $e_i$ Cartesian. Assume $a_1q_{10}=a_0$, $a_2q_{21}=a_1$, $r_{10}p_0=p_1$, and $r_{21}p_1=p_2$. On the ordinary unbounded etale module derived categories [def-weil-pbc-derived-categories], let $L_{01},L_{12}$ be the specified compositor--Cartesian-exchange--compositor transports of [def-pur-etale-graph-proper-ambient-data], and let $L_{02}$ be the same transport for the pasted square with maps $r_{21}r_{10}$ and $q_{21}q_{10}$. Then $L_{01}L_{12}=L_{02}$ as natural isomorphisms. Properness of the $a_i$ and $p_i$ is not required. Schemes, open immersions and proper morphisms have the meanings of [def-pc-scheme], [def-weil-open-immersion], and [def-weil-proper-morphism].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal); applied to the explicit product-graph formula."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-proper-ambient-data",
+  "def-weil-pbc-derived-categories",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The neighborhood maps q10 and q21 are proper by base change along the Cartesian squares. Obtain one normalized comparison family from etaleProperOpenExchangeCube. Apply its vertical pasting clause to the two squares and its Cartesian normalization clause to all three exchanges. This gives exchange_paste, the component formula for the outer Cartesian exchange.",
+   "uses": [
+    "lem-pur-etale-proper-open-exchange-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved push_derived_assoc helper of the structural coherence module to obtain associativity for rightDerivedLowerStarCompOfEq, including transport along the supplied equalities of scheme maps. Take inverses to obtain the corresponding inverse-compositor identity. These are comp_assoc and comp_assoc_inv; no properness is required.",
+   "uses": [
+    "lem-amb-derived-compact-support-composition-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the two specified ambient transports and compare their hom components. Twice use naturality of the ambient compositor to move the second source compositor and second exchange to its left. Apply ambient compositor associativity. Naturality of the first exchange then moves the second source compositor across that exchange; inverse compositor associativity combines it with the first source compositor. Functoriality groups the resulting neighborhood inverse compositor, two exchanges, and ambient compositor into exchange_paste. This is precisely the component of the rectangle transport; extensionality gives the isomorphism equality.",
+   "uses": [
+    "def-pur-etale-graph-proper-ambient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-proper-open-exchange-cube",
+  "lem-amb-derived-compact-support-composition-coherence",
+  "def-pur-etale-graph-proper-ambient-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7C, vertical pasting, with the concrete exact-derived mate associativity calculation already proved in Sheaf.Paper.DerivedCompactSupportCompositionCoherence; implemented by E2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartesian proper open exchange vertical horizontal pasting product graph comparison",
+   "results": "Eight hits, all concerning topology of products or set graphs; no derived exchange pasting theorem.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper ambient change of product graph comparison extension by zero direct image coherence",
+   "results": "Eight hits on set graphs, Function.extend, and graph products, not derived-category comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClosedGraph.*|LowerStarComp.*assoc",
+   "results": "msearch found no Mathlib hits. Direct rg in the two project roots found the explicit graph model and related parent theorems; the parent imports this item, so using it would be circular. Existing graph-neighborhood words also import this item transitively.",
+   "date": "2026-10-26",
+   "verdict": "No independent theorem for the three component equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonProperAmbient",
+  "date": "2026-10-26",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The side and intersection comparisons in the proper ambient change, before shrinking; steps 5--7 of the pairwise product-graph normalization.",
+   "via": [
+    "lem-pur-etale-graph-comparison-proper-ambient",
+    "lem-pur-etale-pairwise-product-graph-normalization",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProperAmbientTransportComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProperAmbientTransportComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleProperAmbientTransport_comp",
+  "statement": "theorem etaleProperAmbientTransport_comp\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y U₀ U₁ U₂ P₀ P₁ P₂ : Scheme.{u}}\n    (a₀ : X ⟶ U₀) (e₀ : U₀ ⟶ P₀) (p₀ : P₀ ⟶ Y)\n    (a₁ : X ⟶ U₁) (e₁ : U₁ ⟶ P₁) (p₁ : P₁ ⟶ Y)\n    (a₂ : X ⟶ U₂) (e₂ : U₂ ⟶ P₂) (p₂ : P₂ ⟶ Y)\n    [IsOpenImmersion e₀] [IsOpenImmersion e₁] [IsOpenImmersion e₂]\n    (r₁₀ : P₁ ⟶ P₀) (r₂₁ : P₂ ⟶ P₁) [IsProper r₁₀] [IsProper r₂₁]\n    (q₁₀ : U₁ ⟶ U₀) (q₂₁ : U₂ ⟶ U₁)\n    (sq₁₀ : IsPullback q₁₀ e₁ e₀ r₁₀) (sq₂₁ : IsPullback q₂₁ e₂ e₁ r₂₁)\n    (ha₁₀ : a₁ ≫ q₁₀ = a₀) (ha₂₁ : a₂ ≫ q₂₁ = a₁)\n    (hp₁₀ : r₁₀ ≫ p₀ = p₁) (hp₂₁ : r₂₁ ≫ p₁ = p₂) :\n    etaleProperAmbientTransport A a₀ e₀ p₀ a₁ e₁ p₁ r₁₀ q₁₀ sq₁₀ ha₁₀ hp₁₀ ≪≫\n        etaleProperAmbientTransport A a₁ e₁ p₁ a₂ e₂ p₂ r₂₁ q₂₁ sq₂₁ ha₂₁ hp₂₁ =\n      etaleProperAmbientTransport A a₀ e₀ p₀ a₂ e₂ p₂ (r₂₁ ≫ r₁₀) (q₂₁ ≫ q₁₀)\n        (sq₂₁.paste_horiz sq₁₀)\n        (by rw [← Category.assoc, ha₂₁, ha₁₀])\n        (by rw [Category.assoc, hp₁₀, hp₂₁])",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T023027-L-514396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T065501-L-3012269",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,239 @@
+{
+ "id": "lem-trf-affine-coordinate-strict-local-model",
+ "kind": "statement",
+ "title": "Affine coordinate sections and their strict-local polynomial models",
+ "statement": "Let $S$ be a scheme, $r\\geq0$, and $e:V\\simeq\\mathbf A^{E}_S$ an isomorphism over $S$ of relative affine spaces [def-nagata-relative-affine-space], where $E=\\operatorname{ULift}(\\operatorname{Fin}r)$, with structure map $f:V\\to S$. Let $\\Omega$ be algebraically closed, $\\bar v:\\operatorname{Spec}\\Omega\\to V$ a geometric point [def-weil-geometric-point], and $\\bar s=f\\bar v$. Put $A=\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$ and $B=\\mathcal O^{\\mathrm{sh}}_{V,\\bar v}$, as geometric strict local rings [def-weil-pbc-strict-henselization-limit], with their canonical map [lem-weil-pbc-strict-henselization-functoriality], $\\mathfrak m_A,\\mathfrak m_B$ their maximal ideals, and $\\kappa=A/\\mathfrak m_A$. Let $t_i\\in B$ be the image of the global coordinate `AffineSpace.coord` along the structural map [def-weil-pbc-strict-henselization-structural-map] $\\operatorname{Spec}B\\to V$ followed by $e$. For a subset $K\\subset E$ assume $t_i\\in\\mathfrak m_B$ for every $i\\in K$, and put $J_K=(t_i:i\\in K)$. Let $V_K\\hookrightarrow V$ be the closed subscheme [def-weil-closed-immersion] given on each affine base chart by setting precisely those coordinates to zero. Then $V_K$ is canonically isomorphic over $S$ to $\\mathbf A^{E\\setminus K}_S$, its projection is smooth [def-sbc-smooth-morphisms], $\\bar v$ factors through a geometric point $\\bar v_K$ of $V_K$, and there is a canonical $A$-algebra isomorphism\n$$\\mathcal O^{\\mathrm{sh}}_{V_K,\\bar v_K}\\simeq B/J_K,$$\nunder which the functorial map from $B$ is its quotient map. For the closed fibre of $\\mathbf A^E_A$, put $P=\\kappa[T_i:i\\in E]$ [def-weil-pbc-mv-polynomial-ring] and let $\\mathfrak q$ be the prime defined by the lift of $\\bar v$ to this fibre. Then $L=(T_i:i\\in K)\\subseteq\\mathfrak q$, $\\mathfrak q'=\\mathfrak q/L$ is a prime of $P/L$, and there are compatible local-ring isomorphisms\n$$B/\\mathfrak m_A B\\simeq(P_{\\mathfrak q})^{\\mathrm{sh}},\\qquad\nB/(\\mathfrak m_A B+J_K)\\simeq((P/L)_{\\mathfrak q'})^{\\mathrm{sh}}.$$\nThe prime localizations and algebraic strict henselizations in these displays are those of [def-weil-pbc-localization-at-prime, def-sc-ring-strict-henselization]. The separable residue closures are the ones inside $\\Omega$ selected by this geometric point; these isomorphisms send every surviving coordinate to its corresponding localized polynomial variable and identify the map between the displayed quotients with the strict-local map induced by $P\\to P/L$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/etale-cohomology.tex; literature/stacks-project/morphisms.tex",
+  "place": "Agent-supplied coordinate comparison realizing old steps 6--7: Tag 05WS (lemma-quotient-strict-henselization), Tag 04HX (lemma-describe-etale-local-ring), and Tag 00T7 (lemma-standard-smooth). Coordinate-zero quotient is by the polynomial universal property, compatible with principal-open restriction."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-sc-ring-strict-henselization",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-nagata-relative-affine-space",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-strict-henselization-point-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit zero-insertion inclusion of def-trf-affine-coordinate-strict-local-data. The affine-space homOfVector and hom_ext universal property constructs, for every scheme T, the unique map to the complementary affine space from a map T to V whose selected coordinate sections are zero. Both directions are proved on global coordinates, so the assertion retains nonreduced test schemes. Coordinate restriction forgetting K is a retraction. It is separated since its composite with the complementary affine projection is the separated affine-space projection. Its section, zero insertion, is therefore a closed immersion (IsClosedImmersion.of_comp). The complementary affine projection is smooth by the finite affine-space smoothness instance.",
+   "uses": [
+    "def-trf-affine-coordinate-strict-local-data",
+    "def-nagata-relative-affine-space",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The geometric evaluation on B is the composite of the surjection to its separable residue closure with the injective inclusion into Omega. Surjectivity identifies its kernel with m_B. Thus hK makes every selected coordinate evaluate to zero. The closed-lift equation and naturality of GammaSpecIso identify this evaluation with evaluation of the coordinate section at v. Since GammaSpecIso is injective, the section vanishes. The universal property from the previous step gives a unique factorization v=a followed by inclusion.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write i for inclusion, B for the strict local ring at ai, C for that at a, J for the selected-coordinate ideal and F:B to C for the canonical map. Its structural square shows F kills each generator of J, so it descends to f:B/J to C. Conversely the quotient q:B to B/J makes all selected coordinates vanish on Spec(B/J). The universal coordinate-zero property gives its map k to the complementary affine space, compatible with Spec q into Spec B. Hence (k,Spec q) maps into the pullback of i by the structural map of Spec B. The existing closed-immersion Cartesian theorem identifies this pullback with Spec C. Compose with its inverse to obtain z:Spec(B/J) to Spec C. The equations z followed by the strict-local map = Spec q and Spec f followed by Spec q = the strict-local map make z and Spec f inverse: the strict-local map is mono as a composite of an isomorphism with a pullback of the mono i, and Spec q is mono as a closed immersion. Full faithfulness of Spec gives the ring isomorphism C to B/J. Applying Spec.preimage to the same equation proves exactly quotientIso_map, including the specified canonical map.",
+   "uses": [
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-trf-affine-coordinate-strict-local-fibre-comparison to the vanishing evaluations already proved. Combine its FibreModels witness with the closed immersion, smoothness, universal zero-locus property, factor point and canonical quotient isomorphism from the preceding steps to construct every field of Model. No data is chosen in a definition.",
+   "uses": [
+    "lem-trf-affine-coordinate-strict-local-fibre-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-affine-coordinate-strict-local-data",
+  "def-nagata-relative-affine-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "def-weil-affine-spectrum",
+  "lem-trf-affine-coordinate-strict-local-fibre-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "N4, 2026-10-26. Direct affine-space universal property and separated-section proof replace chart gluing. The strict-local quotient is constructed from the existing Cartesian comparison. Old steps 5--8 are isolated as the strictly smaller polynomial closed-fibre comparison lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Setting a subset of affine space coordinates to zero identifies the strict henselization of the coordinate subspace with the quotient of the ambient strict local ring by those coordinates",
+   "results": "{\"t\": \"2026-10-22T06:01:03Z\", \"tool\": \"leanfinder\", \"query\": \"Setting a subset of affine space coordinates to zero identifies the strict henselization of the coordinate subspace with the quotient of the ambient strict local ring by those coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"HenselianRing\", \"PreTilt.mk_comp_untilt_eq_coeff_zero\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PreTilt.mk_untilt_eq_coeff_zero\", \"HenselianLocalRing\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\"], \"digest\": \"16e66eb25cd6268c\"}; AffineSpace coordinate and reindexing formulas define the coordinates but do not give the coordinate-zero strict-local quotient or its two polynomial models. Read AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344. Henselian power-series hits are different constructions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric point where selected coordinates vanish factors through the affine coordinate subspace and the two closed fibre local rings have polynomial localization strict henselization models",
+   "results": "{\"t\": \"2026-10-22T06:01:04Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric point where selected coordinates vanish factors through the affine coordinate subspace and the two closed fibre local rings have polynomial localization strict henselization models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.Spec_closedPoint\"], \"digest\": \"ed690d45a42fbe4a\"}; AffineSpace coordinate and reindexing formulas define the coordinates but do not give the coordinate-zero strict-local quotient or its two polynomial models. Read AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344. Henselian power-series hits are different constructions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"coord\"",
+   "results": "{\"t\": \"2026-10-22T06:00:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"AffineSpace\\\", \\\"coord\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord\", \"AlgebraicGeometry.AffineSpace.reindex_appTop_coord\", \"AlgebraicGeometry.AffineSpace.map_appTop_coord\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\"], \"digest\": \"763954535d142bbb\"}; AffineSpace coordinate and reindexing formulas define the coordinates but do not give the coordinate-zero strict-local quotient or its two polynomial models. Read AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344. Henselian power-series hits are different constructions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate zero subspaces of affine space commute with strict localization and give quotients of strict henselization rings by the selected coordinate ideal",
+   "results": "{\"t\": \"2026-10-22T06:00:51Z\", \"tool\": \"leansearch\", \"query\": \"Coordinate zero subspaces of affine space commute with strict localization and give quotients of strict henselization rings by the selected coordinate ideal\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; AffineSpace coordinate and reindexing formulas define the coordinates but do not give the coordinate-zero strict-local quotient or its two polynomial models. Read AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344. Henselian power-series hits are different constructions.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|henselization|coord.*quotient",
+   "results": "{\"t\": \"2026-10-22T06:00:51Z\", \"tool\": \"grep\", \"query\": \"strictHensel|strict_hensel|henselization|coord.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\"], \"digest\": \"44272919d2de5670\"}; AffineSpace coordinate and reindexing formulas define the coordinates but do not give the coordinate-zero strict-local quotient or its two polynomial models. Read AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344. Henselian power-series hits are different constructions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|henselization|coord.*quotient",
+   "results": "{\"t\": \"2026-10-23T09:53:36Z\", \"tool\": \"grep\", \"query\": \"strictHensel|strict_hensel|henselization|coord.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\"], \"digest\": \"44272919d2de5670\"}; Read Mathlib/AlgebraicGeometry/AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344 and RingTheory/Henselian.lean:94--116. AffineSpace coordinate and reindexing hits describe the charts only; henselian criteria and residue-field/fibre-point hits do not give the strict-local quotient and compatible polynomial fibre models.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The strict henselization of a closed coordinate subspace of affine space is the quotient of the ambient strict local ring by those coordinate variables",
+   "results": "{\"t\": \"2026-10-23T09:53:37Z\", \"tool\": \"leansearch\", \"query\": \"The strict henselization of a closed coordinate subspace of affine space is the quotient of the ambient strict local ring by those coordinate variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"HenselianRing.casesOn\", \"HenselianLocalRing.casesOn\", \"HenselianRing.is_henselian\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.recOn\", \"HenselianLocalRing.mk\"], \"digest\": \"33896c0746211bde\"}; Read Mathlib/AlgebraicGeometry/AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344 and RingTheory/Henselian.lean:94--116. AffineSpace coordinate and reindexing hits describe the charts only; henselian criteria and residue-field/fibre-point hits do not give the strict-local quotient and compatible polynomial fibre models.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"coord\"",
+   "results": "{\"t\": \"2026-10-23T09:53:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"AffineSpace\\\", \\\"coord\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord\", \"AlgebraicGeometry.AffineSpace.reindex_appTop_coord\", \"AlgebraicGeometry.AffineSpace.map_appTop_coord\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\"], \"digest\": \"763954535d142bbb\"}; Read Mathlib/AlgebraicGeometry/AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344 and RingTheory/Henselian.lean:94--116. AffineSpace coordinate and reindexing hits describe the charts only; henselian criteria and residue-field/fibre-point hits do not give the strict-local quotient and compatible polynomial fibre models.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict local rings of affine space over a scheme have closed fibres modeled by strict henselizations of prime localized polynomial rings over the base residue field",
+   "results": "{\"t\": \"2026-10-23T09:53:46Z\", \"tool\": \"leanfinder\", \"query\": \"Strict local rings of affine space over a scheme have closed fibres modeled by strict henselizations of prime localized polynomial rings over the base residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\"], \"digest\": \"9089371ffa2a1ea2\"}; Read Mathlib/AlgebraicGeometry/AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344 and RingTheory/Henselian.lean:94--116. AffineSpace coordinate and reindexing hits describe the charts only; henselian criteria and residue-field/fibre-point hits do not give the strict-local quotient and compatible polynomial fibre models.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate subspaces of relative affine space and compatible strict henselization quotient models of their closed fibres",
+   "results": "{\"t\": \"2026-10-23T09:53:47Z\", \"tool\": \"leanfinder\", \"query\": \"Coordinate subspaces of relative affine space and compatible strict henselization quotient models of their closed fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"HenselianLocalRing.TFAE\", \"PrimeSpectrum.preimageHomeomorphFiber\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\"], \"digest\": \"5eb235819cbed180\"}; Read Mathlib/AlgebraicGeometry/AffineSpace.lean:100,122--125,214--216,244--249,277--279,342--344 and RingTheory/Henselian.lean:94--116. AffineSpace coordinate and reindexing hits describe the charts only; henselian criteria and residue-field/fibre-point hits do not give the strict-local quotient and compatible polynomial fibre models.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-geometric-stalk-algebra",
+  "date": "2026-10-22",
+  "group": "Q17"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Re-split of lem-trf-smooth-geometric-stalk-algebra: old steps 6--7 (coordinate-zero affine subspace and the two strict-local polynomial models).",
+   "via": [
+    "lem-trf-smooth-geometric-stalk-algebra",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-coordinate-strict-local-model",
+  "worker": "stage1",
+  "summary": "Reused existing general closed-immersion, smooth closed-fibre, and affine strict-local comparison nodes; wrote the coordinate quotient and point factorization explicitly and checked the two polynomial models and their residue-compatible functorial maps. No new nodes and no statement change.",
+  "blueprint": "The inherited historical nearby-duality/alteration branch under lem-trf-local-term-locality (1)--(2), through lem-trf-smooth-geometric-stalk-algebra old steps 6--7: coordinate-zero affine subspace and both polynomial models. The current blueprint proves locality by contraction; this item only supplies the already present lower-level algebraic tool.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Smoothness of finite affine-space projections, after finite reindexing; generic algebraic-geometric tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Gluing the explicit coordinate quotient chart isomorphisms and their inverses; generic scheme gluing, absent from this unit."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Structural and residue-compatible identification of an affine geometric strict local ring with the strict henselization of its prime localization; generic chart comparison, absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth",
+  "lem-exc-affine-strict-local-ring-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-7c15d0f6f",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-7c15d0f6f (reviewer sub-agent of L); spot-checked: Q114 lem-trf-affine-coordinate-strict-local-model @7c15d0f6: S1 split with no new nodes. The statement and stmt_deps are byte-identical to live, and live is still unsplit, so nothing is superseded. There is no repair note. The proof is an 8-step assembly. Steps 1-3 are written out explicitly: a polynomial universal-property quotient D/I_K≅R[Y] glued by 01JB; smoothness after finite reindexing (the nagata def says finite rank equals def-sbc-affine-space); and factorization of the geometric point at ring level via functoriality (1), where ker(B→Ω)=m_B. Step 4 uses the kernel/surjectivity clause of lem-trf-closed-immersion-strict-localization-cartesian with I_K extending to J_K, and gets the A-algebra structure from uniqueness in (3). Steps 5-6 use lem-trf-smooth-strict-local-closed-fibre-model (f smooth from step 2) and lem-exc-affine-strict-local-ring-comparison on Spec P. Under these, t_i maps to T_i because θ is a P-algebra map. Step 7 checks that the preimage of LH is m_A B+J_K and applies the comparison on P/L. In step 8 the transported map agrees on P and on residues, so uniqueness in (3) pins it with no residue twist. Every cited statement says what is used. I read Stacks 05WS in algebra.tex. Edge cases tested: the origin of A^1_k (B/J_K=k), the generic point (the t_i∈m_B hypothesis is needed), r=0, K=∅, K=E, and non-Noetherian S. The functoriality node is in the transitive route of sk-i-curve-zero. I accept the 3 declared generic tool_uses (affine-space smoothness, scheme gluing, affine strict-local comparison). There is no SGA citation, no control characters, and proof_deps equals the union of the step uses. No duplicate node found. review_split's 'no such node' output is a symlink artifact."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineCoordinateStrictLocalModel",
+  "declaration": "AlgebraicGeometry.Scheme.AffineCoordinateStrictLocal.exists_model",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AffineCoordinateStrictLocal.Model",
+   "AlgebraicGeometry.Scheme.AffineCoordinateStrictLocal.exists_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoordinateStrictLocalModel.lean",
+  "statement": "theorem exists_model {S V : Scheme.{u}} (r : ℕ) (e : V ≅ AffineSpace (Index.{u} r) S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (v : Spec (.of Ω) ⟶ V) [IsLocalRing (Base r e v)] [IsLocalRing (strictHenselizationRing v)] (K : Set (Index.{u} r)) (hK : ∀ i ∈ K, coordinate r e v i ∈ IsLocalRing.maximalIdeal (strictHenselizationRing v)) : Nonempty (Model r e v K)",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c417e176",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: the coordinate-zero subscheme is pinned by a closed immersion plus a zeroLocus clause over all test schemes; smoothness; the point factorization; quotientIso pinned by its quotient-map equation; the polynomial points pinned on coefficients and variables; StrictHenselizationPresentationIn models over Localization.AtPrime with separable closures in Ω; iso0/iso1 pinned on coefficients, coordinates and residue evaluations; the comparison map is unique and commutes with the quotient. IsLocalRing binders are Prop and always true; no extra hypotheses or universe restriction. Added stmt_dep def-weil-pbc-strict-henselization-point-evaluation is used. lean.statement is verbatim, all 14 declarations recorded, the only sorry is in exists_model, docstrings and gates OK. Edge cases r=0, K=∅, K=E, non-maximal q, empty S checked. Advisory: coordinate/ringMap/baseMap duplicate strictHenselizationAffineCoordinate/strictHenselizationRingMap(Along) in the parent theorem's module SmoothGeometricStalkAlgebra; the parent lists this item in proof_deps, so reuse would be an import cycle; maintainer note. No compile run, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d310e",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261026T082604-L-2193969",
+  "kind": "interface",
+  "note": "independent cc review: 12 moved data decls diffed verbatim vs published item (only blueprint ids differ); exists_model proof read against node lem-trf-affine-coordinate-strict-local-model and Model fields; exists_fibre_models = old FibreModels field with equivalent hK; no Lean importers (rg); axioms checked in sandbox"
+ }
+}

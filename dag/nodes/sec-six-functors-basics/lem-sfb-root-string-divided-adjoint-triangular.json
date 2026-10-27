@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-root-string-divided-adjoint-triangular",
+ "kind": "statement",
+ "title": "Triangular integral divided-adjoint coefficient at the bottom of a root string",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional split semisimple Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra, def-wf-semisimple-lie-algebra], with splitting Cartan subalgebra $\\mathfrak h$, reduced crystallographic root system $R$, positive roots $R^+$, and simple roots $\\Delta$. Fix a Chevalley basis in the conventions of [lem-sfb-kostant-integral-pbw]: the simple coroots $h_i$ form a basis of $\\mathfrak h$, the nonzero $e_\\gamma$ span the root spaces, $[h,e_\\gamma]=\\gamma(h)e_\\gamma$, $[e_\\gamma,e_{-\\gamma}]=h_\\gamma$, and $[e_\\gamma,e_\\delta]=\\pm(p_{\\gamma,\\delta}+1)e_{\\gamma+\\delta}$ for a root sum, where $p_{\\gamma,\\delta}=\\max\\{q\\geq0:\\delta-q\\gamma\\in R\\}$; the bracket is zero if the sum is neither a root nor zero. Put $U=T_{\\mathbf Q}(\\mathfrak g)/(xy-yx-[x,y])$ and $e_\\gamma^{(m)}=e_\\gamma^m/m!$. Let $a,b\\in R^+$ be linearly independent with $b-a\\notin R$, and let $k\\geq1$ satisfy $\\gamma=b+ka\\in R$. Fix any total order on $R^+$. There is a sign $\\varepsilon\\in\\{1,-1\\}$ with $(\\operatorname{ad}e_a)^k(e_b)/k!=\\varepsilon e_\\gamma$ such that, for every $n\\geq1$, the element\n$$\\sum_{j=0}^{kn}(-1)^j e_a^{(kn-j)}e_b^{(n)}e_a^{(j)}-\\varepsilon^n e_\\gamma^{(n)}$$\nis a finite integer linear combination of ordered monomials $\\prod_{\\delta\\in R^+}e_\\delta^{(r_\\delta)}$ with $0\\leq r_\\delta<n$ for every $\\delta$. Each monomial with nonzero coefficient can be required to have total root weight $\\sum_\\delta r_\\delta\\delta=n\\gamma$, and every root occurring in it lies in $R\\cap\\{u a+v b:u\\in\\mathbf Z_{\\geq0},\\ v\\in\\mathbf Z_{\\geq1}\\}$. An empty linear combination is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, Theorem 23.71, printed pp.508--509, for the assumed normalization; agent-stated local coefficient lemma supporting the simple divided-power generation asserted via Mathieu Section 1, pp.150--151. Proposed proof uses the existing integral and rational PBW nodes, not a theorem explicitly stated by Milne. Full source WANTED: Kostant, Groups over Z (1966), integral-form construction; Steinberg, Lectures on Chevalley Groups (1967), integral-form construction."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "lem-sfb-kostant-integral-pbw"
+ ],
+ "proof": [
+  {
+   "text": "Index the root/coroot pairing by $R$, with root map $\\delta\\mapsto\\delta\\in\\mathfrak h^\\vee$, coroot map $\\delta\\mapsto h_\\delta\\in\\mathfrak h$, and evaluation pairing. These are precisely the finite crystallographic root-pairing data of the assumed root system (the ambient duality is perfect). Apply [lem-sfb-root-string-integer-interval] to the independent roots $a,b$. Since $b-a$ is absent, its interval has bottom endpoint zero; write its top endpoint as $q$. Thus $b+ia$ is a root exactly for integers $0\\le i\\le q$, and $k\\le q$. For $0\\le i<q$, the largest $p$ with $(b+ia)-pa$ a root is $i$. The assumed Chevalley bracket formula therefore gives $[e_a,e_{b+ia}]=\\eta_i(i+1)e_{b+(i+1)a}$ with $\\eta_i\\in\\{1,-1\\}$. Put $X=e_a$ and $D(u)=Xu-uX$. Induction gives $Y_i=D^i(e_b)/i!=c_i e_{b+ia}$, where $c_0=1$ and $c_{i+1}=\\eta_i c_i$, for $0\\le i\\le q$; all subsequent $Y_i$ vanish because $b+(q+1)a$ is neither a root nor zero. Take $\\varepsilon=c_k$.",
+   "uses": [
+    "lem-sfb-root-string-integer-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent reconstruction of the supporting divided-adjoint coefficient argument using the cited PBW statements (not a theorem stated in Milne)."
+   }
+  },
+  {
+   "text": "In formal series with central variable $t$, put $E(t)=\\sum_{r\\ge0}X^rt^r/r!$. Coefficientwise the binomial identity gives $E(-t)E(t)=1$. For any $u\\in U$, induction on $m$ in $D(u)=Xu-uX$ gives $D^m(u)=\\sum_{j=0}^m(-1)^j\\binom mj X^{m-j}uX^j$: the induction step combines the two adjacent terms by Pascal's identity. Consequently $E(t)uE(-t)=\\sum_{m\\ge0}D^m(u)t^m/m!$. In particular $E(t)e_bE(-t)=Y(t)=\\sum_{i=0}^qY_it^i$. Cancelling $E(-t)E(t)$ between consecutive factors proves $E(t)e_b^{(n)}E(-t)=Y(t)^n/n!$. All identities are coefficientwise finite, so no analytic exponential or convergence is involved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent reconstruction of the supporting divided-adjoint coefficient argument using the cited PBW statements (not a theorem stated in Milne)."
+   }
+  },
+  {
+   "text": "Write $A_n=[t^{kn}]Y(t)^n/n!$. The previous identity identifies $A_n$ with $\\sum_{j=0}^{kn}(-1)^j e_a^{(kn-j)}e_b^{(n)}e_a^{(j)}$. Expanding the finite polynomial $Y(t)^n$ expresses $A_n$ as a rational sum of words of length $n$ in $e_{b+ia}$, with indices $i_1+\\cdots+i_n=kn$. Each word has weight $n b+kn a=n\\gamma$. Let $S=R\\cap\\{ua+vb:u\\in\\mathbf Z_{\\ge0},\\ v\\in\\mathbf Z_{\\ge1}\\}$. Then $S\\subset R^+$, each word uses only $S$, and $S$ is closed under root sums that are roots. Two roots in $S$ cannot be opposite or sum to zero, since their $b$-coordinates are positive and $a,b$ are independent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent reconstruction of the supporting divided-adjoint coefficient argument using the cited PBW statements (not a theorem stated in Milne)."
+   }
+  },
+  {
+   "text": "Sort each word of Step 3 into the prescribed positive-root order using $e_\\rho e_\\sigma=e_\\sigma e_\\rho+[e_\\rho,e_\\sigma]$. The bracket is zero or a scalar times $e_{\\rho+\\sigma}$ by the assumed normalization. Termination and the required properties follow by induction on word length, then on inversions at fixed length: a swap reduces inversions, while each bracket correction has one fewer factor. Corrections stay in $S$ and preserve weight. The resulting rational expansion of $A_n$ uses ordered positive monomials of length at most $n$, supported in $S$, all of weight $n\\gamma$. Apply [lem-sfb-rational-pbw] to the full ordered Chevalley basis (negative roots, Cartan basis, positive roots in the specified order). It makes this ordered expansion unique, and its filtration clause identifies length with PBW degree. Changing ordinary powers to divided powers multiplies coefficients by factorials and changes none of these supports or degrees.",
+   "uses": [
+    "lem-sfb-rational-pbw"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent reconstruction of the supporting divided-adjoint coefficient argument using the cited PBW statements (not a theorem stated in Milne)."
+   }
+  },
+  {
+   "text": "In length exactly $n$, sorting has only permuted the $n$ original factors; every bracket correction has smaller length. Thus the coefficient of the ordinary monomial $e_\\gamma^n$ comes only from the tuple $i_1=\\cdots=i_n=k$ in $Y(t)^n/n!$. Its coefficient is $c_k^n/n!=\\varepsilon^n/n!$, so the coefficient of $e_\\gamma^{(n)}$ is $\\varepsilon^n$. Moreover if any ordered monomial in Step 4 has an exponent $r_\\delta\\ge n$, its length bound forces $r_\\delta=n$ and every other exponent zero. Its weight equation gives $n\\delta=n\\gamma$, hence $\\delta=\\gamma$ over $\\mathbf Q$. Subtracting $\\varepsilon^n e_\\gamma^{(n)}$ therefore removes every possible exponent at least $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent reconstruction of the supporting divided-adjoint coefficient argument using the cited PBW statements (not a theorem stated in Milne)."
+   }
+  },
+  {
+   "text": "Each summand in the displayed formula for $A_n$ is a product of root divided powers, hence belongs to the unital integer subalgebra $U_{\\mathbf Z}$ in [lem-sfb-kostant-integral-pbw]. That node supplies its integer triangular basis for the chosen order. In particular $A_n$ has an integer expansion in that basis. Its elements are also rationally independent: clear denominators in a finite rational relation and use their integer independence. Step 4 already expresses $A_n$ rationally in the positive-only part of exactly this triangular family (all negative and Cartan indices zero). Comparing the two finite expansions by that rational independence forces the Step 4 coefficients to be integers and every other triangular coefficient to be zero. Subtracting the integer coefficient $\\varepsilon^n$ preserves integrality. Step 5 gives the strict exponent bound; Step 4 gives the required root support and weight. For $n=1$ these conditions leave no correction monomial, and the empty sum is permitted.",
+   "uses": [
+    "lem-sfb-kostant-integral-pbw"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent reconstruction of the supporting divided-adjoint coefficient argument using the cited PBW statements (not a theorem stated in Milne)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-root-string-integer-interval",
+  "lem-sfb-rational-pbw",
+  "lem-sfb-kostant-integral-pbw"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent reconstruction of the supporting divided-adjoint coefficient argument using the cited PBW statements (not a theorem stated in Milne).",
+  "note": "Uses existing integral and rational PBW nodes; Milne supplies only the Chevalley normalization, not this coefficient lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating a root divided power by a simple root exponential gives a triangular integral PBW expansion with leading coefficient one when the root string starts at its bottom",
+   "results": "{\"t\": \"2026-10-23T23:52:29Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugating a root divided power by a simple root exponential gives a triangular integral PBW expansion with leading coefficient one when the root string starts at its bottom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.one_le_chainBotCoeff_of_root_add_mem\", \"RootPairing.GeckConstruction.ω_mul_f\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.chainCoeff_chainTopIdx_aux\", \"RootPairing.root_chainBotIdx\", \"RootPairing.one_le_chainTopCoeff_of_root_add_mem\", \"RootPairing.chainTopCoeff_if_one_zero\"], \"digest\": \"8c73b8eeebd0bf82\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual Geck matrix relations, root-string coefficients, the ordinary enveloping universal property or nilpotence of ad. None states this integral PBW coefficient identity; Algebra/Lie grep only found a TODO mentioning PBW."
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversalEnvelopingAlgebra",
+   "results": "{\"t\": \"2026-10-23T23:52:27Z\", \"tool\": \"loogle\", \"query\": \"UniversalEnvelopingAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra\", \"instInhabitedUniversalEnvelopingAlgebra\", \"instRingUniversalEnvelopingAlgebra\", \"instAlgebraUniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra.lift\", \"UniversalEnvelopingAlgebra.mkAlgHom\", \"UniversalEnvelopingAlgebra.hom_ext\"], \"digest\": \"a8beafc2fe0aadad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual Geck matrix relations, root-string coefficients, the ordinary enveloping universal property or nilpotence of ad. None states this integral PBW coefficient identity; Algebra/Lie grep only found a TODO mentioning PBW."
+  },
+  {
+   "tool": "grep",
+   "query": "Kostant|divided|PBW|Poincare",
+   "results": "{\"t\": \"2026-10-23T23:52:27Z\", \"tool\": \"grep\", \"query\": \"Kostant|divided|PBW|Poincare\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Free.lean\"], \"digest\": \"cf2d0d3c3437d8ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual Geck matrix relations, root-string coefficients, the ordinary enveloping universal property or nilpotence of ad. None states this integral PBW coefficient identity; Algebra/Lie grep only found a TODO mentioning PBW."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley integral enveloping algebra divided adjoint root string triangular PBW identity",
+   "results": "{\"t\": \"2026-10-23T23:52:27Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley integral enveloping algebra divided adjoint root string triangular PBW identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.isNilpotent_ad_of_mem_rootSpace\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot.congr_simp\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.f_lie_v_same\", \"LieAlgebra.IsKilling.rootSystem_root_apply\", \"LieAlgebra.IsKilling.apply_coroot_eq_cast'\", \"LieAlgebra.finrank_engel\"], \"digest\": \"434400ebff4764a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual Geck matrix relations, root-string coefficients, the ordinary enveloping universal property or nilpotence of ad. None states this integral PBW coefficient identity; Algebra/Lie grep only found a TODO mentioning PBW."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "PBW monomials in the conjugate of e beta power n divided by n factorial along a Chevalley root string bottom have all other root exponents less than n",
+   "results": "{\"t\": \"2026-10-23T23:52:31Z\", \"tool\": \"leanfinder\", \"query\": \"PBW monomials in the conjugate of e beta power n divided by n factorial along a Chevalley root string bottom have all other root exponents less than n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.le_chainBotCoeff_of_rootSpace_ne_top\", \"LieModule.genWeightSpace_zsmul_add_ne_bot\", \"LieAlgebra.IsKilling.chainBotCoeff_le_chainLength\", \"RootPairing.one_le_chainBotCoeff_of_root_add_mem\", \"LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub\", \"LieAlgebra.IsKilling.chainTopCoeff_le_chainLength\", \"RootPairing.chainCoeff_chainTopIdx_aux\", \"RootPairing.root_sub_nsmul_mem_range_iff_le_chainBotCoeff\"], \"digest\": \"4056285e25b0fe9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual Geck matrix relations, root-string coefficients, the ordinary enveloping universal property or nilpotence of ad. None states this integral PBW coefficient identity; Algebra/Lie grep only found a TODO mentioning PBW."
+  },
+  {
+   "tool": "grep",
+   "query": "Kostant|divided|PBW|Poincare",
+   "results": "{\"t\": \"2026-10-24T00:36:00Z\", \"tool\": \"grep\", \"query\": \"Kostant|divided|PBW|Poincare\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Free.lean\"], \"digest\": \"cf2d0d3c3437d8ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; root-vector relations, root-weight maps and the enveloping universal property do not state the integral triangular coefficient identity. PBW grep finds only a TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley integral enveloping algebra divided adjoint root string triangular PBW identity",
+   "results": "{\"t\": \"2026-10-24T00:36:00Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley integral enveloping algebra divided adjoint root string triangular PBW identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.isNilpotent_ad_of_mem_rootSpace\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot.congr_simp\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.f_lie_v_same\", \"LieAlgebra.IsKilling.rootSystem_root_apply\", \"LieAlgebra.IsKilling.apply_coroot_eq_cast'\", \"LieAlgebra.finrank_engel\"], \"digest\": \"434400ebff4764a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; root-vector relations, root-weight maps and the enveloping universal property do not state the integral triangular coefficient identity. PBW grep finds only a TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversalEnvelopingAlgebra",
+   "results": "{\"t\": \"2026-10-24T00:36:00Z\", \"tool\": \"loogle\", \"query\": \"UniversalEnvelopingAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra\", \"instInhabitedUniversalEnvelopingAlgebra\", \"instRingUniversalEnvelopingAlgebra\", \"instAlgebraUniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra.lift\", \"UniversalEnvelopingAlgebra.mkAlgHom\", \"UniversalEnvelopingAlgebra.hom_ext\"], \"digest\": \"a8beafc2fe0aadad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; root-vector relations, root-weight maps and the enveloping universal property do not state the integral triangular coefficient identity. PBW grep finds only a TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided iterated commutator of a Chevalley root vector at the bottom of a root string has a triangular integral PBW expansion",
+   "results": "{\"t\": \"2026-10-24T00:36:01Z\", \"tool\": \"leanfinder\", \"query\": \"Divided iterated commutator of a Chevalley root vector at the bottom of a root string has a triangular integral PBW expansion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.f_lie_v_same\", \"RootPairing.GeckConstruction.isSl2Triple\", \"LieAlgebra.IsKilling.chainBotCoeff_of_eq_zsmul_add\", \"LieAlgebra.IsKilling.chainLength_nsmul\", \"RootPairing.GeckConstruction.e_lie_u\"], \"digest\": \"89cf3958007a213f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; root-vector relations, root-weight maps and the enveloping universal property do not state the integral triangular coefficient identity. PBW grep finds only a TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the universal enveloping algebra conjugation by a root exponential preserves the PBW filtration and its top symbol is a commutative power",
+   "results": "{\"t\": \"2026-10-24T00:36:02Z\", \"tool\": \"leanfinder\", \"query\": \"In the universal enveloping algebra conjugation by a root exponential preserves the PBW filtration and its top symbol is a commutative power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.toEnd_pow_apply_mem\", \"LieModule.shiftedGenWeightSpace.toEnd_eq\", \"LieAlgebra.rootSpaceProduct_def\", \"LieAlgebra.rootSpaceWeightSpaceProduct\", \"LieAlgebra.rootSpaceProduct_tmul\", \"LieAlgebra.mapsTo_toEnd_genWeightSpace_add_of_mem_rootSpace\", \"LieAlgebra.IsKilling.chainLength_smul\", \"LieAlgebra.rootSpaceProduct\"], \"digest\": \"5c2c4d721d9f9199\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; root-vector relations, root-weight maps and the enveloping universal property do not state the integral triangular coefficient identity. PBW grep finds only a TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-positive-kostant-simple-divided-generation",
+  "date": "2026-10-24",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: integral simple-positive-root divided-power generation before reduction modulo p Supporting input: Triangular integral divided-adjoint coefficient at the bottom of a root string.",
+   "via": [
+    "lem-sfb-positive-kostant-simple-divided-generation",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-root-string-divided-adjoint-triangular",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Six-step coefficient argument: bottom root string, formal conjugation, positive cone and weight, PBW sorting with degree bound, unique exponent-n term, then integral PBW comparison. Reuses three existing nodes and creates none.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain, recorded in blueprint.from.place: integral simple-positive-root divided-power generation, local triangular root-string coefficient. Latest unit text read; this is a supporting algebraic input below that route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-6cbd1d6b6",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-6cbd1d6b6 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the three cited statements in full. The delivery has no new nodes and leaves the statement and stmt_deps unchanged from side-live. The item is still unsplit in live and side-live, and no repair note exists. All three cited nodes are in the item's unit, so there is no off-unit or tool use and no SGA citation. Source: Milne iAG2017 Thm 23.71 (PDF p.520, printed p.508) gives N=±(p+1), which is exactly the assumed normalization; the coefficient argument is correctly marked agent-written. Step 1: RootPairing.root_add_zsmul_mem_range_iff (Chain.lean:186-192, independence hypothesis at :133) with b−a∉R gives p=0. Then p_{a,b+ia}=i, so [e_a,e_{b+ia}]=±(i+1)e_{b+(i+1)a}, c_k=±1 and ε=c_k. Step 2: the identity D^m(u)=Σ(−1)^jC(m,j)X^{m−j}uX^j, conjugation by E(t)=Σ X^r t^r/r!, and the coefficient of t^{kn} all check, and the step is elementary. Step 3: the cone S is positive, closed under root sums and has no opposite pairs; weight is nγ. Step 4: sorting terminates by induction on length then inversions, corrections stay in S and keep the weight, and rational PBW gives uniqueness. Step 5: only the all-k word gives e_γ^n, with coefficient ε^n on e_γ^(n); an exponent ≥n forces δ=γ. Step 6: the Kostant Z-basis is Q-independent, so comparing expansions gives integer coefficients; its hypotheses match the item. Small cases: n=1 gives an empty correction; A2 with k=1 gives zero correction; B2 with a short and b long (q=2) allows k in the middle of the string; rank one is vacuous. Duplicate check: rank-two-straightening, string-central-parity, root-normalization, nonopposite-commutator and endpoint-difference all state something different. The only citer, positive-kostant-simple-divided-generation step 3, uses exactly the clauses the statement provides. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.RootStringDividedAdjointTriangular",
+  "declaration": "LieAlgebra.root_string_divided_adjoint_triangular",
+  "file": "lean/Sheaf/Algebra/Lie/RootStringDividedAdjointTriangular.lean",
+  "statement": "theorem root_string_divided_adjoint_triangular (L : Type u) [LieRing L] [LieAlgebra ℚ L] [FiniteDimensional ℚ L] [HasTrivialRadical ℚ L] (H : LieSubalgebra ℚ L) [H.IsCartanSubalgebra] [LieModule.IsTriangularizable ℚ H L] (I : Type v) [Finite I] (P : RootPairing I ℚ (Module.Dual ℚ H) H) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (heval : ∀ (f : Module.Dual ℚ H) (h : H), P.toLinearMap f h = f h) (Δ : P.Base) (r N : ℕ) (δ : Fin r ≃ Δ.support) (β : Fin N ≃ {i : I // Δ.IsPos i}) (e : I → L) (he : ∀ i : I, e i ∈ LieModule.weightSpace L (P.root i) ∧ e i ≠ 0) (hopp : ∀ i : I, ⁅e i, e (P.reflectionPerm i i)⁆ = (P.coroot i : L)) (hadd : ∀ i j l : I, P.root i + P.root j = P.root l → ∃ η : ℤ, (η = 1 ∨ η = -1) ∧ ⁅e i, e j⁆ = ((η : ℚ) * (P.chainBotCoeff i j + 1)) • e l) (hzero : ∀ i j : I, P.root i + P.root j ∉ Set.range P.root → P.root i + P.root j ≠ 0 → ⁅e i, e j⁆ = 0) (B : Module.Basis (Fin r ⊕ I) ℚ L) (Bh : ∀ i : Fin r, B (Sum.inl i) = (P.coroot (δ i) : L)) (Be : ∀ i : I, B (Sum.inr i) = e i) (a b : I) (ha : Δ.IsPos a) (hb : Δ.IsPos b) (hab : LinearIndependent ℚ ![P.root a, P.root b]) (hbottom : P.root b - P.root a ∉ Set.range P.root) (k : ℕ) (hk : 1 ≤ k) (γ : I) (hγ : P.root γ = P.root b + k • P.root a) : ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ (1 / (k.factorial : ℚ)) • (((ad ℚ L (e a)) ^ k) (e b)) = (ε : ℚ) • e γ ∧ ∀ n : ℕ, 1 ≤ n → ∃ (t : ℕ) (c : Fin t → ℤ) (d : Fin t → Fin N → ℕ), (∀ i : Fin t, (∀ j : Fin N, d i j < n) ∧ (∑ j : Fin N, d i j • P.root (β j).val) = n • P.root γ ∧ (∀ j : Fin N, d i j ≠ 0 → ∃ u v : ℕ, 1 ≤ v ∧ P.root (β j).val = u • P.root a + v • P.root b)) ∧ (∑ j ∈ Finset.range (k * n + 1), (-1 : ℤ) ^ j • (Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e a)) (k * n - j) * Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e b)) n * Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e a)) j)) - ε ^ n • Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e γ)) n = ∑ i : Fin t, c i • (List.ofFn (fun j : Fin N ↦ Algebra.rationalDividedPower (UniversalEnvelopingAlgebra.ι ℚ (e (β j).val)) (d i j))).prod",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ceddceca",
+  "group": "NA",
+  "result": "pass",
+  "note": "Only the node's lean field changed (vs side-live), with one sorry theorem and no defs or new nodes. Statement is verbatim equal to the file. Every clause matches the node: HasTrivialRadical semisimple; Chevalley binders verbatim from lem-sfb-kostant-integral-pbw; chainBotCoeff i j = p_{γ,δ} (Chain.lean:116); ε∈{±1} chosen before ∀n with (1/k!)•(ad e_a)^k e_b = ε•e_γ; range(k*n+1) alternating sum in the stated factor order minus ε^n•e_γ^(n); Fin t ℤ-combination of β-ordered divided-power monomials, each with exponents < n, weight n•γ and roots u•a+v•b (v≥1); t=0 empty. Edge cases n=1, k=1, zero algebra checked; universes u,v independent. Docstrings carry source, blueprint tag and proof plan. Report has Worker report and Second reading by NA (an author pass, noted). Note: the Cartan encoding (IsCartan+IsTriangularizable) differs from the Kostant dep's (abelian+maximal); both force H = coroot span under the Chevalley-basis hypotheses, so nothing stronger is assumed. No recompile (no file changed)."
+ }
+}

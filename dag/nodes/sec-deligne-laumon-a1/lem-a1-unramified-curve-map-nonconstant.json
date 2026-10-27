@@ -1,0 +1,252 @@
+{
+ "id": "lem-a1-unramified-curve-map-nonconstant",
+ "kind": "statement",
+ "title": "An unramified map of integral curves has nonsingleton image",
+ "statement": "Let $k$ be a field and $X,Y$ be curves over $k$, meaning separated integral finite-type $k$-schemes of dimension one [def-pc-curve]. Let $h:X\\to Y$ be a $k$-morphism. If $h$ is unramified [def-weil-unramified-morphism], then its image contains at least two points. More generally, for every nonempty open subscheme $V\\subseteq X$, if $h|_V:V\\to Y$ is unramified, then $V$ is again a curve over $k$ and the image of $h|_V$ contains at least two points. No smoothness, normality, perfection of $k$, or rational point is assumed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1C, lemma-generically-etale, omitted nonconstancy check in (3) implies (4) before applying Tag 0CCK, lemma-flat"
+ },
+ "stmt_deps": [
+  "def-pc-curve",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let $V\\subseteq X$ be nonempty open. It is integral: each nonempty affine open of $V$ is a nonempty affine open of $X$ and thus has a domain as its ring of functions, exactly [def-pc-integral-scheme]. It is separated over $k$ as well. Indeed [lem-weil-pbc-open-fibre-product] identifies $V\\times_kV$ with the open subset of $X\\times_kX$ where both projections lie in $V$. The diagonal of $V$ is the restriction of the closed diagonal of $X$ to that open: its inverse image in $X$ is $V$, and its structure-sheaf map is the restricted quotient map. A closed subset remains closed in an open subspace and a surjective sheaf map remains surjective on restriction. Thus this restricted diagonal is a closed immersion, giving separatedness by [def-weil-proper-morphism].",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OK, definition-integral; separatedness by restriction of the diagonal, schemes.tex Tag 01KK, definition-separated; open fibre product Tag 01JR"
+   }
+  },
+  {
+   "text": "The scheme $\\operatorname{Spec}k$ is Noetherian: its only point has local ring $k$, whose only ideals are $(0)$ and $(1)$, and its one-point space is quasi-compact. Since $X$ is finite type over it, [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. Apply [lem-sfb-noetherian-open-immersion-qc] to $j:V\\hookrightarrow X$; its target is locally Noetherian, so $j$ is quasi-compact. Then [lem-weil-pbc-qc-open-immersion-finite-type] makes $j$ finite type, and clause (1) of [lem-sfb-finite-type-composition-base-change], applied to $j$ and $X\\to\\operatorname{Spec}k$, makes $V$ finite type over $k$. This checks the global finite-type condition even for a non-affine open $V$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6, lemma-finite-type-noetherian; 01T3, lemma-composition-finite-type; properties.tex Tag 01OX, lemma-immersion-into-noetherian; finite type criterion Tags 01T0 and 01T2"
+   }
+  },
+  {
+   "text": "The dimension in [def-pc-curve] is the supremum of local-ring dimensions. By [lem-pc-scheme-dimension-local-rings], it equals topological Krull dimension, for both $X$ and $V$. The hypotheses of [lem-sc-integral-locally-algebraic-opens-dimension] hold for $X$: it is integral and its structure map is locally of finite type, since it is finite type. Hence the nonempty open $V$ has the same topological dimension as $X$, namely one. Together with Steps 1 and 2, this says precisely that $V$ is a curve over $k$ in [def-pc-curve].",
+   "uses": [
+    "def-pc-curve",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-sc-integral-locally-algebraic-opens-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic (3); properties.tex Tag 04MU, lemma-dimension"
+   }
+  },
+  {
+   "text": "Apply the following argument with $(T,g)=(X,h)$, or with $(T,g)=(V,h|_V)$ under the respective unramified hypothesis. In either case $T$ is an integral curve, so it is nonempty and irreducible by [def-pc-integral-scheme], and its topological dimension is one by [lem-pc-scheme-dimension-local-rings]. If its image has fewer than two points, nonemptiness gives an image point $y$ and $g^{-1}(y)=T$. Unramifiedness includes local finite type by [def-weil-unramified-morphism]. For each $t\\in T$ the whole $T$ is an unramified neighbourhood, so the final, subspace formulation of [lem-weil-pbc-unramified-fibre-point-isolated] says that $\\{t\\}$ is open in $g^{-1}(y)=T$. Hence $T$ is discrete. If it had distinct points $t,u$, its nonempty opens $\\{t\\}$ and $\\{u\\}$ would be disjoint, contradicting irreducibility. Thus $T$ has exactly one point. The only nonempty irreducible closed subset of a one-point space is the whole space; the chain definition [def-kun-topological-krull-dimension] therefore gives dimension zero, contradicting dimension one. Thus each asserted image contains at least two points, whether $y$ would have been closed or generic.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-pc-scheme-dimension-local-rings",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-unramified-fibre-point-isolated",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C, lemma-generically-etale, omitted nonconstancy check in (3) implies (4), supplied using morphisms.tex Tag 02G7, lemma-unramified-over-field (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-pc-curve",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-unramified-fibre-point-isolated",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1C, lemma-generically-etale, omitted nonconstancy detail; argument via discrete fibres (Morphisms Tag 02G7), with source-open curve checks using Tags 0A21 and 04MU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(unramified|Unramified).*(nonconstant|Nonconstant)|(nonconstant|Nonconstant).*(unramified|Unramified)",
+   "results": "{\"t\": \"2026-10-22T07:57:50Z\", \"tool\": \"grep\", \"query\": \"(unramified|Unramified).*(nonconstant|Nonconstant)|(nonconstant|Nonconstant).*(unramified|Unramified)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, separability over a field and range_fromSpecResidueField do not exclude singleton images of positive-dimensional integral finite-type sources"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Unramified, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-22T07:57:51Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Unramified, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Unramified'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, separability over a field and range_fromSpecResidueField do not exclude singleton images of positive-dimensional integral finite-type sources"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unramified morphism between integral curves over a field is nonconstant and its image has at least two points",
+   "results": "{\"t\": \"2026-10-22T07:58:01Z\", \"tool\": \"leanfinder\", \"query\": \"An unramified morphism between integral curves over a field is nonconstant and its image has at least two points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified.of_comp\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"WeierstrassCurve.Affine.Point.map_some\"], \"digest\": \"6cb5af04f30d4d85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, separability over a field and range_fromSpecResidueField do not exclude singleton images of positive-dimensional integral finite-type sources"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unramified morphism of one dimensional integral varieties over a field cannot have singleton image",
+   "results": "{\"t\": \"2026-10-22T07:58:23Z\", \"tool\": \"leansearch\", \"query\": \"An unramified morphism of one dimensional integral varieties over a field cannot have singleton image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"RingHom.FormallyUnramified\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"Ideal.ramificationIdx_map_self_eq_one\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.Unramified.formallyUnramified\"], \"digest\": \"22fa493d2b007896\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, separability over a field and range_fromSpecResidueField do not exclude singleton images of positive-dimensional integral finite-type sources"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant map between curves cannot be unramified since an unramified algebra of finite type over a field has dimension zero",
+   "results": "{\"t\": \"2026-10-22T07:58:33Z\", \"tool\": \"leanfinder\", \"query\": \"A constant map between curves cannot be unramified since an unramified algebra of finite type over a field has dimension zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"Algebra.Unramified\", \"Algebra.Unramified.formallyUnramified\", \"RingHom.formallyUnramified_algebraMap\", \"Algebra.Unramified.comp\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.unramifiedLocus\"], \"digest\": \"2986ad84919d6d17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, separability over a field and range_fromSpecResidueField do not exclude singleton images of positive-dimensional integral finite-type sources"
+  },
+  {
+   "tool": "grep",
+   "query": "iff_exists_algEquiv_prod|iff_isSeparable",
+   "results": "{\"t\": \"2026-10-22T07:59:53Z\", \"tool\": \"grep\", \"query\": \"iff_exists_algEquiv_prod|iff_isSeparable\", \"sub\": \"RingTheory/Unramified\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Unramified/Field.lean\", \"Mathlib/RingTheory/Unramified/Field.lean\"], \"digest\": \"a8057ca071266d17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, separability over a field and range_fromSpecResidueField do not exclude singleton images of positive-dimensional integral finite-type sources"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-22T07:59:53Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, separability over a field and range_fromSpecResidueField do not exclude singleton images of positive-dimensional integral finite-type sources"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unramified morphism between integral curves over a field has at least two points in its image",
+   "results": "{\"t\": \"2026-10-24T00:27:37Z\", \"tool\": \"leanfinder\", \"query\": \"An unramified morphism between integral curves over a field has at least two points in its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"Algebra.Unramified\", \"NumberField.InfinitePlace.IsUnramified.comap_algHom\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\"], \"digest\": \"94373181e3960812\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give formal unramifiedness, etale implications or discrete fibres assuming local quasi-finiteness; none states the complete curve claim or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(unramified|Unramified).*(nonconstant|Nonconstant)|(nonconstant|Nonconstant).*(unramified|Unramified)",
+   "results": "{\"t\": \"2026-10-24T00:28:30Z\", \"tool\": \"grep\", \"query\": \"(unramified|Unramified).*(nonconstant|Nonconstant)|(nonconstant|Nonconstant).*(unramified|Unramified)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give formal unramifiedness, etale implications or discrete fibres assuming local quasi-finiteness; none states the complete curve claim or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of integral curves that is unramified cannot be constant",
+   "results": "{\"t\": \"2026-10-24T00:28:30Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of integral curves that is unramified cannot be constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"RingHom.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified\"], \"digest\": \"a227348f6be6ee2a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give formal unramifiedness, etale implications or discrete fibres assuming local quasi-finiteness; none states the complete curve claim or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-24T00:28:31Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give formal unramifiedness, etale implications or discrete fibres assuming local quasi-finiteness; none states the complete curve claim or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant unramified map has discrete source, so a positive dimensional integral scheme cannot map constantly by an unramified morphism",
+   "results": "{\"t\": \"2026-10-24T00:29:54Z\", \"tool\": \"leanfinder\", \"query\": \"A constant unramified map has discrete source, so a positive dimensional integral scheme cannot map constantly by an unramified morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.isField_of_universallyClosed\"], \"digest\": \"9299289f2da3cdbd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give formal unramifiedness, etale implications or discrete fibres assuming local quasi-finiteness; none states the complete curve claim or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallyUnramified|isDiscrete_preimage_singleton",
+   "results": "{\"t\": \"2026-10-24T00:32:07Z\", \"tool\": \"grep\", \"query\": \"FormallyUnramified|isDiscrete_preimage_singleton\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"21626419db50a88f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give formal unramifiedness, etale implications or discrete fibres assuming local quasi-finiteness; none states the complete curve claim or specializes to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-nonzero-differential-generically-etale",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-curve",
+   "place": "Proof, third paragraph: nonzero df implies generic etaleness; supporting criterion lem-a1-nonzero-differential-generically-etale, old step(s) 5 (both singleton-image exclusions), with the source-open curve check in step 6",
+   "via": [
+    "lem-a1-nonzero-differential-generically-etale"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-unramified-curve-map-nonconstant",
+  "worker": "stage1",
+  "summary": "Q67: statement and statement dependencies unchanged. Four proof steps check integrality/separatedness, global finite type, dimension of source opens, and nonsingleton images via the existing unramified fibre-isolation theorem. All prerequisites already have nodes; no new nodes or Mathlib leaves. Searches and exact citation extracts recorded in the sandbox. Generic singleton images are covered without smoothness or normality.",
+  "blueprint": "lem-a1-finite-map-curve, current proof paragraph 3 (generically etale), via lem-a1-nonzero-differential-generically-etale: supplies the omitted nonconstancy and source-open curve check before the normal-curve flatness criterion. The ancestor is now in current blueprint unit sk-lem-wft-finite-map; preserved inherited live node unit as required.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic comparison of the curve convention (local-ring supremum) with topological dimension, needed in Steps 3 and 4; this unit has no replacement comparison."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Generic dimension theorem for a nonempty source open in Step 3; it does not replace the affine-line weight or finite-map route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-integral-locally-algebraic-opens-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-42879b9da",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-42879b9da (reviewer sub-agent of L); spot-checked: Read the item's 4 steps, every cited statement, Stacks curves.tex 0C1C (lemma-generically-etale, where the omitted (3)=>(4) flatness step needs a nonconstant map) and morphisms.tex 02G7(2). There are no new nodes, no unit edits and no repair note; the statement and stmt_deps are unchanged. Step 1: V is integral because its nonempty affine opens are affine opens of X. It is separated because lem-weil-pbc-open-fibre-product identifies V x_k V with p^-1(V) ∩ q^-1(V), so Delta_V is the restriction of the closed Delta_X to that open (genuinely elementary). Step 2: Spec k Noetherian, so X Noetherian (finite-type-over-noetherian); then j is quasi-compact (noetherian-open-immersion-qc), hence of finite type (qc-open-immersion-finite-type); composition clause (1) gives V of finite type over k. Step 3: def-pc-dimension (local-ring supremum) is converted to topological dimension by lem-pc-scheme-dimension-local-rings; opens-dimension (X integral, locally of finite type over k) gives dim V = 1. Step 4: a singleton image means the fibre is all of T, so every point is open by the final subspace clause of lem-weil-pbc-unramified-fibre-point-isolated (local finite type from def-weil-unramified-morphism, T itself as the unramified neighbourhood). A discrete irreducible T has one point and dimension 0, a contradiction, whether y is closed or generic. Edge cases: identity, constant map to a closed or generic point, Frobenius, singular curves, imperfect k. DAG search found no duplicate (unramified-over-field-discrete, unramified-quasi-finite and the dense-open curve-setting nodes state other things). The parent lem-a1-nonzero-differential-generically-etale step 3 uses exactly this statement. Accepted generic tool_uses: lem-pc-scheme-dimension-local-rings and lem-sc-integral-locally-algebraic-opens-dimension (no route step replaced). No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.UnramifiedMapNonconstant",
+  "declaration": "AlgebraicGeometry.unramified_curve_map_nonconstant",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/UnramifiedMapNonconstant.lean",
+  "statement": "theorem unramified_curve_map_nonconstant {k : Type u} [Field k] {X Y : Scheme.{u}} (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) [IsIntegralCurve pX] [IsIntegralCurve pY] (h : X ⟶ Y) (h_over : h ≫ pY = pX) : (IsUnramified h → ∃ x₁ x₂ : X, h x₁ ≠ h x₂) ∧ (∀ V : X.Opens, Nonempty V → IsUnramified (V.ι ≫ h) → IsIntegralCurve (V.ι ≫ pX) ∧ ∃ v₁ v₂ : V.toScheme, (V.ι ≫ h) v₁ ≠ (V.ι ≫ h) v₂)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-157d24e09",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsIntegralCurve pX/pY (recorded def-pc-curve), h_over, IsUnramified h → ∃ x₁ x₂, h x₁ ≠ h x₂; ∀ V : X.Opens, Nonempty V → IsUnramified (V.ι ≫ h) → IsIntegralCurve (V.ι ≫ pX) ∧ two distinct restricted images. No extra smoothness/normality/perfection/rational-point assumptions; the single universe u is forced by Spec (.of k) and the curve interface. True via 02G7(2): fibre discrete, irreducible, so one point, dim 0 ≠ 1. lean.statement verbatim in file; node differs from live only in lean; no name clash; imports = stmt_dep modules + proof_dep modules, all exist; docstrings carry source, blueprint and 4 proof steps; sorry only; no new nodes; report has Worker report and Second reading by Q28. No findings; no compile needed."
+ }
+}

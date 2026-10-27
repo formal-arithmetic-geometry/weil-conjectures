@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-dvr-index-one-separable-base-change",
+ "kind": "statement",
+ "title": "Index one and residue separability survive normalized finite base change",
+ "statement": "Let $A\\to B$ be an injective local map of discrete valuation rings [def-sc-discrete-valuation-ring] with fraction fields $K\\subseteq L$ [def-pc-field-extension], satisfying $\\mathfrak m_AB=\\mathfrak m_B$ and with separable residue field extension $(B/\\mathfrak m_B)/(A/\\mathfrak m_A)$ in the possibly transcendental sense of [def-weil-pbc-separable-field-extension]. For a finite field extension $N/K$, let $R$ be the integral closure of $A$ in $N$ and $C$ the integral closure of $B$ in $E=(L\\otimes_KN)_{\\mathrm{red}}$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. For every maximal ideal $q$ of $C$, $n=q\\cap R$ is maximal, $R_n$ and $C_q$ are discrete valuation rings [def-weil-pbc-localization-at-prime], $nC_q=qC_q$, and $\\kappa(q)/\\kappa(n)$ is separable. These local assertions require no essential finite type, completeness, or separability of $N/K$. If, in addition, the tensor algebra $T=B\\otimes_AR$ is Noetherian [def-weil-pbc-noetherian-ring], then $L\\otimes_KN$ is reduced and the canonical map $T\\to C$ is an isomorphism. Finite means finite-dimensional; reduced means having no nonzero nilpotent element; local means pulling back maximal ideals to maximal ideals.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EQ, lemma-formally-smooth-goes-up, expressed by the equivalent index-one and separable-residue criterion Tag 09E7 (lemma-extension-dvrs-formally-smooth); Tag 09EM (remark-construction) supplies the localizations."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-dvr-algebraic-normalization-structure], case (a) with $P=N$. It gives that $n=q\\cap R$ is maximal, $V=R_n$ and $D=C_q$ are DVRs, and $k_n=\\kappa(n)$ is finite over $k=A/\\mathfrak m_A$. Put $F=B/\\mathfrak m_B$. Choose uniformizers $\\pi\\in A$ and $t\\in V$. The canonical maps $V\\to D$ and $B\\to D$ are injective and local: the embeddings of the fields $N,L$ into the field factor of $E$ selected by $q$ give injectivity; contraction gives locality. In particular $t$ has nonzero image in the maximal ideal of $D$.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EM, remark-construction (1),(3), via case (a) of the cited structure statement"
+   }
+  },
+  {
+   "text": "Let $U=B\\otimes_A V$, let $p$ be the inverse image of the maximal ideal of $D$ under $U\\to D$, and put $S=U_p$. This map extends to a local map $\\phi:S\\to D$ because every element outside $p$ maps to a unit. As $\\pi\\in tV$ and $\\pi B=\\mathfrak m_B$, balancing pure tensors gives $U/tU\\cong F\\otimes_k k_n$, sending $b\\otimes v$ to $\\bar b\\otimes\\bar v$; its inverse sends residue tensors to the classes of lifts. Thus $S/tS$ is a prime localization of $F\\otimes_k k_n$. Apply [lem-sfb-separable-residue-finite-tensor-fields]: this is a field $H$ separable over $k_n$. Consequently the maximal ideal of $S$ is exactly $tS$. No Noetherianity of $S$ is inferred.",
+   "uses": [
+    "lem-sfb-separable-residue-finite-tensor-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EQ, lemma-formally-smooth-goes-up, displayed closed-fibre calculation; valid local part only"
+   }
+  },
+  {
+   "text": "Write $E_0$ for the field factor of $E$ selected by $q$. The image of $C$ in $E_0$ has fraction field $E_0$: for $x\\in E_0$, a monic polynomial over $L$ for $x$ becomes a monic polynomial over $B$ for $\\pi^a x$ when $a$ clears its finitely many denominators; the factor idempotents are integral as well. Hence $\\operatorname{Frac}(D)=E_0$. Likewise $R[1/\\pi]=N$ by scaling a monic polynomial over $K$, and $B[1/\\pi]=L$. Therefore the image of $U[1/\\pi]$ in $E_0$ is the whole field $E_0$, since the projection $L\\otimes_KN\\to E_0$ is onto. It follows that the subring $I=\\phi(S)\\subset D$ has fraction field $E_0$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EM, remark-construction, generic localization identity; denominator scaling written out"
+   }
+  },
+  {
+   "text": "Use the integer valuation $v_D$ of the DVR $D$. For $x\\in S$ with $\\phi(x)\\ne0$, membership $x\\in t^rS$ implies $v_D(\\phi(x))\\ge r v_D(t)$, so there is a largest such $r$. Write $x=t^ru$; maximality gives $u\\notin tS$, hence $u$ is a unit. Thus every nonzero element of $I$ is $t^r$ times a unit of $I$. By Step 3, every nonzero element of $D\\subset\\operatorname{Frac}(I)$ is $t^m$ times a unit of $I$ for some integer $m$; its nonnegative $D$-valuation forces $m\\ge0$. Hence $\\phi$ is onto. Also $\\ker\\phi=\\bigcap_{r\\ge0}t^rS$: the intersection maps to zero by the same valuation bound, whereas any element outside it is $t^r$ times a unit and has nonzero image. This argument uses only the valuation description of a DVR, not a Noetherian principal-ideal criterion for $S$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, valuation description; direct argument repairing the Noetherianity gap in 09EQ"
+   }
+  },
+  {
+   "text": "The image of $t$ generates the maximal ideal of $D$. Indeed surjectivity of $\\phi$ and its locality give $\\mathfrak m_D=\\phi(tS)=tD$. Since $nV=tV$, this is $nD=qD$. Moreover $\\ker\\phi\\subset tS$, so the induced residue map $S/tS\\to D/tD$ is an isomorphism. The isomorphisms in Step 2 preserve the structural $k_n$-map, and thus identify $\\kappa(q)/\\kappa(n)$ with $H/k_n$, which is separable. This proves every unconditional local assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E7, lemma-extension-dvrs-formally-smooth, index-one and residue-separability meaning; quotient calculation from Steps 2 and 4"
+   }
+  },
+  {
+   "text": "For the additional global assertion assume $T$ is Noetherian. The injective map $A\\to B$ makes $B$ torsion free over the PID $A$, hence flat by [lem-weil-pbc-pid-torsion-free-module-flat]. By [def-weil-pbc-flat-ring-map], tensoring $R\\hookrightarrow N$ with $B$ remains injective. In $B\\otimes_AN$, $\\pi$ is invertible; it is therefore a nonzerodivisor on $T$. The identities of Step 3 give $T[1/\\pi]=L\\otimes_KN$. The kernel of $T\\to C$ is exactly the nilradical: after inverting $\\pi$ it is the kernel of reduction to $E$, so each kernel element has a nilpotent power killed by a power of $\\pi$, hence is nilpotent; nilpotents map to zero in $C$. Since every element of $C$ is integral over $B$, it is integral over $T$ too. Apply [lem-weil-pbc-integral-injective-lying-over] to $T_{\\mathrm{red}}\\hookrightarrow C$ to lift every prime of $T$ to $C$.",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0AUW and 00GQ, PID flatness and integral lying over; the source 09EQ comparison repaired with the missing Noetherianity hypothesis"
+   }
+  },
+  {
+   "text": "Fix a maximal ideal $p$ of $T$ and choose a prime $q$ of $C$ over it by Step 6. It is maximal: the domain $C/q$ is integral over the field $T/p$, so for a nonzero element its monic minimal polynomial has nonzero constant coefficient and expresses its inverse. The contraction $n=q\\cap R$ is maximal by the structure statement in Step 1. Localizing first at $R\\setminus n$ and then at $p$ identifies $T_p$ with the ring $S$ of Step 2. It is now Noetherian. Apply [lem-weil-pbc-krull-intersection-jacobson] with ring $S$, ideal $tS=\\mathfrak m_S$, and finite module $S$ over itself. Its intersection of powers is zero; Step 4 therefore makes $T_p\\to C_q$ an isomorphism. In particular every maximal localization of $T$ is a DVR. Every prime localization is a localization of one of these DVRs, hence either that DVR or its fraction field (a DVR has only the primes zero and its maximal ideal). These are integrally closed by their valuation descriptions, so $T$ is normal in the sense of [def-weil-pbc-normal-ring].",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "def-weil-pbc-normal-ring",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ, lemma-intersection-powers-ideal-module (2); Tag 00PD, lemma-characterize-dvr; Tag 00GV, definition-ring-normal"
+   }
+  },
+  {
+   "text": "The kernel of $T\\to C$ localizes to zero at every maximal ideal by Step 7, hence is zero: a nonzero kernel element has a proper annihilator, contained in some maximal ideal, at which it cannot vanish. Thus localizing the injection identifies $T[1/\\pi]=L\\otimes_KN$ with $E=C[1/\\pi]$, so the former is reduced. Furthermore $E$ is the total fraction ring of $T$. Indeed it is already a localization at the nonzerodivisor $\\pi$, and any nonzerodivisor $s\\in T$ has nonzero projection to every field factor of $E$: otherwise the corresponding nonzero idempotent, multiplied by a power of $\\pi$ to lie in $T$, would annihilate $s$. Thus $s$ is a unit of $E$. Apply [lem-weil-pbc-normal-ring-integrally-closed-total] to the normal ring $T$. Every $c\\in C\\subset E$ is integral over $B\\subset T$, hence integral over $T$ and belongs to $T$. Therefore $T\\to C$ is also surjective, giving the claimed comparison isomorphism under the stated extra hypothesis.",
+   "uses": [
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034M, lemma-normal-ring-integrally-closed; direct total-fraction and denominator argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-separable-residue-finite-tensor-fields",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-normal-ring-integrally-closed-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 09EM and 09EQ, with the unconditional comparison claims refuted; the principal-maximal-ideal local argument and the Noetherian conditional repair are written by Q39."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a local DVR extension with ramification index one and separable possibly transcendental residue field extension normalized base change by any finite extension of the lower fraction field preserves both properties",
+   "results": "{\"t\": \"2026-10-24T04:06:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a local DVR extension with ramification index one and separable possibly transcendental residue field extension normalized base change by any finite extension of the lower fraction field preserves both properties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.IsUnramifiedAt.of_liesOver\"], \"digest\": \"d70cc777d725be7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic formal smoothness base change and smooth integral-closure comparison have different hypotheses; the required index-one theorem allows transcendental separable residue extensions and arbitrary DVRs."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, FormallySmooth",
+   "results": "{\"t\": \"2026-10-24T04:06:31Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, FormallySmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'FormallySmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: invalid unqualified identifier FormallySmooth; repeated with Algebra.FormallySmooth."
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*valuation|valuation.*formallySmooth|ramificationIdx.*base|base.*ramificationIdx",
+   "results": "{\"t\": \"2026-10-24T04:06:31Z\", \"tool\": \"grep\", \"query\": \"formallySmooth.*valuation|valuation.*formallySmooth|ramificationIdx.*base|base.*ramificationIdx\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic formal smoothness base change and smooth integral-closure comparison have different hypotheses; the required index-one theorem allows transcendental separable residue extensions and arbitrary DVRs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adically formally smooth extensions of DVRs remain adically formally smooth after finite fraction field extension and normalization; the normalization equals the tensor product",
+   "results": "{\"t\": \"2026-10-24T04:06:32Z\", \"tool\": \"leansearch\", \"query\": \"Adically formally smooth extensions of DVRs remain adically formally smooth after finite fraction field extension and normalization; the normalization equals the tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instTensorProduct\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"3f9061916b874351\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic formal smoothness base change and smooth integral-closure comparison have different hypotheses; the required index-one theorem allows transcendental separable residue extensions and arbitrary DVRs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If A to B is a local map of DVRs with maximalIdeal A times B equal maximalIdeal B and separable residue extension then B tensor A integralClosure A K1 is normal for every finite extension K1 of Frac A",
+   "results": "{\"t\": \"2026-10-24T04:06:37Z\", \"tool\": \"leanfinder\", \"query\": \"If A to B is a local map of DVRs with maximalIdeal A times B equal maximalIdeal B and separable residue extension then B tensor A integralClosure A K1 is normal for every finite extension K1 of Frac A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"integralClosure.isDedekindDomain\", \"Ring.instFiniteNormalClosure_1\", \"Ring.instFiniteNormalClosure\", \"Ring.instIsDedekindDomainNormalClosure\", \"IsIntegralClosure.isDedekindDomain\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"TensorProduct.toIntegralClosure\"], \"digest\": \"1380859296b5e8e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic formal smoothness base change and smooth integral-closure comparison have different hypotheses; the required index-one theorem allows transcendental separable residue extensions and arbitrary DVRs."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.FormallySmooth",
+   "results": "{\"t\": \"2026-10-24T04:07:24Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Algebra.FormallySmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic formal smoothness base change and smooth integral-closure comparison have different hypotheses; the required index-one theorem allows transcendental separable residue extensions and arbitrary DVRs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local extensions of discrete valuation rings with ramification index one and separable residue fields preserve these properties after normalization over any finite extension of the fraction field",
+   "results": "{\"t\": \"2026-10-24T04:39:48Z\", \"tool\": \"leanfinder\", \"query\": \"Local extensions of discrete valuation rings with ramification index one and separable residue fields preserve these properties after normalization over any finite extension of the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Ideal.ramificationIdx_le_finrank\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"IsLocalization.AtPrime.ramificationIdx_map_eq_ramificationIdx\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\"], \"digest\": \"f1d6ce96e8aa380b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no combined theorem for arbitrary DVRs and nonalgebraic separable residues; smooth integral-closure comparison needs algebraic smoothness, and unramified criteria require essential finite type."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.FormallySmooth",
+   "results": "{\"t\": \"2026-10-24T04:40:50Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Algebra.FormallySmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no combined theorem for arbitrary DVRs and nonalgebraic separable residues; smooth integral-closure comparison needs algebraic smoothness, and unramified criteria require essential finite type."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx.*base|base.*ramificationIdx|FormallySmoothAdic|separable.*normalization",
+   "results": "{\"t\": \"2026-10-24T04:40:51Z\", \"tool\": \"grep\", \"query\": \"ramificationIdx.*base|base.*ramificationIdx|FormallySmoothAdic|separable.*normalization\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no combined theorem for arbitrary DVRs and nonalgebraic separable residues; smooth integral-closure comparison needs algebraic smoothness, and unramified criteria require essential finite type."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local extension of discrete valuation rings with index one and separable residue fields stays index one and residue separable after any finite fraction field extension and normalization",
+   "results": "{\"t\": \"2026-10-24T04:40:51Z\", \"tool\": \"leansearch\", \"query\": \"A local extension of discrete valuation rings with index one and separable residue fields stays index one and residue separable after any finite fraction field extension and normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\", \"of_isDiscreteValuationRing\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_one_iff\", \"IsDiscreteValuationRing.exists_lift_of_le_one\"], \"digest\": \"cb4db46fa890a5a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no combined theorem for arbitrary DVRs and nonalgebraic separable residues; smooth integral-closure comparison needs algebraic smoothness, and unramified criteria require essential finite type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Discrete valuation ring extension with separable residue extension and equal maximal ideals; localizing the tensor product after finite base extension and integral closure",
+   "results": "{\"t\": \"2026-10-24T04:41:48Z\", \"tool\": \"leanfinder\", \"query\": \"Discrete valuation ring extension with separable residue extension and equal maximal ideals; localizing the tensor product after finite base extension and integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"IsIntegralClosure.isLocalization_of_isSeparable\", \"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"instIsSeparableResidueFieldOfQuotientIdeal\"], \"digest\": \"01f87b9295c4b53e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no combined theorem for arbitrary DVRs and nonalgebraic separable residues; smooth integral-closure comparison needs algebraic smoothness, and unramified criteria require essential finite type."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized finite base change of DVRs with equal maximal ideals and separable residue extensions; tensor comparison is an isomorphism when the tensor algebra is Noetherian",
+   "results": "{\"t\": \"2026-10-24T04:53:23Z\", \"tool\": \"leansearch\", \"query\": \"Normalized finite base change of DVRs with equal maximal ideals and separable residue extensions; tensor comparison is an isomorphism when the tensor algebra is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.baseChange\", \"IsBaseChange.tensorEquiv\", \"IsLocalization.algebraTensorEquiv\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"Algebra.IsPushout.cancelBaseChangeAux\", \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"Algebra.TensorProduct.cancelBaseChange\", \"Algebra.Unramified.baseChange\"], \"digest\": \"b0ed3841abc76b5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no combined theorem for arbitrary DVRs and nonalgebraic separable residues; smooth integral-closure comparison needs algebraic smoothness, and unramified criteria require essential finite type."
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure_bijective_of_smooth|toIntegralClosure_injective_of_flat",
+   "results": "{\"t\": \"2026-10-24T04:53:23Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure_bijective_of_smooth|toIntegralClosure_injective_of_flat\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"0ebb5e32ea27fcc5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no combined theorem for arbitrary DVRs and nonalgebraic separable residues; smooth integral-closure comparison needs algebraic smoothness, and unramified criteria require essential finite type."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-essentially-finite-type-traits",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Local permanence input used to combine finitely many weak Epp solutions and then to handle every further finite extension.",
+   "via": [
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-index-one-separable-base-change",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: a nonexcellent DVR example makes the unconditional tensor reducedness and normalization comparison false, also in the stated source 09EQ. Preserve every local permanence conclusion without extra hypotheses; condition precisely the two false global assertions on Noetherianity of T. Prove local permanence by a principal-maximal-ideal tensor localization mapping to the normalized DVR, with kernel equal to its intersection of powers. For Noetherian T, Krull intersection removes that kernel and normality proves the comparison. One new statement-only field base-change lemma; all remaining tools reused. See report.md for the full counterexample and audit of the sole direct citer.",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Local permanence input used to combine finitely many weak Epp solutions and then to handle every further finite extension. Latest proof (3) read; it no longer states this historical algebra prerequisite. blueprint_refs.py ancestor returns None; retain the inherited null ancestor and via list. No equivalent blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Generic commutative algebra tool for the displayed tensor localization, integral lying-over, or normality argument; no statement of the local Epp unit replaces it. Its exact hypotheses are checked in the report."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-ring-integrally-closed-total"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-b08867910",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-b08867910 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, the citer lem-sfb-epp-essentially-finite-type-traits, and Stacks 09E7/09EM/09EQ (more-algebra.tex) and 030W. Statement change (E7, source error) accepted. The worker's counterexample is correct: K=F_p(t,f^p), L=F_p(t,f), A,B the t-adic valuation rings, N=L, R=B. Then e=1 and the residue fields are equal, so 09EQ applies by 09E7, but eps=f⊗1-1⊗f in B⊗_A B is nonzero with eps^p=0. So Stacks 09EQ is false: L⊗_K N need not be reduced and B⊗_A R→C need not be an isomorphism. The delivery keeps all local conclusions (n maximal, R_n and C_q DVRs, nC_q=qC_q, κ(q)/κ(n) separable) unconditional and adds a Noetherian hypothesis on T=B⊗_A R only for the two global claims. The only citer (steps 4 and 6) uses only the local conclusions. Steps 1-8 checked line by line. Step 2: U/tU=F⊗_k k_n because π∈tV and πB=m_B; the new node then gives m_S=tS. Steps 3-5 (elementary, correctly flagged): fraction field E_0 from scaled monic polynomials; the valuation argument gives φ:S→D surjective with kernel ∩t^rS; residue map S/tS≅D/tD. Steps 6-8: flatness over a PID; ker(T→C) = nilradical; lying-over; T_p=S; Krull intersection; T normal; E=Q(T); total-ring closure gives C⊂T. New node lem-sfb-separable-residue-finite-tensor-fields is true (030W geometric reducedness, Artinian reduced ⇒ product of fields, localization of F⊗_kΩ), tested on small cases, self-contained, statement-only, six real searches. Not a duplicate of lem-trf-geometric-reducedness-local-base-change, lem-weil-pbc-separably-generated-tensor-reduced or lem-weil-pbc-finite-separable-tensor-field-reduced. lem-sfb-abhyankar-arbitrary-dvr-branches gives only the index-one clause with e=1, not the residue-separability clause: not a duplicate. Accepted tool_use: lem-weil-pbc-normal-ring-integrally-closed-total (generic algebra, step 8). Maintainer note: record the 09EQ source error in coord/HUMAN.md (the report puts it under 'Statement corrected', not under a '## Source error' heading). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrIndexOneSeparableBaseChange",
+  "declaration": "IsDiscreteValuationRing.dvr_index_one_separable_base_change",
+  "file": "lean/Sheaf/RingTheory/DvrIndexOneSeparableBaseChange.lean",
+  "statement": "theorem dvr_index_one_separable_base_change (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (B : Type v) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [Algebra A B] [IsLocalHom (algebraMap A B)] (hinj : Function.Injective (algebraMap A B)) (K : Type w) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type x) [Field L] [Algebra B L] [IsFractionRing B L] [Algebra A L] [Algebra K L] [IsScalarTower A B L] [IsScalarTower A K L] (hindex : (IsLocalRing.maximalIdeal A).map (algebraMap A B) = IsLocalRing.maximalIdeal B) (hsep : Algebra.IsSeparableExtension (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField B)) (N : Type y) [Field N] [Algebra K N] [FiniteDimensional K N] [Algebra A N] [IsScalarTower A K N] : ∃ f : integralClosure A N →+* integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)), (∀ r : integralClosure A N, (f r : (L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)) = Ideal.Quotient.mk _ (Algebra.TensorProduct.includeRight (r : N))) ∧ (∀ (q : Ideal (integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)))) [q.IsMaximal], (q.comap f).IsMaximal ∧ IsDiscreteValuationRing (Localization.AtPrime (q.comap f)) ∧ (∃ hdom : IsDomain (Localization.AtPrime q), @IsDiscreteValuationRing (Localization.AtPrime q) _ hdom) ∧ (q.comap f).map ((algebraMap _ (Localization.AtPrime q)).comp f) = q.map (algebraMap _ (Localization.AtPrime q)) ∧ @Algebra.IsSeparableExtension (q.comap f).ResidueField q.ResidueField _ _ (Ideal.ResidueField.map (q.comap f) q f rfl).toAlgebra) ∧ (IsNoetherianRing (B ⊗[A] integralClosure A N) → IsReduced (L ⊗[K] N) ∧ ∃ e : (B ⊗[A] integralClosure A N) ≃ₐ[B] integralClosure B ((L ⊗[K] N) ⧸ nilradical (L ⊗[K] N)), ∀ (b : B) (r : integralClosure A N), e (b ⊗ₜ[A] r) = algebraMap B _ b * f r)",
+  "branch": "sheaf-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e10fc239e",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: DVRs A,B with injective IsLocalHom, fraction fields with scalar towers, hindex, hsep via Algebra.IsSeparableExtension (FG-subextensions separably generated, the transcendental notion), finite N/K with no separability; R, E and C literal (integralClosure, quotient by nilradical); f pinned by f r = mk(1⊗r), so unique; the 5 local conclusions are unconditional (C_q DVR stated with an existential IsDomain); Noetherian T ⇒ IsReduced(L⊗N) ∧ B-algebra equivalence equal to the canonical map on pure tensors, matching the stage-1 accepted 09EQ correction. Node copy changes only lean; statement is verbatim in the file; one theorem with sorry, no definitions; docstrings carry the source place, blueprint tag and 8 proof steps; imports exist; no duplicate in Mathlib/Sheaf/WeilConjectures. Direct-delivery second-reading section is advisory only. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,266 @@
+{
+ "id": "lem-per-kummer-fixed-sharp-chart-refinement",
+ "kind": "statement",
+ "title": "Kummer etale sharp-chart refinement with a prescribed base chart",
+ "statement": "Let $f:(X,M_X)\\to(Y,M_Y)$ be a Kummer etale morphism of locally Noetherian fs log schemes [def-trf-fs-log-blowup, def-per-kummer-log-morphism, def-per-fs-log-smooth-etale]. Let $\\bar x$ be a geometric point of $X$ and put $\\bar y=f(\\bar x)$. Suppose a chart $a:P\\to M_Y$ is given on $Y$, where $P$ is sharp fs (zero is its only unit) and its map to $\\overline M_{Y,\\bar y}$ is an isomorphism. There exist pointed etale neighbourhoods $U\\to Y$ of $\\bar y$ and $W\\to X\\times_YU$ of the induced point, a sharp fs monoid $Q$ with chart $b:Q\\to M_W$ inducing $Q\\simeq\\overline M_{X,\\bar x}$, and an injective homomorphism $h:P\\to Q$ such that every $q\\in Q$ has a positive multiple in $h(P)$. They satisfy $b\\circ h=f_W^\\flat(a|_U)$. The map $h^{\\rm gp}$ is injective with finite cokernel annihilated by an integer $n>0$ invertible on $U$, and the scheme comparison\n$$W\\longrightarrow U\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$$\nis etale [def-weil-etale-morphism, def-pc-fibre-product]. Monoid rings and chart comparison have the meaning of [def-per-fs-log-smooth-etale]. No finiteness of $f$, strict locality, log regularity, reducedness or flatness of the underlying morphism is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 2.2, p.72, etale-local standard-cover assertion (citing Stix 2002, 3.1.4); VI 3.7(a), p.75, sharp stalk sections and chart spreading. The prescribed sharp-base-chart refinement is an agent formulation of this local chart input; direct Stix source WANTED in report."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-kummer-log-morphism",
+  "def-per-fs-log-smooth-etale",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "First show that the relative logarithmic differential sheaf $\\omega_f$ is zero. The log-etale hypothesis implies log smoothness by [lem-per-log-smooth-composition-strict-base-change]. By [lem-per-fs-log-infinitesimal-criterion], the underlying map is locally of finite presentation and every strict square-zero test square of fine log schemes has exactly one global log lift. In particular lifts exist etale locally. These are the hypotheses of [lem-per-infinitesimal-log-differential-calculus], whose final clause gives $\\omega_f=0$. The required stability of the existence hypothesis under compatible etale restriction follows by restricting the log-etale chart data and applying the same infinitesimal criterion. Thus the differential basis at $\\bar x$ is the empty basis.",
+   "uses": [
+    "lem-per-log-smooth-composition-strict-base-change",
+    "lem-per-fs-log-infinitesimal-criterion",
+    "lem-per-infinitesimal-log-differential-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X proof of Proposition 1.2, pp.136--138; XVI proof of Proposition 3.6.3, p.252, empty differential basis for a log-etale map."
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_{X,\\bar x}$, $E=M_{X,\\bar x}^{\\rm gp}$, $D=A^\\times\\subset E$, and $R=\\overline M_{X,\\bar x}$. Apply [lem-per-very-tame-equivariant-sharp-chart] with the trivial group: its order is $1$, and its action on $R$ is trivial. In particular $R$ is sharp fs. Applying [lem-trf-fs-face-sharpening] with the unit face $\\{0\\}$ to $P$ and $R$ gives finite free groups $L=P^{\\rm gp}$ and $R^{\\rm gp}=E/D$. Let $\\varphi:L\\to E$ be pullback of the given chart germ. Apply [lem-per-log-smooth-differential-generators] to $f$ and this prescribed $P$-chart, whose group is torsion-free. Since $\\omega_{f,\\bar x}=0$, its basis has length zero. The lemma supplies an integer $n\\ge1$ invertible in $A$, $n$-divisibility of $D$, and a finite cokernel of $L\\to E/D$ killed by $n$. The map $P\\to R$ here is precisely the characteristic map using the given identification $P\\simeq\\overline M_{Y,\\bar y}$.",
+   "uses": [
+    "lem-per-very-tame-equivariant-sharp-chart",
+    "lem-trf-fs-face-sharpening",
+    "lem-per-log-smooth-differential-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.7(a), p.75, sharp characteristic and its free group; XVI proof of Proposition 3.6.3, p.252, characteristic cokernel and divisible strict-local units."
+   }
+  },
+  {
+   "text": "Apply [lem-per-divisible-unit-lattice-extension] to $(L,E,D,\\varphi,n)$. The finite-free source, torsion-free quotient, divisible units and finite cokernel hypotheses were verified in step 2. Obtain a finite free group $G$, an injection $i:L\\hookrightarrow G$ and a lift $s:G\\to E$ with $si=\\varphi$, such that $G/i(L)$ is killed by $n^k$ for some $k\\ge0$ and $\\rho:G\\to E/D=R^{\\rm gp}$ induced by $s$ is surjective. This uses the prescribed chart map $\\varphi$, so it does not replace that chart by an unrelated one.",
+   "uses": [
+    "lem-per-divisible-unit-lattice-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Lemma 3.6.4, pp.252--253, applied with zero relative differential rank."
+   }
+  },
+  {
+   "text": "The map $\\rho$ is also injective. If $\\rho(g)=0$, write $n^kg=i(p)$ for $p\\in L$. Then the characteristic group map sends $p$ to zero. Its monoid map $P\\to R$ is injective by Kummerness [def-per-kummer-log-morphism], so its group map is injective: equality of differences reduces to equality of sums in the integral monoids. Hence $p=0$, and torsion-freeness of $G$ gives $g=0$. Define $Q=s^{-1}(M_{X,\\bar x})\\subset G$. An element $e\\in E$ belongs to $M_{X,\\bar x}$ exactly when its image in $R^{\\rm gp}$ belongs to $R$: in the reverse direction choose a log element with that characteristic and subtract the remaining unit. This uses the integral log monoid and its quotient by units [def-trf-fs-log-blowup]. Consequently $Q=\\rho^{-1}(R)$, and $\\rho$ identifies $Q$ with $R$. In particular $Q$ is sharp fs and generates $G$.",
+   "uses": [
+    "def-per-kummer-log-morphism",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.1--2.2, pp.71--72; XVI proof of Proposition 3.6.3, p.252, inverse-image monoid. Agent argument: Kummer injectivity makes the auxiliary lattice map an isomorphism."
+   }
+  },
+  {
+   "text": "The homomorphism $h:P\\to Q$ is $p\\mapsto i(p)$: it lands in $Q$ since $si(p)=f^\\flat(a(p))$. It is injective. For $q\\in Q$, characteristic Kummerness [def-per-kummer-log-morphism] supplies $d>0$ and $p\\in P$ with $d\\rho(q)=\\rho i(p)$. Since $\\rho$ is injective, $dq=i(p)=h(p)$. The group map is $i:L\\to G$ under $Q^{\\rm gp}=G$, so its cokernel is killed by $n^k$. It is finite: for a finite basis of $G$, reduce each coefficient modulo $n^k$ to obtain finitely many representatives of $G/i(L)$. When $n^k=1$ the quotient is zero.",
+   "uses": [
+    "def-per-kummer-log-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.1--2.2, pp.71--72, Kummer maps; XVI Lemma 3.6.4, pp.252--253, finite-exponent auxiliary lattice quotient. Elementary consequences of steps 3--4."
+   }
+  },
+  {
+   "text": "Apply [lem-per-kato-lattice-chart-realization] with base monoid $P$ (called $Q$ in that lemma), $r=0$, the empty differential basis, and the $G,i,s,n$ of steps 2--3. All its hypotheses hold: $f$ is log smooth, $P^{\\rm gp}$ is torsion-free, $n$ is invertible in $A$, $si=\\varphi$, $G/i(L)$ is killed by a power of $n$, and $G\\to E/D$ is surjective. Its prescribed inverse-image monoid is exactly our $Q$. It yields a pointed etale neighbourhood $W_0\\to X$ and a chart $b_0:Q\\to M_{W_0}$ with germ $s|_Q$, compatible with the given $P$-chart through $h$, and an etale comparison $W_0\\to Y\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$. The induced characteristic map of this chart is $\\rho|_Q:Q\\simeq R$ by step 4. Compatibility means the equality of log sections $b_0h=f_{W_0}^\\flat a$, not merely equality of their characteristic classes.",
+   "uses": [
+    "lem-per-kato-lattice-chart-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI proof of Proposition 3.6.3, p.252, last paragraph: prescribed inverse-image monoid, chart spreading and etale comparison."
+   }
+  },
+  {
+   "text": "It remains to put the annihilator on the base. The geometric local ring map $\\mathcal O_{Y,\\bar y}\\to A$ is local; if $n$ were in the maximal ideal downstairs, its image would be in the maximal ideal of $A$. Thus $n$ is invertible at $\\bar y$. Represent its inverse by a section near $\\bar y$ and restrict until its product with $n$ is $1$. This gives an open neighbourhood $U\\subset Y$ where $n$, hence $N=n^k>0$, is invertible. The open immersion $U\\to Y$ is etale by [lem-weil-pbc-etale-composition-cancellation]. Put $W=W_0\\times_YU$. The map $W\\to X\\times_YU$ is the base change of $W_0\\to X$, hence etale by [lem-weil-pbc-etale-scheme-base-change]. The comparison for $W\\to U$ is the base change of the comparison in step 6 and is etale by the same lemma. Restrict $b_0$ and $a$ to obtain $b$ and $a|_U$. Their equality remains $bh=f_W^\\flat(a|_U)$, and their germs at the induced geometric points are unchanged by these open restrictions. Steps 4--5 give sharpness, the characteristic isomorphism, Kummerness, injectivity of the group map, and its finite cokernel annihilated by $N$. Rename $N$ as the statement's integer. This proves all the required clauses.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72, invertible annihilator on the base; restriction of the XVI 3.6.3 chart. Stacks Tags 02GO and 02GT for etale base change and open immersions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-log-smooth-composition-strict-base-change",
+  "lem-per-fs-log-infinitesimal-criterion",
+  "lem-per-infinitesimal-log-differential-calculus",
+  "lem-per-very-tame-equivariant-sharp-chart",
+  "lem-trf-fs-face-sharpening",
+  "lem-per-log-smooth-differential-generators",
+  "lem-per-divisible-unit-lattice-extension",
+  "def-per-kummer-log-morphism",
+  "def-trf-fs-log-blowup",
+  "lem-per-kato-lattice-chart-realization",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 2.2 and 3.7(a), pp.72,75; X proof of Proposition 1.2, pp.136--138; XVI Proposition 3.6.3 and Lemma 3.6.4, pp.252--253. Assembly with the Kummer-injective lattice argument in steps 4--5 written by Q69."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic etale morphism with Kummer characteristic map admits compatible sharp charts with etale scheme comparison",
+   "results": "{\"t\": \"2026-10-24T01:30:39Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic etale morphism with Kummer characteristic map admits compatible sharp charts with etale scheme comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePair.HasMap.map\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.homEquiv_symm_apply\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.instEtaleOfIsStandardEtale\"], \"digest\": \"25b4f11fe040cd9a\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.etale|sharp.*chart|Kummer.*chart",
+   "results": "{\"t\": \"2026-10-24T01:33:37Z\", \"tool\": \"grep\", \"query\": \"log.etale|sharp.*chart|Kummer.*chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log etale Kummer morphism compatible sharp characteristic monoid charts with prescribed base chart",
+   "results": "{\"t\": \"2026-10-24T01:33:37Z\", \"tool\": \"leansearch\", \"query\": \"Log etale Kummer morphism compatible sharp characteristic monoid charts with prescribed base chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.FormallyEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.of_isLocalization\"], \"digest\": \"fa9ef14108cb8f28\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Kummer logarithmic etale morphism can be presented etale locally by a sharp monoid injection with invertible finite group cokernel",
+   "results": "{\"t\": \"2026-10-24T01:33:38Z\", \"tool\": \"leanfinder\", \"query\": \"A Kummer logarithmic etale morphism can be presented etale locally by a sharp monoid injection with invertible finite group cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.hasMap\", \"Algebra.instEtaleOfIsStandardEtale\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePair.hasMap_X\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"StandardEtalePresentation.lift_bijective\"], \"digest\": \"bef29ba162ef75c3\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogEtale\"",
+   "results": "{\"t\": \"2026-10-24T01:33:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?etale|sharp.*chart|Kummer.*chart",
+   "results": "{\"t\": \"2026-10-24T03:19:07Z\", \"tool\": \"grep\", \"query\": \"log.?etale|sharp.*chart|Kummer.*chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Returned types read: ordinary standard-etale presentations and scheme morphisms, manifold charts, and number-field logarithmic unit lattices do not state the logarithmic sharp-chart refinement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible charts for a logarithmic etale morphism with fixed sharp base monoid",
+   "results": "{\"t\": \"2026-10-24T03:19:08Z\", \"tool\": \"leansearch\", \"query\": \"Compatible charts for a logarithmic etale morphism with fixed sharp base monoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"IsManifold.compatible_of_mem_maximalAtlas\", \"Manifold.LiftSourceTargetPropertyAt.domChart\", \"Algebra.FormallyEtale.localization_map\", \"ChartedSpace.atlas\", \"Algebra.FormallyEtale.of_isLocalization\", \"Manifold.LiftSourceTargetPropertyAt.codChart.congr_simp\", \"ChartedSpaceCore.chartAt\"], \"digest\": \"65853c627f643e68\"}; Returned types read: ordinary standard-etale presentations and scheme morphisms, manifold charts, and number-field logarithmic unit lattices do not state the logarithmic sharp-chart refinement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogEtale\"",
+   "results": "{\"t\": \"2026-10-24T03:19:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Returned types read: ordinary standard-etale presentations and scheme morphisms, manifold charts, and number-field logarithmic unit lattices do not state the logarithmic sharp-chart refinement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer log etale morphism has sharp charts extending a prescribed characteristic chart",
+   "results": "{\"t\": \"2026-10-24T03:19:08Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer log etale morphism has sharp charts extending a prescribed characteristic chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePair.lift\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.HasMap.map\", \"StandardEtalePair.homEquiv\"], \"digest\": \"b2e24d73841e7cc1\"}; Returned types read: ordinary standard-etale presentations and scheme morphisms, manifold charts, and number-field logarithmic unit lattices do not state the logarithmic sharp-chart refinement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A logarithmic morphism admits a chart by its characteristic monoid compatible with the base via divisible local units and a finite index lattice",
+   "results": "{\"t\": \"2026-10-24T03:19:24Z\", \"tool\": \"leanfinder\", \"query\": \"A logarithmic morphism admits a chart by its characteristic monoid compatible with the base via divisible local units and a finite index lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.dirichletUnitTheorem.logSpace\", \"NumberField.mixedEmbedding.fundamentalCone.logMap_expMapBasis\", \"NumberField.Units.logEmbedding_fundSystem\", \"NumberField.mixedEmbedding.logMap\", \"NumberField.Units.logEmbedding\", \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne\", \"NumberField.Units.logEmbeddingQuot\", \"NumberField.Units.logEmbeddingEquiv\"], \"digest\": \"4b487ecbf9f3a3eb\"}; Returned types read: ordinary standard-etale presentations and scheme morphisms, manifold charts, and number-field logarithmic unit lattices do not state the logarithmic sharp-chart refinement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-kummer-strict-local-standard-model",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-pair purity geometry: ILO X 1.8, pp.146--147, the very tame quotient and Kummer G-cover in (1.a); VI 2.2--2.3 supplies the local chart and character calculation underlying its quotient interpretation. Specifically: the compatible sharp-chart input to the strict-local Kummer cover used to interpret the very tame quotient.",
+   "via": [
+    "lem-per-kummer-strict-local-standard-model",
+    "lem-per-kummer-g-cover-fs-base-change",
+    "lem-per-gabber-abelian-stage-toric-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-kummer-fixed-sharp-chart-refinement",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Seven-step proof assembled from existing DAG lemmas: zero log differentials, finite-index lattice lift preserving the fixed base chart, Kummer injectivity eliminating auxiliary units, inverse-image sharp chart, and restriction making the annihilator invertible on the base. No new nodes. Searches in project Lean, whole DAG and blueprint, and four Mathlib search kinds with a second semantic phrasing found no attachment or Mathlib leaf.",
+  "blueprint": "The inherited ancestry is lem-per-artin-gabber-affine-curve via the strict-local standard-model node: compatible sharp-chart input to its regular-pair purity geometry. The latest blueprint node has the affine perverse estimate statement and no proof text; its inherited geometry is realized here through ILO VI 2.2 and XVI 3.6.3, without altering the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic fs-monoid algebra gives finite free groups for sharp monoids P and R. No node of this unit states this algebraic freeness assertion; it is used only as a tool, not to replace the logarithmic chart route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fs-face-sharpening"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-833743cba",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-833743cba (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged, 7 steps, no new nodes, proof_deps equal the union of uses, every step has a source, no SGA. Source check: the proof follows ILO XVI Prop 3.6.3 and its proof, and Lemme 3.6.4 (pp.252-253); lem-per-divisible-unit-lattice-extension states Lemme 3.6.4 verbatim. Step-by-step checks: (1) log etale => log smooth, the infinitesimal criterion gives unique global lifts, so omega_f=0 and r=0. (2) The very-tame lemma with the trivial group gives sharp fs characteristic; the generators lemma with the prescribed P-chart gives n invertible, n-divisible units and a finite cokernel killed by n. (3) The lattice extension gives G, i, s and rho surjective. (4) An injective map of integral monoids is injective on groups, so Kummer injectivity plus torsion-free G makes rho an isomorphism, and Q=s^{-1}(M)=rho^{-1}(R) is sharp fs. (5) h=i|_P is Kummer with finite cokernel killed by n^k. (6) Kato lattice realization with r=0: all hypotheses checked; it keeps the prescribed base chart and gives an etale comparison. (7) A local ring map shows n is invertible on an open U; base changes are etale (02GO). Small cases checked: trivial log structures, the d-root chart, empty X. No duplicate: lem-per-kummer-etale-local-chart-criterion neither prescribes the base chart nor gives sharp charts. Accepted tool_use: lem-trf-fs-face-sharpening, generic monoid algebra. Batch-5 check: all flagged citations reach the trace-formula chapter only through the general definition def-trf-fs-log-blowup or generic monoid algebra, which neither assumption gives or proves, so no RETURN. Artin-Gabber check: the item is not in the closure of lem-per-artin-gabber-affine-curve (the old qbar-middle-tstructure chain has no citers). It is live only via the sfb Gabber-modification route, and the 7 flagged nodes are local log-geometry and lattice algebra with no Qbar, middle t-structure or duality, so the finding does not apply."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KummerFixedSharpChart",
+  "declaration": "AlgebraicGeometry.exists_kummer_fixed_sharp_chart",
+  "file": "lean/Sheaf/AlgebraicGeometry/KummerFixedSharpChart.lean",
+  "statement": "theorem exists_kummer_fixed_sharp_chart {X Y : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X Y) (_hkummer : f.IsKummer) (_hetale : f.IsLogEtale) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) {P : Type u} [CommMonoid P] (_hfs : IsFineSaturatedMonoid P) (_hsharp : ∀ p : P, IsUnit p → p = 1) (a : P →* Y.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 Y.scheme)))) (_ha : Y.logStructure.IsChart (Scheme.Etale.mk (𝟙 Y.scheme)) a) (_hchar : Function.Bijective (fun p : P ↦ Associates.mk (Y.logStructure.toEtalePrelogStructure.germ (t ≫ f.base) (Scheme.Etale.mk (𝟙 Y.scheme)) ⟨t ≫ f.base, 𝟙 _, by simp⟩ (a p)))) : ∃ (U : Y.scheme.Etale) (u : (Scheme.pointSmallEtale (t ≫ f.base)).fiber.obj U) (W : X.scheme.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (k : W.left ⟶ U.left) (hk : k ≫ U.hom = W.hom ≫ f.base) (Q : Type u) (_ : CommMonoid Q) (b : Q →* X.logStructure.monoidSheaf.obj.obj (op W)) (h : P →* Q) (aU : P →* Y.logStructure.monoidSheaf.obj.obj (op U)), w.left ≫ k = u.left ∧ Etale (pullback.lift W.hom k hk.symm) ∧ aU = (Y.logStructure.monoidSheaf.obj.map (MorphismProperty.Over.homMk U.hom (Category.comp_id U.hom) : U ⟶ Scheme.Etale.mk (𝟙 Y.scheme)).op).hom.comp a ∧ IsFineSaturatedMonoid Q ∧ (∀ q : Q, IsUnit q → q = 1) ∧ X.logStructure.IsChart W b ∧ Function.Bijective (fun q : Q ↦ Associates.mk (X.logStructure.toEtalePrelogStructure.germ t W w (b q))) ∧ Function.Injective h ∧ (∀ q : Q, ∃ (d : ℕ) (p : P), 0 < d ∧ q ^ d = h p) ∧ (∀ p : P, b (h p) = f.sectionMap U W k hk (aU p)) ∧ ∃ hg : Algebra.GrothendieckGroup P →* Algebra.GrothendieckGroup Q, hg = Algebra.GrothendieckGroup.lift ((Algebra.GrothendieckGroup.of (M := Q)).comp h) ∧ Function.Injective hg ∧ Finite (Algebra.GrothendieckGroup Q ⧸ hg.range) ∧ (∃ n : ℕ, 0 < n ∧ (∀ y : U.left, IsUnit (n : U.left.presheaf.stalk y)) ∧ ∀ c : Algebra.GrothendieckGroup Q ⧸ hg.range, c ^ n = 1) ∧ ∃ c : W.left ⟶ pullback (Y.logStructure.chartToSpec U aU) (Spec.map (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom ℤ h))), c ≫ pullback.fst _ _ = k ∧ c ≫ pullback.snd _ _ = X.logStructure.chartToSpec W b ∧ Etale c",
+  "branch": "sheaf-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e22321cc2",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Node vs Lean clause by clause: Kummer ∧ log-étale (def-per-kummer says Kummer+log étale = Kummer étale); prescribed chart a on Etale.mk 𝟙 with sharp fs P and characteristic bijection at the canonical point of t≫f.base; pointed U and W with étale pullback.lift and w.left≫k=u.left; sharp fs Q chart with characteristic bijection; injective Kummer h; b∘h = f.sectionMap(aU), aU pinned to the sheaf restriction; hg pinned to GrothendieckGroup.lift, injective, finite cokernel killed by one n>0 invertible in every stalk of U; comparison c fixed by both projections and étale. No extra hypotheses. Type u universes follow dependency conventions. Statement field verbatim; 7 proof steps verbatim in docstring; source/blueprint docstrings; no definitions; only sorry. Only the lean field differs from live; all declarations used belong to stmt_dep records or Mathlib; no live duplicate, no supersession. Omitted LogSmoothCompositionStrictBaseChange import confirmed absent from live. No compile needed (no file changed). Advisory: second-reading section is an author self-check."
+ }
+}

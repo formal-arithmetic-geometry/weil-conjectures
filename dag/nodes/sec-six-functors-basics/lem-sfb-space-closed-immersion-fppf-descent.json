@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-space-closed-immersion-fppf-descent",
+ "kind": "statement",
+ "title": "Closed immersions of algebraic spaces descend along fppf coverings",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $\\{Y_i\\to Y\\}_{i\\in I}$ be a set-indexed jointly surjective family of flat locally finitely presented morphisms, with these properties tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-trf-algebraic-space-jointly-surjective-family]. Then $f$ is a closed immersion if and only if every $X\\times_Y Y_i\\to Y_i$ is a closed immersion. Here closed immersion means representable by schemes and a closed immersion on every scheme base change [def-weil-closed-immersion]; fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0420, lemma-descending-property-closed-immersion (fpqc locality, specialized to fppf families)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "First suppose $f$ is a closed immersion. For a scheme $T\\to Y_i$, the sheaf fibre products $(X\\times_Y Y_i)\\times_{Y_i}T$ and $X\\times_YT$ are canonically identical: on test schemes the inverse maps forget, respectively insert, the prescribed $Y_i$ coordinate. By the definition of closed immersion for spaces, the latter is a scheme closed in $T$. This proves both representability and the closed-immersion property of each $f_i:X\\times_Y Y_i\\to Y_i$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M4 (lemma-closed-immersion-local), (1) implies (2), applied to arbitrary space base change"
+   }
+  },
+  {
+   "text": "Conversely suppose every $f_i$ is a closed immersion. For any affine scheme $V\\to Y_i$, its pullback is a closed subscheme of $V$, hence affine by the affine-open characterization in [def-weil-closed-immersion]. Thus each $f_i$ is affine in the precise sense of [lem-sfb-space-four-property-fppf-descent], namely affine scheme source on every affine scheme test. Apply the affine clause of that node to the given set-indexed jointly surjective flat locally finitely presented family. It follows that $f$ is affine. This uses neither finite presentation of $f$ nor representability of $f$ in advance.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-space-four-property-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0420 (lemma-descending-property-closed-immersion): first descend affineness, using Tag 041Z (lemma-descending-property-affine)"
+   }
+  },
+  {
+   "text": "Fix an affine scheme $T$ and $t:T\\to Y$. Affineness just obtained gives an affine scheme $E_T$ representing $X\\times_YT$. Apply [lem-sfb-space-fppf-finite-affine-refinement] to the original covering and $t$. It gives finitely many affine schemes $V_j$, indices $a(j)$, and maps $p_j:V_j\\to T$, $r_j:V_j\\to Y_{a(j)}$ with $q_{a(j)}r_j=tp_j$; the $p_j$ are flat, locally finitely presented and jointly surjective. Accordingly $\\{p_j\\}$ is a scheme fppf covering by [def-pc-fppf-site], and is an fpqc covering by [lem-trf-fppf-covering-is-fpqc]. No individual $Y_i\\to Y$ is assumed quasi-compact.",
+   "uses": [
+    "lem-sfb-space-four-property-fppf-descent",
+    "lem-sfb-space-fppf-finite-affine-refinement",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 0DFQ (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof: finite affine refinement; topologies.tex Tag 022C, scheme fppf implies fpqc"
+   }
+  },
+  {
+   "text": "For each $j$ the scheme $E_T\\times_TV_j$ represents $X\\times_YV_j$, and also represents $(X\\times_YY_{a(j)})\\times_{Y_{a(j)}}V_j$. The identifications preserve the projection to $V_j$: on test schemes each map forgets a coordinate fixed by the maps $p_j,r_j$, and its inverse inserts that coordinate. The hypothesis that $f_{a(j)}$ is a closed immersion therefore says exactly that $E_T\\times_TV_j\\to V_j$ is a closed immersion. Apply [lem-pc-fpqc-descend-closed-immersion] to the scheme morphism $E_T\\to T$ and the fpqc family $\\{p_j\\}$. Hence $E_T\\to T$ is a closed immersion for every affine scheme test $T\\to Y$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-pc-fpqc-descend-closed-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0420 (lemma-descending-property-closed-immersion), final reduction to descent.tex Tag 02L6 (lemma-descending-property-closed-immersion)"
+   }
+  },
+  {
+   "text": "Finally let $T\\to Y$ be any scheme test. The base-change and scheme-target clauses of [lem-sfb-space-affine-locality], applied to the affine morphism $f$, show that $E=X\\times_YT$ is represented by a scheme and $E\\to T$ is affine. For every affine open $V\\subseteq T$, its inverse image in $E$ is $X\\times_YV$ over $V$, by the same fibre-product identity. The preceding step says this morphism is a closed immersion, so its source is affine and its map on affine sections is surjective. The affine-open characterization of [def-weil-closed-immersion] now says $E\\to T$ is a closed immersion. As $T$ was arbitrary, this proves the required representability and closed immersion of $f$. Empty targets and empty covers are included: an empty jointly surjective family forces $Y$ to be empty, and the finite affine refinement permits $J=\\varnothing$ over the empty affine test.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03WG (lemma-affine-local), Tag 03WI (lemma-base-change-affine); Tag 03M4 (lemma-closed-immersion-local), affine tests to scheme tests"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-four-property-fppf-descent",
+  "lem-sfb-space-fppf-finite-affine-refinement",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-sfb-space-affine-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0420 (lemma-descending-property-closed-immersion), affineness then scheme descent; fppf affine refinement from spaces-topologies.tex Tag 0DFQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closed.*immersion.*(descend|fppf|fpqc)|(descend|fppf|fpqc).*closed.*immersion",
+   "results": "{\"t\": \"2026-10-23T14:56:49Z\", \"tool\": \"grep\", \"query\": \"closed.*immersion.*(descend|fppf|fpqc)|(descend|fppf|fpqc).*closed.*immersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion criteria, base change and Zariski locality do not give descent for arbitrary algebraic spaces; universally-closed descent is only one property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersions descend under fppf covers of the target of an algebraic space",
+   "results": "{\"t\": \"2026-10-23T14:56:50Z\", \"tool\": \"leansearch\", \"query\": \"Closed immersions descend under fppf covers of the target of an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.base_closed\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\"], \"digest\": \"5b1cea66446ff06a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion criteria, base change and Zariski locality do not give descent for arbitrary algebraic spaces; universally-closed descent is only one property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T14:56:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedImmersion\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion criteria, base change and Zariski locality do not give descent for arbitrary algebraic spaces; universally-closed descent is only one property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions of algebraic spaces are local on the target for faithfully flat locally finitely presented coverings",
+   "results": "{\"t\": \"2026-10-23T14:56:51Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersions of algebraic spaces are local on the target for faithfully flat locally finitely presented coverings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"f47f376478449c9e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion criteria, base change and Zariski locality do not give descent for arbitrary algebraic spaces; universally-closed descent is only one property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a morphism of schemes becomes a closed immersion after a faithfully flat cover then it is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:56:53Z\", \"tool\": \"leanfinder\", \"query\": \"If a morphism of schemes becomes a closed immersion after a faithfully flat cover then it is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.isClosedImmersion_iff\"], \"digest\": \"6421b1e30a406ad8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion criteria, base change and Zariski locality do not give descent for arbitrary algebraic spaces; universally-closed descent is only one property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions of algebraic spaces descend along a jointly surjective flat locally finitely presented family",
+   "results": "{\"t\": \"2026-10-23T18:31:20Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersions of algebraic spaces descend along a jointly surjective flat locally finitely presented family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"d9270dd18a26a556\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes (or only one constituent property), not representability and closed immersions of arbitrary algebraic spaces. The scheme IsClosedImmersion class and scheme FlatDescent sources were read."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Cc]losed.*[Ii]mmersion.*[Dd]escend|[Dd]escend.*[Cc]losed.*[Ii]mmersion",
+   "results": "{\"t\": \"2026-10-23T18:31:48Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Cc]losed.*[Ii]mmersion.*[Dd]escend|[Dd]escend.*[Cc]losed.*[Ii]mmersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes (or only one constituent property), not representability and closed immersions of arbitrary algebraic spaces. The scheme IsClosedImmersion class and scheme FlatDescent sources were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersions of algebraic spaces are local on the target for flat locally finitely presented coverings",
+   "results": "{\"t\": \"2026-10-23T18:31:48Z\", \"tool\": \"leansearch\", \"query\": \"Closed immersions of algebraic spaces are local on the target for flat locally finitely presented coverings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsPreimmersion.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget\"], \"digest\": \"08be2d27bbc98f14\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes (or only one constituent property), not representability and closed immersions of arbitrary algebraic spaces. The scheme IsClosedImmersion class and scheme FlatDescent sources were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsClosedImmersion\"",
+   "results": "{\"t\": \"2026-10-23T18:31:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsClosedImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes (or only one constituent property), not representability and closed immersions of arbitrary algebraic spaces. The scheme IsClosedImmersion class and scheme FlatDescent sources were read."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion|descendsAlong",
+   "results": "{\"t\": \"2026-10-23T18:32:21Z\", \"tool\": \"grep\", \"query\": \"IsClosedImmersion|descendsAlong\", \"sub\": \"AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"22\", \"24\", \"26\", \"28\"], \"digest\": \"138cab9626becfbe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes (or only one constituent property), not representability and closed immersions of arbitrary algebraic spaces. The scheme IsClosedImmersion class and scheme FlatDescent sources were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is representable and a closed immersion if its pullbacks to an fppf covering are closed immersions",
+   "results": "{\"t\": \"2026-10-23T18:32:21Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces is representable and a closed immersion if its pullbacks to an fppf covering are closed immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\"], \"digest\": \"0d05112b17060edd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes (or only one constituent property), not representability and closed immersions of arbitrary algebraic spaces. The scheme IsClosedImmersion class and scheme FlatDescent sources were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-group-homogeneous-quotient",
+  "date": "2026-10-24",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). Milne Theorem 5.39 proof: existence of G/N, expanded to the independent homogeneous-space theorem 5.28 for arbitrary closed subgroups.; separatedness of the homogeneous quotient from its closed kernel pair",
+   "via": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-closed-immersion-fppf-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split the iff into base-change stability, descent of affineness, finite affine covering refinement, scheme closed-immersion descent and arbitrary scheme tests. Reused all inputs; no new nodes. Checked every cited statement and its hypotheses, original and current blueprint route, actual Mathlib search results and empty cases.",
+  "blueprint": "Retained inherited blueprint.from (its null ancestor confirmed by blueprint_refs.py ancestor). Supplies the closed-immersion descent input for separatedness of the homogeneous quotient in the inherited alteration/moduli support chain of det-thm-sf-ctf-stability-direct-images (3). Read the newest literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic sheaf fibre-product existence and universal property; no replacement in this unit; does not replace a unit proof step."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic scheme covering comparison (022C) for the affine refinement; not a trace-formula argument."
+   },
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Generic scheme descent (02L6), the final reduction explicitly required by 0420; not the Picard theorem route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-9e7a66c4a",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-9e7a66c4a (reviewer sub-agent of L); spot-checked: Read Stacks spaces-descent.tex Tag 0420 (lines 1601-1628) and 041Z (1557-1597). The 5-step split follows 0420's route: base change in step 1, which is genuinely elementary; affineness of f through the affine clause of lem-sfb-space-four-property-fppf-descent, whose hypotheses match the item exactly and which does not need f representable in advance; a finite affine fppf refinement (0DFQ node) of each affine test, which is fpqc by 022C; scheme descent 02L6 on E_T->T, using the identity of base changes via q r_j = t p_j; and arbitrary scheme tests through lem-sfb-space-affine-locality plus the 01QO affine-open characterization. All cited statements say what each step uses. Edge cases I=∅, T=∅ (J=∅) and the identity cover all hold, and no finiteness or separatedness assumption on f is used. No new nodes. No duplicate: the trf cover-descent node assumes representability and étale covers, atlas-locality is 03M4, the other locality nodes are 0424 and 041V/041W/0422. No cycle and no SGA. The item is first split here (unsplit on live, no repair note). Batch 5: the four flagged citations reach sec-trace-formula only through the generic algebraic-space foundations of sk-i-curve-zero (def-trf-algebraic-space etc.) or the Mathlib leaf 022C; no poincare, sk-thm-trace-transport or nt-assume node is in their closures, so they lie outside the assumed statements and are accepted. tool_uses (fibre products, 022C, 02L6) are accepted as generic."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceClosedImmersionFppfDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.closedImmersion_iff_fppf_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceClosedImmersionFppfDescent.lean",
+  "statement": "theorem closedImmersion_iff_fppf_pullback {S : Scheme.{u}} {I : Type w} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (Yᵢ : I → AlgebraicSpace S) (g : ∀ i : I, Yᵢ i ⟶ Y) (hflat : ∀ i : I, MapIsFlat (g i)) (hlfp : ∀ i : I, MapIsLocallyOfFinitePresentation (g i)) (hsurj : IsJointlySurjective (fun i : I ↦ (g i).hom.hom)) : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) f.hom.hom ↔ ∀ i : I, IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (Limits.pullback.snd f.hom.hom (g i).hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2adf6850e",
+  "group": "O4",
+  "result": "pass",
+  "note": "Item lean statement verbatim in the delivered file; only lean and stmt_deps (+ the landed def-sfb-space-morphism-properties, allowed by brief §5) changed against base. Clauses checked against Stacks 0420 and the dependency declarations: IsRepresentableWith (scheme test + IsPullback + IsClosedImmersion) on f and on pullback.snd to Y_i; MapIsFlat/MapIsLocallyOfFinitePresentation are the étale-chart tests; IsJointlySurjective on point classes with I : Type w unrestricted. Hypotheses identical to four_property_fppf_descent. No representability or finiteness is assumed of f. Edge cases I=∅, empty tests, identity cover OK. No duplicate statement or second definition of space closed immersion. Gates: no defs, only sorry, docstrings carry source, blueprint id and 5 proof steps, imports exist with no cycle, report has Worker report and Second reading by O4. No compile, as no file was changed; the worker reports a clean scompile."
+ }
+}

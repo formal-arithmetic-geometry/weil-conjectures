@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-open-stack-algebraic-lfp",
+ "kind": "statement",
+ "title": "Open fibred subcategories inherit algebraicity and local finite presentation",
+ "statement": "Let $S$ be a scheme, $\\mathcal Y$ an algebraic stack over $S$ [def-pc-scheme, def-sfb-algebraic-moduli-stack], and $j:\\mathcal U\\to\\mathcal Y$ a morphism of categories fibred in groupoids over $S$-schemes. Suppose that for every scheme-valued object $T\\to\\mathcal Y$, the two-fibre product $T\\times_{\\mathcal Y}\\mathcal U$ is represented over $T$ by an open subscheme [def-sfb-open-moduli-substack]. Then $\\mathcal U$ is an algebraic stack. If $\\mathcal Y\\to S$ is locally of finite presentation, so is $\\mathcal U\\to S$. Here locally of finite presentation means that a smooth surjective scheme atlas has locally finitely presented structural composite [def-sbc-locally-finite-presentation].",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 05UN, lemma-open-fibred-category-is-algebraic; stacks-morphisms.tex Tags 06Q7, lemma-open-immersion-locally-finite-presentation, and 06Q3, lemma-composition-finite-presentation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For every $T\\to\\mathcal Y$, the hypothesis supplies a scheme representing $T\\times_{\\mathcal Y}\\mathcal U$, namely its specified open subscheme of $T$. The algebraic-stack definition makes $\\mathcal Y$ an etale stack. Apply the scheme-representable fibred-category descent theorem with $\\mathcal F=\\mathcal U$, $\\mathcal G=\\mathcal Y$ and $q=j$. It follows that $\\mathcal U$ is an etale stack; no stack assumption on $\\mathcal U$ or surjectivity of $j$ is needed.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-representable-fibred-category-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UN (lemma-open-fibred-category-is-algebraic), stack assertion, specialized to scheme fibres and the etale convention"
+   }
+  },
+  {
+   "text": "The open-fibre hypothesis also makes $j$ fully faithful on each fibre. Fix $x,x'\\in\\mathcal U(T)$ and $\\alpha:j(x)\\xrightarrow{\\sim}j(x')$. In $h_T\\times_{\\mathcal Y}\\mathcal U$, formed using $j(x):h_T\\to\\mathcal Y$, consider $(\\mathrm{id}_T,x,1)$ and $(\\mathrm{id}_T,x',\\alpha)$. Under its representing equivalence they give sections of an open immersion $W\\to T$. Monomorphy of that immersion says the sections are equal. In a discrete represented groupoid equal sections have exactly one arrow between them; full faithfulness of the representing equivalence therefore gives exactly one arrow between these two triples. The 2-fibre-product arrow equation says precisely that this arrow is $a:x\\to x'$ with $j(a)=\\alpha$. Thus every $\\alpha$ lifts uniquely, naturally under restriction.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UN (lemma-open-fibred-category-is-algebraic); open-fibre specialization, using schemes.tex Tag 01L7 (lemma-immersions-monomorphisms)"
+   }
+  },
+  {
+   "text": "Check the diagonal of $\\mathcal U$ on a scheme $T\\to\\mathcal U\\times_S\\mathcal U$, specified by $x,x'\\in\\mathcal U(T)$. Its 2-fibre is equivalent to the discrete functor $\\operatorname{Isom}_{\\mathcal U}(x,x')$: over $V\\to T$ the triple $(u,a:u\\xrightarrow{\\sim}x|_V,b:u\\xrightarrow{\\sim}x'|_V)$ maps to $ba^{-1}$, with inverse $\\beta\\mapsto(x|_V,1,\\beta)$. The arrow $a$ identifies the other composite with the identity. By step 2, applying $j$ gives a restriction-compatible bijection with $\\operatorname{Isom}_{\\mathcal Y}(jx,jx')$. The same explicit equivalence identifies this last functor with the scheme test of $\\Delta_{\\mathcal Y}$ at $(jx,jx')$, which is an algebraic space by algebraicity of $\\mathcal Y$. This provides an algebraic-space representative for every scheme test of $\\Delta_{\\mathcal U}$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045G (lemma-representable-diagonal), (1) iff (2), with the fibre equivalence written out"
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas $p:A\\to\\mathcal Y$. By hypothesis $A\\times_{\\mathcal Y}\\mathcal U$ is equivalent over $A$ to an open subscheme $W\\subseteq A$. The other projection $W\\to\\mathcal U$ is the 2-base change of $p$. The representable fibred-groupoid smooth calculus makes it representable by algebraic spaces, smooth and surjective. Together with steps 1 and 3 this is exactly an algebraic-stack structure on $\\mathcal U$: etale descent, representable diagonal and a smooth surjective scheme atlas.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UM (lemma-representable-morphism-to-algebraic), atlas construction; Tags 0302 and 045C for arbitrary 2-base change"
+   }
+  },
+  {
+   "text": "The scheme inclusion $i:W\\hookrightarrow A$ is locally of finite presentation directly from the definitions. At each $w\\in W$, choose an affine open neighbourhood $V\\subseteq A$ contained in the open image of $W$. The restriction $i^{-1}V\\to V$ is an isomorphism by the definition of open immersion, so the corresponding ring map is an isomorphism. It is finitely presented as an algebra with zero generators and zero relations, after this identification. These affine neighbourhoods verify local finite presentation at every point; if $W$ is empty the condition is vacuous.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TT (lemma-open-immersion-locally-finite-presentation), proof expanded"
+   }
+  },
+  {
+   "text": "Now assume $\\mathcal Y\\to S$ is locally of finite presentation in the atlas sense stated in the item. Choose the atlas $A\\to\\mathcal Y$ in step 4 so that $A\\to S$ is locally of finite presentation. Step 5 and composition of locally finitely presented scheme maps give that $W\\to A\\to S$ is locally of finite presentation. The atlas $W\\to\\mathcal U$ of step 4, with this structural composite, witnesses exactly the asserted local finite presentation of $\\mathcal U\\to S$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TR (lemma-composition-finite-presentation), applied to the pulled-back open atlas; stacks-morphisms.tex Tags 06Q2 and 06Q3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-representable-fibred-category-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "def-weil-open-immersion",
+  "def-sbc-locally-finite-presentation",
+  "lem-sbc-locally-finite-presentation-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 05UN (lemma-open-fibred-category-is-algebraic), 05UM (lemma-representable-morphism-to-algebraic), and 045G (lemma-representable-diagonal); open-fibre specialization with the diagonal identification explicit. Finite-presentation part: morphisms.tex Tags 01TT and 01TR, using the item's smooth-atlas convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open subcategory fibred in groupoids of an algebraic stack is algebraic and locally of finite presentation over the same base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [hg : AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite presentation is itself a morphism that is locally of finite presentation. This follows from the fact that the property of being l\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open substacks of algebraic stacks have smooth scheme atlases and inherit local finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"[IsOpenImmersion f] : LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [LocallyOfFinitePresentation f] :\\n  LocallyOfFinitePresentation (f.resLE V U e)\", \"doc\": \"If a morphism of schemes is locally of finite presentation, then its restriction to any open subsets is also locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyOfFinitePresentation f] : LocallyOfFinitePresentation (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is locally of finite presentation, then for any open subset $ V $ of $ Y $, the restriction $ f|_V $ is also locally of finite presentation.\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X\", \"doc\": \"If $ X $ is an open subscheme of a locally Noetherian scheme $ Y $, then $ X $ is locally Noetherian. This follows because an open immersion $ f: X \\\\to Y $ ensures $ X $ inherits the local Noetherian \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"[IsOpenImmersion f] : LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"Open\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "openSubstack|OpenSubstack|IsAlgebraicStack|AlgebraicStack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable open immersion into an algebraic stack inherits algebraicity and local finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X : AlgebraicGeometry.PresheafedSpace CommRingCat} →\\n  (Y : AlgebraicGeometry.Scheme) →\\n    (f : X ⟶ Y.toPresheafedSpace) → [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] → AlgebraicGeometry.Scheme\", \"doc\": \"Given an open immersion from a presheafed space into a scheme, this constructs the scheme structure on the presheafed space by inheriting the local affine structure through the open immersion, ensurin\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.PresheafedSpace CommRingCat} (Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y.toPresheafedSpace)\\n  [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f],\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom Y f)\", \"doc\": \"Given an open immersion $ f : X \\to Y $ where $ Y $ is a scheme, this constructs the corresponding morphism of schemes from $ X $ (equipped with the scheme structure inherited via the open immersion) t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i : ι),\\n  AlgebraicGeometry.IsOpenImmersion (\", \"doc\": \"For each index $i$, the canonical morphism from the scheme $X_i$ to the glued scheme constructed from the gluing data is an open immersion. This asserts that the inclusion of each component scheme int\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subcategory fibred in groupoids of an algebraic stack is algebraic and locally of finite presentation over the same base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [hg : AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite presentation is itself a morphism that is locally of finite presentation. This follows from the fact that the property of being l\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or representability of set-valued Zariski sheaves, not algebraicity of fibred groupoids. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean lines 65-83; scheme composition is already lem-sbc-locally-finite-presentation-composition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open substacks of algebraic stacks have smooth scheme atlases and inherit local finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"[IsOpenImmersion f] : LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [LocallyOfFinitePresentation f] :\\n  LocallyOfFinitePresentation (f.resLE V U e)\", \"doc\": \"If a morphism of schemes is locally of finite presentation, then its restriction to any open subsets is also locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyOfFinitePresentation f] : LocallyOfFinitePresentation (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is locally of finite presentation, then for any open subset $ V $ of $ Y $, the restriction $ f|_V $ is also locally of finite presentation.\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X\", \"doc\": \"If $ X $ is an open subscheme of a locally Noetherian scheme $ Y $, then $ X $ is locally Noetherian. This follows because an open immersion $ f: X \\\\to Y $ ensures $ X $ inherits the local Noetherian \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"[IsOpenImmersion f] : LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or representability of set-valued Zariski sheaves, not algebraicity of fibred groupoids. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean lines 65-83; scheme composition is already lem-sbc-locally-finite-presentation-composition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"Open\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or representability of set-valued Zariski sheaves, not algebraicity of fibred groupoids. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean lines 65-83; scheme composition is already lem-sbc-locally-finite-presentation-composition."
+  },
+  {
+   "tool": "grep",
+   "query": "openSubstack|OpenSubstack|IsAlgebraicStack|AlgebraicStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or representability of set-valued Zariski sheaves, not algebraicity of fibred groupoids. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean lines 65-83; scheme composition is already lem-sbc-locally-finite-presentation-composition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable open immersion into an algebraic stack inherits algebraicity and local finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X : AlgebraicGeometry.PresheafedSpace CommRingCat} →\\n  (Y : AlgebraicGeometry.Scheme) →\\n    (f : X ⟶ Y.toPresheafedSpace) → [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] → AlgebraicGeometry.Scheme\", \"doc\": \"Given an open immersion from a presheafed space into a scheme, this constructs the scheme structure on the presheafed space by inheriting the local affine structure through the open immersion, ensurin\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.PresheafedSpace CommRingCat} (Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y.toPresheafedSpace)\\n  [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f],\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom Y f)\", \"doc\": \"Given an open immersion $ f : X \\to Y $ where $ Y $ is a scheme, this constructs the corresponding morphism of schemes from $ X $ (equipped with the scheme structure inherited via the open immersion) t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i : ι),\\n  AlgebraicGeometry.IsOpenImmersion (\", \"doc\": \"For each index $i$, the canonical morphism from the scheme $X_i$ to the glued scheme constructed from the gluing data is an open immersion. This asserts that the inclusion of each component scheme int\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or representability of set-valued Zariski sheaves, not algebraicity of fibred groupoids. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean lines 65-83; scheme composition is already lem-sbc-locally-finite-presentation-composition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-picard-stack-curve-geometry",
+  "date": "2026-10-23",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Supporting stack-of-line-bundles input before passing to isomorphism classes. Algebraicity part: pass from the coherent atlas to its open invertible locus, retaining local finite presentation.",
+   "via": [
+    "lem-sfb-picard-stack-curve-geometry",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-open-stack-algebraic-lfp",
+  "worker": "stage1",
+  "summary": "Six steps prove etale descent, fibrewise full faithfulness, representability of the diagonal, a restricted smooth atlas, and local finite presentation. Existing descent and fibred-groupoid base-change nodes supply the non-elementary stack inputs; the existing scheme-composition Mathlib leaf supplies composition. Open monomorphy and the two explicit groupoid calculations are elementary. No new nodes and no statement change. Fresh searches recorded with actual output.",
+  "blueprint": "Retains inherited blueprint.from.place: the Picard-stack open invertible locus is a supporting input on the alteration/moduli route toward det-thm-sf-ctf-stability-direct-images (3). Read the newest blueprint/latest proof (3). The ancestor tool returns None for this existing creation chain; no ancestor is invented. All six steps supply this local supporting result without replacing a unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-995680686",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-995680686 (reviewer sub-agent of L); spot-checked: There are no new nodes and the statement is unchanged; the delivery is a six-step proof of the Stacks 05UN specialisation (algebraic.tex l.1984; 05UM atlas) plus the lfp clause from 01TT/01TR. S1: étale-stack descent via lem-sfb-representable-fibred-category-stack, whose hypotheses (G an étale stack, T×_G F ≃ h_{P_T}) match exactly; no cycle (mechanical closure check). S2: full faithfulness of j on fibres; orientation checked against the 2-fibre-product convention j(w)φ=φ'; open-immersion monomorphy (Mathlib IsOpenImmersion.mono) and the discrete-groupoid argument give a unique lift; elementary is justified. S3: the diagonal test is identified with Isom_U ≅ Isom_Y ≅ the Δ_Y test, an algebraic space, over the same base T. S4: W=A×_Y U→U is the 2-base change of the atlas; the calculus node assumes nothing on the base-changing category, so it is legitimate before algebraicity is known. S5: an open immersion is lfp, with an explicit affine check. S6: the existential atlas-lfp convention, with composition by the Mathlib leaf. Edge cases checked: empty U, j an equivalence, nontrivial automorphisms, non-noetherian S. Duplicate candidates are not duplicates: dm-open-finite-etale-permanence (field/DM/finite hypotheses), smooth-atlas-open-image (converse direction), finite-schemes-etale-stack-descent. The off-unit cited nodes are Mathlib leaves, so there are no tool_uses; no SGA source is used. Batch-5: the three flagged citations are general stack/fibred-groupoid definitions and algebraic-space calculus. They reach sec-trace-formula only through foundational def-trf-algebraic-space, projective-bundle and fppf lemmas, which the base already reached through the stmt_dep def-sfb-algebraic-moduli-stack. None is a step of the trace formula or of Poincaré duality, so the check is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenStackAlgebraicLfp",
+  "declaration": "CategoryTheory.openStackAlgebraicLfp",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenStackAlgebraicLfp.lean",
+  "statement": "theorem openStackAlgebraicLfp {S : Scheme.{u}} (U : BasedCategory.{v₁, w₁} (Over S)) (Y : BasedCategory.{v₂, w₂} (Over S)) (j : BasedFunctor U Y) (hU : IsFibredInGroupoids U) (hY : IsAlgebraicModuliStack Y) (hOpen : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) Y), ∃ (W : Over S) (i : W ⟶ T), IsOpenImmersion i.left ∧ ∃ e : BasedFunctor (discreteModuli (yoneda.obj W)) (moduliTwoFiberProduct t j), e.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (e.comp (moduliTwoFiberFst t j)) (discreteModuliMap (yoneda.map i)))) : IsAlgebraicModuliStack U ∧ ((∃ (A : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj A)) Y), IsSmoothModuliAtlas Y A a ∧ LocallyOfFinitePresentation A.hom) → ∃ (W : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj W)) U), IsSmoothModuliAtlas U W a ∧ LocallyOfFinitePresentation W.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q146",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e414f621a",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Only the item lean record and one module are delivered; dependency nodes are identical to side-live. Checked against Stacks 05UN (algebraic.tex) and 01TT/01TR. hY is the recorded IsAlgebraicModuliStack; j is a general BasedFunctor and hU makes U fibred in groupoids, as the source assumes. hOpen quantifies over every scheme test T and pins W to an open immersion i into T, with an equivalence h_W ≃ moduliTwoFiberProduct t j over T via ModuliTwoIso, the same as OpenModuliSubstack.open_pullback for a general j. The conclusion is IsAlgebraicModuliStack U together with the existential-atlas lfp implication, matching the node and the IsSmoothModuliStack convention. No extra assumptions; universes u v1 w1 v2 w2 bound explicitly. Edge cases covered: empty U, j an equivalence, stabilizers, non-noetherian S. Statement verbatim; docstrings carry source, blueprint id and all 6 proof steps; lines at most 100; sorry only; name unique; no H4 duplicate; proof-dep modules in the import closure. Advisory: the public import of OpenModuliSubstack (a stmt_dep module) supplies no declaration. No compile, since no file was changed; the worker reports a clean scompile."
+ }
+}

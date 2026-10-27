@@ -1,0 +1,214 @@
+{
+ "id": "lem-zl-target-weight-reassembly",
+ "kind": "statement",
+ "title": "Reassembly of upper weights from restrictions to complementary pieces",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and an isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. For a separated finite-type $k_0$-scheme $S_0$ put $S=S_0\\times_{k_0}k$. Use the common-stage coefficient category $D^b_c(S,\\Qlb)$ and its constructible heart [def-weil-constructible-heart]. Weil objects and equivariant morphisms are fixed pairs as in [def-weil-weil-sheaf-complex]. Mixed upper bounds and $D_{\\le w}(S_0)$ have the meanings of [def-weil-punctual-weights; def-weil-complex-weights].\n\nLet $j_0:V_0\\hookrightarrow Y_0$ be an open immersion with closed complement $i_0:T_0\\hookrightarrow Y_0$ [def-weil-open-immersion; def-weil-closed-immersion], all schemes separated of finite type over $k_0$. Use derived pullbacks [def-weil-derived-pullback-tensor-hom], compact-support extension $Rj_{0!}$ [def-weil-integral-rational-qbar-compact-support], and $Ri_{0*}$ [def-weil-derived-direct-image], with their induced Weil structures. Fix $u\\in\\mathbf R$ and suppose\n$$Rj_{0!}(D_{\\le u}(V_0))\\subseteq D_{\\le u}(Y_0),\\qquad Ri_{0*}(D_{\\le u}(T_0))\\subseteq D_{\\le u}(Y_0).$$\nFor every constructible Weil complex $M$ on $Y_0$, if $j_0^*M\\in D_{\\le u}(V_0)$ and $i_0^*M\\in D_{\\le u}(T_0)$, then $M\\in D_{\\le u}(Y_0)$. In particular, for a constructible Weil sheaf $G$ on $Y_0$, if $j_0^*G$ and $i_0^*G$ are $\\iota$-mixed of weights at most $u$, then so is $G$. In this last assertion $G$ and its restrictions are placed in degree zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 2: reassembly on the target; old steps 8--9."
+ },
+ "stmt_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-punctual-weights",
+  "def-weil-complex-weights",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=Rj_{0!}j_0^*M$ and $B=Ri_{0*}i_0^*M$. The restriction hypotheses give $j_0^*M\\in D_{\\le u}(V_0)$ and $i_0^*M\\in D_{\\le u}(T_0)$. Apply the two assumed preservation inclusions to these particular objects. They give $A,B\\in D_{\\le u}(Y_0)$, with the same bound $u$ and no cohomological shift.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2, complex form: the two outer terms have the required upper weight bound."
+   }
+  },
+  {
+   "text": "Base change the complementary immersions to $k$. Apply [prop-sf-open-closed-triangle-all-stages] on $Y=Y_0\\times_{k_0}k$, with $\\Lambda=\\Qlb$ and underlying complex $\\operatorname{For}M$. It supplies the localization triangle with outer terms $\\operatorname{For}A$ and $\\operatorname{For}B$; its Weil-equivariance clause applies because the immersions and Weil datum come from $k_0$. Thus its arrows are morphisms of the fixed pairs in the statement, while distinguishedness is asserted in $D^b_c(Y,\\Qlb)$. Apply the outer-term criterion [lem-zl-open-closed-weight] with $X_0=Y_0$, $K=M$ and $w=u$ to the bounds of step 1. It gives $M\\in D_{\\le u}(Y_0)$. No triangulated structure on the category of fixed pairs is used.",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
+    "lem-zl-open-closed-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2, complex form: target devissage by lem-zl-open-closed-weight."
+   }
+  },
+  {
+   "text": "For the sheaf assertion, [lem-a1-constructible-pullback-t-exact] applies to the base-changed immersions between finite-type $k$-schemes at $\\Lambda=\\Qlb$. Hence $G,j_0^*G,i_0^*G$ all lie in their constructible hearts [def-weil-constructible-heart]. By the standard truncations of [prop-constructible-truncations], a heart object $F$ has $\\mathcal H^0(F)=F$ and $\\mathcal H^n(F)=0$ for $n\\ne0$. These identifications respect the induced Weil data, since Frobenius is a scheme automorphism and that node makes truncations and cohomology commute with its pullback. The zero sheaf is mixed of weights at most every real number, using the length-zero filtration in [def-weil-punctual-weights]. Thus the definition in [def-weil-complex-weights], degree by degree, says that such an $F$ belongs to $D_{\\le u}$ exactly when $F$ is mixed of weights at most $u$: degree zero has bound $u+0$, and all other degrees are zero.",
+   "uses": [
+    "lem-a1-constructible-pullback-t-exact",
+    "def-weil-constructible-heart",
+    "prop-constructible-truncations",
+    "def-weil-punctual-weights",
+    "def-weil-complex-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2, sheaf form: exact pullbacks and the degree-zero interpretation of the upper bound."
+   }
+  },
+  {
+   "text": "By step 3 the sheaf hypotheses are precisely $j_0^*G\\in D_{\\le u}(V_0)$ and $i_0^*G\\in D_{\\le u}(T_0)$. Apply the complex assertion of steps 1--2 to $M=G$ placed in degree zero. It gives $G\\in D_{\\le u}(Y_0)$, which step 3 identifies with the required mixed upper weight bound on $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2, final sentence of the sheaf argument: apply the complex assertion in degree zero."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-sf-open-closed-triangle-all-stages",
+  "lem-zl-open-closed-weight",
+  "lem-a1-constructible-pullback-t-exact",
+  "def-weil-constructible-heart",
+  "prop-constructible-truncations",
+  "def-weil-punctual-weights",
+  "def-weil-complex-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 2, target reassembly and its degree-zero sheaf specialization; the argument follows the agent-written blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible Weil sheaf or complex has mixed weights at most w if its restrictions to an open subscheme and its closed complement do",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BoundingSieve.weights\", \"module\": \"Mathlib/NumberTheory/SelbergSieve\", \"type\": \"BoundingSieve → ℕ → ℝ\", \"doc\": \"A function that assigns real number weights to natural numbers, associated with a bounding sieve in Selberg sieve theory, used to estimate the size of sifted sets of integers.\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure bounds and unrelated real weights do not state mixed Weil-weight reassembly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue mixed upper weight bounds across an open closed decomposition using extension by zero and finite closed pushforward",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BumpCovering.toPOUFun\", \"module\": \"Mathlib/Topology/PartitionOfUnity\", \"type\": \"{ι : Type u} → {X : Type v} → [inst : TopologicalSpace X] → {s : Set X} → BumpCovering ι X s → ι → X → ℝ\", \"doc\": \"For each index $i$ and point $x$ in the topological space $X$, this function maps $(i, x)$ to the product of the bump function $f_i(x)$ and the finite product over all $j$ with $\\text{WellOrderingRel}(\"}\n  {\"name\": \"WeakFEPair.f_modif_aux1\", \"module\": \"Mathlib/NumberTheory/LSeries/AbstractFuncEq\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℂ E] (P : WeakFEPair E),\\n  Set.EqOn (fun x => P.f_modif x - P.f x + P.f₀)\\n    (((Set.Ioo 0 1).indicator fun x => P.f₀ - (P.ε * ↑(x ^ (-P.k))) • P.g₀) + {1}.indicator fun x => P.f₀ - P.f 1)\\n    (Set.Ioi 0)\", \"doc\": \"For any weak functional equation pair $ P $, the function $ f_{\\\\text{modif}}(x) - f(x) + f_0 $ equals the sum of two indicator functions on $ (0, \\\\infty) $: on $ (0, 1) $ it equals $ f_0 - \\\\varepsilon\"}\n  {\"name\": \"WeakFEPair.g_modif\", \"module\": \"Mathlib/NumberTheory/LSeries/AbstractFuncEq\", \"type\": \"{E : Type u_1} → [inst : NormedAddCommGroup E] → [inst_1 : NormedSpace ℂ E] → WeakFEPair E → ℝ → E\", \"doc\": \"The function $ g_{\\\\text{modif}} : \\\\mathbb{R} \\\\to E $ is defined piecewise: for $ x > 1 $, it equals $ g(x) - g_0 $; for $ 0 < x < 1 $, it equals $ g(x) - \\\\varepsilon^{-1} \\\\cdot x^{-k} \\\\cdot f_0 $; and\"}\n  {\"name\": \"MeasureTheory.Measure.toBoxAdditive\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Measure\", \"type\": \"{ι : Type u_1} →\\n  [Finite ι] →\\n    (μ : MeasureTheory.Measure (ι → ℝ)) → [MeasureTheory.IsLocallyFiniteMeasure μ] → BoxIntegral.BoxAdditiveMap ι ℝ ⊤\", \"doc\": \"Given a finite index type $\\\\iota$ and a locally finite measure $\\\\mu$ on $\\\\mathbb{R}^\\\\iota$, this constructs an additive map over boxes in $\\\\iota$-dimensional space. The map sends each box $J$ to the r\"}\n  {\"name\": \"rieszContentAux_le\", \"module\": \"Mathlib/MeasureTheory/Integral/RieszMarkovKakutani/Basic\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] (Λ : CompactlySupportedContinuousMap X NNReal →ₗ[NNReal] NNReal)\\n  {K : TopologicalSpace.Compacts X} {f : CompactlySupportedContinuousMap X NNReal},\\n  (∀ x ∈ K, 1 ≤ f x) → rieszContentAux Λ K ≤ Λ f\", \"doc\": \"For any compact subset $ K $ of a topological space $ X $ and any compactly supported continuous function $ f : X \\\\to \\\\mathbb{R}_{\\\\geq 0} $ satisfying $ f(x) \\\\geq 1 $ for all $ x \\\\in K $, the Riesz co\"}\n  {\"name\": \"exists_lt_rieszContentAux_add_pos\", \"module\": \"Mathlib/MeasureTheory/Integral/RieszMarkovKakutani/Basic\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] (Λ : CompactlySupportedContinuousMap X NNReal →ₗ[NNReal] NNReal)\\n  [T2Space X] [LocallyCompactSpace X] (K : TopologicalSpace.Compacts X) {ε : NNReal},\\n  0 < ε → ∃ f, (∀ x ∈ K, 1 ≤ f x) ∧ Λ f < rieszContentAux Λ K + ε\", \"doc\": \"For any compact subset $K$ of a topological space $X$ and any positive real number $\\\\varepsilon > 0$, there exists a compactly supported continuous function $f: X \\\\to \\\\mathbb{R}_{\\\\geq 0}$ satisfying $\"}\n  {\"name\": \"MeasureTheory.GridLines.T_insert_le_T_lmarginal_singleton\", \"module\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality\", \"type\": \"∀ {ι : Type u_1} {A : ι → Type u_2} [inst : (i : ι) → MeasurableSpace (A i)] (μ : (i : ι) → MeasureTheory.Measure (A i))\\n  [inst_1 : DecidableEq ι] {p : ℝ} [∀ (i : ι), MeasureTheory.SigmaFinite (μ i)],\\n  0 ≤ p →\\n    ∀ (s : Finset ι),\\n      ↑s.card * p ≤ 1 →\\n        ∀ i ∉ s,\\n          ∀ {f : ((i : ι)\", \"doc\": \"For a finite set $ s $ of indices, a σ-finite measure family $ \\\\mu $, a non-negative measurable function $ f $, and parameters $ 0 \\\\leq p $ with $ |s|p \\\\leq 1 $, inserting an index $ i \\\\notin s $ sati\"}\n  {\"name\": \"HasOuterApproxClosed.measure_le_lintegral\", \"module\": \"Mathlib/MeasureTheory/Measure/HasOuterApproxClosed\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] [inst_1 : HasOuterApproxClosed X] {F : Set X} (hF : IsClosed F)\\n  [inst_2 : MeasurableSpace X] [OpensMeasurableSpace X] (μ : MeasureTheory.Measure X) (n : ℕ),\\n  μ F ≤ ∫⁻ (x : X), ↑((hF.apprSeq n) x) ∂μ\", \"doc\": \"For any closed set $F$ in a topological space $X$ with outer approximation by closed sets, and for any measure $\\\\mu$ on $X$, the measure of $F$ satisfies $\\\\mu(F) \\\\leq \\\\int_X f_n(x) \\\\, d\\\\mu$, where $f_\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure bounds and unrelated real weights do not state mixed Weil-weight reassembly"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\", \"of_openClosed\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure bounds and unrelated real weights do not state mixed Weil-weight reassembly"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost.*openClosed|mixed.*weight.*reassembl",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure bounds and unrelated real weights do not state mixed Weil-weight reassembly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mixed weights of Weil complexes can be checked on an open and closed complement",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"NumberField.mixedEmbedding.mixedEmbedding_apply_isComplex\", \"module\": \"Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic\", \"type\": \"(x : K) (w : { w // IsComplex w }) : (mixedEmbedding K x).2 w = w.val.embedding x\", \"doc\": \"For any element $x$ in the number field $K$ and any complex infinite place $w$, the component of the mixed embedding of $x$ corresponding to $w$ is equal to the image of $x$ under the embedding associ\"}\n  {\"name\": \"Affine.Simplex.excenterWeights_compl\", \"module\": \"Mathlib.Geometry.Euclidean.Incenter\", \"type\": \"(signs : Finset (Fin (n + 1))) : s.excenterWeights signsᶜ = s.excenterWeights signs\", \"doc\": \"For any finite set of indices $ S $, the normalized excenter weights computed for the complement set $ S^c $ are equal to the normalized excenter weights computed for $ S $ itself, i.e., $ \\text{excent\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousComponent_eq_zero_of_notMem\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"[DecidableEq M] (φ : MvPolynomial σ R) (i : M) (hi : i ∉ Finset.image (weight w) φ.support) :\\n  weightedHomogeneousComponent w i φ = 0\", \"doc\": \"For any multivariate polynomial $\\\\varphi \\\\in R[\\\\sigma]$ and weight function $w : \\\\sigma \\\\to M$, if $i \\\\in M$ is not in the image of $w$ restricted to the support of $\\\\varphi$, then the weighted homoge\"}\n  {\"name\": \"Affine.Simplex.excenterWeightsUnnorm_compl\", \"module\": \"Mathlib.Geometry.Euclidean.Incenter\", \"type\": \"(signs : Finset (Fin (n + 1))) : s.excenterWeightsUnnorm signsᶜ = -s.excenterWeightsUnnorm signs\", \"doc\": \"For an affine simplex $ s $ of dimension $ n $ and a finite set of indices $ signs $, the unnormalized excenter weights for the complement of $ signs $ is equal to the negative of the unnormalized exc\"}\n  {\"name\": \"NumberField.mixedEmbedding.convexBodySum_mem\", \"module\": \"Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody\", \"type\": \"{x : K} : mixedEmbedding K x ∈ (convexBodySum K B) ↔ ∑ w : InfinitePlace K, (mult w) * w.val x ≤ B\", \"doc\": \"An element $x$ of a number field $K$ lies in the convex body defined by the weighted norm sum $\\\\sum_{w} \\\\text{mult}(w) \\\\cdot \\\\|x\\\\|_w \\\\leq B$ in the mixed embedding space if and only if the sum of $\\\\te\"}\n  {\"name\": \"LieModule.Weight.noConfusionType\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"Sort u →\\n  {R : Type u_2} →\\n    {L : Type u_3} →\\n      {M : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : LieRing L] →\\n            [inst_2 : LieAlgebra R L] →\\n              [inst_3 : AddCommGroup M] →\\n                [inst_4 : Module R M] →\\n                  [inst_5 : LieRingModule L\", \"doc\": \"For a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, a Lie module $ M $ over $ \\\\mathfrak{g} $, and a weight function $ \\\\chi : \\\\mathfrak{g} \\\\to R $, this case analysis fun\"}\n  {\"name\": \"LieModule.Weight.noConfusion\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"{P : Sort u} →\\n  {R : Type u_2} →\\n    {L : Type u_3} →\\n      {M : Type u_4} →\\n        {inst : CommRing R} →\\n          {inst_1 : LieRing L} →\\n            {inst_2 : LieAlgebra R L} →\\n              {inst_3 : AddCommGroup M} →\\n                {inst_4 : Module R M} →\\n                  {inst_5 : LieRingMo\", \"doc\": \"For a commutative ring $ R $, nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, and Lie module $ M $ over $ \\\\mathfrak{g} $, this function establishes that two weights in $ M $ are equal if and only i\"}\n  {\"name\": \"Topology.RelCWComplex.isClosed_of_isClosed_inter_openCell_or_isClosed_inter_closedCell\", \"module\": \"Mathlib.Topology.CWComplex.Classical.Basic\", \"type\": \"[RelCWComplex C D] [T2Space X] {A : Set X} (hAC : A ⊆ C) (hDA : IsClosed (A ∩ D))\\n  (h : ∀ n (_ : 0 < n), ∀ (j : cell C n), IsClosed (A ∩ openCell n j) ∨ IsClosed (A ∩ closedCell n j)) : IsClosed A\", \"doc\": \"In a Hausdorff topological space $X$ equipped with a relative CW complex structure $(C,D)$, if a subset $A \\\\subseteq C$ satisfies: (1) $A \\\\cap D$ is closed, and (2) for every $n > 0$ and $n$-dimension\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived t-structure bounds and unrelated real weights do not state mixed Weil-weight reassembly"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|WeilComplex|WeilSheaf",
+   "results": "0 hit(s): none",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned topological gluing, Selberg/Lie weights, polynomial constructibility or derived cohomological bounds do not assert mixed Weil-weight reassembly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mixed upper weight bounds for constructible Weil complexes glue from open and closed restrictions",
+   "results": "8 hit(s): TopCat.GlueData.mk, upperBounds_closure, TopCat.GlueData.fromOpenSubsetsGlue, TopCat.Sheaf.interUnionPullbackConeLift, BoundingSieve.weights, RootPairing.coxeterWeightIn_le_four, AlgebraicGeometry.Scheme.Pullback.gluedIsLimit, LieModule.genWeightSpaceChain_def'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned topological gluing, Selberg/Lie weights, polynomial constructibility or derived cohomological bounds do not assert mixed Weil-weight reassembly"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\", \"of_openClosed\"",
+   "results": "0 hit(s): none",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned topological gluing, Selberg/Lie weights, polynomial constructibility or derived cohomological bounds do not assert mixed Weil-weight reassembly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible Weil complex is mixed of weights at most w when its restrictions to an open subscheme and its closed complement are, assuming extension by zero and closed pushforward preserve upper weights",
+   "results": "8 hit(s): PrimeSpectrum.ConstructibleSetData.degBound, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned topological gluing, Selberg/Lie weights, polynomial constructibility or derived cohomological bounds do not assert mixed Weil-weight reassembly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension closed weight bounds and the open closed localization triangle glue mixed Weil sheaves",
+   "results": "8 hit(s): DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned topological gluing, Selberg/Lie weights, polynomial constructibility or derived cohomological bounds do not assert mixed Weil-weight reassembly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-morphism-open-closed-reduction",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Part 2: reassembly on the target; old steps 8--9.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-target-weight-reassembly",
+  "worker": "stage1",
+  "summary": "Q44 checked the fixed-pair/common-stage statement, rejected the derived-Weil-category Lean attachment as a different category, and split reassembly into the assumed outer bounds, the existing open-closed criterion, and the degree-zero sheaf specialization. No statement change and no new nodes. All cited statements were read and verbatim quotations supplied.",
+  "blueprint": "lem-zl-morphism-open-closed-reduction.proof.md, Part 2: the last two complex-form sentences and the sheaf-form application to G in degree zero. Preservation by the two pushforwards is assumed in this item, not reproved.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-constructible-pullback-t-exact",
+    "why": "Generic common-stage pullback t-exactness ensures that the restrictions of a heart object remain heart objects; it does not replace any direct-image weight argument of this unit."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic standard cohomology and Frobenius-compatible truncations identify a heart object with its degree-zero cohomology, for the sheaf specialization; this unit contains no separate common-stage truncation interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-constructible-pullback-t-exact",
+  "prop-constructible-truncations"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-bb71bab65",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-bb71bab65 (reviewer sub-agent of L); spot-checked: This is a first split of a Q15-created leaf, not a re-split. It has no new nodes, and the statement and stmt_deps are unchanged. I read Part 2 of lem-zl-morphism-open-closed-reduction.proof.md (main-20261015). Its complex form ends with 'the target devissage [lem-zl-open-closed-weight]', and its sheaf form applies the same argument to G in degree zero. The item takes the two preservation bounds as hypotheses; the parent supplies them from lem-zl-open-shriek-weight-preservation and lem-zl-finite-pushforward. Step 1 instantiates the hypotheses (elementary). Step 2: the triangle node's hypotheses hold (X separated of finite type, Λ=Q̄_ℓ, the descent and Weil clause apply), and lem-zl-open-closed-weight applies with X_0=Y_0, K=M, w=u. The triangle citation is redundant but harmless. Step 3: lem-a1 makes the restrictions heart objects; prop-constructible-truncations gives H^0(F)=F and H^i(F)=0 for i≠0, compatibly with the Weil data; the filtration with m=0 makes the zero sheaf mixed ≤ any bound. So on the heart, D_{≤u} is equivalent to mixed ≤ u. Step 4 (elementary) puts these together. Both tool uses are accepted: lem-a1 and prop-constructible-truncations are generic and already in the statement closure through def-weil-punctual-weights and def-weil-complex-weights. Both batch-5 flags are accepted. def-weil-local-frobenius-trace is a general definition reached through the item's own weight definitions. lem-pod-texact-truncation-comparison is a generic t-structure lemma. Neither is the trace formula, Poincaré duality, or a step of their proofs. I checked the empty-V_0, empty-T_0, empty-Y_0, M=0 and negative-u cases and found no cycle and no duplicate (rg for 'reassembl' and the item id). Minor: the report mentions a citations.json that is not in the commit."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

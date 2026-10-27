@@ -3,9 +3,9 @@
  "kind": "statement",
  "title": "The normalized completion Roos triangle under completed coefficient transport",
  "status": "split",
- "statement": "Fix a prime l, a finite extension E/Q_l, and a scheme W. Let c:R^pbc_(E,W) ≅ R_(E,W) be an isomorphism of completed commutative coefficient ring sheaves whose Ring image is integralDetailedCoefficientComparison [lem-weil-pbc-integral-stratified-perfect-characterization]. Write F for derived restriction along c inverse [def-weil-pbc-bounded-constructible-tower], C for the actual reflection onto intrinsically complete objects, and η:Id→C for its unit [lem-weil-pbc-ringed-topoi-module-adjunction]. For every derived object K, the products of the intrinsic derived reductions R_n(FK) exist [def-weil-derived-complete]. There are p:F(CK)→∏_n R_n(FK) and δ:∏_n R_n(FK)→F(CK)[1] giving the distinguished Roos triangle with second arrow one minus the canonical reduction transition. They satisfy F(η_K) followed by p = the product of the canonical derived reduction units of FK. No completeness, constructibility or boundedness is assumed on K.",
+ "statement": "Fix a prime l, a finite extension E/Q_l, and a scheme W. Let c:R^pbc_(E,W) ≅ R_(E,W) be an isomorphism of completed commutative coefficient ring sheaves whose Ring image is integralDetailedCoefficientComparison [def-sfb-integral-completed-coefficient-transport]. Write F for derived restriction along c inverse [def-weil-pbc-bounded-constructible-tower], C for the actual reflection onto intrinsically complete objects, and η:Id→C for its unit [lem-weil-pbc-ringed-topoi-module-adjunction]. For every derived object K, the products of the intrinsic derived reductions R_n(FK) exist [def-weil-derived-complete]. There are p:F(CK)→∏_n R_n(FK) and δ:∏_n R_n(FK)→F(CK)[1] giving the distinguished Roos triangle with second arrow one minus the canonical reduction transition. They satisfy F(η_K) followed by p = the product of the canonical derived reduction units of FK. No completeness, constructibility or boundedness is assumed on K.",
  "stmt_deps": [
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-sfb-integral-completed-coefficient-transport",
   "def-weil-pbc-bounded-constructible-tower",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "def-weil-derived-complete"
@@ -16,47 +16,58 @@
  },
  "proof": [
   {
-   "text": "Use the normalized finite projections of the coefficient comparison to identify quotient extension after inverse coefficient restriction with intrinsic derived reduction. Apply the tensor/restriction adjunction on K-flat representatives. The comparison takes pure tensors to the same tensors with transported coefficients, so it identifies both the transition maps and the quotient-unit augmentations. Descend through the universal derived scalar counits to an isomorphism of augmented reduction sequences.",
+   "text": "Choose a flat-term K-flat representative C of K. The fixed derived evaluation counits identify each quotient reduction of K with the localized strict tower of C; reconstructionStep_comparison intertwines their transitions. The normalized completed Koszul quotient comparison and actualCompletion_quotient identify the actual reflector with the intrinsic Koszul completion, preserving the unit. actualFiberToStrict identifies this object with the strict tower derived limit, including its projection unit equations. Reflect the strict Roos triangle through these comparisons. This proves the unit-normalized PBC reduction Roos triangle for arbitrary K.",
    "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-pbc-bounded-constructible-tower",
     "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-derived-complete"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the normalized completed Koszul quotient comparison and the completed Koszul reduction Roos triangle to a representative. The resulting completion is the Koszul reflection. Uniqueness of a left adjoint to the intrinsic-complete inclusion identifies this reflection with the actual completion, and the comparison preserves its unit.",
-   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-actual-completed-reduction-reconstruction",
     "lem-weil-pbc-completed-koszul-quotient-comparison",
     "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
-    "def-weil-pbc-intrinsic-completion",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-weil-pbc-completed-quotient-unit-normalization",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Inverse restriction along the coefficient isomorphism is an exact equivalence and preserves products. Transport the distinguished triangle through it, through the preceding augmented sequence isomorphism and through the unit-compatible comparison of completion objects. The coordinate unit equations combine into the displayed product-unit equation by product extensionality. No completeness or geometric boundedness of the input is used.",
+   "text": "The prescribed Ring image of c implies the normalized commutative projection equations. Apply IntegralCoefficientPresentation.comparison to its canonical quotient lifts. It gives the augmented PBC-to-detailed quotient comparison. The detailed scalar tensor functor and the PBC scalar tensor functor have the same exact restriction right adjoint; leftAdjointUniq gives their unit-normalized comparison. The normalized DVR K-flat transition computation identifies the detailed transition with the adjoint of its smaller quotient unit. A direct calculation under the adjunction bijection proves that leftAdjointUniq preserves those transitions. The ordinary restriction compositor is the identity on sections, so its localization is the specified normalized DVR compositor.",
+   "uses": [
+    "def-sfb-integral-completed-coefficient-transport",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "lem-coef-normalized-dvr-kflat-transition",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-weil-derived-complete",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived restriction along c and c inverse are inverse exact equivalences and preserve countable products. Reflect the PBC Roos triangle through restriction along c using the augmented sequence comparison and the canonical inverse-restriction round trip. Naturality of that round trip and the quotient-unit comparison prove every coordinate of the displayed product-unit equation. Product extensionality combines them. No completeness, boundedness or constructibility assumption is imposed on K.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sfb-integral-completed-coefficient-transport",
   "def-weil-derived-complete",
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-bounded-constructible-tower",
-  "def-weil-pbc-intrinsic-completion",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-coef-normalized-dvr-kflat-transition",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-pbc-actual-completed-reduction-reconstruction",
   "lem-weil-pbc-completed-koszul-quotient-comparison",
   "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "lem-weil-pbc-completed-quotient-unit-normalization",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-weil-pbc-rlim-functoriality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Section Derived completion in the constant Noetherian case, lemma-naive-completion (099M), its Koszul reconstruction proof, and lemma-pushforward-Noetherian-case (099N). Normalize all comparisons by the quotient units."
+  "place": "Tags 099M, 099N and 06YY, normalized by quotient units; Bhatt--Scholze Definition 3.5.2. N4: reuse the strict-tower/Koszul comparison and normalized integral-presentation interfaces; prove the scalar-adjunction choice compatibility locally to avoid importing its downstream consumer."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -130,13 +141,87 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261021T111331-L-75331",
+  "landing": "20261025T204804-L-3009818",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-23",
+  "by": "Q3 stage 2",
+  "old_statement": "Fix a prime l, a finite extension E/Q_l, and a scheme W. Let c:R^pbc_(E,W) ≅ R_(E,W) be an isomorphism of completed commutative coefficient ring sheaves whose Ring image is integralDetailedCoefficientComparison [lem-weil-pbc-integral-stratified-perfect-characterization]. Write F for derived restriction along c inverse [def-weil-pbc-bounded-constructible-tower], C for the actual reflection onto intrinsically complete objects, and η:Id→C for its unit [lem-weil-pbc-ringed-topoi-module-adjunction]. For every derived object K, the products of the intrinsic derived reductions R_n(FK) exist [def-weil-derived-complete]. There are p:F(CK)→∏_n R_n(FK) and δ:∏_n R_n(FK)→F(CK)[1] giving the distinguished Roos triangle with second arrow one minus the canonical reduction transition. They satisfy F(η_K) followed by p = the product of the canonical derived reduction units of FK. No completeness, constructibility or boundedness is assumed on K.",
+  "what": "Correct the ownership of the normalized coefficient constructor, now factored into an independent module. The old reference was to its importing theorem module; no mathematical statement changes.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+   "place": "Step 1, completion coefficient comparison; Stacks Tags 099M, 099N(2),(5), 06YY and Bhatt--Scholze Definition 3.5.2."
+  },
+  "citers": [
+   {
+    "id": "def-pur-completed-coefficient-presentation-transport",
+    "holds": true,
+    "note": "Only the node owning the same coefficient comparison changed; the Lean signature is identical."
+   }
+  ],
+  "old_stmt_deps": [
+   "lem-weil-pbc-integral-stratified-perfect-characterization",
+   "def-weil-pbc-bounded-constructible-tower",
+   "lem-weil-pbc-ringed-topoi-module-adjunction",
+   "def-weil-derived-complete"
+  ],
+  "old_proof": [
+   {
+    "text": "Use the normalized finite projections of the coefficient comparison to identify quotient extension after inverse coefficient restriction with intrinsic derived reduction. Apply the tensor/restriction adjunction on K-flat representatives. The comparison takes pure tensors to the same tensors with transported coefficients, so it identifies both the transition maps and the quotient-unit augmentations. Descend through the universal derived scalar counits to an isomorphism of augmented reduction sequences.",
+    "uses": [
+     "lem-weil-pbc-integral-stratified-perfect-characterization",
+     "def-weil-pbc-bounded-constructible-tower",
+     "def-weil-pbc-adic-coefficient-datum",
+     "def-weil-derived-complete"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the normalized completed Koszul quotient comparison and the completed Koszul reduction Roos triangle to a representative. The resulting completion is the Koszul reflection. Uniqueness of a left adjoint to the intrinsic-complete inclusion identifies this reflection with the actual completion, and the comparison preserves its unit.",
+    "uses": [
+     "lem-weil-pbc-completed-koszul-quotient-comparison",
+     "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
+     "def-weil-pbc-intrinsic-completion",
+     "lem-weil-pbc-ringed-topoi-module-adjunction",
+     "lem-weil-pbc-constant-completion-equivalence"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Inverse restriction along the coefficient isomorphism is an exact equivalence and preserves products. Transport the distinguished triangle through it, through the preceding augmented sequence isomorphism and through the unit-compatible comparison of completion objects. The coordinate unit equations combine into the displayed product-unit equation by product extensionality. No completeness or geometric boundedness of the input is used.",
+    "uses": [],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-derived-complete",
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-pbc-bounded-constructible-tower",
+   "def-weil-pbc-intrinsic-completion",
+   "lem-weil-pbc-completed-koszul-quotient-comparison",
+   "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
+   "lem-weil-pbc-constant-completion-equivalence",
+   "lem-weil-pbc-integral-stratified-perfect-characterization",
+   "lem-weil-pbc-ringed-topoi-module-adjunction"
+  ]
  }
 }

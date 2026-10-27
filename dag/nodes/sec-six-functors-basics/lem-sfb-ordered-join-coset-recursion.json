@@ -1,0 +1,148 @@
+{
+ "id": "lem-sfb-ordered-join-coset-recursion",
+ "kind": "statement",
+ "title": "Recursive chain-map identity and uniform coordinate formula",
+ "statement": "Let G be a group, H a subgroup, n≥1, and a:Fin(n+1)→G. Use B, J, P, chosen vertices and diagonal H actions defined in [def-sfb-ordered-join-coset-chains]. Then dP_q=P_{q-1}d for 0≤q≤n. For each 0≤q≤n there exists a finite list of integers c and degree-q symbols over the constant family Fin(q+1), independent of all inputs h:Fin(q+1)→H, whose evaluation by sending color i and coordinate index j to h_j a_i is P_q[h_0,...,h_q]. Repeated terms may be retained. This states only the recursive comparison properties, without erasure or the composite map.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent ordered-coset expansion, calculations 1–7; the arithmetic is not asserted by the blueprint itself."
+ },
+ "stmt_deps": [
+  "def-sfb-ordered-join-coset-chains"
+ ],
+ "proof": [
+  {
+   "text": "For $B_\\bullet(Y)$ the boundary has square zero. Indeed, when original positions $a<b$ are deleted, deleting $a$ first and then position $b-1$ contributes $(-1)^{a+b-1}$, while deleting $b$ first and then position $a$ contributes $(-1)^{a+b}$. The resulting ordered tuples agree and the coefficients cancel. This pairs all terms, even when tuple entries coincide. At degree one the resulting tuple is the empty tuple; at degrees zero and $-1$ the second boundary is zero by definition. Deletion commutes with diagonal left translation because it removes the same position before or after translation; augmentation commutes because its target has trivial action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion below local continuous-cocycle descent: ordered-coset comparison, calculation 2; not asserted by the blueprint text."
+   }
+  },
+  {
+   "text": "Start the chain-map induction with $dP_0[h]=d[(0,ha_0)]=1=P_{-1}d[h]$. The augmented identity in degree $-1$ is $0=0$. Suppose $1\\leq q\\leq n$ and the identities in smaller degrees are known. For $x=[h_0,\\ldots,h_q]$ put $z=P_{q-1}(dx)$. Then $dz=P_{q-2}(d^2x)=0$ (for $q=1$ use the degree-zero identity and $P_{-1}=1$). The contraction identity of [lem-sfb-ordered-join-partial-contraction] in degree $q-1$ reads $dS^{h_0}_{q-1}z+S^{h_0}_{q-2}dz=z$, since $0\\leq q-1\\leq n-1=r-2$. Therefore $dP_qx=z=P_{q-1}dx$. Extend additively. This proves the induction without using any contraction identity in the top degree $n$.",
+   "uses": [
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion below local continuous-cocycle descent: ordered-coset comparison, calculation 3; not asserted by the blueprint text."
+   }
+  },
+  {
+   "text": "Construct the finite lists inductively as formal lists, without collecting equal terms. For $q=0$ take the single term with coefficient $1$, color $0$ and index $0$. Suppose the list in degree $q-1$ is fixed. For each deleted position $t\\in\\{0,\\ldots,q\\}$, let $\\rho_t:\\{0,\\ldots,q-1\\}\\to\\{0,\\ldots,q\\}$ be the increasing inclusion missing $t$. Copy that list, multiply each coefficient by $(-1)^t$, and replace each coordinate index $j$ by $\\rho_t(j)$. Concatenation is the expansion of $P_{q-1}(d[h_0,\\ldots,h_q])$. For each term apply the finite insertion/replacement expansion of $S^{h_0}$ in [lem-sfb-ordered-join-partial-contraction]. Keep the coordinate indices of retained vertices, and assign index $0$ to each inserted or replaced chosen vertex, since it is $h_0a_i$. Multiply the integer coefficients and concatenate all lists. The cited expansion depends only on the color list and $r$, so the resulting finite coefficients, colors and indices depend only on $q,n$. Each resulting symbol has $q+1$ increasing colors and all indices lie in $\\{0,\\ldots,q\\}$. This proves the required formula for all inputs, including equal coordinates and coincident cosets; cancellations need never be detected.",
+   "uses": [
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion below local continuous-cocycle descent: ordered-coset comparison, calculation 5; not asserted by the blueprint text."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ordered-join-partial-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent ordered-coset expansion, calculations 1–7; the arithmetic is not asserted by the blueprint itself."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant comparison from homogeneous tuple chains to an ordered join of subgroup cosets with uniform coordinate formula",
+   "results": "8 hits; Equidecomp.witness, GrpCat.SurjectiveOfEpiAuxs.g_apply_fromCoset, Equidecomp, Equidecomp.IsDecompOn, and subgroup action constructions. None concerns tuple or ordered-join chain maps.",
+   "date": "2026-10-26",
+   "verdict": "No matching comparison, erasure or tuple-chain construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free integer tuple chains and ordered colored join chains: forgetting colors commutes with alternating deletion and group translation; recursive comparison using a contraction has fixed finite formulas",
+   "results": "8 hits, concerning free group reductions (FreeGroup.Red.Step, FreeAddGroup.Red, their recursors and diamond lemmas). No chain erasure or recursive coset comparison.",
+   "date": "2026-10-26",
+   "verdict": "No matching statement or construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finsupp.linearCombination",
+   "results": "12 hits including Finsupp.linearCombination, linearCombination_single, linearCombination_apply and range_linearCombination. These supply linear extension and extensionality, but not the coset-specific formulas.",
+   "date": "2026-10-26",
+   "verdict": "Supporting Mathlib API, not an exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "orderedJoinCosetComparison|tupleBoundary|erasedComparison",
+   "results": "msearch Mathlib grep: zero hits. rg of lean/Sheaf and lean/WeilConjectures: only the assigned module defines or uses these constructions; no duplicate recursive comparison or erasure theorem.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicTopology.OrderedJoinCosetComparison",
+  "date": "2026-10-26",
+  "group": "J5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent ordered-coset expansion, calculations 1–7; the arithmetic is not asserted by the blueprint itself.",
+   "via": [
+    "lem-sfb-ordered-join-coset-comparison",
+    "lem-sfb-homogeneous-cocycle-rectangle-detection",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicTopology.OrderedJoinCosetRecursion",
+  "file": "lean/Sheaf/AlgebraicTopology/OrderedJoinCosetRecursion.lean",
+  "declaration": "AlgebraicTopology.OrderedJoin.CosetComparison.cosetComparisonRecursion",
+  "declarations": [
+   "AlgebraicTopology.OrderedJoin.CosetComparison.cosetComparisonRecursion"
+  ],
+  "statement": "theorem cosetComparisonRecursion (H : Subgroup G) (n : ℕ) (hn : 1 ≤ n)\n    (a : Fin (n + 1) → G) :\n    (∀ q : ℕ, q ≤ n →\n      (boundary (Coset H a) (q : ℤ) (arityDegree q)).comp (comparison H a (q + 1)) =\n        (comparison H a q).comp (tupleBoundary H (q : ℤ) (arityDegree q))) ∧\n    (∀ q : ℕ, q ≤ n →\n      ∃ L : List (ℤ × Symbol (fun _ : Fin (n + 1) ↦ Fin (q + 1)) (q : ℤ)),\n        ∀ h : Fin (q + 1) → H,\n          comparison H a (q + 1) (tupleTerm (q : ℤ) (List.ofFn h)) =\n            (L.map (fun t ↦ t.1 •\n              chainMap (fun i j ↦ vertex H a (h j) i) (q : ℤ)\n                (Finsupp.single t.2 1))).sum)",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6dd4c",
+  "group": "J5",
+  "result": "fix",
+  "landing": "20261026T091820-L-3378067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6dd4c",
+  "group": "J5",
+  "result": "fix",
+  "landing": "20261026T091820-L-3378067",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (identical statement); 12 moved defs vs clone block (verbatim, public re-export, 0 importers); split sorries vs item conjuncts 1,3 and 4 (verbatim, true); axioms via scratch --all compile"
+ }
+}

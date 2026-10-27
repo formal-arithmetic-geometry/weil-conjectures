@@ -161,7 +161,18 @@
   "lem-cbc-proetale-extension-zero"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -236,5 +247,33 @@
   "landing": "20261018T062855-L-670922",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\nu_X:X_{\\Proet}\\to X_{\\Et}$ be the comparison morphism of\n[def-weil-pbc-site-comparison-morphism]. For an open immersion\n$j:U\\hookrightarrow X$ and a finite commutative ring $\\Lambda$ the\ncanonical comparison\n\n$$\n\\nu_X^*j^{\\mathrm{et}}_!F\\xrightarrow{\\ \\sim\\ }j^{\\mathrm{proet}}_!\\nu_U^*F\n$$\n\nis an isomorphism for every sheaf $F$ of $\\Lambda$-modules on\n$U_{\\Et}$, naturally in $F$; here the two $j_!$ are those of\n[def-weil-pbc-extension-by-zero] and\n[def-weil-extension-by-zero]. Since all four functors are exact, it\nfollows that $j^{\\mathrm{proet}}_!$ carries a bounded-below complex\n$\\nu_U^*L$ of etale origin to the complex $\\nu_X^*j^{\\mathrm{et}}_!L$ of\netale origin.",
+  "proof": [
+   {
+    "text": "Both sides are left adjoints of functors to the sheaves on\n$U_{\\Proet}$, and we identify their right adjoints.\nBy [def-weil-pbc-site-comparison-morphism] the inverse image\n$\\nu_X^*$ is left adjoint to $\\nu_{X*}$, and it is computed on the\nobjects common to the two sites; by\n[def-weil-pbc-extension-by-zero] and\n[def-weil-extension-by-zero] the functors\n$j^{\\mathrm{et}}_!$ and $j^{\\mathrm{proet}}_!$ are left adjoint to\nthe corresponding restriction along $j$. For a sheaf $M$ on\n$X_{\\Proet}$ the two Hom-functors in $F$ are therefore\n\n$$\n\\operatorname{Hom}\\bigl(\\nu_X^*j^{\\mathrm{et}}_!F,M\\bigr)\n\\cong\\operatorname{Hom}\\bigl(j^{\\mathrm{et}}_!F,\\nu_{X*}M\\bigr)\n\\cong\\operatorname{Hom}\\bigl(F,j^{\\mathrm{et},-1}\\nu_{X*}M\\bigr),\n$$\n\n$$\n\\operatorname{Hom}\\bigl(j^{\\mathrm{proet}}_!\\nu_U^*F,M\\bigr)\n\\cong\\operatorname{Hom}\\bigl(\\nu_U^*F,j^{-1}M\\bigr)\n\\cong\\operatorname{Hom}\\bigl(F,\\nu_{U*}j^{-1}M\\bigr).\n$$",
+    "uses": [
+     "def-weil-pbc-site-comparison-morphism",
+     "def-weil-pbc-extension-by-zero",
+     "def-weil-extension-by-zero"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The two right adjoints agree as functors to sheaves on $U_{\\Et}$.\nIndeed, for an etale $W\\to U$ the under-category of etale\n$X$-schemes under $W$ has $W$ itself as initial object, because\n$W$ is etale over $X$ as a composite of etale morphisms; hence\nboth $j^{\\mathrm{et},-1}\\nu_{X*}M$ and $\\nu_{U*}j^{-1}M$ evaluate\nat $W$ to $M(W)$, the identification being the restriction of\nsections along the open immersion $U\\hookrightarrow X$. The two\nHom-functors in $F$ are therefore isomorphic, and by Yoneda the two\nleft adjoints are canonically isomorphic: this is the displayed\ncomparison, natural in $F$. Applying it termwise to a bounded-below\ncomplex $L$, and using that $j^{\\mathrm{et}}_!$, $j^{\\mathrm{proet}}_!$,\n$\\nu_X^*$ and $\\nu_U^*$ are exact\n([lem-cbc-proetale-extension-zero]), gives the statement on complexes.",
+    "uses": [
+     "lem-cbc-proetale-extension-zero"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

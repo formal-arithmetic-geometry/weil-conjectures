@@ -1,0 +1,453 @@
+{
+ "id": "lem-sfb-proper-field-algebraic-dualizing",
+ "kind": "statement",
+ "title": "Absolute algebraic dualizing complexes for proper schemes over fields",
+ "statement": "Let $k$ be a field [def-weil-field], let $f:C\\to\\operatorname{Spec}k$ be a proper morphism of schemes [def-pc-scheme, def-weil-proper-morphism, def-weil-affine-spectrum], and let $a$ be a right adjoint of $Rf_*:D_{\\mathrm{QCoh}}(\\mathcal O_C)\\to D(k)$ [def-pc-derived-category, def-pc-derived-direct-image]. Put $K=a(k[0])$. Then $K$ is an absolute algebraic dualizing complex on $C$: it has bounded coherent cohomology, every stalk $K_x$ is an algebraic dualizing complex over the Noetherian local ring $\\mathcal O_{C,x}$, that is, $K_x$ has finite injective dimension over $\\mathcal O_{C,x}$, and the scalar map $\\mathcal O_{C,x}\\to R\\operatorname{Hom}_{\\mathcal O_{C,x}}(K_x,K_x)$ is an isomorphism in the derived category. Finite injective dimension for a complex means that it is isomorphic to a bounded complex of injective modules; coherent modules are as in [pqf-def-coherent]. The assertion allows arbitrary dimension, disconnected schemes and arbitrary fields.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA3 (lemma-shriek-dualizing), applied to the dualizing complex k[0] on Spec k; Tag 0AWI (example-proper-over-local) and the immediately following example-equidimensional-over-field identify this with the proper adjoint dualizing complex."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "pqf-def-coherent",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-module-stalk-functor",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Properness gives finite type, hence a finite affine cover $C=\\bigcup_{i=1}^r U_i$, $U_i=\\operatorname{Spec}B_i$, with every $B_i$ a finite-type $k$-algebra. A field is Noetherian since its only ideals are $0,k$. The finite-type Noetherian-algebra theorem makes every $B_i$ Noetherian, and the finite-presentation theorem gives finite polynomial presentations over $k$. Thus $C$ is locally Noetherian and $f$ is locally of finite presentation. It is quasi-compact by finite type and quasi-separated by separatedness, so is of finite presentation. Every morphism to $\\operatorname{Spec}k$ is flat by the cited field-flatness lemma.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "pqf-def-locnoeth",
+    "lem-pc-flat-field",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA3, lemma-shriek-dualizing, hypotheses; algebra.tex Tags 00FN and 00FP, lemma-Noetherian-permanence and lemma-Noetherian-finite-type-is-finite-presentation."
+   }
+  },
+  {
+   "text": "Apply the proper-flat polynomial-model theorem to $f$. It gives a right adjoint $f^!$ and $K_f=f^!\\mathcal O_{\\operatorname{Spec}k}$. The affine derived equivalence identifies $\\mathcal O_{\\operatorname{Spec}k}$ with $k[0]$ and the target derived category with $D(k)$. Uniqueness of right adjoints therefore identifies the given $a$ with $f^!$ and $K$ with $K_f$. For each chosen affine $U=\\operatorname{Spec}B$, choose generators and a surjection $P=k[t_1,\\ldots,t_n]\\twoheadrightarrow B$. The same theorem identifies $K|_U$ in $D(B)$ with $L_B=R\\operatorname{Hom}_P(B,\\Omega^n_{P/k})[n]$, with the coinduced $B$-action.",
+   "uses": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BV2, remark-local-calculation-shriek; Tag 0E4P, remark-relative-dualizing-complex-bis; proper adjoint identification."
+   }
+  },
+  {
+   "text": "The polynomial regularity theorem makes $P$ Noetherian and $A=P_{\\mathfrak q}$ a regular local ring for every prime $\\mathfrak q\\subset P$. The regular-local injective-resolution theorem gives a bounded injective representative of $A[0]$. Its only cohomology module is the cyclic module $A$. Since $A$ is free of rank one over itself, the projective-resolution calculation of derived Hom gives $R\\operatorname{Hom}_A(A,A)=\\operatorname{Hom}_A(A,A)[0]\\cong A[0]$ by evaluation at $1$; the scalar map is the inverse of evaluation. Thus $A[0]$ has exactly the three properties required of the input to finite-map dualizing transfer. This establishes those properties locally, without an assertion about a bounded injective model over the nonlocal ring $P$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-trf-regular-local-bounded-injective-resolution",
+    "lem-sc-derived-hom-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AWX, lemma-regular-gorenstein; more-algebra.tex Tag 0A66, lemma-RHom-out-of-projective; algebra.tex Tag 00OQ, proposition-finite-gl-dim-polynomial-ring."
+   }
+  },
+  {
+   "text": "The polynomial differential basis gives $\\Omega^1_{P/k}=\\bigoplus_{j=1}^nP\\,dt_j$. Alternating multilinearity identifies $\\Omega^n_{P/k}$ with $P$: send $dt_1\\wedge\\cdots\\wedge dt_n$ to $1$, and on arbitrary vectors use their coefficient determinant. Expansion expresses every wedge as this determinant times the displayed generator, proving these maps inverse; for $n=0$ use $\\bigwedge^0P^0=P$. Set $M_B=R\\operatorname{Hom}_P(B,P)$ with its coinduced $B$-action. Substituting the differential-basis isomorphism in step 2 gives $L_B\\cong M_B[n]$ in $D(B)$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BV2, remark-local-calculation-shriek, top differential module; algebra.tex polynomial differential basis."
+   }
+  },
+  {
+   "text": "For any ring $T$, if a complex $N$ has bounded finitely generated cohomology, a bounded injective representative, and an invertible scalar map $T\\to R\\operatorname{Hom}_T(N,N)$, then $N[n]$ has the same properties. Shift its bounded injective representative; its cohomology becomes $H^{j+n}(N)$. Shifting both Hom arguments cancels in $R\\operatorname{Hom}_T(N[n],N[n])\\cong R\\operatorname{Hom}_T(N,N)$. The cancellation sends $t\\,\\mathrm{id}_{N[n]}$ to $t\\,\\mathrm{id}_N$, so identifies the scalar maps. We will apply this elementary argument to the local complexes constructed in step 10; no such properties of $M_B$ over the unlocalized ring $B$ are assumed here.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7B, definition-dualizing, shift invariance by the three displayed conditions."
+   }
+  },
+  {
+   "text": "Since $B$ is a quotient of the Noetherian ring $P$, it is cyclic as a $P$-module. The finite-free resolution theorem supplies an exact augmented resolution $F_\\bullet\\to B$ with every $F_i$ finite free; it need not terminate. Regard it as a bounded-above projective cochain resolution of $B[0]$. The projective derived-Hom calculation represents $M_B$, after forgetting its $B$-action, by $\\operatorname{Hom}_P(F_\\bullet,P)$. Its terms are finite free and occur only in nonnegative cohomological degrees. The Noetherian submodule theorem makes its cycles finitely generated; the cohomology, a quotient of the cycles, is finitely generated over $P$. It is therefore finitely generated over $B$ as well: for the coinduced action a lift in $P$ of $b\\in B$ acts as $b$, and the same finite generators work. Also $H^j(M_B)=0$ for $j<0$.",
+   "uses": [
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sc-derived-hom-projective-resolution",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LP, lemma-resolution-by-finite-free (2), and 00IK, lemma-Noetherian-basic; more-algebra.tex Tag 0A66, lemma-RHom-out-of-projective."
+   }
+  },
+  {
+   "text": "For every maximal ideal $\\mathfrak M\\subset P$, localization $P\\to P_{\\mathfrak M}$ is flat. Apply the flat coherent derived-Hom base-change statement with $C=B[0]$ and $Z=P[0]$; both have bounded finite cohomology over the Noetherian ring $P$. It identifies $(M_B)_{\\mathfrak M}$ with $R\\operatorname{Hom}_{P_{\\mathfrak M}}(B\\otimes_PP_{\\mathfrak M},P_{\\mathfrak M})$. The local ring $P_{\\mathfrak M}$ is regular by step 3 and has dimension $n$ by the maximal-localization dimension theorem. Its global dimension is at most $n$, so a projective resolution of length $n$ and the projective derived-Hom calculation give zero cohomology in degrees $j>n$. Flat localization commutes with cohomology. A module zero at all maximal localizations is zero: a nonzero element has a proper annihilator, contained in a maximal ideal, and cannot vanish there by the fraction criterion. Consequently $H^j(M_B)=0$ for $j>n$. Together with step 6 and the shift in step 4, this gives finite cohomology for $L_B$, supported in $[-n,0]$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-trf-flat-coherent-homothety-base-change",
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "lem-weil-pbc-regular-local-finite-gl-dim",
+    "lem-sc-derived-hom-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A, lemma-base-change-RHom (3); algebra.tex Tags 00HT, lemma-flat-localization (1), 00OP, lemma-dim-affine-space, and 00O7, proposition-regular-finite-gl-dim; projective calculation Tag 0A66."
+   }
+  },
+  {
+   "text": "The affine equivalence of step 2 is induced by termwise associated sheaf, so the derived tilde-cohomology comparison gives $H^j(K)|_{U_i}\\cong\\widetilde{H^j(L_{B_i})}$. The finite-type affine-module criterion makes these quasi-coherent sheaves of finite type; since $U_i$ is locally Noetherian, the coherent/finite-type criterion makes them coherent. Coherence is local by its definition, so $H^j(K)$ is coherent on $C$. Step 7 supplies bounds $a_i=-n_i\\le b_i=0$ for the cohomology of $L_{B_i}$. For nonempty $C$, the finite cover gives integers $a=\\min_i a_i$, $b=\\max_i b_i$; the displayed cohomology identifications imply $H^j(K)=0$ for $j\\notin[a,b]$, since a sheaf zero on an open cover is zero. Thus $K$ has bounded coherent cohomology. If $C$ is empty, its module category and its derived category have only the zero object, so the conclusion holds with bounds $[0,0]$.",
+   "uses": [
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA3, lemma-shriek-dualizing, affine locality; perfect.tex Tag 06Z0, lemma-affine-compare-bounded; coherent.tex Tag 01XZ, lemma-coherent-Noetherian."
+   }
+  },
+  {
+   "text": "For $x\\in U=\\operatorname{Spec}B$, let $\\mathfrak p\\subset B$ be its prime and $\\mathfrak q\\subset P$ its inverse image. The affine stalk-ring formula identifies $\\mathcal O_{C,x}$ with $B_{\\mathfrak p}$. Taking termwise associated sheaves of a complex representing $L_B$, the tilde-stalk formula and exactness of stalks identify $K_x\\cong(L_B)_{\\mathfrak p}$ in $D(B_{\\mathfrak p})$. Put $A=P_{\\mathfrak q}$ and $D=B_{\\mathfrak p}$. Then $B\\otimes_PA=D$: the images of $P\\setminus\\mathfrak q$ are exactly $B\\setminus\\mathfrak p$, since $P\\to B$ is surjective. The flat localization and coherent derived-Hom base-change statements, again applied to $C=B[0]$, $Z=P[0]$, give\n$$(M_B)_{\\mathfrak p}\\cong R\\operatorname{Hom}_A(D,A).$$\nThe canonical comparison is $D$-linear: coefficient localization respects $(b\\varphi)(y)=\\varphi(by)$, the action defining coinduction on both sides. Its underlying $A$-linear map is the base-change isomorphism, hence it is an isomorphism in $D(D)$ as well, since forgetting scalars detects zero cohomology of its cone. With step 4 this identifies $K_x$ with $R\\operatorname{Hom}_A(D,A)[n]$ as a derived $D$-object.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-localization-flat",
+    "lem-trf-flat-coherent-homothety-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A, lemma-base-change-RHom (3); schemes.tex Tag 01HV, lemma-spec-sheaves (6),(7); algebra.tex Tag 00HT, lemma-flat-localization (1)."
+   }
+  },
+  {
+   "text": "The localized quotient $A=P_{\\mathfrak q}\\to D=B_{\\mathfrak p}$ is surjective, so $D$ is generated by $1$ as an $A$-module. The ring $A$ is Noetherian by step 3 and so is its quotient $D$ (ideals of $D$ lift to ideals of $A$). Apply finite-map dualizing transfer with the complex $A[0]$: finite cohomology, the bounded injective model and the scalar isomorphism were all verified in step 3. Its conclusion gives finite cohomology, a bounded injective representative and the scalar homothety isomorphism for $R\\operatorname{Hom}_A(D,A)$ as a $D$-complex. Apply step 5 to its shift by $[n]$, and the derived identification of step 9. Thus $K_x$ has the asserted bounded injective representative and scalar homothety isomorphism over $D\\cong\\mathcal O_{C,x}$. Step 8 supplies the global bounded coherent cohomology. No equidimensionality, connectedness or perfection hypothesis was used.",
+   "uses": [
+    "lem-trf-finite-map-dualizing-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AX0, lemma-dualizing-finite, over the localized polynomial quotient; regular-local input Tag 0AWX, lemma-regular-gorenstein; duality.tex Tag 0AA3 for the overall conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-locnoeth",
+  "lem-pc-flat-field",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "det-sp-unique-right-adjoint",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-trf-regular-local-bounded-injective-resolution",
+  "lem-sc-derived-hom-projective-resolution",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "def-weil-pbc-exterior-algebra",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-localization-flat",
+  "lem-trf-flat-coherent-homothety-base-change",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-trf-finite-map-dualizing-transfer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA3, lemma-shriek-dualizing, proper-field specialization; revised local-algebra proof using dualizing.tex Tags 0AWX and 0AX0, more-algebra.tex Tag 0A6A, and algebra.tex Tags 00LP, 00OP and 00O7. Replaces global polynomial-dualizing and dualizing-localization inputs in response to the route-pivot return."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme over a field the right adjoint of derived pushforward applied to the field is an absolute algebraic dualizing complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pushforward adjunctions and injective-dimension predicates do not prove the proper right adjoint applied to k has finite injective dimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent dualizing complex of a proper variety has finite injective dimension at every stalk",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLE\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → C → ℕ → Prop\", \"doc\": \"For an object $ X $ in an abelian category $ C $, the statement that $ X $ has injective dimension less than or equal to $ n $.\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → C → ℕ → Prop\", \"doc\": \"For an object $ X $ in an abelian category $ C $, the statement that $ X $ has injective dimension less than $ n $.\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext Y X i), e = 0) →\\n    CategoryTheory.HasInjectiveDimensionLT X n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, an object $X$ has injective dimension less than $n$ if and only if for every object $Y$ in $\\\\mathcal{C}$ and every integer $i \\\\geq n$, the Ext group $\\\\operatornam\"}\n  {\"name\": \"CategoryTheory.injectiveDimension_ne_top_iff\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (X : C),\\n  CategoryTheory.injectiveDimension X ≠ ⊤ ↔ ∃ n, CategoryTheory.HasInjectiveDimensionLE X n\", \"doc\": \"An object $X$ in an abelian category $\\\\mathcal{C}$ has finite injective dimension if and only if there exists a natural number $n$ such that the injective dimension of $X$ is bounded above by $n$.\"}\n  {\"name\": \"CategoryTheory.instHasInjectiveDimensionLTOfNatNatOfInjective\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (X : C)\\n  [CategoryTheory.Injective X], CategoryTheory.HasInjectiveDimensionLT X 1\", \"doc\": \"If $ X $ is an injective object in an abelian category, then $ X $ has injective dimension less than 1.\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.mk'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext Y X i)) →\\n    CategoryTheory.HasInjectiveDimensionLT X n\", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, if for all $ i \\\\geq n $ and all objects $ Y $, the Ext group $ \\\\operatorname{Ext}^i(Y, X) $ is trivial (i.e., contains at most one element),\"}\n  {\"name\": \"CategoryTheory.instHasInjectiveDimensionLTSucc\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (X : C) (n : ℕ)\\n  [CategoryTheory.HasInjectiveDimensionLT X n], CategoryTheory.HasInjectiveDimensionLT X n.succ\", \"doc\": \"If an object $ X $ in an abelian category has injective dimension less than $ n $, then it also has injective dimension less than $ n + 1 $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pushforward adjunctions and injective-dimension predicates do not prove the proper right adjoint applied to k has finite injective dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pushforward adjunctions and injective-dimension predicates do not prove the proper right adjoint applied to k has finite injective dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|injectiveDimension",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"line\": \"18\", \"text\": \"This file deals with preservation of `injectiveDimension` in (semi) linear equivalences.\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"line\": \"24\", \"text\": \"* `ModuleCat.hasInjectiveDimensionLE_iff_of_linearEquiv`: `HasInjectiveDimensionLE` is preserved\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"line\": \"27\", \"text\": \"* `ModuleCat.hasInjectiveDimensionLE_iff_of_semiLinearEquiv`: `HasInjectiveDimensionLE` is preserved\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"line\": \"30\", \"text\": \"* `ModuleCat.injectiveDimension_eq_of_semiLinearEquiv`: `injectiveDimension` is preserved\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"line\": \"33\", \"text\": \"* `ModuleCat.injectiveDimension_eq_of_linearEquiv`: `injectiveDimension` is preserved\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"32\", \"text\": \"* consider dualizing the results to right adjoints\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"line\": \"45\", \"text\": \"lemma localizedModule_hasInjectiveDimensionLE [Small.{v, u} R] [IsNoetherianRing R] (n : ℕ)\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"line\": \"46\", \"text\": \"    (S : Submonoid R) (M : ModuleCat.{v} R) [HasInjectiveDimensionLE M n] :\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"line\": \"47\", \"text\": \"    HasInjectiveDimensionLE (M.localizedModule S) n := by\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"line\": \"51\", \"text\": \"    have injle : HasInjectiveDimensionLE M 0 := ‹_›\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"line\": \"52\", \"text\": \"    simp only [HasInjectiveDimensionLE, zero_add, ← injective_iff_hasInjectiveDimensionLT_one]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"22\", \"text\": \"by dualizing this file. These two files should be kept in sync.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"21\", \"text\": \"Note: this file was obtained by dualizing the definitions in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"27\", \"text\": \"(This file was obtained by dualizing the results in the file\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"20\", \"text\": \"This file was obtained by dualizing the definitions in\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"line\": \"12\", \"text\": \"# The dualizing functor on `Cat`\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"line\": \"190\", \"text\": \"and dualizing the result using `toDual`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean\", \"line\": \"18\", \"text\": \"`HasInjectiveDimensionLT X n`. We also define a type class\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean\", \"line\": \"19\", \"text\": \"`HasInjectiveDimensionLE X n` as an abbreviation for\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean\", \"line\": \"20\", \"text\": \"`HasInjectiveDimensionLT X (n + 1)`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean\", \"line\": \"22\", \"text\": \"`HasInjectiveDimensionLT X 0`, but this cannot be expressed in terms of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean\", \"line\": \"23\", \"text\": \"`HasInjectiveDimensionLE`.)\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToDual.lean\", \"line\": \"27\", \"text\": \"  We may also want this feature for dualizing results about bicategories.\"}\n  {\"file\": \"Mathlib/Data/Set/Defs.lean\", \"line\": \"60\", \"text\": \"Additionally, dualizing the order on sets would mean that a set is dual to its complement.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pushforward adjunctions and injective-dimension predicates do not prove the proper right adjoint applied to k has finite injective dimension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward right adjoint over a field produces an absolute coherent dualizing complex",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|injectiveDimension",
+   "results": "{\"t\": \"2026-10-23T09:35:32Z\", \"tool\": \"grep\", \"query\": \"dualizing|injectiveDimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\"], \"digest\": \"9c386cb1f21f93ff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module/sheaf adjoints or injective-dimension predicates, not the derived proper algebraic-dualizing assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward right adjoint over a field produces an absolute coherent dualizing complex",
+   "results": "{\"t\": \"2026-10-23T09:35:32Z\", \"tool\": \"leansearch\", \"query\": \"Proper pushforward right adjoint over a field produces an absolute coherent dualizing complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"], \"digest\": \"0ca789172e26ce86\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module/sheaf adjoints or injective-dimension predicates, not the derived proper algebraic-dualizing assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "{\"t\": \"2026-10-23T09:35:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dualizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module/sheaf adjoints or injective-dimension predicates, not the derived proper algebraic-dualizing assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme over a field the right adjoint of derived pushforward applied to the field is an absolute algebraic dualizing complex",
+   "results": "{\"t\": \"2026-10-23T09:35:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper scheme over a field the right adjoint of derived pushforward applied to the field is an absolute algebraic dualizing complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\"], \"digest\": \"3d6a0571fbb815b8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module/sheaf adjoints or injective-dimension predicates, not the derived proper algebraic-dualizing assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent dualizing complex of a proper variety has finite injective dimension at every stalk",
+   "results": "{\"t\": \"2026-10-23T09:35:43Z\", \"tool\": \"leanfinder\", \"query\": \"The coherent dualizing complex of a proper variety has finite injective dimension at every stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.injectiveDimension_ne_top_iff\", \"CategoryTheory.instHasInjectiveDimensionLTOfNatNatOfInjective\", \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"CategoryTheory.HasInjectiveDimensionLT.mk'\", \"CategoryTheory.injectiveDimension_lt_iff\", \"CategoryTheory.injectiveDimension_le_iff\", \"CategoryTheory.injective_iff_hasInjectiveDimensionLT_one\", \"CategoryTheory.hasInjectiveDimensionLT_iff\"], \"digest\": \"2cfc803305c4e17d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; ordinary module/sheaf adjoints or injective-dimension predicates, not the derived proper algebraic-dualizing assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-relative-dualizing-line",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Absolute algebraic dualizing complexes for proper schemes over fields.",
+   "via": [
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-field-algebraic-dualizing",
+  "worker": "stage1",
+  "summary": "Repair of route-pivot return: removed the redundant dropped definition citation from the complete inline statement and stmt_deps. Replaced global polynomial dualizing and dualizing localization by regular-local bounded injective models (0AWX), flat coherent RHom base change (0A6A), and finite-map transfer (0AX0) over P_q to B_p. Proved chartwise finite cohomology from a degreewise finite free resolution and uniform bounds from local global dimension; retained the proper-flat model, determinant, shift, finite-cover gluing and exact stalk arguments. No new nodes; earlier searches retained and read. Ten steps, all shorter than 2000 characters.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Absolute algebraic dualizing complexes for proper schemes over fields. Realizes the absolute algebraic dualizing prerequisite by the polynomial/finite proof of Stacks 0AA3, within the marked curve duality branch of det-thm-sf-ctf-stability-direct-images (3).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Hilbert basis theorem for the finite polynomial charts; this is a generic commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Finite presentation of chart algebras over the Noetherian field; no replacement in the unit."
+   },
+   {
+    "node": "lem-pc-flat-field",
+    "why": "All schemes over a field are flat, needed for the existing polynomial-model input."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Separatedness implies quasi-separatedness, needed to apply the finite-presentation proper-flat polynomial-model theorem."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Identifies D(k) and the scheme derived category on Spec k in the proper-adjoint comparison."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Identifies the arbitrary chosen right adjoint with the one supplying the polynomial model."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "why": "Polynomial localizations are regular local, the generic commutative-algebra input for the accepted local route."
+   },
+   {
+    "node": "lem-trf-regular-local-bounded-injective-resolution",
+    "why": "A bounded injective representative for each regular local polynomial ring, rather than a global polynomial dualizing theorem."
+   },
+   {
+    "node": "lem-sc-derived-hom-projective-resolution",
+    "why": "Computes module derived Hom from a projective resolution, for the rank-one scalar map and finite cohomology and amplitude calculations."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "why": "Trivializes the top polynomial differential module in the existing local model."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Supplies a resolution of the cyclic polynomial quotient by finite free terms; the resolution may be infinite."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Finite generation of cycles in the degreewise finite free Hom complex."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Flatness of prime and maximal localization, required by the coherent derived-Hom base-change tool."
+   },
+   {
+    "node": "lem-trf-flat-coherent-homothety-base-change",
+    "why": "Localizes RHom with bounded finite inputs B[0] and P[0], without assuming global dualizing conditions for its output."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "why": "Gives the uniform dimension n at maximal polynomial localizations."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-finite-gl-dim",
+    "why": "Local projective resolutions of length at most n give the upper cohomology bound."
+   },
+   {
+    "node": "new-affine-derived-tilde-homology-comparison",
+    "why": "Cohomology of the termwise affine associated-sheaf realization."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Finite module cohomology gives finite-type quasi-coherent sheaf cohomology on each chart."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Converts chartwise quasi-coherent finite type to coherent over Noetherian charts."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identifies the local ring at x with the prime localization in its chosen affine chart."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Identifies the stalk of the module-complex affine model termwise with its prime localization."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Makes the stalk identification descend through the quasi-isomorphism to K."
+   },
+   {
+    "node": "lem-trf-finite-map-dualizing-transfer",
+    "why": "Generic finite-ring-map dualizing transfer, now used only over the regular local quotient P_q to B_p; accepted explicitly by the return."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-pc-flat-field",
+  "lem-pc-separated-quasi-separated",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "det-sp-unique-right-adjoint",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-trf-regular-local-bounded-injective-resolution",
+  "lem-sc-derived-hom-projective-resolution",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-localization-flat",
+  "lem-trf-flat-coherent-homothety-base-change",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-trf-finite-map-dualizing-transfer"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-d0d7d7960",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-d0d7d7960 (reviewer sub-agent of L); spot-checked: Re-delivery after the 99535de3 RETURN, which was for citing route-pivot-dropped nodes: def-per-algebraic-normalized-dualizing (drop list l.1368) and the lemmas for 0A7J (l.1407) and 0A7G (l.1406). This delivery follows the replacement route that RETURN suggested. Statement: the only change from live is that the dropped def citation is removed from the text and from stmt_deps; the inline definition (bounded coherent cohomology, bounded injective stalk model, scalar map an isomorphism) is complete, so nothing is weakened. Live and side-live still have the item unsplit, and there is no repair note. Dropped-node check: the item's closure has 959 nodes and none is on side-live route-pivot-dropped.txt. proof_deps equals the union of step uses, and there is no SGA. Steps: 1 gives a finite cover, Noetherian finitely presented charts, quasi-separated and flat, which are the hypotheses of the proper-flat model. 2 applies lem-sfb-proper-flat-dualizing-polynomial-model and identifies a with f^! by D_QCoh(Spec k)≅D(k) and det-sp-unique-right-adjoint. 3 shows P_q is regular for every prime q and A[0] has a bounded injective model (0AWX, dualizing.tex l.3763); RHom(A,A)=A[0] by the one-term projective resolution. 4 trivializes Ω^n with the determinant, giving L_B≅M_B[n]. 5 is the elementary shift. 6 gets finitely generated H^j(M_B), and vanishing for j<0, from a degreewise finite free resolution and Noetherian submodules. 7 gets vanishing for j>n by localizing with lem-trf-flat-coherent-homothety-base-change (0A6A case 3, more-algebra.tex l.28820: flat, pseudo-coherent B, M in D^+), dim P_M=n, global dimension ≤n and the maximal-localization zero test. 8 glues chartwise coherence and bounds, with the empty scheme handled separately. 9 identifies K_x with (L_B)_p, uses B⊗_P P_q=B_p, and shows the comparison is D-linear, so it is an isomorphism in D(B_p). 10 applies lem-trf-finite-map-dualizing-transfer (0AX0, dualizing.tex l.2808) to P_q→B_p with L=A[0], then the shift. Small cases checked: ∅, Spec k, P^1, finite non-reduced B, mixed dimensions. Batch 5: the three flagged trf citations (0AWX, 0A6A, 0AX0) are general coherent commutative algebra. Their closures (85, 270 and 526 nodes) reach no nt-assume, trace-transport or Poincaré-duality node; neither assumption gives these results and they are not steps of either proof. Accepted. All 23 tool_uses accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFieldAlgebraicDualizing",
+  "declaration": "AlgebraicGeometry.proper_field_algebraic_dualizing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFieldAlgebraicDualizing.lean",
+  "statement": "theorem proper_field_algebraic_dualizing (k : Type u) [Field k] (X : Scheme.{u}) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings (Spec (.of k)).toRingedSpace))] (f : X ⟶ Spec (.of k)) [IsProper f] (a : DerivedCategory (ModuleCat.{u} k) ⥤ schemeDerivedQCohCategory X) (_adj : ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f ⋙ (RingedSpace.globalSectionsFunctor (Spec (.of k)).toRingedSpace ⋙ ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of k)).inv.hom).rightDerivedFunctor) ⊣ a) : (∀ j : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) j).obj (a.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} k) 0).obj (ModuleCat.of k k))).obj)) ∧ (∃ p q : ℤ, ∀ j : ℤ, j < p ∨ q < j → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) j).obj (a.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} k) 0).obj (ModuleCat.of k k))).obj)) ∧ (∀ x : X, IsNoetherianRing (X.presheaf.stalk x) ∧ (∃ I : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ, (∃ p q : ℤ, ∀ j : ℤ, j < p ∨ q < j → IsZero (I.X j)) ∧ (∀ j : ℤ, Injective (I.X j)) ∧ Nonempty (DerivedCategory.Q.obj I ≅ DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage (a.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} k) 0).obj (ModuleCat.of k k))).obj)))) ∧ IsIso (MonoidalClosed.curry' (𝟙 (DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage (a.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} k) 0).obj (ModuleCat.of k k))).obj))))))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded coherence, module-stalk and ordinary-module derived closed Hom interfaces. Canonical affine coefficient transport is written as the existing derived global-sections composite. Stalks are the recorded exact stalk functor applied to Q.objPreimage, without importing downstream ProperDualizingClosedStalkNormalized (whose convenience definitions expand to these terms). No statement correction or new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77f95edc1",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Clause-by-clause match with node: left adjoint = ι ⋙ schemeDerivedDirectImage f ⋙ R(Γ ⋙ restrictScalars ΓSpecIso.inv) (canonical D_QCoh(Spec k)≅D(k) transport); K=a(k[0]) uniform; real RingedSpace.IsCoherent + two-sided global bounds; ∀x Noetherian stalk concluded; finite inj dim = ∃ bounded injective I with Q.obj I ≅ K_x (node's definition); K_x via exact moduleStalkFunctor on Q.objPreimage; scalar map IsIso (curry' (𝟙 K_x)) canonical. No extra hypotheses; universes u shared, wX/wS free. Node diff vs side-live only lean + 3 genuinely used stmt_deps (globalSectionsFunctor, moduleStalkFunctor, derived internal hom); statement verbatim; one sorry, no defs; docstrings with 0AA3/0AWI source, blueprint tag, 10 steps; report has Worker report and Second reading; imports exist, no cycle with downstream ProperDualizingClosedStalkNormalized (whose abbreviations this unfolds). Edge cases empty/Spec k/non-reduced/mixed dim/imperfect fields covered. No compile run (no change)."
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-rational-p1-positive-line-constructible",
+ "kind": "lemma",
+ "title": "The positive rational Tate line has finite constant local models",
+ "statement": "For a prime ell and either rational coefficient in the projective-line setting, on any qcqs scheme Z where ell is invertible in every residue field, the positive Tate line placed in degree zero is constant-model bounded constructible. The coefficient and line are the existing constructions of [def-sfb-rational-tate-pullback-comparison]; constructibility is [sk-def-sfb-constructible].",
+ "stmt_deps": [
+  "def-sfb-rational-tate-pullback-comparison",
+  "sk-def-sfb-constructible"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (2)--(3), coefficient line as generator; sk-def-sp-tate-twist local-generator paragraph"
+ },
+ "proof": [
+  {
+   "text": "Convert residue-field units into invertibility instances. Apply spTwists_commonCover to obtain one pro-etale cover simultaneously trivializing the rational line for every finite extension and for the finite-subextension-valued algebraic closure. At signed exponent one the signed line is the original internal line under the section-module equivalence, while exponent zero is the coefficient unit.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "lem-route-sp-twists-common-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing slice-to-internal-module equivalence turns these slice trivializations into raw locally free pullbacks. Extend the free basis along the canonical invertible Cartesian coefficient map. Preservation of finite biproducts and the regular-module comparison give lisse coefficient modules. Their finite free scalar models are finitely presented; the trivial stratification therefore makes the line constructible. The single complex in degree zero is bounded and has this line as its only nonzero cohomology. The same construction covers empty schemes.",
+   "uses": [
+    "lem-sfb-integral-tate-line-constructible",
+    "lem-sfb-coefficient-heart-lisse-extension-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sp-tate-twist",
+  "lem-route-sp-twists-common-cover",
+  "lem-sfb-integral-tate-line-constructible",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (2)--(3), degree-zero generator argument"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "t": "2026-10-27T10:24:48Z",
+   "tool": "grep",
+   "query": "localizingClosure.*IsTriangulated",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "t": "2026-10-27T10:24:48Z",
+   "tool": "loogle",
+   "query": "Functor.IsTriangulated",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "loogle: unknown identifier 'Functor.IsTriangulated'",
+   "top": [],
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "t": "2026-10-27T10:24:49Z",
+   "tool": "leanfinder",
+   "query": "Derived inverse image and proper direct image preserve localizing closure of bounded constructible objects with rational coefficients",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CategoryTheory.Functor.isHomological_of_localization",
+    "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+    "DerivedCategory.isLE_Q_obj_iff",
+    "DerivedCategory.exists_iso_Q_obj_of_isLE",
+    "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+    "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+    "DerivedCategory.exists_iso_Q_obj_of_isGE",
+    "DerivedCategory.isGE_Q_obj_iff"
+   ],
+   "digest": "b23d2bd360a1ab0d"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1LocalizingPreservation",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-localizing-preservation",
+   "place": "Proof step 6: positive Tate line as bounded constructible generator",
+   "via": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1PositiveLineConstructible",
+  "file": "lean/Sheaf/Paper/RationalP1PositiveLineConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.positiveLine_boundedConstructible",
+  "statement": "theorem positiveLine_boundedConstructible\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (Z : Scheme.{u}) [CompactSpace Z] [QuasiSeparatedSpace Z]\n    (hl : ∀ x : Z, IsUnit (l : Z.residueField x)) :\n    constantModelBoundedConstructible (coefficient l c).X Z\n      ((DerivedCategory.singleFunctor (DiagonalCoefficients.Modules (coefficient l c).X Z) 0).obj\n        (line l c Z))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-63ff7",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T123504-L-2307154",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-63ff7",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T123504-L-2307154",
+  "kind": "interface",
+  "note": "independent cc review: item RationalP1LocalizingPreservation + new RationalP1PositiveLineConstructible vs clone 786ba78d644, unit sk-prop-p1-adjunction-rational (realized empty), node proof_deps vs Lean uses, #print axioms on scratch copy"
+ }
+}

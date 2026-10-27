@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-adic-residue-slice-completeness",
+ "kind": "statement",
+ "title": "Local derived completeness survives slicing",
+ "statement": "Let X be a scheme, A a commutative Noetherian ring and J an ideal. Let B be the completed coefficient sheaf on the coefficient pro-etale model site [def-sfb-adic-residue-lift-comparisons], and let q:B -> underline(A/J) be its first projection. If M in D(B) is locally derived complete for the kernel ideal of q [lem-weil-pbc-constant-completion-equivalence], then for every object U its exact derived slice restriction M|U is locally derived complete for the kernel of the restricted projection q|U. No boundedness or weak contractibility is required.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0999, the definition of local derived completeness; Modules on Sites, Section 03DH, localization of ringed sites; Tag 08JB for restriction of derived internal Hom."
+ },
+ "proof": [
+  {
+   "text": "Unfold the sectionwise kernel ideal and its module inclusion. Its image consists exactly of the sections killed by the ring-sheaf morphism. Thus local completeness is equivalently vanishing of sliceTest at every such section. The restricted projection kills exactly the same section on V -> U as the original projection on V.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Mathlib Over.iteratedSliceEquiv to identify (C/U)/(V -> U) with C/V. Its forward functor is continuous and cocontinuous, and direct module restriction along it is an additive exact equivalence. The existing localization restriction comparison identifies the localization at the pulled-back slice section, including the degree-zero derived comparison. The derived internal-Hom restriction comparison identifies the Hom of the transported localization and transported complex.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-equivalence",
+    "lem-pur-native-ringed-restriction-localization",
+    "lem-pur-native-ringed-restriction-derived-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two composite module restrictions evaluate on the same domain and have identical scalar actions. Their identity natural isomorphism, the derived composition comparison, and functoriality of derived internal Hom identify the second argument with the iterated restriction of M. Apply the additive derived restriction functor to the zero test supplied by completeness of M on V; transport zero through the resulting comparison isomorphism. Quantify over U, V and kernel sections.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-pur-native-ringed-restriction-derived-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pur-native-ringed-restriction-equivalence",
+  "lem-pur-native-ringed-restriction-localization",
+  "lem-pur-native-ringed-restriction-derived-hom",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0999 (definition-derived-complete), transported along the iterated-slice equivalence using the existing site-equivalence localization and derived-Hom comparisons; sites-cohomology.tex Tag 08JB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction to a slice of a ringed site preserves local derived completeness and finite projective completed constant models are derived complete",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.restrict, AlgebraicGeometry.LocallyRingedSpace.ofRestrict, AlgebraicGeometry.StructureSheaf.res_const, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.StructureSheaf.res_const', AlgebraicGeometry.LocallyRingedSpace.restrictTopIso, ModuleCat.Tilde.res_const, AlgebraicGeometry.LocallyRingedSpace.toToΓSpecMapBasicOpen.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement on derived completed-coefficient sheaves or their slice localizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a derived complete sheaf complex to a slice site remains locally derived complete for the restricted kernel ideal",
+   "results": "8 hits: localCohomology.diagram, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondensed.instIsGrothendieckAbelianLightCondMod, localCohomology, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement on derived completed-coefficient sheaves or their slice localizations."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyDerived|derived.*complete|complete.*derived",
+   "results": "0 hits: .",
+   "date": "2026-10-25",
+   "verdict": "No exact statement on derived completed-coefficient sheaves or their slice localizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueFiniteLocalModels",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "localization to a slice in Tags 0999, 099F and 03DJ",
+   "via": [
+    "lem-sfb-adic-residue-finite-local-models",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueSliceCompleteness",
+  "file": "lean/Sheaf/Paper/AdicResidueSliceCompleteness.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_slice_completeness",
+  "statement": "theorem adicResidue_slice_completeness\n    (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]\n    (J : Ideal A) :\n    (∀ (M : CategoryTheory.ConstantCompletion.D\n        (CategoryTheory.ConstantCompletion.completed\n          (coefficientProEtaleModelTopology.{u, v} X) A J)),\n      CategoryTheory.ConstantCompletion.IsComplete\n        (CategoryTheory.ConstantCompletion.projection\n          (coefficientProEtaleModelTopology.{u, v} X) A J 0) M →\n      ∀ U : coefficientProEtaleSiteModel.{u, v} X,\n        CategoryTheory.ConstantCompletion.IsComplete\n          (adicResidueLocalProjection.{u, v} X J U 0)\n          ((adicResidueRestriction\n            (CategoryTheory.ConstantCompletion.completed\n              (coefficientProEtaleModelTopology.{u, v} X) A J) U).obj M))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T202914-L-2765214",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261026T002515-L-93165",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

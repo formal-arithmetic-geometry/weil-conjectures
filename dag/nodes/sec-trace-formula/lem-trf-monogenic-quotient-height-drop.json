@@ -1,0 +1,208 @@
+{
+ "id": "lem-trf-monogenic-quotient-height-drop",
+ "kind": "statement",
+ "title": "Algebraicity and prime-height drop for a nonzero monogenic kernel",
+ "statement": "Let $R$ be a commutative Noetherian domain [def-weil-pbc-noetherian-ring], let $S$ be a commutative domain, and let $f:R[T]\\twoheadrightarrow S$ be a surjective $R$-algebra homomorphism from the polynomial ring [def-weil-polynomial-ring]. Assume the structure map $R\\to S$ is injective and $\\mathfrak n=\\ker(f)$ is nonzero. A domain is a nonzero commutative ring without zero divisors. Then the induced extension $\\operatorname{Frac}(S)/\\operatorname{Frac}(R)$ has finite vector-space dimension, and $\\operatorname{trdeg}_R S=0$ [def-kun-transcendence-degree]. For every prime $\\mathfrak q\\subset S$, put $Q=f^{-1}(\\mathfrak q)$ and $\\mathfrak p=\\mathfrak q\\cap R$. Define residue fields by $\\kappa(\\mathfrak a)=\\operatorname{Frac}(A/\\mathfrak a)$ for a prime $\\mathfrak a$ of a ring $A$, and heights as suprema of lengths of strict prime chains ending at the prime. The quotient-induced field isomorphism $\\kappa(Q)\\cong\\kappa(\\mathfrak q)$ is an isomorphism over $\\kappa(\\mathfrak p)$, and\n$$\\operatorname{ht}(\\mathfrak q)+1\\leq\\operatorname{ht}(Q).$$",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02IJ (algebra-lemma-dimension-formula), proof, Case II: nonzero prime kernel, generic algebraicity, quotient residue fields, and height drop (before using Case I)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-polynomial-ring",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=R[T]$, $K=\\operatorname{Frac}(R)$, $L=\\operatorname{Frac}(S)$, and $x=f(T)\\in S\\subset L$. The injection $R\\to S$ embeds $K$ in $L$ by $r/t\\mapsto f(r)/f(t)$. Choose $0\\ne P\\in\\mathfrak n$. Its coefficientwise image $P_K\\in K[T]$ is nonzero, since $R\\to K$ is injective. Because $f$ is an $R$-algebra map, $P_K(x)=f(P)=0$ in $L$. Thus $x$ is algebraic over $K$ [def-weil-algebraic-element].",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-algebraic-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ (algebra-lemma-dimension-formula), Case II: the implicit generic polynomial relation"
+   }
+  },
+  {
+   "text": "Surjectivity gives $S=R[x]$: each $s\\in S$ is $f(g)=g(x)$ for some $g\\in R[T]$. Consequently $S\\subseteq K(x)\\subseteq L$, and every $a/b\\in L$ with $a,b\\in S$, $b\\ne0$, belongs to the field $K(x)$. Hence $L=K(x)$. Apply [lem-weil-pbc-algebraic-generators-finite-extension] to the single algebraic element $x$ of $L$ over the field $K$. It gives that $L/K$ is a finite-dimensional vector space.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ (algebra-lemma-dimension-formula), Case II, generic algebraicity; Fields Tag 09GH (fields-lemma-algebraic-finitely-generated), applied to one generator"
+   }
+  },
+  {
+   "text": "The finite $K$-algebra $L$ is integral by [lem-weil-pbc-finite-algebra-is-integral]. For any $y\\in S$, take its monic annihilating polynomial $H\\in K[U]$. Write each coefficient as $a_i/b_i$ with $a_i,b_i\\in R$ and $b_i\\ne0$, and set $d=\\prod_i b_i\\ne0$. Then $dH$ has coefficients in $R$, has nonzero leading coefficient $d$, and vanishes at $y$ in $L$, hence in $S$. Every $y\\in S$ therefore satisfies a nonzero polynomial over $R$. Any nonempty subset of $S$ contains such a $y$; its one-variable relation is a nonzero relation on that subset, so it is not algebraically independent. The empty subset is independent since $R\\to S$ is injective. By [def-kun-transcendence-degree] the supremum of the cardinalities of independent subsets is $0$: $\\operatorname{trdeg}_R S=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ (algebra-lemma-dimension-formula), Case II, trdeg_R(S)=0; Tag 00GK (algebra-lemma-finite-is-integral), after passage to fraction fields"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q$, $Q=f^{-1}(\\mathfrak q)$ and $\\mathfrak p$ as in the statement. The map $e:A/Q\\to S/\\mathfrak q$, $a+Q\\mapsto f(a)+\\mathfrak q$, is well defined and injective by the definition of $Q$, and is surjective because $f$ is. For $r\\in R$, its class maps to zero in either quotient exactly when $f(r)\\in\\mathfrak q$, equivalently $r\\in\\mathfrak p$. Thus $R/\\mathfrak p$ embeds in both quotients, and $e$ commutes with these embeddings. On fractions it gives $\\widetilde e:(a+Q)/(b+Q)\\mapsto(f(a)+\\mathfrak q)/(f(b)+\\mathfrak q)$; a nonzero denominator stays nonzero by injectivity. Cross multiplication proves well-definedness, and applying $e^{-1}$ to numerator and denominator gives its inverse. This is $\\kappa(Q)\\cong\\kappa(\\mathfrak q)$. On each fraction of elements of $R/\\mathfrak p$ the formula is the identity, proving compatibility with $\\kappa(\\mathfrak p)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ (algebra-lemma-dimension-formula), Case II: the corresponding quotient prime has the same residue extension"
+   }
+  },
+  {
+   "text": "The ring $A=R[T]$ is a domain by [lem-weil-pbc-polynomial-ring-domain], with one variable, so $(0)$ is prime. Take any strict chain $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_m=\\mathfrak q$ in $S$. Its inverse images $Q_i=f^{-1}(\\mathfrak q_i)$ are prime: a product in $Q_i$ maps into the prime $\\mathfrak q_i$, and $1\\notin Q_i$. They remain strict: lift an element of $\\mathfrak q_{i+1}\\setminus\\mathfrak q_i$ using surjectivity. Every $Q_i$ contains $\\mathfrak n\\ne0$, so $(0)\\subsetneq Q_0\\subsetneq\\cdots\\subsetneq Q_m=Q$ has length $m+1$. If the lengths in $S$ are unbounded, so are these lifted lengths; otherwise the set of lengths is nonempty (it contains the length-zero chain consisting of $\\mathfrak q$) and its integer supremum is attained. In either case taking suprema gives $\\operatorname{ht}(\\mathfrak q)+1\\le\\operatorname{ht}(Q)$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ (algebra-lemma-dimension-formula), Case II, strict dimension drop; the prime-chain argument in algebra-lemma-one-equation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-weil-algebraic-element",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-polynomial-ring-domain"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02IJ (algebra-lemma-dimension-formula), Case II, expanding generic algebraicity via Fields Tag 09GH and Algebra Tag 00GK, and writing out the prime-chain argument of algebra-lemma-one-equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Ideal.height, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-22T05:57:18Z\", \"tool\": \"loogle\", \"query\": \"Ideal.height, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: first Loogle query has unknown identifier Ideal.Quotient, corrected by Ideal.height, Ideal.comap, which returns only RingEquiv.height_comap. Algebraic trdeg-zero and quotient-height bounds are separate facts; none gives both the generic finite extension for this nonzero monogenic kernel and the strict prime-height drop. QuasiFinite residue-field results require quasi-finiteness, not assumed here."
+  },
+  {
+   "tool": "grep",
+   "query": "height.*(quotient|comap|ker)|trdeg.*(quotient|algebraic)",
+   "results": "{\"t\": \"2026-10-22T05:57:18Z\", \"tool\": \"grep\", \"query\": \"height.*(quotient|comap|ker)|trdeg.*(quotient|algebraic)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\"], \"digest\": \"e782967de740a77c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: first Loogle query has unknown identifier Ideal.Quotient, corrected by Ideal.height, Ideal.comap, which returns only RingEquiv.height_comap. Algebraic trdeg-zero and quotient-height bounds are separate facts; none gives both the generic finite extension for this nonzero monogenic kernel and the strict prime-height drop. QuasiFinite residue-field results require quasi-finiteness, not assumed here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension inequality for a one generator domain algebra R[X]/n where n is a nonzero prime contracting to zero in a Noetherian domain R: relative transcendence degree is zero and height q plus residue transcendence degree is at most height p",
+   "results": "{\"t\": \"2026-10-22T05:57:33Z\", \"tool\": \"leanfinder\", \"query\": \"Dimension inequality for a one generator domain algebra R[X]/n where n is a nonzero prime contracting to zero in a Noetherian domain R: relative transcendence degree is zero and height q plus residue transcendence degree is at most height p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDeg\", \"Polynomial.height_eq_height_add_one\", \"Ideal.finrank_quotient_map\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"Ideal.inertiaDeg_algebraMap\", \"Ideal.inertiaDeg_le_finrank\", \"Ideal.inertiaDeg_bot\", \"Ideal.inertiaDeg_pos\"], \"digest\": \"b561d2a75918d98a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: first Loogle query has unknown identifier Ideal.Quotient, corrected by Ideal.height, Ideal.comap, which returns only RingEquiv.height_comap. Algebraic trdeg-zero and quotient-height bounds are separate facts; none gives both the generic finite extension for this nonzero monogenic kernel and the strict prime-height drop. QuasiFinite residue-field results require quasi-finiteness, not assumed here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero prime kernel of R[X] to a domain contracting to zero gives a finite fraction field extension and a strict drop in heights of quotient primes",
+   "results": "{\"t\": \"2026-10-22T05:57:36Z\", \"tool\": \"leansearch\", \"query\": \"A nonzero prime kernel of R[X] to a domain contracting to zero gives a finite fraction field extension and a strict drop in heights of quotient primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.instFiniteResidueField\", \"Polynomial.IsPrimitive.irreducible_iff_irreducible_map_fraction_map\", \"Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Polynomial.not_ker_le_map_C_of_surjective_of_quasiFiniteAt\", \"Ideal.Factors.ramificationIdx_ne_zero\", \"Polynomial.IsPrimitive.dvd_of_fraction_map_dvd_fraction_map\", \"primesOver_finite\"], \"digest\": \"216f83d0977b2039\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: first Loogle query has unknown identifier Ideal.Quotient, corrected by Ideal.height, Ideal.comap, which returns only RingEquiv.height_comap. Algebraic trdeg-zero and quotient-height bounds are separate facts; none gives both the generic finite extension for this nonzero monogenic kernel and the strict prime-height drop. QuasiFinite residue-field results require quasi-finiteness, not assumed here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.height, Ideal.comap",
+   "results": "{\"t\": \"2026-10-22T05:57:36Z\", \"tool\": \"loogle\", \"query\": \"Ideal.height, Ideal.comap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RingEquiv.height_comap\"], \"digest\": \"081a835c83fe54ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: first Loogle query has unknown identifier Ideal.Quotient, corrected by Ideal.height, Ideal.comap, which returns only RingEquiv.height_comap. Algebraic trdeg-zero and quotient-height bounds are separate facts; none gives both the generic finite extension for this nonzero monogenic kernel and the strict prime-height drop. QuasiFinite residue-field results require quasi-finiteness, not assumed here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero prime ideal n in the one variable polynomial ring R[X] disjoint from the domain R gives trdeg R (R[X]/n) equal to zero and height of each quotient prime at most height of its preimage minus one",
+   "results": "{\"t\": \"2026-10-22T05:58:02Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzero prime ideal n in the one variable polynomial ring R[X] disjoint from the domain R gives trdeg R (R[X]/n) equal to zero and height of each quotient prime at most height of its preimage minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.height_eq_height_add_one\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"Polynomial.ringKrullDim_le\", \"Polynomial.height_map_C\", \"Ideal.height_le_height_add_one_of_mem\", \"Ideal.height_le_height_add_of_liesOver\", \"Ideal.height_le_ringKrullDim_quotient_add_one\", \"Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown\"], \"digest\": \"bd5d735ee3b8e191\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: first Loogle query has unknown identifier Ideal.Quotient, corrected by Ideal.height, Ideal.comap, which returns only RingEquiv.height_comap. Algebraic trdeg-zero and quotient-height bounds are separate facts; none gives both the generic finite extension for this nonzero monogenic kernel and the strict prime-height drop. QuasiFinite residue-field results require quasi-finiteness, not assumed here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero kernel of an injective monogenic domain algebra R[X] onto S makes Frac(S) finite over Frac(R) and lowers the height of every quotient prime by at least one",
+   "results": "{\"t\": \"2026-10-22T11:05:59Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzero kernel of an injective monogenic domain algebra R[X] onto S makes Frac(S) finite over Frac(R) and lowers the height of every quotient prime by at least one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.height_eq_height_add_one\", \"exists_integral_inj_algHom_of_quotient\", \"Ideal.height_le_height_add_of_liesOver\", \"Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown\", \"Polynomial.height_map_C\", \"Ideal.height_le_height_add_spanFinrank_of_le\", \"height_le_ringKrullDim_quotient_add_spanFinrank\", \"Ideal.height_le_height_add_one_of_mem\"], \"digest\": \"e275cf19e4491cd4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: polynomial height formulas assume maximality or concern the polynomial algebra; finite fraction-field results assume module finiteness; quasi-finite residue theorems require quasi-finiteness. Algebra.trdeg_eq_zero is only a consequence after proving algebraicity. The direct proof requires a nonzero polynomial relation and strict chain lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.height, Ideal.comap",
+   "results": "{\"t\": \"2026-10-22T11:06:38Z\", \"tool\": \"loogle\", \"query\": \"Ideal.height, Ideal.comap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RingEquiv.height_comap\"], \"digest\": \"081a835c83fe54ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: polynomial height formulas assume maximality or concern the polynomial algebra; finite fraction-field results assume module finiteness; quasi-finite residue theorems require quasi-finiteness. Algebra.trdeg_eq_zero is only a consequence after proving algebraicity. The direct proof requires a nonzero polynomial relation and strict chain lifting."
+  },
+  {
+   "tool": "grep",
+   "query": "height.*(quotient|comap|ker)|trdeg.*(quotient|algebraic)",
+   "results": "{\"t\": \"2026-10-22T11:07:18Z\", \"tool\": \"grep\", \"query\": \"height.*(quotient|comap|ker)|trdeg.*(quotient|algebraic)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\"], \"digest\": \"77c30d49ccc1e7ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: polynomial height formulas assume maximality or concern the polynomial algebra; finite fraction-field results assume module finiteness; quasi-finite residue theorems require quasi-finiteness. Algebra.trdeg_eq_zero is only a consequence after proving algebraicity. The direct proof requires a nonzero polynomial relation and strict chain lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an injective algebra over a domain generated by one algebraic element the fraction field extension is finite and prime heights drop under a nonzero polynomial quotient",
+   "results": "{\"t\": \"2026-10-22T11:07:18Z\", \"tool\": \"leansearch\", \"query\": \"For an injective algebra over a domain generated by one algebraic element the fraction field extension is finite and prime heights drop under a nonzero polynomial quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.of_injective\", \"instFiniteDimensionalFractionRingOfFinite\", \"Field.primitive_element_iff_algHom_eq_of_eval'\", \"IsIntegralClosure.isFractionRing_of_algebraic\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"exists_integral_inj_algHom_of_quotient\", \"Algebra.instIsEpiOfIsDomainOfIsFractionRing\", \"RatFunc.liftAlgebra\"], \"digest\": \"d0cb181d77eb60ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: polynomial height formulas assume maximality or concern the polynomial algebra; finite fraction-field results assume module finiteness; quasi-finite residue theorems require quasi-finiteness. Algebra.trdeg_eq_zero is only a consequence after proving algebraicity. The direct proof requires a nonzero polynomial relation and strict chain lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A domain quotient of a one variable polynomial ring R[X] with nonzero kernel and injective coefficients has finite fraction field over Frac R, zero transcendence degree, identical residue fields, and height q plus one at most height preimage q",
+   "results": "{\"t\": \"2026-10-22T11:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"A domain quotient of a one variable polynomial ring R[X] with nonzero kernel and injective coefficients has finite fraction field over Frac R, zero transcendence degree, identical residue fields, and height q plus one at most height preimage q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.height_eq_height_add_one\", \"Polynomial.not_quasiFiniteAt\", \"Algebra.QuasiFinite.instResidueField\", \"Polynomial.residueFieldMapCAlgEquiv\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective\", \"instIsFractionRingQuotientIdealResidueField\"], \"digest\": \"2a3f094f9a30175b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: polynomial height formulas assume maximality or concern the polynomial algebra; finite fraction-field results assume module finiteness; quasi-finite residue theorems require quasi-finiteness. Algebra.trdeg_eq_zero is only a consequence after proving algebraicity. The direct proof requires a nonzero polynomial relation and strict chain lifting."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-dimension-inequality",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the dimension-formula input used to bound local chains in the proof of lem-trf-local-term-locality; affine reduction to Tag 02IJ; Case II of the Tag 02IJ affine dimension-formula input: former item Step 3, generic algebraicity and quotient prime-chain height drop",
+   "via": [
+    "lem-trf-affine-dimension-inequality",
+    "lem-trf-local-dimension-formula",
+    "lem-trf-closed-dominant-dimension",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monogenic-quotient-height-drop",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Expanded Case II of Stacks 02IJ into the nonzero polynomial relation, the identification Frac(S)=Frac(R)(x), finite generation by an algebraic element, explicit denominator clearing for trdeg zero, the residue-field isomorphism over kappa(p), and strict prime-chain lifting with an extra zero prime. Reused three existing Mathlib theorem leaves and three definition leaves; created no nodes. Verified searches and edge cases, and checked every cited statement. Repair of the 2026-10-22 landing return at 506f1dc79a2: rebased through the delivery tool onto the current unsplit item, reread all current statement and proof dependencies, and verified that all six retained citation quotations still equal the complete current statements. Made the two coefficient embeddings in the residue-field comparison and the nonempty bounded-chain case explicit. No target, statement, dependency, or route change.",
+  "blueprint": "The existing ancestry to lem-trf-local-term-locality is retained: its dimension-formula input through lem-trf-affine-dimension-inequality, Case II, is realized by Steps 1–3 (generic algebraicity and zero transcendence degree), Step 4 (quotient residue fields), and Step 5 (height drop).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-5d845a8bd",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-5d845a8bd (reviewer sub-agent of L); spot-checked: This is a re-delivery after the 2026-10-22 14:44 UTC landing return of 506f1dc79a2. That return was 'side completion never promoted; L promotes it', which is not a content fault. In the live DAG the item is still unsplit. The delivered statement, stmt_deps, unit, created, blueprint and source are identical to live. All 7 cited nodes are unchanged Mathlib leaves. Compared with the prior head, only two clarifications changed. Step 4 now shows that both R/p maps have kernel p. Step 5 now shows that the bounded set of chain lengths is nonempty because it contains the length-0 chain. So this is not an A6 re-push. There is no repair note, no SGA source, and tool_uses is empty. The route matches Stacks 02IJ Case II: trdeg 0, then the drop by lemma-one-equation, asserting only the inequality. I read the steps in full. Step 1: a nonzero P in n stays nonzero over K, so x is algebraic by definition. Step 2: S=R[x], so L=K(x), which is finite by algebraic-generators-finite-extension with n=1. Step 3: finite-algebra-is-integral, then clearing denominators with d≠0 gives a nonzero R-relation for every y, so trdeg_R S=0 by def-kun (which covers ring bases). Step 4: A/Q≅S/q, and Q∩R=q∩R=p, so the fraction-field isomorphism is over κ(p). Step 5: preimage chains stay prime and strict by surjectivity and contain n≠0, and (0) is prime by the polynomial-domain node; both bounded and unbounded heights are handled. proof_deps equals the union of the step uses. The only citer, affine-dimension-inequality, uses exactly the three outputs. Edge cases checked: R=S=k; Z[T]→Z[1/2] at q=(3), which is not module-finite; n=0 is correctly excluded. There are no new nodes and I found no duplicate in the live DAG."
+ }
+}

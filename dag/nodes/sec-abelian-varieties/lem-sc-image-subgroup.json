@@ -54,7 +54,32 @@
   "def-sc-group-scheme-subgroup"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_isMonHom_imageι"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_isMonHom_imageι",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Image",
+     "lines": [
+      76,
+      132
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-mult-surjective",
  "lean": {
@@ -67,5 +92,35 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:G\\to H$ be a homomorphism of\ngroup schemes over a field $k$, with $G$ proper over $k$ and\n$H$ separated and locally of finite type over $k$. Let $Z\\subseteq H$ be\nthe scheme-theoretic image of $f$, i.e. the closed subscheme defined\nby the kernel of $\\mathcal O_H\\to f_*\\mathcal O_G$. Then $Z$ is of\nfinite type over $k$, the induced morphism $f':G\\to Z$ is\nsurjective, and $Z$ is a closed\nsubgroup scheme of $H$.",
+  "proof": [
+   {
+    "text": "Being a closed subscheme of the $k$-scheme $H$, which is locally of\nfinite type, $Z$ is locally of finite type over $k$. The morphism\n$f':G\\to Z$ is dominant by construction of the scheme-theoretic image,\nand it is proper because $G$ is proper over $k$ and $Z$, a closed\nsubscheme of the separated $k$-scheme $H$, is separated; a proper\ndominant morphism is surjective. Hence $Z$ is the continuous image of\nthe quasi-compact space $G$, so $Z$ is quasi-compact and therefore of\nfinite type over $k$. Write $j:Z\\hookrightarrow H$ for the closed immersion\nand $\\mathcal I\\subseteq\\mathcal O_H$ for the ideal of $Z$, so that\n$f^*\\mathcal I=0$ because $f=j\\circ f'$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Multiplication.* The morphism\n$m_H\\circ(j\\times j):Z\\times_kZ\\to H$ satisfies\n\n$$\n(m_H\\circ(j\\times j))\\circ(f'\\times f')\n=m_H\\circ(f\\times f)=f\\circ m_G=j\\circ(f'\\circ m_G),\n$$\n\nusing that $f$ is a homomorphism and that $m_H\\circ(f\\times f)= f\\circ m_G$. Pulling the ideal $\\mathcal I$ back along\n$m_H\\circ(j\\times j)$ gives\n$0$, since the composite with $f'\\times f'$ factors through $j$\nand $f'\\times f'$ is surjective: the support of the pulled-back ideal\nis the inverse image of $\\operatorname{Supp}\\mathcal I$, which is\nempty. Hence $m_H\\circ(j\\times j)$ factors through the closed\nsubscheme $Z$, i.e. there is $m_Z:Z\\times_kZ\\to Z$ with\n$j\\circ m_Z=m_H\\circ(j\\times j)$. The same argument with $i_H$ in\nplace of $m_H$ gives $i_Z:Z\\to Z$ with $j\\circ i_Z=i_H\\circ j$,\nand $e_H=j\\circ(f'\\circ e_G)$ factors through $Z$, giving\n$e_Z:\\Spec k\\to Z$ with $j\\circ e_Z=e_H$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Group axioms.* The associativity, unit and inverse axioms for\n$(m_Z,i_Z,e_Z)$ hold after composing with the monomorphism $j$ (they\nare the corresponding axioms for $H$, and $j\\circ m_Z= m_H\\circ(j\\times j)$), hence hold on $Z$. Therefore $Z$ is a group\nscheme over $k$ in the sense of [def-sc-group-scheme] and $j$\nis a homomorphism of group schemes, so $Z$ is a closed\nsubgroup scheme of $H$,\ni.e. a subgroup scheme of $H$ in the sense of\n[def-sc-group-scheme-subgroup].",
+    "uses": [
+     "def-sc-group-scheme",
+     "def-sc-group-scheme-subgroup"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

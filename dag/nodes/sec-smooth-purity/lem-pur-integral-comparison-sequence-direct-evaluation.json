@@ -1,0 +1,103 @@
+{
+ "id": "lem-pur-integral-comparison-sequence-direct-evaluation",
+ "kind": "statement",
+ "title": "Canonical sequence direct image commutes with evaluation",
+ "statement": "Use the coefficient sequence site of [def-coef-ringed-sequence-site] and the canonical sequence operations of [def-trf-integral-comparison-sequence-systems]. For a scheme morphism f : X ⟶ Y and a nonnegative level n, integralComparisonSequenceDirectImage for the canonical constant-section ring map, followed by coefficientSequenceEvaluation at n, is naturally isomorphic to evaluation at n followed by the finite coefficient pro-etale module direct image. There is exactly one such isomorphism whose hom acts by identity on every section. No arbitrary sequence ring map is allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D1 and 0941: sectionwise direct image on the ringed sequence site"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Compose the module-pushforward composition isomorphisms on the two sides of the square formed by sequence base change and level-n inclusions. Their coefficient maps agree: the evaluation identification is equality on the coefficient ring sheaf, while the canonical sequence ring map has the finite constant-section map as its component. Sheaf and natural-transformation extensionality prove equality of these maps. Insert pushforwardCongr for this equality between the two composition isomorphisms. Their section component equations show the resulting isomorphism is the identity on every section. If another isomorphism has this property, heterogeneous transitivity makes its hom equal on every section to the constructed hom; module-sheaf, natural-transformation, and isomorphism extensionality give equality.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D1 and 0941; Mathlib module-pushforward composition and congruence"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanFinder",
+   "query": "direct image module sheaves natural isomorphism composition evaluation identity on sections",
+   "results": "8 hits, principally AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app and its inverse section equation. No exact coefficient-sequence identity-and-uniqueness theorem; the general module-pushforward composition theorem is used."
+  },
+  {
+   "tool": "Loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "7 hits, including pushforwardComp, pushforwardComp_hom_app_val_app and pushforwardComp_inv_app_val_app in Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp_hom_app_val_app",
+   "results": "1 hit at Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:146; source read together with pushforwardCongr section component formulas."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-26",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-completed-pullback-tensor-comparison",
+   "place": "Canonical direct-image/evaluation comparison; separated into a proved module to keep single-file compilation within 60 seconds."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralComparisonSequenceDirectEvaluation",
+  "declaration": "WeilConjectures.integralComparisonSequenceDirectEvaluation_existsUnique",
+  "declarations": [
+   "WeilConjectures.integralComparisonSequenceDirectEvaluation_existsUnique"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralComparisonSequenceDirectEvaluation.lean",
+  "statement": "theorem integralComparisonSequenceDirectEvaluation_existsUnique\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :\n    ∃! e : integralComparisonSequenceDirectImage l E f ⋙ coefficientSequenceEvaluation l E Y n ≅\n      coefficientSequenceEvaluation l E X n ⋙\n        coefficientProEtaleModuleDirectImage.{u, u} f\n          (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1)))),\n      ∀ (M : coefficientSequenceModules l E X) (U : Y.ProEt)\n        (x : ((coefficientSequenceEvaluation l E Y n).obj\n          ((integralComparisonSequenceDirectImage l E f).obj M)).val.obj (op U)),\n        HEq ((e.hom.app M).val.app (op U) x) x",
+  "by": "E4",
+  "date": "2026-10-26",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T100239-L-4160189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T100239-L-4160189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

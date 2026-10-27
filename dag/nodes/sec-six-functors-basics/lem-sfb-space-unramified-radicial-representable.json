@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-space-unramified-radicial-representable",
+ "kind": "statement",
+ "title": "Unramified universally injective space morphisms are representable by schemes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and point spaces [def-a1-space-point-topology]. Assume $f$ is unramified: its chart test [def-sfb-space-morphism-properties] is the scheme unramified property [def-weil-unramified-morphism], including local finite type [def-weil-finite-type-morphism]. Assume $f$ is universally injective: for every algebraic-space morphism $Y'\\to Y$, the map $|X\\times_Y Y'|\\to|Y'|$ is injective. Then $f$ is representable by schemes: for every $S$-scheme $T$ and every morphism $h_T\\to Y$, the sheaf $X\\times_Y h_T$ is represented by a scheme.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05W6 (spaces-more-morphisms-lemma-universally-injective-unramified), moreover clause under condition (2), representability assertion only."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-weil-unramified-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary $S$-scheme $T$ and a map $h_T\\to Y$. Regard $h_T$ as an algebraic space and put $E=X\\times_Yh_T$, with projection $g:E\\to h_T$. The fibre-product result makes $E$ an algebraic space. By base-change permanence, $g$ is unramified, hence locally of finite type on etale scheme charts. No representability of $g$ is being assumed.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-unramified-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05W6, lemma-universally-injective-unramified, proof of (2) implies (1) and the moreover clause; first base change to an arbitrary scheme test."
+   }
+  },
+  {
+   "text": "The morphism $g$ is universally injective directly from the hypothesis: for every $B\\to h_T$, associativity of sheaf fibre products identifies $E\\times_{h_T}B$ with $X\\times_YB$, preserving the projection to $B$. In particular the first projection $p:E\\times_{h_T}E\\to E$ is injective on point classes. Write $\\delta:E\\to E\\times_{h_T}E$ for the diagonal. Since $p\\delta=1_E$, for any point $z$ of $E\\times_{h_T}E$ we have $p(\\delta(p(z)))=p(z)$; injectivity gives $\\delta(p(z))=z$. Thus $|\\delta|$ is surjective. These identifications follow sectionwise from the compatible-pair definition of the fibre product.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05W6, lemma-universally-injective-unramified, proof of (2) implies (1) and the moreover clause; first base change to an arbitrary scheme test."
+   }
+  },
+  {
+   "text": "Apply the open-diagonal theorem to the unramified morphism $g$ with scheme target $T$: $\\delta$ is a representable open immersion. Its point image is all of $|E\\times_{h_T}E|$ by the preceding step. The open-subspace criterion therefore identifies this open subspace with the whole target, so $\\delta$ is an isomorphism. Consequently $g$ is a monomorphism of sheaves: for every test scheme $H$, any pair $e_1,e_2\\in E(H)$ with equal image in $h_T(H)$ is a section of $E\\times_{h_T}E$; the inverse of $\\delta$ expresses it as $(e,e)$, giving $e_1=e_2$.",
+   "uses": [
+    "lem-sfb-unramified-space-open-diagonal",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05W6, lemma-universally-injective-unramified, proof of (2) implies (1) and the moreover clause; first base change to an arbitrary scheme test."
+   }
+  },
+  {
+   "text": "The locally-finite-type monomorphism theorem now applies to $g:E\\to h_T$: the chartwise local finite type was obtained in step 1 and injectivity on sections in step 3. It gives separatedness and chartwise local quasi-finiteness, with no quasi-compactness assumption.",
+   "uses": [
+    "lem-sfb-space-lft-monomorphism-separated-lqf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05W6, lemma-universally-injective-unramified, proof of (2) implies (1) and the moreover clause; first base change to an arbitrary scheme test."
+   }
+  },
+  {
+   "text": "Apply the separated locally quasi-finite space-over-a-scheme theorem to $E\\to T$. Its two hypotheses are precisely the conclusions of step 4. It supplies a scheme $Z$ over $T$ and an isomorphism $h_Z\\simeq E$ over $h_T$. Since the scheme $T$ and its map to $Y$ were arbitrary, every sheaf $X\\times_Yh_T$ is represented by a scheme, which is the required representability of $f$.",
+   "uses": [
+    "lem-a1-separated-locally-qf-space-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05W6, lemma-universally-injective-unramified, proof of (2) implies (1) and the moreover clause; first base change to an arbitrary scheme test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-unramified-permanence",
+  "def-a1-space-point-topology",
+  "lem-sfb-unramified-space-open-diagonal",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-lft-monomorphism-separated-lqf",
+  "lem-a1-separated-locally-qf-space-representable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05W6, lemma-universally-injective-unramified, proof of (2) implies (1) and the moreover clause; first base change to an arbitrary scheme test."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An unramified universally injective morphism of algebraic spaces is representable by schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally injective if for every base change, the induced morphism on the underlying topological spaces is injective.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.UniversallyInjective\", \"doc\": \"The composition of two universally injective morphisms of schemes is universally injective.\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyInjective\", \"doc\": \"The property of being universally injective is Zariski local at the target. That is, for any morphism of schemes with this property, there exists a Zariski covering of the target such that the propert\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.universally_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyInjective f],\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x =>\\n        Function.Injective x).universally\\n    f\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is universally injective if and only if the property of its underlying continuous map being injective is preserved under all base changes. This establishes that un\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.Mono f], AlgebraicGeometry.UniversallyInjective f\", \"doc\": \"Every monomorphism in the category of schemes is universally injective. That is, if $ f : X \\to Y $ is a monomorphism (i.e., a left-cancellative morphism in the category of schemes), then for every bas\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"@AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.injective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyInjective f],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally injective if for every base change, the induced morphism on the underlying topological spaces is injective.\"}\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unramified\", \"UniversallyInjective\"",
+   "results": "[loogle] OK 0 hit(s)\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Uu]nramified.*[Rr]epresentab|[Rr]epresentab.*[Uu]nramified",
+   "results": "[grep] OK 0 hit(s)\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unramified radicial morphism of algebraic spaces is representable",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"RingHom.FormallyUnramified\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\to S $ between commutative semirings is formally unramified if the algebra structure on $ S $ over $ R $ induced by $ f $ satisfies the formally unramified condition, meani\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that the image of $V$ under $f$ is contained in $U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsStableUnderComposition @FormallyUnramified\", \"doc\": \"The composition of two formally unramified morphisms of schemes is also formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsMultiplicative @FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unramified monomorphism of algebraic spaces has scheme fibres over every test scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y),\\n  AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Scheme.Hom.fiberι f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $y$ be a point in $Y$. The fiber of $f$ over $y$, denoted $X_y$, is the pullback $X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is th\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-closed-immersion-unramified-criterion",
+  "date": "2026-10-24",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor. In quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism to the first projection. Supporting input: Tag 05XA (spaces-more-morphisms-lemma-where-closed-immersion), all three hypotheses and arbitrary algebraic-space parameter changes. Supporting input: Tag 05XA proof, first sentence: characterization of closed immersions as universally closed, unramified and universally injective. Supporting input for Tag 05W8: Tag 05W6, moreover under condition (2), representability before scheme base change.",
+   "via": [
+    "lem-sfb-space-closed-immersion-unramified-criterion",
+    "lem-sfb-space-universal-closed-immersion-open",
+    "lem-sfb-space-universal-isomorphism-open",
+    "lem-sfb-space-graphs-open-in-hilbert",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-unramified-radicial-representable",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 05W6 and its cited diagonal and schemehood inputs. Reduce first to an arbitrary scheme target so that the existing scheme-target nodes apply literally. Prove diagonal point-surjectivity by the injective-projection/section calculation rather than introducing an elementary node. Reuse every geometric lemma; no new nodes or statement changes.",
+  "blueprint": "The inherited provenance ends at det-thm-sf-ctf-stability-direct-images, proof (3), alteration/curve-moduli support chain. This split supplies the Tag 05W6 representability prerequisite of Tag 05W8, as recorded in blueprint.from.place, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of sheaf fibre products as algebraic spaces, needed to form the arbitrary scheme base change; this unit has no replacement."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic criterion that an open subspace with full point image is the whole space, used only for the diagonal."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic Stacks 03XX schemehood theorem, the scheme-target form of the 0418 input explicitly used by 05W6; this unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-separated-locally-qf-space-representable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-55dbf742e",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-55dbf742e (reviewer sub-agent of L); spot-checked: Read Stacks 05W6 (spaces-more-morphisms lemma-universally-injective-unramified) and 040X (spaces-morphisms lemma-universally-injective) in full. The item statement is unchanged from live, which is still unsplit, and there is no repair note, so this is a first split of an empty proof. The five steps follow Stacks' route after base-changing to an arbitrary S-scheme T. Step 1: def-trf-scheme-algebraic-space, the fibre-products node and unramified permanence give an unramified, locally finite type E -> h_T. Step 2 is elementary and correct: universal injectivity passes to g by associativity of fibre products; p is injective on points and p.delta = 1, so |delta| is surjective. Step 3: lem-sfb-unramified-space-open-diagonal makes delta a representable open immersion; lem-a1-space-point-open-calculus says an open subspace with full point image is the whole space, so delta is an isomorphism and g is a monomorphism, written out with compatible pairs. Step 4: the hypotheses of lem-sfb-space-lft-monomorphism-separated-lqf (monomorphism into h_T, locally finite type on charts) are met; it gives separated and locally quasi-finite. Step 5: lem-a1-separated-locally-qf-space-representable (03XX) has exactly those hypotheses and gives h_Z = E. No new nodes; the DAG search for 05W6/040X/0418/0463/03XX/05W1 found no duplicate. Small cases checked: empty X or T, open immersion, purely inseparable extension excluded, non-quasi-compact T. No SGA. Batch-5: every flagged citation reaches sec-trace-formula only through the algebraic-space definitions (def-trf-scheme-algebraic-space, def-trf-algebraic-space); none is part of the trace formula or Poincare duality, so all are accepted. The three declared generic tool_uses (fibre products, point-open calculus, 03XX) are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceUnramifiedRadicialRepresentable",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isRepresentable_of_unramified_universallyInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceUnramifiedRadicialRepresentable.lean",
+  "statement": "theorem isRepresentable_of_unramified_universallyInjective {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hunramified : MapIsLocally (@IsUnramified) f) (hinjective : ∀ (Y' : AlgebraicSpace S) (g : Y' ⟶ Y) (a b : PointRepresentative (Limits.pullback f.hom g.hom).obj), (Quot.mk _ (a.map (Limits.pullback.snd f.hom g.hom).hom) : Point Y'.obj.obj) = Quot.mk _ (b.map (Limits.pullback.snd f.hom g.hom).hom) → (Quot.mk _ a : Point (Limits.pullback f.hom g.hom).obj) = Quot.mk _ b) : IsRepresentable f.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Review FIX (2026-10-24): universal injectivity is stated through the point classes and PointRepresentative.map of the stmt_dep def-a1-space-point-topology (two representatives of X ×_Y Y' with equal class in |Y'| have equal class), instead of `Function.Injective (mapPoint …)`, whose owner def-sfb-proper-curve-moduli is not a stmt_dep of the item. Equivalent: mapPoint g (Quot.mk a) is Quot.mk (a.map g) by definition, and Quot.ind reduces injectivity to representatives. Nothing else changed.",
+  "fixed_by": "NT-stage2-cc-dce12e320"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dce12e320",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Read the node (Stacks 05W6 moreover clause under (2)), the module, the report and every stmt_dep declaration: MapIsLocally, IsUnramified (LFT + open-immersion diagonal), IsRepresentable = IsRepresentableWith ⊤, fibreProduct_isAlgebraicSpace with the same sheaf pullback, Point/PointRepresentative.map. Hypotheses, conclusion, quantifiers, the single universe u and edge cases (empty, non-qc T, inseparable extension excluded) match; there are no defs, the proof is sorry, and docstrings and conventions are OK. H2: hinjective used AlgebraicSpace.mapPoint, owned by def-sfb-proper-curve-moduli, which is not a stmt_dep. FIX restates injectivity with the point classes and PointRepresentative.map of the stmt_dep def-a1-space-point-topology (equal class of a.map snd and b.map snd implies equal class of a and b). It is equivalent because mapPoint is Quot.map, and follows the Q98 precedent. Fixes: complete module plus lean-record.json with the verbatim statement and a note. nt_compile --json exit 0 in 3.0 s, clean."
+ }
+}

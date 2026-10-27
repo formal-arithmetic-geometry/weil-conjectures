@@ -1,0 +1,373 @@
+{
+ "id": "lem-sfb-affine-etale-derived-hom-realization",
+ "kind": "statement",
+ "title": "Affine etale realization commutes with derived Hom from a bounded-above coherent source",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and $U=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Use the exact associated etale module functor $a_A$ of [lem-sfb-affine-etale-derived-module-realization] and ordinary unbounded derived categories [def-weil-abstract-derived-category]. Let $E,F\\in D(A)$. Assume every $H^i(E)$ is a finitely generated $A$-module [def-weil-finitely-generated-module], $H^i(E)=0$ for all sufficiently large $i$, and $H^i(F)=0$ for all sufficiently negative $i$. For the explicit size presentation take $A$ and ordinary $A$-modules in universe $u$; the small etale site's object and arrow universes are $u+1$ and $u$. Let $i$ be the canonical sectionwise universe transport sending a module sheaf $M$ to $\\operatorname{ULift}M$ with its original structure-ring action and restriction maps conjugated by $\\operatorname{ULift.up/down}$; the section identification is $\\operatorname{ULift.down}$ with inverse $\\operatorname{ULift.up}$. Put $a'_A=i\\circ a_A$, also denoting its exact termwise derived realization by $a'_A$. There is a natural isomorphism in the ordinary unbounded derived category of $\\mathcal O_U$-module sheaves on the same small etale site, with section universe $u+1$:\n$$a'_A\\bigl(R\\operatorname{Hom}_A(E,F)\\bigr)\\xrightarrow{\\sim}R\\mathcal Hom_{\\mathcal O_U}\\bigl(a'_A(E),a'_A(F)\\bigr).$$\nThe two derived Homs are [def-pur-derived-internal-hom], in its ordinary-module presentation over $A$ and its ringed-site presentation on the small etale site of $U$, respectively. The latter keeps the actual structure rings in universe $u$. Naturality is contravariant in $E$ and covariant in $F$ on the full category of pairs satisfying the stated hypotheses. No finite-generation hypothesis on the cohomology of $F$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08JP (lemma-descend-RHom), case (1), combined with perfect.tex lemma-identify-pseudo-coherent-noetherian and lemma-quasi-coherence-internal-hom (affine clause (3)(a))."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "The Noetherian cohomology criterion makes $E$ pseudo-coherent over $A$: the required upper bound and finite generation are exactly our hypotheses. By the definition, choose a bounded-above finite free complex $P^\\bullet$ representing $E$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E, lemma-Noetherian-pseudo-coherent, clause (2)."
+   }
+  },
+  {
+   "text": "Put $\\widetilde E,\\widetilde F$ for the Zariski affine derived realizations. The affine equivalence sends $P^\\bullet$ to its termwise tilde complex; finite free terms become finite free structure modules, so $\\widetilde E$ is pseudo-coherent by definition. The tilde homology comparison gives $H^i(\\widetilde F)\\cong\\widetilde{H^i(F)}$, so the given lower bound for $F$ also bounds $\\widetilde F$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-pur-pseudo-coherent-complex",
+    "new-affine-derived-tilde-homology-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 06Z0 (lemma-affine-compare-bounded) and 08E7 (lemma-pseudo-coherent-affine)."
+   }
+  },
+  {
+   "text": "Let $b$ bound $P^\\bullet$ above and represent $F$ by a complex $F^\\bullet$ with $F^q=0$ for $q<a$, where $H^i(F)=0$ for $i<a$ [def-sbc-standard-tstructure-derived-category]. By [lem-sc-affine-projective-complex-derived-hom], $\\operatorname{Hom}^\\bullet_A(P^\\bullet,F^\\bullet)$ represents $R\\operatorname{Hom}_A(E,F)$. The termwise tilde $\\widetilde{P^\\bullet}$ represents $\\widetilde E$ and has finite free terms [lem-weil-pbc-spec-tilde-free-module]; so [lem-sc-derived-hom-finite-free-model], applied to its identity and to $\\widetilde{F^\\bullet}$, shows that $\\mathcal Hom^\\bullet(\\widetilde{P^\\bullet},\\widetilde{F^\\bullet})$ represents $R\\mathcal Hom_{\\mathcal O_U}(\\widetilde E,\\widetilde F)$. In degree $n$ only the finitely many $p$ with $a-n\\le p\\le b$ contribute to either product. For $P^p\\cong A^m$ both $\\widetilde{\\operatorname{Hom}_A(P^p,F^q)}$ and $\\mathcal Hom(\\widetilde{P^p},\\widetilde{F^q})$ are $(\\widetilde{F^q})^m$ [lem-weil-pbc-spec-module-tilde-sections], identified by $h\\mapsto\\widetilde h$; this commutes with $d_Fh-(-1)^nhd_P$ because tilde is an additive functor. The resulting isomorphism of complexes gives $\\widetilde{R\\operatorname{Hom}_A(E,F)}\\simeq R\\mathcal Hom_{\\mathcal O_U}(\\widetilde E,\\widetilde F)$, with an explicit map rather than an unspecified isomorphism.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sc-affine-projective-complex-derived-hom",
+    "lem-weil-pbc-spec-tilde-free-module",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clause (3)(a) and its proof (finite projective Hom-complex computation, cohomology.tex lemma-Rhom-complex-of-direct-summands-finite-free)."
+   }
+  },
+  {
+   "text": "For every $A$-module $M$, the restriction of $a_A(M)$ to affine Zariski opens $D(f)$ has sections $A_f\\otimes_A M=M_f$, with the localization restrictions. These are exactly the sections of $\\widetilde M$. Both sheaves are quasi-coherent; the Zariski/etale equivalence, whose inverse is restriction, therefore gives the natural identification $\\epsilon_U^*\\widetilde M\\cong a_A(M)$. Apply it termwise to complexes and localize: both functors are exact, hence it identifies $\\epsilon_U^*\\widetilde T$ with $a_A(T)$ for every $T\\in D(A)$.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "new-affine-derived-tilde-homology-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 071Q, lemma-derived-quasi-coherent-small-etale-site; descent.tex Tag 03DX, proposition-equivalence-quasi-coherent (small-etale case)."
+   }
+  },
+  {
+   "text": "Apply $\\epsilon_U^*$ to the isomorphism of step 3 and compose with the comparison of [lem-sfb-zariski-etale-pseudocoherent-rhom] for $K=\\widetilde E$, $L=\\widetilde F$, whose hypotheses were checked in step 2. The identifications of step 4, for $T=R\\operatorname{Hom}_A(E,F)$, $E$ and $F$, turn the composite into the required isomorphism. Naturality: a morphism $E\\to E'$ in $D(A)$ is represented by a chain map $P^\\bullet\\to P'^\\bullet$ of the finite free models, as bounded-above projective complexes are K-projective [lem-sc-bounded-above-projective-kprojective]; a morphism $F\\to F'$ is represented by a chain map from $F^\\bullet$ into a bounded-below injective, K-injective resolution of $F'^\\bullet$ [lem-sc-bounded-below-injective-resolution], to which step 3 applies equally. Precomposition and postcomposition commute with $h\\mapsto\\widetilde h$, so the step-3 isomorphism is natural; the new comparison is natural by its statement and step 4 is natural in $T$. No finiteness condition on $F$ has been used.",
+   "uses": [
+    "lem-sfb-zariski-etale-pseudocoherent-rhom",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JP, lemma-descend-RHom, case (1), composed with perfect.tex Tag 0A6H(3)(a)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pur-pseudo-coherent-complex",
+  "new-affine-derived-tilde-homology-comparison",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sc-affine-projective-complex-derived-hom",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-zariski-etale-pseudocoherent-rhom",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-sc-bounded-below-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08JP, lemma-descend-RHom, case (1), combined with perfect.tex Tag 0A6H(3)(a) and more-algebra.tex Tag 066E(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Rr]Hom|[Ii]nternalHom|internal_hom).*[Ee]tale|[Ee]tale.*([Rr]Hom|[Ii]nternalHom|internal_hom)",
+   "results": "{\"t\": \"2026-10-23T09:34:25Z\", \"tool\": \"grep\", \"query\": \"([Rr]Hom|[Ii]nternalHom|internal_hom).*[Ee]tale|[Ee]tale.*([Rr]Hom|[Ii]nternalHom|internal_hom)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general sheaf cohomology, ordinary sheafification adjunctions or etale ring maps, not derived internal-Hom realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale affine derived internal Hom comparison for pseudo coherent source and bounded below target",
+   "results": "{\"t\": \"2026-10-23T09:34:26Z\", \"tool\": \"leansearch\", \"query\": \"Etale affine derived internal Hom comparison for pseudo coherent source and bounded below target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.homEquiv\", \"AlgebraicGeometry.sourceAffineLocally\", \"LightCondensed.ihom_map_val_app\", \"RingHom.Etale\", \"RingHom.Etale.propertyIsLocal\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"RingHom.Etale.toAlgebra\", \"RingHom.Etale.stableUnderComposition\"], \"digest\": \"3a3a368f1866cc9a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general sheaf cohomology, ordinary sheafification adjunctions or etale ring maps, not derived internal-Hom realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RHom\", \"etale\"",
+   "results": "{\"t\": \"2026-10-23T09:34:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"RHom\\\", \\\"etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general sheaf cohomology, ordinary sheafification adjunctions or etale ring maps, not derived internal-Hom realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf Hom on the small etale site of an affine Noetherian scheme agrees with associated sheaf of derived module Hom for bounded above finite cohomology source and bounded below target",
+   "results": "{\"t\": \"2026-10-23T09:34:36Z\", \"tool\": \"leanfinder\", \"query\": \"Derived sheaf Hom on the small etale site of an affine Noetherian scheme agrees with associated sheaf of derived module Hom for bounded above finite cohomology source and bounded below target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"SheafOfModules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"AlgebraicGeometry.Scheme.Modules.isSheaf\"], \"digest\": \"8314ad84ab855d48\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general sheaf cohomology, ordinary sheafification adjunctions or etale ring maps, not derived internal-Hom realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom of a bounded above complex of finite free modules and a bounded below complex commutes with sheafification on the etale site",
+   "results": "{\"t\": \"2026-10-23T09:34:36Z\", \"tool\": \"leanfinder\", \"query\": \"Derived Hom of a bounded above complex of finite free modules and a bounded below complex commutes with sheafification on the etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"CategoryTheory.Sheaf.H\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.sheafifyHomEquiv\"], \"digest\": \"41f2f5a3be8b1bb9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general sheaf cohomology, ordinary sheafification adjunctions or etale ring maps, not derived internal-Hom realization."
+  },
+  {
+   "tool": "grep",
+   "query": "(RHom|internalHom|internal_hom).*(etale|étale)|(etale|étale).*(RHom|internalHom|internal_hom)",
+   "results": "{\"t\": \"2026-10-23T11:29:50Z\", \"tool\": \"grep\", \"query\": \"(RHom|internalHom|internal_hom).*(etale|étale)|(etale|étale).*(RHom|internalHom|internal_hom)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(PseudoCoherent|pseudo_coherent|pseudo.coherent).*(Hom|hom)|(Hom|hom).*(PseudoCoherent|pseudo_coherent)",
+   "results": "{\"t\": \"2026-10-23T11:29:50Z\", \"tool\": \"grep\", \"query\": \"(PseudoCoherent|pseudo_coherent|pseudo.coherent).*(Hom|hom)|(Hom|hom).*(PseudoCoherent|pseudo_coherent)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski to small etale exact pullback commutes with derived sheaf Hom for pseudo coherent source bounded below target",
+   "results": "{\"t\": \"2026-10-23T11:29:50Z\", \"tool\": \"leansearch\", \"query\": \"Zariski to small etale exact pullback commutes with derived sheaf Hom for pseudo coherent source bounded below target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"51d787f3d10d2d1c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RHom\", \"etale\"",
+   "results": "{\"t\": \"2026-10-23T11:29:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"RHom\\\", \\\"etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedHom\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-23T11:29:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"derivedHom\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated etale module sheaf of RHom over a Noetherian affine ring agrees with internal derived Hom",
+   "results": "{\"t\": \"2026-10-23T11:29:51Z\", \"tool\": \"leansearch\", \"query\": \"Associated etale module sheaf of RHom over a Noetherian affine ring agrees with internal derived Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tildeInModuleCat\", \"CategoryTheory.Abelian.Ext.instModule\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"RingHom.Etale\", \"SheafOfModules.hom_ext\", \"RingHom.Etale.toAlgebra\", \"SheafOfModules.unit\", \"SheafOfModules.mk\"], \"digest\": \"03280c8eb979cbb0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale pullback of derived internal Hom for a pseudo coherent complex and a bounded below complex on a scheme",
+   "results": "{\"t\": \"2026-10-23T11:29:54Z\", \"tool\": \"leanfinder\", \"query\": \"Etale pullback of derived internal Hom for a pseudo coherent complex and a bounded below complex on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\"], \"digest\": \"545444e9afb97c60\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of topology from Zariski to etale preserves derived sheaf Hom out of a bounded above finite free complex",
+   "results": "{\"t\": \"2026-10-23T11:29:55Z\", \"tool\": \"leanfinder\", \"query\": \"Change of topology from Zariski to etale preserves derived sheaf Hom out of a bounded above finite free complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"718cdb5cb54dec6b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine etale realization of derived module Hom with bounded above finite cohomology source and bounded below target",
+   "results": "{\"t\": \"2026-10-23T11:29:56Z\", \"tool\": \"leanfinder\", \"query\": \"Affine etale realization of derived module Hom with bounded above finite cohomology source and bounded below target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"Algebra.Etale.formallyEtale\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.FormallyEtale.instForallOfFinite\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.FormallyEtale.instFormallySmooth\"], \"digest\": \"b90463abf68a08e7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of derived Hom from coherent bounded above complexes on affine schemes commutes with the small etale topology",
+   "results": "{\"t\": \"2026-10-23T11:29:58Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of derived Hom from coherent bounded above complexes on affine schemes commutes with the small etale topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"CategoryTheory.Sheaf.H\"], \"digest\": \"bb13308ca6651a38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary module pullback, etale sites or sheafification; none states this derived internal-Hom comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-derived-internal-hom",
+  "date": "2026-10-23",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0S supplies coherence and lower boundedness of the internal Hom. Affine chart reduction: Tag 08JP (lemma-descend-RHom), case (1), combined with perfect.tex lemma-identify-pseudo-coherent-noetherian and lemma-quasi-coherence-internal-hom (affine clause (3)(a)).",
+   "via": [
+    "lem-sfb-space-coherent-derived-internal-hom",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-etale-derived-hom-realization",
+  "worker": "stage1",
+  "summary": "Retained the statement. Reused the existing Noetherian pseudo-coherence criterion, affine Zariski derived-Hom comparison, affine homology comparison and change-of-topology equivalences. Added only the general scheme Zariski/etale derived-Hom comparison of Tag 08JP(1).",
+  "blueprint": "The recorded provenance serves det-thm-sf-ctf-stability-direct-images, proof (3), via the coherent Ext and curve deformation prerequisites. These five steps realize the affine internal-Hom comparison used in the parent space-coherence proof. The inherited from.node is null (ancestor command returns None); the existing from.place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic affine module or Zariski derived-category tool for this affine comparison; the same-unit source supplies no replacement."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine module or Zariski derived-category tool for this affine comparison; the same-unit source supplies no replacement."
+   },
+   {
+    "node": "new-affine-derived-tilde-homology-comparison",
+    "why": "Generic affine module or Zariski derived-category tool for this affine comparison; the same-unit source supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic affine module or Zariski derived-category tool for this affine comparison; the same-unit source supplies no replacement."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic affine module or Zariski derived-category tool for this affine comparison; the same-unit source supplies no replacement."
+   },
+   {
+    "node": "lem-sc-affine-projective-complex-derived-hom",
+    "why": "Generic affine module or ringed-space derived-Hom tool (Hom-complex representation, K-projective/K-injective models); the same-unit source supplies no replacement."
+   },
+   {
+    "node": "lem-sc-derived-hom-finite-free-model",
+    "why": "Generic affine module or ringed-space derived-Hom tool (Hom-complex representation, K-projective/K-injective models); the same-unit source supplies no replacement."
+   },
+   {
+    "node": "lem-sc-bounded-above-projective-kprojective",
+    "why": "Generic affine module or ringed-space derived-Hom tool (Hom-complex representation, K-projective/K-injective models); the same-unit source supplies no replacement."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic affine module or ringed-space derived-Hom tool (Hom-complex representation, K-projective/K-injective models); the same-unit source supplies no replacement."
+   },
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "Generic affine module or ringed-space derived-Hom tool (Hom-complex representation, K-projective/K-injective models); the same-unit source supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-free-module",
+    "why": "Generic affine module or ringed-space derived-Hom tool (Hom-complex representation, K-projective/K-injective models); the same-unit source supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-affine-projective-complex-derived-hom",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-sc-bounded-below-injective-resolution",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-spec-tilde-free-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-bab6c0f56",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-bab6c0f56 (reviewer sub-agent of L); spot-checked: The item statement is unchanged and correct: it is Stacks 08JP(1) (spaces-perfect lemma-descend-RHom, proof read) composed with 066E(2) and 0A6H(3)(a). The new node lem-sfb-zariski-etale-pseudocoherent-rhom is exactly 08JP(1) for an arbitrary scheme, with no quasi-coherence of L and no Noetherian hypothesis. It is strictly smaller than the item and is not a duplicate: rg over 08JP, descend-RHom, 0A6H, prepare-fancy-base-change and étale internal Hom found no node stating it. I tested the cases A=0, E=A[0] and E with infinitely many negative degrees (each degree has finitely many factors). Steps 1, 2 and 4 are correct as written; step 4's identification of a_A(M) with ε*M̃ on the D(f) basis uses restriction as the inverse of the 03DX equivalence. Two faults, both fixed. (C3/E5) Step 3 cited lem-sc-affine-pseudo-coherent-rhom-qcoherent, whose statement and Lean declaration give only an unspecified isomorphism (Nonempty), yet step 5 claimed naturality from that isomorphism's form. Step 3 now builds the map h↦h̃ explicitly: lem-sc-affine-projective-complex-derived-hom and lem-sc-derived-hom-finite-free-model represent both derived Homs by Hom complexes, and lem-weil-pbc-spec-tilde-free-module and lem-weil-pbc-spec-module-tilde-sections identify the finite-product terms. Step 5's naturality now cites lem-sc-bounded-above-projective-kprojective and lem-sc-bounded-below-injective-resolution, and proof_deps and tool_uses are updated. (B3) The new node's 'canonical pullback comparison' was never defined; it is now defined inline on the Hom complexes of def-pur-derived-internal-hom (product projections, h↦ε*h, then K-injective replacement), def-pur-hom-complex is added to stmt_deps, and hypotheses and conclusion are unchanged. Batch-5: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is the general Zariski/étale quasi-coherent equivalence (03DX), not part of the trace formula or Poincaré duality. The fixed closure has no trf theorem, no pod node and no nt- node, so it is accepted. There is no cycle and no SGA citation.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleDerivedHomRealization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineEtaleDerivedHomRealization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleSectionLift",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleSectionLiftEquiv",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleSectionLift_additive",
+   "AlgebraicGeometry.Scheme.Modules.affineEtaleDerivedHomPairProperty",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleCommRingHasDerivedCategory",
+   "AlgebraicGeometry.Scheme.Modules.affineEtaleDerivedHomRealization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleDerivedHomRealization.lean",
+  "statement": "theorem affineEtaleDerivedHomRealization (A : Type u) [CommRing A] [IsNoetherianRing A] [HasDerivedCategory.{wE} (SheafOfModules.{u + 1} (smallEtaleModuleRing (Spec (.of A))))] (c : ZariskiEtaleModuleContext (Spec (.of A))) : ∃ _ha : (affineEtaleAssociatedFunctor A c ⋙ smallEtaleModuleSectionLift (Spec (.of A))).Additive, ∃ a : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (SheafOfModules.{u + 1} (smallEtaleModuleRing (Spec (.of A)))), Nonempty (DerivedCategory.Q ⋙ a ≅ (affineEtaleAssociatedFunctor A c ⋙ smallEtaleModuleSectionLift (Spec (.of A))).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧ Nonempty ((affineEtaleDerivedHomPairProperty A).ι ⋙ ordinaryModuleDerivedInternalHom A ⋙ a ≅ (affineEtaleDerivedHomPairProperty A).ι ⋙ a.op.prod a ⋙ derivedInternalHomMixedUniverses.{u + 1, u, u, wE} (Spec (.of A)).smallEtaleTopology ⟨(Spec (.of A)).etaleStructurePresheaf, (Spec (.of A)).isSheaf_etaleStructurePresheaf⟩)",
+  "branch": "sheaf-dag",
+  "by": "Q140",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The natural comparison is a NatIso on the full category of pairs with finite cohomology and an upper bound only for E, and a lower bound only for F. The derived associated functor is existentially specified by its termwise-Q factorization. The original small etale rings/site and affineEtaleAssociatedFunctor are reused; sectionwise ULift has an explicit linear down/up equivalence. HasDerivedCategory is the ordinary localization-size choice."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65038eda5",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Item matches the corrected node clause by clause: IsNoetherianRing; pair property (∀i Module.Finite H^i E, ∃b upper bound for E, ∃a lower bound for F, no finiteness on F); genuine sectionwise ULift (smallEtaleModuleSectionLift, down/up equivalence); a pinned up to iso by Q ⋙ a ≅ termwise; Nonempty NatIso of functors on the full pair category with correct variance. c is a Prop-only context. Statement verbatim (both records). The §1(C) ULift size correction is source-equivalent; citer lem-sfb-space-coherent-derived-internal-hom holds. §1(B) mixed-universe companions (rings r, sections max c v r) for def-pur-derived-internal-hom and prop-pur-kinjective-resolutions-exist use the same Hom complex, K-injective replacement and localization, have real data, sorry only on theorems, publicly re-export the old proved modules, and both live dep records are unchanged since base. Edge cases (A=0, zero complexes, any bounds) covered; no universe equalities. Maintainer notes: (1) the delivered prop-pur-kinjective record drops the landed proved grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses from declarations (still re-exported and used by 10+ modules); please re-add it, since a reviewer fix cannot change a dep record; (2) both dep nodes now have sorried primary companions (_inverts/_comparison/_obj_iso, the MixedUniverses resolution theorem, hasSheafCompose_commRingToRing) for stage 3. No compile: no file changed.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q140 stage 2",
+  "old_statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and $U=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Use the exact associated etale module functor $a_A$ of [lem-sfb-affine-etale-derived-module-realization] and ordinary unbounded derived categories [def-weil-abstract-derived-category]. Let $E,F\\in D(A)$. Assume every $H^i(E)$ is a finitely generated $A$-module [def-weil-finitely-generated-module], $H^i(E)=0$ for all sufficiently large $i$, and $H^i(F)=0$ for all sufficiently negative $i$. There is a natural isomorphism in $D(U_{\\mathrm{et}},\\mathcal O_U)$\n$$a_A\\bigl(R\\operatorname{Hom}_A(E,F)\\bigr)\\xrightarrow{\\sim}R\\mathcal Hom_{\\mathcal O_U}\\bigl(a_A(E),a_A(F)\\bigr).$$\nThe two derived Homs are [def-pur-derived-internal-hom], over the one-object ringed site for $A$ and the small etale site of $U$, respectively. No finite-generation hypothesis on the cohomology of $F$ is imposed.",
+  "what": "The ordinary-module presentation and the associated etale module functor use section universe u, but the full small etale site has object universe u+1. Its generic derived internal Hom therefore has section universe u+1, so it cannot be applied to a_A(E) as written through the recorded API. Make the canonical sectionwise ULift explicit, keeping the coefficient rings and site, and repair the mixed-coefficient K-injective and internal-Hom interfaces. The section identification is explicitly ULift.down with inverse ULift.up; there is no extra mathematical assumption.",
+  "source": {
+   "document": "literature/stacks-project/spaces-perfect.tex",
+   "place": "Tag 08JP, lemma-descend-RHom, case (1), with perfect.tex Tag 0A6H(3)(a); explicit universe presentation of the same module sheaves."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-space-coherent-derived-internal-hom",
+    "holds": true,
+    "note": "The affine-chart comparison is used to compute coherent cohomology. Canonical sectionwise ULift identifies sections by down/up, is exact and fully faithful, so the same finite-free Hom model gives the identical chart coherence and lower bound; no case or hypothesis is lost."
+   }
+  ]
+ }
+}

@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-space-flat-complex-base-change",
+ "kind": "statement",
+ "title": "Arbitrary base change for a relatively flat complex on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a quasi-compact and quasi-separated morphism of algebraic spaces over $S$ [def-trf-algebraic-space]; these properties are tested after etale scheme charts on the target and source. All sites are taken small relative to the universe of their module sheaves [def-weil-size-convention]. Module derived categories are the unbounded localizations of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. On a ringed site, a perfect object means one locally isomorphic in that derived category to a bounded complex whose terms are direct summands of finite free structure modules. A quasi-coherent module on an algebraic space is as in [def-trf-space-quasi-coherent-module], and $D_{\\mathrm{QCoh}}$ denotes the full subcategory of objects with quasi-coherent cohomology sheaves. For morphisms of algebraic spaces use the canonical ringed small etale module functors [def-trf-space-etale-module-functors], their total derived functors $La^*\\dashv Ra_*$, and derived tensor product of modules. Derived pullback is computed by tensor pullback of K-flat resolutions with flat terms, and derived direct image by K-injective resolutions. Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and let $G^\\bullet$ be a bounded-above complex of quasi-coherent modules flat over $Y$ (every geometric stalk of every term is flat over the corresponding geometric stalk of $Y$). For any morphism $g:Y'\\to Y$ of algebraic spaces put $X'=X\\times_Y Y'$, with projections $g':X'\\to X$ and $f':X'\\to Y'$. There is an isomorphism in $D(\\mathcal O_{Y'})$\n$$Lg^*Rf_*(E\\otimes^{\\mathbf L}G^\\bullet)\\longrightarrow Rf'_*(L(g')^*E\\otimes^{\\mathbf L}(g')^*G^\\bullet).$$\nHere $(g')^*G^\\bullet$ is the ordinary termwise tensor pullback. The displayed morphism is the canonical derived exchange followed by the coefficient comparison: exchange is the adjoint of $L(f')^*Lg^*Rf_*A\\simeq L(g')^*Lf^*Rf_*A\\to L(g')^*A$ for $A=E\\otimes^{\\mathbf L}G^\\bullet$, using the counit of $Lf^*\\dashv Rf_*$; then use derived tensor pullback and $L(g')^*G^\\bullet\\to(g')^*G^\\bullet$. No intrinsic $\\mathcal O_X$-flatness of $G^i$, and no properness, finite presentation or boundedness of $E$, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-base-change-comparisons",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-space-flat-proper-coefficient",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-pullback-tensor-comparison",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-module-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Set $K=G^\\bullet$ and $K'=(g')^*G^\\bullet$, and let $\\phi:L(g')^*K\\to K'$ be the derived-to-ordinary pullback comparison. The kernel and cokernel result makes the cohomology of any complex with quasi-coherent terms quasi-coherent: use $\\ker d^i$ and its quotient by $\\operatorname{im}d^{i-1}$. Ordinary module pullback preserves quasi-coherence termwise, so $K,K'$ are in their respective $D_{\\mathrm{QCoh}}$. Derived pullback and derived tensor preserve these subcategories, so $E\\otimes^{\\mathbf L}K$ and $L(g')^*E\\otimes^{\\mathbf L}K'$ also have quasi-coherent cohomology.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-derived-qcoh-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0A1K proof: the coefficient pair and its quasi-coherence; 0DKI proof, opening paragraph."
+   }
+  },
+  {
+   "text": "Fix a geometric $\\bar x'$ and use the rings $R,A,B,C,D=A\\otimes_R B$ in the cited stalk lemma. Put $M=G^\\bullet_{\\bar x}$. Its terms are flat over $R$ by relative flatness and it is bounded above; hence the cited module lemma makes $M$ K-flat over $R$. Thus $M\\otimes_R^{\\mathbf L}B$ is computed by $M\\otimes_R B$. Since $D\\to C$ is flat, tensoring the kernel/image exact sequences in each degree with $C$ shows\n$$H^i(M\\otimes_R B)\\otimes_D C\\cong H^i((M\\otimes_R B)\\otimes_D C).$$\nThe chain isomorphism $(M\\otimes_R B)\\otimes_D C\\cong M\\otimes_A C$ sends $(m\\otimes b)\\otimes c$ to $m\\otimes bc$, with inverse $m\\otimes c\\mapsto(m\\otimes1)\\otimes c$. The stalk lemma identifies the latter complex with $K'_{\\bar x'}$ and identifies $\\phi$ with the canonical tensor comparison. Consequently the displayed isomorphism followed by this chain identification is exactly $\\beta^i_{\\phi,\\bar x'}$: on a cycle its formula is $[m\\otimes b]\\otimes c\\mapsto[m\\otimes bc]$. All these maps are isomorphisms. This checks condition (1) of 0DKG; it does not assert that $L(g')^*G^\\bullet\\to(g')^*G^\\bullet$ itself is invertible.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sfb-space-geometric-stalk-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0A1K proof, last paragraph: computation of the stalk condition; equation-bc before 0DKG."
+   }
+  },
+  {
+   "text": "Apply tensor inheritance to $\\phi$ and the given arbitrary $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Step 2 supplies every required stalk isomorphism. It follows that $\\psi:L(g')^*(E\\otimes^{\\mathbf L}G^\\bullet)\\to L(g')^*E\\otimes^{\\mathbf L}(g')^*G^\\bullet$ satisfies the same geometric-stalk condition, without imposing a bound on $E$.",
+   "uses": [
+    "lem-sfb-space-single-complex-tensor-inheritance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0A1K proof: application of 0DKI(1)."
+   }
+  },
+  {
+   "text": "Apply the single-complex base-change theorem with coefficient pair $E\\otimes^{\\mathbf L}G^\\bullet$, $L(g')^*E\\otimes^{\\mathbf L}(g')^*G^\\bullet$ and map $\\psi$. Step 1 checks quasi-coherence, step 3 checks its stalk condition, and the given morphism $f$ is quasi-compact and quasi-separated. Its conclusion makes $Rf'_*(\\psi)\\circ\\mathrm{Ex}$ invertible. The theorem defines $\\mathrm{Ex}$ by the same pulled-counit adjunction formula as the item, and $\\psi$ is precisely derived tensor pullback followed by $1\\otimes\\phi$. Hence this composition is the specified canonical arrow, proving the assertion.",
+   "uses": [
+    "lem-sfb-space-single-complex-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0A1K proof: application of 0DKH; 07A6 and 07A7 fix the exchange normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-sfb-space-geometric-stalk-tensor-calculus",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-single-complex-base-change",
+  "lem-sfb-space-single-complex-tensor-inheritance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0A1K (lemma-base-change-tensor), using Tags 0DKG, 0DKH and 0DKI; the stalk computation is expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change for quasi compact quasi separated morphisms of algebraic spaces and a bounded above complex of quasi coherent modules flat over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.Flat f]\\n  [hg : AlgebraicGeometry.Flat g], AlgebraicGeometry.Flat (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flat base change and tensor exactness do not state derived direct-image base change on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flat complex tensor perfect factor: derived pushforward commutes with arbitrary base change using ordinary pullback on the flat complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits.\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flat base change and tensor exactness do not state derived direct-image base change on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor direct image of a relatively flat complex on an algebraic space commutes with base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": A ⊗[R] (M ⊗[R] N) ≃ₗ[A] (A ⊗[R] M) ⊗[A] (A ⊗[R] N)\", \"doc\": \"Let $R$ and $A$ be commutative semirings, let $A$ be an $R$-algebra, and let $M$ and $N$ be $R$-modules. There is a canonical $A$-linear isomorphism between the extension of scalars of the tensor prod\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Flat R M] (C : ShortComplex <| ModuleCat R) (hC : C.Exact) : C.map (tensorRight M) |>.Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"IsBaseChange.tensorEquiv\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) (P : Type*) [AddCommGroup P] [Module R P] [Module S P] [IsScalarTower R S P] :\\n  P ⊗[S] N ≃ₗ[S] P ⊗[R] M\", \"doc\": \"Given an $ R $-linear map $ f : M → N $ that satisfies the base change condition with respect to a ring homomorphism $ R → S $, and an $ S $-module $ P $ equipped with compatible $ R $-module and scal\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flat base change and tensor exactness do not state derived direct-image base change on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flat base change and tensor exactness do not state derived direct-image base change on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyFlat|derivedBaseChange|baseChange.*(cohomology|directImage)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flat base change and tensor exactness do not state derived direct-image base change on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arbitrary derived base change for a quasi compact quasi separated morphism of algebraic spaces and a quasi coherent complex tensored with a bounded above relatively flat complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of E tensor G commutes with base change with ordinary pullback on the relatively flat factor G for algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g))\\n  {Z : AlgebraicGeometry.Scheme} (h : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t)\", \"doc\": \"For morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes, and a point $t$ in the fiber product $X \\\\times_S Y$, the composition of the canonical morphism from the spectrum of the tensor product of resi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T'),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr h).hom) T.SpecTensorTo =\\n    T'.SpecTensor\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo\\n      (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.snd f g) h) =\\n \", \"doc\": \"For a pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, the composition of the morphism $\\\\operatorname{Spec}(T.tensor) \\\\to X \\\\times_S Y$ with the second project\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := T, commRing := inst_2 } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackS\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-algebra structures on $S$ and $T$, is isomorph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T') {Z : AlgebraicGeometry.Scheme} (h_1 : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.\", \"doc\": \"For schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, and equal pullback triplets $T=T'$, the composition of the morphism induced by the tensor congruence isomorphism $\\\\operatorname{Spec}(T.te\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := R, commRing := inst } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpe\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-algebra structures on $S$ and $T$, is isomorph\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic spaces relatively flat bounded above complexes tensor derived direct image arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"{P A : Type*} [CommRing P] [CommRing A] [Algebra P S] [Algebra P A] [Algebra R P] [Algebra S A] [IsScalarTower P S A]\\n  (a b) :\\n  cotangentComplexBaseChange R S P A (a ⊗ₜ b) =\\n    a • kerToTensor R P A ⟨b.1, by rw [IsScalarTower.algebraMap_eq P S A]; aesop⟩\", \"doc\": \"Given commutative rings $P, S, A$ with compatible algebra structures and a scalar tower condition $P \\\\to S \\\\to A$, the cotangent complex base change of the tensor product $a \\\\otimes b$ equals the scal\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib.RingTheory.Unramified.Finite\", \"type\": \"[Module.Flat R M] : Module.Flat S M\", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|relativelyFlat|derivedBaseChange",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-derived-base-change",
+  "date": "2026-10-23",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change).",
+   "via": [
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-flat-complex-base-change",
+  "worker": "stage1",
+  "summary": "Q60 expands Stacks 0A1K into the quasi-coherence check, the explicit relative-flat stalk computation, tensor inheritance and the single-complex theorem. Reuses three existing inputs and creates four statement-only algebraic-space tools; no statement change. Scheme-only upstream results do not attach this item.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/curve-moduli chain through proper-flat-space-derived-base-change. The current latest blueprint proof (3) is preserved; the supporting coherent-module calculation is below that unit route. blueprint_refs.py ancestor reports None in the imported live chain, so from.node remains null and the inherited explicit place/via are retained. Whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-ring K-flatness of bounded-above flat complexes used at geometric stalks; no algebraic-space/unit route replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-f955be196",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-f955be196 (reviewer sub-agent of L); spot-checked: I read the delivery against spaces-perfect.tex: 0A1K (statement, proof and exact arrow), equation-bc, 0DKG (with its strict-henselization proof), 0DKH (affine case, induction principle, Mayer–Vietoris), 0DKI(1), 08F4 and 08F5. I also read examples 0FLS can_z, algebra 08HV, and the tags for 05V5, 05VQ and 0DEN. The item's statement is unchanged from the parent Q62 delivery. Its hypotheses and arrow match 0A1K: f qcqs, any E in D_QCoh, G bounded above with quasi-coherent terms flat over Y, ordinary (g')^*G on the right, and the exchange map followed by the coefficient comparison. Step 1: H^i = ker/im is quasi-coherent by the kernels/cokernels node, termwise pullback stays quasi-coherent, and the new 08F4/08F5 node puts both coefficient objects in D_QCoh. Step 2: the stalk of G is K-flat over R (bounded above with flat terms), D→C is flat, and the chain isomorphism (M⊗_R B)⊗_D C ≅ M⊗_A C gives condition (1) of 0DKG. The step never assumes A-flatness of G. Steps 3 and 4 apply 0DKI(1) and 0DKH with every hypothesis supplied, and the Ex formula agrees with the item's arrow. Each new node faithfully states its source: derived-qcoh closure = 08F4+08F5; geometric-stalk calculus, where D→C is flat because C is the strict henselization of a localization of D, and the stalk formulas hold; single-complex base change = 0DKH; tensor inheritance = 0DKI(1). Tested cases: G=0 or E=0, empty X', identity g, Spec ℂ over Spec ℝ, and k[ε] with G=k (relatively flat but not A-flat). No duplicates: the tag hits for 0DKG/0DKH/0DKI/08F4/08F5 are scheme-only lem-pc nodes, and 08IR (flat f) is a different statement. No node restates a clause of the item and there is no cycle. I accept the tool use of lem-pc-module-bounded-flat-kflat, a generic fact about rings. Batch-5: def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-trf-space-etale-module-functors are general definitions used only in statements, outside both assumed theorems, so all 12 listed citations are accepted. No SGA citation. blueprint.from.node is null, inherited from the parent chain, and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatComplexBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.moduleRelativelyFlatBaseChange_isIso",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.moduleRelativelyFlatBaseChangeMap",
+   "AlgebraicGeometry.AlgebraicSpace.moduleRelativelyFlatBaseChange_isIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatComplexBaseChange.lean",
+  "statement": "theorem moduleRelativelyFlatBaseChange_isIso (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (h : X' ⟶ X) (sq : IsPullback h f' f g) (hqc : MapIsQuasiCompact f.hom.hom) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (E : X.DerivedModules) (hE : X.derivedQCohProperty E) (G : CochainComplex X.Modules ℤ) (hGb : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (G.X i)) (hGqc : ∀ i : ℤ, SheafOfModules.IsQuasicoherent (G.X i)) (hGflat : ∀ i : ℤ, ModuleIsFlatOver f (G.X i)) : IsIso (moduleRelativelyFlatBaseChangeMap f f' g h sq.w E G)",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of 3c8de52e5b9b F1/F2. Stacks 0A1K with the unchanged statement and exact exchange-then-coefficient arrow. Exchange uses the existing spaceDerivedAdjunction and spaceDerivedPullbackComp.symm; tensors are Q115 tensors. Q33 binding is unchanged. Ownership maintenance for Q98 H2: moduleDerivedExchange is now defined, with the same name and body, in SpaceModuleDerivedExchange and publicly re-exported here; def-sfb-space-module-derived-exchange owns that definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3377a85b",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Re-delivery of cf4805e1eb31 (H13 RETURN): all 5 requested corrections applied exactly (diff -rq vs cf4805 snapshot): SpaceModuleTensorComposition.lean dropped; def-sfb-space-module-tensor-composition record byte-identical to live; SpaceFlatDirectImageBaseChange.lean and its theorem record no longer delivered; SpaceDerivedPullback import restored (only line changed); unused theorem stmt_dep lem-sfb-space-flat-direct-image-base-change removed (all stmt_deps now def nodes). Dep repairs SpaceDerivedPullback/SpaceAffineHomComparison vs live = per-space HasDerivedCategory binders only, live files predate base; importers use ambient family (still resolves). Item vs 0A1K: qcqs via MapIsQuasiCompact (+diagonal), unbounded E with derivedQCohProperty, bounded-above qcoh G with ModuleIsFlatOver f, IsPullback square, exchange = spaceDerivedAdjunction f' transpose of pulled counit, then moduleDerivedPullbackTensor and 1⊗(Lh*G→h*G), IsIso; no extra hypotheses/universe restriction; edge cases E=0,G=0,empty X',id g,k[eps] ok. New node unchanged since a6aec PASS, ∃!-pinned/actual data. lean.statement verbatim for item, new node and both dep records. No compile run (no file changed); cf4805 review compiled this exact configuration clean (7.6/11.9/27.6/13.8 s). Advisories: Q17/Q115 tensor bridge for the parent; second reading is a self-check."
+ }
+}

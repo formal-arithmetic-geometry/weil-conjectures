@@ -1,0 +1,90 @@
+{
+ "id": "lem-pur-unital-tensor-transport-cancellation",
+ "kind": "statement",
+ "title": "Unital natural tensor maps transport trivializations and cancel normalized comparisons",
+ "statement": "Let $\\mathcal C$ be a category with a chosen object $\\mathbf1_{\\mathcal C}$, and let $\\mathcal D$ be a monoidal category [def-sfb-monoidal-category]. Give $\\mathcal D$ a symmetric braiding $\\beta_{B,C}:B\\otimes C\\xrightarrow{\\sim}C\\otimes B$: natural braiding isomorphisms satisfying the two hexagon identities and $\\beta_{C,B}\\beta_{B,C}=1$. Write $\\mathbf1_{\\mathcal D}$ for the unit of $\\mathcal D$ and $\\lambda,\\rho$ for its left and right unitors; no monoidal structure on $\\mathcal C$ is used. Let $P,G:\\mathcal C\\to\\mathcal D$ be functors (preserving identities and compositions), let $u:P\\mathbf1_{\\mathcal C}\\xrightarrow{\\sim}\\mathbf1_{\\mathcal D}$ be an isomorphism, and put $W=G\\mathbf1_{\\mathcal C}$. Suppose morphisms $\\vartheta_K:PK\\otimes W\\to GK$, for every $K\\in\\mathcal C$, satisfy\n$$G(v)\\vartheta_K=\\vartheta_L(Pv\\otimes1_W)\\quad(v:K\\to L),\\qquad\\vartheta_{\\mathbf1_{\\mathcal C}}=\\lambda_W(u\\otimes1_W).$$\nFor any $T\\in\\mathcal C$, $V\\in\\mathcal D$ and isomorphism $c:V\\xrightarrow{\\sim}GT$, define\n$$s=c^{-1}\\vartheta_T\\beta_{W,PT}:W\\otimes PT\\to V.$$\nFor every isomorphism $\\eta:T\\xrightarrow{\\sim}\\mathbf1_{\\mathcal C}$, put\n$$t=\\rho_W(1_W\\otimes(u\\circ P\\eta)):W\\otimes PT\\xrightarrow{\\sim}W.$$\nThen $s$ is invertible and\n$$G(\\eta)c\\,s=t,\\qquad t\\,s^{-1}=G(\\eta)c.$$\n\nIndependently, suppose a natural isomorphism $r:G\\xrightarrow{\\sim}P$ is given and put $\\zeta=u\\circ r_{\\mathbf1_{\\mathcal C}}:W\\xrightarrow{\\sim}\\mathbf1_{\\mathcal D}$. Assume for every $K$ that\n$$r_K\\vartheta_K=\\rho_{PK}(1_{PK}\\otimes\\zeta).$$\nFor arbitrary $T,V,c$ as above put $E=r_Tc:V\\xrightarrow{\\sim}PT$. Then\n$$E s=\\lambda_{PT}(\\zeta\\otimes1_{PT}),$$\nand $s$ is invertible; this second assertion requires no $\\eta$.\n\nAll the displayed equations, including the two equations defining each inverse, remain true after applying any functor out of $\\mathcal D$. If supplied identifications carry the objects, tensor, unitors, symmetry, $P,G,u,\\vartheta,c$ and any given $\\eta,r$ to a second such datum, the resulting equations are its corresponding equations. No closed structure, exactness, adjunction or geometric realization is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Step 1, source-etale cancellation and target-etale tensor-unit calculation; categorical abstraction of returned Steps 5-7 of lem-pur-dualizing-unit-composite"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightUnitor_naturality|leftUnitor_naturality|braiding.*unit|unit.*braiding",
+   "results": "OK; 25 hits; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: unitOfTensorIsoUnit concerns monoidal actions on endofunctors; monoidal natural transformations assume monoidal structures on both functors, absent here; unitor/braiding naturality supplies only individual rewrites, not either cancellation assertion or the inverse formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unit trivialization and symmetry cancellation for a natural transformation from P K tensor W to G K in symmetric monoidal categories",
+   "results": "OK; 8 hits; CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory, CategoryTheory.NatTrans.IsMonoidal.mk, CategoryTheory.Functor.Monoidal.transport_ε, CategoryTheory.unitOfTensorIsoUnit, Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.NatTrans.IsMonoidal.unit_assoc, Action.tensorUnit_ρ, Mathlib.Tactic.Monoidal.mk_eq_of_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: unitOfTensorIsoUnit concerns monoidal actions on endofunctors; monoidal natural transformations assume monoidal structures on both functors, absent here; unitor/braiding naturality supplies only individual rewrites, not either cancellation assertion or the inverse formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightUnitor_naturality\"",
+   "results": "OK; 12 hits; CategoryTheory.Bicategory.rightUnitor_naturality, CategoryTheory.Bicategory.rightUnitor_naturality_assoc, CategoryTheory.Limits.coprod.rightUnitor_naturality, CategoryTheory.MonoidalCategory.rightUnitor_naturality, CategoryTheory.MonoidalCategory.rightUnitor_naturality_assoc, SemimoduleCat.MonoidalCategory.rightUnitor_naturality, CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts.rightUnitor_naturality, CategoryTheory.GradedObject.mapBifunctorRightUnitor_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: unitOfTensorIsoUnit concerns monoidal actions on endofunctors; monoidal natural transformations assume monoidal structures on both functors, absent here; unitor/braiding naturality supplies only individual rewrites, not either cancellation assertion or the inverse formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In symmetric monoidal categories a natural unital tensor transformation P K tensor W to G K gives an invertible comparison W tensor P T to V when T is isomorphic to the tensor unit and V is isomorphic to G T",
+   "results": "OK; 8 hits; CategoryTheory.unitOfTensorIsoUnit, CategoryTheory.unitOfTensorIsoUnit_inv_app, CategoryTheory.unitOfTensorIsoUnit_hom_app, CategoryTheory.MonoidalCategory.tensor_ε, CategoryTheory.Localization.Monoidal.ε', CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit, CategoryTheory.Center.tensorUnit_β, CategoryTheory.Center.tensorUnit_snd_β",
+   "date": "2026-10-22",
+   "verdict": "no match: unitOfTensorIsoUnit concerns monoidal actions on endofunctors; monoidal natural transformations assume monoidal structures on both functors, absent here; unitor/braiding naturality supplies only individual rewrites, not either cancellation assertion or the inverse formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural tensor transformation with identity unit component transports a trivialization of T to the inverse of its composite with symmetry and an isomorphism; a normalized natural isomorphism G to P cancels the same tensor comparison",
+   "results": "OK; 8 hits; CategoryTheory.unitOfTensorIsoUnit, CategoryTheory.unitOfTensorIsoUnit_inv_app, CategoryTheory.FreeMonoidalCategory.normalizeIso, CategoryTheory.Functor.Monoidal.coreMonoidalTransport_εIso_inv, CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_inv, CategoryTheory.unitOfTensorIsoUnit_hom_app, CategoryTheory.FreeMonoidalCategory.normalizeIsoAux, CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: unitOfTensorIsoUnit concerns monoidal actions on endofunctors; monoidal natural transformations assume monoidal structures on both functors, absent here; unitor/braiding naturality supplies only individual rewrites, not either cancellation assertion or the inverse formula"
+  },
+  {
+   "tool": "grep",
+   "query": "rightUnitor_naturality|braiding_leftUnitor|braiding_rightUnitor|braiding_naturality",
+   "results": "OK; 25 hits; Mathlib/CategoryTheory/Monoidal/Center.lean, Mathlib/CategoryTheory/Monoidal/Center.lean, Mathlib/CategoryTheory/Monoidal/Free/Basic.lean, Mathlib/CategoryTheory/Monoidal/Free/Basic.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: unitOfTensorIsoUnit concerns monoidal actions on endofunctors; monoidal natural transformations assume monoidal structures on both functors, absent here; unitor/braiding naturality supplies only individual rewrites, not either cancellation assertion or the inverse formula"
+  },
+  {
+   "tool": "grep",
+   "query": "def unitOfTensorIsoUnit|theorem unitOfTensorIsoUnit|lemma unitOfTensorIsoUnit",
+   "results": "OK; 1 hits; 297",
+   "date": "2026-10-22",
+   "verdict": "no match: unitOfTensorIsoUnit concerns monoidal actions on endofunctors; monoidal natural transformations assume monoidal structures on both functors, absent here; unitor/braiding naturality supplies only individual rewrites, not either cancellation assertion or the inverse formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-dualizing-unit-composite",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proof Step 1: etale-local compatibility of the composition factors; returned Steps 5-7: tensor-symmetry cancellation for arbitrary target trivializations and normalized source comparisons, including transport of inverse equations",
+   "via": [
+    "lem-pur-dualizing-unit-composite",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

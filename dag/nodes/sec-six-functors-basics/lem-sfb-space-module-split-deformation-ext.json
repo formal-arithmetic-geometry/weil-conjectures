@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-space-module-split-deformation-ext",
+ "kind": "statement",
+ "title": "Split first-order deformations of module sheaves and their Ext classes",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be an algebraic space over $\\operatorname{Spec}k$ [def-trf-algebraic-space, def-weil-affine-spectrum], and work in the universes of [def-weil-size-convention]. Use module sheaves on the small etale ringed sites [def-weil-sheaf-of-modules-category] and the canonical tensor pullbacks [def-trf-space-etale-module-functors]. Let $M$ be any $\\mathcal O_X$-module. Put $D=k[\\epsilon]/(\\epsilon^2)=k\\oplus k\\epsilon$, with its usual $k$-algebra structure, $X_D=X\\times_k\\operatorname{Spec}D$, and let $i:X\\hookrightarrow X_D$ be the special-fibre inclusion [lem-trf-space-fibre-products-etale-covers]. Define $\\operatorname{Def}_M$ to be the set of isomorphism classes of pairs $(N,\\alpha)$ where $N$ is an $\\mathcal O_{X_D}$-module flat over $\\operatorname{Spec}D$ and $\\alpha:i^*N\\xrightarrow{\\sim}M$ is specified. Flat here means that each geometric stalk of $N$ is flat over the corresponding geometric local ring of $\\operatorname{Spec}D$ [def-weil-pbc-flat-ring-map]; isomorphisms commute with $\\alpha$. Let $p:X_D\\to X$ be projection, and let $\\operatorname{Aut}^0_M$ be the automorphisms of $p^*M$ whose pullback to $X$ is the identity. In the derived category of all module sheaves [def-weil-abstract-derived-category], write $\\operatorname{Ext}^n(M,M)=\\operatorname{Hom}_{D(\\mathcal O_X)}(M[0],M[0][n])$. There are natural $k$-linear identifications\n$$\\operatorname{Def}_M\\cong\\operatorname{Ext}^1_{\\mathcal O_X}(M,M),\\qquad\n\\operatorname{Aut}^0_M\\cong\\operatorname{Ext}^0_{\\mathcal O_X}(M,M).$$\nThe origin is the trivial lift $p^*M$. On $\\operatorname{Def}_M$, scalar multiplication by $a\\in k$ is pullback by $\\epsilon\\mapsto a\\epsilon$; addition glues two marked flat modules over the common special fibre to $\\operatorname{Spec}(D\\times_kD)$ and pulls back along the map induced by $(a+b\\epsilon,a+c\\epsilon)\\mapsto a+(b+c)\\epsilon$. Such gluing exists and is unique up to marked isomorphism. On $\\operatorname{Aut}^0_M$, addition is composition and scalar multiplication is the same scalar pullback. These operations are carried by the identifications to the usual Ext operations. No quasi-coherence, finite-presentation, Noetherian or properness hypothesis on $X$ or $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 08VW (lemma-flat-ringed-topoi), applied to the split thickening X in X_D over Spec k in Spec D; Tag 0CYE (lemma-functorial-ringed-topoi) and quot.tex Tag 08W8 (lemma-coherent-tangent-space), displayed Ext identifications, for scalar and addition compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-flat-ring-map",
+  "def-sfb-space-marked-split-module-deformations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-first-order-ringed-description] to the square-zero inclusion $X\\subset X_D$. Identify their small etale sites by reduction. Its inverse sends a chart $U\\to X$ to $U_D=U\\times_k\\operatorname{Spec}D\\to X_D$, etale by [lem-trf-space-fibre-products-etale-covers]. On an affine chart with ring $A$, the structure ring is $A\\otimes_kD=A\\oplus\\epsilon A$, with $(a,b)(c,d)=(ac,ad+bc)$. These formulas commute with restriction and therefore identify the transported structure sheaf with $\\mathcal O_X\\oplus\\epsilon\\mathcal O_X$. Thus a module on $X_D$ is an $\\mathcal O_X$-module $E$ with an $\\mathcal O_X$-linear endomorphism $t$, $t^2=0$, representing multiplication by $\\epsilon$; reduction is $E/tE$. The same calculation for the base gives geometric local rings $K[\\epsilon]$, with $K$ a field: an affine etale $k$-algebra is a finite product of finite separable fields by [lem-weil-pbc-etale-algebra-over-field-product], and a pointed neighbourhood selects a field factor; the filtered colimit of these fields is $K$. Hence the flatness in the statement is flatness over these $K[\\epsilon]$, not a quasi-coherence test. The stalk construction and its exactness are [lem-sfb-space-etale-conservative-geometric-points].",
+   "uses": [
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZS (lemma-thickening-equivalence), specialized to split base changes; defos.tex Tag 08VW, split setup."
+   }
+  },
+  {
+   "text": "For a $K[\\epsilon]$-module $V$, the canonical map $(\\epsilon)\\otimes_{K[\\epsilon]}V\\to V$ identifies with $V/\\epsilon V\\to V$, $\\bar v\\mapsto\\epsilon v$. Indeed $(\\epsilon)\\cong K$ as quotient-ring modules, and [lem-weil-pbc-tensor-over-quotient-ring] gives this tensor identification. If $V$ is flat the map is injective by the definition of flatness, applied to $(\\epsilon)\\hookrightarrow K[\\epsilon]$. Conversely, if it is injective, $V/\\epsilon V$ is flat over $K$ by [lem-weil-pbc-module-over-field-flat], and [lem-sfb-nilpotent-ideal-module-flatness] applies with $I=(\\epsilon)$ and $I^2=0$. Thus flatness is equivalent to $\\ker(\\epsilon:V\\to V)=\\epsilon V$. Apply this at every geometric point of $X$ and use [lem-sfb-space-etale-conservative-geometric-points] to conclude that $E$ represents a flat lift precisely when $E/tE\\to tE$, $\\bar e\\mapsto t(e)$, is an isomorphism of module sheaves. No finite presentation is used.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-sfb-nilpotent-ideal-module-flatness",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051C (lemma-what-does-it-mean), final assertion; Tag 00HB (definition-flat); split form of defos.tex Tag 08MQ (lemma-deform-module-ringed-topoi)."
+   }
+  },
+  {
+   "text": "Given a marked flat lift, let $q:E\\twoheadrightarrow M$ be its reduction followed by the marking. Define $i:M\\to E$ by $i(m)=t(e)$ for any local lift $e$ of $m$. This is independent of the lift since $t^2=0$, and local formulas glue. Step 2 says that $i$ identifies $M$ with $tE$, so $0\\to M\\xrightarrow{i}E\\xrightarrow{q}M\\to0$ is exact and $t=iq$. Conversely, for any such short exact sequence define $t=iq$. Then $t^2=0$, $tE=i(M)=\\ker q$, and the induced $E/tE\\to tE$ is $i$ under the quotient identification with $M$. Step 2 proves flatness. These constructions are inverse: the original $t$, quotient marking, and injection are recovered. A marked module isomorphism commutes with $t$ and $q$, hence also with $i$; an isomorphism of the extensions commutes with $i,q$, hence with $t=iq$. Thus this is a bijection on the required isomorphism classes, not merely on underlying modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08VW (lemma-flat-ringed-topoi), split specialization; explicit construction of its extension action."
+   }
+  },
+  {
+   "text": "The module category is abelian by [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-ext-one-extension-classification] in this category with $P=Q=M$ to the exact sequences of step 3. This gives the asserted bijection to the degree-one Hom group in the derived category, with both endpoints fixed. The trivial lift is $\\mathcal O_{X_D}\\otimes_{\\mathcal O_X}M=M\\oplus M$, with $t(m,n)=(0,m)$, $i(n)=(0,n)$, and $q(m,n)=m$. Its extension is split. By [lem-coef-yoneda-derived-ext-comparison] this is the zero Ext class. This constructs the pointed identification without making a choice of a point in a torsor.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ext-one-extension-classification",
+    "lem-coef-yoneda-derived-ext-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XV (lemma-ext-1), 06XU (lemma-yoneda-extension); quot.tex Tag 08W8 displayed degree-one identification."
+   }
+  },
+  {
+   "text": "For $a\\in k$, pullback along $\\epsilon\\mapsto a\\epsilon$ has the following explicit presentation as an $\\mathcal O_X$-module:\n$$E_a=(E\\oplus M)/\\{(i(m),-am):m\\in M\\},\\quad q_a[e,m]=q(e),\\quad i_a(m)=[0,m].$$\nThe tensor isomorphism sends $e\\otimes1$ to $[e,0]$ and $e\\otimes\\epsilon$ to $[0,q(e)]$. Its inverse sends $[e,m]$ to $e\\otimes1+\\widetilde m\\otimes\\epsilon$, where $q(\\widetilde m)=m$ locally. This is independent of the lift because $i(n)\\otimes\\epsilon=0$; that relation follows by multiplying $i(n)\\otimes1=a\\widetilde n\\otimes\\epsilon$ by $\\epsilon$. These formulas respect the tensor relations in both directions. The map $i_a$ is injective: a relation with first coordinate zero has $i(m)=0$, hence $m=0$. Also $\\ker q_a=\\operatorname{im}i_a$ since $[i(n),m]=[0,an+m]$. Multiplication by the new $\\epsilon$ is $i_aq_a$, so step 2 proves flatness, including $a=0$. This exact sequence is the pushout of the old extension along $a\\,\\mathrm{id}_M$. Naturality in the second variable in [lem-coef-yoneda-derived-ext-comparison], and the postcomposition formula in [def-pc-ext], show that its class is $a$ times the old class. This proves the scalar assertion without using obstruction functoriality as a theorem about tangent classes.",
+   "uses": [
+    "lem-coef-yoneda-derived-ext-comparison",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Following definition-ext-group: pushout in the first coefficient; derived.tex Tag 06XV and the definition of the class preceding Tag 06XU. Explicit tensor calculation for the split situation of defos.tex Tag 08VW."
+   }
+  },
+  {
+   "text": "Let the two lifts correspond to $(E_1,i_1,q_1)$ and $(E_2,i_2,q_2)$. Put $R=D\\times_kD=k\\oplus k\\epsilon_1\\oplus k\\epsilon_2$, with all products of the $\\epsilon_j$ zero. Reduction identifies the small etale sites of $X_R$ and $X$ as in step 1. On this site form $P=E_1\\times_M E_2$. It is an $\\mathcal O_X\\otimes_kR$-module by coordinatewise multiplication. Its projections are locally surjective. The kernel of $P\\to E_1$ is $\\{(0,i_2m)\\}$ and is precisely $\\epsilon_2P$; the analogous kernel for the other projection is $\\epsilon_1P$. Hence its two tensor restrictions are the given marked modules. At a geometric point the base rings are $K[\\epsilon_1,\\epsilon_2]/(\\epsilon_1,\\epsilon_2)^2=K[\\epsilon]\\times_K K[\\epsilon]$, and the stalk of $P$ is the fibre product of the two stalks by [lem-sfb-space-etale-conservative-geometric-points]. Both factors are flat over $K[\\epsilon]$. Apply the flatness assertion of [lem-sfb-flat-module-fibre-product-patching] with $A=K$, $A'=B=K[\\epsilon]$ and the marking as $\\varphi$. Thus $P$ is a flat gluing over $\\operatorname{Spec}R$.",
+   "uses": [
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "lem-sfb-flat-module-fibre-product-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2I (lemma-flat-module-over-fibre-product), part (1), applied at geometric points; spaces-more-morphisms.tex Tag 05ZS."
+   }
+  },
+  {
+   "text": "For any other flat gluing $L$ with its specified identifications on the two copies of $D$, the tensor unit maps give a canonical marked map $L\\to E_1\\times_M E_2=P$. At each geometric point this map is the reconstruction isomorphism of [lem-sfb-flat-module-fibre-product-patching], part (2), for the same rings as in step 6. By [lem-sfb-space-etale-conservative-geometric-points] the sheaf map is an isomorphism. Its formula uses only the restriction maps and the given marking, so compatible marked isomorphisms of either input induce the corresponding isomorphism of gluings. This proves existence and uniqueness up to marked isomorphism in the sense needed for the addition operation.",
+   "uses": [
+    "lem-sfb-flat-module-fibre-product-patching",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2I (lemma-flat-module-over-fibre-product), part (2)."
+   }
+  },
+  {
+   "text": "The ring map $R\\to D$, $(a+b\\epsilon,a+c\\epsilon)\\mapsto a+(b+c)\\epsilon$, is surjective with kernel generated by $\\epsilon_1-\\epsilon_2$. Consequently the tensor pullback of $P$ is\n$$Q=P/\\{(i_1(m),-i_2(m)):m\\in M\\}.$$\nHere $(\\epsilon_1-\\epsilon_2)(e_1,e_2)=(i_1(m),-i_2(m))$ for $m=q_1(e_1)=q_2(e_2)$, and every $m$ has such local lifts. The quotient map to $M$ has kernel $(M\\oplus M)/\\{(m,-m)\\}\\cong M$, identified by addition. Multiplication by the new $\\epsilon$ is injection after quotient: $[(e_1,e_2)]\\mapsto[(i_1(m),0)]=[(0,i_2(m))]$. Thus step 2 again proves flatness. The resulting extension is the pullback of $E_1\\oplus E_2$ along the diagonal on the quotient, followed by pushout along addition on the kernel. This is exactly the Baer sum in [lem-coef-yoneda-derived-ext-comparison], whose class is the sum of the two classes. All formulas hold in characteristic two as well. Hence the prescribed addition and scalar operations make the pointed bijection of step 4 $k$-linear; their vector-space identities follow from the bijection.",
+   "uses": [
+    "lem-coef-yoneda-derived-ext-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Baer sum construction following definition-ext-group; derived.tex Tag 06XV (lemma-ext-1). Explicit quotient calculation for the split case of defos.tex Tag 08VW."
+   }
+  },
+  {
+   "text": "For the trivial lift $E=M\\oplus M$, every marked automorphism $g$ satisfies $qg=q$ and $gt=tg$. Since $i(m)=t(e)$ for local lifts, $gi=i$ also. Thus $g-1$ vanishes on $i(M)$ and has image in $i(M)$, and there is a unique module endomorphism $f:M\\to M$ with $g=1+ifq$. Conversely every such map is an automorphism with inverse $1-ifq$, since $qi=0$. Moreover $(1+ifq)(1+ihq)=1+i(f+h)q$. Scalar pullback sends $ifq$ to $aifq$ under the canonical identification of the pullback of the trivial lift with itself: in the tensor formula of step 5, $i(m)\\otimes1=a\\,\\widetilde m\\otimes\\epsilon$. Thus this is an identification of $\\operatorname{Aut}^0_M$, with its stated operations, with $\\operatorname{End}_{\\mathcal O_X}(M)$ as a $k$-vector space.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08VW (lemma-flat-ringed-topoi), part (3), with the direct difference-of-maps argument of lemma-inf-map-special-ringed-topoi."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-single-fully-faithful] to the abelian category of module sheaves. It identifies $\\operatorname{End}_{\\mathcal O_X}(M)$ with $\\operatorname{Hom}_{D(\\mathcal O_X)}(M[0],M[0])=\\operatorname{Ext}^0(M,M)$. The map sends a module morphism to the same degree-zero map of complexes, so it preserves addition and multiplication by $a\\in k$ termwise. Composing with step 9 proves the second $k$-linear identification. The constructions in steps 1--9 use only the specified maps, kernels, tensor products and quotients. Relabelling $M$ by an isomorphism relabels these formulas, and isomorphisms of extensions are exactly marked isomorphisms by step 3. This gives the claimed natural identifications. Empty $X$ or zero $M$ give singleton deformation sets and zero Ext spaces by the same construction.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Degree-zero Ext identification, lemma-negative-exts and full faithfulness of the degree-zero embedding; quot.tex Tag 08W8 displayed degree-zero identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-first-order-ringed-description",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-sfb-nilpotent-ideal-module-flatness",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ext-one-extension-classification",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "def-pc-ext",
+  "lem-sfb-flat-module-fibre-product-patching",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Explicit split-case construction implementing Tag 08VW (lemma-flat-ringed-topoi), supplemented by algebra.tex Tag 051C, more-algebra.tex Tag 0D2I, derived.tex Tags 06XV/06XU, and the Baer operations in homology.tex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat lifts of a sheaf of modules to a split square zero thickening are classified by Ext one and automorphisms by Hom",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"PresheafOfModules.Derivation'.Universal.mk\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      {M : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))} →\\n        {φ' : S' ⟶ R} →\\n          {d : M.Derivation' φ'} →\\n            (desc :\\n                {\", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ M $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.linearEquiv₀\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear\", \"type\": \"{R : Type t} →\\n  [inst : Ring R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.HasExt C] → {X Y : C} → CategoryTheory.Abelian.Ext X Y 0 ≃ₗ[R]\", \"doc\": \"In an R-linear abelian category $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^0(X,Y)$ is R-linearly equivalent to the hom-set $\\\\operatorname{Hom}(X,Y)$. This equivalence preserves both addition and\"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.desc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a universal derivation $ d $ for a presheaf of modules and another derivation $ d' $ with the same source, there exists a unique morphism of presheaves of modules from the universal derivation t\"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ F $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) →\\n        PresheafOfModules.Derivation.Universal (PresheafOfModules.DifferentialsConstruction.derivation' φ')\", \"doc\": \"The relative Kähler differentials presheaf $\\\\Omega_{\\\\phi'}$ satisfies the universal property: for any derivation $d': S' \\\\to M'$ (where $M'$ is an $R$-module presheaf), there exists a unique $R$-linea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ext definitions, degree-zero Hom equivalences and algebra extensions do not classify flat sheaf lifts on a split thickening"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deformations of a module over the dual numbers correspond to self extensions of the module",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DualNumber.lift\", \"module\": \"Mathlib.Algebra.DualNumber\", \"type\": \": { fe : (A →ₐ[R] B) × B // fe.2 * fe.2 = 0 ∧ ∀ a, Commute fe.2 (fe.1 a) } ≃ (A[ε] →ₐ[R] B)\", \"doc\": \"This equivalence establishes a bijection between pairs $(f, \\\\epsilon)$, where $f : A \\\\to B$ is an $R$-algebra homomorphism and $\\\\epsilon \\\\in B$ satisfies $\\\\epsilon^2 = 0$ and commutes with $f(a)$ for \"}\n  {\"name\": \"DualNumber.algHom_ext'_iff\", \"module\": \"Mathlib.Algebra.DualNumber\", \"type\": \"∀ {R : Type u_1} {B : Type u_3} {A : Type u_4} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Semiring B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] {f g : DualNumber A →ₐ[R] B},\\n  f = g ↔\\n    f.comp (TrivSqZeroExt.inlAlgHom R A A) = g.comp (TrivSqZeroExt.inlAlgHom R A A) ∧\\n      f.toL\", \"doc\": \"Two $ R $-algebra homomorphisms from the ring of dual numbers over $ A $ to $ B $ are equal if and only if they agree on the base ring $ A $ and on the nilpotent element $ \\\\varepsilon $ (which generat\"}\n  {\"name\": \"DualNumber.coe_lift_symm_apply\", \"module\": \"Mathlib.Algebra.DualNumber\", \"type\": \"(F : A[ε] →ₐ[R] B) : (lift.symm F).val = (F.comp (inlAlgHom _ _ _), F ε)\", \"doc\": \"There is a bijection between pairs $(f, \\\\epsilon)$, where $f : A \\\\to B$ is an $R$-algebra homomorphism and $\\\\epsilon \\\\in B$ satisfies $\\\\epsilon^2 = 0$ and commutes with $f(a)$ for all $a \\\\in A$, and $\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.instModule\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear\", \"type\": \": Module R (Ext X Y n)\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^n(X,Y)$ in degree $n$ is equipped with a canonical $R$-module structure. This structure arises from the \"}\n  {\"name\": \"DualNumber.algHom_ext'\", \"module\": \"Mathlib.Algebra.DualNumber\", \"type\": \"⦃f g : A[ε] →ₐ[R] B⦄ (hinl : f.comp (inlAlgHom _ _ _) = g.comp (inlAlgHom _ _ _))\\n  (hinr :\\n    f.toLinearMap ∘ₗ (LinearMap.toSpanSingleton A A[ε] ε).restrictScalars R =\\n      g.toLinearMap ∘ₗ (LinearMap.toSpanSingleton A A[ε] ε).restrictScalars R) :\\n  f = g\", \"doc\": \"Let $R$ be a commutative semiring, and let $A$ and $B$ be $R$-algebras, where $A$ is not necessarily commutative. Let $A[\\\\varepsilon]$ be the algebra of dual numbers over $A$. Two $R$-algebra homomorp\"}\n  {\"name\": \"DualNumber.eps\", \"module\": \"Mathlib.Algebra.DualNumber\", \"type\": \"[Zero R] [One R] : DualNumber R\", \"doc\": \"The element $ \\\\epsilon $ in the ring of dual numbers over a ring $ R $, defined as $ (0, 1) $, which generates the nilpotent ideal with $ \\\\epsilon^2 = 0 $.\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.equivOfFormallySmooth.congr_simp\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  (P₁ : Algebra.Extension R A) (P₂ : Algebra.Extension R A) [inst_3 : Algebra.FormallySmooth R P₁.Ring]\\n  [inst_4 : Algebra.FormallySmooth R P₂.Ring],\\n  Algebra.Extension.H1Cotangent.equivOfFormallySmooth P₁\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and two formally smooth algebra extensions $ P₁ $ and $ P₂ $ of $ R $ over $ A $, there exists an $ A $-module linear \"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(P₁ P₂ : Extension R A) [FormallySmooth R P₁.Ring] : P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ext definitions, degree-zero Hom equivalences and algebra extensions do not classify flat sheaf lifts on a split thickening"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] (X Y : C) (n : ℕ) : Type w\", \"doc\": \"An Ext-group in an abelian category `C`, defined as a `Type w` when `[HasExt.{w} C]`.\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.instAddCommGroup\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} {n : ℕ} : AddCommGroup (CategoryTheory.Abelian.Ext X Y n)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.hasExt_iff_small_ext\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] : CategoryTheory.HasExt C ↔ ∀ (X Y : C) (n : ℕ), Small.{w', w} (CategoryTheory.Abelian.Ext X Y n)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} (f : X ⟶ Y) : CategoryTheory.Abelian.Ext X Y 0\", \"doc\": \"The canonical map `(X ⟶ Y) → Ext X Y 0`.\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.chgUniv\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] [CategoryTheory.HasExt C] {X Y : C} {n : ℕ} : CategoryTheory.Abelian.Ext X Y n ≃ CategoryTheory.Abelian.Ext X Y n\", \"doc\": \"Up to an equivalence, the type `Ext.{w} X Y n` does not depend on the universe `w`.\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homEquiv₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} : CategoryTheory.Abelian.Ext X Y 0 ≃ (X ⟶ Y)\", \"doc\": \"The bijection `Ext X Y 0 ≃ (X ⟶ Y)`.\"}\n  {\"name\": \"CategoryTheory.Abelian.extFunctorObj_obj_coe\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] (X : C) (n : ℕ) (Y : C) : ↑((CategoryTheory.Abelian.extFunctorObj X n).obj Y) = CategoryTheory.Abelian.Ext X Y n\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀_bijective\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] (X Y : C) : Function.Bijective CategoryTheory.Abelian.Ext.mk₀\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.comp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y Z : C} {a b : ℕ} (α : CategoryTheory.Abelian.Ext X Y a) (β : CategoryTheory.Abelian.Ext Y Z b) {c : ℕ} (h : a + b = c) : CategoryTheory.Abelian.Ext X Z c\", \"doc\": \"The composition of `Ext`.\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.comp_mk₀_id\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} {n : ℕ} (α : CategoryTheory.Abelian.Ext X Y n) : α.comp (CategoryTheory.Abelian.Ext.mk₀ (CategoryTheory.CategoryStruct.id Y)) ⋯ = α\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀_id_comp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} {n : ℕ} (α : CategoryTheory.Abelian.Ext X Y n) : (CategoryTheory.Abelian.Ext.mk₀ (CategoryTheory.CategoryStruct.id X)).comp α ⋯ = α\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.HasExt C] {X Y : C} [HasDerivedCategory C] {a : ℕ} (α : CategoryTheory.Abelian.Ext X Y a) : CategoryTheory.ShiftedHom ((DerivedCategory.singleFunctor C 0).obj X) ((DerivedCategory.singleFunctor C 0).obj Y) ↑a\", \"doc\": \"The morphism in the derived category which corresponds to an element in `Ext X Y a`.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ext definitions, degree-zero Hom equivalences and algebra extensions do not classify flat sheaf lifts on a split thickening"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(lift|deform)|deform.*module|squareZero.*Ext",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/Data/WSeq/Relation.lean\", \"line\": \"270\", \"text\": \"  let S s t := ∃ c1 c2, s = flatten c1 ∧ t = flatten c2 ∧ Computation.LiftRel (LiftRel R) c1 c2\"}\n  {\"file\": \"Mathlib/Data/WSeq/Relation.lean\", \"line\": \"274\", \"text\": \"      simp only [destruct_flatten]; apply liftRel_bind _ _ h\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Stability.lean\", \"line\": \"73\", \"text\": \"lemma ulift_left_iff : Flat (ULift.{t} R) M ↔ Flat R M := by\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Stability.lean\", \"line\": \"75\", \"text\": \"  have : Module.Flat (ULift.{t} R) R := .of_ulift\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Stability.lean\", \"line\": \"81\", \"text\": \"lemma ulift_right_iff : Flat R (ULift.{t} M) ↔ Flat R M :=\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Stability.lean\", \"line\": \"82\", \"text\": \"  Flat.equiv_iff ULift.moduleEquiv\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"line\": \"131\", \"text\": \"/-- If `B` is a faithfully-flat `A`-algebra, the lifting an ideal in `A` to `B` is injective. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"189\", \"text\": \"instance ulift [Flat R M] : Flat R (ULift.{v'} M) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"193\", \"text\": \"lemma of_ulift [Flat R (ULift.{v'} M)] : Flat R M :=\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"47\", \"text\": \"The flatness assumption in `Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat`\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"48\", \"text\": \"  rw [weaklyEtale_iff, weaklyEtale_iff, Module.Flat.ulift_left_iff, Module.Flat.ulift_right_iff]\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"50\", \"text\": \"  conv_rhs => rw [← RingHom.Flat.ulift_iff.{u₁, u₂}]\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"92\", \"text\": \"    · exact (flat_lmul' (ULift R) (ULift S)).mapOfCompatibleSMul\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"94\", \"text\": \"    · exact WeaklyEtale.flat_lmul' (ULift S) (ULift T)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Flat.lean\", \"line\": \"264\", \"text\": \"    { lift := PreservesFiniteLimitsOfFlat.lift F hc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ext definitions, degree-zero Hom equivalences and algebra extensions do not classify flat sheaf lifts on a split thickening"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf M on a ringed space, first order deformations over k epsilon are Ext1 M M and infinitesimal automorphisms are End M",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"PresheafOfModules.Derivation'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat)) → (S' ⟶ R) → Type (max (max u₂ u) v)\", \"doc\": \"Given a presheaf of commutative rings $ S $ on a category $ \\\\mathcal{C} $, a derivation is a natural transformation from $ S $ to the composition of the identity functor on $ \\\\mathcal{D} $ with the pr\"}\n  {\"name\": \"PresheafOfModules.HasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} → {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} → (S ⟶ F.op.comp \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"PresheafOfModules.Derivation'.Universal.mk\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      {M : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))} →\\n        {φ' : S' ⟶ R} →\\n          {d : M.Derivation' φ'} →\\n            (desc :\\n                {\", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ M $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ F $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (S' ⟶ R) → PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))\", \"doc\": \"A presheaf of modules constructed by assigning to each object $X$ in the opposite category the module of Kähler differentials $\\\\Omega_{\\\\phi'(X)/R(X)}$, and to each morphism $f: X \\\\to Y$ the $R(Y)$-lin\"}\n  {\"name\": \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {φ : S ⟶ F.op.comp R} [self : PresheafOfModules.HasDi\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^\\\\mathrm{op}\\\\to\\\\mathbf{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, a presheaf of commutative ri\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Ext definitions, degree-zero Hom equivalences and algebra extensions do not classify flat sheaf lifts on a split thickening"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat first order deformations of arbitrary module sheaves over dual numbers are self extensions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallySmooth\", \"Algebra.formallySmooth_iff\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"Algebra.FormallyEtale\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"derivationToSquareZeroEquivLift\"], \"note\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ring extensions, dual-number algebra maps, or abstract Ext and do not classify marked flat module sheaves on a split thickening"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules over a split square zero extension and flat deformations classified by Ext one",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Algebra.Extension.H1Cotangent\", \"CategoryTheory.Sheaf.H\", \"derivationToSquareZeroEquivLift\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"instHasExtModuleCatOfSmall\", \"Algebra.Extension.tensorH1Cotangent\"], \"note\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ring extensions, dual-number algebra maps, or abstract Ext and do not classify marked flat module sheaves on a split thickening"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-tangent-finite",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W8 (lemma-coherent-tangent-space), Situation 08KB (situation-coherent). More precisely, the flat-module deformation and automorphism calculation over the fixed fibre.",
+   "via": [
+    "lem-sfb-space-coherent-tangent-finite",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-module-split-deformation-ext",
+  "worker": "stage1",
+  "summary": "Constructed the flat-lift/self-extension correspondence explicitly and checked all marking, flatness, scalar, Baer addition, gluing uniqueness and automorphism clauses using existing nodes only. No new nodes; no statement change. Tag 0CYE is not used to claim tangent linearity because its statement addresses obstruction classes only.",
+  "blueprint": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W8 (lemma-coherent-tangent-space), Situation 08KB (situation-coherent). More precisely, the flat-module deformation and automorphism calculation over the fixed fibre. Realizes the fixed-fibre Ext calculation used by lem-sfb-space-coherent-tangent-finite steps 6 and 7, supporting latest blueprint det-thm-sf-ctf-stability-direct-images proof (3). The inherited nearest ancestor is null, as reported by blueprint_refs.py ancestor; no ancestor field is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebra or derived-category input used in the explicit fixed-base module calculation; no replacement of the unit direct-image route. The statement used is quoted in citations.json and explained in the report."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic algebra or derived-category input used in the explicit fixed-base module calculation; no replacement of the unit direct-image route. The statement used is quoted in citations.json and explained in the report."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-over-quotient-ring",
+    "why": "Generic algebra or derived-category input used in the explicit fixed-base module calculation; no replacement of the unit direct-image route. The statement used is quoted in citations.json and explained in the report."
+   },
+   {
+    "node": "lem-weil-pbc-module-over-field-flat",
+    "why": "Generic algebra or derived-category input used in the explicit fixed-base module calculation; no replacement of the unit direct-image route. The statement used is quoted in citations.json and explained in the report."
+   },
+   {
+    "node": "lem-weil-pbc-ext-one-extension-classification",
+    "why": "Generic algebra or derived-category input used in the explicit fixed-base module calculation; no replacement of the unit direct-image route. The statement used is quoted in citations.json and explained in the report."
+   },
+   {
+    "node": "lem-coef-yoneda-derived-ext-comparison",
+    "why": "Generic algebra or derived-category input used in the explicit fixed-base module calculation; no replacement of the unit direct-image route. The statement used is quoted in citations.json and explained in the report."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic algebra or derived-category input used in the explicit fixed-base module calculation; no replacement of the unit direct-image route. The statement used is quoted in citations.json and explained in the report."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-ext-one-extension-classification",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-5969fc24c",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-5969fc24c (reviewer sub-agent of L); spot-checked: Statement and stmt_deps are byte-identical to the live item, which is still unsplit. There are no new nodes and no re-split note, and the item is not in its own closure, so there is no cycle. Read all 10 steps, the statements of all 14 cited nodes, and defos 08VW (l.3722) and more-algebra 0D2I (l.807) at the cited places. Recomputed each part: the site equivalence from the first-order thickening; geometric local rings k^sep[ε] via 00U3; flatness ⟺ ker ε=εV via 051C (nilpotent-ideal node, no finiteness); the extension bijection with endpoints fixed, split ⇒ 0; the scalar pushout E_a, including a=0 and the tensor relations both ways; the gluing P=E1×_M E2, kernels ε_jP, 0D2I(1) flatness and 0D2I(2) uniqueness at stalks; the Baer sum, with ker(R→D)=(ε1−ε2) also in characteristic 2; Aut^0 as g=1+ifq with composition as addition and scalar pullback (m',n')↦(m',n'+afm'); Ext^0 by the fully faithful single functor. Edge cases M=0 and X empty are fine. Duplicate searches (08VW/0CYE, flat-lift/Def) find only unrelated nodes. Batch-5: both flagged citations reach only def-trf-algebraic-space and generic lem-trf algebraic-space/descent foundations. No Poincaré, trace-transport or batch-4 nodes are reached, so this is not a trace-formula step. Worker tool_uses are all generic and accepted. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitModuleDeformationExt",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SplitModule.split_module_deformation_ext",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SplitModule.split_module_deformation_ext"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitModuleDeformationExt.lean",
+  "statement": "theorem split_module_deformation_ext {k : Type u} [Field k] (X : AlgebraicSpace (Spec (.of k))) [HasDerivedCategory.{w} X.SmallModules] : ∃ (deformation : ∀ M : X.Modules, Classes X (V := k) M ≃ Ext X M 1) (automorphism : ∀ M : X.Modules, AutZero X (V := k) M ≃ Ext X M 0), (∀ M : X.Modules, ∃ T : Marked X (V := k) M, IsTrivial X T) ∧ (∀ (M : X.Modules) (T : Marked X (V := k) M), IsTrivial X T → deformation M (classOf X T) = 0) ∧ (∀ (M : X.Modules) (a : k) (N : Marked X (V := k) M), (∃ N' : Marked X (V := k) M, PullsBack X (a • LinearMap.id) N N') ∧ ∀ N' : Marked X (V := k) M, PullsBack X (a • LinearMap.id) N N' → deformation M (classOf X N') = extScalar X 1 a (deformation M (classOf X N))) ∧ (∀ (M : X.Modules) (N₁ N₂ : Marked X (V := k) M), (∃ L : Marked X (V := k × k) M, IsGluing X L N₁ N₂) ∧ (∀ L L' : Marked X (V := k × k) M, IsGluing X L N₁ N₂ → IsGluing X L' N₁ N₂ → Related X L L') ∧ ∀ L : Marked X (V := k × k) M, IsGluing X L N₁ N₂ → (∃ N : Marked X (V := k) M, PullsBack X (LinearMap.fst k k k + LinearMap.snd k k k) L N) ∧ ∀ N : Marked X (V := k) M, PullsBack X (LinearMap.fst k k k + LinearMap.snd k k k) L N → deformation M (classOf X N) = deformation M (classOf X N₁) + deformation M (classOf X N₂)) ∧ (∀ (M : X.Modules) (g : AutZero X (V := k) M), g.val = Iso.refl _ → automorphism M g = 0) ∧ (∀ (M : X.Modules) (g h : AutZero X (V := k) M), (∃ t : AutZero X (V := k) M, t.val = g.val ≪≫ h.val) ∧ ∀ t : AutZero X (V := k) M, t.val = g.val ≪≫ h.val → automorphism M t = automorphism M g + automorphism M h) ∧ (∀ (M : X.Modules) (a : k) (g : AutZero X (V := k) M), (∃ t : AutZero X (V := k) M, t.val = changeAut X (a • LinearMap.id) g) ∧ ∀ t : AutZero X (V := k) M, t.val = changeAut X (a • LinearMap.id) g → automorphism M t = extScalar X 0 a (automorphism M g)) ∧ (∀ (M M' : X.Modules) (e : M ≅ M') (N : Marked X (V := k) M), deformation M' (classOf X (relabel X e N)) = extRelabel X e 1 (deformation M (classOf X N))) ∧ (∀ (M M' : X.Modules) (e : M ≅ M') (g : AutZero X (V := k) M), (∃ g' : AutZero X (V := k) M', g'.val = ((moduleTensorPullback (projection X k)).mapIso e).symm ≪≫ g.val ≪≫ (moduleTensorPullback (projection X k)).mapIso e) ∧ ∀ g' : AutZero X (V := k) M', g'.val = ((moduleTensorPullback (projection X k)).mapIso e).symm ≪≫ g.val ≪≫ (moduleTensorPullback (projection X k)).mapIso e → automorphism M' g' = extRelabel X e 0 (automorphism M g))",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The two families of equivalences preserve every specified operation, with existence and uniqueness of geometric operation representatives. These equations state k-linearity without choosing unrelated vector structures. Naturality is simultaneous relabelling by all coefficient isomorphisms. Ext is the exact derived Hom on the equivalent small affine module site, with arbitrary localization morphism universe w."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79094b42f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Item node unchanged except lean + stmt_deps adding new def node def-sfb-space-marked-split-module-deformations; statements verbatim. All clauses matched: X_D via actual TrivSqZeroExt direction base (sheaf product over terminal), geometric-stalk Module.Flat via stalkMap(toBase), Marked/Related/Quot classes, AutZero, Ext=Hom(M[0],M[0][n]) on equivalent small model with HasDerivedCategory.{w}, ∃ families of equivs to Ext^1/Ext^0 with trivial↦0, scalar pullback (incl. a=0) ↦ extScalar via ∃!-scalarEnd, gluing over k⊕(k×k) existence/uniqueness up to marked iso + fst+snd pullback ↦ sum, Aut composition↦sum and scalar, relabel naturality (extRelabel correct). No added hypotheses; edge cases fine; no dup notion found; defs non-hollow; all theorems sorry; docstrings with 10 proof steps. Advisory: SmallModules owner def-sfb-space-small-ringed-model only transitive in new node stmt_deps; redundant DualNumber import; existential identification pinned only up to natural linear automorphism (inherent); second reading is a self-check. No fix, no compile needed."
+ }
+}

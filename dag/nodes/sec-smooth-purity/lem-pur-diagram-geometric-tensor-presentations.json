@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-diagram-geometric-tensor-presentations",
+ "kind": "statement",
+ "title": "Geometric presentations and normalized resolving tensor comparisons on sequence sites",
+ "statement": "For arbitrary natural-number commutative ring sequence A with adjacent maps δ, let T assign TensorConstraints to each scheme W, in the precise sense of [def-pur-diagram-pullback-shift-data]. There exists Models S with S.constraints = T. Thus its pullbacks have the canonical constant-ring components and specified direct images, unit normalization and exactness; its tensor comparisons preserve resolving inputs and satisfy the representative square; its compositors are adjunction mates and have the displayed section formula. This assertion asks for no chain or derived shift coherence beyond the data already required by the structures.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D2, 03D8, 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tag 03EL. Geometric and pullback portions of parent steps 1, 2 and 6."
+ },
+ "stmt_deps": [
+  "def-pur-diagram-pullback-shift-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the entire vertical sequence site and the existing base-change functor. The constant-ring maps are natural in every adjacent coefficient map; inverse image of this ring tower identifies with the target tower. The geometric set inverse-image adjunction gives the algebraic module inverse image and its scalar-extension presentation. Its right adjoint is the specified module pushforward, and transposing generators identifies the adjunction unit with the set unit and q. Constant-ring inverse image is exact; its left adjoint preserves colimits.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right-adjoint compositor acts on sections by pullbackComp.inv. Conjugate it through the set and module adjunctions; both composite unit routes insert 1 on generators, giving scalarAssociation. This provides the section-normalized CompositePresentation.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply canonical ringed-topos tensor pullback on each diagram site. It preserves flat-term K-flat inputs and supplies the unique comparison with its canonical total-tensor representative square. Set the constraints field to the given T and assemble Models.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-tensor-additive-constraints"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-tensor-additive-constraints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D2, 03D8, 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tag 03EL. Geometric and pullback portions of parent steps 1, 2 and 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized derived tensor product on ringed site modules has coherent simultaneous integer shifts associator symmetry and unitors",
+   "results": "Eight results: presheaf monoidal structures, NatTrans.CommShift.associator, and module tensor facts. None gives this resolving-normalized diagram-site statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor comparison of an exact pullback functor commutes with total cochain shifts and preserves total tensor summands",
+   "results": "Eight hits in Mathlib/Algebra/Homology/BifunctorShift: single-slot shift maps and summand formulas. These supply chain ingredients, not the geometric presentation or normalized derived descent.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftUnitor.*shift|shift.*leftUnitor|mapHomologicalComplexCompIso",
+   "results": "13 hits: shift-functor unitors and mapHomologicalComplexCompIso in Additive.lean. No normalized derived-tensor/site presentation result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.DiagramPullbackMonoidalShiftModels",
+  "date": "2026-10-26",
+  "group": "F7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Maps-used sentence: primitive pullback and tensor identifications; retains original item steps 1-3 and the intrinsic-equality part of step 7; Geometric presentations and normalized resolving tensor comparisons on sequence sites",
+   "via": [
+    "lem-pur-diagram-pullback-monoidal-shift-models",
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.DiagramGeometricTensorPresentations",
+  "file": "lean/Sheaf/SixFunctors/DiagramGeometricTensorPresentations.lean",
+  "declaration": "WeilConjectures.DiagramPullbackShift.diagramGeometricTensorPresentations",
+  "statement": "theorem diagramGeometricTensorPresentations (T : ∀ W : Scheme.{u}, TensorConstraints A δ W) : ∃ S : Models A δ, S.constraints = T",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a9b2",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T205446-L-3251048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a9b2",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T205446-L-3251048",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean+node files vs reviewed head e47c86c6c2cd (byte-identical; only change record/report differ); item node vs earlier reviewer fix; reader gate: delivered modules + direct importer SystemTensorShiftCoherence compiled (exit 0)"
+ }
+}

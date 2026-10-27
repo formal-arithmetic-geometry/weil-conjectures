@@ -268,7 +268,109 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-transport",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Functor.ProjectionFormula.mapModRight",
+    "CategoryTheory.Functor.ProjectionFormula.theta",
+    "CategoryTheory.Functor.ProjectionFormula.rightSMul",
+    "CategoryTheory.Functor.ProjectionFormula.rightModObj",
+    "CategoryTheory.Functor.ProjectionFormula.mapModRight_obj_X",
+    "CategoryTheory.Functor.ProjectionFormula.mapModRight_map_hom",
+    "CategoryTheory.Functor.ProjectionFormula.mapModRight_obj_smul",
+    "CategoryTheory.Functor.ProjectionFormula.mapModRight_comp_forget"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModRight",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      424,
+      438
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.theta",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      330,
+      333
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.rightSMul",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      397,
+      400
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.rightModObj",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      402,
+      418
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModRight_obj_X",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      440,
+      440
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModRight_map_hom",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      442,
+      443
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModRight_obj_smul",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      445,
+      446
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModRight_comp_forget",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      448,
+      450
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
   "declaration": "CategoryTheory.Functor.ProjectionFormula.mapModRight",
@@ -296,5 +398,28 @@
   "group": "Q31",
   "result": "pass",
   "note": "Lean-only existing:true record for CategoryTheory.Functor.ProjectionFormula.mapModRight (side ModuleObjects/ProjectionFormula.lean 324-450). Checked clause by clause: theta is the canonical adjunction mate of (L◁c_N)∘π; rightSMul = theta ≫ G.map γ with module axioms proved via theta_unit/theta_assoc/naturality; mapModRight : Mod D B ⥤ Mod C (S.obj B) uses the Mathlib-transported monoid on S B; strict forget compatibility. Independent universes, no extra hypotheses. Dependency records (ProjectionFormula Q18, Mathlib Mod Q48, mapMod) are consistent. No duplicate node, not dropped. #check probe of all 8 declarations compiled cleanly in 3.9 s via nt_compile --json; axioms propext/choice/Quot.sound only. Advisory: statement field carries `noncomputable`."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\pi$ be a projection formula for $P\\colon\\mathcal C\\to\\mathcal D$ relative to a strong\nmonoidal $S\\colon\\mathcal D\\to\\mathcal C$ ([def-sfb-projection-formula]). Let\n$P\\dashv G$ be an adjunction with counit $c$. Let\n$$\n\\theta_{L,N}\\colon SL\\otimes GN\\to G(L\\otimes N)\n$$\nbe the adjoint of\n$P(SL\\otimes GN)\\xrightarrow{\\pi_{L,GN}}L\\otimes PGN\\xrightarrow{L\\otimes c_N}L\\otimes N$.\nLet $\\mathcal B$ be a monoid object of $\\mathcal D$. For a $\\mathcal B$-module object $N$\n([det-def-sfb-module-objects-definition]), the morphism\n$$\nS\\mathcal B\\otimes GN\\xrightarrow{\\theta_{\\mathcal B,N}}G(\\mathcal B\\otimes N)\n\\xrightarrow{G\\gamma_N}GN\n$$\nmakes $GN$ an $S\\mathcal B$-module object, and $Gf$ is $S\\mathcal B$-linear for every\n$\\mathcal B$-linear $f$. This defines the *linearization*\n$$\nG_{\\mathcal B}\\colon\\Mod_{\\mathcal B}(\\mathcal D)\\to\\Mod_{S\\mathcal B}(\\mathcal C),\n$$\nwhich commutes with the forgetful functors.",
+  "proof": [
+   {
+    "text": "Transposing along $P\\dashv G$ turns the naturality, unit and associativity compatibilities\nof $\\pi$ ([def-sfb-projection-formula]) into the following properties of $\\theta$:\n- $\\theta$ is natural in $L$ and $N$;\n- with $\\varepsilon^S\\colon\\mathbf 1\\to S\\mathbf 1$ the unit structure map of $S$,\n  $G(\\lambda_N)\\circ\\theta_{\\mathbf 1,N}\\circ(\\varepsilon^S\\otimes GN)=\\lambda_{GN}$;\n- with $\\mu^S$ the lax structure maps of $S$,\n  $G(\\alpha_{L,L',N})\\circ\\theta_{L\\otimes L',N}\\circ(\\mu^S_{L,L'}\\otimes GN)\n  =\\theta_{L,L'\\otimes N}\\circ(SL\\otimes\\theta_{L',N})\\circ\\alpha_{SL,SL',GN}$.",
+    "uses": [
+     "def-sfb-projection-formula"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "These are the unit and associativity axioms of the lax structure of a lax monoidal\nfunctor, with $\\theta$ in place of the structure maps. The module axioms\nfor $GN$ and the linearity of $Gf$ then follow exactly as in the case of a lax monoidal\nfunctor.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

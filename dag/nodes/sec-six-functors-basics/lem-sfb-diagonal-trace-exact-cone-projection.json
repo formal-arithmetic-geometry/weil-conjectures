@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-diagonal-trace-exact-cone-projection",
+ "kind": "statement",
+ "title": "An ordinary coefficient cone projects canonically after its derived-limit comparison",
+ "statement": "theorem diagonalTrace_exactConeComparison_projection\n    {A : Type*} {B : Type*} {C : Type*}\n    [Category A] [Category B] [Category C] [Abelian A] [Abelian B] [Abelian C]\n    [HasLimitsOfShape ℕᵒᵖ B]\n    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]\n    [HasDerivedCategory C]\n    (U : A ⥤ B) (V : C ⥤ (ℕᵒᵖ ⥤ B)) [U.Additive] [V.Additive]\n    [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (L : DiagonalRlim B) (M : A) (N : C)\n    (π : (Functor.const ℕᵒᵖ).obj (U.obj M) ⟶ V.obj N) (n : ℕ) :\n    exactConeComparison U V L M N π ≫ (L.projection n).app _ ≫\n        ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory.map\n          ((V.mapDerivedCategorySingleFunctor 0).hom.app N) ≫\n        (((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategorySingleFunctor 0).hom.app _ =\n      (U.mapDerivedCategorySingleFunctor 0).hom.app M ≫\n        (DerivedCategory.singleFunctor B 0).map (π.app (op n))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), Rlim of the system trace and its level-n reduction; expanded coefficient-cone normalization in steps 5--7"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-limit-interface"
+ ],
+ "proof": [
+  {
+   "text": "Apply DiagonalRlim.normalization to the single complex of the tower H. Substitute the Q-factor formula for the evaluation/single comparison. Naturality and functoriality of Q reduce the equation to a cochain identity. At degree zero, limMap_π and the single-object comparison cancel; in all other degrees both maps are zero. This proves ordinaryRlim followed by projection and the evaluation/single comparison equals single(limit.π).",
+   "uses": [
+    "def-sfb-diagonal-limit-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In an arbitrary category, naturality moves the inverse of a specified isomorphism across a natural transformation. Functoriality cancels its inverse against its forward map. Apply this identity to the exact-cone comparison, using the restriction/single isomorphism and the preceding normalized ordinary-limit projection.",
+   "uses": [
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The remaining single-functor composite is the image of limit.lift followed by limit.π. The ordinary cone lift equation identifies it with the given component π.app (op n). Precompose with the exact restriction/single comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), Rlim of the system trace and its level-n reduction; expanded coefficient-cone normalization in steps 5--7",
+  "by": "R3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The comparison from an ordinary inverse limit to the derived inverse limit commutes with projection to one tower term on degree zero single complexes",
+   "results": "8 hits: CategoryTheory.Limits.limit.isoLimitCone_inv_π, InverseSystem.invLimEquiv_apply_coe, CochainComplex.toSingle₀Equiv_symm_apply_f_zero, CochainComplex.fromSingle₀Equiv, CategoryTheory.ProjectiveResolution.π', CochainComplex.isoHomologyπ₀_inv_naturality, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.instIsIsoAppFromLeftDerivedZero",
+   "date": "2026-10-27",
+   "verdict": "No exact derived-limit comparison. Ordinary limit projection lemmas are used in the proved normalization calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_singleFunctor_obj, CategoryTheory.Functor.mapDerivedCategoryIdIso_inv_app_singleFunctor_obj, CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj, CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj_assoc, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app_assoc",
+   "date": "2026-10-27",
+   "verdict": "The generic single-functor coherence API supplies the normalization calculation; no theorem for this specified DiagonalRlim cone."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Ii]ntegral|exactConeComparison",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No remote match. Local source inspection gives the definition of exactConeComparison and its normalization fields."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteIntegralProjection",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), Rlim of the system trace and its level-n reduction; expanded coefficient-cone normalization in steps 5--7",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-integral-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceCoefficientProjection",
+  "file": "lean/Sheaf/Paper/DiagonalTraceCoefficientProjection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_exactConeComparison_projection",
+  "statement": "theorem diagonalTrace_exactConeComparison_projection\n    {A : Type*} {B : Type*} {C : Type*}\n    [Category A] [Category B] [Category C] [Abelian A] [Abelian B] [Abelian C]\n    [HasLimitsOfShape ℕᵒᵖ B]\n    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]\n    [HasDerivedCategory C]\n    (U : A ⥤ B) (V : C ⥤ (ℕᵒᵖ ⥤ B)) [U.Additive] [V.Additive]\n    [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (L : DiagonalRlim B) (M : A) (N : C)\n    (π : (Functor.const ℕᵒᵖ).obj (U.obj M) ⟶ V.obj N) (n : ℕ) :\n    exactConeComparison U V L M N π ≫ (L.projection n).app _ ≫\n        ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory.map\n          ((V.mapDerivedCategorySingleFunctor 0).hom.app N) ≫\n        (((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategorySingleFunctor 0).hom.app _ =\n      (U.mapDerivedCategorySingleFunctor 0).hom.app M ≫\n        (DerivedCategory.singleFunctor B 0).map (π.app (op n))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T021355-L-2763028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T021355-L-2763028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-weil-category.md",
+  "place": "order 2106, preservation clause split into a strict defining component"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "proof": [
+  {
+   "text": "Intrinsic completeness is invariant under isomorphism: retain the generating family and cochain representative, compose its realization with coefficient extension of the isomorphism, and preserve invertibility of the intrinsic unit by cancellation. This is the proved private helper isoTransportIntrinsicIso.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Derived direct image preserves intrinsic completeness. Apply pbcActualDirectCompletionIso_exists to the actual reflection unit. The unit on the complete source is invertible by full faithfulness of the reflective inclusion. Its image is invertible, hence so is the unit on the direct image by the comparison equation. This identifies that direct image with its complete reflection. Implemented by isoTransportDirectComplete, using the existing proved actual-ring direct-image/completion comparison (Stacks 099N, clauses (1) and (3)).",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary derived pullback along the inverse is an equivalence, by the existing counit-normalized comparison with exact module transport. Its adjunction unit is consequently invertible. Compose the inverse-isomorphism pullback compositor and identity comparison to identify pullback along f followed by pullback along its inverse with the identity. Whiskering the invertible adjunction unit, then this identity comparison, identifies pullback along f with derived direct image along its inverse. Apply direct-image completeness and transport through this isomorphism and e. Only K.property.1 is used; no constructibility, Noetherian-scheme or nonemptiness assumption is introduced.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof_origin": {
+  "by": "worker T7",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N, lemma-pushforward-Noetherian-case, clauses (1) and (3), applied to the inverse isomorphism; categorical comparison supplied by the already stated pullback composition and identity interfaces."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcAutomorphismTransport",
+  "date": "2026-10-26",
+  "group": "R8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-automorphism-completed-transport",
+   "place": "preservation clause split into its defining conjunction components",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcAutomorphismTransport",
+  "file": "lean/Sheaf/Paper/PbcAutomorphismTransport.lean",
+  "branch": "sheaf-dag",
+  "by": "R8",
+  "date": "2026-10-26",
+  "declaration": "AlgebraicGeometry.Scheme.pbcIsoAmbientPullback_preserves_intrinsic",
+  "statement": "theorem pbcIsoAmbientPullback_preserves_intrinsic (K : PbcBoundedConstructibleComplete Y d) (H : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d) (e : completedOrdinaryPullback f d ≅ H) : PbcIsIntrinsicallyComplete X d (H.obj K.obj)"
+ },
+ "id": "lem-wf-pbc-automorphism-transport-intrinsic",
+ "title": "Intrinsic completion under automorphism transport",
+ "statement": "For the isomorphism transport data and normalized comparison in the parent node, PbcIsIntrinsicallyComplete X d (H.obj K.obj).",
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261026T023945-L-617174",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261026T202127-L-3437584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

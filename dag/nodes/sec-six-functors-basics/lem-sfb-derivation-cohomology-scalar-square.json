@@ -1,0 +1,367 @@
+{
+ "id": "lem-sfb-derivation-cohomology-scalar-square",
+ "kind": "statement",
+ "title": "Scalar extension square for cohomology of the universal derivation",
+ "statement": "Let $k\\hookrightarrow K$ be an extension of fields [def-weil-field], [def-pc-field-extension], let $X$ be a smooth projective $k$-scheme [def-pc-scheme], [def-sbc-smooth-morphisms], [def-pc-projective-morphism], and put $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$. Write $\\Omega^0_{X/k}=\\mathcal O_X$ and let $\\Omega^1_{X/k}$ be the sheaf obtained by gluing the modules of Kähler differentials [def-weil-pbc-kahler-differentials]; write $d_X:\\mathcal O_X\\to\\Omega^1_{X/k}$ for the universal $k$-linear derivation, and define $\\Omega^p_{X_K/K},d_{X_K}$ similarly. For $p=0,1$ and every $q\\geq0$, right-derived global sections in Zariski sheaves of $k$-vector spaces give the same $k$-vector spaces $H^q(X,\\Omega^p_{X/k})$ as ordinary module cohomology [pqf-def-cohomology], and likewise over $K$. There are canonical $K$-linear isomorphisms $\\beta^q_p:H^q(X,\\Omega^p_{X/k})\\otimes_kK\\cong H^q(X_K,\\Omega^p_{X_K/K})$ with\n$$\\beta^q_1\\circ(H^q(X,d_X)\\otimes_k\\mathrm{id}_K)=H^q(X_K,d_{X_K})\\circ\\beta^q_0.$$\nThe horizontal derivations and their cohomology maps are taken in sheaves of ground-field vector spaces, without imposing $\\mathcal O_X$-linearity. No characteristic, connectedness or geometric integrality assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 02KH, coherent-lemma-flat-base-change-cohomology, separated-case Cech proof; Tag 01F1, cohomology-lemma-modules-abelian. Differential compatibility is the scalar formula d(a tensor lambda)=da tensor lambda and the universal differential base-change isomorphism of lem-weil-pbc-kahler-differentials-base-change; report.md spells out the Cech argument."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-weil-pbc-kahler-differentials",
+  "pqf-def-cohomology",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-sc-zariski-site",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-pc-flat-cohomology-comparison",
+  "def-sfb-scalar-abelian-ext-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put $F_p=\\Omega^p_{X/k}$ and $F'_p=\\Omega^p_{X_K/K}$ for $p=0,1$. Apply [lem-sfb-ringed-site-global-module-abelian-cohomology] on the small Zariski site with ring sheaf $\\mathcal O_X$, and again with the constant ring sheaf $\\underline k$. Sheaves of modules over $\\underline k$ are exactly sheaves of $k$-vector spaces: a locally constant function acts piecewise, glued. An injective resolution is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so that node's $H^n$ is the cohomology of [pqf-def-cohomology]. Both cohomologies therefore identify canonically with the cohomology of the same underlying abelian sheaf. These identifications are $k$-linear, since multiplication by each $a\\in k$ is a module endomorphism in both categories and the cited comparison is natural. Repeat with $K,X_K$. This proves the scalar-forgetting assertion and permits computing $H^q(d_X)$ in vector-space sheaves.",
+   "uses": [
+    "lem-sfb-ringed-site-global-module-abelian-cohomology",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree; also Tag 01F1, cohomology-lemma-modules-abelian"
+   }
+  },
+  {
+   "text": "By [lem-pc-projective-proper], $X\\to\\operatorname{Spec}k$ is proper; by [def-weil-proper-morphism] it is separated. It is quasi-compact by the projectivity hypothesis. Choose a finite affine open cover $\\mathcal U=(U_i)$ using [lem-weil-pbc-qcqs-finite-affine-open-cover]. Each nonempty-tuple intersection $U_I$ is affine by iterating [lem-weil-pbc-separated-affine-open-intersection]. For $g:X_K\\to X$ put $V_i=g^{-1}U_i$. Inverse image preserves intersections and unions, so these form a cover and $V_I=g^{-1}U_I$. Apply [lem-pc-finite-affine-cech-intersection-base-change] with affine target $\\operatorname{Spec}k$ and $Z=U_I$: $V_I\\to\\operatorname{Spec}K$ is affine, hence $V_I$ is affine. Empty intersections are allowed.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-pc-finite-affine-cech-intersection-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, separated-case affine cover; Tag 0BDX, lemma-affine-diagonal"
+   }
+  },
+  {
+   "text": "The sheaves $F_0,F_1$ and $F'_0,F'_1$ are quasi-coherent by their affine construction: on $U=\\operatorname{Spec}A$ they are $\\widetilde A$ and $\\widetilde{\\Omega_{A/k}}$, which is exactly [pqf-def-coherent]; $F_1,F'_1$ are the sheaves $\\Omega^1_{X/k},\\Omega^1_{X_K/K}$ of [lem-trf-relative-differential-sheaf-base-change] (same affine description). That node, with $S=\\operatorname{Spec}k$, $S'=\\operatorname{Spec}K$, gives the $\\mathcal O_{X_K}$-linear isomorphism $c:g^*F_1\\cong F'_1$, which on $U_K=\\operatorname{Spec}(A\\otimes_kK)$ is the isomorphism $(A\\otimes_kK)\\otimes_A\\Omega_{A/k}\\cong\\Omega_{(A\\otimes_kK)/K}$, $b\\otimes da\\mapsto b\\,d(a\\otimes1)$, of [lem-weil-pbc-kahler-differentials-base-change]. For $p=0$ use $g^*\\mathcal O_X\\cong\\mathcal O_{X_K}$. Let $h_p:F_p\\to g_*F'_p$ be the pullback unit followed by $g_*c$; on affine sections $h_0(a)=a\\otimes1$ and $h_1(da)=d(a\\otimes1)$, an additive map of sheaves by [def-weil-pbc-kahler-differentials].",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV, lemma-differentials-base-change, including its explicit universal derivation; affine gluing in the item"
+   }
+  },
+  {
+   "text": "Write $C_p^n=\\prod_{I\\in\\{1,\\ldots,r\\}^{n+1}}\\Gamma(U_I,F_p)$ and $C_p^{\\prime n}=\\prod_I\\Gamma(V_I,F'_p)$, with differential $\\delta=\\sum_j(-1)^j\\operatorname{res}_j$. By [pqf-lem-affine-vanishing] the modules have no positive cohomology on these affine intersections. Step 1 applied on each intersection gives the same vanishing for the underlying abelian sheaves and the vector-space sheaves. Therefore [lem-weil-pbc-acyclic-cech-edge-compatibility] supplies canonical isomorphisms $e_p^q:H^q(C_p)\\cong H^q(X,F_p)$ and $e_p^{\\prime q}:H^q(C'_p)\\cong H^q(X_K,F'_p)$. The cited forgetting square identifies these with the module edges. Its additive naturality, applied to scalar multiplications, makes the edges linear, and applied to $d_X$ and $d_{X_K}$ gives $e_1H^q(D)=H^q(X,d_X)e_0$ and $e'_1H^q(D')=H^q(X_K,d_{X_K})e'_0$, where $D,D'$ apply the derivation to each coordinate. They are cochain maps because derivations commute with restriction and additive alternating sums.",
+   "uses": [
+    "pqf-lem-affine-vanishing",
+    "lem-sfb-ringed-site-global-module-abelian-cohomology",
+    "lem-weil-pbc-acyclic-cech-edge-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03AX, lemma-cech-cohomology; 03F7, lemma-cech-spectral-sequence-application; 03FD, lemma-cohomology-modules-abelian-agree"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-flat-cech-base-change] with rings $k,K$, the separated structure morphism, the finite affine family $\\mathcal U$, and the quasi-coherent module $F_p$. After the identifications $g^*F_p\\cong F'_p$ of step 3, it gives a canonical $K$-linear chain isomorphism $\\theta_p:C_p\\otimes_kK\\cong C'_p$. (Use the symmetry of tensor factors to match that node's $K\\otimes_k C_p$ convention.) Its coordinate formula is $\\theta_p(z\\otimes\\lambda)_I=\\lambda\\,h_p(z_I)$. Only the individual coefficient sheaves are used here as $\\mathcal O_X$-modules; the map $D$ is a map of complexes of $k$-vector spaces.",
+   "uses": [
+    "lem-pc-flat-cech-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, relation between Cech complexes; Tag 02KG, lemma-affine-base-change"
+   }
+  },
+  {
+   "text": "The two chain maps from $C_0\\otimes_kK$ to $C'_1$ agree. Indeed, on a pure tensor $z\\otimes\\lambda$ and a tuple $I$ with coordinate $a=z_I$, one has $D'\\theta_0(z\\otimes\\lambda)_I=d_{X_K}(\\lambda(a\\otimes1))=\\lambda\\,d_{X_K}(a\\otimes1)=\\theta_1(Dz\\otimes\\lambda)_I$. The middle equality is the Leibniz rule and $d_{X_K}(\\lambda)=0$ from [def-weil-pbc-kahler-differentials]; the last equality is precisely the formula of [lem-weil-pbc-kahler-differentials-base-change]. Additivity and generation by pure tensors prove $D'\\theta_0=\\theta_1(D\\otimes1)$ in every degree.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-kahler-differentials-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV, lemma-differentials-base-change, formula for the base-changed derivation"
+   }
+  },
+  {
+   "text": "By [lem-weil-field-scalar-extension-exact], tensoring with $K$ is exact. Applied to the kernel, image and quotient defining $H^q(C_p)$, exactness gives the canonical isomorphism $t_p:H^q(C_p)\\otimes_kK\\cong H^q(C_p\\otimes_kK)$ with $t_p([z]\\otimes\\lambda)=[z\\otimes\\lambda]$. This works for the possibly unbounded Cech complex, since only the two adjacent differentials enter a fixed cohomology group. The displayed formula also proves naturality: both composites for a cochain map $f$ send $[z]\\otimes\\lambda$ to $[f(z)\\otimes\\lambda]$.",
+   "uses": [
+    "lem-weil-field-scalar-extension-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, exact tensor after the separated-case Cech calculation"
+   }
+  },
+  {
+   "text": "Define $\\beta_p^q=e_p^{\\prime q}\\,H^q(\\theta_p)\\,t_p\\,((e_p^q)^{-1}\\otimes1)$. Every factor is $K$-linear and invertible. To check canonicity, the inverse-image functor on opens $U\\mapsto g^{-1}U$ preserves the final open, tuple intersections and covers. Apply the site-change square of [lem-weil-pbc-acyclic-cech-edge-compatibility] to $h_p:F_p\\to g_*F'_p$. All its acyclicity hypotheses were checked in step 4. Its cochain map is $z\\mapsto\\theta_p(z\\otimes1)$ by step 5; hence $\\beta_p^q(x\\otimes\\lambda)=\\lambda\\,h_{p,H}^q(x)$, where $h_{p,H}^q$ is the canonical cohomology pullback of $h_p$. This formula characterizes $\\beta_p^q$ independently of the chosen affine cover and agrees, under the cited forgetting square, with ordinary scalar base change on module cohomology.",
+   "uses": [
+    "lem-weil-pbc-acyclic-cech-edge-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AX, lemma-cech-cohomology, the restriction and coefficient augmentations; Tag 03FD, lemma-cohomology-modules-abelian-agree"
+   }
+  },
+  {
+   "text": "Finally step 6 gives $H^q(D')H^q(\\theta_0)=H^q(\\theta_1)H^q(D\\otimes1)$. Insert the naturality $H^q(D\\otimes1)t_0=t_1(H^q(D)\\otimes1)$ from step 7 and the two edge identities of step 4 into the definition of $\\beta_p^q$. The result is $H^q(X_K,d_{X_K})\\beta_0^q=\\beta_1^q(H^q(X,d_X)\\otimes1)$, as asserted. Equivalently, on a cycle representative $z$ both paths send $e_0^q([z])\\otimes\\lambda$ to $e_1^{\\prime q}([\\theta_1(Dz\\otimes\\lambda)])$. Pure tensors generate the source, so this verifies the whole square.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH separated-case Cech argument, with the explicit differential identity of step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-global-module-abelian-cohomology",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-pc-projective-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-pc-finite-affine-cech-intersection-base-change",
+  "pqf-def-coherent",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-pbc-kahler-differentials",
+  "pqf-lem-affine-vanishing",
+  "lem-weil-pbc-acyclic-cech-edge-compatibility",
+  "lem-pc-flat-cech-base-change",
+  "lem-weil-field-scalar-extension-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 02KH, 03AX, 03F7, 03FD and 00RV; explicit additive-derivation square assembled from the separated-case Cech proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(cohomology|HOver|sheafCohomology).*(baseChange|tensor|forget)|(Dolbeault|hodge)",
+   "results": "OK 4 hits: Mathlib/ModelTheory/Fraisse.lean, Mathlib/RingTheory/Perfectoid/BDeRham.lean, Mathlib/RingTheory/Perfectoid/BDeRham.lean, Mathlib/RingTheory/Perfectoid/FontaineTheta.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level cotangent base change and differential maps do not state the cohomological scalar square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"baseChange\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level cotangent base change and differential maps do not state the cohomological scalar square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The induced map on sheaf cohomology from the universal derivation commutes with extension of the ground field",
+   "results": "OK 8 hits: ModuleCat.Derivation.desc, PresheafOfModules.Derivation'.Universal.mk, PresheafOfModules.Derivation.d_map, KaehlerDifferential.derivationQuotKerTotal, KaehlerDifferential.map_compDer, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.Derivation.Universal.desc, PresheafOfModules.Derivation.Universal.mk. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level cotangent base change and differential maps do not state the cohomological scalar square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field extension coherent cohomology commutes with base change compatibly with the universal derivation from the structure sheaf to Kahler differentials",
+   "results": "OK 8 hits: Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Generators.H1Cotangent.δAux_ofComp, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Generators.H1Cotangent.δ_eq. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level cotangent base change and differential maps do not state the cohomological scalar square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech cohomology map from functions to Kahler differentials is compatible with scalar extension of fields",
+   "results": "OK 8 hits: Algebra.Generators.H1Cotangent.δAux_ofComp, Algebra.Extension.H1Cotangent.map, Algebra.H1Cotangent.map, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Generators.H1Cotangent.δ_map, KaehlerDifferential.map_D, KaehlerDifferential.map, Algebra.H1Cotangent.δ. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level cotangent base change and differential maps do not state the cohomological scalar square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The induced map on Zariski sheaf cohomology from the universal derivation commutes with extension of the ground field",
+   "results": "OK 8 hits: PresheafOfModules.Derivation'.Universal.mk, algebraMap.coe_deriv, ModuleCat.Derivation.desc, PresheafOfModules.Derivation.Universal.desc, KaehlerDifferential.derivationQuotKerTotal, KaehlerDifferential.map_compDer, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.Derivation.instSubsingletonUniversal. ",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module differential and base-change declarations do not state the Zariski cohomology scalar square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field extension coherent cohomology commutes with base change compatibly with the universal derivation from functions to Kahler differentials",
+   "results": "OK 8 hits: Algebra.Generators.H1Cotangent.δAux_ofComp, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Generators.H1Cotangent.δ_eq, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, Algebra.Generators.H1Cotangent.δ_map, KaehlerDifferential.isBaseChange_of_formallyEtale. ",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module differential and base-change declarations do not state the Zariski cohomology scalar square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"baseChange\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module differential and base-change declarations do not state the Zariski cohomology scalar square"
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomology|HOver|sheafCohomology).*(baseChange|tensor|forget)|(Dolbeault|hodge)",
+   "results": "OK 4 hits: Mathlib/ModelTheory/Fraisse.lean, Mathlib/RingTheory/Perfectoid/BDeRham.lean, Mathlib/RingTheory/Perfectoid/BDeRham.lean, Mathlib/RingTheory/Perfectoid/FontaineTheta.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module differential and base-change declarations do not state the Zariski cohomology scalar square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech cohomology map from functions to Kahler differentials is compatible with scalar extension of fields",
+   "results": "OK 8 hits: Algebra.Generators.H1Cotangent.δAux_ofComp, Algebra.Extension.H1Cotangent.map, Algebra.H1Cotangent.map, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Generators.H1Cotangent.δ_map, KaehlerDifferential.map_D, KaehlerDifferential.map, Algebra.H1Cotangent.δ. ",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module differential and base-change declarations do not state the Zariski cohomology scalar square"
+  },
+  {
+   "tool": "grep",
+   "query": "map_compDer|map_D|cotangentComplexBaseChange",
+   "results": "OK 25 hits: Mathlib/RingTheory/FractionalIdeal/Operations.lean, Mathlib/RingTheory/FractionalIdeal/Operations.lean, Mathlib/RingTheory/FractionalIdeal/Operations.lean, Mathlib/RingTheory/FractionalIdeal/Norm.lean, Mathlib/RingTheory/FractionalIdeal/Inverse.lean, Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean, Mathlib/RingTheory/Ideal/Norm/RelNorm.lean, Mathlib/RingTheory/MatrixPolynomialAlgebra.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module differential and base-change declarations do not state the Zariski cohomology scalar square"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem KaehlerDifferential.map_compDer|theorem KaehlerDifferential.map_D",
+   "results": "OK 2 hits: Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module differential and base-change declarations do not state the Zariski cohomology scalar square"
+  },
+  {
+   "tool": "grep",
+   "query": "def KaehlerDifferential.cotangentComplexBaseChange|LinearMap.baseChange A P.cotangentComplex",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module differential and base-change declarations do not state the Zariski cohomology scalar square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hodge-first-differential-zero",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Scalar extension square for cohomology of the universal derivation. Checked against literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3); the present scalar square is the supporting input to the inherited Kodaira/Hodge branch.",
+   "via": [
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-derivation-cohomology-scalar-square",
+  "worker": "stage1",
+  "summary": "Q33 wrote a nine-step additive Cech proof using existing nodes only: scalar-forgetting, affine acyclicity, coefficient base change, the explicit derivation square, exact tensor, and the canonical edge normalizations. No statement change, new node or attachment.",
+  "blueprint": "Supporting scalar-extension input to lem-sfb-hodge-first-differential-zero in the inherited Kodaira/Kempf branch under the direct-image step (3); latest blueprint direct-images proof read. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Step 2 uses the general implication projective implies proper to obtain separatedness, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-finite-affine-cech-intersection-base-change",
+    "why": "Step 2 uses only preservation of affine intersections after extension to the affine field base."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Step 4 uses positive-degree vanishing for quasi-coherent modules on affine opens to apply the additive Cech edge."
+   },
+   {
+    "node": "lem-weil-pbc-acyclic-cech-edge-compatibility",
+    "why": "Steps 4 and 8 use the generic additive Cech edge and its forgetting/site-change squares, which allow the non-O-linear derivation."
+   },
+   {
+    "node": "lem-pc-flat-cech-base-change",
+    "why": "Step 5 uses the canonical coordinatewise Cech scalar chain isomorphism for each coefficient sheaf."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Step 3 takes only the sheaf isomorphism g^*Omega^1_{X/k} = Omega^1_{X_K/K} with its affine formula along Spec K -> Spec k (needs the affine pullback formula of quasi-coherent modules); no node of the unit states this generic base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-pc-finite-affine-cech-intersection-base-change",
+  "pqf-lem-affine-vanishing",
+  "lem-weil-pbc-acyclic-cech-edge-compatibility",
+  "lem-pc-flat-cech-base-change",
+  "lem-trf-relative-differential-sheaf-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-07397c7d8",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-07397c7d8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item has no new nodes, and its statement is unchanged. Sources checked: Stacks 02KH (coherent.tex l.948 ff., separated affine-cover Čech case, which uses schemes-lemma-widetilde-pullback) and 00RV (algebra.tex l.34213); the tags 01F1, 03FD, 03AX, 03F7, 01XD and 02KG were confirmed in tags/tags. Steps 2, 4-9 are correct. Step 2: projective⇒proper⇒separated; the cover is finite; tuple intersections are affine, and so are V_I via the T'=Spec K affine-morphism node. Step 4: the edge node is natural for every additive map, so the k-linear-only d_X is fine; the Čech complex is ordered in both the edge node and lem-pc-flat-cech-base-change. Step 5: the coordinate formula gives θ(z⊗λ)_I=λh_p(z_I). Step 6: Leibniz plus d(λ)=0. Step 7: exact ⊗_kK. Step 8: the site-change clause with u=g^{-1}, so β(e[z]⊗λ)=λh_H(e[z]). Step 9: I recomputed the assembly H(d_K)β_0=β_1(H(d)⊗1) by hand. Tested on X=∅, K=k, q=0, an inseparable K/k in characteristic p, and large q. Two missing citations are fixed, both C1/C2. (1) Step 3 marked as elementary the gluing to g^*Ω^1_{X/k}≅Ω^1_{X_K/K}, which needs the affine pullback formula (01I9). It now cites the existing lem-trf-relative-differential-sheaf-base-change, which states exactly this isomorphism with the affine formula b⊗da↦b d(1⊗a). The step is set to elementary:false, the node is declared in split_report.tool_uses, and there is no cycle. (2) Step 1 compares classical cohomology (pqf-def-cohomology) with a node stated for the K-injective RΓ. It now cites lem-weil-pbc-bounded-below-injectives-kinjective, and the step text is trimmed to 916 characters. proof_deps is updated to the union of uses. Accepted tool_uses: lem-pc-projective-proper, lem-pc-finite-affine-cech-intersection-base-change, pqf-lem-affine-vanishing, lem-weil-pbc-acyclic-cech-edge-compatibility, lem-pc-flat-cech-base-change and the added lem-trf node; all are generic tools. blueprint.from.node is the inherited null, which is not this delivery's fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivationCohomologyScalarSquare",
+  "declaration": "AlgebraicGeometry.Scheme.derivation_cohomology_scalar_square",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.scalarDerivationCohomologyMap",
+   "AlgebraicGeometry.Scheme.scalarModuleAbelianComparison",
+   "AlgebraicGeometry.Scheme.abelianCoefficientCohomologyMap",
+   "AlgebraicGeometry.Scheme.derivation_cohomology_scalar_square"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivationCohomologyScalarSquare.lean",
+  "statement": "theorem derivation_cohomology_scalar_square (k K : Type u) [Field k] [Field K] [Algebra k K] (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k)) [Smooth f] [IsProjective f] : ∃ (d : scalarSheaf f (SheafOfModules.unit X.ringCatSheaf) ⟶ scalarSheaf f f.relativeDifferentials) (dK : scalarSheaf (baseChangeSnd (S := K) f) (SheafOfModules.unit (baseChangedScheme (S := K) f).ringCatSheaf) ⟶ scalarSheaf (baseChangeSnd (S := K) f) (baseChangeSnd (S := K) f).relativeDifferentials) (h₁ : f.relativeDifferentials ⟶ (pushforward (baseChangeFst (S := K) f)).obj (baseChangeSnd (S := K) f).relativeDifferentials), (∀ (U : X.Opens) (a : Γ(X, U)), d.hom.app (op U) a = f.relativeDifferentialsDerivation.d (X := op U) a) ∧ (∀ (U : (baseChangedScheme (S := K) f).Opens) (a : Γ(baseChangedScheme (S := K) f, U)), dK.hom.app (op U) a = (baseChangeSnd (S := K) f).relativeDifferentialsDerivation.d (X := op U) a) ∧ (∀ (U : X.Opens) (a : Γ(X, U)), h₁.val.app (op U) (f.relativeDifferentialsDerivation.d (X := op U) a) = (baseChangeSnd (S := K) f).relativeDifferentialsDerivation.d (X := op (baseChangeFst (S := K) f ⁻¹ᵁ U)) ((baseChangeFst (S := K) f).app U a)) ∧ ∀ q : ℕ, (Function.Bijective (scalarModuleAbelianComparison f (SheafOfModules.unit X.ringCatSheaf) q) ∧ ∀ (r : k) (x : scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) q), scalarModuleAbelianComparison f (SheafOfModules.unit X.ringCatSheaf) q (r • x) = r • scalarModuleAbelianComparison f (SheafOfModules.unit X.ringCatSheaf) q x) ∧ (Function.Bijective (scalarModuleAbelianComparison f f.relativeDifferentials q) ∧ ∀ (r : k) (x : scalarCohomology f f.relativeDifferentials q), scalarModuleAbelianComparison f f.relativeDifferentials q (r • x) = r • scalarModuleAbelianComparison f f.relativeDifferentials q x) ∧ (Function.Bijective (scalarModuleAbelianComparison (baseChangeSnd (S := K) f) (SheafOfModules.unit (baseChangedScheme (S := K) f).ringCatSheaf) q) ∧ ∀ (r : K) (x : scalarCohomology (baseChangeSnd (S := K) f) (SheafOfModules.unit (baseChangedScheme (S := K) f).ringCatSheaf) q), scalarModuleAbelianComparison (baseChangeSnd (S := K) f) (SheafOfModules.unit (baseChangedScheme (S := K) f).ringCatSheaf) q (r • x) = r • scalarModuleAbelianComparison (baseChangeSnd (S := K) f) (SheafOfModules.unit (baseChangedScheme (S := K) f).ringCatSheaf) q x) ∧ (Function.Bijective (scalarModuleAbelianComparison (baseChangeSnd (S := K) f) (baseChangeSnd (S := K) f).relativeDifferentials q) ∧ ∀ (r : K) (x : scalarCohomology (baseChangeSnd (S := K) f) (baseChangeSnd (S := K) f).relativeDifferentials q), scalarModuleAbelianComparison (baseChangeSnd (S := K) f) (baseChangeSnd (S := K) f).relativeDifferentials q (r • x) = r • scalarModuleAbelianComparison (baseChangeSnd (S := K) f) (baseChangeSnd (S := K) f).relativeDifferentials q x) ∧ ∃ (β₀ : (K ⊗[k] scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) q) ≃ₗ[K] scalarCohomology (baseChangeSnd (S := K) f) (SheafOfModules.unit (baseChangedScheme (S := K) f).ringCatSheaf) q) (β₁ : (K ⊗[k] scalarCohomology f f.relativeDifferentials q) ≃ₗ[K] scalarCohomology (baseChangeSnd (S := K) f) (baseChangeSnd (S := K) f).relativeDifferentials q), (∀ x : scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) q, scalarModuleAbelianComparison (baseChangeSnd (S := K) f) (SheafOfModules.unit (baseChangedScheme (S := K) f).ringCatSheaf) q (β₀ ((1 : K) ⊗ₜ[k] x)) = abelianCoefficientCohomologyMap (baseChangeFst (S := K) f) (SheafOfModules.unitToPushforwardObjUnit (baseChangeFst (S := K) f).toRingCatSheafHom) q (scalarModuleAbelianComparison f (SheafOfModules.unit X.ringCatSheaf) q x)) ∧ (∀ x : scalarCohomology f f.relativeDifferentials q, scalarModuleAbelianComparison (baseChangeSnd (S := K) f) (baseChangeSnd (S := K) f).relativeDifferentials q (β₁ ((1 : K) ⊗ₜ[k] x)) = abelianCoefficientCohomologyMap (baseChangeFst (S := K) f) h₁ q (scalarModuleAbelianComparison f f.relativeDifferentials q x)) ∧ ∀ (x : scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) q) (aK : K), β₁ (aK ⊗ₜ[k] scalarDerivationCohomologyMap f d q x) = scalarDerivationCohomologyMap (baseChangeSnd (S := K) f) dK q (β₀ (aK ⊗ₜ[k] x))",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The tensor factors are reversed using the canonical tensor symmetry: K tensor_k H carries its standard K-action. The derivation is a morphism of ground-field-vector-space sheaves, fixed on every open by the universal derivation. The canonical module-to-abelian comparison and pullback normalization on 1 tensor x fix both base-change isomorphisms. Additional stmt_deps cite the already recorded differential-sheaf, field-linear cohomology, scalar-forgetting, and scalar-base-change constructions; no definition is duplicated. Returned-delivery repair B3/H12: def-sfb-scalar-abelian-ext-comparison owns the three reused scalar-forgetting definitions; the factorization theorem is cited only as a proof dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2ebf7df2",
+  "group": "O2",
+  "result": "pass",
+  "note": "Re-delivery after B3/H12 (7c49) and H7 (7e3b) returns. Delta vs 7e3b: only proof_deps drops new-sc-scalar-abelian-ext-factorization; Lean module and new node def-sfb-scalar-abelian-ext-comparison byte-identical. Against live base: correction_fields=[] and check_statement_change=[]; only stmt_deps and lean differ; proof_deps, proof and statement identical. Added stmt_deps are all definition nodes (def-sc-relative-differential-sheaf, def-sc-field-linear-module-cohomology-operations, def-pc-flat-cohomology-comparison, new def-sfb-scalar-abelian-ext-comparison). New node existing:true owns scalarAbelianForget/UnitClass/ExtComparison, which are explicit upstream data matching Stacks 03FD; no other live owner. lean.statement verbatim equal to file signature; only sorry is the theorem's. Maths re-checked: hypotheses only Smooth+IsProjective; d, dK, h1 pinned by section formulas; beta pinned on 1⊗x via injective comparison plus K-linearity; H^q(d) via Ext.mk0 postcomposition (scalarCohomologyMap is O-linear only, so the helper is not a duplicate); square on pure tensors; edge cases empty X, q=0, K=k, inseparable K/k OK. Advisory: proof docstring still names the factorization theorem (allowed by the prior return). No compile (no file changed)."
+ }
+}

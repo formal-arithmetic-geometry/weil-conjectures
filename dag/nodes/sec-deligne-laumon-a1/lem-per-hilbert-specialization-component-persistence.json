@@ -1,0 +1,272 @@
+{
+ "id": "lem-per-hilbert-specialization-component-persistence",
+ "kind": "statement",
+ "title": "Equal extended colengths under specialization preserve components",
+ "statement": "Let $X$ be a scheme of finite type over $\\mathbf Q$, locally closed in a smooth finite-type $\\mathbf Q$-scheme; no reducedness is assumed [def-weil-finite-type-morphism] [def-weil-closed-immersion] [def-sbc-smooth-morphisms]. For $u\\in X$ define $h_{X,u}(n)=\\operatorname{length}(\\mathcal O_{X,u}/\\mathfrak m_u^{n+1})$, $t_u=\\operatorname{trdeg}_{\\mathbf Q}\\kappa(u)$, $\\Lambda f(n)=\\sum_{i=0}^n f(i)$, and $H_X(u)=\\Lambda^{t_u}h_{X,u}$ [def-weil-pbc-module-length] [def-kun-transcendence-degree] [def-weil-residue-field]. Irreducible components and their dimensions refer to the underlying topological space [def-weil-irreducible-components] [def-kun-topological-krull-dimension]. Let $z,x\\in X$ with $x\\in\\overline{\\{z\\}}$. If $H_X(z)=H_X(x)$ as sequences, then an irreducible component of $X$ contains $x$ if and only if it contains $z$. In particular the sets $\\{\\dim Z:x\\in Z,\\ Z\\text{ an irreducible component of }X\\}$ and $\\{\\dim Z:z\\in Z,\\ Z\\text{ an irreducible component of }X\\}$ coincide. This concerns actual components through comparable points, not recovery of component dimensions from the Hilbert--Samuel sequence of an arbitrary unrelated local ring.",
+ "source": {
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-module-length",
+  "def-kun-transcendence-degree",
+  "def-weil-residue-field",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension",
+  "def-trf-hilbert-samuel-invariant"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-type-over-noetherian], $X$ is Noetherian (a field is Noetherian since its only ideals are zero and the unit ideal). By [lem-weil-pbc-noetherian-finitely-many-components], its components form a finite family. Let $U$ be the complement of the union of those components which do not contain $z$. Thus $z\\in U$. The inclusion $j:U\\hookrightarrow X$ is quasi-compact by [lem-sfb-noetherian-open-immersion-qc], and is quasi-separated: its diagonal is an isomorphism. Form $Y=\\operatorname{SIm}(j)$ with ideal sheaf $\\mathcal I$. By [lemma-nagata-scheme-image-ideal-qc], $\\mathcal I$ is quasi-coherent and $|Y|=\\overline U$. By [lemma-nagata-scheme-image-restrict-open], its restriction to $U$ is the image of the identity of $U$; by [lemma-nagata-scheme-image-of-closed-immersion] that image is $U$. Hence $Y|_U=U$ as schemes, so $\\mathcal I_z=0$ and $H_Y(z)=H_X(z)$. Also $x\\in|Y|$, since $z\\in U$ and $x\\in\\overline{\\{z\\}}$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lemma-nagata-scheme-image-of-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8, lemma-quasi-compact-scheme-theoretic-image; properties.tex Tags 01OX and 0BA8. Agent choice of the component-complement open."
+   }
+  },
+  {
+   "text": "The closed subscheme $Y$ is of finite type over $\\mathbf Q$: restrict a finite affine finite-type cover of $X$; by [def-weil-closed-immersion] its inverse images have coordinate rings $A/J$, which are generated over $\\mathbf Q$ by the images of any generators of $A$. Its locally closed embedding in the given smooth envelope is obtained by adding $J$ to the equations of $X$ on the same open envelope. Thus [lem-per-scheme-hilbert-samuel-test-presentations] applies to $Y$, including its nilpotents. Its closed upper level sets imply\n$$H_Y(z)\\le_{\\mathrm{lex}}H_Y(x).$$\nIndeed the closed upper level set for the value $H_Y(z)$ contains $z$, hence its closure and $x$. We use only the semicontinuity assertion of the cited node, not its presentations or blowup assertions.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-per-scheme-hilbert-samuel-test-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Section 6.1, extended function and upper semicontinuity; Section 6.3 and Remark 6.2 motivate the component-profile argument. Agent application to a schematic closure."
+   }
+  },
+  {
+   "text": "Put $R=\\mathcal O_{X,x}$, $\\mathfrak m=\\mathfrak m_x$ and $I=\\mathcal I_x$. Then $\\mathcal O_{Y,x}=R/I$ by the local quotient description of [def-weil-closed-immersion], and $I\\subseteq\\mathfrak m$. The ring $R$ is Noetherian: choose a Noetherian affine chart around $x$ in the locally Noetherian covering supplied in Step 1 and use [lem-weil-pbc-localization-noetherian] at the prime of $x$. By [lem-trf-maximal-adic-graded-length-bridge], each $R/\\mathfrak m^{n+1}$ has finite length. Apply [lem-weil-pbc-length-additive-short-exact] to the surjection\n$$R/\\mathfrak m^{n+1}\\twoheadrightarrow R/(I+\\mathfrak m^{n+1}).$$\nThe target is $(R/I)/(\\mathfrak m/I)^{n+1}$ and its submodules over $R$ are exactly its submodules over $R/I$, since the action factors through that surjection. Thus $h_{Y,x}(n)\\le h_{X,x}(n)$ for every $n$. The residue fields at $x$ coincide. Iterated finite summation preserves pointwise inequalities, so $H_Y(x)\\le H_X(x)$ pointwise, hence lexicographically. With Step 2 and the assumed equality this gives\n$$H_X(z)=H_Y(z)\\le_{\\mathrm{lex}}H_Y(x)\\le_{\\mathrm{lex}}H_X(x)=H_X(z).$$\nConsequently $H_Y(x)=H_X(x)$ as sequences.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-trf-maximal-adic-graded-length-bridge",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00IV (lemma-length-additive); power-filtration discussion preceding proposition-hilbert-function-polynomial, Tag 00K8. Agent quotient comparison."
+   }
+  },
+  {
+   "text": "Finite differences undo summation: for a sequence $f$, $\\Lambda f(0)=f(0)$ and $\\Lambda f(n+1)-\\Lambda f(n)=f(n+1)$. Applying this operation $t_x$ times to Step 3 gives $h_{Y,x}=h_{X,x}$. In the short exact sequence\n$$0\\longrightarrow (I+\\mathfrak m^{n+1})/\\mathfrak m^{n+1}\\longrightarrow R/\\mathfrak m^{n+1}\\longrightarrow R/(I+\\mathfrak m^{n+1})\\longrightarrow0,$$\n[lem-weil-pbc-length-additive-short-exact] and equality of the finite lengths force the first term to have length zero. A nonzero module has the strict chain $0\\subsetneq M$, so has length at least one by [def-weil-pbc-module-length]. Hence $I\\subseteq\\mathfrak m^{n+1}$ for every $n$. Apply [lem-weil-pbc-krull-intersection-jacobson] with the Noetherian local ring $R$, ideal $\\mathfrak m$ (its Jacobson radical), and cyclic finite module $R$. It gives $I\\subseteq\\bigcap_{n\\ge0}\\mathfrak m^n=0$. Thus $I=0$.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact",
+    "def-weil-pbc-module-length",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IV (lemma-length-additive), 02LY (definition-length), 00IQ (lemma-intersection-powers-ideal-module), part (2). Agent finite-difference cancellation."
+   }
+  },
+  {
+   "text": "The equality $\\mathcal I_x=0$ gives an open neighbourhood $V$ of $x$ on which $\\mathcal I=0$. Explicitly, on a Noetherian affine chart $\\operatorname{Spec}A$ at $x$, the quasi-coherent ideal corresponds to an ideal $J\\subseteq A$, with finite generators $a_1,\\ldots,a_r$. If $\\mathfrak p$ represents $x$, the equality $J_{\\mathfrak p}=0$ supplies $s_i\\notin\\mathfrak p$ with $s_i a_i=0$. For $s=\\prod_i s_i$ (the empty product is $1$), $J_s=0$; take $V=D(s)$. Thus $V\\subseteq|Y|=\\overline U$. Every component meeting $U$ contains $z$, because $U$ avoids every other component. Therefore $U$ is contained in the union of the components containing $z$. That union is closed since there are finitely many components, so $\\overline U$ is contained in it as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent finite-generation and localization argument following Tag 01R8; uses the quasi-coherent ideal and finite component family established in Step 1."
+   }
+  },
+  {
+   "text": "Let $Z$ be any irreducible component containing $x$. The nonempty open subset $V\\cap Z$ is dense in $Z$: otherwise its closure and its closed complement would express $Z$ as a union of two proper closed subsets, contradicting irreducibility. By Step 5, $V\\cap Z$ lies in the finite union of components containing $z$, so its closure $Z$ lies in that union. An irreducible set contained in a finite union of closed sets is contained in one of them (apply the definition of irreducibility repeatedly). Maximality of irreducible components forces $Z$ to equal that component. Hence $z\\in Z$. Conversely any component containing $z$ is closed and therefore contains $\\overline{\\{z\\}}$, in particular $x$. The component families through $x$ and $z$ are equal, so taking the dimensions of their members gives exactly the asserted equality of sets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Section 6.3 and Remark 6.2: agent-written specialization argument completing the component-profile correction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "def-weil-closed-immersion",
+  "lem-per-scheme-hilbert-samuel-test-presentations",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "lem-weil-pbc-length-additive-short-exact",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "Sections 6.1 and 6.3, Remark 6.2; explicit schematic-closure, quotient-length and Krull-intersection argument supplied by Q66. Online https://arxiv.org/html/0905.3580v1 read; archival PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-per-hilbert-specialization-component-persistence: constant Hilbert Samuel strata cannot cross the arrival of a new irreducible component, even for schemes with nilpotents",
+   "results": "{\"t\": \"2026-10-24T07:08:44Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-hilbert-specialization-component-persistence: constant Hilbert Samuel strata cannot cross the arrival of a new irreducible component, even for schemes with nilpotents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isClosed_image_of_stableUnderSpecialization\", \"PrimeSpectrum.stableUnderSpecialization_range_iff\", \"PrimeSpectrum.isClosed_range_of_stableUnderSpecialization\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible\", \"Module.stableUnderSpecialization_support\", \"StableUnderSpecialization\", \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_assoc\"], \"digest\": \"05a02091e5f0e537\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-hilbert-specialization-component-persistence: equality of extended Hilbert Samuel functions at two specializing points of an arbitrary nonreduced finite type rational scheme forces the same irreducible components through them",
+   "results": "{\"t\": \"2026-10-24T07:08:48Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-hilbert-specialization-component-persistence: equality of extended Hilbert Samuel functions at two specializing points of an arbitrary nonreduced finite type rational scheme forces the same irreducible components through them\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.le_iff_specializes\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply\"], \"digest\": \"a47b9f1841651cdd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-hilbert-specialization-component-persistence: a proper schematic closure of an open subscheme strictly lowers local colength at a point of an omitted component",
+   "results": "{\"t\": \"2026-10-24T07:08:49Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-hilbert-specialization-component-persistence: a proper schematic closure of an open subscheme strictly lowers local colength at a point of an omitted component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.le_iff_specializes\", \"AlgebraicGeometry.Scheme.IdealSheafData.strictMono_ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_antitone\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\"], \"digest\": \"9f60e0c97cef32ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "{\"t\": \"2026-10-24T07:08:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|hilbertSamuel|component.*speciali",
+   "results": "{\"t\": \"2026-10-24T07:08:43Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|hilbertSamuel|component.*speciali\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/SimpleGraph/Connectivity/Connected.lean\", \"Mathlib/Combinatorics/SimpleGraph/Ends/Defs.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"f24986b19cf2a368\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|hilbertSamuel|component.*speciali",
+   "results": "{\"t\": \"2026-10-24T07:53:02Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|hilbertSamuel|component.*speciali\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/Combinatorics/SimpleGraph/Connectivity/Connected.lean\", \"Mathlib/Combinatorics/SimpleGraph/Ends/Defs.lean\"], \"digest\": \"1a376c1ac73e3cf6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; specialization maps, module support, generic points and equality of germs do not compare Hilbert--Samuel functions or force retention of components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert Samuel function equality under specialization preserves irreducible components",
+   "results": "{\"t\": \"2026-10-24T07:53:02Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert Samuel function equality under specialization preserves irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.stableUnderSpecialization_support\", \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"PrimeSpectrum.isClosed_image_of_stableUnderSpecialization\", \"PrimeSpectrum.localizationMapOfSpecializes\", \"PrimeSpectrum.stableUnderSpecialization_range_iff\", \"PrimeSpectrum.stableUnderSpecialization_image_iff\", \"StableUnderSpecialization\", \"PrimeSpectrum.localizationMapOfSpecializes.congr_simp\"], \"digest\": \"09696e70b8e2598a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; specialization maps, module support, generic points and equality of germs do not compare Hilbert--Samuel functions or force retention of components."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Samuel\"",
+   "results": "{\"t\": \"2026-10-24T07:53:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"Samuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; specialization maps, module support, generic points and equality of germs do not compare Hilbert--Samuel functions or force retention of components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-hilbert-specialization-component-persistence: equal extended Hilbert Samuel functions at specializing points force the same irreducible components through the points",
+   "results": "{\"t\": \"2026-10-24T07:53:05Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-hilbert-specialization-component-persistence: equal extended Hilbert Samuel functions at specializing points force the same irreducible components through the points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.specializes_closedPoint\", \"AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply\", \"AlgebraicGeometry.Scheme.le_iff_specializes\", \"Module.stableUnderSpecialization_support\", \"PrimeSpectrum.quasiSober\", \"genericPoints.component_ofComponent\", \"PrimeSpectrum.stableUnderSpecialization_singleton\", \"genericPoint_specializes\"], \"digest\": \"fc9981bd3be474e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; specialization maps, module support, generic points and equality of germs do not compare Hilbert--Samuel functions or force retention of components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic closure of an open subset and equality of all local quotient colengths imply equality of local rings",
+   "results": "{\"t\": \"2026-10-24T07:53:06Z\", \"tool\": \"leanfinder\", \"query\": \"Schematic closure of an open subset and equality of all local quotient colengths imply equality of local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.IsAffineOpen.ideal_ext_iff\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\"], \"digest\": \"47249d923e822bff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; specialization maps, module support, generic points and equality of germs do not compare Hilbert--Samuel functions or force retention of components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-scheme-normalized-hilbert-head",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-resolution branch: BMT §6.3 and Remark 6.2, component-profile constancy inside an extended-Hilbert--Samuel stratum; specialization subargument.",
+   "via": [
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-hilbert-specialization-component-persistence",
+  "worker": "stage1",
+  "summary": "Preserved the entire nonreduced statement. Reused existing semicontinuity, schematic-image, finite-colength, length-additivity and Krull-intersection statements; proved component persistence by schematic closure of the complement of components not containing z. No new nodes. Searched the current project Lean, entire DAG and blueprint; no attachment or exact existing statement. All cited statements were read and verbatim quotations recorded.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3 duality branch, through the recorded regular-resolution chain: BMT section 6.3 component-profile constancy in the extended Hilbert--Samuel stratum. This supplies the specialization subargument isolated by lem-per-scheme-normalized-hilbert-head.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-scheme-image-restrict-open",
+    "why": "Generic restriction of a quasi-compact schematic image to an open, needed to identify Y with U near z; the unit supplies no schematic-image lemma."
+   },
+   {
+    "node": "lem-trf-maximal-adic-graded-length-bridge",
+    "why": "Only the finite length of maximal-adic quotients of a Noetherian local ring is used; this is a commutative-algebra tool, not the other unit's resolution route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-scheme-image-restrict-open",
+  "lem-trf-maximal-adic-graded-length-bridge"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-26de368e0",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-26de368e0 (reviewer sub-agent of L); spot-checked: Read the item and its report in full; the delivery has no new nodes. The statement is unchanged and true. Checked on Spec Q[u,v]/(uv): branch generic point H=n+1, origin H=2n+1, so the hypothesis correctly fails; also checked a smooth line, x=z and a nilpotent point. Steps checked against the cited statements. Step 1: X Noetherian with finitely many components; j is qc (Noetherian) and qs (monomorphism); Y=SIm(j) has |Y|=closure(U), as in Stacks 01R8 (morphisms lemma-quasi-compact-scheme-theoretic-image); restrict-open with W=U plus the closed-immersion image node give Y|_U=U, so I_z=0. Step 2: Y is finite type and locally closed in the same envelope; the 'closed upper level sets for lexicographic order' clause of test-presentations gives H_Y(z)<=lex H_Y(x). Step 3: R=O_{X,x} Noetherian (localization); the bridge gives finite length of R/m^{n+1}; length additivity gives h_Y<=h_X; residue fields agree; the lex chain closes. Step 4: Λ is injective, so the kernel has length 0, I is in every m^{n+1}, and Krull intersection (R local, m = Jacobson radical, M=R) gives I=0. Steps 5-6 (elementary, correct): I=0 near x, so D(s) is in closure(U), which lies in the finite union of components through z; irreducibility and maximality do the rest. Duplicate search: lem-trf-hilbert-samuel-equality-component-rigidity and lem-per-hilbert-test-component-retention are blowup statements, not this one. Tool uses accepted (restrict-open, maximal-adic bridge: generic). Batch 5: test-presentations is already cited by the parent normalized-head on the base, and its closure has no trf/pod theorem, assumption leaf or trace-transport node (only trf definitions and resolution lemmas). The bridge is pure commutative algebra (finite length of R/m^n) that neither assumption gives; its 12-node closure reaches nothing of either proof. Both are outside the assumed statements. No cycle. BMT PDF is WANTED; the proof is correctly marked agent-written. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertSpecializationComponentPersistence",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.components_eq_of_function_eq_specialization",
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertSpecializationComponentPersistence.lean",
+  "statement": "theorem components_eq_of_function_eq_specialization {X Z : Scheme.{u}} (p : Z ⟶ Spec (.of (ULift.{u} ℚ))) (i : X ⟶ Z) [Smooth p] [QuasiCompact p] [IsImmersion i] [QuasiCompact (i ≫ p)] (z x : X) (hspecializes : x ∈ closure ({z} : Set X)) (heq : function (i ≫ p) z = function (i ≫ p) x) : (∀ C : Set X, C ∈ irreducibleComponents X → (x ∈ C ↔ z ∈ C)) ∧ {d : WithBot ℕ∞ | ∃ C : Set X, C ∈ irreducibleComponents X ∧ x ∈ C ∧ topologicalKrullDim C = d} = {d : WithBot ℕ∞ | ∃ C : Set X, C ∈ irreducibleComponents X ∧ z ∈ C ∧ topologicalKrullDim C = d}",
+  "branch": "sheaf-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a78b817ad",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Only lean (new, existing:false) and stmt_deps (+def-trf-hilbert-samuel-invariant, a landed def) differ from live; the 9 dep records are byte-identical. Hypotheses: Smooth+QuasiCompact p over ULift Q, IsImmersion i, QuasiCompact (i≫p) = X finite type, locally closed in smooth finite-type Z, no reducedness, not stronger. H_X = landed HilbertSamuel.function (Λ^trdeg of the n+1 colength, residue algebra from i≫p). x∈closure{z}, full sequence equality, iff on irreducibleComponents and equal topologicalKrullDim sets: all clauses present. lean.statement verbatim. Only sorry, no defs, docstrings with source, blueprint and 6 steps, both report sections. No duplicate (modifiedHead_properties and EqualityComponentRigidity differ). Edge cases z=x, empty X, t=0, nilpotents fine. No compile (no FIX). Advisory: statement text does not cite the new def stmt_dep."
+ }
+}

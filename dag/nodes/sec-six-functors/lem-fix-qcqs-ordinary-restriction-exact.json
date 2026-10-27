@@ -1,0 +1,133 @@
+{
+ "id": "lem-fix-qcqs-ordinary-restriction-exact",
+ "kind": "statement",
+ "title": "Limit preservation and coefficient identification for ordinary qcqs restriction",
+ "statement": "Fix a prime ell and a finite coefficient extension E [def-weil-l-adic-coefficient-extension], and qcqs schemes S,V,T [def-pc-scheme, def-weil-quasi-separated-morphism]. For a weakly etale s:S->V and an immersion i:V->T, put r=s followed by i. With the actual ordinary pullback and completed coefficient map of [def-fix-qcqs-completion-ordinary-models], using independent scheme and coefficient universes, ordinaryPull preserves limits indexed by categories with objects and morphisms in Type 0 and ordinaryCoefficientMap is invertible. The completed rings are those of [def-weil-completed-integral-coefficients].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AA, lemma-closed-immersion, clause (1); Tag 09BL, lemma-closed-immersion-affines-apply; weakly etale slice restriction in Tag 09AE, definition-extension-zero; Bhatt–Scholze Lemma 6.5.8(1). Tensor comparison: sites-cohomology.tex Tags 06YY, lemma-derived-base-change, and 07A4, lemma-pullback-tensor-product."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-pur-integral-derived-operations",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the independent-universe immersion ring/abelian limit theorem. For the weakly etale map, map on pro-etale objects is left adjoint to base change; the induced sheaf adjunction identifies inverse image with sectionwise restriction, which preserves limits. Compose with immersion inverse image using uniqueness of left adjoints and the actual base-change composition isomorphism.",
+   "uses": [
+    "lem-fix-proetale-immersion-algebraic-limits-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the adjunct of the ordinary finite constant-section map with the constant-sheaf adjunction comparison. Forgetting commutative rings commutes with constant sheafification; its unit equation proves that this is the specified map. It is invertible and natural for the quotient transition. Thus its components give a natural isomorphism of the pulled-back quotient system with the source quotient system. Preservation of the inverse limit supplies an isomorphism of cone points. Transpose the defining finite projection equations of ordinaryCompletedRingMap through its adjunction and use limit.hom_ext to identify that isomorphism with ordinaryCoefficientMap.",
+   "uses": [
+    "def-fix-qcqs-completion-ordinary-models",
+    "lem-fix-qcqs-ordinary-finite-coefficient-isos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the arbitrary-ring module/abelian pullback comparison to the now invertible completed coefficient map. Forgetting module structure preserves and reflects limits. The underlying comparison and abelian inverse-image limit preservation transfer the limit property to ordinaryPull. Pair it with the coefficient isomorphism.",
+   "uses": [
+    "lem-fix-proetale-ringed-pullback-underlying-universes",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "lem-fix-proetale-immersion-algebraic-limits-universes",
+  "lem-fix-proetale-ringed-pullback-underlying-universes",
+  "lem-fix-qcqs-ordinary-finite-coefficient-isos",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA and 09BL; sites-modules.tex, Tags 03D2 and 03D3; explicit constant-section adjunction and inverse-limit comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An inverse image functor along a locally closed immersion of pro etale topoi preserves all limits and the completed integral coefficient sheaf",
+   "results": "Functor.sheafPullbackConstruction.preservesFiniteLimits, presheaf module sheafification left exactness, sheafToPresheaf limit preservation; no pro-etale immersion/all-limit coefficient result.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib theorem; the project immersion and slice-restriction results need independent-universe transport and identification of the fixed adjoints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along a locally closed immersion on the small pro etale site preserves arbitrary limits",
+   "results": "Open-immersion forgetful-functor pullback preservation; no pro-etale all-limit inverse-image theorem.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match for the statement in the fixed ordinary models."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale.*immersion|completed.*coefficient.*pullback",
+   "results": "msearch grep returned zero hits. Local source and blueprint searches found the project same-universe ProEtaleImmersionLimitPreservation and no independent-universe ordinary-model statement.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of either independent-universe ordinary restriction interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsOrdinaryRestrictionModels",
+  "date": "2026-10-27",
+  "group": "D9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.; Step 1: geometric inverse image, completed coefficient identification and module limits",
+   "via": [
+    "lem-fix-qcqs-ordinary-restriction-models",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsOrdinaryRestrictionExact",
+  "file": "lean/Sheaf/Paper/QcqsOrdinaryRestrictionExact.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.qcqsOrdinaryRestrictionExact",
+  "statement": "theorem qcqsOrdinaryRestrictionExact\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {S V T : Scheme.{t}} [CompactSpace S] [QuasiSeparatedSpace S]\n    [CompactSpace V] [QuasiSeparatedSpace V] [CompactSpace T] [QuasiSeparatedSpace T]\n    (s : S ⟶ V) (i : V ⟶ T) [WeaklyEtale s] [IsImmersion i] :\n    PreservesLimitsOfSize.{0, 0} (ordinaryPull l E (s ≫ i)) ∧\n    IsIso (ordinaryCoefficientMap l E (s ≫ i))",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T222619-L-674254",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T012936-L-2350264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

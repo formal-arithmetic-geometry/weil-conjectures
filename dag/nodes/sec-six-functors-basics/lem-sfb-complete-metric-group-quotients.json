@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-complete-metric-group-quotients",
+ "kind": "statement",
+ "title": "Complete metric abelian groups are reconstructed from shrinking open-subgroup quotients",
+ "statement": "Let $G$ be an abelian group with a complete translation-invariant metric $d$, so $d(x+z,y+z)=d(x,y)$ and every Cauchy sequence converges, and assume addition and negation are continuous. Let $(U_n)_{n\\geq1}$ be additive subgroups, open for the metric topology, with $U_{n+1}\\subseteq U_n$. Suppose that for every real $\\epsilon>0$ there is $N\\geq1$ such that $d(u,0)<\\epsilon$ for all $u\\in U_N$. Give $G/U_n$ the discrete topology, let $q_n:G\\to G/U_n$ be the quotient homomorphism, and let $t_n:G/U_{n+1}\\to G/U_n$ be the quotient transition. Put\n$$H=\\{(a_n)\\in\\prod_{n\\geq1}G/U_n:t_n(a_{n+1})=a_n\\text{ for all }n\\},$$\nwith coordinatewise addition and the subspace topology [def-kun-subspace-topology] of the product. Then $q:G\\to H$, $x\\mapsto(q_n(x))_n$, is an isomorphism of groups and a homeomorphism. For every topological space $S$, writing $C(S,D)$ for continuous maps with pointwise group operations, the quotient maps induce a group isomorphism\n$$C(S,G)\\xrightarrow{\\sim}\\{(a_n)\\in\\prod_{n\\geq1}C(S,G/U_n):t_n\\circ a_{n+1}=a_n\\text{ for all }n\\}.$$\nThese isomorphisms commute with precomposition by every continuous map $S'\\to S$ and with the displayed quotient projections. Neither compactness of $G$ nor finiteness of $G/U_n$ is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), proof, continuous-function inverse-limit identity; agent-formulated general metric-group reconstruction underlying that identity. The complete Cauchy-sequence argument is retained in the worker report; the paper states the finite-extension application, not this general formulation."
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof": [
+  {
+   "text": "Each $t_n$ is a homomorphism, so the compatibility equations defining $H$ are preserved by addition, zero and negation. Thus $H$ is a subgroup of the product. Since $t_nq_{n+1}=q_n$, the map $q$ takes values in $H$, and $q(x+y)=q(x)+q(y)$ holds coordinatewise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; agent-written general metric-group argument, expanded from coord/reports/Q120/lem-sfb-complete-norm-open-test.md, Source readings and retained argument."
+   }
+  },
+  {
+   "text": "If $q(x)=q(y)$, then $x-y\\in U_n$ for every $n$. Given $\\epsilon>0$, choose $N$ by shrinking. Translation invariance gives $d(x,y)=d(x-y,0)<\\epsilon$. If $x\\ne y$, choosing $\\epsilon=d(x,y)>0$ contradicts this strict inequality. Hence $q$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; agent-written general metric-group argument, expanded from coord/reports/Q120/lem-sfb-complete-norm-open-test.md, Source readings and retained argument."
+   }
+  },
+  {
+   "text": "Fix $a=(a_n)\\in H$ and choose representatives $x_n\\in G$ with $q_n(x_n)=a_n$. For $m\\ge n$ one has $q_n(x_m)=a_n$: this holds for $m=n$; the induction step composes the quotient map $G/U_{m+1}\\to G/U_m$ with $G/U_m\\to G/U_n$ and uses $t_m(a_{m+1})=a_m$. Consequently $x_m-x_n\\in U_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; agent-written general metric-group argument, expanded from coord/reports/Q120/lem-sfb-complete-norm-open-test.md, Source readings and retained argument."
+   }
+  },
+  {
+   "text": "For $\\epsilon>0$, choose $N$ with $d(u,0)<\\epsilon$ on $U_N$. For $m,k\\ge N$, step 3 gives $x_m-x_N,x_k-x_N\\in U_N$, hence $x_m-x_k\\in U_N$ and $d(x_m,x_k)<\\epsilon$. This is precisely the Cauchy condition. The completeness assumed in the statement supplies $x\\in G$ with $x_m\\to x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; agent-written general metric-group argument, expanded from coord/reports/Q120/lem-sfb-complete-norm-open-test.md, Source readings and retained argument."
+   }
+  },
+  {
+   "text": "Fix n. The quotient projection q_n is continuous for the quotient topology, and G/U_n is discrete because U_n is open, hence Hausdorff. By step 3 the sequence q_n(x_m) is eventually the constant a_n. If x_m tends to x by step 4, continuity gives q_n(x_m) tending to q_n(x). Uniqueness of a limit in this discrete quotient gives q_n(x)=a_n. Thus x realizes all coordinates, proving surjectivity; step 2 proves independence of representatives.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; agent-written general metric-group argument, expanded from coord/reports/Q120/lem-sfb-complete-norm-open-test.md, Source readings and retained argument."
+   }
+  },
+  {
+   "text": "Mathlib quotient projections are continuous. Their product q is continuous coordinatewise, and its factorization through H is continuous for the subtype topology [def-kun-subspace-topology]. Together with steps 2 and 5 this gives an additive equivalence e_0 whose forward map is continuous.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; agent-written general metric-group argument, expanded from coord/reports/Q120/lem-sfb-complete-norm-open-test.md, Source readings and retained argument."
+   }
+  },
+  {
+   "text": "Write $h=q^{-1}$ for the bijective inverse. Fix $a=q(x)\\in H$ and $\\epsilon>0$, and choose $N$ by shrinking. The cylinder $W=\\{b\\in H:b_N=a_N\\}$ is open in the subspace topology [def-kun-subspace-topology] and contains $a$. If $b\\in W$, then $h(b)-x\\in U_N$, so $d(h(b),x)<\\epsilon$. Thus $h$ is continuous at every $a$. Together with the preceding steps this proves that $q$ is a homeomorphism and a group isomorphism.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; agent-written general metric-group argument, expanded from coord/reports/Q120/lem-sfb-complete-norm-open-test.md, Source readings and retained argument."
+   }
+  },
+  {
+   "text": "For any topological space S, send f to its continuous quotient-coordinate maps. Conversely, a compatible family (a_n) defines the map A(s)=(a_n(s)) into H, continuous by coordinatewise continuity and the subtype topology [def-kun-subspace-topology]. The map e_0 inverse composed with A is continuous by step 7. The coordinate equations for e_0 and its two inverse identities show that these assignments are mutually inverse, also for the empty space.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; agent-written general metric-group argument, expanded from coord/reports/Q120/lem-sfb-complete-norm-open-test.md, Source readings and retained argument."
+   }
+  },
+  {
+   "text": "Pointwise sums and negatives of continuous maps to $G$ are continuous by the assumed continuity of addition and negation: locally choose neighborhoods of the two values whose sums lie in a prescribed open, and intersect their inverse images. The discrete quotients have the same property. For all $s\\in S$, $q_n(f(s)+g(s))=q_n(f(s))+q_n(g(s))$, so the bijection in step 8 is a group isomorphism. If $v:S\\prime\\to S$ is continuous, $q_n\\circ(f\\circ v)=(q_n\\circ f)\\circ v$; these identities give precomposition naturality and the required quotient-projection compatibility, also for the inverse by uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; agent-written general metric-group argument, expanded from coord/reports/Q120/lem-sfb-complete-norm-open-test.md, Source readings and retained argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), proof, printed p. 59: continuous-function inverse-limit identity; general metric-group argument from the retained Q120/Q88 plan, formalized by P3 on 2026-10-26. Step 5 uses continuity of quotient projections and uniqueness of limits in their discrete Hausdorff codomains in place of the explicit open-ball argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complete metric abelian group with a decreasing basis of open subgroups is homeomorphic to the inverse limit of its discrete quotient groups",
+   "results": "8 hits: ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, ProfiniteGrp.toLimit_fun, QuotientGroup.completeSpace', ProfiniteGrp.toLimit, InfiniteGalois.continuousMulEquivToLimit, AddCircle.isLocalHomeomorph_coe, UniformSpace.Completion.completionSeparationQuotientEquiv; digest 6141c38f739366e4",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(complete|Complete|[Ll]imit).*(openSubgroup|OpenSubgroup|OpenAddSubgroup)|(openSubgroup|OpenSubgroup|OpenAddSubgroup).*([Ll]imit|complete|Complete)",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete metric abelian group is the inverse limit of quotients by decreasing open subgroups whose diameters tend to zero",
+   "results": "8 hits: QuotientGroup.completeSpace', ProfiniteGrp.isIso_toLimit, QuotientAddGroup.completeSpace', AdicCompletion, QuotientGroup.completeSpace, Profinite.lim, QuotientAddGroup.completeSpace, Profinite.asLimit; digest b2da9ed9768cff1e",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuotientAddGroup\", \"limit\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complete metric additive commutative group with translation invariant metric and shrinking open subgroups the canonical quotient map to their inverse limit is a homeomorphism",
+   "results": "8 hits: AddCircle.isLocalHomeomorph_coe, UniformSpace.sepQuotHomeomorphRingQuot, QuotientGroup.completeSpace', AddCircle.homeomorphAddCircle, ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor, AddCircle.partialHomeomorphCoe, QuotientAddGroup.completeSpace', UniformSpace.Completion.completionSeparationQuotientEquiv; digest 37b8ff2a8b4e3472",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; adic completion assumes algebraic adic completeness; none gives metric reconstruction for possibly infinite discrete quotients or the derived open restriction assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(complete|Complete|[Ll]imit).*(OpenAddSubgroup|openAddSubgroup)|(OpenAddSubgroup|openAddSubgroup).*([Ll]imit|complete|Complete)",
+   "results": "0 hits: none; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; quotient completeness does not reconstruct G, and separating-coset or controlled-product results do not state this reconstruction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete metric additive group is the inverse limit of its discrete quotients by shrinking open subgroups",
+   "results": "8 hits: ProfiniteGrp.isIso_toLimit, ProfiniteAddGrp.noConfusionType, Profinite.asLimitConeIso, Profinite.isoAsLimitConeLift, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, Profinite.lim, Profinite.asLimit, QuotientGroup.completeSpace'; digest 1424ce59c82c8af9",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; quotient completeness does not reconstruct G, and separating-coset or controlled-product results do not state this reconstruction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuotientAddGroup\", \"limit\"",
+   "results": "0 hits: none; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; quotient completeness does not reconstruct G, and separating-coset or controlled-product results do not state this reconstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete metric abelian group is homeomorphic to the inverse limit of its discrete quotients by a decreasing sequence of open subgroups tending to zero",
+   "results": "8 hits: ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, ProfiniteAddGrp.coe_of, ProfiniteGrp.toLimit, QuotientGroup.completeSpace', QuotientAddGroup.completeSpace', ProfiniteGrp.toLimit_fun, QuotientAddGroup.completeSpace; digest 275728cc5f0ec8d4",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; quotient completeness does not reconstruct G, and separating-coset or controlled-product results do not state this reconstruction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMulEquivLimittoFiniteQuotientFunctor|isIso_toLimit|completeSpace\\x27",
+   "results": "4 hits: Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean; digest 02fe5e87c6014799",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; quotient completeness does not reconstruct G, and separating-coset or controlled-product results do not state this reconstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every coherent sequence of cosets of shrinking open additive subgroups of a complete metric group has a unique common representative",
+   "results": "8 hits: QuotientGroup.completeSpace', MeasureTheory.Measure.haar.addIndex_elim, MeasureTheory.Measure.haar.addIndex_defined, MeasureTheory.Measure.haar.index, NonarchimedeanAddGroup.exists_openAddSubgroup_separating, controlled_prod_of_mem_closure, NonarchimedeanGroup.exists_openSubgroup_separating, QuotientGroup.exists_norm_mk_lt; digest 0587bc7ae5a26968",
+   "date": "2026-10-22",
+   "verdict": "no match: profinite reconstruction requires compactness; quotient completeness does not reconstruct G, and separating-coset or controlled-product results do not state this reconstruction theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-norm-open-test",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), complete norm-coefficient test: the inverse-limit identity for the unit ball of a complete normed field, extending the finite-extension calculation of Bhatt--Scholze Lemma 6.8.2(1).",
+   "via": [
+    "lem-sfb-complete-norm-open-test",
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-complete-metric-group-quotients",
+  "worker": "stage1",
+  "summary": "Q88: retained the statement and expanded the parent report's reconstruction argument into nine elementary steps: compatible representatives, explicit Cauchy estimates, completeness as hypothesized, open-ball coset lifting, continuity in both directions, continuous maps and naturality. No new nodes or Mathlib match.",
+  "blueprint": "Inherited ancestry has from.node=null (confirmed by blueprint_refs ancestor); realizes paragraph (3) of main-20261015 direct-images proof through the existing complete-norm-open-test chain, specifically the continuous-function inverse-limit identity underlying Bhatt--Scholze 6.8.2(1). No route or unit change."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-d11bee43d",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-d11bee43d (reviewer sub-agent of L); spot-checked: I read the item in full: 9 steps, 0 new nodes, and the statement is unchanged from the node Q120 created. There is no repair note, so this is an ordinary first split. Source: Bhatt-Scholze Lemma 6.8.2(1), proof on printed p.59, the identity Map_cont(S,O_E)=lim Map_cont(S,O_E/ϖ^n). The item is an honestly agent-formulated generalization of it (proof_origin agent). The parent lem-sfb-complete-norm-open-test step 2 applies it to O with U_n=ℓ^nO, and the item's hypotheses and conclusion fit that use. The only citation is def-kun-subspace-topology, a Mathlib leaf saying opens of a subspace are V∩Y, which is exactly what steps 6-8 take from it; there is no off-unit statement and no SGA. Every step checks: (1) H is a subgroup and q is a homomorphism; (2) injectivity via translation invariance and ε=d(x,y); (3) an explicit induction gives x_m−x_n∈U_n; (4) the Cauchy estimate needs only subgroup closure, and completeness is a hypothesis; (5) the open ball inside U_n gives q_n(x)=a_n; (6) q is continuous through open cosets and finite cylinders; (7) the inverse is continuous through the cylinder b_N=a_N and shrinking; (8)-(9) the C(S,−) bijection, group structure and naturality. All steps are genuinely elementary. Edge cases hold: G=0, S=∅, discrete G with U_n=0, and noncompact ∏ℤ with infinite quotients ℤ^n. ℤ with 2-adic U_n and constant U_n=G show that completeness and shrinking are needed, and both are assumed. No duplicate: lem-sfb-integers-profinite-tower clause 1 is a compact special case, and the other candidates state different things. No product-topology definition node exists to cite (advisory). The Mathlib searches cover all three kinds. blueprint.from.node=null is inherited from the parent chain, a base-node fault. The only other issue is cosmetic: step 9 writes S\\prime. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.CompleteMetricGroupQuotients",
+  "declaration": "CompleteMetricGroupQuotients.reconstruction",
+  "declarations": [
+   "CompleteMetricGroupQuotients.transition",
+   "CompleteMetricGroupQuotients.compatibleSubgroup",
+   "CompleteMetricGroupQuotients.continuousCompatibleSubgroup",
+   "CompleteMetricGroupQuotients.reconstruction"
+  ],
+  "file": "lean/Sheaf/Topology/CompleteMetricGroupQuotients.lean",
+  "statement": "theorem reconstruction {G : Type u} [AddCommGroup G] [MetricSpace G] [CompleteSpace G] [IsTopologicalAddGroup G] (htranslation : ∀ x y z : G, dist (x + z) (y + z) = dist x y) (U : ℕ → OpenAddSubgroup G) (hU : ∀ n : ℕ, (U (n + 1)).toAddSubgroup ≤ (U n).toAddSubgroup) (hshrink : ∀ ε : ℝ, 0 < ε → ∃ N : ℕ, ∀ x : G, x ∈ U N → dist x 0 < ε) (S : Type v) [TopologicalSpace S] (S' : Type w) [TopologicalSpace S'] : ∃ e : G ≃ₜ+ compatibleSubgroup U hU, (∀ (x : G) (n : ℕ), (e x).val n = QuotientAddGroup.mk' (U n).toAddSubgroup x) ∧ ∃ E : C(S, G) ≃+ continuousCompatibleSubgroup U hU S, ∃ E' : C(S', G) ≃+ continuousCompatibleSubgroup U hU S', (∀ (f : C(S, G)) (n : ℕ) (s : S), (E f).val n s = QuotientAddGroup.mk' (U n).toAddSubgroup (f s)) ∧ (∀ (f : C(S', G)) (n : ℕ) (s : S'), (E' f).val n s = QuotientAddGroup.mk' (U n).toAddSubgroup (f s)) ∧ (∀ (a : C(S', S)) (f : C(S, G)) (n : ℕ), (E' (f.comp a)).val n = ((E f).val n).comp a)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three helper definitions are the canonical transition and the two compatible-family subgroups displayed in this node. Natural-number index n denotes the original positive index n+1. Quotient topologies are discrete by the OpenAddSubgroup quotient instance; subtype and product topologies are Mathlib instances."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8603cf95",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Node unchanged except the added lean field; lean.statement matches the file signature exactly; the report has both Worker report and Second reading sections. Each hypothesis matches the node and none is stronger: MetricSpace, CompleteSpace (same as Cauchy-sequence completeness for a metric), htranslation, IsTopologicalAddGroup, OpenAddSubgroup tower hU, hshrink; the index shift n -> n+1 is documented. Quotients are discrete by the Mathlib OpenSubgroup instance (line 283). The helpers transition (QuotientAddGroup.map of id), compatibleSubgroup (iInf of eqLocus) and continuousCompatibleSubgroup (pointwise comap) are canonical with real data. e : G ≃ₜ+ H and E, E' are each fixed by coordinate equations; naturality holds for every a : C(S',S); universes u, v, w are independent; no compactness or finiteness assumed. Edge cases hold: G=0, discrete G with U_n=0, empty S or S', a=id. No duplicate in lean/Sheaf, lean/WeilConjectures or Mathlib (only the profinite version). The sole dependency def-kun-subspace-topology is correct and sufficient. Proof is sorry with the 9 steps in the docstring. Not recompiled since no file changed; relied on the worker's compile. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T070448-L-3592492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

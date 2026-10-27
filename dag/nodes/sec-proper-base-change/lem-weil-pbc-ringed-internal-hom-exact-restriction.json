@@ -42,65 +42,12 @@
    }
   },
   {
-   "text": "We will use cones of K-injective representatives. If $g:J\\to I$ is a chain map with $J,I$ K-injective, then in the homotopy-category cone triangle $J\\to I\\to C(g)\\to J[1]$ [lem-pur-homotopy-category-triangulated], apply [lem-weil-pbc-hom-into-triangle-exact] to the rotated triangle and an acyclic complex $E$. The map $E\\to J[1]$ obtained from any $E\\to C(g)$ is zero, since $J[1]$ is K-injective [lem-weil-pbc-kinjective-shift, def-pur-kinjective-complex]. Exactness factors $E\\to C(g)$ through $I$, and that factor is zero for the same reason. Hence $\\operatorname{Hom}_{K(\\mathcal O)}(E,C(g))=0$, which is exactly K-injectivity of $C(g)$. This is the two-line representable-exactness argument of Stacks Tag 090X (lemma-triangle-K-injective), with all of its inputs already cited.",
+   "text": "Use the covariant and contravariant exactness components and pair their conclusions. Each component supplies a coherent integer shift structure and triangulatedness for the corresponding fixed-variable functor; the original theorem is precisely their conjunction.",
    "uses": [
-    "lem-pur-homotopy-category-triangulated",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-pbc-kinjective-shift",
-    "def-pur-kinjective-complex"
+    "lem-weil-pbc-ringed-internal-hom-covariant-exact",
+    "lem-weil-pbc-ringed-internal-hom-contravariant-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 090X (lemma-triangle-K-injective)"
-   }
-  },
-  {
-   "text": "For the first variable fix a K-injective $I$ representing $M$ [prop-pur-kinjective-resolutions-exist]. By the cone description of distinguished triangles [def-weil-abstract-derived-category], it suffices to start with $A\\xrightarrow{f}B\\to C(f)\\to A[1]$. Put $X=\\mathscr H(B,I)$, $Y=\\mathscr H(A,I)$, and $h=f^*:X\\to Y$. The graded splitting $C(f)=B\\oplus A[1]$ writes a degree-$n$ element of $\\mathscr H(C(f),I)$ as $(x,y)$ with $x\\in X^n$, $y\\in Y^{n-1}$. Substitution into the Hom differential [def-pur-hom-complex] gives $d(x,y)=(d_Xx,d_Yy+(-1)^{n+1}h(x))$. The invertible degreewise map $(x,y)\\mapsto((-1)^{n-1}y,x)$ identifies this with $C(h)[-1]$, whose differential is $(u,x)\\mapsto(-d_Yu-h(x),d_Xx)$. Its projection to $X$ is $x$, and the following map $X\\to Y$ is $h$, so the resulting triangle is the inverse rotation of the cone triangle of $h$. Its degree-$n$ boundary $Y\\to\\mathscr H(C(f),I)[1]$ is $y\\mapsto(0,(-1)^n y)$: precomposition with the original boundary $-p:C(f)\\to A[1]$ gives exactly this map after the source-shift comparison, whose degree-$r$ component is multiplication by $(-1)^r$ on $Y^{r-1}$. Cone triangles, their rotations and their localized images are distinguished [lem-pur-homotopy-category-triangulated, def-weil-triangulated-category]. Each Hom into $I$ computes derived Hom [def-pur-derived-internal-hom]; hence this is the required reversed triangle. This calculation uses a finite biproduct, with no exactness assumption on infinite products.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-weil-abstract-derived-category",
-    "def-pur-hom-complex",
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-triangulated-category",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated), first-variable termwise split cone calculation"
-   }
-  },
-  {
-   "text": "For a distinguished triangle in the second variable, choose K-injective representatives $J,I$ of its first two vertices [prop-pur-kinjective-resolutions-exist]. Its first morphism lifts to a chain map $g:J\\to I$ by [lem-weil-pbc-kinjective-hom-derived]. The localized cone triangle of $g$ and the given triangle complete the same first arrow; TR3 [def-weil-triangulated-category] gives a triangle morphism with identity first two components, and [lem-sf-triangle-morphism-iso] makes the third an isomorphism. The preceding step about K-injective cones shows that $C(g)$ is K-injective. For any complex $A$ representing the fixed first variable, [lem-sc-hom-complex-mapping-cone] gives $\\mathscr H(A,C(g))\\cong C(\\mathscr H(A,g))$. Under the standard finite-biproduct splitting the differential is $(x,y)\\mapsto(d x+\\mathscr H(A,g)y,-d y)$ [def-pur-hom-complex], so the inclusion, projection and signed target-shift boundary give the ordinary cone triangle. After localization it is distinguished [lem-pur-homotopy-category-triangulated]. All three targets are K-injective, so these Homs compute the derived Homs and their arrows [def-pur-derived-internal-hom]. This proves the covariant triangle assertion, and the triangle isomorphism just constructed transfers it to the given triangle.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso",
-    "lem-sc-hom-complex-mapping-cone",
-    "def-pur-hom-complex",
-    "lem-pur-homotopy-category-triangulated",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated), second-variable termwise split cone calculation"
-   }
-  },
-  {
-   "text": "The natural shift comparisons [lem-pur-derived-internal-hom-shift-left, lem-pur-derived-internal-hom-shift-right] are $H(P[m],Q)\\cong H(P,Q)[-m]$ and $H(P,Q[n])\\cong H(P,Q)[n]$. They supply the source and target shift identifications used in the two cone triangles above. Their differentials are the signed differentials of [def-pur-hom-complex]. Neither comparison requires boundedness, flatness or finite generation; neither did any of the preceding arguments.",
-   "uses": [
-    "lem-pur-derived-internal-hom-shift-left",
-    "lem-pur-derived-internal-hom-shift-right",
-    "def-pur-hom-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated), shift compatibility"
-   }
+   "elementary": true
   },
   {
    "text": "For the independent-universe normalized shifts, construct both chain reindexings directly from the fixed Hom product projections [lem-sc-hom-complex-projections, def-coef-hom-representative-evaluation]. The target reindexing is unsigned; the source reindexing multiplies degree k by (-1)^(s*k). Projection extensionality proves their chain identities, naturality, inverse identities, and the target shift zero/addition coherence. The ordinary-to-derived comparison is the fixed augmentation followed by the inverse localization factorization. Hom into K-injective complexes preserves quasi-isomorphisms [lem-pur-rhom-well-defined-universes], so that comparison is invertible on the K-injective subcategory. The inclusion of this subcategory followed by Q is a localization and an equivalence, by the existing Mathlib K-injective derivability structure. Descend target shift isomorphisms and their coherence through these localizations and then in the source variable. Descend the signed source shift in both variables through product localization. Naturality of the augmentation gives the exact normalization equations. Projection extensionality and essential surjectivity give uniqueness. For covariant exactness, construct Hom(L, cone(f)) as the cone of Hom(L,f) by the two finite-biproduct projections, verifying the differential and all three triangle arrows, including the target-shift boundary. Mathlib right-orthogonal closure shows the cone of a map between K-injectives is K-injective. Lift the first arrow of a distinguished triangle to that full subcategory; TR3 and the two-out-of-three isomorphism theorem identify its cone triangle with the given triangle. Transfer the ordinary cone comparison through the normalized augmentation, giving triangulatedness for the unique normalized target shift. These arguments allow separate object and morphism universes and use neither boundedness nor K-flatness. The local normalization predicates name homComplexπ directly, the same fixed projection as the coefficient projection from homComplex_exists. Specialize the abstract arguments directly to the native Hom functor, projections, and their law lemmas; no concrete proof-bearing data wrapper is unfolded.",
@@ -116,6 +63,13 @@
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tags 0A8X, 08JA and 08JC; derived.tex Tag 090X. Independent-universe normalized shifts and covariant exactness."
    }
+  },
+  {
+   "text": "For the normalized shift equations use the existing fixed ordinary-to-derived Hom comparison and augmentation, now shared independently of coefficient-duality compatibility. The declaration names, signatures and bodies are unchanged; the shift module imports this lower interface directly.",
+   "uses": [
+    "lem-sfb-ringed-site-ordinary-hom-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -130,25 +84,18 @@
   "def-pur-hom-complex",
   "def-pur-sheaf-hom",
   "lem-pur-kinjective-restrict-localized",
-  "lem-pur-homotopy-category-triangulated",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-kinjective-shift",
-  "def-pur-kinjective-complex",
-  "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sf-triangle-morphism-iso",
-  "lem-sc-hom-complex-mapping-cone",
-  "lem-pur-derived-internal-hom-shift-left",
-  "lem-pur-derived-internal-hom-shift-right",
+  "lem-weil-pbc-ringed-internal-hom-covariant-exact",
+  "lem-weil-pbc-ringed-internal-hom-contravariant-exact",
   "lem-sc-hom-complex-projections",
   "def-coef-hom-representative-evaluation",
-  "lem-pur-rhom-well-defined-universes"
+  "lem-pur-rhom-well-defined-universes",
+  "lem-sfb-ringed-site-ordinary-hom-comparison"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), 08JC (lemma-RHom-triangulated); cone closure: derived.tex Tag 090X (lemma-triangle-K-injective). The seven completed clauses use the existing chain currying theorem, concrete functorial flat and K-injective resolutions, product localization, and continuous/cocontinuous slice restriction. Independent-universe normalized shift clauses additionally use the fixed Hom projection API, localization of K-injectives, and the explicit cone-triangle comparison (S6). Existing clauses and their dependencies are retained."
+  "by": "agent",
+  "date": "2026-10-25",
+  "group": "H2",
+  "note": "Retain tensor adjunction and slice restriction. Decompose exactness into its two distinct cone-and-shift arguments; the Lean proof combines their conclusions without changing either fixed-variable functor."
  },
  "id": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
  "blueprint": {
@@ -350,7 +297,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-6b85405e2 (reviewer sub-agent of L); spot-checked: I read the full item, all six stmt_deps and 23 proof_deps statements, and Stacks sites-cohomology.tex 08J9 (l.8896-8931), 08JB (l.8934-8945), 08JC (l.8947-8962) and derived.tex 090X (l.9674-9685). The statement is unchanged and matches the sources: arbitrary small ringed site, commutative O, unbounded. This is not a target node, so the base-change and coefficient comparison does not apply. Step 1 follows the 08J9 proof: Hom(B,I) is K-injective (lem-pur-hom-kflat-into-kinjective), the chain-level currying is lem-sc-derived-hom-tensor-total, and naturality descends via K-flat representatives and lem-pur-rhom-well-defined; this is terse but at the source's level. Step 2: on each V->U both restricted Hom complexes have the same sections and differential, using exact restriction and lem-pur-kinjective-restrict-localized; successive restriction and naturality hold because the comparison is the identity. Step 3 is the 090X argument via hom-into-triangle-exact(ii) and kinjective-shift; correctly marked elementary. Step 4: I checked by hand the differential (d_X x, d_Y y+(-1)^{n+1}hx), that psi(x,y)=((-1)^{n-1}y,x) is a chain isomorphism onto C(h)[-1], and the boundary (0,(-1)^n y) with the source-shift sign (-1)^r. Step 5: I checked that Hom^n(A,C(g)) = Hom^n(A,I)+Hom^{n+1}(A,J) has differential (dx+g_*y,-dy), and that Hom(A,J[1]) = Hom(A,J)[1] with no sign; TR3, triangle-morphism-iso and the K-injective cone are used correctly. Step 6 cites the existing shift nodes with the right signs. Edge cases (one-point site with Z, f=0, f=id, negative n, zero complexes) hold. No new nodes, no cycle (DFS), and no duplicate: only the scheme-level specializations lem-sc-derived-internal-hom-adjunction and lem-sc-derived-internal-hom-restrict-open exist. Off-route statements are either declared, Lean-closed or Mathlib leaves. I accept the nine declared tool_uses: lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist, lem-sc-derived-hom-tensor-total, lem-pur-hom-kflat-into-kinjective, lem-pur-rhom-well-defined, lem-pur-kinjective-restrict-localized, lem-sc-hom-complex-mapping-cone, lem-pur-derived-internal-hom-shift-left, lem-pur-derived-internal-hom-shift-right. No SGA source is cited. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -387,12 +345,12 @@
   "note": "§1(B): the recorded signed calculus requires a SmallCategory with equal object and morphism universes. The small pro-etale site has object universe u+1 and morphism universe u. This module publicly reexports that entire interface and supplies the same Hom-complex shifts at independent object, morphism, coefficient and derived universes. Both shifts are uniquely specified through fixed Hom-product projections and the actual ordinary-to-derived augmentation, including arbitrary representative isomorphisms; the target shift has its exact triangle structure. No alternative Hom, arbitrary isomorphism or extra universe equality is used."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S6",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261020T221346-L-4177964",
+  "landing": "20261025T123034-L-1826410",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

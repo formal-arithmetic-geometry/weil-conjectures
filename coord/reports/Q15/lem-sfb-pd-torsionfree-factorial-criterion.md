@@ -1,0 +1,44 @@
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-pd-torsionfree-factorial-criterion.json`: split statement node, using the existing binomial and rationalization nodes.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-rational-ideal-divided-powers.json`: one Mathlib leaf, matched by `DividedPowers.RatAlgebra.dividedPowers`.
+- `citations.json`: verbatim statement quotes for every proof-step citation.
+
+## Attachments
+
+No exact sorry-free declaration in the project Lean source was found for the item. The existing `def-sfb-ordinary-divided-power-structure` defines the notion used by the item; it is cited rather than duplicated.
+
+## WANTED
+
+None. The Stacks Project source `literature/stacks-project/dpa.tex` is present.
+
+## Not duplicates
+
+- `lem-sfb-rational-ideal-divided-powers` vs `lem-sfb-pd-torsionfree-factorial-criterion`: the new node is the canonical construction for every ideal in a rational algebra, while the item is the generator divisibility criterion over an arbitrary torsion-free ring; the rational-algebra case is a separate pre-existing Mathlib construction, not a new unsplit lemma carrying the item's generator induction. The argument over torsion-free rings, including closure of factorial divisibility under sums, remains in the item.
+- `lem-sfb-pd-torsionfree-factorial-criterion` vs `lem-sfb-ordinary-pd-polynomial-extension`: the item constructs and characterizes divided powers on an existing ideal, whereas the existing node adjoins divided-power polynomial variables to an already divided-power ideal and proves a universal property.
+
+- `lem-sfb-rational-ideal-divided-powers` vs `def-sfb-ordinary-divided-power-structure`: the existing node defines the five axioms, whereas the new Mathlib leaf asserts existence and gives the factorial formula for every ideal in a rational algebra. The definition supplies no such existence assertion.
+
+## Source error
+
+None. Tag 07GM's wording is faithful: its generator criterion is exactly the item's hypothesis and conclusion. The proof's rational-algebra reduction is made explicit using the injective rationalization map.
+
+## What was checked
+
+I read the item source at Stacks Tag 07GM (`dpa.tex`, lemma-silly, parts (1)--(4)), the ordinary divided-power definition at Tag 07GL, the latest blueprint unit `sk-thm-sf-ctf-stability` and its direct-image proof, and the statements of every cited DAG node. The existing binomial node states the commutative-ring binomial expansion used in the generator induction. The existing rationalization node states injectivity of the canonical map from a torsion-free additive group into its tensor product with `Q`, exactly what the rational embedding step needs. The new Mathlib leaf states that every ideal in a commutative rational algebra has divided powers with value inverse factorial times the power; its recorded source is `Mathlib/RingTheory/DividedPowers/RatAlgebra.lean`, lines 268 and 283--284.
+
+Step 1 proves the factorial-divisibility property for all of `J`: it handles scalar multiples of generators, then sums using the cited binomial formula and the identity `choose(n,i) i! (n-i)! = n!`, and finally finite generator expressions. Step 2 checks factorial cancellation from the stated torsion-free hypothesis and defines the maps independently of choices. Step 3 forms `B = A ⊗_Z Q`, uses the cited injectivity, and applies the new rational-algebra leaf to the extended ideal `K = J B`; the displayed factorial equations identify the two operations after the rational scalar `1/n!`. Step 4 checks each of the five ordinary divided-power axioms after applying the injective map, using precisely the axioms in the cited definition and the rational leaf. Step 5 reproduces Tag 07GM's induction from the multiplication axiom, giving uniqueness and the prescribed generator values.
+
+I tested edge cases in the argument: `J=0` gives the zero operations, a singleton generator family gives the scalar-multiple and sum induction directly, and `n=1` gives `theta_1(x)=x`; the factorial-cancellation argument uses only positive factorials. I also checked that the extended ideal in the rationalization step is `J·B`, rather than incorrectly using the unit ideal. Mathlib searches were run with `msearch.py` and their actual hits are recorded in `searches.jsonl`; the new leaf has LeanSearch, LeanFinder, Loogle and grep records.
+
+## Review by Q15
+
+I checked the source and all five proof steps against Tag 07GM and Tag 07GL, opened each cited node, and verified that every quoted statement says exactly what its step takes. The only non-elementary citations are the commutative-ring binomial expansion, torsion-free rationalization injectivity, and rational-algebra divided powers; all are cited by node, with the latter isolated as a Mathlib leaf. The axioms, hypotheses, and uniqueness induction are written explicitly. No definition is hollow, no new node restates the item, and the new node's Mathlib status is supported by source lines 268 and 283--284. I corrected the rationalization step to use the extended ideal `J·B` and recorded the distinction in `## Not duplicates`.
+
+The existing item was unsplit, with an empty proof, and its earlier Mathlib searches were retained as evidence. I added searches under Q15, inspected `Basic.lean:213`, `Padic.lean:40`, and `RatAlgebra.lean:175,268,283,306`. The factorial identity assumes an existing structure; the nilpotent-ideal constructor assumes invertible factorials and nilpotence; the injective-map constructor assumes a structure on the ambient ideal and lifts of every operation. None alone gives factorial divisibility on all elements from divisibility on generators. The rational-algebra constructor and its value formula give precisely the new leaf, including in the zero ring: no nonzero-ring or characteristic-zero instance is added.
+
+Whole-DAG searches for tags 07GL/07GM, `RatAlgebra.dividedPowers`, `factorial_mul_dpow_eq_pow`, rational divided powers, and the proposed new id found the existing definition and the item but no rational-algebra existence node. Whole imported-blueprint searches (`blueprint_refs.py search`) for `divided power`, `factorial`, `07GM`, `rational algebra`, and `torsion-free` returned no exact statement. The broad `rational` search was also read for relevant matches. The project-source searches by blueprint id and by divided-power/factorial terminology found no exact project declaration, so no ATTACH is claimed. The current blueprint, through `literature/blueprint/latest`, gives the direct-image branch (3) already named by the item's inherited supporting chain. No level-one or level-two route is changed; this is the ordinary divided-power polynomial construction's algebra input. `blueprint_refs.py ancestor` returned `None`; I preserved that inherited null anchor and the full via chain, extending it by this item for the new node.
+
+The generic additive tool `lem-trf-torsionfree-rationalization-injective` is outside this unit, so it is declared in `split_report.tool_uses`: Tag 07GM proof (3) explicitly needs this injectivity; it replaces no step of the unit route. Binomial expansion is already a Mathlib leaf. The tensor-product ring multiplication and scalar map are written explicitly and checked on pure tensors; the ring laws follow from multiplication in A and Q and the defining bilinear relations. The axiom comparison takes x,y in J and a in A; their images and all positive divided powers lie in the extended ideal, so all rational divided-power axioms have their required membership hypotheses. For iteration the inner index is positive, exactly as required by the definition. Zeroth operations are interpreted in the ambient ring and are never asserted to lie in J.
+
+I checked B1--B10: the new leaf has a complete standalone statement, every nonbasic notion is defined inline or cites its definition, TeX is encoded once, source labels and tags agree with `tags/tags`, and the Mathlib match names both the construction and its formula with lines. C1--C8 were checked against the node statements: there is no uncited comparison, proof-only output, or cyclical citation, and the off-unit additive tool is declared. D1--D5 were checked by reading the binomial induction and the comparison: no part of the torsion-free generator argument was moved into an unsplit clone. E1--E7 were checked on the actual ring, ideal and indices. Empty generator sets give J=0; repeated or zero generators cause no change; infinite families are handled by finite expressions; the zero ring remains allowed. The rational leaf works with any ideal of any rational algebra, without nilpotence, a finite-generation hypothesis, or torsion-freeness as an extra input. Every proof step is shorter than 2000 characters. Nothing remains mathematically unfinished beyond the independently queued dependencies already present in the DAG.

@@ -36,11 +36,10 @@
  ],
  "proof": [
   {
-   "text": "*The family $C_T\\to T$.* Let $T$ be any $k$-scheme and $f_T:C_T=C\\times_kT\\to T$ the projection [def-pc-base-change]. Since $C$ is a smooth projective curve [def-pc-smooth-projective-curve], in particular a curve over $k$ smooth over $k$, the morphism $f_T$ is smooth of relative dimension $1$ by [lem-sc-curve-base-change-relative-dimension-one]. It is flat and locally of finite presentation, being smooth [lem-pc-smooth-flat]. It is proper: $C\\to\\operatorname{Spec}k$ is projective, hence proper [lem-pc-projective-proper], and properness is stable under base change [lem-pc-proper-base-change](1). A proper morphism is quasi-compact and separated, hence quasi-separated [def-weil-proper-morphism], so $f_T$ is of finite presentation (locally of finite presentation, quasi-compact and quasi-separated, [def-weil-scheme-morphism-properties]). We use this for $T=H_d$, $T=\\operatorname{Spec}\\kappa(t)$ and $T=\\operatorname{Spec}K$.",
+   "text": "The smooth-projective-curve instance gives SmoothOfRelativeDimension 1 f directly from the dimension-one integral curve and smoothness assumptions [def-pc-smooth-projective-curve]. Smooth relative dimension one is stable under base change, as used in IsHilbertSubscheme.isInvertible and abelClass_mem. Smoothness gives flatness and local finite presentation [lem-pc-smooth-flat]; projectivity gives properness [lem-pc-projective-proper], which is preserved by base change [lem-pc-proper-base-change], and hence quasi-compactness and separatedness [def-weil-proper-morphism, def-weil-scheme-morphism-properties].",
    "uses": [
     "def-pc-base-change",
     "def-pc-smooth-projective-curve",
-    "lem-sc-curve-base-change-relative-dimension-one",
     "lem-pc-smooth-flat",
     "lem-pc-projective-proper",
     "lem-pc-proper-base-change",
@@ -54,7 +53,7 @@
    }
   },
   {
-   "text": "*Clause 1.* Let $\\varphi:h_{H_d}\\xrightarrow{\\sim}\\operatorname{Hilb}^d_{C/k}$ be the representing isomorphism [def-pc-representable-functor] and $D_d:=\\varphi_{H_d}(\\mathrm{id}_{H_d})$. By the definition of the Hilbert functor [def-pc-hilb-functor], $D_d\\subset C_{H_d}$ is a closed subscheme with $D_d\\to H_d$ finite locally free of degree $d$ [def-pc-finite-locally-free]. By step 1, $C_{H_d}\\to H_d$ is smooth of relative dimension $1$, so [lem-pc-cartier-criterion], implication (1)$\\Rightarrow$(2), shows that $D_d$ is a relative effective Cartier divisor on $C_{H_d}/H_d$ [def-pc-relative-effective-cartier]: an effective Cartier divisor of $C_{H_d}$, flat over $H_d$. (For $d=0$, $D_d=\\emptyset$, whose ideal is $\\mathcal O_{C_{H_d}}$; the argument covers it.) Hence its ideal $\\mathcal I_{D_d}$ is an effective Cartier ideal and $\\mathcal O(D_d)=\\mathcal I_{D_d}^\\vee$ of [def-pc-divisor-line-bundle] is defined, and it is an invertible $\\mathcal O_{C_{H_d}}$-module by [lem-pc-divisor-line-bundle-invertible].",
+   "text": "*Clause 1.* Let $\\varphi:h_{H_d}\\xrightarrow{\\sim}\\operatorname{Hilb}^d_{C/k}$ be the representing isomorphism [def-pc-representable-functor] and $D_d:=\\varphi_{H_d}(\\mathrm{id}_{H_d})$. By the definition of the Hilbert functor [def-pc-hilb-functor], $D_d\\subset C_{H_d}$ is a closed subscheme with $D_d\\to H_d$ finite locally free of degree $d$ [def-pc-finite-locally-free]. By step 1, $C_{H_d}\\to H_d$ is smooth of relative dimension $1$, so [lem-pc-cartier-criterion], implication (1)$\\Rightarrow$(2), shows that $D_d$ is a relative effective Cartier divisor on $C_{H_d}/H_d$ [def-pc-relative-effective-cartier]: an effective Cartier divisor of $C_{H_d}$, flat over $H_d$. (For $d=0$, $D_d=\\emptyset$, whose ideal is $\\mathcal O_{C_{H_d}}$; the argument covers it.) Hence its ideal $\\mathcal I_{D_d}$ is an effective Cartier ideal and $\\mathcal O(D_d)=\\mathcal I_{D_d}^\\vee$ of [def-pc-divisor-line-bundle] is defined, and it is an invertible $\\mathcal O_{C_{H_d}}$-module by [lem-pc-divisor-line-bundle-invertible]. In Lean use D := eH.homEquiv (identity H). Its Hilbert condition gives D.2.isInvertible and D.2.2.1, hence the relative Cartier pair. Use abelClass f D for L, abelClassIso f D for its representative isomorphism, and D.2.isInvertible.isInvertible_dual_toModules for invertibility.",
    "uses": [
     "def-pc-representable-functor",
     "def-pc-hilb-functor",
@@ -71,7 +70,7 @@
    }
   },
   {
-   "text": "*The fibre of $\\mathcal O(D_d)$ at a point.* Let $t\\in H_d$, with residue field $\\kappa(t)$ (a field extension of $k$ through $H_d\\to\\operatorname{Spec}k$, [def-pc-field-extension]) and canonical morphism $\\iota_t:\\operatorname{Spec}\\kappa(t)\\to H_d$. The fibre product $C_{H_d}\\times_{H_d}\\operatorname{Spec}\\kappa(t)=(C\\times_kH_d)\\times_{H_d}\\operatorname{Spec}\\kappa(t)$ is $C_{\\kappa(t)}=C\\times_k\\operatorname{Spec}\\kappa(t)$ (pasting of fibre products, [def-pc-fibre-product]), and the pullback of $\\mathcal O(D_d)$ along the projection $\\iota_{t,C}:C_{\\kappa(t)}\\to C_{H_d}$ is the fibre $\\mathcal O(D_d)_t$ of [def-pd-fibrewise-degree]. By step 1, $C_{H_d}\\to H_d$ is flat of finite presentation, and by step 2 $D_d$ is a relative effective Cartier divisor on it; so [lem-pc-recd-pullback] with $g=\\iota_t$ gives: $D_t:=D_d\\times_{H_d}\\operatorname{Spec}\\kappa(t)$ is a relative effective Cartier divisor on $C_{\\kappa(t)}/\\kappa(t)$, in particular an effective Cartier divisor on $C_{\\kappa(t)}$ [def-pc-relative-effective-cartier], and $\\mathcal O_{C_{\\kappa(t)}}(D_t)\\cong\\iota_{t,C}^*\\mathcal O(D_d)=\\mathcal O(D_d)_t$. Moreover $D_t\\to\\operatorname{Spec}\\kappa(t)$ is the fibre of $D_d\\to H_d$ over $t$, so, $D_d\\to H_d$ being finite locally free of degree $d$, $\\dim_{\\kappa(t)}\\Gamma(D_t,\\mathcal O_{D_t})=d$ by [def-pc-finite-locally-free].",
+   "text": "*The fibre of $\\mathcal O(D_d)$ at a point.* Let $t\\in H_d$, with residue field $\\kappa(t)$ (a field extension of $k$ through $H_d\\to\\operatorname{Spec}k$, [def-pc-field-extension]) and canonical morphism $\\iota_t:\\operatorname{Spec}\\kappa(t)\\to H_d$. The fibre product $C_{H_d}\\times_{H_d}\\operatorname{Spec}\\kappa(t)=(C\\times_kH_d)\\times_{H_d}\\operatorname{Spec}\\kappa(t)$ is $C_{\\kappa(t)}=C\\times_k\\operatorname{Spec}\\kappa(t)$ (pasting of fibre products, [def-pc-fibre-product]), and the pullback of $\\mathcal O(D_d)$ along the projection $\\iota_{t,C}:C_{\\kappa(t)}\\to C_{H_d}$ is the fibre $\\mathcal O(D_d)_t$ of [def-pd-fibrewise-degree]. By step 1, $C_{H_d}\\to H_d$ is flat of finite presentation, and by step 2 $D_d$ is a relative effective Cartier divisor on it; so [lem-pc-recd-pullback] with $g=\\iota_t$ gives: $D_t:=D_d\\times_{H_d}\\operatorname{Spec}\\kappa(t)$ is a relative effective Cartier divisor on $C_{\\kappa(t)}/\\kappa(t)$, in particular an effective Cartier divisor on $C_{\\kappa(t)}$ [def-pc-relative-effective-cartier], and $\\mathcal O_{C_{\\kappa(t)}}(D_t)\\cong\\iota_{t,C}^*\\mathcal O(D_d)=\\mathcal O(D_d)_t$. Moreover $D_t\\to\\operatorname{Spec}\\kappa(t)$ is the fibre of $D_d\\to H_d$ over $t$, so, $D_d\\to H_d$ being finite locally free of degree $d$, $\\dim_{\\kappa(t)}\\Gamma(D_t,\\mathcal O_{D_t})=d$ by [def-pc-finite-locally-free]. These fibre comparisons are already proved in abelClass_mem, using the relative Cartier pullback theorem and the rank-versus-fibre-sections comparison.",
    "uses": [
     "def-pc-field-extension",
     "def-pc-fibre-product",
@@ -87,9 +86,8 @@
    }
   },
   {
-   "text": "*Clause 2: the fibrewise degree is $d$.* The scheme $C_{\\kappa(t)}$ is proper over $\\kappa(t)$ (step 1) and of dimension $1$ by [lem-pc-dim-base-change] ($C$ is a curve over $k$, $\\kappa(t)/k$ a field extension). $D_t$ is an effective Cartier divisor on it (step 3), so [lem-pc-degree-base-change](2) gives $\\deg\\mathcal O_{C_{\\kappa(t)}}(D_t)=\\dim_{\\kappa(t)}\\Gamma(D_t,\\mathcal O_{D_t})=d$, with $\\deg=\\chi(-)-\\chi(\\mathcal O)$ of [def-pc-degree-line-bundle]. Isomorphic invertible modules have the same Euler characteristic, so by step 3 and [def-pd-fibrewise-degree]\n$$\\deg_{H_d}(\\mathcal O(D_d))(t)=\\deg_{C_{\\kappa(t)}}(\\mathcal O(D_d)_t)=\\deg\\mathcal O_{C_{\\kappa(t)}}(D_t)=d$$\nfor every $t\\in H_d$.",
+   "text": "For every point t of H, use abelClass_mem f D and mem_picardSubfunctorDegree_iff to obtain picardPresheafDegree f (abelClass f D) t = d [def-pd-fibrewise-degree, def-pc-degree-line-bundle]. The existing proof of abelClass_mem restricts the dual ideal to the residue-field fibre, uses degree_dual_toModules [lem-pc-degree-base-change], and identifies the dimension of its sections with the Hilbert rank d. This does not require the separate field-extension Krull-dimension theorem.",
    "uses": [
-    "lem-pc-dim-base-change",
     "lem-pc-degree-base-change",
     "def-pc-degree-line-bundle",
     "def-pd-fibrewise-degree"
@@ -101,7 +99,7 @@
    }
   },
   {
-   "text": "*Definition of $\\gamma_d$.* The isomorphism class $[\\mathcal O(D_d)]\\in\\operatorname{Pic}(C_{H_d})$ is an element of the Picard presheaf at $H_d$ [def-pc-picard-presheaf]; let $c\\in\\operatorname{Pic}_{C/k}(H_d)$ be its image under the sheafification map [def-pc-picard-functor]. The degree of $c$ [def-pd-degree-morphism], computed with the trivial covering $\\{\\mathrm{id}_{H_d}\\}$ and the representative $\\mathcal O(D_d)$, is the function $t\\mapsto\\deg_{H_d}(\\mathcal O(D_d))(t)$, identically $d$ by step 4; so $c\\in\\operatorname{Pic}^d_{C/k}(H_d)$. With $\\psi:\\operatorname{Pic}^d_{C/k}\\xrightarrow{\\sim}h_{P_d}$ the representing isomorphism [def-pc-representable-functor], put $\\gamma_d:=\\psi_{H_d}(c)\\in\\operatorname{Hom}_k(H_d,P_d)$. This is the morphism of clause 2; equivalently, by the Yoneda lemma [lem-pc-yoneda], $\\gamma_d$ is the morphism $h_{H_d}\\to h_{P_d}$ given by $\\psi\\circ\\tau\\circ\\varphi^{-1}$, where $\\tau:h_{H_d}\\to\\operatorname{Pic}^d_{C/k}$ is the transformation corresponding to $c$.",
+   "text": "Let L := abelClass f D and hL := abelClass_mem f D. Let eta be toSheafify for the degree-d Picard subfunctor [def-pc-picard-presheaf, def-pc-picard-functor, def-pd-degree-morphism]. Define gamma := eP.homEquiv.symm (eta.app (op H) (L,hL)). Equiv.apply_symm_apply proves its representing equation [def-pc-representable-functor, lem-pc-yoneda].",
    "uses": [
     "def-pc-picard-presheaf",
     "def-pc-picard-functor",
@@ -116,7 +114,7 @@
    }
   },
   {
-   "text": "*The $K$-point $x$ and its divisor.* Let $K/k$ be a field extension and $x:\\operatorname{Spec}K\\to H_d$ a $k$-morphism. By the Yoneda lemma [lem-pc-yoneda], the natural isomorphism $\\varphi$ is determined by $D_d=\\varphi_{H_d}(\\mathrm{id})$: $\\varphi_{\\operatorname{Spec}K}(x)=\\varphi_{\\operatorname{Spec}K}(\\mathrm{id}_{H_d}\\circ x)=\\operatorname{Hilb}^d_{C/k}(x)(D_d)$, and the action of the Hilbert functor [def-pc-hilb-functor] on the morphism $x$ is base change, so this is $D:=D_d\\times_{H_d}\\operatorname{Spec}K\\subset C_K$; being an element of $\\operatorname{Hilb}^d_{C/k}(\\operatorname{Spec}K)$, it is a closed subscheme finite locally free of degree $d$ over $K$. Applying [lem-pc-recd-pullback] as in step 3 with $g=x$ (allowed by steps 1 and 2): $D$ is a relative effective Cartier divisor on $C_K/K$, hence an effective Cartier divisor on $C_K$ [def-pc-relative-effective-cartier], and\n$$\\mathcal O_{C_K}(D)\\cong x_C^*\\mathcal O(D_d),$$\nwhere $x_C:C_K\\to C_{H_d}$ is the base change of $x$ and $x_C^*$ the pullback of modules [def-pc-module-pullback].",
+   "text": "For a field extension K/k and a K-point x of H, put DK := eH.homEquiv x and LK := abelClass f DK. The Hilbert condition gives DK.IsInvertible and invertibility of its dual ideal [def-pc-hilb-functor, def-pc-relative-effective-cartier]. abelClassIso gives the representative isomorphism and abelClass_mem gives degree-d membership. RepresentableBy.homEquiv_comp applied to x and identity H identifies DK with the Hilbert pullback of D [lem-pc-yoneda]. The existing pic_map_abelClass, proved from compatibility of divisor line bundles with pullback [lem-pc-recd-pullback, def-pc-module-pullback], then identifies the Picard restriction of L with LK.",
    "uses": [
     "lem-pc-yoneda",
     "def-pc-hilb-functor",
@@ -131,7 +129,7 @@
    }
   },
   {
-   "text": "*Clause 3.* By naturality of $\\psi$ applied to $x$: $\\gamma_d\\circ x=h_{P_d}(x)(\\gamma_d)=h_{P_d}(x)(\\psi_{H_d}(c))=\\psi_{\\operatorname{Spec}K}\\bigl(\\operatorname{Pic}^d_{C/k}(x)(c)\\bigr)$. The restriction map of the Picard presheaf along $x$ is pullback along $x_C$ [def-pc-picard-presheaf, def-pc-module-pullback] and the sheafification map is natural [def-pc-picard-functor], so $\\operatorname{Pic}^d_{C/k}(x)(c)$ is the image in $\\operatorname{Pic}_{C/k}(\\operatorname{Spec}K)$ of $[x_C^*\\mathcal O(D_d)]=[\\mathcal O_{C_K}(D)]$ (step 6). Hence the $K$-point $\\gamma_d\\circ x$ of $P_d$ corresponds under $\\psi$ to the class of $\\mathcal O_{C_K}(D)$ in $\\operatorname{Pic}^d_{C/k}(\\operatorname{Spec}K)$, where $D$ is the divisor corresponding to $x$.",
+   "text": "The equality of Picard classes from step 6 gives an equality in the degree-d subfunctor by Subtype.ext. Apply eP.homEquiv_comp to x and gamma, replace eP.homEquiv gamma by the defining sheafification image, and use naturality_apply of toSheafify [def-pc-picard-presheaf, def-pc-module-pullback, def-pc-picard-functor]. This proves the required equation for x composed with gamma.",
    "uses": [
     "def-pc-picard-presheaf",
     "def-pc-module-pullback",
@@ -147,7 +145,6 @@
  "proof_deps": [
   "def-pc-base-change",
   "def-pc-smooth-projective-curve",
-  "lem-sc-curve-base-change-relative-dimension-one",
   "lem-pc-smooth-flat",
   "lem-pc-projective-proper",
   "lem-pc-proper-base-change",
@@ -164,7 +161,6 @@
   "def-pc-fibre-product",
   "def-pd-fibrewise-degree",
   "lem-pc-recd-pullback",
-  "lem-pc-dim-base-change",
   "lem-pc-degree-base-change",
   "def-pc-degree-line-bundle",
   "def-pc-picard-presheaf",
@@ -176,7 +172,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/pic.tex",
-  "place": "Tag 0BA0 (lemma-picard-pieces) (4) and its proof, second paragraph; Remark 0B9J (remark-universal-object-hilb-d); Lemma 0B9D (lemma-divisors-on-curves) (1)=>(2); Yoneda, Categories Lemma 001P"
+  "place": "Tag 0BA0 (lemma-picard-pieces) (4) and its proof, second paragraph; Remark 0B9J (remark-universal-object-hilb-d); Lemma 0B9D (lemma-divisors-on-curves) (1)=>(2); Yoneda, Categories Lemma 001P; implemented using the already proved abelClass, abelClassIso, abelClass_mem and pic_map_abelClass API, followed by RepresentableBy.homEquiv_comp and sheafification naturality"
  },
  "mathlib_searches": [
   {
@@ -209,7 +205,18 @@
   "item": "lem-sc-picg-geometrically-integral",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-jacobian",
  "split_report": {
@@ -238,5 +245,15 @@
   "group": "M1",
   "result": "fix",
   "note": "k sep. closed [IsSepClosed]; C smooth projective [f.IsSmoothProjectiveCurve] + [GeometricallyIntegral f]; d : ℕ; H_d via (hilbertPresheaf f d).RepresentableBy H, D = eH.homEquiv (𝟙 H); P_d via (picardFunctorDegree f d).obj.RepresentableBy P (FIX: replaced the delivered private degree subfunctor Q/hQ of picardFunctor, H4/H12); (1) IsRelativeEffectiveCartier + O(D) invertible; (2) L ≅ O(D), fibre degree d, L ∈ picardSubfunctorDegree f d, eP.homEquiv γ = toSheafify class of ⟨L,hL⟩; (3) all K/k in Type u, x : Spec K ⟶ H, DK effective Cartier, eP.homEquiv (x ≫ γ) = class of O(DK) in Pic^d; g unused; no hollow hypotheses"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261023T105752-L-3604956",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

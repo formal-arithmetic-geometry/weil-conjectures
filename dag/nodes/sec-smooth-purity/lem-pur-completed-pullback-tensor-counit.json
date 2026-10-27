@@ -1,0 +1,116 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "merged_into": null,
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Let D be the integral tensor of M and N. The reductionTensor field gives an isomorphism e from C.reduction(D) to the system tensor of their reductions. Normalized reconstruction and C.reduction_normalized make the actual counit at C.reduction(D) invertible. The naturality square of the counit at e.hom identifies the composite of the mapped isomorphism with the desired counit with the counit at C.reduction(D) followed by e.hom. The latter is invertible. Cancel the mapped isomorphism to obtain the desired result. This also handles zero inputs and empty schemes, using only isomorphism naturality.",
+   "uses": [
+    "lem-pod-unrestricted-normalized-reconstruction",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-unrestricted-normalized-reconstruction",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Specialization of the existing normalization/reconstruction interfaces for the actual counits, Stacks 0941; parent counit-effectivity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized coefficient systems tensor reduction pullback counit isomorphism",
+   "results": "8 hits, including CategoryTheory.Adjunction.counitAsIsoOfIso and ordinary descent-data counit isomorphisms. No coefficient sequence reconstruction theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing project normalization and reconstruction declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "12 generic adjunction results, including Adjunction.toEquivalence and fullyFaithfulROfIsIsoCounit. No statement on normalized coefficient systems.",
+   "date": "2026-10-26",
+   "verdict": "Only generic infrastructure; component effectivity comes from the existing project reconstruction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*normalized|normalized.*counit",
+   "results": "0 Mathlib hits. Project searches found purNormalizedReconstructionOfScheme, transportedReductionSystems_normalized and the naturality cancellation argument in NormalizedTensorConstraintTransport.",
+   "date": "2026-10-26",
+   "verdict": "Reuse those project results; no new analytic or geometric assertion is required."
+  }
+ ],
+ "mathlib_match": null,
+ "import_flags": [],
+ "blueprint_kind": "statement",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "lem-pur-normalized-reconstruction-adjunction-calculus"
+ ],
+ "id": "lem-pur-completed-pullback-tensor-counit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Coefficient twists, completed-operation comparison convention: the reduction/limit counit-effectivity step used to define the completed pullback/tensor comparison. Parent declaration pullbackTensorComparisonCounits. Blueprint search for normalized counit found no duplicate.",
+   "via": [
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "title": "Counit on a tensor of reduced coefficient systems",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme W with l invertible in each residue field, a coefficient derived system calculus C [lem-coef-derived-system-evaluation-calculus] over W and arbitrary unbounded derived completed-coefficient objects M,N. The actual counit of C at C.systemClosed.tensor(C.reduction(M),C.reduction(N)) is invertible. No boundedness or constructibility assumption is used.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941, tensor compatibility and normalized reconstruction counit"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackTensorTensorCounit",
+  "declaration": "WeilConjectures.completedPullbackTensor_tensor_counit",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensor_tensor_counit"
+  ],
+  "statement": "theorem completedPullbackTensor_tensor_counit (W : Scheme.{u}) (_hW : ∀ w : W, IsUnit (l : W.residueField w))\n    (C : CoefficientDerivedSystemCalculus l E W)\n    (M N : DerivedCategory (scalarReductionSource l E W)) :\n    IsIso (C.adjunction.counit.app\n      (C.systemClosed.tensor.obj (C.reduction.obj M, C.reduction.obj N)))",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorTensorCounit.lean",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b581b",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T070030-L-3344536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b581b",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T070030-L-3344536",
+  "kind": "interface",
+  "note": "independent cc review: 3 renamed normalization predicates vs old inline formulas (identical text); new counit lemmas vs nodes lem-pur-completed-pullback-tensor-counit / -pullback-counit; importers PrimitiveQuotientAugmentations, DerivedPullbackTensorIso, DerivedAutomorphismHomEvaluation compiled against delivered parent"
+ }
+}

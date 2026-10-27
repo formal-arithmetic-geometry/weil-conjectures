@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-additive-subgroup-perfect-decomposition",
+ "kind": "statement",
+ "title": "Closed subgroups of additive group powers over a perfect field have additive, infinitesimal and etale factors",
+ "statement": "Let $k$ be a field [def-weil-field] of characteristic $p>0$ such that every element of $k$ is a $p$-th power. Let $n\\geq0$ and let $H\\subseteq\\mathbf G_a^n$ be a closed subgroup scheme [def-sc-group-scheme-subgroup] of the affine $k$-group scheme with coordinatewise addition [def-sc-group-scheme, def-sc-gm-ga]. Assume $H$ is of finite type over $k$ [def-weil-finite-type-morphism]. There exist integers $d,s,a\\geq0$, integers $r_1,\\ldots,r_s\\geq1$, a commutative finite etale $k$-group scheme $E$ [def-weil-finite-integral-morphism, def-weil-etale-morphism] of rank $p^a$ (that is, $\\dim_k\\mathcal O(E)=p^a$), and an isomorphism of $k$-group schemes $$H\\simeq\\mathbf G_a^d\\times\\prod_{j=1}^s\\alpha_{p^{r_j}}\\times E.$$ Here $\\alpha_{p^r}(R)=\\{x\\in R:x^{p^r}=0\\}$ with addition for every commutative $k$-algebra $R$; explicitly $\\alpha_{p^r}=\\operatorname{Spec}(k[t]/(t^{p^r}))$, with comultiplication $t\\mapsto t\\otimes1+1\\otimes t$, counit $t\\mapsto0$ and antipode $t\\mapsto-t$ [def-weil-affine-spectrum, def-weil-polynomial-ring, def-weil-pbc-algebra-hom-quotient]. Empty products are trivial group schemes. No smoothness or connectedness hypothesis is imposed on $H$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.52, printed p.297, together with Definition 14.45, printed p.295: elementary unipotent means admitting a closed embedding in a finite additive group power. Combine the finitely many additive factors and the finitely many etale factors; omit trivial factors alpha_(p^0)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "The given closed embedding $H\\hookrightarrow\\mathbf G_a^n$ puts $H$ in the class of groups to which primitive-function reconstruction applies, with no smoothness or connectedness assumption. Put $A=k_\\sigma[F]$ and $M=P(H)$ as in that lemma. It supplies finite generation of the left $A$-module $M$ and the group-scheme isomorphism $H\\simeq U(M)$.",
+   "uses": [
+    "lem-sfb-primitive-frobenius-module-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.52, printed p.297; Theorem 14.46, Proposition 14.51 (corrected as reported), and Proposition 11.3. The steps expand the cyclic-factor calculation, including mixed inseparable/etale factors."
+   }
+  },
+  {
+   "text": "Apply cyclic decomposition to $M$, using the stated perfection of $k$, to obtain $M\\simeq\\bigoplus_{i=1}^q A/Ag_i$. For every $k$-algebra $R$, restriction to the summands and summation are inverse maps between $\\operatorname{Hom}_A(\\bigoplus_i A/Ag_i,R)$ and $\\prod_i\\operatorname{Hom}_A(A/Ag_i,R)$. They commute with algebra maps and addition. With the representing group schemes supplied by reconstruction, these mutually inverse natural maps give $H\\simeq\\prod_i U(A/Ag_i)$. This also covers $q=0$, giving the trivial group.",
+   "uses": [
+    "lem-sfb-primitive-frobenius-module-duality",
+    "lem-sfb-perfect-skew-polynomial-cyclic-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.52, printed p.297; Theorem 14.46, Proposition 14.51 (corrected as reported), and Proposition 11.3. The steps expand the cyclic-factor calculation, including mixed inseparable/etale factors."
+   }
+  },
+  {
+   "text": "An $A$-linear map $A/Ag\\to R$ is determined by $x$, the image of $1$: it sends the class of $h$ to $h\\cdot x$. It is well-defined exactly when $g\\cdot x=0$, since $(ag)\\cdot x=a\\cdot(g\\cdot x)$. Thus for $g=\\sum_{j=0}^m c_jF^j$ the group $U(A/Ag)$ is the kernel of the additive polynomial $L_g(T)=\\sum_j c_jT^{p^j}$ on $\\mathbf G_a$, represented by $\\operatorname{Spec}k[T]/(L_g)$. Indeed maps from this quotient to $R$ are exactly choices of $x$ with $L_g(x)=0$, naturally in $R$, and the group law is addition. For $g=0$ this is $\\mathbf G_a$. A nonzero constant $g=c$ gives $L_g=cT$ and hence the trivial group.",
+   "uses": [
+    "lem-sfb-primitive-frobenius-module-duality",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.52, printed p.297; Theorem 14.46, Proposition 14.51 (corrected as reported), and Proposition 11.3. The steps expand the cyclic-factor calculation, including mixed inseparable/etale factors."
+   }
+  },
+  {
+   "text": "For a remaining nonzero $g$, let $m$ be its largest index with $c_m\\ne0$ and $r$ its smallest. Replace all $c_j$ by $c_m^{-1}c_j$; this scales $L_g$ by a unit, does not change its kernel, and makes it monic of degree $p^m$. The monic-quotient basis gives its kernel $K_g$ coordinate dimension $p^m$, so $K_g$ is finite. Factor $L_g=T^{p^r}u(T)$ with $u(0)=c_r\\ne0$. In $k[T]/(T^{p^r})$, $u$ has an inverse $v$: expand the finite geometric series for $u/c_r=1+T w$. Thus $uv+T^{p^r}w_1=1$ for a polynomial $w_1$. The map $k[T]/(L_g)\\to k[T]/(T^{p^r})\\times k[T]/(u)$ has inverse $(a,b)\\mapsto a\\,uv+b\\,T^{p^r}w_1$ modulo $L_g$. This explicit open-and-closed decomposition identifies the identity component with $\\operatorname{Spec}k[T]/(T^{p^r})$: its first factor has just the prime $(T)$, and the other factor has no identity point because $u(0)\\ne0$. Its inclusion has the additive group law, so $K_g^\\circ=\\alpha_{p^r}$. For $r=0$, this means the trivial group $\\alpha_1$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.52, printed p.297; Theorem 14.46, Proposition 14.51 (corrected as reported), and Proposition 11.3. The steps expand the cyclic-factor calculation, including mixed inseparable/etale factors."
+   }
+  },
+  {
+   "text": "The finite commutative group $K_g$ is over the original perfect field, so reduced splitting gives $K_g\\simeq K_g^\\circ\\times E_g$ with $E_g=(K_g)_{\\mathrm{red}}$ finite etale. Inserting the identity component just computed gives $K_g\\simeq\\alpha_{p^r}\\times E_g$. The coordinate ring of this product is $\\mathcal O(E_g)[T]/(T^{p^r})$; its monic power basis gives $\\dim_k\\mathcal O(K_g)=p^r\\dim_k\\mathcal O(E_g)$. Since the left side is $p^m$, the rank of $E_g$ is $p^{m-r}$. This includes $r=m$, when its rank is $1$, and $r=0$, when all of $K_g$ is etale.",
+   "uses": [
+    "lem-sfb-perfect-finite-commutative-reduced-splitting",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.52, printed p.297; Theorem 14.46, Proposition 14.51 (corrected as reported), and Proposition 11.3. The steps expand the cyclic-factor calculation, including mixed inseparable/etale factors."
+   }
+  },
+  {
+   "text": "Collect the factors $g_i=0$ into $\\mathbf G_a^d$, discard the trivial constant factors and the factors $\\alpha_1$, and list the positive remaining values of $r$ as $r_1,\\ldots,r_s$. Let $E=\\prod_i E_{g_i}$ over the nonzero factors, and put $a=\\sum_i(m_i-r_i)$. The projection from a two-factor product to its second factor is a base change of the first factor's structure morphism, hence etale; composing with the second structure morphism is etale. Iteration proves etaleness of $E$. Affine fibre products have tensor-product coordinate rings. The tensor products of the finite bases span, and applying the dual coordinate functionals shows their linear independence. Thus $E$ is finite by the affine definition and so $\\dim_k\\mathcal O(E)=\\prod_i p^{m_i-r_i}=p^a$. Associating and permuting the displayed product isomorphisms gives precisely the required isomorphism. If no such factors occur, take $E=\\operatorname{Spec}k$ and $a=0$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.52, printed p.297; Theorem 14.46, Proposition 14.51 (corrected as reported), and Proposition 11.3. The steps expand the cyclic-factor calculation, including mixed inseparable/etale factors."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-primitive-frobenius-module-duality",
+  "lem-sfb-perfect-skew-polynomial-cyclic-decomposition",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-perfect-finite-commutative-reduced-splitting",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.52, printed p.297; Theorem 14.46, Proposition 14.51 (corrected as reported), and Proposition 11.3. The steps expand the cyclic-factor calculation, including mixed inseparable/etale factors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "date": "2026-10-24",
+   "results": "[loogle] OK 0 hit(s); ",
+   "verdict": "no match: the returned declarations do not assert an embedding or classification of affine algebraic group schemes; perfect fields, smooth algebras, biproduct matrices and abstract additive groups are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "elementary.unipotent|alpha.*[pP]|subgroup.*additive.group|vector.group",
+   "date": "2026-10-24",
+   "results": "[grep] OK 0 hit(s); ; directory Mathlib/AlgebraicGeometry",
+   "verdict": "no match: no source hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification of elementary unipotent algebraic groups over a perfect field as products of additive infinitesimal and etale factors",
+   "date": "2026-10-24",
+   "results": "[leansearch] OK 8 hit(s); Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, Module.End.exists_isNilpotent_isSemisimple, Algebra.FormallyEtale.instFormallyUnramified, ProfiniteAddGrp, AddGroupExtension.ConjClasses, TrivSqZeroExt.instIsUniformAddGroup, PerfectClosure.instAddCommGroup",
+   "verdict": "no match: the returned declarations do not assert an embedding or classification of affine algebraic group schemes; perfect fields, smooth algebras, biproduct matrices and abstract additive groups are different statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\"",
+   "date": "2026-10-24",
+   "results": "[loogle] OK 6 hit(s); CategoryTheory.Biprod.unipotentLower, CategoryTheory.Biprod.unipotentUpper, CategoryTheory.Biprod.unipotentLower_hom, CategoryTheory.Biprod.unipotentUpper_hom, CategoryTheory.Biprod.unipotentLower_inv, CategoryTheory.Biprod.unipotentUpper_inv",
+   "verdict": "no match: the returned declarations do not assert an embedding or classification of affine algebraic group schemes; perfect fields, smooth algebras, biproduct matrices and abstract additive groups are different statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every closed subgroup scheme of a finite power of Ga over a perfect field is a product of Ga alpha p power groups and a finite etale p group",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); PerfectClosure, Algebra.FormallySmooth.of_perfectField, IsAlgClosed.perfectRing, PerfectClosure.R, PerfectClosure.isPRadical, PerfectRing.ofFiniteOfIsReduced, IsPerfectClosure, Algebra.Etale.iff_exists_algEquiv_prod",
+   "verdict": "no match: the returned declarations do not assert an embedding or classification of affine algebraic group schemes; perfect fields, smooth algebras, biproduct matrices and abstract additive groups are different statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Elementary unipotent group schemes over perfect fields decompose into vector groups kernels of iterated Frobenius and finite etale groups",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); WittVector.Isocrystal, bijective_iterateFrobenius, WittVector.isocrystal_classification, iterateFrobeniusEquiv, Algebra.FormallySmooth.of_perfectField, Module.End.exists_isNilpotent_isSemisimple, WittVector.instIsocrystalStandardOneDimIsocrystal, bijective_frobenius",
+   "verdict": "no match: the returned declarations do not assert an embedding or classification of affine algebraic group schemes; perfect fields, smooth algebras, biproduct matrices and abstract additive groups are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "elementary.unipotent|alphaP|alpha_p|skew.polynomial",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: only perfect-field Frobenius, ordinary abstract groups, affine spaces, isocrystals and etale-algebra classifications, not the group-scheme decomposition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification of additive closed subgroup schemes over a perfect field",
+   "results": "8 hits: AddSubgroupClass, ClosedAddSubgroup, AddSubgroup.ofClass, AddSubgroup, ClosedAddSubgroup.instAddSubgroupClass, ClosedAddSubgroup.toAddSubgroup, ClosedAddSubgroup.mk, ClosedAddSubgroup.ext_iff. ",
+   "date": "2026-10-24",
+   "verdict": "no match: only perfect-field Frobenius, ordinary abstract groups, affine spaces, isocrystals and etale-algebra classifications, not the group-scheme decomposition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: only perfect-field Frobenius, ordinary abstract groups, affine spaces, isocrystals and etale-algebra classifications, not the group-scheme decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed subgroup schemes of Ga powers over a perfect field decompose into vector groups alpha p powers and finite etale groups",
+   "results": "8 hits: Algebra.FormallySmooth.of_perfectField, IsAlgClosed.perfectRing, WittVector.isocrystal_classification, AlgebraicGeometry.AffineSpace, PerfectClosure.R, PerfectRing.ofFiniteOfIsReduced, Field.absoluteGaloisGroupAbelianization, Algebra.Etale.iff_exists_algEquiv_prod. ",
+   "date": "2026-10-24",
+   "verdict": "no match: only perfect-field Frobenius, ordinary abstract groups, affine spaces, isocrystals and etale-algebra classifications, not the group-scheme decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Elementary unipotent group schemes over perfect fields are products of additive groups Frobenius kernels and finite etale groups",
+   "results": "8 hits: Algebra.FormallySmooth.of_perfectField, frobeniusEquiv, WittVector.isocrystal_classification, WittVector.Isocrystal, iterateFrobeniusEquiv, bijective_frobenius, FiniteField.frobeniusAlgEquiv_symm_apply, WittVector.instIsocrystalStandardOneDimIsocrystal. ",
+   "date": "2026-10-24",
+   "verdict": "no match: only perfect-field Frobenius, ordinary abstract groups, affine spaces, isocrystals and etale-algebra classifications, not the group-scheme decomposition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-exponent-p-vector-group",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52.",
+   "via": [
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-additive-subgroup-perfect-decomposition",
+  "worker": "stage1",
+  "summary": "Primitive-function reconstruction and corrected Frobenius-skew cyclic decomposition reduce to explicit additive-polynomial kernels. Monic bases, an explicit Bezout/CRT identity-component calculation, and perfect-field finite reduced splitting give all factors and their ranks. Three new statement-only nodes, no Mathlib leaves. The item statement is unchanged; source error in Milne 14.51 is reported and corrected in the new cyclic-module node.",
+  "blueprint": "Realizes the inherited from.place: det-thm-sf-ctf-stability-direct-images proof (3), through the recorded supporting algebraic-group chain to Milne 14.52 and the parent perfect-exponent-p-vector-group. Read the latest main-20261024 direct-image proof and unit; this is a supporting structural tool below that route. The ancestor tool returns None; preserved that ancestry and the existing via list.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-aada252a6",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-aada252a6 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the three new nodes in full against Milne iAG2017 §14e (pp.292–297: 14.40–14.53) and Proposition 11.3 (p.210). The item statement is byte-identical to live, there is no parallel split and no re-split note, and nothing cites SGA. (1) Duality node = Milne 14.41–14.46. It holds over any field of characteristic p, the A-action conventions match Fc = c^p F, and the evaluation map is A-linear. Checked on M = 0, A, A/AF, A/A(F−1). (2) Cyclic-decomposition node: A is a domain, a left PID by right division, and a right PID by left division when k is perfect, so Jacobson's theorem applies. The reported error in printed 14.51 is real: A/(F²) over F_p is not a sum of irreducible cyclics. The correction drops 'irreducible' and allows g = 0, which is exactly what the proof of 14.52 uses. No target is weakened. (3) Reduced-splitting node = Milne 11.3: the semidirect product is direct for commutative G, and G_red is étale over a perfect field. It is not a duplicate of the algebraically-closed local-constant node or of any other existing node I searched. In the item: step 3 (ker L_g) is correctly elementary. I verified the CRT inverse and the identity-component argument in step 4, and the rank p^{m−r} in step 5, tested on g = F² − F (r = 1, m = 2, rank p). Edge cases n = 0, G_a^n, α_{p²} and separable kernels all check. Steps 4–6 cite exact Mathlib leaves. The new nodes are independent inputs, so this is not a relabelling. FIX: step 4 uses 'connected component' without a definition, so I added def-weil-connected-scheme to step 4's uses and to proof_deps (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-additive-subgroup-perfect-decomposition.json).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdditiveSubgroupPerfectDecomposition",
+  "declaration": "AlgebraicGeometry.additive_subgroup_perfect_decomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdditiveSubgroupPerfectDecomposition.lean",
+  "statement": "theorem additive_subgroup_perfect_decomposition {k : Type u} [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hperfect : ∀ x : k, ∃ y : k, y ^ p = x) (n : ℕ) (H : Grp (Over (Spec (.of k)))) (i : H ⟶ ∏ᶜ fun _ : Fin n ↦ Grp.mk (StandardGroupSchemes.additive k)) [IsClosedSubgroupScheme i.hom.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] : ∃ (d s a : ℕ) (r : Fin s → ℕ), (∀ j : Fin s, 1 ≤ r j) ∧ ∃ (A : Fin s → Grp (Over (Spec (.of k)))) (E : Grp (Over (Spec (.of k)))), (∀ j : Fin s, ∃ e : (A j).X ≅ StandardGroupSchemes.alpha k (p ^ r j), IsMonHom (e.hom ≫ StandardGroupSchemes.alphaInclusion k (p ^ r j))) ∧ IsCommMonObj E.X ∧ IsFinite E.X.hom ∧ Etale E.X.hom ∧ E.X.hom.finrankΓ = p ^ a ∧ Nonempty (H ≅ ((∏ᶜ fun _ : Fin d ↦ Grp.mk (StandardGroupSchemes.additive k)) ⨯ (∏ᶜ fun j : Fin s ↦ A j)) ⨯ E)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8aca3fdf8",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Read the node, the six proof steps, all stmt_dep records and the exact sources of IsClosedSubgroupScheme, StandardGroupSchemes (additive, additiveGroup, alpha, alphaInclusion) and finrankΓ. Every hypothesis matches: CharP with 0<p, the p-th-power condition, the closed subgroup of ∏ᶜ Ga in Grp(Over Spec k), finite type as LocallyOfFiniteType+QuasiCompact. The α_{p^r} factors are an Over-iso to alpha k (p^r) plus IsMonHom of the composite into Ga; the inclusion is a mono, so this fixes the additive Hopf law and avoids the invalid CharP p^r alphaGroup instance. E is IsCommMonObj+IsFinite+Etale with finrankΓ=p^a, and the iso is in Grp. Edge cases checked: n=0, Ga^n, α_{p²}, separable, mixed, nonconstant étale E. The recorded statement is verbatim in the file; docstrings carry the source, blueprint tag and 6 proof steps; plain imports are the proof-dep Mathlib leaves. No duplicate notion or parallel delivery, no hollow definition. No file changed, so no compile. No findings."
+ }
+}

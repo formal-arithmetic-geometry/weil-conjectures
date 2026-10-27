@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-smooth-group-relative-neutral-open",
+ "kind": "statement",
+ "title": "The relative neutral open subgroup of a smooth trait group",
+ "statement": "Let $C$ be a discrete valuation ring, and put $S=\\operatorname{Spec}C$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $G\\to S$ be a smooth separated group scheme of finite type [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. A group scheme means multiplication, identity and inverse morphisms over $S$ satisfying the group-object diagrams of [def-sc-group-scheme], with $S$ as base; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. There exists an open subgroup $G^0\\subseteq G$ [def-weil-open-immersion] which is smooth separated of finite type over $S$ and whose fibre at every geometric point $\\bar s\\to S$ is the connected component containing the identity of $G_{\\bar s}$ [def-weil-connected-scheme, def-pc-base-change]. Its fibres are geometrically connected, meaning connected after every extension of their residue field. Formation of this open subgroup commutes with every scheme base change $T\\to S$. For every geometric point $\\bar s$, the orbits of left multiplication by $G^0_{\\bar s}$ on $G_{\\bar s}$ are exactly the connected components of $G_{\\bar s}$. No commutativity or connectedness of $G$ is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.4, paragraph following Proposition 2, printed p.154 (PDF p.160): the fibrewise identity component is open, with geometrically connected fibres; EGA IV3, 15.6.5. Its geometric-fibre characterization gives compatibility with base change. Local BLR PDF WANTED; primary scan read online.",
+  "url": "https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-connected-scheme",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:G\\to S$ and let $e:S\\to G$ be the identity section. By [sbc-lem-smooth-criterion], $f$ is flat and locally of finite presentation. It is quasi-compact by the finite-type hypothesis and [def-weil-finite-type-morphism], and quasi-separated by [lem-pc-separated-quasi-separated], since its diagonal is a closed immersion by hypothesis. Thus it is of finite presentation, in the convention of [def-sbc-locally-finite-presentation]. By [sbc-lem-smooth-geometrically-reduced], all its fibres are geometrically reduced. These verify all the hypotheses of the section-component lemmas used below.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "def-sbc-locally-finite-presentation",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 055R and 055M, hypotheses; smoothness consequences: morphisms.tex Tags 01VE/01VF/01VB and varieties.tex Tag 056T."
+   }
+  },
+  {
+   "text": "For each $s\\in S$, let $C_s$ be the connected component of $e(s)$ in $G_s$ and set $U=\\bigcup_s C_s\\subseteq |G|$. Apply [lem-trf-flat-reduced-section-component-open] to $(f,e)$ using Step 1: $U$ is open. Give it its open-subscheme structure [def-weil-open-immersion], with inclusion $j:U\\to G$. As $S=\\operatorname{Spec}C$ is affine, [lem-trf-section-component-quasi-compact] applies to the same $(f,e)$ and says that $U$ is quasi-compact. Notice that this does not assume $U$ is closed in $G$.",
+   "uses": [
+    "lem-trf-flat-reduced-section-component-open",
+    "def-weil-open-immersion",
+    "lem-trf-section-component-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055R, lemma-connected-along-section-open; Tag 057I, lemma-descent-connected-fibres, proof final paragraph (quasi-compactness of the section-component locus)."
+   }
+  },
+  {
+   "text": "For an arbitrary $T\\to S$, [lem-sbc-section-component-cartesian] identifies the inverse image of $U$ in $G_T$ with the union of the components through $e_T$. Its local finite-type hypothesis holds for $f$ by hypothesis. The inverse image is the open subscheme $U_T=U\\times_ST$: restricting the fibre-product universal property [def-pc-base-change] to an open gives precisely the preimage open, with the restricted structure sheaf. In particular for $T=\\operatorname{Spec}\\kappa(s)$ it identifies $U_s$ with $C_s$, with its open-subscheme structure. This connected scheme has the rational point $e_s$, so [lem-sbc-connected-rational-point-geometrically-connected] makes it connected after every residue-field extension. Taking $T$ to be any geometric point gives exactly the claimed geometric identity component, and the same preimage equality proves compatibility with every base change, without a Noetherian or finite-type restriction on $T$.",
+   "uses": [
+    "lem-sbc-section-component-cartesian",
+    "def-pc-base-change",
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055M, lemma-base-change-connected-along-section; varieties.tex Tag 04KV, lemma-geometrically-connected-if-connected-and-point."
+   }
+  },
+  {
+   "text": "We show that multiplication and inverse restrict to $U$. For a point $q$ of $U\\times_SU$, choose an algebraic closure $L$ of $\\kappa(q)$ and its resulting map $\\operatorname{Spec}L\\to U\\times_SU$. By Step 3 both projections belong to $(G_L)^0$. The finite-type hypothesis for $G_L/L$ follows by tensoring affine finite-type presentations with $L$ and base-changing the finite affine cover. Apply [lem-sfb-locally-algebraic-group-identity-component] over the algebraically closed field $L$: $(G_L)^0$ is a subgroup scheme, so the product lies there. Projecting back to $G$ shows $m(q)\\in U$, again by Step 3. The same argument for a point of $U$ shows that its inverse lies in $U$. The identity section lies in $U$ by construction. A scheme map with image in an open factors uniquely through that open: restrict the continuous map and its structure-sheaf map to it [def-weil-open-immersion]. Thus $m|_{U\\times_SU}$, inverse, and identity factor through $U$. Their group diagrams hold after composition with $j$, since they are the diagrams of $G$; the open immersion is a monomorphism by that same unique factorization, so the diagrams already hold on $U$. Hence $U$ is an open subgroup scheme. Uniqueness of these restrictions also makes the base-change identifications in Step 3 group identifications.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, proposition-connected-component, subgroup property on field fibres; global open restriction of the operations as in the application following section-connected-components."
+   }
+  },
+  {
+   "text": "By [lem-pc-open-immersion-smooth-composition], $U\\to S$ is smooth. Its diagonal is the base change of $\\Delta_{G/S}$ along $U\\times_SU\\to G\\times_SG$: a pair in $U$ has equal images in $G$ exactly when it is the same point of the open subscheme, with the same scheme universal property. It is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], so $U\\to S$ is separated. Local finite type is local on the source directly from the affine-cover definition in [def-weil-finite-type-morphism]: principal affine opens inside finite-type affine charts still have finitely generated coordinate algebras, obtained by adjoining the inverse of one element. Step 2 makes $U$ quasi-compact. For an affine open of $S=\\operatorname{Spec}C$, principal opens form a basis, and a finite principal cover reduces its inverse image to finitely many quasi-compact principal opens in a finite affine cover of $U$. Thus $U\\to S$ is quasi-compact, hence of finite type by that definition. Set $G^0=U$.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "morphisms.tex Tag 01VC, lemma-open-immersion-smooth, with composition; Tag 01QR, lemma-base-change-closed-immersion; finite-type affine-cover definition."
+   }
+  },
+  {
+   "text": "Fix a geometric point with algebraically closed field $\\Omega$. By Step 3, $(G^0)_\\Omega$ is the identity component of $G_\\Omega$. Apply [lem-sfb-group-neutral-component-translates] to the finite-type $\\Omega$-group $G_\\Omega$. Each component $D$ has a point $g\\in G_\\Omega(\\Omega)$ and left translation restricts to an isomorphism $(G^0)_\\Omega\\simeq D$, namely $h\\mapsto gh$. Because $(G^0)_\\Omega$ is a subgroup, its left-multiplication orbit through $g$ is $ (G^0)_\\Omega g$; apply the same component-maximality argument to right translation, whose inverse is translation by $g^{-1}$, to identify this right coset with the component of $g$ as well. Thus each orbit subscheme is exactly a connected component (equivalently the assertion on geometric rational points). No commutativity is used.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R; Milne Algebraic Groups 1.34, translation descriptions of components."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-pc-separated-quasi-separated",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sbc-section-component-cartesian",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-trf-flat-reduced-section-component-open",
+  "lem-trf-section-component-quasi-compact",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 055M/055R and 057I, assembled with groupoids.tex Tag 0B7R and the existing component-translation node; open restriction of the group operations written by Q38."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fibrewise identity components of a smooth finite type group scheme form an open subgroup with geometrically connected fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"Subgroup.connectedComponentOfOne\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"(G : Type u_1) → [inst : TopologicalSpace G] → [inst_1 : Group G] → [IsTopologicalGroup G] → Subgroup G\", \"doc\": \"The subgroup of a topological group $G$ consisting of all elements in the connected component of the identity element $1$. This is the maximal preconnected subset containing $1$, and it forms a subgro\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (L : FiniteGaloisIntermediateField k K), IsOpen (⇑(InfiniteGalois.mulEquivToLimit k K) '' ↑L.fixingSubgroup)\", \"doc\": \"In an infinite Galois extension $ K/k $, the image of the fixing subgroup of a finite Galois intermediate field $ L $ under the isomorphism to the inverse limit of profinite Galois groups is an open s\"}\n  {\"name\": \"IntermediateField.fixingSubgroup_isOpen\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] (E : IntermediateField K L)\\n  [FiniteDimensional K ↥E], IsOpen ↑E.fixingSubgroup\", \"doc\": \"For any finite intermediate field extension $E/K$ within $L/K$, the subgroup of the Galois group $\\\\text{Gal}(L/K)$ consisting of automorphisms that fix every element of $E$ is an open set in the Krull\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"OpenNormalSubgroup.pathComponentOne\", \"module\": \"Mathlib/Topology/Connected/PathComponentOne\", \"type\": \"(G : Type u_1) →\\n  [inst : TopologicalSpace G] →\\n    [inst_1 : Group G] → [IsTopologicalGroup G] → [LocPathConnectedSpace G] → OpenNormalSubgroup G\", \"doc\": \"In a locally path-connected topological group $ G $, the subgroup consisting of all elements path-connected to the identity element $ 1 $ forms an open normal subgroup. This follows from the local pat\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative neutral component of a smooth group scheme is an open smooth subgroup commuting with every base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.connectedComponentOfOne\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"(G : Type u_1) → [inst : TopologicalSpace G] → [inst_1 : Group G] → [IsTopologicalGroup G] → Subgroup G\", \"doc\": \"The subgroup of a topological group $G$ consisting of all elements in the connected component of the identity element $1$. This is the maximal preconnected subset containing $1$, and it forms a subgro\"}\n  {\"name\": \"Subgroup.Normal.pathComponentOne\", \"module\": \"Mathlib/Topology/Connected/PathConnected\", \"type\": \"∀ (G : Type u_4) [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G],\\n  (Subgroup.pathComponentOne G).Normal\", \"doc\": \"In a topological group $G$, the subgroup consisting of all elements path-connected to the identity element $1$ is a normal subgroup. This follows from the continuity of group operations, which ensures\"}\n  {\"name\": \"Subgroup.pathComponentOne\", \"module\": \"Mathlib/Topology/Connected/PathConnected\", \"type\": \"(G : Type u_4) → [inst : Group G] → [inst_1 : TopologicalSpace G] → [IsTopologicalGroup G] → Subgroup G\", \"doc\": \"The subgroup of a topological group $G$ consisting of all elements path-connected to the identity element $1$. This set contains $1$, is closed under multiplication (due to the continuity of multiplic\"}\n  {\"name\": \"OpenNormalSubgroup.pathComponentOne\", \"module\": \"Mathlib/Topology/Connected/PathComponentOne\", \"type\": \"(G : Type u_1) →\\n  [inst : TopologicalSpace G] →\\n    [inst_1 : Group G] → [IsTopologicalGroup G] → [LocPathConnectedSpace G] → OpenNormalSubgroup G\", \"doc\": \"In a locally path-connected topological group $ G $, the subgroup consisting of all elements path-connected to the identity element $ 1 $ forms an open normal subgroup. This follows from the local pat\"}\n  {\"name\": \"OpenNormalSubgroup.pathComponentOne_carrier\", \"module\": \"Mathlib/Topology/Connected/PathComponentOne\", \"type\": \"∀ (G : Type u_1) [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : LocPathConnectedSpace G], ↑(OpenNormalSubgroup.pathComponentOne G) = pathComponent 1\", \"doc\": \"In a locally path-connected topological group $ G $, the subgroup consisting of all elements path-connected to the identity element $ 1 $ forms an open normal subgroup. This follows from the local pat\"}\n  {\"name\": \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"module\": \"Mathlib/Topology/Connected/PathComponentOne\", \"type\": \"∀ (G : Type u_1) [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : LocPathConnectedSpace G], IsClosed ↑(OpenNormalSubgroup.pathComponentOne G)\", \"doc\": \"In a locally path-connected topological group $G$, the subgroup consisting of all elements path-connected to the identity element $1$ is a closed subset of $G$. This follows from the local path-connec\"}\n  {\"name\": \"Subgroup.coe_pathComponentOne\", \"module\": \"Mathlib/Topology/Connected/PathConnected\", \"type\": \"∀ (G : Type u_4) [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G],\\n  ↑(Subgroup.pathComponentOne G) = pathComponent 1\", \"doc\": \"In a topological group $ G $, the set of all elements path-connected to the identity element $ 1 $ forms a subgroup. This subgroup is closed under multiplication and taking inverses due to the continu\"}\n  {\"name\": \"AddSubgroup.Normal.pathComponentZero\", \"module\": \"Mathlib/Topology/Connected/PathConnected\", \"type\": \"∀ (G : Type u_4) [inst : AddGroup G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalAddGroup G],\\n  (AddSubgroup.pathComponentZero G).Normal\", \"doc\": \"In a topological additive group $G$, the additive subgroup consisting of all elements path-connected to the zero element forms a normal subgroup. This follows from the continuity of addition and negat\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(identity|neutral).*(component|subgroup)|component.*(group|smooth)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"line\": \"27\", \"text\": \"  space `ℝ^r₁ × ℂ^r₂` and `ℝ^r₁ × (ℝ × ℝ)^r₂` defined as the identity on the first component and\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"line\": \"175\", \"text\": \"`ℝ^r₁ × (ℝ × ℝ)^r₂` defined as the identity on the first component and mapping `(zᵢ)ᵢ` to\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/Module.lean\", \"line\": \"333\", \"text\": \"/-- The universal property of the direct limit: maps from the components to another abelian group\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Nonarchimedean/Basic.lean\", \"line\": \"18\", \"text\": \"open neighborhoods of the identity element in the group consisting of open subgroups.\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathConnected.lean\", \"line\": \"365\", \"text\": \"/-! ### Path component of the identity in a group -/\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathConnected.lean\", \"line\": \"376\", \"text\": \"/-- The path component of the identity in a topological group, as a subgroup. -/\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathConnected.lean\", \"line\": \"379\", \"text\": \"def Subgroup.pathComponentOne (G : Type*) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] :\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathConnected.lean\", \"line\": \"384\", \"text\": \"/-- The path component of the identity in a topological group is normal. -/\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathConnected.lean\", \"line\": \"386\", \"text\": \"instance Subgroup.Normal.pathComponentOne (G : Type*) [Group G] [TopologicalSpace G]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/OpenSubgroup.lean\", \"line\": \"32\", \"text\": \"* Prove that the identity component of a locally path connected group is an open subgroup.\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathComponentOne.lean\", \"line\": \"11\", \"text\": \"/-! # The path component of the identity in a locally path connected topological group\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathComponentOne.lean\", \"line\": \"13\", \"text\": \"This file defines the path component of the identity is an `OpenNormalSubgroup` when the ambient\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathComponentOne.lean\", \"line\": \"24\", \"text\": \"/-- The path component of the identity in a locally path connected topological group,\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathComponentOne.lean\", \"line\": \"27\", \"text\": \"/-- The path component of the identity in a locally path connected additive topological group,\"}\n  {\"file\": \"Mathlib/Topology/Connected/PathComponentOne.lean\", \"line\": \"29\", \"text\": \"def OpenNormalSubgroup.pathComponentOne [Group G]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Basic.lean\", \"line\": \"759\", \"text\": \"/-- The connected component of 1 is a subgroup of `G`. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Basic.lean\", \"line\": \"760\", \"text\": \"@[to_additive /-- The connected component of 0 is a subgroup of `G`. -/]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Basic.lean\", \"line\": \"761\", \"text\": \"def Subgroup.connectedComponentOfOne (G : Type*) [TopologicalSpace G] [Group G]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Constructions.lean\", \"line\": \"16\", \"text\": \"- the component projections from a product of manifolds are smooth.\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"line\": \"286\", \"text\": \"  rw [← @WeaklyConnectedComponent.eq (Generators G), eq_comm, ← FreeGroup.of_injective.eq_iff, ←\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"49\", \"text\": \"    the identity from `SubMulAction.ofFixingSubgroup M s`\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"58\", \"text\": \"    the identity from `SubMulAction.ofFixingSubgroup M s`\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"112\", \"text\": \"/-- The identity map of the `SubMulAction` of the `fixingSubgroup`\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"115\", \"text\": \"/-- The identity map of the `SubAddAction` of the `fixingAddSubgroup`\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/SubMulAction/OfFixingSubgroup.lean\", \"line\": \"180\", \"text\": \"/-- The identity map of fixing subgroup of stabilizer\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibrewise identity components of a smooth finite type group scheme form an open subgroup with geometrically connected fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.isOpen_of_one_mem_interior\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \"[ContinuousMul G] (H : Subgroup G) (h_1_int : (1 : G) ∈ interior (H : Set G)) : IsOpen (H : Set G)\", \"doc\": \"In a topological group $ G $ with continuous multiplication, if a subgroup $ H $ has the identity element $ 1 $ in the interior of $ H $ (as a subset of $ G $), then $ H $ is an open set in $ G $.\"}\n  {\"name\": \"OpenSubgroup\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \"(G : Type u_1) → [Group G] → [TopologicalSpace G] → Type u_1\", \"doc\": \"An open subgroup of a topological group $G$ is a subgroup $H \\\\subseteq G$ that is also an open set in the topology of $G$.\"}\n  {\"name\": \"OpenNormalSubgroup.pathComponentOne\", \"module\": \"Mathlib.Topology.Connected.PathComponentOne\", \"type\": \"[Group G] [IsTopologicalGroup G] [LocPathConnectedSpace G] : OpenNormalSubgroup G\", \"doc\": \"In a locally path-connected topological group $ G $, the subgroup consisting of all elements path-connected to the identity element $ 1 $ forms an open normal subgroup. This follows from the local pat\"}\n  {\"name\": \"OpenNormalSubgroup.pathComponentOne_carrier\", \"module\": \"Mathlib.Topology.Connected.PathComponentOne\", \"type\": \"∀ (G : Type u_1) [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : LocPathConnectedSpace G], ↑(OpenNormalSubgroup.pathComponentOne G) = pathComponent 1\", \"doc\": \"In a locally path-connected topological group $ G $, the subgroup consisting of all elements path-connected to the identity element $ 1 $ forms an open normal subgroup. This follows from the local pat\"}\n  {\"name\": \"Subgroup.connectedComponentOfOne\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"(G : Type*) [TopologicalSpace G] [Group G] [IsTopologicalGroup G] : Subgroup G\", \"doc\": \"The subgroup of a topological group $G$ consisting of all elements in the connected component of the identity element $1$. This is the maximal preconnected subset containing $1$, and it forms a subgro\"}\n  {\"name\": \"OpenSubgroup.mk\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \"{G : Type u_1} →\\n  [inst : Group G] →\\n    [inst_1 : TopologicalSpace G] → (toSubgroup : Subgroup G) → IsOpen toSubgroup.carrier → OpenSubgroup G\", \"doc\": \"Given a subgroup $ H $ of a topological group $ G $ and a proof that the underlying set of $ H $ is open in $ G $, this constructs the open subgroup $ H $.\"}\n  {\"name\": \"Subgroup.pathComponentOne\", \"module\": \"Mathlib.Topology.Connected.PathConnected\", \"type\": \"(G : Type*) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] : Subgroup G\", \"doc\": \"The subgroup of a topological group $G$ consisting of all elements path-connected to the identity element $1$. This set contains $1$, is closed under multiplication (due to the continuity of multiplic\"}\n  {\"name\": \"OpenSubgroup.mem_nhds_one\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \": (U : Set G) ∈ 𝓝 (1 : G)\", \"doc\": \"An open subgroup $ U $ of a topological group $ G $ is a neighborhood of the identity element $ 1 $, i.e., $ U \\\\in \\\\mathcal{N}(1) $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth group scheme over a discrete valuation ring the fibrewise identity components form an open subgroup compatible with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T09:46:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth group scheme over a discrete valuation ring the fibrewise identity components form an open subgroup compatible with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"ValuationSubring.inertiaSubgroup\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"Set.unit\", \"IntermediateField.fixingSubgroup_isOpen\", \"Algebra.isOpen_unramifiedLocus\", \"Valued.isOpen_integer\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"84dcfb020a2e00c2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits concern ordinary topological groups, smooth loci or universally open morphisms, not the relative identity subgroup of a scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|neutralComponent|connected.along.section|section.component",
+   "results": "{\"t\": \"2026-10-24T09:47:32Z\", \"tool\": \"grep\", \"query\": \"identityComponent|neutralComponent|connected.along.section|section.component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits concern ordinary topological groups, smooth loci or universally open morphisms, not the relative identity subgroup of a scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The union of connected components of the identity in fibres of a smooth finite type group scheme is an open subgroup scheme",
+   "results": "{\"t\": \"2026-10-24T09:47:32Z\", \"tool\": \"leansearch\", \"query\": \"The union of connected components of the identity in fibres of a smooth finite type group scheme is an open subgroup scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"Subgroup.pathComponentOne\", \"OpenNormalSubgroup.pathComponentOne\", \"OpenNormalSubgroup.pathComponentOne_carrier\", \"Subgroup.coe_pathComponentOne\", \"Subgroup.isOpen_of_one_mem_interior\", \"OpenSubgroup\", \"Subgroup.Normal.pathComponentOne\"], \"digest\": \"e43e90c7bb314db3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits concern ordinary topological groups, smooth loci or universally open morphisms, not the relative identity subgroup of a scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T09:47:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits concern ordinary topological groups, smooth loci or universally open morphisms, not the relative identity subgroup of a scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented scheme with geometrically reduced fibres and a section has an open union of the fibre components meeting that section",
+   "results": "{\"t\": \"2026-10-24T09:48:16Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented scheme with geometrically reduced fibres and a section has an open union of the fibre components meeting that section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"Algebra.isOpen_unramifiedLocus\"], \"digest\": \"a25ff3c429be36dc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits concern ordinary topological groups, smooth loci or universally open morphisms, not the relative identity subgroup of a scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-group-field-trait-descent",
+  "date": "2026-10-24",
+  "group": "Q150"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), alteration/Picard auxiliary chain through lem-sfb-smooth-group-field-trait-descent: relative neutral open needed for trait group descent. Its existence follows from the section-component locus of Tags 055M/055R, and its group law from geometric-fibre identity subgroups.",
+   "via": [
+    "lem-sfb-smooth-group-field-trait-descent",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-group-relative-neutral-open",
+  "worker": "stage1",
+  "summary": "Constructed the neutral open as the section-component locus, using existing openness, quasi-compactness, arbitrary-square base change and connected rational-point nodes. Restricted the operations by checking every source point over an algebraically closed field and factoring through the open, then verified smoothness, separatedness, finite type, and the component-orbit assertion. No new nodes; no change to the statement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), alteration/Picard auxiliary chain through lem-sfb-smooth-group-field-trait-descent: relative neutral open needed for trait group descent. Its existence follows from the section-component locus of Tags 055M/055R, and its group law from geometric-fibre identity subgroups.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Restriction of a smooth map to an open is smooth."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Separatedness supplies quasi-separatedness, completing finite presentation."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "A connected fibre component containing its identity rational point is geometrically connected."
+   },
+   {
+    "node": "lem-sbc-section-component-cartesian",
+    "why": "Arbitrary cartesian-square compatibility of the section-component locus."
+   },
+   {
+    "node": "lem-trf-flat-reduced-section-component-open",
+    "why": "Generic openness theorem for fibre components meeting a section, not a different unit-level route."
+   },
+   {
+    "node": "lem-trf-section-component-quasi-compact",
+    "why": "Generic quasi-compactness theorem for the same section locus over an affine base."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "The diagonal of the restricted group is a base change of the closed diagonal."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Smoothness supplies flatness and local finite presentation for the section-component theorem."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Smoothness supplies geometrically reduced fibres."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-pc-separated-quasi-separated",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sbc-section-component-cartesian",
+  "lem-trf-flat-reduced-section-component-open",
+  "lem-trf-section-component-quasi-compact",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-1a0451ee9",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-1a0451ee9 (reviewer sub-agent of L); spot-checked: PASS, first delivery. The item's statement is unchanged and not weakened; there are no new nodes and no changes. Shape A is clean: one commit with the item node and a report containing '## Review by Q38'. Sources read: Stacks more-morphisms.tex, Situation connected-along-section, 055M lemma-base-change-connected-along-section (no hypothesis), 055R lemma-connected-along-section-open (flat, finite presentation, geometrically reduced fibres), and 057I's final quasi-compactness paragraph. Tags 04KV and 0B7R were checked in tags/tags. Step 1: smooth gives flat and lfp; finite type gives quasi-compact; separated gives quasi-separated; so G is of finite presentation with geometrically reduced fibres. Step 2: U is open by the trf 055R node and quasi-compact by the trf 057I node, since S = Spec C is affine; U is correctly not claimed closed. Step 3: 055M for an arbitrary cartesian square needs only local finite type, so U_T is the section-component locus and U_s = C_s; 04KV with the rational point e_s gives geometrically connected fibres; base change holds for any T. Step 4: the L-points over q lie in (G_L)^0, and the locally-algebraic identity-component node over an algebraically closed L (lft) makes it a subgroup; m_L is the base change of m, so m(q) is in U; factorisation through an open and the monomorphism j are elementary. Step 5: U is smooth by open-immersion composition. Its diagonal is the base change of Δ_G along j×j, a closed immersion by 01QR. It is lft through principal opens, and of finite type because U is quasi-compact over an affine base. Step 6: the component-translates node over Ω (finite type, no reducedness) gives each component a rational g. The left-multiplication orbit is the right coset Cg; r_g is an automorphism with inverse r_{g^-1}, so it sends C onto the component of g. The left/right issue for noncommutative groups is handled correctly. proof_deps equal the union of the steps' uses; there is no cycle; steps are at most 1302 characters. Edge cases checked: trivial group, (Z/2)_S, G_a, S ⊔ Spec K, a two-component special fibre where U is open but not closed, and infinitesimal non-smooth groups (excluded). Duplicates: rg -L over dag/nodes. The Néron neutral-open clauses assume commutative Néron lft-models, strict-local-component-translates assumes the open is given, and 0B7R-type nodes are over fields; none states the item. Batch-5 flags: lem-trf-flat-reduced-section-component-open is generic 055R; its 715-node closure is pure scheme theory with no trace-transport, Poincaré or nt-assume node, and it is not a step that the assumption leaves replace, so accepted. lem-trf-section-component-quasi-compact is an unsplit generic 057I leaf whose closure is only definitions, so accepted. Advisory: lem-sbc-smooth-section-component-open (smooth, qcqs, section) fits Step 2 without any trf node, and quasi-compactness also follows because G is Noetherian. tool_uses accepted as recorded."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGroupRelativeNeutralOpen",
+  "declaration": "AlgebraicGeometry.GrpObj.smoothGroup_relativeNeutralOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGroupRelativeNeutralOpen.lean",
+  "statement": "theorem GrpObj.smoothGroup_relativeNeutralOpen (C : Type u) [CommRing C] [IsDomain C] [IsDiscreteValuationRing C] (G : Over (Spec (.of C))) [GrpObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : ∃ U : G.left.Opens, Smooth (U.ι ≫ G.hom) ∧ IsSeparated (U.ι ≫ G.hom) ∧ LocallyOfFiniteType (U.ι ≫ G.hom) ∧ QuasiCompact (U.ι ≫ G.hom) ∧ GeometricallyConnected (U.ι ≫ G.hom) ∧ (∀ (T : Scheme.{u}) (t : T ⟶ Spec (.of C)), (pullback.fst G.hom t) ⁻¹' (U : Set G.left) = {x : ↥(pullback G.hom t) | x ∈ connectedComponentIn ((pullback.snd G.hom t) ⁻¹' {(pullback.snd G.hom t) x}) (η[(Over.pullback t).obj G].left ((pullback.snd G.hom t) x))}) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of C)), (pullback.fst G.hom s) ⁻¹' (U : Set G.left) = connectedComponent (GrpObj.onePoint ((Over.pullback s).obj G)) ∧ Set.range (fun g : 𝟙_ (Over (Spec (.of Ω))) ⟶ (Over.pullback s).obj G => (GrpObj.mulRight ((Over.pullback s).obj G) g).left '' ((pullback.fst G.hom s) ⁻¹' (U : Set G.left))) = Set.range (fun x : ↥(pullback G.hom s) => connectedComponent x)) ∧ ∃ gU : GrpObj (Over.mk (U.ι ≫ G.hom)), @IsMonHom _ _ _ _ _ gU.toMonObj _ (Over.homMk (V := G) U.ι)",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2dd687b25",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Statement checked clause by clause against the node and all 10 stmt_dep records. DVR = IsDomain+IsDiscreteValuationRing on Spec C; group = GrpObj on Over S; smooth/separated/finite type = Smooth, IsSeparated, LocallyOfFiniteType+QuasiCompact. Conclusions: U : Opens with smooth/sep/lft/qc restriction; GeometricallyConnected (Mathlib, all field points); arbitrary T preimage = connectedComponentIn locus of pulled-back η; geometric fibre = connectedComponent of onePoint; GrpObj on U with IsMonHom inclusion (unique since mono); orbit family via mulRight g (= x*g, checked in GroupScheme/Basic.lean:124) = G0 g, equal to the family of all components. No commutativity/connectedness binder; one universe u as in Mathlib geometrically. Statement verbatim in file; node differs from live only in lean; one sorry theorem, docstrings with source/blueprint and 6 proof steps; imported proof modules exist; no duplicate in side-live lean trees. Report has Worker report and Second reading by Q148, with server preflight+compile OK after earlier ENOSPC retries. No findings; no compile (no files changed)."
+ }
+}

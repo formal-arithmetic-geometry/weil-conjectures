@@ -132,7 +132,8 @@ def main_stage2(g, item) -> int:
             # in slopmaster2 (which live imports verbatim): the audit record's decls name them, so the worker can cite them
             import dag_queue as dq
             if dq.audit_state(n) in dq.DONE_STATES:
-                decls = [x for x in ((n.get("lean_audit") or {}).get(dq.done_branch()) or {}).get("decls") or [] if isinstance(x, dict)]
+                a = (n.get("lean_audit") if isinstance(n.get("lean_audit"), dict) else {}).get(dq.done_branch())
+                decls = [x for x in (a if isinstance(a, dict) else {}).get("decls") or [] if isinstance(x, dict)]
                 lean = (f"**no `lean` record, but finished upstream (lean_audit {dq.done_branch()}: closed): its declarations in the "
                         f"slopmaster2 source, cite these**" + "".join(f"\n  - `{x.get('name')}` ({x.get('kind')}) in `{x.get('module')}`"
                         + (f" lines {x['lines'][0]}-{x['lines'][-1]}" if isinstance(x.get("lines"), list) and x["lines"] else "") for x in decls))
@@ -324,6 +325,18 @@ def main_stage3(g, item) -> int:
         w(f"- sorry before: {d['sorry_before'] or '-'}; after: {d['sorry_after'] or '-'}; left by the delivery: {d['new_sorry'] or '-'}")
         dd = git("diff", f"{base}..{br}", "--", m["file"])
         w(f"\n```diff\n{dd[-20000:]}\n```\n")
+    # 2026-10-26 (the human): a delivery that changes other files is read for downstream compatibility too; the direct
+    # importers of what it changes are compiled against it (tools/importer_compile.py) and the result is evidence here
+    import stage3_gate as gt
+    other = gt.other_files(D, item)
+    if other:
+        w("## 3a. Other files this delivery changes (why it is read)\n\n" + "\n".join(f"- {x}" for x in other) + "\n")
+        try:
+            import importer_compile as ic
+            w(ic.evidence(D, item, git("rev-parse", br).strip()))
+        except Exception as e:  # noqa: BLE001   the packet is still written; the reviewer compiles by hand
+            w("## 3b. Downstream compatibility\n\nThe importer compile failed to run (" + repr(e)[:300] + "): compile the "
+              "direct importers of every changed module yourself with lcompile.py.\n")
     for nid, x in D["nodes"].items():
         w(f"## 4. Node {nid} ({x['role']})\n\n```json\n{json.dumps(x['node'], ensure_ascii=False, indent=1)[:12000]}\n```\n")
     for p, t in D["changes"].items():

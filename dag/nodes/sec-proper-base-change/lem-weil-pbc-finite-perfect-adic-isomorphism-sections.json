@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+ "kind": "statement",
+ "title": "Finite Isom sheaves with normalization-compatible evaluation",
+ "statement": "Let X be a scheme, d an adic coefficient datum on A, φ quotient- and scalar-compatible isomorphisms of constant quotient and finite coefficient sheaves, M a derived completed-coefficient module, V an etale X-chart, and T a supplied normalized algebraic tower with perfect levels [def-weil-pbc-finite-perfect-adic-tower-data]. Assume separate local finite-level markings by T [lem-weil-pbc-finite-perfect-adic-stalk-models]. There are finite locally constant etale sheaves I_n of sets on V with nonempty geometric stalks, reduction maps r_n:I_(n+1)→I_n, and evaluation of their comparison-pullback sections on every affine weakly contractible pro-etale U over V. Evaluation gives isomorphisms from the actual strict quotient diagram level to the completed constant algebraic level, also after restriction to every X-pro-etale W mapping to U. Evaluation of reduction satisfies the consecutive naturality square for the actual strict diagram and model diagram. There is no covering or compatible section in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BV and 0F63, finite derived Isom sections and normalization; Tag 09C6, scalar-compatible identification of the actual finite quotient diagram."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "lem-weil-pbc-finite-perfect-adic-stalk-models",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-complete-coefficient-datum",
+  "lem-weil-pbc-residue-perfect-finite-quotient-models",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-weak-contractible",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a normalized etale presheaf presentation from the supplied perfect algebraic tower and separate finite-level markings.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define I_n as the sheafification of the presentation Isom presheaf and r_n by sheafifying p_n. Apply finite-ring derived local constancy to C_n,K_n to prove I_n finite locally constant; use the supplied inhabited Isom stalks.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the pulled-back sections by canonical source-site evaluation. The preservation lemma turns the presheaf generator normalization equation into a raw evaluated square. The presentation transports this square along W to U to the forward square for the actual diagrams. Invert each evaluated transport isomorphism; cancellation of its hom and inverse proves the exact square in the theorem.",
+   "uses": [
+    "lem-weil-pbc-source-isomorphism-normalized-presheaf-evaluation",
+    "def-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+    "def-weil-pbc-source-derived-isomorphism-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+  "def-weil-pbc-source-derived-isomorphism-evaluation",
+  "lem-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+  "lem-weil-pbc-finite-ring-derived-local-constancy",
+  "lem-weil-pbc-source-isomorphism-normalized-presheaf-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C6, 09BV and 0F63; finite-ring local constancy, sheafification of presheaf reduction and inverse-square cancellation. Raw etale presentation and evaluation preservation are split off separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized tower of locally constant perfect complexes over finite quotient rings admits compatible pro-etale local trivializations by an algebraic stalk tower",
+   "results": "8 hits, all etale algebra definitions or elementary etale morphism results, with no normalized derived tower or stalk extraction theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. Use the project finite-ring and normalized Isom APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"Sieve\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "adicTower|compatible.*trivial",
+   "results": "6 hits in CategoryTheory.Shift.Adjunction and manifold local frames, unrelated to normalized algebraic quotient towers.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded locally constant perfect complex over a finite ring has finite locally constant sheaf of derived isomorphisms with a fixed geometric stalk complex",
+   "results": "8 hits: condensed locally constant functors, generic constant sheaf invariance and counit criteria; no finite-ring derived Isom-sheaf comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic tools only; the project finite-ring derived mapping-sheaf theorems are needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicTowerExtraction",
+  "date": "2026-10-27",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tags 09BV and 0F63, finite derived Isom sections and normalization; Tag 09C6, scalar-compatible identification of the actual finite quotient diagram.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicIsomorphismSections",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicIsomorphismSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdic_isomorphism_sections",
+  "statement": "theorem finitePerfectAdic_isomorphism_sections\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)\n    (T : FinitePerfectAdicAlgebraTower d)\n    (hperfect : ∀ n : ℕ, DerivedCategory.IsPerfect (T.level n))\n    (hmark : FinitePerfectAdicLevelMarkings X d φ M V T) :\n    ∃ (I : ℕ → Sheaf V.left.smallEtaleTopology (Type (t + 1)))\n      (r : ∀ n : ℕ, I (n + 1) ⟶ I n)\n      (ev : ∀ (U : V.left.ProEt), IsAffine U.left →\n        (ProEt.topology V.left).IsWeaklyContractible.{t + 1} U →\n        ∀ (W : X.ProEt), (W ⟶ finitePerfectAdicChartObject V U) → ∀ n : ℕ,\n        ((Functor.sheafPullbackConstruction.sheafPullback (toProEt V.left)\n          (Type (t + 1)) V.left.smallEtaleTopology (ProEt.topology V.left)).obj (I n)).obj.obj\n            (op U) →\n        ((finitePerfectAdicRestrictedTower X d W ((completedAdicReduction X d).obj M)).obj\n            (op n) ≅ (finitePerfectAdicModelDiagram X d W T).obj (op n))),\n      (∀ n : ℕ, IsLisseEtaleSheafOfSets (I n)) ∧\n      (∀ (n : ℕ) (Ω : Type t) [Field Ω] [IsSepClosed Ω]\n        (x : Spec (.of Ω) ⟶ V.left), Nonempty ((pointSmallEtale x).sheafFiber.obj (I n))) ∧\n      ∀ (U : V.left.ProEt) (ha : IsAffine U.left)\n        (hw : (ProEt.topology V.left).IsWeaklyContractible.{t + 1} U)\n        (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ)\n        (s : ((Functor.sheafPullbackConstruction.sheafPullback (toProEt V.left)\n          (Type (t + 1)) V.left.smallEtaleTopology (ProEt.topology V.left)).obj\n            (I (n + 1))).obj.obj (op U)),\n        (finitePerfectAdicRestrictedTower X d W ((completedAdicReduction X d).obj M)).map\n            (homOfLE (Nat.le_succ n)).op ≫\n          (ev U ha hw W f n\n            (((Functor.sheafPullbackConstruction.sheafPullback (toProEt V.left)\n              (Type (t + 1)) V.left.smallEtaleTopology (ProEt.topology V.left)).map\n                (r n)).hom.app (op U) s)).hom =\n          (ev U ha hw W f (n + 1) s).hom ≫\n            (finitePerfectAdicModelDiagram X d W T).map (homOfLE (Nat.le_succ n)).op",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3fd",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261027T050617-L-244429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T084357-L-3673757",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

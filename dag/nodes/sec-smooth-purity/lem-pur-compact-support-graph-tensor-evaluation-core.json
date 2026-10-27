@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-compact-support-graph-tensor-evaluation-core",
+ "kind": "statement",
+ "title": "Core mate equation for normalized compact-support graph tensor evaluation",
+ "statement": "With the notation of lem-pur-compact-support-graph-tensor-evaluation, the normalized comparison inverse satisfies the compactification projection mate equation: for every q satisfying the sum-extension tensor unit equation, q followed by the tensor image of the comparison inverse, the compactification projection map, and the induced compactification pullback map equals the comparison inverse on the tensor object.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GKF and 0GL5, projection formula and graph extension"
+ },
+ "stmt_deps": [
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-etale-sum-extension-tensor",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "The sheaf normalization determines N.sheafComparison uniquely: the open extension-to-direct-image map is monic, its proper direct image is monic, and the composition comparison is invertible. Hence N.sheafComparison is the canonical sheaf graph map. The derived normalization and full faithfulness of homotopy localization identify N.comparison.inv with compactSupportDerivedComparison. The existing graph-unit normalization calculation identifies that descent with the graph transpose. The two clopen derived adjunction constructions have the same counit, namely the inverse open-adjunction unit, so adjunction extensionality identifies their transfers and their graph transposes with the upstream compactificationEtaleComparison.",
+   "uses": [
+    "lem-asd-etale-compact-support-normalization",
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-asd-compact-support-graph-geometric-base-change",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-amb-unbounded-proper-open-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the two exact-pullback tensor transports. Naturality of the derived tensor bifunctor commutes the two input isomorphisms, identifying etaleSumExtensionTensorPullbackIso.hom with sfEtaleExactPullbackTensorIso.inv. Injectivity of the sum/evaluation hom-equivalence then identifies the given q with sfEtaleSumExactTensorMap.",
+   "uses": [
+    "lem-asd-etale-sum-extension-tensor",
+    "def-sf-exact-pullback-tensor-comparison",
+    "lem-sf-etale-graph-projection-arbitrary-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply sfEtaleGraphProjectionArbitraryBase to M and K. Its equality states that the graph comparison followed by the inverse exact projection is the sum tensor mate followed by the tensor image of the graph comparison. Postcompose with the exact projection isomorphism and cancel its inverse. Expanding only the hom of that isomorphism yields exactly the compactification projection followed by the pullback comparison in the required equation.",
+   "uses": [
+    "lem-sf-etale-graph-projection-arbitrary-base"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-asd-compact-support-graph-geometric-base-change",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-amb-unbounded-proper-open-composition",
+  "lem-asd-etale-sum-extension-tensor",
+  "def-sf-exact-pullback-tensor-comparison",
+  "lem-sf-etale-graph-projection-arbitrary-base"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E3",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GKF and 0GL5; reuse of the proved graph projection square and the graph-unit normalization calculation",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compactification projection mate equation for derived tensor and lower shriek",
+   "results": "No direct theorem; generic adjunction projection-map identities found and used in the parent proof.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction transpose of projection formula tensor map",
+   "results": "Generic adjunction homEquiv and projectionMap identities; no compact-support graph theorem.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightAdjointProjectionMap",
+   "results": "CategoryTheory.Adjunction.rightAdjointProjectionMap and its counit compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "match for generic transpose only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphTensor",
+  "date": "2026-10-27",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-graph-tensor-evaluation",
+   "place": "core mate equation extracted from the projection-transpose step",
+   "via": [
+    "lem-pur-compact-support-graph-tensor-evaluation"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphTensorCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportGraphTensorCore.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportGraph_tensor_evaluation_core",
+  "statement": "theorem compactSupportGraph_tensor_evaluation_core\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : EtaleCompactSupportNormalization A)\n    {V T : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V]\n    [IsLocallyNoetherian T] [CompactSpace T]\n    (e : V ⟶ T) [Etale e] [IsSeparated e]\n    [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e)\n    (M : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :\n    let S : DerivedCategoryModule A V ⥤ DerivedCategoryModule A T :=\n      (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory\n    let E : DerivedCategoryModule A T ⥤ DerivedCategoryModule A V :=\n      (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory\n    let T₀ := derivedTensor (ModuleCat.{u + 1} A) T\n    let V₀ := derivedTensor (ModuleCat.{u + 1} A) V\n    let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.g\n    ∀ q : S.obj ((V₀.obj M).obj (E.obj K)) ⟶ (T₀.obj (S.obj M)).obj K,\n      ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e\n        inferInstance).mapDerivedCategoryAdjunction).unit.app _ ≫ E.map q =\n        (V₀.map ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e\n          inferInstance).mapDerivedCategoryAdjunction.unit.app M)).app (E.obj K) ≫\n          (etaleSumExtensionTensorPullbackIso A e (S.obj M) K).hom →\n      q ≫ (T₀.map ((N.comparison e c).inv.app M)).app K ≫\n          ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app K ≫\n          (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map\n            ((V₀.obj M).map\n              ((leftDerivedUpperStarIsoMapDerivedCategory\n                (ModuleCat.{u + 1} A) e).hom.app K)) =\n        (N.comparison e c).inv.app ((V₀.obj M).obj (E.obj K))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T034708-L-3675350",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T054557-L-964916",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-affine-derived-coherator",
+ "kind": "statement",
+ "title": "The affine derived coherator has invertible comparison unit and counit",
+ "statement": "Let $T$ be an affine scheme [def-pc-scheme], and write $\\mathcal A_T=\\operatorname{QCoh}(\\mathcal O_T)$ for quasi-coherent module sheaves [pqf-def-coherent, def-weil-sheaf-of-modules-category]. Use unbounded derived categories [def-weil-abstract-derived-category, def-pc-derived-category]. Let $I_T:D(\\mathcal A_T)\\to D(\\mathcal O_T)$ and $C_T=Rq_T:D(\\mathcal O_T)\\to D(\\mathcal A_T)$ be the termwise inclusion and derived coherator with adjunction, unit $e_T$ and counit $d_T$ of [lem-sfb-scheme-derived-coherator-adjunction]. For every $B\\in D(\\mathcal A_T)$ the unit $e_T(B):B\\to C_TI_TB$ is an isomorphism. For every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_T)$ the counit $d_T(E):I_TC_TE\\to E$ is an isomorphism. No boundedness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D9, perfect-lemma-affine-coherator (3), with its induced adjunction; the identification by derived global sections is in (1)--(2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-category",
+  "lem-sfb-scheme-derived-coherator-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Write $T=\\operatorname{Spec}A$, and let $S:\\operatorname{Mod}_A\\to\\mathcal A_T$ be associated sheaf and $G=\\Gamma(T,-)|_{\\mathcal A_T}$. The affine tilde/global-sections node, clauses (2) and (3), gives natural isomorphisms $\\mathrm{id}\\cong GS$ and $SG\\cong\\mathrm{id}$, hence an additive equivalence. Both categories are abelian, using the quasi-coherent Grothendieck node for $\\mathcal A_T$. Both functors are exact: transport a kernel (respectively cokernel) diagram across the Hom bijections of this equivalence; its universal factorization property remains the kernel (respectively cokernel) property. Thus they preserve kernels and cokernels, and hence short exact sequences. This uses the quasi-coherent category, not all module sheaves, for $G$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sfb-qcoh-grothendieck-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IB, schemes-lemma-equivalence-quasi-coherent; Tag 01I7, schemes-lemma-compare-constructions"
+   }
+  },
+  {
+   "text": "Apply exact-functor derived factorization to $S$ and $G$, obtaining termwise functors $S_D:D(A)\\to D(\\mathcal A_T)$ and $G_D:D(\\mathcal A_T)\\to D(A)$. On complexes the two ordinary natural isomorphisms of Step 1 give $G_DS_D\\cong\\mathrm{id}$ and $S_DG_D\\cong\\mathrm{id}$ after localization: precisely, clause (2) of the localization universal-property node lifts each termwise isomorphism, and compatibility with compositions lifts its inverse as an inverse. Thus $S_D$ and $G_D$ are quasi-inverse on unbounded derived categories. No resolution or boundedness restriction enters this construction.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, derived-lemma-right-derived-exact-functor; natural transformations through localization as in the cited localization node"
+   }
+  },
+  {
+   "text": "The inclusion $i_T$ is exact by the quasi-coherent Grothendieck node. For a complex $B$, $H^n(i_TB)=i_T H^n(B)$ by preservation of kernels and cokernels, so $I_T$ lands in the full category $D_{\\mathrm{QCoh}}(\\mathcal O_T)$. Let $F:D(A)\\to D_{\\mathrm{QCoh}}(\\mathcal O_T)$ be the equivalence of the affine derived-equivalence node. Its composite with the full inclusion, and $I_TS_D$, both apply associated sheaf termwise on complexes. Clause (2) of the localization node therefore supplies a natural isomorphism between these functors; it also lies in the full quasi-coherent subcategory. Consequently the corestriction of $I_T$ is naturally isomorphic to $FG_D$, an equivalence by Step 2. In particular $I_T$ is fully faithful into $D(\\mathcal O_T)$, and every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_T)$ admits an isomorphism $v:I_TB\\xrightarrow{\\sim}E$.",
+   "uses": [
+    "lem-sfb-qcoh-grothendieck-generators",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, perfect-lemma-affine-compare-bounded, diagram; Tag 08D9, perfect-lemma-affine-coherator (3)"
+   }
+  },
+  {
+   "text": "Use the specified adjunction $I_T\\dashv C_T$ of the scheme-derived-coherator node. Since $I_T$ is fully faithful by Step 3, the fully faithful left-adjoint unit lemma gives that its actual unit $e_T(B):B\\to C_TI_TB$ is invertible for every $B$. This conclusion is about the specified adjunction, so no choice of a different equivalence unit is involved.",
+   "uses": [
+    "lem-sfb-scheme-derived-coherator-adjunction",
+    "lem-sp-adjunction-unit-fully-faithful-left"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D9, perfect-lemma-affine-coherator (3), induced adjunction; abstract unit criterion as cited"
+   }
+  },
+  {
+   "text": "For $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_T)$ choose $v:I_TB\\xrightarrow{\\sim}E$ from Step 3. The triangle identity of the specified adjunction is $d_T(I_TB)\\circ I_T(e_T(B))=1_{I_TB}$. Step 4 makes the second factor invertible, so $d_T(I_TB)=I_T(e_T(B))^{-1}$. Counit naturality gives $d_T(E)\\circ I_TC_T(v)=v\\circ d_T(I_TB)$, hence $d_T(E)=v\\circ d_T(I_TB)\\circ I_TC_T(v)^{-1}$. All factors are invertible. This proves the counit assertion for the actual $d_T$, including arbitrary unbounded $E$; none of the cited affine results assumes Noetherianity.",
+   "uses": [
+    "lem-sfb-scheme-derived-coherator-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D9, perfect-lemma-affine-coherator (3); triangle identity and counit naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sfb-qcoh-grothendieck-generators",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sfb-scheme-derived-coherator-adjunction",
+  "lem-sp-adjunction-unit-fully-faithful-left"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D9, perfect-lemma-affine-coherator (3), reduced to Tag 06Z0 and the ordinary affine equivalence (schemes Tag 01IB); the adjunction maps are checked by the triangle identity and naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coherator|[Aa]ffine.*[Dd]erived|[Dd]erived.*[Aa]ffine",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine scheme derived coherator adjunction unit and counit are isomorphisms",
+   "results": "8 hits: AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine, CategoryTheory.Adjunction.unitAsIsoOfIso, CategoryTheory.Adjunction.counitAsIsoOfIso, AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful, AlgebraicGeometry.Spec.fullyFaithful",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"DerivedCategory\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme the right derived coherator is quasi inverse to the termwise inclusion from unbounded complexes of quasi coherent sheaves",
+   "results": "8 hits: DerivedCategory.quotientCompQhIso, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, DerivedCategory.singleFunctorsPostcompQhIso, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme derived coherator unit counit isomorphism",
+   "results": "8 hits: AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine, AlgebraicGeometry.Scheme.isoSpec_inv_toSpecΓ, AlgebraicGeometry.Scheme.toSpecΓ_isoSpec_inv, AlgebraicGeometry.Scheme.isoSpec_inv_toSpecΓ_assoc, AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit, AlgebraicGeometry.Scheme.SpecΓIdentity, AlgebraicGeometry.Scheme.toSpecΓ_isoSpec_inv_assoc, AlgebraicGeometry.arrowIsoΓSpecOfIsAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the Gamma-Spec adjunction for schemes, ordinary quasi-coherent presentations, or abstract derived localization; none proves the unbounded scheme coherator comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "coherator, DerivedCategory, Quasicoherent",
+   "results": "0 hits: ; loogle: unknown identifier 'coherator'",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the Gamma-Spec adjunction for schemes, ordinary quasi-coherent presentations, or abstract derived localization; none proves the unbounded scheme coherator comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "coherator|[Aa]ffine.*[Dd]erived|[Dd]erived.*[Aa]ffine",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the Gamma-Spec adjunction for schemes, ordinary quasi-coherent presentations, or abstract derived localization; none proves the unbounded scheme coherator comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived category quasi coherent modules on affine scheme equivalent to modules",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, HasDerivedCategory.standard, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the Gamma-Spec adjunction for schemes, ordinary quasi-coherent presentations, or abstract derived localization; none proves the unbounded scheme coherator comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves affine derived category equivalence inclusion fully faithful",
+   "results": "8 hits: AlgebraicGeometry.AffineScheme.ΓIsEquiv, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, LightCondMod.LocallyConstant.fullyFaithfulFunctor, AlgebraicGeometry.AffineScheme.forgetToScheme_full, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CondensedMod.LocallyConstant.fullyFaithfulFunctor, SheafOfModules.fullyFaithfulForget",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the Gamma-Spec adjunction for schemes, ordinary quasi-coherent presentations, or abstract derived localization; none proves the unbounded scheme coherator comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "QCoh|Quasicoherent|quasicoherent",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the Gamma-Spec adjunction for schemes, ordinary quasi-coherent presentations, or abstract derived localization; none proves the unbounded scheme coherator comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-open-derived-qcoh-criterion",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQR, lemma-nonzero-some-cohomology. Proof of Tag 0BQR, first paragraph: represent K by a complex of quasi-coherent modules using Tag 08DB. Prerequisite of the 08DB argument: Tag 09T6, affine-open derived-pushforward comparison criterion. Tag 09T6 proof: Tag 08D9, perfect-lemma-affine-coherator (3), with its induced adjunction; the identification by derived global sections is in (1)--(2).",
+   "via": [
+    "lem-sfb-affine-open-derived-qcoh-criterion",
+    "lem-sfb-qc-separated-quasicoherent-complex-model",
+    "lem-sfb-ample-twist-hypercohomology-detection",
+    "lem-sfb-projective-negative-twists-generator",
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-derived-coherator",
+  "worker": "stage1",
+  "summary": "Reused the existing ordinary affine equivalence, affine derived equivalence, exact localization factorization and fully faithful unit lemma. Derived the termwise quasi-coherent equivalence explicitly, identified the corestriction of I_T, and checked the actual unit and counit by the specified adjunction. No new nodes; statement unchanged.",
+  "blueprint": "Realizes the affine comparison prerequisite 08D9 in the inherited route through 09T6 and 08DB below det-thm-sf-ctf-stability-direct-images proof (3). The inherited null blueprint ancestor is retained; latest blueprint contains no separate affine coherator statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Ordinary affine module/quasi-coherent-sheaf equivalence; a generic algebraic-geometric tool needed to interpret the affine comparison, with no replacement for this statement in the item unit."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Unbounded affine derived module/sheaf equivalence from Stacks 06Z0, the precise prerequisite cited in the proof of 08D9; no node of the item unit gives this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-b90f06304",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-b90f06304 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full. There are no new nodes, and the statement and stmt_deps are byte-identical to live, where the item is still unsplit with no reviewed record and no repair note, so the delivery is not superseded. Source: I read Stacks perfect.tex 08D9 (l.1453) and 06Z0 (l.237), and checked tags 01IB/01I7/015F against tags/tags. No SGA source is cited. The steps are correct. Step 1: tilde/Gamma clauses (2) and (3) give an equivalence Mod_A ≃ QCoh, which is exact; Gamma is only restricted to QCoh. Step 2: exact-factorization φ together with localization UP (2) lift the termwise isomorphisms to quasi-inverse functors S_D and G_D on unbounded D. Step 3: the inclusion is exact, so I_T lands in D_QCoh. The 06Z0 node's F and I_T∘S_D both lift termwise tilde, so I_T ≅ incl∘F∘G_D; hence I_T is fully faithful with essential image D_QCoh. Step 4: the fully-faithful-left unit leaf makes the specified e_T invertible. Step 5 (elementary): the triangle identity and counit naturality make d_T invertible on D_QCoh. Parent lem-sfb-affine-open-derived-qcoh-criterion step 5 uses exactly these two clauses. Tool uses accepted: lem-pc-affine-qcoh-derived-equivalence (06Z0, the lemma 08D9 itself cites) and the tilde/Gamma leaf. Duplicate search (rg -L over the snapshot DAG for coherator, 08D9 and 06Z0) found no node stating the item. Edge cases checked: the zero ring, non-Noetherian rings and doubly unbounded complexes. No fixes. One harmless point: the report mentions a citations.json that is not on the branch."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineDerivedCoherator",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineDerivedCoherator_comparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedCoherator.lean",
+  "statement": "theorem affineDerivedCoherator_comparisons (X : Scheme.{u}) [IsAffine X] [HasDerivedCategory.{w} (SheafOfModules.{u} X.ringCatSheaf)] (d : DerivedCoheratorAdjunctionData (SheafOfModules.isQuasicoherent X.ringCatSheaf).ι) : (∀ B : @DerivedCategory (SheafOfModules.isQuasicoherent X.ringCatSheaf).FullSubcategory _ d.abelian d.derivedCategory, IsIso (d.derivedAdjunction.unit.app B)) ∧ (∀ E : schemeDerivedCategory X, schemeDerivedQCohProperty X E → IsIso (d.derivedAdjunction.counit.app E))",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-221fd0427",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Node unchanged except lean; not superseded; lean.statement verbatim in file. Statement matches node and Stacks 08D9(3): IsAffine X; QCoh = existing isQuasicoherent full subcategory; unit IsIso for all B in D(QCoh) (package's own abelian/derived instances); counit IsIso for all E in schemeDerivedCategory X with schemeDerivedQCohProperty. Universal quantification over DerivedCoheratorAdjunctionData is the stronger form and holds for every package (full faithfulness argument); the structure is the conclusion package of the cited existence theorem, accepted as theorem-constructed data. No extra hypotheses or universe equalities; edge cases zero ring/empty scheme, unbounded complexes, non-Noetherian rings covered. Docstrings carry source, blueprint tag and the 5-step proof; sorry only; proof_dep imports plain. No duplicate in project Lean or Mathlib. No files changed, so no compile."
+ }
+}

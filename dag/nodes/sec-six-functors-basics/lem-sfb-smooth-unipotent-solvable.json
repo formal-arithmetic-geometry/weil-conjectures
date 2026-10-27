@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-smooth-unipotent-solvable",
+ "kind": "statement",
+ "title": "Smooth unipotent affine algebraic groups are solvable",
+ "statement": "Let $k$ be a field [def-weil-field]. All group schemes below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms], and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure $\\bar k$ of $k$. A smooth affine group is unipotent if in a faithful finite-dimensional matrix representation all its geometric points are unipotent matrices, meaning $(u-I)^N=0$ for some $N\\geq1$. A group scheme is solvable if it has a finite descending series of closed subgroup schemes, each normal in its predecessor, with commutative group-scheme quotients. Every smooth unipotent group scheme $U$ over $k$ is solvable in this group-scheme sense, with no assumption that $k$ is perfect or has characteristic zero.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.21, printed pp.284--285 (central normal series with additive subgroup quotients); Corollary 14.12, printed p.283, compares the smooth geometric-point definition with unipotence. Supporting construction: Theorem 14.5, printed pp.281--282, Example 6.49, printed pp.136--137, and Proposition 6.27, printed p.131."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-geometric-unipotence-unitriangular-embedding] to the faithful representation in the hypothesis. Identify $U$ with its closed image in $\\mathcal U_n$ over $k$.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.21, first sentence of proof; Corollary 14.12 and Theorem 14.5."
+   }
+  },
+  {
+   "text": "Here is the matrix calculation behind the standard series, grouped by superdiagonal distance. For each commutative $k$-algebra $R$ put $J_r(R)=\\{A:A_{ij}=0\\text{ unless }j-i\\geq r\\}$ for $1\\leq r\\leq n$. In matrix multiplication, a nonzero summand of $(AB)_{ij}$ requires $l-i\\geq r$ and $j-l\\geq s$; hence $J_rJ_s\\subseteq J_{r+s}$, with $J_t=0$ for $t\\geq n$. In the ring of upper triangular matrices each $J_r$ is a two-sided ideal. Thus $F_r(R)=I+J_r(R)$ is a subgroup: products use $A+B+AB$, and inverses use $I-A+A^2-\\cdots+(-A)^{n-1}$. Each $F_r$ is closed, cut out by the entries of distance less than $r$. Reduction modulo $J_{r+1}$ shows $F_{r+1}(R)$ normal in $F_r(R)$ and $F_r(R)/F_{r+1}(R)$ commutative, since $J_rJ_r\\subseteq J_{2r}\\subseteq J_{r+1}$ for $r\\geq1$. These identities hold for every $R$, including nonreduced $R$. Define $H_r\\subseteq U$ by the same vanishing equations on $i(u)-I$. They give closed subgroup schemes by [def-weil-closed-immersion, def-sc-group-scheme-subgroup]. The calculation gives $H_{r+1}\\triangleleft H_r$ and $[x,y]\\in H_{r+1}(R)$ for all $x,y\\in H_r(R)$. Finally $H_1=U$ and $H_n=1$, since $i$ is a closed immersion.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 6.49, printed pp.136–137, equations (38) and (c), grouped by distance; Proposition 14.21, intersection construction. Explicit polynomial calculation supplied here."
+   }
+  },
+  {
+   "text": "For $1\\leq r<n$, apply [lem-sfb-affine-normal-quotient-geometry] to $H_{r+1}\\triangleleft H_r$: both are affine of finite type, as closed subschemes cut out by finitely many coordinate equations in the affine finite-type scheme $U$. It represents the fppf quotient $Q_r=H_r/H_{r+1}$ and makes $H_r\\to Q_r$ locally surjective with kernel $H_{r+1}$. For $a,b\\in Q_r(R)$ take a common fppf refinement on which both lift to $x,y\\in H_r$. Step 2 puts $[x,y]$ in the kernel, so $ab=ba$ on that refinement and therefore over $R$ by the sheaf condition. This proves commutativity as a group scheme (the multiplication and its swapped multiplication agree on every algebra), as defined in [def-sc-group-scheme]. The finite series $U=H_1\\supseteq\\cdots\\supseteq H_n=1$ therefore proves the stated solvability. If $n=1$, it is the length-zero series of the trivial group.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.21, concluding sentence; normal quotients in Theorem 5.28 and Proposition 5.29, printed p.105, and sheaf interpretation in 5(j)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "def-sc-group-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.21, pp.284–285, with Example 6.49, pp.136–137. The standard filtration is grouped by superdiagonal distance and its elementary matrix calculation is written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth unipotent affine algebraic group is solvable as a group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsNilpotent.to_isSolvable\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [h : Group.IsNilpotent G], IsSolvable G\", \"doc\": \"Every nilpotent group is solvable.\"}\n  {\"name\": \"LieAlgebra.ofAbelianIsSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (L : Type v) [inst : LieRing L] [IsLieAbelian L], LieAlgebra.IsSolvable L\", \"doc\": \"Every abelian Lie algebra is solvable.\"}\n  {\"name\": \"IsSolvable\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ is solvable.\"}\n  {\"name\": \"LieAlgebra.isSolvable_of_isNilpotent\", \"module\": \"Mathlib/Algebra/Lie/Nilpotent\", \"type\": \"∀ (L : Type v) [inst : LieRing L] [hL : LieModule.IsNilpotent L L], LieAlgebra.IsSolvable L\", \"doc\": \"Every nilpotent Lie algebra is solvable. That is, if a Lie algebra $\\\\mathfrak{g}$ is nilpotent (meaning its lower central series terminates at zero after finitely many steps), then it is also solvable\"}\n  {\"name\": \"LieAlgebra.IsSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"(L : Type v) → [LieRing L] → Prop\", \"doc\": \"A Lie ring $\\\\mathfrak{g}$ is solvable if its derived series terminates at the zero subring after finitely many steps, i.e., there exists $n \\\\geq 0$ such that the $n$-th derived Lie algebra $\\\\mathfrak{\"}\n  {\"name\": \"LieAlgebra.isSolvableBot\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L], LieAlgebra.IsSolvable ↥⊥\", \"doc\": \"The zero Lie ideal $\\\\{0\\\\}$ in any Lie algebra $L$ over a commutative ring $R$ is solvable. This follows because the derived series of the trivial ideal terminates immediately at zero, satisfying the d\"}\n  {\"name\": \"CommGroup.isSolvable\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_3} [inst : CommGroup G], IsSolvable G\", \"doc\": \"Every commutative (abelian) group is a solvable group. This follows because the derived series of an abelian group terminates at the trivial subgroup after one step.\"}\n  {\"name\": \"LieAlgebra.IsSolvable.solvable_int\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {L : Type v} {inst : LieRing L} [self : LieAlgebra.IsSolvable L], ∃ k, LieAlgebra.derivedSeries ℤ L k = ⊥\", \"doc\": \"Every solvable Lie algebra $\\\\mathfrak{g}$ over the integers $\\\\mathbb{Z}$ has a derived series $\\\\mathfrak{g}^{(k)}$ that terminates at the zero submodule $\\\\{0\\\\}$ after finitely many steps, i.e., there \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract nilpotent-implies-solvable and Lie-algebra results do not establish solvability of smooth unipotent group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unipotent linear algebraic group embeds in upper triangular matrices with diagonal entries one and is nilpotent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.isNilpotent_e\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : IsDomain R]\\n  [inst_2 : CharZero R] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  {P : RootPairing ι R M N} [inst_7 : P.IsCrystallographic] [P.IsReduced] {b\", \"doc\": \"For each index $i$ in the finite support set of the base structure $b$, the Geck construction matrix $e(i)$ associated with the root pairing $P$ is nilpotent. Specifically, there exists a natural numb\"}\n  {\"name\": \"RootPairing.GeckConstruction.isNilpotent_f\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : IsDomain R]\\n  [inst_2 : CharZero R] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  {P : RootPairing ι R M N} [inst_7 : P.IsCrystallographic] [P.IsReduced] {b\", \"doc\": \"The block matrix $ f_i $ constructed in Geck's method for root pairings is nilpotent, i.e., there exists a natural number $ n $ such that $ (f_i)^n = 0 $.\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"∀ {K : Type u_2} [inst : Field K] {g : GL (Fin 2) K}, ↑g 1 0 = 0 → (g.IsParabolic ↔ ↑g 0 0 = ↑g 1 1 ∧ ↑g 0 1 ≠ 0)\", \"doc\": \"For a 2×2 invertible upper triangular matrix $g$ over a semiring $K$, $g$ is parabolic if and only if its diagonal entries are equal ($g_{0,0} = g_{1,1}$) and its superdiagonal entry ($g_{0,1}$) is no\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"The Cartan subalgebra obtained via the Geck construction acts triangularizably on the module of functions from the disjoint union of the finite support set and $\\\\iota$ to the commutative ring $R$. Thi\"}\n  {\"name\": \"Matrix.isParabolic_iff_exists\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {m : Matrix (Fin 2) (Fin 2) K} [NeZero 2],\\n  m.IsParabolic ↔ ∃ a n, m = (Matrix.scalar (Fin 2)) a + n ∧ n ≠ 0 ∧ n ^ 2 = 0\", \"doc\": \"A matrix $ m $ is parabolic if and only if there exists a scalar $ a $ and a non-zero matrix $ n $ such that $ m = aI + n $ and $ n^2 = 0 $, where $ I $ denotes the identity matrix.\"}\n  {\"name\": \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : LinearOrder K] [IsStrictOrderedRing K] {𝒢 : Subgroup (GL (Fin 2) K)}\\n  [𝒢.HasDetPlusMinusOne] {g : GL (Fin 2) K},\\n  g ∈ 𝒢 →\\n    ↑g 1 0 = 0 →\\n      (g.IsParabolic ↔\\n        (∃ x, x ≠ 0 ∧ g = Matrix.GeneralLinearGroup.upperRightHom x) ∨\\n          ∃ x, x ≠ 0 \", \"doc\": \"For a matrix $ g $ in the subgroup of $ \\\\mathrm{GL}(2, R) $ with determinant $ \\\\pm 1 $ and $ g_{1,0} = 0 $, $ g $ is parabolic if and only if there exists a non-zero $ x \\\\in R $ such that $ g $ equals\"}\n  {\"name\": \"Matrix.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [Nontrivial R] {m : Matrix (Fin 2) (Fin 2) R} [IsReduced R],\\n  m 1 0 = 0 → (m.IsParabolic ↔ m 0 0 = m 1 1 ∧ m 0 1 ≠ 0)\", \"doc\": \"For a 2×2 upper triangular matrix $ m $ over a commutative ring $ R $, $ m $ is parabolic if and only if its diagonal entries are equal ($ m_{00} = m_{11} $) and the upper right entry $ m_{01} $ is no\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"∀ {K : Type u_2} [inst : Field K] [inst_1 : LinearOrder K] [IsStrictOrderedRing K] {g : GL (Fin 2) K},\\n  Matrix.GeneralLinearGroup.det g = 1 ∨ Matrix.GeneralLinearGroup.det g = -1 →\\n    ↑g 1 0 = 0 →\\n      (g.IsParabolic ↔\\n        (∃ x, x ≠ 0 ∧ g = Matrix.GeneralLinearGroup.upperRightHom x) ∨\\n       \", \"doc\": \"For a 2×2 invertible matrix $ g $ over a linearly ordered ring $ K $ with determinant $ \\\\pm 1 $ and zero entry at position $ (1,0) $, $ g $ is parabolic if and only if there exists a nonzero $ x \\\\in K\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract nilpotent-implies-solvable and Lie-algebra results do not establish solvability of smooth unipotent group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\", \"IsSolvable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract nilpotent-implies-solvable and Lie-algebra results do not establish solvability of smooth unipotent group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*solvable|unipotent.*nilpotent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract nilpotent-implies-solvable and Lie-algebra results do not establish solvability of smooth unipotent group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every smooth unipotent affine algebraic group is solvable as a group scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSolvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ is solvable.\"}\n  {\"name\": \"IsNilpotent.to_isSolvable\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"[h : IsNilpotent G] : IsSolvable G\", \"doc\": \"Every nilpotent group is solvable.\"}\n  {\"name\": \"isSolvable_of_comm\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"{G : Type*} [hG : Group G] (h : ∀ a b : G, a * b = b * a) : IsSolvable G\", \"doc\": \"Every abelian group is solvable, i.e., if $G$ is a group where $ab = ba$ for all $a, b \\\\in G$, then $G$ is a solvable group.\"}\n  {\"name\": \"IsSolvable.mk\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G], (∃ n, derivedSeries G n = ⊥) → IsSolvable G\", \"doc\": \"If there exists a natural number $ n $ such that the $ n $-th term of the derived series of $ G $ is the trivial subgroup $ \\\\{e\\\\} $, then $ G $ is solvable.\"}\n  {\"name\": \"CommGroup.isSolvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"{G : Type*} [CommGroup G] : IsSolvable G\", \"doc\": \"Every commutative (abelian) group is a solvable group. This follows because the derived series of an abelian group terminates at the trivial subgroup after one step.\"}\n  {\"name\": \"LieAlgebra.ofAbelianIsSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsLieAbelian L] : IsSolvable L\", \"doc\": \"Every abelian Lie algebra is solvable.\"}\n  {\"name\": \"LieAlgebra.isSolvable_of_isNilpotent\", \"module\": \"Mathlib.Algebra.Lie.Nilpotent\", \"type\": \"(L : Type v) [LieRing L] [hL : LieModule.IsNilpotent L L] : LieAlgebra.IsSolvable L\", \"doc\": \"Every nilpotent Lie algebra is solvable. That is, if a Lie algebra $\\\\mathfrak{g}$ is nilpotent (meaning its lower central series terminates at zero after finitely many steps), then it is also solvable\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract nilpotent-implies-solvable and Lie-algebra results do not establish solvability of smooth unipotent group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|reductive|torus|centralizer|solvable|groupScheme|GroupScheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract nilpotent-implies-solvable and Lie-algebra results do not establish solvability of smooth unipotent group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|unitriangular",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: no group-scheme unipotence/solvability or unitriangular embedding theorem; the hits concern abstract groups, Lie modules, commuting endomorphisms or closed immersions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth affine algebraic group with unipotent geometric points admits a closed immersion into upper unitriangular matrices over the base field",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, LieModule.instIsTriangularizableOfIsAlgClosed, Matrix.SpecialLinearGroup.isClosedEmbedding_toGL, Matrix.SpecialLinearGroup.isEmbedding_mapGL, Matrix.SpecialLinearGroup.isEmbedding_toGL, Matrix.specialUnitaryGroup, Matrix.instGroupSubtypeMemSubmonoidSpecialUnitaryGroup, AlgebraicGeometry.FormallyUnramified.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: no group-scheme unipotence/solvability or unitriangular embedding theorem; the hits concern abstract groups, Lie modules, commuting endomorphisms or closed immersions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\", \"IsTriangularizable\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: no group-scheme unipotence/solvability or unitriangular embedding theorem; the hits concern abstract groups, Lie modules, commuting endomorphisms or closed immersions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithful unipotent representation of an algebraic group is triangularizable over its ground field",
+   "results": "OK 8 hit(s): LieModule.instIsTriangularizableOfIsAlgClosed, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall, LieModule.IsTriangularizable, LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, LieModule.instIsTriangularizableSubtypeEndMemLieSubalgebraRangeToEnd, LieModule.instIsTriangularizableSubtypeMemLieSubmodule_1, LieModule.instIsTriangularizableSubtypeMemLieSubalgebra",
+   "date": "2026-10-23",
+   "verdict": "no match: no group-scheme unipotence/solvability or unitriangular embedding theorem; the hits concern abstract groups, Lie modules, commuting endomorphisms or closed immersions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine algebraic group with unipotent geometric points admits a closed immersion into upper unitriangular matrices over the base field",
+   "results": "OK 8 hit(s): Matrix.SpecialLinearGroup.isClosedEmbedding_toGL, Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, AlgebraicGeometry.IsClosedImmersion.Spec_map_residue",
+   "date": "2026-10-23",
+   "verdict": "no match: no group-scheme unipotence/solvability or unitriangular embedding theorem; the hits concern abstract groups, Lie modules, commuting endomorphisms or closed immersions"
+  },
+  {
+   "tool": "grep",
+   "query": "unitriangular|unipotent|triangularizable",
+   "results": "OK 14 hit(s): Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean, Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean, Mathlib/LinearAlgebra/Eigenspace/Pi.lean, Mathlib/LinearAlgebra/Eigenspace/Pi.lean, Mathlib/LinearAlgebra/Eigenspace/Pi.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: no group-scheme unipotence/solvability or unitriangular embedding theorem; the hits concern abstract groups, Lie modules, commuting endomorphisms or closed immersions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-radical-quotient",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Smooth unipotent affine algebraic groups are solvable.",
+   "via": [
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-unipotent-solvable",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Split the structural unitriangular embedding from Milne 14.12/14.5 into one statement-only node. Wrote the distance filtration, all-algebra matrix calculation, closed subgroup normality, and fppf-local proof of commutativity of each represented quotient; reused the existing affine normal-quotient theorem. No connectedness or perfectness was added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Smooth unipotent affine algebraic groups are solvable. Realizes the Milne 14.21 supporting argument for the reductive-radical quotient. The inherited created.item chain ends at lem-sfb-admissible-direct-image without an imported ancestor, so blueprint_refs.py ancestor returns None; this value and its via chain are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-ac00bdddd",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-ac00bdddd (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full, and checked them against Milne iAG2017: Thm 14.5 and its proof (pp.281-282), Cor 14.9/14.10/14.12 and the μ_p remark (p.283), Prop 14.21 (pp.284-285) and Cor 3.35 (p.75). The item statement is unchanged and matches Milne 14.12+14.21 restricted to smooth groups. Step 1 cites the new embedding node; its hypotheses (injective on all R, unipotent k̄-points) are exactly the item's. Step 2 is genuinely elementary, and I verified it: J_rJ_s⊆J_{r+s}, F_r=I+J_r is a subgroup, F_r→(T/J_{r+1})^× has kernel F_{r+1} and commutative image since J_r²⊆J_{r+1} for r≥1, H_r is the pullback closed subgroup, H_1=U and H_n=1, and none of this needs reducedness. Step 3 uses only the smoothness-free clauses of lem-sfb-affine-normal-quotient-geometry (the representing quotient is the fppf sheafification, kernel N, locally surjective). The commutator argument on a common refinement R'⊗R'' plus the sheaf property gives m∘s=m on all points, which is commutativity in the sense of def-sc-group-scheme. The new node is true over arbitrary, including imperfect, fields by 14.12→14.9→14.5(a⇒b)→3.35, and smoothness is necessary (μ_p). Small cases are consistent: G_a in U_2, constant Z/p in characteristic p, Z/2 in characteristic 0 (no faithful unipotent representation), and G_m excluded. B1-B9 hold: statement-only, self-contained, searches recorded, blueprint from.node null with the via chain preserved. It is not a relabelling, since the filtration and quotient argument stay in the item. In the DAG-wide duplicate search, p-linear-triangular, lem-sfb-unipotent-rational-representation-fixed-vector (algebraically closed field, fixed vector only) and lem-sfb-perfect-solvable-unipotent-torus are not duplicates. There is no SGA citation, no tool_uses, and the unit is the item's own. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SmoothUnipotentSolvable",
+  "declaration": "AlgebraicGeometry.smooth_unipotent_isSolvable",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SmoothUnipotentSolvable.lean",
+  "statement": "theorem smooth_unipotent_isSolvable {k : Type u} [Field k] (U : Grp (Over (Spec (.of k)))) (hU : SolvableGroupStructure.IsAlgebraic U) (hu : SolvableGroupStructure.IsUnipotent U) : SolvableGroupStructure.IsSolvable U",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92c781a89",
+  "group": "NA",
+  "result": "pass",
+  "note": "Item lem-sfb-smooth-unipotent-solvable: theorem smooth_unipotent_isSolvable (U : Grp (Over (Spec k))) (IsAlgebraic U) (IsUnipotent U) : IsSolvable U uses the landed def-sfb-solvable-group-structure defs (affine+LocFT+QC; Smooth ∧ closed-immersion into GL_n with (r(x)-1)^N=0 at every alg-closed point in universe u; finite closed normal series with commutators factoring on all comm k-algebras). This matches the node and Milne 14.21/14.12 clause by clause, with no perfectness/char/connectedness assumption. Node diff vs live: only lean + stmt_dep gaining a landed def node (brief §177 allows). Statement verbatim; sorry only; docstrings with source place, blueprint tag and 3 proof steps; no duplicate theorem in Sheaf/Mathlib; edge cases (trivial, constant p-groups, imperfect G_a forms, μ_p excluded) OK; no compile (no file changed)."
+ }
+}

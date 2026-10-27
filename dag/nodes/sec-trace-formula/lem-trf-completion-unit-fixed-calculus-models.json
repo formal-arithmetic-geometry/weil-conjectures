@@ -1,0 +1,129 @@
+{
+ "id": "lem-trf-completion-unit-fixed-calculus-models",
+ "kind": "statement",
+ "title": "Ordinary and derived completion models for a fixed calculus",
+ "statement": "For a prime l, finite extension E/Q_l, scheme W and any specified CoefficientDerivedSystemCalculus S, there exists an ordinary quotient model M with a compatible DerivedModel S M. No residue-characteristic invertibility hypothesis is needed. Interfaces: [def-trf-completion-unit-models], [lem-coef-derived-system-evaluation-calculus].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0941, with derived.tex Tag 09T5 and sites-modules.tex Tags 03D7, 03EK; explicit strict quotient construction."
+ },
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Take the existing ordinary quotient tensor/limit adjunction. Its exact restriction and constant-tower limit have the normalized right-derived composition unit. Derive the tensor functor on the resolving class of flat-term K-flat complexes. Compare this left adjoint with the supplied S.reduction using uniqueness of adjoints to the same total limit. Transport its universal left-derived comparison and its Hom formula. The finite-adjunction mate calculation gives the finite reduction equation. The canonical termwise limit comparison, right-derived limit unit and strict Roos isomorphism supply the remaining fields. The construction is over the coefficient sheaf and does not use invertibility of l on W, boundedness, or completeness.",
+   "uses": [
+    "lem-trf-completion-unit-ordinary-adjunction",
+    "lem-trf-completion-unit-derived-adjunction-comparison",
+    "lem-trf-completion-unit-finite-mate-comparison",
+    "lem-trf-completion-unit-canonical-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-ordinary-adjunction",
+  "lem-trf-completion-unit-derived-adjunction-comparison",
+  "lem-trf-completion-unit-finite-mate-comparison",
+  "lem-trf-completion-unit-canonical-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Derived quotient/limit adjunction and strict quotient system; P4 formal assembly, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism from derived completion on flat K-flat complexes to Roos limit of strict quotient tower",
+   "results": "8 hits; DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso.ofComponents\"",
+   "results": "8 hits; CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents', CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents'.app, CategoryTheory.NatIso.ofComponents'_hom_app, CategoryTheory.NatIso.ofComponents'_inv_app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientReductionPresentation|TrfCompletionRoosNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation between inverse sequences assemble level isomorphisms commuting with transition maps",
+   "results": "8 hits; CategoryTheory.NatTrans.ofOpSequence, CategoryTheory.NatTrans.ofSequence, CategoryTheory.CatCommSq.iso_inv_naturality, CategoryTheory.NatTrans.isIso_iff_isIso_app, CategoryTheory.CatCommSq.iso_inv_naturality_assoc, CategoryTheory.NatTrans.CommShift.of_isIso, CategoryTheory.NatIso.hom_app_isIso, CategoryTheory.ComposableArrows.isoMk",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "ofOpSequence|mapHomologicalComplexCompIso|homEquiv_unit",
+   "results": "25 hits; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.StrictQuotientCompletionRealization",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): isomorphism pullback commutes with reductions and transitions, original item steps 4-6 and 8 (multiplication, product comparison and descent); extracted Normalized completion realization, original steps 2 and 8; strict quotient comparison substep",
+   "via": [
+    "lem-trf-strict-quotient-completion-realization",
+    "lem-trf-isomorphism-multiplication-cone-descent",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletionUnitFixedCalculusModels",
+  "file": "lean/Sheaf/Paper/CompletionUnitFixedCalculusModels.lean",
+  "declaration": "WeilConjectures.CompletionUnit.fixedCalculusModels",
+  "statement": "theorem fixedCalculusModels (S : CoefficientDerivedSystemCalculus l E W) :\n    ∃ M : OrdinaryModel l E W, Nonempty (DerivedModel l E W S M)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ac9fc",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T130628-L-3484579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ac9fc",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T130628-L-3484579",
+  "kind": "interface",
+  "note": "independent cc review: TrfCompletionRoosNormalized coherence premise vs T6 invisible-twist counterexample and the S9 pullback precedent; item proof vs coherentQuotientModelComparison/fixedCalculusModels/ordinaryQuotientTowerComparison; adapted modules compiled in sandbox against the published IntegralReductionTowerCanonical"
+ }
+}

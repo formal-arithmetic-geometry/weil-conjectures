@@ -269,22 +269,39 @@
  },
  "lean": {
   "module": "Sheaf.RingTheory.EtaleAwayCompletionHomLifting",
-  "declaration": "AdicCompletion.existsUnique_algHom_of_etale_away_completion",
+  "declaration": "RingTheory.existsUnique_algHom_lift_of_etale_away_completion",
   "file": "lean/Sheaf/RingTheory/EtaleAwayCompletionHomLifting.lean",
-  "statement": "theorem existsUnique_algHom_of_etale_away_completion (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (D : Type u) [CommRing D] [Algebra A D] (hD : RingHom.FiniteType (algebraMap A D)) (hetale : Etale (Spec.map (CommRingCat.ofHom (algebraMap A D)) ∣_ ⟨(PrimeSpectrum.zeroLocus (I : Set A))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (I : Set A)).isOpen_compl⟩)) (C : Type v) [CommRing C] [Algebra A C] [IsNoetherianRing C] [HenselianRing C (I.map (algebraMap A C))] (φ : AdicCompletion (I.map (algebraMap A D)) D →ₐ[A] AdicCompletion (I.map (algebraMap A C)) C) : ∃! f : D →ₐ[A] C, ∀ d : D, algebraMap C (AdicCompletion (I.map (algebraMap A C)) C) (f d) = φ (algebraMap D (AdicCompletion (I.map (algebraMap A D)) D) d)",
+  "statement": "theorem existsUnique_algHom_lift_of_etale_away_completion (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (D : Type u) [CommRing D] [Algebra A D] (hD : (algebraMap A D).FiniteType) (hEtale : AlgebraicGeometry.Etale (AlgebraicGeometry.morphismRestrict (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap A D))) ⟨(PrimeSpectrum.zeroLocus (I : Set A))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (I : Set A)).isOpen_compl⟩)) (C : Type v) [CommRing C] [Algebra A C] [IsNoetherianRing C] [HenselianRing C (I.map (algebraMap A C))] (φ : AdicCompletion (I.map (algebraMap A D)) D →ₐ[A] AdicCompletion (I.map (algebraMap A C)) C) : ∃! u : D →ₐ[A] C, ∀ d : D, algebraMap C (AdicCompletion (I.map (algebraMap A C)) C) (u d) = φ (algebraMap D (AdicCompletion (I.map (algebraMap A D)) D) d)",
   "branch": "newtargets-dag",
-  "by": "N0",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.EtaleAwayCompletionHomLifting deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-9dfeb1609",
-  "group": "N0",
+  "reviewer": "NT-stage2-cc-0cdc15ca6",
+  "group": "Q136",
   "result": "pass",
-  "note": "Read node, Stacks 0AKJ (restricted.tex 1847-1910), all 6 stmt_dep records/declarations and the module. Every hypothesis matches: Noetherian A, ideal I, finite-type D (RingHom.FiniteType), restriction of Spec D→Spec A to the complement of V(I) is étale, Noetherian C with HenselianRing C (IC), AdicCompletion along ID/IC with the canonical A-algebra instance. Conclusion ∃! f : D →ₐ[A] C with ι_C∘f = φ∘ι_D is the node's stated equivalent form; C^h = C for a henselian pair; uniqueness in C via Jacobson radical + Krull. Edge cases I=0, I=⊤, zero rings covered. A and D share universe u as forced by Spec/Etale; C has independent universe v. No new defs, one sorry, source/blueprint docstrings and 7 proof steps present, statement verbatim, no duplicate found in lean/Sheaf or Mathlib. nt_compile --json: clean, 5.5 s. Second reading is a disclosed self-check."
+  "note": "Read node, Stacks 0AKJ (restricted.tex 1848-1862; henselian target so C^h=C), all 6 stmt_dep records, module and report. Every hypothesis matches with nothing stronger: Noetherian A, ideal I, RingHom.FiniteType D, Etale of morphismRestrict of Spec.map(algebraMap A D) to the complement of V(I), Noetherian C with HenselianRing C (IC), AdicCompletion along ID/IC, arbitrary A-algebra φ. Conclusion ∃! u with ι_C∘u = φ∘ι_D is the node's stated equivalent form. A and D share universe u (forced by Spec.map, no loss for finite type); C has independent universe v. Edge cases I=0, I=⊤, nilpotent I, C=0, D=0 hold. One theorem, sorry only, no defs; source/blueprint docstrings and 7 proof steps present; lean.statement verbatim; imports exist live; report has both sections; no name clash in the live tree (old removed name absent); node now cited by DL-a1 nodes. No recompile (no file changed)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/EtaleAwayCompletionHomLifting.lean",
+  "module": "Sheaf.RingTheory.EtaleAwayCompletionHomLifting",
+  "declaration": "AdicCompletion.existsUnique_algHom_of_etale_away_completion",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

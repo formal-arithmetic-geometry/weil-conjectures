@@ -1,0 +1,262 @@
+{
+ "id": "lem-fd-mixed-pullback-transformation",
+ "kind": "statement",
+ "title": "Mixed scalar pullback transformation and its equations on literal pair categories",
+ "statement": "Fix a finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. Let $T$ be a noetherian finite-dimensional scheme with $\\ell$ invertible, in the sense of [lem-weil-pbc-integral-stratified-perfect-characterization]; such schemes are called allowed. For each finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, use the framework integral category and raw rationalization $\\mathcal C_E^s(T)$ of [def-weil-rationalization-karoubi] and the PBC integral category and raw rationalization $\\mathcal C_E^p(T)$ of [def-weil-pbc-rational-category].\nUse these categories also for each allowed $W$, with $T$ replaced by $W$. For each allowed scheme $W$ and every finite $E$, suppose given exact $E$-linear equivalences $J_{W,E}:\\mathcal C_E^s(W)\\simeq\\mathcal C_E^p(W)$ and exact natural scalar comparisons $j_{W,L/E}:J_{W,L}S_{L/E}\\simeq P_{L/E}J_{W,E}$. Here $S,P$ and their associators $a^s,a^p$ are the actual transitions of [def-weil-rationalization-karoubi, lem-weil-scalar-extension-composition, prop-weil-pbc-scalar-extension]. Assume the identity normalization, compatibility with shifts and the scalar cocycle\n$$a^p_{M,L,E}\\circ P_{M/L}(j_{W,L/E})\\circ j_{W,M/L,S_{L/E}K}=j_{W,M/E}\\circ J_{W,M}(a^s_{M,L,E}).$$\nWrite $\\mathcal C_W,\\mathcal P_W$ for the literal pair categories of [def-weil-algebraically-closed-coefficients, def-weil-pbc-qbar-category], with inclusions $\\iota^s_E,\\iota^p_E$. All categories are viewed in one sufficiently large universe. Suppose the additive functors $J_W:\\mathcal C_W\\to\\mathcal P_W$ act on objects and on representatives $u:S_{M/E}K\\to S_{M/F}H$ by the formulas\n$$J_W(E,K)=(E,J_{W,E}K),\\qquad J_W[M,u]=[M,j_{W,M/F,H}J_{W,M}(u)j_{W,M/E,K}^{-1}].$$\nFor each allowed scheme isomorphism $h:U\\simeq T$, let $F^s_{h,E},F^p_{h,E}$ be the actual rational pullbacks of [def-weil-derived-pullback-tensor-hom, def-weil-pbc-completed-pullback], with scalar comparisons $\\alpha^s:S_UF^s_{h,E}\\simeq F^s_{h,L}S_T$ and $\\alpha^p:P_UF^p_{h,E}\\simeq F^p_{h,L}P_T$ and their unit, tower and shift equations. Use their actual common-stage pullbacks $F^s_h,F^p_h$, the latter as in [prop-weil-pbc-descent-functors]. Suppose natural isomorphisms $b_{h,E}:J_{U,E}F^s_{h,E}\\simeq F^p_{h,E}J_{T,E}$ satisfy\n$$F^p_{h,L}(j_T)b_{h,L,S_TK}J_{U,L}(\\alpha^s_K)=\\alpha^p_{J_{T,E}K}P_U(b_{h,E,K})j_{U,F^s_{h,E}K}.$$\nSet $A_E=J_{U,E}F^s_{h,E}$ and $B_E=F^p_{h,E}J_{T,E}$. Their scalar-system comparisons, oriented from $P_U A_E$ to $A_L S_T$ and from $P_U B_E$ to $B_L S_T$, respectively, are\n$$a_{L/E}=J_{U,L}(\\alpha^s)j_{U,F^s_{h,E}}^{-1},\\qquad c_{L/E}=F^p_{h,L}(j_T)^{-1}\\alpha^p_{J_{T,E}}.$$\nThese are coherent composite families whose descended functors are the actual $A=J_UF^s_h$ and $B=F^p_hJ_T$. The mixed square is equivalent to $b_{h,L,S_TK}a_{L/E}=c_{L/E}P_U(b_{h,E,K})$. The classes $[E,b_{h,E,K}]$ define a natural isomorphism $b_h:A\\simeq B$ with inverse $[E,b_{h,E,K}^{-1}]$. More explicitly, for any $u:S_{T,M/E}K\\to S_{T,M/F}H$, writing $a_E,c_E,a_F,c_F$ for the stage-$M$ comparisons, naturality on this representative is the equality\n$$c_F^{-1}B_M(u)c_EP_U(b_{h,E,K})=P_U(b_{h,F,H})a_F^{-1}A_M(u)a_E.$$\nThe construction preserves identities, vertical composition and composition of compatible functor families, retaining the actual pullback associators. Any identity, composition, shift or scalar equation between these finite compatible comparisons holds after descent, using the induced shift comparisons when a shift occurs. It asserts no finite equation that was not assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; agent-extracted auxiliary argument: Original common-stage proof steps 9–11 and the equation-descent part of step 12: actual composite systems and mixed pullback naturality"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-scalar-extension-composition",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-qbar-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-descent-functors"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sbc-coherent-pair-functor-descent] with source stages $\\mathcal C_E^s(T)$, target stages $\\mathcal C_E^p(U)$, source transitions $S_T$ and target transitions $P_U$. Its pair categories are exactly [def-weil-algebraically-closed-coefficients] and [def-weil-pbc-qbar-category], in the stipulated large universe. The fields form the same directed poset; exactness supplies additivity. The comparison for $J_W$ in that lemma's orientation is $j_W^{-1}$. Inverting the assumed scalar cocycle gives its tower equation, and identity normalization gives its unit equation. The pullback comparisons already have the lemma's orientation. Its composition-of-families clause therefore supplies coherent composite comparisons $a=J_U(\\alpha^s)j_U^{-1}$ and $c=F^p(j_T)^{-1}\\alpha^p$, including the actual scalar associators; no associator is replaced by an identity.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence computing local Frobenius in the PBC coefficient category; Auxiliary argument: coherent composite scalar families"
+   }
+  },
+  {
+   "text": "Check that these descended composites are the stipulated actual functors on arrows. For $u:S_{T,M/E}K\\to S_{T,M/F}H$, abbreviate $j_{U,M/E,F^s_EK}$ to $j_{U,E}$, and similarly at $F$. Applying the framework pullback formula of [def-weil-derived-pullback-tensor-hom] and then the given $J_U$ formula represents $A[M,u]$ by\n$$j_{U,F}J_{U,M}((\\alpha^s_F)^{-1})A_M(u)J_{U,M}(\\alpha^s_E)j_{U,E}^{-1}=a_F^{-1}A_M(u)a_E.$$\nApplying the given $J_T$ formula and then the PBC pullback formula of [prop-weil-pbc-descent-functors] represents $B[M,u]$ by\n$$(\\alpha^p_F)^{-1}F^p_M(j_{T,F})B_M(u)F^p_M(j_{T,E})^{-1}\\alpha^p_E=c_F^{-1}B_M(u)c_E.$$\nHere the subscripts of $\\alpha^p$ include $J_{T,E}K$ and $J_{T,F}H$. The equalities follow by expanding $a,c$ and functoriality. The object formulas agree as well. Thus the construction uses $A=J_UF_h^s$ and $B=F_h^pJ_T$ themselves.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "prop-weil-pbc-descent-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence computing local Frobenius in the PBC coefficient category; Auxiliary argument: identification with the actual composite functors"
+   }
+  },
+  {
+   "text": "At $E\\subset L$, left-compose the assumed mixed square by $F^p_{h,L}(j_T)^{-1}$ and right-compose it by $j_{U,F^s_{h,E}K}^{-1}$. Cancellation gives\n$$b_{h,L,S_TK}\\,J_{U,L}(\\alpha^s_K)j_U^{-1}=F^p_{h,L}(j_T)^{-1}\\alpha^p_{J_{T,E}K}\\,P_U(b_{h,E,K}),$$\nwhich is precisely $b_{h,L,S_TK}a_{L/E,K}=c_{L/E,K}P_U(b_{h,E,K})$. Conversely compose this equation by the two canceled isomorphisms. This proves the stated equivalence without any new compatibility assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence computing local Frobenius in the PBC coefficient category; Auxiliary argument: rearranging the mixed scalar square"
+   }
+  },
+  {
+   "text": "The compatibility just proved is exactly the transformation hypothesis of [lem-sbc-coherent-pair-functor-descent] for $\\Phi_E=A_E$, $\\Psi_E=B_E$ and $\\eta_E=b_{h,E}$. Its naturality hypothesis holds because the $b_{h,E}$ were given as natural isomorphisms. The lemma yields $b_h$ with components $[E,b_{h,E,K}]$, independent of representatives. From $b_La=cP_U(b_E)$ one obtains $b_L^{-1}c=aP_U(b_E^{-1})$ by cancellation. Apply the same lemma to the inverse finite natural transformations. Their descended composites have components $[E,b_{h,E,K}^{-1}b_{h,E,K}]$ and $[E,b_{h,E,K}b_{h,E,K}^{-1}]$, hence identities. This gives the asserted inverse and natural isomorphism.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence computing local Frobenius in the PBC coefficient category; Auxiliary argument: descent and invertibility of the mixed comparison"
+   }
+  },
+  {
+   "text": "For the requested representative equality write $b_{MK}=b_{h,M,S_{T,M/E}K}$, $b_{MH}=b_{h,M,S_{T,M/F}H}$. Compatibility at the source, finite naturality on $u$, and compatibility at the target give respectively\n$$\\begin{aligned}\nc_F^{-1}B_M(u)c_EP_U(b_{h,E,K})\n&=c_F^{-1}B_M(u)b_{MK}a_E\\\\\n&=c_F^{-1}b_{MH}A_M(u)a_E\\\\\n&=P_U(b_{h,F,H})a_F^{-1}A_M(u)a_E.\n\\end{aligned}$$\nBoth sides are maps $P_{U,M/E}A_EK\\to P_{U,M/F}B_FH$. By the arrow formulas of step 2 these are precisely the two sides of naturality in the pair category. This calculation allows $E\\ne F$ and does not presume that a common-stage representative has endpoints already defined over $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence computing local Frobenius in the PBC coefficient category; Auxiliary argument: explicit naturality at unequal endpoint fields"
+   }
+  },
+  {
+   "text": "For identities and vertical composition the components are $[E,1]$ and $[E,\\theta_{E,K}\\eta_{E,K}]$. The composition and equation clauses of [lem-sbc-coherent-pair-functor-descent] identify these with the corresponding pair-category operations. For horizontal composition, whiskering a component by a descended family $D$ gives $[E,D_E(\\eta_{E,K})]$, since at $M=E$ the scalar comparison is the identity; prewhiskering evaluates it at the finite-stage image of $K$. Vertical composition then gives the usual horizontal composite. Apply the same rule to each supplied finite pullback compositor or unitor. Their components descend as given, so diagrams involving composition use those actual pullback associators, with the same bracketing as the finite diagram. No new finite pullback equation is inferred.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence computing local Frobenius in the PBC coefficient category; Auxiliary argument: identities, vertical and horizontal composition, actual pullback associators"
+   }
+  },
+  {
+   "text": "For shifts, [prop-weil-pbc-common-stage-calculus] and [def-weil-algebraically-closed-coefficients] give the source and target common-stage shifts. Regard $[1]$ itself as a scalar-compatible family: its comparison is the scalar shift isomorphism. The given tower/shift equations make the finite composite shift comparisons $s^A_{E,K}:A_E(K[1])\\to(A_EK)[1]$ and $s^B_{E,K}:B_E(K[1])\\to(B_EK)[1]$ compatible transformations between the corresponding composite families. Apply [lem-sbc-coherent-pair-functor-descent]; their descended components are $[E,s^A_{E,K}]$ and $[E,s^B_{E,K}]$. They are invertible by the inverse argument of step 4. Thus if the finite $b$ obeys\n$$s^B_{E,K}b_{h,E,K[1]}=(b_{h,E,K})[1]s^A_{E,K},$$\nits class is exactly the shift equation for $b_h$ using these induced comparisons. The same reasoning applies to any specified integer shift. The construction makes no claim that this finite equation follows merely from naturality of $b_{h,E}$.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence computing local Frobenius in the PBC coefficient category; Auxiliary argument: induced shift comparisons and conditional shift equations"
+   }
+  },
+  {
+   "text": "Finally, consider any of the stipulated finite equations, including scalar or composition equations, with its structural comparisons inserted. At an object $(E,K)$, choose one finite field containing all the finitely many fields in this equation. Functor applications and compositions have the representatives already established above; scalar transport is conjugation by the specified associators. By [lem-sbc-coherent-pair-functor-descent], this transport commutes with descent and equations of compatible transformations are preserved. Equal finite maps therefore give equal classes. Equality at every $(E,K)$ is equality of natural transformations. In a shift equation use step 7's comparisons. This proves exactly the asserted conditional preservation of equations, on the literal pair categories throughout.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence computing local Frobenius in the PBC coefficient category; Auxiliary argument: preservation of the assumed equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-qbar-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-common-stage-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; explicit auxiliary comparison argument using the existing generic coherent pair-descent lemma. The blueprint provides the coefficient-category context, not these mixed-square calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A mixed scalar compatibility square for finite pullback comparison isomorphisms descends to a natural isomorphism between composite functors on common stage pair categories",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver_mapIso_mkNatIso_eq_mkIso; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.toFunctorToCategoricalPullback_obj_obj_iso_hom; CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver_obj_iso_hom_app; CategoryTheory.Limits.PreservesPullback.iso_hom; CategoryTheory.Limits.CategoricalPullback.mkNatIso; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.iso_hom_naturality; CategoryTheory.Limits.map_lift_pullbackComparison_assoc; CategoryTheory.Limits.pullbackComparison_comp_fst_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical pullback and pseudofunctor coherence declarations do not identify these actual composites or descend their mixed comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar compatible natural isomorphisms between two composites of coefficient equivalences and pullbacks descend on literal pair categories preserving equations",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Limits.CategoricalPullback.mkNatIso_eq; CategoryTheory.Limits.CategoricalPullback.mkNatIso; CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso; CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso; CategoryTheory.Limits.CategoricalPullback.mkNatIso.congr_simp; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e; CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso_hom_app_hom; CategoryTheory.Limits.CategoricalPullback.mkNatIso_hom_app_snd",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical pullback and pseudofunctor coherence declarations do not identify these actual composites or descend their mixed comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Functor.comp",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.NatIso'; ",
+   "date": "2026-10-22",
+   "verdict": "no match: query reports unknown identifier; semantic searches above and below were also read"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|mixed.scalar|common.stage.*pullback",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical pullback and pseudofunctor coherence declarations do not identify these actual composites or descend their mixed comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of conjugated common field representatives for a transformation between composite pseudonatural functor families with unequal endpoint coefficient fields",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Pseudofunctor.mapComp'_naturality_2; CategoryTheory.Pseudofunctor.mapComp'_hom_naturality; CategoryTheory.Pseudofunctor.mapComp'_naturality_1; CategoryTheory.Pseudofunctor.StrongTrans.naturality_naturality_hom_app; CategoryTheory.Pseudofunctor.mapComp'_hom_naturality_assoc; CategoryTheory.Pseudofunctor.StrongTrans.naturality_naturality_hom; CategoryTheory.Pseudofunctor.mapComp'_inv_naturality; CategoryTheory.Pseudofunctor.StrongTrans.naturality_naturality_hom_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical pullback and pseudofunctor coherence declarations do not identify these actual composites or descend their mixed comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.comp",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Functor.comp, CategoryTheory.Functor.comp_id, CategoryTheory.Functor.id_comp, CategoryTheory.Functor.comp_obj, CategoryTheory.Functor.toPrefunctor_comp, CategoryTheory.Functor.comp_map, CategoryTheory.Functor.leftUnitor, CategoryTheory.Functor.rightUnitor",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary functor composition and associators do not descend the mixed scalar comparison on these pair categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A mixed scalar compatible isomorphism between composites of coefficient comparison functors and pullbacks descends to common stage pair categories",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Limits.map_lift_pullbackComparison; CategoryTheory.Limits.map_lift_pullbackComparison_assoc; CategoryTheory.Limits.instIsIsoPullbackComparison; CategoryTheory.Limits.pullbackComparison_comp_fst_assoc; CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.pullbackComparison_comp_snd_assoc; CategoryTheory.Limits.CategoricalPullback.mkNatIso_eq; CategoryTheory.Limits.pullbackComparison_comp_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary functor composition, categorical pullbacks, or colimits in a fixed category, not the mixed coefficient comparison on these literal pair categories"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|mixed.scalar|common.stage.*pullback",
+   "results": "[grep] OK 1 hit(s); Mathlib/LinearAlgebra/Span/TensorProduct.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary functor composition, categorical pullbacks, or colimits in a fixed category, not the mixed coefficient comparison on these literal pair categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar compatible natural transformations between composite functor families descend to literal common field pair categories and preserve their equations",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.NatTrans.app_smul; CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul; CategoryTheory.Endofunctor.Coalgebra.functorOfNatTransComp; CategoryTheory.Functor.HomObj.comp; CategoryTheory.NatTrans.mk; CategoryTheory.Cat.Hom.toNatTrans_comp; CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp; CategoryTheory.NatTrans.app_units_zsmul",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary functor composition, categorical pullbacks, or colimits in a fixed category, not the mixed coefficient comparison on these literal pair categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a comparison between two conjugated functors on filtered colimits of coefficient categories, with different endpoint fields",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.NonemptyParallelPairPresentationAux.hg; CategoryTheory.NonemptyParallelPairPresentationAux.hf; CategoryTheory.SmallObject.ιFunctorObj_naturality; MonCat.FilteredColimits.cocone_naturality; CategoryTheory.Limits.ColimitPresentation.bind_ι_app; AddMonCat.FilteredColimits.cocone_naturality; MonCat.FilteredColimits.M.map_mk; ModuleCat.FilteredColimits.M.mk_map",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary functor composition, categorical pullbacks, or colimits in a fixed category, not the mixed coefficient comparison on these literal pair categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.comp",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Functor.comp; CategoryTheory.Functor.comp_id; CategoryTheory.Functor.id_comp; CategoryTheory.Functor.comp_obj; CategoryTheory.Functor.toPrefunctor_comp; CategoryTheory.Functor.comp_map; CategoryTheory.Functor.leftUnitor; CategoryTheory.Functor.rightUnitor",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary functor composition, categorical pullbacks, or colimits in a fixed category, not the mixed coefficient comparison on these literal pair categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-common-stage-comparison-descent",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence computing local Frobenius in the PBC coefficient category; Original common-stage proof steps 9–11 and the equation-descent part of step 12: actual composite systems and mixed pullback naturality",
+   "via": [
+    "lem-fd-common-stage-comparison-descent",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-mixed-pullback-transformation",
+  "worker": "stage1",
+  "summary": "Reuse the existing generic coherent pair-functor and transformation descent theorem. Explicitly identify the composite comparisons and actual arrow formulas, rearrange the mixed square, prove unequal-endpoint naturality and the inverse, and check composition, induced shifts and conditional equation descent. No new nodes, no statement change and no Karoubi completion. All source and citation checks are described in report.md.",
+  "blueprint": "Realizes the final sentence of def-fd-trace-function in the current main-20261015 snapshot, specifically the mixed-pullback/equation portion extracted as original common-stage steps 9–11 and the equation-descent part of step 12. The unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic additive descent for arbitrary coherent source and target coefficient diagrams supplies representative independence, composite-family coherence and transformation descent. The Fourier unit has no separate general descent theorem; using it retains the actual framework/PBC systems and pullbacks."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Its explicit common-stage arrow formula is the stipulated actual PBC pullback formula; the Fourier unit does not restate that generic operation descent."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Its common-stage shift formula identifies the actual PBC shift needed in the conditional shift equation; no Fourier-specific replacement is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-coherent-pair-functor-descent",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-common-stage-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-5bb3adb74",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-5bb3adb74 (reviewer sub-agent of L); spot-checked: Zero new nodes; statement and stmt_deps are unchanged; proof_deps equals the union of the step uses; no cycle and no SGA. I re-derived every typed composite myself. Steps 1-4: inverting the scalar cocycle gives exactly the tower equation of lem-sbc-coherent-pair-functor-descent with b=j^{-1}, and the lemma's arrow formula then reproduces the stipulated J_W formula. The comparisons a=J_U(α^s)j_U^{-1} and c=F^p(j_T)^{-1}α^p have the lemma's orientation P_U Φ_E → Φ_L S_T. Step 2: the arrow formulas a_F^{-1}A_M(u)a_E and c_F^{-1}B_M(u)c_E follow from def-weil-derived-pullback-tensor-hom (θ^{-1}Lf^*θ) and prop-weil-pbc-descent-functors. The rearranged mixed square b_L a=c P_U(b_E) is exactly the lemma's transformation hypothesis, and its inverse version holds too. Step 5: the three-equality naturality chain typechecks with E≠F and reduces to finite naturality when E=F=M. Step 7: the descended ([1],σ) family has the shift formula of prop-weil-pbc-common-stage-calculus. lem-weil-pbc-pair-functor-shift-coherence covers PBC→PBC only, so it does not apply here and nothing is duplicated. Steps 6 and 8 descend only equations that are assumed. The three declared tool uses are accepted, and the unit sk-def-trace has no steps. Advisory: the pentagon and unit laws for the framework associators a^s are taken from the pair-category definition def-weil-algebraically-closed-coefficients rather than restated. lem-sf-qbar-localization-common-stage step 1 already applies the lemma to the same framework stages, so this is not a fault of this delivery."
+ }
+}

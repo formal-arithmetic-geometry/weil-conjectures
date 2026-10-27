@@ -1,0 +1,156 @@
+{
+ "id": "def-sfb-top-base-change-canonical-maps",
+ "kind": "definition",
+ "title": "Canonical restricted unit, local class, module base-change and top-degree adjoint maps",
+ "statement": "Let $f:X\\to S$ and $g:T\\to S$ be morphisms of schemes [def-pc-scheme], with $P=T\\times_S X$, $v:P\\to X$ and $f_T:P\\to T$ [def-pc-base-change]. Let $F$ be an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], with ordinary tensor pullback and its section-normalized adjunction [def-pc-module-pullback]. The following are specified canonical maps, not assertions of base-change invertibility. For any morphism $v:Z\\to X$ and open $U\\subseteq X$, the restricted unit $F|_U\\to(v|_{v^{-1}U})_*((v^*F)|_{v^{-1}U})$ is obtained from the ordinary pullback unit by restriction and direct-image composition. For $q\\in\\mathbf N$, an injective resolution $I$ of $F$ [def-sp-injective-resolutions], an open $V\\subseteq S$, an open $U\\subseteq X$ identified with $f^{-1}V$, and an augmentation-preserving restricted-resolution section identification $R$ [def-pc-restricted-resolution-sections], define $\\theta_{f,F,I,V,U,R}^q:H^q(U,F|_U)\\to\\Gamma(V,R^qf_*F)$ [pqf-def-cohomology] by the cocycle-to-sheafification map on the section complex and the resolution comparison with the higher direct image [def-weil-pbc-flat-base-change-open-choices]. Write $C=Rf_*(F[0])$ in the derived categories [def-pc-derived-category] [def-pc-derived-direct-image]. Define $\\delta_{f,g,F}:Lg^*C\\to Rf_{T,*}((v^*F)[0])$ to be the derived mate followed by the pinned derived-to-ordinary module pullback comparison [def-pc-derived-module-base-change-map] [def-pc-derived-pullback]. If $C$ has cohomology zero above $q$, use the specified isomorphism $\\kappa_{g,C}:H^q(Lg^*C)\\to g^*H^q(C)$ [lem-weil-pbc-derived-pullback-top-cohomology] and define $a_{f,g,F}^q:R^qf_*F\\to g_*R^qf_{T,*}(v^*F)$ as the ordinary adjoint of $H^q(\\delta_{f,g,F})\\kappa_{g,C}^{-1}$, transported by the canonical total-derived/classical higher-image comparisons. No flatness, affineness, quasi-coherence or invertibility of $\\delta$ is required.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 0EX3, lemma-top-cohomology-functor, explanation of (c) before the proof; Tags 01E4, 01FB and 08HY for the canonical local class, unit and derived mate constructions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-sp-injective-resolutions",
+  "def-pc-restricted-resolution-sections",
+  "pqf-def-cohomology",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-pullback",
+  "lem-weil-pbc-derived-pullback-top-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical top degree base change map adjoint cocycle class map for higher direct image sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.mapBaseChange\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A : Type u_2) →\\n      (B : Type u_3) →\\n        [inst_1 : CommRing A] →\\n          [inst_2 : CommRing B] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra A B] →\\n                [inst_5 : Algebra R B] → [IsScalarTower R A B] → TensorProd\", \"doc\": \"Given commutative rings $ R $, $ A $, and $ B $ with $ A $ an $ R $-algebra, $ B $ an $ A $-algebra, and $ B $ an $ R $-algebra via the scalar tower $ R \\\\to A \\\\to B $, this defines the $ B $-linear is\"}\n  {\"name\": \"IsBaseChange.toDual_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(f : Dual R V) : ibc.toDual f = (f.baseChange A).congr ibc.equiv\", \"doc\": \"For any R-linear functional $ f $ on $ V $, the dual map induced by base change to $ A $ satisfies $ \\\\text{toDual}(f) = (f_{A}) \\\\circ \\\\text{equiv} $, where $ f_{A} $ is the base change of $ f $ to $ A\"}\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"(P A : Type*) [CommRing P] [CommRing A] [Algebra P S] [Algebra P A] [Algebra R P] [Algebra S A] [IsScalarTower P S A] :\\n  A ⊗[P] RingHom.ker (algebraMap P S) →ₗ[A] A ⊗[P] Ω[P⁄R]\", \"doc\": \"Let $R, P, S, A$ be commutative rings forming a tower of algebras $R \\\\to P \\\\to S \\\\to A$. This defines an $A$-linear map from $A \\\\otimes_P \\\\ker(P \\\\to S)$ to $A \\\\otimes_P \\\\Omega_{P/R}$, where $\\\\ker(P \\\\t\"}\n  {\"name\": \"Module.Dual.baseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A (A ⊗[R] V)\", \"doc\": \"The linear map from the dual module $\\\\text{Hom}_R(V, R)$ to $\\\\text{Hom}_A(A \\\\otimes_R V, A)$ induced by base change from $R$ to an $R$-algebra $A$, constructed by composing the base change homomorphis\"}\n  {\"name\": \"IsBaseChange.toDual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A W\", \"doc\": \"The R-linear map from the dual module of V over R to the dual module of W over A, induced by base change via the algebra structure of A over R. This map sends an R-linear functional on V to an A-linea\"}\n  {\"name\": \"groupCohomology.map\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \"(n : ℕ) : groupCohomology A n ⟶ groupCohomology B n\", \"doc\": \"Given a morphism $\\\\phi: A \\\\to B$ of representations, this constructs the induced map on the $n$-th group cohomology modules $H^n(G, A) \\\\to H^n(G, B)$, obtained by applying the homology functor to the \"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n : ℤ) (x : CochainComplex.HomComplex.Cocycle K L n),\\n  (CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom K L n) x = CochainComplex.HomComplex.CohomologyClass.mk x\", \"doc\": \"For any cocycle $ x $ in degree $ n $ of the homomorphism complex $ \\\\text{Hom}(K, L) $, the canonical additive monoid homomorphism maps $ x $ to its cohomology class $ [x] $ in the $ n $-th cohomology\"}\n  {\"name\": \"groupCohomology.cocyclesMap_cocyclesIso₀_hom_f_apply\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \"∀ {k G H : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Group H] {A : Rep k H} {B : Rep k G} (f : G →* H)\\n  (φ : (Action.res (ModuleCat k) f).obj A ⟶ B) (x : CategoryTheory.ToType (groupCohomology.cocycles A 0)),\\n  (CategoryTheory.CategoryStruct.comp (groupCohomology.iCocycles B 0) (grou\", \"doc\": \"For commutative rings $k$, groups $G$ and $H$, representations $A$ of $H$ and $B$ of $G$, a monoid homomorphism $f: G \\\\to H$, and a morphism $\\\\phi: (\\\\text{Res}_f A) \\\\to B$ of representations, the comp\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib construction; reuse the four existing definitions in Sheaf.AlgebraicGeometry.TopBaseChangePresheaf, not its theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topBaseChange\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib construction; reuse the four existing definitions in Sheaf.AlgebraicGeometry.TopBaseChangePresheaf, not its theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "topBaseChange|cocycle.*[Cc]lass",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib construction; reuse the four existing definitions in Sheaf.AlgebraicGeometry.TopBaseChangePresheaf, not its theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'topBaseChangeRestrictedUnit|topBaseChangeClass|topBaseChangeDelta|topBaseChangeAdjoint' lean/WeilConjectures",
+   "results": "No matches.",
+   "date": "2026-10-23",
+   "verdict": "No upstream duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'topBaseChangeRestrictedUnit|topBaseChangeClass|topBaseChangeDelta|topBaseChangeAdjoint' lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:61:def topBaseChangeRestrictedUnit {Z X : Scheme.{u}} (v : Z ⟶ X)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:80:def topBaseChangeClass {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:102:def topBaseChangeDelta {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) (F : X.Modules) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:116:attribute [local irreducible] topBaseChangeDelta\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:125:def topBaseChangeAdjoint {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:142:            (topBaseChangeDelta f g F)) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:151:private theorem topBaseChangeClass_source {X S : Scheme.{u}} (f : X ⟶ S)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:154:    topBaseChangeClass f F I V (f ⁻¹ᵁ V) rfl R q =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:160:  simp only [topBaseChangeClass, eqToIso_refl, Iso.trans_refl]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:169:      topBaseChangeRestrictedUnit v F U := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:176:private theorem topBaseChangeClass_eq {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:179:    topBaseChangeClass f F I V U e R q =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:190:private theorem topBaseChangeAdjoint_eq {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:194:    topBaseChangeAdjoint f g F q hC =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:202:              (topBaseChangeDelta f g F)) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:226:attribute [local irreducible] topBaseChangeClass topBaseChangeRestrictedUnit\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:227:  topBaseChangeAdjoint derivedSquareUnitMap derivedSquareRightComparison\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:264:lem-weil-pbc-higher-direct-image-presheaf, computed by topBaseChangeClass.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:281:    topBaseChangeClass f F I V (f ⁻¹ᵁ V) rfl R q ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:282:        Hom.app (topBaseChangeAdjoint f g F q hC) V =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:285:        (topBaseChangeRestrictedUnit (pullback.snd g f) F (f ⁻¹ᵁ V)) q ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:286:      topBaseChangeClass (pullback.fst g f) ((tensorPullback (pullback.snd g f)).obj F)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:307:      _ _ g).homEquiv C K (topBaseChangeDelta f g F) =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:311:    unfold topBaseChangeDelta\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:324:              (topBaseChangeDelta f g F))) (normalized_tensorAdjunction g)).symm.trans\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:325:                (ha (topBaseChangeDelta f g F))\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:337:  have hadj' := (topBaseChangeAdjoint_eq f g F q hC).trans hadj\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:345:    (topBaseChangeClass_source f F I V R q)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean:347:    (topBaseChangeClass_eq (pullback.fst g f) G J (g ⁻¹ᵁ V)\n",
+   "date": "2026-10-23",
+   "verdict": "Only the existing Sheaf module defines these maps; the theorem node lists them as helpers, but no definition node owns the notion."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'topBaseChangeRestrictedUnit|topBaseChangeClass|topBaseChangeDelta|topBaseChangeAdjoint' dag/nodes",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-proper-base-change/lem-weil-pbc-top-base-change-presheaf.json:47:   \"text\": \"Substitute this transpose in the top-edge formula. After the canonical total/classical higher-direct-image comparisons, this says precisely that topBaseChangeAdjoint is H^q(A(eta)) followed by e. Only the fixed kappa is inverted.\",\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-proper-base-change/lem-weil-pbc-top-base-change-presheaf.json:55:   \"text\": \"Apply the local-cocycle comparison for an arbitrary coefficient map to eta and the actual fibre-product square. Its restriction construction is definitionally topBaseChangeRestrictedUnit, and its two resolution class maps are topBaseChangeClass, with the inverse-open equality supplied by the fibre-product condition. Substitute the preceding adjunct equality and reassociate.\",\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-proper-base-change/lem-weil-pbc-top-base-change-presheaf.json:246:   \"AlgebraicGeometry.topBaseChangeRestrictedUnit\",\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-proper-base-change/lem-weil-pbc-top-base-change-presheaf.json:247:   \"AlgebraicGeometry.topBaseChangeClass\",\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-proper-base-change/lem-weil-pbc-top-base-change-presheaf.json:248:   \"AlgebraicGeometry.topBaseChangeDelta\",\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-proper-base-change/lem-weil-pbc-top-base-change-presheaf.json:249:   \"AlgebraicGeometry.topBaseChangeAdjoint\",\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-proper-base-change/lem-weil-pbc-top-base-change-presheaf.json:253:  \"statement\": \"theorem top_base_change_presheaf {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) (F : X.Modules) (q : ℕ) (hC : ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)).IsLE (q : ℤ)) (V : S.Opens) (I : InjectiveResolution F) (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) (R' : RestrictedResolutionSections J ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V))) : topBaseChangeClass f F I V (f ⁻¹ᵁ V) rfl R q ≫ Hom.app (topBaseChangeAdjoint f g F q hC) V = moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V) ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) (topBaseChangeRestrictedUnit (pullback.snd g f) F (f ⁻¹ᵁ V)) q ≫ topBaseChangeClass (pullback.fst g f) ((tensorPullback (pullback.snd g f)).obj F) J (g ⁻¹ᵁ V) ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) (flatBaseChangeOpenEquality f g V) R' q\",\n",
+   "date": "2026-10-23",
+   "verdict": "Only the existing Sheaf module defines these maps; the theorem node lists them as helpers, but no definition node owns the notion."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search topBaseChange",
+   "results": "0 blueprint nodes match 'topBaseChange'\n",
+   "date": "2026-10-23",
+   "verdict": "No blueprint definition node matches."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-top-degree-base-change",
+  "date": "2026-10-23",
+  "group": "Q06"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0EX3: the canonical comparison gamma in clause (c), and the cocycle-class normalization of the tensor projection in clause (b).",
+   "via": [
+    "lem-sfb-top-degree-base-change",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TopBaseChangePresheaf",
+  "declaration": "AlgebraicGeometry.topBaseChangeAdjoint",
+  "declarations": [
+   "AlgebraicGeometry.topBaseChangeRestrictedUnit",
+   "AlgebraicGeometry.topBaseChangeClass",
+   "AlgebraicGeometry.topBaseChangeDelta",
+   "AlgebraicGeometry.topBaseChangeAdjoint"
+  ],
+  "statement": "def topBaseChangeAdjoint {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)\n    (F : X.Modules) (q : ℕ)\n    (hC : ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)).IsLE (q : ℤ)) :\n    ((pushforward f).rightDerived q).obj F ⟶\n      (pushforward g).obj (((pushforward (pullback.fst g f)).rightDerived q).obj\n        ((tensorPullback (pullback.snd g f)).obj F))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Existing four canonical definitions in the landed module. No file or duplicate definitions are supplied. The presheaf compatibility theorem is not used to construct these maps: the inverse kappa is licensed by derivedPullback_topCohomology. The hC bound is only required for the adjoint, not for the restricted unit, class map or delta."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62255ccfd",
+  "group": "Q06",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62255ccfd",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 233246 (H2). Lean byte-identical to the returned head (substance already accepted and re-read against Stacks 0EX3: qcqs X,Y only; (a) all quasi-coherent F; (b) tensor projection pinned on cocycle classes x⊗m ↦ H^d(s↦s⊗f'^*m)x; (c) γ = adjoint of H^d(δ)κ⁻¹ with hC as a conclusion; d=0, identity/non-flat b and c, non-qcqs Y'/Y'' covered; universes u,w independent). The item node differs only in stmt_deps: the theorem lem-weil-pbc-top-base-change-presheaf is replaced by the new existing:true def node def-sfb-top-base-change-canonical-maps (topBaseChangeRestrictedUnit/Class/Delta/Adjoint in the landed TopBaseChangePresheaf; recorded signature verbatim, text matches the bodies, no move, no duplicate) and by def-pc-derived-direct-image and def-pc-restricted-resolution-sections; the theorem stays in proof_deps. The new node's theorem stmt_dep lem-weil-pbc-derived-pullback-top-cohomology is justified because topBaseChangeAdjoint takes IsIso κ from choose_spec of derivedPullback_topCohomology. tmulSection, homOfGlobalSection and restrictAppIso have no recording node. Advisory: def-pc-derived-base-change-map is reached only through def-pc-derived-module-base-change-map. The report has real Worker report and Second reading sections; no hollow definitions, only sorry, no SGA source, no pro-étale substitute, item not yet landed live. No recompile (no file changed)."
+ }
+}

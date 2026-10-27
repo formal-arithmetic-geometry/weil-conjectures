@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-conjugation-finite-jet-kernel",
+ "kind": "statement",
+ "title": "A finite conjugation jet detects the scheme-theoretic centre",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth connected affine group scheme of finite type over $F$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $e\\in G(F)$ be its identity, let $B=\\Gamma(G,\\mathcal O_G)$ be its coordinate algebra, and let $I=\\ker(e^*:B\\to F)$ be the augmentation ideal. For each integer $r\\geq1$, put $V_r=B/I^{r+1}$ and $J_r^i=\\operatorname{im}(I^i\\to V_r)$ for $0\\leq i\\leq r+1$. The vector space $V_r$ is finite-dimensional [def-weil-finite-dimensional-subspace]. Pullback by inverse conjugation defines a homomorphism of group schemes $\\rho_r:G\\to\\operatorname{GL}(V_r)$, where $\\operatorname{GL}(V_r)(A)$ is the group of invertible $A$-linear maps of $A\\otimes_F V_r$. Explicitly, for every commutative $F$-algebra $A$ and $g\\in G(A)$, $\\rho_{r,A}(g)$ is pullback on functions on the closed subscheme of $G_A$ defined by $(A\\otimes_F I)^{r+1}$ under $x\\mapsto g^{-1}xg$. It preserves every $A\\otimes_F J_r^i$, acts by $A$-algebra automorphisms, and acts identically on $A\\otimes_F(V_r/J_r^1)=A$. The maps $V_{r+1}\\to V_r$ are equivariant. There is an integer $r_0\\geq1$ such that for every $r\\geq r_0$ the scheme-theoretic kernel of $\\rho_r$ is $Z(G)$, the closed subgroup scheme of [lem-sfb-affine-group-centre-base-change]. Equivalently, for every commutative $F$-algebra $A$, $\\rho_{r,A}(g)=1$ if and only if $g\\in Z(G)(A)$. Quotients and ideal powers have the meaning of [def-weil-pbc-algebra-hom-quotient], tensor products are [def-weil-pbc-module-tensor-product], and affine coordinates and representations use [def-weil-affine-spectrum, def-wf-algebraic-representations].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 8.10 and proof of Proposition 8.9, printed p.150. The coordinate quotient B/I^(r+1) is canonically the local quotient O_e/m_e^(r+1): elements outside I are invertible modulo I^(r+1). Inverse conjugation is the left-action convention on functions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-affine-group-centre-base-change",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-tensor-product",
+  "def-wf-algebraic-representations"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pc-affine-finite-type-algebra], $B$ is a finitely generated $F$-algebra. By [lem-weil-pbc-finite-type-algebra-noetherian], it is Noetherian: a field is Noetherian since its only ideals are $0,F$. Choose algebra generators $b_1,\\ldots,b_d$, and put $t_j=b_j-e^*(b_j)$. The $t_j$ still generate $B$ as an $F$-algebra and generate $I$ as an ideal: any polynomial in them with zero constant term belongs to $(t_1,\\ldots,t_d)$. Thus the images of monomials $t_1^{a_1}\\cdots t_d^{a_d}$ of total degree at most $r$ span $V_r$, proving finite-dimensionality. For any $F$-algebra $A$, the canonical map $(A\\otimes_F B)/(A\\otimes_F I^{r+1})\\to A\\otimes_F V_r$ is an isomorphism. Indeed, choose a basis of $I^{r+1}$ and extend it to a basis of $B$; tensoring gives direct sums of copies of $A$, and the quotient deletes precisely the first basis vectors. Multiplication of pure tensors gives $(A\\otimes_F I)^{r+1}=A\\otimes_F I^{r+1}$. These identifications also apply to each $I^i$ and to the truncation maps.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, printed p.150, finite local quotients and base extension; explicit affine monomial and basis verification. Stacks 01T2 (lemma-locally-finite-type-characterize), 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "For $g\\in G(A)$ write $c_g(x)=gxg^{-1}$. The group laws make $c_{g^{-1}}$ an $A$-scheme automorphism of $G_A$ fixing its identity section. Consequently its pullback $T_g$ is an $A$-algebra automorphism of $A\\otimes_F B$ preserving the kernel $A\\otimes_F I$ of evaluation at that section, hence all its powers. It descends to an invertible $A$-linear map on $A\\otimes_F V_r$. This construction is natural in $A$ because multiplication, inverse, and identity are scheme morphisms. Since $c_{(gh)^{-1}}=c_{h^{-1}}\\circ c_{g^{-1}}$, contravariance gives $T_{gh}=T_gT_h$; $T_1=1$. Thus these maps are natural group homomorphisms. The finite-dimensional clause of [lem-sfb-rational-representation-comodule-dictionary] gives the group-scheme homomorphism $\\rho_r:G\\to\\operatorname{GL}(V_r)$ with exactly these algebra-point values.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9 and Corollary 8.10, printed p.150; Chapter 4(a), printed pp.83--84. Inverse conjugation checks the left representation convention."
+   }
+  },
+  {
+   "text": "The preservation of $(A\\otimes_F I)^i$ just proved gives preservation of $A\\otimes_F J_r^i$. Each $T_g$ preserves products and $1$, and its induced action modulo $A\\otimes_F I$ is the identity because it fixes the identity section and is an $A$-algebra map. Finally $T_g$ on $A\\otimes_F B$ preserves both $I^{r+2}$ and $I^{r+1}$ after scalar extension, so the two quotient maps satisfy $q_{r+1,r}T_g=T_gq_{r+1,r}$ on the class of every $b\\in B$. These classes generate after scalar extension, proving equivariance of $V_{r+1}\\to V_r$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, printed p.150, descending sequence of jet kernels; the filtration and equivariance are the quotient calculation."
+   }
+  },
+  {
+   "text": "Choose an $F$-basis of each $V_r$ and write $a_{ij}^{(r)}\\in B$ for the matrix coefficients of the universal action $T_{\\mathrm{id}_B}$ on $B\\otimes_F V_r$. The dictionary in [lem-sfb-rational-representation-comodule-dictionary] says that for $g:B\\to A$ the matrix entries of $\\rho_{r,A}(g)$ are $g(a_{ij}^{(r)})$. Set $L_r=(a_{ij}^{(r)}-\\delta_{ij})\\subset B$ and $H_r=\\operatorname{Spec}(B/L_r)$. The affine and quotient descriptions show that $H_r(A)$ is precisely $\\ker\\rho_{r,A}$ for every $A$. Thus $H_r$ is the scheme-theoretic kernel (the fibre product over the identity), and is a closed subgroup: each of its algebra-point subsets is a kernel subgroup, as in [def-sc-group-scheme-subgroup]. Equivariance of the surjection $V_{r+1}\\to V_r$ implies $H_{r+1}(A)\\subseteq H_r(A)$: an identity map on the source induces the identity on the quotient. Applying this with $A=B/L_{r+1}$ and its universal point shows $L_r\\subseteq L_{r+1}$, with no replacement by radical ideals.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, printed p.150: H_n=Ker(rho_n) and its descending sequence. Matrix equations spell out the scheme structures."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-finite-module-acc] to the Noetherian ring $B$ and its cyclic module $M=B$, generated by $1$. The increasing sequence of submodules $L_1\\subseteq L_2\\subseteq\\cdots$ stabilizes. Thus there is $r_0\\geq1$ with $L_r=L_{r_0}$ for every $r\\geq r_0$, and $H_r=H_{r_0}$ as closed subgroup schemes, including their nilpotents. Put $H=H_{r_0}$. The inclusions for the earlier indices imply $H\\subseteq H_r$ for every $r\\geq1$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-module-acc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, printed p.150, Noetherian stabilization; Stacks 00IK (lemma-Noetherian-basic), ascending chain condition for submodules."
+   }
+  },
+  {
+   "text": "The identity makes $G$ nonempty. Since $G$ is connected, its identity component is all of $G$. By [lem-sfb-locally-algebraic-group-identity-component], this component is geometrically irreducible, in particular irreducible over $F$. By [sbc-lem-smooth-geometrically-reduced], smoothness makes the fibre of $G\\to\\operatorname{Spec}F$, which is $G$ itself, reduced. Therefore $G$ is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme]. Since $G$ is affine, $B$ is a domain by that same definition. This is the reducedness needed when passing from local information at $e$ to global functions.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 8.10, printed p.150, connected conjugation source. Stacks 0B7R (proposition-connected-component), 056T (lemma-smooth-geometrically-normal); reducedness is explicit here."
+   }
+  },
+  {
+   "text": "The ideal $I$ is maximal since $B/I=F$. Let $R=B_I$ with maximal ideal $\\mathfrak m=IR$ [def-weil-pbc-localization-at-prime]. It is Noetherian by [lem-weil-pbc-localization-noetherian]. Apply [lem-weil-pbc-krull-intersection-jacobson] with $M=R$ and ideal $\\mathfrak m$: the unique maximal ideal is the Jacobson radical and $R$ is generated by $1$ as an $R$-module. Thus $\\bigcap_n\\mathfrak m^n=0$. If $b\\in\\bigcap_n I^n$, its image in $R$ belongs to every $\\mathfrak m^n$, so it vanishes. The localization map $B\\to R$ is injective: vanishing of $b/1$ means $sb=0$ for some $s\\notin I$; $s\\ne0$ and $B$ is a domain. Hence $b=0$, proving $\\bigcap_n I^n=0$ in $B$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, printed p.150, Krull intersection argument. Stacks 00FN (lemma-Noetherian-permanence), 00IQ (lemma-intersection-powers-ideal-module), part (2)."
+   }
+  },
+  {
+   "text": "This separation remains valid with arbitrary coefficient algebra $A$: $\\bigcap_n(A\\otimes_F I^n)=0$ inside $A\\otimes_F B$. To check it, choose an $F$-basis $(u_\\lambda)$ of $A$. Express an element as a finite sum $\\sum_\\lambda u_\\lambda\\otimes b_\\lambda$. Under $A\\otimes_F B=\\bigoplus_\\lambda B$, the subspace $A\\otimes_F I^n$ is $\\bigoplus_\\lambda I^n$. Membership for every $n$ forces each of its finitely many coefficients into $\\bigcap_n I^n=0$. This uses neither finite generation nor reducedness of $A$. Omitting the finitely many exponents $0,1$ does not change the intersection.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, printed p.150, base extension of local quotients and Krull intersection; explicit coefficient calculation for arbitrary, possibly nonreduced, test algebras."
+   }
+  },
+  {
+   "text": "Fix any $F$-algebra $A$ and $g\\in H(A)$. Since $H\\subseteq H_r$ for every $r$, the difference $T_g(b)-1\\otimes b$ lies in $A\\otimes_F I^{r+1}$ for every $r\\geq1$ and $b\\in B$. Step 8 gives $T_g(b)=1\\otimes b$; $A$-linearity gives $T_g=1$ on $A\\otimes_F B$. The affine correspondence makes $c_{g^{-1}}$ the identity morphism of $G_A$. After any $A$-algebra extension $A'$, it is still the identity, so $g_{A'}^{-1}xg_{A'}=x$ for every $x\\in G(A')$. By the universal centre description in [lem-sfb-affine-group-centre-base-change], this says $g\\in Z(G)(A)$. Conversely, a central $g$ has identity conjugation on $G_A$: apply the universal commutation condition to the universal point over $A\\otimes_F B$. Its pullback, and therefore each jet action, is the identity. Thus $H(A)=Z(G)(A)$ for every $A$. These are equal closed subgroup schemes: if their defining ideals are $L,J\\subset B$, the universal points over $B/L$ and $B/J$ give $J\\subseteq L$ and $L\\subseteq J$. Combining with Step 5 proves $\\ker\\rho_r=Z(G)$ for every $r\\geq r_0$ and the stated equivalence on all algebra points.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sfb-affine-group-centre-base-change",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 8.10 and proof of Proposition 8.9, printed pp.150--151; scheme-theoretic centre as in Proposition 1.92, printed pp.33--34. Universal points replace a check on field-valued points alone."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-noetherian-finite-module-acc",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-sfb-affine-group-centre-base-change"
+ ],
+ "proof_origin": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 8.10 and Proposition 8.9, printed pp.150--151, expanded in affine coordinates with Noetherian ideals and a coefficientwise Krull-intersection calculation.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conjugation.*(local|jet|infinitesimal)|ker.*conjugation|conjugation.*ker|adjoint.*kernel|unitriangular",
+   "results": "{\"t\": \"2026-10-23T21:17:17Z\", \"tool\": \"grep\", \"query\": \"conjugation.*(local|jet|infinitesimal)|ker.*conjugation|conjugation.*ker|adjoint.*kernel|unitriangular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Analysis/InnerProductSpace/Reproducing.lean\", \"Mathlib/Analysis/InnerProductSpace/Reproducing.lean\", \"Mathlib/Analysis/InnerProductSpace/Reproducing.lean\", \"Mathlib/Analysis/InnerProductSpace/Reproducing.lean\"], \"digest\": \"32b63c1833a46663\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The centre of a connected algebraic group is detected by its conjugation action on a finite infinitesimal neighborhood of the identity",
+   "results": "{\"t\": \"2026-10-23T21:17:18Z\", \"tool\": \"leansearch\", \"query\": \"The centre of a connected algebraic group is detected by its conjugation action on a finite infinitesimal neighborhood of the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConjAct.fixedPoints_eq_center\", \"Subgroup.center\", \"ConjAct.instGroup\", \"ConjAct.instGroupWithZero\", \"ConjClasses.mk_bijOn\", \"ConjAct.stabilizer_eq_centralizer\", \"LieAlgebra.center\", \"Subgroup.mem_center_iff\"], \"digest\": \"1223198a3876bb24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"conj\"",
+   "results": "{\"t\": \"2026-10-23T21:17:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"conj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"3537b994bd08c57b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a connected smooth affine algebraic group, the conjugation representation on a sufficiently high truncated local ring at the identity has scheme theoretic kernel equal to the centre",
+   "results": "{\"t\": \"2026-10-23T21:17:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a connected smooth affine algebraic group, the conjugation representation on a sufficiently high truncated local ring at the identity has scheme theoretic kernel equal to the centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.self_module_ker_eq_center\", \"LieModule.lowerCentralSeries_one_inf_center_le_ker_traceForm\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"LieDerivation.ad_ker_eq_center\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"Algebra.Extension.ker_infinitesimal\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity\"], \"digest\": \"de10c866d131e94a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "grep",
+   "query": "jet|infinitesimal|conjugation|adjoint",
+   "results": "{\"t\": \"2026-10-23T21:17:44Z\", \"tool\": \"grep\", \"query\": \"jet|infinitesimal|conjugation|adjoint\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"ddb293cbb036df4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite jet of inner automorphisms of a connected algebraic group detects its centre; the adjoint kernel acts upper unitriangularly on truncated functions at the identity",
+   "results": "{\"t\": \"2026-10-23T21:17:46Z\", \"tool\": \"leanfinder\", \"query\": \"A finite jet of inner automorphisms of a connected algebraic group detects its centre; the adjoint kernel acts upper unitriangularly on truncated functions at the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"LieDerivation.ad_ker_eq_center\", \"LieDerivation.injective_ad_of_center_eq_bot\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"SpecialLinearGroup.mem_center_iff\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\"], \"digest\": \"9e3e16e255e55538\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme acts faithfully on a finite infinitesimal neighborhood of a fixed smooth point of an irreducible variety",
+   "results": "{\"t\": \"2026-10-23T21:18:47Z\", \"tool\": \"leanfinder\", \"query\": \"A group scheme acts faithfully on a finite infinitesimal neighborhood of a fixed smooth point of an irreducible variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"IsGaloisGroup.faithful\", \"faithfulSMul_iff\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.PreGaloisCategory.instFaithfulActionFintypeCatAutFunctorFunctorToAction\", \"Nat.Combination.mulAction_faithful\", \"Nat.Combination.addAction_faithful\"], \"digest\": \"589a3071357a752e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conjugation action on a sufficiently high truncated local ring of a smooth connected affine algebraic group has kernel the centre",
+   "results": "{\"t\": \"2026-10-23T22:13:25Z\", \"tool\": \"leanfinder\", \"query\": \"The conjugation action on a sufficiently high truncated local ring of a smooth connected affine algebraic group has kernel the centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"ConjClasses.mk_bijOn\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\"], \"digest\": \"ae804fe42848011b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract-group centres, special linear groups, local-ring residue actions or unrelated sheaf conjugate equivalences; none states finite conjugation-jet detection of the scheme-theoretic centre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"conj\"",
+   "results": "{\"t\": \"2026-10-23T22:14:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"conj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"3537b994bd08c57b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract-group centres, special linear groups, local-ring residue actions or unrelated sheaf conjugate equivalences; none states finite conjugation-jet detection of the scheme-theoretic centre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group scheme acting on its local ring at a fixed point gives finite dimensional jet representations detecting the action kernel",
+   "results": "{\"t\": \"2026-10-23T22:14:48Z\", \"tool\": \"leansearch\", \"query\": \"A group scheme acting on its local ring at a fixed point gives finite dimensional jet representations detecting the action kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"IsLocalRing.ResidueField.residue_smul\", \"Ideal.Quotient.map_ker_stabilizer_subtype\", \"Representation.Coinvariants.le_comap_ker\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"IsLocalRing.ResidueField.instMulSemiringAction\", \"LieModule.ker\"], \"digest\": \"46300615b457013e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract-group centres, special linear groups, local-ring residue actions or unrelated sheaf conjugate equivalences; none states finite conjugation-jet detection of the scheme-theoretic centre."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugation.*(jet|local|infinitesimal)|jet.*(kernel|centre|center)",
+   "results": "{\"t\": \"2026-10-23T22:14:48Z\", \"tool\": \"grep\", \"query\": \"conjugation.*(jet|local|infinitesimal)|jet.*(kernel|centre|center)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract-group centres, special linear groups, local-ring residue actions or unrelated sheaf conjugate equivalences; none states finite conjugation-jet detection of the scheme-theoretic centre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group representation on functions modulo a power of the maximal ideal at its identity detects the scheme theoretic centre",
+   "results": "{\"t\": \"2026-10-23T22:16:03Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic group representation on functions modulo a power of the maximal ideal at its identity detects the scheme theoretic centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.mem_center_iff_spec\", \"Representation.IntertwiningMap.isIntertwiningMap_of_mem_center\", \"Representation.IntertwiningMap.centralMul\", \"SpecialLinearGroup.mem_center_iff\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\"], \"digest\": \"4c9161349acfb151\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract-group centres, special linear groups, local-ring residue actions or unrelated sheaf conjugate equivalences; none states finite conjugation-jet detection of the scheme-theoretic centre."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adjoint-kernel-central-quotient-unipotent",
+  "date": "2026-10-24",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Proposition 21.48, printed p.439; Appendix C.34--C.35, printed p.615; paragraph 22.9, printed p.465. Propositions 21.7 and 21.8, printed p.427; root weights in paragraph 21.1, printed p.425. Supporting input in the present split: Milne 21.7 proof, the sentence invoking 14.23 to make ker(Ad)/Z(G) unipotent. Finite-jet input: Milne 14.23 proof, invocation of Corollary 8.10 for a sufficiently high conjugation jet.",
+   "via": [
+    "lem-sfb-adjoint-kernel-central-quotient-unipotent",
+    "lem-sfb-reductive-centre-root-quotient",
+    "lem-sfb-semisimple-roots-span",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-conjugation-finite-jet-kernel",
+  "worker": "stage1",
+  "summary": "Expanded Milne 8.9/8.10 into finite jet construction, explicit matrix kernel ideals, scheme-theoretic Noetherian stabilization, integrality, local and arbitrary-coefficient separation, and universal-centre comparison. Reused all algebraic and representation inputs; no new nodes. Statement meaning unchanged; only added definition citations.",
+  "blueprint": "Preserves inherited auxiliary ancestry (blueprint_refs.py ancestor prints None) under det-thm-sf-ctf-stability-direct-images proof (3), through the alteration/moduli/Haboush/root-system chain. Read the current latest direct-image proof (3) and unit. This auxiliary realizes Milne 14.23 invocation of 8.10 below that inherited chain, not a new unit route. Whole blueprint search conjugation / finite jet / Krull intersection found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "The affine coordinate algebra of G is finite type over F; this is a generic affine-scheme tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Hilbert basis theorem gives Noetherianity of B from its finite generation over the field."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-module-acc",
+    "why": "Ascending chains of ideals of B stabilize scheme structures, not only supports."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Smoothness over the field gives reducedness of G; the group component theorem supplies irreducibility."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Localizing B at the augmentation maximal ideal preserves Noetherianity."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "Krull intersection applied to the local ring B_I gives separation at the identity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finite-module-acc",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-796fa67d7",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-796fa67d7 (reviewer sub-agent of L); spot-checked: I read the item in full; the split has 0 new nodes. The live node is still unsplit and there is no repair note. The statement is unchanged: the delivered text is the live text with one sentence appended that cites four definition nodes, and those four were added to stmt_deps. Source: Milne iAG 2017, Proposition 8.9 and Corollary 8.10 (printed pp. 150-151), read together with the erratum saying the proof of 8.9 needs X reduced. Step 6 supplies that reducedness: G smooth gives reduced, the identity-component lemma gives irreducible, so G is integral and B is a domain. Step 7 uses B_I Noetherian, Krull intersection with the Jacobson radical, and injectivity of B into B_I. Step 8 does a basis computation to get the intersection of A⊗I^n equal to 0 for any test algebra A, including non-reduced ones. Step 4 proves L_r ⊆ L_{r+1} as ideals, using universal points. Step 5 gets stabilization from ACC. Step 9 identifies H with Z(G) by the universal-point argument against lem-sfb-affine-group-centre-base-change. I checked T_{gh}=T_gT_h by hand, and checked every hypothesis of every cited node. Edge cases checked: G=1, commutative G, and the non-reduced centre μ_2 in SL_2 in characteristic 2. No duplicate in the DAG; lem-sfb-torus-fixed-local-ideal-jets is a different statement. The Stacks tags in the step sources (00IQ, 00FN, 00IK, 01T2, 0B7R, 056T) are correct. I accept all six declared tool uses as generic black boxes. No fixes written."
+ }
+}

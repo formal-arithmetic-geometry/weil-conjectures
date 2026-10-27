@@ -1,0 +1,169 @@
+{
+ "id": "def-sfb-component-lift-section-data",
+ "kind": "definition",
+ "title": "Canonical component-lift coefficient and section data",
+ "statement": "For a commutative condensed ring Lambda [sk-def-sfb-condensed-ring], an affine scheme T [def-pc-scheme], a profinite S, and a specified homeomorphism e:pi_0(T) ≃ S [lem-pe-spectral-components-profinite], define the relative-test functor by transporting componentTests along e inverse. ComponentLiftCoefficient records its universal projections, its exact braided inverse image with its constructed adjunction and point factorization, and the resulting specified coefficient isomorphism. Define the module functor by mapMod followed by restriction along the inverse coefficient isomorphism, and derive it termwise. Define the section map by the module-adjunction unit evaluated at the terminal test followed by terminal pullback restriction; define the derived Hom evaluation by singleFunctor.preimage evaluated at the specified coefficient one. ComponentLiftLisseFacts, ComponentLiftHomIdentity, ComponentLiftMonoidal, ComponentLiftSectionIdentity, IsComponentLiftMap, ComponentLiftInducedComparison, ComponentLiftEquivalence, ComponentLiftSectionComposition and ComponentLiftSectionNaturality are precisely the formulas retained verbatim from the parent module. No new mathematical notion replaces any of these formulas.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Old proof steps 4-6; HRS Definition 3.3, Lemma 4.1, Proposition 4.3(3) and equation (4.2); Stacks Tag 08JJ, sites-cohomology.tex label lemma-dual-perfect-complex, global Hom formula at the coefficient unit. Agent-formulated map normalization for component lifts."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "sk-def-pe-wlocal",
+  "lem-pe-spectral-components-profinite",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "lem-zl-component-relative-profinite-site",
+  "def-sfb-lisse-coefficient-module",
+  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "def-sfb-condensed-module-sections",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Transport the existing component-test functor along e.symm. All constructions and predicates are the original explicit definitions, unchanged; exactness and additivity of the module functor follow by composition and preservation of binary products.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-component-relative-profinite-site",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Original component-lift section-comparison proof, factored without changing its route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Connected component relative profinite inverse image is monoidal and gives an equivalence on dualizable derived modules for weakly contractible affine schemes",
+   "results": "Equivalence.inverseMonoidal; Profinite.toCompHausEquivalence; no component-lift coefficient or derived normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free internal modules on a ringed site have locally free duals and their degree zero complexes are K-flat and dualizable",
+   "results": "SheafOfModules.IsFiniteType, IsFinitePresentation and free; no combined internal-module K-flat duality theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "unitHomEquiv, unitHomEquiv_apply_coe, pushforwardSections_unitHomEquiv; these concern sectionwise sheaves, and do not supply the normalized derived internal-module pullback.",
+   "date": "2026-10-26",
+   "verdict": "nearby elementary API, not the stated comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "component.*[Cc]omparison|[Ll]isse.*[Kk][Ff]lat|[Kk][Ff]lat.*[Ll]isse|componentLift|ComponentLift",
+   "results": "Only an unrelated text-linter component-path comparison in Mathlib; no component-lift statement. Local library search finds LisseModuleInverseImage for the separate lisse pullback clause.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match; existing project constructions retained"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ComponentLiftLisseSectionComparison",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, open direct image; Proof (3), open direct image; component-lift section-comparison subargument, Canonical component-lift coefficient and section data.",
+   "via": [
+    "lem-sfb-component-lift-lisse-section-comparison",
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ComponentLiftSectionDefs",
+  "file": "lean/Sheaf/Paper/ComponentLiftSectionDefs.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftTests",
+  "statement": "def componentLiftTests (T : Scheme.{u}) [IsAffine T] (S : Profinite.{u})\n    (e : affineComponentSpace T ≃ₜ S) : Over S ⥤ T.ProEt",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftTests",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentLiftCoefficient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftModules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftModules_limits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftModules_colimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftModules_additive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftSectionPullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftHomSection",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentLiftLisseFacts",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentLiftHomIdentity",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentLiftMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentLiftSectionIdentity",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IsComponentLiftMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftTestUnit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentLiftInducedComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentLiftDerivedComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentLiftEquivalence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentLiftSectionComposition",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentLiftSectionNaturality"
+  ]
+ },
+ "split_report": {
+  "worker": "M4",
+  "summary": "A strictly separate part of the existing seven-step proof; no target, coefficient or section-map definition changed.",
+  "blueprint": "Keeps the original component-equivalence route below direct-image stability.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Generic tool used for the same component-site, duality or derived normalization subargument as in the reviewed parent plan."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a4861",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261026T082500-L-2181902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a4861",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261026T082500-L-2181902",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (identical), moved defs vs clone item module (verbatim), 3 new sorried theorems vs their nodes and the original clauses, item node proof/proof_deps vs Lean proof"
+ }
+}

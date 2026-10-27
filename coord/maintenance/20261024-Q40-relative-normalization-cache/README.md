@@ -1,0 +1,75 @@
+# Q40 relative normalization: cached storage failure, 2026-10-24
+
+Item: `lem-sfb-stack-quasifinite-relative-normalization`, stage 2.
+
+The repeated failure was a stale compiler failure-cache entry. The original
+storage failures were real: the first worker also could not push because Git
+could not create its temporary object directory. Server `~/cc1/diskwatch.log`
+recorded `/` at 100% at 18:20 server time (10:20 UTC). The precise filesystem
+of the failing Lean write was not recorded. During maintenance, `/` already
+had 84 GiB available; `/tmp`, `/dev/shm`, and inodes also had room. Existing
+server cleanup was running, including `~/cc1/review-runs-clean.py`; its log
+records removal of 13,069 finished review snapshot/files directories at 19:06.
+This maintenance run did not edit that protected review service or its cleanup.
+
+`tools/nt_srv_compile.py` has `INFRA_TEXT = ("object file", "unknown module",
+"No such file")`. Its `kcompile` consequently treats rc=1 ENOSPC as a final Lean
+failure, reuses it for 3,600 seconds, and sets `FAILED_IN_DELIVERED`, suppressing
+the `--wire-confirm` fallback. Workers were replaying the same `[8.1 s]` result
+in about 1.6 seconds, even after disk space recovered.
+
+At 11:07:22 UTC, under each cache key's existing lock, maintenance moved exactly
+these two rc=1 ENOSPC entries out of
+`~/weil-nt-overlay/kcache/Sheaf.AlgebraicGeometry.StackQuasiFiniteRelativeNormalization/`
+into this directory as byte-preserving `.bak` files:
+
+| Cache key | Original timestamp (UTC) | Saved diagnostic duration | Backup SHA256 |
+| --- | --- | --- | --- |
+| `6080b83763a4b93508ee73812befa9c7c857bfc4` | 10:27:32 | 8.1 s | `c1dc2a4048234347203a22164a858f60ec8982c5631fe8bae01667db8f177448` |
+| `eb043d16b5bf719fb8f051ed3d899fb9f6c37fd9` | 10:17:04 | 10.4 s | `bff413ee04d2e75f348aa346c32aed9f51c44c8355c44961f5e32e3c2c3e1b1c` |
+
+No successful cache entry, source, DAG record, dispatcher state, launcher tool,
+landing tool, or concurrency setting was changed. No process was killed.
+
+Validation:
+
+- The active worker's next unchanged-packet dry run passed compilation and
+  preflight: `f50d83a052d`.
+- The current key `6080b83763a4b93508ee73812befa9c7c857bfc4` now has a successful
+  `result.json`: rc=0, `[6.9 s]`, timestamp 11:08:17 UTC.
+- An independent check used `SHEAF_FILE_TIMEOUT=60 tools/lean_file.sh` on the
+  unchanged source copied to
+  `lean/.sandbox/Q40-maint-relative-normalization-1792839873/StackQuasiFiniteRelativeNormalization.lean`:
+  exit 0, `Compiled in 4.8 s`, no diagnostics. The first direct check reported
+  the unpublished `AdequateRelativeSpectrum.olean` dependency missing. The
+  successful check used the private group mirror
+  `local/build/Q40-maint-relative-normalization-1792839873`, primed with that
+  dependency's successful cache entry
+  `f134d00b393d1b962ba5797c4868c2d2f5607f6b` after checking its source and key.
+  Published artifacts were read only; no dependencies were recompiled.
+- The active worker then delivered
+  `31e8e3ab4dd83768139dc1f78d8bb149c6be96b4` on
+  `deliver/Q40/lem-sfb-stack-quasifinite-relative-normalization`.
+
+The next worker should retain the existing mathematics and packet. Delivery is
+complete; independent review and landing remain the normal downstream work.
+Historical storage notes do not establish a current disk failure. For any new
+failure, inspect its timestamp and current disk space before choosing a repair.
+
+Protected-tool follow-up for the tool owner: classify ENOSPC (`error code: 28`,
+`No space left on device`, including `OSError(28, ...)`) as infrastructure in
+both failure-cache reuse and `FAILED_IN_DELIVERED`. Previously cached entries
+must be classified on read too. Such failures must not suppress infrastructure
+confirmation or become one-hour final Lean rejections. Cover a previously
+cached ENOSPC followed by a successful compile, and a genuine Lean type error
+that remains cacheable. Landing tools are protected by the maintenance brief,
+so that code change is reported for its owner rather than applied here.
+
+Final verification: the saved worker source and the independently checked server
+scratch both have SHA256
+`0b52ea16e36342ab1ee21ddefeea814e44fc704d4efdc0c1cc3cd9d69243b41f`.
+The failure backups were committed under the merge lock as
+`540c1ed033451343ff90dc453070490e18782a20`. The initial version of this note
+was picked up by the concurrent build commit
+`619334a0bb0603182867c3672bc57ca89a196908`; this final note and its `.bak`
+are committed explicitly by maintenance under the same merge lock.

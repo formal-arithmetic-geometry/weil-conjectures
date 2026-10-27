@@ -1,0 +1,405 @@
+{
+ "id": "lem-sfb-henselian-parameter-root-domain-tower",
+ "kind": "statement",
+ "title": "Domains in henselian parameter-root towers and their filtered colimits",
+ "statement": "Let $(C,J)$ be a henselian pair [def-weil-pbc-henselian-terminology], with $C$ a Noetherian ring and $J=(t_1,\\ldots,t_r)$, $r\\geq0$. Assume $\\operatorname{Spec}(C/J)$ is nonempty connected and that at every maximal ideal $\\mathfrak m$ of $C$ the tuple $(t_i)$ is a regular sequence [def-weil-pbc-regular-sequence] in $C_{\\mathfrak m}$ with regular local quotient [def-weil-regular-scheme]. For each $n>0$ set $K_n=C[x_1,\\ldots,x_r]/(x_i^n-t_i)$ using [def-weil-pbc-mv-polynomial-ring]. Then $K_n$ is finite free over $C$ with basis $x^a$, $0\\leq a_i<n$, is regular Noetherian, and is a nonzero domain. Every maximal ideal of $K_n$ contains all $x_i$; in its local ring the $x_i$ are a regular sequence and the quotient is $C_{\\mathfrak m}/J C_{\\mathfrak m}$, where $\\mathfrak m$ is its contraction. The ring $C=K_1$ is a nonzero domain, and $f=\\prod_i t_i$ is nonzero in every $K_n$. More generally let $(C_\\lambda,J_\\lambda)$ be a small nonempty filtered diagram of such pairs with the same $r$, unital transition maps carrying each labelled $t_i$ to the next one, and $J_\\lambda=(t_i)$. Put $H=\\varinjlim_\\lambda C_\\lambda$, $H_n=H[x_i]/(x_i^n-t_i)$, and $H_\\infty=\\varinjlim_n H_n$, with power maps for divisibility, over all positive $n$ or only those prime to a fixed positive prime. Then $H_n=\\varinjlim_\\lambda K_{\\lambda,n}$ and $H$, every $H_n$, and $H_\\infty$ are nonzero domains in which $f\\ne0$. The spectra of these rings and of their localizations at $f$ [def-weil-ring-localization-away] are nonempty connected qcqs. For $r=0$, $f=1$ and the root algebras are the base rings. For any henselian regular Noetherian local ring $R$ and any partial regular system of parameters, its finite and full root rings and their punctures have the same nonzero-domain and nonempty-connected conclusions, without requiring the parameter ideal to be the maximal ideal.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1, p.133, simultaneous root presentation; Stacks 00NU (algebra.tex, lemma-regular-mod-x), 00J9 (lemma-lift-idempotents), 09XI (more-algebra.tex, lemma-characterize-henselian-pair), 0AFS (localization of a regular local ring). Agent extension to filtered coefficient and root colimits."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-sfb-parameter-root-algebra",
+  "def-sfb-strict-local-kummer-tame-module"
+ ],
+ "proof": [
+  {
+   "text": "First $J$ lies in every maximal ideal of $C$. Indeed, if $J+\\mathfrak m=C$, the finite $C$-algebra $C/(J\\cap\\mathfrak m)\\simeq C/J\\times C/\\mathfrak m$ has an idempotent $(0,1)\\ne0$ which reduces to zero modulo $J$, contradicting uniqueness in the henselian-pair definition. Here the displayed isomorphism sends $c$ to its two residues; surjectivity follows by writing $1=j+u$ with $j\\in J,u\\in\\mathfrak m$. Nonemptiness of $\\operatorname{Spec}(C/J)$ gives $C/J\\ne0$ and $C\\ne0$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09XI (more-algebra.tex, lemma-characterize-henselian-pair), proof (3) implies (1), radical argument. Agent-written explicit Chinese remainder calculation."
+   }
+  },
+  {
+   "text": "Use the proved simultaneous-root algebra API: its bounded-monomial basis gives finite freeness, faithful flatness and an injective coefficient map. Finite algebras over a Noetherian ring are Noetherian.",
+   "uses": [
+    "lem-sfb-simultaneous-root-algebra-api",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), monic quotient calculation; Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "The finite algebra $K_n$ is integral over $C$. If $\\mathfrak q$ is a maximal ideal of $K_n$, its contraction $\\mathfrak m$ is maximal in $C$, and $JK_n\\subset\\mathfrak q$ because $J$ lies in the Jacobson radical. As $x_i^n=t_i\\in\\mathfrak q$ and $\\mathfrak q$ is prime, each $x_i\\in\\mathfrak q$. Eliminating all root variables gives $K_n/(x_1,\\ldots,x_r)\\simeq C/J$. Localization of this quotient at $\\mathfrak q$ identifies $(K_n)_{\\mathfrak q}/(x_i)$ with $C_{\\mathfrak m}/JC_{\\mathfrak m}$: the corresponding prime of $C/J$ is $\\mathfrak m/J$, since all roots vanish.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-algebra-ideal-in-radical",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GU (lemma-integral-going-up), 09XI (more-algebra.tex, lemma-characterize-henselian-pair), and 00CT (proposition-localize-quotient)."
+   }
+  },
+  {
+   "text": "The finite free coefficient map is flat, hence its local map C_m to (K_n)_q is flat. The assumed regular sequence t_i becomes weakly regular after this flat base change. Its entries are x_i^n. They lie in the maximal ideal, so weak regularity is regularity. The positive-power regular-sequence equivalence reflects this to regularity of the x_i. This also works for n=1 and the empty sequence.",
+   "uses": [
+    "lem-sfb-simultaneous-root-algebra-api",
+    "lem-weil-pbc-regular-sequence-powers",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GG (monic quotient basis), 00CS (proposition-localization-exact), 00CT (proposition-localize-quotient); explicit companion-coordinate calculation for the simultaneous root presentation of ILO IX Proposition 2.1."
+   }
+  },
+  {
+   "text": "The local ring $(K_n)_{\\mathfrak q}$ is Noetherian by localization. Apply the regular-sequence lifting criterion to the sequence and quotient of Steps 3 and 4 to conclude it is regular local. Every prime $\\mathfrak p$ of $K_n$ is contained in a maximal ideal $\\mathfrak q$, and $(K_n)_{\\mathfrak p}$ is the localization of $(K_n)_{\\mathfrak q}$ at the corresponding prime (both rings invert exactly the required denominators). The localization theorem for regular local rings therefore proves regularity at every prime. This proves that $K_n$ is a regular Noetherian ring.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-regular-local-lift-regular-sequence-quotient",
+    "lem-weil-pbc-regular-local-localization",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00NU (lemma-regular-mod-x), 0AFS (lemma-localization-of-regular-local-is-regular), 00OD (definition-regular)."
+   }
+  },
+  {
+   "text": "Let L=(x_i) and I=JK_n. Since x_i^n=t_i, L is contained in the radical of I. If two idempotents have the same image modulo L, their images modulo I differ by a nilpotent, and are equal by uniqueness of idempotents modulo a nil ideal. Uniqueness of henselian integral idempotent lifting then makes the original idempotents equal. The explicit equivalence K_n/L ≃ C/J and connectedness of Spec(C/J) now show every idempotent of K_n is zero or one. Since K_n is nonzero, its spectrum is connected.",
+   "uses": [
+    "lem-weil-pbc-lift-idempotents-locally-nilpotent",
+    "lem-weil-pbc-henselian-pair-integral-idempotent-lifting",
+    "lem-pc-scheme-connected-iff-idempotents"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00J9 (lemma-lift-idempotents); Tag 09XI (more-algebra.tex, lemma-characterize-henselian-pair), condition (3); Tag 00EE (lemma-disjoint-decomposition)."
+   }
+  },
+  {
+   "text": "The spectrum of $K_n$ is regular: affine stalks are the prime localizations proved regular in Step 5. A nonempty connected regular scheme is integral. By the definition of an integral scheme, its ring of global sections $K_n$ is a nonzero domain. For $n=1$, elimination of $x_i=t_i$ identifies $K_1$ with $C$, so $C$ is also a nonzero domain. Each $t_j$ is nonzero in $C$: in any maximal localization its image acts injectively on the nonzero quotient $C_{\\mathfrak m}/(t_1,\\ldots,t_{j-1})$, so that image cannot be zero. Thus $f=\\prod_i t_i\\ne0$ in $C$, and it stays nonzero in every $K_n$ by the injective coefficient map of Step 2.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sc-regular-connected-integral",
+    "def-pc-integral-scheme",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Properties Tags 0569 (lemma-regular-normal), 033N (lemma-normal-locally-Noetherian), 01OK (definition-integral); Schemes 01HV (lemma-spec-sheaves)."
+   }
+  },
+  {
+   "text": "Apply the existing filtered-colimit domain theorem to the coefficient diagram. For the labelled product, eventual equality with zero in the colimit would give equality with zero at a common later stage. Compatibility of the labelled parameters carries the product to that later product, which is nonzero by the finite-pair result.",
+   "uses": [
+    "new-filtered-colimit-domain-cocone",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Categories Tag 04AX (section-directed-colimits), representative and eventual-equality description; agent assembly for domains with a distinguished nonvanishing labelled product."
+   }
+  },
+  {
+   "text": "For fixed $n$, the coefficient maps and labelled roots give a cocone $K_{\\lambda,n}\\to H_n$. It is colimiting: a compatible family $K_{\\lambda,n}\\to A$ restricts to a unique map $H\\to A$, and the images of each labelled root are independent of stage by filteredness; they satisfy $x_i^n=t_i$. The polynomial-quotient presentation therefore gives a unique map $H_n\\to A$, inverse to restriction on cocones. This proves the canonical identification $H_n\\simeq\\varinjlim_\\lambda K_{\\lambda,n}$. The same common-stage argument of Step 8 makes $H_n$ a nonzero domain and keeps $f$ nonzero, since every later $K_{\\lambda,n}$ has these properties by Step 7.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-category-colimit",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-sfb-simultaneous-root-algebra-api",
+    "new-filtered-colimit-domain-cocone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent universal-property calculation from the simultaneous root presentation in ILO IX Proposition 2.1 and Categories Tag 04AX (section-directed-colimits)."
+   }
+  },
+  {
+   "text": "Use the proved compatible-root quotient colimit API. Its directed index wrapper orders positive allowed orders by divisibility, and its transition, inclusion and universal-property lemmas construct the colimit cocone with vertex tameRootAlgebra. Apply the filtered-colimit domain theorem and the same common-stage argument to the coefficient product. No injectivity of transitions is required.",
+   "uses": [
+    "lem-sfb-compatible-root-quotient-colimit",
+    "new-filtered-colimit-domain-cocone",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Categories Tag 04AX (section-directed-colimits); explicit divisibility power substitutions in the simultaneous root presentation."
+   }
+  },
+  {
+   "text": "For each domain $A$ obtained above with $f\\ne0$, the localization $A[1/f]$ is a nonzero domain: fractions multiply as usual; a fraction is zero exactly when $f^k a=0$ for some $k$, which in a domain forces $a=0$. For any nonzero domain $B$, its zero ideal is prime and is a point of $\\operatorname{Spec}B$ contained in every nonempty basic open $D(b)$, because $D(b)\\ne\\varnothing$ implies $b\\ne0$. Thus this point is dense and the spectrum is nonempty irreducible, hence connected. Finally every displayed spectrum, including these localizations, is affine and therefore qcqs. These arguments apply to $C,K_n,H,H_n,H_\\infty$ and all their punctures, irrespective of Noetherianity at the colimit.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM (section-localization), fraction equality; elementary generic-point argument from the definition of Spec; affine qcqs via Tags 00E8 (lemma-quasi-compact), 01KN (schemes.tex, lemma-affine-separated) and 01KO (schemes.tex, lemma-characterize-quasi-separated)."
+   }
+  },
+  {
+   "text": "For the final local-ring clause, let $(R,\\mathfrak m,\\kappa)$ be a henselian regular Noetherian local ring of dimension $d$, and let the chosen partial parameter list be $t_1,\\ldots,t_r$, $0\\leq r\\leq d$, the first $r$ entries (after reordering) of a regular system of parameters $t_1,\\ldots,t_d$ [def-weil-pbc-regular-system-of-parameters]. For each $n>0$, [lem-sfb-henselian-parameter-root-regularity] applied to $R$, $t_1,\\ldots,t_d$, $r$ and $n$ says that $K_n=R[x_1,\\ldots,x_r]/(x_i^n-t_i)$ is free over $R$ on the bounded monomials, so $R\\to K_n$ is injective, and that $K_n$ is a henselian regular local domain. That node uses only the maximal-ideal pair $(R,\\mathfrak m)$; it does not need the partial parameter ideal $(t_1,\\ldots,t_r)$ to be henselian or maximal, and it does not need $n$ to be invertible. For $n=1$, $K_1=R$, so $R$ is a nonzero domain. By [lem-weil-pbc-regular-local-generators-regular-sequence], $t_1,\\ldots,t_d$ is a regular sequence [def-weil-pbc-regular-sequence]. As in Step 7, each $t_j$ therefore acts injectively on the nonzero ring $R/(t_1,\\ldots,t_{j-1})$ and is nonzero. Hence $f=\\prod_i t_i\\neq0$ in the domain $R$, and $f\\neq0$ in every $K_n$ because $R\\to K_n$ is injective. Now take the constant one-object diagram with value $R$. It is nonempty and filtered, and for it $H=R$ and $H_n=K_n$. Since every $K_n$ is a nonzero domain with $f\\neq0$, the representative and common-stage argument of Step 10 applies, again using [lem-pc-filtered-colimit-commrings-elementwise], to the divisibility diagram of the $K_n$, over all positive $n$ or only those prime to a fixed prime. So the full root ring $\\varinjlim_nK_n$ is a nonzero domain with $f\\neq0$. Step 11 then shows that $K_n[1/f]$ and $(\\varinjlim_nK_n)[1/f]$ are nonzero domains, and that all these spectra are nonempty, connected and qcqs. If $r=0$, every root algebra is $R$ by its presentation and $f=1$.",
+   "uses": [
+    "def-weil-pbc-regular-system-of-parameters",
+    "lem-sfb-henselian-parameter-root-regularity",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-sfb-compatible-root-quotient-colimit",
+    "new-filtered-colimit-domain-cocone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NQ (lemma-regular-ring-CM) via lem-weil-pbc-regular-local-generators-regular-sequence; finite root algebra over a henselian regular local ring from the existing node lem-sfb-henselian-parameter-root-regularity (simultaneous root presentation of ILO IX Proposition 2.1); Categories Tag 04AX (section-directed-colimits) for the constant-coefficient root colimit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-regular-scheme",
+  "def-weil-ring-localization-away",
+  "lem-exc-regular-local-lift-regular-sequence-quotient",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-sc-regular-connected-integral",
+  "lem-sfb-compatible-root-quotient-colimit",
+  "lem-sfb-henselian-parameter-root-regularity",
+  "lem-sfb-simultaneous-root-algebra-api",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-henselian-pair-integral-idempotent-lifting",
+  "lem-weil-pbc-integral-algebra-ideal-in-radical",
+  "lem-weil-pbc-lift-idempotents-locally-nilpotent",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-sequence-powers",
+  "new-filtered-colimit-domain-cocone"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1, printed p.133 root presentation, expanded with the cited Stacks local-ring and henselian-pair results and an agent proof for coefficient/root filtered colimits. C4 proof: use the existing simultaneous-root and compatible-root colimit APIs; replace the companion-coordinate calculation by flat base change and reflection of regularity through positive powers; use radical containment and uniqueness of idempotent lifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Henselian pair with connected residual stratum and regular sequence parameters has integral regular simultaneous root algebras and integral filtered root colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianRing.is_henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} [self : HenselianRing R I] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ I →\\n        IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ I\", \"doc\": \"Let $R$ be a commutative ring that is Henselian with respect to an ideal $I$. For any monic polynomial $f \\\\in R[X]$ and any element $a_0 \\\\in R$, if $f(a_0) \\\\in I$ and the derivative $f'(a_0)$ is a uni\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian classes and filtered colimit constructions do not give regular domain root algebras with nonzero punctures for a henselian parameter pair"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining roots of a regular sequence over a henselian Noetherian pair yields connected regular domains including full parameter root tower and principal puncture",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianRing.is_henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} [self : HenselianRing R I] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ I →\\n        IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ I\", \"doc\": \"Let $R$ be a commutative ring that is Henselian with respect to an ideal $I$. For any monic polynomial $f \\\\in R[X]$ and any element $a_0 \\\\in R$, if $f(a_0) \\\\in I$ and the derivative $f'(a_0)$ is a uni\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"exists_integral_inj_algHom_of_quotient\", \"module\": \"Mathlib/RingTheory/NoetherNormalization\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {n : ℕ} (I : Ideal (MvPolynomial (Fin n) k)),\\n  I ≠ ⊤ → ∃ s ≤ n, ∃ g, Function.Injective ⇑g ∧ g.IsIntegral\", \"doc\": \"For any non-trivial ideal $ I $ in the polynomial ring $ k[x_1,\\\\dots,x_n] $ over a field $ k $, there exists a subset $ s \\\\subseteq \\\\{1,\\\\dots,n\\\\} $ and an injective $ k $-algebra homomorphism $ g: k[x\"}\n  {\"name\": \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal (PowerSeries R)} [I.IsPrime],\\n  PowerSeries.X ∉ I →\\n    ∀ {S : Set R},\\n      Ideal.span S = Ideal.map PowerSeries.constantCoeff I →\\n        S.Finite → ∃ T, I = Ideal.span T ∧ T.Finite ∧ T.ncard = S.ncard\", \"doc\": \"If the formal variable $ X $ is not in the ideal $ I $ of univariate power series over a ring $ R $, and the image of $ I $ under the constant coefficient homomorphism is finitely generated by a set $\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian classes and filtered colimit constructions do not give regular domain root algebras with nonzero punctures for a henselian parameter pair"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian pair with connected residual stratum and regular sequence parameters has integral regular simultaneous root algebras and integral filtered root colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": IsColimit <| colimitCocone.{v, u} F\", \"doc\": \"The forgetful functor from the category of commutative rings to the category of rings reflects colimits for filtered diagrams. Specifically, if a diagram in the category of commutative rings has a col\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u) [CommRing R] [IsLocalRing R] :\\n  TFAE\\n    [HenselianLocalRing R,\\n      ∀ f : R[X],\\n        f.Monic →\\n          ∀ a₀ : ResidueField R, aeval a₀ f = 0 → aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀,\\n      ∀ {K : Type u} [Field K],\\n        ∀ (φ : R →+* K),\\n         \", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianRing.recOn\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {motive : HenselianRing R I → Sort u} →\\n        (t : HenselianRing R I) →\\n          ((jac : I ≤ ⊥.jacobson) →\\n              (is_henselian :\\n                  ∀ (f : Polynomial R),\\n                    f.Monic →\\n                      ∀\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a type family $ P $ over $ \\\\text{HenselianRing}(R, I) $, if $ I $ is contained in the Jacobson radical of $ R $ and for every monic polynomial $ f \\\\in\"}\n  {\"name\": \"HenselianRing.casesOn\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {motive : HenselianRing R I → Sort u} →\\n        (t : HenselianRing R I) →\\n          ((jac : I ≤ ⊥.jacobson) →\\n              (is_henselian :\\n                  ∀ (f : Polynomial R),\\n                    f.Monic →\\n                      ∀\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and a type family $ P $ over $ \\\\text{HenselianRing}(R, I) $, if for every $ I \\\\subseteq \\\\text{Jac}(R) $ (the Jacobson radical) and for every monic polyn\"}\n  {\"name\": \"HenselianRing.is_henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} [self : HenselianRing R I] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ I →\\n        IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ I\", \"doc\": \"Let $R$ be a commutative ring that is Henselian with respect to an ideal $I$. For any monic polynomial $f \\\\in R[X]$ and any element $a_0 \\\\in R$, if $f(a_0) \\\\in I$ and the derivative $f'(a_0)$ is a uni\"}\n  {\"name\": \"HenselianRing.rec\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {motive : HenselianRing R I → Sort u} →\\n        ((jac : I ≤ ⊥.jacobson) →\\n            (is_henselian :\\n                ∀ (f : Polynomial R),\\n                  f.Monic →\\n                    ∀ (a₀ : R),\\n                      Polynomial.\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and a type family $ P $ over $ \\\\text{HenselianRing}(R, I) $, if for every $ I \\\\subseteq \\\\text{Jac}(R) $ (the Jacobson radical) and for every monic polyn\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] (I : Ideal R) [IsAdicComplete I R] : HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian classes and filtered colimit constructions do not give regular domain root algebras with nonzero punctures for a henselian parameter pair"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian classes and filtered colimit constructions do not give regular domain root algebras with nonzero punctures for a henselian parameter pair"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*([Rr]oot|[Rr]egular[Ss]equence)|([Rr]oot|[Rr]egular[Ss]equence).*hensel",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Padics/Hensel.lean\", \"line\": \"20\", \"text\": \"Hensel's lemma gives a simple condition for the existence of a root of a polynomial.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian classes and filtered colimit constructions do not give regular domain root algebras with nonzero punctures for a henselian parameter pair"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*([Rr]oot|[Rr]egular)|([Rr]oot|[Rr]egular).*hensel",
+   "results": "msearch: OK; 0 hits; read hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the henselian classes, single-polynomial domain criterion and integral-spectrum instance do not establish the parameter-root regularity and filtered tower assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining roots of parameters to a henselian regular ring with connected quotient gives a domain",
+   "results": "msearch: OK; 8 hits; read hits: AdjoinRoot.isDomain_of_prime, IsAdjoinRoot.mk.noConfusion, AdjoinRoot, AdjoinRoot.isAdjoinRootMonic.congr_simp, IsAdjoinRoot.ctorIdx, IsAdjoinRootMonic.noConfusion, IsAdjoinRoot.noConfusionType, AdjoinRoot.of",
+   "date": "2026-10-22",
+   "verdict": "no match: the henselian classes, single-polynomial domain criterion and integral-spectrum instance do not establish the parameter-root regularity and filtered tower assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"IsDomain\"",
+   "results": "msearch: OK; 0 hits; read hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the henselian classes, single-polynomial domain criterion and integral-spectrum instance do not establish the parameter-root regularity and filtered tower assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselian pair regular sequence connected quotient simultaneous root algebra integral domain filtered colimit",
+   "results": "msearch: OK; 8 hits; read hits: HenselianRing, IsAdicComplete.henselianRing, HenselianLocalRing, HenselianRing.is_henselian, instHenselianRingMaximalIdeal, HenselianLocalRing.TFAE, HenselianRing.jac, HenselianLocalRing.is_henselian",
+   "date": "2026-10-22",
+   "verdict": "no match: the henselian classes, single-polynomial domain criterion and integral-spectrum instance do not establish the parameter-root regularity and filtered tower assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular parameter roots over a Noetherian henselian pair have connected regular spectra and nonzero integral filtered colimits",
+   "results": "msearch: OK; 8 hits; read hits: HenselianLocalRing, HenselianLocalRing.TFAE, StandardEtalePair, HenselianRing, IsAdicComplete.henselianRing, instHenselianRingMaximalIdeal, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, HenselianLocalRing.is_henselian",
+   "date": "2026-10-22",
+   "verdict": "no match: the henselian classes, single-polynomial domain criterion and integral-spectrum instance do not establish the parameter-root regularity and filtered tower assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-universal-residual-charts",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: geometric henselian SNC charts, pointed universal residual covers, and prime-to-characteristic parameter-root tower underlying the tame-boundary calculation. Extraction of returned proof steps 9, 10, 11, 12, 13, 17: Domains in henselian parameter-root towers and their filtered colimits.",
+   "via": [
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-henselian-parameter-root-domain-tower",
+  "worker": "stage1",
+  "summary": "Q40 splits the finite root algebra by monic coordinates, a local regular-sequence calculation, and henselian idempotents, then handles both filtered colimits by representatives. Reuses existing nodes only; retains the full statement, including arbitrary positive root degrees, noninjective coefficient maps and partial parameters.",
+  "blueprint": "Paragraph (3), open direct image: geometric henselian SNC charts, pointed universal residual covers, and prime-to-characteristic parameter-root tower underlying the tame-boundary calculation. Extraction of returned proof steps 9, 10, 11, 12, 13, 17: Domains in henselian parameter-root towers and their filtered colimits. Steps 1--7 realize the finite regular connected domain calculation, Steps 8--11 its filtered and punctured extensions, and Step 12 the partial-parameter local clause. The ancestor command reports no imported blueprint ancestor (node null), retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-regular-local-lift-regular-sequence-quotient",
+    "why": "Step 5 uses exactly the general Noetherian-local regular-sequence lifting criterion, Tag 00NU, for the root localizations; no root-specific node of this unit supplies the criterion."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Step 5 uses regularity under prime localization, Tag 0AFS, to pass from maximal to all prime localizations; the unit does not replace this general commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Step 12 uses the general regular-parameter sequence and quotient theorem, Tag 00NQ; it is the input verifying the partial-parameter hypotheses, not a replacement for the root-tower argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-regular-local-lift-regular-sequence-quotient",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-8a6697e84",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-8a6697e84 (reviewer sub-agent of L); spot-checked: S1 split of lem-sfb-henselian-parameter-root-domain-tower with no new nodes. The statement is byte-identical to live, which is still unsplit; there is no repair note and the item is not on the drop list. I tested it on r=0, n=1, char k dividing n, a henselian DVR, k[[u,v]] with the partial list (u), and non-injective transition maps; it is true as written. Steps 1-11 are correct against their cited statements: Step 1 shows J is in the radical by the CRT argument from uniqueness of idempotent lifts; Step 3 uses the integral-radical node; Step 4 is the companion-matrix nonzerodivisor calculation; Step 5 uses 00NU (algebra.tex:25816) and 0AFS; Step 6 uses henselian plus nilpotent idempotent bijections; Step 7 uses regular connected implies integral (Lean-closed); Steps 8-10 use the elementwise filtered-colimit leaf (both clauses) and the universal-property identification H_n=colim K_{lambda,n}; Step 11 uses the generic point and affine qcqs. The source is ILO IX Prop 2.1, p.133 (PDF p.139); the filtered and arbitrary-n parts are an agent extension. FIX (C1/C5): Step 12 said 'repeat Steps 2-5 / Step 6 verbatim', did not cite the nodes it relied on, and re-derived the existing same-unit node lem-sfb-henselian-parameter-root-regularity (unsplit in the snapshot, split in live, no cycle). I rewrote Step 12 to cite that node, plus lem-weil-pbc-regular-local-generators-regular-sequence for f nonzero and the Step 10 argument applied to the constant diagram for the full root ring; proof_deps is recomputed. Tool uses are accepted: 00NU lift criterion, 0AFS localization and 00NQ parameter sequence are generic algebra used as black boxes. The batch-5 flag (lem-exc-regular-local-lift-regular-sequence-quotient reaching lem-trf-regular-sequence-dimension-formula) is a Mathlib-leaf dimension formula for regular sequences, pure commutative algebra and outside both assumed statements, so it is accepted. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianParameterRootDomainTower",
+  "declaration": "RingTheory.henselianParameterRoot_finite",
+  "declarations": [
+   "RingTheory.parameterRootCoordinate",
+   "RingTheory.parameterRootRelations_vanish",
+   "RingTheory.parameterRootLift",
+   "RingTheory.parameterRootMap_relation",
+   "RingTheory.parameterRootMap",
+   "RingTheory.parameterRootMap_laws",
+   "RingTheory.parameterRootDiagram_laws",
+   "RingTheory.parameterRootDiagram",
+   "RingTheory.parameterRootCocone_naturality",
+   "RingTheory.parameterRootCocone",
+   "RingTheory.parameterRootPower_relation",
+   "RingTheory.parameterRootPower",
+   "RingTheory.parameterRootFull_relation",
+   "RingTheory.parameterRootInclusion",
+   "RingTheory.parameterRootFull_isColimit",
+   "RingTheory.henselianParameterRoot_finite",
+   "RingTheory.henselianParameterRoot_filtered",
+   "RingTheory.henselianParameterRoot_local",
+   "RingTheory.henselianParameterRoot_spectra",
+   "RingTheory.henselianParameterRoot_degenerate"
+  ],
+  "file": "lean/Sheaf/RingTheory/HenselianParameterRootDomainTower.lean",
+  "statement": "theorem henselianParameterRoot_finite {C : Type u} [CommRing C] [IsNoetherianRing C] {r : ℕ} (t : Fin r → C) [HenselianRing C (Ideal.span (Set.range t))] (hconnected : ConnectedSpace (Spec (.of (C ⧸ Ideal.span (Set.range t))))) (hlocal : ∀ (m : Ideal C) [m.IsMaximal], RingTheory.Sequence.IsRegular (Localization.AtPrime m) (List.ofFn (fun i ↦ algebraMap C (Localization.AtPrime m) (t i))) ∧ IsRegularLocalRing (Localization.AtPrime m ⧸ Ideal.map (algebraMap C (Localization.AtPrime m)) (Ideal.span (Set.range t)))) (n : ℕ) (hn : 0 < n) : (∃ b : Module.Basis (Fin r → Fin n) C (Algebra.pthRootAlgebra n r C t), ∀ a, b a = ∏ i, parameterRootCoordinate t n i ^ (a i).val) ∧ Module.Finite C (Algebra.pthRootAlgebra n r C t) ∧ Module.Free C (Algebra.pthRootAlgebra n r C t) ∧ IsRegularRing (Algebra.pthRootAlgebra n r C t) ∧ IsDomain (Algebra.pthRootAlgebra n r C t) ∧ (∀ (q : Ideal (Algebra.pthRootAlgebra n r C t)) [q.IsMaximal], (∀ i, parameterRootCoordinate t n i ∈ q) ∧ RingTheory.Sequence.IsRegular (Localization.AtPrime q) (List.ofFn (fun i ↦ algebraMap _ (Localization.AtPrime q) (parameterRootCoordinate t n i))) ∧ (∃ e : (Localization.AtPrime q ⧸ Ideal.span (Set.range (fun i ↦ algebraMap _ (Localization.AtPrime q) (parameterRootCoordinate t n i)))) ≃+* (Localization.AtPrime (q.comap (algebraMap C (Algebra.pthRootAlgebra n r C t))) ⧸ Ideal.map (algebraMap C (Localization.AtPrime (q.comap (algebraMap C (Algebra.pthRootAlgebra n r C t))))) (Ideal.span (Set.range t))), ∀ a : C, e (Ideal.Quotient.mk _ (algebraMap _ (Localization.AtPrime q) (algebraMap C (Algebra.pthRootAlgebra n r C t) a))) = Ideal.Quotient.mk _ (algebraMap C (Localization.AtPrime (q.comap (algebraMap C (Algebra.pthRootAlgebra n r C t)))) a))) ∧ IsDomain C ∧ (∏ i, t i) ≠ 0 ∧ algebraMap C (Algebra.pthRootAlgebra n r C t) (∏ i, t i) ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All clauses of this compound statement are recorded in henselianParameterRoot_finite, henselianParameterRoot_filtered, henselianParameterRoot_local, henselianParameterRoot_spectra, henselianParameterRoot_degenerate and parameterRootFull_isColimit. Remaining declarations construct the canonical root substitutions and coefficient diagram; their named well-definedness statements postpone only proofs. Reuses Algebra.pthRootAlgebra for finite roots and tameRootAlgebra, with p=1 for all positive orders, for full roots."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d44901cf",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery after the 334f46e9 H12/H4 RETURN; the requested correction was applied exactly. The item's stmt_deps now cite the landed def-sfb-parameter-root-algebra, and the duplicate def-sfb-finite-parameter-root-algebra node file was removed. The dep record is identical to live (existing:true Algebra.pthRootAlgebra in WeilConjectures.RingTheory.PthRootAlgebraLocal, by Q65). The report's repair and new-node sections were updated. The item module is byte-identical (sha256 1801d129) to both earlier heads, whose reviews checked every clause (henselian pair, connected residual Spec, local regular sequence and regular quotient, basis, finite free, IsRegularRing, IsDomain, maximal-ideal clauses, filtered IsColimit, tameRootAlgebra for p=1 or prime, spectra and punctures, r=0, K_1=C, partial parameters) and found no fault. All stmt_deps are live definition nodes with Lean records, so there is no theorem stmt_dep. The node's statement, proof and proof_deps are unchanged from live, and live has no lean record. The def-sfb-strict-local-kummer-tame-module record is identical to live. Report has Worker report and Second reading by NY sections. Proofs are sorry; no hollow defs. Nothing changed or compiled; the worker reports clean scompile (15.7 s / 12.6 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261023T230519-L-3437907",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

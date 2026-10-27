@@ -1,0 +1,275 @@
+{
+ "id": "lem-per-rhom-local-cohomological-bound",
+ "kind": "statement",
+ "title": "Local sheafified derived Hom, cohomological boundaries and lower amplitude",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a small site with a sheaf of commutative rings, using [def-weil-size-convention]. Write $D(\\mathcal O)=D(\\operatorname{Mod}(\\mathcal O))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], with standard cohomology [def-sbc-standard-tstructure-derived-category], and use derived internal Hom [def-pur-derived-internal-hom]. Fix $K\\in D(\\mathcal O)$ and put $T^n(M)=H^nR\\mathcal Hom_{\\mathcal O}(K,M)$. For an object $U$ let $\\mathcal O_U$ and $M|_U$ denote restriction to the localized site $\\mathcal C/U$ [def-pur-localized-ringed-site]. Then:\n\n1. For every integer $n$ there is an isomorphism of module sheaves\n$$T^n(M)\\cong\\bigl(U\\longmapsto\\operatorname{Hom}_{D(\\mathcal O_U)}(K|_U,M|_U[n])\\bigr)^\\#,$$\nwhere $\\#$ is module sheafification [def-weil-presheaf-modules-sheafification], the module action is postcomposition with multiplication by sections of $\\mathcal O$, and restriction on the presheaf is induced by derived restriction and its canonical composition comparisons. The isomorphism is additive, natural in $M$, and compatible with restriction in $U$; for complexes $P,I$ representing $K,M$ with $I$ K-injective [def-pur-kinjective-complex, def-pc-cochain-complex-modules, def-pur-hom-complex] it sends a Hom-complex degree-$n$ cocycle to its localized derived morphism $P|_U\\to I|_U[n]$.\n2. Each $T^n$ is additive. A distinguished triangle $X\\to Y\\to Z\\xrightarrow{w}X[1]$ gives a natural long exact sequence of module sheaves $\\cdots\\to T^n(X)\\to T^n(Y)\\to T^n(Z)\\to T^{n+1}(X)\\to\\cdots$. Under (1) the boundary is induced by local postcomposition with $w[n]$. These sequences and the identifications $T^n(M[t])\\cong T^{n+t}(M)$ are coherent with shifts and natural in triangle morphisms; in particular $T^0$ is homological [def-sp-homological-functor].\n3. For all integers $r,b$, if $H^j(K)=0$ for $j>r$ and $H^j(M)=0$ for $j<b$, then $T^n(M)=0$ for $n<b-r$. No finite Tor amplitude or bound on site cohomological dimension is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A94, lemma-RHom-into-K-injective; sheafification passage in lemma-RHom-well-defined; cohomological and amplitude consequences of the local comparison; agent generalization preserving the arguments of lem-per-bounded-above-rhom-hyperext."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-localized-ringed-site",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sp-homological-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "def-weil-pbc-local-coefficient-localization",
+  "lem-sf-site-perfect-overmap-exact",
+  "lem-sf-site-perfect-restriction-additive",
+  "lem-sf-site-perfect-overmap-additive",
+  "def-coef-hom-representative-evaluation",
+  "lem-sc-hom-complex-projections",
+  "lem-sf-site-perfect-restriction-exact"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representative L of K using essential surjectivity of Q. Construct P by localizing cohomology of the presheaf complex underlying Hom(L,I(-)). Its sheafification is T by exact module sheafification and the fixed internal-Hom localization factorization. The explicit additive section equivalence uses the canonical cocycle comparison into the restricted K-injective resolution.",
+   "uses": [
+    "lem-per-local-rhom-presheaf-model",
+    "lem-per-local-rhom-section-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8Y, 0A94 and 0A95; module sheafification sites-modules.tex Tag 03EI; derived.tex Tags 0147, 0149 and 015F"
+   }
+  },
+  {
+   "text": "Use the concrete local action equations for derived arrows, local scalars and further restriction. Use the normalized internal-Hom target shift to give a coherent shift sequence, additive cohomology functors and homological degree-zero functor.",
+   "uses": [
+    "lem-per-local-rhom-section-actions",
+    "lem-per-local-rhom-shift-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8Y, 0A94 and 0A95; module sheafification sites-modules.tex Tag 03EI; derived.tex Tags 0147, 0149 and 015F"
+   }
+  },
+  {
+   "text": "Let rho be the target-shift presheaf comparison. Define d as P_n applied to the triangle last arrow followed by rho_(1,n). The local formula follows from naturality and the section formula for rho. Sheafification compatibility follows by naturality of sigma and tau and the sheafification equation for rho. This works for every triangle and in particular every distinguished triangle.",
+   "uses": [
+    "lem-per-local-rhom-target-shift-comparison",
+    "lem-per-local-rhom-section-actions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8Y, 0A94 and 0A95; module sheafification sites-modules.tex Tag 03EI; derived.tex Tags 0147, 0149 and 015F"
+   }
+  },
+  {
+   "text": "For any K-injective target use the fixed augmentation-normalized representative isomorphism. For a cycle use its concrete sheafCycleMap, whose component equation is proved by the Hom projection formula and the kernel description of section cycles. The cycle-unit normalization gives the remaining class equation.",
+   "uses": [
+    "lem-per-local-rhom-presheaf-model",
+    "lem-per-local-rhom-additive-cocycle-comparison",
+    "lem-per-local-rhom-cycle-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8Y, 0A94 and 0A95; module sheafification sites-modules.tex Tag 03EI; derived.tex Tags 0147, 0149 and 015F"
+   }
+  },
+  {
+   "text": "Exact restriction preserves the standard t-structure bounds. If K is at most r and M is at least b, the restrictions of K and M[n] are in degrees at most r and at least b-n. For n<b-r orthogonality makes every local Hom zero. Section equivalence makes the cohomology presheaf zero, and its sheafification is T_n(M), so T_n(M) is zero.",
+   "uses": [
+    "lem-weil-pbc-finite-type-restriction-exact",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-derived-tstructure-orthogonality",
+    "lem-per-local-rhom-section-equivalence",
+    "lem-per-local-rhom-presheaf-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8Y, 0A94 and 0A95; module sheafification sites-modules.tex Tag 03EI; derived.tex Tags 0147, 0149 and 015F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-local-rhom-presheaf-model",
+  "lem-per-local-rhom-section-equivalence",
+  "lem-per-local-rhom-section-actions",
+  "lem-per-local-rhom-shift-sequence",
+  "lem-per-local-rhom-target-shift-comparison",
+  "lem-per-local-rhom-additive-cocycle-comparison",
+  "lem-per-local-rhom-cycle-unit-normalization",
+  "lem-weil-pbc-finite-type-restriction-exact",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-derived-tstructure-orthogonality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P5",
+  "date": "2026-10-23",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Concrete resolved presheaf, normalized local cocycles and shifts; Tags 0A8Y, 0A94 and 0A95."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology sheaves of derived internal Hom are sheafifications of local derived morphism groups and form a cohomological functor with lower bound b minus r",
+   "results": "{\"t\": \"2026-10-22T07:21:50Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology sheaves of derived internal Hom are sheafifications of local derived morphism groups and form a cohomological functor with lower bound b minus r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.H\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\"], \"digest\": \"ed0fb6ff21c016a6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf cohomology presheaves and K-injective shifted Hom infrastructure do not identify sheafified local derived Hom with internal RHom cohomology, its boundary maps and its amplitude bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RHom\", \"homology\"",
+   "results": "{\"t\": \"2026-10-22T07:21:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"RHom\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"TopPair.HomologyPretheory.instIsIsoFunctorHomₚ\", \"AlgebraicTopology.singularHomologyFunctor\", \"AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace\", \"AlgebraicTopology.singularHomologyFunctorZeroOfTotallyDisconnectedSpace\", \"TopCat.singularHomology₀ε\", \"TopCat.instIsIsoSingularHomology₀εOfPathConnectedSpaceCarrier\", \"TopCat.singularHomology₀Iso\", \"TopCat.singularHomology₀Iso_sigma_desc_id\"], \"digest\": \"87d48f6a1915ba4a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf cohomology presheaves and K-injective shifted Hom infrastructure do not identify sheafified local derived Hom with internal RHom cohomology, its boundary maps and its amplitude bound."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bRHom\\b|derivedInternalHom|cohomologyPresheaf",
+   "results": "{\"t\": \"2026-10-22T07:29:29Z\", \"tool\": \"grep\", \"query\": \"\\\\bRHom\\\\b|derivedInternalHom|cohomologyPresheaf\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\"], \"digest\": \"1fb170a2cc0b22f0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf cohomology presheaves and K-injective shifted Hom infrastructure do not identify sheafified local derived Hom with internal RHom cohomology, its boundary maps and its amplitude bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a ringed site RHom from D less equal r sends D greater equal b to D greater equal b minus r",
+   "results": "{\"t\": \"2026-10-22T07:21:39Z\", \"tool\": \"leansearch\", \"query\": \"On a ringed site RHom from D less equal r sends D greater equal b to D greater equal b minus r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingQuot.Rel.sub_right\", \"PresheafOfModules.instSubHom\", \"RingHom.restrict_apply\", \"RingHom.map_sub\", \"SheafOfModules.Hom\", \"AlgebraicGeometry.LocallyRingedSpace.toToΓSpecMapBasicOpen\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"Derivation.map_sub\"], \"digest\": \"afcdaf299fc52d17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf cohomology presheaves and K-injective shifted Hom infrastructure do not identify sheafified local derived Hom with internal RHom cohomology, its boundary maps and its amplitude bound."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|RHom|sheafHom.*homology",
+   "results": "{\"t\": \"2026-10-22T12:04:25Z\", \"tool\": \"grep\", \"query\": \"derivedInternalHom|RHom|sheafHom.*homology\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/Preadditive/CommGrp_.lean\", \"Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean\"], \"digest\": \"971bcadfd23f7918\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sheaf cohomology, external shifted Hom, or generic derived infrastructure, not the full internal sheaf Hom comparison with its boundary, coherence, and amplitude clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RHom\"",
+   "results": "{\"t\": \"2026-10-22T12:04:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"RHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Loogle is currently under load, please try again later.\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: Loogle reports that it is under load."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafified local Ext groups form a cohomological functor with connecting maps given by composition in a distinguished triangle",
+   "results": "{\"t\": \"2026-10-22T12:04:26Z\", \"tool\": \"leansearch\", \"query\": \"Sheafified local Ext groups form a cohomological functor with connecting maps given by composition in a distinguished triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.extFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Abelian.extFunctorObj\", \"CategoryTheory.Abelian.Ext.mapExactFunctor.congr_simp\", \"CategoryTheory.plusPlusSheaf\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.sheafifyComposeIso\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\"], \"digest\": \"c19603d15a7f6501\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sheaf cohomology, external shifted Hom, or generic derived infrastructure, not the full internal sheaf Hom comparison with its boundary, coherence, and amplitude clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology sheaf of internal derived Hom on a ringed site is the sheafification of local derived morphisms and vanishes below the difference of cohomological bounds",
+   "results": "{\"t\": \"2026-10-22T12:04:35Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology sheaf of internal derived Hom on a ringed site is the sheafification of local derived morphisms and vanishes below the difference of cohomological bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"CochainComplex.IsKInjective\", \"DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\"], \"digest\": \"aaf31fec94f469ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sheaf cohomology, external shifted Hom, or generic derived infrastructure, not the full internal sheaf Hom comparison with its boundary, coherence, and amplitude clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bRHom\\b|derivedInternalHom|cohomologyPresheaf",
+   "results": "{\"t\": \"2026-10-22T12:06:00Z\", \"tool\": \"grep\", \"query\": \"\\\\bRHom\\\\b|derivedInternalHom|cohomologyPresheaf\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"ec35eb47dbe2392a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sheaf cohomology, external shifted Hom, or generic derived infrastructure, not the full internal sheaf Hom comparison with its boundary, coherence, and amplitude clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded complexes of sheaves of modules on a ringed site, cohomology of the internal Hom complex sheafifies local shifted morphisms in the derived category",
+   "results": "{\"t\": \"2026-10-22T12:06:09Z\", \"tool\": \"leanfinder\", \"query\": \"For unbounded complexes of sheaves of modules on a ringed site, cohomology of the internal Hom complex sheafifies local shifted morphisms in the derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk\", \"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\"], \"digest\": \"f733f9122758fa27\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary sheaf cohomology, external shifted Hom, or generic derived infrastructure, not the full internal sheaf Hom comparison with its boundary, coherence, and amplitude clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-bounded-above-rhom-hyperext",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof, Step 1, relative Verdier duality and its coefficient comparison chain: the degreewise truncation passage implicit in ILO XVII 10.1.1 p. 325 from Ext continuity to representable direct sums. Re-split of lem-per-bounded-above-rhom-hyperext: old proof Steps 1–3 (local comparison, orthogonality and natural long exact sequences).",
+   "via": [
+    "lem-per-bounded-above-rhom-hyperext",
+    "lem-per-constructible-rhom-coproduct-continuity",
+    "lem-per-ctf-hom-universal-coefficients",
+    "lem-per-ctf-hom-coefficient-comparison",
+    "lem-per-coefficient-change-dualizing",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-rhom-local-cohomological-bound",
+  "worker": "stage1",
+  "summary": "Proved all three clauses using existing DAG nodes, without introducing new nodes. Checked the specified local cocycle normalization, variable-ring module sheafification, arbitrary derived morphisms, triangle boundary and shift signs, and the lower bound by exact slice restriction and t-structure orthogonality. Statement unchanged.",
+  "blueprint": "Realizes the local comparison, orthogonality, and natural long exact sequence arguments extracted as old Steps 1–3 of lem-per-bounded-above-rhom-hyperext, within the coefficient-duality branch of lem-per-artin-gabber-affine-curve. Current main-20261015 ancestor proof and unit were read; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-into-kinjective-local",
+    "why": "Identifies degree-zero Hom-complex classes with local derived arrows, applied to shifted K-injectives; this is the existing ringed-site comparison, not a new perverse route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-restriction-exact",
+    "why": "Its statement applies to arbitrary small ringed sites despite its historical name: exact slice restriction supplies both local triangles and cohomology bounds."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-restriction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NE-9c806250b",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-9c806250b (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 6 steps, no new nodes), all 17 cited statements, Stacks sites-cohomology.tex Tag 0A94 lemma-RHom-into-K-injective and Tag 0A95 lemma-RHom-well-defined (sheafified local Hom passage), and the parent lem-per-bounded-above-rhom-hyperext Step 1. The parent uses exactly clauses 2-3 of this item. Checks: (1) Shift identification checked by hand: Hom^•(P,I[n]) = C[n], both differentials are (-1)^n d_I f - (-1)^q f d_P, so degree-0 cocycles are chain maps P|_U -> I|_U[n]. (2) Exact module sheafification over a variable ring sheaf plus the exact-functor cohomology comparison is correct; the counit is an iso on sheaves. (3) Naturality comes from the K-injective Hom bijection, and changes of representative are homotopy equivalences. (4) The long exact sequence comes from hom-into-triangle (ii)/(iii) plus rotation (TR2); the translate signs are only ±1. (5) Shift and TR3 boundary-naturality coherence is elementary. (6) Amplitude: K|_U in D^{<=r} and M|_U[n] in D^{>=b-n}, and n<b-r iff r<b-n, so orthogonality applies with a strict inequality. Small cases: on a point site with a field, K=k[-r] and M=k[-b] give T^n nonzero only at n=b-r, so the bound is sharp. K=0 and M=0 give zero, and negative r,b are allowed. No K-flatness, Tor-amplitude or cohomological-dimension hypothesis is used. No cycle (closure of 209 nodes). No SGA. No duplicate: the 0A94/0A95 hits (relative-bidual-triangles, prime-power-hom-tensor-test, potential-coinduction), the derived-internal-hom shift nodes and sc restrict-open are all different statements. Accepted tool_uses: lem-pur-rhom-into-kinjective-local and lem-weil-pbc-finite-type-restriction-exact; both are generic ringed-site facts. FIX (C1/C4, one point): Step 1 turned lem-pur-rhom-into-kinjective-local's target Hom(Q_U(P|_U), Q_U(I[n]|_U)) into Hom(K|_U, M|_U[n]) without citing exact restriction or lem-weil-pbc-exact-functor-derived-factorization (phi and shift compatibility (2)). Step 6 used H^j(K|_U) = H^j(K)|_U the same way. I added the identification sentence and the citations to Steps 1 and 6; proof_deps already contained both nodes. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-rhom-local-cohomological-bound.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalRHomCohomologicalBound",
+  "declaration": "CategoryTheory.LocalRHom.local_cohomological_bound",
+  "declarations": [
+   "CategoryTheory.LocalRHom.local_cohomological_bound"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/LocalRHomCohomologicalBound.lean",
+  "statement": "theorem local_cohomological_bound (K : D.{uC, vC, u, w} J R) : ∃ (P : ℤ → D.{uC, vC, u, w} J R ⥤ PresheafOfModules.{max uC vC u} (rings.{uC, vC, u} J R).obj) (e : ∀ (n : ℤ) (M : D.{uC, vC, u, w} J R) (U : C), ((P n).obj M).obj (op U) ≃+ ((res.{uC, vC, u, w, wSlice} J R U).obj K ⟶ (res.{uC, vC, u, w, wSlice} J R U).obj (M⟦n⟧))) (σ : ∀ n : ℤ, P n ⋙ sh.{uC, vC, u} J R ≅ T.{uC, vC, u, w} J R K n) (S : (T.{uC, vC, u, w} J R K 0).ShiftSequence ℤ) (τ : ∀ n : ℤ, S.sequence n ≅ T.{uC, vC, u, w} J R K n), τ 0 = S.isoZero ∧ (∀ n : ℤ, (T.{uC, vC, u, w} J R K n).Additive) ∧ (T.{uC, vC, u, w} J R K 0).IsHomological ∧ (∀ (n : ℤ) (M N : D.{uC, vC, u, w} J R) (v : M ⟶ N) (U : C) (x : ((P n).obj M).obj (op U)), e n N U (((P n).map v).app (op U) x) = e n M U x ≫ (res.{uC, vC, u, w, wSlice} J R U).map (v⟦n⟧')) ∧ (∀ (n : ℤ) (M : D.{uC, vC, u, w} J R) (U : C) (a : R.obj.obj (op U)) (x : ((P n).obj M).obj (op U)), e n M U (a • x) = e n M U x ≫ (sectionDerivedMultiplication.{uC, vC, u, w, wSlice} J R U a).app (M⟦n⟧)) ∧ (∀ (n : ℤ) (M : D.{uC, vC, u, w} J R) (U V : C) (f : V ⟶ U) (x : ((P n).obj M).obj (op U)), e n M V (((P n).obj M).map f.op x) = restrictHom.{uC, vC, u, w, wSlice} J R f (e n M U x)) ∧ (∀ (A : Triangle (D.{uC, vC, u, w} J R)), A ∈ distTriang (D.{uC, vC, u, w} J R) → ∀ n : ℤ, ∃ d : (P n).obj A.obj₃ ⟶ (P (n + 1)).obj A.obj₁, (∀ (U : C) (x : ((P n).obj A.obj₃).obj (op U)), e (n + 1) A.obj₁ U (d.app (op U) x) = e n A.obj₃ U x ≫ (res.{uC, vC, u, w, wSlice} J R U).map (A.mor₃⟦n⟧') ≫ (res.{uC, vC, u, w, wSlice} J R U).map ((shiftFunctorAdd' (D.{uC, vC, u, w} J R) 1 n (n + 1) (add_comm 1 n)).inv.app A.obj₁)) ∧ (sh.{uC, vC, u} J R).map d ≫ (σ (n + 1)).hom.app A.obj₁ = (σ n).hom.app A.obj₃ ≫ boundary.{uC, vC, u, w} J R K S τ A n) ∧ (∀ (L I : CochainComplex (Mod.{uC, vC, u} J R) ℤ) [I.IsKInjective] (k : DerivedCategory.Q.obj L ≅ K), ∃ h : (RH.{uC, vC, u, w} J R (DerivedCategory.Q.obj L)).obj (DerivedCategory.Q.obj I) ≅ DerivedCategory.Q.obj (homComplex.{uC, vC, max uC vC u, max uC vC u} (R := R) L I), h.hom ≫ DerivedCategory.Q.map (homAugmentation.{uC, vC, u} J R L I) = (WeilConjectures.coefficientHomResolutionIso.{u, uC, vC, w} J R L I).hom ∧ ∀ (n : ℤ) (U : C) (z : ((homComplex.{uC, vC, max uC vC u, max uC vC u} (R := R) L I).cycles n).val.obj (op U)), ∃ a : (complexRes.{uC, vC, u} J R U).obj L ⟶ (complexRes.{uC, vC, u} J R U).obj (I⟦n⟧), (∀ (p : ℤ) (W : (Over U)ᵒᵖ), ((a.f p).val.app W) = (((homComplexπ.{uC, vC, max uC vC u, max uC vC u} (R := R) L I n p (p + n) rfl).val.app (op U)) (((homComplex.{uC, vC, max uC vC u, max uC vC u} (R := R) L I).iCycles n).val.app (op U) z)).app W) ∧ ((σ n).inv.app (DerivedCategory.Q.obj I)).val.app (op U) (((DerivedCategory.homologyFunctor (Mod.{uC, vC, u} J R) n).map ((derivedInternalHomOfUniverses.{uC, vC, u, w} J R).map (Prod.mkHom k.inv.op (𝟙 (DerivedCategory.Q.obj I))))).val.app (op U) (cycleClass.{uC, vC, u, w} J R L I h n U z)) = ((PresheafOfModules.sheafificationAdjunction.{max uC vC u} (𝟙 (rings.{uC, vC, u} J R).obj)).unit.app ((P n).obj (DerivedCategory.Q.obj I))).app (op U) ((e n (DerivedCategory.Q.obj I) U).symm ((res.{uC, vC, u, w, wSlice} J R U).map k.inv ≫ localizedCocycle.{uC, vC, u, w, wSlice} J R L I n U a))) ∧ (∀ (r b n : ℤ) (M : D.{uC, vC, u, w} J R), K.IsLE r → M.IsGE b → n < b - r → IsZero ((T.{uC, vC, u, w} J R K n).obj M))",
+  "branch": "sheaf-dag",
+  "by": "Q149",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "P5: unchanged theorem signature. Existing concrete normalization definitions are moved verbatim to LocalRHomDefinitions and publicly reexported. Concrete presheaf, additive sections, normalized shifts, boundary assembly and strict bound; three strictly smaller compatibility results."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35703c24e",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Re-delivery fixing the H3 universe RETURN of a2f0b47b: the item is now at independent uC/vC/u/w plus an independent slice universe wSlice, and its T is literally the citer's ringedSiteRHomCohomology.{uC,vC,u,w}. The added slice HasSheafify/WEqualsLocallyBijective hypotheses are the instance arguments of the landed overFunctor/overMap_exact_ofUniverses, size interfaces rather than a strengthening. The new helpers sectionMultiplication/sectionDerivedMultiplication match the landed localSectionMultiplicationNatTrans/localSectionDerivedMultiplication construction (sectionsSMul of overSections, liftNatTrans via mapDerivedCategoryFactors) at general universes: real data, no choice, docstrings present. Universe order of coefficientHomResolution(.Iso) checked (u,c,v,w). All clauses unchanged from the previously verified head. Theorem stmt_deps finding: PASS on this point (exactness and additivity instances needed for mapDerivedCategory; homComplexπ is the choose of lem-sc-hom-complex-projections). lean.statement is verbatim; the node differs from live only in lean and stmt_deps; one sorry. Advisory: the citer's stage 3 must supply the slice instances; the LocalCoefficientLocalization import is used only for the notion."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-8872d",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261024T190546-L-4111539",
+  "kind": "interface",
+  "note": "independent cc review: 8872ddfd vs PASSed 40fc7aa56 delivery (diff -r: only canonical-naturality import/helper removal, private→public lemma in unclaimed HomComplexSectionsHomotopyNaturalityOfUniverses vs live, node proof_deps, change record, report); importer HomComplexSectionsDerivedNaturalityOfUniverses compiled against delivered module"
+ }
+}

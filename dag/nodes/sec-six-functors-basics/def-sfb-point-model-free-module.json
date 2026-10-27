@@ -1,0 +1,94 @@
+{
+ "id": "def-sfb-point-model-free-module",
+ "kind": "definition",
+ "title": "Finite free modules on the condensed point",
+ "statement": "For a commutative ring object Λ in abelian sheaves on the coherent site of profinite spaces [def-sfb-integral-models-stacks-data] and n a natural number, pointModelFree Λ n is the existing finite biproduct of n regular Λ-modules [det-def-sfb-constructible-local-model], with its internal module category explicitly recorded. This includes the zero-fold biproduct.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY (finite presentations) and Sites Tag 00YV (functoriality of modules); named existing constructions for the discrete local-model comparison."
+ },
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "det-def-sfb-constructible-local-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Typed finite free internal module and inverse image of modules from the condensed point",
+   "date": "2026-10-26",
+   "results": "8 hits including Condensed.finFree, Condensed.free and CondensedMod.LocallyConstant.functor.",
+   "verdict": "These have different coefficient/module categories. Adopt the existing project finiteFree and mapMod constructions literally, recording the category in their type."
+  },
+  {
+   "tool": "loogle",
+   "query": "Mod.finiteFree",
+   "date": "2026-10-26",
+   "results": "0 hits; unknown identifier Mod.finiteFree in the Mathlib index.",
+   "verdict": "The project declaration is read directly and used, not reconstructed."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|upperStarFromPoint|CondensedRing.upperStar",
+   "date": "2026-10-26",
+   "results": "3 Mathlib hits, including the mapMod TODO in CategoryTheory/Monoidal/Mon.lean. Project sources provide the actual internal-module functors.",
+   "verdict": "Use the existing project functors with explicit source and target module categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscreteCoefficientLocalModels",
+  "date": "2026-10-26",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-model comparison (1)--(2), discrete residue finite-presentation step; Finite free modules on the condensed point",
+   "via": [
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PointModelFreeModule",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointModelFreeModule.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.pointModelFree",
+  "statement": "def pointModelFree\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (n : ℕ) :\n    Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261026T071302-L-3909786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261026T071302-L-3909786",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -26,215 +26,65 @@
   "sk-def-sfb-coefficient-change",
   "sk-def-sfb-constructible",
   "def-sfb-module-derived-pushpull-adjunction",
-  "det-prop-scalar-six-pullback"
+  "det-prop-scalar-six-pullback",
+  "def-sfb-listed-coefficient-maps"
  ],
  "proof": [
   {
-   "text": "Put $T_Z=(-)_{\\Lambda'}$, $L=f_\\Lambda^*$, $R=Rf_{*,\\Lambda}$, $L'=f_{\\Lambda'}^*$, $R'=Rf_{*,\\Lambda'}$, and let $c_f:L'T_Y\\xrightarrow{\\sim}T_XL$ be the inverse of [det-prop-scalar-six-pullback](1). The adjunctions exist by [def-sfb-module-derived-pushpull-adjunction], and [sk-prop-sfb-cartesian-coefficients] identifies underived module pullback canonically with the exact lift of inverse image: its underlying sheaf functor is $f^{-1}$ and its coefficient action is transported using $\\alpha_f^{-1}$. We use this natural identification, with its transported action, whenever identifying module pullback with inverse image below. The component formula in [def-weil-pbc-adjunction-mate] gives precisely\n$\\gamma_K=R'(T_X\\epsilon_K)\\,R'(c_{f,RK})\\,\\eta'_{T_YRK}$.\nThus $\\gamma$ is a natural transformation. Apply [lem-weil-pbc-mate-pasting](2) to the pullback squares for $g$ and $f$, using the composition compatibility in [det-prop-scalar-six-pullback](1): its mate is $Rg_{*,\\Lambda'}(\\gamma_{f,K})\\circ\\gamma_{g,Rf_{*,\\Lambda}K}$. Apply part (1) of the same pasting lemma to successive coefficient changes, and [det-prop-scalar-six-pullback](3): for $\\Lambda\\to\\Lambda'\\to\\Lambda''$ one gets $\\gamma^{\\Lambda\\to\\Lambda''}_{f,K}=\\gamma^{\\Lambda'\\to\\Lambda''}_{f,T_XK}\\circ T_Y^{\\Lambda'\\to\\Lambda''}(\\gamma^{\\Lambda\\to\\Lambda'}_{f,K})$, with the tensor reassociations. No assertion that an arbitrary mate of an isomorphism is invertible is used.",
+   "text": "Cancel the structure morphism identities f.left ≫ Y.hom = X.hom to infer LocallyOfFiniteType f.left, QuasiCompact f.left and IsSeparated f.left. Use constructibleFiniteTor_stability_direct_images clause (3) at either admissible endpoint to obtain ordinary direct-image preservation. listedCoefficientCtf supplies endpoint admissibility and scalar preservation at both X and Y. Apply preservation in the two orders to get both outputs.",
    "uses": [
-    "det-prop-scalar-six-pullback",
-    "def-sfb-module-derived-pushpull-adjunction",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Formal properties: definition, naturality, and the two pasting laws"
-   }
-  },
-  {
-   "text": "The counit equation is exactly the transpose description in [def-weil-pbc-adjunction-mate]. For the unit equation, transpose $\\gamma_{LN}T_Y\\eta_N$ under $L'\\dashv R'$. Its transpose is $T_X\\epsilon_{LN}\\,c_{f,RLN}\\,L'T_Y\\eta_N$. By naturality of $c_f$ this equals $T_X(\\epsilon_{LN}L\\eta_N)c_{f,N}=c_{f,N}$, using the triangle identity for $L\\dashv R$. The transpose of $R'c_{f,N}\\,\\eta'_{T_YN}$ is also $c_{f,N}$ by the other triangle identity. The bijection of mates proves the unit equation. This proves all the requested adjunction compatibility, without assuming that $\\gamma$ is already invertible.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "def-sfb-module-derived-pushpull-adjunction",
-    "det-prop-scalar-six-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Formal properties: explicit unit and counit equations"
-   }
-  },
-  {
-   "text": "Restriction of scalars must be handled at the derived level. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $R_Z=\\Lambda_Z$, $S_Z=\\Lambda'_Z$ and the Cartesian identifications of [sk-prop-sfb-cartesian-coefficients]. The commuting ring square is part of [sk-def-sfb-coefficient-change]. This gives the canonical restriction/direct-image isomorphism and says that restriction reflects isomorphisms and respects transposes, with no flatness assumption on $\\Lambda\\to\\Lambda'$. Consequently, after restricting $\\gamma$ to $\\Lambda$, it is the projection morphism for the coefficient complex $\\Lambda'_Y$: both have transpose $f^*(\\Lambda'_Y\\otimes^L Rf_*K)\\simeq\\Lambda'_X\\otimes^L f^*Rf_*K\\to\\Lambda'_X\\otimes^L K$. The tensor comparison and this exact projection morphism are those of [lem-weil-pbc-ringed-projection-mate-exact]. It is therefore enough below to prove that the underlying projection morphism is invertible.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-coefficient-change",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Formal properties: restriction of scalars and normalization of the projection map"
-   }
-  },
-  {
-   "text": "The morphism $f$ is finite type by [lemma-nagata-finite-type-to-separated-target], applied to $X\\to Y\\to\\operatorname{Spec}k$: $X$ is finite type and $Y$ is separated over $k$ by [sk-def-sfb-dc-setting]. Its diagonal is the base change of the closed diagonal $X\\to X\\times_kX$ along $X\\times_YX\\to X\\times_kX$; the identification of this pullback with $X$ follows directly from the fibre-product universal property. Hence $f$ is separated by [lem-weil-pbc-closed-immersion-base-change] and the definition in [def-weil-proper-morphism]. In particular it is quasi-compact and quasi-separated. Thus [det-thm-sf-ctf-stability-direct-images](3) applies to $f$ at both coefficient stages. For $K\\in\\Dctf(X,\\Lambda)$, its pushforward lies in $\\Dctf(Y,\\Lambda)$, so [det-prop-scalar-six-ctf](3) puts the source of $\\gamma$ in $\\Dctf(Y,\\Lambda')$. The same coefficient-change assertion first on $X$, followed by the direct-image assertion over $\\Lambda'$, puts its target there too. The coefficient pasting law in step 1 now reduces invertibility for finite composites to invertibility for each elementary listed map; the intermediate complexes stay in $\\Dctf$ by [det-prop-scalar-six-ctf](3).",
-   "uses": [
-    "sk-def-sfb-dc-setting",
-    "det-thm-sf-ctf-stability-direct-images",
-    "det-prop-scalar-six-ctf",
     "lemma-nagata-finite-type-to-separated-target",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-weil-proper-morphism"
+    "def-weil-proper-morphism",
+    "def-weil-quasi-separated-morphism",
+    "det-thm-sf-ctf-stability-direct-images",
+    "lem-sfb-listed-coefficient-ctf"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Preservation and reduction to elementary coefficient maps"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Preservation"
    }
   },
   {
-   "text": "For finite admissible $A$, the discrete condensed ring $\\underline A$ is the sheafification of the constant ring: every continuous $S\\to A$ is constant on a finite clopen partition. The inverse image $p_Z^*$ preserves colimits and finite limits, hence takes this ring to the constant ring on $Z_{\\mathrm{proét}}$ ([sk-def-sfb-condensed-ring], [sk-def-sfb-pullback-from-point]). A finite ring is Noetherian since each ideal is generated by its finite underlying set. Thus [det-pe-finite-tor-comparison-noetherian] supplies $K'\\in D^b_{\\mathrm{ctf}}(X_{\\mathrm{ét}},A)$ with $\\nu_X^*K'\\simeq K$. Define $K'_B$ by [lem-pur-derived-change-of-rings]. Its underlying $A$-complex is $K'\\otimes_A^LB_X$, so finite Tor amplitude puts its cohomology in a finite interval. Both $K'$ and $K'_B$ are therefore bounded below. Apply [lem-sfb-etale-proetale-scalar-mate] to $f,A\\to B,K'$, using the qcqs property from step 4. Its displayed equality identifies the pro-étale $\\gamma$, after the canonical $\\delta_X$ identification, with $\\beta^B\\nu_Y^*(\\gamma^{\\mathrm{ét}})\\delta_Y T_Y((\\beta^A)^{-1})$. The $\\delta$ and $\\beta$ maps are isomorphisms by the cited node. Consequently invertibility of the étale coefficient comparison implies invertibility of the required pro-étale comparison.",
+   "text": "Obtain invertibility for the six primitive constructors and the algebraic-closure identity from scalarDirectImageElementaryCases. Induct on ListedCoefficientMap. In the composite a ≫ b case scalar preservation puts the intermediate scalar extension in Dctf, so both induction hypotheses apply. The coefficient-pasting equation of scalarDirectImageMateCoherence expresses scalarSixTower.hom followed by the composite mate as a composite of three isomorphisms: scalar change applied to the first mate, the second mate, and direct image applied to the source scalar tower. Cancel the invertible target scalar tower to get invertibility of the actual composite mate.",
    "uses": [
-    "sk-def-sfb-condensed-ring",
-    "sk-def-sfb-pullback-from-point",
-    "det-pe-finite-tor-comparison-noetherian",
-    "lem-pur-derived-change-of-rings",
-    "lem-sfb-etale-proetale-scalar-mate"
+    "def-sfb-listed-coefficient-maps",
+    "lem-sfb-scalar-direct-image-elementary-cases",
+    "lem-sfb-listed-coefficient-ctf",
+    "lem-sfb-scalar-direct-image-mate-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite rings: passage to the classical étale category"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Preservation, reduction to elementary maps"
    }
   },
   {
-   "text": "By [lem-kun-0f10](1), $\\operatorname{cd}(f)<\\infty$ over the arbitrary standing field. The definition [def-kun-cd] bounds torsion abelian higher direct images by one integer $N$. Every $A$-module sheaf is torsion, since $A$ is killed by a power of $\\ell$; [lem-weil-pbc-module-abelian-derived-direct-image-comparison] therefore gives this same bound for $A$-module higher direct images. The finite $A$-module $B$ is finitely presented by [lem-sc-noetherian-finite-module-finite-presentation]. Since $K'$ is bounded, it is in $D^-$. Apply [lem-sf-projection-finite-constant] with $M=B$ to obtain an invertible underlying $A$-projection map. Its target is bounded below: it is $Rf_{*,A}$ of the bounded complex underlying $K'_B$ from step 5. Its source is consequently bounded below too. Restriction leaves underlying cohomology sheaves unchanged, so $Q=(Rf_{*,A}K')_B$ is bounded below. These are exactly the three bounded-below hypotheses of [lem-pur-etale-scalar-mate-projection]: $J=K'$, $J_B=K'_B$ and $M=Q$. That node identifies the restricted $B$-linear $\\gamma^{\\mathrm{ét}}$ with the projection morphism just proved invertible. Restriction is exact and conservative because it leaves underlying sheaves unchanged ([lem-weil-pbc-module-sheaves-colimits-forgetful]), hence detects cohomological isomorphisms. Thus $\\gamma^{\\mathrm{ét}}$ is invertible, and step 5 proves the finite-ring pro-étale case, including nonflat $A\\to B$.",
+   "text": "Use the naturality, geometric composition, unit and counit clauses of scalarDirectImageMateCoherence verbatim. For the clauses not involving geometric composition specialize its unused second morphism to the identity on Y. For geometric composition apply it to the arbitrary g : Y → W. These equations hold on the ambient derived categories and need no constructibility hypotheses.",
    "uses": [
-    "lem-kun-0f10",
-    "def-kun-cd",
-    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-    "lem-sc-noetherian-finite-module-finite-presentation",
-    "lem-sf-projection-finite-constant",
-    "lem-pur-etale-scalar-mate-projection",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-sfb-scalar-direct-image-mate-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite rings: relative cohomological-dimension projection argument; repair of the absolute-dimension inference"
-   }
-  },
-  {
-   "text": "For a bounded complex $F$ of finite free condensed $\\Lambda$-modules, put $F_Z=p_Z^*F$. The monoidal natural isomorphism of [sk-def-sfb-pullback-from-point-comp] identifies $f^*F_Y$ with $F_X$: its compatibility with the action map $\\Lambda\\otimes F\\to F$ makes it module-linear, and naturality makes it commute with the differentials. Apply the exact natural projection transformation of [lem-weil-pbc-ringed-projection-mate-exact] to the second variable $F_Y$. It is the identity for $F=\\Lambda$, hence an isomorphism for every finite direct sum of shifts of $\\Lambda$. Its compatibility with triangles, including connecting maps, is explicitly part of the cited node. Build $F$ by the successive brutal truncation triangles, adding its single finite-free terms one at a time. Induction on the number of nonzero terms and [lem-sf-triangle-morphism-iso] prove the projection is an isomorphism for $F$. By [sk-prop-sfb-cartesian-coefficients](2), for $\\mathcal O_E\\to\\mathcal O_F$ and $E\\to F$, the second coefficient sheaf is finite free over the first on every scheme. For these two maps, apply the same projection transformation directly to $P=\\Lambda'_Y$ in degree zero. Choose a finite-free basis on $Y$, so $P\\simeq\\Lambda_Y^{\\oplus r}$; pull back this basis to identify $f^*P\\simeq\\Lambda'_X$ using [sk-prop-sfb-cartesian-coefficients](1). Naturality with the $r$ summand inclusions identifies its projection map with $r$ copies of the unit-coefficient identity. It is therefore invertible, and step 3 proves these cases of $\\gamma$. This uses finite freeness of the coefficient sheaf on $Y$, exactly as stated in the cited node.",
-   "uses": [
-    "sk-def-sfb-pullback-from-point-comp",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-triangle-morphism-iso",
-    "sk-prop-sfb-cartesian-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finite-complex coefficient extensions"
-   }
-  },
-  {
-   "text": "For a listed continuous $O=\\mathcal O_E\\to A$ with $A$ finite, apply [lem-sfb-finite-integral-condensed-resolution]. It supplies an exact sequence $0\\to\\underline O^r\\xrightarrow\\phi\\underline O^r\\to\\underline A\\to0$ with finite free terms. Pulling it back by $p_Z^*$ preserves exactness by [lem-weil-pbc-site-pullback-abelian-exact] and preserves the free terms by the monoidal left-adjoint description in [sk-def-sfb-pullback-from-point]. This yields a two-term finite free resolution of $A_Z$ in degrees $-1,0$. Finite free modules are flat (tensoring with them is a finite sum of the identity). Thus [lem-pc-bounded-above-flat-kflat-site] makes the resolution K-flat, so it computes tensoring with $A_Z$. The criterion is Stacks Tag 06YQ, label lemma-bounded-flat-K-flat, not the existence theorem 06YS named in that dependency's bibliography. Apply step 7 to this pulled-back two-term complex. Its projection transformation is invertible; step 3 identifies it with the restriction of $\\gamma$ and detects invertibility. This proves the $O\\to A$ case. When $A=0$, the cited resolution allows $r=0$ and both sides vanish.",
-   "uses": [
-    "lem-sfb-finite-integral-condensed-resolution",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "sk-def-sfb-pullback-from-point",
-    "lem-pc-bounded-above-flat-kflat-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite presented coefficient extension: the two-term condensed free resolution; its K-flatness uses Stacks sites-cohomology.tex, Tag 06YQ, label lemma-bounded-flat-K-flat (not Tag 06YS, lemma-K-flat-resolution)."
-   }
-  },
-  {
-   "text": "We record explicitly the colimit calculation used for the last two coefficient maps. By [lem-weil-pbc-module-sheaves-colimits-forgetful], module colimits and their underlying sheaf colimits agree. By [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], filtered colimits of these modules are exact. If $S_Z=\\varinjlim_i P_{i,Z}$ with each $P_{i,Z}$ finite free over $R_Z$, then $S_Z\\otimes_{R_Z}M=\\varinjlim_i(P_{i,Z}\\otimes_{R_Z}M)$ by the balanced-coequalizer construction in [sk-def-sfb-change-of-scalars]: an $R_Z$-balanced bilinear map out of $(\\varinjlim_iP_{i,Z})\\times M$ is exactly a compatible family of balanced bilinear maps out of $P_{i,Z}\\times M$. The tensor universal property therefore gives the displayed isomorphism, with each colimit coprojection corresponding to its tensor with $M$. Each functor on the right is exact, so their filtered colimit is exact: $S_Z$ is flat. Consequently ordinary termwise tensor with $S_Z$ sends quasi-isomorphisms to quasi-isomorphisms and computes derived scalar extension, by its K-flat definition [sk-def-sfb-derived-extension-of-scalars]. It also commutes with cohomology, as does the termwise filtered colimit. To apply bounded continuity, choose a representative $C$ of $K$ and a degree $a$ below its cohomology; replace it by the good lower truncation, with $\\operatorname{coker}(d^{a-1})$ in degree $a$ and zero below $a$. The map to this truncation is a quasi-isomorphism because its cohomology agrees in every degree. Tensoring its terms with each flat $P_{i,X}$ gives complexes zero below the same $a$. Thus every colimit diagram below meets the literal common lower bound required by [det-pe-bounded-continuity-direct-image].",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "sk-def-sfb-change-of-scalars",
-    "sk-def-sfb-derived-extension-of-scalars",
-    "det-pe-bounded-continuity-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Bounded representatives, exact filtered colimits, and flatness for the two localization cases"
-   }
-  },
-  {
-   "text": "For $O=\\mathcal O_E\\to E$, [sk-prop-sfb-qlbar-colimit-x] identifies $E_Z$ with the sequential colimit $O_Z\\xrightarrow{\\ell}O_Z\\xrightarrow{\\ell}\\cdots$, compatibly with pullback. Each term is rank-one free, so step 9 applies and $K_E$ is represented by $\\varinjlim(C\\xrightarrow{\\ell}C\\to\\cdots)$ with a common lower bound. Since $f$ is qcqs, [det-pe-bounded-continuity-direct-image] gives\n$H^q(Rf_*(K_E))\\simeq\\varinjlim(H^q(Rf_*K)\\xrightarrow{\\ell}H^q(Rf_*K)\\to\\cdots)$.\nFlatness and exactness from step 9 identify this last sheaf with $H^q((Rf_*K)_E)$. This is the map induced by $\\gamma$, not merely an abstract isomorphism: the $i$th colimit coprojection $O_Y\\to E_Y$ is the $O_Y$-linear map $x\\mapsto\\ell^{-i}x$ (with initial index $0$), and need not be a ring homomorphism, and naturality of the projection transformation [lem-weil-pbc-ringed-projection-mate-exact] makes $\\gamma$ compose with it as $Rf_*$ of the corresponding coprojection on $X$. Therefore the continuity isomorphism is $H^q(\\gamma)$ for every $q$. By [lem-weil-pbc-unbounded-derived-iso-cohomology] and the conservative restriction in step 3, $\\gamma$ is invertible.",
-   "uses": [
-    "sk-prop-sfb-qlbar-colimit-x",
-    "det-pe-bounded-continuity-direct-image",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Localization $\\mathcal O_E\\to E$: canonical map on every cohomology sheaf"
-   }
-  },
-  {
-   "text": "For $E\\to\\overline{\\mathbf Q}_\\ell$, [sk-prop-sfb-qlbar-colimit-x] presents the target coefficient sheaf as the filtered colimit of the $F_Z$ for finite extensions $F/E$ inside $\\overline{\\mathbf Q}_\\ell$. Restricting its original index of all finite extensions of $\\mathbf Q_\\ell$ to those containing $E$ is cofinal: any finite extension is contained in its compositum with $E$, still finite. By [sk-prop-sfb-cartesian-coefficients](2), each $F_Z$ is finite free over $E_Z$. Use the representative $C$ of step 9, zero below the fixed degree $a$; $C_F$ is termwise a finite sum of $C$, so the complexes $C_F$ have a common lower bound. The case $E\\to F$ in step 7 and [det-pe-bounded-continuity-direct-image] give\n$H^q((Rf_*K)_{\\overline{\\mathbf Q}_\\ell})\\simeq\\varinjlim_F H^q((Rf_*K)_F)\\xrightarrow{\\varinjlim H^q(\\gamma_F)}\\varinjlim_FH^q(Rf_*K_F)\\simeq H^q(Rf_*(K_{\\overline{\\mathbf Q}_\\ell}))$.\nThe middle maps are isomorphisms. For an inclusion $F\\subseteq G$, the square of these maps commutes by naturality of the projection transformation in its coefficient complex [lem-weil-pbc-ringed-projection-mate-exact]. For the maps $F_Z\\to\\overline{\\mathbf Q}_{\\ell,Z}$ the same naturality identifies the displayed colimit map with $H^q(\\gamma)$. The cohomology criterion [lem-weil-pbc-unbounded-derived-iso-cohomology] and step 3 prove this last case. Together with step 4 and the formal properties of steps 1–2, this finishes both clauses.",
-   "uses": [
-    "sk-prop-sfb-qlbar-colimit-x",
-    "sk-prop-sfb-cartesian-coefficients",
-    "det-pe-bounded-continuity-direct-image",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Algebraic-closure coefficient extension: compatible filtered-colimit comparison"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Formal properties"
    }
   }
  ],
  "proof_deps": [
-  "det-prop-scalar-six-pullback",
-  "def-sfb-module-derived-pushpull-adjunction",
-  "sk-prop-sfb-cartesian-coefficients",
-  "def-weil-pbc-adjunction-mate",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "sk-def-sfb-coefficient-change",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "sk-def-sfb-dc-setting",
-  "det-thm-sf-ctf-stability-direct-images",
-  "det-prop-scalar-six-ctf",
   "lemma-nagata-finite-type-to-separated-target",
-  "lem-weil-pbc-closed-immersion-base-change",
   "def-weil-proper-morphism",
-  "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-pullback-from-point",
-  "det-pe-finite-tor-comparison-noetherian",
-  "lem-pur-derived-change-of-rings",
-  "lem-sfb-etale-proetale-scalar-mate",
-  "lem-kun-0f10",
-  "def-kun-cd",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-  "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-sf-projection-finite-constant",
-  "lem-pur-etale-scalar-mate-projection",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "sk-def-sfb-pullback-from-point-comp",
-  "lem-sf-triangle-morphism-iso",
-  "lem-sfb-finite-integral-condensed-resolution",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "sk-def-sfb-change-of-scalars",
-  "sk-def-sfb-derived-extension-of-scalars",
-  "det-pe-bounded-continuity-direct-image",
-  "sk-prop-sfb-qlbar-colimit-x",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+  "def-weil-quasi-separated-morphism",
+  "det-thm-sf-ctf-stability-direct-images",
+  "lem-sfb-listed-coefficient-ctf",
+  "def-sfb-listed-coefficient-maps",
+  "lem-sfb-scalar-direct-image-elementary-cases",
+  "lem-sfb-scalar-direct-image-mate-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-  "place": "Formal properties; preservation; finite rings; finite free and finitely presented extensions; localization; algebraic closure. Finite-ring argument repaired using the relative dimension of f and lem-sf-projection-finite-constant."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Preservation, actual induction on ListedCoefficientMap, and ambient coherence; presentation transports isolated in two named nodes"
  },
  "mathlib_searches": [
   {
@@ -338,35 +188,23 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-scalar-six",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "det-prop-scalar-six-direct-image",
   "worker": "stage1",
-  "summary": "Q124 repair of the dedicated long-step return: retained the statement and all other steps verbatim. Extracted the etale/pro-etale scalar-mate comparison and the condensed finite free resolution into two statement-only nodes; replaced the inline restricted etale mate calculation by the exact existing lem-pur-etale-scalar-mate-projection. Every returned step now cites the argument it formerly hid. Rechecked the relative cohomological-dimension route, bounds, zero and nonflat cases, all citations, and recorded searches. No Lean writing or compilation.",
-  "blueprint": "Steps 1–3 realize Formal properties; step 4 Preservation; steps 5–6 Finite rings; steps 7–8 Finite free and finitely presented coefficient extensions; steps 9–10 localization; step 11 algebraic-closure extension. Current unit sk-prop-scalar-six, steps 3 and 4, supplies the direct-image route. The absolute-cd inference in unit step 3 is repaired by the documented relative-cd argument. The chapter and unit metadata are now present on the current base and are preserved by the delivery tool.",
+  "summary": "NM repair of the human re-split return: four independently claimable statement-only nodes (the maintainer reader dropped lem-sfb-linear-filtered-tensor-bounded-model: step 5 now cites the existing localized and Qbar direct-image comparisons); all eleven old arguments retained verbatim in the report and allocated explicitly to the new nodes or exact existing nonduplicate interfaces. Parent proof is a short assembly below 3000 characters. Statement unchanged; nonflat finite rings and arbitrary standing fields retained. No Lean or compiler use.",
+  "blueprint": "Current blueprint Formal properties: new mate-coherence node; Finite rings: new finite-ring-relative-scalar-comparison; Finite free and finite-presentation: existing finite-free coherence and new integral-finite-scalar-perfect-model; localization and algebraic closure: existing localized-direct-image-comparison and qlbar-direct-image-comparison (maintainer fix). Unit steps 3–4 retained, with the already documented relative-cd repair. Full old-step allocation and arguments are in report.md.",
   "tool_uses": [
    {
-    "node": "lem-sf-projection-finite-constant",
-    "why": "Generic finite-presentation constant-coefficient projection formula; repairs the absolute-cd gap while retaining the finite-ring projection route."
+    "node": "lem-sp-finite-free-direct-image-coherence",
+    "why": "General ambient Cartesian-ring-sheaf finite-free counit mate; used for the two finite extension cases only."
    },
    {
-    "node": "lem-kun-0f10",
-    "why": "Only its relative finite-cohomological-dimension clause (1) is used, valid over the arbitrary standing field."
+    "node": "lem-sfb-localized-direct-image-comparison",
+    "why": "States the O_E -> E coefficient-change morphism for qcqs f and bounded-below input; its proof carries the telescope and bounded-continuity argument of returned steps 9-10, which the unit cites through sk-cor-pe-bounded-continuity."
    },
    {
-    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "why": "General Cartesian ring-sheaf restriction and derived-adjunction normalization; does not require flat coefficients."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "General mate pasting for scheme and coefficient composition."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "General exact, shift-compatible projection transformation with unit normalization."
-   },
-   {
-    "node": "lem-pur-etale-scalar-mate-projection",
-    "why": "Exact generic bounded-below normalization of the etale scalar mate as the underlying projection map; reuses the statement instead of duplicating the former inline calculation."
+    "node": "lem-sfb-qlbar-direct-image-comparison",
+    "why": "States the E -> Qbar_ell coefficient-change morphism for qcqs f and bounded-below input; its proof carries the finite-subfield colimit and bounded-continuity argument of returned steps 9 and 11."
    }
   ],
   "source_error": {
@@ -376,24 +214,56 @@
    "replacement": "Keep the finite-ring projection-formula route, applying the existing relative projection lemma lem-sf-projection-finite-constant with the uniform relative bound from lem-kun-0f10(1). Its finitely presented constant module B need not be flat or have finite projective dimension."
   }
  },
- "tool_uses": [
-  "lem-sf-projection-finite-constant",
-  "lem-kun-0f10",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-  "lem-sbc-restrict-scalars-derived-adjunction-identities",
-  "lem-pur-etale-scalar-mate-projection"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q124-1d3da04d5",
-  "group": "Q124",
+  "reviewer": "NT-cc-NM-0a4614681",
+  "group": "NM",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-1d3da04d5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, every cited statement, the main-20261015 blueprint statement and proof, and unit sk-prop-scalar-six. Against the base side DAG, the statement, stmt_deps and steps 1-4, 7 and 9-11 are byte-identical; only steps 5, 6 and 8 changed, and all three are now under 2000 characters. proof_deps equals the union of the step uses, there is no cycle and no SGA citation. Step 5: det-pe-finite-tor-comparison-noetherian gives K'; Tor amplitude tested at B_X makes K' and K'_B bounded, so both D^+ hypotheses of lem-sfb-etale-proetale-scalar-mate hold, and f is qcqs by step 4. Step 6: 0F10(1) (Stacks line 20041) with def-kun-cd gives a uniform bound, so lem-sf-projection-finite-constant applies. Q is bounded below, which meets the three D^+ hypotheses of the existing lem-pur-etale-scalar-mate-projection; its beta_J is exactly gamma^et and it restricts to the PF map. The source error that 0F12 needs cd(X)<inf (line 20164) is real, and this route repairs it. Step 8: the new resolution node, exactness of p_Z^* and the 06YQ flat-complex criterion (tags/tags: 06YQ=lemma-bounded-flat-K-flat; existing node lem-pc-bounded-above-flat-kflat-site mislabels its source tag as 06YS). New node lem-sfb-etale-proetale-scalar-mate: types checked; the equality is mate calculus via the counit compatibility of beta (sk-thm-pe-direct-image-comparison); tested f=id, J=0 and nonflat Z/l^2->Z/l. It asserts no invertibility, and it is not a duplicate of lem-sp-et-proet-coefficient-compatibility, lem-weil-pbc-comparison-direct-image-canonical-mate, lem-coef-finite-direct-image or lem-pur-etale-scalar-mate-projection. New node lem-sfb-finite-integral-condensed-resolution: true (pi^n A=0, open finite-index free kernel of rank r, phi a homeomorphism by compactness, lifts on clopen partitions); tested A=0, O/pi^n, F_l[x]/x^2 and empty S. It is not a duplicate of det-pe-derived-nakayama-resolution or def-weil-pbc-continuous-integral-coefficients, and neither new node restates a clause of the item. Accepted tool use: lem-pur-etale-scalar-mate-projection, plus the five retained ones. FIX: removed three stale split_report.tool_uses entries for nodes the item no longer cites (lem-sc-dvr-fg-torsionfree-free and the two lem-sbc-* nodes); the corrected item is in fixes/. The maintainer-owned top-level tool_uses still lists them.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-0a4614681 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 4 new nodes, every cited statement, the current blueprint proof, unit sk-prop-scalar-six, Stacks 0F10/0F12 and the 2026-10-22 repair note (13920 chars, >=4 nodes). Shape: the item statement and stmt_deps are byte-identical to the base. The new nodes are unsplit and statement-only, with complete stmt_deps. No cycle. No SGA. The 11-step proof is 2578 chars and every old argument is allocated: old 1-2 to mate-coherence, 5-6 to finite-ring, 7 to the existing lem-sp-finite-free-direct-image-coherence plus the integral node, 8 to the integral node, 4 to parent steps 2 and 6. Mathematics checked. Mate-coherence: the types of the composition, unit/counit and tower laws agree (triangle identity, transposes). Finite-ring: 0F10(1) gives finite cd(f) over any field, B is a finitely presented A-module, finite Tor amplitude keeps J_B bounded, and the et/proet equality holds; the 0F12 absolute-cd source error is correctly recorded (k = Fbar_p(t1,t2,...)). Integral: over the DVR O_E, A = sum O/pi^a with a diagonal phi; the resolution is K-flat and the finite-complex projection holds for unbounded K; tested on A=0, O/pi^n and products. FIX (one repair): step 5 rebuilt the O_E->E and E->Qbar cases from filtered-finite-free-projection, internal-scalar-mate-projection and a new general linear-filtered node. The existing split nodes lem-sfb-localized-direct-image-comparison and lem-sfb-qlbar-direct-image-comparison (Q23 10-21; qcqs f, bounded-below C, the same counit adjunct in the same Lf*-|Rf* adjunction) state exactly these gammas, and their proofs carry old steps 9-11 via bounded continuity. The linear node generalizes lem-sfb-qlbar-bounded-tensor-colimit. Step 5 now cites the two comparisons, the linear node is dropped, proof_deps are recomputed, and the two nodes (unit sk-prop-open-coefficients) are added to split_report.tool_uses. The delivery had used 2 off-unit nodes undeclared, wrongly called same-unit. 3 new nodes remain: old 9-11 already sit in proved nodes. Advisory: mate-coherence overlaps lem-sfb-derived-scalar-mate-composition and lem-sfb-internal-scalar-mate-transitivity, but its unit/counit identities are new; lem-sfb-finite-integral-condensed-resolution is now uncited, and the integral prover should use it; the item node tool_uses are stale.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ScalarSixDirectImage",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixDirectImage",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixDirectImage"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ScalarSixDirectImage.lean",
+  "statement": "theorem scalarSixDirectImage (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)] {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (_ha : ListedCoefficientMap ell a) {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) : (∀ K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X.left), (constantModelBoundedConstructible Λ.X X.left K ∧ DerivedCategory.finiteTorAmplitude _ K) → IsIso ((scalarDirectImageMate a f.left).app K) ∧ (constantModelBoundedConstructible Λ'.X Y.left ((scalarSixChange a Y.left).obj ((RootCoordinateFace.lower Λ.X f.left).obj K)) ∧ DerivedCategory.finiteTorAmplitude _ ((scalarSixChange a Y.left).obj ((RootCoordinateFace.lower Λ.X f.left).obj K))) ∧ (constantModelBoundedConstructible Λ'.X Y.left ((RootCoordinateFace.lower Λ'.X f.left).obj ((scalarSixChange a X.left).obj K)) ∧ DerivedCategory.finiteTorAmplitude _ ((RootCoordinateFace.lower Λ'.X f.left).obj ((scalarSixChange a X.left).obj K)))) ∧ (∀ (K K' : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X.left)) (h : K ⟶ K'), (scalarSixChange a Y.left).map ((RootCoordinateFace.lower Λ.X f.left).map h) ≫ (scalarDirectImageMate a f.left).app K' = (scalarDirectImageMate a f.left).app K ≫ (RootCoordinateFace.lower Λ'.X f.left).map ((scalarSixChange a X.left).map h)) ∧ (∀ (W : Over (Spec (.of k))) [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom] (g : Y ⟶ W) (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X.left)), (scalarDirectImageMate a (f.left ≫ g.left)).app K ≫ (RootCoordinateFace.lowerComp Λ'.X f.left g.left).hom.app ((scalarSixChange a X.left).obj K) = (scalarSixChange a W.left).map ((RootCoordinateFace.lowerComp Λ.X f.left g.left).hom.app K) ≫ (scalarDirectImageMate a g.left).app ((RootCoordinateFace.lower Λ.X f.left).obj K) ≫ (RootCoordinateFace.lower Λ'.X g.left).map ((scalarDirectImageMate a f.left).app K)) ∧ (∀ N : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y.left), (scalarSixChange a Y.left).map ((RootCoordinateFace.adjunction Λ.X f.left).unit.app N) ≫ (scalarDirectImageMate a f.left).app ((scalarSixPull Λ f.left).obj N) = (RootCoordinateFace.adjunction Λ'.X f.left).unit.app ((scalarSixChange a Y.left).obj N) ≫ (RootCoordinateFace.lower Λ'.X f.left).map ((scalarDirectImagePullbackData.theta a f.left).inv.app N)) ∧ (∀ K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X.left), (scalarSixPull Λ' f.left).map ((scalarDirectImageMate a f.left).app K) ≫ (RootCoordinateFace.adjunction Λ'.X f.left).counit.app ((scalarSixChange a X.left).obj K) = (scalarDirectImagePullbackData.theta a f.left).inv.app ((RootCoordinateFace.lower Λ.X f.left).obj K) ≫ (scalarSixChange a X.left).map ((RootCoordinateFace.adjunction Λ.X f.left).counit.app K))",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95a3ffa3c",
+  "group": "NS",
+  "result": "fix",
+  "note": "Item Lean matches det-prop-scalar-six-direct-image: standing binders exact (char p>0, ell≠p, separated finite-type X,Y over Spec k, k-morphism f); gamma = scalarDirectImageMate = mateEquiv of theta.inv (=c_f) over RootCoordinateFace.adjunction (the same ordinary module adjunction with right adjoint moduleObjectDerivedPushforward), theta pinned by thetaNormalization; clause (1) IsIso plus Dctf of both sides under constantModelBoundedConstructible ∧ finiteTorAmplitude (the sk-def-sfb-constructible predicate); clause (2) naturality, composition via lowerComp (R(gf)→RgRf), unit and counit equations in node orientation on ambient objects. Edge cases (zero ring, nonflat maps, empty schemes, identities, universes) covered; statements verbatim. New node ListedCoefficientMap: six generators pinned by section formulas plus composites, mathematically correct, no existing duplicate (Q63/Q85 predicates superseded, never landed). F1 (H12) fixed: fixes/def-sfb-listed-coefficient-maps.json replaces theorem det-prop-scalar-six-pullback in stmt_deps/TeX with the def owners def-sfb-scalar-six-coefficient-interfaces, def-sfb-padic-integers-condensed-ring, def-sfb-padic-subfield-condensed-ring, def-sfb-qlbar-subextension-map, def-sfb-qlbar-subextension-to-qlbar, def-sfb-integers-to-subfield-point, det-prop-sfb-cartesian-coefficients-finite-free; all on base, no cycle, cites = stmt_deps, check_new_node adds no failure. No Lean changed, so no compile. Advisories: scalarDirectImageMate defined only in theorem module lem-sfb-scalar-direct-image-mate-coherence and RootCoordinateFace owner def-sfb-test-map-derived-composition uncited (an S2 fix cannot add them); second reading is a self pass."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8c3ce",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T201426-L-2501254",
+  "kind": "interface",
+  "note": "independent cc review: delivered ScalarSixDirectImage proof + 2 new sorried statement modules/nodes vs published item statement, ListedCoefficientMap, scalarSixCtf, scalarDirectImageMateCoherence, IsLocalizingAdmissibleCoefficient, unit sk-prop-scalar-six (realized empty); sandbox compile of 3 delivered modules + 7 direct importers OK, axioms only sorryAx via cited sorried statements"
+ }
 }

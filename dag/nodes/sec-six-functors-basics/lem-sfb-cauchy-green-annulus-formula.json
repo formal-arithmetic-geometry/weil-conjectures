@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-cauchy-green-annulus-formula",
+ "kind": "statement",
+ "title": "Cauchy–Green boundary formula on an annulus",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] with planar Lebesgue measure $dA$. Let $c\\in\\mathbf C$, let $0<r<R$, let $V\\subset\\mathbf C$ be open and contain $A=\\{\\zeta:r\\leq|\\zeta-c|\\leq R\\}$, and let $v:V\\to\\mathbf C$ have continuous first partial derivatives in real coordinates. Define $\\partial_{\\bar\\zeta}v=\\tfrac12(\\partial_xv+i\\partial_yv)$. Then $$\\int_A\\partial_{\\bar\\zeta}v\\,dA=\\frac1{2i}\\left(\\oint_{|\\zeta-c|=R}v(\\zeta)\\,d\\zeta-\\oint_{|\\zeta-c|=r}v(\\zeta)\\,d\\zeta\\right).$$ The area and line integrals are absolutely convergent. Both circles in this formula are counterclockwise, with $\\zeta=c+se^{it}$, $0\\leq t\\leq2\\pi$, for $s=R,r$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED: I §3.A, formula (3.2) proof, printed p.21, the Green/Stokes input on a punctured disk. Agent formulation of its nonsingular annulus prerequisite; the book is absent locally and the online PDF fetch timed out. Related read source: Mathlib/Analysis/Complex/CauchyIntegral.lean:230–240 states only the rectangle version, not this node."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Identify $\\mathbf C$ with $\\mathbf R^2$ by $z=x+iy$. The continuous-partials criterion gives continuity of $v$ and the real differential $Dv(z)[h]=v_x(z)\\operatorname{Re}h+v_y(z)\\operatorname{Im}h$ on the open set $V$, with continuous coefficient functions. In particular $\\partial_{\\bar z}v=(v_x+iv_y)/2$ is continuous. This uses exactly the stated continuous coordinate partials, and does not assume that $v$ is holomorphic or infinitely differentiable.",
+   "uses": [
+    "lem-sfb-continuous-partials-frechet-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Integral/DivergenceTheorem.lean",
+    "place": "Agent polar-coordinate reduction to integral_divergence_prod_Icc_of_hasFDerivAt_of_le, lines 482–494; the annulus argument is supplied here, not stated by that theorem."
+   }
+  },
+  {
+   "text": "The annulus $A$ is a closed bounded subset of $\\mathbf R^2$, hence compact. The compact-integrability lemma applied to $\\partial_{\\bar z}v|_A$ proves absolute convergence of the area integral. For $s=r,R$, the function $t\\mapsto is e^{it}v(c+se^{it})$ is continuous on each of the compact intervals $[-\\pi,\\pi]$ and $[0,2\\pi]$; the same lemma in dimension one proves absolute convergence of the parametrized line integrals. The norm of its factor $is e^{it}$ is $s$, so this is absolute convergence with respect to arc length as well.",
+   "uses": [
+    "lem-sfb-continuous-on-compact-integrable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Integral/DivergenceTheorem.lean",
+    "place": "Agent polar-coordinate reduction to integral_divergence_prod_Icc_of_hasFDerivAt_of_le, lines 482–494; the annulus argument is supplied here, not stated by that theorem."
+   }
+  },
+  {
+   "text": "Put $Q=[r,R]\\times[-\\pi,\\pi]$, $\\Phi(\\rho,t)=c+\\rho e^{it}$, $w=v\\circ\\Phi$, $B=i\\rho e^{it}w$ and $P=e^{it}w$. These functions are defined on the open set $\\Phi^{-1}(V)$ containing $Q$. With $e^{it}=\\cos t+i\\sin t$, differentiating the coordinate functions gives $\\Phi_\\rho=e^{it}$ and $\\Phi_t=i\\rho e^{it}$. The pointwise real chain and product rules therefore give $w_\\rho=(v_x\\circ\\Phi)\\cos t+(v_y\\circ\\Phi)\\sin t$ and $w_t=\\rho(-(v_x\\circ\\Phi)\\sin t+(v_y\\circ\\Phi)\\cos t)$. Subtracting the product-rule formulas yields $$B_\\rho-P_t=i\\rho e^{it}w_\\rho-e^{it}w_t=\\rho\\bigl(i(v_x\\circ\\Phi)-(v_y\\circ\\Phi)\\bigr)=2i\\rho(\\partial_{\\bar z}v)\\circ\\Phi.$$ The cancellation uses $e^{it}(i\\cos t+\\sin t)=i$ and $e^{it}(i\\sin t-\\cos t)=-1$. The only rules taken from the cited calculus node are its pointwise derivative rules, which apply to existing derivatives; its smoothness assertions are not applied to the merely $C^1$ function $v$.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Integral/DivergenceTheorem.lean",
+    "place": "Agent polar-coordinate reduction to integral_divergence_prod_Icc_of_hasFDerivAt_of_le, lines 482–494; the annulus argument is supplied here, not stated by that theorem."
+   }
+  },
+  {
+   "text": "Apply the rectangle divergence formula with $F=B$, $G=-P$, $a=(r,-\\pi)$ and $b=(R,\\pi)$. The real differentials computed in the previous step give $L=DB$ and $M=-DP$ on $Q$. They may be extended arbitrarily outside their open domain since the rectangle formula uses only values on $Q$. Continuity of $v,v_x,v_y$ makes $F,G$ continuous on $Q$ and $H=B_\\rho-P_t$ continuous there; the compact-integrability lemma supplies its required integrability. Since $e^{i\\pi}=e^{-i\\pi}=-1$, we have $P(\\rho,\\pi)=P(\\rho,-\\pi)$ pointwise, so the two radial-edge integrals cancel. The formula becomes $$\\int_Q2i\\rho(\\partial_{\\bar z}v)(\\Phi(\\rho,t))\\,d\\rho\\,dt=\\int_{-\\pi}^{\\pi}B(R,t)\\,dt-\\int_{-\\pi}^{\\pi}B(r,t)\\,dt.$$ The hypotheses $r<R$ and $-\\pi<\\pi$ give the required ordering of endpoints.",
+   "uses": [
+    "lem-sfb-rectangle-divergence-integral",
+    "lem-sfb-continuous-on-compact-integrable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Integral/DivergenceTheorem.lean",
+    "place": "Agent polar-coordinate reduction to integral_divergence_prod_Icc_of_hasFDerivAt_of_le, lines 482–494; the annulus argument is supplied here, not stated by that theorem."
+   }
+  },
+  {
+   "text": "Extend $h=1_A\\partial_{\\bar z}v$ by zero to $\\mathbf C$. It is integrable by step 2. Apply the centered polar integration identity to $h$. On its target $T=(0,\\infty)\\times(-\\pi,\\pi)$, the condition $\\Phi(\\rho,t)\\in A$ is exactly $r\\leq\\rho\\leq R$, since $|\\rho e^{it}|=\\rho$. Hence $$\\int_A\\partial_{\\bar z}v\\,dA=\\int_{[r,R]\\times(-\\pi,\\pi)}\\rho(\\partial_{\\bar z}v)(\\Phi(\\rho,t))\\,d\\rho\\,dt=\\int_Q\\rho(\\partial_{\\bar z}v)(\\Phi(\\rho,t))\\,d\\rho\\,dt.$$ The last change adds only the two angle edges, which have product Lebesgue measure zero (a finite interval times a singleton). The integrand is continuous and bounded on $Q$, so its integral over those edges is zero. Taking the constant $2i$ outside this integral identifies the left side of step 4 with $2i\\int_A\\partial_{\\bar z}v\\,dA$. No holomorphic annulus theorem is being used.",
+   "uses": [
+    "lem-sfb-planar-polar-integration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Integral/DivergenceTheorem.lean",
+    "place": "Agent polar-coordinate reduction to integral_divergence_prod_Icc_of_hasFDerivAt_of_le, lines 482–494; the annulus argument is supplied here, not stated by that theorem."
+   }
+  },
+  {
+   "text": "For $s=r,R$ the function $B(s,t)=is e^{it}v(c+se^{it})$ is $2\\pi$-periodic. Split its integral over $[-\\pi,\\pi]$ at zero, and in the part over $[-\\pi,0]$ substitute $u=t+2\\pi$. Periodicity changes that part into the integral over $[\\pi,2\\pi]$; adding the part over $[0,\\pi]$ gives the integral over $[0,2\\pi]$. By the parametrization in the statement this is precisely the counterclockwise integral $\\oint_{|z-c|=s}v(z)\\,dz$, because $\\frac{d}{dt}(c+se^{it})=is e^{it}$. Step 4 and step 5 thus give $2i\\int_A\\partial_{\\bar z}v\\,dA=\\oint_{|z-c|=R}v\\,dz-\\oint_{|z-c|=r}v\\,dz$. Divide by $2i\\ne0$. The inner integral has a minus sign while both parametrizations run counterclockwise, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Integral/DivergenceTheorem.lean",
+    "place": "Agent polar-coordinate reduction to integral_divergence_prod_Icc_of_hasFDerivAt_of_le, lines 482–494; the annulus argument is supplied here, not stated by that theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-partials-frechet-criterion",
+  "lem-sfb-continuous-on-compact-integrable",
+  "lem-sfb-real-smooth-differentiation",
+  "lem-sfb-rectangle-divergence-integral",
+  "lem-sfb-planar-polar-integration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/MeasureTheory/Integral/DivergenceTheorem.lean",
+  "place": "Agent polar-coordinate reduction to integral_divergence_prod_Icc_of_hasFDerivAt_of_le, lines 482–494; the annulus argument is supplied here, not stated by that theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cauchy Green boundary formula on a complex annulus: integral of the bar derivative equals boundary contour integrals",
+   "results": "{\"t\": \"2026-10-24T03:03:23Z\", \"tool\": \"leansearch\", \"query\": \"Cauchy Green boundary formula on a complex annulus: integral of the bar derivative equals boundary contour integrals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"circleIntegral.integral_eq_zero_of_hasDerivWithinAt\", \"Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable\", \"DiffContOnCl.deriv_eq_smul_circleIntegral\", \"DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul\", \"DifferentiableOn.circleIntegral_sub_inv_smul\", \"Complex.differentiable_on_off_countable_deriv_eq_smul_circleIntegral\", \"Complex.integral_boundary_rect_eq_zero_of_differentiableOn\", \"DifferentiableOn.circleIntegral_one_div_sub_center_pow_smul\"], \"digest\": \"ee02006bdf6bed31\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected real-derivative identities in CauchyIntegral.lean:186–261 concern rectangles, while the annulus results at lines 315–363 assume complex differentiability; neither states the real C1 annular boundary identity and obtaining it is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integral_boundary_rect_of_continuousOn_of_hasFDerivAt_real\"",
+   "results": "{\"t\": \"2026-10-24T03:03:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"integral_boundary_rect_of_continuousOn_of_hasFDerivAt_real\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Complex.integral_boundary_rect_of_continuousOn_of_hasFDerivAt_real\"], \"digest\": \"1d84d11cedc0af0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected real-derivative identities in CauchyIntegral.lean:186–261 concern rectangles, while the annulus results at lines 315–363 assume complex differentiability; neither states the real C1 annular boundary identity and obtaining it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral of the antiholomorphic derivative over a planar annulus equals one over two i times the oriented boundary integral",
+   "results": "{\"t\": \"2026-10-24T03:03:27Z\", \"tool\": \"leanfinder\", \"query\": \"Integral of the antiholomorphic derivative over a planar annulus equals one over two i times the oriented boundary integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Complex.integral_circleTransform\", \"Complex.integral_boundary_rect_of_hasFDerivAt_real_off_countable\", \"Complex.integral_boundary_rect_of_continuousOn_of_hasFDerivAt_real\", \"Complex.integral_boundary_rect_of_differentiableOn_real\", \"DiffContOnCl.deriv_eq_smul_circleIntegral\", \"circleIntegral\", \"Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable\", \"Complex.circleIntegral_sub_center_inv_smul_eq_of_differentiable_on_annulus_off_countable\"], \"digest\": \"338c2fa6ed0e9d06\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected real-derivative identities in CauchyIntegral.lean:186–261 concern rectangles, while the annulus results at lines 315–363 assume complex differentiability; neither states the real C1 annular boundary identity and obtaining it is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "integral_boundary_rect_of_hasFDerivAt_real|divergence.*annulus|Cauchy.Goursat",
+   "results": "{\"t\": \"2026-10-24T03:03:27Z\", \"tool\": \"grep\", \"query\": \"integral_boundary_rect_of_hasFDerivAt_real|divergence.*annulus|Cauchy.Goursat\", \"sub\": \"Analysis\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Complex/CauchyIntegral.lean\", \"Mathlib/Analysis/Complex/CauchyIntegral.lean\", \"Mathlib/Analysis/Complex/CauchyIntegral.lean\", \"Mathlib/Analysis/Complex/CauchyIntegral.lean\", \"Mathlib/Analysis/Complex/CauchyIntegral.lean\"], \"digest\": \"b83996979a6e8847\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected real-derivative identities in CauchyIntegral.lean:186–261 concern rectangles, while the annulus results at lines 315–363 assume complex differentiability; neither states the real C1 annular boundary identity and obtaining it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Green Stokes theorem for a C1 complex function on an annular region with both inner and outer circle boundaries",
+   "results": "{\"t\": \"2026-10-24T03:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"Green Stokes theorem for a C1 complex function on an annular region with both inner and outer circle boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Complex.circleIntegral_eq_of_differentiable_on_annulus_off_countable\", \"Complex.circleIntegral_sub_center_inv_smul_eq_of_differentiable_on_annulus_off_countable\", \"Complex.integral_boundary_rect_of_continuousOn_of_hasFDerivAt_real\", \"circleIntegral\", \"Complex.integral_boundary_rect_of_differentiableOn_real\", \"Complex.circleTransform\", \"Complex.integral_boundary_rect_eq_zero_of_differentiableOn\", \"Complex.integral_boundary_rect_eq_zero_of_continuousOn_of_differentiableOn\"], \"digest\": \"332d13b618ff8519\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected real-derivative identities in CauchyIntegral.lean:186–261 concern rectangles, while the annulus results at lines 315–363 assume complex differentiability; neither states the real C1 annular boundary identity and obtaining it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cauchy Green formula on a closed annulus for a real continuously differentiable complex function",
+   "results": "{\"t\": \"2026-10-24T03:20:56Z\", \"tool\": \"leanfinder\", \"query\": \"Cauchy Green formula on a closed annulus for a real continuously differentiable complex function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DiffContOnCl.circleIntegral_sub_inv_smul\", \"DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul\", \"Complex.circleIntegral_eq_of_differentiable_on_annulus_off_countable\", \"DiffContOnCl.deriv_eq_smul_circleIntegral\", \"DiffContOnCl.circleIntegral_eq_zero\", \"Complex.circleIntegral_sub_center_inv_smul_eq_of_differentiable_on_annulus_off_countable\", \"Complex.circleTransformDeriv\", \"Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable\"], \"digest\": \"41a57549d81a7846\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the annulus declarations in CauchyIntegral.lean:315–363 assume complex differentiability. The real-derivative identity at lines 230–240 concerns rectangles. Neither gives the real C1 annular formula by one-line specialization; the polar pullback calculation is written in this proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral of antiholomorphic derivative on an annulus equals outer circle integral minus inner circle integral divided by two i",
+   "results": "{\"t\": \"2026-10-24T03:20:55Z\", \"tool\": \"leansearch\", \"query\": \"Integral of antiholomorphic derivative on an annulus equals outer circle integral minus inner circle integral divided by two i\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"circleIntegral\", \"circleIntegral.integral_eq_zero_of_hasDerivWithinAt'\", \"Complex.integral_boundary_rect_eq_zero_of_differentiableOn\", \"circleIntegral.integral_eq_zero_of_hasDerivWithinAt\", \"DifferentiableOn.deriv_eq_smul_circleIntegral\", \"Complex.circleIntegral_sub_center_inv_smul_eq_of_differentiable_on_annulus_off_countable\", \"DiffContOnCl.circleIntegral_sub_inv_smul\", \"circleIntegral.integral_sub\"], \"digest\": \"013f6bc42d9b176d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the annulus declarations in CauchyIntegral.lean:315–363 assume complex differentiability. The real-derivative identity at lines 230–240 concerns rectangles. Neither gives the real C1 annular formula by one-line specialization; the polar pullback calculation is written in this proof."
+  },
+  {
+   "tool": "grep",
+   "query": "integral_boundary_rect_of_continuousOn_of_hasFDerivAt_real|circleIntegral_eq_of_differentiable_on_annulus",
+   "results": "{\"t\": \"2026-10-24T03:27:30Z\", \"tool\": \"grep\", \"query\": \"integral_boundary_rect_of_continuousOn_of_hasFDerivAt_real|circleIntegral_eq_of_differentiable_on_annulus\", \"sub\": \"Analysis/Complex\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Complex/CauchyIntegral.lean\", \"Mathlib/Analysis/Complex/CauchyIntegral.lean\"], \"digest\": \"f5c5aeca50eaa7d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the annulus declarations in CauchyIntegral.lean:315–363 assume complex differentiability. The real-derivative identity at lines 230–240 concerns rectangles. Neither gives the real C1 annular formula by one-line specialization; the polar pullback calculation is written in this proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cauchy-green-test-function",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: I §3.C, formula (3.14) and Cauchy--Riemann criterion, printed pp.23--24; I §3.E, Lemma (3.29), smooth scalar case p=0, printed pp.28--29. The point a is translated to 0; only local solvability, not solvability on all of U, is asserted. Supporting scalar Dolbeault step: I §8, Exercise 8.5: the partial convolution F_J=(psi f_J) star_k (1/(pi z_k)) used to remove the highest antiholomorphic differential; analytic right-inverse and parameter commutation input; supporting Cauchy--Green reproduction of compactly supported test functions; Nonsingular Green/Stokes input on the punctured disk, before substituting u(zeta)/(z-zeta).",
+   "via": [
+    "lem-sfb-cauchy-green-test-function",
+    "lem-sfb-cauchy-transform-parameters",
+    "lem-sfb-local-scalar-dolbeault",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cauchy-green-annulus-formula",
+  "worker": "stage1",
+  "summary": "NG supplies the real C1 annulus proof by applying the rectangular divergence theorem to the polar pullback. Reuses centered polar integration and pointwise real derivative rules. Adds the coordinate-partials differentiability criterion as a statement-only obligation, and two Mathlib leaves for rectangular divergence and compact-set integrability. Keeps the statement and all inherited metadata and searches unchanged. Checks the orientation, domains, absolute convergence and angular seam explicitly.",
+  "blueprint": "The inherited blueprint.from.node is null; the ancestor command confirms None. The inherited place names det-thm-sf-ctf-stability-direct-images, proof (3), with the recorded auxiliary chain down through the scalar Dolbeault/Cauchy–Green test-function prerequisite. Steps 1–6 prove its nonsingular annulus Green input without changing any chapter or unit route. The current latest blueprint direct-images proof (3) and unit were read; no blueprint node states this analytic auxiliary lemma.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NG-9822268e5",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-9822268e5 (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, the 3 new nodes and both cited existing nodes (real-smooth-differentiation: only its pointwise rules are used; planar-polar-integration: the complex clause). In clones/live the item is still unsplit with an empty proof. No parallel split or repair note exists, and the statement, stmt_deps and blueprint match live. Mathlib checked: DivergenceTheorem.lean:482-494, LocallyIntegrable.lean:592-594 (instances at 583), PolarCoord.lean:192-212. I recomputed the math. Step 3: B_rho - P_t = rho(i v_x - v_y) = 2i rho dbar v at Phi, using e^{it}(i cos t + sin t) = i and e^{it}(i sin t - cos t) = -1. Step 4: F = B, G = -P on [r,R]x[-pi,pi]; the G-edges cancel because Phi(rho,pi) = Phi(rho,-pi). Step 5: for rho > 0, Phi in A iff r <= rho <= R, and the angle edges are null. Step 6: periodic shift to [0,2pi], d/dt(c+se^{it}) = i s e^{it}. Statement test v = conj(z-c): both sides equal pi(R^2-r^2); constant and holomorphic v give 0. New nodes are true, self-contained, statement-only, not clauses of the parent and not duplicates (rg -L over all chapters); the two leaves are one-line specializations. Advisory: the Fréchet-criterion searches missed Mathlib hasStrictFDerivAt_uncurry_coprod (Analysis/Calculus/FDeriv/Partial.lean:63, bivariate). It is not one-line for general m and open U, so unsplit is right, but its splitter should use it. Inherited blueprint.from.node = null is a base property; maintainer note. No tool_uses, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.CauchyGreenAnnulusFormula",
+  "declaration": "Complex.cauchyGreen_annulus_formula",
+  "file": "lean/Sheaf/Analysis/Complex/CauchyGreenAnnulusFormula.lean",
+  "statement": "theorem cauchyGreen_annulus_formula (c : ℂ) (r R : ℝ) (hr : 0 < r) (hrR : r < R) (V : Set ℂ) (hV : IsOpen V) (hA : {z : ℂ | r ≤ ‖z - c‖ ∧ ‖z - c‖ ≤ R} ⊆ V) (v vx vy : ℂ → ℂ) (hvx : ∀ z ∈ V, HasDerivAt (fun x : ℝ ↦ v ((x : ℂ) + (z.im : ℂ) * I)) (vx z) z.re) (hvy : ∀ z ∈ V, HasDerivAt (fun y : ℝ ↦ v ((z.re : ℂ) + (y : ℂ) * I)) (vy z) z.im) (hcx : ContinuousOn vx V) (hcy : ContinuousOn vy V) : IntegrableOn (fun z ↦ (vx z + I * vy z) / 2) {z : ℂ | r ≤ ‖z - c‖ ∧ ‖z - c‖ ≤ R} ∧ CircleIntegrable v c R ∧ CircleIntegrable v c r ∧ (∫ z in {z : ℂ | r ≤ ‖z - c‖ ∧ ‖z - c‖ ≤ R}, (vx z + I * vy z) / 2) = (1 / (2 * I)) * (circleIntegral v c R - circleIntegral v c r)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-888c87b5b",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Item Complex.cauchyGreen_annulus_formula matches the node clause by clause: c, 0<r<R, open V containing the closed annulus; vx/vy are the actual coordinate partials (HasDerivAt along the horizontal/vertical lines through z, checked to evaluate at z), continuous on V, with no holomorphy or C^1 assumption added; dbar written inline as (vx+I*vy)/2; volume on C is Lebesgue (measureSpaceOfInnerProductSpace); the conjunction gives IntegrableOn on the annulus, CircleIntegrable at R and r (equivalent to absolute convergence since radii > 0), and the equation with counterclockwise circleIntegral and inner circle subtracted. Sign and factor recomputed (v=conj(z-c): both sides pi(R^2-r^2)). Only the item's lean record was added, complete, statement verbatim; def-weil-field unchanged; no new or dependency nodes. Docstrings carry the source, the blueprint id and all 6 steps; proof is sorry; lines <= 86; plain imports = the Mathlib matches of the proof deps. Own searches found no duplicate in Mathlib, lean/Sheaf or lean/WeilConjectures. Not recompiled (no file changed); worker reports a clean scompile. No findings."
+ }
+}

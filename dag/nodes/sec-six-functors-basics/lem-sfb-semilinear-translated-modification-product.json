@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-semilinear-translated-modification-product",
+ "kind": "statement",
+ "title": "Semilinear translated modification product and its invariant isomorphism open",
+ "statement": "Let $k$ be a field [def-weil-field], $S=\\operatorname{Spec}k$ [def-weil-affine-spectrum], and $f:X\\to S$ a morphism of schemes [def-pc-scheme]. Let $H$ be a finite group, with left scheme actions $a_h:X\\to X$ and $b_h:S\\to S$ satisfying $a_1=b_1=1$, $a_ha_l=a_{hl}$, $b_hb_l=b_{hl}$ and $fa_h=b_hf$. The $b_h$ are induced by a compatible action on $k$, using inverse field automorphisms under $\\operatorname{Spec}$. Let $\\pi:Y\\to X$ be a morphism which is an isomorphism over a dense open $U_0\\subset X$ [def-weil-open-immersion], and suppose $f\\pi$ admits a closed immersion $i:Y\\hookrightarrow\\mathbf P^n_S$ over $S$, with $n\\geq0$ [def-kun-projective, def-weil-closed-immersion]. For each $g\\in H$ write $Y_g$ for the underlying scheme $Y$ equipped with $q_g=a_g\\pi$ and $p_g=fq_g=b_gf\\pi$. Put $U=\\bigcap_{g\\in H}a_g(U_0)$ and form the finite fibre product $P=\\prod_{g\\in H,X}Y_g$ [def-pc-fibre-product], with $r:P\\to X$ and projections $\\rho_g:P\\to Y$. Then each $p_g$ admits a closed immersion into $\\mathbf P^n_S$ over $S$, and $U$ is a dense $H$-invariant open of $X$. There is a left action by scheme automorphisms $A_h:P\\to P$ uniquely specified by $\\rho_gA_h=\\rho_{h^{-1}g}$ for all $g,h$. It satisfies $A_hA_l=A_{hl}$, $A_1=1$, $rA_h=a_hr$ and $frA_h=b_hfr$. The restriction $r^{-1}(U)=P\\times_XU\\to U$ is an isomorphism. Its inverse defines an open immersion $j:U\\hookrightarrow P$ satisfying $rj:U\\to X$ equal to the inclusion and $A_hj=j(a_h|_U)$ for every $h$. Neither action is assumed faithful, and there is no restriction on the characteristic of $k$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01WF, lemma-H-projective-base-change; explicit finite-translate construction in the returned proof of lem-sfb-semilinear-equivariant-chow-modification, steps 2, 4 and 5. The averaging route is referenced in de Jong (1997), §2.10, printed p.605 (locally WANTED); the precise action and common-open argument are agent-written."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-kun-projective",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Use the homogeneous-coordinate index set $I=\\{0,\\ldots,n\\}$ in [def-nagata-projective-space-base-change], so $Q=\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Proj}(\\mathbf Z[T_i:i\\in I])$, with projections $t,z$. By [def-nagata-projective-space-base-change] and [def-pc-fibre-product], $c_g=(b_gt,z):Q\\to Q$ exists, since the field automorphism inducing $b_g$ fixes every integer, so $b_g$ commutes with $S\\to\\operatorname{Spec}\\mathbf Z$. Its inverse is $(b_{g^{-1}}t,z)$, as both composites have projections $t,z$. Thus $tc_g=b_gt$. The given closed immersion $i$ followed by this isomorphism is still a closed immersion: its image is the homeomorphic image of the closed image of $i$, and its structure-sheaf map is the surjection for $i$ composed with an isomorphism [def-weil-closed-immersion]. Consequently $i_g=c_gi$ is a closed immersion with $ti_g=b_gf\\pi=p_g$, into the same projective $n$-space.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NF, definition-projective-space; agent-explicit base automorphism lift from the defining fibre product. See also morphisms.tex Tag 01WF, lemma-H-projective-base-change."
+   }
+  },
+  {
+   "text": "Each $a_g$ is an isomorphism with inverse $a_{g^{-1}}$, hence a homeomorphism. It sends the dense open $U_0$ to a dense open. A finite intersection of dense opens is dense: intersect any nonempty open successively with these opens; every intermediate intersection stays open and nonempty. This also covers the empty space vacuously. Thus $U$ is dense and open. Moreover $a_h(U)=\\bigcap_g a_{hg}(U_0)=U$, since left multiplication by $h$ permutes $H$. An automorphism preserving this open restricts to an isomorphism of the open subscheme, by restriction of its structure-sheaf isomorphism [def-weil-open-immersion].",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), direct-image stability route; the finite-translate prerequisite in the inherited ancestry is agent-written, expanding lem-sfb-semilinear-equivariant-chow-modification, returned proof steps 2, 4 and 5. The current blueprint paragraph does not state this construction."
+   }
+  },
+  {
+   "text": "Since $H$ is finite and contains $1$, repeated application of [def-pc-fibre-product] constructs $P$ and gives the following universal property: maps $v:T\\to P$ are uniquely determined by maps $v_g:T\\to Y$ for which all $q_gv_g$ are one common map $T\\to X$. The assertion follows by adjoining one factor at a time using the binary universal property; the one-factor case is $Y_1\\to X$. In particular $q_g\\rho_g=r$ for all $g$, and maps into $P$ with equal projections are equal.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), direct-image stability route; the finite-translate prerequisite in the inherited ancestry is agent-written, expanding lem-sfb-semilinear-equivariant-chow-modification, returned proof steps 2, 4 and 5. The current blueprint paragraph does not state this construction."
+   }
+  },
+  {
+   "text": "Fix $h\\in H$. The maps $v_g=\\rho_{h^{-1}g}:P\\to Y$ satisfy $q_gv_g=a_g\\pi\\rho_{h^{-1}g}=a_ha_{h^{-1}g}\\pi\\rho_{h^{-1}g}=a_hr$. Apply the universal property of step 3 [def-pc-fibre-product] with common base map $a_hr$ to obtain the unique scheme morphism $A_h:P\\to P$ with $\\rho_gA_h=\\rho_{h^{-1}g}$. This gives $rA_h=a_hr$, and applying $f$ gives $frA_h=fa_hr=b_hfr$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), direct-image stability route; the finite-translate prerequisite in the inherited ancestry is agent-written, expanding lem-sfb-semilinear-equivariant-chow-modification, returned proof steps 2, 4 and 5. The current blueprint paragraph does not state this construction."
+   }
+  },
+  {
+   "text": "For every $g$, $\\rho_gA_hA_l=\\rho_{l^{-1}h^{-1}g}=\\rho_{(hl)^{-1}g}=\\rho_gA_{hl}$. Projection uniqueness in step 3 [def-pc-fibre-product] gives $A_hA_l=A_{hl}$. Similarly $\\rho_gA_1=\\rho_g$ gives $A_1=1$. Taking $l=h^{-1}$ in both orders shows that $A_h$ is an automorphism with inverse $A_{h^{-1}}$. Thus these morphisms define the asserted left action.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), direct-image stability route; the finite-translate prerequisite in the inherited ancestry is agent-written, expanding lem-sfb-semilinear-equivariant-chow-modification, returned proof steps 2, 4 and 5. The current blueprint paragraph does not state this construction."
+   }
+  },
+  {
+   "text": "Let $s_0:U_0\\to Y$ be the given inverse over $U_0$, so $\\pi s_0$ is its inclusion and $s_0\\pi$ is the identity on $\\pi^{-1}(U_0)$. Write $u:U\\hookrightarrow X$. Since $U\\subset a_g(U_0)$, the morphism $a_{g^{-1}}u$ factors through the open subscheme $U_0$ by restricting its structure-sheaf map [def-weil-open-immersion]. Define $s_g=s_0(a_{g^{-1}}u):U\\to Y$. Then $q_gs_g=a_ga_{g^{-1}}u=u$. The universal property [def-pc-fibre-product] gives $j:U\\to P$ with $\\rho_gj=s_g$ and $rj=u$. It also gives a lift $\\bar j:U\\to P_U=P\\times_XU$ with $\\operatorname{pr}_U\\bar j=1$ and $\\operatorname{pr}_P\\bar j=j$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), direct-image stability route; the finite-translate prerequisite in the inherited ancestry is agent-written, expanding lem-sfb-semilinear-equivariant-chow-modification, returned proof steps 2, 4 and 5. The current blueprint paragraph does not state this construction."
+   }
+  },
+  {
+   "text": "Write $e=\\operatorname{pr}_P:P_U\\to P$ and $d=\\operatorname{pr}_U:P_U\\to U$. For each $g$, $\\pi\\rho_ge=a_{g^{-1}}ud$, which factors through $U_0$. Therefore $\\rho_ge$ factors through $\\pi^{-1}(U_0)$, and the identity $s_0\\pi=1$ there gives $s_gd=\\rho_ge$. Projection uniqueness for $P$ [def-pc-fibre-product] gives $jd=e$. Now $d\\bar j=1$ by construction, while $\\bar jd$ and $1_{P_U}$ have the same two projections $e,d$, so $\\bar jd=1$. Hence $d:P\\times_XU\\to U$ is an isomorphism with inverse $\\bar j$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), direct-image stability route; the finite-translate prerequisite in the inherited ancestry is agent-written, expanding lem-sfb-semilinear-equivariant-chow-modification, returned proof steps 2, 4 and 5. The current blueprint paragraph does not state this construction."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-open-immersion-base-change] to $u:U\\hookrightarrow X$ and $r:P\\to X$: $U\\times_XP\\to P$ is an open immersion. Exchanging the two projections by [def-pc-fibre-product] identifies this map with $e:P_U\\to P$, so $e$ is an open immersion. Since $\\bar j$ is an isomorphism, $j=e\\bar j$ is an open immersion by [def-weil-open-immersion] (the same open image and an isomorphic restricted structure sheaf). Both $A_hj$ and $j(a_h|_U)$ land in $P_U$, because their composites with $r$ equal $a_hu=u(a_h|_U)$. Under the isomorphism $d$ of step 7 their lifts are both $a_h|_U$; uniqueness of its inverse therefore gives $A_hj=j(a_h|_U)$. All constructions used actual scheme morphisms, and require neither faithful actions nor any characteristic assumption.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY, lemma-base-change-immersion, open-immersion case; agent-explicit inverse and equivariance calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NF, definition-projective-space, and schemes.tex Tag 01JY, lemma-base-change-immersion; explicit fibre-product and finite-intersection arguments. The finite-translate averaging motivation in de Jong (1997) §2.10 is locally WANTED, not used as an unproved assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite semilinear group actions on schemes lift to a finite fibre product of all translates of a modification, with invariant common isomorphism open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_continuous\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (X : Action FintypeCat (CategoryTheory.Aut F)) [inst_3 : TopologicalSpace X.V.carrier] [DiscreteTopol\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, given a continuous action $X$ of the automorphism group $\\\\mathrm{Aut}(F)$ on finite types equipped with the discrete topology, there exists an object $A \\\\in \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.PreGaloisCategory (Action FintypeCat G)\", \"doc\": \"The category of actions of a group $ G $ on the category of finite types is equipped with a pre-Galois category structure. This means that for any group $ G $, the category whose objects are $ G $-act\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.PreGaloisCategory.FiberFunctor (Action.forget FintypeCat G)\", \"doc\": \"The forgetful functor from the category of $G$-actions on finite types to the category of finite types is a fiber functor. This means it satisfies the defining properties of a fiber functor: it is fai\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give pullback existence, actions on finite sets or linear projectivizations, and invariance of module projectivity; none gives the translated scheme product, its semilinear action and its invariant isomorphism open"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pullback\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : CategoryTheory.Limits.HasPullback f g\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : CategoryTheory.Limits.HasPullback g f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : CategoryTheory.Limits.PullbackCone f g\", \"doc\": \"An explicit pullback cone over `cospan f g` if `f` is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullbackOfLeft\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : CategoryTheory.Limits.PreservesLimit (CategoryTheory.Limits.cospan f g) AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullback_of_right\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : CategoryTheory.Limits.PreservesLimit (CategoryTheory.Limits.cospan g f) AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_left\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : CategoryTheory.Limits.ReflectsLimit (CategoryTheory.Limits.cospan f g) AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_right\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : CategoryTheory.Limits.ReflectsLimit (CategoryTheory.Limits.cospan g f) AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : CategoryTheory.Limits.IsLimit (AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft f g)\", \"doc\": \"The constructed `pullbackConeOfLeft` is indeed limiting.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : CategoryTheory.Limits.PreservesLimit (CategoryTheory.Limits.cospan f g) (AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace.comp (AlgebraicGeometry.SheafedSpa\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_fst_of_right\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (CategoryTheory.Limits.pullback.fst g f)\", \"doc\": \"Open immersions are stable under base-change.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_snd_of_left\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"Open immersions are stable under base-change.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instSndPullbackConeOfLeft\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft f g).snd\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give pullback existence, actions on finite sets or linear projectivizations, and invariance of module projectivity; none gives the translated scheme product, its semilinear action and its invariant isomorphism open"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*(product|scheme)|equivariant.*(modification|Chow)|translated.*modification",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give pullback existence, actions on finite sets or linear projectivizations, and invariance of module projectivity; none gives the translated scheme product, its semilinear action and its invariant isomorphism open"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite group permutes twisted copies of a scheme over another scheme to give an action on their fibre product",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulAction.toPermHom\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \": G →* Equiv.Perm α\", \"doc\": \"The function that maps each element of the group $ G $ to the permutation of $ \\\\alpha $ induced by its action, forming a group homomorphism from $ G $ to the permutation group of $ \\\\alpha $. Specifica\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autMulFiber\", \"module\": \"Mathlib.CategoryTheory.Galois.GaloisObjects\", \"type\": \"(F : C ⥤ FintypeCat.{w}) (X : C) : MulAction (Aut X) (F.obj X)\", \"doc\": \"For any category $\\\\mathcal{C}$, functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and object $X \\\\in \\\\mathcal{C}$, the automorphism group $\\\\mathrm{Aut}(X)$ acts on the finite type $F(X)$. This action is\"}\n  {\"name\": \"Equiv.Perm.applyMulAction\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \"(α : Type*) : MulAction (Perm α) α\", \"doc\": \"The group of permutations on a type $\\\\alpha$ acts on $\\\\alpha$ via function application. Specifically, for any permutation $f \\\\in \\\\text{Perm}(\\\\alpha)$ and element $a \\\\in \\\\alpha$, the action $f \\\\cdot a$\"}\n  {\"name\": \"MulAction.toPerm_apply\", \"module\": \"Mathlib.Algebra.Group.Action.Basic\", \"type\": \"∀ {α : Type u_5} {β : Type u_6} [inst : Group α] [inst_1 : MulAction α β] (a : α) (x : β),\\n  (MulAction.toPerm a) x = a • x\", \"doc\": \"For any group $\\\\alpha$ acting on a set $\\\\beta$, and for any element $a \\\\in \\\\alpha$ and $x \\\\in \\\\beta$, applying the permutation induced by $a$ to $x$ yields the result of the group action of $a$ on $x$\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat\", \"module\": \"Mathlib.CategoryTheory.Galois.Examples\", \"type\": \": GaloisCategory (Action FintypeCat G)\", \"doc\": \"The category of actions of the finite type category on a group $G$ is equipped with a Galois category structure. This means that the category satisfies the axioms defining a Galois category, including\"}\n  {\"name\": \"Function.Embedding.smul_def\", \"module\": \"Mathlib.GroupTheory.GroupAction.Embedding\", \"type\": \"[Group G] [MulAction G β] (g : G) (f : α ↪ β) : g • f = f.trans (MulAction.toPerm g).toEmbedding\", \"doc\": \"For a group $ G $ acting on a set $ \\\\beta $, the group action of $ G $ on the set of embeddings from $ \\\\alpha $ to $ \\\\beta $ is defined by $ g \\\\cdot f = f \\\\circ \\\\sigma_g $, where $ \\\\sigma_g $ is the p\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instMulActionAutCarrierVFintypeCatFunctorObjActionFunctorToAction\", \"module\": \"Mathlib.CategoryTheory.Galois.Action\", \"type\": \"(X : C) : MulAction (Aut X) ((functorToAction F).obj X).V\", \"doc\": \"For any object $ X $ in the category $ \\\\mathcal{C} $, the automorphism group $ \\\\mathrm{Aut}(X) $ acts on the finite type $ F(X) $, where $ F $ is a functor from $ \\\\mathcal{C} $ to the category of fini\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois\", \"module\": \"Mathlib.CategoryTheory.Galois.Action\", \"type\": \"(X : C) [IsGalois X] : MulAction.IsPretransitive (Aut X) ((functorToAction F).obj X).V\", \"doc\": \"For any Galois object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, the automorphism group $ \\\\mathrm{Aut}(X) $ acts pretransitively on the finite type $ F(X) $, where $ F $ is the fiber functor to f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give pullback existence, actions on finite sets or linear projectivizations, and invariance of module projectivity; none gives the translated scheme product, its semilinear action and its invariant isomorphism open"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projectivity is preserved by twisting the structure morphism by a field automorphism; the intersection of finitely many translated dense opens is invariant",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.projective_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Projective R M], Module\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ formally unramified over $ R $. If $ M $ is an $ S $-module that is projective as an $ R $-module, then $ M $ is projective as an $ S $-module.\"}\n  {\"name\": \"Projectivization.smul_def\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) (x : Projectivization K V),\\n  SMul.smul g x = Projectivization.map ((DistribMulAction.toM\", \"doc\": \"Given a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the proje\"}\n  {\"name\": \"Projectivization.instMulAction\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"{G : Type u_1} →\\n  {K : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : AddCommGroup V] →\\n        [inst_1 : DivisionRing K] →\\n          [inst_2 : Module K V] →\\n            [inst_3 : Group G] →\\n              [inst_4 : DistribMulAction G V] → [SMulCommClass G K V] → MulAction G (Projectivization K V)\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ (with commuting scalar multiplications between $G$ and $K$), this constructs a group action of $G$ on the projectivizatio\"}\n  {\"name\": \"CategoryTheory.Equivalence.map_projective_iff\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Projective/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  (F : C ≌ D) (P : C), CategoryTheory.Projective (F.functor.obj P) ↔ CategoryTheory.Projective P\", \"doc\": \"Let $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $ be categories, and let $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ be the functor component of an equivalence between them. For any object $ P $ in $ \\\\mathcal{C} $, $ P\"}\n  {\"name\": \"Projectivization.smul_mk\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) {v : V} (hv : v ≠ 0),\\n  g • Projectivization.mk K v hv = Projectivization.mk K (g • v) ⋯\", \"doc\": \"For a group $ G $ acting distributively on a module $ V $ over a division ring $ K $, the induced action of $ G $ on the projectivization $ \\\\mathbb{P}_K(V) $ satisfies that for any non-zero vector $ v\"}\n  {\"name\": \"Projectivization.generalLinearGroup_smul_def\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  (g : LinearMap.GeneralLinearGroup K V) (x : Projectivization K V), g • x = Projectivization.map ↑g.toLinearEquiv ⋯ x\", \"doc\": \"For any invertible linear transformation $ g \\\\in \\\\mathrm{GL}(K, V) $ and any projective point $ x \\\\in \\\\mathbb{P}_K(V) $ (represented by a nonzero vector $ v \\\\in V $), the group action $ g \\\\cdot x $ is\"}\n  {\"name\": \"Module.Projective.of_ringEquiv\", \"module\": \"Mathlib/Algebra/Module/Projective\", \"type\": \"∀ {R : Type u_8} {S : Type u_9} [inst : Semiring R] [inst_1 : Semiring S] {M : Type u_10} {N : Type u_11}\\n  [inst_2 : AddCommMonoid M] [inst_3 : AddCommMonoid N] [inst_4 : Module R M] [inst_5 : Module S N] (e₁ : R ≃+* S)\\n  (e₂ : M ≃ₛₗ[↑e₁] N) [Module.Projective R M], Module.Projective S N\", \"doc\": \"Given semirings $ R $ and $ S $, modules $ M $ over $ R $ and $ N $ over $ S $, if there exists a ring equivalence $ R ≃+* S $ and a linear equivalence $ M ≃ₛₗ[σ] N $ compatible with the ring equivale\"}\n  {\"name\": \"Rep.instPreservesProjectiveObjectsActionModuleCatSubtypeMemSubgroupResSubtype\", \"module\": \"Mathlib/RepresentationTheory/Coinduced\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] (S : Subgroup G),\\n  (Action.res (ModuleCat k) S.subtype).PreservesProjectiveObjects\", \"doc\": \"For any group $ G $ and its subgroup $ S $, the restriction functor from the category of representations of $ G $ to the category of representations of $ S $ preserves projective objects. This means t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give pullback existence, actions on finite sets or linear projectivizations, and invariance of module projectivity; none gives the translated scheme product, its semilinear action and its invariant isomorphism open"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*(scheme|product)|translated.*modification|equivariant.*Chow",
+   "results": "{\"t\": \"2026-10-22T11:05:49Z\", \"tool\": \"grep\", \"query\": \"semilinear.*(scheme|product)|translated.*modification|equivariant.*Chow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Prod.lean\", \"Mathlib/LinearAlgebra/Prod.lean\"], \"digest\": \"2616bc25d916c51a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern set actions, Galois-category actions, topological quotient trivializations, or binary pullbacks, not all clauses of this scheme construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a group action on a fibre product of twisted scheme morphisms by permuting the projections",
+   "results": "{\"t\": \"2026-10-22T11:05:49Z\", \"tool\": \"leansearch\", \"query\": \"Construct a group action on a fibre product of twisted scheme morphisms by permuting the projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.Embedding.smul_def\", \"MulAction.toPermHom\", \"Equiv.Perm.applyMulAction\", \"Function.Embedding.smul\", \"CategoryTheory.PreGaloisCategory.autMulFiber\", \"MulAction.toPerm_apply\", \"MulAction.toPerm\", \"Function.Embedding.coe_smul\"], \"digest\": \"cc68aa5f59ee5ddd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern set actions, Galois-category actions, topological quotient trivializations, or binary pullbacks, not all clauses of this scheme construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T11:05:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullbackOfLeft\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_preservesPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_left\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit\"], \"digest\": \"d386bab8aa39128a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern set actions, Galois-category actions, topological quotient trivializations, or binary pullbacks, not all clauses of this scheme construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group action permutes factors of a wide pullback over a scheme and lifts its action on the base",
+   "results": "{\"t\": \"2026-10-22T11:05:59Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group action permutes factors of a wide pullback over a scheme and lifts its action on the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.action_ext_of_isGalois\", \"CategoryTheory.PreGaloisCategory.autMulFiber\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul\", \"CategoryTheory.PreGaloisCategory.instMulActionAutCarrierVFintypeCatFunctorObjActionFunctorToAction\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois\", \"CategoryTheory.PreGaloisCategory.instMulActionAutFunctorFintypeCatCarrierObj\", \"CategoryTheory.PreGaloisCategory.instSMulAutFintypeCatObjCarrier\"], \"digest\": \"fc2828042f5258fd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern set actions, Galois-category actions, topological quotient trivializations, or binary pullbacks, not all clauses of this scheme construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite semilinear group action on the fibre product of all translates of a scheme morphism with a common invariant isomorphism open",
+   "results": "{\"t\": \"2026-10-22T11:05:59Z\", \"tool\": \"leanfinder\", \"query\": \"Finite semilinear group action on the fibre product of all translates of a scheme morphism with a common invariant isomorphism open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsQuotientMap.trivializationOfSMulDisjoint_source\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint_target\", \"Topology.IsQuotientMap.trivializationOfVAddDisjoint_source\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"Topology.IsQuotientMap.trivializationOfVAddDisjoint_target\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint_baseSet\", \"Topology.IsQuotientMap.trivializationOfVAddDisjoint_baseSet\"], \"digest\": \"6235e3bb2bf2d714\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern set actions, Galois-category actions, topological quotient trivializations, or binary pullbacks, not all clauses of this scheme construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-equivariant-chow-modification",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160.; equivariant Chow preparation in de Jong §2.10, before simultaneous flattening; re-split of lem-sfb-semilinear-equivariant-chow-modification, returned proof steps 2, 4, 5",
+   "via": [
+    "lem-sfb-semilinear-equivariant-chow-modification",
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-semilinear-translated-modification-product",
+  "worker": "stage1",
+  "summary": "N7 repair after L promotion refusal: rebased worker fields onto the current unsplit live node; re-read every statement dependency and proof dependency and verified all 14 quotation entries against the current statements. Retained the eight-step argument and all logged searches. Made the n+1-coordinate convention and integer-fixed base compatibility explicit in step 1, and the exchange of pullback projections explicit in step 8; corrected the step-source descriptions to distinguish the current direct-image paragraph from the historical alteration ancestry. No statement change, new node or Mathlib leaf.",
+  "blueprint": "The inherited from.place locates direct-images proof (3), then the equivariant Chow prerequisite in de Jong §2.10; this item expands returned Chow proof steps 2, 4 and 5. The computed ancestor is null and its inherited via chain is retained. The current direct-images text does not itself state the finite-translate construction."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N7-ae33e462a",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-ae33e462a (reviewer sub-agent of L); spot-checked: I read the whole item. It is split into 8 steps, creates no new nodes, and its statement, stmt_deps and source are the same as at the prior head 19b94d5ca700. Only steps 1 and 8 changed: step 1 now spells out I={0..n} and why b_g is compatible with S→Spec Z, and step 8 now swaps the fibre-product projections explicitly. Both changes are correct. I re-derived every step: c_g=(b_g t,z) with t c_g i=p_g and the closed immersion preserved; U is dense, open and invariant; q_gρ_{h⁻¹g}=a_h r, so A_h exists and rA_h=a_hr; the group law follows from ρ_{(hl)⁻¹g}; s_g=s_0a_{g⁻¹}|_U gives q_gs_g=u; ρ_ge=s_gd, hence jd=e and d is an isomorphism with inverse j̄; j=ej̄ is an open immersion by the base-change leaf lem-weil-pbc-open-immersion-base-change; and A_hj=j a_h|_U. Edge cases checked: trivial H, non-faithful actions, empty X, n=0, any characteristic. Every cited statement says what its step uses, and proof_deps equals the union of the uses. I checked Stacks 01NF, 01WF and 01JY against their labels. There is no SGA citation. The search log has all three kinds of search. The sibling nodes lem-sfb-projective-fibre-product-closed-model and lem-sfb-invariant-integral-open-schematic-closure do not overlap with this item's clauses, and the item does not restate a clause of its parent lem-sfb-semilinear-equivariant-chow-modification. No tool_uses are needed, since the only cited statement is a mathlib leaf. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearTranslatedModificationProduct",
+  "declaration": "AlgebraicGeometry.exists_semilinear_translated_modification_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearTranslatedModificationProduct.lean",
+  "statement": "theorem exists_semilinear_translated_modification_product (k : Type u) [Field k] (X Y : Scheme.{u}) (f : X ⟶ Spec (.of k)) (H : Type v) [Group H] [Finite H] (rho : H →* (k ≃+* k)) (a : H →* Aut X) (ha : ∀ h : H, (a h).hom ≫ f = f ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) (π : Y ⟶ X) (U₀ : X.Opens) (hU₀ : Dense (U₀ : Set X)) (hπ : IsIso (π ∣_ U₀)) (n : ℕ) (i : Y ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of k))) [IsClosedImmersion i] (hi : i ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of k)) ↘ Spec (.of k)) = π ≫ f) : (∀ g : H, ∃ ig : Y ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of k)), IsClosedImmersion ig ∧ ig ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of k)) ↘ Spec (.of k)) = π ≫ (a g).hom ≫ f) ∧ ∃ c : WidePullbackCone (fun g : H ↦ π ≫ (a g).hom), Nonempty (IsLimit c) ∧ ∃ U : X.Opens, (U : Set X) = ⋂ g : H, (a g).hom '' (U₀ : Set X) ∧ Dense (U : Set X) ∧ (∀ h : H, (a h).hom '' (U : Set X) = (U : Set X)) ∧ ∃ (A : H →* Aut c.pt) (aU : H →* Aut U.toScheme), (∀ h : H, (aU h).hom ≫ U.ι = U.ι ≫ (a h).hom) ∧ (∀ h g : H, (A h).hom ≫ c.π g = c.π (h⁻¹ * g)) ∧ (∀ (h : H) (t : c.pt ⟶ c.pt), (∀ g : H, t ≫ c.π g = c.π (h⁻¹ * g)) → t = (A h).hom) ∧ (∀ h : H, (A h).hom ≫ c.base = c.base ≫ (a h).hom) ∧ (∀ h : H, (A h).hom ≫ c.base ≫ f = (c.base ≫ f) ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) ∧ ∃ (e : pullback c.base U.ι ≅ U.toScheme) (j : U.toScheme ⟶ c.pt), e.hom = pullback.snd c.base U.ι ∧ e.inv ≫ pullback.fst c.base U.ι = j ∧ IsOpenImmersion j ∧ j ≫ c.base = U.ι ∧ ∀ h : H, j ≫ (A h).hom = (aU h).hom ≫ j",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd4b7c719",
+  "group": "NC",
+  "result": "fix",
+  "note": "The Lean is exact and unchanged. Clauses checked: Aut_mul_def left action; b_h=Spec.map(rho h⁻¹) composition law; ha = f a_h=b_h f; IsIso(π∣_U₀); closed immersion into ℙ(ULift(Fin(n+1));Spec k), so n=0 covered; ∀g closed immersion of p_g; WidePullbackCone+IsLimit (iso-invariant clauses); U = ⋂a_g U₀, dense, invariant; A : H →* Aut with ρ_gA_h=ρ_{h⁻¹g}, unique among all endomorphisms; r-equivariance and semilinearity; e.hom = pullback.snd; j = e.inv≫fst, open immersion, rj=u; j A_h = aU_h j re-derived. Edge cases: trivial H, empty X/Y, n=0, non-faithful actions, any characteristic, independent universe v. No duplicate in Sheaf/WeilConjectures. Dependency records byte-identical to live; statement verbatim; proof sorry only; docstrings OK. Only fault: H11, the Second reading by NC was the author's own recheck → fixes/lem-sfb-semilinear-translated-modification-product.report.md (worker report verbatim + independent clause-by-clause reading). Advisory: ProjectiveSpace is owned by proof_dep def-nagata-projective-space-base-change and reached via the def-kun-projective statement (precedent: Q14). No compile, since no Lean was changed."
+ }
+}

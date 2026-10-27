@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-fixed-coefficient-local-relations-flat",
+ "kind": "lemma",
+ "title": "The local relation criterion for flat fixed-coefficient sheaves",
+ "statement": "Let C have objects in universe u+1 and morphisms in universe u and be essentially small in universe u+1. Let J be a Grothendieck topology on C and Λ a Noetherian commutative ring in universe u+1. Assume that forgetting Λ-module structure preserves sheaves and that sheafification equivalences of Λ-module presheaves are precisely the locally bijective maps. For a sheaf F of Λ-modules, categorical flatness (exactness of tensoring on either side) is equivalent to the following condition. For every V in C, finite family y_j in F(V), and finite matrix a_lj over Λ with sum_j a_lj y_j = 0 for every l, there is a covering sieve S on V such that for each f:W to V in S there are finitely many z_k in F(W) and b_jk in Λ with a*b=0 and y_j restricted along f = sum_k b_jk z_k. Empty families and the zero ring are included.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section Flat modules, lemma-flat-eq, Tag 08FC, especially (3) implies (1); fixed Noetherian constant coefficients."
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing proved source theorem CategoryTheory.Sheaf.flat_iff_hasLocallyTrivialRelations. For the reverse implication write a tensor killed by a monomorphism as a finite sum of pure tensors and express its vanishing through finitely many linear relations. The local relation factorization makes the tensor locally zero. Thus tensoring preserves monomorphisms; it already preserves finite colimits, and is therefore exact in the abelian sheaf category. For the forward implication choose finite generators of the kernel of the finite coefficient matrix, possible over a Noetherian ring. Tensor the resulting exact sequence of constant finite free sheaves with F. A section encoding the original relation lifts locally through the kernel generators, giving the factorization matrix and sections. Sheafification and the sheafification counit identify these with the required local statements.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08FC; existing complete source proof in WeilConjectures.CategoryTheory.Sites.FlatLocalRelations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally free sheaf of modules over the constant sheaf of rings is flat",
+   "results": "Module.Flat.of_free; SheafOfModules.isQuasicoherent; SheafOfModules.free; SheafOfModules.isFinitePresentation; SheafOfModules.freeFunctor; SheafOfModules.IsFinitePresentation; SheafOfModules.IsQuasicoherent; SheafOfModules.freeFunctor_obj",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib criterion; the existing proved source theorem Sheaf.flat_iff_hasLocallyTrivialRelations is used."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsLocallyFree",
+   "results": "SheafOfModules.IsLocallyFree; SheafOfModules.LocalGeneratorsData.isLocallyFree; SheafOfModules.IsLocallyFree.exists_isLocallyFreeData; SheafOfModules.IsLocallyFree.mk; SheafOfModules.instIsQuasicoherentOfIsLocallyFree; SheafOfModules.instIsLocallyFreeFree",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib criterion; the existing proved source theorem Sheaf.flat_iff_hasLocallyTrivialRelations is used."
+  },
+  {
+   "tool": "grep",
+   "query": "CoversTop|HasLocallyTrivialRelations",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib criterion; the existing proved source theorem Sheaf.flat_iff_hasLocallyTrivialRelations is used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules is flat if and only if its finite linear relations are locally trivial",
+   "results": "Module.Flat.iff_forall_isTrivialRelation; Module.Flat.of_forall_isTrivialRelation; Module.Flat.tfae_equational_criterion; Module.Flat.of_forall_exists_factorization; Module.Flat.isTrivialRelation_of_sum_smul_eq_zero; Module.flat_of_isLocalized_span; Module.Flat.iff_lTensor_preserves_injective_linearMap; Module.Flat.iff_forall_exists_factorization.",
+   "date": "2026-10-22",
+   "verdict": "These concern ordinary modules over a ring. The existing project theorem supplies the sheaf criterion, with locally trivial relations and categorical sheaf flatness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeEtaleFlat",
+  "date": "2026-10-22",
+  "group": "P9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-locally-free-etale-flat",
+   "place": "Final flatness step of the direct local-relations proof."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.Sites.FlatLocalRelations",
+  "declaration": "CategoryTheory.Sheaf.flat_iff_hasLocallyTrivialRelations",
+  "statement": "theorem Sheaf.flat_iff_hasLocallyTrivialRelations (F : Sheaf J (ModuleCat.{u + 1} R)) :\n    ObjectProperty.flat F ↔ Presheaf.HasLocallyTrivialRelations J F.obj",
+  "branch": "sheaf-dag",
+  "by": "P9",
+  "date": "2026-10-22",
+  "note": "Existing complete proof. This node records it; no new Lean declaration or source modification."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261023T103155-L-3067767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261023T103155-L-3067767",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

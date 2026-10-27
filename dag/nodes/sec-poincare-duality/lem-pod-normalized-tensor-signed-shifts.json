@@ -1,0 +1,111 @@
+{
+ "id": "lem-pod-normalized-tensor-signed-shifts",
+ "kind": "statement",
+ "title": "Signed completed tensor shifts for arbitrary normalized reindexing data",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, and $g:X\\xrightarrow\\sim Y$ an isomorphism of schemes on which $\\ell$ is invertible. Let $A,T$ be any completion and completed-tensor reindexing data satisfying all laws of [def-pod-completion-reindex-models] and [def-pod-completion-tensor-normalization], for the actual quotient-tower completed tensor. There exist signed tensor-shift data $S_Y,S_X$ whose strict homogeneous generators have first-factor sign 1 and second-factor sign $(-1)^{pr}$, and whose derived maps are the localizations of these shifts through the specified signed Roos models. They satisfy every clause of PodReindexSignedShifts of [def-pod-completion-reindex-shifts]: the reduction and limit natural transformations commute with canonical shifts; the limit shifts have the specified Roos models; and both tensor-factor shift squares commute with the same comparison T. All integers r, all good representatives and all derived presentation isomorphisms are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, signed tensor transport through the same coefficient and Roos operations; Stacks 011G, 07A4, 0941."
+ },
+ "stmt_deps": [
+  "lem-pod-reindexing-completion-unit-tensor",
+  "def-pod-completion-reindex-shifts",
+  "def-pod-completion-tensor-normalization",
+  "def-pod-completion-reindex-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply podReindexingTensorSignedShifts to the given A, hA, T and hT. Its completion and tensor data are arbitrary and its conclusion is exactly the required existence of SY and SX with all PodReindexSignedShifts laws. No specialization to the existential family of the completion-unit-tensor theorem is needed.",
+   "uses": [
+    "lem-pod-reindexing-tensor-signed-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Step 5, signed tensor transport through the same coefficient and Roos operations; Stacks 011G, 07A4, 0941."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-tensor-signed-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/PodReindexingTensorSignedShifts.lean",
+  "place": "podReindexingTensorSignedShifts, specialized to the supplied A, hA, T, hT; D3, 2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived completed tensor signed shifts commute with normalized inverse image and the Roos cone",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, HomologicalComplex.leftUnitor'_inv_comm, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.ι_mapBifunctorShift₂Iso_hom_f, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁",
+   "date": "2026-10-25",
+   "verdict": "No match: abstract shift compatibility and bifunctor shift maps do not give both normalized Roos coordinates for arbitrary completed tensor data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "12 hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+   "date": "2026-10-25",
+   "verdict": "No match: abstract shift compatibility and bifunctor shift maps do not give both normalized Roos coordinates for arbitrary completed tensor data."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*[Ss]hift|[Ss]hift.*Roos",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match: abstract shift compatibility and bifunctor shift maps do not give both normalized Roos coordinates for arbitrary completed tensor data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletedEvaluationReflection",
+  "group": "Y6",
+  "date": "2026-10-25"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Step 5: signed tensor transport",
+   "via": [
+    "lem-pod-reindexing-completed-evaluation-reflection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodNormalizedTensorSignedShifts",
+  "file": "lean/Sheaf/Paper/PodNormalizedTensorSignedShifts.lean",
+  "declaration": "WeilConjectures.podNormalized_tensor_signed_shifts",
+  "statement": "theorem podNormalized_tensor_signed_shifts\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (A : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g A)\n    (hA : PodCompletionReindex.Laws l E g A)\n    (hT : PodCompletedTensorReindex.Laws l E g A T) :\n    ∃ (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X),\n      PodReindexSignedShifts l E g A T SY SX",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261025T144406-L-1236871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T162133-L-313252",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

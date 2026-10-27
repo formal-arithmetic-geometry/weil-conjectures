@@ -1,0 +1,441 @@
+{
+ "id": "lem-sfb-space-affine-formal-functions",
+ "kind": "statement",
+ "title": "Formal functions over a Noetherian affine base for algebraic spaces",
+ "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], let $I\\subseteq A$ be an ideal, and let $f:X\\to\\operatorname{Spec}A$ be a proper morphism of algebraic spaces [def-pc-scheme, def-trf-algebraic-space, def-weil-affine-spectrum, lem-sfb-space-flat-proper-fp-locality]. Let $F$ be a coherent module on $X$. Coherent means quasi-coherent [def-trf-space-quasi-coherent-module] and, on an affine etale cover by spectra of Noetherian rings, associated to finitely generated modules [def-weil-pbc-noetherian-ring, def-weil-finitely-generated-module]. All module sheaves, tensor pullbacks and direct images are on the small etale ringed sites [def-trf-space-etale-module-functors]; $R^qf_*$ and $H^q$ are computed by injective resolutions in all structure-sheaf module sheaves [def-sp-injective-resolutions]. For $n\\geq1$ put $X_n=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I^n)$, with projection $j_n:X_n\\to X$, and put $F_n=j_n^*F$ [lem-trf-space-fibre-products-etale-covers]. For every $q\\geq0$, the canonical restriction maps $H^q(X,F)\\to H^q(X_n,F_n)$ vanish on $I^nH^q(X,F)$ and induce a compatible system\n$$\\theta_n:H^q(X,F)/I^nH^q(X,F)\\longrightarrow H^q(X_n,F_n).$$\nTheir inverse limit is an isomorphism of $\\widehat A$-modules\n$$\\varprojlim_n\\theta_n:\\widehat{H^q(X,F)}\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}H^q(X_n,F_n),\\qquad \\widehat A=\\varprojlim_{n\\geq1}A/I^n,$$\nwhere $\\widehat{H^q(X,F)}=\\varprojlim_{n\\geq1}H^q(X,F)/I^nH^q(X,F)$ is the $I$-adic completion of the $A$-module $H^q(X,F)$, with the transition maps induced by $I^{n+1}H^q(X,F)\\subseteq I^nH^q(X,F)$ and $\\widehat A$ acting coordinatewise, and $\\widehat A$ is the $I$-adic completion of [def-weil-pbc-adic-completion]. Transitions on the right are restriction along $X_n\\hookrightarrow X_{n+1}$ and the canonical tensor identification $F_{n+1}|_{X_n}\\simeq F_n$; scalar multiplication by $(a_n)_n\\in\\widehat A$ acts coordinatewise by $a_n$. The comparison is natural in $F$. No completeness or locality assumption on $A$, and no flatness assumption on $F$ or $f$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AZ (theorem-formal-functions), in situation-formal-functions; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, identifies quotient-sheaf cohomology with the infinitesimal-subspace formulation used here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-trf-space-etale-module-functors",
+  "def-sp-injective-resolutions",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-affine-spectrum",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "def-weil-pbc-adic-completion",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-affine-sections-compositors",
+  "def-sfb-space-module-structure-map",
+  "def-trf-space-module-scheme-restriction",
+  "lem-sfb-space-flat-direct-image-base-change",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Every affine etale chart of $X$ is locally of finite type over $\\operatorname{Spec}A$, by the chart definition of finite type for the proper map. Since the base is locally Noetherian, pqf-lem-locnoeth-lft makes these charts locally Noetherian. Thus $X$ is locally Noetherian. The cover form of coherence in the statement gives the every-chart form used by the cited nodes: for an affine etale chart $\\operatorname{Spec}R\\to X$, with $F$ given there by an $R$-module $N$, cover $\\operatorname{Spec}R\\times_X U_i$ by finitely many affines $\\operatorname{Spec}C_k$ etale over the cover's Noetherian spectra $U_i=\\operatorname{Spec}B_i$; there $C_k\\otimes_RN\\cong C_k\\otimes_{B_i}P_i$ is finitely generated, so $N$ is finitely generated over $R$ by lem-weil-pbc-faithfully-flat-descent-finite-module applied to the faithfully flat $R\\to\\prod_kC_k$, and hence coherent on the Noetherian $\\operatorname{Spec}R$. Set $J=I\\mathcal O_X$, $G_n=J^nF$ and $Q_n=F/G_n$. Choose finitely many generators of $I^n$, possible since $A$ is Noetherian. The corresponding map $F^{\\oplus t}\\to F$ has image $G_n$, because products in $J$ expand into products of elements of $I$. By lem-sfb-space-coherent-abelian, its kernel and then its image (the cokernel of the kernel inclusion) are coherent, as is $Q_n$. The same argument covers $n=0$ with $G_0=F$. Also $I^nQ_n=0$, directly from the quotient.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-pbc-noetherian-ring",
+    "lem-sfb-space-coherent-abelian",
+    "lem-weil-pbc-faithfully-flat-descent-finite-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "Use lem-trf-space-enlarged-etale-ringed-site-model to replace each space's small ringed etale site by the equivalent enlarged site with the space itself terminal. An equivalence transports the lifting property for injectives, exact sequences, and global sections. The nonnegative module injective resolutions of lem-sfb-module-resolution-derived-presheaf-comparison exist there. At the terminal object, lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison identifies their cohomology naturally with additive sheaf cohomology, identically in degree zero. Applying naturality to each scalar endomorphism gives the same $A$-action. We can therefore use both the additive cohomology assertions below and the specified module-resolution convention. Derived global sections, with the $A$-action from $f$, is an additive left exact functor into $A$-modules; lem-weil-pbc-right-derived-universal-delta-functor supplies its $A$-linear long exact sequences, natural in short exact sequences.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-module-resolution-derived-presheaf-comparison",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "The base change $j_n$ is a representable closed immersion: on an affine scheme chart $\\operatorname{Spec}B\\to X$ it is $\\operatorname{Spec}(B/I^nB)\\to\\operatorname{Spec}B$. In particular it is affine. On that chart, if $F$ corresponds to $P$, its tensor pullback corresponds to $(B/I^nB)\\otimes_BP=P/I^nP$, by $\\bar b\\otimes p\\mapsto bp$ modulo $I^nP$, inverse $\\bar p\\mapsto1\\otimes p$. The scheme Zariski/etale quasi-coherent equivalence identifies these tensor and direct-image calculations with those on the etale charts. They glue, since these formulas preserve restriction and the quotient projection. Thus $j_{n,*}F_n=Q_n$, naturally in $F$. Apply lem-sfb-space-affine-cohomology to $j_n,F_n$ (which is quasi-coherent by the same chart calculation), and step 2 to obtain the canonical $A$-linear edge isomorphism $e_n:H^q(X,Q_n)\\simeq H^q(X_n,F_n)$. It takes the quotient-induced cohomology map to the canonical restriction map. For $r\\geq n$, the chart formula $P/I^rP\\to P/I^nP$ is exactly the unit for $X_n\\hookrightarrow X_r$ after tensor pullback. Consequently the canonical edge comparisons identify the transition with the quotient-induced map. For precision, the edge is the coefficient-map cohomology map of lem-sfb-ringed-site-cohomology-fmap-calculus: lem-sfb-space-affine-module-higher-image-vanishing makes $j_{n,*}$ of an injective resolution of $F_n$ a resolution of $Q_n$, and the calculus node normalizes that edge. Its composition and coefficient-naturality laws applied to the displayed chart identities prove transition compatibility and scalar compatibility. Enough injectives and terminal site models were supplied in step 2.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-space-affine-cohomology",
+    "lem-sfb-space-affine-module-higher-image-vanishing",
+    "lem-sfb-ringed-site-cohomology-fmap-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "Write $M=H^q(X,F)$, $D_n=H^q(X,Q_n)$, $\\rho_n:M\\to D_n$, and $\\tau_{r,n}:D_r\\to D_n$ for the quotient-induced maps, with $\\tau_{r,n}\\rho_r=\\rho_n$. These maps are $A$-linear by functoriality with respect to scalar endomorphisms. Since multiplication by every $a\\in I^n$ on $Q_n$ is zero, its induced endomorphism on $D_n$ is zero. Thus $I^nD_n=0$, and $\\rho_n$ kills $I^nM$. It factors uniquely as $M\\to M/I^nM\\xrightarrow{\\bar\\theta_n}D_n$. The quotient composition identity gives compatibility of the $\\bar\\theta_n$ with transitions. Under $e_n$ these are precisely the $\\theta_n$ in the statement.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "For each $n\\geq1$, apply the long exact sequence of step 2 to $0\\to G_n\\to F\\to Q_n\\to0$. If $K_n=\\ker\\rho_n$ and $L_n=H^{q+1}(X,G_n)$, exactness gives $K_n=\\operatorname{Im}(H^q(X,G_n)\\to M)$ and $\\ker\\delta_n=\\operatorname{Im}\\rho_n$, where $\\delta_n:D_n\\to L_n$ is the boundary. The inclusions $G_r\\subseteq G_n$, identity on $F$, and quotient $Q_r\\to Q_n$ form a morphism of these short exact sequences. Naturality gives $\\delta_n\\tau_{r,n}=a_{r,n}\\delta_r$, where $a_{r,n}:L_r\\to L_n$ is induced by inclusion. This includes $q=0$, where the long exact sequence starts with zero.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "Each $L_n$ is a finite $A$-module. Indeed, step 1 makes $G_n$ coherent, and lem-sfb-space-proper-coherent-higher-images makes $R^{q+1}f_*G_n$ coherent on $\\operatorname{Spec}A$. The proper map is quasi-compact and quasi-separated: its relative diagonal is a closed immersion, hence affine and quasi-compact on scheme tests. Apply lem-sfb-space-affine-base-higher-image-sections to identify $L_n$ with the sections of this coherent higher image. The affine-chart characterization in the higher-image node says those sections are $A\\otimes_AN\\cong N$ for a finitely generated $A$-module $N$. The conventions agree by step 2.",
+   "uses": [
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-space-affine-base-higher-image-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "Apply lem-sfb-space-ideal-power-cohomology-image-bound first in degree $q$, obtaining $c\\geq0$. Its $n=0,m=s$ case gives $\\operatorname{Im}(H^q(X,G_s)\\to M)\\subseteq I^{s-c}M$ for $s\\geq c$. Together with steps 4 and 5 this gives $I^sM\\subseteq K_s\\subseteq I^{s-c}M$ whenever $s\\geq\\max(1,c)$. In particular $K_{n+c}\\subseteq I^nM$ for every $n\\geq1$. No comparison between $H^q(X,G_s)$ and $I^sM$ has been assumed: only its image in $M$ is bounded.",
+   "uses": [
+    "lem-sfb-space-ideal-power-cohomology-image-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "Apply the same bound in degree $q+1$, obtaining $b\\geq0$ such that $\\operatorname{Im}(a_{n+m,n})\\subseteq I^{m-b}L_n$ for every $n\\geq0,m\\geq b$. Fix $n\\geq1$ and put $B_n=\\operatorname{Im}\\delta_n\\subseteq L_n$. Artin-Rees applies to $B_n$ inside the finite module $L_n$ from step 6, with the given Noetherian ring $A$ and ideal $I$. It supplies $d_n\\geq0$ with $I^tL_n\\cap B_n\\subseteq I^{t-d_n}B_n$ for $t\\geq d_n$. Since $\\delta_n$ is $A$-linear, $I^uB_n=\\delta_n(I^uD_n)$ (expand both sides into finite sums of scalar multiples); by step 4 this is zero for $u\\geq n$. Thus $I^tL_n\\cap B_n=0$ for $t\\geq d_n+n$.",
+   "uses": [
+    "lem-sfb-space-ideal-power-cohomology-image-bound",
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "For $r\\geq 2n+b+d_n$, put $m=r-n$. Then $m\\geq b$ and $m-b\\geq d_n+n$. The boundary identity of step 5 and step 8 show $\\delta_n\\tau_{r,n}(D_r)\\subseteq B_n\\cap I^{m-b}L_n=0$. Exactness gives $\\operatorname{Im}\\tau_{r,n}\\subseteq\\operatorname{Im}\\rho_n$. The reverse inclusion holds for every $r\\geq n$ because $\\tau_{r,n}\\rho_r=\\rho_n$. We have therefore proved eventual equality of these images for each $n$, with a bound allowed to depend on $n$. No uniform Artin-Rees constant in $n$ has been claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "Let $x=(x_n)\\in\\varprojlim D_n$. For fixed $n$, take $r\\geq2n+b+d_n$. Compatibility and step 9 imply $x_n=\\tau_{r,n}(x_r)\\in\\operatorname{Im}\\rho_n$. For each $n\\geq1$, choose a lift $u\\in M$ of $x_{n+c}$ and define $y_n=u\\bmod I^nM$. This is independent of the lift since $K_{n+c}\\subseteq I^nM$ by step 7. If $r\\geq n$ and $v$ lifts $x_{r+c}$, then $v$ also lifts $x_{n+c}$ after applying the transition, so $v-u\\in K_{n+c}\\subseteq I^nM$. Therefore the $y_n$ are compatible and define $\\Psi(x)\\in\\widehat M$. The independence just proved also shows that this construction is additive and $A$-linear, by choosing sums and scalar multiples as lifts.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "Let $\\Theta:\\widehat M\\to\\varprojlim D_n$ have components $\\bar\\theta_n$. If $x\\in\\varprojlim D_n$ and $u$ lifts $x_{n+c}$, its class $y_n$ from step 10 maps to $\\rho_n(u)=\\tau_{n+c,n}(x_{n+c})=x_n$, proving $\\Theta\\Psi(x)=x$. Conversely, for $z=(z_n)\\in\\widehat M$, choose $u\\in M$ representing $z_{n+c}\\in M/I^{n+c}M$. It lifts the $(n+c)$-component of $\\Theta(z)$, and its class modulo $I^nM$ is $z_n$ by compatibility. Step 10 then gives $\\Psi\\Theta(z)=z$. Thus $\\Theta$ is the canonical isomorphism of limits; the displayed formulas supply both inverse identities rather than merely an abstract bijection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  },
+  {
+   "text": "The limit map is $\\widehat A$-linear: at level $n$, both $M/I^nM$ and $D_n$ are killed by $I^n$, and $\\bar\\theta_n$ is $A/I^n$-linear. Hence for $\\alpha=(\\alpha_n)\\in\\widehat A$ and $z\\in\\widehat M$, its $n$th component satisfies $\\bar\\theta_n(\\alpha_nz_n)=\\alpha_n\\bar\\theta_n(z_n)$. The same holds after $e_n$, by its scalar compatibility in step 3. For a module map $F\\to F'$, functoriality takes $G_n\\to G'_n$, induces $Q_n\\to Q'_n$, and commutes with each quotient projection. Applying cohomology proves commutation with $\\rho_n$, and their quotient factorizations commute by uniqueness. The natural edges $e_n$ then give naturality of the final comparison. Its inverse is natural because it is the inverse of this natural isomorphism; the choices in step 10 do not affect it. This proves all clauses for the prescribed infinitesimal tower without completeness, locality, or flatness assumptions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-flat-proper-fp-locality",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-space-coherent-abelian",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-module-resolution-derived-presheaf-comparison",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-affine-cohomology",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "lem-sfb-ringed-site-cohomology-fmap-calculus",
+  "lem-sfb-space-proper-coherent-higher-images",
+  "lem-sfb-space-affine-base-higher-image-sections",
+  "lem-sfb-space-ideal-power-cohomology-image-bound",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-faithfully-flat-descent-finite-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tags 08AY (lemma-ML-cohomology-powers-ideal), proof, and 08AZ (theorem-formal-functions), proof; Tag 08B1 (lemma-formal-functions-stalk), final paragraph, for the quotient/thickening dictionary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The theorem on formal functions for a proper algebraic space over a Noetherian ring identifies completed coherent cohomology with the inverse limit of cohomology modulo ideal powers",
+   "results": "OK: 8 hits; AdicCompletion.pi_apply_coe, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AdicCompletion.of_apply, AdicCompletion.eval_of, BDeRhamPlus, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm; ",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion and its component maps describe algebraic completion only; scheme-limit sections and local cohomology do not prove the proper algebraic-space theorem on formal functions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"cohomology\"",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion and its component maps describe algebraic completion only; scheme-limit sections and local cohomology do not prove the proper algebraic-space theorem on formal functions"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.functions|formalFunctions|AlgebraicSpace",
+   "results": "OK: 3 hits; Mathlib/Algebra/MonoidAlgebra/PointwiseSMul.lean, Mathlib/Algebra/MonoidAlgebra/PointwiseSMul.lean, Mathlib/Analysis/Complex/Conformal.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion and its component maps describe algebraic completion only; scheme-limit sections and local cohomology do not prove the proper algebraic-space theorem on formal functions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For proper algebraic spaces coherent cohomology completed at an ideal equals the limit of the cohomology of quotient sheaves",
+   "results": "OK: 8 hits; AdicCompletion, AdicCompletion.instCommRing, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.subring, AdicCompletion.subalgebra, AdicCompletion.submodule, AdicCompletion.mkₐ_apply_coe, AdicCompletion.of_apply; ",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion and its component maps describe algebraic completion only; scheme-limit sections and local cohomology do not prove the proper algebraic-space theorem on formal functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adic completion of coherent cohomology on a proper algebraic space is canonically the projective limit of infinitesimal coherent cohomology",
+   "results": "OK: 8 hits; BDeRhamPlus, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AdicCompletion.pi_apply_coe, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AdicCompletion.piEquivFin_apply, AdicCompletion, localCohomology.diagram, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; ",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion and its component maps describe algebraic completion only; scheme-limit sections and local cohomology do not prove the proper algebraic-space theorem on formal functions"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.functions|formalFunctions|AlgebraicSpace",
+   "results": "Read returned hits: Mathlib/Algebra/MonoidAlgebra/PointwiseSMul.lean, Mathlib/Algebra/MonoidAlgebra/PointwiseSMul.lean, Mathlib/Analysis/Complex/Conformal.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  },
+  {
+   "tool": "grep",
+   "query": "ML.*cohomology|Mittag.*cohomology|cohomology.*ideal|ideal.*cohomology",
+   "results": "Read returned hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Theorem on formal functions: I-adic completion of coherent cohomology for proper algebraic spaces",
+   "results": "Read returned hits: AdicCompletion.instCommRing, AdicCompletion.instAlgebra, AdicCompletion.induction_on, AdicCompletion.liftRingHom.congr_simp, AdicCompletion.liftAlgHom, AdicCompletion.mkₐ, AdicCompletion.map_exact, AdicCompletion.liftAlgHom.congr_simp. ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MittagLeffler\", \"cohomology\"",
+   "results": "Read returned hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"cohomology\"",
+   "results": "Read returned hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological Artin Rees theorem: kernels of reduction maps are bounded by ideal powers and images from deeper quotients eventually equal images from coherent cohomology",
+   "results": "Read returned hits: Ideal.exists_pow_inf_eq_pow_smul, isArtinian_of_range_eq_ker, LinearMap.eventually_iSup_ker_pow_eq, IsArtinian.range_smul_pow_stabilizes, localCohomology, localCohomology.ideal_powers_initial, monotone_stabilizes_iff_artinian, IsArtinian.disjoint_partial_infs_eventually_top. ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of coherent quotient sheaves F modulo I powers on a proper algebraic space has kernels bounded by I powers and eventually stable images equal to global cohomology images",
+   "results": "Read returned hits: localCohomology.diagram, localCohomology, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, localCohomology.hasColimitDiagram, localCohomology.isoSelfLERadical, localCohomology.ringModIdeals, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit. ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal functions for a proper algebraic space over a Noetherian ring: completed coherent cohomology equals the inverse limit on infinitesimal thickenings",
+   "results": "Read returned hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, BDeRhamPlus, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType. ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adic completion of higher coherent cohomology on a proper algebraic space is isomorphic to the projective limit of cohomology modulo powers of an ideal",
+   "results": "Read returned hits: AdicCompletion.pi_apply_coe, AdicCompletion.piEquivFin_apply, localCohomology.isoSelfLERadical, AdicCompletion.piEquivOfFintype_apply, AdicCompletion.piEquivOfFintype, BDeRhamPlus, AdicCompletion.piEquivFin, AdicCompletion.of_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventual image stabilization and an adic kernel estimate for reduction maps in coherent cohomology of proper algebraic spaces",
+   "results": "Read returned hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top. ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion infrastructure, affine scheme limits and algebraic local cohomology do not state coherent formal functions for proper algebraic spaces, nor its geometric image estimates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-formal-functions-geometric-stalk",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Coherent higher-image fibre-dimension bound for proper algebraic spaces. Supporting input in the proof of Tag 0A4T: the completed geometric stalk is computed by infinitesimal-fibre cohomology (Tag 08B1). Supporting input: Tag 08B1 invokes Tag 08AZ after strict-local reduction; global affine theorem on formal functions, for any ideal.",
+   "via": [
+    "lem-sfb-space-formal-functions-geometric-stalk",
+    "lem-sfb-noetherian-space-fibre-cohomology-bound",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-affine-formal-functions",
+  "worker": "stage1",
+  "group": "Q14",
+  "summary": "Proved the affine algebraic-space formal-functions theorem from existing DAG inputs: ideal-power image estimates, coherent finiteness, natural long exact sequences and Artin-Rees. Wrote the eventual-image argument and both inverse identities explicitly. Identified quotient cohomology with the infinitesimal tower on affine etale charts and by the canonical affine cohomology edge. No new nodes or statement changes.",
+  "blueprint": "The inherited from.place follows the direct-image/alteration branch to Tag 08B1 and then 08AZ. This split supplies precisely that supporting affine theorem, using 08AY and 08AX. Read the latest sk-thm-sf-ctf-stability unit and its direct-images proof; the enclosing route is unchanged. The ancestry tool returns from.node = null, which is retained.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme-chart Noetherianity theorem used as a black box; this unit has no distinct version of this input, and no step of its proof route is replaced."
+   },
+   {
+    "node": "def-weil-pbc-noetherian-ring",
+    "why": "Generic notion or module-sheaf infrastructure used as a black box; this unit has no distinct version of this input, and no step of its proof route is replaced."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic ringed site model equivalence used as a black box; this unit has no distinct version of this input, and no step of its proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic module/additive cohomology comparison used as a black box; this unit has no distinct version of this input, and no step of its proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic derived-functor exactness and naturality theorem used as a black box; this unit has no distinct version of this input, and no step of its proof route is replaced."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme-chart tensor and direct-image comparison used as a black box; this unit has no distinct version of this input, and no step of its proof route is replaced."
+   },
+   {
+    "node": "def-trf-space-etale-module-functors",
+    "why": "Generic notion or module-sheaf infrastructure used as a black box; this unit has no distinct version of this input, and no step of its proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-artin-rees",
+    "why": "Generic module Artin-Rees theorem used as a black box; this unit has no distinct version of this input, and no step of its proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "def-weil-pbc-noetherian-ring",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-artin-rees"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-54538260f",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-54538260f (reviewer sub-agent of L); spot-checked: I read the item and all 12 steps in full. The delivery has zero new nodes and the statement is unchanged from base and live. Steps 5-11 follow Stacks spaces-cohomology 08AY one-for-one: the kernel is the image of H^q(J^nF), the 08AX bound in degrees q and q+1, Artin-Rees on Im(delta) inside the finite L_n, and I^n D_n=0, giving the bound r>=2n+b+d_n. Steps 10-11 write out the 08AZ limit argument with both inverse identities, all checked. Step 3 gets j_*F_n=Q_n from the chart formula P/I^nP; the edge comes from affine-cohomology, the higher-image vanishing node and the fmap-calculus normalization. Step 6 gets finiteness of L_n from the proper-coherent node and the affine-base sections node. One fault, repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-affine-formal-functions.json: the statement defines coherence on 'an affine etale cover', but the cited coherent-abelian, proper-coherent and image-bound nodes need it on every etale chart, and step 1 did not bridge the two. I added the descent sentence via the existing Mathlib leaf lem-weil-pbc-faithfully-flat-descent-finite-module and put it in uses and proof_deps. I found no space-level duplicate; the 08AY/08AZ hits are all scheme-only pbc nodes. All batch-5 flagged citations are generic coherent-cohomology or site infrastructure for algebraic spaces (via def-trf-algebraic-space, the enlarged-site model and the Zariski/etale QC equivalence), not steps of the trace-formula or Poincare-duality proofs, so all are accepted. tool_uses are accepted. No SGA is cited, there is no repair note, and the item is not superseded.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineFormalFunctions",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affineFormalFunctions",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalBase",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalBaseOverMap",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalBaseMap",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalBaseTransition",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalSpace",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalι",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalModule",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalH",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalHn",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalTransition",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalTensorTransition",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalCoefficient",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalSmallCoefficient",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalPushSection",
+   "AlgebraicGeometry.AlgebraicSpace.AffineFormalRestrictionNormalized",
+   "AlgebraicGeometry.AlgebraicSpace.affineFormalLimit",
+   "AlgebraicGeometry.AlgebraicSpace.AffineFormalFunctions",
+   "AlgebraicGeometry.AlgebraicSpace.exists_affineFormalFunctions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineFormalFunctions.lean",
+  "statement": "theorem exists_affineFormalFunctions [IsNoetherianRing A] (I : Ideal A) (hf : MapIsProper f) (q : ℕ) : ∃ d : ∀ (F : X.Modules), F.IsQuasicoherent → (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) → AffineFormalFunctions A Y a f I q F, ∀ (F G : X.Modules) (hF : F.IsQuasicoherent) (hFc : ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) (hG : G.IsQuasicoherent) (hGc : ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj G)) (g : F ⟶ G) (x : AdicCompletion I ((affineFormalH A Y a f q).obj F)) (n : ℕ), ((d G hG hGc).comparison (AdicCompletion.map I ((affineFormalH A Y a f q).map g).hom x)).val n = ((affineFormalHn A Y a f I q n).map g).hom (((d F hF hFc).comparison x).val n)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The owning module supplies real infinitesimal fibre products, quotient transitions and tensor coefficient arrows. Restriction maps are fixed by injective-resolution roofs with the chart-normalized structure map, and the theorem asserts compatible quotient maps, the isomorphism over AdicCompletion I A with its coordinate action, and naturality. All cohomology is right derived in all module sheaves on the existing equivalent small ringed model. The chartwise coherence condition is equivalent to the node's affine-cover condition over the proper Noetherian base, as explained in the proof and report. No completeness, locality or flatness hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e2b7a795",
+  "group": "NX",
+  "result": "pass",
+  "note": "Read the item, all 19 stmt_dep records, the module, report.md and Stacks 08AZ/08B1. Mechanical finding: moduleTensorComposition is Classical.choose of moduleTensorComposition_existsUnique in the SpaceFlatDirectImageBaseChange module, so the dependency is genuine: PASS on that point. Every clause matches: Noetherian A, arbitrary I, MapIsProper f to schemeSpace Y with Y.left ≅ Spec A, quasi-coherent plus chartwise RingedSpace.IsCoherent (equivalent to the cover form by proof step 1, same idiom as landed space nodes), rightDerived Γ in all SmallModules, real fibre products X ×Spec(A/I^(n+1)) with tensor pullback, restriction and transitions pinned by a satisfiable roof predicate (affine j makes j_*Q exact and Γ-acyclic, so the IsIso clause holds and r is the canonical edge^{-1}∘H^q(b)), kills/theta/theta_transition, AdicCompletion I H ≃ₗ[AdicCompletion I A] the actual compatible-sequence submodule with coordinate action, and naturality in F. Edge cases q=0, I=0, I=A, zero ring and empty X are covered; one universe u. No hollow defs, the only sorry is the theorem proof, docstrings and the 12 proof steps are present, lines are at most 100 characters, and lean.statement is verbatim. Only lean and stmt_deps changed (8 existing owners added). No algebraic-space duplicate. schemeSpace and enlargedFibreProduct owners are reached transitively through lem-sfb-space-flat-proper-fp-locality. No file changed, so no compile."
+ }
+}

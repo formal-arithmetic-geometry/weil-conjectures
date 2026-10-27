@@ -1,0 +1,371 @@
+{
+ "id": "lem-sfb-smooth-self-product-component-rank",
+ "kind": "statement",
+ "title": "Diagonal component and strict generic component-count decrease in a smooth self-product",
+ "statement": "Let $S$ be a nonempty affine Noetherian integral scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme, def-pc-integral-scheme] which is normal, meaning every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $f:Y\\to S$ be smooth, separated and of finite type with $Y$ nonempty and integral [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Write $\\eta$ and $\\xi$ for the generic points of $S$ and $Y$, with residue fields $k(S)$ and $k(Y)$ [def-sc-generic-point, def-sc-function-field, def-weil-residue-field]. For a morphism $t:Z\\to T$ with $T$ nonempty integral and with finite-type generic fibre, define $\\rho_t(Z)$ to be the number of irreducible components of $Z\\times_T\\operatorname{Spec}\\overline{k(T)}$, where $\\overline{k(T)}$ is an algebraic closure [def-weil-irreducible-components, def-weil-algebraic-closure, def-pc-fibre-product]. Put $N=\\rho_f(Y)$ and $W=Y\\times_SY$, with first projection $\\pi:W\\to Y$ and diagonal $\\Delta:Y\\to W$. Then $N$ is a positive finite integer. The scheme $W$ is Noetherian and normal and has finitely many nonempty normal integral open-and-closed components $C_0,\\ldots,C_m$. Exactly one of them, denoted $C_0$, contains $\\Delta(Y)$. For every $i$, the morphism $\\pi_i=\\pi|_{C_i}:C_i\\to Y$ is smooth, separated, of finite type and dominant (has dense image), and\n$$\\rho_{\\pi_0}(C_0)=1,\\qquad \\sum_{i=0}^m\\rho_{\\pi_i}(C_i)=N,\\qquad 1\\leq\\rho_{\\pi_i}(C_i)<N\\quad (i>0).$$\nThe generic fibre $(C_0)_\\xi$ is geometrically integral [def-pc-geometrically-irreducible], and $\\Delta$ factors through $C_0$ as a section of $\\pi_0$. For every nonempty affine open $B\\subseteq Y$, the schemes $C_{i,B}=C_i\\times_Y B$ are nonempty normal integral open subschemes of $C_i$, their maps to $B$ are smooth separated of finite type, and their geometric generic component counts are the same as those of $\\pi_i$. The diagonal section restricts to $B\\to C_{0,B}$. No surjectivity of $Y\\to S$ or geometric integrality of its generic fibre is assumed.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Lemma 4.3(i)-(ii), with both factors Y and g=id_Y; positivity, sum and affine-open restrictions explicitly included; printed p.10 of March 31, 2026 version, read online. Local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-pc-integral-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-pc-geometrically-irreducible",
+  "def-weil-irreducible-components",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "The first projection $\\pi:W\\to Y$ is the base change of $f$, hence smooth by [lem-pc-proper-base-change] and separated of finite type by [lem-pod-separated-finite-type-base-change]. By [lem-weil-pbc-finite-type-over-noetherian], first $Y$ and then $W$ are Noetherian. By [lem-sfb-smooth-normal-ascent], first $Y$ and then $W$ are normal. Every open of $W$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so has finitely many irreducible components by [lem-weil-pbc-noetherian-finite-components]. Thus [lem-sfb-normal-locally-finite-components] applies to $W$. Its components are nonempty normal integral clopen subschemes, pairwise disjoint and covering $W$, and there are finitely many of them.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sfb-normal-locally-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles; descent.tex Tag 034F, lemma-normal-local-smooth; morphisms.tex Tags 01T6, 01VB; schemes.tex Tag 01KU"
+   }
+  },
+  {
+   "text": "Write the components as $C_i$. Since each inclusion $j_i:C_i\\hookrightarrow W$ is open, [lem-weil-pbc-smooth-restrict-open-subschemes] makes $\\pi_i=\\pi j_i$ smooth. It is also a closed immersion: its underlying image is closed, and its structure-sheaf map is an isomorphism on that image and a surjection to zero off it [def-weil-closed-immersion]. Hence $j_i$ is of finite type by [lem-weil-pbc-closed-immersion-proper], and $\\pi_i$ is of finite type by [lem-sfb-finite-type-composition-base-change]. The diagonal of $\\pi_i$ is the base change of the closed diagonal of $\\pi$ along $C_i\\times_Y C_i\\to W\\times_Y W$: a pair of points of $C_i$ equal in $W$ is the same point of $C_i$, with the same scheme-theoretic universal property [def-pc-fibre-product]. By [lem-weil-pbc-closed-immersion-base-change] it is closed, so $\\pi_i$ is separated.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01V6 (lemma-smooth-characterize), 01T3 (lemma-composition-finite-type), 01W5 (closed immersions proper); schemes.tex separated-diagonal base change"
+   }
+  },
+  {
+   "text": "Both $f$ and every $\\pi_i$ are flat and locally of finite presentation by [lem-pc-smooth-flat], hence open maps by [lem-weil-pbc-flat-lfp-open]. Each has nonempty source and integral target. Its image is therefore a nonempty open of an irreducible space, hence dense and containing the target generic point [def-pc-integral-scheme, def-sc-generic-point]. Thus $f$ is dominant, $\\xi$ maps to $\\eta$, and every $\\pi_i$ is dominant with nonempty generic fibre. To justify the middle assertion explicitly, continuity gives $f(Y)\\subseteq\\overline{\\{f(\\xi)\\}}$; since $f(Y)$ contains $\\eta$, its closure is $S$, so $f(\\xi)$ is the unique generic point $\\eta$. No surjectivity is needed.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-pc-integral-scheme",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VF, lemma-smooth-flat, and 01UA, lemma-fppf-open; elementary topology of an integral scheme"
+   }
+  },
+  {
+   "text": "Each $(C_i)_\\xi$ is irreducible. Indeed [def-pc-scheme-fibre] identifies its topology with the subspace $\\pi_i^{-1}(\\xi)$. Lift two nonempty opens of this subspace to opens $U,V$ of $C_i$. They are nonempty and intersect because $C_i$ is integral [def-pc-integral-scheme]. The nonempty open $U\\cap V$ has nonempty open image under the open map $\\pi_i$ from step 3; this image contains $\\xi$, so the two fibre opens intersect. Nonemptiness was proved in step 3. This proves the irreducibility assertion directly from the definitions.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K0 (definition-fibre), 01K1 (lemma-fibre-topological); elementary subspace topology and step 3"
+   }
+  },
+  {
+   "text": "The nonempty continuous image $\\Delta(Y)$ of the irreducible scheme $Y$ lies in exactly one member of the finite clopen partition from step 1: otherwise its intersections with a component and its clopen complement separate this irreducible image [def-pc-integral-scheme]. Relabel that member $C_0$. By [lem-weil-pbc-morphism-factors-through-open-subscheme], $\\Delta$ factors through $C_0$. The identities $\\pi\\Delta=\\mathrm{id}_Y$, and hence $\\pi_0\\Delta=\\mathrm{id}_Y$, follow from the two projection identities in [def-pc-fibre-product]. Base change gives a $k(Y)$-rational point $c$ of $(C_0)_\\xi\\subseteq W_\\xi$. Since $(C_0)_\\xi$ is irreducible by step 4 and clopen in $W_\\xi$ (the fibre has its subspace topology by [def-pc-scheme-fibre]), it is exactly the connected component of $c$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HI, lemma-restrict-map-to-opens; fibre-product projection identities and clopen partition topology"
+   }
+  },
+  {
+   "text": "The scheme $W_\\xi$ is smooth of finite type over $k(Y)$ by [lem-pc-proper-base-change] and [lem-pod-separated-finite-type-base-change]. For the point $c$ of step 5, the structure map and the rational point give field maps $k(Y)\\to\\kappa(c)\\to k(Y)$ whose composite is the identity; injectivity identifies $\\kappa(c)$ with $k(Y)$, a purely transcendental extension in zero variables. Apply [lem-trf-smooth-component-pure-transcendental] with $k=k(Y)$, $C=W_\\xi$, $c=c$. Its connected component is precisely $(C_0)_\\xi$ by step 5, so this generic fibre is geometrically integral. Consequently $\\rho_{\\pi_0}(C_0)=1$, by the definition of the count and [def-pc-integral-scheme, def-weil-irreducible-components].",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-trf-smooth-component-pure-transcendental",
+    "def-pc-integral-scheme",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057K, connected component T in proof; varieties.tex Tags 04KV and 056T"
+   }
+  },
+  {
+   "text": "The geometric generic fibres of $f$ and of all $\\pi_i$ are finite-type schemes over algebraically closed fields, by [lem-pod-separated-finite-type-base-change], hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. They are nonempty: the ordinary generic fibres are nonempty by step 3, and field extension preserves nonemptiness by [lem-sfb-field-extension-irreducible-components] together with [lem-sc-irreducible-components-cover]. These two nodes also show that every nonempty one has an irreducible component. By [lem-weil-pbc-noetherian-finite-components], their numbers of irreducible components are positive finite integers. In particular $N$ and every $\\rho_{\\pi_i}(C_i)$ are positive finite.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-field-extension-irreducible-components",
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-noetherian-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T4 and 01T6; varieties.tex Tag 04KX; topology.tex irreducible component covering"
+   }
+  },
+  {
+   "text": "By [lem-trf-geometric-fibre-component-count-base-change] applied to $f$ and the base change $Y\\to S$, the number of geometric irreducible components of $W_\\xi$ equals that of $Y_\\eta$, namely $N$, since $f(\\xi)=\\eta$ by step 3. Base-changing the finite clopen partition of $W$ gives a finite clopen partition of its geometric generic fibre into the geometric generic fibres of $C_i\\to Y$ [def-pc-fibre-product, lem-weil-pbc-open-fibre-product]: the pieces are the inverse images of the original disjoint opens, and their complements are the unions of the other inverse images. Any irreducible subset lies in one piece: meeting two pieces separates it into complementary nonempty clopens. A maximal irreducible subset in a piece is maximal in the whole space, and conversely [def-weil-irreducible-components]. Therefore $\\sum_i\\rho_{\\pi_i}(C_i)=N$. The $i=0$ summand is $1$ by step 6 and all other summands are positive by step 7, so for $i>0$ we have $1\\leq\\rho_{\\pi_i}(C_i)\\leq N-1<N$.",
+   "uses": [
+    "lem-trf-geometric-fibre-component-count-base-change",
+    "def-pc-fibre-product",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0556, lemma-base-change-fibres-nr-geometrically-irreducible-components; finite clopen-partition argument"
+   }
+  },
+  {
+   "text": "Let $B\\subseteq Y$ be nonempty affine open. By [lem-weil-pbc-open-fibre-product], $C_{i,B}=C_i\\times_YB$ is the open subscheme $\\pi_i^{-1}(B)$ of $C_i$. It is nonempty because the dense image of $\\pi_i$ meets $B$. A nonempty open of an integral scheme is integral: it is irreducible by intersection of nonempty opens, and each of its affine opens is an affine open of $C_i$, with domain ring [def-pc-integral-scheme]. Its local rings are those of $C_i$, so it is normal. Its map to $B$ is smooth by [lem-pc-proper-base-change] and separated of finite type by [lem-pod-separated-finite-type-base-change]. The generic point $\\xi$ belongs to $B$ and has the same residue field there [def-sc-generic-point]; the two generic fibres are canonically isomorphic because $(C_i\\times_YB)\\times_B\\operatorname{Spec}k(Y)=C_i\\times_Y\\operatorname{Spec}k(Y)$ by [def-pc-fibre-product]. Thus their geometric generic counts agree. Base change of the section in step 5 gives the required section $B\\to C_{0,B}$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-integral-scheme",
+    "lem-pc-proper-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "def-sc-generic-point",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR, lemma-open-fibre-product; universal property of the fibre product and inherited local rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sfb-normal-locally-finite-components",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-trf-smooth-component-pure-transcendental",
+  "def-weil-irreducible-components",
+  "lem-sfb-field-extension-irreducible-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-trf-geometric-fibre-component-count-base-change",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Agent assembly of existing DAG results: Tag 0556 (component-count base change), Tag 057K (smooth pointed connected component); Guo Lemma 4.3(i)-(ii) checked online as the source of the item; local Guo PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an integral smooth family over a normal integral base the component of the self product containing the diagonal has geometrically integral generic fibre and other components have fewer geometric generic components",
+   "results": "{\"t\": \"2026-10-24T14:26:14Z\", \"tool\": \"leanfinder\", \"query\": \"For an integral smooth family over a normal integral base the component of the self product containing the diagonal has geometrically integral generic fibre and other components have fewer geometric generic components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.instFstScheme\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instSndScheme\", \"AlgebraicGeometry.isField_of_universallyClosed\"], \"digest\": \"0952df969826fe03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures and saved outputs; geometrically irreducible entire morphisms, diagonal immersions and finiteness of components do not identify the diagonal component or give its generic component count."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-24T14:26:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyIrreducible\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatPullbackSchemeOfGeometricallyIrreducibleOfUniversallyOpen\", \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatPullbackSchemeOfGeometricallyIrreducibleOfUniversallyOpen_1\"], \"digest\": \"2d3dcbf229be6e4f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures and saved outputs; geometrically irreducible entire morphisms, diagonal immersions and finiteness of components do not identify the diagonal component or give its generic component count."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*component|component.*geometric|diagonal.*component",
+   "results": "{\"t\": \"2026-10-24T14:26:15Z\", \"tool\": \"grep\", \"query\": \"geometric.*component|component.*geometric|diagonal.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"73c368f9c7d6e88a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures and saved outputs; geometrically irreducible entire morphisms, diagonal immersions and finiteness of components do not identify the diagonal component or give its generic component count."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal component of the self fibre product of a smooth integral scheme has geometrically integral generic fibre over the first factor",
+   "results": "{\"t\": \"2026-10-24T14:26:15Z\", \"tool\": \"leansearch\", \"query\": \"The diagonal component of the self fibre product of a smooth integral scheme has geometrically integral generic fibre over the first factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"CategoryTheory.Limits.pullback.diagonal\", \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"CategoryTheory.Limits.pullback.diagonalObj\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.isSeparated_iff\"], \"digest\": \"747b5282ec62a6d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures and saved outputs; geometrically irreducible entire morphisms, diagonal immersions and finiteness of components do not identify the diagonal component or give its generic component count."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric irreducible component count decreases outside the connected component containing the graph in a normal smooth fibre product",
+   "results": "{\"t\": \"2026-10-24T14:26:17Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric irreducible component count decreases outside the connected component containing the graph in a normal smooth fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimpleGraph.ConnectedComponent.Represents.ncard_sdiff_of_notMem\", \"SimpleGraph.ConnectedComponent.Represents.ncard_sdiff_of_mem\", \"SimpleGraph.ConnectedComponent.card_le_card_of_le\", \"irreducibleComponent_subset_connectedComponent\", \"preimage_mem_irreducibleComponents_of_isPreirreducible_fiber\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"CategoryTheory.PreGaloisCategory.card_hom_le_card_fiber_of_connected\"], \"digest\": \"36cc9dfddcbb025f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures and saved outputs; geometrically irreducible entire morphisms, diagonal immersions and finiteness of components do not identify the diagonal component or give its generic component count."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth integral scheme over a normal integral base, the component of its self product containing the diagonal has geometrically integral generic fibre",
+   "results": "{\"t\": \"2026-10-24T15:07:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth integral scheme over a normal integral base, the component of its self product containing the diagonal has geometrically integral generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instFstScheme\", \"AlgebraicGeometry.IsIntegralHom.instSndScheme\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\"], \"digest\": \"7b278f1544fd5195\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; hits concern integral morphisms, diagonal immersions, already geometrically irreducible morphisms, or reducedness, not the component of a smooth self-product and all its counts."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*component|component.*diagonal|geometric.*component",
+   "results": "{\"t\": \"2026-10-24T15:08:17Z\", \"tool\": \"grep\", \"query\": \"diagonal.*component|component.*diagonal|geometric.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"b9b0c7660fe40314\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; hits concern integral morphisms, diagonal immersions, already geometrically irreducible morphisms, or reducedness, not the component of a smooth self-product and all its counts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth integral scheme self fibre product has a diagonal component with geometrically integral generic fibre",
+   "results": "{\"t\": \"2026-10-24T15:08:18Z\", \"tool\": \"leansearch\", \"query\": \"A smooth integral scheme self fibre product has a diagonal component with geometrically integral generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"6b06c13f3606d594\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; hits concern integral morphisms, diagonal immersions, already geometrically irreducible morphisms, or reducedness, not the component of a smooth self-product and all its counts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-24T15:08:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyIrreducible\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatPullbackSchemeOfGeometricallyIrreducibleOfUniversallyOpen\", \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatPullbackSchemeOfGeometricallyIrreducibleOfUniversallyOpen_1\"], \"digest\": \"2d3dcbf229be6e4f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; hits concern integral morphisms, diagonal immersions, already geometrically irreducible morphisms, or reducedness, not the component of a smooth self-product and all its counts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected variety with a rational point is geometrically integral and geometric irreducible component counts are invariant under field extensions",
+   "results": "{\"t\": \"2026-10-24T15:09:01Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected variety with a rational point is geometrically integral and geometric irreducible component counts are invariant under field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"f115c95dd9883a75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; hits concern integral morphisms, diagonal immersions, already geometrically irreducible morphisms, or reducedness, not the component of a smooth self-product and all its counts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-action-orbit-section-ampleness",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary to det-thm-sf-ctf-stability-direct-images, inherited direct-image proof (3), normal-base ampleness branch; Guo Proposition 6.4(b), induction on geometric generic components via Lemma 4.3 and the diagonal of the self-product.",
+   "via": [
+    "lem-sfb-connected-action-orbit-section-ampleness",
+    "lem-sfb-connected-action-affine-saturation-ample",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-self-product-component-rank",
+  "worker": "stage1",
+  "summary": "Q84: all clauses retained; nine-step proof using only existing nodes, no new nodes. Openness supplies dominance and ordinary generic-fibre irreducibility; the existing smooth pointed-component theorem gives geometric integrality. Counts are added across the clopen partition; affine-open restrictions use fibre-product universality. Mathlib candidates read and rejected.",
+  "blueprint": "Inherited auxiliary chain has no imported ancestor (blueprint_refs.py ancestor prints None). This realizes the inherited normal-base ampleness branch of det-thm-sf-ctf-stability-direct-images (3): the self-product induction in the parent orbit-section ampleness node; newest blueprint direct-images proof (3) is the compactification assembly, so no new claim is attributed to it.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-component-pure-transcendental",
+    "why": "Geometric integrality of the smooth component through the generic diagonal rational point; zero transcendence variables. No theorem of the item unit replaces this general input; the inherited Guo self-product route is retained."
+   },
+   {
+    "node": "lem-trf-geometric-fibre-component-count-base-change",
+    "why": "Invariance of geometric irreducible counts when the original family is pulled back to Y. No theorem of the item unit replaces this general input; the inherited Guo self-product route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-component-pure-transcendental",
+  "lem-trf-geometric-fibre-component-count-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-df7c15595",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-df7c15595 (reviewer sub-agent of L); spot-checked: I read the item's 9-step split (no new nodes) in full, with every cited statement. The statement is unchanged. I tested it on three cases. Y=S gives N=1. For a finite separable extension L/K, L⊗_K L=∏L_i with ρ_i=[L_i:L], so the sum is [L:K], ρ_0=1 and every other ρ_i is between 1 and N−1. A proper open Y⊂S is not surjective onto S and still works, so no surjectivity hypothesis is hidden. Steps: S1 gets smoothness, separatedness, finite type, Noetherianity and normality from base change and ascent, then the clopen normal integral components from Tag 0357; its hypothesis that every qc open has finitely many components holds because open subschemes of a Noetherian scheme are Noetherian. S2: j_i is a clopen closed immersion, so π_i is finite type by composition, and it is separated because the diagonal square along the monomorphism j_i is cartesian. S3: smooth, hence flat and lfp, hence open, so each map is dominant and f(ξ)=η. S4: the generic fibre of an open map from an irreducible space is irreducible; the argument is elementary and correct. S5: the irreducible Δ(Y) lies in exactly one clopen piece and gives a k(Y)-rational point c in (C_0)_ξ, which is the connected component of c. S6: 057K applies with r=0 (κ(c)=k(Y)), so (C_0)_ξ is geometrically integral and ρ_0=1. S7: the geometric generic fibres are finite type over a field, hence Noetherian and nonempty, so 1≤ρ<∞. S8: 0556 with t′=ξ gives n_{W/Y}(ξ)=n_{Y/S}(η)=N; components are additive over a finite clopen partition, so the sum is N, which gives the bound. The 055F connected-component node (lem-weil-pbc-geometric-component-count-base-change) is correctly not used. S9: C_{i,B} is the open preimage π_i^{-1}(B), nonempty because ξ∈B, and the generic fibres agree because Spec k(Y)→Y factors through B. Batch 5: I walked the closures of lem-trf-smooth-component-pure-transcendental (282 nodes) and lem-trf-geometric-fibre-component-count-base-change (70 nodes). Neither reaches a trace-formula, Poincaré or purity node. Both are general scheme geometry, outside both assumptions, so I accept them as the tool_uses recorded in split_report. No non-trf node states 0556 or 057K, and no node duplicates the item. The Guo PDF is absent locally (WANTED), so the source could not be reread here. Advisory only: step 5 could also cite lem-weil-pbc-open-fibre-product, and step 6 could cite def-pc-geometrically-irreducible."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.SmoothSelfProductComponentRank",
+  "declaration": "AlgebraicGeometry.exists_smooth_selfProduct_component_rank",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.geometricIrreducibleComponentCount",
+   "AlgebraicGeometry.exists_smooth_selfProduct_component_rank"
+  ],
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/SmoothSelfProductComponentRank.lean",
+  "statement": "theorem exists_smooth_selfProduct_component_rank {S Y : Scheme.{u}} [IsAffine S] [IsLocallyNoetherian S] [IsIntegral S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (f : Y ⟶ S) [Smooth f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsIntegral Y] (η : S) (ξ : Y) (hη : IsGenericPoint η Set.univ) (hξ : IsGenericPoint ξ Set.univ) : ∃ N : ℕ, 0 < N ∧ f.geometricIrreducibleComponentCount η = (N : ℕ∞) ∧ IsNoetherian (pullback f f) ∧ (∀ w : ↥(pullback f f), IsDomain ((pullback f f).presheaf.stalk w) ∧ IsIntegrallyClosed ((pullback f f).presheaf.stalk w)) ∧ ∃ (m : ℕ) (C : Fin (m + 1) → (pullback f f).Opens) (r : Fin (m + 1) → ℕ), Function.Injective C ∧ Set.range (fun i ↦ (C i : Set ↥(pullback f f))) = irreducibleComponents ↥(pullback f f) ∧ (∀ i, IsClosed (C i : Set ↥(pullback f f)) ∧ IsIntegral (C i).toScheme ∧ (∀ c : (C i).toScheme, IsDomain ((C i).toScheme.presheaf.stalk c) ∧ IsIntegrallyClosed ((C i).toScheme.presheaf.stalk c)) ∧ Smooth ((C i).ι ≫ pullback.fst f f) ∧ IsSeparated ((C i).ι ≫ pullback.fst f f) ∧ LocallyOfFiniteType ((C i).ι ≫ pullback.fst f f) ∧ QuasiCompact ((C i).ι ≫ pullback.fst f f) ∧ DenseRange ((C i).ι ≫ pullback.fst f f) ∧ ((C i).ι ≫ pullback.fst f f).geometricIrreducibleComponentCount ξ = (r i : ℕ∞)) ∧ (∀ i, Set.range (pullback.diagonal f) ⊆ (C i : Set ↥(pullback f f)) ↔ i = 0) ∧ r 0 = 1 ∧ (∑ i, r i) = N ∧ (∀ i, i ≠ 0 → 1 ≤ r i ∧ r i < N) ∧ GeometricallyIntegral (((C 0).ι ≫ pullback.fst f f).fiberToSpecResidueField ξ) ∧ ∃ δ : Y ⟶ (C 0).toScheme, δ ≫ (C 0).ι = pullback.diagonal f ∧ δ ≫ ((C 0).ι ≫ pullback.fst f f) = 𝟙 Y ∧ ∀ (B : Y.Opens), IsAffineOpen B → (B : Set Y).Nonempty → ∃ b : B.toScheme, IsGenericPoint b Set.univ ∧ (∀ i, IsOpenImmersion (pullback.fst ((C i).ι ≫ pullback.fst f f) B.ι) ∧ IsIntegral (pullback ((C i).ι ≫ pullback.fst f f) B.ι) ∧ (∀ c : ↥(pullback ((C i).ι ≫ pullback.fst f f) B.ι), IsDomain ((pullback ((C i).ι ≫ pullback.fst f f) B.ι).presheaf.stalk c) ∧ IsIntegrallyClosed ((pullback ((C i).ι ≫ pullback.fst f f) B.ι).presheaf.stalk c)) ∧ Smooth (pullback.snd ((C i).ι ≫ pullback.fst f f) B.ι) ∧ IsSeparated (pullback.snd ((C i).ι ≫ pullback.fst f f) B.ι) ∧ LocallyOfFiniteType (pullback.snd ((C i).ι ≫ pullback.fst f f) B.ι) ∧ QuasiCompact (pullback.snd ((C i).ι ≫ pullback.fst f f) B.ι) ∧ Scheme.Hom.geometricIrreducibleComponentCount (pullback.snd ((C i).ι ≫ pullback.fst f f) B.ι) b = (r i : ℕ∞)) ∧ ∃ δB : B.toScheme ⟶ pullback ((C 0).ι ≫ pullback.fst f f) B.ι, δB ≫ pullback.fst ((C 0).ι ≫ pullback.fst f f) B.ι = B.ι ≫ δ ∧ δB ≫ pullback.snd ((C 0).ι ≫ pullback.fst f f) B.ι = 𝟙 B.toScheme",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8687a8ff8",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read every clause of the node against exists_smooth_selfProduct_component_rank. S affine+locally Noetherian+integral+normal stalks; f Smooth/IsSeparated/LOFT/QC; Y integral; generic points η, ξ. N>0 with finite geometric count; W Noetherian and normal. C : Fin(m+1) is injective with range = irreducibleComponents, each closed, integral and normal; π_i smooth/separated/finite type/DenseRange; count r i. Diagonal ⊆ C i ↔ i=0; r0=1, Σr=N, 1≤r i<N for i≠0; GeometricallyIntegral fibre of π_0 at ξ; section δ of π_0 factoring the diagonal. For every nonempty affine open B: open immersion, integral, normal, smooth/separated/finite type, count at b = r i, and restricted section δB. All match the node and nothing is stronger. The new def geometricIrreducibleComponentCount has real data (ENat.card of irreducibleComponents of the pullback along the canonical fromSpecAlgebraicClosureResidueField). It defines the item's own ρ; there is no existing named count in Mathlib or the project and no statement-level citer. Edge cases (identity, separable field extension, non-surjective open immersion, empty S/Y/B) and the single universe u are fine. Node changed only in lean; statement verbatim; docstrings with source, blueprint and 9 proof steps; sorry only; lines ≤100; plain imports match proof_deps. Not compiled because nothing was changed. Guo PDF not available locally, so read against the node, which stage 1 checked. Advisory: IsNormalScheme exists, but the item cites def-weil-pbc-normal-ring and uses its recorded inline form."
+ }
+}

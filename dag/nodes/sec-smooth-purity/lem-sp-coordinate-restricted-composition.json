@@ -1,0 +1,109 @@
+{
+ "id": "lem-sp-coordinate-restricted-composition",
+ "kind": "statement",
+ "title": "Transported composite counit on full subcategories",
+ "statement": "Let A,B,C be categories and PA,PB,PC object properties. Let F:A→B, G:B→A, H:B→C, I:C→B, J:A→C and R:C→A be functors. Suppose F,G and H,I restrict to adjunctions on the indicated full subcategories [def-sp-coordinate-adjunction-categories]. Suppose J,R preserve the indicated properties, alpha:PA.ι⋙F⋙H≅PA.ι⋙J and beta:I⋙G≅R. Compose the restricted adjunctions, cancel the fully faithful inclusions in alpha and beta, and transport along these isomorphisms to construct J left adjoint to R on the full subcategories. Its ambient counit at K is J(beta.inv_K), then alpha.inv at G(I(K)), then H applied to the first counit at I(K), then the second counit at K. This is CompositeEquation for this explicitly constructed pair.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Levels; explicit categorical details of the original coordinate argument"
+ },
+ "stmt_deps": [
+  "def-sp-coordinate-adjunction-categories"
+ ],
+ "proof": [
+  {
+   "text": "Compose the two restricted adjunctions using Adjunction.comp, cancel the full inclusions, and transport both functors. Unfold the counit definitions and use comp_counit_app; the full inclusion maps preserve composition and cancel its preimages, giving the displayed equality.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Levels, expanded into explicit Lean interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tate twist strict tower projection adjunction normalized finite roots tensor shift finite evaluation",
+   "results": "constantSheafAdj, evaluationAdjunctionLeft, CochainComplex.shiftEval, Adjunction.CommShift.CompatibilityCounit; none states the normalized geometric tower construction.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; generic categorical operations reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "Adjunction.comp, comp_homEquiv, comp_counit_app, comp_unit_app in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-25",
+   "verdict": "Generic composition supplies categorical assembly, not the root normalization or geometric projection adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "tower_coordinate|ProjectivePresentation|AffineRestriction in Mathlib; RestrictedPair|CompositeEquation in project Lean",
+   "results": "Only Mathlib projective presentations of profinite objects; project RestrictedPair and CompositeEquation definitions exist, with no composition theorem or normalized existence lemmas.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate; reuse existing coordinate definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerCoordinateAdjunctionModels",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs, ordered affine projection and etale composition; Levels",
+   "via": [
+    "lem-sp-tower-coordinate-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityCoordinateComposition",
+  "file": "lean/Sheaf/Paper/SmoothPurityCoordinateComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.restrictedComposite_counit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.restrictedIso",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.restrictedComposite",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.restrictedComposite_counit"
+  ],
+  "statement": "theorem restrictedComposite_counit\n    (a : RestrictedPair PA PB F G) (b : RestrictedPair PB PC H I)\n    (hJ : ∀ M : PA.FullSubcategory, PC (J.obj M.obj))\n    (hR : ∀ K : PC.FullSubcategory, PA (R.obj K.obj))\n    (alpha : PA.ι ⋙ F ⋙ H ≅ PA.ι ⋙ J) (beta : I ⋙ G ≅ R) :\n    CompositeEquation PA PB PC F G H I J R a b\n      (restrictedComposite a b hJ hR alpha beta) alpha beta",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T161832-L-124555",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T161832-L-124555",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

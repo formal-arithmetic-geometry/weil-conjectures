@@ -1,0 +1,377 @@
+{
+ "id": "lem-per-scheme-near-point-normal-cone",
+ "kind": "statement",
+ "title": "Normal cone at a Hilbert--Samuel near point without reducedness",
+ "statement": "Let $X$ be a scheme of finite type over $\\mathbf Q$, locally closed in a smooth scheme [def-weil-finite-type-morphism, def-weil-closed-immersion, def-sbc-smooth-morphisms]. For a point $z$ of a scheme $W$ of finite type over $\\mathbf Q$ (below $W=X$ or $W=X'$), set $h_{W,z}(n)=\\operatorname{length}(\\mathcal O_{W,z}/\\mathfrak m_z^{n+1})$ and $H_{W,z}=\\Lambda^{\\operatorname{trdeg}_{\\mathbf Q}\\kappa(z)}h_{W,z}$, where $\\Lambda f(n)=\\sum_{j=0}^n f(j)$ [def-weil-pbc-module-length, def-kun-transcendence-degree, def-weil-residue-field]. Let $C\\hookrightarrow X$ be a smooth closed subscheme on which $z\\mapsto H_{X,z}$ is locally constant. Let $\\pi:X'\\to X$ be the blowup of $C$, equivalently the scheme-theoretic strict transform of $X$ in the ambient blowup [def-nagata-global-blowup, def-nagata-strict-transform]. Fix $y\\in X'$ over $x\\in C$ with $H_{X',y}=H_{X,x}$. Put $R=\\mathcal O_{X,x}$, $\\mathfrak m=\\mathfrak m_x$, $I=\\mathcal I_{C,x}$, $A=R/I$, $k=R/\\mathfrak m$, and $G=\\operatorname{gr}_I R=\\bigoplus_{j\\ge0}I^j/I^{j+1}$ [def-weil-pbc-associated-graded-ring]. Then $G$ is flat over $A$ (tensoring with $G$ preserves injections of $A$-modules). Identify the exceptional fibre over $x$ with $\\operatorname{Proj}(G\\otimes_A k)$ [def-pc-proj, def-weil-pbc-module-tensor-product]. There exist a standard graded $k$-algebra $B$ [def-pc-standard-graded-algebra], an integer $e\\ge1$, and a graded isomorphism\n$$G\\otimes_A k\\simeq B[T_1,\\ldots,T_e],\\qquad \\deg T_i=1,$$\nwhere the polynomial algebra is that of [def-weil-pbc-mv-polynomial-ring], such that $y$ lies in the closed projective linear subspace defined by $B_+=\\bigoplus_{j>0}B_j$, namely $\\operatorname{Proj}(k[T_1,\\ldots,T_e])$. No rationality or closedness assumption on $x$ or $y$ is imposed. No reducedness is assumed. More explicitly, if $\\delta=\\operatorname{trdeg}_{\\kappa(x)}\\kappa(y)$, the near-point hypothesis is $\\Lambda^\\delta h_{X^\\prime,y}=h_{X,x}$; it is equivalent to the displayed equality of extended functions.",
+ "source": {
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "BMT arXiv:0905.3580v1, sections 6.1 and 6.3; precise input: Cossart--Jannsen--Saito, March 12 2009 preprint, section 2, Theorems 2.2(2), 2.3(1)-(2), 2.14, pp.28-29,36, read at https://epub.uni-regensburg.de/13766/1/MP32.pdf. Use the raw local near equality, not the component-dependent CJS normalization (Remark 1.41). Archival copies WANTED. No Stacks tag states this theorem."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-module-length",
+  "def-kun-transcendence-degree",
+  "def-weil-residue-field",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-weil-pbc-associated-graded-ring",
+  "def-pc-proj",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-hilbert-samuel-invariant",
+  "def-per-near-point-normal-fibre-constructions"
+ ],
+ "proof": [
+  {
+   "text": "The assertions are local at $x$. Choose an affine neighbourhood where the given embedding is closed. Finite type over a field gives Noetherianity by [lem-weil-pbc-finite-type-over-noetherian]; The closed subscheme $C$ is also finite type over $\\mathbf Q$: on affine opens its coordinate ring is a quotient of a finitely generated algebra, and closedness makes it quasi-compact. In particular $R$ is Noetherian and essentially of finite type over $\\mathbf Q$. The stalk formulas of [lem-pur-conormal-graded-algebra] identify $A$ with $\\mathcal O_{C,x}$ and $G$ with the stalk of the conormal algebra. Smoothness of $C$ makes $A$ regular by [lem-weil-pbc-smooth-scheme-over-field-regular], and [lem-sc-regular-local-domain] makes it a domain, so $I$ is prime. Its generic point corresponds to a unique generic point $\\eta$ of a component of $C$ through $x$. Shrinking the affine neighbourhood of $x$ in $C$ removes its other components: they are finite in number by [lem-weil-pbc-noetherian-finitely-many-components], and none contains $x$, since $A$ is a domain and components are minimal primes by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. We may therefore compute on an integral affine neighbourhood in $C$. It can also be chosen inside the neighbourhood where $H_X|_C$ is constant.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "VIII 2.3.13 motivation; CJS Theorem 2.3, p.29, preparation for applying the numerical criterion. Stacks Tags 01T6, 056S and 00NP; conormal stalk identifications. Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  },
+  {
+   "text": "Write $t_z=\\operatorname{trdeg}_{\\mathbf Q}\\kappa(z)$ and $d=\\dim A$. Apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] to the integral affine neighbourhood in $C$. Its dimension at $x$ is its component dimension by [lem-weil-pbc-dimension-at-point-components], and that dimension is $t_\\eta$ by [lem-sc-closed-irreducible-dimension-trdeg]. Hence $t_\\eta=t_x+d$. Constancy on $C$ gives $\\Lambda^{t_x}h_{X,x}=\\Lambda^{t_\\eta}h_{X,\\eta}=\\Lambda^{t_x}\\Lambda^d h_{X,\\eta}$. The summation operator is injective: recover $f(0)$ from $\\Lambda f(0)$ and $f(n)$ from $\\Lambda f(n)-\\Lambda f(n-1)$ for $n>0$. Cancel it $t_x$ times to obtain $h_R=\\Lambda^d h_{R_I}$; localization at the prime of $\\eta$ identifies $R_I=\\mathcal O_{X,\\eta}$. This conversion uses the stated transcendence-degree normalization, not CJS's component-dependent global normalization.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "CJS Theorem 2.3(2), p.29; Remark 1.41, p.27, distinguishes the global conventions. Dimension inputs: Stacks Tags 00P1, 00OT and 0A21(6). Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-per-bennett-normal-flat-local-criterion] to $R$, the prime $I$, and $A=R/I$. Step 1 gives a nonzero Noetherian local $\\mathbf Q$-algebra essentially of finite type with regular quotient, and Step 2 gives exactly $h_R=\\Lambda^{\\dim A}h_{R_I}$. Therefore $G$ is flat over $A$. This local criterion assumes no reducedness, so it applies to the actual ring $R$, not to its reduction.",
+   "uses": [
+    "lem-per-bennett-normal-flat-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "CJS Theorem 2.3(1) iff (2), p.29 (Bennett Theorem (3)), with one summation to the length convention. Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  },
+  {
+   "text": "Put $\\delta=\\operatorname{trdeg}_{\\kappa(x)}\\kappa(y)$. The tower formula [lem-kun-transcendence-degree-tower] gives $t_y=t_x+\\delta$. The near hypothesis is therefore $\\Lambda^{t_x}\\Lambda^\\delta h_{X',y}=\\Lambda^{t_x}h_R$. Cancel $\\Lambda^{t_x}$ by the same finite-difference calculation as in Step 2, obtaining $\\Lambda^\\delta h_{X',y}=h_R$. No step here replaces a point by a closed or rational point.",
+   "uses": [
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Raw near condition in CJS Theorem 2.10(2), pp.32--33; comparison with the Bennett normalization in Remark 1.41, p.27. Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  },
+  {
+   "text": "By [def-nagata-global-blowup-glue-data] and [def-nagata-global-blowup-local-model], the given blowup restricts on an affine open to the affine blowup. By [def-nagata-affine-blowup] this is Proj of the Rees algebra of [def-nagata-rees-algebra]. Apply [lemma-nagata-relative-proj-base-change-arbitrary], first to localization at $x$ and then to its residue field. Localization commutes with ideal powers directly on fractions, so the local blowup is $Y=\\operatorname{Bl}_I\\operatorname{Spec}R$ and its fibre is Proj of $\\bigoplus_{j\\ge0}I^j/\\mathfrak m I^j$. Since $I\\subseteq\\mathfrak m$, the inclusion $I^{j+1}\\subseteq\\mathfrak m I^j$ identifies this degree-$j$ space with $(I^j/I^{j+1})\\otimes_A k$: both are the quotient by the same relations. Multiplication in both rings is induced by multiplication in $R$, so this is a graded algebra identification with $S=G\\otimes_A k$. This proves the required fibre identification and identifies the local ring at its point $y$ with $\\mathcal O_{X',y}$.",
+   "uses": [
+    "def-nagata-global-blowup-glue-data",
+    "def-nagata-global-blowup-local-model",
+    "def-nagata-affine-blowup",
+    "def-nagata-rees-algebra",
+    "lemma-nagata-relative-proj-base-change-arbitrary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Stacks divisors.tex Tag 0804, lemma-blowing-up-affine; constructions.tex Tag 01N2, lemma-base-change-map-proj. The degree-wise fibre calculation is written here. Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  },
+  {
+   "text": "We verify that $I$ is contained in no minimal prime of $R$. If a minimal prime contained $I$, primeness of $I$ would make $I$ itself minimal. Every prime of $R_I$ then equals $IR_I$: contraction is a prime contained in $I$, and a fraction belongs to a prime exactly when its numerator does, since its denominator is a unit [def-weil-pbc-localization-at-prime]. Apply [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] to the identity finite algebra $R_I\\to R_I$. It says that every element of $IR_I$ is nilpotent. The ideal $I$ is finitely generated since $R$ is Noetherian. If generators have nilpotence exponents $n_1,\\ldots,n_v$ after localization, then $I^NR_I=0$ for $N=1+\\sum_i(n_i-1)$, since every product of $N$ generators contains one generator to its nilpotence exponent. For $I=0$ take $N=1$. For each $a\\in I^N$ there is $s\\notin I$ with $sa=0$. The class of $s$ in the domain $A$ is nonzero. By [lem-trf-flat-module-torsionfree-domain] and Step 3, its multiplication on $G$ is injective, so the class of $a$ in $G_N$ is zero. Thus $I^N=I^{N+1}\\subseteq\\mathfrak m I^N$. Nakayama [lem-weil-pbc-nakayama-local-generators] for the finite module $I^N$ gives $I^N=0$. In the Rees algebra every positive-degree homogeneous element is then nilpotent, so every prime contains the irrelevant ideal and its Proj is empty [def-nagata-rees-algebra, def-nagata-affine-blowup, def-pc-proj]. This contradicts the given point $y$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-nagata-rees-algebra",
+    "def-nagata-affine-blowup",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "CJS Definition 2.1, p.28: non-component convention. Agent argument for a possibly nonreduced local ring. The nilpotence and Nakayama inputs are cited explicitly (Stacks Tags 00E0 and 00DV). Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  },
+  {
+   "text": "Choose finite generators of $I$. Their degree-one classes generate $S$: every element of $I^j$ is a sum of products of $j$ generators with coefficients in $R$, and after quotienting by $\\mathfrak m I^j$ the coefficients are in $k$. Thus $S$ is standard graded [def-pc-standard-graded-algebra] and has a graded surjection $P=k[Z_1,\\ldots,Z_N]\\twoheadrightarrow S$ with homogeneous kernel $K$. Let $\\mathfrak q_y$ be the inverse image of the homogeneous prime of $y$. Apply [lem-per-scheme-near-point-additive-action] to $R,I,y$ and this presentation. Step 3 gives flatness, Step 4 gives its raw near equality, Step 5 identifies its point and local ring, and Step 6 gives its non-component hypothesis. The new local action theorem allows nilpotents in $R$. We obtain a proper homogeneous ideal $L\\subseteq\\mathfrak q_y$, stable under additive comultiplication and inversion, with $g(Z+W)\\in K(Z)+L(W)$ for every $g\\in K$. In particular $K\\subseteq L$: set $Z=0$ in this last inclusion, using $K\\subseteq P_+$.",
+   "uses": [
+    "def-pc-standard-graded-algebra",
+    "lem-per-scheme-near-point-additive-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "CJS proof of Theorem 2.14, p.36: characteristic-independent subgroup and action from Hironaka [H4], Theorem IV, and [H5], Theorem 2; normal-cone quotient from Theorem 2.2(2)(ii). Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  },
+  {
+   "text": "Here $k$ has characteristic zero. We prove directly that $L$ is generated by $L_1$. Quotient by the ideal generated by $L_1$; this is again a polynomial ring after a linear change of coordinates, and the image $\\bar L$ is homogeneous and satisfies the same additive comultiplication inclusion. If $\\bar L\\ne0$, choose a nonzero homogeneous $f\\in\\bar L$ of least degree $r$. Then $r\\ge2$, and every homogeneous piece of $\\bar L$ of degree less than $r$ is zero. The bidegree $(1,r-1)$ component of $f(Z+W)\\in\\bar L(Z)+\\bar L(W)$ is therefore zero. That component is $\\sum_i Z_i\\partial_i f(W)$, so every $\\partial_i f$ is zero. Euler's identity $rf=\\sum_i W_i\\partial_i f$ contradicts $r\\ne0$ in $k$. Thus $L=(L_1)$. Choose linear coordinates $(U_1,\\ldots,U_a,T_1,\\ldots,T_e)$ with $L=(U_1,\\ldots,U_a)$. Since $L\\subseteq\\mathfrak q_y$ and $\\mathfrak q_y$ does not contain $P_+$, we have $e\\ge1$. This is a polynomial coefficient argument, not an appeal to the unproved linearity conclusion of the near-point theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Agent-written elementary characteristic-zero linearity argument for the homogeneous subgroup in CJS proof of Theorem 2.14, p.36. Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  },
+  {
+   "text": "In these coordinates the coaction inclusion says $g(U,T+T')\\in K(U,T)[T']$ for $g\\in K$. Comparing coefficients gives $\\partial_T^\\alpha g/\\alpha!\\in K$ for every multi-index $\\alpha$. The finite Taylor identity $g(U,0)=\\sum_\\alpha(-T)^\\alpha\\partial_T^\\alpha g(U,T)/\\alpha!$ then shows that evaluation at $T=0$ preserves $K$. For $g=\\sum_\\alpha g_\\alpha(U)T^\\alpha$, apply that evaluation to $\\partial_T^\\alpha g/\\alpha!$ to obtain $g_\\alpha(U)\\in K$. Therefore, writing $J=K\\cap k[U]$, we have $K=J\\,k[U,T]$. The reverse inclusion follows just because $K$ is an ideal. The Taylor sums are finite for polynomials, and all factorials are invertible because $k$ has characteristic zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Agent-written coefficient calculation of the quotient by a translation subgroup, realizing the directrix quotient in CJS Theorems 2.2 and 2.14. Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  },
+  {
+   "text": "Set $B=k[U_1,\\ldots,U_a]/J$. Homogeneity of $K$ makes $J$ homogeneous and $J\\subseteq(U_1,\\ldots,U_a)$, so $B_0=k$ and $B$ is standard graded by [def-pc-standard-graded-algebra]. Step 9 yields $S\\simeq B[T_1,\\ldots,T_e]$, with every $T_i$ in degree one. The quotient $P/K\\twoheadrightarrow P/L=k[T_1,\\ldots,T_e]$ kills exactly the ideal generated by the images of the $U_i$, which is $B_+S$. Its Proj is the closed subspace of the item by the surjection and graded-isomorphism clauses of [prop-nagata-relative-proj-functoriality]. Since $L\\subseteq\\mathfrak q_y$, its image contains $y$. This is membership of the homogeneous prime itself, and so holds for every scheme point, including nonclosed points.",
+   "uses": [
+    "def-pc-standard-graded-algebra",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "CJS proof of Theorem 2.14, p.36, last projective inclusion; Stacks Tag 01N0, constructions-lemma-surjective-graded-rings-map-proj. Polynomial factor constructed in Steps 8--9. Read against CJS section 2, pp.28--36; archival source WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-per-bennett-normal-flat-local-criterion",
+  "lem-kun-transcendence-degree-tower",
+  "def-nagata-global-blowup-glue-data",
+  "def-nagata-global-blowup-local-model",
+  "def-nagata-affine-blowup",
+  "def-nagata-rees-algebra",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-pc-proj",
+  "def-pc-standard-graded-algebra",
+  "lem-per-scheme-near-point-additive-action",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "Cossart--Jannsen--Saito, Canonical embedded and non-embedded resolution of singularities for excellent two-dimensional schemes, March 12 2009, section 2 (preliminary results without any dimension-two or reducedness restriction), pp.28--29,32--36, https://epub.uni-regensburg.de/13766/1/MP32.pdf; read online, archival copy WANTED. BMT sections 6.1 and 6.3 are ancestor motivation; no Stacks tag states the near-point result."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normal.?flat|directrix|hilbert.?samuel",
+   "results": "{\"t\": \"2026-10-24T08:07:33Z\", \"tool\": \"grep\", \"query\": \"normal.?flat|directrix|hilbert.?samuel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures inspected; basic flatness, reducedness and smoothness only, no normal-cone near-point theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-scheme-near-point-normal-cone: normal flatness and polynomial decomposition of a normal cone at Hilbert Samuel near points for nonreduced schemes",
+   "results": "{\"t\": \"2026-10-24T08:07:33Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-scheme-near-point-normal-cone: normal flatness and polynomial decomposition of a normal cone at Hilbert Samuel near points for nonreduced schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.instMorphismRestrict\"], \"digest\": \"b0faaaeb46a5a339\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures inspected; basic flatness, reducedness and smoothness only, no normal-cone near-point theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedGraded\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-24T08:07:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedGraded\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures inspected; basic flatness, reducedness and smoothness only, no normal-cone near-point theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-scheme-near-point-normal-cone: characteristic zero near points of blowups lie in the linear directrix of the normal cone without reducedness",
+   "results": "{\"t\": \"2026-10-24T08:07:34Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-scheme-near-point-normal-cone: characteristic zero near points of blowups lie in the linear directrix of the normal cone without reducedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"02a8b9404193a8e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures inspected; basic flatness, reducedness and smoothness only, no normal-cone near-point theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-scheme-near-point-normal-cone: Bennett numerical criterion normal flatness and Hironaka linear directrix for local rings with nilpotent elements",
+   "results": "{\"t\": \"2026-10-24T08:12:06Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-scheme-near-point-normal-cone: Bennett numerical criterion normal flatness and Hironaka linear directrix for local rings with nilpotent elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"d0c6f59e02731fba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures inspected; basic flatness, reducedness and smoothness only, no normal-cone near-point theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.?flat|directrix|hilbert.?samuel",
+   "results": "{\"t\": \"2026-10-24T08:49:56Z\", \"tool\": \"grep\", \"query\": \"normal.?flat|directrix|hilbert.?samuel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-scheme-near-point-normal-cone: Hilbert Samuel near points on blowups lie in the directrix of the normal cone in characteristic zero without a reducedness hypothesis",
+   "results": "{\"t\": \"2026-10-24T08:49:56Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-scheme-near-point-normal-cone: Hilbert Samuel near points on blowups lie in the directrix of the normal cone in characteristic zero without a reducedness hypothesis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"256a11604f7b04bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedGraded\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-24T08:49:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedGraded\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-scheme-near-point-normal-cone: normal flatness and polynomial factors of a normal cone at a Hilbert Samuel near point for a nonreduced characteristic zero scheme",
+   "results": "{\"t\": \"2026-10-24T08:49:59Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-scheme-near-point-normal-cone: normal flatness and polynomial factors of a normal cone at a Hilbert Samuel near point for a nonreduced characteristic zero scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsSmoothAt\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\"], \"digest\": \"5928833007374b5d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-scheme-near-point-normal-cone: a normal cone fiber at a near point splits off polynomial variables, using Bennett normal flatness and Hironaka translation symmetry",
+   "results": "{\"t\": \"2026-10-24T08:54:59Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-scheme-near-point-normal-cone: a normal cone fiber at a near point splits off polynomial variables, using Bennett normal flatness and Hironaka translation symmetry\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"39cd8913ffaa1c93\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-hilbert-test-component-retention",
+  "date": "2026-10-24",
+  "group": "Q107"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-resolution branch: BMT §6.3 common-presentation assertion and Remark 6.2, near-point component-profile survival under permissible histories and auxiliary tests. Structural input: Normal cone at a Hilbert--Samuel near point without reducedness.",
+   "via": [
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-scheme-near-point-normal-cone",
+  "worker": "stage1",
+  "summary": "Q78: retained the full nonreduced statement. Separated the genuinely general local Bennett criterion and the weaker homogeneous translation-action input; reused existing dimension, conormal, Proj and torsion-free lemmas. Wrote out nilpotent minimal-centre exclusion without using reduced localization to a field, and the characteristic-zero linearity and Taylor coefficient arguments. No exact project declaration or Mathlib match was found.",
+  "blueprint": "Realizes the regular-resolution branch beneath lem-per-artin-gabber-affine-curve, through the inherited BMT section 6.3 near-point component-profile retention input in blueprint.from. The local proof follows CJS section 2 rather than importing the final directrix conclusion. Chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Generic local algebra, dimension, conormal or Proj tool used exactly as stated; it supports the local near-point argument and does not replace a step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic local algebra, dimension, conormal or Proj tool used exactly as stated; it supports the local near-point argument and does not replace a step of the unit."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic local algebra, dimension, conormal or Proj tool used exactly as stated; it supports the local near-point argument and does not replace a step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic local algebra, dimension, conormal or Proj tool used exactly as stated; it supports the local near-point argument and does not replace a step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-components",
+    "why": "Generic local algebra, dimension, conormal or Proj tool used exactly as stated; it supports the local near-point argument and does not replace a step of the unit."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic local algebra, dimension, conormal or Proj tool used exactly as stated; it supports the local near-point argument and does not replace a step of the unit."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-base-change-arbitrary",
+    "why": "Generic local algebra, dimension, conormal or Proj tool used exactly as stated; it supports the local near-point argument and does not replace a step of the unit."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Generic local algebra, dimension, conormal or Proj tool used exactly as stated; it supports the local near-point argument and does not replace a step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-9fcc3fb63",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-9fcc3fb63 (reviewer sub-agent of L); spot-checked: Read the item, the 10 steps, both new nodes and every cited statement. Read CJS section 2 (MP32.pdf, fetched online and run through pdftotext): Def 2.1, Thm 2.2(2)(ii) p.28, Thm 2.3 (Bennett) p.29, Thm 2.10(2) pp.32-33, Def 2.13 and the proof of 2.14 p.36. Section 2 starts from an arbitrary excellent X, so dropping reducedness is legitimate. The new nodes repeat, minus 'reduced', the existing lem-trf-bennett-normal-flat-numerical-criterion and lem-trf-near-point-additive-symmetry. They generalize those nodes rather than duplicate them; the reduced Bennett proof never uses reducedness, and the reduced action chain needs it only as a hypothesis of the Hironaka Thm III node. The action node gives only the subgroup and its action, not linearity or the directrix, so it does not restate the item. All steps check out: injectivity of Λ; t_eta=t_x+dim A; fibre ring I^j/mI^j=(I^j/I^{j+1})⊗k; step 6 rules out a minimal I via nil IR_I, torsion-freeness and Nakayama, then empty Proj; step 8 proves linearity in char 0 from the (1,r-1) bidegree and Euler; step 9 is the Taylor extension K=J k[U,T]; step 10 handles nonclosed y. Small cases tested: k[eps,u]/(eps^2), k[x,y]/(y^2), k[x,y]/(xy), k[x,y]/(x^2,xy) and I=0. Batch-5: lem-trf-flat-module-torsionfree-domain (flat over a domain ⇒ torsion-free) is a generic Mathlib leaf, outside the trace-formula and Poincaré-duality assumptions; accepted. The 8 listed off-unit generic tool_uses are accepted. FIX (B5): both new nodes gave CJS theorem numbers and pages in source.place without naming CJS, under a BMT document. I rewrote source.place in fixes/dag/nodes/sec-deligne-laumon-a1/ for both nodes; nothing else changed.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeNearPointNormalCone",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.near_normal_cone_nonreduced",
+  "declarations": [
+   "AlgebraicGeometry.HilbertSamuel.near_function_iff_raw",
+   "AlgebraicGeometry.HilbertSamuel.near_normal_cone_nonreduced"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeNearPointNormalCone.lean",
+  "statement": "theorem near_normal_cone_nonreduced {X C P : Scheme.{u}} (p : P ⟶ Spec (.of (ULift.{u} ℚ))) (i : X ⟶ P) (c : C ⟶ X) [Smooth p] [IsImmersion i] [LocallyOfFiniteType (i ≫ p)] [QuasiCompact (i ≫ p)] [IsClosedImmersion c] [Smooth (c ≫ i ≫ p)] (hconstant : IsLocallyConstant (fun z : C ↦ function (i ≫ p) (c z))) (z : C) (y : c.ker.blowup) (hy : c.ker.blowupMap y = c z) (hnear : function (c.ker.blowupMap ≫ i ≫ p) y = function (i ≫ p) (c z)) : Module.Flat (X.presheaf.stalk (c z) ⧸ centerStalkIdeal c z) (Ideal.associatedGraded (centerStalkIdeal c z)) ∧ ∃ (_ : GradedAlgebra (normalFibreGrade c z)) (φ : reesGrading (centerStalkIdeal c z) →+*ᵍ normalFibreGrade c z) (hirr : HomogeneousIdeal.irrelevant (normalFibreGrade c z) ≤ (HomogeneousIdeal.irrelevant (reesGrading (centerStalkIdeal c z))).map φ), (∀ (n : ℕ) (a : (centerStalkIdeal c z ^ n : Ideal (X.presheaf.stalk (c z)))), φ (reesMonomial (centerStalkIdeal c z) a.val a.property) = (1 : X.residueField (c z)) ⊗ₜ[X.presheaf.stalk (c z) ⧸ centerStalkIdeal c z] DirectSum.of (Ideal.associatedGradedPiece (centerStalkIdeal c z)) n (Submodule.Quotient.mk a)) ∧ ∃ (U : X.affineOpens) (hx : c z ∈ U.1) (hI : (c.ker.ideal U).map (X.presheaf.germ U.1 (c z) hx).hom = centerStalkIdeal c z), IsPullback (Proj.map φ hirr ≫ AffineBlowup.hom (X.presheaf.germ U.1 (c z) hx).hom hI ≫ c.ker.blowupι U) (Proj.toSpecOfAlgebra (normalFibreGrade c z)) c.ker.blowupMap (X.fromSpecResidueField (c z)) ∧ ∃ (t : Proj (normalFibreGrade c z)) (B : Type u) (_ : CommRing B) (_ : Algebra (X.residueField (c z)) B) (𝓑 : ℕ → Submodule (X.residueField (c z)) B) (_ : GradedAlgebra 𝓑) (_ : GradedAlgebra.IsStandard 𝓑) (r : ℕ) (e : normalFibre c z ≃ₐ[X.residueField (c z)] MvPolynomial (Fin r) B), 1 ≤ r ∧ (∀ (n : ℕ) (s : normalFibre c z), s ∈ normalFibreGrade c z n ↔ e s ∈ normalPolynomialGrade 𝓑 r n) ∧ (Proj.map φ hirr ≫ AffineBlowup.hom (X.presheaf.germ U.1 (c z) hx).hom hI ≫ c.ker.blowupι U) t = y ∧ ∀ (n : ℕ), 0 < n → ∀ b ∈ 𝓑 n, e.symm (MvPolynomial.C b) ∈ t.asHomogeneousIdeal.toIdeal",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The nonreduced generalization reuses the HilbertSamuel.function and the centerStalkIdeal, centerResidueAlgebra, normalFibre, normalFibreGrade and normalPolynomialGrade constructions of the landed reduced node, without invoking its theorem or assuming IsReduced. The additional declaration states the final raw-near equivalence using the canonical residue-field map transported along hy. The exceptional fibre is specified by its Rees monomials and a pullback square, including its point over y."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-99f23572e",
+  "group": "Q139",
+  "result": "pass",
+  "note": "H2 return of ec8547 repaired: the theorem node lem-trf-hilbert-samuel-near-normal-cone is replaced in stmt_deps by the new def node def-per-near-point-normal-fibre-constructions (existing:true on Sheaf.AlgebraicGeometry.HilbertSamuelNearNormalCone, five plain declarations listed; statement checked against Lean lines 50-84: stalk kernel, Quotient.factor residue action, k⊗_A gr_I R, span gradings, j+|d|=n; fields complete; deps exist live; no competing owner). Added landed def-trf-hilbert-samuel-invariant is permitted (STMT_DEPS MAY GAIN LANDED NODES). Item otherwise unchanged vs live except lean; lean.statement verbatim; Lean file byte-identical to the ec8547 delivery whose mathematics two independent reviews confirmed (no IsReduced, canonical Rees/Proj pullback, standard graded B, r>=1, graded B[T], B_+ in prime of t, raw-near iff via canonical residueFieldMap). Sorry only, docstrings with source/blueprint/10 steps. Nothing compiled (no file changed). Advisory: the reused declarations' docstrings still name the old blueprint node."
+ }
+}

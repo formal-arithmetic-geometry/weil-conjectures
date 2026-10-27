@@ -1,0 +1,118 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "id": "lem-sf-identity-projection-normalization",
+ "title": "Canonical normalization of identity projection",
+ "statement": "For a finite commutative ring A, scheme X and V,M∈D_A(X), let d=rightDerivedLowerShriekIdIsoOfLowerStar (ModuleCat A) X and e=leftDerivedUpperStarId (ModuleCat A) X. Then T_X(d_V^(-1),M);π_id(V,M);R(id)_!(T_X(V,e_M)) = d_(V⊗M)^(-1), with π_id the canonical projectionIso. This asserts only identity projection normalization, with exactly the chosen identity comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Projection naturality in both diagonal-coordinate triangle computations, specialized to the unit of an arbitrary proper section. Stacks Project: sites-cohomology.tex, Tag 0B56; categories.tex, Tag 0DV0."
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus"
+ ],
+ "proof": [
+  {
+   "text": "use identity_pullback_tensor to identify the pullback tensor comparison with the\ncanonical identity pullback isomorphism. Transpose the ordinary direct-image projection\nthrough the derived pullback/direct-image adjunction. Its defining transpose is tensor\ncomparison followed by the counit tensor identity. Substituting the preceding identity\nand the identity counit equation gives normalized_identity_projection; the conjugate\nright comparison is rightDerivedLowerStarIdIso by derived_identity_conjugate. Thus the\nordinary projection, followed by the tensor of the identity pullback comparison, becomes\nthe identity under these pullback and direct-image comparisons. Transport this equation\nthrough projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar. The composite\nof proper coincidence with rightDerivedLowerStarIdIso is exactly\nrightDerivedLowerShriekIdIsoOfLowerStar: naturality of the right-derived/exact-functor\ncomparison identifies the two displayed constructions. Naturality moves the proper\ncomparison across the tensor map. Cancel its inverse and then the direct-image identity\ncomparison to obtain the inverse-oriented equality below. No section or composition of\ntwo nonidentity scheme maps occurs in this normalization.",
+   "uses": [
+    "lem-sf-etale-graph-transfer-tensor",
+    "lem-sf-graph-first-projection-square",
+    "lem-asd-source-proper-projection-coincidence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-etale-graph-transfer-tensor",
+  "lem-sf-graph-first-projection-square",
+  "lem-asd-source-proper-projection-coincidence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Named normalization step of the proper-section projection argument; Canonical normalization of identity projection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition and identity coherence of the derived projection formula for proper direct images",
+   "results": "Eight hits: Scheme.Modules.pushforwardComp and its component lemmas, TopCat.Presheaf.Pushforward.comp and component lemmas, and PresheafOfModules.pushforwardComp. None is the unbounded derived projection-map coherence with the specified comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib result. Use the existing project canonical projection calculations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointProjectionMap\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(comp|identity)|(comp|identity).*projection",
+   "results": "25 hits, mostly simps projections and topological projection compositions; no relevant derived projection coherence. Project rg additionally located projectionMap_chosen_comp, the native proper projection square, normalized_identity_projection, and derived_identity_conjugate.",
+   "date": "2026-10-27",
+   "verdict": "Existing project declarations give the mathematical ingredients; the remaining obligations concern their specified canonical comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfProperSectionProjection",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proper-section-projection-unit",
+   "place": "A proper-section projection proof step: Canonical normalization of identity projection",
+   "via": [
+    "lem-sf-proper-section-projection-unit",
+    "lem-sf-diagonal-insertion-projection",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfIdentityProjectionNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfIdentityProjectionNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.identityProjectionNormalization",
+  "statement": "theorem identityProjectionNormalization (X : Scheme.{u})\n    (V M : DerivedCategoryModule A X) :\n    ((derivedTensor (ModuleCat.{u + 1} A) X).map\n        ((rightDerivedLowerShriekIdIsoOfLowerStar (ModuleCat.{u + 1} A) X).inv.app V)).app M ≫\n      (projectionIso A (𝟙 X) V).hom.app M ≫\n      (push A (𝟙 X)).map (((derivedTensor (ModuleCat.{u + 1} A) X).obj V).map\n        ((leftDerivedUpperStarId (ModuleCat.{u + 1} A) X).hom.app M)) =\n      (rightDerivedLowerShriekIdIsoOfLowerStar (ModuleCat.{u + 1} A) X).inv.app\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj V).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T064502-L-2187715",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T084435-L-3680562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.SupportedTrace.identityProjectionNormalization"
+  ],
+  "sorry_after": []
+ }
+}

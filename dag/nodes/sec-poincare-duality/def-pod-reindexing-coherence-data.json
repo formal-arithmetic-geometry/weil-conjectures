@@ -1,0 +1,127 @@
+{
+ "id": "def-pod-reindexing-coherence-data",
+ "kind": "definition",
+ "title": "Presentation data for normalized reindexing coherence",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be a finite extension in universe $u$, and let $s\\in\\operatorname{Option}(\\mathbf N)$. For every scheme $W$ in universe $u$, use the coefficient ring sheaf $(\\mathcal O_E/\\varpi_E^{n+1})_W$ if $s=\\mathrm{some}(n)$ and the ordinary completed ring sheaf $\\varprojlim_n(\\mathcal O_E/\\varpi_E^{n+1})_W$ if $s=\\mathrm{none}$ [lem-pod-reindexing-hom-resolution-model]. Its pro-etale site has object universe $u+1$ and arrow universe $u$; modules have universe $u+1$ and the ordinary unbounded derived category has localization universe $u+2$. Write $K_W$ for the cochain category, total for its actual total tensor, hom for its product Hom complex and proj for its product projection. Closed and Models denote a closed structure for the recorded derived Hom and its normalized K-flat tensor model [def-coef-ringed-tensor-hom-model]. For schemes $X,Y,Z$ with pro-etale sites essentially small in universe $u+1$, isomorphisms $g:X\\to Y$, $h:Z\\to X$, and chosen Closed and Models on these schemes, define the following presentations. Comparison$(g)$ consists of an isomorphism on all actual Hom complexes, fixed on every slice-Hom product projection; the natural derived Hom isomorphism fixed by its K-injective localization model; the total-tensor chain isomorphism fixed on every sheafified pure summand; and the natural derived tensor isomorphism fixed on K-flat pairs. EvaluationLaws records its evaluation equation, uniqueness among all arrows, transported transposition, and both variances. For arbitrary integers $a,b,r$, ChainShift records the Hom double-shift isomorphism with component $(-1)^{ar}$ and the shift reindexing; ShiftLaws records the chain square and its localization using signedShift, which first applies the source shift and then the target shift [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The auxiliary complexShift is the termwise shift comparison. Compositor$(g,h)$ and Identity$(X)$ are ordinary, termwise and derived reindexing identifications fixed by the site restriction maps siteComp$(g,h)$ and siteId$(X)$ and localization. These are the pre-existing presentation structures of the parent, moved verbatim, and assert no existence or coherence theorem.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1, 2 and 4; representative details in the parent node lem-pod-reindexing-evaluation-shift-composition."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pod-reindexing-hom-resolution-model",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-pur-hom-complex",
+  "def-weil-proetale-iso-sectionwise-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived tensor comparison for reindexing sheaf modules along scheme isomorphisms respects composition and the identity",
+   "results": "SheafOfModules.pullbackComp, Scheme.Modules.pullbackComp, pushforward_id_comp and five PiTensorProduct reindexing lemmas.",
+   "date": "2026-10-27",
+   "verdict": "No match for the specified coefficient-normalized sectionwise module functor with its total-tensor, derived-model and signed Hom comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom comparison for composite monoidal functors is characterized by evaluation",
+   "results": "expComparison_ev, MonoidalClosedFunctor.comparison_iso, expComparison, coev_expComparison, uncurry_expComparison and three related lemmas.",
+   "date": "2026-10-27",
+   "verdict": "The Cartesian comparison results do not construct the specified reindexing tensor comparison or signed chain shifts. The abstract evaluation argument is proved directly in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(Comp|Id)|ihomComparison_comp_app",
+   "results": "Mathlib DerivedCategory.ExactFunctor provides factorization naturality; source ihomComparison_comp_app is an abstract composition law. The presentation structures already live in the parent; they are moved without duplication. No concrete compositor or signed Hom-shift square found.",
+   "date": "2026-10-27",
+   "verdict": "The new definition node records relocated existing presentation data. The four new theorem nodes are the remaining construction and shift steps, not duplicates of the abstract Hom comparison law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingEvaluationShiftComposition",
+  "date": "2026-10-27",
+  "group": "K8"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1, 2 and 4; representative details in the parent node lem-pod-reindexing-evaluation-shift-composition.",
+   "via": [
+    "lem-pod-reindexing-evaluation-shift-composition",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodReindexingCoherenceData",
+  "file": "lean/Sheaf/Paper/PodReindexingCoherenceData.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.Comparison",
+  "statement": "structure Comparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s) (TX : Models l E X s SX) (TY : Models l E Y s SY)",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-27",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.PodReindexingCoherence.K",
+   "WeilConjectures.PodReindexingCoherence.Closed",
+   "WeilConjectures.PodReindexingCoherence.Models",
+   "WeilConjectures.PodReindexingCoherence.total",
+   "WeilConjectures.PodReindexingCoherence.hom",
+   "WeilConjectures.PodReindexingCoherence.proj",
+   "WeilConjectures.PodReindexingCoherence.signedShift",
+   "WeilConjectures.PodReindexingCoherence.Comparison",
+   "WeilConjectures.PodReindexingCoherence.EvaluationLaws",
+   "WeilConjectures.PodReindexingCoherence.ChainShift",
+   "WeilConjectures.PodReindexingCoherence.complexShift",
+   "WeilConjectures.PodReindexingCoherence.ShiftLaws",
+   "WeilConjectures.PodReindexingCoherence.siteComp",
+   "WeilConjectures.PodReindexingCoherence.Compositor",
+   "WeilConjectures.PodReindexingCoherence.siteId",
+   "WeilConjectures.PodReindexingCoherence.Identity"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-54610",
+  "group": "K8",
+  "result": "fix",
+  "landing": "20261027T135435-L-3707416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-54610",
+  "group": "K8",
+  "result": "fix",
+  "landing": "20261027T135435-L-3707416",
+  "kind": "interface",
+  "note": "independent cc review: item + 5 new modules vs clone item (verbatim forced data split, statements unchanged), 4 leaves vs parent clauses, nodes vs Lean; reader gate: both direct importers compiled OK against delivered files"
+ }
+}

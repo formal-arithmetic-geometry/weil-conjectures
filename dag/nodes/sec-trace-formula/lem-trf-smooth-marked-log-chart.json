@@ -1,0 +1,215 @@
+{
+ "id": "lem-trf-smooth-marked-log-chart",
+ "kind": "statement",
+ "title": "Smooth and marked associated log charts over a log regular pair",
+ "statement": "Let $Y$ and $W$ be locally Noetherian schemes [pqf-def-locnoeth], let $T\\subseteq Y$ be closed, and suppose $(Y,T)$ is a log regular pair with divisorial log structure $M_Y$ [def-trf-log-regular-pair]. Suppose $M_Y$ has a chart $P\\to M_Y$ by a fine saturated monoid, with structure map $\\alpha:P\\to\\Gamma(Y,\\mathcal O_Y)$ [def-trf-fs-log-blowup]. Consider either of the following data: (i) a smooth morphism $g:W\\to Y$ [def-sbc-smooth-morphisms], with $E=\\varnothing$; or (ii) an etale $Y$-morphism $c:W\\to\\mathbf A^1_Y$ [def-weil-etale-morphism, def-sbc-affine-space], with $g$ its composite to $Y$, coordinate $z=c^*(t)$, and $E=V(z)$. Put $B=g^{-1}(T)\\cup |E|$ and $U=W\\setminus B$. In case (i) let $L$ be the log structure associated to $P\\to\\Gamma(W,\\mathcal O_W)$, $p\\mapsto g^*\\alpha(p)$; in case (ii) let $L$ be associated to $P\\oplus\\mathbf N\\to\\Gamma(W,\\mathcal O_W)$, $(p,n)\\mapsto g^*\\alpha(p)z^n$, using the associated log structure of [def-trf-fs-log-blowup]. Then $L$ is fine saturated and the inclusion of the base chart defines a morphism $(W,L)\\to(Y,M_Y)$. Its groupified chart map is injective, with cokernel $0$ in case (i) and $\\mathbf Z$ in case (ii). The comparison with the monoid-algebra base change is respectively $g:W\\to Y$ and $c:W\\to\\mathbf A^1_Y$. The log scheme $(W,L)$ is log regular, its triviality locus is exactly the dense open $U$, and its structure map canonically identifies $L$ with $\\mathcal O_W\\cap j_*\\mathcal O_U^\\times$, where $j:U\\hookrightarrow W$. Consequently $B$ is nowhere dense and $(W,B)$ is a log regular pair.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI Proposition 1.9, printed pp. 70--71, smooth-locus case; VI 1.8 and 1.4: base chart P and marked chart P direct sum N, comparison, triviality locus and divisorial recovery."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-trf-log-regular-pair",
+  "def-trf-fs-log-blowup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-per-fs-log-smooth-etale"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q=P$ in (i) and $Q=P\\oplus\\mathbf N$ in (ii), with $h=1_P$ or $h(p)=(p,0)$. The latter monoid is fs: finite generation and the embedding in $P^{\\rm gp}\\oplus\\mathbf Z$ hold componentwise; if $n(a,b)\\in P\\oplus\\mathbf N$ for $n>0$, saturation gives $a\\in P$ and $b\\geq0$. Thus the associated structure $L$ has an fs chart by [def-trf-fs-log-blowup]. The chart maps satisfy $\\beta(h(p))=g^*\\alpha(p)$. On associated-log stalk pushouts, send the class of $(p,u)$ to the class of $(h(p),g^*u)$; a relation coming from a base chart element mapping to a unit is respected since its pullback is a unit. These maps commute with restriction and the structure maps, giving the required log morphism.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 and Proposition 1.9, smooth-locus assertion, pp.69--71; explicit associated-chart construction."
+   }
+  },
+  {
+   "text": "The groupified map is respectively $1_{P^{\\rm gp}}$ or $a\\mapsto(a,0)$ into $P^{\\rm gp}\\oplus\\mathbf Z$, hence injective with cokernel $0$ or $\\mathbf Z$. In the monoid-ring convention of [lem-trf-log-smooth-log-regular], $\\mathbf Z[P\\oplus\\mathbf N]=\\mathbf Z[P][t]$: the basis element $[p,n]$ maps to $[p]t^n$, with inverse on the same basis. Therefore the comparison target is $Y$ in (i) and $\\mathbf A^1_Y$ in (ii), by [def-sbc-affine-space]. Affine locally this is $A\\otimes_{\\mathbf Z[P]}\\mathbf Z[P][t]\\simeq A[t]$, sending $a\\otimes[p]t^n$ to $a\\alpha(p)t^n$, with inverse $at^n\\mapsto a\\otimes t^n$. The comparison map pulls $t$ back to $z$, so it is precisely $c$ in (ii), and is $g$ in (i). These identifications agree on restrictions since they fix the base and the coordinate.",
+   "uses": [
+    "lem-trf-log-smooth-log-regular",
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8 and Proposition 1.9 chart test, pp.70--71; explicit monoid-ring base-change computation."
+   }
+  },
+  {
+   "text": "At a geometric point $\\bar w$ over $\\bar y$, the map of strict local rings is local, so an element of $\\mathcal O_{Y,\\bar y}$ pulls back to a unit exactly when it is a unit (nonunits lie in the maximal ideal, whose image lies in the target maximal ideal). By the chart pushout of [def-trf-fs-log-blowup], the associated log stalk is trivial exactly when all chart elements have unit image: if they do, the pushout is the unit group; conversely a log unit has unit structural image. In case (i) this is equivalent to $M_Y$ being trivial at $\\bar y$, hence to $\\bar y\\notin T$ by [def-trf-log-regular-pair]. In case (ii) it additionally requires $z$ to be a unit at $\\bar w$, equivalently $\\bar w\\notin V(z)$. Thus the triviality locus of $L$ is exactly $U=W\\setminus B$ in both cases.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4 and Proposition 1.9, pp.69--71; associated-chart unit calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-log-smooth-log-regular] to the constructed log morphism. Both schemes are locally Noetherian by hypothesis, the charts are fs by step 1, the base is log regular by [def-trf-log-regular-pair], the group map has torsion-free cokernel by step 2, and its comparison is the stipulated smooth $g$ or etale $c$. The cited theorem gives log regularity of $(W,L)$, a dense open triviality locus, and the canonical structural identification with $\\mathcal O_W\\cap j_*\\mathcal O_U^\\times$. Step 3 identifies that locus with the specified $U$. Since $T$ and $V(z)$ are closed, $B$ is closed; density of $U$ means that $B$ is nowhere dense. With the same divisorial identification, the fs and log-regular conclusions say exactly that $(W,B)$ is a log regular pair [def-trf-log-regular-pair].",
+   "uses": [
+    "lem-trf-log-smooth-log-regular",
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8, 1.4 and Proposition 1.9, printed pp.69--71."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-smooth-log-regular",
+  "def-sbc-affine-space",
+  "def-trf-log-regular-pair"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, 1.4, 1.8 and Proposition 1.9 (printed pp.69--71): expanded smooth-locus argument through existing chart criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism over a log regular pair, with an etale coordinate z for a marking, has fine saturated chart P plus N and divisorial log regular boundary.",
+   "results": "{\"t\": \"2026-10-22T06:11:47Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism over a log regular pair, with an etale coordinate z for a marking, has fine saturated chart P plus N and divisorial log regular boundary.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"f2c54dfc0c37426b\"}; Read all returned signatures: ordinary smooth/etale coordinates, manifold charts or logarithmic heights do not construct these associated log charts or identify their divisorial triviality loci. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth base chart P and the marked chart P direct sum N define log regular divisorial structures with dense complement.",
+   "results": "{\"t\": \"2026-10-22T06:11:21Z\", \"tool\": \"leansearch\", \"query\": \"A smooth base chart P and the marked chart P direct sum N define log regular divisorial structures with dense complement.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChartedSpace.sum_of_nonempty\", \"ChartedSpace.sum\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth.recOn\", \"IsManifold.locallyRingedSpace\", \"SmoothPartitionOfUnity.ctorIdx\", \"SmoothBumpCovering\"], \"digest\": \"d4f3670f45c85020\"}; Read all returned signatures: ordinary smooth/etale coordinates, manifold charts or logarithmic heights do not construct these associated log charts or identify their divisorial triviality loci. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "{\"t\": \"2026-10-22T06:11:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures: ordinary smooth/etale coordinates, manifold charts or logarithmic heights do not construct these associated log charts or identify their divisorial triviality loci. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|log.regular|divisorial|logarithmic",
+   "results": "{\"t\": \"2026-10-22T06:11:20Z\", \"tool\": \"grep\", \"query\": \"LogRegular|log.regular|divisorial|logarithmic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\"], \"digest\": \"67110dfe4035ec45\"}; Read all returned signatures: ordinary smooth/etale coordinates, manifold charts or logarithmic heights do not construct these associated log charts or identify their divisorial triviality loci. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|log.regular|divisorial.log|logarithmic.structure",
+   "results": "{\"t\": \"2026-10-24T08:14:25Z\", \"tool\": \"grep\", \"query\": \"LogRegular|log.regular|divisorial.log|logarithmic.structure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: ordinary smooth/etale scheme charts and unrelated logarithmic derivatives or manifold structures do not state fs log regularity or divisorial recovery. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The log structure associated to P plus N and a smooth marked coordinate is log regular and equals the divisorial log structure",
+   "results": "{\"t\": \"2026-10-24T08:14:25Z\", \"tool\": \"leansearch\", \"query\": \"The log structure associated to P plus N and a smooth marked coordinate is log regular and equals the divisorial log structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"Algebra.smoothLocus\", \"Differential.logDeriv\", \"IsManifold.locallyRingedSpace\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"ValueDistribution.logCounting_top\"], \"digest\": \"497212d17f5d5ead\"}; Read returned hits: ordinary smooth/etale scheme charts and unrelated logarithmic derivatives or manifold structures do not state fs log regularity or divisorial recovery. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "{\"t\": \"2026-10-24T08:14:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: ordinary smooth/etale scheme charts and unrelated logarithmic derivatives or manifold structures do not state fs log regularity or divisorial recovery. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth and etale marked affine line charts over a log regular base give fine saturated divisorial log regular structures",
+   "results": "{\"t\": \"2026-10-24T08:14:27Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth and etale marked affine line charts over a log regular base give fine saturated divisorial log regular structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"50ae89f73962710c\"}; Read returned hits: ordinary smooth/etale scheme charts and unrelated logarithmic derivatives or manifold structures do not state fs log regularity or divisorial recovery. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|FineSaturated|log.smooth|Divisorial",
+   "results": "{\"t\": \"2026-10-24T08:15:05Z\", \"tool\": \"grep\", \"query\": \"LogStructure|FineSaturated|log.smooth|Divisorial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: ordinary smooth/etale scheme charts and unrelated logarithmic derivatives or manifold structures do not state fs log regularity or divisorial recovery. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A log smooth morphism with chart P to P direct sum natural numbers preserves logarithmic regularity and recovers the divisorial log structure from its triviality locus",
+   "results": "{\"t\": \"2026-10-24T08:15:06Z\", \"tool\": \"leanfinder\", \"query\": \"A log smooth morphism with chart P to P direct sum natural numbers preserves logarithmic regularity and recovers the divisorial log structure from its triviality locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"4d836b9e7373e758\"}; Read returned hits: ordinary smooth/etale scheme charts and unrelated logarithmic derivatives or manifold structures do not state fs log regularity or divisorial recovery. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-log-regularity",
+  "date": "2026-10-22",
+  "group": "Q114"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality alteration input, lem-trf-local-term-locality proof (1)--(2), via nodal-pair projective resolution: VI Proposition 1.9, printed pp. 70--71, smooth-locus case; VI 1.8 and 1.4: base chart P and marked chart P direct sum N, comparison, triviality locus and divisorial recovery.",
+   "via": [
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-smooth-marked-log-chart",
+  "worker": "stage1",
+  "summary": "Expanded the smooth and marked associated-chart argument into four steps. Reused the existing general chart criterion, including its divisorial recovery conclusion; no new nodes. Checked fs products, group cokernels, the explicit polynomial base change and the exact triviality locus. Statement and statement dependencies unchanged.",
+  "blueprint": "Historical nearby-duality alteration input recorded in from.place: the smooth-locus branch of ILO VI Proposition 1.9, via lem-trf-nodal-log-regularity. Steps 1--2 construct its P and P plus N charts and comparisons, step 3 identifies the boundary, step 4 applies VI 1.8 and 1.4. The latest ancestor blueprint now uses contracting correspondences; this delivery preserves the recorded historical supporting route and changes no ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-661576908",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-661576908 (reviewer sub-agent of L); spot-checked: I read the whole split. It is an ordinary first split: there is no repair note and side-live has the item unsplit with an empty proof. There are no new nodes, and the statement and stmt_deps are unchanged. Source: ILO VI 1.8 and Prop. 1.9 (PDF pp.75-77). The source calls the smooth-locus case 'triviale', and the item spells out that case plus the P+N marked chart. Step 1: P+N is fs (saturation checked one component at a time), and the stalk map is well defined because the pullback of a unit relation is again a unit relation. Step 2: the group cokernel is 0 or Z, Z[P+N]=Z[P][t], and the comparison map is (g, t->z), which is exactly c. Step 3: the stalk of L is trivial iff every chart element maps to a unit; since O_{Y,y}->O_{W,w} is local, this happens iff y is not in T (in case (ii), also z a unit), so the triviality locus is exactly W\\B. Step 4: every stated hypothesis of the same-unit reviewed lemma lem-trf-log-smooth-log-regular is supplied, and its conclusions (dense triviality locus, divisorial identification, log regular pair) give the item. No cycle: a DFS from the four cited nodes does not reach the item. No SGA. No duplicate in the DAG (checked against lem-sfb-marked-nodal-relative-log-charts and lem-trf-polynomial-log-chart-regularity). Edge cases checked: W empty, P=0, non-sharp P, crossing N^2, and z a unit everywhere. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothMarkedLogChart",
+  "declaration": "AlgebraicGeometry.smooth_associatedLogChart",
+  "declarations": [
+   "AlgebraicGeometry.smooth_associatedLogChart",
+   "AlgebraicGeometry.marked_associatedLogChart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothMarkedLogChart.lean",
+  "statement": "theorem smooth_associatedLogChart (Y : FineSaturatedLogScheme.{u}) (UY : Y.scheme.Opens) (hdY : DenseRange UY.ι) (hpair : @IsDivisorialFineSaturatedLogRegularPair Y.scheme UY.toScheme UY.ι inferInstance Y.locallyNoetherian hdY) (eY : Y.logStructure.monoidSheaf.obj ≅ divisorialLogPresheaf UY.ι) (heY : eY.hom ≫ divisorialStructuralMap UY.ι = Y.logStructure.alpha) (P : Type u) [CommMonoid P] (hP : IsFineSaturatedMonoid P) (a : P →* Y.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 Y.scheme)))) (ha : Y.logStructure.IsChart (Scheme.Etale.mk (𝟙 Y.scheme)) a) (W : Scheme.{u}) [IsLocallyNoetherian W] (g : W ⟶ Y.scheme) [Smooth g] (L : EtaleLogStructure W) (b : P →* L.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 W)))) (hb : L.IsChart (Scheme.Etale.mk (𝟙 W)) b) (hab : ∀ p : P, L.alpha.app (op (Scheme.Etale.mk (𝟙 W))) (b p) = g.appTop (Y.logStructure.alpha.app (op (Scheme.Etale.mk (𝟙 Y.scheme))) (a p))) (U : W.Opens) (hU : U = g ⁻¹ᵁ UY) : ∃ hfs : L.IsFineSaturated, (FineSaturatedLogScheme.mk W inferInstance L hfs).IsLogRegular ∧ (∃ (f : EtaleLogHom (FineSaturatedLogScheme.mk W inferInstance L hfs) Y) (hf : g ≫ 𝟙 Y.scheme = 𝟙 W ≫ f.base), ∀ p : P, f.sectionMap (Scheme.Etale.mk (𝟙 Y.scheme)) (Scheme.Etale.mk (𝟙 W)) g hf (a p) = b p) ∧ Function.Injective (Algebra.GrothendieckGroup.lift ((Algebra.GrothendieckGroup.of (M := P)).comp (MonoidHom.id P))) ∧ Subsingleton (Algebra.GrothendieckGroup P ⧸ (Algebra.GrothendieckGroup.lift ((Algebra.GrothendieckGroup.of (M := P)).comp (MonoidHom.id P))).range) ∧ (∃ (e : pullback (Y.logStructure.chartToSpec (Scheme.Etale.mk (𝟙 Y.scheme)) a) (Spec.map (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom ℤ (MonoidHom.id P)))) ≅ Y.scheme) (k : W ⟶ _), e.hom = pullback.fst _ _ ∧ k ≫ pullback.snd _ _ = L.chartToSpec (Scheme.Etale.mk (𝟙 W)) b ∧ k ≫ e.hom = g) ∧ ∃ hd : DenseRange U.ι, L.trivialityLocus = (U : Set W) ∧ (∃ e : L.monoidSheaf.obj ≅ divisorialLogPresheaf U.ι, e.hom ≫ divisorialStructuralMap U.ι = L.alpha) ∧ interior (closure ((U : Set W)ᶜ)) = ∅ ∧ IsDivisorialFineSaturatedLogRegularPair W U.toScheme U.ι hd",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two declarations state cases (i) and (ii), respectively. Global IsChart together with hab specifies the associated log structure, using the exact stalk-pushout chart definition. The already landed def-per-fs-log-smooth-etale supplies the canonical chartToSpec maps used in the explicitly normalized monoid-algebra comparisons; its id is added to stmt_deps. No statement correction, new notion or dependency-interface repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3adafc3c1",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read node, report, module and all stmt_dep declarations (FineSaturatedLogBlowup IsChart/EtaleLogHom/trivialityLocus/IsLogRegular, LogRegularPair divisorial presheaf/pair, FSLogSmoothEtale chartToSpec/comparison, Mathlib AffineSpace/Smooth/Etale). Every hypothesis matches: UY complement + hdY + hpair + eY/heY; IsChart+hab exactly the associated log structure; hU = g^{-1}UY (⊓ basicOpen z). Every conclusion present: fs, log regular, base-chart log morphism with base forced = g, injective groupification with cokernel 0/Z, canonical normalized pullback comparison = g/c, dense U = triviality locus, divisorial identification, nowhere dense B, log regular pair. lean.statement verbatim; only stmt_dep delta def-per-fs-log-smooth-etale (chartToSpec owner, landed 10-18); imports public/plain per brief; no defs, proofs sorry, docstrings with ILO VI 1.1-1.9 and blueprint id. Edge cases (empty schemes, T empty, P with units, z unit) covered. No files changed, no compile."
+ }
+}

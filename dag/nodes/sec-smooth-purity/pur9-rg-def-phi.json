@@ -84,7 +84,18 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-regular",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "pur9-rg-def-phi",
@@ -138,19 +149,29 @@
    "AlgebraicGeometry.ProEtale.RegularImmersionPurity.comparison"
   ],
   "file": "lean/Sheaf/Paper/RegularImmersionPurityComparison.lean",
-  "statement": "def comparison (c : ℕ) (hreg : IsRegularImmersionOfPureCodimension (X ↘ Spec (.of P.field.k)) i c) [Smooth (X ↘ Spec (.of P.field.k))] [IsRegular Z] : unit P Z ⟶ (exceptional P i).obj (P.diagonalTwist X c)",
+  "statement": "def comparison (c : ℕ) (hreg : WeilConjectures.PurityConventions.IsRegularOfPureCodimension i c) [Smooth (X ↘ Spec (.of P.field.k))] [IsRegular Z] : unit P Z ⟶ (exceptional P i).obj (P.diagonalTwist X c)",
   "branch": "newtargets-dag",
-  "by": "Q21",
-  "date": "2026-10-18",
+  "by": "Q78",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "Canonical positive-power determining equation for the connected four-arrow composite, followed by unique finite-clopen assembly using the displayed rho/composition paste. The definition chooses only a uniquely determined morphism. The existing:true definition node def-pur-composition-comparisons owns compositionPowerAdd, compositionTwistPullback, and the unfolding lemma compositionEtalePowerZero, the canonical factors of compositionSourceIdentification in Sheaf.Paper.PurityCompositionCoherence. These factors do not choose data from smoothPurityCompositionCoherence; no theorem statement dependency is added. 2026-10-20 (U): module Sheaf.Paper.RegularImmersionPurityComparison deleted (dead: no target reaches it); this node is not reached either."
+  "note": "§1(B) repair: the recorded module was deleted as unreachable; live scompile --source confirms it is unavailable. Restore its unique positive-cancellation and finite-clopen characterization, canonical orientations, standing exceptional composition and normalized rho. The old signature used the obsolete positive-only stalk predicate IsRegularImmersionOfPureCodimension, which excludes c=0 needed by this consumer. Use the published affine-local PurityConventions.IsRegularOfPureCodimension (including empty sequences), as in sk-def-purity-conv and sk-lem-regular-smooth. On the smooth finite-type domain it supplies the same regularity and dimension conditions; no map, scalar, orientation or additional geometric hypothesis is chosen."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-7dfc5c37c",
-  "group": "Q21",
+  "reviewer": "NT-stage2-cc-7b116365b",
+  "group": "Q78",
   "result": "pass",
-  "note": "Re-delivery after a landing failure at PASSed head fd647cbc3184. That landing failed on a dependency overlay break: RingedSiteDualityMaps 'Unknown constant SheafOfModules.overFunctor', not a delivery fault. Snapshot diff vs fd647: item Lean module byte-identical (sha bed0ae00...) and node record identical; only blueprint-index.tsv and an appended report section differ. All 14 stmt_dep lean and statement records equal live. Live item has no lean record and its module is absent live, so no supersession or collision. nt_compile --json clean: 7.3 s, exit 0, all side overrides cached, the RingedSiteDualityMaps error did not recur. Spot check: proofs are sorry, comparison is .choose of an ExistsUnique, statement verbatim, docstrings with source place and blueprint id. The full mathematical review of b022a6c3/fd647cbc stands. Advisories unchanged: diagonalTwist vs purityCancellationTate typing; plain defs from base-era lemma stmt_deps."
+  "note": "Item lean-only change; stmt_deps unchanged from stage 1. Lean matches node clause by clause: P datum; Z,X sep. finite type; i closed immersion with IsRegularOfPureCodimension i c (c=0 allowed, as node says c>=0); Smooth X; IsRegularScheme Z; u etale with IsSeparated/QC implied by U sep qc and X separated; sq : IsPullback iU v u i. Conclusion existentials: iU closed immersion, v etale, V finite type/qc/separated, U and V smooth, V regular, iU regular codim c; EtaleUnitOrientation u,v (chartOrdinaryOrientation 0 = .choose of diagonal ∃!, = FiniteEtaleNormalization.eta); five-arrow B checked arrow by arrow, IsIso; co-projection square = lem-pur-etale-coprojection-rho-compatibility verbatim, co-projections pinned by co.inv equation, all invertible finite-Tor L; equation comparison iU ≫ B = twistPullback(v,0).inv ≫ v^*(comparison i). §1(B) restoration of deleted RegularImmersionPurityComparison (pur9-rg-def-phi): same 32 decls, note present, statement verbatim; hreg moved to sk-def-purity-conv IsRegularOfPureCodimension (source convention, includes c=0; value pinned by ComponentEquations independent of hreg; equivalent for c>=1 on smooth X); no hollow defs; no importers affected. Docstrings and source/blueprint ok; no line >100; imports exist; only sorry proofs; pro-etale coordinates. Advisories: etale-coordinate B in co-projection clause vs pro-etale B in equation (definitional link via pur9 rho); H11 dispatcher no-second-reader wording; pur9 pruned as unreachable by U on 10-20, reachability for maintainer; docstring cites latest blueprint. No compile run (no file changed)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "On a connected component of $X$ of dimension $N$, with $m=N-c$ (Lemma “Dimension of a regular immersion” (`pur9-rg-lem-dimension`, in [sk-lem-regular-smooth])), let $\\Phi_i:(\\mathcal O_E/\\pi_E^n)_Z\\to Ri^!_{\\mathcal O_E/\\pi_E^n}(\\mathcal O_E/\\pi_E^n)_X(c)[2c]$ be the composite in $D(Z_{\\Proet},\\mathcal O_E/\\pi_E^n)$ of: $\\Pi_{a_Z}^{-1}$ of Theorem “Finite-coefficient smooth purity” (`pur9-thm-smooth-purity`, in [sk-thm-smooth-purity]), twisted by $(-m)[-2m]$; the comparison $c_{a_X,i}:\\omega_{a_Z}\\cong Ri^!_{\\mathcal O_E/\\pi_E^n}\\omega_{a_X}$ of Lemma “The exceptional composition comparison is invertible” (`pur9-lem-upper-shriek-composition`) and Lemma “Smoothness of the two structure morphisms” (`pur9-rg-lem-smooth`, in [sk-lem-regular-smooth]), twisted by $(-m)[-2m]$; $Ri^!_{\\mathcal O_E/\\pi_E^n}\\Pi_{a_X}$, twisted by $(-m)[-2m]$; and the isomorphisms of Lemma “Twists pass through the exceptional inverse image of a closed immersion” (`pur9-cp-lem-twist`, in [sk-lem-coprojection]) moving the twists $(N)[2N]$ and $(-m)[-2m]$ through $Ri^!_{\\mathcal O_E/\\pi_E^n}$, with $N-m=c$; assembled over the components of $X$, the categories over a disjoint union being products.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -7,6 +7,7 @@ public import Sheaf.Paper.KummerResolutionColumns
 public import Sheaf.AlgebraicGeometry.CondensedHenselianLisseRigidity
 public import Sheaf.Paper.ProfiniteCoefficientLinearization
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 
 /-! # Resolved internal bar columns on a stratum
 Source: direct-image proof (3), coherent derived internal bar.
@@ -21,6 +22,104 @@ open CategoryTheory Limits Opposite MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 open CategoryTheory.CondensedBar
+namespace KummerTensorComparison
+universe v w
+variable {C : Type w} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+  {R : C} [MonObj R] [IsCommMonObj R]
+open Mod MonObj
+/-- The quotient map defining the relative tensor product is linear in its first factor. -/
+private noncomputable def relativeTensorπ (M N : Mod C R) :
+    (Mod.tensorRight R N.X).obj M ⟶ M ⊗ N :=
+  homMk (M := (Mod.tensorRight R N.X).obj M) (N := M ⊗ N) (tensorObjπ M N) (by
+    change ((α_ R M.X N.X).inv ≫ γ[R,M.X] ▷ N.X) ≫ tensorObjπ M N =
+      R ◁ tensorObjπ M N ≫ γ[R,(M ⊗ N).X]
+    simpa only [Category.assoc] using (whiskerLeft_tensorπ_smul M N).symm)
+
+/-- The relative tensor product is a cofork of the two action maps on module objects. -/
+private noncomputable def relativeTensorCofork (M N : Mod C R) :
+    Cofork ((tensorRightMap R γ[R,N.X]).app M)
+      ((tensorRightRightAct R N.X).app M) :=
+  Cofork.ofπ (relativeTensorπ M N) (by
+    apply Mod.hom_ext
+    change M.X ◁ γ[R,N.X] ≫ tensorObjπ M N =
+      ((α_ M.X R N.X).inv ≫ rightAct M ▷ N.X) ≫ tensorObjπ M N
+    rw [Category.assoc, tensorObjπ_condition]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc])
+
+/-- The tensor cofork is a coequalizer, as can be checked after forgetting the module action. -/
+private noncomputable def isColimitRelativeTensorCofork (M N : Mod C R) :
+    IsColimit (relativeTensorCofork M N) := by
+  apply isColimitOfIsColimitCoforkMap (forget R)
+  change IsColimit (Cofork.ofπ (tensorObjπ M N) _ :
+    Cofork (M.X ◁ γ[R,N.X]) ((α_ M.X R N.X).inv ≫ rightAct M ▷ N.X))
+  refine Cofork.IsColimit.mk _
+    (fun s ↦ coequalizer.desc (f := rightAct M ▷ N.X)
+      (g := (α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) s.π ?_) ?_ ?_
+  · have h := s.condition
+    change M.X ◁ γ[R,N.X] ≫ s.π =
+      ((α_ M.X R N.X).inv ≫ rightAct M ▷ N.X) ≫ s.π at h
+    rw [← cancel_epi (α_ M.X R N.X).inv]
+    simpa only [Category.assoc, Iso.inv_hom_id_assoc] using h.symm
+  · intro s
+    exact coequalizer.π_desc _ _
+  · intro s m hm
+    apply coequalizer.hom_ext (f := rightAct M ▷ N.X)
+      (g := (α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X])
+    exact hm.trans (coequalizer.π_desc _ _).symm
+
+
+private noncomputable def tensorComponent (M N : Mod C R) :
+    (Mod.tensorLeft N).obj M ≅ M ⊗ N :=
+  HasColimit.isoOfNatIso
+    (diagramIsoParallelPair ((Mod.tensorLeftDiagram R N).flip.obj M)) ≪≫
+      (colimit.isColimit _).coconePointUniqueUpToIso
+        (isColimitRelativeTensorCofork M N)
+
+omit [MonoidalPreadditive C] in
+private lemma tensorComponent_π (M N : Mod C R) :
+    Mod.tensorπ M N ≫ (tensorComponent M N).hom.hom = Mod.tensorObjπ M N := by
+  have h := congrArg Mod.Hom.hom
+    (show colimit.ι ((Mod.tensorLeftDiagram R N).flip.obj M) WalkingParallelPair.one ≫
+        (tensorComponent M N).hom = relativeTensorπ M N by
+      simp [tensorComponent, HasColimit.isoOfNatIso_ι_hom_assoc, relativeTensorCofork])
+  exact h
+
+private noncomputable def tensorIso (N : Mod C R) :
+    Mod.tensorLeft N ≅ MonoidalCategory.tensorRight N :=
+  NatIso.ofComponents (fun M ↦ tensorComponent M N) (by
+    intro M M' f
+    apply Mod.tensorLeft_obj_hom_ext
+    simp only [Mod.comp_hom', Mod.tensorπ_map_assoc]
+    rw [tensorComponent_π, ← Category.assoc, tensorComponent_π]
+    exact (Mod.tensorObjπ_whiskerRight f).symm)
+
+private noncomputable def homAdjunction (M : Mod C R) :
+    Mod.tensorLeft M ⊣ CategoryTheory.ihom M :=
+  (CategoryTheory.ihom.adjunction M).ofNatIsoLeft
+    (tensorIso M ≪≫ (BraidedCategory.tensorLeftIsoTensorRight M).symm).symm
+
+omit [MonoidalPreadditive C] in
+private lemma homAdjunction_uncurry (M N P : Mod C R)
+    (f : P ⟶ (CategoryTheory.ihom M).obj N) :
+    Mod.tensorπ P M ≫ (((homAdjunction M).homEquiv P N).symm f).hom =
+      f.hom ▷ M.X ≫ Mod.tensorObjπ ((CategoryTheory.ihom M).obj N) M ≫
+        ((β_ ((CategoryTheory.ihom M).obj N) M).hom ≫
+          (CategoryTheory.ihom.ev M).app N).hom := by
+  rw [Adjunction.homEquiv_counit, Mod.comp_hom', Mod.tensorπ_map_assoc]
+  congr 1
+  simp only [homAdjunction, Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Iso.symm_inv, Iso.trans_hom, NatTrans.comp_app,
+    Mod.comp_hom', Category.assoc]
+  change Mod.tensorπ ((CategoryTheory.ihom M).obj N) M ≫
+      (tensorComponent ((CategoryTheory.ihom M).obj N) M).hom.hom ≫
+        (β_ M ((CategoryTheory.ihom M).obj N)).inv.hom ≫
+          ((CategoryTheory.ihom.ev M).app N).hom = _
+  rw [← Category.assoc, tensorComponent_π]
+  simp only [← SymmetricCategory.braiding_swap_eq_inv_braiding]
+
+end KummerTensorComparison
+
 /-- The two published internal-Hom interfaces are identified by their actual
 underlying evaluation maps, using the quotient tensor and its braiding. This unique
 normalization excludes an arbitrary automorphism of the internal function object.
@@ -39,7 +138,27 @@ theorem kummerInternalHomComparison_existsUnique (A : Ring.{u}) (P : Profinite.{
             (freeParameter A P) ≫
           ((β_ ((CategoryTheory.ihom (freeParameter A P)).obj N) (freeParameter A P)).hom ≫
             (CategoryTheory.ihom.ev (freeParameter A P)).app N).hom := by
-  sorry
+  let M := freeParameter A P
+  let adj := KummerTensorComparison.homAdjunction M
+  let e := (Mod.ihomAdjunction M).rightAdjointUniq adj
+  have he (N : Modules A) : Mod.evaluation M N =
+      (e.hom.app N).hom ▷ M.X ≫
+        Mod.tensorObjπ ((CategoryTheory.ihom M).obj N) M ≫
+          ((β_ ((CategoryTheory.ihom M).obj N) M).hom ≫
+            (CategoryTheory.ihom.ev M).app N).hom := by
+    rw [← KummerTensorComparison.homAdjunction_uncurry]
+    rw [Adjunction.homEquiv_symm_rightAdjointUniq_hom_app]
+    rfl
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply (adj.homEquiv _ _).symm.injective
+  apply Mod.tensorLeft_obj_hom_ext
+  rw [KummerTensorComparison.homAdjunction_uncurry,
+    KummerTensorComparison.homAdjunction_uncurry]
+  exact (he' N).symm.trans (he N)
 
 /-- The unique counit-preserving transport to the existing profinite-function
 internal Hom, before deriving. Source: direct-image proof (3), term normalization
@@ -104,8 +223,12 @@ Source: direct-image proof (3) (blueprint: def-sfb-kummer-bar-resolution).
 Proof: evaluate at simplex n and use B.bar.maps_additive; natural transformation
 addition is componentwise. -/
 theorem kummerExplicitBar_additive (B : Model A G) :
-    (kummerExplicitBar A G B).Additive := by
-  sorry
+    (kummerExplicitBar A G B).Additive where
+  map_add := by
+    intro N P f h
+    apply NatTrans.ext
+    funext n
+    exact B.bar.maps_additive f h n.len
 attribute [instance] kummerExplicitBar_additive
 
 /-- Exact point pullback of a compatible equivariant bar resolution, still as a

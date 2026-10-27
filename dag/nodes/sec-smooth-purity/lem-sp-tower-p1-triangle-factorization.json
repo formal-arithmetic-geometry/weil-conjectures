@@ -1,0 +1,218 @@
+{
+ "id": "lem-sp-tower-p1-triangle-factorization",
+ "kind": "statement",
+ "title": "Canonical tower triangle composites are diagonal scalar contractions",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and a scheme $S$ on which $\\ell$ is invertible. Put $B_n=\\mathcal O_E/\\ell^n$ and $A_T=((B_n)_T)_n$, with quotient transitions, for schemes $T$ over $S$. Use the coefficient towers [sk-def-sp-coefficient-towers] and their ordinary derived categories [det-sp-coefficient-towers-abelian]. Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be comparison, and let $\\mathscr C^+(T)$ be the full subcategory of $D^+(\\operatorname{Tow}(T,\\mathcal O_E))$ whose every level has an etale-origin witness [def-weil-pbc-etale-origin-witness], meaning it is isomorphic to $\\nu_T^*L_n$ for some $L_n\\in D^+(T_{\\mathrm{et}},B_n)$. Put $P=\\mathbf P^1_S$, $W=P\\times_SP$, $q:P\\to S$, $p_1,p_2:W\\to P$, and let $\\Delta:P\\hookrightarrow W$ be the diagonal [def-nagata-projective-space-base-change]. Use the Tate twist, supported diagonal map $\\delta_\\bullet:\\Delta_*A_P\\to A_W(1)[2]$, and splitting traces $t_q,t_1,t_2$ of [det-sp-tower-classes]; here $t_i$ is the trace for $p_i$. Write $F=Rq_{*,\\bullet}$ and $G=q_\\bullet^*(-)(1)[2]$.\nUse the canonical comparison isomorphisms and natural maps on $\\mathscr C^+$ specified in [lem-sp-tower-p1-etale-origin-comparisons].\nWrite $\\eta_M$ for the composite\n$$M\\simeq Rp_{2*,\\bullet}\\Delta_*M\\simeq Rp_{2*,\\bullet}(\\Delta_*A_P\\otimes^Lp_1^*M)\\xrightarrow{Rp_{2*,\\bullet}(\\delta_\\bullet\\otimes1)}Rp_{2*,\\bullet}(p_1^*M)(1)[2]\\simeq GFM,$$\nand $\\varepsilon_K$ for\n$$FGK\\simeq K\\otimes^LRq_{*,\\bullet}(A_P(1)[2])\\xrightarrow{1\\otimes t_q}K,$$\nwhere composition, projection and exchange are the canonical mate maps on the ringed topos of towers [lem-coef-semilinear-derived-sections].\nLet $\\alpha_i:A_P\\xrightarrow{\\sim}Rp_{i*,\\bullet}\\Delta_*A_P$ be the direct-image composition identification for $p_i\\Delta=1_P$, and set $c_i=t_i\\circ Rp_{i*,\\bullet}(\\delta_\\bullet)\\circ\\alpha_i$. For every $M\\in\\mathscr C^+(P)$ and $K\\in\\mathscr C^+(S)$ the following identities of actual tower-derived morphisms hold:\n$$\\varepsilon_{FM}\\circ F(\\eta_M)=F(1_M\\otimes c_1),\\qquad G(\\varepsilon_K)\\circ\\eta_{GK}=1_{GK}\\otimes c_2,$$\nusing the unit identifications $M\\otimes^LA_P\\simeq M$ and $GK\\otimes^LA_P\\simeq GK$.\nIn the first equality the expanded composite is\n$$FM\\simeq R(qp_1)_{*,\\bullet}\\Delta_*M\\xrightarrow{R(qp_1)_*(\\delta_\\bullet\\otimes1)}R(qp_1)_{*,\\bullet}(p_1^*M(1)[2])\\simeq F(M\\otimes^LRp_{1*,\\bullet}(A_W(1)[2]))\\xrightarrow{F(1\\otimes t_1)}FM.$$\nUnder projection its first arrow has the factor $1_M\\otimes Rp_{1*,\\bullet}(\\delta_\\bullet)$, including $\\alpha_1$ on its source. In the second equality put $M=GK$; the canonical identifications $p_1^*M\\simeq(qp_1)^*K(1)[2]\\simeq p_2^*M$ identify the diagonal arrow with $1_M\\otimes Rp_{2*,\\bullet}(\\delta_\\bullet)$ and $G\\varepsilon_K$ with contraction by the base-changed trace $t_2$. The reordering is with the canonical exchange/projection words, not unspecified isomorphisms. It uses the standard signed tensor symmetry: moving $[2]$ past degree $j$ has sign $(-1)^{2j}=1$, and interchanging the two copies of the unshifted rank-one twist has identity symmetry under the canonical multiplication identification. This statement does not assert $c_i=1$ or assume an adjunction $F\\dashv G$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities, first and second projection (old steps 7-8)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-pbc-etale-origin-witness",
+  "def-nagata-projective-space-base-change",
+  "det-sp-tower-classes",
+  "lem-sp-tower-p1-etale-origin-comparisons",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Factor eta definitionally as unitInsertion then unitTail by functoriality. Apply the diagonal-free first trace rearrangement; then the first diagonal transport equation moves pushSwap through the insertion. Functoriality of F gives the first expanded contraction.",
+   "uses": [
+    "def-sp-tower-p1-triangle-words",
+    "lem-sp-tower-p1-first-trace-reordering",
+    "lem-sp-tower-p1-diagonal-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For N=GK, factor eta_N as unitInsertion_N then unitTail_N. Apply the diagonal-free second trace rearrangement and then the second diagonal transport equation. This gives the second expanded contraction.",
+   "uses": [
+    "def-sp-tower-p1-triangle-words",
+    "lem-sp-tower-p1-second-trace-reordering",
+    "lem-sp-tower-p1-diagonal-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Section specialization gives diagonalInsertion = diagonalTensorFactor followed by outsideProjection, for either projection and every object in the domain. Prove outsideProjection followed by outsideLineProjectionInverse is identity by cancelling the pushed symmetry, projection and base symmetry in order, using h.projection_projections. Substitute in expandedContraction and combine the two tensor maps by functoriality. This is scalarContraction by diagonalScalar. Substitute into both expanded equations and retain the section-specialization equations as the last two clauses.",
+   "uses": [
+    "def-sp-tower-p1-triangle-words",
+    "lem-sp-tower-p1-diagonal-projection-factor",
+    "lem-sp-tower-p1-etale-origin-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-p1-triangle-words",
+  "lem-sp-tower-p1-first-trace-reordering",
+  "lem-sp-tower-p1-diagonal-transport",
+  "lem-sp-tower-p1-second-trace-reordering",
+  "lem-sp-tower-p1-diagonal-projection-factor",
+  "lem-sp-tower-p1-etale-origin-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities, formal combination of diagonal-free trace reordering and diagonal transport with proved projection cancellation and tensor functoriality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Factor both unit counit triangle composites of the projective line diagonal kernel as tensor with its scalar integral using proper exchange and projection formula for towers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"contractLeft_assoc_coevaluation'\", \"module\": \"Mathlib/LinearAlgebra/Coevaluation\", \"type\": \"∀ (K : Type u) [inst : Field K] (V : Type v) [inst_1 : AddCommGroup V] [inst_2 : Module K V]\\n  [inst_3 : FiniteDimensional K V],\\n  LinearMap.lTensor V (contractLeft K V) ∘ₗ\\n      ↑(TensorProduct.assoc K V (Module.Dual K V) V) ∘ₗ LinearMap.rTensor V (coevaluation K V) =\\n    ↑(TensorProduct.rid K V).s\", \"doc\": \"The composition of the associator isomorphism $ (M \\\\otimes_R N) \\\\otimes_R P \\\\xrightarrow{\\\\cong} M \\\\otimes_R (N \\\\otimes_R P) $, the coevaluation map tensored with identity $ (\\\\mathrm{coev}_K(V) \\\\otimes\"}\n  {\"name\": \"TensorProduct.counit_def\", \"module\": \"Mathlib/RingTheory/Coalgebra/TensorProduct\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {A : Type u_3} {B : Type u_4} [inst : CommSemiring R] [inst_1 : CommSemiring S]\\n  [inst_2 : AddCommMonoid A] [inst_3 : AddCommMonoid B] [inst_4 : Algebra R S] [inst_5 : Module R A]\\n  [inst_6 : Module S A] [inst_7 : Module R B] [inst_8 : IsScalarTower R S A] [inst_9 : \", \"doc\": \"The counit of the coalgebra $ A \\\\otimes_R B $ over $ S $ is given by the composition of the right identity map on $ S $ with the tensor product of the counits of $ A $ and $ B $, i.e., $ \\\\varepsilon_{\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"left_triangle\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.left_triangle_components\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (self : F ⊣ G) (X : C) : CategoryTheory.CategoryStruct.comp (F.map (self.unit.app X)) (self.counit.app (F.obj X)) = CategoryTheory.\", \"doc\": \"Equality of the composition of the unit and counit with the identity `F ⟶ FGF ⟶ F = 𝟙`\"}\n  {\"name\": \"CategoryTheory.Adjunction.left_triangle_components_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (self : F ⊣ G) (X : C) {Z : D} (h : F.obj X ⟶ Z) : CategoryTheory.CategoryStruct.comp (F.map (self.unit.app X)) (CategoryTheory.Cat\", \"doc\": \"Equality of the composition of the unit and counit with the identity `F ⟶ FGF ⟶ F = 𝟙`\"}\n  {\"name\": \"CategoryTheory.Adjunction.left_triangle\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) : CategoryTheory.CategoryStruct.comp (CategoryTheory.Functor.whiskerRight adj.unit F) (CategoryTheory.CategoryStruct.\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*adjunction|adjunction.*diagonal|projectionFormula|projection_formula",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of derived projection formula and base change reduces diagonal kernel adjunction triangle composites to scalar trace contractions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"LinearMap.trace_eq_contract\", \"module\": \"Mathlib.LinearAlgebra.Trace\", \"type\": \": LinearMap.trace R M ∘ₗ dualTensorHom R M M = contractLeft R M\", \"doc\": \"The composition of the trace linear map $\\\\text{trace}: \\\\text{End}(M) \\\\to R$ with the tensor product homomorphism $\\\\text{dual}\\\\otimes\\\\text{Hom}: M^* \\\\otimes M \\\\to \\\\text{End}(M)$ equals the left contrac\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"LinearMap.trace_eq_contract_apply\", \"module\": \"Mathlib.LinearAlgebra.Trace\", \"type\": \"(x : Module.Dual R M ⊗[R] M) : (LinearMap.trace R M) ((dualTensorHom R M M) x) = contractLeft R M x\", \"doc\": \"For any element $x$ in the tensor product $M^* \\\\otimes_R M$ of the dual module $M^*$ and module $M$ over a commutative semiring $R$, the trace of the linear operator obtained by applying the canonical\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.comp\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[adj.IsTriangulated] [adj'.IsTriangulated] : (adj.comp adj').IsTriangulated\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and triangulated adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $H \\\\dashv I$ between $\\\\mathcal{D}$ and $\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(Y : Scheme.{u}) : (subschemeFunctor Y).rightOp ⊣ Y.kerFunctor\", \"doc\": \"For any scheme $Y$, the right opposite of the subscheme functor (mapping ideal sheaves to closed subschemes) is left adjoint to the kernel functor (extracting ideal sheaves from structure morphisms in\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ is constructed via the right derived functor description, combining whiskered natural transformations $\\\\bet\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of derived projection formula and base change reduces diagonal kernel adjunction triangle composites to scalar trace contractions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_ev\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (Y : CategoryTheory.Over I),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.ExponentiableMorphism.coev f)\", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map $ \\\\text{coev}_f $ applied to the pushforward object $ f_*Y $ and the pushforward of t\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (X : CategoryTheory.Over J),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.ChosenPullbacksAlong.pullback\", \"doc\": \"For any object $X$ in the over category $\\\\mathcal{C}/J$, the composition of the coevaluation map $\\\\text{coev}_f$ followed by the evaluation map $\\\\text{ev}_f$ equals the identity morphism on the pushfo\"}\n  {\"name\": \"LinearMap.trace_comp_cycle'\", \"module\": \"Mathlib/LinearAlgebra/Trace\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_3}\\n  {P : Type u_4} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : AddCommGroup P] [inst_6 : Module R P]\\n  [Module.Free R M] [Module.Finite R M] [Module.Free R P] [Module.Finite\", \"doc\": \"For finite-dimensional modules $M, N, P$ over a commutative semiring $R$, and linear maps $f : M \\\\to N$, $g : N \\\\to P$, $h : P \\\\to M$, the trace of the composition $(g \\\\circ f) \\\\circ h$ equals the tra\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_ev_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (Y : CategoryTheory.Over I) {Z : CategoryTheory.Over J}\\n  (h : (CategoryTheory.ExponentiableMorphism.pushforward f).ob\", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map (unit of the adjunction) and the pushforward of the counit (evaluation map) yields th\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.ev_coev_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (X : CategoryTheory.Over J) {Z : CategoryTheory.Over I}\\n  (h : (CategoryTheory.ChosenPullbacksAlong.pullback f).obj X \", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map (unit of the adjunction) followed by the evaluation map (counit of the adjunction) be\"}\n  {\"name\": \"LinearMap.trace_comp_cycle\", \"module\": \"Mathlib/LinearAlgebra/Trace\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_3}\\n  {P : Type u_4} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : AddCommGroup P] [inst_6 : Module R P]\\n  [Module.Free R N] [Module.Finite R N] [Module.Free R P] [Module.Finite\", \"doc\": \"For any linear maps $f : M \\\\to N$, $g : N \\\\to P$, and $h : P \\\\to M$ between modules over a commutative semiring $R$, the trace of the composition $g \\\\circ f \\\\circ h$ equals the trace of $f \\\\circ h \\\\ci\"}\n  {\"name\": \"LinearMap.trace_eq_contract\", \"module\": \"Mathlib/LinearAlgebra/Trace\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Free R M]\\n  [Module.Finite R M], LinearMap.trace R M ∘ₗ dualTensorHom R M M = contractLeft R M\", \"doc\": \"The composition of the trace linear map $\\\\text{trace}: \\\\text{End}(M) \\\\to R$ with the tensor product homomorphism $\\\\text{dual}\\\\otimes\\\\text{Hom}: M^* \\\\otimes M \\\\to \\\\text{End}(M)$ equals the left contrac\"}\n  {\"name\": \"LinearMap.trace_tensorProduct\", \"module\": \"Mathlib/LinearAlgebra/Trace\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M] (N : Type u_3)\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [Module.Free R M] [Module.Finite R M] [Module.Free R N]\\n  [Module.Finite R N],\\n  (TensorProduct.mapBilinear (RingHom.id R) M N M N).com\", \"doc\": \"For finite-dimensional modules $ M $ and $ N $ over a commutative semiring $ R $, the trace of the tensor product of their endomorphisms equals the product of their individual traces. Specifically, th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic category theory, algebraic traces, or scheme morphisms; none states this specified projective-line varying-coefficient tower claim."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|diagonal.*trace|trace.*diagonal",
+   "results": "msearch.py: OK, 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the specified projective-line tower-derived factorization; tensor functoriality and abstract triangle laws alone do not identify these maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Beck Chevalley exchange projection formula coherence for diagonal kernel trace contractions in derived categories",
+   "results": "msearch.py: OK, 8 hits; CategoryTheory.Limits.diagonal_pullback_fst; CategoryTheory.Limits.pullback_diagonal_map_snd_fst_fst; CategoryTheory.Limits.pullback_diagonal_map_snd_snd_fst; CategoryTheory.Limits.diagonalObjPullbackFstIso_inv_snd_fst; CategoryTheory.Limits.pullback.diagonal_isKernelPair; CategoryTheory.Limits.pullback.diagonal_fst; CategoryTheory.Limits.pullback.diagonal_snd; CategoryTheory.Functor.diag_δ",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the specified projective-line tower-derived factorization; tensor functoriality and abstract triangle laws alone do not identify these maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, \"tensorHom_comp_tensorHom\"",
+   "results": "msearch.py: OK, 4 hits; CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom; CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom_assoc; CategoryTheory.GradedObject.Monoidal.tensorHom_comp_tensorHom; CategoryTheory.GradedObject.Monoidal.tensorHom_comp_tensorHom_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the specified projective-line tower-derived factorization; tensor functoriality and abstract triangle laws alone do not identify these maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula and proper base change identify the two diagonal kernel unit counit composites with scalar trace contractions in a tower category",
+   "results": "msearch.py: OK, 8 hits; Algebra.trace_comp_trace; toAlgHom_comp_sectionOfRetractionKerToTensorAux; toAlgHom_comp_sectionOfRetractionKerToTensor; Algebra.Generators.H1Cotangent.δAux_ofComp; LinearMap.trace_baseChange; retractionOfSectionOfKerSqZero_comp_kerToTensor; Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange; KaehlerDifferential.tensorKaehlerEquiv_left_inv",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the specified projective-line tower-derived factorization; tensor functoriality and abstract triangle laws alone do not identify these maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Cartesian square of ringed topoi the two Kunneth maps formed by projection formula and exchange have the same counit transpose, giving trace contraction identities for a diagonal kernel",
+   "results": "msearch.py: OK, 8 hits; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the specified projective-line tower-derived factorization; tensor functoriality and abstract triangle laws alone do not identify these maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-p1-adjunction",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Reduction of the triangle identities, first and second projection (old steps 7-8)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-tower-p1-triangle-factorization",
+  "worker": "stage1",
+  "summary": "Expanded the two triangle reductions into common counit transposes, explicit projection/exchange cancellations, section-normalized diagonal insertion and the even-twist symmetry check. Reused existing DAG statements; no new nodes and no change of statement. Uses only the trace-base-change clause of the scalar-normalization sibling.",
+  "blueprint": "det-sp-tower-p1-adjunction, proof paragraph Reduction of the triangle identities: first projection in steps 2-5 and second projection in steps 6-9; step 1 fixes its actual tower comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Realizes the ordinary ringed-topos operations and specified mates on systems; this is the unit route's ringed topos of towers, not a different coefficient category."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "General ringed-topos projection composition, tensor associativity and section normalization applied to inverse-system topoi; the unit only abbreviates this calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic counit-defined exchange/tensor square used in the unit's required projection/base-change reduction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Step 4 takes from its statement the unit normalization alpha_{R_Y}=1 of the counit-defined projection map on an arbitrary ringed topos, applied to q on the topoi of systems; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-9188887b1",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-9188887b1 (reviewer sub-agent of L); spot-checked: I read the whole item. It is unsplit to split with no new nodes; statement, stmt_deps and blueprint are byte-identical to base. The node is not superseded: live and side-live are both still unsplit, and no repair note exists. The source paragraph is blueprint main-20261015 sk-prop-sp-tower-geometric-p1.proof.md 'Reduction of the triangle identities' (latest is identical), realizing unit step 3. Parent Q12 old steps 7-8 are fully expanded, nothing dropped. I typed every map in steps 2-9 myself. J1 and J2 have the same transpose a(eps_M) tensor b(eps_T) (the two Kunneth maps), using the mate-pasting composite counit and the composite projection identity. In step 4, D_M J1 = 1 tensor t_q via t1 v_T = L t_q from the first clause of kernel-scalar-normalization; c_i=1 is not used, so there is no circularity. The section specializations (i=Delta, p=p1 and p=p2) give the 1 tensor alpha_i sources. Step 7 applies ringed-exchange-tensor-coherence with f=g=q, f'=p2, g'=p1, E=T, Q=K. In step 8 the C_N Q_N word checks and t2 u_T = L t_q. The even-shift and rank-one swap signs are +1, including l=2. Every inverted map is a listed comparison isomorphism on C+, with RM, GK and T in the domains. Edge cases checked: M=0, K=0, empty S, odd degrees, non-Noetherian S. Duplicates checked and rejected: det-prop-p1-adjunction-rational-triangle (rational Loc(Dbc)), det-sp-p1-adjunction, thm-amb-p1-adjunction, the finite p1 adjunctions, lem-sp-p1-counit-scalar. Tool_uses accepted: coef-semilinear-derived-sections, sfb-ringed-projection-tensor-composition, ringed-exchange-tensor-coherence (generic ringed-topos coherence). Batch-5: def-sp-tower-class-twisting is a definition, already in the statement closure through stmt_dep det-sp-tower-classes. Its chain ends in lem-pod-etale-stalk-tensor-scalar, a generic stalk/tensor lemma that is not Poincare duality, so I accept it. FIX (C4): step 4 used the unit normalization P_q^r(M,A_S)=1, which the cited projection-composition node does not state. It is stated as alpha_{R_Y}=1 in lem-weil-pbc-ringed-projection-mate-exact, which I added to step 4 uses, proof_deps and split_report.tool_uses with one sentence of text. Its closure has no trace-formula or Poincare-duality node. Advisory A1: the unsplit comparison node should list the invertible-twist projection V(aM) tensor T to V(aM tensor bT) as an isomorphism; its eta formula presupposes it. Advisory A2: proof_origin points to latest/, an identical file.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerP1TriangleFactorization",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1TriangleFactorization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1TriangleFactorization"
+  ],
+  "file": "lean/Sheaf/Paper/TowerP1TriangleFactorization.lean",
+  "statement": "theorem towerP1TriangleFactorization (p : Presentation l E S hS) (d : Maps l E p) (h : EtaleOriginComparisonsWithLine l E p d) : (∀ M : C l E p.classes.base (ProjectiveLine S), (p.F l E).map (eta l E d M) ≫ epsilon l E d ((left l E d).obj M) = (p.F l E).map (scalarContraction l E p M.obj (diagonalScalar l E h false))) ∧ (∀ K : C l E p.classes.base S, eta l E d ((rightRestricted l E d).obj K) ≫ (p.G l E).map (epsilon l E d K) = scalarContraction l E p ((p.G l E).obj K.obj) (diagonalScalar l E h true)) ∧ (∀ M : C l E p.classes.base (ProjectiveLine S), (p.F l E).map (eta l E d M) ≫ epsilon l E d ((left l E d).obj M) = (p.F l E).map (expandedContraction l E h false M)) ∧ (∀ K : C l E p.classes.base S, eta l E d ((rightRestricted l E d).obj K) ≫ (p.G l E).map (epsilon l E d K) = expandedContraction l E h true ((rightRestricted l E d).obj K)) ∧ (∀ M : C l E p.classes.base (ProjectiveLine S), diagonalInsertion l E h false M = diagonalTensorFactor l E p false M.obj ≫ outsideProjection l E p false M.obj ((line l E p.classes.chernW)⟦(2 : ℤ)⟧)) ∧ (∀ K : C l E p.classes.base S, diagonalInsertion l E h true ((rightRestricted l E d).obj K) = diagonalTensorFactor l E p true ((p.G l E).obj K.obj) ≫ outsideProjection l E p true ((p.G l E).obj K.obj) ((line l E p.classes.chernW)⟦(2 : ℤ)⟧))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69ac3560d",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Lean exact: conjuncts 1-2 give eps_{FM}∘Fη_M = F(1⊗c1) and Gε_K∘η_{GK} = 1⊗c2 via scalarContraction (unitors); c_i = sourceUnitAt(α_i) ≫ p_i*δ ≫ t_i; conjuncts 3-6 give the expanded p1 word, the p2 word on GK and the first-arrow factors 1⊗Rp_i*δ with α_i source; they are consistent with 1-2 (outside projection cancels its inverse). No c_i=1 and no F⊣G. Maps has one data field, pinned by projectionQ_eq; h is the cited comparisons theorem's conclusion. t_i = q^*t_q∘exchangeSwap⁻¹ / exchange⁻¹ (base change along the cartesian square; TowerClasses has no P¹_P splitting) accepted: canonical, disclosed, matches the parent's step 2 and the sibling node. §1(B) dependency module TowerP1ComparisonsWithLine extends EtaleOriginComparisons by line_domain (A_P(1)[2] ∈ C⁺, implied by the node via G(A_S)); dependency node changes only in lean, with a note; statements verbatim; edge cases, docstrings, line lengths and helper-name duplicates checked; not recompiled per the instructions, no .lean changed. Sole finding H11: the delivered 'Second reading by Q13' is the author's self-check → fixes/lem-sp-tower-p1-triangle-factorization.report.md (worker report verbatim + reviewer reading). Advisories: A1 the kernel-scalar-normalization Lean must not make trace base change true by definition; A2 sourceUnitAt/exchangeSwap owned by uncited def-sp-p1-projective-coordinates, and the parent's defs are reachable only via the comparisons node; A3 the comparisons record now lists only the new declarations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477bf",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261025T164820-L-1092122",
+  "kind": "interface",
+  "note": "independent cc review: item towerP1TriangleFactorization (signature unchanged, proof complete from 4 sorried split lemmas) and moved defs (verbatim in TowerP1TriangleWords, re-exported) against clone + upstream defs (eta/epsilon/sourceUnit/exchange/exchangeSwap/square/projection/TensorData); scratch compile of all 6 modules with #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

@@ -1,0 +1,159 @@
+{
+ "id": "def-sfb-finite-stack-descent-data",
+ "kind": "definition",
+ "title": "Relative-section encoding of finite stack maps and finite atlas descent data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme and $\\mathcal X$ a category fibred in groupoids over $\\mathrm{Sch}/S$, with stack and 2-fibre-product conventions [def-sfb-stable-pointed-moduli-groupoids]. Use finite scheme representability [def-sfb-finite-stack-scheme-tests] and etale atlases [def-sfb-dm-stack-morphism-properties]. For a scheme map $p:Z\\to T$, its section presheaf on the total category of $h_T$ sends $(U,t:U\\to T)$ to $\\{z:U\\to Z\\mid pz=t\\}$ and restricts by precomposition. It is finite if $p$ is finite [def-weil-finite-integral-morphism]. A finite relative-section presheaf on $\\mathcal X$ is a functor $P:\\mathcal X^{op}\\to\\mathrm{Set}$ whose restriction along every scheme map $t:h_T\\to\\mathcal X$ is naturally isomorphic to such a finite section presheaf. Morphisms are all natural transformations. Its total category has objects $(x,s)$ with $s\\in P(x)$ and arrows $f:(x,s)\\to(y,t)$ satisfying $P(f)(t)=s$, and projects to $\\mathcal X$. Natural transformations act on the section coordinate. For a scheme map $a:h_T\\to\\mathcal X$, let $C_a$ have the objects of the total category of $h_T$ and arrows $c\\to d$ equal to arrows $a(c)\\to a(d)$ in $\\mathcal X$. The ordinary chart category maps into $C_a$ by $a$. A finite atlas descent datum is a functor $C_a^{op}\\to\\mathrm{Set}$ restricting on ordinary chart arrows to a finite section presheaf over $T$. Its vertical-isomorphism action is the overlap isomorphism (with inverse to pass from contravariant sections to covariant transport); functoriality is the cocycle on triple overlaps, and natural transformations are all compatible scheme maps. The restriction functor from finite relative-section presheaves to finite atlas descent data is precomposition with $C_a\\to\\mathcal X$. These are explicit constructions, asserting no descent effectiveness.",
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-weil-finite-integral-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex; literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 0245 (lemma-affine), 02LA (lemma-descending-property-finite), and 06WV(1); relative-section and test-scheme formulation of finite descent."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite scheme descent datum on a stack atlas as a presheaf of relative sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"(M : F.obj (.mk (op S))) : F.DescentData f\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a family of morphisms $f_i: X_i \\\\to S$, this c\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, (F.toDescentData fun f => f.obj.hom).IsEquivalence → F.IsStackFor R\", \"doc\": \"If the descent data functor associated to $ F $ is an equivalence of categories, then $ F $ satisfies the stack condition for the presieve $ R $ on $ S $.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      {ι : Type t} → {S : C} → {X : ι → C} → ((i : ι) → X i ⟶ S) → Type (max (max (max (max t u) u') v) v')\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J] {S : C},\\n  ∀ R ∈ J S, (F.toDescentData fun f => f.obj.hom).EssSurj\", \"doc\": \"For a pseudofunctor $ F $ from the locally discrete opposite category of $ \\\\mathcal{C} $ to the category of small categories, if $ F $ satisfies the stack conditions with respect to a Grothendieck top\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk\", \"module\": \"Mathlib.AlgebraicGeometry.RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {𝒰 : S.OpenCover} →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        (functor : CategoryTheory.Functor 𝒰.I₀ AlgebraicGeometry.Scheme) →\\n          (natTrans : functor ⟶ AlgebraicGeomet\", \"doc\": \"Given a scheme $S$, an open cover $\\\\mathcal{U}$ of $S$, a category structure on $\\\\mathcal{U}_0$, a locally directed cover structure on $\\\\mathcal{U}$, a functor from $\\\\mathcal{U}_0$ to schemes, and an \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \": F.IsStackFor (Presieve.ofArrows _ f) ↔ (F.toDescentData f).IsEquivalence\", \"doc\": \"A pseudofunctor $ F $ satisfies the stack condition for the presieve generated by a family of morphisms $ f_i: X_i \\to S $ if and only if the induced functor from $ F(\\text{op}(S)) $ to the category of \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Presieve S), F.IsStackFor R ↔ (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, the pseudofunct\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No declaration of this finite stack-descent encoding; generic category-of-elements, induced categories, and descent APIs are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative section presheaf of finite representable morphism to a stack and induced atlas descent category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      {S : C} → CategoryTheory.Presieve S → Prop\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}$ from the locally discrete bicategory of $\\\\mathcal{C}^{\\\\text{op}}$ to $\\\\mathsf{Cat}$, an object $S$ in $\\\\mathcal{C}$, and a presieve $R$ on $\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.sheafHom\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsPrestack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) →\\n      (J : CategoryTheory.GrothendieckTopology C) →\\n        [F.IsPrestack J] →\\n          {S : C} →\\n            ↑(F.obj { as := Opposite.op S }\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a pseudofunctor $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ satisfying the prestack axioms, this constructs the sheaf of hom-sets $\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {ι : Type t} {S : C}\\n  {X : ι → C} (f : (i : ι) → X i ⟶ S),\\n  F.IsStackFor (CategoryTheory.Presieve.ofArrows X f) ↔ (F.toDescentData f).IsEquivalence\", \"doc\": \"A pseudofunctor $ F $ satisfies the stack condition for the presieve generated by a family of morphisms $ f_i: X_i \\to S $ if and only if the induced functor from $ F(\\text{op}(S)) $ to the category of \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsPrestack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  (J : CategoryTheory.GrothendieckTopology C) [self : F.IsPrestack J] {S : C} (M N : ↑(F.obj { as := Opposite.op S })),\\n  CategoryTheory.Presheaf.IsSh\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a pseudofunctor $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ satisfying the prestack axioms, the presheaf of hom-sets $\\\\text{Hom}(M,\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.componentwiseDiagram\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits\", \"type\": \"{J : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} J] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        (F : CategoryTheory.Functor J (AlgebraicGeometry.PresheafedSpace C)) →\\n          [inst_2 : CategoryTheory.Limits.HasColimit F] →\\n            TopologicalSpace\", \"doc\": \"Let $F: \\\\mathcal{J} \\\\to \\\\mathrm{PresheafedSpace}(\\\\mathcal{C})$ be a diagram of presheafed spaces over a category $\\\\mathcal{C}$ that has a colimit, denoted $\\\\operatorname{colim} F$. For any open set $U\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S₀ : C}\\n  (S : CategoryTheory.Over S₀) {R : CategoryTheory.Sieve S},\\n  F.IsPrestackFor ((CategoryTheory.Sieve.overEquiv S) R).arrows →\\n    ∀ (M N : ↑\", \"doc\": \"Given a pseudofunctor $ F $ from the opposite category of the over category over an object $ S_0 $ to the category of types, if $ F $ satisfies the prestack condition for a sieve $ R $ on an object $ \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {S : C}\\n  (R : CategoryTheory.Presieve S), F.IsStackFor R ↔ (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, the pseudofunct\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No declaration of this finite stack-descent encoding; generic category-of-elements, induced categories, and descent APIs are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Elements",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.Elements\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor C (Type w)) : Type (max u w)\", \"doc\": \"The type of objects for the category of elements of a functor `F : C ⥤ Type`\\nis a pair `(X : C, x : F.obj X)`.\"}\n  {\"name\": \"CategoryTheory.Functor.Elements.fst\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor C (Type w)} (self : F.Elements) : C\", \"doc\": \"**Alias** of `CategoryTheory.Functor.Elements.obj`.\\n\\n---\\n\\nthe underlying object of an element of a functor to types\"}\n  {\"name\": \"CategoryTheory.Functor.Elements.instCategory\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor C (Type w)} : CategoryTheory.Category.{v, max u w} F.Elements\", \"doc\": \"The category structure on `F.Elements`, for `F : C ⥤ Type`.\\nA morphism `(X, x) ⟶ (Y, y)` is a morphism `f : X ⟶ Y` in `C`, so `F.map f` takes `x` to `y`.\"}\n  {\"name\": \"CategoryTheory.Functor.Elements.obj\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor C (Type w)} (self : F.Elements) : C\", \"doc\": \"the underlying object of an element of a functor to types\"}\n  {\"name\": \"CategoryTheory.Functor.Elements.Hom\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor C (Type w)} (x y : F.Elements) : Type v\", \"doc\": \"A morphism `x ⟶ y` in the category `F.Elements` of elements of a functor `F : C ⥤ Type w`\\nconsists of a morphism `hom : x.obj ⟶ y.obj` such that `F.map hom` sends `x.val` to `y.val`.\"}\n  {\"name\": \"CategoryTheory.Functor.Elements.groupoid\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {G : Type u} [CategoryTheory.Groupoid G] (F : CategoryTheory.Functor G (Type w)) : CategoryTheory.Groupoid F.Elements\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.Elements.initialOfCorepresentableBy\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor C (Type u_1)} {X : C} (h : F.CorepresentableBy X) : F.Elements\", \"doc\": \"The initial object in `F.Elements` if `F` is corepresentable.\"}\n  {\"name\": \"CategoryTheory.CategoryOfElements.π\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor C (Type w)) : CategoryTheory.Functor F.Elements C\", \"doc\": \"**Alias** of `CategoryTheory.Functor.Elements.π`.\\n\\n---\\n\\nThe functor out of the category of elements which forgets the element.\"}\n  {\"name\": \"CategoryTheory.Functor.Elements.π\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor C (Type w)) : CategoryTheory.Functor F.Elements C\", \"doc\": \"The functor out of the category of elements which forgets the element.\"}\n  {\"name\": \"CategoryTheory.Functor.elementsMk\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor C (Type w)) (X : C) (x : F.obj X) : F.Elements\", \"doc\": \"Constructor for the type `F.Elements` when `F` is a functor to types.\"}\n  {\"name\": \"CategoryTheory.Functor.Elements.essentiallySmall\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor C (Type w)) [CategoryTheory.EssentiallySmall.{w, v, u} C] : CategoryTheory.EssentiallySmall.{w, v, max u w} F.Elements\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.Elements.instLocallySmall\", \"module\": \"Mathlib.CategoryTheory.Elements\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor C (Type w)} [CategoryTheory.LocallySmall.{w, v, u} C] : CategoryTheory.LocallySmall.{w, v, max u w} F.Elements\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No declaration of this finite stack-descent encoding; generic category-of-elements, induced categories, and descent APIs are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteAtlasDescent|FiniteStackSections|IsRepresentableFiniteModuliMap",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No declaration of this finite stack-descent encoding; generic category-of-elements, induced categories, and descent APIs are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FiniteAtlasDescent|FiniteStackSections|finiteSchemeSections|relative section presheaf dag/nodes",
+   "results": "No matches (rg exit 1).",
+   "date": "2026-10-24",
+   "verdict": "No existing encoding matching these notions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FiniteAtlasDescent|FiniteStackSections|finiteSchemeSections|relative section presheaf lean/WeilConjectures",
+   "results": "No matches (rg exit 1).",
+   "date": "2026-10-24",
+   "verdict": "No existing encoding matching these notions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FiniteAtlasDescent|FiniteStackSections|finiteSchemeSections|relative section presheaf lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GrothendieckEtaleRelativeSectionColimit.lean:892:the relative section presheaf at U with global sections of the pullback to U times D_j.\n",
+   "date": "2026-10-24",
+   "verdict": "No existing encoding matching these notions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FiniteAtlasDescent|FiniteStackSections|finiteSchemeSections|relative section presheaf lean/.lake/packages/mathlib/Mathlib",
+   "results": "No matches (rg exit 1).",
+   "date": "2026-10-24",
+   "verdict": "No existing encoding matching these notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-schemes-etale-stack-descent",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: Effective descent of finite schemes on an etale stack presentation. Relative-section and atlas-descent encoding of the categories in the statement.",
+   "via": [
+    "lem-sfb-finite-schemes-etale-stack-descent",
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteStackDescentData",
+  "declaration": "CategoryTheory.FiniteAtlasDescent",
+  "declarations": [
+   "CategoryTheory.finiteSchemeSections",
+   "CategoryTheory.IsFiniteSchemeSections",
+   "CategoryTheory.IsFiniteStackSections",
+   "CategoryTheory.FiniteStackSections",
+   "CategoryTheory.FiniteAtlasCategory",
+   "CategoryTheory.finiteAtlasInclusion",
+   "CategoryTheory.FiniteAtlasDescent",
+   "CategoryTheory.finiteStackRestriction",
+   "CategoryTheory.stackSectionTotal",
+   "CategoryTheory.stackSectionProjection",
+   "CategoryTheory.stackSectionMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteStackDescentData.lean",
+  "statement": "abbrev FiniteAtlasDescent {S : Scheme.{u}} {X : BasedCategory.{v, w} (Over S)} {T : Over S} (a : BasedFunctor (discreteModuli (yoneda.obj T)) X)",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7293ba579",
+  "group": "Q39",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7293ba579",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Checked the item node, new node def-sfb-finite-stack-descent-data, unchanged dep records (equal to side-live), both modules and the used defs (IsDeligneMumfordModuliStack, IsEtaleModuliAtlas, IsRepresentableFiniteModuliMap, ModuliTwoIso, discreteModuli). The descent-data presheaf on C_a encodes theta, the cocycle and all compatible maps without assuming T2 is a scheme. The IsEquivalence of the canonical restriction plus the DM/representable-finite, CFG-representation and maps-mod-2-iso clauses give the node's equivalence; the conj.4 existence and uniqueness check out. The normal clause matches the node's 'normal etale atlas' meaning and the inline normal-ring form, with no hypotheses on X. Universes are independent; nothing hollow; proof is sorry only; docstrings and verbatim statements OK. Notes: IsNormalModuliStack (all charts normal) is equivalent for DM stacks but is a different formulation; IsEtaleModuliAtlas/IsRepresentableFiniteModuliMap nodes are reached only through the new node's stmt_deps; the second reading is the worker's own second pass. Nothing compiled, since no file changed."
+ }
+}

@@ -13,9 +13,38 @@
   "def-pc-scheme",
   "def-trf-algebraic-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each etale scheme chart T to X, send an object V to T in X_et/T to its underlying scheme map V to T. The scheme comparison clause of representable_etale_scheme_tests makes that map etale. Conversely compose an etale T-scheme with the chart T to X, using the scheme etaleness test and isEtale_comp. Underlying scheme maps give a fully faithful functor, and this explicit converse proves essential surjectivity.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A sieve in X_et is covering exactly when its underlying scheme maps are jointly surjective. Prove this directly: jointly surjective sieves form a Grothendieck topology, with pullback stability supplied by scheme fibre products and existence of a scheme fibre-product point over matching points. It contains the defining precoverage, and every jointly surjective sieve itself belongs to that precoverage because all chart maps are etale. The slice sieve equivalence gives the identical pointwise criterion in X_et/T. The full faithful equivalence in step 1 preserves and reflects these pointwise coverings and hence is a dense subsite equivalence.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib.AlgebraicGeometry.Sites.AffineEtale constructs u-valued additive sheafification on the small etale site of the underlying scheme of T and proves WEqualsLocallyBijective there. Transport HasSheafify by Equivalence.hasSheafify along the site equivalence, then infer HasWeakSheafify. Transport WEqualsLocallyBijective by GrothendieckTopology.WEqualsLocallyBijective.transport along its inverse, using dense-subsite continuity, cocontinuity and cover preservation. QCoh is then the unchanged Mathlib local-presentation full subcategory. This is a direct use of the cited Mathlib APIs, with no further mathematical proof obligation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Section etale-site, definition-etale-site and its introductory lemma-etale-over-space comparison; Modules on Sites Tag 03DL; Mathlib AlgebraicGeometry.Sites.AffineEtale and CategoryTheory.Sites.Equivalence supply sheafification and transport."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -114,5 +143,26 @@
   "result": "pass",
   "note": "Read the item, all 5 statement deps, Stacks 03M9 (spaces-morphisms l.1907) and the landed declarations. Each clause matches with no extra hypotheses: hqc/hsep are the recorded predicates, F carries Mathlib IsQuasicoherent, and the conclusion uses the canonical moduleDirectImage. Restricting qcqs to separated is the node's choice. Both lean.statement fields appear verbatim. The section 1(B) dependency module gives true slice HasWeakSheafify/WEqualsLocallyBijective instances (sorry, docstrings, same as the landed scheme instances) and QCoh as a real full subcategory; no duplicate. The node diffs only add lean records and the explicit stmt_dep def-trf-space-etale-module-functors. One universe u (site objects u+1). Empty-space, zero-module and infinite-presentation cases are covered. nt_compile --json on both siblings: clean, rc=0. A probe confirmed the signature, instance resolution, and that sorryAx is the only non-standard axiom. Gates met; the report has both sections (standard second-reading placeholder). No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261023T124308-L-1364634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

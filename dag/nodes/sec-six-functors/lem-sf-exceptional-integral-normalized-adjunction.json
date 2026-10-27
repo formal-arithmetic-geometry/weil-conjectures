@@ -1,0 +1,179 @@
+{
+ "id": "lem-sf-exceptional-integral-normalized-adjunction",
+ "kind": "statement",
+ "title": "Restriction to the normalized exceptional system adjunction",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "For D,l,E,X,Y,f,c as in integral reconstruction, fix rX:Reconstruction l E X and any s:Systems l E c [def-sf-exceptional-integral-reconstruction-interfaces]. The actual coordinate system functors s.left and s.exceptional preserve normalized strict constructible systems with common finite cohomological and Tor intervals and have the specified restricted adjunction, compatible origins and transpose equation: Nonempty (SystemAdjunction l E c s). This is the normalized restriction of the already existing system adjunction, not a construction of an integral realization.",
+ "stmt_deps": [
+  "def-sf-exceptional-integral-reconstruction-interfaces"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+ },
+ "proof": [
+  {
+   "text": "The middle scheme is finite type, hence Noetherian; its open factor is quasi-compact. The fixed finite evaluations identify both outputs with finite exceptional operations, which supply common cohomological and Tor bounds independent of the coefficient level.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sf-exceptional-finite-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+   }
+  },
+  {
+   "text": "Constructible origin and the uniform lower bound provide the source and target origin assertions. The transported right operation preserves normalization. For the left operation, rX writes every normalized input as actual reduction of its limit; integral compact-support comparisons identify every successive transition adjunct with a composite of isomorphisms. Transport back along the reconstruction counit.",
+   "uses": [
+    "lem-coef-integral-compact-support",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-exceptional-system-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+   }
+  },
+  {
+   "text": "Conjugate the origin Hom-chain adjunction by the two coordinate equivalences and restrict along the full normalized inclusions. The inverse coordinate counits and the source site counit give exactly SystemAdjunction.transpose. The inverse Hom chain proves the triangles.",
+   "uses": [
+    "lem-sf-exceptional-system-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sf-exceptional-finite-operations",
+  "lem-coef-integral-compact-support",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-exceptional-system-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Formal assembly of the existing actual-map declarations, following the integral reconstruction proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An adjunction restricts to an equivalence of full subcategories when its unit and counit are isomorphisms",
+   "results": "8 hits: Adjunction.toEquivalence, Functor.isEquivalence_of_isRightAdjoint, toEquivalence unit/counit and functor/inverse equations, map_restrictFullyFaithful_unit_app, and instIsIsoFunctorCounitOfIsEquivalence. The categorical restriction and upgrade are used in the proved reconstruction; none supplies the geometric normalization or realization.",
+   "date": "2026-10-27",
+   "verdict": "Use the abstract adjunction APIs; retain the geometric obligations as source-specific steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction and total inverse limit restrict to an equivalence on normalized constructible coefficient systems with uniform Tor bounds",
+   "results": "8 hits, including InverseSystem.globalEquiv, InverseSystem.pEquivOnLim, InverseSystem.invLimEquiv and AdicCompletion.transitionMap_comp_reduceModIdeal; none concerns derived sheaf coefficient systems.",
+   "date": "2026-10-27",
+   "verdict": "No geometric match; reuse the existing project reconstruction declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.ofNatIsoLeft",
+   "results": "toEquivalence upgrades an adjunction with invertible unit/counit; restrictFullyFaithful supplies restriction and its map equations; ofNatIsoLeft transports an adjunction. These carry the categorical steps but not geometric bounds, origins or actual proper/open normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use these abstract categorical results where their hypotheses have been verified."
+  },
+  {
+   "tool": "grep",
+   "query": "(exceptionalIntegral|IntegralReconstruction|LevelBounds)",
+   "results": "msearch Mathlib grep: 0 hits. Repository rg finds the assigned theorem and its structures; generic actual reconstruction is in PurNormalizedReconstructionAdjunctionCalculus; exceptional transport is in ExceptionalSystemTransport. LevelBounds and primitive realization interfaces are project-specific.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of the fixed-coordinate restriction/assembly; preserve the existing interfaces verbatim."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ExceptionalIntegralReconstruction",
+  "date": "2026-10-27",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Restriction to the normalized exceptional system adjunction; existing integral reconstruction proof, without changing the compatibility unit route.",
+   "via": [
+    "lem-sf-exceptional-integral-reconstruction",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ExceptionalIntegralNormalizedAdjunction",
+  "file": "lean/Sheaf/SixFunctors/ExceptionalIntegralNormalizedAdjunction.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralReconstruction.exceptionalIntegralNormalizedAdjunction",
+  "declarations": [
+   "WeilConjectures.ExceptionalIntegralReconstruction.exceptionalIntegralNormalizedAdjunction"
+  ],
+  "statement": "theorem exceptionalIntegralNormalizedAdjunction\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (rX : Reconstruction l E X) (s : Systems l E c) :\n    Nonempty (SystemAdjunction l E c s)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "split_report": {
+  "blueprint": "Restriction to the normalized exceptional system adjunction; existing integral reconstruction proof, without changing the compatibility unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-sf-exceptional-finite-operations",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-coef-integral-compact-support",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-sf-exceptional-system-transport",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d6d43",
+  "group": "Z7",
+  "result": "fix",
+  "landing": "20261027T013018-L-2358518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d6d43",
+  "group": "Z7",
+  "result": "fix",
+  "landing": "20261027T013018-L-2358518",
+  "kind": "interface",
+  "note": "independent cc review: delivered Interfaces module vs clone item module (verbatim move + withTransport), item theorem signature vs clone, new/changed node records vs Lean declarations and owner nodes"
+ }
+}

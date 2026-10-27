@@ -1,0 +1,146 @@
+{
+ "id": "lem-sp-integral-adjunction-reconstruction-package",
+ "kind": "statement",
+ "title": "Specified normalized reconstruction comparison package",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and its completed integral coefficient sheaves [def-weil-l-adic-coefficient-extension, def-weil-completed-integral-coefficients]. Use strict varying-coefficient derived towers and their constructible and normalized full subcategories [sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers], and the specified reduction/total-limit adjunctions [det-sp-normalized-equivalence]. Let $D$ be a finite-field datum of characteristic $p\\ne\\ell$ [def-weil-finite-field-fiber]. Let $X,Y$ be separated finite-type schemes over its algebraic closure, and $f=pj:X\\to Y$ smooth of pure dimension $d$, with $j:X\\to Z$ open and $p:Z\\to Y$ proper. Fix the tower geometry $b,o,q$, Tate presentation $w$, reductions $R_X,R_Y$ and normalized equivalences $N_X,N_Y$, a constructibility proof for tower compact support, and a tower right adjoint $G$ with adjunction $a$ and finite comparisons $lv$ [det-sp-tower-gluing, det-sp-tower-gamma]. Then the package Reconstruction of [def-sp-integral-reconstruction-comparison-data] exists for these specified data. In particular its comparisons are normalized by the actual $N_X,N_Y$ units and counits and by the canonical compactification-limit comparison, rather than arbitrary isomorphisms. This assertion contains no transported integral adjunction, finite unit/counit identities, or integral purity isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Normalization and Bijections"
+ },
+ "stmt_deps": [
+  "det-sp-integral-direct-image-tower",
+  "det-sp-normalized-equivalence",
+  "det-sp-tower-gluing",
+  "det-sp-tower-gamma",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "def-pur-integral-derived-operations",
+  "def-coefficient-twists-detailed",
+  "def-sp-complete-compactification-limit-comparison",
+  "def-sp-twisted-pullback-reduction-data",
+  "def-sp-integral-reconstruction-comparison-data",
+  "def-sp-complete-compactification-scalar-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized equivalence restrictions for the specified NX,NY. Finite type over the field makes X,Y Noetherian. The actual units and counits give fully faithful reductions, reconstruction isomorphisms, inverse equivalences, and the morphism reconstruction identity by unit naturality and cancellation.",
+   "uses": [
+    "det-sp-normalized-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use preservation of normalized towers by the specified adjoints. Hence total limit of G applied to reduction is integral constructible.",
+   "uses": [
+    "det-sp-tower-gamma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose quotient-normalized compactification-limit presentations and scalar data. The canonical natural limit comparison followed by towerWord is imageComparison. Reduce it and compose with the actual NY counit to construct leftComparison. The actual NX counit is rightComparison. Their naturality follows from those of the constituent maps; imageComparison proves support_closed. These give exactly Reconstruction, using the argument of the existing reconstruction comparison theorem while retaining the specified NX,NY.",
+   "uses": [
+    "lem-sp-complete-compactification-limit-realization",
+    "lem-sp-integral-reconstruction-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-integral-reconstruction-comparisons",
+  "det-sp-normalized-equivalence",
+  "lem-sp-complete-compactification-limit-realization",
+  "det-sp-tower-gamma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Normalization and Bijections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction across fully faithful functors and natural isomorphisms",
+   "results": "restrictFullyFaithful and its unit/counit lemmas supply the categorical assembly; no geometric reconstruction or Tate-source comparison. A second ordered-Tate-power query returned tensor-power representation lemmas only.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "Found restrictFullyFaithful, its homEquiv application and mapped unit/counit equations; not the geometric comparison.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction restricts along fully faithful functors",
+   "results": "Found restrictFullyFaithful and mapped unit/counit equations; no coefficient comparison.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful|map_restrictFullyFaithful; reconstructionResult|SpIntegralAdjunction.Reconstruction; finiteSource|orderedLine",
+   "results": "Mathlib has the transport formulas. IntegralReconstructionComparisons constructs Comparisons with existential limit presentations, not Reconstruction for specified NX and NY. TwistedPullbackReductionTower compares to finiteSource; no declared bridge to orderedLine was found.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralAdjunctionBijection",
+  "group": "S6",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Bijections",
+   "via": [
+    "det-sp-integral-adjunction-bijection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralAdjunctionReconstruction",
+  "file": "lean/Sheaf/Paper/IntegralAdjunctionReconstruction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpIntegralAdjunction.integralAdjunctionReconstruction",
+  "statement": "theorem integralAdjunctionReconstruction\n    (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)\n    {X Z Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p]\n    [(j ≫ p).IsOver (Spec (.of D.k))]\n    (d : ℕ) [SmoothOfRelativeDimension d (j ≫ p)]\n    (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)\n    (q : SpTowerCalculus.Coordinates l E b) (w : SpChartAdmissibility.Twists l E X)\n    (RX : SpReductionTower l E X (q.abelian X))\n    (NX : SpNormalizedEquivalence l E X (q.abelian X) RX)\n    (RY : SpReductionTower l E Y (q.abelian Y))\n    (NY : SpNormalizedEquivalence l E Y (q.abelian Y) RY)\n    (hF : ∀ M : SpTowerCalculus.C l E b q X,\n      spConstructibleTorTowers l E Y (q.abelian Y)\n        ((SpTowerCalculus.F l E b o q (SpTowerGamma.factorization j p)).obj M.obj))\n    (G : SpTowerCalculus.C l E b q Y ⥤ SpTowerCalculus.C l E b q X)\n    (a : SpTowerGluing.support l E b o q (SpTowerGamma.factorization j p) hF ⊣ G)\n    (lv : SpTowerGluing.Levels l E b o q (SpTowerGamma.factorization j p) hF G a) :\n    Nonempty (reconstructionResult l E D j p b o q RX NX RY NY hF G a)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T203130-L-2785267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T203130-L-2785267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

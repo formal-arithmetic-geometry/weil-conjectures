@@ -1,0 +1,281 @@
+{
+ "id": "lem-trf-zariski-fs-monoid-chart",
+ "kind": "statement",
+ "title": "Zariski local fs monoid charts for a Zariski log structure",
+ "statement": "Let $(X,M)$ be a locally Noetherian fs log scheme [def-trf-fs-log-blowup]. Suppose there is a log structure $M_{\\mathrm{Zar}}\\to(\\mathcal O_X,\\cdot)$ on the Zariski site whose associated etale log structure is $M$; here a log structure has the same monoid-sheaf and inverse-image-of-units axiom as in [def-trf-fs-log-blowup], on the indicated site. For every point $x\\in X$ there are an affine Zariski open neighborhood $U$ of $x$, a fine saturated commutative monoid $P$, and a homomorphism $h:P\\to M_{\\mathrm{Zar}}(U)$ such that the log structure associated on the Zariski site to $\\alpha h:P\\to\\Gamma(U,\\mathcal O_U)$ is $M_{\\mathrm{Zar}}|_U$, and its associated etale log structure is $M|_U$. Thus $h$ is a chart on both sites, with the prescribed structural map.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.3.4(ii), printed p.107, last sentence (Zariski fine log schemes have Zariski local fine monoscheme charts); fs refinement by taking the sharp characteristic monoid, as in VI 1.6 and VIII 3.3.13, printed pp.70,108--109."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-trf-zariski-log-structure"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in X$, a geometric point $\\bar x$ over it, and an fs etale chart $Q$ near $\\bar x$. Put $A=\\mathcal O_{X,x}$, $B=\\mathcal O_{X,\\bar x}$ and $L=(M_{\\mathrm{Zar}})_x$. The Zariski-stalk unit-extension lemma says that $L$ is integral, has units $A^\\times$, and identifies its sharpening $P=L/A^\\times$ with $(Q-E)/E^{\\mathrm{gp}}$, where $E$ is the face mapping to units in $B$. Face sharpening therefore makes $P$ sharp fine saturated and $P^{\\mathrm{gp}}$ finite free. Apply the integral-monoid splitting lemma to $L$: it gives $j:P\\to L$ and an isomorphism $P\\oplus A^\\times\\to L$, $(p,u)\\mapsto j(p)u$. No nonzero $p\\in P$ has $\\alpha j(p)\\in B^\\times$: the local map $A\\to B$ reflects units, so $\\alpha j(p)\\in A^\\times$, hence $j(p)\\in\\alpha^{-1}(A^\\times)=A^\\times$ by the unit axiom of $M_{\\mathrm{Zar}}$, and $p=q(j(p))=0$, where $q:L\\to P$ is the quotient map with $qj=\\mathrm{id}$ from the splitting lemma. So the face $(\\alpha j)^{-1}(A^\\times)$, and likewise its preimage of $B^\\times$, is $\\{0\\}$, and the chart pushouts over it are the products $P\\oplus A^\\times$ and $P\\oplus B^\\times$. The unit-extension formula $L\\oplus_{A^\\times}B^\\times\\simeq M_{\\bar x}$ with $L\\simeq P\\oplus A^\\times$ then identifies $P\\oplus B^\\times\\to M_{\\bar x}$, $(p,b)\\mapsto j(p)b$, with an isomorphism too. Thus the composite $j_{\\mathrm{Et}}:P\\to M_{\\bar x}$ is a chart of that stalk, and $j$ is a chart of the Zariski stalk.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-zariski-log-stalk-unit-extension",
+    "lem-trf-fs-face-sharpening",
+    "lem-trf-integral-monoid-free-sharpening-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.3.4(ii), printed p.107; VI 3.7(a), printed p.75; agent expansion of the Zariski chart construction."
+   }
+  },
+  {
+   "text": "Choose finitely many generators $p_1,\\ldots,p_d$ of $P$. The finite-presentation lemma supplies finitely many defining pairs of relations for these generators. Represent each germ $j(p_i)$ by a section of $M_{\\mathrm{Zar}}$ on a common Zariski neighborhood $U_0$ of $x$. Each relation holds at $x$, so its two section representatives agree on a smaller neighborhood. Intersect these finitely many neighborhoods. The resulting tuple satisfies every defining relation and hence determines a homomorphism $h:P\\to M_{\\mathrm{Zar}}(U_0)$ with germ exactly $j$. This uses only the definition of equality of germs after the cited finite-presentation result; empty generator or relation lists require no shrinking.",
+   "uses": [
+    "lem-trf-fg-commutative-monoid-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.3.4(ii), printed p.107; VI 3.7(a), printed p.75; agent expansion of the Zariski chart construction."
+   }
+  },
+  {
+   "text": "On $U_0$ put $\\beta=\\alpha h$. Apply the Zariski prelog-logification comparison to the constant monoid sheaf associated to $P$ and to $\\beta$. Denote its associated Zariski log structure by $N_Z$ and its associated etale log structure by $N$. The universal properties give compatible maps $f_Z:N_Z\\to M_{\\mathrm{Zar}}|_{U_0}$ and $f:N\\to M|_{U_0}$, induced by $h$ and fixing units. The comparison identifies the etale extension of $f_Z$ with $f$. The etale associated-log stalk formula identifies $f_{\\bar x}$ with the isomorphism $P\\oplus B^\\times\\to M_{\\bar x}$ in step 1, respecting the specified generators and structural map.",
+   "uses": [
+    "lem-trf-zariski-prelog-logification-comparison",
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.3.4(ii), printed p.107; VI 3.7(a), printed p.75; agent expansion of the Zariski chart construction."
+   }
+  },
+  {
+   "text": "Apply fine-log stalk-chart spreading to the given map $j_{\\mathrm{Et}}:P\\to M_{\\bar x}$. Its pushout hypothesis was verified in step 1. It gives an affine pointed etale neighborhood $(W,\\bar w)\\to(U_0,\\bar x)$ and a chart $k:P\\to M(W)$ whose germ is $j_{\\mathrm{Et}}$. The homomorphism obtained from $h$ on $W$ has the same germ. The equality clause of finite-monoid stalk-data spreading gives a further affine pointed etale refinement on which these homomorphisms agree. Replace $W$ by this refinement; restrictions of a chart are charts by associated-log restriction compatibility. Thus the restriction of $f$ to $W$ is an isomorphism induced by exactly $h$, not by an unrelated chart with the same abstract monoid.",
+   "uses": [
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "lem-trf-finite-monoid-stalk-data-spreading",
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.3.4(ii), printed p.107; VI 3.7(a), printed p.75; agent expansion of the Zariski chart construction."
+   }
+  },
+  {
+   "text": "Let $V$ be the image of this $W\\to U_0$. It contains $x$ and is Zariski open by openness of etale morphisms. The map $W\\to V$ is a surjective etale covering. For any geometric point $\\bar y$ of $V$, the geometric-point lifting lemma gives a lift to $W$. The restriction-stalk identification in finite-monoid stalk-data spreading identifies the map $f_{\\bar y}$ with the stalk of $f|_W$, which is an isomorphism by step 4. The geometric-stalk criterion for etale sheaves now makes $f|_V$ an isomorphism. In particular $N|_V$ is fs, using the charts of the isomorphic $M|_V$.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-trf-finite-monoid-stalk-data-spreading",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.4(ii), p.107, agent descent argument; Stacks 03WT (morphisms.tex, lemma-etale-open), 03PR and 03PU (etale-cohomology.tex, lemma-geometric-lift-to-cover and theorem-exactness-stalks)."
+   }
+  },
+  {
+   "text": "Fix $y\\in V$ and a geometric point $\\bar y$ over it. Write $C=\\mathcal O_{V,y}$, $D=\\mathcal O_{V,\\bar y}$, $R_1=(N_Z)_y$, $R_2=(M_{\\mathrm{Zar}})_y$ and $a=(f_Z)_y$. Apply Zariski-stalk unit extension to both Zariski log structures, whose associated etale log structures are fs by step 5. It says that $R_i$ are integral with units $C^\\times$, and canonically identifies their characteristic quotients with those of $R_i\\oplus_{C^\\times}D^\\times$. These identifications respect section maps and units. Since $f_{\\bar y}$ is an isomorphism, the induced map $\\overline a:R_1/C^\\times\\to R_2/C^\\times$ is bijective. Thus we have a bijection on characteristic monoids for the actual Zariski map, not merely an abstract identification of them.",
+   "uses": [
+    "lem-trf-zariski-log-stalk-unit-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.3.4(ii), printed p.107; VI 3.7(a), printed p.75; agent expansion of the Zariski chart construction."
+   }
+  },
+  {
+   "text": "The map $a$ in step 6 is bijective by cancellation. For $b\\in R_2$, lift its characteristic using $\\overline a$ to a representative $r\\in R_1$. Then $b=a(r)u$ for some $u\\in C^\\times$, so $b=a(ru)$. If $a(r)=a(s)$, injectivity of $\\overline a$ gives $r=su$ for a unit $u\\in C^\\times$. Cancellation in the integral monoid $R_2$ yields $u=1$, since $a$ fixes units; hence $r=s$. Therefore all Zariski stalk maps of $f_Z|_V$ are bijective. On any open, a target section has local lifts by stalk surjectivity; injectivity of stalks makes any two local lifts equal after shrinking at each point of an overlap. The sheaf uniqueness and gluing axioms give a unique global lift. Thus $f_Z|_V$ is an isomorphism compatible with the structural maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.3.4(ii), printed p.107; VI 3.7(a), printed p.75; agent expansion of the Zariski chart construction."
+   }
+  },
+  {
+   "text": "Choose an affine neighborhood $T$ of $x$ in $X$. In $T=\\operatorname{Spec}R$, basic opens form a basis: since $x\\in V\\cap T$, the complement is a closed set $V(I)$, and some $g\\in I$ is outside the prime of $x$. Then $U=D_T(g)=\\operatorname{Spec}R_g$ contains $x$ and is contained in $V$. Restrict $h$ to $U$. Restriction compatibility for logification preserves the isomorphisms $N_Z|_U\\simeq M_{\\mathrm{Zar}}|_U$ and $N|_U\\simeq M|_U$ from steps 5 and 7. Consequently $P$ is the required fs chart on both sites and its structural map is exactly $\\alpha h$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-trf-zariski-prelog-logification-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.3.4(ii), printed p.107; VI 3.7(a), printed p.75; agent expansion of the Zariski chart construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-zariski-log-stalk-unit-extension",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-integral-monoid-free-sharpening-splitting",
+  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "lem-trf-zariski-prelog-logification-comparison",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-trf-fine-log-stalk-chart-spreading",
+  "lem-trf-finite-monoid-stalk-data-spreading",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.3.4(ii), p.107; VI 3.7(a), p.75. Agent expansion using the existing sharp-stalk, finite-presentation and etale spreading nodes; no log regularity is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Zariski.*log|log.*chart|FineSaturated|LogStructure",
+   "results": "{\"t\": \"2026-10-23T09:40:36Z\", \"tool\": \"grep\", \"query\": \"Zariski.*log|log.*chart|FineSaturated|LogStructure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/GluingOneHypercover.lean\", \"Mathlib/AlgebraicGeometry/GluingOneHypercover.lean\", \"Mathlib/AlgebraicGeometry/GluingOneHypercover.lean\", \"Mathlib/AlgebraicGeometry/GluingOneHypercover.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\"], \"digest\": \"5fda83990ea6e106\"}; Read the hits: ordinary structure-sheaf fractions, affine Zariski sites, schemes and finite-type module generators do not give a monoid chart for a logarithmic structure. No logarithmic structure or log scheme declaration was found by the dedicated grep and name searches.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-23T09:40:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: ordinary structure-sheaf fractions, affine Zariski sites, schemes and finite-type module generators do not give a monoid chart for a logarithmic structure. No logarithmic structure or log scheme declaration was found by the dedicated grep and name searches.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fine saturated logarithmic structure defined on the Zariski site admits a finitely generated saturated monoid chart on each Zariski neighborhood",
+   "results": "{\"t\": \"2026-10-23T09:40:47Z\", \"tool\": \"leanfinder\", \"query\": \"A fine saturated logarithmic structure defined on the Zariski site admits a finitely generated saturated monoid chart on each Zariski neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover\", \"AlgebraicGeometry.Scheme.AffineZariskiSite\"], \"digest\": \"e6e7c2ae366d7c0d\"}; Read the hits: ordinary structure-sheaf fractions, affine Zariski sites, schemes and finite-type module generators do not give a monoid chart for a logarithmic structure. No logarithmic structure or log scheme declaration was found by the dedicated grep and name searches.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogScheme|LogStructure|logarithmic.*scheme|logarithmic.*structure",
+   "results": "{\"t\": \"2026-10-23T09:43:02Z\", \"tool\": \"grep\", \"query\": \"LogScheme|LogStructure|logarithmic.*scheme|logarithmic.*structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: ordinary structure-sheaf fractions, affine Zariski sites, schemes and finite-type module generators do not give a monoid chart for a logarithmic structure. No logarithmic structure or log scheme declaration was found by the dedicated grep and name searches.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fs logarithmic scheme associated to a Zariski logarithmic structure has fine saturated monoid charts Zariski locally",
+   "results": "{\"t\": \"2026-10-23T09:43:02Z\", \"tool\": \"leansearch\", \"query\": \"An fs logarithmic scheme associated to a Zariski logarithmic structure has fine saturated monoid charts Zariski locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.IsLocalAtSource\", \"AlgebraicGeometry.Spec\", \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"AlgebraicGeometry.IsZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.mk\", \"AlgebraicGeometry.Scheme.toLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\"], \"digest\": \"7e60be2435908202\"}; Read the hits: ordinary structure-sheaf fractions, affine Zariski sites, schemes and finite-type module generators do not give a monoid chart for a logarithmic structure. No logarithmic structure or log scheme declaration was found by the dedicated grep and name searches.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski locally a log structure is the logification of a constant finitely generated saturated monoid mapping to regular functions",
+   "results": "{\"t\": \"2026-10-23T09:43:05Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski locally a log structure is the logification of a constant finitely generated saturated monoid mapping to regular functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.StructureSheaf.exists_const\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"AlgebraicGeometry.StructureSheaf.locally_const_basicOpen\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\"], \"digest\": \"7e48869c6e65f2f3\"}; Read the hits: ordinary structure-sheaf fractions, affine Zariski sites, schemes and finite-type module generators do not give a monoid chart for a logarithmic structure. No logarithmic structure or log scheme declaration was found by the dedicated grep and name searches.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|logarithmic.*structure|logarithmic.*scheme",
+   "results": "{\"t\": \"2026-10-23T11:14:16Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|logarithmic.*structure|logarithmic.*scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: affine Zariski sites, ordinary structure-sheaf fractions and ring-morphism spreading do not state a chart theorem for logarithmic monoid sheaves. Dedicated log-structure name searches give no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Zariski logarithmic structure which is fine saturated etale locally has a chart on an affine open neighborhood",
+   "results": "{\"t\": \"2026-10-23T11:14:17Z\", \"tool\": \"leansearch\", \"query\": \"A Zariski logarithmic structure which is fine saturated etale locally has a chart on an affine open neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"AlgebraicGeometry.Scheme.AffineZariskiSite\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover\", \"AlgebraicGeometry.IsPreimmersion.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.basicOpen\"], \"digest\": \"2e8bf10bd01a5c21\"}; Read the returned signatures: affine Zariski sites, ordinary structure-sheaf fractions and ring-morphism spreading do not state a chart theorem for logarithmic monoid sheaves. Dedicated log-structure name searches give no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-23T11:14:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: affine Zariski sites, ordinary structure-sheaf fractions and ring-morphism spreading do not state a chart theorem for logarithmic monoid sheaves. Dedicated log-structure name searches give no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fine saturated log structure defined on the Zariski site admits local charts by fine saturated commutative monoids",
+   "results": "{\"t\": \"2026-10-23T11:14:18Z\", \"tool\": \"leanfinder\", \"query\": \"A fine saturated log structure defined on the Zariski site admits local charts by fine saturated commutative monoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsLocallyFullOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.StructureSheaf.isFractionPrelocal\", \"AlgebraicGeometry.topologically_isLocalAtSource'\", \"SheafOfModules.LocalGeneratorsData.coversTop\"], \"digest\": \"6832157bdb2cc0dc\"}; Read the returned signatures: affine Zariski sites, ordinary structure-sheaf fractions and ring-morphism spreading do not state a chart theorem for logarithmic monoid sheaves. Dedicated log-structure name searches give no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?structure|log.?scheme|characteristic.?monoid|fine.?saturated",
+   "results": "{\"t\": \"2026-10-23T11:14:57Z\", \"tool\": \"grep\", \"query\": \"log.?structure|log.?scheme|characteristic.?monoid|fine.?saturated\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: affine Zariski sites, ordinary structure-sheaf fractions and ring-morphism spreading do not state a chart theorem for logarithmic monoid sheaves. Dedicated log-structure name searches give no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated saturated characteristic monoid of a logarithmic structure lifts to a chart locally in the Zariski topology",
+   "results": "{\"t\": \"2026-10-23T11:14:58Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated saturated characteristic monoid of a logarithmic structure lifts to a chart locally in the Zariski topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.topologically_isLocalAtSource'\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.HasRingHomProperty.locally_of_iff\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\"], \"digest\": \"19011b5dd441995c\"}; Read the returned signatures: affine Zariski sites, ordinary structure-sheaf fractions and ring-morphism spreading do not state a chart theorem for logarithmic monoid sheaves. Dedicated log-structure name searches give no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-log-blowup-cartesian",
+  "date": "2026-10-23",
+  "group": "Q77"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-fan-chart-blowup: the Zariski chart used to compare characteristic sheaves under strict pullback. ILO VIII 3.3.4(ii), printed p.107, last sentence.",
+   "via": [
+    "lem-trf-strict-log-blowup-cartesian",
+    "lem-trf-log-fan-chart-blowup",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-zariski-fs-monoid-chart",
+  "worker": "stage1",
+  "summary": "Constructed the sharp fs Zariski stalk chart, spread its finite generators and relations, checked its etale chart property on an open image, and descended the actual map on characteristic monoids and units. Reused existing nodes throughout; no new nodes. The statement and its fs hypotheses are unchanged.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality (1)--(2), through strict log-blowup comparison: Zariski charts for the characteristic comparison. The latest blueprint now uses contracting correspondences; no alteration claim is attributed to its current proof. The inherited node remains a valid standalone ILO chart lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-9ddab970c",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-9ddab970c (reviewer sub-agent of L); spot-checked: Read in full: the ILO source (VIII Remark 3.3.4(ii) p.107, 'any Zariski fine log scheme admits a fine monoscheme chart Zariski locally'; VI 3.7(a) p.75, splitting of (3.a)), the item's 8 steps and all 13 cited statements. There are no new nodes. The statement and stmt_deps are unchanged, and live/side-live still have the item unsplit, so the delivery is not superseded. There is no repair note, so this is a first split. Step checks: (1) unit-extension gives L integral with units A^x, L(+)_{A^x}B^x = M_xbar and Lbar = (Q-E)/E^gp; face-sharpening gives P sharp fs with P^gp free; the splitting lemma gives j and P(+)A^x = L. (2) Finite presentation plus finitely many germ equalities after shrinking. (3) Applies the logification comparison to the constant sheaf of P; f is the etale extension of f_Z and f_xbar is the step-1 map. (4) Chart-spreading hypotheses all hold; the equality clause of stalk-data spreading makes h agree with the chart on an affine refinement. (5) Open image, geometric-point lift, restriction stalks and the stalk criterion (all Mathlib leaves) give f|_V iso. (6)-(7) The characteristic bijection is natural in f_Z; cancellation in the integral R_2 gives stalk bijections, and the sheaf gluing is written out. (8) Basic open D(g) inside V. Gap repaired (E5-type): step 1 asserted that P(+)B^x -> M_xbar is an isomorphism and called j_Et a chart without showing that the face (alpha j)^{-1}(units) is {0}. Chart spreading (step 4) and the stalk formula (step 3) need that. I added the argument: A->B reflects units, alpha^{-1}(A^x)=A^x, and p=q(j(p))=0. Only step 1's text changed, in fixes/dag/nodes/sec-trace-formula/lem-trf-zariski-fs-monoid-chart.json; uses and proof_deps are unchanged. Route: every cited trf node is in sk-i-curve-zero and the weil-pbc nodes and def-pc-scheme are Mathlib leaves, so no tool_uses are needed. There is no cycle (closure of 194 nodes). Duplicate candidates are distinct: fan-chart-local-monoid-lift assumes a fan chart, monoid-chart-characteristic-fan assumes a global chart. Edge cases checked: P=0, P=N, non-free sharp P, torsion units, generic x, empty X.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiFsMonoidChart",
+  "declaration": "AlgebraicGeometry.FineSaturatedLogScheme.exists_affine_zariski_fs_chart",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiFsMonoidChart.lean",
+  "statement": "theorem FineSaturatedLogScheme.exists_affine_zariski_fs_chart (X : FineSaturatedLogScheme.{u}) (Z : ZariskiLogStructure X.scheme) (e : Z.toZariskiPrelogStructure.EtaleMap X.logStructure) (he : e.IsAssociation) (x : X.scheme) : ∃ U : X.scheme.Opens, x ∈ U ∧ IsAffine U.toScheme ∧ ∃ (P : Type u) (_ : CommMonoid P) (h : P →* Z.monoidSheaf.obj.obj (op U)), IsFineSaturatedMonoid P ∧ Z.IsChart U h ∧ X.logStructure.IsChart (Scheme.Etale.mk U.ι) ((e.sectionMap U).comp h)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83df38356",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Item statement matches node and ILO VIII 3.3.4(ii) clause by clause: FineSaturatedLogScheme hypotheses; ZariskiLogStructure (stalkwise unit axiom equivalent to α⁻¹(O^×)≅O^×); association via EtaleMap+IsAssociation universal property, not an arbitrary map; affine U ∋ x, P:Type u with IsFineSaturatedMonoid, h into M_Zar(U), Z.IsChart (pushout congruence at all x∈U) and étale IsChart of e.sectionMap U ∘ h on Etale.mk U.ι. Quantifier order as in the node; no extra hypotheses or universe restriction. Edge cases (empty X, trivial log structure, non-free sharp P, non-closed x) fine. Statement verbatim; item record differs from live only by lean plus the new def node. New def node real and not a duplicate (IsZariski is a different notion); docstrings and 8 proof steps present; proof sorry only. F1 FIXED: new def node def-trf-zariski-log-structure cited theorem lem-trf-associated-log-universal-stalks only for plain HomOverIdentity (theorem node under Q148 re-split). fixes/ZariskiLogStructure.lean inlines the defeq subtype and imports FineSaturatedLogBlowup; fixes/def-trf-zariski-log-structure.json drops that stmt_dep and states hom-over-identity via def-trf-fs-log-blowup. nt_compile --json on fixed module plus item: 4.4 s and 5.1 s, clean."
+ }
+}

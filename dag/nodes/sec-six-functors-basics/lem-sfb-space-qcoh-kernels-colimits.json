@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-space-qcoh-kernels-colimits",
+ "kind": "statement",
+ "title": "Quasi-coherent space modules are closed under kernels and small colimits",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Use the small etale module category and quasi-coherence of [def-trf-space-quasi-coherent-module]. If $f:M\\to N$ is a map of quasi-coherent $\\mathcal O_X$-modules, its kernel and cokernel in all module sheaves are quasi-coherent. Every small diagram of quasi-coherent $\\mathcal O_X$-modules has a colimit in all module sheaves, and this colimit is quasi-coherent. Thus the full inclusion $\\operatorname{QCoh}(X)\\hookrightarrow\\operatorname{Mod}(\\mathcal O_X)$ preserves these kernels, cokernels and small colimits [def-weil-pbc-category-colimit]. In particular arbitrary small direct sums and images of maps between quasi-coherent modules are quasi-coherent. No Noetherian or separation hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03M1 (lemma-properties-quasi-coherent), clauses (1), (2), (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-space-comm-algebra-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Work in the small-site universe of [def-weil-size-convention]. The ambient module categories have all small colimits and are abelian by [lem-pur-ringed-site-grothendieck-abelian]. Choose a surjective etale scheme atlas $p:U\\to X$ using [def-trf-algebraic-space]. For any etale scheme chart $V\\to X$, its ringed slice is $V_{\\mathrm{et}}$: by [lem-trf-space-representable-etale-scheme-tests] every scheme map $W\\to V$ over $X$ between etale charts is etale, and conversely an etale $W\\to V$ composes to an etale chart $W\\to X$; coverings are jointly surjective etale families on both sides, and structure-ring values are $\\Gamma(W,\\mathcal O_W)$. Write $r_V$ for restriction. Apply [lem-weil-pbc-ringed-sheaf-slice-adjunction] to the representable sheaf of $V$: its element site is exactly this slice, so $r_V$ is exact. Its geometric localization morphism has unchanged coefficient ring. Hence [lem-weil-pbc-ringed-topoi-module-adjunction] makes $r_V$ a left adjoint, and [lem-weil-pbc-left-adjoint-preserves-colimits] gives preservation of every small colimit, including cokernels and sums. Exactness gives $r_V\\ker f=\\ker(r_Vf)$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M1, proof, preliminary localization paragraph; sites-modules.tex Tags 03DH, 04IX, 03D2."
+   }
+  },
+  {
+   "text": "The local-presentation predicate [def-trf-space-quasi-coherent-module] is preserved by restriction to any slice: pull a presentation cover back along each slice object and use relocalization [def-pur-localized-ringed-site]. Conversely, suppose $r_UM$ is quasi-coherent. For each $V\\to X$, the base change $V\\times_XU$ is a scheme, its projection to $V$ is surjective etale and its composite to $X$ is etale [lem-trf-space-representable-etale-scheme-tests], so $V\\times_XU\\to V$ is a covering in the small etale site, by representability and surjectivity of the atlas [def-trf-algebraic-space]. Cover this object further by the local-presentation cover for $r_UM$ on $V\\times_XU\\to U$. These presentations are precisely presentations of $M$ on the same objects over $V$, by the sectionwise restriction and relocalization formulas. The composite family is a cover. Thus $M$ satisfies the predicate on every $V$, so is quasi-coherent. This proves explicitly the detection needed below.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "def-pur-localized-ringed-site",
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M0 (lemma-characterize-quasi-coherent), proof (3) implies (1)."
+   }
+  },
+  {
+   "text": "First establish the scheme small-etale case. For any scheme $T$, [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies quasi-coherent etale modules with Zariski quasi-coherent modules by a fully faithful equivalence $A_T$, and identifies $A_T$ with tensor pullback for the canonical ringed-site morphism. A diagram lifts to a Zariski diagram by the inverse equivalence; full faithfulness supplies all arrows and their functor laws. By [lem-weil-pbc-ringed-topoi-module-adjunction] this tensor pullback, on all Zariski module sheaves, is left adjoint to module direct image. It therefore preserves all small colimits by [lem-weil-pbc-left-adjoint-preserves-colimits]. The ambient Zariski and etale module categories admit these colimits by [lem-pur-ringed-site-grothendieck-abelian].",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE (lemma-equivalence-quasi-coherent-limits), (1)-(4); Tag 0GNB, proof (2)."
+   }
+  },
+  {
+   "text": "For completeness the Zariski colimit just used is quasi-coherent. Let $L$ be the ambient colimit of a small diagram $G_i$ of quasi-coherent modules on $T$. Restriction to an affine open $W=\\operatorname{Spec}B$ preserves the colimit and quasi-coherence by [lem-weil-pbc-module-restriction-open-immersion-colimits]. By [lem-weil-pbc-affine-tilde-gamma-adjunction], write this restricted diagram as $\\widetilde{E_i}$, including its arrows, using the natural counit isomorphisms. The $B$-module diagram has a colimit $E$ by [lem-weil-pbc-ring-modules-grothendieck-abelian]. The same tilde adjunction says $\\widetilde E$ is an ambient colimit of $\\widetilde{E_i}$. Uniqueness of colimits [def-weil-pbc-category-colimit] gives $L|_W\\simeq\\widetilde E$, which is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections]. The affine-local definition [pqf-def-coherent] proves quasi-coherence of $L$. Step 3 now shows that any small colimit of quasi-coherent modules on $T_{\\mathrm{et}}$ is $A_T(L)$ and is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01ID (lemma-colimit-quasi-coherent); Section 01LA, (4); descent.tex Tag 0GNB, (2)."
+   }
+  },
+  {
+   "text": "For scheme small-etale kernels use [lem-trf-scheme-etale-quasi-coherent-kernel]. For cokernels, lift a map to a Zariski map by the full faithfulness in [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Its Zariski cokernel is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-cokernel-image]. Applying the colimit-preserving tensor pullback of step 3 identifies its image with the ambient small-etale cokernel. Thus both operations on $T_{\\mathrm{et}}$ preserve quasi-coherence, with no finiteness hypothesis.",
+   "uses": [
+    "lem-trf-scheme-etale-quasi-coherent-kernel",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0GNB (lemma-properties-quasi-coherent), (3), using Tag 06VE."
+   }
+  },
+  {
+   "text": "Let $f:M\\to N$ be a morphism of quasi-coherent $\\mathcal O_X$-modules and $D:I\\to\\operatorname{QCoh}(X)$ any small diagram. Form $K=\\ker f$, $Q=\\operatorname{coker}f$, and $C=\\operatorname{colim}_I D$ in ambient modules (step 1). Their restrictions to $U$ are respectively the kernel, cokernel, and colimit of the restricted inputs (step 1). Those inputs are quasi-coherent by step 2. Steps 4 and 5 on the scheme $U$ therefore show that $r_UK,r_UQ,r_UC$ are quasi-coherent. The explicit detection in step 2 shows that $K,Q,C$ are quasi-coherent on $X$. This is exactly the atlas reduction of Tag 03M1; it uses neither quasi-compactness, separation nor Noetherianity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M1 (lemma-properties-quasi-coherent), proof (1)-(3)."
+   }
+  },
+  {
+   "text": "Because [def-trf-space-quasi-coherent-module] defines $\\operatorname{QCoh}(X)$ as a full subcategory, each ambient universal property remains valid when its test objects are restricted to quasi-coherent ones. The objects just proved quasi-coherent therefore also give the kernels, cokernels and colimits in that full subcategory, and the inclusion preserves them. A small direct sum is a discrete small colimit. In the ambient abelian module category [def-weil-sheaf-of-modules-category], the image is $\\ker(N\\to\\operatorname{coker}f)$, so is quasi-coherent by the kernel and cokernel assertions already proved. This also handles the empty colimit and the zero map.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M1, (1)-(3); images as kernels of cokernels."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-trf-algebraic-space",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-localized-ringed-site",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "pqf-def-coherent",
+  "lem-trf-scheme-etale-quasi-coherent-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03M1 (lemma-properties-quasi-coherent), proof (1)-(3), with its scheme input descent.tex Tag 0GNB and affine-colimit input schemes.tex Tag 01ID."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves on an algebraic space are closed under kernels cokernels and arbitrary small colimits in module sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Category.{u, u + 1} X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ is equipped with a canonical category structure. The Hom-sets consist of sheaf homomorphisms satisfying the sheaf\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of quasi coherent modules on an algebraic space preserves kernels and all colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Category.{u, u + 1} X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ is equipped with a canonical category structure. The Hom-sets consist of sheaf homomorphisms satisfying the sheaf\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) [CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [J.WEqualsLocallyBijective AddCommGrpCat]\\n  [CategoryTheory.Limits.HasColimitsOfSize.{w', w, max u' v, max\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"cokernel\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uasicoherent.*[Kk]ernel|[Qq]uasicoherent.*[Cc]olimit|[Cc]olimit.*[Qq]uasicoherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaves on an algebraic space are closed under kernels cokernels and arbitrary small colimits in module sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfShape K (PresheafOfModules.{v} R.val)] : HasColimitsOfShape K (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfSize.{w', w} (PresheafOfModules.{v} R.val)] : HasColimitsOfSize.{w', w} (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.Presentation.isColimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{M : SheafOfModules.{u} R} (P : Presentation M) :\\n  IsColimit (CokernelCofork.ofπ (f := (freeHomEquiv _).symm P.relations.s ≫ (kernel.ι _)) P.generators.π (by simp))\", \"doc\": \"For a sheaf of modules $ M $ over a ring sheaf $ R $ with a given presentation $ P $, the cocone constructed from the canonical morphism between the free sheaf generated by $ P $'s relations and the f\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \"(J : Type w) [Category.{w'} J] [Small.{v} J] [HasLimitsOfShape Jᵒᵖ C] : HasColimitsOfShape J (SheafedSpace.{_, _, v} C)\", \"doc\": \"If $ \\\\mathcal{J} $ is a small category and the opposite category $ \\\\mathcal{J}^{\\\\text{op}} $ has all limits of shape $ \\\\mathcal{J} $, then the category of sheafed spaces over a category $ \\\\mathcal{C} \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme-only facts, local presentation definitions, or general sheaf/category infrastructure; none states the algebraic-space or equivariant assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on an algebraic space are closed under kernels cokernels and all small colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Category.{u, u + 1} X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ is equipped with a canonical category structure. The Hom-sets consist of sheaf homomorphisms satisfying the sheaf\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ambient module existence and the local-presentation predicate do not assert closure of quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an etale scheme atlas detects quasi coherence and preserves module sheaf colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ambient module existence and the local-presentation predicate do not assert closure of quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"colimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ambient module existence and the local-presentation predicate do not assert closure of quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isQuasicoherent.*(kernel|cokernel|colimit)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ambient module existence and the local-presentation predicate do not assert closure of quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent modules on an algebraic space are closed under kernels cokernels and all small colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfShape K (PresheafOfModules.{v} R.val)] : HasColimitsOfShape K (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.rec\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure, which is established via sheaf composition, weak she\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfSize.{w', w} (PresheafOfModules.{v} R.val)] : HasColimitsOfSize.{w', w} (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \"[HasLimits C] {X Y : SheafedSpace C} (f g : X ⟶ Y) : Epi (coequalizer.π f g).hom.base\", \"doc\": \"If $ \\\\mathcal{J} $ is a small category and its opposite category $ \\\\mathcal{J}^{\\\\text{op}} $ has all limits of shape $ \\\\mathcal{J} $, then the category of sheafed spaces over a category $ \\\\mathcal{C} \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ambient module existence and the local-presentation predicate do not assert closure of quasi-coherent modules on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-filtered-union",
+  "date": "2026-10-23",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions. Supporting input to Tag 07UV: quasi-coherent sums, images and ambient colimits needed by both paragraphs of lemma-directed-colimit-coherent.",
+   "via": [
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-qcoh-kernels-colimits",
+  "worker": "stage1",
+  "summary": "Unchanged statement; explicit etale-atlas reduction of Stacks 03M1, reusing scheme comparison, affine tilde colimits, scheme kernel/cokernel and ringed slice inputs. No new nodes. No exact algebraic-space Lean attachment found.",
+  "blueprint": "Supporting input for Tag 07UV in the existing ancestry of det-thm-sf-ctf-stability-direct-images, proof (3): ambient quasi-coherent sums, images and colimits. The current latest blueprint direct-image paragraph still uses compactification; this split changes no unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site or category infrastructure for the atlas localization argument; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic ringed-site or category infrastructure for the atlas localization argument; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-site or category infrastructure for the atlas localization argument; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic change-of-site equivalence needed by the scheme case of Stacks 03M1."
+   },
+   {
+    "node": "lem-trf-scheme-etale-quasi-coherent-kernel",
+    "why": "Scheme-chart kernel closure is the scheme input explicitly used by Stacks 03M1; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic Zariski cokernel closure used before transport to the small etale scheme site."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic algebraic-space chart facts (Tag 03EC): morphisms between etale charts are etale, composites and base changes of representable etale maps, scheme fibre products of charts; identifies X_et/U with U_et. Not part of the trace formula or Poincare duality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-scheme-etale-quasi-coherent-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-2ebe0464d",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-2ebe0464d (reviewer sub-agent of L); spot-checked: FIX for one missing citation (C1). I read Stacks spaces-properties 03M1 (1)-(3) with the preliminary paragraph of its proof, and 03M0 (3)=>(1). The item statement agrees hypothesis by hypothesis: any scheme S, any algebraic space X, small étale site, arbitrary small colimits, no Noetherian or separation hypothesis. The delivery adds no new nodes and has no re-split note. Steps checked against the cited statements: (1) slice adjunction for h_V, exact restriction r_V with adjoint, so it preserves colimits; (2) detection of quasi-coherence through the cover V x_X U -> V and relocalization, as in 03M0; (3) the Zariski/étale equivalence, whose forward functor is the left adjoint eps^* on all module sheaves, so it preserves ambient colimits; (4) Zariski colimits via natural counit isomorphisms and tilde of a colimit (01ID), no filtered hypothesis; (5) kernels from the 0GNB node, cokernels by lifting to Zariski and using the cokernel node; (6),(7) assembly and the full-subcategory inclusion. Edge cases checked: empty diagram, zero map, empty X, no affine intersections or quasi-compactness used. Fault fixed: steps 1, 2 and 6 use X_et/V = V_et (a map between étale charts over X is étale, composites are charts) and that V x_X U is a scheme chart, with no node cited. I added the existing lem-trf-space-representable-etale-scheme-tests (03EC) to steps 1 and 2, proof_deps and tool_uses, and set step 2 to elementary false. Batch-5: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (03DX) and lem-trf-scheme-etale-quasi-coherent-kernel (0GNB) are general descent facts, not part of the trace formula or Poincaré duality. Their full closures contain no trace-formula, Poincaré, Lefschetz or assumption nodes, so I accepted them; same for the added 03EC node. Advisory: lem-sfb-space-qcoh-affine-chart-calculus (Q52, unsplit) overlaps for filtered colimits but does not assert closure under arbitrary colimits or sums, so the item is not a duplicate. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQCohKernelsColimits",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.quasiCoherent_kernels_colimits",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQCohKernelsColimits.lean",
+  "statement": "theorem quasiCoherent_kernels_colimits {S : Scheme.{u}} (X : AlgebraicSpace S) : (∀ (M N : X.Modules) (f : M ⟶ N), M.IsQuasicoherent → N.IsQuasicoherent → (kernel f).IsQuasicoherent ∧ (cokernel f).IsQuasicoherent ∧ (Abelian.image f).IsQuasicoherent) ∧ (∀ (J : Type u) [Category.{u} J] (F : J ⥤ X.Modules), (∀ j : J, (F.obj j).IsQuasicoherent) → (colimit F).IsQuasicoherent) ∧ HasKernels X.QCoh ∧ HasCokernels X.QCoh ∧ HasColimitsOfSize.{u, u} X.QCoh ∧ (∀ (M N : X.QCoh) (f : M ⟶ N), PreservesLimit (parallelPair f 0) (SheafOfModules.isQuasicoherent X.structureSheaf).ι ∧ PreservesColimit (parallelPair f 0) (SheafOfModules.isQuasicoherent X.structureSheaf).ι) ∧ PreservesColimitsOfSize.{u, u} (SheafOfModules.isQuasicoherent X.structureSheaf).ι ∧ (∀ (I : Type u) (M : I → X.Modules), (∀ i : I, (M i).IsQuasicoherent) → (∐ M).IsQuasicoherent)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing full small-etale module category and Mathlib quasi-coherence predicate. Adds the landed def-sfb-space-comm-algebra-sheaf to stmt_deps solely for its full-site additive sheafification and locally-bijective equivalence instances, with no coefficient lift or additional assumption. All closure, full-subcategory existence and preservation clauses, sums and images are included."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c75744f8c",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read node, Stacks 03M1 (spaces-properties.tex l.5441, clauses 1-3), the delivered module and the dependency Lean (EtaleSite objects u+1/morphisms u, structureSheaf RingCat.{u}, Modules, QCoh = isQuasicoherent full subcategory, Mathlib IsQuasicoherent). All clauses present (ambient kernel/cokernel/image qc; small Type u colimits qc with no HasColimit/filtered assumption; existence in QCoh and preservation by its ι of kernels, cokernels and (u,u) colimits; arbitrary small sums); S and X unrestricted. Added stmt_dep def-sfb-space-comm-algebra-sheaf is landed and is the only source of HasSheafify/WEqualsLocallyBijective on X.etaleTopology (side-live grep), so it is genuine and avoids an extra assumption. Node diff vs live: only lean and that stmt_dep; lean.statement verbatim; sorry proof, no definitions, docstrings with source place, blueprint tag and 7-step proof; imports exist; no universe unbound. Second reading was done by the same worker, disclosed in its section. No compile (no changes)."
+ }
+}

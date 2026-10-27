@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-space-field-discreteness-criterion",
+ "kind": "statement",
+ "title": "Discreteness and local quasi-finiteness over a field",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $k$ be a field [def-weil-field] with a morphism $\\operatorname{Spec}k\\to S$ [def-weil-affine-spectrum], and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], together with a morphism $X\\to\\operatorname{Spec}k$ of algebraic spaces over $S$ (for instance $S=\\operatorname{Spec}k$); all fibre products below are over $\\operatorname{Spec}k$. Give $|X|$ its atlas topology [def-a1-space-point-topology]. Suppose $X\\to\\operatorname{Spec}k$ is locally of finite type, tested on representable etale scheme charts using [def-weil-finite-type-morphism]. Say that this map is locally quasi-finite if every representable etale scheme chart $U\\to X$ has locally quasi-finite composite $U\\to\\operatorname{Spec}k$ in the scheme sense [pqf-def-quasifinite]. Then $|X|$ is discrete (every singleton is open) if and only if $X\\to\\operatorname{Spec}k$ is locally quasi-finite. If in addition $X\\to\\operatorname{Spec}k$ is separated, meaning that its diagonal is representable and is a closed immersion on every scheme test [def-weil-closed-immersion], then finiteness of $|X|$ implies that $|X|$ is discrete. No quasi-compactness hypothesis is imposed. The empty space is allowed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0ACA (lemma-conditions-on-space-over-field), conditions (2) and (5), and (1) implies (2) for decent spaces; Tag 088J (lemma-locally-separated-decent) applies to a separated algebraic space."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Regard $X$ as its discrete fibred groupoid. Its representable diagonal and etale scheme atlas make it Deligne--Mumford: the diagonal is in particular representable by algebraic spaces, and descent of objects is exactly the sheaf condition. The ordinary and stack local finite-type notions agree on algebraic spaces by [lem-sfb-stack-finite-type-calculus]. The point topology agrees as well by [lem-sfb-stack-point-topology]. Thus, if $|X|$ is discrete, [lem-sfb-dm-field-etale-chart-quasifinite] applies to $X/k$ and gives local quasi-finiteness of every representable etale scheme chart over $k$, precisely the required definition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-stack-point-topology",
+    "lem-sfb-dm-field-etale-chart-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ACA (lemma-conditions-on-space-over-field), proof of (2) iff (5) and the finite-point decent case; using the existing DM-chart specialization and the stronger quasi-separated chart bound."
+   }
+  },
+  {
+   "text": "Conversely, assume chartwise local quasi-finiteness and choose a point-surjective etale scheme atlas $p:U\\to X$ by [lem-a1-space-affine-etale-cover]. For $u\\in U$, its composite to $\\operatorname{Spec}k$ is locally of finite type by hypothesis and quasi-finite at $u$ by [pqf-def-quasifinite]. Apply [lem-weil-pbc-quasi-finite-at-point-isolated]: $\\{u\\}$ is open in the inverse image of the unique point of $\\operatorname{Spec}k$, namely all of $U$. The point map of $p$ is open, so $\\{p(u)\\}=|p|(\\{u\\})$ is open in $|X|$. Surjectivity proves discreteness.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-quasi-finite-at-point-isolated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ACA (lemma-conditions-on-space-over-field), proof of (2) iff (5) and the finite-point decent case; using the existing DM-chart specialization and the stronger quasi-separated chart bound."
+   }
+  },
+  {
+   "text": "Now assume separatedness over $k$ and finiteness of $|X|$. Its absolute diagonal factors as $X\\to X\\times_kX\\to X\\times_{\\mathbf Z}X$. The first arrow is a closed immersion on scheme tests by hypothesis. The second is the base change of $\\operatorname{Spec}k\\to\\operatorname{Spec}(k\\otimes_{\\mathbf Z}k)$ induced by multiplication, which is surjective since $a$ is the image of $a\\otimes1$. It is a closed immersion by the affine quotient characterization in [def-weil-closed-immersion]; the product identification is [lem-weil-pbc-fibre-product-affine-spectra]. Base change and composition preserve closed immersions on the scheme tests by [lem-weil-pbc-closed-immersion-base-change, lem-weil-pbc-closed-immersion-comp]. On affine tests their inverse images are spectra of quotient rings, hence quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. This verifies the absolute quasi-separatedness hypothesis for [lem-sfb-space-qc-etale-fibre-bound].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ACA (lemma-conditions-on-space-over-field), proof of (2) iff (5) and the finite-point decent case; using the existing DM-chart specialization and the stronger quasi-separated chart bound."
+   }
+  },
+  {
+   "text": "Fix a representable etale chart $a:V\\to X$ with $V$ affine. It is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], so [lem-sfb-space-qc-etale-fibre-bound] supplies finite geometric fibres. For $x\\in|X|$, choose a field-valued representative and extend its field to an algebraic closure using [def-weil-algebraic-closure], obtaining $\\bar x:\\operatorname{Spec}\\Omega\\to X$. The surjectivity of the cartesian point map in [lem-a1-space-point-open-calculus] shows that $|V\\times_X\\operatorname{Spec}\\Omega|\\to |a|^{-1}(\\{x\\})$ is onto: pair each $v$ above $x$ with the unique point of $\\operatorname{Spec}\\Omega$. Thus this point fibre is finite. Since $|X|$ is finite, $|V|$ is the finite union of these finite fibres and is finite.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-sfb-space-qc-etale-fibre-bound",
+    "def-weil-algebraic-closure",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ACA (lemma-conditions-on-space-over-field), proof of (2) iff (5) and the finite-point decent case; using the existing DM-chart specialization and the stronger quasi-separated chart bound."
+   }
+  },
+  {
+   "text": "The composite $V\\to\\operatorname{Spec}k$ is locally of finite type by the chart hypothesis and has finite point fibre $|V|$. Apply [pqf-lem-locqf-fibre-discrete]; its conclusion makes the scheme fibre discrete. By [def-pc-scheme-fibre] its first projection is a homeomorphism onto all of $V$, so $|V|$ is discrete. For any $x\\in|X|$, [lem-a1-space-affine-etale-cover] gives such an affine chart and a point $v$ above $x$ (use the affine component containing a preimage in its disjoint affine atlas). That component $V_i\\subseteq W$ is open, so for every scheme $T\\to X$ the scheme $T\\times_XV_i$ is an open subscheme of $T\\times_XW$; it is etale over $T$ because local finite presentation, flatness and unramifiedness in [def-weil-etale-morphism] are local on the source. Thus $V_i\\to X$ is a representable etale chart with $V_i$ affine, to which the argument above applies with $V=V_i$. Since its point map is open, $\\{x\\}=|a|(\\{v\\})$ is open. This proves the final assertion. For $X=\\varnothing$ both the chart condition and the singleton condition are vacuous; none of the arguments require a finite atlas or quasi-compactness of $X$.",
+   "uses": [
+    "pqf-lem-locqf-fibre-discrete",
+    "def-pc-scheme-fibre",
+    "lem-a1-space-affine-etale-cover",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ACA (lemma-conditions-on-space-over-field), proof of (2) iff (5) and the finite-point decent case; using the existing DM-chart specialization and the stronger quasi-separated chart bound."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-sfb-stack-point-topology",
+  "lem-sfb-dm-field-etale-chart-quasifinite",
+  "lem-a1-space-affine-etale-cover",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-sfb-space-qc-etale-fibre-bound",
+  "def-weil-algebraic-closure",
+  "lem-a1-space-point-open-calculus",
+  "pqf-lem-locqf-fibre-discrete",
+  "def-pc-scheme-fibre",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0ACA (lemma-conditions-on-space-over-field), proof of (2) iff (5) and the finite-point decent case; using the existing DM-chart specialization and the stronger quasi-separated chart bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated algebraic space locally of finite type over a field with finitely many points has discrete topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme $X$ (i.e., a scheme where every point has an open neighborhood with an Artinian ring) is equipped with the discrete topology, meaning every subset of $X$ is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme has a discrete topology, meaning that every subset of its underlying topological space is open.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"Algebra.QuasiFinite.discreteTopology_primeSpectrum\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [DiscreteTopology (PrimeSpectrum R)] [Algebra.QuasiFinite R S], DiscreteTopology (PrimeSpectrum S)\", \"doc\": \"If $ R $ is a commutative ring equipped with the discrete topology and $ S $ is a quasi-finite $ R $-algebra (i.e., $ S $ is finitely generated as an $ R $-module), then the prime spectrum $ \\\\operator\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsLocallyArtinian X ↔ AlgebraicGeometry.IsLocallyNoetherian X ∧ DiscreteTopology ↥X\", \"doc\": \"A scheme $X$ is locally Artinian if and only if it is locally Noetherian and its underlying topological space has the discrete topology, meaning every subset is open.\"}\n  {\"name\": \"JacobsonSpace.discreteTopology\", \"module\": \"Mathlib/Topology/JacobsonSpace\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] [JacobsonSpace X], (closedPoints X).Finite → DiscreteTopology X\", \"doc\": \"If $X$ is a Jacobson space and the set of closed points in $X$ is finite, then $X$ is equipped with the discrete topology, meaning every subset of $X$ is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsArtinianScheme X ↔ AlgebraicGeometry.IsNoetherian X ∧ DiscreteTopology ↥X\", \"doc\": \"A scheme is Artinian if and only if it is Noetherian and its underlying topological space has the discrete topology.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings or topology with additional hypotheses; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space locally of finite type over a field has discrete point space if and only if its structure morphism is locally quasi finite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme $X$ (i.e., a scheme where every point has an open neighborhood with an Artinian ring) is equipped with the discrete topology, meaning every subset of $X$ is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme has a discrete topology, meaning that every subset of its underlying topological space is open.\"}\n  {\"name\": \"Algebra.QuasiFinite.discreteTopology_primeSpectrum\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [DiscreteTopology (PrimeSpectrum R)] [Algebra.QuasiFinite R S], DiscreteTopology (PrimeSpectrum S)\", \"doc\": \"If $ R $ is a commutative ring equipped with the discrete topology and $ S $ is a quasi-finite $ R $-algebra (i.e., $ S $ is finitely generated as an $ R $-module), then the prime spectrum $ \\\\operator\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings or topology with additional hypotheses; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, DiscreteTopology",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings or topology with additional hypotheses; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|discreteTopology.*[Ff]ield|[Ff]inite.*[Dd]iscrete",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Limits.lean\", \"line\": \"155\", \"text\": \"/-- This is true in general for finite discrete schemes. See below. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Limits.lean\", \"line\": \"601\", \"text\": \"instance {J : Type*} [Finite J] : PreservesColimitsOfShape (Discrete J) Scheme.Spec.{u} :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Limits.lean\", \"line\": \"700\", \"text\": \"instance (priority := low) [Finite X] [DiscreteTopology X] : IsAffine X :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"346\", \"text\": \"  refine ⟨fun H ↦ locallyQuasiFinite_iff_isDiscrete_preimage_singleton.mpr fun x ↦ ?_,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"414\", \"text\": \"    exact Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber.mpr (isOpen_discrete _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"21\", \"text\": \"- `AlgebraicGeometry.Scheme.Hom.discrete_fiber`: Finite morphisms have discrete fibers.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"116\", \"text\": \"    ⟨LocallyOfFiniteType.isLocallyNoetherian f, f.isEmbedding.discreteTopology⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"169\", \"text\": \"    Finite X := finite_of_compact_of_discrete\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"29\", \"text\": \"  Locally quasi-finite morphisms have discrete fibers.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"34\", \"text\": \"- `AlgebraicGeometry.locallyQuasiFinite_iff_isDiscrete_preimage_singleton`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"35\", \"text\": \"  If `f` is locally of finite type, then `f` is locally quasi-finite iff `f` has discrete fibers.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"59\", \"text\": \"Being locally quasi-finite implies that `f` has discrete fibers\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"63\", \"text\": \"- `locallyQuasiFinite_iff_isDiscrete_preimage_singleton`:\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings or topology with additional hypotheses; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated algebraic space locally of finite type over a field with finitely many points has discrete topology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"JacobsonSpace.discreteTopology\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \"[JacobsonSpace X] (h : (closedPoints X).Finite) : DiscreteTopology X\", \"doc\": \"If $X$ is a Jacobson space and the set of closed points in $X$ is finite, then $X$ is equipped with the discrete topology, meaning every subset of $X$ is open.\"}\n  {\"name\": \"instDiscreteTopologyOfFiniteOfJacobsonSpace\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \"[Finite X] [JacobsonSpace X] : DiscreteTopology X\", \"doc\": \"Every finite Jacobson space is equipped with the discrete topology, meaning all subsets are open.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme has a discrete topology, meaning that every subset of its underlying topological space is open.\"}\n  {\"name\": \"FintypeCatDiscrete.instTopologicalSpaceCarrier\", \"module\": \"Mathlib.Topology.Category.FinTopCat\", \"type\": \"(X : FintypeCat) : TopologicalSpace X\", \"doc\": \"Every finite type is equipped with the discrete topology, where all subsets are open.\"}\n  {\"name\": \"Finite.instDiscreteTopology\", \"module\": \"Mathlib.Topology.Separation.Basic\", \"type\": \"[T1Space X] [Finite X] : DiscreteTopology X\", \"doc\": \"Every finite T1 space is equipped with the discrete topology, meaning all subsets are open.\"}\n  {\"name\": \"FintypeCatDiscrete.instDiscreteTopologyCarrier\", \"module\": \"Mathlib.Topology.Category.FinTopCat\", \"type\": \"(X : FintypeCat) : DiscreteTopology X\", \"doc\": \"Every finite type is equipped with the discrete topology, where all subsets are open.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"[IsLocallyArtinian X] : DiscreteTopology X\", \"doc\": \"Every locally Artinian scheme $X$ (i.e., a scheme where every point has an open neighborhood with an Artinian ring) is equipped with the discrete topology, meaning every subset of $X$ is open.\"}\n  {\"name\": \"PrimeSpectrum.instDiscreteTopology\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Noetherian\", \"type\": \": DiscreteTopology (PrimeSpectrum R)\", \"doc\": \"The prime spectrum of a commutative ring $ R $ is equipped with the discrete topology, where every subset is open.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, rings or topology with additional hypotheses; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyQuasiFinite_iff_isDiscrete_preimage_singleton|AlgebraicSpace|discreteTopology",
+   "results": "{\"t\": \"2026-10-23T12:03:51Z\", \"tool\": \"grep\", \"query\": \"locallyQuasiFinite_iff_isDiscrete_preimage_singleton|AlgebraicSpace|discreteTopology\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"34\", \"63\", \"65\", \"276\"], \"digest\": \"11c2f0b517e45662\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or rings, not the algebraic-space criterion; QuasiFinite.lean:276 is only the scheme fibre criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space locally of finite type over a field has discrete topology if and only if locally quasi finite",
+   "results": "{\"t\": \"2026-10-23T12:03:52Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic space locally of finite type over a field has discrete topology if and only if locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"Algebra.QuasiFinite.discreteTopology_primeSpectrum\", \"FintypeCat.discreteTopology\", \"FintypeCatDiscrete.instTopologicalSpaceCarrier\", \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine\", \"FintypeCatDiscrete.instDiscreteTopologyCarrier\", \"AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology\"], \"digest\": \"b3da7852c9766405\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or rings, not the algebraic-space criterion; QuasiFinite.lean:276 is only the scheme fibre criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, DiscreteTopology",
+   "results": "{\"t\": \"2026-10-23T12:03:52Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyQuasiFinite, DiscreteTopology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or rings, not the algebraic-space criterion; QuasiFinite.lean:276 is only the scheme fibre criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space locally of finite type over a field has discrete underlying topology exactly when it is locally quasi finite",
+   "results": "{\"t\": \"2026-10-23T12:03:52Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space locally of finite type over a field has discrete underlying topology exactly when it is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"Algebra.QuasiFinite.discreteTopology_primeSpectrum\", \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine\", \"AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology\", \"AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology\"], \"digest\": \"cf6e8f80df1770b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or rings, not the algebraic-space criterion; QuasiFinite.lean:276 is only the scheme fibre criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-finite-fibre-quasifinite-criterion",
+  "date": "2026-10-23",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Finite-fibre base open for a closed subset in a proper algebraic space. Supporting input: Finite field fibres and quasi-finiteness along a fibre. Supporting input: Discreteness and local quasi-finiteness over a field.",
+   "via": [
+    "lem-sfb-space-finite-fibre-quasifinite-criterion",
+    "lem-sfb-space-closed-subset-finite-fibre-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-field-discreteness-criterion",
+  "worker": "stage1",
+  "summary": "Q23 checked Stacks 0ACA and its chart argument. Reused the existing general DM-chart implication, the scheme isolation lemma, and the quasi-separated chart fibre bound; no new nodes and no statement change. Expanded the absolute diagonal and geometric-to-point fibre passages.",
+  "blueprint": "Supports the recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration/nodal-curve ancestry. Read the latest blueprint direct-image proof. blueprint_refs ancestor returns None because the inherited ancestry is broken; preserve from.node=null and its via chain. Searched the whole blueprint for discreteness, finite fibres, 088J and 03JS; no duplicate of the item.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Foundational existence, surjectivity and openness of scheme atlases. No same-unit statement supplies this foundational input; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "General scheme quasi-finite point isolation, used only on a field chart. No same-unit statement supplies this foundational input; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "General affine product formula for the field diagonal. No same-unit statement supplies this foundational input; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "General scheme-test base change of a closed immersion. No same-unit statement supplies this foundational input; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "General scheme-test composition of closed immersions. No same-unit statement supplies this foundational input; the unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Quasi-compactness of spectra, including affine chart and quotient tests. No same-unit statement supplies this foundational input; the unit route is unchanged."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "General surjectivity of the point map of a sheaf fibre product. No same-unit statement supplies this foundational input; the unit route is unchanged."
+   },
+   {
+    "node": "pqf-lem-locqf-fibre-discrete",
+    "why": "General scheme finite-fibre criterion, applied over a field. No same-unit statement supplies this foundational input; the unit route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-a1-space-point-open-calculus",
+  "pqf-lem-locqf-fibre-discrete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-8bda942a0",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-8bda942a0 (reviewer sub-agent of L); spot-checked: FIX: one missing citation, repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-field-discreteness-criterion.json. S1 split, no new nodes. Statement unchanged against live; live and side-live still have the item unsplit, so no parallel supersession. No re-split note, no SGA citation, no cycle. Source: I read Stacks decent-spaces 0ACA, statement and full proof, and 088J (separated implies decent). The item matches it: (2)⇔(5) needs no separation; the finite-point clause assumes X→Spec k separated, which is stronger than decent. Step 1: an algebraic space is a DM stack under the DM definition in def-sfb-stable-pointed-moduli-groupoids (an étale sheaf, so descent holds; diagonal representable by schemes; étale scheme atlas). Finite type and point topology agree by stack-finite-type-calculus and stack-point-topology. The hypotheses of the DM chart lemma (06UC) hold, and it gives every chart, not only surjective ones. Step 2: atlas point-surjective and open; 01TH isolation in the single fibre W. Step 3 (elementary, accepted): X→X×_kX→X×_ZX, with the second arrow the base change of Spec k→Spec(k⊗_Z k), which is surjective. Base change and composition of closed immersions give Spec(R/I), so the absolute diagonal is quasi-compact, as lem-sfb-space-qc-etale-fibre-bound requires. Step 4: the fibre bound plus the point-open-calculus surjection |V×_X Spec Ω|→|a|⁻¹(x) give finite fibres, so |V| is finite. Step 5: pqf-lem-locqf-fibre-discrete and def-pc-scheme-fibre make |V| discrete. Fault (C1): step 5 used an affine component V_i of the atlas as a representable étale chart without justification. I added that V_i is open in W, that T×_X V_i is open in T×_X W, and that étale (def-weil-etale-morphism: lfp, flat, unramified) is local on the source. def-weil-etale-morphism is now in step 5's uses and in proof_deps. Batch-5: all six flagged citations reach only general algebraic-space and projective-bundle foundations in sec-trace-formula (def-trf-algebraic-space, def-trf-projective-bundle-morphism, fppf descent, sheaf fibre products). None is a step of the trace formula or of Poincaré duality, and no thm-trf, sec-poincare-duality or sk-thm-trace-transport node appears in any closure, so they are accepted. The 8 tool_uses are generic foundations and are accepted. Small cases tested: empty space, infinite disjoint union of Spec k, Spec k[ε]/(ε²), A¹_k, two-point trait.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFieldDiscretenessCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_field_discreteness_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFieldDiscretenessCriterion.lean",
+  "statement": "theorem space_field_discreteness_criterion {S : Scheme.{u}} (k : Type u) [Field k] (s : Spec (CommRingCat.of k) ⟶ S) (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj (Over.mk s)) (hft : ∀ (U : Over S) (a : yoneda.obj U ⟶ X.obj.obj), IsEtale a → LocallyOfFiniteType (yoneda.preimage (a ≫ f)).left) : (DiscreteTopology (Point X.obj.obj) ↔ ∀ (U : Over S) (a : yoneda.obj U ⟶ X.obj.obj), IsEtale a → (yoneda.preimage (a ≫ f)).left.IsLocallyQuasiFinite) ∧ (IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal f) → Finite (Point X.obj.obj) → DiscreteTopology (Point X.obj.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b49dde9b4",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0ACA (2)<->(5) and 0ACA(1)=>(2) via 088J. X is the recorded AlgebraicSpace S; f : X -> yoneda(Over.mk s) is a natural transformation; hft (finite type on every IsEtale chart, equivalent to on an atlas) and the quasi-finiteness condition use the Stacks IsLocallyQuasiFinite on yoneda.preimage(a≫f).left; topology is the recorded pointTopologicalSpace (final topology over étale charts); separatedness is IsRepresentableWith IsClosedImmersion on pullback.diagonal f, assumed only in clause 2; Finite (Point X). Universe u is forced by Scheme.{u}. Node differs from live only by the lean record; lean.statement is verbatim in the file; docstrings carry source, blueprint id and proof steps; proof is sorry only; no new definitions or duplicates (grep of Sheaf/WeilConjectures, worker Mathlib searches). Edge cases empty / infinite disjoint union / k[ε] / A¹ checked. Nothing changed, so no compile."
+ }
+}

@@ -1,0 +1,179 @@
+{
+ "id": "def-sfb-space-structure-module-sum-extension",
+ "kind": "definition",
+ "title": "Structure-module etale sum extension with scheme-chart germ coordinates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $j:Z\\to X$ be a representable etale morphism of algebraic spaces with their small etale structure sheaves and module categories [def-trf-algebraic-space], [def-weil-sheaf-of-modules-category], in the universes of [def-weil-size-convention]. For an etale scheme chart $W\\to X$, its lift labels are the sections $a\\in Z(W)$ mapping to the chart section in $X(W)$; Yoneda identifies them with the maps $W\\to Z$ over $X$. A lift is etale and determines a chart $(W,a)$ of $Z$. Put $P_jM(W)=\\bigoplus_a M(W,a)$. Restriction along $r:V\\to W$ sends the $a$-summand by the restriction of $M$ into the $ar$-summand; it is semilinear, preserves identities and composition, including when labels merge. Morphisms of $M$ act on their respective summands and commute with these restrictions. Define $j_!M$ by module sheafification [def-weil-presheaf-modules-sheafification] of this explicit presheaf, and its maps by sheafification of these summandwise maps; additive sheafification in the original section universe is supplied by [def-sfb-space-comm-algebra-sheaf]. Its section generator is a direct-sum injection followed by the sheafification unit. Use the existing geometric ring and module stalks and structural ring maps [def-sfb-space-geometric-stalk-models]. For a geometric point $x:\\operatorname{Spec}\\Omega\\to X$ and every pointed etale scheme chart $(W,w)$ in [def-sfb-space-pointed-etale-abelian-stalk], the germ of a section is the unique additive map agreeing with every pointed affine refinement cocone. Such maps exist by cofinality of the fixed affine basis. Evaluate a lift $a$ at $w$ to get the lift $aw$ and the same pointed chart of $Z$. For each geometric lift $z$ over $x$, use the actual structural map $\\mathcal O_{X,x}\\to\\mathcal O_{Z,z}$, transporting its target-point equality explicitly, and regard $M_z$ as a module over $\\mathcal O_{X,x}$ by restriction of scalars through this map.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sfb-space-comm-algebra-sheaf",
+  "def-sfb-space-geometric-stalk-models",
+  "def-sfb-space-pointed-etale-abelian-stalk"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0710, lemma-stalk-j-shriek, presheaf and germ construction; spaces-perfect.tex Tag 08GU; spaces-properties.tex Tag 04JY, cofinal pointed affine charts."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Direct sum extension of sheaves of modules on small etale sites of algebraic spaces",
+   "results": "OK 8 hits: DirectSum.ext_component, SheafOfModules.ιFree, SheafOfModules.free, Sheaf.instHasFiniteCoproducts, IsBaseChange.directSum, SheafOfModules.instPreadditive, DirectSum.ext, IsBaseChange.directSumPow.",
+   "date": "2026-10-24",
+   "verdict": "No exact algebraic-space sum-extension construction. Reuse existing sheafification and normalized stalks; define only the missing explicit lift-indexed presheaf and germ coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of etale extension by zero of modules on an algebraic space is the direct sum of stalks indexed by lifts of the geometric point",
+   "results": "OK 8 hits: ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.stalkToFiberLinearMap_germ, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc.",
+   "date": "2026-10-24",
+   "verdict": "No exact algebraic-space sum-extension construction. Reuse existing sheafification and normalized stalks; define only the missing explicit lift-indexed presheaf and germ coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"stalk\"",
+   "results": "OK 2 hits: PresheafOfModules.instModuleCarrierStalkRingCatCarrierAbPresheafOpensCarrier and its CommRingCat analogue.",
+   "date": "2026-10-24",
+   "verdict": "No exact algebraic-space sum-extension construction. Reuse existing sheafification and normalized stalks; define only the missing explicit lift-indexed presheaf and germ coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Ss]talk|[Ss]talk.*extensionByZero|[Ss]talk.*[Ss]um (CategoryTheory)",
+   "results": "msearch.py: OK 0 hits. Local rg of lean/WeilConjectures and lean/Sheaf found scheme constant-coefficient EtaleSumStalks and localized ringed-slice ExtensionByZeroPresheaf, neither defining the direct sum indexed by maps from scheme charts to an algebraic space Z. Reused existing normalized module stalks from AlgebraicSpaceGeometricStalkModels; no new stalk category is defined. DAG grep and blueprint_refs.py search \"sum extension\" found no definition node for this construction (two blueprint matches concern constant coefficients).",
+   "date": "2026-10-24",
+   "verdict": "No exact algebraic-space sum-extension construction. Reuse existing sheafification and normalized stalks; define only the missing explicit lift-indexed presheaf and germ coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct sum presheaf of structure modules over lifts W to Z of an etale algebraic space morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Presheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The presheaf of modules over the ring sheaf associated to a scheme $X$, constructed by taking the underlying presheaf of rings from the structure sheaf (which assigns commutative rings to open sets) a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.presheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) : TopCat.Presheaf Ab X\", \"doc\": \"Given a scheme $X$ and a sheaf of modules over its structure sheaf (obtained via the forgetful functor from commutative rings to rings), this function returns the underlying presheaf of abelian groups\"}\n  {\"name\": \"DirectSum.apply_eq_component\", \"module\": \"Mathlib.Algebra.DirectSum.Module\", \"type\": \"(f : ⨁ i, M i) (i : ι) : f i = component R ι M i f\", \"doc\": \"For any semiring $ R $ and a family of $ R $-modules $\\\\{M_i\\\\}_{i \\\\in \\\\iota} $, the direct sum $\\\\bigoplus_{i \\\\in \\\\iota} M_i$ inherits a canonical $ R $-module structure. This structure is defined by co\"}\n  {\"name\": \"IsBaseChange.directSumPow\", \"module\": \"Mathlib.RingTheory.TensorProduct.IsBaseChangePi\", \"type\": \"(ibc : IsBaseChange S ε) : IsBaseChange S (lmap fun _ : ι ↦ ε)\", \"doc\": \"If each module in a family satisfies the base change condition with respect to a scalar extension, then their direct sum inherits this base change compatibility through component-wise linear maps, pre\"}\n  {\"name\": \"DirectSum.sigmaLuncurry_apply\", \"module\": \"Mathlib.Algebra.DirectSum.Module\", \"type\": \"(f : ⨁ (i) (j), δ i j) (i : ι) (j : α i) : sigmaLuncurry R f ⟨i, j⟩ = f i j\", \"doc\": \"For any semiring $ R $ and a family of $ R $-modules $\\\\{M_i\\\\}_{i \\\\in \\\\iota} $, the direct sum $\\\\bigoplus_{i \\\\in \\\\iota} M_i$ inherits a canonical $ R $-module structure. This structure is defined by co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (U : (X ⨿ Y).Opens) →\\n    (X ⨿ Y).presheaf.obj (Opposite.op U) ≅\\n      X.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map CategoryTheory.Limits.coprod.inl.base).obj U)) ⨯\\n        Y.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map CategoryTheory.Limits\", \"doc\": \"For any two schemes $X$ and $Y$, and for any open subset $U$ of their coproduct (disjoint union) $X \\\\amalg Y$, the ring of sections of the structure sheaf of $X \\\\amalg Y$ over $U$ is isomorphic to the\"}\n  {\"name\": \"PresheafOfModules.add_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \"(f g : M₁ ⟶ M₂) (X : Cᵒᵖ) : (f + g).app X = f.app X + g.app X\", \"doc\": \"For any two morphisms $ f, g : M_1 \\\\to M_2 $ between presheaves of modules over a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, and for every object $ X $ in the opposite category $ \\\\mathcal{\"}\n  {\"name\": \"DirectSum.instModule\", \"module\": \"Mathlib.Algebra.DirectSum.Module\", \"type\": \": Module R (⨁ i, M i)\", \"doc\": \"For any semiring $ R $ and a family of $ R $-modules $\\\\{M_i\\\\}_{i \\\\in \\\\iota} $, the direct sum $\\\\bigoplus_{i \\\\in \\\\iota} M_i$ inherits a canonical $ R $-module structure. This structure is defined by co\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact construction; use existing generic ingredients and the existing normalized geometric stalks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules on an algebraic space as the sheafified direct sum over scheme chart lifts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this component $X$ of the local ge\"}\n  {\"name\": \"ModuleCat.tilde\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → (AlgebraicGeometry.Spec { carrier := R, commRing := inst }).Modules\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-module $ M $, the tilde sheaf $ \\\\widetilde{M} $ on $ \\\\operatorname{Spec}(R) $ is constructed by localizing $ M $ over open sets in the Zariski topology. Sec\"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this type represents data providin\"}\n  {\"name\": \"SheafOfModules.ιFree\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"ModuleCat.tildeInType\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → TopCat.Sheaf (Type u) (AlgebraicGeometry.PrimeSpectrum.Top R)\", \"doc\": \"The sheaf on the prime spectrum $\\\\operatorname{Spec}(R)$ with values in the category of types, constructed by applying the sheafification process to the local predicate that sections are locally expre\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.isSheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (M : X.Modules), M.presheaf.IsSheaf\", \"doc\": \"For any sheaf of modules $ M $ over the structure sheaf of a scheme $ X $, the underlying presheaf of abelian groups on $ X $ satisfies the sheaf condition with respect to open covers of the topologic\"}\n  {\"name\": \"SheafOfModules.freeCofan\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [inst_3 : J.HasS\", \"doc\": \"Given an index type $ I $, this constructs a cocone (cofan) for the diagram of $ I $-indexed copies of the unit sheaf. The apex of the cocone is the free sheaf of $ R $-modules constructed as their co\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact construction; use existing generic ingredients and the existing normalized geometric stalks."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace.*[Ee]xtension|[Ee]xtension.*AlgebraicSpace|spaceSumExtension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact construction; use existing generic ingredients and the existing normalized geometric stalks."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-sum-extension-geometric-stalk",
+  "date": "2026-10-24",
+  "group": "Q160"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH induction step: canonical commutative relative Mayer–Vietoris triangle diagram, before applying third-isomorphism-triangle. Supporting input: Base-changed elementary-square left resolution used to identify the fixed canonical arrows in the Tag 0DKH triangle diagram. Supporting input: geometric stalks of the sheafified etale sum extension, before tensoring along the base-change stalk ring map. Missing construction: the explicit structure-module sum presheaf and its germ coordinates.",
+   "via": [
+    "lem-sfb-space-sum-extension-geometric-stalk",
+    "lem-sfb-space-etale-sum-pullback",
+    "lem-sfb-space-relative-mv-exchange-triangles",
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceStructureModuleSumExtension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spaceSumExtension",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SumLift",
+   "AlgebraicGeometry.AlgebraicSpace.sumLift_over",
+   "AlgebraicGeometry.AlgebraicSpace.sumLift_isEtale",
+   "AlgebraicGeometry.AlgebraicSpace.sumLiftChart",
+   "AlgebraicGeometry.AlgebraicSpace.sumLift_restrict_over",
+   "AlgebraicGeometry.AlgebraicSpace.sumLiftRestrict",
+   "AlgebraicGeometry.AlgebraicSpace.sumLiftChart_w",
+   "AlgebraicGeometry.AlgebraicSpace.sumLiftChartMap",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumSection",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumRestrict",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumRestrict_laws",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumAbPresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumAbPresheaf_module",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumPresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumExtension",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumSectionHom",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumSectionHom_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumPresheafHom",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumExtensionHom",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumGenerator",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartGerm_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceChartGerm",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumStalkScalar",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumStalkPiece",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumPointLift_over",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumPointLift",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumLiftPointed_w",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSumLiftPointed"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceStructureModuleSumExtension.lean",
+  "statement": "def spaceSumExtension (j : Z ⟶ X) (hj : IsEtale j.hom.hom) (M : Z.Modules) : X.Modules",
+  "branch": "sheaf-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4614a6ec",
+  "group": "Q160",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4614a6ec",
+  "group": "Q160",
+  "result": "pass",
+  "note": "The item states both node clauses: the structural map O_{X,x̄}→O_{Z,z̄} is bijective for every lift, and there is a unique family of O_{X,x̄}-linear isomorphisms (j_!M)_x̄ ≅ ⊕_{SumLift} restrictScalars(M_z̄), normalized on every pointed scheme-chart germ (a-summand ↦ a w̄ summand) and natural in M. No extra hypotheses; universe u throughout. New def node def-sfb-space-structure-module-sum-extension: literal direct-sum presheaf over Yoneda section lifts with merging restriction, O_X(W)=Γ(W)=O_Z(W,a) action, Mathlib PresheafOfModules.sheafification with the landed comm-algebra-sheaf instances, and a chart germ pinned by a true ∃! over the cofinal affine basis; data real, theorems sorry, fields per §5. Not a duplicate: extensionByZeroPresheaf needs a slice over a site object; etaleModuleShriek is a theorem-node Functor.leftAdjoint choice. Item changed only in lean/stmt_deps (+new node, +landed geometric-stalk-models); both lean.statement fields verbatim; dep node files identical to side-live; report sections present. Advisory: PointedEtale owner reaches the item only via the new def node's stmt_deps. No recompile (worker compile and dry run OK); no files changed."
+ }
+}

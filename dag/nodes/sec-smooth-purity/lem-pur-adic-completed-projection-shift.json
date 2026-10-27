@@ -1,0 +1,149 @@
+{
+ "id": "lem-pur-adic-completed-projection-shift",
+ "kind": "statement",
+ "title": "Completed compact-support projection shift square",
+ "statement": "Fix the finite-field datum D and coefficient datum C, a finite extension F of Q_(C.l), separated finite-type D.k-schemes X and Y, and a separated finite-type D.k-morphism f:X→Y. Fix a compactification c, normalized ringed models d and open comparisons b, and a uniform finite-Tor constructible integral object T on X, using [def-pur-adic-projection-trace-data], [def-sf-integral-system-canonical-bridge] and [def-weil-finite-tor-amplitude]. For every finite-Tor constructible K on Y, the actual ordinary-to-completed tensor unit chi at (P_c T,K) is invertible; T completed-tensor Lf* K is finite-Tor constructible; and the actual map adicProjection formed from d,b,c and this chi inverse is invertible. With these witnesses the square adicProjection_(K[1]); P_c(adicTensorInputShift_K); shift_(P_c) = completedTensor(1,adicInputShift_K); signedRightShift_(P_cT,K); adicProjection_K[1] commutes. The shifts include the full-subcategory inclusion and the normalized second-slot Koszul sign. No trace or exceptional-adjunction assertion is made.",
+ "stmt_deps": [
+  "def-pur-adic-projection-trace-data",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-operation-shift-data",
+  "def-pur-integral-ringed-projection-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, integral coefficients; expanded adic projection and trace shift calculation in lem-pur-adic-projection-shift-coherence, proof Steps 1-4."
+ },
+ "proof": [
+  {
+   "text": "Choose $f=pj$. By [def-exchange-projection] the projection is the proper counit mate followed by the open tensor map and pullback composition. The proper shift square is [lem-weil-pbc-ringed-projection-mate-exact]; the open square, with sign $(-1)^a$ for arbitrary first degree $a$, is [lem-pur-open-system-tensor-shift]. Thus both finite constituents have the required canonical shifts, without a concentration assumption on $T$.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-open-system-tensor-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "Unit Step 2 (the adic stage): normalized strict-system construction, expanded proper/open projection and shift calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-strict-compactification-projection-shift] to $M=\\mathcal RT$, $N=\\mathcal RK$. The system projection of [lem-pur-system-level-projection-formula-coherence] is exactly its proper/open composite in the simultaneous models of [lem-sf-integral-compactification-system-realization]. Hence $s_H\\operatorname{PF}^{\\mathrm{sys}}_{M,N[1]}=\\operatorname{PF}^{\\mathrm{sys}}_{M,N}[1]s_F$ in the derived system category itself, for its actual quotient transitions.",
+   "uses": [
+    "lem-pur-strict-compactification-projection-shift",
+    "lem-pur-system-level-projection-formula-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "Unit Step 2 (the adic stage): normalized strict-system construction, expanded proper/open projection and shift calculation"
+   }
+  },
+  {
+   "text": "The realization statement [lem-sf-integral-compactification-system-realization] intertwines this composite and its whiskerings, so $\\operatorname{PF}_{T,K}=c_H\\mathcal L_Y(\\operatorname{PF}^{\\mathrm{sys}}_{M,N})c_F^{-1}$; its realized support functor is exactly the total-limit compact support of [def-weil-integral-rational-qbar-compact-support]. By [lem-pur-integral-realization-shift-coherence], $\\mathcal L_Y$ and both $c$ commute with the designated-slot shifts. Apply $\\mathcal L_Y$ to Step 2 and substitute these two $c$-shift equations: the adjacent $c^{-1}c$ cancel, giving the integral projection shift square, including its proper/open constituents. Invert that square using [fix-prop-projection-formula].",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-pur-integral-realization-shift-coherence",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "Unit Step 2 (the adic stage): normalized strict-system construction, expanded proper/open projection and shift calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-open-system-tensor-shift",
+  "lem-pur-strict-compactification-projection-shift",
+  "lem-pur-system-level-projection-formula-coherence",
+  "lem-sf-integral-compactification-system-realization",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-pur-integral-realization-shift-coherence",
+  "fix-prop-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, integral coefficients; expanded adic projection and trace shift calculation in lem-pur-adic-projection-shift-coherence, proof Steps 1-4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The completed compact support projection is invertible on constructible finite Tor inputs and commutes with the second input shift",
+   "results": "Functor.commShiftOfLocalization.iso_inv_app and derived-factorization shift instances; no specialized completed projection statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.CommShift.CompatibilityCounit",
+   "results": "CompatibilityCounit, compatibilityCounit_of_compatibilityUnit, compatibilityCounit_left in Mathlib.CategoryTheory.Shift.Adjunction. These provide formal adjunction algebra, not completed projection or completion-unit compatibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adicProjection|adicTraceTensor|Tensor.chi",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicProjectionShiftCoherence",
+  "date": "2026-10-25",
+  "group": "W9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "via": [
+    "lem-pur-adic-projection-shift-coherence"
+   ],
+   "place": "Step 2, integral coefficients; expanded adic projection and trace shift calculation in lem-pur-adic-projection-shift-coherence, proof Steps 1-4."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompletedProjectionShift",
+  "file": "lean/Sheaf/Paper/AdicCompletedProjectionShift.lean",
+  "declaration": "WeilConjectures.adicCompletedProjectionShift",
+  "statement": "theorem adicCompletedProjectionShift\n    (d : RingedModels C.l F) (b : RingedOpenComparisons C.l F d)\n    (T : finiteTorConstructibleIntegralCategory C.l F X) :\n    ∃ (hχ : ∀ K : finiteTorConstructibleIntegralCategory C.l F Y,\n        IsIso (((d.tensor Y).chi C.l F).app\n          ((PurCompactSupport.image (PurCompactSupport.completed C.l F) c).obj T.obj, K.obj)))\n      (hA : ∀ K : finiteTorConstructibleIntegralCategory C.l F Y,\n        finiteTorConstructibleIntegral C.l F X\n          ((integralCompletedTensor C.l F X).obj\n            (T.obj, (integralDerivedPullback C.l F f).obj K.obj)))\n      (hPF : ∀ K : finiteTorConstructibleIntegralCategory C.l F Y,\n        IsIso (adicProjection C.l F d b c T.obj K.obj (hχ K))),\n      ∀ K : finiteTorConstructibleIntegralCategory C.l F Y,\n        adicProjection C.l F d b c T.obj (K⟦(1 : ℤ)⟧).obj (hχ (K⟦(1 : ℤ)⟧)) ≫\n            (PurCompactSupport.image (PurCompactSupport.completed C.l F) c).map\n              (adicTensorInputShift C.l F f T.obj K).hom ≫\n            ((PurCompactSupport.image (PurCompactSupport.completed C.l F) c).commShiftIso\n              (1 : ℤ)).hom.app _ =\n          (integralCompletedTensor C.l F Y).map\n              (Prod.mkHom (𝟙 _) (adicInputShift C.l F Y K).hom) ≫\n            ((tensorShifts C.l F).integralRight Y 1).hom.app\n              ((PurCompactSupport.image (PurCompactSupport.completed C.l F) c).obj T.obj,\n                K.obj) ≫\n            (adicProjection C.l F d b c T.obj K.obj (hχ K))⟦(1 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5ee36",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T101823-L-3740839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5ee36",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T101823-L-3740839",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly vs three new sorried lemma nodes; moved def block vs published module (byte-identical); new node lean.statements vs files; CommShift instance on PurCompactSupport.image vs integralShifts.compactSupport (rfl); importers AdicTraceTransposeData/AdicUnitTraceReductionData compiled against delivered and published item"
+ }
+}

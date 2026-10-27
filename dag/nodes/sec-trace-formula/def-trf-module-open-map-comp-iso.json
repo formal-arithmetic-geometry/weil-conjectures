@@ -1,0 +1,119 @@
+{
+ "id": "def-trf-module-open-map-comp-iso",
+ "kind": "definition",
+ "title": "Canonical comparisons for successive open restriction of module sheaves and derived objects",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $T\\subset V\\subset U$ be open subsets, with inclusions $i:T\\to V$ and $j:V\\to U$. Write $R=\\mathcal O_X$ and $\\operatorname{Res}_i=\\operatorname{SheafOfModules.overMap}(R,i)$ for restriction on the localized open sites. Define the canonical natural isomorphism $c_{i,j}:\\operatorname{Res}_i\\circ\\operatorname{Res}_j\\xrightarrow{\\sim}\\operatorname{Res}_{i\\,;\\,j}$, where the displayed composition applies restriction along $j$ first and then along $i$, by the identity on sections of every module sheaf. In the derived categories [def-pc-derived-category], define $c^D_{i,j}:D(\\operatorname{Res}_i)\\circ D(\\operatorname{Res}_j)\\xrightarrow{\\sim}D(\\operatorname{Res}_{i\\,;\\,j})$ by the inverse canonical comparison from deriving a composite, followed by the derived natural isomorphism induced by $c_{i,j}$. Thus both comparisons use the canonical sectionwise identity, with no additional choice of comparison maps.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D6B and 0D6C, canonical successive open restriction implicit in the cocycle and compatibility equations."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical natural isomorphism between successive restrictions of sheaves of modules to nested opens and direct restriction, and its derived category comparison",
+   "results": "8 hits; top=['ModuleCat.Tilde.toOpen_res', 'CategoryTheory.Sheaf.ΓRes', 'AlgebraicGeometry.Scheme.Modules.restrict', 'ModuleCat.Tilde.toOpen', 'AlgebraicGeometry.SheafedSpace.restrictTopIso', 'AlgebraicGeometry.Scheme.restrictFunctorΓ', 'AlgebraicGeometry.Scheme.Modules.restrictFunctor', 'AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso']; note=; digest=6a4deb07a837f8e4",
+   "date": "2026-10-24",
+   "verdict": "Related restriction functors and ordinary open restriction comparisons; reuse the exact existing project definitions moduleOpenMapCompIso and derivedModuleOpenMapCompIso rather than introduce copies."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overMap",
+   "results": "8 hits; top=['SheafOfModules.overMap', 'SheafOfModules.instIsLeftAdjointOverOverRingCatOverMapOfHasPullbacks', 'SheafOfModules.overMapPushforwardAdj', 'SheafOfModules.overMapUnitIso', 'SheafOfModules.overFunctorMap', 'SheafOfModules.overMapUnitIso_hom_val_app_hom_apply', 'SheafOfModules.overMapUnitIso_inv_val_app_hom_apply', 'AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv']; note=; digest=b2a1d79b6cc39950",
+   "date": "2026-10-24",
+   "verdict": "Related restriction functors and ordinary open restriction comparisons; reuse the exact existing project definitions moduleOpenMapCompIso and derivedModuleOpenMapCompIso rather than introduce copies."
+  },
+  {
+   "tool": "grep",
+   "query": "overMap.*(Comp|comp|Iso)|(Comp|comp|Iso).*overMap",
+   "results": "5 hits; top=['Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean']; note=; digest=315c5a23d7fefe0f; directory=Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-24",
+   "verdict": "Related restriction functors and ordinary open restriction comparisons; reuse the exact existing project definitions moduleOpenMapCompIso and derivedModuleOpenMapCompIso rather than introduce copies."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "moduleOpenMapCompIso|derivedModuleOpenMapCompIso|def-trf-module-open-map-comp-iso in dag/nodes, lean/WeilConjectures and lean/Sheaf; tools/blueprint_refs.py search restriction",
+   "results": "The two definitions occur in Sheaf.AlgebraicGeometry.DerivedBasisIncreasingUnion and are listed only under its theorem node; no definition node for them. Blueprint search gives 442 nodes involving restriction, without a separate node for these comparisons.",
+   "date": "2026-10-24",
+   "verdict": "Add a definition node recording these exact existing real-data definitions, as requested by the maintainer; no Lean definition is duplicated."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-basis-limit-extension",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; BBD descent for derived objects with vanishing negative self extensions. Re-split component: BBD descent of the polynomial-chart dualizing object: continuous-limit gluing and extension to every chosen open, previously steps 6, 7 and the limit-compatibility part of step 8 of lem-trf-derived-basis-bbd-descent. Canonical comparison of successive open restrictions in the limit-step compatibility equations.",
+   "via": [
+    "lem-trf-derived-basis-limit-extension",
+    "lem-trf-derived-basis-bbd-descent",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedBasisIncreasingUnion",
+  "declaration": "AlgebraicGeometry.derivedModuleOpenMapCompIso",
+  "declarations": [
+   "AlgebraicGeometry.moduleOpenMapCompIso",
+   "AlgebraicGeometry.derivedModuleOpenMapCompIso"
+  ],
+  "statement": "def derivedModuleOpenMapCompIso (X : Scheme.{u}) {T V U : X.Opens}\n    (i : T ⟶ V) (j : V ⟶ U)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over T))] :\n    (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) j).mapDerivedCategory ⋙\n      (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory ≅\n    (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (i ≫ j)).mapDerivedCategory",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Records the two exact existing real-data comparison definitions formerly listed only under the increasing-union theorem node. moduleOpenMapCompIso is sectionwise identity; derivedModuleOpenMapCompIso is the inverse mapDerivedCategoryCompIso followed by mapDerivedCategoryNatIso. No new module or duplicate definition."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76cb03095",
+  "group": "N6",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76cb03095",
+  "group": "N6",
+  "result": "pass",
+  "note": "Re-delivery of 2b18 H2/H4 RETURN. New existing:true def node def-trf-module-open-map-comp-iso owns moduleOpenMapCompIso/derivedModuleOpenMapCompIso on the unchanged DerivedBasisIncreasingUnion. Its lean.statement occurs verbatim in live source; node text matches the bodies (sectionwise Iso.refl; mapDerivedCategoryCompIso.symm ≪≫ NatIso) and the j-then-i order. The item adds it to stmt_deps and otherwise differs from live only in the lean date. lean.statement is verbatim the file signature; one sorry. Clause check vs node/Stacks 0D6B/0D6C: hcover, hrefine, rho_id (inline = parent's derivedModuleOpenMapIdIso body; parent downstream), rho_comp, hnegative, λ IsSuccLimit, Monotone W, hunion, IsSuccPrelimit continuity incl. W_0=∅, F/s/hs/hFnegative, r/hr/hrs; conclusion L on iSup W, sL for every U ≤ iSup W, rL, r and stage equations, uniqueness over all morphisms. No extra assumptions. Edge cases: empty X/B, ∅∈B, all W empty, repeated stages, U in no stage. No compile (no file changed). Advisory: NR binary-extension 5835 (PASS, unlanded) adds def-trf-derived-module-open-map-comp-iso owning the same decls; the second lander drops its node and rebinds."
+ }
+}

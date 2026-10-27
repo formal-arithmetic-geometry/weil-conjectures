@@ -1,0 +1,327 @@
+{
+ "id": "lem-zl-weil-shriek-coefficient-long-exact",
+ "kind": "statement",
+ "title": "Weil-equivariant coefficient long exact sequence for compact supports",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$ and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$. For every separated finite-type $k_0$-scheme $S_0$ write $S=S_0\\times_{k_0}k$. Use the common-stage coefficient categories $D^b_c(S,\\Qlb)$, their constructible hearts and their Weil objects as in [def-weil-weil-sheaf-complex; def-weil-constructible-heart]. A Weil complex is a pair with a geometric-Frobenius isomorphism; no triangulated structure on the category of pairs is assumed. Write $Rf_{0!}$ for the compact-support functor of [def-weil-integral-rational-qbar-compact-support], with its induced Weil structure, and $\\mathcal H^r$ for the standard heart-valued cohomology functors [prop-constructible-truncations].\n\nLet $f_0:X_0\\to Y_0$ be a separated finite-type morphism of separated finite-type $k_0$-schemes. For a constructible Weil sheaf $F$, put $R^rf_{0!}F=\\mathcal H^r(Rf_{0!}(F[0]))$ for $r\\in\\mathbf Z$. For every short exact sequence $0\\to F'\\xrightarrow{a}F\\xrightarrow{b}F''\\to0$ in the constructible Weil heart, the canonical underlying connecting maps induce morphisms of constructible Weil sheaves\n$$\\delta^r:R^rf_{0!}F''\\longrightarrow R^{r+1}f_{0!}F'$$\nfor which\n$$\\cdots\\to R^rf_{0!}F'\\xrightarrow{R^rf_{0!}a}R^rf_{0!}F\\xrightarrow{R^rf_{0!}b}R^rf_{0!}F''\\xrightarrow{\\delta^r}R^{r+1}f_{0!}F'\\to\\cdots$$\nis exact. The sequence is natural in morphisms of short exact Weil sequences. In particular the consecutive same-degree maps are exact at $R^rf_{0!}F$. The underlying connecting map is the cohomology boundary obtained by applying the underlying exact functor $Rf_!$ to the canonical triangle of the short exact sequence in the constructible heart. The assertion includes compatibility of these boundaries with the induced Weil structures, rather than assuming a distinguished triangle of fixed pairs.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 3: the underlying heart triangle, its image under Rf_!, and the Weil-equivariant cohomology sequence (old step 11)."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-constructible-truncations",
+  "def-zl-common-stage-weil-shriek",
+  "def-zl-field-weil-shriek-shift-data",
+  "sk-d-dl-general-weights"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal T_X=D^b_c(X,\\Qlb)$ and $\\mathcal T_Y=D^b_c(Y,\\Qlb)$, $G_X=Lg_X^*$ and $G_Y=Lg_Y^*$. The geometric morphism $f$ and its source and target are separated of finite type by [lem-pod-separated-finite-type-base-change]. The standard bounded t-structures and heart-valued cohomology are supplied by [prop-constructible-truncations]. Pullback by each geometric Frobenius is an exact triangulated functor by the common-stage pullback clause of [prop-weil-pbc-descent-functors], and its restriction to the constructible heart is exact by [lem-a1-constructible-pullback-t-exact]. Thus both $G_X$ and $G_Y$ satisfy the hypotheses of the t-exact boundary comparison [lem-zl-texact-cohomology-boundary-comparison]. Denote their cohomology comparisons by $c^r_M:G H^r(M)\\simeq H^r(GM)$.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "prop-constructible-truncations",
+    "prop-weil-pbc-descent-functors",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-zl-texact-cohomology-boundary-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 3: coefficient category, standard cohomology, and Frobenius pullback hypotheses."
+   }
+  },
+  {
+   "text": "The heart is abelian by [prop-weil-heart-abelian]. In its category of $G$-fixed pairs [def-weil-endofunctor-fixed-pair-category], kernels and cokernels of an intertwining arrow are its underlying kernel and cokernel: exactness of $G$ identifies $G\\ker u$ with $\\ker Gu$ and $G\\operatorname{coker}u$ with $\\operatorname{coker}Gu$ by [lem-sp-exact-functor-preserves-homology](a). The source and target structure isomorphisms induce the required structure isomorphisms on these objects; the inverse structures induce their inverses. A unique underlying kernel or cokernel factorization intertwines, as follows by composing with the kernel monomorphism or precomposing with the cokernel epimorphism. Biproducts are likewise underlying biproducts. Hence the forgetful functor preserves kernels, cokernels and images and reflects exactness: the underlying coimage-to-image isomorphism has an intertwining inverse. In particular the given short exact Weil sequence is short exact in the underlying constructible heart, and underlying exactness of the sequence we construct will suffice.",
+   "uses": [
+    "prop-weil-heart-abelian",
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 3: passage between the constructible Weil heart and its underlying heart."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-heart-short-exact-triangles](4) to obtain the canonical distinguished triangle $T=(F'\\xrightarrow a F\\xrightarrow b F''\\xrightarrow t F'[1])$ in $\\mathcal T_X$. It is natural in short exact sequences: for a commuting triple $(u',u,u'')$, (TR3) of [def-weil-triangulated-category] supplies a triangle map on its first two components. Its third component $v$ satisfies $vb=b_{\\rm target}u=u''b$, so $v=u''$ because $b$ is epic in the heart. Thus $t_{\\rm target}u''=u'[1]t$. Apply this to the short exact sequence $G_XT$ and the three Weil isomorphisms $\\theta',\\theta,\\theta''$. Exactness and t-exactness from step 1 ensure that $G_XT$ is the heart triangle of the pulled-back sequence, with its last arrow followed by the shift comparison of $G_X$. The same argument gives $t\\theta''=\\theta'[1]G_X(t)$, with that shift comparison understood. Therefore $t:F''\\to F'[1]$ is an intertwining morphism, without claiming that fixed pairs form a triangulated category.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-triangulated-category",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 3: canonical underlying heart triangle and functoriality in the short exact sequence."
+   }
+  },
+  {
+   "text": "Put $H=Rf_!$. By [lem-zl-field-shriek-lower-bound], $H$ preserves bounded constructibility and is exact triangulated, so $HT=(HF'\\to HF\\to HF''\\xrightarrow d HF'[1])$ is distinguished, where $d=\\sigma_{F',1}H(t)$. Its first two arrows and $H(t)$ are morphisms of fixed pairs by [lem-fix-weil-operations]. Its shift comparison $\\sigma_{F',1}$ is an isomorphism of fixed pairs by [lem-zl-weil-shriek-shift-compatibility]. Consequently $d$ intertwines the induced Weil structure on $HF''$ and the shifted structure on $HF'[1]$. All three arrows of this underlying triangle therefore commute with the Weil isomorphisms; equivalently these isomorphisms give a morphism of underlying triangles $G_Y(HT)\\to HT$.",
+   "uses": [
+    "lem-zl-field-shriek-lower-bound",
+    "lem-fix-weil-operations",
+    "lem-zl-weil-shriek-shift-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 3: apply the exact compact-support functor, retaining the last arrow and its equivariant shift comparison."
+   }
+  },
+  {
+   "text": "By [lem-weil-heart-short-exact-triangles](5) and [lem-sp-long-exact-of-triangle], the cohomology of $HT$ gives the underlying long exact sequence, with boundary $\\delta^r:H^r(HF'')\\to H^{r+1}(HF')$ induced by $d$. Its terms lie in the constructible heart. On $H^r(M)$ the induced Weil structure is $\\Theta^r_M=H^r(\\theta_M)c^r_M$, using [prop-constructible-truncations]. Naturality of $c^r$ shows that each same-degree map intertwines: for an intertwining $u:M\\to N$,\n$$H^r(u)\\Theta^r_M=H^r(\\theta_N)H^r(G_Yu)c^r_M=\\Theta^r_NG_Y(H^r(u)).$$\nHere the first equality uses $u\\theta_M=\\theta_NG_Yu$. This also identifies the same-degree arrows with the specified $R^rf_{0!}a,R^rf_{0!}b$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "lem-sp-long-exact-of-triangle",
+    "prop-constructible-truncations",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 3: underlying long exact cohomology sequence and its same-degree Weil maps."
+   }
+  },
+  {
+   "text": "Set $A=HF'$ and $C=HF''$. The morphism of triangles in step 4 and naturality of the boundary [lem-sp-long-exact-of-triangle] give\n$$\\delta^r_{HT}H^r(\\theta_C)=H^{r+1}(\\theta_A)\\delta^r_{G_Y(HT)}.$$\nThe t-exact boundary comparison [lem-zl-texact-cohomology-boundary-comparison], applied to the exact t-exact functor $G_Y$, gives\n$$\\delta^r_{G_Y(HT)}c^r_C=c^{r+1}_A G_Y(\\delta^r_{HT}).$$\nCompose the first equality on the right with $c^r_C$ and substitute the second. The result is precisely\n$$\\delta^r\\Theta^r_C=\\Theta^{r+1}_A G_Y(\\delta^r),$$\nso every connecting map is a morphism of constructible Weil sheaves. This computation includes the canonical shift comparison in both image triangles, as required by the comparison lemma; it does not infer boundary compatibility from naturality of the unshifted exchange alone.",
+   "uses": [
+    "lem-sp-long-exact-of-triangle",
+    "lem-zl-texact-cohomology-boundary-comparison",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 3: explicit Frobenius square for the cohomology connecting map."
+   }
+  },
+  {
+   "text": "Every term and every arrow of the underlying long exact sequence is now a constructible Weil sheaf or a Weil morphism. The kernel/image construction in step 2 reflects exactness, so this is an exact sequence in the constructible Weil heart at every term, including the terms next to a boundary and the middle same-degree term. For a morphism of short exact Weil sequences, step 3 gives its underlying triangle morphism; applying the exact functor $H$ gives the corresponding morphism of image triangles. Naturality of the long exact sequence [lem-sp-long-exact-of-triangle] says that its cohomology maps commute also with the boundaries. All these maps intertwine by step 5, so this is naturality in the Weil heart. By construction its underlying boundary is exactly the cohomology boundary of the canonical underlying heart triangle after applying $Rf_!$, which proves the final specification of the statement.",
+   "uses": [
+    "lem-sp-long-exact-of-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 3: exactness in the Weil heart, naturality, and the specified underlying boundary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "prop-constructible-truncations",
+  "prop-weil-pbc-descent-functors",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-zl-texact-cohomology-boundary-comparison",
+  "prop-weil-heart-abelian",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-triangulated-category",
+  "def-weil-weil-sheaf-complex",
+  "lem-zl-field-shriek-lower-bound",
+  "lem-fix-weil-operations",
+  "lem-zl-weil-shriek-shift-compatibility",
+  "lem-sp-long-exact-of-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 3, expanded in the underlying common-stage category; naturality and Frobenius boundary square are supplied explicitly, using the existing heart, shift, and cohomology interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated morphism of finite type over a finite field a short exact sequence of constructible ell adic Weil sheaves induces a natural Frobenius equivariant long exact sequence of higher direct images with compact support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"CategoryTheory.Functor.homologySequence_exact₁\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"The short complex constructed from the δ-morphism in the homology sequence of a triangulated functor is exact, meaning the image of the incoming morphism equals the kernel of the outgoing morphism at \"}\n  {\"name\": \"CategoryTheory.Functor.homologySequence_exact₂\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ from a pretriangulated category $ \\\\mathcal{C} $ to an abelian category $ \\\\mathcal{A} $, and a distinguished triangle $ T = (X \\\\xrightarrow\"}\n  {\"name\": \"groupCohomology.mapShortComplex₁_exact\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)} (hX : X.ShortExact)\\n  {i j : ℕ} (hij : i + 1 = j), (groupCohomology.mapShortComplex₁ hX hij).Exact\", \"doc\": \"For natural numbers $i$ and $j$ such that $i + 1 = j$, the second derived short complex constructed in the Snake Lemma diagram for group cohomology is exact, meaning the image of each differential equ\"}\n  {\"name\": \"groupCohomology.mapShortComplex₃_exact\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)} (hX : X.ShortExact)\\n  {i j : ℕ} (hij : i + 1 = j), (groupCohomology.mapShortComplex₃ hX hij).Exact\", \"doc\": \"For any natural numbers $i$ and $j$ satisfying $j = i + 1$, the short complex $L_1'$ constructed via the Snake Lemma from a short exact sequence of cochain complexes in group cohomology is exact. This\"}\n  {\"name\": \"DerivedCategory.HomologySequence.exact₃\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (T : CategoryTheory.Pretriangulated.Triangle (DerivedCategory C))\\n  (hT : T ∈ CategoryTheory.Pretriangulated.distinguishedTriangles) (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁),\\n  { X₁ :=\", \"doc\": \"For any triangle $ T $ in the derived category of an abelian category $ \\\\mathcal{C} $, and integers $ n_0, n_1 $ satisfying $ n_0 + 1 = n_1 $, the short complex constructed from the composition of the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general homological exactness is only an input; no common-stage compact-support Weil functor or Frobenius-equivariant coefficient sequence is supplied"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\", \"higherLowerShriek\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: general homological exactness is only an input; no common-stage compact-support Weil functor or Frobenius-equivariant coefficient sequence is supplied"
+  },
+  {
+   "tool": "grep",
+   "query": "higherLowerShriek.*exact|exact.*higherLowerShriek|WeilSheaf.*delta|WeilSheaf.*connecting",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: general homological exactness is only an input; no common-stage compact-support Weil functor or Frobenius-equivariant coefficient sequence is supplied"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported direct images of constructible Weil sheaves form a cohomological delta functor with Frobenius equivariant connecting maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.singleδ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle\", \"type\": \": (singleFunctor C 0).obj S.X₃ ⟶ ((singleFunctor C 0).obj S.X₁)⟦(1 : ℤ)⟧\", \"doc\": \"The morphism $ \\\\delta: Q(X_3) \\\\to Q(X_1)[1] $ in the derived category, constructed from a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $, using the localization functor $ Q $ and the mapping\"}\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n  {\"name\": \"DerivedCategory.triangleOfSESδ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ShortExact\", \"type\": \": Q.obj (S.X₃) ⟶ (Q.obj S.X₁)⟦(1 : ℤ)⟧\", \"doc\": \"The morphism $ \\\\delta: Q(X_3) \\\\to Q(X_1)[1] $ in the derived category, constructed from a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $, using the localization functor $ Q $ and the mapping\"}\n  {\"name\": \"CategoryTheory.kernelCokernelCompSequence.δ\", \"module\": \"Mathlib.CategoryTheory.Abelian.DiagramLemmas.KernelCokernelComp\", \"type\": \": kernel g ⟶ cokernel f\", \"doc\": \"The connecting morphism $\\\\delta$ is a morphism from the kernel of $g$ to the cokernel of $f$, constructed via the Snake Lemma's input data in an abelian category. It arises from the exactness conditio\"}\n  {\"name\": \"SnakeLemma.δ\", \"module\": \"Mathlib.Algebra.Module.SnakeLemma\", \"type\": \": K₃ →ₗ[R] C₁\", \"doc\": \"The linear map $\\\\delta: \\\\ker(g_3) \\\\to \\\\coker(f_1)$ constructed in the Snake Lemma, which connects the kernels and cokernels of a short exact sequence of modules over a commutative ring $R$. Given a co\"}\n  {\"name\": \"CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ'\", \"module\": \"Mathlib.CategoryTheory.Triangulated.SpectralObject\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} ι] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.HasShift C ℤ] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : ∀ (n : ℤ), (CategoryTheory.shi\", \"doc\": \"For a triangulated functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between pretriangulated categories and a spectral object $ X $ in $ \\\\mathcal{C} $, the connecting morphism $ \\\\delta' $ of the image spect\"}\n  {\"name\": \"LightCondSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.{u}.FullyFaithful\", \"doc\": \"The functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces (totally disconnected and second-countable) is fully faithful. This follows from the adjunction between \"}\n  {\"name\": \"CondensedSet.LocallyConstant.iso\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor ≅ discrete (Type (u + 1))\", \"doc\": \"An isomorphism between the functor constructing sheaves of locally constant functions on compact Hausdorff spaces and the discrete functor embedding types into condensed sets, established via the adju\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general homological exactness is only an input; no common-stage compact-support Weil functor or Frobenius-equivariant coefficient sequence is supplied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and Frobenius equivariance of the connecting homomorphisms in the cohomology sequence obtained by applying R f shriek to a short exact sequence of Weil coefficient sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomology.δ_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)} (hX : X.ShortExact)\\n  {i j : ℕ} (hij : i + 1 = j) (z : (Fin i → G) → ↑X.X₃.V)\\n  (hz : (CategoryTheory.ConcreteCategory.hom ((groupCohomology.inhomogeneousCochains X.X₃).d i j)) z = 0)\\n  (y : (Fin i → \", \"doc\": \"Given a short exact sequence $0 \\\\to X_1 \\\\xrightarrow{f} X_2 \\\\xrightarrow{g} X_3 \\\\to 0$ of $G$-representations over a commutative ring $k$, and an $i$-cocycle $z$ for $X_3$ with corresponding $i$-cocha\"}\n  {\"name\": \"groupCohomology.δ₀_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)} (hX : X.ShortExact)\\n  (z : ↥X.X₃.ρ.invariants) (y : ↑X.X₂.V),\\n  (CategoryTheory.ConcreteCategory.hom X.g.hom) y = ↑z →\\n    ∀ (x : G → ↑X.X₁.V)\\n      (hx :\\n        ⇑(CategoryTheory.ConcreteCategory.hom\", \"doc\": \"Given a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ of $ G $-representations, an invariant element $ z \\\\in X_3^G $, and elements $ y \\\\in X_2 $, $ x: G \\\\to X_1 $ satisfying $ X.g(y) = z $ \"}\n  {\"name\": \"groupCohomology.δ\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {X : CategoryTheory.ShortComplex (Rep k G)} →\\n        X.ShortExact → (i j : ℕ) → i + 1 = j → (groupCohomology X.X₃ i ⟶ groupCohomology X.X₁ j)\", \"doc\": \"For a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ of representations of a group $ G $ over a commutative ring $ k $, this morphism $ \\\\delta_{i,j} $ maps the $ i $-th group cohomology of $\"}\n  {\"name\": \"groupCohomology.δ₁_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)} (hX : X.ShortExact)\\n  (z : ↥(groupCohomology.cocycles₁ X.X₃)) (y : G → ↑X.X₂.V),\\n  ⇑(CategoryTheory.ConcreteCategory.hom X.g.hom) ∘ y = ⇑z →\\n    ∀ (x : G × G → ↑X.X₁.V)\\n      (hx :\\n        ⇑(CategoryT\", \"doc\": \"Given a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ of representations of a group $G$ over a commutative ring $k$, if $z \\\\in H^1(G, X_3)$ is a 1-cocycle represented by a cochain $y: G \\\\to X\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.δ_apply'\", \"module\": \"Mathlib/Algebra/Homology/ConcreteCategory\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_1} {CC : C → Type v}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [inst_3 : CategoryTheory.HasForget₂ C Ab] [inst_4 : CategoryTheory.Abelian C]\\n  [inst_5 : (Cate\", \"doc\": \"Given a short exact sequence $ S $ of homological complexes in an abelian category $ \\\\mathcal{C} $, indices $ i, j $ with a relation $ i \\\\to j $, elements $ x_3 $ in the homology of $ S.X_3 $ at $ i $\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.δ_apply\", \"module\": \"Mathlib/Algebra/Homology/ConcreteCategory\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_1} {CC : C → Type v}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [inst_3 : CategoryTheory.HasForget₂ C Ab] [inst_4 : CategoryTheory.Abelian C]\\n  [inst_5 : (Cate\", \"doc\": \"Given a short exact sequence $ S $ of homological complexes in an abelian category $ \\\\mathcal{C} $, indices $ i, j $ with a relation $ i \\\\to j $ in the complex shape, and elements satisfying cycle con\"}\n  {\"name\": \"groupCohomology.mapShortComplex₃\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {X : CategoryTheory.ShortComplex (Rep k G)} →\\n        X.ShortExact → {i j : ℕ} → i + 1 = j → CategoryTheory.ShortComplex (ModuleCat k)\", \"doc\": \"The short complex $ L_1' $ constructed via the Snake Lemma input data from a short exact sequence of cochain complexes in group cohomology, using homology functors at indices $ i $ and $ j $ satisfyin\"}\n  {\"name\": \"groupCohomology.mapShortComplex₁\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {X : CategoryTheory.ShortComplex (Rep k G)} →\\n        X.ShortExact → {i j : ℕ} → i + 1 = j → CategoryTheory.ShortComplex (ModuleCat k)\", \"doc\": \"Given natural numbers $i$ and $j$ satisfying $i + 1 = j$, this constructs the second derived short complex $L_2'$ in the Snake Lemma diagram for group cohomology. It arises from applying the inhomogen\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general homological exactness is only an input; no common-stage compact-support Weil functor or Frobenius-equivariant coefficient sequence is supplied"
+  },
+  {
+   "tool": "grep",
+   "query": "homologySequence_exact|singleδ_naturality|singleTriangle",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"32\", \"text\": \"`F.homologySequence_exact₁`, `F.homologySequence_exact₂` and `F.homologySequence_exact₃`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"218\", \"text\": \"lemma homologySequence_exact₂ :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"227\", \"text\": \"lemma homologySequence_exact₃ :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"229\", \"text\": \"  refine ShortComplex.exact_of_iso ?_ (F.homologySequence_exact₂ _ (rot_of_distTriang _ hT) n₀)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"line\": \"235\", \"text\": \"lemma homologySequence_exact₁ :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general homological exactness is only an input; no common-stage compact-support Weil functor or Frobenius-equivariant coefficient sequence is supplied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of constructible Weil sheaves has a natural Frobenius equivariant long exact sequence of compact support higher direct images in common finite stage ell adic coefficient categories",
+   "results": "{\"t\": \"2026-10-22T04:33:56Z\", \"tool\": \"leanfinder\", \"query\": \"A short exact sequence of constructible Weil sheaves has a natural Frobenius equivariant long exact sequence of compact support higher direct images in common finite stage ell adic coefficient categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"localCohomology.diagram\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"groupCohomology.mapShortComplex₁_exact\", \"groupCohomology.mapShortComplex₃_exact\", \"CategoryTheory.Abelian.Ext.covariantSequence_exact\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"eeb915261b70daf6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply the common-stage constructible Weil functor and its full natural equivariant coefficient long exact sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf.*connecting|higherLowerShriek.*exact|exact.*higherLowerShriek",
+   "results": "{\"t\": \"2026-10-22T04:33:59Z\", \"tool\": \"grep\", \"query\": \"WeilSheaf.*connecting|higherLowerShriek.*exact|exact.*higherLowerShriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply the common-stage constructible Weil functor and its full natural equivariant coefficient long exact sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\", \"higherLowerShriek\"",
+   "results": "{\"t\": \"2026-10-22T04:34:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilSheaf\\\", \\\"higherLowerShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply the common-stage constructible Weil functor and its full natural equivariant coefficient long exact sequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius equivariant connecting homomorphisms for compact support direct images of constructible Weil sheaves",
+   "results": "{\"t\": \"2026-10-22T04:34:08Z\", \"tool\": \"leansearch\", \"query\": \"Frobenius equivariant connecting homomorphisms for compact support direct images of constructible Weil sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SnakeLemma.δ\", \"CategoryTheory.ShortComplex.ShortExact.δ\", \"groupCohomology.δ\", \"WittVector.IsocrystalEquiv.frob_equivariant\", \"SnakeLemma.δ'\", \"groupHomology.δ\", \"CategoryTheory.frobeniusMorphism\", \"RingHom.map_iterate_frobeniusEquiv_symm\"], \"digest\": \"68aaade43c4a41f4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply the common-stage constructible Weil functor and its full natural equivariant coefficient long exact sequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-morphism-open-closed-reduction",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Part 3: the underlying heart triangle, its image under Rf_!, and the Weil-equivariant cohomology sequence (old step 11).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-weil-shriek-coefficient-long-exact",
+  "worker": "stage1",
+  "summary": "Q45: retained the complete statement and coefficient model; constructed the canonical underlying heart triangle, its compact-support image and all boundary squares. Reused the existing compact-support exactness and shift-compatibility nodes. One new statement-only generic t-exact cohomology-boundary comparison isolates the non-elementary comparison, rather than assuming a triangulation on fixed pairs.",
+  "blueprint": "Part 3 of lem-zl-morphism-open-closed-reduction: coefficient short exact sequences, underlying distinguished triangles, compact-support image and cohomology exact sequences.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic categorical/coefficient interface used with its stated hypotheses in the coefficient-sequence argument; the excision unit has no replacement for this interface, and its compact-support/heart-triangle route is retained."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Generic categorical/coefficient interface used with its stated hypotheses in the coefficient-sequence argument; the excision unit has no replacement for this interface, and its compact-support/heart-triangle route is retained."
+   },
+   {
+    "node": "lem-a1-constructible-pullback-t-exact",
+    "why": "Generic categorical/coefficient interface used with its stated hypotheses in the coefficient-sequence argument; the excision unit has no replacement for this interface, and its compact-support/heart-triangle route is retained."
+   },
+   {
+    "node": "prop-weil-heart-abelian",
+    "why": "Generic categorical/coefficient interface used with its stated hypotheses in the coefficient-sequence argument; the excision unit has no replacement for this interface, and its compact-support/heart-triangle route is retained."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic categorical/coefficient interface used with its stated hypotheses in the coefficient-sequence argument; the excision unit has no replacement for this interface, and its compact-support/heart-triangle route is retained."
+   },
+   {
+    "node": "def-weil-weil-sheaf-complex",
+    "why": "Generic categorical/coefficient interface used with its stated hypotheses in the coefficient-sequence argument; the excision unit has no replacement for this interface, and its compact-support/heart-triangle route is retained."
+   },
+   {
+    "node": "lem-zl-field-shriek-lower-bound",
+    "why": "Generic categorical/coefficient interface used with its stated hypotheses in the coefficient-sequence argument; the excision unit has no replacement for this interface, and its compact-support/heart-triangle route is retained."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Generic categorical/coefficient interface used with its stated hypotheses in the coefficient-sequence argument; the excision unit has no replacement for this interface, and its compact-support/heart-triangle route is retained."
+   },
+   {
+    "node": "lem-zl-weil-shriek-shift-compatibility",
+    "why": "Generic categorical/coefficient interface used with its stated hypotheses in the coefficient-sequence argument; the excision unit has no replacement for this interface, and its compact-support/heart-triangle route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-truncations",
+  "prop-weil-pbc-descent-functors",
+  "lem-a1-constructible-pullback-t-exact",
+  "prop-weil-heart-abelian",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-weil-sheaf-complex",
+  "lem-zl-field-shriek-lower-bound",
+  "lem-fix-weil-operations",
+  "lem-zl-weil-shriek-shift-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-c78da65fa",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-c78da65fa (reviewer sub-agent of L); spot-checked: I read the item, the new node and all 17 cited statements in full, plus the source (main-20261015 lem-zl-morphism-open-closed-reduction.proof.md, Part 3) and BBD 1.3.17-1.3.21. No fixes were needed. The item's statement and stmt_deps are byte-identical to Q15's created version. The proof follows the source's route: short exact sequence, underlying heart triangle (lem-weil-heart-short-exact-triangles (4)), Rf_!, then the cohomology sequence (lem-sp-long-exact-of-triangle). It never assumes a triangulation on Weil pairs. I checked each step. Step 2: kernels and cokernels of the fixed-pair heart come from lem-sp-exact-functor-preserves-homology(a), and the forgetful functor reflects exactness. Step 3: TR3 plus b epic in the heart forces v=u''; applied to (θ',θ,θ''), this gives tθ''=θ'[1]σG(t). Step 4: Rf_! is exact (lem-zl-field-shriek-lower-bound, whose qs finite-type hypotheses hold), it lifts to Weil complexes (lem-fix-weil-operations), and σ is equivariant (lem-zl-weil-shriek-shift-compatibility), so d intertwines. Steps 5-6: recomputed, δΘ_C=Θ_A G(δ) from triangle naturality plus the new comparison. Step 7: exactness is reflected and naturality holds. Small cases (zero sheaf, empty X, split sequence, Jordan-block Weil extension) are consistent. The new node lem-zl-texact-cohomology-boundary-comparison is true: it follows from naturality of the truncation comparisons and shift coherence, with σ built into both c and PT, which handles BBD 1.3.20's sign issue. It is generic, not a clause of the item, and has no DAG or Mathlib duplicate (scan of t-exact + boundary statements; Mathlib TStructure has no t-exact functor). Its form fields (B1-B9) are OK and it is statement-only and unsplit. I accept all declared tool_uses as generic interfaces. Batch-5 check: no nt-assume leaf or PD/trace-formula key theorem is in any closure. Every sec-poincare-duality/sec-trace-formula node the item reaches is already reached by the parent's other dependencies, so the item adds none. Per citation: lem-pod-texact-truncation-comparison (closure of 3 nodes) is a generic t-structure truncation lemma. lem-a1-constructible-pullback-t-exact reaches the PD chapter only through that lemma. lem-fix-weil-operations and lem-zl-weil-shriek-shift-compatibility reach it only through lem-pod-derived-exact-square-composition, a generic pasting identity. None is a step of the trace-formula or PD proofs, so all are accepted. No SGA citation; the closure is acyclic."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ZlWeilShriekCoefficientLongExact",
+  "declaration": "WeilConjectures.zlWeilShriek_coefficient_long_exact",
+  "declarations": [
+   "WeilConjectures.zlCoefficientHigherShriek",
+   "WeilConjectures.zlCoefficientBoundaryFormula",
+   "WeilConjectures.zlWeilShriek_coefficient_long_exact"
+  ],
+  "file": "lean/Sheaf/Paper/ZlWeilShriekCoefficientLongExact.lean",
+  "statement": "theorem zlWeilShriek_coefficient_long_exact : ∃ δ : ∀ (S : ShortComplex (sfCommonStageWeilSheaf D l hl X₀ Ω)), S.ShortExact → ∀ r : ℤ, (zlCoefficientHigherShriek D l hl Ω f₀ c r).obj S.X₃ ⟶ (zlCoefficientHigherShriek D l hl Ω f₀ c (r + 1)).obj S.X₁, (∀ (S : ShortComplex (sfCommonStageWeilSheaf D l hl X₀ Ω)) (hS : S.ShortExact) (r : ℤ), (∃ h, (ShortComplex.mk ((zlCoefficientHigherShriek D l hl Ω f₀ c r).map S.f) ((zlCoefficientHigherShriek D l hl Ω f₀ c r).map S.g) h).Exact) ∧ (∃ h, (ShortComplex.mk ((zlCoefficientHigherShriek D l hl Ω f₀ c r).map S.g) (δ S hS r) h).Exact) ∧ (∃ h, (ShortComplex.mk (δ S hS r) ((zlCoefficientHigherShriek D l hl Ω f₀ c (r + 1)).map S.f) h).Exact) ∧ zlCoefficientBoundaryFormula D l hl Ω f₀ c S r (δ S hS r)) ∧ ∀ (S T : ShortComplex (sfCommonStageWeilSheaf D l hl X₀ Ω)) (hS : S.ShortExact) (hT : T.ShortExact) (φ : S ⟶ T) (r : ℤ), (zlCoefficientHigherShriek D l hl Ω f₀ c r).map φ.τ₃ ≫ δ T hT r = δ S hS r ≫ (zlCoefficientHigherShriek D l hl Ω f₀ c (r + 1)).map φ.τ₁",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of returned immutable head 351d0daa934c (H4/H12): reuse sfWeilCohomology from Sheaf.Paper.WeilMixedUpperBounds, owned by landed sk-d-dl-general-weights; remove the duplicate def-zl-normalized-weil-cohomology node and module. Higher shriek is the heart inclusion followed by zlComplexShriek and sfWeilCohomology. Its Frobenius comparison uses the prescribed fieldCommonWeilFrobeniusShift and uniquely unit/counit-normalized truncation comparisons. The theorem signature, all integer degrees, three exactness positions, naturality, canonical boundary formula, hypotheses and independent universes are retained; no natural statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d54e7c671",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery carries out the 351d0daa H4/H12 RETURN exactly: item module diff is two lines (import Sheaf.Paper.WeilMixedUpperBounds; zlCoefficientHigherShriek := heart ι ⋙ zlComplexShriek ⋙ sfWeilCohomology D l hl Ω Y₀ r); duplicate def-zl-normalized-weil-cohomology node and module removed (never in live); stmt_dep swapped to landed definition node sk-d-dl-general-weights, whose lean.declarations own sfWeilCohomology and its pieces; dependency closure (18125 nodes) does not reach the item, so no cycle. sfWeilCohomology carrier = constructibleTruncationCohomology on sfCommonStageStandardTStructure, matching the boundary formula's t-structure and the H^(r+1) codomain; Frobenius comparison = fieldCommonWeilFrobeniusShift commShiftIso composed with ∃!-fixed counit/unit truncation comparisons, so no free-shift sign ambiguity; real data via IsoAlgebra.mapOfNatIso + heart lift with proved membership. Node statement unchanged vs live; lean.statement verbatim in file; single sorry; source-place/blueprint docstrings and seven-step proof plan present; report has Worker report and Second reading by Q51. Hypotheses, independent universes u/v, arbitrary compactification c, three exactness positions, pinned boundary formula and naturality all as accepted in earlier rounds. Advisory only: QcqsCompactSupportRealization public import not referenced by name. No fix, so no compile; worker's scompile and dry run reported clean."
+ }
+}

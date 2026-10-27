@@ -1,0 +1,351 @@
+{
+ "id": "lem-pur-rational-restriction-comparison-coherence",
+ "kind": "statement",
+ "title": "Rational restriction comparisons and mixed scalar squares",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, and a fixed algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-pur-conventions]. Let $f:Y\\to X$ be a morphism of finite-type $k$-schemes [def-weil-finite-type-morphism], using the small pro-etale sites [def-weil-pbc-proetale-site]. For every finite intermediate field $E\\subset\\Omega$, put $\\mathcal C_E(W)=D^b_c(W,\\mathcal O_E)$ for $W=X,Y$ [def-weil-derived-complete-integral-detailed], and use the integral pullback $r_E=Lf^*$, completed tensor and coefficient unit $\\mathbf1_{E,W}=\\widehat{\\mathcal O}_{E,W}$ [def-pur-integral-derived-operations]. Assume these operations take values in the displayed constructible categories and that $r_E$ is $\\mathcal O_E$-linear. Write $S^W_{L/E}$ for integral scalar extension [def-weil-integral-scalar-extension]. Let\n$$b_{L/E,K}:S^Y_{L/E}(r_EK)\\xrightarrow{\\sim}r_L(S^X_{L/E}K),\\qquad\n\\theta^W_{L/E,M,N}:S^W_{L/E}(M\\widehat\\otimes N)\\xrightarrow{\\sim}S^W_{L/E}M\\widehat\\otimes S^W_{L/E}N$$\nbe exactly the canonical comparisons of [lem-pur-integral-operations-scalar-extension], with their identity and tower comparisons [lem-weil-scalar-extension-composition]. Suppose given natural integral isomorphisms $\\mu_{E,M,N}:r_E(M\\widehat\\otimes N)\\xrightarrow{\\sim}r_EM\\widehat\\otimes r_EN$, $\\epsilon_E:r_E\\mathbf1_{E,X}\\xrightarrow{\\sim}\\mathbf1_{E,Y}$, and the canonical coefficient scalar-unit isomorphisms $\\upsilon^W_{L/E}:S^W_{L/E}\\mathbf1_{E,W}\\xrightarrow{\\sim}\\mathbf1_{L,W}$ of [lem-weil-constant-coefficient-objects-constructible]. Assume the mixed squares\n$$(b_{L/E,M}\\widehat\\otimes b_{L/E,N})\\circ\\theta^Y_{L/E,r_EM,r_EN}\\circ S^Y_{L/E}(\\mu_{E,M,N})\n=\\mu_{L,S^X_{L/E}M,S^X_{L/E}N}\\circ r_L(\\theta^X_{L/E,M,N})\\circ b_{L/E,M\\widehat\\otimes N},$$\n$$\\upsilon^Y_{L/E}\\circ S^Y_{L/E}(\\epsilon_E)=\\epsilon_L\\circ r_L(\\upsilon^X_{L/E})\\circ b_{L/E,\\mathbf1_{E,X}}$$\nhold integrally.\n\nIn the raw rationalizations $D^b_c(W,E)$ [def-weil-rationalization-karoubi], the components $\\mu_E\\otimes1$, $\\epsilon_E\\otimes1$, $b_{L/E}\\otimes1$, $\\theta^W_{L/E}\\otimes1$ and $\\upsilon^W_{L/E}\\otimes1$ are natural isomorphisms for the rational operations of [def-weil-derived-pullback-tensor-hom]. The rational $b$ and $\\theta$ have the same identity and tower compatibilities, and both displayed mixed squares hold rationally. The pullback and tensor actions on pure arrows are $r_E(u\\otimes a)=r_E(u)\\otimes a$ and $(u\\otimes a)\\otimes_E^L(v\\otimes c)=(u\\widehat\\otimes^L v)\\otimes ac$; these formulas respect balancing and extend additively, with the localized integral inverse comparisons as inverses. Every specified integral equation between these comparisons, identities and composites remains an equation after rationalization.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility assertion, finite-clopen transport: original item step 4; rationalized pullback/scalar, bilinear tensor and coefficient-unit mixed squares. Agent subargument; coefficient models in the current DAG definitions (the blueprint itself only asserts invertibility)."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Write $Q_{E,W}(u)=u\\otimes1$. The raw localization has the same objects and composition $(u\\otimes a)\\circ(v\\otimes c)=(u\\circ v)\\otimes ac$, so $Q$ preserves identities, compositions and equality. Integral representatives therefore suffice for objects, including the coefficient unit; there are no extra idempotent objects to treat. In the following calculations all scalar products are taken in the target coefficient field.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: rationalization for E; explicit raw-Hom calculation in this split (agent)."
+   }
+  },
+  {
+   "text": "Use rationalDerivedPullback_existsUnique and sfRationalScalarExtension_existsUnique, whose uniquely chosen functors are the published rational operations. Their object formulas preserve the integral representative, and their pure-arrow formulas give the pullback and coefficient-extension actions directly. At coefficient one these formulas say that unary whiskering commutes with the localization functor Q. No separate construction by semilinear localization is needed.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: rationalization for E; explicit raw-Hom calculation in this split (agent)."
+   }
+  },
+  {
+   "text": "The rational tensor operation is the separately linear extension specified in the rational-level clause of the operation definition. Explicitly put $T(u\\otimes a,v\\otimes c)=(u\\widehat\\otimes^L v)\\otimes ac$. For $s\\in\\mathcal O_E$, replacing $(su)\\otimes a$ by $u\\otimes sa$ leaves this value unchanged, since $(su)\\widehat\\otimes v=s(u\\widehat\\otimes v)$; the identical calculation in the other variable gives $sac=asc$. Additivity in $u,a,v,c$ then respects all tensor-product relations and defines the claimed action on finite sums. On pure arrows the bifunctor composition law has coefficient $(aa')(cc')=(ac)(a'c')$, and the integral bifunctor law supplies the integral arrow; identities have coefficient $1$. Distributing finite sums proves the same laws on all arrows. In particular $T(Q(u),Q(v))=Q(u\\widehat\\otimes^L v)$.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: rationalization for E; explicit raw-Hom calculation in this split (agent)."
+   }
+  },
+  {
+   "text": "The existence-and-uniqueness specifications of rationalPullbackScalarComparison, rationalTensorScalarComparison and constantCoefficientRationalScalarIso prescribe precisely the localized integral hom components. Their object formulas identify both endpoints. Since Q carries the corresponding integral isomorphism to an isomorphism, equality of hom components identifies the isomorphism, and hence also its inverse component. The supplied unit comparison is transported across the pullback object equality from Q of the given integral isomorphism. This argument applies to identity and ramified coefficient extensions and needs no injectivity of integral Homs.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-linear-scalar-localization",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: rationalization for E; explicit raw-Hom calculation in this split (agent)."
+   }
+  },
+  {
+   "text": "Apply the proved generic rawBilinearIso_existsUnique theorem from DerivedPullbackTensorHom to U = integral tensor followed by integral pullback and V = the product of the two integral pullbacks followed by integral tensor, with comparison μ. The object equations are tensor_obj and pullback_obj. For U, postcompose the tensor bilinear map with the additive rational pullback map; for V, precompose the tensor bilinear map with the two additive pullback maps. The pure-arrow formulas identify both actions with the scalar product times the integral action. The generic theorem proves naturality by tensor induction in both arrows and localizes the integral inverse equations. Its component normalization fixes hom components; iso_inv_heq identifies the inverse components. Uniqueness follows from extensionality of natural transformations and of isomorphisms. The canonical theta comparison already has its published normalized construction.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: rationalization for E; explicit raw-Hom calculation in this split (agent)."
+   }
+  },
+  {
+   "text": "Fix $M,N$ in $\\mathcal C_E(X)$, which also represent every rational object. Apply $Q_{L,Y}$ to the assumed integral tensor mixed-square equality. Steps 2-3 identify its left side with $(\\bar b_M\\otimes_L\\bar b_N)\\circ\\bar\\theta^Y\\circ\\bar S^Y(\\bar\\mu_E)$, and its right side with $\\bar\\mu_L\\circ\\bar r_L(\\bar\\theta^X)\\circ\\bar b_{M\\widehat\\otimes N}$: every comparison has coefficient $1$, and both functor action and tensor action commute with $Q$. Applying the same $Q_{L,Y}$ to the assumed unit equality gives $\\bar\\upsilon^Y\\circ\\bar S^Y(\\bar\\epsilon_E)=\\bar\\epsilon_L\\circ\\bar r_L(\\bar\\upsilon^X)\\circ\\bar b_{\\mathbf1}$. Sources and targets agree because raw localization preserves objects. These componentwise equations are equations of natural transformations by steps 4-5.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: rationalization for E; explicit raw-Hom calculation in this split (agent)."
+   }
+  },
+  {
+   "text": "First identify sfIntegralOrdinaryComparison with the natural isomorphism whose components are scalarCompletionIso: both have the same chain-level normalization, so uniqueness identifies them. The integral scalar unitor is inverse completion comparison followed by the ordinary scalar unitor. The integral associator is inverse completion at the outer extension, ordinary scalar applied to inverse completion at the inner extension, the ordinary associator, and completion for the composite extension. Naturality of scalarCompletion conjugates every completed scalar map to the ordinary scalar map. Expand scalarPullbackCompleted and scalarTensorCompleted, cancel the completion isomorphisms, and apply ordinary-operation naturality and scalarOperationsOrdinary_unit or scalarOperationsOrdinary_tower. This proves the integral identity and tower equations for the specified comparisons. Now use the published rational unitor/associator component specifications and the pure-arrow formulas at coefficient one. Applying Q to each integral equation gives the required rational equation, with unchanged chosen comparisons and no cancellation of integral Homs.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-linear-scalar-localization",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: rationalization for E; explicit raw-Hom calculation in this split (agent)."
+   }
+  },
+  {
+   "text": "The equation calculus consists of functorial preservation of equality, identities and composition by Q, and the pullback, scalar and bilinear tensor pure-arrow formulas at coefficient one. Together with the proved comparison and inverse component formulas these evaluate every finite well-typed expression recursively. Thus both rational expressions in any specified integral equation are its Q-images, and applying Q proves their equality.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Final paragraph: rationalization for E; explicit raw-Hom calculation in this split (agent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-linear-scalar-localization",
+  "def-weil-integral-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Final rational paragraph; G4 completes step 5 for tensorComparison_existsUnique using the existing generic raw bilinear natural-isomorphism localization theorem and the recorded pure-arrow formulas. Earlier completed steps 1–4 and 8 remain. Mixed squares and integral conjugation for identity and tower coherence remain planned."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rational.*tensor|tensor.*rational|scalar.*comparison|comparison.*scalar",
+   "results": "{\"t\": \"2026-10-22T06:45:04Z\", \"tool\": \"grep\", \"query\": \"rational.*tensor|tensor.*rational|scalar.*comparison|comparison.*scalar\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern module/presheaf pullbacks, module base change or bilinear extensionality, not completed constructible operations and their raw rational mixed squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, CategoryTheory.MonoidalFunctor",
+   "results": "{\"t\": \"2026-10-22T06:45:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization, CategoryTheory.MonoidalFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Localization'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "query error: loogle: unknown identifier 'CategoryTheory.Localization'; corrected query is recorded separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of integral pullback tensor unit natural isomorphisms preserves mixed coefficient extension squares and tower coherence",
+   "results": "{\"t\": \"2026-10-22T06:45:04Z\", \"tool\": \"leanfinder\", \"query\": \"Rationalization of integral pullback tensor unit natural isomorphisms preserves mixed coefficient extension squares and tower coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.tensorProdIsoPushout\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"CommRingCat.tensorProdIsoPushout_app\", \"PresheafOfModules.pullback_comp_id\"], \"digest\": \"ecece5148dd42197\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern module/presheaf pullbacks, module base change or bilinear extensionality, not completed constructible operations and their raw rational mixed squares."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raw rationalized bilinear tensor comparison compatible with semilinear coefficient extension",
+   "results": "{\"t\": \"2026-10-22T06:45:05Z\", \"tool\": \"leansearch\", \"query\": \"Raw rationalized bilinear tensor comparison compatible with semilinear coefficient extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.ext_iff\", \"LinearMap.BilinMap.tmul.congr_simp\", \"LinearMap.BilinForm.tmul.congr_simp\", \"LinearMap.ext_iff₂\", \"LinearMap.BilinForm.ext\", \"LinearMap.BilinForm.ext_iff\", \"LinearMap.BilinForm.tensorDistribEquiv_tmul\", \"LinearMap.restrictScalars₁₂.congr_simp\"], \"digest\": \"d79f288d30b45301\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern module/presheaf pullbacks, module base change or bilinear extensionality, not completed constructible operations and their raw rational mixed squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear tensor natural transformations extend to scalar localized Hom modules and respect base change comparison squares",
+   "results": "{\"t\": \"2026-10-22T06:45:05Z\", \"tool\": \"leanfinder\", \"query\": \"Bilinear tensor natural transformations extend to scalar localized Hom modules and respect base change comparison squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.map_lTensor\", \"ModuleCat.ExtendScalars.map_tmul\", \"IsLocalizedModule.isBaseChange\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalizedModule.rTensor\", \"IsLocalization.moduleTensorEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.extendScalarsComp_hom_app_one_tmul\"], \"digest\": \"1782659c3db93066\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern module/presheaf pullbacks, module base change or bilinear extensionality, not completed constructible operations and their raw rational mixed squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.functor_linear_iff",
+   "results": "{\"t\": \"2026-10-22T06:46:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.functor_linear_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.functor_linear_iff\"], \"digest\": \"7041f416ee5c4e23\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern module/presheaf pullbacks, module base change or bilinear extensionality, not completed constructible operations and their raw rational mixed squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear functors and bilinear bifunctors on scalar localized categories preserve natural isomorphisms and equations",
+   "results": "{\"t\": \"2026-10-22T07:53:27Z\", \"tool\": \"leanfinder\", \"query\": \"Linear functors and bilinear bifunctors on scalar localized categories preserve natural isomorphisms and equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.functor_linear_iff\", \"CategoryTheory.Localization.functor_linear\", \"CategoryTheory.Localization.linear\", \"CategoryTheory.Localization.instLinearLocalizationQ\", \"CategoryTheory.Localization.instLinearLocalization'Q'\", \"CategoryTheory.Shift.linear_of_localization\", \"CategoryTheory.Localization.instLinearLocalization'\", \"CategoryTheory.Localization.instLinearLocalization\"], \"digest\": \"7116ae0634a3295b\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: categorical linearity/localization, mapIso and monoidal-localization hits do not state the specified completed-constructible rational pullback/tensor comparisons and their mixed coefficient squares. Candidate source statements read; not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*tensor|tensor.*rational|semilinear.*localiz|localiz.*bilinear",
+   "results": "{\"t\": \"2026-10-22T07:53:56Z\", \"tool\": \"grep\", \"query\": \"rational.*tensor|tensor.*rational|semilinear.*localiz|localiz.*bilinear\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: categorical linearity/localization, mapIso and monoidal-localization hits do not state the specified completed-constructible rational pullback/tensor comparisons and their mixed coefficient squares. Candidate source statements read; not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "{\"t\": \"2026-10-22T07:53:56Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapIso\", \"CategoryTheory.Functor.mapIso_refl\", \"CategoryTheory.Functor.mapIso_symm\", \"CategoryTheory.Functor.mapIso_hom\", \"CategoryTheory.Functor.mapIso_inv\", \"CategoryTheory.Functor.mapIso_trans\", \"CategoryTheory.Functor.mapIso_injective\", \"CategoryTheory.Functor.preimageIso_mapIso\"], \"digest\": \"84c93b8069f66a9f\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: categorical linearity/localization, mapIso and monoidal-localization hits do not state the specified completed-constructible rational pullback/tensor comparisons and their mixed coefficient squares. Candidate source statements read; not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphisms of bilinear functors extend to rationalized linear categories preserving scalar comparison equations",
+   "results": "{\"t\": \"2026-10-22T07:53:57Z\", \"tool\": \"leansearch\", \"query\": \"Natural isomorphisms of bilinear functors extend to rationalized linear categories preserving scalar comparison equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Free.ext\", \"CategoryTheory.Limits.prodComparisonNatIso\", \"CategoryTheory.Functor.linear_of_iso\", \"LinearEquiv.congrRight₂\", \"CategoryTheory.Functor.linear_iff\", \"AddEquiv.toNatLinearEquiv\", \"ModuleCat.restrictScalarsCongr\", \"LinearMap.BilinForm.tensorDistribEquiv\"], \"digest\": \"42c5d9f4cab893ca\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: categorical linearity/localization, mapIso and monoidal-localization hits do not state the specified completed-constructible rational pullback/tensor comparisons and their mixed coefficient squares. Candidate source statements read; not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "functor_linear_iff|def mapIso|theorem linear_of_iso",
+   "results": "{\"t\": \"2026-10-22T07:57:33Z\", \"tool\": \"grep\", \"query\": \"functor_linear_iff|def mapIso|theorem linear_of_iso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Linear.lean\", \"Mathlib/CategoryTheory/GradedObject.lean\", \"Mathlib/CategoryTheory/Iso.lean\", \"Mathlib/CategoryTheory/Shift/Linear.lean\", \"Mathlib/CategoryTheory/Join/Basic.lean\"], \"digest\": \"3904253c9e6e8b02\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: categorical linearity/localization, mapIso and monoidal-localization hits do not state the specified completed-constructible rational pullback/tensor comparisons and their mixed coefficient squares. Candidate source statements read; not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend separately linear tensor functors to Hom modules tensored with a fraction field and localize their natural comparison squares",
+   "results": "{\"t\": \"2026-10-22T07:57:44Z\", \"tool\": \"leanfinder\", \"query\": \"Extend separately linear tensor functors to Hom modules tensored with a fraction field and localize their natural comparison squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.map_lTensor\", \"CategoryTheory.Localization.functor_linear_iff\", \"CategoryTheory.Localization.linear\", \"CategoryTheory.Localization.Monoidal.tensorBifunctor\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost\", \"CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre_iso\", \"CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPost_iso\"], \"digest\": \"c8c8a690c736b505\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: categorical linearity/localization, mapIso and monoidal-localization hits do not state the specified completed-constructible rational pullback/tensor comparisons and their mixed coefficient squares. Candidate source statements read; not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-product-field-coefficient-descent",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion, finite-clopen transport: original item step 4; rationalized pullback/scalar, bilinear tensor and coefficient-unit mixed squares.",
+   "via": [
+    "lem-pur-finite-product-field-coefficient-descent",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-rational-restriction-comparison-coherence",
+  "worker": "stage1",
+  "summary": "No new nodes: use the existing semilinear-localization tool for unary functors and natural transformations; verify balancing, binary naturality, localized inverses and both specified mixed squares explicitly. Preserve the original statement and all inherited searches.",
+  "blueprint": "def-pur-section-invariant final invertibility assertion: finite-clopen transport, rational restriction/comparison coherence subargument of the ancestor split. The blueprint gives only the section invariant; the raw-Hom argument is explicitly agent-written.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic semilinear extension and natural-transformation localization calculus, used as a black box; the purity-conventions unit gives no replacement for this coefficient operation."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic specified integral pullback/tensor comparison and its identity/tower equations, used as a black box; the purity-conventions unit gives no replacement for this coefficient operation."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Generic coefficient-unit scalar comparison, used as a black box; the purity-conventions unit gives no replacement for this coefficient operation."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Generic rational scalar composition identification, used as a black box; the purity-conventions unit gives no replacement for this coefficient operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-semilinear-scalar-localization",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-fdc70d757",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-fdc70d757 (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full, and every cited node's statement. Sources: blueprint main-20261015 def-pur-section-invariant (it only asserts invertibility, so the proof is agent work, correctly marked) and the final paragraph of def-weil-derived-pullback-tensor-hom. No new nodes. The item is still unsplit live and on side-live with an identical statement, and there is no repair note. Statement: the hypotheses hold (ℓ is invertible on finite-type k-schemes); the orientation of b and θ matches lem-pur-integral-operations-scalar-extension; υ is clause 3 of lem-weil-constant-coefficient-objects-constructible. It is not a duplicate: lem-pur-bilinear-comparison-coefficient-descent needs full cocycle systems, and lem-pur-common-stage-restriction-tensor-descent is the consumer. Step 2: semilinear localization with φ=id for r_E and O_E⊂O_L for S; ϖ_E is a nonzero unit in L, so ramified L/E is fine; the extension formulas match the rational definitions. Step 3: balancing and composition coefficients rechecked. Steps 4-6: both sides of b are φ-semilinear and whiskering is covered; the two-variable naturality of μ and θ on pure arrows was recomputed; the mixed squares are the Q-images of the assumed integral squares, factor by factor. Step 8: the induction is set up properly. Edge cases E=L, torsion Homs and zero objects need no cancellation. Accepted tool_uses: lem-pur-semilinear-scalar-localization, lem-pur-integral-operations-scalar-extension and lem-weil-constant-coefficient-objects-constructible are generic black boxes; lem-weil-scalar-extension-composition is on route (sk-def-sf-operations). FIX (C4), step 7 only: the step said lem-weil-scalar-extension-composition identifies the rational associators, but that lemma's statement only gives a 'canonical' rational isomorphism; only its proof makes it Q of the integral one. The step now names the integral composition isomorphisms c, takes the rational tower comparison to be c⊗1, and shows it is a natural isomorphism between the rational scalar functors via the semilinear natural-transformation clause. The tower compatibility is stated for that localized form. Statement, uses and every other field are unchanged. Maintainer note: lem-weil-scalar-extension-composition's statement should record that its canonical isomorphism is the localized integral composition isomorphism, since downstream citers (e.g. lem-pur-common-stage-restriction-tensor-descent) rely on that.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalRestrictionComparisonCoherence",
+  "declaration": "WeilConjectures.RationalRestrictionComparison.mixedSquares",
+  "declarations": [
+   "WeilConjectures.RationalRestrictionComparison.Fields",
+   "WeilConjectures.RationalRestrictionComparison.FieldAt",
+   "WeilConjectures.RationalRestrictionComparison.Schemes",
+   "WeilConjectures.RationalRestrictionComparison.residueInvertible",
+   "WeilConjectures.RationalRestrictionComparison.integralCategory",
+   "WeilConjectures.RationalRestrictionComparison.rationalCategory",
+   "WeilConjectures.RationalRestrictionComparison.localization",
+   "WeilConjectures.RationalRestrictionComparison.integralTensor",
+   "WeilConjectures.RationalRestrictionComparison.rationalTensor",
+   "WeilConjectures.RationalRestrictionComparison.integralPullback",
+   "WeilConjectures.RationalRestrictionComparison.rationalPullback",
+   "WeilConjectures.RationalRestrictionComparison.integralScalar",
+   "WeilConjectures.RationalRestrictionComparison.rationalScalar",
+   "WeilConjectures.RationalRestrictionComparison.integralUnit",
+   "WeilConjectures.RationalRestrictionComparison.integralB",
+   "WeilConjectures.RationalRestrictionComparison.rationalB",
+   "WeilConjectures.RationalRestrictionComparison.integralTheta",
+   "WeilConjectures.RationalRestrictionComparison.rationalTheta",
+   "WeilConjectures.RationalRestrictionComparison.integralUpsilon",
+   "WeilConjectures.RationalRestrictionComparison.rationalUpsilon",
+   "WeilConjectures.RationalRestrictionComparison.rationalAssociator",
+   "WeilConjectures.RationalRestrictionComparison.rationalUnitor",
+   "WeilConjectures.RationalRestrictionComparison.tensorComparison_existsUnique",
+   "WeilConjectures.RationalRestrictionComparison.tensorComparison",
+   "WeilConjectures.RationalRestrictionComparison.unitComparison_existsUnique",
+   "WeilConjectures.RationalRestrictionComparison.unitComparison",
+   "WeilConjectures.RationalRestrictionComparison.scalarComparisons_localized",
+   "WeilConjectures.RationalRestrictionComparison.mixedSquares",
+   "WeilConjectures.RationalRestrictionComparison.identityCoherence",
+   "WeilConjectures.RationalRestrictionComparison.towerCoherence",
+   "WeilConjectures.RationalRestrictionComparison.pureArrowActions",
+   "WeilConjectures.RationalRestrictionComparison.equationCalculus"
+  ],
+  "file": "lean/Sheaf/Paper/RationalRestrictionComparisonCoherence.lean",
+  "statement": "theorem mixedSquares (hTensor : ∀ (E L : Fields P) (h : E ≤ L) (M N : integralCategory P E X), (integralScalar P E L h Y).map ((μ E).hom.app (M, N)) ≫ (integralTheta P E L h Y ((integralPullback P E f).obj M) ((integralPullback P E f).obj N)).hom ≫ (integralTensor P L Y).map (Prod.mkHom (integralB P E L h f M).hom (integralB P E L h f N).hom) = (integralB P E L h f ((integralTensor P E X).obj (M, N))).hom ≫ (integralPullback P L f).map (integralTheta P E L h X M N).hom ≫ (μ L).hom.app ((integralScalar P E L h X).obj M, (integralScalar P E L h X).obj N)) (hUnit : ∀ (E L : Fields P) (h : E ≤ L), (integralScalar P E L h Y).map (ε E).hom ≫ (integralUpsilon P E L h Y).hom = (integralB P E L h f (integralUnit P E X)).hom ≫ (integralPullback P L f).map (integralUpsilon P E L h X).hom ≫ (ε L).hom) : (∀ (E L : Fields P) (h : E ≤ L) (M N : rationalCategory P E X), (rationalScalar P E L h Y).map ((tensorComparison P f E (μ E)).hom.app (M, N)) ≫ (rationalTheta P E L h Y).hom.app ((rationalPullback P E f).obj M, (rationalPullback P E f).obj N) ≫ (rationalTensor P L Y).map (Prod.mkHom ((rationalB P E L h f).hom.app M) ((rationalB P E L h f).hom.app N)) = (rationalB P E L h f).hom.app ((rationalTensor P E X).obj (M, N)) ≫ (rationalPullback P L f).map ((rationalTheta P E L h X).hom.app (M, N)) ≫ (tensorComparison P f L (μ L)).hom.app ((rationalScalar P E L h X).obj M, (rationalScalar P E L h X).obj N)) ∧ (∀ (E L : Fields P) (h : E ≤ L), (rationalScalar P E L h Y).map (unitComparison P f E (ε E)).hom ≫ (rationalUpsilon P E L h Y).hom = (rationalB P E L h f).hom.app ((localization P E X).obj (integralUnit P E X)) ≫ (rationalPullback P L f).map (rationalUpsilon P E L h X).hom ≫ (unitComparison P f L (ε L)).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "All clauses are recorded jointly: uniquely component-normalized rational tensor/unit comparisons, canonical scalar comparisons and their inverses, both mixed squares, identity/tower compatibility, bilinear pure-arrow actions, and the localization evaluation laws. Public abbreviations specialize the recorded operations. Residue invertibility follows from the fixed finite-field datum. The added landed coefficient node supplies its normalized inclusion transports, scalar associator and unitor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a75642b9",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Only the item node changed. stmt_deps gains the landed def-weil-algebraically-closed-coefficients, which is used for the field index and allowed by brief-stage2 §5. Hypotheses match the node: PurityFiniteSetting conventions, finite type as LocallyOfFiniteType+QuasiCompact, ℓ invertibility derived not assumed, r_E linearity as in the node. b, θ, υ are the recorded canonical comparisons with the node's orientation; hTensor and hUnit match the displayed integral squares factor by factor. Conclusions: rational μ and ε pinned by ∃! on hom and inv components; scalarComparisons_localized; both rational mixed squares; identity and tower coherence with the localized normalized unitor and associator; pure-arrow and bilinear actions; equation calculus. No hollow definitions, 8 sorry theorems only, source and blueprint docstrings present, lean.statement verbatim, all 32 declarations present, consistent universe u, no pro-etale substitute, no duplicate found. No recompile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T202109-L-2673715",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

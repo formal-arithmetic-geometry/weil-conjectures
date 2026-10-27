@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-concrete-projection-coefficient-coherence",
+ "kind": "statement",
+ "title": "Coefficient composition and identity of the concrete comparisons",
+ "statement": "Fix normalized scalar/tensor models and their representative-normalized choices [def-sp-open-scalar-tensor-data], and the concrete input and support comparisons [def-sf-concrete-projection-reduction-data]. For arbitrary coefficient maps A→B→C, the scalar tensor comparison satisfies its composition equation with the canonical scalar associator, and its identity equation with the scalar unitor. The support comparison satisfies the same composition and identity equations for every compactification and every unbounded input. For finite coefficient rings and an arbitrary scheme morphism f, the input comparison for K tensor Lf*L likewise satisfies composition and identity, with the scalar associator on K and its pullback on L. These are the six displayed Lean equations tensor_comp, tensor_id, support_comp, support_id, input_comp and input_id. No separatedness of structure morphisms or invertibility of a projection is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0E48; more-etale.tex Tags 0GL1 and 0GL6. Concrete proper/open argument of fix-prop-projection-formula, proof sentence 2."
+ },
+ "stmt_deps": [
+  "def-sp-open-scalar-tensor-data",
+  "def-sf-concrete-projection-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "The normalized tensor comparison respects coefficient composition and identities by its flat K-flat representative equations and descent.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the canonical compact-support comparison cocycle and identity by unique scalar adjunction isomorphisms. Composite adjunction unit equations identify the scalar compositors. Naturality cancels the intermediate presentation isomorphisms.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the tensor/pullback input comparison. Naturality of the scalar tensor comparison, coefficient coherence of lambda, and the tensor equations give the input composition and identity equations.",
+   "uses": [
+    "lem-sp-open-scalar-coefficient-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-sp-open-scalar-coefficient-coherence",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-pur-normalized-adjunction-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete finite coefficient-reduction square, proof sentence 2; the component argument recorded above."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and extension of scalar coefficients commute with tensor product and adjunction counit projection formula",
+   "results": "Ordinary ModuleCat unit/counit and Presheaf.pullbackComp hits; no normalized unbounded constant-ring proper/open square.",
+   "verdict": "No exact match.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"counit\"",
+   "results": "Eleven generic adjunction APIs; use Hom-equivalence naturality and mate equations.",
+   "verdict": "Useful generic glue, no exact scalar comparison.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|coefficient)|(scalar|coefficient).*projection",
+   "results": "One unrelated CStarProjection hit. Local rg located normalized scalar tensor, proper/open and compact-support comparisons used here.",
+   "verdict": "Use the stated library comparisons.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConcreteProjectionReductionSquare",
+  "date": "2026-10-25",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-concrete-projection-reduction-square",
+   "place": "Normalized concrete proper/open coefficient square, its components and coefficient cocycles."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConcreteProjectionCoefficientCoherence",
+  "file": "lean/Sheaf/Paper/ConcreteProjectionCoefficientCoherence.lean",
+  "declaration": "WeilConjectures.ConcreteProjectionReduction.input_id",
+  "declarations": [
+   "WeilConjectures.ConcreteProjectionReduction.tensor_comp",
+   "WeilConjectures.ConcreteProjectionReduction.tensor_id",
+   "WeilConjectures.ConcreteProjectionReduction.support_comp",
+   "WeilConjectures.ConcreteProjectionReduction.support_id",
+   "WeilConjectures.ConcreteProjectionReduction.input_comp",
+   "WeilConjectures.ConcreteProjectionReduction.input_id"
+  ],
+  "statement": "theorem input_id (A : Type u) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : proEtaleDerivedCategory X A) (L : proEtaleDerivedCategory Y A) :\n    (inputComparison m choices (RingHom.id A) f K L).hom ≫\n      (tensor m A X).map (Prod.mkHom ((scalarId m A X).hom.app K)\n        ((constantPullback (A := A) f).map ((scalarId m A Y).hom.app L))) =\n      (scalarId m A X).hom.app (input m A f K L)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-concrete-projection-reduction-square + 6 new/2 changed nodes vs delivered Lean (compiled set + 8 copied OpenScalarTensorData importers in sandbox, axioms printed); change records vs Lean diffs; claims lock of IntegralCompactSupportCoefficientComparison (F8)"
+ }
+}

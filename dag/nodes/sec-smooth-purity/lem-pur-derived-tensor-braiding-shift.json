@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-derived-tensor-braiding-shift",
+ "kind": "statement",
+ "title": "The canonical signed derived symmetry commutes with tensor shifts",
+ "statement": "Let C be a Grothendieck abelian braided monoidal closed category with additive tensor and functorial flat resolutions. With the signed derived tensor [def-kun-derived-tensor] and its canonical symmetry [lem-kun-tensor-sym], for every K in D(C), the natural transformation K tensor (-) to (-) tensor K commutes with all canonical integer shift comparisons.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYI, lemma-flip-douoble-tensor-product; Section section-symmetric-monoidal, the commutativity constraint with sign (-1)^(pq). Explicit shift sign calculation and descent along K-flat localization."
+ },
+ "stmt_deps": [
+  "def-kun-derived-tensor",
+  "lem-kun-tensor-sym"
+ ],
+ "proof": [
+  {
+   "text": "On the summand of first degree p and shifted second degree q, the second-factor shift contributes (-1)^(pn), and the following symmetry contributes (-1)^(p(q+n)). Their product is (-1)^(pq), since their exponents differ by 2pn. The other route is the symmetry followed by the first-factor shift, which has exactly that sign. Extensionality of total complexes proves the chain-map equation.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a K-flat first factor, transport this equation through the canonical left and right tensor localization comparisons, which commute with shifts. Their compatibility with the derived braiding is braiding_hom_mu. The localization from K-flat complexes is essentially surjective; transport the resulting natural transformation along an isomorphism to any derived object, using naturality and tensor bifunctor shift compatibility.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "lem-kun-tensor-sym"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "P6: explicit Koszul sign calculation using the commutativity constraint in Section Tensor products of complexes; descent by the existing TensorCommShift₂ localization comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "braiding.*shift|shift.*braiding",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching braiding shift theorem; reuse cochain and localization component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"braiding\", \"CommShift\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching braiding shift theorem; reuse cochain and localization component APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul braiding of cochain complexes intertwines the signed second tensor shift and first tensor shift",
+   "results": "8 hits: CochainComplex.HomComplex.Cochain.leftShift_rightShift_eq_negOnePow_rightShift_leftShift, CochainComplex.HomComplex.Cochain.rightShift_leftShift, CochainComplex.HomComplex.Cochain.leftShift_rightShift, CochainComplex.shiftShortComplexFunctor'_hom_app_τ₁, CochainComplex.shiftShortComplexFunctor'_hom_app_τ₃, CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₁, CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₃, CochainComplex.shiftShortComplexFunctor'_inv_app_τ₁",
+   "date": "2026-10-25",
+   "verdict": "No matching braiding shift theorem; reuse cochain and localization component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSupportProjectionShiftUnit",
+  "date": "2026-10-25",
+  "group": "P6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-support-projection-shift-unit",
+   "place": "Step 3: the coefficient-first signed symmetry preserves the canonical tensor shift comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorBraidingShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorBraidingShift.lean",
+  "declaration": "DerivedCategory.canonicalTensorSymmetry_commShift",
+  "statement": "theorem canonicalTensorSymmetry_commShift (K : DerivedCategory C) :\n    NatTrans.CommShift ((canonicalTensorSymmetry C).hom.app K) ℤ",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b734b",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261026T002138-L-60288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b734b",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261026T002138-L-60288",
+  "kind": "interface",
+  "note": "independent cc review: SupportProjectionCoherent new abbrev (BifunctorProjectionCoherent + UnitA/UnitB) unfolded against old def body: identical conjuncts and instances; item theorem signature vs clone 7c3c838 unchanged; both importers compiled against delivered modules; axioms clean"
+ }
+}

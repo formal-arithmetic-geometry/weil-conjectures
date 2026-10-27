@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-strict-local-refinement-flat",
+ "kind": "statement",
+ "title": "Flatness of strict-local refinement over a strict-local base",
+ "statement": "Let $R\\to A$ be a local homomorphism of commutative local rings (the inverse image of the maximal ideal of $A$ is the maximal ideal of $R$). Choose separable closures $k_R^{\\mathrm{sep}}$ and $k_A^{\\mathrm{sep}}$ of their residue fields, and an embedding $k_R^{\\mathrm{sep}}\\to k_A^{\\mathrm{sep}}$ extending the residue-field map. Let $R^{\\mathrm{sh}}$ and $A^{\\mathrm{sh}}$ be the strict henselizations for these choices [def-sc-ring-strict-henselization]. Give $A^{\\mathrm{sh}}$ the canonical local $R^{\\mathrm{sh}}$-algebra structure extending $R\\to A$ and the chosen residue embedding. Then the multiplication homomorphism\n$$A\\otimes_R R^{\\mathrm{sh}}\\longrightarrow A^{\\mathrm{sh}},\\qquad a\\otimes r\\longmapsto a r,$$\nis flat [def-weil-pbc-flat-ring-map]. Here tensor products and their scalar actions are [def-weil-pbc-module-tensor-product, def-weil-module-base-change]. There is no Noetherian or finite-type assumption on $R\\to A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 08HV (lemma-strictly-henselian-functorial-improve), flatness consequence: the canonical refinement is a localization followed by strict henselization."
+ },
+ "stmt_deps": [
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-ring-strict-henselization, lem-weil-pbc-strict-henselization-triples], both $R\\to R^{\\mathrm{sh}}$ and $A\\to A^{\\mathrm{sh}}$ are filtered colimits of etale algebras of finite presentation, hence are ind-etale [def-weil-pbc-ind-etale-algebra]. The pointed-algebra and triple presentations agree: a point $\\chi:E\\to K$ gives the prime $\\ker\\chi$ and its residue-field embedding into $K$, and a triple gives their composite $E\\to\\kappa(\\mathfrak q)\\to K$; these inverse constructions preserve morphisms. Apply the triples statement at the maximal ideals, with the separable closures specified in the item.",
+   "uses": [
+    "def-sc-ring-strict-henselization",
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GW (lemma-strict-henselization-different), statement and pointed-algebra description in the proof; Tag 08HV, proof through lemma-henselian-functorial-improve."
+   }
+  },
+  {
+   "text": "Set $T=A\\otimes_R R^{\\mathrm{sh}}$ with its left $A$-algebra structure [def-weil-pbc-module-tensor-product, def-weil-module-base-change]. Base-change stability in [lem-weil-pbc-ind-etale-stability], applied to $R\\to R^{\\mathrm{sh}}$ along $R\\to A$, makes $A\\to T$ ind-etale. No flatness of $R\\to A$ is needed for this base change.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HV (lemma-strictly-henselian-functorial-improve), proof via lemma-henselian-functorial-improve: filtered-colimit argument using Tag 04GW (lemma-strict-henselization-different) and Tag 08HS (lemma-colimits-of-etale)."
+   }
+  },
+  {
+   "text": "Let $h:R^{\\mathrm{sh}}\\to A^{\\mathrm{sh}}$ be the canonical local map fixed in the statement, and $i:A\\to A^{\\mathrm{sh}}$ its structural map. Since $h$ and $i$ agree on $R$, $(a,r)\\mapsto i(a)h(r)$ is $R$-balanced and bilinear, so [def-weil-pbc-module-tensor-product] gives $\\psi:T\\to A^{\\mathrm{sh}}$. The identities $\\psi((a\\otimes r)(b\\otimes s))=i(ab)h(rs)=\\psi(a\\otimes r)\\psi(b\\otimes s)$ and $\\psi(1\\otimes1)=1$ show it is a ring map, since pure tensors generate $T$ additively. Also $\\psi(a\\otimes1)=i(a)$, so it is an $A$-algebra map. Both $T$ and $A^{\\mathrm{sh}}$ are ind-etale over $A$ by steps 1 and 2. Apply the relative clause of [lem-weil-pbc-ind-etale-stability] with base $A$, source $T$ and target $A^{\\mathrm{sh}}$: $\\psi$ is ind-etale and therefore weakly etale. This is exactly the specified multiplication map.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HV (lemma-strictly-henselian-functorial-improve), proof via lemma-henselian-functorial-improve: filtered-colimit argument using Tag 04GW (lemma-strict-henselization-different) and Tag 08HS (lemma-colimits-of-etale)."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-ind-etale-algebra], weak etaleness of $\\psi$ includes that $A^{\\mathrm{sh}}$ is flat as a $T$-module via $\\psi$. This is flatness of the ring map $\\psi$ by [def-weil-pbc-flat-ring-map], proving the assertion.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-pe-morphisms/def-weil-pbc-ind-etale-algebra.md",
+    "place": "Definition, weakly etale ring map: flatness of the map and its multiplication map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ring-strict-henselization",
+  "def-weil-module-base-change",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 08HV (lemma-strictly-henselian-functorial-improve), proof via lemma-henselian-functorial-improve: filtered-colimit argument using Tag 04GW (lemma-strict-henselization-different) and Tag 08HS (lemma-colimits-of-etale)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization along a local ring map R to S is flat over S tensor R strict henselization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.localRingHom\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat →\\n    ∀ (P : Ideal S) [inst_2 : P.IsPrime] (Q : Ideal R) [inst_3 : Q.IsPrime] (hQP : Q = Ideal.comap f P),\\n      (Localization.localRingHom Q P f hQP).Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, $ P \\\\subseteq S $ is a prime ideal, and $ Q = f^{-1}(P) \\\\subseteq R $ is the corresponding prime ideal in $ R $, then the indu\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationPrime\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.OfLocalizationPrime fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, if for every prime ideal $ J ⊆ S $ the localized homomorphism $ R_{f^{-1}(J)} → S_J $ is flat, then $ f $ itself is flat. \"}\n  {\"name\": \"RingHom.Flat.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the canonical ring homomorphism $ R \\to S $ induces a flat $ R $-module structure on $ S $. This means tensoring with $ S $ preserves exact \"}\n  {\"name\": \"RingHom.Flat.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is flat. This means that tensoring with $ S\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"instFlatAtPrime\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {A : Type u_4} {B : Type u_5} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B]\\n  (p : Ideal A) [inst_4 : p.IsPrime] (P : Ideal B) [inst_5 : P.IsPrime] [inst_6 : P.LiesOver p],\\n  Module.Flat (Localization.AtPrime p) (Localization.AtPrime P)\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in a commutative ring $ A $ and $ \\\\mathfrak{P} $ is a prime ideal in a commutative ring $ B $ lying over $ \\\\mathfrak{p} $, then the localization of $ B $ at $ \\\\mat\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: flat localization and flat base change do not identify the strict-henselization refinement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from S tensor R strict henselization of R to strict henselization of S is flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] : Module.Flat S (S ⊗[R] M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"RingHom.Flat.holdsForLocalizationAway\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": HoldsForLocalizationAway Flat\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is flat. This means that tensoring with $ S\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": OfLocalizationSpanTarget Flat\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the canonical ring homomorphism $ R \\to S $ induces a flat $ R $-module structure on $ S $. This means tensoring with $ S $ preserves exact \"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: flat localization and flat base change do not identify the strict-henselization refinement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStrictHenselization\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: flat localization and flat base change do not identify the strict-henselization refinement"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|IsStrictHenselization",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: flat localization and flat base change do not identify the strict-henselization refinement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local homomorphism R to A the canonical ring map A tensor R strict henselization of R to strict henselization of A is flat",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"RingHom.Flat.localRingHom\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat →\\n    ∀ (P : Ideal S) [inst_2 : P.IsPrime] (Q : Ideal R) [inst_3 : Q.IsPrime] (hQP : Q = Ideal.comap f P),\\n      (Localization.localRingHom Q P f hQP).Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, $ P \\\\subseteq S $ is a prime ideal, and $ Q = f^{-1}(P) \\\\subseteq R $ is the corresponding prime ideal in $ R $, then the indu\"}\n  {\"name\": \"RingHom.Flat.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is flat. This means that tensoring with $ S\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationPrime\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.OfLocalizationPrime fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, if for every prime ideal $ J ⊆ S $ the localized homomorphism $ R_{f^{-1}(J)} → S_J $ is flat, then $ f $ itself is flat. \"}\n  {\"name\": \"RingHom.Flat.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the canonical ring homomorphism $ R \\to S $ induces a flat $ R $-module structure on $ S $. This means tensoring with $ S $ preserves exact \"}\n  {\"name\": \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [IsLocalRing A]\\n  [IsLocalRing B] [Module.Flat A B] [IsLocalHom (algebraMap A B)], Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be local rings. If $ A $ is flat as a $ B $-module and the algebra map $ B \\to A $ is a local homomorphism, then $ A $ is faithfully flat over $ B $.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern flat localization, base change, or general flatness; none states the strict-henselization tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict localization of a base changed strict henselization is flat over the tensor product",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"IsLocalization.tensor\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \"(M : Submonoid R) [IsLocalization M A] : IsLocalization (Algebra.algebraMapSubmonoid S M) (S ⊗[R] A)\", \"doc\": \"Let $R$ be a commutative semiring and $S$ be a commutative $R$-algebra. Let $M$ be a submonoid of $R$. If $A$ is the localization of $R$ at $M$, then the tensor product $S \\\\otimes_R A$ is the localiza\"}\n  {\"name\": \"RingHom.Flat.holdsForLocalizationAway\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": HoldsForLocalizationAway Flat\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is flat. This means that tensoring with $ S\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": IsStableUnderBaseChange FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n  {\"name\": \"IsLocalization.flat\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Module.Flat R S\", \"doc\": \"If $ S $ is a localization of a commutative semiring $ R $, then $ S $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": OfLocalizationSpanTarget Flat\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the canonical ring homomorphism $ R \\to S $ induces a flat $ R $-module structure on $ S $. This means tensoring with $ S $ preserves exact \"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern flat localization, base change, or general flatness; none states the strict-henselization tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hensel\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern flat localization, base change, or general flatness; none states the strict-henselization tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|IsStrictHenselization",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern flat localization, base change, or general flatness; none states the strict-henselization tensor comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-stalk-condition-etale-charts",
+  "date": "2026-10-23",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH scheme case: pass from the geometric condition to Tag 0DJ8 via Tag 0DKG. Supporting algebra input: flatness of the strict-henselization refinements in Tag 0DKG, final paragraph.",
+   "via": [
+    "lem-sfb-space-stalk-condition-etale-charts",
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-local-refinement-flat",
+  "worker": "stage1",
+  "group": "Q116",
+  "summary": "Proved the exact canonical multiplication map flat by the filtered-colimit argument inside Stacks 08HV: the two strict henselizations are ind-etale, base change gives the tensor algebra, and the existing relative ind-etale stability lemma applies to its A-algebra map to A^sh. Reused all supporting nodes; zero new nodes. Corrected doubled TeX backslashes only, without changing the mathematical statement. Checked the current blueprint and every cited statement, and recorded actual searches and verbatim citation evidence.",
+  "blueprint": "Realizes the existing provenance place: det-thm-sf-ctf-stability-direct-images, proper/direct-image auxiliary chain, through the strict-local refinement flatness used in Stacks 0DKG. The item has blueprint.from.node = null because its inherited creation chain has no surviving imported blueprint ancestor; retained that truthful computed value and the precise inherited from.place and via. Uses the colimit argument of 08HV, not a change of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic algebraic presentation theorem giving filteredness and the actual strict-henselization colimit; the item unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic algebra tool: ind-etale base change and the relative assertion for algebra maps between two ind-etale algebras, followed by weak etaleness. This is exactly the colimit argument of Stacks 08HV; it does not replace the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-5fc5405cb",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-5fc5405cb (reviewer sub-agent of L); spot-checked: 0-new-node S1 split; statement unchanged from live (unsplit) and not weakened. Route matches Stacks algebra.tex 08HV, whose proof via lemma-henselian-functorial-improve uses 04GW and 08HS. Step 1: def-sc-ring-strict-henselization plus triples clause 1 at the maximal ideal, with an explicit pairs<->triples conversion, show R^sh and A^sh are ind-etale. Step 2: base-change clause of lem-weil-pbc-ind-etale-stability makes A->T=A⊗_R R^sh ind-etale. Step 3: psi is built bilinearly (balanced since h|_R=i|_R) and is the item's map; the relative clause (08HS) makes it ind-etale and then weakly etale. This works for any h extending R->A. Step 4: the weakly-etale definition includes flatness, so the step is a genuine definition unfolding. Small cases checked: identity; k[eps]->k; Q->Q(i), flat but not faithfully flat; inseparable F_p(t)->F_p(t^{1/p}). No cycle (186-node closure). Not a duplicate of any 08HV/08HS hit (lem-trf-strict-henselization-quasi-finite-ring, lem-trf-smooth-strict-local-base-model, lem-sfb-space-geometric-stalk-tensor-calculus, the functoriality node). Accepted tool_uses: lem-weil-pbc-strict-henselization-triples and lem-weil-pbc-ind-etale-stability, both generic ring theory. Advisory only: 'canonical R^sh-algebra structure' in the inherited statement cites no node; the proof does not depend on it. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictLocalRefinementFlat",
+  "declaration": "Algebra.strictLocalRefinement_flat",
+  "file": "lean/Sheaf/RingTheory/StrictLocalRefinementFlat.lean",
+  "statement": "theorem strictLocalRefinement_flat (R : Type u) (A : Type v) (KR H : Type (max u w)) (KA C : Type (max v z)) [CommRing R] [IsLocalRing R] [CommRing A] [IsLocalRing A] [Algebra R A] [IsLocalHom (algebraMap R A)] [Field KR] [Algebra (IsLocalRing.ResidueField R) KR] [IsSepClosure (IsLocalRing.ResidueField R) KR] [Algebra R KR] [IsScalarTower R (IsLocalRing.ResidueField R) KR] [Field KA] [Algebra (IsLocalRing.ResidueField A) KA] [IsSepClosure (IsLocalRing.ResidueField A) KA] [Algebra A KA] [IsScalarTower A (IsLocalRing.ResidueField A) KA] [CommRing H] [IsLocalRing H] [Algebra R H] [CommRing C] [IsLocalRing C] [Algebra A C] [Algebra R C] [IsScalarTower R A C] (P : StrictHenselizationPresentationIn.{u, w} R KR H) (Q : StrictHenselizationPresentationIn.{v, z} A KA C) (ι : KR →+* KA) (_hι : ι.comp (algebraMap (IsLocalRing.ResidueField R) KR) = (algebraMap (IsLocalRing.ResidueField A) KA).comp (IsLocalRing.ResidueField.map (algebraMap R A))) (h : H →ₐ[R] C) [IsLocalHom h.toRingHom] (_hres : Q.residueMap.comp h.toRingHom = ι.comp P.residueMap) : (AlgHom.liftEquiv R A H C h).toRingHom.Flat",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19b2ed30c",
+  "group": "NO",
+  "result": "pass",
+  "note": "Only the lean record changes; the statement field is verbatim in the file; proof is sorry; docstrings carry the source/blueprint and all 4 proof steps. Clauses match the node: local R→A via IsLocalHom; separable residue closures KR, KA with scalar towers; ι extends ResidueField.map (_hι); R^sh, A^sh via the recorded StrictHenselizationPresentationIn; canonical h given by its 04GU characterization (R-algebra map, IsLocalHom, residue equation), which exists and is unique, so the statement is not weakened. Conclusion: (AlgHom.liftEquiv R A H C h).toRingHom.Flat, the a⊗r↦a·h(r) map; flatness only, not faithful flatness. No Noetherian, finite-type or flat assumption; independent universes u, v, max u w, max v z. Edge cases fine: identity, k[ε]→k, ℚ→ℚ(i), inseparable residue extensions. No duplicate in Sheaf/WeilConjectures/Mathlib. Advisory: IsLocalRing H/C are instance hypotheses, harmless because strict henselizations are local."
+ }
+}

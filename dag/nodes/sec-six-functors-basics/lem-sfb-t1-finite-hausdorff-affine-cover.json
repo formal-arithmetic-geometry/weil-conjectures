@@ -1,0 +1,522 @@
+{
+ "id": "lem-sfb-t1-finite-hausdorff-affine-cover",
+ "kind": "statement",
+ "title": "Finite compact Hausdorff affine charts for quasi-compact schemes with closed points",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] that is quasi-compact [def-weil-pbc-quasi-compact-scheme], and suppose every singleton in its underlying topological space is closed. Then there exist a finite set $I$, affine open subschemes $U_i\\subseteq X$, commutative rings $A_i$, and isomorphisms $U_i\\simeq\\operatorname{Spec}A_i$ [def-weil-affine-spectrum], for $i\\in I$, such that $X=\\bigcup_{i\\in I}U_i$, every prime ideal of every $A_i$ is maximal, and each $U_i$ in its subspace topology is quasi-compact and Hausdorff. Here Hausdorff means that any two distinct points admit disjoint open neighbourhoods. The set $I$ may be empty when $X=\\varnothing$. No quasi-separatedness, Noetherianity or finite-type assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0CKV, lemma-dimension-zero, opening proof paragraph: affine charts are profinite, and final paragraph: choose a finite affine open covering of a quasi-compact open. The closed-point formulation makes explicit the maximal-prime argument in the returned item, old steps 1, 2 and the chart-topology part of step 3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-qcqs-finite-affine-open-cover] to the quasi-compact scheme $X$. Obtain a finite affine open cover $(U_i)_{i\\in I}$. By the definition of affine in [def-pc-scheme], choose a commutative ring $A_i$ and a scheme isomorphism $h_i:U_i\\simeq\\operatorname{Spec}A_i$ for each $i$. If $X=\\varnothing$, take $I=\\varnothing$ and all remaining assertions are vacuous.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT, lemma-basis-affine-opens, followed by quasi-compactness; Tag 0CKV, lemma-dimension-zero, finite affine covering in the final paragraph"
+   }
+  },
+  {
+   "text": "Fix $i\\in I$. Every singleton $\\{u\\}\\subset U_i$ is closed in $U_i$, because it is the intersection of the closed singleton $\\{u\\}\\subset X$ with $U_i$, with its subspace topology. The underlying map of the scheme isomorphism $h_i$ is a homeomorphism, so every singleton in $\\operatorname{Spec}A_i$ is closed as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0CKV, lemma-dimension-zero, opening paragraph: closed-point formulation of dimension zero on each affine chart"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p$ be any prime of $A_i$. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], $V(\\mathfrak p)=\\overline{\\{\\mathfrak p\\}}=\\{\\mathfrak p\\}$, where the last equality uses step 2. By [lem-weil-pbc-proper-ideal-contained-in-maximal], choose a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$. A maximal ideal of a commutative ring is prime: if $ab\\in\\mathfrak m$ and $a\\notin\\mathfrak m$, write $1=c+ra$ with $c\\in\\mathfrak m$ and multiply by $b$ to obtain $b\\in\\mathfrak m$. Hence $\\mathfrak m\\in V(\\mathfrak p)=\\{\\mathfrak p\\}$, so $\\mathfrak p=\\mathfrak m$ is maximal.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES, lemma-irreducible, (1); Tag 00E0, lemma-Zariski-topology, (2) and (8); maximal-prime criterion in Tag 04MG, lemma-ring-with-only-minimal-primes"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-zero-dimensional-spectrum-profinite] to $A_i$, whose every prime is maximal by step 3. Thus $\\operatorname{Spec}A_i$ is compact Hausdorff. Pulling an open cover of $U_i$ across the homeomorphism $h_i$ and pulling a finite subcover back proves quasi-compactness of $U_i$; pulling back disjoint open neighbourhoods proves Hausdorffness of $U_i$. The finite family from step 1 now has every property required. No property of intersections of charts was used.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-spectrum-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0CKV, lemma-dimension-zero, opening proof paragraph, invoking Algebra Tag 04MG, lemma-ring-with-only-minimal-primes, (6) implies (1) and (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "def-pc-scheme",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0CKV, lemma-dimension-zero, opening paragraph and finite-cover sentence in final paragraph; maximal-prime argument expanded with Algebra Tags 00ES, 00E0 and 04MG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every affine open subscheme of a scheme with closed points is compact Hausdorff",
+   "results": {
+    "t": "2026-10-22T06:11:19Z",
+    "tool": "leanfinder",
+    "query": "Every affine open subscheme of a scheme with closed points is compact Hausdorff",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.compactSpace_of_isAffine",
+     "AlgebraicGeometry.IsAffineOpen.isCompact",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsArtinianScheme.toCompactSpace",
+     "AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.isArtinianScheme_iff"
+    ],
+    "digest": "f3d2a3a5e5e40ec3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme with T1 topology is compact Hausdorff and all prime ideals are maximal",
+   "results": {
+    "t": "2026-10-22T06:11:02Z",
+    "tool": "leansearch",
+    "query": "An affine scheme with T1 topology is compact Hausdorff and all prime ideals are maximal",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, T1Space, T2Space",
+   "results": {
+    "t": "2026-10-22T06:11:02Z",
+    "tool": "loogle",
+    "query": "PrimeSpectrum, T1Space, T2Space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "T1Space|T2Space|isMaximal",
+   "results": {
+    "t": "2026-10-22T06:11:02Z",
+    "tool": "grep",
+    "query": "T1Space|T2Space|isMaximal",
+    "sub": "RingTheory/Spectrum/Prime",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Basic.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Basic.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Basic.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Basic.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean"
+    ],
+    "digest": "9d79ae5f76b0b5b8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "T1 prime spectrum of a ring is Hausdorff because every prime ideal is maximal",
+   "results": {
+    "t": "2026-10-22T06:11:53Z",
+    "tool": "leanfinder",
+    "query": "T1 prime spectrum of a ring is Hausdorff because every prime ideal is maximal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MaximalSpectrum.instT1Space",
+     "PrimeSpectrum.t1Space_iff_isField",
+     "PrimeSpectrum.instT0Space",
+     "MaximalSpectrum.zariskiTopology",
+     "PrimeSpectrum.instSpectralSpace",
+     "PrimeSpectrum.discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical",
+     "MaximalSpectrum.toPrimeSpectrum_range",
+     "PrimeSpectrum.instPrespectralSpace"
+    ],
+    "digest": "c1b415a9e0e78298"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "T2Space.*PrimeSpectrum|PrimeSpectrum.*T2Space|t2Space.*[sS]pectrum|[sS]pectrum.*t2Space",
+   "results": {
+    "t": "2026-10-22T06:11:25Z",
+    "tool": "grep",
+    "query": "T2Space.*PrimeSpectrum|PrimeSpectrum.*T2Space|t2Space.*[sS]pectrum|[sS]pectrum.*t2Space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Range.lean",
+     "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Range.lean",
+     "Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Abs.lean",
+     "Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Abs.lean"
+    ],
+    "digest": "58f7bc6a5a1c2f19"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, T2Space",
+   "results": {
+    "t": "2026-10-22T06:11:26Z",
+    "tool": "loogle",
+    "query": "PrimeSpectrum, T2Space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact scheme with closed points admits a finite affine open cover by compact Hausdorff charts with all prime ideals maximal",
+   "results": {
+    "t": "2026-10-22T06:13:55Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact scheme with closed points admits a finite affine open cover by compact Hausdorff charts with all prime ideals maximal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace",
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.Scheme.compactSpace_of_isAffine",
+     "AlgebraicGeometry.IsAffineOpen.isCompact",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat"
+    ],
+    "digest": "3f7a05b7c734111a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CompactSpace, T1Space",
+   "results": {
+    "t": "2026-10-22T06:13:41Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.Scheme, CompactSpace, T1Space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Aa]ffine|[Aa]ffine.*finite|T1Space",
+   "results": {
+    "t": "2026-10-22T06:13:41Z",
+    "tool": "grep",
+    "query": "finite.*[Aa]ffine|[Aa]ffine.*finite|T1Space",
+    "sub": "AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "78",
+     "79",
+     "85",
+     "86",
+     "87"
+    ],
+    "digest": "fb77dd4a75026deb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every quasi compact T1 scheme has a finite affine cover of compact Hausdorff spectra",
+   "results": {
+    "t": "2026-10-22T06:13:41Z",
+    "tool": "leansearch",
+    "query": "Every quasi compact T1 scheme has a finite affine cover of compact Hausdorff spectra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.OpenCover.compactSpace",
+     "AlgebraicGeometry.QuasiCompactCover.of_finite",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.IsNoetherian.toCompactSpace",
+     "AlgebraicGeometry.Scheme.compactSpace_of_isAffine",
+     "AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine"
+    ],
+    "digest": "97dda5dc3f9058f4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite affine-cover and affine compactness results cover only part of the statement; the maximal-prime criterion is available, but compact Hausdorff charts under these hypotheses are not supplied by the hits. The domain-only T1/isField criterion adds a hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact T1 scheme has a finite affine open cover by compact Hausdorff spectra with all prime ideals maximal",
+   "results": {
+    "t": "2026-10-23T04:24:00Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact T1 scheme has a finite affine open cover by compact Hausdorff spectra with all prime ideals maximal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact",
+     "AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover",
+     "AlgebraicGeometry.IsArtinianScheme.toCompactSpace",
+     "AlgebraicGeometry.Scheme.compactSpace_of_isAffine",
+     "AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union"
+    ],
+    "digest": "9e25487fc811a374"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine-cover and affine compactness results supply only parts of the item; no returned declaration also gives Hausdorff charts from closedness of points."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Aa]ffine|[Aa]ffine.*finite|T1Space",
+   "results": {
+    "t": "2026-10-23T04:24:42Z",
+    "tool": "grep",
+    "query": "finite.*[Aa]ffine|[Aa]ffine.*finite|T1Space",
+    "sub": "AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "78",
+     "79",
+     "85",
+     "86",
+     "87"
+    ],
+    "digest": "fb77dd4a75026deb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine-cover and affine compactness results supply only parts of the item; no returned declaration also gives Hausdorff charts from closedness of points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact scheme with closed points has a finite affine cover by compact Hausdorff spaces",
+   "results": {
+    "t": "2026-10-23T04:24:42Z",
+    "tool": "leansearch",
+    "query": "A quasi compact scheme with closed points has a finite affine cover by compact Hausdorff spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.OpenCover.compactSpace",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.QuasiCompactCover.of_finite",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen",
+     "AlgebraicGeometry.Scheme.quasiCompactCover",
+     "AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace",
+     "AlgebraicGeometry.Scheme.compactSpace_of_isAffine",
+     "AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover"
+    ],
+    "digest": "7ca2c846aa3245d3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine-cover and affine compactness results supply only parts of the item; no returned declaration also gives Hausdorff charts from closedness of points."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CompactSpace, T1Space",
+   "results": {
+    "t": "2026-10-23T04:24:43Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.Scheme, CompactSpace, T1Space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine-cover and affine compactness results supply only parts of the item; no returned declaration also gives Hausdorff charts from closedness of points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine covering of a compact scheme whose points are closed; T1 prime spectra are Hausdorff",
+   "results": {
+    "t": "2026-10-23T04:25:33Z",
+    "tool": "leanfinder",
+    "query": "Finite affine covering of a compact scheme whose points are closed; T1 prime spectra are Hausdorff",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover",
+     "AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact",
+     "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover"
+    ],
+    "digest": "d5c5f6ddba462f49"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine-cover and affine compactness results supply only parts of the item; no returned declaration also gives Hausdorff charts from closedness of points."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-zero-dimensional-affine",
+  "date": "2026-10-22",
+  "group": "Q140"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 0CKV, lemma-dimension-zero, opening proof paragraph: affine charts are profinite, and final paragraph: choose a finite affine open covering of a quasi-compact open. The closed-point formulation makes explicit the maximal-prime argument in the returned item, old steps 1, 2 and the chart-topology part of step 3. Supports Paragraph (3) of lem-sfb-field-profinite-galois-site, the qcqs field-site-object affineness reduction below the ordinary direct-image clause of det-thm-sf-ctf-stability-direct-images.",
+   "via": [
+    "lem-sfb-qcqs-zero-dimensional-affine",
+    "lem-sfb-field-profinite-galois-site",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-t1-finite-hausdorff-affine-cover",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing finite affine cover, prime closure, maximal-ideal existence and zero-dimensional spectrum nodes; wrote out subspace closedness and the maximal-prime argument. No new nodes. Checked the empty scheme and arbitrary nonreduced and non-Noetherian rings; no quasi-separatedness is used.",
+  "blueprint": "Realizes the 0CKV affine-chart reduction below Paragraph (3) of lem-sfb-field-profinite-galois-site, hence the ordinary direct-image clause of det-thm-sf-ctf-stability-direct-images. The ancestor command returns None, as in the inherited blueprint.from.node; retained its precise place and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+    "why": "Generic ring-theoretic compact Hausdorff spectrum criterion of 04MG, used only on each affine chart; the unit gives no such ring-topology criterion. This does not replace its direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-75e6a2411",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-75e6a2411 (reviewer sub-agent of L); spot-checked: I read the whole item, the four cited statements and the three definitions. Source checked at Stacks properties.tex 0CKV (lemma-dimension-zero, proof opening: affine opens are profinite by Algebra 04MG; choose an affine cover) and algebra.tex 04MG (6)=>(1),(2). The statement is unchanged; there are no new nodes and no repair note, so this is not a 10-21 re-split. The statement gives exactly what step 1 of the parent lem-sfb-qcqs-zero-dimensional-affine uses: a finite affine cover by quasi-compact Hausdorff charts, with the empty cover allowed. Step 1: qcqs-finite-affine-open-cover needs only quasi-compactness and allows m=0; 'affine' in def-pc-scheme gives A_i and h_i. Step 2 (elementary): closed points restrict to the subspace and pass along the homeomorphism. Step 3: closure of {p} = V(p) by spec-irreducible-closed-subsets-primes (1); proper-ideal-contained-in-maximal gives a maximal m containing p; the inline maximal-is-prime argument is correct, so m = p. It is a few lines from the cited statements, so 'elementary' is acceptable. Step 4: zero-dimensional-spectrum-profinite has exactly the hypothesis from step 3, and the homeomorphism carries over quasi-compactness and Hausdorffness. proof_deps is exactly the union of the step uses. There is no cycle (65 transitive dependencies checked). The tool_use of the off-unit 04MG node is declared, generic and accepted. I found no duplicate in a whole-DAG statement scan. Edge cases checked: the empty scheme, k[e]/e^2, an infinite Boolean ring, and non-quasi-separated T1 schemes, which are fine because no chart intersections are used. No SGA is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.T1FiniteHausdorffAffineCover",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_hausdorff_affine_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/T1FiniteHausdorffAffineCover.lean",
+  "statement": "theorem Scheme.exists_finite_hausdorff_affine_cover (X : Scheme.{u}) [CompactSpace X] [T1Space X] : ∃ (n : ℕ) (U : Fin n → X.Opens) (A : Fin n → CommRingCat.{u}), (∀ i : Fin n, IsAffineOpen (U i)) ∧ (∀ i : Fin n, Nonempty ((U i).toScheme ≅ Spec (A i))) ∧ (⨆ i : Fin n, U i) = ⊤ ∧ (∀ (i : Fin n) (p : Ideal (A i)), p.IsPrime → p.IsMaximal) ∧ (∀ i : Fin n, CompactSpace (U i)) ∧ (∀ i : Fin n, T2Space (U i))",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3cede6932",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read item node, all 3 stmt_deps (Scheme, CompactSpace, Spec) and their lean records, the delivered module, the report and Stacks 0CKV (properties.tex l.1303-1324). Lean statement matches every clause: X : Scheme.{u}, [CompactSpace X] for quasi-compact, [T1Space X] exactly for closed singletons, ∃ n with Fin n index (empty cover allowed), affine opens U i with Nonempty((U i).toScheme ≅ Spec (A i)), A i : CommRingCat.{u} (same universe, no restriction, true via sections), ⨆ U i = ⊤, all primes maximal, CompactSpace and T2Space of each U i in subspace topology; no extra hypotheses. Edge cases checked: empty X, zero ring, k[ε]/ε², Boolean rings, non-quasi-separated. lean.statement is word for word the file signature; only the lean key is added to the node; consistent with parent isAffine_of_qcqs_of_t1; no definitions; sorry-only proof; docstrings carry source and blueprint tag with proof steps; report has both sections; no duplicate in the live tree. Not recompiled, as instructed. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261025T051044-L-3939021",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.exists_finite_hausdorff_affine_cover"
+  ],
+  "sorry_after": []
+ }
+}

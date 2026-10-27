@@ -187,7 +187,18 @@
   "latex:proposition"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -263,22 +274,23 @@
   "note": "Section 1(B): the current CompletedTowerDirectImage exports the actual completed-coefficient direct images and their derived comparisons, but not the strict normalized tower adjunction and reduction/pullback mate used by completed exchange. Supply that equivalent normalized ringed-adjunction interface, including the evaluation equation on K-injectives, the constant/pullback conjugate limit comparison, strict projection and its quotient/completion-unit compatibility. Reuse the existing coefficient objects and universal derived pairs."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Levelwise direct image on tower categories has a total right derived functor\n\n$$\n Rf_*^{\\operatorname{Tow}}:\n D(\\operatorname{Tow}_{A}(X))\n \\longrightarrow D(\\operatorname{Tow}_{A}(Y)),\n$$\n\nwith $\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}M_\\bullet\\simeq Rf_*M_n$.\nFor every $M_\\bullet$ the canonical map\n\n$$\n Rf_*\\Rlim M_\\bullet\n \\xrightarrow{\\sim}\n \\Rlim\\bigl(Rf_*^{\\operatorname{Tow}}M_\\bullet\\bigr)\n$$\n\nis an isomorphism. Under the two canonical Roos triangles associated with the\nderived inverse-limit [def-weil-pbc-derived-inverse-limit] construction, it\nis induced by the canonical isomorphisms\n\n$$\n Rf_*R\\!\\prod_nM_n\\xrightarrow{\\sim}\n R\\!\\prod_nRf_*M_n\n$$\n\nand their commutation with $(1-s)$. If $K\\in D(X_{\\Proet},A)$ is derived\n$I$-complete, then $Rf_*K$ is derived $I$-complete. For every $n\\geq1$, the\nprojection-formula morphism\n\n$$\n (Rf_*K)\\otimes_A^LP_n\\longrightarrow Rf_*(K\\otimes_A^LP_n)\n$$\n\nis a functorial isomorphism\n\n$$\n (Rf_*K)\\otimes_A^LP_n\n \\xrightarrow{\\sim}Rf_*(K\\otimes_A^LP_n)=Rf_*K_n,\n$$\n\nand these isomorphisms commute with $P_{n+1}\\to P_n$. Under them, the\ncompletion map for $Rf_*K$ is the composite\n\n$$\n Rf_*K\\xrightarrow{\\sim}Rf_*\\Rlim K_\\bullet\n \\xrightarrow{\\sim}\\Rlim Rf_*^{\\operatorname{Tow}}K_\\bullet.\n$$",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the notation of [det-pbc-complete-derived-completion], let $f:X\\to Y$ be a\nmorphism of schemes. If $K\\in D(X)$ is derived complete, then so is\n$Rf_*K\\in D(Y)$.",
   "proof": [
    {
-    "text": "The tower category of [def-weil-pbc-adic-coefficient-datum] is Grothendieck\nabelian with exact evaluation functors, so levelwise K-injective resolutions\n(also with respect to the K-injective presentation of\n[def-weil-pbc-derived-inverse-limit]) give the total right derived functor\n$Rf_*^{\\operatorname{Tow}}$ with\n$\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}M_\\bullet\\simeq Rf_*M_n$.\nApplying $Rf_*$ to the canonical Roos triangle of\n[prop-weil-pbc-roos-triangle] for $M_\\bullet$ and comparing with the Roos\ntriangle for $Rf_*^{\\operatorname{Tow}}M_\\bullet$, using that the derived\nproducts commute with $Rf_*$ (they are the products of the levelwise\nK-injective resolutions and direct image is a right adjoint, hence\nproduct-preserving) and with $(1-s)$, identifies the two triangles and gives\nthe displayed isomorphism $Rf_*\\Rlim M_\\bullet\\xrightarrow{\\sim}\n\\Rlim(Rf_*^{\\operatorname{Tow}}M_\\bullet)$. If $K$ is derived $I$-complete\nthen, applied to the tower $K_\\bullet$, this shows $Rf_*K\\xrightarrow{\\sim}\n\\Rlim Rf_*^{\\operatorname{Tow}}K_\\bullet$, so $Rf_*K$ is derived\n$I$-complete; [lemma-weil-pbc-perfect-projection-formula] supplies the\nprojection-formula isomorphisms\n$(Rf_*K)\\otimes_A^LP_n\\xrightarrow{\\sim}Rf_*(K\\otimes_A^LP_n)=Rf_*K_n$ of\n[def-weil-pbc-projection-formula-map], commuting with $P_{n+1}\\to P_n$ by the\nnormalization data of [def-weil-pbc-adic-coefficient-datum]; under them the\ncompletion map for $Rf_*K$ is the displayed composite.",
+    "text": "We use the characterization of derived completeness by right orthogonality in\n[det-pbc-complete-derived-completion]. Let $Z\\in D(Y)$ be an object on which\n$\\varpi$ acts invertibly and $u:Z\\to Rf_*K$ a morphism. Under the adjunction\n$f^*\\dashv Rf_*$ between the derived inverse and direct images, $u$ corresponds\nto $u^\\flat:f^*Z\\to K$. The functor $f^*$ is $R$-linear, so $\\varpi$ acts\ninvertibly on $f^*Z$, and $u^\\flat=0$ because $K$ is derived complete. Hence\n$u=0$, and $Rf_*K$ is derived complete.",
     "uses": [
-     "def-weil-pbc-adic-coefficient-datum",
-     "def-weil-pbc-derived-inverse-limit",
-     "prop-weil-pbc-roos-triangle",
-     "lemma-weil-pbc-perfect-projection-formula",
-     "def-weil-pbc-projection-formula-map"
+     "det-pbc-complete-derived-completion"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "tool_uses": [
   "lem-weil-proetale-countable-products-exact",

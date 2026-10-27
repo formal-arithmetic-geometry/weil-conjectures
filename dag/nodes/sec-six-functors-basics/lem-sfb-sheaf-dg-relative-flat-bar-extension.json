@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+ "kind": "statement",
+ "title": "Relative flat bar computes sheaf dg extension with its action counit",
+ "statement": "Let $D$ be a commutative ring, $X$ a topological space, and $\\mathcal S$ a sheaf of commutative $D$-algebras. Let $\\varphi:P\\to Q$ be a map of associative unital dg $D$-algebras [def-sfb-dg-derived-category], and suppose their underlying $D$-complexes are K-flat [def-pc-module-kflat-complex]. Write $\\mathcal C=\\mathcal S\\otimes_D P$ and $\\mathcal C'=\\mathcal S\\otimes_D Q$, with sheafification of the tensor understood. Use the left sheaf dg module localizations and derived extension notation of [def-sfb-sheaf-dg-module-localization]. Then derived extension along $\\mathcal C\\to\\mathcal C'$ exists and is left adjoint to restriction. For every possibly unbounded sheaf dg $\\mathcal C$-module $M$, its value is represented by the $D$-relative two-sided bar complex\n$$B(Q,P,M)=\\bigoplus_{n\\geq0}V_n[n],\\qquad V_n=Q\\otimes_D P^{\\otimes_D n}\\otimes_D M.$$\nAll tensors are tensor products of sheaves, and internal tensor differentials use the direct-sum total convention [def-pc-tensor-complex-sheaves]. On $V_n[n]$, the internal differential is $(-1)^n d_{V_n}$ and the other component is $\\sum_{i=0}^n(-1)^i\\partial_i$ into $V_{n-1}[n-1]$ for $n>0$. From left to right the faces multiply $Q$ by $P$ through $\\varphi$, multiply adjacent $P$ factors, and act on $M$; degeneracies insert units. The $\\mathcal S$-action is retained on $M$. The left $Q$-action on the summand $V_n[n]$ includes the factor $(-1)^{n|q|}$ for a homogeneous $q\\in Q$.\n\nThis bar construction preserves quasi-isomorphisms of $M$ and is natural in its derived-category morphisms. Its comparison to ordinary extension is the balanced quotient on $V_0$ and zero on $V_n[n]$ for $n>0$. For a sheaf dg $\\mathcal C'$-module $N$, the adjunction counit is represented by $B(Q,P,\\operatorname{Res}N)\\to N$ which is $q\\otimes n\\mapsto qn$ on $V_0$ and zero on higher bar summands. In particular the counit retains the given $\\mathcal S$-action. For $P=D$, there is a natural identification of this derived extension with $(\\mathcal S\\otimes_D Q)\\otimes_{\\mathcal S}^{\\mathbf L}-$ in the corresponding dg module category, whose underlying object is $Q\\otimes_D^{\\mathbf L}M$. No flatness of $\\mathcal S$ over $D$ or of the underlying complex of $M$ over $D$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FTF (lemma-derived-tensor-product), definition-pullback, Tag 0FTR (lemma-derived-adjoint-push-pull) with identity underlying topological space. The displayed D-relative bar representative is an agent-stated computational refinement of these constructions, using K-flat P and Q; it is not claimed to be written in those tags."
+ },
+ "stmt_deps": [
+  "def-sfb-dg-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-pc-tensor-complex-sheaves",
+  "def-sfb-scalar-constant-realization",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "Apply the general sheaf dg scalar adjunction on the open site of $X$, with base $\\mathcal S$, to $\\mathcal C\\to\\mathcal C'$, passing to opposite algebras for left modules. It gives the unbounded universal derived extension $L$, its comparison $\\varepsilon_M:L(M)\\to F(M)$ for $F(M)=\\mathcal C'\\otimes_{\\mathcal C}M$, and the adjunction to restriction whose counit is comparison followed by action. Thus it remains to identify this specified derived pair with the displayed bar and its augmentation; no new adjunction is chosen.",
+   "uses": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FTF, 0FTR, identity underlying topos; left version by opposites."
+   }
+  },
+  {
+   "text": "Construct $B(M)$ with the faces, degeneracies and total differential in the statement. Put $\\delta_n=\\sum_i(-1)^i\\partial_i$. Associativity and the module law give $\\partial_i\\partial_j=\\partial_{j-1}\\partial_i$ for $i<j$, hence $\\delta_{n-1}\\delta_n=0$ by cancelling pairs; each face is an internal chain map, so $(-1)^{n-1}d\\delta_n+\\delta_n(-1)^nd=0$. Thus $D^2=0$. The shifted action $q\\cdot v=(-1)^{n|q|}qv$ satisfies Leibniz internally. Horizontally, $\\delta(q\\cdot v)=(-1)^{|q|}q\\cdot\\delta(v)$, since the source and target actions have exponents $n|q|$ and $(n-1)|q|$. The degree-zero $\\mathcal S$-action on $M$ commutes with all these maps. This defines a sheaf dg $\\mathcal C'$-module without a flatness assumption.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Agent bar sign calculation using the left conventions of section-shift and section-tensor-product-dg."
+   }
+  },
+  {
+   "text": "The quotient map $\\alpha_M:B(M)\\to F(M)$ on length zero, zero elsewhere, is a chain map: on length one the two faces become the same balanced tensor, so their difference vanishes. It is $\\mathcal C'$-linear. Module maps act on the last factor, naturally commuting with $\\alpha$. A degree $-1$ module homotopy $h$ induces $H_n=(-1)^n(1\\otimes h)$ on length $n$, with the usual tensor Koszul sign in $1\\otimes h$. The internal terms of $DH+HD$ give the induced difference of maps; the horizontal terms cancel because $\\delta$ commutes with $1\\otimes h$ and $H_n$ has alternating sign. Consequently $B$ and $\\alpha$ descend to the homotopy categories.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Agent chain calculation; tensor signs from section-tensor-product-dg."
+   }
+  },
+  {
+   "text": "At a point of $X$, the constant complex associated with $P$ (respectively $Q$) has stalk $P$ (respectively $Q$), by evaluating a locally constant germ at the point (inverse: the constant germ); apply the stalk K-flatness criterion. Thus these constant sheaf complexes are K-flat over the constant ring sheaf $D_X$. Finite tensor products are K-flat directly from the definition: tensor with an acyclic complex successively, using associativity of the direct-sum tensor. Therefore $Q\\otimes_D P^{\\otimes n}\\otimes_D A$ is acyclic for every acyclic sheaf complex $A$. Stalk tensor comparison ensures these are precisely the sheafified tensors in the statement, not tensors over $\\mathcal S$.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion",
+    "lem-pc-stalk-tensor-complex",
+    "def-pc-module-kflat-complex",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "K-flat tensor criterion on the constant ringed space; sdga relative bar refinement is agent-written."
+   }
+  },
+  {
+   "text": "For a quasi-isomorphism $f:M\\to M'$, filter the mapping cone of $B(f)$ by bar lengths $0\\le n\\le r$. This is an increasing filtration by subcomplexes, because faces lower length. Its $r$th quotient is the shifted cone of $1\\otimes f$ on $Q\\otimes_D P^{\\otimes r}\\otimes_D M$; it is acyclic by the preceding step. Starting with the zero stage, the long exact cohomology sequence for the degreewise split filtration sequence proves each finite stage acyclic. The full cone is the filtered colimit of these stages. Filtered colimits of abelian sheaves are exact, so commute with kernels, images and cohomology; hence the full cone is acyclic. Thus $B$ preserves quasi-isomorphisms, even for unbounded $M$, and induces $\\overline B:D_X(\\mathcal C)\\to D_X(\\mathcal C')$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Agent increasing-length proof; derived tensor localization as in Tag 0FTF."
+   }
+  },
+  {
+   "text": "Let $R=B(Q,P,\\mathcal C)$, with its additional right $\\mathcal C$-action on the last factor. Its augmentation $u:R\\to\\mathcal C'$ multiplies the two algebra factors on length zero and is zero above it. As a complex of $\\mathcal S$-modules it retracts onto $\\mathcal C'$: $i(s\\otimes q)=q\\otimes(s\\otimes1)$ and, on length $n\\ge0$,\n$$h_n(q\\otimes p_1\\otimes\\cdots\\otimes p_n\\otimes(s\\otimes p))=(-1)^{n+1}q\\otimes p_1\\otimes\\cdots\\otimes p_n\\otimes p\\otimes(s\\otimes1).$$\nThe last face contributes the identity; each other face cancels the matching term in $h\\delta$. In length zero the remaining term is $-iu$. Internal differentials anticommute with $h$ because it increases length and commutes with the unshifted tensor differential. Thus $Dh+hD=1-iu$ and $ui=1$. In particular $u$ is a quasi-isomorphism of right dg $\\mathcal C$-modules. The contraction need not be right $\\mathcal C$-linear.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Agent explicit extra-degeneracy contraction; no flatness of S is used."
+   }
+  },
+  {
+   "text": "Choose $h:H\\to M$ with $H$ graded-flat and homotopically flat over $\\mathcal C$ by the sheaf dg resolution theorem. Its comparison $\\varepsilon_H:L(H)\\to F(H)$ is invertible. Homotopical flatness means $u\\otimes_{\\mathcal C}H$ is a quasi-isomorphism. Balancing gives the chain isomorphism\n$$R\\otimes_{\\mathcal C}H\\cong B(Q,P,H),\\qquad (q\\otimes\\mathbf p\\otimes c)\\otimes m\\longmapsto q\\otimes\\mathbf p\\otimes cm,$$\nwith inverse inserting $c=1$. The total differential and both actions agree termwise; in particular no sign is introduced by shifting the first tensor factor with the right-module convention. Under this map $u\\otimes H$ is exactly $\\alpha_H$, so $\\alpha_H$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-sfb-sheaf-dg-hflat-computation",
+    "def-sfb-sheaf-dg-module-localization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSH and 0FTF for the resolving computation; agent balancing of the displayed bar."
+   }
+  },
+  {
+   "text": "The universal property of the left derived pair $(L,\\varepsilon)$ applied to $\\alpha:\\overline B\\,Q_{\\mathcal C}\\to Q_{\\mathcal C'}F$ gives $\\beta:\\overline B\\to L$ with $\\varepsilon\\beta=\\alpha$. On the resolving $H$ of the preceding step, both $\\varepsilon_H$ and $\\alpha_H$ are invertible, so $\\beta_H$ is invertible. Naturality along $h:H\\to M$ then makes $\\beta_M$ invertible: both $L(h)$ and $\\overline B(h)$ are isomorphisms. This proves the bar represents the specified universal derived extension, naturally for every localized morphism, with its specified comparison $\\alpha$. The inherited adjunction counit is consequently $\\alpha_{\\operatorname{Res}N}$ followed by ordinary action. It is $q\\otimes n\\mapsto qn$ on length zero and zero above it, and is $\\mathcal S$-linear.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-sfb-ringed-dg-scalar-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Universal left-derived comparison and action counit of Tags 0FTF and 0FTR; elementary universal-property argument."
+   }
+  },
+  {
+   "text": "For $P=D$, identify every unshifted $V_n$ with $Q\\otimes_D M$ by multiplying the scalar $D$-factors. Every face becomes the identity, so $\\delta_n$ is the identity for positive even $n$ and zero for odd $n$. The augmentation onto length zero has a contraction on its positive-length kernel: take $h_n$ to be the identity into length $n+1$ for odd $n$ and zero for even $n$. Then $\\delta h+h\\delta=1$ there and the internal terms cancel by the alternating shift sign. It follows that $B(Q,D,M)\\to Q\\otimes_D M$ is a natural quasi-isomorphism of $\\mathcal C'$-modules. Ordinary balancing identifies the target with $(\\mathcal S\\otimes_D Q)\\otimes_{\\mathcal S}M$. The preceding derived-pair identification gives exactly the asserted derived extension over $\\mathcal S$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "def-pc-module-kflat-complex",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Agent unit-algebra contraction; K-flat computation of ordinary derived tensor."
+   }
+  },
+  {
+   "text": "For completeness, the underlying derived tensor needs no flat terms on $Q$. For the constant ring sheaf $D_X$, choose a flat-term K-flat resolution $T\\to Q_X$. Its cone is acyclic and K-flat (tensoring its cone with any acyclic complex gives the cone of a map between acyclic tensor complexes). The acyclic K-flat tensor lemma makes $T\\otimes_D M\\to Q_X\\otimes_D M$ a quasi-isomorphism for arbitrary unbounded $M$. The one-sided site tensor comparison identifies $T\\otimes_D M$ with $Q_X\\otimes_D^{\\mathbf L}M$, since $T\\simeq Q_X$. These maps retain the $\\mathcal S$-action on the last factor. If desired, take $T$ to be the constant realization of a flat-term K-flat $D$-module resolution of $Q$, so all comparisons visibly have this action. Thus the underlying bar value for $P=D$ is the asserted $Q\\otimes_D^{\\mathbf L}M$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "lem-trf-site-one-sided-tensor-normalization",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor); one-sided computation by acyclic K-flat tensor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-dg-scalar-adjunction",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-stalk-tensor-complex",
+  "def-pc-module-kflat-complex",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-sfb-sheaf-dg-hflat-computation",
+  "lem-pc-kflat-resolution",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-trf-site-one-sided-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Relative bar refinement, with resolution and adjunction inputs from Tags 0FSH, 0FSI, 0FTF and 0FTR. The displayed signs, length argument, contraction and comparison are written here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "two.sided.bar|bar.*derived.*tensor|dg.*tensor",
+   "results": "{\"t\": \"2026-10-24T03:09:58Z\", \"tool\": \"grep\", \"query\": \"two.sided.bar|bar.*derived.*tensor|dg.*tensor\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary extendRestrictScalarsAdj and CategoryTheory.Adjunction.derived require already-constructed derived functors; neither supplies a sheaf dg relative bar, its flatness hypotheses or its chain-level action counit. Read CategoryTheory/Functor/Derived/Adjunction.lean:11-30."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BarConstruction\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-24T03:09:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"BarConstruction\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary extendRestrictScalarsAdj and CategoryTheory.Adjunction.derived require already-constructed derived functors; neither supplies a sheaf dg relative bar, its flatness hypotheses or its chain-level action counit. Read CategoryTheory/Functor/Derived/Adjunction.lean:11-30."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension restriction adjunction for sheaf differential graded algebras using a relative flat bar complex",
+   "results": "{\"t\": \"2026-10-24T03:09:58Z\", \"tool\": \"leansearch\", \"query\": \"Derived extension restriction adjunction for sheaf differential graded algebras using a relative flat bar complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Adjunction.derived\", \"PresheafOfModules.sheafificationAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\"], \"digest\": \"27460133baa24355\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary extendRestrictScalarsAdj and CategoryTheory.Adjunction.derived require already-constructed derived functors; neither supplies a sheaf dg relative bar, its flatness hypotheses or its chain-level action counit. Read CategoryTheory/Functor/Derived/Adjunction.lean:11-30."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived induction along a map of differential graded algebras is left adjoint to restriction with counit given by module multiplication",
+   "results": "{\"t\": \"2026-10-24T03:09:59Z\", \"tool\": \"leanfinder\", \"query\": \"Derived induction along a map of differential graded algebras is left adjoint to restriction with counit given by module multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived_counit\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"ceb4ffe431400d66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary extendRestrictScalarsAdj and CategoryTheory.Adjunction.derived require already-constructed derived functors; neither supplies a sheaf dg relative bar, its flatness hypotheses or its chain-level action counit. Read CategoryTheory/Functor/Derived/Adjunction.lean:11-30."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two sided bar construction computes derived tensor over a differential graded algebra flat over a commutative base ring with an external sheaf module action",
+   "results": "{\"t\": \"2026-10-24T03:10:00Z\", \"tool\": \"leanfinder\", \"query\": \"Two sided bar construction computes derived tensor over a differential graded algebra flat over a commutative base ring with an external sheaf module action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.derivationTensorProduct\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"HomologicalComplex.ιTensorObj\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"KaehlerDifferential.moduleBaseChange'\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\"], \"digest\": \"1a0cba3443e09146\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary extendRestrictScalarsAdj and CategoryTheory.Adjunction.derived require already-constructed derived functors; neither supplies a sheaf dg relative bar, its flatness hypotheses or its chain-level action counit. Read CategoryTheory/Functor/Derived/Adjunction.lean:11-30."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "D relative two sided bar computes extension of scalars for sheaves of differential graded modules when both algebras are K flat",
+   "results": "{\"t\": \"2026-10-24T03:39:37Z\", \"tool\": \"leanfinder\", \"query\": \"D relative two sided bar computes extension of scalars for sheaves of differential graded modules when both algebras are K flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"KaehlerDifferential.moduleBaseChange'\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"KaehlerDifferential.moduleBaseChange\", \"PresheafOfModules.DifferentialsConstruction.derivation'\"], \"digest\": \"dbc5c586a24427a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary flat modules, tensor exactness or differentials, not the displayed sheaf dg bar model. The abstract derived adjunction requires derived functors as input."
+  },
+  {
+   "tool": "grep",
+   "query": "BarConstruction|two.sided.bar|relative.*bar",
+   "results": "{\"t\": \"2026-10-24T03:39:29Z\", \"tool\": \"grep\", \"query\": \"BarConstruction|two.sided.bar|relative.*bar\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary flat modules, tensor exactness or differentials, not the displayed sheaf dg bar model. The abstract derived adjunction requires derived functors as input."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BarConstruction\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-24T03:48:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"BarConstruction\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary flat modules, tensor exactness or differentials, not the displayed sheaf dg bar model. The abstract derived adjunction requires derived functors as input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two sided relative flat bar complex for derived extension of scalars of sheaf differential graded modules",
+   "results": "{\"t\": \"2026-10-24T03:48:59Z\", \"tool\": \"leansearch\", \"query\": \"Two sided relative flat bar complex for derived extension of scalars of sheaf differential graded modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.isBaseChange\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.Flat.iff_flat_tensorProduct\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"a2e9dae1b60690ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary flat modules, tensor exactness or differentials, not the displayed sheaf dg bar model. The abstract derived adjunction requires derived functors as input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-dg-coefficient-realization",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: Sheaf dg coefficient realizations and normalized arrows. Third paragraph: D-relative flat bar resolution retaining O_Y action; final paragraph: actual action counit, and E=D specialization.",
+   "via": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+  "worker": "stage1",
+  "summary": "Kept the full statement and all inherited searches. Reused the general ringed dg scalar adjunction; isolated only the homotopically-flat resolving computation. Proved the signed bar construction, unbounded quasi-isomorphism preservation by finite length filtration and exact filtered colimits, the S-linear augmented contraction before tensoring with a C-homotopically-flat resolution, universal comparison normalization and P=D contraction. No S-flatness or M-flatness was inserted.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), technical coefficient-realization prerequisite inherited via def-sfb-dg-coefficient-realization: the D-relative bar and its actual action counit. No sketch or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-stalk-criterion",
+    "why": "Generic stalk/tensor or exact-cohomology tool for the bar filtration and constant K-flat complexes; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-stalk-tensor-complex",
+    "why": "Generic stalk/tensor or exact-cohomology tool for the bar filtration and constant K-flat complexes; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic stalk/tensor or exact-cohomology tool for the bar filtration and constant K-flat complexes; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "Generic stalk/tensor or exact-cohomology tool for the bar filtration and constant K-flat complexes; it does not replace the unit direct-image argument."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Ordinary sheaf K-flat tensor computation, used only to identify the underlying object in the unit-algebra case; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "why": "Ordinary sheaf K-flat tensor computation, used only to identify the underlying object in the unit-algebra case; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-trf-site-one-sided-tensor-normalization",
+    "why": "Ordinary sheaf K-flat tensor computation, used only to identify the underlying object in the unit-algebra case; it does not replace the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-stalk-tensor-complex",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-trf-site-one-sided-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-ee9b68a8e",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-ee9b68a8e (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. Checked against Stacks sdga.tex: definition of good modules (l.2630-2668), Tag 0FSH lemma-resolve, Tag 0FSI lemma-acyclic-good (cone proof), 0FSC lemma-good-admissible-ses, and Tag 0FTF lemma-derived-tensor-product (proof via find-existence-computes). Shape: one commit; the item statement is byte-identical to live, where the item is still unsplit (no other group has split it); no repair note; no SGA citation. New node lem-sfb-sheaf-dg-hflat-computation: 'homotopically flat' is good condition (2) and 'graded flat' is condition (1); dropping the base-change condition (3) only enlarges the class. Existence of resolutions comes from 0FSH. Invertibility of eps_H holds by the cone argument: an acyclic homotopically flat module tensored with any module is acyclic (resolve the other factor), so F inverts quasi-isomorphisms in the class, and uniqueness of the universal pair gives eps_H iso. The 'Equivalently' clause holds in both directions. It is statement-only, self-contained, has 8 searches of 4 kinds, and does not duplicate the scalar-adjunction, abstract-kflat, semi-free or coef-flat-model nodes; it restates no clause of the item. Item steps: (1) the scalar adjunction applies on the open site with base S, left modules via opposite algebras. (2)-(3) d^2=0, the shifted-action signs and the homotopy H_n=(-1)^n(1⊗h) recomputed. (4) the stalk criterion gives K-flatness of the constant P_X, Q_X over D_X. (5) length filtration with long exact sequence and exact filtered colimits, valid for unbounded M. (6) length-0 check Dh_0 = 1 - iu recomputed; the contraction is only S-linear, correctly. (7) R⊗_C H ≅ B(Q,P,H) and u⊗H = alpha_H. (8) the universal property gives beta with eps∘beta = alpha, invertible on H and then on M; counit q⊗n -> qn. (9) P=D: delta_n alternates, odd-to-even contraction, C'-linear up to the correct sign. (10) flat-term K-flat resolution T, acyclic K-flat cone, acyclic-kflat tensor lemma and one-sided normalization identify the underlying object with Q⊗^L_D M. Edge cases: X empty, M=0, one point S=P=Q=D, and S=Z/p over D=Z with P=Z[x], Q=Z, which gives Tor = Z/p in degrees 0 and -1 as expected. The citer def-sfb-dg-coefficient-realization's hypotheses match. tool_uses accepted: generic sheaf K-flat and exactness tools used as black boxes. Inherited null blueprint.from.node is a base-chain matter. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafDgRelativeFlatBar",
+  "declaration": "CategoryTheory.SheafDg.RelativeFlatBar.relative_flat_bar_extension",
+  "declarations": [
+   "CategoryTheory.SheafDg.RelativeFlatBar.scalar",
+   "CategoryTheory.SheafDg.RelativeFlatBar.generator",
+   "CategoryTheory.SheafDg.RelativeFlatBar.mul",
+   "CategoryTheory.SheafDg.RelativeFlatBar.ScalarAlgebra",
+   "CategoryTheory.SheafDg.RelativeFlatBar.tail",
+   "CategoryTheory.SheafDg.RelativeFlatBar.term",
+   "CategoryTheory.SheafDg.RelativeFlatBar.tailMap",
+   "CategoryTheory.SheafDg.RelativeFlatBar.tailFace",
+   "CategoryTheory.SheafDg.RelativeFlatBar.face",
+   "CategoryTheory.SheafDg.RelativeFlatBar.tailDegeneracy",
+   "CategoryTheory.SheafDg.RelativeFlatBar.degeneracy",
+   "CategoryTheory.SheafDg.RelativeFlatBar.Model",
+   "CategoryTheory.SheafDg.RelativeFlatBar.Computation",
+   "CategoryTheory.SheafDg.RelativeFlatBar.constantRing",
+   "CategoryTheory.SheafDg.RelativeFlatBar.underlyingD",
+   "CategoryTheory.SheafDg.RelativeFlatBar.underlyingDLocalization",
+   "CategoryTheory.SheafDg.RelativeFlatBar.UnitComputation",
+   "CategoryTheory.SheafDg.RelativeFlatBar.relative_flat_bar_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafDgRelativeFlatBar.lean",
+  "statement": "theorem relative_flat_bar_extension (σ : constantRing X D ⟶ S) (P Q₀ : Mon (CochainComplex (ModuleCat.{u} D) ℤ)) (φ₀ : P ⟶ Q₀) (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} D) (.up ℤ)).kFlat P.X) (hQ : (HomologicalComplex.quasiIso (ModuleCat.{u} D) (.up ℤ)).kFlat Q₀.X) [HasDerivedCategory.{w} (ringedSiteModules.{u} (rings (constantRing X D)))] : ∃ (A B : Algebra S) (a : ScalarAlgebra σ P A) (b : ScalarAlgebra σ Q₀ B) (φ : A ⟶ B), (∀ (i : ℤ) (U : (Opens X)ᵒᵖ) (s : S.obj.obj U) (p : P.X.X i), (φ.hom.f i).val.app U ((a.term i).hom.val.app U (generator σ _ U s p)) = (b.term i).hom.val.app U (generator σ _ U s (φ₀.hom.f i p))) ∧ ∃ m : Model φ, Nonempty (Computation φ m) ∧ (Nonempty (P ≅ Mon.trivial (CochainComplex (ModuleCat.{u} D) ℤ)) → Nonempty (UnitComputation σ Q₀ φ m))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c9315fcc",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery of 2903c4cb7bbd (returned H2). The Lean module is byte-identical to the previously reviewed one, and the item JSON differs only in replacing stmt_dep lem-sfb-scalar-dual-evaluation-descent with the new definition node def-sfb-scalar-constant-realization. The new node is existing:true on scalarConstantRealization, scalarConstantRealizationMap and scalarConstantGenerator (ScalarDualEvaluationDescent.lean l.49-71). Its text matches their bodies: change of rings of the constant module sheaf, the induced map, and the generator from the two sheafification units. These are plain data, not theorem conclusions. All 8 stmt_deps exist and own the ingredients, there is no duplicate owner, and the source is Stacks 03CY/03EK. Mechanical finding on lem-weil-pbc-site-derived-tensor-descent: genuine dependency, PASS on that point. UnitComputation.underlyingIso uses siteDerivedTensorIndependentCoefficients, defined as (siteDerivedTensorExistsIndependentCoefficients J R).choose (l.461-472), an object the theorem constructs. Re-read the mathematics: ScalarAlgebra and the phi-equation are pinned on generators; Model fixes faces, degeneracies, the sheaf coproduct of V_n^(k+n), the (-1)^n internal sign plus alternating faces, the (-1)^(np) action, and the extensionπ/zero augmentation; Computation gives the universal DerivedExtension, its comparison as the augmentation, restriction as restrictScalars, and the counit as derivedActionCounit; UnitComputation identifies the P=D case with the existing D-derived tensor. Edge cases (empty X, M=0, D=0, non-flat S, unbounded M) are covered and no extra assumptions are made. Gates: one sorry in the main theorem, source/blueprint docstrings, verbatim lean.statement, Worker report and Second reading sections present. No file changed, so no compile; the worker's scompile and deliver2 --no-push passed."
+ }
+}

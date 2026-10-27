@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-normal-model-section-orientation",
+ "kind": "statement",
+ "title": "Integration normalization under a vector presentation of a section invariant",
+ "statement": "Fix the finite coefficient datum P and A=A_{E,n} of [def-pur-conventions], with arbitrary finite E/Q_l and n>=1. Let B be a separated finite-type k-scheme and q:N->B a smooth separated finite-type morphism of pure dimension d. Let F be a finite locally free O_B-module of rank d, with vector bundle pi:E->B and zero z [def-asd-vector-bundle-zero-section]. Let e:E~N be a scheme isomorphism satisfying q e=pi and e z=s for a map s:B->N. The Noetherian hypothesis on B in the Lean statement is a consequence of finite type over k. Let theta_q:omega_q~A_N(d)[2d] be the specified ordinary-etale presentation of the diagonal orientation [thm-pur-diagonal-dualizing-object, lem-pur-diagonal-dnc-chart-normalization]. Fix a normalized Tate pullback presentation t and a counit-normalized compact-support presentation M. Let gamma:A_E(d)[2d]~omega_pi be an isomorphism whose hom is the actual adjunction transpose of the canonical integration t_pi, preceded by the inverse canonical Tate pullback along pi [def-amb-vector-integration, thm-amb-vector-bundle-purity]. Let R_e:C(q,s)~C(pi,z) be the specified etale section restriction using M [def-pur-diagonal-dnc-chart-data]. Then\nT_s Ls*(theta_q) = T_z Lz*(gamma^-1) R_e\nas isomorphisms C(q,s)~A_B(d)[2d], with the derived coefficient-unit comparisons included as in chartSectionOrientation and chartSectionEtaleRestriction. The same fixed Tate transport t is used on both sides. This includes d=0 and empty B. No arbitrary orientation is assumed to be canonical.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4; vector-bundle orientation proof Step 3; zero-section restriction after etale locality"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-asd-vector-bundle-zero-section",
+  "thm-pur-diagonal-dualizing-object",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "def-amb-vector-integration",
+  "thm-amb-vector-bundle-purity",
+  "def-pur-diagonal-dnc-chart-data"
+ ],
+ "proof": [
+  {
+   "text": "Use each linear frame to identify the canonical integration with the ordered affine trace. Its adjunction transpose is the inverse normalized ordinary orientation by the affine counit formula. Vector-purity base change makes these equations agree on common refinements; remove the even shift and apply the degree-zero equality test to obtain the equation for the whole bundle.",
+   "uses": [
+    "def-amb-vector-integration",
+    "lem-pur-diagonal-dnc-chart-normalization",
+    "cor-pur-vector-bundle-purity",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4; vector-bundle orientation proof Step 3; zero-section restriction after etale locality"
+   }
+  },
+  {
+   "text": "Apply chartOrientation_etale_restriction to e and q. Invert this equation, pull back by z, and use q e=pi and e z=s. The coefficient-unit comparison and pullback compositors are precisely chartSectionEtaleRestriction. Coherence of the canonical Tate pullback identifies T_s with its two-step counterpart, yielding the displayed section equation. Rank zero uses the identity trace; the empty case uses the empty-cover equality test.",
+   "uses": [
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4; vector-bundle orientation proof Step 3; zero-section restriction after etale locality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-degree-zero-derived-map-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4; vector-bundle orientation proof Step 3; zero-section restriction after etale locality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of vector bundles preserving projection and zero section preserves the integration-transposed purity orientation",
+   "results": "Eight hits about manifold vector bundles and linear algebra orientations: Bundle.contMDiff_zeroSection (Mathlib.Geometry.Manifold.VectorBundle.Basic), Orientation.map (Mathlib.LinearAlgebra.Orientation), VectorBundleCore.localTriv (Mathlib.Topology.VectorBundle.Basic). None concerns derived etale integration or exceptional purity.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of vector bundles preserving projection and zero section preserves the integration-transposed purity orientation",
+   "results": "Eight topological vector-bundle coordinate-change hits, including VectorBundleCore.inCoordinates_eq and hom_trivializationAt; none states the derived etale integration or section comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalCone\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalModelSectionOrientation|vectorBundleDiagonalOrientation",
+   "results": "No Mathlib hits. Library search found chartNormal_vectorPurity_normalization only for affine diagonal charts, and vectorBundleDiagonalOrientation with an extra bottom-extension hypothesis, neither supplies this arbitrary finite coefficient section statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalOrientationChoiceIndependent",
+  "date": "2026-10-24",
+  "group": "S2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-diagonal-orientation-choice-independent",
+   "place": "Step 4; vector-bundle orientation proof Step 3; zero-section restriction after etale locality",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalModelSectionOrientation",
+  "file": "lean/Sheaf/Paper/NormalModelSectionOrientation.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.normalModelSectionOrientation",
+  "statement": "theorem normalModelSectionOrientation (P : PurityFiniteSetting.{u})\n    {B N : Scheme.{u}} [IsNoetherian B] (d : ℕ) (q : N ⟶ B)\n    [SmoothOfRelativeDimension d q] [IsSeparated q]\n    [LocallyOfFiniteType q] [QuasiCompact q]\n    (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aB]\n    [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (s : B ⟶ N) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (e : VectorBundleZeroSection.scheme B d F ≅ N)\n    (w : e.hom ≫ q = VectorBundleZeroSection.π B d F)\n    (hs : VectorBundleZeroSection.zero B d F ≫ e.hom = s)\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates)\n    (M : Etale.EtaleCompactSupportNormalization P.Coefficient) :\n    letI := P.noetherian aB\n    letI := P.noetherian (q ≫ aB)\n    letI := (Etale.vectorIntegration_geometry B d F).1\n    letI := (Etale.vectorIntegration_geometry B d F).2.1\n    letI := P.noetherian (VectorBundleZeroSection.π B d F ≫ aB)\n    letI := Dnc.compactifiable P q aB\n    letI := Dnc.compactifiable P (VectorBundleZeroSection.π B d F) aB\n    ∀ (γ : P.diagonalTwistEtale (VectorBundleZeroSection.scheme B d F) d ≅\n        P.diagonalOrdinaryDualizing (VectorBundleZeroSection.π B d F)),\n      γ.hom = (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient\n          P.diagonalExponent P.diagonalExponent_annihilates t\n          (VectorBundleZeroSection.π B d F) (P.diagonalExponent_isUnit aB) d).inv ≫\n        (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} P.Coefficient)\n          (VectorBundleZeroSection.π B d F)).homEquiv _ _\n            (Etale.vectorBundleIntegration P.diagonalExponent\n              (pow_pos P.coefficients.prime.out.pos P.level) P.Coefficient\n              P.diagonalExponent_annihilates B (P.diagonalExponent_isUnit aB) d F) →\n      P.chartSectionOrientation d q aB s t =\n        P.chartSectionEtaleRestriction M e.hom q\n            (VectorBundleZeroSection.π B d F) w s\n            (VectorBundleZeroSection.zero B d F) hs ≪≫\n          (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n            (VectorBundleZeroSection.zero B d F)).leftDerivedFunctor.mapIso\n              (P.chartDualizingUnit (VectorBundleZeroSection.π B d F) ≪≫ γ.symm) ≪≫\n          Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n            P.diagonalExponent_annihilates t (VectorBundleZeroSection.zero B d F)\n            (P.diagonalExponent_isUnit (VectorBundleZeroSection.π B d F ≫ aB)) d",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T191000-L-200798",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T191000-L-200798",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

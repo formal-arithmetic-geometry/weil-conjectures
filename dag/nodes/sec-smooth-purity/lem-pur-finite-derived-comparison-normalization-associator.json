@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-finite-derived-comparison-normalization-associator",
+ "kind": "statement",
+ "title": "Associativity component of normalized derived tensor coherence",
+ "statement": "theorem tensorComparison_coherence_associator {X Y : Site.{u, w}}\n    (f : RingedPullback.{u, u, u, u, u} Y.A X.A)\n    (k : CochainPullback.Comparison.{u, u, u, u, u} f)\n    (d : Pullback.{u, w} f) :\n    (∀ M N P : Y.D,\n      (tensorComparison f k d).hom.app (Y.closed.tensor.obj (M, N), P) ≫\n          X.closed.tensor.map (Prod.mkHom ((tensorComparison f k d).hom.app (M, N))\n            (𝟙 (d.F.obj P))) ≫\n          (X.closed.monoidal.associator (d.F.obj M) (d.F.obj N) (d.F.obj P)).hom =\n        d.F.map (Y.closed.monoidal.associator M N P).hom ≫\n          (tensorComparison f k d).hom.app (M, Y.closed.tensor.obj (N, P)) ≫\n          X.closed.tensor.map (Prod.mkHom (𝟙 (d.F.obj M))\n            ((tensorComparison f k d).hom.app (N, P))))",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0D6D and the balanced cochain comparison equations; split from the parent normalization theorem."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the already established normalized representative square of tensorComparison and the existing pullback computation on resolving complexes. The finite normalization proof obtains that square by fully faithful restriction and representative tensor descent. The comparison and its cochain counit retain their exact original definitions.",
+   "uses": [
+    "lem-weil-pbc-pullback-resolving-computation",
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport independent K-flatness with site-flat terms to the native flat-term K-flat predicate using resolving_native. This transports both hypotheses to normalized_cochain_tensor_diagrams; proof irrelevance identifies their flatness witnesses. Its cochainUnitComparison is definitionally the original unitMap.",
+   "uses": [
+    "lem-pur-finite-derived-tensor-model-bridge",
+    "lem-pur-normalized-cochain-tensor-diagrams"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project the associativity component of the resulting conjunction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-derived-tensor-model-bridge",
+  "lem-pur-normalized-cochain-tensor-diagrams",
+  "lem-weil-pbc-pullback-resolving-computation",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "G1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E, specializing the proved normalized cochain diagram theorem to the given finite normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associativity component of normalized derived tensor coherence normalized derived tensor comparison",
+   "results": "No direct specialized theorem found; the cited project comparison declarations are the applicable interfaces.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality tensor comparison monoidal",
+   "results": "Only generic naturality and monoidal coherence lemmas; no theorem for this normalized ringed-topos comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison_coherence tensorComparison_composition",
+   "results": "The parent module is the only declaration of these specialized components.",
+   "date": "2026-10-26",
+   "verdict": "No existing duplicate."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "date": "2026-10-26",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-derived-comparison-normalization",
+   "place": "Strict component extracted from the parent proof plan",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "declaration": "CategoryTheory.FiniteDerivedComparison.tensorComparison_coherence_associator",
+  "declarations": [
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison_coherence_associator"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteDerivedComparisonNormalization.lean",
+  "statement": "theorem tensorComparison_coherence_associator {X Y : Site.{u, w}}\n    (f : RingedPullback.{u, u, u, u, u} Y.A X.A)\n    (k : CochainPullback.Comparison.{u, u, u, u, u} f)\n    (d : Pullback.{u, w} f) :\n    (∀ M N P : Y.D,\n      (tensorComparison f k d).hom.app (Y.closed.tensor.obj (M, N), P) ≫\n          X.closed.tensor.map (Prod.mkHom ((tensorComparison f k d).hom.app (M, N))\n            (𝟙 (d.F.obj P))) ≫\n          (X.closed.monoidal.associator (d.F.obj M) (d.F.obj N) (d.F.obj P)).hom =\n        d.F.map (Y.closed.monoidal.associator M N P).hom ≫\n          (tensorComparison f k d).hom.app (M, Y.closed.tensor.obj (N, P)) ≫\n          X.closed.tensor.map (Prod.mkHom (𝟙 (d.F.obj M))\n            ((tensorComparison f k d).hom.app (N, P))))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T002546-L-97923",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T135344-L-4025431",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

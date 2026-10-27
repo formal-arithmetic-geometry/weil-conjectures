@@ -1,0 +1,396 @@
+{
+ "id": "lem-sfb-space-relative-differentials-finite-presentation",
+ "kind": "statement",
+ "title": "Relative differentials of a locally finitely presented space morphism have finite presentation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], locally of finite presentation on compatible etale scheme charts [def-sbc-locally-finite-presentation]. On the small etale ringed sites write $\\Omega_{X/Y}$ for the module representing derivations of $\\mathcal O_X$ vanishing on $f^{-1}\\mathcal O_Y$. On compatible etale scheme charts $U\\to X$, $V\\to Y$, with a morphism $U\\to V$ over $f$, its restriction to $U_{\\mathrm{et}}$ is the associated etale module of the usual relative differential sheaf $\\Omega_{U/V}$ [def-sc-relative-differential-sheaf, def-sc-etale-qcoherent-module]. Then $\\Omega_{X/Y}$ is quasi-coherent [def-trf-space-quasi-coherent-module] and of finite presentation: locally on $X_{\\mathrm{et}}$ there is an exact sequence $\\mathcal O_X^{\\oplus m}\\to\\mathcal O_X^{\\oplus n}\\to\\Omega_{X/Y}\\to0$ with $m,n$ finite. Modules and exact sequences are in [def-weil-sheaf-of-modules-category]. No Noetherian, separation, or quasi-compactness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 04CT (definition-sheaf-differentials), 04CU (lemma-localize-differentials), 04CV (lemma-module-differentials-quasi-coherent), 05ZF (lemma-finite-presentation-differentials)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-etale-qcoherent-module",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-sheaf-differentials"
+ ],
+ "proof": [
+  {
+   "text": "For the scheme-source charts $a,b$, [lem-trf-space-chartwise-etale-permanence] identifies representable etaleness with chartwise etaleness. Use [lem-trf-space-enlarged-etale-ringed-site-model] to present the canonical small etale ringed topoi on the enlarged etale sites: their structure rings restrict to the given structure rings, composition agrees, and an etale map is ringed localization. The representing module in the statement can be computed as the sheafification of sectionwise differentials by [lem-trf-sheafified-module-differentials-cokernel]. For any compatible square $U\\xrightarrow{g}V$, $a:U\\to X$, $b:V\\to Y$ with $a,b$ etale, apply [lem-trf-topos-inverse-image-differentials] to restriction along $a$. It identifies the restricted module with $\\Omega_{\\mathcal O_U/a^{-1}f^{-1}\\mathcal O_Y}$. The equality $fa=bg$ and the composition comparisons give $a^{-1}f^{-1}\\mathcal O_Y\\cong g^{-1}b^{-1}\\mathcal O_Y$. Since $b$ is etale, its structural ring map identifies $b^{-1}\\mathcal O_Y$ with $\\mathcal O_V$. Thus the restricted module is $\\Omega_{\\mathcal O_U/g^{-1}\\mathcal O_V}=\\Omega^{\\mathrm{et}}_{U/V}$, compatibly with universal derivations. Transport through the ringed equivalences returns precisely the restriction on the small scheme sites. The square need not be cartesian.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-trf-topos-inverse-image-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CU, lemma-localize-differentials; sites-modules.tex Tags 08TP, 08TQ, 04BO; spaces-properties.tex Tags 03G8, 03LP."
+   }
+  },
+  {
+   "text": "For schemes $U,V$, apply [lem-sfb-scheme-etale-relative-differentials-comparison] to $g:U\\to V$. Combined with Step 1 this gives $\\Omega_{X/Y}|_{U_{\\mathrm{et}}}\\cong(\\Omega^1_{U/V})_{\\mathrm{et}}$, with the universal derivations identified. This proves the asserted chart description, even without local finite presentation. Now choose compatible scheme-chart covers on which $g$ is locally of finite presentation, as in the hypothesis. It remains to prove finite presentation on each such $U_{\\mathrm{et}}$.",
+   "uses": [
+    "lem-sfb-scheme-etale-relative-differentials-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 04CS, lemma-match-modules-differentials; 04CU, lemma-localize-differentials; 05ZF, lemma-finite-presentation-differentials."
+   }
+  },
+  {
+   "text": "Fix such a chart morphism $g:U\\to V$. For every $u\\in U$, [def-sbc-locally-finite-presentation] gives affine neighbourhoods $W=\\operatorname{Spec}A\\subset U$, $T=\\operatorname{Spec}R\\subset V$, with $g(W)\\subset T$ and $A$ finitely presented over $R$. By [def-sc-relative-differential-sheaf], $F=\\Omega^1_{U/V}$ restricts on $W$ to $\\widetilde{\\Omega_{A/R}}$; these affine descriptions say exactly that $F$ is quasi-coherent in [pqf-def-coherent]. By [lem-sfb-ring-finite-presentation-differentials], $\\Omega_{A/R}$ is a finitely presented $A$-module. The canonical affine-section identification in [lem-sc-relative-differentials-affine-sections] identifies this module with $F(W)$. Apply clause (b) of [lem-weil-pbc-quasi-coherent-finite-type-affine] on $W$: $F|_W$ is of finite presentation. Every $u$ has such $W$, so the local definition of finite presentation in the same cited statement proves that $F$ is of finite presentation on $U$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-sc-relative-differential-sheaf",
+    "pqf-def-coherent",
+    "lem-sfb-ring-finite-presentation-differentials",
+    "lem-sc-relative-differentials-affine-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V3, lemma-finite-presentation-differentials; Tag 01UT, lemma-differentials-affine; algebra.tex Tag 00RY; properties.tex Tag 01PC."
+   }
+  },
+  {
+   "text": "Apply the finite-presentation clause of [lem-sfb-scheme-etale-module-exact-finiteness-comparison] to the quasi-coherent $F$ of Step 3. It gives local exact presentations by two finite-rank free structure modules for $F_{\\mathrm{et}}$ on $U_{\\mathrm{et}}$. By Step 2 these are presentations of $\\Omega_{X/Y}|_{U_{\\mathrm{et}}}$. The chosen chart covers cover $X_{\\mathrm{et}}$; compose their coverings with the local coverings supplying those presentations, using the covering-composition clause of [lem-trf-space-chartwise-etale-permanence]. On the resulting covering, restriction of the structure sheaf is the chart structure sheaf by Step 1, so the resulting sequences are exactly $\\mathcal O_X^{\\oplus m}\\to\\mathcal O_X^{\\oplus n}\\to\\Omega_{X/Y}\\to0$ on the localized sites. This is the stated local finite-presentation condition. These same finite presentations are local presentations with arbitrary small index sets, and therefore also prove quasi-coherence by [def-trf-space-quasi-coherent-module]. Neither a finite global atlas nor a uniform bound on $m,n$ is used.",
+   "uses": [
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZF, lemma-finite-presentation-differentials; descent.tex Tag 05VG, lemma-equivalence-quasi-coherent-properties; sites-modules.tex Tag 03DL, definition-site-local."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-sfb-scheme-etale-relative-differentials-comparison",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-relative-differential-sheaf",
+  "pqf-def-coherent",
+  "lem-sfb-ring-finite-presentation-differentials",
+  "lem-sc-relative-differentials-affine-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "def-trf-space-quasi-coherent-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 04CS, 04CU and 05ZF; the scheme argument is expanded from morphisms.tex Tag 01V3 using algebra.tex Tag 00RY and properties.tex Tag 01PC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "QuasiCoherent|FinitePresentation",
+   "sub": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T12:04:03Z\", \"tool\": \"grep\", \"query\": \"QuasiCoherent|FinitePresentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\"], \"digest\": \"d9e3d8c66f808811\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation|FinitePresentation",
+   "sub": "RingTheory/Kaehler",
+   "results": "{\"t\": \"2026-10-23T12:07:19Z\", \"tool\": \"grep\", \"query\": \"finitePresentation|FinitePresentation\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative differential sheaf of a morphism of algebraic spaces locally of finite presentation has finite presentation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:07:19Z\", \"tool\": \"leansearch\", \"query\": \"The relative differential sheaf of a morphism of algebraic spaces locally of finite presentation has finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"SheafOfModules.isFinitePresentation\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"13aa82ee10f5031c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.FinitePresentation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:07:19Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\"], \"digest\": \"069197c9f5262854\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative differentials of a locally finitely presented morphism of algebraic spaces are a finitely presented quasi coherent module",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:07:23Z\", \"tool\": \"leanfinder\", \"query\": \"Relative differentials of a locally finitely presented morphism of algebraic spaces are a finitely presented quasi coherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"KaehlerDifferential.ideal_fg\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\"], \"digest\": \"c40af03e8fe51f1d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "instFinitePresentationKaehlerDifferentialOfFinitePresentation",
+   "sub": "RingTheory/Extension",
+   "results": "{\"t\": \"2026-10-23T12:10:38Z\", \"tool\": \"grep\", \"query\": \"instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"sub\": \"RingTheory/Extension\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differentials on small etale sites of algebraic spaces are locally cokernels of maps of finite rank free modules for a morphism locally of finite presentation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:10:42Z\", \"tool\": \"leanfinder\", \"query\": \"Kahler differentials on small etale sites of algebraic spaces are locally cokernels of maps of finite rank free modules for a morphism locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.etaleLocus_eq_compl_support\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\"], \"digest\": \"56ca89d94ac02368\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "Module.FinitePresentation.*Ω|Module.FinitePresentation.*Kaehler",
+   "sub": "RingTheory/Extension/Cotangent",
+   "results": "{\"t\": \"2026-10-23T12:17:15Z\", \"tool\": \"grep\", \"query\": \"Module.FinitePresentation.*Ω|Module.FinitePresentation.*Kaehler\", \"sub\": \"RingTheory/Extension/Cotangent\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\"], \"digest\": \"3d9429ee1d6c767e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:17:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative differentials of a locally finitely presented algebraic space morphism are finitely presented quasi coherent sheaves",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:47:26Z\", \"tool\": \"leanfinder\", \"query\": \"Relative differentials of a locally finitely presented algebraic space morphism are finitely presented quasi coherent sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"a01e29dac527d8dd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "grep",
+   "query": "differential|Differential",
+   "sub": "AlgebraicGeometry/Modules",
+   "results": "{\"t\": \"2026-10-23T13:48:34Z\", \"tool\": \"grep\", \"query\": \"differential|Differential\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.FinitePresentation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:48:34Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\"], \"digest\": \"069197c9f5262854\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative differential sheaf algebraic spaces locally finite presentation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:49:36Z\", \"tool\": \"leansearch\", \"query\": \"Relative differential sheaf algebraic spaces locally finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"SheafOfModules.IsFinitePresentation.mk\", \"PresheafOfModules.HasDifferentials.mk\", \"SheafOfModules.IsFinitePresentation\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\"], \"digest\": \"16bb16837370ac9f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differential sheaf on small etale sites restricts to scheme differentials and locally has a finite presentation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:49:39Z\", \"tool\": \"leanfinder\", \"query\": \"Kahler differential sheaf on small etale sites restricts to scheme differentials and locally has a finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"KaehlerDifferential.finite\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"Algebra.Etale.finitePresentation\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.ideal_fg\"], \"digest\": \"51060c84ca73bad5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "grep",
+   "query": "Module.FinitePresentation.*Ω|instFinitePresentationKaehler",
+   "sub": "RingTheory/Extension/Cotangent",
+   "results": "{\"t\": \"2026-10-23T13:49:59Z\", \"tool\": \"grep\", \"query\": \"Module.FinitePresentation.*Ω|instFinitePresentationKaehler\", \"sub\": \"RingTheory/Extension/Cotangent\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\"], \"digest\": \"276fa85f89edd913\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite presentation algebra B over a commutative ring A the Kahler differential module Omega B over A is finitely presented over B",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:50:01Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite presentation algebra B over a commutative ring A the Kahler differential module Omega B over A is finitely presented over B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"KaehlerDifferential.finite\", \"KaehlerDifferential.ideal_fg\", \"Algebra.Presentation.differentialsSolution_isPresentation\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"Algebra.Presentation.differentials\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\"], \"digest\": \"67086305b0345c40\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "grep",
+   "query": "HasDifferentials|relativeDifferentials|localiz",
+   "sub": "Algebra/Category/ModuleCat/Differentials",
+   "results": "{\"t\": \"2026-10-23T13:50:29Z\", \"tool\": \"grep\", \"query\": \"HasDifferentials|relativeDifferentials|localiz\", \"sub\": \"Algebra/Category/ModuleCat/Differentials\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean\"], \"digest\": \"061950e0fe0cf71c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Differentials\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:50:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Differentials\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal'\", \"PresheafOfModulesOfCommRing.HasDifferentials\", \"PresheafOfModulesOfCommRing.HasDifferentials.exists_universal_derivation\", \"PresheafOfModulesOfCommRing.HasDifferentials.mk\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_obj\"], \"digest\": \"63f12b5b81707e02\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Kahler differentials of a morphism of ringed topoi commute with restriction to compatible etale charts of algebraic spaces without any finiteness assumption",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:50:33Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Kahler differentials of a morphism of ringed topoi commute with restriction to compatible etale charts of algebraic spaces without any finiteness assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"CommRingCat.KaehlerDifferential.map\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"], \"digest\": \"250097e1a54e6ca1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Kahler differentials commute with inverse image on the small etale site of a scheme",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:53:10Z\", \"tool\": \"leansearch\", \"query\": \"Relative Kahler differentials commute with inverse image on the small etale site of a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"CommRingCat.KaehlerDifferential.d\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"CommRingCat.KaehlerDifferential\", \"CommRingCat.KaehlerDifferential.map\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\"], \"digest\": \"76438693d3b522f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any morphism of schemes its differential module as a morphism of small etale ringed topoi is canonically the associated etale sheaf of the Zariski relative differential sheaf",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:53:14Z\", \"tool\": \"leanfinder\", \"query\": \"For any morphism of schemes its differential module as a morphism of small etale ringed topoi is canonically the associated etale sheaf of the Zariski relative differential sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"c730498028fdaa96\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the etale ringed site of a scheme the sheafification of sectionwise relative differentials agrees with the tensor pullback of the usual relative differential sheaf from the Zariski site",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:55:30Z\", \"tool\": \"leanfinder\", \"query\": \"On the etale ringed site of a scheme the sheafification of sectionwise relative differentials agrees with the tensor pullback of the usual relative differential sheaf from the Zariski site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\"], \"digest\": \"155ee63994288d22\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finitely presented commutative algebra the module of Kahler differentials is finitely presented",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T13:56:50Z\", \"tool\": \"leansearch\", \"query\": \"For a finitely presented commutative algebra the module of Kahler differentials is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.Presentation.differentials\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"KaehlerDifferential.finite\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"KaehlerDifferential.ideal_fg\", \"CommRingCat.KaehlerDifferential\", \"instFreeMvPolynomialKaehlerDifferential\"], \"digest\": \"3a29e11b354c9e3e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full algebraic-space statement: the ring finite-presentation instance is used as a separate Mathlib leaf; presheaf differentials do not supply the scheme/topos comparison or algebraic-space localization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+  "date": "2026-10-23",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness. Translation-module prerequisite: the sheaf of lifts and the simply transitive derivation action in Tags 061A, 061C, 061D, with quasi-coherence for locally finitely presented space morphisms. Supporting input: Tags 04CU, 05ZF, finite presentation of the relative differential sheaf on compatible etale charts.",
+   "via": [
+    "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+    "lem-sfb-smooth-space-affine-infinitesimal-lift",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-relative-differentials-finite-presentation",
+  "worker": "stage1",
+  "summary": "Q46: statement retained. Expanded Stacks 05ZF through the explicit 04CU ringed-localization calculation and 01V3 affine reduction. Reused the ringed-site model, inverse-image differentials, affine finiteness criterion and etale finiteness comparison. Added the unrestricted scheme differential comparison (04CS), statement only, and the exact Mathlib ring differential finite-presentation leaf (00RY). Searches, source checks, all citations and edge cases are in report.md and citations.json.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness. Translation-module prerequisite: the sheaf of lifts and the simply transitive derivation action in Tags 061A, 061C, 061D, with quasi-coherence for locally finitely presented space morphisms. Supporting input: Tags 04CU, 05ZF, finite presentation of the relative differential sheaf on compatible etale charts. The steps realize the indicated 04CU/05ZF prerequisite for the infinitesimal-lifting translation module. Current blueprint direct-image proof (3) was read; this is below that route, not a replacement for a unit step. Whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Canonical ringed etale localization and composition, needed to apply the general inverse-image theorem to chart restriction. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-trf-sheafified-module-differentials-cokernel",
+    "why": "Computes the representing sheaf by sectionwise differentials, allowing the precise input to the inverse-image theorem. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-trf-topos-inverse-image-differentials",
+    "why": "General inverse-image compatibility for differential sheaves; applied to localization, not replacing any unit-level geometric argument. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-sc-relative-differentials-affine-sections",
+    "why": "Identifies affine sections with the ring differential module in the affine finiteness criterion. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "General affine criterion for finite presentation of quasi-coherent module sheaves. No node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Its scheme-source equivalence permits applying chartwise ringed localization to the representable etale scheme charts; its covering-composition clause composes the final chart coverings. No node of this unit gives these general site facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-sc-relative-differentials-affine-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-ea4f16d8a",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-ea4f16d8a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the sources: Stacks 04CS/04CU/04CV/05ZF (spaces-more-morphisms.tex 861-1030) and 00RY (algebra.tex 34342). The item's statement and stmt_deps are identical to every earlier snapshot, so nothing is weakened; this is the first split, with no re-split note. Step 1 follows the 04CU proof through the ringed-site model (localization, composition), the sheafified-differentials node and topos inverse-image differentials; every clause used is in the cited statements, and the square need not be cartesian. Step 2 applies the new 04CS node, whose base ring g^{-1}O_V matches Step 1. Step 3: the affine lfp neighbourhood gives F|_W = Ω_{A/R}~; 00RY gives a finitely presented module; affine sections plus clause (b) of the quasi-coherent finite-type affine lemma give F of finite presentation, with all hypotheses met. Step 4: the Zariski/étale finite-presentation comparison (needs only quasi-coherence), then composition of coverings; quasi-coherence follows from the presentations. New nodes: the 00RY Mathlib leaf is exact (Cotangent/Basic.lean:537, namespace Algebra, hypotheses only Algebra.FinitePresentation); the 04CS comparison is unsplit, statement only, true with no hypotheses, and agrees with Stacks. Tested on the identity morphism, A^n over Z, polynomial algebras over non-Noetherian rings, and Z→F_p. Duplicate search found nothing that states either node; NL étale-localization (0D0W) and the trf differential nodes were compared and differ. Batch-5: the closure of the six flagged citations reaches 50 trf nodes (sk-i-curve-zero, plus one in sk-d-weil). All are generic foundations (algebraic spaces, ringed étale sites, differentials on sites, Zariski/étale quasi-coherent descent), with no trace, local-term, compact-support or duality content and no Poincaré-duality, trace-theorem or batch-4 target node. Accepted as outside the assumed statements. The off-unit trf tool uses declared in split_report are accepted, for L to record at merge. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeDifferentialsFinitePresentation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spaceRelativeDifferentials_finitePresentation",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceRelativeDifferentials",
+   "AlgebraicGeometry.AlgebraicSpace.differentialChartOver",
+   "AlgebraicGeometry.AlgebraicSpace.differentialChartArrow",
+   "AlgebraicGeometry.AlgebraicSpace.differentialChartInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.spaceRelativeDifferentials_finitePresentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeDifferentialsFinitePresentation.lean",
+  "statement": "theorem spaceRelativeDifferentials_finitePresentation (f : X ⟶ Y) (hfp : MapIsLocallyOfFinitePresentation f) : (∀ (U : X.EtaleSite) (V : Y.EtaleSite) (g : U.obj.left ⟶ V.obj.left), U.obj.hom ≫ f.hom.hom = yoneda.map g ≫ V.obj.hom → ∃ e : (differentialChartInclusion U).op ⋙ (spaceRelativeDifferentials f).val.presheaf ≅ (Scheme.Modules.etaleTensorSectionsSheaf g.left.relativeDifferentials).obj, ∀ (W : (X.etaleForget.obj U).Etale) (r : Γ(W.left, ⊤)) (m : (spaceRelativeDifferentials f).val.obj (op ((differentialChartInclusion U).obj W))), e.hom.app (op W) (r • m) = (((Scheme.Modules.tensorPullback W.hom).obj g.left.relativeDifferentials).smul r).hom (e.hom.app (op W) m)) ∧ (spaceRelativeDifferentials f).IsQuasicoherent ∧ (spaceRelativeDifferentials f).IsFinitePresentation",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The differential module is the existing sheafified differential construction applied to the canonical cotangentRingMap, transported through smallModuleEquivalence. The three chart helpers merely implement the actual scheme-etale chart inclusion. The chart conclusion is a natural isomorphism on the entire scheme-etale site with explicit scalar-linearity, hence an isomorphism of the indicated module sheaves. Three already-landed definition nodes are added to stmt_deps; no mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17ffdcf1b",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Read item, all 10 stmt_deps (identical to side-live), module, report (both sections real). Clauses match: MapIsLocallyOfFinitePresentation chart test (no cartesian/extra hyps); Omega = smallModuleEquivalence.inverse of SheafDifferentials.omega(cotangentRingMap f), real canonical data in universe u; chart clause = natural iso on all of U_et to etaleTensorSectionsSheaf(g.left.relativeDifferentials) plus Gamma(W)-linearity via Scheme.Modules.smul (module-sheaf iso); IsQuasicoherent and Mathlib IsFinitePresentation (local finite presentations, no uniform m,n). Helpers construct the actual chart inclusion (clause 8 of representable_etale_scheme_tests checked). Edge cases: empty, zero Omega, closed immersions, non-qc, non-cartesian squares; no universe restriction (QuasicoherentData index = site universe). lean.statement verbatim, decls complete, only lean+stmt_deps changed (3 genuine def-node owners added), no duplicate space Omega, docstrings with source/blueprint/proof steps, sorry-only. Advisories: cotangentRingMap owned by theorem lem-trf-space-enlarged-etale-ringed-site-model (proof_dep only; maintainer may add stmt_dep); representable-etale-tests proof term uncited; spaceRelativeDifferentials will need an existing:true def node for later citers. No files changed, no compile."
+ }
+}

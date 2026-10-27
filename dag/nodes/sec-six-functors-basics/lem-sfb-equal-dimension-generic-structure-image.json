@@ -1,0 +1,391 @@
+{
+ "id": "lem-sfb-equal-dimension-generic-structure-image",
+ "kind": "statement",
+ "title": "Generic structure-sheaf direct image in equal dimension",
+ "statement": "Let $k$ be a field [def-weil-field], let $X,Y$ be nonempty integral schemes of finite type over $k$ [def-pc-integral-scheme, def-weil-finite-type-morphism], and suppose $\\dim X=\\dim Y=g<\\infty$ [def-kun-topological-krull-dimension], with $g\\geq0$. Let $f:X\\to Y$ be a proper $k$-morphism [def-weil-proper-morphism] with dense image. Let $\\eta_X,\\eta_Y$ be the generic points [def-sc-generic-point]. Equip the function fields $k(X),k(Y)$ [def-sc-function-field] with the actual inclusion $f^*:k(Y)\\to k(X)$ of [def-sfb-dominant-function-field-map]. Then this field extension is finite. There exists a nonempty open subscheme $U\\subseteq Y$ [def-weil-open-immersion] such that $f^{-1}(U)\\to U$ is finite [def-weil-finite-integral-morphism] and $(R^if_*\\mathcal O_X)|_U=0$ for every $i>0$ [def-pc-derived-direct-image]. Moreover, the canonical germ map identifies $(f_*\\mathcal O_X)_{\\eta_Y}$ with $k(X)$ as a $k(Y)$-vector space, with scalar action through $f^*$ [def-pc-module-pullback, def-weil-pbc-module-stalk]. In particular its dimension over $k(Y)$ is $[k(X):f^*k(Y)]$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0A21, lemma-dimension-locally-algebraic, dimension and transcendence degree; literature/stacks-project/morphisms.tex, Tag 02NW, lemma-generically-finite, equivalence (1) and (4); literature/stacks-project/coherent.tex, Tag 01Y6, lemma-finite-pushforward-coherent, higher-image vanishing"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-sfb-dominant-function-field-map",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=k(Y)$ and $L=k(X)$, with the $K$-algebra structure on $L$ given by $f^*$. Dominance gives $f(\\eta_X)=\\eta_Y$ as in [def-sfb-dominant-function-field-map]. By [lem-sc-integral-function-field-affine-fraction] the generic local rings are fields, so their maximal ideals are zero and they equal their residue fields. Apply [lem-sc-closed-irreducible-dimension-trdeg] to the whole irreducible closed subsets $X\\subset X$ and $Y\\subset Y$: $\\operatorname{trdeg}_kL=\\operatorname{trdeg}_kK=g$. The tower identity and zero-degree criterion in [lem-kun-transcendence-degree-tower], for the tower induced by the $k$-morphism $f$, give $g=g+\\operatorname{trdeg}_KL$. Since $g$ is finite, $\\operatorname{trdeg}_KL=0$, hence $L/K$ is algebraic.",
+   "uses": [
+    "def-sfb-dominant-function-field-map",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic (6); fields.tex Tag 030H, lemma-transcendence-degree-tower"
+   }
+  },
+  {
+   "text": "Choose an affine open $V\\ni\\eta_Y$ and an affine open $W\\ni\\eta_X$ inside $f^{-1}V$. Properness includes local finite type [def-weil-proper-morphism]. With $A=\\mathcal O_Y(V)$, $B=\\mathcal O_X(W)$, [lem-weil-pbc-lft-affine-pairs] gives $B=A[b_1,\\ldots,b_r]$. By [lem-sc-integral-function-field-affine-fraction], the compatible generic germ maps identify $K$ and $L$ with the fraction fields of $A$ and $B$. Thus $L=K(b_1,\\ldots,b_r)$: the right side contains $B$ and its fractions, and every generator belongs to $L$. Step 1 makes each $b_i$ algebraic over $K$. Applying [lem-weil-pbc-algebraic-generators-finite-extension] proves $[L:K]<\\infty$, including $r=0$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GH, lemma-algebraic-finitely-generated; morphisms.tex Tag 01T2, lemma-locally-finite-type-characterize; Tag 01RV, lemma-integral-scheme-rational-functions"
+   }
+  },
+  {
+   "text": "By [lem-trf-finite-residue-point-closed-in-fibre], the finite extension at $\\eta_X\\mapsto\\eta_Y$ makes $\\eta_X$ closed in $X_{\\eta_Y}$. By [def-pc-scheme-fibre] its topology is the subspace topology on $f^{-1}(\\eta_Y)$. Every point of $X$ is a specialization of $\\eta_X$, since $\\overline{\\{\\eta_X\\}}=X$. Therefore every point of this fibre is a specialization of its closed point $\\eta_X$, and must equal $\\eta_X$. Hence $f^{-1}(\\eta_Y)=\\{\\eta_X\\}$.",
+   "uses": [
+    "lem-trf-finite-residue-point-closed-in-fibre",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TE, lemma-algebraic-residue-field-extension-closed-point-fibre; schemes.tex Tag 01K1, lemma-fibre-topological"
+   }
+  },
+  {
+   "text": "The field $k$ is Noetherian: its only ideals are $0$ and $k$, both finitely generated. Its spectrum is the one-point affine scheme, hence is Noetherian. By [lem-weil-pbc-finite-type-over-noetherian], both $X$ and $Y$ are Noetherian. The source $X$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], so $f$ is quasi-separated by clause (1) of [lem-weil-pbc-qcqs-morphism-permanence]. Properness includes finite type, which includes quasi-compactness and local finite type [def-weil-proper-morphism, def-weil-finite-type-morphism]. Now $Y$ has only one irreducible component and its generic fibre is a singleton by Step 3. All hypotheses of [lem-weil-pbc-generic-finite-morphism-open-neighborhood] hold. It supplies a dense open $U$ containing $\\eta_Y$ on which $f_U:f^{-1}U\\to U$ is finite. In particular $U$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tag 01OY; schemes.tex Tag 01KV; Tag 02NW, lemma-generically-finite (1) implies (4)"
+   }
+  },
+  {
+   "text": "A finite morphism is affine by [def-weil-finite-integral-morphism]. The structure sheaf on $f^{-1}U$ is quasi-coherent: on each affine $\\operatorname{Spec}B$ it is $\\widetilde B$, which is the condition in [pqf-def-coherent]. Therefore [lem-weil-pbc-affine-morphism-cohomology-edge] gives $R^if_{U,*}\\mathcal O_{f^{-1}U}=0$ for $i>0$. The open-restriction isomorphism [lem-pc-higher-direct-image-open-restriction] identifies this with $(R^if_*\\mathcal O_X)|_U$, giving the stated vanishing.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-higher-direct-image-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XC, lemma-relative-affine-vanishing; cohomology.tex Tag 01E5, lemma-localize-higher-direct-images"
+   }
+  },
+  {
+   "text": "For every open neighbourhood $W$ of $\\eta_X$, properness says $f(X\\setminus W)$ is closed [def-weil-proper-morphism], by taking the identity base change in universal closedness. Step 3 implies $\\eta_Y\\notin f(X\\setminus W)$. Thus $V_W=Y\\setminus f(X\\setminus W)$ is an open neighbourhood of $\\eta_Y$ and $f^{-1}V_W\\subseteq W$. These inverse images therefore refine every open neighbourhood of $\\eta_X$.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BET, lemma-intersection-number-and-pullback, generic stalk paragraph; elementary closed-map neighbourhood argument"
+   }
+  },
+  {
+   "text": "Write $C=(f_*\\mathcal O_X)_{\\eta_Y}$. Using the germ description in [def-weil-pbc-module-stalk], define $c:C\\to L$ by sending the germ of $s\\in\\mathcal O_X(f^{-1}V)$ to its germ at $\\eta_X$. This is well defined since $f(\\eta_X)=\\eta_Y$, and respects addition and multiplication by restriction of sections. For surjectivity, represent any element of $L$ on a neighbourhood $W$ of $\\eta_X$ and restrict it to $f^{-1}V_W$ from Step 6. For injectivity, a section whose germ at $\\eta_X$ is zero vanishes on some open $W\\subseteq f^{-1}V$ containing $\\eta_X$; its restriction to $f^{-1}(V\\cap V_W)$ is zero, so its germ in $C$ is zero. Hence the canonical germ map $c$ is a ring isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0078, section-stalks, germ equality; explicit application of Step 6"
+   }
+  },
+  {
+   "text": "The scalar structure on $C$ is induced by $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$ [def-pc-module-pullback]. If $a\\in K$ and $s\\in C$ are represented by sections over $V$ and $f^{-1}V$ after intersecting neighbourhoods, [def-weil-pbc-module-stalk] computes $a\\cdot s$ by their sectionwise product. Taking its germ at $\\eta_X$ gives $c(a\\cdot s)=f^*(a)c(s)$, because $f^*$ is exactly the generic stalk map [def-sfb-dominant-function-field-map]. Thus $c$ is $K$-linear with precisely the scalar action stipulated in the statement. The image of a $K$-basis under a linear isomorphism is a basis, so $\\dim_K C=\\dim_K L=[k(X):f^*k(Y)]$, finite by Step 2.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-module-stalk",
+    "def-sfb-dominant-function-field-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BET, lemma-intersection-number-and-pullback, generic multiplicity; sheaves.tex Tag 007J, lemma-stalk-module; scalar compatibility from the definitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-dominant-function-field-map",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-kun-transcendence-degree-tower",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-higher-direct-image-open-restriction",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BET generic-image paragraph, expanded using Tags 0A21, 030H, 09GH, 01TE, 02NW and 01XC; explicit closed-map argument for generic germs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.*(stalk|pushforward)|functionField.*(FiniteDimensional|finrank)|stalk.*functionField",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned definitions and pushforward adjunctions do not give the coherent Euler projection identity or the generic higher-direct-image calculation stated here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper dominant morphism equal dimension generic stalk higher direct images structure sheaf",
+   "results": "8 hits; AlgebraicGeometry.IsProper, AlgebraicGeometry.StructureSheaf.toStalk, AlgebraicGeometry.IsDominant, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.isDominant_iff, AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.IsDominant.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: returned definitions and pushforward adjunctions do not give the coherent Euler projection identity or the generic higher-direct-image calculation stated here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"functionField\", \"stalk\"",
+   "results": "2 hits; AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.stalkFunctionFieldAlgebra",
+   "date": "2026-10-23",
+   "verdict": "no match: returned definitions and pushforward adjunctions do not give the coherent Euler projection identity or the generic higher-direct-image calculation stated here"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(stalk|pushforward)|functionField.*(FiniteDimensional|finrank)|stalk.*functionField",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned definitions and pushforward adjunctions do not give the coherent Euler projection identity or the generic higher-direct-image calculation stated here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equal dimension dominant proper map of integral schemes is finite near the generic point with structure sheaf direct image generic rank equal to field degree",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.mk, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsProper",
+   "date": "2026-10-23",
+   "verdict": "no match: returned definitions and pushforward adjunctions do not give the coherent Euler projection identity or the generic higher-direct-image calculation stated here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"functionField\", \"stalk\"",
+   "results": "2 hits; AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.stalkFunctionFieldAlgebra",
+   "date": "2026-10-23",
+   "verdict": "no match: returned definitions and pushforward adjunctions do not give the coherent Euler projection identity or the generic higher-direct-image calculation stated here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a dominant proper morphism of equal dimensional integral varieties the direct image of the structure sheaf at the generic point is the finite function field extension and higher direct image stalks vanish",
+   "results": "8 hits; AlgebraicGeometry.stalkFunctionFieldAlgebra, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.functionField_isScalarTower, AlgebraicGeometry.Scheme.germToFunctionField",
+   "date": "2026-10-23",
+   "verdict": "no match: returned definitions and pushforward adjunctions do not give the coherent Euler projection identity or the generic higher-direct-image calculation stated here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generically finite proper map of integral varieties has generic direct image rank equal to its degree and no higher direct images on a dense open",
+   "results": "8 hits; AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsDominant, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant",
+   "date": "2026-10-23",
+   "verdict": "no match: returned definitions and pushforward adjunctions do not give the coherent Euler projection identity or the generic higher-direct-image calculation stated here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper dominant map of equal dimensional integral varieties is finite on a dense open and its direct image structure sheaf has generic stalk the function field",
+   "results": "8 hits; AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.IsDominant, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits give field/germ constructions, rational maps or properness, not all clauses of the item; finite_appTop_of_universallyClosed concerns global sections over a field, not this generic direct image calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.functionField, Module.Finite",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits give field/germ constructions, rational maps or properness, not all clauses of the item; finite_appTop_of_universallyClosed concerns global sections over a field, not this generic direct image calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*(finite|Finite)|stalk.*pushforward|generically.*finite",
+   "results": "8 hits; Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Spec.lean, Mathlib/AlgebraicGeometry/Spec.lean (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits give field/germ constructions, rational maps or properness, not all clauses of the item; finite_appTop_of_universallyClosed concerns global sections over a field, not this generic direct image calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic stalk of direct image of structure sheaf under proper generically finite dominant map is the source function field",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.StructureSheaf.toStalk, AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits give field/germ constructions, rational maps or properness, not all clauses of the item; finite_appTop_of_universallyClosed concerns global sections over a field, not this generic direct image calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The higher direct images of the structure sheaf vanish on an open where a morphism is finite and the generic stalk is the function field extension",
+   "results": "8 hits; AlgebraicGeometry.functionField_isScalarTower, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.stalkFunctionFieldAlgebra, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen, AlgebraicGeometry.Scheme.functionField",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits give field/germ constructions, rational maps or properness, not all clauses of the item; finite_appTop_of_universallyClosed concerns global sections over a field, not this generic direct image calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-top-intersection-pullback",
+  "date": "2026-10-23",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 10.11, printed p.47, and Proposition 10.13 with its proof, printed pp.47–48; degree convention before Theorem 10.9, printed p.46. Homogeneous means every nonzero monomial has total degree 2g; zero restrictions are allowed. Supporting input in Milne Proposition 10.13: Tag 0BET, lemma-intersection-number-and-pullback, with Z=X and all entries equal; zero-image-dimension clause; Tag 0BET proof, equal-dimensional generic-image paragraph and generic stalk multiplicity",
+   "via": [
+    "lem-sfb-top-intersection-pullback",
+    "lem-sfb-abelian-degree-polynomial",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equal-dimension-generic-structure-image",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave eight steps proving algebraicity by equal transcendence degree, finiteness by affine generators, singleton generic fibre, finite restriction, affine higher-image vanishing, and an explicit proper closed-map/germ calculation with the actual scalar map. Reused existing prerequisites only; no new nodes. Read all cited statements and checked dimension zero, inseparability and nonnormal schemes.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain leads through top-intersection pullback to Stacks 0BET. These steps realize its equal-dimensional generic-image paragraph and generic multiplicity calculation. Read the current latest blueprint proper-direct-image proof (3); this is a supporting algebraic-geometric tool, with no change of the unit route. blueprint_refs ancestor returns None, so the inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Function field of an integral scheme is the fraction field of an affine open. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Dimension of an irreducible closed subset from its generic residue field. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-kun-transcendence-degree-tower",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Transcendence degree in a tower of fields. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Locally of finite type is checked on all pairs of affine opens. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-generators-finite-extension",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Finitely many algebraic elements generate a finite extension. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-trf-finite-residue-point-closed-in-fibre",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Finite residue field points are closed in finite-type fibres. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated A locally Noetherian scheme is quasi-separated (Stacks 01OY). This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Finite generic fibers become a finite morphism near the generic points. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Cohomology along an affine morphism: the edge map is an isomorphism. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   },
+   {
+    "node": "lem-pc-higher-direct-image-open-restriction",
+    "why": "General scheme, field, or Zariski module-sheaf tool used for its stated Higher direct image open restriction. This supports the inherited Stacks 0BET argument; the constructible six-functor unit does not itself supply this algebraic-geometric prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-kun-transcendence-degree-tower",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-higher-direct-image-open-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-045e84999",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-045e84999 (reviewer sub-agent of L); spot-checked: I read all eight steps in full, together with every cited statement and the sources Stacks 0BET (varieties.tex:10477) and 01TE (morphisms.tex:3565). The item statement is unchanged from live (still unsplit there), there are no new nodes, and the item has no re-split note. Step 1: the generic stalks are fields, so the residue fields are K and L; applying 0A21(6) to X and Y and the 030H tower gives trdeg_K L = 0 because g is finite. Step 2: the lft affine-pairs node with W⊆f^{-1}V gives L = K(b_i), and 09GH makes the extension finite. Step 3: the 01TE trf node needs lft and a finite residue extension, both of which hold; with the subspace topology on the fibre, the generic fibre is {η_X}. Step 4: 01T6 makes X and Y Noetherian, 01OY plus qcqs-permanence (1) makes f quasi-separated, and finite type makes it quasi-compact; 02NW then gives a dense open U ∋ η_Y. Step 5: finite implies affine, so the affine-vanishing node applies. Its R^p is pqf-def-cohomology, which is built on def-pc-ringed-spaces-derived-direct-image and the bounded-below-injectives K-injective node, so it is the same notion as the item's R^p; open restriction then has no hypotheses. Steps 6-8 are elementary and correct: the closed map gives f^{-1}V_W ⊆ W, the germ map is bijective, and K-linearity comes from f^♯ and the stalk action. Small cases checked: g=0, the identity, a point blow-up, Frobenius on 𝔸¹, the normalization of a cusp. Batch-5 flag: lem-trf-finite-residue-point-closed-in-fibre is plain Stacks 01TE scheme theory. Its 12-node closure contains no other trace-formula or Poincaré node, so it is not part of either assumption, and the same flag was accepted before. The unit's own lem-sfb-scheme-algebraic-residue-closed-point needs {s} closed, so it does not apply here. No duplicate exists in the DAG. I accept the 12 general algebraic-geometry tool_uses. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EqualDimensionGenericStructureImage",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.equalDimension_generic_structure_image",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.dominantFunctionFieldModule",
+   "AlgebraicGeometry.Scheme.Hom.equalDimension_generic_structure_image"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EqualDimensionGenericStructureImage.lean",
+  "statement": "theorem Scheme.Hom.equalDimension_generic_structure_image {k : Type u} [Field k] {X Y : Scheme.{u}} [IsIntegral X] [IsIntegral Y] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] [IsDominant f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (g : ℕ) (hX : topologicalKrullDim X = (g : WithBot ℕ∞)) (hY : topologicalKrullDim Y = (g : WithBot ℕ∞)) : FiniteDimensional Y.functionField f.dominantFunctionFieldModule ∧ (∃ U : Y.Opens, Nonempty U ∧ IsFinite (f ∣_ U) ∧ ∀ i : ℤ, 0 < i → IsZero ((Scheme.Modules.restrictFunctor U.ι).obj ((schemeModuleHigherDirectImage f i).obj (Scheme.Modules.unit X)))) ∧ (∃ e : ((Scheme.Modules.pushforward f).obj (Scheme.Modules.unit X)).presheaf.stalk (genericPoint Y) ≃ₗ[Y.functionField] f.dominantFunctionFieldModule, ∀ (V : Y.Opens) (hηY : genericPoint Y ∈ V) (hηX : genericPoint X ∈ f ⁻¹ᵁ V) (s : Γ(X, f ⁻¹ᵁ V)), e (((Scheme.Modules.pushforward f).obj (Scheme.Modules.unit X)).presheaf.germ V (genericPoint Y) hηY s) = X.presheaf.germ (f ⁻¹ᵁ V) (genericPoint X) hηX s) ∧ Module.finrank Y.functionField (((Scheme.Modules.pushforward f).obj (Scheme.Modules.unit X)).presheaf.stalk (genericPoint Y)) = Module.finrank Y.functionField f.dominantFunctionFieldModule",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper bundles the already recorded dominantFunctionFieldAlgebra as a ModuleCat object, with its exact toModule action and real data. The existential linear equivalence is characterized on every section germ, fixing the canonical generic germ map. Positive higher images use the recorded schemeModuleHigherDirectImage in all positive integer degrees. HasDerivedCategory binders retain arbitrary localization universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-353d1d712",
+  "group": "NG",
+  "result": "fix",
+  "note": "Lean statement exact against node and Stacks 0BET generic-image paragraph: Field k; IsIntegral X,Y; LocallyOfFiniteType+QuasiCompact of the structure maps (dep record); g:ℕ with topologicalKrullDim=g (g=0 included); IsOver+IsProper+IsDominant; FiniteDimensional over f.dominantFunctionFieldModule (ModuleCat.of of the recorded dominantFunctionFieldAlgebra.toModule, real data); ∃ U nonempty, IsFinite (f∣_U), ∀ i>0 IsZero restrict U of schemeModuleHigherDirectImage f i (unit X), free HasDerivedCategory universes as in the dep; ∃ e ≃ₗ[k(Y)] pinned on every section germ to the X-generic germ (canonical; Mathlib stalk-module instance = colimit of sectionwise f♯ action); finrank equality. Statement field verbatim; 13 stmt_deps used; sorry only; docstrings OK; no name clash (finite_dominant_generic_pushforward_stalk assumes IsFinite, different lemma). Only fault H11: the Second reading is the worker's self-audit (dispatcher wording) → FIX fixes/lem-sfb-equal-dimension-generic-structure-image.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean changed, no compile."
+ }
+}

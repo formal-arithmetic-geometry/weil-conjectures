@@ -1,0 +1,140 @@
+{
+ "id": "lem-trf-scalar-identity-roos-augmentation",
+ "kind": "statement",
+ "title": "The strict scalar identity unit is the Roos lift of scalar insertion",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme X, with the coefficient constructions of [def-trf-integral-comparison-realization-models]. Let P be any ambient coefficient complex and C any strict quotient-system complex, with finite quotient identifications kappa_n. Suppose b maps the constant tower on P to the restricted tower C and has the section formula given by kappa_n inverse applied to 1 tensor x. Let q identify the restricted identity scalar extension of C with the specified scalar quotient tower on P, with the normalized tensor-generator formula of [def-trf-integral-comparison-realization-models]. Insert the scalar one using the inverse ordinary scalar unitor [def-trf-integral-comparison-sequence-systems], transpose b followed by this insertion through the ordinary constant/limit adjunction, and compose with the ordinary limit-to-Roos inclusion and Roos(q). The result equals the specified completedScalarIdentityUnit [lem-weil-finite-free-completed-scalar-comparison] as a chain map. This assertion has no derived realization model, adjunction calculus or completion comparison in its hypotheses or conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok and the preceding constant/limit adjunction discussion in section-derived-limits, combined with the identity scalar tensor calculation in Bhatt--Scholze, Definition 3.4.10; agent expansion of scalar-model-unit proof steps 2--3."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Multiplication of 1 tensor x is x by the ordinary scalar unitor normalization. Since multiplication is an isomorphism its inverse sends every x to 1 tensor x. The actual scalar-restriction functor preserves underlying sections and morphisms, with its specified cast identifications.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit formula for the ordinary adjunction shows that the nth component of the transpose is the nth component of b followed by scalar insertion. The section formulas for b and q therefore make the unshifted quotient components exactly 1 tensor x.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The limit-to-Roos inclusion has zero shifted component. Roos(q) acts diagonally on both product coordinates, so the composite also has zero shifted component. The defining coordinates of completedScalarIdentityUnit and product/biproduct extensionality identify the two chain maps.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site",
+  "def-trf-integral-comparison-realization-models",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; formal naturality and tensor-unit expansion of lem-trf-scalar-model-unit steps 2--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension along identity multiplication inverse inserts one tensor a section and commutes with the inverse limit cone",
+   "results": "Eight hits, including ModuleCat.extendScalarsId_inv_app_apply and ModuleCat.extendScalarsId_hom_app_one_tmul. These compute ordinary module tensor insertion and multiplication, but do not identify the specified sheaf scalar tower, its section transports, or its Roos cone.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift_fst",
+   "results": "Found CochainComplex.mappingCocone.lift_fst; this supplies the first coordinate formula only.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*(adjunction|transpose)|scalarIdentityRoosAugmentation",
+   "results": "No matching theorem.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ScalarModelUnit",
+  "date": "2026-10-27",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final common-stage transport sentence: normalized identity scalar unit in counit-realization-substitution step 11, scalar-model-unit steps 2--3.",
+   "via": [
+    "lem-trf-scalar-model-unit",
+    "lem-trf-counit-realization-substitution",
+    "lem-trf-integral-pullback-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ScalarIdentityRoosAugmentation",
+  "file": "lean/Sheaf/TraceFormula/ScalarIdentityRoosAugmentation.lean",
+  "declaration": "WeilConjectures.scalarIdentityRoosAugmentation",
+  "statement": "theorem scalarIdentityRoosAugmentation\n    (P : CochainComplex (scalarReductionSource l E X) ℤ)\n    (C : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (κ : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        (unrestrictedIntegralFiniteComplex l E X n).obj P)\n    (b : ((Functor.const ℕᵒᵖ : scalarReductionSource l E X ⥤\n        ℕᵒᵖ ⥤ scalarReductionSource l E X).mapHomologicalComplex (.up ℤ)).obj P ⟶\n      ((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj C)\n    (hb : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ) (x : (P.X i).val.obj U),\n      (((b.f i).app (op n)).val.app U) x =\n        integralComparisonRestrictedSection l E X (C.X i) n U\n          (integralComparisonSequenceSection l E X (C.X i) n U\n            (((κ n).inv.f i).val.app U\n              (unrestrictedIntegralTensorSection l E X n (P.X i) U 1 x))))\n    (q : (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj\n        (((integralComparisonSequenceScalarModel l E E\n          (AlgHom.id ℚ_[l] E) X).E.mapHomologicalComplex (.up ℤ)).obj C)).asFunctor ≅\n      (integralScalarTowerFunctor l E E (AlgHom.id ℚ_[l] E) X).obj P)\n    (hq : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)\n        (s : (coefficientSequenceCommRingSheaf l E X).obj.obj (op (n, U.unop)))\n        (x : (P.X i).val.obj U),\n      ((q.hom.app (op n)).f i).val.app U\n        (integralComparisonRestrictedSection l E X\n          ((integralComparisonSequenceScalarModel l E E (AlgHom.id ℚ_[l] E) X).E.obj\n            (C.X i)) n U\n          (integralComparisonSequenceTensorSection l E E (AlgHom.id ℚ_[l] E) X\n            (C.X i) (op (n, U.unop)) s\n            (integralComparisonSequenceSection l E X (C.X i) n U\n              (((κ n).inv.f i).val.app U\n                (unrestrictedIntegralTensorSection l E X n (P.X i) U 1 x))))) =\n        integralScalarTensorSection l E E (AlgHom.id ℚ_[l] E) X n (P.X i) U s x) :\n    ((constLimAdj (J := ℕᵒᵖ) (C := scalarReductionSource l E X)).mapHomologicalComplex\n        (.up ℤ)).homEquiv P _\n      (b ≫ ((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).map\n        ((NatIso.mapHomologicalComplex (integralComparisonSequenceScalarUnit l E X)\n          (.up ℤ)).inv.app C)) ≫\n      integralComparisonLimitToRoos l E X _ ≫\n      integralOperationsRoosFunctor.map q.hom =\n        (completedScalarIdentityUnit l E X).app P",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261027T123426-L-2295815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261027T123426-L-2295815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

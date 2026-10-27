@@ -29,87 +29,73 @@
  ],
  "proof": [
   {
-   "text": "Choose a complex representing $L$ and set $L_n=\\tau_{\\geq-n}L$ for $n\\in\\mathbf N$, with the canonical maps $t_n:L_{n+1}\\to L_n$. By [det-pe-left-complete-iso], applied with the sheaf of rings $\\mathcal R=\\Lambda_X$, the cone fibre of $1-T$ on $P=\\prod_nL_n$ is isomorphic to $L$, where the $n$th component of $T$ is $t_n\\circ\\mathrm{pr}_{n+1}$. Thus there is a distinguished triangle $L\\to P\\xrightarrow{1-T}P\\to L[1]$. The termwise products used here are products in the derived category by [det-pe-products-derived]; the triangle is the shifted and rotated cone triangle in [def-weil-abstract-derived-category]. No assertion that the product belongs to $\\Dic$ is needed.",
+   "text": "Use constructibleInd_extBound to extend the specified uniform Ext bound from constructible targets to each ind-constructible sheaf B. For q at most N=-d_C-1, put r=(-q).toNat. Then r>d_C and its integer cast is -q. Ext.homEquiv and singleFunctors.shiftIso identify the vanishing Ext group with Hom(C[0], singleFunctor(q) B). Zero sheaves have zero Hom as well.",
    "uses": [
-    "det-pe-left-complete-iso",
-    "det-pe-products-derived",
-    "def-weil-abstract-derived-category"
+    "lem-finite-window-ind-ext-bound",
+    "def-pc-ext",
+    "def-kun-truncations"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
-    "place": "Left completeness"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+    "place": "Left completeness, Milnor sequence, and Right term; existing generic source-library devissage"
    }
   },
   {
-   "text": "Apply the exactness of representable Hom on distinguished triangles [lem-weil-pbc-hom-into-triangle-exact], including its rotations, to the triangle of Step 1. The product universal property gives $\\Hom(C,P)=\\prod_n\\Hom(C,L_n)$. Since the shift is an equivalence it preserves this product as well: composing with the projections identifies $\\Hom(C,P[-1])$ with $\\prod_n\\Hom(C,L_n[-1])$. Put $G_n=\\Hom(C,L_n[-1])$. We obtain the exact segment\n$$\\prod_nG_n\\xrightarrow{1-t}\\prod_nG_n\\longrightarrow\\Hom(C,L)\\longrightarrow\\prod_n\\Hom(C,L_n).$$\nHere $(1-t)(x)_n=x_n-t_n[-1]\\circ x_{n+1}$: the formula follows by composing with the $n$th product projection. Thus it suffices to show that the last product is zero and $1-t$ on the first product is surjective; no separate theorem about $\\varprojlim^1$ is being assumed.",
+   "text": "Let P be the union of the ind-constructible sheaves with the zero objects. This property is invariant under isomorphisms and contains zero. The hypothesis on L gives its cohomology in P. The pro-etale repleteness theorem, in its existing abelian-sheaf variant epi_π_app_zero_of_epi_addCommGrpCat, transfers through Mod.epiπAppZeroOfEpi to the module category. CountableAB4Star.of_epi_π_app_zero supplies exact countable products, and Grothendieckness supplies K-injective resolutions.",
    "uses": [
-    "lem-weil-pbc-hom-into-triangle-exact"
+    "det-pe-replete-epimorphism",
+    "lem-sfb-grothendieck-k-injective",
+    "sk-def-sfb-module-objects"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
-    "place": "Milnor sequence"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+    "place": "Left completeness, Milnor sequence, and Right term; existing generic source-library devissage"
    }
   },
   {
-   "text": "The canonical truncation formulas [def-kun-truncations] give $H^q(L_n)=0$ for $q<-n$ and $H^q(L_n)=H^q(L)$ for $q\\geq-n$. Thus every cohomology sheaf of $L_n$ is either zero or a cohomology sheaf of $L$, and belongs to $\\IndCons$; hence $L_n\\in\\Dic$ by its definition. It is bounded with support in $[-n,-d_C-1]$ (the range may be empty). The bounded lower-tail theorem [det-finite-window-bounded], with the given uniform bound $d_C$, therefore gives $\\Hom(C,L_n)=0$ for every $n$. Consequently the last product in Step 2 is zero.",
+   "text": "Apply the abstract strict-tail devissage to all complexes in P supported in degrees at most N-1. It proves Hom(C[0],M)=0 for such M using bounded cohomological induction and the existing generic left-completeness/Milnor triangle. This is a direct invocation of the complete source-library proof, not a new unproved reduction.",
    "uses": [
-    "def-kun-truncations",
-    "det-finite-window-bounded"
+    "lem-finite-window-abstract-strict-tail"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
-    "place": "Right term"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+    "place": "Left completeness, Milnor sequence, and Right term; existing generic source-library devissage"
    }
   },
   {
-   "text": "For each $n\\geq0$, apply [lem-sf-derived-truncation-triangle] to $K=L_{n+1}$ with $b=-n$. This gives $\\tau_{\\leq-n-1}L_{n+1}\\to L_{n+1}\\to L_n\\to$. The truncation formulas [def-kun-truncations] identify its first term with $H^{-n-1}(L)[n+1]$: it is supported only in degree $-n-1$, where its term is $\\ker(d^{-n-1}:\\operatorname{coker}d^{-n-2}\\to L^{-n})=H^{-n-1}(L)$. The second truncation $\\tau_{\\geq-n}L_{n+1}$ is canonically $L_n$, with its canonical quotient map. Shift the triangle by $[-1]$ and use representable Hom exactness [lem-weil-pbc-hom-into-triangle-exact]. With $B_n=H^{-n-1}(L)$ this yields\n$$\\Hom(C,B_n[n])\\longrightarrow G_{n+1}\\longrightarrow G_n\\longrightarrow\\Hom(C,B_n[n+1]).$$\nHere $B_n\\in\\IndCons$ by the definition of $\\Dic$. If $n>d_C$, the bounded objects $B_n[n]$ and $B_n[n+1]$ belong to $\\Dic$ and are supported in degrees $-n$ and $-n-1$, respectively. Both degrees are at most $-d_C-1$, so [det-finite-window-bounded] gives zero for both outer groups. This is exactly the pair of Ext vanishings $\\Ext^n(C,B_n)=\\Ext^{n+1}(C,B_n)=0$ of the blueprint, obtained here as the single-cohomology special cases of the already cited bounded theorem. Exactness says that $G_{n+1}\\to G_n$ is both injective and surjective.",
+   "text": "Take the distinguished truncation triangle tau_lt(N)L -> L -> tau_ge(N)L. The first term has upper bound N-1, so step 3 kills its Hom. The last is supported in the single degree N because L has upper bound N; its cohomology is in P, and the single-degree case of the same source-library bounded devissage kills its Hom by step 1. Representable Hom exactness factors any map C[0] -> L through the first term and makes it zero. This proves Subsingleton for both coefficient choices without changing the endpoint or adding geometric assumptions.",
    "uses": [
     "lem-sf-derived-truncation-triangle",
-    "def-kun-truncations",
     "lem-weil-pbc-hom-into-triangle-exact",
-    "det-finite-window-bounded"
+    "def-sbc-standard-tstructure-derived-category",
+    "def-kun-truncations"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Remark 08J5 (remark-truncation-distinguished-triangle), third displayed triangle; Lemma 0149 (lemma-representable-homological); blueprint proof, Left term"
-   }
-  },
-  {
-   "text": "Write $u_n:G_{n+1}\\to G_n$ for the maps of Step 4 and choose the natural number $N=d_C+1$. For an arbitrary $y=(y_n)\\in\\prod_nG_n$, define $x_N=0$ and, recursively for $n\\geq N$, define $x_{n+1}=u_n^{-1}(x_n-y_n)$, which exists since $n>d_C$. For $n=N-1,N-2,\\ldots,0$, recursively define $x_n=y_n+u_n(x_{n+1})$. These formulas give $x_n-u_n(x_{n+1})=y_n$ at every index, proving surjectivity of $1-t$. This is a direct calculation in abelian groups, including all finitely many transition maps that need not be invertible.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
-    "place": "Vanishing of the derived-limit obstruction, explicit recursion"
-   }
-  },
-  {
-   "text": "In the exact segment of Step 2, the first arrow is surjective by Step 5 and the last term is zero by Step 3. For $f\\in\\Hom(C,L)$, exactness at $\\Hom(C,L)$ lifts $f$ to $g\\in\\prod_nG_n$; surjectivity writes $g=(1-t)x$, whose image is zero by exactness. Thus $f=0$, as required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
-    "place": "Final conclusion from the exact segment"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+    "place": "Left completeness, Milnor sequence, and Right term; existing generic source-library devissage"
    }
   }
  ],
  "proof_deps": [
-  "det-pe-left-complete-iso",
-  "det-pe-products-derived",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-finite-window-ind-ext-bound",
+  "def-pc-ext",
   "def-kun-truncations",
-  "det-finite-window-bounded",
-  "lem-sf-derived-truncation-triangle"
+  "det-pe-replete-epimorphism",
+  "lem-sfb-grothendieck-k-injective",
+  "sk-def-sfb-module-objects",
+  "lem-finite-window-abstract-strict-tail",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-sbc-standard-tstructure-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
-  "place": "Left completeness; Milnor sequence; Right term; Left term; Vanishing of the derived-limit obstruction"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+  "place": "Use existing generic bounded devissage and left completeness (CompactOfBoundedExt.eq_zero_of_isLE) on the strict tail, then attach the boundary cohomology layer by the standard truncation triangle. This retains bounded devissage and Postnikov convergence without reproving eventual-transition recursion."
  },
  "mathlib_searches": [
   {
@@ -216,7 +202,18 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-finite-window",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -239,5 +236,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The two declarations cover respectively Λ=E and Λ=Qlb. Uses the published finite constant-model constructibility notion and Mathlib ObjectProperty.ind for small ambient filtered colimits; no lower bound on L or geometric hypothesis on X is imposed. The added statement dependency records the existing constructibility predicate used."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261026T202412-L-3455988",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

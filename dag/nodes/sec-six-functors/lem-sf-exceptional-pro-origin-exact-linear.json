@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-exceptional-pro-origin-exact-linear",
+ "kind": "statement",
+ "title": "Exactness and scalar actions of pro-etale origin operations",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let O be a commutative ring and ell in O. Fix a compactification X --j--> Z --p--> Y, a strict etale compact-support package S and exceptional right adjunction G [def-sf-strict-etale-exceptional-adjoint-interfaces], actual site comparison packages CX,CY,CZ, and an actual pro-etale compact-support package P at their evaluations [def-pur-exceptional-system-transport-interfaces, def-coef-system-site-transport-interfaces]. Put F=P.derivedOpen followed by P.properDerived.system.direct, and H=CY.image.system.direct followed by G.right followed by CX.image.system.inverse. There exist additive structures and integer-shift comparison structures on F and H, and canonical coefficient scalar-action packages scalarX and scalarY, such that F and H with those structures are triangulated. For every r in O and every input, F and H carry the component of derived scalar multiplication by r to the corresponding scalar component on their output. The scalar-action packages include their ordinary levelwise scalar multiplication and localization equations; these are not arbitrary actions.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Proposition 2.29(2), Construction 5.15 and Lemma 5.22."
+ },
+ "stmt_deps": [
+  "def-pur-exceptional-system-transport-interfaces",
+  "def-coef-system-site-transport-interfaces",
+  "def-sf-strict-etale-exceptional-adjoint-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "extension by zero is additive and exact, so localization gives its\ncanonical additive and shift structures and preserves distinguished triangles.\nProper direct image is its universal K-injective right-derived functor and is\ntriangulated. The site inverse image is exact; the site direct image is a total\nright-derived functor. Compose these structures with the recorded triangulated\netale right adjoint. Multiplication by r is the ordinary natural endomorphism\nwhose component at level n is multiplication by the image of r in the quotient\nconstant ring sheaf. Its compatibility with transitions is scalar linearity.\nLocalize that natural transformation on complexes. On representatives each\ninverse image, open extension and proper direct image commutes with this scalar;\nthe universal localization or right-derived property extends the identities to\nall derived objects. The etale right adjoint has this property by its recorded\nlinearity, so the transported right composite has it as well.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-etale-coefficient-system-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Separated portion of system-transport steps 2–8: Exactness and scalar actions of pro-etale origin operations"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded below etale proetale site comparison on derived strict coefficient systems with fixed evaluation packages",
+   "results": "8 hits: Scheme.Etale.forget, smallEtalePretopology, etalePretopology, smallEtaleTopology, etaleTopology, instCategoryEtale, IsEtale.instHasOfPostcompPropertyScheme, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology. No strict-system comparison or transport theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing project comparison and mate interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": "12 hits: mateEquiv, mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, unit_mateEquiv_symm, mateEquiv_vcomp, mateEquiv_hcomp and iterated/conjugate mate identities.",
+   "date": "2026-10-25",
+   "verdict": "Generic mate identities only; no geometric system construction."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*comparison|adjunction.*evaluation|origin.*adjunction",
+   "results": "8 Mathlib hits: Adjunction.Evaluation, evaluationAdjunctionLeft/Right, and unrelated comparison references; no strict coefficient-system theorem.",
+   "date": "2026-10-25",
+   "verdict": "No equivalent result in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale proetale comparison on bounded below strict coefficient systems, transporting exceptional compact support adjunction and evaluation",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, Adjunction.derivedε and its congr_simp; SheafOfModules.PullbackConstruction.adjunction; CompHausLike.LocallyConstant.adjunction, adjunction_unit, counit_app_val; LightCondSet.LocallyConstant.adjunction. None states site-origin equivalence or exceptional strict-system transport.",
+   "date": "2026-10-25",
+   "verdict": "Existing generic derived-adjunction tools do not construct the needed geometric packages or evaluation mate words."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalSystemTransport",
+  "date": "2026-10-25",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-system-transport",
+   "place": "Exactness and scalar actions of pro-etale origin operations",
+   "via": [
+    "lem-sf-exceptional-system-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalProOriginExactLinear",
+  "file": "lean/Sheaf/Paper/ExceptionalProOriginExactLinear.lean",
+  "declaration": "AlgebraicGeometry.exceptionalProOriginExactLinear",
+  "statement": "theorem exceptionalProOriginExactLinear : ∃ (leftAdditive : (exceptionalProSupport P).Additive) (rightAdditive : (exceptionalSystemRight G CX CY).Additive) (leftShift : (exceptionalProSupport P).CommShift ℤ) (rightShift : (exceptionalSystemRight G CX CY).CommShift ℤ) (scalarX : ExceptionalProScalarAction X O ell) (scalarY : ExceptionalProScalarAction Y O ell), (@Functor.IsTriangulated _ _ _ _ _ _ (exceptionalProSupport P) leftShift _ _ _ _ _ _ _ _) ∧ (@Functor.IsTriangulated _ _ _ _ _ _ (exceptionalSystemRight G CX CY) rightShift _ _ _ _ _ _ _ _) ∧ (∀ r M, (exceptionalProSupport P).map ((scalarX.derived r).app M) = (scalarY.derived r).app ((exceptionalProSupport P).obj M)) ∧ (∀ r N, (exceptionalSystemRight G CX CY).map ((scalarY.derived r).app N) = (scalarX.derived r).app ((exceptionalSystemRight G CX CY).obj N))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfec7",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261025T013903-L-4030217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfec7",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261025T013903-L-4030217",
+  "kind": "interface",
+  "note": "independent cc review: item exceptionalSystemTransport (statement and kernel type hash unchanged vs published) with its 4 new sorry leaves + Interfaces relocation (49 moved decls: verbatim text; type-hash diffs only in Prop instance proofs); 6 delivered modules + 9 direct importers compiled clean in sandbox"
+ }
+}

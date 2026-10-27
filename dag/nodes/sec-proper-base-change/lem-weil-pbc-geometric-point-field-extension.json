@@ -112,5 +112,57 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.pointSmallEtalePrecomp",
+    "AlgebraicGeometry.Scheme.isIso_pointSmallEtalePrecomp_sheafFiber"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.pointSmallEtalePrecomp",
+     "module": "WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension",
+     "lines": [
+      24,
+      42
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.isIso_pointSmallEtalePrecomp_sheafFiber",
+     "module": "WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension",
+     "lines": [
+      44,
+      118
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $S$ be a scheme [def-pc-scheme], $k$ and $l$ separably closed fields [def-pc-separably-closed], $s:\\operatorname{Spec}k\\to S$ a morphism of schemes and $a:\\operatorname{Spec}l\\to\\operatorname{Spec}k$ any morphism of schemes. For an abelian sheaf $F$ on the small etale site of $S$, precomposition of pointed etale lifts by $a$ induces a canonical map $F_s\\to F_{s\\circ a}$ of geometric stalks [def-weil-pbc-geometric-stalks], natural in $F$. This map is an isomorphism. There is no algebraicity assumption on $l/k$.",
+  "proof": [
+   {
+    "text": "For an etale neighbourhood U, precomposition gives a natural map on pointed lifts. Its injectivity follows by cancellation of the faithfully flat, surjective field-spectrum map. For surjectivity base change U along s, lift the identity of Spec k through the underlying point of the given Spec l lift, using etale lifting over a separably closed field. This section of the etale projection is an open immersion. The Spec l lift factors through its open image, since it has the same unique underlying point. Composing the factorization with the projection proves that it is a, so the section gives the required pointed lift over k. Each component of the natural transformation is thus bijective; the associated isomorphism of points induces an isomorphism on sheaf fibres. This proof is written and checked in Lean from Mathlib and the source library.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

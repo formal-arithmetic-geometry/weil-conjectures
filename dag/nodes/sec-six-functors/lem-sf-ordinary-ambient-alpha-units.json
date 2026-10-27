@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-ordinary-ambient-alpha-units",
+ "kind": "statement",
+ "title": "Ordinary derived clopen alpha identity squares",
+ "statement": "For the ordinary calculus at every positive finite coefficient level, its alpha for a square with identity proper edges is the pullback-unit word, and its alpha for a square with identity open edges is the open-extension-unit word, exactly as in [def-sf-ambient-proper-open-calculus]. Explicitly alpha(j,id,id,j) followed by J(j) of the source pullback identity equals the target pullback identity on J(j); alpha(id,p,p,id) followed by the source open identity on P(p) equals P(p) of the target open identity. The scheme data are finite type over the fixed algebraic closure, j is quasi-compact open, p is proper, and neither identity square requires a Cartesian assumption.",
+ "stmt_deps": [
+  "def-sf-ambient-proper-open-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7."
+ },
+ "proof": [
+  {
+   "text": "Take the two ordinary identity-square words from the Identities clause of ambientUnderivedClopenPasting at coefficient level n. Express each word using exact functor edges, cells for the identity comparison and its inverse, whiskering and the two unitors. Apply exact_derived_transformation_pasting to obtain the same words with each identity comparison replaced by its exact localization followed by mapDerivedCategoryIdIso.",
+   "uses": [
+    "lem-sf-ambient-underived-clopen-pasting",
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7."
+   }
+  },
+  {
+   "text": "Identify exact localization of the canonical left-adjoint identity: its inverse is the adjunction unit followed by the right-adjoint identity. Exact-derived pasting of this word, together with localize_adjunction_unit, identifies it with the left-adjoint identity of the exact localized adjunction. Transport of the right adjoint identifies this with Calculus.jId; the published total/exact pullback comparison similarly identifies the localized pullback identity with leftDerivedUpperStarId. Use ordinary_alpha_localized to replace derivedAlpha by properOpenAlpha. Evaluate at an arbitrary derived object and cancel the intermediate comparison isomorphisms, using naturality in the horizontal case. This proves both equations without any Cartesian, boundedness, nonempty-scheme or nonzero-object assumption.",
+   "uses": [
+    "lem-sf-ambient-ordinary-clopen-localization",
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-underived-clopen-pasting",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-sf-ambient-ordinary-clopen-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7D; derived.tex Tag 015F; sites-cohomology.tex Tag 07A7. Explicit identity-word localization and adjunction-identity normalization, M8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization of an exact adjunction preserves the identity comparison of its left and right adjoints",
+   "results": "Adjunction.localization_unit_app, localization_counit_app and Adjunction.Localization.η_app/ε_app.",
+   "date": "2026-10-26",
+   "verdict": "Generic localized adjunction formulas, not this prescribed clopen identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointIdIso",
+   "results": "leftAdjointIdIso, its hom_app and inv_app, and conjugateEquiv_leftAdjointIdIso_hom.",
+   "date": "2026-10-26",
+   "verdict": "Generic identity-adjoint normalization supports the proof, but does not identify the clopen alpha."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointIdIso in Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; liftNatTrans_id in Mathlib/CategoryTheory/Localization/Predicate.lean",
+   "results": "CompositionIso.lean lines 44, 48, 97 and 110; Predicate.lean line 347.",
+   "date": "2026-10-26",
+   "verdict": "No geometric identity-square alpha theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OrdinaryAmbientProperOpenLaws",
+  "date": "2026-10-26",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ordinary-ambient-proper-open-laws",
+   "place": "Ordinary derived clopen alpha identity squares",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OrdinaryAmbientAlphaUnits",
+  "file": "lean/Sheaf/SixFunctors/OrdinaryAmbientAlphaUnits.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.ordinaryAmbientAlphaUnits",
+  "statement": "theorem ordinaryAmbientAlphaUnits (F : WeilConjectures.FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (hl : l ≠ F.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :\n    let c := (ordinary F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))\n    (∀ {U X : Spaces F} (j : U ⟶ X)\n      [IsOpenImmersion ((geometry F).map j)] [QuasiCompact ((geometry F).map j)]\n      (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : c.D U),\n      (c.alpha j (𝟙 U) (𝟙 X) j h).app M ≫\n          (c.J j).map ((c.pId U).hom.app M) =\n        (c.pId X).hom.app ((c.J j).obj M)) ∧\n    (∀ {U X : Spaces F} (p : U ⟶ X) [IsProper ((geometry F).map p)]\n      (h : (𝟙 U) ≫ p = p ≫ (𝟙 X)) (M : c.D X),\n      (c.alpha (𝟙 U) p p (𝟙 X) h).app M ≫\n          (c.jId U).hom.app ((c.P p).obj M) =\n        (c.P p).map ((c.jId X).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T201834-L-3417937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261026T235922-L-1468961",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "id": "lem-trf-compact-support-direct-image-ordinary-evaluation",
+ "kind": "statement",
+ "title": "Ordinary direct-image evaluation for compact support",
+ "statement": "theorem compactSupportDirectImageOrdinaryEvaluation\n    {Z Y : Scheme.{t}} (p : Z ⟶ Y) :\n    ∃ (ordinary : ∀ n : ℕ,\n        integralComparisonSequenceDirectImage l E p ⋙ coefficientSequenceEvaluation l E Y n ≅\n          coefficientSequenceEvaluation l E Z n ⋙ compactSupportLevelDirectImage l E p n),\n      ∀ (n : ℕ) (N : coefficientSequenceModules l E Z) (V : Y.ProEtᵒᵖ)\n        (x : ((integralComparisonSequenceDirectImage l E p ⋙\n          coefficientSequenceEvaluation l E Y n).obj N).val.obj V),\n        HEq (((ordinary n).hom.app N).val.app V x) x",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; decomposition of the parent proof into ordinary and derived components"
+ },
+ "stmt_deps": [
+  "def-trf-compact-support-system-evaluation-diagram"
+ ],
+ "proof": [
+  {
+   "text": "For each n use the canonical ring-identification maps a and b from evaluation of the sequence ring to the finite coefficient sheaves. At each pro-etale object their components are identities. The system direct-image ring map at (n,U) is definitionally the finite constant-section ring map at U, so the square of ring maps commutes. Apply Mathlib SheafOfModules.pushforwardComp on the two sides and SheafOfModules.pushforwardCongr to this equality to obtain the ordinary natural isomorphism.",
+   "uses": [
+    "def-trf-compact-support-system-evaluation-diagram"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every component of pushforwardComp and pushforwardCongr is the identity on underlying sections. Their composite therefore sends x to x, proving the required HEq normalization for all n, N, V and x.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-compact-support-system-evaluation-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; explicit ringed-site pushforward composition using Mathlib SheafOfModules.pushforwardComp and pushforwardCongr (R2, 2026-10-27)."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CompactSupportDirectImageEvaluation",
+  "date": "2026-10-27",
+  "group": "F9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-compact-support-direct-image-evaluation",
+   "place": "Strict component decomposition of the direct-image evaluation proof.",
+   "via": [
+    "lem-trf-compact-support-direct-image-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CompactSupportDirectImageOrdinaryEvaluation",
+  "file": "lean/Sheaf/TraceFormula/CompactSupportDirectImageOrdinaryEvaluation.lean",
+  "declaration": "WeilConjectures.compactSupportDirectImageOrdinaryEvaluation",
+  "statement": "theorem compactSupportDirectImageOrdinaryEvaluation\n    {Z Y : Scheme.{t}} (p : Z ⟶ Y) :\n    ∃ (ordinary : ∀ n : ℕ,\n        integralComparisonSequenceDirectImage l E p ⋙ coefficientSequenceEvaluation l E Y n ≅\n          coefficientSequenceEvaluation l E Z n ⋙ compactSupportLevelDirectImage l E p n),\n      ∀ (n : ℕ) (N : coefficientSequenceModules l E Z)\n              (V : Y.ProEtᵒᵖ)\n              (x : ((integralComparisonSequenceDirectImage l E p ⋙\n                coefficientSequenceEvaluation l E Y n).obj N).val.obj V),\n              HEq (((ordinary n).hom.app N).val.app V x) x",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T050557-L-239550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T084446-L-3683092",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

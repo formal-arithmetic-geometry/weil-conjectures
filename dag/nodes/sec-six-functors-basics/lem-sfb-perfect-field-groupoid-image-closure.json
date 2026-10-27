@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-perfect-field-groupoid-image-closure",
+ "kind": "statement",
+ "title": "Reduced image closures are groupoids over perfect fields",
+ "statement": "Let $k$ be a field [def-weil-field], let $V=\\operatorname{Spec}k$ [def-weil-affine-spectrum], and let $(V,R_1,s_1,t_1,e_1,i_1,c_1)$ and $(V,R_2,s_2,t_2,e_2,i_2,c_2)$ be absolute groupoid schemes [def-a1-groupoid-scheme]. Let $a:R_1\\to R_2$ be a morphism which, together with $\\mathrm{id}_V$, commutes with all groupoid operations. Assume $k$ is perfect, meaning that in positive characteristic $p$ the map $x\\mapsto x^p$ is surjective (every characteristic-zero field is perfect). There is a reduced closed subscheme $j:Z\\hookrightarrow R_2$ [def-pc-reduced-scheme], [def-weil-closed-immersion] whose underlying subset is $\\overline{a(|R_1|)}$. Here the reduced induced structure means that on an affine open $\\operatorname{Spec}A\\subseteq R_2$ its ideal consists of the functions vanishing at every point of that closed subset. The source and target of $R_2$ restricted to $Z$, together with restrictions of the unit, inverse and composition, make $(V,Z)$ a groupoid scheme, and $(\\mathrm{id}_V,j)$ commutes with all groupoid operations. This assertion includes $a=\\mathrm{id}_{R_2}$: the reduction $(R_2)_{\\mathrm{red}}\\hookrightarrow R_2$ [def-weil-pbc-scheme-reduction] inherits these groupoid operations. No finite-type, separatedness or quasi-compactness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04Q8 (lemma-map-groupoids-on-perfect-field-image), statement and proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-a1-groupoid-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=\\overline{a(|R_1|)}\\subseteq|R_2|$. Apply [lem-weil-pbc-reduced-induced-closed-subscheme] to $X=R_2$ and $T=C$. It gives the reduced closed subscheme $j:Z\\hookrightarrow R_2$, its stated affine vanishing ideal, and uniqueness over $R_2$. Set $s=s_2j$ and $t=t_2j$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 and 01J4 (lemma-reduced-closed-subscheme and definition-reduced-induced-scheme); 04Q8 setup"
+   }
+  },
+  {
+   "text": "We will use cancellation of $j$. By the affine description in [def-weil-closed-immersion], $j$ is locally $\\operatorname{Spec}(D/I)\\to\\operatorname{Spec}D$. If $ju=jv$ for two morphisms $u,v:H\\to Z$, their underlying maps agree since $j$ is injective. On inverse images of these affine charts their maps on structure sheaves agree, since a map out of $D/I$ is determined by its composite with the surjection $D\\to D/I$. Hence $u=v$. Thus $Z(H)\\to R_2(H)$ is injective for every test scheme $H$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q8 (lemma-map-groupoids-on-perfect-field-image), final sentence: explicit cancellation for the closed inclusion"
+   }
+  },
+  {
+   "text": "The unit satisfies $e_2=ae_1$, so its set-theoretic image lies in $C$. The field spectrum $V$ is reduced: a nilpotent field element is zero. The inverse $i_2$ is an involution and hence a homeomorphism, by the groupoid axioms [def-a1-groupoid-scheme]. Since $i_2a=ai_1$ and $i_1$ is also an involution, $i_2(a(|R_1|))=a(|R_1|)$, and consequently $i_2(C)=C$. Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to $e_2:V\\to R_2$ and to $i_2j:Z\\to R_2$. This gives $e:V\\to Z$ and $i:Z\\to Z$ with $je=e_2$ and $ji=i_2j$, uniquely by step 2.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q8, unit and inverse restrictions; Tag 0356 (lemma-map-into-reduction) for the scheme factorizations"
+   }
+  },
+  {
+   "text": "Let $P=Z\\times_{s,V,t}Z$. For any affine opens $U=\\operatorname{Spec}D$ and $W=\\operatorname{Spec}E$ of $Z$, their product over $V$ is $\\operatorname{Spec}(D\\otimes_k E)$ by [lem-weil-pbc-fibre-product-affine-spectra], where the $k$-algebra structure on $D$ comes from $s$ and that on $E$ from $t$. Both rings are reduced by [def-pc-reduced-scheme]. Since $k$ is perfect, [lem-weil-pbc-perfect-reduced-tensor] makes $D\\otimes_kE$ reduced. By [lem-weil-pbc-open-fibre-product], applied with the whole base $V$ as its base open and $U,W$ as the opens of the two factors, each $U\\times_VW$ is the open subscheme $\\operatorname{pr}_1^{-1}(U)\\cap\\operatorname{pr}_2^{-1}(W)$ of $P$, so these affine products, over all pairs of affine opens of $Z$, cover $P$. Reducedness is local on open covers (a local ring of $P$ is a localization of a reduced ring $D\\otimes_kE$), so $P$ is reduced. This uses no equality between $s$ and $t$, and no finite-type hypothesis.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-perfect-reduced-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q8, first proof paragraph, reducedness of the composable-pair scheme; Algebra Tag 00I4 (lemma-perfect-reduced)"
+   }
+  },
+  {
+   "text": "Put $T=R_2\\times_{s_2,V,t_2}R_2$, $D_1=R_1\\times_{s_1,V,t_1}R_1$, $b=a\\times_Va:D_1\\to T$, and $q=j\\times_Vj:P\\to T$, using [def-pc-fibre-product]. Apply [lem-sfb-scheme-product-image-closure] with $f=a$ considered over $V$ via $s_1,s_2$, and $g=a$ considered over $V$ via $t_1,t_2$. The two reduced image closures are both $Z$ by step 1, so $\\overline{b(|D_1|)}=q(|P|)$. The closed subset $c_2^{-1}(C)$ of $|T|$ contains $b(|D_1|)$, because $c_2b=ac_1$. It therefore contains its closure $q(|P|)$. Thus $(c_2q)(|P|)\\subseteq C$. Since $P$ is reduced by step 4, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] gives a morphism $c:P\\to Z$ satisfying $jc=c_2q$, uniquely by step 2.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-scheme-product-image-closure",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q7 (lemma-map-groupoids-on-field-image), full composition argument via Varieties Tag 04Q0; Tag 04Q8 and Schemes Tag 0356 to factor the composition"
+   }
+  },
+  {
+   "text": "For every test scheme $H$, steps 3 and 5 give operations on $V(H),Z(H)$ whose images under the identity on objects and the injection $Z(H)\\hookrightarrow R_2(H)$ are exactly the ambient operations. Source and target compatibility, both unit laws, both inverse laws and associativity therefore hold: compose each proposed equality of arrows with $j$, use that equality in $R_2(H)$, and cancel the injection from step 2. All maps are scheme morphisms and hence natural in $H$. This is precisely the absolute groupoid definition [def-a1-groupoid-scheme], and its construction makes $(\\mathrm{id}_V,j)$ commute with every operation.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q8, final sentence, with the groupoid axioms verified by cancellation on all test schemes"
+   }
+  },
+  {
+   "text": "For $a=\\mathrm{id}_{R_2}$ we have $C=|R_2|$. By [def-weil-pbc-scheme-reduction], $(R_2)_{\\mathrm{red}}\\to R_2$ is the reduced closed subscheme with this support. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies it over $R_2$ with the $j$ of step 1, giving the asserted reduction groupoid. Every argument above used only the perfect-field condition, the groupoid equations and the stated general scheme lemmas, so the absence of finiteness or separatedness hypotheses is preserved.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q8 applied to the identity morphism, as used in the second proof paragraph of Tag 04Q9 (lemma-locally-closed-image-is-closed)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "def-a1-groupoid-scheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "def-pc-fibre-product",
+  "lem-sfb-scheme-product-image-closure",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04Q8 (lemma-map-groupoids-on-perfect-field-image), with its Tag 04Q7 product-image argument expanded and the restrictions justified by 0356; no SGA source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a perfect field the reduced closure of the image of a morphism of groupoid schemes is a subgroupoid scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Subgroupoid.ker\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Groupoid C] →\\n    {D : Type u_1} → [inst_1 : CategoryTheory.Groupoid D] → CategoryTheory.Functor C D → CategoryTheory.Subgroupoid C\", \"doc\": \"Given a functor $\\\\phi : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between groupoids, the kernel subgroupoid of $\\\\phi$ is the subgroupoid of $\\\\mathcal{C}$ consisting of all morphisms $f$ such that $\\\\phi(f)$ is an i\"}\n  {\"name\": \"CategoryTheory.Subgroupoid\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"(C : Type u) → [CategoryTheory.Groupoid C] → Type (max u u_1)\", \"doc\": \"A subgroupoid of a groupoid $\\\\mathcal{C}$ is a subcategory of $\\\\mathcal{C}$ that is itself a groupoid, i.e., a collection of objects and morphisms in $\\\\mathcal{C}$ closed under composition, inverses, \"}\n  {\"name\": \"CategoryTheory.Subgroupoid.IsNormal\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Groupoid C] → CategoryTheory.Subgroupoid C → Prop\", \"doc\": \"A subgroupoid $S$ of a groupoid $\\\\mathcal{C}$ is normal if for every morphism $f \\\\in S$ and every morphism $g \\\\in \\\\mathcal{C}$ with $\\\\mathrm{src}(g) = \\\\mathrm{tgt}(f)$, the conjugate $g \\\\circ f \\\\circ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) [AlgebraicGeometry.IsReduced X], AlgebraicGeometry.IsReduced ↑U\", \"doc\": \"Every open subset of a reduced scheme is itself a reduced scheme. This follows because the local rings of the open subscheme are restrictions of the local rings of the ambient scheme, which by definit\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.disconnect_le\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] (S : CategoryTheory.Subgroupoid C), S.disconnect ≤ S\", \"doc\": \"For any subgroupoid $\\\\mathcal{S}$ of a groupoid $\\\\mathcal{C}$, the disconnected subgroupoid $\\\\mathcal{S}^{\\\\text{disc}}$ consisting of identity morphisms in $\\\\mathcal{S}$ satisfies $\\\\mathcal{S}^{\\\\text{\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.disconnect\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Groupoid C] → CategoryTheory.Subgroupoid C → CategoryTheory.Subgroupoid C\", \"doc\": \"The subgroupoid consisting of identity morphisms on objects of $\\\\mathcal{C}$ that belong to the subgroupoid $\\\\mathcal{S}$, constructed by restricting $\\\\mathcal{S}$ to morphisms where source and target\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.IsWide\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Groupoid C] → CategoryTheory.Subgroupoid C → Prop\", \"doc\": \"A subgroupoid $\\\\mathcal{D}$ of a groupoid $\\\\mathcal{C}$ is wide if it contains all objects of $\\\\mathcal{C}$.\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.coe\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Groupoid C] → (S : CategoryTheory.Subgroupoid C) → CategoryTheory.Groupoid ↑S.objs\", \"doc\": \"For any subgroupoid $\\\\mathcal{S}$ of a groupoid $\\\\mathcal{C}$, the set of objects $\\\\mathcal{S}.\\text{objs}$ (those objects in $\\\\mathcal{C}$ with non-empty isotropy in $\\\\mathcal{S}$) forms a groupoid un\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closure of a subgroupoid on a perfect field spectrum inherits scheme groupoid operations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.coe\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Groupoid C] → (S : CategoryTheory.Subgroupoid C) → CategoryTheory.Groupoid ↑S.objs\", \"doc\": \"For any subgroupoid $\\\\mathcal{S}$ of a groupoid $\\\\mathcal{C}$, the set of objects $\\\\mathcal{S}.\\text{objs}$ (those objects in $\\\\mathcal{C}$ with non-empty isotropy in $\\\\mathcal{S}$) forms a groupoid un\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The type of affine open subsets of a scheme $ X $, forming a site under the Zariski topology.\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.vertexSubgroup\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Groupoid C] → (S : CategoryTheory.Subgroupoid C) → {c : C} → c ∈ S.objs → Subgroup (c ⟶ c)\", \"doc\": \"For an object $ c $ in the subgroupoid $ \\\\mathcal{S} $, the set of endomorphisms $ \\\\text{Hom}_{\\\\mathcal{S}}(c, c) $ forms a subgroup under composition. This subgroup consists of all morphisms from $ c\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.disconnect\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Groupoid C] → CategoryTheory.Subgroupoid C → CategoryTheory.Subgroupoid C\", \"doc\": \"The subgroupoid consisting of identity morphisms on objects of $\\\\mathcal{C}$ that belong to the subgroupoid $\\\\mathcal{S}$, constructed by restricting $\\\\mathcal{S}$ to morphisms where source and target\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"CategoryTheory.Subgroupoid\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"(C : Type u) → [CategoryTheory.Groupoid C] → Type (max u u_1)\", \"doc\": \"A subgroupoid of a groupoid $\\\\mathcal{C}$ is a subcategory of $\\\\mathcal{C}$ that is itself a groupoid, i.e., a collection of objects and morphisms in $\\\\mathcal{C}$ closed under composition, inverses, \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"closure\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*closure|closure.*groupoid|groupoid.*reduc|reduc.*groupoid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced image closure of a field groupoid morphism is a groupoid over a perfect field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Subgroupoid.comap\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \"(S : Subgroupoid D) : Subgroupoid C\", \"doc\": \"Given a functor $\\\\phi : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between groupoids and a subgroupoid $\\\\mathcal{S} \\\\subseteq \\\\mathcal{D}$, this constructs the subgroupoid of $\\\\mathcal{C}$ consisting of all morphis\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.im\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \"(hφ : Function.Injective φ.obj)\", \"doc\": \"Given an injective-on-objects functor $\\\\phi: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ between groupoids, this constructs the subgroupoid of $\\\\mathcal{D}$ consisting of all morphisms whose image under $\\\\phi$ lies \"}\n  {\"name\": \"PerfectClosure\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \": Type u\", \"doc\": \"The perfect closure of a field $ K $ of characteristic $ p $, constructed as the quotient of $ \\\\mathbb{N} \\\\times K $ by the equivalence relation $ R $ encoding $ p $-th power relationships between ele\"}\n  {\"name\": \"PerfectClosure.mk\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"(x : ℕ × K) : PerfectClosure K p\", \"doc\": \"The perfect closure of a field $ K $ of characteristic $ p $, constructed as the quotient of $ \\\\mathbb{N} \\\\times K $ by the equivalence relation $ R $ encoding $ p $-th power relationships between ele\"}\n  {\"name\": \"perfectClosure.map_le_of_algHom\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.PerfectClosure\", \"type\": \"(i : E →ₐ[F] K) : (perfectClosure F E).map i ≤ perfectClosure F K\", \"doc\": \"For any algebra homomorphism $ i : E \\\\to K $ over $ F $, the image of the perfect closure of $ F $ in $ E $ under $ i $ is contained within the perfect closure of $ F $ in $ K $.\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.map\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \"(hφ : Function.Injective φ.obj) (S : Subgroupoid C) : Subgroupoid D\", \"doc\": \"Given an injective-on-objects functor $\\\\phi: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ between groupoids and a subgroupoid $S \\\\subseteq \\\\mathcal{C}$, this constructs the subgroupoid of $\\\\mathcal{D}$ consisting of \"}\n  {\"name\": \"IsSepClosure.isAlgClosure_of_perfectField\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"[Algebra k K] [IsSepClosure k K] [PerfectField k] : IsAlgClosure k K\", \"doc\": \"If $ K $ is a separable closure of a perfect field $ k $, then $ K $ is an algebraic closure of $ k $. This means that when $ k $ is a perfect field (every element has a $ p $-th root in characteristi\"}\n  {\"name\": \"PerfectClosure.instPerfectField\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \": PerfectField (PerfectClosure K p)\", \"doc\": \"For any field $ K $ of characteristic $ p $, its perfect closure—constructed as the quotient of $ \\\\mathbb{N} \\\\times K $ by the equivalence relation encoding $ p $-th power relationships—forms a perfec\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme immersion criteria, affine purely inseparable spectrum results, ordinary subgroupoids, or manifold structure groupoids do not state this internal scheme-groupoid assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*closure|closure.*groupoid|groupoid.*reduc|reduc.*groupoid",
+   "results": "{\"t\": \"2026-10-23T19:17:06Z\", \"tool\": \"grep\", \"query\": \"groupoid.*closure|closure.*groupoid|groupoid.*reduc|reduc.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary category-theoretic subgroupoids and field perfect closures do not construct internal groupoid operations on the reduced closed subscheme of a scheme; grep found no scheme-groupoid reduction or closure statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced image closure of a field groupoid morphism is a groupoid over a perfect field",
+   "results": "{\"t\": \"2026-10-23T19:17:06Z\", \"tool\": \"leansearch\", \"query\": \"Reduced image closure of a field groupoid morphism is a groupoid over a perfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Subgroupoid.comap\", \"CategoryTheory.Subgroupoid.im\", \"PerfectClosure\", \"PerfectClosure.mk\", \"perfectClosure.map_le_of_algHom\", \"CategoryTheory.Subgroupoid.map\", \"IsSepClosure.isAlgClosure_of_perfectField\", \"PerfectClosure.instPerfectField\"], \"digest\": \"6d528b19e518045b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary category-theoretic subgroupoids and field perfect closures do not construct internal groupoid operations on the reduced closed subscheme of a scheme; grep found no scheme-groupoid reduction or closure statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"closure\"",
+   "results": "{\"t\": \"2026-10-23T19:17:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary category-theoretic subgroupoids and field perfect closures do not construct internal groupoid operations on the reduced closed subscheme of a scheme; grep found no scheme-groupoid reduction or closure statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a perfect field the reduced closure of the image of a morphism of groupoid schemes is a subgroupoid scheme",
+   "results": "{\"t\": \"2026-10-23T19:17:07Z\", \"tool\": \"leanfinder\", \"query\": \"Over a perfect field the reduced closure of the image of a morphism of groupoid schemes is a subgroupoid scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Subgroupoid.ker\", \"CategoryTheory.Subgroupoid\", \"CategoryTheory.Subgroupoid.IsNormal\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"CategoryTheory.Subgroupoid.disconnect_le\", \"CategoryTheory.Subgroupoid.disconnect\", \"CategoryTheory.Subgroupoid.IsWide\", \"CategoryTheory.Subgroupoid.coe\"], \"digest\": \"5cea4aa47b2d267e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary category-theoretic subgroupoids and field perfect closures do not construct internal groupoid operations on the reduced closed subscheme of a scheme; grep found no scheme-groupoid reduction or closure statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-kernel-relation-immersion-closed",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: 04Q8 supplies the closure groupoid and, on the identity morphism of R1, its reduced source.",
+   "via": [
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-field-groupoid-image-closure",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 04Q8 into reduced-closed construction, explicit monomorphism cancellation, unit/inverse restrictions, reduced composable pairs, the product-image closure composition argument, all groupoid axioms, and the identity special case. Reused the existing reduced tensor and factorization nodes, avoiding the finite-type-only geometric-reduced node. One general product-image closure node is new. Statement unchanged.",
+  "blueprint": "The inherited from.place traces this prerequisite of Tag 04Q9 under the direct-images alteration/moduli branch. This split realizes its cited 04Q8 step, including the 04Q7/04Q0 composition input. Latest blueprint direct-images proof and unit read; it contains no exact groupoid-image closure node. The ancestor command returns None for the inherited created.item chain, retained without fabricating an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "General reduced closed structure existence and uniqueness; no same-unit node gives this construction."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "General factorization from reduced sources, used to restrict the three operations; no same-unit node gives it."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "General affine tensor-product calculation for composable pairs, independent of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-perfect-reduced-tensor",
+    "why": "General perfect-field algebra lemma without finite-type hypotheses, needed for reduced composable pairs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-perfect-reduced-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-486b18663",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-486b18663 (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps) and the new node lem-sfb-scheme-product-image-closure, against Stacks 04Q5-04Q8 (more-groupoids.tex), 04Q0 and lemma-closure-of-product (varieties.tex) and 00I4 (algebra.tex), plus every cited node's statement. Item statement: the absolute version of 04Q8 (S arbitrary, so Spec Z is allowed), perfectness kept, e/i/compatibility of (id,j) and the a=id case added; nothing weakened, unchanged from base. Steps: 1 (reduced-induced closed subscheme Z, clauses 1-3) correct. 2 (j is a monomorphism) elementary. 3 (e2=a e1, i2(C)=C via the involution, factorization by 0356 from reduced sources) correct; it does not claim that a factors through Z. 4 replaces the geometrically-reduced route with 00I4, k-structures from s and t separately, no finiteness used. 5: new lemma applied with X=Y=R2 over s2/t2 and A=B=R1 over s1/t1, so closure of b(D1)=q(P); c2^{-1}(C) is closed and contains b(D1); with P reduced, 0356 gives c. Correct. 6 (axioms by cancellation) and 7 (I_T for T=X is the nilradical) elementary. New node: equals 04Q0, with the set-theoretic product expressed as the image of the fibre product of the reduced induced subschemes; true with no hypotheses (universal openness over a field). Tested on the empty source, Spec K x Spec L (non-product topology), A^1 dense in P^1, and nonreduced X. B1-B5 and searches OK. No duplicate of 04Q0/04Q7 in the DAG (rg -L); strictly smaller than the item, so no D1. tool_uses accepted: reduced-induced (sk-thm-p1), reduced-source factorization (sk-thm-p1), perfect-reduced-tensor 00I4 (sk-thm-iff); affine fibre product is a Mathlib leaf. No SGA. FIX (C1): step 4's 'these affine products cover P' is Stacks 01JR with no cited node; I added the existing Mathlib leaf lem-weil-pbc-open-fibre-product to step 4 uses and proof_deps and wrote out its use and why reducedness is local (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-perfect-field-groupoid-image-closure.json).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectFieldGroupoidImageClosure",
+  "declaration": "AlgebraicGeometry.exists_reduced_image_groupoid_of_perfectField",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectFieldGroupoidImageClosure.lean",
+  "statement": "theorem exists_reduced_image_groupoid_of_perfectField (k : Type u) [Field k] [PerfectField k] {R₁ R₂ : Scheme.{u}} (s₁ t₁ : R₁ ⟶ Spec (CommRingCat.of k)) (e₁ : Spec (CommRingCat.of k) ⟶ R₁) (i₁ : R₁ ⟶ R₁) (c₁ : pullback s₁ t₁ ⟶ R₁) (h₁ : IsGroupoidScheme s₁ t₁ e₁ i₁ c₁) (s₂ t₂ : R₂ ⟶ Spec (CommRingCat.of k)) (e₂ : Spec (CommRingCat.of k) ⟶ R₂) (i₂ : R₂ ⟶ R₂) (c₂ : pullback s₂ t₂ ⟶ R₂) (h₂ : IsGroupoidScheme s₂ t₂ e₂ i₂ c₂) (a : R₁ ⟶ R₂) (hs : a ≫ s₂ = s₁) (ht : a ≫ t₂ = t₁) (he : e₁ ≫ a = e₂) (hi : i₁ ≫ a = a ≫ i₂) (hc : c₁ ≫ a = pullback.map s₁ t₁ s₂ t₂ a a (𝟙 (Spec (CommRingCat.of k))) ((Category.comp_id s₁).trans hs.symm) ((Category.comp_id t₁).trans ht.symm) ≫ c₂) : ∃ (Z : Scheme.{u}) (j : Z ⟶ R₂), IsClosedImmersion j ∧ IsReduced Z ∧ Set.range j = closure (Set.range a) ∧ j.ker = Scheme.IdealSheafData.vanishingIdeal ⟨closure (Set.range a), isClosed_closure⟩ ∧ ∃ (e : Spec (CommRingCat.of k) ⟶ Z) (i : Z ⟶ Z) (c : pullback (j ≫ s₂) (j ≫ t₂) ⟶ Z), IsGroupoidScheme (j ≫ s₂) (j ≫ t₂) e i c ∧ e ≫ j = e₂ ∧ i ≫ j = j ≫ i₂ ∧ c ≫ j = pullback.map (j ≫ s₂) (j ≫ t₂) s₂ t₂ j j (𝟙 (Spec (CommRingCat.of k))) (Category.comp_id (j ≫ s₂)) (Category.comp_id (j ≫ t₂)) ≫ c₂",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c7557607",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 04Q8 clause by clause: PerfectField k, two IsGroupoidScheme septuples over Spec k, a commuting with s,t,e,i,c via the canonical pullback.map; conclusion: closed immersion j with reduced Z, range j = closure(range a), j.ker = vanishingIdeal (reduced induced structure), groupoid law on (j≫s₂, j≫t₂, e, i, c), compatibility of e, i, c with j. The a=id case follows from vanishingIdeal_top = nilradical. No extra hypotheses; one universe u is forced by the def. Statement field is verbatim; docstrings carry source, blueprint and 7 proof steps; sorry only; plain imports are proof-dep Lean modules (confirmed in side-live). No new nodes or dependency changes; live node has no lean record yet. Not recompiled (no change)."
+ }
+}

@@ -1,0 +1,307 @@
+{
+ "id": "lem-per-formal-singular-ideal-patching",
+ "kind": "statement",
+ "title": "Patching formal singular ideals along regular comparisons",
+ "statement": "Let $B$ be a commutative Noetherian semilocal Nagata integral domain [def-weil-pbc-noetherian-ring, def-weil-pbc-nagata-ring], with Jacobson radical $\\mathfrak r$ (the intersection of its finitely many maximal ideals). Let $J\\subseteq\\mathfrak r$, put $C=\\varprojlim_nB/\\mathfrak r^n$, and let $\\mathcal Q$ consist of the nonmaximal primes $\\mathfrak Q$ of $C$ containing $JC$. For $\\mathfrak Q\\in\\mathcal Q$ put $\\mathfrak p=\\mathfrak Q\\cap B$, $U_{\\mathfrak p}=\\widehat{B_{\\mathfrak p}}$, $T_{\\mathfrak Q}=\\widehat{C_{\\mathfrak Q}}$, with maximal-ideal completions. Completions are inverse limits of quotients by ideal powers [def-weil-pbc-adic-completion], and localization at a prime is [def-weil-pbc-localization-at-prime]. For a Noetherian ring $T$ write $\\operatorname{Sing}(T)=\\{\\mathfrak q\\in\\operatorname{Spec}T:T_{\\mathfrak q}\\text{ is not regular local}\\}$ [def-weil-affine-spectrum, def-weil-regular-scheme], and put $s(T)=\\bigcap_{\\mathfrak q\\in\\operatorname{Sing}(T)}\\mathfrak q$, with empty intersection $T$. Assume that every canonical $\\alpha_{\\mathfrak Q}:U_{\\mathfrak p}\\to T_{\\mathfrak Q}$ is regular [def-weil-pbc-g-ring]. Under the canonical $\\beta_{\\mathfrak Q}:C\\to T_{\\mathfrak Q}$ define\n$$D=\\bigcap_{\\mathfrak Q\\in\\mathcal Q}\\beta_{\\mathfrak Q}^{-1}\\bigl(s(U_{\\mathfrak Q\\cap B})T_{\\mathfrak Q}\\bigr).$$\nThen $D$ is a nonzero radical ideal of $C$, with the unit ideal allowed, and\n$$DT_{\\mathfrak Q}=s(U_{\\mathfrak Q\\cap B})T_{\\mathfrak Q}\\qquad(\\mathfrak Q\\in\\mathcal Q).$$\nMoreover every $\\mathfrak P\\in\\operatorname{Sing}(C)$ is nonzero, and if $\\mathfrak P+JC$ is contained in a nonmaximal prime of $C$, then $D\\subseteq\\mathfrak P$. No completeness along $J$, regularity of $B$, or G-ring property of $B$ is assumed.",
+ "source": {
+  "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+  "place": "Rotthaus (1979), proof of Theorem 3, construction of D, Claims 1–3, pp.176–178. Assumptions isolated explicitly: B is a Nagata domain (reduced formal completions), with regular completed comparison maps. The claims do not use J-adic completeness."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-g-ring",
+  "def-per-formal-completion-geometry"
+ ],
+ "proof": [
+  {
+   "text": "The rings $C$, $U_{\\mathfrak p}$ and $T_{\\mathfrak Q}$ are Noetherian by localization and completion Noetherianity. Enumerate the maximal ideals of $B$ as $\\mathfrak m_1,\\ldots,\\mathfrak m_t$, where $t\\ge1$ since $B$ is a domain. The semilocal completion product gives $C\\simeq\\prod_i H_i$, $H_i=\\widehat{B_{\\mathfrak m_i}}$. Each $B_{\\mathfrak m_i}$ is a Nagata local domain (the domain assertion follows directly from fractions), hence $H_i$ is reduced. Each $H_i$ is nonzero since its residue field equals $\\kappa(\\mathfrak m_i)$. Products are reduced coordinatewise, so $C$ is reduced and nonzero.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-per-semilocal-jacobson-completion-product",
+    "lem-weil-pbc-nagata-localization",
+    "lem-weil-pbc-local-nagata-domain-analytically-unramified",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 0316 (lemma-completion-Noetherian-Noetherian), 07N9 (lemma-completion-finite-extension), 032U (lemma-nagata-localize), 07NZ (more-algebra-lemma-completion-reduced); local completion residue field: 05GI/05GG."
+   }
+  },
+  {
+   "text": "The local completions $H_i$ and $U_{\\mathfrak p}$ are complete for their maximal ideals by the completion-mod-ideal theorem and the local-completion maximal-ideal description. Apply complete-local J-2 to each of these Noetherian complete local rings, taking the finite type algebra to be the ring itself (generated over itself by the empty list). Their regular loci are open, hence $\\operatorname{Sing}(H_i)$ and $\\operatorname{Sing}(U_{\\mathfrak p})$ are closed. Independently, each $H_i$ is a G-ring by the complete-local G-ring theorem. The central idempotents $e_i$ of $C=\\prod_iH_i$ satisfy $e_ie_j=0$ and $\\sum e_i=1$, so each prime omits exactly one $e_i$; that clopen piece is $\\operatorname{Spec}H_i$. Product-prime localization identifies its local rings with those of $H_i$. Therefore $\\operatorname{Sing}(C)$ is a finite union of closed subsets in clopen pieces, hence closed. For $\\mathfrak Q$ in the $i$th piece, $C_{\\mathfrak Q}\\simeq(H_i)_{\\mathfrak q}$, so $C_{\\mathfrak Q}\\to T_{\\mathfrak Q}$ is regular by the G-ring clause for $H_i$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-per-complete-local-j2",
+    "lem-weil-pbc-complete-local-g-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-product-prime-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PJ (proposition-ubiquity-J-2), (2), for the open regular loci; separately Tag 07PS (proposition-Noetherian-complete-G-ring) and Tag 07GH (definition-G-ring) for regular completion maps. Completeness: algebra.tex Tag 05GG (lemma-hathat-finitely-generated). Finite-product clopen decomposition via the displayed idempotents. No appeal to complete-local excellence."
+   }
+  },
+  {
+   "text": "Put $I=s(C)$. Since $\\operatorname{Sing}(C)$ is closed, the radical/zero-locus theorem gives $V(I)=\\operatorname{Sing}(C)$ and $I$ radical. The localization map $C\\to C_{\\mathfrak Q}$ is regular, and its target is Noetherian. Apply the generic singular-ideal comparison to it, to the regular completion map of Step 2, and to the assumed regular map $\\alpha_{\\mathfrak Q}:U_{\\mathfrak p}\\to T_{\\mathfrak Q}$. Their source singular loci are closed: those of $C$ and $U_{\\mathfrak p}$ by Step 2, and that of $C_{\\mathfrak Q}$ by the first application. It follows that\n$$s(U_{\\mathfrak p})T_{\\mathfrak Q}=s(T_{\\mathfrak Q})=(IC_{\\mathfrak Q})T_{\\mathfrak Q}=IT_{\\mathfrak Q}.$$\nSince $C_{\\mathfrak Q}\\to T_{\\mathfrak Q}$ is faithfully flat, contraction of its extended ideal gives\n$$\\beta_{\\mathfrak Q}^{-1}(s(U_{\\mathfrak p})T_{\\mathfrak Q})=\\{c\\in C:c/1\\in IC_{\\mathfrak Q}\\}.$$",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-localization-regular",
+    "lem-per-regular-map-singular-ideal",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology); more-algebra.tex Tag 07PT (lemma-check-G-ring-maximal-ideals), localization observation; algebra.tex Tag 00MC (lemma-completion-faithfully-flat). Rotthaus Corollary 4.2(A), Claims 1–2."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak P_1,\\ldots,\\mathfrak P_r$ be all primes minimal over $I$; this is a finite set. Every prime containing $I$ contains a prime minimal over $I$, hence the radical/zero-locus theorem gives $I=\\bigcap_{a=1}^r\\mathfrak P_a$. For a fixed $\\mathfrak Q$, flat finite-intersection preservation gives\n$$IC_{\\mathfrak Q}=\\bigcap_a\\mathfrak P_aC_{\\mathfrak Q}.$$\nIf $\\mathfrak P_a\\not\\subseteq\\mathfrak Q$, an element of $\\mathfrak P_a\\setminus\\mathfrak Q$ becomes a unit, so its factor is the unit ideal. Otherwise the localization prime correspondence gives $\\mathfrak P_aC_{\\mathfrak Q}\\cap C=\\mathfrak P_a$. Thus, by Step 3,\n$$D=\\bigcap_{a\\in A}\\mathfrak P_a,\\qquad A=\\{a:\\exists\\mathfrak Q\\in\\mathcal Q,\\ \\mathfrak P_a\\subseteq\\mathfrak Q\\}.$$\nThis interchanges intersections only after replacing $I$ by a finite intersection; it does not extend an infinite intersection. Empty intersections give the unit ideal throughout.",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-localization-flat",
+    "lem-per-flat-ideal-finite-intersection",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FR (lemma-Noetherian-irreducible-components), 00E0 (lemma-Zariski-topology), 00E6 (lemma-spec-localization), 0BBY (lemma-flat-intersect-ideals); finite component calculation making Rotthaus Claim 2 explicit."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak Q\\in\\mathcal Q$. In the finite intersection formula for $D$, a factor survives localization at $\\mathfrak Q$ exactly when $\\mathfrak P_a\\subseteq\\mathfrak Q$. Every such index belongs to $A$, with this very $\\mathfrak Q$ as witness. Hence the surviving factors are exactly those in the formula for $IC_{\\mathfrak Q}$, and flat finite-intersection preservation gives $DC_{\\mathfrak Q}=IC_{\\mathfrak Q}$. Extending this equality to $T_{\\mathfrak Q}$ and using Step 3 proves $DT_{\\mathfrak Q}=s(U_{\\mathfrak Q\\cap B})T_{\\mathfrak Q}$. The formula of Step 4 also shows $D$ is radical and $I\\subseteq D$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-per-flat-ideal-finite-intersection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BBY (lemma-flat-intersect-ideals); Rotthaus Claim 2, finite component assembly."
+   }
+  },
+  {
+   "text": "A minimal prime $\\mathfrak p_0$ of the nonzero reduced ring $C$ exists, and $C_{\\mathfrak p_0}$ is a field, hence regular local. Thus $\\mathfrak p_0\\notin\\operatorname{Sing}(C)=V(I)$. In particular $I\\ne(0)$, since every prime contains $(0)$. As $I\\subseteq D$, this proves $D\\ne(0)$. A singular prime of $C$ cannot be $(0)$: if $(0)$ is prime, it is minimal and its localization is again a field. Finally take $\\mathfrak P\\in\\operatorname{Sing}(C)$ and a nonmaximal $\\mathfrak Q\\supseteq\\mathfrak P+JC$. Choose a minimal prime $\\mathfrak P_a$ over $I$ inside $\\mathfrak P$. Then $a\\in A$ because $\\mathfrak P_a\\subseteq\\mathfrak Q\\in\\mathcal Q$, so $D\\subseteq\\mathfrak P_a\\subseteq\\mathfrak P$. This proves all the final assertions, including when $\\mathcal Q$ is empty (the conditional containment is then vacuous).",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-field-regular-ring",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00EU (lemma-minimal-prime-reduced-ring), 00E0 (lemma-Zariski-topology); Rotthaus Claims 1 and 3, pp.177–178."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-per-complete-local-j2",
+  "lem-per-flat-ideal-finite-intersection",
+  "lem-per-regular-map-singular-ideal",
+  "lem-per-semilocal-jacobson-completion-product",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-local-g-ring",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-nagata-domain-analytically-unramified",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-product-prime-localization",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+  "place": "Rotthaus Theorem 3, Claims 1–3, pp.176–178, read online. Finite minimal-component calculation supplies the details of Claim 2; supporting Stacks results cited stepwise. Archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-singular-ideal-patching: For a Noetherian semilocal Nagata domain, regular local completion comparison maps patch singular locus ideals into a nonzero radical ideal of the completion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  (a : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v),\\n  ∃ b ∈ nonZeroDivisors R, a * ↑b ∈ Is\", \"doc\": \"In a Dedekind domain $ R $ with fraction field $ K $, for any height one prime ideal $ \\\\mathfrak{p} $ and element $ a $ in the $ \\\\mathfrak{p} $-adic completion of $ K $, there exists a non-zero elemen\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-formal-singular-ideal-patching: Intersection of contractions of extended singular ideals agrees after completed localization under regular comparison maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalization.AtPrime.comap_map_eq_map\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \": (Ideal.map (algebraMap R Sₚ) p).comap (algebraMap S Sₚ) = pS\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ R $, the contraction of the image of $ p $ under the canonical map $ R \\to S_p $ (localization at $ p $) back to $ S $ via the algebra map $ S \\to S_p $ e\"}\n  {\"name\": \"IsLocalization.map_comap\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \"(J : Ideal S) : Ideal.map (algebraMap R S) (Ideal.comap (algebraMap R S) J) = J\", \"doc\": \"For any ideal $ J $ in $ S $, the image of the contraction of $ J $ under the canonical algebra homomorphism $ R \\\\to S $ is equal to $ J $. This asserts that $ \\\\text{Ideal.map}(\\\\text{algebraMap}(R,S))\"}\n  {\"name\": \"IsLocalization.map_inf\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \"(I J : Ideal R) : (I ⊓ J).map (algebraMap R S) = I.map (algebraMap R S) ⊓ J.map (algebraMap R S)\", \"doc\": \"For any two ideals $I$ and $J$ in a commutative semiring $R$, the image of their intersection $I \\\\cap J$ under the canonical localization homomorphism $R \\\\to S$ equals the intersection of their indivi\"}\n  {\"name\": \"Ideal.under_map_of_isLocalizationAtPrime\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \"{p : Ideal R} [p.IsPrime] (hpq : p ≤ q) : (p.map (algebraMap R S)).under R = p\", \"doc\": \"For a prime ideal $ p $ in a commutative semiring $ R $, the contraction of the image of $ p $ under the canonical algebra homomorphism to the localization $ S $ of $ R $ at the complement of $ p $ is\"}\n  {\"name\": \"Submodule.localized'_inf\", \"module\": \"Mathlib.Algebra.Module.LocalizedModule.Submodule\", \"type\": \": (M' ⊓ M'').localized' S p f = M'.localized' S p f ⊓ M''.localized' S p f\", \"doc\": \"For submodules $M'$ and $M''$ of a module $M$ localized at a submonoid $p$ via a map $f$, the localized submodule of the intersection $M' \\\\cap M''$ is equal to the intersection of the localized submod\"}\n  {\"name\": \"IsLocalization.orderEmbedding\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \": Ideal S ↪o Ideal R\", \"doc\": \"For a commutative semiring $ R $ localized at a submonoid $ M $, the function mapping each ideal $ J $ of the localization $ S $ to the preimage $ \\\\varphi^{-1}(J) $ under the canonical homomorphism $ \"}\n  {\"name\": \"IsLocalization.isLocalization_isLocalization_atPrime_isLocalization\", \"module\": \"Mathlib.RingTheory.Localization.LocalizationLocalization\", \"type\": \"(p : Ideal S) [Hp : p.IsPrime] [IsLocalization.AtPrime T p] : IsLocalization.AtPrime T (p.comap (algebraMap R S))\", \"doc\": \"If $ T $ is the localization of $ S $ at the complement of a prime ideal $ \\\\mathfrak{p} \\\\subseteq S $, then $ T $ is also the localization of $ R $ at the contraction $ \\\\mathfrak{p}' = \\\\mathfrak{p} \\\\c\"}\n  {\"name\": \"Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Localization\", \"type\": \"(p : Ideal R') (ass : p ∈ associatedPrimes R' M') (fg : (p.comap (algebraMap R R')).FG) :\\n  p.comap (algebraMap R R') ∈ associatedPrimes R M\", \"doc\": \"If $ \\\\mathfrak{p} $ is an associated prime of the localized module $ M' $, then its contraction $ \\\\mathfrak{p}^{c} $ under the algebra map $ R \\\\to R' $ is an associated prime of the original module $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singularLocus\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "singular[Ll]ocus|singular.*[Ii]deal|Rotthaus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "singular[Ll]ocus|singular.*[Ii]deal|Rotthaus",
+   "results": "{\"t\": \"2026-10-24T08:43:09Z\", \"tool\": \"grep\", \"query\": \"singular[Ll]ocus|singular.*[Ii]deal|Rotthaus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/Geometry/Manifold/Bordism.lean\"], \"digest\": \"5d18225b76b85d13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothLocus and IsSmoothAt concern relative formal smoothness, regular sequences concern module elements, and radical/map/localization identities do not give absolute singular-locus comparison for arbitrary regular maps. Read Smooth/Locus.lean:43–56,111–119 and RegularLocalRing/Defs.lean:49–149."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-formal-singular-ideal-patching: intersection of singular prime ideals commutes with localization and completion for excellent Noetherian rings",
+   "results": "{\"t\": \"2026-10-24T08:43:09Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-formal-singular-ideal-patching: intersection of singular prime ideals commutes with localization and completion for excellent Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.Localizations\", \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"IsLocalization.AtPrime.liesOver_maximalIdeal\", \"Ideal.under_map_of_isLocalizationAtPrime\", \"Localization.AtPrime.congr_simp\", \"IsLocalization.isLocalization_isLocalization_atPrime_isLocalization\", \"IsLocalization.minimalPrimes_comap\", \"Localization.AtPrime\"], \"digest\": \"de3a075ee122893b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothLocus and IsSmoothAt concern relative formal smoothness, regular sequences concern module elements, and radical/map/localization identities do not give absolute singular-locus comparison for arbitrary regular maps. Read Smooth/Locus.lean:43–56,111–119 and RegularLocalRing/Defs.lean:49–149."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singularLocus\"",
+   "results": "{\"t\": \"2026-10-24T08:43:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"singularLocus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothLocus and IsSmoothAt concern relative formal smoothness, regular sequences concern module elements, and radical/map/localization identities do not give absolute singular-locus comparison for arbitrary regular maps. Read Smooth/Locus.lean:43–56,111–119 and RegularLocalRing/Defs.lean:49–149."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-singular-ideal-patching: regular comparison maps between completed localizations patch singular locus radical ideals in the semilocal Nagata completion",
+   "results": "{\"t\": \"2026-10-24T08:43:10Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-formal-singular-ideal-patching: regular comparison maps between completed localizations patch singular locus radical ideals in the semilocal Nagata completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.IsSmoothAt\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.etaleLocus\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\"], \"digest\": \"e971e802850b82d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothLocus and IsSmoothAt concern relative formal smoothness, regular sequences concern module elements, and radical/map/localization identities do not give absolute singular-locus comparison for arbitrary regular maps. Read Smooth/Locus.lean:43–56,111–119 and RegularLocalRing/Defs.lean:49–149."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-g-ring-adic-lifting",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular local model and purity), through the existing small-singular-locus / ideal-adic quasi-excellence chain: the local G-ring lifting input to Kurano–Shimomoto Theorem 5.1 Step 2 equation (5.1). Refined using Rotthaus (1979), Theorem 3, pp.176–179. Rotthaus (1979), proof of Theorem 3, construction of D, Claims 1–3, pp.176–178. Assumptions isolated explicitly: B is a Nagata domain (reduced formal completions), with regular completed comparison maps. The claims do not use J-adic completeness.",
+   "via": [
+    "lem-per-local-g-ring-adic-lifting",
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-formal-singular-ideal-patching",
+  "worker": "stage1",
+  "summary": "NU repair of returned delivery e16527037e7: the statement and accepted Steps 1 and 3–6 are retained. Step 2 now derives closed singular loci from the new standalone complete-local J-2 input (07PJ(2)), and regular completion maps independently from the existing complete-local G-ring input (07PS). The dropped complete-local excellence citation and excellence definition are removed. The two new statement-only nodes are complete-local J-2 and regular-map singular-ideal comparison. The finite minimal-component patching argument is unchanged.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3 regular local model/purity through the existing local G-ring adic-lifting chain; this item supplies Rotthaus Theorem 3 Claims 1–3, not Claim 4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-local-nagata-domain-analytically-unramified",
+    "why": "Generic commutative-algebra tool: A Noetherian local Nagata domain has reduced completion. Applied to the explicitly introduced rings/ideals in the proof; no node of the perverse/Fourier unit supplies this algebraic result."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic commutative-algebra tool: Residue fields of a localization agree with those of the base. Applied to the explicitly introduced rings/ideals in the proof; no node of the perverse/Fourier unit supplies this algebraic result."
+   },
+   {
+    "node": "lem-weil-pbc-localization-regular",
+    "why": "Generic commutative-algebra tool: A localization map is regular. Applied to the explicitly introduced rings/ideals in the proof; no node of the perverse/Fourier unit supplies this algebraic result."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-localization",
+    "why": "Generic commutative-algebra tool: Localizations of Nagata rings are Nagata. Applied to the explicitly introduced rings/ideals in the proof; no node of the perverse/Fourier unit supplies this algebraic result."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-g-ring",
+    "why": "Generic commutative-algebra theorem 07PS: a Noetherian maximal-adically complete local ring is a G-ring. Applied to H_i to prove regularity of C_Q to its completion; no theorem in the item unit supplies this input, and complete-local excellence is not used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-local-nagata-domain-analytically-unramified",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-complete-local-g-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-81244fe86",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-81244fe86 (reviewer sub-agent of L); spot-checked: 4th delivery; only Step 2, proof_deps and split_report changed since e165, and the statement, stmt_deps and provenance are identical. Step 2 now gets J-2 (closed Sing) for H_i and U_p from the new statement-only lem-per-complete-local-j2, applied with A=R. I checked that node against Stacks more-algebra 07PJ proposition-ubiquity-J-2 clause (2): it matches with no added hypothesis. The G-ring half now comes from the live lem-weil-pbc-complete-local-g-ring (07PS). The idempotent decomposition of C and product-prime localization give C_Q ≅ (H_i)_q, so C_Q→T_Q is regular. Steps 1 and 3–6 are unchanged and I re-checked them: C is reduced and nonzero; the new regular-map-singular-ideal node (031E/00OF/07C1/07QK, true) is applied three times with closed source Sing; the faithfully flat contraction holds; D = ∩_{a∈A} P_a is a finite intersection; DT_Q = s(U_p)T_Q; I ≠ 0 via a minimal prime; D ⊆ P; and the cases 𝒬 = ∅ and Sing = ∅ give D = C. Duplicate check: the only stronger relatives are the dropped complete-local-excellence and the live semilocal-g-ring-j2. The latter would be circular to cite (its own Step 1 rests on the dropped node), and the new node is its base case. The dependency closure (515 nodes) contains no node on the drop list. No SGA. Maintainer note: the item, its citer local-g-ring-adic-lifting and the new J-2 node are all unreached once the drop list is excluded (Gabber/KS chain dropped on 2026-10-19). Splitting complete-local-j2 will need 07PI, which is exactly the dropped complete-local-domain-regular-open, so consider dropping all three; if they are kept, repoint semilocal-g-ring-j2 Step 1 to the new node plus 07PS. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalSingularIdealPatching",
+  "declaration": "FormalSingularPatching.formal_singular_ideal_patching",
+  "declarations": [
+   "FormalSingularPatching.completion",
+   "FormalSingularPatching.completedLocalization",
+   "FormalSingularPatching.beta",
+   "FormalSingularPatching.alpha",
+   "FormalSingularPatching.patchedIdeal",
+   "FormalSingularPatching.formal_singular_ideal_patching"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormalSingularIdealPatching.lean",
+  "statement": "theorem formal_singular_ideal_patching (B : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B] [Finite (MaximalSpectrum B)] (hNagata : IsNagataRing B) (J : Ideal B) (hJ : J ≤ Ideal.jacobson (⊥ : Ideal B)) (hRegular : ∀ q : PrimeSpectrum (completion B), ¬ q.asIdeal.IsMaximal → J.map (algebraMap B (completion B)) ≤ q.asIdeal → (alpha B q).IsRegular) : patchedIdeal B J ≠ ⊥ ∧ (patchedIdeal B J).IsRadical ∧ (∀ q : PrimeSpectrum (completion B), ¬ q.asIdeal.IsMaximal → J.map (algebraMap B (completion B)) ≤ q.asIdeal → (patchedIdeal B J).map (beta B q) = (AlgebraicGeometry.absoluteSingularIdeal (completedLocalization B (PrimeSpectrum.comap (algebraMap B (completion B)) q))).map (alpha B q)) ∧ (∀ p : PrimeSpectrum (completion B), ¬ IsRegularLocalRing (Localization.AtPrime p.asIdeal) → p.asIdeal ≠ ⊥ ∧ ((∃ q : PrimeSpectrum (completion B), ¬ q.asIdeal.IsMaximal ∧ p.asIdeal ⊔ J.map (algebraMap B (completion B)) ≤ q.asIdeal) → patchedIdeal B J ≤ p.asIdeal))",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c6d4ca68",
+  "group": "Q57",
+  "result": "pass",
+  "note": "S2 re-delivery after eba0 H2 RETURN. alpha is now built in the item module: localRingHom p q (algebraMap B C) rfl, quotient maps on powers of the maximal ideals, compatibility, AdicCompletion.liftRingHom. It is the canonical completed local map, with no choice. The theorem stmt_dep is gone; the added stmt_dep def-per-formal-completion-geometry owns absoluteSingularIdeal and is on base 3996a809. Clause by clause the Lean matches the node: semilocal Noetherian Nagata domain via Finite MaximalSpectrum + IsNagataRing, J <= jacobson bot, C = AdicCompletion, Q = nonmaximal primes over JC, p = comap, U/T = maximal-ideal completions of Localization.AtPrime, hRegular only for those Q, D = iInf of comap beta (map alpha s(U)), D != bot, D radical, D.map beta = s(U).map alpha, singular p != bot, D <= p under the P+JC condition. No extra hypotheses. Single universe u. lean.statement is verbatim. Edge cases: empty family gives top, Sing empty gives top, J = 0, zero ring excluded by IsDomain. Gates: no hollow defs, source and blueprint docstrings, theorem docstring carries the 6-step proof, one sorry, all imports exist. Parallel Q139 7ca3 PASS was LAND superseded, so the live lean record is null and there is no rebind. Nothing compiled because nothing changed. Maintainer note: the item, local-g-ring-adic-lifting and complete-local-j2 are unreached once the drop list is excluded; consider dropping them."
+ }
+}

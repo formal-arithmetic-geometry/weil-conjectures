@@ -1,0 +1,144 @@
+{
+ "id": "def-sfb-bundle-elliptic-estimate-data",
+ "kind": "definition",
+ "title": "Coordinate data and norms for real bundle elliptic estimates",
+ "status": "split",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $N$ be a smooth real $m$-manifold without boundary [def-sfb-smooth-real-manifold], and let $E,F$ be smooth real rank-$r$ vector bundles [def-sfb-smooth-real-vector-bundle]. Use their smooth sections [def-sfb-smooth-bundle-sections]. A smooth coordinate chart is an open partial homeomorphism to $\\mathbf R^m$ whose forward and inverse maps are smooth. An orientation is a covering family of such charts with positive transition Jacobian determinants. A positive smooth volume consists of a measure $\\mu$ and smooth positive chart densities $\\gamma_e$ such that $e_*(\\mu|_{\\operatorname{source}(e)})=(\\gamma_e\\,dz)|_{\\operatorname{target}(e)}$. A smooth frame is a fibrewise linear bundle trivialization whose map and inverse are smooth. Write $u_{e,f}(z)$ for the frame coefficients of $u(e^{-1}z)$. For $\\alpha\\in\\mathbf N^m$, define $\\partial^\\alpha$ by applying each coordinate partial derivative $\\alpha_j$ times in coordinate order. For an integer $k\\geq0$ and a real-linear map $Q:\\Gamma^\\infty(E)\\to\\Gamma^\\infty(F)$, a local differential expression consists of a smooth chart $e$, smooth frames $f_E,f_F$ defined over its source, and smooth linear-map coefficients $b_\\alpha(z)$ for $|\\alpha|\\leq k$ satisfying $(Qu)_{e,f_F}(z)=\\sum_{|\\alpha|\\leq k}b_\\alpha(z)\\partial^\\alpha u_{e,f_E}(z)$ for every smooth $u$ and every $z$ in the chart target. A bundle differential operator of order at most $k$ has such expressions covering $N$. Its degree-$k$ symbol in each such expression is $\\sigma_k(z,\\xi)=\\sum_{|\\alpha|=k}\\xi^\\alpha b_\\alpha(z)$. It is elliptic when all these linear maps are bijective at every nonzero coordinate covector. A localization of $E$ is a finite covering family of smooth charts and smooth frames, and a subordinate smooth partition of unity [lem-sfb-smooth-subordinate-partition] whose functions have compact support inside their chart sources. Extend $\\chi_i(e_i^{-1}z)u_{e_i,f_i}(z)$ by zero outside the chart target, calling the result $u_i$. Define $\\|u\\|_{H^k,A}=\\sqrt{\\sum_i\\sum_{|\\alpha|\\leq k}\\int_{\\mathbf R^m}|\\partial^\\alpha u_i(z)|^2\\,dz}$. For a smooth positive definite fibre metric $g$, define $\\|u\\|_{L^2(g,\\mu)}=\\sqrt{\\int_N g_x(u(x),u(x))\\,d\\mu(x)}$. These are explicit definitions, not a regularity or estimate assertion.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-real-vector-bundle",
+  "def-sfb-smooth-bundle-sections",
+  "lem-sfb-smooth-subordinate-partition"
+ ],
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Demailly VI §§1–2, (1.1)–(1.4), (1.8), and Sobolev setup before (2.1), printed pp.287–289; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf; coordinate packaging of these notions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite chart localization of smooth vector bundle sections defines the Sobolev norm by sums of coordinate partial derivative squared integrals",
+   "results": "[leansearch] OK 8 hit(s): ContMDiffWithinAt.sum_section_of_locallyFinite; ContMDiffSection.ctorIdx; ContMDiffOn.sum_section; ContMDiffWithinAt.finsum_section_of_locallyFinite; ContMDiff.sum_section_of_locallyFinite; MDifferentiable.sum_section_of_locallyFinite; ContMDiffAt.finsum_section_of_locallyFinite; ContMDiffSection.recOn.",
+   "date": "2026-10-24",
+   "verdict": "No match for the coordinate localization, its norm, or a differential expression. Existing smooth-section type is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth positive volume measure in manifold charts and principal symbol of local differential operator",
+   "results": "[leanfinder] OK 8 hit(s): ae_eq_of_integral_smooth_smul_eq; ae_eq_of_integral_contMDiff_smul_eq; eventually_enorm_mfderivWithin_symm_extChartAt_lt; eventually_norm_mfderivWithin_symm_extChartAt_lt; eventually_norm_mfderivWithin_symm_extChartAt_comp_lt; eventually_norm_mfderiv_extChartAt_lt; eventually_enorm_mfderiv_extChartAt_lt; SmoothBumpFunction.nonneg.",
+   "date": "2026-10-24",
+   "verdict": "No construction of a smooth positive volume or principal symbol. The hits assume a measure or bound derivatives of charts."
+  },
+  {
+   "tool": "grep",
+   "query": "partialDerivative|iteratedPDeriv|DifferentialOperator|Garding|positive.*volume",
+   "results": "[grep] OK 0 hit(s), subdirectory Geometry/. Direct rg of lean/WeilConjectures and lean/Sheaf found no Garding or elliptic estimate. Existing HermitianDolbeaultData concerns complex alternating tensors rather than arbitrary real bundles.",
+   "date": "2026-10-24",
+   "verdict": "No matching coordinate elliptic-estimate data. Reuse Mathlib smooth metrics, smooth sections, vector bundles and partitions; the remaining explicit coordinate data are absent."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-global-garding-estimate",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §2 Gårding inequality (2.3), Sobolev index zero, printed p.289; only its smooth-section estimate, with the two-bundle system version of VI §1; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Coordinate definitions for the smooth-section estimate: local expressions, symbol, localized norms and integrated norms.",
+   "via": [
+    "lem-sfb-elliptic-global-garding-estimate",
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.BundleEllipticEstimateData",
+  "declaration": "RealManifold.BundleDifferentialOperator",
+  "file": "lean/Sheaf/Geometry/Manifold/BundleEllipticEstimateData.lean",
+  "statement": "structure BundleDifferentialOperator (k : ℕ) (Q : ContMDiffSection 𝓘(ℝ, CoordinateModel m) (CoordinateModel r) ∞ E →ₗ[ℝ] ContMDiffSection 𝓘(ℝ, CoordinateModel m) (CoordinateModel r) ∞ H)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "RealManifold.CoordinateModel",
+   "RealManifold.SmoothCoordinateChart",
+   "RealManifold.OrientedAtlas",
+   "RealManifold.PositiveSmoothVolume",
+   "RealManifold.SmoothCoordinateFrame",
+   "RealManifold.sectionCoordinates",
+   "RealManifold.coordinatePartial",
+   "RealManifold.coordinateMultiIndices",
+   "RealManifold.BundleLocalization",
+   "RealManifold.BundleLocalization.localized",
+   "RealManifold.BundleLocalization.sobolevNorm",
+   "RealManifold.bundleL2Norm",
+   "RealManifold.LocalDifferentialExpression",
+   "RealManifold.LocalDifferentialExpression.symbol",
+   "RealManifold.BundleDifferentialOperator",
+   "RealManifold.BundleDifferentialOperator.IsElliptic"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60d969c59",
+  "group": "NV",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60d969c59",
+  "group": "NV",
+  "result": "pass",
+  "note": "Item theorem RealManifold.elliptic_global_garding_estimate matches the node clause by clause: compact oriented m>=1 manifold (OrientedAtlas), smooth metric g, PositiveSmoothVolume (densities in every smooth chart; satisfiable by Riemannian volume, finite on compact N, independent of g as the item's dV allows), equal-rank G,H with ContMDiffRiemannianMetric gG,gH, k>=1, Q real-linear on ContMDiffSection, BundleDifferentialOperator covering N with smooth coefficients and the identity on all smooth sections, IsElliptic = bijective top symbol at every nonzero covector (coefficients determined by Q, so not fakeable), BundleLocalization trivializing G with subordinate compactly supported partition, classical localized H^k norm (localized coefficients genuinely smooth, honest integrals, each |alpha|<=k once), integrated L2 norms, exists C>0 before s, unsquared inequality with L2 remainder. Edge cases N empty, rank 0, ker Q nonzero, non-isomorphic G/H, non-Riemannian volume all handled. New node def-sfb-bundle-elliptic-estimate-data matches its statement, 16 declarations listed with source/blueprint docstrings, no hollow defs, only sorry, no Mathlib match, no RealManifold name clash. Records: only lean + stmt_deps (adds the new def node) differ from live; lean.statement verbatim in both files. Maintainer note: NO's def-sfb-bundle-sobolev-space (BundleSobolevSpace.lean) landed 13:18 CST, after this base (index 05:08 UTC = 13:08 CST); different notions (weak-derivative norms on L2 classes, metric volume, trivializationAtlas frames) vs classical smooth-section norms here, but both modules define a Localization structure and a multi-index partial; consider later consolidation, not a return. No compile run (no file changed)."
+ }
+}

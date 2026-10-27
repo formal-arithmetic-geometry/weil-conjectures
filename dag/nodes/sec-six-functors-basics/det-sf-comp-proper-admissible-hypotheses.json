@@ -2,7 +2,7 @@
  "id": "det-sf-comp-proper-admissible-hypotheses",
  "kind": "statement",
  "title": "Proper-image hypotheses for the recorded admissible coefficient objects",
- "statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$. Let $X,Y$ be separated finite-type $k$-schemes [sk-def-sfb-dc-setting], let $p:X\\to Y$ be a proper $k$-morphism [def-weil-proper-morphism], and let $\\Lambda$ be an admissible condensed coefficient in the recorded isomorphism-invariant sense of [sk-def-localizing-closure], including the ring of all continuous maps into $\\overline{\\mathbf Q}_\\ell$. Then the total right derived module-object pushforward $Rp_*$ [sk-def-sfb-module-derived-pushpull] preserves bounded constant-model constructible objects of finite Tor amplitude [sk-def-sfb-constructible], and preserves every existing ambient discrete colimit indexed in $\\mathrm{Type}(u+2)$ whose vertices lie in $\\operatorname{Loc}(\\mathrm{Dctf}(X,\\Lambda))$ [sk-def-localizing-closure]. These are the two clauses of the existing predicate ProperLocalizingHypotheses. This does not identify the continuous-map algebraic-closure ring with the finite-subextension-valued ring in the older proper-image interface.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$. Let $X,Y$ be separated finite-type $k$-schemes [sk-def-sfb-dc-setting], let $p:X\\to Y$ be a proper $k$-morphism [def-weil-proper-morphism], and let $\\Lambda$ be an admissible condensed coefficient in the recorded isomorphism-invariant sense of [sk-def-localizing-closure]; the ring of all continuous maps into $\\overline{\\mathbf Q}_\\ell$ is not admissible. Then the total right derived module-object pushforward $Rp_*$ [sk-def-sfb-module-derived-pushpull] preserves bounded constant-model constructible objects of finite Tor amplitude [sk-def-sfb-constructible], and preserves every existing ambient discrete colimit indexed in $\\mathrm{Type}(u+2)$ whose vertices lie in $\\operatorname{Loc}(\\mathrm{Dctf}(X,\\Lambda))$ [sk-def-localizing-closure]. These are the two clauses of the existing predicate ProperLocalizingHypotheses.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-single.proof.md",
   "place": "Second paragraph, Proper direct image, with the recorded admissible coefficient convention."
@@ -17,10 +17,9 @@
  ],
  "proof": [
   {
-   "text": "Apply the existing representative coefficient theorem for finite rings, Z_ell, Q_ell, finite extensions E, their valuation rings, and the finite-subextension-valued algebraic closure. The finite nilpotence hypothesis follows by applying the admissibility annihilation condition to 1. Use det-sf-comp-proper-continuous-algcl for the remaining continuous-map algebraic-closure representative.",
+   "text": "Apply the existing representative coefficient theorem for finite rings, Z_ell, Q_ell, finite extensions E, their valuation rings, and the finite-subextension-valued algebraic closure. The finite nilpotence hypothesis follows by applying the admissibility annihilation condition to 1.",
    "uses": [
-    "det-proper-image-localizing-proper",
-    "det-sf-comp-proper-continuous-algcl"
+    "det-proper-image-localizing-proper"
    ],
    "elementary": false
   },
@@ -36,7 +35,6 @@
  ],
  "proof_deps": [
   "det-proper-image-localizing-proper",
-  "det-sf-comp-proper-continuous-algcl",
   "lem-sfb-condensed-coefficient-iso-constructible",
   "det-def-sfb-constructible-tor-amplitude",
   "det-def-localizing-closure-existence"
@@ -95,7 +93,18 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-sf-comp-coherence",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "existing": false,
   "module": "Sheaf.Paper.ProperLocalizingAdmissibleCoefficients",
@@ -125,5 +134,63 @@
   "landing": "20261020T051121-L-1566224",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal)",
+  "old_statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$. Let $X,Y$ be separated finite-type $k$-schemes [sk-def-sfb-dc-setting], let $p:X\\to Y$ be a proper $k$-morphism [def-weil-proper-morphism], and let $\\Lambda$ be an admissible condensed coefficient in the recorded isomorphism-invariant sense of [sk-def-localizing-closure], including the ring of all continuous maps into $\\overline{\\mathbf Q}_\\ell$. Then the total right derived module-object pushforward $Rp_*$ [sk-def-sfb-module-derived-pushpull] preserves bounded constant-model constructible objects of finite Tor amplitude [sk-def-sfb-constructible], and preserves every existing ambient discrete colimit indexed in $\\mathrm{Type}(u+2)$ whose vertices lie in $\\operatorname{Loc}(\\mathrm{Dctf}(X,\\Lambda))$ [sk-def-localizing-closure]. These are the two clauses of the existing predicate ProperLocalizingHypotheses. This does not identify the continuous-map algebraic-closure ring with the finite-subextension-valued ring in the older proper-image interface.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient. The blueprint's algebraic-closure coefficient of sk-def-localizing-closure is the finite-subextension-valued ring (sk-def-sfb-qlbar-condensed), which this statement never listed. The all-continuous case was dropped from this statement and from its Lean hypothesis; the remaining coefficients are unchanged.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "det-sf-comp-coherence-single",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E or the finite-subextension-valued Qbar_l; the all-continuous coefficient is not admissible any more"
+   },
+   {
+    "id": "det-sf-comp-composition-base-change",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E or the finite-subextension-valued Qbar_l; the all-continuous coefficient is not admissible any more"
+   },
+   {
+    "id": "lem-sfb-admissible-direct-image",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E or the finite-subextension-valued Qbar_l; the all-continuous coefficient is not admissible any more"
+   },
+   {
+    "id": "lem-sfb-continuous-qbar-exceptional-preservation",
+    "holds": false,
+    "note": "it applies the cited theorem to the all-continuous coefficient, which is no longer admissible; the citer exists only for that coefficient and is off every route (its Lean proof now has a sorry)."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Apply the existing representative coefficient theorem for finite rings, Z_ell, Q_ell, finite extensions E, their valuation rings, and the finite-subextension-valued algebraic closure. The finite nilpotence hypothesis follows by applying the admissibility annihilation condition to 1. Use det-sf-comp-proper-continuous-algcl for the remaining continuous-map algebraic-closure representative.",
+    "uses": [
+     "det-proper-image-localizing-proper",
+     "det-sf-comp-proper-continuous-algcl"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use lem-sfb-condensed-coefficient-iso-constructible for Dctf preservation under coefficient isomorphisms, and det-def-sfb-constructible-tor-amplitude for isomorphism invariance. Minimality of the localizing closure and coproduct preservation by the exact scalar-restriction equivalence give preservation of the closures. The derived restriction-pushforward comparison conjugates proper pushforward by these equivalences. Transfer Dctf preservation and the ambient coproduct comparisons through this conjugation; the closure and conjugation arguments are proved by private Lean helpers.",
+    "uses": [
+     "lem-sfb-condensed-coefficient-iso-constructible",
+     "det-def-sfb-constructible-tor-amplitude",
+     "det-def-localizing-closure-existence"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "det-proper-image-localizing-proper",
+   "det-sf-comp-proper-continuous-algcl",
+   "lem-sfb-condensed-coefficient-iso-constructible",
+   "det-def-sfb-constructible-tor-amplitude",
+   "det-def-localizing-closure-existence"
+  ]
  }
 }

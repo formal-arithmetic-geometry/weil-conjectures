@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-connected-action-affine-saturation-ample",
+ "kind": "statement",
+ "title": "Ampleness on the saturation of an affine open under a connected smooth group",
+ "statement": "Let $A$ be a Noetherian normal domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring] and let $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Let $H\\to S$ be a smooth separated group scheme of finite type with geometrically connected fibres (for every field $\\Omega$ and every morphism $\\operatorname{Spec}\\Omega\\to S$ the fibre $H_\\Omega=H\\times_S\\operatorname{Spec}\\Omega$ is connected) [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-connected-scheme]. A group scheme is equipped with multiplication, identity and inverse satisfying the group identities; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Let $Z\\to S$ be smooth, separated and of finite type, with an $H$-action $a:H\\times_SZ\\to Z$ [def-pc-fibre-product]. For every affine open subscheme $U\\subseteq Z$, the image $W=a(H\\times_SU)\\subseteq Z$ on underlying points is open. Give $W$ its open subscheme structure. Then $W$ admits an ample invertible $\\mathcal O_W$-module in the absolute sense of [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. No homogeneity of $Z$, affineness of $H$, commutativity, or relative dimension bound is assumed; empty $U$ is allowed.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Proposition quoted in the proof of 4.2.2, printed p.57, attributed there to Raynaud, Faisceaux amples, V.3.10 (OCR V.5.10). Specialize its quasi-affine open to an affine open and its normal locally Noetherian base to an affine normal Noetherian domain. The quoted conclusion constructs a relatively ample boundary-divisor line on the saturation; over an affine base it is ample in the absolute sense. Local archive WANTED; primary scan read at https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "The map $T:H\\times_SZ\\to H\\times_SZ$, $(h,z)\\mapsto(h,hz)$, is an isomorphism with inverse $(h,z)\\mapsto(h,h^{-1}z)$, by the action identities. The projection to $Z$ is smooth by [lem-pc-proper-base-change](2); hence $a=\\operatorname{pr}_2\\circ T$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes](c). By [lem-pc-smooth-flat] it is flat and locally of finite presentation. On affine source and target charts its ring maps are flat of finite presentation, so [lem-weil-pbc-flat-finite-presentation-open] says their maps are open. Taking their union shows $a$ is open. Since $H\\times_SU$ is open, its image $W$ is open. The identity gives $U\\subseteq W$. Associativity and inverses give $H\\cdot W=W$: a point represented after a residue-field extension by $hu$ is sent to $(gh)u$, and every point of $W$ occurs by the identity. Thus the action factors through $W$ by [lem-weil-pbc-morphism-factors-through-open-subscheme], and the action identities restrict to it.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-finite-presentation-open",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UA (lemma-fppf-open), 056G (lemma-smooth-open); group-action factorization as in BLR 6.6 Theorem 2"
+   }
+  },
+  {
+   "text": "The single affine chart $S=\\operatorname{Spec}A$ makes $S$ locally Noetherian by [pqf-def-locnoeth], and affine schemes are quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Its local rings $A_{\\mathfrak p}$ are normal domains by [lem-weil-pbc-localization-normal-domain]. By [lem-weil-pbc-finite-type-over-noetherian], $Z$ and $H$ are Noetherian, and by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so is $W$. The open immersion $W\\to Z$ is of finite presentation by [lem-sfb-noetherian-open-closed-finite-presentation]. Smoothness restricts to $W$ by [lem-weil-pbc-smooth-restrict-open-subschemes]. Both $W\\to S$ and $H\\to S$ are separated: the restricted diagonal is the base change of the original diagonal, hence a closed immersion by [lem-weil-pbc-proper-fp-permanence](b). They are quasi-compact since their sources are Noetherian, and quasi-separated by [lem-pc-separated-quasi-separated]. Their local finite presentation follows from [lem-pc-smooth-flat], hence they are of finite presentation; in particular $W\\to S$ is of finite type.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-separated-quasi-separated",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01OV; normal affine base and finite presentation setup"
+   }
+  },
+  {
+   "text": "We check that $U_t$ is dense in $W_t$ for every $t\\in S$. First pass to an algebraic closure $\\Omega$ of $\\kappa(t)$. The surjection $H\\times_SU\\to W$ remains surjective by [lem-weil-pbc-surjective-base-change]. The scheme $W_\\Omega$ is smooth by [lem-pc-proper-base-change], normal by [lem-trf-smooth-geometrically-normal], and Noetherian by [lem-sfb-finite-type-composition-base-change] and [lem-weil-pbc-finite-type-over-noetherian]. Every quasi-compact open is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so the finite-component condition holds there too. Its irreducible components are disjoint integral opens by [lem-sfb-normal-locally-finite-components] and [lem-weil-pbc-noetherian-finitely-many-components]. In each component choose $y\\in W_\\Omega(\\Omega)$ using [lem-pc-rational-points-dense] on that smooth open. The inverse image of $U_\\Omega$ under $H_\\Omega\\to W_\\Omega$, $g\\mapsto g^{-1}y$, is nonempty by the surjection, and open. It contains an $\\Omega$-point by the same density lemma. The orbit of $y$ lies in its component: it is the continuous image of the connected $H_\\Omega$, and components are disjoint opens. Consequently $U_\\Omega$ meets every component, and is dense in each because the component is irreducible. Hence it is dense in $W_\\Omega$. The projection $W_\\Omega\\to W_t$ is surjective by [lem-weil-pbc-surjective-base-change] applied to $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(t)$, so the image of this dense subset is dense in $W_t$. Empty fibres require no choice.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-normal-locally-finite-components",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-pc-rational-points-dense",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Theorem 6.8 setup: the affine open is fibrewise dense in its connected-group saturation; elementary component argument written explicitly"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-normal-affine-boundary-cartier] to $W\\to S$ and $U$. Step 2 verifies its normal affine locally Noetherian base, smooth separated finite presentation and affine-open hypotheses; step 3 verifies its fibrewise-density hypothesis. It gives the effective Cartier divisor $D=(W\\setminus U)_{\\mathrm{red}}$ with exactly that support. Set $L=\\mathcal O_W(D)$, which is invertible by [lem-pc-divisor-line-bundle-properties](1). By [lem-sc-canonical-section-zero-scheme] it has a global section $s$ with zero scheme $D$. Locally, if the Cartier ideal is $(f)$ with $f$ a nonzerodivisor, the dual generator trivializes $L$ and $s$ has coefficient $f$. Thus its nonvanishing open is exactly $W_s=W\\setminus|D|=U$, including the empty divisor case.",
+   "uses": [
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-pc-divisor-line-bundle-properties",
+    "lem-sc-canonical-section-zero-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Theorem 6.8 Step 1, affine case; Stacks Tag 01X0, divisors.tex lemma-characterize-OD"
+   }
+  },
+  {
+   "text": "Let $V$ be the union of all affine positive-power nonvanishing opens of $L$. Step 4 gives $U=W_s\\subseteq V$ with exponent $1$. Since the action on $W$ is saturated, $W=H\\cdot U\\subseteq H\\cdot V\\subseteq W$. Apply [lem-sfb-connected-action-orbit-section-ampleness] to $X=W$ and this $L$. Its base and smooth separated finite-type hypotheses hold by step 2, and its saturation hypothesis is the displayed equality. It follows that $L$ is ample in the absolute sense. This produces the required invertible module without imposing connectedness of $W$, a section, or a square condition. If $U$ is empty, $W$ is empty and the same argument gives the unique line on the empty scheme, with ampleness vacuous.",
+   "uses": [
+    "lem-sfb-connected-action-orbit-section-ampleness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4(b), applied to the canonical boundary section; Theorem 6.8 affine-open case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-finite-presentation-open",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-noetherian-open-closed-finite-presentation",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-normal-locally-finite-components",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-pc-rational-points-dense",
+  "lem-sfb-smooth-normal-affine-boundary-cartier",
+  "lem-pc-divisor-line-bundle-properties",
+  "lem-sc-canonical-section-zero-scheme",
+  "lem-sfb-connected-action-orbit-section-ampleness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Assembly following the primary online Guo Proposition 6.4(b) and Theorem 6.8, affine-open case, and the Anantharaman p.57 quoted proposition. Local scans WANTED; full component-density argument supplied by Q03."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected fibre group acting on a smooth separated scheme over an affine normal Noetherian base has an ample invertible sheaf on the saturation of any quasi affine open",
+   "results": "{\"t\": \"2026-10-24T12:37:53Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected fibre group acting on a smooth separated scheme over an affine normal Noetherian base has an ample invertible sheaf on the saturation of any quasi affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\"], \"digest\": \"79e341f29529ddb7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasi-affineness, affine open covers, or Proj charts; none constructs an ample invertible sheaf from a smooth connected group saturation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud ampleness of boundary divisors on the group saturation of a quasi affine open in a smooth scheme over a normal base",
+   "results": "{\"t\": \"2026-10-24T12:37:53Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud ampleness of boundary divisors on the group saturation of a quasi affine open in a smooth scheme over a normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.casesOn\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\"], \"digest\": \"fe648ed1ba93291c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasi-affineness, affine open covers, or Proj charts; none constructs an ample invertible sheaf from a smooth connected group saturation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"GrpObj\"",
+   "results": "{\"t\": \"2026-10-24T12:37:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"GrpObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasi-affineness, affine open covers, or Proj charts; none constructs an ample invertible sheaf from a smooth connected group saturation"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*ample|ample.*saturat|Raynaud|quasiAffine.*[Aa]ction",
+   "results": "{\"t\": \"2026-10-24T12:37:54Z\", \"tool\": \"grep\", \"query\": \"saturat.*ample|ample.*saturat|Raynaud|quasiAffine.*[Aa]ction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasi-affineness, affine open covers, or Proj charts; none constructs an ample invertible sheaf from a smooth connected group saturation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected group action translates of an affine open generate a quasi projective open over a normal affine base",
+   "results": "{\"t\": \"2026-10-24T12:37:59Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth connected group action translates of an affine open generate a quasi projective open over a normal affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.iSup_affineOpens_eq_top\"], \"digest\": \"7dd5fd90fb492fe9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define quasi-affineness, affine open covers, or Proj charts; none constructs an ample invertible sheaf from a smooth connected group saturation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T13:36:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; affine covers, structure-sheaf localization and quasi-affineness do not give this theorem about invertible modules and connected scheme group actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected group saturating an affine open of a smooth separated scheme over a normal Noetherian affine base gives an ample invertible module",
+   "results": "{\"t\": \"2026-10-24T13:36:51Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected group saturating an affine open of a smooth separated scheme over a normal Noetherian affine base gives an ample invertible module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\"], \"digest\": \"2ada37dcd806e2b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; affine covers, structure-sheaf localization and quasi-affineness do not give this theorem about invertible modules and connected scheme group actions."
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*ample|ample.*saturat|IsAmple.*[Aa]ction",
+   "results": "{\"t\": \"2026-10-24T13:46:13Z\", \"tool\": \"grep\", \"query\": \"saturat.*ample|ample.*saturat|IsAmple.*[Aa]ction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; affine covers, structure-sheaf localization and quasi-affineness do not give this theorem about invertible modules and connected scheme group actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected group action on a smooth scheme over a normal Noetherian affine base makes the saturation of every affine open admit an ample line bundle",
+   "results": "{\"t\": \"2026-10-24T13:46:14Z\", \"tool\": \"leansearch\", \"query\": \"A smooth connected group action on a smooth scheme over a normal Noetherian affine base makes the saturation of every affine open admit an ample line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite\", \"ProperSMul\", \"ProperSMul.mk\", \"ProperSMul.toContinuousSMul\", \"instProperVAdd\", \"smoothSheafGroup\", \"t2Space_quotient_mulAction_of_properSMul\", \"smoothSheafCommGroup\"], \"digest\": \"2cbe3bb635bdf28a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; affine covers, structure-sheaf localization and quasi-affineness do not give this theorem about invertible modules and connected scheme group actions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait group descent; Anantharaman 4.2.2 proof, printed pp.57–59; Proposition quoted in the proof of 4.2.2, printed p.57, attributed there to Raynaud, Faisceaux amples, V.3.10 (OCR V.5.10). Specialize its quasi-affine open to an affine open and its normal locally Noetherian base to an affine normal Noetherian domain. The quoted conclusion constructs a relatively ample boundary-divisor line on the saturation; over an affine base it is ample in the absolute sense.",
+   "via": [
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-connected-action-affine-saturation-ample",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Proved openness and stability using the action isomorphism, checked Noetherian/finite-presentation hypotheses and fibrewise density, reused the normal smooth affine-boundary Cartier theorem and canonical divisor section, and isolated only the general orbit criterion without square hypotheses.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability, detailed direct-image proof (3), inherited strict-local descent chain; nearest imported ancestor remains null as tools/blueprint_refs.py ancestor reports. The new node serves the ampleness step in Anantharaman p.57 quoted Raynaud proposition.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-flat-finite-presentation-open",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-pc-divisor-line-bundle-properties",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sc-canonical-section-zero-scheme",
+    "why": "Generic scheme geometry or divisor tool used with its stated hypotheses; it supports the normal-base group-saturation argument, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-finite-presentation-open",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-pc-rational-points-dense",
+  "lem-pc-divisor-line-bundle-properties",
+  "lem-sc-canonical-section-zero-scheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-5dda3887c",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-5dda3887c (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-connected-action-orbit-section-ampleness and all cited statements. Guo's PDF (online only, no local copy) was read: Prop 6.4(b) p.16 assumes a normal R, a smooth flat finite-type G with connected fibres and a topologically Noetherian X of strict (N)-type, and has no Picard-admissibility hypothesis, because the proof gets a power via Prop 5.9 after component dévissage and fpqc descent. So the new node, with affine X_s, a Noetherian normal domain base and geometrically connected H, is a true specialization. It is not a duplicate: square-action-affine-orbit-criterion is Guo Cor 6.5 with the square condition, dedekind-action-boundary-ampleness is only for a Dedekind base and O(E), and group-affine-section-ampleness is the special case X=H. It is not a restatement of the item. The split follows Guo Thm 6.8 and simplifies it: D=(W\\U)_red is Cartier with support W\\U, so W_s=U is affine and step 5 applies 6.4(b) directly. Checked: step 1 (a smooth via the isomorphism T and smooth-restrict (c), hence open), step 2 (restricted diagonal is a base change, so W/S is fp), step 3 (density over the algebraic closure, using the disjoint normal components, rational points and connectedness of H_Omega), step 4 (boundary-cartier hypotheses, O(D) and canonical section with W_s=U). Small cases checked: U empty, U=W, trivial H. Batch-5: lem-trf-smooth-geometrically-normal (Stacks 056T) and lem-trf-invertible-affine-limit-descent (Stacks 0B8W, reached via boundary-cartier) are generic scheme facts, neither given by the trace formula or Poincare duality nor steps of their proofs, so both are accepted. FIX (B3): the new node said 'geometrically connected fibres' without defining it, and def-weil-connected-scheme defines plain connectedness only. I added the item's inline definition (every field Omega over S has H_Omega connected) in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-connected-action-orbit-section-ampleness.json.; 1 file(s) fixed by the reviewer"
+ }
+}

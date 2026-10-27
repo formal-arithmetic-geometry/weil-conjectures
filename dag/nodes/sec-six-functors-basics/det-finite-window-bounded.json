@@ -23,71 +23,66 @@
  ],
  "proof": [
   {
-   "text": "Fix $C$ and $d_C$. We prove the assertion for every such bounded $L$ by strong induction on the finite number $N(L)=\\#\\{q:H^q(L)\\neq0\\}$. If $N(L)=0$, choose a complex $M^\\bullet$ representing $L$. The map $0\\to M^\\bullet$ is a quasi-isomorphism, since it is an isomorphism on every cohomology object. Its image is invertible in the derived category by [def-weil-abstract-derived-category], so $L\\cong0$ and every map $C\\to L$ is zero.",
+   "text": "Put S=C[0] and Q(M)=Subsingleton Hom(S,M). Postcomposition with an isomorphism is injective, so Q is replete. Zero objects satisfy Q. For a distinguished triangle A -> M -> B, if Q(A) and Q(B), every map S -> M has zero composite to B and factors through A by [lem-weil-pbc-hom-into-triangle-exact]; the factor is zero. Thus Q is closed under extensions.",
    "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
-    "place": "opening induction sentence; the case L=0, with the acyclic case written out"
-   }
-  },
-  {
-   "text": "If $N(L)=1$, let $q$ be the unique degree with nonzero cohomology. By [lem-sf-derived-concentrated-single], $L\\cong H^q(L)[-q]$. The definition of $\\Dic$ in the statement gives $H^q(L)\\in\\IndCons(X,\\Lambda)$. Since $H^q(L)\\neq0$, the upper-vanishing hypothesis forces $q\\leq-d_C-1$, hence $-q\\geq d_C+1>d_C\\geq0$. By the Ext convention [def-pc-ext], $\\Hom(C,L)\\cong\\Ext^{-q}(C,H^q(L))$ in the ambient module derived category. The last group vanishes by [det-ind-heart-ii-vanishing], applied with $B=H^q(L)$ and Ext degree $-q$.",
-   "uses": [
-    "lem-sf-derived-concentrated-single",
-    "def-pc-ext",
-    "det-ind-heart-ii-vanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
-    "place": "one-cohomology-sheaf case, from L isomorphic to H^q(L)[-q] through Ext vanishing"
-   }
-  },
-  {
-   "text": "Assume $N(L)\\geq2$ and the induction hypothesis for every complex satisfying the stated hypotheses with fewer nonzero cohomology sheaves. Let $q_0=\\min\\{q:H^q(L)\\neq0\\}$. Apply [lem-pc-derived-lower-truncation-step-triangle] with $E=L$ and $n=-q_0$. It gives the distinguished triangle $H^{q_0}(L)[-q_0]\\to\\tau_{\\geq q_0}L\\to\\tau_{\\geq q_0+1}L\\to H^{q_0}(L)[-q_0+1]$. The good-truncation formula of [def-kun-truncations] says $H^i(\\tau_{\\geq a}L)=H^i(L)$ for $i\\geq a$ and zero otherwise. Thus $L\\to\\tau_{\\geq q_0}L$ is an isomorphism on every cohomology sheaf and hence is invertible in the derived category [def-weil-abstract-derived-category]. Write $A=H^{q_0}(L)[-q_0]$, $T=\\tau_{\\geq q_0}L$, $B=\\tau_{\\geq q_0+1}L$, and let $a:A\\to T$, $b:T\\to B$, $c:B\\to A[1]$ be the displayed triangle maps. With $e:L\\xrightarrow{\\sim}T$ the preceding isomorphism, define $u=e^{-1}\\circ a$ and $v=b\\circ e$. The triple $(1_A,e,1_B)$ is an isomorphism from $(A\\xrightarrow{u}L\\xrightarrow{v}B\\xrightarrow{c}A[1])$ to the displayed distinguished triangle: $e\\circ u=a$, $b\\circ e=v$, and the last square is the identity. Thus the triangle with middle term $L$ is distinguished by (TR1) of [def-weil-triangulated-category]. The zero sheaf is constructible, hence ind-constructible by its constant filtered presentation. The only possibly nonzero cohomology sheaf in $A$ is ind-constructible, so $A\\in\\Dic$ directly from the definition, and $B\\in\\Dic$ by [det-ambient-ind-derived-sums](2). The only cohomology of $A$ is $H^{q_0}(L)$ in degree $q_0$; the nonzero cohomology degrees of $B$ are exactly those of $L$ other than $q_0$. Both are bounded and retain the required upper vanishing. Therefore $N(A)=1<N(L)$ and $N(B)=N(L)-1<N(L)$, and induction gives $\\Hom(C,A)=\\Hom(C,B)=0$.",
-   "uses": [
-    "lem-pc-derived-lower-truncation-step-triangle",
-    "def-kun-truncations",
-    "def-weil-abstract-derived-category",
-    "det-ambient-ind-derived-sums",
+    "lem-weil-pbc-hom-into-triangle-exact",
     "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
-    "place": "general case: choice of q_0, canonical triangle, and verification of the hypotheses on both outer terms"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+    "place": "bounded-complex truncation induction and one-cohomology case"
    }
   },
   {
-   "text": "Write $u:A\\to L$ and $v:L\\to B$ for the first two maps of the triangle in step 3. For any $f:C\\to L$, the map $v\\circ f$ lies in $\\Hom(C,B)=0$. Part (ii) of [lem-weil-pbc-hom-into-triangle-exact], with $W=C$, gives $g:C\\to A$ such that $f=u\\circ g$. Since $\\Hom(C,A)=0$, one has $g=0$ and $f=0$. This proves the induction step and hence the assertion.",
+   "text": "Use the proved source-library theorem DerivedCategory.prop_of_bounded_of_degreewise (WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure), with P(q,N)=Q(N placed in degree q). This theorem implements the canonical truncation induction using the standard t-structure [def-sbc-standard-tstructure-derived-category] and the concentration-in-one-degree lemma [lem-sf-derived-concentrated-single]. Finite cohomology support is bounded above and below; isGE_iff and isLE_iff therefore supply its boundedness input, including empty support. P(q,-) is replete by applying the single functor to isomorphisms.",
    "uses": [
-    "lem-weil-pbc-hom-into-triangle-exact"
+    "def-weil-abstract-derived-category",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-concentrated-single"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
-    "place": "last exact Hom sequence and conclusion of the induction"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+    "place": "bounded-complex truncation induction and one-cohomology case"
+   }
+  },
+  {
+   "text": "For each q > -d_C-1, H^q(L) is zero, and its single complex is zero. Otherwise set r=(-q).toNat. Since d_C is nonnegative and q <= -d_C-1, r is a natural number with r=-q in Z and d_C<r. Apply [lem-finite-window-ind-ext-bound] to H^q(L), which is ind-constructible by hL, using the very same constructible Ext bound hExt. The coefficient equality in that lemma is equality of bundled monoid objects and hence retains the specified multiplication. For algebraic-closure coefficients choose the actual bottom finite intermediate field; no witness is selected from an unproved existence theorem.",
+   "uses": [
+    "lem-finite-window-ind-ext-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+    "place": "bounded-complex truncation induction and one-cohomology case"
+   }
+  },
+  {
+   "text": "By [def-pc-ext], Ext.homEquiv identifies the vanishing Ext group with Hom(C[0],H^q(L)[r]). The source-library singleFunctors.shiftIso identifies the shifted single complex with the sheaf placed in degree q. This gives P(q,H^q(L)) at every q. The degreewise induction in step 2 now gives Q(L), exactly the unchanged conclusion for both coefficient choices.",
+   "uses": [
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+    "place": "bounded-complex truncation induction and one-cohomology case"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "lem-sf-derived-concentrated-single",
-  "def-pc-ext",
-  "det-ind-heart-ii-vanishing",
-  "lem-pc-derived-lower-truncation-step-triangle",
-  "def-kun-truncations",
-  "det-ambient-ind-derived-sums",
+  "lem-weil-pbc-hom-into-triangle-exact",
   "def-weil-triangulated-category",
-  "lem-weil-pbc-hom-into-triangle-exact"
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-concentrated-single",
+  "lem-finite-window-ind-ext-bound",
+  "def-pc-ext"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
-  "place": "complete bounded-case induction; generic tools checked against Stacks Tags 08J5 and 0149"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+  "place": "bounded truncation induction specialized via the already proved source-library degreewise devissage; only its general-scheme sheaf Ext input is split off"
  },
  "mathlib_searches": [
   {
@@ -177,7 +172,18 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-finite-window",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.FiniteWindowBounded",
   "declaration": "AlgebraicGeometry.ProEtale.finiteWindow_bounded",
@@ -199,5 +205,15 @@
   "group": "NJ",
   "result": "pass",
   "note": "Clause-by-clause check of NJ/det-finite-window-bounded: E and Q̄_ℓ coefficients (continuousMapRingObj E / padicAlgClRingObj ℓ), Mod(condensedRingObj Λ X), IsConstantModelConstructible, d_C:ℕ given as a property hypothesis with Ext from HasExt.standard for r>d_C, ObjectProperty.ind.{u+1} on every H^q, finite support, strict vanishing above -d_C-1, conclusion Subsingleton(single 0 C ⟶ L). All match node and source; lean.statement verbatim; only the lean field changed. No extra hypotheses or universe restrictions, no definitions, sorry only, source and proof docstrings present. nt_compile --json: clean, 12.8 s. A /tmp test applying both theorems with the citer FiniteWindowUnbounded's pulledBackModuleObjects types compiled clean (33.5 s), so the encodings and instances agree. Edge cases (L=0, acyclic L, C=0, empty X, d_C=0, boundary degree) covered. The 'Second reading by NJ' section holds the post-2026-10-17 convention text (822 landed reports carry it). STATEMENT-DISPUTED: the proof dep det-ind-heart-ii-vanishing assumes X Noetherian, but neither the source lemma nor the unit or chapter sections do, and the landed sibling also allows any X. Statement kept; the gap is in the stage-3 proof route and is recorded in review.md for the maintainer."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T130415-L-3455590",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-compact-support-native-effectivity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; auxiliary scalar-limit argument Steps 1--2, effectivity and coherent actual projection adjuncts.",
+   "via": [
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Effectivity and coherent counits of the native support limit",
+ "statement": "Let $\\ell,E,D,X,Y,f,c,S,K$ satisfy the same single-coefficient hypotheses as [lem-pur-compact-support-native-realization]. Let $L=\\operatorname{scalarSupport}_{E,c,S}(K)$, the total limit of [def-pur-compact-support-scalar-limit-maps]. Then $L$ is intrinsically derived complete. For all $n\\le m$, the actual native projection adjuncts satisfy $\\epsilon_m\\tau_{mn}=d_{mn}\\operatorname{Res}_{mn}(\\epsilon_n)$, where $\\tau$ is coefficientSequenceDerivedTransition and $d$ is normalizedDVRReductionTransition of [lem-coef-normalized-dvr-effectivity]. Every scalarSupportCounit to the finite compact-support presentation is an isomorphism. All maps are the adjoints of the prescribed projections, not independently chosen finite isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), Tag 07A6 (lemma-adjoint); application to the native proper/open coefficient system. The finite compact-support compatibility is more-etale.tex Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings).",
+  "note": "Lean split/construction: lean/Sheaf/Paper/CompactSupportNativeEffectivity.lean:57; source proof step is recorded in proof_origin and the declaration docstring."
+ },
+ "stmt_deps": [
+  "def-pur-compact-support-scalar-limit-maps",
+  "def-coef-derived-system-calculus-data",
+  "lem-pur-compact-support-native-realization",
+  "lem-coef-normalized-dvr-effectivity"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized DVR tower using the native evaluations and transitions and their exact completed restriction. Native finite-action normalization supplies its normalization.",
+   "uses": [
+    "def-weil-compact-support-finite-action",
+    "lem-coef-sequence-roos-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual completed tower has the canonical Roos triangle with coefficientConstantTowerProjection. Apply normalizedDVRTower_effectivity. Pi.lift projection identities identify its counit with scalarSupportNativeCounit, so obtain every quotient cocycle and native counit isomorphism. Convert legacy completeness to intrinsic completeness.",
+   "uses": [
+    "lem-coef-constant-tower-roos",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Adjunction uniqueness expresses scalarSupportCounit as finiteReductionIso followed by the native counit and scalarSupportEvaluation. All three factors are isomorphisms.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-compact-support-finite-action",
+  "lem-coef-sequence-roos-model",
+  "lem-coef-constant-tower-roos",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), Tag 07A6 (lemma-adjoint); application to the native proper/open coefficient system. The finite compact-support compatibility is more-etale.tex Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings). Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; auxiliary scalar-limit argument Steps 1--2, effectivity and coherent actual projection adjuncts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized compact support scalar extension derived inverse limit finite reduction projection adjunction",
+   "results": "8 unrelated Mathlib hits, including Condensed.profiniteSolidCounit; no normalized support-tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "effectivity of normalized DVR towers with canonical projection adjoints",
+   "results": "8 unrelated ring-theoretic/normalization hits, including IsDedekindDomainDvr.toIsNoetherian; no derived tower effectivity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv, homEquiv_unit and homEquiv_counit provide the adjunction API, but not native tower realization or scalar descent.",
+   "date": "2026-10-27",
+   "verdict": "partial match: generic adjunction API"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedDVRTower_effectivity|coefficientConstantTower_roos|compactSupportSystem_normalized",
+   "results": "msearch returned zero Mathlib hits. Repository rg found normalizedDVRTower_effectivity, coefficientConstantTower_roos and the native normalization helper, used in the proved supporting modules.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match; project declarations used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarLimitReduction",
+  "group": "D4",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportNativeEffectivity",
+  "file": "lean/Sheaf/Paper/CompactSupportNativeEffectivity.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.compactSupport_native_effectivity",
+  "statement": "theorem compactSupport_native_effectivity\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} {f : X ⟶ Y}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f) (S : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (K : DerivedCategory (scalarReductionSource l E X)) (hK : sfIntegralConstructible l E X K) :\n    IsSfDerivedComplete l E Y ((scalarSupport l E c S).obj K) ∧\n    (∀ (m n : ℕ) (h : n ≤ m),\n      scalarSupportNativeCounit l E c S m K ≫\n          (coefficientSequenceDerivedTransition l E Y h).app\n            ((scalarSupportNative l E c S).obj K) =\n        normalizedDVRReductionTransition l E Y D hl h ((scalarSupport l E c S).obj K) ≫\n          (normalizedDVRRes l E Y h).map (scalarSupportNativeCounit l E c S n K)) ∧\n    ∀ n : ℕ, IsIso (scalarSupportCounit l E c S n K)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

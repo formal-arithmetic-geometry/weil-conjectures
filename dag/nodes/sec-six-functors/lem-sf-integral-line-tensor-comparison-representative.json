@@ -56,27 +56,25 @@
  ],
  "proof": [
   {
-   "text": "A local rank-one trivialization makes tensor by T exact, hence T is flat. The bounded-above flat criterion gives K-flatness of T[0]. The total tensor model theorem gives K-flatness and flat terms for Tot(P tensor T[0]).",
+   "text": "Apply line_unbounded_derived_tensor to the actual completed integral coefficient ring and the given rank-one locally free T. Retain its K-flatness of T[0] and its termwise flatness. Apply kFlat_total_tensor_model to P and T[0], using P.property for the two hypotheses on P. Its first two clauses are precisely Good for integralLineComplex.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pur-line-unbounded-derived-tensor",
     "lem-pur-kflat-total-tensor-model"
    ],
    "elementary": false
   },
   {
-   "text": "At every finite quotient use the normalized scalar tensorator on each bidegree summand. Its formula is a tensor (x tensor y) mapped to (a tensor x) tensor (1 tensor y); multiplication of the two finite coefficients is its inverse. Distribute extension over the direct sums and observe that both total differentials have the same second-factor sign (-1)^p. This constructs the finite chain isomorphism with the stated generator equation.",
+   "text": "Apply the proved scalarTensorTotal helper of IntegralTensorReductionTowerComparison to the actual finite reduction functor, using its prescribed object and map equations. Evaluate its natural chain isomorphism at (P,T[0]). Its scalar-one generator equation is definitionally the equation for IntegralOnSlice.generator, because both use toSheafify and the same object equality. Substitute k=p+q. For an arbitrary finite coefficient a, express generator(a,x) as a times generator(1,x), using the scalar-extension tensor action and linearity of sheafification and the object-equality cast. Every component of the comparison is linear. The total tensor generator is linear in its first factor, by TensorProduct.smul_tmul and linearity of the sheafification unit and summand inclusion. These identities multiply the scalar-one equation by a and give exactly the required generator formula. No flatness of the quotient map, boundedness of P, or nonzero coefficient hypothesis is introduced.",
    "uses": [
-    "lem-pur-independent-ringed-tensorator-existence"
+    "lem-pur-integral-tensor-reduction-tower-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-line-unbounded-derived-tensor",
   "lem-pur-kflat-total-tensor-model",
-  "lem-pur-independent-ringed-tensorator-existence"
+  "lem-pur-integral-tensor-reduction-tower-comparison"
  ],
  "lean": {
   "existing": false,
@@ -91,7 +89,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Stacks 06YQ, 06YY and 07A4; scalar-extension tensor balancing"
+  "place": "Tags 06YQ, 06YY, 07A2 and 07A4; existing line and total-tensor model theorems, and normalized scalar-extension comparison. Specialization and arbitrary-coefficient linearity argument written by P3, 2026-10-26."
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -104,14 +102,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-69bed",
-  "group": "H2",
-  "result": "fix",
-  "landing": "20261021T001119-L-1372542",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261025T202728-L-2746388",
   "kind": "interface",
-  "note": "independent cc review: item theorem statement vs live clone (identical), ten moved defs vs change-record Old block (verbatim), new sorry statements vs nodes and BS 3.5.1/Stacks 06YY, node stmt_deps vs Lean usage"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

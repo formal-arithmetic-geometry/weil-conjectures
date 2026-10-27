@@ -1,0 +1,144 @@
+{
+ "id": "lem-per-dense-henselian-relative-separable-closed",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks. ILO XX 4.4 dense-field sentence, expanded in the parent proof step 1: relative separable closedness.",
+   "via": [
+    "lem-per-dense-henselian-field-etale-comparison",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "A dense henselian valued subfield is relatively separably closed",
+ "statement": "Let $K\\hookrightarrow L$ be a field extension [def-pc-field-extension] with nontrivial valuations [def-trf-valuation-ring]. Assume the valuation ring of $K$ is henselian [def-weil-pbc-henselian-terminology], that the valuation topology of $K$ is induced from $L$, and that the image of $K$ is dense in $L$ (every nonempty open subset meets it). Then every $a\\in L$ separable over $K$ [def-weil-pbc-separable-algebraic-extension] belongs to the image of $K$. No henselianity of $L$, completeness, rank, or residue-characteristic condition is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 4.4, printed p.374: dense embedding of henselian valued fields and the displayed Galois-group isomorphism."
+ },
+ "stmt_deps": [
+  "def-trf-valuation-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "For a separable a over K, put E=K(a). Embed E in a separable closure and then in a finite Galois extension N/K. Prolong the henselian valuation of K to N. The topology on E inherited from N and the topology inherited from L both induce the given topology on K. The uniqueness-of-topology clause for the finite separable extension E/K identifies these topologies.",
+   "uses": [
+    "def-kun-separably-closed",
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "lem-per-henselian-finite-extension-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374: dense embedding of henselian valued fields and the displayed Galois-group isomorphism."
+   }
+  },
+  {
+   "text": "Density in L implies density of K in the subspace E: each open neighbourhood in E is the intersection of E with an open set of L, and that open set meets K. Intersect the Krasner neighbourhood of a in N with E and choose b in K in this neighbourhood. Krasner implies a in K(b)=K. If a was already in K the assertion was immediate, covering the empty moving-conjugate case. Convert the valuations using the actual value groups so their ball topologies agree.",
+   "uses": [
+    "lem-per-henselian-krasner-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374: dense embedding of henselian valued fields and the displayed Galois-group isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-separably-closed",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-per-henselian-finite-extension-topology",
+  "lem-per-henselian-krasner-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XX 4.4 dense-field sentence, expanded in the parent proof step 1: relative separable closedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A dense henselian valued subfield is relatively separably closed in any valued field extension",
+   "results": "SeparableClosure.isSepClosed; IsSepClosure.sep_closed; separableClosure.isSepClosure; IsSepClosed; Algebra.IsAlgebraic.isSepClosed; IsSepClosure; IsSepClosure.isSeparable; IsSepClosure.separable.",
+   "date": "2026-10-26",
+   "verdict": "no match: the results do not state the arbitrary-rank henselian assertion or the identified inverse-image equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dense henselian valued subfield is relatively separably closed in the larger valued field",
+   "results": "separableClosure; IsSepClosed.casesOn; SeparableClosure.isSepClosed; IsSepClosure.recOn; IsSepClosed.of_isAlgClosed; IsSepClosed; le_separableClosure; IsSepClosure.sep_closed.",
+   "date": "2026-10-26",
+   "verdict": "no match: the results do not state the arbitrary-rank henselian assertion or the identified inverse-image equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSeparable, DenseRange",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match: the results do not state the arbitrary-rank henselian assertion or the identified inverse-image equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*dense|dense.*henselian|separable.*approximation",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-26",
+   "verdict": "no match: the results do not state the arbitrary-rank henselian assertion or the identified inverse-image equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.DenseHenselianEtaleComparison",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.DenseHenselianRelativeSeparableClosed",
+  "file": "lean/Sheaf/FieldTheory/DenseHenselianRelativeSeparableClosed.lean",
+  "declaration": "FieldTheory.denseHenselian_isSeparable_mem_range",
+  "statement": "theorem denseHenselian_isSeparable_mem_range\n    (K L : Type u) [Field K] [Field L] [Algebra K L]\n    (Γ : Type v) (Δ : Type w)\n    [LinearOrderedCommGroupWithZero Γ] [LinearOrderedCommGroupWithZero Δ]\n    [vK : Valued K Γ] [vL : Valued L Δ]\n    [vK.v.IsNontrivial] [vL.v.IsNontrivial]\n    [HenselianLocalRing vK.v.valuationSubring]\n    (h_induced : Topology.IsInducing (algebraMap K L))\n    (h_dense : DenseRange (algebraMap K L))\n    (a : L) (ha : IsSeparable K a) :\n    a ∈ Set.range (algebraMap K L)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T091025-L-3296852",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T091025-L-3296852",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,95 @@
+{
+ "id": "def-finite-compact-scalar-transport-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Step 5: the specified scalar comparisons in the compactification formula; existing data constructions from the item proof Steps 1 and 2, relocated without change",
+   "via": [
+    "lem-finite-compact-support-scalar-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The specified finite compact-support scalar comparison data",
+ "statement": "Let $A,B$ be finite commutative rings, $\\phi:A\\to B$ a ring map, and $j:X\\to Z$ an open immersion of schemes. Write $J_A$ for the exact derived etale extension by zero and $S_T$ for derived extension of coefficients on the etale site. Define $\\operatorname{openScalarIso}:J_A S_Z\\simeq S_X J_B$ by uniqueness of the left adjoints of the common open/coefficient restriction composite, using the specified open restriction isomorphism. For a compactification $c=(j,g)$ with noetherian $Z,Y$, define compactScalarIso as the proper scalar mate of [lem-asd-proper-finite-coefficient-extension] followed by proper image of openScalarIso. For each scheme $T$, define scalarRingMap to be the actual map of constant ring sheaves induced by $\\phi$. Define intrinsicSiteFunctorIso as the derived composition comparison from fixed-scalar site inverse image followed by the intrinsic realization equivalence. Define realizationScalarIso by left-adjoint uniqueness from the sectionwise inverse-realization/restriction square of [lem-sf-compact-support-restriction-of-scalars], and siteScalarIso by composing it with the canonical site/scalar comparison of [lem-pur-etale-scalar-mate-projection]. Define compactRealizationIso using the realization equivalence unit for open extension and the normalized proper realization comparison. Define compactSiteIso on bounded-below etale inputs by the canonical compact-support site comparison [lem-sf-class-compact-support-comparison] followed by this realization comparison. Finally, for bounded-below etale $G,GB$ and an actual scalar-extension identification $S_XG\\simeq GB$, define intrinsicCompactScalarIsoOfOrigin by transporting compactScalarIso through compactSiteIso and siteScalarIso, inserting that identification and its inverse. These are the nine existing explicit constructions relocated verbatim from the item module, with all their original Lean universes and hypotheses preserved. No compatibility equality is asserted by this definition record.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5 (exactness and reduction); Stacks 09AF, 099R and 00YV"
+ },
+ "stmt_deps": [
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sf-class-compact-support-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison of extension by zero, proper direct image and scalar extension of sheaves is compatible with derived adjunction units and an equivalence of module categories",
+   "results": "Eight generic sheaf pullback/pushforward unit and scalar adjunction results, including SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app and ModuleCat.ExtendRestrictScalarsAdj.homEquiv. None constructs these scheme-specific normalized derived comparison coordinates.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; reuse generic adjunction infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve matches in Mathlib.CategoryTheory.Adjunction.Unique, including leftAdjointUniq, unit_leftAdjointUniq_hom and leftAdjointUniq_hom_counit. These supply the generic construction; no scheme-specific site/open/proper composite.",
+   "date": "2026-10-27",
+   "verdict": "generic construction only"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|compactSupportSiteComparison|fixedComparisonDirectImageMatePlus",
+   "results": "Zero Mathlib hits. The project supplies these constructions, which are used directly.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCompactSupportScalarTransport",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCompactSupportScalarTransportData",
+  "file": "lean/Sheaf/Paper/FiniteCompactSupportScalarTransportData.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteCompactScalar.openScalarIso",
+  "statement": "def openScalarIso\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :\n    (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙\n        scalarExtension φ Z ≅\n      scalarExtension φ X ⋙\n        (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-dfe8c",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261026T235932-L-1471754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-dfe8c",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261026T235932-L-1471754",
+  "kind": "interface",
+  "note": "independent cc review: intrinsicCompactScalarIsoOfOrigin_hom proof + 9 defs moved verbatim to FiniteCompactSupportScalarTransportData (public re-export) against clone item module; 4 direct importers compiled in sandbox; axioms checked"
+ }
+}

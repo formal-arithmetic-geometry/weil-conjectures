@@ -18,68 +18,65 @@
  ],
  "proof": [
   {
-   "text": "Use the existing upstream tensorScalarConeIso' and its hom naturality to assemble Φ by NatIso.ofComponents. Similarly assemble θ from tensorScalarConeIso and tensorScalarConeIso_hom_naturality. The latter is, by definition, asIso(μ Q C P_b) followed by Q.mapIso(Φ_C), so the required equality for θ.hom.app is reflexive. Invertibility of μ is the upstream isIso_μ_scalarCone instance, obtained from kFlat_scalarCone and the derived monoidal computation. These are the existing scalar-cone and derived-tensor constructions, not new choices of cone data.",
+   "text": "Apply [lem-pe-unit-endomorphism-cone-coordinates] with $a=b1_{\\mathbf1}$. The assumed tensor linearity and linearity of the unitors give $a^R_C=a^L_C=b1_C$. Its signed chain maps therefore give $\\Phi_C:\\operatorname{Tot}(C\\otimes P_b)\\cong F_b(C)=\\operatorname{Cone}(b1_C)$ and the left-tensor analogue. Its diagonal naturality equations assemble $\\Phi$ as a natural isomorphism; the identity and composition laws of the diagonal cone maps are componentwise.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-sfb-monoidal-category",
-    "lem-sfb-derived-monoidal"
+    "lem-pe-unit-endomorphism-cone-coordinates"
    ],
    "elementary": true,
    "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-    "place": "kFlat_scalarCone, isIso_μ_scalarCone, tensorScalarConeIso', tensorScalarConeIso'_hom_naturality, tensorScalarConeIso and tensorScalarConeIso_hom_naturality, lines 67–158"
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X, tensoring the two-term resolution gives the cone naturally."
    }
   },
   {
-   "text": "For a quasi-isomorphism f:C→D, Q(f) is invertible. Naturality of μ gives Q(f ▷ P_b) = μ(C,P_b)⁻¹ ≫ (Q(f) ▷ Q(P_b)) ≫ μ(D,P_b). All three factors are invertible by step 1 and functoriality. DerivedCategory.isIso_Q_map_iff_quasiIso therefore shows that f ▷ P_b is a quasi-isomorphism. Braiding naturality gives P_b ◁ f = β(P_b,C).hom ≫ (f ▷ P_b) ≫ β(P_b,D).inv. Quasi-isomorphisms contain isomorphisms and are closed under composition, so P_b ◁ f is also a quasi-isomorphism. The two whiskerings are definitionally the two HomologicalComplex.tensorHom maps in IsKFlatForTotalTensor, giving exactly its two conjuncts.",
+   "text": "For a quasi-isomorphism $f:C\\to C\\prime$, scalar linearity gives $f(b1_C)=(b1_{C\\prime})f$. Apply [lem-pe-cone-square-quasi-isomorphism] with $s=t=f$. Thus $F_b(f)$ is a quasi-isomorphism. Conjugating it by the two natural chain isomorphisms of step 1 proves that both $\\operatorname{Tot}(f\\otimes1_{P_b})$ and $\\operatorname{Tot}(1_{P_b}\\otimes f)$ are quasi-isomorphisms: their cohomology maps are conjugates of isomorphisms. These are exactly the two requirements for K-flatness in [def-sfb-preserves-kflat-quasi-iso].",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-sfb-monoidal-category",
-    "def-sfb-preserves-kflat-quasi-iso",
-    "lem-sfb-derived-monoidal"
+    "lem-pe-cone-square-quasi-isomorphism",
+    "lem-pe-unit-endomorphism-cone-coordinates",
+    "def-sfb-preserves-kflat-quasi-iso"
    ],
    "elementary": true,
    "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-    "place": "isIso_μ_scalarCone, lines 79–88; naturality of the lax tensor comparison; Mathlib.Algebra.Homology.DerivedCategory.Basic, isIso_Q_map_iff_quasiIso; Mathlib.CategoryTheory.Monoidal.Braided.Basic, braiding_naturality_right"
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X, hence K-flat; cone calculation and invariance."
    }
   },
   {
-   "text": "For a quasi-isomorphism f:C→D, naturality of θ from step 1 gives (F_b ⋙ Q).map f = θ_C⁻¹ ≫ (Q(f) ▷ Q(P_b)) ≫ θ_D. Each factor is invertible, so F_b ⋙ Q inverts quasi-isomorphisms. This uses only the already constructed θ and that Q inverts quasi-isomorphisms; no long exact sequence or five lemma is needed.",
+   "text": "By [lem-sfb-derived-monoidal], the derived tensor is computed by replacing either argument by a K-flat resolution. Use the identity resolution of $P_b$ from step 2. Hence the canonical lax tensor comparison $\\mu_{C,P_b}:QC\\otimes^{\\mathbf L}QP_b\\to Q\\operatorname{Tot}(C\\otimes P_b)$ is invertible. Define $\\theta_C=Q(\\Phi_C)\\circ\\mu_{C,P_b}$. Naturality of the comparison and of $\\Phi$ makes $\\theta$ a natural isomorphism, with precisely the required comparison formula.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-sfb-monoidal-category"
+    "lem-sfb-derived-monoidal"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-    "place": "tensorScalarConeIso_hom_naturality, lines 152–158, and inversion of quasi-isomorphisms by derived localization"
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X, resolution computes the derived tensor and the natural cone identification."
    }
   },
   {
-   "text": "Choose the descended functor explicitly as F = tensorRight(Q(P_b)), with η = θ and δ = Iso.refl F. The required compatibility reduces to the identity law 𝟙 ≫ θ_C = θ_C. Thus the existing derived right tensor functor already supplies the required descent; choosing a separate localization lift and then comparing it is unnecessary.",
+   "text": "Step 2 and localization [def-weil-abstract-derived-category] show $QF_b$ inverts quasi-isomorphisms. The localization property [lem-weil-pbc-localization-universal-property] gives a descended functor and lifts $\\theta$ to its natural isomorphism with derived right tensor. Concretely choose the descended functor to be $T=-\\otimes^{\\mathbf L}QP_b$, its comparison $TQ\\cong QF_b$ to be $\\theta$, and its comparison with derived right tensor to be $1_T$. The compatibility equation is then $\\theta_C\\circ1=\\theta_C$.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "def-sfb-monoidal-category",
-    "lem-sfb-derived-monoidal"
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": true,
    "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-    "place": "tensorScalarConeIso and its naturality, lines 146–158; explicit witnesses for the descent conclusion"
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X, naturality in K after derived localization."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-sfb-monoidal-category",
+  "lem-pe-unit-endomorphism-cone-coordinates",
+  "lem-pe-cone-square-quasi-isomorphism",
+  "def-sfb-preserves-kflat-quasi-iso",
   "lem-sfb-derived-monoidal",
-  "def-sfb-preserves-kflat-quasi-iso"
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
-  "place": "R4 Lean proof: assemble the existing natural scalar-cone comparisons, reflect invertibility through Q using naturality of the invertible μ, transport to the other tensor order by braiding, and take derived right tensoring itself as the descent."
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "On X; re-split of the six-step signed-coordinate and long-exact-sequence proof retained in the ScalarConeTensorModel Lean docstring, with the canonical derived comparison and explicit descent of the current live proof."
  },
  "mathlib_searches": [
   {
@@ -237,28 +234,33 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "item": "lem-pe-scalar-cone-tensor-model",
   "worker": "stage1",
-  "summary": "Statement unchanged. Six steps prove the signed total-tensor model and naturality explicitly, prove preservation of quasi-isomorphisms by the existing natural long exact sequences and five lemma, deduce both-sided K-flatness, apply the existing either-argument K-flat derived computation, and descend the natural comparison through localization. No new nodes. Source declarations cover the K-flat and comparison clauses but no declaration found states the final descent clause, so no whole-item attachment is claimed.",
-  "blueprint": "Realizes det-pe-derived-nakayama-resolution, On X: “hence K-flat” and “Tensoring K with it gives ... naturally in K”; the generic tensor-unit calculation only, without the quotient coefficient identification.",
+  "summary": "Released stage-1 re-split; statement and statement dependencies unchanged. Extracted the signed left/right unit-endomorphism tensor calculation and the general cone-square quasi-isomorphism argument into two independent statement-only nodes. Four short assembly steps retain K-flatness, the canonical derived comparison, naturality and compatible descent. Prior proof/review records and all Lean records retained as history.",
+  "blueprint": "On X: “It is a resolution ... hence K-flat” and “Tensoring K with it gives ... naturally in K”.",
   "tool_uses": [
    {
     "node": "lem-sfb-derived-monoidal",
-    "why": "Uses the existing general derived tensor and either-argument K-flat computation, required already by the item statement; the Nakayama unit contains no general monoidal construction."
+    "why": "The canonical either-argument K-flat computation of derived tensor is a general tool already needed by the statement; the Nakayama unit does not reconstruct derived monoidal categories."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Uses factorization of a functor and lifting of a natural isomorphism along localization, a general categorical tool for the descent clause."
    }
   ]
  },
  "tool_uses": [
-  "lem-sfb-derived-monoidal"
+  "lem-sfb-derived-monoidal",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "NT-cc-N6-a73b6ab64",
-  "group": "N6",
+  "reviewer": "NT-cc-NI-9bd37b255",
+  "group": "NI",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-a73b6ab64 (reviewer sub-agent of L); spot-checked: PASS, no fixes and no new nodes. I read the item in full: statement unchanged, six steps. Live and side-live both still have it unsplit, so it is not superseded; no repair note, not dropped, no SGA. B10 does not apply: the Lean declarations kFlat_scalarCone, tensorScalarConeIso' and tensorScalarConeIso_hom_naturality (TensorMappingCone.lean 67-158) cover K-flatness and the comparison, but none states the descent to a functor on D(A). Step 1: I recomputed both total-tensor differentials. d_R(x,y)=(dx+(-1)^{n+1}by,dy) and d_L(x,y)=(dx+by,-dy); d_L is the cone [[d,b],[0,-d]] of def-weil-abstract-derived-category. diag(1,(-1)^{n+1}) intertwines them because s_{n+1}=-s_n. Step 2: diagonal naturality follows from B-linearity and unitor naturality. Step 3: the cone sequence is degreewise split, and the long exact sequence, its naturality and the five-lemma leaves are used as stated (Stacks 0117 lemma-long-exact-sequence-cochain, 05QB lemma-five-lemma). Step 4: two-sided K-flatness matches def-sfb-preserves-kflat-quasi-iso. Step 5: lem-sfb-derived-monoidal says it is computed by K-flat replacement with Q lax monoidal; I accept reading this as μ invertible at a K-flat argument (it is the derived-functor counit, as in isIso_μ_scalarCone), and the declared tool use is accepted. Step 6: clauses (1) and (2) of lem-weil-pbc-localization-universal-property apply with F1=HQ, F2=F̄_bQ and identity φ (04VG lemma-properties-left-localization). Small cases checked: b=0, b a unit, b a zero divisor, C=0. Duplicate search: lem-pe-principal-reduction-cone-calculus is a specialization (b=π^n, quotient, tower) and is not cited, so there is no cycle; no generalization exists in the DAG."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-9bd37b255 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the blueprint sk-lem-pe-derived-nakayama-resolution 'On X' paragraph, TensorMappingCone.lean lines 37-158 and the ScalarConeTensorModel.lean six-step docstring, and Stacks 0117 (lemma-long-exact-sequence-cochain), 05QB (lemma-five-lemma) and 014E (definition-cone). Re-split: no argument of the old proof was dropped. Old steps 1-2 (unitor coordinates, signs, naturality) went to lem-pe-unit-endomorphism-cone-coordinates. Old step 3 (split cone short exact sequence, long exact sequence, five lemma) went to lem-pe-cone-square-quasi-isomorphism. Old steps 4-6 are now the four short assembly steps of the item. The two new nodes are of comparable size, each strictly smaller than the item, and neither restates an item clause. Unit-endomorphism node: I recomputed the differentials with the Koszul sign of def-sfb-preserves-kflat-quasi-iso and the cone convention of def-weil-abstract-derived-category: d_R=[[d,(-1)^{n+1}a^R],[0,d]] and d_L=[[d,a^L],[0,-d]]. diag(1,(-1)^{n+1}) intertwines d_R with the cone differential because s_{n+1}=-s_n, and diagonal naturality follows from unitor naturality. This agrees with Lean tensorScalarConeIso'. Tested a=0, a=id, characteristic 2, C=0. Cone-square node: c=diag(t,s[1]) is a chain map because tu=u's, it maps the split short exact sequences, and the five lemma makes it a quasi-isomorphism with no boundedness hypothesis. The statement is true. Item steps: a^R=a^L=b·1 by MonoidalLinear. Step 2 uses s=t=f, then conjugation, which gives exactly the two-sided K-flatness of def-sfb-preserves-kflat-quasi-iso. Step 3 reads lem-sfb-derived-monoidal as 'mu is invertible at a K-flat argument'; this is the declared tool use, the same reading N6 accepted. Step 4 has an explicit witness T, theta, 1. Duplicates: lem-pc-tensor-mapping-cone-iso, lem-weil-pbc-total-tensor-homotopy-cone-signs and lem-cbc-regular-quotient-cone-chain are module-sheaf special cases, not generalizations. I found no general node in the DAG and no Mathlib QuasiIso(mappingCone.map). B1-B9: statement-only, self-contained, every notion cited, blueprint from det-pe-derived-nakayama-resolution via the item. Tool uses lem-sfb-derived-monoidal and lem-weil-pbc-localization-universal-property accepted. No fixes."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.ScalarConeTensorModel",
@@ -283,7 +285,18 @@
   "result": "pass",
   "note": "Read node, 5 stmt_deps, source TensorMappingCone.lean, IsKFlatForTotalTensor, derived monoidal instances. All hypotheses (Grothendieck .{v}, closed braided MonoidalPreadditive, HasFunctorialFlatResolution, CommRing B with Linear+MonoidalLinear, universe r free) and clauses match: two-sided recorded K-flat predicate; natural Φ: tensorRight P_b ≅ cone functor; θ pinned to μ Q C P_b ≫ Q.map Φ (forces μ iso); IsInvertedBy; descent F,η,δ compatible with θ. Probe: tensorRight map = HomologicalComplex.tensorHom by rfl, Q lax structure = laxMonoidalQ from hasDerivedMonoidalCategory, upstream tensorScalarConeIso typechecks on the same objects. Helper scalarConeCochainFunctor has real data (mappingCone, diagonal maps), no existing equivalent. Docstrings/blueprint/6 steps present, only sorry in theorem, statement verbatim, node change only lean, item not landed elsewhere. nt_compile --json clean 4.4 s; broken control fails. Advisory: IsInvertedBy and descent clauses follow formally from θ, as in the node's 'Thus'."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",

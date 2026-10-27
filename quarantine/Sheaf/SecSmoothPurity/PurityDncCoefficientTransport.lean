@@ -5,273 +5,34 @@ Authors: SHEAF group NP
 -/
 module
 
-public import Sheaf.Paper.NoetherianEtaleSectionSpecialization
-public import Sheaf.SecSmoothPurity.ReductionExceptional
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.AlgebraicGeometry.PurityAffineLineComponents
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.Paper.PurLisseMorphismRigidity
-import Sheaf.Paper.PurityDncComparisons
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.SecSmoothPurity.MixedBaseChange
-import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
-import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import Sheaf.SecSmoothPurity.DncCoefficientTransportData
+import Sheaf.SecSmoothPurity.FiniteSectionFamilyConstancy
+import Sheaf.SecSmoothPurity.FiniteSmoothDualizingScalar
+import Sheaf.SecSmoothPurity.SectionScalarBaseChange
+import Sheaf.SecSmoothPurity.ScalarSectionCompositor
+import all Sheaf.AlgebraicGeometry.EtaleShiftedLineNormalizedDescent
+import all Sheaf.Paper.NoetherianEtaleSectionSpecialization
+import Mathlib.Algebra.CharP.CharAndCard
 
-/-! # Coefficient transport for the actual deformation family
-
-Source: blueprint main-20261015, sec-smooth-purity/sk-thm-smooth-purity/
-sk-thm-smooth-purity-general-ring.proof.md, Proof (2)
-(blueprint: lem-pur-dnc-coefficient-transport).
-
-Finite constructible objects are written in their ordinary etale-origin presentation.
-The specified `reductionSite` realizes them in the ordinary uncompleted pro-etale
-constant-ring category. Both coefficient rings have their own exceptional inverse image:
-no B-object is defined by scalar-extending the corresponding R-object.
-- Counit-characterized coefficient maps use `ExceptionalCoefficients.mateMap`.
-- Fibre maps, normalization and specialization use the published Rees-family maps.
--/
+/-! # Finite coefficient transport for the actual smooth-section deformation -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option warn.sorry false
 set_option synthInstance.maxSize 4096
-
+set_option maxRecDepth 2048
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped CategoryTheory.Functor
-
 namespace WeilConjectures
+
+attribute [local instance] Scheme.Etale.essentiallySmall
+
+attribute [local irreducible] DncCoefficientTransport.dualizingMap
+  DncCoefficientTransport.sectionMap DncCoefficientTransport.realizedSectionMap
+  ProEtale.reductionEtaleChartRightIso ProEtale.reductionEtaleChartScalarIso
+
 namespace DncCoefficientTransport
-
-/-- The coefficient ring Z/(ell^n), lifted only for size.
-Source: Proof (2), R=Z/ell^n (blueprint: lem-pur-dnc-coefficient-transport). -/
-abbrev BaseRing (ell n : ℕ) : Type u := ULift.{u} (ZMod (ell ^ n))
-
-/-- The positive prime-power coefficient ring is finite, including n=0.
-Source: Proof (2), finite coefficient convention
-(blueprint: lem-pur-dnc-coefficient-transport). -/
-instance baseRingFinite (ell n : ℕ) [Fact ell.Prime] : Finite (BaseRing.{u} ell n) :=
-  letI : NeZero (ell ^ n) := ⟨ne_of_gt (pow_pos (Fact.out : ell.Prime).pos n)⟩
-  inferInstance
-
-/-- The canonical coefficient map on relative dualizing objects: transpose the
-scalar-extended counit, then identify the extended unit with the B-unit.
-Source: Proof (2), Step 1; det-sp-reduction-exceptional
-(blueprint: lem-pur-dnc-coefficient-transport). -/
-def dualizingMap {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
-    (φ : A →+* B) {V S : Scheme.{u}} (g : V ⟶ S) [HasCompactification g] :
-    (Etale.scalarExtension φ V).obj (Etale.dualizingComplex (ModuleCat.{u + 1} A) g) ⟶
-      Etale.dualizingComplex (ModuleCat.{u + 1} B) g :=
-  Etale.ExceptionalCoefficients.mateMap φ g (𝟙_ _) ≫
-    (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} B) g).map
-      (Etale.ExceptionalCoefficients.unitIso φ S).hom
-
-/-- The actual section coefficient map: balancing for Ls* followed by Ls*(c_g).
-Source: Proof (2), Step 1 (blueprint: lem-pur-dnc-coefficient-transport). -/
-def sectionMap {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
-    (φ : A →+* B) {V S : Scheme.{u}} (g : V ⟶ S) [HasCompactification g]
-    (s : S ⟶ V) :
-    (Etale.scalarExtension φ S).obj (Etale.sectionInvariant A g s) ⟶
-      Etale.sectionInvariant B g s :=
-  (Etale.scalarPullbackIso φ s).inv.app _ ≫
-    (Etale.upperStar (ModuleCat.{u + 1} B) s).leftDerivedFunctor.map (dualizingMap φ g)
-
-/-- The genuine B-coefficient section object in the uncompleted pro-etale category.
-This is the canonical site realization of Ls* g_B^! B_S, formed using g_B^!.
-Source: Proof (2), definition of C_D (blueprint: lem-pur-dnc-coefficient-transport). -/
-def sectionObject (A : Type u) [CommRing A] [Finite A]
-    {V S : Scheme.{u}} (g : V ⟶ S) [HasCompactification g] (s : S ⟶ V) :
-    proEtaleDerivedCategory S A :=
-  (ProEtale.reductionSite A S).obj (Etale.sectionInvariant (ULift.{u + 1, u} A) g s)
-
-/-- The actual pro-etale coefficient map, with the fixed site/scalar comparison.
-Source: Proof (2), q_(g,s) (blueprint: lem-pur-dnc-coefficient-transport). -/
-def realizedSectionMap {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
-    (φ : A →+* B) {V S : Scheme.{u}} (g : V ⟶ S) [HasCompactification g]
-    (s : S ⟶ V) :
-    (ProEtale.scalarExtensionFunctor φ S).obj (sectionObject A g s) ⟶
-      sectionObject B g s :=
-  (ProEtale.reductionSiteScalarIso φ S).hom.app _ ≫
-    (ProEtale.reductionSite B S).map (sectionMap (RingHom.ulift.{u + 1, u + 1, u, u} φ) g s)
-
-/-- Scalar compatibility with both canonical exceptional fibre mates of the Rees family.
-Source: Proof (2), Step 2 (blueprint: lem-pur-dnc-coefficient-transport). -/
-def FibreCompatibility {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    [Finite A] [Finite B] (φ : A →+* B) {V S : Scheme.{u}}
-    (g : V ⟶ S) [HasCompactification g] [QuasiCompact g]
-    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)
-    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
-    [HasCompactification (Scheme.Hom.normalConeProj g s)]
-    [QuasiCompact (Scheme.Hom.normalConeProj g s)] : Prop :=
-  ((Etale.scalarPullbackIso φ (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).inv.app
-        (Etale.NoetherianSectionSpecialization.family A g s) ≫
-      (Etale.upperStar (ModuleCat.{u + 1} B)
-        (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map
-          (sectionMap φ (Scheme.Hom.deformationSpaceProj g s) s.deformationSpaceSection) ≫
-      Etale.NoetherianSectionSpecialization.atOne B g s hs =
-    (Etale.scalarExtension φ S).map (Etale.NoetherianSectionSpecialization.atOne A g s hs) ≫
-      sectionMap φ g s) ∧
-  ((Etale.scalarPullbackIso φ (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)).inv.app
-        (Etale.NoetherianSectionSpecialization.family A g s) ≫
-      (Etale.upperStar (ModuleCat.{u + 1} B)
-        (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map
-          (sectionMap φ (Scheme.Hom.deformationSpaceProj g s) s.deformationSpaceSection) ≫
-      Etale.NoetherianSectionSpecialization.atZero B g s =
-    (Etale.scalarExtension φ S).map (Etale.NoetherianSectionSpecialization.atZero A g s) ≫
-      sectionMap φ (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection)
-
-/-- Naturality for etale localization of pairs, using the specified exceptional mate.
-Source: Proof (2), Steps 2--3 (blueprint: lem-pur-dnc-coefficient-transport). -/
-def LocalizationCompatibility {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    [Finite A] [Finite B] (φ : A →+* B) {V S : Scheme.{u}}
-    (g : V ⟶ S) [HasCompactification g] (s : S ⟶ V) : Prop :=
-  ∀ {V' S' : Scheme.{u}} (g' : V' ⟶ S') [HasCompactification g'] [QuasiCompact g']
-    (b : S' ⟶ S) [AlgebraicGeometry.Etale b] (v : V' ⟶ V)
-    (sq : IsPullback v g' g b) (s' : S' ⟶ V') (hsection : s' ≫ v = b ≫ s),
-    (Etale.scalarPullbackIso φ b).inv.app (Etale.sectionInvariant A g s) ≫
-        (Etale.upperStar (ModuleCat.{u + 1} B) b).leftDerivedFunctor.map (sectionMap φ g s) ≫
-        Etale.NoetherianSectionSpecialization.sectionMap B g g' b v sq s s' hsection =
-      (Etale.scalarExtension φ S').map
-          (Etale.NoetherianSectionSpecialization.sectionMap A g g' b v sq s s' hsection) ≫
-        sectionMap φ g' s'
-
-/-- The direct constant-family coordinate comparison. After restriction to any etale
-base chart on which the family has a constant model, the normalized global comparison
-is the identity on that model, read through its value at one.
-Source: Proof (2), Step 6 (blueprint: lem-pur-dnc-coefficient-transport). -/
-def CoordinateNormalization (A : Type (u + 1)) [CommRing A] [Finite A]
-    {V S : Scheme.{u}} (g : V ⟶ S) [HasCompactification g] [QuasiCompact g]
-    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)
-    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
-    (h1 : IsIso (Etale.NoetherianSectionSpecialization.atOne A g s hs))
-    (κ : Etale.NoetherianSectionSpecialization.family A g s ≅
-      (Etale.upperStar (ModuleCat.{u + 1} A)
-        (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
-          (Etale.sectionInvariant A g s)) : Prop :=
-  ∀ {S' : Scheme.{u}} (b : S' ⟶ S) [AlgebraicGeometry.Etale b]
-    [IsSeparated b] [QuasiCompact b] (C0 : Etale.DerivedCategoryModule A S')
-    (e : (Etale.upperStar (ModuleCat.{u + 1} A)
-      (AffineSpace.map (ULift.{u} (Fin 1)) b)).leftDerivedFunctor.obj
-        (Etale.NoetherianSectionSpecialization.family A g s) ≅
-      (Etale.upperStar (ModuleCat.{u + 1} A)
-        (AffineSpace (ULift.{u} (Fin 1)) S' ↘ S')).leftDerivedFunctor.obj C0),
-    (Etale.upperStar (ModuleCat.{u + 1} A)
-        (AffineSpace.map (ULift.{u} (Fin 1)) b)).leftDerivedFunctor.map κ.hom ≫
-      (Etale.NoetherianSectionSpecialization.linePullback A b
-        (Etale.sectionInvariant A g s)).hom ≫
-      (Etale.upperStar (ModuleCat.{u + 1} A)
-        (AffineSpace (ULift.{u} (Fin 1)) S' ↘ S')).leftDerivedFunctor.map
-          (Etale.sectionRestrictionIso (ModuleCat.{u + 1} A) b
-            (AffineSpace.map (ULift.{u} (Fin 1)) b)
-            (AffineSpace.oneSection_comp_map b)
-            (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S')
-            (@asIso _ _ _ _ (Etale.NoetherianSectionSpecialization.atOne A g s hs) h1)
-            e).hom = e.hom
-
-/-- The normalized B-family comparison and its specialization equation, with uniqueness
-among all normalized isomorphisms, not just among coefficient-compatible choices.
-Source: Proof (2), Steps 4--7 (blueprint: lem-pur-dnc-coefficient-transport). -/
-def NormalizedTransport {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    [Finite A] [Finite B] (φ : A →+* B) {V S : Scheme.{u}}
-    (g : V ⟶ S) [HasCompactification g] [QuasiCompact g]
-    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)
-    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
-    [HasCompactification (Scheme.Hom.normalConeProj g s)]
-    [QuasiCompact (Scheme.Hom.normalConeProj g s)] : Prop :=
-  ∀ κR : Etale.NoetherianSectionSpecialization.family A g s ≅
-      (Etale.upperStar (ModuleCat.{u + 1} A)
-        (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
-          (Etale.sectionInvariant A g s),
-    Etale.NoetherianSectionSpecialization.Normalized A g s hs κR →
-    ∃ κB : Etale.NoetherianSectionSpecialization.family B g s ≅
-        (Etale.upperStar (ModuleCat.{u + 1} B)
-          (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
-            (Etale.sectionInvariant B g s),
-      Etale.NoetherianSectionSpecialization.Normalized B g s hs κB ∧
-      (∀ κ, Etale.NoetherianSectionSpecialization.Normalized B g s hs κ → κ = κB) ∧
-      (sectionMap φ (Scheme.Hom.deformationSpaceProj g s) s.deformationSpaceSection ≫ κB.hom =
-        (Etale.scalarExtension φ (AffineSpace (ULift.{u} (Fin 1)) S)).map κR.hom ≫
-          (Etale.scalarPullbackIso φ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).inv.app _ ≫
-          (Etale.upperStar (ModuleCat.{u + 1} B)
-            (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.map (sectionMap φ g s)) ∧
-      (∀ h1 : IsIso (Etale.NoetherianSectionSpecialization.atOne B g s hs),
-        CoordinateNormalization B g s hs h1 κB) ∧
-      IsIso (Etale.NoetherianSectionSpecialization.specialization B g s κB) ∧
-      (sectionMap φ g s ≫ Etale.NoetherianSectionSpecialization.specialization B g s κB =
-        (Etale.scalarExtension φ S).map
-            (Etale.NoetherianSectionSpecialization.specialization A g s κR) ≫
-          sectionMap φ (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection)
-
-/-- Arbitrary-base-change coefficient square, without imposing any section on g0.
-All morphisms remain in the separated finite-type k-setting.
-Source: Proof (2), Step 2 (blueprint: lem-pur-dnc-coefficient-transport). -/
-def MixedBaseChange (D : FiniteFieldDatum.{u}) {A B : Type (u + 1)}
-    [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) : Prop :=
-  ∀ (V S S' : Over (Spec (.of D.k)))
-    [IsSeparated V.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom]
-    [IsSeparated S.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
-    [IsSeparated S'.hom] [LocallyOfFiniteType S'.hom] [QuasiCompact S'.hom]
-    (g : V ⟶ S) (r : ℕ) [SmoothOfRelativeDimension r g.left]
-    [HasCompactification g.left] [QuasiCompact g.left] (h : S' ⟶ S),
-    IsIso (Etale.smoothDualizingBaseChangeMap A g.left h.left) ∧
-      IsIso (Etale.smoothDualizingBaseChangeMap B g.left h.left) ∧
-      Etale.ExceptionalCoefficients.BaseChangeCompatibility φ g.left h.left (𝟙_ _)
-
-/-- The counit-normalized chart equation, including the standard coordinate pair.
-The right-adjoint comparisons are fixed by etale summation and ordered affine trace;
-the model coefficient map is the canonical root-normalized Tate reassociation.
-Source: Proof (2), Step 3 (blueprint: lem-pur-dnc-coefficient-transport). -/
-def ChartCompatibility (D : FiniteFieldDatum.{u}) {A B : Type (u + 1)}
-    [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (N : ℕ) : Prop :=
-  ∀ (V S : Over (Spec (.of D.k)))
-    [IsSeparated V.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom]
-    [IsSeparated S.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
-    [IsNoetherian V.left] [IsNoetherian S.left]
-    (g : V ⟶ S) [HasCompactification g.left] (d : ℕ)
-    [SmoothOfRelativeDimension d g.left]
-    {U : Scheme.{u}} [IsNoetherian U] (i : U ⟶ V.left) [IsOpenImmersion i]
-    (e : U ⟶ affineTraceTower S.left d) [AlgebraicGeometry.Etale e]
-    [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]
-    (he : i ≫ g.left = e ≫ affineTraceProjection S.left d)
-    (MA : Etale.EtaleCompactSupportNormalization A)
-    (MB : Etale.EtaleCompactSupportNormalization B)
-    (hA : (N : A) = 0) (hB : (N : B) = 0)
-    (tA : Etale.OrdinaryFiniteTwistTransport A N hA)
-    (tB : Etale.OrdinaryFiniteTwistTransport B N hB)
-    (PA : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
-      Etale.OrdinaryFiniteP1Datum A N hA tA T hT)
-    (PB : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
-      Etale.OrdinaryFiniteP1Datum B N hB tB T hT)
-    (hS : IsUnit (N : Γ(S.left, ⊤))),
-    (Etale.scalarExtension φ U).map
-        ((ProEtale.reductionEtaleChartRightIso A MA g.left i d e he
-          (HasCompactification.compactification g.left)
-          (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} A) g.left)
-          (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) g.left)
-          N hA tA PA hS).hom.app (𝟙_ _)) ≫
-      (ProEtale.reductionEtaleChartScalarIso φ N hA hB hS d e (𝟙_ _)).hom ≫
-      (Etale.affineTraceRight B N hB S.left d ⋙ Etale.ordinaryFinitePullback B e).map
-        (Etale.ExceptionalCoefficients.unitIso φ S.left).hom =
-    (Etale.scalarPullbackIso φ i).inv.app
-        (Etale.dualizingComplex (ModuleCat.{u + 1} A) g.left) ≫
-      (Etale.ordinaryFinitePullback B i).map (dualizingMap φ g.left) ≫
-      (ProEtale.reductionEtaleChartRightIso B MB g.left i d e he
-        (HasCompactification.compactification g.left)
-        (Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} B) g.left)
-        (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} B) g.left)
-        N hB tB PB hS).hom.app (𝟙_ _)
-
-/-- Geometric domain facts for the actual Rees family and its actual normal cone.
-These are proof data only; no replacement deformation space is selected.
-Source: sk-lem-geometry, Proof (2) Step 1
-(blueprint: lem-pur-dnc-coefficient-transport). -/
-structure Geometry {V S : Scheme.{u}} (g : V ⟶ S) (s : S ⟶ V) : Prop where
-  compact : HasCompactification g
-  compactFamily : HasCompactification (Scheme.Hom.deformationSpaceProj g s)
-  compactNormal : HasCompactification (Scheme.Hom.normalConeProj g s)
-  quasiCompactNormal : QuasiCompact (Scheme.Hom.normalConeProj g s)
 
 /-- The domain facts follow from the source hypotheses, rather than being additional
 hypotheses of the coefficient theorem.
@@ -285,50 +46,238 @@ theorem geometry (D : FiniteFieldDatum.{u}) {V S : Scheme.{u}}
     (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g]
     (aS : S ⟶ Spec (.of D.k)) [IsSeparated aS] [LocallyOfFiniteType aS] [QuasiCompact aS]
     (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) : Geometry g s := by
-  sorry
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+  have := SmoothOfRelativeDimension.smooth d g
+  have : HasCompactification g := (NagataCompactification g).hasCompactification
+  have := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have : QuasiCompact (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have : IsSeparated (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have : SmoothOfRelativeDimension d (Scheme.Hom.normalConeProj g s) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have := SmoothOfRelativeDimension.smooth d (Scheme.Hom.normalConeProj g s)
+  exact ⟨inferInstance, Scheme.Hom.hasCompactification_deformationSpaceProj g s d hs,
+    (NagataCompactification (Scheme.Hom.normalConeProj g s)).hasCompactification,
+    inferInstance⟩
 
-/-- The complete finite coefficient transport assertion in canonical coordinates.
-Source: Proof (2), all clauses (blueprint: lem-pur-dnc-coefficient-transport). -/
-def Assertions (D : FiniteFieldDatum.{u}) (ell n : ℕ) [Fact ell.Prime]
-    {V S : Scheme.{u}} (g : V ⟶ S) [QuasiCompact g]
+private theorem exponent_unit (D : FiniteFieldDatum.{u}) (ell n : ℕ)
+    [Fact ell.Prime] (hell : ell ≠ D.p) {S : Scheme.{u}}
+    (aS : S ⟶ Spec (.of D.k)) : IsUnit ((ell ^ n : ℕ) : Γ(S, ⊤)) := by
+  let : Fintype D.k₀ := Fintype.ofFinite _
+  have : Fact D.p.Prime := ⟨D.prime⟩
+  have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow (by
+    rw [← Nat.card_eq_fintype_card, D.card_base, D.cardinality_eq])
+  have : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  have hl : IsUnit (ell : D.k) :=
+    isUnit_iff_ne_zero.mpr (CharP.cast_ne_zero_of_ne_of_prime _
+      (Fact.out : ell.Prime) hell.symm)
+  have hu := ((hl.pow n).map (Scheme.ΓSpecIso (.of D.k)).inv.hom).map aS.appTop.hom
+  simpa only [map_pow, map_natCast, Nat.cast_pow] using hu
+
+private theorem section_iso {A B : Type (u + 1)}
+    [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)
+    {V S : Scheme.{u}} (g : V ⟶ S) [HasCompactification g] (s : S ⟶ V)
+    (h : IsIso (Etale.ExceptionalCoefficients.dualizingScalarMap φ g)) :
+    IsIso (sectionMap φ g s) := by
+  have : IsIso (dualizingMap φ g) := by
+    simpa only [dualizingMap, Etale.ExceptionalCoefficients.dualizingScalarMap] using h
+  unfold sectionMap
+  infer_instance
+
+private theorem realized_iso {A B : Type u}
+    [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)
+    {V S : Scheme.{u}} (g : V ⟶ S) [HasCompactification g] (s : S ⟶ V)
+    (h : IsIso (sectionMap (RingHom.ulift.{u + 1, u + 1, u, u} φ) g s)) :
+    IsIso (realizedSectionMap φ g s) := by
+  unfold realizedSectionMap
+  infer_instance
+
+private theorem coordinate_normalization
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {V S : Scheme.{u}} (g : V ⟶ S) [HasCompactification g] [QuasiCompact g]
     (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)
-    (G : Geometry g s) {B : Type u} [CommRing B] [Finite B]
-    (φ : BaseRing.{u} ell n →+* B) : Prop := by
-  letI := G.compact
-  letI := G.compactFamily
-  letI := G.compactNormal
-  letI := G.quasiCompactNormal
-  exact
-    IsIso (realizedSectionMap φ g s) ∧
-    IsIso (realizedSectionMap φ (Scheme.Hom.deformationSpaceProj g s)
-      s.deformationSpaceSection) ∧
-    IsIso (realizedSectionMap φ (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection) ∧
-    IsIso (sectionMap (RingHom.ulift.{u + 1, u + 1, u, u} φ) g s) ∧
-    IsIso (sectionMap (RingHom.ulift.{u + 1, u + 1, u, u} φ) (Scheme.Hom.deformationSpaceProj g s)
-      s.deformationSpaceSection) ∧
-    IsIso (sectionMap (RingHom.ulift.{u + 1, u + 1, u, u} φ) (Scheme.Hom.normalConeProj g s)
-      s.normalConeZeroSection) ∧
-    IsIso (Etale.NoetherianSectionSpecialization.atOne
-      (ULift.{u + 1, u} (BaseRing.{u} ell n)) g s hs) ∧
-    IsIso (Etale.NoetherianSectionSpecialization.atZero
-      (ULift.{u + 1, u} (BaseRing.{u} ell n)) g s) ∧
-    IsIso (Etale.NoetherianSectionSpecialization.atOne (ULift.{u + 1, u} B) g s hs) ∧
-    IsIso (Etale.NoetherianSectionSpecialization.atZero (ULift.{u + 1, u} B) g s) ∧
-    (∃! κR : Etale.NoetherianSectionSpecialization.family
-        (ULift.{u + 1, u} (BaseRing.{u} ell n)) g s ≅
-        (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (BaseRing.{u} ell n)))
-          (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
-            (Etale.sectionInvariant (ULift.{u + 1, u} (BaseRing.{u} ell n)) g s),
-      Etale.NoetherianSectionSpecialization.Normalized
-        (ULift.{u + 1, u} (BaseRing.{u} ell n)) g s hs κR) ∧
-    FibreCompatibility (RingHom.ulift.{u + 1, u + 1, u, u} φ) g s hs ∧
-    LocalizationCompatibility (RingHom.ulift.{u + 1, u + 1, u, u} φ) g s ∧
-    MixedBaseChange D (RingHom.ulift.{u + 1, u + 1, u, u} φ) ∧
-    ChartCompatibility D (RingHom.ulift.{u + 1, u + 1, u, u} φ) (ell ^ n) ∧
-    NormalizedTransport (RingHom.ulift.{u + 1, u + 1, u, u} φ) g s hs
+    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
+    (m : ℤ)
+    (hC : ∃ Q : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A),
+      Nonempty ((Etale.sectionInvariant A g s)⟦m⟧ ≅
+        (_root_.DerivedCategory.singleFunctor _ 0).obj Q))
+    (h1 : IsIso (Etale.NoetherianSectionSpecialization.atOne A g s hs))
+    (κ : Etale.NoetherianSectionSpecialization.family A g s ≅
+      (Etale.upperStar (ModuleCat.{u + 1} A)
+        (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
+          (Etale.sectionInvariant A g s))
+    (hκ : Etale.NoetherianSectionSpecialization.Normalized A g s hs κ) :
+    CoordinateNormalization A g s hs h1 κ := by
+  intro T b _ _ _ C0 e
+  let theta := asIso (Etale.NoetherianSectionSpecialization.atOne A g s hs)
+  let a := (Etale.upperStar (ModuleCat.{u + 1} A)
+    (AffineSpace (ULift.{u} (Fin 1)) T ↘ T)).leftDerivedFunctor
+  let ratio := Etale.sectionRestrictionIso (ModuleCat.{u + 1} A) b
+    (AffineSpace.map (ULift.{u} (Fin 1)) b) (AffineSpace.oneSection_comp_map b)
+    (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) T) theta e
+  let en := e ≪≫ a.mapIso ratio.symm
+  have hen : Etale.AffineLineNormalizedDescent.LocallyNormalized A b theta en := by
+    unfold Etale.AffineLineNormalizedDescent.LocallyNormalized
+    rw [Etale.sectionRestrictionIso_trans_right]
+    exact Iso.self_symm_id ratio
+  let res := (Etale.upperStar (ModuleCat.{u + 1} A)
+    (AffineSpace.map (ULift.{u} (Fin 1)) b)).leftDerivedFunctor.mapIso κ ≪≫
+      Etale.NoetherianSectionSpecialization.linePullback A b (Etale.sectionInvariant A g s)
+  have hres : Etale.AffineLineNormalizedDescent.LocallyNormalized A b theta res := by
+    have htheta : (Etale.upperStar (ModuleCat.{u + 1} A)
+        (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.mapIso κ ≪≫
+        (Etale.leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)
+          (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)
+          (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+          (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S)).app _ = theta :=
+      Iso.ext hκ
+    change Etale.sectionRestrictionIso (ModuleCat.{u + 1} A) b _ _ _ theta res = Iso.refl _
+    rw [← htheta]
+    exact Etale.sectionRestrictionIso_restrict (ModuleCat.{u + 1} A) b
+      (AffineSpace.map (ULift.{u} (Fin 1)) b) (AffineSpace.oneSection_comp_map b)
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) T)
+      (AffineSpace.map_over b) (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S) κ
+  have heq := Etale.AffineLineNormalizedDescent.local_comparison_unique A b m hC
+    theta en res hen hres
+  have hh := congrArg Iso.hom heq
+  change e.hom ≫ a.map ratio.inv = res.hom at hh
+  rw [← Category.assoc]
+  change res.hom ≫ a.map ratio.hom = e.hom
+  apply (cancel_mono (a.map ratio.inv)).1
+  rw [Category.assoc, ← a.map_comp, Iso.hom_inv_id, a.map_id, Category.comp_id]
+  exact hh.symm
+
+attribute [-instance] CategoryTheory.catToReflQuiver in
+private theorem normalized_transport
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {V S : Scheme.{u}} (g : V ⟶ S)
+    [HasCompactification g] [QuasiCompact g]
+    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)
+    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
+    [HasCompactification (Scheme.Hom.normalConeProj g s)]
+    [QuasiCompact (Scheme.Hom.normalConeProj g s)]
+    (hcompat : FibreCompatibility φ g s hs)
+    (hq : IsIso (sectionMap φ g s))
+    (hqF : IsIso (sectionMap φ (Scheme.Hom.deformationSpaceProj g s)
+      s.deformationSpaceSection))
+    (h0 : IsIso (Etale.NoetherianSectionSpecialization.atZero B g s))
+    (m : ℤ)
+    (hC : ∃ Q : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} B),
+      Nonempty ((Etale.sectionInvariant B g s)⟦m⟧ ≅
+        (_root_.DerivedCategory.singleFunctor _ 0).obj Q)) :
+    NormalizedTransport φ g s hs := by
+  intro κR hκR
+  let a := AffineSpace (ULift.{u} (Fin 1)) S ↘ S
+  let EA := Etale.scalarExtension φ (AffineSpace (ULift.{u} (Fin 1)) S)
+  let ES := Etale.scalarExtension φ S
+  let aB := (Etale.upperStar (ModuleCat.{u + 1} B) a).leftDerivedFunctor
+  let q := asIso (sectionMap φ g s)
+  let qF := asIso (sectionMap φ (Scheme.Hom.deformationSpaceProj g s)
+    s.deformationSpaceSection)
+  let κB := qF.symm ≪≫ EA.mapIso κR ≪≫
+    (Etale.scalarPullbackIso φ a).symm.app _ ≪≫ aB.mapIso q
+  have hconj : sectionMap φ (Scheme.Hom.deformationSpaceProj g s)
+      s.deformationSpaceSection ≫ κB.hom =
+      EA.map κR.hom ≫ (Etale.scalarPullbackIso φ a).inv.app _ ≫
+        aB.map (sectionMap φ g s) := by
+    simp [κB, qF, q]
+  have hnorm : Etale.NoetherianSectionSpecialization.Normalized B g s hs κB := by
+    let i := AffineSpace.oneSection (ULift.{u} (Fin 1)) S
+    let iA := (Etale.upperStar (ModuleCat.{u + 1} A) i).leftDerivedFunctor
+    let iB := (Etale.upperStar (ModuleCat.{u + 1} B) i).leftDerivedFunctor
+    let cA := Etale.leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) i a
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S)
+    let cB := Etale.leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} B) i a
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S)
+    have hn := ((Etale.scalarPullbackIso φ i).inv.naturality κR.hom).symm
+    change (Etale.scalarPullbackIso φ i).inv.app _ ≫ iB.map (EA.map κR.hom) =
+      ES.map (iA.map κR.hom) ≫ (Etale.scalarPullbackIso φ i).inv.app _ at hn
+    have hc := cB.hom.naturality (sectionMap φ g s)
+    change iB.map (aB.map (sectionMap φ g s)) ≫ cB.hom.app _ =
+      cB.hom.app _ ≫ sectionMap φ g s at hc
+    have hcoh := Etale.scalar_section_compositor φ i a
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S)
+      (Etale.sectionInvariant A g s)
+    change (Etale.scalarPullbackIso φ i).inv.app _ ≫
+      iB.map ((Etale.scalarPullbackIso φ a).inv.app _) ≫ cB.hom.app _ =
+      ES.map (cA.hom.app _) at hcoh
+    change iB.map κB.hom ≫ cB.hom.app _ = _
+    apply (cancel_epi ((Etale.scalarPullbackIso φ i).inv.app _ ≫
+      iB.map (sectionMap φ (Scheme.Hom.deformationSpaceProj g s)
+        s.deformationSpaceSection))).1
+    simp only [Category.assoc]
+    erw [← iB.map_comp_assoc, hconj]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hc]
+    erw [reassoc_of% hn, reassoc_of% hcoh]
+    erw [← ES.map_comp_assoc, hκR]
+    exact hcompat.1.symm
+  have hspecial : sectionMap φ g s ≫
+      Etale.NoetherianSectionSpecialization.specialization B g s κB =
+      ES.map (Etale.NoetherianSectionSpecialization.specialization A g s κR) ≫
+        sectionMap φ (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection := by
+    let i := AffineSpace.zeroSection (ULift.{u} (Fin 1)) S
+    let iA := (Etale.upperStar (ModuleCat.{u + 1} A) i).leftDerivedFunctor
+    let iB := (Etale.upperStar (ModuleCat.{u + 1} B) i).leftDerivedFunctor
+    let cA := Etale.leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) i a
+      (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) S)
+    let cB := Etale.leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} B) i a
+      (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) S)
+    have hconjInv : aB.map (sectionMap φ g s) ≫ κB.inv =
+        (Etale.scalarPullbackIso φ a).hom.app _ ≫ EA.map κR.inv ≫
+          sectionMap φ (Scheme.Hom.deformationSpaceProj g s) s.deformationSpaceSection := by
+      simp [κB, q, qF, Category.assoc]
+    have hc := cB.inv.naturality (sectionMap φ g s)
+    change sectionMap φ g s ≫ cB.inv.app _ =
+      cB.inv.app _ ≫ iB.map (aB.map (sectionMap φ g s)) at hc
+    have hn := ((Etale.scalarPullbackIso φ i).inv.naturality κR.inv).symm
+    change (Etale.scalarPullbackIso φ i).inv.app _ ≫ iB.map (EA.map κR.inv) =
+      ES.map (iA.map κR.inv) ≫ (Etale.scalarPullbackIso φ i).inv.app _ at hn
+    have hcoh := Etale.scalar_section_compositor φ i a
+      (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) S)
+      (Etale.sectionInvariant A g s)
+    have hcohInv : cB.inv.app (ES.obj (Etale.sectionInvariant A g s)) ≫
+        iB.map ((Etale.scalarPullbackIso φ a).hom.app (Etale.sectionInvariant A g s)) =
+        ES.map (cA.inv.app (Etale.sectionInvariant A g s)) ≫
+          (Etale.scalarPullbackIso φ i).inv.app
+            ((Etale.upperStar (ModuleCat.{u + 1} A) a).leftDerivedFunctor.obj
+              (Etale.sectionInvariant A g s)) := by
+      apply (cancel_mono (iB.map ((Etale.scalarPullbackIso φ a).inv.app _))).1
+      simp only [Category.assoc, ← CategoryTheory.Functor.map_comp, Iso.hom_inv_id_app]
+      apply (cancel_mono (cB.hom.app _)).1
+      simp only [Category.assoc]
+      rw [hcoh, ← ES.map_comp, Iso.inv_hom_id_app]
+      erw [iB.map_id, Category.id_comp, Iso.inv_hom_id_app, ES.map_id]
+      rfl
+    change sectionMap φ g s ≫ (cB.inv.app _ ≫ iB.map κB.inv ≫ _) =
+      ES.map (cA.inv.app _ ≫ iA.map κR.inv ≫ _) ≫ _
+    rw [← Category.assoc, hc]
+    simp only [Category.assoc]
+    rw [← Functor.map_comp_assoc, hconjInv]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [reassoc_of% hcohInv, reassoc_of% hn, hcompat.2]
+  refine ⟨κB, hnorm, ?_, hconj, ?_, ?_, hspecial⟩
+  · intro κ hκ
+    apply Iso.ext
+    apply Etale.AffineLineNormalizedDescent.map_eq_of_oneSection B S m hC
+    exact (cancel_mono
+      ((Etale.leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} B)
+        (AffineSpace.oneSection (ULift.{u} (Fin 1)) S) a
+        (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S)).hom.app _)).1
+      (hκ.trans hnorm.symm)
+  · intro h1'
+    exact coordinate_normalization B g s hs m hC h1' κB hnorm
+  · unfold Etale.NoetherianSectionSpecialization.specialization
+    infer_instance
 
 end DncCoefficientTransport
 
+attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Coefficient transport for the actual smooth-section deformation family.
 Source: Proof (2), sk-thm-smooth-purity-general-ring
 (blueprint: lem-pur-dnc-coefficient-transport).
@@ -369,6 +318,123 @@ theorem dncCoefficientTransport (D : FiniteFieldDatum.{u})
     (φ : DncCoefficientTransport.BaseRing.{u} ell n →+* B) :
     DncCoefficientTransport.Assertions D ell n g s hs
       (DncCoefficientTransport.geometry D d g aS s hs) φ := by
-  sorry
+  classical
+  let G := DncCoefficientTransport.geometry D d g aS s hs
+  have := G.compact
+  have := G.compactFamily
+  have := G.compactNormal
+  have := G.quasiCompactNormal
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+  have : IsNoetherian S := ⟨⟩
+  have := SmoothOfRelativeDimension.smooth d g
+  have : IsNoetherian V := isNoetherian_of_locallyOfFiniteType g
+  have hD := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have : IsNoetherian (AffineSpace (ULift.{u} (Fin 1)) S) :=
+    isNoetherian_of_locallyOfFiniteType (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  have : IsNoetherian s.ker.deformationSpace :=
+    isNoetherian_of_locallyOfFiniteType (Scheme.Hom.deformationSpaceProj g s)
+  have hNormal : SmoothOfRelativeDimension d (Scheme.Hom.normalConeProj g s) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have : IsSeparated (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have := SmoothOfRelativeDimension.smooth d (Scheme.Hom.normalConeProj g s)
+  have : IsNoetherian s.ker.normalCone :=
+    isNoetherian_of_locallyOfFiniteType (Scheme.Hom.normalConeProj g s)
+  let A := ULift.{u + 1, u} (DncCoefficientTransport.BaseRing.{u} ell n)
+  let C := ULift.{u + 1, u} B
+  let ψ : A →+* C := RingHom.ulift.{u + 1, u + 1, u, u} φ
+  have hN : 0 < ell ^ n := pow_pos (Fact.out : ell.Prime).pos n
+  have hA : ((ell ^ n : ℕ) : A) = 0 := by
+    apply ULift.ext
+    apply ULift.ext
+    exact ZMod.natCast_self _
+  have hB : ((ell ^ n : ℕ) : C) = 0 := by
+    rw [← map_natCast ψ, hA, map_zero]
+  have hS := DncCoefficientTransport.exponent_unit D ell n hell aS
+  have hLine := DncCoefficientTransport.exponent_unit D ell n hell
+    ((AffineSpace (ULift.{u} (Fin 1)) S ↘ S) ≫ aS)
+  have hScalar := Etale.finite_smooth_dualizing_scalar ψ ell n hn hA hB hS g d
+  have hScalarF := Etale.finite_smooth_dualizing_scalar ψ ell n hn hA hB hLine
+    (Scheme.Hom.deformationSpaceProj g s) d
+  have hScalarN := Etale.finite_smooth_dualizing_scalar ψ ell n hn hA hB hS
+    (Scheme.Hom.normalConeProj g s) d
+  have hq := DncCoefficientTransport.section_iso ψ g s hScalar.1
+  have hqF := DncCoefficientTransport.section_iso ψ (Scheme.Hom.deformationSpaceProj g s)
+    s.deformationSpaceSection hScalarF.1
+  have hqN := DncCoefficientTransport.section_iso ψ (Scheme.Hom.normalConeProj g s)
+    s.normalConeZeroSection hScalarN.1
+  have hBase := DncCoefficientTransport.section_scalar_base_change ψ (ell ^ n)
+    hN hA hB hS g d
+  have hBaseF := DncCoefficientTransport.section_scalar_base_change ψ (ell ^ n)
+    hN hA hB hLine (Scheme.Hom.deformationSpaceProj g s) d
+  have hFibre : DncCoefficientTransport.FibreCompatibility ψ g s hs :=
+    ⟨hBaseF.2 g (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)
+        (Scheme.Hom.deformationSpaceOneFibre g s)
+        (Scheme.Hom.isPullback_deformationSpaceOneFibre g s)
+        s.deformationSpaceSection s (Scheme.Hom.comp_deformationSpaceOneFibre hs),
+      hBaseF.2 (Scheme.Hom.normalConeProj g s)
+        (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S) s.ker.normalConeToDeformationSpace
+        (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
+        s.deformationSpaceSection s.normalConeZeroSection
+        Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace⟩
+  have hConstA := Etale.NoetherianSectionSpecialization.finite_family_constancy
+    A (ell ^ n) hN hA hS d g s hs
+  have hConstB := Etale.NoetherianSectionSpecialization.finite_family_constancy
+    C (ell ^ n) hN hB hS d g s hs
+  have := Etale.NoetherianSectionSpecialization.compact_normalProjection d g s hs
+  have hlines := Etale.SectionLocalDualizingComparisons.section_local_dualizing_comparisons
+    C (ell ^ n) hN hB hS d g s hs
+  have hshape := Etale.NoetherianSectionSpecialization.line_shape C d S _ hlines.1
+  change DncCoefficientTransport.Assertions D ell n g s hs G φ
+  refine ⟨DncCoefficientTransport.realized_iso φ g s hq,
+    DncCoefficientTransport.realized_iso φ _ _ hqF,
+    DncCoefficientTransport.realized_iso φ _ _ hqN, hq, hqF, hqN,
+    hConstA.1, hConstA.2.1, hConstB.1, hConstB.2.1, hConstA.2.2,
+    hFibre, ?_, ?_, ?_, ?_⟩
+  · intro V' S' g' _ _ b _ v sq s' hsection
+    have : IsLocallyNoetherian S' := LocallyOfFiniteType.isLocallyNoetherian b
+    exact hBase.2 g' b v sq s s' hsection
+  · intro V0 S0 S0' _ _ _ _ _ _ _ _ _ g0 r _ _ _ b
+    have : IsNoetherian V0.left := by
+      have := LocallyOfFiniteType.isLocallyNoetherian V0.hom
+      have := QuasiCompact.compactSpace_of_compactSpace V0.hom
+      exact ⟨⟩
+    have : IsNoetherian S0.left := by
+      have := LocallyOfFiniteType.isLocallyNoetherian S0.hom
+      have := QuasiCompact.compactSpace_of_compactSpace S0.hom
+      exact ⟨⟩
+    have : IsNoetherian S0'.left := by
+      have := LocallyOfFiniteType.isLocallyNoetherian S0'.hom
+      have := QuasiCompact.compactSpace_of_compactSpace S0'.hom
+      exact ⟨⟩
+    have := SmoothOfRelativeDimension.smooth r g0.left
+    have : IsSeparated (g0.left ≫ S0.hom) := by
+      simpa only [g0.w] using inferInstanceAs (IsSeparated V0.hom)
+    have : IsSeparated g0.left := IsSeparated.of_comp g0.left S0.hom
+    have hu := DncCoefficientTransport.exponent_unit D ell n hell S0.hom
+    have huStalk (x : S0.left) : IsUnit ((ell ^ n : ℕ) : S0.left.presheaf.stalk x) := by
+      simpa only [map_natCast] using hu.map (S0.left.presheaf.germ ⊤ x trivial).hom
+    exact ⟨(Etale.smooth_exceptional_base_change A (ell ^ n) hN hA huStalk
+        g0.left r b.left).2.1,
+      (Etale.smooth_exceptional_base_change C (ell ^ n) hN hB huStalk
+        g0.left r b.left).2.1,
+      (DncCoefficientTransport.section_scalar_base_change ψ (ell ^ n) hN hA hB hu
+        g0.left r).1 b.left⟩
+  · intro V0 S0 _ _ _ _ _ _ _ _ g0 _ r _ U _ i _ e _ _ _ _ he MA MB hA' hB'
+        tA tB PA PB hu
+    have := SmoothOfRelativeDimension.smooth r g0.left
+    have : IsSeparated (g0.left ≫ S0.hom) := by
+      simpa only [g0.w] using inferInstanceAs (IsSeparated V0.hom)
+    have : QuasiCompact (g0.left ≫ S0.hom) := by
+      simpa only [g0.w] using inferInstanceAs (QuasiCompact V0.hom)
+    have : IsSeparated g0.left := IsSeparated.of_comp g0.left S0.hom
+    have : QuasiCompact g0.left := QuasiCompact.of_comp g0.left S0.hom
+    exact (Etale.finite_smooth_dualizing_scalar ψ ell n hn hA' hB' hu g0.left r).2
+      i e he MA MB tA tB PA PB
+  · exact DncCoefficientTransport.normalized_transport ψ g s hs hFibre hq hqF
+      hConstB.2.1 (-(2 * (d : ℤ))) (hshape.imp fun _ h ↦ h.2)
 
 end WeilConjectures

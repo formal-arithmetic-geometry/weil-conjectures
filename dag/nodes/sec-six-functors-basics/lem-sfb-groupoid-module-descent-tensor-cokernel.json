@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-groupoid-module-descent-tensor-cokernel",
+ "kind": "statement",
+ "title": "Module descent on a scheme groupoid quotient, with tensor products and cokernels",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $(U,R,s,t,e,i,c)$ be a groupoid in $S$-schemes with the laws of [def-a1-scheme-groupoid-laws]. Put $\\mathcal X=[U/R]$, the fppf stackification of the prestack with objects $U(T)$ and arrows $R(T)$ on $S$-schemes $T$, and let $a:U\\to\\mathcal X$ be the canonical object. Quasi-coherent $\\mathcal O_{\\mathcal X}$-modules mean sheaves on its big fppf site which locally admit presentations $\\mathcal O^{(I)}\\to\\mathcal O^{(J)}\\to F\\to0$ for small sets $I,J$ [def-trf-space-quasi-coherent-module, def-sfb-stack-quasi-coherent-algebra]. Scheme quasi-coherence is [pqf-def-coherent], module sheaves are [def-weil-sheaf-of-modules-category], pullbacks are [def-pc-module-pullback], and tensor products are [def-pur-sheaf-tensor-product]. Restriction to $U$ gives an equivalence between these modules and pairs $(M,\\delta)$ with $M$ a quasi-coherent $\\mathcal O_U$-module and $\\delta:s^*M\\simeq t^*M$ satisfying $e^*\\delta=1_M$ and $c^*\\delta=\\operatorname{pr}_1^*\\delta\\circ\\operatorname{pr}_2^*\\delta$ on $R\\times_{s,U,t}R$ under the canonical pullback identifications. Morphisms are all module maps commuting with $\\delta$. This equivalence sends $\\mathcal O_{\\mathcal X}$ to $\\mathcal O_U$ with its canonical datum and sends $F\\otimes G$ to $a^*F\\otimes a^*G$ with the tensor-product datum, compatibly with associativity, unit and symmetry constraints. Cokernels of maps between quasi-coherent modules on $\\mathcal X$ are quasi-coherent and are their cokernels in all module sheaves; the equivalence identifies them with cokernels of the underlying module maps on $U$, with the induced datum. No finiteness condition on the modules and no smoothness or Deligne--Mumford hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WT (proposition-quasi-coherent), with Tag 06WN (lemma-qc-colimits)(1),(2), Tag 0GQD (lemma-compare-quasi-coherent), and spaces-groupoids.tex Tag 077X (lemma-colimits), whose proof computes colimits on U. The inverse orientation of the isomorphism in 06WT is used here; tensor compatibility is the canonical pullback tensor comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-scheme-groupoid-laws",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-fppf-site",
+  "def-sfb-scheme-groupoid-module",
+  "def-sfb-scheme-groupoid-quotient-presentation",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sfb-stack-module-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Work in the universe convention cited, so that all sites below and all indexing sets are small relative to the sheaf universe. Let $P=[U/_{p}R]$: its objects are $(T,u:T\\to U)$ and an arrow $(f,r):(T,u)\\to(T',u')$ has $f:T\\to T'$, $r:T\\to R$, $sr=u$, $tr=u'f$. For a subsequent $(g,q)$ its composite is $(gf,c(qf,r))$; identities are $(1,e u)$. The groupoid laws make this a fibred groupoid. Apply stackification-module equivalence to $P\\to\\mathcal X$. It identifies all module sheaves and their quasi-coherent subcategories by precomposition, so we may first construct the required equivalence on $P$.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-a1-scheme-groupoid-laws",
+    "lem-sfb-stackification-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, proof, construction of the inverse using 06WR"
+   }
+  },
+  {
+   "text": "For $x=(T,u)$, the slice $P/x$ is equivalent as a ringed site to $(\\mathit{Sch}/T)_{\\mathrm{fppf}}$: a cartesian lift identifies every arrow into $x$ uniquely up to unique isomorphism with the special arrow $(h,e u h):(T',uh)\\to(T,u)$. The functors preserve the base scheme, its regular functions and its covering families. By the local-presentation definition, a module on $P$ is quasi-coherent exactly when all these slice restrictions are quasi-coherent: the presentations on every slice cover its final object, and these are precisely the presentations required at every object of $P$. The big-site comparison therefore associates to a quasi-coherent $F$ a scheme module $M_x$ on each $T$, recovering $F$ on $P/x$ as $A_T(M_x)$. For an arrow $x\\to y$ over $h:T\\to T'$, relocalization identifies the restriction from $P/y$ to $P/x$ with base change to $T$; the canonical comparisons in the big-site equivalence give $h^*M_y\\simeq M_x$. These comparisons satisfy identities and composition because restriction does and the big-site comparison is fully faithful. Neither argument uses the special form of $P$ beyond its being fibred in groupoids. For the stack $\\mathcal X$, also fibred in groupoids, and $x\\in\\mathcal X(T)$, every arrow $y\\to x$ over $h:T'\\to T$ is uniquely isomorphic over $T'$ to the cartesian lift $h^*x\\to x$. Hence $\\mathcal X/x\\simeq(\\mathit{Sch}/T)_{\\mathrm{fppf}}$ as ringed sites, quasi-coherent modules on $\\mathcal X$ are those with quasi-coherent slice restrictions, and $F|_{\\mathcal X/x}\\simeq A_T(M_x)$; steps 7 and 8 use these slices of $\\mathcal X$.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "def-pur-localized-ringed-site",
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, first construction; Tag 06WI (lemma-characterize-quasi-coherent); slice identification expanded from lemma-localizing-structure-sheaf"
+   }
+  },
+  {
+   "text": "Set $M=M_{(U,1)}$. The special arrows to $(U,1)$ identify $M_{(T,u)}$ with $u^*M$. Evaluate $F$ on the universal vertical arrow $(1_R,1_R):(R,s)\\to(R,t)$. Its contravariant restriction gives an isomorphism $\\alpha:t^*M\\to s^*M$; set $\\delta=\\alpha^{-1}$. Evaluation on the identity gives $e^*\\delta=1$. On $R\\times_{s,U,t}R$, the universal composable arrows $b,a$ compose to $c(a,b)$. Functoriality gives $\\alpha_{c(a,b)}=\\alpha_b\\alpha_a$; inversion gives $\\delta_{c(a,b)}=\\delta_a\\delta_b$, which is exactly the stated cocycle with projections numbered $1,2$. A module-sheaf map gives a map of $M$ commuting with these isomorphisms by naturality on the same universal arrow.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, forward construction; inverse of the orientation in Tag 0441 (definition-groupoid-module)"
+   }
+  },
+  {
+   "text": "Conversely, for $(M,\\delta)$ define $F_M(T,u)=\\Gamma(T,u^*M)$. Along $(f,r):(T,u)\\to(T',u')$, send a section first by pullback along $f$ to $\\Gamma(T,(u'f)^*M)=\\Gamma(T,(tr)^*M)$, then by $r^*(\\delta^{-1})$ to $\\Gamma(T,(sr)^*M)$. This is semilinear for $\\mathcal O(T')\\to\\mathcal O(T)$, hence a presheaf module restriction. The identity arrow acts identically since $e^*\\delta=1$ and identity pullback is canonically identity. For subsequent $(g,q)$, after identifying iterated pullbacks, the two transport maps multiply as $r^*\\delta^{-1}\\circ(qf)^*\\delta^{-1}=(c(qf,r))^*\\delta^{-1}$ by the inverse cocycle. Section pullbacks along $g$ then $f$ equal pullback along $gf$. Thus the restriction for the composite equals the composite restrictions. The natural identity/composition pullback comparisons justify precisely these identifications. A compatible $v:M\\to N$ gives the presheaf map with components $\\Gamma(T,u^*v)$, since its compatibility with $\\delta$ makes it commute with the displayed restrictions.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, inverse construction, displayed section formula; omitted presheaf-functor check expanded"
+   }
+  },
+  {
+   "text": "The presheaf in the previous step is a quasi-coherent sheaf. Indeed $u^*M$ is quasi-coherent. On the special arrows in $P/(T,u)$ its restriction is $A_T(u^*M)$, with the section formula and restrictions of the big-site comparison. Every covering arrow to $(T,u)$ is uniquely isomorphic over its base to a special arrow, so matching families and their amalgamations are those for this fppf sheaf. This proves the sheaf condition on $P$, and each slice is quasi-coherent by the same comparison. The local-presentation criterion established in step 2 now proves quasi-coherence on $P$.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, inverse construction, sheaf and quasi-coherence check using 06WI"
+   }
+  },
+  {
+   "text": "These functors are quasi-inverse on objects and on all module maps. Starting with $M$, evaluation at $(U,1)$ recovers $M$ by identity pullback, and evaluation on the universal vertical arrow recovers $\\delta^{-1}$, hence $\\delta$. Starting with $F$, the canonical slice comparisons of step 2 give $F(T,u)\\simeq\\Gamma(T,u^*M)$. They commute with special arrows by the base-change comparison. Every arrow $(f,r)$ factors as the vertical arrow $(1_T,r):(T,u)\\to(T,u'f)$ followed by the special arrow to $(T',u')$; the vertical arrow is the pullback of $(1_R,1_R)$. Thus its comparison is exactly $r^*\\delta^{-1}$, and the objectwise identifications are a natural module-sheaf isomorphism. For a compatible map $v$ the maps $u^*v$ yield a natural transformation by step 4. Conversely any transformation is uniquely determined by its map at $(U,1)$, by the slice full faithfulness and naturality on special arrows; naturality on the universal vertical arrow imposes exactly compatibility with $\\delta$. This proves fullness and faithfulness as well as essential surjectivity. Compose with the equivalence of step 1 to obtain the asserted restriction functor on $\\mathcal X$.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, final omitted quasi-inverse verification, written out on special and vertical arrows"
+   }
+  },
+  {
+   "text": "For quasi-coherent $F,G$ on $\\mathcal X$, restrict to the slice at any object $x$ over $T$. The localized-site tensor comparison identifies the restriction of their ambient tensor with the tensor of their restrictions. These restrictions are $A_T(M_x),A_T(N_x)$, so the big-site tensor comparison identifies this with $A_T(M_x\\otimes N_x)$. The scheme tensor is quasi-coherent, and the slice local-presentation criterion proves that $F\\otimes G$ is quasi-coherent. At $U$ the module is $a^*F\\otimes a^*G$; naturality along the universal arrow makes its datum $\\delta_F\\otimes\\delta_G$, using the scheme pullback tensor comparison. The unit is $\\mathcal O_U$, since the structure sheaf restricts to the structure sheaf. The tensor identifications are the pure-tensor comparisons in the cited statements. On each slice the associator sends $(m\\otimes n)\\otimes p$ to $m\\otimes(n\\otimes p)$, the symmetry interchanges $m,n$, and unitors multiply scalars. Both routes in every constraint square therefore have these same values on local pure tensors. The sheaf tensor universal property makes the maps equal, proving the stated associativity, unit and symmetry compatibility.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WN(2), its slice proof, and Tag 06WT; tensor-constraint checks expanded on local pure tensors"
+   }
+  },
+  {
+   "text": "For $v:F\\to G$ on $\\mathcal X$, form $K=\\operatorname{Coker}(v)$ in all module sheaves, which exists by the module-sheaf colimit statement. Exact slice restriction gives $K|_x=\\operatorname{Coker}(v|_x)$ for each object $x$ over $T$. Under the big-site comparison this is $A_T(\\operatorname{Coker}(v_x))$, since that comparison preserves ambient cokernels. Scheme quasi-coherent cokernels are quasi-coherent, so the slice local-presentation criterion proves that $K$ is quasi-coherent on $\\mathcal X$. Its ambient universal property is still the universal property in the full quasi-coherent subcategory. In particular its module at $U$ is $\\operatorname{Coker}(a^*v)$. Pullback along $s,t$ preserves this cokernel: it is a left adjoint by the module pullback adjunction, and the adjunction bijection transports the cokernel universal property. The equivariance square for $v$ consequently induces an isomorphism between these two cokernels, with inverse induced by the inverse data. Its identity and cocycle laws follow by precomposing with the epimorphic cokernel projection, where they are the laws for $G$. Any equivariant map killing $a^*v$ factors uniquely through this cokernel, and equivariance of the factor follows by the same epimorphic-projection check. This proves both the claimed induced datum and the cokernel identification in the groupoid category. Only right exactness was used, so no flatness hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WN(1), slice proof; spaces-groupoids.tex Tag 077X (lemma-colimits), cokernel universal property expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-a1-scheme-groupoid-laws",
+  "lem-sfb-stackification-module-equivalence",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "def-pur-localized-ringed-site",
+  "def-trf-space-quasi-coherent-module",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-sfb-groupoid-stackification-local-description"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WT (proposition-quasi-coherent), with omitted functor/quasi-inverse checks expanded; Tag 06WN(1),(2); spaces-groupoids.tex Tag 077X for cokernels."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on a quotient stack equivalent to modules on its groupoid presentation compatible with tensor products and cokernels",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk.inj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If two quasicoherent sheaf data structures constructed via local presentations are equal, then their index types are equal, their covering families are isomorphic, and their local presentations are is\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits were read; they give site-local quasi-coherence, ordinary ring descent, or general sheaf functors, not module descent on a scheme groupoid quotient stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"equivalence\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits were read; they give site-local quasi-coherence, ordinary ring descent, or general sheaf functors, not module descent on a scheme groupoid quotient stack"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*[Mm]odule|[Mm]odule.*groupoid|[Dd]escent.*[Qq]uasi|[Qq]uasi.*[Dd]escent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits were read; they give site-local quasi-coherence, ordinary ring descent, or general sheaf functors, not module descent on a scheme groupoid quotient stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent module descent on a flat groupoid presentation of a stack tensor compatible equivalence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, a covering family $\\\\{X_i\\\\}_{i \\\\in I}$ in $J$, and for each $X_i$ a presentation of the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits were read; they give site-local quasi-coherence, ordinary ring descent, or general sheaf functors, not module descent on a scheme groupoid quotient stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric monoidal equivalence between cartesian sheaves of modules on a quotient stack and equivariant quasi coherent modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"CategoryTheory.Sheaf.symmetricCategory\", \"module\": \"Mathlib/CategoryTheory/Sites/Monoidal\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₃) →\\n        [inst_1 : CategoryTheory.Category.{v₃, u₃} A] →\\n          [inst_2 : CategoryTheory.MonoidalCategory A] →\\n            [inst_3 : J.W.IsMonoidal] →\\n           \", \"doc\": \"The category of sheaves on a site (a category equipped with a Grothendieck topology $J$) with values in a symmetric monoidal category $\\\\mathcal{A}$ inherits a canonical symmetric monoidal structure. T\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"SheafOfModules.pushforwardCongr\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given continuous functors between sites with Grothendieck topologies and equal natural transformations $\\\\phi, \\\\psi : S \\\\to F_*R$ between sheaves of rings, this constructs a natural isomorphism between\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits were read; they give site-local quasi-coherence, ordinary ring descent, or general sheaf functors, not module descent on a scheme groupoid quotient stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on an arbitrary scheme groupoid quotient stack equivalent to equivariant modules tensor cokernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ (b : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.obj b).obj = CategoryTheory.Cat.of (Opposite.unop b.as).Modules\", \"doc\": \"For any scheme $X$ considered as an object in the locally discrete opposite category of schemes, the pseudofunctor assigns the category of modules over $X$. Specifically, applying the pseudofunctor to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general descent and quasi-coherence definitions do not give the quotient-groupoid module theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"equivalence\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general descent and quasi-coherence definitions do not give the quotient-groupoid module theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*[Mm]odule|[Mm]odule.*groupoid|[Dd]escent.*[Qq]uasi|[Qq]uasi.*[Dd]escent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general descent and quasi-coherence definitions do not give the quotient-groupoid module theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symmetric monoidal descent equivalence for quasi coherent modules on quotient stacks of scheme groupoids",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, if $\\\\mathcal{F}\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \": F.IsStackFor (Presieve.ofArrows _ f) ↔ (F.toDescentData f).IsEquivalence\", \"doc\": \"A pseudofunctor $ F $ satisfies the stack condition for the presieve generated by a family of morphisms $ f_i: X_i \\to S $ if and only if the induced functor from $ F(\\text{op}(S)) $ to the category of \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{ι' : Type t'} {X' : ι' → C} (f' : ∀ i', X' i' ⟶ S) (h : Sieve.ofArrows _ f = Sieve.ofArrows _ f') :\\n  ∃ (e : F.DescentData f ≌ F.DescentData f'), Nonempty (F.toDescentData f ⋙ e.functor ≅ F.toDescentData f')\", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and two families of morphisms $ f_i: X_i \\\\to S $ and $ f'_j: X'_j \\\\to S \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) {ι' : Type t'} {X' : ι' → C} (f' : ∀ i', X' i' ⟶ S)\\n  (h : Sieve.ofArrows _ f = Sieve.ofArrows _ f') :\\n  (F.toDescentData f).IsEquivalence ↔ (F.toDescentData f').IsEquivalence\", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and two families of morphisms $ f_i: X_i \\\\to S $ and $ f'_j: X'_j \\\\to S \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general descent and quasi-coherence definitions do not give the quotient-groupoid module theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian quasi coherent sheaves on the stackification of a groupoid with tensor and cokernel computed on objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.Presentation.map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, this function constructs a prese\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"CategoryTheory.Sheaf.monoidalCategory\", \"module\": \"Mathlib/CategoryTheory/Sites/Monoidal\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₃) →\\n        [inst_1 : CategoryTheory.Category.{v₃, u₃} A] →\\n          [inst_2 : CategoryTheory.MonoidalCategory A] →\\n            [J.W.IsMonoidal] →\\n              [Categ\", \"doc\": \"The category of sheaves on a site (a category equipped with a Grothendieck topology $J$) is endowed with a monoidal structure. This structure is obtained by localizing the monoidal category of preshea\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general descent and quasi-coherence definitions do not give the quotient-groupoid module theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-groupoid-quasicoherent-algebra-descent",
+  "date": "2026-10-23",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The flat affine-presentation dictionary used before taking the norm of a lift of an invariant section. Supporting module theorem: descent on the fppf quotient groupoid, tensor products and cokernels, before descending multiplication and unit.",
+   "via": [
+    "lem-sfb-affine-groupoid-quasicoherent-algebra-descent",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-module-descent-tensor-cokernel",
+  "worker": "stage1",
+  "summary": "Q89: constructed the quotient-prestack module functors explicitly, checked their inverse equivalence and all module maps, and proved tensor coherence and ambient cokernel compatibility on slices. Two new general inputs (stackification modules and scheme big-fppf comparison), searched by five real queries each, remain statement-only. Existing localized tensor and exact restriction nodes reused. Statement unchanged; no flatness, smoothness, finiteness or DM assumption added.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting alteration/coarse-space chain: module input to affine-groupoid quasi-coherent algebra descent. Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), direct-image finiteness; no change to chapter or unit route. The ancestor command returns null for the inherited chain; retain its place and via provenance.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Step 7 takes (F⊗G)|_U ≅ F|_U⊗G|_U on an arbitrary localized ringed site, with its pure-tensor normalization; a generic ringed-site fact that no node of sk-thm-sf-ctf-stability states (Stacks 06WN(2) proof via Modules on Sites tensor-product-pullback)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-69bb6784e",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-69bb6784e (reviewer sub-agent of L); spot-checked: I read Stacks 06WT in full (the forward α t*→s*, the inverse Γ(T,u*G) on [U/_pR], and the omitted presheaf and quasi-inverse checks), 06WN(1),(2), 06WQ/06WR, 0441 orientation, and descent 03DX(1), 03LC(1), 06VE(3),(4),(6),(7). The statement is correct: δ=α^{-1} gives c*δ=pr_1*δ∘pr_2*δ under c(a,b)=a∘b, s(a)=t(b). All 8 steps check out. Step 1: composite (gf,c(qf,r)) verified, so P is fibred in groupoids. Step 2: P/x≃Sch/T via (f,r)=(f,euf)∘(1,r), and the special objects form a full subcategory. Steps 3-4: the presheaf law reduces exactly to the inverse cocycle α_{ab}=α_bα_a. Step 5: sheaf and quasi-coherence through the special subcategory, no flatness needed. Step 6: every object maps specially to (U,1), so the functor is full on all compatible maps. Step 7: tensor via localized-site restriction plus 06VE(7), constraints checked on pure tensors. Step 8: cokernels use only right exactness (consistent with 06VE(6)), with s*,t* as left adjoints. Both new nodes are true and are not duplicates: big-fppf = 03DX+03LC+06VE (only right exactness claimed); stackification = 06WQ+06WR with q* as precomposition. Neither restates an item clause. Batch-5 flags: def-trf-space-quasi-coherent-module (directly and via def-sfb-stack-quasi-coherent-algebra) is only the general site definition of quasi-coherence, already in the base statement, not a step of the trace formula or Poincaré duality, so it is accepted. FIX: (1) Steps 7-8 use slices of the stack X, but step 2 had argued X/x≃(Sch/T)_fppf, the slice quasi-coherence criterion and F|_{X/x}≃A_T(M_x) only for P. I added the general fibred-groupoid argument for X to step 2, citing lem-sfb-groupoid-stackification-local-description (same unit, no cycle; proof_deps updated). (2) I declared split_report.tool_uses for the off-unit, non-closed generic lem-sfb-localized-site-tensor-restriction. Advisory: the existing lem-sfb-cartesian-module-fppf-realization (06WK) could also have been cited in step 5.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidModuleDescentTensorCokernel",
+  "declaration": "CategoryTheory.groupoid_module_descent_tensor_cokernel",
+  "declarations": [
+   "CategoryTheory.groupoidDescentInclusion",
+   "CategoryTheory.groupoidDescentAtlas",
+   "CategoryTheory.groupoidDescentPullbackTensor",
+   "CategoryTheory.groupoidDescentTensorBeta",
+   "CategoryTheory.groupoidDescentUnitBeta",
+   "CategoryTheory.groupoidDescentBetaOnTest",
+   "CategoryTheory.groupoidDescentTestArrow",
+   "CategoryTheory.groupoidDescentChartScalars",
+   "CategoryTheory.groupoidDescentSpecialArrow",
+   "CategoryTheory.groupoidDescentSectionPullback",
+   "CategoryTheory.groupoidDescentPureTensor",
+   "CategoryTheory.groupoid_module_descent_tensor_cokernel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidModuleDescentTensorCokernel.lean",
+  "statement": "theorem groupoid_module_descent_tensor_cokernel {S : Scheme.{u}} {U R : Over S} (s t : R ⟶ U) (e : U.left ⟶ R.left) (i : R.left ⟶ R.left) (c : pullback s.left t.left ⟶ R.left) (F : BasedCategory.{v, w} (Over S)) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F) (P : SchemeGroupoidQuotientPresentation s t e i c F a) : ∃ E : ModuliSmallQCoh F P.stack.1 ≌ Scheme.GroupoidModule s.left t.left e i c P.groupoid, ∃ j : E.functor ⋙ Scheme.GroupoidModule.forgetToModules ≅ groupoidDescentAtlas P.stack.1 a, ∃ b : ∀ (M : ModuliSmallQCoh F P.stack.1) (T : Over S) (x : T ⟶ U), Γ((Scheme.Modules.tensorPullback x.left).obj (E.functor.obj M).moduleObj, ⊤) ≃+ M.obj.val.obj (op (a.obj (CostructuredArrow.mk (yoneda.map x)))), (∀ (M : ModuliSmallQCoh F P.stack.1) (W : U.left.Opens) (z : Γ((E.functor.obj M).moduleObj, W)), b M (Over.mk (W.ι ≫ U.hom)) (Over.homMk W.ι) (stackModuleOpenSection U.left (E.functor.obj M).moduleObj W z) = (j.app M).hom.app W z) ∧ (∀ (M : ModuliSmallQCoh F P.stack.1) (T : Over S) (x : T ⟶ U) (r : Γ(T.left, ⊤)) (z : Γ((Scheme.Modules.tensorPullback x.left).obj (E.functor.obj M).moduleObj, ⊤)), b M T x (r • z) = groupoidDescentChartScalars a x r • b M T x z) ∧ (∀ (M N : ModuliSmallQCoh F P.stack.1) (f : M ⟶ N) (T : Over S) (x : T ⟶ U) (z : Γ((Scheme.Modules.tensorPullback x.left).obj (E.functor.obj M).moduleObj, ⊤)), b N T x (((Scheme.Modules.tensorPullback x.left).map (E.functor.map f).val).app ⊤ z) = f.hom.val.app _ (b M T x z)) ∧ (∀ (M : ModuliSmallQCoh F P.stack.1) (T T' : Over S) (x : T ⟶ U) (f : T' ⟶ T) (z : Γ((Scheme.Modules.tensorPullback x.left).obj (E.functor.obj M).moduleObj, ⊤)), b M T' (f ≫ x) (groupoidDescentSectionPullback x f (E.functor.obj M).moduleObj z) = M.obj.val.map (groupoidDescentSpecialArrow a x f).op (b M T x z)) ∧ (∀ (M : ModuliSmallQCoh F P.stack.1) (T : Over S) (r : T ⟶ R) (z : Γ((Scheme.Modules.tensorPullback (r ≫ t).left).obj (E.functor.obj M).moduleObj, ⊤)), b M T (r ≫ s) ((groupoidDescentBetaOnTest (E.functor.obj M) r).hom.app ⊤ z) = M.obj.val.map (groupoidDescentTestArrow P r).op (b M T (r ≫ t) z)) ∧ (∃ hQ : ObjectProperty.IsMonoidal (moduliSmallIsQuasicoherent F P.stack.1), ∃ mD : MonoidalCategory (Scheme.GroupoidModule s.left t.left e i c P.groupoid), ∃ sD : SymmetricCategory (Scheme.GroupoidModule s.left t.left e i c P.groupoid), ∃ hV : (Scheme.GroupoidModule.forgetToModules (s := s.left) (t := t.left) (e := e) (i := i) (c := c) (hG := P.groupoid)).Braided, ∃ hA : (groupoidDescentAtlas P.stack.1 a).Braided, ∃ hE : E.functor.Braided, NatTrans.IsMonoidal j.hom ∧ (∀ (W : U.left.Opens) (r : Γ(U.left, W)), (Functor.LaxMonoidal.ε (groupoidDescentAtlas P.stack.1 a)).app W r = (moduliOpenChartRingMap P.stack.1 a).app (op W) r) ∧ (∀ (M N : ModuliSmallQCoh F P.stack.1) (W : U.left.Opens) (x : Γ((groupoidDescentAtlas P.stack.1 a).obj M, W)) (y : Γ((groupoidDescentAtlas P.stack.1 a).obj N, W)), (Functor.LaxMonoidal.μ (groupoidDescentAtlas P.stack.1 a) M N).app W (Scheme.Modules.tmulSection x y) = groupoidDescentPureTensor M.obj N.obj (op ((moduliOpenChart a).obj W)) x y) ∧ (∃ h0 : (𝟙_ (Scheme.GroupoidModule s.left t.left e i c P.groupoid)).moduleObj = SheafOfModules.unit U.left.ringCatSheaf, Functor.LaxMonoidal.ε Scheme.GroupoidModule.forgetToModules = eqToHom h0.symm ∧ (eqToIso (congrArg (fun M ↦ (Scheme.groupoidModulePullback t.left).obj M) h0)).symm ≪≫ (𝟙_ (Scheme.GroupoidModule s.left t.left e i c P.groupoid)).beta ≪≫ eqToIso (congrArg (fun M ↦ (Scheme.groupoidModulePullback s.left).obj M) h0) = groupoidDescentUnitBeta s.left t.left) ∧ (∀ M N : Scheme.GroupoidModule s.left t.left e i c P.groupoid, ∃ hMN : (M ⊗ N).moduleObj = M.moduleObj ⊗ N.moduleObj, Functor.LaxMonoidal.μ Scheme.GroupoidModule.forgetToModules M N = eqToHom hMN.symm ∧ (eqToIso (congrArg (fun K ↦ (Scheme.groupoidModulePullback t.left).obj K) hMN)).symm ≪≫ (M ⊗ N).beta ≪≫ eqToIso (congrArg (fun K ↦ (Scheme.groupoidModulePullback s.left).obj K) hMN) = groupoidDescentTensorBeta M N)) ∧ (∀ (M N : ModuliSmallQCoh F P.stack.1) (f : M ⟶ N), ∃ hK : moduliSmallIsQuasicoherent F P.stack.1 (cokernel f.hom), ∃ k : (E.functor.obj ⟨cokernel f.hom, hK⟩).moduleObj ≅ cokernel (E.functor.map f).val, (E.functor.map (ObjectProperty.homMk (cokernel.π f.hom))).val ≫ k.hom = cokernel.π (E.functor.map f).val)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46f6196c7",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery of d78c5e repairs both return findings. H13: def-sfb-stack-quasi-coherent-algebra.json is byte-identical to side-live (Q113). The new §1(A) node def-sfb-stack-module-restriction owns StackModuleRestriction (24 declarations, matching the file) and the item cites it. Every sorry in that module is in a Prop (instances, HasWeakSheafify/WEqualsLocallyBijective/IsSheaf theorems); data definitions have real bodies. H2: lem-sfb-scheme-big-fppf-quasicoherent-equivalence is dropped from stmt_deps and kept in proof_deps (proof_deps unchanged); its import is now proof-only. sfbSectionPullback/OpenSection/PullbackUnit are replaced by verbatim stackModule* copies built from def-pc-module-pullback's adjunction. Mechanical finding lem-weil-pbc-module-pullback-tensor: groupoidDescentPullbackTensor is Classical.choose of module_pullback_tensor's pure-tensor-pinned iso, so the statement depends on the theorem's conclusion: PASS on this point. Statement otherwise identical to the earlier delivery (clauses, beta=δ⁻¹, pinned monoidal/cokernel data, independent universes). Not compiled: no file changed. Advisory: unused public import of SchemeGroupoidQuotientPresentation in StackModuleRestriction."
+ }
+}

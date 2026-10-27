@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-transverse-local-root-family-regular",
+ "kind": "statement",
+ "title": "Regularity of all transverse local partial-root presentations",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative regular local ring [def-weil-regular-scheme], let $I$ be a finite index set, and let $t_i\\in R$ for $i\\in I$. Put $S=\\{i\\in I:t_i\\in\\mathfrak m\\}$. Suppose that for every $J\\subseteq S$ the ring $R_J=R/(t_j:j\\in J)$ is regular local and $\\dim R_J+|J|=\\dim R$, using Krull dimension [def-weil-pbc-krull-dimension-ring]. Let $n\\geq1$ be an integer whose image in $R$ is a unit. For every $J\\subseteq S$ and $K\\subseteq I\\setminus J$, let $\\bar t_i$ denote the image of $t_i$ in $R_J$ and put $$B_{J,K}=R_J[x_i:i\\in K]/(x_i^n-\\bar t_i:i\\in K),$$ using multivariate polynomial rings [def-weil-pbc-mv-polynomial-ring]. Then every $B_{J,K}$ is a regular Noetherian ring: all of its prime localizations are regular local. Moreover $B_{J,K}$ is a finite free $R_J$-module with basis the monomials $\\prod_{i\\in K}x_i^{a_i}$ for $0\\leq a_i<n$. No henselianity, roots of unity, or assumption that all the $t_i$ lie in $\\mathfrak m$ is imposed. For $K=\\varnothing$ this asserts regularity of $R_J$ and the basis $\\{1\\}$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IX Proposition 2.1 proof, printed p.133, full simultaneous parameter-root algebra before invariants. Algebraic calculation made explicit by the original item steps 3--6: monic free bases and simultaneous induction; Stacks Tag 00NU (algebra-lemma-regular-mod-x) at the root and Tag 07PF (more-algebra-lemma-quotient-regular) off the root. ILO leaves this calculation implicit."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Construct the finite tensor product of the monic one-variable algebras R_J[T_i]/(T_i^n-t_i). Evaluation on coefficients and labelled roots gives inverse algebra maps between this tensor product and B_{J,K}; their composites agree on all generators. Tensor the power bases and reindex their degree indices by K -> Fin n. The resulting basis vectors are exactly the displayed monomials, since a pure tensor is the product of the single-factor inclusions. This also proves finite freeness without any regularity hypothesis (apart from nontriviality for the degree calculation). In the regularity induction each partial algebra is finite over its Noetherian coefficient stratum, hence Noetherian.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), monic finite free algebra in the proof; Tag 00FN (lemma-Noetherian-permanence). Iterated monic division made explicit."
+   }
+  },
+  {
+   "text": "For a in S minus J, if t_a vanished in R_J, inserting a in J would not change the coefficient ideal. The dimension equalities for J and J+a would then assert d+|J|=dim R and d+|J|+1=dim R. Rewrite dimensions as the natural-number embedding dimensions of the regular local rings to obtain a contradiction. Thus t_a is nonzero in the domain R_J. Multiplication by it is injective and stays injective on the free algebra B_{J,L}.",
+   "uses": [
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KQ (proposition-dimension), finite local dimension; Tag 00NP (lemma-regular-domain)."
+   }
+  },
+  {
+   "text": "Prove regularity simultaneously for every allowed pair $(J,K)$ by strong induction on $|K|$, keeping the original ring $R$, elements $t_i$, and exponent $n$ fixed. For $K=\\varnothing$, $B_{J,K}=R_J$ is regular local by hypothesis, and therefore regular by the regular-local localization lemma. For the induction step write $K=L\\sqcup\\{a\\}$, put $A=B_{J,L}$, $f=\\bar t_a\\in A$, and $B=A[T]/(T^n-f)=B_{J,K}$ using step 1. The induction hypothesis gives regularity of $A$; step 1 gives Noetherianity of $A$ and $B$. Fix an arbitrary prime $q$ of $B$, and write $x$ for the class of $T$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AFS (lemma-localization-of-regular-local-is-regular); simultaneous induction supplying the implicit local calculation in ILO IX Proposition 2.1, printed p.133."
+   }
+  },
+  {
+   "text": "Suppose $x\\in q$. If $a\\notin S$, $t_a$ was already a unit in the local ring $R$, hence $f$ is a unit in $B$; the equation $x^n=f$ contradicts $x\\in q$. Consequently $a\\in S\\setminus J$. Step 2 gives injectivity of multiplication by $\\bar t_a$ on $R_J$. The free basis of $A$ from step 1 makes multiplication by $f$ injective on $A$: in a zero product each basis coefficient is killed by $\\bar t_a$ and is therefore zero. Finally $A/(f)\\cong B_{J\\cup\\{a\\},L}$ by reducing coefficients in the displayed presentation. Explicitly, each map fixes all remaining named variables and sends a coefficient to its class; the reverse map exists since precisely the extra relation $t_a=0$ was imposed. The composites fix the generators. This pair is allowed since $L$ is disjoint from $J\\cup\\{a\\}$, and $|L|<|K|$, so the simultaneous induction hypothesis says $A/(f)$ is regular.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Monic free basis and quotient presentation from step 1; elementary coefficient calculation for the root-divisor case of Tag 00NU."
+   }
+  },
+  {
+   "text": "Apply the root-algebra regular-at-root lemma with coefficient ring $A$, element $f$, positive integer $n$ and prime $q$. Its hypotheses hold: $A$ is Noetherian by step 1, multiplication by $f$ is injective by step 4, $A/(f)$ is regular by the induction hypothesis in step 4, and $x\\in q$. Its conclusion is exactly that $B_q$ is regular local. This settles all primes containing the new root.",
+   "uses": [
+    "lem-sbc-root-algebra-regular-at-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NU (lemma-regular-mod-x), root-divisor specialization stated in lem-sbc-root-algebra-regular-at-root."
+   }
+  },
+  {
+   "text": "For a prime q missing the root x of B=A[T]/(T^n-f), pull q back to a prime p of the regular polynomial ring A[T] and put L=A[T]_p. The element T is a unit in L. Extend d/dT as an absolute derivation to L, using the localization clause of lem-weil-pbc-derivation-extends. Its value on P=T^n-f is n*T^(n-1), a unit since n and T are units; this includes n=1. Since P is in the maximal ideal and derivations carry its square into the maximal ideal by the Leibniz rule, P is outside that square. The regular-local hypersurface criterion makes L/(P) regular local. Thus the local argument of Stacks 07PF applies directly, without first forming A[1/f].",
+   "uses": [
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-weil-pbc-derivation-extends",
+    "lem-weil-pbc-regular-local-hypersurface-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PF (lemma-quotient-regular); polynomial regularity as in the next lemma (lemma-degree-p-extension-regular)."
+   }
+  },
+  {
+   "text": "Quotient-localization compatibility identifies L/(P) with B_q: the image of p-complement in B is exactly q-complement. Apply the quotient-localization instance via its explicit surjective-map theorem and transport regular locality along the localization equivalence. This settles primes missing the root, while the preceding root-at-root argument settles the other primes. Finset induction over K, generalized over all allowed J, proves regularity simultaneously. The independently constructed tensor basis gives the second clause. Empty K and I and n=1 are included.",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition Tag 00OD (definition-regular); universal property of localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-sbc-root-algebra-regular-at-root",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-derivation-extends",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO IX Proposition 2.1 proof, printed p.133, expanded by the existing simultaneous-stratum induction. Tensor power bases give the finite monomial basis. Off the root, the local proof of Stacks 07PF is applied directly in A[T]_p using 07PE and the regular-local hypersurface criterion. Online Stacks sources 00NU and 07PF checked 2026-10-23; local literature PDFs are absent on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let R be a regular local ring and t_i elements such that every quotient by a subset of the nonunit t_i is regular local of the expected dimension. All partial quotients by x_i^n minus t_i are regular rings for positive invertible n",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, factorPowSucc.isUnit_of_isUnit_image, PreTilt.isDomain",
+   "date": "2026-10-22",
+   "verdict": "no match: returned regular-sequence, polynomial-regularity and standard-etale declarations do not give regularity of the ramified partial-root family; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsRegularRing|IsRegularLocalRing).*(AdjoinRoot|MvPolynomial)|(AdjoinRoot|MvPolynomial).*(IsRegularRing|IsRegularLocalRing)",
+   "results": "4 hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned regular-sequence, polynomial-regularity and standard-etale declarations do not give regularity of the ramified partial-root family; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining nth roots of a partial regular system of parameters and of units to a regular local ring yields a regular ring when n is invertible",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, AdjoinRoot",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned regular-sequence, polynomial-regularity and standard-etale declarations do not give regularity of the ramified partial-root family; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.*[Rr]egular|[Rr]egular.*AdjoinRoot|[Nn]ormal[Cc]rossing|[Kk]ummer",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned regular-sequence, polynomial-regularity and standard-etale declarations do not give regularity of the ramified partial-root family; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite Kummer algebra over a regular local ring stays regular after killing any subset of transverse branch parameters and adjoining nth roots of the remaining parameters and units, by induction on the number of roots",
+   "results": "8 hits: Algebra.IsStandardEtale, StandardEtalePair, StandardEtalePresentation, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsStandardSmooth, StandardEtalePair.instCommRingRing, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, StandardEtalePair.instEtaleRing",
+   "date": "2026-10-22",
+   "verdict": "no match: returned regular-sequence, polynomial-regularity and standard-etale declarations do not give regularity of the ramified partial-root family; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsRegularRing|IsRegularLocalRing).*(AdjoinRoot|MvPolynomial)|(AdjoinRoot|MvPolynomial).*(IsRegularRing|IsRegularLocalRing)",
+   "results": "4 hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences, Kummer fields, standard etale presentations and polynomial regularity do not state this ramified transverse root-family theorem or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, AdjoinRoot",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences, Kummer fields, standard etale presentations and polynomial regularity do not state this ramified transverse root-family theorem or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Kummer extension of a regular local ring along transverse parameters is regular",
+   "results": "8 hits: KummerExtension.termK[_√_], adjoinRootXPowSubCEquiv, adjoinRootXPowSubCEquiv.congr_simp, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, IsLocalization.isRegular_mk', Algebra.FormallyUnramified.localization_base",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences, Kummer fields, standard etale presentations and polynomial regularity do not state this ramified transverse root-family theorem or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All partial algebras adjoining invertible degree roots of transverse parameters and units over a regular local ring are regular and have the monomial basis",
+   "results": "8 hits: Algebra.SubmersivePresentation.isStandardSmooth, Algebra.IsStandardSmooth, StandardEtalePresentation, Algebra.IsStandardEtale, StandardEtalePair, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.SubmersivePresentation.basisDeriv, Algebra.Generators.basisCotangentAway_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences, Kummer fields, standard etale presentations and polynomial regularity do not state this ramified transverse root-family theorem or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity of a finite ring obtained by successively adjoining nth roots of a subset of a regular system of parameters and of units, with n invertible",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, StandardEtalePair, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, Algebra.IsStandardEtale, RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences, Kummer fields, standard etale presentations and polynomial regularity do not state this ramified transverse root-family theorem or a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-finite-root-regular-ring",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: normality and boundary nonzerodivisors on affine weakly etale charts of the full parameter-root limit, used to extend morphisms between supplied lisse extensions. Finite simultaneous parameter-root stage, before taking the full root limit. Original steps 3--6: simultaneous induction on the number of roots over every boundary-intersection quotient, at primes containing or missing the new root.",
+   "via": [
+    "lem-sfb-snc-finite-root-regular-ring",
+    "lem-sfb-snc-root-limit-normal-charts",
+    "lem-sfb-root-tower-lisse-morphism-extension",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-transverse-local-root-family-regular",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Supplied simultaneous induction over all boundary quotients and partial-root subsets, explicit monic bases, the nonzerodivisor check, and both prime cases. Every non-elementary input is an existing node; no new nodes. Checked project attachment, DAG/blueprint duplicates, recorded current Mathlib searches and edge cases.",
+  "blueprint": "Inherited open-direct-image paragraph: regularity of finite simultaneous parameter-root stages before the root limit. The ancestor search returns None; retained from.node=null and the inherited via chain. Steps 1--7 expand the local induction of the parent original steps 3--6.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic regular-local domain theorem used only for nonzerodivisors on R_J; the unit has no replacement algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic localization theorem needed for the empty-root base case; not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sbc-root-algebra-regular-at-root",
+    "why": "Generic one-variable root-divisor regularity lemma (00NU) applied after proving its nonzerodivisor and regular-quotient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic localization permanence used on A[1/f] in the root-invertible case."
+   },
+   {
+    "node": "lem-weil-pbc-hypersurface-derivation-regular",
+    "why": "Generic hypersurface Jacobian criterion (07PF) on C[T]; the unit supplies no algebraic replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-sbc-root-algebra-regular-at-root"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-3c658a7c8",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-3c658a7c8 (reviewer sub-agent of L); spot-checked: I read the item's 7-step proof in full; it makes no new nodes and leaves the statement and stmt_deps unchanged. This is the first split of the statement-only node from the Q64 re-split. There is no repair note for this item, so the re-split rule does not apply. I read every cited statement against its use. Step 1: the monomial basis comes from iterating the monic-quotient lemma (AdjoinRoot.powerBasis'), and Noetherianity from finite-algebra-noetherian. Step 2: both dimension hypotheses (for J and J+a, both in S) plus finite Krull dimension give dim R_{J+a}+1 = dim R_J, so t_a is nonzero, and R_J is a domain, so t_a is a nonzerodivisor. Step 3: a strong induction on |K| over all pairs (J,K) at once, properly set up. Step 4: an elementary case split (a not in S makes f a unit; otherwise f acts injectively on the free basis, A/(f) = B_{J+a,L} is an allowed pair, and the induction hypothesis gives regularity). Step 5: all hypotheses of lem-sbc-root-algebra-regular-at-root are checked. Step 6: A[1/f] is regular, C[T] is regular, and with d/dT the derivative nT^{n-1} is a unit because T^{-1} = f^{-1}T^{n-1}; the hypersurface criterion applies, including n=1, and E = B[1/f]. Step 7: localizing at q gives B_q. Edge cases checked: K empty, I empty, J=S, n=1, the k[[s]] example with t=(s,1+s), and a repeated parameter, which the hypothesis excludes. I read ILO IX Prop 2.1 at printed p.133; it leaves this algebra implicit, so proof_origin=agent is correct. No duplicate: the henselian-parameter-root-domain-tower node has stronger hypotheses and the face node is geometric. No cycle: the closure of 132 nodes excludes the item and its parent. Batch-5 flag on lem-trf-polynomial-ring-regular-base: accepted. It is a status-mathlib leaf (MvPolynomial.isRegularRing_of_isRegularRing) with no deps, generic polynomial regularity, and neither a statement nor a proof step of the trace formula or Poincare duality; the same flag was accepted in the Q37 face split. The five tool_uses (regular-local domain, regular-local localization, root-at-root, localization of a regular ring, hypersurface derivation criterion) are generic algebra the unit's route does not supply: accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TransverseLocalRootFamilyRegular",
+  "declaration": "RingTheory.isRegularRing_transverseLocalRootFamily",
+  "declarations": [
+   "RingTheory.transverseRootCoefficientRing",
+   "RingTheory.transverseRootRelationIdeal",
+   "RingTheory.transverseRootAlgebra",
+   "RingTheory.transverseRootMonomial",
+   "RingTheory.isRegularRing_transverseLocalRootFamily"
+  ],
+  "file": "lean/Sheaf/RingTheory/TransverseLocalRootFamilyRegular.lean",
+  "statement": "theorem isRegularRing_transverseLocalRootFamily (R : Type u) [CommRing R] [IsRegularLocalRing R] (I : Type v) [Finite I] (t : I → R) (hstrata : ∀ J : Finset I, (∀ j ∈ J, t j ∈ IsLocalRing.maximalIdeal R) → IsRegularLocalRing (transverseRootCoefficientRing t J) ∧ ringKrullDim (transverseRootCoefficientRing t J) + (J.card : WithBot ℕ∞) = ringKrullDim R) (n : ℕ) (hn : 0 < n) (hnunit : IsUnit (n : R)) (J K : Finset I) (hJ : ∀ j ∈ J, t j ∈ IsLocalRing.maximalIdeal R) (hK : Disjoint J K) : IsRegularRing (transverseRootAlgebra t n J K) ∧ ∃ b : Module.Basis (K → Fin n) (transverseRootCoefficientRing t J) (transverseRootAlgebra t n J K), ∀ a : K → Fin n, b a = transverseRootMonomial t n J K a",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helpers give the literal coefficient quotient, partial-root relation ideal, partial-root quotient, and specified monomial classes already introduced in this node. They construct real data, with the standard Mathlib quotient algebra structure; the basis is asserted by existence, not chosen. IsRegularRing includes Noetherianity and regularity of all prime localizations. A basis indexed by the finite type K → Fin n states finite freeness and its exact monomial vectors. No natural-language statement or dependencies changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-321d8ad0e",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Only the item lean record and module changed; lean.statement verbatim. Clause-by-clause match: IsRegularLocalRing R, Finite I, t : I → R, hstrata over all Finsets J inside the maximal ideal (R_J = R/span(t''J) regular local, ringKrullDim R_J + card J = ringKrullDim R), 0<n, IsUnit (n:R), Disjoint J K; conclusion IsRegularRing B_{J,K} (Mathlib class: Noetherian plus all prime localizations regular local) and an existing Module.Basis (K → Fin n) over R_J equal to the literal monomial classes. No extra hypotheses, independent universes. Edge cases ok: empty I/K, n=1, J=∅, J=S, repeated parameter, field case. Helpers are real data; docstrings carry source, blueprint and 7 steps; proof is sorry only; proof imports match proof_deps; report has both sections. Not a duplicate of SNCFiniteRootRegularRing/FaceRegular. Advisory only: sncRootLevel (another node) is an isomorphic presentation of the J=∅, K=univ case. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261023T123429-L-1187152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -126,7 +126,50 @@
   "def-pc-scheme"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.picardFunctorAffineRestrictionIso",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.AffineRestriction",
+     "lines": [
+      76,
+      89
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.algPicardFunctorIso",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.AlgebraPicardFunctor",
+     "lines": [
+      90,
+      104
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.algPicardFunctorObjIso",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.AlgebraPicardFunctor",
+     "lines": [
+      106,
+      113
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-def-picard-pic",
  "split_report": {
@@ -162,5 +205,22 @@
   "group": "M1",
   "result": "fix",
   "note": "k field, f : X ⟶ Spec k with [IsSmoothProjectiveCurve f] (landed) and Mathlib [GeometricallyIntegral f]; LHS = source picardFunctor f (recorded at both def-pc- and def-sc-picard-functor) restricted along CostructuredArrow.toOver Spec (affine k-schemes = k-algebras); RHS = affine-site fppf sheafification (fppfPrecoverage.comap, as J1 fppfSheafification_affineRestriction) of the restricted source picardPresheaf f; FIX: the three let binders inlined, unused (R : Type u) [CommRing R] [Algebra k R] binders removed (the natural iso's component at Spec R is the node's equality)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a commutative ring and $X$ a scheme over $k$ (for instance a smooth\nprojective curve over a field $k$). The restriction of\n$\\operatorname{Pic}_{X/k}$ to affine $k$-schemes\n$T=\\operatorname{Spec}(R)$ is canonically the fppf sheafification, on the\ncategory of $k$-algebras, of\n$R\\mapsto\\operatorname{Pic}(X\\times_k\\operatorname{Spec} R)$;\nmore precisely\n$\\operatorname{Pic}_{X/k}(\\operatorname{Spec}(R))=\\operatorname{Pic}_{X/k}^{\\mathrm{sc}}(R)$\nnaturally in $R$, where the right side is the value of this sheafification,\nwhich for a curve over a field is the functor presented in\n[def-sc-picard-functor]. More generally, for any morphism $f:X\\to S$, the\nrestriction of $\\operatorname{Pic}_{X/S}$ to affine $S$-schemes is the fppf\nsheafification of the restriction of the Picard presheaf.",
+  "proof": [
+   {
+    "text": "Both sides are the fppf sheafification of the same presheaf on the\ncategory of affine $k$-schemes (equivalently, of $k$-algebras), and the\nargument uses nothing about $X$ (the same reasoning works over any base $S$): the left is the restriction of the fppf\nsheafification on $(\\mathit{Sch}/k)_{fppf}$, and fppf sheafification\ncommutes with restricting to the essentially full subcategory of affine\nschemes, because the $(\\mathit{Sch}/k)_{fppf}$-coverings of an affine\nscheme and the corresponding coverings by affines cofinalize (every\nscheme is covered by open affines in the Zariski, hence fppf, topology;\nand for our purposes the affine objects fully capture the value of a\nsheaf). More precisely: let\n$F_T=\\operatorname{Pic}(X_T)$ and let $\\pi:(\\mathit{Sch}/k)_{fppf}\\to(\\mathit{Aff}/k)_{fppf}$\nbe the restriction; the map of sites $\\pi$ induces for the sheafification\n$(\\pi^{-1}F^\\#)^\\#=(\\pi^{-1}F)^\\#$ for the restriction of the sheafified\nfunctor to affine schemes; the sheaves that are sheafifications of\npresheaves on the affine site are exactly the fppf sheaves on\n$(\\mathit{Aff}/k)_{fppf}$, the two prescriptions agree on affine inputs.\nThis is the standard construction of the big sites (see Topologies,\nSection 34.7, Tag [021S](https://stacks.math.columbia.edu/tag/021S)).",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

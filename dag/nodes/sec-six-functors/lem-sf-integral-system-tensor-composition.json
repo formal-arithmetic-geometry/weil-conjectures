@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-integral-system-tensor-composition",
+ "kind": "statement",
+ "title": "The system pullback compositor respects tensor for two composable maps",
+ "statement": "Fix a prime l, a finite extension E of Q_l, Operations o and Compositors c [def-sf-integral-system-operations]. For composable scheme maps f:X to Y and g:Y to Z and arbitrary A,B in System(Z), the following two maps agree. The first applies c.pullComp(f,g) to A tensor B, then pulls back the tensor comparison for g along f and applies the tensor comparison for f. The second applies the fixed tensor comparison for f followed by g, then tensors c.pullComp(f,g) on A and B. The tensor comparisons and tensors are those of [def-pur-completed-pullback-tensor-comparison]. This is an equality in the whole derived system category; it involves only two composable maps, with no square or proper/open transformation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; expanded strict-system realization argument, as recorded in lem-sf-integral-canonical-ambient-models."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved cochain composition equation integralSystemTensorCochainComposition: the ordinary compositor on the total tensor intertwines the two successive unit-normalized tensor comparisons and the composite-map comparison. Its companion module proves this by adjunction-unit conjugation and total-summand pure generators.",
+   "uses": [
+    "lem-sf-integral-system-tensor-cochain-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Invert the cochain compositor and the derived compositor model equations by cancellation of the corresponding isomorphisms. For K-flat P and Q, paste the three specified pullbackTensorSystemComparison normalization squares, naturality of the exact-derived factorization, naturality of the system tensor model, and the localized cochain equality. The generic diagram_paste calculation from ScalarHomTensorCoherence performs this categorical pasting. Cancel the source and target representative isomorphisms. This proves composition_on_representatives.",
+   "uses": [
+    "def-sf-integral-system-operations",
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-sfb-scalar-hom-tensor-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every derived system is isomorphic to the localization of a K-flat complex: take a complex preimage and a K-flat resolution, and invert its quasi-isomorphism. Form the two natural transformations for the inverse-compositor version of the tensor equation. Their components coincide on K-flat pairs by composition_on_representatives, so naturality along a pair of representative isomorphisms identifies them everywhere. Precompose by the forward compositor and postcompose by its tensor to obtain the statement in its original direction.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-sf-integral-system-operations",
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-sf-integral-system-operations",
+  "lem-pc-kflat-resolution",
+  "lem-sf-integral-system-tensor-cochain-composition",
+  "lem-sfb-scalar-hom-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Section-normalized cochain computation and K-flat descent, following Stacks 03EL and 07A4; generic categorical pasting reused from ScalarHomTensorCoherence. X3 proof, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image tensor comparison compatible with composition of pullbacks",
+   "results": "{\"t\": \"2026-10-26T22:45:03Z\", \"tool\": \"leanfinder\", \"query\": \"Derived inverse image tensor comparison compatible with composition of pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_\\u03c4l\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"PresheafOfModules.pullback_assoc\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\"], \"digest\": \"a715f2c058ac4b84\"}",
+   "date": "2026-10-27",
+   "verdict": "Ordinary pullback composition and generic monoidal functor identities were found; none gives this specified K-flat derived system tensor normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]omp|[Cc]omp.*tensor",
+   "results": "{\"t\": \"2026-10-26T22:45:04Z\", \"tool\": \"grep\", \"query\": \"tensor.*[Cc]omp|[Cc]omp.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"f89cdc1e23d37ebe\"}",
+   "date": "2026-10-27",
+   "verdict": "Ordinary pullback composition and generic monoidal functor identities were found; none gives this specified K-flat derived system tensor normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image tensor comparison commutes with composition and adjoint conjugation",
+   "results": "{\"t\": \"2026-10-26T22:46:23Z\", \"tool\": \"leansearch\", \"query\": \"Canonical inverse image tensor comparison commutes with composition and adjoint conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lTensor.inverse_comp_lTensor\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.Functor.Monoidal.tensorObjComp_inv_app\", \"CategoryTheory.Limits.image.compIso_inv_comp_image_\\u03b9\", \"CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural_assoc\", \"CategoryTheory.MorphismProperty.IsMultiplicative.instInverseImage\", \"PiTensorProduct.map_comp_reindex_symm\", \"CategoryTheory.MorphismProperty.IsStableUnderComposition.inverseImage\"], \"digest\": \"32db6cd6f6e64374\"}",
+   "date": "2026-10-27",
+   "verdict": "Ordinary pullback composition and generic monoidal functor identities were found; none gives this specified K-flat derived system tensor normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralCanonicalSystemCoherence",
+  "date": "2026-10-27",
+  "group": "D6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient-comparison sentence: The system pullback compositor respects tensor for two composable maps.",
+   "via": [
+    "lem-sf-integral-canonical-system-coherence",
+    "lem-sf-integral-canonical-ambient-models",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSystemTensorComposition",
+  "file": "lean/Sheaf/SixFunctors/IntegralSystemTensorComposition.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSystemTensorComposition",
+  "statement": "theorem integralSystemTensorComposition (o : Operations l E) (c : Compositors l E o)\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (A B : System l E Z) :\n    (c.pullComp f g).hom.app ((calculus l E Z).systemClosed.tensor.obj (A, B)) ≫\n        (pull l E f).map ((pullbackTensorSystemComparison l E g).hom.app (A, B)) ≫\n        (pullbackTensorSystemComparison l E f).hom.app\n          ((pull l E g).obj A, (pull l E g).obj B) =\n      (pullbackTensorSystemComparison l E (f ≫ g)).hom.app (A, B) ≫\n        (calculus l E X).systemClosed.tensor.map\n          (Prod.mkHom ((c.pullComp f g).hom.app A) ((c.pullComp f g).hom.app B))",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T235844-L-1461396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261027T034808-L-3687454",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-smooth-section-universal-jet-density",
+ "kind": "statement",
+ "title": "Universal weak schematic density of the jets of a section",
+ "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], put $S=\\operatorname{Spec}A$, and let $p:Y\\to S$ be a smooth affine morphism of finite presentation with nonempty geometrically connected fibers [def-weil-affine-spectrum, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation, def-weil-connected-scheme]. Here geometrically connected means connected after extending each residue field to an algebraic closure. Let $e:S\\to Y$ be a section. Write $Y=\\operatorname{Spec}B$, $\\epsilon:B\\to A$ for its retraction and $J=\\ker\\epsilon$. For $n\\geq0$ set $Y_n=\\operatorname{Spec}(B/J^{n+1})\\hookrightarrow Y$ [def-weil-closed-immersion]. For every $S$-scheme $T$, with no Noetherian or reducedness assumption on $T$, and every closed subscheme $Z\\hookrightarrow Y_T=Y\\times_ST$ [def-pc-fibre-product], if each closed immersion $Y_n\\times_ST\\to Y_T$ factors through $Z$, then $Z=Y_T$ as closed subschemes. In particular the only closed subscheme containing every base-changed $Y_n$ is the whole $Y_T$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, proof of Proposition 2.1.6, printed p.63, universal weak schematic density of the neighborhoods of the section; Definition 2.1.7, p.61, specifies weak schematic density. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this exact assertion."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "First the fibres of $Y\\to S$ are geometrically irreducible. The algebraic-closure criterion [lem-weil-geometrically-connected-algebraic-closure] turns the stated geometric connectedness into connectedness over every field extension [def-pc-geometrically-irreducible], in particular over the residue field itself. Apply [lem-sbc-smooth-section-component-geometrically-irreducible] to $p,e$: finite presentation includes quasi-compactness and quasi-separatedness. Its open $U$ contains every point of the connected component of each fibre through the section. Since each fibre is connected and has its section point, this is the whole fibre; hence $U=Y$. Its geometrically irreducible fibres are therefore those of $Y$.",
+   "uses": [
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "def-pc-geometrically-irreducible",
+    "lem-sbc-smooth-section-component-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Proposition 2.1.6, proof, printed pp.62--63; affine universal weak density argument. Local copy WANTED; agent expansion using the cited Stacks tools."
+   }
+  },
+  {
+   "text": "For an $A$-algebra $C$ put $D_C=B\\otimes_A C$ and $J_C=\\ker(D_C\\to C)$. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies $\\operatorname{Spec}D_C$ with $Y_C$. By [lem-sfb-smooth-section-finite-jets], its jet rings are $Q_n\\otimes_A C=D_C/J_C^{n+1}$, where $Q_n=B/J^{n+1}$, and each $\\operatorname{Spec}Q_n\\to S$ is finite locally free. By [def-pc-finite-locally-free] and [lem-weil-pbc-flat-ring-map-iff-flat-affine], each $Q_n$ is flat over $A$. The base-changed family $Y_C\\to\\operatorname{Spec}C$ is smooth: [lem-pc-smooth-flat] gives the hypotheses of [lem-sfb-scheme-flat-smooth-point-base-change], which gives smoothness near every point; [lem-weil-pbc-smooth-local-on-source] assembles these neighbourhoods. Its fibre at $c$ is the original fibre over the image of $c$, extended to $\\kappa(c)$, by associativity of fibre products. Thus step 1 and the definition of geometric irreducibility show that every such fibre is irreducible.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-smooth-section-finite-jets",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-pc-smooth-flat",
+    "lem-sfb-scheme-flat-smooth-point-base-change",
+    "lem-weil-pbc-smooth-local-on-source",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Proposition 2.1.6, proof, printed pp.62--63; affine universal weak density argument. Local copy WANTED; agent expansion using the cited Stacks tools."
+   }
+  },
+  {
+   "text": "Suppose first that $C$ is Noetherian. The ring $B$ is finitely presented over $A$: apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to $p$ and the whole affine opens $Y,S$. In particular choose finitely many algebra generators $b_1,\\ldots,b_r$ of $B$. The elements $b_i\\otimes1$ generate $D_C$ over $C$: express each first factor of a pure tensor as a polynomial in the $b_i$ and use that every tensor is a finite sum of pure tensors. Hence [lem-weil-pbc-finite-type-algebra-noetherian] makes $D_C$ Noetherian. Put $N_C=\\bigcap_{n\\geq0}J_C^{n+1}$. For every prime $\\mathfrak q\\supseteq J_C$, apply [lem-weil-pbc-krull-intersection-localization] with $R=M=D_C$ and $I=J_C$. Omitting the zeroth power does not change the intersection. It supplies $f_{\\mathfrak q}\\notin\\mathfrak q$ with $(N_C)_{f_{\\mathfrak q}}=0$. Thus $V=\\bigcup_{\\mathfrak q\\supseteq J_C}D(f_{\\mathfrak q})$ contains the section and every element of $N_C$ restricts to zero on $V$.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-krull-intersection-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Proposition 2.1.6, proof, printed pp.62--63; affine universal weak density argument. Local copy WANTED; agent expansion using the cited Stacks tools."
+   }
+  },
+  {
+   "text": "Every fibre of $V$ is a nonempty open subset of the irreducible fibre of $Y_C$ (it contains the section point), hence dense: any two nonempty opens of an irreducible space intersect. Apply [lem-sfb-smooth-fibrewise-dense-open-base-change] to this open in the smooth family of step 2, taking the identity base change. It says $\\mathcal O_{Y_C}\\to j_*\\mathcal O_V$ is injective. Since every element of $N_C$ vanishes on $V$, injectivity on sections over $Y_C$ gives $N_C=0$. This proves the intersection assertion for every Noetherian $A$-algebra $C$, including nonreduced ones.",
+   "uses": [
+    "lem-sfb-smooth-fibrewise-dense-open-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Proposition 2.1.6, proof, printed pp.62--63; affine universal weak density argument. Local copy WANTED; agent expansion using the cited Stacks tools."
+   }
+  },
+  {
+   "text": "Now let $C$ be arbitrary and $b\\in\\bigcap_nJ_C^{n+1}$. Write $b=\\sum_{i=1}^m x_i\\otimes c_i$ with $x_i\\in B$, $c_i\\in C$ and $m\\geq0$, using the pure-tensor generation in [def-weil-pbc-module-tensor-product] (the $x_i$ are arbitrary elements of $B$, not the generators $b_1,\\ldots,b_r$ of step 3). Let $C_0\\subseteq C$ be the subring generated by the image of $A$ and the finitely many $c_i$. It is a finite type $A$-algebra and is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Let $b_0=\\sum_i x_i\\otimes c_i\\in D_{C_0}$, which maps to $b$ under $D_{C_0}\\to D_C$. For each $n$, the inclusion $C_0\\hookrightarrow C$ remains injective after tensoring with the flat $A$-module $Q_n$ of step 2, by [lem-weil-pbc-flat-tensor-exact]. The image of $b_0$ in $Q_n\\otimes_A C_0$ maps to zero in $Q_n\\otimes_A C$, because $b\\in J_C^{n+1}$. Therefore that image was already zero. The quotient identifications from step 2 give $b_0\\in J_{C_0}^{n+1}$ for every $n$. Step 4 gives $b_0=0$, hence $b=0$. One fixed $C_0$ works for all $n$; no interchange of infinite intersections and tensor products is used.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Proposition 2.1.6, proof, printed pp.62--63; affine universal weak density argument. Local copy WANTED; agent expansion using the cited Stacks tools."
+   }
+  },
+  {
+   "text": "Finally cover $T$ by affine opens $\\operatorname{Spec}C$. On each such open, [lem-weil-pbc-fibre-product-affine-spectra] identifies $Y_T$ with $\\operatorname{Spec}D_C$. The affine description in [def-weil-closed-immersion] writes $Z$ there as $\\operatorname{Spec}(D_C/K)$ for an ideal $K$. The assumed factorization of every jet says that the quotient $D_C\\to D_C/J_C^{n+1}$ factors through $D_C/K$, equivalently $K\\subseteq J_C^{n+1}$, using [lem-sfb-smooth-section-finite-jets]. Step 5 forces $K=0$. Consequently the ideal sheaf of $Z$ vanishes on this open cover of $Y_T$, hence vanishes globally by the sheaf axiom. Thus $Z=Y_T$ as closed subschemes, including when $T$ is empty.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "lem-sfb-smooth-section-finite-jets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Proposition 2.1.6, proof, printed pp.62--63; affine universal weak density argument. Local copy WANTED; agent expansion using the cited Stacks tools."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "def-pc-geometrically-irreducible",
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-smooth-section-finite-jets",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-pc-smooth-flat",
+  "lem-sfb-scheme-flat-smooth-point-base-change",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-krull-intersection-localization",
+  "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Proposition 2.1.6, proof, printed pp.62--63; affine universal weak density argument. Local copy WANTED; agent expansion using the cited Stacks tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "weakly.*schem|infinitesimal|adic.*injective",
+   "results": "{\"t\": \"2026-10-24T09:18:22Z\", \"tool\": \"grep\", \"query\": \"weakly.*schem|infinitesimal|adic.*injective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"251b1ba8fd5f5047\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"infinitesimal\"",
+   "results": "{\"t\": \"2026-10-24T09:18:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"infinitesimal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The powers of the ideal of a section of a smooth geometrically connected affine scheme have zero intersection after every base change",
+   "results": "{\"t\": \"2026-10-24T09:18:23Z\", \"tool\": \"leansearch\", \"query\": \"The powers of the ideal of a section of a smooth geometrically connected affine scheme have zero intersection after every base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.iInf_pow_eq_bot_of_isDomain\", \"Ideal.iInf_pow_eq_bot_of_isLocalRing\", \"Ideal.iInf_pow_smul_eq_bot_of_le_jacobson\", \"Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree\", \"PrimeSpectrum.zeroLocus_pow\", \"Ideal.pow_eq_top_iff\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf\"], \"digest\": \"8b56202669492cf8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal neighborhoods of a section in a smooth affine scheme with geometrically connected fibers are finite locally free and universally weakly schematically dense",
+   "results": "{\"t\": \"2026-10-24T09:18:27Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal neighborhoods of a section in a smooth affine scheme with geometrically connected fibers are finite locally free and universally weakly schematically dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"3761cc4a5ba6e856\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a smooth affine family with connected geometric fibers and a section, a closed subscheme containing every infinitesimal neighborhood of the section is the whole family after arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T09:23:58Z\", \"tool\": \"leanfinder\", \"query\": \"In a smooth affine family with connected geometric fibers and a section, a closed subscheme containing every infinitesimal neighborhood of the section is the whole family after arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\"], \"digest\": \"43a8bc2dc597b224\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal neighborhoods of a section of a smooth affine scheme with geometrically connected fibers are universally schematically dense",
+   "results": "{\"t\": \"2026-10-24T09:58:40Z\", \"tool\": \"leansearch\", \"query\": \"Infinitesimal neighborhoods of a section of a smooth affine scheme with geometrically connected fibers are universally schematically dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.Scheme.exists_germ_injective\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\"], \"digest\": \"768a1d985771c2ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  },
+  {
+   "tool": "grep",
+   "query": "weakly.*schem|jet.*dens|iInf_pow",
+   "results": "{\"t\": \"2026-10-24T09:59:14Z\", \"tool\": \"grep\", \"query\": \"weakly.*schem|jet.*dens|iInf_pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\", \"Mathlib/RingTheory/Filtration.lean\"], \"digest\": \"5cd8b557220a178e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Ideal",
+   "results": "{\"t\": \"2026-10-24T09:59:14Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.Smooth.of_formallySmooth_fiber\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\"], \"digest\": \"b610ff0f962ff1af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The intersection of powers of the augmentation ideal of a smooth algebra with geometrically connected fibers is zero after tensoring with any base algebra",
+   "results": "{\"t\": \"2026-10-24T09:59:15Z\", \"tool\": \"leanfinder\", \"query\": \"The intersection of powers of the augmentation ideal of a smooth algebra with geometrically connected fibers is zero after tensoring with any base algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.FormallyUnramified.elem\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.FormallyUnramified.ext_of_iInf\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\"], \"digest\": \"0d77c08d7e1aee69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  },
+  {
+   "tool": "grep",
+   "query": "schematicallyDense|schematically_dense|schematicallyDominant|schematically_dominant",
+   "results": "{\"t\": \"2026-10-24T09:59:54Z\", \"tool\": \"grep\", \"query\": \"schematicallyDense|schematically_dense|schematicallyDominant|schematically_dominant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat morphism with geometrically reduced fibers a fiberwise dense open is schematically dense after every base change",
+   "results": "{\"t\": \"2026-10-24T09:59:55Z\", \"tool\": \"leansearch\", \"query\": \"For a flat morphism with geometrically reduced fibers a fiberwise dense open is schematically dense after every base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.mk\"], \"digest\": \"d78b23b5f19eac59\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schematicallyDense\"",
+   "results": "{\"t\": \"2026-10-24T09:59:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"schematicallyDense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fiberwise dense open subset of a flat morphism with geometrically reduced fibers is universally schematically dense",
+   "results": "{\"t\": \"2026-10-24T09:59:56Z\", \"tool\": \"leanfinder\", \"query\": \"A fiberwise dense open subset of a flat morphism with geometrically reduced fibers is universally schematically dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"5adc12bd0d0355a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSchemeTheoreticallyDominant|isSchemeTheoreticallyDominant",
+   "results": "{\"t\": \"2026-10-24T10:00:22Z\", \"tool\": \"grep\", \"query\": \"IsSchemeTheoreticallyDominant|isSchemeTheoreticallyDominant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\"], \"digest\": \"3de25b3c85f46b5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion which is schematically dominant on all fibers of a flat morphism is schematically dominant",
+   "results": "{\"t\": \"2026-10-24T10:00:24Z\", \"tool\": \"leanfinder\", \"query\": \"An open immersion which is schematically dominant on all fibers of a flat morphism is schematically dominant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant.of_comp_of_isOpenImmersion\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsDominant.of_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\"], \"digest\": \"6596d1ea3bcb8f0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits supply smoothness, adic separation under local hypotheses, or dominance; none states universal weak density of section jets. SchemeTheoreticallyDominant.lean was read: its base-change result assumes a flat base change, whereas the item allows arbitrary base change."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-smooth-subgroup-normalizer",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction. Specific supporting place: Proposition 4.2.7, construction of B=P_G(lambda), its self-normalizer and G/B, before trivializing the pointed curve. This does not assert a relative matrix-model isomorphism. Supporting input: Proposition 4.2.7, proof, p.123: construct the closed normalizer of B before proving B=N_G(B). Supporting input to the normalizer construction: Conrad, proof of Proposition 2.1.6, printed p.63, universal weak schematic density of the neighborhoods of the section; Definition 2.1.7, p.61, specifies weak schematic density.",
+   "via": [
+    "lem-sfb-relative-smooth-subgroup-normalizer",
+    "lem-sfb-relative-adjoint-rank-one-flag-curve",
+    "lem-sfb-relative-rank-one-semisimple-models",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-section-universal-jet-density",
+  "worker": "stage1",
+  "summary": "Proved universal weak jet density using existing finite-jet flatness, Krull-localization, relative-component and smooth fibrewise-density nodes. The arbitrary-algebra reduction uses one finite type subalgebra and injectivity for every flat jet quotient, not an interchange of infinite intersections with scalar extension. Statement unchanged; no new nodes.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/normalizer prerequisite chain recorded in blueprint.from.place; realizes Conrad Proposition 2.1.6, printed p.63, affine density argument. The ancestor command returns null for this created chain, retained as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Generic field-extension criterion interpreting the explicitly stated geometric connectedness hypothesis; the unit has no substitute."
+   },
+   {
+    "node": "lem-sbc-smooth-section-component-geometrically-irreducible",
+    "why": "Generic geometry of a smooth section gives geometrically irreducible fibres when connected components are whole fibres; no six-functor proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-localization",
+    "why": "Generic Noetherian commutative algebra gives vanishing near V(J), precisely the Krull step in Conrad; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic source-locality of smoothness assembles the pointwise base-change result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "lem-weil-pbc-krull-intersection-localization",
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NC-251b98f2a",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-251b98f2a (reviewer sub-agent of L); spot-checked: Read Conrad, Reductive group schemes (author PDF), Def 2.1.7 p.61 and the proof of Prop 2.1.6 pp.61-63, which states weak schematic density of {Y_n} after any base change via Noetherian reduction, EGA IV3 11.10.10 and vanishing near the section. The item statement agrees hypothesis by hypothesis, is unchanged and is not weakened. Read all 17 cited statements. Step 1: Y->S affine gives qcqs, connected fibres give U=Y in the 055R component node, so fibres are geometrically irreducible. Step 2: finite-jets gives Q_n finite locally free (hence flat) and Q_n(x)C = D_C/J_C^{n+1} compatibly; Y_C is smooth via smooth-flat, the 01V9-based pointwise base change and source locality. Step 3: the 00IQ(1) Krull node with R=M=D_C, I=J_C; the n/n+1 index shift is harmless. Step 4: the fibrewise-dense node applied with g=id gives N_C=0. Step 5: one finite-type C_0 and flat Q_n give injectivity; correct. Step 6: the 01QO description gives K in J_C^{n+1}, so K=0. Small cases: Y=S, A^1 with zero section, k[e]/e^2 base; Y=S+S shows connectedness is used. No duplicate in the DAG (grep for weak schematic density and jets). Declared tool uses accepted. Batch-5: lem-trf-finite-projective-local-free (Mathlib leaf, projective from local freeness) and lem-trf-smooth-at-point-fibre-criterion (Stacks 01V9) are generic algebra/geometry outside both assumed statements, so no change for any of the three listed citations. FIX: step 5 wrote b=sum_{i=1}^r b_i(x)c_i, reusing the generators b_1..b_r of step 3, which read literally is false; renamed to arbitrary x_i in B and stated that b_0 maps to b. Corrected item in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothSectionUniversalJetDensity",
+  "declaration": "AlgebraicGeometry.Smooth.isIso_of_section_jets_factor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSectionUniversalJetDensity.lean",
+  "statement": "theorem Smooth.isIso_of_section_jets_factor (A B : Type u) [CommRing A] [CommRing B] [IsNoetherianRing A] (p : Spec (.of B) ⟶ Spec (.of A)) [Smooth p] [LocallyOfFinitePresentation p] (ε : B →+* A) (hε : Spec.map (CommRingCat.ofHom ε) ≫ p = 𝟙 (Spec (.of A))) (hgeom : ∀ s : Spec (.of A), ConnectedSpace ↥(pullback p (Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of A)).residueField s) (AlgebraicClosure ((Spec (.of A)).residueField s)))) ≫ (Spec (.of A)).fromSpecResidueField s))) {T : Scheme.{u}} (g : T ⟶ Spec (.of A)) {Z : Scheme.{u}} (i : Z ⟶ pullback p g) [IsClosedImmersion i] (hjets : ∀ n : ℕ, ∃ l : pullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (RingHom.ker ε ^ (n + 1)))) ≫ p) g ⟶ Z, l ≫ i ≫ pullback.fst p g = pullback.fst (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (RingHom.ker ε ^ (n + 1)))) ≫ p) g ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (RingHom.ker ε ^ (n + 1)))) ∧ l ≫ i ≫ pullback.snd p g = pullback.snd (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (RingHom.ker ε ^ (n + 1)))) ≫ p) g) : IsIso i",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94a17dc06",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Clause-by-clause match of Smooth.isIso_of_section_jets_factor to the node: Noetherian A; p : Spec B → Spec A smooth (LFP extra but implied by smoothness; affine automatic); section via ε with hε, J = ker ε, powers n+1 from n = 0; hgeom = ConnectedSpace of the pullback to the algebraic closure of each residue field (includes nonemptiness); T arbitrary; Z closed via IsClosedImmersion; hjets fixes both projections; conclusion IsIso i. Universes all u, nothing unbound. lean.statement verbatim equal to the file (script check); no line >100 chars; 7 stmt_dep records checked; plain imports exactly the recorded modules of the proof deps; docstrings carry the Conrad places, the blueprint tag and proof steps 1-6; sorry only, no definitions; no duplicate found by rg in side-live Sheaf/WeilConjectures; node unchanged vs live except lean; report has Worker report and Second reading sections. Edge cases (zero ring, empty T, identity section, nonreduced or non-Noetherian T, disconnected-fibre counterexample excluded) correct. Not recompiled because no file was changed."
+ }
+}

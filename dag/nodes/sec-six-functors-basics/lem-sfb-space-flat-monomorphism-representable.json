@@ -1,0 +1,404 @@
+{
+ "id": "lem-sfb-space-flat-monomorphism-representable",
+ "kind": "statement",
+ "title": "Flat monomorphisms of algebraic spaces are representable by schemes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Morphism properties use [def-sfb-space-morphism-properties]; locally finite type is the chart test with [def-weil-finite-type-morphism]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $f:X\\to Y$ be flat and a monomorphism, meaning that $X(H)\\to Y(H)$ is injective for every $S$-scheme $H$. Then $f$ is representable by schemes: for every $S$-scheme $T$ and every morphism $h_T\\to Y$, the sheaf $X\\times_Yh_T$ is represented by an $S$-scheme. No finite-type, finite-presentation or quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0B8A (lemma-flat-case), David Rydh."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-morphism-properties",
+  "def-weil-finite-type-morphism",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary scheme test $h_T\\to Y$ and put $Z=X\\times_Yh_T$. This is an algebraic space by [lem-trf-space-fibre-products-etale-covers], and $Z\\to h_T$ is flat by [lem-sfb-space-flat-proper-fp-locality]. On each test scheme, two pairs in $Z$ with the same $T$-component have equal $X$-components by monomorphy of $f$; thus this projection is a monomorphism. Cover $T$ by affine opens $T_j$. The inverse images $Z_j$ are open subspaces covering $Z$. By [lem-sfb-space-largest-schematic-open], once each $Z_j$ is a scheme, they all lie in the largest schematic open of $Z$, which therefore has full point image and so is all of $Z$ [lem-a1-space-point-open-calculus]. It suffices to treat $Z\\to\\operatorname{Spec}B$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-largest-schematic-open",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0B8A (lemma-flat-case), David Rydh."
+   }
+  },
+  {
+   "text": "By [lem-a1-space-affine-atlas-open-cover], cover $Z$ by open subspaces $W$ admitting surjective etale maps from affine schemes. Each $|W|$ is quasi-compact, being the continuous image of the quasi-compact affine atlas; continuity is [lem-a1-space-point-open-calculus]. The restriction $q:W\\to\\operatorname{Spec}B$ is flat: every etale scheme chart of $W$ is also an etale chart of $Z$, so its composite to $\\operatorname{Spec}B$ is flat. It is still a monomorphism. Its diagonal is an isomorphism, since on every test scheme a pair with equal images consists of two equal elements. In particular its diagonal is quasi-compact, so $q$ is quasi-separated. The affine scheme $\\operatorname{Spec}B$ is quasi-separated (its affine structure map is separated by [lem-weil-pbc-affine-morphism-permanence]). By [lem-sfb-space-qcqs-permanence], $q$ is quasi-compact. As before, [lem-sfb-space-largest-schematic-open] reduces schemehood of $Z$ to schemehood of all these $W$.",
+   "uses": [
+    "lem-a1-space-affine-atlas-open-cover",
+    "lem-a1-space-point-open-calculus",
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-largest-schematic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0B8A (lemma-flat-case), David Rydh."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-schemehood-local-ring-test] to the quasi-compact quasi-separated $q:W\\to\\operatorname{Spec}B$. For each $w\\in|W|$ with image $t$, set $A=\\mathcal O_{\\operatorname{Spec}B,t}$ and $P=W\\times_{\\operatorname{Spec}B}\\operatorname{Spec}A$. The map $r:P\\to\\operatorname{Spec}A$ is flat and quasi-compact by [lem-sfb-space-flat-proper-fp-locality] and [lem-sfb-space-quasicompact-affine-tests]. It remains a monomorphism by the pair calculation of step 1. Choose a field-valued representative $\\operatorname{Spec}K\\to W$ of $w$. Its composite to $\\operatorname{Spec}B$ hits $t$, so the ring map $B\\to K$ factors through $A=B_t$ and has kernel $tA$ there. The resulting compatible pair gives a point $p\\in|P|$ over the closed point of $\\operatorname{Spec}A$. Proving each such $P$ a scheme proves $W$ a scheme.",
+   "uses": [
+    "lem-sfb-space-schemehood-local-ring-test",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0B8A (lemma-flat-case), David Rydh."
+   }
+  },
+  {
+   "text": "Since $r$ is quasi-compact and $\\operatorname{Spec}A$ is affine, $P$ is quasi-compact [lem-sfb-space-quasicompact-affine-tests]: it admits a surjective etale map from a quasi-compact scheme. Cover that scheme by finitely many affine opens; their disjoint union is an affine scheme $U$ [lem-weil-pbc-affine-morphism-permanence] with a representable surjective etale map $u:U\\to P$. By [lem-a1-space-point-open-calculus], $|u|$ is surjective, so some $y\\in U$ maps to the point $p$ of step 3. By the chart test of [def-sfb-space-morphism-properties], applied to the charts $u$ and the identity of $\\operatorname{Spec}A$, the scheme morphism $v=r\\circ u:U\\to\\operatorname{Spec}A$ is flat, and $v(y)$ is the closed point. Every prime of the local ring $A$ is contained in its maximal ideal, hence every point $s$ of $\\operatorname{Spec}A$ specializes to the closed point. By [lem-weil-pbc-flat-generalizations-lift] some $y\\prime\\in U$ has $v(y\\prime)=s$. Hence $v$ is surjective, and so is $r$ on point classes.",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-a1-space-point-open-calculus",
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-flat-generalizations-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0B8A (lemma-flat-case), David Rydh."
+   }
+  },
+  {
+   "text": "The flat surjective morphism $v:U\\to\\operatorname{Spec}A$ of affine schemes forms an fpqc covering $\\{v\\}$ [def-weil-pbc-fpqc-covering]: an affine open $V\\subseteq\\operatorname{Spec}A$ is a finite union of standard opens $D(a)$, and $v^{-1}(D(a))$ is a standard, hence affine, open of $U$ mapping onto $D(a)$ by surjectivity. Form $P\\times_{\\operatorname{Spec}A}U$ [lem-trf-space-fibre-products-etale-covers] with its projection to $U$. On a test scheme $H$, a pair $(z,y)\\in P(H)\\times U(H)$ with $r(z)=v(y)=r(u(y))$ has $z=u(y)$ by monomorphy of $r$ (step 3); so $y\\mapsto(u(y),y)$ is inverse to the projection, which is an isomorphism. Thus $P\\times_{\\operatorname{Spec}A}U$ is represented by the scheme $U$ and its projection is an open immersion. Apply [lem-sfb-space-fpqc-open-immersion-descent] with $Z=P$, base scheme $\\operatorname{Spec}A$, $a=r$ and the covering $\\{v\\}$: $r$ identifies $P$ with an open subscheme of $\\operatorname{Spec}A$. That open contains every point because $r$ is surjective (step 4), so it is $\\operatorname{Spec}A$, and $P$ is represented by the scheme $\\operatorname{Spec}A$.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-fpqc-open-immersion-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0B8A (lemma-flat-case), David Rydh."
+   }
+  },
+  {
+   "text": "The local-ring criterion in step 3 now makes each $W$ a scheme. The largest schematic opens used in steps 2 and 1 then give, successively, schemehood over every affine $T_j$ and schemehood of $Z=X\\times_Yh_T$. Since $T$ and its map to $Y$ were arbitrary, this is representability by schemes. All quasi-compactness hypotheses were introduced only for the covering pieces $W$; none was required of the original $f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0B8A (lemma-flat-case), David Rydh."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-largest-schematic-open",
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-a1-space-point-open-calculus",
+  "def-sfb-space-morphism-properties",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-schemehood-local-ring-test",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-space-fpqc-open-immersion-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0B8A (lemma-flat-case), David Rydh, entire proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*mono|mono.*flat|AlgebraicSpace",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean"
+    ],
+    "n_hits": 11,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "3b0715807edebe33"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono and IsOpenImmersion.of_flat_of_mono in Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean:25,38 concern morphisms already between schemes and require additional hypotheses; they do not prove representability of an algebraic-space source."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, CategoryTheory.Mono",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left",
+     "AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right",
+     "AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left_of_ringHomFlat",
+     "AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono"
+    ],
+    "n_hits": 6,
+    "note": "",
+    "subdirectory": "",
+    "digest": "6ffb5a0f1afddb97"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono and IsOpenImmersion.of_flat_of_mono in Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean:25,38 concern morphisms already between schemes and require additional hypotheses; they do not prove representability of an algebraic-space source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat algebraic space monomorphisms are representable by schemes",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.instQuasiSeparatedOfMonoScheme",
+     "AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+     "AlgebraicGeometry.IsPreimmersion.instMonoScheme",
+     "AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme",
+     "AlgebraicGeometry.IsOpenImmersion.le_monomorphisms",
+     "AlgebraicGeometry.IsSeparated.isSeparated_of_mono"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "d1ddc2fa29c12cf3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono and IsOpenImmersion.of_flat_of_mono in Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean:25,38 concern morphisms already between schemes and require additional hypotheses; they do not prove representability of an algebraic-space source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat monomorphism of algebraic spaces is representable by schemes",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.Flat.instFstScheme",
+     "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "2d62d7fd4e4cfea2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono and IsOpenImmersion.of_flat_of_mono in Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean:25,38 concern morphisms already between schemes and require additional hypotheses; they do not prove representability of an algebraic-space source."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|representable.*[Mm]ono|[Mm]ono.*representable",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono and IsOpenImmersion.of_flat_of_mono in Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean:25,38 concern morphisms already between schemes and require additional hypotheses; they do not prove representability of an algebraic-space source."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|flat.*mono|mono.*flat",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean"
+    ],
+    "n_hits": 11,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "0be3908346512652"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean:25-26 and 38-39 concern Scheme sources, already representable; the open-immersion theorem also assumes local finite presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, CategoryTheory.Mono",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left",
+     "AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right",
+     "AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left_of_ringHomFlat",
+     "AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono"
+    ],
+    "n_hits": 6,
+    "note": "",
+    "subdirectory": "",
+    "digest": "6ffb5a0f1afddb97"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean:25-26 and 38-39 concern Scheme sources, already representable; the open-immersion theorem also assumes local finite presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat monomorphisms of algebraic spaces are representable by schemes",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.Flat.mk"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "ce4844a5d6ae190d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean:25-26 and 38-39 concern Scheme sources, already representable; the open-immersion theorem also assumes local finite presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat monomorphism of algebraic spaces is representable by schemes",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.Flat.instFstScheme",
+     "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "2d62d7fd4e4cfea2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean:25-26 and 38-39 concern Scheme sources, already representable; the open-immersion theorem also assumes local finite presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-isomorphism-dense-open",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tag 088Q (lemma-find-common-blowups); U-admissible centres as defined in spaces-divisors.tex Tag 086B (definition-admissible-blowup).. Supporting Tag 088Q proof, choice of the two blowups whose strict transforms are open subspaces. Precise input to the Tag 087F proof: Tag 0879 (lemma-zariski), statement, hypotheses (1)--(3). Supporting input for Tag 0879: Tag 0B8A (lemma-flat-case), David Rydh.",
+   "via": [
+    "lem-sfb-space-flat-isomorphism-dense-open",
+    "lem-sfb-space-zariski-after-admissible-blowup",
+    "lem-sfb-space-common-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-flat-monomorphism-representable",
+  "worker": "stage1",
+  "summary": "Expanded Rydh's proof in Tag 0B8A; retained arbitrary scheme tests and no finiteness hypotheses, checked qcqs conditions for the local-ring test, added the statement-only local-ring schemehood input (reviewer: lifting and descent now via existing nodes), and checked each cited statement and the scheme-only Mathlib candidates.",
+  "blueprint": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tag 088Q (lemma-find-common-blowups); U-admissible centres as defined in spaces-divisors.tex Tag 086B (definition-admissible-blowup).. Supporting Tag 088Q proof, choice of the two blowups whose strict transforms are open subspaces. Precise input to the Tag 087F proof: Tag 0879 (lemma-zariski), statement, hypotheses (1)--(3). Supporting input for Tag 0879: Tag 0B8A (lemma-flat-case), David Rydh. Realizes the supporting representability input via Tag 0B8A: affine-test and quasi-compact-open reductions, local-ring criterion, lifting generalizations, and fpqc descent. The latest unit proof uses compactification for direct images; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-atlas-open-cover",
+    "why": "Generic open affine-atlas covering of a space, used only to restrict the representability argument to quasi-compact pieces; no node in this unit gives that covering."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Continuity of the atlas point map to infer quasi-compactness of its image; generic space topology input, not a different six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "An affine scheme is quasi-separated through separatedness of its affine structure map, needed for the quasi-compactness criterion; no replacement of a unit argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-6f40ad15d",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-6f40ad15d (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes, every cited statement, and the sources: Stacks 0B8A (spaces-more-morphisms lemma-flat-case, statement and whole proof), 0B80 (spaces-limits lemma-enough-local), 0B7W (decent-spaces lemma-generalizations-lift-flat) and 041Y (spaces-descent). The item statement is unchanged and the mathematics of every step is correct. Steps 1-3 (affine T, qc open W with q qc and qs, the 0B80 test with a point p over the closed point) check against the cited statements. The new node lem-sfb-space-schemehood-local-ring-test (0B80) is true, self-contained, not a duplicate and smaller than the item: kept. FIX: two new nodes are true but not needed. (1) lem-sfb-flat-space-to-scheme-generalizations: step 4 now takes an affine etale atlas U->P (P is qc by quasicompact-affine-tests; a finite disjoint union of affines by affine-morphism-permanence(4)) and applies the existing Mathlib leaf lem-weil-pbc-flat-generalizations-lift (03HV) to the flat scheme map v=r∘u. (2) lem-sfb-space-fpqc-descend-isomorphism: step 5 now forms the fpqc covering {v} (def-weil-pbc-fpqc-covering) and uses P×_A U≅U by monomorphy. It then applies the existing same-unit node lem-sfb-space-fpqc-open-immersion-descent, so P is an open subscheme of Spec A, and surjectivity makes it Spec A. Step 1 now also cites lem-a1-space-point-open-calculus for 'full point image => whole space'. proof_deps were updated and equal the step uses; I checked for cycles. Batch-5: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers, and every flagged node whose closure reaches them, are general definitions or space foundations, not trace-formula or Poincaré steps: accepted. The newly cited open-immersion-descent node reaches only the generic lem-trf quasi-affine facts. The worker's tool_uses (atlas cover, point calculus, affine permanence) are generic: accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatMonomorphismRepresentable",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.flat_monomorphism_representable",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatMonomorphismRepresentable.lean",
+  "statement": "theorem flat_monomorphism_representable {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsFlat f) (hmono : ∀ H : Over S, Function.Injective (f.hom.hom.app (op H))) : IsRepresentable f.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25360b35b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read item node, Stacks 0B8A (spaces-more-morphisms l.287-288), deps AlgebraicSpace (IsRepresentable = IsRepresentableWith ⊤, full subcategory of fppf Type u sheaves on Over S) and AlgebraicSpaceMorphismProperties (MapIsFlat = étale-chart test with Flat), and the delivered module. Hypotheses: S : Scheme.{u}, X Y : AlgebraicSpace S, f, MapIsFlat f, injectivity of f.hom.hom.app (op H) for all H : Over S (the node's monomorphism meaning, literally). Conclusion IsRepresentable f.hom.hom = for every T and a : h_T → Y, an S-scheme U with an IsPullback square; exact. No finiteness, qc, extra-universe or instance assumptions; empty, identity, Spec Q→Spec Z and non-qc cases covered. lean.statement verbatim; no name clash; proof-only imports exist, acyclic; only the lean field changed; sorry-only proof; source and blueprint docstrings with all 6 proof steps; worker report and second-reading sections present (second reading by the author, content correct). No files changed, no compile needed."
+ }
+}

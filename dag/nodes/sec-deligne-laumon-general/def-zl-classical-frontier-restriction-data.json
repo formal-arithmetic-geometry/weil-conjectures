@@ -1,0 +1,140 @@
+{
+ "id": "def-zl-classical-frontier-restriction-data",
+ "kind": "definition",
+ "title": "Classical frontier restriction data",
+ "statement": "Fix the finite-field datum D, coefficient prime l and algebraic closure Ω, and the normalized classical realization, system and restriction comparison of [def-zl-classical-lisse-restriction-models; def-zl-classical-lisse-restriction-maps]. The structures RestrictionModel, WeilRestrictionResult and Frontier record respectively an actual locally closed finite-field model factoring through a chosen stratum, a lift of its actual restricted ambient Weil map with a common finite coefficient model and the pinned normalized fibre identification, and a reduced closed frontier chain with its clopen affine smooth geometrically connected pieces. The actual support inclusion, successive-restriction equation and conjunction RestrictionConclusion use the prescribed raw and derived pullback compositors. The data retain the existing definitions verbatim and live separately from the assembly theorem so its argument steps can import them without a cycle.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 6-7; normalized classical restriction, descent of the finite frontier and its actual Weil structures."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraic-closure",
+  "def-weil-scheme-morphism-properties",
+  "def-pc-base-change",
+  "def-weil-constructible-heart",
+  "def-weil-algebraically-closed-coefficients",
+  "def-constructible-stratification",
+  "def-weil-pbc-scheme-reduction",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-tw-lisse-rational-realization",
+  "lem-per-lisse-completed-system-comparison",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-local-frobenius-trace",
+  "lem-zl-smooth-affine-frontier-stratification",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-zl-classical-lisse-restriction-models",
+  "def-zl-classical-lisse-restriction-maps",
+  "def-zl-adic-lisse-calculus-models",
+  "def-per-adic-base-stages",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-zl-classical-local-fibre-comparison",
+  "def-zl-weil-ind-sheaf-category",
+  "def-wf-fundamental-representation",
+  "def-pod-lisse-adic-fibre-functors",
+  "def-zl-normalized-finite-realization-fibre",
+  "def-zl-normalized-finite-fibre-models"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 6-7; normalized classical restriction, descent of the finite frontier and its actual Weil structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lisse adic sheaf realization normalized pullback comparison composition; finite field smooth affine geometrically connected frontier stratification; classical lisse Weil sheaf lifting isomorphism finite coefficient field geometric Frobenius",
+   "results": "SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv give ordinary module pullback composition; Algebra.isOpen_smoothLocus gives the open smooth locus; FiniteField.frobeniusAlgEquivOfAlgebraic gives the field automorphism. None states the normalized classical/common-stage comparison, finite-field frontier diagram or the finite sf local-operator assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "classical lisse Weil sheaf normalized successive pullback comparison finite field frontier stratification",
+   "results": "AlgebraicGeometry.exists_map_preimage_le_map_preimage and exists_map_preimage_eq_map_preimage (Mathlib.AlgebraicGeometry.AffineTransitionLimit); SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; Scheme.Modules.pullbackComp. No normalized adic/classical theorem or full finite-field frontier diagram.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i lisse.*weil|frontier.*strati|normalized.*pullback Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; rg preimageIso Mathlib/CategoryTheory/Functor/FullyFaithful.lean; repository search for WeilRestrictionResult, SuccessiveRestrictions, Frontier",
+   "results": "No matching Mathlib normalized adic or frontier theorem. FullyFaithful.preimageIso supplies the categorical isomorphism lift only. Existing Sheaf.Paper.ClassicalSystemRawLisseRealization is existential in its realization family; it does not directly supply the uniform conclusion for the given R,S,A,C. Existing Sheaf.DeligneLaumon.SmoothAffineFrontierStratification supplies the geometric diagram, requiring scheme-theoretic reduction and canonical-associativity glue. No duplicate of the three assembly lemmas.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClassicalLisseWeilFrontierRestriction",
+  "date": "2026-10-25",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 6-7; normalized classical restriction, descent of the finite frontier and its actual Weil structures.",
+   "via": [
+    "lem-zl-classical-lisse-weil-frontier-restriction",
+    "lem-zl-raw-heart-adic-lisse-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClassicalLisseWeilFrontierData",
+  "file": "lean/Sheaf/Paper/ClassicalLisseWeilFrontierData.lean",
+  "declaration": "WeilConjectures.ZlFrontier.RestrictionModel",
+  "declarations": [
+   "WeilConjectures.ZlFrontier.RestrictionModel",
+   "WeilConjectures.ZlFrontier.RestrictionModel.geometricMap",
+   "WeilConjectures.ZlFrontier.RestrictionModel.base",
+   "WeilConjectures.ZlFrontier.RestrictionModel.frobenius",
+   "WeilConjectures.ZlFrontier.RestrictionModel.lattice",
+   "WeilConjectures.ZlFrontier.RestrictionModel.identification",
+   "WeilConjectures.ZlFrontier.WeilLift.classicalWeil",
+   "WeilConjectures.ZlFrontier.WeilRestrictionResult",
+   "WeilConjectures.ZlFrontier.supportInclusion",
+   "WeilConjectures.ZlFrontier.Frontier",
+   "WeilConjectures.ZlFrontier.SuccessiveRestrictions",
+   "WeilConjectures.ZlFrontier.RestrictionConclusion"
+  ],
+  "statement": "structure RestrictionModel (R : Realization D l Ω) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (T : PerAdic.Base D.k) (M : sfCommonStageHeart l T.scheme Ω) (P : PartitionData D l Ω R T M) (m : ℕ) (hm : 1 ≤ m)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2848",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T123002-L-1822144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c2848",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T123002-L-1822144",
+  "kind": "interface",
+  "note": "independent cc review: live item module vs delivered Data module (verbatim move, item theorem signature unchanged, public re-export); three sorried step theorems vs the three clauses of RestrictionConclusion; node proof_deps vs the Lean proof"
+ }
+}

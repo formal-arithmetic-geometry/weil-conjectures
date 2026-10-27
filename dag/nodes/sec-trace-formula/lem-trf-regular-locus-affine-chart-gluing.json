@@ -1,0 +1,187 @@
+{
+ "id": "lem-trf-regular-locus-affine-chart-gluing",
+ "kind": "statement",
+ "title": "Comparison and gluing of regular loci on affine charts",
+ "statement": "Let $Y$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] and put $\\operatorname{Reg}(Y)=\\{z\\in Y:\\mathcal O_{Y,z}\\text{ is a regular local ring}\\}$ [def-weil-regular-scheme]. For a commutative ring $C$ put $E(C)=\\{\\mathfrak q\\in\\operatorname{Spec}C:C_{\\mathfrak q}\\text{ is a regular local ring}\\}$ [def-weil-affine-spectrum, def-weil-pbc-localization-at-prime]. For every affine open $W\\subseteq Y$, with $C=\\mathcal O_Y(W)$, the canonical homeomorphism $\\alpha_W:W\\xrightarrow{\\sim}\\operatorname{Spec}C$ satisfies $W\\cap\\operatorname{Reg}(Y)=\\alpha_W^{-1}(E(C))$. Consequently, for every affine open covering $Y=\\bigcup_{j\\in J}W_j$, the set $\\operatorname{Reg}(Y)$ is open in $Y$ if and only if every $E(\\mathcal O_Y(W_j))$ is open in its prime spectrum. In particular, for a Noetherian commutative ring $B$ and $Y=\\operatorname{Spec}B$, under the canonical identification of its points with primes of $B$, $\\operatorname{Reg}(Y)=E(B)$ and their openness is equivalent. Empty schemes and infinite coverings are allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07R4 (lemma-J), proof, last paragraph, the assertion Reg(Y) intersect V_j = Reg(V_j) and its openness consequence, together with the second paragraph identifying the scheme and ring regular loci on Spec(B). The affine stalk identity is Schemes lemma-spec-sheaves, part (6). This is the comparison and gluing argument of returned steps 4--5, without any J-2 hypothesis."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-regular-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $W\\subseteq Y$ and $z\\in W$, and write $C=\\mathcal O_Y(W)$ and $\\mathfrak q=\\alpha_W(z)$. The canonical immersion $\\iota_W:\\operatorname{Spec}C\\to Y$ in the affine-stalk theorem restricts to the inverse of the canonical chart $\\alpha_W$, so $\\iota_W(\\mathfrak q)=z$. Thus the prime $\\mathfrak p_z$ of that theorem is exactly $\\mathfrak q$, and its clause (c) gives a ring isomorphism $C_{\\mathfrak q}\\xrightarrow{\\sim}\\mathcal O_{Y,z}$. Apply ring-isomorphism invariance to this isomorphism and its inverse: $C_{\\mathfrak q}$ is regular local if and only if $\\mathcal O_{Y,z}$ is regular local. By the definitions of $E(C)$ and $\\operatorname{Reg}(Y)$ this is exactly $z\\in\\alpha_W^{-1}(E(C))$ if and only if $z\\in W\\cap\\operatorname{Reg}(Y)$. Equality of these subsets follows pointwise.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-trf-regular-local-ring-isomorphism",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), part (6), on an affine open; algebra.tex, Tag 00KU (definition-regular-local)."
+   }
+  },
+  {
+   "text": "Put $T=\\operatorname{Reg}(Y)$. If $T$ is open, then $T\\cap W_j$ is open in $W_j$; its image under the homeomorphism $\\alpha_{W_j}$ is $E(\\mathcal O_Y(W_j))$, hence is open. Conversely, if all these ring loci are open, their inverse images under $\\alpha_{W_j}$ are open in $W_j$. Each $W_j$ is open in $Y$, so these subsets are also open in $Y$: a subset open in the subspace $W_j$ is $W_j\\cap O$ for an ambient open $O$. Since the $W_j$ cover $Y$, $T=\\bigcup_j(T\\cap W_j)$; arbitrary unions of opens are open. These statements follow from the definitions of a homeomorphism, the subspace topology and a topology; no finiteness of the covering is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4 (lemma-J), proof, last paragraph, openness from the affine covering."
+   }
+  },
+  {
+   "text": "For $Y=\\operatorname{Spec}B$, its underlying topological space is the prime spectrum of $B$ and its global sections identify canonically with $B$. Applying the affine-stalk localization theorem on the whole affine scheme therefore gives $\\mathcal O_{Y,\\mathfrak p}\\cong B_{\\mathfrak p}$ for every prime $\\mathfrak p$ of $B$. Ring-isomorphism invariance in both directions identifies membership in $\\operatorname{Reg}(Y)$ with membership in $E(B)$. These are equal subsets of the same prime spectrum, so their openness is equivalent. If $B$ is the zero ring, both spectra and both loci are empty. For an empty $Y$ the pointwise comparison is vacuous and the union in the preceding step is empty, including for an empty covering.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-trf-regular-local-ring-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4 (lemma-J), proof, second paragraph, scheme and ring regular loci on Spec(B); schemes.tex, Tag 01HV (lemma-spec-sheaves), parts (1) and (6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-trf-regular-local-ring-isomorphism",
+  "def-weil-regular-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07R4 (lemma-J), proof, second and final paragraphs; affine-stalk comparison spelled out using Schemes Tag 01HV (lemma-spec-sheaves), part (6), and ring-isomorphism invariance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The regular locus of a locally Noetherian scheme is open if the regular loci of the coordinate rings in an affine open covering are open, using localization isomorphisms of local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  AlgebraicGeometry.IsLocallyNoetherian ↑U\", \"doc\": \"If $X$ is a locally Noetherian scheme and $U$ is an open subscheme of $X$, then $U$ is also a locally Noetherian scheme. This follows from the fact that any open subset of a scheme inherits the local \"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.OpenCover} (i : U.I₀) [AlgebraicGeometry.IsLocallyNoetherian X],\\n  AlgebraicGeometry.IsLocallyNoetherian (U.X i)\", \"doc\": \"If a scheme $ X $ is locally Noetherian, then each open subscheme in an open cover of $ X $ is also locally Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if, for every affine open cover $\\\\{U_i\\\\}$ of $X$, the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for each index $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i)))) → AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsLocallyNoetherian (𝒰.X i)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if every open subscheme in an open cover $\\\\mathcal{U}$ of $X$ is locally Noetherian, i.e., $X$ is locally Noetherian $\\\\iff \\\\forall i \\\\in \\\\mathcal{U}.I_0,\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op U))], TopologicalSpace.NoetherianSpace ↥↑U\", \"doc\": \"If $ U $ is an affine open subset of a scheme $ X $ and the ring of global sections $ \\\\Gamma(U) $ is Noetherian, then the underlying topological space of $ U $ is a Noetherian topological space.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stalk localization, Noetherianity and smooth loci supply parts; no hit states the regular-locus comparison and affine-cover openness criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any affine chart the points with regular local stalk correspond to prime localizations that are regular local rings; openness can be checked on an affine open cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the smooth locus of $ A $ over $ R $ if and only if the localization \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U)\\n  (y : PrimeSpectrum ↑(X.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom hU.fromSpec.base) y ∈ U →\\n    IsLocalization.AtPrime (↑(X.presheaf.stalk ((CategoryTheory.ConcreteCategory.hom hU.fro\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, and a prime ideal $ y $ in the ring of global sections $ \\\\Gamma(U) $, the stalk of the structure sheaf at the point corresponding to $ y $ is isomorp\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) (x : ↥U),\\n  IsLocalization.AtPrime (↑(X.presheaf.stalk ↑x)) (hU.primeIdealOf x).asIdeal\", \"doc\": \"For any point $x$ in an affine open subset $U$ of a scheme $X$, the stalk of the structure sheaf $\\\\mathcal{O}_X$ at $x$ is isomorphic to the localization of the ring $\\\\mathcal{O}_X(U)$ at the prime id\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stalk localization, Noetherianity and smooth loci supply parts; no hit states the regular-locus comparison and affine-cover openness criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, IsOpen",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stalk localization, Noetherianity and smooth loci supply parts; no hit states the regular-locus comparison and affine-cover openness criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "regularLocus|regular.locus|IsRegularLocalRing",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"35\", \"text\": \"lemma Polynomial.isRegularLocalRing_localization_atPrime_of_comap_eq_maximalIdeal\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"36\", \"text\": \"    [IsRegularLocalRing R] (p : Ideal R[X]) [p.IsPrime] (max : p.comap C = maximalIdeal R) :\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"37\", \"text\": \"    IsRegularLocalRing (Localization.AtPrime p) := by\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"38\", \"text\": \"  apply IsRegularLocalRing.of_spanFinrank_maximalIdeal_le\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"41\", \"text\": \"  have reg := (isRegularLocalRing_iff R).mp ‹_›\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"17\", \"text\": \"For a Noetherian local ring `R`, we define `IsRegularLocalRing` as\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"20\", \"text\": \"(see `IsRegularLocalRing.iff_finrank_cotangentSpace`).\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"28\", \"text\": \"* `IsRegularLocalRing` : A Noetherian local ring is regular if\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"32\", \"text\": \"* `IsRegularLocalRing.iff_finrank_cotangentSpace` : the equivalence of `IsRegularLocalRing` and\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"36\", \"text\": \"  `IsRegularLocalRing`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stalk localization, Noetherianity and smooth loci supply parts; no hit states the regular-locus comparison and affine-cover openness criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness of the regular locus of a scheme is local on an affine open cover and agrees on each chart with the ring regular locus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.AffineOpenCover) : X.OpenCover\", \"doc\": \"Given an affine open cover $\\\\mathcal{U}$ of a scheme $X$, this function constructs the corresponding open cover of $X$ by considering the same collection of affine open immersions as an open cover in \"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(𝒰 : Scheme.OpenCover.{v, u} X) [∀ i, IsAffine (𝒰.X i)] :\\n  IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if, for every affine open cover $\\\\{U_i\\\\}$ of $X$, the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for each index $i$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : OpenCover X\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{R : CommRingCat} {ι : Type*} (s : ι → R) (hs : Ideal.span (Set.range s) = ⊤) : (Spec R).AffineOpenCover\", \"doc\": \"Given a commutative ring $ R $ and a set of elements $\\\\{s_i\\\\}$ whose ideal span is the unit ideal (i.e., $\\\\langle s_i \\\\rangle = R$), the localization morphisms $\\\\operatorname{Spec}(R_{s_i}) \\\\to \\\\opera\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(R : CommRingCat.{u}) : OpenCover (Spec R)\", \"doc\": \"For any commutative ring $ R $, this constructs the open cover of the scheme $ \\\\operatorname{Spec}(R) $ by the standard affine open immersions $ \\\\operatorname{Spec}(R_r) \\\\to \\\\operatorname{Spec}(R) $, \"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(𝒰 : Scheme.OpenCover X) : IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsLocallyNoetherian (𝒰.X i)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if every open subscheme in an open cover $\\\\mathcal{U}$ of $X$ is locally Noetherian, i.e., $X$ is locally Noetherian $\\\\iff \\\\forall i \\\\in \\\\mathcal{U}.I_0,\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"{ι : Type*} {U : ι → X.Opens} (hU : TopologicalSpace.IsOpenCover U) (hU' : ∀ i, IsAffineOpen (U i)) :\\n  IsLocallyArtinian X ↔ ∀ i, IsArtinianRing Γ(X, U i)\", \"doc\": \"For a scheme $X$ with an open cover $\\\\{U_i\\\\}$ consisting of affine open subsets, $X$ is locally Artinian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is an Artinian ring for\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: stalk localization, Noetherianity and smooth loci supply parts; no hit states the regular-locus comparison and affine-cover openness criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The regular locus of a locally Noetherian scheme agrees on affine charts with the regular locus of the coordinate ring and openness is local on an open cover",
+   "results": "8 hits: AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover, AlgebraicGeometry.isLocallyNoetherian_iff_openCover, AlgebraicGeometry.noetherianSpace_of_isAffineOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: results supply Noetherianity or affine stalks, not the full regular-locus comparison and gluing statement"
+  },
+  {
+   "tool": "grep",
+   "query": "regularLocus|regular_locus|IsRegularLocalRing.*(equiv|Equiv)|isRegularLocalRing_iff",
+   "results": "7 hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results supply Noetherianity or affine stalks, not the full regular-locus comparison and gluing statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, IsOpen",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results supply Noetherianity or affine stalks, not the full regular-locus comparison and gluing statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally Noetherian scheme the set of points whose stalk is a regular local ring corresponds to the regular ring locus on each affine open subset",
+   "results": "8 hits: AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.instIsLocallyNoetherianToScheme, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.isReduced_of_isReduced_stalk",
+   "date": "2026-10-22",
+   "verdict": "no match: results supply Noetherianity or affine stalks, not the full regular-locus comparison and gluing statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-j2-affine-cover",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Expose X, proof of Theorem 3.5, Step 5 (as recorded on lem-trf-projective-inseparable-spread-normalization): the spread Y' and the replacement of X must again be excellent schemes; excellence is verified on an affine cover of the finite normalization charts and passed to every affine open. Component-locality fact used to pass excellence from normalization charts to arbitrary affine opens: The J-2 property passes from an affine open cover to every affine open. proof, last paragraph, the assertion Reg(Y) intersect V_j = Reg(V_j) and its openness consequence, together with the second paragraph identifying the scheme and ring regular loci on Spec(B). The affine stalk identity is Schemes lemma-spec-sheaves, part (6). This is the comparison and gluing argument of returned steps 4--5, without any J-2 hypothesis.",
+   "via": [
+    "lem-trf-j2-affine-cover",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-trf-projective-inseparable-spread-normalization",
+    "lem-trf-generic-smooth-boundary-preparation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-regular-locus-affine-chart-gluing",
+  "worker": "stage1",
+  "summary": "Read Stacks 07R4 and 01HV, reused the existing affine-stalk localization Mathlib leaf, and added only the Mathlib ring-isomorphism invariance leaf. Wrote the pointwise comparison, both directions of open-cover gluing, and the canonical Spec(B) specialization, including empty schemes and arbitrary coverings. The statement is unchanged. No finished project declaration states the whole item. Repair of the side-completion promotion return: reconstructed the item over the current live node, retained all its maintainer-owned fields and historical searches, re-read every cited current statement, and made the identification of the chart prime with the affine-stalk theorem prime explicit. All six citation excerpts remain verbatim in the current statements. The delivery tool rebuilds the commit on the current server DAG.",
+  "blueprint": "Realizes the inherited affine-cover regularity comparison in the excellence check for the normalization spread, under lem-trf-local-term-locality (1)-(2), the contracting-correspondence proof via specialization; more precisely the descendant lem-trf-j2-affine-cover uses this as its regular-locus gluing step. No change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-6a9412a8e",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-6a9412a8e (reviewer sub-agent of L); spot-checked: I read the item, the new leaf lem-trf-regular-local-ring-isomorphism and every cited statement in full. This is a redelivery after a side-completion promotion return. Against the prior head 87e8505d9d8a (PASS, no fixes), the only change is in step 1: it now states that iota_W is the inverse of alpha_W, so p_z equals alpha_W(z), before it applies clause (c). The split_report text also changed. The statement is unchanged and the new node is identical. There is no re-split note for this item. Sources checked: Stacks 07R4 (lemma-J proof, morphisms.tex l.3310ff), 01HV (lemma-spec-sheaves) and 00KU (algebra.tex l.14615). Mathlib RegularLocalRing/Defs.lean l.49-53 has the IsRegularLocalRing class and l.68-73 has IsRegularLocalRing.of_ringEquiv; the leaf matches it exactly with no extra hypotheses. Step 1: clause (c) of lem-weil-pbc-affine-open-stalk-localization gives C_q isomorphic to O_{Y,z}, the leaf applied to e and its inverse gives an iff, and the equality holds pointwise. Step 2 is genuinely elementary: an open of an open subspace is open in Y, homeomorphisms preserve opens, and arbitrary unions of opens are open; no finiteness and no affine intersections are used. Step 3: with U = Y = Spec B and Gamma = B (def-weil-affine-spectrum), Reg(Y) = E(B) on the same set. Edge cases checked: the empty scheme and empty cover, the zero ring, Spec k, k[eps]/eps^2 and an infinite cover of Spec Z. The parent lem-trf-j2-affine-cover uses exactly the cover criterion and the Spec B clause. Duplicate searches with rg -L (of_ringEquiv, regular-local isomorphism wording, Reg(Y), regular locus with affine cover) found no duplicate; lem-exc-j2-residue-field-criterion, lem-per-excellent-normal-surface-local-data and lem-weil-pbc-regular-ring-map-ring-equiv state different facts. No SGA is used and there is no cycle. All cited nodes from other units are Mathlib leaves or definitions, so no tool_uses are needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularLocusAffineChartGluing",
+  "declaration": "AlgebraicGeometry.regularLocus_affine_chart_gluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularLocusAffineChartGluing.lean",
+  "statement": "theorem regularLocus_affine_chart_gluing (Y : Scheme.{u}) [IsLocallyNoetherian Y] : (∀ W : Y.affineOpens, (fun z : (W : Y.Opens) ↦ (z : Y)) ⁻¹' {z : Y | IsRegularLocalRing (Y.presheaf.stalk z)} = W.2.primeIdealOf ⁻¹' {q : PrimeSpectrum Γ(Y, W) | IsRegularLocalRing (Localization.AtPrime q.asIdeal)}) ∧ (∀ (J : Type v) (W : J → Y.affineOpens), (⨆ j : J, (W j : Y.Opens)) = ⊤ → (IsOpen {z : Y | IsRegularLocalRing (Y.presheaf.stalk z)} ↔ ∀ j : J, IsOpen {q : PrimeSpectrum Γ(Y, W j) | IsRegularLocalRing (Localization.AtPrime q.asIdeal)})) ∧ (∀ (B : Type w) [CommRing B] [IsNoetherianRing B], {p : PrimeSpectrum B | IsRegularLocalRing ((Spec (CommRingCat.of B)).presheaf.stalk p)} = {p : PrimeSpectrum B | IsRegularLocalRing (Localization.AtPrime p.asIdeal)} ∧ (IsOpen {p : PrimeSpectrum B | IsRegularLocalRing ((Spec (CommRingCat.of B)).presheaf.stalk p)} ↔ IsOpen {p : PrimeSpectrum B | IsRegularLocalRing (Localization.AtPrime p.asIdeal)}))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-741b73844",
+  "group": "N7",
+  "result": "pass",
+  "note": "Clauses all match the node and Stacks 07R4 proof (final + 2nd paragraphs): chart equality on subsets of W uses canonical IsAffineOpen.primeIdealOf (isoSpec.hom); arbitrary cover J:Type v (no finite/nonempty assumption) gives both openness directions; Spec B clause has the node's own IsNoetherianRing B, set equality plus openness iff. IsRegularLocalRing extends IsLocalRing+IsNoetherianRing, so no extra instances. Universes u/v/w independent and bound. lean.statement verbatim, node statement unchanged vs live, single sorry, source/blueprint docstrings with 3 proof steps, report has Worker report + Second reading by N7; first S2 delivery, not a rebind. Advisory only: upstream PrimeSpectrum.regularLocus (Excellent.lean l.62, no DAG node) has the same body as inline E(C). Not recompiled, nothing changed."
+ }
+}

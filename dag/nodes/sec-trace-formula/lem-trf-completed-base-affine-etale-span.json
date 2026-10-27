@@ -1,0 +1,296 @@
+{
+ "id": "lem-trf-completed-base-affine-etale-span",
+ "kind": "statement",
+ "title": "A formal isomorphism gives an affine etale span over the completed base",
+ "statement": "Let $S=\\operatorname{Spec}R$ and $T=\\operatorname{Spec}D$ be affine schemes [def-pc-scheme, def-weil-affine-spectrum] of finite type over $\\operatorname{Spec}\\mathbf Z$, and let $X\\to S$ and $Y\\to T$ be finite type morphisms with $X,Y$ affine [def-weil-finite-type-morphism]. Fix $x\\mapsto s$ and $y\\mapsto t$, put $A=\\mathcal O_{S,s}$, and put $B=\\operatorname{Spec}\\widehat A$, where completion is at the maximal ideal [def-weil-pbc-adic-completion]. Let $\\sigma:\\mathcal O_{T,t}\\to\\widehat A$ be a local ring homomorphism, meaning that it sends the maximal ideal into the maximal ideal. Write $b$ for the closed point of $B$, $\\lambda:B\\to T$ for the induced map, $X_B=X\\times_SB$, and $Y_B=Y\\times_{T,\\lambda}B$ [def-pc-fibre-product]. Suppose $y_B\\in Y_B$ maps to $(y,b)$ and there is an isomorphism $\\widehat{\\mathcal O}_{X,x}\\cong\\widehat{\\mathcal O}_{Y_B,y_B}$ of $\\widehat A$-algebras. Then $B$ is Noetherian and $\\kappa(s)\\to\\kappa(b)$ is an isomorphism [pqf-def-locnoeth, def-weil-residue-field]. There is a unique point $x_B\\in X_B$ above $(x,b)$, with $\\kappa(x)\\to\\kappa(x_B)$ an isomorphism. There exist an affine scheme $H$ of finite presentation over $B$ [def-sbc-locally-finite-presentation, def-weil-pbc-scheme-conventions], a point $h\\in H$ over $b$, and étale $B$-morphisms $a:H\\to X_B$ and $c:H\\to Y_B$ [def-weil-etale-morphism] with $a(h)=x_B$ and $c(h)=y_B$, such that the induced maps $\\kappa(x_B)\\to\\kappa(h)$ and $\\kappa(y_B)\\to\\kappa(h)$ are isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GDX, lemma-relative-map-approximation-pre, first proof paragraph and affine reduction; Tag 0CAV, lemma-isomorphism-approximation, with an affine finite-presentation neighbourhood of the marked point."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-pc-fibre-product",
+  "pqf-def-locnoeth",
+  "def-weil-residue-field",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-type-over-noetherian], $S$ is Noetherian. Since $S$ is affine, [pqf-lem-affine-open-locnoeth] makes $R$ Noetherian. The stalk description [lem-weil-pbc-affine-open-stalk-localization] identifies $A$ with the localization of $R$ at the prime of $s$; hence [lem-weil-pbc-localization-noetherian] makes $A$ Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 01OW, lemma-locally-Noetherian; Algebra Tag 00FN, lemma-Noetherian-permanence"
+   }
+  },
+  {
+   "text": "Write $C=\\widehat A$. By [lem-weil-pbc-adic-completion-noetherian], $C$ is Noetherian. By [lem-weil-pbc-local-completion-local-ring] it is local with maximal ideal $\\mathfrak m_A C$, and the canonical map identifies $\\kappa(s)$ with $\\kappa(b)$. Apply [lem-weil-pbc-module-completion-complete] with $M=A$ and $I=\\mathfrak m_A$, which is finitely generated since $A$ is Noetherian. This makes $C$ complete at $\\mathfrak m_A C$: its powers are $\\mathfrak m_A^n C$, so its ring-adic and the cited module-adic filtrations coincide. Consequently [lem-weil-pbc-complete-local-g-ring] makes $C$ a G-ring. The one affine open $B=\\operatorname{Spec}C$ is a Noetherian affine covering, so $B$ is locally Noetherian; any open cover has a member containing $b$, which contains a principal open $D(f)$ with $f\\notin\\mathfrak m_C$. Such $f$ is a unit, so $D(f)=B$. Thus this member alone covers $B$, proving quasi-compactness and hence Noetherianity.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-complete-local-g-ring",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PS, proposition-Noetherian-complete-G-ring; Algebra Tags 0316, 05GG, 05GI"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-completed-local-base-change] to $X\\to S$ at $x$. This supplies the unique $x_B$ over $(x,b)$ and a canonical $C$-algebra isomorphism $\\theta:\\widehat{\\mathcal O}_{X,x}\\xrightarrow{\\sim}\\widehat{\\mathcal O}_{X_B,x_B}$. To check the residue clause, [lem-weil-pbc-fibre-product-points] describes this fibre by the primes of $\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(b)$. Under the canonical residue isomorphism in step 2 this tensor product is $\\kappa(x)$ via $r\\otimes v\\mapsto r\\,\\iota(v)$, where $\\iota:\\kappa(b)\\cong\\kappa(s)\\to\\kappa(x)$. It is a field, whose only prime is zero. By [lem-weil-pbc-fibre-product-point-residue-field] its residue field identifies with $\\kappa(x_B)$ compatibly with $\\kappa(x)$; therefore the canonical map $\\kappa(x)\\to\\kappa(x_B)$ is an isomorphism.",
+   "uses": [
+    "lem-trf-completed-local-base-change",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, first proof paragraph; Schemes Tag 01JT, lemma-points-fibre-product"
+   }
+  },
+  {
+   "text": "By [lem-sfb-finite-type-composition-base-change], $X_B\\to B$ and $Y_B\\to B$ are of finite type. Let $\\psi:\\widehat{\\mathcal O}_{X,x}\\cong\\widehat{\\mathcal O}_{Y_B,y_B}$ be the given $C$-algebra isomorphism. The composite $\\theta\\psi^{-1}:\\widehat{\\mathcal O}_{Y_B,y_B}\\cong\\widehat{\\mathcal O}_{X_B,x_B}$ is a $C$-algebra isomorphism, hence an $\\mathcal O_{B,b}$-algebra isomorphism: $C$ is local, so $\\mathcal O_{B,b}=C$. Both marked points lie over $b$, and step 2 verifies that this base stalk is a G-ring. Apply [lem-trf-isomorphism-completion-approximation] over $B$ with $N=2$. It gives $(X_B,x_B)\\leftarrow(U,u)\\to(Y_B,y_B)$ over $B$, both arrows étale and both residue maps isomorphisms.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-trf-isomorphism-completion-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAV, lemma-isomorphism-approximation, applied as in Tag 0GDX, first proof paragraph"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] for $U\\to X_B$, the canonical residue point $\\operatorname{Spec}\\kappa(u)\\to U$, and the open $U$ itself. Obtain an affine open neighbourhood $j:H\\hookrightarrow U$ and its point $h$ over $u$. Its composite $a:H\\to X_B$ is étale. By [lem-weil-pbc-etale-composition-cancellation], $c:H\\to U\\to Y_B$ is also étale. An open restriction has the same local ring at its marked point (sections on neighbourhoods contained in the open are cofinal in the stalk colimit), so $\\kappa(u)\\to\\kappa(h)$ is an isomorphism. Thus both required residue maps remain isomorphisms. The arrows remain over $B$ and $h$ maps to $b$.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes Tag 01HR, section-affine-schemes (affine open neighbourhoods); Morphisms Tags 02GP, lemma-open-immersion-etale and 02GN, lemma-composition-etale"
+   }
+  },
+  {
+   "text": "The étale arrow $a$ is locally of finite type by the definition [def-weil-etale-morphism] and its unramified clause [def-weil-unramified-morphism]. Its composite $H\\to X_B\\to B$ is locally of finite type by [lem-weil-pbc-proper-fp-permanence](e). Since $B$ is locally Noetherian, [pqf-lem-lft-fp-locnoeth] makes this composite locally of finite presentation. Since $B$ is affine, [lem-weil-pbc-affine-source-morphism-separated] applied to its structure map makes $B$ separated. Since $H$ is affine and $B$ separated, [lem-weil-pbc-affine-source-separated-target-affine-morphism] makes $H\\to B$ affine. By [lem-weil-pbc-affine-morphism-permanence](3), it is quasi-compact and quasi-separated. Together these are exactly the finite-presentation conditions required in the statement.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TX, lemma-noetherian-finite-type-finite-presentation; Tags 01SG, lemma-affine-permanence and 01S7, lemma-affine-separated; Schemes Tags 01KN and 01KV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-completed-local-base-change",
+  "lem-trf-isomorphism-completion-approximation",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-weil-pbc-complete-local-g-ring",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-proper-fp-permanence",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GDX, lemma-relative-map-approximation-pre, first proof paragraph; Tag 0CAV, lemma-isomorphism-approximation; affine shrinking and finite presentation made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Formal isomorphism of completed local rings of two affine finite type families gives an affine elementary etale span after completing the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: etale presentations, formal etaleness and the etale locus do not construct a span from a formal stalk isomorphism; completed-base comparison and approximation are additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin approximation gives common etale neighbourhood of schemes over a complete local ring with isomorphic completed stalks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: etale presentations, formal etaleness and the etale locus do not construct a span from a formal stalk isomorphism; completed-base comparison and approximation are additional arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, AlgebraicGeometry.IsEtale",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-22",
+   "verdict": "Search returned an unknown identifier; not evidence of absence. Both semantic tools and the source grep were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "isomorphism.*completion|completion.*etale|etale.*completion",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: etale presentations, formal etaleness and the etale locus do not construct a span from a formal stalk isomorphism; completed-base comparison and approximation are additional arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common elementary etale neighbourhood over the completed base from isomorphic completed local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpanTarget Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(e : A ≃ₐ[R] B) : FormallyEtale R A ↔ FormallyEtale R B\", \"doc\": \"Given an algebra isomorphism $ e : A \\\\simeq_R B $, the algebra $ A $ is formally étale over $ R $ if and only if $ B $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: etale presentations, formal etaleness and the etale locus do not construct a span from a formal stalk isomorphism; completed-base comparison and approximation are additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphic completed local rings give common elementary etale neighbourhoods over a complete noetherian local base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation.mapEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] → StandardEtalePresentation R S → (S ≃ₐ[R] T) → StandardEtalePresentation R\", \"doc\": \"Given a standard étale presentation $ P $ of an $ R $-algebra $ S $ and an $ R $-algebra equivalence $ e : S ≃ₐ[R] T $, this function constructs the corresponding standard étale presentation of $ T $ \"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardEtale R S], Algebra.Etale R S\", \"doc\": \"Every standard étale algebra over a commutative ring is an étale algebra. Specifically, if an algebra $ S $ over a commutative ring $ R $ is isomorphic to a localization of a polynomial ring over $ R \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"StandardEtalePresentation.mk.inj\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  {P : StandardEtalePair R} {x : S} {hasMap : P.HasMap x} {lift_bijective : Function.Bijective ⇑(P.lift x hasMap)}\\n  {P_1 : StandardEtalePair R} {x_1 : S} {hasMap_1 : P_1.HasMap x_1}\\n  {lift_bijective_1 \", \"doc\": \"If two standard étale presentations constructed via the mk function are equal, then their underlying standard étale pairs and elements $x$ (satisfying $f(x)=0$ and $g(x)$ invertible) must be equal. Th\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern existing etale algebras, localization, etale loci or ordinary stalk isomorphisms; none algebraizes a formal isomorphism to a common elementary etale span."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin approximation algebraizes a formal isomorphism to an etale span of finite type schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern existing etale algebras, localization, etale loci or ordinary stalk isomorphisms; none algebraizes a formal isomorphism to a common elementary etale span."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern existing etale algebras, localization, etale loci or ordinary stalk isomorphisms; none algebraizes a formal isomorphism to a common elementary etale span."
+  },
+  {
+   "tool": "grep",
+   "query": "isomorphism.*completion|completion.*etale|etale.*completion",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"99\", \"text\": \"/-- `Completion.toCompletion` as a ring isomorphism onto the underlying completion. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"293\", \"text\": \"/-- The ring isomorphism `v.Completion ≃+* ℂ`, when `v` is complex, given by the bijection\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"318\", \"text\": \"/-- The ring isomorphism `v.Completion ≃+* ℝ`, when `v` is real, given by the bijection\"}\n  {\"file\": \"Mathlib/Topology/Algebra/UniformRing.lean\", \"line\": \"182\", \"text\": \"lifts to a ring isomorphism between corresponding uniform space completions. -/\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"line\": \"621\", \"text\": \"/-- `adicCompletion.toCompletion` as a ring isomorphism onto the underlying completion. -/\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"line\": \"768\", \"text\": \"/-- `toCompletion` as a uniform-space isomorphism onto the underlying completion. -/\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Completion.lean\", \"line\": \"510\", \"text\": \"/-- The uniform isomorphism between two completions of isomorphic uniform spaces. -/\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Completion.lean\", \"line\": \"522\", \"text\": \"/- In this section we construct isomorphisms between the completion of a uniform space and the\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Completion.lean\", \"line\": \"527\", \"text\": \"/-- The isomorphism between the completion of a uniform space and the completion of its separation\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/AbstractCompletion.lean\", \"line\": \"231\", \"text\": \"/-- The uniform isomorphism between two completions of isomorphic uniform spaces. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"line\": \"14\", \"text\": \"# Isomorphisms between `adicCompletion ℚ` and `ℚ_[p]`\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"line\": \"44\", \"text\": \"  isomorphism `v.adicCompletionIntegers ℚ ≃A[ℤ] ℤ_[natGenerator v]`.\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"line\": \"48\", \"text\": \"TODO : Abstract the isomorphisms in this file using a universal predicate on adic completions,\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"line\": \"144\", \"text\": \"/-- The continuous `ℚ`-algebra isomorphism between `v.adicCompletion ℚ` and `ℚ_[primesEquiv v]`. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"line\": \"154\", \"text\": \"/-- The continuous `ℤ`-algebra isomorphism between `v.adicCompletionIntegers ℚ` and\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"341\", \"text\": \"/-- The isomorphism from multivariate power series to the adic completion of\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"74\", \"text\": \"* To prove the isomorphism between the `X`-adic completion of `K⟮X⟯` and `K⸨X⸩` we construct\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"1008\", \"text\": \"/-- The uniform space isomorphism between two abstract completions of `ratfunc K` -/\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"1181\", \"text\": \"/-- The ring isomorphism between `K⟦X⟧` and the unit ball inside the `X`-adic completion of\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"1210\", \"text\": \"/-- The algebra isomorphism between `K⟦X⟧` and the unit ball inside the `X`-adic completion of\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern existing etale algebras, localization, etale loci or ordinary stalk isomorphisms; none algebraizes a formal isomorphism to a common elementary etale span."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal isomorphism of stalk completions gives common etale neighbourhood over complete local base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{X Y : PresheafedSpace.{_, _, v} C} (α : X ≅ Y) (x : X) : Y.presheaf.stalk (α.hom.base x) ≅ X.presheaf.stalk x\", \"doc\": \"Given presheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$ with colimits, if $\\\\alpha: X \\\\to Y$ is an isomorphism and $x \\\\in X$ is a point, then the induced morphism between stalks $\\\\mathcal{F}_\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": IsIso ((X.ofRestrict h).stalkMap x)\", \"doc\": \"Let $X$ be a locally ringed space and $U$ an open subset of $X$. Let $X|_U$ be the restriction of $X$ to $U$. The canonical inclusion morphism $i: X|_U \\\\to X$ induces for each point $x \\\\in U$ a ring h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) {V : (↑U).Opens} (x : ↥U) (hx : x ∈ V) {Z : CommRingCat}\\n  (h : X.presheaf.stalk ↑x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((↑U).presheaf.germ V x hx)\\n      (CategoryTheory.CategoryStruct.comp (U.stalkIso x).hom h) =\\n    CategoryTheory.CategoryStruc\", \"doc\": \"Let $X$ be a scheme and $U$ be an open subset of $X$. Let $X|_U$ denote the induced open subscheme on $U$. For any point $x \\\\in U$, there is a canonical isomorphism $\\\\phi_x: \\\\mathcal{O}_{X,x} \\\\stackre\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.stalkMap_inv_hom_assoc\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (e : X ≅ Y) (x : ↑X.toTopCat) {Z : CommRingCat}\\n  (h : X.presheaf.stalk x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap e.inv ((CategoryTheory.ConcreteCategory.hom e.hom.base) x))\\n      (CategoryTheo\", \"doc\": \"Let $X$ and $Y$ be locally ringed spaces, and let $e: X \\\\cong Y$ be an isomorphism with forward morphism $f: X \\\\to Y$ and inverse morphism $g: Y \\\\to X$. For any point $x$ in the underlying topological\"}\n  {\"name\": \"ModuleCat.Tilde.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) :\\n  TopCat.Presheaf.stalk (tildeInModuleCat M) x ≅ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.arrowStalkMapIsoOfEq\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{x y : X} (h : x = y) : Arrow.mk (f.stalkMap x) ≅ Arrow.mk (f.stalkMap y)\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes and equal points $ x = y $ in $ X $, this constructs an isomorphism between the arrows $ \\text{Arrow}(f_*^x) $ and $ \\text{Arrow}(f_*^y) $ in the arrow categor\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.stalk_iso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"[HasColimits C] (x : X) : IsIso (f.hom.stalkMap x)\", \"doc\": \"For an open immersion of sheafed spaces over a category $\\\\mathcal{C}$ with colimits, the induced morphism on the stalk at any point is an isomorphism. This asserts that when the base category $\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.stalk_iso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"[HasColimits C] (x : X) : IsIso (f.stalkMap x)\", \"doc\": \"If the category $ \\\\mathcal{C} $ has colimits, then for any open immersion $ f $ of presheafed spaces over $ \\\\mathcal{C} $ and any point $ x $ in the domain, the induced map on the stalk at $ x $ is an\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern existing etale algebras, localization, etale loci or ordinary stalk isomorphisms; none algebraizes a formal isomorphism to a common elementary etale span."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-completion-etale-approximation",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal local-equation input: final paragraph applies relative-map-approximation-pre to the formal model over Spec Z[a]. Auxiliary argument: Tag 0GDX, lemma-relative-map-approximation-pre, first proof paragraph and affine reduction; Tag 0CAV, lemma-isomorphism-approximation, with an affine finite-presentation neighbourhood of the marked point.",
+   "via": [
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-completed-base-affine-etale-span",
+  "worker": "stage1",
+  "summary": "Reuse existing completed-local base-change, complete-local G-ring and isomorphism approximation nodes. Verify Noetherian completion, canonical residue fields, scalar-compatible orientation of the formal isomorphism, and affine finite presentation after shrinking. No new nodes or statement changes.",
+  "blueprint": "Historical nodal local-equation branch of lem-trf-local-term-locality: completed-base first paragraph of Stacks 0GDX. Latest blueprint now uses contracting correspondences; this inherited auxiliary lemma is proved on its stated Stacks route, without changing the unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic local algebra or scheme foundation used only for its stated assertion in the completed-base setup; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-g-ring",
+    "why": "Generic local algebra or scheme foundation used only for its stated assertion in the completed-base setup; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Generic local algebra or scheme foundation used only for its stated assertion in the completed-base setup; the unit has no replacement for this tool."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic local algebra or scheme foundation used only for its stated assertion in the completed-base setup; the unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-local-g-ring",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "pqf-def-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-394711908",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-394711908 (reviewer sub-agent of L); spot-checked: First split of the statement-only item into 6 steps, with no new nodes. Diffed against clones/live: the statement, stmt_deps, source and blueprint are unchanged, the live item is still unsplit (so no other group superseded it), and there is no re-split note. The item is the first proof paragraph of Stacks 0GDX (more-morphisms lemma-relative-map-approximation-pre) with B=Spec Â, read in the source. Each step checked against the cited statements. Step 1: S, R and A Noetherian via finite-type-over-noetherian, affine-open-locnoeth, stalk localization (c) and localization-noetherian. Step 2: C Noetherian and local with m_C=m_A C and κ(s)≅κ(b); module-completion-complete makes C m_C-adically complete because (m_A C)^n=m_A^n C; then complete-local-g-ring (07PS) applies; B Noetherian (an open containing b contains a D(f) with f a unit). Step 3: completed-local-base-change gives the unique x_B and θ; κ(x)≅κ(x_B) follows from fibre-product-points plus the 'in particular' clause of fibre-product-point-residue-field, since κ(x)⊗_{κ(s)}κ(b)≅κ(x) is a field. Step 4: θψ⁻¹ has the direction of φ in isomorphism-completion-approximation, O_{B,b}=C is a G-ring, N=2. Step 5: affine shrink of U→X_B, and c is étale by etale-composition-cancellation (1)+(2). Step 6: lft (from étale and unramified), then lfp over the locally Noetherian B, and H→B is affine (B separated), hence qc and qs, which is 01TP finite presentation. Edge cases Spec ℤ_(p)→ℤ_p, A a field, x non-closed: all fine. No cycle (closure of 1298 nodes), no duplicate among the 0GDX/0CAV sibling nodes, no SGA. The four off-unit tool_uses are accepted as generic foundations. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompletedBaseAffineEtaleSpan",
+  "declaration": "AlgebraicGeometry.completedBaseAffineEtaleSpan",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletedBaseAffineEtaleSpan.lean",
+  "statement": "theorem completedBaseAffineEtaleSpan {X S Y T : Scheme.{u}} [IsAffine X] [IsAffine S] [IsAffine Y] [IsAffine T] (f : X ⟶ S) (g : Y ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType g] [QuasiCompact g] (sZ : S ⟶ Spec (.of (ULift.{u} ℤ))) (tZ : T ⟶ Spec (.of (ULift.{u} ℤ))) [LocallyOfFiniteType sZ] [QuasiCompact sZ] [LocallyOfFiniteType tZ] [QuasiCompact tZ] (x : X) (y : Y) (σ : T.presheaf.stalk (g y) →+* AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))) [IsLocalHom σ] (yB : pullback (C := Scheme.{u}) g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y))) (hyB : pullback.fst g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y)) yB = y) (hb : pullback.snd g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y)) yB = PrimeSpectrum.comap (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x)))).toRingHom ⟨⊥, inferInstance⟩) (hformal : ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* AdicCompletion (IsLocalRing.maximalIdeal ((pullback g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y))).presheaf.stalk yB)) ((pullback g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y))).presheaf.stalk yB), e.toRingHom.comp (Classical.choose (RingHom.exists_adicCompletion_map_of_local (f.stalkMap x).hom)) = (algebraMap ((pullback g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y))).presheaf.stalk yB) (AdicCompletion (IsLocalRing.maximalIdeal ((pullback g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y))).presheaf.stalk yB)) ((pullback g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y))).presheaf.stalk yB))).comp (((pullback.snd g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y))).stalkMap yB).hom.comp (StructureSheaf.toStalk (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))) ((pullback.snd g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y))) yB)).hom)) : IsNoetherian (Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ∧ IsIso ((Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x)).residueFieldMap (PrimeSpectrum.comap (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x)))).toRingHom ⟨⊥, inferInstance⟩)) ∧ ∃ xB : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x)), pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x)) xB = x ∧ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x)) xB = PrimeSpectrum.comap (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x)))).toRingHom ⟨⊥, inferInstance⟩ ∧ (∀ z : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x)), pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x)) z = x → pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x)) z = PrimeSpectrum.comap (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x)))).toRingHom ⟨⊥, inferInstance⟩ → z = xB) ∧ IsIso ((pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x))).residueFieldMap xB) ∧ ∃ (H : Scheme.{u}) (h : H) (p : H ⟶ Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) (a : H ⟶ pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x))) (c : H ⟶ pullback g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y))), IsAffine H ∧ LocallyOfFinitePresentation p ∧ QuasiCompact p ∧ QuasiSeparated p ∧ p h = PrimeSpectrum.comap (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x)))).toRingHom ⟨⊥, inferInstance⟩ ∧ a ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk (f x)) (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk (f x))) (S.presheaf.stalk (f x))))) ≫ S.fromSpecStalk (f x)) = p ∧ c ≫ pullback.snd g (Spec.map (CommRingCat.ofHom σ) ≫ T.fromSpecStalk (g y)) = p ∧ Etale a ∧ Etale c ∧ a h = xB ∧ c h = yB ∧ IsIso (a.residueFieldMap h) ∧ IsIso (c.residueFieldMap h)",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-a044bd6ec"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a044bd6ec",
+  "group": "Q158",
+  "result": "fix",
+  "note": "Maths faithful to node/Stacks 0GDX+0CAV: all hypotheses (affine S,T ft over Spec ULift Z; f,g ft, X,Y affine; IsLocalHom sigma; lambda = Spec.map sigma >> fromSpecStalk; b = ker evalOne; yB over (y,b); e commuting with the canonical Ahat-actions, psi = choose of the uniquely-determined exists_adicCompletion_map_of_local) and all conclusions (Noetherian B, kappa(s)~kappa(b), unique xB over (x,b) with kappa(x)~kappa(xB), affine H with p lfp+qc+qs, h over b, a,c etale B-morphisms hitting xB,yB with residue isos) match; edge cases ok, no hollow defs, sorry-only, docstrings ok. Finding: statement used Scheme.completionBaseMap / Hom.completionBaseChange, defs owned by uncited theorem node lem-trf-completed-local-base-change (public import of a proof-dep module). FIX: inlined both (Spec.map (algebraMap A Ahat) >> S.fromSpecStalk (f x); pullback f of it), import made plain, Mathlib public imports added, (C := Scheme.{u}) on binders; fixes/CompletedBaseAffineEtaleSpan.lean compiles clean (nt_compile --json, 4.6 s); lean-record.json gives the verbatim new statement."
+ }
+}

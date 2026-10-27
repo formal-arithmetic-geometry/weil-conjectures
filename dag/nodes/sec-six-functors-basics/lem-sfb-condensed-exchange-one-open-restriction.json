@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-condensed-exchange-one-open-restriction",
+ "kind": "statement",
+ "title": "Restriction of condensed derived exchange to one open",
+ "statement": "Let $\\Lambda$ be an arbitrary commutative condensed ring and use the ordinary internal-module derived operations [sk-def-sfb-module-derived-pushpull] in the small-site universe [def-weil-size-convention]. Let $X′\\to X$, $X′\\to Y′$, $f:X\\to Y$, $g:Y′\\to Y$ be a chosen Cartesian square [def-pc-fibre-product; def-weil-pbc-ambient-ringed-exchange]. Let $v:U\\to Y$ be an open immersion [def-weil-open-immersion]. Choose Cartesian presentations $X_U\\to X$, $f_U:X_U\\to U$ and $b:Y′_U\\to Y′$, $g_U:Y′_U\\to U$ over $v$, and any Cartesian square $h_U:X′_U\\to X_U$, $f′_U:X′_U\\to Y′_U$ over $f_U,g_U$. For every $K\\in D(\\operatorname{Mod}_{\\Lambda_X})$, the exact inverse image $b^*$ of the actual ambient exchange at $K$ is invertible if and only if the exact-pullback adjunction exchange [def-sfb-closed-test-derived-exchange-maps] of the localized square is invertible at $a^*K$, where $a:X_U\\to X$. No affine, closed, qcqs, proper, boundedness or constructibility assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6F (lemma-unbounded-cohomology-of-open) and 07A7 (remark-base-change), with ringed open_restriction and internal-module operation transport. This internal-module specialization is formulated by F6."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-open-immersion",
+  "def-sfb-closed-test-derived-exchange-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use the three Cartesian presentations to define the missing map t:XU′→X′. Pasting and cancellation give the remaining faces of the cube; base change makes a,b,t open immersions. This is the same projection-preserving cube construction as in ringed open restriction.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sf-ringed-restriction-exchange-open-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each corner use the exact internal/section-module equivalence and its normalized upper and lower comparisons. An exact equivalence preserves K-injectives because its inverse is an exact left adjoint. Applying the lower comparison on K-injective representatives therefore gives the canonical right-derived comparison, while the upper comparison descends termwise. Their unit, counit and upper-composition identities descend from the ordinary identities, so these comparisons identify the actual derived mates. Total left inverse image is canonically the exact termwise inverse image, with the induced adjunction from the same ordinary adjunction; insert its canonical comparison before and after each mate.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "sk-def-sfb-module-derived-pushpull",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let α:b* g*≅gU* v*, β:b* Rf′_*≅RfU′_* t*, γ:v* Rf_*≅RfU_* a*, δ:t* g′*≅hU* a* be the canonical exact comparisons. Ringed open_restriction gives b*(Ex_K);β;RfU′_*(δ)=α;gU*(γ);Ex_U(a*K). Both open pushforward comparisons β,γ are invertible by open_comparison. The other comparisons are pullback-composition isomorphisms. Thus cancellation gives the equivalence of invertibility. Transport through the exact equivalences, which reflect isomorphisms, and the total-left/exact comparisons. No conservativity or covering family is used in this one-open calculation. Alternatively, the already stated derivedOpenRestrictionNormalization gives the canonical internal open direct-image isomorphisms β,γ directly; exchangeMate_cube gives the displayed equation after the inverse-image cube identity. The latter identity is pullback-composition coherence, transported through the canonical exact/total-left comparison. Thus no separate open direct-image isomorphism needs to be stated or reproved.",
+   "uses": [
+    "lem-sf-ringed-restriction-exchange-open-descent",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-derived-open-restriction-normalization",
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-sf-ringed-restriction-exchange-open-descent",
+  "lem-sfb-internal-module-operations-transport",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-sfb-derived-open-restriction-normalization",
+  "lem-weil-pbc-exchange-mate-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6F (lemma-unbounded-cohomology-of-open) and 07A7 (remark-base-change), with ringed open_restriction and internal-module operation transport. This internal-module specialization is formulated by F6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open subsite commutes with derived pushforward and its base change adjunction mate",
+   "results": "Eight hits: Scheme.Modules.restrictAdjunction, restrictFunctorAdjCounitIso and related structure-sheaf restriction maps; none concerns the internal condensed derived mate.",
+   "date": "2026-10-26",
+   "verdict": "Use the project ringed open-restriction theorem; no Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the derived adjunction base change mate along one open immersion agrees with the localized mate",
+   "results": "Eight Scheme.Modules underived restriction adjunction/composition identities.",
+   "date": "2026-10-26",
+   "verdict": "No internal-module derived exchange comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*localizationRestriction|exchange.*open.*descent; actual_ambient_exchange; one.open.restriction",
+   "results": "The project has RingedRestrictionExchange.open_restriction and open_comparison on section modules, and InternalModuleOperations.internal_module_operations_transport for ordinary operations. NonaffineClosedTestExchangeIdentification.actual_ambient_exchange only converts the exact/total-left mates on affine quotient closed squares; it does not compare different base opens. No existing internal-module one-open comparison. Blueprint search restriction exchange open returned zero matching blueprint nodes. A later search also found derivedOpenRestrictionNormalization (canonical internal open direct-image mate isomorphisms, not a full arbitrary-exchange restriction comparison) and exchangeMate_cube (abstract mate naturality). These give the alternative direct internal proof recorded in step 3.",
+   "date": "2026-10-26",
+   "verdict": "A separate one-open comparison is needed; covering conservativity and affine quotient geometry are already available and are proved in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedClosedExchangeAffineDescent",
+  "date": "2026-10-26",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Compactification coherence refinement proof, paragraph (2): restriction of the closed-complement exchange along one base open, before affine-cover detection.",
+   "via": [
+    "lem-sfb-condensed-closed-exchange-affine-descent",
+    "lem-sfb-proper-constructible-closed-exchange-heart",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedExchangeOpenRestriction",
+  "file": "lean/Sheaf/Paper/CondensedExchangeOpenRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensed_exchange_one_open_restriction",
+  "statement": "theorem condensed_exchange_one_open_restriction\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {X' X Y' Y U XU YU' XU' : Scheme.{u}}\n    {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}\n    (sq : ChosenCartesianSquare g' f' f g)\n    (v : U ⟶ Y) [IsOpenImmersion v]\n    (a : XU ⟶ X) (fU : XU ⟶ U)\n    (b : YU' ⟶ Y') (gU : YU' ⟶ U)\n    (hU : XU' ⟶ XU) (fU' : XU' ⟶ YU')\n    (wf : IsPullback a fU f v) (wg : IsPullback b gU g v)\n    (w : IsPullback hU fU' fU gU)\n    (K : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :\n    IsIso ((upperStar Λ b).mapDerivedCategory.map ((condensedAmbientExchange Λ sq).app K)) ↔\n      IsIso ((ClosedTestDerivedExchangeModel.exchange Λ w.toCommSq).app\n        ((upperStar Λ a).mapDerivedCategory.obj K))",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T001511-L-4054",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T001511-L-4054",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

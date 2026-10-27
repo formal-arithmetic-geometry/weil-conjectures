@@ -128,7 +128,9 @@ theorem sfToProEtBaseChange_naturality {U X : Scheme.{u}} (j : U ⟶ X)
     {V W : X.Etale} (h : V ⟶ W) :
     (toProEt X ⋙ MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).map h ≫ 𝟙 _ =
       𝟙 _ ≫ (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ j ⋙ toProEt U).map h := by
-  sorry
+  ext
+  simp
+  rfl
 
 /-- The canonical site square identifying inclusion followed by base change with base
 change followed by inclusion. Source: Stacks Tag 099R

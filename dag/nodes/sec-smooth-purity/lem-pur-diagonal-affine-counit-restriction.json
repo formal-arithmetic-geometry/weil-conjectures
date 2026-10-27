@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-diagonal-affine-counit-restriction",
+ "kind": "statement",
+ "title": "Affine restriction of the coordinate counit equals the inverse diagonal DNC composite",
+ "statement": "Fix the finite coefficient setting [def-pur-conventions], its ordinary coefficient-unit dualizing object and Tate object [def-pur-diagonal-dualizing-data]. Let f:X→Y be separated, quasi-compact, locally of finite type and smooth of pure relative dimension d, with X and Y Noetherian, f compactifiable and a finite-type k-structure aY on Y. Let V be an affine open of Y and C a normalized diagonal Chart of [lem-pur-diagonal-orientation-refinement] over V. Fix normalized twist transport t, projective-line data D, and compact-support normalization N. Let j:U→X and v:U→A^d_Y be separated quasi-compact etale coordinate maps, U Noetherian, with v followed by the affine projection equal to j followed by f, both composites compactifiable. Form b:j* A_X(d)[2d]→j* omega_f by the two specified Tate comparisons, v* of the Kummer-normalized affine counit mate, source-etale locality for v, the equality-induced dualizing comparison, and inverse source-etale locality for j. On j^{-1}(f^{-1}V), the nu* image of b is the pullback of tate.hom followed by theta_C.inv followed by the pullback of the coefficient-unit conversion. Conjugate by the canonical composition/site comparison OrientationCounit.restriction. This is the explicit equality in the attached Lean statement. There is no global orientation e and no assumed equation of local realizations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-orientation-refinement",
+  "def-pur-diagonal-counit-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct a normalized DNC chart E for the affine projection using diagonalOrientationRefinement. The projection is smooth of dimension d by induction on the ordered affine tower.",
+   "uses": [
+    "lem-pur-diagonal-orientation-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply etale naturality to f and the affine projection, the two coordinate maps j,v and the inverse image O of V. Obtain vO by restricting v using the equality of the composites.",
+   "uses": [
+    "lem-pur-diagonal-dnc-etale-naturality",
+    "def-pur-diagonal-counit-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replace the affine local orientation by its counit using diagonalDncAffineModel. Naturality of restrictionAlong conjugates pullback of the affine mate. Cancel its inverse pairs and combine functor images of composites. The remaining arrow is exactly coordinate.",
+   "uses": [
+    "lem-pur-diagonal-dnc-affine-model",
+    "def-pur-diagonal-counit-comparison-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph",
+  "note": "C6: etale-correspondence naturality plus normalization only on the affine projection; explicit naturality/cancellation assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of deformation to normal cone identifies the smooth diagonal orientation with the adjoint mate of the affine-space counit",
+   "results": "8 hits, all about scheme normalization morphisms and normalization diagrams; no DNC or counit normalization theorem. Project rg found the existing chart factorization, but its module reaches the assigned theorem and cannot be imported without a cycle.",
+   "date": "2026-10-25",
+   "verdict": "No independent matching assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id",
+   "results": "Two hits: Iso.inv_hom_id and a descent-data unit isomorphism. The first provides structural cancellation, not geometric normalization.",
+   "date": "2026-10-25",
+   "verdict": "Use cancellation for assembly; no geometric match."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalAffineMate|BetaNormalized|affineTraceCounit",
+   "results": "msearch returned 0 Mathlib hits. Local library rg found the definitions, vector integration normalization, and the downstream chart-factor module; none gives the independent affine-restriction equality. Blueprint searches for diagonal counit and orientation normalization each returned 0 nodes.",
+   "date": "2026-10-25",
+   "verdict": "New affine calculation needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalOrdinaryOrientationNormalization",
+  "date": "2026-10-25",
+  "group": "U5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2 and combining/canonicity paragraph: the affine coordinate counit calculation before global equality detection",
+   "via": [
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalAffineCounitRestriction",
+  "file": "lean/Sheaf/Paper/DiagonalAffineCounitRestriction.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalAffineCounitRestriction",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.diagonalAffineCounitRestriction"
+  ],
+  "statement": "theorem diagonalAffineCounitRestriction (P : PurityFiniteSetting.{u})\n    {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y)\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [SmoothOfRelativeDimension d f]\n    [IsNoetherian X] [IsNoetherian Y] [HasCompactification f]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (V : Y.affineOpens) (C : OrientationRefinement.Chart P f aY d V)\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]\n      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),\n      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t T hT)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)\n    (U : Scheme.{u}) [IsNoetherian U]\n    (j : U ⟶ X) [Etale j] [IsSeparated j] [LocallyOfFiniteType j] [QuasiCompact j]\n    (v : U ⟶ affineTraceTower Y d) [Etale v] [IsSeparated v]\n    [LocallyOfFiniteType v] [QuasiCompact v]\n    (w : v ≫ affineTraceProjection Y d = j ≫ f)\n    [HasCompactification (j ≫ f)] [HasCompactification (v ≫ affineTraceProjection Y d)] :\n    let W := f ⁻¹ᵁ V.1\n    let νX := (ProEtale.comparisonUpperStar\n      (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory\n    let νU := (ProEtale.comparisonUpperStar\n      (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory\n    let R := OrientationRefinement.pull P W.ι\n    let S := OrientationRefinement.pull P (j ∣_ W)\n    let T := OrientationRefinement.pull P (j ⁻¹ᵁ W).ι\n    let c := OrientationCounit.restriction P j W\n    T.map (νU.map (OrientationCounit.coordinate P d f aY t D N U j v w)) =\n      (c.app (P.diagonalTwistEtale X d)).inv ≫\n        S.map ((OrientationRefinement.tate P W.ι (f ≫ aY) d).hom ≫\n          (OrientationRefinement.theta P f aY d V C.geometry C.betaEtale).inv ≫\n          R.map (νX.map (OrientationCounit.unitChange P f).hom)) ≫\n        (c.app (P.diagonalOrdinaryDualizing f)).hom",
+  "branch": "sheaf-dag",
+  "by": "U5",
+  "date": "2026-10-25"
+ },
+ "proof_deps": [
+  "lem-pur-diagonal-orientation-refinement",
+  "lem-pur-diagonal-dnc-etale-naturality",
+  "def-pur-diagonal-counit-comparison-data",
+  "lem-pur-diagonal-dnc-affine-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261025T203340-L-2807306",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2b655",
+  "group": "C6",
+  "result": "fix",
+  "landing": "20261026T023000-L-510496",
+  "kind": "interface",
+  "note": "independent cc review: moved OrientationCounit defs vs live item block (verbatim); new sorry lemmas (etale naturality, affine model) vs item and blueprint canonicity; node stmt_deps vs declarations used in the Lean statements; importer DiagonalOrdinaryOrientationNormalization compiled in sandbox (rc 0)"
+ }
+}

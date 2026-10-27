@@ -1,0 +1,368 @@
+{
+ "id": "lem-per-scheme-normalized-hilbert-head",
+ "kind": "statement",
+ "title": "Dimension-corrected Hilbert--Samuel heads without reducedness",
+ "statement": "Let $X$ be any scheme of finite type over $\\mathbf Q$, locally embeddable in a smooth scheme; nilpotents are allowed [def-weil-finite-type-morphism, def-weil-closed-immersion, def-sbc-smooth-morphisms]. Put $h_x(n)=\\operatorname{length}(\\mathcal O_{X,x}/\\mathfrak m_x^{n+1})$ [def-weil-pbc-module-length]. Let $q_x$ be the minimum dimension of the irreducible components of $\\operatorname{Spec}\\mathcal O_{X,x}$ and $c_x$ the number of distinct such dimensions [def-weil-pbc-krull-dimension-ring]. On integer sequences define $\\Lambda f(n)=\\sum_{i=0}^n f(i)$, $\\Delta f(0)=f(0)$ and $\\Delta f(n+1)=f(n+1)-f(n)$. Order $A_X(x)=(c_x,\\Delta^{q_x}h_x)$ lexicographically, including lexicographic order on sequences.\n\nThe image of $A_X$ is finite and its upper level sets are closed. Every occurring head is at least $(1,(1,1,\\ldots))$, and equality holds exactly at regular points; every nonregular point has greater head [def-weil-regular-scheme]. Under any smooth $Y\\to X$ and $y\\mapsto x$, with $s$ the dimension of the local ring of the smooth fibre at $y$, one has $h_y=\\Lambda^s h_x$, $q_y=q_x+s$ and $c_y=c_x$, hence $A_Y(y)=A_X(x)$. No constant relative dimension or equality of residue fields is required.\n\nFor each fixed $D\\ge\\dim X$, replacing the sequence entry by $\\Lambda^D\\Delta^{q_x}h_x=\\Lambda^{D-q_x}h_x$ preserves all comparisons, and gives the modified Hilbert--Samuel head. The presentations of [lem-per-scheme-hilbert-samuel-test-presentations], with their full finite tests and retained earlier-center data, also present this modified head: locally at a maximum head its cosupport is exactly the equality locus of that head, and controlled transforms follow its retained-level locus. Each irreducible component of a constant-head locus is a component of a constant locus of the extended Hilbert--Samuel function $H_X(x)=\\Lambda^{\\operatorname{trdeg}_{\\mathbf Q}\\kappa(x)}h_x$ [def-kun-transcendence-degree, def-weil-residue-field] and conversely. Permissible blowups have smooth normal-crossings centers locally in these constant loci. Along any sequence of such permissible blowups from one fixed finite-dimensional initial input, the greatest heads cannot increase and cannot strictly decrease infinitely often. Resolving the presentations of a current maximum head so their cosupports are empty removes that head from the strict transform. All assertions include finite disjoint unions and finite histories with ordered earlier-center ideals. No resolution word or regular maximum-center assertion is included.",
+ "source": {
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "BMT arXiv:0905.3580v1, §6.3 and Remark 6.2, pp.14--15; §§6.1--6.2 for finite decrease and presentations. Remove the common auxiliary dimension shift by finite differences. Online text consulted; local archival PDF WANTED. No Stacks tag supplies the synchronization correction."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-regular-scheme",
+  "lem-per-scheme-hilbert-samuel-test-presentations",
+  "def-kun-transcendence-degree",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "The two operators are mutual inverses on all integer sequences. Indeed $\\Delta\\Lambda f(0)=f(0)$, $\\Delta\\Lambda f(n+1)=\\sum_{i\\le n+1}f(i)-\\sum_{i\\le n}f(i)=f(n+1)$, and $\\Lambda\\Delta f(n)=f(0)+\\sum_{i<n}(f(i+1)-f(i))=f(n)$. If $f,g$ first differ at $j$, their partial sums agree below $j$ and differ at $j$ by $f(j)-g(j)$; their differences also agree below $j$ and differ at $j$ by that amount. Hence every iterate of either operator preserves and reflects strict lexicographic order and equality. This holds for arbitrary integer entries, including negative finite differences.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "First [lem-weil-pbc-finite-type-over-noetherian], applied over the field $\\mathbf Q$, makes $X$ Noetherian; the same holds on finite-type source neighbourhoods and for every closed subscheme of it. For the local map $A=\\mathcal O_{X,x}\\to B=\\mathcal O_{Y,y}$ use [lem-trf-smooth-local-tangent-cone-extension]; smooth affine charts give its essentially smooth local hypothesis. Local rings are essentially of finite type over $\\mathbf Q$. Write $g_A(j)=\\dim_{\\kappa(x)}\\mathfrak m_A^j/\\mathfrak m_A^{j+1}$ and similarly $g_B$. The graded isomorphism says that $g_B(j)$ is the sum of $g_A(i)$ over pairs consisting of $i$ and a monomial in $s$ variables of degree $j-i$. Extension of the residue field does not alter these finite dimensions. Finite composition series of the maximal-ideal filtration, using [lem-weil-pbc-length-additive-short-exact], give $h_A=\\Lambda g_A$ and $h_B=\\Lambda g_B$. Adjoining one variable replaces $g_A$ by $\\Lambda g_A$ since its powers are indexed by all nonnegative degrees. Iterate $s$ times to get $h_y=\\Lambda^s h_x$, also for $s=0$.",
+   "uses": [
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-weil-pbc-length-additive-short-exact",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "The minimal-prime quotient formula in [lem-trf-smooth-local-tangent-cone-extension] identifies the set of local component dimensions upstairs with the downstairs set translated by $s$; irreducible components of an affine spectrum are minimal-prime vanishing sets by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. Translation is injective, so $q_y=q_x+s$ and $c_y=c_x$. Step 1 and Step 2 now give $\\Delta^{q_y}h_y=\\Delta^{q_x+s}\\Lambda^s h_x=\\Delta^{q_x}h_x$. Thus $A_Y(y)=A_X(x)$. One works on finite-type open neighbourhoods of $y$ if the smooth source is not quasi-compact.",
+   "uses": [
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "At a regular local ring $R$ of dimension $d$, [lem-sc-regular-local-domain] gives one minimal prime, so $c=1$ and $q=d$. Choose $d$ generators of its maximal ideal. They form a regular sequence by [lem-weil-pbc-regular-local-generators-regular-sequence]. By [lem-pur-regular-sequence-graded-polynomial], the associated graded pieces have the monomial bases in $d$ variables. Applying length additivity to the filtration gives $h_R=\\Lambda^d\\mathbf1$, where $\\mathbf1=(1,1,\\ldots)$ (for $d=0$ the local ring is a field). Therefore the head is $(1,\\mathbf1)$.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-pur-regular-sequence-graded-polynomial",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "Conversely if $c>1$, the head is greater than the regular head in its first coordinate. If $c=1$, all local components have dimension $q$, so $d=\\dim R=q$. Put $e=\\dim_{\\kappa}\\mathfrak m/\\mathfrak m^2$. The exact sequence with successive factors $\\mathfrak m/\\mathfrak m^2$ and $\\kappa$ gives $h(0)=1$ and $h(1)=1+e$, by [lem-weil-pbc-length-additive-short-exact]. Repeated differences leave entry $0$ equal to $1$ and subtract $q$ from entry $1$, so $\\Delta^q h(1)=1+e-q$. By [lem-weil-pbc-regular-local-cotangent-dimension], $e\\ge d$ with equality exactly for regular $R$. Thus any nonregular point with $c=1$ has its first differing entry at $1$, strictly greater than $1$. This proves the regular-head criterion and strict lower bound.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "For $x\\in X$ let $P(x)=\\{\\dim Z:x\\in Z,\\ Z\\text{ an irreducible component of }X\\}$, $d_-(x)=\\min P(x)$, and $t_x=\\operatorname{trdeg}_{\\mathbf Q}\\kappa(x)$. For each such reduced component $Z$, the finite-type dimension formula gives $\\dim\\mathcal O_{Z,x}=\\dim Z-t_x$: apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] on a domain affine chart of $Z$, and [lem-weil-pbc-finite-type-domain-dimension-trdeg] to identify its topological dimension at $x$ with its function-field transcendence degree. All nonempty affine opens of $Z$ have that same function field. Hence $q_x=d_-(x)-t_x$, $c_x=|P(x)|$, and, writing $B_D$ for the modified head,\n$$B_D(x)=(|P(x)|,\\Lambda^{D-d_-(x)}H_x).$$\nAlso $q_x\\le\\dim X\\le D$, so Step 1 gives directly $\\Lambda^D\\Delta^{q_x}h_x=\\Lambda^{D-q_x}h_x$. This proves the stated conversion without discarding any initial entries of the sequences.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-per-hilbert-specialization-component-persistence] to $z\\rightsquigarrow x$. Its hypotheses allow nilpotents, and our $H$ is exactly its extended local colength sequence. If $H_z=H_x$, it gives equality of the actual components through these points, hence $P(z)=P(x)$. This replaces the argument using a reduced union of components, which would lose nilpotents and would not agree with $X$ near $z$.",
+   "uses": [
+    "lem-per-hilbert-specialization-component-persistence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "For arbitrary $z\\rightsquigarrow x$, every component containing $z$ contains $x$, so $P(z)\\subseteq P(x)$. The preceding step supplies the extra equality-case information; upper semicontinuity alone would not supply it. No assertion about components is deduced merely from equality of sequences for unrelated rings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "Near a fixed $x$, discard the finitely many components (by [lem-weil-pbc-noetherian-finitely-many-components]) not containing $x$, and restrict further until $H_z\\le H_x$ using [lem-per-scheme-hilbert-samuel-test-presentations]. For all remaining $z$, $P(z)\\subseteq P(x)$. If $|P(z)|<|P(x)|$, then $B_D(z)<B_D(x)$. If the cardinalities agree, the finite sets agree, their minima agree, and Step 1 applied to the formula in Step 6 gives $B_D(z)\\le B_D(x)$. This proves upper semicontinuity. Finite image follows because $H$ has finite image on a finite open cover by [lem-per-scheme-hilbert-samuel-test-presentations], whereas $P$ takes values in subsets of the finite set of dimensions of the components of the initial $X$. Thus only finitely many pairs in the formula of Step 6 occur.",
+   "uses": [
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "The two finite stratifications by $H$ and by $B_D$ have exactly the same equality relation on comparable points. One direction is step 7 and Step 6. Conversely, if $z$ specializes to $x$ and $B_D(z)=B_D(x)$, inclusion $P(z)\\subseteq P(x)$ and equality of cardinalities give $P(z)=P(x)$; cancel $\\Lambda^{D-d_-}$ using Step 1 to obtain $H_z=H_x$. Their level sets are locally closed, since both maps are upper semicontinuous with finite image. Give the locally closed level sets their reduced scheme structures. They are Noetherian by Step 2; their finite component decompositions and generic points follow from [lem-weil-pbc-noetherian-finitely-many-components] and [lem-weil-pbc-scheme-sober]. Every irreducible component $S$ has a generic point $\\eta$, and all $x\\in S$ specialize from $\\eta$. The equality relation just proved places $S$ inside one component $T$ of a level set for the other map. Its generic point specializes to $\\eta$, so the reverse equality relation puts all of $T$ back in the original level set. Maximality gives $S=T$. Interchanging the two maps proves both directions of the asserted irreducible-component comparison.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "Locally at $x$, the $B_D(x)$-locus is the $H_x$-locus after shrinking. In the neighbourhood of Step 9, equality of $B_D$ forces $P=P(x)$ and hence equality of $H$. For the converse, each component of the $H_x$-locus containing $x$ has the same profile by step 7; remove the finitely many other components of that locally closed locus. Now equality of $H$ forces equality of $B_D$. Choose the local marked-ideal presentation furnished by [lem-per-scheme-hilbert-samuel-test-presentations] on this neighbourhood. It presents precisely this common locus. Along a smooth center in it $H$ is locally constant, so the theorem's admissible-transform and Hilbert--Samuel nonincrease clauses apply. This argument is local on the center; it does not require $H$ to have one value on disconnected center pieces with different global dimensions.",
+   "uses": [
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "For a smooth center locally constant for $H$, [lem-per-hilbert-test-component-retention] gives $P_{X^\\prime}(y)\\subseteq P_X(x)$ at $y\\mapsto x$ and equality of profiles whenever $H_{X^\\prime}(y)=H_X(x)$. Hilbert--Samuel nonincrease is supplied by [lem-per-scheme-hilbert-samuel-test-presentations]. If the profile cardinality drops, the first entry of $B_D$ drops. If it stays equal, inclusion of finite sets gives the same profile and minimum, and the formula in step 6 converts Hilbert--Samuel nonincrease into $B^\\prime_D(y)\\le B_D(x)$. Equality of the heads then cancels the common summation power to give equality of $H$; the converse uses the cited equality-case profile theorem. The same $D$ works after all ordinary blowups: every surviving component is the closure of an unchanged dense open in an initial component and has the same function field, hence the same dimension by [lem-weil-pbc-finite-type-domain-dimension-trdeg].",
+   "uses": [
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "Choose the presentation of step 11 with $H_0=H_x$ and constant profile $P_0=P(x)$ on its retaining locus. At every prefix of its finite tests, [lem-per-hilbert-test-component-retention] identifies the profile on the retained extended level as $P_0+r$, where $r$ is the number of line products. Locally along that locus it supplies $P_j\\subseteq P_0+r$ and $H_j\\le\\Lambda^rH_0$. The finite-set argument of step 9 and cancellation in step 6 therefore identify the equality locus of the corrected head there with that retained extended level. Under a line product use $D+r$: $\\Lambda^{D+r-(\\min P_0+r)}\\Lambda^rH_0=\\Lambda^r(\\Lambda^{D-\\min P_0}H_0)$, equivalently the normalized head is unchanged by steps 2--3. Initially the equality loci agree by step 11; induction on test length now gives the same allowed centers and transformed cosupports. The marked ideal and all its controlled or prescribed pullback transforms are unchanged, as are the ordered earlier-center ideals. This proves the full local finite-test presentation assertion, using the retained-profile theorem also for the exceptional-intersection auxiliary tests. Resolving all presentations of a maximum makes its equality locus empty by [lem-per-scheme-hilbert-samuel-test-presentations]; step 12 excludes larger values, so that maximum has disappeared.",
+   "uses": [
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-hilbert-samuel-test-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  },
+  {
+   "text": "There is no infinite strictly decreasing sequence of the modified heads arising from a fixed initial $X$ under these admissible histories. Otherwise their first coordinates, nonnegative integers, are eventually constant. There are only finitely many possible global component dimensions, all inherited from the initial scheme by step 12. Choose an infinite subsequence on which $d_-$ is constant. Its second coordinates remain strictly decreasing; cancel the same $\\Lambda^{D-d_-}$ by step 1. This gives an infinite strictly decreasing sequence of extended Hilbert--Samuel values arising under the same admissible histories, contrary to [lem-per-scheme-hilbert-samuel-test-presentations]. The argument uses that theorem's descending-chain assertion for values arising from the fixed initial scheme; it makes no claim about arbitrary integer sequences. Ordered exceptional divisors only restrict admissibility and change none of the numerical calculations. A finite disjoint union has finitely many components and a common dimension bound $D$, so the same proof applies, including to its maximum-head process. The empty scheme has no heads and the assertions are vacuous.",
+   "uses": [
+    "lem-per-scheme-hilbert-samuel-test-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "BMT arXiv:0905.3580v1, §6.3, Gabber dimension-profile correction and Remark 6.2 (pp.14--15), using §6.1 for the extended function and §6.2 for tests. Online source read at https://arxiv.org/html/0905.3580v1; local archival PDF WANTED. No Stacks tag states this component-retention assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-smooth-local-tangent-cone-extension",
+  "lem-weil-pbc-length-additive-short-exact",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-per-hilbert-specialization-component-persistence",
+  "lem-per-scheme-hilbert-samuel-test-presentations",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-per-hilbert-test-component-retention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "BMT arXiv:0905.3580v1 §§6.1--6.3 and Remark 6.2, read online; local PDF WANTED. Explicit integer-sequence and finite-profile assembly, adapting the reduced companion without invoking reduced-only inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized Hilbert Samuel head finite differences minimum component dimension smooth pullback invariant upper semicontinuous descending chain condition for nonreduced schemes",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isReduced_stalk_of_isReduced, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension corrected Hilbert Samuel invariant commutes with arbitrary smooth maps on schemes with nilpotents",
+   "results": "; 8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.casesOn, RingHom.FormallySmooth.respectsIso, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, Algebra.smoothLocus, Algebra.FormallySmooth.mk_lift",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Samuel\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|hilbertSamuel|normalized.*(head|invariant)",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated summation of the local Hilbert function and component dimension count gives Gabber invariant for resolution of singularities",
+   "results": "; 8 hits: Algebra.IsStandardSmooth.relativeDimension, Ideal.inertiaDeg, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, ringKrullDim_le_ringKrullDim_add_card, Algebra.IsStandardSmoothOfRelativeDimension, Ideal.rank_pow_quot_aux, Ideal.finrank_quotient_eq_sum, Algebra.IsStandardSmoothOfRelativeDimension.out",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-scheme-normalized-hilbert-head: Gabber dimension corrected Hilbert Samuel invariant for arbitrary nonreduced schemes and arbitrary smooth pullback",
+   "results": "{\"t\": \"2026-10-24T07:05:01Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-scheme-normalized-hilbert-head: Gabber dimension corrected Hilbert Samuel invariant for arbitrary nonreduced schemes and arbitrary smooth pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"Algebra.IsStandardSmooth.relativeDimension\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\"], \"digest\": \"9b1cf3d35b2a5fd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-scheme-normalized-hilbert-head: dimension corrected Hilbert Samuel functions on nonreduced schemes are upper semicontinuous and invariant under smooth maps",
+   "results": "{\"t\": \"2026-10-24T07:07:10Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-scheme-normalized-hilbert-head: dimension corrected Hilbert Samuel functions on nonreduced schemes are upper semicontinuous and invariant under smooth maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"153fff7d498d4e42\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-scheme-normalized-hilbert-head: iterated differences of local colength sequences correct the minimum component dimension and yield Gabber resolution invariant",
+   "results": "{\"t\": \"2026-10-24T07:07:11Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-scheme-normalized-hilbert-head: iterated differences of local colength sequences correct the minimum component dimension and yield Gabber resolution invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_le_ringKrullDim_add_card\", \"Ideal.rank_pow_quot_aux\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\"], \"digest\": \"3bca113637059595\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Samuel\"",
+   "results": "{\"t\": \"2026-10-24T07:07:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"Samuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|hilbertSamuel|normalized.*Hilbert",
+   "results": "{\"t\": \"2026-10-24T07:07:09Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|hilbertSamuel|normalized.*Hilbert\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures; the hits give basic scheme specialization, reducedness, smoothness, graded-ideal extensionality or dimension inequalities, not the asserted Hilbert--Samuel/component comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-generically-reduced-rational-invariant-calculus",
+  "date": "2026-10-24",
+  "group": "Q84"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (duality), regular-resolution branch: BMT §6.3 and Remark 6.2: component dimensions, common summation shift and synchronization.",
+   "via": [
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-scheme-normalized-hilbert-head",
+  "worker": "stage1",
+  "summary": "Q23: explicit 14-step assembly for arbitrary nonreduced inputs; reuses nonreduced smooth tangent-cone and presentation inputs, extracts two component-retention facts, and proves the normalization, regularity, topology, presentation conversion and descending-chain argument. Corrects the false implication that every input has a regular point; the regular head is a universal lower bound attained exactly on the regular locus. No Lean changes.",
+  "blueprint": "Preserves the ancestor Step 3 regular-resolution branch through the existing rational invariant calculus; realizes BMT 6.3 dimension synchronization and Remark 6.2 below that branch. The latest ancestor blueprint has no Hilbert--Samuel node to reuse.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-local-tangent-cone-extension",
+    "why": "Generic local algebra, dimension or scheme-topology input used as a black box for the BMT normalization calculation; this unit has no competing Hilbert--Samuel algebra statement."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic local algebra, dimension or scheme-topology input used as a black box for the BMT normalization calculation; this unit has no competing Hilbert--Samuel algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic local algebra, dimension or scheme-topology input used as a black box for the BMT normalization calculation; this unit has no competing Hilbert--Samuel algebra statement."
+   },
+   {
+    "node": "lem-pur-regular-sequence-graded-polynomial",
+    "why": "Generic local algebra, dimension or scheme-topology input used as a black box for the BMT normalization calculation; this unit has no competing Hilbert--Samuel algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic local algebra, dimension or scheme-topology input used as a black box for the BMT normalization calculation; this unit has no competing Hilbert--Samuel algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Generic local algebra, dimension or scheme-topology input used as a black box for the BMT normalization calculation; this unit has no competing Hilbert--Samuel algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-local-tangent-cone-extension",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-e2161ca30",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-e2161ca30 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every step and the cited statements. Item statement change against live: the old wording 'least occurring regular head' asserted existence, which is false for Spec Q[e]/e^2 (no regular point) and for the empty scheme. The new text keeps the lower bound (1,1) attained exactly at regular points, so no weakening. The explicit H_X=Λ^{trdeg}h matches BMT §6.1 (p.13), which I read from the arXiv PDF along with §6.2–6.3 and Remark 6.2 (pp.13–15). B_D=(|P|,Λ^{D−d_-}H) is Gabber's (#,Λ^{d−q}H). Steps 1–6 check out: Λ/Δ order, tangent-cone h_y=Λ^s h_x, q+s and c, regular h=Λ^d 1, nonregular entry 1+e−q>1. Steps 7–14 check out: specialization, USC, the generic-point comparison of level-set components, blowup comparison, test induction with D+r, DCC. New node persistence: proved true by the scheme-theoretic-closure, Krull and USC argument (contradiction H_X(x)>H_{X'}(x)≥H_X(z)=H_X(x)). New node test-retention: paragraph 1 generalizes the reduced equality-component-rigidity; its proof uses reducedness only for 'minimal-prime elements are zero divisors', true in any Noetherian ring. Small cases checked: double line, plane plus line, a line product, an exceptional-intersection pullback. Neither node restates the item, and the DAG-wide search found only reduced-only trf nodes. Batch 5: def-trf-hilbert-samuel-presentation is a general definition already in the item's input closure; lem-trf-smooth-local-tangent-cone-extension is general algebra. Neither closure reaches trace, Poincaré, sk-thm or nt- nodes, so both are accepted. Generic-algebra tool_uses are accepted. No fixes."
+ }
+}

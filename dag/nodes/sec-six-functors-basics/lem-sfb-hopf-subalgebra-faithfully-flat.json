@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-hopf-subalgebra-faithfully-flat",
+ "kind": "statement",
+ "title": "Faithful flatness of a finitely generated commutative Hopf subalgebra inclusion",
+ "statement": "Let $k$ be a field [def-weil-field]. A commutative Hopf $k$-algebra here means a unital commutative $k$-algebra $A$ with $k$-algebra maps $\\Delta_A:A\\to A\\otimes_k A$, $\\epsilon_A:A\\to k$, $S_A:A\\to A$ such that $(\\Delta_A\\otimes1)\\Delta_A=(1\\otimes\\Delta_A)\\Delta_A$, $(\\epsilon_A\\otimes1)\\Delta_A=(1\\otimes\\epsilon_A)\\Delta_A=1_A$, and $\\mu_A(S_A\\otimes1)\\Delta_A=\\mu_A(1\\otimes S_A)\\Delta_A=\\eta_A\\epsilon_A$, under the usual tensor unit and associativity identifications; $\\mu_A$ and $\\eta_A$ are multiplication and unit. Tensor products are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Let $A,B$ be commutative Hopf $k$-algebras, each finitely generated as a $k$-algebra [def-weil-pbc-finite-type-algebra]. Let $i:A\\to B$ be an injective $k$-algebra homomorphism satisfying $\\Delta_Bi=(i\\otimes i)\\Delta_A$, $\\epsilon_Bi=\\epsilon_A$, and $S_Bi=iS_A$. Then $B$ is a faithfully flat $A$-module through $i$ [def-weil-pbc-faithfully-flat-ring-map]. No reducedness, perfectness, smoothness, cocommutativity or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 3.31, printed pp.73--74; Definition 3.3, printed pp.65--66, and Definition 3.8, printed p.67, for the commutative Hopf algebra convention."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic closure $K/k$ [def-weil-algebraic-closure]. Put $A_K=A\\otimes_kK$ and $B_K=B\\otimes_kK$. The maps $A\\to A_K$, $B\\to B_K$ are faithfully flat by [lem-weil-pbc-field-extension-base-change-faithfully-flat]. Also $k\\to K$ is faithfully flat (apply that node with $D=k$), so [lem-trf-flat-tensor-preserves-injection] makes $i_K=i\\otimes1$ injective. Generators of $A,B$ tensored with $1$ generate $A_K,B_K$ over $K$. Extend each Hopf structure map by scalars, using the algebra tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property]; each required identity is the original equality tensored with $K$, so $i_K$ is a Hopf homomorphism. We prove faithful flatness over an algebraically closed field in steps 2--5 and descend it in step 6.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-trf-flat-tensor-preserves-injection",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.31, p.73, reduction to an algebraic closure; scalar-extension details expanded."
+   }
+  },
+  {
+   "text": "Now assume $k$ algebraically closed. Apply [lem-sfb-hopf-reduced-core-nilpotent-fibre] to $A$ and choose its finitely generated reduced Hopf subalgebra $C$. Set $C^+=\\ker\\epsilon_C$, $D=A/(C^+A)$, $E=B/(i(C^+)B)$. In particular the augmentation ideal $D^+=\\ker\\epsilon_D$ is nilpotent. The composite $C\\hookrightarrow A\\xrightarrow{i}B$ is injective and Hopf, and $C,B$ are finitely generated over $k$. Hence [lem-sfb-reduced-target-dominant-group-flatness], applied with its domain algebra equal to $C$, makes $C\\to B$ faithfully flat. This uses reducedness of $C$ only; it makes no reducedness assumption on $A$ or $B$.",
+   "uses": [
+    "lem-sfb-hopf-reduced-core-nilpotent-fibre",
+    "lem-sfb-reduced-target-dominant-group-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.31, p.74, reduced Frobenius core H-prime, with 3.23 and 3.29."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hopf-relative-kernel-shear] to $C\\hookrightarrow A\\xrightarrow{i}B$. It gives the Hopf map $\\alpha:D\\to E$ and the isomorphisms $\\Phi_A,\\Phi_B$ with $\\Phi_B(i\\otimes_C1_B)=(\\alpha\\otimes_k1_B)\\Phi_A$. Since $B$ is flat over $C$, [lem-trf-flat-tensor-preserves-injection] applied to the $C$-linear injection $i$ proves $i\\otimes_C1_B$ injective. The displayed square therefore makes $\\alpha\\otimes_k1_B$ injective. The algebra $B$ is nonzero, since its counit sends $1$ to $1\\in k$. Choose a $k$-basis of $B$; it is nonempty, and tensoring any $k$-module complex with $B$ gives a nonempty direct sum of copies of that complex, which is exact exactly when the original is exact, coordinate by coordinate. Thus $B$ is faithfully flat over $k$. Now [lem-trf-faithfully-flat-ltensor-injective-reflection], with $R=k$, $S=B$ and $f=\\alpha$ (interchanging tensor factors), proves that $\\alpha$ is injective.",
+   "uses": [
+    "lem-sfb-hopf-relative-kernel-shear",
+    "lem-trf-flat-tensor-preserves-injection",
+    "lem-trf-faithfully-flat-ltensor-injective-reflection",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.31, p.74, injectivity of a and b and its reflection to O(M) to O(N)."
+   }
+  },
+  {
+   "text": "The quotients $D,E$ are finitely generated, as the images of finite algebra generating families for $A,B$ still generate their quotients. Their induced Hopf structures and the compatibility of $\\alpha$ are part of [lem-sfb-hopf-relative-kernel-shear]. Its domain $D$ has nilpotent augmentation ideal by step 2. Choose a $k$-basis of $E/(\\alpha(D^+)E)$ and lifts in $E$. By [lem-sfb-nilpotent-hopf-basis-lifting] these lifts give an isomorphism $E\\simeq\\bigoplus_J D$ of $D$-modules. The counit of $E$ vanishes on $\\alpha(D^+)E$ and sends $1$ to $1$, so this quotient is nonzero and $J$ is nonempty. For every complex of $D$-modules, tensoring with this free module gives a nonempty direct sum of copies; exactness holds if and only if it holds in each coordinate. Thus $\\alpha:D\\to E$ is faithfully flat in precisely the definition [def-weil-pbc-faithfully-flat-ring-map].",
+   "uses": [
+    "lem-sfb-hopf-relative-kernel-shear",
+    "lem-sfb-nilpotent-hopf-basis-lifting",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.31, pp.73--74, using the nilpotent special case only as a stated input; the freeness-to-faithful-flatness argument is written out."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-faithfully-flat-base-change], the base change $b_i=\\alpha\\otimes_k1_B:D\\otimes_kB\\to E\\otimes_kB$ is faithfully flat: its codomain is $E\\otimes_D(D\\otimes_kB)$ under $(e\\otimes(d\\otimes b))\\mapsto e\\alpha(d)\\otimes b$, with inverse $e\\otimes b\\mapsto e\\otimes(1\\otimes b)$. The isomorphisms and commuting square of [lem-sfb-hopf-relative-kernel-shear] transfer this to $a_i=i\\otimes_C1_B:A\\otimes_CB\\to B\\otimes_CB$. To descend, put $R=A\\otimes_CB$; $A\\to R$ is faithfully flat by the same base-change lemma, since $C\\to B$ is faithfully flat. For any complex $L$ of $A$-modules there is the canonical associativity isomorphism $R\\otimes_A(L\\otimes_AB)\\simeq(R\\otimes_AL)\\otimes_R(B\\otimes_CB)$. Explicitly the isomorphism sends $(a\\otimes b)\\otimes(l\\otimes x)$ to $((a\\otimes b)\\otimes l)\\otimes(x\\otimes1)$; its inverse sends $((a\\otimes b)\\otimes l)\\otimes(x\\otimes y)$ to $(a\\otimes by)\\otimes(l\\otimes x)$. Faithful flatness of $A\\to R$ and of $a_i$ implies that the right side is exact if and only if $L$ is exact. Faithful flatness of $A\\to R$ also says that the left side is exact if and only if $L\\otimes_AB$ is exact. Hence $L\\otimes_AB$ is exact if and only if $L$ is exact, proving faithful flatness of $i$ [def-weil-pbc-faithfully-flat-ring-map].",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-sfb-hopf-relative-kernel-shear",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.31, p.74, final faithfully-flat descent, expanded via the exactness definition; Stacks Tags 00HI and 00HB."
+   }
+  },
+  {
+   "text": "Apply steps 2--5 to $i_K$ from step 1. For a complex $L$ of $A$-modules, the scalar-extension isomorphism\n$$A_K\\otimes_A(L\\otimes_AB)\\simeq(A_K\\otimes_AL)\\otimes_{A_K}B_K$$\nsends $(a\\otimes c)\\otimes(l\\otimes b)$ to $(al\\otimes1)\\otimes(b\\otimes c)$, Its inverse sends $((a\\otimes c)\\otimes l)\\otimes(b\\otimes d)$ to $(a\\otimes cd)\\otimes(l\\otimes b)$; the tensor balancing relations make both maps well defined. The right side is exact if and only if $A_K\\otimes_AL$ is exact, by faithful flatness of $i_K$, and this is equivalent to exactness of $L$ by faithful flatness of $A\\to A_K$. The left side is exact if and only if $L\\otimes_AB$ is exact, again by faithful flatness of $A\\to A_K$. These equivalences prove that $i$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. Since the field extension was made only inside this argument, the original arbitrary field and all the stated absence-of-extra-hypotheses clauses are retained.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.31, p.73, descent of the algebraic-closure reduction, expanded via the exactness definition; Stacks Tag 00HB."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-hopf-reduced-core-nilpotent-fibre",
+  "lem-sfb-reduced-target-dominant-group-flatness",
+  "lem-sfb-hopf-relative-kernel-shear",
+  "lem-trf-faithfully-flat-ltensor-injective-reflection",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-sfb-nilpotent-hopf-basis-lifting",
+  "lem-weil-pbc-faithfully-flat-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 3.31, pp.73--74; explicit Hopf shear formulas and exactness descent expanded, and the invalid A-module direct-summand sentence excluded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated commutative Hopf algebra over a field is faithfully flat over every finitely generated Hopf subalgebra",
+   "results": "8 hits; RingHom.faithfullyFlat_algebraMap_iff, Module.FaithfullyFlat.faithfulSMul, TensorProduct.instHopfAlgebra, Module.FaithfullyFlat.bijective_of_tensorProduct, RingHom.FaithfullyFlat, Module.FaithfullyFlat.injective_of_tensorProduct, RingHom.FaithfullyFlat.flat, Module.FaithfullyFlat.instTensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions and consequences of faithful flatness, tensor Hopf structures, or faithfully flat descent; none proves faithful flatness from a Hopf subalgebra inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inclusion of finitely generated commutative Hopf algebras is a faithfully flat ring homomorphism",
+   "results": "8 hits; RingHom.FaithfullyFlat, RingHom.faithfullyFlat_algebraMap_iff, RingHom.FaithfullyFlat.codescendsAlong_injective, Module.FaithfullyFlat.self, RingHom.FaithfullyFlat.flat, RingHom.FaithfullyFlat.injective, Module.FaithfullyFlat.faithfulSMul, Module.FaithfullyFlat.of_specComap_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions and consequences of faithful flatness, tensor Hopf structures, or faithfully flat descent; none proves faithful flatness from a Hopf subalgebra inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective morphism between finitely generated commutative Hopf algebras over a field is faithfully flat",
+   "results": "8 hits; RingHom.FaithfullyFlat, RingHom.Flat, Module.FaithfullyFlat.toFlat, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, RingHom.FaithfullyFlat.injective, RingHom.FaithfullyFlat.of_bijective, Module.FaithfullyFlat, Module.FaithfullyFlat.of_specComap_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions and consequences of faithful flatness, tensor Hopf structures, or faithfully flat descent; none proves faithful flatness from a Hopf subalgebra inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"FaithfullyFlat\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions and consequences of faithful flatness, tensor Hopf structures, or faithfully flat descent; none proves faithful flatness from a Hopf subalgebra inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "Hopf.*[Ff]lat|[Ff]lat.*Hopf",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions and consequences of faithful flatness, tensor Hopf structures, or faithfully flat descent; none proves faithful flatness from a Hopf subalgebra inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated commutative Hopf algebra is faithfully flat over a Hopf subalgebra",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:38Z",
+    "tool": "leanfinder",
+    "query": "A finitely generated commutative Hopf algebra is faithfully flat over a Hopf subalgebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.FaithfullyFlat.self",
+     "Module.FaithfullyFlat.faithfulSMul",
+     "RingHom.faithfullyFlat_algebraMap_iff",
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "Module.FaithfullyFlat.of_comap_surjective",
+     "Module.FaithfullyFlat.bijective_of_tensorProduct",
+     "Module.FaithfullyFlat.injective_of_tensorProduct",
+     "RingHom.FaithfullyFlat"
+    ],
+    "digest": "86c2b0febc97d603"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define faithful flatness or assume it for a descent consequence; none derives it from a Hopf subalgebra inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective homomorphism between finitely generated commutative Hopf algebras is faithfully flat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:32Z",
+    "tool": "leansearch",
+    "query": "An injective homomorphism between finitely generated commutative Hopf algebras is faithfully flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FaithfullyFlat",
+     "RingHom.Flat",
+     "RingHom.FaithfullyFlat.iff_flat_and_comap_surjective",
+     "Module.FaithfullyFlat",
+     "RingHom.FaithfullyFlat.injective",
+     "Module.FaithfullyFlat.of_flat_of_isLocalHom",
+     "RingHom.FaithfullyFlat.of_bijective",
+     "RingHom.Flat.of_bijective"
+    ],
+    "digest": "6ba05a0dc618bb48"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define faithful flatness or assume it for a descent consequence; none derives it from a Hopf subalgebra inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"FaithfullyFlat\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:32Z",
+    "tool": "loogle",
+    "query": "\"HopfAlgebra\", \"FaithfullyFlat\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define faithful flatness or assume it for a descent consequence; none derives it from a Hopf subalgebra inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "Hopf.*[Ff]lat|[Ff]lat.*Hopf",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:32Z",
+    "tool": "grep",
+    "query": "Hopf.*[Ff]lat|[Ff]lat.*Hopf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define faithful flatness or assume it for a descent consequence; none derives it from a Hopf subalgebra inclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-homomorphism-flat-image",
+  "date": "2026-10-23",
+  "group": "Q133"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: Faithfully flat factorization of an affine group homomorphism. Theorem 3.31, printed pp.73--74; Definition 3.3, printed pp.65--66, and Definition 3.8, printed p.67, for the commutative Hopf algebra convention.",
+   "via": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-hopf-subalgebra-faithfully-flat",
+  "worker": "stage1",
+  "group": "Q154",
+  "summary": "Retained the statement. Followed the reduced-core/infinitesimal-kernel proof of Milne 3.31 with four statement-only inputs. Made the kernel comparison and faithful-flat descent explicit. Identified the invalid A-module splitting claim in the source nilpotent special-case proof and did not use it. Searched the complete DAG, latest blueprint and project Lean, checked all Mathlib search hits and small nonreduced cases.",
+  "blueprint": "The inherited supporting chain serves det-thm-sf-ctf-stability-direct-images, proof (3), through the projective PGL quotient and the affine group homomorphism factorization. This split realizes Milne 3.31, its immediate Hopf-algebra prerequisite, without changing the unit route. The ancestry tool returns None because the created.item chain does not terminate at a surviving imported blueprint node; retained that computed null and the full inherited via/place trace.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-96a510e56",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-96a510e56 (reviewer sub-agent of L); spot-checked: I read the item, the 4 new nodes and every cited statement, against Milne, Algebraic Groups (2017): Thm 3.31 pp.73-74, Prop 3.29 / Rem 3.30, Thm 3.23, Cor 1.69 / Prop 1.70 (p.28), Ex 2-1/2-2. The item statement is unchanged and matches 3.31: any field, no added hypothesis. Step 1 passes to the algebraic closure K: A→A_K and k→K are faithfully flat (field-extension node with D=A,B,k), and the flat-tensor leaf makes i_K injective. Step 2: the core node gives a finitely generated reduced Hopf subalgebra C with nilpotent ker of the counit on D=A/C+A; the reduced-target node, applied to the injective Hopf composite C→B, gives C→B faithfully flat. Step 3: the shear isomorphisms Φ_A, Φ_B and the commuting square, the flat-tensor leaf over C, and the inline argument that k→B is faithfully flat (B nonzero and free) give α injective via the ff-reflection leaf. Step 4: the hypotheses of the basis-lifting node hold; J is nonempty via the counit; a nonempty free module is faithfully flat. Step 5: I checked by hand the base change b_i, its transport to a_i, A→A⊗_C B faithfully flat, and the descent isomorphism R⊗_A(L⊗_A B) ≅ (R⊗_A L)⊗_R(B⊗_C B), forward and inverse. Step 6: I checked the descent from K; the forward formula uses a notational shortcut but is the standard isomorphism. Shear node, checked by hand: C+ generates Hopf ideals; Φ_A is well defined over ⊗_C; the inverse is independent of the lift because Σc1S(c2)=ε(c)=0; both composites are the identity; the square follows from Δ_B i=(i⊗i)Δ_A. Small cases tested: k[t], α_p, k[t]/t^p→k[u]/u^{p^2}, A=k, C=A. All new nodes are true, statement-only, not restatements, and each has 5 recorded searches. Milne's source error is confirmed: on p.74 I_A is a direct summand of A only k-linearly, not as an A-module (k[t]/t^2: any A-linear retraction r has r(t)=t·r(1)=0). The nodes record only the true conclusion and the item does not use the faulty sentence. The report's duplicate check missed one existing node: the core node overlaps lem-sfb-affine-group-frobenius-smooth-image (Q156, same unit, Cartier and Frobenius image in group-scheme language). I accept it as not a duplicate because it adds the Hopf-subalgebra form, finite generation and the nilpotent augmentation fibre; whoever splits it should cite that node. lem-sfb-affine-group-homomorphism-image would make a cycle through lem-sfb-affine-homomorphism-flat-image. lem-sfb-algebraic-group-homomorphism-factorization would also give the item, but through a closure of about 10k nodes off the Milne 3.31 route; I accept the self-contained route. Batch 5: lem-trf-flat-tensor-preserves-injection (Mathlib Module.Flat.lTensor_preserves_injective_linearMap) and lem-trf-faithfully-flat-ltensor-injective-reflection (Module.FaithfullyFlat.lTensor_injective_iff_injective) are generic Mathlib leaves of commutative algebra. Neither is part of the trace formula, Poincaré duality or their proofs: accepted. Every off-unit citation is a Mathlib leaf or a definition, so tool_uses [] is correct. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HopfAlgebra.SubalgebraFaithfullyFlat",
+  "declaration": "HopfAlgebra.faithfullyFlat_of_injective",
+  "file": "lean/Sheaf/RingTheory/HopfAlgebra/SubalgebraFaithfullyFlat.lean",
+  "statement": "theorem faithfullyFlat_of_injective (k : Type u) (A : Type v) (B : Type w) [Field k] [CommRing A] [CommRing B] [HopfAlgebra k A] [HopfAlgebra k B] (hA : (algebraMap k A).FiniteType) (hB : (algebraMap k B).FiniteType) (i : A →ₐc[k] B) (hi : Function.Injective i) (hS : ∀ a : A, antipode k (i a) = i (antipode k a)) : @Module.FaithfullyFlat A B _ _ i.toAlgHom.toRingHom.toAlgebra.toModule",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f54ad0af",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Statement matches node and Milne Thm 3.31 clause by clause: Field k; CommRing+HopfAlgebra for A,B (Mathlib antipode axioms = node's; antipodeAlgHom gives S as algebra map); recorded RingHom.FiniteType hyps; BialgHom gives Δ/ε compatibility, hi injective, hS antipode; conclusion recorded Module.FaithfullyFlat with module induced by i. No reducedness/char/smoothness/cocommutativity binder; independent universes. Node copy differs from side-live only in lean; lean.statement verbatim in file. Single sorry theorem, source and blueprint docstrings, six-step proof plan. No duplicate in Mathlib/Sheaf/WeilConjectures; conventions consistent with ReducedCoreNilpotentFibre and the downstream AffineHomomorphismFlatImage citer. Not recompiled per instructions; no files changed. hS redundant but faithful to node."
+ }
+}

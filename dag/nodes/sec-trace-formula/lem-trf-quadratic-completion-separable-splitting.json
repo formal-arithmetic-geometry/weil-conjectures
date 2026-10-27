@@ -1,0 +1,272 @@
+{
+ "id": "lem-trf-quadratic-completion-separable-splitting",
+ "kind": "statement",
+ "title": "Splitting a nondegenerate quadratic completed local algebra after degree at most two",
+ "statement": "Let $F$ be a field and $S$ a finitely generated commutative $F$-algebra [def-weil-pbc-finite-type-algebra]. Let $\\varepsilon:S\\to F$ be an $F$-algebra homomorphism [def-weil-pbc-algebra-hom-quotient], let $\\mathfrak p=\\ker\\varepsilon$, and put $A=S_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]. Let $a,b,c\\in F$ satisfy $\\Delta=b^2-4ac\\ne0$, and write $q=au^2+buv+cv^2\\in F[[u,v]]$ [def-weil-pbc-multivariate-power-series]. Suppose given an $F$-algebra isomorphism $\\widehat A\\cong F[[u,v]]/(q)$, where completion is at the maximal ideal [def-weil-pbc-adic-completion] and the $F$-action on $\\widehat A$ is induced by $F\\to S\\to A\\to\\widehat A$. There exists a finite separable field extension $K/F$ [def-pc-field-extension] [def-weil-pbc-separable-algebraic-extension] with $[K:F]\\le2$ such that the following holds. Form the algebra tensor product $S_K=S\\otimes_FK$ [def-weil-pbc-module-tensor-product], the $K$-algebra map $\\varepsilon_K:S_K\\to K$, $s\\otimes\\lambda\\mapsto\\varepsilon(s)\\lambda$, its maximal kernel $\\mathfrak q$, and the local ring $B=(S_K)_{\\mathfrak q}$. The structural map $K\\to B/\\mathfrak qB$ is an isomorphism and there are $K$-algebra isomorphisms\n$$\\widehat B\\cong K[[u,v]]/(au^2+buv+cv^2)\\cong K[[U,V]]/(UV).$$\nHere coefficients in the middle ring are transported through the given embedding $F\\hookrightarrow K$; the second isomorphism is induced by an invertible $K$-linear change of the two power-series variables.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0CBT (remark-quadratic-extension) and 0CBU (remark-trivial-quadratic-extension), quadratic splitting and split completed equation; Varieties Tag 0C54 (varieties.tex, lemma-base-change-complete-local-ring), completed presentation after field extension. This is the explicit affine quadratic argument of the returned item, steps 6-8, before the final field-tower assembly."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adic-completion",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The map $\\varepsilon$ is onto, since it fixes $F$, and induces $S/\\mathfrak p\\cong F$. Hence $\\mathfrak p$ is maximal and $A/\\mathfrak pA\\cong F$. Apply [lem-trf-separable-evaluation-local-base-change] with base field $F$, residue extension $F/F$, and extension field $F$ to see that $A$ is Noetherian local. Put $\\mathfrak m=\\mathfrak pA$; it is finitely generated. By [lem-weil-pbc-adic-completion-mod-ideal], $\\widehat A/\\mathfrak m\\widehat A\\cong F$ through the given coefficient map. An element of $\\widehat A$ with nonzero residue is a unit: its coordinates in every $A/\\mathfrak m^j$ are units, and their inverses are compatible, giving its inverse in the inverse limit. Thus $\\mathfrak m\\widehat A$ is its unique maximal ideal. The given $F$-algebra isomorphism with $F[[u,v]]/(q)$ preserves the unique maximal ideals and all their powers; it and its inverse are consequently continuous. The variable ideal of the quotient is its unique maximal ideal, since a series with nonzero constant coefficient has a formal geometric-series inverse.",
+   "uses": [
+    "lem-trf-separable-evaluation-local-base-change",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0C4Y (lemma-change-fields-flat), 0C50 (lemma-change-fields-algebraic-unramified), and the presentation hypothesis of Tag 0C54 (lemma-base-change-complete-local-ring); completion quotient: algebra.tex Tag 05GG, lemma-hathat-finitely-generated."
+   }
+  },
+  {
+   "text": "If $a=0$, then $b\\ne0$; choose $K=F$ and put $L_1=v$, $L_2=bu+cv$, so $L_1L_2=q$ with determinant $-b\\ne0$. For the rest suppose $a\\ne0$, put $\\beta=b/a$, $\\gamma=c/a$, $p(T)=T^2+\\beta T+\\gamma$, and $d=\\beta^2-4\\gamma=\\Delta/a^2\\ne0$. The identity $(2T+\\beta)^2-4p=d$ gives the explicit Bezout identity $(-4/d)p+((2T+\\beta)/d)p'=1$. Thus $p$ is separable by [def-pc-separable-polynomial], including in characteristic two. If $p$ has a root $r\\in F$, choose $K=F$. Otherwise $p$ is irreducible: a factorization into nonunits would have two linear factors, by addition of degrees over a field, and hence yield a root in $F$.",
+   "uses": [
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, remark-quadratic-extension, clause (1): separable quadratic polynomial; explicit discriminant computation."
+   }
+  },
+  {
+   "text": "In the no-root case set $K=F[T]/(p)$ and $r=\\overline T$. By [lem-trf-irreducible-polynomial-quotient-field], $K$ is a field. The power basis in [lem-weil-pbc-monic-quotient-free] is $1,r$, so $[K:F]=2$ and every element is $x+yr$, $x,y\\in F$. Hence $K=F(r)$. Evaluation at $r$ is the quotient map (a polynomial evaluates to its own class), so its kernel is $(p)$; the monic minimal polynomial of $r$ is therefore $p$. Step 2 makes $r$ separable, and [lem-trf-simple-separable-field-extension] gives separability of $K/F$. In the root case or the case $a=0$, $K=F$ has degree one and is separable, since every element $x\\in F$ has minimal polynomial $T-x$ with derivative $1$. Thus all cases give a finite separable $K/F$ of degree at most two.",
+   "uses": [
+    "lem-trf-irreducible-polynomial-quotient-field",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-trf-simple-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09FX, example-monogenic-extension; Tag 09H9, lemma-separably-generated-separable; the degree-two power-basis calculation in the quadratic algebra of curves.tex Tag 0CBT."
+   }
+  },
+  {
+   "text": "When $a\\ne0$, the chosen field $K$ contains a root $r$ of $p$. Set $s=-\\beta-r$. The root equation gives $rs=\\gamma$, so $q=a(u-rv)(u-sv)$. Also $(r-s)^2=\\beta^2-4\\gamma=d\\ne0$, so $r\\ne s$. Put $L_1=u-rv$, $L_2=a(u-sv)$. Their coefficient matrix $M$ has determinant $a(r-s)\\ne0$ and $q=L_1L_2$. Together with the $a=0$ calculation of step 2, we have in every case two independent linear forms over $K$ whose product is exactly $q$, with coefficients mapped from $F$. No division by $2$ occurs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0CBT (remark-quadratic-extension) and 0CBU (remark-trivial-quadratic-extension), the explicit split quadratic equation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-separable-evaluation-local-base-change] now with base field $F$, residue extension $F/F$, and the constructed $K$. Its evaluation map is exactly $\\varepsilon_K$, so its maximal kernel is the stated $\\mathfrak q$ and its localization is $B$. It gives $B/\\mathfrak qB\\cong K$ by evaluation; the inverse is the structural map, since evaluation fixes $K$. The coefficient map $F\\to\\widehat A$ is a section of the residue map by step 1. Invert the given isomorphism to obtain the continuous presentation $F[[u,v]]\\twoheadrightarrow\\widehat A$ with kernel $(q)\\subseteq(u,v)$. Therefore [lem-trf-field-extension-completion-presentation], with $n=2$ and the single relation $q$, gives the required $K$-algebra isomorphism $\\widehat B\\cong K[[u,v]]/(q)$, with all coefficients extended by $F\\hookrightarrow K$.",
+   "uses": [
+    "lem-trf-separable-evaluation-local-base-change",
+    "lem-trf-field-extension-completion-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0C4Y and 0C50 at the evaluation point; Tag 0C54, lemma-base-change-complete-local-ring, extension of the specified presentation."
+   }
+  },
+  {
+   "text": "The field case of [lem-weil-pbc-power-series-field-cohen-regular-complete] makes $K[[u,v]]$ and $K[[U,V]]$ complete for their variable ideals. Since $L_1,L_2\\in(u,v)$, [lem-weil-pbc-power-series-universal-property-complete] defines a $K$-algebra map $\\phi:K[[U,V]]\\to K[[u,v]]$, $(U,V)^{\\mathsf T}\\mapsto M(u,v)^{\\mathsf T}$. The same statement applied to $M^{-1}(U,V)^{\\mathsf T}$ defines $\\psi$ in the other direction. The two composites fix every constant and variable by $MM^{-1}=M^{-1}M=1$; uniqueness in that universal property makes both composites the identity. Thus the invertible linear change extends to an isomorphism of the power-series rings.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBU, remark-trivial-quadratic-extension, (1),(2),(5); formal substitution uses algebra.tex Tag 032C and the universal-property passage of more-algebra.tex Tag 07NL."
+   }
+  },
+  {
+   "text": "We have $\\phi(UV)=L_1L_2=q$ and $\\psi(q)=UV$. Consequently the maps send the two principal ideals onto one another and descend to inverse $K$-algebra maps $K[[U,V]]/(UV)\\cong K[[u,v]]/(q)$: the map on a quotient class is the class of its image, and the composites are identities because they were identities before quotienting. Invert this isomorphism and compose with step 5 to obtain both isomorphisms asserted in the statement. The second is induced by the specified invertible linear change.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBU, remark-trivial-quadratic-extension, split completed equation (5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-separable-evaluation-local-base-change",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "def-pc-separable-polynomial",
+  "lem-trf-irreducible-polynomial-quotient-field",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-trf-simple-separable-field-extension",
+  "lem-trf-field-extension-completion-presentation",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Explicit affine proof of Tags 0CBT and 0CBU, using varieties.tex Tag 0C54 and the two elementary field-theory Mathlib leaves; all characteristic-two calculations are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational point with completed local algebra F[[u,v]]/(a*u^2+b*u*v+c*v^2) and nonzero discriminant becomes a rational split node after a finite separable extension of degree at most two",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PerfectField.splits_of_natSepDegree_eq_one\", \"module\": \"Mathlib/FieldTheory/SeparableDegree\", \"type\": \"∀ {E : Type v} [inst : Field E] {K : Type w} [inst_1 : Field K] [PerfectField K] {f : Polynomial E} (i : E →+* K),\\n  f.natSepDegree = 1 → (Polynomial.map i f).Splits\", \"doc\": \"Let $ K $ be a perfect field, let $ f $ be a polynomial over a field $ E $, and let $ i : E \\\\to K $ be a ring homomorphism. If the natural separable degree of $ f $ is 1, then the polynomial $ f $, wh\"}\n  {\"name\": \"Polynomial.exists_finset_of_splits\", \"module\": \"Mathlib/FieldTheory/Separable\", \"type\": \"∀ {F : Type u} [inst : Field F] {K : Type v} [inst_1 : Field K] (i : F →+* K) {f : Polynomial F},\\n  f.Separable →\\n    (Polynomial.map i f).Splits →\\n      ∃ s, Polynomial.map i f = Polynomial.C (i f.leadingCoeff) * ∏ a ∈ s, (Polynomial.X - Polynomial.C a)\", \"doc\": \"Let $ F $ and $ K $ be fields, $ i : F \\\\to K $ a ring homomorphism, and $ f \\\\in F[X] $ a separable polynomial. If $ f $ splits in $ K $, then there exists a finite set $ S \\\\subset K $ such that $ f $ \"}\n  {\"name\": \"IsSepClosed.splits_codomain\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ {k : Type u} [inst : Field k] {K : Type v} [inst_1 : Field K] [IsSepClosed K] {f : k →+* K} (p : Polynomial k),\\n  p.Separable → (Polynomial.map f p).Splits\", \"doc\": \"If $ K $ is a separably closed field and $ p $ is a separable polynomial over a field $ k $, then the polynomial obtained by applying the ring homomorphism $ f : k \\\\to K $ to the coefficients of $ p $\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"IsSepClosed.splits_domain\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ {k : Type u} [inst : Field k] {K : Type v} [inst_1 : Field K] [IsSepClosed k] {f : k →+* K} (p : Polynomial k),\\n  p.Separable → (Polynomial.map f p).Splits\", \"doc\": \"If $ k $ is a separably closed field, then for any separable polynomial $ p $ over $ k $ and any ring homomorphism $ f : k \\\\to K $ to a field $ K $, the polynomial obtained by applying $ f $ to the co\"}\n  {\"name\": \"Polynomial.SplittingFieldAuxAux\", \"module\": \"Mathlib/FieldTheory/SplittingField/Construction\", \"type\": \"ℕ → {K : Type u} → [inst : Field K] → Polynomial K → (L : Type u) × (x : Field L) × Algebra K L\", \"doc\": \"Given a natural number $ n $, a field $ K $, and a polynomial $ f $ over $ K $, this recursive construction builds a field extension $ L $ of $ K $ by successively adjoining roots of irreducible facto\"}\n  {\"name\": \"Polynomial.splits_of_comp\", \"module\": \"Mathlib/Algebra/Polynomial/Splits\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {f : Polynomial R} {S : Type u_4} [inst_1 : CommRing S] [inst_2 : IsDomain S]\\n  [IsSimpleRing R] (i : R →+* S),\\n  (Polynomial.map i f).Splits → (∀ a ∈ (Polynomial.map i f).roots, a ∈ i.range) → f.Splits\", \"doc\": \"Let $ R $ be a commutative ring and $ S $ an integral domain. If $ f $ is a polynomial over $ R $, and $ i : R \\to S $ is a ring homomorphism such that the image $ \\text{map}_i(f) $ splits in $ S $ and \"}\n  {\"name\": \"Polynomial.SplittingFieldAux\", \"module\": \"Mathlib/FieldTheory/SplittingField/Construction\", \"type\": \"ℕ → {K : Type u} → [inst : Field K] → Polynomial K → Type u\", \"doc\": \"Given a natural number $ n $, a field $ K $, and a polynomial $ f $ over $ K $, this recursive construction builds a field extension $ L $ of $ K $ by successively adjoining roots of irreducible facto\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: polynomial splitting, standard smooth presentations, cotangent-space maps and generic power-series evaluation do not identify the base-changed completed quadratic local ring with the split node. The grep Evaluation.lean:255 hit concerns topological inseparability, not field separability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splitting a nondegenerate binary quadratic completed local ring by a separable quadratic field extension and extending the completed presentation of a rational scheme point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: polynomial splitting, standard smooth presentations, cotangent-space maps and generic power-series evaluation do not identify the base-changed completed quadratic local ring with the split node. The grep Evaluation.lean:255 hit concerns topological inseparability, not field separability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let S be a finitely generated F algebra with an F algebra evaluation S to F. If the completion at its kernel is F[[u,v]] modulo a nondegenerate binary quadratic form, then a separable field extension K of degree at most two makes the completion of S tensor K at the evaluation kernel isomorphic to K[[u,v]]/(uv)",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.CotangentSpace.compEquiv_symm_inr\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given a homomorphism $ f $ between algebras $ P $ and $ P' $ with generators, this constructs the canonical homomorphism between their algebra extensions $ P.\\\\text{toExtension} $ and $ P'.\\\\text{toExte\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.compEquiv_symm_zero\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Applying the inverse of the composition equivalence between cotangent spaces to the pair $(0, x)$ yields the image of $x$ under the linear map induced by the algebra extension homomorphism composed wi\"}\n  {\"name\": \"Algebra.Extension.tensorCotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  {P : Algebra.E\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures, and algebra extensions $ P $ and $ Q $, if the linear map induced by the kernel of $ Q $'s algebra map is bijective,\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentInvFun\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  {P : Algebra.E\", \"doc\": \"A linear map from the cotangent module $\\\\ker(\\\\phi_Q)/\\\\ker(\\\\phi_Q)^2$ of an algebra extension $Q$ to the tensor product $T \\\\otimes_S \\\\ker(\\\\phi_P)/\\\\ker(\\\\phi_P)^2$ over a semiring $S$, constructed using \"}\n  {\"name\": \"retractionKerToTensorEquivSection\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                [inst_5 : Algebra R S] →\\n                  [inst_6 : IsSc\", \"doc\": \"There is a canonical equivalence between linear retractions $ l $ of the kernel-to-tensor map $ \\\\kerToTensor_{R,P,S} $ (satisfying $ l \\\\circ \\\\kerToTensor = \\\\text{id} $) and algebra homomorphism sectio\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: polynomial splitting, standard smooth presentations, cotangent-space maps and generic power-series evaluation do not identify the base-changed completed quadratic local ring with the split node. The grep Evaluation.lean:255 hit concerns topological inseparability, not field separability."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Algebra.IsSeparable",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: polynomial splitting, standard smooth presentations, cotangent-space maps and generic power-series evaluation do not identify the base-changed completed quadratic local ring with the split node. The grep Evaluation.lean:255 hit concerns topological inseparability, not field separability."
+  },
+  {
+   "tool": "grep",
+   "query": "discrim|[Ss]plit|[Qq]uadratic|[Ss]eparab",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean\", \"line\": \"100\", \"text\": \"        rw [coeff_C]; split_ifs <;> [exact hx; exact J.zero_mem]\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean\", \"line\": \"108\", \"text\": \"        split_ifs with hd' <;> [exact (h' (hd' ▸ hd'_le)).elim; exact J.zero_mem]\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"line\": \"86\", \"text\": \"  split_ifs with h\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"line\": \"141\", \"text\": \"  split_ifs <;> simp_all\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"line\": \"270\", \"text\": \"    split_ifs <;> [apply h; rfl]\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"line\": \"324\", \"text\": \"  split_ifs with h₁ h₂ h₃ h₃ h₂ <;> try rfl\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"line\": \"495\", \"text\": \"    split_ifs at h with H\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"line\": \"521\", \"text\": \"        split_ifs with h\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"line\": \"628\", \"text\": \"        split_ifs with hi\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/PiTopology.lean\", \"line\": \"189\", \"text\": \"  split_ifs\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"81\", \"text\": \"  split_ifs with h1 h2 h3\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"184\", \"text\": \"  split_ifs with h1 h2 h3\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"194\", \"text\": \"  split_ifs with h1 h2 h3\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"205\", \"text\": \"  split_ifs with h1 h2 h3\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"line\": \"246\", \"text\": \"  split_ifs with h\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"line\": \"255\", \"text\": \"-- inseparable ones.\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"line\": \"216\", \"text\": \"      split_ifs <;>\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"line\": \"182\", \"text\": \"    split_ifs <;> simp [ha.const_coeff i]\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"line\": \"643\", \"text\": \"    split_ifs with h\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"line\": \"686\", \"text\": \"  split_ifs with h\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/LexOrder.lean\", \"line\": \"57\", \"text\": \"  split_ifs with h\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"223\", \"text\": \"  split_ifs with h\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"597\", \"text\": \"    split_ifs with h\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"616\", \"text\": \"  split_ifs with hd\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"650\", \"text\": \"    split_ifs with hd\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: polynomial splitting, standard smooth presentations, cotangent-space maps and generic power-series evaluation do not identify the base-changed completed quadratic local ring with the split node. The grep Evaluation.lean:255 hit concerns topological inseparability, not field separability."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*baseChange|baseChange.*completion|[Cc]omplet.*[Rr]esidue|[Rr]esidue.*[Cc]omplet",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"line\": \"81\", \"text\": \"      (W.baseChange (p.adicCompletion K)).localEulerFactor (p.adicCompletionIntegers K)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: polynomial splitting, standard smooth presentations, cotangent-space maps and generic power-series evaluation do not identify the base-changed completed quadratic local ring with the split node. The grep Evaluation.lean:255 hit concerns topological inseparability, not field separability."
+  },
+  {
+   "tool": "grep",
+   "query": "quadratic|discrim|[Tt]ensor[Pp]roduct|[Ss]eparable",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"line\": \"255\", \"text\": \"-- inseparable ones.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: polynomial splitting, standard smooth presentations, cotangent-space maps and generic power-series evaluation do not identify the base-changed completed quadratic local ring with the split node. The grep Evaluation.lean:255 hit concerns topological inseparability, not field separability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nondegenerate binary quadratic power series quotient becomes K[[u,v]]/(uv) after a separable field extension of degree at most two",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: \n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a rational local algebra after a separable quadratic extension splits a binary quadratic power series equation into uv",
+   "results": "{\"t\": \"2026-10-23T09:30:02Z\", \"tool\": \"leanfinder\", \"query\": \"Completion of a rational local algebra after a separable quadratic extension splits a binary quadratic power series equation into uv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuadraticAlgebra.lift_apply_apply\", \"PowerSeries.weierstrassUnit_mul\", \"QuadraticAlgebra.lift\", \"PowerSeries.weierstrassDistinguished_mul\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.IsWeierstrassFactorization.unique\", \"PowerSeries.exists_isWeierstrassFactorization\", \"QuadraticAlgebra.mk_eq_add_smul_omega\"], \"digest\": \"2859493fa03148a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned polynomial, quadratic-algebra, Weierstrass, residue-field, and power-series completion declarations do not state the completed local-ring base-change and degree-at-most-two splitting conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, AdicCompletion",
+   "results": "{\"t\": \"2026-10-23T09:30:03Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"MvPowerSeries.toAdicCompletionInv\", \"MvPowerSeries.toAdicCompletion\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\", \"MvPowerSeries.toAdicCompletion_coe\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"494e5200ee9779cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned polynomial, quadratic-algebra, Weierstrass, residue-field, and power-series completion declarations do not state the completed local-ring base-change and degree-at-most-two splitting conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "quadratic|discrim|[Ss]eparable",
+   "results": "{\"t\": \"2026-10-23T09:30:29Z\", \"tool\": \"grep\", \"query\": \"quadratic|discrim|[Ss]eparable\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\"], \"digest\": \"65d926aac8a522b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned polynomial, quadratic-algebra, Weierstrass, residue-field, and power-series completion declarations do not state the completed local-ring base-change and degree-at-most-two splitting conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A binary quadratic completed local ring splits after a separable field extension of degree at most two",
+   "results": "{\"t\": \"2026-10-23T09:30:29Z\", \"tool\": \"leansearch\", \"query\": \"A binary quadratic completed local ring splits after a separable field extension of degree at most two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.splits_of_separable\", \"IsSepClosed.splits_domain\", \"Polynomial.splits_of_natDegree_eq_two\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Algebra.isSeparable_residueField_iff\", \"IsSepClosed.factors_of_separable\", \"Algebra.FormallyEtale.of_isSeparable\"], \"digest\": \"e7c0e4c331bc04ab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned polynomial, quadratic-algebra, Weierstrass, residue-field, and power-series completion declarations do not state the completed local-ring base-change and degree-at-most-two splitting conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational ordinary double point becomes a split node over a finite separable extension of degree at most two with completion K[[x,y]]/(xy)",
+   "results": "{\"t\": \"2026-10-23T09:54:03Z\", \"tool\": \"leanfinder\", \"query\": \"A rational ordinary double point becomes a split node over a finite separable extension of degree at most two with completion K[[x,y]]/(xy)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.isGoodReduction_iff\"], \"digest\": \"b3564e2fde297ab2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned polynomial, quadratic-algebra, Weierstrass, residue-field, and power-series completion declarations do not state the completed local-ring base-change and degree-at-most-two splitting conclusion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-point-finite-separable-splitting",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal local-equation input in the first proof of Stacks 0CBY, second paragraph: splitting the separable degree-two branch algebra; returned item steps 6-8, quadratic construction, linear substitutions, and completed-presentation base change.",
+   "via": [
+    "lem-trf-nodal-point-finite-separable-splitting",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-quadratic-completion-separable-splitting",
+  "worker": "stage1",
+  "summary": "Statement preserved. Wrote seven steps: rational residue and continuity, characteristic-free quadratic discriminant calculation, degree-one or degree-two separable field, independent linear factors, completed base change, inverse formal substitutions, quotient assembly. Reused existing completion and power-basis nodes; added two exact Mathlib leaves for irreducible polynomial quotient fields and simple separable extensions.",
+  "blueprint": "The historical nodal branch of lem-trf-local-term-locality, through the recorded via chain and lem-trf-nodal-point-finite-separable-splitting: Stacks 0CBY first proof second paragraph, separable quadratic branch algebra and its splitting (0CBT/0CBU). Steps 2-4 realize quadratic splitting; steps 1,5 the rational completed presentation after field extension (0C54); steps 6-7 the split completed equation. The newest blueprint no longer contains this historical nodal proof paragraph; ancestry is retained rather than asserted to be current text.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "Generic finitely generated ideal completion quotient identifies the completed maximal ideal and residue field; no node of this unit supplies the general completion assertion."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Its field case supplies variable-adic completeness for the formal linear substitutions; no in-unit node supplies this generic power-series ring structure."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Supplies existence and uniqueness of formal substitution maps into complete rings, used with mutually inverse linear matrices; this is a generic algebra tool, not replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-70bf62667",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-70bf62667 (reviewer sub-agent of L); spot-checked: I read the item in full: its unchanged statement agrees with Stacks curves 0CBT/0CBU (l.4303/4331) and with how parent lem-trf-nodal-point-finite-separable-splitting step 3 uses it. All 7 steps are correct against the statements of the nodes they cite. Step 1: separable-evaluation-local-base-change applied with k=F, residue field F, K=F gives A Noetherian local; adic-completion-mod-ideal gives the completed residue field F; the isomorphism matches maximal ideals, so it and its inverse are continuous; the structural map is a section. Step 2: the Bezout identity (−4/d)p+((2T+β)/d)p'=1 holds in characteristic 2; for a=0 the factorization v(bu+cv) has determinant −b. Step 3: the quotient-field leaf, the 1,r power basis and minpoly=p, then the simple-separable leaf. Step 4: rs=γ, q=a(u−rv)(u−sv), (r−s)²=d, determinant a(r−s). Step 5: the hypotheses of field-extension-completion-presentation are met (section σ, kernel (q)⊆(u,v), n=2), and B/qB≅K comes from the evaluation node. Steps 6–7: substitution through the power-series universal property with uniqueness, then the quotient isomorphism. Both new nodes are exact Mathlib leaves with no proof content: AdjoinRoot.instField (AdjoinRoot.lean l.521-523, tag 09FX) and IntermediateField.isSeparable_adjoin_simple_iff_isSeparable (SeparableDegree.lean l.791-801, used through .2). A DAG-wide search found no duplicate: relative-closure quotient field, pth-root quotient, separable permanence and quadratic-completion-geometric-splitting (over the algebraic closure) are all different statements. No cycle; route is in-unit; the 3 declared tool uses are generic power-series/completion lemmas and are accepted. Edge cases checked: a=0, root in F, F2 with T²+T+1, Q with T²+1. No SGA source used, no fixes made."
+ }
+}

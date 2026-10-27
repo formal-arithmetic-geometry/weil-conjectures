@@ -1,0 +1,240 @@
+{
+ "id": "lem-coef-locally-closed-hom-generator",
+ "kind": "statement",
+ "title": "Evaluation-normalized Hom comparison on locally closed generators",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and integers $n\\ge m\\ge1$. Put $A=\\mathcal O_E/(\\varpi_E^n)$, $B=\\mathcal O_E/(\\varpi_E^m)$ with the quotient map [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. Use ordinary unbounded derived categories of sheaves of modules over constant coefficient rings on small etale sites [def-weil-pbc-derived-categories]. Write $F_T=-\\otimes_A^LB$ on a scheme $T$, and $H_R(U,V)=R\\mathcal Hom_R(U,V)$ for $R=A,B$ [lem-pur-derived-change-of-rings, def-pur-derived-internal-hom]. The full subcategory $D^b_{ctf}$ consists of complexes with bounded constructible cohomology and Tor amplitude in some finite interval $[a,b]$: $\\mathcal H^i(K\\otimes_R^L W)=0$ for every degree-zero module sheaf $W$ and $i\\notin[a,b]$ [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. Let $g:Z\\hookrightarrow X$ be closed, $j:S\\hookrightarrow Z$ open, and $s=gj$. Set $Rs_{!,R}=g_{*,R}j_!$, $Rs_R^!=j^*Rg_R^!$ over $R=A,B$, using the etale closed-support adjunction [def-weil-closed-immersion, def-weil-open-immersion, lem-exc-closed-ambient, def-amb-etale-compact-support]. Let $L$ be a locally constant sheaf with finite projective $A$-module values on $S_{\\mathrm{et}}$, in degree zero, and let $M\\in D^b_{ctf}(X,A)$. Put $N=Rs_A^!M$, $Q=H_A(L,N)$, and $L_B=F_SL$, $M_B=F_XM$. Let $q:F_XRs_{!,A}L\\xrightarrow{\\sim}Rs_{!,B}L_B$ be canonical open-extension/closed-direct-image scalar comparison; let $b:F_SN\\xrightarrow{\\sim}Rs_B^!M_B$ be the exceptional comparison characterized by $\\epsilon_{s,B}\\circ Rs_{!,B}(b)\\circ q_{s,N}=F_X\\epsilon_{s,A}$. Let $c:F_XRs_{*,A}Q\\to Rs_{*,B}F_SQ$ be the ordinary direct-image scalar comparison defined by the ordinary counit, and $u:F_SQ\\to H_B(L_B,F_SN)$ the transpose of reduced evaluation. Write $I_R:Rs_{*,R}H_R(L_R,Rs_R^!M_R)\\xrightarrow{\\sim}H_R(Rs_{!,R}L_R,M_R)$ for canonical internal adjunction, where $L_A=L$, $M_A=M$.\n\nThen $N,Q$ are finite-Tor bounded constructible, all factors in the following derived-category composite are isomorphisms, and that composite equals the evaluation-transpose map $v_{Rs_{!,A}L,M}$:\n$$F_XH_A(Rs_{!,A}L,M)\\xrightarrow{F_XI_A^{-1}}F_XRs_{*,A}Q\\xrightarrow{c}Rs_{*,B}F_SQ\\xrightarrow{Rs_*u}Rs_{*,B}H_B(L_B,F_SN)\\xrightarrow{Rs_*H_B(1,b)}Rs_{*,B}H_B(L_B,Rs_B^!M_B)\\xrightarrow{I_B}H_B(Rs_{!,B}L_B,M_B)\\xrightarrow{H_B(q,1)}H_B(F_XRs_{!,A}L,M_B).$$\nHere the compact-support projection map in $I_R$ is the one formed from the open projection and closed proper projection maps. In particular it is this specified comparison, not merely some isomorphism between its endpoints, that is invertible for these locally closed generators.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof paragraphs 3–4; returned proof steps 7, 8; extracted argument preserved verbatim in Q07 report, not a new literature theorem"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-exc-closed-ambient",
+  "def-amb-etale-compact-support",
+  "def-coef-internal-adjunction-comparison-maps",
+  "def-coef-etale-locally-closed-comparison-maps"
+ ],
+ "proof": [
+  {
+   "text": "Apply etaleLocallyClosedShriekComparisons to M, obtaining N finite-Tor bounded constructible, the actual exceptional map b invertible and the pasted counit identity. The coefficient map and adjoint presentations agree definitionally.",
+   "uses": [
+    "lem-coef-etale-locally-closed-shriek"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply locallyProjectiveCoefficientHom on S to L and N. It gives L[0] and Q finite-Tor bounded constructible and invertibility of the specified evaluation transpose u. The support-comparison clause of the shriek theorem applied to L[0] makes q invertible.",
+   "uses": [
+    "lem-coef-locally-projective-coefficient-hom",
+    "lem-coef-etale-locally-closed-shriek"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply locallyClosedOrdinaryComparison_isIso to Q and its finite-Tor bounded constructibility. The new obligation contains exactly the finite-type geometric checks, direct-image theorem application and canonical compositor cancellation.",
+   "uses": [
+    "lem-coef-locally-closed-ordinary-comparison-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply locallyClosedInternalAdjunction_isIso over A and B to the specified internalAdjunction maps. Functors preserve these isomorphisms, their inverses and u,b,q. The intermediate lemma is the proper/open projection adjunction step and contains no coefficient comparison or constructibility assertion.",
+   "uses": [
+    "lem-coef-locally-closed-internal-adjunction-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set b=asIso of the actual exceptional coefficient map. The shriek theorem supplies exactly CounitCompatible, so apply internalAdjunction_pairing_change with M,L[0],N,Q. Precompose the equality with scalar extension of the inverse of I_A, cancel the inverse pair and expand functoriality of the direct image on u followed by Hom(1,b). This gives precisely the displayed composite equal to the evaluation transpose. Combine the invertibility assertions above.",
+   "uses": [
+    "lem-coef-internal-adjunction-pairing-change",
+    "lem-coef-locally-closed-pairing-cancellation",
+    "def-coef-normalized-comparison-word"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-locally-closed-shriek",
+  "lem-coef-locally-projective-coefficient-hom",
+  "lem-coef-locally-closed-ordinary-comparison-iso",
+  "lem-coef-locally-closed-internal-adjunction-iso",
+  "lem-coef-internal-adjunction-pairing-change",
+  "lem-coef-locally-closed-pairing-cancellation",
+  "def-coef-normalized-comparison-word"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof paragraphs 3--4; ordinary closed/open comparison, local finite-projective calculation, compositor cancellation, conjugate projection and pairing equality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of extension by zero from locally closed stratum commutes with finite coefficient reduction via exceptional adjunction",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict [Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic]; AlgebraicGeometry.Proj.fromOfGlobalSections_resLE [Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic]; ModuleCat.Tilde.toOpen_res [Mathlib/AlgebraicGeometry/Modules/Tilde]; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux [Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated]; AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι [Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic]; AlgebraicGeometry.Scheme.ofRestrict_app [Mathlib/AlgebraicGeometry/OpenImmersion]; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app [Mathlib/AlgebraicGeometry/OpenImmersion]; LightCondensed.ihomPoints_symm_comp [Mathlib/Condensed/Light/InternallyProjective] No match: open scheme restrictions, underived module sheaf pushforward, and Ext infrastructure do not state this normalized stratum comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change comparison for derived Hom from shriek pushforward finite projective local system",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.pushforwardSections_unitHomEquiv [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; SheafOfModules.pushforwardSections_coe [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; SheafOfModules.pushforwardNatTrans_app_val_app [Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous]; SheafOfModules.pushforwardNatTrans_app_val_app_apply [Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous]; SheafOfModules.unitToPushforwardObjUnit [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; SheafOfModules.pushforward_map_val [Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous]; SheafOfModules.pushforwardSections [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; PresheafOfModules.pushforward_map_app_apply' [Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward] No match: open scheme restrictions, underived module sheaf pushforward, and Ext infrastructure do not state this normalized stratum comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\", \"hom\"",
+   "results": "[loogle] OK 0 hit(s); No hits. No match: open scheme restrictions, underived module sheaf pushforward, and Ext infrastructure do not state this normalized stratum comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|exceptionalInverse|internalAdjunction",
+   "results": "[grep] OK 0 hit(s); No hits. No match: open scheme restrictions, underived module sheaf pushforward, and Ext infrastructure do not state this normalized stratum comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally closed extension by zero internal Hom derived coefficient comparison",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero [Mathlib.CategoryTheory.Abelian.Projective.Ext]; CategoryTheory.Abelian.Ext.mk₀_hom [Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic]; CategoryTheory.Abelian.Ext.zero_hom [Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic]; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat [Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure]; CochainComplex.HomComplex.Cochain.ext₀_iff [Mathlib.Algebra.Homology.HomotopyCategory.HomComplex]; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero [Mathlib.CategoryTheory.Abelian.Injective.Ext]; CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsIsZero [Mathlib.CategoryTheory.ObjectProperty.Extensions]; CategoryTheory.hasExt_of_hasDerivedCategory [Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic] No match: open scheme restrictions, underived module sheaf pushforward, and Ext infrastructure do not state this normalized stratum comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from locally closed extension by zero commutes with quotient coefficients via evaluation and exceptional adjunction",
+   "results": "8 hits: LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, Profinite.NobelingProof.GoodProducts.square_commutes, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'. Read relevant Mathlib sources: these give underived light-condensed internal Hom, ordinary scalar adjunctions, generic currying, or Ext; none gives the etale locally-closed derived comparison with its normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|exceptionalInverse|internalAdjunction",
+   "results": "0 hits: . Read relevant Mathlib sources: these give underived light-condensed internal Hom, ordinary scalar adjunctions, generic currying, or Ext; none gives the etale locally-closed derived comparison with its normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"curry\"",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.curry'_ihom_map, CategoryTheory.MonoidalClosed.uncurry_ihom_map, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc, CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app, CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app_assoc, CategoryTheory.MonoidalClosed.ihomCurryIso, CategoryTheory.MonoidalClosed.ihomCurry. Read relevant Mathlib sources: these give underived light-condensed internal Hom, ordinary scalar adjunctions, generic currying, or Ext; none gives the etale locally-closed derived comparison with its normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from extension by zero and finite change of coefficients on etale sheaves",
+   "results": "8 hits: CategoryTheory.sheafHom, CategoryTheory.Abelian.Ext.mk₀_hom, SheafOfModules.Hom, CategoryTheory.Abelian.Ext.addEquiv₀, CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.linearEquiv₀. Read relevant Mathlib sources: these give underived light-condensed internal Hom, ordinary scalar adjunctions, generic currying, or Ext; none gives the etale locally-closed derived comparison with its normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of internal Hom out of a shriek extension of a finite projective local system equals the evaluation transpose",
+   "results": "8 hits: LightCondensed.ihomPoints, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints_symm_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.RestrictionCoextensionAdj.app'. Read relevant Mathlib sources: these give underived light-condensed internal Hom, ordinary scalar adjunctions, generic currying, or Ext; none gives the etale locally-closed derived comparison with its normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-coef-finite-hom",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraphs 3–4; returned proof steps 7, 8",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-locally-closed-hom-generator",
+  "worker": "stage1",
+  "summary": "Q136: preserve the full statement and split the generator argument into geometric applicability, finite-projective Hom reduction, normalized exceptional and ordinary scalar comparisons, factor invertibility, and cancellation of the existing pairing identity. Reuse all existing nodes; create no new nodes. Check every cited statement and exact map normalization.",
+  "blueprint": "thm-coef-finite-hom, proof paragraphs 2–3: stratum internal Hom, finite-Tor domain and local projective model; paragraph 3: ordinary and exceptional scalar comparisons; paragraph 4: compact-support identification and equality with the evaluation transpose.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic Noetherian scheme topology, to justify finite covers of open-in-closed strata; it replaces no geometric or duality argument of the unit."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic topological quasi-compactness of subsets of a Noetherian space, used only for the finite-type applicability check."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimensionality of a finite-type scheme over a field, used only to select bounds in the existing lisse Hom reduction lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-6b50403f1",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-6b50403f1 (reviewer sub-agent of L); spot-checked: First split of a statement-only item that Q07 extracted from thm-coef-finite-hom on 2026-10-22. No re-split note applies, no new nodes, the statement is unchanged, no cycle (closure computed), and thm-coef-finite-hom is the only citer. Source: master thm-coef-finite-hom.md proof paragraphs 2-4. The proof follows them: stratum Hom, then coefficient change through Rs_*, Rs^! and the finite-projective Hom, then transposition to v. The coefficient category is ordinary small-etale with the quotient map O_E/ϖ^n→O_E/ϖ^m, the same as the parent's. Step 1: X Noetherian (domain-calculus statement), then minimal condition ⇒ DCC ⇒ subsets quasi-compact; the (R/I)_h pieces give s of finite type, and the immersion diagonal is an iso, so s is separated. Step 2: dim S ≤ dim X because closures keep chains strict; the hypotheses of lem-coef-etale-lisse-hom-reduction match verbatim and give N and Q in D^b_ctf, L Tor [0,0], u iso. Step 3: L is lisse with finite stalks, hence constructible. The shriek node's q_s = g_*(q_j)∘c_g is the item's q. The counit identity determines b uniquely (adjunction bijection, q_{s,N} invertible), so it is the item's b. Step 4: B is a cyclic A-module, s is separated of finite type, Q is ctf, and the counit-defined c matches. Step 5: pairing-change hypotheses hold. I_A and I_B are presupposed isomorphisms both in that node and in the item's own notation. Functors preserve isomorphisms. Step 6: precomposing D = v∘F_X I_A with F_X I_A^{-1} gives the seven-arrow word; marking it elementary is correct. Edge cases checked: n=m, m=1, rank 0, empty X or S, j=id, g=id. The lem-per-ctf-hom-* nodes are F_ℓ / dualizing-hypothesis variants, not duplicates. Accepted tool uses: Noetherian-topology x2 and the finite-type dimension lemma, generic and used only to check hypotheses. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocallyClosedHomGenerator",
+  "declaration": "AlgebraicGeometry.Etale.LocallyClosedHomGenerator.normalizedComparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.LocallyClosedHomGenerator.exceptionalObject",
+   "AlgebraicGeometry.Etale.LocallyClosedHomGenerator.innerHom",
+   "AlgebraicGeometry.Etale.LocallyClosedHomGenerator.inverseInternalAdjunction",
+   "AlgebraicGeometry.Etale.LocallyClosedHomGenerator.IsNormalizedComparison",
+   "AlgebraicGeometry.Etale.LocallyClosedHomGenerator.normalizedComparison"
+  ],
+  "file": "lean/Sheaf/Paper/LocallyClosedHomGenerator.lean",
+  "statement": "theorem normalizedComparison\n    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (n m : ℕ+) (hmn : m ≤ n)\n    {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of D.k))]\n    {S Z : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g]\n    (j : S ⟶ Z) [IsOpenImmersion j]\n    (L : Sheaf S.smallEtaleTopology (ModuleCat (coefficient l E n)))\n    (_hL : ∃ d : Scheme.LocallyConstantDatum L, ∀ i : d.cover.I₀,\n      ∃ P : ModuleCat (coefficient l E n),\n        Module.Finite (coefficient l E n) P ∧ Module.Projective (coefficient l E n) P ∧\n        Nonempty (L.over (d.cover.etalePrecoverageToEtale i) ≅\n          (constantSheaf (S.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i))\n            (ModuleCat (coefficient l E n))).obj P))\n    (M : DerivedCategoryModule (coefficient l E n) X)\n    (_hM : WeilConjectures.finiteTorConstructibleEtale l E n n.property X M) :\n    WeilConjectures.finiteTorConstructibleEtale l E n n.property S\n      (exceptionalObject g j M) ∧\n    WeilConjectures.finiteTorConstructibleEtale l E n n.property S\n      (innerHom g j ((_root_.DerivedCategory.singleFunctor _ 0).obj L) M) ∧\n    IsNormalizedComparison (reduction l E n m hmn) g j\n      ((_root_.DerivedCategory.singleFunctor _ 0).obj L) M",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Ordinary small-etale module derived categories; unchanged Lean statement and helpers. Returned H2 repair: statement dependencies now name def-coef-internal-adjunction-comparison-maps and def-coef-etale-locally-closed-comparison-maps, which own the unchanged published plain constructions. The two original theorem nodes remain in proof_deps. The finite-Tor-amplitude definition is cited through the new exceptional-comparison definition node. No mathematical statement, proof or Lean source changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-659e53fda",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (bbddb2e6). Lean module byte-identical to the returned delivery; item changes only stmt_deps and lean.note. stmt_deps = 12 base entries + 2 new def nodes, replacing the 2 theorem nodes and def-weil-finite-tor-amplitude. New def nodes def-coef-internal-adjunction-comparison-maps (13 plain decls in InternalAdjunctionPairingChange) and def-coef-etale-locally-closed-comparison-maps (8 plain decls in EtaleLocallyClosedShriek, cites def-weil-finite-tor-amplitude): existing:true, verbatim statements, all decls present and not .choose of the theorems, TeX matches the code, H12 fields ok, no other owner, acyclic, published oleans present. Item maths re-confirmed: hypotheses, N/Q ctf, IsIso of I_A plus 6 factors, composite = v, edge cases and universes ok, sorry only. Advisory: open scalar maps are owned in Lean by lem-coef-etale-open-comparison-data (and etaleHomTensorComparison by lem-coef-etale-tensor-model-comparison) while the new nodes cite lem-coef-etale-open-tensor; LocallyConstantDatum has no owner (base-era). No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T203559-L-2830098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

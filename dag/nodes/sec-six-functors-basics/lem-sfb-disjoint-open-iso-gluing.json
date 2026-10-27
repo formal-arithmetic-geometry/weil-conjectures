@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-disjoint-open-iso-gluing",
+ "kind": "statement",
+ "title": "Gluing module isomorphisms on disjoint opens",
+ "statement": "Let X be a scheme [def-pc-scheme], I a small (Type 0) type, and U_i pairwise disjoint open subsets covering X (including empty members). Let F,G be O_X-modules [def-weil-sheaf-of-modules-category]. If their tensor pullbacks [def-pc-module-pullback] along every inclusion U_i -> X are isomorphic, then F and G are isomorphic. No finiteness or quasi-compactness condition is imposed; the empty cover of the empty scheme is included.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 04TN (lemma-glue-maps) and its uniqueness clause; Tag 00AM (lemma-glue-sheaves-structures), compatibility with module structures."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Compare tensor pullback along each U_i inclusion with sectionwise restriction, using uniqueness of left adjoints. Use Scheme.Modules.overFunctorEquiv and the fully faithful equivalence overEquiv to transport each chosen local isomorphism to the category of sheaves of modules on the localized Over U_i site.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any open W contained in two distinct members, disjointness forces W empty. Uniqueness for the empty covering says all sections of a module on W agree, hence both local maps agree on W. For equal indices the agreement is reflexivity. This proves the overlap conditions for both the local forward and inverse maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the morphism clause of glue_sheaves_of_modules to glue the forward maps and their inverses. Each composite restricts to an identity, so the uniqueness clause of the same theorem proves the two global inverse identities. Package the two maps as the required isomorphism.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 04TN (lemma-glue-maps) and its uniqueness clause; Tag 00AM (lemma-glue-sheaves-structures), compatibility with module structures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on pairwise disjoint open subsets: product of direct images restricts to a single factor, and local isomorphisms glue",
+   "results": "msearch: IsSheaf.isSheafUniqueGluing, TopCat.Sheaf.existsUnique_gluing and existsUnique_gluing', isProductOfDisjoint, IsSheafPairwiseIntersections. These provide section gluing and binary disjoint products, not either scheme-module assertion verbatim.",
+   "date": "2026-10-27",
+   "verdict": "Reuse unique gluing; no exact existing module statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules on a disjoint open cover, isomorphisms glue and product of direct images restricts to a factor",
+   "results": "msearch: TopCat.Sheaf.objSupIsoProdEqLocus and its projection equations, isProductOfDisjoint, Scheme.coprodPresheafObjIso_hom_fst. These concern binary section products; no arbitrary direct-image module product restriction or gluing of module isomorphisms.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorInverse\"",
+   "results": "msearch: three exterior-algebra tensor-inverse results. No monoidal integer-line-power or disjoint sheaf gluing result.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "disjoint.*(glue|iso|product)|glue.*(iso|hom)|restrictFunctorIsoPullback; local searches of Mathlib products, sheaf limits, scheme restriction; all DAG/library disjoint-open and direct-image-product searches; blueprint_refs.py searches disjoint open product and gluing module isomorphisms",
+   "results": "msearch returned binary disjoint section/cover and topology results. Local reads found Scheme.Modules.restrictFunctor, restrictFunctorAdjCounitIso, restrictFunctorIsoPullback, overEquiv and overFunctorEquiv; Limits.PreservesProduct.iso; existing glue_sheaves_of_modules. No duplicate statement was found. The proof uses these existing APIs. Both blueprint searches returned zero matches.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; generic restriction and gluing APIs reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyConstantLineTwistIdentities",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Picard-classification proof steps 5 and 9: restriction of the concrete glued twist, addition of integer powers and arbitrary pullback.",
+   "via": [
+    "lem-sfb-locally-constant-line-twist-identities",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DisjointOpenIsoGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/DisjointOpenIsoGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.disjointOpen_nonempty_iso",
+  "statement": "theorem disjointOpen_nonempty_iso {X : Scheme.{u}} {ι : Type}\n    (U : ι → X.Opens)\n    (hcover : ∀ x : X, ∃ i : ι, x ∈ U i)\n    (hdisjoint : ∀ (i j : ι) (x : X), x ∈ U i → x ∈ U j → i = j)\n    (F G : X.Modules)\n    (hlocal : ∀ i : ι,\n      Nonempty ((tensorPullback (U i).ι).obj F ≅ (tensorPullback (U i).ι).obj G)) :\n    Nonempty (F ≅ G)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T112316-L-1569954",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T112316-L-1569954",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

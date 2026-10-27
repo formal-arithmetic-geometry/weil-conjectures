@@ -1,0 +1,264 @@
+{
+ "id": "lem-sp-tower-projection-finite-reduction",
+ "kind": "statement",
+ "title": "Finite reduction of a normalized tower projection",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $T$ a scheme in the same universe, $D$ its abelian coefficient-tower presentation, and $C\\in D(\\operatorname{Tow}(B_n))$ a normalized tower: every specified derived reduction is invertible [sk-def-sp-normalized-towers]. Let $M,p,\\delta$ be any distinguished Roos triangle for the completed evaluations and actual transitions [def-sp-tower-reconstruction-data, lem-weil-pbc-ringed-strict-tower-homotopy-limit]. For each positive $m$, the specified adjunct of $p_m$ is an isomorphism $M\\otimes_R^L B_m\\to C_m$ in $D(B_m)$. No constructibility or boundedness is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Proof first paragraph through the reduction formula; expanded steps 1--8."
+ },
+ "stmt_deps": [
+  "def-sp-tower-reconstruction-data",
+  "sk-def-sp-normalized-towers",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [
+  {
+   "text": "Choose compatible flat-term K-flat representatives and their normalized reduction maps, with the completed lift preserving projections. Normalization of C implies the actual chain-level reductions are quasi-isomorphisms.",
+   "uses": [
+    "lem-sp-semilinear-kflat-tower-model",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Delete the finite prefix below m. The coefficient fiber is the smaller coefficient module shifted by one, with transitions given by powers of ell. Tensor with the K-flat levels. Every m successive error transitions vanish; its derived limit is zero. The normalized constant right tower has limit C_m, so the middle Koszul tower has that limit.",
+   "uses": [
+    "lem-sp-ell-coefficient-fiber",
+    "lem-sp-normalized-error-tower-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Koszul--Roos comparison identifies the middle limit with restricted finite reduction of M, preserving the mth projection. Its normalized adjunct is spTowerReconstructionMap. Exact scalar restriction detects isomorphisms, yielding the assertion in the finite-coefficient derived category.",
+   "uses": [
+    "lem-sp-koszul-roos-projection-comparison",
+    "lem-sp-semilinear-kflat-tower-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-semilinear-kflat-tower-model",
+  "sk-def-sp-normalized-towers",
+  "lem-sp-ell-coefficient-fiber",
+  "lem-sp-normalized-error-tower-vanishing",
+  "lem-sp-koszul-roos-projection-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Proof first paragraph through the reduction formula; expanded steps 1--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized tower of complexes over powers of an ideal is reconstructed by reducing its derived inverse limit",
+   "results": {
+    "count": 8,
+    "hits": [
+     "Hausdorffification",
+     "AdicCompletion",
+     "Hausdorffification.of",
+     "AdicCompletion.of_apply",
+     "AdicCompletion.mk_apply_coe",
+     "AdicCompletion.eval_comp_of",
+     "AdicCompletion.eval_of",
+     "AdicCompletion.factor_evalₐ_eq_eval"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match for the completed sheaf coefficient and derived tower interfaces; hits are ordinary completion or unrelated constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimitTriangle\"",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match for the completed sheaf coefficient and derived tower interfaces; hits are ordinary completion or unrelated constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*tower|tower.*reconstruction",
+   "results": {
+    "count": 3,
+    "hits": [
+     "Mathlib/FieldTheory/NormalizedTrace.lean",
+     "Mathlib/FieldTheory/NormalizedTrace.lean",
+     "Mathlib/FieldTheory/NormalizedTrace.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match for the completed sheaf coefficient and derived tower interfaces; hits are ordinary completion or unrelated constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived inverse limit of a tower of power torsion complexes is derived complete",
+   "results": {
+    "count": 8,
+    "hits": [
+     "IsAdicComplete.mk",
+     "AdicCompletion",
+     "AdicCompletion.subring",
+     "AdicCompletion.instCommRing",
+     "IsAdicComplete.of_lift",
+     "AdicCompletion.submodule",
+     "AdicCompletion.ofLinearEquiv",
+     "AdicCompletion.subalgebra"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match for the completed sheaf coefficient and derived tower interfaces; hits are ordinary completion or unrelated constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite reduction of a derived inverse limit of normalized coefficient complexes is an isomorphism",
+   "results": {
+    "count": 8,
+    "hits": [
+     "ProfiniteGrp.isIso_toLimit",
+     "ProfiniteGrp.isoLimittoFiniteQuotientFunctor",
+     "CategoryTheory.Idempotents.DoldKan.isoN₁",
+     "Profinite.isIso_asLimitCone_lift",
+     "Profinite.asLimitConeIso",
+     "Profinite.isoAsLimitConeLift",
+     "InverseSystem.invLimEquiv.congr_simp",
+     "SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match for the completed sheaf coefficient and derived tower interfaces; hits are ordinary completion or unrelated constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinal quotient scalar extensions preserve constructible complexes and a common Tor amplitude interval",
+   "results": {
+    "count": 8,
+    "hits": [
+     "Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+     "Algebra.QuasiFinite.of_restrictScalars",
+     "isNoetherian_quotient",
+     "Submodule.Quotient.smulCommClass",
+     "ModuleCon.instSMulQuotient",
+     "SMulCon.Quotient",
+     "Algebra.Extension.CotangentSpace.map_comp_cotangentComplex",
+     "Submodule.Quotient.isScalarTower"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match for the completed sheaf coefficient and derived tower interfaces; hits are ordinary completion or unrelated constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed coefficient ring sheaf projection to finite quotients, exact derived evaluation of coefficient towers, and tensor restriction adjoint of a limit projection",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AdicCompletion.evalₐ",
+     "AdicCompletion.coe_eval",
+     "AdicCompletion.eval",
+     "AdicCompletion.eval_of",
+     "AdicCompletion.evalOneₐ",
+     "SheafOfModules.hasLimit",
+     "PresheafOfModules.limitCone_π_app_app",
+     "PresheafOfModules.limitPresheafOfModules"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match for the completed sheaf coefficient and derived tower interfaces; hits are ordinary completion or unrelated constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed coefficient ring sheaf projection to finite quotients, exact derived evaluation of coefficient towers, and tensor restriction adjoint of a limit projection",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AdicCompletion.eval_comp_of",
+     "AdicCompletion.transitionMap_comp_eval",
+     "AdicCompletion.factor_evalₐ_eq_eval",
+     "AdicCompletion.factor_eval_eq_evalₐ",
+     "AdicCompletion.eval_lift",
+     "AdicCompletion.eval_of",
+     "AdicCompletion.eval_apply",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match for the completed sheaf coefficient and derived tower interfaces; hits are ordinary completion or unrelated constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*[Cc]oefficient|[Dd]erived.*[Tt]ower|[Tt]ower.*[Ee]valuation",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match for the completed sheaf coefficient and derived tower interfaces; hits are ordinary completion or unrelated constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerReconstruction",
+  "date": "2026-10-25",
+  "group": "P9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Proof first paragraph through the reduction formula; expanded steps 1--8.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerFiniteReduction",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerFiniteReduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spTower_projection_finite_reduction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spTower_projection_finite_reduction"
+  ],
+  "statement": "theorem spTower_projection_finite_reduction (C : spDerivedCoefficientTowers l E T D) (hnorm : IsSpNormalizedTower l E T D C) (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T)) [HasProduct (fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C)] (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C) (δ : (∏ᶜ fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C) ⟶ M⟦(1 : ℤ)⟧) (hlim : IsDerivedLimitTriangle (fun n : ℕ ↦ (spDerivedCompletedTransition l E T D n).app C) M p δ) (m : ℕ) : IsIso (spTowerReconstructionMap l E T D C M p m)",
+  "branch": "sheaf-dag",
+  "by": "P9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5ad5f",
+  "group": "P9",
+  "result": "fix",
+  "landing": "20261025T164114-L-950762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5ad5f",
+  "group": "P9",
+  "result": "fix",
+  "landing": "20261025T164114-L-950762",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean/nodes (byte-identical to the 2026-10-25 reviewed head ab05c97) against the node statements, the clone at b40d05f, and a fresh sandbox compile of the 5 modules plus the 3 original direct importers; IntegralDirectImageTower original compiles unchanged in 29.1 s"
+ }
+}

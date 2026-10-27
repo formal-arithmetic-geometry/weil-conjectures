@@ -64,6 +64,22 @@
     "def-weil-frobenius-detailed"
    ],
    "elementary": false
+  },
+  {
+   "text": "For LocalFrobeniusLarge.stageScalar_existsUnique, form the natural H^0 scalar square by transporting the specified stage transition equality and whiskering the point-fibre scalar comparison with the canonical field homology comparison. Extend it to Omega and flatten the two scalar tensors with cancelBaseChange. The actual Shrink coefficient embeddings compose because the inverse equivalences cancel. On a tensor a tensor sigma^{-1}(b tensor v), the scalar comparison cancels its inverse and tensor flattening gives a*embedding(b) tensor v. Tensor induction, after precomposition with the scalar-extended inverse square, proves uniqueness. The finite-stage scalar constructions are publicly reexported unchanged from LocalFrobeniusLargeScalarTower so the local tower theorem can depend on them without an import cycle.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "def-weil-coefficient-cohomology-modules",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For LocalFrobeniusLarge.pointFibre_existsUnique, use the existing StageSystem.descFunctor on stageFibre and stageScalar, with stageScalar_tower as its cocone coherence field. The literal object formula and the representative conjugation formula are reflexive from descFunctor, Morphism.ofCocone and constEval. For any other functor satisfying those formulas, Functor.hext reduces equality to objects and arrows. The object equality is supplied; PairCategory.hom_induction reduces every arrow to mkHom, where the supplied heterogeneous representative equality closes the goal. This constructs the quotient functor and proves uniqueness, leaving only the strictly smaller scalar tower equality as a named theorem.",
+   "uses": [
+    "lem-weil-large-point-scalar-tower"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -71,12 +87,16 @@
   "lem-weil-unique-subfield-of-closure",
   "def-weil-residue-field",
   "lem-kun-closed-point-field",
-  "def-weil-frobenius-detailed"
+  "def-weil-frobenius-detailed",
+  "def-weil-finite-coefficient-point",
+  "def-weil-coefficient-cohomology-modules",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-large-point-scalar-tower"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/def-weil-local-frobenius-trace.md",
-  "place": "Z5, 2026-10-21: complete proofs of all five existing theorem holes, following the recorded four-step route; private positive-power and pullback-projection calculations, with the proved geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq for both finite-field return equations."
+  "document": "lean/Sheaf/Paper/LocalFrobeniusLargeCoefficients.lean",
+  "place": "Original local-trace proofs and proved tensor scalar construction preserved; T8 constructs the quotient point functor with StageSystem.descFunctor, proves its normalization and uniqueness, and extracts only the local scalar tower equation."
  },
  "mathlib_searches": [
   {
@@ -151,7 +171,18 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-weil-sheaf-complex"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-poincare-duality",
  "unit": "sk-lem-finite",
  "split_report": {
@@ -170,8 +201,8 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-e39b6910f (reviewer sub-agent of L); spot-checked: Read the whole item, its 18 stmt_deps, the unit and chapter records, the current blueprint and Deligne Weil II (1.1.7)-(1.1.10). The current blueprint text matches master apart from the order number. The item keeps the hypotheses: finite-type Y_0, a Weil complex over E, n>=1. It adds no separatedness. Checked: theta^[n] types and recurrence for n=1,2. The return equation g_Y^n xbar = xbar g_s^n follows because gamma^n fixes F_{q^n} (lem-weil-unique-subfield-of-closure). The literal xbar-fixing reading fails at Spec k_0 with n=1, so the worker's STATEMENT-DISPUTED repair is right. Point-transport composite: each arrow has the stated type, and no invertibility or separated model is needed. Closed point: r>=1 by lem-kun-closed-point-field (a). Trace: zero complex 0; canonical rank one 1; shift by one -1; empty model vacuous. Weil-structure direction matches Deligne 1.1.10. No duplicate: def-trf-frobenius-operators is finite-level, separated and uses Phi. One repairable fault (E3/E6, coefficient identification): the item took its integral pullback-composition comparisons from lem-sbc-completed-operations-linear-natural-exchange. That lemma is about P_u of def-weil-pbc-completed-pullback, a different construction from the def-pur-integral-derived-operations pullbacks that def-weil-derived-pullback-tensor-hom applies to M, and def-pur states that their agreement is a separate comparison. No existing node supplies such a composition (searched by grep). Fix: new statement-only node lem-pod-integral-pullback-composition (source Stacks 099N (2),(5) and 0D6D) giving a natural iso L(kh)^* = Lh^*Lk^* on D^b_c(-,O_E), its reduction mod varpi^n equal to the finite c_{h,k}, and associativity. Its Mathlib search is grep only, recorded as such. In the item, replaced the lem-sbc dependency and citation and updated split_report.summary. Checked: all ids exist and are unmerged, citations match stmt_deps, no cycle. No tool_uses.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean": {
-  "module": "Sheaf.Paper.LocalFrobeniusTrace",
-  "declaration": "WeilConjectures.localFrobeniusTrace",
+  "module": "Sheaf.Paper.LocalFrobeniusLargeCoefficients",
+  "declaration": "WeilConjectures.LocalFrobeniusLarge.operator",
   "declarations": [
    "WeilConjectures.localPullbackObjectIso",
    "WeilConjectures.localPullbackComposition",
@@ -214,32 +245,61 @@
    "WeilConjectures.localQbarReturnComparison",
    "WeilConjectures.localQbarClosedFrobenius",
    "WeilConjectures.localQbarClosedFrobeniusStalk",
-   "WeilConjectures.localQbarClosedStalk"
+   "WeilConjectures.localQbarClosedStalk",
+   "WeilConjectures.LocalFrobeniusLarge.embedding",
+   "WeilConjectures.LocalFrobeniusLarge.stageFibre",
+   "WeilConjectures.LocalFrobeniusLarge.scalarCohomology",
+   "WeilConjectures.LocalFrobeniusLarge.stageScalar_existsUnique",
+   "WeilConjectures.LocalFrobeniusLarge.stageScalar",
+   "WeilConjectures.LocalFrobeniusLarge.pointFibre_existsUnique",
+   "WeilConjectures.LocalFrobeniusLarge.pointFibre",
+   "WeilConjectures.LocalFrobeniusLarge.pullbackStage",
+   "WeilConjectures.LocalFrobeniusLarge.composition",
+   "WeilConjectures.LocalFrobeniusLarge.transport",
+   "WeilConjectures.LocalFrobeniusLarge.transportIterate",
+   "WeilConjectures.LocalFrobeniusLarge.stalk",
+   "WeilConjectures.LocalFrobeniusLarge.weilIterate",
+   "WeilConjectures.LocalFrobeniusLarge.returnComparison",
+   "WeilConjectures.LocalFrobeniusLarge.operator"
   ],
-  "file": "lean/Sheaf/Paper/LocalFrobeniusTrace.lean",
-  "statement": "def localFrobeniusTrace (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : Padic.FiniteCoefficientFields c.l c.Qbar) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (K : sfWeilComplex D c.l c.different Y₀ E.val) (n : ℕ) (hn : 1 ≤ n) (x : D.extensionPoints Y₀ n hn) : E.val",
+  "file": "lean/Sheaf/Paper/LocalFrobeniusLargeCoefficients.lean",
+  "statement": "def operator (K : sfCommonStageWeilComplex D l hl Y₀ Ω) (x : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left) (n : ℕ) (h : x ≫ localPositivePower (D.geometricFrobenius Y₀).hom n = localPositivePower (frobeniusPointIso D).hom n ≫ x) : (stalk D l hl Ω Y₀ x).obj K.carrier ⟶ (stalk D l hl Ω Y₀ x).obj K.carrier",
   "branch": "newtargets-dag",
-  "by": "Q11",
-  "date": "2026-10-18",
+  "by": "Q38",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "§1(B): the previous module supplied local operators only for finite coefficient fields E, while this consumer needs the same construction at algebraically closed common-stage coefficients. All original declarations are retained verbatim. Added literal-stage pullback-composition comparisons, the published Qbar point transport with its prescribed boundary identifications, its iterations, the geometric closed-point return, and the induced H^0 stalk/operator. No independent operator, isomorphism assumption, or integral stable lattice is introduced."
+  "note": "§1(B): the recorded Qbar local operator fixes coefficients to Type u, while the classical realization uses Omega : Type (u+1). This preserves its finite-stage construction, takes H0 and then extends to Omega; the tensor-normalized scalar comparisons descend all common-stage representatives. All original finite and small-Qbar declarations are public imports and remain available. T8 relocates the five finite-stage scalar declarations verbatim to the publicly reexported LocalFrobeniusLargeScalarTower; the full names, types and data remain identical. Quotient descent is proved from a separate local scalar tower theorem.",
+  "modules": [
+   "Sheaf.Paper.LocalFrobeniusLargeCoefficients",
+   "Sheaf.Paper.LocalFrobeniusLargeScalarTower"
+  ]
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-0b13f37ec",
-  "group": "Q11",
-  "result": "pass",
-  "note": "Matched every clause of dual_stalk_frobenius against the node (dual exists; lisse and in the heart for every representing dual; finite-dimensional H^0 stalk; Frobenius equal to a linear automorphism A; exists c with c(F_dual phi)(v)=c(phi)(A^-1 v) and conjugacy to dualMap A^-1). No extra hypotheses; Omega : Type u is forced by the pointQbarFibre API and documented. New section 1(A) definitions IsCommonStageLisse (chart-local rational finite freeness, no global lattice) and IsCommonStageWeilLinearDual (internal-Hom universal property plus evaluation-equivariance equation, which gives the contragredient action) are real Props with correct type directions. Section 1(B) LocalFrobeniusTrace is append-only (lines 1-350 identical to side clone); the localQbar operator follows the node's composite with the semilinear return and theta iteration and introduces no arbitrary maps. Recorded statements equal the file signatures for all 4 records; new nodes have exactly the section 5 fields; the item changed only in stmt_deps and lean. The only proof is the theorem's sorry; docstrings and report sections are present. nt_compile --json on all 4 files: exit 0, no diagnostics (29.4/2.7/2.4/3.1 s). Remarks only: the worker's duplicate search omits commonStageDerivedInternalHom (not a usable duplicate: no evaluation or Weil structure); the Q11 second reading was the author's own pass."
+  "reviewer": "NT-stage2-cc-97c7d55e6",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Substance correct: CompletedNormalization pins c via the S.pullback_pinning stage iso and the unit-germ-normalized proEtale_comparison_stalk; ComparisonAssertions has every node clause (intertwining at all n and returns, FactorSquares, Weil naturality, coefficient arrows, constant-extension blocks); classical/sf transport directions agree; §1(B) LocalFrobeniusLarge needed (localQbar Ω:Type u vs ZlClassicalRealization Ω:Type(u+1)); new def nodes justified; no hollow defs. Fixes: H11 self second reading -> report.md with clause-by-clause reading; H9 unused imports removed from ClassicalLocalFrobeniusData (nt_compile --json clean, 20.8 s + 8.2 s); H12 def-zl-completed-local-fibre-comparison-data gains def-per-continuous-rational-realization-data (moduleUnit). Advisories: block lemmas in def module, copied module title, possible unused hUnits instance, parent's different classical encoding."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Z5",
+  "reviewer": "C-6f8a2",
+  "group": "T8",
   "result": "pass",
-  "landing": "20261021T144034-L-39802",
+  "landing": "20261025T203254-L-2798812",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: pointFibre_existsUnique proof via StageSystem.descFunctor against node def-weil-local-frobenius-trace; relocated scalar block byte-identical to clone; stageScalar_tower against descFunctor's coh field and lem-weil-point-sections-scalar-extension tower clause; 3 direct importers compiled in sandbox"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix the finite-field datum $p,a,q,k_0,k$, a prime $\\ell\\neq p$. Write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and choose\na finite extension $E/\\Ql$ contained in $\\Qlb$, and let $\\Lambda\\in\\{E,\\Qlb\\}$,\nregarded as a condensed ring. Let $Y_0$ be a finite-type\n$k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and let $(K,\\theta)$ be a Weil\ncomplex in the sense of [def-weil-weil-sheaf-complex]: $K\\in\\Dbc(Y,\\Lambda)$\nand $\\theta:Lg_Y^*K\\xrightarrow{\\sim}K$ (for an object of\n$D^b_{c,\\mathrm W}(Y,\\Lambda)$ take the pair $(\\operatorname{For}(K),\\theta_K)$). For a closed point $y\\in|Y_0|$, with $|Y_0|$ and\n$\\kappa(y)$ the closed-point and residue-field notation, let $y$ have degree\n$r=[\\kappa(y):\\Fq]$. Choose an embedding $\\kappa(y)\\hookrightarrow k$ and the\nassociated geometric point $\\bar y\\to Y$. Iterating the Weil isomorphism $r$\ntimes and using the resulting return to $\\bar y$ defines, for every\n$j\\in\\mathbf Z$, the local operator $F_y$ associated with the global\ngeometric-Frobenius action on the stalk of the cohomology sheaf $\\mathcal\nH^j(K)_{\\bar y}$.\n\nMore generally, for every $n\\in\\mathbf Z_{\\geq1}$ and $x\\in Y_0(\\mathbf\nF_{q^n})$ in the finite-field point set, choose an associated geometric point\n$\\bar x\\to Y$; the $n$-fold iterate at $\\bar x$ defines $F_x^{(n)}$. Put\n\n$$\n  K_{\\bar x}:=\n  L\\bar x^*K,\\qquad\n  \\Tr(F_x^{(n)}\\mid K_{\\bar x})=\n \\sum_{j\\in\\mathbf Z}(-1)^j\n \\Tr\\bigl(F_x^{(n)}\\mid\n \\mathcal H^j(K)_{\\bar x}\\bigr).\n$$\n\nHere $L\\bar x^*$ is the derived pullback, and the stalks are finite-dimensional\n$\\Lambda$-vector spaces, nonzero in finitely many degrees ([sk-lem-finite]).",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

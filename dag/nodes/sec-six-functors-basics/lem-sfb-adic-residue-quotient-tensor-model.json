@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-adic-residue-quotient-tensor-model",
+ "kind": "statement",
+ "title": "The strict quotient tensor model and the normalized scalar-adjoint tower",
+ "statement": "Let X be a scheme, A a commutative ring, J an ideal, U a small pro-etale site object, R the completed coefficient sheaf on U, and M an object of D(R). Let P be a K-flat cochain complex of R-module sheaves [def-pc-kflat-complex] and eP:Q(P) isomorphic to M a specified isomorphism. The derived evaluation tower of the explicit complex of towers P tensor_R B_n[0] [def-sfb-adic-residue-quotient-tensor-tower] is isomorphic to the normalized scalar-adjoint tower G_n F_n M [lem-sfb-adic-residue-adjoint-tower]. Under this isomorphism the localized insertion-of-one map P to P tensor_R B_n[0] becomes eP followed by the nth scalar adjunction unit. No Koszul list, Noetherianity, cone assertion, or inverse limit occurs.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-quotient-tensor-tower",
+  "lem-sfb-adic-residue-adjoint-tower",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-naive-completion (099M), strict coefficient tensor calculation; algebraization.tex, lemma-derived-completion-koszul (0A0E); more-algebra.tex, lemma-sequence-Koszul-complexes."
+ },
+ "proof": [
+  {
+   "text": "Construct each comparison explicitly: localize scalarTensorComplexIso, apply resFactors, invert the universal scalar comparison using K-flatness, and map eP through extension and restriction. No isomorphism is chosen from an unproved existence theorem.",
+   "uses": [
+    "lem-sfb-ringed-scalar-tensor-comparison",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The one-successor identity supplies NatTrans.ofOpSequence. Apply NatIso.ofComponents to the already constructed level isomorphisms. This supplies naturality for all tower arrows.",
+   "uses": [
+    "lem-sfb-adic-residue-quotient-tensor-successor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary insertion identity, followed by the K-flat normalization of adicFiniteUnit, cancels the scalar-comparison isomorphism and its inverse. Naturality of adicFiniteUnit along eP identifies this with eP followed by the normalized scalar-adjunction unit. This proves the required equations for the assembled isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-scalar-tensor-unit",
+    "lem-sfb-adic-finite-reduction-data",
+    "lem-sfb-adic-residue-adjoint-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-scalar-tensor-comparison",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pc-kflat-complex",
+  "lem-sfb-adic-residue-quotient-tensor-successor",
+  "lem-sfb-ringed-scalar-tensor-unit",
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-sfb-adic-residue-adjoint-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, explicit scalar comparison and its unit; proetale.tex, lemma-naive-completion (099M), strict coefficient calculation before Rlim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension on a K flat sheaf complex computes its tensor product with the quotient ring, compatibly with quotient transitions and adjunction units",
+   "results": "8 hits on cotangent modules, module scalar descent and flat tensor exactness.",
+   "verdict": "No matching ringed derived tower theorem.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"single\"",
+   "results": "10 hits, on graded-object single/tensor unitor comparisons.",
+   "verdict": "Useful graded generalities, but no derived scalar tower identification.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*restrictScalars|restrictScalars.*tensor|mappingCone.*tensor|tensor.*mappingCone",
+   "results": "25 hits on ordinary tensor products, scalar restriction and ModuleCat descent.",
+   "verdict": "No matching sheaf-complex tower or normalized derived comparison.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension on a K flat sheaf complex computes its tensor product with the quotient ring, compatibly with quotient transitions and adjunction units",
+   "results": "8 hits: ordinary ModuleCat.extendRestrictScalarsAdj, flat tensor exactness, faithfully flat descent and ordinary tensor base change.",
+   "verdict": "The ordinary module adjunction does not state the sheaf-complex comparison, derived unit normalization, or tower naturality.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueStrictKoszulAugmentation",
+  "date": "2026-10-26",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1), the application of Stacks 099M: The strict quotient tensor model and the normalized scalar-adjoint tower.",
+   "via": [
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueQuotientTensorModel",
+  "file": "lean/Sheaf/Paper/AdicResidueQuotientTensorModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_quotient_tensor_model",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicResidue_quotient_tensor_model"
+  ],
+  "statement": "theorem adicResidue_quotient_tensor_model\n    (M : AdicResidueLocalDerived.{u, v} X J U)\n    (P : Cx ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))\n    (hP : P.IsAcyclicTensorKFlat) (eP : (Q _).obj P ≅ M) :\n    ∃ e : (adicResidueQuotientTensorComplex X J U P).asFunctor ⋙ Q _ ≅\n        adicResidueAdjointTower.{u, v} X J U M,\n      ∀ n : ℕ, (Q _).map (adicResidueQuotientTensorUnit X J U P n) ≫\n        e.hom.app (op n) = eP.hom ≫\n          (adicResidueScalarAdjunction.{u, v} X J U n).unit.app M",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261026T100438-L-30686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T114151-L-2270233",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

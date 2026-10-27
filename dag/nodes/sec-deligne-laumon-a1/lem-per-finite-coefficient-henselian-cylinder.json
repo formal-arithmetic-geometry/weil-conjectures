@@ -20,9 +20,165 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A field is Noetherian, local, complete for its zero maximal ideal, and a domain. A complete DVR has these properties by its definition (every ideal is principal). Apply [lem-weil-pbc-power-series-noetherian], [lem-weil-pbc-power-series-local-ring], [lem-weil-pbc-power-series-complete-over-complete-base] and [lem-weil-pbc-power-series-domain] to each coefficient ring, in $e$ variables and in $e+1$ variables. Thus $D,E,R,R_V$ are complete Noetherian local domains. Their maximal ideals consist of the series whose constant coefficient lies in the maximal ideal of the coefficient ring. Regrouping coefficients identifies the $(e+1)$-variable rings with $D[[T]],E[[T]]$: the coefficient of $u^aT^j$ is the coefficient of $u^a$ in the $T^j$ coefficient, and the finite convolution formulas for multiplication coincide. This includes $e=0$.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-complete-over-complete-base",
+    "lem-weil-pbc-power-series-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 1.1.3, complete Noetherian coefficient rings; Stacks algebra.tex Tag 0306 (lemma-Noetherian-power-series)."
+   }
+  },
+  {
+   "text": "Choose finitely many $\\Lambda$-module generators $v_1,\\ldots,v_d$ of $V$. For a series $F=\\sum_a c_a u^a\\in E$, choose expressions $c_a=\\sum_i\\lambda_{ia}v_i$. Then $F=\\sum_i v_i(\\sum_a\\lambda_{ia}u^a)$; equality is coefficientwise. Consequently $E$ is finite over $D$. The same argument with the additional $T$ exponent shows directly that $R_V$ is finite over $R$. Grouping the finitely many coefficients of a polynomial shows that the same $v_i$ generate $E[T]$ over $D[T]$. Coefficientwise injectivity gives $D\\hookrightarrow E$. Since $\\Lambda\\to V$ is local, the constant-coefficient criterion of Step 1 gives $\\mathfrak m_E\\cap D=\\mathfrak m_D$, and hence $(\\mathfrak m_E,T)\\cap D[T]=(\\mathfrak m_D,T)$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.3, comparison of the coefficient rings; explicit coefficient argument."
+   }
+  },
+  {
+   "text": "Apply [lem-per-weierstrass-henselian-cylinder] twice, with coefficient ring $D$ and then $E$, with $r=1$ and input $f=T$. The hypotheses hold by Step 1, and $T$ is a nonunit with nonzero reduction modulo the coefficient maximal ideal. The henselizations in that statement are exactly $S$ and $S_V$. Its conclusions give that they are Noetherian local henselian, that their canonical maximal-ideal completions are $R$ and $R_V$, and that the maps to those completions are faithfully flat. Only these conclusions are used here; its existential distinguished polynomial is not identified with the prescribed $g$.",
+   "uses": [
+    "lem-per-weierstrass-henselian-cylinder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 1.1.3 and 2.2.3: the horizontal maps are completions for the maximal-ideal topologies."
+   }
+  },
+  {
+   "text": "By [lem-per-complete-local-excellence], $D$ and $E$ are excellent. Apply [lem-exc-finite-type-localization-excellent] to their one-variable polynomial rings and the indicated prime localizations. These localized rings are excellent and therefore quasi-excellent by [def-exc-excellent-ring]. They are reduced: a polynomial ring over a domain has no zero divisors by the leading-coefficient formula, and localization at a prime preserves this by the fraction multiplication rule. Apply the first clause of [lem-per-henselian-normal-completion-preparation] to each of these reduced quasi-excellent Noetherian local rings. It gives excellence of $S,S_V$. By [lem-weil-pbc-faithfully-flat-universally-injective], applied to the base ring as its own module and its completion map from Step 3, $S\\to R$ and $S_V\\to R_V$ are injective (identify $A\\otimes_A B$ with $B$ by multiplication). Since the targets are nonzero domains, the sources are nonzero domains as well.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-per-henselian-normal-completion-preparation",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.3, excellent henselian cylinders; Stacks Tags 07QW (proposition-ubiquity-excellent), 07QU (lemma-finite-type-over-excellent) and 05CK (lemma-faithfully-flat-universally-injective)."
+   }
+  },
+  {
+   "text": "Step 2 makes $D[T]\\to E[T]$ finite. By [lem-weil-pbc-finite-ring-map-quasi-finite], it is finite type and quasi-finite at $(\\mathfrak m_E,T)$. This prime lies over $(\\mathfrak m_D,T)$ by the explicit contraction calculation in Step 2. Therefore [lem-trf-henselization-quasi-finite-ring], applied to these polynomial rings and primes, gives a finite local canonical map $S\\to S_V$. The maps $S\\to S_V\\to R_V$ and $S\\to R\\to R_V$ agree: both are local extensions of $D[T]_{(\\mathfrak m_D,T)}\\to R_V$, and uniqueness in [def-weil-pbc-henselization-at-prime] applies because $R_V$ is complete local and hence henselian by [lem-weil-pbc-complete-pair-henselian].",
+   "uses": [
+    "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "lem-trf-henselization-quasi-finite-ring",
+    "def-weil-pbc-henselization-at-prime",
+    "lem-weil-pbc-complete-pair-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Stacks algebra.tex Tag 05WP (lemma-quasi-finite-henselization), not 05WR; ILO V 3.2.3."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-algebra-is-integral] to $S\\to S_V$. Any prime of $S_V$ lying over $\\mathfrak m_S$ is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal]. Since $S_V$ is local, there is precisely one such prime, namely $\\mathfrak m_{S_V}$; it lies over $\\mathfrak m_S$ since the map is local. Now [lem-weil-pbc-completion-finite-extension], with base $S$, finite algebra $S_V$ and prime $\\mathfrak m_S$, gives $\\widehat S\\otimes_S S_V\\cong\\widehat {S_V}$. Localization at the maximal ideal changes neither local ring, and the product on the right has one factor. Substitute the canonical identifications of Step 3. Compatibility of the comparison with the $\\widehat S$-algebra and $S_V$-algebra structures makes it send $a\\otimes b$ to $\\widehat\\varphi(a)$ times the image of $b$, where $\\widehat\\varphi:\\widehat S\\to\\widehat{S_V}$ is induced by $\\varphi:S\\to S_V$ on the quotients $S/\\mathfrak m_S^k\\to S_V/\\mathfrak m_{S_V}^k$. Under Step 3, $S/\\mathfrak m_S^k=R/\\mathfrak m_R^k$ and $S_V/\\mathfrak m_{S_V}^k=R_V/\\mathfrak m_{R_V}^k$; by Step 5 the map on these quotients is induced by the coefficient inclusion $R\\to R_V$, which is local and so maps $\\mathfrak m_R^k$ into $\\mathfrak m_{R_V}^k$. Taking the inverse limit over $k$, $\\widehat\\varphi$ is the inclusion $R\\to R_V$, so the comparison sends $a\\otimes b$ to $ab$. Thus it is exactly the map in the statement, not merely an abstract isomorphism. Finiteness of $R_V/R$ was already proved by generators in Step 2.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Stacks algebra.tex Tags 00GK (lemma-finite-is-integral), 00GS (lemma-integral-over-field) and 07N9 (lemma-completion-finite-extension)."
+   }
+  },
+  {
+   "text": "Let $g$ be as in the statement. It belongs to $\\mathfrak m_S$ and to $\\mathfrak m_{S_V}$: modulo the coefficient maximal ideal its image is $T^n$ with $n>0$. To check the henselian-pair assertion for either local henselian ring $H=S,S_V$, take a finite $H$-algebra $B$. By [lem-weil-pbc-finite-over-henselian-local-product], $B$ is a finite product of local $H$-algebras $B_j$ whose structural maps are local. Then $gB_j$ is contained in the maximal ideal, so $B_j/gB_j$ is nonzero local. In a local ring an idempotent is $0$ or $1$: from $x(1-x)=0$, one of $x,1-x$ is a unit. Thus reduction is a bijection on idempotents in every factor, and in their product, including the empty product. This is precisely [def-weil-pbc-henselian-terminology] for $(H,gH)$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V Lemma 1.2.3; Stacks algebra.tex Tag 04GH (lemma-finite-over-henselian)."
+   }
+  },
+  {
+   "text": "Write $B=D$ or $E$, $A=B[T]_{(\\mathfrak m_B,T)}$, $H=A^h$, and $C=B[[T]]$. For each $N\\ge1$, $g^N$ is monic and reduces to $T^{nN}$. By [lem-per-distinguished-polynomial-quotient], $B[T]/(g^N)\\to C/g^NC$ is the canonical isomorphism. The target is nonzero local because $g\\in\\mathfrak m_C$, and is henselian by [lem-weil-pbc-complete-pair-henselian] and [lem-weil-pbc-quotient-henselian-pair]. The composite $B[T]\\to C/g^NC\\to C/\\mathfrak m_C$ has kernel $(\\mathfrak m_B,T)$. Thus every element outside that prime maps to a unit in $C/g^NC$. Localizing the displayed isomorphism gives $A/g^NA\\cong C/g^NC$. In particular $A/g^NA$ is already henselian local. For $B=E$, locality of $D\\to E$ ensures that all lower coefficients of $g$ lie in $\\mathfrak m_E$, as required.",
+   "uses": [
+    "lem-per-distinguished-polynomial-quotient",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-quotient-henselian-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V Theorem 1.1.1(i), division clause, and Lemma 1.1.3, with Q=g^N."
+   }
+  },
+  {
+   "text": "By [lem-trf-henselization-quotient-at-prime], $H/g^NH$ is the ordinary henselization of $A/g^NA$. The latter is henselian by Step 8, so its henselization map is an isomorphism: [def-weil-pbc-henselization-at-prime] applied to its identity gives a local retraction, and uniqueness for maps to its henselization makes the other composite the identity. Consequently the canonical map $H/g^NH\\to C/g^NC$ is an isomorphism, since its composite with $A/g^NA\\to H/g^NH$ is the isomorphism of Step 8. Reduction from $N+1$ to $N$ commutes with these maps, since each sends the class of $h\\in H$ to the class of its fixed image in $C$.",
+   "uses": [
+    "lem-trf-henselization-quotient-at-prime",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Stacks algebra.tex Tag 05WQ (lemma-quotient-henselization); ILO V Lemma 1.1.3."
+   }
+  },
+  {
+   "text": "By [lem-sbc-complete-local-subideal], the complete Noetherian local ring $C$ is complete also for $gC\\subseteq\\mathfrak m_C$. Taking inverse limits of the compatible isomorphisms of Step 9 therefore identifies $\\varprojlim_N H/g^NH$ with $C$. The map from $H$ is the canonical map already used, since every inverse-limit coordinate is its reduction modulo $g^N$. With $(H,C)=(S,R)$ and $(S_V,R_V)$, this proves the two specified $g$-adic completion identifications. Their maps are the faithfully flat maps of Step 3, so all clauses hold for the same canonical maps.",
+   "uses": [
+    "lem-sbc-complete-local-subideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V Lemma 1.1.3; completeness for a subideal uses Stacks algebra.tex Tag 00IP (lemma-intersect-powers-ideal-module-zero)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-domain",
+  "def-weil-finitely-generated-module",
+  "lem-per-weierstrass-henselian-cylinder",
+  "lem-per-complete-local-excellence",
+  "lem-exc-finite-type-localization-excellent",
+  "def-exc-excellent-ring",
+  "lem-per-henselian-normal-completion-preparation",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-trf-henselization-quasi-finite-ring",
+  "def-weil-pbc-henselization-at-prime",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "def-weil-pbc-henselian-terminology",
+  "lem-per-distinguished-polynomial-quotient",
+  "lem-weil-pbc-quotient-henselian-pair",
+  "lem-trf-henselization-quotient-at-prime",
+  "lem-sbc-complete-local-subideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "V 1.1.3, 1.2.3 and 3.2.3, with the finite-coefficient and canonical-comparison details supplied by the cited algebra nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +214,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : Polynomial A} →\\n      {I : Ideal A} →\\n        g.IsDistinguishedAt I →\\n          [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {g}) ≃ₐ[A] PowerSeries A ⧸ Ideal.span {↑g}\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite local coefficient extension commutes with power series polynomial henselization and completion",
+   "results": "8 hits: IsAdicComplete.henselianRing, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply, PowerSeries.exists_isWeierstrassFactorization, PowerSeries.IsWeierstrassFactorization, PowerSeries.weierstrassDistinguished, PowerSeries.IsWeierstrassFactorization.unique, PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.exists_isWeierstrassDivision",
+   "date": "2026-10-24",
+   "verdict": "no match: separate henselian, Weierstrass, quasi-finite or finite-module completion facts; no declaration states the whole item."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Module.Finite",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: separate henselian, Weierstrass, quasi-finite or finite-module completion facts; no declaration states the whole item."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*(tensor|finite)|finite.*hensel",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: separate henselian, Weierstrass, quasi-finite or finite-module completion facts; no declaration states the whole item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient extension of henselian polynomial local rings has tensor product completion",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, HenselianLocalRing.is_henselian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_surjective_of_finite, IsAdicComplete.henselianRing",
+   "date": "2026-10-24",
+   "verdict": "no match: separate henselian, Weierstrass, quasi-finite or finite-module completion facts; no declaration states the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselization is finite under a quasi finite ring homomorphism and completion commutes with finite extensions",
+   "results": "8 hits: Algebra.QuasiFiniteAt, Algebra.QuasiFinite.instResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.finite_fiber, Algebra.QuasiFinite.instFiniteResidueField, IsAdicComplete.henselianRing, Algebra.quasiFinite_iff, Algebra.QuasiFinite.of_isLocalization",
+   "date": "2026-10-24",
+   "verdict": "no match: separate henselian, Weierstrass, quasi-finite or finite-module completion facts; no declaration states the whole item."
+  },
+  {
+   "tool": "grep",
+   "query": "henselization|henselisation|IsExcellent",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: separate henselian, Weierstrass, quasi-finite or finite-module completion facts; no declaration states the whole item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-equivariant-marked-cylinder-algebraization",
@@ -90,5 +288,107 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-coefficient-henselian-cylinder",
+  "worker": "stage1",
+  "summary": "Ten steps assemble existing algebra nodes, with explicit finite coefficient generators, canonical completion compatibility and all distinguished-polynomial quotients. No new nodes or statement changes. Corrected the ordinary-henselization source tag from 05WR to 05WP.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, IX 1.1 input: ILO V 3.2.3 finite coefficient comparison used by equivariant marked-cylinder algebraization. Both completion topologies are realized without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Generic commutative-algebra tool used for Power series over a complete Noetherian ring are complete for the combined ideal; the perverse-unit route has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic commutative-algebra tool used for Excellence is preserved by finite type algebras and localization; the perverse-unit route has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "why": "Generic commutative-algebra tool used for A finite ring map is of finite type and quasi-finite at every prime; the perverse-unit route has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-trf-henselization-quasi-finite-ring",
+    "why": "Generic commutative-algebra tool used for Ordinary henselization under a quasi-finite local map; the perverse-unit route has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic commutative-algebra tool used for A complete pair is henselian; the perverse-unit route has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Generic commutative-algebra tool used for Completion of a finite algebra at the primes over a prime; the perverse-unit route has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic commutative-algebra tool used for A finite algebra over a henselian local ring is a product of henselian local rings; the perverse-unit route has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-henselian-pair",
+    "why": "Generic commutative-algebra tool used for Henselianity descends through a quotient inside the maximal ideal; the perverse-unit route has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-trf-henselization-quotient-at-prime",
+    "why": "Generic commutative-algebra tool used for Ordinary henselization commutes with a local quotient; the perverse-unit route has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-sbc-complete-local-subideal",
+    "why": "Generic commutative-algebra tool used for Completeness for subideals of the maximal ideal; the perverse-unit route has no replacement for this algebraic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-trf-henselization-quasi-finite-ring",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-quotient-henselian-pair",
+  "lem-trf-henselization-quotient-at-prime",
+  "lem-sbc-complete-local-subideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NL-e30366e1f",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-e30366e1f (reviewer sub-agent of L); spot-checked: No new nodes. Statement and stmt_deps are unchanged from the base; I compared them with clones/live. I read all 10 steps and the statement of every cited node; the proof is correct. ILO Exposé V checked: 1.1.3 (p.63, completion of B{X} by a Weierstraß polynomial), 1.2.3 (p.64, henselian pair) and 3.2.3 (p.67, comparison of the V^H and V coefficient cylinders). Stacks checked: 05WP and 05WQ (algebra.tex l.43581), 07N9, 07QU, 07QW. Small cases checked: fields with e=0, an inseparable extension, a ramified DVR extension; n>0 is used. Route-lock check: the closure of lem-per-artin-gabber-affine-curve contains neither the item nor any of the four flagged nodes (complete-local-excellence, distinguished-polynomial-quotient, henselian-normal-completion-preparation, weierstrass-henselian-cylinder). The item is reached only through lem-per-equivariant-marked-cylinder-algebraization, which already cites two of those nodes, by the sfb tame-pair/Gabber-modification chain. The lock does not apply. Batch-5 check: lem-trf-henselization-quasi-finite-ring (05WP) and lem-trf-henselization-quotient-at-prime (05WQ) are generic algebra. The other four reach sec-trace-formula only through def-weil-pbc-henselization-at-prime or the commutative-algebra lemmas trf-regular-ring-universally-catenary and trf-regular-sequence-dimension-formula. None is part of the trace formula or Poincaré duality; OK. I accept the 10 tool_uses as generic black boxes. FIX in the item file: (1) source.place still read Tag 05WR (the strict-henselization lemma), although the report claimed it was corrected; I set it to 05WP and 05WQ. (2) Step 6 moved from 'agrees on S' to 'the completed map is R→R_V'; I added the argument on S/m^k = R/m_R^k and the inverse limit, so the comparison is a⊗b↦ab.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteCoefficientHenselianCylinder",
+  "declaration": "Algebra.finite_coefficient_henselian_cylinder",
+  "declarations": [
+   "Algebra.cylinderStructureMap",
+   "Algebra.finite_coefficient_henselian_cylinder"
+  ],
+  "file": "lean/Sheaf/RingTheory/FiniteCoefficientHenselianCylinder.lean",
+  "statement": "theorem finite_coefficient_henselian_cylinder (Λ : Type u) (V : Type v) [CommRing Λ] [CommRing V] [IsDomain Λ] [IsDomain V] [IsLocalRing Λ] [IsLocalRing V] [Algebra Λ V] [Module.Finite Λ V] (hcoeff : (IsField Λ ∧ IsField V) ∨ (IsDiscreteValuationRing Λ ∧ IsDiscreteValuationRing V ∧ IsAdicComplete (IsLocalRing.maximalIdeal Λ) Λ ∧ IsAdicComplete (IsLocalRing.maximalIdeal V) V)) (hinj : Function.Injective (algebraMap Λ V)) (hloc : IsLocalHom (algebraMap Λ V)) (e : ℕ) (p : Ideal (Polynomial (MvPowerSeries (Fin e) Λ))) [p.IsPrime] (hp : p = (IsLocalRing.maximalIdeal (MvPowerSeries (Fin e) Λ)).comap (Polynomial.evalRingHom 0)) (q : Ideal (Polynomial (MvPowerSeries (Fin e) V))) [q.IsPrime] (hq : q = (IsLocalRing.maximalIdeal (MvPowerSeries (Fin e) V)).comap (Polynomial.evalRingHom 0)) (S : Type w) (S_V : Type z) [CommRing S] [CommRing S_V] [Algebra (Localization.AtPrime p) S] [HenselianLocalRing S] [Algebra (Localization.AtPrime q) S_V] [HenselianLocalRing S_V] (hS : Algebra.IsHenselizationAtPrime' (Polynomial (MvPowerSeries (Fin e) Λ)) p S) (hSV : Algebra.IsHenselizationAtPrime' (Polynomial (MvPowerSeries (Fin e) V)) q S_V) : IsNoetherianRing (MvPowerSeries (Fin e) Λ) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin e) Λ)) (MvPowerSeries (Fin e) Λ) ∧ IsDomain (MvPowerSeries (Fin e) Λ) ∧ IsNoetherianRing (MvPowerSeries (Fin e) V) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin e) V)) (MvPowerSeries (Fin e) V) ∧ IsDomain (MvPowerSeries (Fin e) V) ∧ IsExcellent S ∧ IsNoetherianRing S ∧ IsDomain S ∧ IsExcellent S_V ∧ IsNoetherianRing S_V ∧ IsDomain S_V ∧ ∃ (_ : Algebra S S_V) (_ : Algebra S (PowerSeries (MvPowerSeries (Fin e) Λ))) (_ : Algebra S_V (PowerSeries (MvPowerSeries (Fin e) V))) (_ : Algebra (PowerSeries (MvPowerSeries (Fin e) Λ)) (PowerSeries (MvPowerSeries (Fin e) V))), Module.Finite S S_V ∧ IsLocalHom (algebraMap S S_V) ∧ (algebraMap S S_V).comp (cylinderStructureMap p S) = (cylinderStructureMap q S_V).comp (Polynomial.mapRingHom (MvPowerSeries.map (algebraMap Λ V))) ∧ (algebraMap S (PowerSeries (MvPowerSeries (Fin e) Λ))).comp (cylinderStructureMap p S) = Polynomial.coeToPowerSeries.ringHom ∧ (algebraMap S_V (PowerSeries (MvPowerSeries (Fin e) V))).comp (cylinderStructureMap q S_V) = Polynomial.coeToPowerSeries.ringHom ∧ algebraMap (PowerSeries (MvPowerSeries (Fin e) Λ)) (PowerSeries (MvPowerSeries (Fin e) V)) = PowerSeries.map (MvPowerSeries.map (algebraMap Λ V)) ∧ IsLocalHom (algebraMap S (PowerSeries (MvPowerSeries (Fin e) Λ))) ∧ IsLocalHom (algebraMap S_V (PowerSeries (MvPowerSeries (Fin e) V))) ∧ (algebraMap S (PowerSeries (MvPowerSeries (Fin e) Λ))).FaithfullyFlat ∧ (algebraMap S_V (PowerSeries (MvPowerSeries (Fin e) V))).FaithfullyFlat ∧ Module.Finite (PowerSeries (MvPowerSeries (Fin e) Λ)) (PowerSeries (MvPowerSeries (Fin e) V)) ∧ ∃ (c : AdicCompletion (IsLocalRing.maximalIdeal S) S ≃+* PowerSeries (MvPowerSeries (Fin e) Λ)) (cV : AdicCompletion (IsLocalRing.maximalIdeal S_V) S_V ≃+* PowerSeries (MvPowerSeries (Fin e) V)) (t : TensorProduct S (PowerSeries (MvPowerSeries (Fin e) Λ)) S_V ≃+* (PowerSeries (MvPowerSeries (Fin e) V))), (∀ x : S, c (algebraMap S _ x) = algebraMap S (PowerSeries (MvPowerSeries (Fin e) Λ)) x) ∧ (∀ x : S_V, cV (algebraMap S_V _ x) = algebraMap S_V (PowerSeries (MvPowerSeries (Fin e) V)) x) ∧ (∀ (a : PowerSeries (MvPowerSeries (Fin e) Λ)) (b : S_V), t (a ⊗ₜ[S] b) = algebraMap (PowerSeries (MvPowerSeries (Fin e) Λ)) (PowerSeries (MvPowerSeries (Fin e) V)) a * algebraMap S_V (PowerSeries (MvPowerSeries (Fin e) V)) b) ∧ ∀ (g : Polynomial (MvPowerSeries (Fin e) Λ)) (n : ℕ), 0 < n → g.Monic → g.natDegree = n → (∀ i : ℕ, i < n → g.coeff i ∈ IsLocalRing.maximalIdeal (MvPowerSeries (Fin e) Λ)) → HenselianRing S (Ideal.span {cylinderStructureMap p S g}) ∧ HenselianRing S_V (Ideal.span {cylinderStructureMap q S_V (g.map (MvPowerSeries.map (algebraMap Λ V)))}) ∧ ∃ (cg : AdicCompletion (Ideal.span {cylinderStructureMap p S g}) S ≃+* PowerSeries (MvPowerSeries (Fin e) Λ)) (cgV : AdicCompletion (Ideal.span {cylinderStructureMap q S_V (g.map (MvPowerSeries.map (algebraMap Λ V)))}) S_V ≃+* PowerSeries (MvPowerSeries (Fin e) V)), (∀ x : S, cg (algebraMap S _ x) = algebraMap S (PowerSeries (MvPowerSeries (Fin e) Λ)) x) ∧ (∀ x : S_V, cgV (algebraMap S_V _ x) = algebraMap S_V (PowerSeries (MvPowerSeries (Fin e) V)) x)",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57256c087",
+  "group": "Q138",
+  "result": "fix",
+  "note": "Lean and records correct: the node differs from side-live only in lean; the statement field matches the signature exactly; all 11 stmt_dep records read. Hypotheses match the node with nothing stronger: finite injective local Λ→V; fields or complete DVRs (IsDomain/IsLocalRing only type the DVR class); D,E = MvPowerSeries (Fin e); primes = comap 𝔪 under eval 0; S,S_V via IsHenselizationAtPrime' (source read). All canonical maps are pinned, none arbitrary: S→S_V, S→R, S_V→R_V by IsLocalHom plus D[T] restriction (unique since targets are henselian); R→R_V = PowerSeries.map. Completion isos c, cV, cg, cgV pinned on S and S_V; t pinned on pure tensors (a⊗b↦ab). Module.Finite R R_V, HenselianRing span{g} on both sides (V side via g.map), FaithfullyFlat both maps. Edge cases e=0, fields, any characteristic, g=T^n covered; n=0 excluded as in the node; universes u v w z independent. cylinderStructureMap is real data; docstrings carry source and blueprint; the only proof is sorry; no name clash. Sole fault H11: the second reading was a self-check by the same worker → FIX fixes/lem-per-finite-coefficient-henselian-cylinder.report.md (worker report verbatim + independent second reading). No Lean change, so no compile."
+ }
 }

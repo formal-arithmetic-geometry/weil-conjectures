@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-free-simplicial-homotopy-normalized-homology",
+ "kind": "statement",
+ "title": "Free abelian normalized homology inverts simplicial homotopy equivalences",
+ "statement": "Let $K,L$ be simplicial sets [def-weil-pbc-simplicial-set], with simplicial maps $u:K\\to L$ and $v:L\\to K$. Suppose $vu$ and $\\mathrm{id}_K$, and respectively $uv$ and $\\mathrm{id}_L$, are joined by finite chains of simplicial maps whose consecutive terms admit a cylinder homotopy in either direction. A cylinder homotopy from $a:S\\to T$ to $b:S\\to T$ is a simplicial map $h:S\\times\\Delta[1]\\to T$ with $h(-,c_0)=a$ and $h(-,c_1)=b$, where $\\Delta[1]_m$ consists of order-preserving maps $[m]\\to[1]$ and $c_e$ is constant at $e$. For a simplicial set $S$, let $F(S)_m=\\mathbb Z[S_m]$, the free abelian group with basis vectors $[s]$ indexed by $s\\in S_m$; every simplicial operator acts by $[s]\\mapsto[S(\\varphi)(s)]$. For a simplicial-set map $a:S\\to T$ put $F(a)_m([s])=[a_m(s)]$. For a simplicial abelian group $Z$ [def-weil-pbc-simplicial-object], set $N(Z)_0=Z_0$ and $N(Z)_m=\\bigcap_{i=1}^m\\ker(d_i:Z_m\\to Z_{m-1})$ for $m>0$, with differential $\\partial_m=d_0$ for $m>0$ and $\\partial_0=0$. Write $H_m(N(Z))=\\ker\\partial_m/\\operatorname{im}\\partial_{m+1}$; a simplicial morphism $a$ induces the chain map $N(a)$ by restriction in every degree. Then for every $n\\geq0$, $H_n(N(F(v)))\\circ H_n(N(F(u)))=\\mathrm{id}$ and $H_n(N(F(u)))\\circ H_n(N(F(v)))=\\mathrm{id}$. In particular $H_n(N(F(u)))$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P2 (lemma-homotopy-equivalence), first proof paragraph, lines 5892-5909: free homology invertibility. Finite cylinder-homotopy chains and the higher-face normalization convention are made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [
+  {
+   "text": "Write $C(S)=C(F(S))$ for the alternating complex, with $C(S)_m=\\mathbb Z[S_m]$, differential $\\sum_{i=0}^m(-1)^id_i$ for $m>0$, and zero out of degree zero. The basis formulas in the statement give $F(ba)=F(b)F(a)$ and $F(\\mathrm{id})=\\mathrm{id}$: both sides send $[s]$ to $[b(a(s))]$ and $[s]$, respectively. Naturality with respect to faces makes $F(a)$ preserve all the kernels defining $N$, and makes $C(a)$ a chain map. Thus $N(F(ba))=N(F(b))N(F(a))$. The induced maps on homology are $[z]\\mapsto[f(z)]$; chain maps preserve cycles and boundaries, so this formula is well-defined and preserves composites and identities. These observations apply also in degree zero.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), first proof paragraph: free abelian groups form a functor; elementary basis and cycle-quotient verification."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-normalized-alternating-homotopy-equivalence] in abelian groups to $F(S)$. It gives the natural chain inclusion $j_S:N(F(S))\\to C(S)$ and a chain map $r_S:C(S)\\to N(F(S))$ with $r_Sj_S$ and $j_Sr_S$ chain homotopic to the respective identities. Set $J_S=H_n(j_S)$. For any chain homotopy $f-g=dh+hd$ and cycle $z$, $(f-g)(z)=d(h(z))$ is a boundary; hence $H_n(f)=H_n(g)$. Applying this calculation to the two supplied homotopies gives $H_n(r_S)J_S=1$ and $J_SH_n(r_S)=1$. Consequently $J_S$ is bijective. The cited normalization is exactly $\\bigcap_{i=1}^m\\ker d_i$ with differential $d_0$, including $N_0=F(S)_0$; it is not being identified silently with the opposite-face convention.",
+   "uses": [
+    "lem-cbc-normalized-alternating-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 019S (lemma-homotopy-s-N), normalization comparison, and 019T (lemma-homotopy-equivalence-s-N), used in 08P2. Higher-face convention supplied by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "For a single cylinder homotopy $h:S\\times\\Delta[1]\\to T$ from $a$ to $b$, apply [lem-weil-pbc-simplicial-homotopy-free-chain-homotopy] with ring $R=\\mathbb Z$. Its cylinder, constant endpoint maps, and basis-induced free chain maps are exactly those in this statement and step 1. Its conclusion gives $H_n(C(a))=H_n(C(b))$. If the cylinder runs from $b$ to $a$, symmetry of equality gives the same conclusion. No Kan or finiteness hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 019Y (lemma-functorial-homotopy) and 019S (lemma-homotopy-s-N), the two ingredients invoked in the first paragraph of Tag 08P2."
+   }
+  },
+  {
+   "text": "Naturality of the inclusions in [lem-cbc-normalized-alternating-homotopy-equivalence] gives $j_TN(F(a))=C(a)j_S$ and the identical formula with $b$. On homology these read $J_TH_n(N(F(a)))=H_n(C(a))J_S$ and $J_TH_n(N(F(b)))=H_n(C(b))J_S$. Step 3 equates their right sides. Cancelling the bijection $J_T$ from step 2 proves $H_n(N(F(a)))=H_n(N(F(b)))$ for either orientation of a cylinder. This is cancellation of explicit maps, not an assumption about naturality of the chosen $r_S$.",
+   "uses": [
+    "lem-cbc-normalized-alternating-homotopy-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S (lemma-homotopy-s-N), passage from alternating to normalized maps; natural inclusion from the cited leaf."
+   }
+  },
+  {
+   "text": "Put $A(a)=H_n(N(F(a)))$. For a finite chain $a_0,\\ldots,a_t$ as in the hypothesis, induct on $t$: for $t=0$ the endpoint maps are identical, and for $t+1$ the induction hypothesis gives $A(a_0)=A(a_t)$ while step 4 gives $A(a_t)=A(a_{t+1})$. Thus $A(vu)=A(\\mathrm{id}_K)$ and $A(uv)=A(\\mathrm{id}_L)$. Step 1 now yields $A(v)A(u)=1$ and $A(u)A(v)=1$. The first identity makes $A(u)$ injective (apply $A(v)$ to an equality), and the second makes it surjective (a preimage of $y$ is $A(v)(y)$). This proves every asserted clause for the arbitrary $n\\geq0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019T (lemma-homotopy-equivalence-s-N) and Tag 08P2 (lemma-homotopy-equivalence), first proof paragraph; explicit finite-chain and inverse assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-normalized-alternating-homotopy-equivalence",
+  "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tags 08P2, 019Y, 019S and 019T; explicit assembly through the existing Mathlib natural higher-face normalization comparison instead of silently switching the Stacks face convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial set homotopy equivalence induces isomorphisms on normalized homology of the degreewise free abelian groups",
+   "results": "{\"t\": \"2026-10-22T06:41:32Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial set homotopy equivalence induces isomorphisms on normalized homology of the degreewise free abelian groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"HomotopyEquiv.toHomologyIso\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"HomotopyEquiv.quasiIsoAt_hom\"], \"digest\": \"a1da216dd2bf034a\"}; full output retained in search-0.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: SSet.Homotopy.congr_homologyMap gives equality for one cylinder homotopy on alternating free chains, not finite chains and a two-sided inverse on normalized free homology. DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex compares the two complexes for a single object. Combining the two and checking free functoriality is the separate argument stated here, not a one-line specialization. Read HomotopyInvariance.lean:103-120, DoldKan/HomotopyEquivalence.lean:79-87, MooreComplex.lean:64-90."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.Homotopy.congr_homologyMap\"",
+   "results": "{\"t\": \"2026-10-22T06:41:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.Homotopy.congr_homologyMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.Homotopy.congr_homologyMap\"], \"digest\": \"a8e6cb290b533d5d\"}; full output retained in search-1.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: SSet.Homotopy.congr_homologyMap gives equality for one cylinder homotopy on alternating free chains, not finite chains and a two-sided inverse on normalized free homology. DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex compares the two complexes for a single object. Combining the two and checking free functoriality is the separate argument stated here, not a one-line specialization. Read HomotopyInvariance.lean:103-120, DoldKan/HomotopyEquivalence.lean:79-87, MooreComplex.lean:64-90."
+  },
+  {
+   "tool": "grep",
+   "query": "Homotopy.*homologyMap|homotopy.*quasiIso",
+   "results": "{\"t\": \"2026-10-22T06:41:26Z\", \"tool\": \"grep\", \"query\": \"Homotopy.*homologyMap|homotopy.*quasiIso\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\"], \"digest\": \"f9c5a54c28bb9f7c\"}; full output retained in search-2.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: SSet.Homotopy.congr_homologyMap gives equality for one cylinder homotopy on alternating free chains, not finite chains and a two-sided inverse on normalized free homology. DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex compares the two complexes for a single object. Combining the two and checking free functoriality is the separate argument stated here, not a one-line specialization. Read HomotopyInvariance.lean:103-120, DoldKan/HomotopyEquivalence.lean:79-87, MooreComplex.lean:64-90."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free abelianization of homotopy equivalent simplicial sets has isomorphic normalized chain homology",
+   "results": "{\"t\": \"2026-10-22T06:41:27Z\", \"tool\": \"leansearch\", \"query\": \"Free abelianization of homotopy equivalent simplicial sets has isomorphic normalized chain homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyEquiv.toHomologyIso\", \"AlgebraicTopology.DoldKan.instReflectsIsomorphismsSimplicialObjectKaroubiChainComplexNatN₁\", \"CategoryTheory.Idempotents.DoldKan.N_map\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"CategoryTheory.Idempotents.DoldKan.N\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"CategoryTheory.Idempotents.DoldKan.N_obj\", \"AlgebraicTopology.normalizedMooreComplex\"], \"digest\": \"4f714db51fa67f7c\"}; full output retained in search-3.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: SSet.Homotopy.congr_homologyMap gives equality for one cylinder homotopy on alternating free chains, not finite chains and a two-sided inverse on normalized free homology. DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex compares the two complexes for a single object. Combining the two and checking free functoriality is the separate argument stated here, not a one-line specialization. Read HomotopyInvariance.lean:103-120, DoldKan/HomotopyEquivalence.lean:79-87, MooreComplex.lean:64-90."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite zigzags of simplicial cylinder homotopies give inverse maps on free integral homology",
+   "results": "{\"t\": \"2026-10-22T06:41:35Z\", \"tool\": \"leanfinder\", \"query\": \"Finite zigzags of simplicial cylinder homotopies give inverse maps on free integral homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.cylinder.homotopyEquiv\", \"HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"HomologicalComplex.cylinder.πCompι₀Homotopy.nullHomotopicMap_eq\", \"HomologicalComplex.cylinder.πCompι₀Homotopy\"], \"digest\": \"232353d8440c417d\"}; full output retained in search-4.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: SSet.Homotopy.congr_homologyMap gives equality for one cylinder homotopy on alternating free chains, not finite chains and a two-sided inverse on normalized free homology. DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex compares the two complexes for a single object. Combining the two and checking free functoriality is the separate argument stated here, not a one-line specialization. Read HomotopyInvariance.lean:103-120, DoldKan/HomotopyEquivalence.lean:79-87, MooreComplex.lean:64-90."
+  },
+  {
+   "tool": "grep",
+   "query": "congr_homologyMap|homotopyEquivNormalizedMoore",
+   "results": "{\"t\": \"2026-10-23T12:15:40Z\", \"tool\": \"grep\", \"query\": \"congr_homologyMap|homotopyEquivNormalizedMoore\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean\", \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\"], \"digest\": \"41e6d1a1b2af3451\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: results compare normalized and alternating complexes, or start with a chain homotopy equivalence; none gives the two inverse identities from finite cylinder-homotopy chains on simplicial sets. Relevant comparison and cylinder invariance are existing Mathlib leaves cited in the split; source read at HomotopyEquivalence.lean:79-87, AlternatingFaceMapComplex.lean:269-301, MooreComplex.lean:64-90, Homology/HomotopyInvariance.lean:103-120."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy equivalent simplicial sets have isomorphic free normalized integral homology",
+   "results": "{\"t\": \"2026-10-23T12:15:41Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy equivalent simplicial sets have isomorphic free normalized integral homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyEquiv.toHomologyIso\", \"homotopyEquivalences_le_quasiIso\", \"HomotopyEquiv.quasiIso_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"HomotopyEquiv.quasiIsoAt_hom\", \"AlgebraicTopology.DoldKan.instReflectsIsomorphismsSimplicialObjectKaroubiChainComplexNatN₁\", \"HomologicalComplex.homotopyEquivalences\", \"HomotopyEquiv.ofIso\"], \"digest\": \"482b3738955e4474\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: results compare normalized and alternating complexes, or start with a chain homotopy equivalence; none gives the two inverse identities from finite cylinder-homotopy chains on simplicial sets. Relevant comparison and cylinder invariance are existing Mathlib leaves cited in the split; source read at HomotopyEquivalence.lean:79-87, AlternatingFaceMapComplex.lean:269-301, MooreComplex.lean:64-90, Homology/HomotopyInvariance.lean:103-120."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\"",
+   "results": "{\"t\": \"2026-10-23T12:15:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\"], \"digest\": \"cde7ca657f8f6633\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: results compare normalized and alternating complexes, or start with a chain homotopy equivalence; none gives the two inverse identities from finite cylinder-homotopy chains on simplicial sets. Relevant comparison and cylinder invariance are existing Mathlib leaves cited in the split; source read at HomotopyEquivalence.lean:79-87, AlternatingFaceMapComplex.lean:269-301, MooreComplex.lean:64-90, Homology/HomotopyInvariance.lean:103-120."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial homotopy equivalence induces inverse maps on normalized homology of free abelian groups",
+   "results": "{\"t\": \"2026-10-23T12:15:47Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial homotopy equivalence induces inverse maps on normalized homology of free abelian groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f\", \"AlgebraicTopology.DoldKan.toKaroubiCompN₂IsoN₁_inv_app\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\"], \"digest\": \"655017196b314a35\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: results compare normalized and alternating complexes, or start with a chain homotopy equivalence; none gives the two inverse identities from finite cylinder-homotopy chains on simplicial sets. Relevant comparison and cylinder invariance are existing Mathlib leaves cited in the split; source read at HomotopyEquivalence.lean:79-87, AlternatingFaceMapComplex.lean:269-301, MooreComplex.lean:64-90, Homology/HomotopyInvariance.lean:103-120."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite zigzags of cylinder homotopies of simplicial sets give mutually inverse homology maps on normalized free integral chains",
+   "results": "{\"t\": \"2026-10-23T12:16:11Z\", \"tool\": \"leanfinder\", \"query\": \"Finite zigzags of cylinder homotopies of simplicial sets give mutually inverse homology maps on normalized free integral chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\"], \"digest\": \"e134384c71cf61d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: results compare normalized and alternating complexes, or start with a chain homotopy equivalence; none gives the two inverse identities from finite cylinder-homotopy chains on simplicial sets. Relevant comparison and cylinder invariance are existing Mathlib leaves cited in the split; source read at HomotopyEquivalence.lean:79-87, AlternatingFaceMapComplex.lean:269-301, MooreComplex.lean:64-90, Homology/HomotopyInvariance.lean:103-120."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: direct simplicial abelian-group input, namely the Tag 08P2 statement that an underlying simplicial-set homotopy equivalence induces a quasi-isomorphism on associated alternating-face complexes. Subargument of Stacks 08P2: Tag 08P2 (lemma-homotopy-equivalence), first proof paragraph, lines 5892-5909: free homology invertibility. Finite cylinder-homotopy chains and the higher-face normalization convention are made explicit.",
+   "via": [
+    "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-free-simplicial-homotopy-normalized-homology",
+  "worker": "stage1",
+  "summary": "Q84 supplies a five-step proof using two existing Mathlib leaves: free cylinder chain homotopy and the natural normalized-to-alternating chain homotopy equivalence. Basis functoriality, cycle-quotient functoriality, the effect of chain homotopies on cycles, naturality cancellation, finite-chain induction and both inverse identities are written out. No new nodes or statement changes.",
+  "blueprint": "lem-trf-local-term-locality, proof (1)--(2): auxiliary simplicial homological-algebra input below the semistable-alteration/nearby-cycle branch; this item supplies the free homology invertibility assertion in the first proof paragraph of Stacks 08P2, through 019Y and 019S/019T. The current latest blueprint does not state this auxiliary fact separately."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-545220997",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-545220997 (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery has no new nodes, keeps the statement and stmt_deps unchanged, and is not answering a re-split note. The statement matches the free-homology subclaim of Stacks 08P2, first proof paragraph (via 019Y and 019S/019T), and exactly what the parent lem-trf-simplicial-abelian-set-homotopy-quasi-iso uses in its step 1: finite zigzags in either direction, inverse H_n(N(F(g))). The higher-face convention (kernels of d_1..d_m, differential d_0) is the convention of the cited leaf lem-cbc-normalized-alternating-homotopy-equivalence; I checked the Mathlib anchors DoldKan/HomotopyEquivalence.lean:79-87 (hom = inclusion) and AlternatingFaceMapComplex.lean:300 (natural transformation). Step 3 uses lem-weil-pbc-simplicial-homotopy-free-chain-homotopy with R=Z, the same cylinder; Mathlib HomotopyInvariance.lean:103-120 congr_homologyMap. Step 2 writes out why a chain homotopy acts trivially on cycles. Step 4 cancels the bijection J_T using only naturality of the inclusion. Step 5 is an explicit induction on the zigzag and derives both inverse identities. proof_deps equals the union of the uses. All four search kinds are recorded. No duplicate in the DAG: I checked the hits for 08P2/019Y/019T and for normalized homotopy, including the coskeleton, trivial-Kan and transfer siblings. The only theorem citations are Mathlib leaves, so no tool_uses are needed; no SGA citation. Edge cases checked: zigzag of length 0, empty simplicial sets, n=0, Δ[1]→Δ[0] with the cylinder min(x,t), infinite simplex sets. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FreeSimplicialHomotopyNormalizedHomology",
+  "declaration": "AlgebraicTopology.free_normalized_homology_inverse_of_homotopy_equivalence",
+  "file": "lean/Sheaf/AlgebraicTopology/FreeSimplicialHomotopyNormalizedHomology.lean",
+  "statement": "theorem free_normalized_homology_inverse_of_homotopy_equivalence {K L : SSet.{u}} (u : K ⟶ L) (v : L ⟶ K) (hK : Relation.EqvGen (fun a b ↦ Nonempty (SSet.Homotopy a b)) (u ≫ v) (𝟙 K)) (hL : Relation.EqvGen (fun a b ↦ Nonempty (SSet.Homotopy a b)) (v ≫ u) (𝟙 L)) (n : ℕ) : (HomologicalComplex.homologyMap ((normalizedMooreComplex AddCommGrpCat.{u}).map (Functor.whiskerRight u AddCommGrpCat.free)) n ≫ HomologicalComplex.homologyMap ((normalizedMooreComplex AddCommGrpCat.{u}).map (Functor.whiskerRight v AddCommGrpCat.free)) n = 𝟙 _) ∧ (HomologicalComplex.homologyMap ((normalizedMooreComplex AddCommGrpCat.{u}).map (Functor.whiskerRight v AddCommGrpCat.free)) n ≫ HomologicalComplex.homologyMap ((normalizedMooreComplex AddCommGrpCat.{u}).map (Functor.whiskerRight u AddCommGrpCat.free)) n = 𝟙 _) ∧ Function.Bijective (HomologicalComplex.homologyMap ((normalizedMooreComplex AddCommGrpCat.{u}).map (Functor.whiskerRight u AddCommGrpCat.free)) n).hom",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2d8a2b57",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: EqvGen of Nonempty SSet.Homotopy (= cylinder X⊗Δ[1]→Y, ι₀/ι₁ endpoints) for finite either-direction chains incl. length 0; u≫v = v∘u; F = S⋙AddCommGrpCat.free, F(a) = whiskerRight; normalizedMooreComplex has the same higher-face kernels d₁..dₘ with ∂=d₀ and N₀=Z₀ (MooreComplex.lean:64-135); both inverse identities plus Bijective .hom, ∀ n:ℕ. No extra assumptions; universes consistent (SSet.{u}, AddCommGrpCat.{u}). lean.statement verbatim in file; no statement_change; sorry only; source/blueprint docstrings and 5-step proof docstring present; report has both sections. Not landed elsewhere (side-live node still split); parent SimplicialAbelianSetHomotopyQuasiIso uses the same EqvGen encoding; Mathlib has only ingredients. No fixes."
+ }
+}

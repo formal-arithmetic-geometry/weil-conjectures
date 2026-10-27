@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-local-domain-birational-dimension-one",
+ "kind": "statement",
+ "title": "A birational dimension-one local overring of a nonfield Noetherian local domain",
+ "statement": "Let $B$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] which is a nonzero local integral domain, with unique maximal ideal $\\mathfrak m_B\\ne0$. Let $K$ be a field [def-weil-field] containing $B$, with every element of $K$ expressible as $b/c$ for $b,c\\in B$ and $c\\ne0$. There exists a subring $R\\subseteq K$ containing $B$ which is a Noetherian local integral domain of Krull dimension $1$ [def-weil-pbc-krull-dimension-ring], with unique maximal ideal $\\mathfrak m_R$ satisfying $\\mathfrak m_R\\cap B=\\mathfrak m_B$. The fraction field of $R$, with the given embedding, is $K$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P8, algebra-lemma-dominate-by-dimension-1, clauses (1) and (2); the same-fraction-field clause follows from the inclusions B ⊆ R ⊆ K in its statement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-local-domain-proper-principal-chart] to $B\\subseteq K$. It gives nonzero generators $x_1,\\ldots,x_r$ of $\\mathfrak m_B$, a selected generator $a$, and the Noetherian subring $S=B[x_1/a,\\ldots,x_r/a]\\subseteq K$ with $\\mathfrak m_BS=aS\\ne S$. The inclusion in the field makes $S$ a nonzero integral domain.",
+   "uses": [
+    "lem-sfb-local-domain-proper-principal-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P8, algebra-lemma-dominate-by-dimension-1, proof from choosing a dominating valuation ring through S contained in A and x_r S not equal to S (original item steps 1-3 and properness part of step 4)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-principalized-maximal-ideal-height-one-prime] to $B\\subseteq S$ and $a$. All its hypotheses were obtained in step 1. Choose the resulting prime $\\mathfrak q$ minimal over $aS$ with $\\operatorname{ht}_S(\\mathfrak q)=1$ and $\\mathfrak q\\cap B=\\mathfrak m_B$.",
+   "uses": [
+    "lem-sfb-principalized-maximal-ideal-height-one-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P8, algebra-lemma-dominate-by-dimension-1, proof sentences choosing a minimal prime over x_r S, proving height one, and proving that it lies over the original maximal ideal (original item steps 4-5)."
+   }
+  },
+  {
+   "text": "Define the required ring as the actual subring $R=\\{s/t\\in K:s\\in S,\\ t\\in S\\setminus\\mathfrak q\\}$. The complement of the prime $\\mathfrak q$ is multiplicative and excludes zero, so field addition and multiplication show this is a subring containing $S$. The fraction construction of [def-weil-pbc-localization-at-prime] identifies it with $S_{\\mathfrak q}$: equality of fractions in $K$ is $s t'=s' t$, exactly the localization equality because $S$ is a domain. Its maximal ideal is $\\mathfrak n=\\{s/t:s\\in\\mathfrak q,\\ t\\notin\\mathfrak q\\}$. Numerator membership in $\\mathfrak q$ is independent of presentation by cross multiplication and primality. This set is a proper ideal, while a fraction outside it has inverse $t/s\\in R$; hence it is the unique maximal ideal. The inclusion in $K$ makes $R$ a nonzero integral domain.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P8, lemma-dominate-by-dimension-1, final sentence R prime = S_q; Tag 00CO, definition-localization"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-noetherian] to $S\\to R$: all $t\\in S\\setminus\\mathfrak q$ have inverses $1/t$, every element is $s/t$, and injectivity gives its kernel condition (take multiplier $1$). Thus $R$ is Noetherian. By [lem-weil-pbc-localization-dimension-chains-below-prime], its Krull dimension equals $\\operatorname{ht}_S(\\mathfrak q)=1$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P8, lemma-dominate-by-dimension-1, conclusion; Tag 00FN, lemma-Noetherian-permanence; Tag 00KF, definition-height"
+   }
+  },
+  {
+   "text": "For $b\\in B$, the fraction $b/1$ belongs to $\\mathfrak n$ exactly when $b\\in\\mathfrak q$, and this is equivalent to $b\\in\\mathfrak m_B$. Thus $\\mathfrak m_R\\cap B=\\mathfrak m_B$. Finally the embedding of $\\operatorname{Frac}(R)$ into $K$ sends $r/s$ to the same field quotient. It is injective because equality is cross multiplication in the domain $R$. It is surjective because every $k\\in K$ has the form $b/c$ with $b,c\\in B\\subseteq R$ and $c\\ne0$. This proves the asserted equality of fraction fields with the prescribed embedding.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P8, lemma-dominate-by-dimension-1, clause (2) and the inclusions in the statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-local-domain-proper-principal-chart",
+  "lem-sfb-principalized-maximal-ideal-height-one-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-dimension-chains-below-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P8, lemma-dominate-by-dimension-1, proof; the principal-height bound is specialized from the existing Tag 00KW height-quotient node and the same-field clause is expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dominat|exists_ringKrullDim_eq_one|dimension.*one",
+   "results": "{\"t\": \"2026-10-22T04:17:03Z\", \"tool\": \"grep\", \"query\": \"dominat|exists_ringKrullDim_eq_one|dimension.*one\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Ideal/Quotient/HasFiniteQuotients.lean\", \"Mathlib/RingTheory/Ideal/Quotient/HasFiniteQuotients.lean\", \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\"], \"digest\": \"045b1f1a2f76f96f\"}; no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonfield Noetherian local domain has a dominating one-dimensional Noetherian local subring of its fraction field",
+   "results": "{\"t\": \"2026-10-22T04:17:03Z\", \"tool\": \"leansearch\", \"query\": \"A nonfield Noetherian local domain has a dominating one-dimensional Noetherian local subring of its fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isDedekindRing_iff\", \"IsDedekindRing.casesOn\", \"isDedekindDomain_iff\", \"Localization.subalgebra.isFractionRing_ofField\", \"LocalSubring.ofPrime\", \"ringKrullDim_eq_one_iff_of_isLocalRing_isDomain\", \"FractionalIdeal.isNoetherian\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\"], \"digest\": \"6ba377fb792c1696\"}; no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T04:17:03Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing, ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalRing.maximalIdeal_height_eq_ringKrullDim\", \"Ideal.height_eq_ringKrullDim_iff\", \"ringKrullDim_le_spanFinrank_maximalIdeal\", \"ringKrullDim_eq_one_iff_of_isLocalRing_isDomain\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\"], \"digest\": \"e2605fa13a54e9fc\"}; no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonfield Noetherian local domain has a dominating one-dimensional Noetherian local subring of its fraction field",
+   "results": "{\"t\": \"2026-10-22T04:17:05Z\", \"tool\": \"leanfinder\", \"query\": \"A nonfield Noetherian local domain has a dominating one-dimensional Noetherian local subring of its fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDiscreteValuationRing.TFAE\", \"isDedekindDomain_iff\", \"isDedekindRing_iff\", \"IsDedekindDomainDvr\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsDedekindDomainDvr.toIsNoetherian\"], \"digest\": \"0e7dcea8ce4d305f\"}; no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "dominat|exists_factor_valuationRing",
+   "results": "{\"t\": \"2026-10-22T04:17:13Z\", \"tool\": \"grep\", \"query\": \"dominat|exists_factor_valuationRing\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\"], \"digest\": \"e4dc4562b2f3dd76\"}; no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|dominat|exists_ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T04:17:13Z\", \"tool\": \"grep\", \"query\": \"blowup|dominat|exists_ringKrullDim\", \"sub\": \"RingTheory/Ideal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine blowup of a maximal ideal has a height one localization dominating the original Noetherian local domain",
+   "results": "{\"t\": \"2026-10-22T04:17:15Z\", \"tool\": \"leanfinder\", \"query\": \"An affine blowup of a maximal ideal has a height one localization dominating the original Noetherian local domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing\", \"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"OfLocalizationMaximal\", \"IsLocalization.AtPrime.liesOver_maximalIdeal\", \"Ring.DimensionLEOne.localization\", \"Ring.krullDimLE_of_isLocalization_maximal\"], \"digest\": \"17df4e616579f479\"}; no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: the dimension and principal-height lemmas assume an existing ring or prime. LocalSubring.ofPrime localizes a given subring and prime; it does not supply a dimension-one local overring dominating the input. exists_factor_valuationRing supplies a valuation overring without Noetherianity or a dimension-one assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_ringKrullDim_eq_one|dominat|blowup",
+   "results": "{\"t\": \"2026-10-22T04:27:29Z\", \"tool\": \"grep\", \"query\": \"exists_ringKrullDim_eq_one|dominat|blowup\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\", \"Mathlib/RingTheory/Valuation/LocalSubring.lean\"], \"digest\": \"ec5b30d9b8032335\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits characterize or localize an existing ring; none constructs a dominating Noetherian dimension-one subring of the prescribed fraction field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonfield Noetherian local domain has a birational Noetherian local overring of dimension one",
+   "results": "{\"t\": \"2026-10-22T04:27:29Z\", \"tool\": \"leansearch\", \"query\": \"A nonfield Noetherian local domain has a birational Noetherian local overring of dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isDedekindRing_iff\", \"ringKrullDim_eq_one_iff_of_isLocalRing_isDomain\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"IsDedekindRing.casesOn\", \"Ring.DimensionLEOne.localization\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsDedekindRing.toIsNoetherian\", \"IsDedekindDomainDvr.toIsNoetherian\"], \"digest\": \"ba66070905b3c35e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits characterize or localize an existing ring; none constructs a dominating Noetherian dimension-one subring of the prescribed fraction field."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T04:27:30Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing, ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalRing.maximalIdeal_height_eq_ringKrullDim\", \"Ideal.height_eq_ringKrullDim_iff\", \"ringKrullDim_le_spanFinrank_maximalIdeal\", \"ringKrullDim_eq_one_iff_of_isLocalRing_isDomain\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\"], \"digest\": \"e2605fa13a54e9fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits characterize or localize an existing ring; none constructs a dominating Noetherian dimension-one subring of the prescribed fraction field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonfield Noetherian local domain has a dominating one dimensional Noetherian local subring of its fraction field",
+   "results": "{\"t\": \"2026-10-22T04:27:31Z\", \"tool\": \"leanfinder\", \"query\": \"A nonfield Noetherian local domain has a dominating one dimensional Noetherian local subring of its fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDiscreteValuationRing.TFAE\", \"isDedekindDomain_iff\", \"isDedekindRing_iff\", \"IsDedekindDomainDvr\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsDedekindDomainDvr.toIsNoetherian\"], \"digest\": \"0e7dcea8ce4d305f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits characterize or localize an existing ring; none constructs a dominating Noetherian dimension-one subring of the prescribed fraction field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine blowup of the maximal ideal has a dimension one localization inside the same fraction field dominating a Noetherian local domain",
+   "results": "{\"t\": \"2026-10-22T04:28:08Z\", \"tool\": \"leanfinder\", \"query\": \"An affine blowup of the maximal ideal has a dimension one localization inside the same fraction field dominating a Noetherian local domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"Ring.DimensionLEOne.localization\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"IsDiscreteValuationRing.TFAE\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\"], \"digest\": \"a449939cbb26ca3b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits characterize or localize an existing ring; none constructs a dominating Noetherian dimension-one subring of the prescribed fraction field."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-domain-same-field-dvr",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.12, refined valuative criterion restricted to traits with generic point over the base generic point; Tag 0208 proof, boundary-point local domain: same-function-field DVR supplied by Algebra Tag 00PH; Algebra 00PH proof, dimension-one reduction by 00P8 (lemma-dominate-by-dimension-1), before taking the integral closure",
+   "via": [
+    "lem-sfb-local-domain-same-field-dvr",
+    "lem-sfb-generic-dvr-properness-criterion",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-local-domain-birational-dimension-one",
+  "worker": "stage1",
+  "summary": "Q121 repairs the human-mandated re-split: two comparable statement-only unsplit nodes take the finite valuation-selected proper principal chart construction and the height-one minimal-prime/contraction argument. Original steps 6-8 remain verbatim in the parent. The statement, Lean metadata, inherited searches, and blueprint route are unchanged. All original arguments are preserved and assigned explicitly in report.md.",
+  "blueprint": "The inherited from.place identifies the alteration/properness route through de Jong 3.12, Tag 0208 and Tag 00PH. These steps realize its specific Tag 00P8 dimension-one reduction inside the same function field. The inherited ancestor is null (blueprint_refs ancestor confirms None), and its via and place are retained. No unit statement or route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-ca74c9d99",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-ca74c9d99 (reviewer sub-agent of L); spot-checked: The human's re-split note (released 2026-10-22, read in clones/live and side-live coord/repair-notes) asks for 8 old steps of 4459 characters to be spread over at least 2 statement-only nodes, with the parent at most 3000 characters. The delivery meets this. Old steps 1-3 and the first sentence of step 4 (aS proper) go to the new node lem-sfb-local-domain-proper-principal-chart. The rest of step 4 and all of step 5 (minimal prime, contraction, height exactly 1) go to the new node lem-sfb-principalized-maximal-ideal-height-one-prime. Old steps 6-8 stay in the parent as steps 3-5; I compared them by text with the live steps and they are identical. Nothing was shortened. The two nodes carry about 1.5k and 1.3k characters of old argument, and the parent proof is 2306 characters. The statement, stmt_deps, lean, reviewed_lean, blueprint and created fields are identical to live; only the proof fields changed. Source: I read Stacks 00P8 (lemma-dominate-by-dimension-1) in full. The item states its clauses (1)-(2) plus Frac R = K, which follows from B ⊂ R ⊂ K. Chart node: true by the 00P8 construction (a dominating valuation ring A via the Nagata/00IA node, the finite 00IB induction choosing a, S ⊂ A, a in m_A, so aS is proper). Tested on a DVR (S=B), on k[x,y]_(x,y) (S=B[y/x]) and on k[t^2,t^3]_m (a=t^2 gives S=B[t]; a=t^3 gives t^3S=S, so the existential choice of j matters and the statement asks only for some j). Prime node: true. A minimal prime q over the proper ideal aS exists; m_B ⊂ aS ⊂ q and q ∩ B is proper, so q ∩ B = m_B; Krull's principal ideal theorem gives ht q ≤ 1; a ≠ 0 in the domain S gives ht q ≥ 1. All hypotheses are used. Parent step 2 checks every hypothesis of the prime node, and steps 3-5 cite Mathlib-leaf localization nodes (Noetherian with conditions a-c checked, dim = ht). Both nodes are statement-only and unsplit, with inline definitions, tag+label sources and four kinds of recorded search; neither restates a clause of the parent. A DAG search (rg -L for 00P8, 00KV, minimal-over-principal and height-one) found only the 00KW quotient bound, the minimal-prime-over-proper-ideal node and the trf normalization height-one refinement, and none of these duplicates the new nodes. No cycle, same unit, no tool_uses, no SGA. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalDomainBirationalDimensionOne",
+  "declaration": "IsLocalRing.exists_birational_dimension_one_subalgebra",
+  "file": "lean/Sheaf/RingTheory/LocalDomainBirationalDimensionOne.lean",
+  "statement": "theorem exists_birational_dimension_one_subalgebra (B : Type u) (K : Type v) [CommRing B] [IsDomain B] [IsLocalRing B] [IsNoetherianRing B] [Field K] [Algebra B K] [IsFractionRing B K] (hB : IsLocalRing.maximalIdeal B ≠ ⊥) : ∃ (R : Subalgebra B K) (_ : IsNoetherianRing R) (_ : IsLocalRing R), ringKrullDim R = 1 ∧ (IsLocalRing.maximalIdeal R).comap (algebraMap B R) = IsLocalRing.maximalIdeal B ∧ IsFractionRing R K",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-add5194dc",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node (Stacks 00P8 (1)-(2)): CommRing+IsNoetherianRing+IsDomain+IsLocalRing B, hB maximalIdeal≠⊥, Field K with IsFractionRing B K; ∃ R : Subalgebra B K, Noetherian, local, ringKrullDim R = 1, comap of maximal ideal = m_B, IsFractionRing R K via the inclusion. No extra hypotheses; independent universes; edge cases (B a field excluded, R=B for 1-dim B, k[x,y]_(x,y), k[t²,t³]) OK. Upstream exists_ringKrullDim_eq_one lacks the embedding into K and the fraction-field clause, so existing:false is right. Node differs from live only in lean; statement verbatim; docstrings carry source, blueprint id and all 8 steps; imports public for statement, plain for proof_deps; no line >100. No changes, no compile run."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

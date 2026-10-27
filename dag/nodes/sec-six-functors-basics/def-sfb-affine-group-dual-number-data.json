@@ -1,0 +1,154 @@
+{
+ "id": "def-sfb-affine-group-dual-number-data",
+ "kind": "definition",
+ "title": "Affine-group scalar-extended dual-number calculus data and compatibility",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], and let $G$ be a group scheme over $\\operatorname{Spec}k$ [def-sc-group-scheme, def-weil-affine-spectrum]. Write $\\mathfrak g=\\operatorname{Lie}(G)$ for its existing identity tangent module and $\\mathrm df$ for the differential of a homomorphism [def-wf-lie-algebra-derivation, def-sc-scheme-tangent-space]. For a commutative $k$-algebra $R$, write $R[\\delta]$ for the dual numbers [def-sc-dual-numbers], $p_R:R[\\delta]\\to R$ for $\\delta\\mapsto0$, and\n$$\\operatorname{Kernel}_G(R)=\\{x\\in G(R[\\delta]):G(p_R)(x)=1\\}.$$\nFor $h:R\\to S$ over $k$, put $\\operatorname{dualMap}(h)(r+\\delta s)=h(r)+\\delta h(s)$; $\\operatorname{reduction}(R)=p_R$.\n\nA dual-number calculus datum $D$ on $G$ consists of the following data and conditions. Its tangent module $\\mathfrak g$ is finite-dimensional, and for every commutative $k$-algebra $R$ it supplies a bijection\n$$E_{G,R}:R\\otimes_k\\mathfrak g\\xrightarrow{\\sim}\\operatorname{Kernel}_G(R),$$\nusing the tensor product and scalar extension [def-weil-pbc-module-tensor-product, def-weil-module-base-change]. It satisfies $E_R(v+w)=E_R(v)E_R(w)$, $E_R(0)=1$, $E_R(-v)=E_R(v)^{-1}$, and $G(\\delta\\mapsto a\\delta)E_R(v)=E_R(av)$ for every $a\\in R$. At $R=k$, $E_k(1\\otimes v)$ is the actual tangent point of $v$. It is natural in $h:R\\to S$: applying $G(\\operatorname{dualMap}(h))$ to $E_R(v)$ gives $E_S((h\\otimes\\mathrm{id})v)$.\n\nIt also supplies homomorphisms $\\operatorname{Ad}_R:G(R)\\to\\operatorname{GL}_R(R\\otimes_k\\mathfrak g)$ characterized by\n$$j_{R[\\delta]}E_R(v)j_{R[\\delta]}^{-1}=E_R(\\operatorname{Ad}_R(j)v).$$\nFor every $n\\geq0$ and basis $b$ of $\\mathfrak g$ indexed by $\\{1,\\ldots,n\\}$, there is a unique group-scheme homomorphism $\\rho:G\\to\\operatorname{GL}_{n,k}$ whose value on each $R$-point, interpreted as an $R$-linear automorphism via the base-changed basis $b_R$, is $\\operatorname{Ad}_R$ [def-sc-general-linear-group]. The case $n=0$ uses the empty matrix group.\n\nFor two such data $D$ on $G$ and $D'$ on $H$ and a group-scheme homomorphism $f:G\\to H$, the proposition $\\operatorname{Compatible}(D,D',f)$ has three clauses. First, for every $R$ and $v\\in R\\otimes_k\\mathfrak g$,\n$$f(E_{G,R}(v))=E_{H,R}((\\mathrm df)_R(v)).$$\nSecond, if $f$ is a closed subgroup inclusion [def-sc-group-scheme-subgroup, def-weil-closed-immersion], its differential is injective and for every $R$,\n$$\\{E_{H,R}((\\mathrm df)_R(v)):v\\in R\\otimes_k\\mathfrak g\\}=f(G(R[\\delta]))\\cap\\operatorname{Kernel}_H(R).$$\nThird, for every $R$, $j\\in G(R)$ and $v\\in R\\otimes_k\\mathfrak g$,\n$$(\\mathrm df)_R(\\operatorname{Ad}_{G,R}(j)v)=\\operatorname{Ad}_{H,R}(f(j))((\\mathrm df)_R(v)).$$\nAll test algebras are allowed, including nonreduced and zero algebras. These are the definitions of the datum and its compatibility, not an assertion that such data exist.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-wf-lie-algebra-derivation",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-sc-general-linear-group",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "10.6, 10.11, 10.14, 10.18–10.21, printed pp.188–193; data interface for the tangent and adjoint calculation used in Proposition 10.34, pp.197–198."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AffineGroupDualNumberCalculus|dualMap|tangentPoint|structure Data",
+   "results": "{\"t\": \"2026-10-24T11:26:10Z\", \"tool\": \"grep\", \"query\": \"AffineGroupDualNumberCalculus|dualMap|tangentPoint|structure Data\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for the calculus datum; reuse the already landed Sheaf structures with existing:true rather than duplicate them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine algebraic group dual number tangent point scalar extension adjoint action compatible calculus data",
+   "results": "{\"t\": \"2026-10-24T11:26:10Z\", \"tool\": \"leansearch\", \"query\": \"Affine algebraic group dual number tangent point scalar extension adjoint action compatible calculus data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DualNumber.lift_smul\", \"DualNumber\", \"DualNumber.coe_lift_symm_apply\", \"DualNumber.range_lift\", \"DualNumber.lift_apply_eps\", \"DualNumber.algHom_ext'\", \"DualNumber.lift\", \"DualNumber.algHom_ext'_iff\"], \"digest\": \"40c022c91e90bc45\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for the calculus datum; reuse the already landed Sheaf structures with existing:true rather than duplicate them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine algebraic group scalar extended dual number kernel adjoint action data with normalization naturality and subgroup compatibility",
+   "results": "{\"t\": \"2026-10-24T11:26:11Z\", \"tool\": \"leanfinder\", \"query\": \"Affine algebraic group scalar extended dual number kernel adjoint action data with normalization naturality and subgroup compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DualNumber.lift\", \"Algebra.Extension.infinitesimal\", \"DualNumber.lift_op_smul\", \"Algebra.Extension.Hom.subToKer\", \"Algebra.Extension.homInfinitesimal\", \"DualNumber.lift_apply_apply\", \"DualNumber.coe_lift_symm_apply\", \"Algebra.Extension.toInfinitesimal\"], \"digest\": \"99ae66bf217aa1a6\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for the calculus datum; reuse the already landed Sheaf structures with existing:true rather than duplicate them."
+  },
+  {
+   "tool": "grep",
+   "query": "AffineGroupDualNumberCalculus|structure (Compatible|Data)|def (dualMap|reduction)|abbrev Kernel in lean/WeilConjectures and lean/Sheaf/AlgebraicGeometry/AffineGroupDualNumberCalculus.lean",
+   "results": "The exact definitions dualMap, reduction, Kernel, Data, Compatible are already in Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus, lines 60,68,74,82,128. Other upstream hits concern unrelated reduction and dualMap notions.",
+   "date": "2026-10-24",
+   "verdict": "Existing Sheaf definitions found and bound with existing:true; no duplicate Lean module or declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "AffineGroupDualNumberCalculus\\.(Data|Compatible)|affine-group-dual-number-data|scalar.extended.*tangent.*data in dag/nodes",
+   "results": "Only lem-sfb-affine-group-dual-number-calculus records these declarations; no definition node owns the plain structures. The proposed definition node id does not exist.",
+   "date": "2026-10-24",
+   "verdict": "Existing Sheaf definitions found and bound with existing:true; no duplicate Lean module or declaration."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search dual-number; ancestor lem-sfb-lie-normalizer-centralizer-invariants",
+   "results": "search: one blueprint match, def-wf-lie-algebra-derivation, which owns the Lie object rather than the calculus structures. ancestor: blueprint.from.node = None.",
+   "date": "2026-10-24",
+   "verdict": "Existing Sheaf definitions found and bound with existing:true; no duplicate Lean module or declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lie-normalizer-centralizer-invariants",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. Supporting input in the proof of Milne Proposition 18.18: Theorem 17.48 puts the central multiplicative kernel inside the chosen Borel, scheme-theoretically. Supporting lemma for Milne Theorem 17.48: Lemma 17.47, printed p.366; normalizer representability in Section 1i, Proposition 1.79 and Corollary 1.80, printed pp.30--31; Lie normalizer identity Proposition 10.34, printed pp.197--198. Auxiliary for Lemma 17.47: Proposition 10.34 and proof, printed pp.197–198; tangent functor and adjoint action in Sections 10a–10d, printed pp.184–193. The smooth-H specialization suffices here; representability is an explicit hypothesis, not asserted in this node. Definition ownership for the existing dual-number calculus structures used in the Lie centralizer and normalizer identities.",
+   "via": [
+    "lem-sfb-lie-normalizer-centralizer-invariants",
+    "lem-sfb-cartan-containing-normalizer-smooth",
+    "lem-sfb-borel-scheme-normalizer",
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus",
+  "declaration": "AlgebraicGeometry.AffineGroupDualNumberCalculus.Data",
+  "declarations": [
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.dualMap",
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.reduction",
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.Kernel",
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.Data",
+   "AlgebraicGeometry.AffineGroupDualNumberCalculus.Compatible"
+  ],
+  "statement": "structure Data (G : Grp (Over (Spec (.of k))))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested in the independent return of cd26fdfb9b7d. These are the already landed plain definitions and structures; none is a .choose from exists_compatible_calculus. Bind existing declarations in place, with no move, copy, additional module or change to the theorem node. The existence theorem remains only a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1461951e4",
+  "group": "Q13",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1461951e4",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Re-delivery of RETURN cd26fdfb9b7d (H2). All three requested repairs are in. (1) New def node def-sfb-affine-group-dual-number-data binds existing:true dualMap/reduction/Kernel/Data/Compatible in Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus with no move or copy. Its TeX matches the Lean fields (finite, E Equiv onto Kernel, add/zero/neg/scale, normalize=tangentPoint, natural via dualMap, Ad by conjugation, regular ∃! ρ incl. n=0, and the three Compatible clauses). lean.statement is verbatim l.82, its stmt_deps all exist, and no parallel owner exists. (2) The item cites it instead of the theorem node; the theorem stays in proof_deps. (3) Landed def-wf-lie-algebra-derivation and def-sc-general-linear-group added. The item differs from live only in lean and in the three appended stmt_deps. The Lean file is byte-identical to cd26 (sha 484e85c8) and lean.statement is verbatim. Mathematics re-checked: D is unique (E fixed by normalize/natural/scale, Ad by conjugation), Q is determined by the surjective mkQ, hC/hN are exactly the node's functors, only H is smooth. Edge cases K=1, H=1, H=G with n=0, finite étale H, mu_p, R=0 all fine. Gates OK. No compile (no file changed). Advisory: the landed Data docstrings still say blueprint lem-sfb-affine-group-dual-number-calculus, and the theorem node record still lists the plain declarations; both are inherent to the requested existing:true route."
+ }
+}

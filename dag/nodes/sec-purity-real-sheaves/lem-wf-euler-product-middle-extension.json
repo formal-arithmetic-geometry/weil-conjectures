@@ -152,7 +152,18 @@
   "latex:corollary"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-p-real-semi",
  "split_report": {
@@ -188,5 +199,35 @@
    "AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_directImage"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.RealSheaves.MiddleExtension: the blueprint item lem-wf-euler-product-middle-extension's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $X_0$ be a smooth geometrically connected affine curve, let\n$j:U_0\\hookrightarrow X_0$ be a dense open immersion, and let\n$\\mathcal F$ be a lisse Weil sheaf on $U_0$, i.e. a lisse\n$\\overline{\\mathbf Q}_{\\ell,U}$-module ([sk-lem-coefficient-heart]) with a Weil structure,\nwith the middle extension\n$j_*\\mathcal F$ of\n[def-wf-middle-extension]. As power series in $t$,\n\n$$\n\\prod_{x\\in|X_0|}\\det\\bigl(1-F_xt^{d(x)},(j_*\\mathcal F)_{\\bar x}\\bigr)^{-1}\n=\n\\frac{\\det(1-Ft,H_c^1(X,j_*\\mathcal F))}\n{\\det(1-Ft,H_c^2(X,j_*\\mathcal F))},\n$$\n\nwhere the left-hand side is the $L$-series [d-real-cohom] of the constructible sheaf\n$j_*\\mathcal F$ on $X_0$ and the right-hand side is its graded form\nin the compact-support convention of\n[def-weil-ordinary-compact-cohomology].",
+  "proof": [
+   {
+    "text": "This is the curve case of the Euler-product form of the trace formula\n[thm-trf-l-function-euler-product], applied with $\\Lambda=\\Qlb$, i.e. to\n$\\Dbc(X,\\Qlb)$ ([det-def-sfb-bounded-constructible]), to the curve\n$X_0$ (separated of finite type, of dimension one) and the\nconstructible sheaf $K=j_*\\mathcal F$ placed in degree zero, under the\nhypotheses of [det-thm-tf-uniform-formula-weil] with which the\ntrace formula is applied to it. Its $L(X_0,j_*\\mathcal F,t)$ is the\nleft-hand side (the local factor at $x$ being\n$\\det(1-F_xt^{d(x)}\\mid(j_*\\mathcal F)_{\\bar x})$, with $e_x=d(x)$),\nand its items (2) and (3) give\n\n$$\nL(X_0,j_*\\mathcal F,t)=\n\\frac{\\det(1-Ft,H_c^1(X,j_*\\mathcal F))}\n{\\det(1-Ft,H_c^0(X,j_*\\mathcal F))\\,\\det(1-Ft,H_c^2(X,j_*\\mathcal F))}.\n$$",
+    "uses": [
+     "thm-trf-l-function-euler-product",
+     "det-def-sfb-bounded-constructible",
+     "det-thm-tf-uniform-formula-weil"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "It remains to see that the degree-zero factor is $1$, i.e.\n$H_c^0(X,j_*\\mathcal F)=0$. Let $k:X\\hookrightarrow\\bar X$ be a smooth\ncompactification, so that $H_c^0(X,j_*\\mathcal F)=\\Gamma(\\bar X,k_!j_*\\mathcal F)$. The\nmap $\\alpha:k_!G\\to k_*G=(kj)_*\\mathcal F$, $G=j_*\\mathcal F$, is injective. Both sides are\nconstructible: $k_!G$ is $G$ on $X$ and $0$ on the finite complement, and\n$k_*G=\\mathcal H^0(R(kj)_*\\mathcal F)$ with $R(kj)_*$ preserving $\\Dbc(-,\\Qlb)$\n([sk-thm-sf-ctf-stability]); so $\\ker\\alpha$ is constructible\n([sk-lem-coefficient-heart] (1)). Its stalks vanish. Indeed, geometric stalks are exact\n(the pullback to a geometric point is exact, [det-prop-sfb-module-pullback-exact-main], and its\nglobal sections are exact because every pro-étale cover of the spectrum of an algebraically\nclosed field has a section, [sk-prop-pe-condensed-point]), so\n$(\\ker\\alpha)_{\\bar x}=\\ker(\\alpha_{\\bar x})$, and $\\alpha_{\\bar x}$ is injective at every\ngeometric point $\\bar x$ of $\\bar X$: over $X$ the restriction $k^*\\alpha$ is the identity of\n$G=k^*k_!G=k^*k_*G$, and over $\\bar X\\setminus X$ the source stalk is $0$, $k_!$ being\nextension by zero. A constructible sheaf with zero stalks vanishes: for each stratum\n$a:S\\hookrightarrow\\bar X$ of the filtration of [sk-lem-coefficient-heart] (3) its lisse\nrestriction to $S$ vanishes by [lem-wf-lisse-stalk-vanishing] (2), hence so does every\nsubquotient of the filtration. So $\\ker\\alpha=0$, and a compactly supported section $s$ is a section of\n$(kj)_*\\mathcal F$ over $\\bar X$, i.e. an element $v\\in\\Gamma(U,\\mathcal F)$, which by\n[prop-wf-weil-sheaf-representation-equivalence] is a $\\pi_1(U)$-invariant vector of the\ngeometric generic stalk $\\mathcal F_{\\bar\\eta}$, and its germ at a geometric point\n$\\bar\\infty$ of $\\bar X\\setminus X\\neq\\emptyset$ (as $X$ is affine) must vanish. By\n[lem-wf-boundary-stalk-invariants] that germ is $v$ itself, viewed in\n$((kj)_*\\mathcal F)_{\\bar\\infty}=\\mathcal F_{\\bar\\eta}^{I_\\infty}$. Hence $v=0$ and\n$s=0$.",
+    "uses": [
+     "sk-lem-coefficient-heart",
+     "lem-wf-lisse-stalk-vanishing",
+     "prop-wf-weil-sheaf-representation-equivalence",
+     "lem-wf-boundary-stalk-invariants"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

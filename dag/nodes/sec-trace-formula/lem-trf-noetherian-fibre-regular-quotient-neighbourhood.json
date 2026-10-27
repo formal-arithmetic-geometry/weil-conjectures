@@ -1,0 +1,279 @@
+{
+ "id": "lem-trf-noetherian-fibre-regular-quotient-neighbourhood",
+ "kind": "statement",
+ "title": "Spread a Noetherian fibre-regular principal quotient to a flat basic neighbourhood",
+ "statement": "Let $A_0\\to B_0$ be a flat [def-weil-pbc-flat-ring-map] finitely presented [def-weil-pbc-finitely-presented-algebra] map of Noetherian commutative rings [def-weil-pbc-noetherian-ring]. Let $\\mathfrak q_0\\subset B_0$ be a prime ideal, $\\mathfrak p_0$ its contraction to $A_0$, and $a_0\\in\\mathfrak q_0$. Suppose the image of $a_0$ is a regular singleton [def-weil-pbc-regular-sequence] in the closed-fibre local ring $C_0=(B_0)_{\\mathfrak q_0}/\\mathfrak p_0(B_0)_{\\mathfrak q_0}$ [def-weil-pbc-localization-at-prime]. Then $(B_0)_{\\mathfrak q_0}/(a_0)$ is flat over $(A_0)_{\\mathfrak p_0}$ and over $A_0$, and there exists $g_0\\in B_0\\setminus\\mathfrak q_0$ such that $H_0=(B_0)_{g_0}/(a_0)$ is flat over $A_0$ [def-weil-ring-localization-away].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 056Y, label lemma-slice-given-element, proof, last paragraph: Grothendieck local flatness and openness for the principal quotient (old steps 8–9)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=(A_0)_{\\mathfrak p_0}$ and $S=(B_0)_{\\mathfrak q_0}$. The flat-local-ring-maps lemma applied to the given flat map $A_0\\to B_0$ and the prime $\\mathfrak q_0$ says that $R\\to S$ is flat and local, and that both local rings are Noetherian. Its maximal source ideal is $\\mathfrak p_0R$, and its extension to $S$ is $\\mathfrak p_0S$; hence its closed fibre is exactly the specified ring $C_0$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 056Y, label lemma-slice-given-element, proof, final paragraph; flat quotient part only."
+   }
+  },
+  {
+   "text": "Use the Grothendieck regular-sequence theorem for $R\\to S$, with $c=1$ and $f_1=a_0/1$. The closed-fibre regular-sequence hypothesis is precisely the assumed regular singleton in $C_0=S/\\mathfrak p_0S$. For $i=1$ the theorem gives $Q=S/(a_0/1)$ flat over $R$. This is the first asserted local quotient.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-regular-sequence-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 056Y, label lemma-slice-given-element, proof, final paragraph; flat quotient part only."
+   }
+  },
+  {
+   "text": "As an $R$-module, $Q$ is flat over $A_0$ by the flat-over-localization equivalence for $A_0\\to R$. Put $T=B_0/(a_0)$ and let $\\overline{\\mathfrak q}_0=\\mathfrak q_0/(a_0)\\subset T$, which is prime because $T/\\overline{\\mathfrak q}_0=B_0/\\mathfrak q_0$ is a domain. The quotient-localization isomorphism $S/(a_0/1)\\cong T_{\\overline{\\mathfrak q}_0}$ sends $[b/s]$ to $\\bar b/\\bar s$. It preserves the $A_0$-action since it sends each base element to its class. Thus $T_{\\overline{\\mathfrak q}_0}$ is flat over $A_0$, proving also the second asserted local flatness.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 056Y, label lemma-slice-given-element, proof, final paragraph; flat quotient part only."
+   }
+  },
+  {
+   "text": "The algebra $T$ is finitely presented over $A_0$: take a finite polynomial presentation for $B_0$ and append to its finite list of relations a polynomial lifting $a_0$. As a $T$-module, $T$ has presentation $T^0\\to T\\xrightarrow{1}T\\to0$. Apply openness of flatness to $A_0\\to T$ and the module $T$. The resulting open flat locus contains $\\overline{\\mathfrak q}_0$ by the preceding step. The basic-open basis gives $\\gamma\\in T\\setminus\\overline{\\mathfrak q}_0$ such that every prime $\\mathfrak r$ avoiding $\\gamma$ has $T_{\\mathfrak r}$ flat over $A_0$. Lift $\\gamma$ to $g_0\\in B_0$; then $g_0\\notin\\mathfrak q_0$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 056Y, label lemma-slice-given-element, proof, final paragraph; flat quotient part only."
+   }
+  },
+  {
+   "text": "Write $H=T_\\gamma$. For any prime $P\\subset H$, let $\\mathfrak r$ be its contraction to $T$. Since $\\gamma$ is a unit in $H$, $\\gamma\\notin\\mathfrak r$. There is a $T$-algebra isomorphism $H_P\\cong T_{\\mathfrak r}$: the forward map sends $(s/\\gamma^n)/(t/\\gamma^m)$ to $s\\gamma^m/(t\\gamma^n)$, and the inverse sends $s/t$ to $(s/1)/(t/1)$. Indeed $t/\\gamma^m\\notin P$ iff $t\\notin\\mathfrak r$, so all displayed denominators are units. The localization universal property constructs both maps; their composites fix $T$ and the inverted denominators, hence are identities by uniqueness. They fix $A_0$ through $T$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 056Y, label lemma-slice-given-element, proof, final paragraph; flat quotient part only."
+   }
+  },
+  {
+   "text": "For each prime $P\\subset H$, the preceding identification makes $H_P$ flat over $A_0$, because its contraction $\\mathfrak r$ avoids $\\gamma$ and lies in the flat locus chosen in step 4. Let $\\mathfrak p$ be the contraction of $P$ to $A_0$. All elements of $A_0\\setminus\\mathfrak p$ are units in $H_P$, so its scalar action factors through $(A_0)_{\\mathfrak p}$. The flat-over-localization equivalence makes $H_P$ flat over $(A_0)_{\\mathfrak p}$. Applying the flat-map local criterion to $A_0\\to H$ now gives $H$ flat over $A_0$.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-flat-map-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 056Y, label lemma-slice-given-element, proof, final paragraph; flat quotient part only."
+   }
+  },
+  {
+   "text": "Finally, quotient and principal localization commute: with $J=(a_0)\\subset B_0$ and $b=g_0$, the cited isomorphism identifies $H=(B_0/(a_0))_\\gamma$ with $(B_0)_{g_0}/(a_0)$ by $\\bar x/\\gamma^n\\mapsto[x/g_0^n]$. This is $A_0$-linear since both base actions factor through $B_0$ and the displayed map fixes its image. Therefore the flatness of $H$ gives exactly the required flatness of $H_0$, with the already chosen $g_0\\notin\\mathfrak q_0$.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 056Y, label lemma-slice-given-element, proof, final paragraph; flat quotient part only."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-grothendieck-regular-sequence-flat",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "lem-weil-pbc-localization-quotient-commute"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 056Y, label lemma-slice-given-element, proof, final paragraph; flat quotient part only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented map of Noetherian rings with a regular element in the closed fibre at a prime has a principal neighbourhood where the quotient algebra is flat over the base",
+   "results": "{\"t\": \"2026-10-22T06:48:49Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented map of Noetherian rings with a regular element in the closed fibre at a prime has a principal neighbourhood where the quotient algebra is flat over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat\", \"RingHom.Flat.ofLocalizationPrime\", \"Algebra.IsSmoothAt\", \"instFlatAtPrime\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.localRingHom\"], \"digest\": \"558e0d6969de0e76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local flatness and smoothness hits do not give the principal flat quotient neighbourhood from one closed-fibre regular element"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Quotient\", \"IsRegular\"",
+   "results": "{\"t\": \"2026-10-22T06:48:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"Quotient\\\", \\\"IsRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local flatness and smoothness hits do not give the principal flat quotient neighbourhood from one closed-fibre regular element"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*quotient|quotient.*flat|isOpen.*flat",
+   "results": "{\"t\": \"2026-10-22T06:48:39Z\", \"tool\": \"grep\", \"query\": \"flat.*quotient|quotient.*flat|isOpen.*flat\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local flatness and smoothness hits do not give the principal flat quotient neighbourhood from one closed-fibre regular element"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spread flatness of a principal quotient from a fibre regular element at a prime of a flat Noetherian algebra to a basic open neighbourhood",
+   "results": "{\"t\": \"2026-10-22T06:48:39Z\", \"tool\": \"leansearch\", \"query\": \"Spread flatness of a principal quotient from a fibre regular element at a prime of a flat Noetherian algebra to a basic open neighbourhood\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck local criterion for flat quotient by one closed fibre regular element followed by openness of the flat locus",
+   "results": "{\"t\": \"2026-10-22T06:48:52Z\", \"tool\": \"leanfinder\", \"query\": \"Grothendieck local criterion for flat quotient by one closed fibre regular element followed by openness of the flat locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.ofLocalizationPrime\", \"Module.flat_of_localized_maximal\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.localRingHom\", \"Module.flat_of_localized_span\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"Algebra.HasGoingDown.of_flat\"], \"digest\": \"df966cd2a80f556a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local flatness and smoothness hits do not give the principal flat quotient neighbourhood from one closed-fibre regular element"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Ff]lat|[Ff]lat.*quotient|IsRegular.*[Ff]lat",
+   "results": "{\"t\": \"2026-10-22T06:48:48Z\", \"tool\": \"grep\", \"query\": \"quotient.*[Ff]lat|[Ff]lat.*quotient|IsRegular.*[Ff]lat\", \"sub\": \"RingTheory/Regular\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\"], \"digest\": \"c56f0e8029feea69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local flatness and smoothness hits do not give the principal flat quotient neighbourhood from one closed-fibre regular element"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*quotient|quotient.*flat|isOpen.*flat",
+   "results": "{\"t\": \"2026-10-23T14:51:20Z\", \"tool\": \"grep\", \"query\": \"flat.*quotient|quotient.*flat|isOpen.*flat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization criteria, flatness of smooth maps, or regularity under flat base change; none gives flatness of the quotient by a closed-fibre regular element together with a basic flat neighbourhood."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness of flatness gives a neighbourhood where quotient by a fibre nonzerodivisor is flat",
+   "results": "{\"t\": \"2026-10-23T14:51:20Z\", \"tool\": \"leansearch\", \"query\": \"Openness of flatness gives a neighbourhood where quotient by a fibre nonzerodivisor is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instMorphismRestrict\", \"Module.flat_of_isLocalized_span\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instResLE\", \"Module.flat_of_isLocalized_maximal\", \"Module.Flat.of_isLocalizedModule\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"5020ae56b289c6bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization criteria, flatness of smooth maps, or regularity under flat base change; none gives flatness of the quotient by a closed-fibre regular element together with a basic flat neighbourhood."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Quotient\", \"IsRegular\"",
+   "results": "{\"t\": \"2026-10-23T14:51:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"Quotient\\\", \\\"IsRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization criteria, flatness of smooth maps, or regularity under flat base change; none gives flatness of the quotient by a closed-fibre regular element together with a basic flat neighbourhood."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented Noetherian algebra with an element regular on the closed fibre at a prime has a flat principal quotient on a basic neighbourhood",
+   "results": "{\"t\": \"2026-10-23T14:51:31Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented Noetherian algebra with an element regular on the closed fibre at a prime has a flat principal quotient on a basic neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.IsSmoothAt\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"instFlatAtPrime\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.HasGoingDown.of_flat\"], \"digest\": \"36df8be5e7cbaf3d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization criteria, flatness of smooth maps, or regularity under flat base change; none gives flatness of the quotient by a closed-fibre regular element together with a basic flat neighbourhood."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck local flatness criterion quotient by one element nonzerodivisor modulo the maximal ideal",
+   "results": "{\"t\": \"2026-10-23T14:51:31Z\", \"tool\": \"leanfinder\", \"query\": \"Grothendieck local flatness criterion quotient by one element nonzerodivisor modulo the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_localized_maximal\", \"Module.flat_of_isLocalized_maximal\", \"Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal\", \"Module.flat_of_localized_span\", \"RingHom.Flat.ofLocalizationPrime\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"654273a707382040\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give localization criteria, flatness of smooth maps, or regularity under flat base change; none gives flatness of the quotient by a closed-fibre regular element together with a basic flat neighbourhood."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fibre-regular-element-flat-hypersurface",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The elementary-etale finite-over-smooth ingredient (Stacks 057K) in the 057S flatification route for the horizontal curve reduction of lem-trf-local-term-locality: in the application of 057J to the smooth intermediate scheme, the preliminary spreading of the specified fibre open with geometrically connected fibres (055W). In the proof of 055W: the application of 0570 producing Z mapping to Y, flat locally finitely presented and locally quasi-finite over S, with singleton designated fibre. In the proof of 0570, the positive-dimensional induction step applying 056Z/056Y to a fibre nonzerodivisor. Tag 056Y, lemma-slice-given-element, last paragraph: Grothendieck local flatness and openness for the principal quotient (old steps 8–9).",
+   "via": [
+    "lem-trf-fibre-regular-element-flat-hypersurface",
+    "lem-trf-cm-closed-point-flat-quasifinite-slice",
+    "lem-trf-geometrically-connected-fibre-open-spreading",
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-noetherian-fibre-regular-quotient-neighbourhood",
+  "worker": "stage1",
+  "summary": "Checked Stacks 056Y final paragraph and Algebra 00MG, 00HT, 00RC. Proved the local quotient flat over the local and original bases, then spread the quotient flat locus and applied the existing local flatness criterion. All required facts already have DAG nodes; no new nodes or statement changes. Explicit scalar-compatible fraction maps supply the two localization identifications. No Lean or compiler work.",
+  "blueprint": "The elementary-etale finite-over-smooth ingredient (Stacks 057K) in the 057S flatification route for the horizontal curve reduction of lem-trf-local-term-locality: in the application of 057J to the smooth intermediate scheme, the preliminary spreading of the specified fibre open with geometrically connected fibres (055W). In the proof of 055W: the application of 0570 producing Z mapping to Y, flat locally finitely presented and locally quasi-finite over S, with singleton designated fibre. In the proof of 0570, the positive-dimensional induction step applying 056Z/056Y to a fibre nonzerodivisor. Tag 056Y, lemma-slice-given-element, last paragraph: Grothendieck local flatness and openness for the principal quotient (old steps 8–9). The seven steps resolve precisely the existing 056Y local-flatness/openness ingredient. The current latest blueprint ancestor describes contracting-correspondence locality; this generic commutative-algebra descendant keeps its assigned source and route and makes no new trace-formula assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-grothendieck-regular-sequence-flat",
+    "why": "Generic Noetherian local algebra: its singleton case makes the principal quotient flat. The assigned trace-formula unit does not supply this algebra lemma."
+   },
+   {
+    "node": "lem-weil-pbc-openness-of-flatness",
+    "why": "Generic finite-presentation openness theorem, used exactly as in the assigned Stacks 056Y proof to spread the quotient flatness. No statement of the trace-formula unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-grothendieck-regular-sequence-flat",
+  "lem-weil-pbc-openness-of-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-64d8264b5",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-64d8264b5 (reviewer sub-agent of L); spot-checked: I read the full item, all seven steps and the full statement of every cited node. The delivery adds a seven-step proof to a node that previously had only a statement; it adds no new nodes and does not change the statement. There is no repair note for this item, so the re-split rule does not apply. The statement is exactly the flat-quotient part of Stacks Tag 056Y, last paragraph (more-morphisms.tex l.6166-6262): Grothendieck local flatness, then openness of flatness. It is not weakened, and the parent lem-trf-fibre-regular-element-flat-hypersurface step 4 uses exactly these hypotheses and this conclusion. Step checks: (1) flat-local-ring-maps gives R=(A0)_p0 -> S=(B0)_q0 flat, local and Noetherian, with closed fibre S/p0S = C0. (2) The Grothendieck regular-sequence lemma with c=1 and i=1 gives S/(a0) flat over R. (3) The flat-over-localization equivalence gives flatness over A0, and localization-at-prime-of-quotient gives Q = T_qbar with the base action kept. (4) T=B0/(a0) is finitely presented over A0 (append a lift of a0 to a presentation of B0) and T is a finitely presented T-module. Openness of flatness for A0->T with M=T, plus the basic-open basis, gives gamma not in qbar, lifted to g0 not in q0. (5) H_P = T_r through two universal-property maps; the argument holds with zero divisors. (6) Flat-over-localization and the flat-map local criterion give H flat over A0; this fills in the passage Stacks leaves implicit. (7) Localization-quotient-commute gives H = (B0)_g0/(a0), compatibly with A0. Small cases: Z[t] at (p,t) with a0=t and with a0=t+p works. k[s,t] at (s,t) with a0=st fails the hypothesis, and B/(st) really is not flat. Duplicate search over the DAG (056Y, fibre-regular, flat quotient and openness) found no node stating the same result. lem-pur-fiber-regular-sequence-neighbourhood concludes regularity, not flatness of the quotient, and the sfb slice-flat nodes are at scheme/space level and cite the parent chain. Accepted tool_uses: the Grothendieck regular-sequence lemma (Stacks 00MG) and openness of flatness (Stacks 00RC). Both are generic commutative-algebra black boxes, used as in the 056Y proof. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreRegularQuotientNeighbourhood",
+  "declaration": "RingTheory.flat_quotient_neighbourhood_of_closedFiber_regular",
+  "file": "lean/Sheaf/RingTheory/FibreRegularQuotientNeighbourhood.lean",
+  "statement": "theorem flat_quotient_neighbourhood_of_closedFiber_regular {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B] [IsNoetherianRing A] [IsNoetherianRing B] [Algebra.FinitePresentation A B] (hflat : (algebraMap A B).Flat) (q : Ideal B) [q.IsPrime] (a : B) (ha : a ∈ q) (hreg : RingTheory.Sequence.IsRegular (Localization.AtPrime q ⧸ (q.under A).map (algebraMap A (Localization.AtPrime q))) [Ideal.Quotient.mk ((q.under A).map (algebraMap A (Localization.AtPrime q))) (algebraMap B (Localization.AtPrime q) a)]) : ((Ideal.Quotient.mk (Ideal.span {algebraMap B (Localization.AtPrime q) a})).comp (Localization.localRingHom (q.under A) q (algebraMap A B) rfl)).Flat ∧ Module.Flat A (Localization.AtPrime q ⧸ Ideal.span {algebraMap B (Localization.AtPrime q) a}) ∧ ∃ g : B, g ∉ q ∧ Module.Flat A (Localization.Away g ⧸ Ideal.span {algebraMap B (Localization.Away g) a})",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e01e31a5",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Read node, 6 stmt_dep lean records, Mathlib IsRegular signature, Stacks 056Y final paragraph, delivered module and report. Lean matches node clause by clause: independent universes u v, Algebra A B with RingHom.Flat, FinitePresentation, both IsNoetherianRing, q prime, p0 = q.under A, a ∈ q, IsRegular C0 [mk(a/1)] with C0 = B_q/(q.under A).map; conclusions: (mk ∘ localRingHom).Flat, Module.Flat A (B_q/(a)), ∃ g ∉ q, Module.Flat A (B_g/(a)). No extra assumptions, nothing weakened; lean.statement verbatim in file; docstrings carry source place, blueprint id and the 7 proof steps; no defs, sorry only; report has Worker report and Second reading sections. No compile run (no file changed). No findings."
+ }
+}

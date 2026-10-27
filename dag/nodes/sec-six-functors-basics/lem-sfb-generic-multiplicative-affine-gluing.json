@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-generic-multiplicative-affine-gluing",
+ "kind": "statement",
+ "title": "Gluing multiplicative affine section maps with a common generic formula",
+ "statement": "Let $p:Y\\to Z$ be a morphism of integral schemes [def-pc-scheme, def-pc-integral-scheme] sending the generic point $\\eta_Y$ to the generic point $\\eta_Z$ [def-sc-generic-point]. Write $K=\\mathcal O_{Y,\\eta_Y}$ and $L=\\mathcal O_{Z,\\eta_Z}$ for the function fields [def-sc-function-field, def-weil-pbc-module-stalk]. Let $F:K\\to L$ be a function and let $d\\geq1$ be an integer. For every nonempty affine open $U\\subseteq Z$, suppose given a map $n_U:\\Gamma(p^{-1}U,\\mathcal O_Y)\\to\\Gamma(U,\\mathcal O_Z)$ preserving multiplication and $1$, with $n_U(p^\\sharp a)=a^d$ for all $a\\in\\Gamma(U,\\mathcal O_Z)$. For any nonempty open $V\\subseteq Z$, write $\\rho_V$ and $\\sigma_V$ for the maps taking sections on $V$ and $p^{-1}V$ to their generic germs in $L$ and $K$, respectively. Assume $\\rho_U(n_U(b))=F(\\sigma_U(b))$ for every such $U$ and $b$. Then there is a unique family of maps $n_V:\\Gamma(p^{-1}V,\\mathcal O_Y)\\to\\Gamma(V,\\mathcal O_Z)$ on all open subsets $V\\subseteq Z$ extending the specified affine maps and commuting with restriction. Each $n_V$ preserves multiplication and $1$, and satisfies $n_V(p^\\sharp a)=a^d$. On nonempty opens it also satisfies $\\rho_V(n_V(b))=F(\\sigma_V(b))$. On the empty open it is the unique map between the one-element section rings. No finiteness or normality hypothesis on $p,Y,Z$, and no assumption that intersections of affine opens are affine, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph: compatible system of maps on sections over affines and hence a global norm map, and property (1); the generic-germ compatibility and sheaf-gluing argument of returned proof steps 4 and 5."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "For every nonempty open $V\\subseteq Z$, $\\eta_Z\\in V$: otherwise the closed complement containing $\\eta_Z$ would contain its closure $Z$ [def-sc-generic-point]. Since $p(\\eta_Y)=\\eta_Z$, also $\\eta_Y\\in p^{-1}V$. Thus all the generic germs in the statement are defined. Restricting a section to a smaller nonempty open leaves its generic germ unchanged, by the germ equivalence relation [def-weil-pbc-module-stalk]. By [lem-sc-integral-scheme-stalks-in-function-field], applied to the integral scheme $Z$, $\\rho_V$ is injective for every such $V$. Consequently sections on $V$ with equal generic germs are equal.",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-pbc-module-stalk",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), proof, compatible affine section maps and hence a global norm map; expanded for the abstract generic formula of this item. Generic-point definition Tag 004X (topology-definition-generic-point); the injectivity input is the cited integral-scheme lemma."
+   }
+  },
+  {
+   "text": "If $W\\subseteq U$ are nonempty affine opens and $b\\in\\Gamma(p^{-1}U,\\mathcal O_Y)$, the two sections $n_U(b)|_W$ and $n_W(b|_{p^{-1}W})$ have generic germs $F(\\sigma_U(b))$ and $F(\\sigma_W(b|_{p^{-1}W}))$, respectively. These are equal by restriction invariance of germs from step 1. Injectivity of $\\rho_W$ gives $n_U(b)|_W=n_W(b|_{p^{-1}W})$. The same compatibility with an empty smaller open is automatic: the empty-cover sheaf axiom gives a singleton set of sections over the empty open [def-pc-scheme, def-weil-locally-ringed-space-morphism].",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), proof, compatible affine section maps and hence a global norm map; expanded for the abstract generic formula of this item. Sheaves Tags 006T (sheaves-definition-sheaf), including the empty covering, and 0091 (sheaves-definition-ringed-space)."
+   }
+  },
+  {
+   "text": "For a nonempty open $V$ and section $b$ on $p^{-1}V$, take the set of all nonempty affine opens $U\\subseteq V$, which covers $V$ by [lem-weil-pbc-affine-opens-basis], and put $c_U=n_U(b|_{p^{-1}U})$. On a nonempty overlap $T=U\\cap U\\prime$, both $c_U|_T$ and $c_{U\\prime}|_T$ have generic germ $F(\\sigma_V(b))$ by the assumed formula and restriction invariance. They agree by injectivity of $\\rho_T$ [lem-sc-integral-scheme-stalks-in-function-field]. On an empty overlap they agree because its section ring is a singleton. The sheaf axiom for $\\mathcal O_Z$ therefore glues the $c_U$ to a unique section, defining $n_V(b)$ [def-pc-scheme, def-weil-locally-ringed-space-morphism]. Here $T$ is merely open; it is never assumed affine. Set $n_\\emptyset$ to be the unique map of the singleton section sets.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-module-stalk",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), proof, compatible affine section maps and hence a global norm map; expanded for the abstract generic formula of this item. Schemes Tag 01IT (schemes-lemma-basis-affine-opens); Sheaves Tags 006T (sheaves-definition-sheaf) and 0091 (sheaves-definition-ringed-space)."
+   }
+  },
+  {
+   "text": "By construction, for every nonempty affine $U\\subseteq V$, $n_V(b)|_U=n_U(b|_{p^{-1}U})$. If $V$ itself is affine, the cover contains $V$, so the new map is exactly the specified $n_V$. For any inclusion $W\\subseteq V$ with $W$ nonempty, restrict $n_V(b)|_W$ and $n_W(b|_{p^{-1}W})$ to each nonempty affine $U\\subseteq W$. Both restrictions are $n_U(b|_{p^{-1}U})$, so sheaf uniqueness on this affine cover of $W$ gives their equality [lem-weil-pbc-affine-opens-basis, def-pc-scheme, def-weil-locally-ringed-space-morphism]. Inclusions with $W$ empty are automatic. Finally choose one nonempty affine $U\\subseteq V$: the generic germ of $n_V(b)$ equals that of its restriction $c_U$, namely $F(\\sigma_V(b))$ [def-weil-pbc-module-stalk].",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), proof, compatible affine section maps and hence a global norm map; expanded for the abstract generic formula of this item. Sheaf uniqueness in Tag 006T and the affine basis Tag 01IT."
+   }
+  },
+  {
+   "text": "For sections $b,b\\prime$ on $p^{-1}V$, restrict $n_V(bb\\prime)$ and $n_V(b)n_V(b\\prime)$ to each nonempty affine $U\\subseteq V$. Step 4 and multiplicativity of the specified $n_U$ identify both restrictions with $n_U(b|_{p^{-1}U})n_U(b\\prime|_{p^{-1}U})$. Sheaf uniqueness gives multiplicativity. The same test gives $n_V(1)=1$. If $a\\in\\Gamma(V,\\mathcal O_Z)$, naturality of the structure-sheaf map $p^\\sharp$ [def-weil-locally-ringed-space-morphism] and the given affine scalar identity give $n_V(p^\\sharp a)|_U=n_U(p^\\sharp(a|_U))=(a|_U)^d=(a^d)|_U$, hence $n_V(p^\\sharp a)=a^d$. Every identity is automatic on the empty open. These are sheaf-uniqueness arguments on the affine cover [lem-weil-pbc-affine-opens-basis, def-pc-scheme]; no additivity of $n_U$ or algebraic property of $F$ is used.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), proof, compatible affine section maps and hence a global norm map; expanded for the abstract generic formula of this item. Property (1) of Tag 0BD3; restriction naturality is part of Tag 0091, and sheaf uniqueness is Tag 006T."
+   }
+  },
+  {
+   "text": "If $(m_V)_V$ is another extension commuting with restriction, then for every nonempty affine $U\\subseteq V$ and every $b$ on $p^{-1}V$, $m_V(b)|_U=m_U(b|_{p^{-1}U})=n_U(b|_{p^{-1}U})=n_V(b)|_U$. The affine opens cover $V$ [lem-weil-pbc-affine-opens-basis], so sheaf uniqueness gives $m_V(b)=n_V(b)$ [def-pc-scheme, def-weil-locally-ringed-space-morphism]. On the empty open there is only one possible map. This proves uniqueness of the whole family.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), proof, compatible affine section maps and hence a global norm map; expanded for the abstract generic formula of this item. Tag 006T (sheaves-definition-sheaf), uniqueness, applied to the basis cover of Tag 01IT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-pc-scheme",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), proof, compatible affine section maps and hence a global norm map; expanded for the abstract generic formula of this item. The generic formula is an abstract generalization of the field norm used there; the six steps supply the omitted compatibility and gluing argument using existing DAG inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "germToFunctionField|appToFunctionField|.*[Gg]lue.*[Aa]ffine|[Aa]ffine.*[Gg]lue",
+   "results": "{\"t\": \"2026-10-22T06:10:14Z\", \"tool\": \"grep\", \"query\": \"germToFunctionField|appToFunctionField|.*[Gg]lue.*[Aa]ffine|[Aa]ffine.*[Gg]lue\", \"sub\": \"AlgebraicGeometry/FunctionField.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"18\", \"41\", \"49\", \"65\", \"66\"], \"digest\": \"22c0686257e1bbe8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-germ injectivity, spreading-out and ringed-space or scheme hom-extensionality do not state the extension of these merely multiplicative affine section maps to all opens with the scalar identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A multiplicative map of generic function fields preserving regular affine sections extends uniquely to a morphism of multiplicative structure sheaves",
+   "results": "{\"t\": \"2026-10-22T06:10:14Z\", \"tool\": \"leansearch\", \"query\": \"A multiplicative map of generic function fields preserving regular affine sections extends uniquely to a morphism of multiplicative structure sheaves\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"germToFunctionField\"",
+   "results": "{\"t\": \"2026-10-22T06:10:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"germToFunctionField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.Scheme.algebraMap_germ_eq_germToFunctionField\"], \"digest\": \"40d87bcf347510cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-germ injectivity, spreading-out and ringed-space or scheme hom-extensionality do not state the extension of these merely multiplicative affine section maps to all opens with the scalar identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicative maps on affine sections of integral schemes having a fixed map on generic germs glue uniquely over arbitrary open subsets, preserving scalar power identities",
+   "results": "{\"t\": \"2026-10-22T06:10:25Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplicative maps on affine sections of integral schemes having a fixed map on generic germs glue uniquely over arbitrary open subsets, preserving scalar power identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\"], \"digest\": \"f22b479ec1b085be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-germ injectivity, spreading-out and ringed-space or scheme hom-extensionality do not state the extension of these merely multiplicative affine section maps to all opens with the scalar identity."
+  },
+  {
+   "tool": "grep",
+   "query": "germToFunctionField|hom_ext.*[Bb]asis|[Bb]asis.*hom_ext",
+   "results": "{\"t\": \"2026-10-22T06:11:04Z\", \"tool\": \"grep\", \"query\": \"germToFunctionField|hom_ext.*[Bb]asis|[Bb]asis.*hom_ext\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"dc236d77b772efa6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-germ injectivity, spreading-out and ringed-space or scheme hom-extensionality do not state the extension of these merely multiplicative affine section maps to all opens with the scalar identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a morphism of integral schemes sending generic point to generic point, affine section monoid homomorphisms with equal generic germs extend uniquely to restriction compatible maps on all opens",
+   "results": "{\"t\": \"2026-10-22T06:11:23Z\", \"tool\": \"leanfinder\", \"query\": \"Given a morphism of integral schemes sending generic point to generic point, affine section monoid homomorphisms with equal generic germs extend uniquely to restriction compatible maps on all opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"AlgebraicGeometry.ext_of_isAffine\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.Scheme.germToFunctionField\"], \"digest\": \"45e95d916f369d0b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-germ injectivity, spreading-out and ringed-space or scheme hom-extensionality do not state the extension of these merely multiplicative affine section maps to all opens with the scalar identity."
+  },
+  {
+   "tool": "grep",
+   "query": "germToFunctionField|[Mm]onoid.*[Ss]heaf|[Ss]heaf.*[Mm]onoid",
+   "results": "{\"t\": \"2026-10-23T09:50:48Z\", \"tool\": \"grep\", \"query\": \"germToFunctionField|[Mm]onoid.*[Ss]heaf|[Ss]heaf.*[Mm]onoid\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"dc236d77b772efa6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide generic-germ injectivity, basis extension for an already natural transformation, or section gluing; none states the common-generic-function criterion and scalar power clauses of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A common generic stalk function glues multiplicative maps on affine sections to restriction compatible maps of structure sheaves",
+   "results": "{\"t\": \"2026-10-23T09:50:49Z\", \"tool\": \"leansearch\", \"query\": \"A common generic stalk function glues multiplicative maps on affine sections to restriction compatible maps of structure sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toOpen_germ_apply\", \"AlgebraicGeometry.StructureSheaf.comapFun\", \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_assoc\", \"AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply\", \"SheafOfModules.sectionsMap\", \"AlgebraicGeometry.StructureSheaf.toOpen_germ\", \"ModuleCat.Tilde.toStalk\"], \"digest\": \"11671449b64e5a88\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide generic-germ injectivity, basis extension for an already natural transformation, or section gluing; none states the common-generic-function criterion and scalar power clauses of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"germToFunctionField\"",
+   "results": "{\"t\": \"2026-10-23T09:50:49Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"germToFunctionField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.Scheme.algebraMap_germ_eq_germToFunctionField\"], \"digest\": \"40d87bcf347510cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide generic-germ injectivity, basis extension for an already natural transformation, or section gluing; none states the common-generic-function criterion and scalar power clauses of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction compatible multiplicative maps on affine sections of integral schemes obtained from a common function on generic stalks extend uniquely to all open sets",
+   "results": "{\"t\": \"2026-10-23T09:50:50Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction compatible multiplicative maps on affine sections of integral schemes obtained from a common function on generic stalks extend uniquely to all open sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine\", \"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.LocallyRingedSpace.toToΓSpecMapBasicOpen\", \"AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map\"], \"digest\": \"f756fa00a9e07c3c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide generic-germ injectivity, basis extension for an already natural transformation, or section gluing; none states the common-generic-function criterion and scalar power clauses of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a natural transformation on an open topological basis uniquely to a morphism between sheaves of commutative monoids preserving locally specified identities",
+   "results": "{\"t\": \"2026-10-23T09:51:52Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a natural transformation on an open topological basis uniquely to a morphism between sheaves of commutative monoids preserving locally specified identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.hom_ext\", \"TopCat.Sheaf.extend_hom_app\", \"TopCat.Sheaf.restrictHomEquivHom\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Presheaf.IsSheaf.section_ext\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"TopCat.Presheaf.section_ext\"], \"digest\": \"106aaa19f390f737\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide generic-germ injectivity, basis extension for an already natural transformation, or section gluing; none states the common-generic-function criterion and scalar power clauses of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-integral-finite-sheaf-norm",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Existence of an ample invertible sheaf descends through a finite cover of a normal integral scheme. Tag 0BD3 (divisors-lemma-norm-in-normal-case); the norm of positive degree is defined in Section 0BCX (divisors-section-norms), conditions (1) and (2). Re-split: Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph: compatible system of maps on sections over affines and hence a global norm map, and property (1); the generic-germ compatibility and sheaf-gluing argument of returned proof steps 4 and 5.",
+   "via": [
+    "lem-sfb-normal-integral-finite-sheaf-norm",
+    "lem-sfb-finite-normal-ample-descent",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-generic-multiplicative-affine-gluing",
+  "worker": "stage1",
+  "summary": "Q148 expands the abstract affine-gluing argument in six steps, using the existing Mathlib leaves for generic-germ injectivity and affine basis, with the sheaf axiom and restriction naturality unpacked from existing definition nodes. Arbitrary open overlaps and the empty open are explicit. Statement and statement dependencies unchanged; no new nodes or Lean files. Exact-project-declaration and two-phrasing Mathlib searches found no full match.",
+  "blueprint": "The inherited blueprint.from.node is null (as confirmed by blueprint_refs.py ancestor); the precise inherited place is retained. This item realizes the compatible affine section maps and hence a global norm map in Stacks 0BD3, serving the normal-integral-finite-sheaf-norm subargument of the alteration route; the current blueprint direct-images proof (3) is retained without a route change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-b62b082f3",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-b62b082f3 (reviewer sub-agent of L); spot-checked: I read the item in full. It is a one-level split into 6 steps with no new nodes, and its statement and stmt_deps are byte-identical to the unsplit node Q92 created. The source is Stacks 0BD3 (divisors.tex 3825-3866): the proof says only 'compatible system of maps on sections over affines and hence a global norm map', and the item supplies exactly that sentence for an abstract generic formula F. The parent normal-integral-finite-sheaf-norm uses it in step 3 with F = N_{K/L}. Checks by step: (1) η_Z lies in every nonempty open by the closed-complement argument, so η_Y lies in p^{-1}V; injectivity comes from clause 1 / the 'in particular' of the Mathlib leaf lem-sc-integral-scheme-stalks-in-function-field, which holds for arbitrary nonempty opens. (2) The given affine maps are compatible because their generic germs are equal. (3) Gluing over all nonempty affines U ⊆ V uses the basis leaf, and agreement on non-affine overlaps uses injectivity there, so E1 is avoided. (4) The construction extends the given maps, commutes with restriction and keeps the generic formula. (5) Multiplicativity, preservation of 1, and n(p^♯a) = a^d follow from naturality of p^♯ in def-weil-locally-ringed-space-morphism plus sheaf uniqueness; additivity is never used. (6) Uniqueness follows from sheaf uniqueness. Edge cases tested: the empty open (zero ring), V affine, a one-point Z, identity p with F = x^d (multiplicative but not additive, so the item rightly claims no ring map), and non-separated Z. Duplicate search: the basis-extension nodes (lem-weil-pbc-sheaf-on-basis-extends, basis-sheaf-sections-germs) need a basis closed under intersection and abelian groups, so they are not duplicates. Every cited node is a definition or a Mathlib leaf, so the unit route is fine and no tool_uses are needed. proof_deps equals the union of uses, and the searches are recorded, including one LeanSearch outage marked unavailable and rerun the next day. Minor note: the item has no lean_audit key, but it was missing on the base too. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericMultiplicativeAffineGluing",
+  "declaration": "AlgebraicGeometry.Scheme.existsUnique_multiplicative_affine_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericMultiplicativeAffineGluing.lean",
+  "statement": "theorem Scheme.existsUnique_multiplicative_affine_extension {Y Z : Scheme.{u}} [IsIntegral Y] [IsIntegral Z] (p : Y ⟶ Z) (hp : p (genericPoint Y) = genericPoint Z) (F : Y.functionField → Z.functionField) (d : ℕ) (hd : 1 ≤ d) (nAffine : ∀ (U : Z.Opens), IsAffineOpen U → genericPoint Z ∈ U → (Γ(Y, p ⁻¹ᵁ U) →* Γ(Z, U))) (hscalar : ∀ (U : Z.Opens) (hU : IsAffineOpen U) (hx : genericPoint Z ∈ U) (a : Γ(Z, U)), nAffine U hU hx (p.app U a) = a ^ d) (hgeneric : ∀ (U : Z.Opens) (hU : IsAffineOpen U) (hx : genericPoint Z ∈ U) (b : Γ(Y, p ⁻¹ᵁ U)), Z.presheaf.germ U (genericPoint Z) hx (nAffine U hU hx b) = F (Y.presheaf.germ (p ⁻¹ᵁ U) (genericPoint Y) ((congrArg (fun z : Z => z ∈ U) hp).mpr hx) b)) : ∃ n : ∀ V : Z.Opens, Γ(Y, p ⁻¹ᵁ V) →* Γ(Z, V), (∀ (U : Z.Opens) (hU : IsAffineOpen U) (hx : genericPoint Z ∈ U), n U = nAffine U hU hx) ∧ (∀ (V W : Z.Opens) (i : W ⟶ V) (b : Γ(Y, p ⁻¹ᵁ V)), Z.presheaf.map i.op (n V b) = n W (Y.presheaf.map ((Opens.map p.base).map i).op b)) ∧ (∀ (V : Z.Opens) (a : Γ(Z, V)), n V (p.app V a) = a ^ d) ∧ (∀ (V : Z.Opens) (hx : genericPoint Z ∈ V) (b : Γ(Y, p ⁻¹ᵁ V)), Z.presheaf.germ V (genericPoint Z) hx (n V b) = F (Y.presheaf.germ (p ⁻¹ᵁ V) (genericPoint Y) ((congrArg (fun z : Z => z ∈ V) hp).mpr hx) b)) ∧ (∀ m : ∀ V : Z.Opens, Γ(Y, p ⁻¹ᵁ V) → Γ(Z, V), (∀ (U : Z.Opens) (hU : IsAffineOpen U) (hx : genericPoint Z ∈ U), m U = ⇑(nAffine U hU hx)) → (∀ (V W : Z.Opens) (i : W ⟶ V) (b : Γ(Y, p ⁻¹ᵁ V)), Z.presheaf.map i.op (m V b) = m W (Y.presheaf.map ((Opens.map p.base).map i).op b)) → ∀ V : Z.Opens, m V = ⇑(n V))",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-23",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-6a50900a3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a50900a3",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Statement matches node/0BD3 in every hypothesis and in the extension/restriction/MonoidHom/scalar/generic clauses (genericPoint membership = nonempty on integral Z; actual germs; hp transport; empty open forced; no extra hyps; single universe u). H3 fault: delivered ∃! gave uniqueness only among MonoidHom families also satisfying the scalar and generic clauses, weaker than the node's uniqueness among all restriction-compatible extensions of the affine maps. FIX: fixes/GenericMultiplicativeAffineGluing.lean replaces ∃! by ∃ plus a conjunct ∀ plain-map family m extending nAffine and commuting with restriction, m V = ⇑(n V), with a docstring sentence; fixes/<item>.lean-record.json gives the new verbatim statement (refit_record: no notes/refusals). Fixed file compiled once with nt_compile --json: 4.5 s, clean. Parent normal-integral-finite-sheaf-norm uses only existence. Advisory: LocallyRingedSpace plain import likely redundant."
+ }
+}

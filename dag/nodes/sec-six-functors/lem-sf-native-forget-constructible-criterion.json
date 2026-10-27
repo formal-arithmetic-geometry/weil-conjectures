@@ -1,0 +1,269 @@
+{
+ "id": "lem-sf-native-forget-constructible-criterion",
+ "kind": "statement",
+ "title": "Detection of native bounded constructibility by underlying coefficient modules",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $T_0$ be separated of finite type over $k_0$ and put $T=T_0\\times_{k_0}k$. Use $B_T$, the native module-object category $\\mathcal A_T$, its geometric Frobenius fixed-pair category $\\mathcal W_T$, and $\\mathrm{WC}^{\\mathrm{der}}(T_0)$ from [def-sf-native-weil-derived-framework]. Let $R_T=p_T^*\\underline\\Omega$ for the finite-subextension-valued condensed coefficient [sk-def-sfb-qlbar-condensed, sk-def-sfb-pulled-back-coefficients]. Let $E_T:\\mathcal A_T\\simeq\\mathcal M_T$ be the exact equivalence to internal $R_T$-modules in abelian sheaves [sk-def-sfb-module-objects] specified by sectionwise action transport along $\\theta_T:R_T\\cong B_T$ [lem-sf-locally-finite-coefficient-ring-realization, lem-sf-native-encoding-derived-operations]. Write $U_T:\\mathcal W_T\\to\\mathcal A_T$ for forgetting Frobenius, and $V_T=D(E_T)D(U_T)$ on ordinary derived categories [def-weil-abstract-derived-category].\n\nA native module $M$ is constructible (Zariski locally admitting a finite locally closed constructible stratification with pro-etale locally finite free restrictions over $B$) if and only if $E_TM$ is constructible in the coefficient-module sense [sk-def-sfb-constructible]. In this setting the native local stratifications can be replaced by one finite stratification of all of $T$. A finite-dimensional constant scalar model $P$ of dimension $r$ corresponds to $R_U\\otimes_\\Omega P\\cong R_U^{\\oplus r}$ on a covering member $U$; rank zero and ranks varying between covering members are allowed.\n\nFor every $C\\in D(\\mathcal W_T)$ and every integer $n$ there is a natural cohomology identification\n$$H^n(V_TC)\\cong E_TU_TH^n(C),\\qquad H^n(C)=0\\ \\Longleftrightarrow\\ H^n(V_TC)=0.$$\nConsequently $V_T$ preserves and reflects support in every cohomological interval $[a,b]$, and\n$$C\\in\\mathrm{WC}^{\\mathrm{der}}(T_0)\\ \\Longleftrightarrow\\ V_TC\\in D^b_c(T,\\Omega)\\ \\Longleftrightarrow\\ V_TC\\in D_{ctf}(T,\\Omega).$$\nHere $D^b_c$ means bounded cohomology with constructible coefficient-module cohomology, and $D_{ctf}$ adds finite Tor amplitude [sk-def-sfb-bounded-constructible, det-def-sfb-constructible-tor-amplitude]. If $V_TC$ has cohomology in $[a,b]$ and constructible cohomology, its Tor amplitude is contained in $[a-1,b]$. These assertions compare predicates after forgetting; they assert no equivalence with fixed pairs in a derived category.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.3, 6.8.6 and 6.8.8; native predicate comparison and cohomology detection extracted from returned steps 5 and 6. Native source: lean/WeilConjectures/SixFunctors/ProEtale/Adic/Constructible.lean:84-149; WeilSheaf/Category.lean:237-247. Finite Tor bound is the coefficient-field case of det-def-localizing-closure-ctf-equals-bc(2), not a new source claim."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sf-native-encoding-derived-operations",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "det-def-sfb-constructible-local-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pod-separated-finite-type-base-change] to the structure morphism of $T_0$ and $\\operatorname{Spec}k\\to\\operatorname{Spec}k_0$. Thus $T$ is separated of finite type over $k$. Since $\\operatorname{Spec}k$ is affine, [lem-weil-pbc-qcqs-over-affine] makes $T$ quasi-compact and quasi-separated. These are the hypotheses required for the global-stratification and Tor-amplitude tools below.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Base change of separated finite-type morphisms; qcqs over an affine base (the statements of the two cited nodes)."
+   }
+  },
+  {
+   "text": "For a covering member $U$ and a scalar space $P$ of dimension $r$, choose a basis $e_1,\\ldots,e_r$. The maps $R_U\\otimes_\\Omega P\\to R_U^{\\oplus r}$, $s\\otimes\\sum_j c_je_j\\mapsto(c_js)_j$, and $(s_j)_j\\mapsto\\sum_j s_j\\otimes e_j$ are inverse $R_U$-linear maps: the balancing identity moves each $c_j$ between the two factors. These formulas hold on sections and commute with restriction, hence define the asserted sheaf isomorphism. For $r=0$ both maps are the unique maps between zero modules. By [lem-sf-native-encoding-derived-operations], $E$ is sectionwise action transport along $\\theta$ and preserves restrictions; it therefore takes $B_U^{\\oplus r}$ to $R_U^{\\oplus r}$. No rank is required to be constant between different covering members.",
+   "uses": [
+    "lem-sf-native-encoding-derived-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3; explicit basis calculation under the sectionwise action encoding."
+   }
+  },
+  {
+   "text": "The same encoding is used in [lem-sf-weil-verdier-module-constructibility-comparison]: it commutes with restriction to locally closed strata and identifies finite constant scalar models with native finite free models, using the same stratification and covering. Thus on any Zariski open carrying a native finite stratification, $E_TM$ has a coefficient finite stratification, and conversely. Apply [lem-sfb-constructible-zariski-locality] on the qcqs scheme $T$ of step 1: these local coefficient stratifications give one finite coefficient stratification of $T$. Transfer each stratum and its covering back by the inverse encoding to obtain a global native stratification. Conversely a coefficient constructible module already has a global finite stratification by [sk-def-sfb-constructible], and transferring it gives a native constructible module. This proves both the sheaf criterion and the global-stratification assertion; the argument also works for the empty scheme.",
+   "uses": [
+    "lem-sf-weil-verdier-module-constructibility-comparison",
+    "lem-sfb-constructible-zariski-locality",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.3 and 6.8.6; Zariski-local-to-global refinement is the cited coefficient-locality tool (cf. Stacks 095E, lemma-constructible-quasi-compact-quasi-separated)."
+   }
+  },
+  {
+   "text": "By [lem-sf-native-weil-constructible-abelian], forgetting Frobenius $U_T$ is exact and conservative on the ambient abelian categories. By [lem-sf-native-encoding-derived-operations], $E_T$ is an exact equivalence. Apply [lem-pur-exact-derived-cohomology-coherence] first to $U_T$, then to $E_T$. Inverting its comparisons and composing gives $H^n(D(E_T)D(U_T)C)\\cong E_TH^n(D(U_T)C)\\cong E_TU_TH^n(C)$. The cited coherence statement makes this identification natural for every morphism in the ordinary unbounded derived category; no boundedness or replacement of this category by derived fixed pairs is used.",
+   "uses": [
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sf-native-encoding-derived-operations",
+    "lem-pur-exact-derived-cohomology-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; canonical cohomology comparison and composition as stated by lem-pur-exact-derived-cohomology-coherence."
+   }
+  },
+  {
+   "text": "Exact functors preserve zero objects, so $H^n(C)=0$ implies $E_TU_TH^n(C)=0$. Conversely suppose the latter is zero. An equivalence reflects zero, so $U_TH^n(C)=0$. Since $U_T$ is conservative, the unique arrow $0\\to H^n(C)$ is invertible: its image is the isomorphism $0\\to0$. Hence $H^n(C)=0$. Together with step 4 this proves vanishing detection degree by degree, and therefore preservation and reflection of support in every interval $[a,b]$, by checking each integer outside the interval.",
+   "uses": [
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sf-native-encoding-derived-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F; zero detection from conservativity, with the explicit zero-object argument."
+   }
+  },
+  {
+   "text": "By [def-sf-native-weil-derived-framework], $C$ belongs to $\\mathrm{WC}^{\\mathrm{der}}(T_0)$ exactly when its cohomology is zero outside a finite interval and each $U_TH^n(C)$ is native constructible. Step 5 identifies the first condition with boundedness of $V_TC$. Steps 3 and 4 identify the second with constructibility of each $H^n(V_TC)$ in the finite constant scalar model sense of [det-def-sfb-constructible-tor-amplitude](1)-(2). That node defines precisely the coefficient $D^b_c$ used here. Thus the first equivalence follows in both directions, using the same cohomological interval.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.6 and 6.8.8; direct assembly of steps 3-5 with the two predicates."
+   }
+  },
+  {
+   "text": "Apply [det-def-localizing-closure-ctf-equals-bc](2) with $X=T$ and $\\Lambda=\\Omega=\\overline{\\mathbf Q}_\\ell$. Its qcqs hypothesis is step 1, and $\\Omega$ is one of its specified coefficient rings, with exactly the finite-subextension condensed convention fixed in the statement. If $V_TC$ is bounded constructible with cohomology in $[a,b]$, that clause gives Tor amplitude in $[a-1,b]$. Hence it lies in $D_{ctf}$. Conversely membership in $D_{ctf}$ includes bounded constructible cohomology by [det-def-sfb-constructible-tor-amplitude](4). This proves the second equivalence and the stated bound. Rank zero and the zero complex satisfy it as well; no hypothesis on the Frobenius action enters this step.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Clause (2), specialized to the algebraically closed coefficient field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-exact-derived-cohomology-coherence",
+  "lem-sf-native-encoding-derived-operations",
+  "lem-sf-native-weil-constructible-abelian",
+  "lem-sf-weil-verdier-module-constructibility-comparison",
+  "lem-sfb-constructible-zariski-locality",
+  "lem-weil-pbc-qcqs-over-affine",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.3, 6.8.6, 6.8.8; assembly of existing native comparison, coefficient-locality and exact-cohomology tools. The native comparison is not a verbatim theorem of Bhatt-Scholze."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting equivariance detects boundedness and constructibility of complexes of adic sheaves whose local finite stratifications refine to a global finite stratification",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (toPresheaf X).ReflectsIsomorphisms\", \"doc\": \"The forgetful functor from the category of sheaves of modules over the structure sheaf of a scheme $ X $ to the category of presheaves of abelian groups reflects isomorphisms. That is, a morphism of s\"}\n  {\"name\": \"SheafOfModules.instReflectsIsomorphismsPresheafOfModulesValRingCatForget\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": (forget.{v} R).ReflectsIsomorphisms\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a sheaf of rings to the category of presheaves of modules reflects isomorphisms. That is, if a morphism of sheaves of modules becomes\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instReflectsIsomorphismsSheafedSpaceCommRingCatForgetToSheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": forgetToSheafedSpace.ReflectsIsomorphisms\", \"doc\": \"The forgetful functor from the category of locally ringed spaces to the category of sheafed spaces over commutative rings reflects isomorphisms. This means that if a morphism of locally ringed spaces \"}\n  {\"name\": \"PresheafOfModules.instReflectsFiniteLimitsSheafOfModulesSheafAddCommGrpCatToSheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \": ReflectsFiniteLimits (SheafOfModules.toSheaf.{v} R)\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a sheaf of rings $ R $ to the category of sheaves of abelian groups reflects finite limits. This means that if a diagram of sheaves o\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms\", \"module\": \"Mathlib.CategoryTheory.Sites.PreservesSheafification\", \"type\": \"{D : Type*} [Category.{max v u} D] {FD : D → D → Type*} {CD : D → Type (max v u)}\\n  [∀ X Y, FunLike (FD X Y) (CD X) (CD Y)] [ConcreteCategory.{max v u} D FD] [PreservesLimits (forget D)]\\n  [∀ X : C, HasColimitsOfShape (J.Cover X)ᵒᵖ D] [∀ X : C, PreservesColimitsOfShape (J.Cover X)ᵒᵖ (forget D)]\\n  [∀\", \"doc\": \"If a forgetful functor from a concrete category to the category of types preserves limits, has colimits of specific shapes, preserves colimits of opposite covers, has limits of walking multicospan dia\"}\n  {\"name\": \"SheafOfModules.forgetPreservesLimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": PreservesLimitsOfSize.{v₂, v} (forget.{v} R)\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a sheaf of rings $ R $ to the category of presheaves of modules over $ R $ preserves limits of a given size.\"}\n  {\"name\": \"smoothSheafCommRing.forgetStalk\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \"(x : TopCat.of M) : ((smoothSheafCommRing IM I M R).presheaf.stalk x).carrier ≅ (smoothSheaf IM I M R).presheaf.stalk x\", \"doc\": \"The forgetful functor from the category of smooth sheaves of commutative rings to the category of types induces an isomorphism between the carrier of the stalk (obtained by forgetting the ring structu\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.preservesCoequalizer\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": PreservesColimitsOfShape WalkingParallelPair forgetToSheafedSpace.{v}\", \"doc\": \"The forgetful functor from the category of locally ringed spaces to the category of sheafed spaces over commutative rings preserves colimits of diagrams indexed by the walking parallel pair category, \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf constructions do not state this native equivariant comparison or predicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"homology\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf constructions do not state this native equivariant comparison or predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicConstructibleSheaf|boundedAdicConstructible|WCder",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf constructions do not state this native equivariant comparison or predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded native Frobenius equivariant adic complex is constructible exactly when its forgotten condensed field coefficient complex has bounded constructible cohomology and finite Tor amplitude",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"CondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [Ring R] → Type (u + 2)\", \"doc\": \"The category of condensed modules over a ring $ R $, defined as the category of sheaves on the site of compact Hausdorff spaces equipped with the coherent Grothendieck topology, taking values in the c\"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"Condensed.profiniteFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the composition of the canonical inclusion functor from profinite spaces to condensed sets and \"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"LightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [Ring R] → Type (u + 1)\", \"doc\": \"For a ring $ R $, the category of light condensed $ R $-modules, defined as the category of sheaves on the site of light profinite spaces with values in the category of left $ R $-modules. This is con\"}\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf constructions do not state this native equivariant comparison or predicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor from Frobenius equivariant adic sheaves to condensed field coefficient modules detects bounded constructibility and finite Tor amplitude",
+   "results": "Read returned hits: CategoryTheory.ExactFunctor.of, CategoryTheory.Functor.exact_tfae, Condensed.free, CondensedSet.LocallyConstant.functorFullyFaithful, CondensedMod.LocallyConstant.functor, Condensed.instAB4CondensedMod, CategoryTheory.ExactFunctor.of_fst, Condensed.freeForgetAdjunction. Generic exact-functor, condensed-module, or etale-algebra facts only; none states the native Frobenius constructibility criterion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting Frobenius on complexes of locally finite adic sheaves detects bounded constructible cohomology",
+   "results": "Read returned hits: LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, LightCondensed.instIsGrothendieckAbelianLightCondMod, localCohomology.diagram, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite, CondensedMod.IsSolid, CondensedMod.ofSheafCompHaus. Generic exact-functor, condensed-module, or etale-algebra facts only; none states the native Frobenius constructibility criterion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence transporting ring sheaf actions identifies locally finite free modules with finite dimensional constant scalar models on pro etale strata",
+   "results": "Read returned hits: Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.finitePresentation, RingHom.Etale.ofLocalizationSpan, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.instForallOfFinite, RingHom.Etale.ofLocalizationSpanTarget, Algebra.isOpen_etaleLocus, RingHom.Etale.toAlgebra. Generic exact-functor, condensed-module, or etale-algebra facts only; none states the native Frobenius constructibility criterion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-pullback-star-preservation",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Definitions 6.8.3, 6.8.6 and 6.8.8; native predicate comparison and cohomology detection extracted from returned steps 5 and 6. Native source: lean/WeilConjectures/SixFunctors/ProEtale/Adic/Constructible.lean:84-149; WeilSheaf/Category.lean:237-247. Finite Tor bound is the coefficient-field case of det-def-localizing-closure-ctf-equals-bc(2), not a new source claim. This audit seed has no imported ancestor; fix-lem-tensor-adjunction.proof.md Step 1 needs the native pullback and ordinary direct-image terms.",
+   "via": [
+    "lem-sf-native-weil-pullback-star-preservation",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-forget-constructible-criterion",
+  "worker": "stage1",
+  "summary": "Split into seven steps using existing nodes only: base change and qcqs, explicit scalar basis maps, same-stratum comparison and global locality, natural exact-functor cohomology, zero detection, assembly of bounded constructibility, and the existing field Tor bound. No statement change and no Lean attachment.",
+  "blueprint": "Audit seed has no imported ancestor (blueprint_refs.py ancestor returns None); realizes native predicate comparison and cohomology detection extracted from returned steps 5-6 of lem-sf-native-weil-pullback-star-preservation, as recorded in the inherited blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Its clause (2) gives the existing coefficient-field Tor bound; no duality route is replaced."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Base-change permanence supplies the separated finite-type geometric fibre needed by the native comparison."
+   },
+   {
+    "node": "lem-pur-exact-derived-cohomology-coherence",
+    "why": "Generic cohomology comparison for composite exact functors on ordinary unbounded derived categories."
+   },
+   {
+    "node": "lem-sf-native-weil-constructible-abelian",
+    "why": "Only its ambient exactness and conservativity of forgetting Frobenius are used, not its constructible closure claims."
+   },
+   {
+    "node": "lem-sfb-constructible-zariski-locality",
+    "why": "Generic finite-stratification gluing for condensed coefficient modules, absent from the biduality unit."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Supplies qcqs hypotheses for coefficient locality and Tor amplitude over the affine field base."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-localizing-closure-ctf-equals-bc",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-exact-derived-cohomology-coherence",
+  "lem-sf-native-weil-constructible-abelian",
+  "lem-sfb-constructible-zariski-locality",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N0-f44133337",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-f44133337 (reviewer sub-agent of L); spot-checked: Read Bhatt-Scholze Def. 6.8.3/6.8.6/6.8.8 (they match the item's lisse/constructible/D_cons conventions; over Ω a finite constant scalar model is the same as finite free) and every cited statement. One commit, item split into 7 steps, no new nodes, statement and stmt_deps as inherited, no SGA, no cycle (only the parent cites the item). S1: the two Mathlib leaves give T separated, finite type and qcqs. S2: explicit basis maps, with E taking B_U^r to R_U^r by encoding-derived-operations. S3: lem-sf-weil-verdier-module-constructibility-comparison states the predicate identification on the same strata and covers; zariski-locality(1)-(2) gives the global stratification (uses tacitly that T is Noetherian when restricting to affines, which is elementary). S4: forgetting Frobenius is exact (native-weil-constructible-abelian) and E_T is an exact equivalence; composing the comparisons of exact-derived-cohomology-coherence gives H^n(V_T C)≅E_T U_T H^n(C) naturally, for unbounded complexes. S5: conservativity applied to 0→H^n gives vanishing detection. S6: unfolds both definitions. S7: localizing-closure-ctf-equals-bc(2) with Λ=Q̄_ℓ and X=T qcqs gives Tor amplitude in [a-1,b]; the converse is def clause (4). Edge cases checked: T empty, C=0, r=0, a single degree, ranks varying between covering members. Batch-5 flag (native-weil-constructible-abelian → lem-trf-geometric-inverse-image-exact): that node is generic exactness of inverse image along a geometric morphism and is used only for exact, conservative forgetting. Neither assumption gives it and it is no step of the trace-formula or Poincaré-duality proofs, so it is accepted. tool_uses accepted as generic: ctf-equals-bc, exact-derived-cohomology-coherence, native-weil-constructible-abelian, constructible-zariski-locality, and the two Mathlib leaves. Maintainer note: the stmt_dep sk-def-sfb-bounded-constructible uses the locally-finitely-presented ring-object predicate, while the item explicitly fixes the finite-constant-model sense of sk-def-sfb-constructible / det-def-sfb-constructible-tor-amplitude. Stage 2 must use the latter."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeForgetConstructibleCriterion",
+  "declaration": "AlgebraicGeometry.ProEtale.NativeEncoding.native_forget_constructible_criterion",
+  "file": "lean/Sheaf/Paper/NativeForgetConstructibleCriterion.lean",
+  "statement": "theorem native_forget_constructible_criterion (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] : (∀ M : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber, (IsAdicConstructibleSheaf M ↔ IsConstantModelConstructible (Profinite.padicAlgClRingObj l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ((encoding l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).obj M)) ∧ (IsAdicConstructibleSheaf M ↔ IsAdicStratifiedLisseSheaf M)) ∧ (∀ (U : Scheme.{u}) (P : Mod Ab.{u + 1} (scalarRingObj (Profinite.padicAlgClRingObj l))) (r : ℕ), Nonempty (P ≅ Mod.finiteFree (scalarRingObj (Profinite.padicAlgClRingObj l)) r) → Nonempty ((finiteConstantScalarExtension (Profinite.padicAlgClRingObj l) U).obj P ≅ Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj l) U) r) ∧ Nonempty ((encoding l U).obj (Mod.finiteFree (adicConstantSheaf l U) r) ≅ Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj l) U) r)) ∧ (∀ n : ℤ, Nonempty (realization k₀ l X ⋙ DerivedCategory.homologyFunctor _ n ≅ DerivedCategory.homologyFunctor _ n ⋙ Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X) ⋙ encoding l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ∧ (∀ (C : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (n : ℤ), IsZero ((DerivedCategory.homologyFunctor _ n).obj C) ↔ IsZero ((DerivedCategory.homologyFunctor _ n).obj ((realization k₀ l X).obj C))) ∧ (∀ (C : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (a b : ℤ), (∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor _ n).obj C)) ↔ (∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor _ n).obj ((realization k₀ l X).obj C)))) ∧ (∀ C : DerivedCategory (ProEtaleWeilSheaf k₀ l X), (WeilComplex.objectProperty k₀ l X C ↔ constantModelBoundedConstructible (Profinite.padicAlgClRingObj l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ((realization k₀ l X).obj C)) ∧ (constantModelBoundedConstructible (Profinite.padicAlgClRingObj l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ((realization k₀ l X).obj C) ↔ (constantModelBoundedConstructible (Profinite.padicAlgClRingObj l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ((realization k₀ l X).obj C) ∧ DerivedCategory.finiteTorAmplitude _ ((realization k₀ l X).obj C)))) ∧ (∀ (C : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (a b : ℤ), a ≤ b → (∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor _ n).obj ((realization k₀ l X).obj C))) → (∀ n : ℤ, IsConstantModelConstructible (Profinite.padicAlgClRingObj l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ((DerivedCategory.homologyFunctor _ n).obj ((realization k₀ l X).obj C))) → DerivedCategory.torAmplitudeIn _ (a - 1) b ((realization k₀ l X).obj C))",
+  "branch": "sheaf-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published NativeEncoding.encoding and realization. The theorem explicitly states the native/coefficient constructibility iff, global native stratification, scalar finite-rank model comparison (including rank zero), natural cohomology identification, zero and interval detection, both bounded-constructible/finite-Tor predicate equivalences, and the [a-1,b] Tor bound. The additional already-landed statement dependency supplies scalarRingObj and finiteConstantScalarExtension; no new notion or dependency repair is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6ba6b5da",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Read node, all 11 stmt_deps and the declarations used (Adic/Constructible.lean IsAdic*Sheaf, WeilSheaf/Category objectProperty, NativeEncoding encoding/realization, CondensedConstantConstructibility, TorAmplitude, FiniteConstantLocalModel scalarRingObj/finiteConstantScalarExtension, Mod.finiteFree). Hypotheses are exactly separated finite type over a finite k0 with l != char; T = geometricFiber. Every clause is rendered: native<->coefficient constructibility iff via the recorded encoding; local<->global stratification (IsAdicStratifiedLisseSheaf); finite-rank scalar model including r=0 and per-U ranks; natural iso of functors Hn(V C) = E U Hn(C) on unbounded D; zero detection; support in [a,b] for arbitrary a,b; WCder <-> bc <-> bc and finite Tor using the finite-constant-model convention per the N0 maintainer note; Tor amplitude in [a-1,b] with the source's a<=b convention. No defs, proof sorry, docstrings carry source and blueprint, statement field verbatim. Node differs from live only by the lean record and the added landed stmt_dep det-def-sfb-constructible-local-model; not superseded. Plain imports are proof_dep modules. Advisory: the cohomology identification is Nonempty, not the canonical mapDerivedCategoryHomologyFunctorIso (node says 'there is'; the only citer uses the predicates); sk-def-sfb-bounded-constructible is intentionally unused. No compile: no file changed."
+ }
+}

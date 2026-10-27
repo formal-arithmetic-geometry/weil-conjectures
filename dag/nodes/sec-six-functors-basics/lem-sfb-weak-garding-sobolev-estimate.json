@@ -1,0 +1,191 @@
+{
+ "id": "lem-sfb-weak-garding-sobolev-estimate",
+ "kind": "statement",
+ "title": "Weak finite-order Gårding estimate on a compact bundle",
+ "statement": "All vector spaces are over $\\mathbf R$ [def-weil-field]. Let $N$ be a compact oriented smooth manifold without boundary of dimension $m\\geq1$, with a smooth Riemannian metric and its positive volume form. For a smooth finite-rank real metric bundle $B$, let $L^2(B)$ be measurable square-integrable sections modulo almost-everywhere equality. For an integer $j\\geq0$, let $H^j(B)$ be the subspace of $L^2(B)$ whose local coefficients in smooth coordinate charts and bundle frames have distributional derivatives through order $j$ locally in $L^2$. Fix Sobolev norms $\\|\\cdot\\|_{H^j}$ obtained by a finite smooth coordinate trivializing cover and a subordinate smooth partition of unity, taking the square root of the sum of squared Euclidean $L^2$ norms of all derivatives through order $j$ of the localized sections. Here $H^0(B)=L^2(B)$, with its usual integrated norm $\\|\\cdot\\|_{L^2}$. Distributional derivatives are taken by duality against compactly supported smooth test functions in each chart. Let $B$ be such a bundle and let $P:\\Gamma^\\infty(B)\\to\\Gamma^\\infty(B)$ be a real-linear differential operator with smooth coefficients of order at most an integer $d\\geq1$. Write it locally as $P=\\sum_{|\\alpha|\\leq d}a_\\alpha(x)\\partial^\\alpha$, and assume the degree-$d$ symbol $\\sum_{|\\alpha|=d}a_\\alpha(x)\\xi^\\alpha:B_x\\to B_x$ is invertible for every $\\xi\\neq0$. For each integer $s\\geq0$ there is a constant $C_s>0$, depending on $P$, the fixed geometry, the chosen norms and $s$, such that for every $v\\in L^2(B)$ for which the distribution $Pv$ belongs to $H^s(B)$, one has $$v\\in H^{s+d}(B),\\qquad \\|v\\|_{H^{s+d}}\\leq C_s\\bigl(\\|Pv\\|_{H^s}+\\|v\\|_{L^2}\\bigr).$$ The distribution $Pv$ means applying the local differential expression to the coefficients of $v$ using distributional derivatives; its membership in $H^s(B)$ means equality with the distribution induced by an element of that space. No a priori $H^{s+d}$ regularity of $v$ is required.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-elliptic-distribution-parametrix] with $C=B$ to obtain $A\\in\\Psi^{-d}(B,B)$ and a smooth-kernel operator $R_K$ satisfying $AP=\\mathrm{id}+R_K$ on all distributions. Its hypotheses are exactly compactness, absence of boundary, smooth real coefficients and invertibility of the degree-$d$ symbol assumed here. Fix $s\\geq0$ and write $f\\in H^s(B)$ for the section inducing $Pv$; the identity therefore gives $v=Af-R_Kv$ in $\\mathcal D'(B)$, even though $v$ was assumed only in $L^2$.",
+   "uses": [
+    "lem-sfb-elliptic-distribution-parametrix"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Part I 3.B, construction after 3.8 and proof of 3.9, printed pp.13–14; WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-symbol-operator-sobolev-boundedness] for $A$, with order $r=-d$ and input index $t=s$. Both $t$ and $t-r=s+d$ are nonnegative. It follows that $Af\\in H^{s+d}(B)$ and $\\|Af\\|_{H^{s+d}}\\leq a_s\\|f\\|_{H^s}$ for a positive constant $a_s$ fixed by $A$ and the chosen data. This is the action on the distribution $f=Pv$, as required in the identity from step 1.",
+   "uses": [
+    "lem-sfb-symbol-operator-sobolev-boundedness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Part I Theorem 3.6, used in the proof of 3.9, printed pp.13–14; WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf"
+   }
+  },
+  {
+   "text": "In [def-sfb-symbol-pseudodifferential-operators], take the empty local-symbol sum and kernel $K$. Thus the same $R_K$ belongs to $\\Psi^{-(s+d)}(B,B)$; the definition imposes no restriction on the integer order for the smooth-kernel term. Apply [lem-sfb-symbol-operator-sobolev-boundedness] with $t=0$ and $r=-(s+d)$. Since $H^0=L^2$, this gives $R_Kv\\in H^{s+d}(B)$ and $\\|R_Kv\\|_{H^{s+d}}\\leq b_s\\|v\\|_{L^2}$, with $b_s>0$.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-symbol-operator-sobolev-boundedness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Part I 3.B, Theorem 3.6 and following smooth-kernel paragraph, printed p.13; WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf"
+   }
+  },
+  {
+   "text": "The difference $w=Af-R_Kv$ belongs to $H^{s+d}(B)$: its local weak derivatives are the differences of the corresponding $L^2$ derivatives. The distribution identity gives $v=w$. The injectivity of $L^2(B)\\to\\mathcal D'(B)$ in [lem-sfb-bundle-sobolev-rellich] identifies their $L^2$ classes, so $v\\in H^{s+d}(B)$. The triangle inequality and the preceding two bounds yield $\\|v\\|_{H^{s+d}}\\leq a_s\\|Pv\\|_{H^s}+b_s\\|v\\|_{L^2}\\leq C_s(\\|Pv\\|_{H^s}+\\|v\\|_{L^2})$, where $C_s=\\max(1,a_s,b_s)>0$. None of these constants depends on $v$.",
+   "uses": [
+    "lem-sfb-bundle-sobolev-rellich"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Part I proof of 3.9, printed p.14; weak-section identification made explicit; WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-elliptic-distribution-parametrix",
+  "lem-sfb-symbol-operator-sobolev-boundedness",
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-bundle-sobolev-rellich"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Assembly following the online-read proof of Part I Theorem 3.9, printed p.14, with Theorem 3.6 and the parametrix after Definition 3.8; missing local document recorded WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Gårding|Garding|elliptic.*operator|elliptic.*regular|hypoellipt|parametrix",
+   "results": "{\"t\": \"2026-10-24T02:26:49Z\", \"tool\": \"grep\", \"query\": \"Gårding|Garding|elliptic.*operator|elliptic.*regular|hypoellipt|parametrix\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Complex/AbelLimit.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\"], \"digest\": \"2fa6e9126c31cc69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits are Euclidean Sobolev inequalities for already differentiable functions, derivative operations or seminorm bounds; Loogle elliptic hits are elliptic curves/sequences. No weak variable-coefficient bundle elliptic estimate is stated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An elliptic differential operator gains d weak derivatives in the L2 Sobolev scale",
+   "results": "{\"t\": \"2026-10-24T02:26:50Z\", \"tool\": \"leansearch\", \"query\": \"An elliptic differential operator gains d weak derivatives in the L2 Sobolev scale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_le\", \"InnerProductSpace.InnerProduct.laplacian\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner\", \"Laplacian.laplacian\", \"SchwartzMap.derivCLM\", \"SchwartzMap.laplacianCLM_eq\", \"InnerProductSpace.instLaplacian\", \"InnerProductSpace.laplacianWithin_eq_iteratedDerivWithin_real\"], \"digest\": \"820173b3dd523711\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits are Euclidean Sobolev inequalities for already differentiable functions, derivative operations or seminorm bounds; Loogle elliptic hits are elliptic curves/sequences. No weak variable-coefficient bundle elliptic estimate is stated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"elliptic\"",
+   "results": "{\"t\": \"2026-10-24T02:26:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"elliptic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsElliptic\", \"WeierstrassCurve.IsElliptic.isUnit\", \"WeierstrassCurve.IsElliptic.mk\", \"WeierstrassCurve.isElliptic_iff\", \"WeierstrassCurve.instIsEllipticMap\", \"WeierstrassCurve.twoTorsionPolynomial_discr_ne_zero_of_isElliptic\", \"WeierstrassCurve.instIsEllipticHSMulVariableChange\", \"IsEllipticDvdSequence.id\"], \"digest\": \"c60cd8e1c20e56eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits are Euclidean Sobolev inequalities for already differentiable functions, derivative operations or seminorm bounds; Loogle elliptic hits are elliptic curves/sequences. No weak variable-coefficient bundle elliptic estimate is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Garding estimate: if v is L2 and Pv is in Sobolev Hs for an elliptic operator of order d on a compact manifold then v is in H(s+d) with a norm bound",
+   "results": "{\"t\": \"2026-10-24T02:26:51Z\", \"tool\": \"leanfinder\", \"query\": \"Garding estimate: if v is L2 and Pv is in Sobolev Hs for an elliptic operator of order d on a compact manifold then v is in H(s+d) with a norm bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq\", \"ContDiffMapSupportedIn.seminorm_le_iff_withOrder\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner\", \"ContDiffMapSupportedIn.norm_iteratedFDeriv_apply_le_seminorm\", \"SchwartzMap.seminorm_le_bound\", \"SchwartzMap.seminormAux_le_bound\", \"ContDiffMapSupportedIn.seminorm_le_iff\", \"SchwartzMap.le_seminormAux\"], \"digest\": \"d9ca79631240dda9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits are Euclidean Sobolev inequalities for already differentiable functions, derivative operations or seminorm bounds; Loogle elliptic hits are elliptic curves/sequences. No weak variable-coefficient bundle elliptic estimate is stated."
+  },
+  {
+   "tool": "grep",
+   "query": "Gårding|Garding|elliptic.*regular|hypoellipt|parametrix",
+   "results": "{\"t\": \"2026-10-24T03:04:36Z\", \"tool\": \"grep\", \"query\": \"Gårding|Garding|elliptic.*regular|hypoellipt|parametrix\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Complex/AbelLimit.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\"], \"digest\": \"2fa6e9126c31cc69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: elliptic-curve and differentiable-function Sobolev hits do not assert weak elliptic regularity for an L2 bundle section."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An elliptic differential operator gains d weak derivatives in the L2 Sobolev scale",
+   "results": "{\"t\": \"2026-10-24T03:04:37Z\", \"tool\": \"leansearch\", \"query\": \"An elliptic differential operator gains d weak derivatives in the L2 Sobolev scale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_le\", \"InnerProductSpace.InnerProduct.laplacian\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner\", \"Laplacian.laplacian\", \"SchwartzMap.derivCLM\", \"SchwartzMap.laplacianCLM_eq\", \"InnerProductSpace.instLaplacian\", \"InnerProductSpace.laplacianWithin_eq_iteratedDerivWithin_real\"], \"digest\": \"820173b3dd523711\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: elliptic-curve and differentiable-function Sobolev hits do not assert weak elliptic regularity for an L2 bundle section."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"elliptic\"",
+   "results": "{\"t\": \"2026-10-24T03:04:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"elliptic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsElliptic\", \"WeierstrassCurve.IsElliptic.isUnit\", \"WeierstrassCurve.IsElliptic.mk\", \"WeierstrassCurve.isElliptic_iff\", \"WeierstrassCurve.instIsEllipticMap\", \"WeierstrassCurve.twoTorsionPolynomial_discr_ne_zero_of_isElliptic\", \"WeierstrassCurve.instIsEllipticHSMulVariableChange\", \"IsEllipticDvdSequence.id\"], \"digest\": \"c60cd8e1c20e56eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: elliptic-curve and differentiable-function Sobolev hits do not assert weak elliptic regularity for an L2 bundle section."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an L2 distribution has elliptic differential operator image in Hs then it lies in H(s+d) with norm controlled by the image and L2 norm",
+   "results": "{\"t\": \"2026-10-24T03:04:42Z\", \"tool\": \"leanfinder\", \"query\": \"If an L2 distribution has elliptic differential operator image in Hs then it lies in H(s+d) with norm controlled by the image and L2 norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNormLESNormFDerivOfLeConst\", \"MeasureTheory.eLpNormLESNormFDerivOfEqInnerConst\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq\", \"SchwartzMap.norm_toLp_le_seminorm\", \"MeasureTheory.eLpNormLESNormFDerivOneConst\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"SchwartzMap.eLpNorm_le_seminorm\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv\"], \"digest\": \"8b9154c5f1a1aadb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: elliptic-curve and differentiable-function Sobolev hits do not assert weak elliptic regularity for an L2 bundle section."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-adjoint-regularity",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle.",
+   "via": [
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weak-garding-sobolev-estimate",
+  "worker": "stage1",
+  "summary": "Q21 checked Demailly VI (2.3) against the unchanged weak statement and read the explicit parametrix proof in Demailly Part I 3.B. Isolated symbol-operator definition, distributional left-parametrix existence, and general symbol Sobolev boundedness; retained the all-distributions identity before applying the two independent mapping bounds. Reused the existing injectivity/weak-realization node. No exact project or Mathlib declaration was found.",
+  "blueprint": "Realizes the analytic weak-regularity prerequisite at the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry, below the unit route. The nearest-blueprint-ancestor utility returns None for this inherited chain, which is preserved; current latest direct-image proof (3) was read. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-dabdc14c1",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-dabdc14c1 (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full. The item statement and stmt_deps are byte-identical to the base (Q03 snapshot), and there is no re-split note. I read Demailly agbook VI (2.1)-(2.4), printed pp.289-290, from an existing local copy at /tmp/nu-demailly/agbook.txt. The item matches (2.3) hypothesis by hypothesis: L2 input, the distributional extension of P, and a gain of d derivatives with an L2 remainder. Demailly's hodge-ams.pdf is not in literature/ and network access is blocked, so I could not check its cited numbers (3.4-3.6, Def 3.8, Thm 3.9). The WANTED line and proof_origin agent are correct, and I checked each statement against the standard theory (Shubin, Hörmander). The definition node gives S^r_{1,0} matrix symbols, χ Re Op(a) ψ quantization and smooth kernels, allows the empty sum, and contains no claim. The parametrix node is true: a properly supported parametrix splits into chart pieces plus smoothing terms, the real case follows by complexifying and taking real parts, and the identity extends to D' by density. The boundedness node is true for t>=0 and t-r>=0, with the output being the distributional action. Step 1 applies the parametrix with C=B; all hypotheses hold and v=Af-R_Kv in D'. Step 2 applies boundedness with r=-d, t=s. Step 3 puts R_K in Psi^{-(s+d)} by the empty-sum clause and applies boundedness at t=0. Step 4 is elementary: it uses the L2->D' injectivity from lem-sfb-bundle-sobolev-rellich and C_s=max(1,a_s,b_s). Small cases checked: d/dx on S^1, 1-Δ, s=0, rank 0. proof_deps equals the union of uses, there is no cycle, everything is in the same unit, no tool_uses are needed and no SGA is cited. My rg -L duplicate search over dag/nodes found only the sfb analytic siblings (global-garding, rellich, embedding, closed-range, adjoint, fredholm), none of which duplicates or generalizes a new node. No new node restates a clause of the item. Blueprint: the inherited from.node is null as in earlier sibling PASSes, and each via is [item]+item.via. No fixes."
+ }
+}

@@ -9,7 +9,10 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.Algebra.IntermediateField
 public import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Basic
-import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import Sheaf.Analysis.Normed.Module.ProperUltrametricScalarExtension
+import Mathlib.Analysis.Normed.Algebra.Basic
+import Mathlib.Analysis.Normed.Algebra.Ultra
+import Mathlib.NumberTheory.Padics.ProperSpace
 import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-! # Continuous linear retraction onto a finite p-adic subfield
@@ -61,6 +64,28 @@ theorem exists_finiteSubfield_continuousLinearRetraction
     (E : IntermediateField (Padic l) Ω) [FiniteDimensional (Padic l) E]
     (F : IntermediateField E Ω) [FiniteDimensional (Padic l) F] :
     ∃ p : Ω →L[E] F, ∀ a : F, p (a : Ω) = a := by
-  sorry
+  classical
+  let : NormedAlgebra E Ω :=
+    { norm_smul_le c x := norm_mul_le (c : Ω) x }
+  let : IsUltrametricDist Ω := IsUltrametricDist.of_normedAlgebra (Padic l)
+  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra (Padic l)
+  let : CompleteSpace E := FiniteDimensional.complete (Padic l) E
+  let : ProperSpace E := FiniteDimensional.proper (Padic l) E
+  let : FiniteDimensional E F := Module.Finite.of_restrictScalars_finite (Padic l) E F
+  let W : Submodule E Ω := F.toSubalgebra.toSubmodule
+  let b := Module.finBasis E F
+  let f : Fin (Module.finrank E F) → W →L[E] E :=
+    fun i ↦ (b.coord i).toContinuousLinearMap
+  have hext (i : Fin (Module.finrank E F)) :
+      ∃ g : Ω →L[E] E, ∀ w : W, g (w : Ω) = f i w :=
+    ContinuousLinearMap.exists_extension_of_proper_ultrametric (K := E) (V := Ω)
+      (NormedField.exists_norm_lt_one E) W (f i)
+  choose g hg using hext
+  let p : Ω →L[E] F := ∑ i, (g i).smulRight (b i)
+  refine ⟨p, fun a ↦ ?_⟩
+  change (∑ i, (g i).smulRight (b i)) (a : Ω) = a
+  simp only [sum_apply, ContinuousLinearMap.smulRight_apply]
+  simp only [hg _ (show W from a)]
+  exact b.sum_repr a
 
 end Padic

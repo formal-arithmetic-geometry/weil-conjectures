@@ -6,6 +6,7 @@ Authors: SHEAF group L
 module
 
 public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionComparisonNaturality
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTensorNaturality
 
 /-! # Restricted tensor maps of tensor resolutions
 

@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-regular-unit-normalization",
+ "kind": "statement",
+ "title": "A fixed regular-unit normalization for completed Koszul degree zero",
+ "statement": "Let T be a scheme, A a commutative ring, d an adic coefficient datum, r a natural number, and a:Fin r to A. Use the actual constant module functor and completed scalar extension of [def-weil-pbc-intrinsic-completion], and put E equal to their composite. There exists one isomorphism c0 from the regular completed module to E of the regular ULift A-module such that, for every n, c0 followed by E of the inverse exteriorPower.zeroEquiv and the extension identification in exterior degree zero is exactly completedAdicKoszulUnitZero(T,d,r,a,n). No tensor of complexes, tower comparison, quotient, or augmentation is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product (03EK), regular-module scalar tensor and sheafification; proetale.tex, proof of lemma-naive-completion (099M), realization of the constant Koszul complex."
+ },
+ "proof": [
+  {
+   "text": "The normalized constant regular-module map sends 1 to its sheafification. Construct its inverse by the module-sheafification adjunction, sending this generator to 1. Both composites are identity: maps from the regular module are determined by 1, and the adjunction reduces the other equation to that same generator.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each object of the site, the heterobasic tensor isomorphism sends s tensor r to s*phi(r). Its restriction compatibility is naturality of phi. Sheafify this presheaf isomorphism and compose with the adjunction counit at the target regular module. The hom-equivalence of the adjunction proves the section formula, and applying the inverse shows that 1 is sent to the sheafification of 1 tensor 1.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the inverse scalar regular-unit isomorphism, the recorded object equality for completed scalar extension, and scalar extension of the constant regular-module isomorphism. This explicitly constructs c0. The scalar-extension morphism formula sends normalized tensors to normalized tensors of the image. Thus, at every n, c0 followed by the realized exterior degree-zero identification has the defining value of the actual completed Koszul unit on 1. The unit-module/sections equivalence gives equality. These constructions also apply to rank zero, the zero ring, and an empty scheme.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S4",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tensor products and sheafification; explicit regular-unit calculation for the finite realization in Stacks 099M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of the regular module is the tensor unit normalized at one",
+   "results": "Found ModuleCat.extendScalarsId, extendRestrictScalarsAdj_unit_app_apply and module tensor-unit APIs. These concern algebraic modules, not the prescribed completed sheaf scalar-extension witness.",
+   "verdict": "Reuse the local tensor-unit API; prove its sheafification and normalized completed comparison.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.rid",
+   "results": "Found rid, rid_tmul, rid_symm_apply in Mathlib.LinearAlgebra.TensorProduct.Tower and ModuleCat.extendScalars monoidal unit formulas.",
+   "verdict": "Use rid for the sectionwise scalar regular-unit isomorphism. The completed sheaf normalization still needs proof.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*unit|unit.*changeOfRings",
+   "results": "No service hit. Local source search found private normalized-unit arguments in CompletedKoszulTensorQuotientAugmentationUnique and the scalar-unit construction in FlatConstantTensorProZeroCones.",
+   "verdict": "No duplicate public statement; retain and prove this specific normalization.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulUnitTensorRealization",
+  "group": "S4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Order 1248, finite realization in the strict coefficient augmentation argument: normalize the regular module before identifying the exterior Koszul source.",
+   "via": [
+    "lem-weil-pbc-completed-koszul-unit-tensor-realization",
+    "lem-weil-pbc-completed-koszul-coefficient-cone-realization",
+    "lem-weil-pbc-completed-koszul-tensor-quotient-cone-pro-zero",
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulRegularUnitNormalization",
+  "file": "lean/Sheaf/Paper/CompletedKoszulRegularUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulRegularUnitNormalization",
+  "statement": "theorem completedKoszulRegularUnitNormalization\n    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A) :\n    let E := koszulConstantFunctor T A ⋙ completedAdicScalarExtension T d\n    ∃ c₀ : SheafOfModules.unit (completedAdicRing T d) ≅\n        E.obj (ModuleCat.of (ULift.{t + 1} A) (ULift.{t + 1} A)),\n      ∀ n : ℕ, completedAdicKoszulUnitZero T d r a n = c₀.hom ≫ E.map\n        (ModuleCat.ofHom (exteriorPower.zeroEquiv (ULift.{t + 1} A)\n          (Fin r →₀ ULift.{t + 1} A)).symm.toLinearMap ≫\n          ((ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r\n            (fun i ↦ ULift.up (a i ^ (n + 1)))).extendXIso\n              ComplexShape.embeddingDownNat (i := 0) rfl).inv)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedKoszulRegularUnitNormalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T052609-L-456909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T052609-L-456909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

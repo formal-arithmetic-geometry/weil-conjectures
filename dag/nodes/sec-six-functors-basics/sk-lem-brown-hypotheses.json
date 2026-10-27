@@ -27,56 +27,34 @@
  ],
  "proof": [
   {
-   "text": "Fix the standing datum $(p,\\ell,k)$ and a separated finite-type $k$-scheme $X$ as in [sk-def-sfb-dc-setting], and fix one of the displayed admissible coefficient rings $\\Lambda$. The coefficient list, condensed topologies, pulled-back ring object $\\Lambda_X$, unbounded module-object ambient category $\\mathcal T=D(\\Mod_{\\Lambda_X})$, constructible finite-Tor subcategory $\\mathcal S=\\Dctf(X,\\Lambda)$, replete localizing intersection, and fixed small indexing universe are exactly those specified by [sk-def-localizing-closure]. Put $\\mathcal L=\\Loc(\\mathcal S)$. All direct sums below use this fixed universe; no derived-completeness condition is added.",
+   "text": "Finite type over the specified field makes X compact and locally Noetherian.",
    "uses": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-localizing-closure"
+    "sk-def-sfb-dc-setting"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md",
-    "place": "item statement and proof first paragraph; standing scheme setting and localizing-closure definitions"
-   }
+   "elementary": true
   },
   {
-   "text": "Use the coefficient-independent structural theorem [h1-brown-hypotheses-structural] for local smallness, triangulation, coproducts and split idempotents. Use [det-brown-hypotheses-small] for thickness and essential smallness when the coefficient is among its six alternatives. The current admissibility predicate additionally includes all-continuous-map algebraic-closure coefficients, which this smallness declaration does not cover.",
+   "text": "The proved Noetherian criterion reduces the Brown bundle to coproducts and compactness of bounded constructible finite-Tor objects.",
    "uses": [
-    "h1-brown-hypotheses-structural",
-    "det-brown-hypotheses-small"
+    "lem-sfb-brown-noetherian-compactness-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
-    "place": "first paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "For the geometric finite-field setting and the six supported coefficient alternatives, [a4-brown-finite-field-internal-compactness] converts the existing ambient canonical Hom-map assertion to compactness in the full localizing category. The private finiteIntermediateField specialization constructs a small skeletal model using essential smallness, transports compactness along representative isomorphisms, and applies brownHypothesesFor_of_compact. Generation in that assembly follows directly from the orthogonal argument and the minimality of the localizing intersection. The arbitrary-field theorem remains STATEMENT-DISPUTED and sorry: the compactness declaration requires a FiniteFieldDatum, and cannot be applied to an arbitrary positive-characteristic base field. This diagnostic does not assert the unsupported implication.",
-   "uses": [
-    "a4-brown-finite-field-internal-compactness",
-    "def-pc-compact-object",
-    "def-pc-generators"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
-    "place": "second paragraph"
-   }
+   "text": "STATEMENT-DISPUTED: compactness cannot be supplied for arbitrary fields from the stated hypotheses. Finite-field compactness requires the geometric field of a finite-field datum; integral compactness requires explicit uniform constructible Ext bounds. The original theorem remains a named sorry. The two false downstream splits are retired, not used as assumptions.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "sk-def-sfb-dc-setting",
-  "sk-def-localizing-closure",
-  "h1-brown-hypotheses-structural",
-  "det-brown-hypotheses-small",
-  "a4-brown-finite-field-internal-compactness",
-  "def-pc-compact-object",
-  "def-pc-generators"
+  "lem-sfb-brown-noetherian-compactness-criterion"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-generation.proof.md",
-  "place": "A4: supported geometric finite-field diagnostic and canonical finite-extension Brown bundle; original arbitrary-field hole remains disputed"
+  "by": "K4 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "compactness paragraph",
+  "note": "Restore the original unresolved statement without changing its signature or the unit route. The previously complete formal assembly depended on false unrestricted compactness splits; those declarations and DAG edges are retired."
  },
  "mathlib_searches": [
   {
@@ -175,7 +153,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-f96bbd611 (reviewer sub-agent of L); spot-checked: I read the full source unit sk-lem-brown-hypotheses (main-20261015: _section.md, the item proof, and the ambient, small and generation detail statements and proofs), the full statements of the five cited nodes, the three compactness nodes bound in the unit's realized step 2, and the citers. The statement changes only by making two hypotheses explicit. The admissible-coefficient list A, Z_l, O_E, Q_l, E, Qlbar matches sk-thm-sf-ctf-stability and sk-def-localizing-closure; sk-def-sf-admissible is about morphisms, so not citing it is correct. The other is the standing separated finite-type setting of sk-def-sfb-dc-setting; the source's own small-detail proof assumes it ('the Noetherian scheme X'), and every citer (sk-prop-sf-existence, det-sf-existence-brown) uses the item only for such schemes. The worker's counterexample, a countable disjoint union of geometric points, checks out: Hom(A_X, sum_i j_{i!}A) is the product of the A, not the direct sum, so the setting is needed and nothing is weakened. Small cases hold: the empty scheme, one geometric point, the non-regular ring A=Z/l^2, and Z_l, Q_l as the case E=Q_l. Step 1 only unpacks two definitions and is elementary. Step 2 uses exactly what the ambient detail states (locally small, triangulated, sums, split idempotents) and what the small detail states (thick, essentially small), plus an elementary skeleton choice. Step 3 uses the generation detail for an arbitrary skeleton. The route stays inside the unit, there is no cycle, no new node, no SGA and no tool use. This is not a target, so the base-change check does not apply; the coefficient category is D(Mod over Lambda_X) on the pro-etale site throughout. Repaired one fault, B3: the restated statement used 'thick', 'compact' and 'generators' without definition nodes. fixes/dag/nodes/sec-six-functors-basics/sk-lem-brown-hypotheses.json cites pur9-def-thick, def-pc-compact-object and def-pc-generators in the statement and stmt_deps. Step 2 now lets G be any small skeleton. Step 3 shows the vanishing criterion is generation in the sense of def-pc-generators (via Hom of the sum of G into K[-n] being the product of the Hom(C[n],K)) and cites both definitions; proof_deps is the union of uses again. One minor report inaccuracy: the unit's realized step 2 also binds det-ctf-finite-compact-proetale, sk-thm-constructible-compactness and det-prop-int-compactness-compact. That is correct and needs no change. Details are in review.md.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
   "declaration": "CategoryTheory.brownHypotheses",
@@ -199,13 +188,19 @@
   "note": "Read the item node, all five stmt deps (setting binders; IsLocalizingAdmissibleCoefficient + localizingClosureProEtale; Mathlib thick rendering; IsCompactObject; IsTriangulatedGeneratingFamily), BrownHypothesesAmbient and the small/generation detail nodes. Every clause matches: prime l, char p>0 with p!=l, separated finite-type X over Spec k, the six admissible Lambda up to Mon-iso; conclusion has LocallySmall.{u+1}, L.IsTriangulated with canonical shift, HasCoproducts.{u+1} including the empty sum, IsIdempotentComplete, S thick (IsTriangulated+iso-closed+retracts), EssentiallySmall.{u+1}, and compactness+generation for every small presentation G equivalent to S (covers any skeleton; equivalent in substance). Universes are uniformly u+1 (probe: Homs in Type (u+1)); no autobound vars. Def is sorry-free, theorem only sorry; docstrings have source place, blueprint id, 3 proof steps; snapshot dep nodes identical to main; item node changed only in lean; statement verbatim. nt_compile --json rc 0, no diagnostics (3.7 s). Non-blocking: generation detail node is stated only for k = F_q-bar with the finite-subextension Q_l-bar (stage-1 route reconciliation needed); localizing-closure record does not list localizingClosureProEtale."
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261022T011821-L-3215698",
+  "landing": "20261027T112403-L-1578020",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
  }
 }

@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-hilbert-uniform-section-bound",
+ "kind": "statement",
+ "title": "Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial",
+ "statement": "Fix $n\\geq0$ and a numerical polynomial $P\\in\\mathbf Q[t]$ (one taking integer values for all sufficiently large integers). There is an integer $m\\geq1$, depending only on $n,P$, with the following property over every scheme $T$ [def-pc-scheme]. Let $i:Z\\hookrightarrow\\mathbf P^n_T$ be a closed immersion [def-weil-closed-immersion], with $Z\\to T$ flat [def-weil-flat-morphism] and finitely presented (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated), and with Hilbert polynomial $P$ on every geometric fibre. Here the fibre polynomial is the eventual homogeneous-coordinate Hilbert function. Write $p:\\mathbf P^n_T\\to T$, $\\mathcal I=\\ker(\\mathcal O_{\\mathbf P^n_T}\\to i_*\\mathcal O_Z)$, $\\mathcal O_Z(d)=i^*\\mathcal O_{\\mathbf P^n_T}(d)$, and $V_d=\\mathcal O_T[x_0,\\ldots,x_n]_d$; twists are those of [def-weil-pbc-proj-twisting-sheaf]. For every $d\\geq m$ the canonical sequence\n$$0\\longrightarrow p_*\\mathcal I(d)\\longrightarrow V_d\\longrightarrow (pi)_*\\mathcal O_Z(d)\\longrightarrow0$$\nis exact, its terms are finite locally free (locally isomorphic to a finite direct sum of copies of $\\mathcal O_T$), and the last term has rank $P(d)$. This sequence and both direct-image terms commute with arbitrary base change $T'\\to T$, with the ideal on $T'$ understood as the ideal of $Z_{T'}$. The evaluation map $p^*p_*\\mathcal I(m)\\otimes\\mathcal O(-m)\\to\\mathcal I$ is surjective, as is the multiplication map $V_{d-m}\\otimes p_*\\mathcal I(m)\\to p_*\\mathcal I(d)$ for every $d\\geq m$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 08AG (lemma-bound-quotients-free), 08A6 (lemma-m-regular-up), 08A7 (lemma-m-regular-multiply), 08A8 (lemma-m-regular-globally-generated); relative finitely presented formulation via cohomology and base change, perfect.tex Tag 0A1H (lemma-base-change-tensor-perfect). Grothendieck Expose 221, Theorem 2.1 and the conditions preceding Lemma 3.3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-nagata-relative-projective-space",
+  "def-pc-module-pullback",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-sfb-projective-coordinate-hilbert-polynomial"
+ ],
+ "proof": [
+  {
+   "text": "Apply the uniform field-fibre lemma to $n,P$, and choose its integer $m\\geq1$ once for all bases. Each geometric fibre of the family is a closed subscheme of the specified projective space with coordinate polynomial $P$, so its ideal is coherent and $m$-regular. For every $d\\geq m$, the same lemma gives vanishing of positive cohomology of $\\mathcal O_{Z_{\\bar t}}(d)$, surjective polynomial restriction, and dimension $P(d)$. These conclusions include $n=0$ and empty fibres.",
+   "uses": [
+    "lem-sfb-uniform-projective-fibre-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+    "place": "Tags 08AG (lemma-bound-quotients-free), 08A6 (lemma-m-regular-up), 08AE (lemma-hilbert-polynomial-H0), and 01XT (lemma-cohomology-projective-space-over-ring); uniform field consequence with the twisted ideal long exact sequence"
+   }
+  },
+  {
+   "text": "For a nonempty base $T$ and each $d\\geq m$, choose any geometric point. The preceding dimension equality shows that $r=P(d)$ is a nonnegative integer; the fibre lemma gives the same dimension at every geometric point. Apply the relative section-sequence lemma with this $d,r$: its hypotheses are precisely flat finite presentation of $Z/T$ and the three fibre assertions of step 1. It supplies the finite-type ideal, its canonical pullback as the actual base-changed ideal, the locally split restriction sequence, finite local freeness and rank, and canonical arbitrary base change for all its terms. For empty $T$ all sheaves and maps are zero, and the stated conditions hold vacuously.",
+   "uses": [
+    "lem-sfb-projective-ideal-sections-from-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex; literature/stacks-project/coherent.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 0B9S (lemma-open-where-cohomology-in-degree-i-rank-r-geometric), 0B91 (lemma-flat-proper-perfect-direct-image-general), 01XT (lemma-cohomology-projective-space-over-ring); flat-closed-family ideal base change and split-kernel argument from the returned proof, steps 1, 4--6"
+   }
+  },
+  {
+   "text": "For nonempty $T$, apply the relative generation lemma with this same $m$. The ideal and its fibre identifications, and the locally free $K_b=p_*\\mathcal I(b)$ with canonical geometric-fibre section isomorphisms for all $b\\geq m$, are furnished by step 2. Step 1 supplies coherent $m$-regular fibre ideals. The lemma therefore gives the required evaluation surjection and every polynomial multiplication surjection. These and the sequences of step 2 are exactly the asserted conclusions. The choice of $m$ used only $n,P$.",
+   "uses": [
+    "lem-sfb-relative-regular-ideal-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 08A6 (lemma-m-regular-up), 08A7 (lemma-m-regular-multiply), 08A8 (lemma-m-regular-globally-generated), 00DV (lemma-NAK); fibrewise evaluation and iterated multiplication descended by local Nakayama"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-uniform-projective-fibre-vanishing",
+  "lem-sfb-projective-ideal-sections-from-fibres",
+  "lem-sfb-relative-regular-ideal-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 08AG and 08A6--08A8; relative argument assembled from perfect.tex Tags 0B9S and 0B91"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform regularity bound for ideal sheaves of closed subschemes of projective space with fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T04:03:32Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform regularity bound for ideal sheaves of closed subschemes of projective space with fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"ProjectiveSpectrum.vanishingIdeal\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"ProjectiveSpectrum.mem_vanishingIdeal\", \"ProjectiveSpectrum.not_irrelevant_le\", \"ProjectiveSpectrum.homogeneousIdeal_le_vanishingIdeal_zeroLocus\"], \"digest\": \"3431e6dd69e43e2e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences and regular topologies do not give bounded Castelnuovo--Mumford regularity or relative sections of ideal sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T04:03:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"regular\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.isSheafFor_regular_of_projective\", \"CategoryTheory.regularTopology.isSheaf_of_projective\", \"CategoryTheory.regularTopology.isSheaf_yoneda_obj\", \"CategoryTheory.regularTopology.equalizerCondition_iff_isSheaf\", \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff\", \"CategoryTheory.Equivalence.sheafCongrPreregular\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall\"], \"digest\": \"de6d9148d2fa601f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences and regular topologies do not give bounded Castelnuovo--Mumford regularity or relative sections of ideal sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "regularity|Regularity|hilbertPolynomial|HilbertPolynomial",
+   "results": "{\"t\": \"2026-10-22T04:03:33Z\", \"tool\": \"grep\", \"query\": \"regularity|Regularity|hilbertPolynomial|HilbertPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences and regular topologies do not give bounded Castelnuovo--Mumford regularity or relative sections of ideal sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform Serre vanishing generation and base change for a flat projective family with fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T04:03:33Z\", \"tool\": \"leansearch\", \"query\": \"Uniform Serre vanishing generation and base change for a flat projective family with fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"ProjectiveSpectrum.mem_vanishingIdeal\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"ProjectiveSpectrum.vanishingIdeal\"], \"digest\": \"8207e666480482f0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences and regular topologies do not give bounded Castelnuovo--Mumford regularity or relative sections of ideal sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Castelnuovo Mumford regularity bounds kernels of quotients of a free sheaf on projective space",
+   "results": "{\"t\": \"2026-10-22T04:03:41Z\", \"tool\": \"leanfinder\", \"query\": \"Castelnuovo Mumford regularity bounds kernels of quotients of a free sheaf on projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"Module.basicOpen_subset_freeLocus_iff\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"RingTheory.Sequence.isWeaklyRegular_iff\", \"RingTheory.Sequence.IsWeaklyRegular.ndrecIterModByRegular\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\"], \"digest\": \"af842f3b5db79eda\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: regular sequences and regular topologies do not give bounded Castelnuovo--Mumford regularity or relative sections of ideal sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every flat finitely presented closed family in projective n space with fixed Hilbert polynomial all sufficiently large ideal twists have locally free sections arbitrary base change and are generated in one uniform degree",
+   "results": "{\"t\": \"2026-10-22T04:22:56Z\", \"tool\": \"leanfinder\", \"query\": \"For every flat finitely presented closed family in projective n space with fixed Hilbert polynomial all sufficiently large ideal twists have locally free sections arbitrary base change and are generated in one uniform degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"Module.basicOpen_subset_freeLocus_iff\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\"], \"digest\": \"b7a25c1324ea8559\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, free loci, regular elements and Chevalley bounds do not state relative ideal regularity with fixed Hilbert polynomial."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T04:22:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, free loci, regular elements and Chevalley bounds do not state relative ideal regularity with fixed Hilbert polynomial."
+  },
+  {
+   "tool": "grep",
+   "query": "regularity|hilbertPolynomial|HilbertPolynomial",
+   "results": "{\"t\": \"2026-10-22T04:22:45Z\", \"tool\": \"grep\", \"query\": \"regularity|hilbertPolynomial|HilbertPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, free loci, regular elements and Chevalley bounds do not state relative ideal regularity with fixed Hilbert polynomial."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform Castelnuovo Mumford regularity for projective families with fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T04:22:45Z\", \"tool\": \"leansearch\", \"query\": \"Uniform Castelnuovo Mumford regularity for projective families with fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MultipliableUniformlyOn\", \"MvPolynomial.isRegular_X_pow\", \"UniformSpace.to_regularSpace\", \"IdealFilter.IsUniform\", \"MvPolynomial.IsHomogeneous\", \"MvPowerSeries.WithPiTopology.uniformContinuous_coeff\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"MvQPF.IsUniform\"], \"digest\": \"2dee2dd63f907782\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, free loci, regular elements and Chevalley bounds do not state relative ideal regularity with fixed Hilbert polynomial."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniform bound on degrees of equations and cohomology base change for all flat families of projective subschemes with a fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T04:22:56Z\", \"tool\": \"leanfinder\", \"query\": \"A uniform bound on degrees of equations and cohomology base change for all flat families of projective subschemes with a fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.degBound\", \"chevalley_mvPolynomial_mvPolynomial\", \"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.degBound\", \"ChevalleyThm.MvPolynomialC.degBound_succ\", \"ChevalleyThm.numBound\", \"PrimeSpectrum.ConstructibleSetData.degBound\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"2de2e3e67c8b1b44\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, free loci, regular elements and Chevalley bounds do not state relative ideal regularity with fixed Hilbert polynomial."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-hilbert-polynomial-representability",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial",
+   "via": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hilbert-uniform-section-bound",
+  "worker": "stage1",
+  "summary": "Human re-split repair: extracted three comparable statement-only arguments: uniform field-fibre cohomology (old 2--3), relative section sequence and canonical base change (old 1,4--6), and relative generation/multiplication descent (old 7--8). The report preserves every old step verbatim and maps it to its new obligation. Statement and its dependencies unchanged. Returned-delivery rebase repair: compared against the current live parent (including the N9 review), whose statement, statement dependencies, Lean metadata and original eight proof steps are unchanged; retained the three extracted obligations and rechecked their canonical maps and citation quotes against the current DAG. The delivery is regenerated on the current server DAG, not the prior side-project head. Revalidated 2026-10-23 after the repeated landing return: initial fresh preflight passed at 3cd08632a08. Current parent still has exactly the preserved original eight steps, all statement and statement-dependency fields agree, and all three child ids remain absent on the current baseline. Re-read the current supplying statements and source hypotheses; no mathematical adjustment is required. Regenerate this repair on the freshly fetched origin/sheaf-dag using the prescribed delivery tool.",
+  "blueprint": "The inherited ancestor has no blueprint id (blueprint_refs.py ancestor returns None). The recorded from.place identifies det-thm-sf-ctf-stability-direct-images proof (3), de Jong 3.9 and the Hilbert construction prerequisite. Steps 1--3 realize the uniform field bound used in that Hilbert construction; 4--6 its relative Grassmann quotient and base-change input; 7--8 its bounded equations and multiplication input. Re-split: the three new nodes distribute exactly those field, relative quotient/base-change, and bounded-equation arguments. The inherited ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-f6dba1158",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-f6dba1158 (reviewer sub-agent of L); spot-checked: Landing-return re-delivery of a split that passed twice before (5ff85407, 85b7d928). Compared field by field with the 85b7 snapshot: the three new nodes are byte-identical, and only the item's split_report changed (date and a rebase sentence). The item statement, stmt_deps, proof, proof_deps and source are unchanged. I re-read the mathematics in full. Re-split note: the old 8 steps map to A uniform-projective-fibre-vanishing (old 2-3), B projective-ideal-sections-from-fibres (old 1, 4-6) and C relative-regular-ideal-generation (old 7-8). Nothing was dropped or summarised. The item proof is a 3-step assembly (1685 chars), and no node restates the item. A is true: coordinate polynomial = chi by Serre vanishing (08AE); 08AG with r=1 gives a bound uniform in k; m = max(1,a); 08A6, 01XT and the twisted ideal long exact sequence give vanishing, a surjection and dimension P(d). Checked for n=0, Z empty, Z=P^n and unrealisable P. B is true over any T: 0B9S (perfect l.7987), applied at the geometric point over each t, gives U=T with no reducedness needed; 0B91(2) gives base change; Nakayama on the cokernel; a local splitting; K_d = p_*I(d) by left exactness; ideal base change by flatness. C is true: the fibre evaluation is surjective by 08A8 and multiplication by the iterated 08A7; local Nakayama on finite-type cokernels after the faithfully flat field extension. The assembly gives B and C exactly their hypotheses: r=P(d) is a nonnegative integer when T is nonempty, B supplies the canonical fibre isomorphisms at every geometric point, and A supplies coherent m-regular fibre ideals. Duplicate search with rg -L over the full snapshot (m-regular, Castelnuovo, Mumford, section sequences) finds only ingredient nodes, e.g. lem-per-projective-closed-subscheme-homogeneous-ideal, which is a Proj(B/I) identification. All Stacks tags verified in tags/tags. No SGA is cited (Expose 221 is FGA base metadata). No cycle, tool_uses not needed, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertUniformSectionBound",
+  "declaration": "AlgebraicGeometry.HilbertSectionBound.exists_uniform_bound",
+  "declarations": [
+   "AlgebraicGeometry.HilbertSectionBound.twist",
+   "AlgebraicGeometry.HilbertSectionBound.projection",
+   "AlgebraicGeometry.HilbertSectionBound.idealTwist",
+   "AlgebraicGeometry.HilbertSectionBound.closedTwist",
+   "AlgebraicGeometry.HilbertSectionBound.polynomialSections",
+   "AlgebraicGeometry.HilbertSectionBound.polynomialModule",
+   "AlgebraicGeometry.HilbertSectionBound.integralMonomial",
+   "AlgebraicGeometry.HilbertSectionBound.monomialSection",
+   "AlgebraicGeometry.HilbertSectionBound.polynomialMap",
+   "AlgebraicGeometry.HilbertSectionBound.idealSections",
+   "AlgebraicGeometry.HilbertSectionBound.closedSections",
+   "AlgebraicGeometry.HilbertSectionBound.idealInclusion",
+   "AlgebraicGeometry.HilbertSectionBound.sectionInclusion",
+   "AlgebraicGeometry.HilbertSectionBound.sectionRestriction",
+   "AlgebraicGeometry.HilbertSectionBound.idealTwistMultiplication",
+   "AlgebraicGeometry.HilbertSectionBound.evaluation",
+   "AlgebraicGeometry.HilbertSectionBound.exists_uniform_bound"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertUniformSectionBound.lean",
+  "statement": "theorem exists_uniform_bound (n : ℕ) (P : Polynomial ℚ) (hP : ∃ N : ℕ, ∀ d : ℕ, N ≤ d → ∃ z : ℤ, P.eval (d : ℚ) = (z : ℚ)) : ∃ m : ℕ, 1 ≤ m ∧ ∀ (T Z : Scheme.{u}) (i : Z ⟶ ℙ(ULift.{u} (Fin (n + 1)); T)), IsClosedImmersion i → Flat (i ≫ projection T n) → LocallyOfFinitePresentation (i ≫ projection T n) → QuasiCompact (i ≫ projection T n) → QuasiSeparated (i ≫ projection T n) → (∀ t : T, ProjectiveHilbertPolynomial.IsCoordinatePolynomial (AlgebraicClosure (T.residueField t)) n (ProjectiveHilbertPolynomial.baseChangeEmbedding n i (ProjectiveHilbertPolynomial.geometricPoint T t)) P) → (∀ d : ℕ, m ≤ d → IsIso (polynomialMap T n d) ∧ (∃ h : sectionInclusion i d ≫ sectionRestriction i d = 0, (ShortComplex.mk (sectionInclusion i d) (sectionRestriction i d) h).ShortExact) ∧ (idealSections i d).IsFiniteLocallyFree ∧ (polynomialSections T n d).IsFiniteLocallyFree ∧ (closedSections i d).IsFiniteLocallyFree ∧ (∀ t : T, ∃ (U : T.Opens) (r : ℕ), t ∈ U ∧ P.eval (d : ℚ) = (r : ℚ) ∧ Nonempty ((closedSections i d).over U ≅ SheafOfModules.free (R := T.ringCatSheaf.over U) (ULift.{u} (Fin r)))) ∧ (∀ (T' : Scheme.{u}) (g : T' ⟶ T), IsIso (Scheme.Modules.moduleBaseChangeMap (projection T n) (pullback.snd (projection T n) g) g (pullback.fst (projection T n) g) pullback.condition (idealTwist i d)) ∧ IsIso (Scheme.Modules.moduleBaseChangeMap (projection T n) (pullback.snd (projection T n) g) g (pullback.fst (projection T n) g) pullback.condition (twist T n d)) ∧ IsIso (Scheme.Modules.moduleBaseChangeMap (i ≫ projection T n) (pullback.snd (i ≫ projection T n) g) g (pullback.fst (i ≫ projection T n) g) pullback.condition (closedTwist i d)) ∧ (∃ φ : (Scheme.Modules.tensorPullback (pullback.fst (projection T n) g)).obj i.ker.toModules ≅ (pullback.snd i (pullback.fst (projection T n) g)).ker.toModules, φ.hom ≫ (pullback.snd i (pullback.fst (projection T n) g)).ker.toModulesι = (Scheme.Modules.tensorPullback (pullback.fst (projection T n) g)).map i.ker.toModulesι ≫ Scheme.Modules.tensorPullbackObjUnitToUnit (pullback.fst (projection T n) g)) ∧ (∃ h : (Scheme.Modules.tensorPullback g).map (sectionInclusion i d) ≫ (Scheme.Modules.tensorPullback g).map (sectionRestriction i d) = 0, (ShortComplex.mk ((Scheme.Modules.tensorPullback g).map (sectionInclusion i d)) ((Scheme.Modules.tensorPullback g).map (sectionRestriction i d)) h).ShortExact))) ∧ Epi (evaluation i (m : ℤ)) ∧ (∀ e : ℕ, IsIso (polynomialMap T n e) ∧ ∃ μ : polynomialSections T n e ⊗ idealSections i m ⟶ idealSections i ((m : ℤ) + (e : ℤ)), Epi μ ∧ ∀ (U : T.Opens) (s : Γ(twist T n e, projection T n ⁻¹ᵁ U)) (t : Γ(idealTwist i m, projection T n ⁻¹ᵁ U)), μ.app U (Scheme.Modules.tmulSection s t) = (idealTwistMultiplication i m e).app (projection T n ⁻¹ᵁ U) (Scheme.Modules.tmulSection t s))",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing standard base-change realization of projective space, identified in def-nagata-projective-space-base-change with the relative-Proj realization. The literal homogeneous polynomial module is polynomialModule; polynomialMap is its explicit monomial identification with p_*O(d). Rank is local at each base point, including the empty-base/unrealizable-polynomial case. The fibre hypothesis uses the recorded coordinate Hilbert polynomial, not an unrecorded Euler-polynomial predicate. Canonical base-change maps are those of moduleBaseChangeMap; the displayed normalized ideal isomorphism identifies their targets with actual base-changed ideals."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-637e5e7a9",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery of the bce3fcaa H2/H12 RETURN. Lean byte-identical to the returned head, whose clause-by-clause check passed. The only item change: stmt_dep lem-sfb-flat-projective-hilbert-polynomial-locality replaced by new def-sfb-projective-coordinate-hilbert-polynomial (existing:true on the unchanged FlatProjectiveHilbertPolynomialLocality: equations, coordinatePiece, coordinateDimension, IsCoordinatePolynomial, baseChangeEmbedding, geometricPoint); the theorem stays in proof_deps. Each definition checked against the node text and Stacks 03GL/08AC/08AE/01O3/03PO. check_existing, check_record and check_new_node all clean; statement verbatim; 9 live def stmt_deps; no cycle. used_recorded: all project declarations owned by stmt_deps except generic Mathlib leaves and tensorPullbackObjUnitToUnit (non-stmt_dep owner, advisory). Advisory: inherited docstrings cite wrong tags 01W6/02H5. No compile needed (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

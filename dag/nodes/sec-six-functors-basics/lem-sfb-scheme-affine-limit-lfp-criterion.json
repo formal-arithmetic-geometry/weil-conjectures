@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-scheme-affine-limit-lfp-criterion",
+ "kind": "statement",
+ "title": "Scheme local finite presentation characterized by affine limit tests",
+ "statement": "Let $B$ and $U$ be schemes [def-pc-scheme], let $g:U\\to B$ be a morphism, and use the universes of [def-weil-size-convention]. Then $g$ is locally of finite presentation [def-sbc-locally-finite-presentation] if and only if for every small nonempty directed set $I$ and every inverse system of affine $B$-schemes $(T_i)_{i\\in I}$ with limit $T=\\varprojlim_iT_i$ [lem-weil-pbc-limit-affine-transition], the canonical map\n$$\\operatorname{colim}_{i\\in I}\\operatorname{Mor}_B(T_i,U)\\longrightarrow\\operatorname{Mor}_B(T,U)$$\nis bijective. The colimit is a filtered colimit of sets [def-weil-pbc-category-colimit]. No quasi-compactness or quasi-separatedness hypothesis on $B$ or $U$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZC, proposition-characterize-locally-finite-presentation, equivalence (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "First suppose $g$ is locally of finite presentation. It is locally of finite type: on the affine neighbourhoods in the definition a finite polynomial presentation supplies finitely many algebra generators, giving the affine cover required for local finite type. No finiteness of an affine cover of $U$ or $B$ is used.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, forward implication; the finite polynomial presentations of Tag 01TP imply local finite type."
+   }
+  },
+  {
+   "text": "Fix an affine test system. Each $T_i$ is quasi-compact and quasi-separated by the affine-scheme lemma. Write $T_i\\cong\\operatorname{Spec}A_i$. By the spectrum correspondence these identifications carry every transition to a spectrum map; the spectrum-colimit lemma says these maps are affine. Thus the map-limit-factorization lemma applies to the given limit over $B$: every $B$-map $a:T\\to U$ has the form $a_i\\circ p_i$ for a $B$-map $a_i:T_i\\to U$. This is the required existence of stage representatives.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-finite-presentation-map-limit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, (1) implies (3), existence part (b), specialized to affine stages."
+   }
+  },
+  {
+   "text": "Any two choices $a_i:T_i\\to U$ and $b_j:T_j\\to U$ for the same limit map have a common stage $k\\ge i,j$. Their restrictions there are $B$-maps with equal pullbacks to $T$. The locally-finite-type equality lemma gives a further stage where they are equal (Step 1 supplies its local finite type hypothesis). Their coprojections to the set colimit are therefore equal. For each $a:T\\to U$, choose the colimit class of any representative provided by Step 2. What we just proved makes this independent of the representative. It is inverse to the canonical map: its composite toward $\\operatorname{Mor}_B(T,U)$ is $a$ by the factorization equation, and on every stage coprojection the other composite is the identity by independence. By the colimit universal property these equations prove bijectivity.",
+   "uses": [
+    "lem-weil-pbc-locally-finite-type-limit-map-equality",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, (1) implies (3), uniqueness part (a), and assembly of the Hom-set colimit."
+   }
+  },
+  {
+   "text": "Conversely assume the affine test map is bijective. Fix affine opens $W=\\operatorname{Spec}C\\subseteq U$ and $V=\\operatorname{Spec}R\\subseteq B$ with $g(W)\\subseteq V$. Given a directed system of $R$-algebras $A_i$ with colimit $A$ and a map $h:C\\to A$, the spectrum correspondence gives a $V$-map $a:T=\\operatorname{Spec}A\\to W$. The spectrum-colimit lemma identifies $T$ with the limit of the affine $B$-schemes $T_i=\\operatorname{Spec}A_i$. Apply the assumed surjectivity to $T\\to W\\to U$: it is $a_i\\circ p_i$ for some $B$-map $a_i:T_i\\to U$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, proof of (2) implies (1), affine chart and directed algebra system."
+   }
+  },
+  {
+   "text": "The open $a_i^{-1}(W)\\subseteq T_i$ pulls back to all of $T$. The eventual-open-containment lemma applies because the stages are affine, hence quasi-compact, and their transitions are affine. It gives $j\\ge i$ for which $a_i\\circ(T_j\\to T_i)$ has image in $W$. Restrict its continuous map and structure-sheaf map to the open subscheme $W$; this gives a unique map $a_j:T_j\\to W$. Its composite to $B$ equals the given structure map. Both maps $T_j\\to V$ obtained from this equality are equal because $V\\hookrightarrow B$ is an inclusion of an open subscheme (restriction of the same space and sheaf map). Thus $a_j$ is a $V$-map, and its pullback to $T$ is $a$ since $W\\hookrightarrow U$ is likewise an inclusion. The spectrum correspondence now gives an $R$-algebra map $h_j:C\\to A_j$ with composite $h$.",
+   "uses": [
+    "lem-weil-pbc-limit-image-contained-in-open",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, proof of (2) implies (1), eventual image containment in the affine open; Tag 01Z3 is replaced by its existing eventual-open-containment consequence."
+   }
+  },
+  {
+   "text": "The construction in Steps 4 and 5 works for every directed $R$-algebra system and every map $C\\to\\varinjlim A_i$. The algebra directed-Hom criterion therefore makes $C$ finitely presented over $R$. Given any $u\\in U$, choose an affine neighbourhood $V$ of $g(u)$ and an affine neighbourhood $W$ of $u$ inside $g^{-1}(V)$. The chart just proved finitely presented witnesses finite presentation at $u$ in the definition. Since $u$ was arbitrary, $g$ is locally of finite presentation, completing the converse without quasi-compactness or quasi-separatedness of $U$ or $B$.",
+   "uses": [
+    "lem-sfb-algebra-directed-hom-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC, proof of (2) implies (1), application of Algebra Tag 00QO and the affine-local definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-finite-presentation-map-limit-factorization",
+  "lem-weil-pbc-locally-finite-type-limit-map-equality",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-limit-image-contained-in-open",
+  "def-weil-open-immersion",
+  "lem-sfb-algebra-directed-hom-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZC, proposition-characterize-locally-finite-presentation, (1) implies (2) and (2) implies (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "locallyOfFinitePresentation_iff|exists_π_app_comp_eq_of_locallyOfFinitePresentation|finitePresentation.*[Ii]s[Cc]olimit",
+   "results": "OK 7 hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the definition and affine-chart equivalence are not the functorial iff. Mathlib AffineTransitionLimit.lean:1232 gives only the forward factorization clause; the converse is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes is locally finitely presented exactly when its relative functor of points commutes with directed affine limits",
+   "results": "OK 8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, CategoryTheory.MorphismProperty.isFinitelyPresentable, AlgebraicGeometry.LocallyOfFinitePresentation.recOn, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.IsFinite.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: the definition and affine-chart equivalence are not the functorial iff. Mathlib AffineTransitionLimit.lean:1232 gives only the forward factorization clause; the converse is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\", \"IsLimit\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the definition and affine-chart equivalence are not the functorial iff. Mathlib AffineTransitionLimit.lean:1232 gives only the forward factorization clause; the converse is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism is locally of finite presentation if and only if maps from affine directed inverse limits factor uniquely through stages",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the definition and affine-chart equivalence are not the functorial iff. Mathlib AffineTransitionLimit.lean:1232 gives only the forward factorization clause; the converse is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"LocallyOfFinitePresentation\"",
+   "results": "OK 8 hits: AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation, AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact, AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat",
+   "date": "2026-10-23",
+   "verdict": "no match: the definition and affine-chart equivalence are not the functorial iff. Mathlib AffineTransitionLimit.lean:1232 gives only the forward factorization clause; the converse is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme over a base is locally finitely presented exactly when Hom from every directed affine inverse limit is the filtered colimit of the stage Hom sets",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: the definition and affine-chart equivalence are not the functorial iff. Mathlib AffineTransitionLimit.lean:1232 gives only the forward factorization clause; the converse is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\", \"IsLimit\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match for the full equivalence: affine-chart characterization and forward preservation only; existing DAG leaves cover factorization and equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is locally of finite presentation if and only if its functor of points preserves directed limits of affine schemes",
+   "results": "OK 8 hits: AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.locallyOfFinitePresentation_comp",
+   "date": "2026-10-23",
+   "verdict": "no match for the full equivalence: affine-chart characterization and forward preservation only; existing DAG leaves cover factorization and equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism locally of finite presentation is characterized by preservation of directed affine limits by its relative functor of points",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match for the full equivalence: affine-chart characterization and forward preservation only; existing DAG leaves cover factorization and equality."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSpace_of_isAffine|quasiSeparatedSpace_of_isAffine|isAffineHom_of_isAffine",
+   "results": "OK 5 hits: Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the full equivalence: affine-chart characterization and forward preservation only; existing DAG leaves cover factorization and equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine schemes are quasi compact and quasi separated and morphisms between affine schemes are affine",
+   "results": "OK 8 hits: AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.instCategoryAffineScheme, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.IsAffine.casesOn, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine",
+   "date": "2026-10-23",
+   "verdict": "no match for the full equivalence: affine-chart characterization and forward preservation only; existing DAG leaves cover factorization and equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffine\", \"CompactSpace\"",
+   "results": "OK 2 hits: AlgebraicGeometry.Scheme.compactSpace_of_isAffine, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj",
+   "date": "2026-10-23",
+   "verdict": "no match for the full equivalence: affine-chart characterization and forward preservation only; existing DAG leaves cover factorization and equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme is quasi compact and quasi separated and every morphism between affine schemes is affine",
+   "results": "OK 8 hits: AlgebraicGeometry.IsAffine, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match for the full equivalence: affine-chart characterization and forward preservation only; existing DAG leaves cover factorization and equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finitePresentation\"",
+   "results": "OK 12 hits: Algebra.FinitePresentation, RingHom.FinitePresentation.id, Algebra.FinitePresentation.self, RingHom.FinitePresentation, RingHom.FiniteType.of_finitePresentation, AlgHom.FinitePresentation.id, Algebra.FiniteType.of_finitePresentation, RingHom.FinitePresentation.of_finiteType",
+   "date": "2026-10-23",
+   "verdict": "no match for the full equivalence: affine-chart characterization and forward preservation only; existing DAG leaves cover factorization and equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-affine-limit-criterion",
+  "date": "2026-10-23",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting limit test used in Tag 07SK, second paragraph, on an affine atlas and on its quasi-compact quasi-separated scheme kernel pair; Tag 0CP4 supplies the nonaffine overlap case. Affine input: Tag 04AK with the cartesian-square formulation of Tag 06BC, before the qcqs gluing argument of Tag 0CP4. Scheme input to Tag 04AK, both proof paragraphs: Tag 01ZC is used for U and R and for the converse on U -> V.",
+   "via": [
+    "lem-sfb-space-relative-affine-limit-criterion",
+    "lem-sfb-lfp-space-scheme-limit-test",
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-affine-limit-lfp-criterion",
+  "worker": "stage1",
+  "summary": "Read Stacks 01ZC and 00QO. Keep the statement unchanged. Reuse existing Mathlib leaves for forward factorization, eventual equality, affine qcqs and eventual open containment, and the spectrum correspondence. The sole new statement-only node is the strictly algebraic converse detecting finite presentation from directed Hom factorization. All six steps are below 2000 characters.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting limit test used in Tag 07SK, second paragraph, on an affine atlas and on its quasi-compact quasi-separated scheme kernel pair; Tag 0CP4 supplies the nonaffine overlap case. Affine input: Tag 04AK with the cartesian-square formulation of Tag 06BC, before the qcqs gluing argument of Tag 0CP4. Scheme input to Tag 04AK, both proof paragraphs: Tag 01ZC is used for U and R and for the converse on U -> V.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-31027c8fa",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-31027c8fa (reviewer sub-agent of L); spot-checked: Read Stacks 01ZC in full: statement and both proof directions. Read 00QO in full: its (3) is the surjectivity form, and the (3)=>(1) proof is the colimit of finitely presented algebras plus a retract. The item's statement is unchanged and matches 01ZC (1)<=>(2): small nonempty directed I, affine B-schemes, bijective canonical map, no qc or qs hypothesis. Step 1 (lfp=>lft) is elementary: the Mathlib instance at FinitePresentation.lean:109. Steps 2 and 3 use the Mathlib leaves exists_pi_app_comp_eq_of_locallyOfFinitePresentation (AffineTransitionLimit:1231) and the lft map-equality leaf. Their hypotheses all hold: I^op cofiltered, affine stages qcqs via the affine-scheme-qcqs node, affine transitions via the spec-colimit node, lft from Step 1. The inverse map on the set colimit is built correctly. Steps 4 and 5 follow the 01ZC converse. Stacks argues through 01Z3; the step uses the exists_map_eq_top leaf instead, whose hypotheses (cofiltered, qc stages, affine transitions) are met and which does not need the open to be qc. The B-map to V-map descent and the pullback to T both hold because open immersions are monomorphisms; Spec full faithfulness then gives the R-algebra map. Step 6 applies the new node chart by chart. New node lem-sfb-algebra-directed-hom-finite-presentation states exactly 00QO (3)=>(1). It is self-contained and statement-only. Edge cases pass: the zero ring, R itself, and infinite polynomial rings (which fail the hypothesis, as they should). It is not a restatement of the item. A DAG search for 00QO and its label found only forward-direction nodes, and the Mathlib file Algebra/Category/Ring/FinitePresentation.lean is forward-only, so unsplit is correct. Route: every non-definition citation is a Mathlib leaf; there are no tool_uses and no SGA. proof_deps equals the union of uses, and each step is under 2000 characters. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyFinitePresentationAffineLimitCriterion",
+  "declaration": "AlgebraicGeometry.locallyOfFinitePresentation_iff_affine_limit_hom_bijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFinitePresentationAffineLimitCriterion.lean",
+  "statement": "theorem locallyOfFinitePresentation_iff_affine_limit_hom_bijective {B U : Scheme.{u}} (g : U ⟶ B) : LocallyOfFinitePresentation g ↔ ∀ (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over B), (∀ i : Iᵒᵖ, IsAffine (D.obj i).left) → ∀ c : Cone D, IsLimit c → Function.Bijective (colimit.desc (D.rightOp ⋙ yoneda.obj (Over.mk g)) ((yoneda.obj (Over.mk g)).mapCocone (coconeRightOpOfCone c)))",
+  "branch": "sheaf-dag",
+  "by": "Q60",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b9314387",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 01ZC (1)<=>(2) clause by clause: Scheme.{u} B U, g; LocallyOfFinitePresentation (recorded Mathlib decl); small nonempty directed I : Type u with Preorder/IsDirected/Nonempty; D : Iᵒᵖ ⥤ Over B with affine stages; every limiting cone in Over B (connected index, so same as the scheme limit; existence via recorded exists_limit_affine_transition); canonical colimit.desc of yoneda.obj (Over.mk g) over coconeRightOpOfCone c, i.e. precomposition with projections, B-morphisms; Function.Bijective; no qc/qs binders. Edge cases (empty I excluded; empty stages/U/B allowed; universes) fine. lean.statement verbatim; source place + blueprint docstrings and six-step plan present; sorry only; no defs/new nodes/dep repairs; node differs from live only in lean; no other delivery of the item; Worker report + Second reading stub present. No compile run (no file changed); worker reports clean server compile."
+ }
+}

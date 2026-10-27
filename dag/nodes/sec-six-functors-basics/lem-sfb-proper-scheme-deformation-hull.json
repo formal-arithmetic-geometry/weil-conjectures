@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-proper-scheme-deformation-hull",
+ "kind": "statement",
+ "title": "Hull and tangent space of the deformation functor of a proper scheme",
+ "statement": "Let $k$ be a field [def-weil-field] and $X$ a proper $k$-scheme [def-pc-scheme, def-weil-proper-morphism]. Let $\\mathrm{Art}_k$ have as objects commutative Artinian local $k$-algebras $R$ with identified residue field $k$, and as arrows local $k$-homomorphisms inducing the identity on $k$. Artinian means that descending chains of ideals stabilize. Let $F_X(R)$ be the set of isomorphism classes of proper flat $R$-schemes $Y$ with an identification $Y\\times_R k\\cong X$, with isomorphisms preserving the identification [def-weil-flat-morphism, def-pc-fibre-product]. For a complete Noetherian local $k$-algebra $B$ with residue field $k$, put $h_B(R)=\\operatorname{Hom}_{k,\\mathrm{loc},\\mathrm{cont}}(B,R)$, using the maximal-ideal-adic topology [def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion]. A transformation $h_B\\to F_X$ is a hull when it has the lifting property for every surjection $R'\\twoheadrightarrow R$ in $\\mathrm{Art}_k$ and is a bijection at $k[\\epsilon]/(\\epsilon^2)$. There is such a hull. Its tangent space, and that of $F_X$, is canonically the finite-dimensional $k$-vector space $\\operatorname{Ext}^1_X(L_{X/k},\\mathcal O_X)$. Here $L_{X/k}$ is the cotangent complex in $D(\\mathcal O_X)$: sheafify the normalized differential complex $\\Omega^1_{P_\\bullet/k}\\otimes_{P_\\bullet}\\mathcal O_X$ of the standard simplicial polynomial resolution, in nonpositive degrees [def-weil-pbc-kahler-differentials]. Ext means $\\operatorname{Hom}_{D(\\mathcal O_X)}(-,-[j])$ in degree $j$ [def-weil-abstract-derived-category, def-pc-ext]. The tangent identification commutes with restriction to open subschemes and with completion at closed points, interpreted using continuous differentials for completed rings. If every $k$-linear sheaf derivation $\\mathcal O_X\\to\\mathcal O_X$ is zero, the hull is a natural isomorphism $h_B\\cong F_X$; thus $F_X$ is prorepresented by $B$.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tags 0DY9 (lemma-schemes-TI), 0DYA (lemma-proper-schemes-TI) and 0ET5 (lemma-schemes-hull), equal-characteristic coefficient ring Lambda=k. The cotangent-complex formulation uses its truncation to the naive complex in degrees -1,0."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-abstract-derived-category",
+  "def-pc-ext",
+  "def-sfb-proper-scheme-deformation-data",
+  "def-sfb-completed-scheme-tangent-data",
+  "def-sfb-proper-scheme-tangent-data",
+  "def-sfb-proper-scheme-stalk-tangent-data"
+ ],
+ "proof": [
+  {
+   "text": "For an Artinian local base $R$, its maximal ideal is nilpotent and $R$ is Noetherian. Hence properness reflection identifies the groupoid $\\mathcal D_X(R)$ of all marked flat scheme deformations with that of proper flat ones: every such deformation has proper special fibre $X$. Base change preserves flatness and properness, so these groupoids and their isomorphism classes give the stated functor. Over $k$ a marked object has a unique marked isomorphism to $X$, so $\\mathcal D_X(k)$ is equivalent to a point.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-sfb-proper-nilpotent-base-change-reflection",
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0ET5 (lemma-schemes-hull), comparison with Example 0DY7 (example-schemes); more-morphisms.tex Tag 09ZW."
+   }
+  },
+  {
+   "text": "For $A_1\\to A\\leftarrow A_2$ with $A_2\\twoheadrightarrow A$, put $B=A_1\\times_AA_2$. The infinitesimal affine-chart lemma identifies the base pushout with $\\operatorname{Spec}B$. A pair of deformations with a specified identification over $A$ has a scheme pushout $Z$ over this base, recovering both deformations by that lemma. Each deformation is proper by step 1, and therefore locally finitely presented over its Noetherian Artinian base. Flat patching makes $Z$ flat and locally finitely presented; its canonical reconstruction map is invertible for every flat scheme. A pair of compatible morphisms glues uniquely by the universal property of the pushout. These identifications give inverse functors on objects and morphisms. The common marking over $k$ glues. Properness reflection makes $Z$ proper, since $B$ is again in $\\mathrm{Art}_k$: Noetherianity and nilpotence make each $\\mathfrak m_R^i/\\mathfrak m_R^{i+1}$ finite-dimensional over $k$, so each input ring is finite-dimensional. The subring $B\\subset A_1\\oplus A_2$ is finite-dimensional, and its common residue map to $k$ has nilpotent kernel. Pairs of nonzero common residue are invertible componentwise, hence this kernel is its unique maximal ideal. Thus $\\mathcal D_X$ has the full Rim-Schlessinger equivalence, including its specified gluing isomorphism.",
+   "uses": [
+    "lem-sfb-infinitesimal-pushout-affine-charts",
+    "lem-sfb-scheme-pushout-flat-patching",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-sfb-proper-nilpotent-base-change-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DY8 (lemma-schemes-RS); more-morphisms.tex Tags 07RV and 07RX."
+   }
+  },
+  {
+   "text": "Apply the square-zero lift torsor theorem to $\\operatorname{Spec}k\\hookrightarrow\\operatorname{Spec}k[\\epsilon]/(\\epsilon^2)$. Its ideal is $k\\epsilon$, and its pullback is $\\mathcal O_X$ by $a\\otimes c\\epsilon\\mapsto ca$. The trivial lift supplies the origin. This gives $T F_X\\cong\\operatorname{Ext}^1_X(L_{X/k},\\mathcal O_X)$, with the asserted $k$-linear structure. For the trivial lift an automorphism on its structure sheaf is $(a,b)\\mapsto(a,b+D(a))$; multiplicativity is exactly $D(aa')=aD(a')+a'D(a)$ and the $k$-algebra condition is $D|_k=0$. Conversely each such derivation gives this automorphism, and composition adds derivations. Thus $\\operatorname{Inf}(\\mathcal D_X)=\\operatorname{Der}_k(\\mathcal O_X,\\mathcal O_X)$, without imposing any smoothness on $X$.",
+   "uses": [
+    "lem-sfb-scheme-square-zero-lift-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DY9 (lemma-schemes-TI); defos.tex Tag 0D14, split origin and automorphism formula."
+   }
+  },
+  {
+   "text": "Every affine chart of $X$ has a finitely generated $k$-algebra of sections, so it is Noetherian. The structure morphism is locally finitely presented because it is finite type over the Noetherian field. The cotangent truncation theorem gives $N=\\tau_{\\geq-1}L_{X/k}$ with coherent cohomology in degrees $-1,0$, coherent $\\mathcal O_X$, and $\\operatorname{Ext}^1_X(N,\\mathcal O_X)\\cong\\operatorname{Ext}^1_X(L_{X/k},\\mathcal O_X)$. Apply proper coherent Ext finiteness over $k$ to $K=N$ and $E=\\mathcal O_X[0]$. All its bounds hold, so this Ext group is a finite-dimensional $k$-vector space. This argument uses a coherent truncation and makes no assertion that the full cotangent complex is bounded below.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-sfb-noetherian-scheme-cotangent-truncation",
+    "lem-sfb-proper-scheme-coherent-ext-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYA (lemma-proper-schemes-TI); perfect.tex Tag 0D0D."
+   }
+  },
+  {
+   "text": "The groupoid in step 2 and the finite tangent space in steps 3–4 satisfy the abstract Schlessinger hull criterion with coefficient ring $k$. It supplies a complete Noetherian local $k$-algebra $B$ and $h_B\\to\\pi_0\\mathcal D_X=F_X$ with exactly the required surjective lifting map and tangent isomorphism. Composing its tangent isomorphism with step 3 gives the claimed canonical identification relative to the chosen hull. If all sheaf derivations vanish, the automorphism formula of step 3 makes the infinitesimal automorphism group trivial; the rigidity clause of the same criterion makes this hull itself an isomorphism on every Artinian base. This proves prorepresentation, without claiming that a hull is unique with a chosen ring identification.",
+   "uses": [
+    "lem-sfb-schlessinger-groupoid-hull-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0ET5 (lemma-schemes-hull); formal-defos.tex Tags 06IX, 06IZ, 06K0, 06JL, with Lambda=k."
+   }
+  },
+  {
+   "text": "Restriction to an open $U\\subseteq X$ takes the same first-order structure-sheaf extension and trivial origin to their restrictions. The open-naturality clause of the lift torsor theorem therefore makes the tangent square with $\\operatorname{Ext}^1(L,\\mathcal O)$ commute. For a closed point $x$, choose an affine neighbourhood and localize its ring at $x$. The affine and localization clause of that theorem represents the restricted class by the conormal complex $C$ of a localized polynomial presentation. The completed-local comparison sends its class to $\\operatorname{Ext}^1_{\\widehat{\\mathcal O}_{X,x}}(C\\otimes\\widehat{\\mathcal O}_{X,x},\\widehat{\\mathcal O}_{X,x})$ and identifies it with the completed deformation. Its complex uses continuous differentials. Thus the completion square commutes, independently of the affine presentation, as claimed. The residue extension at $x$ need not be separable over $k$.",
+   "uses": [
+    "lem-sfb-scheme-square-zero-lift-torsor",
+    "lem-sfb-completed-local-deformation-tangent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tags 0DYW (lemma-open), 0DYX (lemma-affine), 0DZM (lemma-local-ring), 0DYV (lemma-completion); completion tangent formula from completed presentations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-sfb-proper-nilpotent-base-change-reflection",
+  "lem-sfb-pointwise-flatness-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-sfb-infinitesimal-pushout-affine-charts",
+  "lem-sfb-scheme-pushout-flat-patching",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-sfb-scheme-square-zero-lift-torsor",
+  "lem-wf-affine-noetherian-components",
+  "lem-sfb-noetherian-scheme-cotangent-truncation",
+  "lem-sfb-proper-scheme-coherent-ext-finite",
+  "lem-sfb-schlessinger-groupoid-hull-criterion",
+  "lem-sfb-completed-local-deformation-tangent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tags 0DY8, 0DY9, 0DYA, 0ET5, with explicit completed-presentation compatibility as in Tags 0DYV and 0GPZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The marked deformation functor of a proper scheme has a hull and is prorepresentable when all infinitesimal automorphisms vanish",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme formal unramifiedness, Zariski local representability, and Galois-category prorepresentability do not construct hulls of scheme deformation functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"deformation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme formal unramifiedness, Zariski local representability, and Galois-category prorepresentability do not construct hulls of scheme deformation functors"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|prorepresent|deformationHull|versalDeformation",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Topology.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Galois.Prorepresentability\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Action.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Galois.Prorepresentability\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Galois.Prorepresentability\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme formal unramifiedness, Zariski local representability, and Galois-category prorepresentability do not construct hulls of scheme deformation functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism classes of flat deformations of a proper scheme over Artinian local algebras have a miniversal formal object",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is Artinian\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[RepresentablyFlat F] {G : C ⥤ D} (α : F ≅ G) : RepresentablyFlat G\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat and there exists an isomorphism $ \\\\alpha : F \\\\cong G $ between $ F $ and another functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the\"}\n  {\"name\": \"Algebra.FormallySmooth.mk\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Module.Projective A Ω[A⁄R] → Subsingleton (Algebra.H1Cotangent R A) → Algebra.FormallySmooth R A\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if the module of Kähler differentials $ \\\\Omega_{A/R} $ is projective as an $ A $-module and the first cohomology group of the cotangent complex $ H^1 $ is tri\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] [Mono f] : IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme formal unramifiedness, Zariski local representability, and Galois-category prorepresentability do not construct hulls of scheme deformation functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper scheme infinitesimal deformations represented by a complete noetherian local ring if derivations are zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme formal unramifiedness, Zariski local representability, and Galois-category prorepresentability do not construct hulls of scheme deformation functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper scheme deformations over local Artinian k algebras have a hull with tangent Ext one of the full cotangent complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent homology, formal unramifiedness and Zariski representability do not construct hulls for proper-scheme deformation functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schlessinger\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent homology, formal unramifiedness and Zariski representability do not construct hulls for proper-scheme deformation functors"
+  },
+  {
+   "tool": "grep",
+   "query": "deformationHull|miniversal|Schlessinger|prorepresent.*deform",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent homology, formal unramifiedness and Zariski representability do not construct hulls for proper-scheme deformation functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism class functor of proper flat marked scheme deformations is prorepresented if its infinitesimal automorphisms vanish",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[RepresentablyFlat F] {G : C ⥤ D} (α : F ≅ G) : RepresentablyFlat G\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat and there exists an isomorphism $ \\\\alpha : F \\\\cong G $ between $ F $ and another functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (toPresheaf X).ReflectsIsomorphisms\", \"doc\": \"The forgetful functor from the category of sheaves of modules over the structure sheaf of a scheme $ X $ to the category of presheaves of abelian groups reflects isomorphisms. That is, a morphism of s\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instReflectsIsomorphismsActionFintypeCatAutFunctorFunctorToAction\", \"module\": \"Mathlib.CategoryTheory.Galois.Action\", \"type\": \": Functor.ReflectsIsomorphisms (functorToAction F)\", \"doc\": \"The functor from a pre-Galois category $\\\\mathcal{C}$ to the category of actions of its automorphism group $\\\\mathrm{Aut}(F)$ on finite types reflects isomorphisms. Specifically, if a morphism $f$ in $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.RepresentableBy (glueData hf).glued\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent homology, formal unramifiedness and Zariski representability do not construct hulls for proper-scheme deformation functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme has a miniversal formal deformation and finite dimensional cotangent Ext tangent space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent homology, formal unramifiedness and Zariski representability do not construct hulls for proper-scheme deformation functors"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-deformation-smoothing-parameters",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme.",
+   "via": [
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-scheme-deformation-hull",
+  "worker": "stage1",
+  "summary": "Six-step proof through marked deformation groupoids, infinitesimal scheme patching, the general square-zero lift torsor, coherent truncation and proper global Ext finiteness, and Schlessinger hull/rigidity. Retained all statement clauses, including open and continuous completed-local tangent compatibility, without identifying Zariski and etale cotangent Ext. Created five strictly general supporting statements; reused the existing infinitesimal pushout affine-chart recovery lemma after DAG/blueprint/Lean and logged Mathlib searches.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic Noetherian finite-presentation input for the Artinian-base patching and cotangent finiteness steps."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic Noetherianity of affine finite-type field algebras, used only to verify the cotangent truncation hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Base change of proper marked families defines the deformation functor; no alternative finiteness route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-ccf566b81",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-ccf566b81 (reviewer sub-agent of L); spot-checked: Read the item, all 5 new nodes, every cited statement, and Stacks examples-defos 0DY7/0DY8/0DY9/0DYA/0ET5, defos 0D14, perfect 0D0D, cotangent 08UW, more-morphisms 0D0K, formal-defos 06J7/06K0/06IZ. The item's statement is unchanged from base. Steps 1-6 follow the Stacks proof. Step 1: 09ZW reflection plus base-change leaves. Step 2: Rim-Schlessinger via 07RT/07RX, with full faithfulness by the pushout universal property; B in Art_k checked. Step 3: torsor node with origin = trivial lift; the derivation formula checked. Step 4: truncation to degrees -1,0, with Ext^0/Ext^1 agreement checked by orthogonality, then 0D0D. Step 5: Schlessinger hull, and rigidity via 06K0. Step 6: open and localization clauses plus the completed-local comparison. New nodes are true general inputs, statement-only, with real searches. Tested: terminal groupoid; J=0; A=k; k[t]_(t). None duplicates an existing node or restates the item; compared with artin-rs-versal-formal-object, flat-algebra-small-extension-control, flat-space-split-deformation-ext, proper-space-coherent-ext-finite and adic-completion-flat-deformation-functor. The last one partly overlaps the completed-local node's first paragraph (advisory only). Batch-5: lem-trf-affine-cotangent-comparison (cited by the truncation and torsor nodes) is the general definition of the cotangent complex of sheaves of rings (08SR/08SS ...), which neither assumption gives, so accepted. The reflection node reaches def-trf-scheme-algebraic-space only through a definition, so accepted. tool_uses are three Mathlib leaves, accepted. No SGA source cited. Live item is still unsplit. FIX (B3): the item's inline definition of L_{X/k} used Omega^1 without a node; added def-weil-pbc-kahler-differentials to its statement citation and stmt_deps (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-proper-scheme-deformation-hull.json).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSchemeDeformationHull",
+  "declaration": "AlgebraicGeometry.ProperSchemeDeformation.exists_hull",
+  "declarations": [
+   "AlgebraicGeometry.ProperSchemeDeformation.TangentVectorSpace",
+   "AlgebraicGeometry.ProperSchemeDeformation.HullConclusion",
+   "AlgebraicGeometry.ProperSchemeDeformation.exists_hull"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSchemeDeformationHull.lean",
+  "statement": "theorem exists_hull (C : Coherence.{u}) (D : TopCat.SheafCotangent.Comparison C) (f : X ⟶ Spec (.of k)) [IsProper f] : Nonempty (HullConclusion C D f)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f63aedda",
+  "group": "NH",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed aa39769fd87c. Snapshot diff: only ProperSchemeTangentData.lean, def-sfb-proper-scheme-tangent-data.json and the report changed. The item node and module and the other three new def nodes/modules are byte-identical to the previously reviewed packet, whose clause checks stand. H3 fix verified: TangentIdentification now has sheaf : SquareZeroSheaf.Classification, kernel : LiftKernel, a section-normalized coefficient iso, SplitLiftExtension, and split_normalization (split.classes = extensionClass sheaf … a for every ConormalClass a). These match SchemeSquareZeroLiftTorsor Classification.split_coefficient(_sections)/split_extension/split_normalization line by line; the IsFirstOrderThickening argument is dropped, which is harmless because it always holds for directionReduction. The condition is non-vacuous via cl_normalization. Global and every opens U are pinned; the GL-twist ambiguity is removed. New stmt_deps lem-sfb-zariski-sheaf-algebra-extension-ext (owner of the Classification structure, no def node owns it; same citation as the landed def-sfb-scheme-coefficient-extension-problems; advisory) and def-sfb-scheme-coefficient-extension-problems. Lean record and statement verbatim; docstrings carry the source and blueprint tag; no hollow defs, no sorry outside the item theorem, no extra hypotheses or universe constraints. Item and new nodes not landed elsewhere. No compile run (no file changed); the report records a clean deliver2 dry run 9045e8c2248."
+ }
+}

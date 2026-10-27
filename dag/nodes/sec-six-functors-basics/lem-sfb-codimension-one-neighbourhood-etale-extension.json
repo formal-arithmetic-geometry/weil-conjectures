@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-codimension-one-neighbourhood-etale-extension",
+ "kind": "statement",
+ "title": "Finite etale model from boundary source neighbourhoods and codimension-two extension",
+ "statement": "Let $B$ be a Noetherian regular integral domain and let $0\\ne f\\in B$ [def-weil-pbc-noetherian-ring, def-weil-regular-scheme]. Put $X=\\operatorname{Spec}B$ and $U=\\operatorname{Spec}B[1/f]\\subseteq X$ [def-weil-affine-spectrum, def-weil-ring-localization-away, def-weil-open-immersion]. Let $C$ be a finite $B$-algebra and $N=\\operatorname{Spec}C$, with its finite structural map $q:N\\to X$ [def-weil-finite-integral-morphism]. Suppose $N\\times_X U\\to U$ is etale [def-weil-etale-morphism, def-pc-fibre-product]. Suppose also that for each height-one prime $\\mathfrak q\\subset B$ containing $f$, and each point $z\\in N$ above $\\mathfrak q$, there is an open neighbourhood $O_z\\subseteq N$ such that $O_z\\to X$ is etale. Here height one means $\\mathfrak q\\ne(0)$ with no prime strictly between $(0)$ and $\\mathfrak q$. Let $O\\subseteq N$ be the union of $q^{-1}(U)$ and any such neighbourhoods for all those points. Then\n$$W=X\\setminus q(N\\setminus O)$$\nis open, contains $U$ and every height-one point of $X$, and $N\\times_X W\\to W$ is finite etale. There exist a finite etale morphism $H\\to X$ and an isomorphism $H\\times_X W\\cong N\\times_X W$ over $W$; in particular $H\\times_X U\\cong N\\times_X U$ over $U$. For every $x\\in X\\setminus W$, the ambient local ring $\\mathcal O_{X,x}$ is regular and has Krull dimension at least two [def-weil-pbc-krull-dimension-ring]. Neither normality of $C$ nor henselianity of $B$ is assumed, and the conclusion does not identify $H$ with $N$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1(i), printed pp.133-134: regular extension subargument made explicit in returned steps 14-15. Stacks pione.tex Tags 0BMA (lemma-local-purity), 0EY7 (lemma-extend-pure); finite closed-image construction of the base open uses lem-weil-pbc-finite-closed-map-finite-fibres. The finite etale extension is a new model, not an asserted identification with the normalization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "At each point of O, choose either the inverse image of D(f) or one of the supplied neighbourhoods containing that point. Its structural map to X is etale: for the first case compose the given restriction with the open immersion D(f) → X; the second case is hVet. Once q⁻¹(W) ⊆ O is known, pull these neighbourhoods back along q⁻¹(W) → N. Their maps to X are etale by restriction and composition. The point-indexed neighbourhoods cover q⁻¹(W), so source locality gives etaleness of q⁻¹(W) → X. Cancel the open immersion W → X to obtain etaleness over W.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale), 02GJ (lemma-etale-characterize)."
+   }
+  },
+  {
+   "text": "Let $Z=N\\setminus O$. It is closed. Since $q$ is finite, its image $q(Z)$ is closed. Hence $W=X\\setminus q(Z)$ is open. For a point $x\\in X$, membership $x\\in W$ says exactly that every point of the fibre $q^{-1}(\\{x\\})$ lies in $O$. If $x\\in U$, its entire fibre lies in $N_U\\subseteq O$, so $U\\subseteq W$. This also shows $q^{-1}(W)\\subseteq O$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN (lemma-finite-proper), used for the closed image of Z."
+   }
+  },
+  {
+   "text": "If a height-one prime $\\mathfrak q$ does not contain $f$, it belongs to $U\\subseteq W$. If $f\\in\\mathfrak q$, every point $z$ over $\\mathfrak q$ belongs to its chosen $O_z\\subseteq O$. The fibre criterion of step 2 therefore gives $\\mathfrak q\\in W$ as well. An empty fibre satisfies the same criterion. Also $(0)\\in U$, since $B$ is a domain and $f\\ne0$. Thus a prime $\\mathfrak p$ outside $W$ is neither zero nor height one: by the stated meaning of height one there is a prime $\\mathfrak r$ with $(0)\\subsetneq\\mathfrak r\\subsetneq\\mathfrak p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), definition of D(f); the height-one condition in the item."
+   }
+  },
+  {
+   "text": "For x outside W, height(x) is nonzero: height zero is equivalent to the zero ideal in the domain B, but the zero ideal belongs to D(f) since f is nonzero. Height(x) is not one, since all height-one points belong to W. Thus height(x) ≥ 2 in the extended natural numbers. Mathlib ringKrullDim_stalk_eq_coheight and idealHeight_eq_coheight identify the dimension of the affine stalk with this height. The affine stalk is regular by transporting the regularity of Localization.AtPrime x.asIdeal through Spec.stalkIso. Finally B is Noetherian by IsRegularRing, hence Spec B is locally Noetherian. This replaces the explicit chain-and-contraction calculation by the proved Mathlib height identity.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization), explicit fraction argument; Schemes Tag 01HV (lemma-spec-sheaves)(6); regularity and dimension definitions Tags 00OD and 00KE."
+   }
+  },
+  {
+   "text": "The restriction q|W is finite by base change. Its etaleness is proved by the source-neighbourhood argument in step 1 using the inclusion q⁻¹(W) ⊆ O from step 2, followed by cancellation of W → X. Thus no separate isomorphism between the base changes of O and N is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (lemma-base-change-finite), 02GO (lemma-base-change-etale); restriction along an open immersion."
+   }
+  },
+  {
+   "text": "Apply the regular codimension-two extension theorem with $L=X$, $V=W$, and the finite etale morphism $q_W$ of step 5. Its base hypothesis is supplied by step 4: $X$ is locally Noetherian, and every missing ambient stalk is regular of dimension at least two. It gives a finite etale $p:H\\to X$ and an isomorphism $N\\times_XW\\cong H\\times_XW$ over $W$. Invert this isomorphism to obtain the displayed comparison in the item. The theorem extends the restricted cover; it imposes no normality condition on the original algebra $C$.",
+   "uses": [
+    "lem-sbc-regular-codimension-two-etale-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BMA (lemma-local-purity)(1) and 0EY7 (lemma-extend-pure), as packaged by the cited existing extension theorem."
+   }
+  },
+  {
+   "text": "Use pullbackRestrictIsoRestrict to convert the extension theorem comparison into ew : H ×X W ≅ N ×X W, compatible with the second projections. Put i : D(f) → W. Pull back ew using pullback.map with identity maps on D(f) and W; it is an isomorphism because ew is. On both sides use pullbackLeftPullbackSndIso and pullback.congrHom for i ≫ W.ι = D(f).ι. Compose these three isomorphisms. The pullback projection identities give the required compatibility over D(f).",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JO (section-fibre-products), fibre-product universal property and associativity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "lem-sbc-regular-codimension-two-etale-extension",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Closed-image construction written out from Tags 01WN, 02GJ, 01WL and 02GO; extension follows existing node lem-sbc-regular-codimension-two-etale-extension (Tags 0BMA and 0EY7). P2 formalization, 2026-10-23: source-local proof directly on q⁻¹(W); affine stalk dimension via Mathlib height identities; comparison restricted by pullback.map and pullbackLeftPullbackSndIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebra over a regular Noetherian domain that is etale on a principal open and locally etale at all points above height one boundary primes admits a finite etale model agreeing over that open",
+   "results": "{\"t\": \"2026-10-22T05:58:40Z\", \"tool\": \"leanfinder\", \"query\": \"A finite algebra over a regular Noetherian domain that is etale on a principal open and locally etale at all points above height one boundary primes admits a finite etale model agreeing over that open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.Etale.finitePresentation\", \"Algebra.etaleLocus\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.mem_etaleLocus_iff\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"cb06dc2fef1a5aca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The etale locus is open and pointwise etaleness has basic neighbourhoods; these results do not extend a cover across a regular codimension-two complement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"finrank\"",
+   "results": "{\"t\": \"2026-10-22T05:58:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"finrank\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The etale locus is open and pointwise etaleness has basic neighbourhoods; these results do not extend a cover across a regular codimension-two complement."
+  },
+  {
+   "tool": "grep",
+   "query": "(Etale|[ée]tale).*(codimension|heightOne|height_one|purity)|(codimension|heightOne|height_one|purity).*(Etale|[ée]tale)",
+   "results": "{\"t\": \"2026-10-22T05:58:29Z\", \"tool\": \"grep\", \"query\": \"(Etale|[ée]tale).*(codimension|heightOne|height_one|purity)|(codimension|heightOne|height_one|purity).*(Etale|[ée]tale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The etale locus is open and pointwise etaleness has basic neighbourhoods; these results do not extend a cover across a regular codimension-two complement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Remove the finite image of the bad closed locus to obtain an open containing all codimension one points, then extend a finite etale cover across a regular codimension two complement",
+   "results": "{\"t\": \"2026-10-22T05:58:29Z\", \"tool\": \"leansearch\", \"query\": \"Remove the finite image of the bad closed locus to obtain an open containing all codimension one points, then extend a finite etale cover across a regular codimension two complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.isOpen_etaleLocus\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"Algebra.isOpen_unramifiedLocus\", \"Algebra.etaleLocus\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"abe26a3030440b53\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The etale locus is open and pointwise etaleness has basic neighbourhoods; these results do not extend a cover across a regular codimension-two complement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Remove the finite image of the bad closed locus to obtain an open containing all codimension one points, then extend a finite etale cover across a regular codimension two complement",
+   "results": "{\"t\": \"2026-10-22T05:59:37Z\", \"tool\": \"leanfinder\", \"query\": \"Remove the finite image of the bad closed locus to obtain an open containing all codimension one points, then extend a finite etale cover across a regular codimension two complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.etaleLocus\"], \"digest\": \"83e5244ce8a23e20\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The etale locus is open and pointwise etaleness has basic neighbourhoods; these results do not extend a cover across a regular codimension-two complement."
+  },
+  {
+   "tool": "grep",
+   "query": "(purity|codimension).*(Etale|etale)|(Etale|etale).*(purity|codimension)",
+   "results": "{\"t\": \"2026-10-22T06:53:47Z\", \"tool\": \"grep\", \"query\": \"(purity|codimension).*(Etale|etale)|(Etale|etale).*(purity|codimension)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite etale extension across a codimension-two boundary; hits concern the etale locus, local presentations, or permanence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend finite etale cover from an open containing all height one points of a regular Noetherian scheme",
+   "results": "{\"t\": \"2026-10-22T06:53:47Z\", \"tool\": \"leansearch\", \"query\": \"Extend finite etale cover from an open containing all height one points of a regular Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.ofLocalizationSpan\", \"AlgebraicGeometry.Scheme.affineCover\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.openCoverOfIsOpenCover\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"91ea006666ccf8f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite etale extension across a codimension-two boundary; hits concern the etale locus, local presentations, or permanence."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale",
+   "results": "{\"t\": \"2026-10-22T06:53:47Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite etale extension across a codimension-two boundary; hits concern the etale locus, local presentations, or permanence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism etale on source neighbourhoods over all height one points of a regular Noetherian integral affine scheme admits a finite etale model by purity across codimension two",
+   "results": "{\"t\": \"2026-10-22T06:53:57Z\", \"tool\": \"leanfinder\", \"query\": \"A finite morphism etale on source neighbourhoods over all height one points of a regular Noetherian integral affine scheme admits a finite etale model by purity across codimension two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"Algebra.etaleLocus\", \"Algebra.isOpen_etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"e7a2a2bf897dd5ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite etale extension across a codimension-two boundary; hits concern the etale locus, local presentations, or permanence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers extend over regular schemes across a closed subset of codimension at least two",
+   "results": "{\"t\": \"2026-10-22T06:53:57Z\", \"tool\": \"leanfinder\", \"query\": \"Finite etale covers extend over regular schemes across a closed subset of codimension at least two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"4ae8004eba3a3eef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite etale extension across a codimension-two boundary; hits concern the etale locus, local presentations, or permanence."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-22T06:56:10Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.etale_isStableUnderBaseChange\", \"AlgebraicGeometry.Etale.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Etale\", \"AlgebraicGeometry.Etale.instHasRingHomPropertyEtale\", \"AlgebraicGeometry.Scheme.Etale.mk\", \"AlgebraicGeometry.Etale.instFormallyUnramified\", \"AlgebraicGeometry.Etale.instOfIsOpenImmersion\"], \"digest\": \"9153c621f3bb6058\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite etale extension across a codimension-two boundary; hits concern the etale locus, local presentations, or permanence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3): coefficient-specific alteration/tame-boundary reduction below lem-sfb-continuous-algcl-open-scalar-comparison; this added input has no imported blueprint ancestor; finite-cover geometric input: prime-to-p Galois torsors on a strict-local boundary puncture are split at a finite simultaneous parameter-root level. Re-split subargument: returned proof steps 14-15, Finite etale model from boundary source neighbourhoods and codimension-two extension.",
+   "via": [
+    "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+    "lem-sfb-lisse-lattice-potential-kummer-tameness",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-codimension-one-neighbourhood-etale-extension",
+  "worker": "stage1",
+  "group": "NF",
+  "summary": "Seven-step split with no new nodes: source-local etaleness on O, closed finite image defining W, fibrewise containment of all height-one points, explicit ambient-stalk dimension check, finite/etale base change, existing regular-boundary extension, and restriction to U. Clarified that the final regularity/dimension assertion concerns ambient stalks of X; preserved every hypothesis and the distinction between the new model H and N.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None); realizes the recorded regular extension subargument in returned steps 14-15 of lem-sfb-strict-local-prime-to-p-kummer-splitting below det-thm-sf-ctf-stability-direct-images, proof (3).",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-regular-codimension-two-etale-extension",
+    "why": "Generic finite etale extension theorem on a locally Noetherian base with regular missing stalks of dimension at least two; used as a geometric tool for the existing Kummer-splitting route, which contains no other such extension statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-regular-codimension-two-etale-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NF-bfe6f3c6c",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-bfe6f3c6c (reviewer sub-agent of L); spot-checked: The item is live-unsplit, not on the drop list, and has no repair note. There are no new nodes. The one statement change is correct and weakens nothing: the last sentence now says 'ambient O_{X,x}'. Under the old reading it was false: for B=k[x,y], f=x, C=B×B/(x,y) the complement of W is Spec k, of dimension 0. I read all 7 steps against the cited statements and all are correct. Step 1 uses etale-composition-cancellation (1)(2) and etale-local-on-source. Step 2 uses the closed-image clause (1) of the finite-closed-map node and the set criterion x∈W ⇔ fibre ⊆ O. Step 3 checks the height-one points and that (0)∈U. Step 4 uses B_p from spec-domain-stalks (1) and gives an explicit length-2 chain. Step 5 identifies N×_XW with O×_XW as open subschemes, then applies finite (a) and etale base change. Step 6 applies lem-sbc-regular-codimension-two-etale-extension with L=X, V=W; its hypotheses and orientation match, and it agrees with Stacks pione 0EY7/0BMA. Step 7 restricts to U. Edge cases checked: f a unit, B a field, C=0, dim B ≤ 1. The tool_use of the sbc extension node is accepted: it is a generic purity theorem with no sfb equivalent. Batch-5 finding: that node's closure reaches only def-trf-schematically-dense-open, lem-trf-affine-open-limit-descent and lem-pod-separated-finite-type-base-change. All three are general scheme theory, not trace-formula or duality content. Recomputing the target closure with and without the item's citation, the citation adds no trf/pod node. So it stays outside both assumptions and is no ground for a RETURN. No SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CodimensionOneNeighbourhoodEtaleExtension",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_etale_model_of_codimension_one_neighbourhoods",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CodimensionOneNeighbourhoodEtaleExtension.lean",
+  "statement": "theorem exists_finite_etale_model_of_codimension_one_neighbourhoods (B C : Type u) [CommRing B] [IsDomain B] [IsRegularRing B] [CommRing C] [Algebra B C] [Module.Finite B C] (f : B) (hf : f ≠ 0) (hU : Etale ((Spec.map (CommRingCat.ofHom (algebraMap B C))) ∣_ PrimeSpectrum.basicOpen f)) (V : (z : Spec (CommRingCat.of C)) → ((Spec.map (CommRingCat.ofHom (algebraMap B C))) z).asIdeal.height = 1 ∧ f ∈ ((Spec.map (CommRingCat.ofHom (algebraMap B C))) z).asIdeal → (Spec (CommRingCat.of C)).Opens) (hV : ∀ (z : Spec (CommRingCat.of C)) (hz : ((Spec.map (CommRingCat.ofHom (algebraMap B C))) z).asIdeal.height = 1 ∧ f ∈ ((Spec.map (CommRingCat.ofHom (algebraMap B C))) z).asIdeal), z ∈ V z hz) (hVet : ∀ (z : Spec (CommRingCat.of C)) (hz : ((Spec.map (CommRingCat.ofHom (algebraMap B C))) z).asIdeal.height = 1 ∧ f ∈ ((Spec.map (CommRingCat.ofHom (algebraMap B C))) z).asIdeal), Etale ((V z hz).ι ≫ Spec.map (CommRingCat.ofHom (algebraMap B C)))) (O : (Spec (CommRingCat.of C)).Opens) (hO : O = (Spec.map (CommRingCat.ofHom (algebraMap B C))) ⁻¹ᵁ PrimeSpectrum.basicOpen f ⊔ ⨆ (z : Spec (CommRingCat.of C)) (hz : ((Spec.map (CommRingCat.ofHom (algebraMap B C))) z).asIdeal.height = 1 ∧ f ∈ ((Spec.map (CommRingCat.ofHom (algebraMap B C))) z).asIdeal), V z hz) : ∃ W : (Spec (CommRingCat.of B)).Opens, (W : Set (Spec (CommRingCat.of B))) = ((Spec.map (CommRingCat.ofHom (algebraMap B C))) '' (O : Set (Spec (CommRingCat.of C)))ᶜ)ᶜ ∧ PrimeSpectrum.basicOpen f ≤ W ∧ (∀ x : Spec (CommRingCat.of B), x.asIdeal.height = 1 → x ∈ W) ∧ IsFinite ((Spec.map (CommRingCat.ofHom (algebraMap B C))) ∣_ W) ∧ Etale ((Spec.map (CommRingCat.ofHom (algebraMap B C))) ∣_ W) ∧ (∃ (H : Scheme.{u}) (p : H ⟶ Spec (CommRingCat.of B)), IsFinite p ∧ Etale p ∧ (∃ e : pullback p W.ι ≅ pullback (Spec.map (CommRingCat.ofHom (algebraMap B C))) W.ι, e.hom ≫ pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap B C))) W.ι = pullback.snd p W.ι) ∧ ∃ e : pullback p (Scheme.Opens.ι (X := Spec (CommRingCat.of B)) (PrimeSpectrum.basicOpen f)) ≅ pullback (Spec.map (CommRingCat.ofHom (algebraMap B C))) (Scheme.Opens.ι (X := Spec (CommRingCat.of B)) (PrimeSpectrum.basicOpen f)), e.hom ≫ pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap B C))) (Scheme.Opens.ι (X := Spec (CommRingCat.of B)) (PrimeSpectrum.basicOpen f)) = pullback.snd p (Scheme.Opens.ι (X := Spec (CommRingCat.of B)) (PrimeSpectrum.basicOpen f))) ∧ ∀ x : Spec (CommRingCat.of B), x ∉ W → IsRegularLocalRing ((Spec (CommRingCat.of B)).presheaf.stalk x) ∧ (2 : WithBot ℕ∞) ≤ ringKrullDim ((Spec (CommRingCat.of B)).presheaf.stalk x)",
+  "branch": "sheaf-dag",
+  "by": "Q64",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b75dc48c",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Only the item lean record is added; the statement is verbatim in the file, no line is over 100 characters, and the proof is sorry. Clause by clause: IsRegularRing+IsDomain = Noetherian regular domain; q = Spec.map algebraMap; U = PrimeSpectrum.basicOpen f; Etale (q ∣_ D(f)) = base change to U; Ideal.height = 1 = node height one in a domain; the family V indexed by z over height-one primes containing f, with z ∈ V and V.ι ≫ q étale; O equation exact; W fixed by the set formula (q '' Oᶜ)ᶜ; U ≤ W; height-one points in W; IsFinite and Etale of q ∣_ W; one finite étale H with pullback isomorphisms over W and over U, each compatible with pullback.snd; ambient stalks outside W IsRegularLocalRing with ringKrullDim ≥ 2. Consistent with exists_finite_etale_extension_of_regular_codimension_two_boundary. Edge cases f unit, B field, C=0, empty fibres, non-normal C are fine; single universe u. No duplicate in side-live Sheaf/WeilConjectures (QuasiFiniteFlat…Neighbourhood and StrictHenselRootFiniteEtaleModel are different results). Docstrings carry source place, blueprint tag and 7 steps; imports follow rule 7. Not recompiled (human 2026-10-21 rule)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261023T105419-L-3555885",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

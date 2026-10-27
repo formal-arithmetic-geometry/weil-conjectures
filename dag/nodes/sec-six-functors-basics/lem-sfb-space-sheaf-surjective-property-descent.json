@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-space-sheaf-surjective-property-descent",
+ "kind": "statement",
+ "title": "Descent of a morphism property through an fppf sheaf surjection",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $X\\xrightarrow{u}Y\\xrightarrow{v}Z$ be morphisms of algebraic spaces over $S$ [def-trf-algebraic-space]. Let $P$ be any one of flatness [def-weil-flat-morphism], local finite type [def-weil-finite-type-morphism], or local finite presentation [def-sbc-locally-finite-presentation], extended to algebraic spaces by etale scheme charts. Suppose $v\\circ u$ has $P$ and $u$ is a surjection of sheaves on the big fppf site [def-pc-fppf-site]: for every scheme $T/S$ and every $y\\in Y(T)$ there is an fppf covering $\\{T_i\\to T\\}$ and sections $x_i\\in X(T_i)$ with $u(x_i)=y|_{T_i}$. Then $v$ has $P$. This assertion is separate for each of the three properties. No flatness, local finite type, local finite presentation, or quasi-compactness of $u$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06NR (lemma-curiosity)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose surjective etale scheme charts $W\\to Z$ and $V\\to Y_W=Y\\times_ZW$. Put $X_W=X\\times_ZW$ and $A=X_W\\times_{Y_W}V=X\\times_YV$, and choose a surjective etale scheme chart $U\\to A$. The fibre-product lemma ensures these are algebraic spaces; the definition supplies their charts. The map $A\\to X_W$ is the base change of $V\\to Y_W$, so the representable-etale scheme-test lemma makes $U\\to X_W$ surjective etale. Apply the chart-test criterion to $X\\to Z$ with charts $W$ and $U\\to X_W$: the scheme composite $U\\to V\\to W$ has $P$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06NR, lemma-curiosity, proof; scheme descent is Tag 06NB in descent.tex."
+   }
+  },
+  {
+   "text": "Apply the assumed local lifting property of $u$ to the section $V\\to Y$. Obtain an fppf covering $\\{V_i\\to V\\}$ and maps $x_i:V_i\\to X$ over $Y$. Pair $x_i$ with the given $V_i\\to V$ to obtain $t_i:V_i\\to A=X\\times_YV$. Set $D_i=V_i\\times_{A}U$. By representable surjective etale base change, $D_i$ is a scheme and $D_i\\to V_i$ is surjective etale. The covering-calculus lemma, clauses (1), (3), (4), makes $\\{D_i\\to V_i\\to V\\}$ an fppf covering of schemes. Each arrow factors through $U\\to V$: on $D_i$ the two maps to $A$ agree, so their projections to $V$ agree. Thus this family refines the single arrow $U\\to V$ without requiring any property of that arrow.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06NR, lemma-curiosity, proof; scheme descent is Tag 06NB in descent.tex."
+   }
+  },
+  {
+   "text": "Apply the scheme refinement-descent lemma to $U\\to V\\to W$, the covering just constructed, and $P(U\\to W)$ from step 1. It gives $P(V\\to W)$. Apply the chart-test criterion to $Y\\to Z$ with the chosen charts $W\\to Z$ and $V\\to Y_W$ to conclude $P(v)$. The same argument applies separately to each of the three allowed properties.",
+   "uses": [
+    "lem-sfb-scheme-fppf-refinement-property-descent",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06NR, lemma-curiosity, proof; scheme descent is Tag 06NB in descent.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-scheme-fppf-refinement-property-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06NR, lemma-curiosity, proof; scheme descent is Tag 06NB in descent.tex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "surject.*sheaf|sheaf.*surject",
+   "results": "{\"t\": \"2026-10-23T18:53:51Z\", \"tool\": \"grep\", \"query\": \"surject.*sheaf|sheaf.*surject\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"6eeb9545f6294bb0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness and local finite presentation descend from a composite through a morphism surjective as a sheaf on the big fppf site for algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T18:53:51Z\", \"tool\": \"leansearch\", \"query\": \"Flatness and local finite presentation descend from a composite through a morphism surjective as a sheaf on the big fppf site for algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"RingHom.Flat.stableUnderComposition\", \"CategoryTheory.Sheaf.isLocallySurjective_comp\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.Flat\", \"Module.FaithfullyFlat.of_comap_surjective\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"c4de130316ccf36b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T18:53:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If X to Y is surjective as an fppf sheaf and X to Z is flat or locally of finite presentation then Y to Z has the same property",
+   "results": "{\"t\": \"2026-10-23T18:53:52Z\", \"tool\": \"leanfinder\", \"query\": \"If X to Y is surjective as an fppf sheaf and X to Z is flat or locally of finite presentation then Y to Z has the same property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instHasOfPrecompPropertySchemeSurjective\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\"], \"digest\": \"b7c8fda9dcfa0bdf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A property flat locally finite type or locally finite presentation of morphisms of algebraic spaces descends along a sheaf epimorphism without flatness of the epimorphism",
+   "results": "{\"t\": \"2026-10-23T18:53:54Z\", \"tool\": \"leanfinder\", \"query\": \"A property flat locally finite type or locally finite presentation of morphisms of algebraic spaces descends along a sheaf epimorphism without flatness of the epimorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"ab293cd0a6d89fe4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness local finite type and local finite presentation descend from a composite through a morphism of algebraic spaces surjective as an fppf sheaf",
+   "results": "{\"t\": \"2026-10-23T21:08:08Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness local finite type and local finite presentation descend from a composite through a morphism of algebraic spaces surjective as an fppf sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"2e27dbd2e4b76ed0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properties of algebraic space morphisms descend across a locally surjective map for the flat finitely presented topology without flatness of that map",
+   "results": "{\"t\": \"2026-10-23T21:08:09Z\", \"tool\": \"leanfinder\", \"query\": \"Properties of algebraic space morphisms descend across a locally surjective map for the flat finitely presented topology without flatness of that map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\"], \"digest\": \"e946cec7d455dbe2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-classifying-stack-flatness",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Smooth atlas over the gerbe base for local-finite-type descent, and the universal topological comparison. Supporting neutral-section input for the smooth atlas argument (06QG(3)). In the neutral-section proof: Tag 06QG invokes the converse direction of criteria Lemma 06PL after identifying the stack with the trivial-action quotient. 06PL converse: descend the properties of the restricted arrow projection through the sheaf-surjective map which forgets its first B-prime factor.",
+   "via": [
+    "lem-sfb-algebraic-classifying-stack-flatness",
+    "lem-sfb-neutral-gerbe-section-fppf",
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-sheaf-surjective-property-descent",
+  "worker": "stage1",
+  "summary": "Reduced Tag 06NR to the scheme theorem Tag 06NB through compatible etale scheme charts; reused the existing chart-test, fibre-product, representable-etale, and fppf-covering-calculus nodes. The local lifting refinement is pulled back over X times_Y V, retaining compatibility with V. One new statement-only scheme lemma; no statement change and no Lean work.",
+  "blueprint": [
+   "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), supporting geometric descent input along the inherited classifying-stack chain: Tag 06PL converse, then Tag 06NR. The blueprint_refs ancestor command returns None for this imported chain; its null from.node and full inherited via list are retained."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and etale base-change tool for compatible scheme charts; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic representable surjective etale composition and base-change tests used to form scheme refinements; no result specific to the unit replaces this calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-11106df52",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-11106df52 (reviewer sub-agent of L); spot-checked: I read Stacks 06NR (spaces-descent.tex l.665, its proof) and 06NB (descent.tex l.4541, its full three-case proof). The item statement is unchanged and matches 06NR. The new statement-only node lem-sfb-scheme-fppf-refinement-property-descent is exactly 06NB, with the refinement written out as an fppf covering of Y whose members factor through X; nothing is assumed on a. Step 1 takes charts W→Z and V→Y_W and A=X×_Y V; U→A→X_W is surjective étale because the representable-étale node gives closure under base change and composition; the chart test (every pair of charts) then gives P(U→W). Step 2 pairs the local lifts into A, takes D_i=V_i×_A U (a scheme, surjective étale over V_i), and uses covering-calculus (4),(1),(3),(4) to get a scheme fppf covering of V. Each D_i→V factors through U because the two composites D_i→A agree. This also correctly repairs Stacks' literal V_i×_X U, and I checked the report's counterexample. Step 3 applies the new node, then the chart test for Y→Z. Small cases checked: identity, empty X/Y, a an fppf covering (02KL/02KK special cases). Duplicate search over the DAG (06NB/06NR/curiosity/02KL/02KK/0367/flat-finitely-presented-permanence) finds only special cases in which the arrow itself is fppf, and no 06NB node. The new node is not a restatement: the space reduction stays in the item, and there is no cycle. Batch-5 flags: the trf fibre-product and representable-étale nodes, and the chart-test and covering-calculus nodes (which reach the trf chapter only via def-trf-algebraic-space), are generic foundations of algebraic spaces. None is part of the trace formula or Poincaré duality, so I accept them, together with the declared tool_uses. No SGA. Live item is still unsplit, and there is no repair note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSheafSurjectivePropertyDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.sheaf_surjective_property_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSheafSurjectivePropertyDescent.lean",
+  "statement": "theorem sheaf_surjective_property_descent {S : Scheme.{u}} (P : MorphismProperty Scheme.{u}) (hP : P = @Flat ∨ P = @LocallyOfFiniteType ∨ P = @LocallyOfFinitePresentation) {X Y Z : AlgebraicSpace S} (a : X ⟶ Y) (b : Y ⟶ Z) (hab : MapIsLocally P (a ≫ b)) (ha : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over S) a.hom.hom) : MapIsLocally P b",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-435816f5f",
+  "group": "O2",
+  "result": "pass",
+  "note": "Clause-by-clause against Stacks 06NR (spaces-descent.tex l.665-694) and the node: S : Scheme.{u} arbitrary; X Y Z : AlgebraicSpace S with a, b; hP picks exactly one of Flat / LocallyOfFiniteType / LocallyOfFinitePresentation; MapIsLocally is the landed étale-chart test of def-sfb-space-morphism-properties (added to stmt_deps; landed 2026-10-23, before delivery); ha = Presheaf.IsLocallySurjective (fppfTopology.over S) a.hom.hom is exactly the fppf local-lift condition, not representable surjectivity; no assumption on a; conclusion MapIsLocally P b. Edge cases (identity, empty X/Y, empty coverings, non-representable a) and universes ok. Compared with live, only lean + that stmt_dep differ; lean.statement verbatim; the 4 proof-dependency modules exist; proof-only scheme lemma correctly not imported; sorry only; source/blueprint docstrings with proof steps 1-3; no duplicate. No fixes, no compile."
+ }
+}

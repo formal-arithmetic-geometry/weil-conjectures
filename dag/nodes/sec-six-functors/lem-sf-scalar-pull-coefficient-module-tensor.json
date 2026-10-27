@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-scalar-pull-coefficient-module-tensor",
+ "kind": "statement",
+ "title": "The ordinary module tensor square for scalar extension and geometric pullback",
+ "statement": "Let R,S be coefficient data, a:R→S a compatible change of coefficients, and g:U→V a scheme morphism, with the normalized ordinary module comparison gamma=scalarPullModule a g of [lem-sf-scalar-pull-coefficient-complex-normalization]. Put F=g_R^*, G=extension along a_V, H=extension along a_U, and K=g_S^*. For any R_V module sheaves M,N, let mu_F,mu_K be the normalized ordinary geometric tensor isomorphisms of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and mu_G,mu_H the normalized ordinary scalar tensor isomorphisms of [def-sf-compact-support-scalar-tensor-identification]. Then K(mu_G(M,N));mu_K(GM,GN);(gamma_M tensor gamma_N) = gamma_(M tensor N);H(mu_F(M,N));mu_H(FM,FN). This is an equality of module morphisms, with no complexes, localization, boundedness or flatness assumptions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback: transpose the tensor universal property through module adjunctions; compatibility of the two composite pullbacks with coefficient changes."
+ },
+ "stmt_deps": [
+  "lem-sf-scalar-pull-coefficient-complex-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sf-compact-support-scalar-tensor-identification"
+ ],
+ "proof": [
+  {
+   "text": "Write gamma as uniqueness of the two left adjoints after identifying their right adjoints. The homEquiv_leftAdjointUniq_hom_app identity identifies its transpose with the second composite unit. The direct-image/restriction comparison is identity on sections, for its inverse as well as its forward map. Hence gamma carries the geometric unit of the scalar unit of a section to the scalar unit of its geometric unit.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sf-scalar-pull-coefficient-complex-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the scalar-extension and geometric-pullback adjunction bijections. The leftAdjointUniq unit identity and the sectionwise identity characterizing proEtaleRingRestrictionDirectImage show that scalarPullModule carries iterated unit sections to the iterated units in the other order. Test the ordinary tensor square on pure tensors after these two transposes. Naturality of the geometric unit moves the source scalar tensor map through it; the normalized scalar and geometric tensor formulas then turn the left route into the tensor of the two iterated units. On the right route, the scalarPullModule unit identity, naturality of the target scalar unit, and the same two tensor formulas give precisely that tensor. The tensor sheafification universal property and injectivity of both adjunction bijections prove equality of the module morphisms.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-sf-compact-support-scalar-tensor-identification",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sf-scalar-pull-coefficient-complex-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sf-compact-support-scalar-tensor-identification",
+  "lem-sfb-scalar-ordinary-tensor-comparison"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "W8",
+  "note": "Complete Lean proof of the ordinary module step in the parent node, following the adjunction and tensor universal-property proof of Stacks 03EL. Extracted into a proved module after profiling the complete combined file above 60 seconds."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension and geometric inverse image comparison preserves ordinary tensor products of sheaves of modules",
+   "results": "8 hits, including SheafOfModules.conjugateEquiv_pullbackComp_inv and the ordinary continuous pullback/free-module API. None states this four-functor normalized tensor square.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; prove from the existing normalized adjunction and tensor formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app",
+   "results": "One hit: Mathlib.CategoryTheory.Adjunction.Unique, identifying the transpose of the uniqueness comparison with the other unit.",
+   "date": "2026-10-27",
+   "verdict": "Used for the iterated unit identity."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPull.*tensor|tensor.*scalarPull",
+   "results": "No Mathlib hits. Local rg finds the parent total-tensor and derived-tensor coherence declarations, but no ordinary module tensor square.",
+   "date": "2026-10-27",
+   "verdict": "The new theorem is the ordinary module part of the existing total argument."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarPullCoefficientTotalTensor",
+  "date": "2026-10-27",
+  "group": "W8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Ordinary module step of lem-sf-scalar-pull-coefficient-total-tensor, following Stacks 03EL.",
+   "via": [
+    "lem-sf-scalar-pull-coefficient-total-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarPullCoefficientModuleTensor",
+  "file": "lean/Sheaf/Paper/ScalarPullCoefficientModuleTensor.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.scalarPull_coefficient_module_tensor",
+  "statement": "theorem scalarPull_coefficient_module_tensor {R S : Coefficients.{u}} (a : Change R S)\n    {U V : Scheme.{u}} (g : U ⟶ V) (M N : pbcModules V (R.ring V)) :\n    let F := proEtaleRingModulePullback g (R.ring V) (R.ring U) (R.pull g)\n    let G := pbcExtend (a.map V)\n    let H := pbcExtend (a.map U)\n    let K := proEtaleRingModulePullback g (S.ring V) (S.ring U) (S.pull g)\n    K.map (scalarOrdinaryTensor (a.map V) M N).hom ≫\n      (proEtaleOrdinaryTensorPullback g (S.ring V) (S.ring U) (S.pull g)\n        (G.obj M) (G.obj N)).hom ≫\n      ((scalarPullModule a g).hom.app M ⊗ₘ (scalarPullModule a g).hom.app N) =\n    (scalarPullModule a g).hom.app (M ⊗ N) ≫\n      H.map (proEtaleOrdinaryTensorPullback g (R.ring V) (R.ring U) (R.pull g) M N).hom ≫\n      (scalarOrdinaryTensor (a.map U) (F.obj M) (F.obj N)).hom",
+  "branch": "sheaf-dag",
+  "by": "W8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T013002-L-2356192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T013002-L-2356192",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

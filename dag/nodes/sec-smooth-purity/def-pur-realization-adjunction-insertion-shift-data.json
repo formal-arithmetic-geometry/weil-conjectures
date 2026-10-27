@@ -1,0 +1,143 @@
+{
+ "id": "def-pur-realization-adjunction-insertion-shift-data",
+ "kind": "definition",
+ "title": "Data of the normalized realization adjunction insertion shift laws",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring and uniformizer, and a finite-field datum $D$ with $k=\\overline{\\mathbf F}_q$. Use the actual system and integral derived categories, reduction $\\mathcal R$, total limit $\\mathcal L$, and adjunction of [lem-coef-derived-system-evaluation-calculus], an operation package $o$ and its realization package $c$ from [lem-sf-integral-compactification-system-realization], and the actual inverse-unit and unary and tensor insertion maps of [lem-pur-integral-realization-recursion]. Use exactly the designated shift comparisons of [def-pur-integral-operation-shift-data], including the signed second tensor slot and fixed total-limit comparison. Define the following predicate, not an assertion that it holds.\n\nFor functors $F,G:\\mathcal C\\to\\mathcal D$ between categories with integer shifts, designated comparisons $\\sigma_r(M):F(M[r])\\cong F(M)[r]$ and $\\tau_r(M):G(M[r])\\cong G(M)[r]$, actual arrows $a_M:F(M)\\to G(M)$, and an input predicate $P$, define $\\operatorname{InsertionShiftLaw}(F,G,\\sigma,\\tau,a,P)$ to mean: (i) there is a $\\operatorname{CommShift}$ structure on each of $F,G$ whose components are exactly $\\sigma,\\tau$ (so the fixed comparisons satisfy naturality and zero and addition coherence); (ii) for every $M$ satisfying $P$, $a_M$ is invertible and, for every $r\\in\\mathbf Z$, $\\tau_r(M)\\circ a_{M[r]}=a_M[r]\\circ\\sigma_r(M)$; (iii) for every $f:M\\to N$ with $P(M)$ and $P(N)$, $a_N\\circ F(f)=G(f)\\circ a_M$. Define the composite designated comparison for $G\\circ F$ by $\\tau_r(FM)\\circ G(\\sigma_r(M))$. The source comparison for $\\mathcal L A$ and target comparison for $A_{\\rm int}\\mathcal L$ are these composites in that order, using the fixed total-limit comparison.\n\nDefine $\\operatorname{RealizationAdjunctionInsertionShift}(\\ell,E,D,o,c)$ as the conjunction of six families of these laws: the inverse-unit law, the pullback insertion law, the proper-image insertion law, the quasi-compact open-extension insertion law, and the separate first-slot and second-slot tensor insertion laws. Quantify over all finite-type $k$-schemes, separated finite-type pullback maps, proper direct-image maps, and quasi-compact open immersions as appropriate, and over four arbitrary integer bounds $a,b,t_a,t_b$. For the inverse unit use $F=\\mathcal L\\mathcal R$, $G=\\mathrm{id}$, the actual inverse-or-zero of the adjunction unit as $a$, the composite reduction/limit comparison and the identity target comparison; its input domain consists of the derived-complete constructible integral inputs of [def-weil-derived-complete-integral-detailed] whose reduced systems are admissible with these bounds. For each unary operation $A$ use $F=\\mathcal L A$, $G=A_{\\rm int}\\mathcal L$, its actual insertion $a_A$, and its input and output systems admissible with these same bounds. For tensor fix the other system operand, use the corresponding curried tensor functors and the actual $a_\\otimes(M,N)$, and require both operands and their tensor output to be admissible with these bounds. Here admissibility is the normalization, compatible bounded-below etale-origin witnesses, constructibility and common finite cohomology and Tor bounds of [def-sf-integral-system-expression-domain], with finite Tor amplitude as in [def-weil-finite-tor-amplitude]. All shifts range over every integer, and no choice of arbitrary insertion arrow or shift comparison is made.",
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-pur-integral-realization-recursion",
+  "def-pur-integral-operation-shift-data",
+  "def-sf-integral-system-expression-domain",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Agent-formulated definition packaging the coefficient-comparison sentence and actual adjunction insertion maps as the local-square hypothesis in lem-pur-realization-tree-shift-transport; no assertion of the insertion-shift theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Predicate expressing natural integer shift compatibility of inverse unit and unary and two tensor slot realization adjunction insertion maps",
+   "results": [
+    "CategoryTheory.Adjunction.CommShift.CompatibilityUnit",
+    "CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right",
+    "CategoryTheory.Adjunction.CommShift.compatibilityCounit_left",
+    "CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app",
+    "CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso",
+    "CategoryTheory.Adjunction.CommShift.compatibilityUnit_right",
+    "CategoryTheory.Adjunction.LeftAdjointCommShift.compatibilityUnit_iso",
+    "CategoryTheory.Pretriangulated.opShiftFunctorEquivalence_unitIso_inv_naturality"
+   ],
+   "date": "2026-10-24",
+   "verdict": "Generic adjunction-shift interfaces only; no normalized realization insertion predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural shift compatibility data for normalized inverse unit and adjunction counit realization insertions in unary operations and both tensor slots",
+   "results": [
+    "CategoryTheory.Adjunction.CommShift.CompatibilityUnit",
+    "CategoryTheory.Adjunction.CommShift.CompatibilityCounit",
+    "CategoryTheory.Adjunction.CommShift.compatibilityUnit_right",
+    "CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit",
+    "CategoryTheory.Adjunction.CommShift.compatibilityCounit_left",
+    "CategoryTheory.CommShift₂Setup.hε",
+    "CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoAdd",
+    "CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app"
+   ],
+   "date": "2026-10-24",
+   "verdict": "Eight generic compatibility declarations; none defines this six-family predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep \"RealizationAdjunctionInsertionShift|InsertionShiftLaw|insertionCompositeShift\" CategoryTheory",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib definition of the system realization insertion predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"RealizationAdjunctionInsertionShift|InsertionShiftLaw|insertionCompositeShift\" lean/WeilConjectures lean/Sheaf; rg -n \"RealizationAdjunctionInsertionShift|InsertionShiftLaw\" dag/nodes",
+   "results": "No upstream WeilConjectures hits. Sheaf/SixFunctors/RealizationAdjunctionInsertionShift.lean:44 insertionCompositeShift, :59 InsertionShiftLaw, :101 RealizationAdjunctionInsertionShift; all occurrences are in that module. DAG matches only the theorem node lem-pur-realization-adjunction-insertion-shift, not a definition node.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing real definitions in Sheaf.SixFunctors.RealizationAdjunctionInsertionShift; the new node owns their predicate interface without using the theorem."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search \"insertion shift\"; python3 tools/blueprint_refs.py ancestor lem-pur-realization-tree-shift-transport",
+   "results": "0 blueprint nodes match 'insertion shift'; ancestor thm-pur-rational-and-qbar-purity",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node for these data; attach the new definition through the conditional tree obligation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-realization-tree-shift-transport",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient-comparison and inherited-coherence sentences: the assumed inverse-unit, unary and two-slot tensor insertion squares of the conditional tree transport obligation.",
+   "via": [
+    "lem-pur-realization-tree-shift-transport",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RealizationAdjunctionInsertionShift",
+  "declaration": "WeilConjectures.IntegralSystemRealization.RealizationAdjunctionInsertionShift",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.insertionCompositeShift",
+   "WeilConjectures.IntegralSystemRealization.InsertionShiftLaw",
+   "WeilConjectures.IntegralSystemRealization.insertionLimitShift",
+   "WeilConjectures.IntegralSystemRealization.insertionSourceShift",
+   "WeilConjectures.IntegralSystemRealization.insertionTargetShift",
+   "WeilConjectures.IntegralSystemRealization.RealizationAdjunctionInsertionShift"
+  ],
+  "statement": "structure RealizationAdjunctionInsertionShift (D : FiniteFieldDatum.{u})\n    (o : Operations l E) (c : Realizations l E D o) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Returned delivery 45a679750f32 H2: this definition node records the already published real predicate and its five fixed-comparison helpers, without copying them (H4). It defines six families of insertion laws and does not assert they hold. The theorem realizationAdjunctionInsertionShift is not a declaration of this node and is not used by the conditional consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a381367c5",
+  "group": "Q40",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a381367c5",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 45a6 (H2). Lean module byte-identical to 45a6 (full clause/edge-case review there found no other fault). Item stmt_dep theorem lem-pur-realization-adjunction-insertion-shift replaced by new def node def-pur-realization-adjunction-insertion-shift-data: existing:true record of the six plain decls in Sheaf.SixFunctors.RealizationAdjunctionInsertionShift (theorem excluded, no copy, lean.statement verbatim). Node statement checked against InsertionShiftLaw's 3 clauses, composite/source/target order, six fields (unit/pull/proper/open/tensorLeft/tensorRight) with separated-finite-type/proper/qc-open binders, four integer bounds, admissible domains, signed right slot; predicate only, not hollow. Same pattern as landed affine-base/native-open owners. Spectator advisory answered via SynchronizedPair.components + R.coherence. Advisories: uncited theorem-owned SystemAdmissible/inverseOrZero (owner lem-sf-generator-reduction-coherence reached via cited lem-pur-integral-realization-recursion); helper names also still listed on the theorem node. No compile (no file changed)."
+ }
+}

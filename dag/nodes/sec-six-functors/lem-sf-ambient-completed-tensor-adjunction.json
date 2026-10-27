@@ -1,0 +1,338 @@
+{
+ "id": "lem-sf-ambient-completed-tensor-adjunction",
+ "kind": "statement",
+ "title": "Quotient-completed tensor and maps into locally complete targets",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology]. For a sheaf of commutative rings $\\mathcal O$ on $\\mathcal C$ write $D(\\mathcal O)$ for its unbounded derived module category [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], $R\\mathcal Hom_{\\mathcal O}$ for derived internal Hom [def-pur-derived-internal-hom] and $\\otimes^L_{\\mathcal O}$ for total derived tensor [def-pc-tensor-complex-sheaves].\n\nLet $R$ be a commutative Noetherian ring, $I=(t_1,\\ldots,t_s)$ a finitely generated ideal [def-weil-pbc-noetherian-ring], $B=\\varprojlim_n\\underline{R/I^n}$ on $\\mathcal C$, and $B_n=\\underline{R/I^n}$ with their canonical quotient maps [def-weil-pbc-constant-sheaf]. Let $P,L\\in D(B)$ be arbitrary. Set $P_n=P\\otimes_B^LB_n$, $L_n=L\\otimes_B^LB_n$ and\n$$P\\widehat\\otimes L=R\\varprojlim_n\\operatorname{Res}_{B_n/B}(P_n\\otimes_{B_n}^LL_n),$$\nwhere restriction is along $B\\to B_n$ [def-pc-sheaf-restrict-scalars] and the limit is the total derived limit of the strict quotient tower [def-weil-derived-limit]. There is a canonical isomorphism of strict derived towers\n$$\\bigl((P\\otimes_B^LL)\\otimes_B^LB_n\\bigr)_n\\cong(P_n\\otimes_{B_n}^LL_n)_n,$$\nidentifying their quotient augmentations. Its total limit identifies $P\\widehat\\otimes L$, together with its map from $P\\otimes_B^LL$, with the Koszul-derived $IB$-completion of $P\\otimes_B^LL$.\n\nFor every $Q\\in D(B)$ that is locally derived $IB$-complete, meaning $R\\mathcal Hom_{B|_U}(B|_U[1/t],Q|_U)=0$ for every site object $U$ and $t\\in(IB)(U)$, composition with that completion unit gives a natural bijection\n$$\\operatorname{Hom}(P\\widehat\\otimes L,Q)\\xrightarrow{\\ \\sim\\ }\\operatorname{Hom}(P\\otimes_B^LL,Q).$$\nThe tensor–Hom adjunction itself is not part of this statement.\nFor $R=\\mathcal O_E$, $I=(\\varpi_E)$ on a scheme's small pro-etale site this is the quotient-tower tensor of [def-pur-integral-derived-operations]; targets in [def-weil-derived-complete-integral-detailed] satisfy the local completeness condition. No constructibility, separatedness or finite-Tor condition is imposed on $P,L$, and no equality between ordinary and completed tensor is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (lemma-naive-completion), composed with the ambient tensor–Hom adjunction and the completed-coefficient comparison; source argument expanded in returned steps 1–2 of fix-lem-tensor-adjunction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-limit",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete-integral-detailed",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-strict-quotient-completion-data",
+  "def-sfb-quotient-kernel-completeness",
+  "def-sf-constant-coefficient-koszul-completion-data",
+  "def-sf-integral-local-completion-test"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sf-normalized-finite-tensor-comparison: for each finite coefficient sheaf, the restricted scalar total-tensor isomorphism sends (a*b) tensor (x tensor y) to (a tensor x) tensor (b tensor y). Conjugate the existing reductionStep by the comparisons at n+1 and n. The reductionStep generator formula and multiplicativity of the quotient map prove the required normalization on both scalar factors. For uniqueness, precompose any other normalized transition by the comparison at n+1. The generic total_extension_hom_ext helper of lem-pur-integral-tensor-transition-compatibility reduces equality to c tensor (x tensor y); the normalization with scalar factors c and 1 identifies both routes. Thus existence and uniqueness are proved without a new assumption or split-off theorem.",
+   "uses": [
+    "lem-sf-normalized-finite-tensor-comparison",
+    "lem-pur-integral-tensor-transition-compatibility",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), composed with the ambient tensor–Hom adjunction and the completed-coefficient comparison; source argument expanded in returned steps 1–2 of fix-lem-tensor-adjunction"
+   }
+  },
+  {
+   "text": "For good representatives P,Q, apply kFlat_total_tensor_model to their total tensor H. Its degreewise site-flatness gives monoidal flatness by siteSheafTensorRightIso. The normalized quotient presentation therefore computes H. Set T to S.tensor followed by its quotient tower, beta to identity, V and b from the strict balancing comparison. The model isomorphism followed by the quotient comparison and the image of b is e; the strict comparison kappa is lem-sf-quotient-total-tensor-tower-comparison. Its generator equation supplies the required normalization.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sf-quotient-total-tensor-tower-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), composed with the ambient tensor–Hom adjunction and the completed-coefficient comparison; source argument expanded in returned steps 1–2 of fix-lem-tensor-adjunction"
+   }
+  },
+  {
+   "text": "Set nu to the quotient completion unit whiskered by S.tensor. The beta-unit equation reduces to a functor mapping an identity. Use koszul_quotient_reflector: its unit-preserving isomorphism, inverted and whiskered by S.tensor, is gamma. The hom-inverse identity proves the Koszul unit equation. The same reflector supplies the Hom bijection into every complete target.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), composed with the ambient tensor–Hom adjunction and the completed-coefficient comparison; source argument expanded in returned steps 1–2 of fix-lem-tensor-adjunction"
+   }
+  },
+  {
+   "text": "In the integral category, take a good representative of K by the existing localization. Choose a prime greater than l and the principal coefficient datum. Conditions (ii) and (v) of roosIntrinsicCompletenessEquivalence turn local vanishing into invertibility of eta_K. Use lem-sf-integral-completion-unit-inverted and a categorical argument. If F(eta_M) and eta_K are invertible, precomposition with eta_M is bijective: a preimage of f is F(f) followed by eta_K inverse. For injectivity cancel F(eta_M) after applying F, then use naturality and cancel eta_K. Apply this to M equal to ordinary tensor; completedTensor is its completion by definition.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-sf-integral-completion-unit-inverted"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), composed with the ambient tensor–Hom adjunction and the completed-coefficient comparison; source argument expanded in returned steps 1–2 of fix-lem-tensor-adjunction"
+   }
+  },
+  {
+   "text": "A target in [def-weil-derived-complete-integral-detailed] satisfies [def-weil-derived-complete] by definition. The datum hypotheses required by [lem-pur-roos-intrinsic-completeness-equivalence] hold by [lem-a1-principal-koszul-strict-replacement]: the valuation ring is Noetherian and its quotients are finite and perfect with the stated two-term free resolutions. Conditions (i) and (ii) of the Roos/intrinsic equivalence therefore give precisely local derived $\\varpi_EB$-completeness of the target. If an auxiliary prime distinct from $\\ell$ is needed for that node's notation, take $3$ when $\\ell=2$ and $2$ otherwise. Its statement requires no condition on the scheme. This establishes the last specialization without imposing a bound or a finite-Tor condition on $P,L$. The Lean proof of integralConstructible_locallyComplete first applies [lem-sf-derived-complete-legacy-comparison] to the completeness clause of sfIntegralConstructible. Choose an auxiliary prime p greater than l, and use the finite-field datum with base ZMod p, exponent one and its algebraic closure. The good-representative localization for IntegralOnSlice is essentially surjective, so choose a good representative P of K. Apply conditions (i) implies (ii) of [lem-pur-roos-intrinsic-completeness-equivalence], using the datum furnished by [lem-a1-principal-koszul-strict-replacement]. The bounds and constructibility of the reductions are not needed for this implication.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-complete",
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), composed with the ambient tensor–Hom adjunction and the completed-coefficient comparison; source argument expanded in returned steps 1–2 of fix-lem-tensor-adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-normalized-finite-tensor-comparison",
+  "lem-pur-integral-tensor-transition-compatibility",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sf-quotient-total-tensor-tower-comparison",
+  "def-pur-integral-derived-operations",
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-sf-integral-completion-unit-inverted",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "lem-sf-derived-complete-legacy-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, with the scalar-extension tensor identity of sites-modules.tex Tag 03EL and total complexes in sites-cohomology.tex Tags 06YM and 07A4. G2 proves the finite successor transition by transporting reductionStep through the normalized scalar tensor comparison. The existing strict tower-comparison dependency is now proved in its own module in this delivery. Existing reflector and completeness arguments are retained; the finite-field datum is isolated behind a private irreducible definition to avoid repeated unfolding."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom is right adjoint to completed derived tensor product on derived complete sheaves over a complete discrete valuation ring",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, instMonoidalClosedLightCondSet, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.ihomPoints, LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed/reflective categories and underived adic completion do not identify the actual strict quotient tensor, its completion unit, and its ambient internal-Hom transpose"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul derived completion is a reflector and the ordinary derived tensor Hom adjunction induces completed tensor Hom adjunction into complete targets",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.exponentialIdealReflective, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed/reflective categories and underived adic completion do not identify the actual strict quotient tensor, its completion unit, and its ambient internal-Hom transpose"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any small site for a Noetherian ring and finitely generated ideal the quotient tower completed derived tensor product maps to a derived complete target by the ordinary tensor internal Hom adjunction",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed/reflective categories and underived adic completion do not identify the actual strict quotient tensor, its completion unit, and its ambient internal-Hom transpose"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed derived tensor Hom adjunction for arbitrary module complexes on a small ringed site over a Noetherian coefficient ring",
+   "results": "8 hits: ModuleCat.monoidalClosedHomEquiv, lTensorHomEquivHomLTensor, CategoryTheory.FunctorToTypes.adj, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derivedε, dualTensorHomEquiv, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed/reflective categories and underived adic completion do not identify the actual strict quotient tensor, its completion unit, and its ambient internal-Hom transpose"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalClosed",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed/reflective categories and underived adic completion do not identify the actual strict quotient tensor, its completion unit, and its ambient internal-Hom transpose"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(tensor|adjunction)|tensor.*completion",
+   "results": "6 hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/Smooth/Flat.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed/reflective categories and underived adic completion do not identify the actual strict quotient tensor, its completion unit, and its ambient internal-Hom transpose"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Cc]omplet|[Cc]omplet.*derived",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed/reflective categories and underived adic completion do not identify the actual strict quotient tensor, its completion unit, and its ambient internal-Hom transpose"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian ring on a small site the derived limit of the quotient completed tensor is Koszul completion and maps to locally derived complete targets uniquely",
+   "results": "8 hits: AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.tensor_map_id_left_eq_map, IsAdicComplete.of_comp_lift, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, IsAdicComplete.of_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and local cohomology do not state this unbounded completed-ring sheaf quotient-tower/unit comparison and mapping property"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, CategoryTheory.Adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and local cohomology do not state this unbounded completed-ring sheaf quotient-tower/unit comparison and mapping property"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Cc]omplet|[Cc]omplet.*derived",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and local cohomology do not state this unbounded completed-ring sheaf quotient-tower/unit comparison and mapping property"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived I-adic completion on a ringed site is left adjoint to the inclusion of locally complete complexes and equals the inverse limit of derived reductions",
+   "results": "8 hits: AdicCompletion, AdicCompletion.module, AdicCompletion.instCommRing, AdicCompletion.instAddCommGroup, AdicCompletion.subring, AdicCompletion.submodule, AdicCompletion.instAlgebra, AdicCompletion.subalgebra",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and local cohomology do not state this unbounded completed-ring sheaf quotient-tower/unit comparison and mapping property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul completion reflector for unbounded sheaf complexes over a Noetherian constant ring agrees with quotient tower completion",
+   "results": "8 hits: localCohomology.diagram, localCohomology.isoSelfLERadical, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, localCohomology.ofDiagram, localCohomology, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion and local cohomology do not state this unbounded completed-ring sheaf quotient-tower/unit comparison and mapping property"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-lem-tensor-adjunction",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Proof Step 1, tensor–internal-Hom adjunction at the integral stage; returned detailed step 2: strict quotient balancing, Koszul completion of the ordinary tensor and the completion-unit mapping property (returned step 1, ambient currying, is the closed structure of lem-sf-ringed-derived-closed-symmetric-monoidal)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ambient-completed-tensor-adjunction",
+  "worker": "stage1",
+  "summary": "NJ: explicit augmented strict quotient-tower balancing, quotient/Koszul unit comparison and reflector mapping property; all supporting facts reused from existing DAG nodes, with no new nodes. The integral Roos completeness condition is converted by the existing equivalence rather than assumed to be the canonical unit condition. Statement unchanged.",
+  "blueprint": "fix-lem-tensor-adjunction, proof Step 1, first and fourth tensor/internal-Hom transposes: completion-unit part at the integral stage; ambient currying remains in lem-sf-ringed-derived-closed-symmetric-monoidal.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of good representatives for arbitrary unbounded module-sheaf complexes. No node of this unit supplies this general ringed-site tool."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Good total tensor represents the ordinary derived tensor on any small site. No node of this unit supplies this general ringed-site tool."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings-independent",
+    "why": "Good representatives remain good over each quotient sheaf. No node of this unit supplies this general ringed-site tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat computation of derived scalar extension. No node of this unit supplies this general ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Resolving-class descent of the explicit bifunctorial tower comparison. No node of this unit supplies this general ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Functorial total derived limit of strict towers without exact-product assumptions. No node of this unit supplies this general ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Unit-compatible quotient/Koszul comparison on arbitrary small sites over the completed ring. No node of this unit supplies this general ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Maps from Koszul completion into any locally complete target. No node of this unit supplies this general ringed-site tool."
+   },
+   {
+    "node": "lem-a1-principal-koszul-strict-replacement",
+    "why": "Adic datum hypotheses for valuation-ring coefficients on any scheme. No node of this unit supplies this general ringed-site tool."
+   },
+   {
+    "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+    "why": "Converts the exact Roos convention used by the target definition to local completeness. No node of this unit supplies this general ringed-site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-pur-roos-intrinsic-completeness-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-03fe80cb4",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-03fe80cb4 (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, statement and stmt_deps unchanged, 5 new steps; review.md has the checks. (1) The statement agrees with Stacks 099M (lemma-naive-completion) and its preceding completed-coefficient paragraph, applied to N=P⊗^L_B L over B=lim R/I^n. Step 1 is correct: lem-pc-kflat-resolution, lem-pur-kflat-total-tensor-model, lem-pur-kflat-change-of-rings-independent and lem-pur-derived-change-of-rings(2) give good representatives that compute P_n, L_n and N⊗^L B_n. (2) Step 2: I checked the balancing map β_n((x⊗y)⊗c)=(x⊗1)⊗(y⊗c) and its inverse on pure tensors, along with the signs of the total differential, the quotient transitions and the augmentations. The descent through site-derived-tensor-descent into D(Tow) uses levelwise quasi-isomorphisms; this is correct. (3) Step 3: the strict-tower Rlim functor is the same functorial model that is fixed in the last paragraph of lem-weil-pbc-constant-completion-equivalence. With A=R and O=Â=B, that paragraph gives the quotient/Koszul isomorphism respecting the units on any small site. (4) Step 4: I checked γu=η_N, h↦hγ^{-1}↦hu in the Koszul reflector. The b_j are the images of t_j, and its local condition is exactly the item's. (5) Step 5: the def-pur-integral-derived-operations tensor uses the same tower; its Cone(1−s) derived limit is identified with the total Rlim by the strict-tower triangle. lem-pur-integral-ambient-operation-models also states this O_E case, which is advisory only. Local completeness of D^b_c targets comes from the Roos-convention definition plus Roos-equivalence (i)⇒(ii), with the adic-datum hypothesis from the a1 node. Edge cases checked: I=0, I=R, Z_p with B[1/p]. Unbounded inputs are allowed. No duplicate of the general statement exists; ambient-operation-models and constructible-tensor-completion are narrower or different. No SGA is used. Batch-5: lem-a1-principal-koszul-strict-replacement is cited only for the DVR adic-datum hypotheses, and lem-pur-roos-intrinsic-completeness-equivalence is a convention equivalence for derived completeness. Both reach lem-pod-completed-integral-scalar-regular, which says only that ϖ^m is injective on sections of the completed coefficient sheaf. That is generic coefficient algebra, not part of the trace formula or Poincaré duality nor of their proofs, so I accepted both. The worker's tool_uses (generic ringed-site tools) are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AmbientCompletedTensorAdjunction",
+  "declaration": "CategoryTheory.AmbientCompletedTensor.ambientCompletedTensorAdjunction",
+  "declarations": [
+   "CategoryTheory.AmbientCompletedTensor.moduleDerived",
+   "CategoryTheory.AmbientCompletedTensor.finiteTensor",
+   "CategoryTheory.AmbientCompletedTensor.finiteGenerator",
+   "CategoryTheory.AmbientCompletedTensor.finiteTensorStep_existsUnique",
+   "CategoryTheory.AmbientCompletedTensor.finiteTensorStep",
+   "CategoryTheory.AmbientCompletedTensor.finiteTensorTower",
+   "CategoryTheory.AmbientCompletedTensor.Good",
+   "CategoryTheory.AmbientCompletedTensor.goodLocalization",
+   "CategoryTheory.AmbientCompletedTensor.ambientCompletedTensorAdjunction",
+   "WeilConjectures.integralAmbientCompletedTensorAdjunction",
+   "WeilConjectures.integralConstructible_locallyComplete"
+  ],
+  "file": "lean/Sheaf/Paper/AmbientCompletedTensorAdjunction.lean",
+  "statement": "theorem ambientCompletedTensorAdjunction [IsNoetherianRing A] (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = I) (S : CoefficientClosedStructure (@derivedInternalHomOfUniverses.{u, u, u, u + 1} C _ J _ _ (completed J A I) (HasDerivedCategory.standard _))) (models : @CoefficientTensorModels.{u, u, u, u + 1} C _ J _ _ (completed J A I) (HasDerivedCategory.standard _) S) : ∃ (T : D (completed J A I) × D (completed J A I) ⥤ TD (completed J A I)) (β : S.tensor ⋙ (quotientPresentation J A I true).tower ≅ T) (ν : S.tensor ⟶ T ⋙ rlim (completed J A I)), (∀ (P Q : (Good J A I).FullSubcategory), ∃ (V : CochainComplex (ℕᵒᵖ ⥤ Mod (completed J A I)) ℤ) (κ : V.asFunctor ≅ (finiteTensorTower J A I).obj (P.obj, Q.obj)) (e : T.obj ((goodLocalization J A I).obj P, (goodLocalization J A I).obj Q) ≅ (TQ (completed J A I)).obj V) (b : reductionComplex J A I true ((coefficientTotalTensor.{u, u, u} J (completed J A I)).obj (P.obj, Q.obj)) ≅ V), β.hom.app ((goodLocalization J A I).obj P, (goodLocalization J A I).obj Q) ≫ e.hom = (quotientPresentation J A I true).tower.map (models.iso J (completed J A I) S P.obj Q.obj P.property.1 Q.property.1).inv ≫ (quotientPresentation J A I true).comparison.app ((coefficientTotalTensor.{u, u, u} J (completed J A I)).obj (P.obj, Q.obj)) ≫ (TQ (completed J A I)).map b.hom ∧ ∀ (n : ℕ) (p q k : ℤ) (h : p + q = k) (U : Cᵒᵖ) (c : (finite J A I n).obj.obj U) (x : (P.obj.X p).val.obj U) (y : (Q.obj.X q).val.obj U), ((κ.hom.app (op n)).f k).val.app U (((b.hom.f k).app (op n)).val.app U (tensorSection (projection J A I n) (((coefficientTotalTensor.{u, u, u} J (completed J A I)).obj (P.obj, Q.obj)).X k) U c (coefficientTensorGenerator.{u, u, u} J (completed J A I) P.obj Q.obj p q k h U x y))) = finiteGenerator J A I n P.obj Q.obj p q k h U 1 c x y) ∧ (∀ M : D (completed J A I) × D (completed J A I), (completionUnit J A I true).app (S.tensor.obj M) ≫ (rlim (completed J A I)).map (β.hom.app M) = ν.app M) ∧ (∃ (K : KoszulPresentation J A I true r a) (γ : T ⋙ rlim (completed J A I) ≅ S.tensor ⋙ koszulCompletion J A I K), ∀ M : D (completed J A I) × D (completed J A I), ν.app M ≫ γ.hom.app M = koszulUnit J A I K (S.tensor.obj M)) ∧ (∀ (M : D (completed J A I) × D (completed J A I)) (L : D (completed J A I)), IsComplete (projection J A I 0) L → Function.Bijective (fun f : (T ⋙ rlim (completed J A I)).obj M ⟶ L ↦ ν.app M ≫ f))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of returned head 8af3b04444db: cite definition owners for all plain coefficient, strict quotient, completeness, Koszul presentation and integral local-test data; retain the two comparison theorem nodes only in proof_deps. Remove the duplicate bare Nonempty integral comparison; reuse IntegralOnSlice.completedTensor_global_comparison in the proof. The general strict balancing comparison and all unit normalizations are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b28c55bd",
+  "group": "Q59",
+  "result": "fix",
+  "note": "Re-delivery of returned 8af3b04444db. F1 done: theorem nodes lem-weil-pbc-constant-completion-equivalence and lem-pur-roos-intrinsic-completeness-equivalence moved to proof_deps only; def-sfb-constant-completion-coefficient-data, def-pur-strict-quotient-completion-data and def-sfb-quotient-kernel-completeness cited; new existing:true nodes def-sf-constant-coefficient-koszul-completion-data (KoszulPresentation/koszulCompletion/koszulUnit) and def-sf-integral-local-completion-test (integralCompletionScalarValue/integralCompletionLocalTest) checked against live bodies and owner records. F2 done: copied bare Nonempty clause dropped; the Lean diff vs 8af3 is only that clause and its docstring; main signature byte-identical to the one accepted earlier; dep nodes identical to side-live; item not yet landed live. FIX (H12): integralCompletionScalarValue is the sectionwise value of PrincipalKoszulStrictReplacement.uniformizer, whose owner def-sp-completed-uniformizer-section is on base; fixes/def-sf-integral-local-completion-test.json cites that node in text and stmt_deps and extends lean.note; no Lean change, so no compile. Advisories: Good uses K-flat and flat-term predicates whose owner nodes are outside stmt_deps (accepted before); site and coefficient ring share universe u in the general declaration."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1fa77",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T065850-L-2483130",
+  "kind": "interface",
+  "note": "independent cc review: 1fa77da0 vs 55f3 delivery (only Mod qualification + obtain→choose in item; other Lean/change record identical) and new node statement vs owner nodes of reduction/res"
+ }
+}

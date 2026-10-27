@@ -1,0 +1,343 @@
+{
+ "id": "lem-pur-site-derived-sections-unit-pasting",
+ "kind": "statement",
+ "title": "Derived sections pullback and unit-Leray pasting for geometric morphisms",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E$ be small sites with terminal objects [def-weil-pbc-sites-and-cohomology], and let $R$ be a commutative ring. Use sheaves of modules over the constant sheaf $R$ on each site [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category], and their bounded-below derived categories $D^+$ [def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories]. Let $f:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ and $g:\\operatorname{Sh}(\\mathcal E)\\to\\operatorname{Sh}(\\mathcal D)$ be geometric morphisms [def-trf-geometric-morphism]. On constant-$R$ modules use their induced exact inverse images and right adjoints, with the canonical coefficient identifications preserving constant sections. Write $\\eta_u$ for the unit of the derived adjunction $u^{-1}\\dashv Ru_*$, for $u=f,g,fg$. Let $R\\Gamma_{\\mathcal A}$ mean ordinary right-derived sections at the terminal object, valued in $D^+(R\\text{-}\\operatorname{Mod})$.\nFor $M\\in D^+(\\mathcal D,R)$ the canonical comparison induced by $\\Gamma_{\\mathcal C}f_*\\cong\\Gamma_{\\mathcal D}$ is a natural isomorphism\n$$\\lambda_{f,M}:R\\Gamma_{\\mathcal C}(Rf_*M)\\xrightarrow{\\sim}R\\Gamma_{\\mathcal D}(M).$$\nPut $T_f(K)=\\lambda_{f,f^{-1}K}\\circ R\\Gamma_{\\mathcal C}(\\eta_{f,K})$, and similarly for $g$ and $fg$. These maps are natural in $K$. For the canonical inverse-image composition isomorphism $c:g^{-1}f^{-1}\\xrightarrow{\\sim}(fg)^{-1}$,\n$$T_{fg}(K)=R\\Gamma_{\\mathcal E}(c_K)\\circ T_g(f^{-1}K)\\circ T_f(K).$$\nIf $h:\\operatorname{Sh}(\\mathcal E)\\to\\operatorname{Sh}(\\mathcal C)$ is another geometric morphism and $\\alpha:g^{-1}f^{-1}\\xrightarrow{\\sim}h^{-1}$ is induced by a geometric $2$-isomorphism $h\\cong fg$, then\n$$T_h(K)=R\\Gamma_{\\mathcal E}(\\alpha_K)\\circ T_g(f^{-1}K)\\circ T_f(K).$$\nHere the $2$-isomorphism is on sheaves of sets and induces the constant-$R$ module comparison; an arbitrary $R$-linear automorphism of a module inverse image is not allowed. For a sheaf $K$ in degree zero, $H^q(T_f(K))$ is the usual cohomology pullback: choose injective resolutions $K\\to I^\\bullet$ and $f^{-1}K\\to J^\\bullet$, apply sections to the ordinary section pullback into $f^{-1}I^\\bullet$ and to any comparison $f^{-1}I^\\bullet\\to J^\\bullet$ over $f^{-1}K$, and take cohomology. This holds for every integer $q$, with zero groups for $q<0$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015M, lemma-compose-derived-functors, with sites-cohomology.tex Tag 071J, section-derived-functors, and sites.tex Tag 04IA, definition-2-morphism-topoi; agent formulation of unit/Leray and geometric-2-isomorphism compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-trf-geometric-morphism",
+  "def-pur-constant-module-inverse-image-lift"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal M_{\\mathcal A}=\\Mod(\\underline R_{\\mathcal A})$ and let $Q$ denote complex localization in the appropriate category. These are Grothendieck abelian categories by [lem-pur-ringed-site-grothendieck-abelian], hence have enough injectives by [lem-sp-grothendieck-enough-injectives]. Use degreewise monomorphic, bounded-below injective replacements $A\\to I$ from [lem-weil-pbc-complex-injective-resolution-mono]. They are K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Localization on maps into them is bijective by [lem-sc-kinjective-quasi-iso-comparison]. Thus derived objects and morphisms may be computed on these replacements, with chain maps unique up to homotopy. The section functors are additive and left exact: kernels and finite products of module sheaves are evaluated sectionwise. Denote their right-derived comparisons by $\\beta_{\\mathcal A,P}:Q\\Gamma_{\\mathcal A}P\\to R\\Gamma_{\\mathcal A}(QP)$, and the comparison for $u_*$ by $a_{u,P}:Q(u_*P)\\to Ru_*(QP)$. They are natural, and invertible on bounded-below injective complexes, by [lem-weil-pbc-right-derived-plus-injective].",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 071J, section-derived-functors; Tag 07A5, section-unbounded; derived.tex Tags 013K and 05TI"
+   }
+  },
+  {
+   "text": "Let $1_{\\mathcal A}$ denote the terminal sheaf. Global sections of a set sheaf $F$ are maps $1_{\\mathcal A}\\to F$. Since $u^{-1}1_{\\mathcal A}\\cong1_{\\mathcal B}$, the adjunction of [def-trf-geometric-morphism] gives a natural bijection $s_{u,F}:\\Gamma_{\\mathcal A}(u_*F)\\cong\\Gamma_{\\mathcal B}F$. Applied to the underlying module sheaf it is $R$-linear: addition is induced by the product map $F\\times F\\to F$, and multiplication by $r\\in R$ by the corresponding endomorphism of $F$; naturality of the adjunction bijection respects both. Coefficient identifications preserve these constant scalars by hypothesis. Define $p_{u,F}=s_{u,u^{-1}F}\\Gamma_{\\mathcal A}(\\eta^0_{u,F})$. Its value on a section $x:1_{\\mathcal A}\\to F$ is precisely $u^{-1}(x):1_{\\mathcal B}\\to u^{-1}F$, since the adjunct of $\\eta^0_{u,F}x$ is $\\varepsilon_{u,u^{-1}F}u^{-1}(\\eta^0_{u,F})u^{-1}(x)=u^{-1}(x)$ by the triangle identity. These constructions apply degreewise to complexes and commute with differentials by naturality.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XA, definition-topos; adjunction and terminal-object definition of global sections"
+   }
+  },
+  {
+   "text": "The preceding description proves the underived identities directly. For a module map $v:F\\to F'$, $u^{-1}(v)u^{-1}(x)=u^{-1}(vx)$ gives $\\Gamma_{\\mathcal B}(u^{-1}v)p_{u,F}=p_{u,F'}\\Gamma_{\\mathcal A}(v)$. For a section $x:1_{\\mathcal C}\\to F$, naturality of the canonical compositor gives $c_Fg^{-1}f^{-1}(x)=(fg)^{-1}(x)c_1$; its component $c_1$ is the unique map between the two terminal sheaves. Hence $p_{fg,F}=\\Gamma_{\\mathcal E}(c_F)p_{g,f^{-1}F}p_{f,F}$. The same calculation for the inverse-image isomorphism $\\alpha$ of the given geometric $2$-isomorphism yields $p_{h,F}=\\Gamma_{\\mathcal E}(\\alpha_F)p_{g,f^{-1}F}p_{f,F}$. Here $\\alpha_1$ is again the unique terminal comparison because $\\alpha$ is defined on sheaves of sets [def-trf-geometric-morphism]; its induced module comparison has this same underlying map. This proves these equalities as $R$-linear maps, degreewise for complexes. It explains exactly why an arbitrary module automorphism cannot be substituted for $\\alpha$.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04IA, definition-2-morphism-topoi and its mate description; terminal-component naturality"
+   }
+  },
+  {
+   "text": "For a bounded-below injective complex $I$ on $\\mathcal D$, $f_*I$ is a bounded-below complex of injectives on $\\mathcal C$: apply [lem-sp-right-adjoint-preserves-injectives] to the stipulated exact $f^{-1}$. Thus [lem-weil-pbc-right-derived-plus-injective] computes both $R\\Gamma_{\\mathcal C}(Rf_*QI)$ and $R\\Gamma_{\\mathcal D}(QI)$ by $\\Gamma_{\\mathcal C}(f_*I)$ and $\\Gamma_{\\mathcal D}I$. Define $\\lambda_{f,QI}$ by $Q(s_{f,I})$ under these identifications. Its naturality on chain maps and homotopies gives naturality on derived morphisms, using the K-injective localization bijection of Step 1. This is the canonical comparison induced by $s_f$, not just some isomorphism. More explicitly, for any bounded-below complex $P$ it satisfies\n$$\\lambda_{f,QP}\\,R\\Gamma_{\\mathcal C}(a_{f,P})\\,\\beta_{\\mathcal C,f_*P}=\\beta_{\\mathcal D,P}\\,Q(s_{f,P}).\\tag{*}$$\nTo verify $(*)$, choose $r:P\\to I$. The comparison $a_{f,P}$, followed by $Rf_*(Qr)$ and identified on $I$, is $Q(f_*r)$ by naturality of $a_f$. Naturality of $\\beta_{\\mathcal C}$ converts the left side into sections of $f_*r$ followed by $s_{f,I}$. The equation $s_{f,I}\\Gamma_{\\mathcal C}(f_*r)=\\Gamma_{\\mathcal D}(r)s_{f,P}$ and naturality of $\\beta_{\\mathcal D}$ give the right side; cancel the invertible $Qr$ identifications. This also specifies the normalization on every complex.",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J6, remark-before-Leray; derived.tex Tag 015M, lemma-compose-derived-functors, injective model"
+   }
+  },
+  {
+   "text": "Represent $K$ on $\\mathcal C$ by a bounded-below injective complex $I$. Exactness identifies $f^{-1}K$ with $Q(f^{-1}I)$ by [lem-weil-pbc-exact-functor-derived-factorization]. Choose a monomorphic injective replacement $b:f^{-1}I\\to J$ using [lem-weil-pbc-complex-injective-resolution-mono]. The unit equation of [lem-trf-bounded-below-derived-adjunction], with the exact-localization identifications understood, reads $\\eta_{f,QI}=a_{f,f^{-1}I}Q(\\eta^0_{f,I})$. Apply $R\\Gamma_{\\mathcal C}$ and then $(*)$. Naturality of $\\beta_{\\mathcal C}$ gives\n$$T_f(QI)\\,\\beta_{\\mathcal C,I}=\\beta_{\\mathcal D,f^{-1}I}\\,Q(p_{f,I}).$$\nAfter the replacement $b$, this says that $T_f(K)$ is represented by the actual chain map\n$$\\Gamma_{\\mathcal C}I\\xrightarrow{p_{f,I}}\\Gamma_{\\mathcal D}(f^{-1}I)\\xrightarrow{\\Gamma_{\\mathcal D}b}\\Gamma_{\\mathcal D}J.\\tag{**}$$\nThe middle complex is not asserted to compute derived sections; its map to derived sections is $\\beta_{\\mathcal D,f^{-1}I}$, and naturality along $b$ justifies the replacement. Thus no preservation of injectives by $f^{-1}$ is used. Naturality of $T_f$ follows already from its definition as the composite of the natural unit, $R\\Gamma$, and $\\lambda_f$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; Tag 013K; canonical derived unit as in read-only PlusAdjunction.lean, derivedPlus_unit_app_fac lines 143–149"
+   }
+  },
+  {
+   "text": "Retain $I,b,J$ from Step 5 and choose a monomorphic injective replacement $d:g^{-1}J\\to H$. Exactness of $g^{-1}$ makes $d\\,g^{-1}(b):g^{-1}f^{-1}I\\to H$ a quasi-isomorphism and a degreewise monomorphism [lem-weil-pbc-exact-functor-derived-factorization]. It therefore also computes the composite pullback target; for $(fg)^{-1}I$ use $d\\,g^{-1}(b)c_I^{-1}$. Apply $(**)$ twice. The chain map representing $T_g(f^{-1}K)T_f(K)$ is\n$$\\Gamma d\\,p_{g,J}\\,\\Gamma b\\,p_{f,I}=\\Gamma(d\\,g^{-1}b)\\,p_{g,f^{-1}I}\\,p_{f,I},$$\nwhere the equality is precisely naturality of $p_g$ from Step 3. The model for $T_{fg}(K)$ is\n$$\\Gamma(d\\,g^{-1}b c_I^{-1})\\,p_{fg,I}=\\Gamma(d\\,g^{-1}b)\\,p_{g,f^{-1}I}\\,p_{f,I}.$$\nThe two target identifications differ by $R\\Gamma_{\\mathcal E}(c_K)$, so these equations prove exactly the required composition formula, in the derived category, before taking cohomology. Homotopy invariance makes the calculation independent of the displayed replacements.",
+   "uses": [
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist; sites.tex Tag 04IA; agent assembly of the chain-map identities in Steps 3 and 5"
+   }
+  },
+  {
+   "text": "Set $L=(fg)^{-1}$ and $\\delta=\\alpha c^{-1}:L\\xrightarrow{\\sim}h^{-1}$. For a replacement $r:LI\\to V$, use $r\\delta_I^{-1}:h^{-1}I\\to V$ as the replacement on the $h$ side. Step 3 gives $p_{h,I}=\\Gamma(\\delta_I)p_{fg,I}$, so the two chain models from $(**)$ agree after identifying their targets:\n$$\\Gamma(r\\delta_I^{-1})p_{h,I}=\\Gamma(r)p_{fg,I}.$$\nTermwise $\\delta$ represents its derived isomorphism because both inverse images are exact [lem-weil-pbc-exact-functor-derived-factorization] (equivalently apply the defining universal property of localization to its components). Consequently $T_h(K)=R\\Gamma_{\\mathcal E}(\\delta_K)T_{fg}(K)$. Substitute Step 6 and $\\delta c=\\alpha$ to obtain the stated formula with $\\alpha$. This uses the geometric terminal-component equation of Step 3; it asserts no corresponding invariance for arbitrary $R$-linear automorphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04IA, definition-2-morphism-topoi; induced inverse-image mate and terminal-component naturality"
+   }
+  },
+  {
+   "text": "Finally let $K$ be a sheaf in degree zero. Choose $K\\to I$ and $f^{-1}K\\to J$ with no negative terms. The map $f^{-1}K\\to f^{-1}I$ is a degreewise monomorphic quasi-isomorphism by exactness, and [lem-weil-pbc-lift-along-injective-quasi-iso] supplies a chain map $b:f^{-1}I\\to J$ over $f^{-1}K$. It is a quasi-isomorphism since both augmentations are. The same unit and comparison calculation proving $(**)$ applies to this $b$, so its section chain map is exactly the one in the statement. Any two choices of $b$ are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy], applied to $f^{-1}K\\to f^{-1}I$ and the injective target $J$. Applying the additive section functor preserves a chain homotopy degreewise. Thus every allowed comparison yields $H^q(T_f(K))$ and the usual resolution-defined pullback. For $q<0$ the section complexes have zero terms, and therefore zero cohomology. This proves the assertion for every integer $q$.",
+   "uses": [
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K, 013P (lemma-morphisms-lift), 013S (lemma-morphisms-equal-up-to-homotopy); sites-cohomology.tex Tag 071J"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-geometric-morphism",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015M, 013K, 013P, 013S; sites-cohomology.tex Tags 071J, 08J6; sites.tex Tag 04IA. Agent assembly using existing DAG lemmas and explicit terminal-section calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso|globalSectionsUpperStarMap|rightDerived.*[Uu]nit",
+   "results": "{\"t\": \"2026-10-22T11:21:39Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorCompIso|globalSectionsUpperStarMap|rightDerived.*[Uu]nit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\"], \"digest\": \"afc8c5f7ef7704ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections pullback via adjunction unit and Leray isomorphism is compatible with composition of morphisms of sites",
+   "results": "{\"t\": \"2026-10-22T11:21:40Z\", \"tool\": \"leansearch\", \"query\": \"Derived global sections pullback via adjunction unit and Leray isomorphism is compatible with composition of morphisms of sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitHomEquiv_comp_apply\", \"CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"CategoryTheory.GrothendieckTopology.Cover.pullbackComp\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.GrothendieckTopology.pullbackComp\"], \"digest\": \"baacef9e6539a8cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "{\"t\": \"2026-10-22T11:21:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\", \"CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\"], \"digest\": \"d295d3bf12c461b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections on sites are functorial under composition of geometric morphisms and natural isomorphisms of inverse image functors via adjunction units and Leray comparison",
+   "results": "{\"t\": \"2026-10-22T11:21:41Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections on sites are functorial under composition of geometric morphisms and natural isomorphisms of inverse image functors via adjunction units and Leray comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafComposeNatIso\", \"CategoryTheory.sheafComposeNatTrans\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\", \"CategoryTheory.sheafComposeNatTrans_fac\", \"CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans\", \"CategoryTheory.sheafComposeIso_hom_fac\", \"CategoryTheory.sheafCompose_comp\", \"SheafOfModules.pullbackComp\"], \"digest\": \"87f0a9137b98e9a9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]eray|[Rr]ightDerived.*[Gg]lobal|[Dd]erived.*[Ss]ections",
+   "results": "{\"t\": \"2026-10-22T11:23:06Z\", \"tool\": \"grep\", \"query\": \"[Ll]eray|[Rr]ightDerived.*[Gg]lobal|[Dd]erived.*[Ss]ections\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"derived\"",
+   "results": "{\"t\": \"2026-10-22T11:23:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"derived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For geometric morphisms of topoi with fixed constant ring coefficients the derived sections pullback defined by unit and Leray comparison is natural and respects composition",
+   "results": "{\"t\": \"2026-10-22T11:23:08Z\", \"tool\": \"leanfinder\", \"query\": \"For geometric morphisms of topoi with fixed constant ring coefficients the derived sections pullback defined by unit and Leray comparison is natural and respects composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"TopCat.Sheaf.pullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\"], \"digest\": \"d72f17641b6ac5c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans_comp|rightDerivedFunctorCompIso|globalSectionsUpperStarMap",
+   "results": "{\"t\": \"2026-10-23T09:36:15Z\", \"tool\": \"grep\", \"query\": \"rightDerivedNatTrans_comp|rightDerivedFunctorCompIso|globalSectionsUpperStarMap\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\"], \"digest\": \"654bc25ff11fe879\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullbacks, abstract Kan-extension transformations, or group cohomology; none states this general derived-sections unit/Leray pasting theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "{\"t\": \"2026-10-23T09:36:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\", \"CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\"], \"digest\": \"d295d3bf12c461b8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullbacks, abstract Kan-extension transformations, or group cohomology; none states this general derived-sections unit/Leray pasting theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections of module sheaves on a site pullback is the adjunction unit followed by Leray isomorphism and is functorial under composition",
+   "results": "{\"t\": \"2026-10-23T09:36:16Z\", \"tool\": \"leansearch\", \"query\": \"Derived sections of module sheaves on a site pullback is the adjunction unit followed by Leray isomorphism and is functorial under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackComp\"], \"digest\": \"3adb18ac0dad6a9c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullbacks, abstract Kan-extension transformations, or group cohomology; none states this general derived-sections unit/Leray pasting theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections pullback defined by the derived adjunction unit and Leray comparison respects composition of geometric morphisms and geometric two isomorphisms",
+   "results": "{\"t\": \"2026-10-23T09:36:20Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections pullback defined by the derived adjunction unit and Leray comparison respects composition of geometric morphisms and geometric two isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"SheafOfModules.pullbackIso\"], \"digest\": \"756078eb2abb4144\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullbacks, abstract Kan-extension transformations, or group cohomology; none states this general derived-sections unit/Leray pasting theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]eray|[Dd]erived.*[Ss]ections|[Ss]ections.*[Dd]erived",
+   "results": "{\"t\": \"2026-10-23T09:38:37Z\", \"tool\": \"grep\", \"query\": \"[Ll]eray|[Dd]erived.*[Ss]ections|[Ss]ections.*[Dd]erived\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullbacks, abstract Kan-extension transformations, or group cohomology; none states this general derived-sections unit/Leray pasting theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology restriction map for an exact inverse image on module sheaves is computed by pulling back an injective resolution and comparing into an injective replacement",
+   "results": "{\"t\": \"2026-10-23T09:38:38Z\", \"tool\": \"leanfinder\", \"query\": \"The cohomology restriction map for an exact inverse image on module sheaves is computed by pulling back an injective resolution and comparing into an injective replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"groupCohomology.resNatTrans\", \"PresheafOfModules.restrictHomEquivOfIsLocallySurjective\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"groupCohomology.resNatTrans_app\"], \"digest\": \"875035cedb773ea9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullbacks, abstract Kan-extension transformations, or group cohomology; none states this general derived-sections unit/Leray pasting theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-ordinary-unit-site-sections-transport",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Shear paragraph: ordinary affine-line homotopy input, refined by Step 4 (transport) of main-20261015/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md; canonical ordinary-sections consequence.",
+   "via": [
+    "lem-pur-ordinary-unit-site-sections-transport",
+    "lem-pur-affine-line-ordinary-invariance",
+    "lem-pur-supported-affine-line-homotopy"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-site-derived-sections-unit-pasting",
+  "worker": "stage1",
+  "summary": "Proved general small-site Leray comparison on injective replacements, identified the derived unit map with the resolution section map, and calculated composition and geometric 2-isomorphism transport on the same chain models. Reused the existing abstract homological algebra nodes; no new nodes and no change to the statement.",
+  "blueprint": "Realizes the ordinary-sections consequence of the shear/homotopy paragraph of lem-pur-frame-independence, via Step 4 (transport) of latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md, preserving the lecture-notes affine-line route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "General injective-resolution or derived-adjunction infrastructure applied to module sheaves on arbitrary small sites; it supplies the stated formula or existence result, without replacing the affine-line unit route."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "General injective-resolution or derived-adjunction infrastructure applied to module sheaves on arbitrary small sites; it supplies the stated formula or existence result, without replacing the affine-line unit route."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-adjunction",
+    "why": "General injective-resolution or derived-adjunction infrastructure applied to module sheaves on arbitrary small sites; it supplies the stated formula or existence result, without replacing the affine-line unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "General injective-resolution or derived-adjunction infrastructure applied to module sheaves on arbitrary small sites; it supplies the stated formula or existence result, without replacing the affine-line unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-0d59aeea4",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-0d59aeea4 (reviewer sub-agent of L); spot-checked: First S1 split of the item, with 0 new nodes and the statement unchanged. There is no re-split repair note. I checked all eight steps against the statements they cite. Step 1: Mod(R_A) is Grothendieck abelian (ringed-site node), so it has enough injectives; monomorphic bounded-below injective replacements are K-injective, with the Hom bijection; β and a come from right-derived-plus-injective (2). Step 2: s and p come from the adjunction at the terminal sheaf, and the triangle identity gives p(x)=u^{-1}(x). Step 3: terminal components are unique, which proves the c and α equations; this is exactly where α must be a set-level mate. Step 4: f_* preserves injectives (exact left adjoint). I verified (*) through naturality along r:P→I; it pins λ as the canonical 015M comparison. Step 5: the unit formula of lem-trf-bounded-below-derived-adjunction with L=f^{-1}, R=f_*, combined with (*), gives T_f(QI)β_C=β_D Q(p_f). Step 6: the composition follows from naturality of p_g, and Γ(c^{-1})Γ(c) cancel. Step 7: δ=αc^{-1} substitution. Step 8: lift-along-injective gives a quasi-iso b (it need not be monomorphic, and Step 5 does not need that); uniqueness up to homotopy covers every comparison; groups vanish for q<0. Edge cases tested: f=id, R=0, disconnected sites, q<0. Multiplying α by a unit u≠1 would break the clause, so the restriction to geometric α is correct and nothing is weakened. Sources read: Stacks derived.tex 015M (l.7293), sites-cohomology section-derived-functors/08J6/lemma-adjoint, sites.tex 04IA (mate direction matches α), and blueprint main-20261015 lem-pur-a1-direct-image Step 4 and lem-pur-frame-independence shears. No SGA source is used. Duplicates checked and ruled out: trf site-object-derived-sections-pullback and site-injective-sections-model (cocontinuous site functors, object U, no unit or composition), pbc derived-sections-pushforward and pur comparison-unit-injective-model (ν_T only), sfb derived-composition-adjunction-normalization (unbounded, no sections). Batch-5 flag on lem-trf-bounded-below-derived-adjunction: generic exact L ⊣ R^+ unit/counit homological algebra with definition-only stmt_deps, not part of the trace formula or Poincaré duality; accepted as before. The worker wrote four tool_uses (ringed-site-grothendieck, complex-injective-resolution-mono, trf derived adjunction, lift-to-injective-unique-up-to-homotopy); I accept them as generic infrastructure."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.DerivedSectionsUnitPasting",
+  "declaration": "CategoryTheory.SiteDerivedSections.geometric_pasting",
+  "declarations": [
+   "CategoryTheory.SiteDerivedSections.sections",
+   "CategoryTheory.SiteDerivedSections.sectionsAdditive",
+   "CategoryTheory.SiteDerivedSections.modulesGrothendieck",
+   "CategoryTheory.SiteDerivedSections.sectionHom",
+   "CategoryTheory.SiteDerivedSections.directSets",
+   "CategoryTheory.SiteDerivedSections.inverseAdditive",
+   "CategoryTheory.SiteDerivedSections.inverseLeftExact",
+   "CategoryTheory.SiteDerivedSections.inverseRightExact",
+   "CategoryTheory.SiteDerivedSections.directAdditive",
+   "CategoryTheory.SiteDerivedSections.directPreservesInjectives",
+   "CategoryTheory.SiteDerivedSections.Comparison",
+   "CategoryTheory.SiteDerivedSections.existsUnique_comparison",
+   "CategoryTheory.SiteDerivedSections.comparison",
+   "CategoryTheory.SiteDerivedSections.ordinaryPullback",
+   "CategoryTheory.SiteDerivedSections.pullback",
+   "CategoryTheory.SiteDerivedSections.geometric_pasting",
+   "CategoryTheory.SiteDerivedSections.composition_pasting",
+   "CategoryTheory.SiteDerivedSections.sectionChainMap",
+   "CategoryTheory.SiteDerivedSections.resolutionIdentification",
+   "CategoryTheory.SiteDerivedSections.resolvedPullback",
+   "CategoryTheory.SiteDerivedSections.resolution_formula",
+   "CategoryTheory.SiteDerivedSections.cohomology_resolution_formula",
+   "CategoryTheory.SiteDerivedSections.negative_cohomology"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/DerivedSectionsUnitPasting.lean",
+  "statement": "theorem geometric_pasting {TC : C} {TD : D} {TE : E} (hC : IsTerminal TC) (hD : IsTerminal TD) (hE : IsTerminal TE) (h : GeometricMorphism (Sheaf H (Type u)) (Sheaf J (Type u))) (dh : ConstantLeftModuleInverseImageLift J H R h.inverse h.direct h.adj h.leftExact) (t : h.direct ≅ (g.comp f).direct) : ∃ α : d.moduleFunctor ⋙ dg.moduleFunctor ≅ dh.moduleFunctor, (∀ α' : d.moduleFunctor ⋙ dg.moduleFunctor ≅ dh.moduleFunctor, (∀ M : Modules J R, (W H R).map (α'.hom.app M) ≫ dh.moduleSetIso.hom.app M = dg.moduleSetIso.hom.app (d.moduleFunctor.obj M) ≫ g.inverse.map (d.moduleSetIso.hom.app M) ≫ (GeometricMorphism.inverseIso t).hom.app ((W J R).obj M)) ↔ α' = α) ∧ (∀ M : DerivedCategory.Plus (Modules J R), (pullback h dh hC hE).app M = (pullback f d hC hD).app M ≫ (pullback g dg hD hE).app (d.moduleFunctor.mapDerivedCategoryPlus.obj M) ≫ (sections H R TE).rightDerivedFunctorPlus.map (((Functor.mapDerivedCategoryPlusCompIso d.moduleFunctor dg.moduleFunctor).inv ≫ (Functor.mapDerivedCategoryPlusNatIso α).hom).app M))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The full node is stated by existsUnique_comparison (canonical natural Leray isomorphism), pullback (the unit-Leray natural transformation), composition_pasting and geometric_pasting (the two composition clauses), resolution_formula and cohomology_resolution_formula (the actual comparison of injective section complexes in every integer degree), and negative_cohomology. All are in the recorded declarations. The normalized module lift is reused from the already landed definition node def-pur-constant-module-inverse-image-lift; no dependency is repaired and no statement is corrected. The comparison data are selected from a unique-existence theorem whose normalization fixes both ordinary and derived natural isomorphisms. Review FIX (cc second reader, 2026-10-24): in geometric_pasting and composition_pasting, the normalization of alpha (resp. c) is now stated as a characterization, (∀ α', normalization α' ↔ α' = α), and the pasting equation is asserted for that α. Previously ∃! ranged over the conjunction, so uniqueness was only among comparisons that also satisfied the pasting equation.",
+  "fixed_by": "NT-stage2-cc-3fdfbc9f0"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3fdfbc9f0",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Read node (8 steps, Stacks 015M/071J/08J6/04IA), module (23 decls), report, GeometricMorphism (comp, inverseIso direction) and ConstantLeftModuleInverseImageLift (landed def-pur-constant-module-inverse-image-lift, valid added stmt_dep). Objects, hypotheses and universes (u from deps, free w) match. Comparison pinned by sectionHom/adjunction ordinary normalization and derived-unit Leray normalization; existsUnique_comparison is true; pullback = derived unit then leray; resolution/cohomology formulas cover any b over f^-1 M and all q ∈ ℤ; negative_cohomology covers both sides. No hollow defs; all theorem proofs are sorry. H3 FIX: geometric_pasting and composition_pasting had ∃! over (underlying-set normalization ∧ pasting), which gives uniqueness only among maps also satisfying pasting; rewritten to iff form ∃ α, (∀ α', norm α' ↔ α' = α) ∧ pasting α (same for c). Fixed file compiled once via nt_compile --json: clean in 44.5 s. lean-record override gives the new verbatim statement; refit_record: no notes or refusals."
+ }
+}

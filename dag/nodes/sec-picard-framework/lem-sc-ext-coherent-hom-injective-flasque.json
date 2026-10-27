@@ -29,65 +29,48 @@
  ],
  "proof": [
   {
-   "text": "Fix opens $U'\\subset U\\subset X$ and write $j_U:U\\hookrightarrow X$ and $j_{U'}:U'\\hookrightarrow X$. By [def-pur-sheaf-hom], sections of $\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal I)$ over an open $V$ are $\\operatorname{Hom}_{\\mathcal O_V}(\\mathcal F|_V,\\mathcal I|_V)$. The extension-by-zero adjunction of [lem-weil-pbc-module-extension-by-zero-adjunction] identifies this group with $\\operatorname{Hom}_{\\mathcal O_X}(j_{V!}(\\mathcal F|_V),\\mathcal I)$ via $\\psi\\mapsto(\\psi\\circ\\theta)|_V$ (clause (2) of that node).",
+   "text": "For an open V, a section of internal Hom is a morphism F|_V → I|_V. Use the canonical extension-by-zero adjunction with its component formula, lem-weil-pbc-module-extension-by-zero-hom-formula, to identify this morphism with ψ : j_!(F|_V) → I.",
    "uses": [
     "def-pur-sheaf-hom",
-    "lem-weil-pbc-module-extension-by-zero-adjunction"
+    "lem-weil-pbc-module-extension-by-zero-hom-formula"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/equiv.tex",
-    "place": "Cohomology, Lemma 01EA proof, the extension-by-zero/Yoneda identification of sections"
-   }
+   "elementary": false
   },
   {
-   "text": "The inclusion $U'\\subset U$ gives a morphism (on the presheaves $j_{p!}$ it is the identity on $V\\subseteq U'$ and $0$ otherwise, then sheafify) $j_{U'!}(\\mathcal F|_{U'})\\to j_{U!}(\\mathcal F|_U)$. It is a monomorphism: by the stalk clause of [lem-weil-pbc-module-extension-by-zero-adjunction], at a point outside $U'$ the source stalk is zero, while at a point of $U'$ both stalks identify with the corresponding stalk of $\\mathcal F$ and the map is the identity; applying [lem-weil-pbc-module-stalk-exact] (5) to the complex $0\\to j_{U'!}(\\mathcal F|_{U'})\\to j_{U!}(\\mathcal F|_U)$, which is exact on stalks at every point, shows it is exact at the source, i.e. the map is a monomorphism.",
+   "text": "Construct the presheaf map j_{p!}(F|_V) → F by the identity on each direct-sum summand. Naturality is checked on generators. For any open W the index set Hom(W,V) is a subsingleton. If it is inhabited, the direct-sum injection at its unique element is a left inverse to the component map; if empty, the source is zero. Thus the map is monic sectionwise and hence as a presheaf morphism. Sheafification preserves monomorphisms. Its adjoint map c : j_!(F|_V) → F factors as sheafification of this monomorphism followed by the invertible sheafification counit, so c is monic.",
    "uses": [
-    "lem-weil-pbc-module-extension-by-zero-adjunction",
-    "lem-weil-pbc-module-stalk-exact"
+    "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01EA proof, the canonical map between extensions by zero and its stalkwise injectivity"
-   }
+   "elementary": true
   },
   {
-   "text": "Since $\\mathcal I$ is injective, [def-sp-injective-resolutions] says that precomposition with this monomorphism induces a surjection $\\operatorname{Hom}_{\\mathcal O_X}(j_{U!}(\\mathcal F|_U),\\mathcal I)\\twoheadrightarrow\\operatorname{Hom}_{\\mathcal O_X}(j_{U'!}(\\mathcal F|_{U'}),\\mathcal I)$. Under the bijections of Step 1, this is exactly the restriction map (elementary: the map of Step 2 restricts on $U'$ to the identity of $\\mathcal F|_{U'}$ through $\\theta$, so both routes send $\\psi$ to $(\\psi\\circ\\theta)|_{U'}$) $\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal I)(U)\\to\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal I)(U')$.",
+   "text": "Injectivity of I extends ψ along c to g : F → I. The component formula identifies the adjunction image of c with the identity of F|_V, since the presheaf map sends every direct-sum injection to its section. Naturality in the target of the adjunction now gives g|_V equal to the original local morphism.",
    "uses": [
     "def-sp-injective-resolutions",
-    "def-pur-sheaf-hom",
-    "lem-weil-pbc-module-extension-by-zero-adjunction"
+    "lem-weil-pbc-module-extension-by-zero-hom-formula"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01EA proof, injectivity applied to the extension-by-zero monomorphism"
-   }
+   "elementary": false
   },
   {
-   "text": "The restriction map is surjective for every inclusion of opens $U'\\subset U$. Therefore the underlying abelian sheaf is flasque by [def-sc-zariski-flasque].",
+   "text": "For V ⊆ U, restrict the global g to U. The internal-Hom restriction formula restrictOverMap_restrictOver_map identifies its restriction to V with g|_V. Hence every restriction map on internal Hom is surjective; AddCommGrpCat.epi_iff_surjective makes these maps epimorphisms, proving flasqueness.",
    "uses": [
+    "def-pur-sheaf-hom",
     "def-sc-zariski-flasque"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/equiv.tex",
-    "place": "Cohomology, Lemma 01EA (cohomology-lemma-injective-restriction-surjective), conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-hom",
-  "lem-weil-pbc-module-extension-by-zero-adjunction",
-  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-extension-by-zero-hom-formula",
+  "def-weil-presheaf-modules-sheafification",
   "def-sp-injective-resolutions",
   "def-sc-zariski-flasque"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/equiv.tex",
-  "place": "Cohomology, Lemma 01EA and its proof, with the same argument applied to sheaf Hom"
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01EA proof, specialized to extending Hom sections to the whole space; monicity checked on presheaf sections and preserved by Mathlib module sheafification."
  },
  "mathlib_searches": [
   {
@@ -159,12 +142,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-module-extension-by-zero-adjunction",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-module-extension-by-zero-adjunction",
-  "lem-weil-pbc-module-stalk-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -192,5 +170,26 @@
   "result": "fix",
   "note": "Noetherian X -> [IsNoetherian X] (STATE NOETHERIAN SCHEME, fixed from split CompactSpace+IsLocallyNoetherian); F coherent = RingedSpace.IsCoherent X.toRingedSpace F (C1 def, not hollow); I injective = Injective in SheafOfModules (moduleRings X); Hom = SheafOfModules.homObj (R := X.sheaf), moduleRings X defeq checked by rfl; conclusion TopCat.Sheaf.IsFlasque of toSheaf (Epi in AddCommGrpCat = surjective); no let, one universe u, no new definitions"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261023T123328-L-1162305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

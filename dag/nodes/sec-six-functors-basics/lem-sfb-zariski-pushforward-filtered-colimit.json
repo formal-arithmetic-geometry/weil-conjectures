@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-zariski-pushforward-filtered-colimit",
+ "kind": "statement",
+ "title": "Ordinary Zariski module pushforward preserves filtered colimits",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme], meaning inverse images of affine opens are quasi-compact and the diagonal of $f$ is quasi-compact. Let $I$ be a small nonempty filtered category and $M:I\\to\\operatorname{Mod}(\\mathcal O_X)$ a diagram of sheaves of modules on the Zariski topology [def-weil-sheaf-of-modules-category]. With $f_*$ the ordinary module pushforward [def-pc-module-pullback], the canonical comparison $\\operatorname{colim}_{j\\in I}f_*M_j\\longrightarrow f_*(\\operatorname{colim}_{j\\in I}M_j)$ is an isomorphism of $\\mathcal O_Y$-modules [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 07TB (lemma-colimit-cohomology), p=0; the module form is the same underlying abelian-sheaf comparison with its natural structure-sheaf action."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=\\operatorname{colim}_I M_j$ in $\\operatorname{Mod}(\\mathcal O_X)$ and $C=\\operatorname{colim}_I f_*M_j$ in $\\operatorname{Mod}(\\mathcal O_Y)$, with coprojections $a_j$ and $b_j$. These colimits exist, and their underlying abelian sheaves are the corresponding colimits of underlying abelian sheaves, by [lem-weil-pbc-module-sheaves-colimits-forgetful](2),(3). The cocone $f_*a_j$ induces the canonical module morphism $c:C\\to f_*L$, characterized by $c b_j=f_*a_j$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07TB, lemma-colimit-cohomology, proof, specialized to p=0; sections argument via Sites Tag 0738."
+   }
+  },
+  {
+   "text": "Fix an affine open $V\\subseteq Y$ and put $W=f^{-1}V=X\\times_YV$. The affine scheme $V$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Base change preserves quasi-compactness and quasi-separatedness by [lem-weil-pbc-qcqs-morphism-permanence](3), so $W\\to V$ has both properties. Part (2) of that same node gives that $W$ is quasi-compact and quasi-separated. Apply [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings] separately to $V$ and $W$: every open cover of either is refined by a finite affine open cover whose pairwise intersections are quasi-compact. These are also covers in the ambient opens sites of $Y$ and $X$, respectively; an open of an open subspace is an ambient open, with exactly the same coverings and intersections.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07TB, lemma-colimit-cohomology, proof, specialized to p=0; sections argument via Sites Tag 0738."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-site-quasi-compact-section-colimit] to the underlying abelian-sheaf diagrams on the opens sites of $Y$ and $X$, at the objects $V$ and $W$ respectively. Its small filtered index hypothesis is exactly the hypothesis on $I$, and its cofinal finite-cover hypothesis was checked in step 2. With the colimit identifications of step 1 this gives isomorphisms of abelian groups $\\alpha_V:\\operatorname{colim}_I(f_*M_j)(V)\\xrightarrow{\\sim}C(V)$ and $\\beta_W:\\operatorname{colim}_I M_j(W)\\xrightarrow{\\sim}L(W)$, induced by $b_j(V)$ and $a_j(W)$. No global quasi-separatedness of $Y$ or $X$ is required by the cited sections lemma.",
+   "uses": [
+    "lem-sfb-site-quasi-compact-section-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07TB, lemma-colimit-cohomology, proof, specialized to p=0; sections argument via Sites Tag 0738."
+   }
+  },
+  {
+   "text": "By the definition of ordinary module pushforward, $(f_*M_j)(V)=M_j(W)$ and $(f_*L)(V)=L(W)$; the scalar action is through $\\mathcal O_Y(V)\\to\\mathcal O_X(W)$. Under this identity of the two section diagrams, $c(V)\\alpha_V=\\beta_W$: after each colimit coprojection both maps are $a_j(W)$, by $c b_j=f_*a_j$, and equality follows from the colimit universal property. Thus $c(V)$ is bijective for every affine open $V$. The affine opens form a basis by [lem-weil-pbc-affine-opens-basis], so [lem-weil-pbc-sheaf-morphism-on-basis](b), applied to the underlying abelian sheaves, makes $c$ an isomorphism there. Its inverse is also a module morphism: for each open, bijectivity and $c(r x)=r c(x)$ give $c^{-1}(r y)=r c^{-1}(y)$, and the inverse commutes with restrictions by the same cancellation. By [def-weil-sheaf-of-modules-category] this is an inverse in $\\operatorname{Mod}(\\mathcal O_Y)$, as required.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07TB, lemma-colimit-cohomology, proof, specialized to p=0; sections argument via Sites Tag 0738."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-sfb-site-quasi-compact-section-colimit",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 07TB (lemma-colimit-cohomology), proof, p=0; replacing the higher-cohomology invocation by the sections theorem, Sites Tag 0738, and Modules on Sites Tag 03DB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of sheaves of modules on schemes along a quasi compact quasi separated morphism commutes with filtered colimits on the Zariski topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.pushforward_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"The composition of pushforward functors for sheaves of modules, induced by continuous functors between sites with Grothendieck topologies and ring sheaf morphisms, satisfies an associativity condition\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).hom.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      ((((AlgebraicGeometry.Scheme.Modules.pushforward f)\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"SheafOfModules.pushforward_obj_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betwee\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"SheafOfModules.pushforward_map_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\phi : S \\\\to F_*R$ between \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward adjunctions and presheafed-space colimits do not assert preservation of filtered colimits of Zariski module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary direct image of structure sheaf modules preserves directed colimits for a quasi compact quasi separated scheme map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (AlgebraicGeometry.Scheme.Hom.normalizationDiagram f)).rightOp.comp\\n          AlgebraicGe\", \"doc\": \"The composition of the opposite of the affine Zariski site inclusion functor for a scheme $ Y $, the normalization diagram of a morphism $ f $, the right opposite functor, the contravariant Spec funct\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (F : CategoryTheory.Functor X.AffineZariskiSiteᵒᵖ CommRingCat)\\n  (α : (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op.comp X.presheaf ⟶ F),\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization F α →\\n    ((F.rightOp.comp AlgebraicGeometr\", \"doc\": \"Given a scheme $X$, a functor $F : (X_{\\\\text{aff}})^{\\\\text{op}} \\\\to \\\\text{CommRing}$ equipped with a natural transformation $\\\\alpha : \\\\mathcal{O}_X \\\\Rightarrow F$ that preserves localization, the comp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.instPreservesColimitLocallyRingedSpaceForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] [Quiver.IsThin J] [Small.{u, w} J],\\n  CategoryTheor\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces preserves colimits of diagrams. This means that for any diagram in the category of schemes, the colimit comp\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyDirectedCompSchemeOverOverTopMorphismPropertyForgetForgetForget\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {S : AlgebraicGeometry.Scheme} {J : Type u_1}\\n  [inst : CategoryTheory.Category.{v_1, u_1} J] (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [(F.comp\\n        ((CategoryTheory.MorphismProperty.Over.forget P ⊤ S).comp\\n          ((Category\", \"doc\": \"The composition of the functors $ F $, the forgetful functor from the over category with morphism property $ P $ to the standard over category, the forgetful functor from the over category to the base\"}\n  {\"name\": \"AlgebraicGeometry.preservesColimit_Γ\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {I : Type w} [inst : CategoryTheory.Category.{v, w} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Schemeᵒᵖ)\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (Opposite.unop (D.obj i))],\\n  CategoryTheory.Limits.PreservesColimit D AlgebraicGeometry.Scheme.Γ\", \"doc\": \"The global sections functor $ \\\\Gamma $, which maps schemes to their global sections in the category of commutative rings, preserves colimits of diagrams where each object is an affine scheme. Specific\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n         \", \"doc\": \"The forgetful functor from schemes to locally ringed spaces preserves colimits of directed gluing diagrams: given a small thin category $ J $ and a locally directed functor $ F: J \\to \\text{Scheme} $ wi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward adjunctions and presheafed-space colimits do not assert preservation of filtered colimits of Zariski module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"PreservesFilteredColimits\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward adjunctions and presheafed-space colimits do not assert preservation of filtered colimits of Zariski module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*[Ff]iltered|[Ff]iltered.*pushforward|pushforward.*[Cc]olimit",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean\", \"line\": \"103\", \"text\": \"def pushforwardDiagramToColimit (F : J ⥤ PresheafedSpace.{_, _, v} C) :\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean\", \"line\": \"107\", \"text\": \"    ((pushforward C (colimit.ι (F ⋙ PresheafedSpace.forget C) j')).map (F.map f).c ≫\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean\", \"line\": \"110\", \"text\": \"      (pushforwardEq (colimit.w (F ⋙ PresheafedSpace.forget C) f) (F.obj j).presheaf).hom).op\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean\", \"line\": \"141\", \"text\": \"  presheaf := limit (pushforwardDiagramToColimit F).leftOp\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean\", \"line\": \"150\", \"text\": \"    (colimit F).presheaf = limit (pushforwardDiagramToColimit F).leftOp :=\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward adjunctions and presheafed-space colimits do not assert preservation of filtered colimits of Zariski module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward of sheaves of modules on schemes along a quasi compact quasi separated morphism commutes with filtered colimits on the Zariski topology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforward_map_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\phi : S \\\\to F_*R$ between \"}\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"[Functor.IsContinuous.{v} F J K] {M : SheafOfModules.{v} R} (s : M.sections) : ((pushforward φ).obj M).sections\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": SheafOfModules.{v} R ⥤ SheafOfModules.{v} S\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": X.Modules ⥤ Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(φ : M ⟶ N) (U : Y.Opens) : ((pushforward f).map φ).app U = φ.app (f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) (U : Y.Opens) : Γ((pushforward f).obj M, U) = Γ(M, f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, any sheaf of modules $ M $ over the structure sheaf of $ X $, and any open subset $ U $ of $ Y $, the sections of the pushforward sheaf $ f_*M $ over $ U $ \"}\n  {\"name\": \"PresheafOfModules.pushforward₀_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \"(R : Dᵒᵖ ⥤ RingCat.{u}) (M : PresheafOfModules R) : PresheafOfModules (F.op ⋙ R)\", \"doc\": \"Given a presheaf of modules $ M $ over a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, and a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the pushforward presheaf $ F_*M $ is defined as follo\"}\n  {\"name\": \"SheafOfModules.pushforward_obj_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betwee\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward adjunctions and presheafed-space colimits do not assert preservation of filtered colimits of Zariski module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*[Ff]iltered|[Ff]iltered.*pushforward|pushforward.*[Cc]olimit",
+   "results": "OK 5 hits: Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned adjunctions, existence of colimits, presheafed-space colimit constructions and colimits of affine scheme diagrams do not state preservation of filtered colimits by ordinary Zariski module pushforward"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski module sheaf pushforward preserves filtered colimits for quasi compact quasi separated morphisms",
+   "results": "OK 8 hits: SheafOfModules.pushforward, SheafOfModules.pushforwardSections, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.pushforward, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, PresheafOfModules.pushforward₀_obj_obj_isModule, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned adjunctions, existence of colimits, presheafed-space colimit constructions and colimits of affine scheme diagrams do not state preservation of filtered colimits by ordinary Zariski module pushforward"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"PreservesFilteredColimits\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned adjunctions, existence of colimits, presheafed-space colimit constructions and colimits of affine scheme diagrams do not state preservation of filtered colimits by ordinary Zariski module pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski direct image of ringed space modules commutes with directed colimits for qcqs maps",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace, AlgebraicGeometry.Scheme.IsLocallyDirected.instPreservesColimitLocallyRingedSpaceForgetToLocallyRingedSpace, AlgebraicGeometry.preservesColimit_Γ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned adjunctions, existence of colimits, presheafed-space colimit constructions and colimits of affine scheme diagrams do not state preservation of filtered colimits by ordinary Zariski module pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of sheaves of modules along a quasi compact quasi separated scheme morphism preserves filtered colimits",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforward",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned adjunctions, existence of colimits, presheafed-space colimit constructions and colimits of affine scheme diagrams do not state preservation of filtered colimits by ordinary Zariski module pushforward"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+  "date": "2026-10-23",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions. Supporting input to Tag 07UV: the invocation of Groupoids lemma-colimit-coherent in the last sentence; the equivariant approximation theorem, not the algebraic-space conclusion. Supporting input to Tag 07TU: Tag 07TB (lemma-colimit-cohomology), p=0; the module form is the same underlying abelian-sheaf comparison with its natural structure-sheaf action.",
+   "via": [
+    "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-zariski-pushforward-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Split ordinary module direct-image continuity by evaluating its canonical comparison on affine opens. Verified qcqs inverse images using base change and permanence; used the existing general filtered-category abelian section-colimit node, not directed-preorder variants. No new nodes. Preserved the statement and existing Mathlib searches; repeated searches with Q28 and read the hits.",
+  "blueprint": "Supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), along the recorded alteration/curve-approximation chain: the Tag 07TU groupoid argument requires the p=0 case of Tag 07TB. Steps 1-4 realize that ordinary Zariski module comparison. The inherited blueprint ancestor chain has from.node=null; blueprint_refs.py ancestor confirms None; the concrete current blueprint place is recorded here and in the inherited from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic ringed-site colimit/forgetful theorem; the unit gives no separate ordinary Zariski module colimit construction."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "why": "Generic finite-cover criterion for qcqs schemes needed for the sections theorem."
+   },
+   {
+    "node": "lem-sfb-site-quasi-compact-section-colimit",
+    "why": "Generic abelian-sheaf section-continuity theorem on arbitrary small filtered categories, used for p=0 of Tag 07TB."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-sfb-site-quasi-compact-section-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-161b10a5e",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-161b10a5e (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with the item and the Q28 report, no new nodes. The item is still unsplit live and has no repair note, so this is not a re-split order. Statement, stmt_deps and blueprint are byte-identical to the base, so no target was weakened. Sources read: Stacks 07TB (coherent lemma-colimit-cohomology, p=0 route through affine U and qcqs f^-1U), Sites 0738 (2)/(4) with proof, and Modules-on-Sites 03DB. Step 1: forgetful (2),(3) gives L and C and their underlying abelian colimits; c comes from the universal property. Step 2: affine V is qcqs; permanence (3) then (2) makes W=f^-1V qcqs; the cofinal finite affine covers with quasi-compact pairwise intersections apply to both, and intersections are never assumed affine. Step 3: the site section-colimit lemma's hypotheses (small site, small filtered I, cofinal finite covers) match exactly, giving alpha_V and beta_W. Step 4: I checked c(V)alpha_V=beta_W on each coprojection, both equal to a_j(W); the basis criterion (b) on underlying abelian sheaves and the written inverse-linearity give an inverse in Mod(O_Y). Edge cases: an infinite disjoint union over Spec k shows the qc hypothesis is needed; the empty scheme and a one-object diagram are fine. No duplicate: the related nodes are etale-site, etale cohomology or D_QCoh direct sums. I accept the three declared generic tool uses; the site lemma is in the item's own unit. Advisory 1: blueprint.from.node is null, inherited from the Q110 creator chain and not changed here. Advisory 2: the step-4 sections formula for f_* is used as a definition, but def-pc-module-pullback only names f_* as the adjoint. No SGA cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiPushforwardFilteredColimit",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_colimitPost_pushforward",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiPushforwardFilteredColimit.lean",
+  "statement": "theorem isIso_colimitPost_pushforward {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {I : Type u} [SmallCategory I] [IsFiltered I] (M : I ⥤ X.Modules) : IsIso (colimit.post M (pushforward f))",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da3338241",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Lean `isIso_colimitPost_pushforward {X Y : Scheme.{u}} (f) [QuasiCompact f] [QuasiSeparated f] {I : Type u} [SmallCategory I] [IsFiltered I] (M : I ⥤ X.Modules) : IsIso (colimit.post M (pushforward f))` matches every clause of the node and Stacks 07TB p=0 (coherent.tex l.1146): qcqs f, small nonempty filtered I, arbitrary Zariski O_X-modules, the canonical colimit.post comparison, and IsIso in Y.Modules. pushforward is Mathlib's right adjoint in the def-pc-module-pullback owner's recorded signature (tensorPullbackSectionAdjunction). Universes follow the small-colimit convention with no extra restriction. Edge cases checked (empty X, one-object I, empty I excluded by IsFiltered, zero diagrams). No duplicate in Mathlib or the project trees (CondensedQcqsPushforwardContinuity is condensed, not Zariski). lean.statement is verbatim; docstrings give the source place, blueprint tag and 4-step proof; sorry only, no new definitions; imported modules exist in side-live; report has Worker report and Second reading sections (the second reading is a self-review, advisory). No compile run because no file was changed."
+ }
+}

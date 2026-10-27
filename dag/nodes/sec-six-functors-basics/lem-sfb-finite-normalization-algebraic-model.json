@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-finite-normalization-algebraic-model",
+ "kind": "statement",
+ "title": "Finite normalization has a model over a finite algebraic stage",
+ "statement": "Let $A\\to B$ be an injective local map of discrete valuation rings [def-sc-discrete-valuation-ring], with fraction fields $K\\subseteq L$ [def-pc-field-extension]. Assume $B\\cong U_{\\mathfrak p}$ for a finitely generated $A$-algebra $U$ and a prime $\\mathfrak p$ [def-weil-pbc-finite-type-algebra, def-weil-pbc-localization-at-prime]. Let $P/K$ be algebraic [def-weil-algebraic-element]. For each finite intermediate field $K\\subseteq F\\subseteq P$, let $R_F$ be the integral closure of $A$ in $F$ and $C_F$ the integral closure of $B$ in $(L\\otimes_KF)_{\\mathrm{red}}$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. Define $R_P,C_P$ in the same way with $P$ in place of $F$. Reduction means quotient by all nilpotent elements. Assume $R_P$ is Noetherian [def-weil-pbc-noetherian-ring] and $C_P$ is a finitely generated module over $B\\otimes_AR_P$ via the canonical multiplication map [def-weil-finitely-generated-module]. Then there is a finite intermediate field $F_*/K$ in $P$ such that for every finite intermediate field $F$ containing $F_*$ the canonical multiplication map\n$$C_F\\otimes_{R_F}R_P\\longrightarrow C_P,\\qquad c\\otimes r\\longmapsto cr,$$\nis an isomorphism of $B\\otimes_AR_P$-algebras. Finite means finite-dimensional. No ramification-index or residue-field-separability hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 05N9, lemma-colimit-category-fp-algebras, and 033G, lemma-descent-normal; agent-extracted finite-normalization model lemma repairing more-algebra.tex Tag 09II, proposition-epp-essentially-finite-type, last three paragraphs. The additional finite-module hypothesis is explicit."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $E_Q=(L\\otimes_KQ)_{\\mathrm{red}}$ and $T_Q=B\\otimes_AR_Q$. Apply [lem-sfb-normalization-algebraic-transition-system] to the given DVR inclusion and algebraic extension. We obtain the three colimit identifications, injective maps $C_F\\to C_P$ and $E_F\\to E_P$, faithful flatness of every $R_F\\to R_P$, and surjectivity $T_F[1/b]\\to E_F$ for a fixed uniformizer $b$ of $B$. In particular $C_F$ is an integral $T_F$-algebra. Separately [lem-sfb-dvr-algebraic-normalization-structure], case (b), applies because $B/A$ is essentially of finite type and $R_P$ is Noetherian; it gives that $E_P$ is a nonempty finite product of fields. Each field is integrally closed in its own fraction field, which is itself. Apply [lem-sbc-integral-closure-finite-normal-product] with base $B$ and ambient algebra $E_P$ to conclude that its integral closure $C_P$ is a normal ring. This use does not assert that $R_F$ is finite as an $A$-module.",
+   "uses": [
+    "lem-sfb-normalization-algebraic-transition-system",
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-sbc-integral-closure-finite-normal-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, filtered normalization system; structure from lemma-big-extension-is-ok."
+   }
+  },
+  {
+   "text": "Choose the presentation $B=U_{\\mathfrak p}$ from the hypotheses and let $M=U\\setminus\\mathfrak p$. The algebra $V=U\\otimes_AR_P$ is generated over $R_P$ by the finitely many elements $u_j\\otimes1$, where the $u_j$ generate $U/A$: express each pure tensor by the same polynomial with coefficients in $R_P$, then sum. Thus [lem-weil-pbc-finite-type-algebra-noetherian] makes $V$ Noetherian. By [lem-weil-pbc-localization-tensor-over-base], with base $A$, module $U$ and second factor $R_P$, $T_P=U_{\\mathfrak p}\\otimes_AR_P$ is its localization at the images of $M$. The formula $(u\\otimes r)/s\\mapsto(u/s)\\otimes r$ preserves multiplication as well as addition. Apply [lem-weil-pbc-localization-noetherian] to conclude that $T_P$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence; localization and scalar extension via the fraction formula."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-noetherian-integral-colimit-image-model] to $S_F=T_F$ and $D_F=C_F$. Step 1 supplies the compatible integral diagrams and their colimits; Step 2 supplies Noetherianity of $T_P$; the given finite-module assumption supplies finiteness of $C_P/T_P$. We obtain a finite field stage $F_*$, a finite $T_{F_*}$-subalgebra $H\\subseteq C_{F_*}$, and the canonical isomorphism $H\\otimes_{T_{F_*}}T_P\\simeq C_P$. Write $R_*=R_{F_*}$. It also gives the canonical isomorphism $H\\otimes_{R_*}R_P\\simeq C_P$: the inverse tensor identifications are $h\\otimes(b'\\otimes r)\\mapsto b'h\\otimes r$ and $h\\otimes r\\mapsto h\\otimes(1\\otimes r)$, with $b'\\in B$. The balancing relations verify both formulas and their inverse compositions.",
+   "uses": [
+    "lem-sfb-noetherian-integral-colimit-image-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9, lemma-colimit-category-fp-algebras, image-model refinement; explicit tensor cancellation."
+   }
+  },
+  {
+   "text": "Fix any finite intermediate field $F\\supseteq F_*$. Set $N_F=H\\otimes_{R_*}R_F$. Its multiplication map $N_F\\to C_F$ is defined by $h\\otimes r\\mapsto\\bar h r$: $H$ maps to $C_F$ by Step 1 and $R_F$ maps there because its monic equations over $A$ remain monic over $B$. Tensor associativity, explicitly $(h\\otimes r)\\otimes s\\mapsto h\\otimes rs$, identifies $N_F\\otimes_{R_F}R_P$ with $C_P$ by Step 3. Faithful flatness of $R_F\\to R_P$ from Step 1 and [lem-weil-pbc-faithfully-flat-base-change] make the canonical map $N_F\\to C_P$ faithfully flat. Its injectivity follows from [lem-weil-pbc-faithfully-flat-ideal-contraction], and therefore $N_F\\to C_F$ is injective too, since its composite with $C_F\\to C_P$ is that same map. Since $C_P$ is normal by Step 1, [lem-sfb-faithfully-flat-normal-ring-descent] makes $N_F$ normal.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-sfb-faithfully-flat-normal-ring-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 033G, lemma-descent-normal, applied to the canonical scalar extension of the image model."
+   }
+  },
+  {
+   "text": "Regard $N_F$ as a subring of $C_F\\subseteq E_F$ using Step 4. Its image contains the image of $T_F$: $h=1$ gives $R_F$, and the $T_{F_*}$-subalgebra $H$ already contains the image of $B$. The surjectivity $T_F[1/b]\\to E_F$ from [lem-sfb-normalization-algebraic-transition-system] therefore implies $N_F[1/b]\\to E_F$ is surjective. It is injective because $N_F\\subseteq E_F$ and $b$ is a unit in $E_F$ (it is a nonzero element of the field $L$). Consequently $E_F=N_F[1/b]$. In particular $b$ is a nonzerodivisor of $N_F$, and sending $x/b^n$ to the same fraction embeds $E_F$ into the total ring of fractions $Q(N_F)$: equality is detected by cross multiplication, since all powers of $b$ are nonzerodivisors.",
+   "uses": [
+    "lem-sfb-normalization-algebraic-transition-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II normalization system, generic localization; elementary fraction comparison."
+   }
+  },
+  {
+   "text": "For $c\\in C_F$, its monic equation over $B$ is also a monic equation over $N_F$, since the image of $B$ lies in $N_F$. Step 5 regards $c$ as an element of $Q(N_F)$. Normality of $N_F$ and [lem-weil-pbc-normal-ring-integrally-closed-total] imply $c\\in N_F$. Thus the injection $N_F\\to C_F$ is surjective and hence an isomorphism. Tensoring this identification with $R_P$ and using Step 4 gives $C_F\\otimes_{R_F}R_P\\simeq C_P$. Every map in the construction sends a pure tensor to the product of its images; the resulting map is exactly $c\\otimes r\\mapsto cr$ and preserves the $B\\otimes_AR_P$-structure. Since $F$ was arbitrary above $F_*$, this proves the stated uniform conclusion.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 033G descent followed by normality in the total fraction ring; identification with integral closure, not a noncanonical model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normalization-algebraic-transition-system",
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sfb-noetherian-integral-colimit-image-model",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-sfb-faithfully-flat-normal-ring-descent",
+  "lem-weil-pbc-normal-ring-integrally-closed-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II final normalization-colimit argument, repaired finite-module version; finite image model via 05N9 and normality descent via 033G. The canonical identification is supplied explicitly in Steps 4-6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite normalization of an essentially finite type algebra commutes with base change from a sufficiently large finite field subextension of an algebraic extension with Noetherian normalization",
+   "results": "{\"t\": \"2026-10-24T04:52:32Z\", \"tool\": \"leansearch\", \"query\": \"Finite normalization of an essentially finite type algebra commutes with base change from a sufficiently large finite field subextension of an algebraic extension with Noetherian normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_finite_inj_algHom_of_fg\", \"exists_integral_inj_algHom_of_fg\", \"Algebra.FinitePresentation.baseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"Algebra.QuasiFinite.baseChange\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"RingHom.finiteType_isStableUnderBaseChange\", \"RingHom.EssFiniteType.finset\"], \"digest\": \"ff9c5490c93ca447\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fp algebra descent and finite separable integral-closure theorems do not identify normalized tensor algebras at a finite stage; Smooth/IntegralClosure.lean requires smooth base change, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a finite normal algebra with prescribed generic fibre over a filtered union of faithfully flat Noetherian rings",
+   "results": "{\"t\": \"2026-10-24T04:52:35Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of a finite normal algebra with prescribed generic fibre over a filtered union of faithfully flat Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fg_of_fg_of_fg\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.QuasiFinite\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.EssFiniteType.of_comp\"], \"digest\": \"58976cb3ff0bf4ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fp algebra descent and finite separable integral-closure theorems do not identify normalized tensor algebras at a finite stage; Smooth/IntegralClosure.lean requires smooth base change, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite integral closure over an algebraic union of normalized DVR base rings is the scalar extension of the integral closure at a sufficiently large finite subextension",
+   "results": "{\"t\": \"2026-10-24T04:55:23Z\", \"tool\": \"leanfinder\", \"query\": \"A finite integral closure over an algebraic union of normalized DVR base rings is the scalar extension of the integral closure at a sufficiently large finite subextension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.finite\", \"Ring.instFiniteNormalClosure\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"Ring.instFiniteNormalClosure_1\", \"integralClosure.isFractionRing_of_finite_extension\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"ValuationSubring.algebra\", \"Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\"], \"digest\": \"852f0e54ca156335\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fp algebra descent and finite separable integral-closure theorems do not identify normalized tensor algebras at a finite stage; Smooth/IntegralClosure.lean requires smooth base change, absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure, Algebra.FinitePresentation",
+   "results": "{\"t\": \"2026-10-24T04:52:32Z\", \"tool\": \"loogle\", \"query\": \"integralClosure, Algebra.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fp algebra descent and finite separable integral-closure theorems do not identify normalized tensor algebras at a finite stage; Smooth/IntegralClosure.lean requires smooth base change, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*descen|descen.*normal|integralClosure.*[Bb]ase[Cc]hange",
+   "results": "{\"t\": \"2026-10-24T04:52:32Z\", \"tool\": \"grep\", \"query\": \"normal.*descen|descen.*normal|integralClosure.*[Bb]ase[Cc]hange\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"a9cd5e8940ca8ed4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fp algebra descent and finite separable integral-closure theorems do not identify normalized tensor algebras at a finite stage; Smooth/IntegralClosure.lean requires smooth base change, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*descen|descen.*normal|integralClosure.*[Bb]ase[Cc]hange",
+   "results": "{\"t\": \"2026-10-24T06:53:37Z\", \"tool\": \"grep\", \"query\": \"normal.*descen|descen.*normal|integralClosure.*[Bb]ase[Cc]hange\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"a9cd5e8940ca8ed4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite separable integral-closure finiteness and smooth base-change results do not prove canonical normalization stabilization under these hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite normalization model over a finite subextension of an algebraic field extension",
+   "results": "{\"t\": \"2026-10-24T06:53:38Z\", \"tool\": \"leansearch\", \"query\": \"Finite normalization model over a finite subextension of an algebraic field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Normal.casesOn\", \"IntermediateField.normalClosure\", \"Normal.rec\", \"Normal.isIntegral\", \"Normal\", \"FiniteField.instFiniteExtension_1\", \"FiniteField.norm_surjective\", \"Normal.toIsAlgebraic\"], \"digest\": \"a1d399ff99a9da9b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite separable integral-closure finiteness and smooth base-change results do not prove canonical normalization stabilization under these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure, Algebra.FinitePresentation",
+   "results": "{\"t\": \"2026-10-24T06:53:38Z\", \"tool\": \"loogle\", \"query\": \"integralClosure, Algebra.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite separable integral-closure finiteness and smooth base-change results do not prove canonical normalization stabilization under these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite integral closure over an algebraic extension descends to normalization at a finite field subextension",
+   "results": "{\"t\": \"2026-10-24T06:53:39Z\", \"tool\": \"leanfinder\", \"query\": \"Finite integral closure over an algebraic extension descends to normalization at a finite field subextension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.algebraMap_intNorm\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"prod_galRestrict_eq_norm\", \"IsIntegralClosure.finite\", \"integralClosure.isFractionRing_of_finite_extension\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"Algebra.intNormAux\", \"Algebra.map_intNormAux\"], \"digest\": \"189bc226af2a9d48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite separable integral-closure finiteness and smooth base-change results do not prove canonical normalization stabilization under these hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-normalized-finite-stage-descent",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Finite-stage descent of the solution obtained only after the perfect-residue algebraic preparation. Tag 09II final three paragraphs: the finite algebra model needed before descending residue separability.",
+   "via": [
+    "lem-sfb-dvr-normalized-finite-stage-descent",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-normalization-algebraic-model",
+  "worker": "stage1",
+  "summary": "Kept the statement and all hypotheses. Descended a finite image subalgebra inside a genuine normalization stage, then used faithful flatness to descend normality for every later scalar model. Identified each scalar model with the canonical integral closure by generic localization and integral closedness in the total fraction ring. Two new statement-only lemmas; no Lean edits or compilation.",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Finite-stage descent of the solution obtained only after the perfect-residue algebraic preparation. Tag 09II final three paragraphs: the finite algebra model needed before descending residue separability. The six steps supply this historical auxiliary algebra argument; the current latest direct-image proof (3) does not state it.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "General commutative algebra tool for Noetherianity of the finite-type coefficient algebra; no result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-tensor-over-base",
+    "why": "General commutative algebra tool for the actual scalar-extended localized algebra; no result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "General commutative algebra tool for Noetherianity after localization; no result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-base-change",
+    "why": "General commutative algebra tool for faithful flatness of the canonical model map; no result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "why": "General commutative algebra tool for injectivity of the canonical model map; no result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "General commutative algebra tool for identifying a normal subring with the integral closure inside its generic localization; no result of this unit replaces it."
+   },
+   {
+    "node": "lem-sbc-integral-closure-finite-normal-product",
+    "why": "General integral-closure normality tool for an ambient finite product of fields; the unit has no alternative statement for this prime-local assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-sbc-integral-closure-finite-normal-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-957de1e97",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-957de1e97 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, and Stacks 09II (last paragraphs), 0AUW(1), 05N9(1), 033G, with labels checked for 00PG/00GM. Step 1: the transition lemma gives the colimits, injectivity, R_F→R_P faithful flatness, T_F[1/b]↠E_F and integrality; structure lemma case (b) (B≅U_p as A-algebras, R_P Noetherian) gives E_P a finite product of fields; integral-closure-finite-normal-product then makes C_P normal. Step 2: U⊗R_P is of finite type over R_P, hence Noetherian; T_P is its localization at the image of U∖p, so T_P is Noetherian. Step 3: the image-model hypotheses (directed I, integral compatible maps, colimits T_P/C_P, Noetherian S, finite D) all hold; T_*⊗_{R_*}R_P=T_P. Step 4: I checked on pure tensors that N_F→N_F⊗R_P≅C_P equals N_F→C_F→C_P; faithfully flat base change plus ideal contraction give injectivity, and 033G gives N_F normal. Step 5 (elementary): b is a unit in E_F≠0 and T_F⊂N_F, so E_F=N_F[1/b]⊂Q(N_F). Step 6: 034M gives C_F=N_F, so the map c⊗r↦cr is an isomorphism. Both new nodes are true and strictly smaller than the item. Transition lemma: Krull–Akizuki, then 0AUW torsion-free⇒flat, then lying-over⇒faithfully flat; a=u·b^e gives T_F[1/b]=L⊗_K F. Image-model lemma: the 05N9 lift of the finite presentation, the image H, the surjection-plus-isomorphic-composite argument, and 00GM finiteness. Tested on D=0 and on non-injective transitions; P=K, purely inseparable P and multi-factor L⊗F all pass. No duplicates (rg over dag/nodes), no cycle, no SGA; I accept all seven declared tool_uses (generic commutative algebra). FIX for B3: 'P/K algebraic' cited no definition node, so I added [def-weil-algebraic-element] plus the matching stmt_dep in the item and in lem-sfb-normalization-algebraic-transition-system. Nothing else changed; no target is weakened.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteNormalizationAlgebraicModel",
+  "declaration": "IsDiscreteValuationRing.exists_finite_normalization_algebraic_model",
+  "declarations": [
+   "IsDiscreteValuationRing.FiniteNormalizationCoefficientModel",
+   "IsDiscreteValuationRing.FiniteNormalizationStageModel",
+   "IsDiscreteValuationRing.exists_finite_normalization_algebraic_model"
+  ],
+  "file": "lean/Sheaf/RingTheory/FiniteNormalizationAlgebraicModel.lean",
+  "statement": "theorem exists_finite_normalization_algebraic_model (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (B : Type v) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [Algebra A B] [IsLocalHom (algebraMap A B)] (hinj : Function.Injective (algebraMap A B)) (K : Type w) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type x) [Field L] [Algebra B L] [IsFractionRing B L] [Algebra A L] [Algebra K L] [IsScalarTower A B L] [IsScalarTower A K L] (hfiniteType : ∃ (U : Type (max u v)) (_ : CommRing U) (_ : Algebra A U) (p : Ideal U) (_ : p.IsPrime), RingHom.FiniteType (algebraMap A U) ∧ Nonempty (B ≃ₐ[A] Localization.AtPrime p)) (P : Type y) [Field P] [Algebra K P] [Algebra A P] [IsScalarTower A K P] [Algebra.IsAlgebraic K P] [IsNoetherianRing (integralClosure A P)] (hfinite : Nonempty (FiniteNormalizationCoefficientModel A B K L P)) : ∃ F₀ : IntermediateField K P, Module.Finite K F₀ ∧ ∀ (F : IntermediateField K P), F₀ ≤ F → Module.Finite K F → Nonempty (FiniteNormalizationStageModel A B K L P F)",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two helper structures package canonical scalar actions and the isomorphism, all constrained by exact formulas in the actual reduced tensor rings. The ring equivalence and pure-tensor multiplication formula express the canonical B tensor R_P algebra isomorphism; no arbitrary map or normal model is chosen. The theorem alone has a postponed proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94e41a55d",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Only the new module FiniteNormalizationAlgebraicModel.lean and the item's lean record changed; the recorded statement matches the file verbatim. Every node clause matches the Lean: DVRs with an injective local map, fraction fields with scalar towers, finite-type presentation (universe max u v is no restriction), P/K algebraic, R_Q, E_Q and C_Q written directly in Mathlib, R_P Noetherian, then ∃ finite F₀ ∀ finite F ≥ F₀. FiniteNormalizationCoefficientModel fixes the B⊗R_P action on pure tensors, so Module.Finite is exactly the node's hypothesis. FiniteNormalizationStageModel fixes both R_F actions and the ring equivalence to c⊗r ↦ cr on all pure tensors (every c covered via quotient representatives), giving the canonical algebra isomorphism, not an arbitrary map. Nine statement dependencies use their recorded Mathlib declarations. The only existing reduced-tensor abbreviations belong to a downstream node and importing them would make a cycle, so there is no duplicate definition. Imported proof-dependency modules exist. Edge cases P=K, finite P, F=F₀, purely inseparable P, several factors and any characteristic are covered. Single sorry; docstrings carry source places, blueprint id and the six proof steps; report has both sections (second reading short and by the author). No file changed, so no compile."
+ }
+}

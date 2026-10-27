@@ -1,0 +1,221 @@
+{
+ "id": "lem-route-transition-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "via": [
+    "lem-route-integral-transition-comm-shift-exists-unique",
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "place": "Retained exact finite scalar-transition clause of def-weil-algebraically-closed-coefficients, order 1462: exactness for the specified integral-image-normalized shift. Current blueprint sk-thm-sfb-qlbar-two-colimit clauses (2) and (4) provide the finite scalar-transition context. The recorded ancestry through the module-created parent is null, as blueprint_refs.py ancestor computes."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exactness for the normalized shift comparison on the recorded intrinsic rational stages.",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and finite intermediate coefficient fields $E\\subseteq L\\subseteq\\Omega$ [def-weil-finite-subextension-directed-set]. Let $Y$ be any scheme. Write $\\mathcal I_F=D^b_c(Y,\\mathcal O_F)$ for the intrinsic derived-complete integral category [def-weil-derived-complete-integral-detailed], with its inherited triangulation [lem-weil-integral-constructible-triangulated], and $\\mathcal R_F=\\mathcal I_F[1/\\varpi_F]$, with localization $Q_F:\\mathcal I_F\\to\\mathcal R_F$, for its raw rationalization [def-weil-rationalization-karoubi, lem-weil-linear-scalar-localization-triangulated], for $F=E,L$. Let $T:\\mathcal I_E\\to\\mathcal I_L$ be completed integral scalar extension restricted to these categories [def-weil-integral-scalar-extension, lem-weil-integral-scalar-extension-constructible]. Let $G:D(Y,\\mathcal O_E)\\to D(Y,\\mathcal O_L)$ be ordinary derived extension of the completed coefficient sheaves, and put $H=G\\circ I_E$, where $I_E:\\mathcal I_E\\hookrightarrow D(Y,\\mathcal O_E)$ and $I_L:\\mathcal I_L\\hookrightarrow D(Y,\\mathcal O_L)$ are the inclusions. Give $H$ its specified ordinary derived coherent integer-shift comparison $h_{n,K}:H(K[n])\\xrightarrow{\\sim}H(K)[n]$ [lem-weil-pbc-exact-functor-derived-factorization, lem-weil-finite-free-completed-scalar-comparison]. Let $\\chi:H\\xrightarrow{\\sim}I_L\\circ T$ be the fixed ordinary-to-completed natural isomorphism [def-zl-normalized-integral-scalar-comparison], and write $\\beta_{n,Z}:I_L(Z[n])\\xrightarrow{\\sim}I_L(Z)[n]$ for the inherited inclusion comparison. Suppose $t$ is a coherent integer-shift comparison on $T$, meaning natural isomorphisms $t_{n,K}:T(K[n])\\xrightarrow{\\sim}(TK)[n]$ satisfying the zero and addition equations, and suppose its normalization is, for every $n,K$,\n$$\nI_L(t_{n,K});\\beta_{n,TK}=\\chi_{K[n]}^{-1};h_{n,K};\\chi_K[n].\n$$\nLet $F:\\mathcal R_E\\longrightarrow\\mathcal R_L$ be the specified scalar transition [def-weil-rationalization-karoubi], with $F(Q_EK)=Q_L(TK)$ and $F(f\\otimes a)=T(f)\\otimes\\iota(a)$. Suppose $c$ is a coherent integer-shift comparison on $F$, meaning natural isomorphisms $c_n:F(-[n])\\xrightarrow{\\sim}(F-)[n]$ satisfying the zero and addition equations, and suppose its degree-one component satisfies\n$$\n c_{1,Q_EK}=Q_L(t_{1,K})\\qquad(K\\in\\mathcal I_E).\n$$\nThen $F$ with this prescribed comparison is exact [def-weil-triangulated-category]: for every distinguished triangle\n$$X\\xrightarrow{u}Y'\\xrightarrow{v}Z\\xrightarrow{w}X[1]$$\nof $\\mathcal R_E$, the triangle\n$$FX\\xrightarrow{F(u)}FY'\\xrightarrow{F(v)}FZ\\xrightarrow{\\ c_{1,X}\\circ F(w)\\ }(FX)[1]$$\nis distinguished in $\\mathcal R_L$. Thus the assertion concerns every coherent pair $(t,c)$ satisfying the displayed normalization equations, and in particular the recorded normalized transition. No structure morphism from $Y$ to a finite field is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "lem-route-integral-transition-comm-shift-exists-unique: the Lean of this node (declared in its module Sheaf.Paper.SfAlgebraicallyClosedCoefficients) reaches WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionExact, a sorry on the sorry route of batch5 with no node; Lean: SHEAF file lean/Sheaf/Paper/SfAlgebraicallyClosedCoefficients.lean, declaration WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionExact (module Sheaf.Paper.SfAlgebraicallyClosedCoefficients, lines 724-736, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-zl-normalized-integral-scalar-comparison",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Let $I_E,I_L$ be the integral full-subcategory inclusions and let $G$ be ordinary derived extension along the map $R=\\widehat{\\mathcal O}_{E,Y}\\to S=\\widehat{\\mathcal O}_{L,Y}$ of completed coefficient sheaves. By [lem-weil-finite-free-completed-scalar-comparison], $S$ is a finite free $R$-module sheaf; after choosing a basis, termwise change of rings $-\\otimes_RS$ is, on underlying sheaves, a finite direct sum of copies of the identity, hence an exact functor of module sheaves. So [lem-weil-pbc-exact-functor-derived-factorization], clause (1), makes $G$ with its termwise shift comparison an exact functor; this is the derived-tensor shift entering $h$. By [lem-pur-derived-change-of-rings], clause (2), $G$ is the derived change of rings $-\\otimes^{\\mathbf L}_RS$: for a K-flat resolution $P\\to K$, the termwise exact functor carries it to a quasi-isomorphism $P\\otimes_RS\\to K\\otimes_RS$. [lem-weil-integral-constructible-triangulated] makes $I_E$ exact, so $H=G\\circ I_E$ with the composite comparison $h$ is exact. The finite-free completion comparison is an isomorphism, natural on all derived-complete objects, by [lem-weil-finite-free-completed-scalar-comparison]. Use its fixed quotient-completion normalization $\\chi:H\\xrightarrow{\\sim}I_L\\circ T$ from [def-zl-normalized-integral-scalar-comparison]. The restriction $T$ lands in $\\mathcal I_L$ by [lem-weil-integral-scalar-extension-constructible]. These results apply for arbitrary $Y$; finiteness is required only of the coefficient fields.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-integral-constructible-triangulated",
+    "def-zl-normalized-integral-scalar-comparison",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; the fixed completion comparison is the existing finite-free comparison node"
+   }
+  },
+  {
+   "text": "For a distinguished integral triangle $\\Delta=(A\\to B\\to C\\xrightarrow{\\delta}A[1])$, write $h$ for the shift of $H$ and $\\beta$ for that of $I_L$. The displayed normalization hypothesis in the statement says $I_L(t_{1,A});\\beta_A=\\chi_{A[1]}^{-1};h_A;\\chi_A[1]$, where semicolons mean composition in order. Consequently naturality of $\\chi$ gives\n$$\\chi_C;I_L(T\\delta);I_L(t_{1,A});\\beta_A=H\\delta;h_A;\\chi_A[1].$$\nTogether with naturality on the first two arrows, this makes the three components of $\\chi$ an isomorphism from the distinguished triangle $H\\Delta$ to the included triangle $T\\Delta$ with connecting arrow $T\\delta;t_{1,A}$. The latter is distinguished by invariance under isomorphism [def-weil-triangulated-category]. Distinguished triangles in $\\mathcal I_L$ are exactly the ambient distinguished triangles lying in it [lem-weil-integral-constructible-triangulated]; hence $T\\Delta$ is distinguished for the prescribed $t$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V, definition-exact-functor-triangulated-categories; direct triangle-isomorphism calculation with the recorded normalization"
+   }
+  },
+  {
+   "text": "For an integral morphism $a$, the pure-tensor formula in [def-weil-rationalization-karoubi] gives $F(Q_Ea)=Q_L(Ta)$, since $Q_Ea=a\\otimes1$. The displayed relation $Q_F\\circ[1]=[1]\\circ Q_F$ makes the degree-one comparison of each $Q_F$ the identity, and the displayed degree-one normalization hypothesis gives $c_{1,Q_EA}=Q_L(t_{1,A})$. Thus the first two arrows of $F(Q_E\\Delta)$ are $Q_L(Ta)$, and its last arrow is exactly\n$$F(Q_E\\delta);c_{1,Q_EA}=Q_L(T\\delta);Q_L(t_{1,A})=Q_L(T\\delta;t_{1,A}).$$\nAll object and degree-one shift identifications here are the fixed ones in that normalization. Hence this entire triangle is $Q_L(T\\Delta)$, which is distinguished by step 2 and exactness of $Q_L$ [lem-weil-linear-scalar-localization-triangulated]. The Lean proof invokes the proved rational-transition-from-integral lemma, with the normalized integral shift and its exactness established in the preceding step; its hypothesis is exactly transitionCommShift_existsUnique at degree one.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-linear-scalar-localization",
+    "lem-route-rational-transition-exact-of-integral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R6, proposition-construct-localization; direct evaluation of the pure-tensor and normalized degree-one formulas"
+   }
+  },
+  {
+   "text": "Every distinguished triangle $\\Gamma$ in $\\mathcal R_E$ is isomorphic to $Q_E\\Delta$ for an integral distinguished triangle $\\Delta$, by [lem-weil-linear-scalar-localization-triangulated]. Apply $F$ to the three components of this isomorphism. Naturality of $c_1$ supplies its last triangle square, so these components give an isomorphism of mapped triangles; applying $F$ to the inverse gives its inverse. Step 3 and invariance of distinguished triangles under isomorphism show that $F\\Gamma$ is distinguished. This is precisely exactness for the given shift comparison [def-weil-triangulated-category].",
+   "uses": [
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R6, proposition-construct-localization, definition of distinguished localized triangles; Tag 014V, exact functors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-constructible-triangulated",
+  "def-zl-normalized-integral-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "def-weil-triangulated-category",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-linear-scalar-localization",
+  "lem-route-rational-transition-exact-of-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Finite coefficient transitions in clauses (2) and (4), retaining the intrinsic scalar-localization model and the ordinary/completed comparison of the recorded transitionExact docstring. The normalization calculation is written out by NA using Stacks 06YY, 014V and 05R6 and the cited existing DAG statements; the current blueprint is contextual, not a theorem identifying coefficient models for arbitrary schemes. S2 (2026-10-27) implements this route with the normalized ordinary comparison, a degree-one normalized localization square extended to all integer shifts, and the integral-image criterion for rational distinguished triangles. The proved rational descent step is extracted as lem-route-rational-transition-exact-of-integral after profiling and simplifying the stage-category cache, to keep each delivered file within 60 seconds."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'transitionExact' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "sfScalarExtension|sfRationalScalarExtension|transitionExact",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic completed/rational transition with its prescribed integral-image-normalized shift; generic triangulated and derived-functor tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor between triangulated categories descends to a triangulated functor on scalar localizations",
+   "results": "8 hits: CategoryTheory.Triangulated.Localization.isTriangulated_functor, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Triangulated.Localization.isTriangulated, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Functor.IsTriangulated.instAdditive, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.isHomological_of_localization",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic completed/rational transition with its prescribed integral-image-normalized shift; generic triangulated and derived-functor tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated",
+   "results": "12 hits: CategoryTheory.Functor.IsTriangulated.instId, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.instAdditive, CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair, CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms, CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Functor.isTriangulated_of_iso, CategoryTheory.Functor.isTriangulated_iff_of_iso",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic completed/rational transition with its prescribed integral-image-normalized shift; generic triangulated and derived-functor tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension on rationalized constructible l-adic categories preserves distinguished triangles with the shift comparison induced by ordinary derived tensor",
+   "results": "8 hits: CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic completed/rational transition with its prescribed integral-image-normalized shift; generic triangulated and derived-functor tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated_iff_comp_right|isTriangulated_of_iso|isTriangulated_of_precomp|mapDerivedCategory",
+   "results": "6 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic completed/rational transition with its prescribed integral-image-normalized shift; generic triangulated and derived-functor tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact derived change of rings functor restricted to full triangulated subcategories and then rationalized preserves triangles for its induced integral shift",
+   "results": "8 hits: DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Triangulated.Localization.isTriangulated",
+   "date": "2026-10-27",
+   "verdict": "no match for the fixed intrinsic completed/rational transition with its prescribed integral-image-normalized shift; generic triangulated and derived-functor tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-route-integral-transition-comm-shift-exists-unique",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.SfAlgebraicallyClosedCoefficients",
+  "file": "lean/Sheaf/Paper/SfAlgebraicallyClosedCoefficients.lean",
+  "declaration": "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionExact",
+  "declarations": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionExact"
+  ],
+  "statement": "theorem transitionExact (E L : Index l Ω) (h : E ≤ L) :\n    (transition D l hl Ω Y E L h).IsTriangulated := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-transition-exact",
+  "worker": "stage1",
+  "summary": "Replaced the provisional docstring/signature by a self-contained statement with the identical finite-field parameters and arbitrary scheme. Proved integral exactness by the explicit connecting-arrow square for the normalized ordinary/completed comparison; evaluated the rational image triangle including its last arrow and used the localized distinguished-triangle characterization. Reused existing nodes only; no new nodes, no compiler, no definition changes. The recorded Lean module is absent in this checkout, so no proof attachment is claimed.",
+  "blueprint": "Realizes the retained exact-transition clause of def-weil-algebraically-closed-coefficients. The current sk-thm-sfb-qlbar-two-colimit clauses (2),(4) are context only; the intrinsic categories, shifts and tensor formulas stay those of the recorded defining nodes. Each proof step is below the owning sk-def-sf-operations unit; no replacement of its route."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NA-e361c66e1",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-e361c66e1 (reviewer sub-agent of L); spot-checked: Read the item, every cited statement, both route comm-shift nodes and the recorded Lean (SfAlgebraicallyClosedCoefficients.lean:640-736, where the instances are .exists.choose of the existsUnique theorems). Statement: the forall-(t,c) normalized form plus the existence halves of the two route theorems gives the Lean transitionExact, and uniqueness makes the two forms equivalent. It is not weakened, and leaving the route nodes uncited avoids the cycle through the integral route node's stale proof_deps entry. Recorded intrinsic D^b_c(Y,O_F) and raw [1/varpi] categories are kept, with no base hypothesis on Y. Steps 2-4 recomputed and correct: chi-naturality last square with the normalization; F(Q_E delta);c_1 = Q_L(T delta;t_1) with identity Q-shift (def-weil-linear-scalar-localization); the localized-triangle characterization plus c_1-naturality. FIX (E1/C4): step 1 got exactness of G with the prescribed h from lem-pur-derived-change-of-rings, which does not fix the shift. Step 1 now cites lem-weil-pbc-exact-functor-derived-factorization (1) (Mathlib leaf; S is finite free so -tensor_R S is exact) for (G,h), and keeps lem-pur (2) to identify G with -tensor^L_R S; proof_deps updated. Stacks 014V, 05R6 and 06YY labels checked. Route is in-unit, no tool_uses. Advisory: remove the stale lem-route-transition-exact entry from the proof_deps of lem-route-integral-transition-comm-shift-exists-unique separately.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T135059-L-3664847",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.shift_existsUnique",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageSystem_existsUnique",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionIso_commShift"
+  ],
+  "sorry_after": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.shift_existsUnique",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionIso_commShift"
+  ]
+ }
+}

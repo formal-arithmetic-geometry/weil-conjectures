@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-isolated-curve-formal-lifting",
+ "kind": "statement",
+ "title": "Compatible local deformations of isolated curve singularities lift globally",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a proper $k$-scheme [def-weil-proper-morphism] of dimension at most one, and let $p_1,\\ldots,p_r$ be distinct closed points such that $X$ is smooth over $k$ [def-sbc-smooth-morphisms] off these points. Put $R_n=k[t]/(t^n)$ for $n\\geq1$. For every $i,n$ suppose given a local $R_n$-algebra $C_{i,n}$, flat [def-weil-pbc-flat-ring-map] and essentially of finite type [def-weil-pbc-essentially-finite-type-algebra], with isomorphisms $C_{i,n+1}/t^nC_{i,n+1}\\cong C_{i,n}$ compatible under iterated reduction, and $C_{i,1}\\cong\\mathcal O_{X,p_i}$. Then there are proper flat finitely presented schemes $X_n\\to\\operatorname{Spec}R_n$ [def-weil-flat-morphism, def-sbc-locally-finite-presentation], an identification $X_1\\cong X$, and compatible isomorphisms $X_{n+1}\\times_{\\operatorname{Spec}R_{n+1}}\\operatorname{Spec}R_n\\cong X_n$ [def-pc-fibre-product]. Under the underlying-space identifications given by these nilpotent closed immersions, there are isomorphisms of local $R_n$-algebras $\\mathcal O_{X_n,p_i}\\cong C_{i,n}$, compatible with reduction and the prescribed special-fibre identifications. The finite list may be empty.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZP, lemma-curve-isolated, first smooth arrow; formal-system consequence of Tag 06HN, formal-defos.tex, lemma-smooth-morphism-essentially-surjective, as used in the middle paragraph of Tag 0E7Y. Properness is preserved under the nilpotent deformations of the proper special fibre."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Properness makes $X$ separated and of finite type by [def-weil-proper-morphism]. Apply [lem-sfb-isolated-curve-two-affine-cover] to $P=\\{p_1,\\ldots,p_r\\}$. Fix $X=U\\cup V$ as there: $V$ contains all the prescribed points, $U$ avoids them, and $U$ and $U\\cap V$ are smooth affine schemes. This is the fixed cover used at every level; no affine intersection is inferred from quasi-separatedness alone.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-isolated-curve-two-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZP, lemma-curve-isolated, first paragraph of the proof."
+   }
+  },
+  {
+   "text": "We construct the tower recursively, keeping both the reductions $\\theta_n:(X_{n+1})_{R_n}\\cong X_n$ and isomorphisms $h_{i,n}:\\mathcal O_{X_n,p_i}\\cong C_{i,n}$ in the induction data. Start with $X_1=X$ and with $h_{i,1}$ the inverse of the prescribed $C_{i,1}\\cong\\mathcal O_{X,p_i}$. The scheme $X_1$ is flat over $k$ by [lem-pc-flat-field]. At the inductive stage $R_{n+1}\\twoheadrightarrow R_n$ respects the augmentations to $k$, and its kernel is $(t^n)/(t^{n+1})$, whose square is zero since $2n\\geq n+1$. Each $R_n$ is finite-dimensional over $k$, has unique maximal ideal $(t)$, and has residue field $k$: an element is invertible exactly when its constant coefficient is nonzero, with inverse given by a finite geometric series.",
+   "uses": [
+    "lem-pc-flat-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06HN, formal-defos.tex, lemma-smooth-morphism-essentially-surjective, proof: inductive construction of xi_n and compatible arrows."
+   }
+  },
+  {
+   "text": "Suppose the construction has reached $X_n$ with its special fibre identified with $X$. Let $V_n\\subseteq X_n$ be the open corresponding to $V$. Its special fibre is $V$, and the closed immersion $V\\hookrightarrow V_n$ is a thickening: on affine charts it is reduction modulo $(t)$, and every prime contains the nilpotent element $t$. Thus $V_n$ is affine by [lem-weil-pbc-thickening-affine-scheme]. For each marked point its local ring is canonically the local ring of $X_n$ by [lem-weil-pbc-affine-open-stalk-localization]. Write this identification as $\\lambda_{i,n}:\\mathcal O_{V_n,p_i}\\cong\\mathcal O_{X_n,p_i}$. Give $D_i=C_{i,n+1}$ the specified reduction isomorphism\n$$D_i\\otimes_{R_{n+1}}R_n\\cong C_{i,n}\\xrightarrow{h_{i,n}^{-1}}\\mathcal O_{X_n,p_i}\\xrightarrow{\\lambda_{i,n}^{-1}}\\mathcal O_{V_n,p_i}.$$\nAll local flatness and essential-finite-type assumptions on $D_i$ are precisely the hypotheses of the item.",
+   "uses": [
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZP, lemma-curve-isolated, final sentence; Tag 0DYX, lemma-affine, proof (affineness of nilpotent deformations)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-isolated-deformation-lift] with $A'=R_{n+1}$, $A=R_n$, the fixed affine $V$, and its affine deformation $V_n$. It gives an affine flat $R_{n+1}$-scheme $Z$, a reduction isomorphism $e:Z_{R_n}\\cong V_n$, and local isomorphisms $b_i:\\mathcal O_{Z,p_i}\\cong C_{i,n+1}$. Their reductions commute with the isomorphisms chosen in the previous step. This use requires smoothness only away from the prescribed points; it does not require those points to be singular, nor does it require complete-intersection singularities.",
+   "uses": [
+    "lem-sfb-affine-isolated-deformation-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZF, lemma-isolated, first arrow, as applied in the final sentence of the proof of Tag 0DZP."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-open-deformation-lift] to $X=U\\cup V$, $Y=X_n$, and $Z$ with $e$. Obtain a flat $R_{n+1}$-scheme $X_{n+1}$, an isomorphism $\\theta_n:(X_{n+1})_{R_n}\\cong X_n$, and $\\gamma:(X_{n+1})_V\\cong Z$ with $e\\circ\\gamma_{R_n}=\\theta_n|_{V_n}$. Set the special-fibre identification of $X_{n+1}$ to be that of $X_n$ composed with the reduction of $\\theta_n$. Since the open $(X_{n+1})_V$ is affine (it is isomorphic to $Z$), [lem-weil-pbc-affine-open-stalk-localization] identifies its stalks with those of $X_{n+1}$. Compose the local identification induced by $\\gamma$ with $b_i$ to define $h_{i,n+1}$. The displayed equation for $\\gamma$ and the reduction equation for $b_i$ give exactly\n$$\\overline{h}_{i,n+1}:\\mathcal O_{X_{n+1},p_i}/t^n\\xrightarrow{\\sim} C_{i,n+1}/t^n\\cong C_{i,n},$$\nwith $\\overline{h}_{i,n+1}$ equal to $h_{i,n}$ after the identification induced by $\\theta_n$. This checks the compatibility of the chosen local isomorphisms, not just the existence of their isomorphism classes.",
+   "uses": [
+    "lem-sfb-smooth-open-deformation-lift",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZN, lemma-glueing-smooth, second arrow, as used in Tag 0DZP; compatibility follows the commutative square in the proof of Tag 06HN."
+   }
+  },
+  {
+   "text": "For every constructed $X_n$, the special-fibre square over $R_n\\twoheadrightarrow k$ is cartesian and the kernel $(t)$ satisfies $(t)^n=0$. Its special-fibre morphism is the given proper $X\\to\\operatorname{Spec}k$. Apply [lem-sfb-proper-nilpotent-base-change-reflection] with $A=R_n$ and $I=(t)$ to conclude that $X_n\\to\\operatorname{Spec}R_n$ is proper. Thus the induction has preserved properness without choosing any algebraization or projective embedding.",
+   "uses": [
+    "lem-sfb-proper-nilpotent-base-change-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09ZW, lemma-thicken-property-morphisms-cartesian, part (7)."
+   }
+  },
+  {
+   "text": "Each $R_n$ is Noetherian: every ideal is a subspace of the finite-dimensional $k$-vector space with basis $1,t,\\ldots,t^{n-1}$, and a finite $k$-basis of that ideal also generates it as an $R_n$-ideal. The one affine chart $\\operatorname{Spec}R_n$ is therefore a locally Noetherian scheme by [pqf-def-locnoeth]. Properness implies finite type by [def-weil-proper-morphism], in particular locally finite type and quasi-compact. Apply [pqf-lem-lft-fp-locnoeth] to obtain local finite presentation. By [lem-pc-separated-quasi-separated] the morphism is also quasi-separated. These three conditions give finite presentation by [def-sbc-locally-finite-presentation], including at $n=1$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-proper-morphism",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-pc-separated-quasi-separated",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TX, morphisms.tex, lemma-noetherian-finite-type-finite-presentation; definitions of proper and finite presentation."
+   }
+  },
+  {
+   "text": "Choose the extension data at each successor stage and continue the recursion over $n\\geq1$. Define every longer reduction by composing the adjacent $\\theta_n$ and their base changes. For three levels the two composites agree by associativity of composition and of base change. The adjacent equations for $h_{i,n}$ then give every iterated reduction equation by induction on the difference of the levels. The given local transition maps already satisfy these equations. When $r=0$, the affine lifting statement has no prescribed local factors and the same recursion applies. When $X=\\varnothing$, the construction can be the empty scheme at every level. This proves all the clauses of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06HN, lemma-smooth-morphism-essentially-surjective, second paragraph of the proof: continuing the compatible induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-sfb-isolated-curve-two-affine-cover",
+  "lem-pc-flat-field",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sfb-affine-isolated-deformation-lift",
+  "lem-sfb-smooth-open-deformation-lift",
+  "lem-sfb-proper-nilpotent-base-change-reflection",
+  "pqf-def-locnoeth",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-pc-separated-quasi-separated",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZP, lemma-curve-isolated, proof, followed by the compatible induction of Tag 06HN in formal-defos.tex; this is the local-to-global formal-system step used in Tag 0E7Y."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Deformations of a separated algebraic curve lift arbitrary compatible formal deformations of its finitely many singular local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formally smooth algebra homomorphism lifting is not local-to-global lifting of deformations of a curve"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local to global lifting of infinitesimal deformations of curves with isolated singularities",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formally smooth algebra homomorphism lifting is not local-to-global lifting of deformations of a curve"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formally smooth algebra homomorphism lifting is not local-to-global lifting of deformations of a curve"
+  },
+  {
+   "tool": "grep",
+   "query": "deformation|Deformation|formalObject",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formally smooth algebra homomorphism lifting is not local-to-global lifting of deformations of a curve"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deformations of a separated algebraic curve lift arbitrary compatible formal deformations of its finitely many singular local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} [IsAdicComplete I S] (f : A →ₐ[R] S ⧸ I) : ∃ (g : A →ₐ[R] S), (Ideal.Quotient.mkₐ _ _).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.lift.congr_simp\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra.FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I)\\n  (g g_1 : A →ₐ[R] B ⧸ I), g = g_1 → Algebra.FormallySmooth.lift I hI g \", \"doc\": \"For a commutative ring $ R $ and a formally smooth $ R $-algebra $ A $, given a commutative ring $ B $ with a nilpotent ideal $ I $, if two algebra homomorphisms $ g $ and $ g_1 $ from $ A $ to $ B/I \"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"(p : Ideal A) [p.IsPrime] : Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.FormallySmooth.mk_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) (x : A) :\\n  Ideal.Quotient.mk I (FormallySmooth.lift I hI g x) = g x\", \"doc\": \"For a formally smooth algebra $ A $ over a commutative ring $ R $, given a nilpotent ideal $ I $ of a commutative ring $ B $ and an algebra homomorphism $ g : A \\\\to B/I $, the image of the lift of any\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Function.Surjective g) (hg' : IsNilpotent <| RingHom.ker g)\\n  (x : A) : g (FormallySmooth.liftOfSurjective f g hg hg' x) = f x\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: formally smooth algebra homomorphism lifting is not local-to-global lifting of deformations of a curve"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-lci-curve-smoothing",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally.",
+   "via": [
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-isolated-curve-formal-lifting",
+  "worker": "stage1",
+  "summary": "Q74 expanded the formal-lifting argument into a fixed two-affine cover, affine isolated local lifting, smooth-open extension, an explicit induction keeping the reduction equations, and nilpotent reflection of properness. Four smaller statement-only inputs were searched; existing affineness, stalk, flatness and finite-presentation nodes are reused. The statement and all earlier search records were retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Steps 1 and 3--5 realize the local-to-global curve deformation input of 0DZP; steps 2 and 8 realize the compatible-system passage of 06HN used in 0E7Y. Steps 6--7 record properness and finite presentation before algebraization. The recorded ancestor is null, as returned by blueprint_refs.py ancestor; no replacement ancestor is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-thickening-affine-scheme",
+    "why": "The affine deformation chart V_n is affine because it is a nilpotent thickening of V; this is exactly the generic affineness tool used in the proof of Stacks 0DYX, and no same-unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-thickening-affine-scheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-6d0b52379",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-6d0b52379 (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes, every cited statement, and the sources at the cited places: examples-defos 0DZP/0DZF/0DZN/0DYX, Examples rings/schemes and Situation glueing; more-morphisms 09ZW. The item statement is identical to the Q21-era base. The only change adds the Krull-dimension stmt_dep, which the brief allows. The item is unsplit in live and side-live, is not in the route-pivot dropped list, has no SGA source and no re-split note. New nodes: (1) two-affine-cover matches the first paragraph of the 0DZP proof (quasi-projectivity, then an ample finite set in an affine, then affine intersection by separatedness). I checked the edge cases X=∅, X∖V=∅ and zero-dimensional components. (2) affine-isolated-deformation-lift is the first smooth arrow of 0DZF plus 0DYX. Its bases are exactly C_k, and the (α,β_i) compatibility is exactly the smoothness lifting condition. r=0 is fine because smooth P is unobstructed. (3) smooth-open-deformation-lift is the second assertion of 0DZN with U smooth (so lci) and U∩V smooth, and e∘γ_A=α| is the lifting condition. (4) proper-nilpotent-base-change-reflection is 09ZW(7) with I^N=0, faithful. It does not duplicate the 09ZW(2)/(8) nodes or the henselian clopen-lift node. Item steps: V_n is affine by the thickening lemma (tool_use accepted: it is the lemma the 0DYX proof cites). The reductions δ_i are built from h_{i,n}^{-1} and λ^{-1}. I traced the compatibility of h_{i,n+1} with h_{i,n} through e∘γ_A=θ_n| and the δ/β equation, and it holds. Properness follows from 09ZW(7) with A=R_n, I=(t). Finite presentation follows from R_n Noetherian (pqf-lem-lft-fp-locnoeth) plus quasi-compact and quasi-separated. The recursion and the empty cases close the proof. The parent's citation of the item still matches. Advisory only: the new nodes have no lean_audit field, and the dimension stmt_dep is not bracket-cited in the item text."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsolatedCurveFormalLifting",
+  "declaration": "AlgebraicGeometry.exists_isolatedCurve_formal_lifting",
+  "declarations": [
+   "AlgebraicGeometry.isolatedCurveLevelRing",
+   "AlgebraicGeometry.isolatedCurveLevelReduction",
+   "AlgebraicGeometry.isolatedCurveLevelZero",
+   "AlgebraicGeometry.isolatedCurveLevelParameter",
+   "AlgebraicGeometry.isolatedCurveScalarToStalk",
+   "AlgebraicGeometry.isolatedCurveSpecialMap",
+   "AlgebraicGeometry.exists_isolatedCurve_formal_lifting"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IsolatedCurveFormalLifting.lean",
+  "statement": "theorem exists_isolatedCurve_formal_lifting (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsProper f] (hdim : topologicalKrullDim X ≤ 1) (r : ℕ) (p : Fin r → X) (hp : Function.Injective p) (hclosed : ∀ i : Fin r, IsClosed ({p i} : Set X)) (hsmooth : ∀ x : X, x ∉ Set.range p → ∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ f)) (C : Fin r → ℕ → Type v) [∀ (i : Fin r) (n : ℕ), CommRing (C i n)] [∀ (i : Fin r) (n : ℕ), IsLocalRing (C i n)] [∀ (i : Fin r) (n : ℕ), Algebra (isolatedCurveLevelRing k n) (C i n)] [∀ (i : Fin r) (n : ℕ), Module.Flat (isolatedCurveLevelRing k n) (C i n)] [∀ (i : Fin r) (n : ℕ), Algebra.EssFiniteType (isolatedCurveLevelRing k n) (C i n)] (c : ∀ (i : Fin r) (n : ℕ), C i (n + 1) →+* C i n) (hcscalar : ∀ (i : Fin r) (n : ℕ), (c i n).comp (algebraMap (isolatedCurveLevelRing k (n + 1)) (C i (n + 1))) = (algebraMap (isolatedCurveLevelRing k n) (C i n)).comp (isolatedCurveLevelReduction k n)) (hcsurj : ∀ (i : Fin r) (n : ℕ), Function.Surjective (c i n)) (hcker : ∀ (i : Fin r) (n : ℕ), RingHom.ker (c i n) = Ideal.span {(algebraMap (isolatedCurveLevelRing k (n + 1)) (C i (n + 1)) (isolatedCurveLevelParameter k (n + 1))) ^ (n + 1)}) (eC : ∀ i : Fin r, C i 0 ≃+* X.presheaf.stalk (p i)) (heC : ∀ (i : Fin r) (a : k), eC i (algebraMap (isolatedCurveLevelRing k 0) (C i 0) ((isolatedCurveLevelZero k).symm a)) = isolatedCurveScalarToStalk f (p i) a) : ∃ (Y : ℕ → Scheme.{u}) (g : ∀ n : ℕ, Y n ⟶ Spec (.of (isolatedCurveLevelRing k n))) (e : X ≅ Y 0) (j : ∀ n : ℕ, Y n ⟶ Y (n + 1)), (∀ n : ℕ, IsProper (g n) ∧ Flat (g n) ∧ LocallyOfFinitePresentation (g n)) ∧ e.hom ≫ g 0 = f ≫ Spec.map (CommRingCat.ofHom (isolatedCurveLevelZero k).toRingHom) ∧ (∀ n : ℕ, IsPullback (j n) (g n) (g (n + 1)) (Spec.map (CommRingCat.ofHom (isolatedCurveLevelReduction k n)))) ∧ ∃ h : ∀ (i : Fin r) (n : ℕ), (Y n).presheaf.stalk (isolatedCurveSpecialMap Y j e n (p i)) ≃+* C i n, (∀ (i : Fin r) (n : ℕ) (a : isolatedCurveLevelRing k n), h i n (isolatedCurveScalarToStalk (g n) (isolatedCurveSpecialMap Y j e n (p i)) a) = algebraMap _ _ a) ∧ (∀ (i : Fin r) (n : ℕ) (a : (Y (n + 1)).presheaf.stalk (isolatedCurveSpecialMap Y j e (n + 1) (p i))), c i n (h i (n + 1) a) = h i n ((j n).stalkMap (isolatedCurveSpecialMap Y j e n (p i)) a)) ∧ (∀ (i : Fin r) (a : (Y 0).presheaf.stalk (e.hom (p i))), h i 0 a = (eC i).symm (e.hom.stalkMap (p i) a))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe7db8b3d",
+  "group": "NY",
+  "result": "pass",
+  "note": "Clause-by-clause match to node and Stacks 0DZP/06HN/0E7Y: IsProper f, topologicalKrullDim ≤ 1, injective closed points, local smoothness off range p; C i n local/flat/EssFiniteType in free universe v; adjacent reductions as surjective maps with kernel (t^(n+1)) (index shift correct) and R-linearity; eC k-linear. Conclusion: proper/flat/lfp (proper ⇒ fp), e : X ≅ Y 0 over levelZero, IsPullback squares (orientation checked), stalk isos over R_n compatible with j-stalkMaps and eC. r=0, X=∅, dim 0, any characteristic covered. Six helpers real, with source and blueprint docstrings; only proof is sorry; statement field verbatim; lines ≤91; plain imports are proof-plan modules. No duplicate notion found in Sheaf/WeilConjectures. def-weil-field and essentially-finite-type deps have lean null but status mathlib, not a fault. Not recompiled (no file changed). Advisory only: (X − C 0) form of the ideal; IsPullback used for the pullback record."
+ }
+}

@@ -15,7 +15,7 @@ import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.CondensedProductActionInflation
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.AlgebraicGeometry.CondensedModulePullbackExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp

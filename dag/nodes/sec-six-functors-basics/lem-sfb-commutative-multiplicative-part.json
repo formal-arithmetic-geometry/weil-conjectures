@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-commutative-multiplicative-part",
+ "kind": "statement",
+ "title": "Largest multiplicative part of a commutative affine group and scalar extension",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. A group is of multiplicative type if over an algebraic closure $\\bar k$ [def-weil-algebraic-closure] it admits a closed subgroup inclusion into $(\\mathbf G_m)^r$ for some $r\\geq0$ [def-sfb-tori-multiplicative-type, def-sc-gm-ga]. Unipotent means admitting a closed group immersion [def-weil-closed-immersion] into some $\\mathcal U_{n,k}\\subseteq\\operatorname{GL}_{n,k}$, $n\\geq1$ [def-sc-general-linear-group], where $\\mathcal U_{n,k}(A)$ consists of upper triangular matrices with diagonal entries $1$ for every commutative $k$-algebra $A$. Let $C$ be commutative. There is a largest subgroup $C_s\\subseteq C$ of multiplicative type, meaning that every closed subgroup of $C$ of multiplicative type is contained in $C_s$. The represented fppf quotient $C/C_s$ is unipotent. The fppf quotient here is the sheafification of $A\\mapsto C(A)/C_s(A)$ for faithfully flat finitely presented coverings [def-sfb-solvable-group-structure]. For every field extension $K/k$, scalar extension gives $(C_s)_K=(C_K)_s$ as closed subgroup schemes of $C_K$. No smoothness, connectedness or perfectness is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.13(a) and its proof, printed p.328; compatibility of the central multiplicative part with field extension explicitly used in Theorem 16.47(c), printed p.341; Theorem 14.5 and Corollary 14.9, pp.281–282, for unitriangular unipotence."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-algebraic-closure",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-gm-ga",
+  "def-weil-closed-immersion",
+  "def-sc-general-linear-group",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "Write $C=\\operatorname{Spec}B$. By [lem-pc-affine-finite-type-algebra] and [lem-weil-pbc-finite-type-algebra-noetherian], $B$ is Noetherian: a field is Noetherian since its only ideals are $(0)$ and $(1)$. Let $\\mathcal H$ be the set of closed subgroups $H\\subseteq C$ for which $C/H$ is unipotent; the quotients exist by [lem-sfb-affine-normal-quotient-geometry], since $C$ is commutative. The set is nonempty, containing $C$. If $I_H\\subseteq B$ is the ideal of $H$, the sum $I=\\sum_{H\\in\\mathcal H}I_H$ is finitely generated [def-weil-pbc-noetherian-ring]. Each of its finitely many generators is a finite sum from the $I_H$, so $I=I_{H_1}+\\cdots+I_{H_r}$ for finitely many $H_i\\in\\mathcal H$. Their fibre-product intersection $S$ is the closed subgroup defined by $I$: maps $B\\to A$ kill $I$ exactly when they kill all $I_H$. Thus $S=\\bigcap_{H\\in\\mathcal H}H$ scheme-theoretically, not just on field-valued points.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-noetherian-ring",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(a), printed p.328, and Note 16.17, printed p.329."
+   }
+  },
+  {
+   "text": "The diagonal homomorphism $C\\to\\prod_{i=1}^r C/H_i$ has kernel $S$ on every algebra. By [lem-sfb-algebraic-group-homomorphism-factorization] its quotient by that kernel is a closed subgroup of the product. The quotient universal property [lem-sfb-faithfully-flat-group-quotient-universal] identifies it with $C/S$. Choose closed immersions $C/H_i\\hookrightarrow\\mathcal U_{n_i,k}$. Block diagonal matrices give a closed immersion of their product into $\\mathcal U_{\\sum n_i,k}$: the coordinate map is surjective, with all off-block coordinates sent to zero. Hence $C/S$ is unipotent. In the empty-product case it is trivial and embeds in $\\mathcal U_{1,k}$. By construction $S$ is contained in every closed subgroup whose quotient is unipotent.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-faithfully-flat-group-quotient-universal",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(a), printed p.328, and Note 16.17, printed p.329."
+   }
+  },
+  {
+   "text": "Let $\\varphi:S\\to\\mathbf G_a$ be a homomorphism, and put $N=\\ker\\varphi$. By [lem-sfb-algebraic-group-homomorphism-factorization], $S/N$ is a closed subgroup of $\\mathbf G_a$. The map $a\\mapsto\\left(\\begin{smallmatrix}1&a\\\\0&1\\end{smallmatrix}\\right)$ identifies $\\mathbf G_a$ with $\\mathcal U_{2,k}$, so $S/N$ is unipotent. The subgroup correspondence [lem-sfb-affine-normal-quotient-geometry] gives an exact represented fppf sequence $1\\to S/N\\to C/N\\to C/S\\to1$. Apply [lem-sfb-unitriangular-extension]: both end groups have the required unitriangular embeddings, so $C/N$ is unipotent. The minimality in step 2 forces $S\\subseteq N$, while $N\\subseteq S$. Thus $\\varphi=0$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "def-sc-gm-ga",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-unitriangular-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(a), printed p.328, and Note 16.17, printed p.329."
+   }
+  },
+  {
+   "text": "This vanishing remains true over any field extension $L/k$. Indeed, for $A=k[S]$, [lem-sfb-affine-group-coordinate-hopf] and [def-sc-gm-ga] identify $\\operatorname{Hom}(S,\\mathbf G_a)$ with the primitive subspace $P(A)=\\{a:\\Delta a=a\\otimes1+1\\otimes a\\}$. For a primitive element $x\\in L\\otimes_k A$, choose an expression $x=\\sum_{i=1}^m\\lambda_i\\otimes a_i$ with the $\\lambda_i$ linearly independent over $k$. Its primitive equation is $\\sum_i\\lambda_i\\otimes(\\Delta a_i-a_i\\otimes1-1\\otimes a_i)=0$. Applying the coordinate functionals on the span of the $\\lambda_i$ (extended to $L$ by a vector-space basis) makes every $a_i$ primitive. Since $P(A)=0$ by step 3, $x=0$. Conversely zero maps stay zero. The affine fibre-product formula identifies this Hopf algebra with $L[S_L]$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-sc-gm-ga",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18, first paragraph of proof, printed p.237: primitive elements and linear base change."
+   }
+  },
+  {
+   "text": "Apply step 4 with $L=\\bar k$. The group $S_{\\bar k}$ is commutative and has no nonzero additive homomorphisms. Therefore [lem-sfb-multiplicative-additive-vanishing-criterion] makes it $D_{\\bar k}(M)$ for a finitely generated abelian group $M$. Choose generators $m_1,\\ldots,m_t$ of $M$. The algebra map $\\bar k[z_1^{\\pm1},\\ldots,z_t^{\\pm1}]\\to\\bar k[M]$, $z_i\\mapsto e_{m_i}$, is surjective and respects all Hopf operations. Its spectrum is a closed group immersion into $\\mathbf G_m^t$. Thus $S$ is of multiplicative type in exactly the definition of the item.",
+   "uses": [
+    "lem-sfb-multiplicative-additive-vanishing-criterion",
+    "def-weil-closed-immersion",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(a), printed p.328, and Note 16.17, printed p.329."
+   }
+  },
+  {
+   "text": "If $H\\subseteq C$ is of multiplicative type, then $H_{\\bar k}$ is a closed subgroup of a split torus. By [lem-sfb-split-torus-subgroups-diagonalizable] it is diagonalizable. The closed unitriangular immersion of $(C/S)_{\\bar k}$ is obtained by tensoring the coordinate surjection of step 2. Consequently [lem-sfb-diagonalizable-to-unipotent-trivial] makes the composite $H_{\\bar k}\\to(C/S)_{\\bar k}$ trivial. It is already trivial over $k$: the difference of its coordinate map and the identity-valued coordinate map becomes zero after tensoring with $\\bar k$, and $V\\to\\bar k\\otimes_k V$ is injective for every $k$-vector space $V$ (extend a nonzero vector to a basis). Since $\\ker(C\\to C/S)=S$, the inclusion of $H$ factors through $S$. Thus $C_s:=S$ is the largest multiplicative-type subgroup and has the asserted represented unipotent quotient.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-diagonalizable-to-unipotent-trivial",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(a), printed p.328, and Note 16.17, printed p.329."
+   }
+  },
+  {
+   "text": "Let $K/k$ be any field extension. Applying steps 1–6 over $K$ gives $T=(C_K)_s$ with unipotent quotient. Step 4 gives $\\operatorname{Hom}(S_K,\\mathbf G_{a,K})=0$, hence also this vanishing over an algebraic closure $\\Omega$ of $K$. The criterion and the explicit generator map of step 5 make $S_K$ multiplicative, so maximality gives $S_K\\subseteq T$. Quotient base change [lem-sfb-affine-normal-quotient-geometry] identifies $C_K/S_K=(C/S)_K$. This group is unipotent over $K$: tensoring with $K$ the surjective coordinate map $k[\\mathcal U_{n,k}]=k[x_{ij}:i<j]\\to k[C/S]$ of step 2 gives a surjection $K[x_{ij}:i<j]\\to K\\otimes_kk[C/S]$ [def-weil-pbc-module-tensor-product] compatible with the Hopf maps, i.e. a closed group immersion $(C/S)_K\\hookrightarrow\\mathcal U_{n,K}$, exactly as over $\\bar k$ in step 6. Over $\\Omega$, [lem-sfb-split-torus-subgroups-diagonalizable] and [lem-sfb-diagonalizable-to-unipotent-trivial] make $T_\\Omega\\to(C_K/S_K)_\\Omega$ trivial. The same coordinate-basis injectivity argument of step 6 descends this equality to $K$, giving $T\\subseteq S_K$. The two inclusions are inclusions of the actual closed subgroup functors in $C_K$, so $S_K=T$ as closed subgroup schemes.",
+   "uses": [
+    "lem-sfb-multiplicative-additive-vanishing-criterion",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-diagonalizable-to-unipotent-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(a), printed p.328, and Note 16.17, printed p.329."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-faithfully-flat-group-quotient-universal",
+  "def-sc-gm-ga",
+  "lem-sfb-unitriangular-extension",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-multiplicative-additive-vanishing-criterion",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-diagonalizable-to-unipotent-trivial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.13(a), printed p.328, and Note 16.17, printed p.329."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Mm]ultiplicative[Tt]ype|[Uu]nipotent.*[Qq]uotient|[Dd]iagonalizable.*[Ss]ubgroup",
+   "results": "{\"t\": \"2026-10-24T07:03:31Z\", \"tool\": \"grep\", \"query\": \"[Mm]ultiplicative[Tt]ype|[Uu]nipotent.*[Qq]uotient|[Dd]iagonalizable.*[Ss]ubgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"CommGroup\"",
+   "results": "{\"t\": \"2026-10-24T07:03:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"CommGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every commutative affine algebraic group over a field has a largest multiplicative type subgroup with unipotent quotient compatible with field extension",
+   "results": "{\"t\": \"2026-10-24T07:03:33Z\", \"tool\": \"leanfinder\", \"query\": \"Every commutative affine algebraic group over a field has a largest multiplicative type subgroup with unipotent quotient compatible with field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.absoluteGaloisGroupAbelianization\", \"galGroupBasis\", \"top_fixedByFinite\", \"ValuationSubring.decompositionSubgroup\", \"instIsAbelianGalois\", \"InfiniteGalois.profiniteGalGrp\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Field.instGroupAbsoluteGaloisGroup\"], \"digest\": \"b4c00de81615b003\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Largest multiplicative subgroup of a commutative algebraic group with unipotent quotient",
+   "results": "{\"t\": \"2026-10-24T07:03:35Z\", \"tool\": \"leansearch\", \"query\": \"Largest multiplicative subgroup of a commutative algebraic group with unipotent quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.unop_eq_top\", \"Subgroup.ofUnits_iSup\", \"Subgroup.unop\", \"instSMulCommClassQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"rootsOfUnity\", \"Subgroup.topEquiv\", \"Subgroup.instTop\", \"AddSubgroup.unop_eq_top\"], \"digest\": \"666630597e3b9622\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative group scheme contains a characteristic subgroup of multiplicative type maximal among such subgroups and unipotent quotient",
+   "results": "{\"t\": \"2026-10-24T07:04:17Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative group scheme contains a characteristic subgroup of multiplicative type maximal among such subgroups and unipotent quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frattini_nilpotent\", \"isNilpotent_of_finite_tfae\", \"CommGroup.primaryComponent\", \"frattini_characteristic\", \"CommGroup.isNilpotent\", \"isNilpotent_of_product_of_sylow_group\", \"frattini\", \"Sylow.le_center_or_le_commutator\"], \"digest\": \"f8ce2a03f4934623\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|diagonali[sz]able.*group|unipotent.*quotient",
+   "results": "{\"t\": \"2026-10-24T07:31:30Z\", \"tool\": \"grep\", \"query\": \"multiplicative.?type|diagonali[sz]able.*group|unipotent.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Translate/ToAdditive.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"Mathlib/Algebra/Group/TypeTags/Hom.lean\"], \"digest\": \"3a71bd3a5187cd62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read returned signatures: abstract groups, matrix embeddings, formally unramified morphisms and base-change properties do not assert the required group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative affine algebraic group has a largest subgroup of multiplicative type and unipotent quotient compatible with all field extensions",
+   "results": "{\"t\": \"2026-10-24T07:31:33Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative affine algebraic group has a largest subgroup of multiplicative type and unipotent quotient compatible with all field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.absoluteGaloisGroupAbelianization\", \"isSolvable_of_comm\", \"CommGroup.isSolvable\", \"instIsAbelianGalois\", \"IsAbelianGalois.toIsMulCommutative\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"RootPairing.GeckConstruction.instHasTrivialRadical\"], \"digest\": \"b4662021bd0d55cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read returned signatures: abstract groups, matrix embeddings, formally unramified morphisms and base-change properties do not assert the required group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Commutative affine group scheme maximal diagonalizable subgroup unipotent quotient",
+   "results": "{\"t\": \"2026-10-24T07:32:00Z\", \"tool\": \"leansearch\", \"query\": \"Commutative affine group scheme maximal diagonalizable subgroup unipotent quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"QuotientAddGroup.Quotient.addCommGroup\", \"CommGrpMax\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AddCommGrpMax\", \"Abelianization\", \"QuotientGroup.Quotient.commGroup\", \"Con.commGroup\"], \"digest\": \"ea00c89c5c146efd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read returned signatures: abstract groups, matrix embeddings, formally unramified morphisms and base-change properties do not assert the required group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"CommGroup\"",
+   "results": "{\"t\": \"2026-10-24T07:32:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"CommGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal subgroup of multiplicative type in a commutative group scheme is the intersection of all subgroups with unipotent quotient",
+   "results": "{\"t\": \"2026-10-24T07:38:22Z\", \"tool\": \"leanfinder\", \"query\": \"The maximal subgroup of multiplicative type in a commutative group scheme is the intersection of all subgroups with unipotent quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frattini\", \"frattini_characteristic\", \"CommGroup.isNilpotent\", \"FiniteMulArchimedeanClass.subgroup_eq_bot\", \"MulArchimedeanClass.ballSubgroup_top\", \"frattini_le_coatom\", \"frattini_nilpotent\", \"Subgroup.instTop\"], \"digest\": \"7eaa22f5ee16d001\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read returned signatures: abstract groups, matrix embeddings, formally unramified morphisms and base-change properties do not assert the required group-scheme theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-central-torus-quotient",
+  "date": "2026-10-24",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Theorem 16.47(a),(c), printed p.341, as used in the first case of the proof of Proposition 17.81, p.379; Theorem 14.5(a),(b), pp.281–282. Quotient by the central smooth torus is the represented fppf quotient (Theorem 5.28, p.110). Supporting input for this split: Theorem 16.13(a) and its proof, printed p.328; compatibility of the central multiplicative part with field extension explicitly used in Theorem 16.47(c), printed p.341; Theorem 14.5 and Corollary 14.9, pp.281–282, for unitriangular unipotence.",
+   "via": [
+    "lem-sfb-nilpotent-central-torus-quotient",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-commutative-multiplicative-part",
+  "worker": "stage1",
+  "summary": "Followed Milne 16.13(a) through the finite scheme-theoretic intersection, the kernel of an arbitrary additive homomorphism, and the primitive-element base-change calculation. Reused existing quotient, diagonalizable and vanishing nodes; created only the nonsmooth extension prerequisite (the field-descent node was dropped on review: step 7 needs only the trivial direction, base change of a unitriangular embedding). No statement change. Added the exact scalar-extension reference, Note 16.17.",
+  "blueprint": "Supporting input to the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration branch, exactly the Milne 16.13 input specified in blueprint.from.place; current latest unit and direct-images proof read. Whole-blueprint searches for multiplicative, unipotent, primitive, fixed vector, unitriangular, extension of groups, and field extension found no equivalent item or new prerequisite. blueprint_refs ancestor returns None, retained faithfully.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-2006ddf5a",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-2006ddf5a (reviewer sub-agent of L); spot-checked: Mathematics read in full and correct. The statement matches Milne 16.13(a) (p.328) and Note 16.17(b) (p.329). Unipotent here means a unitriangular embedding, which matches Milne by Thm 14.5(a)⇔(b). Step checks: steps 1–3 follow Milne's intersection argument, with the finiteness made explicit by the Noetherian coordinate ring, and 'extension of unipotents is unipotent' gives φ=0. Step 4 (primitive elements under base change, linear independence) is correctly elementary. Step 5 applies the vanishing criterion over k̄, matching its hypotheses. Step 6 uses diagonalizable→unipotent trivial (Milne 14.18) and descends by injectivity. Step 7 is Note 16.17's argument. Small cases checked: μ_p (S=C), α_p and G_a (S=1), G_m×α_p (S=G_m). New node lem-sfb-unitriangular-extension is true (Milne 14.7/6.45, no smoothness needed), self-contained and searched. It is not a duplicate: lem-sfb-smooth-unipotent-extension needs an algebraically closed field, smooth groups and a different definition. Fix: dropped lem-sfb-unitriangular-field-descent as unneeded. Its only citation was step 7, which uses only the direction 'G unipotent ⇒ G_K unipotent', a one-line base change of a closed embedding into U_n that step 6 already writes out. The hard descent direction (Milne 14.9 converse) is never used. Step 7 now tensors the step-2 coordinate surjection with K (cite def-weil-pbc-module-tensor-product). proof_deps updated, source place 14.9→14.7, split_report summary notes the drop. Batch-5 flags: def-trf-scheme-cover-descent-datum (a general descent-datum definition) and lem-trf-fppf-covering-base-change (a Mathlib-leaf site fact) are generic foundations, not steps of the trace-formula or Poincaré-duality proofs, so accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CommutativeMultiplicativePart",
+  "declaration": "AlgebraicGeometry.commutative_multiplicative_part",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CommutativeMultiplicativePart.lean",
+  "statement": "theorem commutative_multiplicative_part {k : Type u} [Field k] (C : Grp (Over (Spec (.of k)))) [IsAffine C.X.left] [LocallyOfFiniteType C.X.hom] [QuasiCompact C.X.hom] [IsCommMonObj C.X] : ∃ (S Q : Grp (Over (Spec (.of k)))) (i : S ⟶ C) (q : C ⟶ Q), SolvableGroupStructure.IsAlgebraic S ∧ SolvableGroupStructure.IsAlgebraic Q ∧ IsClosedSubgroupScheme i.hom.hom ∧ MultiplicativeType.IsMultiplicativeType S ∧ (∀ (H : Grp (Over (Spec (.of k)))) (j : H ⟶ C), IsClosedSubgroupScheme j.hom.hom → MultiplicativeType.IsMultiplicativeType H → ∃ f : H ⟶ S, f ≫ i = j) ∧ SolvableGroupStructure.IsFppfQuotient i.hom.hom q ∧ (∃ n : ℕ, 0 < n ∧ ∃ r : Q.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k, IsClosedSubgroupScheme r ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (x : (Spec (.of A)).asOver (Spec (.of k)) ⟶ Q.X), (∀ a : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (x ≫ r)).val ⟨a⟩ ⟨a⟩ = 1) ∧ (∀ a b : Fin n, b < a → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (x ≫ r)).val ⟨a⟩ ⟨b⟩ = 0)) ∧ ∀ (K : Type u) [Field K] [Algebra k K], IsClosedSubgroupScheme ((MultiplicativeType.baseChange (K := K)).map i).hom.hom ∧ MultiplicativeType.IsMultiplicativeType ((MultiplicativeType.baseChange (K := K)).obj S) ∧ ∀ (H : Grp (Over (Spec (.of K)))) (j : H ⟶ (MultiplicativeType.baseChange (K := K)).obj C), IsClosedSubgroupScheme j.hom.hom → MultiplicativeType.IsMultiplicativeType H → ∃ f : H ⟶ (MultiplicativeType.baseChange (K := K)).obj S, f ≫ (MultiplicativeType.baseChange (K := K)).map i = j",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1db46daf6",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read item node, report, module and every dependency declaration (MultiplicativeType.baseChange/IsMultiplicativeType/splitTorus, SolvableGroupStructure.IsAlgebraic/IsFppfQuotient/IsUnipotent, IsClosedSubgroupScheme, GeneralLinearGroup.homMulEquiv). All clauses match the node: commutative affine finite-type C with no smoothness assumed; closed multiplicative-type S with universal factorization; recorded IsFppfQuotient Q; unipotence as a closed GL_n embedding (n>0) whose matrices are upper unitriangular over all k-algebras (index convention checked; the existing smooth IsUnipotent is correctly avoided because C/C_s may be alpha_p); for every K/k the base-changed inclusion is closed, multiplicative and largest. Edge cases (trivial group, mu_p, alpha_p, G_a, G_m x alpha_p, imperfect k, K=k) covered. Single universe u is forced by the recorded baseChange/GL interfaces. Node copy differs from live only in lean; lean.statement verbatim; imports exist; docstrings carry source, blueprint and all 7 steps; sorry only, no definitions. Not recompiled; no files changed."
+ }
+}

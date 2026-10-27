@@ -24,6 +24,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+public import Mathlib.Order.CompletePartialOrder
 
 /-! # The two-term integral coefficient example
 

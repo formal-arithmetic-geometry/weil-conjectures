@@ -149,7 +149,18 @@
   "item": "lem-weil-pbc-ogoma",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -196,5 +207,32 @@
    "Module.exists_annihilator_of_subsingleton_localizedModule"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, $S\\subseteq A$ a multiplicative subset and $M$ a finitely generated $A$-module such that $S^{-1}M=0$, i.e. for every $m\\in M$ there is $t\\in S$ with $tm=0$. Then there is $s\\in S$ with $sM=0$ (that is, $sm=0$ for all $m\\in M$).",
+  "proof": [
+   {
+    "text": "Since $M$ is finitely generated, choose $m_1,\\dots,m_n\\in M$ ($n\\ge 0$) such that every $m\\in M$ can be written $m=\\sum_{i=1}^n a_im_i$ with $a_i\\in A$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For each $i$, $m_i/1=0$ in $S^{-1}M=0$; by the description of the kernel of the localization map ($m/1=0$ iff $um=0$ for some $u\\in S$; this is the hypothesis as phrased in the statement) there is $t_i\\in S$ with $t_im_i=0$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Put $s=t_1t_2\\cdots t_n$ ($s=1$ if $n=0$); $s\\in S$ since $S$ is multiplicative and contains $1$. For $m=\\sum_i a_im_i\\in M$, commutativity of $A$ gives $sm=\\sum_i a_i\\big(\\prod_{j\\ne i}t_j\\big)(t_im_i)=0$. Hence $sM=0$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

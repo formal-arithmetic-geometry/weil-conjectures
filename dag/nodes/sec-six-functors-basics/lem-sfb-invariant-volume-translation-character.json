@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-invariant-volume-translation-character",
+ "kind": "statement",
+ "title": "Invariant volume forms and valuation-unit translation multipliers",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $E$, residue field $k$, and $T=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. Smooth and finite type have the meanings of [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Write $R^{\\mathrm{sh}}$ for a strict henselization at a geometric closed point and $E^{\\mathrm{sh}}=\\operatorname{Frac}(R^{\\mathrm{sh}})$ [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. A subset $C\\subseteq X(E^{\\mathrm{sh}})$ of a finite-type $E$-scheme is bounded if some finite affine cover $U_i=\\operatorname{Spec}B_i$, finite $E$-algebra generating lists $b_{ij}$, decomposition $C=\\bigcup_i C_i$ with $C_i\\subseteq U_i(E^{\\mathrm{sh}})$, and integers $c_i$ satisfy $v(b_{ij}(x))\\geq c_i$ for $x\\in C_i$, where $v(0)=+\\infty$. Let $G/E$ be a smooth separated finite-type group scheme of dimension $d$ [def-sc-group-scheme]. There exists a nowhere vanishing left-invariant section $\\omega$ of $\\Omega^d_{G/E}$ [def-sc-relative-differential-sheaf, def-sc-sheaf-exterior-power], unique up to multiplication by $E^\\times$. For this section there is a group-scheme character $\\chi:G\\to\\mathbb G_{m,E}$, where $\\mathbb G_m=\\operatorname{Spec}E[t,t^{-1}]$, such that, for every extension field $F/E$ and $g\\in G(F)$, $\\ell_g^*\\omega_F=\\omega_F$ and $r_g^*\\omega_F=\\chi(g)\\omega_F$, with $\\ell_g(x)=gx$ and $r_g(x)=xg$. If $G(E^{\\mathrm{sh}})$ is bounded, then $v(\\chi(g))=0$ for all $g\\in G(E^{\\mathrm{sh}})$, and hence also for all $g\\in G(E)$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "4.2 Proposition 1, Corollary 3 and Propositions 4-5, printed pp.101-103 (PDF pp.107-109). No use of Remark 6 or its external references. Primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "Put $p:G\\to\\operatorname{Spec}E$ and $V=e^*\\Omega^1_{G/E}$. By [lem-sfb-group-scheme-differentials-from-identity], $\\Omega^1_{G/E}\\cong p^*V$. Applying [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] at the identity shows that $V$ has some finite dimension $n$. The same theorem at any $x\\in G$, together with the displayed trivialization, gives $\\dim_xG=n$: the free differential module there has rank $\\dim_xG$, while $p^*V$ has rank $n$. These ranks agree by tensoring an isomorphism with the residue field. Thus $\\dim G=n=d$. Explicitly, $\\dim_xG\\leq\\dim G$ by restriction of chains to opens; conversely, a chain $Z_0\\subsetneq\\cdots\\subsetneq Z_r$ of irreducible closed subsets and $x\\in Z_0$ restricts to a chain of the same length in every open neighbourhood of $x$. Indeed its intersection with each $Z_i$ is a nonempty open in $Z_i$ and cannot be contained in the proper closed subset $Z_{i-1}$. Hence $r\\leq\\dim_xG=n$. We specify the left-translation trivialization next; an arbitrary bundle trivialization need not give invariant sections.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-sfb-group-scheme-differentials-from-identity",
+    "def-pc-module-pullback",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 4.2 Propositions 1-2 and Corollary 3; Stacks Tags 02G1 and 047I."
+   }
+  },
+  {
+   "text": "Here is the specified isomorphism $A:p^*V\\to\\Omega^1_{G/E}$. On $G\\times_EG$ with coordinates $(g,x)$, the map $a(g,x)=(g,g^{-1}x)$ is an automorphism over the first factor, inverse $(g,x)\\mapsto(g,gx)$. The square with top map $a$, vertical first projections and bottom identity is cartesian: a compatible test map lifts uniquely by the displayed inverse of $a$. Apply [lem-trf-relative-differential-sheaf-base-change] first to the second projection base change of $G/E$, and then to this automorphism over $G$: the differential isomorphism has local rule $df\\mapsto d(f(g^{-1}x))$, with $g$ held constant. Pull it back along the diagonal $x=g$. Its source becomes $p^*e^*\\Omega^1_{G/E}$ and its target becomes $\\Omega^1_{G/E}$, by the composition comparison for ordinary module pullback. This is $A$, and at a $T$-point $g$ it is $(d\\ell_{g^{-1}})_g^*:V_T\\to\\Omega^1_{G_T/T}|_g$. The chain rule and functoriality here follow on local generators from $d(f^\\sharp a)$ and the universal property of Kähler differentials; exterior pullbacks send wedges to the wedges of their images. These formulas also prove compatibility with arbitrary base change.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-trf-relative-differential-sheaf-base-change",
+    "def-pc-module-pullback",
+    "def-weil-pbc-kahler-differentials",
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 4.2 Proposition 1, universal-translation construction; Stacks Tag 01V0; left-translation version of Tag 047I."
+   }
+  },
+  {
+   "text": "Choose a basis $v_1,\\ldots,v_d$ of $V$ and put $\\omega=A(v_1)\\wedge\\cdots\\wedge A(v_d)$. It generates $\\Omega^d_{G/E}$ everywhere: under $A$ it is the top wedge of a basis of the free module $\\mathcal O_G\\otimes_EV$. For any $T$-point $h$, the equality $\\ell_{(hx)^{-1}}\\ell_h=\\ell_{x^{-1}}$ implies $(d\\ell_h)_x^*A_{hx}=A_x$. Taking wedges proves $\\ell_h^*\\omega_T=\\omega_T$. This is an identity for the universal pair $(h,x)$ and hence for every base change. Conversely, if $\\eta$ is left-invariant, then $\\eta|_g=A_g(\\eta|_e)$, by applying invariance to $\\ell_{g^{-1}}$. This determines $\\eta$ from its identity value, also for arbitrary $T$-points. If $\\eta$ is only assumed invariant under $\\ell_g$ for field-valued points $g$, as in the statement, take $c\\in E$ with $\\eta|_e=c\\,\\omega|_e$ and apply this at every $x\\in G$ to the canonical $\\kappa(x)$-point: locally $\\eta-c\\,\\omega=f\\omega$ with $f(x)=0$ in $\\kappa(x)$ at every point, so $f$ lies in every prime of each affine coordinate ring and is nilpotent. Since $G$ is smooth over $E$ it is reduced [sbc-lem-smooth-geometrically-reduced], so $f=0$ and $\\eta=c\\,\\omega$. The line $\\bigwedge^dV$ has basis $v_1\\wedge\\cdots\\wedge v_d$, so two nowhere vanishing invariant top forms differ by exactly one scalar in $E^\\times$. For $d=0$ the empty wedge is $1$ and the same statements hold.",
+   "uses": [
+    "def-sc-sheaf-exterior-power",
+    "def-weil-pbc-exterior-algebra",
+    "def-sc-group-scheme",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 4.2 Proposition 1 and Corollary 3; uniqueness also recalled at the start of 4.3."
+   }
+  },
+  {
+   "text": "Over $G\\times_EG$ with coordinates $(x,g)$, use the second projection as base. Universal right translation $(x,g)\\mapsto(xg,g)$ is an automorphism with inverse $(x,g)\\mapsto(xg^{-1},g)$. Differential base change and its local rule give an isomorphism of the relative top differential line. Apply it to $\\omega$, and restrict along the identity section $g\\mapsto(e,g)$. Comparing with the basis $\\omega_e$ defines an invertible regular function $u\\in\\Gamma(G,\\mathcal O_G)^\\times$; invertibility follows because both the translation and its differential have the displayed inverse. Affine-locally the map $E[t,t^{-1}]\\to\\mathcal O_G(U)$, $t\\mapsto u|_U$, defines a morphism $U\\to\\mathbb G_{m,E}$. The restrictions agree since they send $t$ to the same function, so [lem-weil-pbc-scheme-morphism-gluing] gives $\\chi:G\\to\\mathbb G_{m,E}$. This construction is over the parameter scheme $G$, not just over extension-field points.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "def-sc-sheaf-exterior-power",
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum",
+    "def-pc-scheme",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 4.2 Proposition 4, functorial scalar construction; right-translation convention instead of inner conjugation."
+   }
+  },
+  {
+   "text": "Left and right translations commute, since $h(xg)=(hx)g$. Thus $r_g^*\\omega_T$ is left-invariant, and its identity value is $u(g)\\omega_e$ by the construction in Step 4. The uniqueness argument of Step 3 over $T$ yields $r_g^*\\omega_T=u(g)\\omega_T$. Since $r_{gh}=r_h\\circ r_g$, pullback reverses composition and gives $r_{gh}^*\\omega_T=u(h)u(g)\\omega_T$. The generator $\\omega_T$ can be cancelled, so $u(gh)=u(g)u(h)$ and $u(e)=1$. Apply these identities to the universal pair on $G\\times_EG$ to obtain equality of scheme morphisms. Hence $\\chi$ is a group-scheme character, and in particular gives the required formulas over every extension field $F/E$.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 4.2 Proposition 4; the character here is the inverse of the character for int_g used in BLR."
+   }
+  },
+  {
+   "text": "Take the affine cover, generators, subsets $C_i$ and integers $c_i$ witnessing boundedness of $C=G(E^{\\mathrm{sh}})$. On $U_i=\\operatorname{Spec}B_i$, the regular function $u$ is a polynomial $P_i(b_{i1},\\ldots,b_{is_i})$ with coefficients in $E$. For a nonzero coefficient $a_{i\\alpha}$ its monomial has valuation at least $v(a_{i\\alpha})+|\\alpha|c_i$ on $C_i$. The valuation inequality for a finite sum gives the minimum of these finitely many integers as a lower bound for $v(u(x))$ on $C_i$. Taking the minimum over the finite cover gives one integer $M$ such that $v(\\chi(x))\\geq M$ on $C$. Empty $C_i$ may be ignored, and a chart with an empty generator list uses constant polynomials. Thus no general theorem that morphisms preserve boundedness is being assumed.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 4.2 Proposition 5, first sentence expanded using the boundedness definition in the item."
+   }
+  },
+  {
+   "text": "For fixed $g\\in G(E^{\\mathrm{sh}})$ and every integer $n$, the power $g^n$ lies in this same group, and the character identity gives $v(\\chi(g^n))=n\\,v(\\chi(g))$. This integer is at least $M$ for every $n\\in\\mathbb Z$. A nonzero integer $a=v(\\chi(g))$ contradicts that bound by taking $n$ arbitrarily large with sign opposite to $a$. Hence $v(\\chi(g))=0$. The valuation on $E^{\\mathrm{sh}}$ restricts to that on $E$, so the conclusion also holds for every $E$-point.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 4.2 Proposition 5, bounded-subgroup argument expanded; no use of Remark 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-dimension",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-sc-group-scheme",
+  "def-sc-sheaf-exterior-power",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sfb-group-scheme-differentials-from-identity",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 4.2 Propositions 1-2, Corollary 3 and Propositions 4-5, printed pp.101-103; online primary scan PDF pp.107-109; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth algebraic group has an invariant top differential form and right translations scale it by a character whose values on a bounded group are valuation units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MeasureTheory.distribHaarChar\", \"module\": \"Mathlib/MeasureTheory/Measure/Haar/DistribChar\", \"type\": \"{G : Type u_1} →\\n  (A : Type u_2) →\\n    [inst : Group G] →\\n      [inst_1 : AddCommGroup A] →\\n        [inst_2 : DistribMulAction G A] →\\n          [inst_3 : TopologicalSpace A] →\\n            [IsTopologicalAddGroup A] → [LocallyCompactSpace A] → [ContinuousConstSMul G A] → G →* NNReal\", \"doc\": \"The monoid homomorphism from a group $G$ to the non-negative real numbers $\\\\mathbb{R}_{\\\\geq 0}$, defined by assigning to each element $g \\\\in G$ the scalar factor between the additive Haar measure tran\"}\n  {\"name\": \"MeasureTheory.distribHaarChar_pos\", \"module\": \"Mathlib/MeasureTheory/Measure/Haar/DistribChar\", \"type\": \"∀ {G : Type u_1} {A : Type u_2} [inst : Group G] [inst_1 : AddCommGroup A] [inst_2 : DistribMulAction G A]\\n  [inst_3 : TopologicalSpace A] [inst_4 : IsTopologicalAddGroup A] [inst_5 : LocallyCompactSpace A]\\n  [inst_6 : ContinuousConstSMul G A] {g : G}, 0 < (MeasureTheory.distribHaarChar A) g\", \"doc\": \"The distributive Haar measure character is a monoid homomorphism from a group $ G $ to the non-negative real numbers $ \\\\mathbb{R}_{\\\\geq 0} $, defined by assigning to each element $ g \\\\in G $ the posit\"}\n  {\"name\": \"MeasureTheory.Measure.map_right_mul_eq_modularCharacterFun_smul\", \"module\": \"Mathlib/MeasureTheory/Group/ModularCharacter\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : LocallyCompactSpace G] [inst_4 : MeasurableSpace G] [BorelSpace G] (μ : MeasureTheory.Measure G)\\n  [μ.IsHaarMeasure] [μ.InnerRegular] (g : G),\\n  MeasureTheory.Measure.map (fun x => x * g) μ = \", \"doc\": \"For a locally compact topological group $G$ equipped with a left Haar measure $\\\\mu$ and an inner regular measure, the pushforward measure of right multiplication by any element $g \\\\in G$ satisfies $\\\\m\"}\n  {\"name\": \"MeasureTheory.Measure.modularCharacterFun\", \"module\": \"Mathlib/MeasureTheory/Group/ModularCharacter\", \"type\": \"{G : Type u_1} →\\n  [inst : TopologicalSpace G] → [inst_1 : Group G] → [IsTopologicalGroup G] → [LocallyCompactSpace G] → G → NNReal\", \"doc\": \"For a locally compact topological group $ G $ with Haar measure $ \\\\mu $, the modular character function assigns to each element $ g \\\\in G $ the non-negative real number $ c $ such that the pushforward\"}\n  {\"name\": \"MeasureTheory.Measure.modularCharacterFun_eq_haarScalarFactor\", \"module\": \"Mathlib/MeasureTheory/Group/ModularCharacter\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : LocallyCompactSpace G] [inst_4 : MeasurableSpace G] [inst_5 : BorelSpace G] (μ : MeasureTheory.Measure G)\\n  [inst_6 : μ.IsHaarMeasure] (g : G),\\n  MeasureTheory.Measure.modularCharacterFun g = \", \"doc\": \"For a locally compact topological group $ G $ with Haar measure $ \\\\mu $, the modular character value at an element $ g \\\\in G $ equals the scalar factor relating the pushforward measure under right mul\"}\n  {\"name\": \"MeasureTheory.distribHaarChar_apply\", \"module\": \"Mathlib/MeasureTheory/Measure/Haar/DistribChar\", \"type\": \"∀ {G : Type u_1} (A : Type u_2) [inst : Group G] [inst_1 : AddCommGroup A] [inst_2 : DistribMulAction G A]\\n  [inst_3 : TopologicalSpace A] [inst_4 : IsTopologicalAddGroup A] [inst_5 : LocallyCompactSpace A]\\n  [inst_6 : ContinuousConstSMul G A] (g : G),\\n  (MeasureTheory.distribHaarChar A) g =\\n    (Do\", \"doc\": \"For each element $ g $ in a group $ G $ acting continuously and distributively on a locally compact topological additive commutative group $ A $, the distributive Haar character evaluated at $ g $ equ\"}\n  {\"name\": \"MeasureTheory.mulEquivHaarChar_pos\", \"module\": \"Mathlib/MeasureTheory/Measure/Haar/MulEquivHaarChar\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : MeasurableSpace G] [inst_3 : BorelSpace G]\\n  [inst_4 : IsTopologicalGroup G] [inst_5 : LocallyCompactSpace G] (φ : G ≃ₜ* G), 0 < MeasureTheory.mulEquivHaarChar φ\", \"doc\": \"For a continuous group equivalence $\\\\varphi : G \\\\to G$ on a locally compact topological group $G$, the pushforward of the Haar measure $\\\\mu$ under $\\\\varphi$ satisfies $\\\\varphi_*\\\\mu = c \\\\cdot \\\\mu$ for \"}\n  {\"name\": \"MeasureTheory.Measure.haarScalarFactor_self\", \"module\": \"Mathlib/MeasureTheory/Measure/Haar/Unique\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : MeasurableSpace G] [inst_4 : BorelSpace G] (μ : MeasureTheory.Measure G) [inst_5 : μ.IsHaarMeasure],\\n  μ.haarScalarFactor μ = 1\", \"doc\": \"For any Haar measure $\\\\mu$ on a topological group $G$, the scalar factor $c$ relating $\\\\mu$ to itself satisfies $c = 1$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant differential forms trivialize the cotangent bundle of a smooth algebraic group and the adjoint determinant is a character",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LeftInvariantDerivation.left_invariant''\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LeftInvariantDerivation\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Monoid G] [in\", \"doc\": \"For any left-invariant derivation $ D $ on a smooth group $ G $ modeled over a nontrivially normed field $ \\\\mathbb{K} $ with values in a normed vector space $ E $, and for every element $ g \\\\in G $, t\"}\n  {\"name\": \"mdifferentiable_mulInvariantVectorField\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"(v : GroupLieAlgebra I G) :\\n  MDifferentiable I I.tangent (fun (g : G) ↦ (mulInvariantVectorField v g : TangentBundle I G))\", \"doc\": \"For any element $ v $ in the Lie algebra $ \\\\mathfrak{g} = T_eG $ of a Lie group $ G $, the left-invariant vector field associated to $ v $, defined by $ g \\\\mapsto \\\\mathrm{d}(L_g)_e(v) \\\\in T_gG $, is d\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"LeftInvariantDerivation.ext_iff\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LeftInvariantDerivation\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Monoid G] [in\", \"doc\": \"Two left-invariant derivations on a charted group are equal if and only if they evaluate to the same value on every smooth function from the group to the underlying nontrivially normed field.\"}\n  {\"name\": \"LeftInvariantDerivation.instLinearMapClassContMDiffMapModelWithCornersSelfSomeENatTop\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LeftInvariantDerivation\", \"type\": \": LinearMapClass (LeftInvariantDerivation I G) 𝕜 C^∞⟮I, G; 𝕜⟯ C^∞⟮I, G; 𝕜⟯\", \"doc\": \"The space of left-invariant derivations on a charted group modeled over a nontrivially normed field $\\\\mathbb{K}$ is equipped with a linear structure over $\\\\mathbb{K}$, making it a module of linear map\"}\n  {\"name\": \"contMDiff_mulInvariantVectorField\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"(v : GroupLieAlgebra I G) :\\n  ContMDiff I I.tangent (minSmoothness 𝕜 2) (fun (g : G) ↦ (mulInvariantVectorField v g : TangentBundle I G))\", \"doc\": \"For a Lie group $ G $ modeled on a normed vector space $ E $ via a model with corners $ I $, and for any element $ v $ in the Lie algebra $ \\\\mathfrak{g} = T_eG $, the map assigning to each $ g \\\\in G $\"}\n  {\"name\": \"LeftInvariantDerivation.coeFnAddMonoidHom_apply\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LeftInvariantDerivation\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) (G : Type u_4)\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Monoid G] [in\", \"doc\": \"The canonical additive monoid homomorphism that maps each left-invariant derivation on a charted group $ G $ to its corresponding function on $ C^\\\\infty $-smooth maps $ G \\\\to \\\\mathbb{K} $, preserving \"}\n  {\"name\": \"mdifferentiableAt_mulInvariantVectorField\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"(v : GroupLieAlgebra I G) {g : G} :\\n  MDifferentiableAt I I.tangent (fun (g : G) ↦ (mulInvariantVectorField v g : TangentBundle I G)) g\", \"doc\": \"For a Lie group $ G $ modeled on a normed vector space $ E $ via a model with corners $ I $, the left-invariant vector field associated to an element $ v $ of the Lie algebra $ \\\\mathfrak{g} = T_eG $ i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGroupScheme\", \"differential\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*differential|differential.*invariant|modularCharacter|adjoint.*determinant",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"line\": \"382\", \"text\": \"  (\\\"modularCharacter\\\", \\\"AddModularCharacter\\\"),\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/ModularCharacter.lean\", \"line\": \"22\", \"text\": \"* `modularCharacterFun`: Define the modular character function. If `μ` is a left Haar measure on `G`\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/ModularCharacter.lean\", \"line\": \"25\", \"text\": \"  depend on the measure chosen is `modularCharacterFun_eq_haarScalarFactor`.\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/ModularCharacter.lean\", \"line\": \"26\", \"text\": \"* `modularCharacter`: The homomorphism G →* ℝ≥0 whose toFun is `modularCharacterFun`.\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/ModularCharacter.lean\", \"line\": \"42\", \"text\": \"  See also `modularCharacter` that defines the map as a homomorphism. -/\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/ModularCharacter.lean\", \"line\": \"45\", \"text\": \"noncomputable def modularCharacterFun (g : G) : ℝ≥0 :=\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/DistribChar.lean\", \"line\": \"23\", \"text\": \"`MeasureTheory.Measure.modularCharacter` for the analogous definition when the action is\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"line\": \"208\", \"text\": \"  rw [← left_invariant, hfdifferential_apply, hfdifferential_apply, L_mul, fdifferential_comp,\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"line\": \"211\", \"text\": \"  rw [fdifferential_apply, ← hfdifferential_apply (smoothLeftMul_one I h), left_invariant]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"21\", \"text\": \"`StructureGroupoid.LocalInvariantProp`: that is, showing that a differential-geometric \\\"locally\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"line\": \"27\", \"text\": \"`Rep.coinvariantsTensorFreeLEquiv`. If we conjugate the $n$th differential in $(A \\\\otimes_k P)_G$\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant differential forms on a smooth group scheme are determined by their value at the identity and trivialize its top exterior cotangent sheaf",
+   "results": "8 hits; LeftInvariantDerivation.left_invariant'', LeftInvariantDerivation.ext, LeftInvariantDerivation.ext_iff, LeftInvariantDerivation.left_invariant, LeftInvariantDerivation.evalAt_apply, LeftInvariantDerivation.left_invariant', mulInvariantVectorField, LeftInvariantDerivation.mk.noConfusion",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Haar measures, manifold invariant derivations or ring presentation cotangent modules do not state the algebraic-group differential and bounded-character assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"differential\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Haar measures, manifold invariant derivations or ring presentation cotangent modules do not state the algebraic-group differential and bounded-character assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*differential|differential.*invariant|cotangent.*group|group.*cotangent",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Haar measures, manifold invariant derivations or ring presentation cotangent modules do not state the algebraic-group differential and bounded-character assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth algebraic group has a nowhere vanishing left invariant top differential form, and right translation scales it by an algebraic character whose values on a bounded subgroup have valuation zero",
+   "results": "8 hits; MeasureTheory.distribHaarChar_pos, MeasureTheory.mulEquivHaarChar_pos, MeasureTheory.Measure.modularCharacterFun_pos, MeasureTheory.distribHaarChar, MeasureTheory.Measure.modularCharacterFun_eq_haarScalarFactor, MeasureTheory.Measure.haarScalarFactor_pos_of_isHaarMeasure, MeasureTheory.Measure.haarScalarFactor_self, MeasureTheory.Measure.haar.prehaar_self",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Haar measures, manifold invariant derivations or ring presentation cotangent modules do not state the algebraic-group differential and bounded-character assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGroupScheme|invariantDifferential|invariant.*volume|volume.*invariant",
+   "results": "20 hits; Mathlib/Dynamics/Ergodic/Extreme.lean, Mathlib/Geometry/Euclidean/Volume/Measure.lean, Mathlib/Geometry/Euclidean/Volume/Measure.lean, Mathlib/MeasureTheory/Integral/CircleAverage.lean, Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean, Mathlib/MeasureTheory/Integral/IntervalIntegral/Periodic.lean, Mathlib/MeasureTheory/Group/FundamentalDomain.lean, Mathlib/MeasureTheory/Measure/Haar/Quotient.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Haar measures, manifold invariant derivations or ring presentation cotangent modules do not state the algebraic-group differential and bounded-character assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cotangent bundle of a smooth algebraic group is trivialized by invariant differentials; translations act on the determinant line by a multiplicative regular function",
+   "results": "8 hits; Algebra.SubmersivePresentation.cotangentEquiv, Algebra.SubmersivePresentation.sectionCotangent, Algebra.Generators.cotangentSpaceBasis_repr_one_tmul, Algebra.PreSubmersivePresentation.cotangentComplexAux, TangentBundle.symmL_model_space, Algebra.Extension.toKaehler, TangentBundle.continuousLinearMapAt_model_space, TangentBundle.symmL_trivializationAt",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Haar measures, manifold invariant derivations or ring presentation cotangent modules do not state the algebraic-group differential and bounded-character assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-group-translation-model",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Proposition 4(iii), printed pp.106-107 (PDF pp.112-113), using 3.5 Theorem 2 and 4.3 Propositions 2 and 4; boundedness is BLR 1.1 Definition 2. The local rings and translations here are exactly those in 4.3/4(iii). Supporting BLR result: 4.2 Proposition 1, Corollary 3 and Propositions 4-5, printed pp.101-103 (PDF pp.107-109). No use of Remark 6 or its external references.",
+   "via": [
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-invariant-volume-translation-character",
+  "worker": "stage1",
+  "summary": "Constructed the invariant volume and the character using universal translations and the existing differential-sheaf base-change theorems. Expanded boundedness into polynomial valuation estimates and the all-integer-powers argument. Statement unchanged, no new nodes. BLR primary scan read online; local copy WANTED. Right translation gives the inverse of BLR’s inner-conjugation character. Self-review replaced the unjustified identification of dimension with pure relative dimension by the existing local differential-rank theorem plus an explicit topological chain argument, and added the existing morphism-gluing lemma for the character.",
+  "blueprint": "Read latest/main-20261024 sec-six-functors-basics/sk-thm-sf-ctf-stability and its direct-images proof (3). This is the inherited Neron-model supporting input, BLR 4.2/1-5, to the translation-model chain serving that direct-image route. The ancestor script returns None; retained inherited from.node and via, and searched the entire imported blueprint for invariant differential, volume, translation, cotangent and bounded subset with no exact duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Generic arbitrary differential base-change theorem (01V0) makes the universal left and right translations into differential isomorphisms over the parameter scheme."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic affine form of smooth differential rank equals dimension at the point, used with the identity-fibre trivialization to prove its rank is dim G without assuming connectedness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-99df76b82",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-99df76b82 (reviewer sub-agent of L); spot-checked: I read the item's statement and all 7 steps in full. The delivery is the item only, with no new nodes. The statement and stmt_deps are identical to live (base status unsplit, empty proof), so the re-split rule does not apply. I checked the mathematics independently: BLR 4.2 has no local copy and is recorded WANTED with proof_origin.by=agent. The statement is true. Small cases: G_a (unbounded, nothing claimed), G_m dx/x (chi=1), d=0, Borel of GL2 (inverse of BLR's convention; the valuation claim is unaffected). Step-by-step checks: step 1, 047I gives Omega = p^*e^*Omega, the rank lemma with S=Spec E gives dim_x G = n at every point, and the chain argument gives dim G = d, also for disconnected G. Step 2, a(g,x)=(g,g^{-1}x) gives a cartesian square, and 01V0 restricted along the diagonal yields A. Step 3, invariance for T-points holds on the universal pair. Step 4, universal right translation, restriction along (e,.), unit u, and the gluing lemma give chi. Step 5, translations commute and r_{gh}=r_h∘r_g, so chi is a character. Step 6, the polynomial bound min(v(a)+|alpha|c_i) holds for negative c_i too. Step 7, all integer powers force v=0. One gap, fixed: the statement asks for invariance only at field-valued points, so uniqueness needs G reduced to pass from fibrewise vanishing to vanishing. I added one sentence to step 3 citing sbc-lem-smooth-geometrically-reduced, set elementary=false and updated proof_deps (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-invariant-volume-translation-character.json). Duplicate search turned up nothing. lem-sfb-minimal-volume-model-smooth-base-change only uses such an omega, and the homogeneous-cotangent node has different hypotheses. Batch-5: lem-trf-relative-differential-sheaf-base-change is the generic Stacks 01V0 base change of Kähler differentials, and lem-sfb-group-scheme-differentials-from-identity (047I) reaches only that node. Neither is a step of the trace formula or Poincaré duality, so I accept both as generic tool_uses.; 1 file(s) fixed by the reviewer"
+ }
+}

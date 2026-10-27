@@ -1,0 +1,122 @@
+{
+ "id": "lem-coef-actual-total-tensor-evaluation",
+ "kind": "statement",
+ "title": "Unique ordinary total-tensor evaluation for the actual coefficient sequence",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $W$ [def-weil-l-adic-coefficient-extension, def-pc-scheme]. Use the actual commutative coefficient sequence and its evaluation functor $e_n$ [def-coef-ringed-sequence-site], with the total tensor of [def-coef-ringed-tensor-hom-model]. For every level $n$, use the canonical section transport given by $\\operatorname{eqToHom}$ of the recorded equality between the abelian section objects of the evaluation and the original level. For arbitrary unbounded cochain complexes $P,Q$ of actual coefficient systems there is a unique isomorphism $e_n(\\operatorname{Tot}(P\\otimes Q))\\cong\\operatorname{Tot}(e_nP\\otimes e_nQ)$ carrying every pure total generator in bidegree $(p,q)$, $p+q=k$, to the corresponding generator formed from the transported sections. No K-flatness, boundedness, or normalization hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-modules.tex, section-tensor-product (Tag 03EK); sites-cohomology.tex, lemma-pullback-tensor-product (Tag 07A4) and the ringed sequence site in section-derived-limits preceding lemma-derived-limit-is-ok (Tag 0941). Agent-formulated ordinary total-complex consequence of these constructions; no derived or flatness assertion is needed."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "The actual coefficient sequence evaluation equals the generic semilinear evaluation functor by unfolding their definitions; the ringed sequence sheaves and structural identity maps agree. Record the actual functor zero-morphism preservation separately.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the unique pure-generator-normalized total-tensor evaluation theorem to that functor, its equality with semilinear evaluation, the supplied section transport, and P,Q. The source ring and total tensors agree definitionally with the actual coefficient constructions, so its isomorphism, generator formula, and uniqueness give precisely the assertion.",
+   "uses": [
+    "lem-coef-semilinear-total-tensor-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the general section-transport assertion to this actual eqToHom transport. Equality elimination shows that applying eqToHom to a section is heterogeneously equal to the original section. The general isomorphism, generator formula and uniqueness therefore give the canonical coefficient comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-coef-semilinear-system-models",
+  "lem-coef-semilinear-total-tensor-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "C2, 2026-10-27: coefficient-specific specialization of the fully proved generic ordinary total-tensor evaluation theorem. Kept in a separate module after local irreducibility improvements, because the unchanged assigned module plus this conversion exceeded 60 seconds. No proof hole is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of semilinear sheaves on a sequence site commutes with the total tensor product of unbounded cochain complexes uniquely on tensor generators",
+   "results": "8 hits, including HomologicalComplex.ιTensorObj, tensorObj and HasGoodTensor. No sequence-site evaluation theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing signed total comparison and Mathlib coproduct summand equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"total\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*[Tt]ensor|semilinear.*[Tt]otal",
+   "results": "0 hits in search service; local rg identifies SemilinearTensorEvaluation and the ordinary pure-section API.",
+   "date": "2026-10-27",
+   "verdict": "Reuse project constructions; add only generator normalization and uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefDerivedSystemEvaluationCalculus",
+  "date": "2026-10-27",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, first and last derived mapping-complex comparisons: coherent coefficient evaluation. Auxiliary ordinary total-tensor evaluation comparison required by step 3 of lem-coef-derived-system-evaluation-calculus.",
+   "via": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientTotalTensorEvaluation",
+  "file": "lean/Sheaf/Paper/CoefficientTotalTensorEvaluation.lean",
+  "declaration": "WeilConjectures.coefficientTotalTensorEvaluation_existsUnique",
+  "statement": "theorem coefficientTotalTensorEvaluation_existsUnique (n : ℕ)\n    (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ) :\n    ∃! e : ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj\n          ((coefficientTotalTensor.{u, t+1, t}\n            (coefficientSequenceTopology (Scheme.ProEt.topology W))\n            (coefficientSequenceCommRingSheaf l E W)).obj (P, Q)) ≅\n      (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)\n        (integralCoefficientCommRingSheaf l E W n)).obj\n          (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj P,\n           ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj Q),\n      ∀ (p q k : ℤ) (h : p + q = k) (U : W.ProEtᵒᵖ)\n        (x : (P.X p).val.obj (op (n, U.unop)))\n        (y : (Q.X q).val.obj (op (n, U.unop))),\n      (e.hom.f k).val.app U\n        ((eqToHom (coefficientSequenceEvaluationAb_eq l E W _ n U).symm)\n          (coefficientTensorGenerator.{u, t+1, t}\n            (coefficientSequenceTopology (Scheme.ProEt.topology W))\n            (coefficientSequenceCommRingSheaf l E W) P Q p q k h\n            (op (n, U.unop)) x y)) =\n        coefficientTensorGenerator.{u, t+1, t} (Scheme.ProEt.topology W)\n          (integralCoefficientCommRingSheaf l E W n)\n          (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj P)\n          (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj Q) p q k h U\n          ((eqToHom (coefficientSequenceEvaluationAb_eq l E W (P.X p) n U).symm) x)\n          ((eqToHom (coefficientSequenceEvaluationAb_eq l E W (Q.X q) n U).symm) y)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-39893",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T134955-L-3651497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-39893",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T134955-L-3651497",
+  "kind": "interface",
+  "note": "independent cc review: delivered 4 modules vs clone original (verbatim prefix split + 1 hole proved, statement unchanged); all 107 direct importers compiled against the delivered set (104 OK, 3 slow pre-existing, equal time on published); axioms clean; nodes vs Lean"
+ }
+}

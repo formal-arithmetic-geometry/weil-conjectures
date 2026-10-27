@@ -1,0 +1,127 @@
+{
+ "id": "def-pur-supported-constant-base-change-maps",
+ "kind": "definition",
+ "title": "Canonical supported-constant base-change square and exchange",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring in universe $u+1$, and let $Z',Z,X',X$ be schemes in universe $u$. Use the ordinary fixed-$A$ module sheaves, inverse images $f_t^*$, direct images $f_{t,*}$, adjunctions, constants $A_{T,t}$, supported constants $P_{t,i}=i_{t,*}A_{Z,t}$ and scalar-preserving identifications $u_{t,f}:f_t^*A_{T,t}\\cong A_{T',t}$ of [def-pur-supported-constant-exchange-maps], where $t=\\mathrm{et},\\mathrm{proet}$. Fix a chosen Cartesian square [def-weil-pbc-cartesian-square] with top $g:Z'\\to Z$, bottom $h:X'\\to X$, left $i':Z'\\to X'$ and right $i:Z\\to X$. Define $\\theta_t:i_t'^*h_t^*\\xrightarrow{\\sim}g_t^*i_t^*$ as the specified inverse-image square isomorphism, using the existing coherent site-square data [def-per-site-comparison-pullback-data]. Define the supported-constant exchange $\\beta_t:h_t^*P_{t,i}\\to P_{t,i'}$ as the adjunction transpose under $i_t'^*\\dashv i'_{t,*}$ of\n$$i_t'^*h_t^*i_{t,*}A_{Z,t}\\xrightarrow{\\theta_t}g_t^*i_t^*i_{t,*}A_{Z,t}\\xrightarrow{g_t^*(\\epsilon_i)}g_t^*A_{Z,t}\\xrightarrow{u_{t,g}}A_{Z',t}.$$\nOn the etale site this is the existing ordinary direct-image base-change map evaluated at $A_{Z,\\mathrm{et}}$, followed by $i'_{\\mathrm{et},*}(u_{\\mathrm{et},g})$. On the pro-etale site it is the displayed adjunction mate. The maps are defined for arbitrary vertical morphisms; their specialization to closed immersions is the closed exchange. No invertibility or normalization property is asserted.",
+ "stmt_deps": [
+  "def-pur-supported-constant-exchange-maps",
+  "def-weil-pbc-cartesian-square",
+  "def-per-site-comparison-pullback-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7, remark-base-change, the adjunction-mate construction; underived constant-module specialization and localized adjunction normalization as in etale-cohomology.tex Tag 03S6, lemma-shriek-base-change."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical supported constant closed direct image base change exchange as the adjunction mate of the inverse image square",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \": TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Presheaf\", \"type\": \"{X Y : TopCat.{v}} (f : X ⟶ Y) : pullback C f ⊣ pushforward C f\", \"doc\": \"Given topological spaces $X$ and $Y$ with a continuous map $f: X \\to Y$, the pullback presheaf functor (defined via left Kan extension) is left adjoint to the pushforward presheaf functor. This establi\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    {I J : C} →\\n      (f : I ⟶ J) →\\n        {inst_1 : CategoryTheory.ChosenPullbacksAlong f} →\\n          [self : CategoryTheory.ExponentiableMorphism f] →\\n            CategoryTheory.ChosenPullbacksAlong.pullback f ⊣ CategoryTheory.Exponent\", \"doc\": \"Given an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the pullback functor along $ f $ from the over-category $ \\\\mathcal{C}/J $ to $ \\\\mathcal{C}/I $ is left adjoint to the pushf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Subobject.existsPullbackAdj\", \"module\": \"Mathlib.CategoryTheory.Subobject.Basic\", \"type\": \"(f : X ⟶ Y) [HasPullbacks C] : «exists» f ⊣ pullback f\", \"doc\": \"Given a morphism $ f : X \\to Y $ in a category $\\\\mathcal{C}$ with pullbacks, the image functor $\\\\exists_f$ (mapping subobjects of $X$ to their images under $f$) is left adjoint to the pullback functor \"}\n  {\"name\": \"CategoryTheory.constantSheafΓAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : constantSheaf J A ⊣ Γ J A\", \"doc\": \"The constant sheaf functor is left adjoint to the global sections functor, establishing an adjunction between them in the category of sheaves with respect to a Grothendieck topology $J$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib construction among the returned signatures. Reuse the already landed Sheaf definitions with existing:true, without copying Lean code."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical supported constant closed direct image base change exchange as the adjunction mate of the inverse image square",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"{X Y : TopCat} →\\n  (A : Type u_1) →\\n    [inst : CategoryTheory.Category.{w, u_1} A] →\\n      {FA : A → A → Type u_2} →\\n        {CA : A → Type w} →\\n          [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] →\\n            [inst_2 : CategoryTheory.ConcreteCategory A FA] →\\n              [inst_3 : Ca\", \"doc\": \"For any continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ (mapping sheaves on $ Y $ to sheaves on $ X $) is left adjoint to the sheaf pushforward functor $ f_\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adju\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"module\": \"Mathlib/Topology/Sheaves/Presheaf\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} → (f : X ⟶ Y) → TopCat.Presheaf.pullback C f ⊣ TopCat.Presheaf.pushforward C f\", \"doc\": \"Given topological spaces $X$ and $Y$ with a continuous map $f: X \\to Y$, the pullback presheaf functor (defined via left Kan extension) is left adjoint to the pushforward presheaf functor. This establi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib construction among the returned signatures. Reuse the already landed Sheaf definitions with existing:true, without copying Lean code."
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*exchange|finiteCompactSite|compactSupport (Mathlib/AlgebraicGeometry)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib occurrence; the exact geometric maps are the existing Sheaf definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search \"supported constant\"; declaration-ownership search in dag/nodes; rg SupportedConstantNormalization.(square|exchange) lean/WeilConjectures lean/Sheaf",
+   "results": "Blueprint search: 0 nodes match. The definition def-pur-supported-constant-exchange-maps owns the ordinary components and gamma, but neither square nor exchange. Only the theorem record lem-pur-supported-constant-exchange-normalization lists these two plain definitions. No upstream WeilConjectures definition with these names; the existing Sheaf module defines square at line 178 and exchange at line 189. These exact definitions are reused.",
+   "date": "2026-10-23",
+   "verdict": "No existing definition node owns these declarations. The exact constructions are already in the stated Sheaf module and are reused verbatim."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-section-compact-source-exchange",
+  "date": "2026-10-23",
+  "group": "NI"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 3: identity-normalized compact source of a closed section and its arbitrary-base-change exchange.",
+   "via": [
+    "lem-pur-section-compact-source-exchange",
+    "lem-pur-line-zero-class-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedConstantExchangeNormalization",
+  "declaration": "AlgebraicGeometry.SupportedConstantNormalization.exchange",
+  "declarations": [
+   "AlgebraicGeometry.SupportedConstantNormalization.square",
+   "AlgebraicGeometry.SupportedConstantNormalization.exchange"
+  ],
+  "statement": "def exchange (pro : Bool) {Z' Z X' X : Scheme.{u}}\n    {g : Z' ⟶ Z} {i' : Z' ⟶ X'} {i : Z ⟶ X} {h : X' ⟶ X}\n    (sq : ChosenCartesianSquare g i' i h) :\n    (pull A pro h).obj (supported A pro i) ⟶ supported A pro i'",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership requested by L H2 for the return at fb50ca0e70ff. Both are existing plain definitions, not choices from the supported-constant normalization theorem. The Boolean parameter false/true selects etale/pro-etale, with the same site universes. No Lean source is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dd9dfdd7",
+  "group": "NI",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dd9dfdd7",
+  "group": "NI",
+  "result": "pass",
+  "note": "H2 repair of the fb50ca0e70ff RETURN is complete. Item Lean module byte-identical (sha256 b3b8d3dd), so the earlier full mathematical acceptance stands. Item record changes only stmt_deps and lean.note: lem-pur-supported-constant-exchange-normalization and lem-sp-finite-compact-site-coherence moved to proof_deps only; now cites landed def-pur-supported-constant-exchange-maps, new existing:true def-pur-supported-constant-base-change-maps (square/exchange: plain adjunction-mate defs, verbatim statement, Stacks 07A7/03S6), new existing:true def-pur-finite-compact-site-constructions (8 plain finiteCompactSite* defs checked against the node text: Δ direction, witness conjugation, tower, composition paste, identity unit; verbatim statement) and def-sf-compact-support-site-comparison-construction. Every SupportedConstantNormalization/finiteCompactSite/compactSupportSiteComparisonPlus name used is owned by a cited def node. All new-node stmt_deps on base, no cycle; live item still has no lean record. Report sections present. No compile needed (no change). Advisories: new compact-site def node cites lem-cbc-proetale-extension-zero-comparison, lem-sp-proper-open-coefficient-mate, prop-weil-pbc-comparison-direct-image and lem-cbc-compactifiable-compatible-tower for helpers with no def-node owner; étale baseChangeMap/squareUpperStarIso owners not cited; second reading is a disclosed self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6a107",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261024T191216-L-272422",
+  "kind": "interface",
+  "note": "independent cc review: delivered SupportedConstantExchangeNormalization (6 sorries closed, siteCategory @[reducible]/topology abbrev, openBackward via openTranspose) vs live module, change records, node lem-pur-supported-constant-exchange-normalization, 4 direct importers compiled against the delivered olean, #print axioms",
+  "sorry_before": [
+   "AlgebraicGeometry.SupportedConstantNormalization.compareSectionMap_existsUnique",
+   "AlgebraicGeometry.SupportedConstantNormalization.comparison_square",
+   "AlgebraicGeometry.SupportedConstantNormalization.presentation",
+   "AlgebraicGeometry.SupportedConstantNormalization.scheme_normalization",
+   "AlgebraicGeometry.SupportedConstantNormalization.sectionMap_existsUnique",
+   "AlgebraicGeometry.SupportedConstantNormalization.site_normalization"
+  ],
+  "sorry_after": []
+ }
+}

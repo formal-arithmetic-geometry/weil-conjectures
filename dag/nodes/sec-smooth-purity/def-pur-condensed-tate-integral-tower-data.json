@@ -1,0 +1,190 @@
+{
+ "id": "def-pur-condensed-tate-integral-tower-data",
+ "kind": "definition",
+ "title": "Normalized integral Tate tower coefficient and projection data",
+ "statement": "Use the lifted p-adic DVR and its ideal (ell), the uniquely residue-normalized finite quotient comparisons, their associated-module realizations, the projection-normalized comparison of completed coefficient rings, the actual inverse-root tensor powers and their strict quotient towers. Define ProjectionBalanced and ProjectionNormalized by the actual root projections and exact single/evaluation maps; define Reconstructed by actual inverse-limit counits and IdentifiesExceptional by the finite gamma square. All constructions and names are those previously attached to lem-pur-condensed-tate-integral-tower; no mathematical definition changes. Uses [def-weil-pbc-adic-coefficient-datum], [def-weil-pbc-bounded-constructible-tower], [def-weil-pbc-bounded-constructible-complete], [lem-pur-finite-smooth-adjunction-general-base], [lem-pur-twist-sheaf-locally-free], [lem-weil-pbc-reconstruction-uniform-tower], [def-sbc-smooth-morphisms], [def-weil-pbc-scheme-conventions], [def-pur-roots-of-unity-sheaf], [lem-weil-pbc-ringed-strict-tower-homotopy-limit], [def-weil-l-adic-numbers], [def-pur-sheaf-tensor-product], [def-weil-pbc-etale-origin-witness], [def-trf-coordinate-counit-arrows], [def-amb-finite-tate-site-comparison-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 2, common local models, normalized finite tower and adic reconstruction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-pur-finite-smooth-adjunction-general-base",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-l-adic-numbers",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-etale-origin-witness",
+  "def-trf-coordinate-counit-arrows",
+  "def-amb-finite-tate-site-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Auxiliary coefficient claims, now proved in Lean: identify each positive power quotient of the universe-lifted p-adic integers with ZMod using toZModPow and its kernel. Finiteness gives additive torsion. The lifted DVR is a Noetherian PID, so the existing scalar perfect-cohomology/PID-model theorem applied to the explicit rank-one quotient surjection gives perfectness. Quotient induction proves uniqueness of the residue-normalized ring equivalence. Its inverse followed by the continuous-function scalar presentation is locally bijective; the existing associated-module realization equivalence gives exactness. Residue compatibility and naturality of the scalar presentation on an explicit quotient-ring diagram give the scalar square for every comparable pair. The diagram uses the actual quotient homomorphisms, with identity and composition supplied by the existing Ideal.Quotient.factor laws; the existing consecutive scalar squares determine its natural transformation. Derived realization is an equivalence, so the existing inverse-mate theorem proves invertibility of the specified scalar mate. The finite coefficient isomorphisms commute with adjacent maps by the same residue computation. They define a natural isomorphism of inverse systems, whose induced limit isomorphism has the required projection equations; joint monicity of limit projections proves uniqueness. These arguments prove coefficientProperties, residueIso_existsUnique, scalars_locallyBijective, realization_exact, scalars_comp, scalarComparisonMap_isIso, and completionIso_existsUnique. The main condensedTateIntegralTower theorem remains open with the eight preceding proof steps retained.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-scalar-perfect-cohomology-and-pid-models",
+    "lem-stage3-inverse-mate-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1-2: integral coefficients and compatible finite reductions; coefficient and limit subclaims"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-scalar-perfect-cohomology-and-pid-models",
+  "lem-stage3-inverse-mate-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 2, common local models, normalized finite tower and adic reconstruction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit root of unity line tensor powers have normalized strict quotient towers and common local models",
+   "results": "BDeRhamPlus; generic adic completion tensor equivalences and quotient transition formulas",
+   "date": "2026-10-25",
+   "verdict": "No theorem on normalized pro-etale derived towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor.map_comp and presheaf composition formulas",
+   "date": "2026-10-25",
+   "verdict": "Composition tools only; no tower reconstruction or source unit coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorIso.*unit|unit.*tensorIso|adic.*reconstruction|root.*tower",
+   "results": "Generic scalar-tower and root polynomial lemmas; no matching sheaf theorem. Also searched both project roots.",
+   "date": "2026-10-25",
+   "verdict": "Use project declarations for the relevant geometric and categorical ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized inverse system of roots of unity sheaves has a complete constructible derived limit with canonical finite coefficient reductions",
+   "results": "InverseSystem.limit, InverseSystem.mk, SheafOfModules.hasLimitsOfShape, ProfiniteGrp.isIso_toLimit, instHasLimitsCondensedMod",
+   "date": "2026-10-25",
+   "verdict": "Only generic limits, inverse systems and profinite results. None proves the specified root projection, unit coherence or constructible-complete reconstruction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedTateIntegralTower",
+  "date": "2026-10-25",
+  "group": "R1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 2, common local models, normalized finite tower and adic reconstruction",
+   "via": [
+    "lem-pur-condensed-tate-integral-tower",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedTateIntegralTowerData",
+  "file": "lean/Sheaf/Paper/CondensedTateIntegralTowerData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.datum",
+  "statement": "def datum (ell : ℕ) [Fact ell.Prime] : AdicCoefficientDatum (Ring.{u} ell)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.Ring",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.coefficientProperties",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.datum",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.residueIso_existsUnique",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.residueIso",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.scalars",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.scalars_locallyBijective",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.scalars_injective",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.scalars_surjective",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.realization",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.realization_exact",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.realization_additive",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.realization_limits",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.realization_colimits",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.derivedRealization",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.scalars_comp",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.restrictionComparison",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.derivedRestrictionComparison",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.scalarComparisonMap",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.scalarComparisonMap_isIso",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.scalarComparison",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.finiteTwist",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.unitReduction",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.unitSource",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.gammaUnit",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.exceptionalReduction",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.coefficientIso",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.completionIso_existsUnique",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.completionIso",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.integralRoot",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.integralLine",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.strictTower",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.strictDerivedTower",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.finiteSheaf",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.derivedRealization_shift",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.comparison_shift",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.finiteModelIso",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.integralPure",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.integralGenerator",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.quotientLine",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.ProjectionBalanced",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.ProjectionNormalized",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.finiteZeroIso",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.Reconstructed",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.reconstructedGamma",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.IdentifiesExceptional"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-feced",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261025T002531-L-3126547",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-feced",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261025T002531-L-3126547",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs lem-pur-condensed-tate-integral-tower plan and new nodes; extracted data module diffed against the old item (bodies identical); the two remaining sorry statements read against FiniteSmoothCoefficientArrows/FiniteSmoothPurityMaps definitions; node proof_deps vs Lean"
+ }
+}

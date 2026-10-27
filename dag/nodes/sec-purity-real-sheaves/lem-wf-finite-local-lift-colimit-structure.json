@@ -1,0 +1,261 @@
+{
+ "id": "lem-wf-finite-local-lift-colimit-structure",
+ "kind": "statement",
+ "title": "Local strictly henselian structure of the finite-lift colimit",
+ "statement": "Let $(H,\\mathfrak m,k)$ be a commutative henselian local ring [def-weil-pbc-henselian-terminology], with residue field $k$ [def-weil-residue-field], and let $K/k$ be a separable closure [def-pd-separable-closure]. Let $I$ be the small directed poset of finite separable intermediate fields of $K/k$. Suppose given a diagram $(B_e,u_{ef})_{e\\in I}$ of finite local etale $H$-algebras [def-weil-etale-morphism], with maximal ideals $\\mathfrak n_e=\\mathfrak mB_e$, local structure maps and local transitions, together with compatible $k$-algebra isomorphisms $r_e:B_e/\\mathfrak n_e\\xrightarrow{\\sim}e$ inducing the inclusions $e\\subset f$ on residues. There exists a colimit $C$ in commutative $H$-algebras [def-weil-pbc-category-colimit], and every such colimit with coprojections $\\iota_e$ is also the colimit of the underlying commutative-ring diagram. The compatible maps $B_e\\to e\\hookrightarrow K$ induce a surjection $q:C\\to K$ with\n$$\\ker q=\\bigcup_{e\\in I}\\iota_e(\\mathfrak n_e).$$\nEvery element of $C$ has a representative in some $B_e$, and every element outside $\\ker q$ is a unit. The ring $C$ is local with maximal ideal $\\ker q$, every $\\iota_e$ and $H\\to C$ is local, and $q$ identifies $C/\\mathfrak m_C$ with $K$ as a $k$-algebra. Each $B_e$ is henselian, $(C,\\mathfrak m_C)$ is a henselian pair, and $C$ is strictly henselian. Moreover $H\\to C$ is ind-etale [def-weil-pbc-ind-etale-algebra]. No Noetherian or completeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BSL (remark-construct-sh-from-h), local union, residue field and henselianity sentences; Tags 04GH (lemma-finite-over-henselian), 04GI (lemma-colimit-henselian); more-algebra.tex Tag 0FWT (lemma-filtered-colimits-henselian)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-residue-field",
+  "def-pd-separable-closure",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [
+  {
+   "text": "The given poset $I$ is small and directed, hence filtered and nonempty. Apply [lem-weil-pbc-commutative-algebras-colimits-exist] with $R=H$ to obtain an algebra colimit. For any such colimit $(C,\\iota_e)$, [lem-weil-pbc-filtered-colimit-algebras-elementwise] makes its underlying ring cocone a colimit and gives a representative $c=\\iota_e(b)$ for every $c\\in C$. These conclusions apply to every algebra-colimit cocone, not only a chosen construction.",
+   "uses": [
+    "lem-weil-pbc-commutative-algebras-colimits-exist",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D6 (lemma-directed-colimit), 0BSL (remark-construct-sh-from-h), the displayed colimit/union"
+   }
+  },
+  {
+   "text": "For each $e$, let $q_e:B_e\\to K$ be reduction modulo $\\mathfrak n_e$, followed by $r_e$ and $e\\hookrightarrow K$. Compatibility of the $r_e$ gives $q_f u_{ef}=q_e$. The ring-colimit universal property gives a unique $q:C\\to K$ with $q\\iota_e=q_e$. Every $z\\in K$ lies in the finite separable subfield $k(z)$ since $K/k$ is algebraic separable; surjectivity of reduction and of $r_{k(z)}$ gives a preimage of $z$ in $B_{k(z)}$, and hence in $C$. For $c=\\iota_e(b)$, injectivity of $r_e$ and $e\\hookrightarrow K$ gives $q(c)=0$ if and only if $b\\in\\mathfrak n_e$. Thus $q$ is surjective and $M:=\\ker q=\\bigcup_e\\iota_e(\\mathfrak n_e)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-pd-separable-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BSL (remark-construct-sh-from-h), residue field sentence, with the residue map and kernel made explicit"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-colimit-residue-field] to the underlying ring colimit: the diagram consists of local rings and all transitions are local by hypothesis, and $I$ is nonempty, small and directed. Its unique maximal ideal is the union computed in Step 2, namely $M$, and $\\iota_e^{-1}(M)=\\mathfrak n_e$. In particular all $\\iota_e$ are local. If $c=\\iota_e(b)\\notin M$, then $b\\notin\\mathfrak n_e$ and the local-ring unit criterion gives $bd=1$ in $B_e$ for some $d$. Thus $c\\iota_e(d)=1$, proving the asserted unit clause. Choose any $e\\in I$: since $H\\to B_e$ is local, the inverse image of $M$ under $H\\to B_e\\to C$ is $\\mathfrak m$. Hence $H\\to C$ is local.",
+   "uses": [
+    "lem-sfb-local-colimit-residue-field",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GI (lemma-colimit-henselian), omitted local-ring argument, and Tag 0BSL"
+   }
+  },
+  {
+   "text": "The map $[c]\\mapsto q(c)$ from $C/M$ to $K$ is well defined, injective by $M=\\ker q$, and surjective by Step 2; it is therefore a ring isomorphism. For $h\\in H$ and any $e$, $q(\\iota_e(h))$ is the image in $K$ of the residue of $h$ in $k$, because $r_e$ is a $k$-algebra isomorphism. The displayed isomorphism is thus a $k$-algebra isomorphism for the residue $k$-algebra structure on $C/M$. Step 3 identifies $M$ with $\\mathfrak m_C$, so this is exactly the required residue-field identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BSL (remark-construct-sh-from-h), residue field sentence"
+   }
+  },
+  {
+   "text": "For each $e$, the ring $H$ is henselian local, $B_e$ is local, and $B_e$ is finite as an $H$-module by hypothesis. Apply [lem-weil-pbc-finite-local-henselian] with $R=H$, $A=B_e$. This proves that every $B_e$ is henselian. By the meaning of henselian local ring, each pair $(B_e,\\mathfrak n_e)$ is consequently henselian.",
+   "uses": [
+    "lem-weil-pbc-finite-local-henselian",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GH (lemma-finite-over-henselian), part (2); Tag 0BSL, henselianity of the finite lifts"
+   }
+  },
+  {
+   "text": "The transitions send $\\mathfrak n_e$ into $\\mathfrak n_f$ because they are local. Thus the pairs of Step 5 form a directed system of henselian pairs. Apply [lem-weil-pbc-filtered-colimit-henselian-pair] to the ring colimit of Step 1. It yields a henselian pair $(C,\\bigcup_e\\iota_e(\\mathfrak n_e))=(C,M)$. By Step 3, $M=\\mathfrak m_C$, so $C$ is henselian local. By Step 4 its residue field is $K$, which is separably closed since it is a separable closure of $k$. The definition of strictly henselian now gives that $C$ is strictly henselian.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-henselian-pair",
+    "def-weil-pbc-henselian-terminology",
+    "def-pd-separable-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FWT (lemma-filtered-colimits-henselian), applied to the maximal-ideal pairs; algebra.tex Tag 0BSL, strictly henselian conclusion"
+   }
+  },
+  {
+   "text": "Each term $B_e$ is an etale $H$-algebra, hence of finite presentation as part of the etale hypothesis. The given small directed diagram and the algebra colimit of Step 1 therefore exhibit $C$ as a filtered colimit of etale $H$-algebras of finite presentation. This is precisely the defining condition for $H\\to C$ to be ind-etale. All arguments used only the stated hypotheses; none used Noetherianity or completeness.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BSL (remark-construct-sh-from-h), colimit of etale algebras; ind-etale definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-commutative-algebras-colimits-exist",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "def-weil-pbc-category-colimit",
+  "def-pd-separable-closure",
+  "lem-sfb-local-colimit-residue-field",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-weil-pbc-finite-local-henselian",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-filtered-colimit-henselian-pair",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BSL (remark-construct-sh-from-h), using Tag 04GH (2) and the maximal-ideal-pair formulation of filtered henselian colimits in more-algebra.tex Tag 0FWT; underlying ring-colimit and residue-map arguments expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered diagram of finite local etale algebras over a henselian local ring with residue fields exhausting a separable closure has strictly henselian local ind-etale colimit and that separable closure as residue field.",
+   "results": "[leansearch] OK 8 hit(s); CommRingCat.FilteredColimits.colimitCoconeIsColimit; Algebra.FormallyEtale.iff_exists_algEquiv_prod; CategoryTheory.instIsClosedUnderColimitsOfShapeFunctorOppositeTypeIsIndObjectOfIsFiltered; CategoryTheory.Limits.Types.FilteredColimit.isColimitOf; CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal; HenselianLocalRing.toIsLocalRing; Algebra.Etale.iff_exists_algEquiv_prod; CommRingCat.FilteredColimits.colimit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic colimit existence and henselian definitions do not compute the local residue colimit or prove its henselianity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute the maximal ideal and residue field of a directed colimit of finite local etale algebras over a henselian local ring and prove the colimit henselian.",
+   "results": "[leanfinder] OK 8 hit(s); HenselianLocalRing.TFAE; instHenselianRingMaximalIdeal; HenselianLocalRing.toIsLocalRing; HenselianLocalRing; Field.henselian; IsAdicComplete.henselianRing; StandardEtalePair.instFormallyEtaleRing; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-22",
+   "verdict": "no match: generic colimit existence and henselian definitions do not compute the local residue colimit or prove its henselianity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of henselian local rings along local homomorphisms are local and henselian with residue field the colimit of residue fields.",
+   "results": "[leanfinder] OK 8 hit(s); HenselianLocalRing.toIsLocalRing; HenselianLocalRing.TFAE; instHenselianRingMaximalIdeal; HenselianLocalRing; Field.henselian; IsAdicComplete.henselianRing; isLocalRing_of_isAdicComplete_maximal; HenselianRing",
+   "date": "2026-10-22",
+   "verdict": "no match: generic colimit existence and henselian definitions do not compute the local residue colimit or prove its henselianity."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Ring.DirectLimit",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-22",
+   "verdict": "no match: generic colimit existence and henselian definitions do not compute the local residue colimit or prove its henselianity."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian|IsLocalRing.*[Cc]olimit|[Dd]irectLimit.*[Rr]esidue",
+   "results": "[grep] OK 5 hit(s); Mathlib/RingTheory/Henselian.lean:13; Mathlib/RingTheory/Henselian.lean:15; Mathlib/RingTheory/Henselian.lean:16; Mathlib/RingTheory/Henselian.lean:26; Mathlib/RingTheory/Henselian.lean:32",
+   "date": "2026-10-22",
+   "verdict": "no match: generic colimit existence and henselian definitions do not compute the local residue colimit or prove its henselianity."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian|IsLocalRing.*colimit|DirectLimit.*Residue",
+   "results": "[grep] OK 5 hit(s); Mathlib/RingTheory/Henselian.lean; Mathlib/RingTheory/Henselian.lean; Mathlib/RingTheory/Henselian.lean; Mathlib/RingTheory/Henselian.lean; Mathlib/RingTheory/Henselian.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give HenselianLocalRing criteria, separable closure definitions or generic residue/colimit tools, not all clauses of the finite-lift colimit statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The directed colimit of finite local etale lifts of finite separable residue field extensions is strictly henselian and has residue field the separable closure.",
+   "results": "[leansearch] OK 8 hit(s); HenselianLocalRing.TFAE; instHenselianRingMaximalIdeal; HenselianLocalRing.mk; HenselianLocalRing.toIsLocalRing; IsSepClosure.recOn; separableClosure; IsSepClosed.lift_def; IsSepClosed.lift",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give HenselianLocalRing criteria, separable closure definitions or generic residue/colimit tools, not all clauses of the finite-lift colimit statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Ring.DirectLimit",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give HenselianLocalRing criteria, separable closure definitions or generic residue/colimit tools, not all clauses of the finite-lift colimit statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of finite local etale algebras over a henselian local ring whose residue fields exhaust a separable closure is a strictly henselian local ind etale algebra with that residue field.",
+   "results": "[leanfinder] OK 8 hit(s); HenselianLocalRing.TFAE; HenselianLocalRing; Field.henselian; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; HenselianLocalRing.toIsLocalRing; Algebra.instIsSeparableResidueFieldOfFormallyUnramified; Algebra.instEtaleOfIsStandardEtale; StandardEtalePair.instEtaleRing",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give HenselianLocalRing criteria, separable closure definitions or generic residue/colimit tools, not all clauses of the finite-lift colimit statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed system of henselian local commutative rings with local homomorphisms has henselian local colimit and its residue field is the colimit of the residue fields.",
+   "results": "[leanfinder] OK 8 hit(s); HenselianLocalRing.TFAE; HenselianLocalRing.toIsLocalRing; HenselianLocalRing; instHenselianRingMaximalIdeal; Field.henselian; IsAdicComplete.henselianRing; RingHom.EssFiniteType.residueFieldMap; DirectLimit.instFieldOfRingHomClass",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give HenselianLocalRing criteria, separable closure definitions or generic residue/colimit tools, not all clauses of the finite-lift colimit statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-strict-henselization-finite-lifts",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-boundary",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-boundary-stalk-invariants",
+   "place": "Proof paragraph 1, 'the spectrum of a field with absolute Galois group the inertia group'; paragraph 2, 'the fraction field of the strict henselization' and the induced automorphisms over the henselization. Extracts original finite-lifts proof steps 3, 4 and the H-ind-etaleness in 5.",
+   "via": [
+    "lem-wf-strict-henselization-finite-lifts",
+    "lem-wf-strict-henselian-fraction-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-wf-finite-local-lift-colimit-structure",
+  "worker": "stage1",
+  "summary": "Expanded the finite-lift colimit construction of Stacks 0BSL into seven steps. Reused the existing algebra-colimit existence and elementwise leaves, local-colimit residue lemma, finite-local henselian lemma and filtered-colimit henselian-pair lemma. Computed the residue surjection and kernel explicitly, verified localness and units without transition injectivity, and retained every statement clause. No new nodes and no statement change.",
+  "blueprint": "lem-wf-boundary-stalk-invariants, finite-level paragraph: punctured strict henselian trait and inertia field; final paragraph: fraction field of the strict henselization over the henselization. This item supplies the local strictly henselian ring underlying the finite-lifts construction in that route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-local-colimit-residue-field",
+    "why": "Generic local-ring colimit theorem supplies the unique maximal ideal and inverse-image formula for the given local transitions; no node of sk-i-real-boundary supplies this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-henselian-pair",
+    "why": "Generic directed-colimit theorem for henselian pairs applies to the maximal-ideal pairs of the finite lifts; it is an algebraic tool for the prescribed strict-henselization construction, not a replacement for the boundary-stalk route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-local-colimit-residue-field",
+  "lem-weil-pbc-filtered-colimit-henselian-pair"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-a79b8143b",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-a79b8143b (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and every cited statement. Sources checked: Stacks algebra.tex 0BSL (remark-construct-sh-from-h l.43156), 04GH(2) (lemma-finite-over-henselian l.42385), more-algebra 0FWT (lemma-filtered-colimits-henselian l.2885). The statement and stmt_deps are unchanged from live; the live node is still unsplit with an empty proof; there is no repair note, so the re-split rule does not apply; there are no new nodes. Step 1: I is small, nonempty (k is in I) and directed (compositum), hence filtered; algebra colimit exists and elementwise leaf makes it a ring colimit for any cocone. Step 2: q_e is well defined since local transitions send n_e into n_f; surjectivity via k(z) in I; kernel formula from representatives and injectivity of r_e. Step 3: hypotheses of lem-sfb-local-colimit-residue-field (local transitions = preimage condition) hold; units by IsLocalRing.notMem_maximalIdeal; H->C local via any B_e. Step 4: k-algebra identification is elementary. Step 5: finite-local-henselian needs H henselian, B_e local and module-finite, all hypotheses. Step 6: the 0FWT pair lemma applies to the ring colimit with ideal M, and K is separably closed, so C is strictly henselian; no stage is assumed strictly henselian. Step 7: étale includes locally finite presentation, i.e. fp for affine algebras, so C is ind-étale. Edge cases (H a field, k separably closed, imperfect k, noninjective transitions) hold. Accepted as generic tools: tool_uses lem-sfb-local-colimit-residue-field and lem-weil-pbc-filtered-colimit-henselian-pair. Duplicate search (strict-henselization-local-structure, exc presentation-properties, pbc triples, sfb field colimit) found no node stating the item. No cycle, no SGA. proof_deps equals the union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteLocalLiftColimitStructure",
+  "declaration": "HenselianLocalRing.finite_local_lift_colimit_structure",
+  "file": "lean/Sheaf/RingTheory/FiniteLocalLiftColimitStructure.lean",
+  "statement": "theorem finite_local_lift_colimit_structure (H K : Type u) [CommRing H] [HenselianLocalRing H] [Field K] [Algebra (ResidueField H) K] [IsSepClosure (ResidueField H) K] (B : {e : IntermediateField (ResidueField H) K // FiniteDimensional (ResidueField H) e ∧ Algebra.IsSeparable (ResidueField H) e} ⥤ CommAlgCat.{u} H) [∀ e, IsLocalRing (B.obj e)] [∀ e, Module.Finite H (B.obj e)] [∀ e, Algebra.Etale H (B.obj e)] [∀ e, IsLocalHom (algebraMap H (B.obj e))] [∀ (e f) (a : e ⟶ f), IsLocalHom (B.map a).hom.toRingHom] (hn : ∀ e, maximalIdeal (B.obj e) = Ideal.map (algebraMap H (B.obj e)) (maximalIdeal H)) (r : ∀ e, ResidueField (B.obj e) ≃+* e.1) (hr_base : ∀ e, (r e).toRingHom.comp (ResidueField.map (algebraMap H (B.obj e))) = algebraMap (ResidueField H) e.1) (hr_transition : ∀ (e f) (a : e ⟶ f) (b : B.obj e), ((r f) (residue (B.obj f) ((B.map a).hom b)) : K) = ((r e) (residue (B.obj e) b) : K)) : Nonempty (ColimitCocone B) ∧ ∀ (c : Cocone B), IsColimit c → Nonempty (IsColimit ((forget₂ (CommAlgCat H) CommRingCat).mapCocone c)) ∧ ∃ q : c.pt →+* K, (∀ e, ∀ b : B.obj e, q ((c.ι.app e).hom b) = ((r e) (residue (B.obj e) b) : K)) ∧ Function.Surjective q ∧ (RingHom.ker q : Set c.pt) = (⋃ e, (c.ι.app e).hom '' (maximalIdeal (B.obj e) : Set (B.obj e))) ∧ (∀ x : c.pt, ∃ e, ∃ b : B.obj e, (c.ι.app e).hom b = x) ∧ (∀ x : c.pt, x ∉ RingHom.ker q → IsUnit x) ∧ ∃ (_ : IsLocalRing c.pt) (_ : IsLocalHom (algebraMap H c.pt)), maximalIdeal c.pt = RingHom.ker q ∧ (∀ e, IsLocalHom (c.ι.app e).hom.toRingHom) ∧ (∃ rC : ResidueField c.pt ≃+* K, (∀ x : c.pt, rC (residue c.pt x) = q x) ∧ rC.toRingHom.comp (ResidueField.map (algebraMap H c.pt)) = algebraMap (ResidueField H) K) ∧ (∀ e, HenselianLocalRing (B.obj e)) ∧ HenselianRing c.pt (maximalIdeal c.pt) ∧ IsStrictlyHenselianLocalRing c.pt ∧ RingHom.IndEtaleAcrossUniverses (algebraMap H c.pt)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d37b72d3",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Fresh stage-2 statement; the node equals the live node apart from the new lean record. Every hypothesis matches the node and nothing stronger is assumed: HenselianLocalRing H, IsSepClosure, the finite separable intermediate-field poset, finite/local/étale stages, hn, IsLocalHom on the structure maps and transitions, k-linear compatible residue isos r with hr_base and hr_transition. Every conclusion clause matches: colimit exists, every algebra-colimit cocone is a ring colimit, q pinned by its values on stages, surjective, kernel = union of images of the stage maximal ideals, representatives, units, local ring with m = ker q, local coprojections and H→C, k-linear residue identification rC, stages henselian, henselian pair, IsStrictlyHenselianLocalRing, IndEtaleAcrossUniverses. Recorded declarations are used for all stmt_deps. lean.statement is verbatim in the file; one sorry, no definitions; docstrings carry the source place, the blueprint id and the 7-step plan. Same universe u for H, K and the index; harmless because a separable closure can be taken in u, and the citer uses the same convention. Advisory: downstream Algebra.finiteResidueLiftIndex omits the separability conjunct, so stage 3 needs a reindexing. Not recompiled, per instructions."
+ }
+}

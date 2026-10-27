@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-algebra-diagram-theta-naturality",
+ "kind": "statement",
+ "title": "Naturality of the ambient coefficient specialization",
+ "statement": "For any two Coherence presentations over the same exact base pullback, if their degree-zero coefficient isomorphisms commute with given coefficient module maps, their ambient scalar specializations commute with the induced scalarUnderlyingMap on source and target, for every derived object.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0G7E and 06YU; scalar-unit refinement with sites-modules.tex Tag 03EL; parent proof steps 1–6."
+ },
+ "stmt_deps": [
+  "def-pur-algebra-diagram-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "The two independently normalized ambient comparisons agree: precompose with representatives of resolving pairs and postcompose with the invertible tensor factorization. Their normalization equations agree; full faithfulness proves uniqueness.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact factorization and naturality of the degree-zero single-complex functor transport the coefficient square to the derived category.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the ambient tensor comparison at the coefficient morphism gives the specialized square. Conjugate by the normalized scalar tensor presentations and cancel inverse isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit formalization of the parent scalar/unit refinement of Tags 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with exact geometric inverse image and its tensor comparison preserves scalar extension units",
+   "results": "Ordinary ModuleCat.extendScalars identity and adjunction unit lemmas; no normalized derived ringed-site comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; reuse ordinary adjunction and localization lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived tensor with a module in degree zero and scalar extension units on ringed sites",
+   "results": "PresheafOfModules tensor definitions and SheafOfModules pullback free-module unit formulas; no derived normalized statement.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySquareIso",
+   "results": "Unknown identifier in Mathlib search; this comparison is project-local.",
+   "date": "2026-10-25",
+   "verdict": "Use existing project comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|kFlat.*single.*tensor|ScalarDerivedPresentation",
+   "results": "0 Mathlib hits; project source supplies exact localization and K-flat comparison tools.",
+   "date": "2026-10-25",
+   "verdict": "No direct Mathlib match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlgebraDiagramPullbackExtensionCoherence",
+  "date": "2026-10-25",
+  "group": "M4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof steps 6-7 and 10). Original normalization proof steps 1-2: scalar-unit and tensor pullback comparison.",
+   "via": [
+    "lem-pur-algebra-diagram-pullback-extension-coherence",
+    "lem-pur-perfect-quotient-exchange-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlgebraDiagramThetaNaturality",
+  "file": "lean/Sheaf/CategoryTheory/AlgebraDiagramThetaNaturality.lean",
+  "declaration": "CategoryTheory.AlgebraDiagramPullback.theta_natural",
+  "declarations": [
+   "CategoryTheory.AlgebraDiagramPullback.theta_natural"
+  ],
+  "statement": "theorem theta_natural\n    (f : RingedPullback.{u, u, u, u, u} R S) (k : Comparison.{u, u, u, u, u} f)\n    [IsIso f.coefficient]\n    (d d' : CoefficientSquare.{u, u, u, u, u} f)\n    (k' : Comparison.{u, u, u, u, u} (changed f d))\n    (k'' : Comparison.{u, u, u, u, u} (changed f d'))\n    [HasDerivedCategory.{w} (Modules.{u, u, u} R)]\n    [HasDerivedCategory.{w} (Modules.{u, u, u} S)]\n    [HasDerivedCategory.{w} (Modules.{u, u, u} d.R')]\n    [HasDerivedCategory.{w} (Modules.{u, u, u} d.S')]\n    [HasDerivedCategory.{w} (Modules.{u, u, u} d'.R')]\n    [HasDerivedCategory.{w} (Modules.{u, u, u} d'.S')]\n    [ExactPullback f] [ExactPullback (changed f d)] [ExactPullback (changed f d')]\n    [ExactRestriction d.sourceMap] [ExactRestriction d.targetMap]\n    [ExactRestriction d'.sourceMap] [ExactRestriction d'.targetMap]\n    (q : Coherence f k d k') (q' : Coherence f k d' k'')\n    (hY : coefficient d.sourceMap ⟶ coefficient d'.sourceMap)\n    (hX : coefficient d.targetMap ⟶ coefficient d'.targetMap)\n    (hb : f.L.map hY ≫ q'.beta.hom = q.beta.hom ≫ hX)\n    (M : DerivedCategory (Modules.{u, u, u} R)) :\n    f.L.mapDerivedCategory.map ((scalarUnderlyingMap q.source q'.source hY).app M) ≫\n      q'.theta.hom.app M = q.theta.hom.app M ≫\n        (scalarUnderlyingMap q.target q'.target hX).app (f.L.mapDerivedCategory.obj M)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e45d3",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T095621-L-3454102",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e45d3",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T095621-L-3454102",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); AlgebraDiagramPullbackData vs clone's removed block (verbatim apart from dropped proof-only imports, one docstring line and a local instance attribute); ambient_balancing vs Coherence.tensor_coherence with pinned normalizations; 12 node lean.statement vs Lean files; delivered modules + importer TowerChernPullback compiled in /tmp sandbox (exit 0); #print axioms on all proved constituents"
+ }
+}

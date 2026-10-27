@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-finite-scalar-extension-generic-points",
+ "kind": "statement",
+ "title": "Generic points and residue fields under finite scalar extension",
+ "statement": "Let $F\\subseteq K$ be a finite field extension and let $V$ be any $F$-scheme. Put $W=V\\times_{\\operatorname{Spec}F}\\operatorname{Spec}K$ and let $\\operatorname{pr}:W\\to V$ be the projection. For every affine open $\\operatorname{Spec}R\\subseteq V$, its inverse image is $\\operatorname{Spec}(R\\otimes_F K)$; the corresponding map $R\\to R\\otimes_F K$ is finite free of rank $[K:F]$, and is flat. For every generic point $y$ of an irreducible component of $W$, the point $x=\\operatorname{pr}(y)$ is a generic point of an irreducible component of $V$. For every point $y\\in W$, with $x=\\operatorname{pr}(y)$, its residue field $\\kappa(y)$ is the quotient of the finite-dimensional $\\kappa(x)$-algebra $\\kappa(x)\\otimes_F K$ by the prime corresponding to $y$ in the fibre over $x$; that quotient is a field, and $\\kappa(y)/\\kappa(x)$ is finite. Consequently, for any scheme $B$ and morphism $v:V\\to B$ that sends every component generic point to a component generic point with finite residue extension, $v\\circ\\operatorname{pr}:W\\to B$ has the same property. No normality or separability of $K/F$, finite-type or Noetherian hypothesis on $V$ or $B$, or reducedness is imposed. Fields and degree use [def-weil-field], [def-pc-field-extension], [def-pc-field-tower]; schemes, spectrum, fibre products, generic points, components, residue fields and flatness use [def-pc-scheme], [def-weil-affine-spectrum], [def-pc-fibre-product], [def-sc-generic-point], [def-weil-irreducible-components], [def-weil-residue-field], [def-weil-flat-morphism]. Tensor products, free modules and flat ring maps use [def-weil-pbc-module-tensor-product], [def-weil-pbc-free-module] and [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00HS, lemma-flat-going-down, applied to finite-free scalar extension; agent-formulated scheme corollary together with the finite-dimensional fibre-algebra argument, former step 10 of lem-sfb-common-field-semilinear-induction. It supplies the generic-point assertion in ILO X 2.3 Step 2, printed p.150, diagram (2.b)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $U=\\operatorname{Spec}R\\subseteq V$. Apply [lem-weil-pbc-open-fibre-product] to the opens $U\\subseteq V$, the whole $\\operatorname{Spec}K$, and the whole $\\operatorname{Spec}F$. It identifies $\\operatorname{pr}^{-1}(U)$ with $U\\times_{\\operatorname{Spec}F}\\operatorname{Spec}K$, compatibly with its projection to $U$. By [lem-weil-pbc-fibre-product-affine-spectra] this is $\\operatorname{Spec}S$, where $S=R\\otimes_F K$, and its map to $U$ is induced by $r\\mapsto r\\otimes1$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes), with 01JQ (lemma-fibre-product-affines)."
+   }
+  },
+  {
+   "text": "Put $n=[K:F]$ and choose an $F$-basis $b_1,\\ldots,b_n$ of $K$, with coordinate functions $\\lambda_i:K\\to F$. The mutually inverse $R$-linear maps are $R^n\\to S$, $(r_i)\\mapsto\\sum_i r_i\\otimes b_i$, and $S\\to R^n$, $r\\otimes k\\mapsto(r\\lambda_i(k))_i$. The second is well-defined by the tensor-product relations, and the inverse identities follow from $k=\\sum_i\\lambda_i(k)b_i$ and $\\lambda_i(b_j)=\\delta_{ij}$. Thus $1\\otimes b_i$ is an $R$-basis: $S$ is finite free of rank $n$. These formulas also hold for $R=0$.",
+   "uses": [
+    "def-pc-field-tower",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written coordinate calculation from the tensor universal property of Tag 00CX (lemma-tensor-product); finite freeness means a finite basis (Tag 00C2, item-free-module)."
+   }
+  },
+  {
+   "text": "To check flatness directly, for any $R$-module $N$ the basis in step 2 identifies $N\\otimes_R S$ with $N^n$: $a\\otimes s\\mapsto(c_i a)_i$ when $s=\\sum_i c_i(1\\otimes b_i)$, with inverse $(a_i)\\mapsto\\sum_i a_i\\otimes(1\\otimes b_i)$. For an injective map $f:N_1\\to N_2$, $f\\otimes1$ becomes $(a_i)\\mapsto(f(a_i))$, which is injective coordinate by coordinate. This is precisely the definition of a flat ring map in [def-weil-pbc-flat-ring-map], proving the flatness of $R\\to S$. The same coordinates preserve exactness: if $(a_i)$ maps to zero in the next module, choose a preimage of each $a_i$ in the preceding module; the resulting tuple is a preimage of $(a_i)$. Thus the calculation also satisfies the exact-sequence formulation in Stacks 00HB.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HB (definition-flat), items (1) and (3); agent-written coordinate verification rather than an uncited free-implies-flat lemma."
+   }
+  },
+  {
+   "text": "We spell out the passage between component generic points and an open neighbourhood. If $z\\in O\\subseteq X$ with $O$ open, then $C=\\overline{\\{z\\}}$ has $C\\cap O=\\overline{\\{z\\}}^{\\,O}$. If $C$ is maximal irreducible in $X$, an irreducible closed subset of $O$ containing $C\\cap O$ has irreducible closure in $X$ containing $C$, hence equals $C$ after closure; intersecting with $O$ gives equality. Conversely, if $C\\cap O$ is maximal irreducible in $O$, any irreducible closed $Z\\supseteq C$ has nonempty open $Z\\cap O$, hence dense in $Z$: two nonempty relative opens intersect by irreducibility. It follows that $Z\\cap O=C\\cap O$, and taking closures gives $Z=C$. Thus $z$ is a component generic point in $X$ if and only if it is one in $O$. For $O=\\operatorname{Spec}A$, its closure is $V(\\mathfrak q)$ when $z=\\mathfrak q$: $V(\\mathfrak q)$ is closed, and every closed $V(I)$ containing $\\mathfrak q$ contains $V(\\mathfrak q)$. Consequently [lem-weil-pbc-spec-irreducible-components-minimal-primes] identifies this condition with minimality of $\\mathfrak q$.",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES (lemma-irreducible), parts (1) and (3); open-neighbourhood argument written out from irreducibility and closure definitions."
+   }
+  },
+  {
+   "text": "Now let $y$ be a component generic point of $W$, let $x=\\operatorname{pr}(y)$, and choose the affine neighbourhood of $x$ in step 1. Write $\\mathfrak q\\subset S$ for $y$ and $\\mathfrak p=\\mathfrak q\\cap R$ for $x$. Step 4 says that $\\mathfrak q$ is minimal. If $\\mathfrak p_0\\subseteq\\mathfrak p$ is any prime of $R$, flatness from step 3 and [lem-sc-flat-going-down] supply a prime $\\mathfrak q_0\\subseteq\\mathfrak q$ contracting to $\\mathfrak p_0$. Minimality gives $\\mathfrak q_0=\\mathfrak q$, so $\\mathfrak p_0=\\mathfrak p$. Thus $\\mathfrak p$ is minimal. By step 4, $x$ is a component generic point first in $U$ and then in $V$. No existence or finiteness assertion about a list of components is used.",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS (lemma-flat-going-down), applied to the finite-free map of steps 2–3."
+   }
+  },
+  {
+   "text": "For any $y\\in W$ put $x=\\operatorname{pr}(y)$ and $D=\\kappa(x)\\otimes_F K$. By [lem-weil-pbc-fibre-product-points], $y$ corresponds to a prime $P$ of $D$; the other two residue fields are $K$ and $F$ because spectra of fields have their single points [def-weil-affine-spectrum]. By the fibre definition and the fibre-product universal property, a map $T\\to W_x$ is a pair of maps $T\\to\\operatorname{Spec}\\kappa(x)$ and $T\\to\\operatorname{Spec}K$ agreeing over $\\operatorname{Spec}F$: the map to $V$ is forced by the first map. Hence $W_x=\\operatorname{Spec}D$, compatibly with both projections, and this is the prime in the stated fibre. The basis calculation of step 2 with $R=\\kappa(x)$ gives dimension $n$ for $D$; the images of its $n$ basis vectors span $D/P$. This quotient is a nonzero domain because $P$ is prime. Hence [lem-weil-pbc-finite-dimensional-domain-is-field] makes $D/P$ a field. Apply the final clause of [lem-weil-pbc-fibre-product-point-residue-field]: the canonical $D/P\\to\\kappa(y)$ is an isomorphism compatible with $\\kappa(x)\\to\\kappa(y)$. This proves both the asserted quotient description and finiteness of $\\kappa(y)/\\kappa(x)$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "def-weil-affine-spectrum",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT (lemma-points-fibre-product), including its residue-field sentence; Tag 01I4 for the fibre spectrum. The finite-dimensional-domain ingredient is the existing Mathlib leaf."
+   }
+  },
+  {
+   "text": "Finally take a component generic point $y$ of $W$. Step 5 makes $x=\\operatorname{pr}(y)$ a component generic point of $V$, and the hypothesis on $v$ makes $b=v(x)$ a component generic point of $B$. The induced residue maps compose: on local rings the stalk map for a composite is the composite stalk map, and passing to maximal-ideal quotients gives $\\kappa(b)\\to\\kappa(x)\\to\\kappa(y)$, the residue map for $v\\circ\\operatorname{pr}$ [def-weil-residue-field]. Both extensions are finite. Explicitly, products of members of a finite $\\kappa(b)$-spanning set of $\\kappa(x)$ with members of a finite $\\kappa(x)$-spanning set of $\\kappa(y)$ span $\\kappa(y)$ over $\\kappa(b)$. Thus the composite has the required finite residue extension. If $W$ is empty the generic-point assertions are vacuous; all preceding affine calculations remain valid.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-field-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written finite-spanning-set argument and functoriality of the residue map (local ring discussion following Tag 07BI); conclusion in ILO X 2.3 Step 2, printed p.150, diagram (2.b)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-field-tower",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-fibre-product-points",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-formulated finite-field scalar-extension corollary of Tag 00HS, assembled with Schemes Tags 01I4, 01JR, 01JT and Algebra Tag 00ES. Supplies ILO X 2.3 Step 2, printed p.150, diagram (2.b)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite field scalar extension of an arbitrary scheme sends generic points to generic points and induces finite residue field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.IsOver\\n    (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap (X ↘ Y) x)) Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).CanonicallyOver X\", \"doc\": \"For any scheme $ X $ and a point $ x \\\\in X $, the affine scheme $ \\\\operatorname{Spec} $ of the residue field at $ x $ is equipped with a canonical morphism to $ X $, thereby forming an object in the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).Over X\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, there is a canonical morphism of schemes from the spectrum of the residue field at $x$, denoted $\\\\operatorname{Spec}(k(x))$, to the scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) (x : ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f y).base) x =\\n    IsLocalRing.closedPoint ↑(Y.residueField y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and let $y \\\\in Y$ be a point. Let $\\\\kappa(y)$ be the residue field of $Y$ at $y$. The canonical projection from the fiber $X_y := X \\\\times_Y \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {X : AlgebraicGeometry.Scheme}\\n  {f₁ f₂ : (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })},\\n  f₁ = f₂ ↔\\n    ∃ (e : f₁.fst = f₂.fst),\\n      f₁.snd = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueF\", \"doc\": \"For a scheme $X$ and points $x, y \\\\in X$, if $x = y$, then the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ are isomorphic via the identity isomorphism on $\\\\kappa(x)$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (K : Type u) [inst : Field K] (X : AlgebraicGeometry.Scheme)\\n  (f : AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map\\n        (AlgebraicGeometry.Scheme.descResidueField (AlgebraicGeom\", \"doc\": \"For a field $ K $, a scheme $ X $, and a morphism $ f : \\\\operatorname{Spec}(K) \\\\to X $, the composition of the morphism induced by the residue field at the closed point of $ \\\\operatorname{Spec}(K) $ a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to \\\\kappa(x)$ m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic points under a finite free field base change map to generic points by going down with finite residue fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.HasGoingDown R S ↔ GeneralizingMap (PrimeSpectrum.comap (algebraMap R S))\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ satisfies the going-down property if and only if the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $, defined by taking preimages under\"}\n  {\"name\": \"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/RingHom\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u_1} [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : PrimeSpectrum R),\\n  Nontrivial (TensorProduct R p.asIdeal.ResidueField S) ↔ p ∈ Set.range (PrimeSpectrum.comap (algebraMap R S))\", \"doc\": \"For commutative rings $R$ and $S$ with an $R$-algebra structure on $S$, and a prime ideal $\\\\mathfrak{p}$ in $R$, the tensor product of the residue field of $\\\\mathfrak{p}$ with $S$ over $R$ is nontrivi\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat → GeneralizingMap (PrimeSpectrum.comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.baseChange\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [inst_3 : p.IsPrime] [Algebra.QuasiFiniteAt R p] {A : Type u_4} [inst_5 : CommRing A] [inst_6 : Algebra R A]\\n  (q : Ideal (TensorProduct R A S)) [inst_7 : q.IsPrime],\\n  p = Ideal.comap Al\", \"doc\": \"If a commutative ring $ S $ is quasi-finite over a base ring $ R $ at a prime ideal $ p $, then after base change to an $ R $-algebra $ A $, the tensor product $ A \\\\otimes_R S $ is quasi-finite over $\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (k : Type u_1) (K : Type u_2) (R : Type u_3) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  [inst_3 : CommRing R] [inst_4 : Algebra k R] [IsPurelyInseparable k K],\\n  IsHomeomorph (PrimeSpectrum.comap (algebraMap R (TensorProduct k R K)))\", \"doc\": \"Let $ k \\\\to K $ be a purely inseparable field extension and $ R $ a commutative semiring equipped with a $ k $-algebra structure. The induced map on prime spectra given by preimage under the canonical\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (K : Type u_2) (R : Type u_3) (S : Type u_4) [inst : Field K] [inst_1 : CommRing R] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R K] [inst_4 : Algebra R S] (L : Type u_5) [inst_5 : Field L] [inst_6 : Algebra R L]\\n  [inst_7 : Algebra K L] [inst_8 : IsScalarTower R K L] [IsPurelyInseparable K L],\\n  Is\", \"doc\": \"Let $ R $ be a commutative semiring, $ K $ and $ S $ be $ R $-algebras, and $ L $ be a field extending $ K $ as a purely inseparable field extension. The map induced by the tensor product $ K \\\\otimes_\"}\n  {\"name\": \"Ideal.comap_fiberIsoOfBijectiveResidueField_symm\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u_1} {R' : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing R'] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R R'] [inst_4 : Algebra R S] {p : Ideal R} {q : Ideal R'} [inst_5 : p.IsPrime] [inst_6 : q.IsPrime]\\n  [inst_7 : q.LiesOver p] (H : Function.Bijective ⇑(Ideal.ResidueFi\", \"doc\": \"Given a bijective algebra homomorphism between residue fields of prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{q} \\\\subseteq R'$, the inverse of the order isomorphism between prime ideals lyin\"}\n  {\"name\": \"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u_1} {R' : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing R'] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R R'] [inst_4 : Algebra R S] {p : Ideal R} {q : Ideal R'} [inst_5 : p.IsPrime] [inst_6 : q.IsPrime]\\n  [inst_7 : q.LiesOver p] (H : Function.Bijective ⇑(Ideal.ResidueFi\", \"doc\": \"Given a bijective algebra homomorphism between the residue fields of prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{q} \\\\subseteq R'$, the order isomorphism between the sets of prime ideals lyi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"genericPoints\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "genericPoints|residueField.*[Ff]inite|[Ff]inite.*residueField",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"211\", \"text\": \"    IsFinite (f.fiberToSpecResidueField x) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"215\", \"text\": \"nonrec lemma LocallyQuasiFinite.of_fiberToSpecResidueField\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"216\", \"text\": \"    (hf : ∀ x, LocallyQuasiFinite (f.fiberToSpecResidueField x)) : LocallyQuasiFinite f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"222\", \"text\": \"      .of_locallyQuasiFinite (f.fiberToSpecResidueField x)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"229\", \"text\": \"    convert! (inferInstance : LocallyQuasiFinite <| g ≫ f.fiberToSpecResidueField _) using 1\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"34\", \"text\": \"lemma Smooth.of_smooth_fiberToSpecResidueField [LocallyOfFinitePresentation f] [Flat f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"222\", \"text\": \"    IsClosed {x} ↔ LocallyOfFiniteType (X.fromSpecResidueField x) := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite extension of ground field gives finite flat morphism preserving component generic points and finite residue extensions",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "genericPoints|residueField.*[Ff]inite|[Ff]inite.*residueField",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ingredients (generalizing maps, fibre prime correspondences or finite residue extensions), not all clauses of this scheme scalar-extension statement in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite extension of scalars of schemes preserves generic points and gives finite residue field extensions",
+   "results": "8 hits; IsLocalRing.ResidueField.finite_of_finite, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, Algebra.QuasiFinite.instFiniteResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, AlgebraicGeometry.Scheme.residueField, instIsAlgebraicResidueFieldOfIsIntegral, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, Algebra.instFiniteResidueFieldOfFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ingredients (generalizing maps, fibre prime correspondences or finite residue extensions), not all clauses of this scheme scalar-extension statement in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genericPoints\", \"Flat\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ingredients (generalizing maps, fibre prime correspondences or finite residue extensions), not all clauses of this scheme scalar-extension statement in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite field scalar extension of any scheme is finite free and flat and sends component generic points to component generic points with finite residue field extensions",
+   "results": "8 hits; AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, RingHom.EssFiniteType.residueFieldMap, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Flat.generalizingMap",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ingredients (generalizing maps, fibre prime correspondences or finite residue extensions), not all clauses of this scheme scalar-extension statement in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free base change along a field extension maps minimal primes to minimal primes and its residue fields are prime quotients of the tensor product of fields",
+   "results": "8 hits; PrimeSpectrum.preimageOrderIsoTensorResidueField, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, Ideal.comap_fiberIsoOfBijectiveResidueField_apply, PrimeSpectrum.coe_preimageOrderIsoFiber_apply_asIdeal, PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal, Ideal.comap_fiberIsoOfBijectiveResidueField_symm, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, Ideal.fiberIsoOfBijectiveResidueField",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ingredients (generalizing maps, fibre prime correspondences or finite residue extensions), not all clauses of this scheme scalar-extension statement in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-field-semilinear-induction",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 00HS, lemma-flat-going-down, applied to finite-free scalar extension; agent-formulated scheme corollary together with the finite-dimensional fibre-algebra argument, former step 10 of lem-sfb-common-field-semilinear-induction. It supplies the generic-point assertion in ILO X 2.3 Step 2, printed p.150, diagram (2.b).",
+   "via": [
+    "lem-sfb-common-field-semilinear-induction",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-scalar-extension-generic-points",
+  "worker": "stage1",
+  "group": "Q123",
+  "summary": "Split into seven explicit steps using existing affine base-change, going-down, minimal-prime and fibre-residue nodes. No new nodes. Wrote out the tensor basis, flatness, open-neighbourhood generic-point criterion, minimal-prime contraction, quotient dimension and field-tower arguments; checked arbitrary schemes and inseparable/nonreduced cases. Mathematical statement unchanged; added three missing notion references for tensor products, free modules and flat ring maps. Landing-return repair: compared the retained returned split with the current unsplit DAG item and re-read all seventeen cited node statements; all twenty citation quotes remain valid. Made coordinate exactness and the fibre universal-property identification explicit, preserving all hypotheses and the proof route. Delivery is rebuilt on the current server DAG.",
+  "blueprint": "The ancestor command returns null (the inherited non-blueprint new-target chain). This is the generic-point/finite-residue ingredient cut from former step 10 of lem-sfb-common-field-semilinear-induction, now its step 5, serving ILO X 2.3 Step 2, printed p.150, diagram (2.b). No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Generic geometric fact identifying residue fields of points in arbitrary fibre products; the unit supplies no alternate residue-field comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-9d025fee5",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-9d025fee5 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and all 17 cited node statements in full. There are no new nodes. The item is still unsplit with an empty proof in clones/live and side-live, and there is no repair note for it. This head redelivers after the landing/promotion refusal of f2e75169d, which a cc review had PASSed. The only changes since then expand step 3 (explicit coordinatewise exactness, redundant but correct) and step 6 (W_x identified via the universal property as pairs of maps over Spec F, giving Spec(κ(x)⊗_F K)), plus the split_report summary. Compared with live, the statement is unchanged except for one notion-reference sentence and its 3 added stmt_deps; chapter, unit and created record are unchanged. proof_deps = union of the step uses, and no SGA is cited. Step checks: (1) lem-weil-pbc-open-fibre-product with Spec K and Spec F whole, plus the affine-spectra node, gives pr^-1(U) = Spec(R⊗_F K) with r↦r⊗1. (2) The basis maps R^n⇄S are mutually inverse; S→R^n is induced by an F-bilinear map, and this also holds for R=0. (3) N⊗_R S≅N^n naturally in N, which gives flatness by def-weil-pbc-flat-ring-map. (4) Both directions of 'component generic point in X ⇔ in an open O', closure{q}=V(q), and the minimal-primes node. (5) Stacks 00HS (algebra.tex:9265) going down, in the right direction, makes the contraction of a minimal q minimal. (6) Stacks 01JT (schemes.tex:3265) points node, dim D=[K:F], the domain-is-field leaf, and the final clause of the fibre-product residue-field node give D/P≅κ(y) over κ(x). (7) Residue maps compose and a composite of finite extensions is finite. Parent use (lem-sfb-common-field-semilinear-induction step 5) is covered. Edge cases checked: K=F, empty V/R=0, nonreduced V, purely inseparable K with nonreduced D, and the split separable non-injective case. Accepted the tool use of lem-weil-pbc-fibre-product-point-residue-field. Advisory: the report mentions a citations.json that was not delivered (cosmetic). Note for the maintainer: this is a side-completion promotion loop and the earlier head was already PASSed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteScalarExtensionGenericPoints",
+  "declaration": "AlgebraicGeometry.Scheme.finite_scalar_extension_generic_points",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteScalarExtension",
+   "AlgebraicGeometry.Scheme.scalarExtensionProjection",
+   "AlgebraicGeometry.Scheme.fieldToResidue",
+   "AlgebraicGeometry.Scheme.scalarExtensionFiberAlgebra",
+   "AlgebraicGeometry.Scheme.scalarExtensionFiberTmul",
+   "AlgebraicGeometry.Scheme.finite_scalar_extension_generic_points"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteScalarExtensionGenericPoints.lean",
+  "statement": "theorem finite_scalar_extension_generic_points (F K : Type u) [Field F] [Field K] [Algebra F K] [Module.Finite F K] (V : Scheme.{u}) (f : V ⟶ Spec (.of F)) : (∀ (R : Type u) [CommRing R] [Algebra F R] (i : Spec (.of R) ⟶ V) [IsOpenImmersion i], i ≫ f = Spec.map (CommRingCat.ofHom (algebraMap F R)) → (∃ e : pullback (scalarExtensionProjection (K := K) f) i ≅ Spec (.of (R ⊗[F] K)), e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R (R ⊗[F] K))) = pullback.snd (scalarExtensionProjection (K := K) f) i) ∧ (∃ n : ℕ, FieldExtension.degree F K = (n : WithTop ℕ) ∧ Nonempty (Module.Basis (Fin n) R (R ⊗[F] K))) ∧ (algebraMap R (R ⊗[F] K)).Flat) ∧ (∀ y : finiteScalarExtension (K := K) f, y ∈ genericPoints (finiteScalarExtension (K := K) f) → scalarExtensionProjection (K := K) f y ∈ genericPoints V) ∧ (∀ y : finiteScalarExtension (K := K) f, ∃ ψ : scalarExtensionFiberAlgebra (K := K) f (scalarExtensionProjection (K := K) f y) →+* (finiteScalarExtension (K := K) f).residueField y, (∀ (a : V.residueField (scalarExtensionProjection (K := K) f y)) (b : K), ψ (scalarExtensionFiberTmul f _ a b) = ((scalarExtensionProjection (K := K) f).residueFieldMap y).hom a * fieldToResidue (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap F K)))) y b) ∧ (RingHom.ker ψ).IsPrime ∧ Module.Finite (V.residueField (scalarExtensionProjection (K := K) f y)) (scalarExtensionFiberAlgebra (K := K) f (scalarExtensionProjection (K := K) f y)) ∧ IsField (scalarExtensionFiberAlgebra (K := K) f (scalarExtensionProjection (K := K) f y) ⧸ RingHom.ker ψ) ∧ (∃ e : (scalarExtensionFiberAlgebra (K := K) f (scalarExtensionProjection (K := K) f y) ⧸ RingHom.ker ψ) ≃+* (finiteScalarExtension (K := K) f).residueField y, e.toRingHom.comp (Ideal.Quotient.mk (RingHom.ker ψ)) = ψ) ∧ ((scalarExtensionProjection (K := K) f).residueFieldMap y).hom.Finite) ∧ (∀ (B : Scheme.{u}) (v : V ⟶ B), (∀ x : V, x ∈ genericPoints V → v x ∈ genericPoints B ∧ (v.residueFieldMap x).hom.Finite) → ∀ y : finiteScalarExtension (K := K) f, y ∈ genericPoints (finiteScalarExtension (K := K) f) → (scalarExtensionProjection (K := K) f ≫ v) y ∈ genericPoints B ∧ ((scalarExtensionProjection (K := K) f ≫ v).residueFieldMap y).hom.Finite)",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-251a9a393",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Node record changed only in lean; the statement is verbatim with the file signature. Hypotheses: finite K/F ([Module.Finite F K]) and an arbitrary F-scheme (f : V ⟶ Spec F), nothing stronger; single universe u. W/pr = pullback/pullback.fst, the def-pc-base-change convention. Affine clause: ∀ R with an open immersion i compatible over Spec F; the iso to Spec(R⊗K) is over Spec R; Fin n basis with degree = n (covers R=0); ring flatness. genericPoints agrees with the IsGenericPoint/irreducibleComponents records. Residue clause: ψ pinned on pure tensors (unique; exists by the pullback condition), so ker ψ is the fibre prime; finite over κ(x), field quotient, quotient ≃ κ(y) with e∘mk=ψ, actual residueFieldMap finite. Composition clause correct for arbitrary B, v. Helpers are real constructions with source/blueprint docstrings; proof is sorry only; seven-step plan in the docstring. No duplicate: the Sheaf/Paper finiteScalarExtension is unrelated, and Mathlib's Triplet.tensor is over κ(s), not F. Edge cases checked: empty schemes, R=0, K=F, inseparable K, infinitely many components. No recompile (no file changed). Advisory: the second reading is by the author; the IsField clause is redundant but harmless."
+ }
+}

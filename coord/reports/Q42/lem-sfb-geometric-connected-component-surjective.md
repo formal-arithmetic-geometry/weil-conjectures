@@ -1,0 +1,70 @@
+# Worker report: Q42
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-geometric-connected-component-surjective.json`: statement item, now split in five steps; Mathlib searches found no exact statement or one-line specialization.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-geometric-component-finite-preimage.json`: one new statement-only node, unsplit, no Mathlib match. It describes the finite decomposition above one irreducible component for an arbitrary locally finite type scheme; it does not assume connectedness or globally finitely many components, and does not assert the item's surjective connected-component cover.
+- `citations.json`: 28 entries, one per step/node pair, quoting the verbatim statement of the cited node. Whole statements are quoted so that the precise clause and its hypotheses remain visible.
+- `searches.jsonl`: actual msearch.py output records; no unavailable query was reinterpreted as absence. Existing item searches have been retained, and the new searches were appended.
+
+## Attachments
+
+None. Searches of the project library for the blueprint tag and component/surjectivity terminology did not find a declaration stating the entire item. The finite-field component descent declarations assume finiteness of the geometric component set; they do not prove that finiteness from the hypotheses here. They cannot finish this item. Mathlib's connected-components homeomorphism requires geometrically connected fibres, which this scalar-extension projection need not have.
+
+## WANTED
+
+None. All mathematical sources used are present in `literature/stacks-project/`.
+
+## Corrections and scope
+
+The item statement is unchanged. It was an unsplit supporting input with no proof. In particular I have not added quasi-compactness, perfectness of the field, or reducedness of X. Stacks 04L7 assumes reducedness of X for the subsequent injection of global functions, but that assumption is not used for this geometric-component cover. Our item stops before the injection assertion.
+
+The inherited blueprint ancestry has `from.node = null`; the required `blueprint_refs.py ancestor` command also reports None. I retained that provenance and extended the new node's `via` chain through this item. I read the chapter and unit records and the CURRENT `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md`. The latter's proof (3) is now shorter than the older provenance; the local Stacks input already present in the DAG is still being split, without changing chapter or unit routes. Searches of imported blueprint nodes for geometric connected component, irreducible components, finite union of irreducible, 04KZ and 038H found no identical statement.
+
+## Unfinished work
+
+Only the new statement-only input remains unsplit, as required by the one-level stage-1 brief. Its proof material for the next worker is Stacks 04KZ(3) over the separable closure, followed by 038H from the separable closure to K: this latter projection gives a bijection on components. No proof sketch was placed inside the new node's statement. The item's finite intersection-chain and affine-generator arguments remain in the item instead of becoming additional nodes.
+
+## Not duplicates
+
+lem-sfb-geometric-component-finite-preimage vs new-lem-sbc-finite-field-closed-component-descent: the existing statement assumes geometric component finiteness and descends individual closed subsets to a finite intermediate field; the new input gives finiteness of the components lying above a single original component, without any global component-finiteness hypothesis.
+
+lem-sfb-geometric-component-finite-preimage vs lem-sbc-components-finite-separable-descent: the existing statement assumes geometric component finiteness and produces a finite descent field; the new input supplies componentwise geometric finiteness before such a descent can be applied.
+
+lem-sfb-geometric-component-finite-preimage vs lem-sbc-generic-components-split: the existing statement assumes a globally finite-type scheme and produces a finite etale field extension with geometrically irreducible components; the new statement allows merely locally finite type schemes and specifies the finite union above a chosen component over the full algebraic closure.
+
+lem-sfb-geometric-component-finite-preimage vs new-lem-sbc-closed-component-descent-topology: the existing topological lemma assumes finitely many upstairs components and a descent condition; it does not prove geometric finiteness for locally finite type schemes over fields.
+
+lem-sfb-geometric-component-finite-preimage vs lem-trf-geometric-fibre-component-count-base-change: the existing statement proves independence/base change invariance of a geometric component count, allowing infinity; the new statement proves finiteness above each original component over a possibly non-separably-closed field.
+
+lem-sfb-geometric-component-finite-preimage vs lem-trf-geometric-components-projective-line-descent: the existing result assumes an algebraically closed base and globally finite type, and concerns integral component and projective-line descent; the new result allows arbitrary base fields, merely locally finite type schemes, and multiple geometric components above one original component.
+
+lem-sfb-geometric-component-finite-preimage vs lem-trf-sepclosed-valuation-geometric-components: the existing result treats a geometrically reduced finite-type scheme over a separably closed valuation residue field; the new input imposes none of these additional conditions.
+
+lem-sfb-geometric-component-finite-preimage vs lem-sfb-group-local-minimal-prime: the existing statement concerns a group scheme's identity component and geometric irreducibility; the new statement concerns arbitrary locally finite type schemes and a finite decomposition above every irreducible component.
+
+lem-sfb-geometric-component-finite-preimage vs lem-sfb-relatively-closed-constants-units-fg: the existing statement is about finite generation of the units quotient, with connectedness, reducedness and relatively closed constants; it states no geometric component decomposition.
+
+lem-sfb-geometric-component-finite-preimage vs lem-sfb-geometric-connected-component-surjective: the item proves a connected-component cover and all its scheme properties, under global finiteness and connectedness; the new input is the finer single-irreducible-component decomposition, with neither hypothesis, and supplies neither a connected-component cover nor its surjectivity.
+
+lem-sfb-geometric-component-finite-preimage vs lem-sfb-field-extension-irreducible-components: the existing statement gives actual images and surjectivity on component sets under arbitrary field extensions, and allows an infinite union in a component inverse image; the new input gives finiteness of that union using local finite type and an algebraic closure.
+
+## Review by Q42
+
+I read the full first proof paragraph of Stacks 04L7 (varieties.tex, `proposition-units-general`), not just its citation line. It explicitly uses openness from 0383 and closedness from 01WM to get a surjective image of the chosen geometric connected component. Its finiteness sentence invokes 04KZ and explicitly distinguishes the separable closure from the algebraic closure through 038H. I read 04KZ's statement and proof and 038H's statement and proof. This verifies the source for the one new node: 04KZ(3) gives a finite union over the separable closure for EACH original irreducible component, and 038H preserves the component set on extending that separably closed field to K. Local finite type is present, and global finite type is not needed. I checked the possible duplicate statements listed above, not their proofs, before introducing this node.
+
+For step 1, I opened `lem-sc-irreducible-components-cover`, which actually states that components cover every topological space; the new node supplies the finite inverse-image cover for each original component. The definition of irreducible components supplies closedness and maximality. Intersecting the finite closed cover with a further irreducible component and applying irreducibility successively proves it equals a listed member; I did not assume a merely finite irreducible cover automatically lists all components. `def-weil-pbc-scheme-reduction` states that reduction is a closed immersion and the identity on underlying sets, and `def-weil-closed-immersion` supplies the topological embedding. Together these give the homeomorphism used here; the definition was not cited for an unstated theorem about reducedness.
+
+For step 2, `lem-pc-field-extension-surjective` is exactly the surjectivity of the spectrum map of a field extension, and `lem-weil-pbc-surjective-base-change` states its preservation by arbitrary scheme base change. The hypotheses require neither finite degree nor finite presentation. Nonemptiness follows because X is nonempty and reduction preserves points.
+
+For step 3, I checked Topology 004W and the statements of the same covering lemma and component/connectedness definitions. The elementary proof is given explicitly: partition the FINITE list by chains of intersections; each irreducible piece cannot cross a clopen partition, and intersections propagate its side. The chain-class unions and their complements are finite closed unions, hence clopen. This proves maximal connectedness and existence instead of appealing to an uncited connected-component existence theorem. The same maximality argument identifies the irreducible components of Y. This argument does not assert that an arbitrary locally Noetherian scheme is quasi-compact or globally Noetherian.
+
+For step 4, I read Schemes 01J3, `lemma-reduced-closed-subscheme`, including the affine quotient construction, and the full statement of `lem-weil-pbc-reduced-induced-closed-subscheme`. Clause (2) gives reducedness for the whole closed set, so it applies to W_red. `def-weil-open-immersion` identifies Y with restriction of the structure sheaf, hence the local rings agree. The affine-spectrum fibre-product theorem actually gives the tensor-product charts, rather than merely existence of fibre products. The finite-type definition gives the original affine finite-generator cover. Reduction gives quotient rings, whose generators remain finite. I opened the entire `lem-weil-pbc-affine-ideals-closed-subscheme` statement and use precisely clause (0): principal opens are affine with localized sections. The principal neighbourhood choice is explicit from the closed complement V(I); the localization definition makes the additional generator f^{-1} sufficient. Thus the argument works even when the cover is infinite. Reducedness of Y is checked on local rings, so no theorem on arbitrary open-section localization is being assumed.
+
+For step 5, I read Morphisms 0383 (`lemma-scheme-over-field-universally-open`), 01WL (`lemma-base-change-finite`) and 01WM (`lemma-integral-universally-closed`). The universally-open-over-a-field node states openness of precisely the projection along ANY field-scheme, so it applies to Spec K, including an infinite extension. The integral-morphism definition gives the affine criterion; algebraicity becomes monic integrality by dividing by the nonzero leading coefficient in k. The integral base-change node states integrality in ANY Cartesian square, and the integral/universally-closed node gives closedness. `def-weil-proper-morphism` is used only for the meaning of universally closed (identity base change gives closedness); no properness hypothesis is invoked. The definition of connectedness then excludes a proper nonempty clopen image. Closedness here is topological restriction of a closed map to a closed subset, so no unjustified finite-type or quasi-compactness of the open immersion Y into Z is used.
+
+I tested the new statement and the item on: an algebraically closed base (one geometric component above an irreducible T), a finite separable field spectrum (several geometric points, each connected component still covers the one-point original spectrum), a nontrivial purely inseparable field spectrum (nonreduced geometric base change, whose reduction has the same points), nonreduced X (reduction is necessary and does not change the image argument), empty X for the new lemma (no T, so vacuous), and an infinite disjoint union of affine lines for the new lemma (not quasi-compact, but one component still has a finite geometric decomposition). The item's nonemptiness condition rules out the empty case; connectedness rules out the infinite disjoint-union test as an item hypothesis. Chains of intersecting irreducible components test that connected components are unions of irreducible components rather than individual irreducible components.
+
+Against delivery-errors B--E: the only new node is self-contained, statement-only, with all definitions and Stacks tags/labels; all searches are actual msearch calls and both semantic phrasings were read. No Mathlib leaf is claimed. The proof cites node statements, not their hidden constructions. It uses no circular dependency, SGA source, or additional hypothesis. The new input is the proper componentwise finiteness fact, not a relabelled connected-component cover. The few-line finite topology, finite unions, quotient generators and localization generators remain explicit steps. Every step is below 2000 characters. I corrected the tempting shortcuts of using globally Noetherian component finiteness for a merely locally finite type scheme, using a geometric-connectedness equivalence for a projection with disconnected fibres, and treating a finite-descent lemma's assumed finiteness as a conclusion. No source statement was disputed.
+
+Generic off-unit tool uses are declared in `split_report.tool_uses` with their purposes. They are topology, scalar extension and affine-chart tools, not replacements for any unit proof route. The report and split are my direct-delivery self-review; no second worker or subagent was started.

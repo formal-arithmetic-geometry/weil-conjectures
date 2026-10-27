@@ -1,0 +1,58 @@
+{
+ "id": "sk-thm-tf-coefficient-morphism-formula",
+ "kind": "unit",
+ "chapter": "sec-trace-formula",
+ "title": "Trace formula for a Frobenius correspondence",
+ "lean": [],
+ "uses": [
+  "sk-d-weil",
+  "sk-lem-tf-compact-trace",
+  "sk-i-relative-frob",
+  "sk-p-proper",
+  "sk-p-frob",
+  "sk-thm-sf-ctf-stability",
+  "sk-i-global-additivity"
+ ],
+ "statement": "The iterates $\\psi_m$, the global operators $T_{c_m}(\\psi_m)$ and the local\noperators $\\psi_{m,\\bar x}$ of a Frobenius correspondence are those of\n[sk-d-weil].\n\nLet $X_0/\\mathbf F_q$ be separated and of finite type, put\n$X=X_0\\times_{\\mathbf F_q}k$, let $A$ be any finite commutative\n$\\ell$-primary ring and $K\\in\\Dctf(X,A)$, and let\n$\\psi:\\Phi_X^*K\\to K$ be any Frobenius correspondence on $K$, that\nis, any morphism in $\\Dctf(X,A)$. For every\n$m\\geq1$, in $A$,\n\n$$\n \\boxed{\\quad\n \\operatorname{tr}_A(T_{c_m}(\\psi_m)\\mid R\\Gamma_c(X_{\\mathrm{pro\\acute et}},K))\n =\\sum_{x\\in X_0(\\mathbf F_{q^m})}\n \\operatorname{tr}_A(\\psi_{m,\\bar x}\\mid K_{\\bar x}).\n \\quad}\n$$\n\nBoth sides are traces of endomorphisms of perfect complexes.",
+ "steps": [
+  {
+   "text": "The proof first treats finite schemes and the affine line, the\nlatter by the Lefschetz–Verdier formula on $\\mathbf P^1$ and the\ncurve local term. Pushforward along a coordinate projection then\nreduces closed subschemes of $\\mathbf A^d$ to fibres in $\\mathbf A^1$,\nand open–closed additivity reduces general $X_0$ to affine pieces;\nthe only compactification used is $\\mathbf A^1\\subset\\mathbf P^1$.\nThe geometric content lies in the case of the affine line, through\nthe local term of [sk-p-frob]; the\nother steps are formal reductions."
+  },
+  {
+   "text": "Perfectness is [sk-lem-tf-compact-trace]. We prove the assertion\nsimultaneously for all finite fields, all Frobenius correspondences and\nall $m$, so that $\\mathbf F_q$ may be replaced by $\\mathbf F_{q^m}$\nwhen we pass to a rational fibre."
+  },
+  {
+   "text": "*Finite schemes.* If $X_0$ is finite, nilpotent invariance and\nthe finite disjoint union of its geometric points give\n$R\\Gamma_c(X,K)=\\bigoplus_{z\\in X(k)}K_z$.\nThe unit pullback along $\\Phi_X^m$ permutes these summands, and\n$T_{c_m}(\\psi_m)$ has block from $K_{\\Phi_X^m(z)}$ to $K_z$ equal to\n$\\psi_{m,z}$. On a finite projective model only the diagonal blocks\ncontribute to the trace. They occur exactly at the points\n$z\\in X_0(\\mathbf F_{q^m})$, with the required stalk maps."
+  },
+  {
+   "text": "*The affine line.* Let $j:\\mathbf A^1_k\\hookrightarrow\\mathbf P^1_k$.\nSince $j$ is defined over $\\mathbf F_q$, its square with the\nFrobenius maps is Cartesian, and base change for this open square gives\n$(\\Phi_{\\mathbf P^1}^m)^*j_!K\\simeq j_!(\\Phi_{\\mathbf A^1}^m)^*K$, and hence an extension\n$\\bar\\psi_m$ of $\\psi_m$ to $j_!K$, compatible with iteration. The\ncomposition isomorphism\n\n$$\n R\\Gamma_c(\\mathbf A^1,K)\n \\simeq R\\Gamma(\\mathbf P^1,j_!K)\n$$\n\nintertwines the global operators of $\\psi$ and $\\bar\\psi$, by the unit\ncompatibility in the open base-change square or by\n[sk-i-relative-frob] (3) for $j$. On\nthe proper curve $\\mathbf P^1$ the graph is proper, so\n[sk-p-proper] writes the trace as the sum of\nthe local terms at the fixed points, and\n[sk-p-frob] identifies each local term\nwith a stalk trace. The stalk of $j_!K$ at infinity is zero, so that\nterm vanishes; the other fixed points and stalk maps are those of\n$\\mathbf A^1_0$."
+  },
+  {
+   "text": "*Closed subschemes of the affine line.* For\n$X_0=\\operatorname{Spec}\\mathbf F_q[t]/I$, either $I=0$ and the\nprevious paragraph applies, or a nonzero polynomial in $I$ makes\n$X_0$ finite over $\\mathbf F_q$, and the finite-scheme case applies,\nalso to nonreduced subschemes."
+  },
+  {
+   "text": "*Induction on affine coordinates.* Suppose the assertion holds\nfor closed subschemes of $\\mathbf A^{d-1}$ over every finite field,\nand let $X_0\\hookrightarrow\\mathbf A^d_{\\mathbf F_q}$ be closed.\nLet $f_0:X_0\\to Y_0=\\mathbf A^{d-1}_{\\mathbf F_q}$ forget the last\ncoordinate, and let $f:X\\to Y$ be its base change to $k$. By\n[sk-thm-sf-ctf-stability], $L=Rf_!K$ lies in\n$\\Dctf(Y,A)$; equip it with the Frobenius correspondence $\\psi'$ of\n[sk-i-relative-frob] (2). Since\n[sk-i-relative-frob] (3) identifies the global operators,\nthe induction hypothesis gives\n\n$$\n \\operatorname{tr}_A(T_{c_m}(\\psi_m)\\mid R\\Gamma_c(X,K))\n =\\sum_{y\\in Y_0(\\mathbf F_{q^m})}\n      \\operatorname{tr}_A(\\psi'_{m,\\bar y}\\mid L_{\\bar y}).\n$$\n\nBy [sk-i-relative-frob] (4) each summand is the compact\ntrace on the fibre $X_{0,y}$, a closed subscheme of\n$\\mathbf A^1_{\\mathbf F_{q^m}}$, for the Frobenius correspondence\n$\\psi_m$ restricted to the fibre and the one-step Frobenius over\n$\\mathbf F_{q^m}$. The case of the affine line\nidentifies it with the sum of the stalk traces over\n$X_{0,y}(\\mathbf F_{q^m})$, and these sets partition\n$X_0(\\mathbf F_{q^m})$ as $y$ varies. This proves the affine case."
+  },
+  {
+   "text": "*General schemes.* Choose a finite affine open cover\n$U_1,\\ldots,U_N$ of $X_0$, let $W_i=\\bigcup_{j\\leq i}U_j$ and\n$V_i=W_i\\setminus W_{i-1}$, with the reduced closed structure.\nEach $V_i$ is closed in the affine $U_i$, hence affine, and it is\nthe closed complement of $W_{i-1}$ in $W_i$. Applying\n[sk-i-global-additivity] successively, the traces add\nover this stratification, as do the point sums, and the affine case\ngives the equality."
+  },
+  {
+   "text": "The detailed form of this argument is\n[thm-trf-coefficient-morphism-trace-formula]; the extension to\n$\\mathbf P^1$ in the case of the affine line is\n[lem-trf-compactification-cohomology] and\n[lem-trf-compactification-graph-operator]."
+  }
+ ],
+ "source": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-thm-tf-coefficient-morphism-formula/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

@@ -1,0 +1,380 @@
+{
+ "id": "lem-trf-local-proj-isomorphism-compatibility",
+ "kind": "statement",
+ "title": "Local Proj comparison under restrictions and degreewise units",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal A=\\bigoplus_{k\\geq0}\\mathcal A_k$ and $\\mathcal B=\\bigoplus_{k\\geq0}\\mathcal B_k$ be commutative unital graded $\\mathcal O_S$-algebra sheaves, quasi-coherent as $\\mathcal O_S$-modules [def-weil-pbc-graded-sheaf-structures; def-weil-pbc-quasi-coherent-algebra]. Put $P_{\\mathcal A}=\\operatorname{Proj}_S(\\mathcal A)$ and $P_{\\mathcal B}=\\operatorname{Proj}_S(\\mathcal B)$, with their structure maps and specified affine restriction isomorphisms $i_U$ [def-nagata-relative-proj]. Let $U\\subseteq S$ be affine and let $\\beta:\\mathcal A|_U\\xrightarrow{\\sim}\\mathcal B|_U$ be a graded $\\mathcal O_U$-algebra isomorphism. There is a unique $U$-isomorphism $r_{\\beta,U}:P_{\\mathcal B}|_U\\to P_{\\mathcal A}|_U$ with the following chart description. With $A=\\Gamma(U,\\mathcal A)$ and $B=\\Gamma(U,\\mathcal B)$, for every $f\\in A_d$, $d>0$, its inverse image of $D_+(f)$ is $D_+(\\beta(f))$, and, under $i_U$ and the standard affine chart identifications, its ring map is\n$$A_{(f),0}\\longrightarrow B_{(\\beta(f)),0},\\qquad a/f^m\\longmapsto\\beta(a)/\\beta(f)^m\\quad(a\\in A_{md}).$$\nHere the chart rings are the degree-zero homogeneous localizations [def-nagata-homogeneous-localization-degree-zero] and a chart map means the induced spectrum morphism [def-weil-affine-spectrum]. These inverse-image charts cover $P_{\\mathcal B}|_U$. The inverse of $r_{\\beta,U}$ is $r_{\\beta^{-1},U}$. For every affine $V\\subseteq U$, restriction over $V$ identifies $r_{\\beta,U}|_V$ with $r_{\\beta|_V,V}$, also for the inverse maps; on a chart coefficient restriction $\\rho$ sends $\\beta(a)/\\beta(f)^m$ to $\\rho\\beta(a)/\\rho\\beta(f)^m$.\nIf $u\\in\\Gamma(U,\\mathcal O_S)^\\times$ and $\\beta'$ is another graded $\\mathcal O_U$-algebra isomorphism such that $\\beta'|_{\\mathcal A_k}=u^k\\beta|_{\\mathcal A_k}$ for every $k\\geq0$, then $r_{\\beta',U}=r_{\\beta,U}$, including equality of their inverses. On the common chart $D_+(\\beta'(f))=D_+(\\beta(f))$, the equality of the two chart maps is the equality\n$$\\frac{\\beta'(a)}{\\beta'(f)^m}=\\frac{u^{md}\\beta(a)}{(u^d\\beta(f))^m}=\\frac{\\beta(a)}{\\beta(f)^m}\\quad(a\\in A_{md}).$$\nNo regularity or non-zero-divisor condition on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MY (label lemma-morphism-proj), 01N2 (label lemma-base-change-map-proj), and 02NC (label lemma-twisting-and-proj, local construction and gluing compatibility)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-nagata-relative-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-affine-spectrum",
+  "def-trf-local-graded-algebra-iso"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\Gamma(U,\\mathcal O_S)$. The specified $i_U$ identify the two relative restrictions with $\\operatorname{Proj}(A)$ and $\\operatorname{Proj}(B)$ [def-nagata-relative-proj]. On sections $\\beta$ is a graded $R$-algebra isomorphism. Apply [lem-nagata-affine-proj-scalar-extension] with the identity $R\\to R$ and the graded isomorphism $R\\otimes_R A\\to B$, $r\\otimes a\\mapsto r\\beta(a)$. Its inverse is $b\\mapsto1\\otimes\\beta^{-1}(b)$: the balanced-tensor relation $r\\otimes a=1\\otimes ra$ verifies both composites. The induced $\\psi$ is exactly $\\beta$. That node supplies the morphism over $U$, the inverse-image charts, the stated fraction formula, their covering, and uniqueness. Conjugating with the specified $i_U$ gives $r_{\\beta,U}$. No equality $\\mathcal A_0=\\mathcal O_U$ is used.",
+   "uses": [
+    "def-nagata-relative-proj",
+    "lem-nagata-affine-proj-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MY (lemma-morphism-proj), 01N2 (lemma-base-change-map-proj), specialization to identity scalar extension"
+   }
+  },
+  {
+   "text": "Perform step 1 with $\\beta^{-1}$. On the chart indexed by $f\\in A_d$, the composite ring map sends $a/f^m$ first to $\\beta(a)/\\beta(f)^m$ and then to $a/f^m$. In the other order the same calculation starts with any positive-degree homogeneous $g\\in B$ and sends $b/g^m$ back to itself. These fractions exhaust the chart rings [def-nagata-homogeneous-localization-degree-zero]. Spectrum functoriality [def-weil-affine-spectrum] therefore makes both scheme composites identities on their charts. The charts cover by step 1; uniqueness in [lem-weil-pbc-scheme-morphism-gluing] makes both composites identities globally. Thus $r_{\\beta,U}^{-1}=r_{\\beta^{-1},U}$, and the uniqueness already proved for the morphism gives the asserted unique $U$-isomorphism.",
+   "uses": [
+    "lem-nagata-affine-proj-scalar-extension",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY (lemma-morphism-proj), chart formula applied to inverse graded isomorphisms"
+   }
+  },
+  {
+   "text": "For affine $V\\subseteq U$, write $\\rho_A:A\\to A_V$ and $\\rho_B:B\\to B_V$ for restriction. The compatibility data in [def-nagata-relative-proj] identify $P_{\\mathcal A}|_V\\to P_{\\mathcal A}|_U$ and its $\\mathcal B$ counterpart with these coefficient restriction maps on localized charts. Sheaf naturality gives $\\rho_B\\beta=\\beta_V\\rho_A$, where $\\beta_V=\\Gamma(V,\\beta|_V)$. The two composites from $P_{\\mathcal B}|_V$ to $P_{\\mathcal A}|_U$ have inverse image of $D_+(f)$ equal to $D_+(\\rho_B\\beta(f))=D_+(\\beta_V\\rho_A(f))$, by step 1 and the specified restriction charts. Their chart comorphisms agree, since\n$$\\frac{a}{f^m}\\longmapsto\\frac{\\rho_B\\beta(a)}{\\rho_B\\beta(f)^m}=\\frac{\\beta_V\\rho_A(a)}{\\beta_V\\rho_A(f)^m}.$$\nThe inverse images of the step-1 chart cover still cover after restriction to $V$. Spectrum functoriality and [lem-weil-pbc-scheme-morphism-gluing] give equality of the composites, hence the required equality over $V$ under $i_V$. This also proves the specified formula for coefficient restriction. Apply this same argument to $\\beta^{-1}$ to obtain compatibility of the inverse maps.",
+   "uses": [
+    "def-nagata-relative-proj",
+    "lem-nagata-affine-proj-scalar-extension",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MY (lemma-morphism-proj), 01N2 (lemma-base-change-map-proj); specified affine restriction compatibility in relative Proj"
+   }
+  },
+  {
+   "text": "Write $v$ for the image of $u$ in $B_0$; it is a unit with inverse the image of $u^{-1}$. For $f\\in A_d$, membership of $v^d\\beta(f)$ in a homogeneous prime is equivalent to membership of $\\beta(f)$, so their standard opens coincide. Their canonical chart-ring identification is\n$$B_{(v^d\\beta(f)),0}\\longrightarrow B_{(\\beta(f)),0},\\qquad \\frac{b}{(v^d\\beta(f))^m}\\longmapsto\\frac{v^{-dm}b}{\\beta(f)^m}.$$\nIts inverse multiplies the numerator by $v^{dm}$; both formulas respect the ordinary localization relation and preserve degree zero [def-nagata-homogeneous-localization-degree-zero]. Under this identification the chart formula from step 1 for $\\beta'$ sends $a/f^m$, $a\\in A_{md}$, to\n$$\\frac{v^{-dm}\\beta'(a)}{\\beta(f)^m}=\\frac{v^{-dm}v^{md}\\beta(a)}{\\beta(f)^m}=\\frac{\\beta(a)}{\\beta(f)^m}.$$\nThus the two spectrum morphisms agree on every chart [def-weil-affine-spectrum], and the covering and [lem-weil-pbc-scheme-morphism-gluing] give $r_{\\beta',U}=r_{\\beta,U}$. Equality of inverses follows by composing this equality with the two inverses. Only the unit $v$ was cancelled; neither $f$ nor $\\beta(f)$ was cancelled, so no non-zero-divisor hypothesis is needed.",
+   "uses": [
+    "def-nagata-affine-proj",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 02NC (lemma-twisting-and-proj), omitted gluing details: cancellation of frame-change units using Tag 01MY chart formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-relative-proj",
+  "lem-nagata-affine-proj-scalar-extension",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-nagata-affine-proj"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MY, 01N2 and 02NC; explicit fraction calculations fill the restriction and degreewise-unit compatibility details omitted in the twisting proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]roj.*[Ss]cal|[Ss]cal.*[Pp]roj|[Pp]roj.*[Rr]estrict",
+   "results": {
+    "count": 5,
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean"
+    ],
+    "digest": "62cb95980821778e",
+    "directory": "Mathlib/AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.map and its chart and composition lemmas cover parts, but no hit gives relative sheaf restriction compatibility and invariance under degreewise unit rescaling"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.map",
+   "results": {
+    "count": 9,
+    "hits": [
+     "AlgebraicGeometry.Proj.map_id",
+     "AlgebraicGeometry.Proj.map",
+     "AlgebraicGeometry.Proj.map_preimage_basicOpen",
+     "AlgebraicGeometry.Proj.map_comp",
+     "AlgebraicGeometry.Proj.awayι_comp_map",
+     "AlgebraicGeometry.Proj.awayι_comp_map_assoc",
+     "AlgebraicGeometry.Proj.ι_comp_map",
+     "AlgebraicGeometry.Proj.awayToSection_comp_appLE"
+    ],
+    "digest": "68af8c776ccf3d97"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.map and its chart and composition lemmas cover parts, but no hit gives relative sheaf restriction compatibility and invariance under degreewise unit rescaling"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degreewise unit scaling of a graded algebra acts trivially on Proj scheme maps and these maps commute with base open restriction",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_resLE",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections.congr_simp",
+     "AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc",
+     "AlgebraicGeometry.Proj.basicOpenToSpec_SpecMap_awayMap",
+     "AlgebraicGeometry.Proj"
+    ],
+    "digest": "66241825c181cab2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.map and its chart and composition lemmas cover parts, but no hit gives relative sheaf restriction compatibility and invariance under degreewise unit rescaling"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of graded quasi coherent algebra sheaves induces inverse local relative Proj maps, commuting with affine open restriction and unchanged by multiplying degree k by a unit to the kth power",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι_assoc",
+     "AlgebraicGeometry.Proj.basicOpenIsoAway_hom",
+     "AlgebraicGeometry.Proj.basicOpenToSpec_app_top",
+     "AlgebraicGeometry.Proj.basicOpenIsoAway",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec_hom",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec",
+     "AlgebraicGeometry.projIsoSpec"
+    ],
+    "digest": "d25461a9a12af682"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.map and its chart and composition lemmas cover parts, but no hit gives relative sheaf restriction compatibility and invariance under degreewise unit rescaling"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]mul|[Ss]cal|[Uu]nit|[Rr]estrict",
+   "results": {
+    "count": 3,
+    "hits": [
+     "155",
+     "156",
+     "158"
+    ],
+    "digest": "9d6feec12546a162",
+    "directory": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.map and its chart and composition lemmas cover parts, but no hit gives relative sheaf restriction compatibility and invariance under degreewise unit rescaling"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two graded ring isomorphisms differing by a unit to the power of the degree induce the same morphism of projective spectrum schemes",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.projIsoSpecTopComponent",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec_hom",
+     "AlgebraicGeometry.Proj.basicOpenIsoAway"
+    ],
+    "digest": "0775806a055029d8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.map and its chart and composition lemmas cover parts, but no hit gives relative sheaf restriction compatibility and invariance under degreewise unit rescaling"
+  },
+  {
+   "tool": "grep",
+   "query": "Proj.*(scal|smul|unit|restrict)|(scal|smul|unit|restrict).*Proj",
+   "results": {
+    "count": 5,
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean"
+    ],
+    "digest": "62cb95980821778e",
+    "directory": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give affine Proj chart identifications and functorial maps, but not all relative affine restriction and degreewise-unit invariance clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two graded ring isomorphisms differing by multiplication by a unit to the degree induce the same map on projective spectrum, naturally under base open restriction",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections.congr_simp",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left",
+     "AlgebraicGeometry.Proj.awayι.congr_simp",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst"
+    ],
+    "digest": "e7c71952bb885b3c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give affine Proj chart identifications and functorial maps, but not all relative affine restriction and degreewise-unit invariance clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.map",
+   "results": {
+    "count": 9,
+    "hits": [
+     "AlgebraicGeometry.Proj.map_id",
+     "AlgebraicGeometry.Proj.map",
+     "AlgebraicGeometry.Proj.map_preimage_basicOpen",
+     "AlgebraicGeometry.Proj.map_comp",
+     "AlgebraicGeometry.Proj.awayι_comp_map",
+     "AlgebraicGeometry.Proj.awayι_comp_map_assoc",
+     "AlgebraicGeometry.Proj.ι_comp_map",
+     "AlgebraicGeometry.Proj.awayToSection_comp_appLE"
+    ],
+    "digest": "68af8c776ccf3d97"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give affine Proj chart identifications and functorial maps, but not all relative affine restriction and degreewise-unit invariance clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded algebra sheaf isomorphism induces an isomorphism of relative Proj commuting with affine open restriction and unchanged by scaling degree k by the kth power of a base unit",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.projIsoSpecTopComponent",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc",
+     "AlgebraicGeometry.Proj.basicOpenIsoAway",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec"
+    ],
+    "digest": "b68039c3dd109a14"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give affine Proj chart identifications and functorial maps, but not all relative affine restriction and degreewise-unit invariance clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective spectrum functor on graded commutative rings: degree rescaling automorphisms induce the identity, and induced maps commute with restriction of quasi coherent algebras",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app",
+     "AlgebraicGeometry.projIsoSpecTopComponent",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec"
+    ],
+    "digest": "526f8c6e425d0a8d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give affine Proj chart identifications and functorial maps, but not all relative affine restriction and degreewise-unit invariance clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-proj-invertible-twist",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The 087S projectivity-conversion argument used by the projective-bundle step of the trace-formula reduction. The 02NC twisting input: old steps 3-4 give inverse chart morphisms, old step 5 cancels the degreewise unit factors, and old step 6 compares coefficient restrictions.",
+   "via": [
+    "lem-trf-relative-proj-invertible-twist",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-local-proj-isomorphism-compatibility",
+  "worker": "stage1",
+  "summary": "Constructed the affine comparison by the existing scalar-extension theorem at the identity base map. Wrote the inverse, affine restriction and degreewise-unit calculations explicitly; retained the statement and all previous search records, introduced no new nodes, and checked every cited statement and the zero-divisor edge cases.",
+  "blueprint": "Serves the inherited 087S projectivity-conversion branch below lem-trf-local-term-locality: the 02NC input to lem-trf-relative-proj-invertible-twist, inverse local comparisons, affine-refinement compatibility and invariance under change of frame. The current blueprint ancestor and unit were read; the unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Its identity-base specialization constructs the affine Proj morphism with the exact fraction formula and covering. This is a generic Proj tool for the inherited twisting argument; the trace-formula unit contains no such algebraic-geometric construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-nagata-affine-proj-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-6577749dd",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-6577749dd (reviewer sub-agent of L); spot-checked: Read the item in full with all 4 steps; the delivery has no new nodes. The statement is byte-identical to live and side-live, both still unsplit, and there is no repair or re-split note. Cited statements read: lem-nagata-affine-proj-scalar-extension, def-nagata-relative-proj (including the i_V and W⊆V chart compatibility), def-nagata-affine-proj, def-nagata-homogeneous-localization-degree-zero, def-weil-affine-spectrum, lem-weil-pbc-scheme-morphism-gluing. Step 1: the scalar-extension node at id_R with r⊗a↦rβ(a) gives ψ=β, the chart formula, the cover and uniqueness, and its p_A matches p_V. Step 2: both chart composites are the identity on fractions; gluing uniqueness finishes it. Step 3: ρ_Bβ=β_Vρ_A gives equal preimages and comorphisms on the restricted cover; the restriction map is an open immersion, so equality transfers to r_{β|V,V}. Step 4: v^dβ(f) and β(f) give the same D_+; the chart iso b/(v^dβf)^m↦v^{-dm}b/βf^m gives v^{-dm}v^{md}β(a)/β(f)^m, cancelling only the unit. Small cases: R[x] and R[x,y] scaled by u give the identity map. Also checked m=0, u=1, empty and nilpotent charts, A_0≠R, and zero-divisor f=2x in (Z/6)[x]; all fine. Sources: Stacks constructions.tex 01MY, 01N2, 02NC checked against tags; no SGA. Accepted tool_use: the generic affine Proj construction lem-nagata-affine-proj-scalar-extension. Maintainer note: def-sfb-relative-proj-iso-of-graded-iso is a definition overlapping the pre-existing item's data, not a fault of this delivery. Citer lem-trf-relative-proj-invertible-twist uses exactly the proved inverse, restriction and unit clauses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalProjIsomorphismCompatibility",
+  "declaration": "AlgebraicGeometry.RelativeProjAlgebra.exists_unique_localProjComparison",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjAlgebra.localProjChartMap",
+   "AlgebraicGeometry.RelativeProjAlgebra.IsLocalProjComparison",
+   "AlgebraicGeometry.RelativeProjAlgebra.unitAdjustedChartFraction",
+   "AlgebraicGeometry.RelativeProjAlgebra.exists_unique_localProjComparison",
+   "AlgebraicGeometry.RelativeProjAlgebra.localProjComparison_inverse",
+   "AlgebraicGeometry.RelativeProjAlgebra.localProjComparison_restrict",
+   "AlgebraicGeometry.RelativeProjAlgebra.localProjComparison_degreewise_unit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalProjIsomorphismCompatibility.lean",
+  "statement": "theorem exists_unique_localProjComparison (β : LocalGradedIso A B U) : (∃! r : (B.realization.π ⁻¹ᵁ U.1).toScheme ≅ (A.realization.π ⁻¹ᵁ U.1).toScheme, IsLocalProjComparison β r) ∧ (∀ (d : ℕ) (f : A.sections U) (hf : f ∈ A.sectionGrade U d) (_hd : 0 < d) (m : ℕ) (a : A.sections U) (ha : a ∈ A.sectionGrade U (m • d)), HomogeneousLocalization.Away.map (β.hom U le_rfl) f (HomogeneousLocalization.Away.mk (A.sectionGrade U) hf m a ha) = HomogeneousLocalization.Away.mk (B.sectionGrade U) ((β.hom U le_rfl).map_mem hf) m (β.hom U le_rfl a) ((β.hom U le_rfl).map_mem ha))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98e80198b",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Every node clause has a matching Lean clause: unique U-iso with i_U-conjugated chart description (preimage D+(βf), Spec.map Away.map via awayι, cover ⨆=⊤), explicit Away.mk fraction formula, inverse via β.symm, affine restriction compat incl. inverses and ρ formula, degreewise-unit invariance with r'=r, r'.inv=r.inv, fraction-pinned chart ring equiv and three-term localization identity, no NZD hypothesis. hscale only on U-sections is a weaker, still-valid hypothesis. New def node def-trf-local-graded-algebra-iso (LocalGradedIso, symm, restrict) is the real affine-basis presentation of a graded algebra-sheaf iso on U; no duplicate found in side-live lean/Sheaf, lean/WeilConjectures, dag/nodes. lean.statement equals file signature after whitespace normalization; item changes vs side-live are only the lean record and the added stmt_dep; statement text unchanged. Edge cases (empty Proj, nilpotent/zero-divisor f, m=0, k=0, u=1, V=U, A_0≠O_U) admitted; single universe u. Second-reading section is tool boilerplate, accepted. No fixes, no compile."
+ }
+}

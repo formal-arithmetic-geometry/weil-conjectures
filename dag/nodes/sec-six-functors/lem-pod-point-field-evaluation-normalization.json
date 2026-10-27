@@ -1,0 +1,251 @@
+{
+ "id": "lem-pod-point-field-evaluation-normalization",
+ "kind": "statement",
+ "title": "Rational and common-stage point evaluation normalization",
+ "statement": "Fix the point and coefficient data of [def-weil-finite-coefficient-point]: $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, $\\ell\\ne\\operatorname{char}k$, and a finite extension $E/\\mathbf Q_\\ell$ inside a fixed $\\overline{\\mathbf Q}_\\ell$, with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi_E$. Use the completed integral point category, its raw scalar localization at $\\varpi_E$, and the common finite-stage category at $\\overline{\\mathbf Q}_\\ell$, with operations [def-weil-derived-pullback-tensor-hom]. For $\\Lambda=R,E,\\overline{\\mathbf Q}_\\ell$ and $C_\\Lambda\\in D^b_{ctf}(s,\\Lambda)$ [def-weil-finite-tor-amplitude], write $F_\\Lambda=\\operatorname{Fib}_s$, $c_\\Lambda=F_\\Lambda C_\\Lambda$, $H_\\Lambda=R\\mathcal Hom_s(C_\\Lambda,\\Lambda_s)$, and $c_\\Lambda^\\vee=R\\operatorname{Hom}_\\Lambda(c_\\Lambda,\\Lambda)$. Define $\\kappa_{\\Lambda,C}:F_\\Lambda H_\\Lambda\\to c_\\Lambda^\\vee$ as the transpose of $F_\\Lambda(\\operatorname{ev})$ through the tensor and unit comparisons [lem-sf-point-fibre-derived-tensor]. Let $u_\\Lambda:\\omega_{s,\\Lambda}\\xrightarrow{\\sim}\\Lambda_s$, $\\rho_{\\Lambda,C}=R\\mathcal Hom_s(C_\\Lambda,u_\\Lambda)$ and $j_{\\Lambda,C}:F_\\Lambda R\\mathcal Hom_s(C_\\Lambda,\\omega_{s,\\Lambda})\\to c_\\Lambda^\\vee$ be the specified point-dualizing comparisons [lem-pod-point-dualizing-complex].\nFor an integral representative $C_R$ of $C_E$, put $c_R=F_RC_R$ and choose any bounded finite-projective complex $P$ representing $c_R$ [def-pc-perfect-ring-complex]. Under the stipulated rationalization comparisons one has\n$$\\kappa_{E,C}=\\delta_P\\circ(\\kappa_{R,C}\\otimes_RE),\\qquad F_E\\rho_{E,C}=F_R\\rho_{R,C}\\otimes_RE,$$\nwhere the perfect scalar-Hom isomorphism $\\delta_P:P^\\vee\\otimes_RE\\to(P\\otimes_RE)^\\vee$ [lem-pc-base-change-rhom-perfect] is the map $h\\otimes a\\mapsto(x\\otimes b\\mapsto h(x)ab)$. The transpose uses the same signed evaluation $(-1)^{pj}$ for $x\\in P^p$ and $h\\in(P^\\vee)^j$ on both sides. This is valid when the integral representative has torsion cohomology, and is natural for every localized morphism, including sums of $v\\otimes a$.\nFor $E\\subset L$ finite in $\\overline{\\mathbf Q}_\\ell$, these equations respect the specified sections scalar comparisons $\\varphi$ of [lem-weil-point-sections-scalar-extension] and the internal-Hom comparison defined as transpose of scalar-extended evaluation. On perfect models its coefficient arrow is $P^\\vee\\otimes_R\\mathcal O_L\\to\\operatorname{Hom}_{\\mathcal O_L}^\\bullet(P\\otimes_R\\mathcal O_L,\\mathcal O_L)$, $h\\otimes a\\mapsto(x\\otimes b\\mapsto h(x)ab)$, in the Hom convention [def-pur-hom-complex]. Compatibility includes identities and towers $E\\subset L\\subset M$ after rationalization. Consequently $\\kappa_{\\Lambda,C}$ is an isomorphism and $j_{\\Lambda,C}=\\kappa_{\\Lambda,C}\\circ F_\\Lambda\\rho_{\\Lambda,C}$ for $\\Lambda=E,\\overline{\\mathbf Q}_\\ell$, independent of the integral representative and the common finite field stage.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence at E and algebraically closed coefficients; explicit rational and common-stage verification of returned lem-pod-global-duality-map-identification step 6 (agent expansion)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-pod-point-dualizing-complex",
+  "def-pc-perfect-ring-complex",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-weil-point-sections-scalar-extension",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "First work with an arbitrary integral representative $C_R$. Apply [lem-pur-rational-lattice-adic-domain] with $T=s$, a separated finite-type $k$-scheme, $\\ell\\ne\\operatorname{char}k$: its integral category has exactly the objects of $D^b_c(s,\\mathcal O_E)$, and every integral representative of a rational object, torsion ones included, lies in $D^b_{ctf}(s,R)$ with one Tor interval for all reductions. Apply [lem-pod-point-integral-evaluation-normalization]. It supplies the actual counit representative $L_RP\\cong C_R$, with $P$ bounded finite projective, the evaluation-defined isomorphism $\\kappa_{R,C}$, and $j_{R,C}=\\kappa_{R,C}F_R\\rho_{R,C}$. In its Hom-complex model the comparison is $h\\mapsto(x\\mapsto h(1\\otimes x))$, and evaluation in the order $P\\otimes P^\\vee$ has sign $(-1)^{pj}$. These assertions concern the completed integral operations, and require no torsion-freeness of the cohomology of $P$.",
+   "uses": [
+    "lem-pur-rational-lattice-adic-domain",
+    "lem-pod-point-integral-evaluation-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: coefficient Hom at the point; rationalization and common finite-stage normalization (agent expansion)."
+   }
+  },
+  {
+   "text": "Apply [lem-pod-perfect-dual-scalar-calculus] to $R\\to E$ and this $P$. Its isomorphism $\\beta_{E/R,P}$ is $\\delta_P$ of the statement: on homogeneous tensors it sends $h\\otimes a$ to $(x\\otimes b\\mapsto h(x)ab)$. The rational operations extend the integral operations linearly by [def-weil-derived-pullback-tensor-hom], and $F_E=F_R(-)\\otimes_RE$ by [def-weil-finite-coefficient-point]. The rational tensor and unit comparisons are the scalar extensions of the integral ones by [lem-sf-point-fibre-derived-tensor]. Thus the uncurry of $\\delta_P(\\kappa_{R,C}\\otimes_RE)$ is the scalar extension of integral evaluation: on $(x\\otimes b)\\otimes(h\\otimes a)$ it is $(-1)^{pj}h(x)ab$. This is exactly the evaluation whose transpose defines $\\kappa_{E,C}$. The two morphisms therefore agree by injectivity of the tensor–Hom adjunction bijection [lem-pod-closed-uncurry-laws]. Both factors are isomorphisms, so $\\kappa_{E,C}$ is an isomorphism in $D(E)$.",
+   "uses": [
+    "lem-pod-perfect-dual-scalar-calculus",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point",
+    "lem-sf-point-fibre-derived-tensor",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: coefficient Hom at the point; rationalization and common finite-stage normalization (agent expansion)."
+   }
+  },
+  {
+   "text": "For rationalization $Q_s$, [lem-pod-point-dual-coefficient-domains] gives the dualizing coefficient comparison normalized by $u_E$ to $Q_su_R$, with sections comparison equal to the identity under $F_E=F_R(-)\\otimes_RE$. Applying the rational Hom formula of [def-weil-derived-pullback-tensor-hom] to this equality gives $F_E\\rho_{E,C}=(F_R\\rho_{R,C})\\otimes_RE$. By the statement of [lem-pod-point-dualizing-complex], the comparison at $E$ is the rationalization of the integral one, with the point Hom computed over the coefficient ring. The rational coefficient arrow is fixed by [lem-pod-point-hom-rational-descent]: the composite of the rationalized integral Hom-complex comparison with the perfect-source base-change arrow, here $\\delta_P$, is the isomorphism $F_E R\\mathcal Hom_E(C_E,E_s)\\to c_E^\\vee$, independent of $P$. Its hypothesis that $H=R\\mathcal Hom_B(C_R,B)$ is constructible with the finite-projective Hom model is [lem-pod-point-completed-evaluation] for $P$. On the counit model of Step 1 that integral comparison is $\\kappa_{R,C}$, so this arrow is $\\delta_P(\\kappa_{R,C}\\otimes_RE)=\\kappa_{E,C}$ by Step 2. Rationalizing the last equality in Step 1 therefore gives\n$$j_{E,C}=\\delta_P(j_{R,C}\\otimes_RE)=\\delta_P(\\kappa_{R,C}\\otimes_RE)(F_R\\rho_{R,C}\\otimes_RE)=\\kappa_{E,C}F_E\\rho_{E,C}.$$\nHere the coefficient dual identification is the actual signed Hom-complex map of Step 2, rather than a chosen abstract isomorphism.",
+   "uses": [
+    "lem-pod-point-dual-coefficient-domains",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pod-point-dualizing-complex",
+    "lem-pod-point-hom-rational-descent",
+    "lem-pod-point-completed-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: coefficient Hom at the point; rationalization and common finite-stage normalization (agent expansion)."
+   }
+  },
+  {
+   "text": "Naturality holds for all localized morphisms, not only integral arrows. For an integral $v:C_R\\to C'_R$, Step 1 is natural in $v$, and [lem-pod-perfect-dual-scalar-calculus] makes $\\delta$ natural for the induced derived map on coefficient perfect complexes, independently of the models. For $v\\otimes a$, the fibre map is $a(F_Rv\\otimes1)$ by [def-weil-finite-coefficient-point], and the internal-Hom map is precomposition by $v$ multiplied by $a$ by [def-weil-derived-pullback-tensor-hom]. Precomposition with $a(F_Rv\\otimes1)$ multiplies a functional by $a$, so the same scalar multiplies both sides of each naturality square. Addition gives the square for $\\sum_i v_i\\otimes a_i$. Balancing is the defining tensor-product relation in these localized Hom groups. In particular this covers localized isomorphisms between different integral representatives. Conjugating by such an isomorphism gives the same evaluation-defined comparison. No step replaced a torsion complex by its degreewise underived dual; all duals were computed on $P$.",
+   "uses": [
+    "lem-pod-point-integral-evaluation-normalization",
+    "lem-pod-perfect-dual-scalar-calculus",
+    "def-weil-finite-coefficient-point",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: coefficient Hom at the point; rationalization and common finite-stage normalization (agent expansion)."
+   }
+  },
+  {
+   "text": "Let $E\\subset L$ be finite. In the counit model of Step 1 put $K=L_RP$ and $H=L_R(P^\\vee)$. The isomorphism $H\\cong R\\mathcal Hom_B(K,B)$, constructibility of both models and of their evaluation tensor, and the completed evaluation normalization are exactly [lem-pod-point-completed-evaluation]. Hence [lem-pod-point-scalar-hom-evaluation] applies to these perfect models. Its commuting square uses exactly $\\varphi$ of [lem-weil-point-sections-scalar-extension] and identifies the evaluation-transpose internal-Hom scalar arrow with $\\beta_{\\mathcal O_L/R,P}$. Its coefficient formula is $h\\otimes a\\mapsto(x\\otimes b\\mapsto h(x)ab)$ in the same signed Hom convention. Rationalizing that square and using Step 2 gives the asserted scalar compatibility of $\\kappa_E$. For $\\rho$, the dualizing normalization in [lem-pod-point-dual-coefficient-domains] identifies the extended $u_E$ with $u_L$; applying the internal-Hom functor gives the corresponding square for $\\rho$. Substituting $j=\\kappa F\\rho$ gives its square as well. The scalar-Hom lemma includes identities, towers and localized naturality, while the sections lemma includes the precise associators for $\\varphi$; thus these squares use the stipulated comparisons also for $E\\subset L\\subset M$.",
+   "uses": [
+    "lem-pod-point-integral-evaluation-normalization",
+    "lem-pod-point-completed-evaluation",
+    "lem-pod-point-dual-coefficient-domains",
+    "lem-pod-point-scalar-hom-evaluation",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: coefficient Hom at the point; rationalization and common finite-stage normalization (agent expansion)."
+   }
+  },
+  {
+   "text": "Finally use the common-stage definition [def-weil-algebraically-closed-coefficients] and the corresponding fibre and operations [def-weil-finite-coefficient-point, def-weil-derived-pullback-tensor-hom]. Represent an object by $(E,C_E)$ and its comparison by Step 2 at $E$. An input morphism is represented over one finite common extension $L$, where Step 4 proves naturality. Replacing it by a representative at $M\\supset L$ preserves that square by Step 5. Two representatives which become equal at a further stage therefore give equal morphism classes. The identity and tower equations of Step 5 show that the resulting comparison is independent of the common field and respects composition. The stagewise inverses of $\\kappa_E$ also respect transitions (invert the commuting squares), so define a two-sided inverse in the common-stage category. This class is the common-stage arrow of [lem-pod-point-hom-rational-descent], which equals $\\kappa_E$ at the stage $E$ by Step 3 and which that statement makes independent of the stage and of the morphism representatives; this is the common-stage version of the comparison meant in [lem-pod-point-dualizing-complex]. The equation $j=\\kappa F\\rho$ holds there because Step 3 proves it at each finite stage and Step 5 preserves it under extension. This proves all the asserted conclusions for $\\overline{\\mathbf Q}_\\ell$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-finite-coefficient-point",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pod-point-hom-rational-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: coefficient Hom at the point; rationalization and common finite-stage normalization (agent expansion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rational-lattice-adic-domain",
+  "lem-pod-point-integral-evaluation-normalization",
+  "lem-pod-perfect-dual-scalar-calculus",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-pod-closed-uncurry-laws",
+  "lem-pod-point-dual-coefficient-domains",
+  "lem-pod-point-dualizing-complex",
+  "lem-pod-point-hom-rational-descent",
+  "lem-pod-point-completed-evaluation",
+  "lem-pod-point-scalar-hom-evaluation",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: coefficient Hom at the point; rationalization and common finite-stage normalization (agent expansion)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization and finite coefficient field extension preserve the point dualizing identification as the transpose of evaluation including derived duals of torsion integral lattices",
+   "results": "[leanfinder] OK 8 hit(s); map_equiv_traceDual; Module.Basis.traceDual_traceDual; Module.Basis.traceDual_def; Module.Basis.traceDual_involutive; IsIntegralClosure.range_le_span_dualBasis; Module.Basis.traceDual_inj; Submodule.traceDual_span_of_basis; Module.Basis.traceDual. Generic evaluation, module scalar extension or trace duals; module dual base change gives one constituent, not the rationalized sheaf/module comparison and its common-stage normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex dual scalar extension sends h tensor a to the function x tensor b maps to h x times a b and identifies rationalized sheaf point evaluation with coefficient evaluation compatibly in towers",
+   "results": "[leanfinder] OK 8 hit(s); ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; Module.Dual.baseChange_apply_tmul; IsBaseChange.toDualBaseChange_tmul; Module.Dual.baseChange; FGModuleCat.FGModuleCatEvaluation_apply'; FGModuleCat.FGModuleCatEvaluation_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply. Generic evaluation, module scalar extension or trace duals; module dual base change gives one constituent, not the rationalized sheaf/module comparison and its common-stage normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point internal Hom comparison preserves derived evaluation after rationalization and common finite coefficient field stages with naturality on localized morphisms",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ihom.ev_naturality_assoc; CategoryTheory.ihom.ev_naturality; AlgebraicGeometry.Scheme.evaluation_naturality_assoc; CategoryTheory.ihom.ev; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply; CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_naturality_app; CategoryTheory.exp.ev. Generic evaluation, module scalar extension or trace duals; module dual base change gives one constituent, not the rationalized sheaf/module comparison and its common-stage normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.baseChange, LinearMap.dualMap",
+   "results": "[loogle] OK 0 hit(s); no hits. Generic evaluation, module scalar extension or trace duals; module dual base change gives one constituent, not the rationalized sheaf/module comparison and its common-stage normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*evaluation|point.*dual.*scalar|Hom.*baseChange|baseChange.*Hom",
+   "results": "[grep] OK 25 hit(s); Mathlib/Tactic/NormNum/Result.lean:405; Mathlib/Tactic/NormNum/Result.lean:413; Mathlib/LinearAlgebra/Transvection/Basic.lean:669; Mathlib/LinearAlgebra/Dual/BaseChange.lean:11; Mathlib/LinearAlgebra/Dual/BaseChange.lean:22; Mathlib/LinearAlgebra/Dual/BaseChange.lean:46; Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean:111; Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean:160; Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean:166; Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean:170; Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean:179; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:104; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:381; Mathlib/LinearAlgebra/TensorProduct/Tower.lean:715; Mathlib/LinearAlgebra/TensorProduct/Tower.lean:717; Mathlib/LinearAlgebra/TensorProduct/Tower.lean:722; Mathlib/LinearAlgebra/TensorProduct/Tower.lean:724; Mathlib/LinearAlgebra/TensorProduct/Tower.lean:725; Mathlib/Algebra/Category/Ring/Under/Property.lean:89; Mathlib/Algebra/Module/LinearMap/Polynomial.lean:273; Mathlib/Algebra/Lie/CartanCriterion.lean:190; Mathlib/Algebra/Lie/CartanCriterion.lean:191; Mathlib/Algebra/Module/FinitePresentation.lean:681; Mathlib/Algebra/Module/FinitePresentation.lean:698; Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean:553. Generic evaluation, module scalar extension or trace duals; module dual base change gives one constituent, not the rationalized sheaf/module comparison and its common-stage normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of derived point internal Hom preserves signed evaluation and coefficient duals of perfect integral complexes, natural for localized morphisms",
+   "results": "8 hits: DerivedCategory.instLinearCochainComplexIntQ; DerivedCategory.instLinearHomotopyCategoryIntUpQh; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app; DerivedCategory.right_fac; DerivedCategory.left_fac; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app. Read the module dual base-change source and project point comparison. These give constituent module/evaluation facts, not the completed-point, raw rationalization and specified common-stage normalization of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "point.*dual.*scalar|rational.*evaluation|Dual.baseChange",
+   "results": "6 hits: Mathlib/Tactic/NormNum/Result.lean; Mathlib/Tactic/NormNum/Result.lean; Mathlib/LinearAlgebra/Transvection/Basic.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean. Read the module dual base-change source and project point comparison. These give constituent module/evaluation facts, not the completed-point, raw rationalization and specified common-stage normalization of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom at a geometric point commutes with rationalization as the transpose of evaluation for perfect complexes",
+   "results": "8 hits: transpose_dualTensorHom; CategoryTheory.ihom.ev; LinearMap.IsPerfPair.dualEval; LightCondensed.ihomPoints; smoothSheaf.evalHom; smoothSheafCommRing.forgetStalk_hom_comp_evalHom; LightCondensed.ihom_map_val_app; LightCondensed.ihomPoints_apply. Read the module dual base-change source and project point comparison. These give constituent module/evaluation facts, not the completed-point, raw rationalization and specified common-stage normalization of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual.baseChange",
+   "results": "6 hits: Module.Dual.baseChange; Module.Dual.baseChange_apply_tmul; IsBaseChange.toDual_apply; Module.Dual.baseChange_baseChange; LinearMap.transvection.baseChange; LinearEquiv.transvection.baseChange. Read the module dual base-change source and project point comparison. These give constituent module/evaluation facts, not the completed-point, raw rationalization and specified common-stage normalization of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dual of a bounded finite projective complex commutes with scalar extension and signed evaluation compatibly with towers of coefficient rings",
+   "results": "8 hits: Module.dual_projective; Module.dual_finite; HomologicalComplex.extend_op_d; HomologicalComplex.extend_op_d_assoc; IsBaseChange.dual; FGModuleCat.exactPairing; HomologicalComplex.extendOpIso; IsBaseChange.toDual_apply. Read the module dual base-change source and project point comparison. These give constituent module/evaluation facts, not the completed-point, raw rationalization and specified common-stage normalization of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-global-duality-map-identification",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third paragraph: the global-duality comparison under the point-category identifications at rational and algebraically closed coefficients. Carries returned item proof step 6, including signs, localized morphisms and common-stage descent.",
+   "via": [
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-point-field-evaluation-normalization",
+  "worker": "stage1",
+  "summary": "Checked the completed integral normalization, arbitrary torsion representatives, signed perfect dual base change, scalar-linearity on all localized arrows, the specified sections scalar squares and common-stage descent. Reused existing nodes throughout; no new nodes and no statement change. Reviewer FIX (Q50 maintainer read): Step 1 now cites lem-pur-rational-lattice-adic-domain, whose statement identifies the integral categories and gives finite Tor amplitude of every integral representative; Steps 3 and 6 cite lem-pod-point-hom-rational-descent for the rational and common-stage arrow instead of reading the proof of lem-pod-point-dualizing-complex.",
+  "blueprint": "Realizes the third paragraph of thm-pod-identification-of-the-comparison: its coefficient evaluation step at E and the common finite-stage algebraically closed category, expanding the second sentence of lem-pod-point-dualizing-complex.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-closed-uncurry-laws",
+    "why": "Only injectivity of the tensor-Hom adjunction bijection is used to compare the two actual transposes; a generic closed-category tool."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Supplies the specified sections comparisons and their identity/tower equations for coefficient extension; used as a tool, not as a replacement duality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-closed-uncurry-laws",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-da3ef527f",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-da3ef527f (reviewer sub-agent of L); spot-checked: I read the item in full, all 13 cited statements, the main-20261015 point-dualizing proof and the paragraph of thm-pod-identification it serves, and the unit route. There are no new nodes and the statement is unchanged. The mathematics is correct. Step 2 holds: κ_E=δ_P(κ_R⊗E) because β of perfect-dual-scalar-calculus intertwines the signed evaluation (−1)^{pj}h(x)ab, and curry is injective by closed-uncurry-laws. Step 4 extends naturality to localized morphisms (same scalar a on both sides, then additivity). Step 5 gets its squares from completed-evaluation, scalar-hom-evaluation and the φ maps. Step 6 is the common-stage descent. Edge cases checked: P=0, R[0], a rank-one complex in odd degree, [R -ϖ-> R] (torsion, rationally zero), L=E, and towers. Two citation faults, both repaired in fixes/dag/nodes/sec-six-functors/lem-pod-point-field-evaluation-normalization.json. (1) C4/E1, Step 1: ctf was taken from lem-pur-integral-reduction-uniform-tor, which is stated for the pbc category I_T(R) with étale-origin witnesses, not for D^b_c(s,O_E) of def-weil-derived-complete-integral-detailed. The step now cites lem-pur-rational-lattice-adic-domain (same unit, on route), which identifies the two categories and puts every integral representative, torsion ones included, in D^b_ctf. The uniform-Tor citation and its tool_use are dropped. (2) C3, Steps 3 and 6: the specification of j at E and at Q̄ was read from the proof of lem-pod-point-dualizing-complex. These steps now cite lem-pod-point-hom-rational-descent (the rational composite with the base-change arrow, independent of P and of the stage), with its hypothesis supplied by lem-pod-point-completed-evaluation. No cycle; the added citations were already in the base closure. Batch-5: lem-pod-closed-uncurry-laws is a Mathlib leaf of generic monoidal curry/uncurry laws, not a step of Poincaré duality or the trace formula, and the parent already cites it, so it is accepted. Tool uses accepted: closed-uncurry-laws and point-sections-scalar-extension. No SGA. Maintainer note: the dualizing-complex statement should pin its arrow at E and Q̄. Hom-rational-descent overlaps the item's Steps 4–6 but is not a duplicate of the item.; 1 file(s) fixed by the reviewer"
+ }
+}

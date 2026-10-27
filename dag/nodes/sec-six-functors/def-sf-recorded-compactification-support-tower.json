@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-recorded-compactification-support-tower",
+ "kind": "definition",
+ "title": "Recorded compactification support tower and finite evaluations",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its completed integral coefficient sheaves [def-weil-completed-integral-coefficients], and separated finite-type $k$-schemes with $\\ell$ invertible in $k$. For a compactification $c=(j,p)$ [def-weil-compactifications-refinements], use the specified integral compact-support action [def-weil-integral-rational-qbar-compact-support]. Define supportTower and supportEvaluation to be exactly the strict tower and its evaluation coordinates already selected in that action. The evaluation at index $n\\ge0$ is the restricted finite composite $Rp_*j_!(K\\otimes^L A_{n+1})$ with its prescribed quotient transitions. These are aliases of the recorded selection, not a fresh choice of towers or maps.",
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-compactifications-refinements",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (3), actual strict compact-support realization and its quotient projections; Bhatt--Scholze 6.7.6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical compactification refinement comparisons, ordinary direct image of strict towers and its derived limit comparison, identity direct image, and recorded compact support tower evaluations",
+   "results": "{\"hits\": 8, \"top\": [\"DirectLimit.map₀\", \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"DirectLimit.map\", \"CompHaus.hasLimits\", \"TensorProduct.fromDirectLimit\", \"compHausToTop.reflective\", \"Compactum.instHasLimits\"], \"note\": \"\", \"digest\": \"2af0c58e245ecc02\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for these pro-etale derived constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compactification refinement comparisons, ordinary direct image of strict towers and its derived limit comparison, identity direct image, and recorded compact support tower evaluations",
+   "results": "{\"hits\": 8, \"top\": [\"LightProfinite.transitionMapLE\", \"IsCompactOpenCovered.of_comp\", \"Alexandrov.lowerCone_π_app\", \"AbstractCompletion.compare_comp_eq_compare\", \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Profinite.IndexFunctor.map_comp_π_app\", \"Profinite.NobelingProof.GoodProducts.smaller_factorization\"], \"note\": \"\", \"digest\": \"04e5c4b18f1b593c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "cbcCompactificationComparison|directImageRlimIso|towerPushReductionEvaluation|modulePushId|supportEvaluation",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "rg",
+   "query": "cbcCompactificationComparison|directImageRlimIso|towerPushReductionEvaluation|modulePushId|supportEvaluation in lean/WeilConjectures and lean/Sheaf, and exact lean.declarations in dag/nodes",
+   "results": "No WeilConjectures hit. Published Sheaf declarations: CompleteCompactSupportProetale.lean:602; CompletedDirectImageLimits.lean:79,322,1714; CompletedOrdinaryComparisons.lean:196; CompactificationCompletedRealization.lean:204,212. Only theorem nodes own these declarations; no existing definition node does.",
+   "date": "2026-10-24",
+   "verdict": "Exact published declarations reused, existing:true."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "direct image tower; compactification comparison; support tower",
+   "results": "0 blueprint nodes match 'direct image tower'; 11 blueprint nodes match 'compactification comparison' (the matching completed comparison owner is thm-cbc-complete-proetale); 0 blueprint nodes match 'support tower'",
+   "date": "2026-10-24",
+   "verdict": "No duplicate definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-compactified-proper-tower-exchange",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (3), actual strict compact-support realization and its quotient projections; Bhatt--Scholze 6.7.6.",
+   "via": [
+    "lem-sf-compactified-proper-tower-exchange",
+    "lem-sf-package-compactified-tower-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.CompactificationCompletedRealizationData",
+  "declaration": "WeilConjectures.CompactificationCompletedRealization.supportTower",
+  "declarations": [
+   "WeilConjectures.CompactificationCompletedRealization.supportTower",
+   "WeilConjectures.CompactificationCompletedRealization.supportEvaluation"
+  ],
+  "statement": "abbrev supportTower",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "The exact published canonical supportTower and supportEvaluation aliases are re-exported by CompactificationCompletedRealization from CompactificationCompletedRealizationData. Definition ownership is preserved; no construction, existence choice or mathematical dependency is changed.",
+  "file": "lean/Sheaf/Paper/CompactificationCompletedRealizationData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c6a406b1",
+  "group": "Q46",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c6a406b1",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Re-delivery after RETURN e15f; both findings fixed. H3: θ in IntegralNormalizationSpec is now pinned at every level n to CompactSupportProperImageTower.beta.inv at j=1_X conjugated by a_X; beta direction checked (proper level to support level). A new level-n projection clause on integralProper gives α_{f,n} with the specified source/target projections; it is consistent with the total-limit equation plus finiteNormalization. The main declaration now also contains the ordinaryFiniteTransition formula, finiteNormalization, both identity-open clauses (cbcDatumCompletedExchange and cbcStrictExchange under openId/openTowerId), the completed proper mate and all-arrow refinement independence. H2: four existing:true re-export definition nodes (refinement comparison, direct-image tower/Rlim data, modulePushId, recorded supportTower/supportEvaluation) match their source declarations; their stmt_deps exist; the ids are absent from side-live. Eight existing definition owners added as stmt_deps; only lean and stmt_deps changed on the item; no dependency node changed. No hollow definitions (∃! choices with pinning conditions); 24 theorems sorry with proof docstrings; source and blueprint docstrings present; statement verbatim; declaration list matches the file. Edge cases K=0, empty schemes, f=id, n=0 and arbitrary refinement arrows OK. Advisories: cbcDatumCompletedExchange, proEtaleRingRestrictionDerivedDirectImage, cbcDerivedOpenAdjunction and completedPull still have only theorem-node owners (all present in e15f and not flagged then; canonical, uniquely fixed constructions); the helper finiteRefinement uses a theorem-owned Etale declaration; the second reading is a self-reading. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-19185",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T041139-L-1025551",
+  "kind": "interface",
+  "note": "independent cc review: completedRealization signature and the 13 extracted helper defs byte-identical to the clone; the strictRealization and finiteProjectionModels sorry statements read against the item's clauses and their nodes; 3 direct importers plus the delivered modules compiled in sandbox, axioms probed"
+ }
+}

@@ -1,0 +1,230 @@
+{
+ "id": "lem-pur-point-signed-cyclotomic-action",
+ "kind": "statement",
+ "title": "Cyclotomic action on signed point-line section coordinates",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ with $q=p^a$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($n\\ge1$) [def-weil-finite-field-fiber]. Set $s=\\operatorname{Spec}k$ and $g=\\operatorname{Spec}(\\gamma)$ with $\\gamma=(z\\mapsto z^q)^{-1}$. Choose primitive roots $\\zeta_r\\in k$ of order $\\ell^r$ with $\\zeta_{r+1}^{\\ell}=\\zeta_r$ and put $e=(\\zeta_r)_r$. For $B=\\mathcal O_E$ or $A_{E,n}$ use the signed sheaf twists [def-coefficient-twists-detailed], the sheaf Weil isomorphisms $\\tau_m^B:g^{-1}B(m)_s\\to B(m)_s$ [def-weil-frobenius-coefficient-twists], and the restriction/coprojection maps $\\sigma$ [def-weil-frobenius-point-transport]. Put\n$$\\Psi_m^B=\\Gamma(s,\\tau_m^B)\\circ\\sigma_{B(m)_s}:\\Gamma(s,B(m)_s)\\to\\Gamma(s,B(m)_s).$$\nThe corresponding root-level composite sends $\\zeta\\in\\mu_{\\ell^r}(k)$ to $\\gamma(\\zeta)=\\zeta^{q'_r}$, where $q q'_r\\equiv1\\pmod{\\ell^r}$. Its inverse-image comparison [def-pur-roots-of-unity-inverse-image] at $(s,g)$ is the identity on the roots of the unchanged underlying scheme. These maps commute with $\\zeta\\mapsto\\zeta^{\\ell}$, and their limit sends $e$ to $q^{-1}e$. Write $e_B=e\\otimes1$, $e_{m,B}=e_B^{\\otimes m}$ for $m>0$, $e_{0,B}=1$, and $e_{-r,B}(e_{r,B})=1$ for $r>0$. The coefficient factors of $\\Psi_1^B$ fix $1$. For all $b\\in B$ and $m\\in\\mathbf Z$,\n$$\\Psi_m^B(b e_{m,B})=b q^{-m}e_{m,B}.$$\nMore precisely $\\Psi_0^B(1)=1$, $\\Psi_{m+1}^B(e_{m,B}\\otimes e_B)=\\Psi_m^B(e_{m,B})\\otimes\\Psi_1^B(e_B)$ for $m\\ge1$, and the induced dual action for $r>0$ is $\\varphi\\mapsto\\varphi\\circ(\\Psi_r^B)^{-1}$, with $\\Psi_{-r}^B(e_{-r,B})(e_{r,B})=q^r$. Here $q$ is a unit in $\\mathbf Z_\\ell$, and its image in $B$ defines the displayed signed powers.",
+ "source": {
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "(2.2), pp. 280-281 (root action, tensor powers, duals); geometric convention in Deligne Weil II (1.1.7), pp. 150-151; returned item steps 5-7"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-coefficient-twists-detailed",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-frobenius-point-transport",
+  "def-pur-roots-of-unity-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Compute the finite root action using the adjunction defining the root comparison, its direct-image projection formula and the pullback projection equation for the specified sectionArrow. Naturality of GammaSpecIso then identifies this action with geometric field Frobenius. Apply the roots-of-unity Frobenius power theorem to obtain the modular inverse exponent and the p-adic unit q.",
+   "uses": [
+    "def-pur-roots-of-unity-inverse-image",
+    "def-pur-roots-of-unity-sheaf",
+    "def-weil-proetale-inverse-image",
+    "def-weil-frobenius-point-transport",
+    "lem-pur-frobenius-roots-of-unity-power",
+    "def-pur-point-cyclotomic-section-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The roots inverse-image isomorphism theorem gives the identity comparison in the normalized chart. Naturality of the inverse-image adjunction unit, transition compatibility of the root comparisons and naturality of the transition map show that the finite root actions commute with all displayed transitions.",
+   "uses": [
+    "lem-pur-roots-of-unity-inverse-image-iso",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the completed-root-action lemma to the given section e. Each coefficient action fixes 1 simply because its three factors are ring homomorphisms.",
+   "uses": [
+    "lem-pur-point-root-limit-cyclotomic-action"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the signed-section-scalar lemma on every section. It gives the formula on b times x by associativity and commutativity of scalar multiplication, and the degree-zero assertion because the scalar is 1. Bilinearity of the actual sheaf tensor gives the successor formula by inverse(q)^(n+1) times inverse(q) = inverse(q)^(n+2).",
+   "uses": [
+    "lem-pur-point-signed-section-scalar",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The p-adic unit q maps to a unit in the valuation ring, each finite quotient and each lifted scalar ring. Its positive and inverse powers cancel. The signed scalar formula and bilinearity of internal-Hom evaluation therefore give invariance of the pairing. Multiplication by q^(n+1) is an explicit two-sided inverse of the positive action, hence that action is bijective. Substitute invFun of the positive action into the pairing identity to derive the inverse-dual identity. Finally evaluate the negative scalar formula on the normalized generator; its value 1 leaves scalarAt(q^(n+1)).",
+   "uses": [
+    "lem-pur-point-signed-section-scalar",
+    "lem-pur-frobenius-roots-of-unity-power",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-roots-of-unity-inverse-image",
+  "def-pur-roots-of-unity-sheaf",
+  "def-weil-proetale-inverse-image",
+  "def-weil-frobenius-point-transport",
+  "lem-pur-frobenius-roots-of-unity-power",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "lem-pur-point-root-limit-cyclotomic-action",
+  "lem-pur-point-signed-section-scalar",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-pur-point-cyclotomic-section-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "(2.2), pp. 280-281; root adjunct/projection computation and scalar algebra after two strict sublemmas, A3 stage-3 reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along geometric Frobenius and the roots of unity inverse image comparison act on signed tensor powers and dual Tate lines by the inverse field cardinality to that power",
+   "results": "8 hits: cyclotomicCharacter.spec, cyclotomicCharacter.toFun_spec, FiniteField.frobeniusAlgEquiv_symm_apply, FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, cyclotomicCharacter.toZModPow, cyclotomicCharacter.toZModPow_toFun, cyclotomicCharacter.toFun_apply, FiniteField.frobeniusAlgEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cyclotomic character of inverse arithmetic Frobenius is inverse finite field cardinality and its contragredient tensor powers have signed exponents",
+   "results": "8 hits: cyclotomicCharacter.spec, cyclotomicCharacter.toFun_spec, cyclotomicCharacter.toZModPow, cyclotomicCharacter.toZModPow_toFun, cyclotomicCharacter.toFun_apply, IsPrimitiveRoot.autToPow_eq_modularCyclotomicCharacter, modularCyclotomicCharacter.spec, modularCyclotomicCharacter'.spec'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cyclotomicCharacter\"",
+   "results": "12 hits: cyclotomicCharacter.toFun, modularCyclotomicCharacter.aux, modularCyclotomicCharacter.toFun, modularCyclotomicCharacter.pow_dvd_aux_pow_sub_aux_pow, cyclotomicCharacter.toFun_apply, cyclotomicCharacter, modularCyclotomicCharacter.toFun_spec'', modularCyclotomicCharacter",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric Frobenius acts by inverse q on roots of unity and by q to minus m on tensor powers and duals with coefficient factors fixed",
+   "results": "8 hits: WittVector.StandardOneDimIsocrystal.frobenius_apply, modularCyclotomicCharacter.toFun_spec', modularCyclotomicCharacter.toFun, AlgHom.IsArithFrobAt.apply_of_pow_eq_one, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.Extension.frob, autEquivRootsOfUnity_smul, modularCyclotomicCharacter.spec",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclotomicCharacter|frobeniusAlgEquivOfAlgebraic",
+   "results": "23 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse geometric Frobenius on root of unity sheaves commutes with tensor powers and duals giving signed Tate twist section action q to minus m",
+   "results": "8 hits: cyclotomicCharacter.spec, cyclotomicCharacter.toFun_spec, modularCyclotomicCharacter'.spec', modularCyclotomicCharacter.spec, modularCyclotomicCharacter.toFun_spec', cyclotomicCharacter.toZModPow, modularCyclotomicCharacter.aux_spec, cyclotomicCharacter.toZModPow_toFun",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: algebraic cyclotomic characters, scheme global-section maps and general module pullback results do not identify the specified canonical root, completed-coefficient, tensor and dual section operators"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclotomicCharacter|restrictRootsOfUnity",
+   "results": "11 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/Analysis/SpecialFunctions/Complex/CircleAddChar.lean, Mathlib/RingTheory/RootsOfUnity/Basic.lean, Mathlib/RingTheory/RootsOfUnity/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: algebraic cyclotomic characters, scheme global-section maps and general module pullback results do not identify the specified canonical root, completed-coefficient, tensor and dual section operators"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf inverse image along a scheme automorphism sends root of unity sections to inverse Frobenius and acts on negative Tate twists by the dual inverse",
+   "results": "8 hits: AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.Scheme.inv_appTop, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.Modules.inv_app, autEquivRootsOfUnity_smul, AlgebraicGeometry.Scheme.Hom.inv_appTop, IsPrimitiveRoot.autToPow_spec",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: algebraic cyclotomic characters, scheme global-section maps and general module pullback results do not identify the specified canonical root, completed-coefficient, tensor and dual section operators"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cyclotomicCharacter\"",
+   "results": "12 hits: cyclotomicCharacter.toFun, modularCyclotomicCharacter.aux, modularCyclotomicCharacter.toFun, modularCyclotomicCharacter.pow_dvd_aux_pow_sub_aux_pow, cyclotomicCharacter.toFun_apply, cyclotomicCharacter, modularCyclotomicCharacter.toFun_spec'', modularCyclotomicCharacter",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: algebraic cyclotomic characters, scheme global-section maps and general module pullback results do not identify the specified canonical root, completed-coefficient, tensor and dual section operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaf tensor products and internal Hom along an isomorphism respects pure tensor sections and evaluation; geometric Frobenius on integral Tate lines and their duals",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: algebraic cyclotomic characters, scheme global-section maps and general module pullback results do not identify the specified canonical root, completed-coefficient, tensor and dual section operators"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-twist-frobenius-scalar",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "(2.2), pp. 280-281 (root action, tensor powers, duals); geometric convention in Deligne Weil II (1.1.7), pp. 150-151; returned item steps 5-7",
+   "via": [
+    "lem-pur-twist-frobenius-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-point-signed-cyclotomic-action",
+  "worker": "stage1",
+  "summary": "Checked Deligne I (2.2), Deligne II (1.1.7), the current blueprint ancestor, all cited DAG statements, and the project Lean. Split into restriction-chart calculation, root action and limit, fixed coefficients, positive tensor induction, dual evaluation, and linear assembly. Reused the existing root arithmetic, coordinate and transport/comparison lemmas; no new nodes, no statement change. Verified the sign comes from restriction and the dual uses the inverse operator. Ran and read fresh logged Mathlib searches, including two semantic phrasings.",
+  "blueprint": "Realizes the signed scalar assertion of def-weil-frobenius-coefficient-twists (main-20261015, sec-six-functors-basics/sk-def-purity-conv), through returned lem-pur-twist-frobenius-scalar steps 5-7: root restriction then comparison, limit and tensor powers, and dual inverse action. Preserves its roots-of-unity construction and coefficient route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-automorphism-restriction-natural",
+    "why": "Uses its arbitrary-automorphism evaluation chart, identity coprojection and coefficient-linearity formula as a general sheaf transport tool; it supplies no cyclotomic, tensor-power or dual scalar conclusion, so it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-automorphism-restriction-natural"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-6230772e9",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-6230772e9 (reviewer sub-agent of L); spot-checked: Ordinary first split of a node created by the Q122 re-split (landed a2510094); there is no re-split note on this item. No new nodes, statement unchanged, 6 steps, proof_deps = uses, no cycle. Nothing is dropped from old parent steps 5-7: root restriction, transitions, coefficient factors, tensor induction, m=0, duals. Source checked: Deligne I (2.2) p.280 defines mu_{l^n}, transitions x->x^l and negative twists as duals; gamma=phi_q^{-1} agrees across def-weil-frobenius-detailed, def-weil-frobenius-point-transport and def-weil-frobenius-coefficient-twists. Step 1: lem-weil-point-automorphism-restriction-natural makes sigma restriction along g:V->U in the same chart (V,(id,id)); def-pur-roots-of-unity-sheaf gives res_g(zeta)=gamma(zeta); roots iso lemma (3) gives the identity comparison in the same identification. Step 2: lem-pur-frobenius-roots-of-unity-power (2)-(3) with N=l^r, transitions by iso (1), sectionwise limit, so e->q^{-1}e (geometric, checked on l-torsion: zeta->zeta^{q'}). Step 3: sigma(b)=c^{-1}b; the constant Z_l/O_E factors were checked against c^f_A = counit after f^{-1}(rho) in def-weil-proetale-inverse-image; tau_0=c_B. Step 4: pure-tensor restriction from presheaf tensor + sheafification; sigma_{F,G} on pure tensors with associativity and change of rings; base m=1, successor m+1. Step 5: tau_{-r}(phi)=c phi tau_r^{-1} evaluated at tau_r(sigma x) gives phi(x), hence phi o Psi_r^{-1} and value q^r. Step 6: linearity via c^{-1} transport is elementary. Edge cases m=0,+-1, b=0, l=2, n=1, ramified/non-reduced A_{E,n}, change of root sequence: all fine. No duplicate (lem-wf-tate-twist-frobenius is rational closed-point; the roots-power lemma is cited). Accepted tool use: lem-weil-point-automorphism-restriction-natural, the generic chart lemma of the same unit as stmt_dep def-weil-frobenius-point-transport. Advisory: the worker wrote tool_uses itself (C8)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSignedCyclotomicAction",
+  "declaration": "WeilConjectures.PointSignedCyclotomicAction.point_signed_cyclotomic_action",
+  "declarations": [
+   "WeilConjectures.PointSignedCyclotomicAction.point_signed_cyclotomic_action"
+  ],
+  "file": "lean/Sheaf/Paper/PointSignedCyclotomicAction.lean",
+  "statement": "theorem point_signed_cyclotomic_action (hl : l ≠ D.p) (e : (purTwistZlOne (point D) l).obj.obj (op (finalObject D))) (he : ∀ r : ℕ, IsPrimitiveRoot (rootValue D (l ^ (r + 1)) ((limit.π (proEtaleRootsOfUnityTower (point D) l Fact.out) (op r)).hom.app (op (finalObject D)) e)) (l ^ (r + 1))) : (∃ u : ℤ_[l]ˣ, (u : ℤ_[l]) = (D.q : ℤ_[l])) ∧ (∀ r : ℕ, (∃ q' : ℤ, Int.ModEq (l ^ (r + 1) : ℕ) ((D.q : ℤ) * q') 1) ∧ ∀ (q' : ℤ), Int.ModEq (l ^ (r + 1) : ℕ) ((D.q : ℤ) * q') 1 → ∀ x : (proEtaleRootsOfUnitySheaf (point D) (l ^ (r + 1))).obj.obj (op (finalObject D)), rootValue D (l ^ (r + 1)) (rootAction D (l ^ (r + 1)) x) = rootValue D (l ^ (r + 1)) x ^ q') ∧ (∀ (r : ℕ) (x : (proEtaleRootsOfUnitySheaf (point D) (l ^ (r + 1))).obj.obj (op (finalObject D))), rootValue D (l ^ (r + 1)) (rootAction D (l ^ (r + 1)) x) = (@FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ _ (Fintype.ofFinite D.k₀) D.k _ _ _).symm (rootValue D (l ^ (r + 1)) x)) ∧ (∀ (r : ℕ) (x : ((proEtaleSheafInverseImage (frobeniusPointIso D).hom AddCommGrpCat.{u + 1}).obj (proEtaleRootsOfUnitySheaf (point D) (l ^ (r + 1)))).obj.obj (op (finalObject D))), proEtaleRootsOfUnitySections (point D) (l ^ (r + 1)) (op (finalObject D)) ((proEtaleRootsOfUnityInverseImageMap (frobeniusPointIso D).hom (l ^ (r + 1))).hom.app (op (finalObject D)) x) = proEtaleRootsOfUnitySections (point D) (l ^ (r + 1)) ((proEtaleIsoPostcompose (frobeniusPointIso D).hom).op.obj (op (finalObject D))) (((proEtaleIsoInverseImageIdentification (frobeniusPointIso D).hom AddCommGrpCat.{u + 1}).hom.app (proEtaleRootsOfUnitySheaf (point D) (l ^ (r + 1)))).app (op (finalObject D)) x)) ∧ (∀ (r : ℕ) (x : (proEtaleRootsOfUnitySheaf (point D) (l ^ (r + 2))).obj.obj (op (finalObject D))), rootAction D (l ^ (r + 1)) ((proEtaleRootsOfUnityTransition (point D) (l ^ (r + 1)) (l ^ (r + 2)) (pow_pos (Fact.out : l.Prime).pos _) (pow_pos (Fact.out : l.Prime).pos _) (pow_dvd_pow l (Nat.le_succ (r + 1)))).hom.app (op (finalObject D)) x) = (proEtaleRootsOfUnityTransition (point D) (l ^ (r + 1)) (l ^ (r + 2)) (pow_pos (Fact.out : l.Prime).pos _) (pow_pos (Fact.out : l.Prime).pos _) (pow_dvd_pow l (Nat.le_succ (r + 1)))).hom.app (op (finalObject D)) (rootAction D (l ^ (r + 2)) x)) ∧ (rootLimitAction D l e = @SMul.smul _ _ (purTwistZlAction (point D) l (op (finalObject D))).toSMul ((purTwistZlCompletionMap (point D) l).hom.app (op (finalObject D)) (((toSheafify (ProEt.topology (point D)) ((Functor.const (point D).ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} (PadicInt l))))).app (op (finalObject D))) (ULift.up (Ring.inverse (D.q : ℤ_[l]))))) e) ∧ (constantAction D (CommRingCat.of (ULift.{u + 1} (PadicInt l))) 1 = 1 ∧ constantAction D (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))) 1 = 1 ∧ ∀ n : ℕ, constantAction D (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) 1 = 1) ∧ (∀ (a : Option ℕ) (m : ℤ) (b : scalars l E a) (x : (line D l E a m).val.obj (op (finalObject D))), action D l E a m (scale D l E a m b x) = scale D l E a m (b * (Ring.inverse (D.q : scalars l E a) ^ m.toNat * (D.q : scalars l E a) ^ (-m).toNat)) x) ∧ (∀ a : Option ℕ, action D l E a 0 (generator D l E a e 0) = generator D l E a e 0) ∧ (∀ (a : Option ℕ) (n : ℕ), action D l E a ((n + 2 : ℕ) : ℤ) (tensor D l E a n (generator D l E a e (n + 1)) (generator D l E a e 1)) = tensor D l E a n (action D l E a ((n + 1 : ℕ) : ℤ) (generator D l E a e (n + 1))) (action D l E a 1 (generator D l E a e 1))) ∧ (∀ (a : Option ℕ) (n : ℕ) (φ : (line D l E a (Int.negSucc n)).val.obj (op (finalObject D))) (x : (line D l E a ((n + 1 : ℕ) : ℤ)).val.obj (op (finalObject D))), evaluate D l E a n (action D l E a (Int.negSucc n) φ) (action D l E a ((n + 1 : ℕ) : ℤ) x) = evaluate D l E a n φ x) ∧ (∀ (a : Option ℕ) (n : ℕ), Function.Bijective (action D l E a ((n + 1 : ℕ) : ℤ)) ∧ ∀ (φ : (line D l E a (Int.negSucc n)).val.obj (op (finalObject D))) (x : (line D l E a ((n + 1 : ℕ) : ℤ)).val.obj (op (finalObject D))), evaluate D l E a n (action D l E a (Int.negSucc n) φ) x = evaluate D l E a n φ (Function.invFun (action D l E a ((n + 1 : ℕ) : ℤ)) x)) ∧ (∀ (a : Option ℕ) (n : ℕ) (φ : (line D l E a (Int.negSucc n)).val.obj (op (finalObject D))), evaluate D l E a n φ (generator D l E a e (n + 1)) = 1 → evaluate D l E a n (action D l E a (Int.negSucc n) φ) (generator D l E a e (n + 1)) = scalarAt D l E a ((D.q : scalars l E a) ^ (n + 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded canonical root, completed/finite signed line and module inverse-image maps. The root basis is a section of the actual sheaf inverse limit with primitive projections. The coordinate scalar identity is expressed equivalently on every section, with the tensor generator and dual inverse-action identities retained explicitly. Option none is integral; some n is quotient exponent n+1. All helper definitions assemble existing canonical maps; no new notion or dependency interface is introduced. The sixteen data declarations are attached to def-pur-point-cyclotomic-section-data in the publicly reexported data module; their signatures and bodies are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e004378e",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Only the item lean field changed vs live; lean.statement is verbatim and the 17 declarations match the file. Checked against def-weil-frobenius-point-transport (sigma = ins o res_g) and def-weil-frobenius-coefficient-twists clauses 1-3: action/rootAction/rootLimitAction/constantAction = adjunction unit, then the recorded tau (signedLineMaps/finiteSignedLineMaps/rootSection/constant comparison), then restriction along comma arrow ≫ g*(res_g), which equals Γ(tau)∘sigma by naturality. Sign: frobeniusPointIso = Spec(geometric Frobenius), so res_g sends zeta to gamma(zeta), matching the third conjunct (frobeniusAlgEquivOfAlgebraic.symm). All 14 node clauses rendered (q unit, q' exponents, comparison identity via proEtaleIsoInverseImageIdentification, l-power transitions, e -> q^{-1}e, coefficient factors fix 1, signed scalar formula for every section, Psi_0(1)=1, successor tensor, dual evaluation/invFun, q^r). Edge cases m=0, m=±1, n>=1 via some n -> n+1, l=2, ramified/non-reduced, universes all OK. No hollow defs, sorry-only, docstrings with source/blueprint and 6 proof steps, lines <= 100, public stmt-dep and plain proof-dep imports. Advisory: statement uses canonical decls owned by nodes outside stmt_deps (roots-of-unity sheaf, point section scalar maps, proetale inverse image, the iso-identification .choose of lem-weil-proetale-isomorphism-inverse-image), inherited through recorded interfaces; the coefficient-factor conjunct is map_one, mirroring the node. No fix and no compile; per instructions I relied on the worker's clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-54049",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T163532-L-691593",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to clone; 16 data defs verbatim vs clone; root_limit = item conjunct (he dropped, true via unique coordinatewise purTwistZlAction); signed_section_scalar = item scalar conjunct at b=1; combined scratch compile + #print axioms (sorryAx from the 2 sublemmas only); 0 importers"
+ }
+}

@@ -19,6 +19,25 @@ def _strip(t):
     return re.sub(r"--[^\n]*|/-.*?-/", "", t, flags=re.S)
 
 
+def _scan(p, memo, used):
+    """(the imports, whether a hole remains) of the text of p, as _compute reads it. 2026-10-24 (cpu): memoized on the
+    file's identity and stat (inode, size, mtime, ctime), across runs in FILES; a changed file is read again."""
+    try:
+        st = os.stat(p)
+        key = (str(p), st.st_ino, st.st_size, st.st_mtime_ns, st.st_ctime_ns)
+    except OSError:
+        key = None
+    hit = memo.get(key) if key else None
+    if hit is None:
+        t = _strip(p.read_text(errors="ignore"))
+        hit = (IMPORT.findall(t), bool(HOLE.search(t)))
+        if key:
+            memo[key] = hit
+    if key:
+        used[key] = hit
+    return hit
+
+
 def _compute():
     src = LIVE / "lean"
     files = {}
@@ -26,7 +45,12 @@ def _compute():
         if ".lake" in p.parts or ".sandbox" in p.parts:
             continue
         files[".".join(p.relative_to(src).with_suffix("").parts)] = p
+    memo, used = _load_files_memo(), {}
     state = {}                                   # module -> True (closed) / False
+    # 2026-10-24: modules being visited. An import cycle in live (a landing or a sync can bring one in for a while)
+    # made this walk expand the cycle forever: check_dag.py grew to 67 GB in an hour and stalled the server. A module
+    # met again while it is being visited is on a cycle: it counts as not closed (it cannot compile as it stands).
+    visiting = set()
     for root in files:
         if root in state:
             continue
@@ -35,14 +59,45 @@ def _compute():
             m, done = stack.pop()
             if m in state:
                 continue
-            t = _strip(files[m].read_text(errors="ignore"))
-            deps = [i for i in IMPORT.findall(t) if i in files]
+            raw, hole = _scan(files[m], memo, used)
+            deps = [i for i in raw if i in files]
             if not done:
+                if m in visiting:
+                    state[m] = False
+                    continue
+                visiting.add(m)
                 stack.append((m, True))
                 stack.extend((i, False) for i in deps if i not in state)
                 continue
-            state[m] = not HOLE.search(t) and all(state.get(i, True) for i in deps)
+            visiting.discard(m)
+            state[m] = not hole and all(state.get(i, True) for i in deps)
+    _save_files_memo(used)
     return sorted(m for m, ok in state.items() if ok)
+
+
+FILES = CACHE.with_name(CACHE.name + ".files.pickle")   # the per-file memo of _scan (only entries of the last scan kept)
+
+
+def _load_files_memo():
+    import pickle
+    try:
+        with open(FILES, "rb") as f:
+            d = pickle.load(f)
+        return d if isinstance(d, dict) else {}
+    except Exception:
+        return {}
+
+
+def _save_files_memo(d):
+    import pickle
+    try:
+        FILES.parent.mkdir(parents=True, exist_ok=True)
+        tmp = FILES.with_name(FILES.name + f".{os.getpid()}.tmp")
+        with open(tmp, "wb") as f:
+            pickle.dump(d, f, protocol=pickle.HIGHEST_PROTOCOL)
+        os.replace(tmp, FILES)
+    except Exception:
+        pass
 
 
 def closed():
@@ -55,18 +110,45 @@ def closed():
         head = ("lean-tree:" + head) if head else ""
     except Exception:
         head = ""
+    def cached():
+        try:
+            c = json.loads(CACHE.read_text())
+            if head and c.get("head") == head:
+                return set(c["modules"])
+        except Exception:
+            pass
+        return None
+    _closed = cached()
+    if _closed is not None:
+        return _closed
+    # 2026-10-24 (cpu): one computation per key; the other processes wait for it and read it (every preflight running
+    # when the lean tree moved used to recompute it, ~15 s of CPU each), and the file is replaced atomically (a reader
+    # could see it half written and recompute)
+    lk = None
+    if head:
+        try:
+            import fcntl
+            CACHE.parent.mkdir(parents=True, exist_ok=True)
+            lk = open(CACHE.with_name(CACHE.name + ".lock"), "a")
+            fcntl.flock(lk, fcntl.LOCK_EX)
+            _closed = cached()
+            if _closed is not None:
+                lk.close()
+                return _closed
+        except OSError:
+            pass
     try:
-        c = json.loads(CACHE.read_text())
-        if head and c.get("head") == head:
-            _closed = set(c["modules"]); return _closed
-    except Exception:
-        pass
-    mods = _compute() if LIVE.is_dir() else []
-    try:
-        CACHE.parent.mkdir(parents=True, exist_ok=True)
-        CACHE.write_text(json.dumps({"head": head, "modules": mods}))
-    except Exception:
-        pass
+        mods = _compute() if LIVE.is_dir() else []
+        try:
+            CACHE.parent.mkdir(parents=True, exist_ok=True)
+            tmp = CACHE.with_name(CACHE.name + f".{os.getpid()}.tmp")
+            tmp.write_text(json.dumps({"head": head, "modules": mods}))
+            os.replace(tmp, CACHE)
+        except Exception:
+            pass
+    finally:
+        if lk:
+            lk.close()
     _closed = set(mods)
     return _closed
 

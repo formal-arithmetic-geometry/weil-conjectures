@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-fppf-lifts-finite-affine-charts",
+ "kind": "statement",
+ "title": "Finite affine charts subordinate to fppf local lifts",
+ "statement": "Let $a:X\\to Y$ be a morphism of schemes [def-pc-scheme], in the universes of [def-weil-size-convention]. Suppose there is a set-indexed fppf covering $\\{q_i:Y_i\\to Y\\}_{i\\in I}$ [def-pc-fppf-site] and maps $s_i:Y_i\\to X$ satisfying $a\\circ s_i=q_i$. For every affine open $V=\\operatorname{Spec}B\\subseteq Y$ [def-weil-affine-spectrum], there are an integer $n\\geq0$, affine opens $U_j=\\operatorname{Spec}A_j\\subseteq X$ with $a(U_j)\\subseteq V$, and affine schemes $T_j=\\operatorname{Spec}D_j$, with maps $t_j:T_j\\to U_j$ and $r_j:T_j\\to V$ for $1\\leq j\\leq n$, such that $r_j=(a|_{U_j})\\circ t_j$ and $\\{r_j:T_j\\to V\\}$ is an fppf covering. Thus the induced maps on rings are $B\\to A_j\\to D_j$. Each $B\\to D_j$ is flat [def-weil-pbc-flat-ring-map] and of finite presentation [def-weil-pbc-finitely-presented-algebra], and the coordinate map $B\\to D:=\\prod_{j=1}^nD_j$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map] and of finite presentation. No property is assumed of $a$ itself. Empty $V$ is allowed, with $n=0$ and $B=D=0$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 06NB, lemma-curiosity, first proof paragraph through the faithfully flat finitely presented product map; Topologies Tag 021P, lemma-fppf-affine, supplies the finite affine refinement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "For nonempty $V$, form $P_i=V\\times_Y Y_i$ with projections $p_i:P_i\\to Y_i$ and $g_i:P_i\\to V$. Base change of the given covering makes $\\{g_i\\}$ fppf. Set $\\sigma_i=s_i p_i:P_i\\to X$. The fibre-product equality and $a s_i=q_i$ give $a\\sigma_i=\\iota_V g_i$, so $\\sigma_i(P_i)\\subseteq a^{-1}(V)$. For empty $V$ take $n=0$; the chart clauses are vacuous and step 5 verifies the ring conclusion.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021O, lemma-fppf, (3); Tag 06NB affine preparation"
+   }
+  },
+  {
+   "text": "Use the affine-opens basis to cover the open $a^{-1}(V)\\subseteq X$ by affine opens $U_k$. For each $i$, the opens $W_{ik}=\\sigma_i^{-1}(U_k)$ cover $P_i$: a point maps into $a^{-1}(V)$ and hence into some $U_k$. Thus $\\{W_{ik}\\to P_i\\}_k$ is a Zariski covering and consequently an fppf covering. Apply the composition clause of the covering calculus, using its equivalence for scheme families, to obtain the fppf covering $\\{W_{ik}\\to P_i\\xrightarrow{g_i}V\\}_{i,k}$. These are set-indexed families since the opens of a scheme form a set.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021O (lemma-fppf, (2)) and 021N (Zariski coverings are fppf); descent Tag 06NB, lemma-curiosity, first paragraph"
+   }
+  },
+  {
+   "text": "Apply finite affine fppf refinement to the covering of step 2 over the affine scheme $V$. It gives finitely many affine opens $T_j=\\operatorname{Spec}D_j\\subseteq W_{i(j),k(j)}$ whose composite maps $r_j:T_j\\to V$ are an fppf covering. Put $U_j=U_{k(j)}=\\operatorname{Spec}A_j$. The image of $T_j\\to P_{i(j)}\\xrightarrow{\\sigma_{i(j)}}X$ lies in $U_j$ by the definition of $W_{i(j),k(j)}$, so the open-subscheme factorization lemma gives $t_j:T_j\\to U_j$. The same lemma gives $a|_{U_j}:U_j\\to V$. Composing with the open inclusion $V\\to Y$ gives equal maps, hence $r_j=(a|_{U_j})t_j$ by uniqueness of that factorization.",
+   "uses": [
+    "lem-pc-fppf-affine-refinement",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021P, lemma-fppf-affine; descent Tag 06NB, lemma-curiosity, affine preparation"
+   }
+  },
+  {
+   "text": "The contravariant functoriality of the affine spectrum turns $r_j=(a|_{U_j})t_j$ into the ring factorization $B\\to A_j\\to D_j$. Each $r_j$ is flat and locally of finite presentation by the definition of fppf covering. Apply the affine flatness criterion and the affine-open finite-presentation criterion with the whole source $T_j$ and target $V$ to obtain flatness and finite presentation of $B\\to D_j$. A finite presentation also supplies a surjection from a polynomial ring on finitely many variables, so each $D_j$ is of finite type over $B$ by the definitions.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06NB, lemma-curiosity, product-map preparation; Morphisms Tags 01U5 and 01TQ; Algebra Tag 00F3"
+   }
+  },
+  {
+   "text": "Apply the finite-affine-family algebra lemma with its rings $R=A=B$ and identity $R\\to A$, and its factors $B_j=D_j$. Step 4 supplies flatness, finite presentation and finite type of every factor; step 3 supplies joint surjectivity of their spectra. Its coordinate-map conclusion is precisely that $B\\to D=\\prod_jD_j$ is faithfully flat and of finite presentation. When $V$ is empty, use the empty family: joint surjectivity holds, the factor hypotheses are vacuous, and the same lemma explicitly gives $B=0$ and the empty product $D=0$, together with the stated ring properties.",
+   "uses": [
+    "lem-a1-finite-affine-family-fppf-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06NB, lemma-curiosity, first paragraph, final sentence; Tag 02KL finite affine packaging"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fppf-covering-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-a1-finite-affine-family-fppf-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 06NB, lemma-curiosity, first proof paragraph; Topologies Tags 021O and 021P for the subordinate finite affine refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scheme map admitting fppf local lifts has over every affine open a finite fppf cover by affine schemes lifting into affine opens of its source",
+   "results": "{\"t\": \"2026-10-23T21:54:17Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme map admitting fppf local lifts has over every affine open a finite fppf cover by affine schemes lifting into affine opens of its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.AffineCover.map_prop\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.HasAffineProperty.of_openCover\", \"AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top\", \"AlgebraicGeometry.Scheme.AffineCover.I₀\"], \"digest\": \"d75784ff1484ea1b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski affine refinements and finite-cover infrastructure do not supply lifts into affine opens of an arbitrary source morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"fppf\", \"refinement\"",
+   "results": "{\"t\": \"2026-10-23T21:54:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"fppf\\\", \\\"refinement\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski affine refinements and finite-cover infrastructure do not supply lifts into affine opens of an arbitrary source morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "refinement|affine",
+   "results": "{\"t\": \"2026-10-23T21:54:18Z\", \"tool\": \"grep\", \"query\": \"refinement|affine\", \"sub\": \"AlgebraicGeometry/Sites/Fppf.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski affine refinements and finite-cover infrastructure do not supply lifts into affine opens of an arbitrary source morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine fppf covering refining local lifts through affine opens of an arbitrary scheme morphism",
+   "results": "{\"t\": \"2026-10-23T21:54:18Z\", \"tool\": \"leansearch\", \"query\": \"Finite affine fppf covering refining local lifts through affine opens of an arbitrary scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.affineLocally_iff_forall_isAffineOpen\", \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\"], \"digest\": \"ea5cf9b56ee76f6f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski affine refinements and finite-cover infrastructure do not supply lifts into affine opens of an arbitrary source morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine fppf cover subordinate to inverse images of open subsets under local lifts of a morphism",
+   "results": "{\"t\": \"2026-10-23T21:55:32Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine fppf cover subordinate to inverse images of open subsets under local lifts of a morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"], \"digest\": \"21c6eb75882a2755\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski affine refinements and finite-cover infrastructure do not supply lifts into affine opens of an arbitrary source morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf|refinement",
+   "results": "{\"t\": \"2026-10-23T21:55:32Z\", \"tool\": \"grep\", \"query\": \"fppf|refinement\", \"sub\": \"AlgebraicGeometry/Cover\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Cover/Sigma.lean\", \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\"], \"digest\": \"14eb0ae97f14c4c6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Zariski affine refinements and finite-cover infrastructure do not supply lifts into affine opens of an arbitrary source morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine fppf cover of an affine scheme with lifts into affine open subsets of the source of an arbitrary morphism",
+   "results": "{\"t\": \"2026-10-23T22:21:50Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine fppf cover of an affine scheme with lifts into affine open subsets of the source of an arbitrary morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.AffineCover.J\", \"AlgebraicGeometry.Scheme.AffineCover.I₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.AffineCover.cover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\"], \"digest\": \"f4e055e1deee9a17\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary affine open refinements or fppf precoverage stability; none supplies the local-lift subordinate charts and product-algebra conclusion together."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf|affine_open_refinement",
+   "results": "{\"t\": \"2026-10-23T22:22:20Z\", \"tool\": \"grep\", \"query\": \"fppf|affine_open_refinement\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"609c32a9b230a998\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary affine open refinements or fppf precoverage stability; none supplies the local-lift subordinate charts and product-algebra conclusion together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite affine fppf refinement subordinate to local lifts into open affine charts of a scheme",
+   "results": "{\"t\": \"2026-10-23T22:22:20Z\", \"tool\": \"leansearch\", \"query\": \"A finite affine fppf refinement subordinate to local lifts into open affine charts of a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.directedAffineCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.affineBasisCover\"], \"digest\": \"c25ee9088156a2ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary affine open refinements or fppf precoverage stability; none supplies the local-lift subordinate charts and product-algebra conclusion together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"fppf\"",
+   "results": "{\"t\": \"2026-10-23T22:22:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"fppf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fppfPrecoverage\", \"AlgebraicGeometry.Scheme.fppfTopology\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instSubcanonicalFppfTopology\", \"AlgebraicGeometry.Scheme.fppfTopology_le_fpqcTopology\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage\"], \"digest\": \"419fa6232936f8a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary affine open refinements or fppf precoverage stability; none supplies the local-lift subordinate charts and product-algebra conclusion together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refine an fppf covering by finitely many affine open source charts whose lifts factor through chosen open subsets",
+   "results": "{\"t\": \"2026-10-23T22:22:51Z\", \"tool\": \"leanfinder\", \"query\": \"Refine an fppf covering by finitely many affine open source charts whose lifts factor through chosen open subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.AffineCover.cover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\"], \"digest\": \"105fa7564eb55d23\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary affine open refinements or fppf precoverage stability; none supplies the local-lift subordinate charts and product-algebra conclusion together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-fppf-refinement-property-descent",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Smooth atlas over the gerbe base for local-finite-type descent, and the universal topological comparison. Supporting neutral-section input for the smooth atlas argument (06QG(3)). In the neutral-section proof: Tag 06QG invokes the converse direction of criteria Lemma 06PL after identifying the stack with the trivial-action quotient. 06PL converse: descend the properties of the restricted arrow projection through the sheaf-surjective map which forgets its first B-prime factor. Scheme-chart reduction: Descent Tag 06NB, descent of the scheme composite after constructing an fppf refinement of U to V. Affine preparation in descent Tag 06NB, before the three property cases: choose finite affine covering maps whose lifts land in affine opens of X.",
+   "via": [
+    "lem-sfb-scheme-fppf-refinement-property-descent",
+    "lem-sfb-space-sheaf-surjective-property-descent",
+    "lem-sfb-algebraic-classifying-stack-flatness",
+    "lem-sfb-neutral-gerbe-section-fppf",
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fppf-lifts-finite-affine-charts",
+  "worker": "stage1",
+  "summary": "Checked Stacks 06NB affine preparation and 021O/021P. Wrote the inverse-image open-cover construction and finite refinement, then applied the existing affine criteria and finite-family product algebra lemma. No new nodes. All mathematical hypotheses and the empty-base clause are unchanged; corrected doubled TeX backslashes.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/descent route, at the 06NB finite affine chart preparation recorded in blueprint.from.place. The current latest proof (3) is phrased through compactification; this delivery changes no higher-level route. No exact blueprint duplicate was found.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Tag 021P finite affine refinement is a generic scheme-site tool; the present unit has no competing chart-refinement statement."
+   },
+   {
+    "node": "lem-a1-finite-affine-family-fppf-algebra",
+    "why": "Generic finite-family ring packaging, specialized with R=A=B and the identity map, gives faithful flatness and finite presentation of the product; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement",
+  "lem-a1-finite-affine-family-fppf-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-bf51d6eb2",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-bf51d6eb2 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 14 cited statements, Stacks 06NB lemma-curiosity first paragraph and 021P. No new nodes. The statement is identical to live, where the node is still unsplit, so no other group has split it. Proof: (1) 021O(3) base change gives fppf {g_i}, and the fibre-product square gives a s_i p_i = ι_V g_i. (2) Cover a^{-1}(V) by affine opens; the W_ik = σ_i^{-1}(U_k) are a Zariski covering, hence fppf, and composition uses space-calculus clauses (3)+(4); no scheme-level composition node exists. (3) 021P refinement gives T_j ⊆ W_ik; the open-subscheme factorization lemma gives t_j and a|U, and its uniqueness clause gives r_j = a|U t_j. (4) The affine flatness and lfp criteria on the whole affine source and target give flat, finitely presented B→D_j, and the presentation gives finite type. (5) lem-a1 with R=A=B; all hypotheses checked; it allows the empty family. Edge cases checked: empty V, a = id, non-quasi-compact X, non-affine intersections; no property of a is used. Fits the parent 06NB step 1 exactly and does not restate a parent clause. No duplicate in the DAG. Accepted tool_uses: 021P refinement and finite-product algebra, both generic. Batch 5: lem-trf-fppf-covering-base-change is a generic site-foundations leaf (021O), and the space calculus reaches trf only through the definition def-trf-algebraic-space; neither is part of the trace-formula or Poincaré proofs. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfLiftsFiniteAffineCharts",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_affine_charts_of_fppf_lifts",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfLiftsFiniteAffineCharts.lean",
+  "statement": "theorem exists_finite_affine_charts_of_fppf_lifts {X Y : Scheme.{u}} (a : X ⟶ Y) {I : Type v} (Yᵢ : I → Scheme.{u}) (q : ∀ i : I, Yᵢ i ⟶ Y) (s : ∀ i : I, Yᵢ i ⟶ X) (hq : Presieve.ofArrows Yᵢ q ∈ fppfPrecoverage Y) (hs : ∀ i : I, s i ≫ a = q i) (V : Y.Opens) (hV : IsAffineOpen V) : ∃ (n : ℕ) (U : Fin n → X.Opens) (e : ∀ j : Fin n, U j ≤ a ⁻¹ᵁ V) (T : Fin n → Scheme.{u}) (t : ∀ j : Fin n, T j ⟶ (U j).toScheme) (r : ∀ j : Fin n, T j ⟶ V.toScheme), (∀ j : Fin n, IsAffineOpen (U j)) ∧ (∀ j : Fin n, IsAffine (T j)) ∧ (∀ j : Fin n, r j = t j ≫ a.resLE V (U j) (e j)) ∧ Presieve.ofArrows T r ∈ fppfPrecoverage V.toScheme ∧ (∀ j : Fin n, (r j).appTop = (a.resLE V (U j) (e j)).appTop ≫ (t j).appTop) ∧ (∀ j : Fin n, (r j).appTop.hom.Flat ∧ (r j).appTop.hom.FinitePresentation) ∧ (RingHom.pi (fun j : Fin n ↦ (r j).appTop.hom)).FaithfullyFlat ∧ (RingHom.pi (fun j : Fin n ↦ (r j).appTop.hom)).FinitePresentation ∧ (IsEmpty V.toScheme → n = 0 ∧ Subsingleton Γ(V.toScheme, ⊤) ∧ Subsingleton (∀ j : Fin n, Γ(T j, ⊤)))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bda33cc29",
+  "group": "Q04",
+  "result": "pass",
+  "note": "First stage-2 record for the item (S1 Q58 landed; the live node had no lean record). Only the lean record and one new module changed; one theorem, proof sorry, no defs or axioms; the record statement is verbatim in the file. Clause-by-clause match: arbitrary a; Presieve.ofArrows Yᵢ q ∈ fppfPrecoverage Y (the def-pc-fppf-site declaration, any index universe); hs : s i ≫ a = q i; IsAffineOpen U j with e : U j ≤ a⁻¹ᵁ V; IsAffine T j; r j = t j ≫ a.resLE V (U j) (e j) (argument order checked at Restrict.lean:775); {r j} fppf over V; appTop factorization in the contravariant order; each (r j).appTop flat and finitely presented; RingHom.pi of the real r j faithfully flat and finitely presented; empty V gives n=0 and B, D Subsingleton. Edge cases: nonempty V forces n>0; empty I forces Y empty; one universe u for X, Y, T. stmt_deps are Mathlib records plus the size convention. Docstrings give source 06NB/021P and the blueprint id. Proof-only imports exist live. The report has a Worker report and a Second reading by Q04. No pro-étale content. No compile run (none required, no file changed)."
+ }
+}

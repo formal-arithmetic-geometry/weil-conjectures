@@ -463,5 +463,34 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-782be3b9f (reviewer sub-agent of L); spot-checked: Read the item, the new leaf and every cited node statement in full, plus ILO IV 4.2.2-4.2.5 and 4.3.3-4.3.7 (pdf p.58-61). The statement is unchanged against the live unsplit node; only proof, proof_deps, proof_origin, split_report and status changed. The steps follow the source: k_* and its Cohen ring W0; the height-one traits A_{P_i}, which are excellent DVRs; the perfect-core lemma, whose hypothesis holds trivially since k_perf=k_*; finite-family Epp, whose conclusion is exactly 'W_1 good'; a Galois K; W = normalization of W0 in K, local over W_1; single-trait clause (3), which needs only a local W0-map W_1->W; L = field factor of F⊗K and C = integral closure of A in L, finite because A is Nagata; the new compositum leaf and the fixed-field node give G=Aut_F(L) finite and full. Steps 9 and 12 are genuinely elementary. Going down gives contractions to the P_i. Localization of the integral closure, plus integral transitivity, identifies C_i with B_E. Associated primes plus the quotient-localization node give reducedness (ILO 4.2.4). Catenarity of the excellent C gives dim C/Q = d-1. The field-factor choice is the source's component alternative, and G is a subgroup of Gal(K/K_*) as in 4.3.7. Nothing is weakened. New leaf lem-per-galois-compositum-restriction: Mathlib Galois/Basic.lean lines 54-58, 557-569 (IsGalois.sup_right), 608-629 (restrictRestrictAlgEquivMapHom, its apply formula and injectivity). One declaration per clause. Tested on K⊆F, F=k and Q(∛2)⊂Q(ω,∛2). No duplicate found by greps for sup_right/restrictRestrict/compositum; it is not a restated clause of the item. All off-unit statement tools are declared and generic; accepted. Batch-5 flag lem-per-complete-local-excellence -> lem-trf-regular-ring-universally-catenary: its trf closure is only regular⇒CM⇒universally catenary, polynomial-CM and fraction-degree commutative algebra. No trace-transport, Poincaré or batch-4 node is reached; this is outside both assumptions, so accepted. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GaloisEppReducedFibreCover",
+  "declaration": "IsLocalRing.exists_galois_epp_reduced_fibre_cover",
+  "file": "lean/Sheaf/RingTheory/GaloisEppReducedFibreCover.lean",
+  "statement": "theorem exists_galois_epp_reduced_fibre_cover (A : Type u) [CommRing A] [IsDomain A] [IsLocalRing A] [IsNoetherianRing A] [IsIntegrallyClosed A] [IsAdicComplete (maximalIdeal A) A] [CharZero A] (p d : ℕ) [Fact p.Prime] [CharP (ResidueField A) p] (hd : 2 ≤ d) (hdim : ringKrullDim A = (d : WithBot ℕ∞)) : ∃ (C : Type u) (_ : CommRing C) (_ : IsDomain C) (_ : IsLocalRing C) (_ : IsNoetherianRing C) (_ : IsIntegrallyClosed C) (_ : IsAdicComplete (maximalIdeal C) C) (_ : Algebra A C) (_ : IsLocalHom (algebraMap A C)), Function.Injective (algebraMap A C) ∧ Module.Finite A C ∧ ∃ (W : Type u) (_ : CommRing W) (_ : IsDomain W) (_ : IsDiscreteValuationRing W) (_ : IsAdicComplete (maximalIdeal W) W) (_ : CharZero W) (_ : CharP (ResidueField W) p) (_ : Algebra W C) (_ : IsLocalHom (algebraMap W C)), Function.Injective (algebraMap W C) ∧ PerfectRing (ResidueField W) p ∧ ∃ (_ : Algebra (FractionRing A) (FractionRing C)), (∀ a : A, algebraMap (FractionRing A) (FractionRing C) (algebraMap A (FractionRing A) a) = algebraMap C (FractionRing C) (algebraMap A C a)) ∧ Module.Finite (FractionRing A) (FractionRing C) ∧ IsGalois (FractionRing A) (FractionRing C) ∧ ∃ (G : Type u) (_ : Group G) (_ : Finite G) (e : G ≃* (FractionRing C ≃ₐ[FractionRing A] FractionRing C)) (ρC : G →* (C ≃+* C)) (ρW : G →* (W ≃+* W)), (∀ g : G, IsLocalHom (ρC g).toRingHom) ∧ (∀ g : G, IsLocalHom (ρW g).toRingHom) ∧ (∀ (g : G) (w : W), ρC g (algebraMap W C w) = algebraMap W C (ρW g w)) ∧ (∀ (g : G) (a : A), ρC g (algebraMap A C a) = algebraMap A C a) ∧ (∀ (g : G) (c : C), e g (algebraMap C (FractionRing C) c) = algebraMap C (FractionRing C) (ρC g c)) ∧ ringKrullDim C = (d : WithBot ℕ∞) ∧ RingHom.Finite (ResidueField.map (algebraMap A C)) ∧ Function.Injective (ResidueField.map (algebraMap W C)) ∧ ∃ π : W, maximalIdeal W = Ideal.span {π} ∧ IsReduced (C ⧸ Ideal.span {algebraMap W C π}) ∧ ringKrullDim (C ⧸ Ideal.span {algebraMap W C π}) = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ (∀ P : Ideal (C ⧸ Ideal.span {algebraMap W C π}), P ∈ (⊥ : Ideal (C ⧸ Ideal.span {algebraMap W C π})).minimalPrimes → ringKrullDim ((C ⧸ Ideal.span {algebraMap W C π}) ⧸ P) = ((d - 1 : ℕ) : WithBot ℕ∞))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a09907239",
+  "group": "NP",
+  "result": "pass",
+  "note": "Only the lean field changed (statement, 14 proof steps and stmt_deps unchanged against side-live). lean.statement is verbatim in GaloisEppReducedFibreCover.lean. All 7 stmt_deps are existing Mathlib records. Every clause matches the node: hypotheses on A (IsAdicComplete, IsIntegrallyClosed, CharZero A plus CharP of the residue field with p prime, d >= 2); C and W with their instances; perfect residue field of W; injective local maps A->C and W->C; finite G with ring-automorphism actions that are local, compatible with W->C and fix A; the Frac(A)->Frac(C) algebra pinned by its values on A; Module.Finite and IsGalois; e : G = Gal tied to the action on C; uniformizer as an existential (equivalent, same ideal); IsReduced; fibre dimension d-1 and every minimal prime of the fibre of dimension d-1; dim C = d; residue-field finiteness and injectivity. Edge cases: d = 2; universe u for C, W, G loses nothing. No definitions, theorem proved by sorry, docstrings give the source place, blueprint id and all 14 proof steps; imported project modules exist (two in upstream slopmaster2); no duplicate declaration; report has Worker report and Second reading by NP. No file changed, so no compile; the worker reports clean compiles."
+ }
 }

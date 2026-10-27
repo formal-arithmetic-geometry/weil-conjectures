@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-semiabelian-torsion-kernel-divisibility",
+ "kind": "statement",
+ "title": "Semiabelian homomorphisms killing invertible torsion are divisible",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. A semiabelian $k$-group algebraic space means a smooth separated finite-type commutative group object $G$ in algebraic spaces [def-trf-algebraic-space] admitting an exact sequence $0\\to T\\to G\\to A\\to0$ of fppf sheaves [def-pc-fppf-site], where $T\\simeq\\mathbf G_m^t$ for some integer $t\\geq0$ and $A/k$ is an abelian variety [def-sc-abelian-variety]. Here $\\mathbf G_m(U)=\\Gamma(U,\\mathcal O_U)^\\times$, group-object operations induce functorial group operations on $U$-points, and exactness means that $T$ is the kernel and sections of $A$ locally lift to $G$ for fppf coverings. Smoothness and finite type are tested on etale scheme charts, and separated means that the diagonal is a closed immersion. Let $G,H$ be two such spaces and let $n\\geq1$ be an integer invertible in $k$. Write $[n]_G:G\\to G$ for the sum of $n$ copies of $\\operatorname{id}_G$, and $G[n](k)=\\{x\\in G(k):[n]_Gx=0\\}$. If a homomorphism $f:G\\to H$ of $k$-group algebraic spaces satisfies $f(x)=0$ for every $x\\in G[n](k)$, there is a unique homomorphism $b:G\\to H$ of $k$-group algebraic spaces with $f=b\\circ[n]_G$. Equivalently $f=n b$ in the group of homomorphisms, where $n b$ is pointwise addition of $n$ copies of $b$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.21, pp.103–104 (quotient universal property), and §5(e), pp.108–111 (quotient by a homomorphism kernel); §8.21, p.152 (multiplication on the abelian quotient), and Theorem 12.9, pp.233–234 (multiplication on a split torus). Semiabelian application: multiplication by invertible n is a finite etale surjective homomorphism, so killing its geometric kernel is exactly the quotient-factorization condition. Group-space representability over a field is recalled in Deligne §1.1(a), p.131.",
+  "external": [
+   {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remarks 8.11(f) and 8.12, printed p.39, for the abelian special case"
+   },
+   {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "§1.1(a), p.131; Lemma 3.5.1, pp.139–140",
+    "url": "https://numdam.org/item/AST_1985__127__131_0.pdf"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-sc-abelian-variety"
+ ],
+ "proof": [
+  {
+   "text": "Put $p=[n]_G$. Apply [lem-sfb-semiabelian-invertible-multiplication] to the semiabelian group $G$ and the given invertible integer $n$. In particular the scheme-test fibre $K=\\operatorname{Spec}k\\times_{e,G,p}G$ is a finite etale scheme over $k$. Its functor of points is exactly $K(U)=\\{x\\in G(U):p(x)=0\\}$, by the fibre-product definition.",
+   "uses": [
+    "lem-sfb-semiabelian-invertible-multiplication"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.21, printed p.104, quotient factorization; agent sheaf-theoretic version for algebraic spaces"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to the scheme map $K\\to\\operatorname{Spec}k$ and its unique base point. Its fibre is $K$ itself, and it is a disjoint union of spectra of finite separable extensions of $k$. Because $k$ is algebraically closed, each such extension is $k$. Thus the inclusions indexed by $K(k)=G[n](k)$ form an open cover of $K$. On each inclusion $\\operatorname{Spec}k\\to K$, the maps $f|_K$ and zero agree by hypothesis. By the sheaf property of the algebraic space $H$ [def-trf-algebraic-space], they agree on this cover, hence on $K$. Equivalently, for every scheme $U$ and every $z\\in K(U)$ one has $f_U(z)=0$.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), part (2); algebraic spaces as fppf sheaves: spaces.tex Tag 025Y (definition-algebraic-space)"
+   }
+  },
+  {
+   "text": "For every $k$-scheme $U$ and $y\\in G(U)$, [lem-sfb-semiabelian-invertible-multiplication] gives a scheme cover $q:V=U\\times_{y,G,p}G\\to U$ with its tautological lift $x\\in G(V)$ satisfying $p(x)=y|_V$. The map $q$ is finite etale surjective, hence an fppf cover by [def-pc-fppf-site] and [def-weil-etale-morphism], which makes etale maps flat and locally of finite presentation. On $V\\times_U V$ its two lifts $x_1,x_2$ have $p(x_1-x_2)=0$. Step 2 gives $f(x_1)-f(x_2)=f(x_1-x_2)=0$. Since $H$ is an fppf sheaf [def-trf-algebraic-space], $f(x)$ glues uniquely to a section $b_U(y)\\in H(U)$.",
+   "uses": [
+    "lem-sfb-semiabelian-invertible-multiplication",
+    "def-pc-fppf-site",
+    "def-weil-etale-morphism",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.21, printed p.104, quotient factorization; agent sheaf-theoretic version for algebraic spaces"
+   }
+  },
+  {
+   "text": "Any two local lifts of the same $y$ differ by a section of $K$ on their common pullback cover, so step 2 and sheaf uniqueness show that the glued value is independent of the lifts. For $a:W\\to U$, restricting the cover and lift of step 3 gives $b_U(y)|_{W}=b_{W}(y|_{W})$. The maps $b_U$ are therefore a natural transformation $G\\to H$, hence a morphism of algebraic spaces by [def-trf-algebraic-space]. If $y=p(z)$ for $z\\in G(U)$, the global lift $z$ gives $b_U(p(z))=f_U(z)$. Thus $b\\circ p=f$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.21, printed p.104, quotient factorization; agent sheaf-theoretic version for algebraic spaces"
+   }
+  },
+  {
+   "text": "For $y,y'\\in G(U)$ choose local lifts $x,x'$ on the common refinement of their covers from step 3. Then $x+x'$ lifts $y+y'$ and $f(x+x')=f(x)+f(x')$. The independence just proved and sheaf uniqueness give $b_U(y+y')=b_U(y)+b_U(y')$. The zero lift gives $b_U(0)=0$, so $b$ is a group homomorphism. If $c\\circ p=f$, then on any such lift $c_U(y)|_V=c_V(p(x))=f_V(x)=b_U(y)|_V$, hence $c_U(y)=b_U(y)$. This proves uniqueness. Finally $b_U([n]x)=n b_U(x)$ on every scheme $U$; therefore $b\\circ[n]_G=n b$, and the stated equivalence follows.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.21, printed p.104, quotient factorization; agent sheaf-theoretic version for algebraic spaces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semiabelian-invertible-multiplication",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.21, printed p.104, quotient factorization; agent sheaf-theoretic version for algebraic spaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of semiabelian varieties vanishing on all n torsion points factors uniquely through multiplication by n when n is invertible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Abelianization.lift.unique\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : CommGroup A] (f : G →* A) (φ : Abelianization G →* A),\\n  (∀ (x : G), φ (Abelianization.of x) = f x) → ∀ {x : Abelianization G}, φ x = (Abelianization.lift f) x\", \"doc\": \"For any group $G$ and abelian group $A$, if a group homomorphism $\\\\phi : G^{\\\\text{ab}} \\\\to A$ satisfies $\\\\phi \\\\circ \\\\text{of}_G = f$ for a homomorphism $f : G \\\\to A$, then $\\\\phi$ must equal the unique\"}\n  {\"name\": \"Abelianization.lift_unique\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : CommGroup A] (f : G →* A) (φ : Abelianization G →* A),\\n  (∀ (x : G), φ (Abelianization.of x) = f x) → ∀ {x : Abelianization G}, φ x = (Abelianization.lift f) x\", \"doc\": \"Given a group $G$, its abelianization $G^{\\\\text{ab}} = G/[G, G]$, and an abelian group $A$, if two group homomorphisms $\\\\varphi, \\\\psi : G^{\\\\text{ab}} \\\\to A$ satisfy $\\\\varphi \\\\circ \\\\text{of} = \\\\psi \\\\ci\"}\n  {\"name\": \"Abelianization.hom_ext\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : Monoid A] (φ ψ : Abelianization G →* A),\\n  φ.comp Abelianization.of = ψ.comp Abelianization.of → φ = ψ\", \"doc\": \"For any abelian group $A$ and group homomorphisms $\\\\varphi, \\\\psi : G^{\\\\text{ab}} \\\\to A$, if $\\\\varphi \\\\circ \\\\text{can} = \\\\psi \\\\circ \\\\text{can}$ (where $\\\\text{can} : G \\\\to G^{\\\\text{ab}}$ is the canonica\"}\n  {\"name\": \"Abelianization.hom_ext_iff\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : Monoid A] {φ ψ : Abelianization G →* A},\\n  φ = ψ ↔ φ.comp Abelianization.of = ψ.comp Abelianization.of\", \"doc\": \"For any group $G$ and monoid $A$, two monoid homomorphisms $\\\\varphi, \\\\psi : G^{\\\\text{ab}} \\\\to A$ are equal if and only if their compositions with the canonical projection $G \\\\to G^{\\\\text{ab}}$ are equ\"}\n  {\"name\": \"ModN.liftEquiv\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/ModN\", \"type\": \"{G : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : AddCommGroup G] → {n : ℕ} → [inst_1 : AddMonoid M] → (ModN G n →+ M) ≃ { φ // ∀ (g : G), n • φ g = 0 }\", \"doc\": \"There is a natural equivalence between additive monoid homomorphisms from the quotient module $\\\\text{Mod}_n(G)$ to an additive monoid $M$ and additive monoid homomorphisms $\\\\varphi : G \\\\to M$ satisfyi\"}\n  {\"name\": \"AddCommGrpCat.int_hom_ext\", \"module\": \"Mathlib/Algebra/Category/Grp/Basic\", \"type\": \"∀ {G : AddCommGrpCat} (f g : AddCommGrpCat.of ℤ ⟶ G),\\n  (CategoryTheory.ConcreteCategory.hom f) 1 = (CategoryTheory.ConcreteCategory.hom g) 1 → f = g\", \"doc\": \"Let $ G $ be an additive commutative group. If two group homomorphisms $ f, g : \\\\mathbb{Z} \\\\to G $ satisfy $ f(1) = g(1) $, then $ f = g $.\"}\n  {\"name\": \"AddCommGrpCat.int_hom_ext_iff\", \"module\": \"Mathlib/Algebra/Category/Grp/Basic\", \"type\": \"∀ {G : AddCommGrpCat} {f g : AddCommGrpCat.of ℤ ⟶ G},\\n  f = g ↔ (CategoryTheory.ConcreteCategory.hom f) 1 = (CategoryTheory.ConcreteCategory.hom g) 1\", \"doc\": \"For any additive commutative group $ G $, two group homomorphisms $ f, g : \\\\mathbb{Z} \\\\to G $ are equal if and only if they agree on the generator $ 1 $, i.e., $ f(1) = g(1) $ in $ G $. This follows f\"}\n  {\"name\": \"Abelianization.lift\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"{G : Type u} → [inst : Group G] → {A : Type v} → [inst_1 : CommGroup A] → (G →* A) ≃ (Abelianization G →* A)\", \"doc\": \"For any group $ G $ and abelian group $ A $, there is a natural bijection between group homomorphisms $ G \\to A $ and group homomorphisms $ G^{\\text{ab}} \\to A $, where $ G^{\\text{ab}} = G/[G, G] $ is the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsion\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|[Ii]sogeny|torsion.*[Ff]actor|[Ff]actor.*torsion",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"44\", \"text\": \"  constant factor of the cubic discriminant of its 2-torsion polynomial.\"}\n  {\"file\": \"Mathlib/Algebra/Module/DedekindDomain.lean\", \"line\": \"38\", \"text\": \"      torsionBySet R M (p ^ (factors I).count ↑p : Ideal R) := by\"}\n  {\"file\": \"Mathlib/Algebra/Module/DedekindDomain.lean\", \"line\": \"60\", \"text\": \"`p i ^ e i`-torsion submodules where `p i` are factors of `(⊤ : Submodule R M).annihilator` and\"}\n  {\"file\": \"Mathlib/Algebra/Module/DedekindDomain.lean\", \"line\": \"65\", \"text\": \"      torsionBySet R M (p ^ (factors (⊤ : Submodule R M).annihilator).count ↑p : Ideal R) := by\"}\n  {\"file\": \"Mathlib/Algebra/GroupWithZero/Torsion.lean\", \"line\": \"33\", \"text\": \"variable [UniqueFactorizationMonoid M] [NormalizationMonoid M] [IsMulTorsionFree Mˣ]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of semi abelian group varieties killing the kernel of multiplication by n is divisible by n in the homomorphism group",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The multiplication n isogeny of a semiabelian variety is the quotient by its n torsion subgroup",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"QuotientAddGroup.homQuotientZSMulOfHom\", \"module\": \"Mathlib/GroupTheory/QuotientGroup/Basic\", \"type\": \"{A B : Type u} →\\n  [inst : AddCommGroup A] →\\n    [inst_1 : AddCommGroup B] → (A →+ B) → (n : ℤ) → A ⧸ (zsmulAddGroupHom n).range →+ B ⧸ (zsmulAddGroupHom n).range\", \"doc\": \"Given additive commutative groups $A$ and $B$, a group homomorphism $f : A →+ B$, and an integer $n$, this constructs the induced additive group homomorphism from the quotient group $A/N_A$ to $B/N_B$\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} → [inst_1 : DecidableEq F] → W.Point →+ Additive (ClassGroup W.CoordinateRing)\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"QuotientGroup.homQuotientZPowOfHom\", \"module\": \"Mathlib/GroupTheory/QuotientGroup/Basic\", \"type\": \"{A B : Type u} →\\n  [inst : CommGroup A] →\\n    [inst_1 : CommGroup B] → (A →* B) → (n : ℤ) → A ⧸ (zpowGroupHom n).range →* B ⧸ (zpowGroupHom n).range\", \"doc\": \"Given a group homomorphism $ f: A \\\\to B $ and an integer $ n $, this constructs the induced homomorphism from the quotient group $ A/\\\\langle a^n \\\\mid a \\\\in A \\\\rangle $ to the quotient group $ B/\\\\langl\"}\n  {\"name\": \"ModN.mkQ\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/ModN\", \"type\": \"{G : Type u_1} → [inst : AddCommGroup G] → (n : ℕ) → G →+ ModN G n\", \"doc\": \"The canonical additive homomorphism sending each element $ g $ of the additive commutative group $ G $ to its equivalence class $ [g] $ in the quotient module $ \\\\text{Mod}_n(G) = G / \\\\text{range}(n \\\\c\"}\n  {\"name\": \"AddCircle\", \"module\": \"Mathlib/Topology/Instances/AddCircle/Defs\", \"type\": \"{𝕜 : Type u_1} → [AddCommGroup 𝕜] → 𝕜 → Type u_1\", \"doc\": \"The additive circle is defined as the quotient of an additive commutative group $\\\\mathbb{K}$ by the subgroup consisting of all integer multiples of an element $p$, i.e., $\\\\mathbb{K}/\\\\langle p \\\\rangle$\"}\n  {\"name\": \"ModN.liftEquiv\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/ModN\", \"type\": \"{G : Type u_1} →\\n  {M : Type u_3} →\\n    [inst : AddCommGroup G] → {n : ℕ} → [inst_1 : AddMonoid M] → (ModN G n →+ M) ≃ { φ // ∀ (g : G), n • φ g = 0 }\", \"doc\": \"There is a natural equivalence between additive monoid homomorphisms from the quotient module $\\\\text{Mod}_n(G)$ to an additive monoid $M$ and additive monoid homomorphisms $\\\\varphi : G \\\\to M$ satisfyi\"}\n  {\"name\": \"Ideal.torsionMapQuot\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/Basic\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] →\\n    (I : Ideal (NumberField.RingOfIntegers K)) → ↥(NumberField.Units.torsion K) →* (NumberField.RingOfIntegers K ⧸ I)ˣ\", \"doc\": \"The group homomorphism from the torsion subgroup of the unit group $\\\\mathcal{O}_K^\\\\times$ to the unit group of the quotient ring $\\\\mathcal{O}_K/I$, induced by the canonical quotient map $\\\\mathcal{O}_K\"}\n  {\"name\": \"CharacterModule.ofSpanSingleton\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"{A : Type uA} → [inst : AddCommGroup A] → (a : A) → CharacterModule ↥(ℤ ∙ a)\", \"doc\": \"Given an element `a` in an additive commutative group `A`, this definition constructs a character on the cyclic subgroup `ℤ \\\\cdot a` generated by `a`. This character is a group homomorphism from `ℤ \\\\c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism of semiabelian algebraic groups killing n torsion factors uniquely through multiplication by n",
+   "results": "OK 8 hits; AddCommGrpCat.hom_zsmul, AddCommGrpCat.hom_nsmul, ModN.liftEquiv, AddSubgroup.torsionBy.nsmul, AddSubgroup.torsionBy, AddCommGrpCat.instSMulIntHom, AddCommGrpCat.instSMulNatHom, SemimoduleCat.hom_nsmul. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semiabelian group over an algebraically closed field has finite etale surjective multiplication by any invertible positive integer",
+   "results": "OK 8 hits; ax_grothendieck_of_locally_finite, ax_grothendieck_univ, Algebra.Etale.iff_exists_algEquiv_prod, FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime_or_zero, Algebra.IsStandardEtale.of_surjective, Algebra.FormallyEtale.iff_exists_algEquiv_prod. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsion\"",
+   "results": "OK 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|[Ii]sogeny|multiplication.*[Ee]tale|torsion.*factor",
+   "results": "OK 0 hits; . Subdirectory: AlgebraicGeometry. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|semi_abelian|[Ii]sogeny|AbelianVariety",
+   "results": "OK 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by a unit integer on an extension of an abelian variety by a split torus is a finite etale surjective morphism",
+   "results": "OK 8 hits; IsUnit.isQuotientMap_zsmul, AddCircle.isAddQuotientCoveringMap_zsmul, AddAut.mulRight, LinearEquiv.smulOfUnit, NumberField.mixedEmbedding.unitSMul_smul, AddAut.mulLeft, ZMod.smul_units_def, AffineEquiv.homothetyUnitsMulHom. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isogeny\"",
+   "results": "OK 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic groups vanishing on the kernel of multiplication by n descends through that isogeny",
+   "results": "OK 8 hits; QuotientGroup.homQuotientZPowOfHom, MonoidHom.liftOfRightInverseAux, ModN.liftEquiv, QuotientGroup.homQuotientZPowOfHom_comp, GrpCat.SurjectiveOfEpiAuxs.comp_eq, QuotientAddGroup.homQuotientZSMulOfHom, AlgHom.kerSquareLift_mk, AlgHom.liftOfSurjective_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny of semiabelian varieties given by multiplication by n prime to the characteristic is finite etale and faithfully flat",
+   "results": "OK 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.iff_exists_algEquiv_prod, RingHom.Etale, Algebra.Etale.iff_exists_algEquiv_prod, RingHom.Etale.of_bijective, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-torsion-faithfulness",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: passing from identity on invertible level torsion to an endomorphism congruent to identity modulo n, on the semiabelian Picard object.",
+   "via": [
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semiabelian-torsion-kernel-divisibility",
+  "worker": "stage1",
+  "summary": "Kept the exact statement. Separated the invertible semiabelian multiplication cover as one smaller geometric statement-only node, then proved kernel vanishing on all scheme sections, explicit sheaf descent, naturality, additivity, uniqueness and the n-times-Hom identity. Read Milne quotient descent and torus/abelian inputs, reused the existing etale fibre decomposition instead of creating a duplicate. No Lean declaration states the item; searches found no Mathlib match.",
+  "blueprint": [
+   "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: passing from identity on invertible level torsion to an endomorphism congruent to identity modulo n, on the semiabelian Picard object.",
+   "Current latest blueprint: det-thm-sf-ctf-stability-direct-images proof (3); inherited alteration/level-structure prerequisite, no unit-route change."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic etale-scheme fibre decomposition, applied to the kernel over the algebraically closed field; no node in this unit supplies that decomposition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-4350f34fd",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-4350f34fd (reviewer sub-agent of L); spot-checked: I read the item, all five steps, the new node lem-sfb-semiabelian-invertible-multiplication and every cited statement. Item statement and stmt_deps are unchanged from the base; the item is still unsplit in live and side-live; no re-split note applies. Step 1 uses the new node with U=Spec k and y=e, so the kernel K is a finite etale k-scheme. Step 2 applies lem-weil-pbc-etale-fibre-discrete-separable-points: K is a disjoint union of copies of Spec k indexed by G[n](k), and fppf-sheaf uniqueness in H (def-trf-algebraic-space) gives f|_K=0 on every test scheme, which is the 'for all R' condition of Milne Prop 5.21 (p.104, checked). Step 3 uses the finite etale surjective cover, which is fppf by def-weil-etale-morphism and def-pc-fppf-site, and glues with p(x1-x2)=0. Steps 4-5 (independence of lifts, naturality, b∘p=f, additivity, uniqueness, f=nb) are genuinely elementary. New node: true (split torus power map with n invertible, Stacks 0BFH/03RP for the abelian part, torsor factorization). It is statement-only, self-contained, cites definitions that define what they are cited for, and does not restate the item (no f, no H). Grep over the whole DAG found no duplicate: smooth-group-invertible-multiplication gives etale only and excludes finiteness; the Hom-group, Picard and abelian lem-sc-mult-n nodes are different. Small cases checked: n=1, G=G_m (n|r), and the characteristic-p counterexample when n is not invertible. Sources: Milne 8.21 p.152 and 12.9(b) pp.233-4; Stacks tags 0BFG, 0BFH and 03RP match groupoids.tex labels. Batch-5: def-trf-algebraic-space is the general definition of algebraic spaces, not part of the proof of the trace formula or Poincare duality, and was already a stmt_dep of the base item, so it is accepted. The tool_uses entry (generic etale-fibre decomposition from sec-proper-base-change) is accepted. No fixes."
+ }
+}

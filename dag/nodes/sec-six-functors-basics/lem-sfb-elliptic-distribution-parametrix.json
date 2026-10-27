@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-elliptic-distribution-parametrix",
+ "kind": "statement",
+ "title": "Elliptic left parametrix as an identity on distributions",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $N$ be a compact oriented smooth manifold without boundary of dimension $m\\geq1$, with a smooth Riemannian metric and its positive volume form. Let $B,C$ be smooth real vector bundles of the same finite rank with smooth positive definite fibre metrics. Let $d\\geq1$ be an integer and let $P:\\Gamma^\\infty(B)\\to\\Gamma^\\infty(C)$ be a real-linear differential operator locally given in smooth frames by $P=\\sum_{|\\alpha|\\leq d}a_\\alpha(x)\\partial^\\alpha$, with smooth coefficients, such that $\\sum_{|\\alpha|=d}a_\\alpha(x)\\xi^\\alpha:B_x\\to C_x$ is invertible for every nonzero real covector $\\xi$. Extend $P$ to distributions by that local formula using derivatives defined by duality. With $\\mathcal D'$ and $\\Psi^r$ as in [def-sfb-symbol-pseudodifferential-operators], there exist $A\\in\\Psi^{-d}(C,B)$ and a real smooth kernel $K(x,y)\\in\\operatorname{Hom}_{\\mathbf R}(B_y,B_x)$ such that $$A(Pu)=u+R_Ku\\quad\\text{for every }u\\in\\mathcal D'(B).$$ Here $R_K$ is the distributional integral operator with kernel $K$ and the fixed volume form. The equality is in $\\mathcal D'(B)$ and requires no Sobolev regularity of $u$.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Part I section 3.B, construction following Definition 3.8, printed pp.13–14 (PDF pages 25–26); real bundle version of the symbol inverse and smoothing remainder; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-pseudodifferential-leading-calculus](iii) with $k=d$: the distributional $P$ has order $d$ and global homogeneous leading symbol $p_d=i^d\\sum_{|\\alpha|=d}a_\\alpha\\xi^\\alpha$. The hypothesis makes $p_d$ invertible away from zero. Put $b=p_d^{-1}:C_{\\mathbf C,x}\\to B_{\\mathbf C,x}$. In real frames the adjugate-over-determinant formula shows that $b$ is smooth; $b(x,t\\xi)=t^{-d}b(x,\\xi)$ for $t>0$. Also $p_d(x,-\\xi)=\\overline{p_d(x,\\xi)}$, so the same reality identity holds for $b$. To check the symbol estimates after a cutoff, each $\\partial_x^\\alpha\\partial_\\xi^\\beta b$ is homogeneous of degree $-d-|\\beta|$ and bounded on each compact chart set times the unit sphere; the cutoff region is compact in frequency. Thus $b$ satisfies the hypotheses of (i). Obtain a real $A_0\\in\\Psi^{-d}(C,B)$ with leading symbol $b$. By (ii) and (iii), $A_0P$ and $I_B$ have order zero and the same leading symbol $bp_d=\\operatorname{id}_{B_{\\mathbf C}}$, whence $$E:=A_0P-I_B\\in\\Psi^{-1}(B,B).$$ Use the current [def-sfb-symbol-pseudodifferential-operators] on the strong distributional dual: each local term is $L=\\chi\\operatorname{Re}\\operatorname{Op}(a)\\psi$ and $(Lu)(\\phi)=u(L^t\\phi)$, with both spatial cutoffs included. The input cutoff keeps $L^t\\phi$ compactly supported. Clause (iii) identifies the differential-operator action with the local derivative-by-duality extension required here.",
+   "uses": [
+    "lem-sfb-pseudodifferential-leading-calculus",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "§3.B, paragraph following Definition 3.8, printed p.13: truncate the inverse symbol and compose"
+   }
+  },
+  {
+   "text": "Let $T_0=I_B$ and $T_j=(-E)^j$ for $j\\geq1$. The order rules of [lem-sfb-pseudodifferential-leading-calculus](ii) give $T_j\\in\\Psi^{-j}(B,B)$ by induction: $T_0$ has order zero and $T_{j+1}=(-E)T_j$ has order at most $-1-j$. Apply [lem-sfb-pseudodifferential-asymptotic-sum] with $r=0$ and $E=F=B$ to obtain one real $Q\\in\\Psi^0(B,B)$ such that, for every $L\\geq1$, $$Q-S_L\\in\\Psi^{-L}(B,B),\\qquad S_L=\\sum_{j=0}^{L-1}(-E)^j.$$ This is an asymptotic realization, requiring no norm-smallness of $E$ or convergence of its geometric series.",
+   "uses": [
+    "lem-sfb-pseudodifferential-leading-calculus",
+    "lem-sfb-pseudodifferential-asymptotic-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "§3.B, paragraph following Definition 3.8, printed pp.13–14: asymptotic geometric expansion"
+   }
+  },
+  {
+   "text": "Set $A=QA_0\\in\\Psi^{-d}(C,B)$ by [lem-sfb-pseudodifferential-leading-calculus](ii). For each $L\\geq1$, cancellation of the finite sums gives $$S_L(I_B+E)-I_B=(-1)^{L-1}E^L.$$ Since $A_0P=I_B+E$, associativity and distributivity of composition on distributions give $$AP-I_B=(Q-S_L)(I_B+E)+(-1)^{L-1}E^L.$$ The first term has order at most $-L+0=-L$, because $I_B+E\\in\\Psi^0$; the second has order at most $-L$ by induction on $L$. Closure under addition therefore gives $AP-I_B\\in\\Psi^{-L}(B,B)$ for every $L\\geq1$. The sign is checked already at $L=1$, when the finite remainder is $E$. No limit of operator identities is taken.",
+   "uses": [
+    "lem-sfb-pseudodifferential-leading-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "§3.B, paragraph following Definition 3.8, printed p.14: the asymptotic expansion is an inverse modulo regular operators"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pseudodifferential-residual-kernel] to the continuous real-linear distributional map $T=AP-I_B$ with $E=F=B$. It supplies a real smooth kernel $K(x,y):B_y\\to B_x$ such that $AP-I_B=R_K$ on every distribution, with the fixed volume form and duality convention. Evaluating this equality at any $u\\in\\mathcal D\\prime(B)$ yields $A(Pu)=u+R_Ku$ in $\\mathcal D\\prime(B)$, with no regularity assumption on $u$.",
+   "uses": [
+    "lem-sfb-pseudodifferential-residual-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "§3.B, regular-kernel paragraph after Proposition 3.6, printed p.13, applied to the inverse constructed on p.14"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-pseudodifferential-leading-calculus",
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-pseudodifferential-asymptotic-sum",
+  "lem-sfb-pseudodifferential-residual-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Demailly, Part I §3.B, printed pp.12–14 (PDF pages 24–26); WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf; expanded Neumann-series argument following Definition 3.8, with real Fourier convention and equality on distributions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "parametrix|pseudodifferential|pseudoDifferential|smoothingOperator",
+   "results": "{\"t\": \"2026-10-24T03:04:36Z\", \"tool\": \"grep\", \"query\": \"parametrix|pseudodifferential|pseudoDifferential|smoothingOperator\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth approximation, Fourier inversion and inverse-function theorems do not give an elliptic parametrix modulo smooth kernels."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parametrix\"",
+   "results": "{\"t\": \"2026-10-24T03:04:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"parametrix\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth approximation, Fourier inversion and inverse-function theorems do not give an elliptic parametrix modulo smooth kernels."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an inverse modulo smoothing operators for an elliptic differential operator",
+   "results": "{\"t\": \"2026-10-24T03:04:37Z\", \"tool\": \"leansearch\", \"query\": \"Construct an inverse modulo smoothing operators for an elliptic differential operator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.fourierIntegralInv\", \"FourierInvModule.mk.injEq\", \"FourierInvModule.noConfusion\", \"SchwartzMap.instFourierInvPair\", \"instContMDiffInv₀OfTopWithTopENat\", \"Diffeomorph.contMDiff_invFun\", \"instContMDiffInv₀OfSomeENatTopOfLEInfty\", \"FourierInvModule.mk\"], \"digest\": \"f8a6bef2c50ddd83\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth approximation, Fourier inversion and inverse-function theorems do not give an elliptic parametrix modulo smooth kernels."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A classical elliptic differential operator on a closed smooth manifold admits a pseudodifferential left parametrix modulo an operator with smooth kernel",
+   "results": "{\"t\": \"2026-10-24T03:04:40Z\", \"tool\": \"leanfinder\", \"query\": \"A classical elliptic differential operator on a closed smooth manifold admits a pseudodifferential left parametrix modulo an operator with smooth kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Continuous.exists_contMDiff_approx\", \"Continuous.exists_contMDiff_approx_and_eqOn\", \"SchwartzMap.integral_clm_comp_laplacian_right_eq_left\", \"Emetric.exists_smooth_forall_closedBall_subset\", \"Continuous.exists_contDiff_approx_and_eqOn\", \"exists_continuousLinearEquiv_fderiv_symm_eq\", \"ExistsContDiffBumpBase.u\", \"IsContDiffImplicitAt.implicitFunctionAux\"], \"digest\": \"b86778c0772a532e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth approximation, Fourier inversion and inverse-function theorems do not give an elliptic parametrix modulo smooth kernels."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An elliptic real differential operator on a closed manifold has a left inverse modulo a smooth integral kernel acting on every distribution",
+   "results": "{\"t\": \"2026-10-24T03:28:44Z\", \"tool\": \"leanfinder\", \"query\": \"An elliptic real differential operator on a closed manifold has a left inverse modulo a smooth integral kernel acting on every distribution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.integral_clm_comp_laplacian_right_eq_left\", \"SchwartzMap.integral_bilinear_laplacian_right_eq_left\", \"SchwartzMap.integral_clm_comp_lineDerivOp_right_eq_neg_left\", \"SchwartzMap.integral_mul_laplacian_right_eq_left\", \"SchwartzMap.integral_bilinear_lineDerivOp_right_eq_neg_left\", \"SchwartzMap.integral_smul_laplacian_right_eq_left\", \"SchwartzMap.instLaplacian\", \"SchwartzMap.integral_mul_lineDerivOp_right_eq_neg_left\"], \"digest\": \"c79ba299eba40ccf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give distributional Laplacians, integration by parts or norm-small geometric-series inverses, not pseudodifferential elliptic inversion modulo smooth kernels."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parametrix\"",
+   "results": "{\"t\": \"2026-10-24T03:28:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"parametrix\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give distributional Laplacians, integration by parts or norm-small geometric-series inverses, not pseudodifferential elliptic inversion modulo smooth kernels."
+  },
+  {
+   "tool": "grep",
+   "query": "parametrix|pseudodifferential|pseudoDifferential",
+   "results": "{\"t\": \"2026-10-24T03:28:43Z\", \"tool\": \"grep\", \"query\": \"parametrix|pseudodifferential|pseudoDifferential\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give distributional Laplacians, integration by parts or norm-small geometric-series inverses, not pseudodifferential elliptic inversion modulo smooth kernels."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An elliptic differential operator admits a pseudodifferential parametrix on distributions",
+   "results": "{\"t\": \"2026-10-24T03:28:43Z\", \"tool\": \"leansearch\", \"query\": \"An elliptic differential operator admits a pseudodifferential parametrix on distributions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TemperedDistribution.instLaplacian.congr_simp\", \"Laplacian.laplacian\", \"TemperedDistribution.laplacianCLM_apply\", \"TemperedDistribution.derivCLM\", \"TemperedDistribution.instLaplacian\", \"TemperedDistribution.laplacian_apply_apply\", \"TemperedDistribution.lineDerivOpCLM_eq\", \"InnerProductSpace.InnerProduct.laplacian\"], \"digest\": \"a7f59b2f6572d98e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give distributional Laplacians, integration by parts or norm-small geometric-series inverses, not pseudodifferential elliptic inversion modulo smooth kernels."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invert an elliptic operator modulo smoothing operators using the asymptotic geometric series in a negative order remainder",
+   "results": "{\"t\": \"2026-10-24T03:28:46Z\", \"tool\": \"leanfinder\", \"query\": \"Invert an elliptic operator modulo smoothing operators using the asymptotic geometric series in a negative order remainder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedRing.inverse_add_nth_order\", \"NormedRing.inverse_add_norm_diff_nth_order\", \"WeakFEPair.hf_zero\", \"NormedRing.inverse_one_sub_nth_order\", \"NormedRing.inverse_add_norm_diff_second_order\", \"WeakFEPair.hf_zero'\", \"NormedRing.inverse_one_sub_norm\", \"instInhabitedNonlinearRightInverseToContinuousLinearMap\"], \"digest\": \"f0f61c1a6753d51b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give distributional Laplacians, integration by parts or norm-small geometric-series inverses, not pseudodifferential elliptic inversion modulo smooth kernels."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weak-garding-sobolev-estimate",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions.",
+   "via": [
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-elliptic-distribution-parametrix",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against Demailly Part I §3.B. Expanded the truncated inverse and asymptotic Neumann construction, with the Fourier factor i^d, real conjugation symmetry, finite remainder formula and equality on all distributions. Three generic analytic supporting statements remain unsplit, with five executed Mathlib searches each. No attachment or Mathlib leaf was found. Repair of the refused landing: revalidated the changed symbol/distribution definition, including its strong-dual topology and transposition with both spatial cutoffs; step 1 and its verbatim citation now use that current statement. The item and supporting theorem statements are unchanged.",
+  "blueprint": "Inherited analytic prerequisite below det-thm-sf-ctf-stability-direct-images proof (3), through the harmonic-representative and weak-Garding branch. The source paragraph following Demailly Definition 3.8 is realized by steps 1–3, and the regular-kernel identification after Proposition 3.6 by step 4. blueprint_refs.py ancestor returns None for this inherited chain; its existing from.node=null and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-906b44787",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-906b44787 (reviewer sub-agent of L); spot-checked: Re-delivery after a landing return caused by the change to def-sfb-symbol-pseudodifferential-operators. Against the 75bf snapshot (earlier PASS), only step 1's closing sentences and the split_report summary changed. The item statement, stmt_deps, steps 2-4 and the three new nodes are byte-identical. Against live and side-live, the item differs only in its split fields. The two def nodes match live, and none of the new ids is on live. Changed definition: I read the new def and def-sfb-smooth-bundle-test-distributions in full (strong dual; localized transpose with both cutoffs; (-1)^|alpha| chart derivatives). Step 1 quotes the new rule correctly. Leading-calculus (iii) still agrees with the Psi^k representation: chi_i D psi_i acting by transpose equals the local derivative-by-duality formula. Residual-kernel equality on D' follows from continuity and density of smooth sections in the strong dual. So the new nodes need no change. Math re-read in full. Step 1: p_d=i^d M with conj p_d(xi)=p_d(-xi); b=p_d^{-1} meets the hypotheses of (i); the composition order A_0 after P gives b p_d=id, so E is in Psi^{-1}. Step 2: (-E)^j is in Psi^{-j}, and Borel summation with r=0 gives Q. Step 3: S_L(I+E)-I=(-1)^{L-1}E^L, checked at L=1 and L=2; AP-I=(Q-S_L)(I+E)+(-1)^{L-1}E^L is in Psi^{-L}. Step 4: residual-kernel applies to the continuous map AP-I. Demailly is not available locally (WANTED, proof_origin agent), so I checked the statements against the standard S^r_{1,0} calculus. Duplicate search with rg -L found only the Q21 analytic siblings, plus the new Euclidean L2 mollification node; none is a duplicate. The route stays in unit sk-thm-sf-ctf-stability, no tool_uses are needed, and there is no SGA. Edge cases checked: rank 0, empty N, d/dx on the circle. Advisory only: the 'E=F=B' notation clashes with the operator E, and the bundle G is unused in the new nodes."
+ }
+}

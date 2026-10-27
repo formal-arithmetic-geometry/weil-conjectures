@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-strict-dvr-coefficient-sequence",
+ "kind": "statement",
+ "title": "The constant DVR residue-kernel sequence with completed actions",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$ and the specified uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. Let $X$ be any scheme with its small pro-etale site [def-pc-scheme, def-weil-pbc-proetale-site]. For $m\\geq0$ put $C_m=(R/\\pi^{m+1})_X$, $B=\\lim C_m$, and regard $C_m$ as a $B$-module via its limit projection [def-weil-pbc-constant-sheaf, def-weil-completed-integral-coefficients, def-pc-sheaf-restrict-scalars, def-sf-scalar-reduction-categories-restriction]. Let $q_n:C_{n+1}\\to C_n$ be the actual constant quotient ring map, regarded as a $B$-module map. There are $B$-linear maps $a_n:C_0\\to C_{n+1}$ for all $n\\geq0$, taking each constant section represented by $r\\in R$ to the section represented by $\\pi^{n+1}r$, and the sequences $0\\to C_0\\xrightarrow{a_n}C_{n+1}\\xrightarrow{q_n}C_n\\to0$ are short exact in module sheaves [def-weil-sheaf-of-modules-category].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942, lemma-bounded, proof (1), coefficient ideal-quotient triangle; the indicated coefficient or tensor part of its construction"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sf-scalar-reduction-categories-restriction",
+  "def-weil-sheaf-of-modules-category",
+  "def-sf-strict-dvr-coefficient-sequence-data"
+ ],
+ "proof": [
+  {
+   "text": "Define $R/(\\pi)\\to R/(\\pi^{n+2})$ by $[r]\\mapsto[\\pi^{n+1}r]$. Changing the representative changes the image by a multiple of $\\pi^{n+2}$. The nonzero uniformizer in the domain $R$ can be cancelled, so the map is injective. The quotient onto $R/(\\pi^{n+1})$ is onto and its kernel is exactly this image. Multiplication of lifted representatives proves linearity over the middle quotient, with source action through the residue quotient.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the constant module presheaf sectionwise and prove that evaluation preserves its finite limits and colimits. Exact module sheafification gives an exact constant-module functor. Use the already proved generic basisLift comparison and its sheafification-unit equation from ConstantFiniteFreeSectionBasis to identify its quotient-ring modules with restrictions of the constant quotient ring sheaves; this comparison itself requires no freeness hypothesis. Its unit equation fixes the normalization on constant sections.",
+   "uses": [
+    "lem-pur-constant-finite-free-section-basis",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict along the actual completion projection to the middle quotient. The proved coefficientTower_map identity from CompletedIntegralProjectionDivisibility and limit.w identify the outer scalar actions. The proved generic restrictionComp isomorphism from SuccessiveQuotientFlatTensorSequence has identity underlying maps. Sheafification-unit naturality identifies the transported quotient with strictDvrCoefficientQuotient. Apply the exact composite constant-realization/restriction functor to the elementary short exact sequence and transport along these three normalized comparisons.",
+   "uses": [
+    "lem-sp-completed-integral-projection-divisibility",
+    "lem-pe-successive-quotient-flat-tensor-sequence",
+    "def-pur-sheaf-inverse-limit",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-constant-finite-free-section-basis",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sp-completed-integral-projection-divisibility",
+  "lem-pe-successive-quotient-flat-tensor-sequence",
+  "def-pur-sheaf-inverse-limit",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942, lemma-bounded, proof (1); elementary DVR specialization, exact constant realization (Modules on Sites, lemma-constant-exact, Tag 093J), and flat tensor exactness (definition-flat, Tag 03ER)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*shortExact|shortExact.*constant",
+   "results": "{\"t\": \"2026-10-23T17:09:57Z\", \"tool\": \"grep\", \"query\": \"constant.*shortExact|shortExact.*constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: results concern ordinary coefficient modules or generic exact functors, and do not identify the prescribed constant sheaves, completed actions and normalized reduction maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant sheaf of a discrete valuation ring residue field is the kernel of the quotient between successive powers of its uniformizer, with completed coefficient actions",
+   "results": "{\"t\": \"2026-10-23T17:09:59Z\", \"tool\": \"leanfinder\", \"query\": \"The constant sheaf of a discrete valuation ring residue field is the kernel of the quotient between successive powers of its uniformizer, with completed coefficient actions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"Valued.ResidueField\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.selmerGroup.valuation_ker_eq\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"933ec2824c031541\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: results concern ordinary coefficient modules or generic exact functors, and do not identify the prescribed constant sheaves, completed actions and normalized reduction maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal.Quotient.mk_surjective\"",
+   "results": "{\"t\": \"2026-10-23T17:15:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ideal.Quotient.mk_surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Ideal.Quotient.mk_surjective\"], \"digest\": \"a1905de64d95c2dc\"}",
+   "date": "2026-10-23",
+   "verdict": "partial match: Ideal.Quotient.mk_surjective supplies ordinary quotient surjectivity, but not residue kernel exactness and its constant realization with completed actions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictDvrReductionTriangles",
+  "date": "2026-10-24",
+  "group": "B8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Supporting boundedness input for the residue-basis induction (Stacks 09C2(1),(2)). This node isolates the simultaneous quotient model, the explicit DVR coefficient kernel, its B-linearity, and the induced triangles (old proof steps 2-4).",
+   "via": [
+    "lem-sf-strict-dvr-reduction-triangles"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictDvrCoefficientSequence",
+  "file": "lean/Sheaf/Paper/StrictDvrCoefficientSequence.lean",
+  "declaration": "WeilConjectures.strictDvrCoefficientSequence",
+  "declarations": [
+   "WeilConjectures.strictDvrCoefficientSequence"
+  ],
+  "statement": "theorem strictDvrCoefficientSequence :\n    ∃ (a : ∀ n : ℕ, strictDvrFiniteCoefficient l E X 0 ⟶\n        strictDvrFiniteCoefficient l E X (n + 1)),\n      (∀ (n : ℕ) (U : X.ProEtᵒᵖ) (r : Padic.coefficientExtensionIntegers l E),\n        (a n).val.app U\n          ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)\n            ((Functor.const X.ProEtᵒᵖ).obj\n              (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E 1))))).app U\n                (ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E 1) r))) =\n          (toSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)\n            ((Functor.const X.ProEtᵒᵖ).obj\n              (CommRingCat.of\n                (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1 + 1)))))).app U\n                  (ULift.up (Ideal.Quotient.mk\n                    (Padic.coefficientExtensionIdeal l E (n + 1 + 1))\n                    (Padic.coefficientExtensionUniformizer l E ^ (n + 1) * r)))) ∧\n      ∀ n : ℕ, ∃ hz : a n ≫ strictDvrCoefficientQuotient l E X n = 0,\n        (ShortComplex.mk (a n) (strictDvrCoefficientQuotient l E X n) hz).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261023T230500-L-3432650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261023T230500-L-3432650",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

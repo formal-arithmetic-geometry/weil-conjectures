@@ -21,115 +21,49 @@
  ],
  "proof": [
   {
-   "text": "Write $T_{V/U}C=C\\otimes_{R_U}R_V$ and $t_{V/U}N=N\\otimes_{\\mathcal O_U}\\mathcal O_V$ on complexes. For each pair in the tower, [lem-weil-point-finite-free-sections-tensor] identifies coefficient sections with their valuation rings compatibly with inclusions and gives the natural chain isomorphism $\\theta_{V/U,C}(n\\otimes a)=n\\otimes a_s$. By [lem-weil-point-derived-sections-tensor-descent], $T$, $t$ and $\\Gamma(s,-)$ preserve all quasi-isomorphisms; the localization of $T_{V/U}$ is identified with the stipulated ordinary derived scalar extension by its counit. The localization of this particular $\\theta$ is exactly the stipulated $\\theta^D$. These statements apply to every complex, including the intermediate $T_{L/E}C$, without a completeness or boundedness assumption.",
+   "text": "Choose the pairwise finite-free sections comparisons and their exact derived descent. Constants determine the coefficient identifications uniquely, so transport each ordinary comparison to the fixed identity-pair sections functors. Its pure-tensor normalization is preserved by substitution.",
    "uses": [
     "lem-weil-point-finite-free-sections-tensor",
     "lem-weil-point-derived-sections-tensor-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change; specialization through the two cited point-sections comparison statements"
-   }
+   "elementary": false
   },
   {
-   "text": "For a sheaf $F$, define $u_F: (F\\otimes_{R_E}R_L)\\otimes_{R_L}R_M\\to F\\otimes_{R_E}R_M$ by $((x\\otimes a)\\otimes b)\\mapsto x\\otimes ab$, using the coefficient inclusions. The inner balance is respected because $(rx)\\otimes ab=x\\otimes r(ab)$, and the outer balance because $x\\otimes(ac)b=x\\otimes a(cb)$. Its inverse is $v_F(x\\otimes b)=(x\\otimes1)\\otimes b$: the $R_E$-balance follows from $((rx)\\otimes1)\\otimes b=(x\\otimes r)\\otimes b=(x\\otimes1)\\otimes rb$. These compatible bilinear formulas define sheaf maps by [def-pur-sheaf-tensor-product] and the unique factorization in [def-weil-pbc-sheafification], applied successively to the two tensor factors. They are $R_M$-linear. The composites are the identity, since $(x\\otimes1)\\otimes ab=(x\\otimes a)\\otimes b$. Equalities are tested before each sheafification by its uniqueness clause; no assertion that all global sections of a sheaf tensor are pure is needed. Applying the identical balanced formulas to ordinary modules defines $a^{\\mathrm{mod}}$ and its inverse. All formulas commute with restrictions and with $f(x)$ for a module-sheaf map $f$.",
+   "text": "Apply the ordinary scalar-tower coherence theorem with independent coefficient and section universes. The coefficient maps compose because their finite-quotient projections compose; uniqueness of inverse-limit maps proves the equality. Integer inclusions compose definitionally. This gives the ordinary formulas and coherent section, unit and four-stage equations.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-sheafification"
+    "lem-weil-sections-scalar-ordinary-tower"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product: sheafified tensor and its bilinear universal property; explicit scalar-tower calculation supporting def-weil-finite-coefficient-point, final paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply $u$ and $v$ degreewise to any cochain complex $C$. The differential check is $d(x\\otimes ab)=dx\\otimes ab=u((dx\\otimes a)\\otimes b)$; the inverse check is the same with $a=1$. Coefficients are in degree zero, so no Koszul signs occur. The maps are natural chain isomorphisms. To compute the derived version, choose $P\\to C$ K-flat with flat terms by [lem-pc-kflat-resolution]. Apply [lem-weil-pbc-ringed-topos-kflat-pullback] to the identity morphism of the underlying sheaf topos and the ring map $R_E\\to R_L$. The inverse image is the identity (hence preserves finite limits), so its module pullback is precisely $T_{L/E}$. Thus $T_{L/E}P$ is K-flat with flat terms. Take the small-site presentation in the fixed larger module universe used for these sheaf-module categories. By [lem-pur-derived-change-of-rings], both successive derived extensions and direct extension to $R_M$ are consequently computed by these very complexes. Their canonical scalar-composition associator is the class of $u_P$, with inverse the class of $v_P$, as in the K-flat construction of derived pullback composition.",
+   "text": "Apply exact scalar-tower transport using the exactness supplied by pairwise descent and its specified comparison with the prescribed derived scalar functor. The general localized-comparison normalization theorem identifies the localized ordinary comparison with the descent datum localized; equality of coefficient identifications then identifies thetaDerived with its prescribed theta. Sigma is the published counit by comparison_counit. Thus all representative and derived equations are exactly the requested ones.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-pur-derived-change-of-rings"
+    "lem-weil-exact-scalar-tower-transport",
+    "lem-weil-point-derived-sections-tensor-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), and 0D6D (lemma-derived-pullback-composition), specialized to identity underlying topoi"
-   }
+   "elementary": false
   },
   {
-   "text": "On $((n\\otimes a)\\otimes b)$ in degree $i$ of $t_{M/L}t_{L/E}\\Gamma(s,C)$, the upper route first gives $(n\\otimes a_s)\\otimes b_s$ and then the section $n\\otimes a_sb_s=n\\otimes(ab)_s$. The lower route first gives $n\\otimes ab$ and then the same section, by [lem-weil-point-finite-free-sections-tensor]. Equality extends to the whole module by additivity and the two tensor balancing relations. The maps commute with differentials by the previous step and by the chain assertion of the cited node. Thus $\\Gamma(s,u_C)\\theta_{M/L,T_{L/E}C}(\\theta_{L/E,C}\\otimes1)=\\theta_{M/E,C}a^{\\mathrm{mod}}$ is an equality of natural chain maps for every $C$, in particular every $P$.",
+   "text": "Ordinary squares applied to each term give ChainLaws. Change of rings preserves flat-term K-flat complexes; the exact-derived comparison and its invertible factorization make the counit invertible on every complex. Uniqueness of the ordinary maps follows from the ordinary tower theorem and the normalized theta; uniqueness of derived maps follows from exact transport and the normalized thetaD. Equality of all ten Maps fields proves the stated unique existence.",
    "uses": [
-    "lem-weil-point-finite-free-sections-tensor"
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-weil-exact-scalar-tower-transport",
+    "lem-weil-sections-scalar-ordinary-tower"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product: sheafified tensor and its bilinear universal property; explicit scalar-tower calculation supporting def-weil-finite-coefficient-point, final paragraph"
-   }
-  },
-  {
-   "text": "By [lem-weil-point-derived-sections-tensor-descent], every composite functor occurring in the last equation preserves quasi-isomorphisms before the final localization. Apply [lem-weil-pbc-localization-universal-property] (2) to the natural chain isomorphisms $u,v,\\theta$ after composing with target localization. They descend to natural isomorphisms, and (2)-(3) preserve compositions and equality. Conjugate by the counit-fixed comparisons of [lem-weil-point-derived-sections-tensor-descent]. Step 3 identifies the descended $u$ with $\\alpha$ on K-flat representatives, and that descent identifies the descended $\\theta$ with $\\theta^D$ on every representative. The equation of step 4 therefore becomes exactly the displayed derived equation, with its stated source and target.",
-   "uses": [
-    "lem-weil-point-derived-sections-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization, together with the fully faithful natural-transformation clause stated in lem-weil-pbc-localization-universal-property; agent calculation after localization"
-   }
-  },
-  {
-   "text": "For clarity, the associator's naturality on a roof $C\\xleftarrow{q}H\\xrightarrow{f}J$ can be checked without choosing a lift between resolutions. Put $F=T_{M/L}T_{L/E}$ and $G=T_{M/E}$, and denote localized chain maps by the same letters. Chain naturality gives $G(f)u_H=u_JF(f)$ and $G(q)u_H=u_CF(q)$. Since $F(q),G(q)$ are invertible by [lem-weil-point-derived-sections-tensor-descent], the latter gives $G(q)^{-1}u_C=u_HF(q)^{-1}$, and substitution yields $G(f)G(q)^{-1}u_C=u_JF(f)F(q)^{-1}$. The same algebra applies to $\\theta$ and to the unit maps below. Moreover [lem-weil-pbc-localization-universal-property] makes each descent unique with its representative comparison; thus any K-flat resolution computes this same transformation. Replacing resolutions cannot change either the maps or their equations.",
-   "uses": [
-    "lem-weil-point-derived-sections-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization; explicit roof algebra using the cited full natural-transformation statement"
-   }
-  },
-  {
-   "text": "For the equal-field case define $m_F:F\\otimes_{R_E}R_E\\to F$ by $x\\otimes r\\mapsto rx$; its inverse is $x\\mapsto x\\otimes1$. Balance and $R_E$-linearity show both composites are identities. The module multiplication map has the identical formula. On a section tensor $n\\otimes r$, $\\Gamma(s,m_F)\\theta_{E/E,F}$ gives $r_sn=rn$, using the coefficient-section identification of [lem-weil-point-finite-free-sections-tensor]. Hence it equals module multiplication, degreewise, naturally in complexes. This is the requested unit equation. Under the descent of step 5 it is the unit equation for $\\theta^D$; the representative-normalized comparisons ensure the prescribed multiplication identifications are the ones being used.",
-   "uses": [
-    "lem-weil-point-finite-free-sections-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product: sheafified tensor and its bilinear universal property; explicit scalar-tower calculation supporting def-weil-finite-coefficient-point, final paragraph"
-   }
-  },
-  {
-   "text": "For $E\\subset L\\subset M\\subset H$, apply the already constructed $u$ to a nested sheaf tensor $(((x\\otimes a)\\otimes b)\\otimes c)$. One composition gives $x\\otimes(ab)c$, and the other $x\\otimes a(bc)$; these are equal by associativity in $R_H$. Repeated uniqueness of the balanced maps of step 2 gives equality as sheaf chain maps. For module tensors the same calculation gives $n\\otimes abc$. Repeated use of [lem-weil-point-finite-free-sections-tensor] sends $a,b,c$ to their constant sections, whose product is $(abc)_s$; consequently the iterated sections comparisons give that same section whichever route is chosen. The localization theorem [lem-weil-pbc-localization-universal-property] carries these equalities to derived categories. Step 6 supplies their resolution independence. This includes identity stages and repeated fields, and proves precisely ordinary scalar-tower coherence.",
-   "uses": [
-    "lem-weil-point-finite-free-sections-tensor",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product: sheafified tensor and its bilinear universal property; explicit scalar-tower calculation supporting def-weil-finite-coefficient-point, final paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-point-finite-free-sections-tensor",
   "lem-weil-point-derived-sections-tensor-descent",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-sheafification",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-sections-scalar-ordinary-tower",
+  "lem-weil-exact-scalar-tower-transport",
+  "lem-pur-kflat-change-of-rings-independent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0G7E and 0D6D for representative computations; explicit balanced tensor, sections, unit, tower and localization calculations written here for the final paragraph of blueprint def-weil-finite-coefficient-point"
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03CZ, 03CY; exact derived localization via categories.tex Tag 04VG; H6 Lean assembly with independent universes"
  },
  "mathlib_searches": [
   {
@@ -225,33 +159,21 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-weil-point-derived-tensor-tower-coherence",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged; constructed the balanced sheaf and module associators and their inverses, checked the sections equation, units and four-field products explicitly, used the existing flat-term K-flat pullback theorem to compute successive derived extensions, and used the existing localization universal property for descent, roof naturality and resolution independence. No new nodes.",
-  "blueprint": "def-weil-finite-coefficient-point, final paragraph: stagewise passage to the finite-stage colimit; the ordinary tensor and sections coherence subargument extracted through lem-weil-point-sections-scalar-extension. Steps 1-6 establish the normalized tower equation and its naturality; steps 7-8 give units and iterated coherence.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Existence of flat-term K-flat sheaf resolutions, a general tool for the ordinary tensor computation; not a replacement of the point-coefficient route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "why": "Generic pullback preservation of K-flatness and flat terms, specialized to the identity topos and a coefficient ring map; the exact statement needed for the intermediate complex."
-   }
-  ]
+  "summary": "Repair of the human-mandated re-split: unchanged statement; two comparable independent statement-only tasks separate cochain sections coherence from counit-normalized K-flat/localization transport. All eight returned arguments and prior report are retained verbatim and allocated in report.md. Assembly has 2232 characters. Existing generic scalar, resolution and localization lemmas remain tools for the new tasks, not duplicate nodes.",
+  "blueprint": "def-weil-finite-coefficient-point, final paragraph: stagewise point evaluation followed by the common finite-stage colimit; ordinary scalar and sections coherence extracted via lem-weil-point-sections-scalar-extension and lem-weil-point-derived-tensor-tower-coherence; assembly step 1 sets up the point data, step 2 handles ordinary coherence, steps 3-4 handle normalized derived coherence.",
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topos-kflat-pullback"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q140-527d0a86a",
-  "group": "Q140",
+  "reviewer": "NT-cc-Q88-cefbb1988",
+  "group": "Q88",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-527d0a86a (reviewer sub-agent of L); spot-checked: I read the item and all 8 cited statements in full. The statement is identical to live; stmt_deps adds only def-pur-sheaf-tensor-product, which the sheaf tensors in the statement use. There are no new nodes and no cycle, the item has no re-split note of its own and is not dropped. Step 1 takes only what lem-weil-point-finite-free-sections-tensor and lem-weil-point-derived-sections-tensor-descent state; the descent node has no hypotheses on the complex, so it also applies to the intermediate T_{L/E}C. Step 2 builds the associator u by two successive factorizations through sheafification (def-pur-sheaf-tensor-product, def-weil-pbc-sheafification). Its balance checks and both inverse composites are correct, and it is elementary. Step 3 uses lem-pc-kflat-resolution, then lem-weil-pbc-ringed-topos-kflat-pullback on the identity topos with R_E→R_L (the hypotheses hold), then lem-pur-derived-change-of-rings (2), so the class of u_P is the derived associator α. I recomputed step 4 on pure tensors: n⊗a_s b_s = n⊗(ab)_s, because the constant-value maps are ring maps compatible with inclusions. Step 5 descends u and θ by clauses (2)-(3) of lem-weil-pbc-localization-universal-property and the counit-fixed comparisons of the descent node. Steps 6-8 are correct: the roof algebra, the unit case L=E via the finite-free node with d=1, and the four-field equality via associativity in R_H. Edge cases checked: L=E and M=L, ramified extensions, K=0, a single module in one degree, repeated fields. Duplicate search over all node statements (associator, tensor-tower, 0D6D, lem-weil-point-*) found no node stating the item. lem-sfb-flat-scalar-tower-coherence (unit sk-thm-sfb-qlbar-two-colimit) states the generic sheaf part of steps 2/3/8 in another formalism; the item re-derives that part elementarily and citing it is optional. Sources checked: Stacks 0G7E at sites-cohomology.tex line 3508 and 0D6D at line 3658; the final paragraph of blueprint main-20261015 def-weil-finite-coefficient-point; no SGA. I accept the declared tool_uses lem-pc-kflat-resolution and lem-weil-pbc-ringed-topos-kflat-pullback as generic K-flat tools. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-cefbb1988 (reviewer sub-agent of L); spot-checked: This answers the released human re-split note (clones/live repair-notes: 6867 chars, at least 2 nodes, assembly at most 3000 chars), so Q140's earlier PASS does not supersede it. The item statement and stmt_deps are byte-identical to live; the assembly is 4 steps and 2232 chars. All 8 old step texts are verbatim in the report and each argument has a new home. Old 2 and 4, the termwise part of 3, and the chain parts of 7 and 8 went to lem-weil-sections-scalar-cochain-coherence. The K-flat part of 3, all of 5 and 6, and the derived parts of 7 and 8 went to lem-weil-sections-scalar-derived-transport. Old 1 stays as item step 1. Cochain node checked on generators: θ is balanced because λ is compatible with the towers. In the triple equation both sides give n⊗λ_k(ab). The unit gives λ_i(a)n=a·n. The four-stage equation holds by associativity, and repeated stages cover the three-field case. Transport node: c_ij exists because T_ij preserves quasi-isomorphisms, so the counit is invertible. T_ijP is K-flat with flat terms (0G7E). α=[u_P] follows the 0D6D construction (read at sites-cohomology.tex:3658). Θ is fixed by the same counit conjugation as the descent node's θ^D, so Θ=θ^D. I checked the types of the roof equation. Item steps 2-4 match every clause of the statement: the representative formulas, roofs, units, four fields and resolution independence. Both new nodes are statement-only, self-contained, carry searches of all three kinds and sources at tags 03EK, 06YS, 0G7E, 06YY, 0D6D and 04VG (all verified), and are in the same unit sk-thm-sf-compatibility. There is no cycle and no SGA source. On duplicates, lem-sfb-flat-scalar-tower-coherence and lem-sfb-successive-derived-quotient-normalization overlap only the associator and α clauses (advisory). The scan found no node with the sections/λ comparison or the counit-normalized transport. Maintainer note: the item's node-level tool_uses (lem-pc-kflat-resolution, lem-weil-pbc-ringed-topos-kflat-pullback) are stale now."
  },
  "lean": {
   "module": "Sheaf.Paper.PointDerivedTensorTowerCoherence",
@@ -281,6 +203,28 @@
    "WeilConjectures.PointTensorTower.inclusion",
    "WeilConjectures.PointTensorTower.moduleGenerator",
    "WeilConjectures.PointTensorTower.Maps",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsSheafFormulaStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsSheafInverseStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsModuleFormulaStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsModuleInverseStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsThetaNormalizedStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsSquareStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsSheafUnitFormulaStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsModuleUnitFormulaStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsUnitSquareStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsSheafTowerStatement",
+   "WeilConjectures.PointTensorTower.OrdinaryLawsModuleTowerStatement",
+   "WeilConjectures.PointTensorTower.DerivedLawsThetadNormalizedStatement",
+   "WeilConjectures.PointTensorTower.DerivedLawsRepresentativeStatement",
+   "WeilConjectures.PointTensorTower.DerivedLawsModuleRepresentativeStatement",
+   "WeilConjectures.PointTensorTower.DerivedLawsDerivedSquareStatement",
+   "WeilConjectures.PointTensorTower.DerivedLawsUnitRepresentativeStatement",
+   "WeilConjectures.PointTensorTower.DerivedLawsModuleUnitRepresentativeStatement",
+   "WeilConjectures.PointTensorTower.DerivedLawsDerivedUnitSquareStatement",
+   "WeilConjectures.PointTensorTower.DerivedLawsDerivedTowerStatement",
+   "WeilConjectures.PointTensorTower.DerivedLawsDerivedModuleTowerStatement",
+   "WeilConjectures.PointTensorTower.ChainLawsSquareStatement",
+   "WeilConjectures.PointTensorTower.ChainLawsUnitStatement",
    "WeilConjectures.PointTensorTower.OrdinaryLaws",
    "WeilConjectures.PointTensorTower.DerivedLaws",
    "WeilConjectures.PointTensorTower.ChainLaws",
@@ -293,7 +237,7 @@
   "by": "NC",
   "date": "2026-10-21",
   "existing": false,
-  "note": "All ordinary scalar, section, chain and derived maps use the recorded constructions. Formula and counit normalization laws uniquely determine the natural isomorphisms; the sole postponed theorem asserts their existence and all coherence laws. Site and coefficient universes remain independent."
+  "note": "Ordinary scalar, section, chain and derived maps retain the recorded constructions. Formula and counit normalizations uniquely determine all natural isomorphisms. Named definitionally equal clause propositions share record field types; the sheaf generator is semireducible with its construction unchanged. Site and coefficient universes remain independent. The proof uses proved ordinary tower coherence and exact-derived transport."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -302,5 +246,27 @@
   "group": "NC",
   "result": "pass",
   "note": "Lean-only node diff; statement verbatim; all 29 declarations present; sole sorry. ∃ B is not a free choice: PointFiniteFreeSectionsTensorData pins coefficientE/L (constantE/L) and comparison (comparison_unique), and PointDerivedSectionsTensorData pins comparison, localized and theta (theta_eq). The HEq normalizations are typable via the constant equations. All Maps fields are pinned by generator formulas, HEq, and counit/factorization representatives, so ∃! holds. derived_square matches the displayed equation (types re-checked). Representative, PreservesModels, unit (completedCoefficientMap is the identity at le_rfl by residue uniqueness) and four-field tower clauses are present; roof naturality follows from NatIso. Same pro-étale site as the descent dependency; t/u independent; no extra hypotheses. Advisory: finite-free declarations are used through the descent interface without being a stmt_dep; ChainLaws is redundant. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5b97f",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261025T202213-L-2692230",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointDerivedTensorTowerCoherence + 2 new modules vs published item; original OrdinaryLaws/DerivedLaws/ChainLaws/PreservesModels text re-elaborated and proved equivalent field-by-field to the new records (modules = integralTowerModules by rfl); both direct importers compile unchanged; axioms of the new general results clean"
  }
 }

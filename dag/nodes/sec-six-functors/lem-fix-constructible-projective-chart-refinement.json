@@ -1,0 +1,246 @@
+{
+ "id": "lem-fix-constructible-projective-chart-refinement",
+ "kind": "statement",
+ "title": "Common projective sheaf charts for two integral constructible complexes",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. For a quasi-compact quasi-separated scheme $W$ on which $\\ell$ is invertible [def-pc-scheme, def-weil-quasi-separated-morphism], work on its small pro-etale site [def-weil-pbc-proetale-site], put $B_W=\\varprojlim_n(A_n)_W$ [def-weil-completed-integral-coefficients], and use $D(B_W)$, the unbounded derived category of $B_W$-module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].\n\nFor every qcqs $S$ appearing below, likewise put $B_S=\\varprojlim_n(A_n)_S$. Let $M,N\\in D^b_c(W,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]. Choose finitely many finite partitions of $W$ by locally closed constructible subschemes, on whose strata the residue-cohomology sheaves of $M$ and $N$ are locally constant [def-weil-finite-torsion-constructibility]. There is a finite rooted binary tree of qcqs locally closed subschemes with root $W$, each internal vertex split into a quasi-compact open subscheme and its closed complement, with the following property. On each nonempty leaf $T$, both restricted complexes are derived complete [def-weil-derived-complete], and their derived residue reductions have only finitely many nonzero cohomology sheaves, all locally constant with finite-dimensional $R/(\\varpi)$-vector-space local models [def-weil-integral-derived-reduction, def-weil-derived-cohomology-sheaves, def-weil-proetale-locally-constant-sheaf]. Each leaf maps scheme-theoretically through a stratum of every one of these chosen partitions.\n\nFor each such $T$ there is an affine pro-etale cover $V\\to T$ with $V$ weakly contractible (evaluation on $V$ sends epimorphisms of sheaves of sets to surjections), and a finite disjoint open cover $V=\\coprod_i U_i$ on which both $M$ and $N$ have bounded $B_{U_i}$-module-sheaf representatives $P_i,Q_i$. Every term of these representatives is a direct summand of a finite sum of $B_{U_i}$: it has an inclusion into $B_{U_i}^{\\oplus r}$ and a retraction whose composite is the identity. The opens $U_i$ are qcqs, and the composite maps $U_i\\to T$ form a covering. Their differentials may be arbitrary $B_{U_i}$-linear sheaf maps. No Noetherian hypothesis on $W$, and no assertion that these differentials are constant over $R$, is imposed. For $W=\\varnothing$ the tree and its empty leaf have no chart conditions.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, using the finite open–closed refinement and residue Tor bound already stated in lem-fix-constructible-open-closed-refinement and lem-fix-constructible-flat-cohomology-tor-bound. Common-chart formulation of returned item steps 3 and 4, with Bhatt–Scholze Lemmas 6.5.5 and 6.5.8."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-finite-torsion-constructibility",
+  "def-sf-ordinary-integral-derived-pullback",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite residue-lisse tree theorem to the two complexes and the given partitions. For a leaf, instantiate its qcqs weakly etale restriction assertion at the identity to recover the required leaf residue conditions.",
+   "uses": [
+    "lem-fix-constructible-residue-tree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the single affine weakly contractible ring cover from clause (2) of hypercover existence. The weak-contractibility equivalences give the epimorphism-evaluation property in the covering scheme's own site. Uniqueness of the arrow to the terminal object identifies its displayed singleton cover.",
+   "uses": [
+    "det-pe-hypercover-existence",
+    "det-pe-weak-contractible-equivalences"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine common-projective-chart theorem to the restriction along the covering map composed with the leaf immersion, using the tree's stability on qcqs weakly etale objects.",
+   "uses": [
+    "lem-fix-affine-common-projective-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The singleton pro-etale cover is surjective on points. Lift any leaf point to the affine cover and then to a member of its finite open cover; this proves the stated coverage of the leaf. Associativity identifies each composite model morphism. Empty leaves require no charts.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-pe-hypercover-existence",
+  "det-pe-weak-contractible-equivalences",
+  "lem-fix-affine-common-projective-charts",
+  "lem-fix-constructible-residue-tree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3: finite residue-lisse refinement and affine bounded projective charts, assembled with the existing single-affine hypercover and weak-contractibility equivalences. T2, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two bounded constructible derived complete integral proetale complexes on a qcqs scheme admit a common finite open closed refinement with bounded finite projective sheaf models on affine weakly contractible covers",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.exists_map_eq_top",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue constructible adic sheaf complexes are locally bounded complexes of retracts of finite free completed coefficient sheaves on constructible pieces",
+   "results": "localCohomology; localCohomology.ofSelfLERadical; localCohomology.diagram; localCohomology.ofDiagram; localCohomology.isoSelfLERadical; AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top; AdicCompletion.exists_smodEq_pow_add_one_smul; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible complete complexes of integral adic sheaves have finite projective models on common proetale charts of a constructible refinement",
+   "results": "instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; AdicCompletion; IsAdicComplete; IsAdicComplete.mk; IsAdicComplete.rec; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; IsAdicComplete.casesOn; SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"projective\"",
+   "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.one_mem'; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.zero_mem'; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|weakly.?contractible|finite.?projective",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|weakly.?contractible|finite.?projective",
+   "subdirectory": "CategoryTheory/Sites",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: site definitions, quasicoherent finite presentations, condensed sheaf constructions and scheme limits do not state common bounded projective sheaf charts for derived-complete integral complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible complete adic sheaf complexes have common finite projective local representatives on proetale covers",
+   "subdirectory": "",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isFinitePresentation, LightCondensed.ofSheafLightProfinite, Profinite.instEnoughProjectives, CondensedSet.LocallyConstant.functorFullyFaithful, SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: site definitions, quasicoherent finite presentations, condensed sheaf constructions and scheme limits do not state common bounded projective sheaf charts for derived-complete integral complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"projective\"",
+   "subdirectory": "",
+   "results": "12 hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj",
+   "date": "2026-10-22",
+   "verdict": "no match: site definitions, quasicoherent finite presentations, condensed sheaf constructions and scheme limits do not state common bounded projective sheaf charts for derived-complete integral complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic complexes with locally constant finite residue cohomology are locally bounded complexes of finite projective completed ring sheaves",
+   "subdirectory": "",
+   "results": "8 hits: CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, CompHausLike.LocallyConstantModule.functor, CondensedMod.ofSheafCompHaus, CondensedMod.IsSolid, LightCondMod.LocallyConstant.functor, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: site definitions, quasicoherent finite presentations, condensed sheaf constructions and scheme limits do not state common bounded projective sheaf charts for derived-complete integral complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two derived complete constructible integral proetale complexes admit common finite projective sheaf models after open closed refinement",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: site definitions, quasicoherent finite presentations, condensed sheaf constructions and scheme limits do not state common bounded projective sheaf charts for derived-complete integral complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale|derived.?complet|weakly.?contractible",
+   "subdirectory": "",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: site definitions, quasicoherent finite presentations, condensed sheaf constructions and scheme limits do not state common bounded projective sheaf charts for derived-complete integral complexes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-constructible-tensor-completion",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": ordinary-to-completed integral tensor comparison for evaluation.",
+   "via": [
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fix-constructible-projective-chart-refinement",
+  "worker": "stage1",
+  "summary": "Unchanged statement; seven-step assembly using existing open–closed refinement, qcqs completion locality, finite-coefficient homology/pullback, weakly contractible cover, residue Tor bound and projective sheaf models. Intersect the two disjoint open chart partitions and explicitly retain retractions. No new nodes.",
+  "blueprint": "lem-fix-weil-operations, proof paragraph beginning \"For an admissible exceptional adjoint\", evaluation sentence: supplies the common projective charts for the integral ordinary-to-completed tensor comparison used in lem-fix-constructible-tensor-completion.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-proetale-constant-module-pullback-homology",
+    "why": "Exact finite constant-coefficient inverse image commutes with cohomology for arbitrary schemes; no item-unit node supplies this generic homology comparison."
+   },
+   {
+    "node": "lem-pur-proetale-module-pullback-composition",
+    "why": "Identifies the actual restriction through the stratum factorization with successive constant-module pullbacks; a generic functoriality tool absent from this unit."
+   },
+   {
+    "node": "lem-exc-proetale-pullback-locally-constant",
+    "why": "Pullback retains the same finite local models on arbitrary schemes, including non-Noetherian leaves; this generic finite-coefficient tool does not replace the local-projective-model route."
+   },
+   {
+    "node": "det-pe-hypercover-existence",
+    "why": "Only clause (2), a single affine weakly contractible cover of a quasi-compact site object, is used; the unit has no such general covering theorem."
+   },
+   {
+    "node": "det-pe-weak-contractible-equivalences",
+    "why": "Only its last sentence: Spec D with D w-contractible is weakly contractible (evaluation sends epimorphisms of set sheaves to surjections), applied to V in its own site; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-proetale-constant-module-pullback-homology",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-exc-proetale-pullback-locally-constant",
+  "det-pe-hypercover-existence",
+  "det-pe-weak-contractible-equivalences"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-89333f201",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-89333f201 (reviewer sub-agent of L); spot-checked: Read the item, all 13 cited statements, Stacks 09C3 (proetale.tex lemma-local-structure-constructible-complex) and Bhatt–Scholze Lemma 6.5.8 and Remark 6.5.10. It is a first split (no 2026-10-21 re-split note), the statement is unchanged and there are no new nodes. Steps 1–7 are sound. (1) The open-closed refinement node gives the tree and the morphisms from each leaf to its strata. (2) The locality restriction clause covers both children: the open child is weakly étale and qcqs, and the closed child's complement is quasi-compact. (3) Homology, composition and locally-constant pullback over the finite field k give the residue assertions on each leaf. (4) Hypercover clause (2) gives the cover V, and completeness passes to V. (5) The Tor-bound conclusion is verbatim the Tor hypothesis of the projective-model node. (6) Its derived-limit completeness is the definition in def-weil-derived-complete. (7) Clopen intersections are qcqs, and the clopen coefficient comparison is exact, so quasi-isomorphisms and retractions survive. Edge cases checked: W empty, empty partition list, M or N zero, different intervals and charts, nonreduced strata, non-Noetherian W. No duplicate found: integral-heart-local-model, adic-residue-lisse-perfect-lift and pbc local-effectivity are Noetherian or have stronger conclusions. Repaired two faults. B4: steps 3–7 had TeX corrupted into control characters (\\varpi, \\to and \\beta lost) and missing backslashes on \\alpha, \\leq, \\coprod, \\cap and \\mathrm; restored. C1/C4: step 4 took 'V weakly contractible for its own site' from det-pe-hypercover-existence, which only gives a w-contractible ring D. It now cites det-pe-weak-contractible-equivalences (Spec D with D w-contractible is weakly contractible, applied with X=W=V); this is added to proof_deps and split_report.tool_uses. Accepted tool uses: the pur homology and composition nodes, exc locally-constant pullback, det-pe-hypercover-existence clause (2) and det-pe-weak-contractible-equivalences. No SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleProjectiveChartRefinement",
+  "declaration": "WeilConjectures.constructible_projective_chart_refinement",
+  "file": "lean/Sheaf/Paper/ConstructibleProjectiveChartRefinement.lean",
+  "statement": "theorem constructible_projective_chart_refinement (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) [CompactSpace W] [QuasiSeparatedSpace W] (_hl : IsUnit (l : Γ(W, ⊤))) (M N : DerivedCategory (scalarReductionSource.{u, u} l E W)) (_hM : sfIntegralConstructible l E W M) (_hN : sfIntegralConstructible l E W N) (m : ℕ) (n : Fin m → ℕ) (S : ∀ a : Fin m, Fin (n a) → Scheme.{u}) (s : ∀ (a : Fin m) (j : Fin (n a)), S a j ⟶ W) (_hs : ∀ (a : Fin m) (j : Fin (n a)), IsImmersion (s a j)) (_hc : ∀ (a : Fin m) (j : Fin (n a)), Topology.IsConstructible (Set.range (s a j).base)) (_hcover : ∀ a : Fin m, (⋃ j : Fin (n a), Set.range (s a j).base) = Set.univ) (_hdisjoint : ∀ a : Fin m, Pairwise (fun j k : Fin (n a) ↦ Disjoint (Set.range (s a j).base) (Set.range (s a k).base))) (_hlisse : ∀ (a : Fin m) (j : Fin (n a)) (K : DerivedCategory (scalarReductionSource.{u, u} l E W)), K = M ∨ K = N → ∀ q : ℤ, IsLocallyConstantProEtaleModuleSheafOfUniverses (S a j) (Padic.coefficientExtensionRing l E 1) (proEtaleConstantModulePullback (s a j) (Padic.coefficientExtensionRing l E 1) ((DerivedCategory.homologyFunctor _ q).obj ((scalarReductionDerivedExtension l E W 0).obj K)))) : ∃ (d : ℕ) (T : Fin d → Scheme.{u}) (toW : ∀ v : Fin d, T v ⟶ W) (root : Fin d) (parent left right : Fin d → Fin d) (leftEdge : ∀ v : Fin d, T (left v) ⟶ T v) (rightEdge : ∀ v : Fin d, T (right v) ⟶ T v) (leaf : Fin d → Prop), (∃ e : T root ≅ W, e.hom = toW root) ∧ parent root = root ∧ (∀ v, v ≠ root → (parent v).val < v.val) ∧ (∀ v, CompactSpace (T v)) ∧ (∀ v, QuasiSeparatedSpace (T v)) ∧ (∀ v, IsImmersion (toW v)) ∧ (∀ v, v ≠ root → left (parent v) = v ∨ right (parent v) = v) ∧ (∀ v, leaf v ↔ ∀ w, w ≠ root → parent w ≠ v) ∧ (∀ v, ¬ leaf v → left v ≠ right v ∧ v.val < (left v).val ∧ v.val < (right v).val ∧ parent (left v) = v ∧ parent (right v) = v ∧ leftEdge v ≫ toW v = toW (left v) ∧ rightEdge v ≫ toW v = toW (right v) ∧ IsOpenImmersion (leftEdge v) ∧ QuasiCompact (leftEdge v) ∧ IsClosedImmersion (rightEdge v) ∧ Set.range (leftEdge v).base ∪ Set.range (rightEdge v).base = Set.univ ∧ Disjoint (Set.range (leftEdge v).base) (Set.range (rightEdge v).base)) ∧ (∀ v, leaf v → Nonempty (T v) → (∀ a : Fin m, ∃ j : Fin (n a), ∃ f : T v ⟶ S a j, f ≫ s a j = toW v) ∧ (∀ K : DerivedCategory (scalarReductionSource.{u, u} l E W), K = M ∨ K = N → IntegralOnSlice.IsComplete l E (T v) none ((ordinaryIntegralDerivedPull l E (toW v)).obj K) ∧ ∃ a b : ℤ, a ≤ b ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((scalarReductionDerivedExtension l E (T v) 0).obj ((ordinaryIntegralDerivedPull l E (toW v)).obj K)))) ∧ (∀ q : ℤ, IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses (T v) (Padic.coefficientExtensionRing l E 1) (fun L ↦ Module.Finite (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)) L) ((DerivedCategory.homologyFunctor _ q).obj ((scalarReductionDerivedExtension l E (T v) 0).obj ((ordinaryIntegralDerivedPull l E (toW v)).obj K))))) ∧ ∃ V : (T v).ProEt, IsAffine V.left ∧ (∀ (F G : Sheaf (ProEt.topology V.left) (Type (u + 1))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (Opposite.op (ProEt.mk (𝟙 V.left))))) ∧ Presieve.singleton (MorphismProperty.Over.homMk V.hom (Category.comp_id _) : V ⟶ ProEt.mk (𝟙 (T v))) ∈ (ProEt.precoverage (T v)) (ProEt.mk (𝟙 (T v))) ∧ ∃ (c : ℕ) (U : Fin c → V.left.Opens), (⨆ i, U i) = ⊤ ∧ Pairwise (fun i j ↦ Disjoint (U i) (U j)) ∧ (∀ i, CompactSpace (U i).toScheme) ∧ (∀ i, QuasiSeparatedSpace (U i).toScheme) ∧ (∀ x : T v, ∃ i : Fin c, x ∈ Set.range (((U i).ι ≫ V.hom).base)) ∧ ∀ (i : Fin c) (K : DerivedCategory (scalarReductionSource.{u, u} l E W)), K = M ∨ K = N → ∃ (P : CochainComplex (scalarReductionSource.{u, u} l E (U i).toScheme) ℤ) (a b : ℤ), a ≤ b ∧ P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ q : ℤ, ∃ (r : ℕ) (ι : P.X q ⟶ ∏ᶜ fun _ : Fin r ↦ SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E (U i).toScheme)) (ρ : (∏ᶜ fun _ : Fin r ↦ SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E (U i).toScheme)) ⟶ P.X q), ι ≫ ρ = 𝟙 _) ∧ Nonempty ((ordinaryIntegralDerivedPull l E ((U i).ι ≫ V.hom ≫ toW v)).obj K ≅ DerivedCategory.Q.obj P))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Ordinary uncompleted ringed derived pullback is the published ordinaryIntegralDerivedPull, with its canonical completed-coefficient map. The shared chart family works for both complexes, selected by K = M or K = N; all tree geometry, residue conditions and termwise split retractions are retained explicitly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73e3feff1",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 31e2f8a3749d. The Lean signature is byte-identical; only the imports changed (public ProEtaleInverseImage, proof-only homology import). Re-read clause by clause against the node: qcqs W, l invertible, sfIntegralConstructible M and N, partitions with _hlisse via the actual constant-module pullback, binary qc-open/closed tree with root iso W, leaf factorizations through strata, completeness of the ordinary pullback, bounded locally constant finite residue cohomology, affine weakly contractible V with a singleton pro-etale cover, finite disjoint qcqs opens covering T, bounded P with split finite-free terms and a derived iso. Edge cases W empty, m=0, M=N, zero complexes, r=0, non-reduced W are fine. The H2 repair is as prescribed: the new definition node def-sf-ordinary-integral-derived-pullback is existing:true over ordinaryIntegralPull_hasLeftDerived and ordinaryIntegralDerivedPull (arbitrary f, totalLeftDerived with counit, no completion, no Noetherian premise; fields per §5; stmt_deps exist; co-ownership follows the def-sf-ordinary-integral-pullback-construction precedent; no competing owner on live). The item stmt_deps drop the theorem node and add the new node plus the landed def-weil-proetale-inverse-image, owner of proEtaleConstantModulePullback. The item is not landed on live. Not recompiled (no file changed); worker reports scompile and deliver2 --no-push OK. Advisory: the statement inlines the weak-contractibility condition instead of the upstream IsWeaklyContractible; equivalent and matches the node's parenthetical."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T041249-L-1121711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

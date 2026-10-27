@@ -1,0 +1,335 @@
+{
+ "id": "lem-trf-factorized-centres-product-transform",
+ "kind": "statement",
+ "title": "A product of factorized base centres dominates local module flatifications",
+ "statement": "Let $S$ be a quasi-compact and quasi-separated scheme, $U\\subset S$ a quasi-compact open, $f:X\\to S$ a morphism of schemes, and $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module. Let $R$ be a finite index set. For each $r\\in R$ let $T_r$ be a qcqs scheme and let $g_r:Y_r\\to T_r$, $e_r:T_r\\to S$ and $j_r:Y_r\\to X$ satisfy $e_r g_r=fj_r$. Assume $e_r$ is quasi-compact and flat, and $j_r$ is flat. Let $\\mathcal J_r,\\mathcal J'_r\\subset\\mathcal O_{T_r}$ and $\\mathcal I_r\\subset\\mathcal O_S$ be finite-type quasi-coherent ideals such that $\\mathcal I_r|_U=\\mathcal O_U$ and\n$$\\mathcal I_r\\mathcal O_{T_r}=\\mathcal J_r\\mathcal J'_r.$$\nAssume the strict transform of $j_r^*\\mathcal F$ for $\\operatorname{Bl}_{\\mathcal J_r}T_r\\to T_r$ is flat over that blowup. Define\n$$\\mathcal I=\\prod_{r\\in R}\\mathcal I_r,\\qquad b:S^b=\\operatorname{Bl}_{\\mathcal I}S\\to S,$$\nusing the unit ideal for an empty product. Then $\\mathcal I$ is finite type and $V(\\mathcal I)=\\bigcup_rV(\\mathcal I_r)\\subset S\\setminus U$, so $b$ is $U$-admissible. For each $r$, put\n$$\\mathcal K_r=\\mathcal J'_r\\prod_{t\\ne r}(\\mathcal I_t\\mathcal O_{T_r}),\\qquad T_r^b=T_r\\times_SS^b.$$\nThere are canonical isomorphisms over $T_r$\n$$T_r^b\\cong\\operatorname{Bl}_{\\mathcal J_r\\mathcal K_r}T_r\\cong\\operatorname{Bl}_{\\mathcal K_r\\mathcal O_{\\operatorname{Bl}_{\\mathcal J_r}T_r}}(\\operatorname{Bl}_{\\mathcal J_r}T_r).$$\nWriting $c_r:\\operatorname{Bl}_{\\mathcal J_r}T_r\\to T_r$, the support of the product centre equals\n$$V(\\mathcal J_r\\mathcal K_r)=V(\\mathcal J_r)\\cup c_r\\bigl(V(\\mathcal K_r\\mathcal O_{\\operatorname{Bl}_{\\mathcal J_r}T_r})\\bigr).$$\nOn $Y_r\\times_SS^b=Y_r\\times_{T_r}T_r^b$, the pullback of $\\mathcal F^b$ is canonically the successive strict transform of $j_r^*\\mathcal F$ along the two blowups in the display, compatibly with the ordinary-pullback quotient maps. It is the ordinary pullback of the first, flat strict transform along the second blowup and is flat over $T_r^b$. Schemes, qcqs conventions, quasi-coherence, relative module flatness, admissible blowups, module strict transforms, fibre products and module pullbacks are as in [def-pc-scheme], [def-weil-pbc-scheme-conventions], [pqf-def-coherent], [def-pc-scheme-module-flat-over], [def-nagata-admissible-blowup], [def-trf-module-strict-transform], [def-pc-fibre-product] and [def-pc-module-pullback]. Flat morphisms are as in [def-weil-flat-morphism], and $V$ denotes the underlying zero set of an ideal. Blowups themselves are those of [def-nagata-global-blowup].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2: product of base ideals, local domination and comparison of module transforms before the final flatness descent. Returned proof steps 6 and 7."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-flat-morphism",
+  "def-nagata-global-blowup",
+  "def-nagata-extended-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Products of quasi-coherent ideals are quasi-coherent: express a binary product as the image of the multiplication map from the tensor product, and apply the cited tensor and image statements. On an affine open where the factors have finite generating sets, their pairwise products generate the product ideal; induction gives finite type for a finite product. Extension of an ideal is the image of its module pullback, by the cited closed-subscheme base-change statement and the definition of extended ideal. Thus on affine opens its generators are the images of the original generators; extension preserves finite type and finite products. These observations apply to $\\mathcal I$, to each $\\mathcal K_r$, and to its extension to $\\operatorname{Bl}_{\\mathcal J_r}T_r$. At a point a finite product of ideals of the local ring is the unit ideal exactly when every factor is the unit ideal (the product is contained in each factor). Therefore $V(\\mathcal I)=\\bigcup_r V(\\mathcal I_r)$, and $\\mathcal I|_U=\\mathcal O_U$. The defining datum makes $b$ $U$-admissible. For $R=\\varnothing$ the ideal is $\\mathcal O_S$ and there are no assertions indexed by $r$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "def-nagata-extended-ideal",
+    "pqf-def-coherent",
+    "def-nagata-admissible-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2: finite product of base ideals"
+   }
+  },
+  {
+   "text": "Fix $r$ and abbreviate $T=T_r$, $Y=Y_r$, $J=\\mathcal J_r$, $K=\\mathcal K_r$. Extension and multiplication as in Step 1 give $\\mathcal I\\mathcal O_T=(\\mathcal I_r\\mathcal O_T)\\prod_{t\\ne r}(\\mathcal I_t\\mathcal O_T)=JK$. Since $e_r$ is flat, the specified flat base-change comparison identifies $T_r^b=T\\times_SS^b$ with $\\operatorname{Bl}_{JK}T$. Apply the product-ideal comparison to $J,K$: its two constructed maps are inverse, so this is also the blowup of $K\\mathcal O_{T_1}$ on $T_1=\\operatorname{Bl}_JT$. Write $c:T_1\\to T$ and $d:T_2\\to T_1$ for these two blowups. Both identifications are over $T$.",
+   "uses": [
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-product-comparison",
+    "thm-nagata-blowup-product-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0805, lemma-flat-base-change-blowing-up, and 080A, lemma-blowing-up-two-ideals"
+   }
+  },
+  {
+   "text": "The product criterion in local rings gives $V(JK)=V(J)\\cup V(K)$. The underlying zero set of the extended ideal $K\\mathcal O_{T_1}$ is $c^{-1}V(K)$, since the closed subscheme defined by the extension is its fibre product. Thus its image under $c$ is contained in $V(K)$. Conversely, if $t\\in V(K)\\setminus V(J)$, the complement isomorphism for the $J$-blowup supplies its unique preimage in $T_1$, which lies in $c^{-1}V(K)$. Points in $V(J)$ are already in the first summand. This proves $V(JK)=V(J)\\cup c(V(K\\mathcal O_{T_1}))$. This argument does not assert that $c$ is surjective over $V(J)$.",
+   "uses": [
+    "def-nagata-extended-ideal",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups: support hypothesis; Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor (1)"
+   }
+  },
+  {
+   "text": "Put $M=j_r^*\\mathcal F$, which is quasi-coherent by pullback. Let $M_1$ and $M_2$ be its successive module strict transforms along $c,d$, and $G$ its strict transform along the specified $JK$-blowup. Apply the comparison-epimorphism statement with base $T$, ideals $J$, $K\\mathcal O_{T_1}$ and total centre $JK$. Step 2 supplies the required isomorphism of the composite blowup, and Step 3 supplies exactly the required support equality. It gives an epimorphism $\\theta:M_2\\twoheadrightarrow G$ commuting with the composite quotient from the ordinary pullback; every local section of its kernel is supported on the inverse image of $V(JK)$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-trf-strict-transform-comparison-epimorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups (1), first two proof paragraphs"
+   }
+  },
+  {
+   "text": "Apply the iterated-transform exceptional-support statement to the same $c,d,M$. It says $M_2$ has no nonzero local sections supported on the inverse image of $V(K\\mathcal O_{T_1})\\cup c^{-1}V(J)$, and identifies that inverse image with the inverse image of $V(J)\\cup c(V(K\\mathcal O_{T_1}))$. By Step 3 this is exactly the support allowed for $\\ker\\theta$ in Step 4. Hence the kernel is zero. Since $\\theta$ is already surjective, it is the canonical isomorphism $M_2\\cong G$. The identity $\\theta\\alpha=\\beta$ in Step 4 proves compatibility with the ordinary-pullback quotient maps, not just an abstract isomorphism.",
+   "uses": [
+    "lem-trf-iterated-transform-exceptional-support",
+    "lem-trf-strict-transform-comparison-epimorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups (1), final proof paragraph"
+   }
+  },
+  {
+   "text": "Use the flat-pullback comparison of module strict transforms for the original commuting square $(f,e_r,g_r,j_r)$ and the finite-type ideal $\\mathcal I$. Its hypotheses are precisely the assumed flatness of both $e_r$ and $j_r$, and the quasi-coherence of $\\mathcal F$. It identifies the pullback of $\\mathcal F^b$ on $Y\\times_T T_r^b$ with $G$, compatibly with the ordinary-pullback quotient maps. The fibre-product universal property identifies $Y\\times_T(T\\times_SS^b)$ with $Y\\times_SS^b$ by the maps to $Y$ and $S^b$. Combining this comparison with Step 5 gives the asserted successive transform on the stated scheme, with its quotient compatibility.",
+   "uses": [
+    "lem-trf-module-strict-transform-flat-pullback",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0814, lemma-flatten-module-etale-localize, first proof paragraph: base-change comparison of transforms"
+   }
+  },
+  {
+   "text": "By hypothesis $M_1$ is flat over $T_1$. Its ordinary pullback $N$ to $Y\\times_T T_2$ is flat over $T_2$ by relative-flat-module pullback, without any flatness requirement on $d$. The extended centre $(K\\mathcal O_{T_1})\\mathcal O_{T_2}$ defines an effective Cartier divisor by principalization of the blowup centre. Apply relative-flat Cartier-support vanishing to $N$: it has no nonzero local sections supported on the inverse image of that divisor. The strict-transform sheaf-kernel statement identifies the defining kernel of $N\\twoheadrightarrow M_2$ with precisely these sections, so this kernel is zero and the defining quotient is an isomorphism. Consequently $M_2=N$ is the ordinary pullback of the first flat strict transform and is flat over $T_2=T_r^b$. Together with Step 6 this proves the remaining assertions.",
+   "uses": [
+    "lem-pc-relatively-flat-module-pullback",
+    "thm-nagata-blowup-principalizes-center",
+    "lem-trf-relative-flat-cartier-support",
+    "lem-trf-strict-transform-sheaf-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080F, lemma-strict-transform-flat (2); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor; morphisms.tex Tag 01U8, lemma-base-change-module-flat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-blowup-product-comparison",
+  "def-nagata-extended-ideal",
+  "def-pc-fibre-product",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-trf-iterated-transform-exceptional-support",
+  "lem-trf-module-strict-transform-flat-pullback",
+  "lem-trf-relative-flat-cartier-support",
+  "lem-trf-strict-transform-comparison-epimorphism",
+  "lem-trf-strict-transform-sheaf-kernel",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "pqf-def-coherent",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-product-ideal",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2; the comparisons from paragraph 1 use divisors.tex Tags 0805, 080A, 080I and 080F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Product of base ideals whose extensions factor through local blowup centres dominates the local blowups and preserves flat module strict transforms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] {T : Type u_3} [inst_2 : CommRing T]\\n  [inst_3 : Algebra R T] [inst_4 : Algebra R S],\\n  (algebraMap R T).SurjectiveOnStalks →\\n    ∀ (x : TensorProduct R S T) (J : Ideal T), J.IsPrime → ∃ t r a, r • t ∉ J ∧ 1 ⊗ₜ[R] (r • t) * x \", \"doc\": \"Let $R, S, T$ be commutative rings, and let $S$ and $T$ be $R$-algebras. Let $\\\\phi: R \\\\to T$ be the structure map. Suppose that $\\\\phi$ is surjective on stalks. Then for any element $x \\\\in S \\\\otimes_R \"}\n  {\"name\": \"IsBaseChange.map_smul_top_ne_top_iff_of_faithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {S : Type u_1}\\n  {N : Type u_2} [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S] [inst_6 : AddCommGroup N]\\n  [inst_7 : Module R N] [inst_8 : Module S N] [inst_9 : IsScalarTower R S\", \"doc\": \"Let $ S $ be an $ R $-algebra obtained via a base change satisfying the tensor product universal property. For any ideal $ I $ of $ R $, the image of $ I $ under the algebra map $ R \\\\to S $ acting on \"}\n  {\"name\": \"PrimeSpectrum.exists_primeSpectrum_prod_le\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [IsNoetherianRing R] (I : Ideal R),\\n  ∃ Z, (Multiset.map PrimeSpectrum.asIdeal Z).prod ≤ I\", \"doc\": \"For any ideal $I$ in a commutative semiring $R$, there exists a multiset $Z$ of prime ideals in the prime spectrum $\\\\operatorname{Spec}(R)$ such that the product of the ideals corresponding to $Z$ is \"}\n  {\"name\": \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_2} {A : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (f : A) (s : Set A)\\n  [Module.Finite R (A ⧸ Ideal.span s)] [Module.Free R (A ⧸ Ideal.span s)],\\n  ∃ t,\\n    PrimeSpectrum.comap (algebraMap R A) '' (PrimeSpectrum.zeroLocus s \\\\ PrimeSpectrum.zeroLocus {f})\", \"doc\": \"Let $ A $ be a commutative ring over $ R $, $ s \\\\subseteq A $, and $ f \\\\in A $. If the quotient ring $ A / \\\\langle s \\\\rangle $ is a finite and free $ R $-module, then there exists a finite subset $ t \"}\n  {\"name\": \"Algebra.ZariskisMainProperty.trans\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] (p : Ideal T) [p.IsPrime],\\n  Algebra.ZariskisMainProperty R (Ideal.under S p) →\\n    (∃ r ∉ Ideal\", \"doc\": \"If a prime ideal $\\\\mathfrak{p} \\\\subseteq T$ satisfies Zariski's Main Theorem property relative to $S$, and there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfr\"}\n  {\"name\": \"Ideal.exists_mul_add_mem_pow_succ\", \"module\": \"Mathlib/RingTheory/Ideal/Norm/AbsNorm\", \"type\": \"∀ {S : Type u_1} [inst : CommRing S] {P : Ideal S} [P_prime : P.IsPrime] [IsDedekindDomain S],\\n  P ≠ ⊥ → ∀ {i : ℕ} (a c : S), a ∈ P ^ i → a ∉ P ^ (i + 1) → c ∈ P ^ i → ∃ d, ∃ e ∈ P ^ (i + 1), a * d + e = c\", \"doc\": \"In a Dedekind domain $ S $, for a nonzero prime ideal $ P $, any natural number $ i $, and elements $ a, c \\\\in S $ such that $ a \\\\in P^i $, $ a \\\\notin P^{i+1} $, and $ c \\\\in P^i $, there exist element\"}\n  {\"name\": \"Module.flat_of_localized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ (S : Type u_2) [inst : CommSemiring S] (M : Type u_3) [inst_1 : AddCommMonoid M] [inst_2 : Module S M] (s : Set S),\\n  Ideal.span s = ⊤ → (∀ (r : ↑s), Module.Flat S (LocalizedModule.Away (↑r) M)) → Module.Flat S M\", \"doc\": \"If for every element $ r $ in a subset $ S $, the localization of the module $ M $ at the multiplicative set generated by all powers of $ r $ is flat over $ S $, then $ M $ itself is flat over $ S $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict transform of a module along the blowup in a product of ideals agrees with successive transforms and is locally flat",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M] (s : Set S),\\n  Ideal.span s = ⊤ →\\n    ∀ (Mₛ : ↑s → Type u_5) [inst_7 : (r : ↑s) → Add\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"Module.flat_of_localized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ (S : Type u_2) [inst : CommSemiring S] (M : Type u_3) [inst_1 : AddCommMonoid M] [inst_2 : Module S M] (s : Set S),\\n  Ideal.span s = ⊤ → (∀ (r : ↑s), Module.Flat S (LocalizedModule.Away (↑r) M)) → Module.Flat S M\", \"doc\": \"If for every element $ r $ in a subset $ S $, the localization of the module $ M $ at the multiplicative set generated by all powers of $ r $ is flat over $ S $, then $ M $ itself is flat over $ S $.\"}\n  {\"name\": \"instFlatAtPrime\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {A : Type u_4} {B : Type u_5} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B]\\n  (p : Ideal A) [inst_4 : p.IsPrime] (P : Ideal B) [inst_5 : P.IsPrime] [inst_6 : P.LiesOver p],\\n  Module.Flat (Localization.AtPrime p) (Localization.AtPrime P)\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in a commutative ring $ A $ and $ \\\\mathfrak{P} $ is a prime ideal in a commutative ring $ B $ lying over $ \\\\mathfrak{p} $, then the localization of $ B $ at $ \\\\mat\"}\n  {\"name\": \"Module.flat_of_localized_maximal\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (M : Type u_3) [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  (∀ (P : Ideal R) [inst_3 : P.IsMaximal], Module.Flat R (LocalizedModule P.primeCompl M)) → Module.Flat R M\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ an $ R $-module. If for every maximal ideal $ P $ of $ R $, the localization of $ M $ at the complement of $ P $ is a flat $ R $-module, then $ M $ is fla\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  (Mₚ : (P : Ideal S) → [P.IsMaximal] → Type u_4) [inst_7 : (P : Ideal S) → [inst : P\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"RingHom.Flat.localRingHom\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat →\\n    ∀ (P : Ideal S) [inst_2 : P.IsPrime] (Q : Ideal R) [inst_3 : Q.IsPrime] (hQP : Q = Ideal.comap f P),\\n      (Localization.localRingHom Q P f hQP).Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, $ P \\\\subseteq S $ is a prime ideal, and $ Q = f^{-1}(P) \\\\subseteq R $ is the corresponding prime ideal in $ R $, then the indu\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Product of base ideals whose extensions factor through local blowup centres dominates the local blowups and preserves flat module strict transforms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"IsLocalization.coeSubmodule_mul\", \"module\": \"Mathlib.RingTheory.Localization.Submodule\", \"type\": \"(I J : Ideal R) : coeSubmodule S (I * J) = coeSubmodule S I * coeSubmodule S J\", \"doc\": \"For any ideals $I$ and $J$ in a commutative semiring $R$, and an $R$-algebra $S$, the image of the product ideal $IJ$ under the canonical linear map from $R$ to $S$ is equal to the product of the imag\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"Module.FaithfullyFlat.submodule_ne_top\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommRing R} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : Module.FaithfullyFlat R M] ⦃m : Ideal R⦄, m.IsMaximal → m • ⊤ ≠ ⊤\", \"doc\": \"For a commutative ring $ R $, a faithfully flat $ R $-module $ M $, and a maximal ideal $ \\\\mathfrak{m} $ of $ R $, the product $ \\\\mathfrak{m} \\\\cdot M $ is a proper submodule of $ M $.\"}\n  {\"name\": \"FractionalIdeal.extended_mul\", \"module\": \"Mathlib.RingTheory.FractionalIdeal.Extended\", \"type\": \": (I * J).extended L hf = (I.extended L hf) * (J.extended L hf)\", \"doc\": \"For fractional ideals $I$ and $J$ of a commutative ring $A$ in its localization $K$ at a submonoid $M$, and given a ring homomorphism $A \\\\to B$ extending to a localization homomorphism $K \\\\to L$ (wher\"}\n  {\"name\": \"Module.Flat.localizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) : Flat (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any submonoid $ S $ of $ R $, the localized module $ M_S $ is flat over the localization $ R_S $ of $ R $ at $ S $. This asserts t\"}\n  {\"name\": \"IsLocalizedModule.pi\", \"module\": \"Mathlib.RingTheory.TensorProduct.IsBaseChangePi\", \"type\": \"{ι : Type*} [Finite ι] {M M' : ι → Type*} [∀ i, AddCommMonoid (M i)] [∀ i, AddCommMonoid (M' i)] [∀ i, Module R (M i)]\\n  [∀ i, Module R (M' i)] (f : ∀ i, M i →ₗ[R] M' i) [∀ i, IsLocalizedModule S (f i)] :\\n  IsLocalizedModule S (.pi fun i ↦ f i ∘ₗ .proj i)\", \"doc\": \"Given a finite index set $\\\\iota$ and families of $R$-modules $\\\\{M_i\\\\}$ and $\\\\{M'_i\\\\}$ with a submonoid $S \\\\subseteq R$, if each component map $f_i: M_i \\\\to M'_i$ localizes $M_i$ at $S$, then the produ\"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"mul\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "(blowup|strictTransform).*(mul|prod)|flatification",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Tactic/GRewrite/Core.lean\", \"line\": \"127\", \"text\": \"  This lets us avoid an exponential blowup when there are multiple `gcongr` lemmas for rewriting\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified blowup/strict-transform construction or its comparison and flatness assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "(blowup|strictTransform).*(mul|prod)|flatification",
+   "results": "OK: 1 hits; Mathlib/Tactic/GRewrite/Core.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits do not state the blowup and module-strict-transform comparison of the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"mul\"",
+   "results": "OK: 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits do not state the blowup and module-strict-transform comparison of the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module strict transform along a product ideal blowup is a successive strict transform and remains flat",
+   "results": "OK: 8 hits; Algebra.FormallyUnramified.flat_of_restrictScalars, AlgebraicGeometry.Flat.instMorphismRestrict, Module.Flat.of_isLocalizedModule, Module.Flat.isBaseChange, Module.Flat.localizedModule, Module.Flat.of_projective, AlgebraicGeometry.Flat.comp, instFlatAtPrime. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits do not state the blowup and module-strict-transform comparison of the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowup of a product of factorized ideals and successive strict transforms of a flat quasicoherent module",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, Ideal.quotientToQuotientRangePowQuotSuccAux_mk, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, Ideal.map_mk_comap_factorPow, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, Ideal.powQuotSuccInclusion, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits do not state the blowup and module-strict-transform comparison of the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a product of ideals is the same as blowing up one ideal and then the pullback of the other ideal",
+   "results": "OK: 8 hits; Ideal.ideal_prod_eq, Ideal.prod, Ideal.idealProdEquiv, Ideal.map_fst_prod, Ideal.idealProdEquiv_symm_apply, PrimeSpectrum.sigmaToPi_asIdeal, Ideal.map_prodComm_prod, PrimeSpectrum.primeSpectrumProd_symm_inr_asIdeal. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits do not state the blowup and module-strict-transform comparison of the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-flattening-descent",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Expanded 0814 argument: Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2: product of base ideals, local domination and comparison of module transforms before the final flatness descent. Returned proof steps 6 and 7.",
+   "via": [
+    "lem-trf-etale-flattening-descent",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-factorized-centres-product-transform",
+  "worker": "stage1",
+  "summary": "Seven steps prove the unchanged statement using existing nodes only. Finite-product and support calculations are written out; the general quotient comparison and exceptional-support vanishing prove the canonical successive-transform identity. Relative flatness and Cartier-support vanishing identify the second transform with ordinary pullback. Added the definition of extended ideal to statement dependencies. No new nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Expanded 0814 argument: Tag 0814, lemma-flatten-module-etale-localize, proof paragraph 2: product of base ideals, local domination and comparison of module transforms before the final flatness descent. Returned proof steps 6 and 7.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Generic Ideal sheaf of a base-changed closed subscheme used in the indicated proof step; this is a structural scheme/module tool, not a replacement of the flattening or local-term unit route."
+   },
+   {
+    "node": "lem-pc-relatively-flat-module-pullback",
+    "why": "Generic Relative flatness of a module under scheme base change used in the indicated proof step; this is a structural scheme/module tool, not a replacement of the flattening or local-term unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic The pullback of a quasi-coherent module is quasi-coherent used in the indicated proof step; this is a structural scheme/module tool, not a replacement of the flattening or local-term unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic Cokernel and image of a morphism of quasi-coherent modules: quasi-coherent, computed on affine opens used in the indicated proof step; this is a structural scheme/module tool, not a replacement of the flattening or local-term unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "Generic The tensor product of quasi-coherent modules is quasi-coherent, with sections over affine opens the tensor product of sections used in the indicated proof step; this is a structural scheme/module tool, not a replacement of the flattening or local-term unit route."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic Flat base change of blow-ups used in the indicated proof step; this is a structural scheme/module tool, not a replacement of the flattening or local-term unit route."
+   },
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "Generic Principalization of the center ideal used in the indicated proof step; this is a structural scheme/module tool, not a replacement of the flattening or local-term unit route."
+   },
+   {
+    "node": "thm-nagata-blowup-product-ideal",
+    "why": "Generic [stacks-project] used in the indicated proof step; this is a structural scheme/module tool, not a replacement of the flattening or local-term unit route."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic Complement of the center used in the indicated proof step; this is a structural scheme/module tool, not a replacement of the flattening or local-term unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-product-ideal",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-4f0027e7e",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-4f0027e7e (reviewer sub-agent of L); spot-checked: Q72 lem-trf-factorized-centres-product-transform 4f0027e7: a first split (live item unsplit, no repair note). The statement is byte-identical to live. There are 0 new nodes, proof_deps equals the union of uses, there is no SGA and no cycle. I read Stacks 0814 (both paragraphs, including the product paragraph) and 080F(2) with its proof. Step 1 is correct: the product is quasi-coherent via the tensor and cokernel-image nodes; extension is the image of g^*I via lem-pc-closed-subscheme-base-change-ideal-image; the local-ring unit criterion gives V(I)=∪V(I_r) and U-admissibility. Step 2 is correct: IO_T=JK; flat base change bc_e is an iso by thm-nagata-blowup-flat-base-change (e_r flat); Φ and Ψ are inverse by thm-nagata-blowup-product-ideal, which agrees with its main-20261015 blueprint_update. Step 3, marked elementary, is correct: |V(KO_{T1})|=c^{-1}V(K), and the complement iso gives the converse without claiming c is surjective over V(J). Step 4: every hypothesis of lem-trf-strict-transform-comparison-epimorphism matches (base T, ideals J and KO_{T1}, total JK, specified iso, support equality), giving θα=β with ker θ supported on D. Step 5: lem-trf-iterated-transform-exceptional-support's set equality plus Step 3 equal D, so ker θ=0 and the quotient compatibility comes from θα=β. Step 6: lem-trf-module-strict-transform-flat-pullback applies to the non-Cartesian square with e_r and j_r flat, and Bl_{IO_T}=Bl_{JK}. Step 7: the pullback N is flat over T_2 by lem-pc-relatively-flat-module-pullback (no flatness of d needed); the extended centre is Cartier by principalization; relative-flat Cartier-support plus sheaf-kernel give N=M_2, realizing 080F(2) and 01U8. Edge cases R=∅, J=O, K=O, J=0 and a nilpotent centre all hold. No duplicate: lem-trf-flattening-finite-cover-common-blowup is the scheme analogue only. The nine declared tool_uses are generic and accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FactorizedCentresProductTransform",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.factorizedCentres_product_transform",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.factorizedProductCentre",
+   "AlgebraicGeometry.Scheme.Modules.factorizedResidualCentre",
+   "AlgebraicGeometry.Scheme.Modules.factorizedTransformSourceIso",
+   "AlgebraicGeometry.Scheme.Modules.factorizedCentres_product_transform"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FactorizedCentresProductTransform.lean",
+  "statement": "theorem factorizedCentres_product_transform {S X : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (U : S.Opens) (hU : IsCompact (U : Set S)) (f : X ⟶ S) (F : X.Modules) [F.IsQuasicoherent] {R : Type v} [Fintype R] (T Y : R → Scheme.{u}) [∀ r, CompactSpace (T r)] [∀ r, QuasiSeparatedSpace (T r)] (g : ∀ r, Y r ⟶ T r) (e : ∀ r, T r ⟶ S) (j : ∀ r, Y r ⟶ X) (h : ∀ r, j r ≫ f = g r ≫ e r) [∀ r, QuasiCompact (e r)] [∀ r, Flat (e r)] [∀ r, Flat (j r)] (J J' : ∀ r, (T r).IdealSheafData) (I : R → S.IdealSheafData) [∀ r, (J r).toModules.IsFiniteType] [∀ r, (J' r).toModules.IsFiniteType] [∀ r, (I r).toModules.IsFiniteType] (hIU : ∀ r, (I r).comap U.ι = ⊤) (hfactor : ∀ r, (I r).comap (e r) = J r * J' r) (hflat : ∀ r, (cokernel (kernel.ι (moduleStrictTransformRestriction (g r) (J r) ((tensorPullback (j r)).obj F)))).IsFlatOver (pullback.snd (g r) (J r).blowupMap)) : ∃ hI : (factorizedProductCentre I).toModules.IsFiniteType, ((factorizedProductCentre I).support : Set S) = ⋃ r, ((I r).support : Set S) ∧ ((factorizedProductCentre I).support : Set S) ⊆ (U : Set S)ᶜ ∧ (∃ B : IsAdmissible S U, B.I = factorizedProductCentre I) ∧ ∀ r, ∃ a : Limits.pullback (e r) (factorizedProductCentre I).blowupMap ≅ (J r * factorizedResidualCentre T e I J' r).blowup, a.hom ≫ (J r * factorizedResidualCentre T e I J' r).blowupMap = pullback.fst (e r) (factorizedProductCentre I).blowupMap ∧ ∃ d : ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowup ≅ (J r * factorizedResidualCentre T e I J' r).blowup, d.hom ≫ (J r * factorizedResidualCentre T e I J' r).blowupMap = ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap ≫ (J r).blowupMap ∧ ((J r * factorizedResidualCentre T e I J' r).support : Set (T r)) = ((J r).support : Set (T r)) ∪ (J r).blowupMap '' (((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).support : Set (J r).blowup) ∧ ∃ phi : Limits.pullback (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap ≅ Limits.pullback (g r ≫ e r) (factorizedProductCentre I).blowupMap, phi.hom ≫ pullback.fst (g r ≫ e r) (factorizedProductCentre I).blowupMap = pullback.fst (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap ≫ pullback.fst (g r) (J r).blowupMap ∧ phi.hom ≫ pullback.snd (g r ≫ e r) (factorizedProductCentre I).blowupMap = pullback.snd (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap ≫ d.hom ≫ a.inv ≫ pullback.snd (e r) (factorizedProductCentre I).blowupMap ∧ ∃ z : Limits.pullback (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap ⟶ Limits.pullback f (factorizedProductCentre I).blowupMap, ∃ hz : (pullback.fst (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap ≫ pullback.fst (g r) (J r).blowupMap) ≫ j r = z ≫ pullback.fst f (factorizedProductCentre I).blowupMap, z ≫ pullback.snd f (factorizedProductCentre I).blowupMap = phi.hom ≫ pullback.snd (g r ≫ e r) (factorizedProductCentre I).blowupMap ∧ IsIso (cokernel.π (kernel.ι (moduleStrictTransformRestriction (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap) (cokernel (kernel.ι (moduleStrictTransformRestriction (g r) (J r) ((tensorPullback (j r)).obj F))))))) ∧ (cokernel (kernel.ι (moduleStrictTransformRestriction (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap) (cokernel (kernel.ι (moduleStrictTransformRestriction (g r) (J r) ((tensorPullback (j r)).obj F))))))).IsFlatOver (pullback.snd (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap) ∧ ((tensorPullback z).obj (@moduleStrictTransform X S f (factorizedProductCentre I) hI F inferInstance)).IsFlatOver (pullback.snd (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap) ∧ ∃! theta : cokernel (kernel.ι (moduleStrictTransformRestriction (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap) (cokernel (kernel.ι (moduleStrictTransformRestriction (g r) (J r) ((tensorPullback (j r)).obj F)))))) ≅ (tensorPullback z).obj (@moduleStrictTransform X S f (factorizedProductCentre I) hI F inferInstance), (tensorPullback (pullback.fst (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap)).map (cokernel.π (kernel.ι (moduleStrictTransformRestriction (g r) (J r) ((tensorPullback (j r)).obj F)))) ≫ cokernel.π (kernel.ι (moduleStrictTransformRestriction (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap) (cokernel (kernel.ι (moduleStrictTransformRestriction (g r) (J r) ((tensorPullback (j r)).obj F)))))) ≫ theta.hom = (factorizedTransformSourceIso (pullback.fst (pullback.snd (g r) (J r).blowupMap) ((factorizedResidualCentre T e I J' r).comap (J r).blowupMap).blowupMap) (pullback.fst (g r) (J r).blowupMap) (j r) z (pullback.fst f (factorizedProductCentre I).blowupMap) hz F).hom ≫ (tensorPullback z).map (cokernel.π (kernel.ι (moduleStrictTransformRestriction f (factorizedProductCentre I) F)))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ac89159d",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the node, all 11 stmt_dep records and their declarations (moduleStrictTransform body, IdealSheafData.comap/support/Mul in Mathlib, IsAdmissible, IsFlatOver, tensorPullbackSectionComp). Every hypothesis matches exactly with nothing extra. All conclusions are present: finite type, support union and admissibility; isos a and d over T_r, fixed by the blowup universal property; the literal support equality; phi and z fixed by both projections; unique theta normalized by the actual quotient maps; IsIso of the second quotient; flatness of both modules. The 3 helper defs are real data with docstrings, and none of their names occurs elsewhere in the live lean tree. The node differs from live only in lean; lean.statement is verbatim equal to the file (checked by script). All stmt_dep modules are imported, the proof is sorry only, no line exceeds 100 chars. Edge cases (R empty or a singleton, unit or zero centres, U empty or all of S) are covered. Advisory only: a could use the upstream blowupFlatBaseChangeIso, but the existential has only one possible value. I changed nothing and ran no compile; the worker reports a clean server compile (5.2 s)."
+ }
+}

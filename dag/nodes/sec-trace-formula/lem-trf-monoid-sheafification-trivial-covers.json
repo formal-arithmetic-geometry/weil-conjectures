@@ -1,0 +1,244 @@
+{
+ "id": "lem-trf-monoid-sheafification-trivial-covers",
+ "kind": "statement",
+ "title": "Commutative-monoid sheafification on opens with trivial covers",
+ "statement": "Let $X$ be a topological space. Work in a common universe containing the opens of $X$ and all coefficient sets, so that its open site is small [def-weil-pbc-sites-and-cohomology]. Let $Q$ be a presheaf of commutative monoids on this site: its restriction maps preserve addition and zero. A monoid sheaf is such a presheaf whose underlying set presheaf is a sheaf. Let $\\eta:Q\\to Q^\\#$ be its monoid sheafification, in the universal-property sense of [def-weil-pbc-sheafification]. Then the underlying set presheaf of $Q^\\#$, with the same unit $\\eta$, is a set-valued sheafification of the underlying set presheaf of $Q$.\nFor every open $W$, each element of $Q^\\#(W)$ lifts to $Q$ on an open cover of $W$, and two elements of $Q(W)$ with the same image under $\\eta_W$ agree on an open cover of $W$.\nLet $\\mathcal B$ be any collection of nonempty opens such that every open cover of each $U\\in\\mathcal B$ has $U$ as a member. For every $U\\in\\mathcal B$, the component $\\eta_U:Q(U)\\to Q^\\#(U)$ is a monoid isomorphism. These component isomorphisms and their inverses commute with restriction along all inclusions $V\\subseteq U$ with $U,V\\in\\mathcal B$; thus the resulting identifications preserve zero, addition, and all such restrictions.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Remark 3.1.4(iii), printed pp.98--99, sheafification on trivially covered affine opens; general monoid-valued formulation of old proof steps 3--5 and the naturality in step 7. Supporting source: literature/stacks-project/sites.tex, Tags 00WH (proposition-sheafification-adjoint), 00WK (lemma-sections-sheafification), 00YR (section-sheaves-algebraic-structures)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib AddCommMonCat.FilteredColimits.colimitCoconeIsColimit to supply colimits over the filtered category of covering sieves. The concrete sheafification instance of Mathlib.CategoryTheory.Sites.LeftExact then supplies standard additive-commutative-monoid sheafification in the common universe. This avoids the multiplicative-only existential interface of lem-trf-commutative-monoid-sheafification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YR (section-sheaves-algebraic-structures), assertions (alpha), (gamma), (epsilon) for commutative monoids, and Proposition 00WH (proposition-sheafification-adjoint): uniqueness of a sheafification up to unique isomorphism compatible with the units."
+   }
+  },
+  {
+   "text": "Use the standard sheafification universal property and the given bijectivity hη to construct maps in both directions. sheafify_hom_ext and injectivity of hη show that they are inverse. Apply sheafifyComposeIso for forget AddCommMonCat and sheafComposeIso_hom_fac to obtain an isomorphism from standard set sheafification to the given underlying presheaf, compatible with the unit. The underlying presheaf is a sheaf by Presheaf.isSheaf_iff_isSheaf_forget. Precompose with this comparison and use sheafifyLift and sheafify_hom_ext to prove existence and uniqueness of set-valued factorizations.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YR (section-sheaves-algebraic-structures), assertions (alpha), (gamma), (epsilon) for commutative monoids, and Proposition 00WH (proposition-sheafification-adjoint): uniqueness of a sheafification up to unique isomorphism compatible with the units."
+   }
+  },
+  {
+   "text": "Mathlib Presheaf.IsLocallyInjective and Presheaf.IsLocallySurjective hold for the standard unit and are stable under composition with an isomorphism. Transport them using the monoid comparison. For a covering sieve S on W, take the family indexed by pairs (V, f) where f : V → W lies in S. Every domain lies in W, and the covering condition says every point of W lies in some domain, so their supremum equals W. Apply this construction to imageSieve for local lifts and equalizerSieve for local equality. The construction also permits the empty family on the empty open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WK (lemma-sections-sheafification) and Tag 00WB (theorem-plus), parts (2) and (4); equality clause as stated in lem-weil-pbc-site-sheafification-sections-local."
+   }
+  },
+  {
+   "text": "For U in B, choose a member V i = U from each local lifting or equality cover using hB. The covering arrow is an isomorphism by homOfLE_isIso_of_eq. The injectivity of restriction proves equality of two sections whose images agree. For surjectivity, pull a local representative back by the inverse restriction in Q, and use naturality and injectivity of restriction in Qsharp to show that its image is the desired section.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 3.1.4(iii), printed pp.98--99: every open covering of an affine fan open contains that open; the same cover argument applies to the stated collection."
+   }
+  },
+  {
+   "text": "The forgetful functor reflects isomorphisms, so ConcreteCategory.isIso_iff_bijective turns each unit component on B into an isomorphism. Its forward map is the given component by construction. Naturality proves compatibility with restriction for the forward maps; cancel the component isomorphisms to obtain compatibility for the inverse maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 3.1.4(iii), printed pp.98--99, functoriality of the affine-open description; explicit naturality calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00YR and 00WH: concrete algebraic sheafification, compatibility with underlying sets and uniqueness; 00WK/00WB: local lifting and local equality, implemented directly using Mathlib locally bijective unit APIs. The final trivial-cover argument follows ILO VIII Remark 3.1.4(iii), printed pp.98--99. Proof formalized by H5 using existing Mathlib results, without new proof obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafification.*(bijective|isIso)|(bijective|isIso).*sheafification|presheafToSheaf.*app",
+   "results": "{\"t\": \"2026-10-22T06:00:37Z\", \"tool\": \"grep\", \"query\": \"sheafification.*(bijective|isIso)|(bijective|isIso).*sheafification|presheafToSheaf.*app\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\"], \"digest\": \"606033cd2584805b\"} Read hits: isIso_toSheafify assumes the entire presheaf is already a sheaf; sheafificationAdjunction_counit_app and sheafificationNatIso concern sheaves. LocallyBijective.lean supplies local bijectivity under universe assumptions, not the stated component isomorphisms for arbitrary monoid presheaves on selected opens. No single declaration or one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of a presheaf is unchanged on an open set admitting only trivial covering sieves",
+   "results": "{\"t\": \"2026-10-22T06:00:37Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification of a presheaf is unchanged on an open set admitting only trivial covering sieves\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: isIso_toSheafify assumes the entire presheaf is already a sheaf; sheafificationAdjunction_counit_app and sheafificationNatIso concern sheaves. LocallyBijective.lean supplies local bijectivity under universe assumptions, not the stated component isomorphisms for arbitrary monoid presheaves on selected opens. No single declaration or one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.presheafToSheaf, \"app\"",
+   "results": "{\"t\": \"2026-10-22T06:00:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.presheafToSheaf, \\\"app\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.sheafificationAdjunction_unit_app\", \"CategoryTheory.sheafificationNatIso_hom_app_hom\", \"CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction\", \"CategoryTheory.sheafificationNatIso_inv_app_hom\", \"CategoryTheory.sheafificationAdjunction_counit_app_val\", \"CategoryTheory.toPresheafToSheafCompComposeAndSheafify_app\", \"CategoryTheory.presheafToSheafCompComposeAndSheafifyIso_inv_app\", \"PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app\"], \"digest\": \"5e865ad764c9754a\"} Read hits: isIso_toSheafify assumes the entire presheaf is already a sheaf; sheafificationAdjunction_counit_app and sheafificationNatIso concern sheaves. LocallyBijective.lean supplies local bijectivity under universe assumptions, not the stated component isomorphisms for arbitrary monoid presheaves on selected opens. No single declaration or one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf of commutative monoids has sheafification unit an isomorphism on every open whose every open cover contains that open itself, naturally in restrictions",
+   "results": "{\"t\": \"2026-10-22T06:00:50Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf of commutative monoids has sheafification unit an isomorphism on every open whose every open cover contains that open itself, naturally in restrictions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.isIso_toSheafify\", \"CategoryTheory.GrothendieckTopology.isIso_toPlus_of_isSheaf\", \"CategoryTheory.GrothendieckTopology.isoSheafify\", \"CategoryTheory.isIso_toSheafify\", \"TopCat.Presheaf.generateEquivalenceOpensLe_unitIso\", \"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"CategoryTheory.GrothendieckTopology.isoToPlus\", \"CategoryTheory.isoSheafify\"], \"digest\": \"bb5f8b488549f8c6\"} Read hits: isIso_toSheafify assumes the entire presheaf is already a sheaf; sheafificationAdjunction_counit_app and sheafificationNatIso concern sheaves. LocallyBijective.lean supplies local bijectivity under universe assumptions, not the stated component isomorphisms for arbitrary monoid presheaves on selected opens. No single declaration or one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bot|trivial|isIso.*app|bijective|toSheafify",
+   "results": "{\"t\": \"2026-10-22T06:00:59Z\", \"tool\": \"grep\", \"query\": \"bot|trivial|isIso.*app|bijective|toSheafify\", \"sub\": \"CategoryTheory/Sites/LocallyBijective.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"16\", \"18\", \"19\", \"20\"], \"digest\": \"a1f19d1ba3ace8d1\"} Read hits: isIso_toSheafify assumes the entire presheaf is already a sheaf; sheafificationAdjunction_counit_app and sheafificationNatIso concern sheaves. LocallyBijective.lean supplies local bijectivity under universe assumptions, not the stated component isomorphisms for arbitrary monoid presheaves on selected opens. No single declaration or one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\", \"app\"",
+   "results": "{\"t\": \"2026-10-22T06:01:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallySurjective\\\", \\\"app\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instIsLocallySurjectiveAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\"], \"digest\": \"c07597ee66c36ef6\"} Read hits: isIso_toSheafify assumes the entire presheaf is already a sheaf; sheafificationAdjunction_counit_app and sheafificationNatIso concern sheaves. LocallyBijective.lean supplies local bijectivity under universe assumptions, not the stated component isomorphisms for arbitrary monoid presheaves on selected opens. No single declaration or one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a topological space with a basis of nonempty supercompact opens, sheafifying any commutative monoid presheaf leaves its values on that basis unchanged",
+   "results": "{\"t\": \"2026-10-22T06:01:11Z\", \"tool\": \"leanfinder\", \"query\": \"On a topological space with a basis of nonempty supercompact opens, sheafifying any commutative monoid presheaf leaves its values on that basis unchanged\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.sheafify\", \"TopCat.Sheaf.hom_ext\", \"TopCat.Presheaf.IsSheaf.section_ext\", \"TopCat.Presheaf.section_ext\", \"TopCat.subpresheafToTypes.isSheaf\", \"TopCat.PrelocalPredicate.sheafifyOf\", \"TopCat.subsheafToTypes\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\"], \"digest\": \"147e1406fd5164e5\"} Read hits: isIso_toSheafify assumes the entire presheaf is already a sheaf; sheafificationAdjunction_counit_app and sheafificationNatIso concern sheaves. LocallyBijective.lean supplies local bijectivity under universe assumptions, not the stated component isomorphisms for arbitrary monoid presheaves on selected opens. No single declaration or one-line specialization gives all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*(forget|CommMon)|toSheafify.*(bijective|isIso)|isIso.*toSheafify",
+   "results": "{\"t\": \"2026-10-23T09:32:41Z\", \"tool\": \"grep\", \"query\": \"sheafification.*(forget|CommMon)|toSheafify.*(bijective|isIso)|isIso.*toSheafify\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/PreservesSheafification.lean\", \"Mathlib/CategoryTheory/Sites/LocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/LocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallyInjective.lean\"], \"digest\": \"c98b40ea218cdb5d\"} Read Sites/Sheafification.lean:151 (requires the whole presheaf to be a sheaf), PreservesSheafification.lean:304--313 (forgetful compatibility), and LocallyBijective.lean:132--139 (local injectivity/surjectivity). These are general tools, not the full item with component isomorphisms and inverse restriction compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheafification of a presheaf of commutative monoids has underlying set sheafification",
+   "results": "{\"t\": \"2026-10-23T09:32:42Z\", \"tool\": \"leansearch\", \"query\": \"The sheafification of a presheaf of commutative monoids has underlying set sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.sheafify\", \"CategoryTheory.GrothendieckTopology.sheafify_isSheaf\", \"CategoryTheory.sheafification\", \"CategoryTheory.GrothendieckTopology.sheafify\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"CategoryTheory.sheafify\", \"CategoryTheory.plusPlusSheaf\", \"TopCat.Presheaf.toSheafify\"], \"digest\": \"73b11d5bf3a2baaa\"} Read the returned sheafify/toSheafify and sheafify_isSheaf candidates; these construct sheafification or state its sheaf property, not all clauses of the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.presheafToSheaf, CategoryTheory.sheafCompose",
+   "results": "{\"t\": \"2026-10-23T09:32:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.presheafToSheaf, CategoryTheory.sheafCompose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} The first combined-name query returned no hits. The second returned PreservesSheafification and its generic forgetful instance (Sites/PreservesSheafification.lean:304--313); read that instance and its hypotheses. It does not state the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of commutative monoid presheaves agrees with sheafification of their underlying sets, and is unchanged on opens whose every cover contains the whole open",
+   "results": "{\"t\": \"2026-10-23T09:32:47Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of commutative monoid presheaves agrees with sheafification of their underlying sets, and is unchanged on opens whose every cover contains the whole open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.sheafification_obj\", \"CategoryTheory.GrothendieckTopology.sheafify_isSheaf\", \"TopCat.Presheaf.sheafify\", \"CategoryTheory.sheafification_obj\", \"CategoryTheory.plusPlusSheaf_obj_val\", \"CategoryTheory.instHasSheafifyType\", \"CategoryTheory.plusPlusIsoSheafify\", \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\"], \"digest\": \"bc2b1814772e4412\"} Read returned concrete sheafification, forgetful preservation, and module-sheafification candidates. The forgetful preservation instance in Sites/PreservesSheafification.lean:304--313 supports the first clause but does not state the trivial-cover component conclusion or its restriction compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesSheafification\"",
+   "results": "{\"t\": \"2026-10-23T09:33:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"PreservesSheafification\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.PreservesSheafification\", \"CategoryTheory.GrothendieckTopology.W_of_preservesSheafification\", \"CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms\", \"CategoryTheory.GrothendieckTopology.instPreservesSheafification\", \"CategoryTheory.GrothendieckTopology.PreservesSheafification.le\", \"CategoryTheory.GrothendieckTopology.PreservesSheafification.mk\", \"CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions_of_hasSheafCompose\", \"CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions\"], \"digest\": \"de84750091a67338\"} The first combined-name query returned no hits. The second returned PreservesSheafification and its generic forgetful instance (Sites/PreservesSheafification.lean:304--313); read that instance and its hypotheses. It does not state the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from commutative monoids to types preserves sheafification of presheaves on a small site",
+   "results": "{\"t\": \"2026-10-23T09:33:14Z\", \"tool\": \"leanfinder\", \"query\": \"The forgetful functor from commutative monoids to types preserves sheafification of presheaves on a small site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"CategoryTheory.GrothendieckTopology.sheafify_isSheaf\", \"CategoryTheory.instHasSheafifyType\", \"CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover\", \"CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms\", \"LightProfinite.hasSheafify\", \"CategoryTheory.plusPlusSheaf_obj_val\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\"], \"digest\": \"f1b24b3b40d91a54\"} Read returned concrete sheafification, forgetful preservation, and module-sheafification candidates. The forgetful preservation instance in Sites/PreservesSheafification.lean:304--313 supports the first clause but does not state the trivial-cover component conclusion or its restriction compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-fan-localization-sections",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, proof of Theorem 3.3.15, p.109, paragraph beginning Choose a point y, restricted to strict morphisms; affine fan interpretation: 3.1.8(ii), 3.1.10(ii). Supporting affine-target comparison: ILO VIII 3.1.8(ii), invoked in the final sentence of the point-local comparison paragraph in the proof of 3.3.15, printed p.109. Supporting localization description of the sharp affine model in VIII 3.1.3 and Remark 3.1.4(iii), used in the proof of 3.1.8(ii). VIII Remark 3.1.4(iii), printed pp.98--99, sheafification on trivially covered affine opens; general monoid-valued formulation of old proof steps 3--5 and the naturality in step 7. Supporting source: literature/stacks-project/sites.tex, Tags 00WH (proposition-sheafification-adjoint), 00WK (lemma-sections-sheafification), 00YR (section-sheaves-algebraic-structures).",
+   "via": [
+    "lem-trf-affine-fan-localization-sections",
+    "lem-trf-affine-fan-hom-universal",
+    "lem-trf-strict-fan-chart-local-comparison",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoid-sheafification-trivial-covers",
+  "worker": "stage1",
+  "summary": "Statement and statement dependencies unchanged. Obtained a commutative-monoid sheafification whose underlying set presheaf is the set sheafification from the existing Mathlib leaf lem-trf-commutative-monoid-sheafification, compared it with the given monoid sheafification by the universal property, applied the existing local-sections lemma, and proved the trivial-cover component isomorphisms and inverse restriction identities. No new nodes and no attachment. (Maintainer review FIX: the hand-built monoid structure on the set sheafification, old steps 1--4, replaced by the citation of the existing leaf.)",
+  "blueprint": "Historical affine-fan localization branch recorded in blueprint.from.place: ILO VIII Remark 3.1.4(iii), general sheafification argument serving lem-trf-affine-fan-localization-sections old proof steps 3--5 and 7. Current latest lem-trf-local-term-locality has no monoid/sheafification clause; no change to the current chapter or unit route is made.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local lifting and local equality for set sheafification on any small site; used for the open site, independently of trace-formula geometry. No node in this unit provides this general sheafification fact."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-6e5e81baa",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-6e5e81baa (reviewer sub-agent of L); spot-checked: Read the item and its 7 steps in full. The statement and stmt_deps are byte-identical to the live node (live is still unsplit). There are no new nodes and no repair note. Sources checked: ILO VIII Rem. 3.1.4(iii) on p.98 ('any open covering of an affine set is trivial … no sheafification is needed') and Stacks sites.tex 00WH, 00WJ, 00WK (l.2156) and 00YR (α–ζ). The mathematics is correct. Checked: m_S∘u²=u∘m and the associativity, zero and commutativity laws after u^n; the monoid universal property; the a/b comparison with the given (Q^#,η); the local-sections lemma applied to (|Q^#|,|η|), whose universe convention holds; the trivial-cover member U_i=U giving surjectivity and injectivity; inverse additivity and naturality. Small cases: a point, the Sierpiński space and the empty space. Advisory: the 'nonempty' condition on members of B already follows from the trivial-cover hypothesis. One fault, C5/C1: steps 1–3 rebuild by hand what the existing Mathlib leaf lem-trf-commutative-monoid-sheafification states (same unit sk-i-curve-zero; sheafificationAdjunction/sheafifyComposeIso; it says |P^#| with |η| is the set sheafification). The report missed it despite a 00YR search, and the NQ parent review had already flagged it. FIX: new step 1 cites the leaf; new step 2 (elementary, def-weil-pbc-sheafification) compares it with the given (Q^#,η) and writes out uniqueness of the set factorization; old steps 5–7 are kept as steps 3–5. proof_deps drops lem-weil-pbc-sheafification-sets-exact and adds the leaf; proof_origin and split_report.summary are updated. The statement is untouched. The tool_use lem-weil-pbc-site-sheafification-sections-local (generic, sk-thm-p1) is accepted. No cycle and no SGA source. Fix file: fixes/dag/nodes/sec-trace-formula/lem-trf-monoid-sheafification-trivial-covers.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MonoidSheafificationTrivialCovers",
+  "declaration": "CategoryTheory.monoid_sheafification_trivial_covers",
+  "file": "lean/Sheaf/CategoryTheory/MonoidSheafificationTrivialCovers.lean",
+  "statement": "theorem monoid_sheafification_trivial_covers (X : Type u) [TopologicalSpace X] (Q : (Opens X)ᵒᵖ ⥤ AddCommMonCat.{u}) (Qsharp : Sheaf (Opens.grothendieckTopology X) AddCommMonCat.{u}) (η : Q ⟶ Qsharp.obj) (hη : ∀ H : Sheaf (Opens.grothendieckTopology X) AddCommMonCat.{u}, Function.Bijective (fun f : Qsharp ⟶ H ↦ η ≫ f.hom)) (B : Set (Opens X)) (hB : ∀ U ∈ B, (U : Set X).Nonempty ∧ ∀ (I : Type u) (V : I → Opens X), iSup V = U → ∃ i, V i = U) : Presheaf.IsSheaf (Opens.grothendieckTopology X) (Qsharp.obj ⋙ forget AddCommMonCat.{u}) ∧ (∀ H : Sheaf (Opens.grothendieckTopology X) (Type u), Function.Bijective (fun f : (Qsharp.obj ⋙ forget AddCommMonCat.{u}) ⟶ H.obj ↦ Functor.whiskerRight η (forget AddCommMonCat.{u}) ≫ f)) ∧ (∀ (W : Opens X) (s : Qsharp.obj.obj (op W)), ∃ (I : Type u) (V : I → Opens X) (hV : iSup V = W) (t : ∀ i, Q.obj (op (V i))), ∀ i, Qsharp.obj.map (homOfLE ((le_iSup V i).trans hV.le)).op s = η.app (op (V i)) (t i)) ∧ (∀ (W : Opens X) (p q : Q.obj (op W)), η.app (op W) p = η.app (op W) q → ∃ (I : Type u) (V : I → Opens X) (hV : iSup V = W), ∀ i, Q.map (homOfLE ((le_iSup V i).trans hV.le)).op p = Q.map (homOfLE ((le_iSup V i).trans hV.le)).op q) ∧ (∃ e : ∀ U : B, Q.obj (op U.val) ≅ Qsharp.obj.obj (op U.val), (∀ U : B, (e U).hom = η.app (op U.val)) ∧ (∀ (U V : B) (h : V.val ≤ U.val), Q.map (homOfLE h).op ≫ (e V).hom = (e U).hom ≫ Qsharp.obj.map (homOfLE h).op) ∧ (∀ (U V : B) (h : V.val ≤ U.val), Qsharp.obj.map (homOfLE h).op ≫ (e V).inv = (e U).inv ≫ Q.map (homOfLE h).op))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-951dc1ef5",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Snapshot vs live: new module MonoidSheafificationTrivialCovers.lean and item node; node differs only in lean (live null), and lean.statement is verbatim in the file. Clause check: X:Type u with AddCommMonCat.{u}/Type u coefficients is the node's common-universe convention; Opens.grothendieckTopology is the ordinary open site; Q is a presheaf to AddCommMonCat (node: addition/zero); Sheaf AddCommMonCat equals the underlying-set sheaf definition via isSheaf_iff_isSheaf_forget; arbitrary unit eta with bijective precomposition to every monoid sheaf (universal-property sense of def-weil-pbc-sheafification, no HasSheafify assumed); conclusions give set sheaf + set universal property with whiskerRight eta, local lifting and local equality on Type u-indexed open covers, and AddCommMonCat isos e with hom = eta_U plus forward and inverse naturality for all V<=U in B. hB (Nonempty + Type u-indexed trivial covers) loses nothing (reindex by range). Edge cases: empty space/open (empty I), empty B, point, Sierpinski, zero monoids, identity inclusions. No new defs (no H4/H5), sorry only, source/blueprint docstrings carry all 5 node steps, universe bound, report sections present. No compile run (no file changed); worker reports clean compile. Advisory: Nonempty conjunct implied by trivial-cover conjunct."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T082121-L-2137889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,525 @@
+{
+ "id": "lem-sf-native-weil-open-proper-forgetting",
+ "kind": "statement",
+ "title": "Native coefficient hearts and normalized open/proper forgetting",
+ "statement": "Fix a finite field $k_0$, its algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. For a separated finite-type $k_0$-scheme $T_0$ put $T=T_0\\times_{k_0}k$ and let $g_T$ be geometric Galois Frobenius [def-weil-frobenius-detailed]. Let $R_T$ on the small pro-etale site be the sheaf of continuous $\\Omega$-valued functions taking values locally in a finite extension of $\\mathbf Q_\\ell$ [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Put $\\mathcal A_T=\\operatorname{Mod}(R_T)$ [def-weil-sheaf-of-modules-category], $P_T=g_T^*$, $\\mathcal B_T=\\mathcal A_T^{P_T}$, whose objects are $(M,\\theta:P_TM\\xrightarrow{\\sim}M)$ and arrows intertwine $\\theta$ [def-weil-endofunctor-fixed-pair-category]. Write $U_T$ for the forgetful functor and also its termwise derived functor on ordinary derived categories [def-weil-abstract-derived-category]. Write $\\mathcal C_T\\subset D(\\mathcal A_T)$ for objects with bounded cohomology admitting a finite locally closed stratification with pro-etale locally finite free restrictions, and $\\mathcal W(T_0)=U_T^{-1}(\\mathcal C_T)\\subset D(\\mathcal B_T)$, with full subcategory morphisms. These are the actual native categories of [def-sf-native-weil-derived-framework]. Let $f_0:X_0\\to Y_0$ be separated of finite type between separated finite-type $k_0$-schemes, with geometric fiber $f:X\\to Y$. Choose the native compactification $f_0=p_0j_0$ and its geometric fiber $f=pj$ [def-compact-support-direct-image-detailed].\n\nThe coefficient ring $B_{T_0}$ of locally finite-dimensional-span functions in [def-sf-native-weil-derived-framework] is canonically $R_T$, respecting restrictions, multiplication and finite-extension inclusions; its internal module objects identify with sectionwise $R_T$-module sheaves with identical actions. The categories $\\mathcal A_T$ and $\\mathcal B_T$ are Grothendieck abelian [def-sp-grothendieck-abelian]. Site reindexing by $g_T$ and $g_T^{-1}$ gives inverse exact coefficient-preserving equivalences $P_T$ and $P_T^{-1}$. The functor $U_T$ is exact and conservative, has the exact free-action left adjoint with underlying object $\\bigoplus_{n\\in\\mathbf Z}P_T^nM$, preserves K-injective complexes [def-sfb-right-derived-functor], and $D(U_T)$ is conservative, commutes with cohomology and shifts, and preserves cone triangles. Thus boundedness and the stated constructibility are tested after forgetting.\n\nOpen extension by zero is exact and its native lift forgets to ordinary $j_!$. For proper pushforward let $a:P_Yp_*\\xrightarrow{\\sim}p_*P_{\\overline X}$ be the native Frobenius comparison, so its fixed-pair lift is $(M,\\theta)\\mapsto(p_*M,p_*(\\theta)a_M)$. Put $F^{\\mathrm W}=Rp_*^{\\mathrm W}j_!^{\\mathrm W}$ on ordinary native derived categories and $F^c=Rp_*j_!$. There is a canonical natural isomorphism\n$$c^0:U_YF^{\\mathrm W}\\xrightarrow{\\sim}F^cU_X.$$\nIts proper factor is the total-right-derived comparison induced by the equality on sheaf functors, including their derived-unit maps. On a native K-injective resolution $I$ after open extension it is the identity of $Q(p_*U_{\\overline X}I)$, where $Q$ is localization; on that representative both Frobenius maps are $Q(p_*(\\theta_I)a_{UI})$. Consequently $c^0$ respects the induced Frobenius actions, shifts and all localized derived morphisms. It compares the actual ordered open/proper constructions; it assumes no exceptional adjoint.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Old proof Steps 1–2: native module hearts, reindexing and the K-injective-normalized open/proper comparison. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-sf-native-weil-derived-framework",
+  "def-compact-support-direct-image-detailed",
+  "def-sfb-right-derived-functor",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-sp-grothendieck-abelian",
+  "def-sf-exact-square-derived-unit-arrows",
+  "def-sf-native-sectionwise-module-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-locally-finite-coefficient-ring-realization] on each geometric fibre $T$. Its coefficient isomorphism identifies the finite-extension coefficient sheaf $R_T$ with the native $B_{T_0}$, and its naturality square identifies restriction and geometric coefficient maps. In particular multiplication and the inclusions of finite coefficient fields agree, not merely the underlying abelian sheaves.",
+   "uses": [
+    "lem-sf-locally-finite-coefficient-ring-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native coefficient identification preceding the Frobenius-equivariance construction; the existing coefficient-realization lemma supplies the function-sheaf comparison."
+   }
+  },
+  {
+   "text": "Unpack an internal $B$-module action in sheaves of $\\underline\\Omega$-modules [sk-def-sfb-module-objects]. By [def-pur-sheaf-tensor-product] and the sheafification universal property [def-weil-presheaf-modules-sheafification], a map $B\\otimes_{\\underline\\Omega}M\\to M$ is exactly a restriction-compatible family of $\\underline\\Omega(V)$-balanced bilinear maps $B(V)\\times M(V)\\to M(V)$. The unit and associativity diagrams say $1m=m$ and $(bb')m=b(b'm)$ on sections. Conversely a sectionwise $B(V)$-module action supplies these maps, after restricting scalars along $\\underline\\Omega\\to B$. The two assignments are inverse; the morphism condition in the same definition is precisely sectionwise $B(V)$-linearity. Hence the module presentations, actions and forgetful functors agree.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tensor product, label section-tensor-product (03EK), and sheafification, label lemma-sheafification-presheaf-modules (03CY); direct unpacking of the module-object axioms."
+   }
+  },
+  {
+   "text": "Use the small site models of [def-weil-pbc-proetale-site, def-weil-size-convention]. The sheaf $R_T$ is commutative, so [lem-pur-ringed-site-grothendieck-abelian] applies and makes $\\mathcal A_T$ Grothendieck abelian. Apply the site-reindexing assertion of [lem-sf-weil-frobenius-action-resolutions]: postcomposition by $g_T$ and $g_T^{-1}$ preserves coverings, gives inverse site equivalences and identifies the coefficient functions with the same functions, retaining their finite coefficient fields. Thus the module functors $P_T$ and $P_T^{-1}$ are inverse additive exact equivalences, with the native coefficient actions.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sf-weil-frobenius-action-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/Category.lean",
+    "place": "frobeniusPullback and ProEtaleWeilSheaf; site and ringed-module assertions supplied by the explicitly cited nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-fixed-pair-derived-forget-comparison] with $\\mathcal C=\\mathcal A_T$ and $F=P_T$. Its hypotheses hold by Step 3. It gives Grothendieck abelianness of $\\mathcal B_T$, exact conservative $U_T$, the exact free-action left adjoint $M\\mapsto\\bigoplus_{n\\in\\mathbf Z}P_T^nM$ with shifting structure, preservation of K-injectives and conservativity of $D(U_T)$. Exactness gives $U_T\\ker d=\\ker(U_Td)$ and preserves images and their quotients, so $H^a(D(U_T)K)=U_TH^a(K)$ naturally. By [lem-sf-exact-functor-derived-triangulated], $D(U_T)$ also commutes with shifts and takes cone triangles to distinguished triangles. Since $U_T$ reflects zero objects, vanishing in each degree, hence boundedness, is tested after forgetting.",
+   "uses": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean",
+    "place": "Free.preservesHomology_functor, preservesKInjectiveComplexes_forget; derived conservativity in IsoAlgebraComp.lean; termwise exactness for cohomology and triangles."
+   }
+  },
+  {
+   "text": "The geometric fibres are separated finite-type $k$-schemes by [lem-pod-separated-finite-type-base-change]. Finite type gives quasi-compactness; separatedness gives quasi-separatedness by [lem-pc-separated-quasi-separated]. Thus [lem-sf-native-adic-qcqs-stratification] identifies the local constructibility condition of [def-sf-native-weil-derived-framework] with a finite stratification of the whole fibre by locally closed constructible subschemes with lisse restrictions. The converse restricts such a partition to open subsets; the strata stay constructible because $T$, of finite type over $k$, is a Noetherian space, where every finite union of locally closed subsets is constructible [def-weil-constructible-subset]. Step 2 identifies the restricted rings and finite free modules. Together with Step 4's cohomology identity, this proves that the displayed $\\mathcal W(T_0)=U_T^{-1}(\\mathcal C_T)$ is exactly the native bounded constructible full subcategory, and proves constructibility is tested after forgetting.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-pc-separated-quasi-separated",
+    "lem-sf-native-adic-qcqs-stratification",
+    "def-sf-native-weil-derived-framework",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf; comparison with Category.lean, WeilComplex.objectProperty."
+   }
+  },
+  {
+   "text": "By [lem-weil-proetale-weakly-etale-localization] the pro-etale site of the open $X$ is the localization of that of $\\overline X$ at $X$. On an object over $X$, both restricted coefficient sheaves are the identical locally finite functions. Apply [lem-pur-site-restriction-module-adjunction-exact] to this ringed localization: the ordinary $j_!$ is exact. The actual native lift is specified in [def-sf-native-weil-derived-framework] as $(M,\\theta)\\mapsto(j_!M,j_!(\\theta)c_M)$, hence $U_{\\overline X}j_!^{\\mathrm W}=j_!U_X$ on sheaves and their maps. The lift is exact as well: its underlying short sequences are exact by ordinary $j_!$, and the exact conservative forgetful functor tests exactness by its cohomology identity. Termwise application therefore gives the same equality after localization, by [lem-sf-exact-functor-derived-triangulated].",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Labels lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI,03DJ), applied through the cited ringed-localization statements."
+   }
+  },
+  {
+   "text": "By [lem-sfb-compactification-middle-over-base] (with $S=\\operatorname{Spec}k_0$) the compactification $\\overline X_0$ is separated of finite type over $k_0$, so Steps 3--5 apply to $T_0=\\overline X_0$ and to $T_0=Y_0$. The ordinary module $p_*$ is additive and left exact: [lem-weil-pbc-ringed-topoi-module-adjunction] makes it a right adjoint, and a compatible family of maps into a limit corresponds under its Hom adjunction to a compatible family into the original limit. The native proper lift is the lift for $L=p_*$ and $e=a$ in [lem-sf-fixed-pair-derived-forget-comparison], by the formula in [def-sf-native-weil-derived-framework]. Applying that lemma with $(\\mathcal C,F)=(\\mathcal A_{\\overline X},P_{\\overline X})$ and $(\\mathcal D,H)=(\\mathcal A_Y,P_Y)$ gives Grothendieck hearts, K-injective preservation by $U_{\\overline X}$ and a derived isomorphism $U_YRp_*^{\\mathrm W}\\cong Rp_*U_{\\overline X}$. The lift formula gives the literal equality $U_Yp_*^{\\mathrm W}=p_*U_{\\overline X}$ on objects and morphisms; Step 8 takes the comparison $d$ induced by this equality and normalized by the units on all K-injective complexes, rather than an independently chosen objectwise isomorphism.",
+   "uses": [
+    "lem-sfb-compactification-middle-over-base",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean",
+    "place": "rightDerivedFunctorMapOfNatIsoCompForgetIso, canonical comparison of the two total right derived functors."
+   }
+  },
+  {
+   "text": "For a complex $K$ in the native source, take a K-injective resolution $s:j_!^{\\mathrm W}K\\to I$ in $\\mathcal B_{\\overline X}$ by [lem-sfb-grothendieck-k-injective]. Step 4 makes $U_{\\overline X}I$ K-injective and $U_{\\overline X}s$ a quasi-isomorphism. The K-injective computation and unit normalization in [def-sfb-right-derived-functor] identify both sides of $d$ with $Q(p_*U_{\\overline X}I)$; the normalization follows from the units themselves. At $I$, write $\\eta_I^{\\mathrm W}$ and $\\eta_{UI}$ for the native and ordinary derived units. Apply [lem-weil-pbc-kinjective-exact-square-comparison] with its exact functors $(r,s)=(U_{\\overline X},U_Y)$ and $(H',H)=(p_*^{\\mathrm W},p_*)$: both source hearts have K-injective resolutions, the forgetful functors are exact and $U_{\\overline X}$ preserves K-injectives (Step 4), and $U_Yp_*^{\\mathrm W}=p_*U_{\\overline X}$ (Step 7). Let $d$ be its unique natural isomorphism $\\beta$, so $d_{QI}\\,U_Y\\eta_I^{\\mathrm W}=\\eta_{UI}$ for every K-injective $I$. Both units are isomorphisms by the cited K-injective computation. Using their inverses to identify the targets with $Q(p_*UI)$ makes $d_{QI}$ the identity. Naturality along $s$ then identifies both units at $j_!^{\\mathrm W}K$ with $Q(p_*Us)$. The native structure on $p_*^{\\mathrm W}I$ is degreewise $p_*(\\theta_I)a_{UI}$; ordinary derivation computes the Frobenius comparison on the same underlying K-injective $UI$. Indeed $P_{\\overline X}UI\\cong UI$ is also K-injective. Thus the two Frobenius arrows are literally $Q(p_*(\\theta_I)a_{UI})$, and the identity comparison intertwines them.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-exact-square-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native refinement of the equivariance paragraph: the common K-injective representative and the identical lifted structure maps."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kinjective-hom-derived], every derived morphism between the native K-injective resolutions is represented by a chain map uniquely up to homotopy. Both constructions send such a map $v:I\\to I'$ to $Q(p_*Uv)$, so the identity comparisons commute with every derived morphism and with change of resolution. For shifts one may choose $I[n]$: it is K-injective because shifting an acyclic source remains acyclic, and the defining Hom group shifts back to a vanishing one. Both constructions use $p_*UI[n]=(p_*UI)[n]$ and the same shifted structure arrow, so $d$ respects shifts. Finally precompose $d$ with $j_!^{\\mathrm W}$ and use the equality of Step 6, obtaining $c^0:U_YRp_*^{\\mathrm W}j_!^{\\mathrm W}\\xrightarrow{\\sim}Rp_*j_!U_X$. This uses exactly the chosen ordered compactification construction of [def-sf-native-weil-derived-framework]. Step 8 proves its asserted normalization and Frobenius compatibility. The argument applies on the ordinary ambient derived categories and requires no exceptional adjunction.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Assembly of the normalized open/proper comparison; all localized morphisms and shifts checked on native K-injective representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "sk-def-sfb-module-objects",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pc-separated-quasi-separated",
+  "lem-sf-native-adic-qcqs-stratification",
+  "def-sf-native-weil-derived-framework",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sfb-compactification-middle-over-base",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-kinjective-exact-square-comparison",
+  "lem-sf-native-scalar-forgetting-equivalence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/WeilSheaf/NativeOpenProperForgetting.lean",
+  "place": "The five filled declarations use the existing locally finite coefficient, scalar-forgetting, normalized realization, Frobenius equivalence and exact open-extension APIs; the four remaining theorem proofs retain the planned route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting Frobenius on native complexes of sheaves commutes with derived proper pushforward after exact open extension by zero with comparison identity on K-injectives",
+   "results": {
+    "t": "2026-10-22T07:05:59Z",
+    "tool": "leanfinder",
+    "query": "Forgetting Frobenius on native complexes of sheaves commutes with derived proper pushforward after exact open extension by zero with comparison identity on K-injectives",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardNatIso",
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pushforwardNatIso_hom",
+     "SheafOfModules.pushforwardComp_hom_app_val_app",
+     "TopCat.Sheaf.pushforwardForgetIso",
+     "SheafOfModules.pushforwardComp_inv_app_val_app",
+     "TopCat.Sheaf.pushforward_forget",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom"
+    ],
+    "digest": "54f20cf52687fcea"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": {
+    "t": "2026-10-22T07:07:13Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Functor.rightDerived",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.rightDerived",
+     "CategoryTheory.Functor.rightDerivedZeroIsoSelf",
+     "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+     "CategoryTheory.Functor.toRightDerivedZero",
+     "CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+     "CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective",
+     "CategoryTheory.instIsIsoAppToRightDerivedZero",
+     "CategoryTheory.NatTrans.rightDerived"
+    ],
+    "digest": "fbdb177a91ae8c23"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective.*forget|forget.*KInjective|rightDerived.*forget",
+   "results": {
+    "t": "2026-10-22T07:11:24Z",
+    "tool": "grep",
+    "query": "KInjective.*forget|forget.*KInjective|rightDerived.*forget",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact forgetting of Frobenius equivariant sheaves commutes with total right derived proper image and open extension",
+   "results": {
+    "t": "2026-10-22T07:11:24Z",
+    "tool": "leansearch",
+    "query": "Exact forgetting of Frobenius equivariant sheaves commutes with total right derived proper image and open extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.pushforward₀CompToPresheaf",
+     "CategoryTheory.sheafForget",
+     "TopCat.Sheaf.pushforwardForgetIso",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+     "SheafOfModules.forgetToSheafModuleCat_map_val",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left",
+     "SheafOfModules.forget",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_preservesPullback_of_right"
+    ],
+    "digest": "ae61c4b6e6d05261"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra.*rightDerived|rightDerived.*IsoAlgebra|KInjective.*forget|forget.*KInjective",
+   "results": {
+    "t": "2026-10-22T09:36:08Z",
+    "tool": "grep",
+    "query": "IsoAlgebra.*rightDerived|rightDerived.*IsoAlgebra|KInjective.*forget|forget.*KInjective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-pushforward, abelianness, or higher-derived-functor declarations do not give the complete native coefficient/fixed-pair/open-proper comparison and its normalized Frobenius action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck abelian category of module sheaves with invertible endomorphism and derived forgetful pushforward comparison",
+   "results": {
+    "t": "2026-10-22T09:36:08Z",
+    "tool": "leansearch",
+    "query": "Grothendieck abelian category of module sheaves with invertible endomorphism and derived forgetful pushforward comparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.instAbelian",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+     "AlgebraicGeometry.Scheme.Modules.instAbelian",
+     "SheafOfModules.fullyFaithfulForget",
+     "SheafOfModules.forgetToSheafModuleCat",
+     "PresheafOfModules.pushforward₀CompToPresheaf",
+     "instIsGrothendieckAbelianModuleCat"
+    ],
+    "digest": "fc644b332249b170"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-pushforward, abelianness, or higher-derived-functor declarations do not give the complete native coefficient/fixed-pair/open-proper comparison and its normalized Frobenius action."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Sheaf",
+   "results": {
+    "t": "2026-10-22T09:36:08Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-pushforward, abelianness, or higher-derived-functor declarations do not give the complete native coefficient/fixed-pair/open-proper comparison and its normalized Frobenius action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting Frobenius equivariant module sheaves commutes with total derived proper pushforward and exact open extension by zero",
+   "results": {
+    "t": "2026-10-22T09:36:09Z",
+    "tool": "leanfinder",
+    "query": "Forgetting Frobenius equivariant module sheaves commutes with total derived proper pushforward and exact open extension by zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforward_assoc",
+     "SheafOfModules.pushforwardNatIso",
+     "SheafOfModules.pushforward_map_val",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pushforwardComp_hom_app_val_app",
+     "SheafOfModules.pushforwardComp_inv_app_val_app"
+    ],
+    "digest": "1e092ed33fd204fd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-pushforward, abelianness, or higher-derived-functor declarations do not give the complete native coefficient/fixed-pair/open-proper comparison and its normalized Frobenius action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact forgetful functor from fixed pairs of an autoequivalence preserves K injective resolutions and derived functor comparison",
+   "results": {
+    "t": "2026-10-22T09:36:11Z",
+    "tool": "leanfinder",
+    "query": "Exact forgetful functor from fixed pairs of an autoequivalence preserves K injective resolutions and derived functor comparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+     "CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors"
+    ],
+    "digest": "3122783033ac8b46"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-pushforward, abelianness, or higher-derived-functor declarations do not give the complete native coefficient/fixed-pair/open-proper comparison and its normalized Frobenius action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-native-exceptional-forgetful",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Old proof Steps 1–2: native module hearts, reindexing and the K-injective-normalized open/proper comparison. Supplied provenance: exceptional-adjunction final sentence of cor-coef-verdier-weil-equivariance.proof.md; blueprint_refs ancestor is None.",
+   "via": [
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-open-proper-forgetting",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the native coefficient, heart and normalized open/proper comparison in nine steps, reusing existing coefficient realization, fixed-pair derivation and ringed-site lemmas. Checked actual native declarations, global versus local constructibility on qcqs fibres, units, the common K-injective representative, Frobenius arrows, all localized morphisms and shifts. No new nodes, no whole-item Lean attachment, no exceptional-adjoint input. Repair of the landing return at 85e509ac4e2: rebased split-owned fields onto the current unsplit live item, re-read every current proof dependency, revalidated all citation excerpts, and expanded Step 8 to derive identity normalization directly from the two invertible derived units and their compatibility.",
+  "blueprint": "The supplied ancestor chain terminates with blueprint.from.node=null (confirmed by blueprint_refs.py ancestor). The proof realizes the recorded old Steps 1–2 of lem-sf-weil-native-exceptional-forgetful, refining the equivariance construction and exceptional-adjunction final sentence of cor-coef-verdier-weil-equivariance.proof.md; it does not assert the latter adjunction. Whole-blueprint searches found no equivalent native theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Grothendieck theorem for modules over a ringed small site."
+   },
+   {
+    "node": "lem-sf-fixed-pair-derived-forget-comparison",
+    "why": "Generic fixed-pair Grothendieck and total-derivation theorem, applied to the native hearts; no biduality or exceptional adjunction is used."
+   },
+   {
+    "node": "lem-sf-native-adic-qcqs-stratification",
+    "why": "Generic globalization of the native locally stratified lisse condition on a qcqs scheme."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site localization equivalence for an open immersion."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact extension by zero for a localized ringed site."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module pullback/pushforward adjunction, used only to establish left exactness of p_*."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic unbounded K-injective existence for the two Grothendieck hearts."
+   },
+   {
+    "node": "lem-sfb-compactification-middle-over-base",
+    "why": "Generic: the middle of a compactification of a morphism between separated finite-type k_0-schemes is separated of finite type over k_0 (Step 7, reviewer FIX)."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-exact-square-comparison",
+    "why": "Generic unit-normalized comparison D(s)RH' = RH D(r) for an exact square preserving K-injectives; gives the normalization on K-injective complexes (Step 8, reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-sf-native-adic-qcqs-stratification",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sfb-compactification-middle-over-base",
+  "lem-weil-pbc-kinjective-exact-square-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-852660ec9",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-852660ec9 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 9 steps, every cited statement (20 plus the 3 I added), the def-sf-native-weil-derived-framework statement and the main-20261015 cor-coef-verdier-weil-equivariance proof. There are no new nodes, the statement and stmt_deps are unchanged, no SGA source is cited, there is no repair note and no cycle. The previous head 85e509ac4e29 received a FIX that was never landed, and this re-delivery lost both of its repairs; I re-applied them and added one new repair. (1) E1/C4, Step 5: the item's C_T asks only for a locally closed stratification, while the framework requires constructible strata. Fix: T is of finite type over k, hence Noetherian, so finite unions of locally closed subsets are constructible; cited def-weil-constructible-subset (005L). (2) E1, Step 7: applying Steps 3-5 (frobenius-action-resolutions needs a separated finite-type T_0) to the compactification Xbar_0 was not justified. Fix: cited lem-sfb-compactification-middle-over-base with S=Spec k_0. (3) C4, Step 8 (new): it used d_{QI} U_Y eta^W_I = eta_{UI} for K-injective complexes I, but the fixed-pair lemma's statement gives unit compatibility only for M[0]. Fix: cited lem-weil-pbc-kinjective-exact-square-comparison with (r,s)=(U_Xbar,U_Y) and (H',H)=(p_*^W,p_*). Its hypotheses hold by Step 4 and by the literal equality U_Y p_*^W = p_* U_Xbar from the lift formula, and d is taken to be its unique beta normalized on K-injectives. The other steps check out. Step 1: the ring isomorphism with its E-inclusion and naturality clauses. Step 2: the module-object unpacking via the sheafified tensor is elementary. Step 3: the small site and reindexing come from the statement of frobenius-action-resolutions. Step 4: the fixed-pair heart and D(U) clauses. Step 6: exact j_! for a general ring sheaf, and exactness of the lift is reflected by the exact conservative U. Step 7: the framework's c:F_T^*G->GF_S^* matches e:HL->LF, and F_W=g_T. Step 8: both Frobenius arrows are Q(p_*(theta_I)a_{UI}). Step 9: unbounded K-injective Hom, shifts, and the ordered Rp_* j_!. Edge cases checked: empty X, f=id, identity Frobenius, zero and varying ranks, M[0], I[n]. Two generic tool uses were added to split_report.tool_uses: lem-sfb-compactification-middle-over-base and lem-weil-pbc-kinjective-exact-square-comparison. The existing tool uses are generic and accepted. Advisory: lem-sf-weil-frobenius-action-resolutions already states most of the U/D(U) clause, but the item predates it. Fix file: fixes/dag/nodes/sec-six-functors/lem-sf-native-weil-open-proper-forgetting.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeOpenProperForgetting",
+  "declaration": "AlgebraicGeometry.NativeWeilOpenProper.open_proper",
+  "declarations": [
+   "AlgebraicGeometry.NativeWeilOpenProper.coefficient_sections",
+   "AlgebraicGeometry.NativeWeilOpenProper.coefficient_modules",
+   "AlgebraicGeometry.NativeWeilOpenProper.coefficient_naturality",
+   "AlgebraicGeometry.NativeWeilOpenProper.hearts",
+   "AlgebraicGeometry.NativeWeilOpenProper.frobenius_reindexing",
+   "AlgebraicGeometry.NativeWeilOpenProper.properComparison",
+   "AlgebraicGeometry.NativeWeilOpenProper.properLeftUnit",
+   "AlgebraicGeometry.NativeWeilOpenProper.properRightUnit",
+   "AlgebraicGeometry.NativeWeilOpenProper.proper_normalization",
+   "AlgebraicGeometry.NativeWeilOpenProper.open_exact",
+   "AlgebraicGeometry.NativeWeilOpenProper.openComparison",
+   "AlgebraicGeometry.NativeWeilOpenProper.comparison",
+   "AlgebraicGeometry.NativeWeilOpenProper.ordinaryFrobeniusChain",
+   "AlgebraicGeometry.NativeWeilOpenProper.proper_frobenius",
+   "AlgebraicGeometry.NativeWeilOpenProper.ordinaryCompactSupport",
+   "AlgebraicGeometry.NativeWeilOpenProper.compactificationComparison",
+   "AlgebraicGeometry.NativeWeilOpenProper.nativeDerivedStructure",
+   "AlgebraicGeometry.NativeWeilOpenProper.ordinaryProperFrobenius",
+   "AlgebraicGeometry.NativeWeilOpenProper.ordinaryOpenFrobenius",
+   "AlgebraicGeometry.NativeWeilOpenProper.ordinaryFrobeniusComparison",
+   "AlgebraicGeometry.NativeWeilOpenProper.nativeCompactSupportFrobenius",
+   "AlgebraicGeometry.NativeWeilOpenProper.ordinaryCompactSupportFrobenius",
+   "AlgebraicGeometry.NativeWeilOpenProper.open_proper"
+  ],
+  "file": "lean/Sheaf/WeilSheaf/NativeOpenProperForgetting.lean",
+  "statement": "theorem open_proper (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (c : Compactification f) : (compactificationComparison (k₀ := k₀) (l := l) f c).hom.CommShift ℤ ∧ (∀ K : DerivedCategory (ProEtaleWeilSheaf k₀ l X), (WeilSheaf.frobeniusPullback k₀ l Y).mapDerivedCategory.map ((compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K) ≫ (ordinaryCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom = (nativeCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom ≫ (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K) ∧ (∀ (K L : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (v : K ⟶ L), (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c ⋙ (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y)).mapDerivedCategory).map v ≫ (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app L = (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K ≫ ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory ⋙ ordinaryCompactSupport (k₀ := k₀) (l := l) f c).map v)",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of 9fe287dcfc8f: open_proper now states for every K the Frobenius square for compactificationComparison. Native action is D(strNatIso) at the native output. Ordinary action is independently assembled from derived a, exact open Frobenius comparison, and Rp_*j! of input D(strNatIso). The comparison is never used to define ordinary action. Helper ownership is supplied by two existing:true definition nodes; the normalized coefficient iso is owned by the presentation definition node, which cites the realization theorem. All originally accepted clauses remain."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd3d4290c",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 9fe287. Statement, proof and proof_deps are unchanged; the stmt_deps swap two theorem nodes for two new existing:true def nodes; the Lean adds 7 declarations and a new Frobenius conjunct. F1 repaired: open_proper states D(P_Y)(c0_K) then the ordinary action (rightDerivedFunctorNatIso of a, termwise open comparison, then F^c of the input theta) equals the native D(strNatIso) at F^W K then c0_K, for every derived K. Types checked; the ordinary action does not use c0, properComparison or compactificationComparison, so the square is a genuine canonical coherence and is true via the common K-injective representative. F2 repaired: def-sf-exact-square-derived-unit-arrows owns KInjectiveExactSquare sourceIso/leftUnit/rightUnit/delta and def-sf-native-sectionwise-module-presentation owns nativeModuleCoefficientIso (.choose of the coefficient-realization theorem, which this node cites)/nativeToOrdinaryModules. Both match the source and have verbatim records; no other owner exists; the item uses no theorem from either module. Re-checked hearts, coefficient clauses, open/proper comparisons, normalization, CommShift, hypotheses, universes, docstrings, sorry-only proofs and the verbatim lean.statement. Advisories: the naturality conjunct is automatic; the LocallyFiniteCoefficientRingRealization import is redundant (H9); the second reading is the worker's own (H11). No compile because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T131503-L-2945108",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

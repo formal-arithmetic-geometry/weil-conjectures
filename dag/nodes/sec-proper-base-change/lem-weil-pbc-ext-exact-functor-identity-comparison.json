@@ -86,7 +86,32 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Abelian.Ext.exactFunctorIdentityComparison"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Abelian.Ext.exactFunctorIdentityComparison",
+     "module": "WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison",
+     "lines": [
+      51,
+      122
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -118,5 +143,31 @@
   "landing": "20261020T145443-L-2396077",
   "kind": "interface",
   "note": "independent cc review: removed Sheaf exactFunctorIdentityComparisonSheaf vs live twin WeilConjectures exactFunctorIdentityComparison (identical signature, retire-items.tsv row 108); adapted ScalarAbelianExtFactorization diff (import, name, whitespace wrap) compiled via lcompile --all"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with small Ext groups [def-pc-ext], $F:\\mathcal A\\to\\mathcal A$ an additive functor preserving finite limits and finite colimits, and $e:F\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal A}$ a natural isomorphism. For objects $A,B\\in\\mathcal A$, $n\\geq0$, and $x\\in\\operatorname{Ext}^n_{\\mathcal A}(A,B)$, use the termwise exact functor on derived categories to define $F_*x$. Write $\\operatorname{mk}_0(a)$ for the degree-zero Ext class of a morphism $a$. Then\n$$\\operatorname{mk}_0(e_B)\\circ F_*x=x\\circ\\operatorname{mk}_0(e_A).$$",
+  "proof": [
+   {
+    "text": "Since $F$ preserves finite limits and finite colimits, it acts termwise on complexes and preserves quasi-isomorphisms, so it induces a functor on the derived category. The termwise identity functor induces the identity, and $e$ induces a natural isomorphism from the induced functor $F$ to the identity. This follows from the universal property of the localization [def-weil-abstract-derived-category]. The components of this isomorphism commute with shifts because $e$ acts termwise.",
+    "uses": [
+     "def-weil-abstract-derived-category"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By [def-pc-ext], $x$ is a morphism $A[0]\\to B[0][n]$ in the derived category. Apply naturality of the induced isomorphism to $x$. The source component is $\\operatorname{mk}_0(e_A)$, the target component is $\\operatorname{mk}_0(e_B)[n]$, and the identity functor leaves $x$ unchanged. This gives exactly the asserted equality $\\operatorname{mk}_0(e_B)\\circ F_*x=x\\circ\\operatorname{mk}_0(e_A)$.",
+    "uses": [
+     "def-pc-ext"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

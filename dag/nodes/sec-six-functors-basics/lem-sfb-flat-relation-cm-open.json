@@ -1,0 +1,430 @@
+{
+ "id": "lem-sfb-flat-relation-cm-open",
+ "kind": "statement",
+ "title": "Cohen--Macaulay open restriction meeting every orbit",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $V,R$ be $S$-schemes. An equivalence relation $(s,t):R\\to V\\times_SV$ [def-pc-fibre-product] means that for every $S$-scheme $T$ the map on sections is injective and identifies $R(T)$ with an equivalence relation on $V(T)$. A morphism $f:X\\to Y$ is called Cohen--Macaulay here if it is flat [def-weil-flat-morphism] and every local ring of every scheme-theoretic fibre [def-pc-scheme-fibre] is Noetherian [def-weil-pbc-noetherian-ring], with depth [def-weil-pbc-depth] equal to Krull dimension [def-weil-pbc-krull-dimension-ring]. Assume $s,t$ are flat and locally of finite presentation [def-sbc-locally-finite-presentation]. There is an open subscheme $W\\subseteq V$ [def-weil-open-immersion] such that the restricted relation $R_W=W\\times_{V,t}R\\times_{s,V}W$ has Cohen--Macaulay, locally finitely presented projections to $W$, and the map $h_W=s\\circ\\operatorname{pr}_R:W\\times_{V,t}R\\to V$ is surjective, flat and locally of finite presentation.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0460 (lemma-make-CM), clauses (4),(5), specialized to equivalence relations; h_W is the restriction of s to the open t^{-1}(W). Definition Tag 045R (definition-CM) in more-morphisms.tex."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For any flat locally finitely presented $f:X\\to Y$, let $C_f$ be the set of points where the fibre local ring has depth equal to dimension. Its fibres are locally Noetherian by [lem-sbc-restricted-fibre-locally-noetherian], taking the open to be all of $Y$. Thus this is precisely its Cohen--Macaulay locus as defined in the statement, and it is open by [lem-sbc-fibre-cohen-macaulay-locus-open].",
+   "uses": [
+    "lem-sbc-restricted-fibre-locally-noetherian",
+    "lem-sbc-fibre-cohen-macaulay-locus-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 045R, definition-CM; Tag 045U, lemma-flat-finite-presentation-CM-open (1),(2)"
+   }
+  },
+  {
+   "text": "These opens meet the compatibility hypotheses of [lem-sfb-relation-open-locus-descent]. Indeed for a cartesian square with flat locally finitely presented vertical maps $f,f'$, [lem-weil-pbc-fibre-of-base-change] identifies the fibre at $y'$ with $X_y\\times_{\\kappa(y)}\\kappa(y')$. The fibre $X_y$ is locally of finite type over $\\kappa(y)$: on an affine presentation $B=A[x_1,\\ldots,x_n]/(q_1,\\ldots,q_m)$ its fibre algebra is $\\kappa(y)[x_1,\\ldots,x_n]/(\\bar q_1,\\ldots,\\bar q_m)$. The first assertion of [lem-pur-cohen-macaulay-field-extension] therefore gives $x'\\in C_{f'}$ if and only if $\\operatorname{pr}_X(x')\\in C_f$. It requires no Noetherian hypothesis on $Y$ or $Y'$. Isomorphisms of morphisms induce isomorphisms of fibre local rings; transporting regular sequences and prime chains preserves depth and dimension. Hence $C_f$ is also invariant under these isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "lem-pur-cohen-macaulay-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 045U, lemma-flat-finite-presentation-CM-open (4); algebra.tex, Tag 00RJ, lemma-extend-field-CM-locus"
+   }
+  },
+  {
+   "text": "Reflexivity evaluated at $T=V$ gives the unique $e:V\\to R$ over $(\\mathrm{id},\\mathrm{id})$. Symmetry evaluated at $T=R$ gives $i:R\\to R$ over $(t,s)$; injectivity on sections gives $i^2=\\mathrm{id}$. Apply [lem-sfb-relation-open-locus-descent] to the assignment $D_f=C_f$. We obtain the open $W=e^{-1}(C_s)$ with $t^{-1}(W)=C_s$. Since $s i=t$, the fibre local rings for $t$ at $r$ and for $s$ at $i(r)$ are isomorphic. Thus $C_t=i^{-1}(C_s)=s^{-1}(W)$.",
+   "uses": [
+    "lem-sfb-relation-open-locus-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0460, lemma-make-CM, proof of (1),(2), using Tag 04LH"
+   }
+  },
+  {
+   "text": "The source of $h_W$ is the open $t^{-1}(W)$ of $R$ by the defining universal property of the fibre product. By [lem-trf-flat-lfp-cm-locus-fibre-dense], $C_s\\cap R_v$ is dense in each fibre $R_v$ of $s$. Every such fibre is nonempty: $e(v)$ is a point over $v$. Applying density to the nonempty open subset $R_v$ itself gives a point in $C_s\\cap R_v=t^{-1}(W)\\cap R_v$. Therefore $h_W$ is surjective. This also covers $V=\\varnothing$, when surjectivity is vacuous.",
+   "uses": [
+    "lem-trf-flat-lfp-cm-locus-fibre-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0460, lemma-make-CM, proof of (3),(4); more-morphisms.tex, Tag 045U (3)"
+   }
+  },
+  {
+   "text": "An open inclusion is etale by [lem-weil-pbc-open-immersion-etale]. Consequently precomposing either $s$ or $t$ with any source-open inclusion preserves flatness and local finite presentation by clause (i) of [lem-sfb-scheme-etale-source-target-properties]. In particular $h_W=s|_{t^{-1}(W)}$ is flat and locally of finite presentation. The open $R_W=t^{-1}(W)\\cap s^{-1}(W)$ is the indicated iterated fibre product, by its universal property. Its two projections factor uniquely through $W$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0460, lemma-make-CM (5); groupoids.tex, restriction construction; restrictions to source opens"
+   }
+  },
+  {
+   "text": "Write $j:W\\hookrightarrow V$ and $k:R_W\\hookrightarrow R$. For each projection $p:R_W\\to W$, the square $j p=s k$ or $j p=t k$ has etale horizontal maps $k,j$. The commutative-square clause of [lem-sfb-scheme-etale-source-target-properties] gives flatness and local finite presentation of $p$. At a point of $R_W$, its fibre over $w\\in W$ is the open restriction of the corresponding fibre of $s$ or $t$ over $j(w)$. Indeed [def-weil-open-immersion] identifies $\\mathcal O_{W,w}$ with $\\mathcal O_{V,j(w)}$, hence their residue fields, and the fibre-product universal property identifies this fibre with the inverse image of $R_W$ in the original fibre. Its local ring is therefore the same fibre local ring. Since $R_W\\subset C_s\\cap C_t$, that ring is Noetherian and has depth equal to dimension. Both projections are Cohen--Macaulay.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0460, lemma-make-CM (5); more-morphisms.tex, Tag 045R, definition-CM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-restricted-fibre-locally-noetherian",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-pur-cohen-macaulay-field-extension",
+  "lem-sfb-relation-open-locus-descent",
+  "lem-trf-flat-lfp-cm-locus-fibre-dense",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0460, lemma-make-CM (1)-(5), with generic locus descent isolated from Tag 04LH and CM base change verified by Tag 00RJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented equivalence relation on schemes admits an open restriction with Cohen Macaulay projections meeting every orbit",
+   "results": {
+    "t": "2026-10-23T11:52:30Z",
+    "tool": "leanfinder",
+    "query": "A flat locally finitely presented equivalence relation on schemes admits an open restriction with Cohen Macaulay projections meeting every orbit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth"
+    ],
+    "digest": "684bb26ece617a76"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat scheme groupoid has an open subset meeting every orbit whose restricted source and target maps have Cohen Macaulay fibres",
+   "results": {
+    "t": "2026-10-23T11:56:23Z",
+    "tool": "leanfinder",
+    "query": "Flat scheme groupoid has an open subset meeting every orbit whose restricted source and target maps have Cohen Macaulay fibres",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.Flat.of_stalkMap",
+     "Algebra.isOpen_smoothLocus",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.Flat.iff_flat_stalkMap"
+    ],
+    "digest": "a13c3f26397c01e8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat locally finitely presented scheme equivalence relation has an open Cohen Macaulay restriction whose saturation surjects onto the original scheme",
+   "results": {
+    "t": "2026-10-23T11:56:13Z",
+    "tool": "leansearch",
+    "query": "A flat locally finitely presented scheme equivalence relation has an open Cohen Macaulay restriction whose saturation surjects onto the original scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "AlgebraicGeometry.opensRestrict",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.affineOpensRestrict",
+     "AlgebraicGeometry.Flat.instResLE",
+     "AlgebraicGeometry.flat_iff"
+    ],
+    "digest": "4af63cdeb0e01c14"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Flat\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T11:56:12Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry.Flat\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ohen.?[Mm]acaulay|[Mm]ax[Ss]lice|[Ss]lice.*[Gg]roupoid",
+   "results": {
+    "t": "2026-10-23T11:56:13Z",
+    "tool": "grep",
+    "query": "[Cc]ohen.?[Mm]acaulay|[Mm]ax[Ss]lice|[Ss]lice.*[Gg]roupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual scheme morphisms, smooth charts, topological quotients, or categorical slice equivalences; none states this equivalence-relation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented scheme equivalence relation has a Cohen Macaulay open restriction meeting every orbit",
+   "results": {
+    "t": "2026-10-23T13:02:17Z",
+    "tool": "leanfinder",
+    "query": "A flat locally finitely presented scheme equivalence relation has a Cohen Macaulay open restriction meeting every orbit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Flat",
+     "Algebra.isOpen_smoothLocus",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.isSmoothOfRelativeDimension_iff"
+    ],
+    "digest": "ff3994a7dceea33a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are individual morphism, smooth-locus or descent-property lemmas; none gives a Cohen--Macaulay open restriction meeting all equivalence classes"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ohen.?[Mm]acaulay|[Ee]quivalence[Rr]elation.*[Ff]lat",
+   "results": {
+    "t": "2026-10-23T13:03:33Z",
+    "tool": "grep",
+    "query": "[Cc]ohen.?[Mm]acaulay|[Ee]quivalence[Rr]elation.*[Ff]lat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are individual morphism, smooth-locus or descent-property lemmas; none gives a Cohen--Macaulay open restriction meeting all equivalence classes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen Macaulay open presentation of a flat scheme groupoid",
+   "results": {
+    "t": "2026-10-23T13:03:33Z",
+    "tool": "leansearch",
+    "query": "Cohen Macaulay open presentation of a flat scheme groupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.Flat.mk",
+     "AlgebraicGeometry.Flat.iff_flat_stalkMap"
+    ],
+    "digest": "b3171828655afc5e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are individual morphism, smooth-locus or descent-property lemmas; none gives a Cohen--Macaulay open restriction meeting all equivalence classes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Flat\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T13:03:33Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry.Flat\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are individual morphism, smooth-locus or descent-property lemmas; none gives a Cohen--Macaulay open restriction meeting all equivalence classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence relation of schemes with flat locally finitely presented projections admits a fibrewise Cohen Macaulay open meeting all equivalence classes",
+   "results": {
+    "t": "2026-10-23T13:06:36Z",
+    "tool": "leanfinder",
+    "query": "An equivalence relation of schemes with flat locally finitely presented projections admits a fibrewise Cohen Macaulay open meeting all equivalence classes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.Flat.instIsMultiplicativeScheme"
+    ],
+    "digest": "ac4c754ca68773b7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are individual morphism, smooth-locus or descent-property lemmas; none gives a Cohen--Macaulay open restriction meeting all equivalence classes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-space-relation-slicing",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 0460 (lemma-make-CM), clauses (4),(5), specialized to equivalence relations; h_W is the restriction of s to the open t^{-1}(W). Definition Tag 045R (definition-CM) in more-morphisms.tex.",
+   "via": [
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-relation-cm-open",
+  "worker": "stage1",
+  "summary": "Followed Tag 0460, constructing W from the CM locus of s and the identity section. Reused existing CM openness, density and arbitrary field-extension lemmas, and scheme etale restriction calculus. One new statement-only generic locus-descent lemma from Tag 04LH carries the translation comparison, rather than restating a clause of the item. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 0460 (lemma-make-CM), clauses (4),(5), specialized to equivalence relations; h_W is the restriction of s to the open t^{-1}(W). Definition Tag 045R (definition-CM) in more-morphisms.tex. Current latest blueprint direct-images proof (3) supplies the enclosing compactification route; the created prerequisite chain specializes it via the recorded moduli/atlas inputs. The ancestor command returns None: retain the existing null ancestor and extend its via list for the new node.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-restricted-fibre-locally-noetherian",
+    "why": "Local finite presentation gives locally Noetherian fibres without assuming the base Noetherian. No node in this unit states this generic fact."
+   },
+   {
+    "node": "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "why": "Generic CM-locus openness, used for arbitrary flat locally finitely presented scheme maps. No node in this unit states this generic fact."
+   },
+   {
+    "node": "lem-pur-cohen-macaulay-field-extension",
+    "why": "Only the first assertion, CM invariance for a locally finite-type scheme under arbitrary field extension, is used; no purity theorem or Noetherian-base consequence is used. No node in this unit states this generic fact."
+   },
+   {
+    "node": "lem-trf-flat-lfp-cm-locus-fibre-dense",
+    "why": "Only the generic algebraic CM-locus density theorem is used, not a trace-formula argument. No node in this unit states this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-restricted-fibre-locally-noetherian",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-pur-cohen-macaulay-field-extension",
+  "lem-trf-flat-lfp-cm-locus-fibre-dense"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-b1a53409c",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-b1a53409c (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, and Stacks 0460 and 04LH with proofs and remark-local-source-apply(5). The item statement is unchanged from the Q142 snapshot. It matches 0460 (4),(5) specialized to equivalence relations, with CM as defined in 045R; no hypothesis was added or dropped. Steps: (1) restricted-fibre locally Noetherian with U=T plus CM-locus openness. (2) Fibre of a base change (Mathlib leaf) plus only the first assertion of lem-pur-cohen-macaulay-field-extension (any field extension, no Noetherian base), plus isomorphism invariance. (3) e and i by Yoneda; the new node gives W=e^{-1}(C_s) with t^{-1}(W)=C_s, and C_t=i^{-1}(C_s)=s^{-1}(W) since t∘i=s. (4) Fibre density; e(v) makes each fibre nonempty, so s restricted to t^{-1}(W) is surjective. (5),(6) The etale clauses (i) and the commutative-square clause, with fibre local rings unchanged under open restriction. New node lem-sfb-relation-open-locus-descent: I proved it independently via P=R×_{s,V,t}R≅R×_{s,V,s}R and the section (e∘t, id). Edge cases (empty, diagonal relation, constant assignments) hold. It is generic, not a clause of the item and not a duplicate (rg -L for 04LH, lemma-local-source, 0460 and relation/identity-section nodes). It is statement-only with real searches. The off-unit tool_uses are generic and accepted. Batch-5: lem-trf-flat-lfp-cm-locus-fibre-dense is generic Stacks 045U, and lem-trf-smooth-composition (reached through scheme-etale-source-target-properties) is generic composition of smooth maps. Neither is part of the trace formula or Poincare duality or their proofs, so both are accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatRelationCMOpen",
+  "declaration": "AlgebraicGeometry.exists_flat_relation_cm_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatRelationCMOpen.lean",
+  "statement": "theorem exists_flat_relation_cm_open {S : Scheme.{u}} {V R : Over S} (s t : R ⟶ V) (hinj : ∀ T : Over S, Function.Injective (fun r : T ⟶ R ↦ (r ≫ s, r ≫ t))) (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [Flat s.left] [Flat t.left] [LocallyOfFinitePresentation s.left] [LocallyOfFinitePresentation t.left] : ∃ W : V.left.Opens, (∀ p : pullback (pullback.snd W.ι t.left ≫ s.left) W.ι ⟶ W.toScheme, (p = pullback.fst (pullback.snd W.ι t.left ≫ s.left) W.ι ≫ pullback.fst W.ι t.left ∨ p = pullback.snd (pullback.snd W.ι t.left ≫ s.left) W.ι) → Flat p ∧ LocallyOfFinitePresentation p ∧ ∀ (w : W.toScheme) (x : p.fiber w), IsNoetherianRing ((p.fiber w).presheaf.stalk x) ∧ (IsLocalRing.depth (R := (p.fiber w).presheaf.stalk x) ((p.fiber w).presheaf.stalk x) : WithBot ℕ∞) = ringKrullDim ((p.fiber w).presheaf.stalk x)) ∧ Surjective (pullback.snd W.ι t.left ≫ s.left) ∧ Flat (pullback.snd W.ι t.left ≫ s.left) ∧ LocallyOfFinitePresentation (pullback.snd W.ι t.left ≫ s.left)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a629f59b9",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Read node, Stacks 0460(1)-(5) and 045R, all 10 stmt_dep records, Depth.lean, the CM-locus theorem convention and the proof_dep records. Lean matches clause by clause: sectionwise injectivity and Equivalence over Over S at universe u; flat and lfp on s.left, t.left only; R_W = pullback (pullback.snd W.ι t ≫ s) W.ι with both canonical projections (the disjunction is equivalent to the conjunction); CM inline as Flat + Noetherian stalk + depth = ringKrullDim on every fibre point, as in isOpen_fibre_depth_eq_ringKrullDim; h_W surjective, flat, lfp. Edge cases (empty V, coinciding projections, non-Noetherian base, one universe) are fine. No CM definition exists in the DAG, Mathlib or the project. Records and proof_dep imports are correct; only sorry; docstrings complete; statement verbatim; live node unchanged except the lean record. No findings; no compile since no files changed."
+ }
+}

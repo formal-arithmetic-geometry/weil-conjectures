@@ -5,7 +5,7 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.Paper.CompletedPullbackReduction
+public import Sheaf.Paper.CompletedPullbackReductionData
 import all Sheaf.Paper.CompletedConstantAlgebraFlatQuotients
 import all Sheaf.Paper.OrdinaryCommonQuotientTower
 import all Sheaf.Paper.AdicCoefficientDatum

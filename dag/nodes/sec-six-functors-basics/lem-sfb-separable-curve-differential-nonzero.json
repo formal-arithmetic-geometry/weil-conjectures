@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-separable-curve-differential-nonzero",
+ "kind": "statement",
+ "title": "Finite separability makes the differential of a smooth curve map nonzero",
+ "statement": "Let $k$ be a field [def-weil-field], let $X,Y$ be curves over $k$, meaning separated integral schemes of finite type and dimension one [def-pc-curve], and suppose both are smooth over $k$ [def-sbc-smooth-morphisms]. Let $f:X\\to Y$ be a dominant $k$-morphism (its image is dense in $Y$), with induced finite separable extension $k(X)/k(Y)$ of function fields [def-sc-function-field], [def-pc-field-tower]. Write $\\Omega_{Z/k}$ for the relative differential sheaf [def-sc-relative-differential-sheaf]. Then the canonical map\n$$\\mathrm df:f^*\\Omega_{Y/k}\\longrightarrow\\Omega_{X/k}$$\n[def-a1-relative-differentials-pullback-map], with module pullback [def-pc-module-pullback], is nonzero.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1C (curves-lemma-generically-etale), implication (5) implies (1)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-curve",
+  "def-sbc-smooth-morphisms",
+  "def-sc-function-field",
+  "def-pc-field-tower",
+  "def-sc-relative-differential-sheaf",
+  "def-a1-relative-differentials-pullback-map",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=k(Y)$ and $L=k(X)$. Apply [lem-sfb-smooth-curve-generic-differentials] to each smooth curve. We obtain the germ-normalized isomorphisms $\\alpha_Y:(\\Omega_{Y/k})_{\\eta_Y}\\cong\\Omega_{K/k}$ and $\\alpha_X:(\\Omega_{X/k})_{\\eta_X}\\cong\\Omega_{L/k}$. Their targets have dimension one; in particular $\\Omega_{L/k}\\ne0$.",
+   "uses": [
+    "lem-sfb-smooth-curve-generic-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C (curves-lemma-generically-etale), implication (5) implies (1)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dominant-generic-differential-comparison] to $f$ and these two isomorphisms. Its hypotheses require only integrality, dominance and their formula on germs, all supplied above. It sends $\\eta_X$ to $\\eta_Y$ and identifies the function-field map with the induced stalk map $\\varphi:K\\to L$. Its isomorphism $\\beta_f$ identifies $\\alpha_X\\circ(df)_{\\eta_X}\\circ\\beta_f^{-1}$ with $T:L\\otimes_K\\Omega_{K/k}\\to\\Omega_{L/k}$, $a\\otimes db\\mapsto a\\,d\\varphi(b)$.",
+   "uses": [
+    "lem-sfb-dominant-generic-differential-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C (curves-lemma-generically-etale), implication (5) implies (1)."
+   }
+  },
+  {
+   "text": "The given finite separable extension is this induced $L/K$. For the field tower $k\\to K\\to L$, [lem-weil-pbc-separable-algebraic-differentials-base-change] says exactly that $T$ is an isomorphism. Since its target is nonzero, choose a nonzero vector $v$ there: $T(T^{-1}v)=v\\ne0$. Thus $T$ and, by the two coordinate isomorphisms, $(df)_{\\eta_X}$ are nonzero.",
+   "uses": [
+    "lem-weil-pbc-separable-algebraic-differentials-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090W (lemma-characterize-separable-algebraic-field-extensions), finite separable implies formally etale; Tag 031W (lemma-derivative-zero-pth-power), proof, differential base-change computation"
+   }
+  },
+  {
+   "text": "By the germ formula in [def-weil-pbc-module-stalk], a sheaf morphism $u$ acts by $u_x(s_x)=u(s)_x$. If $df=0$, this is the zero map at every point, since the image of every section is zero; in particular $(df)_{\\eta_X}=0$. This contradicts Step 3. Therefore $df\\ne0$.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C (curves-lemma-generically-etale), implication (5) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-curve-generic-differentials",
+  "lem-sfb-dominant-generic-differential-comparison",
+  "lem-weil-pbc-separable-algebraic-differentials-base-change",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1C (lemma-generically-etale), (5) implies (1): expansion at the generic point"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of smooth integral curves over a field, a finite separable extension of function fields implies that the pullback map on differential line bundles is nonzero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  Nontrivial ↑T.tensor\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, the pushout $T.tensor$ in the category of commutative rings constructed from the residue field maps is\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {F : Type u} {K : Type v} {L : Type w} [inst : CommRing R] [inst_1 : Field F] [inst_2 : Field K]\\n  [inst_3 : Field L] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : DecidableEq L] [inst_7 : Algebra R F] [inst_8 : Algebra R K] [inst_9 : A\", \"doc\": \"Given fields $F$, $K$, and $L$ with $R$-algebra structures and scalar tower compatibility $R → F → K$ and $R → F → L$, for any algebra homomorphism $f : K → L$ over $F$ and point $P$ on an affine Weie\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Jacobian R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst_9\", \"doc\": \"Given an injective algebra homomorphism $ f : A \\\\to B $, a point $ P $ on the Jacobian of a Weierstrass curve $ W' $ over $ A $ is nonsingular if and only if its image $ f \\\\circ P $ is nonsingular on \"}\n  {\"name\": \"WeierstrassCurve.Affine.baseChange_slope\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : Algebra R S] [inst_5 : DecidableEq F]\\n  [inst_6 : DecidableEq K] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [IsScalarT\", \"doc\": \"For an affine Weierstrass curve $ W' $ over a field $ F $, given an $ S $-algebra homomorphism $ f : F → K $, the slope of two points $ (x_1, y_1) $ and $ (x_2, y_2) $ computed after base change to $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_injective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the group homomorphism from $ W'(F) $ to $ W'(K) $ ind\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.integral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {K : Type u_2} {inst_1 : Field K} {inst_2 : Algebra R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsIntegral R W], ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For any commutative ring $ R $, field $ K $ equipped with an $ R $-algebra structure, and integral Weierstrass curve $ W $ over $ K $, there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ su\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the geometric theorem; polynomial derivatives, field-level differentials, Weierstrass curve maps and scheme pullback constructors do not give this assertion in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"differential\", \"separable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the geometric theorem; polynomial derivatives, field-level differentials, Weierstrass curve maps and scheme pullback constructors do not give this assertion in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "generically.?etale|separable.*differential|differential.*separable",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the geometric theorem; polynomial derivatives, field-level differentials, Weierstrass curve maps and scheme pullback constructors do not give this assertion in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separable morphism of smooth algebraic curves has nonzero differential at the generic point",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.Separable.aeval_derivative_ne_zero\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"[Nontrivial S] [Algebra R S] {p : R[X]} (h : p.Separable) {x : S} (hx : aeval x p = 0) : aeval x (derivative p) ≠ 0\", \"doc\": \"If $ p $ is a separable polynomial over a commutative semiring $ R $, and $ x $ is a root of $ p $ in an $ R $-algebra $ S $, then the formal derivative of $ p $ evaluated at $ x $ is nonzero, i.e., $\"}\n  {\"name\": \"Polynomial.separable_iff_derivative_ne_zero\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"{f : F[X]} (hf : Irreducible f) : f.Separable ↔ derivative f ≠ 0\", \"doc\": \"An irreducible polynomial $f$ over a field is separable if and only if its formal derivative $f'$ is not the zero polynomial.\"}\n  {\"name\": \"Polynomial.Separable.eval₂_derivative_ne_zero\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"[Nontrivial S] (f : R →+* S) {p : R[X]} (h : p.Separable) {x : S} (hx : p.eval₂ f x = 0) : (derivative p).eval₂ f x ≠ 0\", \"doc\": \"Let $ S $ be a non-trivial ring, $ f : R \\\\to S $ a ring homomorphism, and $ p \\\\in R[X] $ a separable polynomial. If $ x \\\\in S $ satisfies $ \\\\operatorname{eval}_2(f, x)(p) = 0 $, then $ \\\\operatorname{e\"}\n  {\"name\": \"Polynomial.Separable\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"(f : R[X]) : Prop\", \"doc\": \"A polynomial $ f $ is separable if it is coprime with its derivative, meaning there exist polynomials $ a $ and $ b $ such that $ a f + b f' = 1 $.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"IsSeparable\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"(x : K) : Prop\", \"doc\": \"An element $ x $ in the field $ K $ is called separable over $ F $ if its minimal polynomial over $ F $ is separable, meaning the polynomial and its derivative are coprime.\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Unramified.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyUnramified K L\", \"doc\": \"If $ K $ is a separable algebra over $ L $, then $ K $ is formally unramified over $ L $. This follows from the fact that separability implies the vanishing of Kähler differentials, which characterize\"}\n  {\"name\": \"Polynomial.separable_def'\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"(f : R[X]) : f.Separable ↔ ∃ a b : R[X], a * f + b * (derivative f) = 1\", \"doc\": \"A polynomial $ f $ is separable if it is coprime with its derivative $ f' $, meaning there exist polynomials $ a $ and $ b $ such that $ a f + b f' = 1 $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the geometric theorem; polynomial derivatives, field-level differentials, Weierstrass curve maps and scheme pullback constructors do not give this assertion in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For smooth curves, the map from pullback Kahler differentials to source differentials is nonzero if the map of function fields is finite separable",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"differentIdeal_ne_bot\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Different\", \"type\": \"∀ {A : Type u_1} {B : Type u_3} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [inst_3 : IsDomain A]\\n  [IsIntegrallyClosed A] [inst_5 : IsDedekindDomain B] [inst_6 : Module.IsTorsionFree A B] [Module.Finite A B]\\n  [Algebra.IsSeparable (FractionRing A) (FractionRing B)], differentId\", \"doc\": \"For a finite extension $ B $ of a Dedekind domain $ A $, if the field extension of their fraction rings is separable, then the different ideal of $ B $ over $ A $ is non-zero.\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {P : Algebra.Extension R S} →\\n            {R' : Type u'} →\\n              {S' : Type v'} →\\n                [inst_3 : CommRing R'] →\\n                  [inst_4 : CommRing S\", \"doc\": \"Given an algebra extension homomorphism $ f : P \\to P' $, this constructs the induced linear map $ P.\\text{CotangentSpace} \\to P'.\\text{CotangentSpace} $ over $ S $, defined by restricting scalars and com\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Subsingleton (Algebra.H1Cotangent R S)] {I : Type u_3}\\n  (b : Module.Basis I S Ω[S⁄R]), Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S) → Algebra.IsStandardSmoot\", \"doc\": \"If $ S $ is finitely presented over $ R $, the first cohomology group $ H^1 $ of the cotangent complex of $ S $ over $ R $ is trivial, and there exists a basis for the module of Kähler differentials $\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the geometric theorem; polynomial derivatives, field-level differentials, Weierstrass curve maps and scheme pullback constructors do not give this assertion in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "generically.?etale|separable.*differential|differential.*separable",
+   "results": "{\"t\": \"2026-10-22T04:31:57Z\", \"tool\": \"grep\", \"query\": \"generically.?etale|separable.*differential|differential.*separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations give algebraic, polynomial or manifold differential facts and general scheme properties, not this geometric sheaf-map assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The differential sheaf map of a finite separable morphism of smooth curves is nonzero",
+   "results": "{\"t\": \"2026-10-22T04:31:57Z\", \"tool\": \"leansearch\", \"query\": \"The differential sheaf map of a finite separable morphism of smooth curves is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.trace_ne_zero\", \"differentIdeal_ne_bot\", \"Polynomial.Separable.eval₂_derivative_ne_zero\", \"Polynomial.Separable.aeval_derivative_ne_zero\", \"CommRingCat.KaehlerDifferential.map\", \"Polynomial.Separable.ne_zero\", \"Polynomial.separable_iff_derivative_ne_zero\", \"hfdifferential\"], \"digest\": \"03ee155952c25171\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations give algebraic, polynomial or manifold differential facts and general scheme properties, not this geometric sheaf-map assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"differential\", \"separable\"",
+   "results": "{\"t\": \"2026-10-22T04:31:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"differential\\\", \\\"separable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations give algebraic, polynomial or manifold differential facts and general scheme properties, not this geometric sheaf-map assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant morphism of smooth integral curves whose function field extension is finite separable has nonzero map on differential sheaves",
+   "results": "{\"t\": \"2026-10-22T04:31:59Z\", \"tool\": \"leanfinder\", \"query\": \"A dominant morphism of smooth integral curves whose function field extension is finite separable has nonzero map on differential sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"WeierstrassCurve.Affine.Point.map_some\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Differential.algHom_deriv\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"Differential.differentialFiniteDimensional\"], \"digest\": \"9a6fe93bab82ad01\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations give algebraic, polynomial or manifold differential facts and general scheme properties, not this geometric sheaf-map assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite separable function field extensions make the map on Kahler differential sheaves of smooth curves nonzero at the generic point",
+   "results": "{\"t\": \"2026-10-22T04:32:20Z\", \"tool\": \"leanfinder\", \"query\": \"Finite separable function field extensions make the map on Kahler differential sheaves of smooth curves nonzero at the generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"aeval_derivative_mem_differentIdeal\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.unramifiedLocus_eq_compl_support\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\"], \"digest\": \"342e30eaa72dcb07\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations give algebraic, polynomial or manifold differential facts and general scheme properties, not this geometric sheaf-map assertion or a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-riemann-hurwitz-numerical",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), the direct-image constructibility/alteration auxiliary route already recorded through the high-genus-cover and Riemann--Hurwitz nodes: this lemma supplies the nonzero differential for the separable curve factor (Stacks 0C1C (5) implies (1)).",
+   "via": [
+    "lem-sfb-curve-riemann-hurwitz-numerical",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-separable-curve-differential-nonzero",
+  "worker": "stage1",
+  "summary": "Rebased the accepted two-node re-split after the current L return at head 7e5a5c77af9. Compared all fifteen saved dependency statements with the current DAG: none changed. Preserved all current non-stage-1 fields and the unchanged statement. Re-read the normalized generic-line and dominant-map comparisons and finite-separable base-change statement; strengthened the final elementary step with an explicit citation of the current module-stalk germ formula. Added its verbatim citation quote. The two unsplit nodes retain all affine localization, rank and map-compatibility work of the original proof; the parent remains a short four-step assembly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), the direct-image constructibility/alteration auxiliary route already recorded through the high-genus-cover and Riemann--Hurwitz nodes: this lemma supplies the nonzero differential for the separable curve factor (Stacks 0C1C (5) implies (1)). This preserves the existing auxiliary curve route; the new nodes supply its generic differential computation. The current blueprint does not itself expand this auxiliary argument.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sc-dimension-locally-algebraic"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-781d4ee2e",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-781d4ee2e (reviewer sub-agent of L); spot-checked: Fourth head of this re-split (51a6 FIX, 611522 FIX, 7e5a FIX; every landing refused for 'side completion never promoted'). The live item still has the old six-step proof and the re-split note is still released, so the re-split is still owed. Diff against the 7e5a snapshot: both new nodes are byte-identical, so the def-weil-scheme-over-base fix was lost again. The item's only changes are in step 4 and split_report. Step 4 now cites def-weil-pbc-module-stalk; that node does state phi_x(s_x)=phi(s)_x, so the zero-germ step is correct. Re-split check: old step 1 is divided between the two new nodes (generic point to the comparison node, affine fraction field to the curve node). Old steps 2-3 (rank one by 02G1 and 0A21(3), and the 00RT(2) localization with da to d(a/1)) went to smooth-curve-generic-differentials. Old step 4 (pullback stalk via module-stalk-pullback, the tensor flip, and the generator check through def-a1 1⊗da to d(h#a)) went to dominant-generic-differential-comparison. Old steps 5-6 stay in the item as a four-step assembly using the mathlib leaf separable-algebraic-differentials-base-change. Nothing was summarised away, the nodes are of comparable size and neither restates the item. Both statements are true. Edge cases checked: A1, imperfect k, identity, open immersion, and Frobenius (zero map, allowed because the comparison node has no separability hypothesis). The source is Stacks curves.tex 0C1C (5)=>(1); no SGA source is used. Duplicate search on the full current snapshot of 27,719 nodes found a1-smooth-curve-cotangent-generic-isomorphism (rank only, no normalized alpha), pc-vector-bundle-principal-parts, per-inseparable-differential-trace and sfb-smooth-derivation-zero-divisor (proper curves over algebraically closed k); none is a duplicate. B3 fault: 'integral k-schemes' and 'k-morphism' in the comparison node have no definition node. FIX: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-dominant-generic-differential-comparison.json adds def-weil-scheme-over-base to the statement citations and to stmt_deps; it is the same file as in 611522/7e5a, and these are its only changes against this head.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparableCurveDifferentialNonzero",
+  "declaration": "AlgebraicGeometry.relativeDifferentialsPullbackMap_ne_zero_of_finite_separable",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparableCurveDifferentialNonzero.lean",
+  "statement": "theorem relativeDifferentialsPullbackMap_ne_zero_of_finite_separable (k : Type u) [Field k] (X Y : Scheme.{u}) (g : Y ⟶ Spec (.of k)) (f : X ⟶ Y) [IsIntegralCurve g] [IsIntegralCurve (f ≫ g)] [Smooth g] [Smooth (f ≫ g)] [IsDominant f] [Algebra Y.functionField X.functionField] (hfield : Spec.map (CommRingCat.ofHom (algebraMap Y.functionField X.functionField)) ≫ Y.fromSpecFunctionField = X.fromSpecFunctionField ≫ f) [Module.Finite Y.functionField X.functionField] [Algebra.IsSeparable Y.functionField X.functionField] : g.relativeDifferentialsPullbackMap f ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63beb0780",
+  "group": "NH",
+  "result": "pass",
+  "note": "First S2 delivery; only the lean record changed from live; lean.statement matches the file verbatim; proof is sorry only; no definitions. Clause match: Field k; IsIntegralCurve g and (f≫g) (integral, separated, finite type, topologicalKrullDim=1 = def-pc-curve); Smooth g and (f≫g); f over k via the composite; IsDominant f; [Algebra k(Y) k(X)] pinned by hfield. fromSpecStalk is a preimmersion, hence mono, and Spec is fully faithful, so hfield determines the map uniquely; the generic stalk map satisfies it, so this is a genuine pin, not arbitrary. Module.Finite+IsSeparable = finite separable (def-pc-field-tower); conclusion relativeDifferentialsPullbackMap ≠ 0 is the recorded def-a1 map. Source curves.tex 2346-2389 (0C1C (5)⇒(1)) read; universes fine; edge cases identity, t^n, Frobenius excluded, non-proper and imperfect k covered. All imports exist live; docstrings carry source, blueprint and 6 steps; report sections present. Advisory: def-sfb-dominant-function-field-map (Hom.dominantFunctionFieldAlgebra, landed 2026-10-22) is the same induced algebra but is not citable at S2; the delivered pin is equivalent. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

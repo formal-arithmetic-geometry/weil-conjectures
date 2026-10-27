@@ -1,0 +1,227 @@
+{
+ "id": "lem-per-filtered-category-pseudococones",
+ "kind": "statement",
+ "title": "Functor categories out of a filtered colimit and coherent pseudococones",
+ "statement": "Let $J$ be a small filtered category and $D:J\\to\\mathsf{Cat}$ a strict functor with small categories as values [def-nagata-category, def-weil-size-convention, def-weil-pbc-category-colimit]. Let $C$ be the category formed by taking filtered colimits of the sets of objects and arrows, with the induced operations, and let $v_j:D(j)\\to C$ be its structure functors [lem-weil-pbc-filtered-colimit-categories]. For any category $\\mathcal A$ in the containing universe, form $\\operatorname{PCone}(D,\\mathcal A)$ as follows. An object consists of functors $A_j:D(j)\\to\\mathcal A$ and natural isomorphisms $\\theta_a:A_kD(a)\\xrightarrow{\\sim}A_j$ for $a:j\\to k$, with $\\theta_1=1$ and $\\theta_{ba}=\\theta_a\\circ(\\theta_bD(a))$; an arrow to $(B_j,\\eta_a)$ is a family of natural transformations $\\rho_j:A_j\\to B_j$ with $\\rho_j\\theta_a=\\eta_a(\\rho_kD(a))$. Restriction, with identity comparison isomorphisms, is an equivalence $\\operatorname{Fun}(C,\\mathcal A)\\simeq\\operatorname{PCone}(D,\\mathcal A)$, natural in $\\mathcal A$. In addition, if $K$ is small filtered and $w:K\\to J$ is final, meaning each comma category $(j\\downarrow w)$ is nonempty and connected, the induced functor $\\varinjlim_K D(wk)\\to C$ is an equivalence, compatible with the structure functors and these restriction equivalences. Objectwise equivalences between strict diagrams over $J$, equipped with coherent invertible natural comparisons along arrows, likewise induce equivalences of their filtered colimit categories compatible with their structure functors up to those comparisons.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04AX (section-directed-colimits), Tag 04E7 (lemma-cofinal), and Tag 004A (lemma-fibred-strict). The equivalence with pseudococones is the category-valued finite-representative argument extending these constructions; not attributed verbatim to one tag."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-categories",
+  "def-per-strict-diagram-pseudococones"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-per-filtered-pseudococone-effectivity] to obtain essential surjectivity of the specified restriction functor. This isolates exactly the construction of a functor from an arbitrary coherent pseudococone, not modification descent.",
+   "uses": [
+    "lem-per-filtered-pseudococone-effectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove full faithfulness directly from the supplied set-colimit universal properties. For a modification between restrictions, its compatibility square with equality comparisons says its components have equal complete arrows at objects related by a transition. Thus they define a cocone of sets with vertex Arrow(A). Mathlib CoconeTypes.IsColimit.exists_desc descends it even when A has larger universes. Object joint surjectivity identifies the descended arrow endpoints with F(X) and G(X); conjugate by these equalities. Arrow joint surjectivity reduces naturality to the stage naturality equation. The representative formula gives restriction equal to the original modification. Object joint surjectivity also shows that restriction is faithful. Postcomposition and its transformations commute with restriction definitionally, including proof irrelevance for coherence fields.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Combine the proved full faithfulness and Step 1 essential surjectivity with [lem-trf-fully-faithful-ess-surj-equivalence], using the IsEquivalence constructor, to obtain the restriction equivalence.",
+   "uses": [
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-weil-pbc-filtered-colimit-functor-descent] to descend every strictly compatible functor family. Object and arrow joint surjectivity prove uniqueness of such a descent, so the given set-presented cocone is an ordinary colimit in Cat. Do this for both c and cK. Apply the colimit dual of [lem-weil-pbc-initial-functor-limit], directly through Mathlib Functor.Final.isColimitWhiskerEquiv, in Cat. The two colimit cocones of w composed with D have canonically isomorphic vertices. Cat.equivOfIso gives q, and the colimit comparison equations give the required strict stage-leg equations. No new category structure or separate object/arrow comparison map is constructed.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-functor-descent",
+    "lem-weil-pbc-initial-functor-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For restriction compatibility, the stage functor equations identify the functor families after precomposition by q. Both comparison isomorphisms are whiskered equality isomorphisms; equality proof irrelevance identifies them after those stage equations. A private pseudococone extensionality lemma gives equality on objects. On modifications, the components are t evaluated at q(vK_k x) and t evaluated at v_(wk)x; the stage object equation gives their heterogeneous equality. Functor.hext then proves the stated equality of restriction functors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Finally let $E:J\\to\\mathsf{Cat}$ be another strict diagram, $e_j:D(j)\\to E(j)$ equivalences, and $\\sigma_a:E(a)e_j\\xrightarrow{\\sim}e_kD(a)$ coherent along identities and composition. Write $u_j:E(j)\\to C_E$ for the set-colimit functors. The family $u_je_j$ has pseudococone comparisons $u_k(\\sigma_a^{-1})$. Steps 1–3 produce $Q:C\\to C_E$ and coherent isomorphisms $\\lambda_j:Qv_j\\cong u_je_j$. Every object of $C_E$ is some $u_jy$, and $y\\cong e_jx$ for some $x$, proving essential surjectivity of $Q$. For fullness, move two source representatives to a common stage $j$. A morphism between their $Q$-images, conjugated by $\\lambda_j$, is represented at some $a:j\\to k$ by an arrow between $E(a)e_jx$ and $E(a)e_jy$. Conjugation by $\\sigma_a$ changes its endpoints to $e_kD(a)x$ and $e_kD(a)y$; fullness of $e_k$ lifts it to a stage arrow of $D(k)$. Naturality and coherence of $\\lambda$ show its image under $Q$ is the given morphism. For faithfulness, put two source arrows at one stage; if their $Q$-images agree, their conjugate $E$-arrows agree after a later transition by the Hom equality assertion of [lem-weil-pbc-filtered-colimit-categories]. Conjugating with $\\sigma$ and using faithfulness of the later $e_k$ makes the source arrows equal there, hence equal in $C$. Thus $Q$ is an equivalence by [lem-trf-fully-faithful-ess-surj-equivalence]. The displayed $\\lambda_j$, with their coherence equation, are the required compatibility with structure functors up to the given comparisons.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-categories",
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of representatives. The conjugation and modification identities below are an agent formulation extending that representative calculus; they are not asserted verbatim by this tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-filtered-pseudococone-effectivity",
+  "lem-trf-fully-faithful-ess-surj-equivalence",
+  "lem-weil-pbc-filtered-colimit-functor-descent",
+  "lem-weil-pbc-initial-functor-limit",
+  "lem-weil-pbc-filtered-colimit-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04AX finite-representative extension. Full faithfulness and vertex naturality are formalized directly from the set-colimit hypotheses. Final reindexing uses the proved strict descent theorem and the dual initial/final Mathlib colimit API in Cat. Object effectivity is split off as a strictly smaller theorem; Step 6 remains the original unproved objectwise-equivalence argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor, CategoryTheory.Limits.IsColimit",
+   "results": "{\"t\": \"2026-10-24T10:58:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pseudofunctor, CategoryTheory.Limits.IsColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary colimit presentations and reindexing do not state an equivalence with coherent pseudococones of functors and modifications."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo[Cc]o[cl]imit|[Bb]ico[cl]imit|[Pp]seudo[Cc]ocone|[Ff]iltered.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-24T10:58:42Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo[Cc]o[cl]imit|[Bb]ico[cl]imit|[Pp]seudo[Cc]ocone|[Ff]iltered.*[Cc]olimit\", \"sub\": \"CategoryTheory/Bicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary colimit presentations and reindexing do not state an equivalence with coherent pseudococones of functors and modifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor categories out of a filtered colimit of small categories are equivalent to categories of functors with coherent invertible transition comparisons",
+   "results": "{\"t\": \"2026-10-24T10:58:43Z\", \"tool\": \"leansearch\", \"query\": \"Functor categories out of a filtered colimit of small categories are equivalent to categories of functors with coherent invertible transition comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instHasFilteredColimitsOfSizeFunctor\", \"CategoryTheory.Ind.lim\", \"MonCat.FilteredColimits.colimit\", \"CategoryTheory.Functor.IsFinitelyAccessible\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.instIsIPCFunctor\", \"CategoryTheory.Limits.PreservesFilteredColimits\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\"], \"digest\": \"0e26bb0d6e123000\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary colimit presentations and reindexing do not state an equivalence with coherent pseudococones of functors and modifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of categories is a bicategorical colimit restriction of functors gives equivalence with coherent pseudococones",
+   "results": "{\"t\": \"2026-10-24T10:58:45Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered colimit of categories is a bicategorical colimit restriction of functors gives equivalence with coherent pseudococones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.bind\", \"CategoryTheory.Limits.ColimitPresentation.bind_diag_obj\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_isColimit\", \"CategoryTheory.Limits.ColimitPresentation.bind_diag_map\", \"CategoryTheory.Limits.ColimitPresentation.instNonemptyTotalOfIsFiltered\", \"CategoryTheory.Limits.ColimitPresentation.bind_ι_app\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_F\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\"], \"digest\": \"24826a3e1ee8ba16\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary colimit presentations and reindexing do not state an equivalence with coherent pseudococones of functors and modifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal reindexing preserves the pseudocolimit of a filtered diagram of categories",
+   "results": "{\"t\": \"2026-10-24T10:58:49Z\", \"tool\": \"leanfinder\", \"query\": \"Cofinal reindexing preserves the pseudocolimit of a filtered diagram of categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.reindex_diag\", \"CategoryTheory.ObjectProperty.ColimitOfShape.reindex\", \"CategoryTheory.ObjectProperty.ColimitOfShape.reindex_toColimitPresentation\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_ℐ\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_I\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\", \"CategoryTheory.Limits.ColimitPresentation.instNonemptyTotalOfIsFiltered\"], \"digest\": \"6eb1f388a947370a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary colimit presentations and reindexing do not state an equivalence with coherent pseudococones of functors and modifications."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudocolimit|pseudoColimit|pseudoCocone|pseudococone|bicategorical colimit",
+   "results": "{\"t\": \"2026-10-24T11:22:59Z\", \"tool\": \"grep\", \"query\": \"pseudocolimit|pseudoColimit|pseudoCocone|pseudococone|bicategorical colimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit in Cat is a bicategorical colimit universal for coherent functors and natural transformations",
+   "results": "{\"t\": \"2026-10-24T11:23:00Z\", \"tool\": \"leansearch\", \"query\": \"A filtered colimit in Cat is a bicategorical colimit universal for coherent functors and natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.HasFilteredColimits\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"MonCat.FilteredColimits.colimit\", \"AddGrpCat.FilteredColimits.colimitCoconeIsColimit\", \"CategoryTheory.Limits.colimitLimitIso\", \"MonCat.FilteredColimits.colimitCoconeIsColimit\"], \"digest\": \"0b211b3c13543be5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Cat, CategoryTheory.Functor.Final",
+   "results": "{\"t\": \"2026-10-24T11:23:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Cat, CategoryTheory.Functor.Final\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.final_pre\", \"CategoryTheory.Grothendieck.final_map\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\"], \"digest\": \"1d3d77540fc6f9bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinal reindexing and objectwise equivalences preserve filtered categorical pseudocolimits",
+   "results": "{\"t\": \"2026-10-24T11:23:01Z\", \"tool\": \"leanfinder\", \"query\": \"Cofinal reindexing and objectwise equivalences preserve filtered categorical pseudocolimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.IsFiltered.of_equivalence\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered\", \"CategoryTheory.isFiltered_of_isFiltered_costructuredArrow\", \"CategoryTheory.Limits.ColimitPresentation.instNonemptyTotalOfIsFiltered\", \"CategoryTheory.Limits.IndObjectPresentation.hI\"], \"digest\": \"c400523316f7e9f6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor categories out of a filtered colimit of categories are equivalent to coherent pseudococones",
+   "results": "{\"t\": \"2026-10-24T11:23:04Z\", \"tool\": \"leanfinder\", \"query\": \"Functor categories out of a filtered colimit of categories are equivalent to coherent pseudococones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IndObjectPresentation.ofCocone_F\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_ℐ\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_I\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_isColimit\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'\"], \"digest\": \"9e4a313406d2c638\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern set representatives, ordinary colimits, or site descent, not canonical transport for arbitrary filtered category diagrams with invertible comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qcqs-etale-topos-inverse-limit",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Completion argument behind the ancestor proof Step 3: the projective-limit etale topos in ILO XX 4.4, printed p.373. Coherent compatibility and cofinal independence.",
+   "via": [
+    "lem-per-qcqs-etale-topos-inverse-limit",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-filtered-category-pseudococones",
+  "worker": "stage1",
+  "summary": "Constructed descent explicitly by canonical transport of representatives, proved full faithfulness and vertex naturality, obtained final reindexing by the existing initial-functor theorem in opposite categories, and checked objectwise-equivalence invariance on stage Hom representatives. One genuine transport lemma remains statement-only; no item clause is moved into a new node.",
+  "blueprint": "Realizes the completion-continuity argument below Step 3 of lem-per-artin-gabber-affine-curve via the existing ancestry in blueprint.from; no change to the chapter or unit route. The current ancestor proof has no explicit pseudococone construction: this fills that downstream categorical detail."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-60c3d9c80",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-60c3d9c80 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the sources (Stacks categories.tex 04AX section-directed-colimits, 04E7 lemma-cofinal, 004A lemma-fibred-strict) in full; the item statement is unchanged and no repair note applies. Batch-5 flag: lem-trf-fully-faithful-ess-surj-equivalence is a Mathlib leaf (Functor.asEquivalence) with empty proof_deps whose only stmt_dep is def-nagata-category. It is generic category theory and not part of the trace formula or Poincaré duality, so it is accepted. Off-unit citations: lem-weil-pbc-filtered-colimit-categories is closed in slopmaster2 (exists_filteredColimit_category, sorry-free) and lem-weil-pbc-initial-functor-limit is a Mathlib leaf, so no tool_uses is needed. Steps checked by hand: (1) F(h)=T A_i(f) T does not depend on the representative, by the transport square and the cocycle identity; (2) the middle transports cancel, and lambda_i=theta_a lambda_k D(a) because T_{(k,D(a)x),(i,x)}=theta_{a,x}; (3) full faithfulness via eventual equality of objects and clause (3), then the asEquivalence leaf; (4) the initial-functor leaf applied to w^op with values in Sets^op makes q an isomorphism; (5) q v^K_k=v_{wk} holds strictly; (6) the fullness computation lambda_k^{-1}u_k(sigma beta sigma^{-1})lambda_k=m and faithfulness through the later e_k are correct, with no faithfulness of the transitions assumed. New node lem-per-filtered-pseudocone-representative-transport: every clause verified (independence via a common target plus two equalizations, cocycle, transition formula, naturality square, rho and H identities). Edge cases tested: one-object J, J with parallel arrows, empty D(i). B1-B7, searches and blueprint fields are fine. It is not a restatement of the item and not a duplicate of the preorder-indexed lem-sfb-coherent-cocone-evaluation-invariant or det-def-sfb-filtered-two-colimit-model. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredColimitPseudococones",
+  "declaration": "CategoryTheory.filteredColimit_restriction_isEquivalence",
+  "declarations": [
+   "CategoryTheory.pseudococone_restriction_naturality",
+   "CategoryTheory.filteredColimit_final_reindexing",
+   "CategoryTheory.filteredColimit_objectwise_equivalences"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitPseudococones.lean",
+  "statement": "theorem filteredColimit_restriction_isEquivalence {J : Type z} [SmallCategory J] [IsFiltered J] (D : J ⥤ Cat.{z, z}) (c : Cocone D) (hobjects : IsColimit (Cat.objects.mapCocone c)) (harrows : IsColimit (Cat.arrows.mapCocone c)) (A : Type u) [Category.{v} A] : (StrictDiagramPseudococone.restriction c A).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four declarations state respectively the restriction equivalence, its naturality on functors and natural transformations, final reindexing with strict leg and restriction compatibility, and descent of coherent objectwise equivalences. The two IsColimit hypotheses are precisely the object-and-arrow set presentation supplied by exists_filteredColimit_category, without choosing a second category structure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de22dd01d",
+  "group": "Q74",
+  "result": "fix",
+  "note": "Lean and records correct in substance. StrictDiagramPseudococone: θ_a : D(a)⋙A_k ≅ A_j; identity and composition laws match θ_{ba}=θ_a∘θ_bD(a); modification square matches; all data explicit, only Prop laws sorried with docstrings. Restriction equivalence stated as IsEquivalence of the specified eqToIso restriction functor, with object/arrow IsColimit hypotheses met by the Category.{z} on Type z built by exists_filteredColimit_category. Vertex naturality: functor equality plus HEq on 2-cells, true. Final reindexing: w.Final = (j↓w) nonempty and connected; leg equations pin q; reindex compatibility equation correct. Objectwise equivalences: hidentity/hcomposition are the σ coherence; conclusion's equation is the λ-coherence with correct directions. No universe restriction beyond the single size universe z. No Pseudococone duplicate in Mathlib, side-live or slopmaster2. Statements verbatim in the files. Sole fault H11: the second reading is the worker's self-check. FIX: fixes/lem-per-filtered-category-pseudococones.report.md keeps the worker report and New nodes section verbatim and adds an independent clause-by-clause second reading. No Lean changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T092339-L-3424770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

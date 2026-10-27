@@ -1,0 +1,101 @@
+{
+ "id": "def-sf-native-derived-exchange-map",
+ "kind": "definition",
+ "title": "The exact-pullback native derived exchange map",
+ "statement": "Fix a prime $l$ and a commutative square $v:X'\\to X$, $p':X'\\to Y'$, $p:X\\to Y$, $g:Y'\\to Y$ of schemes. Use the native adic module categories and their ordinary unbounded derived categories [def-sf-native-weil-derived-framework]. Write $P_f=D(f^*)$ for exact native pullback. Localize the actual native pullback-composition comparison to obtain $P_{p'}P_g\\simeq P_vP_p$. Define the native exchange $P_gRp_*\\to Rp'_*P_v$ as its unit-square-counit mate for the adjunctions $P_p\\dashv Rp_*$ and $P_{p'}\\dashv Rp'_*$ [def-weil-pbc-adjunction-mate]. This construction imposes no properness, constructibility, boundedness or Weil-structure hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived base change for sheaves is compatible with open restriction and with an exact equivalence of coefficient modules",
+   "results": "8 hits: generic sheaf-module restriction and adjunction comparisons; none states compatibility for the native derived adic exchange.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"mate\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adicDerivedBaseChange|nativeDerivedExchange|adicChartSquare",
+   "results": "0 hits in Mathlib. The adopted source contains adicDerivedBaseChangeIso for open base change, but no compatibility theorem for the specified exact-pullback-derived mate.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "W3",
+  "item": "Sheaf.WeilSheaf.GeometricProperBaseChange",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps; no exact blueprint match in searches for native derived exchange, affine proper base change, adic cover isomorphism, or adic open base change.",
+   "via": [
+    "lem-sf-geometric-native-proper-base-change",
+    "lem-sf-native-weil-proper-natural-base-change",
+    "lem-sf-native-weil-compact-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeDerivedBaseChange",
+  "file": "lean/Sheaf/WeilSheaf/NativeDerivedBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.adicDerivedBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.adicDerivedPullSquare",
+   "AlgebraicGeometry.ProEtale.adicDerivedBaseChange"
+  ],
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-27",
+  "statement": "def adicDerivedBaseChange (l : ℕ) [Fact l.Prime]\n    {Z' Z T' T : Scheme.{u}} {v : Z' ⟶ Z} {p' : Z' ⟶ T'}\n    {p : Z ⟶ T} {g : T' ⟶ T} (sq : CommSq v p' p g) :\n    (adicLowerStar l p).rightDerivedFunctor ⋙ (adicUpperStar l g).mapDerivedCategory ⟶\n      (adicUpperStar l v).mapDerivedCategory ⋙ (adicLowerStar l p').rightDerivedFunctor"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cbdd2",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261027T050651-L-251723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cbdd2",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261027T050651-L-251723",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules + 7 node files against the clone (sheaf-dag) and their node statements; sole direct importer NativeBaseChangeForgetComparison compiled with the delivered set (all 6 OK)"
+ }
+}

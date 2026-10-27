@@ -1,0 +1,146 @@
+{
+ "id": "lem-pur-vector-integration-ordinary-frame-counit",
+ "kind": "statement",
+ "title": "Ordinary vector integration adjunct on one affine linear frame",
+ "statement": "Fix the finite purity setting P of [def-pur-conventions], its ordinary dualizing objects and source-etale locality of [def-pur-diagonal-dualizing-data], and the positive Tate presentation Q_T=A_T(d)[2d] of [def-coefficient-twists-detailed]. Let S be an affine finite-type k-scheme, F a locally free module of rank d>=0, and pi:V->S its vector-bundle projection [def-asd-vector-bundle-zero-section]. Let t be any normalized finite-twist pullback transport, D any corresponding normalized ordinary projective-line adjunction family, and N any normalized etale compact-support comparison. Let U be an affine open of S and frame:F|U~O_U^d a linear frame. Put W=pi^{-1}U and j:W->V. Let v:W->A^d_S be the frame isomorphism W~A^d_U followed by A^d_U->A^d_S, in the ordered coordinate-tower presentation, with w:v;p_d=j;pi. Write alpha_pi=c_pi^{-1};adj_pi(int_pi), where int_pi is the actual integration of [def-amb-vector-integration] and c_pi is its canonical base-coefficient Tate pullback. Write alpha_pd for the ordinary ordered affine counit adjunct diagonalAffineMate(t,D,S,d). Then j^*(alpha_pi);locality_N(j,pi) equals c_j;c_v^{-1};v^*(alpha_pd);locality_N(v,p_d);congr(w). This is an equation on one linear frame, contains no orientation e or global descent assertion, and includes empty U and rank zero.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-asd-vector-bundle-zero-section",
+  "def-coefficient-twists-detailed",
+  "def-amb-vector-integration",
+  "def-pur-diagonal-dualizing-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Second paragraph: on a trivializing open the transpose is the adjunct of the affine-space counit; orientation-charts Step 4 fixes the ambient-base coordinates"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the defining VectorIntegrationNormalization of vectorBundleIntegration at this affine frame and the given normalized t,D. Its right hand side is the inverse-frame compact-support exchange, the actual coefficient comparison, the inverse compact/tower comparison, and the ordered affine counit. This is the ordinary trace equation before any transpose.",
+   "uses": [
+    "def-amb-vector-integration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the trace equation using the fixed exceptional adjunction. Naturality of the Hom bijection changes inverse compact-support exchange into exceptional exchange. Compose with source-etale locality for the frame open and its coordinate map. These localities are the counit-normalized right-adjoint conjugates, so mate pasting cancels the common extension-by-zero counit.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalized twist-transport and projective-line datum uniqueness imply the base-change law for the specified t,D. The affine trace base-change equation along U into S identifies the trace on the frame base with the restriction of the ambient trace. The coefficient comparisons agree by induction on d: the zero case is constant-unit pullback composition; at a successor use the tensor-pullback compositor and the normalized shifted Tate-line pullback composition. Move these invertible coefficient maps across the Hom bijection to obtain exactly the displayed equality. Rank zero has the identity ordered adjunction; the empty frame has unique arrows.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-ordinary-finite-p1-datum-uniqueness",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-ordinary-finite-p1-datum-uniqueness",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X9",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Second paragraph; ordinary source-etale and ambient-base coefficient bookkeeping expanded from the parent Step 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional adjunct of vector bundle compact support integration restricts on a linear frame to the ordered affine space counit mate",
+   "results": "8 hits, including ContinuousLinearMap.inCoordinates_eq and CategoryTheory.mateEquiv_counit(_symm). These give general mate identities but no etale vector-integration frame equation. Local search found VectorIntegrationChartTranspose; it compares pro-etale images in a different coefficient presentation and does not give the ambient-base source-etale locality equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "One hit in Mathlib.CategoryTheory.Adjunction.Basic: the generic source-naturality formula for an adjunct. It supplies only a formal step of this trace/coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegration.*frame|vectorIntegration.*locality|vectorIntegration.*counit",
+   "results": "0 Mathlib hits through msearch. Source rg found the inverse-frame normalization in VectorBundleIntegrationCharts and the pro-etale chart transpose, but no ordinary ambient-base frame counit comparison. Blueprint search returned no separate frame node.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorBundleIntegrationOrientation",
+  "date": "2026-10-27",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Vector-bundle model calculation in the standard-coordinate diagonal/DNC assembly; orientation-charts Step 4, ordinary linear-frame calculation",
+   "via": [
+    "lem-pur-vector-bundle-integration-orientation",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorIntegrationOrdinaryFrameCounit",
+  "file": "lean/Sheaf/Paper/VectorIntegrationOrdinaryFrameCounit.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorIntegration_ordinary_frame_counit",
+  "statement": "theorem vectorIntegration_ordinary_frame_counit (P : PurityFiniteSetting.{u})\n    (S : Scheme.{u}) [IsAffine S] (aS : S ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aS] [QuasiCompact aS]\n    (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]\n      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),\n      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t T hT)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :\n    letI := isNoetherian_of_locallyOfFiniteType aS\n    letI := (Etale.vectorIntegration_geometry S d F).1\n    letI := (Etale.vectorIntegration_geometry S d F).2.1\n    letI := isNoetherian_of_locallyOfFiniteType (VectorBundleZeroSection.π S d F ≫ aS)\n    letI : HasCompactification (VectorBundleZeroSection.π S d F) := inferInstance\n    letI := affineTraceNoetherian S d\n    ∀ (U : S.Opens) [IsAffine U.toScheme]\n      (frame : VectorBundleZeroSection.Trivialization S d F U),\n      let p := VectorBundleZeroSection.π S d F\n      let W := p ⁻¹ᵁ U\n      letI := isNoetherian_of_locallyOfFiniteType W.ι\n      ∀ (v : W.toScheme ⟶ affineTraceTower S d)\n        [Etale v] [IsSeparated v] [LocallyOfFiniteType v] [QuasiCompact v]\n        (_hv : v = VectorBundleZeroSection.trivializationMap S d F U frame ≫\n          AffineSpace.map (ULift.{u} (Fin d)) U.ι ≫ (affineTraceAffineSpaceIso S d).inv)\n        (w : v ≫ affineTraceProjection S d = W.ι ≫ p),\n        letI : HasCompactification (W.ι ≫ p) := inferInstance\n        letI : HasCompactification (v ≫ affineTraceProjection S d) := by\n          rw [w]\n          infer_instance\n        (Etale.ordinaryFinitePullback P.Coefficient W.ι).map\n            ((Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n              P.diagonalExponent_annihilates t p (P.diagonalExponent_isUnit aS) d).inv ≫\n            (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} P.Coefficient)\n              p).homEquiv _ _\n                (Etale.vectorBundleIntegration P.diagonalExponent\n                  (pow_pos P.coefficients.prime.out.pos P.level) P.Coefficient\n                  P.diagonalExponent_annihilates S (P.diagonalExponent_isUnit aS) d F)) ≫\n            (P.diagonalEtaleLocality N W.ι p).hom =\n          (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n            P.diagonalExponent_annihilates t W.ι (P.diagonalExponent_isUnit (p ≫ aS)) d).hom ≫\n          (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n            P.diagonalExponent_annihilates t v\n              (affineTraceInvertible P.diagonalExponent S (P.diagonalExponent_isUnit aS) d)\n                d).inv ≫\n          (Etale.ordinaryFinitePullback P.Coefficient v).map\n            (P.diagonalAffineMate t D S (P.diagonalExponent_isUnit aS) d) ≫\n          (P.diagonalEtaleLocality N v (affineTraceProjection S d)).hom ≫\n          (P.diagonalDualizingCongr w).hom",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T013008-L-2357188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T013008-L-2357188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

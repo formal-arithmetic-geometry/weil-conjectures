@@ -196,24 +196,51 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IdealSheafData.StrictTransformChart.comap_ker_strictι_fst_eq",
+     "module": "WeilConjectures.Compactification.StrictTransformChartModel",
+     "lines": [
+      418,
+      427
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-blowups",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "The localized strict-transform chart comparisons agree on double\nlocalizations and satisfy the cocycle equality on triple chart overlaps.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f\\colon Y\\to X$ be a morphism, let $\\mathcal I$ be a quasi-coherent\nideal on $X$, and put $X'=\\operatorname{Bl}_{\\mathcal I}(X)$. Let\n$c=(U,V,a)$ and $c'=(U',V',a')$ be two chart data: affine opens\n$U=\\operatorname{Spec}(A)$ of $X$ and $V=\\operatorname{Spec}(B)\\subseteq\nf^{-1}(U)$ of $Y$ and an element $a\\in I=\\mathcal I(U)$, and likewise\n$A',B',I',a'$. Each gives the open immersion\n$\\operatorname{Spec}(C_a(A,B,I))=V\\times_U\\operatorname{Spec}(A[I/a])\n\\to Y\\times_XX'$ of a base-changed blow-up chart. Let\n$W=\\operatorname{Spec}(C_a(A,B,I))\\times_{Y\\times_XX'}\n\\operatorname{Spec}(C_{a'}(A',B',I'))$ be the overlap of the two charts.\nThen the closed subschemes $\\operatorname{Spec}(C_a^{\\mathrm{st}}(A,B,I))$\nand $\\operatorname{Spec}(C_{a'}^{\\mathrm{st}}(A',B',I'))$ have the same\nrestriction to $W$: the ideals $\\Gamma_{(a)}(C_a(A,B,I))$ and\n$\\Gamma_{(a')}(C_{a'}(A',B',I'))$ pull back to the same ideal of\n$\\mathcal O_W$.",
   "proof": [
    {
-    "text": "On an intersection of the $a$- and $a'$-charts, choose a basic affine\nrefinement on which both chart restrictions are defined. The ordinary\nblow-up transition is the specified localization isomorphism; by\n[lemma-nagata-affine-blowup-restrict-cocycle] its two composites on a\ntriple refinement agree. Localizing the quotient map\n$C_a\\twoheadrightarrow C_a^{\\mathrm{st}}$ gives the quotient by the\nlocalized power-torsion ideal, by\n[lemma-nagata-strict-transform-chart-localization-data]. Thus the\nordinary transition descends uniquely to a transition of strict-transform\nchart rings. The descended maps agree with the comparisons constructed\nafter localization by\n[lemma-nagata-strict-transform-chart-localization]. On a triple\nrefinement their two composites become the same ordinary transition before\nquotienting, hence are equal after quotienting. This proves both the\ndouble-overlap compatibility and the cocycle.",
+    "text": "Let $\\Omega\\subseteq Y\\times_XX'$ be the open part lying over\n$X\\setminus V(\\mathcal I)$ and put $C=C_a(A,B,I)$. On the chart\n$\\operatorname{Spec}(C)$ the preimage of $V(\\mathcal I)$ is cut out by\n$IC=aC$ ([lemma-nagata-chart-extended-ideal-principal]), so\n$\\Omega\\cap\\operatorname{Spec}(C)=D(a)$. By\n[lemma-nagata-power-torsion-kernel-localization],\n$\\Gamma_{(a)}(C)$ is the kernel of $C\\to C_a$, i.e. the ideal of the\nscheme-theoretic closure of the quasi-compact open $D(a)$ in\n$\\operatorname{Spec}(C)$. Scheme-theoretic closures of quasi-compact\nopens commute with restriction to opens, so the restriction of\n$\\Gamma_{(a)}(C)$ to $W$ is the ideal of the scheme-theoretic closure of\n$\\Omega\\cap W$ in $W$. The same holds for the chart $c'$, and the two\nrestricted ideals coincide.",
     "uses": [
-     "lemma-nagata-affine-blowup-restrict-cocycle",
-     "lemma-nagata-strict-transform-chart-localization-data",
-     "lemma-nagata-strict-transform-chart-localization"
+     "lemma-nagata-chart-extended-ideal-principal",
+     "lemma-nagata-power-torsion-kernel-localization"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "split_report": {
   "date": "2026-10-21",

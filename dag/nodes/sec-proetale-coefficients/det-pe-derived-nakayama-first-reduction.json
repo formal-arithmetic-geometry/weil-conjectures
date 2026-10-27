@@ -190,7 +190,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-9a02f3b51 (reviewer sub-agent of L); spot-checked: Read in full: the item, the 3 new nodes, the blueprint first-reduction statement and proof, the resolution statement, the unit record, the statements of all cited nodes (sk-def-pe-derived-completion with its proof steps, for what 'canonical map' means) and the human re-split note of 2026-10-21. The note is answered: 3 new statement-only unsplit nodes, and the parent is a 4-step assembly of about 1.8k chars. Against live, the item changes only the split-owned fields; the statement is verbatim the blueprint's. No SGA is cited, the item is not dropped and the new ids are new. The parent steps check: the induction uses the zero TR1 triangle and two-of-three; the derived limit of a zero tower is zero; cones via the completion triangle morphism; shifts via sigma; detection uses the D_1 reduction triangle, lem-kun twice and steps 1-2. I recomputed every chain formula with the def-weil-abstract-derived-category conventions (cone B^q+A^{q+1}, boundary -p, shift -d). They are all correct: the pi-transition, the coaugmentation, the D_n cone permutation (b,b',a,-a') with boundary (-a,a'), the D_n and Roos shift signs (-1)^r, the Roos differential (dv,-du-sv), the Roos cone permutation and the zero-second-coordinate augmentation. Edge cases checked: n=1, f=0, f=id, M=0, r=0 and -1, the zero tower and a constant tower. The coefficient category is R=p_X^*O_E in unbounded D(R), with no boundedness added. Duplicate search: the roos-comm-shift and completed-scalar-chain-shift nodes cover only shifts for other functors; the amb signed-fibre nodes are Ab-valued; kflat-roos-invariance, roos-coordinates and the Milnor nodes differ; the module derived-complete-triangles node is for a ring A; levelwise-isomorphism-cones is the Koszul datum of another unit. So none is a duplicate. Accepted tool_use: det-pe-products-derived (the blueprint itself cites sk-prop-pe-products). Three fixes: (1) completion-triangle-comparison: 'representing the canonical completion map' replaced by an explicit isomorphism F(K)=R lim K_n carrying c_K to the specified canonical map, hence K is complete iff c_K is an isomorphism, which parent step 3 needs (E5/C4); (2) principal-reduction: 'functorial strict model' made explicit as natural isomorphisms QD_n(M)=(QM)_n compatible with the transitions and the reduction maps, which parent step 4 needs (E5/C4); (3) roos-cone-calculus: X_proet now cited as def-weil-pbc-proetale-site and the tower is stated to consist of complexes of A (B3). The item file is unchanged.; 3 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -218,5 +229,38 @@
   "landing": "20261021T151153-L-1165057",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $K\\in D(X_{\\Proet},\\mathcal O_E)$ be derived complete in the sense of\n[def-pe-derived-complete]. If $K_1=0$, then $K_n=0$ for all $n\\geq1$ and\n$K=0$. Derived complete complexes are closed under cones (and shifts), and a\nmorphism $f\\colon K\\to L$ of derived complete complexes is an isomorphism as soon\nas $f_1=f\\otimes^{\\mathbf L}(\\mathcal O_E/\\pi_E)_X\\colon K_1\\to L_1$ is an\nisomorphism.",
+  "proof": [
+   {
+    "text": "*Vanishing.* Suppose $K_1=0$. By [det-pe-derived-nakayama-resolution] there is a\ntriangle $K_1\\to K_{n+1}\\to K_n\\to$ for every $n\\geq1$. If $K_n=0$, its outer terms\nvanish, so $K_{n+1}=0$. By induction all $K_n$ vanish, hence\n$R\\varprojlim_nK_n=0$, and completeness gives $K\\cong R\\varprojlim_nK_n=0$.",
+    "uses": [
+     "det-pe-derived-nakayama-resolution"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Cones.* Represent $f$ by a map of complexes of $\\mathcal O_{E,X}$-modules and let\n$C=\\operatorname{cone}(f)$ be the mapping cone. By\n[det-pe-derived-nakayama-resolution], $K_n$ is represented functorially by the\nmapping cone of $\\pi_E^n$ on the complex $K$, and $R\\varprojlim_n$ of a strict\ntower of complexes $(M_n)$ is represented by the fibre of\n$1-\\text{shift}\\colon\\prod_nM_n\\to\\prod_nM_n$ formed termwise; this computes the\nderived limit because countable products are exact on $X_{\\Proet}$\n([det-pe-products-exact]), so that termwise products of complexes are products in\nthe derived category ([det-pe-products-derived]). Both constructions are functorial on complexes and\ncommute with mapping cones up to canonical isomorphism, so the canonical maps\n$K\\to R\\varprojlim_nK_n$, $L\\to R\\varprojlim_nL_n$ and\n$C\\to R\\varprojlim_nC_n$ form a morphism of distinguished triangles. If the\nfirst two are isomorphisms, so is the third, by the five lemma on cohomology\nsheaves. Shifts are clear. So $C$ is derived complete.",
+    "uses": [
+     "det-pe-derived-nakayama-resolution",
+     "det-pe-products-exact",
+     "det-pe-products-derived"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Isomorphisms.* With $C$ as above, $C_1=\\operatorname{cone}(f_1)=0$ when $f_1$ is\nan isomorphism. By the first part $C=0$, so $f$ is an isomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

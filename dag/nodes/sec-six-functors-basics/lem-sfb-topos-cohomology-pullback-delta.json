@@ -1,0 +1,390 @@
+{
+ "id": "lem-sfb-topos-cohomology-pullback-delta",
+ "kind": "statement",
+ "title": "Resolution pullback of global cohomology respects boundary maps for geometric morphisms",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to a common sheaf universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], and let $f:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ be a geometric morphism [def-trf-geometric-morphism], with inverse image $L=f^{-1}$ and direct image $f_*$. Use the induced exact inverse image on abelian sheaves. For an abelian sheaf $F$ on $\\mathcal C$, write $\\Gamma_{\\mathcal C}(F)=\\operatorname{Hom}(*,F)$ and $H^q(\\mathcal C,F)=R^q\\Gamma_{\\mathcal C}(F)$; similarly on $\\mathcal D$. For injective resolutions $F\\to I^\\bullet$ and $LF\\to J^\\bullet$ [def-sp-injective-resolutions], a comparison $\\beta:LI^\\bullet\\to J^\\bullet$ extending the identity of $LF$ exists. The maps $P_f^q(F):H^q(\\mathcal C,F)\\to H^q(\\mathcal D,LF)$ induced by $\\Gamma_{\\mathcal C}(I^\\bullet)\\xrightarrow{\\eta}\\Gamma_{\\mathcal C}(f_*LI^\\bullet)\\cong\\Gamma_{\\mathcal D}(LI^\\bullet)\\xrightarrow{\\Gamma(\\beta)}\\Gamma_{\\mathcal D}(J^\\bullet)$ are independent of both resolutions and of $\\beta$, natural in $F$, and in degree zero send a global section $s:*\\to F$ to $Ls:*\\cong L*\\to LF$. For every short exact sequence $E:0\\to F\\to F'\\to F''\\to0$, its exact image $LE$ satisfies $P_f^{q+1}(F)\\,\\delta_E^q=\\delta_{LE}^q\\,P_f^q(F'')$ for all $q\\geq0$. For every morphism $(a,b,c):E\\to E'$ of short exact sequences on either site, $H^{q+1}(a)\\delta_E^q=\\delta_{E'}^qH^q(c)$. The maps $\\delta$ here are the connecting homomorphisms of the derived global-section long exact sequences. The identifications $\\Gamma_{\\mathcal C}(f_*M)=\\Gamma_{\\mathcal D}(M)$ use adjunction and $L*\\cong *$. No final site object and no functor between the presenting sites are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 01FT (section-cohomology-sheaves), global sections and their universal delta-functor; Tag 08J6 (remark-before-Leray), global sections of derived direct image. Resolution construction as in cohomology.tex Tag 01F8 (lemma-functoriality), extended to geometric morphisms using the exact abelian inverse image; boundary naturality is the universal delta-functor property, derived.tex Tag 015B (lemma-higher-derived-functors)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-geometric-morphism",
+  "def-sp-injective-resolutions",
+  "def-trf-abelian-inverse-image-presentation",
+  "lem-trf-geometric-inverse-image-exact"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal A=\\operatorname{Ab}(\\mathcal C)$, $\\mathcal B=\\operatorname{Ab}(\\mathcal D)$ and $G=\\Gamma_{\\mathcal C}$, $T=\\Gamma_{\\mathcal D}$. Global sections are additive: their addition is pointwise addition of maps into an abelian group object. They preserve kernels, since a map from the terminal sheaf lands in a kernel exactly when its composite with the defining map is zero. Thus $G,T$ are left exact additive. Adjunction and the finite-limit preservation in the geometric-morphism datum give $\\operatorname{Hom}(*,f_*M)\\cong\\operatorname{Hom}(L*,M)\\cong\\operatorname{Hom}(*,M)$. Under this bijection the unit defines a natural additive map $t_M:G(M)\\to T(LM)$ sending $s$ to $Ls$ after $*\\cong L*$. This also defines a natural map of complexes $t_K:G(K)\\to T(LK)$. No representing terminal object of either site is used.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 01FT (section-cohomology-sheaves), global sections without a final site object; adjunction calculation"
+   }
+  },
+  {
+   "text": "Both $\\mathcal A$ and $\\mathcal B$ are abelian with enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]; take nonnegative injective resolutions, whose augmentations and degree-zero identifications are supplied by [lem-weil-pbc-left-exact-injective-resolution-degree-zero]. Exactness of the given $L$ makes $LF[0]\\to LI^\\bullet$ a degreewise monomorphic quasi-isomorphism. Apply [lem-weil-pbc-lift-along-injective-quasi-iso] with $K=LF[0]$, $L^\\bullet=LI^\\bullet$, target $J^\\bullet$, and $\\gamma$ the target augmentation. It gives $\\beta:LI^\\bullet\\to J^\\bullet$ strictly over $LF$. Therefore the chain map $w_{I,J}=T(\\beta)t_I:G(I^\\bullet)\\to T(J^\\bullet)$ gives the claimed map on cohomology under the resolution identifications.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P (lemma-morphisms-lift), 013K (lemma-injective-resolutions-exist), 015B (lemma-higher-derived-functors)"
+   }
+  },
+  {
+   "text": "Any two choices of $\\beta$ agree after the quasi-isomorphism $LF[0]\\to LI$ and hence are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]; applying $T$ and then cohomology gives equal maps by [lem-weil-pbc-homotopic-maps-equal-cohomology]. More generally, for $h:F\\to F'$ and resolutions $(I,J)$, $(I',J')$, choose augmented lifts $u:I\\to I'$ of $h$ and $v:J\\to J'$ of $Lh$ by [lem-weil-pbc-injective-resolution-lift-exists]. The maps $v\\beta$ and $\\beta'Lu$ from $LI$ to $J'$ have the same composite with $LF[0]\\to LI$; the same uniqueness lemma makes them homotopic. Naturality of $t$ gives $t_{I'}G(u)=T(Lu)t_I$, so on cohomology $H^q(Tv)H^q(w_{I,J})=H^q(w_{I',J'})H^q(Gu)$. The map-via-lift formula of [lem-weil-pbc-derived-functor-map-via-lift] identifies the two outer maps with $H^q(Lh)$ and $H^q(h)$. This proves naturality. For $h=1_F$ it proves independence of both resolutions, since the same formula identifies the resolution changes with the canonical identity maps on $R^qG(F)$ and $R^qT(LF)$.",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P and 013S (lemma-morphisms-equal-up-to-homotopy); homology.tex Tag 0116 (lemma-map-cohomology-homotopy-cochain)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-left-exact-injective-resolution-degree-zero], $G(F)\\to H^0(GI)$ and $T(LF)\\to H^0(TJ)$ are the canonical isomorphisms induced by the augmentations. The augmented square for $w_{I,J}$ commutes, because $\\beta$ is over $LF$ and $t$ is natural. Consequently its degree-zero map is $t_F$, which step 1 computed as $s\\mapsto Ls$ with domain identified using $*\\cong L*$.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors), degree zero"
+   }
+  },
+  {
+   "text": "Fix a short exact sequence $E$ and choose a horseshoe $I_1\\to I_2\\to I_3$ by [lem-weil-pbc-injective-resolution-ses]. Every row splits by [lem-weil-pbc-ses-injective-kernel-splits]. Its images under $G$ and under $TL$ therefore split: applying an additive functor to $pi=1$, $rs=1$, $ip+sr=1$ gives the same splitting equations. In particular both image sequences are degreewise short exact; extension by zero remains so. We identify precisely which boundary $\\partial_I$ on $H^q(GI_3)$ this computes. In the derived category of [def-weil-abstract-derived-category], [lem-sc-p1-horseshoe-derived-triangle-comparison] gives a triangle morphism from $RG(E[0])$ to the derived triangle of $G(I)$, with endpoint homology maps $j_{I_i}\\theta_{F_i}$. By boundary naturality in [lem-sp-long-exact-of-triangle] and the snake/derived identification of [lem-sc-p1-nat-complex-derived-boundary], its endpoint equation is $j_{I_1}^{q+1}\\delta_E^q=\\partial_I^q j_{I_3}^q$, after the single-object identifications $\\theta$. Thus this is the derived global-section connecting map specified in the item. The identical application to $T$ identifies $\\delta_{LE}$ with the boundary of any target horseshoe $J_1\\to J_2\\to J_3$. All these applications have enough injectives by step 2, left exactness by step 1, and the required image exactness by the splitting equations just given.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-ses",
+    "lem-weil-pbc-ses-injective-kernel-splits",
+    "def-weil-abstract-derived-category",
+    "lem-sc-p1-horseshoe-derived-triangle-comparison",
+    "lem-sp-long-exact-of-triangle",
+    "lem-sc-p1-nat-complex-derived-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013T (lemma-injective-resolution-ses), 014Q (derived-category triangle), 015B; homology.tex Tag 0117 (lemma-long-exact-sequence-cochain)"
+   }
+  },
+  {
+   "text": "Choose a target horseshoe $J$ resolving $LE$ as in step 5. The source row $LI_1\\to LI_2\\to LI_3$ has exact augmented columns, since $L$ is exact, and short exact rows, since its original rows split. The lifting argument of step 2 gives endpoint maps $\\beta_1:LI_1\\to J_1$, $\\beta_3:LI_3\\to J_3$ over the identity maps of $LF_1,LF_3$. Apply [lem-weil-pbc-horseshoe-morphism-lift-exact-source] to this augmented source row and the target horseshoe, with morphism $1_{LE}$. It supplies $\\beta_2$ making both row squares commute strictly and preserving the middle augmentation. Here no $LI_i^n$ is required to be injective. The maps $w_i=T(\\beta_i)t_{I_i}$ consequently give a morphism of short exact complexes $G(I_1\\to I_2\\to I_3)\\to T(J_1\\to J_2\\to J_3)$. Its rows are short exact by step 5. By [lem-weil-pbc-complex-ses-long-exact-naturality], $H^{q+1}(w_1)\\partial_I^q=\\partial_J^q H^q(w_3)$. Step 3 identifies its endpoint maps with the specified $P_f$, independently of these convenient choices, and step 5 identifies its boundaries with the derived $\\delta_E,\\delta_{LE}$. Substitution proves $P_f^{q+1}(F_1)\\delta_E^q=\\delta_{LE}^qP_f^q(F_3)$.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Horseshoe comparison for exact augmented source columns (Tag 013T construction); homology.tex Tag 0117 (lemma-long-exact-sequence-cochain), naturality"
+   }
+  },
+  {
+   "text": "For a morphism $(a,b,c):E\\to E'$ on either site, apply [lem-weil-pbc-horseshoe-delta-functor] to that site's global-section functor. Its hypotheses hold by steps 1 and 2, and clause (1) gives $H^{q+1}(a)\\delta_H^q=\\delta_{H'}^qH^q(c)$ for horseshoe boundaries. Step 5 identifies both of these with the specified derived boundaries. This gives the last assertion on either site. The whole argument used only the geometric adjunction, the terminal sheaf and exactness of its abelian inverse image, so it applies without a functor between the presenting sites or a final object of either site.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013T and 015B, with homology.tex Tag 0117; horseshoe naturality and its derived identification in step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-injective-resolution-ses",
+  "lem-weil-pbc-ses-injective-kernel-splits",
+  "def-weil-abstract-derived-category",
+  "lem-sc-p1-horseshoe-derived-triangle-comparison",
+  "lem-sp-long-exact-of-triangle",
+  "lem-sc-p1-nat-complex-derived-boundary",
+  "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-horseshoe-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Synthesis of Tags 013P, 013S, 013T and 015B with sites-cohomology.tex Tag 01FT and homology.tex Tags 0116/0117, for arbitrary geometric morphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomology.*[Pp]ullback|[Pp]ullback.*cohomology|delta.*naturality",
+   "results": "1 hits; Mathlib/CategoryTheory/Monad/Basic.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: NatTrans.rightDerived compares functors on the same source using one source resolution; it does not give this comparison across an exact inverse image which need not preserve injectives, nor the stated global-section boundary compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "12 hits; CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.subsingleton_H_of_isZero, CategoryTheory.Sheaf.functorH_obj_coe, CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat, CategoryTheory.Sheaf.H.map, CategoryTheory.Sheaf.H.equiv₀, CategoryTheory.Sheaf.functorH_map, CategoryTheory.Sheaf.H.map_id_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: NatTrans.rightDerived compares functors on the same source using one source resolution; it does not give this comparison across an exact inverse image which need not preserve injectives, nor the stated global-section boundary compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image between sheaf topoi induces a morphism of cohomology delta functors defined by comparison of injective resolutions",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.Hom.hom, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.desc, CategoryTheory.Functor.sheafPushforwardContinuousIso_inv, CategoryTheory.Equivalence.sheafCongr_inverse, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality",
+   "date": "2026-10-23",
+   "verdict": "no match: NatTrans.rightDerived compares functors on the same source using one source resolution; it does not give this comparison across an exact inverse image which need not preserve injectives, nor the stated global-section boundary compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism of Grothendieck topoi gives resolution independent pullback of derived global sections commuting with connecting homomorphisms",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, SheafOfModules.pullbackComp, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, SheafOfModules.pullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: NatTrans.rightDerived compares functors on the same source using one source resolution; it does not give this comparison across an exact inverse image which need not preserve injectives, nor the stated global-section boundary compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation of global sections induces pullback maps on sheaf cohomology compatible with long exact sequence boundaries under exact inverse image",
+   "results": "8 hits; SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: NatTrans.rightDerived compares functors on the same source using one source resolution; it does not give this comparison across an exact inverse image which need not preserve injectives, nor the stated global-section boundary compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Nn]atTrans|[Dd]elta|[Cc]onnecting|[Pp]ullback",
+   "results": "2 hits; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; directory Mathlib/CategoryTheory/Sites/SheafCohomology",
+   "date": "2026-10-23",
+   "verdict": "no match: NatTrans.rightDerived compares functors on the same source using one source resolution; it does not give this comparison across an exact inverse image which need not preserve injectives, nor the stated global-section boundary compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.rightDerived",
+   "results": "5 hits; CategoryTheory.NatTrans.rightDerived, CategoryTheory.NatTrans.rightDerived_id, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: NatTrans.rightDerived compares functors on the same source using one source resolution; it does not give this comparison across an exact inverse image which need not preserve injectives, nor the stated global-section boundary compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of a geometric morphism induces resolution independent pullback on global cohomology commuting with connecting homomorphisms",
+   "results": "8 hits; SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, TopCat.Sheaf.pullbackIso, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern sheaf pullbacks, Ext functoriality or a same-source right-derived transformation; none states the specified cross-category resolution construction and all its boundary clauses in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|connecting|delta|rightDerived",
+   "results": "2 hits; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; directory Mathlib/CategoryTheory/Sites/SheafCohomology",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern sheaf pullbacks, Ext functoriality or a same-source right-derived transformation; none states the specified cross-category resolution construction and all its boundary clauses in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric morphism pullback global sheaf cohomology compatible with connecting maps of short exact sequences",
+   "results": "8 hits; SheafOfModules.pullback, CategoryTheory.GrothendieckTopology.overMapPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, TopCat.Sheaf.pullback, CategoryTheory.Functor.sheafPullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern sheaf pullbacks, Ext functoriality or a same-source right-derived transformation; none states the specified cross-category resolution construction and all its boundary clauses in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.rightDerived",
+   "results": "5 hits; CategoryTheory.NatTrans.rightDerived, CategoryTheory.NatTrans.rightDerived_id, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern sheaf pullbacks, Ext functoriality or a same-source right-derived transformation; none states the specified cross-category resolution construction and all its boundary clauses in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between global section functors across an exact additive functor gives pullback maps on right derived cohomology and a morphism of long exact sequences",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.ShortComplex.ShortExact.δ_apply, CategoryTheory.ShortComplex.SnakeInput.functorP_map, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.ShortComplex.ShortExact.δ_apply', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern sheaf pullbacks, Ext functoriality or a same-source right-derived transformation; none states the specified cross-category resolution construction and all its boundary clauses in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "def mapExactFunctor|lemma mapExactFunctor_hom|def rightDerived|lemma rightDerived_app_eq",
+   "results": "0 hits; ; directory Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern sheaf pullbacks, Ext functoriality or a same-source right-derived transformation; none states the specified cross-category resolution construction and all its boundary clauses in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-picard-h1-natural",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Functorial Picard obstruction for square-zero thickenings of algebraic spaces. Ringed-site input: identify line-module classes with first cohomology of units, compatibly with tensor pullback. Homological prerequisite for the naturality clause of the ringed-site Picard input: compare the specified resolution pullback with boundaries of arbitrary abelian extensions.",
+   "via": [
+    "lem-sfb-ringed-site-picard-h1-natural",
+    "lem-sfb-space-picard-obstruction-natural",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-topos-cohomology-pullback-delta",
+  "worker": "stage1",
+  "summary": "Constructed the global-section resolution pullback from adjunction, proved choice independence and coefficient naturality by homotopy comparison, identified the horseshoe and derived boundaries, and used the existing exact-augmented-source horseshoe comparison to prove boundary compatibility. No new nodes or Lean changes.",
+  "blueprint": "The inherited from.place chain terminates at det-thm-sf-ctf-stability-direct-images, proof (3). This is the homological prerequisite below the ringed-site Picard naturality input in that chain. The current latest blueprint calls its file sk-thm-sf-ctf-stability-direct-images.proof.md; its frontmatter of remains det-thm-sf-ctf-stability-direct-images. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "General homological algebra tool for the abelian sheaf categories on both given small sites; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-map-via-lift",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-ses",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ses-injective-kernel-splits",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sc-p1-horseshoe-derived-triangle-comparison",
+    "why": "General homological algebra tool for identifying the exact derived boundary using fixed resolution endpoints; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sp-long-exact-of-triangle",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sc-p1-nat-complex-derived-boundary",
+    "why": "General homological algebra tool for identifying the derived complex boundary with its snake boundary; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-horseshoe-delta-functor",
+    "why": "General homological algebra tool for the resolution and horseshoe calculation; the unit supplies no replacement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-injective-resolution-ses",
+  "lem-weil-pbc-ses-injective-kernel-splits",
+  "lem-sc-p1-horseshoe-derived-triangle-comparison",
+  "lem-sp-long-exact-of-triangle",
+  "lem-sc-p1-nat-complex-derived-boundary",
+  "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-horseshoe-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-499326712",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-499326712 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full; the delivery has no new nodes. The live clone still has the item unsplit with the same statement, so no other group has superseded it, and it is not a 2026-10-21 re-split. I read every cited statement, including all 17 proof_deps. Global sections Hom(*,-) agree with Stacks 01FT (sites-cohomology.tex), and every Stacks tag cited matches tags/tags. Step 1 is elementary: L*≅* comes from finite-limit preservation in def-trf-geometric-morphism. Step 2: LF[0]→LI is monic in every degree and a quasi-isomorphism because L is exact, which meets the hypotheses of the lift-along-injective-quasi-iso lemma. Step 3: vβ and β'Lu agree after α, which gives homotopy and then naturality through the map-via-lift lemma. Step 4: w∘G(s_I)=T(s_J)t_F, so degree zero sends s to Ls. Step 5: horseshoe rows split, so the triangle-comparison hypotheses hold; its endpoint equations combined with triangle naturality and the snake/derived identity give jδ_E=∂_I j, and I wrote out this chain myself. Step 6: the exact-source horseshoe lift gives β₂, and long-exact naturality then gives Pδ_E=δ_{LE}P. Step 7: clause (1) of the horseshoe δ-functor node gives naturality of δ. The edge cases (q=0, zero sheaves, f=id) hold. My DAG-wide search found no duplicate; lem-weil-pbc-site-cohomology-pullback covers only site morphisms evaluated at an object and does not address the triangle δ. No SGA source is used. I accept the generic homological-algebra tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ToposCohomologyPullbackDelta",
+  "declaration": "CategoryTheory.ToposCohomologyPullback.pullback_delta",
+  "declarations": [
+   "CategoryTheory.ToposCohomologyPullback.abelianSheafification",
+   "CategoryTheory.ToposCohomologyPullback.globalSectionsExist",
+   "CategoryTheory.ToposCohomologyPullback.abelianSheavesGrothendieck",
+   "CategoryTheory.ToposCohomologyPullback.sectionGraph",
+   "CategoryTheory.ToposCohomologyPullback.terminalIso",
+   "CategoryTheory.ToposCohomologyPullback.inverseAdditive",
+   "CategoryTheory.ToposCohomologyPullback.inverseLeftExact",
+   "CategoryTheory.ToposCohomologyPullback.inverseRightExact",
+   "CategoryTheory.ToposCohomologyPullback.resolutionMap",
+   "CategoryTheory.ToposCohomologyPullback.pullback_delta"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/ToposCohomologyPullbackDelta.lean",
+  "statement": "theorem pullback_delta {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))) (A : AbelianInverseImagePresentation f.inverse) [HasDerivedCategory.{dC} (Sheaf J AddCommGrpCat.{w})] [HasDerivedCategory.{dD} (Sheaf K AddCommGrpCat.{w})] [HasDerivedCategory.{dA} AddCommGrpCat.{w}] : ∃ (t : Sheaf.Γ J AddCommGrpCat.{w} ⟶ A.functor ⋙ Sheaf.Γ K AddCommGrpCat.{w}) (P : ∀ q : ℕ, (Sheaf.Γ J AddCommGrpCat.{w}).rightDerived q ⟶ A.functor ⋙ (Sheaf.Γ K AddCommGrpCat.{w}).rightDerived q), (∀ (F : Sheaf J AddCommGrpCat.{w}) (x : (Sheaf.Γ J AddCommGrpCat.{w}).obj F), sectionGraph K (A.functor.obj F) (t.app F x) = (terminalIso J K f).inv ≫ f.inverse.map (sectionGraph J F x) ≫ A.underlying.inv.app F) ∧ (∀ (F : Sheaf J AddCommGrpCat.{w}) (I : InjectiveResolution F) (R : InjectiveResolution (A.functor.obj F)), ∃ β : (A.functor.mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ R.cocomplex, A.functor.map (I.ι.f 0) ≫ β.f 0 = R.ι.f 0) ∧ (∀ (F : Sheaf J AddCommGrpCat.{w}) (I : InjectiveResolution F) (R : InjectiveResolution (A.functor.obj F)) (β : (A.functor.mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ R.cocomplex), A.functor.map (I.ι.f 0) ≫ β.f 0 = R.ι.f 0 → ∀ q : ℕ, (P q).app F = resolutionMap J K f A t F I R β q) ∧ (∀ F : Sheaf J AddCommGrpCat.{w}, (P 0).app F ≫ (Sheaf.Γ K AddCommGrpCat.{w}).rightDerivedZeroIsoSelf.hom.app (A.functor.obj F) = (Sheaf.Γ J AddCommGrpCat.{w}).rightDerivedZeroIsoSelf.hom.app F ≫ t.app F) ∧ (∀ (S : ShortComplex (Sheaf J AddCommGrpCat.{w})) (hS : S.ShortExact), ∃ hLS : (S.map A.functor).ShortExact, ∀ q : ℕ, hS.rightDerivedδ (Sheaf.Γ J AddCommGrpCat.{w}) q ≫ (P (q + 1)).app S.X₁ = (P q).app S.X₃ ≫ hLS.rightDerivedδ (Sheaf.Γ K AddCommGrpCat.{w}) q) ∧ (∀ (S T : ShortComplex (Sheaf J AddCommGrpCat.{w})) (hS : S.ShortExact) (hT : T.ShortExact) (φ : S ⟶ T) (q : ℕ), hS.rightDerivedδ (Sheaf.Γ J AddCommGrpCat.{w}) q ≫ ((Sheaf.Γ J AddCommGrpCat.{w}).rightDerived (q + 1)).map φ.τ₁ = ((Sheaf.Γ J AddCommGrpCat.{w}).rightDerived q).map φ.τ₃ ≫ hT.rightDerivedδ (Sheaf.Γ J AddCommGrpCat.{w}) q) ∧ (∀ (S T : ShortComplex (Sheaf K AddCommGrpCat.{w})) (hS : S.ShortExact) (hT : T.ShortExact) (φ : S ⟶ T) (q : ℕ), hS.rightDerivedδ (Sheaf.Γ K AddCommGrpCat.{w}) q ≫ ((Sheaf.Γ K AddCommGrpCat.{w}).rightDerived (q + 1)).map φ.τ₁ = ((Sheaf.Γ K AddCommGrpCat.{w}).rightDerived q).map φ.τ₃ ≫ hT.rightDerivedδ (Sheaf.Γ K AddCommGrpCat.{w}) q)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The induced abelian inverse image is the recorded normalized presentation; its exactness is taken from the proved geometric_inverse_image_exact dependency. Separate site object and morphism universes and EssentiallySmall.{w} hypotheses retain essentially-small sites with objects above the coefficient universe. The global-section transformation is normalized on every terminal-sheaf section. One natural family satisfies the resolution formula for every pair of resolutions and every augmented comparison. Connecting maps are the existing derived-triangle rightDerivedδ."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-adceeda03",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Snapshot vs live node: only lean (new) and stmt_deps changed (added existing def-trf-abelian-inverse-image-presentation and lem-trf-geometric-inverse-image-exact); statement, proof and proof_deps unchanged. Every clause matches: t pinned on every section by the terminal-graph equation (s↦Ls via terminalIso and A.underlying); β exists over id_LF; one NatTrans family P equals resolutionMap (isoRightDerivedObj, H^q(t_I), compIso, Γ(β), inverse iso) for every I, R and augmented β, every q; degree zero via rightDerivedZeroIsoSelf; ∃ exactness of S.map A and hS.δ≫P(q+1)=P q≫hLS.δ with the derived-triangle rightDerivedδ; δ-naturality on both sites. Hypotheses: EssentiallySmall.{w}, independent site universes, no UnivLE, no injective preservation, no final object or site functor. Mechanical theorem-stmt_dep finding judged: the statement needs the theorem's conclusion (exactness, hence Additive/PreservesZeroMorphisms of A.functor) to form S.map A.functor, mapHomologicalComplex and the target δ; no definition from that module is used → PASS on that point. Gates OK: no hollow defs, one sorry (main theorem, 7-step docstring), source/blueprint docstrings, statement verbatim, 10 declarations present, Worker report and Second reading present, no duplicate, no pro-etale substitute. Not compiled (no fixes). Advisory: global HasSheafify/Grothendieck instances; δ-naturality conjuncts restate the upstream lemma, kept because the node states them."
+ }
+}

@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-relative-flat-locus-base-change",
+ "kind": "statement",
+ "title": "Relative source flat locus is open and commutes with parameter base change",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme], with morphisms $p:X\\to S$, $q:Y\\to S$ and $f:X\\to Y$ satisfying $q\\circ f=p$. Assume that $p$ is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], and that $q$ is locally of finite type [def-weil-finite-type-morphism]. Put $U=\\{x\\in |X|:f\\text{ is flat at }x\\}$. Then $U$ is open in $|X|$. For every morphism $h:T\\to S$ of schemes, let $f_T:X\\times_ST\\to Y\\times_ST$ and $\\pi_X:X\\times_ST\\to X$ be the base-changed morphism and projection [def-pc-fibre-product]. The set of points where $f_T$ is flat is exactly $\\pi_X^{-1}(U)$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05VK, more-morphisms-lemma-base-change-flatness-fibres, full statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the compatible-affine-chart lemma at every $x\\in X$. On each resulting chart $Z$, its open subset $E$ is exactly $U\\cap Z$. Since these $Z$ cover $X$, the union of their open subsets $E$ is $U$. Thus $U$ is open in $X$.",
+   "uses": [
+    "lem-sfb-relative-flat-affine-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, proof first two sentences, expanded using Tag 0399, theorem-openness-flatness; morphisms.tex Tag 02FV, lemma-finite-presentation-permanence (1). Affine-chart and stalk-localization form, not the parameter-base-change assertion."
+   }
+  },
+  {
+   "text": "Fix any $h:T\\to S$ and $x'\\in X_T$, and put $x=\\pi_X(x')$, $t=p_T(x')$, $s=h(t)=p(x)$. The universal fibrewise-flatness test gives $f_T\\text{ flat at }x'\\iff(f_T)_t\\text{ flat at }\\widetilde{x'}$ and $f\\text{ flat at }x\\iff f_s\\text{ flat at }\\widetilde x$, with all hypotheses valid over $T$.",
+   "uses": [
+    "lem-sfb-relative-flat-fibre-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, proof from the fibrewise description of U through the sentence that the hypotheses remain in force after base change; Tag 039C, theorem-criterion-flatness-fibre, structure-sheaf specialization, together with pointwise flat ascent."
+   }
+  },
+  {
+   "text": "The residue-field homomorphism κ(s) → κ(t) makes κ(t) a vector space over κ(s). Mathlib Module.Free.of_divisionRing and Module.Flat.of_free give flatness directly. Flat.SpecMap_iff makes r = Spec(κ(t) ← κ(s)) flat; base-change stability applied to the cartesian fibre square for Y makes b:(Y_T)_t → Y_s flat. At z = p_T.asFiber(x′), pointwise flatness ascent and reflection in the square of step 5 give Flat(f_s at a(z)) iff Flat((f_T)_t at z). The projection identities give p.fiberι(a(z)) = π_X(x′) and p_T.fiberι(z) = x′. The equivalences from steps 3 and 4 therefore give Flat(f_T at x′) iff Flat(f at π_X(x′)). Extensionality proves the required equality of subsets.",
+   "uses": [
+    "lem-sfb-flat-residue-fibre-square",
+    "lem-sfb-pointwise-flatness-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, proof final paragraph, applying Tag 047C, lemma-flat-locus-base-change (1),(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-flat-affine-charts",
+  "lem-sfb-relative-flat-fibre-test",
+  "lem-sfb-flat-residue-fibre-square",
+  "lem-sfb-pointwise-flatness-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05VK (lemma-base-change-flatness-fibres), expanding the cited Tag 05VJ (lemma-base-change-criterion-flatness-fibre), proof with the structure sheaf. Openness expanded via Tag 00RC rather than a new scheme-openness lemma. Lean assembly by S4, 2026-10-23: residue-field flatness uses the Mathlib vector-space/free-module instances directly instead of faithfully flat tensor base change; all other six-step arguments are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism X to Y of S schemes with X flat locally of finite presentation over S and Y locally of finite type over S, the flat locus in X is open and commutes with arbitrary base change on S",
+   "results": "{\"t\": \"2026-10-22T04:23:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism X to Y of S schemes with X flat locally of finite presentation over S and Y locally of finite type over S, the flat locus in X is open and commutes with arbitrary base change on S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"f610b796fa1a97ed\"}; no match: UniversallyOpen.of_flat is openness of a map already flat, and Flat.isStableUnderBaseChange only preserves flatness; neither identifies the full flat locus after arbitrary parameter base change.",
+   "date": "2026-10-22",
+   "verdict": "no match: UniversallyOpen.of_flat is openness of a map already flat, and Flat.isStableUnderBaseChange only preserves flatness; neither identifies the full flat locus after arbitrary parameter base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a morphism between families of schemes is flat is open in its source and equals the inverse image of that locus under every change of the parameter base, provided the source is flat finitely presented over the parameter base",
+   "results": "{\"t\": \"2026-10-22T04:24:10Z\", \"tool\": \"leanfinder\", \"query\": \"The locus where a morphism between families of schemes is flat is open in its source and equals the inverse image of that locus under every change of the parameter base, provided the source is flat finitely presented over the parameter base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"475910ca1651cc52\"}; no match: hits are openness of flat maps and permanence/descent of flatness, not this relative flat-locus equality.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are openness of flat maps and permanence/descent of flatness, not this relative flat-locus equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Flat\", \"IsOpen\"",
+   "results": "{\"t\": \"2026-10-22T04:24:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Flat\\\", \\\"IsOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instRespectsSchemeIsOpenImmersion\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"93ba15562618e50f\"}; no match: the two hits concern flatness of open immersions, not the relative flat locus.",
+   "date": "2026-10-22",
+   "verdict": "no match: the two hits concern flatness of open immersions, not the relative flat locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The flat locus of a map of flat finitely presented families of schemes commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:23:09Z\", \"tool\": \"leansearch\", \"query\": \"The flat locus of a map of flat finitely presented families of schemes commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"4cd0aee27e75e2ec\"}; no match: base change of flatness and stalkwise criteria do not give openness and equality of the relative flat loci.",
+   "date": "2026-10-22",
+   "verdict": "no match: base change of flatness and stalkwise criteria do not give openness and equality of the relative flat loci."
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|flatness.*fib|locus.*flat",
+   "results": "{\"t\": \"2026-10-22T04:23:08Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|flatness.*fib|locus.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: no hits in AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match: no hits in AlgebraicGeometry."
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|isOpen.*[Ff]lat|[Ff]lat.*locus",
+   "results": "{\"t\": \"2026-10-22T04:24:10Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|isOpen.*[Ff]lat|[Ff]lat.*locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean\"], \"digest\": \"90230d256cf2727c\"}; no match: full Mathlib search hits universally open flat maps, flat monomorphisms and tensor equalizers, not relative flat-locus formation.",
+   "date": "2026-10-22",
+   "verdict": "no match: full Mathlib search hits universally open flat maps, flat monomorphisms and tensor equalizers, not relative flat-locus formation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locus of a morphism between families with source flat locally finitely presented over S commutes with arbitrary change of S",
+   "results": "{\"t\": \"2026-10-22T04:39:01Z\", \"tool\": \"leanfinder\", \"query\": \"Flat locus of a morphism between families with source flat locally finitely presented over S commutes with arbitrary change of S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"adc6098bbd5aecb4\"}; Flat.isStableUnderBaseChange preserves an everywhere-flat map, and UniversallyOpen.of_flat says the map is open; neither gives relative flat loci.",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat.isStableUnderBaseChange preserves an everywhere-flat map, and UniversallyOpen.of_flat says the map is open; neither gives relative flat loci."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nonflat points of a morphism from a flat finitely presented S scheme to a locally finite type S scheme form a closed subset preserved by every base change of S",
+   "results": "{\"t\": \"2026-10-22T04:39:53Z\", \"tool\": \"leanfinder\", \"query\": \"The nonflat points of a morphism from a flat finitely presented S scheme to a locally finite type S scheme form a closed subset preserved by every base change of S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"4912557cd851367f\"}; Hits concern globally flat morphisms, their base-change stability and openness of the morphism, not the locus assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern globally flat morphisms, their base-change stability and openness of the morphism, not the locus assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"IsOpen\"",
+   "results": "{\"t\": \"2026-10-22T04:38:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"IsOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instRespectsSchemeIsOpenImmersion\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\"], \"digest\": \"7ab49c6970e6f6a6\"}; Open-immersion flatness and IsOpenImmersion.of_flat_of_mono are different assertions.",
+   "date": "2026-10-22",
+   "verdict": "no match: Open-immersion flatness and IsOpenImmersion.of_flat_of_mono are different assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|locus.*flat|flatness.*fib",
+   "results": "{\"t\": \"2026-10-22T04:38:56Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|locus.*flat|flatness.*fib\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits in AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match: No hits in AlgebraicGeometry."
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|flatness.*fib|locus.*flat",
+   "results": "{\"t\": \"2026-10-22T04:39:50Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|flatness.*fib|locus.*flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/Ring/EqualizerPushout.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean\"], \"digest\": \"9a499f0c00f525f6\"}; Full Mathlib search finds free loci and equalizers, not this relative locus.",
+   "date": "2026-10-22",
+   "verdict": "no match: Full Mathlib search finds free loci and equalizers, not this relative locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative source flat locus is open and its formation commutes with arbitrary parameter base change",
+   "results": "{\"t\": \"2026-10-22T04:38:56Z\", \"tool\": \"leansearch\", \"query\": \"Relative source flat locus is open and its formation commutes with arbitrary parameter base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"RingHom.Flat.propertyIsLocal\", \"Module.Flat.localizedModule\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.instResLE\"], \"digest\": \"878e2a6ce93333c6\"}; Flat.isStableUnderBaseChange and UniversallyOpen.of_flat do not state the claim; smoothLocus openness is for a different property.",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat.isStableUnderBaseChange and UniversallyOpen.of_flat do not state the claim; smoothLocus openness is for a different property."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-universal-surjective-flat-open",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: first sentence, applying Tag 05XC to construct W_1; Tag 05XC reduction to the flat case, expanded via Tag 05XB: the source flat locus is open and commutes with arbitrary parameter base change (scheme form Tag 05VK).",
+   "via": [
+    "lem-sfb-universal-surjective-flat-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-flat-locus-base-change",
+  "worker": "stage1",
+  "summary": "Repair of the released 2026-10-22 re-split order: the six old arguments are assigned in pairs to three independent statement-only nodes, for affine charts and openness, the fibrewise test over every parameter base, and the flat cartesian residue-fibre comparison. The assembly proof uses exactly these statements and the existing pointwise flat-ascent/reflection theorem. Statement, statement dependencies and inherited route are unchanged; every original argument is preserved verbatim in report.md for the successor workers. Searches found no Mathlib leaf.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite: the de Jong morphism-scheme/Hilbert-scheme route through 05XC and 05XB, where 05VK supplies the relative source flat locus. The nearest recorded blueprint ancestor is null, as returned by blueprint_refs.py ancestor; the inherited ancestry and unit are retained. Repair realizes its same prerequisite by three extractions covering old steps 1–2, 3–4 and 5–6; blueprint_refs.py ancestor still returns null. The current latest direct-images proof (3) has changed its higher-level route, but this keep_plan repair preserves the assigned prerequisite and reports that discrepancy.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-openness-of-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-c8693a9ff",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-c8693a9ff (reviewer sub-agent of L); spot-checked: Proper re-split under the released 2026-10-21/22 repair note (keep_plan; 4713-character six-step proof). The item's statement, stmt_deps, lean and review fields are unchanged from live. Only proof, proof_deps and split_report changed. The item is not on the route-pivot list. No later group has re-split it live. No SGA source is cited. All six old step texts appear verbatim in the report and are each assigned to a new node. (a) Old 1-2 become lem-sfb-relative-flat-affine-charts, which I checked true. It gives a chart triple A->B->C with C finitely presented over A and over B (00F4, q locally of finite type, p locally of finite presentation). It identifies the stalk map with B_b->C_r and applies 00RC with M=C, then 00HT, to get E open and E=U∩Z. It needs no flatness of p. Test: Spec k -> A^1 gives an empty E. (b) Old 3-4 become lem-sfb-relative-flat-fibre-test. The forward direction is 047C(1), since X_s = X x_Y Y_s. The reverse is 039C with F=O_X and p flat. The T clause follows from 01U9, 01TS and 01T4. Spec k into Spec k[t] shows that the hypothesis p flat is needed. (c) Old 5 and the first half of 6 become lem-sfb-flat-residue-fibre-square. It uses (X_T)_t ≅ X_s x_{κ(s)} κ(t) ≅ X_s x_{Y_s} (Y_T)_t, so the square is cartesian. The projection identity holds, and e, a and b are flat as base changes of a field extension. It has no hypotheses. The application of 047C(1),(2) stays in parent step 3 through the existing lem-sfb-pointwise-flatness-base-change. I checked a(x~') = x~ by uniqueness of the fibre point. The three new statements (1100-1330 characters) are of comparable size, and none restates the item. The parent is a short assembly of about 1050 characters, and proof_deps equals the union of the step uses. I compared the sources with more-morphisms.tex: 05VK at l.4759, the 05VJ proof at l.4725-4756, 039C, 047C and 0399. All tags match tags/tags. Duplicate search with rg -L over 0399, 05VJ, 05VK, 039C, 047C, 00RC, 02FV and flat-locus phrasing found no duplicate. Nearest nodes: openness-of-flatness (algebra input), fibre-of-base-change (single family), trf-base-change-fibre-flat-qcoherent (single family, lft), sbc finite-flat-target-locus, and sfb relative-universal-flat-open (a citer). All stmt_deps exist. Each node is unsplit with an empty proof and five searches. Removing the 00RC tool_use is correct. Advisory only: main-20261023 changes the higher direct-images route, but keep_plan applies and the item has not been dropped."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFlatLocusBaseChange",
+  "declaration": "AlgebraicGeometry.isOpen_flatLocus_and_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFlatLocusBaseChange.lean",
+  "statement": "theorem isOpen_flatLocus_and_baseChange {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (hf : f ≫ q = p) [Flat p] [LocallyOfFinitePresentation p] [LocallyOfFiniteType q] : IsOpen {x : X | (f.stalkMap x).hom.Flat} ∧ ∀ (T : Scheme.{u}) (h : T ⟶ S), {x : ↥(pullback p h) | ((pullback.map p h q h f (𝟙 T) (𝟙 S) (by simpa only [Category.comp_id] using hf.symm) (by simp)).stalkMap x).hom.Flat} = (pullback.fst p h) ⁻¹' {x : X | (f.stalkMap x).hom.Flat}",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3cd79b36a",
+  "group": "NL",
+  "result": "pass",
+  "note": "Lean statement matches lem-sfb-relative-flat-locus-base-change and Stacks Tag 05VK/05VJ (more-morphisms.tex 4700-4777) clause by clause. Hypotheses Flat p, LocallyOfFinitePresentation p, LocallyOfFiniteType q, f ≫ q = p; nothing stronger. U = {x | (f.stalkMap x).hom.Flat}, the pointwise notion of def-weil-flat-morphism; conclusion IsOpen U ∧ ∀ T h, flat locus of the canonical pullback.map p h q h f (𝟙 T) (𝟙 S) = (pullback.fst p h)⁻¹' U. Edge cases (empty X or T, flat f, shared universe u) are fine. All five stmt_deps are mathlib existing:true records. Snapshot node differs from live only in the lean field; lean.statement appears verbatim in the file; no other group has a stage-2 record; item not on the route-pivot dropped list. No definitions, proof is sorry only, source and blueprint docstrings present, six-step proof in the docstring, report has both sections. No existing Mathlib/project declaration, so existing:false is right. Not recompiled: no file changed; worker reports a clean compile. Advisory only: some plain proof imports probably unused."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261023T105610-L-3580450",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

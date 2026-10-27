@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-universal-unramified-radicial-open",
+ "kind": "statement",
+ "title": "The universal unramified and universally injective locus in the base is open",
+ "statement": "Let $A,B,C$ be schemes [def-pc-scheme], let $p:A\\to B$ and $q:C\\to B$ be morphisms, and let $f:A\\to C$ satisfy $q\\circ f=p$. Assume that $p$ is locally of finite type [def-weil-finite-type-morphism], that the underlying map of $p$ is closed (it sends closed subsets to closed subsets), and that the underlying map of $p_2=p\\circ\\operatorname{pr}_1:A\\times_C A\\to B$ [def-pc-fibre-product] is closed. Then there exists an open subscheme $V\\subseteq B$ [def-weil-open-immersion] such that for every scheme $T$ and every morphism $h:T\\to B$, the induced morphism $f_T:A\\times_B T\\to C\\times_B T$ is unramified [def-weil-unramified-morphism] and universally injective [def-weil-radicial-morphism] if and only if $h$ factors through $V\\hookrightarrow B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, scheme specialization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-unramified-morphism",
+  "def-weil-radicial-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-closed-source-unramified-parameter-open] to obtain $B_0\\subseteq B$. Thus, for every $h:T\\to B$, $f_T$ is unramified exactly when $h$ factors through $B_0$. In particular $f_0:A_0=A\\times_BB_0\\to C_0=C\\times_BB_0$ is unramified, by taking $h:B_0\\hookrightarrow B$.",
+   "uses": [
+    "lem-sfb-closed-source-unramified-parameter-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, scheme specialization."
+   }
+  },
+  {
+   "text": "Put $D=A\\times_CA$ and $D_0=A_0\\times_{C_0}A_0$. By [lem-sfb-open-base-relative-square-closed], $D_0\\cong D\\times_BB_0$, and $p_{20}:D_0\\to B_0$ is closed. The diagonal $\\delta:A_0\\to D_0$ is an open immersion by [def-weil-unramified-morphism]. Its image $J$ is open by [def-weil-open-immersion]. Hence $E=|D_0|\\setminus J$ is closed, and $V=B_0\\setminus p_{20}(E)$ is open in $B_0$ and therefore in $B$, with the restricted structure sheaf.",
+   "uses": [
+    "lem-sfb-open-base-relative-square-closed",
+    "def-weil-unramified-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, scheme specialization."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-open-image-universal-surjectivity] over $B_0$ to $\\delta:A_0\\to D_0$, with structure maps $p_0$ and $p_{20}$. Its open image is $J$, its target structure map is closed, and $p_{20}\\circ\\delta=p_0$. Its complement formula gives exactly $V$. Therefore, for every $h:T\\to B_0$, the base change $\\delta_T$ is surjective exactly when $h$ factors through $V$. By [lem-sfb-open-base-relative-square-closed] this base change is the diagonal of $f_T$. By [def-weil-radicial-morphism], its surjectivity is equivalent to universal injectivity of $f_T$.",
+   "uses": [
+    "lem-sfb-open-image-universal-surjectivity",
+    "lem-sfb-open-base-relative-square-closed",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, scheme specialization."
+   }
+  },
+  {
+   "text": "For arbitrary $h:T\\to B$, unramifiedness first factors $h$ through $B_0$ by step 1. The iterated-base-change identifications in [lem-sfb-open-base-relative-square-closed] identify its $f_T$ with that of the restricted triangle. Step 3 then says that universal injectivity factors this map through $V$. Conversely, factorization through $V\\subseteq B_0$ gives unramifiedness by step 1 and universal injectivity by step 3. Composition of the two inclusions makes $V$ the required open subscheme of $B$.",
+   "uses": [
+    "lem-sfb-open-base-relative-square-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, spaces-more-morphisms-lemma-where-unramified-universally-injective, scheme specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-closed-source-unramified-parameter-open",
+  "lem-sfb-open-base-relative-square-closed",
+  "def-weil-unramified-morphism",
+  "def-weil-open-immersion",
+  "lem-sfb-open-image-universal-surjectivity",
+  "def-weil-radicial-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X9, lemma-where-unramified-universally-injective, scheme specialization; expands its application of Tag 05X8 using scheme Tags 0475, 01T8, 01JT, 01S4, 01HH, 01HI, 01JY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "where.*unramified|unramifiedLocus|unramified.*locus|unramified.*universally.*injective",
+   "results": "{\"t\": \"2026-10-22T04:23:12Z\", \"tool\": \"grep\", \"query\": \"where.*unramified|unramifiedLocus|unramified.*locus|unramified.*universally.*injective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open subscheme of the base parametrizes unramified universally injective base changes of a morphism",
+   "results": "{\"t\": \"2026-10-22T04:23:13Z\", \"tool\": \"leansearch\", \"query\": \"An open subscheme of the base parametrizes unramified universally injective base changes of a morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyInjective.mk\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.Scheme.Hom.injective\", \"AlgebraicGeometry.universallyInjective_eq\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\"], \"digest\": \"ecd871cf97d75741\"}; no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyInjective\", \"Opens\"",
+   "results": "{\"t\": \"2026-10-22T04:23:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyInjective\\\", \\\"Opens\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open of the parameter scheme represents base changes where a map is both unramified and universally injective, when the source and its relative self product have closed structure maps",
+   "results": "{\"t\": \"2026-10-22T04:23:23Z\", \"tool\": \"leanfinder\", \"query\": \"An open of the parameter scheme represents base changes where a map is both unramified and universally injective, when the source and its relative self product have closed structure maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\"], \"digest\": \"c072a316f0d775f1\"}; no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a family of morphisms the unramified radicial condition after arbitrary base change is represented by an open subset of the parameter scheme",
+   "results": "{\"t\": \"2026-10-22T04:23:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a family of morphisms the unramified radicial condition after arbitrary base change is represented by an open subset of the parameter scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\"], \"digest\": \"7e98e2aa7a238ffb\"}; no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change."
+  },
+  {
+   "tool": "grep",
+   "query": "unramifiedLocus|isOpen_unramifiedLocus|unramified.*locus",
+   "results": "{\"t\": \"2026-10-22T04:24:43Z\", \"tool\": \"grep\", \"query\": \"unramifiedLocus|isOpen_unramifiedLocus|unramified.*locus\", \"sub\": \"RingTheory/Unramified\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/Field.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/Locus.lean\", \"Mathlib/RingTheory/Unramified/Locus.lean\", \"Mathlib/RingTheory/Unramified/Locus.lean\", \"Mathlib/RingTheory/Unramified/Locus.lean\", \"Mathlib/RingTheory/Unramified/Locus.lean\"], \"digest\": \"dd634fd1d8efdab0\"}; no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give the affine unramified locus, diagonal criteria or base-change stability, not an open in the parameter base representing the simultaneous condition after every base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme of the parameter base represents base changes where a morphism is unramified and universally injective",
+   "results": "{\"t\": \"2026-10-22T04:32:38Z\", \"tool\": \"leanfinder\", \"query\": \"An open subscheme of the parameter base represents base changes where a morphism is unramified and universally injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\"], \"digest\": \"b02fc31a7c6efeea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply only morphism properties, their diagonal criteria, or base-change permanence, not the parameter open representing simultaneous unramifiedness and universal injectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "where.*unramified|unramifiedLocus|unramified.*locus|unramified.*universally.*injective",
+   "results": "{\"t\": \"2026-10-22T04:32:58Z\", \"tool\": \"grep\", \"query\": \"where.*unramified|unramifiedLocus|unramified.*locus|unramified.*universally.*injective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply only morphism properties, their diagonal criteria, or base-change permanence, not the parameter open representing simultaneous unramifiedness and universal injectivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open subscheme of the base parametrizes unramified universally injective base changes of a morphism",
+   "results": "{\"t\": \"2026-10-22T04:32:58Z\", \"tool\": \"leansearch\", \"query\": \"An open subscheme of the base parametrizes unramified universally injective base changes of a morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyInjective.mk\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.Scheme.Hom.injective\", \"AlgebraicGeometry.universallyInjective_eq\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\"], \"digest\": \"ecd871cf97d75741\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply only morphism properties, their diagonal criteria, or base-change permanence, not the parameter open representing simultaneous unramifiedness and universal injectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyInjective\", \"Opens\"",
+   "results": "{\"t\": \"2026-10-22T04:32:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyInjective\\\", \\\"Opens\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply only morphism properties, their diagonal criteria, or base-change permanence, not the parameter open representing simultaneous unramifiedness and universal injectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a family of morphisms the unramified radicial condition after arbitrary base change is represented by an open subset of the parameter scheme",
+   "results": "{\"t\": \"2026-10-22T04:33:27Z\", \"tool\": \"leanfinder\", \"query\": \"For a family of morphisms the unramified radicial condition after arbitrary base change is represented by an open subset of the parameter scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified.of_comp\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"24410bd78f0bbb31\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply only morphism properties, their diagonal criteria, or base-change permanence, not the parameter open representing simultaneous unramifiedness and universal injectivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-universal-closed-immersion-open",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: second sentence, applying Tag 05XA to construct W_2; Tag 05XA proof, final application of Tag 05X9 after verifying closedness of the source and its relative self-product.",
+   "via": [
+    "lem-sfb-universal-closed-immersion-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-universal-unramified-radicial-open",
+  "worker": "stage1",
+  "summary": "Repair of the released re-split order: statement and its dependencies unchanged. Two new statement-only nodes distribute original steps 1--4 and the relative-square restriction and diagonal comparisons of steps 5 and 7. The existing more general open-image universal-surjectivity node carries the complement and point-lifting argument of original steps 6--8. The parent now assembles the two parameter opens and the diagonal criterion in four short steps. Full original arguments and a responsibility map are retained in report.md.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: second sentence, applying Tag 05XA to construct W_2; Tag 05XA proof, final application of Tag 05X9 after verifying closedness of the source and its relative self-product.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields",
+  "lem-trf-unramified-locus-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-121890e5c",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-121890e5c (reviewer sub-agent of L); spot-checked: Re-split delivery with the statement, stmt_deps and maintainer-owned fields unchanged. Live and side-live still hold the old 9-step proof (Q18), so the delivery is not superseded. I read Stacks 05X8 and 05X9 (spaces-more-morphisms) in full. Coverage of the old proof: old steps 1-4 (lft cancellation, point lifting, unramified locus 0475, B0 complement) became the new node lem-sfb-closed-source-unramified-parameter-open (05X8, scheme case; true; small cases checked: inseparable extension gives B0 empty, identity gives B, empty A). Old step 5 and the comparison parts of steps 7 and 9 became lem-sfb-open-base-relative-square-closed (fibre-product comparison with matching diagonal, open restriction to inverse-image opens, closed maps restrict to closed maps on an open base, iterated base change; it claims no arbitrary-base-change stability of closed maps). Old steps 7-8 are covered by the existing, more general lem-sfb-open-image-universal-surjectivity (05XC open-image argument, same unit). It applies with S=B0, X=A0, Y=D0, f=δ, q=p20: p20∘δ=p0, the image J is open, p20 is closed, and its complement formula gives V. Old step 6 is kept in assembly step 2, and the 01S4 diagonal criterion of old step 9 (diagonal taken over C_T) in assembly steps 3-4. The assembly is 4 steps and 1776 characters; proof_deps equals the union of uses. Both new nodes are self-contained, unsplit, with grep, leansearch, loogle and leanfinder searches and a correct blueprint via chain; neither restates a clause of the parent. My grep of the DAG for 05X8, 05X9 and the unramified locus found no duplicate. No SGA is cited. Maintainer note: the item's merged tool_uses (lem-weil-common-extension-fields, lem-trf-unramified-locus-base-change) are no longer cited by the assembly and belong to the future proof of the 05X8 node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalUnramifiedRadicialOpen",
+  "declaration": "AlgebraicGeometry.exists_universalUnramifiedRadicialOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalUnramifiedRadicialOpen.lean",
+  "statement": "theorem exists_universalUnramifiedRadicialOpen {A B C : Scheme.{u}} (p : A ⟶ B) (q : C ⟶ B) (f : A ⟶ C) (hf : f ≫ q = p) [LocallyOfFiniteType p] (hp : IsClosedMap p.base) (hp2 : IsClosedMap (pullback.fst f f ≫ p).base) : ∃ V : B.Opens, ∀ (T : Scheme.{u}) (h : T ⟶ B), (IsUnramified (pullback.map p h q h f (𝟙 T) (𝟙 B) (by simpa only [Category.comp_id] using hf.symm) (by simp)) ∧ UniversallyInjective (pullback.map p h q h f (𝟙 T) (𝟙 B) (by simpa only [Category.comp_id] using hf.symm) (by simp))) ↔ ∃ l : T ⟶ V.toScheme, l ≫ V.ι = h",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b5e3c644",
+  "group": "N9",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 05X9 clause by clause: hf : f ≫ q = p; [LocallyOfFiniteType p]; IsClosedMap p.base; IsClosedMap (pullback.fst f f ≫ p).base over A×_C A; ∃ V : B.Opens before ∀ T : Scheme.{u}, h; canonical pullback.map p h q h f (𝟙 T) (𝟙 B) (signature checked, HasPullback.lean:270); (IsUnramified ∧ UniversallyInjective) ↔ ∃ l, l ≫ V.ι = h. Stmt_dep declarations read (IsUnramified = LFT ∧ open-immersion diagonal; UniversallyInjective via mathlib_match). Node copy differs from live only in lean; lean.statement verbatim; no defs, sorry only; docstrings carry source, blueprint tag and nine steps; no long lines; proof-dep imports exist. Edge cases (empty A/T, identity, inseparable, separable/B⊔B, non-reduced T) fine. No compile needed (no change); worker compile clean. Cosmetic: stray leading spaces in two docstring lines."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

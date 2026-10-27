@@ -1,0 +1,373 @@
+{
+ "id": "lem-sfb-derived-scalar-lax-normalization",
+ "kind": "statement",
+ "title": "Derived scalar restriction has the balanced tensor-of-counits lax structure",
+ "statement": "Let $(C,J)$ be a site small in a coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], and let $\\varphi:R\\to S$ be a morphism of sheaves of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category], their ordinary unbounded derived categories and localizations $Q_R,Q_S$ [def-weil-abstract-derived-category], and exact scalar restriction $s:\\operatorname{Mod}_S\\to\\operatorname{Mod}_R$, with its termwise localization $V=D(s)$ [def-pc-sheaf-restrict-scalars]. Use the sheafified balanced tensor [def-pur-sheaf-tensor-product] and the signed direct-sum total tensor of complexes [def-pc-tensor-complex-sheaves]. Use the native derived tensor and lax localization maps\n$$\\lambda_{R;P,Q}:Q_RP\\otimes_R^{\\mathbf L}Q_RQ\\longrightarrow Q_R\\operatorname{Tot}(P\\otimes_RQ)$$\nof [lem-sf-ringed-derived-native-tensor], and the analogous $\\lambda_S$. Write $\\kappa_P:VQ_SP\\simeq Q_RsP$ for the canonical exact-localization comparison. Let $E=S\\otimes_R^{\\mathbf L}-\\dashv V$ be the canonical derived scalar adjunction [sk-def-sfb-derived-extension-of-scalars], with counit $\\epsilon$, and equip $E$ with the canonical strong monoidal pullback comparisons $t_{X,Y}:E(X\\otimes_R^{\\mathbf L}Y)\\simeq EX\\otimes_S^{\\mathbf L}EY$ and $e:E(R[0])\\simeq S[0]$ [lem-sfb-ringed-derived-monoidal-comparisons], applied to the identity geometric morphism with structural ring map $\\varphi$.\n\nDefine $\\sigma_{A,B}:VA\\otimes_R^{\\mathbf L}VB\\to V(A\\otimes_S^{\\mathbf L}B)$ to be the adjoint transpose of $(\\epsilon_A\\otimes_S^{\\mathbf L}\\epsilon_B)\\circ t_{VA,VB}$, and define $\\sigma_0$ as the transpose of $e$ [lem-sfb-monoidal-adjunction-mates]. Let $\\gamma_{P,Q}:\\operatorname{Tot}(sP\\otimes_RsQ)\\to s\\operatorname{Tot}(P\\otimes_SQ)$ be the chain map whose component on each $(p,q)$ summand is the balanced sheaf map sending every generalized pure tensor $x\\otimes_Ry$ to $x\\otimes_Sy$.\n\nFor every pair of complexes $P,Q$ of $S$-modules,\n$$V(\\lambda_{S;P,Q})\\circ\\sigma_{Q_SP,Q_SQ}\n=\\kappa_{\\operatorname{Tot}(P\\otimes_SQ)}^{-1}\\circ Q_R(\\gamma_{P,Q})\\circ\\lambda_{R;sP,sQ}\\circ(\\kappa_P\\otimes_R^{\\mathbf L}\\kappa_Q).$$\nMoreover $\\sigma_0$ is the actual degree-zero ring map $\\varphi:R[0]\\to V(S[0])$, under the regular-unit identifications. The family $\\sigma$ is uniquely determined by this equation already on pairs of flat-term K-flat $S$-complexes [def-pc-kflat-complex]. It respects the fixed signed integer tensor/shift comparisons [lem-weil-pbc-derived-tensor-shift-descent]. These conclusions require no flatness of $\\varphi$, no boundedness, and no K-flatness of $sP$ or $sQ$ over $R$; the map $\\lambda_{R;sP,sQ}$ is not asserted to be invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), for the ambient native tensors; agent-formulated comparison of scalar adjunction mates with the balanced localization map, not a verbatim assertion of that tag. Exact external normalization reference WANTED."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-ringed-derived-native-tensor",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-monoidal-adjunction-mates",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "For module sheaves $M,N$ over $S$, the pairing $(x,y)\\mapsto x\\otimes_Sy$ with values in $s(M\\otimes_SN)$ is $R$-bilinear: $\\varphi(r)x\\otimes_Sy=x\\otimes_S\\varphi(r)y$. The sheaf tensor universal property therefore gives its unique map $sM\\otimes_RsN\\to s(M\\otimes_SN)$. Map each $(p,q)$ summand into $s\\operatorname{Tot}(P\\otimes_SQ)$ and use the coproduct universal property to obtain $\\gamma_{P,Q}$. Both composites with the differentials send $x\\otimes_Ry$ to $dx\\otimes_Sy+(-1)^p x\\otimes_Sdy$, so this is a chain map. Bilinearity, the sheaf universal property and the coproduct inclusions also show naturality for chain maps in both variables. These arguments use generalized sections and sheafification, not a sectionwise formula for all sections of the sheaf tensor.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03CZ (sites-modules.tex, lemma-adjointness-tensor-restrict) and 07A4 (lemma-pullback-tensor-product); agent-written balanced-map construction"
+   }
+  },
+  {
+   "text": "Fix arbitrary $S$-complexes $P,Q$, and choose flat-term K-flat $R$-resolutions $a:U\\to sP$, $b:W\\to sQ$. Put $T=\\operatorname{Tot}(U\\otimes_RW)$ and $H=\\operatorname{Tot}(P\\otimes_SQ)$. The total-model theorem makes $T$ flat-term K-flat. Apply ringed pullback to the identity geometric morphism with structural map $\\varphi$: the complexes $S\\otimes_RU$, $S\\otimes_RW$ and $S\\otimes_RT$ are flat-term K-flat over $S$. Write $c_U:E(Q_RU)\\simeq Q_S(S\\otimes_RU)$, and likewise $c_W,c_T$, for the canonical computations. The specified tensor comparison $t$ on these models is the localization of the ordinary comparison $S\\otimes_RT\\simeq\\operatorname{Tot}((S\\otimes_RU)\\otimes_S(S\\otimes_RW))$. This is precisely the representative-normalized canonical comparison, not an arbitrary strong monoidal structure. The native $\\lambda_R$ at $(U,W)$ and $\\lambda_S$ at the extended pair are invertible. No such claim has been made for $(sP,sQ)$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-ringed-tensor-square-presentation",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 0FPT (lemma-symmetric-monoidal-derived)"
+   }
+  },
+  {
+   "text": "Define $i=\\kappa_P^{-1}Q_R(a)$, $j=\\kappa_Q^{-1}Q_R(b)$ and the isomorphism $h=(i\\otimes_R^{\\mathbf L}j)\\lambda_{R;U,W}^{-1}:Q_RT\\to VQ_SP\\otimes_R^{\\mathbf L}VQ_SQ$. Write $f=V(\\lambda_{S;P,Q})\\sigma_{Q_SP,Q_SQ}$. The defining adjunct formula for $\\sigma$, followed by naturality of the adjunction counit along $\\lambda_S$, gives\n$$f^\\flat=\\lambda_{S;P,Q}(\\epsilon_{Q_SP}\\otimes_S^{\\mathbf L}\\epsilon_{Q_SQ})t_{VQ_SP,VQ_SQ}.$$\nConsequently, naturality of $t$ gives\n$$(fh)^\\flat=\\lambda_{S;P,Q}\\bigl((\\epsilon_{Q_SP}E(i))\\otimes_S^{\\mathbf L}(\\epsilon_{Q_SQ}E(j))\\bigr)t_{Q_RU,Q_RW}E(\\lambda_{R;U,W}^{-1}).$$\nHere $q^\\flat=\\epsilon\\circ E(q)$. These identities are just the Hom bijection and naturality; they do not require a tensor comparison involving restricted complexes to be invertible.",
+   "uses": [
+    "lem-sfb-monoidal-adjunction-mates",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 07A4; agent-written expansion of the specified adjunction transpose"
+   }
+  },
+  {
+   "text": "The canonical coefficient adjunction on representatives says that $\\epsilon_{Q_SP}E(i)$ is $Q_S(A)c_U$, where $A:S\\otimes_RU\\to P$ sends $s\\otimes u\\mapsto s\\,a(u)$; similarly $B:S\\otimes_RW\\to Q$ represents $\\epsilon_{Q_SQ}E(j)$. The normalized adjunction is the derived ordinary extension/restriction adjunction in the statement; moving the degree-zero scalar factor from right to left introduces no sign. Substitute these formulas into step 3. Naturality of $\\lambda_S$ moves $Q_S(A)\\otimes^{\\mathbf L}Q_S(B)$ through $\\lambda_S$. The representative formula for $t$ in step 2 then shows that $(fh)^\\flat=Q_S(m)c_T$, where\n$$m:S\\otimes_RT\\to H,\\qquad s\\otimes(u\\otimes w)\\longmapsto (s\\,a(u))\\otimes_S b(w).$$\nIndeed the ordinary tensor comparison sends $s\\otimes(u\\otimes w)$ to $(s\\otimes u)\\otimes_S(1\\otimes w)$; applying $A\\otimes B$ gives exactly this formula. Equality follows first on generalized pure tensors and then on the total coproduct inclusions. Apply the same normalized Hom formula to $T$: $Q_S(m)c_T$ has adjunct $\\kappa_H^{-1}Q_R(g)$, where $g:T\\to sH$ is $u\\otimes w\\mapsto a(u)\\otimes_S b(w)$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03CZ (sites-modules.tex, lemma-adjointness-tensor-restrict), 03EL (lemma-tensor-product-pullback), 07A4, 07A6; agent-written tensor-of-counits calculation"
+   }
+  },
+  {
+   "text": "Denote the proposed right side in the item by $r$. Naturality of the native lax localization map gives\n$$\\lambda_{R;sP,sQ}(Q_R(a)\\otimes_R^{\\mathbf L}Q_R(b))=Q_R\\operatorname{Tot}(a\\otimes_Rb)\\lambda_{R;U,W}.$$\nAfter composing with $h$, its invertible $\\lambda_{R;U,W}$ factors cancel and the $\\kappa_P,\\kappa_Q$ factors cancel against those in $i,j$. Hence\n$$rh=\\kappa_H^{-1}Q_R(\\gamma_{P,Q}\\operatorname{Tot}(a\\otimes_Rb))=\\kappa_H^{-1}Q_R(g).$$\nStep 4 and injectivity of the adjunction Hom bijection give $fh=rh$. Cancel the isomorphism $h$ to obtain the required equation for the original arbitrary $P,Q$. This calculation only cancels $\\lambda_R$ on the chosen resolving pair $(U,W)$; $\\lambda_{R;sP,sQ}$ remains a morphism throughout.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6; agent-written naturality and cancellation calculation"
+   }
+  },
+  {
+   "text": "The complex $R[0]$ is flat-term K-flat: tensoring with it is the identity via the regular unitor, and therefore preserves every acyclic complex. The canonical unit comparison $e$ is represented by $S\\otimes_RR\\to S$, $s\\otimes r\\mapsto s\\varphi(r)$, as prescribed by the regular-unit pullback identification. By the normalized coefficient adjunction, its transpose is represented by $R\\to sS$, $r\\mapsto1\\otimes r\\mapsto\\varphi(r)$. By definition this transpose is $\\sigma_0$. Thus it is the actual coefficient map in degree zero, including its scalar action, not just a morphism abstractly isomorphic to it.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03CZ, 03EL, 07A6; agent-written regular-unit calculation"
+   }
+  },
+  {
+   "text": "If $P,Q$ are flat-term K-flat over $S$, $\\lambda_{S;P,Q}$ is invertible, and so is its image under $V$. The displayed equation therefore fixes $\\sigma_{Q_SP,Q_SQ}$ uniquely, even though the right side contains a possibly noninvertible $\\lambda_{R;sP,sQ}$. For any other natural family satisfying these equations, use the resolving-localization determination theorem over $S$, with the two bifunctors $(A,B)\\mapsto VA\\otimes_R^{\\mathbf L}VB$ and $(A,B)\\mapsto V(A\\otimes_S^{\\mathbf L}B)$. Equality on these resolving pairs implies equality everywhere. Thus the uniqueness assertion is uniqueness as a natural tensor comparison, as for the lax structure in the statement.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 0FPT; resolving localization and cancellation"
+   }
+  },
+  {
+   "text": "For the signed shift assertion first take $P,Q$ flat-term K-flat over $S$ and the $R$-resolutions $a,b$ of step 2. For a first-variable shift use $U[n]\\to s(P[n])$, and for a second-variable shift use $W[n]\\to s(Q[n])$. These remain flat-term K-flat: terms are reindexed, and tensoring with a shifted complex is the shifted tensor up to the stated signed chain isomorphism, so still takes acyclic complexes to acyclic complexes. In the formula $g(u\\otimes w)=a(u)\\otimes_Sb(w)$ of step 4, extracting the first shift is unsigned on both sides; extracting the second multiplies both sides on the $(p,q)$ summand by $(-1)^{np}$. The termwise comparison $\\kappa$ commutes with shifts. The fixed resolving tensor comparisons over $R$ and $S$ commute with these chain shifts by the derived shift-descent theorem. Thus the shift squares for $fh$ and $rh$ agree with the prescribed ones; cancel $h$ and $V(\\lambda_S)$ to obtain both shift squares for $\\sigma$ on resolving $S$-pairs. Resolving-localization determination extends these equalities to all derived objects. The mixed sign is the same $(-1)^{ab}$ on both sides, with no permutation of factors. Neither this step nor the normalization calculation uses boundedness or flatness of $\\varphi$.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FNH (more-algebra.tex, item-shift-tensor), Tags 06YS, 0FPT; agent-written shift square on resolving models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-monoidal-adjunction-mates",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-pbc-derived-tensor-shift-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A2, 0G7E, 07A4, 07A6 and 0FPT provide the derived models; the scalar mate normalization, cancellation, unit and shift verification are written by Q47. Ordinary source: sites-modules.tex Tags 03CZ, 03EL; signs: more-algebra.tex Tag 0FNH. An exact external normalization reference remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|RestrictScalars).*(LaxMonoidal|laxMonoidal|derived)|(LaxMonoidal|laxMonoidal|derived).*(restrictScalars|RestrictScalars)",
+   "results": "OK 2 hit(s): Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunction and tensor formulas, sheaf pullback adjunctions, and native condensed tensor structures do not assert this derived scalar-restriction normalization on arbitrary ring sheaves; read ModuleCat/Monoidal/Adjunction.lean:115-138"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of scalars between module sheaves has the lax monoidal comparison adjoint to derived extension of scalars",
+   "results": "OK 8 hit(s): ModuleCat.instIsLeftAdjointRestrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, RestrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunction and tensor formulas, sheaf pullback adjunctions, and native condensed tensor structures do not assert this derived scalar-restriction normalization on arbitrary ring sheaves; read ModuleCat/Monoidal/Adjunction.lean:115-138"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"Monoidal\"",
+   "results": "OK 1 hit(s): ModuleCat.instLaxMonoidalRestrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunction and tensor formulas, sheaf pullback adjunctions, and native condensed tensor structures do not assert this derived scalar-restriction normalization on arbitrary ring sheaves; read ModuleCat/Monoidal/Adjunction.lean:115-138"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sheaves of commutative rings the right adjoint lax monoidal structure on derived scalar restriction is the canonical balanced derived tensor comparison without flatness",
+   "results": "OK 8 hit(s): SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat, ModuleCat.instIsRightAdjointRestrictScalars, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunction and tensor formulas, sheaf pullback adjunctions, and native condensed tensor structures do not assert this derived scalar-restriction normalization on arbitrary ring sheaves; read ModuleCat/Monoidal/Adjunction.lean:115-138"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|rightAdjointLaxMonoidal",
+   "results": "OK 5 hit(s): 16, 52, 55, 58, 115; directory Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunction and tensor formulas, sheaf pullback adjunctions, and native condensed tensor structures do not assert this derived scalar-restriction normalization on arbitrary ring sheaves; read ModuleCat/Monoidal/Adjunction.lean:115-138"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat derived extension restriction adjunction counit determines balanced tensor comparison on restricted module sheaves even for a nonflat ring homomorphism",
+   "results": "OK 8 hit(s): ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunction and tensor formulas, sheaf pullback adjunctions, and native condensed tensor structures do not assert this derived scalar-restriction normalization on arbitrary ring sheaves; read ModuleCat/Monoidal/Adjunction.lean:115-138"
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|restrict_scalars).*(derived|lax|monoidal)|(derived|lax|monoidal).*(restrictScalars|restrict_scalars)",
+   "results": "OK 5 hits: Mathlib/RepresentationTheory/Basic.lean, Mathlib/RepresentationTheory/Rep/Iso.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary ModuleCat formulas at Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:115-138 and general adjunction/localization infrastructure do not identify the native unbounded module-sheaf tensor with the scalar right-adjoint mate. SheafOfModules.restrictScalars at Sheaf/ChangeOfRings.lean:38 is ordinary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint lax monoidal structure of derived extension and restriction of scalars agrees with the balanced tensor comparison on arbitrary unbounded complexes of module sheaves",
+   "results": "OK 8 hits: CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, ModuleCat.extendRestrictScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary ModuleCat formulas at Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:115-138 and general adjunction/localization infrastructure do not identify the native unbounded module-sheaf tensor with the scalar right-adjoint mate. SheafOfModules.restrictScalars at Sheaf/ChangeOfRings.lean:38 is ordinary."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"Monoidal\"",
+   "results": "OK 1 hits: ModuleCat.instLaxMonoidalRestrictScalars",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary ModuleCat formulas at Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:115-138 and general adjunction/localization infrastructure do not identify the native unbounded module-sheaf tensor with the scalar right-adjoint mate. SheafOfModules.restrictScalars at Sheaf/ChangeOfRings.lean:38 is ordinary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar restriction for sheaves of modules has lax tensor map given by the tensor of counits under the scalar extension adjunction, normalized by the balanced chain tensor map",
+   "results": "OK 8 hits: SheafOfModules.restrictScalars, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.restrictScalars_map_val, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.Monoidal.tensorObj, ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary ModuleCat formulas at Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:115-138 and general adjunction/localization infrastructure do not identify the native unbounded module-sheaf tensor with the scalar right-adjoint mate. SheafOfModules.restrictScalars at Sheaf/ChangeOfRings.lean:38 is ordinary."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointLaxMonoidal|restrictScalars_μ|restrictScalars_ε",
+   "results": "OK 4 hits: 116, 123, 130, 132; directory Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary ModuleCat formulas at Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:115-138 and general adjunction/localization infrastructure do not identify the native unbounded module-sheaf tensor with the scalar right-adjoint mate. SheafOfModules.restrictScalars at Sheaf/ChangeOfRings.lean:38 is ordinary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The monoidal localization of unbounded complexes identifies the right adjoint tensor of counits with the scalar restriction balanced tensor map without a flat ring homomorphism",
+   "results": "OK 8 hits: CategoryTheory.Localization.Monoidal.tensorBifunctorIso, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, IsLocalizedModule.map_lTensor, CategoryTheory.Localization.Monoidal.rightUnitor, CategoryTheory.Localization.Monoidal.ε', IsLocalization.moduleTensorEquiv, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary ModuleCat formulas at Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:115-138 and general adjunction/localization infrastructure do not identify the native unbounded module-sheaf tensor with the scalar right-adjoint mate. SheafOfModules.restrictScalars at Sheaf/ChangeOfRings.lean:38 is ordinary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-cup-mate-coherence",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof paragraph (3), coefficient-change input for the dense-lattice branch: normalization of the balanced scalar tensor in the cup compatibility argument. Ancestor command returns null because the inherited created.item chain is broken above lem-sfb-admissible-direct-image; no fabricated ancestor.",
+   "via": [
+    "lem-sfb-condensed-cup-mate-coherence",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-derived-scalar-lax-normalization",
+  "worker": "stage1",
+  "summary": "Eight-step normalization proof using existing DAG statements only: construct gamma, resolve sP and sQ over R, compute the tensor-of-counits adjunct on their total tensor, cancel only resolving comparisons, identify the actual unit, and prove natural-family uniqueness and the signed shift squares. Statement unchanged; added its flat-term definition dependency. No new nodes or Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof paragraph (3), coefficient-change input for the dense-lattice branch: normalization of the balanced scalar tensor in the cup compatibility argument. The broader direct-image proof is untouched. Whole-blueprint searches scalar, balanced tensor, and restriction of scalars found no exact normalization statement; the null inherited ancestor and its existing via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Sheafified balanced maps are determined by bilinear generalized sections; the unit has no substitute for this generic sheaf-tensor tool."
+   },
+   {
+    "node": "def-pc-sheaf-restrict-scalars",
+    "why": "Generic definition of the objects/comparisons explicitly used in this scalar tensor calculation; the unit has no different definition."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Generic definition of the objects/comparisons explicitly used in this scalar tensor calculation; the unit has no different definition."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides flat-term K-flat R-resolutions of arbitrary restricted S-complexes; the unit has no replacement for this general resolution theorem."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Ensures the tensor of the two R-resolving complexes is itself flat-term K-flat; no preservation of K-flatness by restriction is used."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Applied to the identity geometric morphism with ring map phi, supplies flat-term K-flat scalar extensions and their canonical tensor computation."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic definition of the objects/comparisons explicitly used in this scalar tensor calculation; the unit has no different definition."
+   },
+   {
+    "node": "def-weil-pbc-ringed-tensor-square-presentation",
+    "why": "Generic definition of the objects/comparisons explicitly used in this scalar tensor calculation; the unit has no different definition."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Supplies the actual lax localization tensor maps and their invertibility on resolving pairs; it does not give invertibility on restricted S-complexes."
+   },
+   {
+    "node": "lem-sfb-monoidal-adjunction-mates",
+    "why": "Generic definition of the objects/comparisons explicitly used in this scalar tensor calculation; the unit has no different definition."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Supplies the normalized Hom formula and counit on K-flat R-representatives for arbitrary coefficient maps, the generic normalization needed here."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Supplies the precise scalar tensor comparison and regular unit on complexes, avoiding any arbitrary strong monoidal identification."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Generic definition of the objects/comparisons explicitly used in this scalar tensor calculation; the unit has no different definition."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Supplies determination of arbitrary natural bifunctor transformations by flat-term K-flat pairs, used for uniqueness and the shift squares."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-integer-shifts",
+    "why": "Supplies both explicit signed integer tensor shifts on chain complexes, used to check the balanced map component by component."
+   },
+   {
+    "node": "lem-weil-pbc-derived-tensor-shift-descent",
+    "why": "Identifies those signed chain shifts with the fixed derived comparisons on the resolving models."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-monoidal-adjunction-mates",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-pbc-derived-tensor-shift-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-51c4dba96",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-51c4dba96 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged; it gains def-pc-flat-sheaf-modules as a stmt_dep, which its 'flat-term K-flat' wording justifies), all 8 steps, and the statement of every stmt_dep and proof_dep. The delivery has no new nodes and there is no repair note, so this is an ordinary split. The proof is mathematically correct. Step 1: gamma is the R-bilinear map (via phi) given by the sheaf-tensor universal property; both differential composites agree. Step 2: sP and sQ are resolved over R and not assumed R-K-flat. Tot is flat-term K-flat by lem-pur-kflat-total-tensor-model. The pullback node, applied to the identity topos with ring map phi, makes the extensions flat-term K-flat. lambda is invertible only on those resolving pairs. Steps 3-5: I recomputed (fh)^flat = lambda_S(QA tensor QB)lambda_S^-1 Q(c_ord)c_T = Q_S(m)c_T, and rh = kappa^-1 Q(gamma Tot(a tensor b)) = kappa^-1 Q(g), whose adjunct is m. So fh = rh, and only lambda_{R;U,W} is cancelled. Step 6: e is s tensor r -> s phi(r), and its transpose under the normalized unit is phi. Step 7: lambda_S is invertible on flat-term K-flat S-pairs, and the determination clause of lem-weil-pbc-site-derived-tensor-descent gives uniqueness as a natural family. Step 8: flat-term K-flat complexes are stable under shifts; the second shift carries the sign (-1)^{np} on both sides and the first shift is unsigned. The R-side shift at non-resolving objects is moved along i and j by the naturality clause of the shift-descent node; the signs are written out, not 'transported'. Edge cases: R=Z, S=Z/2, P=Q=S[0] (lambda_R loses Tor_1 and both sides are multiplication); phi=id gives the identity; S=0 is trivial. Duplicate search (rg -L over the snapshot DAG) found no node with this statement: lem-pd-ringed-direct-image-pairing-lax and lem-pd-ringed-tensor-adjunction-mate are underived, def-sfb-condensed-scalar-tensor is the condensed definition used by the citer, and the internal-scalar normalizations are other comparisons. The only citer, lem-sfb-condensed-cup-mate-coherence (steps 5, 10, 12), uses exactly the stated clauses. Sources read: Stacks 0FPT lemma-symmetric-monoidal-derived (proof omitted; ambient structure only) and 03CZ lemma-adjointness-tensor-restrict; proof_origin is agent with an honest WANTED. No SGA citations. The 16 tool_uses are generic tools and are accepted. Advisory: step 4 identifies the statement's canonical derived scalar adjunction with the normalized one of lem-pur-sheaf-ring-derived-coefficient-adjunction (same unit x->x tensor 1); the null inherited from.node and the loose from.place predate this delivery. No fixes."
+ }
+}

@@ -1,0 +1,406 @@
+{
+ "id": "lem-zl-residue-compatible-pullback-frobenius",
+ "kind": "statement",
+ "title": "Residue-compatible pullback and the three-factor local Frobenius operator",
+ "statement": "Fix $k_0=\\mathbf F_q$ of characteristic $p$, an algebraic closure $k$, a prime $\\ell\\ne p$, and $\\Qlb=\\overline{\\mathbf Q}_\\ell$. Let $f_0:W_0\\to X_0$ be a morphism of separated finite-type $k_0$-schemes and $f:W\\to X$ its base change to $k$. Use the rational and common-stage constructible categories, Weil pairs and pullback of [def-weil-weil-sheaf-complex, def-weil-derived-pullback-tensor-hom, def-weil-algebraically-closed-coefficients]. Put $G_T=Lg_T^*$ for the geometric-Frobenius automorphism on $T=T_0\\times_{k_0}k$. These are exact autoequivalences preserving the standard $t$-structures [def-weil-constructible-standard-tstructure], including when $g_T$ is not $k$-linear. For $m\\ge1$, let $\\alpha_m:G_W^mLf^*\\simeq Lf^*G_X^m$ be the comparison induced by $g_X^mf=fg_W^m$ using the rationalized associative integral pullback compositors [lem-pod-integral-pullback-composition].\n\nFor a Weil complex $(K,\\theta)$ set $\\theta_f=Lf^*(\\theta)\\alpha_1$. This defines the induced pullback on Weil pairs, and its iterates satisfy\n$$(\\theta_f)^{[m]}=Lf^*(\\theta^{[m]})\\alpha_m.$$\nLet $z\\in W_0$ and $x=f_0(z)\\in X_0$ be closed points such that the actual residue map $\\kappa(x)\\to\\kappa(z)$ is an isomorphism over $k_0$. Put $r=[\\kappa(x):k_0]=[\\kappa(z):k_0]$. For compatible embeddings of these fields in $k$, take $\\bar x=f\\bar z$ with common source $s=\\operatorname{Spec}k$. The inverse pullback-composition comparison followed by the point fibre [def-weil-local-frobenius-trace] gives a specified natural isomorphism of derived coefficient objects\n$$c_K:\\operatorname{Fib}_sL\\bar z^*Lf^*K\\xrightarrow{\\sim}\\operatorname{Fib}_sL\\bar x^*K.$$\nFor the three-factor local operators of [def-weil-local-frobenius-trace], one has $c_KF_z=F_xc_K$ as an equality of derived morphisms, not merely of traces. The comparison identifies separately the iterated point transports $I^{[r]}$, the return pullback compositors for $g_T^r\\bar t=\\bar t g_s^r$, and the maps induced by $\\theta^{[r]}$. It consequently gives the same intertwining equation on every coefficient cohomology group and the canonical Frobenius-equivariant stalk isomorphism for a constructible sheaf [def-weil-constructible-heart].\n\nIf $f_0$ is a locally closed immersion (a closed immersion followed by an open immersion [def-weil-closed-immersion, def-weil-open-immersion]), every closed $z\\in W_0$ has closed image and the displayed residue-map hypothesis holds, with both residue fields of size $q^r$ [def-weil-residue-field]. All the comparisons just specified commute with finite coefficient extension and define maps at $\\Qlb$. Every finite diagram of Weil objects, arrows, inverse Weil arrows, and equations between their composites can be represented over one finite extension $E/\\mathbf Q_\\ell$ after enlargement; the two inverse equations already hold at this stage, and no Frobenius-stable integral lattice is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Restriction: common-stage Weil pullback, equal residue fields and local Frobenius; returned item Steps 1, 2, 4, 5 and 6; precise auxiliary assertion written by Q37, not a verbatim theorem of the source."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-standard-tstructure",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-local-frobenius-trace",
+  "def-weil-constructible-heart",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-residue-field",
+  "def-zl-weil-ind-sheaf-category",
+  "def-zl-field-weil-shriek-shift-data"
+ ],
+ "proof": [
+  {
+   "text": "For finite coefficients E, use the recorded isomorphismFieldTransport for the scheme automorphism g_T and its inverse, without imposing k-linearity. Its rational and common-stage functors are the actual pullbacks and are inverse equivalences. On an integral representative M in either standard half-category, the exact module inverse image commutes with derived cohomology; the recorded comparison lambda identifies this with constructibleIntegralPullback. Therefore the pulled-back representative has the same cohomological vanishing. The recorded rational object comparison gives the required rational standard-class witness. For common stages, apply this at the representative coefficient field and use the stage comparison. Apply the same argument to the inverse and compose with the recorded counit to obtain reflection of both standard half-categories. For triangulated exactness, take the normalized descended shifts and exactness from automorphismConstructibleStage_descended_shifts. The integral normalization uniquely identifies the ambient shift with fieldIntegralPullShift; faithfulness of the constructible inclusion then identifies the restricted shift with fieldConstructiblePullShift. Rational localization uniqueness identifies the rational shift with fieldRationalPullShift. The common-stage uniqueness, tested on its finite representatives, similarly identifies the common shift with fieldCommonPullShift. Substitution therefore proves exactness for precisely the canonical shifts in the statement, rather than for an arbitrary shift structure.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "lem-pod-isomorphism-field-transport",
+    "lem-sf-automorphism-constructible-stage-equivalence",
+    "def-weil-constructible-standard-tstructure",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "def-zl-field-weil-shriek-shift-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "Write $P_h=Lh^*$ and $d_{h,k}:P_hP_k\\xrightarrow{\\sim}P_{kh}$ for the inverse of the specified compositor. Use its associativity to identify powers with pullback along powers. Since $f$ is the base change of $f_0$, the two projections of $g_Xf$ and $fg_W$ agree, so these scheme morphisms agree, also for every power. Consequently\n$$\\alpha_m=d_{f,g_X^m}^{-1}d_{g_W^m,f}:G_W^mP_f\\longrightarrow P_fG_X^m.$$\nThese are natural isomorphisms by [lem-pod-integral-pullback-composition], rationalized. Set $\\theta_f=P_f(\\theta)\\alpha_1$. For a Weil arrow $u$, naturality gives\n$$P_f(u)\\theta_f=P_f(u\\theta)\\alpha_1=P_f(\\theta'G_Xu)\\alpha_1=\\theta'_fG_W(P_fu).$$\nThus $P_f$ on objects and arrows is the claimed functor of Weil pairs; identities and composition are those of $P_f$.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "Put $P=P_f$. Associativity of the specified compositors gives, with the power identifications just fixed,\n$$\\alpha_{m+1,K}=\\alpha_{m,G_XK}\\,G_W^m(\\alpha_{1,K}).$$\nIndeed both sides first collapse the word of pullbacks along $g_W^m,g_W,f$ to the pullback along $fg_W^{m+1}=g_X^{m+1}f$ and then expand it in the order $f,g_X^{m+1}$; this is the associativity equation of [lem-pod-integral-pullback-composition] twice, with the middle compositor and inverse cancelled. For $m=1$ the required iterate equation is the definition. If it holds for $m$, naturality of $\\alpha_m$ at $\\theta:G_XK\\to K$ gives\n$$\\begin{aligned}\n(\\theta_f)^{[m+1]}&=P(\\theta^{[m]})\\alpha_{m,K}G_W^m(P\\theta)G_W^m(\\alpha_{1,K})\\\\\n&=P(\\theta^{[m]})P(G_X^m\\theta)\\alpha_{m,G_XK}G_W^m(\\alpha_{1,K})\\\\\n&=P(\\theta^{[m+1]})\\alpha_{m+1,K}.\n\\end{aligned}$$\nThis proves the iterates by induction on all $m\\ge1$.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "Now let $z,x$ and the embeddings be as in the statement. Their residue-field isomorphism gives the same finite degree $r$; finiteness follows from [lem-kun-closed-point-field](a). The compatibility of the embeddings gives the equality of scheme morphisms $\\bar x=f\\bar z$. Each embedding factors through $\\mathbf F_{q^r}\\subset k$, so the returns in [def-weil-local-frobenius-trace] use the same $h=g_s^r$: $g_W^r\\bar z=\\bar z h$ and $g_X^r\\bar x=\\bar x h$. Put $A=P_{\\bar z}P_fK$, $B=P_{\\bar x}K$, $e_K=d_{\\bar z,f,K}:A\\to B$, $V=\\operatorname{Fib}_s$, and $H=P_h$. Then $c_K=V(e_K)$ is exactly the stipulated natural isomorphism, not a separately chosen stalk identification.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "def-weil-local-frobenius-trace",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "For every derived arrow $v:N\\to N'$ on $s$, naturality of the point transport [lem-weil-frobenius-point-transport-natural] says $V(Lg_s^*v)\\iota_N=\\iota_{N'}V(v)$. Apply this successively to $v,Lg_s^*v,\\ldots,(Lg_s^*)^{r-1}v$ and compose; the intermediate factors cancel by these equalities. Naturality of the compositor identifying $(Lg_s^*)^r$ with $H$ then gives\n$$V(Hv)I_N^{[r]}=I_{N'}^{[r]}V(v).$$\nIn particular, taking $v=e_K$ proves the comparison of the first factors:\n$$V(He_K)I_A^{[r]}=I_B^{[r]}c_K.$$\nThis works for arbitrary derived morphisms, not only maps of a chosen complex.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "Let $R_{t,K}:HP_tK\\to P_tG_T^rK$ denote the return comparison for $t=\\bar z,\\bar x$. In the notation of Step 2 it is exactly\n$$R_{t,K}=d_{t,g_T^r,K}^{-1}d_{h,t,K}.$$\nAssociativity gives the middle-factor equation on $s$:\n$$e_{G_X^rK}\\,P_{\\bar z}(\\alpha_{r,K})\\,R_{\\bar z,P_fK}=R_{\\bar x,K}\\,H(e_K).$$\nTo check it, multiply on the left by $d_{\\bar x,g_X^r,K}$. Expand $\\alpha_r$ and $R$ by the two displayed formulas. The associativity equation for $(\\bar z,f,g_X^r)$ replaces $d_{\\bar x,g_X^r}e_{G_X^rK}P_{\\bar z}(d_{f,g_X^r}^{-1})$ by $d_{\\bar z,g_X^rf}$. Next use $g_X^rf=fg_W^r$ and associativity for $(\\bar z,g_W^r,f)$: it rewrites $d_{\\bar z,fg_W^r}P_{\\bar z}(d_{g_W^r,f})$ as $d_{g_W^r\\bar z,f}(d_{\\bar z,g_W^r}P_f)$. Cancel $(d_{\\bar z,g_W^r}P_f)^{-1}$. The remaining product is $d_{\\bar z h,f}(d_{h,\\bar z}P_f)=d_{h,f\\bar z}H(d_{\\bar z,f})=d_{h,\\bar x}H(e_K)$ by associativity for $(h,\\bar z,f)$ and the two scheme equalities. This is precisely the right side after multiplication by $d_{\\bar x,g_X^r}$. Cancel that isomorphism. Only the cited compositor identities are used; no Cartesianity of the Frobenius square is needed.",
+   "uses": [
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "Naturality of $e$ at $\\theta^{[r]}:G_X^rK\\to K$ gives the third-factor equation\n$$e_K\\,P_{\\bar z}P_f(\\theta^{[r]})=P_{\\bar x}(\\theta^{[r]})e_{G_X^rK}.$$\nWrite $F_z$ as the three factors of [def-weil-local-frobenius-trace]. Substitute Step 3, namely $(\\theta_f)^{[r]}=P_f(\\theta^{[r]})\\alpha_r$, into its last factor. Apply the displayed naturality equation, then the middle-factor equation of Step 6, and finally Step 5. Functoriality of $V$ yields explicitly\n$$\\begin{aligned}\nc_KF_z\n&=V(P_{\\bar x}\\theta^{[r]})V(e_{G_X^rK}P_{\\bar z}\\alpha_r R_{\\bar z,P_fK})I_A^{[r]}\\\\\n&=V(P_{\\bar x}\\theta^{[r]})V(R_{\\bar x,K})V(He_K)I_A^{[r]}\\\\\n&=V(P_{\\bar x}\\theta^{[r]})V(R_{\\bar x,K})I_B^{[r]}c_K=F_xc_K.\n\\end{aligned}$$\nThis proves equality in the derived coefficient category and identifies each of the three factors separately. The separate rational_point_naturality theorem follows by identifying the specified local compositor with fieldRationalPullComp using its normalization on the literal integral representative. Its inverse natural-transformation square gives the required point naturality. The common-stage comparison is identified with zlPullComp by its normalization on the literal integral representative, then naturality is its inverse natural-transformation square.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "def-weil-local-frobenius-trace",
+    "def-zl-weil-ind-sheaf-category",
+    "def-zl-field-weil-shriek-shift-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "Apply $H^j$ to the derived intertwining equality: functoriality gives $H^j(c_K)H^j(F_z)=H^j(F_x)H^j(c_K)$ and $H^j(c_K)$ is invertible. For a constructible sheaf $K$, [lem-a1-constructible-pullback-t-exact] applies to $f$ and the geometric points, which are $k$-morphisms; their pullbacks preserve the heart and the point complexes are concentrated in degree zero. Its displayed stalk/cohomology identification identifies $H^0(c_K)$ with the canonical pullback stalk isomorphism. Thus that isomorphism is Frobenius-equivariant. Step 1, rather than this $k$-linear theorem, handles the semilinear automorphisms. The common_heart corollary uses the existing zlPull_mem theorem on the heart object (K,hK); its underlying pullback is definitionally Common.pull.",
+   "uses": [
+    "lem-a1-constructible-pullback-t-exact",
+    "def-weil-local-frobenius-trace",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "A locally closed immersion is surjective on stalks. Apply the proved source lemma Scheme.Hom.isIso_residueFieldMap [lem-weil-pbc-surjective-stalks-residue-field-iso] directly, without factorization. The source theorem Hom.finitePoints_eq_closedPoints identifies closed points with points having finite residue fields over the finite base. Hom.mem_finitePoints_iff_of_isIso transports that property to the image. Choose the actual residue algebra through W0.hom.residueFieldAlgebraMap. Module.natCard_eq_pow_finrank and D.card_base give cardinality q^r, where r is exactly localClosedPointDegree. Hom.pointNorm_of_isIso gives the same cardinality for the target residue field.",
+   "uses": [
+    "lem-weil-pbc-surjective-stalks-residue-field-iso",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "All the preceding finite-field constructions commute with $E\\subset L$. Use the composition/scalar equation of [lem-pod-pullback-identities-scalar-extension](1), with exactly its specified canonical families, to transport every $d$, its inverse, $\\alpha_m$, $e$ and $R_t$; the inverse equation follows by multiplying the equation by the invertible comparisons. These equations are rationalized from the integral ones. The point-fibre scalar comparison is [lem-weil-point-sections-scalar-extension], and the scalar compatibility of $\\iota$ is explicitly part (2) of [lem-weil-frobenius-point-transport-natural]. Composing this last equation $r$ times and the compositor equation gives compatibility of $I^{[r]}$. Naturality of the pullback/scalar isomorphisms of [lem-pur-integral-operations-scalar-extension] gives compatibility of each map $P_t(\\theta^{[r]})$. Thus all three-factor equations, and their cohomology maps, agree under coefficient extension. The identity and tower laws in the cited comparisons make these maps well-defined on the common-stage categories, by their stated representative formula.",
+   "uses": [
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  },
+  {
+   "text": "Finally consider a finite diagram at $\\Qlb$. Choose stages for its finitely many underlying objects, its Weil maps and their inverses, and its arrows. The common-stage Hom formula in [def-weil-algebraically-closed-coefficients] supplies representatives after taking one common finite upper field. Each of the finitely many prescribed relations, the arrow equivariance equations, and the two inverse equations for every Weil map is an equality of common-stage Hom classes. By the definition of that equivalence relation each equality holds after some finite further extension. Take a common upper field for all these finitely many witnesses. At that stage all relations hold simultaneously, including both inverse equations, so the representatives really are Weil objects and Weil arrows. The empty diagram uses $E=\\mathbf Q_\\ell$. Step 10 supplies all geometric and fibre comparisons at that same stage. Nothing asks for the rational Weil map or its inverse to preserve an integral lattice; only the underlying objects have integral representatives.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction paragraph: same stalk and local Frobenius; explicit coherence argument by Q119."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-detailed",
+  "lem-pod-isomorphism-field-transport",
+  "lem-sf-automorphism-constructible-stage-equivalence",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-zl-field-weil-shriek-shift-data",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace",
+  "lem-kun-closed-point-field",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-weil-pbc-surjective-stalks-residue-field-iso",
+  "def-weil-residue-field",
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Restriction; T1 proves residue/point naturality/common heart corollaries using existing source lemmas and specified compositor normalization. Other proof steps remain the existing plan. Q8 proves frobenius_exact using the recorded isomorphism-field transport, exact inverse-image homology, and normalization of the descended canonical shifts; the other unfinished steps remain the existing plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of ell-adic Weil complexes along a finite field scheme morphism intertwines local geometric Frobenius at closed points with isomorphic residue fields",
+   "results": "AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply scheme residue fields or topological presheaf stalks, not derived ell-adic local Frobenius transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the iterated Weil structure and point transport under the canonical geometric stalk pullback composition comparison",
+   "results": "AlgebraicGeometry.Scheme.stalkMap_comp, AlgebraicGeometry.PresheafedSpace.stalkMap.comp, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, AlgebraicGeometry.LocallyRingedSpace.stalkMap_comp, TopCat.Presheaf.stalkFunctor_map_germ, TopCat.Presheaf.germ_stalkPullbackInv, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply scheme residue fields or topological presheaf stalks, not derived ell-adic local Frobenius transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkPullbackIso\"",
+   "results": "TopCat.Presheaf.stalkPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply scheme residue fields or topological presheaf stalks, not derived ell-adic local Frobenius transport"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|localFrobenius|stalkPullbackIso",
+   "results": "Mathlib/Topology/Sheaves/Stalks.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply scheme residue fields or topological presheaf stalks, not derived ell-adic local Frobenius transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of Weil complexes preserves the local Frobenius operator at geometric points with equal residue fields",
+   "results": "AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.residueFieldMap_congr, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme residue fields, topological stalks or ordinary module pullbacks do not state the completed rational/common-stage Weil complex assertion and its three-factor intertwining"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|localFrobenius|stalkPullbackIso",
+   "results": "Mathlib/Topology/Sheaves/Stalks.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme residue fields, topological stalks or ordinary module pullbacks do not state the completed rational/common-stage Weil complex assertion and its three-factor intertwining"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of geometric Frobenius on derived stalks under composition of scheme pullbacks",
+   "results": "AlgebraicGeometry.Scheme.stalkMap_comp, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.stalkMap_comp, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.stalkClosedPointTo_comp, CategoryTheory.ChosenPullbacksAlong.pullbackComp, PresheafOfModules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme residue fields, topological stalks or ordinary module pullbacks do not state the completed rational/common-stage Weil complex assertion and its three-factor intertwining"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkPullbackIso\"",
+   "results": "TopCat.Presheaf.stalkPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme residue fields, topological stalks or ordinary module pullbacks do not state the completed rational/common-stage Weil complex assertion and its three-factor intertwining"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-immersion-weil-local-behavior",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Restriction: common-stage Weil pullback, equal residue fields and local Frobenius; returned item Steps 1, 2, 4, 5 and 6",
+   "via": [
+    "lem-zl-immersion-weil-local-behavior"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-residue-compatible-pullback-frobenius",
+  "worker": "stage1",
+  "summary": "Expanded the restriction assertion into explicit pullback-functor and iterate constructions, naturality of iterated point transport, a compositor associativity calculation for the return square, and the resulting derived intertwining identity. Checked semilinear t-exactness, immersion residue fields and closed images, scalar coherence and simultaneous descent of inverse equations. Reused existing lemmas throughout; no new nodes and no statement change.",
+  "blueprint": "lem-zl-morphism-open-closed-reduction.proof.md, Restriction: restrict the filtration; a closed point has the same residue field, stalk and local Frobenius. Steps 1-3 construct the Weil pullback, 4-8 prove the same stalk and Frobenius, 9 checks the immersion geometry, 10-11 handle the coefficient stages.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Integral pullback along any scheme isomorphism is termwise inverse image; needed for semilinear Frobenius, with no k-linearity hypothesis."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Exact inverse-image equivalence for any scheme isomorphism; the local unit supplies no such semilinear site theorem."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Canonical natural associative completed pullback compositors, needed to calculate alpha and the point-return square."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Finite residue-field criterion for closed points of finite-type field schemes, used in both directions to check closed images."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality for every derived arrow and scalar compatibility of the specified point transport, not a sheaf-only replacement."
+   },
+   {
+    "node": "lem-a1-constructible-pullback-t-exact",
+    "why": "Standard heart and coefficient stalk identification for k-linear pullback; used only for f and geometric points."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "The actual residue homomorphism of a closed immersion is an isomorphism; general scheme tool in the restriction argument."
+   },
+   {
+    "node": "lem-pod-pullback-identities-scalar-extension",
+    "why": "Specified pullback-composition comparisons commute with integral scalar extension, then rationalization."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "The specified point-fibre comparison with finite coefficient extension."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Natural pullback/scalar comparisons with identity and tower compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pod-integral-pullback-composition",
+  "lem-kun-closed-point-field",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-c25923d94",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-c25923d94 (reviewer sub-agent of L); spot-checked: Read the whole item, 11 steps with 0 new nodes, against the blueprint lem-zl-morphism-open-closed-reduction 'Restriction' paragraph and every cited statement. Shape: proof_deps equals the union of the uses, there is no cycle, no SGA citation, statement and stmt_deps are unchanged, and no repair note applies. Checks per step: S1 gets G_T t-exactness from lem-weil-isomorphism-derived-pullback, which holds for any isomorphism, so the semilinear g_T is covered; it adds the exact inverse-image equivalence and the cohomology-sheaf definition of the standard pair, with isomorphism closure at E and Qlb. S2: re-derived α_m=d_{f,g^m}^{-1}d_{g^m,f} and Weil-arrow equivariance. S3: the iterate induction matches the θ^{[n]} recurrence of def-weil-local-frobenius-trace. S4: x̄=f z̄ and the common return h=g_s^r. S5: point-transport-natural (2) holds for all derived arrows. S6: re-derived the return-square calculation from the associativity identity in d-form for the triples (z̄,f,g_X^r), (z̄,g_W^r,f) and (h,z̄,f); types match. S7: recomputed c_K F_z=F_x c_K as an equality of derived morphisms. S8: a1 t-exact applies to the k-morphisms f and x̄. S9: closed-immersion residue isomorphism, open-immersion local rings, and closedness of the image via kun-closed-point-field(a) in both directions. S10: scalar compatibility from the statements of pod-pullback-identities-scalar-extension(1), point-sections-scalar-extension and pur-integral-operations-scalar-extension. S11: colimit-Hom descent of finitely many relations. Edge cases checked: f=id, r=1, empty schemes, nonreduced immersions. All 10 declared tool uses are accepted as generic black boxes. No existing node duplicates the item. Batch-5 flags, each accepted as outside the assumptions: (1) point-transport-natural reaches the trace-formula chapter only through a general pullback-along-isomorphism normalization that the trace-formula statement does not give; (2) a1-constructible-pullback-t-exact reaches only an abstract t-structure truncation lemma (BBD 1.3.3), not Poincaré duality; (3) pod-pullback-identities-scalar-extension is compositor/scalar coherence of the coefficient formalism, not a step of the Poincaré duality isomorphism. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ResidueCompatiblePullbackFrobenius",
+  "declaration": "WeilConjectures.ResidueCompatible.residueCompatiblePullbackFrobenius",
+  "declarations": [
+   "WeilConjectures.ResidueCompatible.Rational.pull",
+   "WeilConjectures.ResidueCompatible.Rational.power",
+   "WeilConjectures.ResidueCompatible.Rational.point",
+   "WeilConjectures.ResidueCompatible.Rational.alphaComponent",
+   "WeilConjectures.ResidueCompatible.Rational.pointComponent",
+   "WeilConjectures.ResidueCompatible.Rational.fibreComponent",
+   "WeilConjectures.ResidueCompatible.Rational.Pullback",
+   "WeilConjectures.ResidueCompatible.Common.pull",
+   "WeilConjectures.ResidueCompatible.Common.power",
+   "WeilConjectures.ResidueCompatible.Common.point",
+   "WeilConjectures.ResidueCompatible.Common.alphaComponent",
+   "WeilConjectures.ResidueCompatible.Common.pointComponent",
+   "WeilConjectures.ResidueCompatible.Common.fibreComponent",
+   "WeilConjectures.ResidueCompatible.Common.Pullback",
+   "WeilConjectures.ResidueCompatible.Rational.Local",
+   "WeilConjectures.ResidueCompatible.Common.Local",
+   "WeilConjectures.ResidueCompatible.frobenius_exact",
+   "WeilConjectures.ResidueCompatible.residueCompatiblePullbackFrobenius",
+   "WeilConjectures.ResidueCompatible.immersion_residue",
+   "WeilConjectures.ResidueCompatible.rational_point_naturality",
+   "WeilConjectures.ResidueCompatible.rational_heart",
+   "WeilConjectures.ResidueCompatible.common_point_naturality",
+   "WeilConjectures.ResidueCompatible.common_heart",
+   "WeilConjectures.ResidueCompatible.finite_diagram_descent",
+   "WeilConjectures.ResidueCompatible.composition_scalar",
+   "WeilConjectures.ResidueCompatible.transport_scalar"
+  ],
+  "file": "lean/Sheaf/Paper/ResidueCompatiblePullbackFrobenius.lean",
+  "statement": "theorem residueCompatiblePullbackFrobenius (f₀ : W₀ ⟶ X₀) [IsSeparated W₀.hom] [IsSeparated X₀.hom] : ∃ (P : Rational.Pullback D l hl E f₀) (Q : Common.Pullback D l hl Ω f₀), ∀ (z : {z : W₀.left // z ∈ closedPoints W₀.left}) (hx : f₀.left z.val ∈ closedPoints X₀.left), IsIso (f₀.left.residueFieldMap z.val) → ∀ (ιz : W₀.left.residueField z.val →+* D.k) (hz : ιz.comp (W₀.hom.residueFieldAlgebraMap z.val) = algebraMap D.k₀ D.k) (ιx : X₀.left.residueField (f₀.left z.val) →+* D.k) (hιx : ιx.comp (X₀.hom.residueFieldAlgebraMap (f₀.left z.val)) = algebraMap D.k₀ D.k), ιz.comp (f₀.left.residueFieldMap z.val).hom = ιx → Nonempty (Rational.Local D l hl E f₀ P z hx ιz hz ιx hιx) ∧ Nonempty (Common.Local D l hl Ω f₀ Q z hx ιz hz ιx hιx)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The statement is supplied by the main theorem together with frobenius_exact, immersion_residue, point naturality and heart corollaries, finite_diagram_descent, composition_scalar and transport_scalar; Rational.Local and Common.Local spell out all three factors and every cohomological degree."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54c33f7fe",
+  "group": "Q52",
+  "result": "fix",
+  "note": "Lean exact against node: α_m pinned by normalization to inverse compositor ≫ eqToIso ≫ compositor (direction G_W^m Lf^* → Lf^* G_X^m); θ_f = mapOfNatIso(alpha 0) = Lf^*θ∘α_1; iterate uses recorded localWeilIterate; hypotheses closed z, hx, IsIso actual residueFieldMap, k0-embeddings with ιz∘res=ιx; Local transport/return_compositor/weil_map/derived/cohomology match Steps 4-8 in localFrobeniusOperator order; frobenius_exact uses canonical fieldWeilFrobeniusShift CommShift instance; immersion_residue IsImmersion, closed image, iso, Nat.card q^r for both fields; scalar squares canonical; finite_diagram_descent fine; heart def has no separate stalk notion. Added stmt_deps are landed def nodes, no cycle; no theorem-owned declaration in statements; transitively reached def owners uncited (advisory). Sole fault H11: self-check second reading → fixes/lem-zl-residue-compatible-pullback-frobenius.report.md (worker report verbatim + independent second reading). No Lean change, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261025T164156-L-965636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

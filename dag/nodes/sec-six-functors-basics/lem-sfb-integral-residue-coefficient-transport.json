@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-integral-residue-coefficient-transport",
+ "kind": "statement",
+ "title": "Constructibility and Tor under the first integral quotient comparison",
+ "statement": "Fix a prime l, a finite field extension E of Q_l and a Noetherian scheme X. Let A be the lifted valuation ring of E, I its lifted uniformizer ideal [det-prop-integral-criterion-constant-coefficients], k=A/I, and assume its Noetherian-ring instance explicitly (it holds since k is a field). For any internal complex K over the continuous integral coefficients, let F(K) be its canonical integral realization [def-sfb-integral-constant-model-realization] and M the fixedScalarDerivedModel of its literal sfbResidueComplex [def-sfb-fixed-scalar-complex-model, def-sfb-adic-stratified-perfect-data]. Then residueCondition for the constant scalar restriction of K [def-sfb-integral-models-stacks-data] is equivalent to affine-locally constructible cohomology of M [def-sfb-affine-locally-constructible-proetale-modules] and finite global coefficient-model Tor amplitude [def-weil-proetale-tor-amplitude]. No completeness or etale-origin hypothesis or conclusion enters this coefficient comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1)--(2), common-quotient residue comparison; proetale.tex Tags 099C, 099M and 09C1"
+ },
+ "stmt_deps": [
+  "det-prop-integral-criterion-constant-coefficients",
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-fixed-scalar-complex-model",
+  "def-sfb-adic-stratified-perfect-data",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Instantiate the normalized discrete coefficient model for A=O_E/(pi_E), k=ULift(O_E)/(ULift(pi_E)) and the reverse of integralCoefficientULift at index zero. Its constructed functor F is an additive monoidal equivalence and transports finite-constant-model constructibility on module sheaves. The normalized common-quotient comparison gives an isomorphism i from D(F) of the Stacks first residue to the fixed-scalar first residue M.",
+   "uses": [
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact functor cohomology isomorphism to each degree and then homology to i. Transport constructibility along that isomorphism and the heart-level equivalence. This proves the first conjunct in both directions.",
+   "uses": [
+    "lem-sfb-discrete-coefficient-model",
+    "def-sfb-exact-derived-cohomology-comparison",
+    "lem-pe-coefficient-constructible-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A monoidal equivalence preserves flat objects. The proved exact faithful monoidal derived Tor comparison transports native finite Tor amplitude through F, and isomorphism invariance transports it through i. Apply nativeTor_iff from the coefficient flat-model module to identify the native predicate with the coefficient-model predicate. For an unordered native interval [a,b], widen its lower bound to min(a,b); the coefficient predicate supplies ordered endpoints in the reverse direction. Combine these independent equivalences with and_congr.",
+   "uses": [
+    "lem-pe-coefficient-tor-flat-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-discrete-coefficient-model",
+  "lem-sfb-integral-residue-model-comparison",
+  "def-sfb-exact-derived-cohomology-comparison",
+  "lem-pe-coefficient-constructible-iso",
+  "lem-pe-coefficient-tor-flat-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Z9 stage-3 reduction: explicit exact-derived homology and native Tor transport from a normalized heart equivalence and a common-residue isomorphism; the unit route in integral-models (1)--(2) is preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence between modules over a constant ring sheaf and sheaves of modules preserves constructible cohomology and Tor amplitude",
+   "date": "2026-10-25",
+   "results": "8 hits: PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.sheafifyHomEquiv', CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.sheafifyHomEquiv, CompHausLike.LocallyConstantModule.functor, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafificationHomEquiv",
+   "verdict": "General sheafification infrastructure, no exact match for these project coefficient presentations; reuse the existing constant-scalar restriction equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence between modules over a constant ring sheaf and sheaves of modules preserves constructible cohomology and Tor amplitude",
+   "date": "2026-10-25",
+   "results": "8 hits: CondensedMod.ofSheafCompHaus, SheafOfModules.isFinitePresentation, instAbelianCondensedMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.isQuasicoherent, CondensedMod.IsSolid, SheafOfModules.instAbelian",
+   "verdict": "No matching derived comparison with these project constructibility and Tor predicates."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*module.*equiv|finiteTorAmplitude",
+   "date": "2026-10-25",
+   "results": "1 hit: Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean:109, Nobeling_aux",
+   "verdict": "No matching scalar-presentation transport theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralModelsResidueTransport",
+  "date": "2026-10-25",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Unit proof (1)--(2): comparison of the first reductions and their etale origin",
+   "via": [
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralResidueCoefficientTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralResidueCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integral_residue_coefficient_transport",
+  "statement": "theorem integral_residue_coefficient_transport (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [IsNoetherian X]\n    (hk : IsNoetherianRing\n      (IntegralConstantCompletion.integers l E ⧸ IntegralConstantCompletion.ideal l E ^ (0 + 1)))\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integersObj l E) X))) :\n    letI := hk\n    let k := IntegralConstantCompletion.integers l E ⧸\n      IntegralConstantCompletion.ideal l E ^ (0 + 1)\n    let M := Scheme.fixedScalarDerivedModel X k\n      (Scheme.sfbResidueComplex X (IntegralConstantCompletion.ideal l E)\n        ((IntegralConstantModel.derived l E X).functor.obj K))\n    residueCondition l E X ((restriction l E X).obj K) ↔\n      (∀ q : ℤ, Scheme.IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf.{u, u} X k\n        ((coefficientModelCohomology _ q).obj M)) ∧\n      Scheme.HasFiniteCoefficientProEtaleTorAmplitude.{u, u} X k M",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T144020-L-1152388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261025T212803-L-234683",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

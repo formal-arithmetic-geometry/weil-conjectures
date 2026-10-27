@@ -1,0 +1,118 @@
+{
+ "id": "new-unit-scalar-raw-data",
+ "kind": "definition",
+ "title": "Explicit coefficient transport of raw unit classes",
+ "statement": "For a scheme morphism f:X→S, degree q, etale chart U and structural raw class z [def-pc-scheme,def-weil-pbc-coherent-higher-image-classes], define its coherent raw transport by the canonical raw coefficient map of the inverse explicit unit coefficient isomorphism [new-unit-structure-coefficient-iso,def-weil-pbc-raw-restricted-normalization-data]. This is postcomposition of the represented derived morphism, with no choice of a raw class.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-coherent-higher-image-classes",
+  "new-unit-structure-coefficient-iso",
+  "def-weil-pbc-raw-restricted-normalization-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "proof": [
+  {
+   "text": "Use the already constructed raw coefficient natural transformation, evaluated at U and z. This is an explicit term.",
+   "uses": [
+    "def-weil-pbc-raw-restricted-normalization-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-raw-restricted-normalization-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated etale sheaf of the unit module is isomorphic to the additive structure sheaf naturally in scalar multiplication",
+   "results": "8 hits, including SheafOfModules.unit, unitHomEquiv and structurePresheafCompForget. None identifies the project tensor-section coefficient or its localized scalar action.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPullbackObjUnitToUnit\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHToDerived.*natural|etaleTensorUnit.*Iso|unitRealization.*transport",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation of Ext classes under a right derived functor with respect to coefficient morphisms",
+   "results": "8 hits: extFunctor, its map formula and generic right-derived naturality. None states naturality of the fixed derivedExtEvaluation composite.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnitRealizationScalarNormalization",
+  "date": "2026-10-25",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input via proper smooth curve structural coefficients; unit coefficient transport and scalar normalization.",
+   "via": [
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "new-unit-realization-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitScalarRawData",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitScalarRawData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.unitCoherentRawClass",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.unitCoherentRawClass"
+  ],
+  "statement": "def unitCoherentRawClass {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ) (U : S.Etale)\n    (z : (Etale.abelianHigherDirectImageRawPresheaf f q X.etaleAdditiveSheaf).obj (op U)) :\n    (Etale.abelianHigherDirectImageRawPresheaf f q\n      (liftedCoherentEtaleSheaf (SheafOfModules.unit X.ringCatSheaf))).obj (op U)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

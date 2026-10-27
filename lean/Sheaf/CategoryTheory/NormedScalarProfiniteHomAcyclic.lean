@@ -10,18 +10,13 @@ public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 public import WeilConjectures.CategoryTheory.RightDerivedSingleZeroUnit
 public import Mathlib.NumberTheory.Padics.PadicNumbers
 public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Topology.ContinuousMapCondensedRing
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import WeilConjectures.CategoryTheory.SiteCechComplex
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.CategoryTheory.InternalSectionTensorComparison
-import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
-import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.CategoryTheory.SheafTensor
+import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Mathlib.Algebra.Homology.Functor
+import Mathlib.CategoryTheory.Sites.Abelian
+import Sheaf.CategoryTheory.ProfiniteActualFreeHomEvaluation
+import Sheaf.Topology.FiniteNormedScalarSectionAcyclicity
 
 /-! # Continuous profinite functions and ordinary derived internal Hom
 
@@ -169,6 +164,91 @@ def Assertion : Prop := by
         (Modules (continuousScalarRing F)) 0).hom.app
           ((homFunctor F P).obj (Mod.regular (continuousScalarRing F).X)))
 
+private theorem single_unit_isIso_of_resolution
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
+    [Abelian.HasKInjectiveResolutions C]
+    (G : C ⥤ D) [G.Additive] (M : C) (I : InjectiveResolution M)
+    (hi : QuasiIso ((G.mapHomologicalComplex (.up ℕ)).map I.ι)) :
+    IsIso (G.rightDerivedSingleUnit M) := by
+  have hext : (G.mapHomologicalComplex (.up ℤ)).map
+      (HomologicalComplex.extendMap I.ι ComplexShape.embeddingUpNat) =
+      (HomologicalComplex.mapExtendIso _ ComplexShape.embeddingUpNat G).hom ≫
+        HomologicalComplex.extendMap ((G.mapHomologicalComplex (.up ℕ)).map I.ι)
+          ComplexShape.embeddingUpNat ≫
+        (HomologicalComplex.mapExtendIso _ ComplexShape.embeddingUpNat G).inv := by
+    apply HomologicalComplex.hom_ext
+    intro i
+    simp only [Functor.mapHomologicalComplex_map_f, HomologicalComplex.comp_f,
+      ← HomologicalComplex.mapExtensIso_hom_f_naturality_assoc]
+    rw [← HomologicalComplex.comp_f, Iso.hom_inv_id, HomologicalComplex.id_f]
+    exact (Category.comp_id _).symm
+  have : QuasiIso (HomologicalComplex.extendMap
+      ((G.mapHomologicalComplex (.up ℕ)).map I.ι) ComplexShape.embeddingUpNat) :=
+    (HomologicalComplex.quasiIso_extendMap_iff _ _).2 hi
+  have : QuasiIso ((G.mapHomologicalComplex (.up ℤ)).map I.ι') := by
+    erw [InjectiveResolution.ι', Functor.map_comp, hext]
+    infer_instance
+  have : IsIso (DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map I.ι')) :=
+    inferInstance
+  have hF : IsIso ((G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).map
+      ((HomotopyCategory.quotient C (.up ℤ)).map I.ι')) := by
+    dsimp only [Functor.comp_map]
+    rw [Functor.mapHomotopyCategory_map]
+    exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso D) _).2 inferInstance
+  have hq : IsIso ((DerivedCategory.Qh ⋙ G.rightDerivedFunctor).map
+      ((HomotopyCategory.quotient C (.up ℤ)).map I.ι')) := by
+    have : IsIso (DerivedCategory.Qh.map
+        ((HomotopyCategory.quotient C (.up ℤ)).map I.ι')) :=
+      (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso C) _).2 inferInstance
+    change IsIso (G.rightDerivedFunctor.map (DerivedCategory.Qh.map
+      ((HomotopyCategory.quotient C (.up ℤ)).map I.ι')))
+    infer_instance
+  have : I.cochainComplex.IsKInjective := by
+    change CochainComplex.IsKInjective (I.cocomplex.extend ComplexShape.embeddingUpNat)
+    infer_instance
+  have hu : IsIso (G.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj I.cochainComplex)) := inferInstance
+  have hn := G.rightDerivedFunctorUnit.naturality
+    ((HomotopyCategory.quotient C (.up ℤ)).map I.ι')
+  have hleft : IsIso
+      ((G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).map
+        ((HomotopyCategory.quotient C (.up ℤ)).map I.ι') ≫
+      G.rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient C (.up ℤ)).obj I.cochainComplex)) := by
+    infer_instance
+  rw [hn] at hleft
+  have : IsIso (G.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj
+        ((CochainComplex.singleFunctor C 0).obj M))) :=
+    IsIso.of_isIso_comp_right _
+      ((DerivedCategory.Qh ⋙ G.rightDerivedFunctor).map
+        ((HomotopyCategory.quotient C (.up ℤ)).map I.ι'))
+  unfold Functor.rightDerivedSingleUnit
+  infer_instance
+
+private theorem quasiIso_of_sections {A : Ring.{u}}
+    {K L : CochainComplex (Modules A) ℕ} (f : K ⟶ L)
+    (h : ∀ S : Profinite.{u},
+      QuasiIso (((ProfiniteHom.eval A S).mapHomologicalComplex (.up ℕ)).map f)) :
+    QuasiIso f := by
+  let U : Modules A ⥤ Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} :=
+    Mod.forget A.X
+  let P := sheafToPresheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}
+  let T := presheafToSheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}
+  have hp : QuasiIso (((U ⋙ P).mapHomologicalComplex (.up ℕ)).map f) := by
+    apply (HomologicalComplex.quasiIso_iff_evaluation _).2
+    intro S
+    exact h S.unop
+  have ht : QuasiIso (((U ⋙ P ⋙ T).mapHomologicalComplex (.up ℕ)).map f) :=
+    HomologicalComplex.quasiIso_map_of_preservesHomology
+      (((U ⋙ P).mapHomologicalComplex (.up ℕ)).map f) T
+  let e := NatIso.mapHomologicalComplex (Functor.isoWhiskerLeft U
+    (sheafificationNatIso (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})) (.up ℕ)
+  have hu : QuasiIso ((U.mapHomologicalComplex (.up ℕ)).map f) :=
+    (quasiIso_iff_of_arrow_mk_iso _ _ (Arrow.isoOfNatIso e (Arrow.mk f))).2 ht
+  exact (HomologicalComplex.quasiIso_map_iff_of_preservesHomology f U).1 hu
+
 /-- For every finite norm-topological extension E of Q_ell, ordinary continuous
 functions compute derived internal functions of every profinite parameter set.
 Source: main-20261015 direct-images proof, paragraph (3), finite E analytic input;
@@ -218,6 +298,126 @@ theorem normed_scalar_profinite_hom_acyclic (ell : ℕ) [Fact ell.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ell] E]
     [FiniteDimensional ℚ_[ell] E] :
     CompleteSpace E ∧ Assertion E := by
-  sorry
+  have hc : CompleteSpace E := FiniteDimensional.complete ℚ_[ell] E
+  refine ⟨hc, ?_⟩
+  let : HasDerivedCategory.{u + 2} (Modules (continuousScalarRing E)) :=
+    HasDerivedCategory.standard (Modules (continuousScalarRing E))
+  let (P : Profinite.{u}) : PreservesLimits (homFunctor E P) :=
+    (Mod.ihomAdjunction (freeParameter (continuousScalarRing E) P)).rightAdjoint_preservesLimits
+  obtain ⟨ev⟩ := ProfiniteHom.actual_free_hom_evaluation (continuousScalarRing E)
+    (Classical.choice (ProfiniteHom.exists_evaluation (continuousScalarRing E)))
+  have he (P S : Profinite.{u}) (x) :
+      evaluation E P S x =
+        ((ev.evaluate P S).hom.app (Mod.regular (continuousScalarRing E).X) x).down := by
+    rw [ev.tautological]
+    rfl
+  have hs := (Profinite.finiteNormedScalar_section_acyclicity ell E).2.2.2
+  have hsection (I : InjectiveResolution (Mod.regular (continuousScalarRing E).X))
+      (V : Profinite.{u}) :
+      QuasiIso (((ProfiniteHom.eval (continuousScalarRing E) V).mapHomologicalComplex
+        (.up ℕ)).map I.ι) := by
+    rw [quasiIso_iff]
+    intro q
+    rw [quasiIsoAt_iff_isIso_homologyMap]
+    cases q with
+    | zero => exact (hs I V).2.2.2.1
+    | succ q =>
+        have hz := HomologicalComplex.isZero_single_obj_homology
+          (.up ℕ) 0 ((ProfiniteHom.eval (continuousScalarRing E) V).obj
+            (Mod.regular (continuousScalarRing E).X)) (q + 1) (Nat.succ_ne_zero q)
+        let e := (HomologicalComplex.singleMapHomologicalComplex
+          (ProfiniteHom.eval (continuousScalarRing E) V) (.up ℕ) 0).app
+            (Mod.regular (continuousScalarRing E).X)
+        exact (hz.of_iso ((HomologicalComplex.homologyFunctor _ (.up ℕ)
+          (q + 1)).mapIso e)).isIso ((hs I V).2.2.2.2 (q + 1) (Nat.zero_lt_succ q)) _
+  have haug (P : Profinite.{u})
+      (I : InjectiveResolution (Mod.regular (continuousScalarRing E).X)) :
+      QuasiIso (resolutionAugmentation E P I) := by
+    apply quasiIso_of_sections
+    intro S
+    have hi : QuasiIso
+        (((homFunctor E P ⋙ ProfiniteHom.eval (continuousScalarRing E) S).mapHomologicalComplex
+          (.up ℕ)).map I.ι) :=
+      (quasiIso_iff_of_arrow_mk_iso _ _
+        (Arrow.isoOfNatIso (NatIso.mapHomologicalComplex (ev.evaluate P S) (.up ℕ))
+          (Arrow.mk I.ι))).2 (hsection I (Profinite.of (S × P)))
+    dsimp only [resolutionAugmentation]
+    rw [Functor.map_comp]
+    let t := (HomologicalComplex.singleMapHomologicalComplex
+      (homFunctor E P) (.up ℕ) 0).app (Mod.regular (continuousScalarRing E).X)
+    have ht : IsIso (((ProfiniteHom.eval (continuousScalarRing E) S).mapHomologicalComplex
+        (.up ℕ)).map t.inv) := inferInstance
+    change QuasiIso
+      (((ProfiniteHom.eval (continuousScalarRing E) S).mapHomologicalComplex (.up ℕ)).map
+          t.inv ≫
+        ((ProfiniteHom.eval (continuousScalarRing E) S).mapHomologicalComplex (.up ℕ)).map
+          (((homFunctor E P).mapHomologicalComplex (.up ℕ)).map I.ι))
+    have : QuasiIso
+        (((ProfiniteHom.eval (continuousScalarRing E) S).mapHomologicalComplex (.up ℕ)).map
+          t.inv) := quasiIso_of_isIso _
+    exact (quasiIso_iff_comp_left _ _).2 hi
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro P S
+    have hb := ConcreteCategory.bijective_of_isIso
+      ((ev.evaluate P S).hom.app (Mod.regular (continuousScalarRing E).X))
+    rw [show evaluation E P S = fun x ↦
+      ((ev.evaluate P S).hom.app (Mod.regular (continuousScalarRing E).X) x).down from
+        funext (he P S)]
+    exact (Equiv.ulift : ULift.{u + 1} C(S × P, E) ≃ C(S × P, E)).bijective.comp hb
+  · intro P S x y
+    simp only [he, map_add]
+    rfl
+  · intro P S r x s p
+    simp only [he, ev.scalar]
+    let a := (InternalAbelianSheafModule.sectionRingSheaf
+      (coherentTopology Profinite.{u}) (continuousScalarRing E).X).obj.map
+        (CompHausLike.ofHom _ (ContinuousMap.fst : C(S × P, S))).op r
+    let y : sections (continuousScalarRing E) (Mod.regular (continuousScalarRing E).X)
+        (Profinite.of (S × P)) :=
+      (ev.evaluate P S).hom.app (Mod.regular (continuousScalarRing E).X) x
+    let : MonObj (Profinite.continuousMapRingObjOfUniverse E).obj :=
+      (Profinite.continuousMapRingPresheafOfUniverse E).monObjCompForget₂
+    have hm := Sheaf.μ_comp_map_mul (Profinite.continuousMapRingObjOfUniverse E)
+    have hmul := ConcreteCategory.congr_hom (congr_app hm (op (Profinite.of (S × P))))
+      (TensorProduct.tmul ℤ a y)
+    change ((a • y).down (s, p)) = _
+    change (((Functor.LaxMonoidal.μ
+      (sheafToPresheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
+      (continuousScalarRing E).X (continuousScalarRing E).X).app
+        (op (Profinite.of (S × P)))) (TensorProduct.tmul ℤ a y) |>
+      ((MonObj.mul (X := (continuousScalarRing E).X)).hom.app
+        (op (Profinite.of (S × P))))).down (s, p) = _
+    exact congrArg (fun z ↦ z.down (s, p)) hmul
+  · intro P S S' v x s p
+    simp only [he, ev.restriction]
+    rfl
+  · intro P P' v S x s p
+    simp only [he, parameterMap]
+    exact congrArg (fun z ↦ z.down (s, p))
+      (ev.parameter P P' S v (Mod.regular (continuousScalarRing E).X) x)
+  · intro P
+    let I := injectiveResolution (Mod.regular (continuousScalarRing E).X)
+    have hi : QuasiIso (((homFunctor E P).mapHomologicalComplex (.up ℕ)).map I.ι) :=
+      (quasiIso_iff_comp_left
+        ((HomologicalComplex.singleMapHomologicalComplex (homFunctor E P) (.up ℕ) 0).inv.app
+          (Mod.regular (continuousScalarRing E).X)) _).1 (haug P I)
+    exact single_unit_isIso_of_resolution (homFunctor E P) _ I hi
+  · intro P I
+    have := haug P I
+    have : QuasiIso (HomologicalComplex.extendMap (resolutionAugmentation E P I)
+        ComplexShape.embeddingUpNat) :=
+      (HomologicalComplex.quasiIso_extendMap_iff _ _).2 inferInstance
+    infer_instance
+  · intro P P' v I
+    apply HomologicalComplex.hom_ext
+    intro n
+    cases n with
+    | zero =>
+        simp [resolutionAugmentation]
+    | succ n =>
+        apply (HomologicalComplex.isZero_single_obj_X (.up ℕ) 0 _ (n + 1)
+          (Nat.succ_ne_zero n)).eq_of_src
+  · intro P
+    exact (homFunctor E P).rightDerivedSingleUnit_zero _
 
 end Profinite.NormedScalarHom

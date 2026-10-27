@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-local-dimension-formula-generic-components",
+ "kind": "statement",
+ "title": "Local dimension formula with generic components through a point",
+ "statement": "Let $f:X\\to S$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], with $S$ locally Noetherian [pqf-def-locnoeth]. For a point $x\\in X$ put $s=f(x)$, and write $\\mathcal O_{X,x}$ and $\\mathcal O_{S,s}$ for the stalks of the structure sheaves [def-weil-pbc-module-stalk], with ring Krull dimension [def-weil-pbc-krull-dimension-ring]. Let $G_x$ be the set of generic points [def-sc-generic-point] of the irreducible components of $X$ containing $x$ [def-weil-irreducible-components]. Then $G_x$ is finite and nonempty, the transcendence degrees $t_\\xi=\\operatorname{trdeg}_{\\kappa(f(\\xi))}\\kappa(\\xi)$ for $\\xi\\in G_x$ and $t_x=\\operatorname{trdeg}_{\\kappa(s)}\\kappa(x)$ are finite nonnegative integers [def-weil-residue-field, def-kun-transcendence-degree], and, putting $E_x=\\max_{\\xi\\in G_x}t_\\xi$, one has\n$$\\dim\\mathcal O_{X,x}+t_x\\leq\\dim\\mathcal O_{S,s}+E_x.$$\nNo irreducibility, reducedness, dominance, universal catenarity, quasi-compactness, or separatedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAE, lemma-dimension-formula-general: local dimension inequality, in the equivalent form with the nonnegative residue transcendence degree on the left; its proof identifies the finitely many components through x."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine opens $s\\in V=\\operatorname{Spec}A\\subseteq S$ and $x\\in U=\\operatorname{Spec}B\\subseteq f^{-1}(V)$. The scheme axiom gives these neighbourhoods. By [pqf-lem-affine-open-locnoeth], $A$ is Noetherian; by [lem-weil-pbc-lft-affine-pairs], the induced map $\\varphi:A\\to B$ is of finite type. Hence [lem-weil-pbc-finite-type-algebra-noetherian] makes $B$ Noetherian. Write $\\mathfrak q\\subset B$ for $x$ and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)\\subset A$ for $s$, using the point identification of [lem-weil-pbc-affine-open-spec-points].",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-open-stalk-localization], the local rings at $x,s$ are $B_{\\mathfrak q},A_{\\mathfrak p}$. The localization compatibility in [lem-weil-pbc-spec-map-stalk-localization] identifies their map with $a/u\\mapsto\\varphi(a)/\\varphi(u)$. Taking quotients by their maximal ideals identifies the residue fields with $\\operatorname{Frac}(B/\\mathfrak q)$ and $\\operatorname{Frac}(A/\\mathfrak p)$, compatibly with this same map: the class of $b/u$ goes to $\\bar b/\\bar u$, and every nonzero denominator modulo $\\mathfrak q$ (respectively $\\mathfrak p$) is represented by an element outside that prime. The same description applies to every point of these affine charts.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+   }
+  },
+  {
+   "text": "The components of $U$ are $V(\\mathfrak q_i)$ for the minimal primes of $B$, by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. Their points $\\mathfrak q_i$ are their unique generic points, since the closure of a prime $P$ in a spectrum is $V(P)$ and $V(P)=V(Q)$ for primes forces $P=Q$. Components of $X$ meeting $U$ restrict injectively to components of $U$ by [lem-sc-components-open-injection]. Conversely, the closure in $X$ of a component $D$ of $U$ is a component of $X$: any larger irreducible closed $C$ has $C\\cap U=D$ by maximality in $U$, and a nonempty open subset of an irreducible space is dense, so $C=\\overline D$. Its generic point is the point $\\mathfrak q_i$ of $D$. Thus $G_x$ identifies exactly with the minimal primes $\\mathfrak q_i\\subseteq\\mathfrak q$. This set is finite by [lem-weil-pbc-noetherian-finitely-many-minimal-primes] and nonempty by [lem-weil-pbc-prime-contains-minimal-prime] applied to $0\\subseteq\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-sc-components-open-injection",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-residue-field-extension-finitely-generated] to $\\varphi$ at $\\mathfrak q$, and at each of the finitely many $\\mathfrak q_i\\subseteq\\mathfrak q$. Step 2 identifies its field maps with the maps in the statement, including those at $\\xi_i=\\mathfrak q_i$. Each extension has a finite transcendence basis by [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis]. By the definition of transcendence degree, its value is the finite cardinality of that basis, hence a nonnegative integer. Therefore all $t_x,t_{\\xi_i}$ are finite and the maximum $E_x$ exists.",
+   "uses": [
+    "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+   }
+  },
+  {
+   "text": "Fix one of these $\\mathfrak q_i$ and put $\\mathfrak p_i=\\varphi^{-1}(\\mathfrak q_i)\\subseteq\\mathfrak p$. Set $Y_i=\\operatorname{Spec}(B/\\mathfrak q_i)$ and $Z_i=\\operatorname{Spec}(A/\\mathfrak p_i)$. The map $A/\\mathfrak p_i\\to B/\\mathfrak q_i$ is injective, and the images of any finite algebra-generating set of $B/A$ generate its target. Both quotient rings are domains, so [lem-weil-pbc-spec-domain-stalks-function-field] makes both schemes integral with generic point $(0)$. This map sends the generic point of $Y_i$ to that of $Z_i$, so it is dominant. It is locally of finite type by [lem-weil-pbc-lft-pointwise-criterion], using the displayed affine pair at every point; its base is locally Noetherian, since $A/\\mathfrak p_i$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (a quotient is generated by the empty family as an $A$-algebra). The points $y_i=\\mathfrak q/\\mathfrak q_i$, $z_i=\\mathfrak p/\\mathfrak p_i$ map to each other.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-localization-at-prime-of-quotient] and [lem-weil-pbc-spec-domain-stalks-function-field](1) to identify $\\mathcal O_{Y_i,y_i}=B_{\\mathfrak q}/\\mathfrak q_iB_{\\mathfrak q}$ and $\\mathcal O_{Z_i,z_i}=A_{\\mathfrak p}/\\mathfrak p_iA_{\\mathfrak p}$. Their residue fields are those of $x,s$: quotienting further by $\\mathfrak qB_{\\mathfrak q}$ and $\\mathfrak pA_{\\mathfrak p}$ gives exactly the same fields. By clause (2) of the same spectrum lemma, their function fields are $\\operatorname{Frac}(B/\\mathfrak q_i)$ and $\\operatorname{Frac}(A/\\mathfrak p_i)$, namely $\\kappa(\\xi_i)$ and $\\kappa(f(\\xi_i))$. All maps are induced by $\\varphi$; on fractions they send $\\bar a/\\bar u$ to $\\overline{\\varphi(a)}/\\overline{\\varphi(u)}$. Thus the residue and generic transcendence degrees for $Y_i\\to Z_i$ are exactly $t_x$ and $t_{\\xi_i}$.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-local-dimension-formula] to $Y_i\\to Z_i$ and $y_i$. Step 5 has verified integrality, dominance, local finite type and the locally Noetherian base; no catenarity hypothesis is needed for this inequality. Substituting the identifications of Step 6 yields $$\\dim(B_{\\mathfrak q}/\\mathfrak q_iB_{\\mathfrak q})+t_x\\leq\\dim(A_{\\mathfrak p}/\\mathfrak p_iA_{\\mathfrak p})+t_{\\xi_i}.$$ This holds for every $\\mathfrak q_i\\subseteq\\mathfrak q$.",
+   "uses": [
+    "lem-trf-local-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+   }
+  },
+  {
+   "text": "For any ring $R$ and ideal $I$, prime chains of $R/I$ inject into those of $R$, with the same lengths: send each prime to its inverse image; the inverse on primes containing $I$ is $P\\mapsto P/I$, which is prime because $(R/I)/(P/I)=R/P$ is a domain. Thus $\\dim(A_{\\mathfrak p}/\\mathfrak p_iA_{\\mathfrak p})\\leq\\dim A_{\\mathfrak p}$. Also $$\\dim B_{\\mathfrak q}=\\max_i\\dim(B_{\\mathfrak q}/\\mathfrak q_iB_{\\mathfrak q}).$$ Indeed every finite prime chain in $B_{\\mathfrak q}$ contracts to a strict chain in $B$ ending below $\\mathfrak q$ by [lem-weil-pbc-primes-of-localization]. Its first prime contains a minimal prime $\\mathfrak q_i$ by [lem-weil-pbc-prime-contains-minimal-prime]; this $i$ is in our list. The chain therefore descends to the quotient by $\\mathfrak q_iB_{\\mathfrak q}$ with its length unchanged. Conversely every chain in any such quotient lifts to $B_{\\mathfrak q}$. Taking suprema gives the equality, since the list is finite and nonempty.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+   }
+  },
+  {
+   "text": "In Step 7 bound the target quotient dimension by $\\dim A_{\\mathfrak p}$ using Step 8, and bound $t_{\\xi_i}$ by $E_x$ using its definition. Taking the maximum over the nonempty finite list and using Step 8 gives $$\\dim B_{\\mathfrak q}+t_x\\leq\\dim A_{\\mathfrak p}+E_x.$$ Step 2 identifies these with the asserted local dimensions. Steps 3--4 gave precisely the other clauses. All choices were affine neighbourhoods of the prescribed points; no global finiteness or separation, nor reducedness or irreducibility of $X,S$, was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sc-components-open-injection",
+  "lem-trf-local-dimension-formula",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "pqf-lem-affine-open-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAE, lemma-dimension-formula-general, proof; affine realization of the reduced components and their image closures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dimension.formula|trdeg.*(height|ringKrullDim)|ringKrullDim.*trdeg",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "General dimension formula inequality for local rings of a locally finite type morphism of reducible schemes",
+   "results": "Returned ringKrullDim_quotient_le, ringKrullDim_le_ringKrullDim_add_spanFinrank, ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_succ_le_of_surjective, ringKrullDim_le_ringKrullDim_quotSMulTop_succ, ringKrullDim_le_ringKrullDim_quotient_add_card, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, ringKrullDim_succ_le_ringKrullDim_polynomial. Read the returned statements: they concern preimmersions, residue fields, finite transcendence degree, localization heights, or bounds by ideal generators, not the claimed relative local dimension inequality.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"trdeg\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a point of a scheme locally of finite type over a locally Noetherian base the local ring dimension plus the residue field transcendence degree is at most the base local ring dimension plus the maximum transcendence degree of generic components containing that point",
+   "results": "Returned AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, ringKrullDim_le_ringKrullDim_add_spanFinrank, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Ideal.inertiaDeg_le_finrank, ringKrullDim_le_ringKrullDim_add_card, trdeg_lt_aleph0. Read the returned statements: they concern preimmersions, residue fields, finite transcendence degree, localization heights, or bounds by ideal generators, not the claimed relative local dimension inequality.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local ring Krull dimension inequality under an essentially finite type map of Noetherian rings with the maximum relative transcendence degree over minimal primes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ring.krullDimLE_of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_2)\\n  [inst_1 : (P : Ideal R) → [inst : P.IsMaximal] → CommRing (Rₚ P)]\\n  [inst_2 : (P : Ideal R) → [inst_2 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_3 : P.IsMaximal], IsLocalization.AtPrime (Rₚ P) P] \", \"doc\": \"If for every maximal ideal $\\\\mathfrak{m}$ of a commutative semiring $R$, the Krull dimension of the localization $R_\\\\mathfrak{m}$ is at most $n$, then the Krull dimension of $R$ itself is also at most\"}\n  {\"name\": \"Ring.KrullDimLE.of_isLocalization\", \"module\": \"Mathlib/RingTheory/KrullDimension/Zero\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type u_2)\\n  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization.AtPrime S p], Ring.KrullDimLE 0 S\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq 0 $. This follows b\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] {I : Ideal R},\\n  I ≠ ⊤ → ringKrullDim R ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a commutative ring $ R $ and a proper ideal $ I $ of $ R $, the Krull dimension of $ R $ is less than or equal to the sum of the Krull dimension of the quotient ring $ R/I $ and the finite rank of\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_card\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {S : Finset R},\\n  ↑S ⊆ ↑(IsLocalRing.maximalIdeal R) → ringKrullDim R ≤ ringKrullDim (R ⧸ Ideal.span ↑S) + ↑S.card\", \"doc\": \"For a commutative ring $ R $ and a finite set $ S $ of elements in the maximal ideal of $ R $, the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R / I $ (where $ I $ i\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → ringKrullDim R ≤ ringKrullDim (R ⧸ x • ⊤) + 1\", \"doc\": \"If $ x $ is an element of the maximal ideal of a commutative semiring $ R $, then the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R/(x) $ plus one, i.e., $ \\\\dim(R) \\\\\"}\n  {\"name\": \"ringKrullDim_succ_le_of_surjective\", \"module\": \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  Function.Surjective ⇑f → ∀ {r : R}, r ∈ nonZeroDivisors R → f r = 0 → ringKrullDim S + 1 ≤ ringKrullDim R\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $f: R \\\\to S$ be a surjective ring homomorphism. If there is a non-zero-divisor $r \\\\in R$ in the kernel of $f$ (i.e., $f(r) = 0$), then the Krull dimension\"}\n  {\"name\": \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [inst_1 : I.IsPrime] (A : Type u_2) [inst_2 : CommRing A]\\n  [inst_3 : Algebra R A] [IsLocalization.AtPrime A I], ringKrullDim A = ↑I.height\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the complement of a prime ideal $ I $, then the Krull dimension of $ A $ is equal to the height of $ I $. This equality connects the dimensi\"}\n  {\"name\": \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  IsSMulRegular R x → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a regular element in the maximal ideal of a local ring $ R $, then the Krull dimension of $ R $ satisfies $ \\\\dim(R) = \\\\dim(R/(x)) + 1 $, where $ R/(x) $ denotes the quotient ring of $ R $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dimension.formula|trdeg|transcendence",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dimension.formula|ringKrullDim.*trdeg|trdeg.*ringKrullDim",
+   "results": "{\"t\": \"2026-10-23T19:07:59Z\", \"tool\": \"grep\", \"query\": \"dimension.formula|ringKrullDim.*trdeg|trdeg.*ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\"], \"digest\": \"c6a25273be893fff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned transcendence-degree, local-ring dimension and standard smoothness results do not state the relative componentwise local dimension inequality"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, Algebra.trdeg",
+   "results": "{\"t\": \"2026-10-23T19:08:00Z\", \"tool\": \"loogle\", \"query\": \"ringKrullDim, Algebra.trdeg\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned transcendence-degree, local-ring dimension and standard smoothness results do not state the relative componentwise local dimension inequality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension formula inequality for local rings of a finite type morphism with irreducible components and residue field transcendence degrees",
+   "results": "{\"t\": \"2026-10-23T19:08:00Z\", \"tool\": \"leansearch\", \"query\": \"Dimension formula inequality for local rings of a finite type morphism with irreducible components and residue field transcendence degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_quotient_le\", \"ringKrullDim_succ_le_of_surjective\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_quotient_succ_le_of_nonZeroDivisor\", \"ringKrullDim_le_ringKrullDim_add_card\", \"trdeg_le_of_surjective\"], \"digest\": \"fe55c1443f1b6f17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned transcendence-degree, local-ring dimension and standard smoothness results do not state the relative componentwise local dimension inequality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local ring dimension plus residue transcendence degree is bounded by base local dimension plus maximum relative transcendence degree of generic components for a locally finite type morphism",
+   "results": "{\"t\": \"2026-10-23T19:08:01Z\", \"tool\": \"leanfinder\", \"query\": \"Local ring dimension plus residue transcendence degree is bounded by base local dimension plus maximum relative transcendence degree of generic components for a locally finite type morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lift_trdeg_add_le\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"trdeg_add_le\", \"Algebra.IsStandardSmooth.relativeDimension\", \"IsLocalization.AtPrime.inertiaDeg_map_eq_inertiaDeg\", \"trdeg_lt_aleph0\"], \"digest\": \"17d4a46be955ae0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned transcendence-degree, local-ring dimension and standard smoothness results do not state the relative componentwise local dimension inequality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension inequality of Noetherian local rings for an essentially finite type map using minimal primes and their relative transcendence degrees",
+   "results": "{\"t\": \"2026-10-23T19:09:11Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension inequality of Noetherian local rings for an essentially finite type map using minimal primes and their relative transcendence degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"Ring.KrullDimLE.of_isLocalization\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\"], \"digest\": \"1ca81514dc74610f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned transcendence-degree, local-ring dimension and standard smoothness results do not state the relative componentwise local dimension inequality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-residue-transcendence-dimension-bound",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: A high fibre codimension constructible locus has fibrewise nonfull closure. Supporting input: the generic-point dimension inequality applied to the reduced closure on an affine etale atlas. Local input: Stacks 0BAE, the pointwise dimension inequality with the residue transcendence correction.",
+   "via": [
+    "lem-sfb-generic-residue-transcendence-dimension-bound",
+    "lem-sfb-constructible-closure-fibre-avoidance",
+    "lem-sfb-group-finite-translate-cover",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-dimension-formula-generic-components",
+  "worker": "stage1",
+  "summary": "Q29 follows the reduced-component proof of Stacks 0BAE in affine coordinates, reusing the existing integral dominant dimension formula and existing affine, residue-field and minimal-prime lemmas. Nine steps prove all clauses without new nodes or a statement change. The quotient prime-chain arguments are written out.",
+  "blueprint": "The inherited null ancestor is confirmed by blueprint_refs.py ancestor; the exact inherited from.place is retained. This realizes the local dimension-inequality input for the generic-residue transcendence bound, supporting the alteration/dimension-induction portion of det-thm-sf-ctf-stability-direct-images proof (3). The latest blueprint direct-images proof and unit were read; no alternative same_as was found.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-local-dimension-formula",
+    "why": "Generic local dimension inequality for an integral dominant morphism used as stated in the cited step; this local dimension-formula input has no replacement in the constructible-functor unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-local-dimension-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-c51a4d26e",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-c51a4d26e (reviewer sub-agent of L); spot-checked: Read the item in full: all 9 steps, all 19 cited statements, and Stacks morphisms.tex 0BAE (lemma-dimension-formula-general) and 02JU (lemma-dimension-formula) with the proof. 0 new nodes. The statement is unchanged and is exactly 0BAE written additively, under the same hypotheses: f locally of finite type, S locally Noetherian. The steps follow 0BAE through affine charts. Step 3: the components of X through x correspond to the minimal primes q_i ⊆ q; the converse direction (closure of a component of U is a component of X) is argued correctly, and finiteness and nonemptiness are proved. Step 4: the trdegs are finite via the finitely generated residue extension and a finite transcendence basis. Steps 5–6: Spec(B/q_i) → Spec(A/p_i) is integral, dominant and locally of finite type (pointwise criterion) over a Noetherian base, and its local rings and fields are the right ones. Step 7: lem-trf-local-dimension-formula, all hypotheses checked. Step 8: dim B_q = max_i dim(B_q/q_iB_q) and dim(A_p/p_iA_p) ≤ dim A_p; this is a few lines from the cited statements, so elementary is acceptable. Step 9: take the maximum. Tested on k[x,y]/(xy) at the origin, on Spec F_p[t] → Spec Z (non-dominant component, handled by the quotient base), on affine space, and with nilpotents and embedded primes. No duplicate of 0BAE in the DAG; the universally catenary exc node cannot replace it. Batch-5 flag on lem-trf-local-dimension-formula: accepted. It is the generic Stacks 02JU commutative-algebra inequality. Its 118-node closure is commutative algebra and scheme basics with no trace-formula, Poincaré or batch-4 node. Neither assumed statement gives a dimension formula, so no assumption leaf can replace it. The tool_uses declaration for it is accepted. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalDimensionFormulaGenericComponents",
+  "declaration": "AlgebraicGeometry.local_dimension_formula_generic_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalDimensionFormulaGenericComponents.lean",
+  "statement": "theorem local_dimension_formula_generic_components {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [IsLocallyNoetherian S] (x : X) : ∃ (G : Finset X) (tx : ℕ) (t : X → ℕ), (∀ ξ : X, ξ ∈ G ↔ ∃ Z ∈ irreducibleComponents X, x ∈ Z ∧ IsGenericPoint ξ Z) ∧ G.Nonempty ∧ @Algebra.trdeg (S.residueField (f x)) (X.residueField x) _ _ (f.residueFieldMap x).hom.toAlgebra = (tx : Cardinal) ∧ (∀ ξ ∈ G, @Algebra.trdeg (S.residueField (f ξ)) (X.residueField ξ) _ _ (f.residueFieldMap ξ).hom.toAlgebra = (t ξ : Cardinal)) ∧ ringKrullDim (X.presheaf.stalk x) + (tx : WithBot ℕ∞) ≤ ringKrullDim (S.presheaf.stalk (f x)) + ((G.sup t : ℕ) : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af2be387e",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Statement field verbatim; only the node's lean field changed; first stage-2 delivery, no supersession, no repair note. Lean matches Stacks 0BAE (morphisms.tex l.13610) in additive form: LocallyOfFiniteType f, IsLocallyNoetherian S, no extra hypotheses. G is a Finset characterized exactly by ↔ with irreducibleComponents/IsGenericPoint, plus G.Nonempty. trdeg uses the canonical residueFieldMap.toAlgebra, with ℕ witnesses and max = G.sup t. Inequality uses ringKrullDim of the ring stalks (the O_x of def-weil-pbc-module-stalk), in the same form as the landed integral local_dimension_formula. Edge cases checked: empty X, identity, two crossing lines, non-dominant component, nilpotents, WithBot ⊥/⊤, universes. Docstrings carry source/blueprint and all 9 steps; sorry only; no defs; stmt_dep modules public imports. Not recompiled (no change); no findings."
+ }
+}

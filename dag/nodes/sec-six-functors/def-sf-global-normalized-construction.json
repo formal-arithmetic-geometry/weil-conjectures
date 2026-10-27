@@ -1,0 +1,129 @@
+{
+ "kind": "definition",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+  "place": "Specialization of Verdier exchange, counit normalization at the point, and the constant-unit specialization; expanded imported proof steps 2–6."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-global-duality",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalVerdierDuality",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-global-duality",
+   "place": "Proof steps 2–5: normalize the identity adjunction, its units and coefficient maps."
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dual of compactly supported etale cohomology is the cohomology of the Verdier dual",
+   "results": "No match. Returned derived cohomology and condensed-category facts do not supply four-stage identity normalization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"unit\"",
+   "results": "4 hits: CategoryTheory.MonoidalClosed.unitIsoSelf, unitNatIso, CategoryTheory.Pi.monoidalClosed_closed_adj_counit and closed_adj_unit. Read Monoidal/Closed/Basic: these use tensorLeft, while CoefficientClosedStructure records tensorRight. None normalizes a constructible System. The main proof directly proves the corresponding right-unitor map.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientDual|unit.*[Ii]so|rightUnitor",
+   "results": "25 Mathlib grep hits, mostly unrelated number-theory and category-theory unit references; no four-stage System normalization. Separate local rg searches read source GlobalDuality, PointFibreDerivedTensor, PointFibreEquivalence, VerdierExchangeData and ProjectionInternalHom: these provide finite etale duality or generic adjunction/unit facts, not the required all-stage normalization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint of tensoring with the unit object is naturally isomorphic to the identity functor",
+   "results": "8 hits, including CategoryTheory.MonoidalCategory.rightUnitorNatIso, CategoryTheory.unitClosed and rightUnitor. Read the right-unitor signature and used rightUnitorNatIso together with Adjunction.rightAdjointUniq in the main proof. None supplies the four-stage identity/counit normalization of a constructible exceptional System.",
+   "date": "2026-10-25",
+   "verdict": "partial match: unit adjunction only"
+  }
+ ],
+ "id": "def-sf-global-normalized-construction",
+ "title": "Normalized construction data before exchange invertibility",
+ "statement": "For a separated finite-type morphism f:X→S, a published constructible exceptional System A and compactification c, NormalizedData records a coefficient unit at every Stage, StageData [def-sf-verdier-exchange-data] for the literal identity of S, and the specified epsilon as a natural transformation commuting with shifts. Its dualizing comparison is the identity. The projection is natural in its first variable. It records the original ring realizations, projection normalization, tensor-unit comparisons with both normalized unitors, and coefficient comparisons with ScalarConclusion and canonical q/unit normalization. RingShiftRealization and ScalarShifts are asserted for every subsequent proof that all epsilon components are invertible; no such proof is part of this record. StageMaps.toConclusion constructs StageConclusion from that proof. The original global-duality Package, Data and Assertion definitions are relocated here verbatim. Its coefficient stages, operations and Systems are those of [def-weil-exceptional-inverse-image], with the common-stage index of [def-weil-algebraically-closed-coefficients], the coefficient changes of [def-pur-integral-compact-support-coefficient-data] and the derived extension of [def-weil-pbc-bounded-constructible-tower]; compactifications are those of [def-nagata-compactification]. GeometricAlternative uses the geometric fibre of [def-weil-finite-field-fiber], smoothness [def-sbc-smooth-morphisms] and geometric connectedness [def-pc-geometrically-irreducible].",
+ "proof": [
+  {
+   "text": "Define StageMaps as the specified natural evaluation transpose with signed shifts. Given a proof of componentwise invertibility, use NatIso.isIso_of_isIso_app and asIso, preserving the transformation literally. Define NormalizedData by the listed construction fields; these do not include invertibility. Existing definitions are relocated without changes.",
+   "uses": [
+    "def-sf-verdier-exchange-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-verdier-exchange-data"
+ ],
+ "stmt_deps": [
+  "def-sf-verdier-exchange-data",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-algebraically-closed-coefficients",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-nagata-compactification",
+  "def-weil-finite-field-fiber",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+  "place": "Specialization of Verdier exchange, counit normalization at the point, and the constant-unit specialization; expanded imported proof steps 2–6."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalVerdierDualityData",
+  "file": "lean/Sheaf/Paper/GlobalVerdierDualityData.lean",
+  "declaration": "WeilConjectures.GlobalVerdierDuality.NormalizedData",
+  "statement": "structure NormalizedData",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.GlobalVerdierDuality.NormalizedData",
+   "WeilConjectures.GlobalVerdierDuality.StageMaps",
+   "WeilConjectures.GlobalVerdierDuality.StageMaps.toConclusion",
+   "WeilConjectures.GlobalVerdierDuality.identityOperation",
+   "WeilConjectures.GlobalVerdierDuality.Data",
+   "WeilConjectures.GlobalVerdierDuality.unitEvaluation",
+   "WeilConjectures.GlobalVerdierDuality.unitCoevaluation",
+   "WeilConjectures.GlobalVerdierDuality.Conclusion",
+   "WeilConjectures.GlobalVerdierDuality.Package",
+   "WeilConjectures.GlobalVerdierDuality.GeometricAlternative",
+   "WeilConjectures.GlobalVerdierDuality.Assertion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1661a",
+  "group": "T2",
+  "result": "fix",
+  "landing": "20261025T101443-L-3695530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1661a",
+  "group": "T2",
+  "result": "fix",
+  "landing": "20261025T101443-L-3695530",
+  "kind": "interface",
+  "note": "independent cc review: relocated Package/Assertion block vs live G5 text (identical); item proof (5-adjunction Yoneda + rightAdjointUniq unit iso) vs StageData.epsilon and unitEvaluation/unitCoevaluation; identity_normalization (NormalizedData) vs old Package and sk-thm-sf-global-duality; node stmt_deps vs owners of the Lean names"
+ }
+}

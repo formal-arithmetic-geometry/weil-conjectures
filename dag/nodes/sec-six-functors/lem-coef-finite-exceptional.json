@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "All adjunctions below are restricted to the stated constructible categories. Choose a compactification $f=pj$ by [thm-nagata-compactification] and use $F_r=Rp_*j_!$ from [def-compact-support-direct-image-detailed]. [lem-trf-open-ctf] puts $j_!K$ in $D^b_{ctf}(\\overline X,A_r)$, and [cor-sf-direct-image-ctf-proetale], applied to the proper finite-type $p$ and an integer bounding $\\dim\\overline X$, which exists by [lem-kun-dimension-finite-type] since $\\overline X$ is finite type over $k$, puts $F_rK$ in $\\mathcal C_{Y,r}$. Every bounded constructible input is of etale origin by [lem-sf-proetale-constructible-origin]. Choose its bounded constructible etale witness. If the input has Tor interval $[a,b]$, clause (ii) of [lem-sf-comparison-tor-amplitude] shows that this witness has the same Tor interval on the etale site. Thus every later use of a finite constructible pro-etale realization has a finite-Tor etale witness, not just a bounded constructible one. Hence [thm-sf-ambient-adjoint-class] gives $F_r\\dashv G_r$ with its specified compactification comparisons, and clauses (1)--(2) of [thm-sf-preservation-class] give bounded constructibility and $G_r\\mathcal C_{Y,r}\\subseteq\\mathcal C_{X,r}$. More explicitly, take the finite affine chart family in that statement, with $D=0$ for an empty chart family, and $e=\\dim Y$ for nonempty $Y$ and $e=0$ otherwise. An input with cohomological interval $[a,b]$ has output interval $[a-2D,b+2e+1]$, and an input with Tor interval $[c,d]$ has output Tor interval $[c-2D,d+2e+1]$. These are assertions about the transported constructible adjoint, not the stronger ambient admissibility datum. The hypotheses are satisfied also for the structure morphisms of $X,Y$, whose targets are $\\operatorname{Spec}k$. No unrestricted pro-etale ambient adjoint is required.",
+   "text": "All adjunctions below are restricted to the stated constructible categories. Choose a compactification $f=pj$ by [thm-nagata-compactification] and use $F_r=Rp_*j_!$ from [def-compact-support-direct-image-detailed]. [lem-trf-open-ctf] puts $j_!K$ in $D^b_{ctf}(\\overline X,A_r)$, and [cor-sf-direct-image-ctf-proetale], applied to the proper finite-type $p$ and an integer bounding $\\dim\\overline X$, which exists by [lem-kun-dimension-finite-type] since $\\overline X$ is finite type over $k$, puts $F_rK$ in $\\mathcal C_{Y,r}$. Every bounded constructible input is of etale origin by [lem-sf-proetale-constructible-origin]. Choose its bounded constructible etale witness. If the input has Tor interval $[a,b]$, clause (ii) of [lem-sf-comparison-tor-amplitude] shows that this witness has the same Tor interval on the etale site. Thus every later use of a finite constructible pro-etale realization has a finite-Tor etale witness, not just a bounded constructible one. Hence [thm-sf-ambient-adjoint-class] gives $F_r\\dashv G_r$ with its specified compactification comparisons, and clauses (1)--(2) of [thm-sf-preservation-class] give bounded constructibility and $G_r\\mathcal C_{Y,r}\\subseteq\\mathcal C_{X,r}$. More explicitly, take the finite affine chart family in that statement, with $D=0$ for an empty chart family, and $e=\\dim Y$ for nonempty $Y$ and $e=0$ otherwise. An input with cohomological interval $[a,b]$ has output interval $[a-2D,b+2e+1]$, and an input with Tor interval $[c,d]$ has output Tor interval $[c-2D,d+2e+1]$. These are assertions about the transported constructible adjoint, not the stronger ambient admissibility datum. The hypotheses are satisfied also for the structure morphisms of $X,Y$, whose targets are $\\operatorname{Spec}k$. No unrestricted pro-etale ambient adjoint is required. For the preservation declarations in the Lean module, use the already stated finite-operations package [lem-sf-exceptional-finite-operations] at the given field and positive level, with the dimension bound just described. Its equality realizations give the two restrictions literally. Transport the right restriction from the specified-compactification ordinary-etale right adjoint to the recorded fixed right adjoint by right-adjoint uniqueness. Repleteness [lem-weil-finite-ctf-triangulated] transports the finite-Tor property across this canonical isomorphism. This replaces the separate preservation argument, while the normalized adjunction obligation remains as stated above.",
    "uses": [
     "thm-nagata-compactification",
     "def-compact-support-direct-image-detailed",
@@ -32,7 +32,9 @@
     "thm-sf-ambient-adjoint-class",
     "thm-sf-preservation-class",
     "lem-kun-dimension-finite-type",
-    "lem-sf-comparison-tor-amplitude"
+    "lem-sf-comparison-tor-amplitude",
+    "lem-sf-exceptional-finite-operations",
+    "lem-weil-finite-ctf-triangulated"
    ],
    "elementary": false,
    "source": {
@@ -60,11 +62,11 @@
    }
   },
   {
-   "text": "Construct the fixed-coefficient exchange without an axiomatized six-functor datum. Write $s=\\operatorname{Spec}k$, $P_{T,r}=Ra_{T!,r}$, and $\\operatorname{tr}_{T,r}:P_{T,r}\\omega_{T,r}\\to A_r$ for the structure-map counit. The inputs are bounded below and have the etale-origin witnesses from step 1, so the current comparison-class version of [thm-sf-comp-composition] applies and gives $\\kappa_r:P_{Y,r}F_r\\xrightarrow{\\sim}P_{X,r}$. Define $\\tau_r:F_r\\omega_{X,r}\\to\\omega_{Y,r}$ to be the unique transpose under $P_{Y,r}\\dashv Ra_{Y,r}^!$ of $\\operatorname{tr}_{X,r}\\circ\\kappa_{r,\\omega_{X,r}}$. Hence\n$$\\operatorname{tr}_{Y,r}\\circ P_{Y,r}(\\tau_r)=\\operatorname{tr}_{X,r}\\circ\\kappa_{r,\\omega_{X,r}}.$$\nHere the adjunction exists by step 1.\n\nFor finite-Tor constructible $M$, put $J_r=Rf_{*,r}D_{X,r}M$, finite-Tor constructible by [cor-sf-direct-image-ctf-proetale], using an integer bound for $\\dim X$ supplied by [lem-kun-dimension-finite-type]. Define $E_{r,M}:J_r\\to D_{Y,r}F_rM$ to be the tensor-Hom transpose of\n$$\\lambda_{r,M}:J_r\\otimes^LF_rM\\xrightarrow{\\mathrm{sym}}F_rM\\otimes^LJ_r\\xrightarrow{\\mathrm{PF}_{f,M,J_r}}F_r(M\\otimes^Lf^*J_r)\\xrightarrow{F_r(1\\otimes\\varepsilon^*_{r,D_XM})}F_r(M\\otimes^LD_XM)\\xrightarrow{F_r(\\mathrm{ev}_M\\circ\\mathrm{sym})}F_r\\omega_{X,r}\\xrightarrow{\\tau_r}\\omega_{Y,r}.$$\nThe projection map is the isomorphism of [fix-prop-projection-formula]; its finite hypotheses are verified in steps 1--2. Evaluation is [lem-weil-duality-pairing]. This explicitly specifies the relative exchange map.",
+   "text": "Construct the fixed-coefficient exchange without an axiomatized six-functor datum. Write $s=\\operatorname{Spec}k$, $P_{T,r}=Ra_{T!,r}$, and $\\operatorname{tr}_{T,r}:P_{T,r}\\omega_{T,r}\\to A_r$ for the structure-map counit. The inputs are bounded below and have the etale-origin witnesses from step 1, so the current comparison-class version of [thm-sf-comp-composition] applies and gives $\\kappa_r:P_{Y,r}F_r\\xrightarrow{\\sim}P_{X,r}$. Define $\\tau_r:F_r\\omega_{X,r}\\to\\omega_{Y,r}$ to be the unique transpose under $P_{Y,r}\\dashv Ra_{Y,r}^!$ of $\\operatorname{tr}_{X,r}\\circ\\kappa_{r,\\omega_{X,r}}$. Hence\n$$\\operatorname{tr}_{Y,r}\\circ P_{Y,r}(\\tau_r)=\\operatorname{tr}_{X,r}\\circ\\kappa_{r,\\omega_{X,r}}.$$\nHere the adjunction exists by step 1.\n\nFor finite-Tor constructible $M$, put $J_r=Rf_{*,r}D_{X,r}M$, finite-Tor constructible by [cor-sf-direct-image-ctf-proetale], using an integer bound for $\\dim X$ supplied by [lem-kun-dimension-finite-type]. Define $E_{r,M}:J_r\\to D_{Y,r}F_rM$ to be the tensor-Hom transpose of\n$$\\lambda_{r,M}:J_r\\otimes^LF_rM\\xrightarrow{\\mathrm{sym}}F_rM\\otimes^LJ_r\\xrightarrow{\\mathrm{PF}_{f,M,J_r}}F_r(M\\otimes^Lf^*J_r)\\xrightarrow{F_r(1\\otimes\\varepsilon^*_{r,D_XM})}F_r(M\\otimes^LD_XM)\\xrightarrow{F_r(\\mathrm{ev}_M\\circ\\mathrm{sym})}F_r\\omega_{X,r}\\xrightarrow{\\tau_r}\\omega_{Y,r}.$$\nThe projection map is the isomorphism of [lem-weil-finite-compact-projection-formula]; its finite hypotheses are verified in steps 1--2. Evaluation is [lem-weil-duality-pairing]. This explicitly specifies the relative exchange map.",
    "uses": [
     "thm-sf-comp-composition",
     "cor-sf-direct-image-ctf-proetale",
-    "fix-prop-projection-formula",
+    "lem-weil-finite-compact-projection-formula",
     "lem-weil-duality-pairing",
     "lem-kun-dimension-finite-type"
    ],
@@ -77,7 +79,7 @@
   {
    "text": "Apply [lem-sf-absolute-trace-exchange] to $\\mathcal C_T=\\mathcal C_{T,r}$, $\\mathcal S=\\mathcal C_{s,r}$, $\\Omega=A_r$, $P_T=Ra_{T!,r}$, $A_T=Ra_{T,r}^!$, $F=F_r$, $U=f^*$ and $R=Rf_{*,r}$. The absolute adjunctions and their domains are step 1; tensor closure and evaluation-representability are step 2; $\\kappa$ and the projection isomorphism $\\theta=\\mathrm{PF}$ are step 3. Ordinary adjunction is [fix-prop-adjunctions](1). Thus all hypotheses hold on these categories. The lemma's trace transpose and evaluation pairing are exactly $\\tau_r,\\lambda_{r,M}$ from step 3, so its conclusion proves that the specified $E_{r,M}:Rf_{*,r}D_{X,r}M\\to D_{Y,r}F_rM$ is invertible. It also identifies its Hom action, which will fix the normalization used under coefficient change.\n\nNow use the original four Hom bijections with this constructed exchange:\n$$\\begin{aligned}\n\\operatorname{Hom}_X(K,H_rL)&\\cong\\operatorname{Hom}_X(f^*D_YL,D_XK)\\\\\n&\\cong\\operatorname{Hom}_Y(D_YL,Rf_*D_XK)\\\\\n&\\xrightarrow{E_K\\circ-}\\operatorname{Hom}_Y(D_YL,D_YF_rK)\\\\\n&\\cong\\operatorname{Hom}_Y(F_rK,L).\n\\end{aligned}$$\nThe outside arrows are biduality [thm-fix-general-biduality], the middle ordinary adjunction is [fix-prop-adjunctions](1). Explicitly the first sends $u:K\\to D_XT$ to $D_X(u)\\circ\\delta_T$. Denote the inverse composite by $\\Phi_r$. By [lem-weil-pbc-adjunction-of-natural-bijection] this gives $F_r\\dashv H_r$. The route remains the imported duality/ordinary-adjunction/exchange route, with the previously conditional exchange proved rather than assumed.",
    "uses": [
-    "fix-prop-projection-formula",
+    "lem-weil-finite-compact-projection-formula",
     "thm-sf-comp-composition",
     "fix-prop-adjunctions",
     "thm-fix-general-biduality",
@@ -100,11 +102,9 @@
    }
   },
   {
-   "text": "Write $A=A_m$, $B=A_n$. Reduction $Q_T$ takes $\\mathcal C_{T,m}$ to $\\mathcal C_{T,n}$. Indeed, [lem-sf-flat-model] supplies a bounded flat representative $P$ for any such input, and [lem-sf-reduction-flat-model] identifies $Q_TK$ with $P\\otimes_AB$, flat over $B$ in the same finite interval. Its cohomology is constructible by [lem-pur-finite-tensor-constructible-cohomology], applied to $K$ and the constant finite $A$-module sheaf $B_T$: both are bounded constructible $A$-complexes. Here constructibility as a $B$-module follows from constructibility of the underlying $A$-module: on a stratum with a constant $A$-module description, the stalk is killed by $\\ker(A\\to B)$, and that description is automatically $B$-linear, since every scalar in $B$ lifts to $A$. Its finite $A$-module stalk is consequently a finite $B$-module stalk. This proves bounded constructibility as well as finite Tor amplitude; it does not assert that the nonflat quotient $A\\to B$ is flat.",
+   "text": "The Lean declaration reduction_preserves uses the arbitrary finite-ring scalar-extension result [det-sp-scalar-extension-functor]. The quotient map is exactly the existing compactSupportLevelQuotient, and its scalar functor is definitionally the actual derived quotient tensor. The proved Tor-preservation and constructibility parts of that result give the same interval and constructible cohomology; its boundedness-from-Tor lemma bounds cohomological support. This applies on every scheme and does not require the quotient to be flat. It includes equal indices.",
    "uses": [
-    "lem-sf-flat-model",
-    "lem-sf-reduction-flat-model",
-    "lem-pur-finite-tensor-constructible-cohomology"
+    "det-sp-scalar-extension-functor"
    ],
    "elementary": false,
    "source": {
@@ -150,12 +150,12 @@
    }
   },
   {
-   "text": "Use the compact-support comparison $q_K:Q_YF_mK\\xrightarrow{\\sim}F_nQ_XK$ of [lem-fix-compact-support-coefficient-change]. For ordinary direct image use $c_M:Q_YRf_{*,m}M\\xrightarrow{\\sim}Rf_{*,n}Q_XM$ of [lem-coef-finite-direct-image], with its coefficient ring $A=A_m$ and its finite commutative $A$-algebra $B=A_n$, applied to finite-Tor constructible $M=D_{X,m}K$. The quotient $A_m\\to A_n$ is finite as an $A_m$-module because $A_n$ is cyclic; no flatness of this quotient is needed. Use the theorem's finite constructible pro-etale realization on the finite-Tor etale-origin witnesses of step 1. Its stated definition of $c$ as the scalar extension of the ordinary counit supplies exactly the following identity. Let $p_M:Q_Xf_m^*M\\xrightarrow{\\sim}f_n^*Q_YM$. The ordinary-counit identity is\n$$\\varepsilon^*_{n,Q_XM}\\circ f_n^*(c_M)\\circ p_{Rf_{*,m}M}=Q_X(\\varepsilon^*_{m,M}),$$\nwith pullback/tensor source identifications inserted. This is exactly the transpose defining the canonical projection map $c$ in [lem-coef-finite-direct-image]. Thus the ordinary Hom bijection respects finite reduction; no finite ordinary-direct-image assertion is taken from [lem-fix-operation-reduction]. The same operation-reduction statement and [lem-fix-compact-support-coefficient-change] preserve the projection construction and tensor constraints used in $\\lambda$; [fix-prop-projection-formula] identifies that construction with the finite projection isomorphism. The ordinary counit identity is supplied by [lem-coef-finite-direct-image]; [lem-fix-operation-reduction] is used here only for the pullback, tensor constraints, and projection-construction comparisons on finite-Tor inputs. Its clause requiring admissible exceptional adjoints is not used.",
+   "text": "Use the compact-support comparison $q_K:Q_YF_mK\\xrightarrow{\\sim}F_nQ_XK$ of [lem-fix-compact-support-coefficient-change]. For ordinary direct image use $c_M:Q_YRf_{*,m}M\\xrightarrow{\\sim}Rf_{*,n}Q_XM$ of [lem-coef-finite-direct-image], with its coefficient ring $A=A_m$ and its finite commutative $A$-algebra $B=A_n$, applied to finite-Tor constructible $M=D_{X,m}K$. The quotient $A_m\\to A_n$ is finite as an $A_m$-module because $A_n$ is cyclic; no flatness of this quotient is needed. Use the theorem's finite constructible pro-etale realization on the finite-Tor etale-origin witnesses of step 1. Its stated definition of $c$ as the scalar extension of the ordinary counit supplies exactly the following identity. Let $p_M:Q_Xf_m^*M\\xrightarrow{\\sim}f_n^*Q_YM$. The ordinary-counit identity is\n$$\\varepsilon^*_{n,Q_XM}\\circ f_n^*(c_M)\\circ p_{Rf_{*,m}M}=Q_X(\\varepsilon^*_{m,M}),$$\nwith pullback/tensor source identifications inserted. This is exactly the transpose defining the canonical projection map $c$ in [lem-coef-finite-direct-image]. Thus the ordinary Hom bijection respects finite reduction; no finite ordinary-direct-image assertion is taken from [lem-fix-operation-reduction]. The same operation-reduction statement and [lem-fix-compact-support-coefficient-change] preserve the projection construction and tensor constraints used in $\\lambda$; [lem-weil-finite-compact-projection-formula] identifies that construction with the finite projection isomorphism. The ordinary counit identity is supplied by [lem-coef-finite-direct-image]; [lem-fix-operation-reduction] is used here only for the pullback, tensor constraints, and projection-construction comparisons on finite-Tor inputs. Its clause requiring admissible exceptional adjoints is not used.",
    "uses": [
     "lem-fix-compact-support-coefficient-change",
     "lem-coef-finite-direct-image",
     "lem-fix-operation-reduction",
-    "fix-prop-projection-formula"
+    "lem-weil-finite-compact-projection-formula"
    ],
    "elementary": false,
    "source": {
@@ -182,7 +182,7 @@
     "lem-fix-operation-reduction",
     "lem-fix-compact-support-coefficient-change",
     "lem-coef-finite-direct-image",
-    "fix-prop-projection-formula"
+    "lem-weil-finite-compact-projection-formula"
    ],
    "elementary": false,
    "source": {
@@ -212,45 +212,77 @@
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
     "place": "Proof, paragraph 2: identifying the units and counits before reconstructing a tower (agent expansion checked against the main-20261015 Proof)"
    }
+  },
+  {
+   "text": "The Lean coefficient-map identities quotient_comp and quotient_id are elementary: constant sheafification preserves composition and identities, quotient induction identifies the composite ring map with the direct quotient, and Ideal.Quotient.factor_eq gives the identity quotient. For finitePull_comp apply the constant-ring inverse-image composition identity [pur713-def-pullback-comparison] in the reverse direction. These proofs include equal indices and the empty scheme.",
+   "uses": [
+    "pur713-def-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Lean qMap_isIso proof uses the already specified constructible exceptional coefficient system [lem-sf-constructible-exceptional-adjunction-coefficients], specialized to the positive finite quotient stages and an auxiliary algebraic closure in the scheme universe. Its QNormalized equation expresses the ambient canonical PurCompactSupport.comparison as a composite of isomorphisms after cancelling the scalar and support realization isomorphisms. Conjugating by finiteImageIso gives the literal supportMap component. These components are natural by supportMap.naturality, and the fully faithful inclusion lifts their natural isomorphism to qMap. The system is used only in a proof: none of its arbitrary data defines a public object, and qMap retains its original construction.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Second paragraph, canonical compact-support coefficient comparison; existing normalized coefficient-system specialization"
+   }
+  },
+  {
+   "text": "S2 assembly: the selected dualFormulaIso satisfies FormulaNormalized by Exists.choose_spec applied to dualFormula_existsUnique. The quotient invertibility and the quotient composition/identity clauses are the two split coefficient statements. For the final two clauses apply Mathlib unit_mateEquiv and mateEquiv_counit to q.inv, and cancel q.inv≫q.hom or q.hom≫q.inv. This proves the original conjunction with its original parameters and endpoints.",
+   "uses": [
+    "lem-sf-finite-exceptional-quotient-is-iso",
+    "lem-sf-finite-exceptional-quotient-coherence"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "cor-coef-finite-verdier",
-  "cor-sf-direct-image-ctf-proetale",
-  "def-compact-support-direct-image-detailed",
-  "def-weil-pbc-adjunction-mate",
-  "fix-prop-adjunctions",
-  "fix-prop-projection-formula",
-  "lem-coef-finite-direct-image",
-  "lem-coef-finite-dualizing",
-  "lem-fix-compact-support-coefficient-change",
-  "lem-fix-operation-reduction",
-  "lem-kun-dimension-finite-type",
-  "lem-pur-finite-tensor-constructible-cohomology",
-  "lem-pur-rhom-global-sections",
-  "lem-sf-absolute-trace-exchange",
-  "lem-sf-compact-coefficient-composition",
-  "lem-sf-comparison-tor-amplitude",
-  "lem-sf-flat-model",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-sf-reduction-flat-model",
-  "lem-trf-open-ctf",
-  "lem-weil-duality-pairing",
-  "lem-weil-finite-duality-site-comparison",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "thm-coef-finite-hom",
-  "thm-fix-general-biduality",
   "thm-nagata-compactification",
+  "def-compact-support-direct-image-detailed",
+  "lem-trf-open-ctf",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-sf-proetale-constructible-origin",
   "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-exceptional-finite-operations",
+  "lem-weil-finite-ctf-triangulated",
+  "thm-fix-general-biduality",
+  "lem-sf-pullback-tor-amplitude",
+  "fix-prop-adjunctions",
+  "cor-coef-finite-verdier",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-sf-flat-model",
   "thm-sf-comp-composition",
-  "thm-sf-preservation-class"
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-duality-pairing",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-sf-absolute-trace-exchange",
+  "det-sp-scalar-extension-functor",
+  "lem-coef-finite-dualizing",
+  "thm-coef-finite-hom",
+  "lem-fix-operation-reduction",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-coef-finite-direct-image",
+  "lem-sf-compact-coefficient-composition",
+  "def-weil-pbc-adjunction-mate",
+  "pur713-def-pullback-comparison",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-finite-exceptional-quotient-is-iso",
+  "lem-sf-finite-exceptional-quotient-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
-  "place": "Both paragraphs of the current blueprint proof; agent expansion constructs relative Verdier exchange and its coefficient square from projection, evaluation, absolute traces, and the ordinary adjunction."
+  "place": "Both paragraphs of the current blueprint proof; agent expansion constructs relative Verdier exchange and its coefficient square from projection, evaluation, absolute traces, and the ordinary adjunction. X3 proves the two preservation declarations using the existing finite-operations and scalar-extension packages, and proves the quotient and constant-pull identities directly. The remaining normalized-adjunction, dual-formula and scalar-mate obligations retain their existing proof plans. X3 also proves qMap_isIso by cancellation of the existing coefficient-system normalization, with no new dependency cycle. S2 separates the quotient invertibility and quotient coherence steps and proves the final conjunction using choice specification and Mathlib mate unit/counit cancellation. The unchanged construction block is publicly re-exported from FiniteExceptionalData to avoid cycles."
  },
  "mathlib_searches": [
   {
@@ -353,7 +385,18 @@
   "thm-sf-preservation-class"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -551,7 +594,7 @@
   "by": "NH",
   "date": "2026-10-19",
   "existing": false,
-  "note": "H3 repair: dualFormulaIso is specified by the unique trace/evaluation normalization FormulaNormalized, using the published finiteTrace (structural absolute-counit transpose), canonical projection and ordinary pullback comparison. Clause 1 asserts that normalization for this specified iso. H13 repair: leave def-weil-finite-tor-amplitude and its NW etale interface unchanged; import the original Sheaf.Paper.FiniteTorAmplitude directly to use the original intrinsic finiteTorConstructible. No declaration is removed or rebound."
+  "note": "H3 repair: dualFormulaIso is specified by the unique trace/evaluation normalization FormulaNormalized, using the published finiteTrace (structural absolute-counit transpose), canonical projection and ordinary pullback comparison. Clause 1 asserts that normalization for this specified iso. H13 repair: leave def-weil-finite-tor-amplitude and its NW etale interface unchanged; import the original Sheaf.Paper.FiniteTorAmplitude directly to use the original intrinsic finiteTorConstructible. No declaration is removed or rebound. S2: construction declarations are relocated verbatim to FiniteExceptionalData and remain publicly visible through the original module. The unique-existence theorems remain attached to this node; only finite_exceptional is reduced by two strict quotient substatements."
  },
  "reviewed_lean": {
   "date": "2026-10-19",
@@ -560,5 +603,16 @@
   "group": "NH",
   "result": "pass",
   "note": "Re-delivery after RETURN 490c38d86e7e. H13 resolved: all 6 stmt_dep records equal side-live (def-weil-finite-tor-amplitude back to NW FiniteTorAmplitudeSites/finiteTorConstructibleEtale); item imports Sheaf.Paper.FiniteTorAmplitude directly and says so in lean.note. H3 resolved: clause 1 is now FormulaNormalized of dualFormulaIso, chosen from dualFormula_existsUnique; the equation is projectionMap + formulaPullIso + Koszul swap + evaluation + finiteImageIso + finiteTrace (absolute counit transposed through support composition) = ev∘(ε⊗1), the finite analogue of the landed CoefDualFormulaScalarTranspose.FormulaNormalized. Finite TensorPresentation/SignedSymmetry exist via IntegralVerdier.Conclusion, so the ∀ is not vacuous; the map α ↦ λ∘(Fα⊗1) is injective, so ∃! holds and rescaling is excluded. finitePull_comp is a true sorry coherence. Clauses 2-6 byte-identical to the accepted text; statement verbatim; sorry-only; docstrings present. nt_compile --json 11.7 s exit 0, clean. Cosmetic only: redundant tensor.map(𝟙⊗𝟙) on the RHS."
- }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-92de4",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164236-L-981366",
+  "kind": "interface",
+  "note": "independent cc review: FiniteExceptionalData vs published FiniteExceptional.lean (verbatim names, signatures, bodies, imports); split theorems vs conjuncts 2-4 of finite_exceptional; 12 direct importers compiled against sandbox build"
+ },
+ "lean_notes": "2026-10-26 (maintainer M, DAG direction fix for prop-sf-pf-coherence): the citation of fix-prop-projection-formula was replaced by lem-weil-finite-compact-projection-formula: the blueprint node does not use fix-prop-projection-formula, the Lean declaration uses none of its declarations (constant walk), and the edge closed the cycle fix-prop-projection-formula -> prop-sf-pf-coherence -> ... -> here."
 }

@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-generic-linear-perturbation-jacobian",
+ "kind": "statement",
+ "title": "Generic affine-linear perturbations have full-rank Jacobian",
+ "statement": "Let $k$ be a field [def-weil-field], let $0\\leq c\\leq N$ be integers, and let $f_1,\\ldots,f_c\\in k[x_1,\\ldots,x_N]$ [def-weil-pbc-mv-polynomial-ring]. Introduce $c(N+1)$ independent variables $z_{ij}$, indexed by $0\\leq i\\leq N$ and $1\\leq j\\leq c$. There exists a nonzero polynomial $H\\in k[z_{ij}]$ such that the following holds. For every field extension $L/k$ (a field $L$ with a unital homomorphism $k\\to L$) and every tuple $b_{ij}\\in L$ with $H(b_{ij})\\ne0$, put $h_j=f_j+b_{0j}+\\sum_{i=1}^N b_{ij}x_i$ and $B=L[x_1,\\ldots,x_N]/(h_1,\\ldots,h_c)$, using the coefficient homomorphism to regard $f_j$ as polynomials over $L$. The images in $B$ of all $c\\times c$ minors of the matrix $(\\partial h_j/\\partial x_i)_{1\\leq j\\leq c,1\\leq i\\leq N}$ generate the unit ideal, where partial derivatives and determinants are those of [def-weil-pbc-polynomial-partial-derivative] and [def-weil-pbc-matrix-determinant]. Moreover $\\operatorname{Spec}B\\to\\operatorname{Spec}L$ is smooth [def-sbc-smooth-morphisms]. When $c=0$, the single empty minor is $1$, the parameter ring is $k$, and one may take $H=1$. The zero algebra $B$ is allowed.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7U, lemma-jouanolou-type-thing, statement and proof: exclude every rank-deficient point above the generic parameter, then shrink to a principal open. The full-rank conclusion is the rank-deficient incidence argument in that proof; the c=0 extension uses the empty Jacobian convention."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "If $c=0$, take $H=1$. The empty minor is $1$ by the determinant definition. The quotient is $L[x_1,\\ldots,x_N]$, a standard smooth presentation with no equations and empty determinant $1$; standard smooth implies smooth, and the affine comparison gives the claimed smooth morphism. Henceforth $c\\geq1$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7U, lemma-jouanolou-type-thing, proof: rank-deficient incidence and parameter exclusion"
+   }
+  },
+  {
+   "text": "Put $M=c(N+1)$, $P=k[z_{ij}]$, $K=\\operatorname{Frac}(P)$ and $g_j=f_j+z_{0j}+\\sum_i z_{ij}x_i$. Let $\\Delta_I$ run through the $c$-column minors of $J=(\\partial_i f_j+z_{ij})_{j,i}$, and set $D=P[x]/(g_j,\\Delta_I)$. Localize $D$ at the images of $P\\setminus\\{0\\}$, obtaining $D_K$. Suppose $D_K\\ne0$. Choose a maximal ideal and its residue field $E$. Thus the images $u_i$ of $x_i$ and $a_{ij}$ of $z_{ij}$ in $E$ satisfy all $g_j=0$ and all $\\Delta_I=0$. The unital field map $K\\to E$ is injective: its kernel is an ideal of a field and cannot contain $1$. Consequently the $M$ elements $a_{ij}$ are algebraically independent over $k$: a nonzero polynomial in them is a nonzero element of $P$, hence a unit of $D_K$ and of $E$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7U, lemma-jouanolou-type-thing, proof: rank-deficient incidence and parameter exclusion"
+   }
+  },
+  {
+   "text": "Apply the field injective-matrix lemma contrapositively to the $N\\times c$ transpose of $J(u)$. Every maximal minor is zero (transposing preserves the determinant, directly by replacing the permutation with its inverse in the Leibniz formula). Thus this linear map is not injective. A difference of two vectors with the same image gives a nonzero kernel vector $\\lambda$. Renumber the equations so its first entry is nonzero and divide by that entry. Then $\\lambda_1=1$, and for each $1\\leq i\\leq N$ the kernel equation gives $a_{i1}=-\\partial_i f_1(u)-\\sum_{j=2}^c\\lambda_j(\\partial_i f_j(u)+a_{ij})$. The derivative is $\\partial_i f_1$, correcting the index typo in the displayed formula of 0E7U.",
+   "uses": [
+    "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+    "def-weil-pbc-polynomial-partial-derivative",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7U, lemma-jouanolou-type-thing, proof: rank-deficient incidence and parameter exclusion"
+   }
+  },
+  {
+   "text": "Let $F$ be the subfield of $E$ generated over $k$ by the $u_i$, the $\\lambda_2,\\ldots,\\lambda_c$, and the $a_{ij}$ with $i\\geq1,j\\geq2$. There are $N+(c-1)+N(c-1)=M-1$ listed generators. The preceding identities put every $a_{i1}$ in $F$, and $g_j(u)=0$ gives $a_{0j}=-f_j(u)-\\sum_i a_{ij}u_i\\in F$. Let $s$ be the set of listed generators and $A=k[s]\\subseteq F$. The fractions $a/b$ with $a,b\\in A$, $b\\ne0$, form a subfield containing $k$ and $s$, and are contained in every such subfield, so they are exactly $F$. Every $v=a/b\\in F$ therefore satisfies the nonzero polynomial $bT-a\\in A[T]$. Apply the algebraic-adjoin bound to get $\\operatorname{trdeg}_k F\\leq|s|\\leq M-1$. But all $M$ elements $a_{ij}$ lie in $F$ and remain algebraically independent there: a polynomial relation in $F$ would be one in $E$. The definition of transcendence degree gives $M\\leq\\operatorname{trdeg}_k F$, a contradiction. Thus $D_K=0$.",
+   "uses": [
+    "lem-sfb-algebraic-adjoin-transcendence-bound",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7U, lemma-jouanolou-type-thing, proof: rank-deficient incidence and parameter exclusion"
+   }
+  },
+  {
+   "text": "Since $1/1=0$ in $D_K$, the defining equality of localized fractions gives $H\\in P\\setminus\\{0\\}$ whose image in $D$ is zero. Membership in the defining ideal means an identity $H=\\sum_j A_jg_j+\\sum_I C_I\\Delta_I$ in $P[x]$ for polynomial coefficients $A_j,C_I$. For any $L/k$ and $b$ with $H(b)\\ne0$, substitute $z_{ij}=b_{ij}$ and then pass to $B$. Derivatives commute with this coefficient substitution by their monomial formula, and determinants do so by their finite sum formula. Hence $H(b)=\\sum_I\\overline{C_I(b,x)}\\,\\overline{\\Delta_I(b,x)}$ in $B$. Multiplication by the scalar inverse of $H(b)$ expresses $1$ as a linear combination of the required minors. This also holds if $B$ is zero.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-polynomial-partial-derivative",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7U, lemma-jouanolou-type-thing, proof: rank-deficient incidence and parameter exclusion"
+   }
+  },
+  {
+   "text": "Write $\\delta$ for any specialized minor and also its image in $B$. Its localization has presentation $B_\\delta=L[x_1,\\ldots,x_N,y]/(h_1,\\ldots,h_c,y\\delta(x)-1)$: the maps send $y$ to $\\delta^{-1}$ and fractions $v/\\delta^r$ to $vy^r$, respectively, and are inverse on all generators. Select the $c$ variables of the minor followed by $y$ as the first $c+1$ variables. The Jacobian block of this presentation is $\\left(\\begin{smallmatrix}J_I&0\\\\ *&\\delta\\end{smallmatrix}\\right)$, with determinant $\\delta\\det J_I=\\delta^2$ by expansion along its last column. It is invertible because $y\\delta=1$. Since $c+1\\leq N+1$, this is a standard smooth presentation, even when the localization is zero. Every $B_\\delta$ is therefore smooth over $L$. The minors generate the unit ideal by step 5, so smoothness on this finite principal cover gives that $L\\to B$ is smooth. The affine comparison gives smoothness of $\\operatorname{Spec}B\\to\\operatorname{Spec}L$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-pbc-polynomial-partial-derivative",
+    "def-weil-pbc-matrix-determinant",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-local-on-cover",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0E7U, lemma-jouanolou-type-thing, proof: rank-deficient incidence and parameter exclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-ring-localization-away",
+  "lem-sfb-algebraic-adjoin-transcendence-bound",
+  "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-local-on-cover",
+  "lem-weil-pbc-standard-smooth-is-smooth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7U, lemma-jouanolou-type-thing: the rank-deficient incidence argument; localization of its closed incidence scheme makes the parameter exclusion explicit without Chevalley."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generic affine linear perturbations of finitely many polynomials in affine space give a smooth complete intersection with maximal rank Jacobian",
+   "results": "8 hits: Algebra.SubmersivePresentation.isStandardSmooth, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.out, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: these results construct or describe standard smooth presentations already supplied as data, not a nonempty coefficient open for arbitrary input equations"
+  },
+  {
+   "tool": "grep",
+   "query": "perturb|jouanolou|smoothing",
+   "results": "0 hits: ; directory RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: these results construct or describe standard smooth presentations already supplied as data, not a nonempty coefficient open for arbitrary input equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsStandardSmoothOfRelativeDimension, MvPolynomial",
+   "results": "3 hits: Algebra.IsStandardSmoothOfRelativeDimension.mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension.mvPolynomial_fin, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-22",
+   "verdict": "no match: these results construct or describe standard smooth presentations already supplied as data, not a nonempty coefficient open for arbitrary input equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal affine linear perturbation of polynomial equations is smooth over a nonempty open subset of coefficient space",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a nonzero polynomial in the coefficients such that adding generic constants and linear forms to any c polynomials makes all c by c Jacobian minors generate the unit ideal",
+   "results": "8 hits: Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one, Algebra.SubmersivePresentation.jacobianOfHasCoeffs, Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top, Algebra.SubmersivePresentation.jacobianRelations, Algebra.SubmersivePresentation.jacobianRelations_spec, Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs, Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs, Algebra.PreSubmersivePresentation.jacobian",
+   "date": "2026-10-22",
+   "verdict": "no match: these results construct or describe standard smooth presentations already supplied as data, not a nonempty coefficient open for arbitrary input equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic linear perturbations of polynomial equations have full rank Jacobian",
+   "results": "8 hits: Algebra.PreSubmersivePresentation.jacobian, Algebra.SubmersivePresentation.jacobian_isUnit, Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs, Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top, Algebra.SubmersivePresentation.linearIndependent_aeval_val_pderiv_relation, Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one, Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs.congr_simp, Algebra.PreSubmersivePresentation.jacobiMatrix; ",
+   "date": "2026-10-23",
+   "verdict": "no match: presentations assumed standard smooth do not construct a coefficient open for arbitrary f_j"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any polynomials over a field there is a nonzero polynomial in affine linear perturbation coefficients outside whose vanishing locus all maximal Jacobian minors generate the unit ideal",
+   "results": "8 hits: Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top, Algebra.SubmersivePresentation.jacobianRelations, Algebra.SubmersivePresentation.invJacobianOfHasCoeffs, Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs, Algebra.SubmersivePresentation.jacobianOfHasCoeffs, Algebra.SubmersivePresentation.jacobian_isUnit, Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one, Algebra.SubmersivePresentation.ofHasCoeffs; ",
+   "date": "2026-10-23",
+   "verdict": "no match: presentations assumed standard smooth do not construct a coefficient open for arbitrary f_j"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsStandardSmoothOfRelativeDimension, MvPolynomial",
+   "results": "3 hits: Algebra.IsStandardSmoothOfRelativeDimension.mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension.mvPolynomial_fin, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; ",
+   "date": "2026-10-23",
+   "verdict": "no match: presentations assumed standard smooth do not construct a coefficient open for arbitrary f_j"
+  },
+  {
+   "tool": "grep",
+   "query": "perturb|jouanolou|smoothing",
+   "results": "0 hits: ; directory RingTheory; ",
+   "date": "2026-10-23",
+   "verdict": "no match: presentations assumed standard smooth do not construct a coefficient open for arbitrary f_j"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-global-ci-smoothing",
+  "date": "2026-10-22",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Local complete-intersection deformations with a Fitting-ideal bound. Affine smoothing input: the polynomial perturbation in Stacks lemma-smoothing-affine-lci, used in the local smoothing construction. Supporting polynomial input: Stacks 0E7U, generic affine-linear perturbations and full-rank Jacobian locus, before choosing a power-series arc.",
+   "via": [
+    "lem-sfb-affine-global-ci-smoothing",
+    "lem-sfb-lci-local-fitting-smoothing",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-generic-linear-perturbation-jacobian",
+  "worker": "stage1",
+  "summary": "Followed the 0E7U normalized-kernel incidence count, corrected its derivative index in the proof, and made principal-open shrinking explicit by localization of the closed rank-deficient incidence algebra. Reused field-matrix and smooth-presentation nodes; created one exact Mathlib transcendence-degree leaf. The statement is unchanged; checked c=0, c=1, c=N, finite and imperfect fields, and zero quotient.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Local complete-intersection deformations with a Fitting-ideal bound. Affine smoothing input: the polynomial perturbation in Stacks lemma-smoothing-affine-lci, used in the local smoothing construction. Supporting polynomial input: Stacks 0E7U, generic affine-linear perturbations and full-rank Jacobian locus, before choosing a power-series arc. The six steps realize the polynomial perturbation prerequisite by Stacks 0E7U; this is below the unchanged unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+    "why": "Generic linear algebra / affine smoothness comparison used as stated in the 0E7U polynomial argument; the alteration unit supplies no alternative for this supporting algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic linear algebra / affine smoothness comparison used as stated in the 0E7U polynomial argument; the alteration unit supplies no alternative for this supporting algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-31f57af60",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-31f57af60 (reviewer sub-agent of L); spot-checked: I read the source, Stacks 0E7U (examples-defos.tex lines 2933-2996), in full. The item's statement is byte-identical to the live one; live still has the item unsplit and there is no repair note, so this is its first split. All six steps check: (1) for c=0, the empty determinant is 1 and the standard-smooth definition allows c=0; (2) D_K≠0 gives a maximal ideal and residue field E, and P→E is injective, so the a_ij are algebraically independent; (3) the injective-matrix lemma, applied to J(u)ᵀ (N×c) and read contrapositively, gives the kernel vector λ, and the formula for a_i1 is corrected from the source's index typo; (4) the count N+(c-1)+N(c-1)=M-1 is right, F=Frac(k[s]) makes every element algebraic via bT-a, and the new bound together with the sup-definition of trdeg gives the contradiction; (5) 1/1=0 in D_K gives H in the ideal, and specializing z to b gives the unit ideal; (6) B_δ ≅ L[x,y]/(h,yδ-1) has block determinant δ², a standard smooth presentation, then local-on-cover and the affine comparison give smoothness. Small cases: f=x² gives H=4z0-z1² (char≠2) and H=z1 (char 2). The new node lem-sfb-algebraic-adjoin-transcendence-bound is an exact specialization of Mathlib Algebra.IsAlgebraic.trdeg_le_cardinalMk (TranscendenceBasis.lean:469, which needs only NoZeroDivisors). It passes B1-B5, and an rg -L search of the DAG for 030F, trdeg and tower nodes found no duplicate. I accept the tool_uses (the field-injective-matrix lemma and the smooth-iff-affine comparison) as generic. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GenericLinearPerturbationJacobian",
+  "declaration": "MvPolynomial.GenericLinearPerturbation.exists_nonzero_parameter_polynomial",
+  "declarations": [
+   "MvPolynomial.GenericLinearPerturbation.equation",
+   "MvPolynomial.GenericLinearPerturbation.Quotient",
+   "MvPolynomial.GenericLinearPerturbation.minor",
+   "MvPolynomial.GenericLinearPerturbation.exists_nonzero_parameter_polynomial"
+  ],
+  "file": "lean/Sheaf/RingTheory/GenericLinearPerturbationJacobian.lean",
+  "statement": "theorem exists_nonzero_parameter_polynomial (k : Type u) [Field k] (N c : ℕ) (hc : c ≤ N) (f : Fin c → MvPolynomial (Fin N) k) : ∃ H : MvPolynomial (Fin (N + 1) × Fin c) k, H ≠ 0 ∧ (c = 0 → H = 1) ∧ ∀ (L : Type (max u v)) [Field L] (φ : k →+* L) (b : Fin (N + 1) → Fin c → L), MvPolynomial.eval₂ φ (fun ij ↦ b ij.1 ij.2) H ≠ 0 → Ideal.span (Set.range (minor φ f b)) = ⊤ ∧ Smooth (Spec.map (CommRingCat.ofHom (algebraMap L (Quotient φ f b))))",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e422701ed",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read the item node, all six statement-dependency records (Field, MvPolynomial, pderiv, Matrix.det, Spec/Spec.map, AlgebraicGeometry.Smooth), Stacks 0E7U (examples-defos.tex 2933-2996), the module and the report. Every clause matches: H ≠ 0 over Fin (N+1) × Fin c, H quantified before L/φ/b; c=0 → H=1; equation = map φ f_j + C b_0j + Σ C b_{i+1,j} X_i; Quotient = L[x]/span(range equation); minors over embeddings Fin c ↪ Fin N give the full maximal-minor ideal; Ideal.span = ⊤ ∧ Smooth(Spec.map(algebraMap L B)). The lean.statement is verbatim the file signature. Edge cases checked: c=0, N=0, c=N, finite fields, char p, zero quotient. No hollow definitions; only sorry is the theorem; docstrings carry the source and blueprint plus the 6-step proof (with the derivative index typo corrected); no extra assumptions, new nodes or duplicates. Note: L : Type (max u v); smaller-universe fields are reached by ULift transport. Second reading section is the author's self-reading, stated openly. No compile needed (no files changed)."
+ }
+}

@@ -32,117 +32,66 @@
  ],
  "proof": [
   {
-   "text": "Write $F=Rf_!$, $E=Du_!$, $V=u^*$, $G=f^\\times$ and $H=Rh_!$. Throughout, $\\otimes$ means $\\otimes_A^L$ and composition is right to left. Write $q_a(K,M):Ra_!(a^*K\\otimes M)\\to K\\otimes Ra_!M$ for the inverse-directed projection denoted $P_a$ in the question. It is a natural isomorphism: choose a compactification $a=rj$, apply the open tensor isomorphism of [lem-pur-etale-open-derived-tensor], and then the proper projection isomorphism of [lem-amb-proper-coproducts-projection], using the tensor symmetry [lem-kun-tensor-sym] to put $K$ first. The compactification ambient scheme is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since $r$ is proper, hence finite type, over the Noetherian target. These are precisely the factors of the projection used in [lem-amb-shriek-tensor-composition], whose statement includes the refinement compatibility. All these maps exist on the entire unbounded categories.",
+   "text": "Construct coefficient-first inverse projections as natural transformations, using the existing inverse projection, signed symmetries and exact-pullback comparisons. Their naturality is built into the natural-transformation composition.",
    "uses": [
-    "lem-pur-etale-open-derived-tensor",
-    "lem-amb-proper-coproducts-projection",
-    "lem-kun-tensor-sym",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-amb-shriek-tensor-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL5 (lemma-projection-formula-Rf-lower-shriek); sites-cohomology.tex Tag 0GL1 (lemma-j-shriek-and-tensor)."
-   }
-  },
-  {
-   "text": "By [lem-amb-etale-adjoint-locality] and [thm-amb-etale-exceptional-adjoint], $E\\dashv V$ and $F\\dashv G$ are adjunctions on the unbounded categories. Since $U$ and $X$ are Noetherian, hence quasi-compact and quasi-separated, and $u$ is separated of finite type, $u$ has a compactification by [thm-nagata-compactification]. Use [lem-asd-etale-compact-support-normalization] and [lem-amb-unbounded-compact-support-comparisons] to fix $c:FE\\xrightarrow{\\sim}H$: first identify $E$ with compact-support direct image of $u$, then apply the proper/open tower composition. Put $e_C=\\epsilon_{u,C}:EVC\\to C$. The composite Hom bijection of [def-weil-pbc-composite-adjunction] sends $b:M\\to VGB$ to $\\epsilon_{f,B}\\circ F(e_{GB})\\circ FE(b)$. On the other hand the specified comparison $\\lambda_B$ sends it to $\\lambda_B\\circ b$, whose $H\\dashv h^\\times$-transpose, precomposed with $c_M$, is $\\epsilon_{h,B}\\circ H(\\lambda_B\\circ b)\\circ c_M$. Taking $M=VGB$ and $b=1$ proves\n$$\\epsilon_{h,B}\\circ H(\\lambda_B)\\circ c_{VGB}=\\epsilon_{f,B}\\circ F(e_{GB}).$$\nThis is exactly the claimed composite-counit identity after identifying the right adjoints; it is not a choice of counit on isomorphic functors. Naturality of $c$ then gives the same identity after precomposition by $FE(b)$ for every $b$.",
-   "uses": [
-    "lem-amb-etale-adjoint-locality",
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-asd-etale-compact-support-normalization",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "def-weil-pbc-composite-adjunction",
-    "thm-nagata-compactification"
+    "def-asd-tensor-mate-inverse-projection"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
-    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
    }
   },
   {
-   "text": "Let $Q(B,M):E(VB\\otimes M)\\xrightarrow{\\sim}B\\otimes EM$ be the sum-extension tensor map of [lem-asd-etale-sum-extension-tensor]. Clause (2) of [lem-pur-etale-support-map-compatibility] says that the compactification projection for $u$ becomes the sum-extension projection under its canonical proper-support comparison. Its specified component sends $(s,m)\\otimes b$ to $(s,m\\otimes s^*b)$; after the tensor symmetries and inversion this is $Q(B,M)$. The proper-support comparison is the same one as [lem-asd-etale-compact-support-normalization]: both send a proper-support section to its sheet components, with inverse given by its graph sections. Thus the inverse-projection identity in [lem-amb-shriek-tensor-composition], for the pair $(u,f)$ (both compactifiable: $f$ by hypothesis, $u$ by [thm-nagata-compactification] as in step 2) and this normalization, gives, for every $M\\in D(U_{\\mathrm{et}},A)$,\n$$q_h(K,M)\\circ c_{h^*K\\otimes M}=(1_K\\otimes c_M)\\circ q_f(K,EM)\\circ F(Q(f^*K,M)).$$\nHere $h^*K=Vf^*K$ by the canonical pullback-composition identification. This equation specifies all occurrences of $c$ below; it is an identity of actual transformations, not just the existence of isomorphic objects.",
+   "text": "The definition of the locality isomorphism is conjugateIsoEquiv. Apply Mathlib conjugateEquiv_counit to its inverse comparison, cancel c.hom followed by c.inv, and use Adjunction.comp_counit_app. This proves the entire composite-counit clause.",
    "uses": [
-    "lem-asd-etale-sum-extension-tensor",
-    "lem-pur-etale-support-map-compatibility",
-    "lem-asd-etale-compact-support-normalization",
-    "lem-amb-shriek-tensor-composition",
-    "thm-nagata-compactification"
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-etale-adjoint-locality",
+    "thm-amb-etale-exceptional-adjoint"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
-    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
    }
   },
   {
-   "text": "Put $W=GA_S=\\omega_f$, $B=f^*K$, $N=B\\otimes W$, and $D=VB\\otimes VW$. Let $\\theta:D\\xrightarrow{\\sim}VN$ be the inverse-image tensor comparison; its naturality is part of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Apply the counit identity in [lem-asd-etale-sum-extension-tensor] to $(B,W)$. With $Q=Q(B,VW)$ it says exactly\n$$e_N\\circ E(\\theta)=(1_B\\otimes e_W)\\circ Q:E(D)\\longrightarrow N.$$\nIn particular this is the fold/evaluation counit, rather than the counit of $u^*\\dashv Ru_*$. The coefficient objects $B,W$ are arbitrary complexes, as required by that cited statement.",
+   "text": "Apply the normalized projection square to every source object. The existing sum-extension theorem supplies the fold-counit identity at f*K and ω_f.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-asd-etale-precomp-projection",
     "lem-asd-etale-sum-extension-tensor"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
-    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
    }
   },
   {
-   "text": "Abbreviate $\\alpha_{f,K}$ by $a:N\\to GK$. By its defining transpose,\n$$\\epsilon_{f,K}\\circ F(a)=(1_K\\otimes\\epsilon_{f,A_S})\\circ q_f(K,W).$$\nUsing step 2 and naturality of $c$, the $H\\dashv h^\\times$-transpose of $\\lambda_K\\circ V(a)\\circ\\theta:D\\to h^\\times K$, precomposed with $c_D$, is\n$$\\epsilon_{f,K}\\circ F(e_{GK})\\circ FE(V(a))\\circ FE(\\theta).$$\nNaturality of $e$ at $a:N\\to GK$ rewrites $e_{GK}\\circ EV(a)=a\\circ e_N$. Substitute step 4 into this expression. The resulting transpose is\n$$\\epsilon_{f,K}\\circ F(a)\\circ F(1_B\\otimes e_W)\\circ F(Q).$$\nThese are simply the formula for the Hom bijection, functoriality, and the naturality square for its counit, with all domains fixed in step 4.",
+   "text": "Transpose both proposed tensor maps under the h adjunction and precompose by c. Naturality of c and the sum counit rewrites the first transpose, and the fold identity replaces sum extension of the tensor-pullback map. The f mate equation and projection naturality move the sum counit to the base tensor factor. Projection composition then gives the second transpose, using the composite-counit identity at the coefficient unit. Cancel c and apply injectivity of the adjunction Hom bijection. This is the private, fully proved tensor_mate_calculation specialized in the item.",
    "uses": [
+    "def-weil-pbc-composite-adjunction",
     "thm-amb-etale-exceptional-adjoint"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
-    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
-   }
-  },
-  {
-   "text": "Insert the defining equation for $a$ from step 5. Naturality of the inverse projection $q_f$ at $e_W:EVW\\to W$ gives\n$$q_f(K,W)\\circ F(1_B\\otimes e_W)=(1_K\\otimes F(e_W))\\circ q_f(K,EVW).$$\nBifunctoriality of tensor therefore makes the transpose computed in step 5 equal to\n$$(1_K\\otimes[\\epsilon_{f,A_S}\\circ F(e_W)])\\circ q_f(K,EVW)\\circ F(Q).$$\nFinally apply step 3 with $M=VW$ to rewrite this as\n$$T=(1_K\\otimes[\\epsilon_{f,A_S}\\circ F(e_W)])\\circ(1_K\\otimes c_{VW}^{-1})\\circ q_h(K,VW)\\circ c_D:FE(D)\\to K.$$\nThe projection naturality used here is the naturality of the maps in [lem-amb-shriek-tensor-composition] and of their inverses, not an additional projection formula.",
-   "uses": [
-    "lem-amb-shriek-tensor-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
-    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
-   }
-  },
-  {
-   "text": "The other map is $\\alpha_{h,K}\\circ(1_{h^*K}\\otimes\\lambda_{A_S}):D\\to h^\\times K$. Its transpose, by the definition of $\\alpha_{h,K}$ and naturality of $q_h$ in the coefficient object, is\n$$(1_K\\otimes[\\epsilon_{h,A_S}\\circ H(\\lambda_{A_S})])\\circ q_h(K,VW).$$\nPrecompose with $c_D$ and use the counit equation of step 2 at $B=A_S$, namely\n$$\\epsilon_{h,A_S}\\circ H(\\lambda_{A_S})=[\\epsilon_{f,A_S}\\circ F(e_W)]\\circ c_{VW}^{-1}.$$\nThis gives exactly $T$ from step 6. Since $c_D$ is invertible, the two transposes are equal; since the adjunction in [thm-amb-etale-exceptional-adjoint] is a Hom bijection, the two original maps are equal. Removing $\\theta$ by the canonical source identification gives the equality in the statement. Every projection, comparison and adjunction used above was stated on entire ordinary unbounded derived categories over finite $A$, so the calculation applies to every unbounded $K$ without any smoothness, invertibility-of-exponent, constructibility or Tor-amplitude assumption.",
-   "uses": [
-    "thm-amb-etale-exceptional-adjoint"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
-    "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
    }
   }
  ],
  "proof_deps": [
+  "def-asd-tensor-mate-inverse-projection",
   "def-weil-pbc-composite-adjunction",
   "lem-amb-etale-adjoint-locality",
-  "lem-amb-proper-coproducts-projection",
-  "lem-amb-shriek-tensor-composition",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-etale-precomp-projection",
   "lem-asd-etale-sum-extension-tensor",
-  "lem-kun-tensor-sym",
-  "lem-pur-etale-open-derived-tensor",
-  "lem-pur-etale-support-map-compatibility",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "thm-amb-etale-exceptional-adjoint",
-  "thm-nagata-compactification"
+  "thm-amb-etale-exceptional-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
-  "place": "Paragraph 3: transpose on U; projection formula followed by the composite etale counit. Explicit agent-written expansion."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
  },
  "mathlib_searches": [
   {
@@ -279,15 +228,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-etale-open-derived-tensor",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-amb-proper-coproducts-projection",
-  "lem-amb-shriek-tensor-composition",
-  "lem-pur-etale-support-map-compatibility",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-amb-unbounded-compact-support-comparisons"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -319,5 +260,26 @@
   "result": "pass",
   "note": "Wrote review.md. Verified all 21 statement dependencies, canonical tensor mates and sum counit, source clauses, hypotheses, universes, edge cases, docstrings, and verbatim signature. scompile.py passed with no diagnostics: local overlay 12.2s, library confirmation 13.2s. No fixes or repository changes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T144301-L-1223057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

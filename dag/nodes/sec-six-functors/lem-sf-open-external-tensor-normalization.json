@@ -15,18 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Use the finite constant ring $A=A_{E,n}$ throughout, on the ambient ordinary pro-etale derived categories. For every open $v$, write $\\eta^v:1\\xrightarrow{\\sim}v^*v_!$ for the unit normalized as the identity on sections over the open. The open normalization lemma supplies these units, full faithfulness of $v_!$, and the canonical isomorphisms $\\beta$ (open base change) and $\\gamma$ (open projection) whose restrictions are identities. It identifies their constant finite-coefficient specializations with the maps used in the question. Thus its hypotheses hold for every open and Cartesian square below; its objects may be arbitrary unbounded complexes, so no intermediate constructibility assertion is needed.",
-   "uses": [
-    "lem-sf-open-tensor-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent argument from normalized open base change and projection"
-   }
-  },
-  {
-   "text": "For composable opens $w:V\\hookrightarrow U$ and $v:U\\hookrightarrow Z$, use the composite adjunction $v_!w_!\\dashv w^*v^*$. Restriction along $vw$ is canonically $w^*v^*$, so uniqueness of left adjoints with their units gives the normalized isomorphism $c_{v,w}:v_!w_!\\xrightarrow{\\sim}(vw)_!$. Its restriction is the identity after the open-unit identifications: this is exactly the unit equation defining that comparison. For three opens, both composites of these comparisons carry the same pasted unit to the unit of the composite open, hence are equal by the same uniqueness. This specifies the composition identifications used below, without choosing an arbitrary scalar multiple of a composition map.",
+   "text": "Work with $A=A_{E,n}$ on the ordinary unbounded pro-etale derived categories. For composable opens $w,v$, the composite adjunction and the unique unit-preserving left-adjoint comparison give $c_{v,w}:v_!w_!\\cong(vw)_!$. Its restriction is the identity: its defining unit equation becomes this assertion after the open units are inverted. For three opens the two composites carry the same pasted unit to the composite unit, hence coincide by uniqueness. These are the composition identifications in the statement.",
    "uses": [
     "lem-sf-open-tensor-normalization",
     "def-weil-pbc-composite-adjunction",
@@ -35,93 +24,54 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tags 0DV0 (lemma-compose-counits) and 0B65 (lemma-transformation-between-functors-and-adjoints); normalized comparison of open left adjoints"
+    "place": "Tags 0DV0 (lemma-compose-counits) and 0B65 (lemma-transformation-between-functors-and-adjoints)"
    }
   },
   {
-   "text": "Put $S=X\\times_B\\bar Y$, with $r:S\\to X$, $s:S\\to\\bar Y$, $j_1:S\\hookrightarrow\\bar T$, and $k_1:T\\hookrightarrow S$. Thus $u=j_1k_1$, $rk_1=p$, and $sk_1=kq$. Set $P=Lr^*K$ and $N_0=L\\bar q^*k_!L$. The square with vertical opens $j,j_1$ and horizontal projections $\\bar p,r$ is Cartesian. Its $\\beta$ gives $L\\bar p^*j_!K\\cong j_{1!}P$. Tensoring with $N_0$ and then applying $\\gamma$ for $j_1$ gives\n$$L\\bar p^*j_!K\\otimes^LN_0\\longrightarrow j_{1!}P\\otimes^LN_0\\longrightarrow j_{1!}(P\\otimes^Lj_1^*N_0)=j_{1!}(P\\otimes^LLs^*k_!L).$$\nThe equality uses the canonical composition of pullbacks and $\\bar qj_1=s$. Both arrows are natural isomorphisms by the open normalization lemma.",
+   "text": "Apply [lem-pur-finite-open-product-swap] with $\\bar Z=\\bar Y$, $Z=Y$, the given structure maps to $B$, $M=K$ and $N=L$. Its hypotheses hold (same $A_{E,n}$ and $k$, separated finite-type schemes and morphisms, arbitrary objects). Its $C,P,r,t,p,q,u,E,D$ are $\\bar T,T,\\bar p,\\bar q,p,q,u$, the source of $e_{j,k}$ and $D$ here, and its $e_{j,k}$ is the composite of the statement through $X\\times_B\\bar Y$: base change of $j$, projection map for $j_1$, base change of $k$, projection map for $k_1$ after the signed symmetry, then the compositor. It is an isomorphism with $u^*e_{j,k}=1_D$, and it equals $e^{\\mathrm{op}}_{j,k}$ built through $\\bar X\\times_BY$. Its $\\beta,\\gamma$ are those of [lem-sf-open-tensor-normalization], which at constant finite coefficients are the canonical exchange and projection maps. Its compositor [lem-cbc-extension-zero-composition] is the identity on sections over the small open, as are the section-normalized units; so it carries the composite unit to the unit and is $c_{j_1,k_1}$ of step 1 by [lem-weil-pbc-conjugate-iso-unit-equation]. Naturality in $K,L$: every arrow is natural.",
    "uses": [
-    "lem-sf-open-tensor-normalization"
+    "lem-pur-finite-open-product-swap",
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent argument from normalized open base change and projection"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph, open external tensor identification; binary comparison, factorization independence and signed swap from the existing finite open product node"
    }
   },
   {
-   "text": "The square with opens $k,k_1$ and projections $s,q$ is also Cartesian. Apply its $\\beta$ to obtain $Ls^*k_!L\\cong k_{1!}Q$, where $Q=Lq^*L$. Inside $j_{1!}$ use the following completely typed sequence, with $\\sigma$ the signed tensor symmetry:\n$$P\\otimes^Lk_{1!}Q\\xrightarrow{\\sigma}k_{1!}Q\\otimes^LP\\xrightarrow{\\gamma_{k_1,Q,P}}k_{1!}(Q\\otimes^Lk_1^*P)\\xrightarrow{k_{1!}(\\sigma)}k_{1!}(k_1^*P\\otimes^LQ)=k_{1!}D.$$\nThe last equality uses $rk_1=p$. Compose with step 3 and $c_{j_1,k_1}$ of step 2. This is the asserted $e_{j,k}$ with exactly the prescribed sequence of open base changes and projection maps. Every arrow is invertible. Naturality in $K,L$ follows from naturality of $\\beta,\\gamma$, tensor symmetry, and the composition comparison.",
+   "text": "The swap clause of [lem-pur-finite-open-product-swap], for the same data, gives $e_{j,k}=u_!(\\sigma_{Lq^*L,Lp^*K})\\circ\\widetilde e_{k,j}\\circ\\sigma_{L\\bar p^*j_!K,L\\bar q^*k_!L}$, where $\\widetilde e_{k,j}$ is $e_{k,j}$ on $\\bar Y\\times_B\\bar X$ transported by the swap and normalized open base change. Compose with $u_!(\\sigma_{Lp^*K,Lq^*L})$ and use $\\sigma_{N,M}\\circ\\sigma_{M,N}=1$ for the signed symmetry: $u_!(\\sigma)\\circ e_{j,k}=\\widetilde e_{k,j}\\circ\\sigma$. So the maps $e$ intertwine the signed symmetries; the target $u_!(Lq^*L\\otimes^LLp^*K)$ is $u_!\\tau^*(L\\boxtimes K)$ by pullback composition along the swap $\\tau$.",
    "uses": [
-    "lem-sf-open-tensor-normalization",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pur-finite-open-product-swap"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent argument from normalized open base change and projection"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph, open external tensor identification; binary comparison, factorization independence and signed swap from the existing finite open product node"
    }
   },
   {
-   "text": "Restrict this composite to $T$. Each $\\beta$ and $\\gamma$ becomes the identity by step 1; $c_{j_1,k_1}$ becomes the identity by step 2. The two symmetries in step 4 become the symmetry of $p^*K,q^*L$ and its inverse. On homogeneous tensor sections of degrees $i,j$ their composite is multiplication by $(-1)^{ij}(-1)^{ji}=1$, so $u^*e_{j,k}=1_D$. These formulas apply to derived tensors using their K-flat total tensor models and the canonical pullback/tensor comparison: pullback preserves K-flat complexes with flat terms, and tensor descent determines the derived maps from these models. In particular restriction also preserves the associator $((x\\otimes y)\\otimes z)\\mapsto x\\otimes(y\\otimes z)$ and the signed symmetry, since its tensor comparison sends the same tensor sections to the same sections. Thus all restriction identifications just used are the canonical ones, not extra choices.",
+   "text": "For the third open $l$ and $M$, $\\bar X\\times_B\\bar Y$ and $\\bar Y\\times_B\\bar W$ are separated of finite type. Step 2 at the pairs $(j,k)$ on $(K,L)$, $(k,l)$ on $(L,M)$, $(j\\times_Bk,l)$ on $(K\\boxtimes L,M)$ and $(j,k\\times_Bl)$ on $(K,L\\boxtimes M)$ gives isomorphisms with identity restriction. Its objects are arbitrary, so no constructibility of $K\\boxtimes L$ is used. These are the four normalized maps in the hypothesis of [lem-sf-open-normalized-product-coherence-criterion] with $A=A_{E,n}$, and its $F,G$ are the two composites of the statement, with the canonical associators and the composition identifications of step 1. It gives $v^*F=v^*G=1_{K\\boxtimes L\\boxtimes M}$ and $F=G$, which is the final clause.",
    "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pur-finite-open-product-swap",
+    "lem-sf-open-normalized-product-coherence-criterion"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent argument from normalized open base change and projection"
-   }
-  },
-  {
-   "text": "Let $H=L\\bar p^*j_!K\\otimes^LL\\bar q^*k_!L$. Restriction is faithful on maps with source $H$: for $a,b:H\\to u_!D'$, compose with $e_{j,k}^{-1}:u_!D\\to H$. Every map $u_!D\\to u_!D'$ is $u_!t$ for a unique $t:D\\to D'$ by full faithfulness. Naturality of the isomorphism $\\eta^u:1\\to u^*u_!$ says that restriction of $u_!t$, conjugated by these units, is $t$. Hence $u^*a=u^*b$ implies $a=b$. Now perform steps 3 and 4 through $S'=\\bar X\\times_BY$, with $r':S'\\to\\bar X$, $s':S'\\to Y$, $k_2=1\\times k:S'\\hookrightarrow\\bar T$ and $j_2=j\\times1:T\\hookrightarrow S'$, so $u=k_2j_2$: first extend the $Y$ factor, using the Cartesian square with opens $k,k_2$ and projections $\\bar q,s'$, then the $X$ factor, using the Cartesian square with opens $j,j_2$ and projections $r',p$. These are the analogous squares for $S'$, not the squares of steps 3 and 4. The construction uses the same normalized $\\beta,\\gamma$ of the open normalization lemma, $c_{k_2,j_2}$ of step 2, and signed symmetries placed so that each extension factor comes first before $\\gamma$ is applied. Their restriction is again $1_D$ by the calculation in step 5, so this opposite-factorization map equals $e_{j,k}$.",
-   "uses": [
-    "lem-sf-open-tensor-normalization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent argument from normalized open base change and projection"
-   }
-  },
-  {
-   "text": "Write $\\tau:\\bar T\\cong\\bar Y\\times_B\\bar X$ and $\\tau_0:T\\cong Y\\times_BX$ for the swaps. Use the canonical projection-pullback identifications to bring the swapped construction back to $\\bar T$, and the open base-change identification for $u$ along $\\tau$ to identify its target. The required square has top map $e_{j,k}$, bottom map the transported $e_{k,j}$, left vertical map the signed external symmetry $H\\to\\tau^*(k_!L\\boxtimes j_!K)$ and right vertical map $u_!(\\sigma):u_!D\\to u_!\\tau_0^*(L\\boxtimes K)$. On $T$ the horizontal maps are identities, the swap base-change map is the normalized identity, and both vertical maps are $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$. The two paths therefore have identical restrictions. Apply the faithful-restriction argument of step 6, with $D'=\\tau_0^*(L\\boxtimes K)$, to obtain equality of the paths, including their Koszul signs.",
-   "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent argument from normalized open base change and projection"
-   }
-  },
-  {
-   "text": "For the third open $l$, set $v=j\\times_Bk\\times_Bl$, $H_3=j_!K\\boxtimes k_!L\\boxtimes l_!M$, and $D_3=K\\boxtimes L\\boxtimes M$. First apply $e_{j,k}\\boxtimes1$ and then $e_{j\\times k,l}$ to get $F:H_3\\xrightarrow{\\sim}v_!D_3$. First applying $1\\boxtimes e_{k,l}$ and then $e_{j,k\\times l}$ gives $G$ with the same source and target after the indicated associators. Products and projections here are over $B$; projection pullbacks preserve K-flat models by the tensor-pullback lemma. The binary construction was on all ambient complexes, so it applies also to the intermediate external products. Upon restriction to the full open, each binary map is the identity by step 5, and each composition comparison is the identity by step 2. The associators on the two sides send $((x\\otimes y)\\otimes z)$ to $x\\otimes(y\\otimes z)$ on the same K-flat tensor models; restriction does the same. Thus $v^*F=v^*G=1_{D_3}$ after these associators. Compose with $F^{-1}$ and apply full faithfulness of $v_!$ exactly as in step 6 to conclude $F=G$.",
-   "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent argument from normalized open base change and projection"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (ii) (triple product) and the symmetry paragraph; assembly of the binary comparisons with the triple pasting node"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
   "def-weil-pbc-composite-adjunction",
+  "lem-cbc-extension-zero-composition",
+  "lem-pur-finite-open-product-swap",
+  "lem-sf-open-normalized-product-coherence-criterion",
   "lem-sf-open-tensor-normalization",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "proof_origin": {
   "by": "agent",
@@ -185,11 +135,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-sf-open-external-tensor-normalization",
   "worker": "stage1",
-  "summary": "Constructed the canonical finite open external tensor map explicitly from the existing general open-tensor normalization lemma. Proved identity restriction, opposite-factorization independence, signed symmetry, and triple associativity by full faithfulness and the unit-normalized composition comparison. No new nodes, no statement change, and no Lean writing or compilation.",
-  "blueprint": "Realizes the open external tensor identification needed for the proper-reduction sentence in the symmetry paragraph of lem-sf-kunneth-coherence.proof.md; the unit Kunneth route is unchanged.",
+  "summary": "Re-split of the 6831-character proof. The binary comparison, its identity restriction, factorization independence and the signed swap are the statement of the existing reviewed lem-pur-finite-open-product-swap in exactly this setting (A_{E,n}, separated finite-type k-schemes, arbitrary unbounded objects); its own re-split nodes lem-pur-two-open-tensor-chain-normalization and lem-pur-supported-tensor-isomorphism-transport carry old steps 3-7. The triple pasting (old step 8, with the triple-source faithfulness of old step 6) is the new statement-only node lem-sf-open-normalized-product-coherence-criterion; old step 2 is parent step 1. Reviewer FIX: the delivered general two-square node duplicated that existing work and was dropped; the criterion was restated as the triple pasting node.",
+  "blueprint": "The symmetry paragraph of lem-sf-kunneth-coherence.proof.md, specifically the normalized open external tensor identification required for reduction to proper f,g; the Kunneth unit and chapter route are unchanged.",
   "tool_uses": [
    {
     "node": "lem-sf-open-tensor-normalization",
@@ -200,12 +150,8 @@
     "why": "Uniqueness of the isomorphism between two left adjoints preserving their units, to fix open composition comparisons."
    },
    {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Canonical derived tensor/pullback comparison and preservation of K-flat models for the restriction computations."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "K-flat tensor localization determines the derived morphisms computed on total tensor models."
+    "node": "lem-pur-finite-open-product-swap",
+    "why": "Off-unit (sk-prop-an) statement of the normalized binary open product comparison, its factorization independence and signed swap in exactly the item's setting; no Kunneth-unit node states it, and re-proving it would duplicate its unsplit children."
    }
   ]
  },
@@ -213,17 +159,29 @@
   "lem-sf-open-tensor-normalization",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-finite-open-product-swap"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NV-e3cc14df0",
-  "group": "NV",
+  "reviewer": "NT-cc-Q142-98cb16459",
+  "group": "Q142",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-e3cc14df0 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement and all 8 steps, the full statement of every cited node, the source lem-sf-kunneth-coherence.proof.md (main-20261015, clause (i)), the unit sk-thm-sf-kunneth-relative and the chapter. Coefficients and maps match the source. def-exchange-projection uses lem-cbc-proetale-extension-zero-base-change for open base change and lem-cbc-extension-zero-projection-formula for the open projection map, at finite A in D(T_proet,A). lem-sf-open-tensor-normalization says its beta and gamma are exactly these maps for constant finite coefficients, and adds identity restriction and full faithfulness. The statement is unchanged and not weakened. I checked the geometry: S = Tbar x_Xbar X and T = S x_Ybar Y are Cartesian, u = j1 k1, r k1 = p, s k1 = k q, qbar j1 = s. Each step's arrows are typed correctly, and the sign check (-1)^{ij}(-1)^{ji} = 1 holds. The restriction-faithfulness argument (full faithfulness plus the conjugate-iso unit equation) correctly proves independence of the factorization, the signed symmetry and the three-factor associativity. Edge cases tested: X empty, j = id, j = k = id. There are no new nodes and no cycle, uses equals proof_deps, and the only nearby node, lem-sf-integral-open-product-diagram-normalization, is the integral analogue, not a duplicate. Batch-5 check: the closure of lem-sf-open-tensor-normalization reaches sec-poincare-duality only at lem-pod-adic-limit-finite-modules, lem-pod-adic-tower-reconstruction and def-pod-ring-scalar-extension (unit sk-lem-finite). All three are general algebra and definitions, reached only through coefficient-category definitions (def-weil-derived-pullback-tensor-hom and the rationalization, scalar-extension and algebraically-closed definitions). Neither assumption states them and they are not steps of the trace-formula or Poincare-duality proofs, so the citation is outside the assumed statements. Accepted tool uses: lem-sf-open-tensor-normalization (the on-route cbc lemmas lack the normalization and full faithfulness), and the derived tensor-pullback and tensor-descent lemmas. FIX (E4, wording): step 6 said the opposite factorization reuses the same two Cartesian squares in reversed order. It actually uses (k,k2; qbar,s') and (j,j2; r',p) through S' = Xbar x_B Y. I checked both squares are Cartesian, and the conclusion does not depend on which squares are used. The corrected whole item is in fixes/dag/nodes/sec-six-functors/; only the text of step 6 changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-98cb16459 (reviewer sub-agent of L); spot-checked: Stage-1 re-split from the human's 2026-10-21 order, judged on its merits. The repair note is released (stage 1, 2026-10-22). The item is not superseded: live still has the 8-step proof. Neither the item nor its new nodes are on the dropped list. Statement and stmt_deps are byte-identical to the base, and nothing is weakened. Sources read: blueprint main-20261015 lem-sf-kunneth-coherence.md, where (ii) is the triple product, and its .proof.md symmetry paragraph (agent-formulated); Stacks 0GL1 as background; no SGA. Fault 1 (C5): new node N1 lem-sf-open-two-stage-tensor-composite is true but generalizes existing work. lem-pur-finite-open-product-swap is in the base, split and PASS by Q117 on 2026-10-22, and states the item's binary iso, its identity restriction, e=e^op and the signed swap in exactly this setting (A_{E,n}, separated finite-type k-schemes, arbitrary unbounded objects). Its unsplit child lem-pur-two-open-tensor-chain-normalization is N1's chain. The report dismissed both on generality alone. Fault 2 (C5/D1): N2's faithfulness and swap clauses duplicate lem-pur-supported-tensor-isomorphism-transport and the swap clause, and its all-schemes family hypothesis is supplied only by N1. Only the triple pasting (old step 8, with the triple-source faithfulness of old step 6) is new. Fault 3 (E5): item step 3 asserts 'exactly the opposite factorization' with no argument for transport along the swap or for the left/right projection exchange. FIX: drop N1. Restate N2, same id, as the triple pasting: four normalized isos imply F, G iso, v*F=v*G=1, injectivity on H_3 to v_!D', and F=G. I checked it is true (pullback composition with mu, the K-flat associator, full faithfulness plus eta naturality) and tested M=0, W empty, all-identity opens, and l=id. It cites def-sf-finite-open-tensor-operations, which is stated for any finite ring and any scheme, and is the only node stating the triple pasting (rg over the snapshot; O1's side-live triple-compactification node cites the item). In the item, step 1 is unchanged. Step 2 cites the swap node (Zbar=Ybar, M=K, N=L, hypotheses matched); beta and gamma come from lem-sf-open-tensor-normalization; the lem-cbc compositor equals c via the conjugate-iso unit uniqueness. Step 3 is the swap clause with sigma sigma=1. Step 4 takes four applications of step 2 (arbitrary objects, so no ctf stability is needed) plus N2. The proof is 2988 characters; proof_deps equals the union of uses; there is no cycle. The closure gains only the swap node and its 2 sec-smooth-purity children, with no trf/pod node. Tool use lem-pur-finite-open-product-swap (sk-prop-an) is accepted. Maintainer note: the count of new nodes is 1, below the note's 2. Please waive it as in the earlier drop-and-cite FIXes: every old argument has a carrier, and the chain node is a separate unsplit queue item.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.SixFunctors.OpenExternalTensorNormalization",
   "declaration": "AlgebraicGeometry.ProEtale.OpenExternalTensor.finite_open_external_tensor_normalization",

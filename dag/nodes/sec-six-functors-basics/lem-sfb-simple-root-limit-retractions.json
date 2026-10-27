@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-simple-root-limit-retractions",
+ "kind": "statement",
+ "title": "Simple-root limit retractions and reflection-invariant kernels",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Groups are affine $F$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_a,\\mathbf G_m$ for [def-sc-gm-ga]. Let $G$ be smooth and connected and $T\\subseteq G$ a split maximal torus, that is, a subgroup isomorphic to $\\mathbf G_m^r$ and maximal among such subgroups. Write $N_G(T)$ for the subgroup functor normalizing $T$ after every scalar extension. Put $X=\\operatorname{Hom}(T,\\mathbf G_m)$ and $Y=\\operatorname{Hom}(\\mathbf G_m,T)$, paired by $\\chi\\circ\\eta(t)=t^{\\langle\\chi,\\eta\\rangle}$. Let $D\\subset X\\setminus\\{0\\}$ be finite, nonempty and $\\mathbf Z$-linearly independent. For each $\\alpha\\in D$ let $J_\\alpha\\subseteq G$ be split reductive with maximal torus $T$ and roots exactly $\\pm\\alpha$, with conventions as in [lem-sfb-reductive-borel-pair-structure]. Denote its root groups by $U_\\alpha,V_\\alpha=U_{-\\alpha}$ [lem-sfb-reductive-root-subgroup-parametrizations]. Assume $G$ is the smallest closed subgroup containing these $J_\\alpha$, and that $V_\\alpha$ commutes scheme-theoretically with $U_\\beta$ whenever $\\alpha\\ne\\beta$. Let $U,V$ be the smallest closed subgroups containing the $U_\\alpha$, respectively the $V_\\alpha$. For a cocharacter $\\eta$, let $U_G(\\eta)$ be the subgroup functor of points $g$ for which $\\eta(t)g\\eta(t)^{-1}$ extends to $t=0$ with value $1$, and let $Z_G(\\eta)$ be the subgroup functor centralizing $\\eta(\\mathbf G_m)$ after every scalar extension. Assume $U,V$ are smooth and connected, $U=U_G(\\lambda)$, $V=U_G(-\\lambda)$, $Z_G(\\lambda)=T$ for a $\\lambda$ positive on $D$, and multiplication $V\\times T\\times U\\to G$ is an open immersion. For every $\\eta\\in Y$ nonnegative on $D$, the action $(t,u)\\mapsto\\eta(t)u\\eta(t)^{-1}$ extends to an action of the multiplicative monoid $\\mathbf A^1$ on $U$. For each $\\alpha\\in D$ choose $\\eta_\\alpha\\in Y$ with $\\langle\\alpha,\\eta_\\alpha\\rangle=0$ and $\\langle\\beta,\\eta_\\alpha\\rangle=m_\\alpha>0$ for all $\\beta\\ne\\alpha$. Evaluation at zero defines a group-scheme retraction $p_\\alpha:U\\to U_\\alpha$. Its kernel $K_\\alpha$ is smooth connected, multiplication gives $U_\\alpha\\ltimes K_\\alpha\\simeq U$, and $C_U(\\eta_\\alpha)=U_\\alpha$. Any representative $n_\\alpha\\in N_{J_\\alpha}(T)(F)$ of the rank-one nontrivial Weyl element satisfies $n_\\alpha K_\\alpha n_\\alpha^{-1}=K_\\alpha$. Centralizers and the assertions about kernels are assertions on all test algebras. No reductivity hypothesis is imposed on $G$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.31, p.494; cocharacter limit homomorphisms in 13.28--13.33, pp.264--266. Supporting assertion: simple-root limit retractions and invariant kernels (Steinberg 1999, 5.11--5.13)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "First prove the asserted monoid extension, rather than assuming it. Fix $\\eta$ nonnegative on $D$. Since $T$ commutes with $\\lambda$, conjugation by $T$ preserves $U=U_G(\\lambda)$ and $V=U_G(-\\lambda)$, directly from their functor definitions. For each $\\beta\\in D$, the root formula is $\\eta(t)u_\\beta(a)\\eta(t)^{-1}=u_\\beta(t^{\\langle\\beta,\\eta\\rangle}a)$, so $U_\\beta\\subseteq P_\\eta$, the closed limit-exists group supplied by the cocharacter structure theorem. The closed subgroup $U\\cap P_\\eta$ contains all the generators of $U$, hence equals $U$. Apply the functor description to the universal point over $F[U]$: its orbit extends over $F[U][t]$. This gives a morphism $\\mathbf A^1\\times U\\to G$ which factors through $U$, since its restriction after inverting $t$ does and $F[U][t]\\to F[U][t,t^{-1}]$ is injective. The same injectivity, also in two variables, extends the unit, monoid-action and group-homomorphism identities from invertible parameters to all parameters. Thus it is the required multiplicative-monoid action by group endomorphisms.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Root formula (135), p.431; Definition 13.21 and Proposition 13.24, pp.261--262; Propositions 13.28--13.29 and Theorem 13.33(a), pp.264--266."
+   }
+  },
+  {
+   "text": "Fix $\\alpha\\in D$ and the chosen $\\eta_\\alpha$, and write $p(u)=0\\cdot u$ for the endomorphism from step 1. Such a choice is possible: the perfect pairing for the split torus and independence of $D$ give a rational cocharacter taking value $0$ on $\\alpha$ and $1$ on the other elements; clearing denominators gives a common positive $m_\\alpha$. If $D=\\{\\alpha\\}$, take $\\eta_\\alpha=0$ and any $m_\\alpha>0$. The root formula gives $p|_{U_\\alpha}=\\mathrm{id}$ and $p|_{U_\\beta}=1$ for $\\beta\\ne\\alpha$. Consequently the closed subgroup $p^{-1}(U_\\alpha)$ of $U$ contains every generating root subgroup and is all of $U$. The morphism $p$ therefore factors through $U_\\alpha$, and its restriction to that subgroup is the identity: this is the claimed group-scheme retraction.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Root formula (135), p.431; perfect character--cocharacter pairing in the root datum, Chapter 21 and Appendix C; limit homomorphism in Proposition 13.29, p.264."
+   }
+  },
+  {
+   "text": "The monoid identity $s\\cdot(0\\cdot u)=0\\cdot u$ shows that $p(u)$ is fixed under $\\eta_\\alpha$. Conversely an element fixed under $\\eta_\\alpha$ after every scalar extension has constant orbit on $\\mathbf G_m$; uniqueness of its polynomial extension gives $p(u)=u$. Thus $C_U(\\eta_\\alpha)=\\operatorname{im}(p)=U_\\alpha$ as functors. Define $K=\\ker(p)$, a closed normal subgroup of $U$. Multiplication $(a,k)\\mapsto ak$ has inverse $u\\mapsto(p(u),p(u)^{-1}u)$ on every test algebra, hence is an isomorphism of schemes $U_\\alpha\\times K\\simeq U$. Its transported group law is $(a,k)(b,l)=(ab,b^{-1}kb\\,l)$, which is exactly the conjugation semidirect product with normal factor $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 13.29 and the limit-homomorphism calculation in Theorem 13.33(b), pp.264--266; explicit inverse and fixed-point calculation."
+   }
+  },
+  {
+   "text": "Put $\\eta=\\eta_\\alpha$ and $H=U_G(\\eta)$. The cocharacter theorem makes $H$ smooth connected and gives its tangent space as the sum of the strictly positive $\\eta$-weight spaces in $\\mathfrak g=\\operatorname{Lie}(G)$. We check $\\operatorname{Lie}(H)\\subseteq\\operatorname{Lie}(U)$. Step 1 gives $U\\subseteq P_\\eta$. On each $V_\\beta$ the conjugation exponent for $-\\eta$ is $\\langle\\beta,\\eta\\rangle\\ge0$; closedness of $P_{-\\eta}$ and generation therefore give $V\\subseteq P_{-\\eta}$. The Lie formulas imply that $\\eta$ has only nonnegative weights on $\\operatorname{Lie}(U)$, only nonpositive weights on $\\operatorname{Lie}(V)$, and weight zero on $\\operatorname{Lie}(T)$. The same formulas for $\\lambda$ and the assumed equalities $U=U_G(\\lambda)$, $V=U_G(-\\lambda)$, $Z_G(\\lambda)=T$ give the $T$-stable direct sum $\\mathfrak g=\\operatorname{Lie}(V)\\oplus\\operatorname{Lie}(T)\\oplus\\operatorname{Lie}(U)$. Decompose the torus representation by applying the multiplicative-group weight-basis theorem successively to the factors of $T\\simeq\\mathbf G_m^r$; commuting factors preserve the preceding weight spaces. Every strictly positive $\\eta$-weight of $\\mathfrak g$ is therefore in $\\operatorname{Lie}(U)$.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(c), pp.265--266, and the root conjugation formula (135), p.431; split-torus weight decomposition, Chapter 12."
+   }
+  },
+  {
+   "text": "Upgrade the preceding tangent inclusion using positive-ray subgroups, so no assertion that arbitrary Lie inclusions imply subgroup inclusions is needed. Both $H$ and $U$ are smooth connected closed subgroups stable under conjugation by $T$ (the cocharacters commute with $T$). For each positive rational ray $R$ meeting the finite set of $T$-weights in $\\operatorname{Lie}(H)$, let $V_R$ be the sum of all weight spaces of $\\mathfrak g$ on that ray. Positivity on $\\eta$ is constant along $R$, so the cocharacter Lie formula gives $V_R\\subseteq\\operatorname{Lie}(H)\\subseteq\\operatorname{Lie}(U)$. The positive-ray subgroup theorem gives a smooth connected $T$-stable subgroup $S_R\\subseteq G$ with tangent space $V_R$; its containment clause puts $S_R$ in both $H$ and $U$. These finitely many tangent spaces span $\\operatorname{Lie}(H)$. Apply smooth-subgroup tangent generation in the ambient group $H$ to the closed subgroup $H\\cap U$ containing all $S_R$. It follows that $H\\cap U=H$, or $H\\subseteq U$, as subgroup schemes. If there are no such rays, use the empty-family case of tangent generation.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-torus-positive-ray-subgroup",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.64(a), pp.348--349; Corollary 10.17, p.191; Theorem 13.33(c), pp.265--266."
+   }
+  },
+  {
+   "text": "For $u\\in U(A)$, the defining condition $p(u)=1$ is exactly that its $\\eta$-conjugation orbit extends to zero with value $1$. Thus $K=U\\cap U_G(\\eta)$ on every commutative test algebra. Step 5 gives $U_G(\\eta)\\subseteq U$, so $K=U_G(\\eta)=H$. Smoothness and connectedness of $K$ now follow from the cocharacter theorem. In particular this proves smoothness of the actual scheme-theoretic kernel, including infinitesimal test points, rather than merely its reduced subgroup.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition of the contraction kernel, Proposition 13.29, p.264; Theorem 13.33(a),(e), pp.265--266."
+   }
+  },
+  {
+   "text": "Apply the Weyl-reflection realization and rank-one reflection statements to the reductive group $J_\\alpha$, not to $G$. Since its only roots are $\\pm\\alpha$, its Weyl group has two elements, and every representative $n_\\alpha$ of the nonidentity element acts on $X$ by $s_\\alpha(\\chi)=\\chi-\\langle\\chi,\\alpha^\\vee\\rangle\\alpha$. Preservation of the perfect pairing gives, for every $\\chi\\in X$, $\\langle\\chi,n_\\alpha\\eta_\\alpha n_\\alpha^{-1}\\rangle=\\langle s_\\alpha^{-1}\\chi,\\eta_\\alpha\\rangle=\\langle\\chi,\\eta_\\alpha\\rangle$, because $\\langle\\alpha,\\eta_\\alpha\\rangle=0$. Hence $n_\\alpha\\eta_\\alpha n_\\alpha^{-1}=\\eta_\\alpha$ as cocharacters. On every test algebra, conjugation by $n_\\alpha$ therefore takes an orbit extending with value $1$ to another such orbit; the same holds for $n_\\alpha^{-1}$. Using $K=U_G(\\eta_\\alpha)$ from step 6 gives $n_\\alpha K n_\\alpha^{-1}=K$. All uses of reductive structure in this step concern the given $J_\\alpha$.",
+   "uses": [
+    "lem-sfb-weyl-reflection-realization",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(d),(e), pp.428--430; Theorem 21.37 and Corollary 21.38, pp.435--436; functor definition in Proposition 13.29, p.264."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-cocharacter-limit-smooth-structure",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-torus-positive-ray-subgroup",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-weyl-reflection-realization",
+  "lem-sfb-reductive-rank-one-reflections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assembly of Milne 13.24, 13.28--13.33, 16.64(a), 10.17 and 21.11/21.37 for the supporting limit-retraction assertion beneath Theorem 23.31. Steinberg 1999 is not present locally and is not used as an unchecked proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cocharacter limit retracts a unipotent group onto a simple root subgroup with reflection invariant kernel",
+   "results": "{\"t\": \"2026-10-23T22:27:17Z\", \"tool\": \"leanfinder\", \"query\": \"A cocharacter limit retracts a unipotent group onto a simple root subgroup with reflection invariant kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.range_weylGroup_coweightHom\", \"RootPairing.exist_set_root_not_disjoint_and_le_ker_coroot'_of_invtSubmodule\", \"RootPairing.range_weylGroup_weightHom\", \"RootPairing.bijOn_coreflection_coroot\", \"LieAlgebra.IsKilling.reflectRoot\", \"LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot\", \"IsSl2Triple.h_eq_coroot\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\"], \"digest\": \"4762742d1cc7a20f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract categorical retractions, monoid transfer and root-pairing reflections do not construct conjugation limits or algebraic subgroup kernels."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Limits of conjugation by a one parameter subgroup define a group homomorphism retraction onto its centralizer",
+   "results": "{\"t\": \"2026-10-23T22:27:17Z\", \"tool\": \"leanfinder\", \"query\": \"Limits of conjugation by a one parameter subgroup define a group homomorphism retraction onto its centralizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidHom.transferCenterPow\", \"Equiv.Perm.Basis.toCentralizer\", \"Subgroup.centralizer_eq_comap_stabilizer\", \"Subgroup.quotientCentralizerEmbedding_apply\", \"Subgroup.quotientCentralizerEmbedding\", \"GroupExtension.Splitting.conjAct\", \"MulAut.conjNormal\", \"MonoidHom.transferSylow\"], \"digest\": \"cc09a33bc79346c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract categorical retractions, monoid transfer and root-pairing reflections do not construct conjugation limits or algebraic subgroup kernels."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\"",
+   "results": "{\"t\": \"2026-10-23T22:27:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"cocharacter\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract categorical retractions, monoid transfer and root-pairing reflections do not construct conjugation limits or algebraic subgroup kernels."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|root.subgroup|retraction.*unipotent",
+   "results": "{\"t\": \"2026-10-23T22:27:14Z\", \"tool\": \"grep\", \"query\": \"cocharacter|root.subgroup|retraction.*unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract categorical retractions, monoid transfer and root-pairing reflections do not construct conjugation limits or algebraic subgroup kernels."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simple root cocharacter limit retraction on a unipotent algebraic group",
+   "results": "{\"t\": \"2026-10-23T22:27:15Z\", \"tool\": \"leansearch\", \"query\": \"Simple root cocharacter limit retraction on a unipotent algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.retraction\", \"LieAlgebra.IsKilling.rootSystem_root_apply\", \"CategoryTheory.SplitMono.retraction\", \"CategoryTheory.Retract.r\", \"CategoryTheory.Retract.instIsSplitEpiR\", \"retractionOfSectionOfKerSqZero\", \"LieSubalgebra.root.congr_simp\", \"CategoryTheory.Retract.refl_r\"], \"digest\": \"7f6f071c6cfaa733\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract categorical retractions, monoid transfer and root-pairing reflections do not construct conjugation limits or algebraic subgroup kernels."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|concentrator|contracting.*subgroup|unipotent.*weight",
+   "results": "{\"t\": \"2026-10-23T23:33:40Z\", \"tool\": \"grep\", \"query\": \"cocharacter|concentrator|contracting.*subgroup|unipotent.*weight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract group fixed points, Lie-algebra generalized weights, abstract root pairings, or modular-form cusp widths; none constructs group-scheme conjugation limits, their kernels and root retractions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inclusion between unipotent subgroups contracted by commuting one parameter subgroups follows from inclusion of positive Lie algebra weight spaces",
+   "results": "{\"t\": \"2026-10-23T23:33:40Z\", \"tool\": \"leansearch\", \"query\": \"Inclusion between unipotent subgroups contracted by commuting one parameter subgroups follows from inclusion of positive Lie algebra weight spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.weightSpace\", \"LieModule.genWeightSpace_le_genWeightSpaceOf\", \"LieModule.weightSpaceOfIsLieTower\", \"AddSubgroup.unop_le_unop_iff\", \"LieModule.weightSpace_le_genWeightSpace\", \"Subgroup.unop_le_unop_iff\", \"LieModule.genWeightSpace\", \"LieModule.genWeightSpaceOf\"], \"digest\": \"7cfbe1f6f46b6db5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract group fixed points, Lie-algebra generalized weights, abstract root pairings, or modular-form cusp widths; none constructs group-scheme conjugation limits, their kernels and root retractions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\"",
+   "results": "{\"t\": \"2026-10-23T23:33:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"cocharacter\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract group fixed points, Lie-algebra generalized weights, abstract root pairings, or modular-form cusp widths; none constructs group-scheme conjugation limits, their kernels and root retractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two commuting cocharacters of a smooth algebraic group, inclusion of the positive tangent weight spaces implies inclusion of their contracting unipotent subgroups",
+   "results": "{\"t\": \"2026-10-23T23:33:42Z\", \"tool\": \"leanfinder\", \"query\": \"For two commuting cocharacters of a smooth algebraic group, inclusion of the positive tangent weight spaces implies inclusion of their contracting unipotent subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.genWeightSpace_le_genWeightSpaceChain\", \"LieModule.genWeightSpace_le_genWeightSpaceOf\", \"LieModule.lie_mem_genWeightSpaceChain_of_genWeightSpace_eq_bot_right\", \"LieAlgebra.lie_mem_genWeightSpace_of_mem_genWeightSpace\", \"LieModule.weightSpace_le_genWeightSpace\", \"LieModule.iSup_ucs_le_genWeightSpace_zero\", \"LieModule.lie_mem_genWeightSpaceChain_of_genWeightSpace_eq_bot_left\", \"LieAlgebra.IsKilling.le_chainBotCoeff_of_rootSpace_ne_top\"], \"digest\": \"c208701ddfd56743\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract group fixed points, Lie-algebra generalized weights, abstract root pairings, or modular-form cusp widths; none constructs group-scheme conjugation limits, their kernels and root retractions."
+  },
+  {
+   "tool": "grep",
+   "query": "root.subgroup|cocharacter|unipotent.*retract",
+   "results": "{\"t\": \"2026-10-23T23:34:35Z\", \"tool\": \"grep\", \"query\": \"root.subgroup|cocharacter|unipotent.*retract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract group fixed points, Lie-algebra generalized weights, abstract root pairings, or modular-form cusp widths; none constructs group-scheme conjugation limits, their kernels and root retractions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a contracting torus action on a unipotent algebraic group is a retraction onto its fixed point subgroup",
+   "results": "{\"t\": \"2026-10-23T23:34:36Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation of a contracting torus action on a unipotent algebraic group is a retraction onto its fixed point subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.subgroup\", \"FixedPoints.subalgebra\", \"FixedPoints.mem_subgroup\", \"contractLeft\", \"ConjAct.fixedPoints_eq_center\", \"SubMulAction.conjMap_ofFixingSubgroup_coe_apply\", \"coe_smul_fixedPoints_of_normal\", \"fixedPoints_subgroup_antitone\"], \"digest\": \"586c5dcebef90061\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract group fixed points, Lie-algebra generalized weights, abstract root pairings, or modular-form cusp widths; none constructs group-scheme conjugation limits, their kernels and root retractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple root cocharacter limit gives a retraction onto a root subgroup and a smooth connected reflection invariant kernel",
+   "results": "{\"t\": \"2026-10-23T23:34:37Z\", \"tool\": \"leanfinder\", \"query\": \"Simple root cocharacter limit gives a retraction onto a root subgroup and a smooth connected reflection invariant kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.exist_set_root_not_disjoint_and_le_ker_coroot'_of_invtSubmodule\", \"LieAlgebra.IsKilling.reflectRoot\", \"RootPairing.range_weylGroup_coweightHom\", \"LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot\", \"LieAlgebra.IsKilling.rootSystem_root_apply\", \"LieAlgebra.IsKilling.rootSystem\", \"LieSubalgebra.root\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\"], \"digest\": \"cd154e7cdde1190e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract group fixed points, Lie-algebra generalized weights, abstract root pairings, or modular-form cusp widths; none constructs group-scheme conjugation limits, their kernels and root retractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth subgroup stable under a torus is contained in the attracting subgroup if all its tangent weights are strictly positive",
+   "results": "{\"t\": \"2026-10-23T23:34:38Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth subgroup stable under a torus is contained in the attracting subgroup if all its tangent weights are strictly positive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.IsRegularAtInfty\", \"Subgroup.strictWidthInfty_mem_strictPeriods\", \"Subgroup.strictWidthInfty\", \"Subgroup.strictWidthInfty_nonneg\", \"Subgroup.isRegularAtInfty_iff\", \"Subgroup.strictPeriods_le_periods\", \"Subgroup.strictWidthInfty_eq_one_of_T_mem\", \"Subgroup.IsRegularAtInfty.eq\"], \"digest\": \"9b34ed088fe575ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract group fixed points, Lie-algebra generalized weights, abstract root pairings, or modular-form cusp widths; none constructs group-scheme conjugation limits, their kernels and root retractions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-one-reductive-generation",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Theorem 23.31 and Remark 23.33, printed p.494; root-coroot compatibility for embedded rank-one subgroups as in Theorem 21.11, pp.428-429. Supporting Simple-root limit retractions and reflection-invariant kernels.",
+   "via": [
+    "lem-sfb-rank-one-reductive-generation",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-simple-root-limit-retractions",
+  "worker": "stage1",
+  "summary": "Proved monoid extension from root generators; evaluated the action and proved its fixed subgroup and semidirect splitting; identified the kernel with the full cocharacter contraction subgroup by positive-ray generation, giving smoothness, connectedness and reflection invariance without assuming G reductive. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Supporting simple-root limit step of rank-one reductive generation beneath det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/GIT/Haboush/root-datum-realization ancestry. Latest sk-thm-sf-ctf-stability and chapter text read; the node is a created supporting input, not an imported blueprint statement. Ancestor tool returns null, preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-fc7ab6521",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-fc7ab6521 (reviewer sub-agent of L); spot-checked: PASS, no fixes: I read the item, all 7 steps and all 8 cited statements, and every step holds. The delivery is one commit (item plus report) with no new nodes; compared with live, the statement, stmt_deps, source and blueprint are unchanged. Live and side-live still show the item unsplit, so no other group superseded it. All proof_deps are in its own unit sk-thm-sf-ctf-stability, so there are no tool_uses, and nothing cites SGA. Source: Milne iAG2017 Thm 23.31 (p.494) only refers to Steinberg 5.4, so an agent-written proof is correct. Prop 13.28-13.29 and Thm 13.33 (pp.264-266) match lem-sfb-cocharacter-limit-smooth-structure. Steps: (1) the root formula inside J_beta gives U_beta in P_eta; P_eta is a closed subgroup, so generation gives U in P_eta; the monoid action follows from the universal point and injectivity of F[U][t] into F[U][t,1/t]. (2) eta_alpha exists by the perfect pairing and independence of D; p is the identity on U_alpha and trivial on U_beta, and the preimage of U_alpha is all of U. (3) Elementary: fixed points, the inverse map and the semidirect law check. (4) U is in P_eta and V in P_{-eta} (sign checked); the lambda Lie formulas with U=U_G(lambda), V=U_G(-lambda), Z_G(lambda)=T give g = Lie V + Lie T + Lie U; the weight basis, applied factor by factor, puts every positive eta-weight in Lie U. (5) The positive-ray containment clause applies to K=H and K=U, and tangent generation in H gives H in U as schemes. (6) K = U meet U_G(eta) = H, so K is smooth and connected. (7) The rank-one Weyl group of J_alpha has 2 elements and acts by s_alpha; the pairing computation gives n eta n^-1 = eta, so n normalises U_G(eta). Small cases (SL2; D a singleton with eta_alpha nonzero; SL3 simple roots) are consistent. lem-sfb-triangular-root-subgroup-detection assumes these conclusions and is not a duplicate. Batch 5: the four sec-trace-formula nodes reached (smooth-at-point-fibre-criterion 01V9, split-lattice-torus-projection, fppf-covering-base-change 021O, smooth-fpqc-base-descent 02VL) are generic facts of unit sk-i-curve-zero, not steps of the trace formula or Poincare duality, so the citations stay."
+ }
+}

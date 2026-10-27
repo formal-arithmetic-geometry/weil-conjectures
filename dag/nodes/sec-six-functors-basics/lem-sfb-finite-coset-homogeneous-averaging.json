@@ -1,0 +1,506 @@
+{
+ "id": "lem-sfb-finite-coset-homogeneous-averaging",
+ "kind": "statement",
+ "title": "Finite-coset averaging on continuous homogeneous cochains",
+ "statement": "Let $E$ be a topological field [def-weil-field]. For a topological group $J$ and a topological $E$-vector space $V$ with jointly continuous $E$-linear $J$-action, write $B^n(J,V)$ for the abstract $E$-vector space of jointly continuous functions $F:J^{n+1}\\to V$ with $F(ax_0,\\ldots,ax_n)=aF(x_0,\\ldots,x_n)$. Its differential is $(\\delta F)(x_0,\\ldots,x_{n+1})=\\sum_{j=0}^{n+1}(-1)^jF(x_0,\\ldots,\\widehat{x_j},\\ldots,x_{n+1})$, and it is extended by zero in negative degrees. Let $G$ be a compact topological group and $H\\subseteq G$ an open subgroup with the subspace topology. There is a finite transversal $S\\subset G$ for the right cosets $H\\backslash G$, containing $1$ as representative of $H$, with $|S|=[G:H]$. For any such $S$, the uniquely determined map $r:G\\to H$ given by $x=r(x)s$ for the unique $s\\in S$ representing $Hx$, is continuous, satisfies $r(hx)=h r(x)$ for $h\\in H$, and restricts to the identity on $H$.\nFor every topological $E$-vector space $V$ with jointly continuous linear $G$-action, the formulas\n$$(T_{V,n}f)(x_0,\\ldots,x_n)=\\sum_{s\\in S}s^{-1}f(r(sx_0),\\ldots,r(sx_n))$$\ndefine an $E$-linear cochain map $T_V:B^\\bullet(H,V)\\to B^\\bullet(G,V)$. Put $a_s(x)=s^{-1}r(sx)$, using $H\\subseteq G$. These maps $G\\to G$ are continuous. For $a\\in G$, let $\\pi_a(s)=u$ be the unique representative with $Hsa=Hu$. Then $\\pi_a$ is a permutation of $S$ and $a_s(ax)=a a_{\\pi_a(s)}(x)$. If $R_V$ is restriction of homogeneous cochains to $H$, then\n$$(T_{V,n}R_{V,n}F)(x_0,\\ldots,x_n)=\\sum_{s\\in S}F(a_s(x_0),\\ldots,a_s(x_n)).$$\nFor the same $S$ and $r$, simultaneously for all $V,W$ and every continuous $G$-equivariant $E$-linear map $b:V\\to W$, postcomposition $b_*$ satisfies $b_*T_V=T_W b_*$. No normality of $H$, completeness or local compactness of $V$, or discreteness of its topology is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic expansion below the coefficient comparison: compactness, finite right-coset retraction, homogeneous averaging, equivariance, differential compatibility, composite with restriction and coefficient naturality. Agent-written auxiliary lemma from old transfer proof steps 2–4 and 9, not stated verbatim in the blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-joint-continuous-cochain-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "The spaces $B^n(J,V)$ and their differentials are well defined directly from the stated formulas. Pointwise addition and scalar multiplication preserve continuity and equivariance. Each deletion of one coordinate is continuous and commutes with simultaneous left multiplication, so $\\delta$ preserves these properties and is $E$-linear. In $\\delta^2F$, for each pair of original positions $i<j$, deleting $i$ then the position $j-1$, or deleting $j$ then $i$, gives the same value with coefficients $(-1)^{i+j-1}$ and $(-1)^{i+j}$. They cancel. Thus these are cochain complexes, also after extension by zero in negative degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic auxiliary expansion: 1; explicit argument by Q138, not a verbatim blueprint proof."
+   }
+  },
+  {
+   "text": "The right cosets $Hx$ cover $G$ and are open: right translation by $x$ is a homeomorphism, with inverse right translation by $x^{-1}$. Compactness, namely the finite-subcover property, gives a finite subcover by such cosets. Two right cosets that intersect are equal, since $h_1x=h_2y$ implies $x=h_1^{-1}h_2y$. Discard repetitions and choose one representative of each coset, using $1$ for $H$. This gives $S$. Its cardinality is the number of right cosets, equal to $[G:H]$ (inversion bijects right and left cosets).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic auxiliary expansion: 2; explicit argument by Q138, not a verbatim blueprint proof."
+   }
+  },
+  {
+   "text": "Fix any such $S$. If $x\\in Hs$, there is a unique $h\\in H$ with $x=hs$, namely $h=xs^{-1}$; define $r(x)=h$. On the open set $Hs$, this is the continuous map $x\\mapsto xs^{-1}$ into the subspace $H$. Explicitly, for an open subset $U\\subseteq H$, its inverse image under $r$ is $\\bigcup_{s\\in S}Us$, which is open in $G$: $U$ is open in $G$ because $H$ is open, and right translations preserve opens. Hence $r$ is continuous. For $h\\in H$, $hx$ lies in the same right coset as $x$, and $hx=(hr(x))s$, so uniqueness gives $r(hx)=hr(x)$. On $H$ the representative is $1$, giving $r(x)=x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic auxiliary expansion: 3; explicit argument by Q138, not a verbatim blueprint proof."
+   }
+  },
+  {
+   "text": "For $a\\in G$, right multiplication gives a bijection $Hx\\mapsto Hxa$ of the set of right cosets, with inverse right multiplication by $a^{-1}$. It therefore permutes their representatives: write $u=\\pi_a(s)$ and $h_s=sa u^{-1}\\in H$, so $sa=h_su$. Then $r(sax)=h_sr(ux)$, and consequently $a_s(ax)=s^{-1}h_sr(ux)=a u^{-1}r(ux)=a a_u(x)$. Also $x\\mapsto a_s(x)=s^{-1}r(sx)$ is continuous, by continuity of translation, $r$, and the inclusion $H\\subseteq G$. More explicitly, $\\pi_{a^{-1}}(\\pi_a(s))=s$ because $(Hsa)a^{-1}=Hs$, and the reverse composite is the identity by the same equality with $a^{-1}$; thus the reindexing used below has a specified inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic auxiliary expansion: 4; explicit argument by Q138, not a verbatim blueprint proof."
+   }
+  },
+  {
+   "text": "For $f\\in B^n(H,V)$, the tuple map $(x_0,\\ldots,x_n)\\mapsto(r(sx_0),\\ldots,r(sx_n))$ is continuous, since each coordinate is continuous. Composing with $f$ and then with the continuous linear action of the fixed element $s^{-1}$ gives a continuous function into $V$. Summing these functions over finite $S$ is continuous by repeated use of continuous addition in $V$. Each summand depends $E$-linearly on $f$, so the displayed formula for $T_{V,n}$ is $E$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic auxiliary expansion: 5; explicit argument by Q138, not a verbatim blueprint proof."
+   }
+  },
+  {
+   "text": "Using $u=\\pi_a(s)$ and $h_s$ from step 4, $H$-equivariance of $f$ gives\n$$s^{-1}f(r(sax_0),\\ldots,r(sax_n))=s^{-1}h_s f(r(ux_0),\\ldots,r(ux_n))=a u^{-1}f(r(ux_0),\\ldots,r(ux_n)).$$\nSum this identity and reindex by the permutation $s\\mapsto u$. Since the action of $a$ is linear, the result is $(T_{V,n}f)(ax_0,\\ldots,ax_n)=a(T_{V,n}f)(x_0,\\ldots,x_n)$. Together with step 5, this proves that $T_{V,n}$ takes values in $B^n(G,V)$. In formulas, $\\sum_{s\\in S}a\\pi_a(s)^{-1}f(r(\\pi_a(s)x_0),\\ldots,r(\\pi_a(s)x_n))=a\\sum_{u\\in S}u^{-1}f(r(ux_0),\\ldots,r(ux_n))$, using the inverse permutation from step 4.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic auxiliary expansion: 6; explicit argument by Q138, not a verbatim blueprint proof."
+   }
+  },
+  {
+   "text": "At $(x_0,\\ldots,x_{n+1})$, expand $\\delta T_{V,n}f$ as\n$$\\sum_{j=0}^{n+1}\\sum_{s\\in S}(-1)^j s^{-1}f(r(sx_0),\\ldots,\\widehat{r(sx_j)},\\ldots,r(sx_{n+1})).$$\nInterchange the two finite sums. The $E$-linear action of $s^{-1}$ commutes with signs and addition, so the inner sum over $j$ is $s^{-1}(\\delta f)(r(sx_0),\\ldots,r(sx_{n+1}))$. Thus $\\delta T_{V,n}=T_{V,n+1}\\delta$. In negative degrees take $T$ to be the unique zero map; the remaining cochain-map identities then have both sides zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic auxiliary expansion: 7; explicit argument by Q138, not a verbatim blueprint proof."
+   }
+  },
+  {
+   "text": "Restriction $R_{V,n}$ takes $B^n(G,V)$ to $B^n(H,V)$: the inclusion $H^{n+1}\\subseteq G^{n+1}$ is continuous, and $G$-equivariance implies $H$-equivariance. Restriction is linear and commutes term by term with deletion, hence with $\\delta$. For $F\\in B^n(G,V)$, use its $G$-equivariance with $s^{-1}$ in each summand to obtain\n$$s^{-1}(R_{V,n}F)(r(sx_0),\\ldots,r(sx_n))=F(s^{-1}r(sx_0),\\ldots,s^{-1}r(sx_n)).$$\nSumming gives exactly the asserted $T_VR_V$ formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic auxiliary expansion: 8; explicit argument by Q138, not a verbatim blueprint proof."
+   }
+  },
+  {
+   "text": "For a continuous $G$-equivariant $E$-linear $b:V\\to W$, composition $b_*$ preserves continuity and equivariance for both $G$ and $H$, and commutes with $\\delta$ because it preserves finite signed sums. With $S,r$ fixed independently of the coefficients,\n$$b\\bigl(\\sum_{s\\in S}s^{-1}f(r(sx_0),\\ldots,r(sx_n))\\bigr)=\\sum_{s\\in S}s^{-1}b\\bigl(f(r(sx_0),\\ldots,r(sx_n))\\bigr).$$\nHere linearity moves $b$ through the sum and equivariance moves it through each $s^{-1}$. This is $b_*T_V=T_Wb_*$ simultaneously for every $V,W,b$. All sums are finite; no division by the index or limiting operation occurs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic auxiliary expansion: 9; explicit argument by Q138, not a verbatim blueprint proof."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary arithmetic transfer expansion retained from lem-sfb-continuous-cochain-finite-index-transfer; explicit finite-coset argument by Q138."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "transfer|corestriction|transversal",
+   "results": {
+    "t": "2026-10-22T06:04:56Z",
+    "tool": "grep",
+    "query": "transfer|corestriction|transversal",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean"
+    ],
+    "digest": "f96763bfde920a60"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains uses iterated continuous maps and supplies no averaging theorem; groupCohomology.cochainsMap is restriction on all functions; Rep.coindToInd is an algebraic representation map, not the continuous homogeneous transfer with its retraction and composite formula; groupHomology corestriction is homology, not this cochain construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transfer on continuous homogeneous cochains by a finite right coset transversal commutes with the differential and coefficient maps",
+   "results": {
+    "t": "2026-10-22T06:04:57Z",
+    "tool": "leansearch",
+    "query": "Transfer on continuous homogeneous cochains by a finite right coset transversal commutes with the differential and coefficient maps",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"transfer\"",
+   "results": {
+    "t": "2026-10-22T06:04:57Z",
+    "tool": "loogle",
+    "query": "\"transfer\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Std.Http.Header.Name.transferEncoding",
+     "Std.Http.Header.TransferEncoding",
+     "Std.Http.Header.instReprTransferEncoding",
+     "Std.Http.Header.TransferEncoding.inst",
+     "Std.Http.Header.TransferEncoding.isChunked",
+     "Std.Http.Header.TransferEncoding.Validate",
+     "Std.Http.Header.TransferEncoding.codings",
+     "Std.Http.Header.TransferEncoding.parse"
+    ],
+    "digest": "dded7ed6f755f501"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains uses iterated continuous maps and supplies no averaging theorem; groupCohomology.cochainsMap is restriction on all functions; Rep.coindToInd is an algebraic representation map, not the continuous homogeneous transfer with its retraction and composite formula; groupHomology corestriction is homology, not this cochain construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coset averaging defines a natural cochain map on continuous homogeneous equivariant cochains for an open subgroup of a compact group",
+   "results": {
+    "t": "2026-10-22T06:05:10Z",
+    "tool": "leanfinder",
+    "query": "Finite coset averaging defines a natural cochain map on continuous homogeneous equivariant cochains for an open subgroup of a compact group",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.homogeneousCochains",
+     "continuousCohomology",
+     "ContinuousCohomology.Iobj_ρ_apply",
+     "groupCohomology.cochainsMap",
+     "Rep.coindToInd_apply",
+     "ContinuousCohomology.I_map_hom",
+     "groupCohomology.cochainsMap₁",
+     "groupCohomology.cochainsMap_f"
+    ],
+    "digest": "135b65b40de1dabd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains uses iterated continuous maps and supplies no averaging theorem; groupCohomology.cochainsMap is restriction on all functions; Rep.coindToInd is an algebraic representation map, not the continuous homogeneous transfer with its retraction and composite formula; groupHomology corestriction is homology, not this cochain construction"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousCochains|cochainsMap|transfer",
+   "results": {
+    "t": "2026-10-22T06:05:46Z",
+    "tool": "grep",
+    "query": "homogeneousCochains|cochainsMap|transfer",
+    "sub": "RepresentationTheory/Homological/ContCohomology",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean"
+    ],
+    "digest": "7f4386cfbc96f5c3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains uses iterated continuous maps and supplies no averaging theorem; groupCohomology.cochainsMap is restriction on all functions; Rep.coindToInd is an algebraic representation map, not the continuous homogeneous transfer with its retraction and composite formula; groupHomology corestriction is homology, not this cochain construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coindToInd\"",
+   "results": {
+    "t": "2026-10-22T06:05:47Z",
+    "tool": "loogle",
+    "query": "\"coindToInd\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Rep.coindToInd",
+     "Rep.coindToInd_indToCoind",
+     "Rep.indToCoind_coindToInd",
+     "Rep.coindToInd_of_support_subset_orbit",
+     "Rep.coindToInd_apply"
+    ],
+    "digest": "4322ed552118424c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains uses iterated continuous maps and supplies no averaging theorem; groupCohomology.cochainsMap is restriction on all functions; Rep.coindToInd is an algebraic representation map, not the continuous homogeneous transfer with its retraction and composite formula; groupHomology corestriction is homology, not this cochain construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Corestriction using a continuous H equivariant coset retraction and finite transversal on homogeneous topological group cochains",
+   "results": {
+    "t": "2026-10-22T06:06:02Z",
+    "tool": "leanfinder",
+    "query": "Corestriction using a continuous H equivariant coset retraction and finite transversal on homogeneous topological group cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.H1InfRes_f",
+     "groupCohomology.infNatTrans_app",
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.H1InfRes_X₁",
+     "groupCohomology.H1InfRes_X₃",
+     "groupCohomology.cochainsMap₁",
+     "groupCohomology.H1InfRes_g",
+     "groupCohomology.H1InfRes_X₂"
+    ],
+    "digest": "d34d5cf9ff712b80"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains uses iterated continuous maps and supplies no averaging theorem; groupCohomology.cochainsMap is restriction on all functions; Rep.coindToInd is an algebraic representation map, not the continuous homogeneous transfer with its retraction and composite formula; groupHomology corestriction is homology, not this cochain construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopRep.homogeneousCochains",
+   "results": {
+    "t": "2026-10-22T11:57:53Z",
+    "tool": "loogle",
+    "query": "TopRep.homogeneousCochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "TopRep.homogeneousCochains",
+     "ContinuousCohomology.π",
+     "TopRep.homogeneousCochains.d_eq",
+     "TopRep.homogeneousCochains.d_apply",
+     "ContinuousCohomology.cochainsMap",
+     "ContinuousCohomology.cochainsMap_id",
+     "ContinuousCohomology.cochainsMap_f",
+     "ContinuousCohomology.π_map"
+    ],
+    "digest": "ccf54a579b07640c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains and ContinuousCohomology.cochainsMap use iterated continuous functions and restriction, not finite-coset transfer on jointly continuous cochains; averageMap requires a finite group and invertible order; coindToInd is an algebraic induced/coinduced map, not this cochain theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "transfer|corestriction|transversal",
+   "results": {
+    "t": "2026-10-22T11:57:53Z",
+    "tool": "grep",
+    "query": "transfer|corestriction|transversal",
+    "sub": "RepresentationTheory/Homological/ContCohomology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains and ContinuousCohomology.cochainsMap use iterated continuous functions and restriction, not finite-coset transfer on jointly continuous cochains; averageMap requires a finite group and invertible order; coindToInd is an algebraic induced/coinduced map, not this cochain theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Averaging continuous homogeneous cochains over finite coset representatives defines a natural transfer cochain map",
+   "results": {
+    "t": "2026-10-22T11:57:53Z",
+    "tool": "leansearch",
+    "query": "Averaging continuous homogeneous cochains over finite coset representatives defines a natural transfer cochain map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AddMonoidHom.transfer",
+     "MonoidHom.transfer",
+     "Representation.averageMap",
+     "groupCohomology.cochainsMap₁",
+     "AddMonoidHom.transfer_def",
+     "MonoidHom.transfer_def",
+     "ContinuousCohomology.homogeneousCochains",
+     "Rep.coindToInd"
+    ],
+    "digest": "17ef8153ce252acc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains and ContinuousCohomology.cochainsMap use iterated continuous functions and restriction, not finite-coset transfer on jointly continuous cochains; averageMap requires a finite group and invertible order; coindToInd is an algebraic induced/coinduced map, not this cochain theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coset averaging defines a natural cochain map on continuous homogeneous equivariant cochains for a compact topological group and open subgroup",
+   "results": {
+    "t": "2026-10-22T11:57:54Z",
+    "tool": "leanfinder",
+    "query": "Finite coset averaging defines a natural cochain map on continuous homogeneous equivariant cochains for a compact topological group and open subgroup",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.I",
+     "continuousCohomology",
+     "ContinuousCohomology.MultiInd.complex",
+     "ContinuousCohomology.I_obj_ρ_apply",
+     "ContinuousCohomology.I_map_hom",
+     "ContinuousCohomology.kerHomogeneousCochainsZeroEquiv",
+     "groupCohomology.cochainsMap"
+    ],
+    "digest": "f0bd9286e1d77fc0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains and ContinuousCohomology.cochainsMap use iterated continuous functions and restriction, not finite-coset transfer on jointly continuous cochains; averageMap requires a finite group and invertible order; coindToInd is an algebraic induced/coinduced map, not this cochain theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Corestriction on jointly continuous equivariant functions on powers of a topological group using an open subgroup coset retraction",
+   "results": {
+    "t": "2026-10-22T11:58:38Z",
+    "tool": "leanfinder",
+    "query": "Corestriction on jointly continuous equivariant functions on powers of a topological group using an open subgroup coset retraction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.I",
+     "ContinuousCohomology.Iobj",
+     "ContinuousCohomology.I_obj_ρ_apply",
+     "ContinuousCohomology.invariants",
+     "ContAction.res",
+     "ContinuousCohomology.Iobj_ρ_apply",
+     "ContinuousCohomology.I_map_hom",
+     "IsQuotientCoveringMap.toContinuousConstSMul"
+    ],
+    "digest": "06dbc63792981882"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains and ContinuousCohomology.cochainsMap use iterated continuous functions and restriction, not finite-coset transfer on jointly continuous cochains; averageMap requires a finite group and invertible order; coindToInd is an algebraic induced/coinduced map, not this cochain theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "coindToInd|averageMap|def transfer",
+   "results": {
+    "t": "2026-10-22T11:58:38Z",
+    "tool": "grep",
+    "query": "coindToInd|averageMap|def transfer",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Character.lean",
+     "Mathlib/RepresentationTheory/Character.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean",
+     "Mathlib/RepresentationTheory/FiniteIndex.lean"
+    ],
+    "digest": "7dda9db4fd3d8ed4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: TopRep.homogeneousCochains and ContinuousCohomology.cochainsMap use iterated continuous functions and restriction, not finite-coset transfer on jointly continuous cochains; averageMap requires a finite group and invertible order; coindToInd is an algebraic induced/coinduced map, not this cochain theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-cochain-finite-index-transfer",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), arithmetic transfer expansion: old transfer proof steps 2–4 and averaging naturality in step 9.",
+   "via": [
+    "lem-sfb-continuous-cochain-finite-index-transfer",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-coset-homogeneous-averaging",
+  "worker": "stage1",
+  "group": "Q138",
+  "summary": "Repair of the landing refusal for returned head ce8672e6fbb: rebuilt the item from the current read-clone DAG with only the retained stage-1 fields overlaid, reread the current field definition and parent transfer assembly, and checked their exact interfaces. The live item is unsplit with the same statement, statement dependencies, source, blueprint fields and creation metadata as the retained copy. Its proof uses no external nodes. Retained all nine finite-coset arguments and all logged searches; made the inverse representative permutation and the full finite-sum reindexing explicit, matching the current parent transfer steps 2 and 3 without invoking the parent. The delivery command rebuilds against current origin/sheaf-dag; no side completion or review marker is imported.",
+  "blueprint": "Current direct-images paragraph (3), arithmetic transfer expansion below coefficient comparison, inherited from old transfer proof steps 2–4 and naturality in old step 9. The actual current blueprint paragraph names coefficient preservation but does not print this auxiliary argument; proof_origin is agent. The ancestor command returns None for this inherited created.item chain; retained null from.node and inherited via, as in the reviewed parent split. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-c5b52598e",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-c5b52598e (reviewer sub-agent of L); spot-checked: Re-delivery after the landing refusal of the PASSed head ce8672e6fbbf ('completed in this project's DAG but not in the live'); I read all 9 steps in full. There is no repair note for this item, so the 2026-10-21 re-split rule does not apply. Field by field, clones/live and side-live hold the item unsplit with 0 steps and differ from this head only in the split-owned fields (status, proof, proof_origin, split_report, mathlib_searches). The statement, stmt_deps [def-weil-field], source, blueprint and created fields are identical, so nothing is weakened. Compared with ce8672 head, only the step 4 and 6 texts and split_report changed. Step 4 adds that pi_{a^-1} undoes pi_a because (Hsa)a^-1=Hs; correct. Step 6 adds the reindexed sum, a_s(ax)=a a_u(x) with s^-1 h_s = a u^-1; correct. I rechecked all steps. delta^2=0 holds because the signs (-1)^{i+j} and (-1)^{i+j-1} cancel. The finite transversal comes from the open cover by cosets Hx. Continuity of r holds because r^-1(U) is the union of Us. Joint continuity of T holds. G-equivariance needs no normality of H. Also correct: delta T = T delta, the formula for TR, and naturality in b with S fixed. Edge cases H=G, H={1} with G finite, V=0 and char E dividing [G:H] all hold. The parent lem-sfb-continuous-cochain-finite-index-transfer, steps 2-4, uses only clauses of the item. Source: main-20261015 sk-thm-sf-ctf-stability-direct-images paragraph (3); the steps are agent-written arithmetic. No SGA, no new nodes, no fixes. Maintainer note: this is a side-completion promotion loop; the landing should promote this head rather than return it."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.FiniteCosetHomogeneousAveraging",
+  "declaration": "ContinuousCohomology.exists_finiteCosetHomogeneousAveraging",
+  "declarations": [
+   "ContinuousCohomology.finiteCosetRetraction",
+   "ContinuousCohomology.finiteCosetArgument",
+   "ContinuousCohomology.exists_finiteRightTransversal",
+   "ContinuousCohomology.finiteCosetRetraction_properties",
+   "ContinuousCohomology.exists_finiteCosetHomogeneousAveraging"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/FiniteCosetHomogeneousAveraging.lean",
+  "statement": "theorem exists_finiteCosetHomogeneousAveraging (E : Type u) [Field E] [TopologicalSpace E] [IsTopologicalDivisionRing E] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] (H : Subgroup G) (_hH : IsOpen (H : Set G)) (S : Finset G) (hS : Subgroup.IsComplement (H : Set G) (S : Set G)) (_h1 : 1 ∈ S) (V : Type w) [AddCommGroup V] [Module E V] [TopologicalSpace V] [IsTopologicalAddGroup V] [ContinuousSMul E V] (ρ : G →* V ≃ₗ[E] V) (_hρ : Continuous (fun p : G × V ↦ ρ p.1 p.2)) [HasDerivedCategory.{r} (ModuleCat.{t} E)] (B C BH CH : CochainComplex (ModuleCat.{t} E) ℤ) (D : JointContinuousCochainCoordinates E G V ρ B C) (DH : JointContinuousCochainCoordinates E H V (ρ.comp H.subtype) BH CH) : ∃ (T : BH ⟶ B) (R : B ⟶ BH), (∀ (n : ℕ) (f : BH.X (n : ℤ)) (x : Fin (n + 1) → G), D.bEval n ((T.f (n : ℤ)).hom f) x = ∑ s ∈ S, ρ s⁻¹ (DH.bEval n f (fun i ↦ finiteCosetRetraction H S hS (s * x i)))) ∧ (∀ (n : ℕ) (F : B.X (n : ℤ)) (x : Fin (n + 1) → H), DH.bEval n ((R.f (n : ℤ)).hom F) x = D.bEval n F (fun i ↦ (x i : G))) ∧ (∀ (n : ℕ) (F : B.X (n : ℤ)) (x : Fin (n + 1) → G), D.bEval n (((R ≫ T).f (n : ℤ)).hom F) x = ∑ s ∈ S, D.bEval n F (fun i ↦ finiteCosetArgument H S hS s (x i))) ∧ ∀ (W : Type w') [AddCommGroup W] [Module E W] [TopologicalSpace W] [IsTopologicalAddGroup W] [ContinuousSMul E W] (σ : G →* W ≃ₗ[E] W), Continuous (fun p : G × W ↦ σ p.1 p.2) → ∀ (BW CW BHW CHW : CochainComplex (ModuleCat.{t} E) ℤ) (DW : JointContinuousCochainCoordinates E G W σ BW CW) (DHW : JointContinuousCochainCoordinates E H W (σ.comp H.subtype) BHW CHW), ∃ TW : BHW ⟶ BW, (∀ (n : ℕ) (f : BHW.X (n : ℤ)) (x : Fin (n + 1) → G), DW.bEval n ((TW.f (n : ℤ)).hom f) x = ∑ s ∈ S, σ s⁻¹ (DHW.bEval n f (fun i ↦ finiteCosetRetraction H S hS (s * x i)))) ∧ ∀ b : V →ₗ[E] W, Continuous b → (∀ (a : G) (z : V), b (ρ a z) = σ a (b z)) → ∃ (bG : B ⟶ BW) (bH : BH ⟶ BHW), (∀ (n : ℕ) (F : B.X (n : ℤ)) (x : Fin (n + 1) → G), DW.bEval n ((bG.f (n : ℤ)).hom F) x = b (D.bEval n F x)) ∧ (∀ (n : ℕ) (f : BH.X (n : ℤ)) (x : Fin (n + 1) → H), DHW.bEval n ((bH.f (n : ℤ)).hom f) x = b (DH.bEval n f x)) ∧ bH ≫ TW = T ≫ bG",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing evaluation-exact JointContinuousCochainCoordinates structure, now attached to definition node def-sfb-joint-continuous-cochain-coordinates. D/DH/DW/DHW are coordinate data, not applications of the coordinate existence theorem. The three theorems together state all clauses, with real canonical retraction and a_s definitions. Averaging is for every realization of the coefficient complexes and is natural simultaneously in all continuous equivariant linear coefficient maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1d1d0b6b",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery after the A2/H2 RETURN of abb2a2928a88. The Lean module is byte-identical to the head whose mathematics was already accepted; I re-checked every clause and edge case. The item changes only lean and stmt_deps; the only stmt_dep added is the new definition node def-sfb-joint-continuous-cochain-coordinates, which replaces the theorem node. The new node meets the H12 rules (kind, status, three search kinds, created, blueprint.from/via, lean_audit, chapter/unit). Its existing:true record has a lean.statement verbatim from the file, and its TeX matches every field of the existing structure JointContinuousCochainCoordinates. That structure is reused, not duplicated. The report has the Worker report, New nodes and Second reading sections. No compile was run because no file was changed. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261025T051910-L-4189024",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "ContinuousCohomology.exists_finiteCosetHomogeneousAveraging",
+   "ContinuousCohomology.exists_finiteRightTransversal",
+   "ContinuousCohomology.finiteCosetRetraction_properties"
+  ],
+  "sorry_after": []
+ }
+}

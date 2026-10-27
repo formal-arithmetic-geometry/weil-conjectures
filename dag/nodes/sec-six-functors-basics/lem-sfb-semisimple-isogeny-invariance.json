@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-semisimple-isogeny-invariance",
+ "kind": "statement",
+ "title": "A connected smooth finite covering of a semisimple group is semisimple",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Closed and normal subgroup schemes are as in [def-sc-group-scheme-subgroup]. A semisimple group means a smooth connected affine group of finite type with no nontrivial smooth connected solvable normal closed subgroup scheme; solvable means that successive derived subgroup schemes eventually become trivial, where the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. Let $f:G_1\\to G_0$ be a faithfully flat homomorphism of smooth connected groups with finite scheme-theoretic kernel. If $G_0$ is semisimple, then $G_1$ is semisimple. Here faithfully flat means that $F[G_1]$ is a faithfully flat $F[G_0]$-module, and finite kernel means finite-dimensional coordinate algebra; the kernel need not be reduced or central.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 19.14, printed p.400: for an isogeny G-prime to G, semisimplicity of G implies semisimplicity of G-prime. The proof uses the image of a smooth connected solvable normal subgroup of G-prime, which is trivial, so that subgroup is finite and hence trivial."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Let $N\\subseteq G_1$ be an arbitrary smooth connected solvable normal closed subgroup. Apply [lem-sfb-affine-homomorphism-flat-image] to $f|_N$ to write it as $N\\xrightarrow{q} I\\xrightarrow{j}G_0$, with $q$ faithfully flat and $j$ a closed immersion. The hypotheses of [lem-sfb-solvable-normal-image-geometry] hold for $f:G_1\\to G_0$ and this factorization. Hence $I$ is a smooth connected solvable normal closed subgroup of $G_0$.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-solvable-normal-image-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.34, printed p.75; proof of Lemma 19.14, printed p.400, image argument with solvable in place of unipotent."
+   }
+  },
+  {
+   "text": "By the assumed semisimplicity of $G_0$, the subgroup $I$ is trivial. Consequently $f|_N$ equals the identity section of $G_0$ composed with $N\\to\\operatorname{Spec}F$. Thus $N$ factors through the scheme-theoretic kernel $K=\\ker f$. This is scheme-theoretic factorization, not only a statement about rational points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 19.14, printed p.400, trivial image implies containment in the kernel."
+   }
+  },
+  {
+   "text": "The inclusion $N\\hookrightarrow K$ is closed: on the affine coordinate algebra $A=F[G_1]$, write the defining ideals as $J_N,J_K$. Factorization through $K$ says $J_K\\subseteq J_N$, so $F[K]=A/J_K\\to A/J_N=F[N]$ is surjective. This uses the affine characterization of [def-weil-closed-immersion]. Since $F[K]$ is finite-dimensional over $F$, so is its quotient $B=F[N]$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 19.14, printed p.400, finite-kernel step; affine closed-immersion calculation."
+   }
+  },
+  {
+   "text": "Smoothness of $N/F$ gives reducedness of $B$ by [sbc-lem-smooth-geometrically-reduced], applied to the sole fibre over $\\operatorname{Spec}F$. Every descending chain of ideals of $B$ stabilizes because each strict inclusion decreases its finite $F$-vector-space dimension. Thus [lem-sfb-reduced-artinian-residue-product] writes $B$ as the finite product of its residue fields. Each factor is $F$ by clause 1 of [lem-wf-affine-nullstellensatz-vanishing], since $F$ is algebraically closed and $B$ is a finitely generated $F$-algebra. The identity section ensures this product is nonempty. Two or more factors would partition $\\operatorname{Spec}B$ into two nonempty disjoint opens (use the coordinate idempotents); connectedness excludes this. There is exactly one factor, so $B\\simeq F$ as an $F$-algebra.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-reduced-artinian-residue-product",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 19.14, printed p.400, finite smooth connected implies trivial; expanded using Stacks Tags 056T, 00J7 and 00JB and the affine Nullstellensatz."
+   }
+  },
+  {
+   "text": "Therefore $N\\simeq\\operatorname{Spec}F$, and its group structure and inclusion are the trivial subgroup: the identity section is the unique $F$-morphism from $\\operatorname{Spec}F$ to this $F$-scheme. As $N$ was arbitrary, $G_1$ has no nontrivial smooth connected solvable normal closed subgroup. The remaining conditions for semisimplicity of $G_1$ were hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 19.14, printed p.400, conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-solvable-normal-image-geometry",
+  "def-weil-closed-immersion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 19.14, printed p.400, source-semisimple implication proved there, with its finite-group argument expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Semisimplicity is preserved and reflected by an isogeny between smooth connected affine algebraic groups over an algebraically closed field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingEquiv.isSemisimpleRing_iff\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] (e : R ≃+* S), IsSemisimpleRing R ↔ IsSemisimpleRing S\", \"doc\": \"Given a ring equivalence between rings $ R $ and $ S $, $ R $ is a semisimple ring if and only if $ S $ is a semisimple ring.\"}\n  {\"name\": \"RingEquiv.isSemisimpleRing\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] (e : R ≃+* S) [IsSemisimpleRing R], IsSemisimpleRing S\", \"doc\": \"If $ R $ and $ S $ are isomorphic rings and $ R $ is semisimple, then $ S $ is also semisimple. Specifically, given a ring isomorphism $ e : R \\\\simeq S $ and the assumption that $ R $ is a semisimple \"}\n  {\"name\": \"LinearEquiv.isSemisimpleModule_iff\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] (e : M ≃ₗ[R] N), IsSemisimpleModule R M ↔ IsSemisimpleModule R N\", \"doc\": \"For a ring $ R $, if there exists a linear equivalence $ e : M \\\\simeq_R N $ between $ R $-modules $ M $ and $ N $, then $ M $ is semisimple if and only if $ N $ is semisimple.\"}\n  {\"name\": \"IsSemisimpleModule.congr\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsSemisimpleModule R M] (e : N ≃ₗ[R] M), IsSemisimpleModule R N\", \"doc\": \"If there exists a linear equivalence between modules $ N $ and $ M $ over a ring $ R $, then $ N $ is a semisimple $ R $-module if and only if $ M $ is a semisimple $ R $-module.\"}\n  {\"name\": \"LinearEquiv.isSemisimple_iff\", \"module\": \"Mathlib/LinearAlgebra/Semisimple\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (f : Module.End R M)\\n  {M₂ : Type u_3} [inst_3 : AddCommGroup M₂] [inst_4 : Module R M₂] (g : Module.End R M₂) (e : M ≃ₗ[R] M₂),\\n  ↑e ∘ₗ f = g ∘ₗ ↑e → (f.IsSemisimple ↔ g.IsSemisimple)\", \"doc\": \"Given modules $ M $ and $ M_2 $ over a ring $ R $, and a linear equivalence $ e : M \\\\simeq_R M_2 $, if endomorphisms $ f : \\\\text{End}_R(M) $ and $ g : \\\\text{End}_R(M_2) $ satisfy $ e \\\\circ f = g \\\\circ\"}\n  {\"name\": \"LinearMap.isSemisimpleModule_iff_of_bijective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] {M' : Type u_6} [inst_2 : AddCommGroup M']\\n  [inst_3 : Module R M'] {N' : Type u_7} [inst_4 : AddCommGroup N'] [inst_5 : Module S N'] {σ : R →+* S}\\n  (l : M' →ₛₗ[σ] N') [RingHomSurjective σ], Function.Bijective ⇑l → (IsSemisimpleModul\", \"doc\": \"Given a surjective ring homomorphism $\\\\sigma: R \\\\to S$ and a bijective linear map $l: M' \\\\to N'$ between an $R$-module $M'$ and an $S$-module $N'$, the module $M'$ is semisimple over $R$ if and only i\"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSemisimpleRing R] [FiniteDimensional F R],\\n  ∃ n d, (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[F] (i : Fin n) → Matrix (Fin (d i)) (Fin (d i)) F)\", \"doc\": \"Let `F` be an algebraically closed field and `R` be a finite-dimensional semisimple algebra over `F`. Then there exists a natural number `n` and a sequence of positive integers $d_0, d_1, \\\\ldots, d_{n\"}\n  {\"name\": \"Module.End.isFinitelySemisimple_iff_isSemisimple\", \"module\": \"Mathlib/LinearAlgebra/Semisimple\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {f : Module.End R M}\\n  [Module.Finite R M], f.IsFinitelySemisimple ↔ f.IsSemisimple\", \"doc\": \"For a finitely generated $ R $-module $ M $, an endomorphism $ f $ is finitely semisimple if and only if it is semisimple. This equivalence holds under the assumption that $ M $ admits a finite genera\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a surjective homomorphism of connected group varieties has finite kernel then its source is semisimple if and only if its target is semisimple",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.isSemisimpleRing_of_surjective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S),\\n  Function.Surjective ⇑f → ∀ [IsSemisimpleRing R], IsSemisimpleRing S\", \"doc\": \"If $ R $ is a semisimple ring and $ f : R \\\\to S $ is a surjective ring homomorphism, then $ S $ is also a semisimple ring.\"}\n  {\"name\": \"IsSemisimpleModule.of_surjective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsSemisimpleModule R M] (f : M →ₗ[R] N),\\n  Function.Surjective ⇑f → IsSemisimpleModule R N\", \"doc\": \"If $ M $ is a semisimple module over a ring $ R $ and there exists a surjective linear map $ f : M \\\\to N $, then $ N $ is also a semisimple module over $ R $.\"}\n  {\"name\": \"LinearMap.isSemisimpleModule_iff_of_bijective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] {M' : Type u_6} [inst_2 : AddCommGroup M']\\n  [inst_3 : Module R M'] {N' : Type u_7} [inst_4 : AddCommGroup N'] [inst_5 : Module S N'] {σ : R →+* S}\\n  (l : M' →ₛₗ[σ] N') [RingHomSurjective σ], Function.Bijective ⇑l → (IsSemisimpleModul\", \"doc\": \"Given a surjective ring homomorphism $\\\\sigma: R \\\\to S$ and a bijective linear map $l: M' \\\\to N'$ between an $R$-module $M'$ and an $S$-module $N'$, the module $M'$ is semisimple over $R$ if and only i\"}\n  {\"name\": \"IsSemisimpleModule.range\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsSemisimpleModule R M] (f : M →ₗ[R] N),\\n  IsSemisimpleModule R ↥f.range\", \"doc\": \"For any linear map $ f: M \\\\to N $ over a ring $ R $, the image of $ f $ is a semisimple $ R $-module, i.e., it decomposes as a direct sum of simple submodules.\"}\n  {\"name\": \"IsSimpleAddGroup.isSimpleAddGroup_of_surjective\", \"module\": \"Mathlib/GroupTheory/Subgroup/Simple\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {H : Type u_3} [inst_1 : AddGroup H] [IsSimpleAddGroup G] [Nontrivial H]\\n  (f : G →+ H), Function.Surjective ⇑f → IsSimpleAddGroup H\", \"doc\": \"Let $G$ and $H$ be additive groups, where $G$ is simple (has no nontrivial subgroups) and $H$ is non-trivial. If there exists a surjective additive monoid homomorphism $f : G →+ H$, then $H$ is also a\"}\n  {\"name\": \"IsSemisimpleModule.lifting_property\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsSemisimpleModule R M] {P : Type u_6} [inst_6 : AddCommGroup P]\\n  [inst_7 : Module R P] (f : M →ₗ[R] N), Function.Surjective ⇑f → ∀ (g : \", \"doc\": \"For a semisimple module $ M $ over a ring $ R $, if $ f : M \\\\to N $ is a surjective $ R $-linear map and $ g : P \\\\to N $ is another $ R $-linear map, then there exists an $ R $-linear map $ h : P \\\\to \"}\n  {\"name\": \"solvable_of_surjective\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} {G' : Type u_2} [inst : Group G] [inst_1 : Group G'] {f : G →* G'},\\n  Function.Surjective ⇑f → ∀ [IsSolvable G], IsSolvable G'\", \"doc\": \"If $ G $ is a solvable group and there exists a surjective group homomorphism $ f : G \\to G' $, then the group $ G' $ is also solvable.\"}\n  {\"name\": \"IsSimpleGroup.isSimpleGroup_of_surjective\", \"module\": \"Mathlib/GroupTheory/Subgroup/Simple\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Type u_3} [inst_1 : Group H] [IsSimpleGroup G] [Nontrivial H] (f : G →* H),\\n  Function.Surjective ⇑f → IsSimpleGroup H\", \"doc\": \"If $ G $ is a simple group, $ H $ is a non-trivial group, and there exists a surjective group homomorphism $ f : G \\to H $, then $ H $ is also a simple group.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\", \"Semisimple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emisimple.*[Ii]sogen|[Ii]sogen.*[Ss]emisimple",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimplicity is preserved and reflected by an isogeny between smooth connected affine algebraic groups over an algebraically closed field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSemisimpleModule.congr\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"(e : N ≃ₗ[R] M) : IsSemisimpleModule R N\", \"doc\": \"If there exists a linear equivalence between modules $ N $ and $ M $ over a ring $ R $, then $ N $ is a semisimple $ R $-module if and only if $ M $ is a semisimple $ R $-module.\"}\n  {\"name\": \"LinearEquiv.isSemisimpleModule_iff\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"(e : M ≃ₗ[R] N) : IsSemisimpleModule R M ↔ IsSemisimpleModule R N\", \"doc\": \"For a ring $ R $, if there exists a linear equivalence $ e : M \\\\simeq_R N $ between $ R $-modules $ M $ and $ N $, then $ M $ is semisimple if and only if $ N $ is semisimple.\"}\n  {\"name\": \"RingEquiv.isSemisimpleRing_iff\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"(e : R ≃+* S) : IsSemisimpleRing R ↔ IsSemisimpleRing S\", \"doc\": \"Given a ring equivalence between rings $ R $ and $ S $, $ R $ is a semisimple ring if and only if $ S $ is a semisimple ring.\"}\n  {\"name\": \"RingEquiv.isSemisimpleRing\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"(e : R ≃+* S) [IsSemisimpleRing R] : IsSemisimpleRing S\", \"doc\": \"If $ R $ and $ S $ are isomorphic rings and $ R $ is semisimple, then $ S $ is also semisimple. Specifically, given a ring isomorphism $ e : R \\\\simeq S $ and the assumption that $ R $ is a semisimple \"}\n  {\"name\": \"RingHom.isSemisimpleRing_of_surjective\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"(f : R →+* S) (hf : Function.Surjective f) [IsSemisimpleRing R] : IsSemisimpleRing S\", \"doc\": \"If $ R $ is a semisimple ring and $ f : R \\\\to S $ is a surjective ring homomorphism, then $ S $ is also a semisimple ring.\"}\n  {\"name\": \"LinearEquiv.isSemisimple_iff\", \"module\": \"Mathlib.LinearAlgebra.Semisimple\", \"type\": \"{M₂ : Type*} [AddCommGroup M₂] [Module R M₂] (g : End R M₂) (e : M ≃ₗ[R] M₂) (he : e ∘ₗ f = g ∘ₗ e) :\\n  f.IsSemisimple ↔ g.IsSemisimple\", \"doc\": \"Given modules $ M $ and $ M_2 $ over a ring $ R $, and a linear equivalence $ e : M \\\\simeq_R M_2 $, if endomorphisms $ f : \\\\text{End}_R(M) $ and $ g : \\\\text{End}_R(M_2) $ satisfy $ e \\\\circ f = g \\\\circ\"}\n  {\"name\": \"LinearMap.isSemisimpleModule_iff_of_bijective\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"[RingHomSurjective σ] (hl : Function.Bijective l) : IsSemisimpleModule R M' ↔ IsSemisimpleModule S N'\", \"doc\": \"Given a surjective ring homomorphism $\\\\sigma: R \\\\to S$ and a bijective linear map $l: M' \\\\to N'$ between an $R$-module $M'$ and an $S$-module $N'$, the module $M'$ is semisimple over $R$ if and only i\"}\n  {\"name\": \"MulEquiv.isSimpleGroup\", \"module\": \"Mathlib.GroupTheory.Subgroup.Simple\", \"type\": \"{H : Type*} [Group H] [IsSimpleGroup H] (e : G ≃* H) : IsSimpleGroup G\", \"doc\": \"If $G$ and $H$ are groups and there exists a group isomorphism $e : G \\\\simeq H$, then $G$ is a simple group if and only if $H$ is a simple group. In particular, if $H$ is simple and $e : G \\\\simeq H$ i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emisimple.*[Ii]sogen|[Ii]sogen.*[Ss]emisimple",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithfully flat homomorphism of smooth connected affine algebraic groups with finite kernel and semisimple target has semisimple source",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"Module.FaithfullyFlat.toFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommRing R} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : Module.FaithfullyFlat R M], Module.Flat R M\", \"doc\": \"If $ M $ is a faithfully flat module over a commutative ring $ R $, then $ M $ is flat over $ R $. Faithful flatness implies flatness as a module property.\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"RingHom.FaithfullyFlat.injective\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"(hf : f.FaithfullyFlat) : Function.Injective ⇑f\", \"doc\": \"Let $ f : R \\\\to S $ be a ring homomorphism between commutative rings. If $ S $ is a faithfully flat $ R $-module under the scalar multiplication induced by $ f $, then $ f $ is injective as a function\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\", \"Semisimple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semisimplicity of connected group schemes is invariant under isogenies",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LinearEquiv.isSemisimple_iff\", \"module\": \"Mathlib/LinearAlgebra/Semisimple\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (f : Module.End R M)\\n  {M₂ : Type u_3} [inst_3 : AddCommGroup M₂] [inst_4 : Module R M₂] (g : Module.End R M₂) (e : M ≃ₗ[R] M₂),\\n  ↑e ∘ₗ f = g ∘ₗ ↑e → (f.IsSemisimple ↔ g.IsSemisimple)\", \"doc\": \"Given modules $ M $ and $ M_2 $ over a ring $ R $, and a linear equivalence $ e : M \\\\simeq_R M_2 $, if endomorphisms $ f : \\\\text{End}_R(M) $ and $ g : \\\\text{End}_R(M_2) $ satisfy $ e \\\\circ f = g \\\\circ\"}\n  {\"name\": \"IsSemisimpleModule.congr\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsSemisimpleModule R M] (e : N ≃ₗ[R] M), IsSemisimpleModule R N\", \"doc\": \"If there exists a linear equivalence between modules $ N $ and $ M $ over a ring $ R $, then $ N $ is a semisimple $ R $-module if and only if $ M $ is a semisimple $ R $-module.\"}\n  {\"name\": \"LinearEquiv.isSemisimpleModule_iff\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] (e : M ≃ₗ[R] N), IsSemisimpleModule R M ↔ IsSemisimpleModule R N\", \"doc\": \"For a ring $ R $, if there exists a linear equivalence $ e : M \\\\simeq_R N $ between $ R $-modules $ M $ and $ N $, then $ M $ is semisimple if and only if $ N $ is semisimple.\"}\n  {\"name\": \"RingEquiv.isSemisimpleRing_iff\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] (e : R ≃+* S), IsSemisimpleRing R ↔ IsSemisimpleRing S\", \"doc\": \"Given a ring equivalence between rings $ R $ and $ S $, $ R $ is a semisimple ring if and only if $ S $ is a semisimple ring.\"}\n  {\"name\": \"LinearMap.isSemisimpleModule_iff_of_bijective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] {M' : Type u_6} [inst_2 : AddCommGroup M']\\n  [inst_3 : Module R M'] {N' : Type u_7} [inst_4 : AddCommGroup N'] [inst_5 : Module S N'] {σ : R →+* S}\\n  (l : M' →ₛₗ[σ] N') [RingHomSurjective σ], Function.Bijective ⇑l → (IsSemisimpleModul\", \"doc\": \"Given a surjective ring homomorphism $\\\\sigma: R \\\\to S$ and a bijective linear map $l: M' \\\\to N'$ between an $R$-module $M'$ and an $S$-module $N'$, the module $M'$ is semisimple over $R$ if and only i\"}\n  {\"name\": \"RingEquiv.isSemisimpleRing\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] (e : R ≃+* S) [IsSemisimpleRing R], IsSemisimpleRing S\", \"doc\": \"If $ R $ and $ S $ are isomorphic rings and $ R $ is semisimple, then $ S $ is also semisimple. Specifically, given a ring isomorphism $ e : R \\\\simeq S $ and the assumption that $ R $ is a semisimple \"}\n  {\"name\": \"CategoryTheory.Simple.iff_of_iso\", \"module\": \"Mathlib/CategoryTheory/Simple\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] {X Y : C}\\n  (i : X ≅ Y), CategoryTheory.Simple X ↔ CategoryTheory.Simple Y\", \"doc\": \"In a category equipped with zero morphisms, for any isomorphic objects $X$ and $Y$, the object $X$ is simple if and only if $Y$ is simple. This equivalence follows from the fact that isomorphisms pres\"}\n  {\"name\": \"IsSemisimpleModule.of_surjective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsSemisimpleModule R M] (f : M →ₗ[R] N),\\n  Function.Surjective ⇑f → IsSemisimpleModule R N\", \"doc\": \"If $ M $ is a semisimple module over a ring $ R $ and there exists a surjective linear map $ f : M \\\\to N $, then $ N $ is also a semisimple module over $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat homomorphism of smooth connected affine algebraic groups with finite kernel and semisimple target has semisimple source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"RingHom.isSemisimpleRing_of_surjective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S),\\n  Function.Surjective ⇑f → ∀ [IsSemisimpleRing R], IsSemisimpleRing S\", \"doc\": \"If $ R $ is a semisimple ring and $ f : R \\\\to S $ is a surjective ring homomorphism, then $ S $ is also a semisimple ring.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"LinearMap.isSemisimpleModule_iff_of_bijective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] {M' : Type u_6} [inst_2 : AddCommGroup M']\\n  [inst_3 : Module R M'] {N' : Type u_7} [inst_4 : AddCommGroup N'] [inst_5 : Module S N'] {σ : R →+* S}\\n  (l : M' →ₛₗ[σ] N') [RingHomSurjective σ], Function.Bijective ⇑l → (IsSemisimpleModul\", \"doc\": \"Given a surjective ring homomorphism $\\\\sigma: R \\\\to S$ and a bijective linear map $l: M' \\\\to N'$ between an $R$-module $M'$ and an $S$-module $N'$, the module $M'$ is semisimple over $R$ if and only i\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.comp\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u_5) (B : Type u_6) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Smooth R A]\\n  [Algebra.Smooth A B], Algebra.Smooth R B\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, and $ B $ is a smooth algebra over $ A $ with compatible scalar actions forming a scalar tower $ R \\to A \\to B $, then $ B $ is a smooth algeb\"}\n  {\"name\": \"IsSemisimpleModule.of_injective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsSemisimpleModule R M] (f : N →ₗ[R] M),\\n  Function.Injective ⇑f → IsSemisimpleModule R N\", \"doc\": \"Let $ R $ be a ring, and let $ N $ and $ M $ be $ R $-modules. If there exists an injective linear map $ f : N \\to M $, then $ N $ is a semisimple $ R $-module, meaning $ N $ can be expressed as a dire\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme image definitions, abstract-group solvability and normality, flatness, semisimple rings/modules and endomorphisms do not state the asserted geometry of affine group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-multiplicative-universal-cover",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Lemma 19.14, printed p.400, source-semisimple direction proved in its proof: a smooth connected solvable normal subgroup of the source has trivial image and is finite, hence trivial. The displayed lemma in the PDF has its G/G-prime direction reversed relative to that proof; the proof gives precisely the direction needed here.",
+   "via": [
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimple-isogeny-invariance",
+  "worker": "stage1",
+  "summary": "Followed the source-semisimple direction of Milne 19.14, checked the image factorization hypotheses, isolated the image geometry in one statement-only node, and expanded the finite smooth connected subgroup argument using existing reduced-ring and Nullstellensatz nodes. Found the pre-existing duplicate lem-sfb-semisimple-isogeny-source; reported it without editing another item. Statement unchanged. Visual inspection of PDF p.412/printed p.400 shows the inherited blueprint annotation alleging reversed source notation is incorrect: the displayed lemma and proof both give exactly this implication.",
+  "blueprint": "The inherited alteration/moduli/reductive-cover chain ends at Milne Lemma 19.14 in the proof of lem-sfb-semisimple-multiplicative-universal-cover. These steps realize precisely its source-semisimple prerequisite; the inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic affine scheme/reduced algebra foundation for the finite smooth connected subgroup argument; no semisimplicity or isogeny conclusion is taken from it."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic affine scheme/reduced algebra foundation for the finite smooth connected subgroup argument; no semisimplicity or isogeny conclusion is taken from it."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic affine scheme/reduced algebra foundation for the finite smooth connected subgroup argument; no semisimplicity or isogeny conclusion is taken from it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-closed-immersion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-c79698292",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-c79698292 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-solvable-normal-image-geometry, and every cited statement. Sources checked: Milne iAG2017 Lemma 19.14 (printed p.400) says that for an isogeny G'→G, if G is semisimple then so is G'. That matches the item, so the inherited claim that the lemma is reversed is false. Also checked: Theorem 3.34 (p.75), 5.39/5.42 (p.108), 1.62(b) (p.24), 6.19/6.27/6.30 (pp.129-132). Steps: (1) the flat-image lemma is applied to f|_N, then the new node with G=G_1, H=G_0, f faithfully flat; the hypotheses match exactly. (2) Trivial I makes N factor through the scheme kernel. (3) J_K⊆J_N, so F[N] is a quotient of finite-dimensional F[K]. (4) Smooth gives reduced (sbc-lem-smooth-geometrically-reduced); finite-dimensional gives Artinian; the reduced-Artinian product node applies; Nullstellensatz clause 1 makes each factor F; connected with nonempty leaves one factor. (5) N is trivial. New node: true (image is reduced, hence smooth; connected; solvable by 6.27/6.30; normal by fppf lifting; j is automatically a homomorphism). Tested on N=1, f=id, Frobenius on G_a; a non-surjective f (Borel in SL_2) shows faithful flatness is needed. It is self-contained, statement-only and not a restated clause. DAG search found no duplicate; candidates read: algebraic-group-homomorphism-factorization, affine-normal-quotient-geometry, solvable-normal-subgroup-products, lem-sc-image-subgroup (needs a proper source), lem-ag-homomorphism-image-closed. Accepted tool_uses: def-weil-closed-immersion, sbc-lem-smooth-geometrically-reduced, lem-wf-affine-nullstellensatz-vanishing, all generic. Duplicate note: lem-sfb-semisimple-isogeny-source is already split on this base as a one-step application of this item; there is no cycle, but the maintainer should merge the two. FIX (B3): (a) the item statement now cites [def-sc-group-scheme-subgroup] for closed and normal subgroup schemes, with the matching stmt_dep; (b) the false 'displayed lemma reversed' sentence is removed from the new node's blueprint.from.place.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SemisimpleIsogenyInvariance",
+  "declaration": "AlgebraicGeometry.isSemisimpleGroupScheme_of_faithfullyFlat_finite_kernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SemisimpleIsogenyInvariance.lean",
+  "statement": "theorem isSemisimpleGroupScheme_of_faithfullyFlat_finite_kernel {F : Type u} [Field F] [IsAlgClosed F] (G1 G0 : Over (Spec (.of F))) [GrpObj G1] [GrpObj G0] [IsAffine G1.left] [IsAffine G0.left] [LocallyOfFiniteType G1.hom] [QuasiCompact G1.hom] [LocallyOfFiniteType G0.hom] [QuasiCompact G0.hom] [Smooth G1.hom] [Smooth G0.hom] [ConnectedSpace G1.left] [ConnectedSpace G0.left] (f : G1 ⟶ G0) [IsMonHom f] (hff : f.left.appTop.hom.FaithfullyFlat) [IsFinite (GrpObj.ker f).hom] (hG0 : IsSemisimpleGroupScheme G0) : IsSemisimpleGroupScheme G1",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44d934740",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Lean theorem isSemisimpleGroupScheme_of_faithfullyFlat_finite_kernel matches the node and Milne Lemma 19.14 (p.400) clause by clause: algebraically closed F; affine, finite-type (LOFT+QC), smooth, connected G1 and G0 as GrpObj over Spec F; IsMonHom f; faithful flatness as appTop.hom.FaithfullyFlat; finite kernel as IsFinite (GrpObj.ker f).hom, the scheme pullback along the unit, with no reducedness or centrality assumed; semisimplicity via the landed IsSemisimpleGroupScheme (definition read in full; reused, not copied). Statement verbatim; node differs from live only in lean and the added landed stmt_dep; proof only sorry; no definitions; docstrings carry source, blueprint tag and all 5 proof steps; private proof-dependency imports exist in side-live; report has Worker report and Second reading by Q11. Edge cases: identity, trivial groups, Frobenius, SL_p to PGL_p with mu_p kernel, torus over trivial group excluded, Borel excluded, any characteristic, universe u arbitrary. No compile rerun (2026-10-21 rule). Maintainer note: twin node lem-sfb-semisimple-isogeny-source (lean null) should later cite this declaration as existing:true."
+ }
+}

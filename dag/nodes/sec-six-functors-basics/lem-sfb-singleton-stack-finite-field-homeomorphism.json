@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-singleton-stack-finite-field-homeomorphism",
+ "kind": "statement",
+ "title": "Reduced singleton stacks over a field have a finite residue-field topological model",
+ "statement": "Let $k$ be a field [def-weil-field] and $\\mathcal Z$ an algebraic stack over $\\operatorname{Spec}k$ [def-sfb-algebraic-moduli-stack, def-weil-affine-spectrum]. Use the field-valued point set and smooth-atlas topology of [lem-sfb-stack-point-topology-flat-lfp-open]. Assume that $|\\mathcal Z|$ is a singleton, that $\\mathcal Z$ is reduced (it admits a reduced smooth scheme atlas, meaning the local rings of that atlas have no nonzero nilpotents), and that $\\mathcal Z$ is locally of finite type over $k$ (on smooth scheme charts, in the sense of [def-weil-finite-type-morphism]). There exist a finite field extension $K/k$, meaning $K$ is finite-dimensional as a $k$-vector space, and a $k$-morphism $\\pi:\\mathcal Z\\to\\operatorname{Spec}K$ such that for every algebraic stack $\\mathcal T$ and every morphism $\\mathcal T\\to\\operatorname{Spec}K$ the projection induces a homeomorphism $|\\mathcal Z\\times_{\\operatorname{Spec}K}\\mathcal T|\\xrightarrow{\\sim}|\\mathcal T|$. The product is the 2-fibre product of [def-sfb-stable-pointed-moduli-groupoids]. No separation or finiteness condition on the inertia of $\\mathcal Z$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06R6 (lemma-locally-finite-type-locally-noetherian), 06QK (lemma-noetherian-singleton-stack-gerbe), 06QI (lemma-gerbe-fppf), and 06R9 (lemma-gerbe-bijection-points); spaces-descent.tex Tag 06EW (lemma-locally-finite-type-fppf-local-source); decent-spaces.tex Tag 0ACA (lemma-conditions-on-space-over-field), (2) implies (5); spaces-over-fields.tex Tag 06S0 (lemma-locally-quasi-finite-over-field), (1) implies (5)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "def-weil-finite-type-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Choose a reduced smooth surjective atlas $u:U\\to\\mathcal Z$ from the hypotheses. Its composite to $\\operatorname{Spec}k$ is locally of finite type by the chart meaning of the hypothesis. The field $k$ is Noetherian (its only ideals are $0$ and $k$), so [pqf-lem-locnoeth-lft] makes $U$ locally Noetherian. Thus $\\mathcal Z$ is reduced and locally Noetherian. Apply [lem-sfb-noetherian-singleton-gerbe] over $S=\\operatorname{Spec}k$ to obtain a reduced locally Noetherian singleton algebraic space $Q/k$ and a gerbe $p:\\mathcal Z\\to Q$ over $k$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-noetherian-singleton-gerbe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 01T6 (morphisms.tex, lemma-finite-type-noetherian) and 06QK (lemma-noetherian-singleton-stack-gerbe)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-gerbe-smooth-universal-homeomorphism], $pu:U\\to Q$ is surjective, flat and locally of finite presentation. Both $U\\to Q$ and $Q\\to\\operatorname{Spec}k$ are maps of algebraic spaces, hence representable by algebraic spaces as stack maps. Their composite $U\\to\\operatorname{Spec}k$ is locally of finite type by step 1. Apply [lem-sfb-representable-lft-fppf-source-descent] to these two maps to conclude that $Q\\to\\operatorname{Spec}k$ is locally of finite type. This avoids applying representable descent to the possibly nonrepresentable gerbe map itself.",
+   "uses": [
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-representable-lft-fppf-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0DN8 (lemma-gerbe-smooth), 075V (lemma-composition-smooth), and 06EW (spaces-descent.tex, lemma-locally-finite-type-fppf-local-source)."
+   }
+  },
+  {
+   "text": "The singleton space $|Q|$ is discrete: its only subsets are empty and the whole space. By [lem-sfb-space-field-discreteness-criterion], $Q\\to\\operatorname{Spec}k$ is locally quasi-finite; use its discreteness equivalence, which needs no separatedness. Apply [lem-sfb-reduced-quasifinite-space-field-decomposition] to the reduced space $Q$. In its decomposition $Q\\simeq\\coprod_{i\\in I}\\operatorname{Spec}K_i$, every summand has one point. Since $|Q|$ has exactly one point, $I$ has exactly one element. Its field $K$ is finite-dimensional over $k$ and gives a $k$-isomorphism $e:Q\\simeq\\operatorname{Spec}K$.",
+   "uses": [
+    "lem-sfb-space-field-discreteness-criterion",
+    "lem-sfb-reduced-quasifinite-space-field-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0ACA (decent-spaces.tex, lemma-conditions-on-space-over-field), (2) implies (5), and 06S0 (spaces-over-fields.tex, lemma-locally-quasi-finite-over-field)."
+   }
+  },
+  {
+   "text": "Set $\\pi=ep$. For any $\\mathcal T\\to\\operatorname{Spec}K$, regard $\\mathcal T$ as a stack over $Q$ using $e^{-1}$. The isomorphism $e$ identifies $\\mathcal Z\\times_{\\operatorname{Spec}K}\\mathcal T$ with $\\mathcal Z\\times_Q\\mathcal T$, compatibly with projection to $\\mathcal T$. The universal homeomorphism clause of [lem-sfb-gerbe-smooth-universal-homeomorphism] now gives exactly the required homeomorphism on point spaces. All structure maps are over $k$; no condition on inertia was introduced.",
+   "uses": [
+    "lem-sfb-gerbe-smooth-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06R9 (lemma-gerbe-bijection-points)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-noetherian-singleton-gerbe",
+  "lem-sfb-gerbe-smooth-universal-homeomorphism",
+  "lem-sfb-representable-lft-fppf-source-descent",
+  "lem-sfb-space-field-discreteness-criterion",
+  "lem-sfb-reduced-quasifinite-space-field-decomposition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06QK, with gerbe geometry Tags 0DN8 and 06R9, descent Tag 06EW, and space classification Tags 0ACA and 06S0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced algebraic stack locally of finite type over a field with a single point is universally homeomorphic to the spectrum of a finite field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] → Unique ↥(AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any field $ K $, the scheme $ \\\\operatorname{Spec}(K) $ has a unique carrier (underlying topological space), corresponding to the fact that the prime spectrum $ \\\\operatorname{Spec}(K) $ contains on\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"AlgebraicGeometry.IsAffine (⊤_ AlgebraicGeometry.Scheme)\", \"doc\": \"The terminal object in the category of schemes is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Subsingleton ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is a subsingleton (i.e., contains at most one point), then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Unique ↥(AlgebraicGeometry.Spec (X.residueField x))\", \"doc\": \"For any point $ x $ in a scheme $ X $, the spectrum of the residue field at $ x $ has a unique underlying topological space. This follows because the residue field is a field, and the prime spectrum o\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A residual gerbe of a closed point on a finite type algebraic stack is a gerbe over a finite extension of the base field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).Over X\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, there is a canonical morphism of schemes from the spectrum of the residue field at $x$, denoted $\\\\operatorname{Spec}(k(x))$, to the scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Field ↑(X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).CanonicallyOver X\", \"doc\": \"For any scheme $ X $ and a point $ x \\\\in X $, the affine scheme $ \\\\operatorname{Spec} $ of the residue field at $ x $ is equipped with a canonical morphism to $ X $, thereby forming an object in the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Unique ↥(AlgebraicGeometry.Spec (X.residueField x))\", \"doc\": \"For any point $ x $ in a scheme $ X $, the spectrum of the residue field at $ x $ has a unique underlying topological space. This follows because the residue field is a field, and the prime spectrum o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.over_def\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.Spec (X.residueField x) ↘ X = X.fromSpecResidueField x\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the morphism from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ in the over category $\\\\mathbf{Sch}/X$ (constructed as $\\\\operatorname{Spec}(\\\\kapp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → AlgebraicGeometry.Spec (X.residueField x) ⟶ X\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, this defines the canonical morphism of schemes from the spectrum of the residue field at $x$, $\\\\operatorname{Spec}(k(x))$, to $X$. This morphism is constructed \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to \\\\kappa(x)$ m\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"UniversalHomeomorph\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|residualGerbe|residual_gerbe|gerbe",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced singleton algebraic stack over a field is a gerbe universally homeomorphic to a finite field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : Scheme.{u}} {f : X ⟶ Y} [Subsingleton X] [IsReduced X] [JacobsonSpace Y] : IsFinite f ↔ LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"Algebra.isReduced_of_isGeometricallyReduced\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"[IsGeometricallyReduced k A] : IsReduced A\", \"doc\": \"If $ A $ is a $ k $-algebra that is geometrically reduced over a field $ k $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"Algebra.isGeometricallyReduced_iff\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"∀ (k : Type u_3) (A : Type u_4) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  Algebra.IsGeometricallyReduced k A ↔ IsReduced (TensorProduct k (AlgebraicClosure k) A)\", \"doc\": \"For a field $ k $ and a $ k $-algebra $ A $, the algebra $ A $ is geometrically reduced over $ k $ (i.e., $ A \\\\otimes_k L $ is reduced for every field extension $ L/k $) if and only if the tensor prod\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.casesOn\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"{k : Type u_3} →\\n  {A : Type u_4} →\\n    [inst : Field k] →\\n      [inst_1 : Ring A] →\\n        [inst_2 : Algebra k A] →\\n          {motive : Algebra.IsGeometricallyReduced k A → Sort u} →\\n            (t : Algebra.IsGeometricallyReduced k A) →\\n              ((isReduced_algebraicClosure_tensorProduct : I\", \"doc\": \"If $ A $ is geometrically reduced over a field $ k $, then the tensor product $ A \\\\otimes_k \\\\overline{k} $ is a reduced ring, where $ \\\\overline{k} $ denotes the algebraic closure of $ k $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.isReduced_of_field\", \"module\": \"Mathlib.RingTheory.Unramified.Field\", \"type\": \": IsReduced A\", \"doc\": \"If $ A $ is a formally unramified algebra over a field $ R $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"(k : Type u_3) → (A : Type u_4) → [inst : Field k] → [inst_1 : Ring A] → [Algebra k A] → Prop\", \"doc\": \"Given a field $ k $ and a ring $ A $ equipped with a $ k $-algebra structure, the proposition that $ A $ is geometrically reduced over $ k $, meaning that for every field extension $ L $ of $ k $, the\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.recOn\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"{k : Type u_3} →\\n  {A : Type u_4} →\\n    [inst : Field k] →\\n      [inst_1 : Ring A] →\\n        [inst_2 : Algebra k A] →\\n          {motive : Algebra.IsGeometricallyReduced k A → Sort u} →\\n            (t : Algebra.IsGeometricallyReduced k A) →\\n              ((isReduced_algebraicClosure_tensorProduct : I\", \"doc\": \"Given a property that depends on a geometrically reduced algebra structure, this recursor allows deriving the property for any instance of $ A $ being geometrically reduced over $ k $ by verifying the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and commutative algebras; none provides the algebraic-stack assertion or a one-line specialization to stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced singleton algebraic stack locally of finite type over a field is universally homeomorphic to a finite field spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] → Unique ↥(AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any field $ K $, the scheme $ \\\\operatorname{Spec}(K) $ has a unique carrier (underlying topological space), corresponding to the fact that the prime spectrum $ \\\\operatorname{Spec}(K) $ contains on\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"AlgebraicGeometry.IsAffine (⊤_ AlgebraicGeometry.Scheme)\", \"doc\": \"The terminal object in the category of schemes is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-stack result; scheme analogues do not specialize to arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residual gerbe over a finite extension of the ground field for a finite type stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).Over X\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, there is a canonical morphism of schemes from the spectrum of the residue field at $x$, denoted $\\\\operatorname{Spec}(k(x))$, to the scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).CanonicallyOver X\", \"doc\": \"For any scheme $ X $ and a point $ x \\\\in X $, the affine scheme $ \\\\operatorname{Spec} $ of the residue field at $ x $ is equipped with a canonical morphism to $ X $, thereby forming an object in the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.IsOver\\n    (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap (X ↘ Y) x)) Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Field ↑(X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(k(x)) \\\\to X$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a preimmersion, where $k(x)$ denotes the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (X.residue x))\", \"doc\": \"The canonical ring homomorphism from the local ring $\\\\mathcal{O}_{X,x}$ (the stalk of the structure sheaf at $x$) to its residue field $k(x)$, obtained by quotienting $\\\\mathcal{O}_{X,x}$ by its unique\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-stack result; scheme analogues do not specialize to arbitrary algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Homeomorph\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-stack result; scheme analogues do not specialize to arbitrary algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|residualGerbe|residual_gerbe|gerbe",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-stack result; scheme analogues do not specialize to arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced algebraic stack with one point has finite residue field topological model",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : Scheme.{u}} {f : X ⟶ Y} [Subsingleton X] [IsReduced X] [JacobsonSpace Y] : IsFinite f ↔ LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"Given a locally ringed space $X$ and a point $x$ in $X$, this constructs the residue field of the stalk of the structure sheaf at $x$. The stalk is a local ring, and its residue field is obtained by q\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"For a scheme $ X $ and a point $ x \\\\in X $, the residue field at $ x $ is the quotient of the local ring $ \\\\mathcal{O}_{X,x} $ (the stalk of the structure sheaf at $ x $) by its unique maximal ideal, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {x y : ↥X} (h : x = y) {Z : CommRingCat} (h_1 : X.residueField y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (X.residue x)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueFieldCongr h).hom h_1) =\\n    CategoryTheory.CategoryStruct.comp (X.pre\", \"doc\": \"For a scheme $X$ and points $x,y \\\\in X$, if $x = y$, there exists a canonical isomorphism between the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ induced by the identity morphism on the residue field a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.evaluation.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens) (x : ↥X) (hx : x ∈ U), X.evaluation U x hx = X.evaluation U x hx\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the residue field at $x$ is the quotient of the local ring $\\\\mathcal{O}_{X,x}$ (the stalk of the structure sheaf at $x$) by its unique maximal ideal, viewed as \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) : X.presheaf.obj (op ⊤) ⟶ X.residueField x\", \"doc\": \"Given a locally ringed space $X$ and a point $x$ in $X$, this constructs the residue field of the stalk of the structure sheaf at $x$. The stalk is a local ring, and its residue field is obtained by q\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residueFieldCongr.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x = y),\\n  AlgebraicGeometry.Scheme.residueFieldCongr h = AlgebraicGeometry.Scheme.residueFieldCongr h\", \"doc\": \"For a scheme $ X $ and points $ x, y \\\\in X $, if $ x = y $, then the residue fields $ \\\\kappa(x) $ and $ \\\\kappa(y) $ are isomorphic via the identity isomorphism on $ \\\\kappa(x) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : Unique (Spec (X.residueField x))\", \"doc\": \"For any point $ x $ in a scheme $ X $, the spectrum of the residue field at $ x $ has a unique underlying topological space. This follows because the residue field is a field, and the prime spectrum o\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-stack result; scheme analogues do not specialize to arbitrary algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-diagonal-closed-points",
+  "date": "2026-10-23",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum",
+   "via": [
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-singleton-stack-finite-field-homeomorphism",
+  "worker": "stage1",
+  "summary": "Followed the residual-gerbe route; established local Noetherianity on the given atlas, descended local finite type via its smooth composite to the gerbe base, classified that reduced singleton space, and transported the universal homeomorphism. Three new statement-only inputs, no Lean attachment.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), supporting alteration/moduli branch recorded in blueprint.from.place: residual-gerbe reduction of the closed singleton.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme local-Noetherianity under a locally finite type morphism, applied to the atlas over the field; no scheme permanence node in this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-a87f756bd",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-a87f756bd (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and the 3 new statement-only nodes against the Stacks source: 06QK (stacks-morphisms l.6360, with its proof), 0DN8, 06R9 with 06QE, and 06S0 (1)<=>(5). Step 1: pqf-lem-locnoeth-lft over the Noetherian Spec k makes the given reduced smooth atlas locally Noetherian, which is the hypothesis of the new 06QK node; that node is applied with S=Spec k. Step 2: the atlas clause of the new gerbe node gives pu: U->Q surjective, flat and lfp between algebraic spaces, so the representable source-descent node (06EW) applies to U->Q->Spec k and not to the non-representable p. Step 3: the singleton |Q| is discrete, so the first equivalence of the space-field discreteness criterion gives local quasi-finiteness with no separatedness used; the new reduced decomposition node then gives Q = Spec K with [K:k] finite. Step 4: pulling back along e gives Z x_{Spec K} T = Z x_Q T, and the gerbe node's universal clause applies. All new statements are true and none restates the item: I tested inseparable K, BG for non-smooth G, a non-neutral gerbe, Spec k[e] (excluded by reducedness), and empty or infinite coproducts. No duplicates: lem-sfb-flat-inertia-algebraic-space-quotient, singleton-stack-flat-lfp-field-cover, unramified-diagonal-singleton-field-cover and finite-type-point-residual-substack all state different things. Batch-5: every flagged path ends in def-trf-algebraic-space or def-trf-projective-bundle-morphism, which are general definitions and not steps of the trace-formula or Poincare-duality proofs, so all flags are accepted. Accepted tool_use: pqf-lem-locnoeth-lft, a status-mathlib generic scheme fact (01T6); the worker wrote this entry itself, a C8 nit. No SGA is cited and no repair note applies. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingletonStackFiniteFieldHomeomorphism",
+  "declaration": "CategoryTheory.exists_singleton_stack_finite_field_homeomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingletonStackFiniteFieldHomeomorphism.lean",
+  "statement": "theorem exists_singleton_stack_finite_field_homeomorphism (k : Type u) [Field k] (F : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (hstack : IsAlgebraicModuliStack F) (hsingleton : Nonempty (ModuliPoints F) ∧ Subsingleton (ModuliPoints F)) (hreduced : ∃ (U : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a ∧ ∀ x : U.left, _root_.IsReduced (U.left.presheaf.stalk x)) (hlft : ∀ (U : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a → LocallyOfFiniteType U.hom) : ∃ (K : Type u) (_ : Field K) (_ : Algebra k K), Module.Finite k K ∧ ∃ pi : BasedFunctor F (discreteModuli (yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))), ∀ (G : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))), IsAlgebraicModuliStack G → ∀ g : BasedFunctor G (discreteModuli (yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))), IsHomeomorph (moduliPointMap (moduliTwoFiberFst g pi))",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3cda5f44e",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Only the lean field differs from live; the six stmt_deps are unchanged and their records identical to live; lean.statement is verbatim; the theorem's only proof is sorry; docstrings carry source and blueprint tags and the 4 proof steps; Worker report and Second reading sections are present. Clauses checked: k a field; F with IsAlgebraicModuliStack (general Artin, not DM); singleton = Nonempty ∧ Subsingleton ModuliPoints with the smooth-atlas iSup topology; reduced = ∃ smooth atlas with reduced stalks; lft on every smooth atlas, equivalent to the node; ∃ K : Type u with Field, Algebra and Module.Finite k K (no separability); pi a strict BasedFunctor to discreteModuli Spec K over k via algebraMap; ∀ algebraic G with independent universes and ∀ g; IsHomeomorph of moduliPointMap of moduliTwoFiberFst g pi, the real projection to the test stack; no inertia or separation hypothesis; quantifier order matches. Edge cases: empty stack excluded; Spec k[ε] excluded; inseparable K, BG of non-smooth G and non-neutral gerbes allowed; empty test stack fine. H4: no duplicate (SingletonStackFlatLfpFieldCover is a different statement); same idiom as FiniteFlatAffineGroupoidModuli:211. Note: ModuliPoints and moduliPointMap come via the base theorem stmt_dep lem-sfb-stack-point-topology-flat-lfp-open (owner def-sfb-dm-stack-morphism-properties); accepted. Not compiled (no change)."
+ }
+}

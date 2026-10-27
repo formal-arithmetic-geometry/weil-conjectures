@@ -1,0 +1,107 @@
+{
+ "id": "lem-sfb-open-exchange-derived-unit",
+ "kind": "statement",
+ "title": "Right-derived unit normalization of the canonical open exchange",
+ "statement": "Let A be a commutative ring, and let b:U→V, q:U→W, p:V→Z and i:W→Z form a cartesian square of schemes, with b and i open immersions. Let I=i!, O=b!, R=q* and P=p* on constant-A module sheaves. Write Q for homotopy localization, f_I and f_O for exact-derived homotopy factor isomorphisms, and u_R,u_P for right-derived units. Let bc:q^*⋙b!≅i!⋙p^* be ordinary open base change, χ:R⋙I→O⋙P the mate of its inverse, and Γ:R(R)⋙D(I)→D(O)⋙R(P) the canonical derived open exchange. For every homotopy object L of sheaves on U, D(I)(u_R(L)) followed by Γ(QL) and R(P)(f_O(L)) equals f_I(RL) followed by Q(χ̄_L) and u_P(OL), where χ̄ includes the canonical homotopy composition isomorphisms. No properness or finiteness assumptions are needed for this forward identity. Conventions: [def-pc-scheme], [def-weil-pbc-etale-sheaves], [def-weil-pbc-derived-categories].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7J and 0D6E; formal derived-adjunction normalization"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "For arbitrary exact functors, expand the exact-derived square construction to show that the square of the inverse ordinary isomorphism equals the inverse derived square. Specialize to ordinary open base change.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the mixed derived mate unit normalization with the specified inverse derived base-change square and its symmetry equality. Unfold the canonical open exchange and derived upper-star/lower-star adjunction names to identify the result.",
+   "uses": [
+    "lem-sfb-mixed-derived-mate-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-mixed-derived-mate-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7J and 0D6E; formal categorical calculation extracted from the tower proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a derived square respects right derived functor units",
+   "results": "Eight hits: Adjunction.derived_unit, derived′_unit, derivedη_fac_app, derivedε_fac_app and related generic adjunction formulas. None gives the mixed-square unit normalization or the normalized pasting statement.",
+   "verdict": "Use the factorization API and prove the mate and pasting calculations.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnit\"",
+   "results": "Zero Mathlib hits; this API belongs to the adopted source library.",
+   "verdict": "No duplicate.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|rightDerivedFunctorUnit",
+   "results": "Zero Mathlib hits. Local source searches found MapDerivedCategoryMate factorization identities and the right-derived composition unit API, which are used in the proofs.",
+   "verdict": "No duplicate of the two assembled identities.",
+   "date": "2026-10-27"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExactCompactificationUnitTower",
+  "date": "2026-10-27",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-exact-compactification-unit-tower",
+   "place": "Formal mate normalization and pasting steps of the compatible compactification tower proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenExchangeDerivedUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenExchangeDerivedUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.openExchangeDerivedUnit",
+  "statement": "theorem openExchangeDerivedUnit\n    (A : Type (u + 1)) [CommRing A]\n    {U V W Z : Scheme.{u}} (b : U ⟶ V) (q : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n    [IsOpenImmersion b] [IsOpenImmersion i] (sq : IsPullback q b i p)\n    (L : HomotopyCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)) :\n    let K := ModuleCat.{u + 1} A;\n    let I := openImmersionLowerShriek K i;\n    let O := openImmersionLowerShriek K b;\n    let R := lowerStar K q;\n    let P := lowerStar K p;\n    let bc := @asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap K sq);\n    let χ := (mateEquiv (upperStarLowerStarAdjunction K q)\n      (upperStarLowerStarAdjunction K p) (TwoSquare.mk _ _ _ _ bc.inv)).natTrans;\n    let Γ := openImmersionLowerShriekLowerStarExchange K sq;\n    I.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app L) ≫\n        Γ.app (DerivedCategory.Qh.obj L) ≫\n        P.rightDerivedFunctor.map (O.mapDerivedCategoryFactorsh.hom.app L) =\n      I.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj L) ≫\n        DerivedCategory.Qh.map\n          ((Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ I)) (.up ℤ)).hom.app L ≫\n            (χ.mapHomotopyCategory (.up ℤ)).app L ≫\n            (Functor.mapHomotopyCategoryCompIso (Iso.refl (O ⋙ P)) (.up ℤ)).inv.app L) ≫\n          P.rightDerivedFunctorUnit.app ((O.mapHomotopyCategory (.up ℤ)).obj L)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T103410-L-1066659",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T103410-L-1066659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

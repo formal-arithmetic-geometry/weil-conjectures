@@ -1,0 +1,110 @@
+{
+ "id": "lem-sfb-exterior-koszul-scalar-realization",
+ "kind": "statement",
+ "title": "Finite exterior Koszul realization under an additive scalar-compatible functor",
+ "statement": "Let C be a small site, O a commutative ring sheaf, and A a commutative ring in the same universe. Let E be an additive functor from A-modules to O-module sheaves, c:O -> E(A) an isomorphism, and s:A -> sections(O), such that c intertwines E(multiplication by x) with scalar multiplication by s(x). For any finite list a:Fin r -> A and supplied Koszul chain maps t_nm whose degree-k components are the exterior powers of the diagonal a_i^(m-n), the termwise E-images of the exterior Koszul complexes for a_i^(n+1), extended into nonpositive cochain degrees, are isomorphic to the actual ringed Koszul dual tower [def-weil-pbc-ringed-koszul-system] for s(a_i). These isomorphisms intertwine every supplied transition for n<=m. In degree zero, c followed by E of the inverse exterior-degree-zero coordinate and the extension coordinate, followed by the comparison, is the degree-zero dual unit under the canonical single-complex identification. No quotient, augmentation, cone, exactness or Noetherian assumption occurs.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma-join-sequences-koszul-complex (0664), finite tensor coordinates; algebraization.tex, lemma-derived-completion-koszul (0A0E)."
+ },
+ "proof": [
+  {
+   "text": "Construct the coefficient ring homomorphism A→End(O) by conjugating E of multiplication by c. Prove directly that the increasing exterior wedge inclusions form a finite coproduct, and that each supplied exterior diagonal transition multiplies a basis vector by the product of its diagonal entries. These two proofs are in the item and use only the basis and exterior map APIs. Additivity of E preserves the finite coproduct. Precompose its legs with c to obtain a coproduct of copies of O.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the normalized finite coproduct basis of the actual dual tower. The unique comparison between the two coproducts supplies degreewise isomorphisms. Test the differential square on each source basis leg, use the proved expansion of the actual exterior differential and the dual-tower differential matrix, and apply functoriality and additivity. These isomorphisms assemble to chain isomorphisms. The proved exterior diagonal calculation and the dual transition matrix prove naturality for every n<=m. The exterior degree-zero basis is proved to be the inverse zeroEquiv followed by the extension coordinate; comparison of the empty basis legs gives exactly the required dual-unit equality.",
+   "uses": [
+    "lem-sfb-exterior-koszul-basis-differential",
+    "lem-sfb-ringed-koszul-dual-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-exterior-koszul-basis-differential",
+  "lem-sfb-ringed-koszul-dual-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F3",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664; algebraization.tex, Tag 0A0E. The actual exterior differential expansion, finite coproduct uniqueness, scalar-functor transfer, diagonal transitions and unit glue are formalized in Lean. Only the normalized ringed dual-tower matrix statement remains unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Additive functor scalar multiplication finite exterior Koszul complex ordered tensor internal dual",
+   "results": "Eight hits, including ModuleCat.exteriorPower.functor and exteriorPower.map_apply_ιMulti_family.",
+   "verdict": "Finite exterior maps are available, but no comparison with the ringed ordered tensor dual.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"map\"",
+   "results": "No result: Loogle reported load; local exteriorPower declarations and project comparison proofs were inspected.",
+   "verdict": "unavailable",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*realiz|realiz.*Koszul|constant.*quotient",
+   "results": "Five unrelated Mathlib matches. Project comparisons were inspected, including WeilCompletedKoszulCoefficientComparison and WeilExteriorKoszulTensorComparison.",
+   "verdict": "Project comparisons specialize to a different site datum and successor coefficient universe; no comparison for the arbitrary coefficient-model universe in this item.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueKoszulCoefficientConeComparison",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-residue-koszul-coefficient-cone-comparison",
+   "place": "Proof step 2: unaugmented finite Koszul coordinates only."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExteriorKoszulScalarRealization",
+  "file": "lean/Sheaf/CategoryTheory/ExteriorKoszulScalarRealization.lean",
+  "declaration": "CategoryTheory.exteriorKoszul_scalar_realization",
+  "statement": "theorem exteriorKoszul_scalar_realization\n    {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}\n    (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]\n    (E : ModuleCat.{w} A ⥤ SheafOfModules.{w}\n      ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)) [E.Additive]\n    (c : SheafOfModules.unit\n      ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O) ≅ E.obj (ModuleCat.of A A))\n    (s : A → (O.obj ⋙ forget CommRingCat).sections)\n    (hs : ∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =\n      ringedKoszulScalar O (s x) ≫ c.hom)\n    (r : ℕ) (a : Fin r → A)\n    (t : ∀ n m : ℕ, n ≤ m →\n      (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶\n        ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))))\n    (ht : ∀ n m h k, (t n m h).f k = ModuleCat.ofHom\n      (exteriorPower.map k\n        (Finsupp.linearCombination A (fun i ↦ Finsupp.single i (a i ^ (m - n)))))) :\n    let H := E.mapHomologicalComplex (.up ℤ)\n    ∃ e : ∀ n : ℕ, H.obj\n        ((ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))).extend\n          ComplexShape.embeddingDownNat) ≅ (ringedKoszulDualTower O r (fun i ↦ s (a i))).obj\n            (op n),\n      (∀ n m h, H.map (HomologicalComplex.extendMap (t n m h)\n          ComplexShape.embeddingDownNat) ≫ (e n).hom =\n        (e m).hom ≫ (ringedKoszulDualTower O r (fun i ↦ s (a i))).map (homOfLE h).op) ∧\n      ∀ n, c.hom ≫ E.map\n          (ModuleCat.ofHom (exteriorPower.zeroEquiv A (Fin r →₀ A)).symm.toLinearMap ≫\n            ((ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))).extendXIso\n              ComplexShape.embeddingDownNat (i := 0) rfl).inv) ≫ (e n).hom.f 0 =\n        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫\n          (ringedKoszulDualUnit O r (fun i ↦ s (a i)) n).f 0",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3caba",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T135627-L-4051345",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T152525-L-1134807",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,280 @@
+{
+ "id": "lem-zl-texact-cohomology-boundary-comparison",
+ "kind": "statement",
+ "title": "A t-exact triangulated functor preserves the cohomology boundary comparison",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be triangulated categories [def-weil-triangulated-category] with bounded t-structures [def-weil-t-structure], hearts $\\mathcal A,\\mathcal B$, and heart-valued cohomology functors $H^r_{\\mathcal C},H^r_{\\mathcal D}$ [lem-weil-heart-short-exact-triangles]. Let $P:\\mathcal C\\to\\mathcal D$ be an exact functor equipped with coherent shift comparisons $\\sigma_{M,r}:P(M[r])\\xrightarrow{\\sim}(PM)[r]$. Suppose that $P$ preserves both halves of the t-structures, in every integer degree. Write $P^{\\heartsuit}:\\mathcal A\\to\\mathcal B$ for its restriction. The canonical truncation comparisons [lem-pod-texact-truncation-comparison], together with $\\sigma$, give natural isomorphisms\n$$c^r_M:P^{\\heartsuit}H^r_{\\mathcal C}(M)\\xrightarrow{\\sim}H^r_{\\mathcal D}(PM).$$\nFor a distinguished triangle $T=(A\\to B\\to C\\xrightarrow{w}A[1])$, let $PT$ have last arrow $\\sigma_{A,1}\\circ P(w)$, and let $\\delta_T^r:H^r_{\\mathcal C}(C)\\to H^{r+1}_{\\mathcal C}(A)$ and $\\delta_{PT}^r:H^r_{\\mathcal D}(PC)\\to H^{r+1}_{\\mathcal D}(PA)$ be its standard cohomology boundaries. Then, for every integer $r$,\n$$c^{r+1}_A\\circ P^{\\heartsuit}(\\delta_T^r)=\\delta_{PT}^r\\circ c^r_C.$$\nThese comparison squares are natural in morphisms of distinguished triangles.",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "BBD Proposition 1.3.3 (canonical truncation adjunctions), Theorem 1.3.6 (heart and cohomological functor), and 1.3.16 (t-exact functors), printed pp. 29–31 and 36–37; boundary compatibility is the generic formal comparison extracted by the agent from these constructions, not printed as a separate theorem. No Stacks tag states this t-structure form."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pod-texact-truncation-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Since $P$ preserves both halves, it sends the full heart $\\mathcal A=\\mathcal C^{\\le0}\\cap\\mathcal C^{\\ge0}$ into $\\mathcal B$; its restriction $P^{\\heartsuit}$ is therefore defined. Write $Q_{\\mathcal C}=H^0_{\\mathcal C}=\\tau^{\\ge0}_{\\mathcal C}\\tau^{\\le0}_{\\mathcal C}$ and similarly $Q_{\\mathcal D}$. Apply [lem-pod-texact-truncation-comparison] at $m=0$ to $P$ (the categories have bounded t-structures and $P$ is exact and preserves both halves in every degree, exactly its hypotheses). If $\\alpha^-,\\alpha^+$ are its natural isomorphisms, their composite\n$$e_M=\\tau^{\\ge0}_{\\mathcal D}(\\alpha^-_{P,0,M})\\circ\\alpha^+_{P,0,\\tau^{\\le0}_{\\mathcal C}M}:P^{\\heartsuit}Q_{\\mathcal C}(M)\\xrightarrow{\\sim}Q_{\\mathcal D}(PM)$$\nis an isomorphism in the full heart. This uses the stated formula for $H^0$ in [lem-weil-heart-short-exact-triangles](1); fullness means that the displayed ambient morphism and its inverse are also heart morphisms.",
+   "uses": [
+    "def-weil-t-structure",
+    "lem-pod-texact-truncation-comparison",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i), Theorem 1.3.6, and 1.3.16; printed pp. 29–31, 36: composite of the two canonical truncation comparisons"
+   }
+  },
+  {
+   "text": "The composite $e$ is natural: for any $f:M\\to N$, naturality of $\\alpha^+$ followed by naturality of $\\alpha^-$, with $\\tau^{\\ge0}_{\\mathcal D}$ applied to the latter equation, gives\n$$e_N\\circ P^{\\heartsuit}(Q_{\\mathcal C}(f))=Q_{\\mathcal D}(P(f))\\circ e_M.$$\nNo boundary assertion is taken from [lem-pod-texact-truncation-comparison]; only its naturality in the object is used here.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i): naturality of the two adjunction comparisons, composed"
+   }
+  },
+  {
+   "text": "Use the convention $H^r(M)=Q(M[r])$ of [lem-weil-heart-short-exact-triangles](1). The comparison in degree $r$ is explicitly\n$$c^r_M=Q_{\\mathcal D}(\\sigma_{M,r})\\circ e_{M[r]}.$$\nIt is an isomorphism since each factor is. This is precisely the canonical truncation comparison together with the given shift comparison: $e$ is the composite of the canonical truncation maps at zero, now evaluated on $M[r]$. For $f:M\\to N$, apply step 2 to $f[r]$ and then use $\\sigma_{N,r}P(f[r])=(P(f))[r]\\sigma_{M,r}$ to obtain\n$$c^r_N P^{\\heartsuit}(H^r_{\\mathcal C}(f))=H^r_{\\mathcal D}(P(f))c^r_M.$$\nThus all $c^r$ are natural, for positive, zero and negative $r$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Theorem 1.3.6 and 1.3.16; printed pp. 31, 36: shifted cohomology and naturality of the supplied shift comparison"
+   }
+  },
+  {
+   "text": "Fix $r$ and let $a_{X,r}:(X[1])[r]\\xrightarrow{\\sim}X[r+1]$ be the associator for the iterated shift. Put $w_r=a_{A,r}\\circ w[r]$ and $v=\\sigma_{A,1}\\circ P(w)$, so the shifted third arrow of $PT$ is $v_r=a_{PA,r}\\circ v[r]$. Coherence of the given $\\sigma$ says\n$$\\sigma_{A,r+1}\\circ P(a_{A,r})=a_{PA,r}\\circ(\\sigma_{A,1})[r]\\circ\\sigma_{A[1],r}.$$\nNaturality of $\\sigma_{-,r}$ at $w:C\\to A[1]$ says $\\sigma_{A[1],r}P(w[r])=(P(w))[r]\\sigma_{C,r}$. Substitute this into the preceding equation and use functoriality of $[r]$ to get\n$$\\sigma_{A,r+1}\\circ P(w_r)=v_r\\circ\\sigma_{C,r}.$$\nThis is a calculation from the specified coherent shift data, not an additional theorem about t-exact functors. Exactness of $P$ in [def-weil-triangulated-category] ensures that the image triangle with third arrow $v$ is distinguished.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.1.1, printed p. 18; 1.3.16, printed p. 36: shifts and the exact-functor structure; explicit coherence calculation"
+   }
+  },
+  {
+   "text": "By the definition of the standard long exact sequence of the cohomological functor in [lem-weil-heart-short-exact-triangles](5), its boundary is $\\delta_T^r=Q_{\\mathcal C}(w_r)$; likewise $\\delta_{PT}^r=Q_{\\mathcal D}(v_r)$. There is no extra rotation sign here: these are the shifted third arrows, followed by the shift associator. Apply step 2 to $w_r:C[r]\\to A[r+1]$, substitute step 4, and preserve composition under $Q_{\\mathcal D}$. The whole required square is the following calculation:\n$$\\begin{aligned}\nc^{r+1}_A P^{\\heartsuit}(\\delta_T^r)\n&=Q_{\\mathcal D}(\\sigma_{A,r+1})e_{A[r+1]}P^{\\heartsuit}(Q_{\\mathcal C}(w_r))\\\\\n&=Q_{\\mathcal D}(\\sigma_{A,r+1}\\circ P(w_r))e_{C[r]}\\\\\n&=Q_{\\mathcal D}(v_r\\circ\\sigma_{C,r})e_{C[r]}\\\\\n&=\\delta_{PT}^r c^r_C.\n\\end{aligned}$$\nThus the boundary compatibility is proved using object naturality of $e$, rather than assumed as a property of the truncation comparisons.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Theorem 1.3.6, printed p. 31: boundary of a cohomological functor; explicit naturality calculation (cf. Mathlib HomologicalFunctor.lean, definition homologySequenceδ, lines 172–178)"
+   }
+  },
+  {
+   "text": "For a morphism of triangles $(a,b,d):T\\to T'$, its third-arrow equation is $a[1]\\circ w=w'\\circ d$ by [def-weil-triangulated-category]. Shift it by $r$ and use naturality of the associator to obtain $a[r+1]\\circ w_r=w'_r\\circ d[r]$. Applying $Q_{\\mathcal C}$ gives $H^{r+1}_{\\mathcal C}(a)\\delta_T^r=\\delta_{T'}^rH^r_{\\mathcal C}(d)$. The same calculation applies in $\\mathcal D$ to $PT\\to PT'$: its third-arrow equation follows by applying $P$ and using naturality of $\\sigma_{-,1}$. Finally step 3 gives the commuting comparison faces at $a$ and $d$. Together with step 5 these are all the faces expressing naturality of the comparison square in a morphism of distinguished triangles.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.1.1 and Theorem 1.3.6, printed pp. 18, 31: triangle morphisms and the induced long exact sequence; explicit third-arrow calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-t-structure",
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "BBD Proposition 1.3.3(i), Theorem 1.3.6, and 1.3.16, printed pp. 29–31 and 36. The agent wrote the composite comparison and the full boundary/shift-associator calculation; this compatibility is not claimed as a separately printed theorem in BBD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact t exact functor between triangulated categories commutes with heart cohomology and the connecting maps in the long exact sequence of a distinguished triangle",
+   "results": "{\"t\": \"2026-10-22T04:34:14Z\", \"tool\": \"leanfinder\", \"query\": \"An exact t exact functor between triangulated categories commutes with heart cohomology and the connecting maps in the long exact sequence of a distinguished triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Functor.comp_homologySequenceδ\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.Functor.homologySequence_exact₂\", \"CategoryTheory.Functor.comp_homologySequenceδ_assoc\", \"CategoryTheory.Functor.homologySequence_exact₁\", \"CategoryTheory.Functor.homologySequence_exact₃\"], \"digest\": \"db2ed33184e77916\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ_naturality is naturality in triangles for one fixed functor; comp_homologySequenceδ states a zero composition, as the local source at line 198 shows. Neither constructs the canonical t-exact heart comparison or its compatibility with shifts. TStructure truncation isomorphisms alone do not state the boundary comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "eTrunc.*Iso|homology.*[Cc]omparison|homologySequence.*[Nn]at",
+   "results": "{\"t\": \"2026-10-22T04:34:19Z\", \"tool\": \"grep\", \"query\": \"eTrunc.*Iso|homology.*[Cc]omparison|homologySequence.*[Nn]at\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean\"], \"digest\": \"a2d41aed7dfc042b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ_naturality is naturality in triangles for one fixed functor; comp_homologySequenceδ states a zero composition, as the local source at line 198 shows. Neither constructs the canonical t-exact heart comparison or its compatibility with shifts. TStructure truncation isomorphisms alone do not state the boundary comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"homology\"",
+   "results": "{\"t\": \"2026-10-22T04:34:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"TStructure\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ_naturality is naturality in triangles for one fixed functor; comp_homologySequenceδ states a zero composition, as the local source at line 198 shows. Neither constructs the canonical t-exact heart comparison or its compatibility with shifts. TStructure truncation isomorphisms alone do not state the boundary comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A t exact triangulated functor commutes with the connecting morphisms in the long exact cohomology sequence for the hearts of t structures",
+   "results": "{\"t\": \"2026-10-22T04:34:20Z\", \"tool\": \"leansearch\", \"query\": \"A t exact triangulated functor commutes with the connecting morphisms in the long exact cohomology sequence for the hearts of t structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsTriangulated.mk\", \"CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ'\", \"CategoryTheory.Functor.IsTriangulated\", \"CategoryTheory.Functor.IsTriangulated.map_distinguished\", \"CategoryTheory.Functor.homologySequenceComposableArrows₅_exact\", \"CategoryTheory.Functor.homologySequenceδ_naturality\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ\"], \"digest\": \"da6e4d26a1b10a59\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ_naturality is naturality in triangles for one fixed functor; comp_homologySequenceδ states a zero composition, as the local source at line 198 shows. Neither constructs the canonical t-exact heart comparison or its compatibility with shifts. TStructure truncation isomorphisms alone do not state the boundary comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical cohomology isomorphism for a t exact functor is compatible with boundary maps of distinguished triangles",
+   "results": "{\"t\": \"2026-10-22T04:34:30Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical cohomology isomorphism for a t exact functor is compatible with boundary maps of distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁\", \"CategoryTheory.Functor.comp_homologySequenceδ\", \"DerivedCategory.triangleOfSESIso\", \"CategoryTheory.Functor.comp_homologySequenceδ_assoc\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso\", \"CochainComplex.mappingCone.mapTriangleIso\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₂\", \"CochainComplex.mappingCone.mapTrianglehIso\"], \"digest\": \"0bc608f389802fb7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ_naturality is naturality in triangles for one fixed functor; comp_homologySequenceδ states a zero composition, as the local source at line 198 shows. Neither constructs the canonical t-exact heart comparison or its compatibility with shifts. TStructure truncation isomorphisms alone do not state the boundary comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homologySequenceδ|homology.*[Cc]omparison|[Cc]omparison.*homology",
+   "results": "{\"t\": \"2026-10-22T04:51:27Z\", \"tool\": \"grep\", \"query\": \"homologySequenceδ|homology.*[Cc]omparison|[Cc]omparison.*homology\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/Yoneda.lean\", \"Mathlib/CategoryTheory/Triangulated/Yoneda.lean\", \"Mathlib/CategoryTheory/Triangulated/Yoneda.lean\"], \"digest\": \"6c35e4d3091e725c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ and its triangle naturality do not construct the canonical heart comparison for a t-exact functor; comp_homologySequenceδ is a zero-composition lemma. SpectralObject maps concern spectral objects, and short-complex homology comparisons concern a different construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologySequenceδ\", \"NatTrans\"",
+   "results": "{\"t\": \"2026-10-22T04:51:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"homologySequenceδ\\\", \\\"NatTrans\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ and its triangle naturality do not construct the canonical heart comparison for a t-exact functor; comp_homologySequenceδ is a zero-composition lemma. SpectralObject maps concern spectral objects, and short-complex homology comparisons concern a different construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t exact functor commutes with heart valued cohomology and with connecting morphisms of distinguished triangles",
+   "results": "{\"t\": \"2026-10-22T04:51:29Z\", \"tool\": \"leanfinder\", \"query\": \"A t exact functor commutes with heart valued cohomology and with connecting morphisms of distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.Functor.comp_homologySequenceδ\", \"CategoryTheory.Functor.homologySequence_exact₂\", \"CategoryTheory.Functor.IsHomological\", \"CategoryTheory.Functor.homologySequence_exact₁\"], \"digest\": \"dab3fc7bd0b7b22d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ and its triangle naturality do not construct the canonical heart comparison for a t-exact functor; comp_homologySequenceδ is a zero-composition lemma. SpectralObject maps concern spectral objects, and short-complex homology comparisons concern a different construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical cohomology isomorphisms of a t exact triangulated functor preserve the boundary maps in long exact sequences",
+   "results": "{\"t\": \"2026-10-22T04:51:37Z\", \"tool\": \"leansearch\", \"query\": \"Canonical cohomology isomorphisms of a t exact triangulated functor preserve the boundary maps in long exact sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.mapHomologyIso'\", \"CategoryTheory.Functor.IsTriangulated.mk\", \"CategoryTheory.Functor.homologySequence_exact₃\", \"CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ'\", \"CategoryTheory.ShortComplex.mapOpcyclesIso\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.ShortComplex.mapHomologyIso\", \"CochainComplex.mappingCone.mapTrianglehIso\"], \"digest\": \"5efa252fe20ab6d6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ and its triangle naturality do not construct the canonical heart comparison for a t-exact functor; comp_homologySequenceδ is a zero-composition lemma. SpectralObject maps concern spectral objects, and short-complex homology comparisons concern a different construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of connecting morphisms induced by a natural transformation of homological functors and compatible shift isomorphisms",
+   "results": "{\"t\": \"2026-10-22T04:51:39Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of connecting morphisms induced by a natural transformation of homological functors and compatible shift isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.homologySequenceδ_naturality\", \"CategoryTheory.Functor.homologySequenceδ_naturality_assoc\", \"CategoryTheory.NatTrans.mapHomologicalComplex_naturality\", \"CategoryTheory.Functor.comp_homologySequenceδ_assoc\", \"CategoryTheory.NatTrans.mapHomologicalComplex_naturality_assoc\", \"CategoryTheory.Functor.comp_homologySequenceδ\", \"CategoryTheory.Functor.homologySequenceδ_comp\", \"CategoryTheory.Functor.homologySequence_comp\"], \"digest\": \"bdc6364faa517a5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ and its triangle naturality do not construct the canonical heart comparison for a t-exact functor; comp_homologySequenceδ is a zero-composition lemma. SpectralObject maps concern spectral objects, and short-complex homology comparisons concern a different construction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsTExact|eTrunc.*Iso|homologySequenceδ",
+   "results": "{\"t\": \"2026-10-22T04:51:56Z\", \"tool\": \"grep\", \"query\": \"IsTExact|eTrunc.*Iso|homologySequenceδ\", \"sub\": \"CategoryTheory/Triangulated/TStructure\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\"], \"digest\": \"0762cf78b559a1fe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homologySequenceδ and its triangle naturality do not construct the canonical heart comparison for a t-exact functor; comp_homologySequenceδ is a zero-composition lemma. SpectralObject maps concern spectral objects, and short-complex homology comparisons concern a different construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-weil-shriek-coefficient-long-exact",
+  "date": "2026-10-22",
+  "group": "Q45"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Part 3: taking cohomology after compact support; compatibility of the underlying cohomology boundary with Frobenius pullback, without a triangulation on fixed pairs.",
+   "via": [
+    "lem-zl-weil-shriek-coefficient-long-exact"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-texact-cohomology-boundary-comparison",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Constructed the comparison from the existing natural truncation isomorphisms, wrote the shift-associator identity and the boundary square calculation, and proved naturality for triangle morphisms. Checked BBD and the exact cited statements; refreshed the item Mathlib searches.",
+  "blueprint": "lem-zl-morphism-open-closed-reduction, Part 3 (Coefficients), and unit sk-l-dl-general-excision: “Filtrations of the coefficient sheaf are handled by the corresponding long exact sequences.” This item supplies the generic underlying cohomology-boundary comparison used for Frobenius equivariance, without a triangulation on fixed pairs.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-texact-truncation-comparison",
+    "why": "Canonical natural truncation comparisons for an arbitrary t-exact functor are used as a generic tool. This unit concerns weight bounds and supplies no replacement construction of those comparisons."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "The general heart-valued cohomology convention and its long exact sequence are generic tools, used for the underlying category rather than a triangulation on Weil pairs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O4-b75983222",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-b75983222 (reviewer sub-agent of L); spot-checked: This is a split with 0 new nodes and an unchanged statement; I read all six steps in full and recomputed them. Step 1: e_M = τ≥0(α^-_{P,0,M})∘α^+_{P,0,τ≤0 M} has type P Q_C M → Q_D PM; the hypotheses of lem-pod-texact-truncation-comparison (bounded t-structures, exact P, both halves preserved in every degree) match the item's exactly. Step 2: naturality of e comes from the object-naturality of α^±. Step 3: c^r = Q(σ_{M,r})∘e_{M[r]}; naturality comes from step 2 at f[r] plus naturality of σ. Step 4: σ_{A,r+1}P(w_r) = v_r σ_{C,r}, recomputed from the CommShift add-coherence hypothesis. Step 5: the four-line boundary chain is correct. The boundary convention δ = H^0(shifted third arrow), with no rotation sign, matches Mathlib's homologySequenceδ and the citer weil-shriek-coefficient-long-exact. The heart lemma's (5) does not print this formula; I accept it as the definition of the item's phrase 'standard boundaries', stated explicitly in the step. Step 6: the naturality cube follows from TR3, naturality of σ_{-,1} and step 3. Edge cases tested: r ≤ 0, P = id, split triangle (w = 0), zero objects. Source: BBD 1.3.16–1.3.17 (printed p. 36) read in the local PDF; the source field correctly says the boundary compatibility is an agent-written formal consequence, not printed in BBD. No SGA source is used. A DAG grep for t-exact/boundary comparisons found no duplicate. I accept the two generic tool_uses (lem-pod-texact-truncation-comparison, lem-weil-heart-short-exact-triangles). There is no repair note for this item and it is on no dropped list. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.TExactCohomologyBoundaryComparison",
+  "declaration": "CategoryTheory.Triangulated.TStructure.texact_cohomology_boundary_comparison",
+  "declarations": [
+   "CategoryTheory.Triangulated.TStructure.texactHeartRestriction",
+   "CategoryTheory.Triangulated.TStructure.texactHomologyZeroComparison",
+   "CategoryTheory.Triangulated.TStructure.texactCohomologyComparison",
+   "CategoryTheory.Triangulated.TStructure.heartCohomologyBoundary",
+   "CategoryTheory.Triangulated.TStructure.texact_cohomology_boundary_comparison",
+   "CategoryTheory.Triangulated.TStructure.texact_cohomology_boundary_comparison_naturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/TExactCohomologyBoundaryComparison.lean",
+  "statement": "theorem texact_cohomology_boundary_comparison (_hC : tC.bounded = ⊤) (_hD : tD.bounded = ⊤) (T : Triangle C) (_hT : T ∈ distTriang C) (r : ℤ) : (texactHeartRestriction tC tD P).map (heartCohomologyBoundary tC T r) ≫ (texactCohomologyComparison tC tD P (r + 1)).hom.app T.obj₁ = (texactCohomologyComparison tC tD P r).hom.app T.obj₃ ≫ heartCohomologyBoundary tD (P.mapTriangle.obj T) r",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69e6d93c8",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: Pretriangulated+IsTriangulated, bounded tC/tD kept on both theorems, CommShift+IsTriangulated P, IsTExact for every n; no stronger assumption; 4 independent universes. Maps: P♥ is a full-subcategory lift; e = τ≥0(eTruncLTIso 1)∘(eTruncGEIso 0 on τ≤0), the α± characterized by lem-pod-texact-truncation-comparison, lifted via fullyFaithfulCancelRight; c^r = H0(commShiftIso r)∘e_{M[r]} as a NatIso. PT = P.mapTriangle with last arrow P(w)≫σ(A,1). δ = Mathlib homologySequenceδ with tautological shift sequence on homology₀ (no sign; matches node step 5 and the citer; no competing instance). Main equation correct for all r : ℤ. Naturality theorem gives the 4 cube faces of step 6; advisory: two faces follow from NatIso naturality, acceptable since the node clause is formal. Records: statement verbatim once, 6 declarations, stmt_deps unchanged, live node differs only by lean, docstrings carry source/blueprint and proof steps, only the two theorems are sorry, report sections present, no duplicate found. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261022T143628-L-1247175",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Triangulated.TStructure.texact_cohomology_boundary_comparison",
+   "CategoryTheory.Triangulated.TStructure.texact_cohomology_boundary_comparison_naturality"
+  ],
+  "sorry_after": []
+ }
+}

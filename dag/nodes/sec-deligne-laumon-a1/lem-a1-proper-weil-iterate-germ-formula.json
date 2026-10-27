@@ -1,0 +1,351 @@
+{
+ "id": "lem-a1-proper-weil-iterate-germ-formula",
+ "kind": "statement",
+ "title": "Iterated global Weil operators evaluated at moving geometric points",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ in an algebraic closure $\\Qlb$, and $\\Lambda\\in\\{E,\\Qlb\\}$ in the rational/common-stage coefficient categories [def-weil-constructible-heart]. Let $Y_0$ be proper of finite type over $k_0$ [def-weil-proper-morphism], put $Y=Y_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, and let $K=(M,\\theta)$ be a bounded constructible Weil complex [def-weil-weil-sheaf-complex]. Write $h=\\operatorname{Spec}(\\gamma)$, $g=\\operatorname{id}_{Y_0}\\times h$, $P=L g^*$, $P_r=L(g^r)^*$, $Q_r=L(h^r)^*$ [def-weil-frobenius-detailed, def-weil-derived-pullback-tensor-hom]. Use the specified scalar-localized integral pullback-composition comparisons [lem-pod-integral-pullback-composition]. Put $C=R\\Gamma_c(Y,-)$ [def-weil-ordinary-compact-cohomology] and $F=C(\\theta)\\circ\\tau_{c,M}$, with the specified compact transport and global geometric Frobenius [def-weil-frobenius-cohomology-transport, def-weil-global-geometric-frobenius].\n\nFor a $k$-point $z:s\\to Y$ let $e_z^M:C(M)\\to\\operatorname{Fib}_s(Lz^*M)$ be the canonical compact rational counit germ [def-a1-proper-sections-germ-and-moving-point, def-weil-finite-coefficient-point], and put $T(z)=gzh^{-1}$, $z_r=T^r(z)=g^rz h^{-r}$. For $r\\geq1$, the equality $g^rz=z_rh^r$ defines the composition comparison $b_{r,z,M}:Q_rLz_r^*M\\xrightarrow{\\sim}Lz^*P_rM$. Write $d_r:P_r\\xrightarrow{\\sim}P^r$ for the specified iterated comparison and define\n$$\\tau^{[r]}_{c,M}=C(d_{r,M}^{-1})\\circ\\tau_{c,P^{r-1}M}\\circ\\cdots\\circ\\tau_{c,M}.$$\nUse the iterated Weil map $\\theta^{[r]}:P_rM\\xrightarrow{\\sim}M$ and iterated point transport $I_N^{[r]}:\\operatorname{Fib}_s(N)\\to\\operatorname{Fib}_s(Q_rN)$ of [def-weil-local-frobenius-trace]. Then, as morphisms in the derived coefficient category,\n$$F^r=C(\\theta^{[r]})\\circ\\tau^{[r]}_{c,M},$$\n$$e_z^M\\circ F^r=B_{r,z}\\circ e_{z_r}^M,\\qquad B_{r,z}=\\operatorname{Fib}_s(Lz^*\\theta^{[r]})\\circ\\operatorname{Fib}_s(b_{r,z,M})\\circ I_{Lz_r^*M}^{[r]}.$$\nThe morphism $B_{r,z}$ is an isomorphism, natural for morphisms of Weil complexes. If $T^r(z)=z$, it is exactly the degree-$r$ local geometric-Frobenius operator with the return $g^rz=zh^r$ and the specified comparisons of [def-weil-local-frobenius-trace]. In particular, for a geometric lift of a closed point $x$ and $r=[\\kappa(x):k_0]$, whenever this return holds it is the closed-point local operator. The formulas are at the derived level before taking any cohomology. At $\\Qlb$ they are the scalar extensions of the same formulas at a common finite field stage. No invariant integral lattice, weight, semisimplicity, or finiteness of $Y_0\\to\\operatorname{Spec}k_0$ is assumed.\n\nThe functors $C$, $\\operatorname{Fib}_{z}$, contracted transports $\\tau^{[r]}$, moving-point identities, comparisons $b_{r,z,M}$ and finite-stage realizations are the specified constructions of [def-a1-proper-sections-semilinear-iterate-data]. At $\\Qlb$, the cohomology functor and its canonical source identification are those of [def-a1-common-stage-cohomology-realization]; the point Frobenius and coefficient inclusions and finite index fields are those of [def-weil-frobenius-point-transport, def-weil-algebraically-closed-coefficients, def-weil-finite-subextension-directed-set].",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3), p.150; (1.1.7), pp.150-151; (1.1.10)-(1.1.14), pp.151-153. Agent extraction of the explicit naturality induction and germ calculation in steps 4-6 of lem-a1-finite-weil-sections-decomposition, using the specified semilinear germ identity rather than asserting equality with an unspecified Frobenius transport."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-constructible-heart",
+  "def-weil-proper-morphism",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-global-geometric-frobenius",
+  "def-a1-proper-sections-germ-and-moving-point",
+  "def-weil-finite-coefficient-point",
+  "def-weil-local-frobenius-trace",
+  "def-a1-proper-sections-semilinear-iterate-data",
+  "def-a1-common-stage-cohomology-realization",
+  "def-weil-frobenius-point-transport",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-subextension-directed-set"
+ ],
+ "proof": [
+  {
+   "text": "Put $t=\\tau_{c,-}:C\\Rightarrow CP$, natural by [def-weil-frobenius-cohomology-transport]; properness includes separatedness, so its hypotheses hold. Apply [lem-trf-global-frobenius-iterate-formula] with $G=P$ and structure map $\\theta$. Writing $\\widehat\\theta_r=\\theta\\circ P(\\theta)\\circ\\cdots\\circ P^{r-1}(\\theta)$ and $\\widehat\\tau_r=t_{P^{r-1}M}\\circ\\cdots\\circ t_M$, it gives $F^r=C(\\widehat\\theta_r)\\widehat\\tau_r$. The iterate in [def-weil-local-frobenius-trace] is $\\theta^{[r]}=\\widehat\\theta_r d_{r,M}$: both are the same ordered list of pulled-back copies of $\\theta$, with brackets identified by the associative comparisons of [lem-pod-integral-pullback-composition] and their specified scalar localizations. Thus $C(\\widehat\\theta_r)=C(\\theta^{[r]})C(d_{r,M}^{-1})$, proving the first formula with exactly the stated $\\tau^{[r]}_{c,M}$.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport",
+    "lem-trf-global-frobenius-iterate-formula",
+    "def-weil-local-frobenius-trace",
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10), p.151, action of the Weil generator; (1.1.14), p.153, cohomology operator. Explicit categorical iteration."
+   }
+  },
+  {
+   "text": "The germ of [def-a1-proper-sections-germ-and-moving-point] is natural in the underlying complex, not only in Weil morphisms. Indeed write $R=Ra_{Y*}$ and $v_z^M=Lz^*(\\varepsilon_M)u_z(RM)^{-1}$, where $u_z:Lz^*La_Y^*\\cong\\mathrm{id}$. Naturality of the counit of [fix-prop-adjunctions] and of $u_z$ from [lem-pod-integral-pullback-composition] gives $Lz^*(f)v_z^M=v_z^N R(f)$ for $f:M\\to N$. Apply $\\operatorname{Fib}_s$ and the natural proper comparison of [lem-pod-proper-coincidence-frobenius]. With the scalar-localized germ specified in the definition this reads $e_z^N C(f)=\\operatorname{Fib}_s(Lz^*f)e_z^M$.",
+   "uses": [
+    "def-a1-proper-sections-germ-and-moving-point",
+    "fix-prop-adjunctions",
+    "lem-pod-integral-pullback-composition",
+    "lem-pod-proper-coincidence-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p.150, scalar localization; (1.1.10)-(1.1.14), pp.151-153, transport of fibres. Naturality of the specified counit germ."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-proper-sections-semilinear-germs] to $M$, at the same coefficient stage. Its properness, bounded constructibility, $k$-point and specified-comparison hypotheses are precisely ours. It gives $z_r=g^rzh^{-r}$ as a $k$-point and $e_z^{P_rM}\\tau^{[r]}_{c,M}=\\operatorname{Fib}_s(b_{r,z,M})I_{Lz_r^*M}^{[r]}e_{z_r}^M$. Use step 2 with $f=\\theta^{[r]}:P_rM\\to M$ and then step 1. The result is\n$$e_z^MF^r=\\operatorname{Fib}_s(Lz^*\\theta^{[r]})e_z^{P_rM}\\tau^{[r]}_{c,M}=B_{r,z}e_{z_r}^M.$$\nThe source of $B_{r,z}$ is $\\operatorname{Fib}_s(Lz_r^*M)$ and its target is $\\operatorname{Fib}_s(Lz^*M)$, so no fixed-point assertion is used here.",
+   "uses": [
+    "lem-a1-proper-sections-semilinear-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), pp.150-151, fibre transport; (1.1.10)-(1.1.14), pp.151-153. Substitution of the specified semilinear germ identity."
+   }
+  },
+  {
+   "text": "Each factor of $B_{r,z}$ is invertible. The pulled-back $\\theta^{[r]}$ is invertible because the Weil structure of [def-weil-weil-sheaf-complex] is an isomorphism and functors preserve its inverse. The comparison $b_{r,z,M}$ is an isomorphism by [lem-a1-proper-sections-semilinear-germs]. By [lem-weil-frobenius-cohomology-transport-iso](1) every one-step point transport is invertible; its finite composite, followed by the invertible composition comparison, is $I^{[r]}$. Composing the inverses in reverse order supplies the inverse of $B_{r,z}$.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-a1-proper-sections-semilinear-germs",
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10), p.151, Weil action by isomorphisms; (1.1.7), pp.150-151, point transport."
+   }
+  },
+  {
+   "text": "Let $f:(M,\\theta_M)\\to(N,\\theta_N)$ be a Weil morphism, so $f\\theta_M=\\theta_NP(f)$ by [def-weil-weil-sheaf-complex]. In the uncontracted iterates, induction gives $f\\widehat\\theta_{M,r}=\\widehat\\theta_{N,r}P^r(f)$: the case $r=1$ is this equation, and the successor follows by composing with $P^r(\\theta_M)$ and using $P^r(f\\theta_M)=P^r(\\theta_NP(f))$. Naturality of $d_r$ from [lem-pod-integral-pullback-composition] contracts this to $f\\theta_M^{[r]}=\\theta_N^{[r]}P_r(f)$. The same node makes $b_{r,z}$ natural. Each point transport is natural by [lem-weil-frobenius-point-transport-natural](2), so composing its $r$ naturality squares and the composition comparison gives naturality of $I^{[r]}$. Consequently, for $U_z=\\operatorname{Fib}_s(Lz^*f)$,\n$$U_zB_{r,z,M}=\\operatorname{Fib}_s(Lz^*\\theta_N^{[r]})\\operatorname{Fib}_s(Lz^*P_r(f))\\operatorname{Fib}_s(b_{r,z,M})I^{[r]}=B_{r,z,N}U_{z_r}.$$\nThis proves the required naturality, including noninvertible $f$.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-pod-integral-pullback-composition",
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10)-(1.1.13), pp.151-152, equivariant morphisms and fibre transport. Explicit naturality squares."
+   }
+  },
+  {
+   "text": "If $T^r(z)=z$, substitute this equality in $g^rz=z_rh^r$. It gives $g^rz=zh^r$, and the three factors defining $B_{r,z}$ are, in order, the iterated point transport, the specified comparison for this return, and the pulled-back $\\theta^{[r]}$. This is word for word the definition of the degree-$r$ local operator in [def-weil-local-frobenius-trace]. For a lift of a closed point $x$ and $r=[\\kappa(x):k_0]$, its closed-point clause uses the identical composite. Thus, whenever the stated return holds, this is the closed-point operator; no equality $g^rz=z$ of scheme morphisms is asserted. All equations so far are equations of derived morphisms, so taking cohomology is optional.",
+   "uses": [
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.8), p.151, and (1.1.13), p.152, degree-normalized local geometric Frobenius."
+   }
+  },
+  {
+   "text": "At $\\Qlb$, choose one common finite field stage for the underlying objects, $\\theta$, $\\theta^{-1}$ and their inverse equations, using [def-weil-algebraically-closed-coefficients]; the finite list of equations for a morphism $f$ can be included when proving naturality. There $\\theta$ is an actual rational isomorphism. All operations and the unit, counit and exchange comparisons commute with scalar extension by [lem-fix-operation-reduction], and point transport does so by [lem-weil-frobenius-point-transport-natural](2). The germ formula of [lem-a1-proper-sections-semilinear-germs] is already stated with these common-stage factors. Hence the equations above at that stage represent exactly the asserted $\\Qlb$ equations; equality and composition of their classes are defined at a common finite stage. No step reduces $\\theta$ to an invertible integral map. Neither weights, semisimplicity nor finiteness of the proper structure morphism has been used.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-fix-operation-reduction",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-a1-proper-sections-semilinear-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p.150, scalar localization and finite-field-stage colimit; (1.1.14), p.153, rational Weil structures need not preserve integral lattices."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-cohomology-transport",
+  "lem-trf-global-frobenius-iterate-formula",
+  "def-weil-local-frobenius-trace",
+  "lem-pod-integral-pullback-composition",
+  "def-a1-proper-sections-germ-and-moving-point",
+  "fix-prop-adjunctions",
+  "lem-pod-proper-coincidence-frobenius",
+  "lem-a1-proper-sections-semilinear-germs",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-fix-operation-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3), (1.1.7)-(1.1.14), printed pp.150-153; explicit assembly from the generic categorical iterate identity and the existing proper semilinear counit-germ theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|semilinear.*germ|frobenius.*cohomology|cohomology.*frobenius",
+   "results": "Actual logged hits: none. The hits are ring Frobenius, Witt-vector isocrystals or structure-sheaf residue evaluation; none concerns this derived rational Weil-complex counit-germ identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at a point intertwines iterated global Frobenius on compact cohomology with local geometric Frobenius via semilinear point transport",
+   "results": "Actual logged hits: LinearMap.iterateFrobenius, LinearMap.frobenius, iterateFrobenius_mul_apply, RingHom.map_iterate_frobenius, RingHom.iterate_map_frobenius, AlgebraicGeometry.Scheme.Γevaluation, MonoidHom.map_iterateFrobenius, RingHom.iterateFrobenius_comm. The hits are ring Frobenius, Witt-vector isocrystals or structure-sheaf residue evaluation; none concerns this derived rational Weil-complex counit-germ identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"NatTrans\", \"iterate\"",
+   "results": "Actual logged hits: none. The hits are ring Frobenius, Witt-vector isocrystals or structure-sheaf residue evaluation; none concerns this derived rational Weil-complex counit-germ identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a rational Weil complex on a proper scheme iterating global geometric Frobenius and evaluating at a moving point equals the iterated Weil stalk map and point transport",
+   "results": "Actual logged hits: coe_iterateFrobeniusEquiv, iterateFrobeniusEquiv_apply, iterateFrobeniusEquiv_one, iterateFrobeniusEquiv_add, iterateFrobeniusEquiv_add_apply, IsPurelyInseparable.iterateFrobeniusₛₗ, iterateFrobeniusEquiv_symm_add, iterateFrobeniusEquiv_symm_add_apply. The hits are ring Frobenius, Witt-vector isocrystals or structure-sheaf residue evaluation; none concerns this derived rational Weil-complex counit-germ identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of semilinear cohomology transport gives the power of a Weil operator and its germ formula at every Frobenius iterate",
+   "results": "Actual logged hits: IsPurelyInseparable.iterateFrobeniusₛₗ, PreTilt.coeff_iterate_frobeniusEquiv_symm, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.Isocrystal.frobenius, WittVector.Isocrystal.frob, WittVector.IsocrystalHom.frob_equivariant, IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base. The hits are ring Frobenius, Witt-vector isocrystals or structure-sheaf residue evaluation; none concerns this derived rational Weil-complex counit-germ identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated global Frobenius operator on compact cohomology equals the operator from the iterated Weil isomorphism and evaluation at a moving geometric point gives the local Frobenius germ",
+   "results": "Actual fresh logged hits: iterateFrobenius_one, iterateFrobeniusEquiv_one, Filter.Germ.valueₗ, iterateFrobeniusEquiv_eq_pow, iterateFrobenius_mul_apply, LinearMap.iterateFrobenius, iterateFrobenius_eq_pow, iterateFrobenius_def. Read the returned signatures. Ring Frobenius, Witt isocrystals, topological function germs and structure-sheaf residue evaluation do not state this rational constructible derived Weil-complex identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|WeilComplex|semilinear.*germ|germ.*Frobenius|Frobenius.*cohomology",
+   "results": "Actual fresh logged hits: none. Read the returned signatures. Ring Frobenius, Witt isocrystals, topological function germs and structure-sheaf residue evaluation do not state this rational constructible derived Weil-complex identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"iterate\"",
+   "results": "Actual fresh logged hits: none. Read the returned signatures. Ring Frobenius, Witt isocrystals, topological function germs and structure-sheaf residue evaluation do not state this rational constructible derived Weil-complex identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of semilinear compact cohomology transport intertwines powers of global geometric Frobenius with the iterated Weil stalk map at moving geometric points",
+   "results": "Actual fresh logged hits: IsPurelyInseparable.iterateFrobeniusₛₗ, AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc, AlgebraicGeometry.Scheme.Γevaluation_naturality, WittVector.IsocrystalHom.frob_equivariant, AlgebraicGeometry.Scheme.Γevaluation_naturality_apply, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.Isocrystal.frob. Read the returned signatures. Ring Frobenius, Witt isocrystals, topological function germs and structure-sheaf residue evaluation do not state this rational constructible derived Weil-complex identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a constructible rational Weil complex on a proper finite field scheme evaluating a power of its global geometric Frobenius at a geometric point is the iterated stalk isomorphism after transport from the moving point",
+   "results": "Actual fresh logged hits: coe_iterateFrobeniusEquiv, iterateFrobeniusEquiv_eq_pow, IsPurelyInseparable.iterateFrobeniusₛₗ, iterateFrobeniusEquiv_apply, iterateFrobeniusEquiv_one, iterateFrobeniusEquiv_add, iterateFrobeniusEquiv_symm, iterateFrobeniusEquiv_symm_add. Read the returned signatures. Ring Frobenius, Witt isocrystals, topological function germs and structure-sheaf residue evaluation do not state this rational constructible derived Weil-complex identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-weil-sections-decomposition",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-boundary-weights",
+   "place": "Proof, first displayed evaluation formula and its following assertion of local Frobenius stability: explicit global powers, moving-point block coefficients and their identification upon return.",
+   "via": [
+    "lem-a1-finite-weil-sections-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-proper-weil-iterate-germ-formula",
+  "worker": "stage1",
+  "summary": "Statement and specified comparisons retained. Reused the existing generic categorical iterate lemma and same-unit proper semilinear germ theorem; supplied counit-germ naturality, the exact contraction by d_r, invertibility, explicit Weil-morphism naturality, the returning-point identification and common-stage descent. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the corrected first evaluation display and local Frobenius stability in lem-a1-finite-boundary-weights, via steps 2-3 of lem-a1-finite-weil-sections-decomposition; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-global-frobenius-iterate-formula",
+    "why": "Purely categorical identity for a natural transformation C => CP and a P-algebra, independent of any trace-formula or cohomological hypothesis; the same-unit germ theorem has no Weil structure and does not supply this algebraic identity."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Only the ordinary pullback/direct-image counit and its naturality are used to derive naturality of the specified germ."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Specified associative natural pullback comparisons, already statement dependencies; no duality theorem is used."
+   },
+   {
+    "node": "lem-pod-proper-coincidence-frobenius",
+    "why": "The natural identity-compactification proper comparison matches compact germs with ordinary counit germs; no Poincare-duality conclusion is used."
+   },
+   {
+    "node": "lem-weil-frobenius-cohomology-transport-iso",
+    "why": "Only clause (1), invertibility of the point transport, is used for the explicitly given B factors."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality and finite coefficient-extension compatibility of the specified point transport are needed for B and its common-stage realization."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Only rationalization/common-stage compatibility of operations, units, counits and exchange transformations is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-global-frobenius-iterate-formula",
+  "fix-prop-adjunctions",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-proper-coincidence-frobenius",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-ed5d7c13c",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-ed5d7c13c (reviewer sub-agent of L); spot-checked: Read the item and all 13 cited statements in full, plus Deligne Weil II (1.1.3)/(1.1.7)-(1.1.14), pp.150-153. No new nodes and no fixes. Against the NY-delivered version, the statement, stmt_deps, source and blueprint are byte-identical; old searches are kept and 5 new ones added. The proof carries every argument of the parent's old steps 4-6 and adds naturality and the Qlb descent. Step 1: the generic G-algebra lemma with G=P, C=RΓ_c, t=τ_c; I checked θ^[r]=θ̂_r d_r from the recursion in def-weil-local-frobenius-trace (d_{n+1}=d_{n,PM}∘c) and the associativity in pod-integral-pullback-composition. Step 2: the germ is natural for every rational morphism; elementary. Step 3: the hypotheses of the semilinear-germs node hold, the composition and types check, and z_r is a k-point. Step 4: each factor of B is invertible (transport-iso(1) for ι); e_z is not claimed invertible. Step 5: I redid the induction and the three naturality squares; it covers non-invertible f. Step 6: B is literally F_x^(r), with the return g^r z = z h^r. Step 7: common-stage descent through fix-operation-reduction and point-transport-natural(2). Small cases: Spec F_q with λ=ℓ^-1, Spec F_{q^2} (swap of the two points), r=1,2, M=0, empty Y_0, P^1. No duplicate: trf-rational-global-frobenius-powers needs ctf reductions. Tool_uses are all generic and accepted. Batch 5: I recomputed the closure, cut at the trf/pod chapters and sk-thm-trace-transport. Adding the item adds only same-chapter a1 nodes and no trace-formula or Poincaré-duality node. trf-global-frobenius-iterate-formula is pure category theory, already reached via lem-zl-weil-constant-extension-frobenius. pod-proper-coincidence-frobenius is the RΓ_c≅RΓ transport compatibility, already reached via def-a1 and thm-weil-deligne-purity; it is not duality. semilinear-germs reaches no new trf/pod node. point-transport-natural is already widely cited and its trf reach is generic normalization. All four accepted. Advisory note: the item uses the def-a1 whole-system-counit germ and the semilinear-germs node phrases its germ via the fix-prop-adjunctions counit; I read them as the same counit, and def-a1 would benefit from an explicit cross-reference."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperWeilIterateGermFormula",
+  "declaration": "WeilConjectures.ProperWeilIterateGerms.commonStage",
+  "declarations": [
+   "WeilConjectures.ProperWeilIterateGerms.global",
+   "WeilConjectures.ProperWeilIterateGerms.contractedGlobal",
+   "WeilConjectures.ProperWeilIterateGerms.block",
+   "WeilConjectures.ProperWeilIterateGerms.rational",
+   "WeilConjectures.ProperWeilIterateGerms.global_eq",
+   "WeilConjectures.ProperWeilIterateGerms.modelSectionsComparison",
+   "WeilConjectures.ProperWeilIterateGerms.realizedFormulas",
+   "WeilConjectures.ProperWeilIterateGerms.commonStage"
+  ],
+  "file": "lean/Sheaf/Paper/ProperWeilIterateGermFormula.lean",
+  "statement": "theorem commonStage (z : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left) (hz : z ≫ (D.geometricFiber Y₀).hom = 𝟙 _) (n : ℕ) : (∀ (F : AlgebraicallyClosedCoefficients.Index l Ω) (A : sfWeilComplex D l Fact.out Y₀ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)), realizedFormulas D Y₀ l Ω F A z hz n) ∧ (∀ K : sfCommonStageWeilComplex D l Fact.out Y₀ Ω, ∃ (F : AlgebraicallyClosedCoefficients.Index l Ω) (A : sfWeilComplex D l Fact.out Y₀ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)), Nonempty (sfWeilStageObject D l Fact.out Y₀ Ω F A ≅ K)) ∧ (∀ (K L : sfCommonStageWeilComplex D l Fact.out Y₀ Ω) (f : K ⟶ L), ∃ (F : AlgebraicallyClosedCoefficients.Index l Ω) (A B : sfWeilComplex D l Fact.out Y₀ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)) (eA : sfWeilStageObject D l Fact.out Y₀ Ω F A ≅ K) (eB : sfWeilStageObject D l Fact.out Y₀ Ω F B ≅ L) (a : A ⟶ B), (GeneralAlgebraicallyClosedCoefficients.inclusion F).map a.hom.f ≫ (sfCommonStageWeilForget D l Fact.out Y₀ Ω).map eB.hom = (sfCommonStageWeilForget D l Fact.out Y₀ Ω).map eA.hom ≫ f.hom.f) ∧ (∀ (F : AlgebraicallyClosedCoefficients.Index l Ω) (A : sfWeilComplex D l Fact.out Y₀ (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)) (K : sfCommonStageWeilComplex D l Fact.out Y₀ Ω) (e : sfWeilStageObject D l Fact.out Y₀ Ω F A ≅ K), (modelSectionsComparison D Y₀ l Ω F A K e).hom ≫ (globalGeometricFrobeniusQbar D l Fact.out Y₀ Ω (Compactification.ofIsProper Y₀.hom) K true ^ (n + 1)) = (End.of ((ProperSemilinearGerms.stageRealization l Ω F).map (global D Y₀ l _ A)) ^ (n + 1)) ≫ (modelSectionsComparison D Y₀ l Ω F A K e).hom)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of H2 at ac681637b6b6: cite exact existing definition-owner nodes for every flagged interface. All declaration signatures and three theorem statements are unchanged; only statement-dependency import visibility changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-425c2b434",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN ac681637. Lean module byte-identical apart from 4 imports made public; mathematics re-read and correct (power formula, germ eq F^r≫e_z=e_{z_r}≫B, B factors and direction, IsIso, naturality for all Weil arrows, hfix return, closed-point HEq, Q̄ stage/model/arrow clauses, n=r-1, independent v). Statement = old_statement + ownership paragraph only; TeX cites = stmt_deps; proof_deps unchanged; sole citer finite-weil-sections-decomposition holds. New existing:true def-a1-proper-sections-semilinear-iterate-data (ProperSectionsSemilinearGerms: rationalSections/Fibre/Transport/Square, movingPoint_properties, stageRealization) and def-a1-common-stage-cohomology-realization (frobeniusCohomologyQbarFunctor pinned by ∃! on objects+representatives, SourceEq=object clause): signatures verbatim with live source, TeX matches code, no prior owner, deps on base, searches logged. Advisory: node 1 also cites lem-pod-integral-pullback-composition (same as item/landed germ owner); re-export bodies use theorem-module helpers (accepted pattern). No compile (no file changed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "NZ stage 2",
+  "old_statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ in an algebraic closure $\\Qlb$, and $\\Lambda\\in\\{E,\\Qlb\\}$ in the rational/common-stage coefficient categories [def-weil-constructible-heart]. Let $Y_0$ be proper of finite type over $k_0$ [def-weil-proper-morphism], put $Y=Y_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, and let $K=(M,\\theta)$ be a bounded constructible Weil complex [def-weil-weil-sheaf-complex]. Write $h=\\operatorname{Spec}(\\gamma)$, $g=\\operatorname{id}_{Y_0}\\times h$, $P=L g^*$, $P_r=L(g^r)^*$, $Q_r=L(h^r)^*$ [def-weil-frobenius-detailed, def-weil-derived-pullback-tensor-hom]. Use the specified scalar-localized integral pullback-composition comparisons [lem-pod-integral-pullback-composition]. Put $C=R\\Gamma_c(Y,-)$ [def-weil-ordinary-compact-cohomology] and $F=C(\\theta)\\circ\\tau_{c,M}$, with the specified compact transport and global geometric Frobenius [def-weil-frobenius-cohomology-transport, def-weil-global-geometric-frobenius].\n\nFor a $k$-point $z:s\\to Y$ let $e_z^M:C(M)\\to\\operatorname{Fib}_s(Lz^*M)$ be the canonical compact rational counit germ [def-a1-proper-sections-germ-and-moving-point, def-weil-finite-coefficient-point], and put $T(z)=gzh^{-1}$, $z_r=T^r(z)=g^rz h^{-r}$. For $r\\geq1$, the equality $g^rz=z_rh^r$ defines the composition comparison $b_{r,z,M}:Q_rLz_r^*M\\xrightarrow{\\sim}Lz^*P_rM$. Write $d_r:P_r\\xrightarrow{\\sim}P^r$ for the specified iterated comparison and define\n$$\\tau^{[r]}_{c,M}=C(d_{r,M}^{-1})\\circ\\tau_{c,P^{r-1}M}\\circ\\cdots\\circ\\tau_{c,M}.$$\nUse the iterated Weil map $\\theta^{[r]}:P_rM\\xrightarrow{\\sim}M$ and iterated point transport $I_N^{[r]}:\\operatorname{Fib}_s(N)\\to\\operatorname{Fib}_s(Q_rN)$ of [def-weil-local-frobenius-trace]. Then, as morphisms in the derived coefficient category,\n$$F^r=C(\\theta^{[r]})\\circ\\tau^{[r]}_{c,M},$$\n$$e_z^M\\circ F^r=B_{r,z}\\circ e_{z_r}^M,\\qquad B_{r,z}=\\operatorname{Fib}_s(Lz^*\\theta^{[r]})\\circ\\operatorname{Fib}_s(b_{r,z,M})\\circ I_{Lz_r^*M}^{[r]}.$$\nThe morphism $B_{r,z}$ is an isomorphism, natural for morphisms of Weil complexes. If $T^r(z)=z$, it is exactly the degree-$r$ local geometric-Frobenius operator with the return $g^rz=zh^r$ and the specified comparisons of [def-weil-local-frobenius-trace]. In particular, for a geometric lift of a closed point $x$ and $r=[\\kappa(x):k_0]$, whenever this return holds it is the closed-point local operator. The formulas are at the derived level before taking any cohomology. At $\\Qlb$ they are the scalar extensions of the same formulas at a common finite field stage. No invariant integral lattice, weight, semisimplicity, or finiteness of $Y_0\\to\\operatorname{Spec}k_0$ is assumed.",
+  "what": "H2 ownership fault at ac681637b6b6: the formal signature used specified semilinear iteration data and Qbar functor/source equality owned only by theorem nodes, and three existing definition owners were not cited. Add only explicit definition-owner citations; no mathematical hypothesis, object, formula or conclusion changes. This is the ownership repair expressly requested by the maintainer.",
+  "source": {
+   "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+   "place": "(1.1.3), p.150, finite coefficient fields and scalar localization; (1.1.7), pp.150-151, point transport; (1.1.10)-(1.1.14), pp.151-153, Weil pullback and cohomology transport. Explicit derived common-stage implementation of these constructions."
+  },
+  "citers": [
+   {
+    "id": "lem-a1-finite-weil-sections-decomposition",
+    "holds": true,
+    "note": "All equations, hypotheses and conclusions are unchanged; the added citations assign definition ownership to the same canonical constructions used by this citer."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-finite-field-fiber",
+   "def-weil-constructible-heart",
+   "def-weil-proper-morphism",
+   "def-weil-weil-sheaf-complex",
+   "def-weil-frobenius-detailed",
+   "def-weil-derived-pullback-tensor-hom",
+   "lem-pod-integral-pullback-composition",
+   "def-weil-ordinary-compact-cohomology",
+   "def-weil-frobenius-cohomology-transport",
+   "def-weil-global-geometric-frobenius",
+   "def-a1-proper-sections-germ-and-moving-point",
+   "def-weil-finite-coefficient-point",
+   "def-weil-local-frobenius-trace"
+  ]
+ }
+}

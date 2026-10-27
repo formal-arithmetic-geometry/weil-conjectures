@@ -39,125 +39,71 @@
  ],
  "proof": [
   {
-   "text": "First check the domain of full faithfulness. The closed immersion $c$ is finite, so its etale direct image is exact on abelian sheaves. It is also exact on constant-$A$ modules: kernels, images and cokernels are computed on underlying abelian sheaves, with their induced $A$-actions, and the underlying direct image is the same functor. Open extension $v_{e,!}$ is exact on modules. Hence $\\mathcal H^r(F_eL)=v_{e,!}c_{e,*}\\mathcal H^r(L)$, by applying these exact functors to kernels and images in a representative complex. Thus $F_eL\\in D^+(T_e,A)$. The counit-mate comparison for $c$ is a natural isomorphism on $L\\in D^+$; $c$ is quasi-compact and quasi-separated. The open comparison is a natural sheaf isomorphism, hence its degreewise application is a natural isomorphism on complexes and descends to their derived categories. Therefore $\\Delta_L$ is a natural isomorphism. The same argument applies with $c,v,L$ replaced by $i,u,L$, giving $E_eL\\in D^+$ and invertibility of $B_L$. On the pro-etale site, exactness of closed direct image is the closed case of locally closed extension coherence (take the open factor to be the identity), so the derived direct images in the canonical mate are the displayed termwise closed direct images.",
+   "text": "Use the closure-adjoint realization for exactness of $F_e,E_e$, preservation of lower bounds and the fixed conjugate identification $J_e\\cong s^\\times$. Thus $F_eL,E_eL,F_eH$ and $M$ are in $D^+$. The closure comparison square gives the natural isomorphisms $\\Delta,B$ with exactly the displayed closed-mate/open normalizations. These are the hypotheses on the forward functors needed below.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-sf-locally-closed-closure-adjoint-realization",
+    "lem-sf-locally-closed-closure-comparison-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second paragraph; old Step 1, using existing forward exactness and comparison statements."
+   }
+  },
+  {
+   "text": "Apply the counit/closure-unit calculus with the ordinary derived categories, full subcategories $\\mathcal A_0=D^+(S_e,A)$, $\\mathcal B_0=D^+(T_e,A)$, $\\mathcal Q_0=D^+(T_p,A)$, $C_S=\\nu_S^*$, $C_T=\\nu_T^*$, $U=U_T$ the bounded-below derived direct image on $\\mathcal Q_0$ and $\\eta$ its unit on $\\mathcal B_0$; $F_e,E_e$ preserve $D^+$ by Step 1. Site comparison supplies this unit, full faithfulness on $\\mathcal B_0$ and invertibility of $\\eta_{T,M}$. Its transported $E_e$ adjunction is precisely the fixed $s^\\times$ adjunction. The specified chosen-closure Hom formula is the $\\Phi$ of that calculus. Consequently there is a unique $h_0$, and both transposes are respectively $\\gamma_MC_S(g_0)$ and $\\rho_MC_S(g_0)$, with $\\rho_M$ invertible.",
+   "uses": [
+    "lem-sf-counit-closure-unit-transpose-calculus",
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-bounded-site-adjunction-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second paragraph; old Steps 2–5, applied with the supplied closure square and normalized counit."
+   }
+  },
+  {
+   "text": "Put $\\theta_M=\\rho_M\\gamma_M^{-1}$; the two formulas give $\\Phi(hq_p^{-1})=\\theta_M\\operatorname{adj}_p(h)$. Apply relative Hom witness transport with $F=F_p$, $E=E_p$, $C=C_S$, $J=J_p$ and $G=G_s$, on the full target class of $C_TM$ with the given bounds. The preceding calculation makes $\\theta$ natural in $M,L$. Full faithfulness at $S$ is site comparison. The specified relative Hom bijection is witness-independent and natural, and has the prescribed identity-witness value. Therefore the transport lemma identifies it, its inverse, and every defined unit and counit. The isomorphism $\\gamma_M:C_SH\\cong J_pC_TM$ supplies the counit witness.",
+   "uses": [
+    "lem-sf-relative-hom-witness-transport",
+    "thm-weil-pbc-site-comparison",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second paragraph; old Steps 6–7, without enlarging the admissible test class."
+   }
+  },
+  {
+   "text": "For a compatible identity-normalized factorization change $r_e,r_p$, the normalized extension identifications give $q\\prime_pr_p=q_p$. Identify $J_e$ and $J'_e$ with $s^\\times$ by the conjugates of $q_e,q'_e$, so the two etale adjunctions are transported from $E_e\\dashv s^\\times$ along $q_e,q'_e$. Normalized factorization transpose coherence first gives $q'_er_e=q_e$ (from its squares and the bounded-below faithfulness above, without using the adjunctions); hence the $F'_e$ adjunction is the one transported from $F_e\\dashv s^\\times$ along $r_e$, as that lemma requires. Apply its remaining conclusions. It gives the transformed lifts, $q\\prime_er_e=q_e$, unchanged closure arrows, $\\gamma\\prime=t\\gamma$, and $\\theta\\prime t=\\theta$, with identity and composition laws. This is the asserted naturality for precisely the factorization changes allowed in the statement.",
+   "uses": [
+    "lem-sf-normalized-factorization-transpose-coherence",
     "lem-sfb-locally-closed-extension-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero); sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact); the named comparison maps are those assumed in the item"
-   }
-  },
-  {
-   "text": "Given $h$, compose it with $\\Delta_L$ to obtain a morphism $C_TF_eL\\to C_TM$. Both $F_eL$ and $M$ are bounded below. Full faithfulness of $C_T$ gives exactly one $h_0:F_eL\\to M$ with $C_T(h_0)=h\\Delta_L$. Consequently $h=C_T(h_0)\\Delta_L^{-1}$.",
-   "uses": [
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099V (lemma-relative-comparison), bounded-below comparison unit; module-coefficient version is the cited node"
-   }
-  },
-  {
-   "text": "Put $g_0=\\operatorname{adj}_e(h_0)$. The inverse-transpose formula gives $h_0=\\epsilon^e_M F_e(g_0)$. Naturality of $\\Delta$ at $g_0:L\\to H$ gives $F_pC_S(g_0)\\Delta_L=\\Delta_H C_TF_e(g_0)$. The assumed counit equation therefore yields\n$$\\begin{aligned}\n\\epsilon^p_{C_TM}F_p(\\gamma_MC_S(g_0))\\Delta_L\n&=\\epsilon^p_{C_TM}F_p(\\gamma_M)\\Delta_H C_TF_e(g_0)\\\\\n&=C_T(\\epsilon^e_M)C_TF_e(g_0)=C_T(h_0)=h\\Delta_L.\n\\end{aligned}$$\nCancel $\\Delta_L$. The resulting equality says precisely that the inverse ambient transpose of $\\gamma_MC_S(g_0)$ is $h$. Since the transpose is a bijection, $\\operatorname{adj}_{F_p\\dashv J_p}(h)=\\gamma_MC_S(g_0)$.",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037 (definition-adjoint), ensuing unit/counit formulas and naturality"
-   }
-  },
-  {
-   "text": "Set $z=hq_{p,C_SL}^{-1}$ and $a=h_0q_{e,L}^{-1}:E_eL\\to M$. The assumed closure square says $q_{p,C_SL}^{-1}B_L=\\Delta_L C_T(q_{e,L}^{-1})$. Thus\n$$zB_L=h\\Delta_L C_T(q_{e,L}^{-1})=C_T(a).$$\nThe fixed conjugate identification $J_e\\cong s^\\times$ identifies the transpose of $a$ under $E_e\\dashv s^\\times$ with $g_0$: the conjugate is characterized by sending the transpose of $a$ to the transpose of $aq_{e,L}=h_0$. Equivalently its counit square is $\\epsilon^E_M E_e(g_0)q_{e,L}=\\epsilon^e_M F_e(g_0)=h_0$. This fixes the direction of the conjugate and does not choose a second adjunction structure.",
-   "uses": [
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints), counit square; Tag 0037 (definition-adjoint)"
-   }
-  },
-  {
-   "text": "Use the specified formula for $\\Phi$ at the closure compactification. By the preceding equality and naturality of the comparison unit,\n$$U_T(zB_L)\\eta_{T,E_eL}=U_TC_T(a)\\eta_{T,E_eL}=\\eta_{T,M}a.$$\nNaturality of the etale adjunction transpose in its target gives\n$$\\operatorname{adj}_{E_e\\dashv s^\\times}(\\eta_{T,M}a)\n=s^\\times(\\eta_{T,M})\\operatorname{adj}_{E_e\\dashv s^\\times}(a)\n=s^\\times(\\eta_{T,M})g_0.$$\nApply $C_S$ to obtain $\\Phi_{L,C_TM}(z)=\\rho_MC_S(g_0)$, as required. Only the displayed normalization of the cited transpose node is used here, not an extension of its Hom bijection to other test objects. The unit $\\eta_{T,M}$ is invertible since $M\\in D^+$; functors preserve isomorphisms, so $\\rho_M=C_Ss^\\times(\\eta_{T,M})$ is an isomorphism. In particular its target is bounded below, since its source $C_SH$ is.",
-   "uses": [
-    "lem-pur-bounded-site-adjunction-transpose",
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037 (definition-adjoint), naturality of transpose and of unit; Tag 0B65 (lemma-transformation-between-functors-and-adjoints); proetale.tex Tag 099V (lemma-relative-comparison)"
-   }
-  },
-  {
-   "text": "Since $\\gamma_M$ and $\\rho_M$ are isomorphisms, $\\theta_M=\\rho_M\\gamma_M^{-1}$ is an isomorphism, and the two formulas just proved give, for every $h$,\n$$\\theta_M\\operatorname{adj}_{F_p\\dashv J_p}(h)\n=\\Phi_{L,C_TM}(h q_{p,C_SL}^{-1}).$$\nThis identifies the actual Hom functions, including their inverses. A defined unit is the transpose of the identity on the left-adjoint object, and a defined counit is the inverse transpose of the identity on the right-adjoint object. Evaluating this equality or its inverse on those identities therefore identifies every unit and counit for which the indicated objects belong to the stated domains. In particular $J_pC_TM\\cong C_SH$ is an admissible test object, so the counit comparison at $C_TM$ is defined. This argument constructs no unit or counit outside these domains.",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037 (definition-adjoint), ensuing unit/counit formulas and naturality"
-   }
-  },
-  {
-   "text": "For a test object $K$ with a witness $\\alpha:C_SL\\xrightarrow{\\sim}K$, transport an arrow $F_pK\\to C_TM$ by precomposition with $F_p(\\alpha)$, apply the equality of Step 6, and postcompose the resulting source change with $\\alpha^{-1}$. This proves the same equality on $K$. For another witness $\\beta:C_SL'\\xrightarrow{\\sim}K$, full faithfulness of $C_S$ lifts $\\beta^{-1}\\alpha$ uniquely to an isomorphism $t:L\\to L'$ (lift its inverse too and use faithfulness on their composites). Naturality in $L$ then identifies the two transported formulas. The comparison-class Hom bijection is itself witness-independent by the cited class-adjunction statement, so this equality is with its specified Hom bijection, rather than a new choice. Naturality in $L$ follows from naturality of $\\Delta,q,\\Phi$ and the adjunction Hom functions; naturality in $M$ follows in addition from the assumed naturality of $\\gamma$ and that of $\\eta$.",
-   "uses": [
-    "thm-weil-pbc-site-comparison",
-    "thm-sf-ambient-adjoint-class",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037 (definition-adjoint), ensuing unit/counit formulas and naturality"
-   }
-  },
-  {
-   "text": "Finally let $r_\\tau:F_\\tau\\xrightarrow{\\sim}F'_\\tau$ be an identity-normalized change of factorization with $r_{p,C_SL}\\Delta_L=\\Delta'_L C_T(r_{e,L})$. For $h'=hr_{p,C_SL}^{-1}$ its etale lift is $h'_0=h_0r_{e,L}^{-1}$, by this equation and uniqueness in Step 2. Conjugation identifies their etale transposes. Let $t:J_p\\xrightarrow{\\sim}J'_p$ be the corresponding right-adjoint identification (the conjugate of $r_p^{-1}$). Its counit square gives $\\operatorname{adj}'_p(h')=t\\operatorname{adj}_p(h)$. Apply this to $h=\\epsilon^p_{C_TM}F_p(\\gamma_M):F_pC_SH\\to C_TM$, whose transpose is $\\gamma_M$ by Step 3 with $g_0=\\mathrm{id}_H$. Its transformed etale lift is the new etale counit under the conjugate identification, so Step 3 for the new factorization gives $\\gamma'_M=t\\gamma_M$, with the etale right-adjoint identification understood: both sides are the unique transpose of the same normalized counit. The normalized pro-etale closure maps satisfy $q\\prime_p r_p=q_p$. Combining this with the two closure squares and $r_p\\Delta=\\Delta\\prime C_T(r_e)$, then cancelling $B$ and using faithfulness of $C_T$, gives $q\\prime_e r_e=q_e$ as well. Therefore $h'(q'_{p,C_SL})^{-1}=h q_{p,C_SL}^{-1}$. Hence $\\theta'_M t=\\theta_M$ under the fixed closure identification. Identity and composition follow from the same equalities and functoriality of conjugation. This proves the asserted factorization naturality under exactly the compatibility stipulated in the item.",
-   "uses": [
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-sfb-locally-closed-extension-coherence",
-    "lem-sfb-etale-locally-closed-extension-comparison",
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints); identity-normalized extension identifications from the two cited nodes"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+    "place": "Second paragraph; old Step 8, with fixed chosen closure."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-finite",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sf-locally-closed-closure-adjoint-realization",
+  "lem-sf-locally-closed-closure-comparison-square",
+  "lem-sf-counit-closure-unit-transpose-calculus",
   "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "def-weil-pbc-adjunction-conjugate",
   "lem-pur-bounded-site-adjunction-transpose",
+  "lem-sf-relative-hom-witness-transport",
   "thm-sf-ambient-adjoint-class",
-  "lem-sfb-etale-locally-closed-extension-comparison"
+  "lem-sf-normalized-factorization-transpose-coherence",
+  "lem-sfb-locally-closed-extension-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-  "place": "Second proof paragraph, locally closed exceptional comparison: explicit categorical normalization of the two Hom transposes, using Stacks 0037, 0B65, 099V, 03QP and 03DJ as recorded per step."
+  "place": "Second paragraph, locally closed exceptional comparison; short assembly of the three new categorical arguments and existing geometric realization statements."
  },
  "mathlib_searches": [
   {
@@ -257,6 +203,34 @@
    "results": "8 hits: CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit, CategoryTheory.conjugateEquiv, CategoryTheory.conjugateIsoEquiv, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app. Actual output read; generic adjunction formulas and restriction do not state the scheme/site normalization.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally closed immersion relative adjunction transpose normalization through etale proetale comparison and the chosen closure compactification",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f]\\n  {U V : Y.AffineZariskiSite} (i : U ⟶ V),\\n  AlgebraicGeometry.IsOpenImmersion\\n    ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (Algebrai\", \"doc\": \"The composition of the opposite of the open subset functor, the right opposite of the normalization diagram, and the Spec functor yields an open immersion for morphisms in the affine Zariski site of a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n      (AlgebraicGeometry.Scheme.Hom.no\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization f)\\n      (AlgebraicGeometry.Scheme.Hom.fromNormalization f) =\\n    f\", \"doc\": \"The composition of the canonical morphism from a scheme $ X $ to the normalization of a morphism $ f: X \\\\to Y $ and the canonical morphism from the normalization to $ Y $ equals the original morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj ↑U).ι\\n      (AlgebraicGeometry.Scheme.Hom.toNormalization f) =\\n\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Functor.FullyFaithful",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleOrigin|[Cc]omparison.*[Tt]ranspose|[Tt]ranspose.*[Cc]omparison",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare ambient locally closed exceptional adjunction and chosen closure etale origin Hom bijections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.homEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"{F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) (X : C) (Y : D) : (F.obj X ⟶ Y) ≃ (X ⟶ G.obj Y)\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, this defines a natural bijection between morphism sets $ \\\\text{Hom}_{\\\\mathcal{D}}(F(X), Y) $ and $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_symm_apply\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \"{X : Scheme} {R : CommRingCatᵒᵖ} (f : X ⟶ Scheme.Spec.obj R) :\\n  (ΓSpec.adjunction.homEquiv X R).symm f = (locallyRingedSpaceAdjunction.homEquiv X.1 R).symm f.toLRSHom\", \"doc\": \"The inverse of the natural bijection in the Γ-Spec adjunction between morphisms from a scheme $X$ to $\\\\operatorname{Spec}(R)$ and ring homomorphisms from $R$ to $\\\\Gamma(X)$ coincides with the inverse \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isColocal_adj_counit_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Bousfield\", \"type\": \"(X : C) : isColocal (· ∈ Set.range G.obj) (adj.counit.app X)\", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}$, the counit component $\\\\epsilon_X$ of an adjunction between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is a colocal m\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \": (Spec R ⟶ X) ≃ Σ x, { f : X.presheaf.stalk x ⟶ R // IsLocalHom f.hom }\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, there is a bijection between morphisms from $\\\\operatorname{Spec}(R)$ to $X$ and pairs $(x, \\\\varphi)$, where $x$ is a point in $X$ and $\\\\varphi : \\\\mat\"}\n  {\"name\": \"CategoryTheory.unitCompPartialBijectiveAux\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Reflective\", \"type\": \"[Reflective i] (A : C) (B : D) : (A ⟶ i.obj B) ≃ (i.obj ((reflector i).obj A) ⟶ i.obj B)\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a reflective functor $i : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, there is a natural bijection between the hom-set $\\\\text{Hom}_{\\\\mathcal{C}}(A, i(B))$ and $\\\\t\"}\n  {\"name\": \"IsOpenMap.adjunctionNhds\", \"module\": \"Mathlib.Topology.Category.TopCat.OpenNhds\", \"type\": \"(h : IsOpenMap f) (x : X) : IsOpenMap.functorNhds h x ⊣ OpenNhds.map f x\", \"doc\": \"For an open continuous map $ f : X \\to Y $ between topological spaces, there is an adjunction between the functor assigning neighborhoods of $ x $ in $ X $ and the functor mapping neighborhoods of $ f(\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \"{X : LocallyRingedSpace} {R : Type u} [CommRing R] (f : Γ.rightOp.obj X ⟶ op (CommRingCat.of R)) (U) :\\n  StructureSheaf.toOpen R U.unop ≫ (locallyRingedSpaceAdjunction.homEquiv X (op <| CommRingCat.of R) f).c.app U =\\n    f.unop ≫ X.presheaf.map (homOfLE le_top).op\", \"doc\": \"For a locally ringed space $X$ and commutative ring $R$, the composition of the structure sheaf morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(U) \\\\to R$ with the component of the Γ-Spec adjunction hom\"}\n  {\"name\": \"CategoryTheory.Adjunction.Localization.η\", \"module\": \"Mathlib.CategoryTheory.Localization.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\eta: F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{D_2}$ constructed from the counit of the adjunction $\\\\epsilon: F \\\\circ G \\\\Rightarrow \\\\text{id}_{D_1}$ via whiskering with the local\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -281,47 +255,27 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sf-locally-closed-relative-transpose-normalization",
   "worker": "stage1",
-  "summary": "Q38 wrote eight explicit steps without new nodes: boundedness and invertibility of the forward comparison, unique etale lift, ambient counit computation, closure conjugation, comparison-unit computation, and the resulting units, counits, witness independence and factorization coherence. Statement unchanged.",
-  "blueprint": "Realizes the second paragraph of lem-weil-finite-duality-site-comparison.proof.md, the assertion that the locally closed exceptional inverse image commutes with comparison, by normalizing its ambient and chosen-closure relative transposes.",
+  "summary": "Q29 repairs the 6760-character split by adding three independent, self-contained statement-only categorical lemmas of comparable proof workload. Existing exactness and closure-square nodes supply old Step 1; the new lemmas carry old Steps 2–5, 6–7 and 8. Every old argument is retained verbatim with its allocation in report.md. Statement and Lean records unchanged.",
+  "blueprint": "Second paragraph of lem-weil-finite-duality-site-comparison.proof.md: locally closed exceptional comparison; new arguments are the explicit Hom/counit/closure-unit normalization, witnessed class extension, and factorization coherence.",
   "tool_uses": [
    {
-    "node": "lemma-weil-pbc-finite-direct-image-exact",
-    "why": "Used only as the stated generic exactness, comparison, or normalized-adjunction tool in the locally closed Hom calculation; it does not replace the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-extension-by-zero-exact",
-    "why": "Used only as the stated generic exactness, comparison, or normalized-adjunction tool in the locally closed Hom calculation; it does not replace the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "Used only as the stated generic exactness, comparison, or normalized-adjunction tool in the locally closed Hom calculation; it does not replace the unit route."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "Used only as the stated generic exactness, comparison, or normalized-adjunction tool in the locally closed Hom calculation; it does not replace the unit route."
-   },
-   {
     "node": "thm-weil-pbc-site-comparison",
-    "why": "Used only as the stated generic exactness, comparison, or normalized-adjunction tool in the locally closed Hom calculation; it does not replace the unit route."
+    "why": "Full faithfulness and comparison-unit invertibility on D+, needed for lifting Hom maps; generic site-comparison tool."
    },
    {
     "node": "lem-pur-bounded-site-adjunction-transpose",
-    "why": "Used only as the stated generic exactness, comparison, or normalized-adjunction tool in the locally closed Hom calculation; it does not replace the unit route."
+    "why": "Only the explicit chosen-compactification Hom formula, specialized to the fixed scheme-theoretic closure."
    },
    {
     "node": "thm-sf-ambient-adjoint-class",
-    "why": "Used only as the stated generic exactness, comparison, or normalized-adjunction tool in the locally closed Hom calculation; it does not replace the unit route."
+    "why": "Specified witness-independent relative Hom bijection, with its naturality and exact domain."
    },
    {
     "node": "lem-sfb-locally-closed-extension-coherence",
-    "why": "Used only as the stated generic exactness, comparison, or normalized-adjunction tool in the locally closed Hom calculation; it does not replace the unit route."
-   },
-   {
-    "node": "lem-sfb-etale-locally-closed-extension-comparison",
-    "why": "Used only as the stated generic exactness, comparison, or normalized-adjunction tool in the locally closed Hom calculation; it does not replace the unit route."
+    "why": "Identity-normalized pro-etale extension comparisons and their cocycle law, needed for q-prime r = q."
    }
   ]
  },
@@ -337,12 +291,12 @@
   "lem-sfb-etale-locally-closed-extension-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q38-3616f192b",
-  "group": "Q38",
+  "reviewer": "NT-cc-Q29-cb6e1062e",
+  "group": "Q29",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-3616f192b (reviewer sub-agent of L); spot-checked: Read the full item. The statement and stmt_deps are byte-identical to side-live, so nothing was weakened. Only proof, proof_deps, proof_origin, mathlib_searches, split_report and status changed, and there are no new nodes. The item is still unsplit on live and side-live; a parallel N7 delivery for the same item exists on the same base. There is no repair note, no node is on the dropped list, and there is no SGA citation. All 39 cited ids exist and none is merged; there is no cycle; uses equal proof_deps. Source: main-20261015 lem-weil-finite-duality-site-comparison.proof.md, second paragraph (the locally closed Rs^! commutes with nu^*); Stacks 0037 and 0B65 are named only in proof_origin. Step checks: (1) the finite, extension-by-zero and closed-immersion nodes give F_eL in D^+; the canonical-mate node needs c qcqs and A finite, which hold; the open comparison applied degreewise stays an isomorphism; the coherence node with v=id gives exactness of the pro-etale closed direct image on Noetherian T; the same argument gives B_L. (2) Full faithfulness of C_T on D^+ gives the unique h_0. (3) I re-derived the computation: naturality of Delta at g_0 plus the counit hypothesis give adj_p(h)=gamma C_S(g_0). (4) I checked the conjugate direction: tau=q_e gives tau^c adj_E(a)=adj_F(a q_e)=g_0, and zB=C_T(a). (5) The lem-pur Phi formula at the closure compactification (i closed hence proper, its B_{f,J} equal to the item's B_L), with eta naturality, gives rho_M C_S(g_0); rho_M is invertible since M is in D^+. (6) theta = rho gamma^{-1} identifies the bijections; units and counits only on defined domains. (7) Witness transport through naturality of q; witness independence is from thm-sf-ambient-adjoint-class (2). (8) I re-derived h'_0=h_0 r_e^{-1}, adj'(h r_p^{-1})=t adj(h), q'_p r_p=q_p from uniqueness of identity-normalized isomorphisms, and then q'_e r_e=q_e by cancelling B and using faithfulness of C_T, which gives theta' t = theta. Edge cases checked: identity immersion, open-only and closed-only immersions, L=0, empty S; rescaling gamma breaks the counit hypothesis. The nine declared tool_uses are generic exactness, comparison and adjunction black boxes and are accepted. Cosmetic only: Step 8 writes q\\prime and Delta\\prime where q' would be standard. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-cb6e1062e (reviewer sub-agent of L); spot-checked: Re-split note of 2026-10-22, released: the old 8-step proof of 6760 characters becomes a 4-step assembly, 2179 characters as delivered and 2658 after the fix. Statement and stmt_deps are byte-identical to side-live. The item and the new nodes are not on the dropped list, nothing cites SGA, there is no cycle and every cited id exists unmerged. Old Step 1 is carried by the existing reviewed nodes lem-sf-locally-closed-closure-adjoint-realization and lem-sf-locally-closed-closure-comparison-square (same unit, PASS 2026-10-21). I read both statements: they give exactness, D^+ preservation, J_e≅s^× by the conjugate of q_e, H∈D^+, the item's Δ and B as natural isomorphisms, and q_pΔ=BC_T(q_e). Old Steps 2–5, 6–7 and 8 become three new self-contained categorical nodes of comparable size; none restates the item and each cites only Mathlib leaves. I re-derived every displayed formula. A: the unique lift, adj_p(h)=γC_S(g_0) from naturality of Δ at g_0 plus the counit equation, zB=C_T(a), adj_E(a)=g_0, and Φ(z)=ρC_S(g_0) from naturality of η. B: b^α(hq^{-1})=θa_K(h) from naturality of q and a; witness independence, the inverse and the unit/counit evaluations follow. C: q'_e r_e=q_e by cancelling B and using faithfulness of C_T; adj'_p(hr_p^{-1})=t adj_p(h), with the conjugate direction checked against def-weil-pbc-adjunction-conjugate; γ'=tγ; θ't=θ. Source: main-20261015 lem-weil-finite-duality-site-comparison.proof.md, second paragraph; the categorical calculus is agent-written and marked so. Fault E1 (repaired): node A assumed an adjunction C_T⊣U on the whole unbounded categories, but thm-weil-pbc-site-comparison gives only the bounded-below ν^*⊣Rν_*. A now takes U:Q_0→B with natural η on B_0 and E_e(A_0)⊆B_0, which is all its proof uses, and item Step 2 names Q_0=D^+(T_p) and the bounded-below unit. Fault E5 (repaired): item Step 4 did not check node C's hypothesis that the F'_e adjunction is transported along r_e. Step 4 now derives it from q'_e r_e=q_e, which C proves without the adjunctions. Advisory: A's Φ clause is the abstract form of the last clause of lem-pur-bounded-site-adjunction-transpose, but A is not a duplicate. The four tool uses declared in split_report are already in the item's tool_uses and are accepted.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.LocallyClosedRelativeTransposeNormalization",
@@ -415,5 +369,17 @@
   "group": "Q21",
   "result": "pass",
   "note": "All node clauses matched to Lean and re-derived by hand (unique lift, both transpose formulas, theta = rho∘gamma⁻¹ invertibility, explicit Phi = boundedSiteTranspose at the scheme-theoretic closure, unit/counit evaluations, witness transport/independence, L/M naturality, factorization change with gamma' = gamma≫t). Delta and B use the same closed mate and open comparison. q's are identity-normalized and uniquely determined. s^× is realized as J_e via the node-specified conjugate adjE.ofNatIsoLeft qE; the compared pro-etale adjunction is built independently (closedUpperShriek), so no tautology. Records: item changed only in lean and stmt_deps (+def-pur-conventions, a landed and used def node, which the tool allows); 29 dep records identical to side-live; statement verbatim. No hollow defs, 2 sorry theorems with full proof docstrings, docstrings and line lengths ok, not dropped, not superseded. Advisories: fixed-scalar upstream closed-support/extension used instead of the intrinsic records (forced by the lem-pur interface); local witness transport instead of specifiedExceptionalHomEquiv (canonically equivalent); helpers duplicate theorem-owned sibling helpers; one tautological refactor conjunct; same-worker second reading. No file changed, so no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

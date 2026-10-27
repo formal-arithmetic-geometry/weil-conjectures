@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-filtered-condensed-counit-finite-formula",
+ "kind": "statement",
+ "title": "Finite-stage formula for the extended representing counit",
+ "statement": "Fix a prime $\\ell$, a field $k$ of positive prime characteristic different from $\\ell$, separated finite-type $k$-schemes $X,Y$, a $k$-morphism $f:X\\to Y$, and a compactification $c$ [def-weil-pbc-scheme-conventions, def-weil-compactifications-refinements]. Write $\\mathcal C_H(T)$ and $\\mathcal C_\\Omega(T)$ for the bounded constructible condensed module-object categories and scalar functors $T^T_{H,H'}$, $T^T_{H,\\Omega}$ of [prop-weil-pbc-qbar-condensed-two-colimit], with $\\Omega=\\overline{\\mathbf Q}_\\ell$ carrying the finite-subextension-valued condensed coefficient ring. Write $P_H$ and $P_\\Omega$ for the fixed compact-support composites [lem-pur-compact-support-condensed-realization]. The data structures and displayed equations are [def-pur-filtered-condensed-representing-pair-data]. Suppose $s$ is a canonical scalar comparison family, $E$ is a finite coefficient field and $d=(M,L,t,\\beta)$ is a supplied compatible representing pair at $E$: $t:P_E M\\to L$ and for each $H\\supset E$, natural bijections $\\beta_{H,C}:\\operatorname{Hom}(C,T^X_{E,H}M)\\simeq\\operatorname{Hom}(P_HC,T^Y_{E,H}L)$ given by the scalar-extended counit formula. Put $t_\\Omega=T^Y_{E,\\Omega}(t)\\circ s_{E,\\Omega,M}^{-1}$. For $H\\supset E$, $C\\in\\mathcal C_H(X)$ and $a:C\\to T^X_{E,H}M$, applying $P_\\Omega$ to $T^X_{H,\\Omega}(a)$ followed by the transitivity isomorphism to $T^X_{E,\\Omega}M$, and then composing with $t_\\Omega$, equals $s_{H,\\Omega,C}^{-1}$ followed by $T^Y_{H,\\Omega}(\\beta_{H,C}(a))$ and the transitivity isomorphism to $T^Y_{E,\\Omega}L$. This is equality of morphisms in $\\mathcal C_\\Omega(Y)$, with exactly the tensor-transitivity isomorphisms recorded in constructibleToPadicAlgClCompIso; it asserts no bijectivity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+  "place": "Filtered Hom-colimit display and final paragraph on descent of morphisms and relations; parent Steps 1--4."
+ },
+ "stmt_deps": [
+  "def-pur-filtered-condensed-representing-pair-data"
+ ],
+ "proof": [
+  {
+   "text": "substitute the finite counit formula Pair.IsCompatible into the right side.\nNaturality of the closure scalar comparison moves the scalar extension of the test\nmap to the left. The projection composition equation identifies the two successive\ninverse projection comparisons, followed by the tensor transitivity comparison,\nwith the single inverse comparison at E. The scalar-transitivity isomorphism on Y\nis natural in t. These two equalities give the displayed equation by associativity.\nThe IsCanonical equations transfer the original projection coherence through the\nfaithful constructible inclusions. For H=E the same composition equation applies;\nno identity scalar functor is treated as a definitional identity.",
+   "uses": [
+    "lem-pur-compact-support-condensed-realization",
+    "def-pur-condensed-compact-support-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-condensed-realization",
+  "def-pur-condensed-compact-support-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+  "place": "Filtered Hom-colimit display and final paragraph on descent of morphisms and relations; parent Steps 1--4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural Hom bijections determine isomorphism to a specified right adjoint",
+   "results": "8 hits including Adjunction.rightAdjointUniq, leftAdjointUniq, ofNatIsoRight and CoreHomEquiv.mk.inj.",
+   "date": "2026-10-25",
+   "verdict": "General adjunction facts handle the final transpose but do not supply finite-coefficient comparison or descent statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "12 hits including Adjunction.homEquiv, CoreHomEquiv and mkOfHomEquiv.",
+   "date": "2026-10-25",
+   "verdict": "These concern a supplied adjunction, not descent through the recorded coefficient categories."
+  },
+  {
+   "tool": "grep",
+   "query": "representableBy|homEquiv_eq",
+   "results": "25 hits, including Adjunction.representableBy and RepresentedBy. No coefficient descent theorem.",
+   "date": "2026-10-25",
+   "verdict": "No exact coefficient comparison/descent statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered descent of representing Hom bijections along finite coefficient scalar extensions",
+   "results": "8 hits: algHomEquivSigma, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv formulas, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, PresheafOfModules.restrictHomEquivOfIsLocallySurjective, AlgHom.extendScalars.",
+   "date": "2026-10-25",
+   "verdict": "No finite-coefficient constructible derived two-colimit descent result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FilteredCondensedRepresentingPair",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Filtered Hom-colimit display and final paragraph on descent of morphisms and relations; parent Steps 1--4.",
+   "via": [
+    "lem-pur-filtered-condensed-representing-pair",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FilteredCondensedCounitFiniteFormula",
+  "file": "lean/Sheaf/Paper/FilteredCondensedCounitFiniteFormula.lean",
+  "declaration": "WeilConjectures.FilteredCondensedRepresentingPair.counit_finite_formula",
+  "declarations": [
+   "WeilConjectures.FilteredCondensedRepresentingPair.counit_finite_formula"
+  ],
+  "statement": "theorem counit_finite_formula {s : ScalarComparisons l k c}\n    (hs : s.IsCanonical l k c) {E : PadicAlgCl.FiniteIntermediateField l}\n    (d : Pair l k c s E) (hd : d.IsCompatible l k c)\n    (H : PadicAlgCl.FiniteIntermediateField l) (h : E ≤ H)\n    (C : PadicSubfieldConstructible X.left l H)\n    (a : C ⟶ (constructibleExtendScalars X.left l h).obj d.M) :\n    (omegaSupport l k c).map\n        ((constructibleToPadicAlgCl X.left l H).map a ≫\n          (constructibleToPadicAlgClCompIso X.left l h).hom.app d.M) ≫\n        d.omegaCounit l k c =\n      (s.omega H).inv.app C ≫\n        (constructibleToPadicAlgCl Y.left l H).map (d.beta H h C a) ≫\n          (constructibleToPadicAlgClCompIso Y.left l h).hom.app d.L",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6d2d5",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100852-L-3631318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6d2d5",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100852-L-3631318",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone item file (verbatim move, tags only); item theorem statement vs original; 3 sorried split lemmas vs item's IsDescent/IsCanonical clauses (each implied, none a restatement); 5 direct importers compiled against delivered modules"
+ }
+}

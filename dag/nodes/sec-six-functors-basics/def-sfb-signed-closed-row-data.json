@@ -1,0 +1,109 @@
+{
+ "id": "def-sfb-signed-closed-row-data",
+ "kind": "definition",
+ "title": "Ordered closed families and unit-normalized signed augmented row data",
+ "statement": "Let $X,Z$ be schemes [def-pc-scheme], $i:Z\\to X$ a scheme morphism, and $A$ a sheaf of commutative rings on the small pro-etale site of $X$ [def-weil-pbc-proetale-site]. Use module sheaves [def-weil-sheaf-of-modules-category] and the actual closed restriction functors $E_j$, units $\\eta_j$, finite intersections, ordered terms $D_F^p$, signed differential matrices, and horizontal-first double complexes and totals of [def-sfb-finite-closed-row-constructions]. Use integer cochain complexes [def-weil-abstract-derived-category].\n\nAn ordered closed family over $i$ is a positive finite length $m$, objects $F_a\\to X$ of schemes over $X$, closed immersions $F_a\\to X$ [def-weil-closed-immersion], a nonempty set of factorizations of each through $i$, and quasi-compact complementary open immersions in $X$ [def-weil-open-immersion, def-weil-finite-type-morphism]. There is no covering condition.\n\nA signed row for such a family consists of the following specified data and equations (this is a structure, not an existence assertion). Each $E_i$ and $E_{F_s}$ is additive. There are natural transformations $r_{s,t}:E_{F_s}\\to E_{F_t}$ for all pairs of subsets, with $\\eta_{F_s}r_{s,t}=\\eta_{F_t}$ whenever $s\\subseteq t$ and $r_{s,t}r_{t,h}=r_{s,h}$ for $s\\subseteq t\\subseteq h$. For every nonempty $s$ there is $r_{Z,s}:E_i\\to E_{F_s}$ satisfying $\\eta_i r_{Z,s}=\\eta_{F_s}$ and $r_{Z,s}r_{s,t}=r_{Z,t}$ for nonempty $s\\subseteq t$. There is an additive row functor $R$ from module sheaves to integer cochain complexes and natural term isomorphisms $R^p\\simeq D_F^p$ for every natural $p$, identifying its differential with the given signed matrix. Its terms are zero for integer $p<0$ or $p\\geq m$. The augmentation $a:E_i\\to R^0$ has singleton components exactly $r_{Z,\\{a\\}}$. It is the degree-zero part of a specified chain augmentation $\\alpha:E_i[0]\\to R$, with degree-zero component the canonical single-object identification followed by $a$. Finally there is a natural total augmentation from $E_i$ applied termwise to $K$ into $\\operatorname{Tot}_R(K)$, whose degree-$n$ component is $a_{K^n}$ followed by the $(0,n)$ diagonal coproduct inclusion. No data are chosen from an existence theorem.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, for closed units only; signed construction is the agent deduction from the ordered alternating cochains of cohomology.tex, Tag 01FG, split from lem-sfb-closed-restriction-signed-refinements."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-finite-closed-row-constructions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite signed alternating complex of restriction functors and ordered refinement chain maps with sorting signs",
+   "results": "AlgebraicTopology.alternatingFaceMapComplex; alternatingCofaceMapComplex; ComplexShape.Embedding.restrictionFunctor; HomologicalComplex.restrictionMap; no unit-normalized finite strictly increasing closed-intersection complex or signed refinement system.",
+   "date": "2026-10-26",
+   "verdict": "The general simplicial complex does not identify the finite ordered terms or provide the sorting-sign refinement matrices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating finite ordered Cech cochain complex refinement maps sorting permutation signs repeated indices zero",
+   "results": "AlgebraicTopology.alternatingCofaceMapComplex, AlternatingCofaceMapComplex.obj and map, and ChainComplex.alternatingConst. Also Loogle query \"alternatingFaceMapComplex\" found the analogous simplicial constructions.",
+   "date": "2026-10-26",
+   "verdict": "No specialized closed-restriction row data or construction; no direct ordered refinement result."
+  },
+  {
+   "tool": "grep",
+   "query": "SignedClosed|finiteClosed|refin.*(alternat|[Cc]ech)|alternat.*refin",
+   "results": "The assigned module alone declares SignedClosedFamily, SignedClosedRow, and SignedClosedRefinementSystem. FiniteClosedRowConstructions provides terms and differential; FiniteClosedCoverResolution defines refinement matrices but its existence theorem assumes a cover. No match in WeilConjectures. Read Mathlib AlgebraicTopology/AlternatingFaceMapComplex and Algebra/Homology/TotalComplex; searched imported blueprint with blueprint_refs.py search \"signed closed\": zero matches.",
+   "date": "2026-10-26",
+   "verdict": "Reuse all existing finiteClosed definitions. Only relocate the existing data; split row existence from row refinement. Totalization is provided by Mathlib and proved in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedRestrictionSignedRefinements",
+  "date": "2026-10-26",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The existing family and row specifications in lem-sfb-closed-restriction-signed-refinements; needed to state its two separate construction steps without an import cycle.",
+   "via": [
+    "lem-sfb-closed-restriction-signed-refinements",
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedRestrictionSignedData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedRestrictionSignedData.lean",
+  "declaration": "AlgebraicGeometry.SignedClosedFamily",
+  "declarations": [
+   "AlgebraicGeometry.SignedClosedFamily",
+   "AlgebraicGeometry.SignedClosedRow"
+  ],
+  "statement": "structure SignedClosedFamily {X Z : Scheme.{u}} (i : Z ⟶ X)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0260",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T081218-L-1873471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0260",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T081218-L-1873471",
+  "kind": "interface",
+  "note": "independent cc review: the moved SignedClosedFamily/SignedClosedRow against the clone (identical bodies), SignedClosedRowMaps fields against SignedClosedRefinementSystem's row-level fields, finiteClosedRefinementMap's use of mixed against mixed_unit's domain, item node changes against the change record"
+ }
+}

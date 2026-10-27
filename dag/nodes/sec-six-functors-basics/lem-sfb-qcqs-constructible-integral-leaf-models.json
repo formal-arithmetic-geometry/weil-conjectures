@@ -1,0 +1,149 @@
+{
+ "id": "lem-sfb-qcqs-constructible-integral-leaf-models",
+ "kind": "statement",
+ "title": "Integral lisse leaf models on an actual qcqs open-closed tree",
+ "statement": "Fix a prime $\\ell$, a finite subextension $E$ of $\\overline{\\mathbf Q}_\\ell$, and a qcqs scheme $V$. Let $\\Lambda=\\underline E$ or the finite-subextension-valued condensed algebraic closure, with the canonical integral coefficient maps [sk-def-sfb-qlbar-condensed, def-weil-l-adic-coefficient-extension, sk-def-sfb-pulled-back-coefficients]. For every $\\Lambda_V$-module $M$ constructible with finite constant scalar models [sk-def-sfb-constructible], there is a finite qcqs open/closed tree rooted at $V$ [def-sfb-qcqs-open-closed-tree] and, at every leaf $W$, a finite field $F_W$ (equal to $E$ in the finite-field case), a lisse $\\mathcal O_{F_W,W}$-module $B_W$ [def-sfb-lisse-coefficient-module], and an isomorphism $\\Lambda_W\\otimes_{\\mathcal O_{F_W,W}}B_W\\cong p_W^*M$ using the actual leaf path morphism and canonical coefficient inclusion [sk-def-sfb-change-of-scalars, sk-def-sfb-module-pushforward-pullback]. Zero models on empty leaves are included. This is the sheaf-level integral-lattice refinement assertion; it asserts no derived generation or descent of connecting maps.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Finite refinement before and after the lattice construction; parent steps 2--3, and Stacks topology.tex lemma-constructible-partition-refined-by-stratification (09Y4)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-constructible",
+  "def-sfb-qcqs-open-closed-tree",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the constructible-integral-lattice-tree assertion to the constructible module M. Its initial finite refinement tree has qcqs vertices and lisse restrictions on every nonempty leaf.",
+   "uses": [
+    "lem-sfb-qcqs-constructible-integral-lattice-tree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each nonempty leaf apply the qcqs lisse-stratified-integral-lattice theorem. In the finite-field case take F=E. In the finite-valued closure case use its finite F, lisse model L and final scalar composite, which is an isomorphism from scalar extension of B_s to the restriction of M. Add constructibility to the finite locally closed partition to obtain Scheme.Stratification.",
+   "uses": [
+    "lem-sfb-qcqs-lisse-stratified-integral-lattices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Refine each supplied partition by the existing finite open/closed refinement construction. Pull B_s back along its actual factoring morphism; its lissity and scalar-extension isomorphism pull back by upperStarComp and pullIso. Empty tips have the zero integral module over E. Inductively replace tips of the original SchemeRefinementTree by the new QcqsOpenClosedTrees, retaining the old complementary qcqs splits. The Path.toRoot equations identify each leaf path with the original composite immersion; transport along associativity and identity. The leaf fields, pulled modules, lissity proofs and scalar isomorphisms assemble LeafModels.",
+   "uses": [
+    "lem-sfb-qcqs-constructible-integral-lattice-tree",
+    "def-sfb-qcqs-open-closed-tree",
+    "def-sfb-pull-iso",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qcqs-constructible-integral-lattice-tree",
+  "lem-sfb-qcqs-lisse-stratified-integral-lattices",
+  "def-sfb-qcqs-open-closed-tree",
+  "def-sfb-pull-iso",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+  "place": "Finite refinement before and after the lattice construction; parent steps 2--3, and Stacks topology.tex lemma-constructible-partition-refined-by-stratification (09Y4).",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible sheaf rational integral lattice finite stratification",
+   "results": "IsLocallyConstructible.isConstructible, SheafOfModules.IsFiniteType, isFinitePresentation and IsZLattice.mk; no pro-etale integral tree.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; compose the existing project refinement and lisse lattice declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible rational sheaf has integral lisse lattices on leaves of a finite open closed stratification tree",
+   "results": "LocalGeneratorsData.IsFiniteType, LocallyConstantModule.functor and generic finite presentation declarations; no match.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; compose the existing project refinement and lisse lattice declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Stratification",
+   "results": "Unknown identifier; no hits.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; compose the existing project refinement and lisse lattice declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*leaf|leaf.*integral|QcqsOpenClosedTree",
+   "results": "No Mathlib hits. Project has the two tree presentations and the lisse theorem; no direct assembly. Blueprint search integral leaf: zero matches.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; compose the existing project refinement and lisse lattice declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsRationalIntegralLocalizingGenerators",
+  "group": "K9",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms (2), rational generator devissage: sheaf-level integral lattice refinement on qcqs schemes.",
+   "via": [
+    "lem-sfb-qcqs-rational-integral-localizing-generators",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsConstructibleIntegralLeafModels",
+  "file": "lean/Sheaf/Paper/QcqsConstructibleIntegralLeafModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.qcqs_constructible_integral_leaf_models",
+  "statement": "theorem qcqs_constructible_integral_leaf_models\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V] :\n    (∀ M : LatticeTree.Modules (Profinite.continuousMapRingObj E) V,\n      IsConstantModelConstructible (Profinite.continuousMapRingObj E) V M →\n      ∃ t : QcqsOpenClosedTree V,\n        Nonempty (LatticeTree.LeafModels ℓ Unit (fun _ ↦ E)\n          (Profinite.continuousMapRingObj E)\n          (fun _ ↦ padicIntegersRingObjToContinuousMapRingObj ℓ E) t M)) ∧\n    (∀ M : LatticeTree.Modules (Profinite.padicAlgClRingObj ℓ) V,\n      IsConstantModelConstructible (Profinite.padicAlgClRingObj ℓ) V M →\n      ∃ t : QcqsOpenClosedTree V,\n        Nonempty (LatticeTree.LeafModels ℓ (PadicAlgCl.FiniteIntermediateField ℓ)\n          (fun F ↦ F) (Profinite.padicAlgClRingObj ℓ)\n          (fun F ↦ padicIntegersRingObjToContinuousMapRingObj ℓ F ≫\n            Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) t M))",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-175af",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T123243-L-1847781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-175af",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T123243-L-1847781",
+  "kind": "interface",
+  "note": "independent cc review: delivered QcqsRationalIntegralLocalizingGenerators + new QcqsConstructibleIntegralLeafModels/node against published olean (#check pp.fullNames: identical statements), node lem-sfb-qcqs-rational-integral-localizing-generators, unit realized lists and DAG reachability, existing lattice-tree/lisse-lattice statements"
+ }
+}

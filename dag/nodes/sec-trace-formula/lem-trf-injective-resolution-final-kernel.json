@@ -1,0 +1,247 @@
+{
+ "id": "lem-trf-injective-resolution-final-kernel",
+ "kind": "statement",
+ "title": "Ext vanishing makes the final kernel of an injective resolution injective",
+ "statement": "Let $R$ be a commutative ring and $N$ an $R$-module, in a common universe. Let $I^\\bullet$ be an integer-indexed cochain complex and $\\varepsilon:N\\to I^0$ an $R$-linear map such that $I^j=0$ for $j<0$, every $I^j$ is injective, and $0\\to N\\xrightarrow{\\varepsilon}I^0\\xrightarrow{\\partial^0}I^1\\to\\cdots$ is exact [def-sp-injective-resolutions, def-weil-abstract-derived-category]. Fix an integer $d\\geq0$ and put $J=\\ker(\\partial^d:I^d\\to I^{d+1})$. Suppose that $\\operatorname{Ext}^{d+1}_R(R/T,N)=0$ for every ideal $T\\subseteq R$, with Ext defined in [def-pc-ext]. Then $J$ is an injective $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1), final-kernel injectivity and truncation."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "Work in the abelian category $\\operatorname{Mod}(R)$, whose monomorphisms are the injective linear maps by [lem-weil-pbc-ring-modules-enough-injectives]. Fix an ideal $T\\subseteq R$ and a linear map $f:T\\to J$, and write $\\iota:J\\hookrightarrow I^d$ for the kernel inclusion. Since $I^d$ is injective, the extension property in [def-sp-injective-resolutions], applied to $T\\hookrightarrow R$ and $\\iota f$, gives $a:R\\to I^d$ with $a|_T=\\iota f$.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1), final-kernel injectivity; expanded by the ideal-extension test of Tag 0AVF, lemma-characterize-injective-bis."
+   }
+  },
+  {
+   "text": "Let $q:R\\twoheadrightarrow R/T$ be the quotient map. Because $\\partial^d a(t)=\\partial^d\\iota f(t)=0$ for $t\\in T$, the formula $\\alpha(r+T)=\\partial^d a(r)$ defines a well-defined linear map $\\alpha:R/T\\to I^{d+1}$ with $\\alpha q=\\partial^d a$. It is a cocycle: for every $r\\in R$, $\\partial^{d+1}\\alpha(r+T)=\\partial^{d+1}\\partial^d a(r)=0$ by the cochain-complex identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1), final-kernel injectivity; expanded by the ideal-extension test of Tag 0AVF, lemma-characterize-injective-bis."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ext-via-injective-resolution] to the given augmented resolution of $N$, with first argument $R/T$ and degree $d+1>0$. Its hypotheses hold because the given complex is nonnegative, degreewise injective, and augmented exact, in the abelian module category of step 1. The assumed vanishing of $\\operatorname{Ext}^{d+1}_R(R/T,N)$ makes $H^{d+1}(\\operatorname{Hom}_R(R/T,I^\\bullet))$ zero. The explicit cocycle-modulo-boundaries formula in the cited statement therefore supplies $b:R/T\\to I^d$ satisfying $\\partial^d b=\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XR, lemma-compute-ext-resolutions, (1), for the two modules in degree zero; cochain homotopies identify boundaries."
+   }
+  },
+  {
+   "text": "Put $h=a-bq:R\\to I^d$. Then $\\partial^d h=\\partial^d a-(\\partial^d b)q=\\alpha q-\\alpha q=0$, so $\\widetilde f(r)=h(r)$, regarded as an element of the kernel $J$, is linear. For $t\\in T$, $q(t)=0$ gives $h(t)=a(t)=\\iota f(t)$, hence $\\widetilde f|_T=f$. This constructs an extension to $R$ of the arbitrary map $f:T\\to J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1), final-kernel injectivity; expanded by the ideal-extension test of Tag 0AVF, lemma-characterize-injective-bis."
+   }
+  },
+  {
+   "text": "Every linear map from every ideal of $R$ into $J$ thus extends to $R$. Apply [lem-sf-baer-criterion] with $A=R$ and this module $J$: its ideal-extension condition implies that $J$ is injective. The common-universe hypothesis is exactly the one in that criterion.",
+   "uses": [
+    "lem-sf-baer-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVF, lemma-characterize-injective-bis, (3) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-sf-baer-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A5T, lemma-injective-amplitude, final-kernel step of (3) implies (1): explicit cocycle correction written by Q153 using derived.tex Tag 06XR and more-algebra.tex Tag 0AVF, rather than leaving dimension shifting implicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If Ext to a module vanishes in degree d+1 for every quotient of the ring by an ideal, then the degree d kernel in an injective resolution is injective",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.injective', 'CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex', 'CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex', 'CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex', 'CochainComplex.cm5b.instInjectiveXIntI', 'CategoryTheory.HasInjectiveDimensionLT.mk', 'CategoryTheory.InjectiveResolution.extMk_eq_zero_iff', \"CategoryTheory.HasInjectiveDimensionLT.mk'\"]; subdirectory=; note=; digest=0e8fc97e042beeaf",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext cocycle/boundary formulas and short-exact dimension shifting are ingredients, but do not state injectivity of the degree-d kernel of an arbitrary resolution from tests only on ideal quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*(kernel|cycles)|hasInjectiveDimension.*(iff|syzygy)|syzygy.*injective",
+   "results": "25 hits; top=['Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean', 'Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean', 'Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean', 'Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean', 'Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean', 'Mathlib/Algebra/Group/Subgroup/Ker.lean', 'Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean', 'Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean']; subdirectory=; note=; digest=8897e0e13bb7fdd2",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext cocycle/boundary formulas and short-exact dimension shifting are ingredients, but do not state injectivity of the degree-d kernel of an arbitrary resolution from tests only on ideal quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasInjectiveDimensionLE, CategoryTheory.InjectiveResolution",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext cocycle/boundary formulas and short-exact dimension shifting are ingredients, but do not state injectivity of the degree-d kernel of an arbitrary resolution from tests only on ideal quotients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an injective resolution of a module, vanishing Ext in degree n+1 implies the kernel in degree n is injective",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.of', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", 'CategoryTheory.HasInjectiveDimensionLT.subsingleton', 'CategoryTheory.InjectiveResolution.self', 'CategoryTheory.InjectiveResolution.of_def', 'CategoryTheory.InjectiveResolution', 'CategoryTheory.InjectiveResolution.ofCocomplex', 'CategoryTheory.HasInjectiveDimensionLT.mk']; subdirectory=; note=; digest=e2d5b2d79d59948d",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext cocycle/boundary formulas and short-exact dimension shifting are ingredients, but do not state injectivity of the degree-d kernel of an arbitrary resolution from tests only on ideal quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "cycles|syzygy|resolution|hasInjectiveDimensionLT_X",
+   "results": "20 hits; top=['Mathlib/CategoryTheory/Abelian/Injective/Ext.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Ext.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Ext.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Ext.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Ext.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean', 'Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean']; subdirectory=CategoryTheory/Abelian/Injective; note=; digest=6cc8224fa33d2130",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext cocycle/boundary formulas and short-exact dimension shifting are ingredients, but do not state injectivity of the degree-d kernel of an arbitrary resolution from tests only on ideal quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*(kernel|cycles)|hasInjectiveDimensionLE_of_quotients|extMk_eq_zero_iff",
+   "results": "25 hits; top=['Mathlib/Algebra/Group/Subgroup/Ker.lean', 'Mathlib/Algebra/Group/Hom/Basic.lean', 'Mathlib/Algebra/Group/Hom/Basic.lean', 'Mathlib/RingTheory/Congruence/Hom.lean', 'Mathlib/RingTheory/Congruence/Hom.lean', 'Mathlib/Data/Setoid/Basic.lean', 'Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree.lean', 'Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree.lean']; subdirectory=; note=; digest=92e59fa41e0c85ce",
+   "date": "2026-10-23",
+   "verdict": "no match: resolution term injectivity and Ext-defined injective-dimension criteria do not identify the kernel of an arbitrary resolution from ideal-quotient tests. The Ext cocycle-boundary lemma and Baer criterion are existing DAG leaves, used as ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective resolution has injective nth cycles if Ext n+1 from all ideal quotients vanishes",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.self', 'CategoryTheory.InjectiveResolution.of', 'CategoryTheory.InjectiveResolution', \"CategoryTheory.HasInjectiveDimensionLT.mk'\", 'CategoryTheory.HasInjectiveDimensionLT.mk', 'CategoryTheory.injectiveResolution', 'CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex', 'CategoryTheory.InjectiveResolution.instHasInjectiveResolutions']; subdirectory=; note=; digest=0555398014cf8f07",
+   "date": "2026-10-23",
+   "verdict": "no match: resolution term injectivity and Ext-defined injective-dimension criteria do not identify the kernel of an arbitrary resolution from ideal-quotient tests. The Ext cocycle-boundary lemma and Baer criterion are existing DAG leaves, used as ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution, CategoryTheory.Injective",
+   "results": "4 hits; top=['CategoryTheory.InjectiveResolution.self', 'CategoryTheory.InjectiveResolution.injective', 'CategoryTheory.InjectiveResolution.mk', 'CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex']; subdirectory=; note=; digest=ce2443e26f6c8aec",
+   "date": "2026-10-23",
+   "verdict": "no match: resolution term injectivity and Ext-defined injective-dimension criteria do not identify the kernel of an arbitrary resolution from ideal-quotient tests. The Ext cocycle-boundary lemma and Baer criterion are existing DAG leaves, used as ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree d kernel in an injective module resolution is injective if Ext d+1 vanishes for every ideal quotient of the ring",
+   "results": "8 hits; top=[\"CategoryTheory.HasInjectiveDimensionLT.mk'\", 'CategoryTheory.HasInjectiveDimensionLT.mk', 'CategoryTheory.HasInjectiveDimensionLT', 'CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex', 'CategoryTheory.InjectiveResolution.injective', 'CategoryTheory.hasInjectiveDimensionLT_iff', 'CategoryTheory.HasInjectiveDimensionLE', 'CochainComplex.cm5b.instInjectiveXIntI']; subdirectory=; note=; digest=6a17e8bc2be6c1b0",
+   "date": "2026-10-23",
+   "verdict": "no match: resolution term injectivity and Ext-defined injective-dimension criteria do not identify the kernel of an arbitrary resolution from ideal-quotient tests. The Ext cocycle-boundary lemma and Baer criterion are existing DAG leaves, used as ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "cycles|syzygy|extMk_eq_zero_iff|hasInjectiveDimensionLE_of_quotients",
+   "results": "1 hits; top=['Mathlib/CategoryTheory/Abelian/Injective/Ext.lean']; subdirectory=CategoryTheory/Abelian/Injective; note=; digest=41fa21ee7deec88a",
+   "date": "2026-10-23",
+   "verdict": "no match: resolution term injectivity and Ext-defined injective-dimension criteria do not identify the kernel of an arbitrary resolution from ideal-quotient tests. The Ext cocycle-boundary lemma and Baer criterion are existing DAG leaves, used as ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Baer injectivity criterion for higher cosyzygies using vanishing Ext from cyclic modules",
+   "results": "8 hits; top=['CategoryTheory.injective_iff_subsingleton_ext_one', 'CategoryTheory.hasInjectiveDimensionLT_iff', 'CategoryTheory.HasInjectiveDimensionLT.mk', \"CategoryTheory.HasInjectiveDimensionLT.mk'\", 'CategoryTheory.HasInjectiveDimensionLT', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", 'CategoryTheory.HasInjectiveDimensionLE', 'isZero_Ext_succ_of_projective']; subdirectory=; note=; digest=813e05e4ec87c688",
+   "date": "2026-10-23",
+   "verdict": "no match: resolution term injectivity and Ext-defined injective-dimension criteria do not identify the kernel of an arbitrary resolution from ideal-quotient tests. The Ext cocycle-boundary lemma and Baer criterion are existing DAG leaves, used as ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-regular-local-bounded-injective-resolution",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Existence over a regular local Cohen presentation, in the proof of dualizing.tex Tag 0BFR case (2). Re-split of its regular-local algebra input: old proof steps 4--5: the cocycle correction in the Baer ideal-extension test, followed by Baer's criterion.",
+   "via": [
+    "lem-trf-regular-local-bounded-injective-resolution",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-injective-resolution-final-kernel",
+  "worker": "stage1",
+  "summary": "Q153: statement and statement dependencies unchanged. Proved final-kernel injectivity by extending an ideal map into I^d and correcting it by a boundary in Hom(R/T,I). Reused the existing module-category, Ext-computation and Baer nodes, with no new nodes. Read Stacks 0A5T, 06XR and 0AVF and the statements of all cited nodes. Checked d=0, the endpoint ideals, zero module and zero ring. Recorded six genuine current Mathlib searches after a second phrasing; no exact project declaration or Mathlib specialization states the entire item.",
+  "blueprint": "Auxiliary regular-local bounded-injective-resolution input in the inherited ancestry of lem-trf-local-term-locality, proof (1)--(2); realizes the cocycle correction and Baer ideal-extension test named in this item's blueprint.from.place. Current latest blueprint proof read; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-modules-enough-injectives",
+    "why": "Only the generic abelian module-category and monomorphism description are used; the trace-formula unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ext-via-injective-resolution",
+    "why": "Computes the given Ext vanishing as the cocycle-boundary quotient for this exact resolution; generic homological tool already a Mathlib leaf."
+   },
+   {
+    "node": "lem-sf-baer-criterion",
+    "why": "Turns the explicit ideal-extension construction into injectivity; generic module-theoretic tool already a Mathlib leaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-sf-baer-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-c5aa252a9",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-c5aa252a9 (reviewer sub-agent of L); spot-checked: Shape: one commit touching only the item and the report; no new nodes. Diffed against the Q119 ec37214b snapshot: statement, stmt_deps, source and blueprint are byte-identical; only proof/proof_deps/proof_origin/status/split_report/searches changed. There is no repair note for the item; it is the child of the re-split of the PASSed parent regular-local-bounded-injective-resolution (old steps 4-5). Statement checked against Stacks more-algebra 0A5T (l.17530, proof of (3)=>(1): J=Ker(I^b->I^{b+1})) and 0AVF (l.13692, Baer); tags checked against tags/tags. Proof read in full and correct. (1) T into R is a monomorphism by ring-modules-enough-injectives (mono_iff_injective), and I^d injective by def-sp-injective-resolutions, so iota f extends to a. (2) Elementary: alpha(r+T)=del a(r) is well defined since del iota f=0, and del alpha=0. (3) ext-via-injective-resolution has the same augmented-exact nonnegative injective resolution and explicit cocycle/coboundary H^i; with M=R/T and i=d+1>=1, Ext vanishing gives b with del b=alpha (derived.tex 06XR l.8682). (4) Elementary: h=a-bq has del h=0 and h|_T=iota f. (5) lem-sf-baer-criterion (Module.Baer.iff_injective; commutative ring, common universe, no finiteness) applies to J inside I^d in Mod(R). proof_deps equals the union of uses; proof_origin agent is correct; no SGA. Edge cases: d=0 (J=N, the Ext^1 Baer test), T=0, T=R, N=0 and the zero ring all consistent. Duplicate search (rg -L for 0A5T/injective-amplitude/cosyzygy/injective dimension/R/T Ext) found no node stating this; same_as [] stands. Accepted tool_uses: ring-modules-enough-injectives, ext-via-injective-resolution and sf-baer-criterion, all generic Mathlib leaves. Searches plausible (injective_iff_subsingleton_ext_one and HasInjectiveDimensionLT.mk are not the kernel statement); the search log itself could not be checked here."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InjectiveResolutionFinalKernel",
+  "declaration": "ModuleCat.injective_kernel_of_ext_ideal_quotient_eq_zero",
+  "file": "lean/Sheaf/RingTheory/InjectiveResolutionFinalKernel.lean",
+  "statement": "theorem injective_kernel_of_ext_ideal_quotient_eq_zero (R : Type u) [CommRing R] (N : ModuleCat.{u} R) (I : CochainComplex (ModuleCat.{u} R) ℤ) (ε : N ⟶ I.X 0) (hneg : ∀ j : ℤ, j < 0 → IsZero (I.X j)) (hinj : ∀ j : ℤ, Injective (I.X j)) (hε : Function.Injective ε.hom) (hexact₀ : Function.Exact ε.hom (I.d 0 1).hom) (hexact : ∀ j : ℤ, 0 < j → Function.Exact (I.d (j - 1) j).hom (I.d j (j + 1)).hom) (d : ℤ) (hd : 0 ≤ d) (hExt : ∀ T : Ideal R, Subsingleton (Abelian.Ext (ModuleCat.of R (R ⧸ T)) N (d.toNat + 1))) : Injective (kernel (I.d d (d + 1)))",
+  "branch": "sheaf-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-26a2d180b",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Only the lean field changed versus live; lean.statement matches the file verbatim. Every hypothesis matches the node: universe u for R, N and the complex; zero terms in negative degrees via IsZero; degreewise Injective; exactness split into hε, hexact₀ (real d 0 1) and hexact for j>0; d≥0 with Ext degree d.toNat+1; Ext vanishing for all ideals via Subsingleton (Abelian.Ext (R⧸T) N), HasExt instance automatic. Conclusion: Injective (kernel (I.d d (d+1))). No extra assumptions. Edge cases d=0, T=0, T=⊤, N=0, zero ring covered. Docstrings carry source and all 5 proof steps; proof is only sorry; no definitions; no duplicate found by rg/Mathlib search; report has Worker report and Second reading by Q53. Not recompiled (no file changed)."
+ }
+}

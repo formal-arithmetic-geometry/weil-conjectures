@@ -1,0 +1,135 @@
+{
+ "id": "lem-per-continuous-mixed-integral-component",
+ "kind": "statement",
+ "title": "Specified completed mixed map on an integral object",
+ "statement": "Let l be prime, E,F finite extensions of Q_l and i:E→F an embedding. Let g:X→Y be between noetherian finite-dimensional l-invertible schemes with normalized continuous realizations, Along comparisons agE,agF and FieldChange comparisons bX,bY [def-per-continuous-rational-realization-data]. Let m be any AmbientMixed comparison [lem-per-continuous-ambient-mixed-coherence]. For each integral bounded constructible complete K on Y there is a single raw arrow t from agF.raw(T_Y(QK)) to T_X(agE.raw(QK)), heterogeneously equal to Q_X applied to the actual pbcScalarCompletedPullIso component on K. Its realized image satisfies J_XF(t)≫bX.comparison≫extend(bX.coefficient)(agE.comparison) = agF.comparison≫pullF(bY.comparison)≫m.ambient, evaluated on QK. No naturality or invertibility of t, and no transformation on all raw objects, is asserted.",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data",
+  "lem-per-continuous-ambient-mixed-coherence"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; Stacks Tags 0D6D, 0A0E and 0A0G. Expansion of the normalized comparison argument."
+ },
+ "proof": [
+  {
+   "text": "Take the rationalization of the actual pbcScalarCompletedPullIso component restricted by ObjectProperty.homMk. The endpoints are definitionally the two raw functor objects, so its required heterogeneous equality is HEq.rfl.",
+   "uses": [
+    "def-per-continuous-rational-realization-data",
+    "lem-pbc-scalar-ambient-operation-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Solve Along.completion_unit for P.map(integral.hom)≫ambient≫extend.map(unit), obtaining comparison.inv≫integral.hom. Solve FieldChange.integral_normalization for comparison.hom≫extend.map(integral.hom), obtaining integral.hom≫integralBalance. Naturality of the two reduction normalizations gives naturality of integralBalance.",
+   "uses": [
+    "def-per-continuous-rational-realization-data",
+    "lem-weil-pbc-completed-pullback-reduction-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the requested realized equation by scalar extension of comparison.inv≫integral.hom on the E completed pullback. This is an isomorphism. The left side reduces by scalar normalization and naturality of the F integral comparison to integral.hom≫extend.map(published completed component)≫integralBalance. On the right move integral.hom through m.ambient by naturality, apply scalar normalization at Y and the ordinary balancing cube, then move the E completion unit through integralBalance. The published scalarCompletedPull_unit equation turns the integral ordinary comparison followed by scalar extension of the E unit into the F unit followed by the completed component. Along normalization for F now cancels its comparison and yields exactly the same expression. Cancel the common postcomposition.",
+   "uses": [
+    "lem-per-continuous-mixed-ordinary-balance",
+    "def-per-continuous-rational-realization-data",
+    "lem-pbc-scalar-ambient-operation-comparisons",
+    "lem-weil-pbc-completed-pullback-reduction-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-per-continuous-rational-realization-data",
+  "lem-pbc-scalar-ambient-operation-comparisons",
+  "lem-weil-pbc-completed-pullback-reduction-coherence",
+  "lem-per-continuous-mixed-ordinary-balance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "U5: explicit rationalized component and complete naturality/normalization/unit cancellation; only the ordinary ambient tensor cube remains separate. BS Remark 6.8.15 and Stacks Tag 0D6D."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived pullback and coefficient extension comparisons obey composition and identity",
+   "results": "8 hits on scheme normalization (hom_ext, normalizationDesc_comp, toNormalization_fromNormalization and related lemmas), none on continuous coefficient tensor normalization.",
+   "date": "2026-10-27",
+   "verdict": "No match for the concrete normalized tensor and completion data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "1 hit: CategoryTheory.Functor.leftDerivedUnique, generic uniqueness of left derived functors.",
+   "date": "2026-10-27",
+   "verdict": "A generic proof tool; it does not state the coefficient and tensor-unit equations."
+  },
+  {
+   "tool": "grep",
+   "query": "pbcReductionNormalization|IsNormalizedPullCounit|RationalRealizationScalar",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completed pullback and scalar extension comparison realizes derived tensor interchange on an integral complex.",
+   "results": "8 hits: IsLocalization.algebraTensorEquiv in Mathlib.RingTheory.Localization.BaseChange; PresheafOfModules.pullback and pullbackPushforwardAdjunction; TensorProduct.AlgebraTensorModule.distribBaseChange in Mathlib.LinearAlgebra.TensorProduct.Tower; IsBaseChange.tensorEquiv and IsBaseChange in Mathlib.RingTheory.IsTensorProduct; AlgebraicGeometry.pullbackSpecIso and Algebra.Extension.baseChange. No completed derived comparison or integral realization equation.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; ordinary pullback and tensor coherence are useful proof tools but do not state these normalized derived equations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalContinuousComparisonCoherence",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: cohomology sheaves of pullback are pullbacks, via the continuous rational realization and its normalized scheme/coefficient comparisons.",
+   "via": [
+    "lem-per-rational-continuous-comparison-coherence",
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousMixedIntegralComponent",
+  "file": "lean/Sheaf/Paper/ContinuousMixedIntegralComponent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.continuousMixedIntegralComponent",
+  "statement": "theorem continuousMixedIntegralComponent (i : E →ₐ[ℚ_[l]] F)\n    {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)\n    (aXE : At l E X) (aYE : At l E Y) (aXF : At l F X) (aYF : At l F Y)\n    (agE : Along l E g aXE aYE) (agF : Along l F g aXF aYF)\n    (bX : FieldChange l E F i X aXE aXF) (bY : FieldChange l E F i Y aYE aYF)\n    (m : AmbientMixed l E F i g aXE aYE aXF aYF agE agF bX bY)\n    (K : PbcBoundedConstructibleComplete Y.scheme (pbcIntegralDatum l E)) :\n    ∃ t : (agF.raw l F).obj\n        ((pbcRationalScalarExtension l E F i Y.scheme Y.dimension Y.prime_unit).obj\n          ((pbcRationalization Y.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K)) ⟶\n      (pbcRationalScalarExtension l E F i X.scheme X.dimension X.prime_unit).obj\n        ((agE.raw l E).obj\n          ((pbcRationalization Y.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K)),\n    HEq t\n      ((pbcRationalization X.scheme (pbcIntegralDatum l F) (pbcUniformizer l F)).map\n        (ObjectProperty.homMk\n          (X := (integralPull l F g agF.integral_mem).obj\n            ((pbcEmbeddingIntegralTensor l E F i Y.scheme Y.dimension Y.prime_unit).obj K))\n          (Y := (pbcEmbeddingIntegralTensor l E F i X.scheme X.dimension X.prime_unit).obj\n            ((integralPull l E g agE.integral_mem).obj K))\n          ((pbcScalarCompletedPullIso l E F i g).hom.app K.obj))) ∧\n    aXF.J.map t ≫\n        bX.comparison.hom.app ((agE.raw l E).obj\n          ((pbcRationalization Y.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K)) ≫\n        (pbcDerivedExtend bX.coefficient).map (agE.comparison.hom.app\n          ((pbcRationalization Y.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K)) =\n      agF.comparison.hom.app\n          ((pbcRationalScalarExtension l E F i Y.scheme Y.dimension Y.prime_unit).obj\n            ((pbcRationalization Y.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K)) ≫\n        (derivedPull g agF.coefficient).map (bY.comparison.hom.app\n          ((pbcRationalization Y.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K)) ≫\n        m.ambient.hom.app (aYE.J.obj\n          ((pbcRationalization Y.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T094422-L-223889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261027T112437-L-1583956",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

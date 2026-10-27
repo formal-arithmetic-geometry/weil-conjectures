@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-complete-nonarchimedean-matrix-group",
+ "kind": "statement",
+ "title": "Two-sided completeness and congruence subgroups of completed matrix groups",
+ "statement": "Let $A$ be a nonarchimedean normed field, meaning a field with a multiplicative real absolute value satisfying $|a+b|\\leq\\max(|a|,|b|)$. Let $F=\\widehat A$ be its complete normed-field completion with its canonical isometric field inclusion $\\iota:A\\hookrightarrow F$ [lem-sfb-normed-field-completion]. The extended absolute value on $F$ satisfies the same nonarchimedean inequality. For every integer $n\\geq0$, give $\\operatorname{GL}_n(F)$ the topology induced from the finite product $F^{n\\times n}$, and write $\\|B\\|_{\\max}=\\max_{i,j}|B_{ij}|$, with maximum $0$ for an empty matrix. This is a Hausdorff topological group. For every real $0<r<1$,\n$$U_r=\\{I_n+B:\\|B\\|_{\\max}<r\\}$$\nconsists of invertible matrices and is an open subgroup; these subgroups form a basis of identity neighborhoods. For $\\|B\\|_{\\max}<1$, the series $\\sum_{m\\geq0}(-B)^m$ converges to $(I_n+B)^{-1}$. Every net $(g_i)$ Cauchy for both relative differences $g_i^{-1}g_j$ and $g_ig_j^{-1}$ tending to $I_n$ has entrywise limits $g_i\\to a$ and $g_i^{-1}\\to b$ in $M_n(F)$, with $ab=ba=I_n$; hence it converges in $\\operatorname{GL}_n(F)$. In other words this group is complete for its two-sided uniformity. For $n=0$ these assertions concern the trivial group.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent complete nonarchimedean matrix-group argument underlying Proposition 7.1.5, pp. 63–64. Completion is the recorded Mathlib input; Example 7.1.7 is not used for the norm topology."
+ },
+ "stmt_deps": [
+  "lem-sfb-normed-field-completion"
+ ],
+ "proof": [
+  {
+   "text": "Use the complete normed field and isometric dense inclusion of [lem-sfb-normed-field-completion]. Completion.induction_on₂ extends the norm inequality because the subset defined by the inequality is closed, using continuity of addition, norm and maximum.",
+   "uses": [
+    "lem-sfb-normed-field-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix-group argument supporting Proposition 7.1.5, pp. 63–64; Lean proof by T7."
+   }
+  },
+  {
+   "text": "Give the matrix space its existing nested Pi norm. The finite ultrametric sum inequality bounds each product entry by the product of the maximum entry norms. This supplies a local NormedRing structure with exactly the existing additive metric and topology. The Pi space is complete and ultrametric. The identity norm is at most one, also for n=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix-group argument supporting Proposition 7.1.5, pp. 63–64; Lean proof by T7."
+   }
+  },
+  {
+   "text": "Apply Mathlib isUnit_one_sub_of_norm_lt_one and hasSum_geom_series_inverse to -B in this complete normed matrix ring. Matrix.nonsing_inv_eq_ringInverse identifies the series limit with the stated nonsingular inverse. Mathlib Units.isOpenEmbedding_val supplies the matrix subspace topology; the existing units instances give Hausdorffness and the topological group structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix-group argument supporting Proposition 7.1.5, pp. 63–64; Lean proof by T7."
+   }
+  },
+  {
+   "text": "For a unit g put q=N(g-I)<1 and d=N(g⁻¹-I). The identity g⁻¹-I=-g⁻¹(g-I) gives d≤N(g⁻¹)q. The ultrametric inequality gives N(g⁻¹)≤max(d,1). If N(g⁻¹)>1 these inequalities imply N(g⁻¹)<N(g⁻¹), a contradiction. Thus N(g⁻¹)≤1 and d≤q. This argument also covers the zero ring of empty matrices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix-group argument supporting Proposition 7.1.5, pp. 63–64; Lean proof by T7."
+   }
+  },
+  {
+   "text": "Define U_r by the stated norm inequality on units. The product expansion (I+B)(I+C)-I=B+C+BC, ultrametric addition and submultiplicativity prove product closure when r<1; the previous inverse estimate gives inverse closure. Norm continuity proves openness. The inducing map and a metric ball at I give the neighborhood-basis assertion by choosing 0<r<min(ε,1).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix-group argument supporting Proposition 7.1.5, pp. 63–64; Lean proof by T7."
+   }
+  },
+  {
+   "text": "Work with any proper filter f and unit-valued map g. From convergence of g_i⁻¹g_j to I choose product-filter sets P,Q on which its value has distance less than one from I. Fix k∈P. On Q, N(g_j)≤N(g_k)(N(I)+1)<M for a positive M. For any ε>0 the same relative convergence and g_j-g_i=g_i(g_i⁻¹g_j-I) now give additive Cauchyness of the values. Apply the same argument to g⁻¹ using the second relative convergence hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix-group argument supporting Proposition 7.1.5, pp. 63–64; Lean proof by T7."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-complete-field-cauchy-filter-limit], in its recorded general complete-uniform-space form cauchy_map_iff_exists_tendsto, to the two matrix-valued Cauchy filters. Obtain limits a,b; continuity of multiplication and uniqueness of limits give ab=ba=I. Construct the unit l with value a and inverse b. The inducing units embedding into R×Rᵐᵒᵖ gives convergence to l. Specialize to atTop and compose with coordinate evaluation to obtain every clause for directed nets.",
+   "uses": [
+    "lem-sfb-complete-field-cauchy-filter-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix-group argument supporting Proposition 7.1.5, pp. 63–64; Lean proof by T7."
+   }
+  },
+  {
+   "text": "For an arbitrary Cauchy filter of the infimum of left and right uniformities, its product lies below both group uniformities. Their defining comap formulas give the two relative convergence hypotheses (swap the coordinates for the right one). Apply the filter-level result just proved. The infimum uniformity induces the original topology since both component uniformities do. This proves CompleteSpace.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent matrix-group argument supporting Proposition 7.1.5, pp. 63–64; Lean proof by T7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-complete-field-cauchy-filter-limit",
+  "lem-sfb-normed-field-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent matrix-group argument supporting Proposition 7.1.5, pp. 63–64; Lean proof by T7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The general linear group over a complete nonarchimedean normed field is complete for its two sided uniformity and has a neighborhood basis of open congruence subgroups",
+   "results": "[leanfinder] OK 8 hit(s); instNonarchimedeanAddGroupCompletion; instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space; IsNonarchimedeanLocalField.instCompleteSpace; NormedField.instCompletableTopField; NonarchimedeanGroup.toIsTopologicalGroup; NonarchimedeanGroup.is_nonarchimedean; QuotientGroup.nhds_one_hasBasis; IsUltrametricDist.nonarchimedeanGroup",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cauchy nets of invertible matrices and their inverses converge over a complete ultrametric field and small matrices one plus B form open subgroups",
+   "results": "[leanfinder] OK 8 hit(s); Units.isOpen; Units.nhds; Units.ofNearby; Units.val_ofNearby; NormedRing.inverse_add; IsUltrametricDist.closedBall_openSubgroup; IsUltrametricDist.ball_openSubgroup; instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "General linear group over a complete nonarchimedean field is Raikov complete with open subgroup basis",
+   "results": "[leansearch] OK 8 hit(s); NonarchimedeanAddGroup.is_nonarchimedean; RingSubgroupsBasis.openAddSubgroup; NonarchimedeanGroup.is_nonarchimedean; SubmodulesBasis.openAddSubgroup; instNonarchimedeanAddGroupCompletion; NonarchimedeanRing.mk; NonarchimedeanRing.is_nonarchimedean; SubmodulesBasis.nonarchimedean",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\", \"CompleteSpace\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "Raikov|([Tt]wo[Ss]ided|two_sided).*[Cc]omplete|[Cc]omplete.*[Gg]eneralLinear|[Gg]eneralLinear.*[Cc]omplete|[Gg]eneralLinear.*[Oo]pen[Ss]ubgroup",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "General linear group over a complete ultrametric field is complete for its two sided group uniformity",
+   "results": "8 hits: spectralNorm.completeSpace, IsNonarchimedeanLocalField.instCompleteSpace, Matrix.instCompleteSpace, spectralNorm.uniformSpace, IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation, completableTopField_of_complete, CompletableTopField, NormedField.instCompletableTopField",
+   "date": "2026-10-22",
+   "verdict": "no match: searches return completeness of matrix space or locally compact groups, or special linear group topology, not this complete norm-topology general linear group with all clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "Raikov|[Gg]eneralLinear.*[Cc]omplete|[Cc]omplete.*[Gg]eneralLinear|two_sided.*[Cc]omplete",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: searches return completeness of matrix space or locally compact groups, or special linear group topology, not this complete norm-topology general linear group with all clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "General linear group is a complete topological group for the two sided uniformity",
+   "results": "8 hits: IsRightUniformGroup.completeSpace_of_weaklyLocallyCompactSpace, IsLeftUniformGroup.toIsTopologicalGroup, IsRightUniformGroup.toIsTopologicalGroup, IsRightUniformAddGroup.completeSpace_of_weaklyLocallyCompactSpace, IsUniformGroup.mk', IsUniformGroup.of_left_right, IsUniformGroup.to_topologicalGroup, topologicalGroup_is_uniform_of_compactSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: searches return completeness of matrix space or locally compact groups, or special linear group topology, not this complete norm-topology general linear group with all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible elements of a complete nonarchimedean matrix algebra form a Raikov complete group with open subgroups one plus small matrices",
+   "results": "8 hits: Matrix.SpecialLinearGroup.topologicalGroup, Matrix.SpecialLinearGroup.instTopologicalSpace, Matrix.instCompleteSpace, Units.isOpen, NonarchimedeanRing.to_nonarchimedeanAddGroup, instIsTopologicalAddGroupMatrix, Matrix.SpecialLinearGroup.instDiscreteTopology, CStarMatrix.instIsTopologicalAddGroup",
+   "date": "2026-10-22",
+   "verdict": "no match: searches return completeness of matrix space or locally compact groups, or special linear group topology, not this complete norm-topology general linear group with all clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-continuous-algcl-monodromy",
+  "date": "2026-10-22",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; old proof Step 4: completion, congruence subgroups, geometric series and two-sided Cauchy nets",
+   "via": [
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-complete-nonarchimedean-matrix-group",
+  "worker": "stage1",
+  "summary": "Q86 wrote the matrix estimates, geometric inverse, open congruence groups, inversion continuity and two-sided Cauchy-net convergence. Reused the existing completion and geometric-decay leaves, and added one general Mathlib Cauchy-filter convergence leaf. The statement is unchanged.",
+  "blueprint": "The recorded ancestor chain has null blueprint.from.node (confirmed with blueprint_refs.py ancestor); the inherited place is det-thm-sf-ctf-stability-direct-images proof paragraph (3), norm-topology continuous coefficient monodromy before finite-field descent. Steps 1–7 supply the complete matrix topological group and open subgroup basis; steps 8–9 supply its two-sided completeness. The current blueprint direct-images proof and unit were read; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-8a6338ba4",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-8a6338ba4 (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, every cited statement, Mathlib Cauchy.lean:420-435 and Bhatt–Scholze pp. 63-65 (Def 7.1.3, Lemma 7.1.4, Prop 7.1.5, Ex 7.1.7). The item's statement and stmt_deps are identical to the base; live and side-live still have the item unsplit with no proof, and there is no repair note. Steps 1-9 are correct. The norm estimates and the max-norm topology agree with the product topology. Step 4: the geometric series gives a two-sided inverse; the coordinate sums are Cauchy with tail bound q^{k+1}, and the new leaf supplies the limit. Step 5: the inverse stays within distance q of I. Step 6: products in U_r stay in U_r, since N(B)N(C)<r^2<r. Step 7: inversion is continuous, with bound N(g^-1)^2 N(x-g). Step 8: I checked both identities g_j-g_i=g_i(g_i^-1 g_j-I) and g_i^-1-g_j^-1=g_i^-1(I-g_i g_j^-1), with the uniform tail bound M. Step 9: the tail filter is proper, so coordinatewise limits exist and give ab=ba=I. I checked the cases n=0, trivial absolute value, B=0 and uncountable directed index sets. The new node lem-sfb-complete-field-cauchy-filter-limit is an exact one-line specialization of cauchy_map_iff_exists_tendsto at Cauchy.lean:428-430; properness corresponds to NeBot. It is self-contained, cites def-weil-field and has no proof. It is neither a clause nor a restatement of the item, and searching dag/nodes found no duplicate. Its blueprint from/via fields are consistent and created.item is correct. All cited nodes are Mathlib leaves, so no tool_uses are needed, and there is no SGA. Advisory only: step 1 takes density of A in its completion from the meaning of 'uniform completion' in lem-sfb-normed-field-completion."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.CompleteNonarchimedeanMatrixGroup",
+  "declaration": "Matrix.GeneralLinearGroup.complete_nonarchimedean_matrix_group",
+  "file": "lean/Sheaf/GroupTheory/CompleteNonarchimedeanMatrixGroup.lean",
+  "statement": "theorem complete_nonarchimedean_matrix_group (A : Type u) [NormedField A] (hA : ∀ x y : A, ‖x + y‖ ≤ max ‖x‖ ‖y‖) (n : ℕ) : (∀ x y : Completion A, ‖x + y‖ ≤ max ‖x‖ ‖y‖) ∧ IsInducing (fun g : GeneralLinearGroup (Fin n) (Completion A) => (g : Matrix (Fin n) (Fin n) (Completion A))) ∧ T2Space (GeneralLinearGroup (Fin n) (Completion A)) ∧ IsTopologicalGroup (GeneralLinearGroup (Fin n) (Completion A)) ∧ (∀ r : ℝ, 0 < r → r < 1 → ∃ U : OpenSubgroup (GeneralLinearGroup (Fin n) (Completion A)), ∀ g : GeneralLinearGroup (Fin n) (Completion A), g ∈ U ↔ ‖fun i j : Fin n => g i j - (1 : Matrix (Fin n) (Fin n) (Completion A)) i j‖ < r) ∧ (∀ V ∈ 𝓝 (1 : GeneralLinearGroup (Fin n) (Completion A)), ∃ r : ℝ, 0 < r ∧ r < 1 ∧ {g : GeneralLinearGroup (Fin n) (Completion A) | ‖fun i j : Fin n => g i j - (1 : Matrix (Fin n) (Fin n) (Completion A)) i j‖ < r} ⊆ V) ∧ (∀ B : Matrix (Fin n) (Fin n) (Completion A), ‖fun i j => B i j‖ < 1 → IsUnit (1 + B) ∧ HasSum (fun m : ℕ => (-B) ^ m) (1 + B)⁻¹) ∧ (∀ (J : Type v) [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J] (g : J → GeneralLinearGroup (Fin n) (Completion A)), Tendsto (fun p : J × J => (g p.1)⁻¹ * g p.2) (atTop ×ˢ atTop) (𝓝 1) → Tendsto (fun p : J × J => g p.1 * (g p.2)⁻¹) (atTop ×ˢ atTop) (𝓝 1) → ∃ (a b : Matrix (Fin n) (Fin n) (Completion A)) (l : GeneralLinearGroup (Fin n) (Completion A)), (∀ i j, Tendsto (fun k => g k i j) atTop (𝓝 (a i j))) ∧ (∀ i j, Tendsto (fun k => ((g k)⁻¹) i j) atTop (𝓝 (b i j))) ∧ a * b = 1 ∧ b * a = 1 ∧ (l : Matrix (Fin n) (Fin n) (Completion A)) = a ∧ ((l⁻¹ : GeneralLinearGroup (Fin n) (Completion A)) : Matrix (Fin n) (Fin n) (Completion A)) = b ∧ Tendsto g atTop (𝓝 l)) ∧ @CompleteSpace (GeneralLinearGroup (Fin n) (Completion A)) (IsTopologicalGroup.leftUniformSpace (GeneralLinearGroup (Fin n) (Completion A)) ⊓ IsTopologicalGroup.rightUniformSpace (GeneralLinearGroup (Fin n) (Completion A)))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2da3ae0e2",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read item node, stmt_dep lem-sfb-normed-field-completion (unchanged, Mathlib leaf), module, report. lean.statement verbatim in file; node diff vs side-live is only lean. Clauses match: nonarchimedean completion norm, IsInducing coe (induced topology) + T2 + IsTopologicalGroup, OpenSubgroup U_r iff N(g-1)<r, nhds basis, IsUnit(1+B) and HasSum (-B)^m = (1+B)^-1 (unconditional, true here), nets over any directed nonempty J : Type v with entrywise limits a,b, ab=ba=1 and convergence in GL, CompleteSpace for leftUniformSpace ⊓ rightUniformSpace = two-sided uniformity (inf_uniformity, Mathlib order by filters). Edge cases n=0, trivial norm, B=0, large J covered; no extra hypotheses or definitions; sorry only; docstrings with source and 9 proof steps. Advisory: T2/IsTopologicalGroup instance-derivable, content in IsInducing; second-reading section is a declared self-check. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261023T124452-L-1405416",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

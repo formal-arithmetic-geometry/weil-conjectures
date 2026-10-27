@@ -1,0 +1,264 @@
+{
+ "id": "lem-a1-subspace-ring-restriction-unit-coherence",
+ "kind": "statement",
+ "title": "Canonical restriction units on nested subspaces and under isomorphisms",
+ "statement": "Let $Z$ be a topological space, $G$ a sheaf of commutative rings on $Z$, and $E\\subseteq Z$ any subset with the subspace topology. Write $e:E\\hookrightarrow Z$ for inclusion and $G_E=e^{-1}G$, with inverse image and units as in [def-weil-pbc-topological-inverse-image]. For an open $V\\subseteq Z$ containing $E$, let $v:V\\hookrightarrow Z$ and $p_V:E\\hookrightarrow V$ be inclusions and define $r_V:G(V)\\to G_E(E)$ to be the unit $\\eta^e_{G,V}$, identifying $e^{-1}V=E$. Then $v^{-1}G$ is canonically isomorphic to ordinary restriction $G|_V$, with the unit equal to ordinary restriction on every open. There is exactly one ring-sheaf isomorphism $c_V:p_V^{-1}(G|_V)\\xrightarrow{\\sim}e^{-1}G$ (the canonical composition isomorphism) such that $c_{V,E\\cap B}\\bigl(\\eta^{p_V}_{G|_V,B}(s)\\bigr)=\\eta^e_{G,B}(s)$ for every open $B\\subseteq V$ and every $s\\in G(B)$; for $B=V$ this identifies the composite of the two inverse-image units with $r_V$. For $E\\subseteq W\\subseteq V$ with $W,V$ open, the transition obtained by inverse-image unit and canonical composition on $G(V)$ is ordinary restriction to $G(W)$, and $$r_W\\circ\\operatorname{res}_{V,W}=r_V.$$ The same composition and restriction identifications hold for sheaves of sets, with the canonical set composition isomorphism of [lem-weil-pbc-sets-inverse-image-composition]. Moreover, let $g:Z\\to Z'$ be a homeomorphism, let $G'$ be a commutative-ring sheaf on $Z'$, and let $\\theta:G'\\xrightarrow{\\sim}g_*G$ be a ring-sheaf isomorphism. Put $E'=g(E)$, $g_E:E\\to E'$, and $e':E'\\hookrightarrow Z'$. There is a unique ring-sheaf isomorphism $\\theta_E:e'^{-1}G'\\xrightarrow{\\sim}(g_E)_*e^{-1}G$ characterized, on every open $B'\\subseteq Z'$, by $$\\theta_E\\circ\\eta^{e'}_{G',B'}=\\eta^e_{G,g^{-1}B'}\\circ\\theta_{B'},$$ with components evaluated on $E'\\cap B'$ and identified via $g_E$. Consequently, writing $g_E^\\sharp=\\theta_E(E')$ and $g_V^\\sharp=\\theta_{g(V)}$, one has $$g_E^\\sharp\\circ r'_{g(V)}=r_V\\circ g_V^\\sharp$$ for every open $V$ containing $E$. Empty subspaces and empty opens are allowed.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008F (lemma-pullback-presheaves) and Tag 008I (lemma-pullback-composition); open restriction and composition units, and their functoriality under an isomorphism of ringed spaces"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-sets-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Work simultaneously for a coefficient category satisfying the concrete sheafification hypotheses, then specialize to CommRingCat and Type. Transport the abstract inverse-image unit across the canonical isomorphism with the sheafified left Kan extension, using the proved source-library formula Functor.sheafAdjunctionContinuous_unit_app_hom_sheafPullbackIso_hom. Unfold the open-embedding comparison: sheafification naturality cancels its lifts, and the pointwise left Kan extension universal property identifies the canonical coprojection with the ordinary restriction map. This proves exactly the unit equation for Mathlib's sheafPullbackIso, not merely for an arbitrary open-restriction isomorphism.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008F (lemma-pullback-presheaves), 008I (lemma-pullback-composition), 008P (section-presheaves-structures-functorial); explicit unit calculations"
+   }
+  },
+  {
+   "text": "Transport the open-inclusion adjunction along sheafPullbackIso and compose it with the adjunction for p_V. Its right adjoint is definitionally the direct image for e. Adjunction.leftAdjointUniq supplies c_V and its composite-unit equation. Evaluate on the ambient image of an open B of V. Naturality along the unit B → v⁻¹v(B) of the opens adjunction, and its triangle identity, turn the composite-unit equation into the stated equation for B. Injectivity of the p_V adjunction hom bijection proves uniqueness for the fixed G. Taking B = top and applying unit naturality along v(top) → V gives the global section formula. The identical generic construction proves the set-valued statement, with the same unit characterization as the canonical set composition isomorphism; no separate set-composition theorem is needed.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008F (lemma-pullback-presheaves), 008I (lemma-pullback-composition), 008P (section-presheaves-structures-functorial); explicit unit calculations"
+   }
+  },
+  {
+   "text": "Apply naturality of the inverse-image unit for e to W ≤ V and then restrict to the whole subspace E. Functoriality of restriction combines the lower maps and gives r_W res_(V,W) = r_V. This argument works for both rings and sets.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008F (lemma-pullback-presheaves), 008I (lemma-pullback-composition), 008P (section-presheaves-structures-functorial); explicit unit calculations"
+   }
+  },
+  {
+   "text": "Lift the presheaf equivalences induced by the homeomorphisms g and g_E to equivalences T and S of sheaf categories. At every ambient open, direct images e_* ⋙ T and S ⋙ e'_* evaluate on the same inverse-image open, giving an identity-component natural isomorphism beta between them.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008F (lemma-pullback-presheaves), 008I (lemma-pullback-composition), 008P (section-presheaves-structures-functorial); explicit unit calculations"
+   }
+  },
+  {
+   "text": "Take the inverse mate alpha of beta for the inverse-image adjunctions of e and e'. The proved library theorem isIso_inverseMate_of_equivalences makes alpha invertible. Define theta_E as the composite of e'⁻¹(theta) with alpha_G. The inverse-mate unit identity and naturality of the e' unit under theta give the required unit square on every ambient open. Injectivity of the e' adjunction hom bijection proves uniqueness among isomorphisms with this square.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-adjunction-mate",
+    "lem-stage3-inverse-mate-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008F (lemma-pullback-presheaves), 008I (lemma-pullback-composition), 008P (section-presheaves-structures-functorial); explicit unit calculations"
+   }
+  },
+  {
+   "text": "Evaluate the unit square at g(V) and restrict along E' → e'⁻¹g(V). Naturality of theta_E moves this restriction across the comparison. Naturality of the e unit along V → g⁻¹g(V), followed by functoriality of restriction, gives the required global section equation. All equalities of open-set morphisms follow from their subsingleton hom sets. No point, section, nonempty open, or nonempty subspace is chosen.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008F (lemma-pullback-presheaves), 008I (lemma-pullback-composition), 008P (section-presheaves-structures-functorial); explicit unit calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-adjunction-mate",
+  "lem-stage3-inverse-mate-equivalences"
+ ],
+ "proof_origin": {
+  "by": "D8 stage-3 worker",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008F, 008I, 008P; Categories Tag 0B65 for inverse mates across equivalences",
+  "note": "Complete Lean proof: open-embedding colimit/unit calculation, uniqueness of left adjoints, and the proved inverse-mate equivalence theorem. No new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafPullbackIso|pullback.*(comp|Comp)|unit.*(naturality|app)",
+   "results": "4 hits: 100, 139, 142, 143; source subdirectory Topology/Sheaves/Functors.lean. Open-embedding pullback and scheme restriction identities cover portions only. They do not state the combined subspace composition-unit and ringed-homeomorphism characterization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical sections maps to inverse image sheaves for nested open neighborhoods commute with restriction and ringed space isomorphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.app_appIso_inv, AlgebraicGeometry.arrowResLEAppIso, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom. Open-embedding pullback and scheme restriction identities cover portions only. They do not state the combined subspace composition-unit and ringed-homeomorphism characterization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsOpenEmbedding.sheafPullbackIso, TopCat.Sheaf.pullbackPushforwardAdjunction",
+   "results": "0 hits: . Open-embedding pullback and scheme restriction identities cover portions only. They do not state the combined subspace composition-unit and ringed-homeomorphism characterization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For nested subspaces E contained in an open V contained in X the inverse image units of a sheaf of rings identify with restriction maps and commute with isomorphisms of ringed spaces",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_invApp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app'. Open-embedding pullback and scheme restriction identities cover portions only. They do not state the combined subspace composition-unit and ringed-homeomorphism characterization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image units of sheaves of commutative rings on nested subspaces commute with restriction and transport by a homeomorphism",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app. Read the generic sheaf pullback and open embedding formulas; none states all the subspace and homeomorphism unit characterizations of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullbackIso|unit_leftAdjointUniq|pullbackHomIsoPushforwardInv",
+   "results": "10 hits: Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/LeftExact.lean. Read the generic sheaf pullback and open embedding formulas; none states all the subspace and homeomorphism unit characterizations of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsOpenEmbedding.sheafPullbackIso, CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "0 hits: . Read the generic sheaf pullback and open embedding formulas; none states all the subspace and homeomorphism unit characterizations of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image units for ring sheaves on subspaces, composition through an open subset, and naturality under homeomorphisms",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.preimage_basicOpen, AlgebraicGeometry.StructureSheaf.toOpen_res. Read the generic sheaf pullback and open embedding formulas; none states all the subspace and homeomorphism unit characterizations of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.pullbackPushforwardAdjunction",
+   "results": "1 hits: TopCat.Sheaf.pullbackPushforwardAdjunction. Read the generic sheaf pullback and open embedding formulas; none states all the subspace and homeomorphism unit characterizations of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "TopCat sheaf pullback composition unit compatibility and homeomorphism restriction to a subspace for CommRingCat valued sheaves",
+   "results": "8 hits: ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, TopCat.Sheaf.pullbackIso, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map'_assoc. Read the generic sheaf pullback and open embedding formulas; none states all the subspace and homeomorphism unit characterizations of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-sections-intersection-structure-colimit",
+  "date": "2026-10-22",
+  "group": "Q58"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67. In the Tag 0APK input, this is the equation-sections-of-intersection identification used to compute the section rings of the invariant intersection. Extracted argument: Canonical restriction units on nested subspaces and under isomorphisms.",
+   "via": [
+    "lem-a1-sections-intersection-structure-colimit",
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-subspace-ring-restriction-unit-coherence",
+  "worker": "stage1",
+  "summary": "Q48: proved the item using existing inverse-image, colimit, sheafification, composite-adjunction and unit-preserving uniqueness nodes, with no new nodes. Wrote out ordinary restriction, unit naturality, and homeomorphism reindexing and its Hom bijections. No statement correction and no Lean attachment.",
+  "blueprint": "Preserves the ancestor lem-a1-affine-hc0 route through the Gabber/0APK intersection-section construction recorded in blueprint.from.place; supplies its canonical maps, transitions, and equivariance, without changing the chapter or unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-inverse-image-composition",
+    "why": "Generic topological set inverse-image composition with its sectionwise unit characterization; the current unit has no such generic sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-9940de95d",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-9940de95d (reviewer sub-agent of L); spot-checked: I read the item in full: 6 steps, no new nodes. I also read every cited statement (the inverse-image definition with its explicit unit and Hom bijection, colimit, sheafification, composite adjunction, the conjugate-iso unit equation, and the set composition node) and Stacks sheaves.tex 008F (l.2067), 008I (l.2209) and 008P (l.2546). Step 1: an open A of V is the terminal neighbourhood, so v^{-1}G = G|_V and its unit is restriction. Step 2: the composite adjunction plus the conjugate-iso node with δ=id gives c_V. Uniqueness over B⊆V holds because the p_V adjunction transpose is exactly the fixed family. Step 3: the restriction square of the sheaf morphism η^e gives r_W∘res = r_V. Step 4: I checked g_*e_*S = e'_* using g_E(E∩g^{-1}B') = E'∩B'. Step 5: the Hom chain makes T e^{-1}H left adjoint to e'_* with unit η^e_{HK,g^{-1}B'}, and the conjugate-iso node gives d. Step 6: θ_E = T(e^{-1}q)∘d with q_B = θ_{g(B)}; unit naturality gives the equation, and B' = g(V) gives g_E^♯r' = r_V g_V^♯. I tested E empty, V empty, W = V, E = V, the identity homeomorphism, and E neither open nor closed. proof_deps equals the union of the step uses. I searched the DAG for 008F/008I nodes and for inverse-image composition nodes and found no duplicate. The one route tool is lem-weil-pbc-sets-inverse-image-composition (sk-thm-p1, generic). It is declared in tool_uses and I accept it. No SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SubspaceRingRestrictionUnitCoherence",
+  "declaration": "TopCat.Sheaf.subspace_ring_restriction_unit_coherence",
+  "declarations": [
+   "TopCat.Sheaf.subspaceInclusion",
+   "TopCat.Sheaf.subspaceToOpen",
+   "TopCat.Sheaf.subspaceSectionMap",
+   "TopCat.Sheaf.subspaceOpenUnit",
+   "TopCat.Sheaf.openRestrictionGlobal",
+   "TopCat.Sheaf.subspace_ring_restriction_unit_coherence",
+   "TopCat.Sheaf.subspace_sets_restriction_unit_coherence",
+   "TopCat.Sheaf.subspaceHomeomorphism",
+   "TopCat.Sheaf.homeomorphismOpenSectionMap",
+   "TopCat.Sheaf.subspace_ring_homeomorphism_unit_coherence"
+  ],
+  "file": "lean/Sheaf/Topology/SubspaceRingRestrictionUnitCoherence.lean",
+  "statement": "theorem subspace_ring_restriction_unit_coherence {Z : TopCat.{u}} (E : Set Z) (G : Z.Sheaf (CommRingCat.{u})) : (∀ (V B : Opens Z), ((pullbackPushforwardAdjunction (CommRingCat.{u}) V.inclusion').unit.app G).hom.app (op B) ≫ ((V.isOpenEmbedding.sheafPullbackIso (CommRingCat.{u})).hom.app G).hom.app (op ((Opens.map V.inclusion').obj B)) = G.obj.map (V.isOpenEmbedding.isOpenMap.adjunction.counit.app B).op) ∧ (∀ (V : Opens Z) (h : E ⊆ V), ∃ c : (pullback (CommRingCat.{u}) (subspaceToOpen E V h)).obj ((V.isOpenEmbedding.sheafPullback (CommRingCat.{u})).obj G) ≅ (pullback (CommRingCat.{u}) (subspaceInclusion E)).obj G, (∀ B : Opens (TopCat.of V), ((pullbackPushforwardAdjunction (CommRingCat.{u}) (subspaceToOpen E V h)).unit.app ((V.isOpenEmbedding.sheafPullback (CommRingCat.{u})).obj G)).hom.app (op B) ≫ c.hom.hom.app (op ((Opens.map (subspaceToOpen E V h)).obj B)) = subspaceOpenUnit (CommRingCat.{u}) E G V h B) ∧ (∀ c' : (pullback (CommRingCat.{u}) (subspaceToOpen E V h)).obj ((V.isOpenEmbedding.sheafPullback (CommRingCat.{u})).obj G) ≅ (pullback (CommRingCat.{u}) (subspaceInclusion E)).obj G, (∀ B : Opens (TopCat.of V), ((pullbackPushforwardAdjunction (CommRingCat.{u}) (subspaceToOpen E V h)).unit.app ((V.isOpenEmbedding.sheafPullback (CommRingCat.{u})).obj G)).hom.app (op B) ≫ c'.hom.hom.app (op ((Opens.map (subspaceToOpen E V h)).obj B)) = subspaceOpenUnit (CommRingCat.{u}) E G V h B) → c' = c) ∧ openRestrictionGlobal (CommRingCat.{u}) G V ≫ ((pullbackPushforwardAdjunction (CommRingCat.{u}) (subspaceToOpen E V h)).unit.app ((V.isOpenEmbedding.sheafPullback (CommRingCat.{u})).obj G)).hom.app (op ⊤) ≫ c.hom.hom.app (op ⊤) = subspaceSectionMap (CommRingCat.{u}) E G V h) ∧ (∀ (W V : Opens Z) (hWV : W ≤ V) (hEW : E ⊆ W), G.obj.map (homOfLE hWV).op ≫ subspaceSectionMap (CommRingCat.{u}) E G W hEW = subspaceSectionMap (CommRingCat.{u}) E G V (fun x hx ↦ hWV (hEW hx)))",
+  "branch": "sheaf-dag",
+  "by": "Q158",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-043e8a273",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Read item node, both stmt_deps, module, report, Mathlib Functors/Presheaf/Opens. Clause 1: unit followed by sheafPullbackIso = G.map of the counit on every ambient B. True because pullbackObjIso is the canonical terminal-index colimit identification. Clause 2: ∃ c fixed by the unit equation on every B : Opens V, plus uniqueness among isos from that equation alone; B=V global formula via openRestrictionGlobal. Clause 3: r_W∘res=r_V stated; the 'transition is restriction' sentence follows from clauses 1-2 applied to (V, G|_V). Sets version identical; its c is the transported exists_sets_inverseImage_comp iso by uniqueness. Homeomorphism part: θE characterized by the unit square on every B' with iso uniqueness; final square g_E^♯∘r'=r_V∘θ_{gV}. No extra hypotheses; empty cases covered; single universe u as in deps; helpers are actual maps; no name collisions; sorry-only; docstrings OK; lean.statement byte-identical; declarations present; stmt_deps unchanged. No changes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261023T131509-L-2114513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

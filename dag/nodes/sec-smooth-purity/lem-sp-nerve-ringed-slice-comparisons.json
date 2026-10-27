@@ -1,0 +1,218 @@
+{
+ "id": "lem-sp-nerve-ringed-slice-comparisons",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Gluing paragraph: choose a small presentation of the binary subterminal cover and identify its restriction adjunctions. Simultaneous ringed slices and their invertible adjunction mates",
+   "via": [
+    "lem-sp-binary-cover-site-presentation",
+    "lem-sp-ringed-topos-binary-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Simultaneous ringed slices and their invertible adjunction mates",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "For small finitely complete E with subcanonical topology K, a fully faithful finite-limit-preserving F:E→Sh(J), a specified Hom nerve equivalence N, and a ringed equivalence g with invertible structural map inducing N, fix exact whole module data [def-sp-binary-presentation-module-data], four subterminal images F(Zi), and specified element-site and actual localized-site slice equivalences with their Hom formula. There exist localized ringed equivalences to the fixed rings A.over Zi, with module and ordinary derived equivalences, commuting with restriction and further restriction with the exact identity/composition HEq equations. For every choice of left or right adjoints, the actual mates of the comparison squares are invertible. This is the ringed and adjunction part of the binary presentation; no small-category construction or binary-cover hypothesis occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00Y1, 04GZ and 03EH; sites-modules.tex Tags 03CR and 04IE. Auxiliary extraction of the corresponding steps of lem-sp-binary-cover-site-presentation."
+ },
+ "stmt_deps": [
+  "def-sp-binary-presentation-module-data",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-topos"
+ ],
+ "proof": [
+  {
+   "text": "For each Zi use [lem-sp-nerve-ringed-localization] to get the localized ringed morphism, its inverse-image equality, invertible structural map, module comparison data and restriction square.",
+   "uses": [
+    "lem-sp-nerve-ringed-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Y1 and 04GZ"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-nerve-module-restriction-coherence] to choose simultaneous restriction/further squares and their three coherence equations.",
+   "uses": [
+    "lem-sp-nerve-module-restriction-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Y1 and 04GZ"
+   }
+  },
+  {
+   "text": "For an invertible square between equivalences, use the adjunction Hom equivalences on each side. Postcomposition with the right mate on maps from E(X) is the composite of the first equivalence Hom bijection, first adjunction inverse Hom bijection, second equivalence Hom bijection, conjugation by the square, and second adjunction Hom bijection. The mate counit equation proves this formula. Essential surjectivity extends bijectivity to all objects, and Yoneda proves the mate invertible. Dually, precomposition with the left mate is a composite of Hom bijections by its unit equation; coyoneda proves it invertible. Package these mates with the comparisons, leaving their component maps and HEq equations unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Categories Tag 0B65; Mathlib Adjunction.Mates mateEquiv_counit and unit_mateEquiv_symm"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-nerve-ringed-localization",
+  "lem-sp-nerve-module-restriction-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Product/fibre proof of 00Y1 and relocalization 03EH; concrete Lean assembly and adjunction proof by V5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "small full finite limit closed subcategory of sheaves containing prescribed objects and sheafified representables",
+   "results": "8 hits: CategoryTheory.hasSheafifyEssentiallySmallSite, CategoryTheory.SheafOfTypes.finitary_extensive, CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover, CategoryTheory.hasLimitsEssentiallySmallSite, CategoryTheory.Sheaf.instHasFiniteLimits, CategoryTheory.smallSheafify, CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify, CategoryTheory.Sheaf.ab5ofSize",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.limitsClosure",
+   "results": "12 hits: CategoryTheory.ObjectProperty.limitsClosure, CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsLimitsClosure, CategoryTheory.ObjectProperty.limitsClosure.of_mem, CategoryTheory.ObjectProperty.instIsClosedUnderLimitsOfShapeLimitsClosure, CategoryTheory.ObjectProperty.instNonemptyLimitsClosure, CategoryTheory.ObjectProperty.le_limitsClosure, CategoryTheory.ObjectProperty.limitsClosure_isoClosure, CategoryTheory.ObjectProperty.limitsClosure.of_isoClosure",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*limit.*generator|sheafSubcategory_sievePresentation|ringed.*equivalence.*slice",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of sheaf categories induces compatible equivalences of module sheaves on localized sites",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongrPrecoherent, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Equivalence.sheafCongrPreregular",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedToposMorphism slice module equivalence restriction mate",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "grep",
+   "query": "module.*slice.*coheren|slice.*module.*coheren|mate.*isIso|isIso.*mate",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence from sheaves on a localized site to the slice over a represented sheaf is the Hom nerve and commutes coherently with restrictions of modules",
+   "results": "8 hits: PresheafOfModules.homEquivOfIsLocallyBijective, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.homEquivOfIsLocallyBijective_apply, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.restrictHomEquivOfIsLocallySurjective, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "grep",
+   "query": "ringed.*equivalence|module.*equivalence.*restriction|slice.*nerve",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of sheaves of modules under a ringed topos equivalence with underlying sheaf and rank one structural map and induced derived equivalence",
+   "results": "8 hits: SheafOfModules.mk, CategoryTheory.Equivalence.sheafCongrPrecoherent, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, SheafOfModules, SheafOfModules.mk.inj, CategoryTheory.Equivalence.sheafCongrPreregular",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.mateEquiv",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf Hom nerve equivalence induces an equivalence of the slice over an object with sheaves on the localized site with the represented Hom formula",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.sheafHom, CategoryTheory.Sheaf.ΓHomEquiv, CategoryTheory.sheafHom, CategoryTheory.sheafHomSectionsEquiv, CategoryTheory.sheafHom', CategoryTheory.GrothendieckTopology.yonedaEquiv, CategoryTheory.Functor.IsCoverDense.sheafHom, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible module sheaf equivalences on slices commute with restriction and satisfy identity and composition equations",
+   "results": "8 hits: ModuleCat.Tilde.toOpen_res, SheafOfModules.instCategory, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.hom_ext, SheafOfModules.pushforwardComp_hom_app_val_app, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, SheafOfModules.freeHomEquiv_symm_comp",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport the restricted ring sheaf on the category of elements along a localized Hom nerve equivalence to the original ring restricted to the slice site",
+   "results": "8 hits: CategoryTheory.Equivalence.transportAndSheafify, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, AlgebraicGeometry.LocallyRingedSpace.ofRestrict, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_assoc, AlgebraicGeometry.LocallyRingedSpace.restrict, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom",
+   "date": "2026-10-24",
+   "verdict": "No exact statement: generic equivalences, module sheafification and mates APIs only. The actual cited APIs are used in the proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.BinaryCoverSitePresentation",
+  "date": "2026-10-24",
+  "group": "V5"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.BinaryPresentationSlices",
+  "file": "lean/Sheaf/CategoryTheory/Sites/BinaryPresentationSlices.lean",
+  "declaration": "CategoryTheory.exists_binaryPresentationSlices",
+  "statement": "theorem exists_binaryPresentationSlices\n    {C E : Type u} [SmallCategory C] [SmallCategory E] [HasFiniteLimits E]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology E} [K.Subcanonical]\n    (R : Sheaf J CommRingCat.{u}) (ring : Sheaf K CommRingCat.{u})\n    (F : E ⥤ Sheaf J (Type u)) [F.Full] [F.Faithful] [PreservesFiniteLimits F]\n    (Z : Fin 4 → E) (hsub : ∀ i : Fin 4, IsSubterminal (F.obj (Z i)))\n    (N : Sheaf J (Type u) ≌ Sheaf K (Type u))\n    (hN : N.functor ⋙ sheafToPresheaf K (Type u) ≅ sheafSubcategoryNerve F)\n    (ringed : RingedToposMorphism (localCoefficientRings ring) (localCoefficientRings R))\n    (hi : ringed.inverse = N.functor) (_hd : ringed.direct = N.inverse)\n    (hr : IsIso ringed.ringMap) (whole : BinaryPresentationModules ringed)\n    (sourceSlice : ∀ i : Fin 4,\n      RingedSheafSliceAdjunctionData (localCoefficientRings R) (F.obj (Z i)))\n    (slice : ∀ i : Fin 4, Over (F.obj (Z i)) ≌ Sheaf (K.over (Z i)) (Type u))\n    (hSlice : ∀ i : Fin 4,\n      (slice i).functor ⋙ sheafToPresheaf (K.over (Z i)) (Type u) ≅\n        yoneda ⋙ (Functor.whiskeringLeft (Over (Z i))ᵒᵖ\n          (Over (F.obj (Z i)))ᵒᵖ (Type u)).obj (Over.post F).op) :\n    Nonempty (BinaryPresentationSlices R ring F Z ringed whole sourceSlice slice)",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-b0e35",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261024T191518-L-416307",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-b0e35",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261024T191518-L-416307",
+  "kind": "interface",
+  "note": "independent cc review: lem-sp-binary-cover-site-presentation node and published BinaryCoverSitePresentation (signatures unchanged) with delivered item proof, relocated structures (verbatim, public re-export, change record) and 5 new modules; new sorry exists_binaryPresentationRestrictionData checked against node lem-sp-nerve-module-restriction-coherence; importer ToposOpenScalarUnit compiled clean against delivered modules"
+ }
+}

@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-internal-homogeneous-lift-reconstruction",
+ "kind": "statement",
+ "title": "Reconstructing an equivariant homogeneous-function lift from a tensor map",
+ "statement": "Let $A$ be a commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], and let $G$ be a profinite group, with $\\underline G(S)=C(S,G)$. Use internal $A$-modules, internal $G$-actions, their forgetful functor $U$, and section modules [sk-def-sfb-module-objects, def-sfb-condensed-action-module, def-weil-pbc-internal-abelian-sheaf-module-equivalence]. For a profinite parameter $X$, let $A[\\underline X]$ be the free internal module, left adjoint to forgetting to condensed sets, with canonical local generators $[t]$ [def-sfb-condensed-equivariant-bar-data, def-sfb-condensed-free-module-generators]. Use internal tensor and its right-adjoint internal Hom [lem-pc-sheaf-modules-tensor-closed], whose sections are maps on the entire slice [def-pur-sheaf-hom]. Fix $n\\geq0$ and an equivariant module $J$. Put $P_n=A[\\underline G^n]$, with $G^0=*$, and $\\mathcal H_n(J)=\\underline{\\operatorname{Hom}}_A(A[\\underline G^{n+1}],UJ)$. A normalized homogeneous-function model means an equivariant module identified underneath with $\\mathcal H_n(J)$ and having action $(k\\cdot f)(g_0,\\ldots,g_n)=k\\cdot_J f(k^{-1}g_0,\\ldots,k^{-1}g_n)$ on every profinite slice [def-sfb-condensed-homogeneous-functions].\nThe displayed homogeneous action admits a normalized homogeneous-function model $H$. For every such model, every equivariant module $M$, and every internal $A$-linear map $\\beta:P_n\\otimes_A UM\\to UJ$, the following formula defines an equivariant internal $A$-linear morphism $b_\\beta:M\\to H$:\n$$b_\\beta(m)(g_0,\\ldots,g_n)=g_0\\cdot_J\\beta\\bigl([g_0^{-1}g_1,\\ldots,g_0^{-1}g_n]\\otimes(g_0^{-1}\\cdot_M m)\\bigr).$$\nPrecisely, for every $S$, $m\\in M(S)$, base change $T\\to S$, and $g_i\\in C(T,G)$, the left side is the slice evaluation of $b_{\\beta,S}(m)$, and the right side uses $m|_T$ and $\\beta_T$. In particular $b_\\beta(m)(1,\\mathbf t)=\\beta([\\mathbf t]\\otimes m)$ on every slice. If $N$ is any equivariant module, $i:N\\to M$ and $h:N\\to H$ are equivariant internal linear maps, and\n$$\\beta([\\mathbf t]\\otimes i(x))=h(x)(1,\\mathbf t)$$\non every profinite test and after every base change, then $b_\\beta\\circ i=h$. This assertion assumes neither monicity of $i$ nor injectivity of $UJ$. It includes $n=0$, the trivial group, the empty test object, and zero coefficients.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: internal homogeneous-function helper, old steps 6-8 (slice reconstruction, equivariance and extension identity), including well-definedness of the displayed action. Agent-formulated internal construction using Stacks Tag 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor (2)); exact condensed reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-free-module-generators",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-sheaf-hom",
+  "def-sfb-condensed-homogeneous-functions"
+ ],
+ "proof": [
+  {
+   "text": "Use the following immediate combination of the cited universal properties. If $X$ is a condensed set, $V,W$ are internal modules, and $F_T(x,v)\\in W(T)$ is natural in every profinite $T$, for $x\\in X(T),v\\in V(T)$, and $A(T)$-linear in $v$, then it determines a unique map $A[X]\\otimes_A V\\to W$ with value $F_T(x,v)$ on $[x]\\otimes v$. Indeed for $x\\in X(S)$ the maps $v\\mapsto F_T(x|_T,v)$ for every $T\\to S$ are a morphism $V|_S\\to W|_S$, hence a section of the slice sheaf Hom [def-pur-sheaf-hom]. These sections are natural in $S,x$. The free-generator bijection [lem-sfb-condensed-free-linearization-tensor] extends them uniquely to $A[X]\\to\\mathcal Hom_A(V,W)$; uncurrying by [lem-pc-sheaf-modules-tensor-closed], using its symmetry, gives the asserted map and formula. Conversely its curry recovers the same sections. Thus equality of these maps is detected on the indicated generators and arbitrary local $v$; equality of their transposes is detected by those same slice evaluations. This argument makes no claim that sections of a sheafified free module are themselves finite free sums. In particular, for the representable parameter $Q=G^{n+1}$, the section description in [def-sfb-condensed-equivariant-bar-data] identifies an element of $\\mathcal Hom_A(A[Q],UJ)(S)$ with its entire natural family of evaluations on $T\\to S$ and $q:T\\to Q$. It therefore detects equality of these sections, including every action-law calculation below.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-sfb-condensed-free-linearization-tensor",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image helper: explicit free-generator and tensor–Hom construction; supporting Stacks Tag 03EO, lemma-internal-hom-adjoint-tensor (2)."
+   }
+  },
+  {
+   "text": "Put $Q=\\underline G^{n+1}$ and $K=\\mathcal Hom_A(A[Q],UJ)$. For every test $T$, $(k,q)\\in(\\underline G\\times Q)(T)$ and $c\\in K(T)$, set $F_T((k,q),c)=k\\cdot_J c(k^{-1}q)$, where $k^{-1}q=(k^{-1}q_0,\\ldots,k^{-1}q_n)$. Slice evaluation is linear in $c$, and $k\\cdot_J-$ is $A(T)$-linear [def-sfb-condensed-action-module]. The expression commutes with restriction because evaluation and the action do. Step 1 gives $A[\\underline G\\times Q]\\otimes_A K\\to UJ$. The free-product tensor isomorphism of [lem-sfb-condensed-free-linearization-tensor], associativity and symmetry rewrite its source as $A[Q]\\otimes_A(A[\\underline G]\\otimes_A K)$. Curry with [lem-pc-sheaf-modules-tensor-closed] to obtain $A[\\underline G]\\otimes_A K\\to K$. On $[k]\\otimes c$ it has slice evaluation $q\\mapsto k\\cdot_J c(k^{-1}q)$. Composing the free-generator map in the first variable defines a natural action of the condensed set $\\underline G$ on $K$, linear in $c$.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-condensed-free-linearization-tensor",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), homogeneous-function helper: construct the displayed action on the internal Hom, rather than assume its existence."
+   }
+  },
+  {
+   "text": "For $k,l\\in C(S,G)$ and $c\\in K(S)$, evaluate after every $T\\to S$ at $q\\in Q(T)$, writing $k,l$ for their restrictions. The action of step 2 satisfies\n$$(k\\cdot(l\\cdot c))(q)=k\\cdot_J\\bigl(l\\cdot_J c(l^{-1}k^{-1}q)\\bigr)=(kl)\\cdot_J c((kl)^{-1}q)=((kl)\\cdot c)(q),$$\nand $(1\\cdot c)(q)=c(q)$. The action laws of $J$ give these equalities without any commutativity assumption on $G$. Step 1's generator detection, or equivalently the free-generator bijection on each of the slice evaluations, makes them equalities of sections of $K$. Thus the natural linear operations form the homomorphisms required by [def-sfb-condensed-action-module]. With underlying module $K$ and identity identification, they give a normalized homogeneous-function model as specified in [def-sfb-condensed-homogeneous-functions].",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-sfb-condensed-homogeneous-functions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), homogeneous-function helper: identity and multiplication laws on all slices."
+   }
+  },
+  {
+   "text": "Now fix $\\beta$ and first construct its lift into this model. For $q=(g_0,\\ldots,g_n)\\in Q(T)$ and $m\\in M(T)$ put\n$$B_T(q,m)=g_0\\cdot_J\\beta_T\\bigl([g_0^{-1}g_1,\\ldots,g_0^{-1}g_n]\\otimes(g_0^{-1}\\cdot_M m)\\bigr).$$\nThis is $A(T)$-linear in $m$, since both group actions are linear and $\\beta$ is linear. It is natural in $T$: restriction commutes separately with inversion and multiplication of continuous group-valued maps, the free-adjunction unit, the tensor pairing, both actions and $\\beta$. Step 1 therefore supplies a genuine internal map $A[Q]\\otimes_A UM\\to UJ$. Its transpose is $b_\\beta:UM\\to K$ by [lem-pc-sheaf-modules-tensor-closed], with exactly the stated evaluation formula at every $T\\to S$, applied to $m|_T$. For an arbitrary normalized model $H$, compose with the inverse of its underlying-module identification with $K$; the action formula defining that model [def-sfb-condensed-homogeneous-functions] is unchanged under this identification. Hence the same construction and all subsequent calculations apply to every such $H$.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-condensed-free-linearization-tensor",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-sfb-condensed-homogeneous-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), old reconstruction step: construct the slice-natural linear lift by free linearization and tensor–Hom adjunction."
+   }
+  },
+  {
+   "text": "Check equivariance on every slice. For $k\\in C(S,G)$, restrict to $T\\to S$, put $q=(g_0,\\ldots,g_n)\\in Q(T)$, and abbreviate $r=(g_0^{-1}g_1,\\ldots,g_0^{-1}g_n)$. Using the normalized action on $H$,\n$$\\begin{aligned}(k\\cdot_H b_\\beta(m))(q)&=k\\cdot_J b_\\beta(m)(k^{-1}g_0,\\ldots,k^{-1}g_n)\\\\&=k\\cdot_J\\bigl((k^{-1}g_0)\\cdot_J\\beta_T([r]\\otimes((g_0^{-1}k)\\cdot_M m))\\bigr)\\\\&=g_0\\cdot_J\\beta_T([r]\\otimes(g_0^{-1}\\cdot_M(k\\cdot_M m)))\\\\&=b_\\beta(k\\cdot_M m)(q).\\end{aligned}$$\nHere $(k^{-1}g_0)^{-1}(k^{-1}g_i)=g_0^{-1}g_i$; the two action laws give the next equality. Detection by all slice evaluations from step 1 proves equality in $H(S)$. Thus the internal linear map from step 4 is equivariant in the precise sense of [def-sfb-condensed-action-module]. No equivariance of $\\beta$ is needed.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-sfb-condensed-homogeneous-functions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), old equivariance step: explicit cancellation calculation on arbitrary profinite base change."
+   }
+  },
+  {
+   "text": "Putting $g_0=1$ and $(g_1,\\ldots,g_n)=\\mathbf t$ in step 4 gives $b_\\beta(m)(1,\\mathbf t)=\\beta([\\mathbf t]\\otimes m)$ on every slice. For the extension assertion, fix $x\\in N(S)$ and evaluate after any $T\\to S$ at $q=(g_0,\\ldots,g_n)$. Write $x$ for its restriction and $r=(g_0^{-1}g_1,\\ldots,g_0^{-1}g_n)$. Equivariance of $i$, followed by the assumed identity with $g_0^{-1}\\cdot_N x$ as input, gives\n$$b_\\beta(i(x))(q)=g_0\\cdot_J\\beta_T([r]\\otimes i(g_0^{-1}\\cdot_N x))=g_0\\cdot_J h(g_0^{-1}\\cdot_N x)(1,r).$$\nEquivariance of $h$ identifies the last expression with $g_0\\cdot_J(g_0^{-1}\\cdot_H h(x))(1,r)$. The normalized action formula [def-sfb-condensed-homogeneous-functions] makes this $g_0\\cdot_J(g_0^{-1}\\cdot_J h(x)(g_0,g_0r))=h(x)(q)$. Step 1's detection proves $b_\\beta\\circ i=h$. This uses neither cancellation of $i$ nor extension by injectivity.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-sfb-condensed-homogeneous-functions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), old extension-identity step: use the prescribed identity on $g_0^{-1}x$ and write out both equivariance substitutions."
+   }
+  },
+  {
+   "text": "All powers are finite products; at $n=0$, $r$ is the unique empty tuple and $A[\\underline G^0]=A[1]\\cong A$ by [lem-sfb-condensed-free-linearization-tensor]. The formulas then read $b_\\beta(m)(g_0)=g_0\\cdot_J\\beta([*]\\otimes g_0^{-1}\\cdot_M m)$ and the same cancellation calculations apply. For the trivial group every action is the identity and the lift is the transpose of $\\beta$ at the terminal parameter. Over the empty test object every module sheaf has a singleton set of sections, so all identities hold; zero coefficients force every unital module section to be zero. None of the construction or calculations discards these cases.",
+   "uses": [
+    "lem-sfb-condensed-free-linearization-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), homogeneous-function helper: boundary cases of the explicit construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-sfb-condensed-free-linearization-tensor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-action-module",
+  "def-sfb-condensed-homogeneous-functions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: internal homogeneous helper; the current blueprint does not contain the helper argument. Explicit construction from free linearization and Stacks Tag 03EO (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homogeneous|coind",
+   "results": "{\"t\": \"2026-10-22T06:11:39Z\", \"tool\": \"grep\", \"query\": \"homogeneous|coind\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\"], \"digest\": \"a6d808491b22dbbd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction/resCoindHomEquiv concern actions of abstract groups on modules over a fixed ordinary ring; continuous homogeneous cochains concern topological representations. Neither constructs this internal-ring homogeneous action and slice-natural reconstruction nor its restriction identity. The reconstruction requires an additional internal argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at the identity gives the coinduction adjunction for internal group actions on sheaves of modules",
+   "results": "{\"t\": \"2026-10-22T06:11:40Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation at the identity gives the coinduction adjunction for internal group actions on sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.coindResAdjunction\", \"Rep.resCoindAdjunction\", \"Rep.coindResAdjunction_counit_app\", \"CategoryTheory.ihom.ev\", \"SheafOfModules.evaluation\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"CategoryTheory.exp.ev\", \"Rep.instIsRightAdjointCoindFunctor\"], \"digest\": \"fbb3e89e8a0d9f6f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction/resCoindHomEquiv concern actions of abstract groups on modules over a fixed ordinary ring; continuous homogeneous cochains concern topological representations. Neither constructs this internal-ring homogeneous action and slice-natural reconstruction nor its restriction identity. The reconstruction requires an additional internal argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coind\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-22T06:11:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"coind\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Rep.resCoindAdjunction\", \"Rep.coindResAdjunction\", \"Rep.coindResAdjunction_counit_app\", \"Rep.coindResAdjunction_unit_app\", \"Rep.coindResAdjunction_homEquiv_apply\", \"Rep.coindResAdjunction_homEquiv_symm_apply\"], \"digest\": \"12dfd58fe2d75602\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction/resCoindHomEquiv concern actions of abstract groups on modules over a fixed ordinary ring; continuous homogeneous cochains concern topological representations. Neither constructs this internal-ring homogeneous action and slice-natural reconstruction nor its restriction identity. The reconstruction requires an additional internal argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous internal functions on a profinite group satisfy a natural bijection between equivariant maps M to Hom(A[G^(n+1)],J) and linear maps A[G^n] tensor M to J",
+   "results": "{\"t\": \"2026-10-22T06:12:08Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous internal functions on a profinite group satisfy a natural bijection between equivariant maps M to Hom(A[G^(n+1)],J) and linear maps A[G^n] tensor M to J\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.ihom_ev_app_hom\", \"Rep.ihom_coev_app_hom\", \"Rep.MonoidalClosed.linearHomEquiv\", \"Rep.MonoidalClosed.linearHomEquivComm\", \"Rep.indResHomEquiv_symm_apply_hom\", \"FDRep.dualTensorIsoLinHomAux\", \"Rep.homEquiv_symm_apply_hom\", \"TannakaDuality.FiniteGroup.mulRepHom\"], \"digest\": \"3925aca236cbbb26\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction/resCoindHomEquiv concern actions of abstract groups on modules over a fixed ordinary ring; continuous homogeneous cochains concern topological representations. Neither constructs this internal-ring homogeneous action and slice-natural reconstruction nor its restriction identity. The reconstruction requires an additional internal argument."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous|resCoindAdjunction",
+   "results": "{\"t\": \"2026-10-22T06:12:09Z\", \"tool\": \"grep\", \"query\": \"homogeneous|resCoindAdjunction\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\"], \"digest\": \"6d5f15091ad76749\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction/resCoindHomEquiv concern actions of abstract groups on modules over a fixed ordinary ring; continuous homogeneous cochains concern topological representations. Neither constructs this internal-ring homogeneous action and slice-natural reconstruction nor its restriction identity. The reconstruction requires an additional internal argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal coinduction tensor Hom adjunction for condensed modules: reconstruct an equivariant map by g0 times beta of relative group coordinates tensor g0 inverse m",
+   "results": "{\"t\": \"2026-10-22T06:12:40Z\", \"tool\": \"leanfinder\", \"query\": \"Internal coinduction tensor Hom adjunction for condensed modules: reconstruct an equivariant map by g0 times beta of relative group coordinates tensor g0 inverse m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.indResHomEquiv_symm_apply_hom\", \"Rep.ihom_ev_app_hom\", \"Rep.ihom_coev_app_hom\", \"Rep.coinvariantsTensorIndInv\", \"Rep.coindVEquiv\", \"Rep.coinvariantsTensorIndHom\", \"Rep.indResAdjunction_counit_app_hom_hom\", \"Rep.resCoindHomEquiv\"], \"digest\": \"5dccf86e0f71d520\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction/resCoindHomEquiv concern actions of abstract groups on modules over a fixed ordinary ring; continuous homogeneous cochains concern topological representations. Neither constructs this internal-ring homogeneous action and slice-natural reconstruction nor its restriction identity. The reconstruction requires an additional internal argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal condensed G modules any A linear map beta from A[G^n] tensor M to J reconstructs a G equivariant map b(m)(g0,...,gn) = g0 beta([g0 inverse g1,...] tensor g0 inverse m) compatible with prescribed submodule restrictions",
+   "results": "{\"t\": \"2026-10-22T06:13:50Z\", \"tool\": \"leanfinder\", \"query\": \"For internal condensed G modules any A linear map beta from A[G^n] tensor M to J reconstructs a G equivariant map b(m)(g0,...,gn) = g0 beta([g0 inverse g1,...] tensor g0 inverse m) compatible with prescribed submodule restrictions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.finsuppToCoinvariantsTensorFree\", \"Rep.coinvariantsTensorIndInv\", \"Rep.coinvariantsTensorFreeToFinsupp\", \"Rep.coinvariantsTensorIndHom\", \"Rep.indMap_hom\", \"Representation.ind_apply\", \"Representation.ofCoinvariantsTprodLeftRegular\", \"Rep.coinvariantsTensorIndHom_mk_tmul_indVMk\"], \"digest\": \"a87654bcfacc0cff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction/resCoindHomEquiv concern actions of abstract groups on modules over a fixed ordinary ring; continuous homogeneous cochains concern topological representations. Neither constructs this internal-ring homogeneous action and slice-natural reconstruction nor its restriction identity. The reconstruction requires an additional internal argument."
+  },
+  {
+   "tool": "grep",
+   "query": "resCoindHomEquiv|homogeneousCochains",
+   "results": "{\"t\": \"2026-10-23T10:40:19Z\", \"tool\": \"grep\", \"query\": \"resCoindHomEquiv|homogeneousCochains\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\"], \"digest\": \"cfecb925038f6524\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Rep.resCoindHomEquiv (Coinduced.lean:283), LightCondensed.ihomPoints (InternallyProjective.lean:53), and SheafOfModules.freeHomEquiv. They concern ordinary representations, light condensed modules over an ordinary ring, or free constant-index module sheaves. None states the internal action and reconstructed lift for a general condensed ring with all slice and extension identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal homogeneous functions on a profinite group admit the equivariant lift reconstructed from an A linear tensor map",
+   "results": "{\"t\": \"2026-10-23T10:40:19Z\", \"tool\": \"leansearch\", \"query\": \"Internal homogeneous functions on a profinite group admit the equivariant lift reconstructed from an A linear tensor map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.homEquiv\", \"Rep.ihom\", \"Rep.MonoidalClosed.linearHomEquiv\", \"homTensorHomEquiv\", \"PiTensorProduct.liftAddHom\", \"PiTensorProduct.mapLMultilinear_apply_apply\", \"Rep.ihom_obj_ρ_def\", \"ProfiniteGrp.Hom.ext_iff\"], \"digest\": \"e19a61cf9cb60fba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Rep.resCoindHomEquiv (Coinduced.lean:283), LightCondensed.ihomPoints (InternallyProjective.lean:53), and SheafOfModules.freeHomEquiv. They concern ordinary representations, light condensed modules over an ordinary ring, or free constant-index module sheaves. None states the internal action and reconstructed lift for a general condensed ring with all slice and extension identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"resCoindHomEquiv\"",
+   "results": "{\"t\": \"2026-10-23T10:40:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"resCoindHomEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Rep.resCoindHomEquiv\", \"Rep.resCoindHomEquiv_apply\", \"Rep.resCoindHomEquiv_symm_apply\"], \"digest\": \"c51689fdf4a02fb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Rep.resCoindHomEquiv (Coinduced.lean:283), LightCondensed.ihomPoints (InternallyProjective.lean:53), and SheafOfModules.freeHomEquiv. They concern ordinary representations, light condensed modules over an ordinary ring, or free constant-index module sheaves. None states the internal action and reconstructed lift for a general condensed ring with all slice and extension identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct an equivariant map from an internal condensed module to homogeneous functions on a profinite group using a tensor map and relative group coordinates",
+   "results": "{\"t\": \"2026-10-23T10:40:21Z\", \"tool\": \"leanfinder\", \"query\": \"Construct an equivariant map from an internal condensed module to homogeneous functions on a profinite group using a tensor map and relative group coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihom_map_val_app\", \"Condensed.profiniteFree\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\"], \"digest\": \"47b1ee760bda40fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Rep.resCoindHomEquiv (Coinduced.lean:283), LightCondensed.ihomPoints (InternallyProjective.lean:53), and SheafOfModules.freeHomEquiv. They concern ordinary representations, light condensed modules over an ordinary ring, or free constant-index module sheaves. None states the internal action and reconstructed lift for a general condensed ring with all slice and extension identities."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous|coinduc",
+   "results": "{\"t\": \"2026-10-23T10:41:16Z\", \"tool\": \"grep\", \"query\": \"homogeneous|coinduc\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\"], \"digest\": \"6c83fd2f875d25c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Rep.resCoindHomEquiv (Coinduced.lean:283), LightCondensed.ihomPoints (InternallyProjective.lean:53), and SheafOfModules.freeHomEquiv. They concern ordinary representations, light condensed modules over an ordinary ring, or free constant-index module sheaves. None states the internal action and reconstructed lift for a general condensed ring with all slice and extension identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules over a ring sheaf the coinduced homogeneous action is k f(k inverse x) and an equivariant map is reconstructed from its identity-coordinate values",
+   "results": "{\"t\": \"2026-10-23T10:41:17Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of modules over a ring sheaf the coinduced homogeneous action is k f(k inverse x) and an equivariant map is reconstructed from its identity-coordinate values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeHomEquiv\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.freeHomEquiv_symm_comp\", \"SheafOfModules.freeMap\", \"PresheafOfModules.Sheafify.SMulCandidate.x\", \"PresheafOfModules.Sheafify.SMulCandidate\", \"SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply\", \"PresheafOfModules.Sheafify.SMulCandidate.h\"], \"digest\": \"0841d76ddc52a63e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Rep.resCoindHomEquiv (Coinduced.lean:283), LightCondensed.ihomPoints (InternallyProjective.lean:53), and SheafOfModules.freeHomEquiv. They concern ordinary representations, light condensed modules over an ordinary ring, or free constant-index module sheaves. None states the internal action and reconstructed lift for a general condensed ring with all slice and extension identities."
+  },
+  {
+   "tool": "grep",
+   "query": "def ihomPoints|def profiniteFree|ihomPoints_symm",
+   "results": "{\"t\": \"2026-10-23T10:42:12Z\", \"tool\": \"grep\", \"query\": \"def ihomPoints|def profiniteFree|ihomPoints_symm\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\"], \"digest\": \"25eab5ad2d901e4f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Rep.resCoindHomEquiv (Coinduced.lean:283), LightCondensed.ihomPoints (InternallyProjective.lean:53), and SheafOfModules.freeHomEquiv. They concern ordinary representations, light condensed modules over an ordinary ring, or free constant-index module sheaves. None states the internal action and reconstructed lift for a general condensed ring with all slice and extension identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-homogeneous-functions-injective",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: internal homogeneous-function helper, old steps 6-8 (slice reconstruction, equivariance and extension identity), including well-definedness of the displayed action. Agent-formulated internal construction using Stacks Tag 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor (2)); exact condensed reference WANTED.",
+   "via": [
+    "lem-sfb-internal-homogeneous-functions-injective",
+    "lem-sfb-equivariant-resolution-bar-normalization",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-internal-homogeneous-lift-reconstruction",
+  "worker": "stage1",
+  "summary": "Constructed the normalized action and tensor-map reconstruction using existing free-linearization and closed-tensor statements. Wrote action laws, slice naturality, equivariance, normalized evaluation and extension identity explicitly. Unchanged statement; no new nodes or Mathlib leaves. Checked every cited statement and boundary cases.",
+  "blueprint": "Current latest direct-images proof, paragraph (3), open direct image. Realizes the internal homogeneous-function helper identified in the inherited ancestry, old steps 6-8, by the seven explicit steps; the current blueprint retains only the open-direct-image citation, not the internal helper details.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor–Hom adjunction and symmetry used to uncurry natural slice-linear families and construct the action and lift; the unit has no separate general closed-tensor statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-e7e7b73b8",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-e7e7b73b8 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full. This is a first split of a node Q131 created on 2026-10-22; there are no new nodes and the statement and stmt_deps are unchanged. Source: the main-20261015 blueprint, direct-images paragraph (3), has no helper argument, so proof_origin agent plus the WANTED line is right; Stacks 03EO (lemma-internal-hom-adjoint-tensor (2)) gives the general adjunction. Cited statements read: def-pur-sheaf-hom (sections are maps on the whole slice), free-linearization-tensor (generators, A[X]⊗A[Y]≅A[X×Y], A[1]≅A), tensor-closed, bar-data (sections identified with families of evaluations), action-module, homogeneous-functions (asserts no existence). Step 1 builds a map A[X]⊗V→W from a natural family linear in v, via a section of the slice Hom, the free bijection, then curry and symmetry. It never assumes the slice restriction of A[X] is free. Step 2 builds the action as A[G]⊗K→K, and its inputs are cited. Steps 3, 5 and 6 recomputed: k(l c)=(kl)c; k·b(m)=b(k m) using (k^{-1}g_0)^{-1}(k^{-1}g_i)=g_0^{-1}g_i; b(i x)(q)=g_0·h(g_0^{-1}x)(1,r)=h(x)(q), with no monicity or injectivity. Step 4 makes the lift and composes with the identification of an arbitrary model. Step 7 edge cases hold: n=0, trivial G, empty profinite set (empty cover), A=0. Tested: trivial G with n=0 gives the plain transpose, and finite discrete G gives classical coinduction. This matches the parent's use in steps 1 and 3. Not duplicates: transpose-extension (complementary), lem-exc-coinduced-* (discrete modules). No cycle. Tool use of lem-pc-sheaf-modules-tensor-closed (generic closed monoidal structure) accepted. Batch-5: lem-trf-free-module-sheaf-universal-property is Stacks 04BL, the free module sheaf universal property. It is a generic construction, not part of the trace-formula or Poincaré-duality assumptions or their proofs, so the citation is fine. Advisories: proof_origin points at blueprint/latest rather than main-20261015, and the curry value formula relies on the canonical 03EO isomorphism."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedHomogeneousLiftReconstruction",
+  "declaration": "Profinite.CondensedAction.homogeneous_lift_reconstruction",
+  "file": "lean/Sheaf/CategoryTheory/CondensedHomogeneousLiftReconstruction.lean",
+  "statement": "theorem homogeneous_lift_reconstruction (J : ActionModule R G) (n : ℕ) : Nonempty (HomogeneousFunctions R G J n) ∧ ∀ (H : HomogeneousFunctions R G J n) (M : ActionModule R G) (β : InternalBar.freePower R G n ⊗ M.module ⟶ J.module), ∃ b : M ⟶ H.object, (∀ (S : Profinite.{u}) (m : sectionModule R M.module S) (T : Profinite.{u}) (f : T ⟶ S) (q : Fin (n + 1) → C(T, G)), homogeneousEvaluate R G J n S ((H.internalHom.hom.val.app (op S)).hom (InternalBar.onSections R b.val S m)) T f q = J.act T (q 0) (InternalBar.onSections R β T (InternalBar.pureTensor R (InternalBar.freePower R G n) M.module T (InternalBar.generator R G n T (fun i ↦ (q 0)⁻¹ * q i.succ)) (M.act T (q 0)⁻¹ ((M.module.X.obj.map f.op).hom m))))) ∧ (∀ (S : Profinite.{u}) (m : sectionModule R M.module S) (T : Profinite.{u}) (f : T ⟶ S) (t : Fin n → C(T, G)), homogeneousEvaluate R G J n S ((H.internalHom.hom.val.app (op S)).hom (InternalBar.onSections R b.val S m)) T f (Fin.cons 1 t) = InternalBar.onSections R β T (InternalBar.pureTensor R (InternalBar.freePower R G n) M.module T (InternalBar.generator R G n T t) ((M.module.X.obj.map f.op).hom m))) ∧ (∀ (N : ActionModule R G) (i : N ⟶ M) (h : N ⟶ H.object), (∀ (S : Profinite.{u}) (x : sectionModule R N.module S) (T : Profinite.{u}) (f : T ⟶ S) (t : Fin n → C(T, G)), InternalBar.onSections R β T (InternalBar.pureTensor R (InternalBar.freePower R G n) M.module T (InternalBar.generator R G n T t) (InternalBar.onSections R i.val T ((N.module.X.obj.map f.op).hom x))) = homogeneousEvaluate R G J n S ((H.internalHom.hom.val.app (op S)).hom (InternalBar.onSections R h.val S x)) T f (Fin.cons 1 t)) → i ≫ b = h)",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a19b8bc8",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read item, all 10 stmt_dep records, module, report (Worker report + Second reading by Q11), and live sources of HomogeneousFunctions/homogeneousEvaluate, InternalBar.{freePower,generator,onSections,pureTensor}, ActionModule/actionCategory, and the adjacent homogeneous_transpose_extension. Clause match exact: Nonempty model outside the ∀; ∀ H M β with no β equivariance; ∃ b : M ⟶ H.object (equivariant); formula J.act (q 0)(β([(q 0)⁻¹*q i.succ] ⊗ M.act (q 0)⁻¹ m|_T)) on every T→S; normalization at Fin.cons 1 t; extension premise identical in form to transpose-extension's β conclusion; i ≫ b = h with no Mono/Injective. Maths rechecked (action laws, equivariance cancellation, extension identity, generator detection); edge cases n=0, trivial G, empty test object, zero ring covered. lean.statement verbatim; single sorry; docstrings carry source, blueprint tag and 7 steps; owners are stmt_deps (def-sfb-condensed-homogeneous-functions existing:true definition owner). Advisory only: def-sfb-condensed-action-module records the Universe.* copy, while this item and the recorded HomogeneousFunctions use the original Type-u ActionModule (same notion at v=u; known consolidation debt). No compile (no file changed)."
+ }
+}

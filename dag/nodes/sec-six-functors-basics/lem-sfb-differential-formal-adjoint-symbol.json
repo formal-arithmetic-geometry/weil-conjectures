@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-differential-formal-adjoint-symbol",
+ "kind": "statement",
+ "title": "Formal differential adjoint and its principal symbol in every order",
+ "statement": "All vector spaces are over $\\mathbf R$ [def-weil-field]. Let $N$ be a Hausdorff second-countable oriented smooth manifold without boundary [def-sfb-smooth-real-manifold], of dimension $m\\geq1$, with a smooth positive volume form $dV$ [def-sfb-oriented-smooth-volume]. Let $G,H$ be smooth real vector bundles of finite ranks [def-sfb-smooth-real-vector-bundle], equipped with smooth positive definite fibre metrics. Let $d\\geq0$ be an integer and let $Q:\\Gamma^\\infty(G)\\to\\Gamma^\\infty(H)$ be a real-linear differential operator with smooth coefficients of order at most $d$ [def-sfb-smooth-differential-operator], locally $Q=\\sum_{|\\alpha|\\leq d}b_\\alpha(x)\\partial^\\alpha$. There exists a unique real-linear differential operator $Q^*:\\Gamma^\\infty(H)\\to\\Gamma^\\infty(G)$ with smooth coefficients of order at most $d$ such that $$\\int_N\\langle Qv,w\\rangle_H\\,dV=\\int_N\\langle v,Q^*w\\rangle_G\\,dV$$ whenever $v,w$ are smooth and at least one has compact support. Its degree-$d$ principal symbol is $$\\sigma_d(Q^*)(x,\\xi)=(-1)^d\\sigma_d(Q)(x,\\xi)^*,$$ where $\\sigma_d(Q)(x,\\xi)=\\sum_{|\\alpha|=d}b_\\alpha(x)\\xi^\\alpha$ and the star on the right is the adjoint of a linear map for the fibre metrics. In local orthonormal frames it is the ordinary matrix transpose. Compactness of $N$ is not assumed.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1, definition (1.5), local formula (1.6) and symbol formula (1.7), printed pp.288--289 (PDF pages 288--289), Euclidean-bundle case; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-real-vector-bundle",
+  "def-sfb-oriented-smooth-volume",
+  "def-sfb-smooth-differential-operator"
+ ],
+ "proof": [
+  {
+   "text": "In an oriented trivializing chart $U\\subset\\mathbf R^m$, write $dV=\\rho\\,dx$ with $\\rho>0$, and let $M_G,M_H$ be the real positive definite Gram matrices in the chosen smooth frames. Put $C_\\alpha=\\rho b_\\alpha^tM_H$ and define\n$$R_Uw=(\\rho M_G)^{-1}\\sum_{|\\alpha|\\le d}(-1)^{|\\alpha|}\\partial^\\alpha(C_\\alpha w).$$\nThis is an explicit construction, not a choice from existence. The inverses are smooth: the adjugate formula expresses each entry of $M_G^{-1}$ as a polynomial in its entries times $(\\det M_G)^{-1}$; its determinant never vanishes by positive definiteness. Apply [lem-sfb-smooth-nonzero-complex-reciprocal] to the real functions $\\det M_G$ and $\\rho$, viewed in $\\mathbf C$; their reciprocals remain real. The product rule, iterated $|\\alpha|$ times, expresses $R_U$ as a finite sum of derivatives of $w$ of orders at most $d$, with smooth real matrix coefficients. Thus $R_U$ is real-linear and differential of order at most $d$.",
+   "uses": [
+    "lem-sfb-smooth-nonzero-complex-reciprocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "Specialize [lem-sfb-coordinate-weighted-adjoint] to scalar functions, identity Gram matrices, density $1$, $B=0$, and $A_j=1$ for one chosen coordinate and $A_k=0$ otherwise. Restrict its complex functions to real-valued functions. It gives $\\int_U(\\partial_j f)g\\,dx=-\\int_U f(\\partial_jg)\\,dx$ when at least one function has compact support in $U$. For a multi-index $\\alpha$, repeat this identity $|\\alpha|$ times, moving one derivative at a time. At each application the derivatives of the initially compact factor are still supported in its original compact support. The resulting identity is\n$$\\int_U(\\partial^\\alpha f)g\\,dx=(-1)^{|\\alpha|}\\int_U f\\partial^\\alpha g\\,dx.$$\nApply this to $f=v_a$ and $g=(C_\\alpha w)_a$ and sum over $a,\\alpha$. Since $\\langle Qv,w\\rangle_H\\rho=\\sum_{a,\\alpha}(\\partial^\\alpha v_a)(C_\\alpha w)_a$ and $\\langle v,R_Uw\\rangle_G\\rho=v^t\\sum_\\alpha(-1)^{|\\alpha|}\\partial^\\alpha(C_\\alpha w)$, this proves the local adjunction identity for $R_U$. If $w$ is the compact factor, each $C_\\alpha w$ is compactly supported; if $v$ is compact, each derivative of $v_a$ is. Thus either support hypothesis suffices.",
+   "uses": [
+    "lem-sfb-coordinate-weighted-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "Prove uniqueness locally before gluing. Suppose $R,S$ are smooth differential operators satisfying the local identity for compactly supported tests. Fix compactly supported smooth $w$ and set $h=(R-S)w$. Taking $v=ge_a$ for a smooth real scalar test $g$ with compact support in $U$, subtraction gives $\\int_U g\\rho(M_Gh)_a\\,dx=0$. Extend $f_a=\\rho(M_Gh)_a$ by zero outside $U$. It is continuous on $U$, so [lem-sfb-continuous-local-integrability] gives the local integrability required by [lem-sfb-smooth-test-ae-separation]. That node applies to these real tests (viewing $f_a$ as complex-valued) and gives $f_a=0$ almost everywhere on $U$. By [lem-sfb-continuous-ae-pointwise], $f_a$ is identically zero on $U$. Invertibility of $\\rho M_G$ gives $h=0$. No continuity of the zero extension at the boundary of $U$ was used.",
+   "uses": [
+    "lem-sfb-continuous-local-integrability",
+    "lem-sfb-smooth-test-ae-separation",
+    "lem-sfb-continuous-ae-pointwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "For any smooth local $w$ and $x\\in U$, choose $0<a<b$ with $\\overline B(x,b)\\subset U$. By [lem-sfb-euclidean-smooth-bump] choose $\\beta=1$ near $x$ with compact support $\\overline B(x,b)$. Then $\\beta w$, extended by zero, is a compactly supported smooth section, and step 3 gives $R(\\beta w)=S(\\beta w)$. Since differential operators depend only on the germ, $Rw(x)=Sw(x)$. This proves local uniqueness for unrestricted smooth inputs. The same cutoff extends any smooth germ to a global smooth section, a fact used below when passing between local and global operators.",
+   "uses": [
+    "lem-sfb-euclidean-smooth-bump"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "On an overlap write $y=\\phi(x)$, $v_x=P(x)v_y(\\phi(x))$, and $w_x=T(x)w_y(\\phi(x))$ for the smooth invertible frame matrices. Then $M_{G,y}\\circ\\phi=P^tM_{G,x}P$, $M_{H,y}\\circ\\phi=T^tM_{H,x}T$, and $(\\rho_y\\circ\\phi)|\\det d\\phi|=\\rho_x$. By [lem-sfb-euclidean-jacobian-integral] these identities preserve the two scalar pairing integrals under change of chart; the inputs have compact support, preserved by the diffeomorphism. Transfer the $x$-chart candidate to the $y$ chart by\n$$\\widetilde R_yw_y=\\bigl(P^{-1}R_x(T(w_y\\circ\\phi))\\bigr)\\circ\\phi^{-1}.$$\nThe repeated chain and product rules express a derivative of order $k$ of $T(w_y\\circ\\phi)$ using derivatives of $w_y$ of orders at most $k$; this follows by induction, since one further differentiation increases that order by at most one. Hence $\\widetilde R_y$ is smooth and differential of order at most $d$. The transferred adjunction identity of step 2 says it is adjoint to the given $y$-chart expression of $Q$. Steps 3–4 now imply $\\widetilde R_y=R_y$. Thus the local candidates agree as bundle-valued operators on every overlap.",
+   "uses": [
+    "lem-sfb-euclidean-jacobian-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "For a smooth section $w$ of $H$, define $Q^*w$ by $R_U(w|_U)$ in each trivializing chart. Step 5 says that these are the same vector in the fibre of $G$ on overlaps, so they define a unique global section, smooth because it is smooth in every chart. This assignment is real-linear and locally has the expression in step 1, hence is a differential operator with smooth coefficients of order at most $d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "Let $K$ be the compact support of whichever of $v,w$ is compactly supported. Choose finitely many trivializing charts $V_i$ covering $K$ and put $O=\\bigcup_iV_i$. This open submanifold is Hausdorff and sigma-compact: every open subset of $\\mathbf R^m$ is covered by its countable collection of closed rational balls contained in it. Thus [lem-sfb-smooth-subordinate-partition] applies on $O$ to the closed subset $K$ and the finite open cover $V_i$. Let $\\varphi_i$ be its functions. If $v$ is compactly supported, set $v_i=\\varphi_i v$ on $O$, extended by zero to $N$. Each $v_i$ is smooth, has compact support contained in $V_i$, and $\\sum_i v_i=v$. Sum the local identities of step 2 for $v_i,w|_{V_i}$ to get the required global identity: linearity gives $\\sum_iQv_i=Qv$, including all derivatives of the partition functions. If only $w$ is compactly supported, instead set $w_i=\\varphi_i w$ and sum the identities for $v|_{V_i},w_i$; now $\\sum_iQ^*w_i=Q^*w$. These are finite sums. All pairing integrals are genuine integrals: the local scalar pairing functions, extended by zero, are continuous with compact support, so [lem-sfb-continuous-compact-support-integrable] applies. Step 5 identifies these chart integrals with the volume-form integrals on $N$. Only $O$, not $N$, needed sigma-compactness.",
+   "uses": [
+    "lem-sfb-smooth-subordinate-partition",
+    "lem-sfb-continuous-compact-support-integrable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "Read the highest-order coefficients from step 1. Repeated Leibniz gives\n$$\\partial^\\alpha(C_\\alpha w)=\\sum_{\\gamma\\le\\alpha}\\binom\\alpha\\gamma(\\partial^{\\alpha-\\gamma}C_\\alpha)\\partial^\\gamma w.$$\nFor $|\\gamma|=d$, $|\\alpha|\\le d$ and $\\gamma\\le\\alpha$ force $\\gamma=\\alpha$ and $|\\alpha|=d$. Thus the degree-$d$ coefficient of $Q^*$ is $(-1)^d M_G^{-1}b_\\alpha^tM_H$. The fibre adjoint of $b_\\alpha$ is exactly $M_G^{-1}b_\\alpha^tM_H$, since $\\langle b_\\alpha u,z\\rangle_H=u^tb_\\alpha^tM_Hz$. Multiplying by the real scalar $\\xi^\\alpha$ and summing gives the asserted symbol equality. In orthonormal frames both Gram matrices are the identity, so this is the ordinary transpose. This calculation uses precisely the symbol convention of the statement, with no factor of $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "If another global differential operator satisfies the asserted adjunction, use compact tests supported in one chart and extend by zero to obtain its local adjunction. Steps 3–4 imply equality with the constructed operator on every local smooth germ, and hence globally. For $d=0$, step 1 reduces to $Q^*w=M_G^{-1}b_0^tM_Hw$, confirming the sign and the symbol formula. When $Q$ has order less than $d$, all degree-$d$ coefficients on both sides are zero by step 8. On a component where either bundle has rank zero, $Q$ and $Q^*$ are zero and all identities are interpreted as equalities of zero maps; the nonempty-matrix argument is needed only where both ranks are positive. On the empty manifold the assertions are vacuous. No completeness, finite volume, or compactness of $N$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-ae-pointwise",
+  "lem-sfb-continuous-compact-support-integrable",
+  "lem-sfb-continuous-local-integrability",
+  "lem-sfb-coordinate-weighted-adjoint",
+  "lem-sfb-euclidean-jacobian-integral",
+  "lem-sfb-euclidean-smooth-bump",
+  "lem-sfb-smooth-nonzero-complex-reciprocal",
+  "lem-sfb-smooth-subordinate-partition",
+  "lem-sfb-smooth-test-ae-separation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Agent-written integration-by-parts construction for Demailly VI §1, (1.5)–(1.7), printed pp.288–289; PDF absent locally and online fetch timed out. The precise analytical inputs are the cited DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "formal.adjoint|principal.symbol|IsFormalAdjoint",
+   "results": "{\"t\": \"2026-10-24T02:30:01Z\", \"tool\": \"grep\", \"query\": \"formal.adjoint|principal.symbol|IsFormalAdjoint\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\"], \"digest\": \"71bed95d12f2d114\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearPMap adjoints are abstract partially defined operators; the results do not give a smooth differential formal adjoint or its principal symbol. Read Mathlib/Analysis/InnerProductSpace/LinearPMap.lean:72--83."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The formal adjoint of a differential operator of order k exists and has principal symbol minus one to the k times the transpose principal symbol",
+   "results": "{\"t\": \"2026-10-24T02:30:01Z\", \"tool\": \"leansearch\", \"query\": \"The formal adjoint of a differential operator of order k exists and has principal symbol minus one to the k times the transpose principal symbol\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearPMap.IsFormalAdjoint\", \"LinearPMap.adjoint_isFormalAdjoint\", \"LinearPMap.IsFormalAdjoint.symm\", \"ContinuousLinearMap.adjoint_inner_left\", \"ContinuousLinearMap.adjointAux_inner_left\", \"LinearPMap.IsFormalAdjoint.le_adjoint\", \"LinearMap.adjoint_adjoint\", \"ContinuousLinearMap.adjoint_comp\"], \"digest\": \"eb8a86904866d0a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearPMap adjoints are abstract partially defined operators; the results do not give a smooth differential formal adjoint or its principal symbol. Read Mathlib/Analysis/InnerProductSpace/LinearPMap.lean:72--83."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearPMap.IsFormalAdjoint",
+   "results": "{\"t\": \"2026-10-24T02:30:01Z\", \"tool\": \"loogle\", \"query\": \"LinearPMap.IsFormalAdjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"LinearPMap.IsFormalAdjoint\", \"LinearPMap.IsFormalAdjoint.symm\", \"LinearPMap.adjoint_isFormalAdjoint\", \"LinearPMap.IsFormalAdjoint.le_adjoint\"], \"digest\": \"a7b238e4199ef7e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearPMap adjoints are abstract partially defined operators; the results do not give a smooth differential formal adjoint or its principal symbol. Read Mathlib/Analysis/InnerProductSpace/LinearPMap.lean:72--83."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth differential operator of arbitrary order between real metric vector bundles has a smooth formal adjoint whose principal symbol is the signed transpose",
+   "results": "{\"t\": \"2026-10-24T02:30:02Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth differential operator of arbitrary order between real metric vector bundles has a smooth formal adjoint whose principal symbol is the signed transpose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearPMap.IsFormalAdjoint\", \"LinearPMap.adjoint_isFormalAdjoint\", \"LinearPMap.IsFormalAdjoint.symm\", \"LinearPMap.IsFormalAdjoint.le_adjoint\", \"InnerProductSpace.instLaplacian\", \"VectorField.mpullbackWithin_mlieBracketWithin_of_isSymmSndFDerivWithinAt\", \"ContinuousLinearMap.adjointAux\", \"InnerProductSpace.laplacian_CLE_comp_left\"], \"digest\": \"c3c11ca01b751689\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearPMap adjoints are abstract partially defined operators; the results do not give a smooth differential formal adjoint or its principal symbol. Read Mathlib/Analysis/InnerProductSpace/LinearPMap.lean:72--83."
+  },
+  {
+   "tool": "grep",
+   "query": "formal.?adjoint|principal.?symbol",
+   "results": "{\"t\": \"2026-10-24T03:00:41Z\", \"tool\": \"grep\", \"query\": \"formal.?adjoint|principal.?symbol\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\"], \"digest\": \"71bed95d12f2d114\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Hilbert-space adjoints or first-derivative integration-by-parts tools do not assert smooth differential formal adjoints on bundles or the degree-d symbol identity. Read LinearPMap.lean:72–83 and SchwartzSpace/Deriv.lean:271–304."
+  },
+  {
+   "tool": "leansearch",
+   "query": "formal adjoint of a linear differential operator and principal symbol",
+   "results": "{\"t\": \"2026-10-24T03:00:42Z\", \"tool\": \"leansearch\", \"query\": \"formal adjoint of a linear differential operator and principal symbol\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearPMap.adjoint_isFormalAdjoint\", \"LinearPMap.IsFormalAdjoint\", \"LinearPMap.IsFormalAdjoint.symm\", \"LinearPMap.IsFormalAdjoint.le_adjoint\", \"LinearMap.adjoint_adjoint\", \"LinearMap.adjoint\", \"ContinuousLinearMap.adjointAux_inner_left\", \"ContinuousLinearMap.adjointAux\"], \"digest\": \"2fe3fa47eafa0762\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Hilbert-space adjoints or first-derivative integration-by-parts tools do not assert smooth differential formal adjoints on bundles or the degree-d symbol identity. Read LinearPMap.lean:72–83 and SchwartzSpace/Deriv.lean:271–304."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"formalAdjoint\"",
+   "results": "{\"t\": \"2026-10-24T03:00:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"formalAdjoint\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"LinearPMap.IsFormalAdjoint\", \"LinearPMap.IsFormalAdjoint.symm\", \"LinearPMap.adjoint_isFormalAdjoint\", \"LinearPMap.IsFormalAdjoint.le_adjoint\"], \"digest\": \"a7b238e4199ef7e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Hilbert-space adjoints or first-derivative integration-by-parts tools do not assert smooth differential formal adjoints on bundles or the degree-d symbol identity. Read LinearPMap.lean:72–83 and SchwartzSpace/Deriv.lean:271–304."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal adjoint of a smooth differential operator on real vector bundles has principal symbol equal to signed fibrewise adjoint",
+   "results": "{\"t\": \"2026-10-24T03:00:43Z\", \"tool\": \"leanfinder\", \"query\": \"Formal adjoint of a smooth differential operator on real vector bundles has principal symbol equal to signed fibrewise adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearPMap.adjoint_isFormalAdjoint\", \"LinearPMap.IsFormalAdjoint\", \"LinearPMap.IsFormalAdjoint.symm\", \"LinearPMap.IsFormalAdjoint.le_adjoint\", \"ContinuousLinearMap.innerSL_apply_comp_of_isSymmetric\", \"LinearMap.IsSymmetric.clm_adjoint_eq\", \"LinearMap.IsSymmetric.hasStrictFDerivAt_reApplyInnerSelf\", \"ContinuousLinearMap.adjointAux_apply\"], \"digest\": \"b726ff4265d79dd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Hilbert-space adjoints or first-derivative integration-by-parts tools do not assert smooth differential formal adjoints on bundles or the degree-d symbol identity. Read LinearPMap.lean:72–83 and SchwartzSpace/Deriv.lean:271–304."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialOperator|principalSymbol|formalAdjoint|transpose.*deriv",
+   "results": "{\"t\": \"2026-10-24T03:01:58Z\", \"tool\": \"grep\", \"query\": \"DifferentialOperator|principalSymbol|formalAdjoint|transpose.*deriv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\"], \"digest\": \"59fe8244af80f3e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Hilbert-space adjoints or first-derivative integration-by-parts tools do not assert smooth differential formal adjoints on bundles or the degree-d symbol identity. Read LinearPMap.lean:72–83 and SchwartzSpace/Deriv.lean:271–304."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integration by parts constructs the transpose differential operator of arbitrary order on a vector bundle with smooth density",
+   "results": "{\"t\": \"2026-10-24T03:02:02Z\", \"tool\": \"leanfinder\", \"query\": \"Integration by parts constructs the transpose differential operator of arbitrary order on a vector bundle with smooth density\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hfdifferential\", \"SchwartzMap.integral_clm_comp_lineDerivOp_right_eq_neg_left\", \"SchwartzMap.integral_smul_lineDerivOp_right_eq_neg_left\", \"SchwartzMap.integral_mul_lineDerivOp_right_eq_neg_left\", \"SchwartzMap.integral_bilinear_lineDerivOp_right_eq_neg_left\", \"extDerivWithin_apply_vectorField\", \"extDeriv_apply_vectorField\", \"extDerivWithin_pullback\"], \"digest\": \"5c4b06db5d07a946\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Hilbert-space adjoints or first-derivative integration-by-parts tools do not assert smooth differential formal adjoints on bundles or the degree-d symbol identity. Read LinearPMap.lean:72–83 and SchwartzSpace/Deriv.lean:271–304."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem integral_.*lineDerivOp.*eq_neg",
+   "results": "{\"t\": \"2026-10-24T03:03:34Z\", \"tool\": \"grep\", \"query\": \"theorem integral_.*lineDerivOp.*eq_neg\", \"sub\": \"Analysis/Distribution/SchwartzSpace\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv.lean\"], \"digest\": \"cf7d6de286c86688\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Hilbert-space adjoints or first-derivative integration-by-parts tools do not assert smooth differential formal adjoints on bundles or the degree-d symbol identity. Read LinearPMap.lean:72–83 and SchwartzSpace/Deriv.lean:271–304."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-adjoint-regularity",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §1, definition (1.5), local formula (1.6) and symbol formula (1.7), printed pp.288--289 (PDF pages 288--289), Euclidean-bundle case.",
+   "via": [
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-differential-formal-adjoint-symbol",
+  "worker": "stage1",
+  "summary": "Explicit weighted arbitrary-order coordinate construction, repeated scalar integration by parts using the existing first-order weighted node, local uniqueness by existing test separation, chart compatibility by change of variables, and finite partition assembly. Computed the top coefficients directly. No new nodes; no statement change. Source absent locally and online requests timed out, so proof is explicitly agent-written.",
+  "blueprint": "Supporting formal-adjoint prerequisite of lem-sfb-elliptic-adjoint-regularity in the inherited det-thm-sf-ctf-stability-direct-images proof-(3) analytic branch. Read the current latest direct-images proof: the analytic branch is a downstream prerequisite, not a replacement of that unit step. The mechanical ancestor is null; preserve inherited from.node and via. Steps 1–9 realize the adjoint construction and signed-symbol claim named at the end of inherited blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-25214157b",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-25214157b (reviewer sub-agent of L); spot-checked: I read all 9 steps against the full statements of the 9 cited nodes, all in unit sk-thm-sf-ctf-stability (no off-route use, so no tool_uses needed). Statement unchanged. Demailly VI §1 is absent from the literature, so the proof is correctly marked agent-written with a WANTED line. Live and side-live still show the item unsplit, and there is no repair note. No new nodes, and no duplicate in the DAG: first-order-local-formal-adjoint covers only order ≤1 over ℂ. Steps: (1) explicit R_U from the adjugate inverse, with smooth reciprocals from smooth-nonzero-complex-reciprocal; (2) coordinate-weighted-adjoint specialized to r=s=1, H=1, ρ=1, B=0, A_j=e_j gives ∫∂_j f·g=−∫f∂_j g, iterated, and the pairing algebra ρ⟨Qv,w⟩=Σ(∂^αv)ᵗC_αw checks out; (3) uniqueness via local integrability, test separation (test class matched) and a.e.⇒pointwise; (4) bump cutoff plus locality; (5) frame, metric and density transformation rules checked, Jacobian node used, uniqueness applied on the overlap (a written argument, not an E5 'transport'); (7) partition of unity on the finite chart union O, which is Hausdorff and σ-compact, with K closed in O and both compact-support cases handled; (8) only α=γ contributes in top degree, giving (−1)^d M_G⁻¹b_αᵗM_H, which is the fibre adjoint (verified). Edge cases checked: d=0, actual order <d, rank 0, empty N, d=1 with Q=∂_j. Note: blueprint.from.node is null, inherited from the creator chain; if landing complains about it, that is a base-node fault, not this delivery's. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Calculus.DifferentialFormalAdjointSymbol",
+  "declaration": "SmoothDifferentialOperator.exists_unique_formalAdjoint_symbol",
+  "declarations": [
+   "SmoothDifferentialOperator.IsFormalAdjointFor",
+   "SmoothDifferentialOperator.exists_unique_formalAdjoint_symbol"
+  ],
+  "file": "lean/Sheaf/Analysis/Calculus/DifferentialFormalAdjointSymbol.lean",
+  "statement": "theorem exists_unique_formalAdjoint_symbol (hm : 1 ≤ m) [T2Space M] [SecondCountableTopology M] [BorelSpace M] [IsManifold (𝓘(ℝ, Fin m → ℝ)) ∞ M] [FiniteDimensional ℝ F] [FiniteDimensional ℝ K] [ContMDiffVectorBundle ∞ F G (𝓘(ℝ, Fin m → ℝ))] [ContMDiffVectorBundle ∞ K H (𝓘(ℝ, Fin m → ℝ))] [IsContMDiffRiemannianBundle (𝓘(ℝ, Fin m → ℝ)) ∞ F G] [IsContMDiffRiemannianBundle (𝓘(ℝ, Fin m → ℝ)) ∞ K H] (dV : Manifold.OrientedSmoothVolume (m := m) M) (d : ℕ) (Q : ContMDiffSection (𝓘(ℝ, Fin m → ℝ)) F ∞ G →ₗ[ℝ] ContMDiffSection (𝓘(ℝ, Fin m → ℝ)) K ∞ H) (hQ : IsSmoothDifferentialOperator d Q) : ∃ R : ContMDiffSection (𝓘(ℝ, Fin m → ℝ)) K ∞ H →ₗ[ℝ] ContMDiffSection (𝓘(ℝ, Fin m → ℝ)) F ∞ G, IsSmoothDifferentialOperator d R ∧ IsFormalAdjointFor (m := m) dV.measure Q R ∧ (∀ (p : M) (U V : Set (Fin m → ℝ)) (b : (Fin m → Fin (d + 1)) → (Fin m → ℝ) → F →L[ℝ] K) (c : (Fin m → Fin (d + 1)) → (Fin m → ℝ) → K →L[ℝ] F), IsLocalPresentation Q p U b → IsLocalPresentation R p V c → ∀ (ξ : Fin m → ℝ) (a : G p) (z : H p), inner ℝ a (presentationSymbol (G := H) (H := G) p c ξ z) = (-1 : ℝ) ^ d * inner ℝ (presentationSymbol (G := G) (H := H) p b ξ a) z) ∧ ∀ S : ContMDiffSection (𝓘(ℝ, Fin m → ℝ)) K ∞ H →ₗ[ℝ] ContMDiffSection (𝓘(ℝ, Fin m → ℝ)) F ∞ G, IsSmoothDifferentialOperator d S → IsFormalAdjointFor (m := m) dV.measure Q S → S = R",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f8e32127",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Clause check of SmoothDifferentialOperator.exists_unique_formalAdjoint_symbol against the node. Real scalars; T2 + second countable + IsManifold on Fin m → ℝ, hm 1 ≤ m, no compactness. OrientedSmoothVolume: oriented subatlas, smooth positive densities, chart pushforward measure law (with BorelSpace it determines μ; locally finite). Fibre metrics via IsContMDiffRiemannianBundle ∞ (actual smooth inner products). IsSmoothDifferentialOperator: local expression Σ_{|α|≤d} b_α ∂^α in the preferred chart and frames, smooth coefficients on an open U. Existence of R with the order bound and IsFormalAdjointFor (either section with compact closure of its nonzero set; Bochner integrals are genuine). Symbol identity ⟪a, σ_R z⟫ = (−1)^d ⟪σ_Q a, z⟫ for all presentations; not stronger, since coefficients are determined by the operator. Uniqueness among order-≤d formal adjoints without requiring the symbol of S. §1(C) correction adding Hausdorff/second countable is source-based (Demailly I §1.A); both citers hold. Verbatim lean.statement for the item and both new nodes; item record changed only in lean/statement/statement_change/stmt_deps. Docstrings with source and blueprint, nine proof steps, sorry only; universes independent. Edge cases d=0, lower order, rank 0, empty M, ξ=0 covered. Maintainer note: parallel PASS deliveries Q45 db8bb1e9 (def-sfb-smooth-real-differential-operator, real-metric-volume) and Q68 d2f64cd0 (coordinate differential operator, smooth positive density) overlap these notions; both landings failed and neither is in live, so whichever lands second should reuse the first. No compile run (no file changed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q88 stage 2",
+  "old_statement": "All vector spaces are over $\\mathbf R$ [def-weil-field]. Let $N$ be an oriented smooth manifold without boundary, of dimension $m\\geq1$, with a smooth positive volume form $dV$. Let $G,H$ be smooth real vector bundles of finite ranks, equipped with smooth positive definite fibre metrics. Let $d\\geq0$ be an integer and let $Q:\\Gamma^\\infty(G)\\to\\Gamma^\\infty(H)$ be a real-linear differential operator with smooth coefficients of order at most $d$, locally $Q=\\sum_{|\\alpha|\\leq d}b_\\alpha(x)\\partial^\\alpha$. There exists a unique real-linear differential operator $Q^*:\\Gamma^\\infty(H)\\to\\Gamma^\\infty(G)$ with smooth coefficients of order at most $d$ such that $$\\int_N\\langle Qv,w\\rangle_H\\,dV=\\int_N\\langle v,Q^*w\\rangle_G\\,dV$$ whenever $v,w$ are smooth and at least one has compact support. Its degree-$d$ principal symbol is $$\\sigma_d(Q^*)(x,\\xi)=(-1)^d\\sigma_d(Q)(x,\\xi)^*,$$ where $\\sigma_d(Q)(x,\\xi)=\\sum_{|\\alpha|=d}b_\\alpha(x)\\xi^\\alpha$ and the star on the right is the adjoint of a linear map for the fibre metrics. In local orthonormal frames it is the ordinary matrix transpose. Compactness of $N$ is not assumed.",
+  "what": "The node left the standing separation and size hypotheses of the cited source implicit. Mathlib IsManifold by itself includes neither. Demailly I §1.A, printed p.7, explicitly assumes all manifolds Hausdorff and with a countable basis; VI §1 uses this convention. Make those hypotheses explicit, without adding compactness, and attach the missing notion references.",
+  "source": {
+   "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+   "place": "I §1.A, printed p.7, definition of differentiable manifold (Hausdorff and countable basis), and VI §1, (1.1)–(1.7), printed pp.287–289; online PDF read and downloaded in the sandbox."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-elliptic-adjoint-regularity",
+    "holds": true,
+    "note": "Uses the formal adjoint and its signed symbol on a compact smooth manifold with the standing Demailly Hausdorff second-countable convention; the clarified assumptions are satisfied."
+   },
+   {
+    "id": "lem-sfb-elliptic-global-garding-estimate",
+    "holds": true,
+    "note": "Uses the formal adjoint and its signed symbol on a compact smooth manifold with the standing Demailly Hausdorff second-countable convention; the clarified assumptions are satisfied."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-field"
+  ]
+ }
+}

@@ -1,0 +1,202 @@
+{
+ "id": "lem-sfb-space-local-ring-dimension-quasifinite",
+ "kind": "statement",
+ "title": "Pointwise local-ring dimension inequality for locally quasi-finite algebraic-space morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $U$ an $S$-scheme, $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $f:U\\to X$ a representable morphism, with point sets [def-a1-space-point-topology]. For an algebraic space $Z$ and a point $z\\in|Z|$, write $\\delta_Z(z)$ for the dimension of its local ring, namely the common value $\\dim\\mathcal O_{W,w}$ for an etale morphism $W\\to Z$ from a scheme and a point $w$ above $z$; $\\mathcal O_{W,w}$ is the stalk of the structure sheaf. Ring dimension is [def-weil-pbc-krull-dimension-ring] and etale morphisms are [def-weil-etale-morphism]. Assume that $f$ is locally quasi-finite: after every etale scheme chart $V\\to X$, the scheme morphism $U\\times_XV\\to V$ is locally quasi-finite [pqf-def-quasifinite]; the fibre product is the sheaf fibre product, represented by a scheme by representability. Then for every $u\\in U$ one has $$\\dim\\mathcal O_{U,u}\\leq\\delta_X(f(u)).$$ No quasi-separatedness, quasi-compactness, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0ABW, lemma-dimension-local-ring-quasi-finite. The chart definition and scheme agreement are spaces-properties.tex, Tag 04NA (definition-dimension-local-ring) and Tag 0BAM (lemma-pre-dimension-local-ring)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "pqf-def-quasifinite",
+  "lem-sfb-space-local-dimension-chart-invariance"
+ ],
+ "proof": [
+  {
+   "text": "Fix $u\\in U$. Choose a representable surjective etale atlas $p:V\\to X$ from the definition [def-trf-algebraic-space]. Its scheme test along $f$ is $P=U\\times_XV$, a scheme with surjective etale projection $a:P\\to U$. Choose $w\\in P$ over $u$, and put $v=b(w)$ for the other projection $b:P\\to V$. The fibre-product relation gives $p(v)=f(u)$. By the hypothesis on $f$, $b$ is locally quasi-finite. These are direct applications of representable surjectivity and etaleness on the scheme test $U$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ABW (lemma-dimension-local-ring-quasi-finite), proof: etale charts and reduction to Algebra Tag 00QF."
+   }
+  },
+  {
+   "text": "Unfold quasi-finiteness of $b$ at $w$ using [pqf-def-quasifinite]. It supplies affine neighbourhoods $\\operatorname{Spec}B\\subset P$ of $w$ and $\\operatorname{Spec}A\\subset V$ of $v$, with the former mapped into the latter, for which $A\\to B$ is finite type and quasi-finite at the prime $\\mathfrak q$ of $w$. Its contraction $\\mathfrak p$ is the prime of $v$.",
+   "uses": [
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TD (definition-quasi-finite), affine neighbourhoods in the definition of quasi-finite at a point."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-dimension-inequality-quasi-finite] to $A\\to B$, $\\mathfrak q$, and $\\mathfrak p$: it gives $\\dim B_{\\mathfrak q}\\leq\\dim A_{\\mathfrak p}$. The affine-open stalk identifications in [lem-weil-pbc-affine-open-stalk-localization] identify these rings with $\\mathcal O_{P,w}$ and $\\mathcal O_{V,v}$, respectively. Ring isomorphisms carry strict prime chains bijectively to strict prime chains, so $$\\dim\\mathcal O_{P,w}\\leq\\dim\\mathcal O_{V,v}.$$",
+   "uses": [
+    "lem-weil-pbc-dimension-inequality-quasi-finite",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QF (lemma-dimension-inequality-quasi-finite), applied in the final sentence of the proof of Tag 0ABW."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-space-local-dimension-chart-invariance] for the etale chart $a:P\\to U$ and the identity chart of the scheme $U$: $\\dim\\mathcal O_{P,w}=\\dim\\mathcal O_{U,u}$. For the etale chart $p:V\\to X$ at $v$, the same node gives $\\dim\\mathcal O_{V,v}=\\delta_X(f(u))$. Substituting both equalities in step 3 proves the asserted inequality. Since $u$ was arbitrary this proves every pointwise assertion, including the vacuous case $U=\\varnothing$.",
+   "uses": [
+    "lem-sfb-space-local-dimension-chart-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0BAM (lemma-pre-dimension-local-ring) and Tag 04NA (definition-dimension-local-ring), as used in the first sentence of the proof of Tag 0ABW."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-dimension-inequality-quasi-finite",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sfb-space-local-dimension-chart-invariance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0ABW (lemma-dimension-local-ring-quasi-finite), proof, specialized to a scheme source; affine reduction to Tag 00QF written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally quasi finite morphism from a scheme to an algebraic space the dimension of the source local ring is at most the etale local ring dimension at its image",
+   "results": "OK 8 hits; AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, AlgebraicGeometry.IsEtale.of_comp, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.locallyQuasiFinite_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension inequality for stalks under a quasi finite map to an algebraic space computed using etale scheme charts",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyOfFiniteType.stalkMap, ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_le_ringKrullDim_add_spanFinrank, ringKrullDim_le_ringKrullDim_quotSMulTop_succ, Ring.krullDimLE_of_isLocalization_maximal, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_quotient",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"dim\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*[Dd]im.*quasi.?[Ff]inite|quasi.?[Ff]inite.*local.*[Dd]im|[Aa]lgebraic[Ss]pace",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally quasi finite morphism of algebraic spaces does not increase the dimension of the local rings at points",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, RingHom.QuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, RingHom.QuasiFinite.propertyIsLocal, RingHom.QuasiFinite.of_finite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally quasi finite morphism from a scheme to an algebraic space does not increase the dimension of local rings",
+   "results": "8 hits: AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.LocallyQuasiFinite.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes and rings, and do not state the algebraic-space local-dimension inequality"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasiFinite.*ringKrullDim|ringKrullDim.*quasiFinite",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes and rings, and do not state the algebraic-space local-dimension inequality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of a source stalk is bounded by the etale chart local dimension at its image under a locally quasi finite map to an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFiniteType.stalkMap, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', Algebra.QuasiFiniteAt.of_surjectiveOnStalks, Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.Scheme.Hom.stalkMap",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes and rings, and do not state the algebraic-space local-dimension inequality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"ringKrullDim\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes and rings, and do not state the algebraic-space local-dimension inequality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasifinite-source-dimension-bound",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Pointwise inequality underlying the source-dimension bound in the proof of Tag 0ADD, first paragraph; the local-ring estimate is Tag 0ABW.",
+   "via": [
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-local-ring-dimension-quasifinite",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all hypotheses. Expanded the atlas pullback and affine ring reduction in the proof of Stacks 0ABW. Reused the existing 00QF inequality and affine stalk-localization leaf. Added one statement-only input, 0BAM/04NA chart-independence and scheme agreement, to justify the local-dimension notation and the two concluding equalities.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting dimension induction: the 0ADD source-dimension argument uses the pointwise estimate 0ABW. The item keeps its inherited nearest blueprint ancestor (null, as blueprint_refs.py ancestor reports); its exact place and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-inequality-quasi-finite",
+    "why": "Generic commutative-algebra inequality 00QF explicitly invoked by 0ABW; no algebraic-space unit lemma replaces this affine ring estimate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-inequality-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-9cfa92bcd",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-9cfa92bcd (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, and Stacks 0ABW (decent-spaces), 0BAM/04NA (spaces-properties) and 00QF. The item is 0ABW with a scheme source and is unchanged; no hypothesis was added or dropped. Step 1 is the atlas test along f, elementary: P is a scheme, a:P->U is surjective etale, and b is locally quasi-finite because the atlas is a chart. Step 2 unfolds 01TD into affine A->B, finite type and quasi-finite at q. Step 3 applies 00QF; all its hypotheses come from step 2, and the stalk-localization leaf (c) gives O ~ localization. Step 4 uses the new node: the scheme clause for U and the chart clauses for a:P->U and p:V->X. This treats h_U as an algebraic space, which the item statement already does, so it adds no gap. New node lem-sfb-space-local-dimension-chart-invariance is 0BAM (any/some chart, scheme agreement) plus 04NA. Its statement is self-contained and true without Noetherian or quasi-separated hypotheses (via 04N8/07QP); I tested it on Spec k, A^1, infinite-rank valuation rings and the empty space. It is statement-only and has three kinds of Mathlib search. A DAG search over 0BAM/04NA/04N8 and 'dimension of the local ring' finds no duplicate: the 0BAN topological-dimension and 0A4J nodes are different statements. It is not a clause of its parent, since it has no inequality and no quasi-finite hypothesis. Accepted tool_use: 00QF node lem-weil-pbc-dimension-inequality-quasi-finite (sk-thm-p1), a generic commutative-algebra lemma that 0ABW names. Batch-5 flags: def-trf-algebraic-space and def-a1-space-point-topology are general definitions of algebraic spaces and |X| (025Y, 03BU/03BX), not trace-formula or Poincare-duality content, and the base item statement already cited both, so I accepted them. There is no SGA citation and no re-split note. No changes."
+ }
+}

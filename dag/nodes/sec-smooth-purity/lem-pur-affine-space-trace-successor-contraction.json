@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-affine-space-trace-successor-contraction",
+ "kind": "statement",
+ "title": "Successor integration factors through the explicit last-line contraction",
+ "statement": "Let P be a finite purity setting [def-pur-conventions], Y separated finite type over k with structure aY, and d>=0. Write I_j:C_jT_j→A_Y for the actual ordered exceptional transpose [def-pur-ordered-affine-trace-data]. Let h certify bounded-below etale origin of H_(d+1) [def-pur-affine-space-binary-trace-coordinates], and hq certify invertibility of the specified coefficient-first projection for the last affine line with coefficient T_(d+1) [def-pur-affine-line-purity-comparison]. For the explicit contraction L_(d+1)(h,hq) [def-pur-affine-space-last-line-contraction], I_(d+2)=L_(d+1)(h,hq);I_(d+1). No trace base-change or binary-product hypothesis is used.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration on affine space, ordered trace recursion and projection formula"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-ordered-affine-trace-data",
+  "def-pur-affine-space-binary-trace-coordinates",
+  "def-pur-affine-space-last-line-contraction",
+  "def-pur-affine-line-purity-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The shifted Tate coefficient T_(d+1) is a finite-Tor constructible object: start with the constant unit, tensor successively with the locally free rank-one Tate line and shift by two at each stage. Thus it has a bounded ordinary etale representative for use in the line/composite transpose theorem.",
+   "uses": [
+    "prop-weil-twist-preserves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-affine-line-composite-transpose] at p=p_(d+1), M=T_(d+1), K=A_Y, t=gamma_(p,A_Y). Unfold the ordered comparison successor. Its source is inverse tateSourceIso followed by sourceReassociation and lineSource(tateSourceIso), precisely successorSourceIso. Naturality of the evaluation moves the last source isomorphism to the left. The normalized inverse compositor and canonical change to the standard line compactification give exactly lastLineContraction. The projection inverse used in evaluation and the one certified by hq invert the identical specified projection, so they agree. The remaining image of gamma followed by the counit is I_(d+1). Functoriality and composition associativity give the equality.",
+   "uses": [
+    "lem-pur-affine-line-composite-transpose",
+    "def-pur-affine-space-comparison",
+    "def-pur-affine-space-last-line-contraction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-twist-preserves",
+  "lem-pur-affine-line-composite-transpose",
+  "def-pur-affine-space-comparison",
+  "def-pur-affine-space-last-line-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration on affine space, ordered trace recursion and projection formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional transpose of ordered affine space purity comparison equals the tensor product of normalized affine line integration under relative compact support Kunneth",
+   "results": "BoxIntegral.IntegrationParams.isoProd, MeasureTheory.GridLines.T, SSet.prodStdSimplex.nonDegenerate_iff_strictMono_objEquiv, exteriorPower.pairingDual_apply_apply_eq_one, NumberField.mixedEmbedding.fundamentalCone.setLIntegral_expMapBasis_image, MeasureTheory.GridLines.T_univ, NumberField.mixedEmbedding.volume_eq_two_pi_pow_mul_integral, NumberField.mixedEmbedding.volume_eq_two_pow_mul_two_pi_pow_mul_integral",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.NatTrans.naturality\"",
+   "results": "CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.naturality_assoc, CategoryTheory.NatTrans.naturality_map, CategoryTheory.NatTrans.naturality_map_assoc, CategoryTheory.NatTrans.naturality_inv, CategoryTheory.NatTrans.naturality_inv_assoc, CategoryTheory.NatTrans.naturality_app, CategoryTheory.NatTrans.naturality_app_assoc",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*factorization|integration.*succ|integration.*kunneth",
+   "results": "No matching declarations.",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the counit transpose for affine line purity under composition and base change",
+   "results": "CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Comonad.counit_naturality, CategoryTheory.Comonad.counit_naturality_assoc, CategoryTheory.Equivalence.counit_naturality_assoc, CategoryTheory.Equivalence.counit_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.OverPresheafAux.counitForward_naturality₁",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support Kunneth product composed with a line trace equals contraction of the last affine line",
+   "results": "GenLoop.cCompInsert, curveIntegralFun_segment, curveIntegral_segment, GenLoop.fromLoop_apply, GenLoop.toLoop_apply_coe, GenLoop.toLoop_apply, GenLoop.fromLoop_coe, GenLoop.homotopyTo_apply",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineSpaceTraceFactorization",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4, Integration paragraph: ordered trace and binary product",
+   "via": [
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineSpaceTraceSuccessorContraction",
+  "file": "lean/Sheaf/Paper/AffineSpaceTraceSuccessorContraction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineSpaceTrace.integration_successor_contraction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineSpaceTrace.integration_successor_contraction"
+  ],
+  "statement": "theorem integration_successor_contraction\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})\n    (aY : Y ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (d : ℕ)\n    (h : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (Ring P))\n      (iteratedAffineLine Y (d + 2)) (externalTate P Y (d + 1)))\n    (hq : ProjectionInvertible (Ring P)\n      (affineTraceLineCompactification (iteratedAffineLine Y (d + 1)))\n      (coefficient P.coefficients.l P.extension (P.level - 1)\n        (iteratedAffineLine Y (d + 1)) P.level (annihilates P)) (tate P Y (d + 1))) :\n    integration P Y aY (d + 2) =\n      lastLineContraction P Y aY d h hq ≫ integration P Y aY (d + 1)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-63e77",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261025T204458-L-2960906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-63e77",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261025T204458-L-2960906",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 3 new modules + 7 node files vs live composite_transpose/standingEvaluation, originChange/TraceCompatible, affineSpace_lastFactor_product, OrderedAffineTranspose.integration/tateSourceIso and the base item node"
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "id": "lem-sf-ordinary-projection-inner-constructible",
+ "kind": "statement",
+ "title": "Constructibility of the ordinary inner tensor on the qcqs finite-type domain",
+ "statement": "For schemes X,Y of finite type over the finite field D, a separated finite-type morphism f:X→Y, the completed integral coefficient ring of the finite extension E of Q_l with l≠D.p, and integral constructibles K,L, the ordinary tensor of K with ordinary derived pullback of L is integral constructible and its actual completion unit is invertible, for any representative-normalized tensor model. This uses the representative-normalized tensor of [def-sfb-proetale-tensor-model], the ordinary pullback of [def-sf-ordinary-integral-derived-pullback], and the constructible category of [def-weil-derived-complete-integral-detailed]. No separatedness of the structure maps is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.5.3–6.5.5 and 6.5.9(5); blueprint integral projection step 2"
+ },
+ "stmt_deps": [
+  "def-sfb-proetale-tensor-model",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sf-ordinary-integral-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the finite field gives locally Noetherian and compact schemes, hence Noetherian schemes, finite dimension, and invertibility of the coefficient prime globally and in residue fields. Identify the module pullback with ordinaryIntegralModulePull through the identical completed ring map, uniqueness of left adjoints, and uniqueness of their left derived functors. Apply ordinaryCompletedIntegralPullback to obtain constructibility of ordinary pullback.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-tw-ordinary-completed-integral-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose actual flat-term K-flat resolutions of the two inputs. The tensor representative normalization identifies the supplied tensor model with the ordinary tensor in constructibleTensorCompletion. Its comparison with integralCompletedTensor is invertible on constructible inputs. The completed tensor preserves constructibility; transport this property through the two isomorphisms. The ordinary tensor is complete by the constructible tensor-completion theorem, so the qcqs completion-unit locality theorem makes its actual unit invertible; transport through the tensor-model isomorphism by unit naturality.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-fix-constructible-tensor-completion",
+    "lem-fix-qcqs-completion-unit-locality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-dimension-finite-type",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-fix-constructible-tensor-completion",
+  "lem-fix-qcqs-completion-unit-locality"
+ ],
+ "proof_origin": {
+  "kind": "source",
+  "note": "Applies the already proved private tensor_domains, pull_domains, finite_dimension, scheme_unit and residue_unit lemmas through a private import all of SfProEtaleProjectionFormula. Their proofs use ordinary pullback, K-flat normalization and the actual completion unit, without structural separatedness."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConcreteIntegralProjectionCone",
+  "date": "2026-10-25",
+  "group": "D6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-concrete-integral-projection-cone",
+   "place": "Integral endpoint step 2, before completion and compact support",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryProjectionInnerConstructible",
+  "file": "lean/Sheaf/Paper/OrdinaryProjectionInnerConstructible.lean",
+  "declaration": "WeilConjectures.ordinaryProjectionInnerConstructible",
+  "statement": "theorem ordinaryProjectionInnerConstructible\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f]\n    [LocallyOfFiniteType f] [QuasiCompact f]\n    (aX : SfProEtaleProjection.TensorModel l E X)\n    (K : sfIntegralConstructibleCategory l E X) (L : sfIntegralConstructibleCategory l E Y)\n    (_hK : finiteTorConstructibleIntegral l E X K.obj)\n    (_hL : finiteTorConstructibleIntegral l E Y L.obj) :\n    sfIntegralConstructible l E X\n      (SfProEtaleProjection.ordinaryInner l E f aX K.obj L.obj) ∧\n    IsIso ((IntegralOnSlice.completionUnit l E X none).app\n      (SfProEtaleProjection.ordinaryInner l E f aX K.obj L.obj))",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary derived tensor of two constructible complete integral sheaves is constructible",
+   "results": "Eight hits about monoidal light condensed modules and Cartesian sheaf tensor, with no constructible derived completeness statement. Existing private tensor_domains and pull_domains proofs in SfProEtaleProjectionFormula were reused as the proof route.",
+   "date": "2026-10-25",
+   "verdict": "Library proof reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedUnique",
+   "results": "0 hits: unknown identifier in search index; source lookup finds the existing general uniqueness theorem.",
+   "date": "2026-10-25",
+   "verdict": "General uniqueness used in pullback comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*tensor|tensor.*constructible",
+   "results": "0 Mathlib hits. Repository has constructibleTensorCompletion and integralOperations_preserve_constructible.",
+   "date": "2026-10-25",
+   "verdict": "Existing declared dependencies suffice."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-27f52",
+  "group": "D6",
+  "result": "fix",
+  "landing": "20261025T201631-L-2591332",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-27f52",
+  "group": "D6",
+  "result": "fix",
+  "landing": "20261025T201631-L-2591332",
+  "kind": "interface",
+  "note": "independent cc review: head 27f527 vs earlier head 4323f (C-4323f FIX) files: Lean and nodes byte-identical to the unfixed 4323f delivery; item node lem-sf-concrete-integral-projection-cone + the two new nodes against the Lean and the clone base; 14 direct importers of IntegralReductionTowerUnrestricted compiled against the corrected set, the slow ones paired with the published baseline"
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-space-picard-abelian-pullback",
+ "kind": "definition",
+ "title": "Abelian inverse-image presentations on small affine etale algebraic-space models",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For algebraic spaces over a scheme [def-trf-algebraic-space], use the existing small affine etale model and its inclusion [def-sfb-space-small-ringed-model], and the enlarged etale site and fibre-product direct image [lem-trf-space-enlarged-etale-ringed-site-model]. Define restriction of abelian sheaves, with coefficients in the original universe u, along the affine inclusion and the scheme inclusion. Both restriction functors are equivalences; retain the equivalences with these precise forward functors. Define the abelian direct image of a space morphism f by conjugating evaluation on the enlarged-site fibre products through these equivalences. Its chart section map is restriction along the actual chart-to-fibre-product arrow followed by the two restriction counits. Use Mathlib's small Ext construction from enough injectives on the small affine site. An abelian inverse-image presentation consists of an additive exact left adjoint P to this specified direct image, with its adjunction, and an isomorphism from the source constant integer sheaf to P of the target integer sheaf. Require this isomorphism to send 1 on every source affine chart to the unit image of 1 on every compatible target chart, restricted by the specified chart section map. The local inverse-image section map is the adjunction unit followed by that chart section map. Define pullback on global cohomology as exact-functor transport on Ext followed by precomposition with this integer isomorphism, using the existing integer sheaves and global Ext cohomology [def-sfb-ringed-site-picard-data]. No arbitrary coefficient or cohomology map is part of this definition; existence of an inverse-image presentation is not asserted here.",
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-sfb-ringed-site-picard-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G2 and 03H7 (Properties of Spaces), Tag 039Z (site comparison), Tag 03AJ (global Ext cohomology); used by Tag 0DNM"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Abelian sheaves on the small affine etale model of an algebraic space have inverse image adjoint to evaluation of extended sheaves on fibre products",
+   "results": "[leansearch] OK 8 hit(s): TopCat.Sheaf.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; TopCat.Sheaf.pullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; TopCat.Sheaf.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+   "date": "2026-10-24",
+   "verdict": "General site and topological or scheme adjunctions do not give the specified algebraic-space direct image through the existing two basis equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pullback on global Ext cohomology of abelian sheaves on algebraic spaces normalized on the constant integer sheaf",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.cohomologyPresheaf; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.pullbackIso; CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-24",
+   "verdict": "Reuse Sheaf.H and exact-functor transport on Ext; none of the hits specializes their canonical pullback to this small algebraic-space model."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep: picardAb|PicardUnitsSequence|picardIdeal|square.?zero.*units|units.*square.?zero; rg in lean/WeilConjectures, lean/Sheaf, dag/lean_names_upstream.json; blueprint_refs.py search",
+   "results": "[grep] OK 0 hit(s). rg: no matching names in project or upstream index. blueprint_refs.py: 0 blueprint nodes match Picard obstruction; 0 blueprint nodes match units sequence. Related existing source files are Scheme square-zero obstruction modules, RingedSitePicardData and RingedSitePicardH1Natural; they do not give these algebraic-space normalized presentations.",
+   "date": "2026-10-24",
+   "verdict": "No existing declaration or DAG node supplies this specialized notion; reuse the existing general Picard and Ext definitions and the space site models."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-picard-obstruction-natural",
+  "date": "2026-10-24",
+  "group": "NJ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Functorial Picard obstruction for square-zero thickenings of algebraic spaces. Supporting definitions for the units-sequence obstruction and its arbitrary-square naturality.",
+   "via": [
+    "lem-sfb-space-picard-obstruction-natural",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePicardAbelianPullback",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.PicardAbInverse",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.picardSmallHasExt",
+   "AlgebraicGeometry.AlgebraicSpace.picardAbRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.picardAbRestriction_equivalences",
+   "AlgebraicGeometry.AlgebraicSpace.picardAbEquivalence",
+   "AlgebraicGeometry.AlgebraicSpace.picardEnlargedAbEquivalence",
+   "AlgebraicGeometry.AlgebraicSpace.picardAbDirect",
+   "AlgebraicGeometry.AlgebraicSpace.picardAbDirectChart",
+   "AlgebraicGeometry.AlgebraicSpace.PicardAbInverse",
+   "AlgebraicGeometry.AlgebraicSpace.PicardAbInverse.chartSection",
+   "AlgebraicGeometry.AlgebraicSpace.PicardAbInverse.cohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePicardAbelianPullback.lean",
+  "statement": "structure PicardAbInverse {X Y : AlgebraicSpace S} (f : X ⟶ Y)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c10f4f22e",
+  "group": "NJ",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c10f4f22e",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Read item, report (Worker report + Second reading by NJ present), 3 delivered modules, 2 new def nodes, deps (RingedSitePicardData Comparison/IsComparison/Line/Pic, picard_h1_natural, ThickeningSiteModel, SquareZeroIdeal, IsSpaceFirstOrderThickening, smallModuleTensorPullback, enlarged-site API) and Stacks 0DNM/040E. Every clause matches: QC square-zero ideal, Pic as line quotient with the pinned tensor group, delta = pinned Picard comparison then Yoneda postcomp with the 1+j units-sequence extClass, kernel = image via ordinary tensor pullback, arbitrary square j≫h'=h≫i with no flat/cartesian hypothesis, H^2 pullback = exact inverse image + IsPicardIdealMap coefficient map. New def nodes not hollow (only the named sorried equivalence theorem, as in landed modules); fields ok; no duplicate. Single universe u. Edge cases ok (empty, zero ideal, char 2, non-flat). FINDING H3 (fixed): nested ∃! α inside ∃! β made α unique only among maps also satisfying naturality. FIX: (∃! β, IsPicardModuleIdealMap β) ∧ ∃ P α, (∀ α', IsPicardIdealMap α' ↔ α' = α) ∧ ∀ M …; fixes/SpacePicardObstructionNatural.lean plus item lean-record.json with verbatim statement; nt_compile --json clean for all 3 siblings (8.2/16.4/11.7 s). Advisory: unused proof-dep imports in item module."
+ }
+}

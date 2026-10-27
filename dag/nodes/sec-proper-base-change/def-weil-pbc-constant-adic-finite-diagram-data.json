@@ -1,0 +1,104 @@
+{
+ "id": "def-weil-pbc-constant-adic-finite-diagram-data",
+ "kind": "definition",
+ "title": "Constant algebraic completion and its finite coefficient diagram",
+ "statement": "Let $X,Y$ be schemes, $g:Y\\to X$ a morphism, and $d$ an adic coefficient datum on a commutative ring $A$ [def-weil-pbc-adic-coefficient-datum]. Put $C=\\widehat A$. The evaluations $C\\to A/I^{n+1}$, constant sheafification, and the coefficient comparisons of [def-weil-pbc-bounded-constructible-tower] give a cone from the constant $C$ ring sheaf to the actual finite coefficient diagram on $X$. Its inverse-image projections $r_n$ satisfy $r_m q_{mn}=r_n$ for every $n\\le m$. Define $a_g:D(C)\\to D(g^{-1}\\underline C_X)$ by the exact constant module functor followed by exact inverse image [def-weil-proetale-inverse-image]. This construction uses the constant algebraic completion ring, not the completed sheaf of coefficient rings.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093J (lemma-constant-exact); sites-cohomology.tex Tag 06YY (lemma-derived-base-change); finite completion evaluation before completed sheaf realization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible local constant derived diagrams of finite lisse adic towers and scalar extension reductions",
+   "results": "8 hits, including AdicCompletion.transitionMap_comp_reduceModIdeal and affine transition limit results. No derived local tower or completed sheaf realization comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion.evalₐ\"",
+   "results": "7 hits: evalₐ and its evaluation formulas on mk, of, and lifts. These supply the elementary completion evaluation calculation, but no local derived diagram.",
+   "date": "2026-10-27",
+   "verdict": "partial matches used for evaluation formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "constantAdicFinite|completed_constant_unbounded|lisse_tower_constant_algebraic",
+   "results": "0 Mathlib hits; repository searches found CompatibleFiniteDerivedTrivializations, finite-ring local constancy and the bounded finite-complex completed realization, but not these interfaces.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerLocalAlgebraicReductionDiagram",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Tags 06YY and 093J--093M, constant-ring finite coefficient evaluation before completion",
+   "via": [
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantAdicFiniteDiagramData",
+  "file": "lean/Sheaf/Paper/ConstantAdicFiniteDiagramData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constantAdicFiniteCone",
+  "statement": "def constantAdicFiniteCone (X : Scheme.{u})\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :\n    Cone (pbcAdicRings X d)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constantAdicCompletion_eval_step",
+   "AlgebraicGeometry.Scheme.constantAdicFiniteCone",
+   "AlgebraicGeometry.Scheme.constantAdicFiniteProjection",
+   "AlgebraicGeometry.Scheme.constantAdicFiniteProjection_comp",
+   "AlgebraicGeometry.Scheme.constantAdicFinite_constant_exact",
+   "AlgebraicGeometry.Scheme.constantAdicFiniteRealization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021358-L-2763455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021358-L-2763455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

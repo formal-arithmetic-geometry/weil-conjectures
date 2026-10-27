@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-dg-finite-cell-compact",
+ "kind": "statement",
+ "title": "Finite cell DG modules are compact",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. For a right differential graded $A$-module $P$, assume there is a finite filtration $0=F_{-1}P\\subseteq F_0P\\subseteq\\cdots\\subseteq F_rP=P$ by differential graded submodules such that every quotient $F_jP/F_{j-1}P$ is isomorphic as a differential graded module to a finite direct sum of integer shifts of $A$. The image of $P$ in $D(A,d)$ is compact in the sense of [def-pc-compact-object]. This includes $P=0$ and requires no countability assumption on $A$.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09R3, proposition-compact, implication (2) to (1), with the identity retraction of P."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-compact-object"
+ ],
+ "proof": [
+  {
+   "text": "By lem-sfb-dg-free-shift-derived-hom, for every $k\\in\\mathbf Z$ and every right DG module $M$, each morphism $A[k]\\to M$ of $D(A,d)$ is the image of a DG module map $f$, and $f\\mapsto[f(1)]$ gives an additive bijection $\\operatorname{Hom}_{D(A,d)}(A[k],M)\\cong H^{-k}(M)$. It is natural for DG module maps $h:M\\to M'$: indeed $(hf)(1)=h(f(1))$, so composition with $h$ corresponds to $H^{-k}(h)$. This applies in particular to the coprojections $\\iota_\\alpha:M_\\alpha\\to\\bigoplus_\\beta M_\\beta$ used in Step 2, which are DG module maps.",
+   "uses": [
+    "lem-sfb-dg-free-shift-derived-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3, proposition-compact, final paragraph ('we reduce to the case P = A[k] which is clear'); Tags 09K1, lemma-hom-from-shift-free, and 09KY, lemma-hom-derived (1)."
+   }
+  },
+  {
+   "text": "The coproduct assertion of lem-sfb-dg-sequential-colimit-triangle represents every small coproduct by the degreewise direct sum of DG modules. For any family $(M_\\alpha)$, an element of degree $q$ of this sum has finite support. It is a cycle exactly when each coordinate is a cycle. Its boundary subgroup is the direct sum of the boundary subgroups: choose preimages for the finitely many nonzero boundary coordinates. Consequently $H^q(\\bigoplus_\\alpha M_\\alpha)=\\bigoplus_\\alpha H^q(M_\\alpha)$. Apply this at $q=-k$ to the natural computation of Step 1. Under it the canonical compactness map is exactly this cohomology isomorphism, so every $A[k]$ is compact as in def-pc-compact-object.",
+   "uses": [
+    "lem-sfb-dg-sequential-colimit-triangle",
+    "def-pc-compact-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3, proposition-compact, final paragraph; Tag 09QI, lemma-derived-products, (1)-(2)."
+   }
+  },
+  {
+   "text": "Every finite direct sum $Q=\\bigoplus_{a=1}^t A[k_a]$ is compact. Indeed $\\operatorname{Hom}(Q,M)=\\prod_{a=1}^t\\operatorname{Hom}(A[k_a],M)$. For a small family $(M_\\alpha)$, the bijections from Step 2 commute with these finite products: a finite tuple of finite supports has finite union, which identifies $\\prod_a\\bigoplus_\\alpha\\operatorname{Hom}(A[k_a],M_\\alpha)$ with $\\bigoplus_\\alpha\\prod_a\\operatorname{Hom}(A[k_a],M_\\alpha)$. These identifications send each component map to its composition with the corresponding coprojection, so they give the required canonical map. For $t=0$ both groups are zero.",
+   "uses": [
+    "def-pc-compact-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3, proposition-compact, reduction from finite sums to a single shift."
+   }
+  },
+  {
+   "text": "Write $Q_j=F_jP/F_{j-1}P$. The exact sequence $0\\to F_{j-1}P\\to F_jP\\to Q_j\\to0$ splits as graded right $A$-modules: choose a homogeneous preimage in $F_jP$ of the generator of every summand of a fixed DG isomorphism $Q_j\\cong\\bigoplus_a A[k_a]$, and extend $A$-linearly. Their composite with the quotient map is the identity. No assertion that these lifts are cycles is needed. By lem-sfb-dg-derived-admissible-triangles the sequence therefore gives a distinguished triangle $F_{j-1}P\\to F_jP\\to Q_j\\to F_{j-1}P[1]$ in the triangulated category $D(A,d)$.",
+   "uses": [
+    "lem-sfb-dg-derived-admissible-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3, proposition-compact, finite-filtration reduction; Tag 09K8, definition-distinguished-triangle, and Tag 09KX, definition-unbounded-derived-category."
+   }
+  },
+  {
+   "text": "The category in Step 4 has all small coproducts by lem-sfb-dg-sequential-colimit-triangle, so lem-sc-compact-objects-thick applies. Start with $F_{-1}P=0$, compact by that node. Inductively, if $F_{j-1}P$ is compact, then $Q_j$ is compact by Step 3 and the assumed quotient isomorphism. Stability under distinguished triangles gives compactness of the middle object $F_jP$ in the triangle of Step 4. Finite induction ends at $F_rP=P$. If $P=0$, use the zero-object case directly. Neither the coproduct computation nor this induction restricts the cardinality of $A$.",
+   "uses": [
+    "lem-sfb-dg-sequential-colimit-triangle",
+    "lem-sc-compact-objects-thick"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3, proposition-compact, implication (2) to (1), with identity retraction; derived.tex Tag 09QH, lemma-compact-objects-subcategory."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-free-shift-derived-hom",
+  "lem-sfb-dg-sequential-colimit-triangle",
+  "def-pc-compact-object",
+  "lem-sfb-dg-derived-admissible-triangles",
+  "lem-sc-compact-objects-thick"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09R3, proposition-compact, final paragraph, with the free-shift and filtration arguments written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]ompact.*[Dd]erived|[Ff]inite.*[Cc]ell|[Ss]emi.free",
+   "results": "0 hits ; Mathlib/CategoryTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: finite generation as a lattice-compact submodule and ordinary derived Ext do not assert coproduct compactness for DG modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite cell differential graded modules are compact objects of the derived category",
+   "results": "Hits: Submodule.fg_iff_compact, CategoryTheory.HasExt, instFiniteCarrierObjModuleCatIsFG, CategoryTheory.ShortComplex.hasFiniteColimits, HomologicalComplex.instHasFiniteLimits, CategoryTheory.DifferentialObject.HomSubtype, CategoryTheory.DifferentialObject.Hom.comp, instHasExtModuleCatOfSmall",
+   "date": "2026-10-24",
+   "verdict": "no match: finite generation as a lattice-compact submodule and ordinary derived Ext do not assert coproduct compactness for DG modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"DerivedCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: finite generation as a lattice-compact submodule and ordinary derived Ext do not assert coproduct compactness for DG modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded module with a finite filtration whose quotients are finite sums of shifts of the algebra is compact in the derived category",
+   "results": "Hits: DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-24",
+   "verdict": "no match: finite generation as a lattice-compact submodule and ordinary derived Ext do not assert coproduct compactness for DG modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules built by finitely many extensions of shifts of the free rank one DG module are compact",
+   "results": "Hits: instHasExtModuleCatOfSmall, DerivedCategory.IsGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.IsLE, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.TStructure.t",
+   "date": "2026-10-24",
+   "verdict": "no match: finite generation as a lattice-compact submodule and ordinary derived Ext do not assert coproduct compactness for DG modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cell differential graded modules are compact objects in the derived category",
+   "results": "Hits: DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary Ext, linearity and t-structure declarations do not assert compactness of finite cell DG modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"DerivedCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary Ext, linearity and t-structure declarations do not assert compactness of finite cell DG modules."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ompact.*[Dd]erived|[Ff]inite.*[Cc]ell|[Ss]emi.free",
+   "results": "0 hits ; Mathlib/CategoryTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary Ext, linearity and t-structure declarations do not assert compactness of finite cell DG modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite cell differential graded modules are compact objects in the derived category",
+   "results": "Hits: Submodule.fg_iff_compact, CategoryTheory.HasExt, instFiniteCarrierObjModuleCatIsFG, CategoryTheory.DifferentialObject.Hom.comp, instHasExtModuleCatOfSmall, FGModuleCat.instFiniteHom, HomologicalComplex.instHasFiniteLimits, CategoryTheory.ShortComplex.hasFiniteColimits",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary Ext, linearity and t-structure declarations do not assert compactness of finite cell DG modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules obtained by finitely many extensions of shifts of the free rank one DG module preserve arbitrary direct sums under derived Hom",
+   "results": "Hits: DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearSingleFunctor, instHasExtModuleCatOfSmall, DerivedCategory.instLinear, CategoryTheory.hasExt_iff, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearShiftFunctorInt, DerivedCategory.instLinearHomotopyCategoryIntUpQh",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary Ext, linearity and t-structure declarations do not assert compactness of finite cell DG modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-countable-compact-telescope",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 09R3, proposition-compact, implication (2) to (1), with the identity retraction of P.",
+   "via": [
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-finite-cell-compact",
+  "worker": "stage1",
+  "summary": "Kept the full statement unchanged. Wrote the free-shift mapping-complex calculation and finite-support cohomology argument explicitly, reused general projective-module derived mapping objects, DG coproducts and compact-object closure, and isolated only the DG derived triangulation/admissible-exact-triangle input as one new statement-only node. Checked all cited statements and edge cases. Reviewer FIX (Q40 maintainer reader): Step 1 now cites the new statement-only node lem-sfb-dg-free-shift-derived-hom (Stacks 09K1 + 09KY(1)) instead of the general enhanced-localization projective-resolution node of sk-prop-sf-biduality-general, dropped machinery under the 2026-10-18 route pivot.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, via the inherited coherent-family/Quot effectivity chain and the 0CRW / 0CRV / 0CRM telescope construction: the finite-cell compactness input 09R3 (2) to (1). The ancestor script returns None because the created.item chain terminates at a Lean module; inherited via is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-compact-objects-thick",
+    "why": "Step 5 uses only generic closure of compact objects under zero, isomorphisms and distinguished triangles; no same-unit node gives that closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-compact-objects-thick"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-0db4a6ed1",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-0db4a6ed1 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-dg-derived-admissible-triangles, every cited statement, and Stacks dga.tex 09R3 (whole proof), 09K1, 09KY, 09QI, 09KW, 09K8, definition-admissible-ses and 09KM. The item is 09R3 (2)=>(1) and is unchanged from the base. I tested it on P=0, r=0, A=0, A concentrated in degree 0 and A uncountable; it holds in each case. Steps 2-5 are correct. Step 2 takes the coproduct clause from the statement of lem-sfb-dg-sequential-colimit-triangle. Step 4 constructs a graded splitting with no compatibility with d, which is exactly Stacks' admissible hypothesis. The Step 5 induction is set up properly and uses lem-sc-compact-objects-thick; I accept that tool use. The new triangle node is true (09KJ/09K8/09KW/09KX), self-contained and not a duplicate: the lem-coef dg-abc and cone-triangulation nodes are abstract H^0 statements with no localization at quasi-isomorphisms. Route-pivot point: Step 1 cited lem-coef-dg-module-projective-resolution, an enhanced-localization node whose statement dependencies include the simplicial-nerve and Reedy localization machinery. The step needs only Hom_D(A[k],M)=H^{-k}(M) (Stacks 09K1 + 09KY(1)), so I do not accept the declared tool use. lem-coef-kprojective-derived-hom-bijection does not apply, because it covers complexes in an abelian category only. No existing node or blueprint node gives the fact. FIX: I added the statement-only unsplit node lem-sfb-dg-free-shift-derived-hom (sources 09K1 and 09KY(1) with 09KM; Mathlib greps recorded, no match) and rewrote Step 1 to cite it. I also recomputed proof_deps, removed that tool_use, and Step 1 no longer contains the 'dg categor' wording. The remaining DG vocabulary is the classical D(A,d) of Stacks, not dropped machinery. No SGA source is used.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
+}

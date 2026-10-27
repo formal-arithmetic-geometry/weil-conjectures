@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-torus-nonfixed-complement-annihilation",
+ "kind": "statement",
+ "title": "Character annihilation on the nonfixed torus complement",
+ "statement": "For an affine finite-type group scheme $G$ over a field $F$ [def-weil-field, def-sc-group-scheme] acting on an $F$-scheme $Y$ [def-pc-scheme], a $G$-linearized coherent module means a coherent $\\mathcal O_Y$-module [pqf-def-coherent] with an isomorphism $a^*\\mathcal M\\simeq\\operatorname{pr}_2^*\\mathcal M$ on $G\\times_FY$, satisfying the identity and cocycle identities; its geometric fibre action is from $y$ to $gy$. Let $G_0^G(Y)$ be the abelian group on isomorphism classes of these modules, with relations $[\\mathcal M]=[\\mathcal M']+[\\mathcal M'']$ for every equivariant short exact sequence $0\\to\\mathcal M'\\to\\mathcal M\\to\\mathcal M''\\to0$. Let $R(G)$ be the analogous group of finite-dimensional rational $G$-modules, with multiplication induced by tensor product. Rational means a counital coassociative coaction $V\\to V\\otimes_FF[G]$. Tensoring a sheaf with the trivial vector bundle associated to such a module makes $G_0^G(Y)$ an $R(G)$-module. Suppose $F$ is algebraically closed [def-weil-algebraic-closure], $G=T\\simeq\\mathbf G_m^r$ is a split torus for $r\\geq0$ (where $\\mathbf G_m(A)=A^\\times$), and $Y$ is separated and of finite type over $F$ [def-weil-proper-morphism, def-weil-finite-type-morphism]. Suppose $i:W\\hookrightarrow Y$ is a closed immersion [def-weil-closed-immersion] representing the functor of points fixed by $T$ after every commutative algebra extension. Put $U=Y\\setminus W$, with its induced invariant open subscheme structure [def-weil-open-immersion]. Put $X=\\operatorname{Hom}(T,\\mathbf G_m)$, with addition given by multiplication of characters, and $R=\\mathbf Z[X]$ with $e^\\eta e^\\xi=e^{\\eta+\\xi}$; its action on $G_0^T(U)$ twists by the one-dimensional representations of the characters. For every $\\alpha\\in G_0^T(U)$ there exist $n\\geq0$ and nonzero characters $\\eta_1,\\ldots,\\eta_n$ such that\n$$\\left(\\prod_{m=1}^n(1-e^{\\eta_m})\\right)\\alpha=0.$$\nThe empty product is $1$. Neither smoothness nor properness is required. The statement is integral and holds in every characteristic, including when stabilizers are nonreduced.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-formulated supporting statement for Milne Section 22d, Theorem 22.50, printed p.480. Milne invokes a general fixed-point theorem but does not state or prove this lemma. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), nonfixed-locus character annihilation. No Stacks tag is asserted for this equivariant result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-algebraic-closure",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sfb-torus-character-gzero-action"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-torus-invariant-affine-filtration] to the given $Y,T$ and invariant open $U$. It gives separated finite-type $U$, its equivariant reduction $U_{\\mathrm{red}}\\hookrightarrow U$, and $Z_0=U_{\\mathrm{red}}\\supseteq\\cdots\\supseteq Z_N=\\varnothing$ with invariant affine strata $S_j$. None of these strata has a fixed point over any algebra: a fixed point maps equivariantly into $U$ and then into $Y$, and the representing property of $W$ forces that map to factor through $W$. The simultaneous factorization through the disjoint open $U$ is impossible on a nonempty test scheme. The same reasoning applies to every invariant subscheme of a stratum.",
+   "uses": [
+    "lem-sfb-torus-invariant-affine-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent proof of the nonfixed-locus supporting input to Section 22d, Theorem 22.50, printed p.480. Milne only invokes a general fixed-point theorem. Thomason (1986) and Sumihiro (1974), Corollary 2, are WANTED; the argument here is not attributed to Milne."
+   }
+  },
+  {
+   "text": "Here is the coordinate calculation for any one affine stratum $S=\\operatorname{Spec}A$. Choose split coordinates on $T$, so its functions are Laurent polynomials in $z_1,\\ldots,z_r$. Write the action coaction as $a^*(a)=\\sum_m z^m\\otimes a_m$, a finite Laurent expansion for each $a\\in A$, indexed by $m\\in\\mathbf Z^r$. Comparing coefficients in coassociativity gives $a^*(a_m)=z^m\\otimes a_m$; the counit gives $a=\\sum_m a_m$. Each monomial $z^m$ defines a character $\\eta_m$ of $T$, nonzero when $m\\ne0$. Thus each $a_m$ is a semi-invariant: $a_m(ty)=\\eta_m(t)a_m(y)$ after every algebra extension. Multiplicativity of $a^*$ gives $A_mA_n\\subseteq A_{m+n}$, where $A_m$ consists of these semi-invariants. This coefficient argument works for arbitrary $A$, including rings with nilpotents; it assumes neither a finite-dimensional coordinate ring nor a decomposition theorem for abstract point-group representations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent proof of the nonfixed-locus supporting input to Section 22d, Theorem 22.50, printed p.480. Milne only invokes a general fixed-point theorem. Thomason (1986) and Sumihiro (1974), Corollary 2, are WANTED; the argument here is not attributed to Milne."
+   }
+  },
+  {
+   "text": "Put $I=(A_m:m\\ne0)\\subseteq A$. For any commutative $F$-algebra $B$, a map $x:A\\to B$ is fixed after every further algebra extension exactly when $\\sum_m z^m\\otimes x(a_m)=1\\otimes x(a)$ for every $a$. Laurent monomials remain a basis over $B$, so this is exactly $x(I)=0$. Hence $\\operatorname{Spec}(A/I)$ represents the fixed functor of $S$. It is empty by step 1, so its global sections $A/I$ are the zero ring. Thus $1\\in I$; by the definition of generated ideal there are finitely many $f_1,\\ldots,f_t$, each in some $A_{m_i}$ with $m_i\\ne0$, and $b_i\\in A$ such that $1=\\sum_i b_i f_i$. Write $\\eta_i=\\eta_{m_i}\\ne0$. For the empty affine scheme the zero ring allows $t=0$. This is a scheme-theoretic fixed-ideal calculation, without a reduced-stabilizer assumption or a Nullstellensatz invocation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent proof of the nonfixed-locus supporting input to Section 22d, Theorem 22.50, printed p.480. Milne only invokes a general fixed-point theorem. Thomason (1986) and Sumihiro (1974), Corollary 2, are WANTED; the argument here is not attributed to Milne."
+   }
+  },
+  {
+   "text": "Set $C_0=S$ and $C_i=\\operatorname{Spec}(A/(f_1,\\ldots,f_i))$ for $1\\leq i\\leq t$. These are invariant closed subschemes because their defining ideals are generated by semi-invariants; $C_t=\\varnothing$ by $1=\\sum_i b_i f_i$. On $D_i=C_{i-1}\\setminus C_i$, the function $f_i$ is invertible and still satisfies $f_i(ty)=\\eta_i(t)f_i(y)$. For any linearized coherent module $\\mathcal M$ on $D_i$, multiplication by $f_i$ defines an isomorphism $\\mathcal M\\to\\mathcal M\\otimes_FF_{\\eta_i}$, where $F_{\\eta_i}$ is the character representation. Indeed its two equivariance composites at $(t,y)$ are respectively $f_i(ty)\\rho_t(m)$ and $\\eta_i(t)f_i(y)\\rho_t(m)$, and they agree as morphisms by the semi-invariant equation. Its inverse is multiplication by $f_i^{-1}$. Therefore $q_i=1-e^{\\eta_i}$ kills every generator, hence every class in $G_0^T(D_i)$. The schemes $C_i,D_i$ are separated and finite type: their affine coordinate algebras are respectively quotients and single-element localizations of the finite-type $F$-algebra $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent proof of the nonfixed-locus supporting input to Section 22d, Theorem 22.50, printed p.480. Milne only invokes a general fixed-point theorem. Thomason (1986) and Sumihiro (1974), Corollary 2, are WANTED; the argument here is not attributed to Milne."
+   }
+  },
+  {
+   "text": "For this finite chain, use [lem-sfb-equivariant-coherent-localization-sequence] for $C_i\\hookrightarrow C_{i-1}$ and complement $D_i$. Its hypotheses hold for these affine separated finite-type schemes, even when $C_i$ is nonreduced. Its $R(T)$-linearity is $R$-linearity along $e^\\eta\\mapsto[F_\\eta]$: tensoring the one-dimensional coactions adds characters, so this is a ring map. Starting with the empty $C_t$, whose coherent group is zero, induct downwards. If $p_i$ kills $G_0^T(C_i)$, then for any $\\gamma\\in G_0^T(C_{i-1})$ step 4 gives $q_i\\gamma$ zero on $D_i$. Exactness supplies $\\delta\\in G_0^T(C_i)$ with $q_i\\gamma=(C_i\\hookrightarrow C_{i-1})_*\\delta$. Linearity gives $p_iq_i\\gamma=(C_i\\hookrightarrow C_{i-1})_*(p_i\\delta)=0$. Taking $p_t=1$ proves that $q_1\\cdots q_t$ annihilates $G_0^T(S)$. Every factor uses a nonzero character.",
+   "uses": [
+    "lem-sfb-equivariant-coherent-localization-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent proof of the nonfixed-locus supporting input to Section 22d, Theorem 22.50, printed p.480. Milne only invokes a general fixed-point theorem. Thomason (1986) and Sumihiro (1974), Corollary 2, are WANTED; the argument here is not attributed to Milne."
+   }
+  },
+  {
+   "text": "Apply the affine calculation of steps 2--5 to each of the finitely many strata $S_j$ of step 1, obtaining a product $s_j$ of permitted factors annihilating its entire group. Apply [lem-sfb-equivariant-coherent-localization-sequence] to $Z_{j+1}\\hookrightarrow Z_j$, with complement $S_j$; their separated finite-type hypotheses are supplied by the filtration. Induct downwards from $Z_N=\\varnothing$: if $P_{j+1}$ annihilates $G_0^T(Z_{j+1})$, exactness lifts $s_j\\gamma$ to a class $\\delta$ on $Z_{j+1}$ for every $\\gamma$ on $Z_j$, and linearity gives $P_{j+1}s_j\\gamma=i_*(P_{j+1}\\delta)=0$. Starting with $P_N=1$ yields $P_0=\\prod_js_j$ annihilating $G_0^T(U_{\\mathrm{red}})$. Finally apply the same localization statement to $U_{\\mathrm{red}}\\hookrightarrow U$. Its open complement is empty, so its ordinary closed pushforward is surjective, with no need for injectivity or a nilpotent-invariance assertion. Lift the prescribed $\\alpha$ to $\\widetilde\\alpha$; then $P_0\\alpha=i_*(P_0\\widetilde\\alpha)=0$. Listing the finitely many characters occurring in $P_0$ gives exactly the required $n$ and $\\eta_1,\\ldots,\\eta_n$.",
+   "uses": [
+    "lem-sfb-equivariant-coherent-localization-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent proof of the nonfixed-locus supporting input to Section 22d, Theorem 22.50, printed p.480. Milne only invokes a general fixed-point theorem. Thomason (1986) and Sumihiro (1974), Corollary 2, are WANTED; the argument here is not attributed to Milne."
+   }
+  },
+  {
+   "text": "If $r=0$, the group scheme is trivial, every point of $Y$ is fixed functorially, and the assumed representing immersion identifies $W$ with $Y$. Thus $U=\\varnothing$ and $\\alpha=0$, so $n=0$ works. The same empty product works whenever $U=\\varnothing$. In positive characteristic an action $t\\cdot x=t^p x$ on $\\mathbf G_m$ has stabilizer $\\mu_p$; its invertible coordinate has nonzero character $p$, and step 4 uses $1-e^p$, without dividing by $p$ or replacing this character by its differential. All preceding calculations are identities over $F$ and in integral Grothendieck groups.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent proof of the nonfixed-locus supporting input to Section 22d, Theorem 22.50, printed p.480. Milne only invokes a general fixed-point theorem. Thomason (1986) and Sumihiro (1974), Corollary 2, are WANTED; the argument here is not attributed to Milne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-torus-invariant-affine-filtration",
+  "lem-sfb-equivariant-coherent-localization-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent proof of the nonfixed-locus supporting input to Section 22d, Theorem 22.50, printed p.480. Milne only invokes a general fixed-point theorem. Thomason (1986) and Sumihiro (1974), Corollary 2, are WANTED; the argument here is not attributed to Milne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A split torus character Euler factor annihilates equivariant coherent K theory classes supported away from the fixed locus",
+   "results": "{\"t\": \"2026-10-23T23:02:43Z\", \"tool\": \"leansearch\", \"query\": \"A split torus character Euler factor annihilates equivariant coherent K theory classes supported away from the fixed locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeakDual.CharacterSpace.ext_ker\", \"Polynomial.cyclotomic'_splits\", \"Matrix.IsHermitian.splits_charpoly\", \"UnitAddTorus.mFourierLp.congr_simp\", \"CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective\", \"Algebra.etaleLocus_eq_compl_support\", \"Polynomial.SplittingField.instExpChar\", \"Algebra.formallyEtale_iff\"], \"digest\": \"89d203755464bfd3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary module, abstract group-representation, topology and exterior-power results do not state the equivariant coherent-sheaf assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonfixed torus action equivariant coherent G zero group is torsion under products of one minus nonzero characters",
+   "results": "{\"t\": \"2026-10-23T23:02:48Z\", \"tool\": \"leanfinder\", \"query\": \"Nonfixed torus action equivariant coherent G zero group is torsion under products of one minus nonzero characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.mixedEmbedding.fundamentalCone.instMulActionSubtypeUnitsRingOfIntegersMemSubgroupTorsionElemMixedSpaceIntegerSet\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul\", \"NumberField.mixedEmbedding.fundamentalCone.unit_smul_mem_iff_mem_torsion\", \"AddCircle.finite_torsion_of_isSMulRegular\", \"AddCircle.finite_torsion_of_isSMulRegular_int\", \"CharacterModule.exists_character_apply_ne_zero_of_ne_zero\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer\", \"AddCircle.card_torsion_le_of_isSMulRegular_int\"], \"digest\": \"f6ed53f8a689f2d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary module, abstract group-representation, topology and exterior-power results do not state the equivariant coherent-sheaf assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral equivariant K theory vanishes after character localization on finite type torus scheme without fixed points",
+   "results": "{\"t\": \"2026-10-23T23:02:47Z\", \"tool\": \"leanfinder\", \"query\": \"Integral equivariant K theory vanishes after character localization on finite type torus scheme without fixed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isIntegral_of_profinite\", \"FDRep.average_char_eq_finrank_invariants\", \"FDRep.char_orthonormal\", \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"TannakaDuality.FiniteGroup.sumSMulInv_single_id\", \"Algebra.IsInvariant.isIntegral\", \"FDRep.simple_iff_char_is_norm_one\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\"], \"digest\": \"39850eeb33a60135\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary module, abstract group-representation, topology and exterior-power results do not state the equivariant coherent-sheaf assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"equivariant\", \"character\"",
+   "results": "{\"t\": \"2026-10-23T23:02:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"equivariant\\\", \\\"character\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary module, abstract group-representation, topology and exterior-power results do not state the equivariant coherent-sheaf assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "torus.*(annih|coherent)|equivariant.*KTheory|character.*annihil",
+   "results": "{\"t\": \"2026-10-23T23:02:43Z\", \"tool\": \"grep\", \"query\": \"torus.*(annih|coherent)|equivariant.*KTheory|character.*annihil\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary module, abstract group-representation, topology and exterior-power results do not state the equivariant coherent-sheaf assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "torus.*(annih|coherent)|equivariant.*KTheory|character.*annihil",
+   "results": "{\"t\": \"2026-10-23T23:39:32Z\", \"tool\": \"grep\", \"query\": \"torus.*(annih|coherent)|equivariant.*KTheory|character.*annihil\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract or finite-group representations, ordinary scheme localizations and Proj charts; none states equivariant coherent nonfixed-locus annihilation or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant coherent Grothendieck group of a fixed point free torus scheme is annihilated classwise by products of one minus characters",
+   "results": "{\"t\": \"2026-10-23T23:39:32Z\", \"tool\": \"leansearch\", \"query\": \"Equivariant coherent Grothendieck group of a fixed point free torus scheme is annihilated classwise by products of one minus characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.scalar_product_char_eq_finrank_equivariant\", \"Representation.Coinvariants.mk_tmul_inv\", \"Representation.toCoinvariants_mk\", \"Representation.coinvariantsTprodLeftRegularLEquiv_symm_apply\", \"Representation.Coinvariants.mk_self_apply\", \"CharacterModule.homEquiv_symm_apply_apply_apply\", \"Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single\", \"Representation.Coinvariants.mk_eq_zero\"], \"digest\": \"3158d0489ca1ecaa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract or finite-group representations, ordinary scheme localizations and Proj charts; none states equivariant coherent nonfixed-locus annihilation or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"equivariant\", \"character\"",
+   "results": "{\"t\": \"2026-10-23T23:39:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"equivariant\\\", \\\"character\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract or finite-group representations, ordinary scheme localizations and Proj charts; none states equivariant coherent nonfixed-locus annihilation or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing equivariant algebraic G theory at all nontrivial torus characters kills the complement of the fixed subscheme",
+   "results": "{\"t\": \"2026-10-23T23:39:34Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing equivariant algebraic G theory at all nontrivial torus characters kills the complement of the fixed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.opensRange_map\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.Proj.opensRange_awayι\", \"AlgebraicGeometry.Proj.awayι_preimage_basicOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\"], \"digest\": \"a33dcf22a35bf3ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract or finite-group representations, ordinary scheme localizations and Proj charts; none states equivariant coherent nonfixed-locus annihilation or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product of Euler factors one minus a character annihilates any class of equivariant coherent sheaves on the nonfixed locus of a split torus action",
+   "results": "{\"t\": \"2026-10-23T23:42:57Z\", \"tool\": \"leanfinder\", \"query\": \"A product of Euler factors one minus a character annihilates any class of equivariant coherent sheaves on the nonfixed locus of a split torus action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.average_char_eq_finrank_invariants\", \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"Rep.FiniteCyclicGroup.normHomCompSub\", \"Representation.apply_sub_id_partialSum_eq\", \"Rep.FiniteCyclicGroup.subCompNormHom\", \"groupCohomology.Hilbert90.aux\", \"FDRep.char_linHom\", \"TannakaDuality.FiniteGroup.sumSMulInv_single_id\"], \"digest\": \"05f5f1628cffcd2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract or finite-group representations, ordinary scheme localizations and Proj charts; none states equivariant coherent nonfixed-locus annihilation or a one-line generalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-coherent-concentration",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item.",
+   "via": [
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-nonfixed-complement-annihilation",
+  "worker": "stage1",
+  "summary": "Q14 preserves the full integral statement. One new statement-only geometric input supplies invariant affine strata of the reduction. The proof writes out the Laurent coefficient calculation, the universal fixed ideal, multiplication by an invertible semi-invariant with its precise twist sign, and two finite descending localization inductions. Existing equivariant localization also gives the surjection from the reduction, so no unsupported nilpotent-invariance theorem is used. Sources, full cited statements, project Lean, the current blueprint and recorded Mathlib searches were checked; missing Sumihiro and Thomason references are reported WANTED.",
+  "blueprint": "The ancestor command returns null, as in the inherited ancestry, which is retained. The split fills the nonfixed-locus annihilation input to the concentration prerequisite of Milne 22.50 in the inherited supporting chain below det-thm-sf-ctf-stability-direct-images proof (3). The latest blueprint (main-20261024) contains no equivalent torus/coherent localization statement. It does not assert that its direct-image proof itself proves concentration."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-3460dffda",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-3460dffda (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-torus-invariant-affine-filtration, the full statement and steps of the cited lem-sfb-equivariant-coherent-localization-sequence, and the citing parent lem-sfb-torus-coherent-concentration, whose Sigma matches the item's product exactly. Milne iAG2017 Th. 22.50 (p.480) only says 'follows from Nielsen 1974 / Iversen 9.4', so the agent-proof marking and the WANTED Thomason and Sumihiro lines are honest. No SGA is used. Step checks: (1) U is invariant because a^{-1}(W)=TxW, and a fixed B-point of a stratum lands in W x_Y U = empty, so B=0. (2) Coassociativity gives a^*(a_m)=z^m (x) a_m and the counit gives a=sum a_m, also with nilpotents. (3) The universal fixed point is represented by A/I; the tautological point gives A/I=0, so 1=sum b_i f_i with nonzero weights. (4) Multiplication by f_i on D(f_i) gives M = M (x) F_{+-eta}; the sign is irrelevant because 1-e^eta = -e^eta(1-e^-eta) and e^eta is a unit. (5)/(6) The localization-sequence hypotheses hold (separated finite type, equivariant closed immersion, nonreduced or empty closed part allowed, R(T)-linear); both inductions have a base and a step, and U_red->U uses only surjectivity. (7) Edge cases r=0 and weight p in characteristic p are correct. The new node is true by Sumihiro on normal irreducible invariant opens plus Noetherian induction, the torus being reduced and connected. I tested it on the trivial action, empty V, a nodal cubic and P^1. Its form is correct (B1-B4, three kinds of search, blueprint from=null with via=item+via, same_as=[]). It is pure geometry and not a clause of the item (D1), and no duplicate exists (zl smooth filtration, pd invariant-affine nbhds, finite-groupoid invariant affine, extreme-weight chart and trf torus coords are all different). Both cited nodes are in unit sk-thm-sf-ctf-stability, so no tool_uses. Batch-5: the localization sequence reaches lem-pod-texact-truncation-triangle-comparison only through proper-pushforward composition. That is a generic t-exact truncation lemma, not part of the trace formula or Poincare duality, and the parent already cited the sequence on base. Accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusNonfixedComplementAnnihilation",
+  "declaration": "AlgebraicGeometry.EquivariantCoherent.torus_nonfixed_complement_annihilation",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusNonfixedComplementAnnihilation.lean",
+  "statement": "theorem torus_nonfixed_complement_annihilation (F : Type u) [Field F] [IsAlgClosed F] (r : ℕ) (T : Grp (Over (Spec (.of F)))) (hT : Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (Y U : CategoryTheory.Mod (Over (Spec (.of F))) T.X) [IsSeparated Y.X.hom] [LocallyOfFiniteType Y.X.hom] [QuasiCompact Y.X.hom] (W : Over (Spec (.of F))) (i : W ⟶ Y.X) [IsClosedImmersion i.left] (hfixed : ∀ (A : CommAlgCat.{u} F) (y : (algSpec (.of F)).obj (op A) ⟶ Y.X), (∃ w : (algSpec (.of F)).obj (op A) ⟶ W, w ≫ i = y) ↔ ∀ (B : CommAlgCat.{u} F) (f : A ⟶ B) (t : (algSpec (.of F)).obj (op B) ⟶ T.X), t • ((algSpec (.of F)).map f.op ≫ y) = (algSpec (.of F)).map f.op ≫ y) (j : U ⟶ Y) [IsOpenImmersion j.hom.left] (hcomplement : Set.range j.hom.left = (Set.range i.left)ᶜ) (D : ActionGroupoidModel T.X U.X) [m : Module (TrivialTorusCoherent.CharacterRing T) (GZero D)] (hm : IsCharacterAction D m) (α : GZero D) : ∃ (n : ℕ) (χs : Fin n → TrivialTorusCoherent.Character T), (∀ k, χs k ≠ 0) ∧ (∏ k, (1 - AddMonoidAlgebra.single (χs k) 1 : TrivialTorusCoherent.CharacterRing T)) • α = 0",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bf41f55f",
+  "group": "N8",
+  "result": "pass",
+  "note": "Item Lean matches every clause of lem-sfb-torus-nonfixed-complement-annihilation: IsAlgClosed F; split torus via Nonempty (T ≅ splitTorus F r), r=0 allowed; Y : Mod with IsSeparated+LocallyOfFiniteType+QuasiCompact, no properness; closed immersion i with hfixed testing all CommAlgCat.{u} F algebras and all further extensions via Mathlib's ModObj point smul; equivariant open immersion j with range = complement of W; GZero D from def-sfb-equivariant-coherent-gzero; integral CharacterRing = Z[Additive (T ⟶ G_m)]; conclusion ∃ n, χs nonzero, ∏(1 - single χ 1) • α = 0, n=0 allowed. New def node def-sfb-torus-character-gzero-action: IsCharacterTwist uses the forward linearization (linearization.inv : p^*M → a^*M) multiplied by χ(pr1), matching the node TeX and the IsAssociated convention for coaction v ↦ v⊗χ; IsCharacterAction requires twists to exist and fixes single χ 1 • [M] = [P], so the module structure is unique, with real Prop bodies and no sorry; H12 fields checked; no duplicate (IsRepresentationAction is for R(G), not Z[X]). Item node differs from base only in lean and stmt_deps (+ new node); dependency nodes byte-identical to live; lean.statement verbatim (diffed); no line over 100 characters; docstrings carry the source and all 7 steps. splitTorus owner def-sfb-tori-multiplicative-type is a def node reached transitively, not a theorem-node owner. Edge cases r=0, empty U/W, char-p weight p, nonreduced schemes are covered. No fixes, no compile run."
+ }
+}

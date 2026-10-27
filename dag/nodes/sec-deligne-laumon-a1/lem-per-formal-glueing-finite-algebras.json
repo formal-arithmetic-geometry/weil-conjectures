@@ -239,20 +239,38 @@
   "module": "Sheaf.RingTheory.FormalGlueingFiniteAlgebras",
   "declaration": "FormalGlueing.exists_finite_algebra_of_formalGlueing",
   "file": "lean/Sheaf/RingTheory/FormalGlueingFiniteAlgebras.lean",
-  "statement": "theorem exists_finite_algebra_of_formalGlueing {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (t : ℕ) (f : Fin t → R) (hflat : (algebraMap R S).Flat) (hquot : Function.Bijective (Ideal.quotientMap ((Ideal.span (Set.range f)).map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map)) (E' : Type w) [CommRing E'] [Algebra S E'] [Algebra R E'] [IsScalarTower R S E'] (E : Fin t → Type w) [∀ i, CommRing (E i)] [∀ i, Algebra R (E i)] [∀ i, Algebra (Localization.Away (f i)) (E i)] [∀ i, IsScalarTower R (Localization.Away (f i)) (E i)] (alpha : ∀ i : Fin t, LocalizedModule.Away (f i) E' ≃ₐ[R] (S ⊗[R] E i)) (alphaOverlap : ∀ i j : Fin t, LocalizedModule.Away (f j) (E i) ≃ₐ[R] LocalizedModule.Away (f i) (E j)) (hdata : ∃ X : Data.{u, v, w} (algebraMap R S) f, X.M' = ModuleCat.of S E' ∧ (∀ i : Fin t, X.M i = ModuleCat.of (Localization.Away (f i)) (E i)) ∧ (∀ i : Fin t, HEq (X.alpha i).toLinearMap (alpha i).toLinearMap) ∧ (∀ i j : Fin t, HEq (X.alpha_overlap i j).toLinearMap (alphaOverlap i j).toLinearMap)) (hfinitePrime : Module.Finite S E') (hfiniteChart : ∀ i : Fin t, Module.Finite (Localization.Away (f i)) (E i)) : ∃ (D : Type (max u v w)) (_ : CommRing D) (_ : Algebra R D), Module.Finite R D ∧ ∃ (a' : (S ⊗[R] D) ≃ₐ[S] E') (a : ∀ i : Fin t, LocalizedModule.Away (f i) D ≃ₐ[R] E i), (∀ (i : Fin t) (d : D), alpha i (LocalizedModule.mk (a' (1 ⊗ₜ[R] d)) 1) = 1 ⊗ₜ[R] a i (LocalizedModule.mk d 1)) ∧ (∀ (i j : Fin t) (d : D), alphaOverlap i j (LocalizedModule.mk (a i (LocalizedModule.mk d 1)) 1) = LocalizedModule.mk (a j (LocalizedModule.mk d 1)) 1)",
-  "branch": "newtargets-dag",
-  "by": "Q34",
-  "date": "2026-10-18",
+  "statement": "theorem exists_finite_algebra_of_formalGlueing {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (t : ℕ) (f : Fin t → R) (hflat : (algebraMap R S).Flat) (hquot : Function.Bijective (Ideal.quotientMap ((Ideal.span (Set.range f)).map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map)) (E' : Type w) [CommRing E'] [Algebra S E'] [Algebra R E'] [IsScalarTower R S E'] (E : Fin t → Type w) [∀ i, CommRing (E i)] [∀ i, Algebra (Localization.Away (f i)) (E i)] [∀ i, Algebra R (E i)] [∀ i, IsScalarTower R (Localization.Away (f i)) (E i)] (α : ∀ i, E' ⊗[R] Localization.Away (f i) ≃ₐ[S] S ⊗[R] E i) (αij : ∀ i j, E i ⊗[R] Localization.Away (f j) ≃ₐ[R] E j ⊗[R] Localization.Away (f i)) (hdatum : ∃ X : Data.{u, v, w} (algebraMap R S) f, X.M' = ModuleCat.of S E' ∧ (∀ i, X.M i = ModuleCat.of (Localization.Away (f i)) (E i)) ∧ (∀ i, HEq (fun x : X.M' ↦ X.alpha i (LocalizedModule.mk x 1)) (fun x : E' ↦ α i (x ⊗ₜ[R] 1))) ∧ (∀ i j, HEq (fun x : piece (f i) (X.M i) ↦ (TensorProduct.comm R (Localization.Away (f i)) (piece (f j) (X.M j))) ((LocalizedModule.equivTensorProduct (Submonoid.powers (f i)) (piece (f j) (X.M j))) (X.alpha_overlap i j (LocalizedModule.mk x 1)))) (fun x : E i ↦ αij i j (x ⊗ₜ[R] 1)))) (hfinite' : Module.Finite S E') (hfinite : ∀ i, Module.Finite (Localization.Away (f i)) (E i)) : ∃ (D : Type (max u v w)) (_ : CommRing D) (_ : Algebra R D), Module.Finite R D ∧ ∃ (q' : S ⊗[R] D ≃ₐ[S] E') (q : ∀ i, Localization.Away (f i) ⊗[R] D ≃ₐ[Localization.Away (f i)] E i), (∀ (i : Fin t) (d : D), α i (q' (1 ⊗ₜ[R] d) ⊗ₜ[R] 1) = 1 ⊗ₜ[R] q i (1 ⊗ₜ[R] d)) ∧ (∀ (i j : Fin t) (d : D), αij i j (q i (1 ⊗ₜ[R] d) ⊗ₜ[R] 1) = q j (1 ⊗ₜ[R] d) ⊗ₜ[R] 1)",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "The map R → S is encoded by Algebra R S. Scalar-tower binders are the restrictions of the given coefficient algebras, not additional mathematical hypotheses. hdata identifies exactly the supplied underlying module datum with FormalGlueing.Data. Algebra equivalences over R are automatically over the corresponding localizations; Data.alpha_smul supplies S-linearity of the prime transition. The two concluding equations on images of D determine the full commuting squares by linearity, tensor generation and localization. 2026-10-20 (U): module Sheaf.RingTheory.FormalGlueingFiniteAlgebras deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Tensor models of algebra localization identify with the recorded LocalizedModule.Away through LocalizedModule.equivTensorProduct and tensor symmetry. hdatum identifies the transitions on numerator generators with an object of FormalGlueing.Data. The concluding equations on D imply the full prime-chart and chart-chart squares by linearity and invertible denominators."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3a4537046",
-  "group": "Q34",
+  "reviewer": "NT-stage2-cc-0b664e0f0",
+  "group": "Q80",
   "result": "pass",
-  "note": "Statement matches node clause by clause: flat RingHom.Flat, R/K≅S/KS as bijective Ideal.quotientMap (same encoding as prop-weil-pbc-formal-glueing-equivalence), E'/E_i algebras with unique-restriction tower instances, alpha ≃ₐ[R] made S-linear by Data.alpha_smul via hdata, overlap ≃ₐ[R], finiteness via Module.Finite; conclusion D : Type (max u v w) finite R-algebra with a' : S⊗D ≃ₐ[S] E', a i : D_fi ≃ₐ[R] E i and two generator equations, which by S-/R-linearity and invertibility of f_i,f_j give exactly the full Can(D)→datum squares. hdata HEq satisfiable: Module R E' = compHom (IsScalarTower) and (algebraMap R S).toAlgebra = given instance, both proven in a probe that compiled clean. Edge cases t=0, zero/nilpotent f_i, K=R, i=j, zero rings ok; universe w shared by E',E_i inherited from Data. sorry-only, docstrings with 05ER/05EU source and blueprint id plus the 6 proof steps, statement verbatim, proof-dep plain imports per rule 7, no duplicate found. nt_compile --json clean 2.7 s."
+  "note": "Only the lean record changed vs side-live (restores the dead-module-deleted statement; α now ≃ₐ[S], q i ≃ₐ[R_fi]). Flat = RingHom.Flat; hquot = bijective quotientMap R/K→S/KS, same encoding as prop-weil-pbc-formal-glueing-equivalence; E', E_i commutative algebras with tower-determined R-structures; α over S (equivalent to S_fi with f_i invertible), αij R-algebra iso (equivalent to R_fifj); hdatum ∃ FormalGlueing.Data with these carriers, transitions matched on numerators via equivTensorProduct+comm (HEq types equal propositionally via tower/algebra ext), equivalent to the node's Glue-object hypothesis; Module.Finite hypotheses; conclusion finite R-algebra D with q' : S⊗D ≃ₐ[S] E', q i : R_fi⊗D ≃ₐ[R_fi] E_i and generator equations equivalent to the full Can(D)→datum squares (algebra maps, generated by D, S/base and inverse powers). t=0, nilpotent/unit f_i, i=j, zero rings covered; w shared as Data requires; D in max u v w harmless. Statement verbatim; sorry only; source/blueprint docstrings with 6 steps; autoImplicit false; proof-dep plain imports match recorded modules; no duplicate. Maintainer notes: stale reviewed_lean/lean_removed fields; citer conormal-torsion-algebraization also has lean null, so the module may be unreached again."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/FormalGlueingFiniteAlgebras.lean",
+  "module": "Sheaf.RingTheory.FormalGlueingFiniteAlgebras",
+  "declaration": "FormalGlueing.exists_finite_algebra_of_formalGlueing",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

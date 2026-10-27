@@ -1,0 +1,228 @@
+{
+ "id": "lem-trf-formal-jacobian-generator-minor-expansion",
+ "kind": "statement",
+ "title": "Explicit quotient-Jacobian minor formula for linear combinations",
+ "statement": "Let $F$ be a field, $n,s,l\\geq0$, $T=F[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series], and $I\\subseteq T$ an ideal. Let $f_1,\\ldots,f_s\\in I$, let $C=(c_{ab})$ be an $l\\times s$ matrix over $T$ [def-weil-matrix], and put $g_a=\\sum_{b=1}^s c_{ab}f_b$. Write $\\partial_i$ for termwise differentiation [def-trf-formal-power-series-partial-derivative], $\\pi:T\\to R=T/I$ for the quotient map, and $J_x(h)=(\\pi(\\partial_i h_a))_{a,i}$ for the quotient Jacobian of any finite list $h$ (rows are list entries). Then for every $a,i$,\n$$\\partial_i g_a=\\sum_b c_{ab}\\partial_i f_b+\\sum_b(\\partial_i c_{ab})f_b,\\qquad J_x(g)=\\overline C J_x(f),$$\nwhere $\\overline C=(\\pi(c_{ab}))$. For every $r\\geq0$ and subsets $A\\subseteq\\{1,\\ldots,l\\}$, $B\\subseteq\\{1,\\ldots,n\\}$ of cardinality $r$, with all index sets in increasing order, one has\n$$\\det(J_x(g)_{A,B})=\\sum_{\\substack{S\\subseteq\\{1,\\ldots,s\\}\\\\|S|=r}}\\det(\\overline C_{A,S})\\det(J_x(f)_{S,B})\\quad\\text{in }R.$$\nHere subscripts denote submatrices [def-weil-submatrix] and $\\det$ is [def-weil-pbc-matrix-determinant]. The formula includes $r=0$ (empty determinants are $1$) and $s<r$ (the sum is empty and the left side is $0$). Neither list is required to generate $I$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), generator-change paragraph: g_s = sum a_sj f_j, its displayed derivative-error matrix, and Cauchy-Binet for each chosen minor; selected-minor formula made explicit using algebra.tex Tag 0F0K (item-cauchy-binet)."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-matrix",
+  "def-weil-submatrix",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "By [def-trf-formal-power-series-partial-derivative], each $\\partial_i$ is an $F$-derivation. The definition of derivation in [def-weil-pbc-kahler-differentials] gives additivity and $\\partial_i(uv)=u\\partial_i v+v\\partial_i u$. Apply additivity repeatedly to the finite sum defining $g_a$ and the product rule to each $c_{ab}f_b$. Commutativity of $T$ and distribution of the finite sum give $\\partial_i g_a=\\sum_b c_{ab}\\partial_i f_b+\\sum_b(\\partial_i c_{ab})f_b$. The empty sum is zero, so this calculation includes $s=0$.",
+   "uses": [
+    "def-trf-formal-power-series-partial-derivative",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), generator-change paragraph and displayed derivative-error matrix."
+   }
+  },
+  {
+   "text": "Apply the quotient ring homomorphism $\\pi$ to the identity in step 1. Since each $f_b\\in I$, its residue is zero, hence $\\pi((\\partial_i c_{ab})f_b)=\\pi(\\partial_i c_{ab})\\pi(f_b)=0$. Preservation of sums and products gives $\\pi(\\partial_i g_a)=\\sum_b\\pi(c_{ab})\\pi(\\partial_i f_b)$. With matrix entries as in [def-weil-matrix], this is precisely $J_x(g)=\\overline C J_x(f)$, where the entry of the product in row $a$, column $i$ is the displayed sum. No condition that either list generates $I$ was used.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), generator-change paragraph and displayed derivative-error matrix."
+   }
+  },
+  {
+   "text": "Fix $A,B$ of cardinality $r$, with increasing enumerations $a_1,\\ldots,a_r$ and $b_1,\\ldots,b_r$. Define the $r\\times s$ matrix $U_{t,j}=\\pi(c_{a_tj})$ and the $s\\times r$ matrix $V_{j,u}=\\pi(\\partial_{b_u}f_j)$. Step 2 gives $(UV)_{t,u}=J_x(g)_{a_t,b_u}$, so $UV=J_x(g)_{A,B}$ by [def-weil-submatrix]. Apply [lem-weil-pbc-cauchy-binet] over the commutative ring $R=T/I$, with its $m=r$ and $n=s$. For each increasing $r$-element subset $S$ of $\\{1,\\ldots,s\\}$, its column submatrix $U^S$ has entries $\\overline C_{a_t,j}$ for $j\\in S$, hence is $\\overline C_{A,S}$; its row submatrix $V_S$ is $J_x(f)_{S,B}$. Substituting these entrywise equalities into that node's determinant formula proves the required selected-minor identity.",
+   "uses": [
+    "def-weil-submatrix",
+    "lem-weil-pbc-cauchy-binet"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K (item-cauchy-binet), applied to the selected rows and columns of the product in Curves Tag 0C4B."
+   }
+  },
+  {
+   "text": "If $r=0$, [def-weil-pbc-matrix-determinant] makes every empty determinant $1$, and there is exactly one subset $S$ of size zero, so the sum is $1$. If $s<r$, there is no $r$-element subset of the $s$-element index set; the sum in step 3 is zero, giving a zero left determinant. If $r>l$ or $r>n$, there are no choices of $A,B$ as required and the assertion about such choices is vacuous.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K (item-cauchy-binet), empty-size and empty-sum conventions made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-matrix",
+  "def-weil-submatrix",
+  "lem-weil-pbc-cauchy-binet",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), generator-change paragraph; Cauchy-Binet as stated in algebra.tex Tag 0F0K (item-cauchy-binet)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "jacob.*minor|minor.*jacob|pderiv.*det|det.*pderiv",
+   "results": "1 hits; Mathlib/RingTheory/MvPowerSeries/Derivative.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formula for each minor of the Jacobian of g equals C f modulo the ideal generated by f",
+   "results": "8 hits; Algebra.PreSubmersivePresentation.jacobiMatrix_apply, Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian, Algebra.PreSubmersivePresentation.jacobiMatrix_naive, Algebra.PreSubmersivePresentation.localizationAway_jacobiMatrix, Algebra.PreSubmersivePresentation.jacobiMatrix_ofAlgEquiv, Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential, Algebra.PreSubmersivePresentation.jacobian.congr_simp, Algebra.SubmersivePresentation.jacobianOfHasCoeffs.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv, Matrix.det",
+   "results": "0 hits; none",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series Jacobian minors of linear combinations modulo the ideal generated by the original series: coefficient matrix and Cauchy Binet expansion",
+   "results": "8 hits; Algebra.SubmersivePresentation.jacobianRelations_spec, Algebra.SubmersivePresentation.jacobianOfHasCoeffs, Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs, Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one, MvPolynomial.universalFactorizationMapPresentation_jacobiMatrix, Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential, Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det, Algebra.SubmersivePresentation.jacobianRelations",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leibniz rule modulo an ideal and Cauchy Binet express every r minor of the formal derivatives of C times f as a sum of minors of df",
+   "results": "8 hits; Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential, Matrix.derivative_det_one_add_X_smul_aux, Matrix.derivative_det_one_add_X_smul, Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det, Algebra.SubmersivePresentation.jacobianRelations_spec, Algebra.PreSubmersivePresentation.jacobian, Algebra.PreSubmersivePresentation.aevalDifferential_toMatrix'_eq_mapMatrix_jacobiMatrix, Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "grep",
+   "query": "jacob.*minor|minor.*jacob|pderiv.*det|det.*pderiv",
+   "results": "{\"t\": \"2026-10-23T09:33:42Z\", \"tool\": \"grep\", \"query\": \"jacob.*minor|minor.*jacob|pderiv.*det|det.*pderiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\"], \"digest\": \"e4f34cccdc82c490\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derivative source provides the existing derivation definition but does not state the quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Jacobian matrix of linear combinations of formal power series modulo an ideal is the coefficient matrix times the original Jacobian and its minors satisfy Cauchy Binet",
+   "results": "{\"t\": \"2026-10-23T09:33:43Z\", \"tool\": \"leansearch\", \"query\": \"The Jacobian matrix of linear combinations of formal power series modulo an ideal is the coefficient matrix times the original Jacobian and its minors satisfy Cauchy Binet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_ofAlgEquiv\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_apply\", \"Algebra.PreSubmersivePresentation.jacobiMatrix\", \"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"Algebra.PreSubmersivePresentation.jacobian.congr_simp\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\"], \"digest\": \"1ea35e5dc05b8dc7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern polynomial presentations or analytic derivatives, not arbitrary formal power-series quotient Jacobians and all selected minors."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv, Matrix.det",
+   "results": "{\"t\": \"2026-10-23T09:33:43Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv, Matrix.det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern polynomial presentations or analytic derivatives, not arbitrary formal power-series quotient Jacobians and all selected minors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series Jacobian of linear combinations modulo an ideal and the Cauchy Binet formula for its selected minors",
+   "results": "{\"t\": \"2026-10-23T09:33:53Z\", \"tool\": \"leanfinder\", \"query\": \"Formal power series Jacobian of linear combinations modulo an ideal and the Cauchy Binet formula for its selected minors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.SubmersivePresentation.jacobianRelations\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"MvPolynomial.universalFactorizationMapPresentation_jacobiMatrix\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs\"], \"digest\": \"c69bb0656954fdc5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern polynomial presentations or analytic derivatives, not arbitrary formal power-series quotient Jacobians and all selected minors."
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv|comp_jacobian_eq_jacobian_smul_jacobian",
+   "results": "{\"t\": \"2026-10-23T09:37:08Z\", \"tool\": \"grep\", \"query\": \"pderiv|comp_jacobian_eq_jacobian_smul_jacobian\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\"], \"digest\": \"76818c782dc66cff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derivative source provides the existing derivation definition but does not state the quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leibniz differentiation of a finite sum of products in multivariate formal power series followed by quotient and rectangular matrix minor expansion",
+   "results": "{\"t\": \"2026-10-23T09:37:17Z\", \"tool\": \"leanfinder\", \"query\": \"Leibniz differentiation of a finite sum of products in multivariate formal power series followed by quotient and rectangular matrix minor expansion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.aevalDifferential\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.PreSubmersivePresentation.aevalDifferential_single\", \"FormalMultilinearSeries.derivSeries_apply_diag\", \"Algebra.SubmersivePresentation.basisDeriv_apply\", \"MvPolynomial.universalFactorizationMapPresentation_jacobiMatrix\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"Polynomial.sylvesterDeriv\"], \"digest\": \"a2a28898cea8f4e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern polynomial presentations or analytic derivatives, not arbitrary formal power-series quotient Jacobians and all selected minors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-trf-formal-jacobian-minor-invariance",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "generator-change paragraph: g_s = sum a_sj f_j, its displayed derivative-error matrix, and Cauchy-Binet for each chosen minor",
+   "via": [
+    "lem-trf-formal-jacobian-minor-invariance",
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-jacobian-generator-minor-expansion",
+  "worker": "stage1",
+  "summary": "Q72: checked Stacks 0C4B and 0F0K, the live project source and existing DAG statements. The derivation definition already supplies the sum/product calculation and the existing closed Cauchy-Binet node supplies every selected minor. Four short steps give the derivative expansion, quotient matrix equality, selected-factor Cauchy-Binet application, and empty cases. No new nodes, no statement change, no attachment. All fresh Mathlib searches were run through msearch.py and recorded.",
+  "blueprint": "This is auxiliary algebra in the inherited chain from lem-trf-local-term-locality through the nodal-curve and formal-Jacobian reductions, specifically the generator-change paragraph of Curves 0C4B named in blueprint.from.place. The latest ancestor proof concerns contracting correspondences and does not itself contain this algebra calculation; the source paragraph, not a nonexistent sentence of that ancestor, is realized by steps 1-3. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cauchy-binet",
+    "why": "Generic determinant formula for rectangular products over a commutative ring, used on the explicitly selected factors U,V. The node is Lean-closed and the unit has no replacement for this linear-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cauchy-binet"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-b6489331f",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-b6489331f (reviewer sub-agent of L); spot-checked: I read all of the item and its 4 steps; there are no new nodes and the statement is unchanged. Sources checked: Stacks curves.tex lines 4065-4098 (Tag 0C4B, generator-change matrix with the error term vanishing in A/I, then Cauchy-Binet) and algebra.tex lines 282-288 (Tag 0F0K), with both tags confirmed in tags/tags. Step 1 is the derivation additivity and Leibniz rule from def-trf-formal-power-series-partial-derivative and def-weil-pbc-kahler-differentials. Step 2 applies pi with f_b in I, so the error term vanishes, giving J(g)=C-bar J(f). Step 3 builds the r x s matrix U and the s x r matrix V; UV is J(g)_{A,B}, U^S is C-bar_{A,S} and V_S is J(f)_{S,B}, so the statement of lem-weil-pbc-cauchy-binet (m=r, n=s, increasing order, empty sum when n<m) applies verbatim. Step 4 covers r=0 (empty determinants are 1), s<r (empty sum, so 0) and r>l or r>n (no such A, B; vacuous). Small cases checked: g=x^2 with I=(x), and g=(1+y)x with n=2. The I=T and positive-characteristic cases also hold. The only tool use, the generic Cauchy-Binet node lem-weil-pbc-cauchy-binet, is accepted. Possible duplicates (coordinate-minor-expansion, invertible-relation-minor-generators, fitting-ideal-independence-base-change) are different results. The parent node uses this item and is not used by it, so there is no cycle. No repair or re-split note exists for the item, and it cites no SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalJacobianGeneratorMinorExpansion",
+  "declaration": "MvPowerSeries.formalJacobian_generator_minor_expansion",
+  "file": "lean/Sheaf/RingTheory/FormalJacobianGeneratorMinorExpansion.lean",
+  "statement": "theorem formalJacobian_generator_minor_expansion (F : Type u) [Field F] (n s l : ℕ) (I : Ideal (MvPowerSeries (Fin n) F)) (f : Fin s → MvPowerSeries (Fin n) F) (hf : ∀ b : Fin s, f b ∈ I) (C : Matrix (Fin l) (Fin s) (MvPowerSeries (Fin n) F)) : (∀ (a : Fin l) (i : Fin n), pderiv F i (∑ b : Fin s, C a b * f b) = (∑ b : Fin s, C a b * pderiv F i (f b)) + ∑ b : Fin s, pderiv F i (C a b) * f b) ∧ (Matrix.of (fun a i ↦ Ideal.Quotient.mk I (pderiv F i (∑ b : Fin s, C a b * f b))) = C.map (Ideal.Quotient.mk I) * Matrix.of (fun b i ↦ Ideal.Quotient.mk I (pderiv F i (f b)))) ∧ (∀ (r : ℕ) (A : Finset (Fin l)) (B : Finset (Fin n)) (hA : A.card = r) (hB : B.card = r), (Matrix.submatrix (Matrix.of (fun a i ↦ Ideal.Quotient.mk I (pderiv F i (∑ b : Fin s, C a b * f b)))) (A.orderEmbOfFin hA) (B.orderEmbOfFin hB)).det = ∑ S : {S : Finset (Fin s) // S.card = r}, ((C.map (Ideal.Quotient.mk I)).submatrix (A.orderEmbOfFin hA) (S.val.orderEmbOfFin S.property)).det * (Matrix.submatrix (Matrix.of (fun b i ↦ Ideal.Quotient.mk I (pderiv F i (f b)))) (S.val.orderEmbOfFin S.property) (B.orderEmbOfFin hB)).det)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d117ace11",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Only change to the item node is the new lean record; statement and stmt_deps unchanged; lean.statement matches the file verbatim. Lean matches the node clause by clause: derivative identity in T (both sums), quotient Jacobian J_x(g) = C̄ J_x(f) as a matrix equality, and the minor formula via submatrix/orderEmbOfFin/det with a sum over {S // S.card = r}, the same shape as Matrix.cauchy_binet. Edge cases r=0, s<r, s=0, l or n = 0, r>l or r>n, I=T, any characteristic covered with no extra hypotheses; one universe u. stmt_deps are only Mathlib leaves; J_x written inline with Matrix.of (no jacobianQ, which would need a theorem stmt_dep, cf. Q44 7814); quotientJacobian is a different notion. No definitions, source and blueprint docstrings with the 4 proof steps, sorry only, both report sections present. No fix, no compile."
+ }
+}

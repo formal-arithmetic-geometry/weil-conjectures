@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-additive-subgroup-diagonalizable-extension-splitting",
+ "kind": "statement",
+ "title": "Splitting an extension with a one-dimensional additive subgroup kernel",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups and closed immersions are as in [def-sc-group-scheme-subgroup, def-weil-closed-immersion]. Let $M$ be a finitely generated abelian group and let $D=\\operatorname{Spec}k[M]$, where $k[M]$ has basis $e_a$, multiplication $e_ae_b=e_{a+b}$, comultiplication $e_a\\mapsto e_a\\otimes e_a$, counit $e_a\\mapsto1$, and antipode $e_a\\mapsto e_{-a}$. Let $\\chi:D\\to\\mathbf G_m$ be a group-scheme homomorphism, and let $N\\subseteq\\mathbf G_a$ be a closed subgroup scheme stable under scalar multiplication by $\\chi$. Here $\\mathbf G_a(R)=(R,+)$ and $\\mathbf G_m(R)=R^\\times$ for a commutative $k$-algebra $R$ [def-sc-gm-ga]. Let $i:N\\hookrightarrow E$ be a closed normal subgroup and let $q:E\\to D$ identify $D$ with the fppf sheaf quotient $E/i(N)$, with scheme-theoretic kernel $i(N)$. The quotient is the sheafification of $R\\mapsto E(R)/i(N)(R)$ for faithfully flat finitely presented coverings. Assume that on every commutative $k$-algebra $R$, every $e\\in E(R)$ and $x\\in N(R)\\subseteq R$ satisfy\n$$e\\,i_R(x)\\,e^{-1}=i_R\\bigl(\\chi_R(q_R(e))x\\bigr).$$\nThen there is a homomorphism of $k$-group schemes $s:D\\to E$ with $q\\circ s=\\operatorname{id}_D$. No smoothness or connectedness is assumed for $N,E,D$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 15.34(d), printed p.319 (vanishing of the extension group for a subgroup of the additive group with a linear multiplicative-type action); application to the pullback extension in Theorem 16.26(a), printed pp.332--333."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-sc-gm-ga",
+  "def-sfb-diagonalizable-group",
+  "def-sfb-fppf-group-quotient-presentation",
+  "def-sfb-standard-group-coordinate-points"
+ ],
+ "proof": [
+  {
+   "text": "Form the affine finite-type group $H=\\mathbf G_a\\rtimes E$ with multiplication $(v,e)(w,f)=(v+\\chi(q(e))w,ef)$ and inverse $(v,e)^{-1}=(-\\chi(q(e))^{-1}v,e^{-1})$. These are scheme morphisms and satisfy the group axioms by the character identity. The graph $K=\\{(-x,i(x)):x\\in N\\}$ is a closed subgroup isomorphic to $N$. Its normality is the explicit identity\n$$(v,e)(-x,i(x))(v,e)^{-1}=(-\\chi(q(e))x,i(\\chi(q(e))x)).$$\nStability of $N$ makes the right side an element of $K$ on every algebra. Apply the affine normal quotient theorem to obtain the affine finite-type group $F=H/K$ and its fppf quotient map. Write $[v,e]$ for a local representative; the brackets do not assert existence of a representative over the original algebra.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 15.34(d), printed p.319; concretization of its additive-kernel reduction, using Example 2.72 (p.61), Proposition 15.31 (p.318), and Exercise 14-3(a) (p.301)."
+   }
+  },
+  {
+   "text": "The homomorphisms $u:\\mathbf G_a\\to F$, $v\\mapsto[v,1]$, $j:E\\to F$, $e\\mapsto[0,e]$, and $r:F\\to D$, $[v,e]\\mapsto q(e)$ satisfy $rj=q$. The formula for $r$ is invariant under $K$, hence descends by the defining quotient-sheaf universal property. Both $u$ and $j$ are monomorphisms: fppf locally membership of $(v,1)$ or $(0,e)$ in $K$ forces respectively $x=0$ or $x=0$, and then $v=0$ or $e=1$. If $q(e)=1$, write $e=i(x)$; the relation $[v,i(x)]=[v+x,1]$ identifies $\\ker r$ with $u(\\mathbf G_a)$. Local surjectivity of $q$ shows that $r$ is locally surjective as a sheaf map. Thus $D=F/u(\\mathbf G_a)$ as fppf sheaves. The kernel is a closed normal subgroup, and the quotient theorem says that $r$ is a faithfully flat finitely presented $\\mathbf G_a$-torsor. Conjugation on its kernel is $f u(v)f^{-1}=u(\\chi(r(f))v)$, as follows locally from the multiplication in $H$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 15.34(d), printed p.319; concretization of its additive-kernel reduction, using Example 2.72 (p.61), Proposition 15.31 (p.318), and Exercise 14-3(a) (p.301)."
+   }
+  },
+  {
+   "text": "Here is the affine additive-torsor argument, with no new torsor lemma. Put $B=k[M]=\\mathcal O(D)$ and $C=\\mathcal O(F)$; $B\\to C$ is faithfully flat by the preceding step. The tautological section $t_C$ over $\\operatorname{Spec}C$ has two pullbacks related uniquely by $t_2=u(z)t_1$, with $z\\in C\\otimes_B C$. On triple overlaps $z_{13}=z_{12}+z_{23}$. Amitsur exactness for $B\\to C$ with module $B$ gives $w\\in C$ with $z=1\\otimes w-w\\otimes1$. Therefore $u(-w)t_C$ agrees on the double overlap. To descend it, use affineness: its coordinate algebra map $\\mathcal O(F)\\to C$ has image in the equalizer of $C\\rightrightarrows C\\otimes_B C$, which is $B$ by the same exactness. Its unique factorization into $B$ preserves sums, products and scalars since $B\\to C$ is injective. It defines a scheme section $t:D\\to F$ of $r$. Translate $t$ on the left by $t(1)^{-1}\\in u(k)$ so that $t(1)=1$.",
+   "uses": [
+    "lem-pc-cech-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 15.34(d), printed p.319; concretization of its additive-kernel reduction, using Example 2.72 (p.61), Proposition 15.31 (p.318), and Exercise 14-3(a) (p.301)."
+   }
+  },
+  {
+   "text": "Define the regular function $c:D\\times D\\to\\mathbf G_a$ by $t(x)t(y)=u(c(x,y))t(xy)$. The torsor identity supplies $c$ as a scheme morphism, not merely as a rule on field-valued points. Associativity and the preceding conjugation formula give\n$$c(x,y)+c(xy,z)=\\chi(x)c(y,z)+c(x,yz).$$\nLet $\\lambda:B\\to k$ extract the coefficient of $e_0$, and put $b=(\\operatorname{id}_B\\otimes\\lambda)c\\in B$. Since $\\Delta(e_a)=e_a\\otimes e_a$, applying $\\lambda$ in the second variable of $h(xy)$ gives the constant $\\lambda(h)$ for any $h\\in B$. Apply $\\lambda$ in the $z$ variable of the displayed identity to obtain\n$$c(x,y)+b(xy)=\\chi(x)b(y)+b(x).$$\nConsequently $\\sigma(d)=u(-b(d))t(d)$ satisfies $\\sigma(x)\\sigma(y)=\\sigma(xy)$ and $r\\sigma=1_D$. The multiplicative identity also forces $\\sigma(1)=1$. This calculation uses the group-algebra basis, including when $D$ is nonreduced; it does not average geometric points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 15.34(d), printed p.319; concretization of its additive-kernel reduction, using Example 2.72 (p.61), Proposition 15.31 (p.318), and Exercise 14-3(a) (p.301)."
+   }
+  },
+  {
+   "text": "If $N=\\mathbf G_a$, every $[v,e]$ is locally $[0,i(v)e]$. The monomorphism $j$ is therefore an isomorphism of the represented quotient sheaves, so $j^{-1}\\sigma$ is the required section of $q$. Otherwise apply the monic additive-polynomial quotient node to the proper subgroup $N$, with $G=D$ and $\\eta=\\chi$. Obtain its polynomial $P$ of positive degree $n$, kernel $N$, and identity $P(\\chi(d)v)=\\chi(d)^nP(v)$. Put $\\psi=\\chi^n$.",
+   "uses": [
+    "lem-sfb-additive-subgroup-polynomial-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 15.34(d), printed p.319; concretization of its additive-kernel reduction, using Example 2.72 (p.61), Proposition 15.31 (p.318), and Exercise 14-3(a) (p.301)."
+   }
+  },
+  {
+   "text": "In the proper-subgroup case the rule $a([v,e])=P(v)$ descends to a scheme morphism $a:F\\to\\mathbf G_a$: replacing $(v,e)$ by $(v,e)(-x,i(x))$ replaces $v$ by $v-\\chi(q(e))x$, whose $P$-value is unchanged. The quotient universal property gives descent, and the multiplication formula gives\n$$a(ff')=a(f)+\\psi(r(f))a(f').$$\nIts zero fibre is exactly $j(E)$ as a sheaf. Indeed, locally $a([v,e])=0$ means $v\\in N$, and then $[v,e]=[0,i(v)e]$. Conversely $a([0,e])=0$. The monomorphism property of $j$ makes the local preimage unique, so these preimages glue in the sheaf represented by $E$. This also shows that $j$ identifies $E$ with the scheme-theoretic zero fibre, including on nonreduced test algebras.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 15.34(d), printed p.319; concretization of its additive-kernel reduction, using Example 2.72 (p.61), Proposition 15.31 (p.318), and Exercise 14-3(a) (p.301)."
+   }
+  },
+  {
+   "text": "Let $f=a\\sigma\\in B$ and let $\\alpha=\\lambda(f)\\in k$, using the same coefficient functional as above. Since $\\sigma$ is a homomorphism, $f(xy)=f(x)+\\psi(x)f(y)$. Apply $\\lambda$ in the $y$ variable. The left side is $\\alpha$, hence $f(x)=\\alpha(1-\\psi(x))$. The polynomial $P(T)-\\alpha$ is nonconstant, so algebraic closedness gives $v\\in k$ with $P(v)=\\alpha$.",
+   "uses": [
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 15.34(d), printed p.319; concretization of its additive-kernel reduction, using Example 2.72 (p.61), Proposition 15.31 (p.318), and Exercise 14-3(a) (p.301)."
+   }
+  },
+  {
+   "text": "Conjugate the homomorphism $\\sigma$ by $u(-v)$, setting $\\sigma'(d)=u(-v)\\sigma(d)u(v)$. It still satisfies $r\\sigma'=1_D$, and the crossed identity for $a$ gives\n$$a(\\sigma'(d))=-P(v)+f(d)+\\psi(d)P(v)=0.$$\nThe zero-fibre identification from step 6 therefore factors $\\sigma'$ uniquely as $j\\circ s$ for a scheme morphism $s:D\\to E$. Since $j$ is a group-scheme monomorphism and $\\sigma'$ a homomorphism, $s(xy)=s(x)s(y)$ and $s(1)=1$. Finally $q\\circ s=rj\\circ s=r\\sigma'=1_D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 15.34(d), printed p.319; concretization of its additive-kernel reduction, using Example 2.72 (p.61), Proposition 15.31 (p.318), and Exercise 14-3(a) (p.301)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-pc-cech-exact",
+  "lem-sfb-additive-subgroup-polynomial-quotient",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Concrete pushout and group-algebra coefficient proof of the additive-kernel reduction in Milne Theorem 15.34(d), with the affine torsor argument of Example 2.72 and the vector-kernel vanishing of Proposition 15.31. It avoids the deleted Propositions 15.29 and 15.30."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over an algebraically closed field every extension of a diagonalizable group scheme by a closed subgroup of the additive group with linear conjugation action splits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"GroupExtension.Splitting.conjAct\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : Group N] →\\n      [inst_1 : Group G] →\\n        {E : Type u_3} → [inst_2 : Group E] → {S : GroupExtension N E G} → S.Splitting → G →* MulAut N\", \"doc\": \"The group homomorphism $ G \\\\to \\\\mathrm{Aut}(N) $ obtained by composing the splitting $ s : G \\\\to E $ with the conjugation action homomorphism $ E \\\\to \\\\mathrm{Aut}(N) $, where $ \\\\mathrm{Aut}(N) $ denot\"}\n  {\"name\": \"SemidirectProduct.inr_splitting\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_3} →\\n    [inst : Group G] → [inst_1 : Group N] → (φ : G →* MulAut N) → (SemidirectProduct.toGroupExtension φ).Splitting\", \"doc\": \"The canonical splitting of the group extension $1 \\\\to N \\\\to N \\\\rtimes_\\\\phi G \\\\to G \\\\to 1$ induced by the right embedding $G \\\\to N \\\\rtimes_\\\\phi G$. This splitting maps each $g \\\\in G$ to $(1, g)$ in the\"}\n  {\"name\": \"GroupExtension.Splitting\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → GroupExtension N E G → Type (max u_2 u_3)\", \"doc\": \"A splitting of the group extension given by the short exact sequence $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ is a group homomorphism $s : G \\\\to E$ such that the composition $G \\\\xrightarrow{s} E \\\\xrightarrow{\\\\pi} \"}\n  {\"name\": \"GroupExtension.IsConj\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] →\\n        [inst_1 : Group E] → [inst_2 : Group G] → (S : GroupExtension N E G) → S.Splitting → S.Splitting → Prop\", \"doc\": \"Two splittings $ s $ and $ s' $ of the group extension $ 1 \\\\to N \\\\to E \\\\to G \\\\to 1 $ are conjugate if there exists an element $ n \\\\in N $ such that $ s(g) = \\\\text{inl}(n) \\\\cdot s'(g) \\\\cdot \\\\text{inl}(\"}\n  {\"name\": \"AddGroupExtension.IsConj\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] →\\n        [inst_1 : AddGroup E] → [inst_2 : AddGroup G] → (S : AddGroupExtension N E G) → S.Splitting → S.Splitting → Prop\", \"doc\": \"The proposition that two splittings $s, t : G \\\\to E$ of an additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ are conjugate, meaning there exists an automorphism $\\\\phi : E \\\\to E$ preserving $N$ (i.e\"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSemisimpleRing R] [FiniteDimensional F R],\\n  ∃ n d, (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[F] (i : Fin n) → Matrix (Fin (d i)) (Fin (d i)) F)\", \"doc\": \"Let `F` be an algebraically closed field and `R` be a finite-dimensional semisimple algebra over `F`. Then there exists a natural number `n` and a sequence of positive integers $d_0, d_1, \\\\ldots, d_{n\"}\n  {\"name\": \"AddGroupExtension.IsConj.refl\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : AddGroup N] [inst_1 : AddGroup G] {E : Type u_3} [inst_2 : AddGroup E]\\n  (S : AddGroupExtension N E G) (s : S.Splitting), S.IsConj s s\", \"doc\": \"For any additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ and any splitting $s : G \\\\to E$, the splitting $s$ is conjugate to itself. This holds because the identity automorphism $\\\\phi = \\\\text{id}_E\"}\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: GroupExtension.Splitting and its section operations assume an abstract splitting; Hilbert 90 concerns multiplicative Galois cohomology, and cotangent H1 vanishing concerns ring maps, not these group-scheme extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first extension group of a multiplicative type algebraic group with coefficients in a subgroup of Ga is zero when the action extends linearly and the field is algebraically closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  (f : Gal(L/K) → Lˣ), groupCohomology.IsMulCocycle₁ f → groupCohomology.IsMulCoboundary₁ f\", \"doc\": \"In the context of Galois cohomology, if $ f : \\\\text{Gal}(L/K) \\\\to L^\\\\times $ is a 1-cocycle (satisfying $ f(gh) = g \\\\cdot f(h) \\\\cdot f(g) $ for all $ g, h \\\\in \\\\text{Gal}(L/K) $), then $ f $ is a 1-cob\"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.val_zero\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, ↑0 = 0\", \"doc\": \"The first component of the zero element in the first cotangent cohomology module $ H^1 $ of a commutative ring extension is equal to zero, i.e., $ (0 : H^1).1 = 0 $.\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"Algebra.Extension.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Subsingleton P.H1Cotangent ↔ Function.Injective ⇑P.cotangentComplex\", \"doc\": \"For an $ R $-algebra extension $ S $, the first cohomology group $ H^1 $ of the cotangent complex is trivial (i.e., all elements are equal) if and only if the canonical cotangent complex map $ \\\\ker(\\\\p\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: GroupExtension.Splitting and its section operations assume an abstract splitting; Hilbert 90 concerns multiplicative Galois cohomology, and cotangent H1 vanishing concerns ring maps, not these group-scheme extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of a diagonalizable algebraic group by an additive subgroup with scalar character action admits a group scheme section",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"GroupExtension.Splitting.toSection\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → {S : GroupExtension N E G} → S.Splitting → S.Section\", \"doc\": \"Given a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ and a splitting $s : G \\\\to E$ (a group homomorphism satisfying $\\\\pi \\\\circ s = \\\\mathrm{id}_G$), this constructs the corresponding section $s : G \\\\to \"}\n  {\"name\": \"AddGroupExtension.Section.mk\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] →\\n        [inst_1 : AddGroup E] →\\n          [inst_2 : AddGroup G] →\\n            {S : AddGroupExtension N E G} → (toFun : G → E) → Function.RightInverse toFun ⇑S.rightHom → S.Section\", \"doc\": \"Given a function $ s : G \\to E $ that is a right inverse of the projection homomorphism $ E \\to G $, this constructs the corresponding section of the additive group extension $ 0 \\to N \\to E \\to G \\to 0 $.\"}\n  {\"name\": \"GroupExtension.Section\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → GroupExtension N E G → Type (max u_2 u_3)\", \"doc\": \"The type of sections $ s : G \\\\to E $ for a group extension $ 1 \\\\to N \\\\to E \\\\to G \\\\to 1 $, where the projection $ \\\\pi : E \\\\to G $ satisfies $ \\\\pi(s(g)) = g $ for all $ g \\\\in G $.\"}\n  {\"name\": \"GroupExtension.Section.mk\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] →\\n        [inst_1 : Group E] →\\n          [inst_2 : Group G] →\\n            {S : GroupExtension N E G} → (toFun : G → E) → Function.RightInverse toFun ⇑S.rightHom → S.Section\", \"doc\": \"Given groups $N$, $E$, $G$ and a group extension $S$ with short exact sequence $1 \\\\to N \\\\to E \\\\to G \\\\to 1$, this constructor builds a section $s: G \\\\to E$ by specifying a function $\\\\text{toFun}: G \\\\to\"}\n  {\"name\": \"AddGroupExtension.Section\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] → [inst_1 : AddGroup E] → [inst_2 : AddGroup G] → AddGroupExtension N E G → Type (max u_2 u_3)\", \"doc\": \"The type of sections of an additive group extension, i.e., homomorphisms $s : G \\to E$ such that the composition of $s$ with the projection $E \\to G$ is the identity map on $G$.\"}\n  {\"name\": \"AddGroupExtension.Splitting.toSection\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] →\\n        [inst_1 : AddGroup E] → [inst_2 : AddGroup G] → {S : AddGroupExtension N E G} → S.Splitting → S.Section\", \"doc\": \"Given a splitting $ s : G \\to E $ of the additive group extension $ 0 \\to N \\to E \\to G \\to 0 $, this function constructs the corresponding section of the extension by utilizing $ s $ as the right inverse \"}\n  {\"name\": \"AddGroupExtension.surjInvRightHom\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : AddGroup N] →\\n      [inst_1 : AddGroup G] → {E : Type u_3} → [inst_2 : AddGroup E] → (S : AddGroupExtension N E G) → S.Section\", \"doc\": \"For any additive group extension representing the short exact sequence $0 \\to N \\to E \\to G \\to 0$, this function constructs a section $s : G \\to E$ (a right inverse to the projection $E \\to G$) using the a\"}\n  {\"name\": \"Algebra.Extension.mk\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (Ring : Type w) →\\n            [commRing : CommRing Ring] →\\n              [algebra₁ : Algebra R Ring] →\\n                [algebra₂ : Algebra Ring S] →\\n                  [i\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a commutative ring $ A $ equipped with $ R $-algebra and $ A $-algebra structures on $ S $ satisfying the scalar t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: GroupExtension.Splitting and its section operations assume an abstract splitting; Hilbert 90 concerns multiplicative Galois cohomology, and cotangent H1 vanishing concerns ring maps, not these group-scheme extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"section\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: GroupExtension.Splitting and its section operations assume an abstract splitting; Hilbert 90 concerns multiplicative Galois cohomology, and cotangent H1 vanishing concerns ring maps, not these group-scheme extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|multiplicative.type|split.*extension|extension.*split",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: GroupExtension.Splitting and its section operations assume an abstract splitting; Hilbert 90 concerns multiplicative Galois cohomology, and cotangent H1 vanishing concerns ring maps, not these group-scheme extensions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-triangular-diagonal-kernel",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, use of 16.6 and 16.10; the concrete matrix kernel in present proof step 1, before descent. Supporting input: Milne Theorem 16.26(a), last paragraph: the pulled-back extension (118) splits by Theorem 15.34(d).",
+   "via": [
+    "lem-sfb-triangular-diagonal-kernel",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-additive-subgroup-diagonalizable-extension-splitting",
+  "worker": "stage1",
+  "summary": "Kept the full nonsmooth extension statement. Constructed the pushout to an additive-kernel extension, trivialized its affine torsor using the existing Amitsur exactness node, killed its two-cocycle by coefficient extraction, then corrected the splitting into the original subgroup using its monic additive-polynomial quotient and a root in k. Only the polynomial quotient is a new unsplit node; the cochain computations and torsor descent are explicit elementary steps.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, use of 16.6 and 16.10; the concrete matrix kernel in present proof step 1, before descent. Supporting input: Milne Theorem 16.26(a), last paragraph: the pulled-back extension (118) splits by Theorem 15.34(d). Realizes the supporting extension split used in Milne 16.26(a), without changing the unit route; current blueprint direct-images proof paragraph (3) is the upstream motivation."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-f75b539ad",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-f75b539ad (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-additive-subgroup-polynomial-quotient and every cited statement in full, against Milne iAG Thm 15.34(d) p.319, Ex 2.72 p.61, Ex 14-3 p.301 and 15.31. The item statement is unchanged against live (unsplit there, no repair note, no supersession) and matches 15.34(d) for diagonalizable D, with nothing weakened. I recomputed all 8 steps. Step 1: semidirect law and inverse; conjugate of (-x,i(x)) is (-χx,i(χx)), in K by stability. Step 2: ker r = u(Ga) via (v+x,1)(-x,i(x))=(v,i(x)); torsor and faithfully flat from the cited quotient node. Step 3: torsor cocycle, Amitsur degree-1 primitive and degree-0 equalizer descent (Milne Ex 2.72). Step 4: cocycle identity under id⊗id⊗λ gives c(x,y)+b(xy)=χ(x)b(y)+b(x), so σ is a homomorphism; valid for torsion M and nonreduced D. Step 5: N=Ga branch gives (0,i(v)e). Step 6: a is K-invariant since P(v-χx)=P(v); crossed law; zero fibre = j(E). Step 7: f=α(1-ψ), root of P-α in k. Step 8: a(σ')=-α+α-αψ+αψ=0, so σ' factors through E. New node is true over any field: PID generator, additivity by reduced-monomial argument in k[X,Y]/(P(X),P(Y)), free of rank n over k[P], equivariance by leading coefficients at the universal point. Tested on N=0, α_{p^r}, T^p-T. Searches recorded; no duplicate after an rg -L sweep, checked against the one-dimensional-unipotent, multiplicative-additive-vanishing, multiplicative-type-extension, faithfully-flat-quotient-universal and split-torus nodes. Route: affine-normal-quotient-geometry is in the same unit; cech-exact is Lean-closed; algebraic-closure is a Mathlib leaf; no SGA. Batch-5 finding: the closure reaches def-trf-scheme-cover-descent-datum, a general descent-datum definition used for torsor representability. It is not part of the trace formula or Poincaré duality or their proofs, and the parent already cites the same node, so no fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdditiveSubgroupDiagonalizableExtensionSplitting",
+  "declaration": "AlgebraicGeometry.additiveSubgroup_diagonalizable_extension_splits",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdditiveSubgroupDiagonalizableExtensionSplitting.lean",
+  "statement": "theorem additiveSubgroup_diagonalizable_extension_splits {k : Type u} [Field k] [IsAlgClosed k] (M : Type u) [AddCommGroup M] [AddGroup.FG M] (N E : Grp (Over (Spec (.of k)))) [IsAffine N.X.left] [LocallyOfFiniteType N.X.hom] [QuasiCompact N.X.hom] [IsAffine E.X.left] [LocallyOfFiniteType E.X.hom] [QuasiCompact E.X.hom] (j : N.X ⟶ additive k) [IsClosedSubgroupScheme j] (chi : (diagonalizableGroup k M).X ⟶ multiplicative k) [IsMonHom chi] (i : N ⟶ E) [IsClosedSubgroupScheme i.hom.hom] [IsNormalSubgroupScheme i.hom.hom] (q : E ⟶ diagonalizableGroup k M) (hquot : IsFppfGroupQuotient i q) (hstable : ∀ (R : Type u) [CommRing R] [Algebra k R] (d : affine k R ⟶ (diagonalizableGroup k M).X) (x : R), (∃ z : affine k R ⟶ N.X, z ≫ j = additiveCoordinatePoint k R x) → ∃ z : affine k R ⟶ N.X, z ≫ j = additiveCoordinatePoint k R (multiplicativeCoordinateValue k (d ≫ chi) * x)) (hconj : ∀ (R : Type u) [CommRing R] [Algebra k R] (e : affine k R ⟶ E.X) (x : R) (z : affine k R ⟶ N.X), z ≫ j = additiveCoordinatePoint k R x → ∃ w : affine k R ⟶ N.X, w ≫ j = additiveCoordinatePoint k R (multiplicativeCoordinateValue k (e ≫ q.hom.hom ≫ chi) * x) ∧ e * (z ≫ i.hom.hom) * e⁻¹ = w ≫ i.hom.hom) : ∃ s : diagonalizableGroup k M ⟶ E, s ≫ q = 𝟙 (diagonalizableGroup k M)",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing diagonalizable group and the definition node def-sfb-fppf-group-quotient-presentation, together with the coordinate definitions registered by def-sfb-standard-group-coordinate-points. The affine normal quotient and additive polynomial quotient theorems remain solely in proof_deps. Repair of H2 return on 533ef8693436; Lean file and signature unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be04af62a",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 533ef869. Lean file byte-identical to the returned delivery (sha256 2a23c4e4), whose math/H3 was already correct; re-read the signature against the node: alg-closed k, FG M, D=diagonalizableGroup, affine finite-type N and E, closed N⊆Ga, IsMonHom chi, closed normal i, IsFppfGroupQuotient, hstable/hconj on all R:Type u, ∃ Grp-hom s with s≫q=𝟙; no added assumptions; lean.statement verbatim. Item node vs live: only stmt_deps and lean differ. Theorem nodes affine-normal-quotient-geometry and additive-subgroup-polynomial-quotient are removed from stmt_deps and kept in proof_deps; def-sfb-fppf-group-quotient-presentation (landed Q95 def, existing:true) and new def-sfb-standard-group-coordinate-points are cited. New node: existing:true on additiveCoordinatePoint (map k (aeval x)) and multiplicativeCoordinateValue (g*(T 1)), real data with no .choose, statement matches the Lean, verbatim def signature, stmt_dep def-sc-gm-ga, Milne §2.1-2.2 pp.39-40 and Ex 14.40 p.292 verified, no other owner node, no SGA citation. Docstrings carry all 8 proof steps; proof by sorry only. No file changed, nothing compiled. Advisory only: new node does not list def-weil-field."
+ }
+}

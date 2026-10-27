@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-semilinear-fixed-field-finite-generation",
+ "kind": "statement",
+ "title": "Finite generation of fixed fields for compatible finite actions",
+ "statement": "Let $k\\subseteq E$ be fields [def-weil-field, def-pc-field-extension], with $E=k(a_1,\\ldots,a_n)$ for some finite family. Let a finite group $H$ act on $k$ and $E$ by field automorphisms, and assume that for $a\\in k$ and $h\\in H$, the image of $h(a)$ in $E$ equals $h$ applied to the image of $a$. Define $k_0=k^H=\\{a\\in k:h(a)=a\\ \\forall h\\in H\\}$ and $F=E^H=\\{x\\in E:h(x)=x\\ \\forall h\\in H\\}$. Then $k_0\\subseteq F$, both $k/k_0$ and $E/F$ are finite separable extensions, and both $E/k_0$ and $F/k_0$ are finitely generated as field extensions. Here finitely generated means generated as a field by a finite family, and finite separable means finite-dimensional with every element having separable minimal polynomial [def-weil-pbc-separable-algebraic-extension]. Neither action is required to be faithful; no geometric reducedness or integrality hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Agent extraction of former steps 1-3 of lem-sfb-invariant-separating-parameters: apply Tag 09I3 (lemma-galois-over-fixed-field) to the two automorphism images, use its orbit polynomials and Tag 09GH (lemma-algebraic-finitely-generated) to obtain a finite coefficient field, then the finite-dimensional-subspace argument. Serves de Jong Lemma 5.2 proof, printed p.613, invariant parameter choice."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "For $a\\in k_0$ and $h\\in H$, compatibility gives $h(a)=a$ also in $E$. Hence $k_0\\subseteq F$. The subsets $k_0$ and $F$ are subfields because automorphisms preserve sums, products, $0$, $1$, negatives and inverses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fixed-field definition immediately before Tag 09I3 (lemma-galois-over-fixed-field)."
+   }
+  },
+  {
+   "text": "Let $G_k$ and $G_E$ be the respective images of $H$ in the automorphism groups of $k$ and $E$. Each is a finite group acting faithfully, and an element is fixed by its image exactly when it is fixed by every element of $H$. Apply [lem-wf-finite-field-action-fixed-degree] to these two groups. Thus $k/k_0$ and $E/F$ are finite-dimensional and separable algebraic; no faithfulness of the original actions is used.",
+   "uses": [
+    "lem-wf-finite-field-action-fixed-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3 (lemma-galois-over-fixed-field), applied to the two automorphism images."
+   }
+  },
+  {
+   "text": "By [def-weil-finite-dimensional-subspace], choose a finite $k_0$-spanning family $u_1,\\ldots,u_r$ of $k$. Adjoin it to the given finite field-generating family $a_1,\\ldots,a_n$ of $E/k$, and call the combined family $z_1,\\ldots,z_N$. The field $k_0(z_1,\\ldots,z_N)$ contains $k$, since it contains every $k_0$-linear combination of the $u_j$, and then contains $E=k(a_1,\\ldots,a_n)$. The reverse inclusion holds since all generators lie in $E$. Therefore $E=k_0(z_1,\\ldots,z_N)$, proving finite generation of $E/k_0$.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Finite-dimensionality from Tag 09I3 (lemma-galois-over-fixed-field); explicit field-generator argument."
+   }
+  },
+  {
+   "text": "For each $i$ let $O_i=\\{h(z_i):h\\in H\\}$ and set $P_i(T)=\\prod_{b\\in O_i}(T-b)$. Each $h$ permutes $O_i$, so applying $h$ to the coefficients leaves $P_i$ unchanged. Thus all coefficients belong to $F$. Let $S$ be the finite set of all these coefficients and $C=k_0(S)\\subseteq F$. Each $P_i$ is a monic polynomial of positive degree over $C$ and vanishes at $z_i$, so $z_i$ is algebraic over $C$. Since $k_0\\subseteq C\\subseteq E$ and the $z_i$ generate $E/k_0$, we have $E=C(z_1,\\ldots,z_N)$. Apply [lem-weil-pbc-algebraic-generators-finite-extension] to obtain that $E$ is finite-dimensional over $C$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3 (lemma-galois-over-fixed-field), first proof paragraph (orbit polynomials); Tag 09GH (lemma-algebraic-finitely-generated)."
+   }
+  },
+  {
+   "text": "The field $C$ is Noetherian in the sense of [def-weil-pbc-noetherian-ring]: an ideal containing $x\\ne0$ contains $x^{-1}x=1$, so its ideals are $(0)$ and $(1)$. By [def-weil-finitely-generated-module], finite-dimensionality makes $E$ a finite $C$-module. Since $C\\subseteq F\\subseteq E$, $F$ is a $C$-submodule of $E$. Apply [lem-weil-pbc-noetherian-submodule-finite] to obtain a finite $C$-spanning family $b_1,\\ldots,b_m$ of $F$. The field $C(b_1,\\ldots,b_m)$ contains every such linear combination and lies in $F$, so equals $F$. Consequently $F=k_0(S\\cup\\{b_1,\\ldots,b_m\\})$, generated by a finite set.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK (lemma-Noetherian-basic), submodule-finiteness assertion; explicit conversion from linear to field generators."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-finite-field-action-fixed-degree",
+  "def-weil-finite-dimensional-subspace",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09I3 (lemma-galois-over-fixed-field), automorphism images and orbit-polynomial construction; Tag 09GH (lemma-algebraic-finitely-generated); algebra.tex Tag 00IK (lemma-Noetherian-basic) supplies the finite-dimensional-subspace step. Expands former steps 1-3 retained in coord/reports/Q132/lem-sfb-invariant-separating-parameters.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated field extension with compatible actions of a finite group has finitely generated extension of fixed fields, and both fields are finite separable over their fixed fields",
+   "results": "{\"t\": \"2026-10-22T06:10:12Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated field extension with compatible actions of a finite group has finitely generated extension of fixed fields, and both fields are finite separable over their fixed fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.isSeparable\", \"IsGalois.of_fixed_field\", \"IsGaloisGroup.fixedPoints\", \"FixedPoints.normal\", \"FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield\", \"IsGaloisGroup.intermediateField\", \"IntermediateField.fixedField.algebra\", \"fixedByFinite\"], \"digest\": \"089f1817db3fb8aa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints finite-dimensional/separable instances give the two finite extensions only; IntermediateField.fg_of_noetherian assumes module finiteness over the same base. Neither supplies finite generation of the invariant extension over k^H from field finite generation of E/k."
+  },
+  {
+   "tool": "grep",
+   "query": "fixedField.*(fg|FG)|[Ff]ixed[Pp]oints.*(fg|FG)|fg_of_fg|FG.*[Ii]nvariant",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"grep\", \"query\": \"fixedField.*(fg|FG)|[Ff]ixed[Pp]oints.*(fg|FG)|fg_of_fg|FG.*[Ii]nvariant\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\"], \"digest\": \"707fb60ebc80a5fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints finite-dimensional/separable instances give the two finite extensions only; IntermediateField.fg_of_noetherian assumes module finiteness over the same base. Neither supplies finite generation of the invariant extension over k^H from field finite generation of E/k."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed subfields of compatible finite group actions on a finitely generated field extension form a finitely generated extension",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"leansearch\", \"query\": \"The fixed subfields of compatible finite group actions on a finitely generated field extension form a finitely generated extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.fixedField\", \"FixedPoints.instSMulCommClassSubtypeMemSubfieldSubfield\", \"FixedPoints.intermediateField\", \"FixedPoints.smulCommClass'\", \"FixedPoints.subfield\", \"IsGaloisGroup.fixedPoints_eq_bot\", \"FixedPoints.finrank_eq_card\", \"FixedPoints.instIsInvariantSubfieldSubfield\"], \"digest\": \"9da30eb83bae620f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints finite-dimensional/separable instances give the two finite extensions only; IntermediateField.fg_of_noetherian assumes module finiteness over the same base. Neither supplies finite generation of the invariant extension over k^H from field finite generation of E/k."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FixedPoints\", \"FG\"",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"FixedPoints\\\", \\\"FG\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints finite-dimensional/separable instances give the two finite extensions only; IntermediateField.fg_of_noetherian assumes module finiteness over the same base. Neither supplies finite generation of the invariant extension over k^H from field finite generation of E/k."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite semilinear action on a finitely generated extension yields a finitely generated extension between the invariant subfields",
+   "results": "{\"t\": \"2026-10-22T06:11:58Z\", \"tool\": \"leanfinder\", \"query\": \"A finite semilinear action on a finitely generated extension yields a finitely generated extension between the invariant subfields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield\", \"IntermediateField.finiteDimensional_map\", \"IsGaloisGroup.finiteDimensional\", \"IntermediateField.FG.of_restrictScalars\", \"IntermediateField.instFiniteSubtypeMemBot\", \"FiniteField.instFiniteExtension_1\", \"finiteExts\", \"Field.FiniteDimensional.of_finite_intermediateField\"], \"digest\": \"50b721f6536d6ff0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints finite-dimensional/separable instances give the two finite extensions only; IntermediateField.fg_of_noetherian assumes module finiteness over the same base. Neither supplies finite generation of the invariant extension over k^H from field finite generation of E/k."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem|lemma|instance",
+   "results": "{\"t\": \"2026-10-22T06:12:47Z\", \"tool\": \"grep\", \"query\": \"theorem|lemma|instance\", \"sub\": \"FieldTheory/Fixed.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"57\", \"68\", \"81\", \"91\"], \"digest\": \"79070a1b4562a8d1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints finite-dimensional/separable instances give the two finite extensions only; IntermediateField.fg_of_noetherian assumes module finiteness over the same base. Neither supplies finite generation of the invariant extension over k^H from field finite generation of E/k."
+  },
+  {
+   "tool": "grep",
+   "query": "isSeparable|FiniteDimensional|finrank_eq_card",
+   "results": "{\"t\": \"2026-10-22T06:13:32Z\", \"tool\": \"grep\", \"query\": \"isSeparable|FiniteDimensional|finrank_eq_card\", \"sub\": \"FieldTheory/Fixed.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"287\", \"291\", \"296\", \"319\", \"324\"], \"digest\": \"7bd01d8e77690a63\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints finite-dimensional/separable instances give the two finite extensions only; IntermediateField.fg_of_noetherian assumes module finiteness over the same base. Neither supplies finite generation of the invariant extension over k^H from field finite generation of E/k."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite group actions on a finitely generated field extension give a finitely generated extension of fixed fields",
+   "results": "{\"t\": \"2026-10-22T11:05:44Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible finite group actions on a finitely generated field extension give a finitely generated extension of fixed fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGalois.of_fixed_field\", \"IsGaloisGroup.fixedPoints\", \"FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield\", \"FixedPoints.normal\", \"IsGaloisGroup.intermediateField\", \"top_fixedByFinite\", \"FixedPoints.isSeparable\", \"IsGaloisGroup.finiteDimensional\"], \"digest\": \"de25c1cfa2f657bc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field and Galois declarations give finite separability only; no finite-generation conclusion for the invariant extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FixedPoints\", \"FG\"",
+   "results": "{\"t\": \"2026-10-22T11:05:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"FixedPoints\\\", \\\"FG\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field and Galois declarations give finite separability only; no finite-generation conclusion for the invariant extension"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedField.*(fg|FG)|[Ff]ixed[Pp]oints.*(fg|FG)|fg_of_fg|FG.*[Ii]nvariant",
+   "results": "{\"t\": \"2026-10-22T11:06:23Z\", \"tool\": \"grep\", \"query\": \"fixedField.*(fg|FG)|[Ff]ixed[Pp]oints.*(fg|FG)|fg_of_fg|FG.*[Ii]nvariant\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\"], \"digest\": \"707fb60ebc80a5fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fg_of_fg_toSubalgebra assumes algebra finite generation, while fg_of_noetherian assumes module Noetherianity over the same base (Adjoin/Algebra.lean:294-299); neither proves the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed subfields of compatible finite group actions on a finitely generated field extension form a finitely generated field extension",
+   "results": "{\"t\": \"2026-10-22T11:06:24Z\", \"tool\": \"leansearch\", \"query\": \"Fixed subfields of compatible finite group actions on a finitely generated field extension form a finitely generated field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedBy.subfield\", \"IntermediateField.fixedField\", \"FixedPoints.intermediateField\", \"FixedPoints.instSMulCommClassSubtypeMemSubfieldSubfield\", \"FixedPoints.smulCommClass'\", \"FixedPoints.subfield\", \"IsGaloisGroup.fixedPoints_eq_bot\", \"FixedPoints.instIsInvariantSubfieldSubfield\"], \"digest\": \"df36b1734315464c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field and Galois declarations give finite separability only; no finite-generation conclusion for the invariant extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An intermediate field of a finitely generated field extension is finitely generated over the base field",
+   "results": "{\"t\": \"2026-10-22T11:07:01Z\", \"tool\": \"leanfinder\", \"query\": \"An intermediate field of a finitely generated field extension is finitely generated over the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.fg_of_fg_toSubalgebra\", \"IntermediateField.FG\", \"IntermediateField.fg_top\", \"IntermediateField.essFiniteType_iff\", \"IntermediateField.fg_def\", \"IntermediateField.fg_adjoin_finset\", \"IntermediateField.fg_adjoin_of_finite\", \"IntermediateField.induction_on_adjoin_fg\"], \"digest\": \"d4b348a21d02fd15\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the reported FG definitions and finite-generation lemmas; none descends field finite generation to a general intermediate field, and the combined fixed-field statement is not supplied"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-separating-parameters",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; de Jong Lemma 5.2 proof, p.613, invariant functions x_1,...,x_{d-1}; supplies the separating basis before taking its first d-1 entries; Agent extraction of former steps 1-3 of lem-sfb-invariant-separating-parameters: apply Tag 09I3 (lemma-galois-over-fixed-field) to the two automorphism images, use its orbit polynomials and Tag 09GH (lemma-algebraic-finitely-generated) to obtain a finite coefficient field, then the finite-dimensional-subspace argument. Serves de Jong Lemma 5.2 proof, printed p.613, invariant parameter choice.",
+   "via": [
+    "lem-sfb-invariant-separating-parameters",
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semilinear-fixed-field-finite-generation",
+  "worker": "stage1",
+  "summary": "Finite automorphism images remove the faithfulness issue; a finite spanning family of k proves E/k0 finitely generated. Orbit-polynomial coefficients define an explicit finite coefficient field C inside F, over which E is finite by the existing 09GH leaf. The existing 00IK leaf gives a finite C-spanning family of F, yielding finite field generators. All cited statements were read and quoted; no new nodes or statement change. Logged searches do not find a Mathlib theorem for the combined statement. Repair of returned head 8ade7534077: rebuilt on the current live unsplit DAG record, retained the approved coefficient-field proof and logged searches, and re-read all six current cited statements; no changed hypotheses or citations require a mathematical route change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; de Jong Lemma 5.2 proof, p.613, invariant functions x_1,...,x_{d-1}; supplies the separating basis before taking its first d-1 entries; Agent extraction of former steps 1-3 of lem-sfb-invariant-separating-parameters: apply Tag 09I3 (lemma-galois-over-fixed-field) to the two automorphism images, use its orbit polynomials and Tag 09GH (lemma-algebraic-finitely-generated) to obtain a finite coefficient field, then the finite-dimensional-subspace argument. Serves de Jong Lemma 5.2 proof, printed p.613, invariant parameter choice.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NS-02e29ee6b",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-02e29ee6b (reviewer sub-agent of L); spot-checked: There are no new nodes; the commit changes only the item JSON and the report. Against the previously PASSed head 8ade7534077d, the item differs only in split_report.date and summary. 8ade was refused at landing ('NOT MERGED … completed in this project's DAG but not …'), which is a landing refusal, not a mathematical fault. The statement and stmt_deps are unchanged. I tested the statement on these cases and it holds in each: trivial H, n=0, a non-faithful action, F_p(t) with t↦t+1, Frobenius acting on the constants of F_{p^r}(t), and inseparable E/k. Step-by-step checks. Step 1: elementary, k0⊆F. Step 2: lem-wf-finite-field-action-fixed-degree (finite G, injective ρ) is applied to the images of H in Aut(k) and Aut(E); the fixed fields are unchanged; source Stacks 09I3, fields.tex 2727-2781. Step 3: the definition gives a finite k0-spanning set of k, so E=k0(u,a). Step 4: the H-invariant orbit polynomials have coefficients in F, so C=k0(S)⊆F; E/C is finite by lem-weil-pbc-algebraic-generators-finite-extension (Stacks 09GH, fields.tex 693-709). Step 5: C is a field, hence Noetherian; E is a finite C-module and F a C-submodule, so lem-weil-pbc-noetherian-submodule-finite (Stacks 00IK, algebra.tex 12154) gives a finite C-span of F, and F=k0(S∪b). proof_deps equals the union of the step uses. There is no SGA citation and no repair note, and no duplicate or restatement node. Maintainer note: a repeat refusal of this head would be a fault in the landing/promotion path, not in the split."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SemilinearFixedFieldFiniteGeneration",
+  "declaration": "Algebra.semilinear_fixed_field_finite_generation",
+  "file": "lean/Sheaf/FieldTheory/SemilinearFixedFieldFiniteGeneration.lean",
+  "statement": "theorem semilinear_fixed_field_finite_generation (k : Type u) (E : Type v) [Field k] [Field E] [Algebra k E] (hfg : (⊤ : IntermediateField k E).FG) (H : Type w) [Group H] [Finite H] [MulSemiringAction H k] [MulSemiringAction H E] (hcompat : ∀ (h : H) (a : k), h • algebraMap k E a = algebraMap k E (h • a)) : (∀ a : k, a ∈ FixedPoints.subfield H k → algebraMap k E a ∈ FixedPoints.subfield H E) ∧ FiniteDimensional (FixedPoints.subfield H k) k ∧ Algebra.IsSeparable (FixedPoints.subfield H k) k ∧ FiniteDimensional (FixedPoints.subfield H E) E ∧ Algebra.IsSeparable (FixedPoints.subfield H E) E ∧ (⊤ : @IntermediateField (FixedPoints.subfield H k) E _ _ (Algebra.compHom E (FixedPoints.subfield H k).subtype)).FG ∧ ∃ F : @IntermediateField (FixedPoints.subfield H k) E _ _ (Algebra.compHom E (FixedPoints.subfield H k).subtype), F.toSubfield = FixedPoints.subfield H E ∧ F.FG",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cd64a50d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Item lean record + module Sheaf.FieldTheory.SemilinearFixedFieldFiniteGeneration (sorry only). Statement matches node clause by clause: Field/Algebra k E, IntermediateField.FG top for finite generators (n=0 ok), finite group with MulSemiringAction on k and E without faithfulness, compatibility hcompat, k^H/E^H as FixedPoints.subfield, k0⊆F, FiniteDimensional+Algebra.IsSeparable for k/k^H and E/E^H, FG of E and of E^H over k^H via Algebra.compHom along the subtype (E^H pinned by toSubfield). No extra hypotheses, independent universes u v w. lean.statement verbatim. stmt_deps are existing Mathlib leaves. No duplicate in Mathlib or the project. Source/blueprint docstrings and 5 proof steps present. Live has no prior lean record. Report sections present. No file changed, so nothing compiled."
+ }
+}

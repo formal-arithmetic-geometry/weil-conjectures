@@ -1,0 +1,403 @@
+{
+ "id": "lem-per-admissible-completion-spectral-presentation",
+ "kind": "statement",
+ "title": "Natural spectral sequences and completion over a fixed admissible limit site",
+ "statement": "Let (A,I) be a henselian pair with finitely generated I, and let U be the complement of V(I). Fix a small site (C,τ), an AdmissibleToposPresentation P for I on it, and the cartesian common-open embeddings j into the full-support blowups. There exists AdmissibleCompletionSpectralPresentation P j: completed-site projections on the same (C,τ), completed common-open embeddings, a cofinal extension and compatible blowup/closed-fibre/site comparisons, and original and completed AdmissibleSpectralPresentations, together with coefficient exchange normalized on every finite-stage coprojection, a natural spectral-sequence map with the prescribed E₂ square, preservation of torsion under the open completion pullback, and its canonical filtered cohomological abutment. All definitions and normalizations are those of [def-per-admissible-modification-presentation-data] and [def-per-admissible-modification-coefficient-data]. In particular this conclusion does not construct or assert existence of the original site, its limit property or its original common-open embeddings; those are fixed hypotheses.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 4.4, printed p.373: admissible blowups, (**) and its limit; p.374 final Note for the formal closed-fibre identification."
+ },
+ "stmt_deps": [
+  "def-per-admissible-modification-presentation-data",
+  "def-per-admissible-modification-coefficient-data",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Using [lem-weil-pbc-module-sheaves-enough-injectives] with $R=\\mathbf Z$, choose a nonnegative injective resolution $F\\to I^\\bullet$ and put $C_J=j_{J*}I^\\bullet$ and $K_J=i_J^{-1}C_J$, where $i_J:Z_J\\hookrightarrow B_J$. By [lem-weil-pbc-direct-image-preserves-injectives], $C_J$ represents $Rj_{J*}F$ and its derived global sections are represented by $\\Gamma(B_J,C_J)=\\Gamma(U,I^\\bullet)$. For a domination $h:B_K\\to B_J$ the ordinary exchange map $h^{-1}j_{J*}I^\\bullet\\to j_{K*}I^\\bullet$ is adjoint to $j_{J*}I^\\bullet\\to h_*j_{K*}I^\\bullet=j_{J*}I^\\bullet$ equal to the identity. These maps satisfy composition and give the restricted coefficient system $K_J$. Exactness of inverse image [prop-weil-pbc-inverse-image-exact] gives $H^q(K_J)=i_J^{-1}R^qj_{J*}F$. The open $U$ is quasi-compact because $I$ is finitely generated, so $j_J$ is qcqs. Apply [lem-sbc-qcqs-higher-images-prime-torsion] with all primes to see that these cohomology sheaves are torsion.",
+   "uses": [
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-sbc-qcqs-higher-images-prime-torsion",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed pp.373–374, finite-stage (**) and its limit; final Note."
+   }
+  },
+  {
+   "text": "Apply [lem-per-proper-henselian-derived-restriction] to the proper morphism $B_J\\to\\operatorname{Spec}A$ and the bounded-below torsion-cohomology complex $C_J$. It identifies the restriction map $R\\Gamma(U,F)=R\\Gamma(B_J,C_J)\\to R\\Gamma(Z_J,K_J)$ as an isomorphism. Its naturality clause applies to a domination and the exchange map of the preceding step. On $R\\Gamma(U,F)$ that map is the identity: its adjoint defining $j_{J*}I^\\bullet\\to h_*j_{K*}I^\\bullet$ is the identity, so the global-section map is the identity on $\\Gamma(U,I^\\bullet)$. Thus the whole diagram of derived sections is canonically identified with the constant diagram $R\\Gamma(U,F)$.",
+   "uses": [
+    "lem-per-proper-henselian-derived-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed pp.373–374, finite-stage (**) and its limit; final Note."
+   }
+  },
+  {
+   "text": "Set $K=\\varinjlim_Jp_J^{-1}K_J$ termwise. Apply [lem-per-finite-cover-derived-sections-continuity] with common lower bound zero. It gives $R\\Gamma(\\mathcal T,K)\\simeq\\operatorname{colim}^{\\mathrm{der}}_JR\\Gamma(Z_J,K_J)\\simeq R\\Gamma(U,F)$; the last identification uses the constant diagram of Step 4 and [lem-weil-pbc-colimit-constant-connected-diagram]. Inverse image on abelian sheaves is exact [lem-trf-geometric-inverse-image-exact], and filtered colimits of abelian sheaves are exact [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. They therefore preserve the kernels and cokernels defining cohomology, giving $H^q(K)=\\varinjlim_Jp_J^{-1}i_J^{-1}R^qj_{J*}F=L_F^q$.",
+   "uses": [
+    "lem-per-finite-cover-derived-sections-continuity",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed pp.373–374, finite-stage (**) and its limit; final Note."
+   }
+  },
+  {
+   "text": "The category of abelian sheaves on the presenting small site is Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck] with the constant ring $\\mathbf Z$. Apply [thm-sp-truncation-e2] to its global-section functor and $K$, with lower bound zero. Its $E_2$ formula is $H^p(\\mathcal T,H^qK)=H^p(\\mathcal T,L_F^q)$, and Step 5 identifies its abutment with $H^{p+q}(U,F)$. Its stated finite filtration is $\\mathrm{Fil}^pH^n=\\operatorname{im}(H^n(R\\Gamma\\tau_{\\le n-p}K)\\to H^n(R\\Gamma K))$, giving exactly $n+1$ graded pieces and no unbounded convergence issue.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed pp.373–374, finite-stage (**) and its limit; final Note."
+   }
+  },
+  {
+   "text": "Since $I$ is finitely generated, [lem-weil-pbc-adic-completion-mod-ideal] makes $A'$ complete for $IA'$ and identifies $A'/IA'$ with $A/I$. Hence [lem-weil-pbc-complete-pair-henselian] makes $(A',IA')$ henselian; proper-pair restriction applies on the completed side too. By [lem-per-admissible-modification-system], extension of ideals is cofinal and the corresponding closed fibres are compatibly isomorphic. The reindexing clause of [lem-per-qcqs-etale-topos-inverse-limit] therefore gives the common $\\mathcal T$. The completion pullback/exchange maps, computed on resolutions by [lem-weil-pbc-derived-exchange-termwise], of the open direct images restrict and then pass to colimits to give $K\\to K'$ in $D^+(\\mathcal T)$; their cohomology maps are exactly $L_F^q\\to L_{F'}^q$. Naturality of proper-pair restriction [lem-per-proper-henselian-derived-restriction] and of derived site continuity [lem-per-finite-cover-derived-sections-continuity] identifies the induced $R\\Gamma$ arrow with the canonical $R\\Gamma(U,F)\\to R\\Gamma(U',F')$. Apply [lem-pc-raw-truncation-couple-naturality] to $K\\to K'$: it gives maps of the truncation couples of Step 6 commuting with $\\alpha,f,g$, with the abutment maps $c_n$ and with the $E_2$ identifications. Then [lem-sp-derived-couple-functoriality] gives the induced maps on every page, the required spectral-sequence morphism. They preserve the abutment filtration because the truncation inclusions are natural, and each filtration step in Step 6 is the image of that inclusion. This also proves naturality in $F$. Nothing here asserts that $K\\to K'$ or its cohomology sheaves are isomorphisms. The original site and open embeddings are fixed inputs. Use the two-dimensional limit property to transport the finite-cover construction onto that site, and choose the completed site projection functors and siteComparison using the canonical cofinal comparison. They are constructed together, rather than quantified as arbitrary incompatible projections. This gives the remaining data AdmissibleCompletionSpectralPresentation over those fixed original inputs.",
+   "uses": [
+    "lem-per-admissible-modification-system",
+    "lem-per-qcqs-etale-topos-inverse-limit",
+    "lem-per-proper-henselian-derived-restriction",
+    "lem-per-finite-cover-derived-sections-continuity",
+    "lem-pc-raw-truncation-couple-naturality",
+    "lem-sp-derived-couple-functoriality",
+    "lem-weil-pbc-derived-exchange-termwise",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-complete-pair-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed pp.373–374, finite-stage (**) and its limit; final Note."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-per-proper-henselian-derived-restriction",
+  "lem-per-finite-cover-derived-sections-continuity",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "thm-sp-truncation-e2",
+  "lem-per-admissible-modification-system",
+  "lem-per-qcqs-etale-topos-inverse-limit",
+  "lem-pc-raw-truncation-couple-naturality",
+  "lem-sp-derived-couple-functoriality",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-complete-pair-henselian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 4.4, printed pp.373–374, finite-stage (**) and its limit; final Note."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Limit etale topos of admissible blowups of a henselian pair gives spectral sequence of open complement cohomology, natural under completion",
+   "results": {
+    "t": "2026-10-26T06:38:30Z",
+    "tool": "leanfinder",
+    "query": "Limit etale topos of admissible blowups of a henselian pair gives spectral sequence of open complement cohomology, natural under completion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRhamPlus",
+     "BDeRham",
+     "StandardEtalePair.homEquiv_symm_apply",
+     "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+     "StandardEtalePair.instFormallyEtaleRing",
+     "StandardEtalePair.homEquiv",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit"
+    ],
+    "digest": "32b0bd8caa6e076d"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match. Completion algebra, ordinary scheme limits and module local cohomology do not give the admissible closed-fibre limit topos or its natural cohomology spectral sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.exists_truncationHypercohomology",
+   "results": {
+    "t": "2026-10-26T06:38:39Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.exists_truncationHypercohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.exists_truncationHypercohomology'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match. Completion algebra, ordinary scheme limits and module local cohomology do not give the admissible closed-fibre limit topos or its natural cohomology spectral sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "admissibleModification|AdmissibleSpectralPresentation|AdmissibleToposPresentation",
+   "results": {
+    "t": "2026-10-26T06:38:39Z",
+    "tool": "grep",
+    "query": "admissibleModification|AdmissibleSpectralPresentation|AdmissibleToposPresentation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match. Completion algebra, ordinary scheme limits and module local cohomology do not give the admissible closed-fibre limit topos or its natural cohomology spectral sequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cofiltered diagram of admissible blowups has a limit etale topos with conservative geometric points",
+   "results": {
+    "t": "2026-10-26T06:41:22Z",
+    "tool": "leansearch",
+    "query": "A cofiltered diagram of admissible blowups has a limit etale topos with conservative geometric points",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.hasLimitsOfShape_of_has_cofiltered_limits",
+     "CategoryTheory.IsCofiltered.instHasLimitOfIsEventuallyConstant",
+     "AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty",
+     "AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'",
+     "AlgebraicGeometry.exists_preimage_eq",
+     "AlgebraicGeometry.exists_isAffineOpen_preimage_eq",
+     "AlgebraicGeometry.Scheme.nonempty_of_isLimit",
+     "CategoryTheory.Limits.HasCofilteredLimits"
+    ],
+    "digest": "3be2c890ed84f574"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match. Completion algebra, ordinary scheme limits and module local cohomology do not give the admissible closed-fibre limit topos or its natural cohomology spectral sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hypercohomology spectral sequence for a filtered colimit of higher direct images, natural under completion of a henselian pair",
+   "results": {
+    "t": "2026-10-26T06:41:23Z",
+    "tool": "leanfinder",
+    "query": "Hypercohomology spectral sequence for a filtered colimit of higher direct images, natural under completion of a henselian pair",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "localCohomology.diagram",
+     "localCohomology.ofDiagram",
+     "localCohomology.hasColimitDiagram",
+     "localCohomology.isoOfFinal",
+     "localCohomology.isoSelfLERadical",
+     "AdicCompletion.transitionMap_comp_eval",
+     "CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc",
+     "AdicCompletion.transitionMap_comp_eval_apply"
+    ],
+    "digest": "0bd15f9c2f4caf88"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match. Completion algebra, ordinary scheme limits and module local cohomology do not give the admissible closed-fibre limit topos or its natural cohomology spectral sequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial hypercohomology spectral sequence with coefficient colimits for admissible blowups, compatible with completion",
+   "results": {
+    "t": "2026-10-26T06:44:49Z",
+    "tool": "leansearch",
+    "query": "Functorial hypercohomology spectral sequence with coefficient colimits for admissible blowups, compatible with completion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "localCohomology.ofDiagram",
+     "AlgebraicGeometry.LocallyRingedSpace.coproductCofan",
+     "instPreservesHomologyFunctorAddCommGrpCatColim",
+     "CategoryTheory.Limits.fiberwiseColim",
+     "HomologicalComplex.isColimitCoconeOfHasColimitEval",
+     "HomologicalComplex.isColimitOfEval",
+     "HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits",
+     "AlgebraicGeometry.SheafedSpace.instCreatesColimitsPresheafedSpaceForgetToPresheafedSpaceOfHasLimits"
+    ],
+    "digest": "db062c239b672b3a"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match. Completion algebra, ordinary scheme limits and module local cohomology do not give the admissible closed-fibre limit topos or its natural cohomology spectral sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofiltered diagram of admissible blowups has a limit etale topos with conservative geometric points",
+   "results": {
+    "t": "2026-10-26T06:44:50Z",
+    "tool": "leanfinder",
+    "query": "A cofiltered diagram of admissible blowups has a limit etale topos with conservative geometric points",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'",
+     "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'",
+     "AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index"
+    ],
+    "digest": "8fc0b9e25c79738d"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match. Completion algebra, ordinary scheme limits and module local cohomology do not give the admissible closed-fibre limit topos or its natural cohomology spectral sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "rg admissible.*[Tt]opos|[Aa]dmissible.*[Ss]pectral in Mathlib, WeilConjectures and Sheaf; search DAG sec-deligne-laumon-a1 for closed-fibre limit and admissible presentations",
+   "results": "Only the assigned module defines AdmissibleToposPresentation and AdmissibleSpectralPresentation. Existing qcqs_etale_topos_inverse_limit and exists_truncationHypercohomology are the general inputs, with different interfaces. No duplicate split theorem found.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; apply the existing generic inputs in the split proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AdmissibleModificationCohomologyPresentation",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: completion part of the closed-point purity test through ILO XX §4.4 admissible blowups, the limit spectral sequence, and the closed-fibre completion identification.",
+   "via": [
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdmissibleCompletionSpectralPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdmissibleCompletionSpectralPresentation.lean",
+  "declaration": "AlgebraicGeometry.admissibleCompletionSpectralPresentation",
+  "declarations": [
+   "AlgebraicGeometry.AdmissibleCompletionSpectralPresentation",
+   "AlgebraicGeometry.admissibleCompletionSpectralPresentation"
+  ],
+  "statement": "theorem admissibleCompletionSpectralPresentation {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] (hI : I.FG) (U : (Spec (CommRingCat.of A)).Opens) (hU : ∀ x : PrimeSpectrum A, x ∈ U ↔ x ∉ PrimeSpectrum.zeroLocus (I : Set A)) {C : Type (u + 1)} [SmallCategory C] {τ : GrothendieckTopology C} (P : AdmissibleToposPresentation I C τ) (j : AdmissibleOpenEmbeddings I U) : Nonempty (AdmissibleCompletionSpectralPresentation P j)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The original topos and open embeddings are parameters; the auxiliary structure contains exactly the remaining completion and spectral-sequence data."
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "worker": "stage3",
+  "item": "Sheaf.AlgebraicGeometry.AdmissibleModificationCohomologyPresentation",
+  "summary": "Steps 3–7 of the parent, over an already specified original limit site and open embeddings; no repetition of the original geometric existence assertion.",
+  "blueprint": "Proof Step 3: completion part of the closed-point purity test through ILO XX §4.4 admissible blowups, the limit spectral sequence, and the closed-fibre completion identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-direct-image-preserves-injectives",
+    "why": "General Direct image preserves injectives used as a black-box site, derived-functor or blowup tool in the ILO XX 4.4 construction; the perverse unit has no substitute for this generic input."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "General Exactness of inverse image used as a black-box site, derived-functor or blowup tool in the ILO XX 4.4 construction; the perverse unit has no substitute for this generic input."
+   },
+   {
+    "node": "lem-sbc-qcqs-higher-images-prime-torsion",
+    "why": "General Qcqs higher direct images preserve a fixed set of torsion primes used as a black-box site, derived-functor or blowup tool in the ILO XX 4.4 construction; the perverse unit has no substitute for this generic input."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "General Exactness of inverse image on abelian sheaves and modules used as a black-box site, derived-functor or blowup tool in the ILO XX 4.4 construction; the perverse unit has no substitute for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General Module sheaves over arbitrary ring sheaves are Grothendieck used as a black-box site, derived-functor or blowup tool in the ILO XX 4.4 construction; the perverse unit has no substitute for this generic input."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "General The truncation hypercohomology spectral sequence used as a black-box site, derived-functor or blowup tool in the ILO XX 4.4 construction; the perverse unit has no substitute for this generic input."
+   },
+   {
+    "node": "lem-pc-raw-truncation-couple-naturality",
+    "why": "General naturality of the raw truncation couple of a bounded-below complex (maps commuting with alpha, f, g, the abutment maps and the E2 identifications) for the completion map K -> K' in Step 7; the perverse unit has no substitute for this generic spectral-sequence input."
+   },
+   {
+    "node": "lem-sp-derived-couple-functoriality",
+    "why": "General Functoriality of derived exact couples used as a black-box site, derived-functor or blowup tool in the ILO XX 4.4 construction; the perverse unit has no substitute for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Sheaves of modules on the small etale site have enough injectives is a generic geometric or derived-functor tool used below ILO XX 4.4; it does not replace a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-termwise",
+    "why": "The termwise construction of the derived exchange morphism is a generic geometric or derived-functor tool used below ILO XX 4.4; it does not replace a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Completeness implies henselianity for any pair, a general ring-theoretic tool verifying the hypotheses on the completed base; the perverse unit supplies no such ring theorem."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3d802",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T082652-L-2206285",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3d802",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T082652-L-2206285",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembly of admissibleOpenToposPresentation + admissibleCompletionSpectralPresentation) vs unchanged item statement/structure; moved interfaces diffed verbatim vs clone; new split statements vs node lem-per-admissible-modification-cohomology-presentation steps 1-2 / 3-7; no importers of the item in clone"
+ }
+}

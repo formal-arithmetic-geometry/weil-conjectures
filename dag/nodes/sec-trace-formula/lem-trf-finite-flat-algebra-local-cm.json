@@ -1,0 +1,258 @@
+{
+ "id": "lem-trf-finite-flat-algebra-local-cm",
+ "kind": "statement",
+ "title": "Cohen–Macaulay prime localizations of finite flat algebras",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] such that $\\operatorname{depth}(A_{\\mathfrak p})=\\dim A_{\\mathfrak p}$ for every prime ideal $\\mathfrak p\\subset A$, where prime localizations, depth, and Krull dimension are as in [def-weil-pbc-localization-at-prime; def-weil-pbc-depth; def-weil-pbc-krull-dimension-ring]. Let $\\varphi:A\\to B$ be a homomorphism of commutative rings such that $B$ is a finite $A$-module [def-weil-finitely-generated-module] and is flat over $A$ [def-weil-pbc-flat-ring-map]. Then $B$ is Noetherian, and for every prime ideal $\\mathfrak q\\subset B$, writing $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, the ring $B_{\\mathfrak q}$ is Noetherian local and satisfies $\\operatorname{depth}(B_{\\mathfrak q})=\\dim B_{\\mathfrak q}=\\dim A_{\\mathfrak p}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00R5 (lemma-finite-flat-over-regular-CM), second alternative after prime localization; global finite-flat form used in the proof of Tag 045M (lemma-tensor-fields-CM)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-algebra-noetherian], $B$ is Noetherian. Fix a prime $\\mathfrak q$ of $B$ and put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, $R=A_{\\mathfrak p}$ and $S=B_{\\mathfrak q}$. Apply [lem-weil-pbc-flat-local-ring-maps]: $R,S$ are Noetherian local rings and the induced map $R\\to S$ is flat and local.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-flat-local-ring-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00HT (lemma-flat-localization)(6); preparation for 00R5"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-algebra-is-integral], $B$ is integral over $A$. Every strict chain $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_t\\subseteq\\mathfrak q$ contracts to a strict chain $\\varphi^{-1}(\\mathfrak q_0)\\subsetneq\\cdots\\subsetneq\\varphi^{-1}(\\mathfrak q_t)\\subseteq\\mathfrak p$ by [lem-weil-pbc-integral-incomparability]. The chain description [lem-weil-pbc-localization-dimension-chains-below-prime], applied to both primes, therefore gives $\\dim S\\leq\\dim R$. This argument uses integrality of $A\\to B$, without asserting finiteness or integrality of $R\\to S$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-incomparability",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral), 00GT (lemma-integral-no-inclusion), 00E3 (lemma-spec-localization), 00KF (definition-height); dimension bound for 00R5"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-local-finite-krull-dimension], write $\\dim R=d$ with $d\\in\\mathbb N$. The hypothesis gives $\\operatorname{depth}(R)=d$. By [def-weil-pbc-depth], there is a regular sequence $x_1,\\ldots,x_d$ in the maximal ideal of $R$: a nonempty set of natural-number lengths with finite supremum $d$ contains $d$ (if $d>0$ and every length were smaller, $d-1$ would be an upper bound). For $d=0$, take the empty sequence; $R\\neq0$ since it is a prime localization.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00R5 (lemma-finite-flat-over-regular-CM), first proof sentence; Tags 00KQ (proposition-dimension), 00LI (definition-depth), 00LF (definition-regular-sequence)"
+   }
+  },
+  {
+   "text": "The flat local map $R\\to S$ is faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. Apply [lem-sfb-regular-sequence-faithfully-flat-ascent] to the sequence just chosen. Its image is an $S$-regular sequence of length $d$, and its entries lie in the maximal ideal of $S$ by locality. Thus $d\\leq\\operatorname{depth}(S)$ by [def-weil-pbc-depth]. This includes the nonzero final quotient required for regularity, including when $d=0$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-sfb-regular-sequence-faithfully-flat-ascent",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00R5 (lemma-finite-flat-over-regular-CM), regular-sequence transfer; 00LM (lemma-flat-increases-depth), 00HR (lemma-local-flat-ff)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-depth-le-support-dimension] to the nonzero finite $S$-module $S$. Its support is all of $\\operatorname{Spec}S$: for every prime $P$, the fraction $1/1$ in $S_P$ cannot vanish, since that would require an element outside $P$ to equal zero. Consequently $\\operatorname{depth}(S)\\leq\\dim S$. Combining the preceding bounds yields $d\\leq\\operatorname{depth}(S)\\leq\\dim S\\leq\\dim R=d$, proving both equalities. Since $\\mathfrak q$ was arbitrary, this proves the assertion at every prime; if $B=0$, there are no primes and only the already proved Noetherianity assertion remains.",
+   "uses": [
+    "lem-weil-pbc-depth-le-support-dimension",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00R5 (lemma-finite-flat-over-regular-CM), final inequality; Tag 00LK (lemma-bound-depth)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-sfb-regular-sequence-faithfully-flat-ascent",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00R5 (lemma-finite-flat-over-regular-CM), regular-sequence proof, with its dimension bound established by contraction of prime chains using 00GK, 00GT, 00E3 and 00KF; global form used in 045M"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite flat algebra B over a Noetherian ring A whose prime localizations have depth equal to dimension is Noetherian and for q over p depth B_q equals dimension B_q equals dimension A_p",
+   "results": "{\"t\": \"2026-10-22T06:48:42Z\", \"tool\": \"leanfinder\", \"query\": \"A finite flat algebra B over a Noetherian ring A whose prime localizations have depth equal to dimension is Noetherian and for q over p depth B_q equals dimension B_q equals dimension A_p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"IsNoetherianRing.of_isLocalization_maximal\", \"Algebra.QuasiFiniteAt\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AlgebraicGeometry.isNoetherianRing_of_away\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"RingHom.Flat.ofLocalizationPrime\"], \"digest\": \"52ffa0ab91636c8c\"} Read hits: No match: going-down, localized flatness, smooth-flatness, and Noetherian dimension hits do not assert the local depth equality for a finite flat algebra. The depth name search returns Lean recursion-depth utilities, not commutative-algebra depth.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsIntegral",
+   "results": "{\"t\": \"2026-10-22T06:48:30Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: No match: going-down, localized flatness, smooth-flatness, and Noetherian dimension hits do not assert the local depth equality for a finite flat algebra. The depth name search returns Lean recursion-depth utilities, not commutative-algebra depth.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|cohen.macaulay|depth.*[Ff]lat|[Ff]lat.*depth",
+   "results": "{\"t\": \"2026-10-22T06:48:30Z\", \"tool\": \"grep\", \"query\": \"CohenMacaulay|cohen.macaulay|depth.*[Ff]lat|[Ff]lat.*depth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: No match: going-down, localized flatness, smooth-flatness, and Noetherian dimension hits do not assert the local depth equality for a finite flat algebra. The depth name search returns Lean recursion-depth utilities, not commutative-algebra depth.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite flat algebra over a Noetherian Cohen Macaulay ring is Cohen Macaulay with equal dimensions at corresponding prime localizations",
+   "results": "{\"t\": \"2026-10-22T06:48:57Z\", \"tool\": \"leansearch\", \"query\": \"A finite flat algebra over a Noetherian Cohen Macaulay ring is Cohen Macaulay with equal dimensions at corresponding prime localizations\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"depth\"",
+   "results": "{\"t\": \"2026-10-22T06:49:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"depth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.defaultMaxRecDepth\", \"Lean.maxRecDepthErrorMessage\", \"Lean.Macro.Context.currRecDepth\", \"Lean.Macro.Context.maxRecDepth\", \"Lean.Macro.withIncRecDepth\", \"Lean.Meta.Simp.Config.maxDischargeDepth\", \"Lean.Parser.Command.symSimpFieldMaxDischargeDepth\", \"Lean.PersistentHashMap.maxDepth\"], \"digest\": \"4cc15d560fae440d\"} Read hits: No match: going-down, localized flatness, smooth-flatness, and Noetherian dimension hits do not assert the local depth equality for a finite flat algebra. The depth name search returns Lean recursion-depth utilities, not commutative-algebra depth.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen Macaulayness ascends along a finite locally free ring homomorphism; prime localization of a finite flat algebra has depth equal to its Krull dimension",
+   "results": "{\"t\": \"2026-10-22T06:49:41Z\", \"tool\": \"leanfinder\", \"query\": \"Cohen Macaulayness ascends along a finite locally free ring homomorphism; prime localization of a finite flat algebra has depth equal to its Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.localRingHom\", \"instFlatAtPrime\", \"Algebra.QuasiFiniteAt\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"9df4b34fa284c19f\"} Read hits: No match: going-down, localized flatness, smooth-flatness, and Noetherian dimension hits do not assert the local depth equality for a finite flat algebra. The depth name search returns Lean recursion-depth utilities, not commutative-algebra depth.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite flat algebra over a locally Cohen Macaulay Noetherian ring has Cohen Macaulay prime localizations with equal local dimensions",
+   "results": "{\"t\": \"2026-10-23T12:23:36Z\", \"tool\": \"leanfinder\", \"query\": \"Finite flat algebra over a locally Cohen Macaulay Noetherian ring has Cohen Macaulay prime localizations with equal local dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Flat.ofLocalizationPrime\", \"instFlatAtPrime\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.QuasiFiniteAt\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Module.flat_of_isLocalized_maximal\", \"Algebra.IsSmoothAt\"], \"digest\": \"ca23c3278e4bddb8\"} Read returned hits: none states the finite-flat Cohen–Macaulay ascent or its depth equalities. Flatness, faithful flatness, localized flatness, Krull dimensions and regular elements are partial ingredients only, already represented by cited DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|cohen.macaulay|depth.*[Ff]lat|[Ff]lat.*depth",
+   "results": "{\"t\": \"2026-10-23T12:24:13Z\", \"tool\": \"grep\", \"query\": \"CohenMacaulay|cohen.macaulay|depth.*[Ff]lat|[Ff]lat.*depth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned hits: none states the finite-flat Cohen–Macaulay ascent or its depth equalities. Flatness, faithful flatness, localized flatness, Krull dimensions and regular elements are partial ingredients only, already represented by cited DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite flat algebra over a Noetherian Cohen Macaulay ring is Cohen Macaulay with equal local dimensions",
+   "results": "{\"t\": \"2026-10-23T12:24:14Z\", \"tool\": \"leansearch\", \"query\": \"A finite flat algebra over a Noetherian Cohen Macaulay ring is Cohen Macaulay with equal local dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.free_of_flat_of_isLocalRing\", \"RingHom.Flat\", \"Module.Flat.of_isLocalizedModule\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.free_of_flat_of_finrank_eq\", \"RingHom.FaithfullyFlat\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"416e47a0f299ac55\"} Read returned hits: none states the finite-flat Cohen–Macaulay ascent or its depth equalities. Flatness, faithful flatness, localized flatness, Krull dimensions and regular elements are partial ingredients only, already represented by cited DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsIntegral",
+   "results": "{\"t\": \"2026-10-23T12:24:14Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned hits: none states the finite-flat Cohen–Macaulay ascent or its depth equalities. Flatness, faithful flatness, localized flatness, Krull dimensions and regular elements are partial ingredients only, already represented by cited DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Depth equals Krull dimension for prime localizations of a finite locally free algebra over a Cohen Macaulay ring",
+   "results": "{\"t\": \"2026-10-23T12:25:16Z\", \"tool\": \"leanfinder\", \"query\": \"Depth equals Krull dimension for prime localizations of a finite locally free algebra over a Cohen Macaulay ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"Ring.KrullDimLE.of_isLocalization\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"Module.supportDim_self_eq_ringKrullDim\", \"Ring.DimensionLEOne.localization\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\"], \"digest\": \"95a833eef8af9899\"} Read returned hits: none states the finite-flat Cohen–Macaulay ascent or its depth equalities. Flatness, faithful flatness, localized flatness, Krull dimensions and regular elements are partial ingredients only, already represented by cited DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tensor-fields-cohen-macaulay",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, flat-family component-closure input through relative associated specialization; in the proof of Stacks 05DC used there, the residue-field tensor ring has no embedded associated primes because it is Noetherian Cohen–Macaulay. This input is the finite-flat local Cohen–Macaulay ascent in Stacks 045M.",
+   "via": [
+    "lem-trf-tensor-fields-cohen-macaulay",
+    "lem-trf-relative-assassin-base-change",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-flat-algebra-local-cm",
+  "worker": "stage1",
+  "summary": "Q155 checked Stacks 00R5 and 045M and proved the global prime-localized form by the regular-sequence argument. The local dimension upper bound is obtained by contracting prime chains in the original finite integral map, avoiding the unjustified claim that B_q is finite over A_p. All ingredients reuse existing nodes; no new nodes. Statement unchanged.",
+  "blueprint": "Serves lem-trf-local-term-locality proof (1)--(2), the flat-family component-closure input in the existing descendant chain: finite-flat Cohen–Macaulay ascent in 045M supplies the tensor-field input to relative associated specialization. Latest ancestor proof and sk-i-curve-zero read; no unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Generic Noetherian local depth bound (00LK), explicitly needed by the 00R5 regular-sequence proof; no node in this unit states this algebraic bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-depth-le-support-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-8f1127221",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-8f1127221 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Statement: the item is the true global form of Stacks 00R5 (algebra.tex l.27489, second alternative) as used in 045M (l.47267). It is unchanged and its stmt_deps are exact. B_q is not finite over A_p, so the delivery correctly proves dim B_q <= dim A_p in step 2: integrality (00GK) plus incomparability (00GT) contract prime chains below q to chains below p, and the chain description of a prime localization (00KF/00E3) gives the bound. Step 1: the 00FN and 00HT(6) leaves have exactly the hypotheses that hold. Step 3: the depth definition's supremum is finite and so attained; d=0 uses the empty sequence, and R is nonzero. Step 4: 00HR gives faithful flatness; the IsRegular.of_faithfullyFlat leaf gives an S-regular sequence with nonzero final quotient, inside m_S by locality. Step 5: 00LK applied to the nonzero module S, with Supp S = Spec S checked via 1/1. Small cases: A=0 or B=0 vacuous; a field with k[e]/e^2; A×A, which is not local globally; k[t]->k[t]/(t), where flatness is needed. Citer lem-trf-tensor-fields-cohen-macaulay step 3 uses exactly these clauses. No duplicate found by rg over 00R5/045M/00LM/00OK/Cohen-Macaulay; the flat-fiber depth/height nodes are an alternative route, not duplicates. Accepted tool use: lem-weil-pbc-depth-le-support-dimension (sk-thm-p1, generic 00LK). The other cited lemmas are mathlib leaves. No SGA, no new nodes, not a re-split. Searches complete; the rate-limited leansearch is recorded as unavailable and was re-run later."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteFlatAlgebraLocalCM",
+  "declaration": "RingHom.finite_flat_algebra_local_depth_eq_dimension",
+  "file": "lean/Sheaf/RingTheory/FiniteFlatAlgebraLocalCM.lean",
+  "statement": "theorem finite_flat_algebra_local_depth_eq_dimension {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsNoetherianRing A] (hCM : ∀ (p : Ideal A) [p.IsPrime], (IsLocalRing.depth (R := Localization.AtPrime p) (Localization.AtPrime p) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime p)) (φ : A →+* B) (hfinite : @Module.Finite A B _ _ φ.toAlgebra.toModule) (hflat : φ.Flat) : IsNoetherianRing B ∧ ∀ (q : Ideal B) [q.IsPrime], IsNoetherianRing (Localization.AtPrime q) ∧ IsLocalRing (Localization.AtPrime q) ∧ (IsLocalRing.depth (R := Localization.AtPrime q) (Localization.AtPrime q) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime q) ∧ ringKrullDim (Localization.AtPrime q) = ringKrullDim (Localization.AtPrime (q.comap φ))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aed586fc1",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Statement RingHom.finite_flat_algebra_local_depth_eq_dimension matches node clause by clause: CommRing A (u), B (v) independent; IsNoetherianRing A; hCM over all primes with IsLocalRing.depth (recorded def-weil-pbc-depth decl, read in side-live) coerced to WithBot ℕ∞ = ringKrullDim of Localization.AtPrime; finiteness tied to φ via @Module.Finite A B _ _ φ.toAlgebra.toModule; φ.Flat; conclusions IsNoetherianRing B and ∀ prime q: B_q Noetherian, local, depth=dim, dim B_q = dim A_(q.comap φ). No added hypotheses; edge cases B=0, A=0, d=0, unbounded global dimension covered. Node diff vs live only the lean field; statement verbatim; single sorry; docstrings carry source place, blueprint tag and the 5 proof steps; stmt_dep modules publicly imported. No duplicate in side-live Sheaf/WeilConjectures (polynomial-algebra CM, tensor-fields CM, flat local depth formula and Serre S_k ascent are different statements). Report has Worker report and Second reading by Q08 sections. No file changed, so no recompile; the report records a clean scompile and a deliver2 dry run that printed OK."
+ }
+}

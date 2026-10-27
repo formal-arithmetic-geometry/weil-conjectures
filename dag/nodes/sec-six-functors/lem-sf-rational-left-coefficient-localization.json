@@ -1,0 +1,227 @@
+{
+ "id": "lem-sf-rational-left-coefficient-localization",
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "title": "Localization of normalized integral left coefficient laws",
+ "statement": "Fix a prime $\\ell$, a finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p\\ne\\ell$, finite-type $k$-schemes $X,Y$ and a separated finite-type $k$-morphism $f:X\\to Y$ [def-weil-finite-field-fiber, def-weil-scheme-morphism-properties]. No absolute separatedness of the schemes is imposed. Use the small pro-etale coefficient categories $C_s(T)=D^b_{ctf}(T,s)$ [def-sf-categories], completed at integral stages and with positive finite levels $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($E/\\mathbf Q_\\ell$ finite, $n\\ge1$) [def-weil-l-adic-coefficient-extension].\nFor each finite extension $E/\\mathbf Q_\\ell$ use the completed integral category $C_{E,\\mathrm{int}}(T)$ and its raw scalar localization $C_E(T)$, whose objects are integral objects and whose Hom groups are $\\operatorname{Hom}_{\\mathrm{int}}\\otimes_{\\mathcal O_E}E$, with localization functor $R_E^T$ [def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi]. Fix a compactification $c$ of $f$. Give integral functors $F_{E,\\mathrm{int}}$ and rational functors $F_E$, and the actual completed integral and rational scalar extensions $T_{L/E,\\mathrm{int}}^T,T_{L/E}^T$ [def-weil-integral-scalar-extension]. Use the scalar associators $\\alpha$ and unitors $u$ normalized by balanced tensor multiplication; their rational versions are the localized integral maps under the canonical ordinary/completed scalar identifications. Allow all $\\mathbf Q_\\ell$-algebra embeddings by identifying each source field with its image.\n\nSuppose integral comparisons $q^{\\mathrm{int}}_{L/E}$ satisfy the left scalar composition and identity equations for these integral associators and unitors. Suppose given rational comparisons $q_{L/E}:T_{L/E}^YF_E\\cong F_LT_{L/E}^X$ whose components on each integral representative are the localized integral components, with the specified scalar object identifications. Require the following normalization on all rational morphisms, in addition to the object equalities $F_E(R_E^XK)=R_E^Y(F_{E,\\mathrm{int}}K)$:\n$$F_E\\!\\left(\\sum_\\nu a_\\nu R_E^X(h_\\nu)\\right)=\\sum_\\nu a_\\nu R_E^Y(F_{E,\\mathrm{int}}(h_\\nu)),\\quad a_\\nu\\in E.$$\nHere $h_\\nu$ are integral arrows with the indicated common endpoints.\n\nThen every rational input has an integral representative in the uniform finite-Tor domain, and for every $E\\to L\\to M$ and $K\\in C_E(X)$ one has\n$$F_M(\\alpha_{X,K})q_{M/L,T_{L/E}^XK}T_{M/L}^Y(q_{L/E,K})=q_{M/E,K}\\alpha_{Y,F_EK},\\qquad F_E(u_{X,K})q_{E/E,K}=u_{Y,F_EK}.$$\nIn particular the functor-image terms $F_M(\\alpha_{X,K})$ and $F_E(u_{X,K})$ are the localized integral functor-image terms under the same identifications. This conclusion concerns the given rational functors on arrows, and does not assert that localization reflects equality.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Derived inverse limits, rationalization, common-stage construction and refinement-compatible adjunction; extracted normalized coefficient argument, old steps 5"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-sf-categories",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-integral-scalar-extension",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Let $K\\in C_E(X)$. Raw localization has exactly the integral objects, so write $K=R_E^X\\widetilde K$ with $\\widetilde K\\in D^b_c(X,\\mathcal O_E)$. Since $\\ell\\ne p$, $\\ell$ is invertible on $X$. The residue-Tor lemma gives $D^b_c(X,\\mathcal O_E)=D^b_{ctf}(X,\\mathcal O_E)$; thus this very representative has one Tor interval for all positive reductions. This proves the domain assertion without replacing the raw category by an idempotent completion.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Derived inverse limits, rationalization, common-stage construction and refinement-compatible adjunction; extracted normalized coefficient argument, old steps 5"
+   }
+  },
+  {
+   "text": "Suppress the given scalar object identifications and write $R_F=R_F^Y$ on target arrows. The raw scalar formula gives $T_{M/L}^Y(R_L h)=R_M(T_{M/L,\\mathrm{int}}^Yh)$ for every integral arrow $h$. The assumed morphism normalization, specialized to the singleton sum with coefficient $1$, gives $F_M(R_M^Xh)=R_M(F_{M,\\mathrm{int}}h)$. In particular, since $\\alpha_{X,K}=R_M^X(\\alpha^{\\mathrm{int}}_{X,\\widetilde K})$ and $u_{X,K}=R_E^X(u^{\\mathrm{int}}_{X,\\widetilde K})$ by hypothesis, their images under the given rational functors are $R_M(F_{M,\\mathrm{int}}(\\alpha^{\\mathrm{int}}_{X,\\widetilde K}))$ and $R_E(F_{E,\\mathrm{int}}(u^{\\mathrm{int}}_{X,\\widetilde K}))$. These equalities use the normalization on arrows, beyond the object equalities. In Lean the component specifications of sfRationalScalarComp and sfRationalScalarUnit from lem-weil-scalar-extension-composition give the precise heterogeneous equalities, and specializing sfRationalHomCoordinates to h tensor 1 identifies the singleton normalization with the localization map.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Derived inverse limits, rationalization, common-stage construction and refinement-compatible adjunction; extracted normalized coefficient argument, old steps 5"
+   }
+  },
+  {
+   "text": "Apply $R_M$ to the assumed integral composition equation at $\\widetilde K$. Its composition rule $(h\\otimes1)(g\\otimes1)=(hg)\\otimes1$ gives\n$$R_M(F_{M,\\mathrm{int}}(\\alpha_X^{\\mathrm{int}}))\\,R_M(q^{\\mathrm{int}}_{M/L,T_{L/E,\\mathrm{int}}^X\\widetilde K})\\,R_M(T_{M/L,\\mathrm{int}}^Y(q^{\\mathrm{int}}_{L/E,\\widetilde K}))=R_M(q^{\\mathrm{int}}_{M/E,\\widetilde K})\\,R_M(\\alpha_Y^{\\mathrm{int}}).$$\nThe middle $q$ component is evaluated on the integral object $T_{L/E,\\mathrm{int}}^X\\widetilde K$, which represents $T_{L/E}^XK$. Substitute Step 2 and the stipulated localized components of $q$ and $\\alpha_Y$. The displayed equality becomes exactly $F_M(\\alpha_{X,K})q_{M/L,T_{L/E}^XK}T_{M/L}^Y(q_{L/E,K})=q_{M/E,K}\\alpha_{Y,F_EK}$.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Derived inverse limits, rationalization, common-stage construction and refinement-compatible adjunction; extracted normalized coefficient argument, old steps 5"
+   }
+  },
+  {
+   "text": "Likewise apply $R_E$ to the integral identity equation:\n$$R_E(F_{E,\\mathrm{int}}(u^{\\mathrm{int}}_{X,\\widetilde K}))\\,R_E(q^{\\mathrm{int}}_{E/E,\\widetilde K})=R_E(u^{\\mathrm{int}}_{Y,F_{E,\\mathrm{int}}\\widetilde K}).$$\nThe same composition rule and Step 2 identify this with $F_E(u_{X,K})q_{E/E,K}=u_{Y,F_EK}$. Step 1 covers every rational object. For an embedding rather than a literal inclusion, identify each field with its specified image, as allowed in the hypotheses; the same formulas then apply. Both arguments apply localization to a known equality and need no injectivity of integral Hom maps.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Derived inverse limits, rationalization, common-stage construction and refinement-compatible adjunction; extracted normalized coefficient argument, old steps 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "lem-coef-integral-residue-tor",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Derived inverse limits, rationalization, common-stage construction and refinement-compatible adjunction; extracted normalized coefficient argument, old steps 5; explicit raw-localization calculation from the stated normalizations; G5 Lean proof: singleton Hom-coordinate normalization, heterogeneous transport along the stated object equations, and Functor.map_comp applied to the integral equations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Raw scalar localization of integral constructible compact support functors on objects and morphisms carries normalized coefficient associativity and identity laws",
+   "results": "[leanfinder] OK 8 hit(s) Hits read: ModuleCat.Tilde.Localizations, CategoryTheory.Localization.instLinearLocalization', LightCondMod.LocallyConstant.functor, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.linear, CategoryTheory.Localization.instLinearLocalization, ModuleCat.Tilde.instIsScalarTowerCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop, CategoryTheory.Localization.instLinearLocalizationQ. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational coefficient comparison cocycle follows by localizing completed integral scalar associators and unitors on every Hom representative",
+   "results": "[leanfinder] OK 8 hit(s) Hits read: CategoryTheory.Localization.Monoidal.triangle_aux₂, CategoryTheory.Localization.Monoidal.triangle_aux₃, CategoryTheory.Localization.Monoidal.triangle_aux₁, CategoryTheory.Localization.Monoidal.μ, CategoryTheory.Localization.Monoidal.pentagon_aux₂, CategoryTheory.Localization.Monoidal.triangle_aux₁_assoc, CategoryTheory.Localization.Monoidal.associator_hom_app, CategoryTheory.Localization.Monoidal.pentagon_aux₁. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Localization' General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*coefficient.*cocycle|localiz.*integral.*functor|completed.*scalar.*compar",
+   "results": "[grep] OK 0 hit(s) General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived integral compact support coefficient identity laws descend to rational scalar localization",
+   "results": "[leansearch] OK 8 hit(s) Hits read: IsLocalization.instIsScalarTowerAtPrimeFractionRing, MeasureTheory.LocallyIntegrable.integrable_smul_left_of_hasCompactSupport, HasCompactSupport.deriv, Derivation.coe_restrictScalars, LocalSubring.instIsScalarTowerSubtypeMemSubringToSubringOfPrime, IsLocalization.integerNormalization, IsLocalization.coeffIntegerNormalization, instIsScalarTowerAtPrimeFractionRing_1. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*(associator|unitor)|map_comp.*localiz|scalar.*localiz.*(functor|transform)",
+   "results": "8 hits: Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean, Mathlib/CategoryTheory/Localization/Trifunctor.lean, Mathlib/CategoryTheory/Localization/Trifunctor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean.  Read returned types; generic localization/linear functor facts, ordinary module pseudofunctors, and cotangent or group cohomology do not state the complete constructible-domain and normalized coefficient equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing completed integral constructible coefficient categories preserves normalized scalar extension comparison composition and identity laws",
+   "results": "8 hits: CommRingCat.moduleCatExtendScalarsPseudofunctor, CategoryTheory.Localization.Construction.natTransExtension_hcomp, CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ, CategoryTheory.Localization.linear, CategoryTheory.Localization.instAdditiveLocalizationQ, CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1, CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory, CategoryTheory.Localization.instLinearLocalization.  Read returned types; generic localization/linear functor facts, ordinary module pseudofunctors, and cotangent or group cohomology do not state the complete constructible-domain and normalized coefficient equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "6 hits: CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app.  Read returned types; generic localization/linear functor facts, ordinary module pseudofunctors, and cotangent or group cohomology do not state the complete constructible-domain and normalized coefficient equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing integral linear functors and natural transformations preserves their coefficient associativity and unit equations",
+   "results": "8 hits: CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.linear, CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.LocalizerMorphism.homMap_apply_assoc, CategoryTheory.Localization.liftNatTrans_app, CategoryTheory.Localization.Construction.NatTransExtension.app.  Read returned types; generic localization/linear functor facts, ordinary module pseudofunctors, and cotangent or group cohomology do not state the complete constructible-domain and normalized coefficient equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor defined by scalar extension on tensor Hom modules sends an integral coefficient comparison cocycle to the same cocycle over the fraction field",
+   "results": "8 hits: Algebra.Extension.H1Cotangent.map, Algebra.Extension.tensorH1Cotangent, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, Algebra.tensorH1CotangentOfIsLocalization, Algebra.Extension.H1Cotangent.map_eq, Algebra.H1Cotangent.isLocalizedModule, groupCohomology.cocyclesMap_comp_isoCocycles₁_hom_apply, groupCohomology.cocyclesMap_comp_isoCocycles₂_hom_apply.  Read returned types; generic localization/linear functor facts, ordinary module pseudofunctors, and cotangent or group cohomology do not state the complete constructible-domain and normalized coefficient equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-constructible-exceptional-coefficient-coherence",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Final assertion of compatibility with finite reduction, scalar extension and shifts; raw rationalization of the integral left coefficient equations in the constructible adjunction argument.",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-rational-left-coefficient-localization",
+  "worker": "stage1",
+  "summary": "Q149: unchanged statement; existing residue-Tor theorem supplies the uniform finite-Tor representative, then an explicit calculation applies raw localization to each integral equation using the normalization of the given rational functors on arrows. No new nodes. Repaired null blueprint ancestor using the recorded ancestor of the creating item.",
+  "blueprint": "sk-thm-sf-tensor-hom final coefficient-compatibility assertion, via lem-sf-constructible-exceptional-coefficient-coherence old step 5.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic domain theorem that every derived-complete integral constructible object has a uniform reduction Tor interval; used only for the representative assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-integral-residue-tor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-09c8261c2",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-09c8261c2 (reviewer sub-agent of L); spot-checked: I read the item, all four steps, every cited node statement and the sources in full. There are no new nodes and no fixes. (1) Statement and stmt_deps are byte-identical to the Q148-reviewer-fixed version, so the target is not weakened. The node was created by Q148 with an empty proof, so the 2026-10-21 re-split note does not apply. (2) Step 1: K=R_E K̃. ℓ is invertible on X because char k=p≠ℓ. lem-coef-integral-residue-tor (D^b_c(X,O_E)=D^b_ctf, one Tor interval for all n; master source read) gives the uniform finite-Tor representative. Correctly non-elementary. (3) Step 2: T_{M/L}(R_L h)=R_M(T_int h) is the morphism formula f⊗a↦(f⊗O_L)⊗a with a=1 (def-weil-rationalization-karoubi). F_M(R_M h)=R_M(F_int h) is the item's own morphism normalization with coefficient 1. (4) Steps 3-4: I typed both equations out and the endpoints agree. Each factor is a localized integral arrow by a stated hypothesis or by Step 2. The middle q sits at T_{L/E,int}K̃, which is literally the raw object T_{L/E}K. R is a functor by the composition rule (def-weil-linear-scalar-localization). No faithfulness is used. Edge cases checked: torsion arrows killed by ⊗E, E=L=M, ramified L/E, the empty scheme. proof_deps equals the union of step uses. (5) Blueprint from.node null→sk-thm-sf-tensor-hom with via=[parent]: correct. It is a blueprint node and the parent's ancestor; _section.md line 20 has the 'compatible with finite reduction, scalar extension and shifts' clause. The def-weil-exceptional-inverse-image.md rationalization sentence was read. (6) No SGA, no cycle, no Lean declaration, no duplicate. tool_use residue-tor (generic, other unit) accepted. Advisory: worker-written tool_uses (C8); the report names citations.json/searches.jsonl files that are not in the commit; one loogle 'unknown identifier' error is recorded as 'no match'."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalLeftCoefficientLocalization",
+  "declaration": "WeilConjectures.rational_left_coefficient_localization",
+  "file": "lean/Sheaf/Paper/RationalLeftCoefficientLocalization.lean",
+  "statement": "theorem rational_left_coefficient_localization (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (X Y : Scheme.{u}) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_c : Compactification f) (Fint : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y) (F : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], sfRationalConstructibleCategory l E X ⥤ sfRationalConstructibleCategory l E Y) (qint : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L), Fint E ⋙ sfConstructibleIntegralScalarExtension D.p l hl E L ι Y ≅ sfConstructibleIntegralScalarExtension D.p l hl E L ι X ⋙ Fint L) (q : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L), F E ⋙ sfRationalScalarExtension l E Y D.p hl L ι ≅ sfRationalScalarExtension l E X D.p hl L ι ⋙ F L) (hobj : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (K : sfIntegralConstructibleCategory l E X), (F E).obj ((sfRationalConstructibleLocalization l E X).obj K) = (sfRationalConstructibleLocalization l E Y).obj ((Fint E).obj K)) (hmap : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (K K' : sfIntegralConstructibleCategory l E X) (n : ℕ) (a : Fin n → E) (h : Fin n → (K ⟶ K')), HEq ((F E).map ((sfRationalHomCoordinates l E X _ _).symm (∑ i : Fin n, h i ⊗ₜ[Padic.coefficientExtensionIntegers l E] a i))) ((sfRationalHomCoordinates l E Y _ _).symm (∑ i : Fin n, (Fint E).map (h i) ⊗ₜ[Padic.coefficientExtensionIntegers l E] a i))) (hq : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) (K : sfIntegralConstructibleCategory l E X), HEq ((q E L ι).hom.app ((sfRationalConstructibleLocalization l E X).obj K)) ((sfRationalConstructibleLocalization l L Y).map ((qint E L ι).hom.app K))) (hcomp : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M] (ι : E →ₐ[Padic l] L) (κ : L →ₐ[Padic l] M) (K : sfIntegralConstructibleCategory l E X), (sfConstructibleIntegralScalarExtension D.p l hl L M κ Y).map ((qint E L ι).hom.app K) ≫ (qint L M κ).hom.app ((sfConstructibleIntegralScalarExtension D.p l hl E L ι X).obj K) ≫ (Fint M).map ((sfIntegralScalarComp l E L ι X D.p hl M κ).hom.app K) = (sfIntegralScalarComp l E L ι Y D.p hl M κ).hom.app ((Fint E).obj K) ≫ (qint E M (κ.comp ι)).hom.app K) (hunit : ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (K : sfIntegralConstructibleCategory l E X), (qint E E (AlgHom.id (Padic l) E)).hom.app K ≫ (Fint E).map ((sfIntegralScalarUnit l E X D.p hl).hom.app K) = (sfIntegralScalarUnit l E Y D.p hl).hom.app ((Fint E).obj K)) : (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (K : sfRationalConstructibleCategory l E X), ∃ Kint : sfIntegralConstructibleCategory l E X, (sfRationalConstructibleLocalization l E X).obj Kint = K ∧ finiteTorConstructibleIntegral l E X Kint.obj) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M] (ι : E →ₐ[Padic l] L) (κ : L →ₐ[Padic l] M) (K : sfRationalConstructibleCategory l E X), (sfRationalScalarExtension l L Y D.p hl M κ).map ((q E L ι).hom.app K) ≫ (q L M κ).hom.app ((sfRationalScalarExtension l E X D.p hl L ι).obj K) ≫ (F M).map ((sfRationalScalarComp l E L ι X D.p hl M κ).hom.app K) = (sfRationalScalarComp l E L ι Y D.p hl M κ).hom.app ((F E).obj K) ≫ (q E M (κ.comp ι)).hom.app K) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (K : sfRationalConstructibleCategory l E X), (q E E (AlgHom.id (Padic l) E)).hom.app K ≫ (F E).map ((sfRationalScalarUnit l E X D.p hl).hom.app K) = (sfRationalScalarUnit l E Y D.p hl).hom.app ((F E).obj K)) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M] (ι : E →ₐ[Padic l] L) (κ : L →ₐ[Padic l] M) (K : sfIntegralConstructibleCategory l E X), HEq ((F M).map ((sfRationalScalarComp l E L ι X D.p hl M κ).hom.app ((sfRationalConstructibleLocalization l E X).obj K))) ((sfRationalConstructibleLocalization l M Y).map ((Fint M).map ((sfIntegralScalarComp l E L ι X D.p hl M κ).hom.app K)))) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (K : sfIntegralConstructibleCategory l E X), HEq ((F E).map ((sfRationalScalarUnit l E X D.p hl).hom.app ((sfRationalConstructibleLocalization l E X).obj K))) ((sfRationalConstructibleLocalization l E Y).map ((Fint E).map ((sfIntegralScalarUnit l E X D.p hl).hom.app K))))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e625029e",
+  "group": "Q64",
+  "result": "fix",
+  "note": "Lean statement exact. All 14 node clauses checked. Raw ScalarLocalization with no Karoubi; T obj spec = <T_int K.obj>; rational alpha/u are the exists-unique choose with HEq to R.map(integral alpha/u), matching the node's localized-integral clause. hcomp/hunit and conclusions 2-3 are the node equations in diagrammatic order. HEq endpoints in hq/hmap/conclusions 4-5 agree via hobj, so no hypothesis is vacuous. finiteTorConstructibleIntegral is one Tor interval for all n+1 reductions. Edge cases covered: empty schemes, zero object, n=0, E=L=M with identity embedding, ramified embeddings. Fault: H11, the Second reading by Q64 is the worker's self-check; FIX fixes/lem-sf-rational-left-coefficient-localization.report.md = worker report verbatim + clause-by-clause second reading. Advisory: owners not in stmt_deps (lem-weil-scalar-extension-composition, lem-weil-integral-scalar-extension-constructible, def-weil-finite-tor-amplitude); stmt_deps unchanged since stage 1 and a stage-2 fix cannot change them. No Lean change, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T091631-L-3360091",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

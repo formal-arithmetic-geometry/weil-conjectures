@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-etale-constant-module-geometric-realization",
+ "kind": "statement",
+ "title": "Ordinary geometric realization of the etale constant-module adjunction",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $B$ a commutative ring, in the site and module universes of [def-weil-size-convention]. On their actual small etale sites [def-weil-pbc-etale-site], there exists a geometric constant-module datum $d$ [def-sfb-constant-module-geometric-comparison-data] whose set inverse image is the specified etale set inverse image, whose set direct image is the specified etale direct image, and whose fixed-$B$ module inverse image, direct image and adjunction are exactly the published etale upperStar, lowerStar and upperStarLowerStarAdjunction. There is also FixedTensorData for $d$ whose ordinary monoidal structure is exactly the published etale upperStar monoidal structure. Equality of the adjunction and monoidal structure is heterogeneous only to account for the two functor equalities. This is an ordinary-category assertion: it asserts no derived comparison, monoidal structure on a derived functor, or projection formula. No finiteness, nonzero-ring or hypothesis on $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6, 03D7, 03EL: inverse image of modules and its tensor comparison; the etale realization of the given module inverse image"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-site",
+  "def-sfb-constant-module-geometric-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "apply etaleInverseImageModulesExact to the constant commutative ring sheaves.\nIts ring inverse image, constant-section isomorphism and transported action supply the\nalgebraic inverse image and scalar isomorphism. Extension of scalars along this ring\nisomorphism is the actual changeOfRings construction; its tensor map sends a tensor\nof two scalar-extension units to the unit of their tensor. The inverse-image action\nand the abelian Hom equation identify its adjunction with the ringed module adjunction.\nFor fixed modules take the published upperStar, lowerStar and their adjunction.\nThe continuous direct image is unchanged on underlying sections. Its Hom bijection\npreserves addition and scalar endomorphisms, which proves the generalized-section\nlinear equation. Choose its underlying comparison to be the identity on sections.\nThe canonical etale inverse-image monoidal structure, with its Hom-normalized\nunderlying comparison, gives FixedTensorData: the sheafified tensor comparison is\nthe map on generalized pure tensors, so its pure equation follows from the ordinary\ntensor universal property. Its monoidal field is the published structure itself.\nThe set, ring and additive Hom equations give ringHom. Bundle the\nsame set adjunction, direct image and structural constant-ring map into ringed, so\nits six comparison fields are identities. All construction equalities are then the\ndefining equations, including equality of the fixed adjunction itself. This works\nfor the zero ring, the empty scheme and the identity morphism without modification.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lean normalization bridge for step 6 of lem-sfb-constant-module-derived-projection-identification; follows the stated pure-tensor and adjunction constructions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor on etale sheaves of modules over a constant ring is extension of scalars and its adjunction agrees with the inverse image of underlying sheaves",
+   "results": "Search returned 8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullback, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.restrictCoextendScalarsAdj, SheafOfModules.pullback, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction. Read candidate module adjunctions and localization APIs; none gives the specified geometric-data package or the etale normalized tensor square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"pullback\"",
+   "results": "Search returned 12 hits: SheafOfModules.overPullback, SheafOfModules.instIsLeftAdjointOverOverRingCatOverMapOfHasPullbacks, SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id. Read candidate module adjunctions and localization APIs; none gives the specified geometric-data package or the etale normalized tensor square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Gg]eometric|[Tt]ensor[Nn]ormalization|leftDerivedUpperStarTensorComparison",
+   "results": "Search returned 1 hits: Mathlib/RingTheory/Etale/Finite.lean. Read candidate module adjunctions and localization APIs; none gives the specified geometric-data package or the etale normalized tensor square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ConstantModuleDerivedProjectionIdentification",
+  "date": "2026-10-27",
+  "group": "Y2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof paragraph (3): canonical projection map transport, not only its endpoints; equality of the tensor and counit constructions in returned item steps 2-4. Supporting etale-specialization ordinary geometric datum.",
+   "via": [
+    "lem-sfb-constant-module-derived-projection-identification",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.EtaleConstantModuleGeometricRealization",
+  "file": "lean/Sheaf/CategoryTheory/EtaleConstantModuleGeometricRealization.lean",
+  "declaration": "CategoryTheory.ConstantModuleDerivedProjection.etale_constant_module_geometric_realization",
+  "statement": "theorem etale_constant_module_geometric_realization\n    {X Y : AlgebraicGeometry.Scheme.{z}} (f : X ⟶ Y)\n    (B : Type (z + 1)) [CommRing B] :\n    ∃ d : GeometricData Y.smallEtaleTopology X.smallEtaleTopology B,\n      d.inverse = AlgebraicGeometry.Scheme.etaleSetPullback f ∧\n      d.direct = AlgebraicGeometry.Etale.lowerStar (Type (z + 1)) f ∧\n      ∃ (hL : d.pullA = AlgebraicGeometry.Etale.upperStar (ModuleCat.{z + 1} B) f)\n        (hR : d.pushA = AlgebraicGeometry.Etale.lowerStar (ModuleCat.{z + 1} B) f),\n        HEq d.fixedAdj\n          (AlgebraicGeometry.Etale.upperStarLowerStarAdjunction (ModuleCat.{z + 1} B) f) ∧\n        ∃ t : FixedTensorData d,\n          HEq t.monoidal\n            (inferInstance :\n              (AlgebraicGeometry.Etale.upperStar (ModuleCat.{z + 1} B) f).Monoidal)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-etale-constant-module-geometric-realization",
+  "worker": "stage3",
+  "summary": "A genuine ordinary realization step.",
+  "blueprint": "Proof paragraph (3): canonical projection map transport, not only its endpoints; equality of the tensor and counit constructions in returned item steps 2-4. Supporting etale-specialization ordinary geometric datum.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic module inverse-image, tensor or resolving-localization tool for the specified comparison; the proper base-change unit route is preserved."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic module inverse-image, tensor or resolving-localization tool for the specified comparison; the proper base-change unit route is preserved."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic module inverse-image, tensor or resolving-localization tool for the specified comparison; the proper base-change unit route is preserved."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T222810-L-697822",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T222810-L-697822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,480 @@
+{
+ "id": "lem-sfb-galois-kinjective-section-model",
+ "kind": "statement",
+ "title": "Exact singleton evaluation and K-injective Galois section model",
+ "statement": "Let $k$ be a field, $k^s/k$ a separable closure [def-pd-separable-closure], $s=\\operatorname{Spec}k$, $\\bar s=\\operatorname{Spec}k^s$, and $G=\\operatorname{Aut}_k(k^s)$ with its Krull topology. Use small sites in the compatible universes of [def-weil-size-convention]. For a profinite set $P$ put $T[P]=\\varprojlim_i\\coprod_{P_i}T$ over its finite quotients [lem-weil-pbc-profinite-test-object-functor].\n\nLet $R$ be any commutative condensed ring, $R_T=p_T^*R$, and use internal modules and ordinary unbounded derived categories [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-derived-categories]. Write $\\mathcal M_R$ for internal condensed $R$-modules and $\\mathcal A_G(R)$ for such modules with an $R$-linear action of the condensed group $\\underline G(P)=C(P,G)$ [def-sfb-condensed-action-module].\n\nLet $a:X\\to s$ be qcqs and let $E_R$, $F_R=E_Ra_*$, and $\\Gamma_G:\\mathcal A_G(R)\\to\\mathcal M_R$ be the normalized equivalence, geometric section functor, and invariant-submodule right adjoint of [lem-sfb-geometric-sections-adjunction]. Let $\\operatorname{ev}_*:\\mathcal M_R\\to\\mathbf{Ab}$ be evaluation at the singleton followed by forgetting scalars. Write $C(H)$ for termwise application of an additive functor $H$ to cochain complexes, $Q$ for localization at quasi-isomorphisms, and $\\Gamma_X$ for global sections of $R_X$-modules followed by forgetting scalars [def-pur-ringed-site-zeroth-hypercohomology]. A complex is K-injective if every chain map from an acyclic complex to it is null-homotopic.\n\nThe functor $\\operatorname{ev}_*$ is exact. Restriction to $X^s$, with invariant codomain, defines a natural isomorphism of additive functors $\\gamma:\\Gamma_X\\xrightarrow{\\sim}\\operatorname{ev}_*\\Gamma_GF_R$ whose inverse is unique sheaf gluing. The left adjoint $a^*E_R^{-1}$ of $F_R$ is exact for every commutative condensed $R$, and both $C(F_R)$ and $C(\\Gamma_G)$ carry K-injective complexes to K-injective complexes. The categories $\\operatorname{Mod}_{R_X}$, $\\mathcal M_R$ and $\\mathcal A_G(R)$ have K-injective resolutions of all unbounded complexes, so the ordinary total right derived functors $\\mathbf RF_R:D(R_X)\\to D(\\mathcal A_G(R))$ and $\\mathbf R\\Gamma_G:D(\\mathcal A_G(R))\\to D(\\mathcal M_R)$ exist on all unbounded complexes [sk-def-sfb-derived-categories]. Consequently every unbounded $R_X$-complex $M$ admits a K-injective resolution $M\\to I$ for which $C(F_R)I$ represents $\\mathbf RF_R(M)$ and $C(\\Gamma_G)C(F_R)I$ represents $(\\mathbf R\\Gamma_G)(\\mathbf RF_R(M))$. In these coordinates the normalized derived section comparison is represented by the chain isomorphism\n$$C(\\gamma)_I:C(\\Gamma_X)I\\xrightarrow{\\sim}C(\\operatorname{ev}_*)C(\\Gamma_G)C(F_R)I.$$\nIts class is natural under the canonical changes of K-injective resolution and is the canonical derived adjunction-composition comparison, with the specified underived units and counits. No boundedness or finite cohomological dimension of $G$ is required.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; Bhatt-Scholze Example 4.1.10, singleton exactness. Agent refinement giving the normalized geometric section chain model; exact combined reference WANTED."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-size-convention",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-geometric-sections-adjunction",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the internal/section-ring module equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category]; the identical constructions on underlying abelian sheaves show that forgetting the module structure preserves kernels and cokernels. Thus [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] gives local lifts for every module epimorphism. A covering sieve of $*$ contains a finite jointly surjective family by [sk-def-sfb-condensed-ring]. Some member $P\\to *$ is nonempty; any point of $P$ gives a continuous section $*\\to P$. Restricting a local lift along this section gives a lift over $*$. Evaluation preserves kernels by their sectionwise formula and preserves epimorphisms by this argument, hence preserves short exact sequences. Forgetting the resulting $R(*)$-module structure preserves their exactness as abelian groups. This proves exactness of $\\operatorname{ev}_*$ for arbitrary $R$.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p.28; explicit splitting argument at the singleton, using sites-modules.tex Tags 03DA/03CN"
+   }
+  },
+  {
+   "text": "Apply the normalized right-adjoint comparison in [lem-sfb-field-action-topos-coefficients] to the underlying sheaf of $N=a_*M$, and use its ring comparison and [lem-sfb-geometric-sections-adjunction] to retain the module structures. At $P=*$ it identifies $N(s)$ with the fully fixed sections of $(E_RN)(*)$. By [sk-def-sfb-module-pushforward-pullback] the underlying sheaf of $N$ is $a^{\\mathrm{Ab}}_*M$, and by [def-sfb-finite-lower-star] $N(V)=M(X\\times_sV)$ with restriction maps those of $M$; as $s[*]=s$ and $\\Gamma_X=\\operatorname{Hom}(R_X,-)$ is evaluation on the final object $X$ [def-pur-ringed-site-zeroth-hypercohomology], $N(s)=\\Gamma(X,M)$ and $N(s)\\to N(\\bar s)$ is restriction $M(X)\\to M(X^s)$. The normalized section formula identifies $(E_RN)(*)=\\Gamma(X^s,M|_{X^s})$, with the specified condensed action, so the inclusion is exactly restriction to $X^s$. The equalizer comparison supplies its inverse by unique gluing. It tests invariance after every profinite base change, rather than only under individual elements of $G$. These identifications commute with module morphisms; restriction and gluing are additive. They therefore give precisely the asserted natural additive isomorphism $\\gamma$.",
+   "uses": [
+    "lem-sfb-field-action-topos-coefficients",
+    "lem-sfb-geometric-sections-adjunction",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-finite-lower-star",
+    "def-pur-ringed-site-zeroth-hypercohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9-4.1.10, pp.27-28; normalized ringed descent through the two cited inputs"
+   }
+  },
+  {
+   "text": "By [det-prop-sfb-module-pullback-exact-main], $a^*$ is exact for any commutative condensed $R$. The additive equivalence $E_R$ and its inverse are exact, and [lem-sfb-geometric-sections-adjunction] specifies $a^*E_R^{-1}\\dashv F_R$; hence this left adjoint is exact. The same node specifies exact trivial inflation $T_G:\\mathcal M_R\\to\\mathcal A_G(R)$ with right adjoint $\\Gamma_G$. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to each of these two additive adjunctions. This proves K-injective preservation by $C(F_R)$ and $C(\\Gamma_G)$.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sfb-geometric-sections-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; exact module inverse image from the cited general coefficient result"
+   }
+  },
+  {
+   "text": "The three categories in the assertion are Grothendieck abelian by [lem-sfb-geometric-sections-adjunction]. Apply [lem-sfb-grothendieck-k-injective] in each, in the fixed compatible universes. For every additive $H$ used here, $Q C(H)$ on the homotopy category is triangulated: applying $H$ to a homotopy applies it to its defining additive identity, and $H$ preserves the finite biproducts and signed differential matrices defining shifts and cones. Thus [lem-weil-pbc-kinjective-total-derived] gives the ordinary total right derived functors of $F_R$, $\\Gamma_G$, and also of $\\Gamma_X$. Choose any resolution $M\\to I$. Its computation units are invertible on $I$; since $C(F_R)I$ is K-injective by Step 3, the intermediate computation unit for $\\Gamma_G$ is invertible there too. Consequently $C(F_R)I$ and $C(\\Gamma_G)C(F_R)I$ are exactly the claimed representatives.",
+   "uses": [
+    "lem-sfb-geometric-sections-adjunction",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; derived.tex Tags 070K/070Y, lemma-enough-K-injectives-implies and lemma-K-injective-defined"
+   }
+  },
+  {
+   "text": "Naturality of $\\gamma$ applied to each differential $d_I^n$ gives $\\gamma_{I^{n+1}}\\Gamma_X(d_I^n)=\\operatorname{ev}_*\\Gamma_GF_R(d_I^n)\\gamma_{I^n}$. Thus its degreewise isomorphisms and inverses form the displayed chain isomorphism $C(\\gamma)_I$. The left side computes $R\\Gamma_X(M)$ by [lem-weil-pbc-kinjective-total-derived]. Exactness of $\\operatorname{ev}_*$ from Step 1 permits termwise localization by [lem-weil-pbc-exact-functor-derived-factorization], so the right side represents $D(\\operatorname{ev}_*)(R\\Gamma_G)(RF_R)(M)$. No K-injective-preservation claim for singleton evaluation is needed.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y and 015F, K-injective computation and exact postcomposition; the differential identity is naturality"
+   }
+  },
+  {
+   "text": "For resolutions $i:M\\to I$, $j:N\\to J$ and $h:QM\\to QN$, [lem-sf-kinjective-derived-map-computation] gives the unique homotopy class $t:I\\to J$ with $Qt=(Qj)h(Qi)^{-1}$; every derived-functor map in these resolution coordinates is obtained by applying the corresponding additive functor to $t$. Apply this also at the intermediate K-injectives $F_RI,F_RJ$. Naturality of $\\gamma$ gives the equality of chain maps $\\operatorname{ev}_*\\Gamma_GF_R(t)\\,C(\\gamma)_I=C(\\gamma)_J\\,\\Gamma_X(t)$. Its localized equality is precisely naturality of the comparison on $h$. Taking $h=1$ proves compatibility with canonical changes of resolution; the cocycle identity for those changes is supplied by the same cited computation statement.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y and the arbitrary-resolution computation of the cited node; chain naturality square"
+   }
+  },
+  {
+   "text": "Put $L=a^*E_R^{-1}$. Apply [lem-sfb-derived-composition-adjunction-normalization] with $(\\mathcal A,\\mathcal B,\\mathcal C)=(\\mathcal M_R,\\mathcal A_G(R),\\operatorname{Mod}_{R_X})$, $L_a=T_G$, $L_b=L$, $L_c=LT_G$, and right adjoints $R_a=\\Gamma_G$, $R_b=F_R$, $R_c=\\Gamma_GF_R$, the last endowed with the composite adjunction. Take $\\lambda$ to be the identity compositor. All left adjoints are exact by Step 3. The conjugate $\\kappa$ is the identity and the cited theorem identifies the derived composition with the identity on $C(\\Gamma_G)C(F_R)I$, with exactly the composite units and counits. Step 2 identified the underived section comparison with the normalized restriction/equalizer comparison for the specified geometric adjunction, so after exact singleton evaluation its chain representative is $C(\\gamma)_I$. Step 6 then identifies its class on every resolution with the canonical comparison. Every input used applies to unbounded complexes; none imposes a cohomological-dimension bound on $G$.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors; sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition; specified adjunction normalization from the cited node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "sk-def-sfb-condensed-ring",
+  "lem-sfb-field-action-topos-coefficients",
+  "lem-sfb-geometric-sections-adjunction",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-finite-lower-star",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-sfb-derived-composition-adjunction-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 08BJ, 070I, 070K, 070Y, 09T5, combined with Bhatt-Scholze Example 4.1.10 and the existing normalized field/action descent inputs; no single source states the combined model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a K injective pro etale module complex geometric sections remain K injective and arithmetic sections equal singleton evaluation of condensed Galois invariants",
+   "results": {
+    "t": "2026-10-22T06:00:55Z",
+    "tool": "leanfinder",
+    "query": "On a K injective pro etale module complex geometric sections remain K injective and arithmetic sections equal singleton evaluation of condensed Galois invariants",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.eval_section_injective_of_eventually_injective",
+     "Algebra.Extension.cotangentComplex_injective_iff",
+     "Algebra.FormallySmooth.kerCotangentToTensor_injective_iff",
+     "CochainComplex.cm5b.instInjectiveXIntI",
+     "Algebra.Extension.h1Cotangentι_injective",
+     "Algebra.Extension.subsingleton_h1Cotangent",
+     "PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective",
+     "PresheafOfModules.instIsLocallyInjectiveToSheafify"
+    ],
+    "digest": "ede8cf9f4e2e5267"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: exact limits of condensed categories, componentwise injective complexes and ordinary sheaf gluing do not give this internal-coefficient Galois K-injective section model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation at singleton and normalized chain isomorphism between arithmetic sections and invariant geometric sections on unbounded K injective resolutions",
+   "results": {
+    "t": "2026-10-22T06:00:43Z",
+    "tool": "leansearch",
+    "query": "Exact evaluation at singleton and normalized chain isomorphism between arithmetic sections and invariant geometric sections on unbounded K injective resolutions",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"exact\"",
+   "results": {
+    "t": "2026-10-22T06:00:44Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"exact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Condensed.hasExactLimitsOfShape",
+     "Condensed.hasExactColimitsOfShape"
+    ],
+    "digest": "5b28b4c7e4ec28a9"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: exact limits of condensed categories, componentwise injective complexes and ordinary sheaf gluing do not give this internal-coefficient Galois K-injective section model."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|[Gg]alois).*(KInjective|[Kk].injective)|([Ii]nvariant|[Ss]ection).*(KInjective)|pointEvaluation",
+   "results": {
+    "t": "2026-10-22T06:00:44Z",
+    "tool": "grep",
+    "query": "(Condensed|[Gg]alois).*(KInjective|[Kk].injective)|([Ii]nvariant|[Ss]ection).*(KInjective)|pointEvaluation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: exact limits of condensed categories, componentwise injective complexes and ordinary sheaf gluing do not give this internal-coefficient Galois K-injective section model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The arithmetic sheaf descent equalizer on free Galois covers gives a normalized chain level invariant geometric section model for unbounded hypercohomology",
+   "results": {
+    "t": "2026-10-22T06:01:39Z",
+    "tool": "leanfinder",
+    "query": "The arithmetic sheaf descent equalizer on free Galois covers gives a normalized chain level invariant geometric section model for unbounded hypercohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.exists_mul_galRestrict_of_norm_eq_one",
+     "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk",
+     "TopCat.Presheaf.SheafConditionEqualizerProducts.w_apply",
+     "TopCat.Presheaf.SheafConditionEqualizerProducts.res_π_apply",
+     "TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff",
+     "TopCat.Presheaf.IsCompatible.sectionPairwise",
+     "TopCat.Presheaf.SheafConditionEqualizerProducts.res_π",
+     "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit"
+    ],
+    "digest": "588d4f83c577273d"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: exact limits of condensed categories, componentwise injective complexes and ordinary sheaf gluing do not give this internal-coefficient Galois K-injective section model."
+  },
+  {
+   "tool": "grep",
+   "query": "pointEvaluation|preservesKInjectiveComplexes|eval.*[Ee]xact",
+   "results": {
+    "t": "2026-10-22T09:36:50Z",
+    "tool": "grep",
+    "query": "pointEvaluation|preservesKInjectiveComplexes|eval.*[Ee]xact",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean"
+    ],
+    "digest": "f46c6960a4ffbefa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary-ring condensed AB axioms, ordinary degreewise right-derived functors or abstract derived adjunctions, not the normalized internal-coefficient geometric Galois section model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Arithmetic global sections are singleton evaluation of condensed Galois invariants on a K injective resolution",
+   "results": {
+    "t": "2026-10-22T09:36:51Z",
+    "tool": "leansearch",
+    "query": "Arithmetic global sections are singleton evaluation of condensed Galois invariants on a K injective resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+     "CategoryTheory.Sheaf.Γ",
+     "CategoryTheory.HasGlobalSectionsFunctor",
+     "AlgebraicGeometry.termΓ(_,_)",
+     "AlgebraicGeometry.Scheme.Γ_def",
+     "AlgebraicGeometry.Scheme.instSubsingletonCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensBot",
+     "AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply",
+     "AlgebraicGeometry.LocallyRingedSpace.Γ_obj"
+    ],
+    "digest": "1fd9e0947fd09f73"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary-ring condensed AB axioms, ordinary degreewise right-derived functors or abstract derived adjunctions, not the normalized internal-coefficient geometric Galois section model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"exact\"",
+   "results": {
+    "t": "2026-10-22T09:36:51Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"exact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Condensed.hasExactLimitsOfShape",
+     "Condensed.hasExactColimitsOfShape"
+    ],
+    "digest": "5b28b4c7e4ec28a9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary-ring condensed AB axioms, ordinary degreewise right-derived functors or abstract derived adjunctions, not the normalized internal-coefficient geometric Galois section model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact singleton evaluation of condensed modules and unbounded K injective Galois geometric section comparison",
+   "results": {
+    "t": "2026-10-22T09:36:52Z",
+    "tool": "leanfinder",
+    "query": "Exact singleton evaluation of condensed modules and unbounded K injective Galois geometric section comparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CondensedMod.IsSolid",
+     "Condensed.instAB4StarCondensedMod",
+     "Condensed.instAB4CondensedMod",
+     "Profinite.NobelingProof.succ_exact",
+     "Condensed.instAB5CondensedMod",
+     "CondensedMod.isDiscrete_tfae",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "instAbelianCondensedMod"
+    ],
+    "digest": "18e3528099fb611c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary-ring condensed AB axioms, ordinary degreewise right-derived functors or abstract derived adjunctions, not the normalized internal-coefficient geometric Galois section model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived composition of additive right adjoints with exact left adjoints computed on a common K injective resolution",
+   "results": {
+    "t": "2026-10-22T09:37:45Z",
+    "tool": "leanfinder",
+    "query": "Right derived composition of additive right adjoints with exact left adjoints computed on a common K injective resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.NatTrans.rightDerived_comp",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.NatTrans.rightDerived_comp_assoc",
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.NatTrans.rightDerived",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derivedε"
+    ],
+    "digest": "42b7a100a513ec6d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary-ring condensed AB axioms, ordinary degreewise right-derived functors or abstract derived adjunctions, not the normalized internal-coefficient geometric Galois section model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-galois-global-descent",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), separable-closure descent input; returned global-descent proof steps 6-8: Exact singleton evaluation and K-injective Galois section model.",
+   "via": [
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-galois-kinjective-section-model",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven proof steps establish singleton exactness by splitting a local lift, obtain the normalized arithmetic/geometric section isomorphism from the existing field/action descent comparison, and assemble the unbounded K-injective model with exact left adjoints and the existing normalized derived-composition theorem. No new node is needed. Existing ancestry has a null ancestor; retained and reported.",
+  "blueprint": "Supplies the separable-closure descent subargument below paragraph (3) of det-thm-sf-ctf-stability-direct-images, through the existing global-descent/topology-comparison chain. The current blueprint paragraph only gives preservation and compactification; it does not itself contain this categorical Galois calculation. The inherited created.item chain returns no blueprint ancestor, as recorded in the report.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic internal/section-ring equivalence, preserving the sections used at the singleton. No node of the item unit states this general categorical tool."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness of module inverse image for every condensed ring; needed for arbitrary R, beyond the admissible-coefficient Cartesian statement. No node of the item unit states this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-left-adjoint criterion, applied to geometric sections and invariants. No node of the item unit states this general categorical tool."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic unbounded existence theorem, applied to the three existing Grothendieck categories. No node of the item unit states this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic K-injective construction and invertible computation units for ordinary unbounded total right derived functors. No node of the item unit states this general categorical tool."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic formula for arbitrary derived maps and changes of K-injective resolutions. No node of the item unit states this general categorical tool."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic normalized adjoint-composition theorem, ensuring the specified units and counits survive derivation. No node of the item unit states this general categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-sfb-derived-composition-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-dc71d4c80",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-dc71d4c80 (reviewer sub-agent of L); spot-checked: Seven-step split of the Q30-created node with no new nodes. Statement and stmt_deps are byte-identical to the Q30 fix file and not weakened: any commutative condensed R, unbounded complexes, no bound on G. Former global-descent steps 6-8 are all kept: old 6 is step 1, old 7 is steps 3-4, old 8 is steps 2 and 5-7. I checked every cited statement against what each step takes from it. Step 1: sectionwise kernels and sheafified cokernels (def-weil-sheaf-of-modules-category) through the internal/section-ring equivalence; local lifts; a finite jointly surjective cover of * has a nonempty member, which gives a section *->P (BS Ex. 4.1.10, pdf pp. 27-28: exact on extremally disconnected sets). Step 3: det-prop-sfb-module-pullback-exact-main holds for any morphism and any condensed R; the 08BJ node is used twice (Stacks derived.tex l. 9857, hypotheses checked). Step 4: the Grothendieck node, then kinjective-total-derived; C(F_R)I is K-injective. Step 5: the exact-functor factorization. Step 6: the K-injective map-computation formulas and cocycle. Step 7: derived-composition normalization with (M_R, A_G(R), Mod_{R_X}), L_a=T_G, L_b=a^*E_R^{-1} and identity lambda; all left adjoints are exact. There is no cycle (closure of 443 nodes) and no duplicate (rg -L over singleton evaluation and X^s[P] hits), and no SGA is cited. I accept the seven declared tool_uses as generic categorical tools. One C1/C4 fault, repaired: step 2 claimed N(s)=Gamma(X,M) for N=a_*M, and that N(s)->N(s-bar) is restriction, but no cited statement gives this. It is the pushforward section formula, which old step 5 cited. In fixes/dag/nodes/sec-six-functors-basics/lem-sfb-galois-kinjective-section-model.json, step 2 now cites sk-def-sfb-module-pushforward-pullback, def-sfb-finite-lower-star and def-pur-ringed-site-zeroth-hypercohomology (Gamma=Hom(O,-)) and writes out s[*]=s; proof_deps is now the union of uses. Step 2 is now 1215 characters, a little over the 1,100 guideline; I left it as one step. The null blueprint from.node is inherited from the created chain, not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GaloisKInjectiveSectionModel",
+  "declaration": "AlgebraicGeometry.ProEtale.GaloisKInjectiveSectionModel.galois_kinjective_section_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.GaloisKInjectiveSectionModel.singleton",
+   "AlgebraicGeometry.ProEtale.GaloisKInjectiveSectionModel.singletonEvaluation",
+   "AlgebraicGeometry.ProEtale.GaloisKInjectiveSectionModel.globalSections",
+   "AlgebraicGeometry.ProEtale.GaloisKInjectiveSectionModel.geometricTest",
+   "AlgebraicGeometry.ProEtale.GaloisKInjectiveSectionModel.geometricRestriction",
+   "AlgebraicGeometry.ProEtale.GaloisKInjectiveSectionModel.Model",
+   "AlgebraicGeometry.ProEtale.GaloisKInjectiveSectionModel.Assertion",
+   "AlgebraicGeometry.ProEtale.GaloisKInjectiveSectionModel.galois_kinjective_section_model"
+  ],
+  "file": "lean/Sheaf/Paper/GaloisKInjectiveSectionModel.lean",
+  "statement": "theorem galois_kinjective_section_model (e : NormalizedModules k Ω h R) (X : Scheme.{u}) (a : X ⟶ Spec (.of k)) [CompactSpace X] [QuasiSeparatedSpace X] : Assertion e X a",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the repaired normalized geometric-sections interface directly. Exactness, K-injective preservation and all three resolution classes are conclusions of Model, not hypotheses. All three derived Hom universes are explicitly u+2 on the original internal module categories; site and coefficient universes are unchanged. The comparison is the canonical composition of the existing right-derived natural-isomorphism, composition, and exact postcomposition comparisons, and is specified on every arbitrary quasi-isomorphic K-injective resolution."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34a7c89e1",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Checked every clause of lem-sfb-galois-kinjective-section-model against the Lean. Exact singleton evaluation, gamma fixed by actual restriction to X^s (invariant inclusion) with unique gluing, exact a^*E_R^{-1}, K-injective preservation by F_R and Gamma_G, K-injective resolutions in all three categories, canonical comparison from rightDerivedFunctorNatIso / CompMapDerivedCategoryIso / CompIso (rightDerivedUnique on universal units), and the chain formula on every K-injective quasi-iso resolution are all conclusions inside Nonempty Model. No extra hypotheses beyond the NormalizedModules dep interface; ActionAbelian only asserts limits and normality, addition fixed; no universe equality; derived categories explicitly at u+2. Node unchanged vs side-live except the lean record; stmt_deps intact. Statement verbatim, docstrings with source and blueprint, sorry only, real pro-etale site. Global sections taken as evaluation at the final object of the internal-module category the dep requires (accepted). No compile, since no FIX. Advisory: the Additive/Zero fields are redundant elaboration aids."
+ }
+}

@@ -1,0 +1,267 @@
+{
+ "id": "lem-trf-line-quotient-homogeneous-fraction-map",
+ "kind": "statement",
+ "title": "The morphism from a line quotient by homogeneous fractions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\mathcal E$ an arbitrary quasi-coherent $\\mathcal O_S$-module [pqf-def-coherent], and $p:P=\\operatorname{Proj}_S A_S(\\mathcal E)\\to S$, where $A_S(\\mathcal E)$ is the canonical symmetric graded algebra [def-trf-canonical-symmetric-graded-algebra] and relative Proj is [def-nagata-relative-proj]. No finite-type or local-freeness hypothesis is imposed on $\\mathcal E$. Let $h:T\\to S$ be any scheme morphism, $L$ an invertible $\\mathcal O_T$-module [def-sc-invertible-module], and $q:h^*\\mathcal E\\twoheadrightarrow L$ a surjective sheaf homomorphism, with tensor pullback [def-pc-module-pullback]. There is a unique graded algebra map $\\psi:h^*A_S(\\mathcal E)\\to\\bigoplus_{d\\ge0}L^{\\otimes d}$ whose degree-one part is $q$ and whose degree-zero part is the structural unit (tensor powers use [def-pur-sheaf-tensor-product]). For $U=\\operatorname{Spec}R\\subseteq S$, put $M=\\mathcal E(U)$ and $A=\\operatorname{Sym}_R M$. On each affine open $W=\\operatorname{Spec}B\\subseteq h^{-1}U$ with a frame $l$ of $L$, write $q(m\\otimes1)=b_m l$ under $(h^*\\mathcal E)(W)=M\\otimes_R B$. Write $b(a)$ for the coefficient of $l^{\\otimes d}$ in $\\psi(a)$ for $a\\in A_d$. The opens $W_m=D(b_m)$ cover $W$, and for $e=\\iota(m)$ the formula\n$$\\rho_m:(A_e)_0\\longrightarrow B[1/b_m],\\qquad a/e^d\\longmapsto b(a)/b_m^d\\quad(a\\in A_d)$$\nis a well-defined $R$-algebra homomorphism (degree-zero localization is [def-nagata-homogeneous-localization-degree-zero]). Its spectrum map sends $W_m$ into $D_+(e)\\subset P$. These maps agree on overlaps, where for $f=\\iota(n)$ the function $f/e$ maps to the unit $b_n/b_m$. Replacing $l$ by $u l$, $u\\in B^\\times$, replaces the degree-$d$ coefficients by $u^{-d}b(a)$ and leaves every $\\rho_m$ unchanged; the same formulas commute with affine base restriction. The local maps determine a unique $S$-morphism $F_h(L,q):T\\to P$ satisfying these formulas for every such $U,W,l,m$, independent of all these choices. The domain $U(\\psi)$ is all of $T$ and $F_h(L,q)$ equals the canonical relative-Proj morphism $r_{L,\\psi}$ of [lem-trf-space-line-module-proj-map].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA (section-projective-bundle), 01O4 (lemma-apply-relative), 01NA (lemma-apply), and 01O9 (lemma-invertible-map-into-relative-proj); graded extension and affine homogeneous-fraction construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "lem-trf-space-line-module-proj-map",
+  "def-trf-relative-graded-line-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the section-normalized tensor-pullback adjunction to regard q as a map E→h_*L. For each affine base U, construct the commutative direct sum of sections of all tensor powers of L on h^(-1)(U), using the tensor-power associativity and local-frame commutativity identities. SymmetricAlgebra.lift sends a generator m to the degree-one section obtained from q by the inverse right unitor. Induction on powers of the generator range shows that degree n maps to the nth direct-sum component. Projecting gives a concrete graded extension. Scalar, product, unit and restriction identities follow by injectivity of each direct-sum inclusion and equality on scalars and generators. The right unitor proves that this extension recovers q.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "def-sc-invertible-section-ring",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle), 01O4 (lemma-apply-relative), 01NA (lemma-apply), and 01O9 (lemma-invertible-map-into-relative-proj); graded extension and affine homogeneous-fraction construction."
+   }
+  },
+  {
+   "text": "Induction on powers of the symmetric generator range proves uniqueness of the extension. Every tensor power of a frame is a free generator. Its scalar-multiplication bijection identifies the coefficient chosen by invFun. Apply the right unitor and the extension equation to identify degree-one coefficients with the quotient generator coefficients. Injectivity of scalar multiplication proves the frame-change, source-restriction and base-restriction identities.",
+   "uses": [
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle), 01O4 (lemma-apply-relative), 01NA (lemma-apply), and 01O9 (lemma-invertible-map-into-relative-proj); graded extension and affine homogeneous-fraction construction."
+   }
+  },
+  {
+   "text": "Tensor pullback preserves quasi-coherence. The affine surjectivity lemma in the quasi-coherent cokernel/image module lifts the frame through q on W. The tensor-pullback affine sections comparison lifts that section to a finite tensor sum. Tensor induction shows that its frame coefficient lies in the ideal generated by all quotient generator coefficients. Since this coefficient is 1, the ideal is the unit ideal and the basic opens cover W. On stalks a free frame remains a basis; the unit coefficient on one covering generator open shows that the homogeneous degree-one section is outside the maximal-ideal multiple. Thus the graded extension generates everywhere.",
+   "uses": [
+    "def-weil-pbc-tensor-pullback-ordinary-comparison",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle), 01O4 (lemma-apply-relative), 01NA (lemma-apply), and 01O9 (lemma-invertible-map-into-relative-proj); graded extension and affine homogeneous-fraction construction."
+   }
+  },
+  {
+   "text": "Apply the general affine-basis homogeneous-fraction atlas to this graded extension and its frame coefficients. Specialize its denominator to the degree-one symmetric generator. This supplies the canonical morphism and all scalar, fraction and chart equations. On a double generator open, both coefficients are units; the localization equation for c/b proves that its image is a unit. Together with the already proved coefficient identities this is the full quotient chart predicate.",
+   "uses": [
+    "lem-trf-graded-line-homogeneous-fraction-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle), 01O4 (lemma-apply-relative), 01NA (lemma-apply), and 01O9 (lemma-invertible-map-into-relative-proj); graded extension and affine homogeneous-fraction construction."
+   }
+  },
+  {
+   "text": "For frame independence, scalar-preserving transports of two charts have the same source scheme morphism. Their composites with F therefore agree. Cancel the monomorphisms of the relative-Proj affine chart and its D_+(e) chart, then use faithfulness of Spec to obtain equality of ring maps. For uniqueness of F, the fraction formulas and homogeneous-fraction surjectivity identify the two chart ring maps. Their spectrum equations give equal restrictions to every generator open. The generator cover and local equality of scheme morphisms prove global equality.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle), 01O4 (lemma-apply-relative), 01NA (lemma-apply), and 01O9 (lemma-invertible-map-into-relative-proj); graded extension and affine homogeneous-fraction construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-section-ring",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison",
+  "lem-trf-graded-line-homogeneous-fraction-atlas",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lemma-nagata-relative-proj-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA and 01O9, concrete symmetric lift and tensor-section generator-cover proof; the separate general affine-basis fraction-atlas result supplies the geometric construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|invertible.*[Pp]roj|[Pp]roj.*invertible|quotient.*[Pp]roj",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; searched Mathlib/AlgebraicGeometry; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "results": "6 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a scheme morphism to a projective bundle from a line bundle quotient with homogeneous fraction formulas",
+   "results": "8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.basicOpenToSpec, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjection from the pullback of a quasi coherent module to an invertible sheaf defines a morphism to the relative Proj of its symmetric algebra by homogeneous fraction charts",
+   "results": "8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.basicOpenToSpec, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given module generators with line bundle images b m the maps from degree zero localized symmetric algebras send a divided by e power d to b a divided by b m power d and glue",
+   "results": "8 hits: HomogeneousLocalization.awayMapAux_mk, HomogeneousLocalization.awayMap_mk, HomogeneousLocalization.val_awayMap_mk, HomogeneousLocalization.val_awayMap_eq_aux, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply, HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.val_awayMap, HomogeneousLocalization.map; inspected hits: absolute Proj/localization or unrelated statements; none states this relative sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|invertible.*[Pp]roj|[Pp]roj.*quotient",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean. Read the returned hits; absolute Proj and homogeneous localization constructions, or unrelated linear/topological projectivizations, do not state the relative quasi-coherent sheaf assertion. Basic.lean 443--455 constructs the absolute map, not this full relative result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective bundle morphism associated to an invertible quotient of a quasi coherent module",
+   "results": "8 hits: Projectivization.rep, Projectivization, VectorBundleCore.proj, Module.Grassmannian.projective_quotient, Projectivization.map, Bundle.TotalSpace.proj, Projectivization.mk'', Module.Invertible.instProjective. Read the returned hits; absolute Proj and homogeneous localization constructions, or unrelated linear/topological projectivizations, do not state the relative quasi-coherent sheaf assertion. Basic.lean 443--455 constructs the absolute map, not this full relative result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "results": "6 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict. Read the returned hits; absolute Proj and homogeneous localization constructions, or unrelated linear/topological projectivizations, do not state the relative quasi-coherent sheaf assertion. Basic.lean 443--455 constructs the absolute map, not this full relative result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle quotient of a pulled back quasi coherent module defines a morphism to the relative Proj of its symmetric algebra by homogeneous fractions",
+   "results": "8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict. Read the returned hits; absolute Proj and homogeneous localization constructions, or unrelated linear/topological projectivizations, do not state the relative quasi-coherent sheaf assertion. Basic.lean 443--455 constructs the absolute map, not this full relative result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous degree zero localization chart map from graded algebra sections into tensor powers of a line bundle",
+   "results": "8 hits: HomogeneousLocalization.map, AlgebraicGeometry.openToLocalization, AlgebraicGeometry.Proj.awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.sectionInBasicOpen, HomogeneousLocalization.awayMap. Read the returned hits; absolute Proj and homogeneous localization constructions, or unrelated linear/topological projectivizations, do not state the relative quasi-coherent sheaf assertion. Basic.lean 443--455 constructs the absolute map, not this full relative result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-bundle-quotient-geometry",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 4--6.",
+   "via": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-line-quotient-homogeneous-fraction-map",
+  "worker": "stage1",
+  "summary": "Preserved the unrestricted quasi-coherent statement. Constructed the unique graded extension on affine line charts, proved the degree-one generator cover by finite stalk expressions, reused the existing general line-Proj affine chart atlas for fraction well-definedness and overlaps, and glued and identified the canonical morphism. No new nodes.",
+  "blueprint": "Historical ancestor lem-trf-local-term-locality proof (1)--(2), normal-cone route; projectivity helper lem-trf-proper-fibrewise-ample-projective step 4, through the evaluation immersion of 01VR. Realizes lem-trf-projective-bundle-quotient-geometry old steps 4--6 (now step 2): induced graded map, quotient fraction charts, and canonical relative-Proj identification."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-7f417e38b",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-7f417e38b (reviewer sub-agent of L); spot-checked: Ordinary one-level split of a statement-only node that NM created in the resolved re-split of lem-trf-projective-bundle-quotient-geometry; this item has no repair note of its own. The statement, stmt_deps, source and blueprint are identical to the NM node. There are no new nodes and no cycle (the 205-node closure of the cited nodes does not contain the item). Source checked: Stacks constructions.tex 01O9 (lemma-invertible-map-into-relative-proj, l.4503; U(psi), characterizations (1)-(3), 'details omitted' gluing) and 01OA (section-projective-bundle, arbitrary qcoh E, induced graded map). Step 1: the pullback-sections lemma gives M⊗_R B, and the Sym universal property plus the graded statement give A_d -> B t^d; Sym^1 = M is elementary because J is homogeneous and generated in degree 2. Step 2: gluing and uniqueness come from the restriction formula of def-trf-canonical-symmetric-graded-algebra and from algHom_ext; frame change gives u^{-d}. Step 3: a finite-tensor germ gives sum c_i b_{m_i} = 1 in the local ring, so some b_m is a unit (no finite generation used), and U(psi) = T since psi_1 = q. Step 4: the statement of the unsplit, same-unit lem-trf-line-proj-affine-chart-atlas, with alpha_e = b_m, gives exactly rho_m on D(b_m) and the overlap agreement across base opens. Step 5: the overlap value f/e -> b_n/b_m and the frame cancellation are elementary. Step 6: gluing gives F with pF = h (R-algebra charts) and independence of choices. Step 7: by the chart specification of def-trf-space-line-module-proj-input (irrelevant ideal is the unit ideal on W_m), r_{L,psi} equals F. Duplicate check: rg -L found 27 nodes tagged 01O9/01OA; none states this line-quotient construction, and reusing the atlas is correct. Small cases: k^2 over a field gives the point [a:b], frame-invariant; T empty; nilpotent b_m; infinite M; non-separated bases. No SGA cited, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LineQuotientHomogeneousFractionMap",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.line_quotient_homogeneous_fraction_map",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.quotientFramePower",
+   "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap.quotientCoefficient",
+   "AlgebraicGeometry.Scheme.Modules.quotientGeneratorCoefficient",
+   "AlgebraicGeometry.Scheme.Modules.quotientSymmetricGenerator",
+   "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap.ExtendsLineQuotient",
+   "AlgebraicGeometry.Scheme.Modules.quotientFractionSource",
+   "AlgebraicGeometry.Scheme.Modules.degreeOneQuotientFraction",
+   "AlgebraicGeometry.Scheme.Modules.quotientFractionScalar",
+   "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap.IsQuotientFractionChart",
+   "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap.HasQuotientFractionCharts",
+   "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap.QuotientFrameIndependent",
+   "AlgebraicGeometry.Scheme.Modules.line_quotient_homogeneous_fraction_map"
+  ],
+  "file": "lean/Sheaf/TraceFormula/LineQuotientHomogeneousFractionMap.lean",
+  "statement": "theorem line_quotient_homogeneous_fraction_map {S T : Scheme.{u}} (h : T ⟶ S) (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules) [L.IsInvertible] (q : (tensorPullback h).obj E ⟶ L) [Epi q] : ∃ ψ : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) L, ψ.ExtendsLineQuotient h E L q ∧ (∀ ψ' : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) L, ψ'.ExtendsLineQuotient h E L q → ψ' = ψ) ∧ ψ.GeneratesEverywhere ∧ ∃ F : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj, ψ.HasQuotientFractionCharts h E L q F ∧ ψ.QuotientFrameIndependent h E L q F ∧ ψ.IsCanonicalMap F ∧ ∀ F' : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj, ψ.HasQuotientFractionCharts h E L q F' → F' = F",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the landed RelativeGradedLineMap and its evaluate, GeneratesEverywhere and IsCanonicalMap definitions through def-trf-relative-graded-line-map, whose existing:true record owns this interface. No dependency on the ampleness theorem conclusion. All fraction charts, scalar, overlap, frame and restriction clauses retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e5eda835",
+  "group": "Q53",
+  "result": "fix",
+  "note": "Re-delivery of the 66d14ec2 H2/H12 RETURN. The Lean file is byte-identical, and its clauses were already reviewed with no fault (arbitrary quasi-coherent E, Epi q, unique psi, fraction charts with d=0, unrestricted generator cover, scalar/Spec/overlap/frame/restriction clauses, uniqueness of F, IsCanonicalMap). The item swaps the theorem stmt_dep for the new def-trf-relative-graded-line-map, existing:true on the unchanged GradedImmersionAmpleCriterion (RelativeGradedLineMap/evaluate/GeneratesEverywhere/IsCanonicalMap); its TeX matches the Lean; check_existing and check_new_node are clean; no cycle. FIX: evaluate uses boundaryPullbackPowIso, owned by def-sc-tensor-pullback-power-comparison, which was not cited; fixes/def-trf-relative-graded-line-map.json adds it to stmt_deps and the TeX, and both checks are clean. Advisory: IsFreeGenerator (def-sc-local-free-generator) is not in the item's stmt_deps. No compile: the Lean is unchanged and the fix is JSON only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261023T231855-L-3653745",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

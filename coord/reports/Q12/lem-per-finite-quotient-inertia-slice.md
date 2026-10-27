@@ -1,0 +1,35 @@
+# Stage-1 worker report: lem-per-finite-quotient-inertia-slice
+
+Files written:
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-finite-quotient-inertia-slice.json`: item retained and split into ten proof steps; no new DAG nodes.
+- `citations.json`: verbatim statement quotes for every cited node in every step.
+- `searches.jsonl`: Mathlib searches run with `msearch.py`.
+
+Attachments: none.  No sorry-free project declaration states this item.
+
+WANTED: none.  The proof follows Stacks Project `pione.tex` Tag 0BST and the local finite-quotient argument in Illusie–Laszlo–Orgogozo, Exposé VI, p.74; both sources are present.
+
+The imported item was not mathematically weakened.  I kept its normal Noetherian and regular hypotheses, the arbitrary prescribed pointed étale neighbourhood, the generically free finite quotient, the faithfulness clause, the torsor statement on every dense étale locus, the optional invertibility localization, and the strict-local invariant-ring conclusion.  I added the existing pointed-etale-neighbourhood definition to `stmt_deps`, because the strict-local conclusion and the prescribed refinement use that notion.  No new statement node was created: the DAG already has the geometric-point idempotent split, purely inseparable residue test, equivariant product refinement, transitive product invariant calculation, flat invariant base change, normal component facts, finite strict-localization decomposition, and normal strict-henselization colimit lemma.  The whole item is therefore an assembly proof rather than a restatement child.
+
+## Review by Q12
+
+I read the item source (Stacks Project `pione.tex`, Tag 0BST, `lemma-inertia-invariants-etale`, together with the paragraph after Proposition 3.5 of ILO Exposé VI, printed p.74) and the current DAG statements of every dependency used in the ten steps.  The proof begins by passing to affine opens and the prescribed pointed étale neighbourhood, then uses the existing finite-algebra geometric-point splitting and equivariant idempotent refinement.  The transitive-product node says exactly that the selected component has invariant ring equal to the base and that its inertia subgroup is the stabilizer; this is the input for the maps `V -> X` and `V -> T`.
+
+For Steps 1–3 I checked the affine quotient, finite tensor base change, Noetherianity, finite presentation of the étale base, flat invariants, the existence and uniqueness of the selected geometric branch, and the principal localization that makes the product factors permuted by the group.  The cited node statements contain each of those conclusions; the finite-module and empty-spectrum observations are elementary.  Step 4 uses precisely the transitive-product statement for the invariant ring and stabilizer, plus the existing étale base-change/composition statements to obtain the pointed equivariant map.  Step 5 checks normality and integrality of the selected component: regular Noetherianity gives normal components, the finite étale normal-component lemma gives normal integral clopen pieces, and the domain base forces the selected invariant idempotent to be one.  The open-image statement and the dense free locus then give faithfulness.
+
+Step 6 verifies surjectivity by integral lying-over, invariant structure sheaf by the finite difference-map/flat-invariants node, and geometric fibres by the orbit calculation.  Step 7 uses the finite étale rank and local-splitting statements: on any dense étale locus both source and target are integral, one free geometric fibre has cardinality `|H|`, and constant rank plus the orbit description gives a connected finite étale `H`-torsor.  Step 8 tests the edge case `|H|` invertible in the residue field and localizes at that element; all quotient and torsor assertions restrict along the principal open.  Steps 9–10 use the cited strict-localization decomposition and ind-étale strict-local invariance to identify the selected strict local ring, compute `C^H = R` by flat invariants, and prove faithfulness and normality of the strict-local ring by the existing normal colimit lemma.
+
+I tested the edge cases in the statements while checking the proof: the empty scheme is vacuous; the trivial group forces the original quotient to be an isomorphism and gives `V ≅ T`; a free orbit on a disjoint union of copies of the base has `H=1` and selects one copy; a ramified cyclic quotient `Spec k[t] -> Spec k[t^n]` at the origin (with `n` prime to the characteristic and all `n`th roots of unity in `k`) has a one-point geometric fibre and full, potentially nontrivial inertia, so the proof keeps that full stabilizer; the optional invertibility clause is applied only when the group order is a unit; and localization preserves normality, integrality, the pointed branch, and the dense-free intersection.  I also checked that the proof never assumes excellence, normal crossings, regularity of `X`, or invertibility of `|G|` unless the final optional clause is invoked.
+
+Five Mathlib searches using all four prescribed tools were run for the item (grep, LeanSearch, Loogle, and two LeanFinder queries; the `leansearch` query was available).  They returned only general étale, inertia-subgroup, Frobenius, or finite-algebra results and no declaration of this full geometric slice, so `mathlib_match` remains null.  The server `review_split` check passed with zero new nodes.  The proof steps are each below 2000 characters, and every citation has a verbatim quote in `citations.json`.
+
+## Blueprint and reuse audit
+
+I read the current `literature/blueprint/latest` (main-20261024) chapter, unit and ancestor proof, and the DAG chapter/unit records. The inherited `blueprint.from` chain is a legacy regular-pair branch below `lem-per-artin-gabber-affine-curve`; the newest ancestor is now an exchange/support proof. I retained this dispatched local finite-quotient statement and did not alter either route record. Whole-DAG and whole-blueprint searches for inertia, finite group quotients, normal components, `0BST`, and the corresponding labels found the existing algebraic tools cited here, but no blueprint node stating this complete slice. The Lean source search for the exact blueprint tag, inertia slice and its names found no attachment.
+
+## Not duplicates
+
+No new nodes. In particular, the existing `lem-per-finite-quotient-strict-local-invariants` is broader on the ring/log invariant calculation but does not construct the normal integral pointed affine slice or establish its generically free torsor and faithfulness assertions. The proof uses the existing underlying algebraic tools without copying that theorem into a new node.
+
+Unfinished work: none at stage 1. No Lean file was written and no compiler, Lake command, local DAG checker, or repository git command was run. I corrected the review's initial mistaken description of a one-point geometric fibre: such a fibre can have nontrivial inertia. The proof itself consistently retains that inertia. I also added explicit finite/étale base-change citations to Step 7 before the final dry run.

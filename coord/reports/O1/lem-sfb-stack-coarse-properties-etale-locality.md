@@ -1,0 +1,41 @@
+## Worker report
+
+Files written: dag/nodes/sec-six-functors-basics/lem-sfb-stack-coarse-properties-etale-locality.json — statement, split using existing nodes, no Mathlib match. There are zero new nodes and zero new Mathlib leaves. Supporting sandbox artifacts: citations.json, searches.jsonl, and write_split.py.
+
+Attachments: none. I searched lean/WeilConjectures for the exact blueprint tag, coarse/etale-locality language, AlgebraicStack, DeligneMumford, and stack properness/quasi-compactness/homeomorphism language. There is no project declaration stating all clauses. The nearby Sheaf coarse-moduli statements are not attachments of this item.
+
+WANTED: none. The proofs and all cited Stacks files are present locally.
+
+The imported item was statement-only. Its statement is sound and unchanged. Its six cited Stacks results are actually present at the claimed labels. Quasi-compactness here uses the item's scheme-test convention; I prove the required assertions directly in that convention rather than silently substitute the source's quantification over all quasi-compact algebraic stacks. The universal-homeomorphism tests really range over arbitrary algebraic stacks, not only DM stacks. No SGA source is used.
+
+The inherited blueprint creation chain has from.node null, and blueprint_refs.py ancestor prints None. The present latest blueprint (7284bb09daf97437d544c51882b325f9c52cd345) has the direct-image proof in sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md; paragraph (3) now cites direct-image preservation without repeating the older alteration/moduli expansion. I read that proof and the current unit; the inherited detailed place remains the historical explanation of this support item. I preserve the inherited chain and null ancestor, rather than invent a blueprint id or change a unit. Whole-blueprint searches for “universal homeomorphism” and “algebraic stack” found no node stating this item; scheme universal-homeomorphism lemmas are not stack versions.
+
+Nothing mathematical remains unfinished at this split level. Existing unsplit supporting nodes remain their owners' work. All item steps are below 2000 characters. No new node restates a clause of the item.
+
+## Not duplicates
+
+No new nodes. In particular I reused lem-sfb-space-flat-proper-fp-locality for algebraic-space properness descent and stability, lem-sfb-stack-point-topology-flat-lfp-open for continuity and openness, and the existing chart and fibre-product nodes. I did not create separate nodes for the three requested locality clauses, base-change tautologies, field-point lifting, diagonal pullback, or finite unions of quasi-compact images.
+
+## Review by O1
+
+I read stacks-morphisms.tex at Tags 050F/06TZ (diagonal base change and separated descent), 050V/0DTL (quasi-compactness), and 0CI8/0DTQ (universal homeomorphisms). I read stacks-properties.tex at 04XH (common-field point lifting), 04XL (continuity and flat-lfp openness), the weak-covering property proof underlying 06TZ, and 04YC (the finite-atlas argument behind 0DTL). I opened every cited DAG statement, not just its title or proof. citations.json contains one verbatim statement quotation for each use in each numbered step.
+
+Step 1 uses precisely the triples in def-sfb-stable-pointed-moduli-groupoids: equality of point classes supplies a common extension and an isomorphism, hence the required triple. It proves only surjectivity to the set-theoretic fibre product, never bijectivity. This few-line definition argument covers arbitrary algebraic stacks and does not rely on the narrower field-base smooth-presentation node.
+
+Step 2 uses the same explicit triples, lem-sfb-dm-isom-space-unramified for representability of both Isom spaces (its unramified conclusion is not needed), and lem-trf-space-fibre-products-etale-covers for the fibre representing the relative diagonal on a scheme test. Its objectwise diagonal comparison is written out; it cites no scheme-only diagonal lemma as if it applied to stacks. The source and target of f are DM as required by the Isom node. No representability hypothesis on f is added.
+
+Step 3 uses exactly the independent properness clause of lem-sfb-space-flat-proper-fp-locality. Its descent conclusion is for maps of algebraic spaces to a scheme and scheme fppf covers, so I fix the scheme T into the diagonal target, obtain an algebraic space H over T, and refine each E_i by a scheme Q_i. The affine-etale-cover node supplies that refinement, the chart calculus supplies flatness, local finite presentation and base-change/composition, and def-pc-fppf-site supplies exactly the covering condition. Step 1 supplies joint surjectivity. Every pullback of H is a test of the local diagonal by Step 2. The base-change clause likewise applies properness to an algebraic-space test, not a possibly nonrepresentable stack map.
+
+Step 4 is the actual base-change proof for quasi-compactness with the statement's scheme tests; it uses associativity of the defined 2-fibre products and the point-topology node to regard the equivalent stacks as having the same atlas topology. There is no hidden theorem about quasi-compact topological maps being stable under arbitrary topological pullback.
+
+Step 5 uses algebraic-space etale atlases and the affine-open basis to construct open images above V. The chart calculus and stack point-topology node say respectively that these maps are flat lfp and that their point maps are open. The cited Mathlib leaf lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact explicitly states spectrum quasi-compactness in clause (iii). Compactness of V chooses finitely many images. This requires no global finiteness of the given family or of W_i.
+
+Step 6 uses the hypothesis on f_i on each selected quasi-compact affine U, the point-topology node for continuity, Step 1 for covering, and a written finite-subcover argument. The DM-atlas-calculus statement ensures the DM fibre products have atlases. Finite unions of continuous images of quasi-compact spaces are proved here as an elementary step, not introduced as a redundant new node.
+
+Step 7 uses algebraic-stack-fibre-products, whose statement is over an arbitrary scheme, for Z_i and X with Z arbitrary algebraic. Smooth scheme atlases exist by the explicit algebraic-stack definition. The chart calculus supplies smoothness, representability and flat lfp of the composites; the point-topology node gives openness because their sources U_i are schemes, hence algebraic spaces. The universal-homeomorphism hypothesis gives a homeomorphism on each U_i test. I do not apply the DM-atlas lemma to Z, nor the point-openness lemma to a map whose source is a nonrepresentable stack.
+
+Step 8 uses only continuity and openness furnished above, the given local homeomorphisms, and Step 1's point lifting. I wrote out separate surjectivity, injectivity and open-image arguments. In particular two points over z lift with the SAME u and are equal by local injectivity; an arbitrary open O has image the union of q_i(h_i(O_i)). This is enough without claiming underlying point spaces preserve fibre products or invoking a missing universal-injectivity characterization node.
+
+I checked B--E in both copies of delivery-errors.md: no new-node shape/source/notion errors; every non-elementary input is a cited existing statement; no use of the proof of a cited node; no clause relabelled as a new lemma. I tested the empty source/target and empty cover (the latter forces an empty target), infinite covers, non-quasi-separated schemes, a nonrepresentable classifying-stack morphism, and a smooth stack test Z not DM. The point argument allows stabilizers and retains isomorphisms in all products. The diagonal argument uses A times_B A, never A times_S A. No correction to the statement or its hypotheses was needed.
+
+The required Mathlib queries were run through msearch.py and their results read: one Loogle pattern, a whole-source grep, LeanSearch, and two distinct LeanFinder phrasings. The hits concern scheme diagonals/local properties or general prestacks. They cannot specialize in one line to a morphism of DM stacks. The actual searches are appended to mathlib_searches, and the earlier imported search records are retained.

@@ -1,0 +1,155 @@
+{
+ "id": "lem-trf-point-transport-tower-natural-constructions",
+ "kind": "statement",
+ "title": "Natural strict point map and two Roos comparison constructions",
+ "statement": "Fix the finite-field datum D, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with integer ring $\\mathcal O_E$, as in [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$. For the actual canonical towers and augmentation of [lem-trf-point-transport-cone-comparison-descent], the level maps of [lem-trf-point-transport-strict-quotient] assemble into a natural strict tower transformation U on all complexes, whose n-th component is exactly strictQuotientPointMap. The existing actual quotient augmentation assembles into a natural transformation alpha from exact sections to the source Roos functor. The product-preserving sectionwise comparison of [lem-trf-point-quotient-augmentation-diagram], whiskered by the pullback tower, gives a natural isomorphism beta from sections of the sheaf-level pullback Roos complex to the evaluated target Roos complex. No completeness assumption is used to construct these maps.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(3)*: the integral point transport is the derived limit of the levelwise maps, via its specified cone map; implementation module PointTransportTowerRealizationConstruction"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-point-transport",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-trf-point-transport-cone-comparison-descent",
+  "lem-trf-point-transport-strict-quotient",
+  "lem-trf-point-quotient-augmentation-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Use NatTrans.ofOpSequence on the strict finite quotient maps. The transition and arbitrary-chain-map laws give its compatibility and naturality; its component equation is definitional.",
+   "uses": [
+    "lem-trf-point-transport-strict-quotient-all-complexes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For augmentation naturality use extensionality of both Roos coordinates. The first coordinate is naturality of unrestrictedTowerUnit after exact sections; both shifted coordinates vanish. Set alpha to this natural family.",
+   "uses": [
+    "lem-trf-point-transport-cone-comparison-descent",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact point sections preserve countable products. Whisker the sectionwise normalized Roos isomorphism by the actual pullback tower to define beta.",
+   "uses": [
+    "lem-trf-point-quotient-augmentation-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-transport-strict-quotient-all-complexes",
+  "lem-trf-point-transport-cone-comparison-descent",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-trf-point-quotient-augmentation-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(3)*: the integral point transport is the derived limit of the levelwise maps, via its specified cone map; implementation module PointTransportTowerRealizationConstruction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact evaluation of inverse towers commutes with the two-coordinate Roos mapping cocone, natural quotient augmentation, and finite Frobenius point transport",
+   "results": "Generic limits and cocone comparison equations, tensor quotient maps, and inverse Frobenius on perfect rings; no coefficient-sheaf point construction. Existing project constructions are reused.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only; project-specific interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone",
+   "results": "Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone: mappingCocone, fst, snd, liftCochain and projection equations. These are the generic ingredients, not the specified integral point data.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pointTransportTowerRealization|finitePointIterate|mapHomologicalComplex.*mappingCocone|ofOpSequence",
+   "results": "Mathlib.CategoryTheory.Functor.OfSequence supplies ofOpSequence and NatTrans.ofOpSequence. No specialized realization or finite point iterate; source constructions already exist in Sheaf.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match; reuse the project API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPointTransportTowerRealization",
+  "group": "G6",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), Natural strict point map and two Roos comparison constructions",
+   "via": [
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "module": "Sheaf.Paper.PointTransportTowerRealizationConstruction",
+  "file": "lean/Sheaf/Paper/PointTransportTowerRealizationConstruction.lean",
+  "declaration": "WeilConjectures.realizationTowerMap",
+  "statement": "def realizationTowerMap (hl : l ≠ D.p) :\n    PointTransportCone.reductionTowers D l E ⟶ PointTransportCone.pullbackTowers D l E",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-trf-point-transport-tower-natural-constructions",
+  "worker": "stage3",
+  "summary": "A compiled implementation helper; no new unresolved theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-integral-reduction-tower-well-defined",
+    "why": "Uses the existing generic coefficient, exact-section, or cone API in the explicit construction described in the proof, without replacing a unit step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery b2da vs returned 8fe8 (diff -r: LFTN split removed, C5 fix and item stmt_deps fix taken, Lean otherwise identical); spec vs published statement (earlier defeq check, published blob unchanged cb8c8b5c887); delivered set + 3 direct importers compiled in sandbox; #print axioms; nodes vs Lean"
+ }
+}

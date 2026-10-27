@@ -1,0 +1,172 @@
+{
+ "id": "lem-sf-integral-open-scalar-unit-square",
+ "kind": "statement",
+ "title": "Unit equation for the canonical finite scalar open comparison",
+ "statement": "Fix a prime l, a finite extension E/Q_l, an open immersion j:X→Y, any completed integral derived object K on X, and n≥0. Let q=integralFiniteScalarPull(j,n), the normalized scalar/pullback comparison defined from scalarPull and the published constant-ring presentation. Let t_K be finiteReductionIso(Y,n) inverse at ringedOpen(j)(K), followed by openComparison for reduction modulo exponent n+1, the derived finiteOpenIso(j,n), and finite extension by zero of finiteReductionIso(X,n) at K. Then scalar reduction at X of the actual integral open unit at K, followed by q at ringedOpen(j)(K) and finite pullback of t_K, equals the actual finiteOpenAdj(j,n) unit at scalar reduction of K. No strict-system Operations or RealizationModel is involved.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons of evaluation and adjunction units/counits; open evaluation component of the original node plan, Step 2; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-operations",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-reduction-pull-finite-square",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized derived geometric Hom equation to the identity of the S-pullback. The Hom equation for leftAdjointUniq, after transporting the right adjoint, identifies scalarPull with the scalar mate of the inverse restriction/pullback square. This is the private scalarPull_unit calculation.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-sp-coefficient-mate-comparisons",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons of evaluation and adjunction units/counits; open evaluation component of the original node plan, Step 2; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+   }
+  },
+  {
+   "text": "Apply exact_localization_inverse_mate to the ordinary open adjunctions and the inverse restriction/pullback comparison. Its ordinary inverse mate is exactly openRestrictionMap, already invertible. Its localization is openRestriction, with the actual openDerivedAdjunction units.",
+   "uses": [
+    "lem-sf-exact-localization-inverse-mate",
+    "def-strict-coefficient-ringed-geometric-data",
+    "def-sp-open-coefficient-adjunction-data",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons of evaluation and adjunction units/counits; open evaluation component of the original node plan, Step 2; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+   }
+  },
+  {
+   "text": "Transpose the desired open equation under the scalar adjunction. Naturality of its unit, the scalarPull unit formula, naturality of the restriction/pullback square, and the scalar-mate unit equation reduce it to the open inverse-mate unit equation. Cancel the comparison and its inverse. This proves coefficientOpen_unit for any compatible change, without any flatness condition.",
+   "uses": [
+    "def-sp-coefficient-mate-comparisons",
+    "def-sp-open-coefficient-adjunction-data",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons of evaluation and adjunction units/counits; open evaluation component of the original node plan, Step 2; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+   }
+  },
+  {
+   "text": "The ordinary finiteOpenIso is leftAdjointUniq after transporting finitePullbackIso; its unit equation follows from unit_leftAdjointUniq_hom_app. Localize this equation, cancelling the exact-functor factorization isomorphisms on complexes and using localization natural-transformation extensionality. Finally expand integralFiniteScalarPull and transport coefficientOpen_unit through finiteReductionIso at X and Y and the two derived finite presentation isomorphisms. Their naturality cancels both scalar-presentation factors and gives the statement verbatim.",
+   "uses": [
+    "lem-strict-coefficient-finite-geometric-coordinates",
+    "def-sp-coefficient-mate-comparisons",
+    "lem-sf-integral-reduction-pull-finite-square",
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons of evaluation and adjunction units/counits; open evaluation component of the original node plan, Step 2; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sp-coefficient-mate-comparisons",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-sf-exact-localization-inverse-mate",
+  "def-strict-coefficient-ringed-geometric-data",
+  "def-sp-open-coefficient-adjunction-data",
+  "lem-strict-coefficient-finite-geometric-coordinates",
+  "lem-sf-integral-reduction-pull-finite-square",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The existing open scalar-unit argument, implemented using the normalized derived geometric Hom equation, exact inverse-mate localization, and finite presentation unit transport; Stacks 03DI, 0E8I, 0D6D, 07A7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with inverse image and preserves the unit of extension by zero",
+   "results": "Eight hits, including ModuleCat.extendRestrictScalarsAdj and scalar extension identities for linear equivalences; none states a derived ringed-site coefficient square.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary module adjunction tools only; no normalized geometric evaluation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates: mateEquiv, unit_mateEquiv_symm, mateEquiv_hcomp, mateEquiv_vcomp, and iterated_mateEquiv_conjugateEquiv.",
+   "date": "2026-10-27",
+   "verdict": "Used for assembly; they do not identify the actual coefficient and whole-system model comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*comp|mateEquiv.*whisker",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates contains the generic mate calculus. Local source search finds PurCompactSupport.scalarPull, finiteReductionIso, finitePullbackIso and finiteOpenIso; no finite model evaluation or scalar-open unit theorem. Blueprint searches for finite evaluation pullback and open scalar unit returned no matching node.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing scalarPull construction and transport it through the published finite presentation isomorphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOpenFiniteEvaluation",
+  "date": "2026-10-27",
+  "group": "W5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Preservation of coefficient comparisons for evaluation and adjunction units/counits: Unit equation for the canonical finite scalar open comparison",
+   "via": [
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOpenScalarUnitSquare",
+  "file": "lean/Sheaf/SixFunctors/IntegralOpenScalarUnitSquare.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralOpenScalarUnitSquare",
+  "statement": "theorem integralOpenScalarUnitSquare {X Y : Scheme.{u}} (j : X ⟶ Y)\n    [IsOpenImmersion j] (K : Integral l E X) (n : ℕ) :\n    letI := (sfIntrinsicExtensionByZero_exact j\n      (Padic.coefficientExtensionRing l E (n + 1))).1\n    letI := (sfIntrinsicExtensionByZero_exact j\n      (Padic.coefficientExtensionRing l E (n + 1))).2.1\n    letI := (sfIntrinsicExtensionByZero_exact j\n      (Padic.coefficientExtensionRing l E (n + 1))).2.2\n    (scalarReductionDerivedExtension l E X n).map ((ringedOpenAdj l E j).unit.app K) ≫\n      (integralFiniteScalarPull l E j n).hom.app ((ringedOpen l E j).obj K) ≫\n      (finiteDerivedPullback l E n j).map\n        ((PurCompactSupport.finiteReductionIso l E Y n).inv.app ((ringedOpen l E j).obj K) ≫\n          (PurCompactSupport.openComparison\n            (PurCompactSupport.reduction l E (n + 1) (Nat.le_add_left 1 n)) j).app K ≫\n          (Functor.mapDerivedCategoryNatIso\n            (PurCompactSupport.finiteOpenIso l E n j)).hom.app\n              ((pbcDerivedExtend (PurCompactSupport.projection l E (n + 1)\n                (Nat.le_add_left 1 n) X)).obj K) ≫\n          (sfIntrinsicExtensionByZero j\n            (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.map\n              ((PurCompactSupport.finiteReductionIso l E X n).hom.app K)) =\n    (finiteOpenAdj l E j n).unit.app ((scalarReductionDerivedExtension l E X n).obj K)",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T084509-L-3686393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T103440-L-1080463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,277 @@
+{
+ "id": "lem-per-finite-group-algclosed-scalar-extension",
+ "kind": "statement",
+ "title": "Algebraically closed scalar extension of finite-group representation rings",
+ "statement": "Let $k,L$ be algebraically closed fields of characteristic zero [def-weil-algebraic-closure], let $\\iota:k\\hookrightarrow L$ be a field homomorphism, and let $G$ be finite. A representation is a finite-dimensional vector space with a linear group action. Define $R_k(G)$ and $R_L(G)$ as the abelian groups on representation isomorphism classes modulo $[V\\oplus W]=[V]+[W]$, with multiplication induced by diagonal tensor product. Scalar extension $V\\mapsto L\\otimes_{k,\\iota}V$, with $g(a\\otimes v)=a\\otimes gv$, induces a ring isomorphism\n$$b_{\\iota,G}:R_k(G)\\xrightarrow{\\sim}R_L(G).$$\nScalar extension preserves dimension and induces a bijection on the isomorphism classes of irreducible representations. For every subgroup $H\\leq G$, composition with $\\iota$ induces a bijection $\\operatorname{Hom}(H,k^\\times)\\xrightarrow{\\sim}\\operatorname{Hom}(H,L^\\times)$. It commutes with induction and restriction, in particular\n$$b_{\\iota,G}([\\operatorname{Ind}_H^G k_\\lambda])=[\\operatorname{Ind}_H^G L_{\\iota\\lambda}].$$\nHere $k_\\lambda$ is the line with $h\\cdot a=\\lambda(h)a$; for either coefficient field $A$, $\\operatorname{Ind}_H^G W$ means the quotient of $A[G]\\otimes_A W$ by $[gh]\\otimes w=[g]\\otimes hw$ with action by left translation. Finally, if $A$ is any fixed algebraic closure of $\\mathbf Q$ and $L$ is any algebraically closed characteristic-zero field, an embedding $A\\hookrightarrow L$ extending the prime-field embedding exists.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, context for the representation input only. WANTED: Serre, Linear Representations of Finite Groups, characteristic-zero splitting-field/base-extension discussion (precise location to verify when obtained). Agent-isolated comparison obligation: finite-dimensional split semisimple group algebras, extension of matrix blocks, induced quotient compatibility and embeddings of an algebraic closure of Q. Mathlib candidate IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed is only the algebra structure theorem, not this representation-ring comparison. No Stacks tag found for this finite-group representation-theoretic result."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $V_L=L\\otimes_{k,\\iota}V$ and $B=k[G]$. A representation is a $B$-module via $(\\sum c_g[g])v=\\sum c_g(gv)$; the two actions recover each other on $[g]$. The $[g]$ form a finite basis, so $B$ is finite-dimensional. There is an $L$-algebra isomorphism $L\\otimes_kB\\simeq L[G]$ given by $a\\otimes\\sum c_g[g]\\mapsto\\sum a\\iota(c_g)[g]$, with inverse $\\sum a_g[g]\\mapsto\\sum a_g\\otimes[g]$; multiplication agrees on basis elements. For a $k$-basis $v_1,\\ldots,v_n$ of $V$, the maps $L^n\\to V_L$, $(a_j)\\mapsto\\sum a_j\\otimes v_j$, and $a\\otimes\\sum c_jv_j\\mapsto(a\\iota(c_j))_j$ are inverses by the tensor relations. Thus $\\dim_LV_L=\\dim_kV$, including zero.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, before equation (5): contextual representation input only; the following characteristic-zero comparison argument is agent-written, not asserted by this passage."
+   }
+  },
+  {
+   "text": "Let $S$ be irreducible over $k$. Schur's scalar-endomorphism theorem applied to $B$ and $S$ gives $\\operatorname{End}_B(S)=k$. Its hypotheses hold: $k$ is algebraically closed and $S$ is nonzero, finite-dimensional, and simple as a $B$-module. The Hom scalar-extension theorem, using the algebra identification in Step 1, therefore identifies $\\operatorname{End}_{L[G]}(S_L)$ with $L\\otimes_k k=L$ as an algebra, with scalars acting as scalars. The dimension calculation makes $S_L$ nonzero. Apply finite-group semisimple decomposition over $L$. If the resulting direct sum had at least two nonzero summands, projection onto the first would be an equivariant idempotent different from both zero and the identity. In the field $L$, an idempotent $c$ satisfies $c(c-1)=0$, hence is zero or one. Thus the decomposition has exactly one summand, proving that $S_L$ is irreducible.",
+   "uses": [
+    "lem-sfb-simple-algebra-scalar-endomorphisms",
+    "lem-per-finite-algebra-hom-scalar-extension",
+    "lem-per-finite-group-character-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, before equation (5): contextual representation input only; the following characteristic-zero comparison argument is agent-written, not asserted by this passage."
+   }
+  },
+  {
+   "text": "For simple $k$-representations $S,T$, every nonzero equivariant map $S\\to T$ is an isomorphism: its kernel is a proper stable subspace of $S$, hence zero, and its nonzero stable image is all of $T$. In particular, if $S$ and $T$ are not isomorphic then $\\operatorname{Hom}_{k[G]}(S,T)=0$. The Hom scalar-extension theorem makes $\\operatorname{Hom}_{L[G]}(S_L,T_L)=0$ in that case. Consequently $S_L$ and $T_L$ cannot be isomorphic. This proves injectivity on simple isomorphism classes; all modules and $k[G]$ satisfy the finite-dimensional hypotheses of that theorem.",
+   "uses": [
+    "lem-per-finite-algebra-hom-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, before equation (5): contextual representation input only; the following characteristic-zero comparison argument is agent-written, not asserted by this passage."
+   }
+  },
+  {
+   "text": "Decompose the regular $k$-representation $k[G]$ into finitely many simple representations $S_1,\\ldots,S_r$ using finite-group semisimple decomposition. The tensor relations identify extension of this finite direct sum with $\\bigoplus_j(S_j)_L$, using $a\\otimes(v_j)_j\\mapsto(a\\otimes v_j)_j$ and the sum of the summand inclusions for its inverse. Hence Step 1 gives $L[G]\\simeq\\bigoplus_j(S_j)_L$. For any irreducible $L$-representation $W$, choose $0\\ne w\\in W$. The $L[G]$-linear map $L[G]\\to W$, $\\sum a_g[g]\\mapsto\\sum a_g(gw)$, is nonzero because it sends $[1]$ to $w$. One of its restrictions to the displayed summands is nonzero. That summand is simple by Step 2, so the kernel-and-image argument of Step 3 makes the restriction an isomorphism onto $W$. Thus every irreducible over $L$ occurs as an extension from $k$.",
+   "uses": [
+    "lem-per-finite-group-character-decomposition",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, before equation (5): contextual representation input only; the following characteristic-zero comparison argument is agent-written, not asserted by this passage."
+   }
+  },
+  {
+   "text": "For either field $F=k,L$, semisimple decomposition writes every finite-dimensional representation as a finite sum of simple ones. The multiplicity of a fixed simple $T$ is determined by $\\dim_F\\operatorname{Hom}_{F[G]}(T,V)$: Hom into a finite sum is the sum of the Hom spaces by taking components; a nonzero map between simples is an isomorphism by the kernel-and-image argument; Schur's theorem gives dimension one for $\\operatorname{End}_{F[G]}(T)$. Consequently the direct-sum monoid of representation classes is the free commutative monoid on simple classes, and imposing $[V\\oplus W]=[V]+[W]$ gives the free abelian group on those classes (the multiplicity maps are inverse to the generator map). Steps 2--4 give a bijection of those bases, so scalar extension induces an additive isomorphism $b_{\\iota,G}$.",
+   "uses": [
+    "lem-per-finite-group-character-decomposition",
+    "lem-sfb-simple-algebra-scalar-endomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, before equation (5): contextual representation input only; the following characteristic-zero comparison argument is agent-written, not asserted by this passage."
+   }
+  },
+  {
+   "text": "The tensor relations define inverse equivariant $L$-linear maps\n$$V_L\\otimes_L W_L\\ \\rightleftarrows\\ (V\\otimes_kW)_L,\\qquad (a\\otimes v)\\otimes(b\\otimes w)\\mapsto ab\\otimes(v\\otimes w),\\quad c\\otimes(v\\otimes w)\\mapsto(c\\otimes v)\\otimes(1\\otimes w).$$\nFor example, the $L$-balancing relation moves $b$ to the first factor, giving the first inverse identity; the $k$-balancing relation moves $\\iota(t)$ to the coefficient for $t\\in k$, giving the other relations. Diagonal action agrees on the generators. The unit comparison is $L\\otimes_k k\\to L$, $a\\otimes c\\mapsto a\\iota(c)$, with inverse $a\\mapsto a\\otimes1$. Thus $b_{\\iota,G}$ preserves products and the unit, making the additive isomorphism a ring isomorphism. Restriction to $H\\le G$ has the identical vector space and $H$-action on both sides, so commutes with scalar extension. Dimension preservation was proved in Step 1.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, before equation (5): contextual representation input only; the following characteristic-zero comparison argument is agent-written, not asserted by this passage."
+   }
+  },
+  {
+   "text": "For any homomorphism $\\mu:H\\to L^\\times$ and $h\\in H$, finiteness makes two powers among $1,h,\\ldots,h^{|H|}$ equal, so $h^n=1$ for some $n>0$ and $\\mu(h)^n=1$. Over the algebraically closed field $k$, repeatedly finding a root of a nonconstant polynomial and dividing by the corresponding linear factor writes $X^n-1=\\prod_{j=1}^n(X-c_j)$ with $c_j\\in k$. Applying $\\iota$ and evaluating at $\\mu(h)$ shows that some $\\mu(h)-\\iota(c_j)$ is zero, since a field has no zero divisors. Thus $\\mu(h)$ lies in $\\iota(k^\\times)$. Its unique preimages $\\lambda(h)$ satisfy $\\lambda(hh')=\\lambda(h)\\lambda(h')$ and $\\lambda(1)=1$ by injectivity of $\\iota$. This gives the inverse to composition with $\\iota$ on character homomorphisms. The line comparison $L\\otimes_k k_\\lambda\\simeq L_{\\iota\\lambda}$ is $a\\otimes c\\mapsto a\\iota(c)$: applying $h$ multiplies its value by $\\iota(\\lambda(h))$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, before equation (5): contextual representation input only; the following characteristic-zero comparison argument is agent-written, not asserted by this passage."
+   }
+  },
+  {
+   "text": "Let $W$ be any finite-dimensional $k$-representation of $H$. On the induced quotients defined in the statement, define\n$$L\\otimes_k\\operatorname{Ind}_H^G W\\ \\rightleftarrows\\ \\operatorname{Ind}_H^G(W_L),\\qquad a\\otimes([g]\\otimes w)\\mapsto[g]\\otimes(a\\otimes w),\\quad [g]\\otimes(a\\otimes w)\\mapsto a\\otimes([g]\\otimes w).$$\nBoth formulas respect addition and $k$-balancing; $L$-linearity moves a coefficient on $[g]$ into the $L$-coefficient $a$. The subgroup relation on either side maps to the same equality $[gh]\\otimes(a\\otimes w)=[g]\\otimes(a\\otimes hw)$, because $h$ fixes $a$. Hence the maps descend and are inverse on all generators. Left translation on $[g]$ commutes with both formulas, so they are equivariant. Choosing representatives $t$ for the cosets $tH$ and writing $g=th$ identifies either induced quotient with a finite direct sum of copies of $W$ (or $W_L$); the inverse sends $[th]\\otimes w$ to $hw$ in the $t$-coordinate. Thus these are finite-dimensional representations. Together with Step 7 this proves the displayed induction formula, and proves commutation with induction for arbitrary representations and their classes.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, before equation (5): contextual representation input only; the following characteristic-zero comparison argument is agent-written, not asserted by this passage."
+   }
+  },
+  {
+   "text": "Give $L$ its $\\mathbf Q$-algebra structure by the unique prime-field embedding, which exists since $\\operatorname{char}L=0$. The fixed algebraic closure $A$ is algebraic over $\\mathbf Q$ by definition. Apply the algebraic-extension embedding theorem to $K=\\mathbf Q$, the extension $A/K$, the algebraically closed target $L$, and the prime-field map. It supplies a field homomorphism $A\\to L$ extending that map. A unital homomorphism of fields is injective (its kernel is an ideal other than the whole field), giving the required embedding.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GU, lemma-map-into-algebraic-closure; its algebraically closed target generalization is the cited node and Mathlib IsAlgClosed.lift."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-simple-algebra-scalar-endomorphisms",
+  "lem-per-finite-algebra-hom-scalar-extension",
+  "lem-per-finite-group-character-decomposition",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, before equation (5): contextual representation input only; the following characteristic-zero comparison argument is agent-written, not asserted by this passage. Uses existing DAG Hom-comparison and Schur inputs in place of a second matrix-algebra classification route; Serre reference remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Bb]ase[Cc]hange|extendScalars|[Ss]calar|[Ii]sAlgClosed",
+   "results": "{\"t\": \"2026-10-24T01:37:38Z\", \"tool\": \"grep\", \"query\": \"[Bb]ase[Cc]hange|extendScalars|[Ss]calar|[Ii]sAlgClosed\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Subrepresentation.lean\", \"Mathlib/RepresentationTheory/Subrepresentation.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\"], \"digest\": \"6e57ba1a1cc54a15\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the comparison: split semisimple algebra structure and Schur endomorphism results are partial ingredients, not a ring isomorphism compatible with the displayed induction generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars between algebraically closed characteristic zero fields induces a bijection on irreducible representations of a finite group and an isomorphism on representation rings compatible with induction",
+   "results": "{\"t\": \"2026-10-24T01:37:39Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars between algebraically closed characteristic zero fields induces a bijection on irreducible representations of a finite group and an isomorphism on representation rings compatible with induction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.of_ρ\", \"FDRep.finrank_hom_simple_simple\", \"TannakaDuality.FiniteGroup.ofRightFDRep_hom\", \"Rep.indCoindIso_hom_hom_hom\", \"Rep.indCoindNatIso_hom_app\", \"FDRep.char_iso\", \"Rep.indCoindIso\", \"Rep.unitIso\"], \"digest\": \"9fa174b6b65e7ead\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the comparison: split semisimple algebra structure and Schur endomorphism results are partial ingredients, not a ring isomorphism compatible with the displayed induction generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraically closed subfield k of K and finite group G the split semisimple algebras k G and K G have the same simple modules after base change",
+   "results": "{\"t\": \"2026-10-24T01:39:15Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraically closed subfield k of K and finite group G the split semisimple algebras k G and K G have the same simple modules after base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.finrank_hom_simple_simple\", \"FDRep.simple_iff_end_is_rank_one\", \"FDRep.simple_iff_char_is_norm_one\", \"IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"IsSimpleModule.finrank_eq_one_of_isMulCommutative\"], \"digest\": \"f01d2bf0858d56d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the comparison: split semisimple algebra structure and Schur endomorphism results are partial ingredients, not a ring isomorphism compatible with the displayed induction generators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Irreducible representations of finite groups preserved and descended by extension of algebraically closed fields characteristic zero",
+   "results": "{\"t\": \"2026-10-24T01:37:38Z\", \"tool\": \"leansearch\", \"query\": \"Irreducible representations of finite groups preserved and descended by extension of algebraically closed fields characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IsIrreducible\", \"Representation.IsIrreducible.mk\", \"IsAlgClosure.separable\", \"Rep.instInjective\", \"Representation.is_simple_module_iff_irreducible_ofModule\", \"FDRep.finrank_hom_simple_simple\", \"Representation.irreducible_iff_isSimpleModule_asModule\", \"Representation.isIrreducible_iff\"], \"digest\": \"f995adcbc10b8c26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the comparison: split semisimple algebra structure and Schur endomorphism results are partial ingredients, not a ring isomorphism compatible with the displayed induction generators."
+  },
+  {
+   "tool": "loogle",
+   "query": "FDRep, \"extend\"",
+   "results": "{\"t\": \"2026-10-24T01:37:37Z\", \"tool\": \"loogle\", \"query\": \"FDRep, \\\"extend\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the comparison: split semisimple algebra structure and Schur endomorphism results are partial ingredients, not a ring isomorphism compatible with the displayed induction generators."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|extendScalars|scalarExtension",
+   "results": "{\"t\": \"2026-10-24T02:08:44Z\", \"tool\": \"grep\", \"query\": \"baseChange|extendScalars|scalarExtension\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Schur, endomorphism-rank tests or unrelated field results, but not the full scalar-extension comparison. The existing Hom-comparison and decomposition DAG nodes provide the required ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars between algebraically closed fields gives an isomorphism of finite group representation rings compatible with induction",
+   "results": "{\"t\": \"2026-10-24T02:08:44Z\", \"tool\": \"leansearch\", \"query\": \"Extension of scalars between algebraically closed fields gives an isomorphism of finite group representation rings compatible with induction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosure.equivOfEquiv.congr_simp\", \"Rep.indResAdjunction\", \"AlgEquiv.extendScalarsOfSurjective\", \"Rep.coindToInd.congr_simp\", \"Algebra.Generators.extendScalars\", \"AlgHom.extendScalarsOfSurjective\", \"Representation.ofModule\", \"Algebra.Generators.extendScalars_val\"], \"digest\": \"463e94e002e7ac5f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Schur, endomorphism-rank tests or unrelated field results, but not the full scalar-extension comparison. The existing Hom-comparison and decomposition DAG nodes provide the required ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "FDRep, \"base\"",
+   "results": "{\"t\": \"2026-10-24T02:08:45Z\", \"tool\": \"loogle\", \"query\": \"FDRep, \\\"base\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Schur, endomorphism-rank tests or unrelated field results, but not the full scalar-extension comparison. The existing Hom-comparison and decomposition DAG nodes provide the required ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of finite group representations between algebraically closed fields preserves simple modules and is bijective on simple isomorphism classes",
+   "results": "{\"t\": \"2026-10-24T02:08:47Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension of finite group representations between algebraically closed fields preserves simple modules and is bijective on simple isomorphism classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.finrank_hom_simple_simple\", \"FDRep.simple_iff_end_is_rank_one\", \"IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed\", \"FDRep.simple_iff_char_is_norm_one\", \"FDRep.char_orthonormal\", \"Rep.instInjective\", \"FDRep.instInjectiveOfNeZeroCastCard\", \"CategoryTheory.finrank_hom_simple_simple_eq_one_iff\"], \"digest\": \"928bd87aff063f43\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Schur, endomorphism-rank tests or unrelated field results, but not the full scalar-extension comparison. The existing Hom-comparison and decomposition DAG nodes provide the required ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar|IsAlgClosed|Grothendieck|character",
+   "results": "{\"t\": \"2026-10-24T02:09:11Z\", \"tool\": \"grep\", \"query\": \"scalar|IsAlgClosed|Grothendieck|character\", \"sub\": \"RepresentationTheory/FinGroupCharZero.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"10\", \"29\", \"30\", \"83\", \"118\"], \"digest\": \"492c366bd4617b46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Schur, endomorphism-rank tests or unrelated field results, but not the full scalar-extension comparison. The existing Hom-comparison and decomposition DAG nodes provide the required ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraically closed field extension induces bijection on irreducibles and isomorphism on Grothendieck rings of a finite group",
+   "results": "{\"t\": \"2026-10-24T02:09:13Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraically closed field extension induces bijection on irreducibles and isomorphism on Grothendieck rings of a finite group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.to_isFractionRing\", \"IsGaloisGroup.iff_isFractionRing\", \"galRestrict\", \"Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under\", \"IsGaloisGroup.mulEquivAlgEquiv\", \"IsGaloisGroup.mulEquivCongr\", \"Ideal.exists_map_eq_of_isGalois\", \"Ideal.isPretransitive_of_isGalois\"], \"digest\": \"3297e1ff54469eaf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Schur, endomorphism-rank tests or unrelated field results, but not the full scalar-extension comparison. The existing Hom-comparison and decomposition DAG nodes provide the required ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "simple_iff_end_is_rank_one|finrank_hom_simple_simple|char_iso",
+   "results": "{\"t\": \"2026-10-24T02:10:51Z\", \"tool\": \"grep\", \"query\": \"simple_iff_end_is_rank_one|finrank_hom_simple_simple|char_iso\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/FDRep.lean\", \"Mathlib/RepresentationTheory/FDRep.lean\", \"Mathlib/RepresentationTheory/FDRep.lean\"], \"digest\": \"b0152646e863e983\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Schur, endomorphism-rank tests or unrelated field results, but not the full scalar-extension comparison. The existing Hom-comparison and decomposition DAG nodes provide the required ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-brauer-monomial-induction",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3 (duality input) of lem-per-artin-gabber-affine-curve, through the inherited auxiliary cyclotomic splitting route: Expose X Proposition 1.2, printed p.138, representation lifting before equation (5). This auxiliary representation-theoretic input is not proved by the current blueprint paragraph. Specifically: WANTED: Serre, Linear Representations of Finite Groups, characteristic-zero splitting-field/base-extension discussion (precise location to verify when obtained). Agent-isolated comparison obligation: finite-dimensional split semisimple group algebras, extension of matrix blocks, induced quotient compatibility and embeddings of an algebraic closure of Q. Mathlib candidate IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed is only the algebra structure theorem, not this representation-ring comparison.",
+   "via": [
+    "lem-per-brauer-monomial-induction",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-group-algclosed-scalar-extension",
+  "worker": "stage1",
+  "summary": "Q57 checked the current blueprint, ILO X p.138 and all cited node statements; proves simple-class comparison using existing Hom scalar extension, Schur and semisimple decomposition, then gives explicit tensor and induced-quotient maps, character descent and the Qbar embedding. No new nodes, no claim of an attachment, no changed mathematical statement; adds the tensor-product notion dependency. Retains inherited searches and metadata.",
+  "blueprint": "Auxiliary representation input below lem-per-artin-gabber-affine-curve proof Step 3 through the inherited Gabber/cyclotomic splitting chain; ILO X Proposition 1.2 p.138 before (5). The current ancestor paragraph supplies context rather than this auxiliary proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "why": "Generic algebraic field-extension embedding into an algebraically closed field for the Qbar embedding clause; no node in this unit replaces this field-theory tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-7f684c367",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-7f684c367 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is byte-identical to the base version (unsplit, statement-only; checked against the Q47 e3b54ad4 snapshot). The only stmt_deps addition, def-weil-pbc-module-tensor-product, is justified by the ⊗ in the statement. I read the full statements of all six cited nodes. Schur (a Mathlib leaf: algebraically closed K, nonzero simple finite-dimensional V) is applied with its hypotheses met. The Hom scalar-extension node (unit-own, unsplit, true, no cycle) needs A=k[G] finite-dimensional, which Step 1 gives. It yields End(S_L)=L, and the idempotent argument then makes S_L simple. Step 3 gets injectivity from Hom(S,T)=0 and the Hom node. Step 4 gets surjectivity from the decomposition of L[G] and a nonzero orbit map. Step 5 shows R is free on simple classes through multiplicity = dim Hom, using Schur dimension 1. Step 6 builds the tensor and unit maps with explicit inverses. Step 7 gets the character bijection from roots of X^n-1 in k and injectivity of ι. Step 8 builds the induced-quotient maps with the H-relation, equivariance and coset finiteness. Step 9 is the Q-bar embedding via the IsAlgClosed.lift leaf (Stacks 09GU). The parent's Ind (e_{gh}=λ(h)e_g) agrees with the item's definition at W=k_λ, and the clauses that parent Step 5 uses are all present. ILO X Prop 1.2 p.138 (PDF p.144) is context only; proof_origin=agent and the Serre WANTED entry are correct. There are no new nodes. The search found no duplicate: kzero-criterion is a different statement. No SGA source is cited. The tool_uses entry is a Mathlib leaf and is accepted. Edge cases checked: trivial G, V=0, H=1 or G, ι=id, transcendental L/k."
+ }
+}

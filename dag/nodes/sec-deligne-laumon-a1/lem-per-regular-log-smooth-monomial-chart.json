@@ -17,132 +17,175 @@
  ],
  "proof": [
   {
-   "text": "The canonically logged trait is log regular: at its closed point the nonunit ideal is $(\\pi)$, its quotient is the residue field (dimension zero), and the characteristic is $\\mathbf N$, of rank one; at its generic point the log structure is trivial and the local ring is a field. These give precisely the stratum and dimension conditions. Apply log-smooth preservation of log regularity to $(X,M)\\to S$. The chart hypothesis is exactly the one in the statement, including invertible torsion, so $(X,M)$ is log regular.",
+   "text": "The canonical log trait is log regular. At a geometric point over the closed point, let $A$ be its strict local ring. By [lem-sc-strict-henselization-noetherian] and [lem-sc-strict-henselization-dimension], $A$ is Noetherian of dimension one; [lem-sc-ring-strict-henselization-local-maximal-ideal] identifies its maximal ideal with $(\\pi)$. Thus its characteristic is $\\mathbf N$, its nonunit log ideal is $(\\pi)$, and its stratum ring is the residue field. At a geometric point over the generic point the ordinary local ring is a field, and the same maximal-ideal statement gives zero maximal ideal in its strict henselization. The log structure is trivial there, its characteristic has rank zero, and its strict local ring is a field. These are exactly the stratum regularity and dimension equalities of [def-trf-fs-log-blowup].",
    "uses": [
-    "lem-per-log-smooth-invertible-torsion-log-regular",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-dimension",
+    "lem-sc-ring-strict-henselization-local-maximal-ideal",
     "def-trf-fs-log-blowup"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.2, 1.8, printed pp.69--70; XVI 3.6.1 and the log-regularity invocation in 3.6.5."
+    "place": "Expose XVI Definition 3.6.1, p.252; VI 1.2, p.69. Strict henselization inputs: Stacks Tags 06LJ (lemma-henselization-noetherian), 06LK (lemma-henselization-dimension), 04GP (lemma-strict-henselization), maximal-ideal clause."
    }
   },
   {
-   "text": "Fix $x\\in X$ and the given uniformizer $\\pi$. The hypothesis on $(X,M)\\to S$ is log smoothness in the sense of [def-per-fs-log-smooth-etale]: its charts $\\mathbf N\\to P$ have injective group map, so the kernel is zero, and the torsion of the cokernel is finite of invertible order with smooth comparison. Choose an algebraic closure of $\\kappa(x)$ and hence a geometric point $\\bar x$ over $x$. Apply the uniformizer-chart theorem for log-smooth schemes over a trait to $V=X$, $\\bar v=\\bar x$ and the given $\\pi$. It gives an etale $a:W\\to X$ whose image contains $x$, a fine saturated monoid $P$ with torsion-free $P^{\\rm gp}$, an injection $g:\\mathbf N\\to P$, a chart $P\\to M|_W$ compatible through $g$ with the chart $1\\mapsto\\pi$ of $S$, and an etale comparison $c:W\\to S\\times_{\\operatorname{Spec}\\mathbf Z[\\mathbf N]}\\operatorname{Spec}\\mathbf Z[P]$. Choose $w\\in W$ with $a(w)=x$ and, by the same algebraic-closure statement, a geometric point $\\bar w$ over $w$. Since $a$ is etale it is locally of finite presentation and hence locally of finite type; $W$ is locally Noetherian by the cited finite-type lemma.",
-   "uses": [
-    "lem-per-trait-log-smooth-uniformizer-chart",
-    "def-per-fs-log-smooth-etale",
-    "lem-pc-algebraic-closure-exists-unique",
-    "def-weil-geometric-point",
-    "def-weil-etale-morphism",
-    "pqf-lem-locnoeth-lft"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI 3.6.3 with Q=N (footnote x) and first paragraph of proof of 3.6.5, printed pp.252--253; local Noetherian input: Stacks Tag 01T6, morphisms.tex, lemma-finite-type-noetherian."
-   }
-  },
-  {
-   "text": "Give $W$ the pulled-back log structure. The map $a$ is strict: on a pulled-back chart its monoid map is the identity, its group cokernel is zero, and its comparison is the etale morphism $a$, which is smooth by the cited etale-smoothness lemma. Log-smooth preservation therefore makes $W$ log regular. At every geometric point of $W$, its characteristic equals the characteristic at the corresponding geometric point of $X$, because $a$ is etale and the log structure is the inverse-image sheaf. As $X$ is regular and log regular, the free-characteristic criterion makes these monoids free. The converse direction of the same criterion on $W$ makes every ordinary local ring of $W$ regular. Thus $W$ is regular; subsequent open restrictions remain regular and locally Noetherian.",
+   "text": "Apply [lem-per-log-smooth-invertible-torsion-log-regular] to $(X,M)\\to S$: source and target are locally Noetherian fs, Step 1 proves the target log regular, and the injective chart group map, invertible torsion order, and smooth comparison are exactly the hypotheses assumed for $(X,M)\\to S$. Hence $(X,M)$ is log regular. Fix $x\\in X$ and choose an algebraic closure of $\\kappa(x)$ by [def-weil-algebraic-closure], giving a geometric point $\\bar x$ over $x$ as in [def-weil-geometric-point]. Since $X$ is regular, [lem-trf-free-characteristic-regular-boundary] gives an isomorphism $\\overline M_{\\bar x}\\cong\\mathbf N^r$ for some $r\\geq0$. Only its pointwise equivalence is used, not its boundary conclusion.",
    "uses": [
     "lem-per-log-smooth-invertible-torsion-log-regular",
-    "lem-trf-free-characteristic-regular-boundary",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "def-trf-fs-log-blowup",
-    "def-sbc-smooth-morphisms",
-    "def-weil-regular-scheme"
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
+    "lem-trf-free-characteristic-regular-boundary"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.7--1.8, printed p.70; XVI proof of 3.6.5, regular and log-regular source."
+    "place": "Expose VI 1.7--1.8, p.70; XVI Proposition 3.6.5, third paragraph, p.253."
    }
   },
   {
-   "text": "Let $F\\subset P$ be the elements whose chart images are units at $\\bar w$. It is a face: in a local ring a product is a unit exactly when both factors are units. Choose finite monoid generators of $P$. The generators lying in $F$ generate $F$, since the face property applied to an expression for an element of $F$ forces every summand to lie in $F$. Shrink $W$ to the intersection of the finitely many opens where these images are invertible. Replace $P$ by $P_F=\\{p-f:p\\in P,f\\in F\\}$. The face-sharpening lemma says that it is fs and its unit group is $H=F^{\\rm gp}$; its group completion is still $P^{\\rm gp}$, as both contain $P$ and are subgroups of that group. The chart extends by inverting these units. On monoid rings this is localization at the corresponding monomials, so the new toric model is an open of the old one and $c$ factors through it. The factor is etale by etale cancellation with that open immersion.",
+   "text": "Keep the specified chart $Q=\\mathbf N\\to R$, $1\\mapsto\\pi$. This monoid is fs with torsion-free group completion $\\mathbf Z$: a positive multiple of an integer is nonnegative only if that integer is nonnegative. The assumed compatible injective charts make $(X,M)\\to S$ log smooth in [def-per-fs-log-smooth-etale]. Apply [lem-per-log-smooth-differential-generators] at $\\bar x$ with this fixed base chart. Put $A=\\mathcal O_{X,\\bar x}$, $B=M_{\\bar x}^{\\rm gp}$, $D=A^\\times$, and $C=B/D$. Obtain $t_1,\\ldots,t_d\\in M_{\\bar x}$ and $m\\geq1$ invertible in $A$ such that the $d\\log t_i$ are a basis of the relative logarithmic differential module. The lemma also gives $C$ torsion-free, $D$ $m$-divisible, and finite cokernel killed by $m$ for $L=\\mathbf Z^d\\oplus\\mathbf Z\\to C$. This map sends $(a,q)$ to the class of $\\sum a_it_i+f^\\flat(q)$, writing $B$ additively. No replacement of the trait or its uniformizer is made.",
    "uses": [
-    "lem-trf-fs-face-sharpening",
-    "def-trf-fs-log-blowup",
+    "def-per-fs-log-smooth-etale",
+    "lem-per-log-smooth-differential-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, first half, p.252, with fixed Q=N; Definition 3.6.1."
+   }
+  },
+  {
+   "text": "Let $\\varphi:L\\to B$ send $(a,q)$ to $\\sum a_it_i+f^\\flat(q)$. Apply [lem-per-divisible-unit-lattice-extension] with $n=m$, this finite free group $L$, and subgroup $D=A^\\times$. Step 3 supplies each hypothesis: $D$ is $m$-divisible, $B/D$ is torsion-free, and $(B/D)/\\operatorname{im}(L)$ is finite and killed by $m$. Thus there are a finite free abelian group $G$, an injection $i:L\\to G$, and $h:G\\to B$ extending $\\varphi$, with $G/i(L)$ killed by a power of $m$ and $G\\to C$ surjective. These maps and the differential basis from Step 3 are fixed for the chart construction.",
+   "uses": [
+    "lem-per-divisible-unit-lattice-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Lemma 3.6.4, pp.252--253, used in the proof of Proposition 3.6.3."
+   }
+  },
+  {
+   "text": "Set $P=h^{-1}(M_{\\bar x})\\subseteq G$. Apply [lem-per-kato-lattice-chart-realization] with $Q=\\mathbf N$, the basis from Step 3, and the maps from Step 4. The source and target are locally Noetherian fs and log smooth; $Q^{\\rm gp}$ is torsion-free, $m$ is invertible in $A$, and Step 4 gives the required extension, finite-index condition and characteristic surjectivity. Obtain a pointed etale neighbourhood $(V,\\bar v)\\to(X,\\bar x)$, this fs monoid $P$ with $P^{\\rm gp}=G$, its chart, and an etale comparison $c:V\\to Z=S\\times_{\\operatorname{Spec}\\mathbf Z[\\mathbf N]}\\operatorname{Spec}\\mathbf Z[P]$. The base chart remains $1\\mapsto\\pi$ and the compatible monoid map is $q\\mapsto i(0,q)$. It is injective since $i$ is; $P^{\\rm gp}$ is torsion-free since $G$ is free. The pointed neighbourhood gives a geometric lift of $\\bar x$. The restriction-stalk colimit of [def-weil-pbc-geometric-stalks] and strict-local invariance [lem-trf-ind-etale-strict-local-invariance] identify the log stalks and their unit groups. Hence the characteristic at $\\bar v$ is the $\\mathbf N^r$ from Step 2.",
+   "uses": [
+    "lem-per-kato-lattice-chart-realization",
+    "def-weil-pbc-geometric-stalks",
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, last paragraph, p.252, followed by Proposition 3.6.5, first paragraph, p.253."
+   }
+  },
+  {
+   "text": "Let $F\\subset P$ be the elements whose structural functions are units at $\\bar v$. The localized-chart theorem [lem-trf-chart-face-localization-logification] says that $F$ is a face and, putting $P_F=\\{p-f:p\\in P,f\\in F\\}$ and $H=F^{\\rm gp}$, identifies $P_F/H$ with $\\overline M_{\\bar x}$. By [lem-trf-fs-face-sharpening], $P_F$ is fs with unit group $H$, and the sharpening has finite free group completion. These statements apply to the given chart, including any units it already has; no sharpness of $P$ is assumed.",
+   "uses": [
+    "lem-trf-chart-face-localization-logification",
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.5, first two paragraphs, p.253; VIII 3.1.1--3.1.5, pp.98--99."
+   }
+  },
+  {
+   "text": "Choose finite generators $p_1,\\ldots,p_m$ of $P$. The face $F$ is generated by those $p_j$ which lie in $F$: a sum lying in a face has every summand in the face. Restrict $V$ to the open neighbourhood $V_0$ where these finitely many structural functions are units. The chart extends to $P_F$ there. Algebraically $\\mathbf Z[P_F]$ is $\\mathbf Z[P]$ with the corresponding monomials inverted: a map out of either ring is precisely a monoid map from $P$ taking $F$ to units. Thus the new comparison target $Z_F=S\\times_{\\operatorname{Spec}\\mathbf Z[\\mathbf N]}\\operatorname{Spec}\\mathbf Z[P_F]$ is the open in $Z$ where those monomials are units, and $V_0=c^{-1}(Z_F)$. The inverse-image equality is also the principal-open formula in [lem-weil-pbc-morphism-into-affine-scheme]. Its comparison is etale: its composite with the open immersion to $Z$ is etale by [lem-weil-pbc-etale-composition-cancellation](1),(2), and cancellation (3) applies.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
     "lem-weil-pbc-etale-composition-cancellation"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI proof of 3.6.5, second paragraph and footnote xi, printed p.253; face localization: Expose VIII 3.1.1--3.1.2."
+    "place": "Expose XVI, Proposition 3.6.5, printed p.253."
    }
   },
   {
-   "text": "For the localized chart write $P$ again. Its elements mapping to units at $\\bar w$ are exactly $H=P^\\times$: if $p-f$ maps to a unit, then $p\\in F$, so $p-f\\in F^{\\rm gp}$. The stalk chart identity is $M_{\\bar w}=P\\oplus_H\\mathcal O_{W,\\bar w}^{\\times}$. Quotienting by the units therefore identifies $P/H$ with $\\overline M_{\\bar w}$. By regularity and log regularity of $W$, the free-characteristic criterion gives an isomorphism $P/H\\cong\\mathbf N^r$ for some $r\\geq0$.",
+   "text": "Use [lem-trf-integral-monoid-free-sharpening-splitting] for the integral monoid $P_F$. Its sharpening is $\\mathbf N^r$ by Steps 2 and 6, with group completion $\\mathbf Z^r$. Obtain a monoid isomorphism $P_F\\cong\\mathbf N^r\\oplus H$, restricting to the identity on the unit group. The group $P^{\\rm gp}$ is finite free: its finite monoid generators generate the group, so use [lem-sbc-finitely-generated-abelian-group-structure] and torsion-freeness to eliminate its finite primary factors. The subgroup theorem [lem-weil-subgroup-finite-free-abelian-group-free] therefore gives a finite basis of $H\\subset P^{\\rm gp}$, say $a_1,\\ldots,a_s$.",
    "uses": [
-    "lem-trf-free-characteristic-regular-boundary",
-    "def-trf-fs-log-blowup"
+    "lem-trf-integral-monoid-free-sharpening-splitting",
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-weil-subgroup-finite-free-abelian-group-free"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI proof of 3.6.5, characteristic quotient and free-monoid criterion, printed p.253; VI 1.7."
+    "place": "Expose XVI, Proposition 3.6.5, printed p.253."
    }
   },
   {
-   "text": "Lift the $r$ standard generators of $P/H$ to elements $v_1,\\ldots,v_r\\in P$. Define $\\phi:\\mathbf N^r\\oplus H\\to P$ by $(m,h)\\mapsto\\sum_i m_iv_i+h$. It is surjective: subtracting the lift of the image of $p$ in $P/H$ leaves an element of $H$ in $P^{\\rm gp}$, and that element, being a unit, belongs to $P$. It is injective: equality first gives equality of the $\\mathbf N^r$ coordinates in $P/H$, and cancellation in $P^{\\rm gp}$ then gives equality of the $H$ coordinates. Thus $\\phi$ is an isomorphism. The group $H$ is finitely generated by the generators of $F$ from Step 4 and torsion-free because it is a subgroup of the torsion-free $P^{\\rm gp}$. Use the finite-basis theorem to choose a basis $a_1,\\ldots,a_s$ of $H$. Write $g(1)=(e_1,\\ldots,e_r,\\sum_j f_ja_j)$; all $e_i\\geq0$. Replace $a_j$ by $-a_j$ whenever $f_j<0$, making every $f_j\\geq0$. Since $g$ is injective, $g(1)\\ne0$, so $n=r+s\\geq1$ and the tuple $(e_1,\\ldots,e_r,f_1,\\ldots,f_s)$ is not all zero.",
+   "text": "Write the image of $1\\in\\mathbf N$ in $P_F\\cong\\mathbf N^r\\oplus H$ as $(e_1,\\ldots,e_r,h)$, with $e_i\\geq0$. Write $h=\\sum_j f_ja_j$. Replacing each $a_j$ with $-a_j$ when its coefficient is negative makes all $f_j\\geq0$. The vector $(e_1,\\ldots,e_r,f_1,\\ldots,f_s)$ is nonzero: otherwise the image of $1$ in $P_F$ would equal the image of $0$, contradicting the injection $\\mathbf N\\to P$ and the inclusion $P_F\\subset P^{\\rm gp}$. In particular $n=r+s\\geq1$. This argument also covers $r=0$ (a point over the generic fibre): then a nonzero coordinate in the group factor supplies a positive exponent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.6.5, printed p.253."
+   }
+  },
+  {
+   "text": "Under the chosen monoid isomorphism, $\\mathbf Z[P_F]=\\mathbf Z[t_1,\\ldots,t_r,z_1^{\\pm1},\\ldots,z_s^{\\pm1}]$: monoid basis elements correspond bijectively to ordinary monomials in $t_i$ and Laurent monomials in $z_j$, respecting multiplication. By [lem-weil-pbc-fibre-product-affine-spectra], $Z_F$ has ring $R\\otimes_{\\mathbf Z[q]}\\mathbf Z[P_F]$, where $q\\mapsto\\pi$ in $R$ and $q\\mapsto\\prod_i t_i^{e_i}\\prod_jz_j^{f_j}$ in the other factor. Its universal property is therefore that of $R[t_i,z_j^{\\pm1}]/(\\prod_i t_i^{e_i}\\prod_jz_j^{f_j}-\\pi)$. It is precisely the localization at $\\prod_jz_j$ of the monomial hypersurface ring $R[t_i,z_j]/(\\prod_i t_i^{e_i}\\prod_jz_j^{f_j}-\\pi)$; maps from both sides specify the same coordinates, the same relation, and invertible $z_j$. Thus $Z_F$ is an open subscheme of the required $T$ (if $s=0$ this is the whole scheme). The comparison followed by this open immersion is an etale $S$-map by [lem-weil-pbc-etale-composition-cancellation].",
    "uses": [
-    "lem-trf-fg-torsionfree-group-free",
-    "def-trf-fs-log-blowup"
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI proof of 3.6.5, splitting of the free quotient and choice of unit-group basis, printed p.253; the cancellation argument is written out."
+    "place": "Expose XVI, Proposition 3.6.5, printed p.253."
    }
   },
   {
-   "text": "The chart decomposition identifies its monoid ring with $\\mathbf Z[t_1,\\ldots,t_r,y_1^{\\pm1},\\ldots,y_s^{\\pm1}]$: the monomial indexed by $(m,\\sum_jb_ja_j)$ goes to $t^my^b$, giving inverse maps on these abelian-group bases and preserving products. Under this identification $z^{g(1)}=\\prod_i t_i^{e_i}\\prod_j y_j^{f_j}$. Tensoring over $\\mathbf Z[\\mathbf N]=\\mathbf Z[q]$ with $R$, where $q\\mapsto\\pi$, therefore gives the ring $B=R[t_1,\\ldots,t_r,y_1^{\\pm1},\\ldots,y_s^{\\pm1}]/(\\prod_i t_i^{e_i}\\prod_jy_j^{f_j}-\\pi)$. Explicitly the two maps are induced by the same variables, subject to the relation $z^{g(1)}=\\pi$, and are mutual inverses. Thus the comparison target is $\\operatorname{Spec}B$, the principal open where $y_1\\cdots y_s$ is invertible in the required monomial hypersurface $T$. If $s=0$, this open is all of $T$. All identifications respect $R$, so the composite $b:W\\to\\operatorname{Spec}B\\hookrightarrow T$ is an $S$-morphism.",
+   "text": "It remains to choose the required regular affine neighbourhood. Since $X$ is regular, [def-weil-regular-scheme] supplies a regular Noetherian affine open $X_1$ containing $x$. Apply [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] to $V\\to X$ and the open $V_0\\cap a^{-1}(X_1)$, at $\\bar v$. It gives an affine open $U$ containing its image, and $a:U\\to X$ etale. The restricted $U\\to T$ is etale by [lem-weil-pbc-etale-composition-cancellation]. The affine morphism $U\\to X_1$ is smooth, since it is etale; use the affine-local smooth-ring interpretation explicitly included in [def-sbc-smooth-morphisms]. Hence [lem-weil-pbc-regular-ring-smooth-ascent] applied to their coordinate rings shows that the ring of $U$ is regular (and Noetherian). Thus $U$ is regular affine Noetherian. Its marked point $u$ maps to $x$. Steps 9--10 supply the required nonzero exponent vector and the required etale $S$-map, for the originally specified uniformizer.",
    "uses": [
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI final paragraph of proof of 3.6.5, printed p.253; explicit monoid-ring identification and open torus locus."
-   }
-  },
-  {
-   "text": "The map $b$ is etale, being the composite of the etale comparison with an open immersion. Since $W$ is regular, the definition of a regular scheme supplies an affine open neighbourhood $U$ of the underlying point $w$ of $\\bar w$ with regular Noetherian coordinate ring. Thus $U$ is regular affine Noetherian. Restricting both $a$ and $b$ along this open immersion preserves etaleness by the cited composition lemma. The point $u=w\\in U$ maps to $x$, the exponent tuple is the one in Step 6, and the restricted $b$ is over the original trait $S$. This proves every clause for the chosen $x$ and $\\pi$. If $X$ is empty the pointwise assertion is vacuous.",
-   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
     "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-regular-scheme"
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-regular-ring-smooth-ascent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose XVI conclusion of proof of 3.6.5, printed p.253; affine shrinking from the definition of regular scheme; etale composition and open immersions: Stacks morphisms.tex, lemma-composition-etale and lemma-open-immersion-etale."
+    "place": "Expose XVI Proposition 3.6.5, p.253; affine shrinking: Stacks Tags 01HR, 02GP, 02GN; smooth regular ascent: Tag 07NF (lemma-regular-goes-up)."
    }
   }
  ],
  "proof_deps": [
-  "lem-per-log-smooth-invertible-torsion-log-regular",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
   "def-trf-fs-log-blowup",
-  "lem-per-trait-log-smooth-uniformizer-chart",
-  "def-per-fs-log-smooth-etale",
-  "lem-pc-algebraic-closure-exists-unique",
+  "lem-per-log-smooth-invertible-torsion-log-regular",
+  "def-weil-algebraic-closure",
   "def-weil-geometric-point",
-  "def-weil-etale-morphism",
-  "pqf-lem-locnoeth-lft",
   "lem-trf-free-characteristic-regular-boundary",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-  "def-sbc-smooth-morphisms",
-  "def-weil-regular-scheme",
+  "def-per-fs-log-smooth-etale",
+  "lem-per-log-smooth-differential-generators",
+  "lem-per-divisible-unit-lattice-extension",
+  "lem-per-kato-lattice-chart-realization",
+  "def-weil-pbc-geometric-stalks",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-chart-face-localization-logification",
   "lem-trf-fs-face-sharpening",
+  "lem-weil-pbc-morphism-into-affine-scheme",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-trf-fg-torsionfree-group-free",
-  "def-weil-affine-spectrum"
+  "lem-trf-integral-monoid-free-sharpening-splitting",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-regular-ring-smooth-ascent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose XVI proof of Proposition 3.6.5, printed p.253, with inputs XVI 3.6.3 (trait case) and VI 1.7--1.8; monoid cancellation and ring identification expanded explicitly."
+  "place": "Expose XVI Proposition 3.6.5, p.253, using Proposition 3.6.3, p.252, and VI 1.7--1.8, p.70; affine and strict-local details expanded."
  },
  "mathlib_searches": [
   {
@@ -214,6 +257,41 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"{f : R →+* S} (hf : f.IsStandardSmooth) : ∃ n, ∃ g : MvPolynomial (Fin n) R →+* S, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"[Algebra R S] [Algebra.IsStandardSmoothOfRelativeDimension n R S] : ∃ g : MvPolynomial (Fin n) R →ₐ[R] S, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: hits concern ordinary smooth or regular rings and schemes; none has logarithmic structures, characteristic monoids, or the stated logarithmic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?smooth|monomial.*chart",
+   "results": "{\"t\": \"2026-10-24T05:39:54Z\", \"tool\": \"grep\", \"query\": \"log.?smooth|monomial.*chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ordinary standard smooth presentations and etale definitions do not supply logarithmic monoid charts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale monomial hypersurface charts for regular logarithmically smooth schemes over a trait",
+   "results": "{\"t\": \"2026-10-24T05:39:54Z\", \"tool\": \"leansearch\", \"query\": \"Etale monomial hypersurface charts for regular logarithmically smooth schemes over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"7d2bb64e2dedd8c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ordinary standard smooth presentations and etale definitions do not supply logarithmic monoid charts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogSmooth\"",
+   "results": "{\"t\": \"2026-10-24T05:39:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ordinary standard smooth presentations and etale definitions do not supply logarithmic monoid charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fine saturated logarithmically smooth regular schemes over a discrete valuation ring are etale locally monomial hypersurfaces",
+   "results": "{\"t\": \"2026-10-24T05:39:55Z\", \"tool\": \"leanfinder\", \"query\": \"Fine saturated logarithmically smooth regular schemes over a discrete valuation ring are etale locally monomial hypersurfaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"StandardEtalePair\", \"StandardEtalePresentation\"], \"digest\": \"b2f79fd46adbf0f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ordinary standard smooth presentations and etale definitions do not supply logarithmic monoid charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular log smooth schemes over a trait admit etale local monomial hypersurface charts with a product of variables equal to a uniformizer",
+   "results": "{\"t\": \"2026-10-24T05:39:56Z\", \"tool\": \"leanfinder\", \"query\": \"Regular log smooth schemes over a trait admit etale local monomial hypersurface charts with a product of variables equal to a uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair\", \"StandardEtalePresentation\", \"StandardEtalePair.hasMap_X\"], \"digest\": \"7c738402a47cce72\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ordinary standard smooth presentations and etale definitions do not supply logarithmic monoid charts"
   }
  ],
  "mathlib_match": null,
@@ -243,83 +321,98 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-regular-log-smooth-monomial-chart",
   "worker": "stage1",
-  "summary": "Q51 follows ILO XVI 3.6.5: the existing trait uniformizer-chart node (3.6.3), face localization, regular characteristic freeness (existing VI 1.7 node), splitting and torus-open monomial calculation. One general logarithmic input, log-regularity preservation with invertible torsion (VI 1.8), is a new statement-only node. No statement change, Lean writing or compilation.",
-  "blueprint": "Realizes the inherited proof Step 3 regular finite-torsion local model input of lem-per-artin-gabber-affine-curve, specifically the monomial chart invoked in ILO XVI Theorem 3.6.2 through Proposition 3.6.5. This is not the unit key node.",
+  "summary": "Read ILO XVI 3.6.1--3.6.5 and VI 1.7--1.8. Retained the statement; replaced the excluded uniformizer-chart citation by explicit applications of already-reached differential-generator, lattice-extension and prescribed-chart statements; reused log-regularity, face, splitting and regular-ascent nodes; wrote the localization, sign choice and monomial ring calculation explicitly. No new nodes or Mathlib leaves.",
+  "blueprint": "Historical regular local-model input in proof Step 3 of lem-per-artin-gabber-affine-curve, via the recorded ancestry; current latest blueprint Step 3 still uses Verdier duality. This split follows ILO XVI Proposition 3.6.5 without altering the unit route.",
   "tool_uses": [
    {
-    "node": "lem-trf-fs-face-sharpening",
-    "why": "Generic fs face-localization theorem needed for the chart calculation; the perverse unit has no monoid localization result."
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic local algebra or chart theorem used for the ILO XVI monomial-chart argument; the perverse-curve unit has no replacement statement for this input."
    },
    {
-    "node": "lem-trf-fg-torsionfree-group-free",
-    "why": "Generic finite basis for the unit group of the chart."
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic local algebra or chart theorem used for the ILO XVI monomial-chart argument; the perverse-curve unit has no replacement statement for this input."
    },
    {
-    "node": "lem-pc-algebraic-closure-exists-unique",
-    "why": "Generic existence of an algebraic closure used to choose a geometric point over the specified ordinary point."
-   },
-   {
-    "node": "pqf-lem-locnoeth-lft",
-    "why": "Generic local Noetherian ascent for the etale neighbourhood."
-   },
-   {
-    "node": "lem-weil-pbc-etale-composition-cancellation",
-    "why": "Generic etale composition, open-immersion and cancellation properties for restricting the chart."
+    "node": "lem-sc-ring-strict-henselization-local-maximal-ideal",
+    "why": "Generic local algebra or chart theorem used for the ILO XVI monomial-chart argument; the perverse-curve unit has no replacement statement for this input."
    },
    {
     "node": "lem-trf-free-characteristic-regular-boundary",
-    "why": "Generic criterion ILO VI 1.7 (regular iff free characteristic) for log regular fs schemes, used in both directions on X and W; no node of the perverse unit states it, and it is already in the batch-5 closure."
+    "why": "Generic local algebra or chart theorem used for the ILO XVI monomial-chart argument; the perverse-curve unit has no replacement statement for this input."
    },
    {
-    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "why": "Generic fact that an etale morphism is smooth, so a strict etale map satisfies the chart hypothesis of the preservation lemma."
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic local algebra or chart theorem used for the ILO XVI monomial-chart argument; the perverse-curve unit has no replacement statement for this input."
+   },
+   {
+    "node": "lem-trf-chart-face-localization-logification",
+    "why": "Generic local algebra or chart theorem used for the ILO XVI monomial-chart argument; the perverse-curve unit has no replacement statement for this input."
+   },
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic local algebra or chart theorem used for the ILO XVI monomial-chart argument; the perverse-curve unit has no replacement statement for this input."
+   },
+   {
+    "node": "lem-trf-integral-monoid-free-sharpening-splitting",
+    "why": "Generic local algebra or chart theorem used for the ILO XVI monomial-chart argument; the perverse-curve unit has no replacement statement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic local algebra or chart theorem used for the ILO XVI monomial-chart argument; the perverse-curve unit has no replacement statement for this input."
    }
   ]
  },
  "tool_uses": [
-  "lem-trf-fs-face-sharpening",
-  "lem-trf-fg-torsionfree-group-free",
-  "lem-pc-algebraic-closure-exists-unique",
-  "pqf-lem-locnoeth-lft",
-  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
   "lem-trf-free-characteristic-regular-boundary",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-chart-face-localization-logification",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-integral-monoid-free-sharpening-splitting",
+  "lem-weil-pbc-regular-ring-smooth-ascent"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q51-e5c6b6255",
-  "group": "Q51",
+  "reviewer": "NT-cc-Q138-cbff78c75",
+  "group": "Q138",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-e5c6b6255 (reviewer sub-agent of L); spot-checked: FIX: the mathematics was read in full and the item is a correct split of ILO XVI 3.6.5 (printed p.253), using 3.6.3 and Definition 3.5.11 (pp.250-252) and VI 1.7-1.8 (p.70). The statement is unchanged.\n\nSteps checked:\n- Step 1: the canonical trait is log regular at both points.\n- Step 3: W is strict, hence log regular, and regular through both directions of the VI 1.7 criterion.\n- Step 4: F is a face, and face-sharpening gives P_F fs with units F^gp; the chart extends and c is étale by cancellation.\n- Step 5: P/H is the characteristic monoid and is free.\n- Step 6: P is N^r plus H, a basis exists, sign flips make all exponents nonnegative, and g(1)≠0.\n- Step 7: the correct comparison target is the torus-open principal open of V(S,π,e), not V itself.\n- Step 8: shrinking to a regular affine open.\nEdge cases tested: generic point with r=0, s=0, n=1, and invertible torsion P=N with g(1)=d (this rules out the torsion-free trf preservation lemma).\n\nFaults repaired (three):\n- C5: new lem-per-log-smooth-torsionfree-etale-chart duplicates the landed same-unit lem-per-trait-log-smooth-uniformizer-chart (XVI 3.6.3 with Q=N), which is identical in live. Step 2 now cites it plus def-per-fs-log-smooth-etale (kernel 0) and chooses w in a^{-1}(x) with a geometric point over it. Node dropped.\n- C5: new lem-per-log-regular-free-characteristic is word for word the first sentence of lem-trf-free-characteristic-regular-boundary (VI 1.7). Steps 3 and 5 now cite that node. Node dropped. A per copy is not justified for batch 5: that trf node is already in the base batch-5 closure, so citing it adds 0 nodes.\n- C1: Step 3 used 'étale hence smooth' without a node; it now cites lem-weil-pbc-etale-smooth-zero-dimensional-fibres.\nproof_deps, the summary and tool_uses were updated (two declarations added). No cycle; every step is under 2000 characters.\n\nKept: lem-per-log-smooth-invertible-torsion-log-regular, which is VI 1.8 with invertible torsion. It is a true generalization of lem-trf-log-smooth-log-regular, which requires a torsion-free cokernel, and Step 1 needs it.\n\nBatch 5: def-trf-fs-log-blowup (general definition), lem-trf-fs-face-sharpening (monoid algebra) and lem-trf-fg-torsionfree-group-free (f.g. abelian groups) are generic, not trace-formula or Poincaré-duality steps. All three are already in the base batch-5 closure, and the fixed delivery adds no trf or pod node. Accepted.\n\nAccepted tool_uses: face-sharpening, fg basis, algebraic closure, 01T6, étale composition/cancellation, VI 1.7 node, étale⇒smooth.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-cbff78c75 (reviewer sub-agent of L); spot-checked: I read the mathematics in full against ILO XVI 3.6.1, 3.6.3, 3.6.4 and 3.6.5 (printed pp.252–253) and VI 1.8. The statement, source and stmt_deps are unchanged from side-live and faithful to 3.6.5, and nothing is weakened. There are no new nodes. All eleven steps check out. Step 1: the canonical trait is log regular (DVR, strict henselization dimension 1, M̄=N, 1=0+1; the generic point gives 0=0+0). Step 2: the invertible-torsion log-regularity node (VI 1.8) and the Kato free-characteristic criterion give M̄≅N^r. Steps 3–5: differential generators, lattice extension (3.6.4) and Kato chart realization, with every hypothesis matched; the base chart N→P is injective because i is. Steps 6–7: face localization; V_0=c^{-1}(Z_F) is étale over Z_F by cancellation. Step 8: P_F≅N^r⊕H with H finite free. Step 9: the exponent vector is nonzero because N→P is injective, which covers r=0 and s=0. Step 10: Z_F is the Laurent open of T. Step 11: affine shrink and regular smooth ascent make U regular and Noetherian. Small cases (generic fibre, X=S, s=0, zero exponents, any uniformizer) work. Duplicate search: no existing node states the item. Batch-5: the closure of all cited nodes (2135 nodes) has no nt-assume, no trace-transport, no batch-4 target and no trace or duality theorem; the one pod node is a generic base-change lemma. All 8 flags are generic log, monoid and strict-local inputs, so I accept them. Dropped-route finding: the four cited nodes (invertible-torsion, differential-generators, divisible-unit-lattice, kato-lattice) are pure log geometry from Kato 3.5 and XVI 3.6.3–3.6.4, not any of the forbidden inputs, and this item is not artin-gabber-affine-curve or one of its children. My own BFS on live and side-live shows all four are already reached from nt-target-zeta-rational through the landed lem-sfb-field-log-smooth-gabber-modification → gabber-abelian-stage-toric-chart chain. The previously returned uniformizer-chart node is gone and is unreached. So no excluded node is restored, and the report justifies each citation at Steps 2–5. Maintainer: route-pivot-dropped.txt lists 138 nodes that are reachable, including these four. Please reconcile it, for example by re-admitting them as N0 did. I accept the 9 off-unit tool_uses as generic. Cosmetic only: m is reused in Step 7 and a is used before U is defined in Step 11. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.RegularLogSmoothMonomialChart",
   "declaration": "AlgebraicGeometry.regular_logSmooth_monomial_chart",
-  "declarations": [
-   "AlgebraicGeometry.monomialTraitAlgebra",
-   "AlgebraicGeometry.monomialTraitAlgebraMap",
-   "AlgebraicGeometry.regular_logSmooth_monomial_chart"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/RegularLogSmoothMonomialChart.lean",
-  "statement": "theorem regular_logSmooth_monomial_chart (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] (hdim : ringKrullDim R = 1) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (M : EtaleLogStructure (Spec (.of R))) (hfs : M.IsFineSaturated) (hcanonical : ∃ e : M.monoidSheaf.obj ≅ divisorialLogPresheaf ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι, e.hom ≫ divisorialStructuralMap ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι = M.alpha) (X : FineSaturatedLogScheme.{u}) (hregular : IsRegularScheme X.scheme) [IsNoetherian X.scheme] (x : X.scheme) (f : EtaleLogHom X ⟨Spec (.of R), inferInstance, M, hfs⟩) (hcharts : ∀ y : X.scheme, ∃ c : FSLogChart f, y ∈ Set.range c.V.hom ∧ ∃ e : c.P ≃* Multiplicative (ULift.{u} ℕ), (∃ π₀ : R, IsLocalRing.maximalIdeal R = Ideal.span {π₀} ∧ ∀ p : c.P, M.alpha.app (op c.W) (c.chartY p) = c.W.hom.appTop ((Scheme.ΓSpecIso (.of R)).inv π₀) ^ (e p).toAdd.down) ∧ Function.Injective c.groupMap ∧ Finite (CommGroup.torsion c.cokernel) ∧ (∀ v : c.V.left, IsUnit (Nat.card (CommGroup.torsion c.cokernel) : c.V.left.presheaf.stalk v)) ∧ Smooth c.comparison) : ∃ (U : Scheme.{u}) (a : U ⟶ X.scheme) (v : U), IsAffine U ∧ IsRegularScheme U ∧ IsNoetherian U ∧ Etale a ∧ a v = x ∧ ∃ (n : ℕ) (e : Fin n → ℕ), 0 < n ∧ (∃ i, e i ≠ 0) ∧ ∃ b : U ⟶ Spec (.of (monomialTraitAlgebra R π n e)), Etale b ∧ b ≫ Spec.map (CommRingCat.ofHom (monomialTraitAlgebraMap R π n e)) = a ≫ f.base",
+  "statement": "theorem regular_logSmooth_monomial_chart\n    (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R]\n    (hdim : ringKrullDim R = 1) (π : R)\n    (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π})\n    (M : EtaleLogStructure (Spec (.of R))) (hfs : M.IsFineSaturated)\n    (hcanonical : ∃ e : M.monoidSheaf.obj ≅ divisorialLogPresheaf\n        ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι,\n      e.hom ≫ divisorialStructuralMap\n        ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι = M.alpha)\n    (X : FineSaturatedLogScheme.{u}) (hregular : IsRegularScheme X.scheme)\n    [IsNoetherian X.scheme] (x : X.scheme)\n    (f : EtaleLogHom X ⟨Spec (.of R), inferInstance, M, hfs⟩)\n    (hcharts : ∀ y : X.scheme, ∃ c : FSLogChart f,\n      y ∈ Set.range c.V.hom ∧\n      ∃ e : c.P ≃* Multiplicative (ULift.{u} ℕ),\n        (∃ π₀ : R, IsLocalRing.maximalIdeal R = Ideal.span {π₀} ∧\n          ∀ p : c.P, M.alpha.app (op c.W) (c.chartY p) =\n            c.W.hom.appTop ((Scheme.ΓSpecIso (.of R)).inv π₀) ^ (e p).toAdd.down) ∧\n        Function.Injective c.groupMap ∧ Finite (CommGroup.torsion c.cokernel) ∧\n        (∀ v : c.V.left,\n          IsUnit (Nat.card (CommGroup.torsion c.cokernel) : c.V.left.presheaf.stalk v)) ∧\n        Smooth c.comparison) :\n    ∃ (U : Scheme.{u}) (a : U ⟶ X.scheme) (v : U),\n      IsAffine U ∧ IsRegularScheme U ∧ IsNoetherian U ∧ Etale a ∧ a v = x ∧\n      ∃ (n : ℕ) (e : Fin n → ℕ), 0 < n ∧ (∃ i, e i ≠ 0) ∧\n        ∃ b : U ⟶ Spec (.of (monomialTraitAlgebra R π n e)), Etale b ∧\n          b ≫ Spec.map (CommRingCat.ofHom (monomialTraitAlgebraMap R π n e)) =\n            a ≫ f.base",
   "branch": "newtargets-dag",
-  "by": "Q101",
-  "date": "2026-10-18",
-  "existing": false,
-  "fixed_by": "NT-stage2-cc-3405735d4"
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing theorem in the unchanged shared module, independently matched to the current stage-1 statement. The maintenance N0 decision preserved this source while withdrawing the old theorem attachment and proof split; this record reattaches only its statement, whose proof remains sorry. The monomial ring and coefficient map remain owned by def-per-monomial-trait-model."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3405735d4",
-  "group": "Q101",
-  "result": "fix",
-  "note": "H3: hcharts pinned every base chart to 1↦π for the conclusion's own uniformizer π, while the node's log-smooth hypothesis does not depend on π (proof Step 2 needs XVI 3.6.3 to obtain π-charts). Fixed: base chart is 1↦π₀ for some uniformizer π₀ chosen per chart; docstring updated; lean.statement updated verbatim in fixes/lem-per-regular-log-smooth-monomial-chart.lean-record.json; fixes/RegularLogSmoothMonomialChart.lean compiles clean (nt_compile --json, exit 0, 6.3 s; delivered file also clean, 3.2 s). Everything else checked against the node and the dependency declarations: trait (domain, local, Noetherian, dim 1, maximal ideal = span π), canonical log structure via iso with divisorialLogPresheaf of the generic open D(π) commuting with the structural maps, FSLogChart with base monoid ≅ N, injective groupMap, finite cokernel torsion invertible in every stalk, smooth comparison; conclusion: U affine, regular, Noetherian, a étale with a v = x, n>0, exponents not all zero, literal quotient R[X]/(∏X^e − Cπ), b étale and over S. Edge cases (empty X, generic point r=0, s=0, invertible torsion, universes all u) OK. No duplicate notion; helpers are real data; no hollow defs; sorry only. Advisory: the report's second-reading section is the worker's self-check."
- },
- "lean_audit": {}
+  "reviewer": "NT-stage2-cc-b8fc4ea09",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Existing:true reattachment of AlgebraicGeometry.regular_logSmooth_monomial_chart (RegularLogSmoothMonomialChart.lean l.99-127, by sorry) after N0 withdrew the old record (live/side-live lean null, so not a rebind). Only the lean field differs from side-live; the module is byte-identical in live and side-live; lean.statement is verbatim. Clause check: trait (domain, local, Noetherian, dim 1), arbitrary π with hπ bound before the conclusion; hcanonical = iso with divisorialLogPresheaf D(π) pinned by α; regular Noetherian X; FSLogChart with base P≅ℕ, fs source Q, uniformizer chart π₀, injective groupMap, finite invertible cokernel torsion, Smooth comparison (over étale W, equivalent); conclusion U affine regular Noetherian, a étale, a v = x, n>0, e≠0, b étale over S into the literal monomialTraitAlgebra. Edge cases (empty X, generic fibre, X=S, any uniformizer, universes) OK. No hollow def, nothing proved, docstrings carry source and blueprint id, searches recorded. Notes: stmt_deps omit def-trf-log-regular-pair and def-per-monomial-trait-model (landed definition owners; adding them is optional and not fixable at S2); the N0-protected module keeps the old 8-step docstring and imports the dropped TraitLogSmoothUniformizerChart, which stage 3 must fix. No compile: no file changed."
+ }
 }

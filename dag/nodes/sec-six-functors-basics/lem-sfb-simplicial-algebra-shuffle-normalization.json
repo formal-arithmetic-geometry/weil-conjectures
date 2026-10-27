@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-simplicial-algebra-shuffle-normalization",
+ "kind": "statement",
+ "title": "Shuffle normalization of simplicial commutative algebras",
+ "statement": "Let $D$ be a commutative ring and $P_\\bullet$ a simplicial commutative $D$-algebra, with faces $d_i$ and degeneracies $s_i$ [def-weil-pbc-simplicial-object]. Write $C(P)^{-n}=P_n$ for $n\\geq0$, with differential $\\sum_i(-1)^id_i$ for $n>0$, zero differential out of degree zero, and zero positive terms. Put $J_n=\\sum_{i=0}^{n-1}\\operatorname{im}s_i$ as a $D$-submodule of $P_n$, with $J_0=0$. The quotient complex $N(P)^{-n}=P_n/J_n$ has multiplication\n$$[x]\\mathbin{\\mathrm{sh}}[y]=\\sum_{(\\mu,\\nu)}\\operatorname{sgn}(\\mu,\\nu)[(s_{\\nu_q}\\cdots s_{\\nu_1}x)(s_{\\mu_p}\\cdots s_{\\mu_1}y)],\\qquad x\\in P_p,\\ y\\in P_q,$$\nwhere $\\mu_1<\\cdots<\\mu_p$ and $\\nu_1<\\cdots<\\nu_q$ partition $\\{0,\\ldots,p+q-1\\}$ and the sign is that of the permutation listed as $(\\mu_1,\\ldots,\\mu_p,\\nu_1,\\ldots,\\nu_q)$. Empty degeneracy strings are identities. These formulas are well-defined and make $N(P)$ an associative unital graded-commutative dg $D$-algebra [def-sfb-dg-derived-category], with unit $[1]\\in P_0/J_0$ and $d(xy)=d(x)y+(-1)^p x\\,d(y)$ for $|x|=-p$. This construction is functorial in simplicial $D$-algebra maps.\n\nThe quotient $C(P)\\to N(P)$ is a natural quasi-isomorphism, and each $P_n/J_n$ is a direct summand of the $D$-module $P_n$. Consequently, if every $P_n$ is flat over $D$, so is every term of $N(P)$. If $P_\\bullet\\to E$ is an augmentation to a constant commutative $D$-algebra and $C(P)\\to E[0]$ is a quasi-isomorphism, its induced augmentation $N(P)\\to E[0]$ is a quasi-isomorphism of dg $D$-algebras. For a constant simplicial algebra $D$, $N(D)$ is canonically $D[0]$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tags 017V (lemma-splitting-abelian-category), 019A (lemma-decompose-associated-complexes), 019C (lemma-quasi-isomorphism), for additive normalization and its quotient model. The displayed shuffle multiplication and its dg algebra laws are an agent-stated additional prerequisite, not asserted by those tags; WANTED Weibel, An Introduction to Homological Algebra, Section 8.5 (Eilenberg-Zilber)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-sfb-dg-derived-category",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Work first with homological degree $n$, reindexed as cohomological degree $-n$ at the end. Functoriality in [def-weil-pbc-simplicial-object] gives the face and degeneracy identities by composing the corresponding monotone maps. In the double alternating sum for $\\partial^2$, the two deletions of positions $i<j$ have coefficients $(-1)^{i+j-1}$ and $(-1)^{i+j}$, so cancel. For $s_i z\\in J_n$, the terms $d_i s_i z=d_{i+1}s_i z=z$ cancel in $\\partial s_i z$; the terms with $k<i$ are $s_{i-1}d_k z$ and those with $k>i+1$ are $s_i d_{k-1}z$. All lie in $J_{n-1}$. For $n=1$ only the cancelling terms remain. Thus $J$ is a subcomplex and $q:C(P)\\to C(P)/J$ is a chain map. Maps of simplicial algebras preserve $J$ and commute with $q$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 017V (lemma-splitting-abelian-category), 019A (lemma-decompose-associated-complexes), remark-degenerate-subcomplex and 019C (lemma-quasi-isomorphism). Positive-face convention checked directly below."
+   }
+  },
+  {
+   "text": "Put $K_0=P_0$ and $K_n=\\bigcap_{i=1}^n\\ker d_i$. On $P_n$ write $E_j=1-s_{j-1}d_j$, $1\\leq j\\leq n$, and $\\rho_n=E_1E_2\\cdots E_n$ (rightmost applied first), with $\\rho_0=1$. If $d_k z=0$ for $k>j$, then $d_jE_jz=0$, since $d_js_{j-1}=1$, and for $k>j$ one has $d_kE_jz=d_kz-s_{j-1}d_{k-1}d_jz=d_kz-s_{j-1}d_jd_kz=0$. Descending induction on $j$ therefore gives $\\rho_n(P_n)\\subset K_n$. Each $E_j$ fixes $K_n$ and changes an element by a degeneracy, so $\\rho_n|_{K_n}=1$ and $z-\\rho_nz\\in J_n$. These conclusions include $n=0$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 017V (lemma-splitting-abelian-category), 019A (lemma-decompose-associated-complexes), remark-degenerate-subcomplex and 019C (lemma-quasi-isomorphism). Positive-face convention checked directly below."
+   }
+  },
+  {
+   "text": "For $0\\leq i<n$ and $j>i+1$, the simplicial identities give $E_j^{(n)}s_i=s_i E_{j-1}^{(n-1)}$: expand both sides and use $d_js_i=s_i d_{j-1}$ and $s_{j-1}s_i=s_i s_{j-2}$. Commute $s_i$ left across $E_n,E_{n-1},\\ldots,E_{i+2}$ in $\\rho_ns_i$. The next factor is $E_{i+1}s_i=s_i-s_i d_{i+1}s_i=0$. Thus $\\rho_nJ_n=0$. Together with the preceding step, this proves $P_n=K_n\\oplus J_n$: every $z$ is $\\rho_nz+(z-\\rho_nz)$, and an element in the intersection is both fixed and killed by $\\rho_n$. In particular $a_n=q_n|_{K_n}:K_n\\to P_n/J_n$ is an isomorphism with inverse $[z]\\mapsto\\rho_nz$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 017V (lemma-splitting-abelian-category), 019A (lemma-decompose-associated-complexes), remark-degenerate-subcomplex and 019C (lemma-quasi-isomorphism). Positive-face convention checked directly below."
+   }
+  },
+  {
+   "text": "For $z\\in K_n$, the alternating differential is $d_0z$, and $d_i d_0z=d_0d_{i+1}z=0$ for $1\\leq i<n$. Thus $K$ is the positive-face Moore complex, and its inclusion $i:K\\to C(P)$ is a chain map. Hence $a=qi$ is a chain map and, by the degreewise inverses just constructed, an isomorphism of complexes $K\\cong N(P)$. In particular $q$ is a split surjection in each degree with section $i_na_n^{-1}$, satisfying $q_ni_na_n^{-1}=1$ and $i_na_n^{-1}q_n=\\rho_n$. Every operator defining $\\rho$ commutes with simplicial module maps, so these splittings and the quotient maps are natural.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 017V (lemma-splitting-abelian-category), 019A (lemma-decompose-associated-complexes), remark-degenerate-subcomplex and 019C (lemma-quasi-isomorphism). Positive-face convention checked directly below."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-normalized-alternating-homotopy-equivalence] in the abelian category of $D$-modules, to the underlying simplicial module of $P$. Its $N(X)$ is exactly $K$ (kernels of the positive faces, differential $d_0$), so the map $i$ above is a chain homotopy equivalence. Reindex degree $n$ as $-n$ and extend by zero; its inverse and homotopies retain their equations. By [lem-weil-pbc-homotopic-maps-equal-cohomology], the induced maps of $i$ and its homotopy inverse are mutually inverse on cohomology. Since $a=qi$ is an isomorphism, $H(q)=H(a)H(i)^{-1}$ is an isomorphism in every degree. This proves the asserted natural quasi-isomorphism $C(P)\\to N(P)$.",
+   "uses": [
+    "lem-cbc-normalized-alternating-homotopy-equivalence",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 017V (lemma-splitting-abelian-category), 019A (lemma-decompose-associated-complexes), remark-degenerate-subcomplex and 019C (lemma-quasi-isomorphism). Positive-face convention checked directly below."
+   }
+  },
+  {
+   "text": "For a shuffle partition $(\\mu,\\nu)$ of $\\{0,\\ldots,p+q-1\\}$, set $A_k=\\#(\\mu\\cap[0,k))$, $B_k=\\#(\\nu\\cap[0,k))$. These define monotone surjections $A:[p+q]\\to[p]$, $B:[p+q]\\to[q]$. The repeats of $A$ are precisely $\\nu$, so $P(A)x=s_{\\nu_q}\\cdots s_{\\nu_1}x$; likewise $P(B)y=s_{\\mu_p}\\cdots s_{\\mu_1}y$. Define $b(x,y)=\\sum\\operatorname{sgn}(\\mu,\\nu)P(A)x\\,P(B)y$ in $P_{p+q}$. Every operator is $D$-linear and multiplication in each $P_n$ is $D$-bilinear, so $b$ is bilinear. This is exactly the representative formula in the statement, including empty blocks.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), inherited coefficient-model prerequisite. Agent-written shuffle calculation; the blueprint gives the application only. WANTED Weibel, An Introduction to Homological Algebra, section 8.5."
+   }
+  },
+  {
+   "text": "To check its differential, apply [lem-sfb-simplex-lattice-shuffle-boundary] with parameter simplices $[p],[q]$, and the identity strings $u=(0,\\ldots,p)$, $v=(0,\\ldots,q)$. For each $m$, evaluate a basis string of $V(p,q)_m$, equivalently monotone maps $\\alpha:[m]\\to[p]$, $\\beta:[m]\\to[q]$, at $P(\\alpha)x\\,P(\\beta)y\\in P_m$, and extend $\\mathbf Z$-linearly. Deleting vertex $k$ before evaluation is the same as applying $d_k$ afterwards, because $d_k$ is a ring map. The evaluated shuffle is $b(x,y)$. An input face deleting $i$ evaluates to $d_ix$ or $d_iy$, since $P(\\delta_i\\alpha)=P(\\alpha)d_i$. The cited boundary identity therefore gives $\\partial b(x,y)=b(\\partial x,y)+(-1)^p b(x,\\partial y)$, omitting a term when its input degree is zero. This argument uses integral coefficients, so imposes no restriction on $D$.",
+   "uses": [
+    "lem-sfb-simplex-lattice-shuffle-boundary",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), inherited coefficient-model prerequisite. Agent-written shuffle calculation; the blueprint gives the application only. WANTED Weibel, An Introduction to Homological Algebra, section 8.5."
+   }
+  },
+  {
+   "text": "If $x=s_i z$, each shuffle summand is degenerate separately. Indeed let $k$ be the edge of its lattice path on which $A$ increases from $i$ to $i+1$. The maps $\\sigma_iA$ and $B$ both repeat at the adjacent vertices $k,k+1$. Write them as $\\alpha'\\sigma_k$ and $\\beta'\\sigma_k$. The summand is then $s_k(P(\\alpha')z)\\,s_k(P(\\beta')y)=s_k(P(\\alpha')z\\,P(\\beta')y)$, in $J_{p+q}$. If $y=s_i z$, use the edge on which $B$ crosses $i$ instead. Bilinearity now gives $b(J_p,P_q)+b(P_p,J_q)\\subset J_{p+q}$. Thus $b$ descends to the displayed product on $N(P)$, and the preceding boundary formula descends to its Leibniz rule. No claim that $J_n$ is an ideal for the ordinary product on $P_n$ is used.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), inherited coefficient-model prerequisite. Agent-written shuffle calculation; the blueprint gives the application only. WANTED Weibel, An Introduction to Homological Algebra, section 8.5."
+   }
+  },
+  {
+   "text": "For $x\\in P_p,y\\in P_q,z\\in P_r$, expand $b(b(x,y),z)$. Its indices are an outer word in the letters $AB,C$ and an inner word in $A,B$. Replace, in order, the outer $AB$ letters by the inner letters. This bijects the indices with all words containing $p$ letters $A$, $q$ letters $B$, $r$ letters $C$; the inverse deletes all $C$ letters for the inner word and merges $A,B$ for the outer word. Expanding $b(x,b(y,z))$ gives the same words by deleting $A$ and merging $B,C$. In either expansion the three simplicial operators are the prefix counts of $A,B,C$, because composing prefix-count maps counts exactly those letters. Multiplicativity of simplicial operators and associativity in $P_{p+q+r}$ give identical terms. Both coefficient products equal $(-1)^I$, where $I$ counts inverted pairs for the order $A<B<C$: the inner and outer counts partition these pairs. Hence the expansions agree, also when any count is zero. The quotient product is associative.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), inherited coefficient-model prerequisite. Agent-written shuffle calculation; the blueprint gives the application only. WANTED Weibel, An Introduction to Homological Algebra, section 8.5."
+   }
+  },
+  {
+   "text": "Swapping the blocks of a $(p,q)$ shuffle bijects it with a $(q,p)$ shuffle. The signs differ by $(-1)^{pq}$, since the block interchange moves $p$ entries past $q$ entries. The two term factors interchange, and they commute in $P_{p+q}$. Therefore $b(y,x)=(-1)^{pq}b(x,y)$, giving the required graded commutativity since $(-p)(-q)$ has parity $pq$. For $(0,q)$ there is one shuffle, all degeneracies applied to $1\\in P_0$ still equal $1$, and its product with $y$ is $y$; the $(p,0)$ case is identical. Thus $[1]$ is a two-sided unit, and its differential is zero. Elements of $D$ enter centrally by $D\\to P_0$; the same one-shuffle computation agrees with scalar multiplication.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), inherited coefficient-model prerequisite. Agent-written shuffle calculation; the blueprint gives the application only. WANTED Weibel, An Introduction to Homological Algebra, section 8.5."
+   }
+  },
+  {
+   "text": "A simplicial $D$-algebra map $f:P\\to P'$ commutes term by term with $P(A),P(B)$ and with multiplication, so $f(b(x,y))=b(fx,fy)$. It preserves the degree-zero unit and is already a map on the quotient complexes by step 1. Thus it induces a dg $D$-algebra map. The associative multiplication and closed unit from steps 9–10, together with the Leibniz identity of steps 7–8, give precisely the dg-algebra structure of [def-sfb-dg-derived-category] on the underlying integer cochain complex, now with its specified central $D$-action. The construction respects identities and composites because its underlying quotient maps do.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-sfb-dg-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), inherited coefficient-model prerequisite. Agent-written shuffle calculation; the blueprint gives the application only. WANTED Weibel, An Introduction to Homological Algebra, section 8.5."
+   }
+  },
+  {
+   "text": "For each $n$, take $M=P_n$, $N=P_n/J_n$, $r=q_n$ and $i=i_na_n^{-1}$ in [lem-weil-pbc-flat-module-retract]. The relation $ri=1$ was proved in steps 3–4 and both maps are $D$-linear. Consequently if $P_n$ is flat over $D$, so is $P_n/J_n$. The zero positive cochain terms are flat as well: tensoring with zero sends every injection to the injection $0\\to0$.",
+   "uses": [
+    "lem-weil-pbc-flat-module-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 017V (lemma-splitting-abelian-category), 019A (lemma-decompose-associated-complexes), remark-degenerate-subcomplex and 019C (lemma-quasi-isomorphism). Positive-face convention checked directly below."
+   }
+  },
+  {
+   "text": "In a constant simplicial algebra $E$, every degeneracy is the identity, hence $J_n=E$ for $n>0$ and $J_0=0$. Thus $N(E)=E[0]$, with its ordinary product by the $(0,0)$ formula. Functoriality therefore sends an augmentation $P\\to E$ to a dg-algebra map $N(P)\\to E[0]$. The original chain augmentation $\\epsilon:C(P)\\to E[0]$ factors as $\\bar\\epsilon q$ (in positive degrees its target is zero, in degree zero $q_0=1$). If $\\epsilon$ is a quasi-isomorphism, then $H(\\bar\\epsilon)=H(\\epsilon)H(q)^{-1}$ is an isomorphism in every degree, proving the final augmentation assertion. Taking $E=D$ also gives the stated canonical identification $N(D)=D[0]$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), inherited coefficient-model prerequisite. Agent-written shuffle calculation; the blueprint gives the application only. WANTED Weibel, An Introduction to Homological Algebra, section 8.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "lem-cbc-normalized-alternating-homotopy-equivalence",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-sfb-simplex-lattice-shuffle-boundary",
+  "def-sfb-dg-derived-category",
+  "lem-weil-pbc-flat-module-retract",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Additive normalization: Tags 017V, 019A, 019C, checked with positive-face kernels. Shuffle part: agent-written evaluation of the existing lattice-path boundary identity and explicit finite-word calculations; Weibel section 8.5 unavailable locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DoldKan|normalizedMoore|normalized.*complex|shuffle",
+   "results": "{\"t\": \"2026-10-24T03:09:25Z\", \"tool\": \"grep\", \"query\": \"DoldKan|normalizedMoore|normalized.*complex|shuffle\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\"], \"digest\": \"6d0ca1b142c9c86c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: Mathlib has additive Moore normalization, Dold-Kan equivalence, and its split inclusion, but none of the hits equips the normalization of a simplicial commutative algebra with the displayed shuffle dg multiplication. Read MooreComplex.lean:64-83 and DoldKan/Normalized.lean:64-125."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shuffle multiplication on the normalized chain complex of a simplicial commutative algebra",
+   "results": "{\"t\": \"2026-10-24T03:09:25Z\", \"tool\": \"leansearch\", \"query\": \"Shuffle multiplication on the normalized chain complex of a simplicial commutative algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.N₁\", \"CategoryTheory.Idempotents.DoldKan.N\", \"AlgebraicTopology.NormalizedMooreComplex.obj\", \"CategoryTheory.Abelian.DoldKan.N\", \"AlgebraicTopology.normalizedMooreComplex\", \"AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex_assoc\", \"AlgebraicTopology.normalizedMooreComplex_obj\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_comp_inclusionOfMooreComplexMap_assoc\"], \"digest\": \"4680dcbec986eb39\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: Mathlib has additive Moore normalization, Dold-Kan equivalence, and its split inclusion, but none of the hits equips the normalization of a simplicial commutative algebra with the displayed shuffle dg multiplication. Read MooreComplex.lean:64-83 and DoldKan/Normalized.lean:64-125."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a simplicial commutative algebra has the shuffle product and preserves flat terms and augmentation quasi-isomorphisms",
+   "results": "{\"t\": \"2026-10-24T03:09:26Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of a simplicial commutative algebra has the shuffle product and preserves flat terms and augmentation quasi-isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.NormalizedMooreComplex.obj\", \"CategoryTheory.Abelian.DoldKan.N\", \"AlgebraicTopology.normalizedMooreComplex\", \"AlgebraicTopology.normalizedMooreComplex_obj\", \"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex\", \"AlgebraicTopology.DoldKan.QInfty\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex\"], \"digest\": \"277507ae59a3fccc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: Mathlib has additive Moore normalization, Dold-Kan equivalence, and its split inclusion, but none of the hits equips the normalization of a simplicial commutative algebra with the displayed shuffle dg multiplication. Read MooreComplex.lean:64-83 and DoldKan/Normalized.lean:64-125."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicTopology.DoldKan\"",
+   "results": "{\"t\": \"2026-10-24T03:09:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicTopology.DoldKan\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Compatibility.equivalence₀\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₀_functor\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₀_inverse\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₁\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₂\", \"AlgebraicTopology.DoldKan.Compatibility.τ₀\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₁_functor\", \"AlgebraicTopology.DoldKan.Compatibility.equivalenceCounitIso\"], \"digest\": \"67947a1eaddd47c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: Mathlib has additive Moore normalization, Dold-Kan equivalence, and its split inclusion, but none of the hits equips the normalization of a simplicial commutative algebra with the displayed shuffle dg multiplication. Read MooreComplex.lean:64-83 and DoldKan/Normalized.lean:64-125."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized Moore complex of a simplicial module is a direct summand of its unnormalized chain complex",
+   "results": "{\"t\": \"2026-10-24T03:09:30Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized Moore complex of a simplicial module is a direct summand of its unnormalized chain complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"AlgebraicTopology.DoldKan.splitMonoInclusionOfMooreComplexMap\", \"AlgebraicTopology.inclusionOfMooreComplexMap\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex\", \"AlgebraicTopology.inclusionOfMooreComplex\", \"AlgebraicTopology.NormalizedMooreComplex.obj_X\", \"AlgebraicTopology.normalizedMooreComplex\"], \"digest\": \"328cabb35b13b80b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole statement: Mathlib has additive Moore normalization, Dold-Kan equivalence, and its split inclusion, but none of the hits equips the normalization of a simplicial commutative algebra with the displayed shuffle dg multiplication. Read MooreComplex.lean:64-83 and DoldKan/Normalized.lean:64-125."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle|splitMonoInclusionOfMooreComplexMap|normalizedMooreComplex",
+   "results": "{\"t\": \"2026-10-24T03:37:01Z\", \"tool\": \"grep\", \"query\": \"shuffle|splitMonoInclusionOfMooreComplexMap|normalizedMooreComplex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\"], \"digest\": \"9b985aba76cca597\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: additive Moore normalization and Dold–Kan functors do not assert the displayed shuffle multiplication and its dg algebra laws."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized chains of a simplicial commutative algebra carry an associative unital graded commutative shuffle product",
+   "results": "{\"t\": \"2026-10-24T03:37:01Z\", \"tool\": \"leansearch\", \"query\": \"Normalized chains of a simplicial commutative algebra carry an associative unital graded commutative shuffle product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DoldKan.termN[_]\", \"AlgebraicTopology.DoldKan.N₁\", \"CategoryTheory.Idempotents.DoldKan.N\", \"CategoryTheory.Idempotents.DoldKan.N_map\", \"GradedTensorProduct.comm\", \"CategoryTheory.Idempotents.DoldKan.N_obj\", \"AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex_assoc\", \"AlgebraicTopology.NormalizedMooreComplex.obj\"], \"digest\": \"11157abdd72f95bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: additive Moore normalization and Dold–Kan functors do not assert the displayed shuffle multiplication and its dg algebra laws."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shuffle\"",
+   "results": "{\"t\": \"2026-10-24T03:37:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"shuffle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: additive Moore normalization and Dold–Kan functors do not assert the displayed shuffle multiplication and its dg algebra laws."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shuffle multiplication on the quotient of a simplicial commutative algebra by degenerate simplices gives a differential graded commutative algebra",
+   "results": "{\"t\": \"2026-10-24T03:37:02Z\", \"tool\": \"leanfinder\", \"query\": \"Shuffle multiplication on the quotient of a simplicial commutative algebra by degenerate simplices gives a differential graded commutative algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.NormalizedMooreComplex.obj\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj\", \"AlgebraicTopology.NormalizedMooreComplex.obj_d\", \"AlgebraicTopology.DoldKan.N₂_obj_X_d\", \"AlgebraicTopology.alternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.N₁_obj_X\", \"AlgebraicTopology.DoldKan.QInfty\", \"AlgebraicTopology.alternatingCofaceMapComplex_obj\"], \"digest\": \"3f52d0b5a259fff5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: additive Moore normalization and Dold–Kan functors do not assert the displayed shuffle multiplication and its dg algebra laws."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Eilenberg Zilber shuffle map makes normalization a lax symmetric monoidal functor on simplicial modules",
+   "results": "{\"t\": \"2026-10-24T03:37:39Z\", \"tool\": \"leanfinder\", \"query\": \"The Eilenberg Zilber shuffle map makes normalization a lax symmetric monoidal functor on simplicial modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.DoldKan.N\", \"AlgebraicTopology.normalizedMooreComplex_map\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality\", \"AlgebraicTopology.normalizedMooreComplex\", \"CategoryTheory.Idempotents.DoldKan.N\", \"CategoryTheory.Preadditive.DoldKan.N\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality_assoc\", \"CategoryTheory.Idempotents.DoldKan.N_map\"], \"digest\": \"6d7388a281899ca5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: additive Moore normalization and Dold–Kan functors do not assert the displayed shuffle multiplication and its dg algebra laws."
+  },
+  {
+   "tool": "grep",
+   "query": "Eilenberg.?Zilber|shuffle",
+   "results": "{\"t\": \"2026-10-24T03:37:39Z\", \"tool\": \"grep\", \"query\": \"Eilenberg.?Zilber|shuffle\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: additive Moore normalization and Dold–Kan functors do not assert the displayed shuffle multiplication and its dg algebra laws."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-dg-coefficient-realization",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: Sheaf dg coefficient realizations and normalized arrows. First paragraph: meaning of normalization with shuffle product and the flat augmented coefficient model.",
+   "via": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-simplicial-algebra-shuffle-normalization",
+  "worker": "stage1",
+  "summary": "No statement change. Constructed and checked the quotient-to-positive-face normalization comparison explicitly, reused the existing Moore homotopy-equivalence and simplex lattice-shuffle boundary nodes, and proved descent, associativity, commutativity, unit, functoriality and the augmentation consequences directly. No new nodes: all remaining arguments are finite simplicial-operator or permutation calculations. Added the flat-module definition statement dependency.",
+  "blueprint": "Latest direct-images proof paragraph (3), inherited coefficient-realization prerequisite: shuffle normalization. Nearest imported ancestor is null as on the base. Whole-blueprint searches for shuffle, normalized, simplicial algebra, degenerate and Moore found no equivalent imported statement. The blueprint provides the application, not this calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-1a3a05c4c",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-1a3a05c4c (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement is unchanged, and stmt_deps gains def-weil-pbc-flat-ring-map, which is correct because the statement uses flatness. proof_deps equals the union of the step uses, and there is no cycle: the lattice-boundary node's deps do not reach the item. Side-live still has the item unsplit, so it is not superseded. This is the first delivery and there is no repair note. Stacks simplicial.tex 017V/019A/remark-degenerate-subcomplex/019C (l.2028–3945) uses kernels of d_0..d_{m-1}. The item proves the positive-face splitting directly, which matches the Mathlib Moore leaf. I checked steps 1–4 against the simplicial identities: J is a subcomplex with correct index ranges, d_j s_{j-1}=1, E_j s_i = s_i E_{j-1} via s_{j-1}s_i = s_i s_{j-2}, E_{i+1}s_i = 0, so P_n = K_n ⊕ J_n. Step 5: the Mathlib leaf's N(X) is the positive-face kernels with d_0, and H(q) = H(a)H(i)^{-1}. Step 6: the repeats of the prefix-count map A are ν, and P(σ_{j1}…σ_{jt}) = s_{jt}…s_{j1}, which matches the statement. Step 7: evaluation V(p,q) → C(P) is a chain map because the faces are ring maps; I verified p=q=1 by hand: ∂(s_1x s_0y − s_0x s_1y) = s_0∂x·y − x·s_0∂y. Step 8: at the edge where A crosses i, both σ_iA and B repeat, so the term is s_k of a product. Step 9: the inner and outer inversion counts partition the 3-letter inversions. Step 10: block swap gives (−1)^{pq}; the unit and the central D-action are correct. Steps 11–13: functoriality, flat retract with r i = 1, constant E has J_n = E, and ε = ε̄q. Duplicate search found no node stating the algebra normalization; the hits are the cited additive lattice and bicosimplicial shuffle nodes. The blueprint direct-images paragraph (3) gives only the application, and the node is honestly agent-written with Weibel WANTED. No SGA citation, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialAlgebraShuffleNormalization",
+  "declaration": "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.exists_shuffle_normalization",
+  "declarations": [
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.modules",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.chains",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.chainsTerm",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.degenerates",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.quotient",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.shuffle",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.mul",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.unit",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.constant",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.degreeZero",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.degreeZeroTerm",
+   "AlgebraicTopology.SimplicialAlgebraShuffleNormalization.exists_shuffle_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialAlgebraShuffleNormalization.lean",
+  "statement": "theorem exists_shuffle_normalization : ∃ (N : SimplicialObject (CommAlgCat.{v} D) ⥤ CommMon (CochainComplex (ModuleCat.{max u v} (ULift.{v} D)) ℤ)) (q : chains D ⟶ N ⋙ CommMon.forget _) (e : ∀ (P : SimplicialObject (CommAlgCat.{v} D)) (n : ℕ), (N.obj P).X.X (-(n : ℤ)) ≅ ModuleCat.of (ULift.{v} D) (ULift.{u} (quotient D P n))) (c : ∀ E : CommAlgCat.{v} D, (N.obj (constant D E)).X ≅ degreeZero D E) (a : ∀ E : CommAlgCat.{v} D, (chains D).obj (constant D E) ⟶ degreeZero D E), (∀ (P : SimplicialObject (CommAlgCat.{v} D)) (n : ℕ), (q.app P).f (-(n : ℤ)) ≫ (e P n).hom = (chainsTerm D P n).hom ≫ ModuleCat.ofHom { toFun := fun x ↦ ULift.up ((degenerates D P n).mkQ x.down) map_add' := fun x y ↦ congrArg ULift.up (map_add _ x.down y.down) map_smul' := fun r x ↦ congrArg ULift.up (map_smul _ r.down x.down) }) ∧ (∀ P : SimplicialObject (CommAlgCat.{v} D), QuasiIso (q.app P)) ∧ (∀ (P : SimplicialObject (CommAlgCat.{v} D)) (i : ℤ), 0 < i → IsZero ((N.obj P).X.X i)) ∧ (∀ (P : SimplicialObject (CommAlgCat.{v} D)) (p q' : ℕ) (x : P.obj (op ⦋p⦌)) (y : P.obj (op ⦋q'⦌)), mul D (N.obj P) (-(p : ℤ)) (-(q' : ℤ)) (-(p + q' : ℕ) : ℤ) (by omega) ((e P p).inv (ULift.up (Submodule.Quotient.mk x))) ((e P q').inv (ULift.up (Submodule.Quotient.mk y))) = (e P (p + q')).inv (ULift.up (Submodule.Quotient.mk (shuffle D P p q' x y)))) ∧ (∀ P : SimplicialObject (CommAlgCat.{v} D), unit D (N.obj P) = (e P 0).inv (ULift.up (Submodule.Quotient.mk (1 : P.obj (op ⦋0⦌))))) ∧ (∀ (P : SimplicialObject (CommAlgCat.{v} D)) (n : ℕ), ∃ s : quotient D P n →ₗ[D] P.obj (op ⦋n⦌), (degenerates D P n).mkQ.comp s = LinearMap.id) ∧ (∀ P : SimplicialObject (CommAlgCat.{v} D), (∀ n : ℕ, Module.Flat D (P.obj (op ⦋n⦌))) → ∀ i : ℤ, Module.Flat D ((ModuleCat.restrictScalars (ULift.ringEquiv.symm : D ≃+* ULift.{v} D).toRingHom).obj ((N.obj P).X.X i))) ∧ (∀ (E : CommAlgCat.{v} D) (x : E), (degreeZeroTerm D E).hom ((c E).hom.f 0 ((e (constant D E) 0).inv (ULift.up (Submodule.Quotient.mk x)))) = ULift.up x) ∧ (∀ E : CommAlgCat.{v} D, (a E).f 0 ≫ (degreeZeroTerm D E).hom = (chainsTerm D (constant D E) 0).hom) ∧ (∀ E : CommAlgCat.{v} D, q.app (constant D E) ≫ (c E).hom = a E) ∧ (∀ (P : SimplicialObject (CommAlgCat.{v} D)) (E : CommAlgCat.{v} D) (ε : P ⟶ constant D E), q.app P ≫ (CommMon.forget _).map (N.map ε) ≫ (c E).hom = (chains D).map ε ≫ a E) ∧ (∀ (P : SimplicialObject (CommAlgCat.{v} D)) (E : CommAlgCat.{v} D) (ε : P ⟶ constant D E), QuasiIso ((chains D).map ε ≫ a E) → QuasiIso ((CommMon.forget _).map (N.map ε) ≫ (c E).hom))",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem supplies the quotient-normalization functor with its specified shuffle multiplication, quotient maps, split terms, flatness, canonical constants and augmentation compatibility. The scalar ring and algebra carriers have independent universes u,v; canonical ULift of scalars and carriers gives a common max u v universe for Mathlib's monoidal ModuleCat API. Restriction along ULift.ringEquiv.symm recovers the D-linear statement. Helper definitions are precisely constructions introduced in this node, not independent notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1960b022b",
+  "group": "Q29",
+  "result": "pass",
+  "note": "All clauses match the node: chains via alternatingFaceMapComplex extended by n↦-n; J_n = ⨆ range σ_i (⊥ at 0); quotient map pins the differential and N.map via degreewise-surjective natural q; shuffle sums LatticePath with A (μ-count, repeats ν) on x and B on y, pathSign = inversions of (μ,ν), product pinned on all representatives; CommMon in ℤ-cochain complexes of ULift D-modules with Koszul braiding (-1)^(pq) (WeilConjectures Monoidal ι_braiding_hom) gives assoc/unit/graded-comm/Leibniz; unit [1]; QuasiIso q for all P; D-linear section of mkQ; flatness after restrictScalars incl. positive zero terms; constant c_E pinned in degree 0; augmentation a_E pinned, factorization and qis implication. Edge cases n=0, p/q=0, (1,1) sign, constant E, zero ring, independent universes ok. Statement verbatim, lean record complete, docstrings (13 steps), lines ≤100, no hollow defs, only sorry. Advisories: LatticePath/pathSign come from theorem node lem-sfb-simplex-lattice-shuffle-boundary (proof_dep, not stmt_dep; no cycle); dg D-algebra rendered as D-linear CommMon, while def-sfb-dg-derived-category records only ℤ-coefficient DgAlgebra.Algebra. No file changed, no compile run."
+ }
+}

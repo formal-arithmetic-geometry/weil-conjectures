@@ -1,0 +1,126 @@
+{
+ "id": "def-per-postnikov-truncation-couple-terms",
+ "kind": "definition",
+ "title": "Postnikov truncation couple terms and canonical arrows",
+ "status": "split",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], let $D(\\mathcal A)$ be the derived category [def-weil-abstract-derived-category] with its standard t-structure and truncations [def-sbc-standard-tstructure-derived-category], and let $T:D(\\mathcal A)\\to\\mathcal B$ be a functor. For $n,r,P,Q\\in\\mathbf Z$, define $T^n(M)=T(M[n])$, and define the functors\n$$D_r^{P,Q}(L)=T^{P+Q-r}(\\tau_{\\le Q}L),\\qquad E_r^{P,Q}(L)=T^{P+Q-r}(\\tau_{\\ge Q}\\tau_{<Q+1}L).$$\nThe single-degree truncation $\\tau_{\\ge Q}\\tau_{<Q+1}L$ is the canonical truncation representative of $H^Q(L)[-Q]$. Define $\\alpha_r^{P,Q}(L):D_r^{P,Q}(L)\\to D_r^{P-1,Q+1}(L)$ by applying $T^{P+Q-r}$ to the canonical inclusion $\\tau_{\\le Q}L\\to\\tau_{\\le Q+1}L$, with the equality of total degrees inserted. Define $g_r^{P,Q}(L):D_r^{P,Q}(L)\\to E_r^{P,Q}(L)$ by applying $T^{P+Q-r}$ to the second arrow of the canonical truncation triangle\n$$\\tau_{<Q}L\\longrightarrow\\tau_{<Q+1}L\\longrightarrow\\tau_{\\ge Q}\\tau_{<Q+1}L\\longrightarrow(\\tau_{<Q}L)[1].$$\nDefine $f_r^{P,Q}(L):E_r^{P,Q}(L)\\to D_r^{P+2,Q-1}(L)$ by applying the shift $[P+Q-r]$ and then $T$ to that triangle's boundary arrow, using the canonical comparison $[1][P+Q-r]\\cong[(P+2)+(Q-1)-r]$ and the equality $\\tau_{<Q}=\\tau_{\\le Q-1}$. These definitions impose no homological, additivity, boundedness or convergence hypothesis on $T$.",
+ "stmt_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08J5, remark-truncation-distinguished-triangle, successive truncation triangle; Tag 0147, definition-homological and the shifted-value convention immediately following it. Canonical terms and arrows used in lem-per-postnikov-additive-exact-couple."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Postnikov truncation exact couple shifted functor canonical inclusion quotient boundary",
+   "results": "[leansearch] OK 8 hit(s); CochainComplex.truncate, ChainComplex.truncate, ComplexShape.Embedding.truncLEFunctor, CategoryTheory.CosimplicialObject.truncation, CategoryTheory.CosimplicialObject.Truncated.trunc, CategoryTheory.SimplicialObject.truncation, CategoryTheory.Triangulated.TStructure.truncGE, ComplexShape.Embedding.truncGEFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postnikov truncation exact couple terms canonical inclusion quotient boundary",
+   "results": "[leanfinder] OK 8 hit(s); HomologicalComplex.πTruncGE, HomologicalComplex.shortComplexTruncLEX₃ToTruncGE, HomologicalComplex.truncGE'Map, CochainComplex.shortComplexTruncLEX₃ToTruncGE, CochainComplex.πTruncGE, CochainComplex.g_shortComplexTruncLEX₃ToTruncGE, HomologicalComplex.truncLE'_d_eq_toCycles, HomologicalComplex.shortComplexTruncLE_f",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "postnikovValue|postnikovD|postnikovE|postnikovAlpha|postnikovG|postnikovF",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-postnikov-additive-exact-couple",
+  "date": "2026-10-23",
+  "group": "Q144"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof, Step 1, relative Verdier duality and its coefficient comparison chain: the degreewise truncation passage implicit in ILO XVII 10.1.1 p. 325 from Ext continuity to representable direct sums. Re-split of lem-per-bounded-above-rhom-hyperext: old proof Steps 4–5 and 9 (Postnikov exact couple, shift comparison and additive functoriality). Canonical shifted Postnikov terms and the inclusion, quotient and boundary of the successive truncation triangle.",
+   "via": [
+    "lem-per-postnikov-additive-exact-couple",
+    "lem-per-bounded-above-rhom-hyperext",
+    "lem-per-constructible-rhom-coproduct-continuity",
+    "lem-per-ctf-hom-universal-coefficients",
+    "lem-per-ctf-hom-coefficient-comparison",
+    "lem-per-coefficient-change-dualizing",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PostnikovFiniteCutoffAbutment",
+  "declaration": "DerivedCategory.postnikovValue",
+  "declarations": [
+   "DerivedCategory.postnikovValue",
+   "DerivedCategory.postnikovD",
+   "DerivedCategory.postnikovE",
+   "DerivedCategory.postnikovAlpha",
+   "DerivedCategory.postnikovG",
+   "DerivedCategory.postnikovF"
+  ],
+  "statement": "abbrev postnikovValue (T : DerivedCategory A ⥤ B) (n : ℤ) : DerivedCategory A ⥤ B\n\nabbrev postnikovD (T : DerivedCategory A ⥤ B) (r P Q : ℤ) : DerivedCategory A ⥤ B\n\nabbrev postnikovE (T : DerivedCategory A ⥤ B) (r P Q : ℤ) : DerivedCategory A ⥤ B\n\ndef postnikovAlpha (T : DerivedCategory A ⥤ B) (r P Q : ℤ) (L : DerivedCategory A) :\n    (postnikovD T r P Q).obj L ⟶ (postnikovD T r (P - 1) (Q + 1)).obj L\n\ndef postnikovG (T : DerivedCategory A ⥤ B) (r P Q : ℤ) (L : DerivedCategory A) :\n    (postnikovD T r P Q).obj L ⟶ (postnikovE T r P Q).obj L\n\ndef postnikovF (T : DerivedCategory A ⥤ B) (r P Q : ℤ) (L : DerivedCategory A) :\n    (postnikovE T r P Q).obj L ⟶ (postnikovD T r (P + 2) (Q - 1)).obj L",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Ownership record requested by independent immutable-head return 13478f6f2d3c (H2). These six existing abbreviations/definitions have real data and are used without the finite-cutoff theorem. The declarations remain in their existing module; none is moved, copied, or restated."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ee0a8085",
+  "group": "Q144",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ee0a8085",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Lean module byte-identical (sha 59e01152) to 13478f head whose substance was accepted; only change is the H2 repair prescribed by return 13478f6f2d3c: item stmt_deps replace theorem lem-per-postnikov-finite-cutoff-abutment by new def node def-per-postnikov-truncation-couple-terms, existing:true on Sheaf.CategoryTheory.PostnikovFiniteCutoffAbutment owning postnikovValue/D/E/Alpha/G/F. Six signatures verbatim vs side-live file lines 38-80; NL statement matches bodies (truncLE Q, truncGELT Q (Q+1), natTransTruncLEOfLE, triangleLTLTGELT mor2, mor3 shifted + shiftFunctorAdd' inv + truncLT Q=truncLE(Q-1); bidegrees (-1,+1),(0,0),(+2,-1)); stmt_deps def-sbc-standard-tstructure/def-weil-abstract-derived-category/def-sp-abelian; source Tag 08J5/0147. Not a dup of def-sp-truncation-couple (Rv, Grothendieck), def-weil-pbc-truncation-exact-couples (pbc-specific), def-kun-truncations. No live def node or item lean record yet (not superseded). Report has Worker report + Second reading by Q144. No file changed, no compile. Advisories: owned decl docstrings still cite finite-cutoff blueprint id; redundant [T.Additive]."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261024T190657-L-5269",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "DerivedCategory.postnikov_finite_cutoff_abutment"
+  ],
+  "sorry_after": []
+ }
+}

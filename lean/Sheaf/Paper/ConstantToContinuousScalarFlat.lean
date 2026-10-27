@@ -12,11 +12,18 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import Mathlib.RingTheory.PrincipalIdealDomain
 import Sheaf.CategoryTheory.InternalSectionModuleFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
-import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
-import Mathlib.RingTheory.Flat.TorsionFree
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.RingTheory.Flat.EquationalCriterion
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 
 /-! # Flatness of continuous coefficients over discrete constant scalars
 

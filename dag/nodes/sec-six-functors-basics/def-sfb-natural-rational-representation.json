@@ -1,0 +1,123 @@
+{
+ "id": "def-sfb-natural-rational-representation",
+ "kind": "definition",
+ "title": "Natural rational representations on scalar extensions",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], $G$ an affine $k$-group scheme [def-sc-group-scheme], and $V$ a $k$-vector space. Put $V_R=R\\otimes_k V$ using [def-weil-pbc-module-tensor-product]. For every commutative $k$-algebra $R$, put $G(R)=\\operatorname{Hom}_k(\\operatorname{Spec}R,G)$ [def-weil-affine-spectrum]. A natural rational representation on $V$ is a family of group homomorphisms $r_R:G(R)\\to\\operatorname{Aut}_R(V_R)$ such that for every $k$-algebra map $\\alpha:R\\to T$, every $g\\in G(R)$ and every $z\\in V_R$, one has $(\\alpha\\otimes1)(r_R(g)z)=r_T(G(\\alpha)(g))((\\alpha\\otimes1)z)$. The scalar action on $V_R$ is on its first tensor factor. All the individual objects lie in one fixed universe; the family may lie in the containing universe.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 4(a), printed p.83, and Remark 4.1, printed p.84; the action interface already declared in lem-sfb-rational-representation-comodule-dictionary."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "NaturalRepresentation|rational.*representation",
+   "results": "{\"t\": \"2026-10-24T06:07:06Z\", \"tool\": \"grep\", \"query\": \"NaturalRepresentation|rational.*representation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib natural algebra-valued group-scheme representation interface: hits are affine schemes or actions of a single abstract group. Reuse the project's existing NaturalRepresentation helper from RationalRepresentationComoduleDictionary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational representation of an affine group scheme is a family of linear group actions on scalar extensions natural in commutative algebras",
+   "results": "{\"t\": \"2026-10-24T06:07:06Z\", \"tool\": \"leansearch\", \"query\": \"A rational representation of an affine group scheme is a family of linear group actions on scalar extensions natural in commutative algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.isAffine_affineScheme\", \"Representation.ofModule\", \"Representation.ofModule'\", \"Rep.ofAlgebraAut\", \"Representation.ofDistribMulAction\", \"AlgebraicGeometry.IsAffine.recOn\", \"Rep.ρ\"], \"digest\": \"ba675f17e629a7e5\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib natural algebra-valued group-scheme representation interface: hits are affine schemes or actions of a single abstract group. Reuse the project's existing NaturalRepresentation helper from RationalRepresentationComoduleDictionary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural linear actions of all algebra valued points of an affine group scheme on scalar extended vector spaces",
+   "results": "{\"t\": \"2026-10-24T06:07:07Z\", \"tool\": \"leanfinder\", \"query\": \"Natural linear actions of all algebra valued points of an affine group scheme on scalar extended vector spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.CoextendScalars.mulAction\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.map\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.AffineSpace.comp_homOfVector\"], \"digest\": \"a01bc6e86a66e365\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib natural algebra-valued group-scheme representation interface: hits are affine schemes or actions of a single abstract group. Reuse the project's existing NaturalRepresentation helper from RationalRepresentationComoduleDictionary."
+  },
+  {
+   "tool": "grep",
+   "query": "NaturalRepresentation|rational.*action|rational representation",
+   "results": "rg in lean/WeilConjectures: coordinate-matrix RationalHom and point representations; lean/Sheaf: NaturalRepresentation in RationalRepresentationComoduleDictionary and its use in AffineGroupTensorReconstruction; DAG: theorem lem-sfb-rational-representation-comodule-dictionary owns the helper, but no definition node for this natural-family interface. blueprint_refs.py search natural rational representation: 0 blueprint nodes. def-sfb-rational-representation-gzero is a distinct comodule Grothendieck-group construction.",
+   "date": "2026-10-24",
+   "verdict": "Existing helper reused through an existing:true definition record; no duplicate Lean declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-unipotence-invariant-descent",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Definition of the natural rational action used in the geometric invariant comparison, Milne Chapter 4(a) and Section 4(i).",
+   "via": [
+    "lem-sfb-geometric-unipotence-invariant-descent",
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalRepresentationComoduleDictionary",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.NaturalRepresentation",
+  "statement": "structure NaturalRepresentation",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Reuse the existing structure and its action/naturality fields; no Lean declaration is added or moved. Its ambient parameters are k, G with its k-scheme group structure, and the k-vector space V. This definition-only node exposes the helper independently of the dictionary theorem; finite-dimensional representations are its usual specialization."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b78fcabf",
+  "group": "Q46",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b78fcabf",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_dep records, the new existing:true node def-sfb-natural-rational-representation (-> landed NaturalRepresentation at RationalRepresentationComoduleDictionary:49; its fields match the node's natural-action definition), the delivered module and the report. H3: W^G is an ∃ Submodule fixed by an iff that copies the node's ∀R∀g definition (R : Type u contains the coordinate ring, so nothing is lost); conclusions are injectivity of U.subtype.lTensor K, exact range = K-point fixed set, and nonzero-fixed-vector ↔ U≠⊥. Hypotheses: IsAlgClosure, GrpObj over Spec k, IsAffine, Smooth, LFT∧QC (implied by smooth), FiniteDimensional with finrank=d; no perfect/connected/characteristic assumption. Edge cases d=0, trivial G, disconnected G, imperfect k OK; universe u forced by the interface and harmless. H4: no duplicate (searched DAG/blueprint index; related fixed-space nodes state different things); the new def node closes the ownership gap Q43 was returned for. Docstrings carry source place, blueprint tag and all 6 steps; only sorry; lean.statement verbatim. No fixes, no compile (unchanged files; worker compile clean)."
+ }
+}

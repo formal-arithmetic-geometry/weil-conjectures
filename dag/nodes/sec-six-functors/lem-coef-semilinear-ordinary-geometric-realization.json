@@ -1,0 +1,144 @@
+{
+ "id": "lem-coef-semilinear-ordinary-geometric-realization",
+ "kind": "statement",
+ "title": "Ordinary normalized geometric realization on semilinear systems",
+ "statement": "Let the sites, coefficient tower, set-sheaf geometric adjunction and, when specified, source/target derived calculi have the following parameters. The exact fields defining the conclusion are displayed, so all ordinary carrier and transition normalizations and all representative equations are part of the statement.\n\nvariable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)\n\nstructure GeometryOrdinary where\n  /-- The inverse-image coefficient sheaves C_n. -/\n  coefficients : ℕ → Sheaf J' CommRingCat.{max c v r}\n  /-- Their inverse-image transitions. -/\n  coefficientTransition : ∀ n : ℕ, coefficients (n + 1) ⟶ coefficients n\n  /-- Algebraic inverse image, with actual ring/module operations and underlying sheaves. -/\n  inverseImage : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage uInv (B n) (coefficients n)\n  /-- The transitions are u-inverse-image of the supplied tau maps. -/\n  coefficient_compatibility : ∀ n : ℕ,\n    uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫\n        (inverseImage n).ringUnderlying.hom =\n      (inverseImage (n + 1)).ringUnderlying.hom ≫\n        (sheafCompose J' (CategoryTheory.forget CommRingCat.{max c v r})).map\n          (coefficientTransition n)\n  /-- Levelwise exact inverse image. -/\n  [levelAdditive : ∀ n : ℕ, (inverseImage n).modules.Additive]\n  /-- Left exactness of inverse image of modules. -/\n  [levelLimits : ∀ n : ℕ, PreservesFiniteLimits (inverseImage n).modules]\n  /-- Right exactness of inverse image of modules. -/\n  [levelColimits : ∀ n : ℕ, PreservesFiniteColimits (inverseImage n).modules]\n  /-- Ordinary direct image at each coefficient level. -/\n  levelPush : ∀ n : ℕ, Mod.{c, v, max c v r} J' (coefficients n) ⥤ Mod.{c, v, max c v r} J (B n)\n  /-- Its ordinary adjunction. -/\n  levelAdjunction : ∀ n : ℕ, (inverseImage n).modules ⊣ levelPush n\n  /-- The underlying set-sheaf direct image is the given uPush. -/\n  levelPushUnderlying : ∀ n : ℕ,\n    levelPush n ⋙ underlying.{c, v, r} J (B n) ≅\n      underlying.{c, v, r} J' (coefficients n) ⋙ uPush\n  /-- The module adjunction is normalized by the original topos unit. -/\n  level_unit_underlying : ∀ (n : ℕ) (M : Mod.{c, v, max c v r} J (B n)),\n    (underlying.{c, v, r} J (B n)).map ((levelAdjunction n).unit.app M) ≫\n        (levelPushUnderlying n).hom.app ((inverseImage n).modules.obj M) ≫\n        uPush.map ((inverseImage n).moduleUnderlying.hom.app M) =\n      adjSet.unit.app ((underlying.{c, v, r} J (B n)).obj M)\n  /-- Additivity of direct image. -/\n  [levelPushAdditive : ∀ n : ℕ, (levelPush n).Additive]\n  /-- Ordinary inverse image on systems. -/\n  pull : Systems.{c, v, max c v r} J B τ ⥤ Systems.{c, v, max c v r} J' coefficients\n    coefficientTransition\n  /-- It is the levelwise inverse image, on modules and maps. -/\n  ordinaryPullEvaluation : ∀ n : ℕ,\n    pull ⋙ evaluation.{c, v, max c v r} J' coefficients coefficientTransition n ≅\n      evaluation.{c, v, max c v r} J B τ n ⋙ (inverseImage n).modules\n  /-- Additivity and exactness on systems. -/\n  [pullAdditive : pull.Additive]\n  /-- Inverse image preserves finite limits. -/\n  [pullLimits : PreservesFiniteLimits pull]\n  /-- Inverse image preserves finite colimits. -/\n  [pullColimits : PreservesFiniteColimits pull]\n  /-- The ordinary system right adjoint. -/\n  push : Systems.{c, v, max c v r} J' coefficients coefficientTransition ⥤ Systems.{c, v, max c v\n    r} J B τ\n  /-- The system adjunction before deriving. -/\n  ordinaryAdjunction : pull ⊣ push\n  /-- Additivity of system direct image. -/\n  [pushAdditive : push.Additive]\n  /-- The chosen ordinary realization acts as the identity on the actual\n  component section carriers. This rules out twisting the evaluation by a sign. -/\n  ordinaryPullEvaluation_sections : ∀ (n : ℕ) (M : Systems.{c, v, max c v r} J B τ)\n    (U : C'ᵒᵖ)\n    (x : ((evaluation.{c, v, max c v r} J' coefficients coefficientTransition n).obj\n      (pull.obj M)).val.obj U),\n    HEq ((((ordinaryPullEvaluation n).hom.app M).val.app U) x) x\n  /-- Ordinary direct image has its actual componentwise realization. -/\n  ordinaryPushEvaluation : ∀ n : ℕ,\n    push ⋙ evaluation.{c, v, max c v r} J B τ n ≅ evaluation.{c, v, max c v r} J' coefficients\n      coefficientTransition n ⋙ levelPush n\n  /-- The ordinary push evaluation is the identity on the component carriers. -/\n  ordinaryPushEvaluation_sections : ∀ (n : ℕ)\n    (M : Systems.{c, v, max c v r} J' coefficients coefficientTransition) (U : Cᵒᵖ)\n    (x : ((evaluation.{c, v, max c v r} J B τ n).obj (push.obj M)).val.obj U),\n    HEq ((((ordinaryPushEvaluation n).hom.app M).val.app U) x) x\n  /-- The ordinary system unit is the level unit under these realizations. -/\n  ordinary_unit_evaluation : ∀ (n : ℕ) (M : Systems.{c, v, max c v r} J B τ),\n    (evaluation.{c, v, max c v r} J B τ n).map (ordinaryAdjunction.unit.app M) ≫\n      (ordinaryPushEvaluation n).hom.app (pull.obj M) ≫\n      (levelPush n).map ((ordinaryPullEvaluation n).hom.app M) =\n        (levelAdjunction n).unit.app ((evaluation.{c, v, max c v r} J B τ n).obj M)\n  /-- Restricting coefficient actions commutes with inverse image. -/\n  restrictionPullback : ∀ {m n : ℕ} (h : n ≤ m),\n    res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h) ⋙ (inverseImage m).modules ≅\n      (inverseImage n).modules ⋙ res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J'\n        coefficients coefficientTransition h)\n  /-- The ordinary restriction comparison is the identity on the inverse-image\n  underlying sheaf; this excludes an unrelated scalar or sign automorphism. -/\n  restrictionPullback_underlying : ∀ {m n : ℕ} (h : n ≤ m)\n    (M : Mod.{c, v, max c v r} J (B n)),\n    (underlying.{c, v, r} J' (coefficients m)).map ((restrictionPullback h).hom.app M) ≫\n      (inverseImage n).moduleUnderlying.hom.app M =\n        (inverseImage m).moduleUnderlying.hom.app ((res.{c, v, max c v r} (coefficientMap.{c, v,\n          max c v r} J B τ h)).obj M)\n  /-- Termwise inverse image carries the horizontal transition of the actual\n  system to the coefficient-restriction inverse image of that transition.\n  This equation is imposed before taking complexes or localizing; specifying\n  evaluation on component objects alone does not specify horizontal maps. -/\n  ordinaryPullTransition : ∀ {m n : ℕ} (h : n ≤ m)\n    (M : Systems.{c, v, max c v r} J B τ),\n    (transition.{c, v, max c v r} J' coefficients coefficientTransition h).app (pull.obj M) ≫\n        (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J'\n          coefficients coefficientTransition h)).map ((ordinaryPullEvaluation n).hom.app M) =\n      (ordinaryPullEvaluation m).hom.app M ≫\n        (inverseImage m).modules.map\n          ((transition.{c, v, max c v r} J B τ h).app M) ≫\n        (restrictionPullback h).hom.app ((evaluation.{c, v, max c v r} J B τ n).obj M)\n\ntheorem semilinearGeometryOrdinary [PreservesFiniteLimits uInv]\n    (F : ℕ → Sheaf J' CommRingCat.{max c v r}) (σ : ∀ n : ℕ, F (n + 1) ⟶ F n)\n    (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage uInv (B n) (F n))\n    (hI : ∀ n : ℕ,\n      uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫\n          (I n).ringUnderlying.hom =\n        (I (n + 1)).ringUnderlying.hom ≫\n          (sheafCompose J' (CategoryTheory.forget CommRingCat.{max c v r})).map (σ n)) :\n    Nonempty {O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet //\n      O.coefficients = F ∧ HEq O.coefficientTransition σ ∧ HEq O.inverseImage I}",
+ "stmt_deps": [
+  "def-coef-semilinear-geometry-derived",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, and Tag 03D7, lemma-adjoint-pullback-pushforward-modules; applied termwise to the strict systems in Zheng Construction 4.1 and the paragraph before Lemma 4.10."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, and Tag 03D7, lemma-adjoint-pullback-pushforward-modules; applied termwise to the strict systems in Zheng Construction 4.1 and the paragraph before Lemma 4.10."
+ },
+ "proof": [
+  {
+   "text": "Construct normalized module right adjoints at every coefficient level, retaining their underlying set-sheaf transposes. Prove left exactness of every specified algebraic inverse image by reflecting finite limits along the faithful underlying-sheaf functor. The module adjunction gives preservation of colimits; preservation of finite products and zero gives additivity.",
+   "uses": [
+    "lem-coef-normalized-module-adjunction",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the ordinary inverse-system functor, its exactness, the identity-on-sections evaluation, normalized restriction comparison, and its horizontal-transition equation. Use the compatible direct-system construction to get the right functor, identity-on-sections evaluation and the componentwise Hom bijection.",
+   "uses": [
+    "lem-coef-ordinary-inverse-system",
+    "lem-coef-ordinary-direct-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Joint faithfulness of ordinary evaluations proves naturality of the system Hom bijection from its component formula and the level adjunctions. Form the system adjunction using mkOfHomEquiv. Evaluate the transpose of the identity, compose with the level image of the pull evaluation, and cancel the evaluation isomorphism to obtain the ordinary unit equation. The identical calculation with the underlying module transpose proves normalization by the original topos unit. Right adjoint additivity follows from left adjoint additivity. Assemble GeometryOrdinary with the supplied F, σ and I verbatim, so all three equalities in the subtype are reflexive.",
+   "uses": [
+    "lem-coef-ordinary-direct-system",
+    "lem-coef-normalized-module-adjunction",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models",
+  "lem-coef-normalized-module-adjunction",
+  "lem-coef-ordinary-direct-system",
+  "lem-coef-ordinary-inverse-system"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricOperationsBaseExistence",
+  "date": "2026-10-26",
+  "group": "Q6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Ordinary normalized geometric realization on semilinear systems.",
+   "via": [
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "termwise inverse image direct image adjunction for strict inverse systems of sheaves of modules, normalized underlying sections",
+   "results": "{\"t\": \"2026-10-26T02:51:37Z\", \"tool\": \"leanfinder\", \"query\": \"termwise inverse image direct image adjunction for strict inverse systems of sheaves of modules, normalized underlying sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitHomEquiv_symm_comp\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"SheafOfModules.ιFree_mapFree_inv\", \"CategoryTheory.Sheaf.ΓObjEquivSections_naturality_symm\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"SheafOfModules.Presentation.map_π_eq\", \"CategoryTheory.Sheaf.ΓNatIsoLim\"], \"digest\": \"39e545e28ac5e9ad\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso|prodComparison|pullbackPushforwardAdjunction",
+   "results": "{\"t\": \"2026-10-26T02:56:00Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategoryNatIso|prodComparison|pullbackPushforwardAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/Topology/Sheaves/Presheaf.lean\", \"Mathlib/Topology/Sheaves/Presheaf.lean\", \"Mathlib/Topology/Sheaves/Presheaf.lean\"], \"digest\": \"03cf201ccb2bbcac\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image functor on sheaves of modules induced by a finite limit preserving left adjoint",
+   "results": "{\"t\": \"2026-10-26T02:56:01Z\", \"tool\": \"leansearch\", \"query\": \"inverse image functor on sheaves of modules induced by a finite limit preserving left adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"TopCat.Sheaf.pullback\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullback\"], \"digest\": \"eba66a3614aaeae1\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "{\"t\": \"2026-10-26T02:56:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"conjugateIsoEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateIsoEquiv\", \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_apply_inv\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_inv\", \"CategoryTheory.Bicategory.conjugateIsoEquiv\", \"CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv\"], \"digest\": \"98a2463c6f1dc6d0\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricOrdinaryRealization",
+  "file": "lean/Sheaf/Paper/GeometricOrdinaryRealization.lean",
+  "declaration": "WeilConjectures.SemilinearSections.semilinearGeometryOrdinary",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.GeometryOrdinary",
+   "WeilConjectures.SemilinearSections.geometryPullEvaluation",
+   "WeilConjectures.SemilinearSections.GeometryOrdinary.toBase",
+   "WeilConjectures.SemilinearSections.semilinearGeometryOrdinary"
+  ],
+  "statement": "theorem semilinearGeometryOrdinary [PreservesFiniteLimits uInv]\n    (F : ℕ → Sheaf J' CommRingCat.{max c v r}) (σ : ∀ n : ℕ, F (n + 1) ⟶ F n)\n    (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage uInv (B n) (F n))\n    (hI : ∀ n : ℕ,\n      uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫\n          (I n).ringUnderlying.hom =\n        (I (n + 1)).ringUnderlying.hom ≫\n          (sheafCompose J' (CategoryTheory.forget CommRingCat.{max c v r})).map (σ n)) :\n    Nonempty {O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet //\n      O.coefficients = F ∧ HEq O.coefficientTransition σ ∧ HEq O.inverseImage I}",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T070639-L-3636090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T092737-L-3462069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

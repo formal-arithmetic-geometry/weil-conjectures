@@ -1,0 +1,226 @@
+{
+ "id": "lem-pur-framework-pbc-integral-comparison-laws",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-rational-purity-trace-coherence",
+   "place": "Coefficient-change transport argument, especially (1)--(3); the parent bridge refines the comparison of the two completed presentations.",
+   "via": [
+    "lem-pur-framework-pbc-pullback-scalar-bridge",
+    "lem-pur-twisted-pullback-square-scalars",
+    "lem-pur-smooth-exchange-scalar-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized integral comparison laws for a prescribed simultaneous realization",
+ "statement": "Fix a prime $\\ell$. Fix an integral comparison system $C$ [def-sf-integral-comparison-system-data] and suppose its IntegralComparisonRealizationCoherence holds for every inclusion of finite extensions of $\\mathbf Q_\\ell$. For every finite coefficient field and every Noetherian scheme of finite Krull dimension on which $\\ell$ is invertible, there exist simultaneous families Pullback [def-pur-framework-pbc-pullback-comparison-data], Scalar, Tensor and ScalarTensor [def-pur-framework-pbc-comparison-data], over all scheme morphisms and coefficient inclusions with these hypotheses. These families satisfy the eight integral fields unit, composition, scalar_square, tensor_square, scalar_unit, scalar_tower, pullback_shifts and scalar_shifts of System [def-pur-framework-pbc-comparison-system] with realization $C$. Each family retains all the representative, quotient-generator, completion-unit and shift normalization conditions of its defining structure. This concludes only the integral laws; it asserts no raw rational comparison or coefficient-category rational equivalence.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+ },
+ "stmt_deps": [
+  "def-pur-framework-pbc-comparison-system",
+  "def-pur-framework-pbc-comparison-data",
+  "def-pur-framework-pbc-pullback-comparison-data",
+  "def-sf-integral-comparison-system-data"
+ ],
+ "proof": [
+  {
+   "text": "First identify coefficient presentations, retaining their maps. By [def-pur-completed-coefficient-presentation-transport], $J$ is exact coefficient relabeling, its round trips are identity maps on sections, and its finite projections are the specified ones. Thus after relabeling, the square formed by $h^{-1}R_{D,U}\\to R_{D,T}$ commutes: its $n$-th projection is in both presentations $h^{-1}R_{D,U}\\to h^{-1}(A_{D,n})_U\\to(A_{D,n})_T$. Equality into a limit follows from equality of its projections. Apply [lem-cbc-adic-pullback-presentation-transport] to these structural maps: it supplies the identity-on-tensors ordinary and whole-tower derived comparisons, with their universal counits, evaluations and quotient augmentations. No isomorphism $h^{-1}R_{D,U}\\cong R_{D,T}$ is needed. The categorical restriction to the stated full subcategories is valid by the predicate identification in the coefficient-presentation definition and preservation of pullback and completed tensor in [lem-pur-integral-operations-preserve-constructible].",
+   "uses": [
+    "def-pur-completed-coefficient-presentation-transport",
+    "lem-cbc-adic-pullback-presentation-transport",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+   }
+  },
+  {
+   "text": "For a flat-term K-flat representative $P$, both constructions now use the entire tower $Q_n=\\operatorname{Res}_nh_n^*(P\\otimes_{R_{D,U}}(A_{D,n})_U)$. The framework uses its product cone and PBC its total derived limit. Countable products of pro-etale module sheaves are exact by [lem-weil-proetale-countable-products-exact]. Hence [lem-weil-strict-roos-comparison] realizes the identity of this strict tower as the isomorphism $\\pi_{h,D}$. Coefficient relabeling preserves both cone coordinates and products, as all underlying modules and maps are unchanged. The cited Roos comparison preserves every projection and sends the quotient augmentation with zero shifted-product coordinate to the actual derived-limit augmentation. Its naturality and [lem-pur-integral-operations-well-defined] give naturality in $K$ and independence of representatives. This proves the prescribed normalization, not merely an isomorphism between the two objects.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+   }
+  },
+  {
+   "text": "For composable $h,g$, retain the whole-system counits when identifying an iterated pullback with $R\\lim_n h_n^*g_n^*P_n$. The substitution statement [lem-pur-completed-operation-tower-substitution] identifies the actual completed compositor with realization of the finite adjunction-normalized compositor. For framework pullbacks its precise iterated identification is also the $\\eta_{h,g}$ of [lem-trf-integral-pullback-comparison-realization]. Step 1's presentation transport preserves the universal counits, so it preserves these identifications for the PBC realization as well. On the PBC side, the specified compositor $c^{\\mathrm{pbc}}_{h,g}$ is pinned by the completion units: by [lem-weil-pbc-completed-pullback-reflection] the output $F^{\\mathrm{pbc}}_hF^{\\mathrm{pbc}}_gK$ is complete and precomposition with the ordinary-to-completed unit of $gh$ bijects maps into it, so $c^{\\mathrm{pbc}}_{h,g}$ is the unique map whose composite with that unit is the ordinary pullback compositor followed by the units of $g$ and $h$. The realization of the finite compositor $(gh)_n^*\\to h_n^*g_n^*$ satisfies this unit equation, because each unit is the realization of the quotient augmentation and the finite compositors commute with the quotient maps; hence it is $c^{\\mathrm{pbc}}_{h,g}$. At the strict-system level both routes in (1) are the same map $(gh)_n^*P_n\\to h_n^*g_n^*P_n$, with the same quotient transitions. Applying the functorial Roos comparison gives exactly the equation in (1). For $h=1$, the whole-system map is the scalar multiplication unitor; its realization is the derived-completeness unitor on the complete input. Thus $\\pi_1$ is the asserted unit identification.",
+   "uses": [
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-cbc-adic-pullback-presentation-transport",
+    "lem-weil-pbc-completed-pullback-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+   }
+  },
+  {
+   "text": "Identify the completed scalar and pullback comparisons with their ambient normalizations. Completed coefficient scalar extension is finite free by [lem-weil-completed-integral-finite-free]. By [lem-weil-finite-free-completed-scalar-comparison], $\\chi:C^0\\to S$ is the quotient-augmentation isomorphism, so $j$ is its inverse followed by the coefficient-presentation tensor relabeling. For arbitrary ambient $H$, [lem-pur-integral-ambient-operation-models] identifies framework pullback with quotient completion of ordinary pullback, preserving the augmentation. PBC has the same normalization by [def-weil-pbc-completed-pullback]. The finite-free completion comparison satisfies $\\kappa C(\\eta)=\\eta C$ by [lem-weil-pbc-finite-free-completion-transport]. The reflector uniqueness in [lem-weil-pbc-ringed-koszul-completion-reflector], together with the unit-preserving quotient/Koszul identification of [lem-weil-pbc-constant-completion-equivalence], makes this also the comparison of the specified quotient completions: two candidates become equal after precomposing with $C\\eta$, because the target is complete and $C\\eta$ is a reflection unit under $\\kappa$. Consequently the ordinary balancing square completes to $\\widehat\\delta_h=\\kappa^{-1}\\Lambda(\\delta_h)$ by [lem-weil-pbc-reflected-adjunction-coefficient-squares]. Its inverse, in the direction used here, is $p_h=\\Lambda(\\delta_h)^{-1}\\kappa$.",
+   "uses": [
+    "lem-weil-completed-integral-finite-free",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-ambient-operation-models",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-finite-free-completion-transport",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-reflected-adjunction-coefficient-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+   }
+  },
+  {
+   "text": "Now compare the actual scalar square, rather than choosing a new $a_h$. By [lem-pur-normalized-scalar-comparison-realization], the specified framework $a_h$ is the realization of the entire derived-system balancing map. Its source and target realizations retain the coherent counit and the actual quotient maps. The balancing calculus [lem-pur-strict-coefficient-comparison-calculus] says that, at level $n$, both relabeled routes send a generator $s\\otimes(b\\otimes x)$ to $s\\,i(b)\\otimes(1\\otimes x)$, with inverse given there. Coefficient relabeling commutes with $i$ because it preserves the specified coefficient projections. Apply the whole-tower realization, then use Step 4 to replace ordinary scalar models by $S$ via $\\chi$, and their PBC counterparts via $j$. The resulting equality is precisely (2): the two routes start at $J_{T,L}S_TF^{\\mathrm{sf}}_{h,E}K$ and finish at $F^{\\mathrm{pbc}}_{h,L}C_UJ_{U,E}K$. Completion-unit uniqueness identifies the PBC route with $p_h$ of Step 4. No assertion about equality of morphisms merely from their separate finite reductions occurs.",
+   "uses": [
+    "lem-pur-normalized-scalar-comparison-realization",
+    "lem-pur-strict-coefficient-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+   }
+  },
+  {
+   "text": "For tensor, [lem-pur-integral-ambient-operation-models] identifies each completed tensor with completion of the ambient total tensor, retaining all quotient augmentations. Define $\\tau^J$ by the identity of the relabeled strict total-tensor towers. The normalized-scalar-realization statement identifies $a^{\\otimes}$ with realization of the whole-system map $\\sigma$. In right-tensor notation, the formula of [lem-pur-strict-coefficient-comparison-calculus] is $(x\\otimes y)\\otimes s\\mapsto(x\\otimes s)\\otimes(y\\otimes1)$, with inverse multiplying the two scalar factors. Hence conjugation by $j$, with the two $\\tau^J$ comparisons inserted as in the corrected statement, gives that same balanced tensor map followed by completion. The canonical ambient derived monoidal comparison is precisely this map by [lem-sfb-ringed-derived-monoidal-comparisons]; Step 4 identifies its completion comparison. This proves (3), including its normalization on representatives.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "lem-pur-normalized-scalar-comparison-realization",
+    "lem-pur-strict-coefficient-comparison-calculus",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+   }
+  },
+  {
+   "text": "For successive fields $E\\subset F\\subset L$, [lem-pur-strict-coefficient-comparison-calculus] gives the scalar unit and associator equations as equalities of entire strict systems. Both scalar-association routes multiply $((x\\otimes b)\\otimes c)$ to $x\\otimes bc$; both tensor routes give $(x\\otimes bc)\\otimes(y\\otimes1)$. The completion comparisons respect successive extension and identity coefficients by [lem-weil-pbc-finite-free-completion-transport]; the realized framework scalar associators are exactly those conjugated by $\\chi$ by [lem-trf-integral-pullback-comparison-realization]. Thus the insertions of $\\chi,\\chi^{-1}$ (and $j,j^{-1}$) cancel, proving the unit and successive-extension assertions for all the equations. For shifts, all the relabelings and balancing maps have cochain degree zero and preserve homogeneous degrees. They commute with $d$ and the shifted differential $(-1)^rd$; in total tensor they retain the same $(-1)^p$ differential and slot-shift signs. Products and both Roos coordinates use the identical maps. The $\\kappa$ comparison respects cochain shifts by its cited statement. Consequently the specified comparisons and equations respect the canonical shifts, not independently chosen shift isomorphisms.",
+   "uses": [
+    "lem-pur-strict-coefficient-comparison-calculus",
+    "lem-weil-pbc-finite-free-completion-transport",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-cbc-adic-pullback-presentation-transport",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-pbc-completed-pullback-reflection",
+  "lem-weil-completed-integral-finite-free",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-ambient-operation-models",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-finite-free-completion-transport",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-reflected-adjunction-coefficient-squares",
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-strict-coefficient-comparison-calculus",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion commutes with pullback and finite free scalar extension for sheaves of modules",
+   "results": "SheafOfModules.pullback, pullbackPushforwardAdjunction, conjugateEquiv_pullbackComp_inv and pullback free-object formulas; no completed-tower comparison or raw localization of that comparison.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem. Ordinary pullback identities supply only part of the argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between derived inverse limit models of completed module sheaf pullback compatible with scalar extension",
+   "results": "Ordinary sheaf pullback and adic completion results, no strict derived-complete coefficient-presentation bridge.",
+   "date": "2026-10-25",
+   "verdict": "No match for the integral system or its raw localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "SheafOfModules.pullbackComp, pullback_comp_id, pullback_id_comp, pullback_assoc, conjugateEquiv_pullbackComp_inv.",
+   "date": "2026-10-25",
+   "verdict": "Ordinary sheaf pullback only; does not provide either specialized derived-complete comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "FrameworkPbc|RawCoherence|pullback.*presentation; rg in lean/Sheaf, lean/WeilConjectures and Mathlib/CategoryTheory/Localization",
+   "results": "The assigned module is the only owner of the full arbitrary-morphism bridge. SimultaneousIntegralPullbackComparisons supplies the initial realization; coefficient-category and finite-field pullback comparisons have narrower or different signatures.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing realization. No existing declaration states either remaining step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrameworkPbcPullbackScalarBridge",
+  "date": "2026-10-25",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrameworkPbcIntegralComparisonLaws",
+  "file": "lean/Sheaf/Paper/FrameworkPbcIntegralComparisonLaws.lean",
+  "declaration": "WeilConjectures.FrameworkPbc.frameworkPbcIntegralComparisonLaws",
+  "statement": "theorem frameworkPbcIntegralComparisonLaws\n    (l : ℕ) [Fact l.Prime] (realization : IntegralComparisonSystem.{u} l)\n    (realization_coherent : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B),\n      IntegralComparisonRealizationCoherence l A B i realization)\n :\n    ∃ pullback : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n      {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n      [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))],\n      (h : X ⟶ Y) → Pullback l A h,\n    ∃ scalar : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n      [Field B] [Algebra ℚ_[l] B] [FiniteDimensional ℚ_[l] B]\n      (i : A →ₐ[ℚ_[l]] B) (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))], Scalar l A B i W,\n    ∃ tensor : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n      (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))], Tensor l A W,\n    ∃ scalarTensor : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B) (W : Scheme.{u})\n      [IsNoetherian W] [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))],\n      ScalarTensor l A B i W,\n    (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n      (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))]\n      (K : sfIntegralConstructibleCategory l A W),\n      (pullback A (𝟙 W)).pi.hom.app K ≫\n        (pbcActualCompletedPullIdIso (pbcIntegralDatum l A) W).hom.app\n          ⟨(integralDetailedTransport W l A).obj K.obj,\n            (purDetailedTransport_complete_iff l A W K.obj).mp K.property.1⟩ =\n        (integralDetailedTransport W l A).map\n          (integralComparisonUnit l A realization W K).hom) ∧\n    (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] (X Y Z : Scheme.{u})\n      [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]\n      [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Z ≤ n)]\n      [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]\n      [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]\n      (h : X ⟶ Y) (g : Y ⟶ Z) (K : sfIntegralConstructibleCategory l A Z),\n      (pullback A (h ≫ g)).pi.hom.app K ≫\n        (pbcActualCompletedPullCompIso h g (pbcIntegralDatum l A)).inv.app\n          ⟨(integralDetailedTransport Z l A).obj K.obj,\n            (purDetailedTransport_complete_iff l A Z K.obj).mp K.property.1⟩ =\n      (integralDetailedTransport X l A).map\n          (integralComparisonComposition l A realization h g K).hom ≫\n        (pullback A h).pi.hom.app ((constructibleIntegralPullback l A g).obj K) ≫\n        (pbcActualCompletedPull h (pbcIntegralDatum l A)).map\n          ((pullback A g).pi.hom.app K)) ∧\n    (∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B)\n      {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n      [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]\n      (h : X ⟶ Y) (K : sfIntegralConstructibleCategory l A Y),\n      (integralDetailedTransport X l B).map\n          (integralPullbackScalarComparison l A B i h K).hom.hom ≫\n        (pullback B h).pi.hom.app ((integralComparisonConstructibleScalar l A B i Y).obj K) ≫\n        (pbcActualCompletedPull h (pbcIntegralDatum l B)).map\n          (scalarComponent l A B i Y K).hom =\n      (scalarComponent l A B i X ((constructibleIntegralPullback l A h).obj K)).hom ≫\n        (pbcEmbeddingAmbientTensor l A B i X).map ((pullback A h).pi.hom.app K) ≫\n        (pbcScalarCompletedPullIso l A B i h).inv.app\n          ((integralDetailedTransport Y l A).obj K.obj)) ∧\n    (∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B)\n      (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))]\n      (M N : sfIntegralConstructibleCategory l A W),\n      (pbcEmbeddingAmbientTensor l A B i W).map ((tensor A W).tau.inv.app (M.obj, N.obj)) ≫\n        (scalarComponent l A B i W ((constructibleIntegralTensor l A W).obj (M, N))).inv ≫\n        (integralDetailedTransport W l B).map\n          (integralTensorScalarComparison l A B i W M N).hom.hom ≫\n        (tensor B W).tau.hom.app\n          (((integralComparisonConstructibleScalar l A B i W).obj M).obj,\n            ((integralComparisonConstructibleScalar l A B i W).obj N).obj) ≫\n        (FrameworkPbc.tensor l B W).map\n          (Prod.mkHom (scalarComponent l A B i W M).hom\n            (scalarComponent l A B i W N).hom) =\n      ((scalarTensor A B i W).completed l A B i).hom.app\n        ((integralDetailedTransport W l A).obj M.obj,\n          (integralDetailedTransport W l A).obj N.obj)) ∧\n    (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))]\n      (K : sfIntegralConstructibleCategory l A W),\n      (scalarComponent l A A (AlgHom.id ℚ_[l] A) W K).hom ≫\n        (pbcEmbeddingAmbientUnit l A W).hom.app\n          ((integralDetailedTransport W l A).obj K.obj) =\n      (integralDetailedTransport W l A).map (integralComparisonScalarUnit l A W K).hom) ∧\n    (∀ (A B C : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] [Field C] [Algebra ℚ_[l] C]\n      [FiniteDimensional ℚ_[l] C] (i : A →ₐ[ℚ_[l]] B) (j : B →ₐ[ℚ_[l]] C)\n      (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))]\n      (K : sfIntegralConstructibleCategory l A W),\n      (scalarComponent l B C j W ((integralComparisonConstructibleScalar l A B i W).obj K)).hom ≫\n        (pbcEmbeddingAmbientTensor l B C j W).map (scalarComponent l A B i W K).hom ≫\n        (pbcAmbientScalarComp l A B C i j W).hom.app\n          ((integralDetailedTransport W l A).obj K.obj) =\n      (integralDetailedTransport W l C).map\n          (integralComparisonScalarAssociator l A B i C j W K).hom ≫\n        (scalarComponent l A C (j.comp i) W K).hom) ∧\n    (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n      [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))] (h : X ⟶ Y),\n      ∃ c : (integralOperationsPullbackComplexFunctor l A h).CommShift ℤ,\n      ∃ d : (integralDerivedPullback l A h).CommShift ℤ,\n        IntegralCompletedComparison.ShiftCoordinates l A h c ∧\n        IntegralCompletedComparison.ShiftDescent l A h c d ∧\n        ∀ (K : sfIntegralConstructibleCategory l A Y) (r : ℤ),\n        ∃ hKr : sfIntegralConstructible l A Y (K.obj⟦r⟧),\n        HEq ((integralDetailedTransport X l A).map\n            ((Functor.commShiftIso (integralDerivedPullback l A h) (self := d) r).hom.app\n              K.obj) ≫\n          ((fdCoefficientTransport l A X).mapDerivedCategory.commShiftIso r).hom.app\n            ((integralDerivedPullback l A h).obj K.obj) ≫\n          ((pullback A h).pi.hom.app K)⟦r⟧')\n          ((pullback A h).pi.hom.app ⟨K.obj⟦r⟧, hKr⟩ ≫\n            (pbcActualCompletedPull h (pbcIntegralDatum l A)).map\n              (((fdCoefficientTransport l A Y).mapDerivedCategory.commShiftIso r).hom.app\n                K.obj) ≫\n            ((pbcActualCompletedPull h (pbcIntegralDatum l A)).commShiftIso r).hom.app\n              ((integralDetailedTransport Y l A).obj K.obj))) ∧\n    (∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B) (W : Scheme.{u})\n      [IsNoetherian W] [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))],\n      ∃ (c : (integralScalarComplexFunctor l A B i W).CommShift ℤ)\n        (o : (completedDerivedScalarExtension l A B i W).CommShift ℤ)\n        (d : (integralScalarExtension l A B i W).CommShift ℤ),\n        completedScalarShiftRepresentativeProperty i W c o d ∧\n        ∀ (K : sfIntegralConstructibleCategory l A W) (r : ℤ),\n        ∃ hKr : sfIntegralConstructible l A W (K.obj⟦r⟧),\n        HEq ((integralDetailedTransport W l B).map\n            ((Functor.commShiftIso (integralScalarExtension l A B i W) (self := d) r).hom.app\n              K.obj) ≫\n          ((fdCoefficientTransport l B W).mapDerivedCategory.commShiftIso r).hom.app\n            ((integralScalarExtension l A B i W).obj K.obj) ≫\n          (scalarComponent l A B i W K).hom⟦r⟧')\n          ((scalarComponent l A B i W ⟨K.obj⟦r⟧, hKr⟩).hom ≫\n            (pbcEmbeddingAmbientTensor l A B i W).map\n              (((fdCoefficientTransport l A W).mapDerivedCategory.commShiftIso r).hom.app\n                K.obj) ≫\n            ((pbcEmbeddingAmbientTensor l A B i W).commShiftIso r).hom.app\n              ((integralDetailedTransport W l A).obj K.obj)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T101603-L-3711048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T101603-L-3711048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

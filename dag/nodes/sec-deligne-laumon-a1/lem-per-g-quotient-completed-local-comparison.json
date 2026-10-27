@@ -1,0 +1,354 @@
+{
+ "id": "lem-per-g-quotient-completed-local-comparison",
+ "kind": "statement",
+ "title": "Regular completed-local comparison above a G-ring quotient",
+ "statement": "Let $B$ be a commutative Noetherian semilocal ring [def-weil-pbc-noetherian-ring], with $\\mathfrak r$ the intersection of its finitely many maximal ideals. Let $J\\subseteq\\mathfrak r$ be an ideal and suppose that $B/J$ is a G-ring [def-weil-pbc-g-ring]. Put $C=\\varprojlim_n B/\\mathfrak r^n$. For every nonmaximal prime $\\mathfrak Q\\subset C$ containing $JC$, put $\\mathfrak p=\\mathfrak Q\\cap B$, $U_{\\mathfrak p}=\\widehat{B_{\\mathfrak p}}$ and $T_{\\mathfrak Q}=\\widehat{C_{\\mathfrak Q}}$, where the latter two completions use the respective maximal ideals. Completions are inverse limits of quotients by ideal powers [def-weil-pbc-adic-completion], and localization at a prime is [def-weil-pbc-localization-at-prime]. The canonical map $\\alpha_{\\mathfrak Q}:U_{\\mathfrak p}\\to T_{\\mathfrak Q}$ induced by $B_{\\mathfrak p}\\to C_{\\mathfrak Q}$ is a regular local ring homomorphism [def-weil-pbc-g-ring] and is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. No $J$-adic completeness or G-ring hypothesis on $B$ is required.",
+ "source": {
+  "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+  "place": "Rotthaus (1979), Lemma 4 and Corollaries 4.1–4.2, pp.175–176. This is the regularity of the completed comparison, not regularity of B_p to C_Q. Completeness of the source U_p permits the formally smooth complete-local regularity theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-fs-adic-completion-map-local"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\mathfrak Q$ as in the statement. Write $A=B_{\\mathfrak p}$ and $D=C_{\\mathfrak Q}$, with maximal ideals $\\mathfrak m=\\mathfrak pA$ and $\\mathfrak n=\\mathfrak QD$. Completion of a Noetherian ring is Noetherian, so $C$ is Noetherian. The completion map $B\\to C$ is flat. Applying the flat-local-ring-maps lemma to this map and $\\mathfrak Q$ gives a flat local homomorphism $f:A\\to D$ of Noetherian local rings. Since $JC\\subseteq\\mathfrak Q$, contraction gives $J\\subseteq\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-local-ring-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0316 (lemma-completion-Noetherian-Noetherian), 00MB (lemma-completion-flat), 00HT (lemma-flat-localization)."
+   }
+  },
+  {
+   "text": "Put $E=B/J$ and $H=\\varprojlim_n E/(\\mathfrak rE)^n$. Apply completion-finite-module-tensor over $B$ to its finite module $E$. Its map $C\\otimes_B E\\to H$, $c\\otimes\\bar b\\mapsto c\\bar b$, is bijective. It preserves products since $(c\\bar b)(c^{\\prime}\\bar b^{\\prime})=cc^{\\prime}\\overline{bb^{\\prime}}$ on pure tensors, so it is an isomorphism of rings. The elementary quotient-tensor isomorphism $C\\otimes_BE\\cong C/JC$, $c\\otimes\\bar b\\mapsto cb\\bmod JC$, has inverse $\\bar c\\mapsto c\\otimes1$. Thus $H\\cong C/JC$ compatibly with the maps from $E$. The hypothesis that $E$ is a G-ring and the G-ring-completion-regular lemma give regularity of $E\\to C/JC$. The target is Noetherian as a quotient of $C$. Put $\\bar{\\mathfrak Q}=\\mathfrak Q/JC$ and $\\bar{\\mathfrak p}=\\mathfrak p/J$. Applying regular-local-maximal, implication (1) to (2), gives a regular local map $g:E_{\\bar{\\mathfrak p}}\\to (C/JC)_{\\bar{\\mathfrak Q}}$.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-regular-local-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AH2 (lemma-map-G-ring-to-completion-regular), Tag 07C0 (lemma-regular-local); algebra.tex Tags 00MA (lemma-completion-tensor), 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Apply localization-at-prime-of-quotient to $(B,J,\\mathfrak p)$ and $(C,JC,\\mathfrak Q)$. It identifies the source and target of $g$ with $A/JA$ and $D/JD$, respectively, by $\\overline{b/s}\\mapsto\\bar b/\\bar s$. The maximal ideal of $A/JA$ is $\\mathfrak m/JA$ and its residue field is $k=A/\\mathfrak m$, by quotient-local-structure. The closed fibre of $g$ is therefore $(D/JD)/(\\mathfrak mD/JD)=D/\\mathfrak mD$: this equality uses $J\\subseteq\\mathfrak p$, hence $JD\\subseteq\\mathfrak mD$. Every map here is induced by $b/s\\mapsto b/s$, so this is an isomorphism of $k$-algebras for the original map $f$. Since $g$ is regular, its fibre over the maximal ideal of $A/JA$ is Noetherian and geometrically regular over $k$, by the definition of regular ring map. Thus the closed fibre of $f$ is geometrically regular over $k$.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-quotient-local-structure",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient), local-ring definitions 07BI/07BJ; more-algebra.tex Definition 07BZ (definition-regular)."
+   }
+  },
+  {
+   "text": "The ring $D/\\mathfrak mD$ is a Noetherian local $k$-algebra: $D$ is Noetherian and $\\mathfrak mD\\subseteq\\mathfrak n$, so quotient-local-structure applies. Its geometric regularity from Step 3 implies that it is formally smooth over $k$ for its maximal-ideal topology, by geometrically-regular-local-field-adic-smooth. Together with the flatness of $f$ from Step 1, flat-formally-smooth-closed-fibre-adic now implies that $D$ is formally smooth over $A$ for the $\\mathfrak n$-adic topology.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-sfb-geometrically-regular-local-field-adic-smooth",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EL (theorem-regular-fs), (1) implies (2); Tag 07NQ (proposition-fs-flat-fibre-fs), (2) implies (3)."
+   }
+  },
+  {
+   "text": "Write $U=\\widehat A=U_{\\mathfrak p}$ and $T=\\widehat D=T_{\\mathfrak Q}$. Their maximal ideals are $\\mathfrak mU$ and $\\mathfrak nT$ and their residue fields are those of $A$ and $D$, by local-completion-local-ring. They are Noetherian by adic-completion-noetherian and complete for these ideals by module-completion-complete, applied to the two finitely generated maximal ideals. Apply fs-adic-complete-source-target to $f$ and Step 4. It gives formal smoothness of the canonical $\\alpha_{\\mathfrak Q}:U\\to T$ for $\\mathfrak nT$, which is the maximal-ideal topology of $T$. On each quotient coordinate the map sends the class of $a\\in A$ to the class of $f(a)\\in D$. Consequently $\\alpha_{\\mathfrak Q}$ sends every generator of $\\mathfrak mU$ into $\\mathfrak nT$ and is local. This is exactly the map specified in the statement, not a chosen comparison isomorphism.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-fs-adic-complete-source-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ED (lemma-formally-smooth-completion), (1) implies (3); algebra.tex Tags 0316, 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion)."
+   }
+  },
+  {
+   "text": "The source and target of $\\alpha_{\\mathfrak Q}$ are complete Noetherian local rings by Step 5. Apply formally-smooth-complete-local-regular to its adic formal smoothness and locality. This proves that $\\alpha_{\\mathfrak Q}$ is regular and in particular flat. A flat local homomorphism of local rings is faithfully flat, so flat-local-hom-faithfully-flat proves the final assertion. The only G-ring hypothesis used was on $E=B/J$ in Step 2; no completeness of $B$ was used.",
+   "uses": [
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PM (proposition-fs-regular), (4) implies (1); algebra.tex Tag 00HR (lemma-local-flat-ff)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-quotient-local-structure",
+  "def-weil-pbc-g-ring",
+  "lem-sfb-geometrically-regular-local-field-adic-smooth",
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly from Tags 0AH2, 07C0, 07EL, 07NQ, 07ED, 07PM, with algebra.tex 00MA, 00CT, 00MB, 0316, 05GG, 05GI and 00HR. Rotthaus is the inherited attribution, not the source read for this proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-g-quotient-completed-local-comparison: Let B be Noetherian semilocal and B/J a G-ring. Over primes containing J the map from the completion of B_p to the completed localization of the completion of B is regular",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] [IsLocalization.AtPrime S p] {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs →\\n    (∀ r ∈ rs, r ∈ p) → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraM\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ its localization at the complement of a prime ideal $ p $, and $ rs $ a list of elements in $ R $. If $ rs $ forms a weakly regular sequence in $ R $ and every e\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [IsScalarTower R S N] (p : Ideal R) [inst_9 : p.IsP\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ and $ N $ be $ R $-modules, and $ p $ a prime ideal of $ R $. Suppose $ N $ is a non-trivial finitely generated $ S $-module obtained by localizing $ M $ at \"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-g-quotient-completed-local-comparison: Regular comparison maps between completed prime localizations when the closed quotient is a G-ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"module\": \"Mathlib.RingTheory.Localization.LocalizationLocalization\", \"type\": \"(p : Ideal (Localization M)) [p.IsPrime] :\\n  Localization.AtPrime (p.comap (algebraMap R (Localization M))) ≃ₐ[R] Localization.AtPrime p\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in the localization $R_M$, the localization of $R_M$ at $\\\\mathfrak{p}$ is canonically isomorphic as an $R$-algebra to the localization of $R$ at the contraction of $\"}\n  {\"name\": \"IsLocalization.AtPrime.equivQuotientMapOfIsMaximal.congr_simp\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Extension\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p p_1 : Ideal R)\\n  (e_p : p = p_1) [inst_3 : p.IsPrime] (Sₚ : Type u_4) [inst_4 : CommRing Sₚ] [inst_5 : Algebra S Sₚ]\\n  [inst_6 : IsLocalization (Algebra.algebraMapSubmonoid S p.primeCompl) Sₚ] (P : Id\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if $ p $ and $ p_1 $ are equal prime ideals in $ R $, then the canonical isomorphisms between the localization of $ S \"}\n  {\"name\": \"Padic.adicCompletionEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(p : Nat.Primes) : ℚ_[p] ≃A[ℚ] ((primesEquiv (R := R)).symm p).adicCompletion ℚ\", \"doc\": \"For a prime number $ p $, there is a continuous algebra equivalence between the field of $ p $-adic numbers $ \\\\mathbb{Q}_p $ and the adic completion of $ \\\\mathbb{Q} $ with respect to the height one pr\"}\n  {\"name\": \"AdicCompletion.liftRingHom.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  (f f_1 : (n : ℕ) → R →+* S ⧸ I ^ n) (e_f : f = f_1)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m),\\n  AdicCompletion.liftRingHom I f hf = AdicCompletion.liftRingHo\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise addition and multiplication induced by the inverse limit of the quotient ri\"}\n  {\"name\": \"Localization.localRingHom\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \"(J : Ideal P) [J.IsPrime] (f : R →+* P) (hIJ : I = J.comap f) : Localization.AtPrime I →+* Localization.AtPrime J\", \"doc\": \"Given a ring homomorphism $ f : R → P $ between commutative semirings and prime ideals $ I ⊆ R $, $ J ⊆ P $ such that $ I $ is the preimage of $ J $ under $ f $, this constructs the unique ring homomo\"}\n  {\"name\": \"IsLocalization.map.congr_simp\", \"module\": \"Mathlib.RingTheory.Localization.Defs\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {M M_1 : Submonoid R} (e_M : M = M_1) {S : Type u_2} [inst_1 : CommSemiring S]\\n  [inst_2 : Algebra R S] {P : Type u_3} [inst_3 : CommSemiring P] [inst_4 : IsLocalization M S] {T T_1 : Submonoid P}\\n  (e_T : T = T_1) (Q : Type u_4) [inst_5 : CommSemiring Q] [in\", \"doc\": \"If two submonoids $M = M_1 \\\\subseteq R$ and $T = T_1 \\\\subseteq P$ are equal, and two ring homomorphisms $g, g_1 : R \\\\to P$ are equal with $g(M) \\\\subseteq T$, then the induced ring homomorphisms betwee\"}\n  {\"name\": \"IsLocalization.map_eq\", \"module\": \"Mathlib.RingTheory.Localization.Defs\", \"type\": \"(x) : map Q g hy ((algebraMap R S) x) = algebraMap P Q (g x)\", \"doc\": \"For any element $x$ in the commutative semiring $R$, the induced ring homomorphism between localizations $S \\to Q$ (where $S$ is $R$ localized at $M$ and $Q$ is $P$ localized at $T$) satisfies $f(\\text{\"}\n  {\"name\": \"Localization.localRingHom_comp\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \"{S : Type*} [CommSemiring S] (J : Ideal S) [hJ : J.IsPrime] (K : Ideal P) [hK : K.IsPrime] (f : R →+* S)\\n  (hIJ : I = J.comap f) (g : S →+* P) (hJK : J = K.comap g) :\\n  localRingHom I K (g.comp f) (by rw [hIJ, hJK, Ideal.comap_comap f g]) =\\n    (localRingHom J K g hJK).comp (localRingHom I J f hIJ)\", \"doc\": \"Given commutative semirings $R, S, P$, prime ideals $I \\\\subseteq R$, $J \\\\subseteq S$, $K \\\\subseteq P$, and ring homomorphisms $f : R \\\\to+* S$, $g : S \\\\to+* P$ such that $I$ is the preimage of $J$ unde\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.ReducibilityHints.isRegular\", \"module\": \"Lean.Declaration\", \"type\": \" : Lean.ReducibilityHints → Bool\", \"doc\": \"\"}\n  {\"name\": \"Lean.PrettyPrinter.Delaborator.ParamKind.isRegularExplicit\", \"module\": \"Lean.PrettyPrinter.Delaborator.Builtins\", \"type\": \" (param : Lean.PrettyPrinter.Delaborator.ParamKind) : Bool\", \"doc\": \"Returns true if the parameter is an explicit parameter that has neither a default value nor a tactic.\"}\n  {\"name\": \"IsRegular\", \"module\": \"Mathlib.Algebra.Regular.Defs\", \"type\": \" {R : Type u_1} [Mul R] (c : R) : Prop\", \"doc\": \"A regular element is an element `c` such that multiplication by `c` both on the left and\\non the right is injective.\"}\n  {\"name\": \"IsRegular.left\", \"module\": \"Mathlib.Algebra.Regular.Defs\", \"type\": \" {R : Type u_1} [Mul R] {c : R} (self : IsRegular c) : IsLeftRegular c\", \"doc\": \"A regular element `c` is left-regular\"}\n  {\"name\": \"IsRegular.right\", \"module\": \"Mathlib.Algebra.Regular.Defs\", \"type\": \" {R : Type u_1} [Mul R] {c : R} (self : IsRegular c) : IsRightRegular c\", \"doc\": \"A regular element `c` is right-regular\"}\n  {\"name\": \"IsRegular.mk\", \"module\": \"Mathlib.Algebra.Regular.Defs\", \"type\": \" {R : Type u_1} [Mul R] {c : R} (left : IsLeftRegular c) (right : IsRightRegular c) : IsRegular c\", \"doc\": \"\"}\n  {\"name\": \"isRegular_iff\", \"module\": \"Mathlib.Algebra.Regular.Defs\", \"type\": \" {R : Type u_1} [Mul R] {c : R} : IsRegular c ↔ IsLeftRegular c ∧ IsRightRegular c\", \"doc\": \"\"}\n  {\"name\": \"IsRegular.all\", \"module\": \"Mathlib.Algebra.Group.Semigroup\", \"type\": \" {R : Type u_2} [Mul R] [IsCancelMul R] (g : R) : IsRegular g\", \"doc\": \"If all multiplications cancel then every element is regular.\"}\n  {\"name\": \"isCancelMul_iff_forall_isRegular\", \"module\": \"Mathlib.Algebra.Group.Semigroup\", \"type\": \" {R : Type u_2} [Mul R] : IsCancelMul R ↔ ∀ (r : R), IsRegular r\", \"doc\": \"\"}\n  {\"name\": \"isLeftRegular_iff_isRegular\", \"module\": \"Mathlib.Algebra.Group.Semigroup\", \"type\": \" {G : Type u_1} [CommMagma G] {a : G} : IsLeftRegular a ↔ IsRegular a\", \"doc\": \"\"}\n  {\"name\": \"isRightRegular_iff_isRegular\", \"module\": \"Mathlib.Algebra.Group.Semigroup\", \"type\": \" {G : Type u_1} [CommMagma G] {a : G} : IsRightRegular a ↔ IsRegular a\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.Term.Do.ToTerm.Kind.isRegular\", \"module\": \"Lean.Elab.Do.Legacy\", \"type\": \" : Lean.Elab.Term.Do.ToTerm.Kind → Bool\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Rotthaus|IsGRing|[Rr]egular.*[Cc]ompletion",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGRing|[Gg]eometrically[Rr]egular|[Rr]egular.*[Cc]ompletion",
+   "results": "0 hits: . Subdirectory: RingTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; discrete formal smoothness, smooth finite-presentation maps, flatness and regular sequences do not assert regularity of this completed-local comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a local flat map with geometrically regular closed fiber is a regular map of complete local rings",
+   "results": "8 hits: Module.FaithfullyFlat.of_flat_of_isLocalHom, RingHom.Flat, RingTheory.Sequence.IsRegular.of_faithfullyFlat, IsSMulRegular.of_flat_of_isBaseChange, AdicCompletion.flat_of_isNoetherian, AlgebraicGeometry.Flat.stalkMap, RingHom.Flat.propertyIsLocal, AlgebraicGeometry.Flat.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; discrete formal smoothness, smooth finite-presentation maps, flatness and regular sequences do not assert regularity of this completed-local comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\"",
+   "results": "12 hits: Algebra.FormallySmooth.inst, Algebra.FormallySmooth, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.FormallySmooth.polynomial, Algebra.FormallySmooth.of_isLocalization, Algebra.instFormallySmoothMvPolynomial, Algebra.FormallySmooth.of_equiv",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; discrete formal smoothness, smooth finite-presentation maps, flatness and regular sequences do not assert regularity of this completed-local comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local homomorphism of Noetherian local rings with geometrically regular closed fibre induces a regular homomorphism between their completions",
+   "results": "8 hits: Algebra.Smooth.flat_of_isNoetherianRing, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, RingHom.Smooth.ofLocalizationSpanTarget, RingHom.Smooth.holdsForLocalizationAway, RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves, AdicCompletion.flat_of_isNoetherian, RingTheory.Sequence.IsRegular.of_faithfullyFlat, RingTheory.Sequence.IsWeaklyRegular.of_flat",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; discrete formal smoothness, smooth finite-presentation maps, flatness and regular sequences do not assert regularity of this completed-local comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If B is Noetherian semilocal and B modulo J is a G-ring, then the map from completion of B at p to completion of the localization of the semilocal completion at Q is regular for Q containing J",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, injective_of_isLocalization_isMaximal, Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, Algebra.IsSmoothAt.exists_notMem_smooth",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; discrete formal smoothness, smooth finite-presentation maps, flatness and regular sequences do not assert regularity of this completed-local comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-g-ring-adic-lifting",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular local model and purity), through the existing small-singular-locus / ideal-adic quasi-excellence chain: the local G-ring lifting input to Kurano–Shimomoto Theorem 5.1 Step 2 equation (5.1). Refined using Rotthaus (1979), Theorem 3, pp.176–179. Rotthaus (1979), Lemma 4 and Corollaries 4.1–4.2, pp.175–176. This is the regularity of the completed comparison, not regularity of B_p to C_Q. Completeness of the source U_p permits the formally smooth complete-local regularity theorem.",
+   "via": [
+    "lem-per-local-g-ring-adic-lifting",
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-g-quotient-completed-local-comparison",
+  "worker": "stage1",
+  "summary": "Q05: preserved the statement and split the completed-local regularity comparison into six steps using existing nodes only. Checked the quotient-completion map, the equality of closed fibres, all Noetherian/local/complete hypotheses, the distinction between discrete and adic formal smoothness, and faithful flatness. No assumption of J-adic completeness or G-ring on B was introduced.",
+  "blueprint": "Realizes the inherited formal-fibre regularity comparison in the chain beneath lem-per-artin-gabber-affine-curve, Step 3, via lem-per-local-g-ring-adic-lifting. Current latest blueprint searched; no blueprint node states this commutative algebra comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative algebra tool: The completion of a Noetherian ring is Noetherian. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-completion-flat",
+    "why": "Generic commutative algebra tool: The adic completion of a Noetherian ring is flat. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-ring-maps",
+    "why": "Generic commutative algebra tool: A flat ring map induces flat local maps of local rings. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-module-tensor",
+    "why": "Generic commutative algebra tool: The completion of a finite module over a Noetherian ring is its base change to the completed ring. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "Generic commutative algebra tool: The completion of a G-ring along an ideal is a regular ring map. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-image-noetherian",
+    "why": "Generic commutative algebra tool: A ring receiving a surjection from a Noetherian ring is Noetherian. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-maximal",
+    "why": "Generic commutative algebra tool: Regularity of a ring map is local on the target. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-at-prime-of-quotient",
+    "why": "Generic commutative algebra tool: Localizing a quotient at a prime is the quotient of the localization. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-local-structure",
+    "why": "Generic commutative algebra tool: Local structure of a quotient of a local ring. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "def-weil-pbc-g-ring",
+    "why": "Generic commutative algebra tool: G-ring. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-sfb-geometrically-regular-local-field-adic-smooth",
+    "why": "Generic commutative algebra tool: A geometrically regular local field algebra is adically formally smooth. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "why": "Generic commutative algebra tool: Flatness and an adically formally smooth closed fibre imply adic formal smoothness. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic commutative algebra tool: The completion of a Noetherian local ring is local with the same residue field. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic commutative algebra tool: The adic completion of a module along a finitely generated ideal is complete, with quotients M/I^nM. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-complete-source-target",
+    "why": "Generic commutative algebra tool: Adic formal smoothness passes to the completions of source and target. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "why": "Generic commutative algebra tool: Formally smooth local maps of complete Noetherian local rings are regular. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "Generic commutative algebra tool: A flat local homomorphism of local rings is surjective on spectra. The perverse-sheaf unit supplies no substitute; this is below its fixed route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-quotient-local-structure",
+  "def-weil-pbc-g-ring",
+  "lem-sfb-geometrically-regular-local-field-adic-smooth",
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-7ba5d9a21",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-7ba5d9a21 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited node statement, and Stacks 07ED, 07NQ, 07PM, 07EL and 0AH2 at their labels. The delivery has no new nodes and keeps the statement unchanged; there is no re-split repair note. The six steps are correct. Step 1: C is Noetherian (0316), B→C is flat (00MB), and B_p→C_Q is flat and local (00HT); J⊆p. Step 2: C⊗B/J≅(B/J)^ by 00MA, a ring isomorphism. 0AH2 gives regularity of B/J→C/JC, and 07C0 localizes it at Q̄ over p/J. Step 3: 00CT identifies the closed fibre of g with D/mD, using JD⊆mD, so that fibre is geometrically regular over k. Step 4: 07EL (1)⇒(2), then 07NQ (2)⇒(3), so D is formally smooth over A for the n-adic topology. Step 5: 05GI, 0316 and 05GG show both completions are complete Noetherian local rings; 07ED (1)⇒(3) gives formal smoothness of α, and α is local. Step 6: 07PM (4)⇒(1) gives regular, and 00HR gives faithfully flat. Edge cases J=0, J=r, B complete, B Artinian and the zero ring behave correctly. No duplicate in the DAG and no cycle (the item is not in its own 667-node closure). Batch-5 flag: the citation of lem-sfb-geometrically-regular-local-field-adic-smooth reaches lem-trf-regular-complete-coefficient-coordinates. That node is the Cohen structure theorem (0C0S), generic commutative algebra that neither the trace-formula nor the Poincaré-duality assumption gives and that is not a step of their proofs, so I accept it. All declared tool_uses are generic commutative algebra, accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GRingQuotientCompletedLocalComparison",
+  "declaration": "AdicCompletion.isRegular_completedLocalComparison_of_quotient_isGRing",
+  "declarations": [
+   "AdicCompletion.jacobsonCompletedLocalComparison",
+   "AdicCompletion.isRegular_completedLocalComparison_of_quotient_isGRing"
+  ],
+  "file": "lean/Sheaf/RingTheory/GRingQuotientCompletedLocalComparison.lean",
+  "statement": "theorem isRegular_completedLocalComparison_of_quotient_isGRing (B : Type u) [CommRing B] [IsNoetherianRing B] [Finite (MaximalSpectrum B)] (J : Ideal B) (hJ : J ≤ Ideal.jacobson (⊥ : Ideal B)) (hG : IsGRing (B ⧸ J)) (Q : Ideal (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B)) [Q.IsPrime] (hQ : ¬ Q.IsMaximal) (hJQ : J.map (algebraMap B (AdicCompletion (Ideal.jacobson (⊥ : Ideal B)) B)) ≤ Q) : (jacobsonCompletedLocalComparison B Q).IsRegular ∧ IsLocalHom (jacobsonCompletedLocalComparison B Q) ∧ (jacobsonCompletedLocalComparison B Q).FaithfullyFlat",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical comparison helper is the map uniquely determined by the quotient coordinates of RingHom.exists_adicCompletion_map_of_local, stated with the standard Localization.AtPrime instances (reviewer FIX: the explicit CommRing projection and with_unfolding_all were unnecessary; plain term compiles). Added the already landed canonical-map node to stmt_deps.",
+  "fixed_by": "NT-stage2-cc-c494a7a28"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c494a7a28",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: Noetherian + Finite MaximalSpectrum (semilocal); r = jacobson ⊥; J ≤ r; only G-ring hypothesis is IsGRing (B⧸J); C = AdicCompletion r B; Q prime, nonmaximal, JC ≤ Q; p = comap; U_p and T_Q are maximal-ideal completions of Localization.AtPrime; conclusion IsRegular ∧ IsLocalHom ∧ FaithfullyFlat. Edge cases (zero ring, Artinian, J=0, J=r, n=0) OK. Mechanical theorem-stmt_dep finding: the item uses the uniquely coordinate-pinned witness of exists_adicCompletion_map_of_local (.choose), an object the theorem constructs, and that module defines nothing, so PASS on that point. FIX: the helper jacobsonCompletedLocalComparison stated its codomain with a nonstandard @IsLocalRing.maximalIdeal instance path plus with_unfolding_all, so it matched the standard completion type only under full unfolding; replaced by the plain term-mode .choose with standard instances (nt_compile clean, 3.2 s); lean-record.json keeps the theorem statement verbatim and updates the note. Notes: Q139 delivered the same item to the same file (PASS 15:47, not yet landed), so land only one; AlgebraicGeometry.localMapCompletionMap is an identical .choose in a trace-formula theorem module, could be consolidated into a definition node later."
+ }
+}

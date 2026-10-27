@@ -1,0 +1,292 @@
+{
+ "id": "lem-fd-hom-linear-equivalence",
+ "kind": "statement",
+ "title": "Hom transport and linear equivalence between literal coefficient pair categories",
+ "statement": "Fix a finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. Let $T$ be a noetherian finite-dimensional scheme with $\\ell$ invertible, in the sense of [lem-weil-pbc-integral-stratified-perfect-characterization]; such schemes are called allowed. For each finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, use the framework integral category and raw rationalization $\\mathcal C_E^s(T)$ of [def-weil-rationalization-karoubi] and the PBC integral category and raw rationalization $\\mathcal C_E^p(T)$ of [def-weil-pbc-rational-category].\nUse these categories also for each allowed $W$, with $T$ replaced by $W$. For each allowed scheme $W$ and every finite $E$, suppose given exact $E$-linear equivalences $J_{W,E}:\\mathcal C_E^s(W)\\simeq\\mathcal C_E^p(W)$ and exact natural scalar comparisons $j_{W,L/E}:J_{W,L}S_{L/E}\\simeq P_{L/E}J_{W,E}$. Here $S,P$ and their associators $a^s,a^p$ are the actual transitions of [def-weil-rationalization-karoubi, lem-weil-scalar-extension-composition, prop-weil-pbc-scalar-extension]. Assume the identity normalization, compatibility with shifts and the scalar cocycle\n$$a^p_{M,L,E}\\circ P_{M/L}(j_{W,L/E})\\circ j_{W,M/L,S_{L/E}K}=j_{W,M/E}\\circ J_{W,M}(a^s_{M,L,E}).$$\nWrite $\\mathcal C_W,\\mathcal P_W$ for the literal pair categories of [def-weil-algebraically-closed-coefficients, def-weil-pbc-qbar-category], with inclusions $\\iota^s_E,\\iota^p_E$. All categories are viewed in one sufficiently large universe. For a fixed allowed $W$, endpoints $X=(E,K),Y=(F,H)$, and $M\\supset E,F$, put\n$$\\phi_M(u)=j_{W,M/F,H}J_{W,M}(u)j_{W,M/E,K}^{-1}.$$\nThese maps are additive bijections from $\\operatorname{Hom}(S_{M/E}K,S_{M/F}H)$ to $\\operatorname{Hom}(P_{M/E}J_{W,E}K,P_{M/F}J_{W,F}H)$. Their inverses are\n$$\\psi_M(v)=(J_{W,M}|_{\\operatorname{Hom}})^{-1}(j_{W,M/F,H}^{-1}v j_{W,M/E,K}).$$\nFor every $N\\supset M$, with the actual associator-conjugated transport maps, $\\phi_N(u_N)=\\phi_M(u)_N$ and $\\psi_N(v_N)=\\psi_M(v)_N$. Thus these maps induce inverse additive bijections on the actual Hom colimits, given by $[M,u]\\mapsto[M,\\phi_M(u)]$ and $[M,v]\\mapsto[M,\\psi_M(v)]$; no faithfulness of any transition functor is required. The object formula $J_W(E,K)=(E,J_{W,E}K)$ and the first map define an additive functor. It is essentially surjective already at each target field label: for every $(E,A)$ there are $K$ and a stage-$E$ isomorphism $J_{W,E}K\\simeq A$ whose class identifies $J_W(E,K)$ with $(E,A)$. Consequently it is an equivalence. Choosing such object preimages and lifting the conjugated arrows by the inverse Hom bijections gives a quasi-inverse. Both functors and both Hom maps are $\\Omega$-linear for the scalar actions represented by $\\lambda u_N$ at a finite $N\\supset M,\\mathbf Q_\\ell(\\lambda)$. The identity-normalized finite-stage inclusions satisfy $J_W\\iota^s_E=\\iota^p_EJ_{W,E}$ on objects and morphisms. No idempotents are adjoined.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; agent-extracted auxiliary argument: Original common-stage proof steps 1–5: conjugation transport, inverse Hom maps, essential surjectivity and scalar linearity"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-scalar-extension-composition",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-qbar-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "proof": [
+  {
+   "text": "At every common stage, construct stageHomEquiv with forward map J.mapAt and inverse the preimage under J.Φ M of beta_A.inv ≫ v ≫ beta_B.hom. Full faithfulness and the inverse equations of beta prove both inverse laws. The map is additive by finite-stage additivity and bilinearity of composition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: stage Hom maps and their inverse"
+   }
+  },
+  {
+   "text": "Apply StageSystem.Morphism.tr_mapAt, already proved for the actual associator-conjugated transports. Its proof is exactly the scalar cocycle at the two endpoints followed by beta naturality. This gives the forward transport equation.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: cocycle and naturality calculation with the actual associators"
+   }
+  },
+  {
+   "text": "Apply injectivity of stageHomEquiv at N to the inverse transport equation. The forward transport equation and the right-inverse laws at M and N reduce both sides to the transport of v. No transition functor is assumed faithful.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: inverse transport from stage Hom injectivity"
+   }
+  },
+  {
+   "text": "Prove that J.functor is full and faithful on the existing quotient. For fullness, represent a target arrow at M and apply the inverse stage Hom equivalence there. For faithfulness, represent both source arrows; equality of their images gives equality after transport to a common P. tr_mapAt and injectivity of stageHomEquiv at P give equality of the original transported representatives. The actual quotient equality criterion then gives equality of the source arrows.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: well-defined inverse additive maps on the specified Hom colimits"
+   }
+  },
+  {
+   "text": "Use the already constructed StageSystem.Morphism.functor: its object formula is literal, and functor_map_mkHom is the representative formula. Its identity and composition laws were proved by cancellation of the middle beta. After essential surjectivity from the next step, this functor is an equivalence, hence preserves binary products and zero morphisms. Mathlib additive_of_preserves_binary_products proves additivity for the published preadditive structures, avoiding any definitional identification of their implementations.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: functor laws by identity normalization and cancellation"
+   }
+  },
+  {
+   "text": "For each target pair A=(E,A_E), take the object preimage of A_E under the given finite-stage equivalence J_E and its isomorphism. Apply the actual inclusion functor at E to that isomorphism. This proves essential surjectivity at the original target field label E.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: essential surjectivity at the target field label"
+   }
+  },
+  {
+   "text": "For arbitrary specified finite-stage choices K_A and epsilon_A, set Kprime(A)=(A.stage,K_A) and let epsilonprime(A) be the inclusion image of epsilon_A. Define G.obj=Kprime and G.map f=J.functor.preimage(epsilonprime(A).hom ≫ f ≫ epsilonprime(B).inv). Apply faithfulness of J.functor and its preimage equations to prove identity and composition laws.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: chosen quasi-inverse on objects and arrows"
+   }
+  },
+  {
+   "text": "Define the unit at X as the inverse of the preimage isomorphism of epsilonprime(JX); define the counit by epsilonprime. Applying J.functor and cancelling the epsilon components proves unit naturality, counit naturality, and the forward triangle equation. These data construct the specified equivalence directly. The inverse object and counit formulas are definitional. The inverse arrow formula follows by faithfulness and the inverse law of the Hom equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: unit, counit and triangle identities of the chosen equivalence"
+   }
+  },
+  {
+   "text": "For a scalar a in Omega, induct on an arrow representative at M and set N to the actual finite coefficient compositum of M and qbarScalarField(a). The intrinsicQbarLinear_existsUnique normalization identifies the published source scalar action with qbarScalarHom; the target action is the published qbarPairLinear construction. Unfold only the quotient scalar-action formula, which represents scalar multiplication by a times the transported arrow at N. Finite-stage linearity, bilinearity of beta conjugation, and tr_mapAt equate the two representatives. Thus J.functor is Omega-linear. Define its LinearEquiv explicitly with forward map J.functor.map and inverse J.functor.preimage; the functor preimage equations and the established additive and scalar laws prove its fields. Its forward representative formula is functor_map_mkHom; its inverse representative formula follows from injectivity and the stage inverse law.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-pbc-qbar-category",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: scalar multiplication at a common finite overfield"
+   }
+  },
+  {
+   "text": "Apply Mathlib Equivalence.inverse_additive and Equivalence.inverseLinear to the explicitly constructed equivalence. They use the forward full-faithful linear functor, bilinearity of composition and the unit/counit equations, so apply to every supplied choice of finite object preimages.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: linearity of the chosen quasi-inverse"
+   }
+  },
+  {
+   "text": "The object equality for finite inclusions is reflexivity. The arrow equality is precisely StageSystem.Morphism.functor_map_ι, proved by beta naturality. All carriers are the existing literal pairs and actual quotient Homs; no completion is introduced.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence identifying the coefficient category; agent-written auxiliary argument: identity-normalized inclusions and literal pair categories"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-qbar-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence, auxiliary common-stage argument, steps 1–11; implemented by E5 using the actual StageSystem API and Mathlib equivalence/linear-functor API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent field linear equivalences of finite coefficient categories induce bijections on common stage Hom filtered colimits commuting with associator transport and a linear equivalence on literal pair categories",
+   "results": "[leanfinder] OK 8 hit(s); ModuleCat.FilteredColimits.colimitSMulAux_eq_of_rel; ModuleCat.FilteredColimits.M.mk_eq; ModuleCat.FilteredColimits.M.mk_map; fromModuleCatToModuleCatLinearEquivtoModuleCatObj; MatrixModCat.unitIso; ModuleCat.FilteredColimits.colimitCoconeIsColimit; ModuleCat.FilteredColimits.ι_colimitDesc_assoc; ModuleCat.FilteredColimits.colimitCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-ring module colimits and abstract equivalence infrastructure do not supply conjugation transport between these two varying coefficient systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugation by a natural scalar comparison commutes with common stage transport and its inverse induces a linear equivalence of pair categories",
+   "results": "[leansearch] OK 8 hit(s); ConjAct.smulCommClass₀'; ConjAct.smulCommClass'; CategoryTheory.PreGaloisCategory.IsNaturalSMul.mk; ModuleCat.Iso.conj_eq_conj; RCLike.conjCLE; SMulCommClass.op_right; FGModuleCat.Iso.conj_eq_conj; MulOpposite.instSMulCommClass",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-ring module colimits and abstract equivalence infrastructure do not supply conjugation transport between these two varying coefficient systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence, CategoryTheory.Linear",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-ring module colimits and abstract equivalence infrastructure do not supply conjugation transport between these two varying coefficient systems"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|pseudocolimit|common.stage",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-ring module colimits and abstract equivalence infrastructure do not supply conjugation transport between these two varying coefficient systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudonatural equivalences of filtered diagrams of linear categories induce equivalences on explicit categories of pairs with colimit morphisms",
+   "results": "[leanfinder] OK 8 hit(s); ModuleCat.FilteredColimits.M.mk_eq; CategoryTheory.Limits.Types.FilteredColimit.rel_equiv; ModuleCat.FilteredColimits.colimitSMulAux_eq_of_rel; ModuleCat.FilteredColimits.M.mk_map; CategoryTheory.Limits.Types.FilteredColimit.rel_eq_eqvGen_colimitTypeRel; CategoryTheory.Limits.HasColimit.isoOfEquivalence_hom_π; ModuleCat.FilteredColimits.colimitCocone; ModuleCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-ring module colimits and abstract equivalence infrastructure do not supply conjugation transport between these two varying coefficient systems"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|pseudocolimit|common.stage",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no exact match: abstract additive direct-limit congruences and pseudofunctor naturality do not state the actual coefficient-system transport or the chosen equivalence; the elementary quotient argument is written explicitly in steps 3–4"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence, CategoryTheory.Linear",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no exact match: abstract additive direct-limit congruences and pseudofunctor naturality do not state the actual coefficient-system transport or the chosen equivalence; the elementary quotient argument is written explicitly in steps 3–4"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudonatural stage equivalences commute with associator conjugated transport and descend to equivalences on filtered categories of pairs",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.conjugateEquiv_associator_hom, CategoryTheory.Pseudofunctor.StrongTrans.naturality_comp_assoc, CategoryTheory.Pseudofunctor.StrongTrans.naturality_naturality_assoc, CategoryTheory.Pseudofunctor.map₂_associator_app, CategoryTheory.Pseudofunctor.StrongTrans.naturality_naturality_hom_assoc, CategoryTheory.Pseudofunctor.StrongTrans.naturality_comp_hom_app_assoc, CategoryTheory.NatTrans.CommShift.associator, CategoryTheory.Pseudofunctor.StrongTrans.naturality_comp_hom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no exact match: abstract additive direct-limit congruences and pseudofunctor naturality do not state the actual coefficient-system transport or the chosen equivalence; the elementary quotient argument is written explicitly in steps 3–4"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of bijections of directed systems induces a bijection of their direct limits even when transition maps are not injective",
+   "results": "[leanfinder] OK 8 hit(s); Ring.DirectLimit.congr_apply_of, AddCommGroup.DirectLimit.congr_apply_of, AddCommGroup.DirectLimit.congr, Ring.DirectLimit.congr, AddCommGroup.DirectLimit.congr_symm_apply_of, FirstOrder.Language.DirectLimit.Equiv_iSup, DirectLimit.exists_eq_mk₂, DirectLimit.exists_eq_mk₃",
+   "date": "2026-10-22",
+   "verdict": "no exact match: abstract additive direct-limit congruences and pseudofunctor naturality do not state the actual coefficient-system transport or the chosen equivalence; the elementary quotient argument is written explicitly in steps 3–4"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent linear equivalences between directed systems of categories induce inverse maps on common stage Hom colimits and a linear equivalence of categories of pairs",
+   "results": "[leanfinder] OK 8 hit(s); Module.DirectLimit.congr_symm_apply_of, Module.DirectLimit.linearEquiv, Module.DirectLimit.linearEquiv_symm_mk, Module.DirectLimit.linearEquiv_of, Module.DirectLimit.congr_apply_of, DirectLimit.Module.of_f, Module.DirectLimit.congr, AddCommGroup.DirectLimit.congr_symm_apply_of",
+   "date": "2026-10-22",
+   "verdict": "no exact match: abstract additive direct-limit congruences and pseudofunctor naturality do not state the actual coefficient-system transport or the chosen equivalence; the elementary quotient argument is written explicitly in steps 3–4"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-common-stage-comparison-descent",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence computing trace in the PBC coefficient category; auxiliary common-stage comparison: stage Hom conjugation, actual associator transport, inverse Hom quotients, chosen linear equivalence and finite inclusions",
+   "via": [
+    "lem-fd-common-stage-comparison-descent",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-hom-linear-equivalence",
+  "worker": "stage1",
+  "summary": "Q39 gives an explicit eleven-step proof from the supplied finite equivalences, naturality and scalar cocycle. The actual associator-conjugated transport is computed, its inverse commutes by stage Hom injectivity, the Hom quotient maps are checked directly, and the chosen quasi-inverse, unit, counit, both triangle identities and scalar linearity are written out. No new nodes, no statement change, no transition faithfulness, and no Karoubi construction. Searches find abstract direct-limit infrastructure only; every elementary step is an explicit substitution, cancellation, or quotient check.",
+  "blueprint": "Auxiliary argument serving the final sentence of def-fd-trace-function in main-20261015: compare framework and PBC coefficient categories. Steps 1–4 realize stagewise Hom conjugation and passage to the actual Hom colimits; steps 5–8 realize the additive equivalence with specified object preimages; steps 9–10 give Omega-linearity; step 11 gives finite-inclusion normalization. The blueprint itself contains no proof of this auxiliary argument."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-fda0d8e8a",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-fda0d8e8a (reviewer sub-agent of L); spot-checked: Ordinary one-level split with no new nodes and no repair note. Statement and stmt_deps are byte-identical to the Q11-created item (checked against the Q11 5b87 snapshot), and the citer lem-fd-common-stage-comparison-descent step 1 uses the item exactly as stated. proof_deps equals the union of the step uses. proof_origin is agent, with the main-20261015 def-fd-trace-function final sentence as source; no SGA. I read the cited statements in full: def-weil-pbc-finite-stage-pair-category (transport a T(u) a^{-1}, equality at a common P, [E,id] with T_{E/E}=id), def-weil-algebraically-closed-coefficients (raw D^b_c(Y,E), no Karoubi, so it matches C_E^s), def-weil-pbc-qbar-category (αf=[N,αu_N]), def-weil-finite-subextension-directed-set, prop-weil-pbc-scalar-extension and def-weil-pbc-rational-category. I type-checked the cocycle (both sides J_M S S K → P_{M/E} J_E K) and re-derived the step-2 computation: cocycle at both endpoints plus naturality gives c_V J(Su) c_U^{-1} = P(J_M u), hence φ_N(u_N) = a_F P(φ_M u) a_E^{-1}. Step 3 uses only φ_N injectivity. Steps 4-5 check descent, inverses, additivity, identity and composition. Step 6 gives essential surjectivity at the label E. Steps 7-8 give G, η, naturality and both triangle identities, all type-checked. Steps 9-10 give Ω-linearity at N ⊃ M, Q_ℓ(λ); step 11 gives inclusions via j_{E/E}=1. Each step is a few lines, so elementary is justified. Edge cases checked: E=F=M=N, non-injective transitions, λ outside M, zero arrows. lem-sbc-coherent-pair-functor-descent generalises only steps 2/4/5, belongs to another unit and needs pentagon hypotheses not stated on the framework side, so the inline calculation is acceptable. No faults, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FdHomLinearEquivalence",
+  "declaration": "WeilConjectures.fdHomLinearEquivalence",
+  "declarations": [
+   "WeilConjectures.FdHomLinearEquivalence",
+   "WeilConjectures.fdHomLinearEquivalence"
+  ],
+  "file": "lean/Sheaf/Paper/FdHomLinearEquivalence.lean",
+  "statement": "theorem fdHomLinearEquivalence (_D : FiniteFieldDatum.{d}) (_hl : l ≠ _D.p) [∀ E, (J.Φ E).CommShift ℤ] (_hadd : ∀ E, (J.Φ E).Additive) (_hlinear : ∀ E, (J.Φ E).Linear E.val) (_hexact : ∀ E, (J.Φ E).IsTriangulated) (_hshift : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L), NatTrans.CommShift (J.β h).hom ℤ) (_hunit : ∀ E (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E), HEq ((J.β (le_refl E)).hom.app K) ((J.Φ E).map ((GeneralAlgebraicallyClosedCoefficients.unitor l Ω T E).inv.app K))) : FdHomLinearEquivalence l Ω T J",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Packages every clause in FdHomLinearEquivalence, using the two published literal stage systems, their actual quotient Homs and the canonical common-stage scalar actions. beta is inverse j; its coherence is exactly the assumed scalar cocycle. Pointwise in the arbitrary allowed scheme T, so a supplied family over all allowed W specializes without additional assumptions. Return 0574c0e64d9d repaired by preserving the live def-weil-pbc-qbar-category record byte-identically, including ownership of all eight intrinsic declarations. The report gives the requested maintainer note: intrinsicPbcQbarCategory is the framework carrier; this item uses the distinct existing pbcQbarCategory publicly reexported by IntrinsicQbarCategory for its PBC target."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f25a668e",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 0574c0e64d9d (H13/H4). Repaired by the authorized byte-identical option: all 8 stmt_dep records are byte-identical to side-live, including def-weil-pbc-qbar-category (IntrinsicQbarCategory, existing:false, all 8 intrinsic decls kept). The item .lean is byte-identical to the 0574 snapshot, whose mathematics was already found correct. Item record: only lean.note changed; statement verbatim. Report has a Worker report, a Second reading by Q83 and a maintainer note on the carriers (intrinsicPbcQbarCategory aliases the framework C_T; the PBC carrier is pbcQbarCategory = (pbcScalarSystem).PairCategory, publicly re-exported). Independent re-check: beta = j^-1 and coh/coh_inv = the node's cocycle with the actual associators; phi = mapAt, psi = preimage of beta_A.inv>>v>>beta_B.hom; transports use the actual tr; the Hom maps are an Omega-linear equivalence via intrinsicQbarLinear and pbcQbarLinear; essential surjectivity at the target label; quasi-inverse for every (K, eps); inclusion equations; _hunit satisfiable; universes d/u/w independent; sorry-only; docstrings carry the source place and the 11 proof steps. Advisory: pbcScalarSystem comes from a proof_dep owner and reaches the item through a public re-export (accepted pattern). No compile run (no file changed); the worker reports scompile pass 33.3 s/47.5 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261025T210231-L-3497317",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

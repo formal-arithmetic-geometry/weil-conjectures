@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-dm-field-etale-chart-quasifinite",
+ "kind": "statement",
+ "title": "Etale scheme charts of a discrete finite-type DM stack over a field",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Stacks, Deligne--Mumford stacks, representability by algebraic spaces and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. An etale chart is a representable-by-algebraic-spaces etale map from a scheme, and an atlas is a surjective chart; etale and smooth are tested on scheme charts using [def-weil-etale-morphism, def-sbc-smooth-morphisms]. Let $k$ be a field [def-weil-field] over $S$ and let $\\mathcal Z$ be a Deligne--Mumford stack over $k$. Suppose that $\\mathcal Z\\to\\operatorname{Spec}k$ is locally of finite type, meaning locally of finite type on smooth scheme charts [def-weil-finite-type-morphism], and that $|\\mathcal Z|$ is discrete. Here the point space consists of field-valued objects modulo isomorphism after common field extension, with topology detected by any smooth surjective scheme atlas. For every etale scheme chart $A\\to\\mathcal Z$, not necessarily surjective, the composite $A\\to\\operatorname{Spec}k$ is locally quasi-finite [pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06UC (lemma-locally-quasi-finite-over-field), etale-chart specialization; its proof uses only local finite type, discreteness of the stack point space, and local quasi-finiteness of the chart."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-stack-point-topological-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $a:A\\to\\mathcal Z$. The chartwise calculus makes $a$ smooth and locally of finite type. The stack finite-type calculus then makes $A\\to\\operatorname{Spec}k$ locally of finite type. Set $R=A\\times_{\\mathcal Z}A$, with projections $s,t:R\\to A$. This is an algebraic space by representability of $a$, and both projections are etale by base change. These assertions do not require $a$ to be surjective.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-dm-etale-atlas-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06UC (lemma-locally-quasi-finite-over-field), proof specialized to etale charts; only its stated local finite type, discrete point space, and chart quasi-finiteness inputs are used."
+   }
+  },
+  {
+   "text": "Assume that $A\\to\\operatorname{Spec}k$ is not locally quasi-finite. The specialization lemma gives distinct $v,v^{\\prime}\\in A$ with $v\\leadsto v^{\\prime}$, and the strict-drop lemma gives $\\operatorname{trdeg}_k\\kappa(v)>\\operatorname{trdeg}_k\\kappa(v^{\\prime})$. Continuity of $|a|$ sends this specialization to one in $|\\mathcal Z|$. A discrete space has no specialization between distinct points, so $|a|(v)=|a|(v^{\\prime})$.",
+   "uses": [
+    "lem-sfb-field-nonquasifinite-specialization",
+    "lem-sfb-field-specialization-trdeg-drop",
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06UC (lemma-locally-quasi-finite-over-field), proof specialized to etale charts; only its stated local finite type, discrete point space, and chart quasi-finiteness inputs are used."
+   }
+  },
+  {
+   "text": "The equality of point classes means that their residue-field representatives become 2-isomorphic over a common field extension $L$. The two maps $\\operatorname{Spec}L\\to A$, with that isomorphism over $\\mathcal Z$, are an object of the 2-fibre product $R$. Its point $r\\in|R|$ satisfies $s(r)=v$ and $t(r)=v^{\\prime}$. This is the direct construction in Tag 04XH (lemma-points-cartesian), using the stated definition of point classes and the defining triples of the 2-fibre product.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06UC (lemma-locally-quasi-finite-over-field), proof specialized to etale charts; only its stated local finite type, discrete point space, and chart quasi-finiteness inputs are used."
+   }
+  },
+  {
+   "text": "Choose an etale scheme chart $W\\to R$ and $w\\in W$ above $r$, using the point-surjectivity of an etale scheme cover of an algebraic space. Since $s$ and $t$ are etale, the etale-space lemma makes both locally quasi-finite. Apply the chart transcendence-degree comparison to $R\\xrightarrow{s}A\\to\\operatorname{Spec}k$ and $R\\xrightarrow{t}A\\to\\operatorname{Spec}k$, with the same $W,w$. It gives $$\\operatorname{trdeg}_k\\kappa(v)=\\operatorname{trdeg}_k\\kappa(w)=\\operatorname{trdeg}_k\\kappa(v^{\\prime}).$$ The required local finite type of $A/k$ was established in step 1.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-a1-etale-space-locally-quasi-finite",
+    "lem-sfb-space-quasifinite-trdeg-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06UC (lemma-locally-quasi-finite-over-field), proof specialized to etale charts; only its stated local finite type, discrete point space, and chart quasi-finiteness inputs are used."
+   }
+  },
+  {
+   "text": "The equality in step 4 contradicts the strict inequality in step 2. Thus $A\\to\\operatorname{Spec}k$ is locally quasi-finite. Since the chart $a$ was arbitrary, this proves the assertion for every chart, including the empty chart.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06UC (lemma-locally-quasi-finite-over-field), proof specialized to etale charts; only its stated local finite type, discrete point space, and chart quasi-finiteness inputs are used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-sfb-dm-etale-atlas-calculus",
+  "lem-sfb-field-nonquasifinite-specialization",
+  "lem-sfb-field-specialization-trdeg-drop",
+  "lem-sfb-stack-point-topology",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-sfb-space-quasifinite-trdeg-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06UC (lemma-locally-quasi-finite-over-field), proof specialized to etale charts; only its stated local finite type, discrete point space, and chart quasi-finiteness inputs are used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|AlgebraicStack|locallyQuasiFinite_iff_isDiscrete",
+   "results": "Actual search hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\"",
+   "results": "Actual search hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme etale over a Deligne Mumford stack locally quasi finite over a field is locally quasi finite over that field",
+   "results": "Actual search hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale scheme chart of a Deligne Mumford stack locally quasi finite over a field has dimension zero",
+   "results": "Actual search hits: AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale atlas over a discrete locally finite type Deligne Mumford stack over a field is locally quasi finite",
+   "results": "Actual search hits: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.LocallyQuasiFinite.of_comp. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|smooth.*local.*source.*target",
+   "results": "Actual search hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"locallyQuasiFinite_iff_isDiscrete_preimage_singleton\"",
+   "results": "Actual search hits: AlgebraicGeometry.locallyQuasiFinite_iff_isDiscrete_preimage_singleton. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\"",
+   "results": "Actual search hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.locallyOfFiniteType_comp. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale scheme chart of a locally finite type Deligne Mumford stack with discrete point space over a field is locally quasi finite",
+   "results": "Actual hits: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.LocallyOfFinitePresentation. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results only treat schemes, ring maps, or Artinian topology; they do not cover Deligne--Mumford stacks or their 2-fibre products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme over a field a discrete Deligne Mumford quotient of an etale equivalence relation forces the scheme to be zero dimensional",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsLocallyArtinian.discreteTopology, AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology, AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology, AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results only treat schemes, ring maps, or Artinian topology; they do not cover Deligne--Mumford stacks or their 2-fibre products."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale charts of discrete algebraic stacks over fields are locally quasi finite",
+   "results": "Actual hits: AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.IsEtale, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results only treat schemes, ring maps, or Artinian topology; they do not cover Deligne--Mumford stacks or their 2-fibre products."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\"",
+   "results": "Actual hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results only treat schemes, ring maps, or Artinian topology; they do not cover Deligne--Mumford stacks or their 2-fibre products."
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|AlgebraicStack|compare_tr_deg|locallyQuasiFinite_iff",
+   "results": "Actual hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results only treat schemes, ring maps, or Artinian topology; they do not cover Deligne--Mumford stacks or their 2-fibre products."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-lqf-atlas-test",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Etale presentation test for intrinsic stack local quasi-finiteness. Supporting input for the etale local-quasi-finiteness test: Etale scheme charts of a discrete finite-type DM stack over a field.",
+   "via": [
+    "lem-sfb-dm-lqf-atlas-test",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dm-field-etale-chart-quasifinite",
+  "worker": "stage1",
+  "summary": "Followed the actual 06UC specialization/transcendence-degree contradiction, with no surjectivity assumption on the chart. Reused the stack chart/finite-type/topology calculi and algebraic-space chart cover and etale-to-lqf lemmas. Created three statement-only supporting inputs after whole-DAG, blueprint and logged Mathlib searches. Kept the original statement and its hypotheses unchanged.",
+  "blueprint": "The inherited creation chain has no resolvable blueprint ancestor (blueprint_refs.py ancestor returns None). Its named ancestor is det-thm-sf-ctf-stability-direct-images, proof (3), Rj_* constructibility. The current literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md still uses the open-direct-image route. This split resolves only its inherited DM-stack chart prerequisite, by the source 06UC proof.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic existence and point-surjectivity of an algebraic-space etale scheme cover; the unit gives no replacement for this chart construction."
+   },
+   {
+    "node": "lem-a1-etale-space-locally-quasi-finite",
+    "why": "Generic etale implies locally quasi-finite for algebraic spaces, applied to the two projections of the chart relation; no unit lemma states this implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-etale-space-locally-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-38aabe4f7",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-38aabe4f7 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, every cited statement and the sources: Stacks 06UC proof, 01TH, 06RU(3), 06RX, plus 04XH for step 3. The item is a special case of 06UC: DM, locally of finite type, discrete |Z|, etale chart (hence locally quasi-finite); statement unchanged. Its five steps follow the 06UC proof one to one. Step 1: the chartwise, finite-type and DM-atlas calculi give A/k locally of finite type and R = A×_Z A an algebraic space with s, t etale. Step 2: the two new nodes give v⇝v' with trdeg κ(v) > trdeg κ(v'); continuity from stack-point-topology and discreteness of |Z| give |a|(v) = |a|(v'). Step 3 (elementary): the 04XH triple (v_L, v'_L, φ) gives r ∈ |R| with s(r) = v, t(r) = v'. Step 4: a1 affine-etale-cover gives W, w over r; a1 etale⇒lqf applies to s and t; the comparison node with the same W, w gives equal trdeg. Step 5: contradiction. New nodes checked true and statement-only. The 01TH node follows by contraposition of (3)⇒(1); tested on A^1, k[ε], the empty scheme. The 06RU node is strict trdeg drop for primes p⊊q; tested on A^1 and k[x,y]/(y^2). The 06RX node holds because κ(w)/κ(g(e)) is finite at a quasi-finite point; tested on the identity, Frobenius and Spec k(t). No duplicates: rg -L over dag/nodes for the tags and labels and for trdeg/specialization, with 12 candidates read. None restates an item clause. No cycle; the parent lem-sfb-dm-lqf-atlas-test uses the item exactly as stated. lem-a1 tool_uses accepted as generic algebraic-space chart facts. Batch-5: all seven flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space (also def-a1-space-point-topology is a definition). They are not the trace formula, Poincaré duality or a step of their proofs, so they are outside the assumptions. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmFieldEtaleChartQuasifinite",
+  "declaration": "CategoryTheory.dm_field_etale_chart_isLocallyQuasiFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/DmFieldEtaleChartQuasifinite.lean",
+  "statement": "theorem dm_field_etale_chart_isLocallyQuasiFinite {S : Scheme.{u}} (k : Type u) [Field k] (s : Spec (.of k) ⟶ S) (Z : BasedCategory.{v, w} (Over S)) (f : BasedFunctor Z (discreteModuli (yoneda.obj (Over.mk s)))) (hZ : IsDeligneMumfordModuliStack Z) (hft : IsLocallyFiniteTypeModuliMap f) [DiscreteTopology (ModuliPoints Z)] (A : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj A)) Z) (ha : IsEtaleModuliMap a) (p : A ⟶ Over.mk s) (e : ModuliTwoIso (a.comp f) (discreteModuliMap (yoneda.map p))) : Scheme.Hom.IsLocallyQuasiFinite p.left",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing DM local-finite-type, representable etale-chart and smooth-atlas point-topology declarations. The three owning landed definition nodes are added to stmt_deps. The specified 2-isomorphism identifies the displayed scheme map with the composite over the field; no chart-surjectivity assumption is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8411acedf",
+  "group": "NX",
+  "result": "pass",
+  "note": "Item statement and proof unchanged; delivery adds the lean record and three stmt_deps (moduli-chart-normalization, dm-stack-morphism-properties, stack-point-topological-space), which own the declarations used. Clause check: S, field k with s : Spec k → S, DM Z with structure map f to Spec k, intrinsic lft IsLocallyFiniteTypeModuliMap f, DiscreteTopology on ModuliPoints Z (the only instance is the landed smooth-atlas final topology moduliPointTopologicalSpace), étale chart IsEtaleModuliMap a without surjectivity, p plus 2-iso e naming the Yoneda composite (exists and is unique, so no extra hypothesis), conclusion is the 01TD IsLocallyQuasiFinite including finite type. Universes bound; empty and non-surjective cases covered. Statement field verbatim in file; docstrings carry 06UC, blueprint tag and five steps; proof is only sorry; no definitions; proof-only imports exist, no cycle; report has both sections. No files changed and no compile run; worker reports clean compile and dry-run OK. Three unneeded public imports are harmless. No fixes."
+ }
+}

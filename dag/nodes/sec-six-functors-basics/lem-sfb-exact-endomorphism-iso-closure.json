@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-exact-endomorphism-iso-closure",
+ "kind": "statement",
+ "title": "Invertibility locus of an endomorphism of an exact functor",
+ "statement": "Let $A,B$ be abelian categories [def-sp-abelian], let $G:A\\to B$ be additive and preserve finite limits and finite colimits, and let $\\alpha:G\\to G$ be a natural transformation. For every $g:M\\to N$ such that $\\alpha_M$ and $\\alpha_N$ are isomorphisms, the components $\\alpha_{\\ker g}$, $\\alpha_{\\operatorname{coker}g}$ and $\\alpha_{\\operatorname{im}g}$ are isomorphisms. For every short exact sequence $0\\to M\\to P\\to N\\to0$ such that $\\alpha_M$ and $\\alpha_N$ are isomorphisms, $\\alpha_P$ is an isomorphism. There is no assertion about arbitrary subobjects.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.14, printed p.23: elementary exact-functor diagram argument after representing T on modules by its two-term product differential"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Preservation of kernels conjugates the component at a kernel to the induced kernel map of the naturality square. Its inverse is induced by the inverse endpoint maps. The dual cokernel argument is identical; these are Mathlib kernel.map and cokernel.map isomorphism instances.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply cokernel closure to the kernel inclusion, then transport across the canonical abelian coimage-image isomorphism by naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Map the short exact sequence by G. The naturality diagram has invertible outside arrows, so [lem-weil-pbc-short-five-lemma] proves invertibility of the middle arrow.",
+   "uses": [
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-short-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-25",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.14, printed p.23: elementary exact-functor diagram argument after representing T on modules by its two-term product differential",
+  "note": "The product criterion and exact-functor argument spell out the two-term Roos calculation of the cited source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The invertibility locus of a natural endomorphism of an exact functor between abelian categories is closed under kernels cokernels and extensions",
+   "results": "8 hits: CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.mk, CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsInverseImage, CategoryTheory.ExactFunctor.of, CategoryTheory.MorphismProperty.FunctorsInverting, CategoryTheory.exactFunctor, CategoryTheory.PreGaloisCategory.FibreFunctor.end_isUnit, CategoryTheory.Functor.exact_tfae",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic exact functors, kernel/cokernel comparison isomorphisms and the short five lemma supply the proof, but no single result states this joint invertibility-locus assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The components of a natural endomorphism of an exact additive functor that are isomorphisms remain isomorphisms at kernels cokernels and extensions",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.exact_tfae, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.AdditiveFunctor.ofExact_map_hom, CategoryTheory.AdditiveFunctor.ofExact_map, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.AdditiveFunctor.ofExact",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic exact functors, kernel/cokernel comparison isomorphisms and the short five lemma supply the proof, but no single result states this joint invertibility-locus assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(kernel|cokernel)|preservesFiniteColimits_of_preservesEpi",
+   "results": "25 hits: Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Preadditive/Schur.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean",
+   "date": "2026-10-25",
+   "verdict": "no exact match: generic exact functors, kernel/cokernel comparison isomorphisms and the short five lemma supply the proof, but no single result states this joint invertibility-locus assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrincipalCompleteHeartKernels",
+  "group": "F4",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph (direct-sum preservation): descendant supported scalar heart estimate; the kernel/image completeness input, not an assertion made by the blueprint itself. Computational step: Lemma 3.4.14, printed p.23: elementary exact-functor diagram argument after representing T on modules by its two-term product differential",
+   "via": [
+    "lem-sfb-principal-complete-heart-kernels",
+    "lem-sfb-supported-image-derived-completeness",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExactEndomorphismIsoClosure",
+  "file": "lean/Sheaf/Paper/ExactEndomorphismIsoClosure.lean",
+  "declaration": "CategoryTheory.exactEndomorphism_iso_closure",
+  "statement": "theorem exactEndomorphism_iso_closure :\n    (∀ (M N : A) (g : M ⟶ N), IsIso (α.app M) → IsIso (α.app N) →\n      IsIso (α.app (kernel g)) ∧ IsIso (α.app (cokernel g)) ∧\n        IsIso (α.app (image g))) ∧\n    (∀ S : ShortComplex A, S.ShortExact → IsIso (α.app S.X₁) →\n      IsIso (α.app S.X₃) → IsIso (α.app S.X₂))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T095220-L-3323299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T095220-L-3323299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

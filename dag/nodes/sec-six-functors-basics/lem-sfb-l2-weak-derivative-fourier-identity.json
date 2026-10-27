@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-l2-weak-derivative-fourier-identity",
+ "kind": "statement",
+ "title": "Plancherel transform of an L2 weak partial derivative",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $m\\geq1$ be an integer, equip $\\mathbf R^m$ with its Euclidean norm and Lebesgue measure, and write $L^2(\\mathbf R^m;\\mathbf C)$ for measurable square-integrable complex functions modulo almost-everywhere equality. For $f\\in L^2$, let $\\widehat f\\in L^2$ denote the Plancherel Fourier transform, the continuous extension from Schwartz functions of $f\\mapsto(\\xi\\mapsto\\int e^{-2\\pi i x\\cdot\\xi}f(x)\\,dx)$; Schwartz functions are smooth functions whose derivatives decrease faster than every inverse polynomial. Fix a multi-index $\\alpha\\in\\mathbf N^m$, put $|\\alpha|=\\sum_i\\alpha_i$, $\\partial^\\alpha=\\prod_i\\partial_{x_i}^{\\alpha_i}$ and $\\xi^\\alpha=\\prod_i\\xi_i^{\\alpha_i}$. Let $u,v\\in L^2$ satisfy $$\\int_{\\mathbf R^m}v(x)\\phi(x)\\,dx=(-1)^{|\\alpha|}\\int_{\\mathbf R^m}u(x)\\partial^\\alpha\\phi(x)\\,dx$$ for every smooth compactly supported complex function $\\phi$. Then any measurable representatives $h$ of $\\widehat u$ and $k$ of $\\widehat v$ satisfy $$k(\\xi)=(2\\pi i)^{|\\alpha|}\\xi^\\alpha h(\\xi)\\quad\\text{for almost every }\\xi.$$ In particular $\\xi\\mapsto\\xi^\\alpha h(\\xi)$ is square-integrable.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; VI §2, Sobolev lemma (2.1), printed p.289: agent-stated weak-derivative Fourier prerequisite for the Euclidean proof, not a separately numbered assertion there. Supporting identities read in Mathlib/Analysis/Distribution/TemperedDistribution.lean:568–573 and Mathlib/Analysis/Fourier/LpSpace.lean:120–129. The compact-test weak derivative to L2 Fourier multiplier bridge remains the assertion of this node."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-euclidean-multi-index-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Put $n=|\\alpha|$ and $c=2\\pi i$, and choose measurable representatives $u_0,v_0$ of $u,v$. The weak identity extends to every Schwartz test $\\theta$. Indeed, apply [lem-sfb-schwartz-cutoff-l2-approximation] with $s=n$ to get compact smooth $\\theta_N$ with $\\theta_N\\to\\theta$ and $\\partial^\\alpha\\theta_N\\to\\partial^\\alpha\\theta$ in $L^2$. All these functions are square-integrable by that assertion and [lem-sfb-schwartz-l2-coordinate-calculus]. By [lem-sfb-l2-product-integral-bound], the two errors in the weak identity are bounded by $\\|v_0\\|_2\\|\\theta_N-\\theta\\|_2$ and $\\|u_0\\|_2\\|\\partial^\\alpha\\theta_N-\\partial^\\alpha\\theta\\|_2$, respectively, and tend to zero. Passing to the limit gives $\\int v_0\\theta=(-1)^n\\int u_0\\partial^\\alpha\\theta$.",
+   "uses": [
+    "lem-sfb-schwartz-cutoff-l2-approximation",
+    "lem-sfb-schwartz-l2-coordinate-calculus",
+    "lem-sfb-l2-product-integral-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally, VI §2 before Sobolev lemma (2.1), printed p.289; agent-written Fourier proof using the cited Mathlib interfaces, not a claim to have read this missing book."
+   }
+  },
+  {
+   "text": "For every Schwartz $\\psi$, repeated coordinate multiplication and differentiation preserve the Schwartz class by [lem-sfb-schwartz-l2-coordinate-calculus]. Iterating the first-order rule of [lem-sfb-schwartz-fourier-coordinate-rule] gives $\\partial^\\alpha\\mathcal F\\psi=\\mathcal F(q_\\alpha\\psi)$, where $q_\\alpha(\\xi)=(-c)^n\\xi^\\alpha$. Explicitly start with $\\beta=0$, where the formula is the identity; if it holds for an ordered list of coordinate derivatives with multiplier $q_\\beta$, applying $\\partial_{x_j}$ gives $\\mathcal F(-c\\xi_jq_\\beta\\psi)$. Append the $\\alpha_j$ copies of each coordinate in the order defining $\\partial^\\alpha$. The final multiplier is $(-c)^n\\prod_j\\xi_j^{\\alpha_j}$, and every intermediate multiplier times $\\psi$ is Schwartz. No lower derivative of $u$ is used.",
+   "uses": [
+    "lem-sfb-schwartz-l2-coordinate-calculus",
+    "lem-sfb-schwartz-fourier-coordinate-rule"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally, VI §2 before Sobolev lemma (2.1), printed p.289; agent-written Fourier proof using the cited Mathlib interfaces, not a claim to have read this missing book."
+   }
+  },
+  {
+   "text": "We need the forward bilinear test identity. Let $a\\in L^2$, let $b$ be a measurable representative of $\\mathcal F_2a$, and let $a_0$ represent $a$. By [lem-sfb-l2-inverse-fourier-test-duality], $\\mathcal G_2\\mathcal F_2a=a$ and, evaluated on the Schwartz test $\\mathcal F\\psi$, $\\int(\\mathcal F\\psi)a_0=\\int\\mathcal G(\\mathcal F\\psi)b=\\int\\psi b$. The last equality is the Schwartz inverse law of [lem-sfb-schwartz-fourier-coordinate-rule]. Thus $\\int b\\psi=\\int a_0\\mathcal F\\psi$. All pairings here are integrable by [lem-sfb-schwartz-l2-coordinate-calculus] and [lem-sfb-l2-product-integral-bound]. This identity applies to the chosen representatives by its statement.",
+   "uses": [
+    "lem-sfb-l2-inverse-fourier-test-duality",
+    "lem-sfb-schwartz-fourier-coordinate-rule",
+    "lem-sfb-schwartz-l2-coordinate-calculus",
+    "lem-sfb-l2-product-integral-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally, VI §2 before Sobolev lemma (2.1), printed p.289; agent-written Fourier proof using the cited Mathlib interfaces, not a claim to have read this missing book."
+   }
+  },
+  {
+   "text": "Apply step 3 first to $(a,b)=(v,k)$ and then to $(u,h)$ with test $q_\\alpha\\psi$. Step 1 is applicable to $\\theta=\\mathcal F\\psi$ since this is Schwartz by [lem-sfb-schwartz-fourier-coordinate-rule]. Step 2 identifies its derivative. Consequently, for every Schwartz $\\psi$, $$\\int k\\psi=\\int v_0\\mathcal F\\psi=(-1)^n\\int u_0\\mathcal F(q_\\alpha\\psi)=(-1)^n\\int hq_\\alpha\\psi=\\int c^n\\xi^\\alpha h\\psi.$$ The last sign is $(-1)^n(-c)^n=c^n$. These are bilinear pairings throughout, so no conjugation or reflected frequency is introduced.",
+   "uses": [
+    "lem-sfb-schwartz-fourier-coordinate-rule"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally, VI §2 before Sobolev lemma (2.1), printed p.289; agent-written Fourier proof using the cited Mathlib interfaces, not a claim to have read this missing book."
+   }
+  },
+  {
+   "text": "Let $w(\\xi)=k(\\xi)-c^n\\xi^\\alpha h(\\xi)$. By [lem-sfb-lp-local-integrability] at $p=2$, both $h$ and $k$ are locally integrable. Hence $w$ is locally integrable: on a sufficiently small bounded neighborhood where $h,k$ have finite absolute integrals, the polynomial $c^n\\xi^\\alpha$ is bounded, and $\\int|w|\\leq\\int|k|+\\sup|c^n\\xi^\\alpha|\\int|h|<\\infty$. It is measurable since $h,k$ are. Every compactly supported smooth real $g$, regarded as complex, is Schwartz by [lem-sfb-schwartz-test-inclusion-integrability]. Step 4 gives $\\int gw=0$; the two terms are integrable since $g$ and $\\xi^\\alpha g$ are Schwartz by [lem-sfb-schwartz-l2-coordinate-calculus], and the L2 product bound applies. Use [lem-sfb-smooth-test-ae-separation] with the open set $U=\\mathbf R^m$ to conclude $w=0$ almost everywhere, exactly the required identity.",
+   "uses": [
+    "lem-sfb-lp-local-integrability",
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-schwartz-l2-coordinate-calculus",
+    "lem-sfb-l2-product-integral-bound",
+    "lem-sfb-smooth-test-ae-separation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally, VI §2 before Sobolev lemma (2.1), printed p.289; agent-written Fourier proof using the cited Mathlib interfaces, not a claim to have read this missing book."
+   }
+  },
+  {
+   "text": "Since $c\\ne0$, the established identity gives $\\xi^\\alpha h=c^{-n}k$ almost everywhere. Thus $\\int|\\xi^\\alpha h|^2=|c|^{-2n}\\int|k|^2<\\infty$, including $n=0$. The argument began with arbitrary measurable representatives $h,k$, so it proves the representative-independent assertion as stated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally, VI §2 before Sobolev lemma (2.1), printed p.289; agent-written Fourier proof using the cited Mathlib interfaces, not a claim to have read this missing book."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-schwartz-cutoff-l2-approximation",
+  "lem-sfb-schwartz-l2-coordinate-calculus",
+  "lem-sfb-l2-product-integral-bound",
+  "lem-sfb-schwartz-fourier-coordinate-rule",
+  "lem-sfb-l2-inverse-fourier-test-duality",
+  "lem-sfb-lp-local-integrability",
+  "lem-sfb-schwartz-test-inclusion-integrability",
+  "lem-sfb-smooth-test-ae-separation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally, VI §2 before Sobolev lemma (2.1), printed p.289; agent-written Fourier proof using the cited Mathlib interfaces, not a claim to have read this missing book."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Plancherel Fourier transform of an L2 weak partial derivative equals multiplication of the Fourier transform by the corresponding monomial in 2 pi i xi",
+   "results": "{\"t\": \"2026-10-24T03:17:44Z\", \"tool\": \"leanfinder\", \"query\": \"The Plancherel Fourier transform of an L2 weak partial derivative equals multiplication of the Fourier transform by the corresponding monomial in 2 pi i xi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.fourier_fderiv\", \"Real.fourierIntegral_fderiv\", \"SchwartzMap.fourier_lineDerivOp_eq\", \"SchwartzMap.lineDerivOp_fourierInv_eq\", \"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"SchwartzMap.fourier_fderivCLM_eq\", \"Real.iteratedFDeriv_fourier\", \"Real.fourier_iteratedFDeriv\"], \"digest\": \"dc2ecc3babcfc4b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.fourier_lineDerivOp_eq requires a Schwartz function; Real.fourier_fderiv and Real.fourier_iteratedFDeriv require classical differentiability and integrability. TemperedDistribution.fourier_lineDerivOp_eq (Mathlib/Analysis/Distribution/TemperedDistribution.lean:568) is an identity of tempered distributions. Lp.fourier_toTemperedDistribution_eq (Mathlib/Analysis/Fourier/LpSpace.lean:120) compares L2 and distribution Fourier transforms, but neither statement identifies compact-test weak derivatives with tempered derivatives or gives equality of the resulting measurable functions almost everywhere. These bridges are not a one-line specialization. The focused weak-derivative grep in Analysis/Distribution has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\", \"lineDerivOp\"",
+   "results": "{\"t\": \"2026-10-24T03:17:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"fourier\\\", \\\"lineDerivOp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.fourier_lineDerivOp_eq\", \"SchwartzMap.lineDerivOp_fourierInv_eq\", \"SchwartzMap.fourierInv_lineDerivOp_eq\", \"SchwartzMap.lineDerivOp_fourier_eq\", \"TemperedDistribution.fourier_lineDerivOp_eq\", \"TemperedDistribution.lineDerivOp_fourierInv_eq\", \"TemperedDistribution.fourierInv_lineDerivOp_eq\", \"TemperedDistribution.lineDerivOp_fourier_eq\"], \"digest\": \"94daff4f92603abe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.fourier_lineDerivOp_eq requires a Schwartz function; Real.fourier_fderiv and Real.fourier_iteratedFDeriv require classical differentiability and integrability. TemperedDistribution.fourier_lineDerivOp_eq (Mathlib/Analysis/Distribution/TemperedDistribution.lean:568) is an identity of tempered distributions. Lp.fourier_toTemperedDistribution_eq (Mathlib/Analysis/Fourier/LpSpace.lean:120) compares L2 and distribution Fourier transforms, but neither statement identifies compact-test weak derivatives with tempered derivatives or gives equality of the resulting measurable functions almost everywhere. These bridges are not a one-line specialization. The focused weak-derivative grep in Analysis/Distribution has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.*deriv|fourier.*lineDerivOp|integrable_rpow_neg_one_add_norm_sq|integrable_mul",
+   "results": "{\"t\": \"2026-10-24T03:17:42Z\", \"tool\": \"grep\", \"query\": \"weak.*deriv|fourier.*lineDerivOp|integrable_rpow_neg_one_add_norm_sq|integrable_mul\", \"sub\": \"Analysis\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/SpecialFunctions/Gaussian/GaussianIntegral.lean\", \"Mathlib/Analysis/SpecialFunctions/Gaussian/GaussianIntegral.lean\", \"Mathlib/Analysis/SpecialFunctions/Gaussian/GaussianIntegral.lean\", \"Mathlib/Analysis/SpecialFunctions/Gaussian/GaussianIntegral.lean\"], \"digest\": \"6cd8244d2920013d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.fourier_lineDerivOp_eq requires a Schwartz function; Real.fourier_fderiv and Real.fourier_iteratedFDeriv require classical differentiability and integrability. TemperedDistribution.fourier_lineDerivOp_eq (Mathlib/Analysis/Distribution/TemperedDistribution.lean:568) is an identity of tempered distributions. Lp.fourier_toTemperedDistribution_eq (Mathlib/Analysis/Fourier/LpSpace.lean:120) compares L2 and distribution Fourier transforms, but neither statement identifies compact-test weak derivatives with tempered derivatives or gives equality of the resulting measurable functions almost everywhere. These bridges are not a one-line specialization. The focused weak-derivative grep in Analysis/Distribution has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Fourier transform of a distributional weak derivative of a square integrable function is multiplication by the frequency variable",
+   "results": "{\"t\": \"2026-10-24T03:19:04Z\", \"tool\": \"leansearch\", \"query\": \"The Fourier transform of a distributional weak derivative of a square integrable function is multiplication by the frequency variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.fourier_iteratedFDeriv\", \"VectorFourier.fourierIntegral_fderiv\", \"Real.fourierIntegral_iteratedDeriv\", \"Real.fourier_fderiv\", \"SchwartzMap.fourier_fderivCLM_eq\", \"Real.fourierIntegral_fderiv\", \"VectorFourier.fderiv_fourierIntegral\", \"Real.fourierIntegral_deriv\"], \"digest\": \"da465e6372153453\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.fourier_lineDerivOp_eq requires a Schwartz function; Real.fourier_fderiv and Real.fourier_iteratedFDeriv require classical differentiability and integrability. TemperedDistribution.fourier_lineDerivOp_eq (Mathlib/Analysis/Distribution/TemperedDistribution.lean:568) is an identity of tempered distributions. Lp.fourier_toTemperedDistribution_eq (Mathlib/Analysis/Fourier/LpSpace.lean:120) compares L2 and distribution Fourier transforms, but neither statement identifies compact-test weak derivatives with tempered derivatives or gives equality of the resulting measurable functions almost everywhere. These bridges are not a one-line specialization. The focused weak-derivative grep in Analysis/Distribution has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If u and v are in L2 and v is a distributional partial derivative of u tested on compactly supported smooth functions then Fourier v equals 2 pi i xi times Fourier u almost everywhere",
+   "results": "{\"t\": \"2026-10-24T03:23:51Z\", \"tool\": \"leanfinder\", \"query\": \"If u and v are in L2 and v is a distributional partial derivative of u tested on compactly supported smooth functions then Fourier v equals 2 pi i xi times Fourier u almost everywhere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.fourier_lineDerivOp_eq\", \"Real.fourier_fderiv\", \"Real.fourierIntegral_fderiv\", \"SchwartzMap.fourier_fderivCLM_eq\", \"SchwartzMap.lineDerivOp_fourierInv_eq\", \"SchwartzMap.lineDerivOp_fourier_eq\", \"SchwartzMap.fourierInv_lineDerivOp_eq\", \"SchwartzMap.fderivCLM_fourier_eq\"], \"digest\": \"0e53100adc45729d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.fourier_lineDerivOp_eq requires a Schwartz function; Real.fourier_fderiv and Real.fourier_iteratedFDeriv require classical differentiability and integrability. TemperedDistribution.fourier_lineDerivOp_eq (Mathlib/Analysis/Distribution/TemperedDistribution.lean:568) is an identity of tempered distributions. Lp.fourier_toTemperedDistribution_eq (Mathlib/Analysis/Fourier/LpSpace.lean:120) compares L2 and distribution Fourier transforms, but neither statement identifies compact-test weak derivatives with tempered derivatives or gives equality of the resulting measurable functions almost everywhere. These bridges are not a one-line specialization. The focused weak-derivative grep in Analysis/Distribution has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.*deriv|weakDeriv|WeakDeriv|HasWeak",
+   "results": "{\"t\": \"2026-10-24T03:24:20Z\", \"tool\": \"grep\", \"query\": \"weak.*deriv|weakDeriv|WeakDeriv|HasWeak\", \"sub\": \"Analysis/Distribution\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap.fourier_lineDerivOp_eq requires a Schwartz function; Real.fourier_fderiv and Real.fourier_iteratedFDeriv require classical differentiability and integrability. TemperedDistribution.fourier_lineDerivOp_eq (Mathlib/Analysis/Distribution/TemperedDistribution.lean:568) is an identity of tempered distributions. Lp.fourier_toTemperedDistribution_eq (Mathlib/Analysis/Fourier/LpSpace.lean:120) compares L2 and distribution Fourier transforms, but neither statement identifies compact-test weak derivatives with tempered derivatives or gives equality of the resulting measurable functions almost everywhere. These bridges are not a one-line specialization. The focused weak-derivative grep in Analysis/Distribution has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Plancherel Fourier transform of an L2 compact-test weak multi-index derivative equals the corresponding polynomial frequency multiplier almost everywhere",
+   "results": "{\"t\": \"2026-10-24T03:40:15Z\", \"tool\": \"leanfinder\", \"query\": \"The Plancherel Fourier transform of an L2 compact-test weak multi-index derivative equals the corresponding polynomial frequency multiplier almost everywhere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"Real.iteratedFDeriv_fourier\", \"VectorFourier.iteratedFDeriv_fourierIntegral\", \"Real.iteratedFDeriv_fourierIntegral\", \"Real.fourier_iteratedFDeriv\", \"Real.fourierIntegral_iteratedFDeriv\", \"VectorFourier.fourierIntegral_iteratedFDeriv\", \"SchwartzMap.fourier_fderivCLM_eq\"], \"digest\": \"fcc43bbcc05ee0d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: classical smooth Fourier-derivative identities and the Schwartz/tempered identities do not supply the compact-test to Schwartz-test bridge, or equality of measurable representatives. The named approximation and ae-separation arguments are necessary; this is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For square integrable functions u and v satisfying integral v phi equals minus integral u derivative phi for compact smooth tests their L2 Fourier transforms satisfy a frequency multiplier identity",
+   "results": "{\"t\": \"2026-10-24T03:43:19Z\", \"tool\": \"leansearch\", \"query\": \"For square integrable functions u and v satisfying integral v phi equals minus integral u derivative phi for compact smooth tests their L2 Fourier transforms satisfy a frequency multiplier identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.fourierIntegral_deriv\", \"Real.fourier_fderiv\", \"Real.fourierIntegral_fderiv\", \"VectorFourier.fourierIntegral_fderiv\", \"Real.fourier_deriv\", \"SchwartzMap.fourier_fderivCLM_eq\", \"SchwartzMap.fourierTransformCLM\", \"Real.deriv_fourier\"], \"digest\": \"46e5b7540645b943\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: classical smooth Fourier-derivative identities and the Schwartz/tempered identities do not supply the compact-test to Schwartz-test bridge, or equality of measurable representatives. The named approximation and ae-separation arguments are necessary; this is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\", \"lineDerivOp\"",
+   "results": "{\"t\": \"2026-10-24T03:40:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"fourier\\\", \\\"lineDerivOp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.fourier_lineDerivOp_eq\", \"SchwartzMap.lineDerivOp_fourierInv_eq\", \"SchwartzMap.fourierInv_lineDerivOp_eq\", \"SchwartzMap.lineDerivOp_fourier_eq\", \"TemperedDistribution.fourier_lineDerivOp_eq\", \"TemperedDistribution.lineDerivOp_fourierInv_eq\", \"TemperedDistribution.fourierInv_lineDerivOp_eq\", \"TemperedDistribution.lineDerivOp_fourier_eq\"], \"digest\": \"94daff4f92603abe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: classical smooth Fourier-derivative identities and the Schwartz/tempered identities do not supply the compact-test to Schwartz-test bridge, or equality of measurable representatives. The named approximation and ae-separation arguments are necessary; this is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.*deriv|weakDeriv|HasWeak",
+   "results": "{\"t\": \"2026-10-24T03:40:14Z\", \"tool\": \"grep\", \"query\": \"weak.*deriv|weakDeriv|HasWeak\", \"sub\": \"Analysis/Distribution\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: classical smooth Fourier-derivative identities and the Schwartz/tempered identities do not supply the compact-test to Schwartz-test bridge, or equality of measurable representatives. The named approximation and ae-separation arguments are necessary; this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Plancherel Fourier transform of an L2 compact-test weak multi-index derivative equals the corresponding polynomial frequency multiplier almost everywhere",
+   "results": "{\"t\": \"2026-10-24T03:40:15Z\", \"tool\": \"leanfinder\", \"query\": \"The Plancherel Fourier transform of an L2 compact-test weak multi-index derivative equals the corresponding polynomial frequency multiplier almost everywhere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"Real.iteratedFDeriv_fourier\", \"VectorFourier.iteratedFDeriv_fourierIntegral\", \"Real.iteratedFDeriv_fourierIntegral\", \"Real.fourier_iteratedFDeriv\", \"Real.fourierIntegral_iteratedFDeriv\", \"VectorFourier.fourierIntegral_iteratedFDeriv\", \"SchwartzMap.fourier_fderivCLM_eq\"], \"digest\": \"fcc43bbcc05ee0d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: classical smooth Fourier-derivative identities and the Schwartz/tempered identities do not supply the compact-test to Schwartz-test bridge, or equality of measurable representatives. The named approximation and ae-separation arguments are necessary; this is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For square integrable functions u and v satisfying integral v phi equals minus integral u derivative phi for compact smooth tests their L2 Fourier transforms satisfy a frequency multiplier identity",
+   "results": "{\"t\": \"2026-10-24T03:43:19Z\", \"tool\": \"leansearch\", \"query\": \"For square integrable functions u and v satisfying integral v phi equals minus integral u derivative phi for compact smooth tests their L2 Fourier transforms satisfy a frequency multiplier identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.fourierIntegral_deriv\", \"Real.fourier_fderiv\", \"Real.fourierIntegral_fderiv\", \"VectorFourier.fourierIntegral_fderiv\", \"Real.fourier_deriv\", \"SchwartzMap.fourier_fderivCLM_eq\", \"SchwartzMap.fourierTransformCLM\", \"Real.deriv_fourier\"], \"digest\": \"46e5b7540645b943\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: classical smooth Fourier-derivative identities and the Schwartz/tempered identities do not supply the compact-test to Schwartz-test bridge, or equality of measurable representatives. The named approximation and ae-separation arguments are necessary; this is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\", \"lineDerivOp\"",
+   "results": "{\"t\": \"2026-10-24T03:40:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"fourier\\\", \\\"lineDerivOp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.fourier_lineDerivOp_eq\", \"SchwartzMap.lineDerivOp_fourierInv_eq\", \"SchwartzMap.fourierInv_lineDerivOp_eq\", \"SchwartzMap.lineDerivOp_fourier_eq\", \"TemperedDistribution.fourier_lineDerivOp_eq\", \"TemperedDistribution.lineDerivOp_fourierInv_eq\", \"TemperedDistribution.fourierInv_lineDerivOp_eq\", \"TemperedDistribution.lineDerivOp_fourier_eq\"], \"digest\": \"94daff4f92603abe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: classical smooth Fourier-derivative identities and the Schwartz/tempered identities do not supply the compact-test to Schwartz-test bridge, or equality of measurable representatives. The named approximation and ae-separation arguments are necessary; this is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.*deriv|weakDeriv|HasWeak",
+   "results": "{\"t\": \"2026-10-24T03:40:14Z\", \"tool\": \"grep\", \"query\": \"weak.*deriv|weakDeriv|HasWeak\", \"sub\": \"Analysis/Distribution\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: classical smooth Fourier-derivative identities and the Schwartz/tempered identities do not supply the compact-test to Schwartz-test bridge, or equality of measurable representatives. The named approximation and ae-separation arguments are necessary; this is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weak-sobolev-fourier-moments",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, Sobolev lemma (2.1), printed p.289 (PDF page 289), including the preceding weak-derivative definition of the Sobolev spaces. Supporting Fourier argument: The Euclidean weighted-Fourier integrability input for (2.1), before inverse transformation. Supporting Fourier calculation: Plancherel transform of an L2 weak partial derivative.",
+   "via": [
+    "lem-sfb-weak-sobolev-fourier-moments",
+    "lem-sfb-bundle-sobolev-embedding",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-l2-weak-derivative-fourier-identity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Extended the compact-test identity using a separate finite-derivative Schwartz cutoff approximation; proved the multi-index test formula by explicit first-order induction; derived forward L2 test duality from the existing inverse identity, then used existing smooth-test ae separation. Four new nodes: one unsplit approximation lemma and three Mathlib leaves. No Lean attachment or compilation.",
+  "blueprint": "Realizes the inherited supporting Fourier calculation for Demailly VI §2 (2.1) in the analytic prerequisite chain of det-thm-sf-ctf-stability-direct-images. Latest blueprint main-20261024 and its sk-thm-sf-ctf-stability unit were read; this analytic helper is not itself a blueprint assertion. The inherited ancestor chain has from.node=null, as confirmed by tools/blueprint_refs.py ancestor; retained without inventing an ancestor. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-eab809e9b",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-eab809e9b (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full, plus every cited statement, and checked the Mathlib source lines against the pinned Mathlib. Step 1 extends the weak identity to Schwartz tests: one cutoff sequence (s=n) and the L2 product bound control both error terms. Step 2 iterates lineDerivOp_fourier_eq (Fourier.lean:193, ∂_m𝓕f=𝓕(-(2πi)⟨·,m⟩f)) to get ∂^αFψ=F((-c)^nξ^αψ). Step 3 gets forward duality from lem-sfb-l2-inverse-fourier-test-duality with v=F2a, w0=a0, φ=Fψ, then GF=id; the pairing is bilinear, with no conjugation. In step 4 the signs check: (-1)^n(-c)^n=c^n. Step 5 meets every hypothesis of the ae-separation node: local integrability via the p=2 leaf plus a bounded monomial, and real C_c^∞ tests are Schwartz. Step 6 is fine since c≠0. Tested α=0, the 1-D first derivative, the second-order sign (-4π²ξ²), zero functions, and s=0 for the cutoff lemma. No Mathlib result gives density of compactly supported tests in the Schwartz topology, so the cutoff node is rightly unsplit; it is true and strictly smaller than the item. Leaf lines are correct (the HolderTriple 2 2 1 instance is instTwoTwo, Holder.lean:133). lem-sfb-l2-product-integrable (real-valued, integrability only) is a weaker neighbour, not a duplicate of the new complex bound node. proof_deps equals the union of step uses. All cited existing nodes are same-unit Mathlib leaves, so there is no cycle and no tool_uses. No SGA, no restated clauses, item statement unchanged and consistent with its citer lem-sfb-weak-sobolev-fourier-moments."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.L2WeakDerivativeFourierIdentity",
+  "declaration": "MeasureTheory.Lp.fourier_weak_multiIndex_derivative",
+  "declarations": [
+   "MeasureTheory.Lp.fourier_weak_multiIndex_derivative"
+  ],
+  "file": "lean/Sheaf/Analysis/L2WeakDerivativeFourierIdentity.lean",
+  "statement": "theorem fourier_weak_multiIndex_derivative (m : ℕ) (hm : 1 ≤ m) (α : Fin m → ℕ) (u v : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m)))) (hweak : ∀ φ : EuclideanSpace ℝ (Fin m) → ℂ, ContDiff ℝ ∞ φ → HasCompactSupport φ → (∫ x, v x * φ x ∂volume) = (-1 : ℂ) ^ (∑ j, α j) * ∫ x, u x * EuclideanSpace.multiIndexPartialDeriv α φ x ∂volume) (h k : EuclideanSpace ℝ (Fin m) → ℂ) (hh : Measurable h) (hk : Measurable k) (hrep : h =ᵐ[volume] (𝓕 u : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m))))) (krep : k =ᵐ[volume] (𝓕 v : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m))))) : (∀ᵐ ξ ∂volume, k ξ = (2 * (Real.pi : ℂ) * Complex.I) ^ (∑ j, α j) * (∏ j, (ξ j : ℂ) ^ (α j)) * h ξ) ∧ MemLp (fun ξ ↦ (∏ j, (ξ j : ℂ) ^ (α j)) * h ξ) 2 volume",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Requested ownership extraction in Q78 return: the theorem statement and proof are unchanged; the module now imports/re-exports Sheaf.Analysis.MultiIndexPartialDeriv, which owns EuclideanSpace.multiIndexPartialDeriv. The helper is removed from this theorem node declarations list."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9374bc637",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Checked every clause of the item against Lean: m≥1, EuclideanSpace ℝ (Fin m) with volume, Lp ℂ 2, Mathlib Lp 𝓕 (Schwartz extension, kernel 𝐞(-⟪x,ξ⟫), toLp_fourier_eq), α : Fin m → ℕ, bilinear weak identity over C^∞ compactly supported complex φ, arbitrary measurable representatives h,k a.e. equal to 𝓕u,𝓕v, a.e. conclusion k=(2πi)^|α| ξ^α h and MemLp 2 of ξ^α h. Edge cases α=0 and m=1,α=1 (sign +2πiξ) are correct; integrals are not vacuous. Helper multiIndexPartialDeriv has real data and no Mathlib/project duplicate (iteratedLineDerivOp needs a LineDeriv instance); it is owned by the item module and listed in declarations. stmt_deps=[def-weil-field] is correct; lean.statement is verbatim; the live node differs only by the lean field (no parallel supersession). Proof is by sorry; docstrings carry source, blueprint and the 6 steps; the report has Worker report and Second reading by Q40. No compile (no file changed). Advisory: citer Q139 weak-sobolev-fourier-moments writes the derivative inline as a provably equal nested-iterate form."
+ }
+}

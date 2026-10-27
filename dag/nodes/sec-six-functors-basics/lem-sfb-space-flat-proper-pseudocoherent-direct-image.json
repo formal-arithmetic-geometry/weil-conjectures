@@ -1,0 +1,379 @@
+{
+ "id": "lem-sfb-space-flat-proper-pseudocoherent-direct-image",
+ "kind": "statement",
+ "title": "Flat proper algebraic-space direct image preserves pseudo-coherence",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived pullback and tensor use K-flat resolutions; derived direct image uses K-injective resolutions. Pseudo-coherent means etale locally represented by a bounded-above complex of finite free structure modules [def-sfb-space-pseudocoherent-complex]. Let $S$ be a scheme and $g:Y\\to Z$ a flat proper morphism of finite presentation of algebraic spaces over $S$. Proper means separated, of finite type and universally closed; flatness and local finite presentation are checked on etale scheme charts, and finite presentation includes quasi-compactness and quasi-separatedness. If $F\\in D(\\mathcal O_Y)$ is pseudo-coherent, then $Rg_*F$ is pseudo-coherent on $Z$. In particular, for every commutative ring $A$, every algebraic space $X$ over $\\operatorname{Spec}A$, every $n\\geq0$, and the projection $p:X\\times_A\\mathbf P^n_A\\to X$ [def-pc-projective-space-twist], $Rp_*F$ is pseudo-coherent for every pseudo-coherent $F\\in D(\\mathcal O_{X\\times_A\\mathbf P^n_A})$. No Noetherian hypothesis or lower cohomological bound is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CTN, lemma-flat-proper-pseudo-coherent-direct-image-general, pseudo-coherence conclusion; projective projection specialization used explicitly in spaces-more-morphisms.tex Tag 0CTT."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-pseudocoherent-complex",
+  "def-pc-projective-space-twist",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine etale scheme covering of $Z$. For one member $v:V\\to Z$, put $Y_V=Y\\times_ZV$, $g_V:Y_V\\to V$, and $F_V=F|_{Y_V}$. The fibre product and covering exist by [lem-trf-space-fibre-products-etale-covers]. By [lem-sfb-space-flat-proper-fp-locality], $g_V$ is flat, proper and finitely presented. Since $V$ is affine, [lem-sfb-space-fp-qcqs-source] makes $Y_V$ quasi-compact and quasi-separated. Restriction preserves the local finite-free models in [def-sfb-space-pseudocoherent-complex]. Exact etale restriction gives $v^*Rg_*F\\simeq R(g_V)_*F_V$ by [lem-sfb-space-derived-etale-chart-calculus]. It therefore suffices to construct the required models on these charts. Until step 6 replace $(Y,Z,g,F)$ by $(Y_V,V,g_V,F_V)$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-fp-qcqs-source",
+    "def-sfb-space-pseudocoherent-complex",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTN, lemma-flat-proper-pseudo-coherent-direct-image-general, expanded through Tag 0CTL, lemma-base-change-tensor-pseudo-coherent, with coefficient complex O_Y[0]."
+   }
+  },
+  {
+   "text": "The morphism $g$ is quasi-compact and quasi-separated and its base is now affine. Choose $N\\geq1$ from [lem-sfb-space-derived-pushforward-upper-bound]. Fix any integer $m$ and set $a=m-N-1$. Apply [lem-sfb-space-pseudocoherent-perfect-approximation] on the qcqs space $Y$: it gives $F\\in D_{\\mathrm{QCoh}}$, a perfect $P$, and a distinguished triangle $P\\xrightarrow{u}F\\to C\\to P[1]$ in $D_{\\mathrm{QCoh}}$, with $H^i(u)$ an isomorphism for $i>a$ and $H^a(u)$ surjective. The long exact sequence [lem-sf-derived-homology-long-exact] gives $H^i(C)=0$ for $i\\geq a$: in degree $a$ use that surjection and the injection in degree $a+1$, and in higher degrees use both adjacent isomorphisms.",
+   "uses": [
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "lem-sfb-space-pseudocoherent-perfect-approximation",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTN, lemma-flat-proper-pseudo-coherent-direct-image-general, expanded through Tag 0CTL, lemma-base-change-tensor-pseudo-coherent, with coefficient complex O_Y[0]."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proper-support-tensor-perfect] with $E=P$ and $G^\\bullet=\\mathcal O_Y[0]$. This is bounded; its degree-zero term is quasi-coherent and finitely presented, with presentation $0\\to\\mathcal O_Y\\xrightarrow{1}\\mathcal O_Y\\to0$. To check relative flatness use [lem-sfb-space-module-flat-chart-test]: on any etale scheme atlas $U\\to Y$, the corresponding module is $\\mathcal O_U$, and its stalk is flat over the base stalk since $U\\to Z$ is flat by [lem-sfb-space-local-properties-chart-test] and [def-weil-flat-morphism]. The annihilator of $\\mathcal O_Y$ is zero, so its support subspace is $Y$, proper over $Z$. Every zero term has empty support, proper by [lem-sfb-space-proper-support-closed-operations] (the empty union). Thus $Rg_*(P\\otimes^L\\mathcal O_Y[0])$ is perfect. On a K-flat representative $Q$ of $P$, the termwise maps $Q^i\\otimes\\mathcal O_Y\\to Q^i$, $q\\otimes r\\mapsto rq$, commute with differentials and are inverse to $q\\mapsto q\\otimes1$. Hence $P\\otimes^L\\mathcal O_Y[0]\\simeq P$, and $Rg_*P$ is perfect.",
+   "uses": [
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-space-module-flat-chart-test",
+    "lem-sfb-space-local-properties-chart-test",
+    "def-weil-flat-morphism",
+    "lem-sfb-space-proper-support-closed-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTN, lemma-flat-proper-pseudo-coherent-direct-image-general, expanded through Tag 0CTL, lemma-base-change-tensor-pseudo-coherent, with coefficient complex O_Y[0]."
+   }
+  },
+  {
+   "text": "Apply the upper-bound theorem of step 2 to $C$ with $b=a-1$. It gives $H^j(Rg_*C)=0$ for $j\\geq a-1+N=m-2$. The canonical direct image is additive and K-injective-derived [def-sfb-space-derived-module-calculus]; [lem-pc-right-derived-functor-triangulated] therefore gives a distinguished triangle $Rg_*P\\to Rg_*F\\to Rg_*C\\to(Rg_*P)[1]$. For $i\\geq m$, both $H^{i-1}(Rg_*C)$ and $H^i(Rg_*C)$ vanish. Its long exact sequence [lem-sf-derived-homology-long-exact] makes $H^i(Rg_*u)$ an isomorphism for every $i\\geq m$. This calculation uses only an upper bound on $C$, never a lower bound.",
+   "uses": [
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "def-sfb-space-derived-module-calculus",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTN, lemma-flat-proper-pseudo-coherent-direct-image-general, expanded through Tag 0CTL, lemma-base-change-tensor-pseudo-coherent, with coefficient complex O_Y[0]."
+   }
+  },
+  {
+   "text": "Put $K=Rg_*F$. By [lem-sfb-space-derived-pushforward-coproducts], $K$ has quasi-coherent cohomology. Since $Z$ is a scheme, [lem-sfb-derived-etale-zariski-equivalence] supplies $K_0\\in D_{\\mathrm{QCoh}}(\\mathcal O_{Z,\\mathrm{Zar}})$ with $\\epsilon_Z^*K_0\\simeq K$. For each $m$, the perfect object $Rg_*P$ of step 3 has local strictly perfect models; composing these with $Rg_*u$ and using step 4 gives isomorphisms above $m$ and a surjection in degree $m$. These are precisely the small-etale $m$-pseudo-coherence witnesses in [lem-sfb-etale-pseudocoherence-descent]. That lemma implies that $K_0$ is $m$-pseudo-coherent on the Zariski site. This holds for every integer $m$, so [def-pur-pseudo-coherent-complex] gives local bounded-above finite-free models for $K_0$. Exact $\\epsilon_Z^*$ takes such a model to a finite-free model for $K$ on the small etale site, identifying the structure modules by [lem-sfb-derived-etale-zariski-equivalence].",
+   "uses": [
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTN, lemma-flat-proper-pseudo-coherent-direct-image-general, expanded through Tag 0CTL, lemma-base-change-tensor-pseudo-coherent, with coefficient complex O_Y[0]."
+   }
+  },
+  {
+   "text": "Return to the original space $Z$. The isomorphisms of step 1 and models of step 5 give derived finite-free models on an etale covering, and on further slice restrictions of that covering. To meet the representative formulation of [def-sfb-space-pseudocoherent-complex], choose one K-injective representative $I$ of $Rg_*F$ on the small ringed model using [prop-pur-kinjective-resolutions-exist]. Its restrictions remain K-injective by [lem-pur-kinjective-restrict-localized]. Each derived isomorphism from a local finite-free complex $L$ to $I|_U$ is represented by a chain map by [lem-sc-kinjective-quasi-iso-comparison]; that map is a quasi-isomorphism since its image in the derived category is invertible. Thus all local models map into the single representative $I$. For any other etale site object, pull back the covering and these chain maps; exact slice restriction [lem-sfb-space-derived-etale-chart-calculus] preserves their quasi-isomorphisms. This is exactly the covering-sieve condition of the definition. Hence $Rg_*F$ is pseudo-coherent.",
+   "uses": [
+    "def-sfb-space-pseudocoherent-complex",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTN, lemma-flat-proper-pseudo-coherent-direct-image-general, expanded through Tag 0CTL, lemma-base-change-tensor-pseudo-coherent, with coefficient complex O_Y[0]."
+   }
+  },
+  {
+   "text": "For the projective projection, first work over an affine etale chart $V=\\operatorname{Spec}R\\to X$. Identify polynomial Proj with base-change projective space by [lem-trf-free-projective-bundle-base-change-space]. Then the fibre product of $X\\times_A\\mathbf P^n_A$ with $V$ is $\\mathbf P^n_R$ by [lemma-nagata-projective-space-base-change-pullback]. Its projection $p_V$ is proper by [lemma-nagata-projective-space-base-change-proper]. By [lem-weil-pbc-projective-space-standard-charts], its $n+1$ standard affine opens have rings $R[t_1,\\ldots,t_n]$. Each projection from a chart is flat by [lem-nagata-polynomial-projection-flat]. Flatness is local for the jointly surjective open, hence etale, cover by [lem-sfb-scheme-etale-source-target-properties], so $p_V$ is flat. On each chart this polynomial algebra has $n$ generators and zero relations; [def-sbc-locally-finite-presentation] therefore makes $p_V$ locally of finite presentation.",
+   "uses": [
+    "lem-trf-free-projective-bundle-base-change-space",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-nagata-polynomial-projection-flat",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, projective projection; constructions.tex Tags 01NF (definition-projective-space), 01NG (lemma-standard-covering-projective-space); Morphisms Tags 01U5 and 01TP."
+   }
+  },
+  {
+   "text": "Properness makes $p_V$ quasi-compact and separated. Since its base is affine, [lem-weil-pbc-qcqs-over-affine] makes $\\mathbf P^n_R$ quasi-compact and quasi-separated. Then [lem-weil-pbc-qcqs-morphism-permanence](1) makes $p_V$ quasi-compact and quasi-separated. Together with the local finite presentation in step 7 this is finite presentation in [def-pc-morphism-conventions]. These scheme properties of $p_V$ are the algebraic-space properties required in steps 1--6: flatness and local finite presentation by the scheme clause of [lem-sfb-space-local-properties-chart-test], and properness by the scheme agreement recorded in [def-sfb-space-morphism-properties]. Apply steps 1--6 to $p_V$ and the restricted pseudo-coherent $F$. It follows that $R(p_V)_*(F|_{\\mathbf P^n_R})$ is pseudo-coherent. The exact etale base-change comparison [lem-sfb-space-derived-etale-chart-calculus] identifies this with $(Rp_*F)|_V$. The models on all such $V$ give pseudo-coherence on $X$ by the same covering and representative argument of step 6. For $n=0$ there is one affine chart with ring $R$ and the argument is unchanged; empty charts and the zero ring cause no exception.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-morphism-conventions",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-local-properties-chart-test",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTT, lemma-characterize-pseudo-coherent, projective projection specialization; standard-cover calculation in constructions.tex Tag 01NG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-morphism-conventions",
+  "def-pur-pseudo-coherent-complex",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-pseudocoherent-complex",
+  "def-weil-flat-morphism",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-pseudocoherence-descent",
+  "lem-sfb-proper-support-tensor-perfect",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-derived-pushforward-coproducts",
+  "lem-sfb-space-derived-pushforward-upper-bound",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-module-flat-chart-test",
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-sfb-space-pseudocoherent-perfect-approximation",
+  "lem-trf-free-projective-bundle-base-change-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CTN, expanded using the perfect-approximation argument of Tag 0CTL, lemma-base-change-tensor-pseudo-coherent, specialized to O_Y[0]; Tag 0CTT for the projective projection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat proper finitely presented algebraic space morphisms preserve pseudo coherent complexes under derived pushforward",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of a bounded above finite free locally modeled complex along projective space projection is pseudo coherent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every object is projective. If $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a functor preserving finite products and $F : \\\\mathcal{C}^{\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme} (\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees $m, m' > 0$, the pullback of the inclusion morphisms $\\\\operatorname{Spec}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat proper finitely presented algebraic space morphisms preserve pseudo coherent complexes under derived pushforward",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.mkPseudoArrayLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (elements : Array Lean.FVarId) (typ : Lean.Expr) (typLevel : Lean.Level) : Lean.Compiler.LCNF.Simp.ConstantFold.FolderM (Lean.Compiler.LCNF.LetValue Lean.Compiler.LCNF.Purity.pure)\", \"doc\": \"Turn an `#[a, b, c]` into:\\n```\\nlet _x.12 := 3\\nlet _x.8 := @Array.mkEmpty _ _x.12\\nlet _x.22 := @Array.push _ _x.8 x\\nlet _x.24 := @Array.push _ _x.22 y\\nlet _x.26 := @Array.push _ _x.24 z\\n_x.26\\n```\"}\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.getPseudoListLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (fvarId : Lean.FVarId) : Lean.Compiler.LCNF.CompilerM (Option (List Lean.FVarId × Lean.Expr × Lean.Level))\", \"doc\": \"Turns an expression chain of the form\\n```\\nlet _x.1 := @List.nil _\\nlet _x.2 := @List.cons _ a _x.1\\nlet _x.3 := @List.cons _ b _x.2\\nlet _x.4 := @List.cons _ c _x.3\\nlet _x.5 := @List.cons _ d _x.4\\nlet _x\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.LaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on a lax functor that promotes a lax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfLax`.\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).inv = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : (self.mapCompIso f g).inv = F.mapComp f g\", \"doc\": \"`mapCompIso` gives rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mk\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (mapIdIso : (a : B) → F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)) (mapCompIso : {a b c : B} → (f : a ⟶ b) → (g : b ⟶ c) → F.map (C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.OplaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on an oplax functor that promotes an oplax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfOplax`.\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the oplax unity constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the oplax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso_hom\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).hom = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the oplax unity constraint\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|Fourier.?Mukai|derived.?Chow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|pseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T19:33:43Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coherent|pseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned hits; scheme flatness, ordinary pushforward, and morphism permanence do not state derived pseudo-coherent pushforward on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward preserves pseudo coherence for proper flat finitely presented algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T19:33:43Z\", \"tool\": \"leansearch\", \"query\": \"Derived pushforward preserves pseudo coherence for proper flat finitely presented algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward\", \"PresheafOfModules.pushforward₀\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"SheafOfModules.pushforward_obj_val\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"SheafOfModules.pushforward_map_val\"], \"digest\": \"19f5f2881e21e932\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned hits; scheme flatness, ordinary pushforward, and morphism permanence do not state derived pseudo-coherent pushforward on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T19:33:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned hits; scheme flatness, ordinary pushforward, and morphism permanence do not state derived pseudo-coherent pushforward on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat proper finitely presented algebraic space morphisms preserve pseudo coherent complexes under derived pushforward",
+   "results": "{\"t\": \"2026-10-23T19:33:44Z\", \"tool\": \"leanfinder\", \"query\": \"Flat proper finitely presented algebraic space morphisms preserve pseudo coherent complexes under derived pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"9df1e62297e86660\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned hits; scheme flatness, ordinary pushforward, and morphism permanence do not state derived pseudo-coherent pushforward on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of locally bounded above finite free complexes under proper flat maps is pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T19:36:27Z\", \"tool\": \"leanfinder\", \"query\": \"Pushforward of locally bounded above finite free complexes under proper flat maps is pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\"], \"digest\": \"adb7530862ae839a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned hits; scheme flatness, ordinary pushforward, and morphism permanence do not state derived pseudo-coherent pushforward on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pseudocoherent-tests-relative",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, pseudo-coherence of Rp_*(E tensor Lq^*O(i)).",
+   "via": [
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-flat-proper-pseudocoherent-direct-image",
+  "worker": "stage1",
+  "summary": "Expanded 0CTN through the 0CTL perfect-approximation argument, with coefficient O_Y in degree zero. Reused existing space approximation, cohomological-bound, perfect-tensor-image, etale comparison and K-injective nodes. Checked the projective specialization on affine etale charts, including n=0. No statement change and no new nodes.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), via the imported coherent-duality prerequisite chain recorded in blueprint.from.place. This item supplies the 0CTN input in the 0CTT proof. Whole-blueprint searches for pseudo-coherent, flat proper pseudocoherent direct image, and 0CTN found no equivalent blueprint statement. The ancestor tool returns None, matching the inherited null from.node and via chain, which are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic the unbounded right derived functor is triangulated used as a black box in the Stacks coherent-direct-image prerequisite; it supplies no replacement for the ctf-stability unit route."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic restriction to a localized ringed site preserves k-injectivity used as a black box in the Stacks coherent-direct-image prerequisite; it supplies no replacement for the ctf-stability unit route."
+   },
+   {
+    "node": "lem-trf-free-projective-bundle-base-change-space",
+    "why": "Generic free projective bundle agrees with base-change projective space used as a black box in the Stacks coherent-direct-image prerequisite; it supplies no replacement for the ctf-stability unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre products of algebraic spaces and pullback of etale coverings used as a black box in the Stacks coherent-direct-image prerequisite; it supplies no replacement for the ctf-stability unit route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic standard charts and coordinate sections of projective space over a scheme used as a black box in the Stacks coherent-direct-image prerequisite; it supplies no replacement for the ctf-stability unit route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic projective space is proper over its base used as a black box in the Stacks coherent-direct-image prerequisite; it supplies no replacement for the ctf-stability unit route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "Generic projective space commutes with base change used as a black box in the Stacks coherent-direct-image prerequisite; it supplies no replacement for the ctf-stability unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of k-injective resolutions of sheaves of modules used as a black box in the Stacks coherent-direct-image prerequisite; it supplies no replacement for the ctf-stability unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-trf-free-projective-bundle-base-change-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-4d4ac7ded",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-4d4ac7ded (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes, an unchanged statement and 8 steps, and I read all 32 cited statements. No cycle, no SGA, no re-split note for this item. Sources: Stacks 0CTN (spaces-perfect l.6247) and the proof of 0CTL (l.6157-6230); the delivered proof is 0CTL with G=O_Y[0], b=0. Leaving out the 0CTN base-change clause is correct because the item never states it. Checks: step 1 base change, qcqs and chart-calculus base change are OK. Step 2 is OK: N is fixed before a=m-N-1, the approximation triangle lies in D_QCoh, and the long exact sequence gives H^i(C)=0 for i>=a. Step 3 checks every hypothesis of tensor-perfect: fp, O_Y qcoh fp, flatness by the geometric-stalk test because V is a scheme, support Y proper, zero terms empty via the empty-family clause; the unit iso is elementary. Step 4 arithmetic is right (b=a-1, vanishing for j>=m-2), giving an iso on H^i for i>=m. Step 5 is OK: strictly perfect local witnesses feed the etale-pseudocoherence descent lemma for every m, then def-pur 08E5/08E7 and exact eps^*. Step 6 covers the K-injective representative, restriction and the Hom_K=Hom_D lift. Step 7 is OK: Proj A[x] = P(n;Spec A), cartesian over V gives P^n_R, standard charts R[U_j] (n=0 gives one chart), flatness and lfp. FIX: step 8 applied steps 1-6, which use algebraic-space notions (space-proper = universally closed after every space base change), to the scheme morphism p_V without citing the comparison. I added one sentence citing the scheme clause of lem-sfb-space-local-properties-chart-test (flatness, lfp) and def-sfb-space-morphism-properties ('in agreement with the scheme convention', properness). Both nodes are on the base; I updated the step's uses and proof_deps, and stmt_deps are untouched. Batch-5: all 15 flagged citations are generic algebraic-space, qcoh, fibre-product, Proj or smooth-composition foundations, and most reach def-trf-algebraic-space, which the item's stmt_deps already cite. None is a trace-formula or PD statement or proof step, so all are accepted. I accept all 8 tool_uses as generic. The scheme node lem-sfb-flat-proper-pseudocoherent-direct-image is not a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatProperPseudoCoherentDirectImage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isPseudoCoherent_derivedDirectImage_of_flat_proper",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.isPseudoCoherent_derivedDirectImage_of_flat_proper",
+   "AlgebraicGeometry.AlgebraicSpace.projectiveSpaceStructureMap",
+   "AlgebraicGeometry.AlgebraicSpace.isPseudoCoherent_derivedDirectImage_projectiveProjection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatProperPseudoCoherentDirectImage.lean",
+  "statement": "theorem isPseudoCoherent_derivedDirectImage_of_flat_proper {S : Scheme.{u}} {Y Z : AlgebraicSpace S} [HasDerivedCategory.{w} Y.SmallModules] [HasDerivedCategory.{w} Z.SmallModules] (g : Y ⟶ Z) (_hflat : MapIsFlat g) (_hproper : MapIsProper g) (_hfp : MapIsLocallyOfFinitePresentation g ∧ MapIsQuasiCompact g.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal g.hom.hom)) (F : Y.DerivedModules) (_hF : Y.IsPseudoCoherent F) : Z.IsPseudoCoherent ((derivedDirectImage g).obj F)",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The general theorem and the projective-projection specialization jointly state the node. The helper is the actual Yoneda map of projective space over Spec A; its base change uses enlargedFibreProduct and enlargedFibreProductFst. Only already landed definition owners were added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdaaaab7e",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Matches node and Stacks 0CTN (spaces-perfect l.6247) clause by clause: S scheme, Y Z : AlgebraicSpace S, MapIsFlat, MapIsProper, fp = lfp ∧ qc ∧ qc-diagonal (same rendering as landed properSupport_tensor_perfect, implied by proper, not stronger), Y.IsPseudoCoherent F ⇒ Z.IsPseudoCoherent of the canonical K-injective derivedDirectImage. 0CTT specialization: every CommRingCat A, X over Spec A, n:ℕ (n=0 ok), ProjectiveSpace (ULift (Fin (n+1))) (Spec A), real Yoneda structural-map helper, actual enlargedFibreProduct/Fst; f into the terminal representable is unique. No Noetherian, lower-bound or nonemptiness hypothesis; universes bound; statement verbatim; added stmt_deps are landed def owners (two existing:true); docstrings carry source, blueprint id and proof steps; only sorry. Not compiled (no file changed). Advisory: MapIsQuasiCompact/ProjectiveSpace owners reached via cited modules' public imports (as in landed sibling); unused proof-dep plain imports (H9)."
+ }
+}

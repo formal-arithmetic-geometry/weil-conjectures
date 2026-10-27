@@ -1,0 +1,286 @@
+{
+ "id": "sk-p-comparison",
+ "kind": "statement",
+ "title": "Stable subspaces and the center",
+ "statement": "Use the coefficient and matrix-group conventions of [sk-d-geometry]: $L$ is an algebraically closed field of characteristic zero, $V,M$ are finite-dimensional $L$-vector spaces, and $G\\subseteq\\operatorname{GL}(V)$ is a finite-type closed subgroup scheme. Write $D=L[\\epsilon]/(\\epsilon^2)$. In the tangent-space convention of [def-wf-lie-algebra-derivation],\n$$X\\in\\operatorname{Lie}(G)\\quad\\Longleftrightarrow\\quad 1+\\epsilon X\\in G(D).$$\nThe bracket is $[X,Y]=XY-YX$, and this space is closed under the bracket. For a rational representation $r:G\\to\\operatorname{GL}(M)$, its differential is characterized by\n$$r(1+\\epsilon X)=1+\\epsilon\\,dr(X),$$\nand $dr$ is a Lie algebra homomorphism.\n\nIf $G$ is connected, a subspace $U\\subseteq M$ is $G$-stable (every $g\\in G(L)$ preserves $U$) if and only if $dr(X)U\\subseteq U$ for every $X\\in\\operatorname{Lie}(G)$. Moreover,\n$$\\operatorname{Lie}(Z(G)^\\circ)=Z(\\operatorname{Lie}(G)).$$\nHere $Z(G)$ and $Z(G)^\\circ$ are the reduced center and its identity component of [sk-d-geometry], and the Lie center is $\\{X:[X,Y]=0\\text{ for all }Y\\}$ as in [sk-d-lie]. The equality is inside $\\operatorname{Lie}(G)$ via the differential of $Z(G)^\\circ\\hookrightarrow G$. In particular these assertions apply to every connected closed subgroup $G\\subseteq\\operatorname{GL}_{n,L}$ and every rational representation $r:G\\to\\operatorname{GL}_{m,L}$, with no faithfulness hypothesis on $r$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-algebraic-groups-lie-algebras/sk-p-comparison/_section.md",
+  "place": "node sk-p-comparison, order 3708"
+ },
+ "stmt_deps": [
+  "sk-d-geometry",
+  "def-wf-lie-algebra-derivation",
+  "sk-d-lie"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-wf-lie-algebra-derivation-bracket] to $G,V,M,r$. It states that the dual-number tangent space is a linear subspace closed under $XY-YX$, and that $dr$ is linear and preserves that bracket. These are exactly the preliminary assertions; neither connectedness nor faithfulness is needed here.",
+   "uses": [
+    "lem-wf-lie-algebra-derivation-bracket"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-comparison/_section.md",
+    "place": "statement and proof; field convention in sk-i-cartier/_section.md"
+   }
+  },
+  {
+   "text": "Choose a basis of $M$ whose first $a=\\dim U$ vectors span $U$. In $G$, impose that the lower-left $(\\dim M-a)\\times a$ block of $r(g)$ vanish, and call the resulting closed subscheme $S$. It is a subgroup scheme: block upper triangular invertible matrices have block upper triangular inverses and products. Indeed their two diagonal determinants have invertible product, hence are units over every commutative $L$-algebra. Thus $S$ is a finite-type group scheme. By [lem-sfb-cartier-characteristic-zero-smooth], $S$ and $G$ are smooth and reduced (Stacks Tag 047N, lemma-group-scheme-characteristic-zero-smooth). A tangent vector of $S$ is precisely a tangent vector $1+\\epsilon X$ of $G$ for which the lower-left block of $1+\\epsilon dr(X)$ vanishes. Comparing coefficients in the free $L$-basis $1,\\epsilon$ gives\n$$\\operatorname{Lie}(S)=\\{X\\in\\operatorname{Lie}(G):dr(X)U\\subseteq U\\}.$$\nThis reads the actual defining equations, so no radicalization is used. It also covers $a=0$ and $a=\\dim M$, when the block has no entries.",
+   "uses": [
+    "def-wf-lie-algebra-derivation",
+    "lem-sfb-cartier-characteristic-zero-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-comparison/_section.md",
+    "place": "statement and proof; field convention in sk-i-cartier/_section.md"
+   }
+  },
+  {
+   "text": "If $U$ is Lie-stable, the preceding formula gives $\\operatorname{Lie}(S)=\\operatorname{Lie}(G)$. As $G$ is connected and $S$ is a closed subgroup scheme, [sk-p-geometry] gives $S=G$, hence $U$ is $G$-stable. Conversely suppose every $g\\in G(L)$ preserves $U$. Each lower-left matrix coefficient of $r$ then vanishes at every $L$-point of the reduced finite-type affine scheme $G$. By the vanishing principle [lem-wf-affine-nullstellensatz-vanishing] these functions are zero in $L[G]$. Thus $S=G$ as schemes, and the same tangent formula gives Lie-stability. This proves the equivalence for arbitrary rational $r$.",
+   "uses": [
+    "sk-p-geometry",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-comparison/_section.md",
+    "place": "statement and proof; field convention in sk-i-cartier/_section.md"
+   }
+  },
+  {
+   "text": "Put $\\mathfrak g=\\operatorname{Lie}(G)$. By [lem-sfb-affine-group-centre-base-change], the scheme center $C=C_G(G)$ is a closed subgroup scheme. Cartier's theorem [lem-sfb-cartier-characteristic-zero-smooth] makes $C$ reduced. It agrees with the reduced center $Z(G)$ used in the statement: for $g\\in G(L)$ commuting with every $h\\in G(L)$, each entry of $gh-hg$, as a regular function of $h$, is zero on all $L$-points, hence identically zero by [lem-wf-affine-nullstellensatz-vanishing]. The commutation identity therefore holds after every scalar extension. This proves $C(L)=Z(G)(L)$; the ideals of two reduced closed subschemes with these points agree by the same vanishing principle on each subscheme. Apply [lem-sfb-lie-normalizer-centralizer-invariants] with $K=G$ and with its auxiliary smooth subgroup $H$ taken to be the trivial group and $N=G$, which normalizes that subgroup. Its centralizer clause gives\n$$\\operatorname{Lie}(Z(G))=\\mathfrak g^G,$$\nwhere the right side consists of vectors fixed by the adjoint action over every commutative $L$-algebra. The auxiliary trivial group is smooth by Cartier, and both $G$ and $C$ are affine of finite type, as that node requires.",
+   "uses": [
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sfb-cartier-characteristic-zero-smooth",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-sfb-lie-normalizer-centralizer-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-comparison/_section.md",
+    "place": "statement and proof; field convention in sk-i-cartier/_section.md"
+   }
+  },
+  {
+   "text": "By [lem-sfb-lie-normalizer-centralizer-invariants], conjugation induces a rational linear action $\\operatorname{Ad}$ of $G$ on $\\mathfrak g$, i.e. a homomorphism of group schemes $G\\to\\operatorname{GL}(\\mathfrak g)$, given on $R$-points by $h\\mapsto(X\\otimes1\\mapsto hXh^{-1})$; on $L$-points it is $\\operatorname{Ad}(g)X=gXg^{-1}$, and its differential is $d\\operatorname{Ad}(Y)X=[Y,X]$ by [def-wf-lie-algebra-derivation]. A vector fixed by the whole group functor is fixed by $1+\\epsilon Y$; the identity $(1+\\epsilon Y)X(1-\\epsilon Y)=X+\\epsilon[Y,X]$ gives $[Y,X]=0$, hence it is central. Conversely, for central $X$, use the rational representation $\\operatorname{Ad}\\oplus1$ on $\\mathfrak g\\oplus L$. Its differential sends $(X,1)$ to $([Y,X],0)=(0,0)$ for every $Y$. The equivalence just proved makes the line $L(X,1)$ stable under $G(L)$. Since the last coordinate of the image is $1$, the proportionality scalar is $1$, so $\\operatorname{Ad}(g)X=X$ for all $g\\in G(L)$. Each coordinate of $\\operatorname{Ad}(g)X-X$ is a regular function on reduced affine $G$; [lem-wf-affine-nullstellensatz-vanishing] makes it zero in $L[G]$, hence zero after evaluation in every $L$-algebra. Thus $X\\in\\mathfrak g^G$, proving $\\mathfrak g^G=Z(\\mathfrak g)$.",
+   "uses": [
+    "def-wf-lie-algebra-derivation",
+    "lem-sfb-lie-normalizer-centralizer-invariants",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-comparison/_section.md",
+    "place": "statement and proof; field convention in sk-i-cartier/_section.md"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-locally-algebraic-group-identity-component] to $C=Z(G)$. Its identity component is open and closed, and has the open subgroup-scheme structure. Since $C$ is reduced by step 4, this open subscheme is already reduced, so it is the reduced identity component in the statement. An open neighborhood of the identity has the same local ring there as $C$, hence the same maximal ideal modulo its square. The identity-point cotangent duality [lem-ag-lie-identity-cotangent-dual] identifies the Lie space with the dual of this quotient, using the canonical identity residue-field identification; the tangent-map convention of [def-wf-lie-algebra-derivation] makes the inclusion act by the identity on this unchanged local-ring description. Therefore $\\operatorname{Lie}(Z(G)^\\circ)=\\operatorname{Lie}(Z(G))$. Combining steps 4 and 5 proves the center equality, with both tangent inclusions read inside $\\operatorname{Lie}(G)$.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-wf-lie-algebra-derivation",
+    "lem-ag-lie-identity-cotangent-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-comparison/_section.md",
+    "place": "statement and proof; field convention in sk-i-cartier/_section.md"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-lie-algebra-derivation-bracket",
+  "def-wf-lie-algebra-derivation",
+  "lem-sfb-cartier-characteristic-zero-smooth",
+  "sk-p-geometry",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sfb-lie-normalizer-centralizer-invariants",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-ag-lie-identity-cotangent-dual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-comparison/_section.md",
+  "place": "statement and proof; field convention in sk-i-cartier/_section.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A subspace is invariant under a connected algebraic group in characteristic zero if and only if invariant under its Lie algebra; the Lie algebra of the connected center equals the center of its Lie algebra",
+   "results": "LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful; LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_apply_eq_top_iff; LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_top; LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_apply_eq_bot_iff; LieAlgebra.IsKilling.coe_invtSubmoduleToLieIdeal_eq_iSup; LieAlgebra.IsKilling.invtSubmoduleToLieIdeal; LieAlgebra.self_module_ker_eq_center; LieDerivation.maxTrivSubmodule_eq_bot_of_center_eq_bot",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not give the algebraic-group invariant-subspace and center comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.center, LieSubalgebra",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not give the algebraic-group invariant-subspace and center comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant_iff_differential|lieAlgebra.*center|Lie.*stabili|Cartier",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not give the algebraic-group invariant-subspace and center comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant subspaces of a connected algebraic group in characteristic zero are exactly the invariant subspaces for its Lie algebra",
+   "results": "LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_apply_eq_bot_iff; LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_apply_eq_top_iff; LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_top; GroupLieAlgebra; Algebra.IsInvariant.mk; Algebra.IsInvariant; instLieRingGroupLieAlgebra; addInvariantVector_mlieBracket",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not give the algebraic-group invariant-subspace and center comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type group scheme over a characteristic zero field, Cartier theorem smooth and reduced, identity component has the same tangent Lie algebra",
+   "results": "instLieAlgebraGroupLieAlgebra; instLieRingGroupLieAlgebra; RootPairing.GeckConstruction.instHasTrivialRadical; GroupLieAlgebra; Algebra.IsStandardSmooth.subsingleton_h1Cotangent; LieAlgebra.exists_isCartanSubalgebra_engel; LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card; Algebra.SubmersivePresentation.subsingleton_h1Cotangent",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not give the algebraic-group invariant-subspace and center comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|group scheme|HopfAlgebra.*[Rr]educed|[Rr]educed.*HopfAlgebra",
+   "results": "Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean; Mathlib/AlgebraicGeometry/Group/Abelian.lean; Mathlib/AlgebraicGeometry/Group/Abelian.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not give the algebraic-group invariant-subspace and center comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type group scheme over a field of characteristic zero is smooth over the field and is a reduced scheme",
+   "results": "AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; AlgebraicGeometry.IsReduced; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.isReduced_of_isIntegral; AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not give the algebraic-group invariant-subspace and center comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CharZero",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not give the algebraic-group invariant-subspace and center comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier theorem a locally algebraic group scheme over a field of characteristic zero is smooth and reduced",
+   "results": "AlgebraicGeometry.isReduced_of_isReduced_stalk; AlgebraicGeometry.IsSmooth.casesOn; Algebra.FormallyUnramified.isReduced_of_field; Algebra.FormallySmooth.iff_subsingleton_and_projective; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.affine_isReduced_iff; Algebra.FormallyEtale.instFormallySmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not give the algebraic-group invariant-subspace and center comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 3708,
+ "blueprint_uses": [
+  "sk-i-cartier",
+  "sk-p-geometry"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant",
+  "AlgebraicGeometry.GeneralLinearGroup.range_lieAlgebraMap_identityComponent_center"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant",
+  "AlgebraicGeometry.GeneralLinearGroup.range_lieAlgebraMap_identityComponent_center"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "sk-p-comparison",
+  "from": null,
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-p-comparison",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "sk-p-comparison",
+  "worker": "stage1",
+  "summary": "Restored explicit appendix coefficient and matrix-group conventions; audited arbitrary nonfaithful representations; wrote out block stabilizer and central-vector line arguments, reusing generic Cartier, centralizer and identity-component tools. No new nodes.",
+  "blueprint": "Current preliminary dual-number formulas and proof paragraphs 1–2 are steps 1–3. The fixed unit second proof step (adjoint-fixed vectors and line L(X,1)) is realized by steps 4–6. The current proof centralizer/kernel alternative is replaced by the fixed unit line argument; both give the same conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-lie-algebra-derivation-bracket",
+    "why": "Generic dual-number bracket and differential calculation, available over every algebraically closed characteristic-zero field; realizes the preliminary formulas."
+   },
+   {
+    "node": "lem-sfb-cartier-characteristic-zero-smooth",
+    "why": "Cartier for arbitrary characteristic-zero fields; the older matrix-group Cartier node only states the Q_l algebraic-closure specialization."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic affine vanishing principle converts rational-point stability and reduced-center point equality into scheme identities."
+   },
+   {
+    "node": "lem-sfb-affine-group-centre-base-change",
+    "why": "Generic representation of the scheme center, needed to compare with the reduced center convention."
+   },
+   {
+    "node": "lem-sfb-lie-normalizer-centralizer-invariants",
+    "why": "Generic tangent space of a scheme centralizer; uses only its centralizer clause with K=G."
+   },
+   {
+    "node": "lem-sfb-locally-algebraic-group-identity-component",
+    "why": "Generic openness of the identity component, valid over the arbitrary L of the item; older matrix component statements have implicit coefficient conventions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-lie-algebra-derivation-bracket",
+  "lem-sfb-cartier-characteristic-zero-smooth",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sfb-lie-normalizer-centralizer-invariants",
+  "lem-sfb-locally-algebraic-group-identity-component"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-ceec1c0f2",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-ceec1c0f2 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 6 steps (no new nodes), the base import in clones/live (still imported; no repair note, so no re-split rule), the blueprint main-20261023-1620 sk-p-comparison section with its unit-mates, the sk-i-cartier appendix convention, the unit record, and the statement of every cited node. Statement: L algebraically closed of characteristic 0, G a finite-type closed subgroup scheme of GL(V), arbitrary rational r. This narrows the source's 'algebraic group' (any finite-type group scheme) to its own matrix-group Complement. Accepted: the Lean names are GeneralLinearGroup ones, sk-d-geometry defines only matrix groups, and the citers sk-p-product and lem-sfb-char-zero-semisimple-group-lie use only matrix groups. Hypotheses are needed: the F_p counterexample [[1,t^p],[0,1]] shows characteristic 0 is required, and O(2) shows connectedness is required. Edge cases checked: U=0, U=M, dim M=0, n=0. Steps: (1) lem-wf-lie-algebra-derivation-bracket gives exactly the bracket clauses. (2) The block stabilizer S and the formula for Lie(S) follow from the dual-number definition; Cartier makes S and G smooth and reduced. (3) sk-p-geometry's same-Lie clause plus the vanishing principle prove the equivalence. (4) The functor centre is representable, Cartier makes it reduced, and C=Z(G) via the vanishing principle; lem-sfb-lie-normalizer-centralizer-invariants with K=G, H=1, N=G (hypotheses met) gives Lie(C)=g^G. (5) The line L(X,1) argument in Ad⊕1 shows g^G=Z(g). (6) The open identity component has the same local ring, and lem-ag-lie-identity-cotangent-dual gives Lie(Z°)=Lie(Z). FIX (C4): step 5 justified the rationality of Ad by def-wf-lie-algebra-derivation, which defines Ad only on k-points; the step now cites lem-sfb-lie-normalizer-centralizer-invariants, already in proof_deps, which states that Ad is a rational action. proof_deps is unchanged. Tool uses accepted: sfb Cartier (the live lem-ag-cartier-reduced is only for Q̄_ℓ), centre representability, centralizer Lie invariants, identity component. Route: sk-i-cartier is reached through lem-ag-lie-identity-cotangent-dual. Duplicates: lem-ag-lie-stable-subspace and lem-ag-lie-centre state the two clauses only for Q̄_ℓ, so they are specializations, not duplicates; same_as [] is acceptable.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For a matrix group $G\\subseteq\\GL(V)$, define $\\Lie(G)$ by its\ndual-number points at $1$:\n\n$$\nX\\in\\Lie(G)\n\\quad\\Longleftrightarrow\\quad\n1+\\epsilon X\\in G(L[\\epsilon]/\\epsilon^2).\n$$\n\nThe bracket is $[X,Y]=XY-YX$. To see that $\\Lie(G)$ is closed under the\nbracket, note that over $L[\\epsilon,\\eta]/(\\epsilon^2,\\eta^2)$ the\ncommutator of $1+\\epsilon X$ and $1+\\eta Y$ is $1+\\epsilon\\eta[X,Y]$. The\ndifferential of a representation $r\\colon G\\to\\GL(M)$ is characterized by\n\n$$\nr(1+\\epsilon X)=1+\\epsilon\\,dr(X).\n$$\n\nThese formulas show that $dr$ is a Lie algebra homomorphism.\n\nLet $G$ be a connected algebraic group and $r\\colon G\\to\\GL(M)$ an\nalgebraic representation. A subspace of $M$ is $G$-stable if and only if\nit is $\\Lie(G)$-stable. Moreover, if $G$ is a closed subgroup of\n$\\GL(V)$, then\n\n$$\n\\Lie\\bigl(Z(G)^\\circ\\bigr)=Z\\bigl(\\Lie(G)\\bigr),\n$$\n\nwith the Lie algebras computed by dual numbers as above and\n$\\Lie(Z(G)^\\circ)$ regarded as a subspace of $\\Lie(G)$ via the\ndifferential of the inclusion $Z(G)^\\circ\\subseteq G$.",
+  "proof": [
+   {
+    "text": "Let $U\\subseteq M$ be a subspace. In a basis of $M$ extending a basis of\n$U$, the scheme-theoretic stabilizer $S\\subseteq G$ of $U$ is the closed\nsubgroup defined by the vanishing of the lower-left block of $r(g)$.\nDifferentiating these equations, we find\n\n$$\n\\Lie(S)=\\{X\\in\\Lie(G):dr(X)U\\subseteq U\\}.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "If $U$ is $\\Lie(G)$-stable, then $\\Lie(S)=\\Lie(G)$, so Cartier's theorem\n[sk-i-cartier] gives $\\dim S=\\dim\\Lie(S)=\\dim\\Lie(G)=\\dim G$, and the\ndimension criterion of [sk-p-geometry] shows that $S=G$. Conversely, if\n$U$ is $G$-stable, then $S=G$, and the displayed formula shows that $U$\nis $\\Lie(G)$-stable.",
+    "uses": [
+     "sk-p-geometry"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Now let $G\\subseteq\\GL(V)$ be a closed subgroup and put\n$\\mathfrak g=\\Lie(G)$. We claim that the kernel of the adjoint\nrepresentation $G\\to\\GL(\\mathfrak g)$ is the center. Indeed, if $g$ acts\ntrivially on $\\mathfrak g$, then the centralizer $C_G(g)$ is a closed\nsubgroup of $G$ with Lie algebra $\\mathfrak g$, so it equals $G$ by the\nLie criterion of [sk-p-geometry]. Conversely, a central element acts trivially. Since the\nkernel and the center are reduced by Cartier's theorem [sk-i-cartier],\ntheir equality on $L$-points is an equality of schemes. Finally, the\nformula\n\n$$\n\\operatorname{Ad}(1+\\epsilon X)(Y)=Y+\\epsilon[X,Y]\n$$\n\nshows that $\\Lie(Z(G))=\\ker(\\operatorname{ad})=Z(\\mathfrak g)$, and\n$Z(G)^\\circ$ has the same Lie algebra as $Z(G)$ by [sk-i-cartier].",
+    "uses": [
+     "sk-p-geometry"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ }
+}

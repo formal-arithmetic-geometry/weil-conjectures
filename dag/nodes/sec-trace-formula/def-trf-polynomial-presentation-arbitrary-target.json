@@ -1,0 +1,129 @@
+{
+ "id": "def-trf-polynomial-presentation-arbitrary-target",
+ "kind": "definition",
+ "title": "Bounded polynomial presentation categories augmented to an arbitrary algebra",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix an infinite set $I$ as a common bound [def-weil-size-convention], commutative rings $A,B,C$ and maps $A\\to B\\to C$. Define $\\mathcal D_C^+$ with objects $(T,c)$ where $T\\subseteq I$ and $c:T\\to C$, representing $B[T]\\to C$ by evaluation; morphisms are all augmentation-preserving $B$-algebra maps. Define $\\mathcal E_C^+$ with objects $(S,T,\\beta,c)$, $S,T\\subseteq I$, $\\beta:A[S]\\to B$ an $A$-algebra map, and $c:T\\to C$, representing $P=A[S]$, $Q=P[T]$ with its compatible augmentation to $C$. Its morphisms are commuting pairs of $A$-algebra maps preserving both augmentations. The induced base-change map on $B[T]$ is uniquely fixed by its square with coefficient specialization $Q\\to B[T]$. Define $u^+:\\mathcal E_C^+\\to\\mathcal D_C^+$ by $(S,T,\\beta,c)\\mapsto(T,c)$, on morphisms by that canonical base-change map. Thus $u^+$ represents $Q\\otimes_P B$ and the opposite categories with the opposite functor give the identity-cover presentation sites for arbitrary $C$, without polynomiality or flatness assumptions.",
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "The fundamental triangle: construction C_{C/B/A} and equation-three-maps before Tag 08QU; Tag 08QW, case i=3, arbitrary target C."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Small category of polynomial algebra pairs augmented to an arbitrary commutative algebra and their base change functor",
+   "results": "8 hits: Algebra.Extension.baseChange, Polynomial.algebraOfAlgebra, Algebra.Generators.baseChange, commAlgCatEquivUnder, LinearMap.charpoly_baseChange, Polynomial.algebra, CommRingCat.free, Subalgebra.baseChange. General algebra/base-change APIs; none gives the bounded augmented polynomial pair categories.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The comma category of tensor base change of polynomial algebra presentation pairs is equivalent to pairs augmented to the chosen polynomial target, preserving the bar evaluation augmentation",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsEquiv, tensorModelOfHasCoeffsInv, tensorModelOfHasCoeffsHom, tensorModelOfHasCoeffsEquiv_symm_tmul, tensorModelOfHasCoeffsEquiv_tmul, tensorModelOfHasCoeffsInv_aeval_val, Algebra.PreSubmersivePresentation.baseChange, Algebra.Presentation.baseChange. Algebra isomorphisms and presentations, no augmented category.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"TensorProduct\"",
+   "results": "1 hit: TensorProduct.toIntegralClosure_mvPolynomial_bijective. Integral closure after polynomial base change, not augmented categories.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(polynomial|cotangent).*(comma|shriek)|(comma|shriek).*(polynomial|tensor)",
+   "results": "msearch Mathlib: Algebra/MvPolynomial/Equiv.lean:444, Algebra/Category/CommAlgCat/FiniteType.lean:42, CategoryTheory/LocallyCartesianClosed/Over.lean:260,268; none matches. rg in WeilConjectures for PolynomialPresentation, polynomial/comma and item id: no matching category or lemma (only unrelated polynomial-presentation modules). rg in lean/Sheaf found PolynomialPresentationPairCategories (C=B[E] only) and CotangentLowerShriek (coordinate-free large categories). DAG filename/statement scan finds only def-trf-polynomial-presentation-pair-categories for bounded pair categories, restricted to a polynomial target. tools/blueprint_refs.py search \"polynomial presentation\" returns only sk-d-geometry, unrelated.",
+   "date": "2026-10-24",
+   "verdict": "no exact bounded arbitrary-target definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polynomial-basechange-comma-evaluation",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Extracted lower-shriek proof steps 5 and 6: tensor-comma equivalence, coefficient pullback, and the exact polynomial-target augmentation. Bounded arbitrary-target categories for the comma calculation.",
+   "via": [
+    "lem-trf-polynomial-basechange-comma-evaluation",
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialPresentationArbitraryTarget",
+  "declaration": "Algebra.PolynomialPresentation.ArbitraryTarget.baseChange",
+  "declarations": [
+   "Algebra.PolynomialPresentation.ArbitraryTarget.Target",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.Target.augmentation",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.TargetHom",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.targetCategory",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.Pair",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.Pair.target",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.Pair.specialize",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.Pair.augmentation",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.PairHom",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.pairCategory",
+   "Algebra.PolynomialPresentation.ArbitraryTarget.baseChange"
+  ],
+  "file": "lean/Sheaf/RingTheory/PolynomialPresentationArbitraryTarget.lean",
+  "statement": "def baseChange : Pair I A B C ⥤ Target I B C",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Bounded coordinate categories for an arbitrary B-algebra C. The prior polynomial-target coordinate node fixes C=B[E], while CotangentSites uses coordinate-free rings in a larger object universe. These data retain the common variable bound and allow arbitrary C; no flatness or polynomiality of C is imposed. Stored base-change morphisms are uniquely determined by the specialization square."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1bb5faee",
+  "group": "Q24",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1bb5faee",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read item node, new def node def-trf-polynomial-presentation-arbitrary-target, both delivered modules, the live deps (polynomial-target categories, polynomial_top_evaluation/IsEvaluationAugmentation, CategoryColimitBarSystem.map) and the citer CotangentLowerShriek. Every clause matches: StructuredArrow comma; pinned e_V object and morphism formulas (gamma(X_i)=alpha(X_i⊗1), inverse alpha=aeval gamma with values delta∘gamma, lower and upper maps kept as HEq, baseChange uniquely determined); identity-component coefficient iso; natural D(R) comparison pinned to system.map e id coefficient; comma augmentation K(a)x and polynomial augmentation equal to polynomial_top's epsP with F=j^-1 K; chain-level equality; IsIso(Q.map epsComma). C arbitrary, no flatness, bounds A/B/C into infinite I as in polynomial-top. New def node: PairHom gives exactly compatible A-algebra pairs, base change unique and existing. Edge cases E empty, empty variable sets, zero rings and zero K are covered. Docstrings, sources, single sorry and verbatim statement fields are OK. Advisory: duplicate coordinate model next to the u+1 CotangentSites model; this already existed with the landed Q35 polynomial-top node and the citer must bridge it. Not recompiled per instructions."
+ }
+}

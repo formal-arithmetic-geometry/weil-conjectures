@@ -1,0 +1,140 @@
+{
+ "id": "lem-pe-coefficient-origin-closed-direct-image",
+ "kind": "lemma",
+ "title": "Closed direct image preserves coefficient-sized etale origin",
+ "statement": "Let i:Z→X be a closed immersion of schemes in universe u, A a commutative ring in max v (u+1), and H a sheaf of A-modules on the coefficient-sized pro-etale site of Z. If H belongs to the essential image of the etale comparison inverse image on Z, then its direct image along the canonical coefficient-model base-change functor belongs to the essential image of comparison on X. The comparison and inverse images are those of [def-weil-pbc-site-comparison-morphism] and [def-weil-proetale-inverse-image].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A6, lemma-morphism-comparison, degree zero; Tag 09AA, lemma-closed-immersion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Restrict scalars along the constant-ring sheafification unit. The public equivalence [lem-ctf-finite-comparison-model-realization] identifies intrinsic modules with fixed-scalar sheaves. Prove privately that comparison commutes with this equivalence: the ring-map adjunction equation identifies constant scalar actions on direct images, and uniqueness of left adjoints gives the inverse-image square. Fix an etale antecedent of H.",
+   "uses": [
+    "lem-ctf-finite-comparison-model-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given any affine etale presentation over X, pull its diagram and cone back along i. Each stage and the vertex remain affine because their projections to the original affine schemes are closed immersions, hence affine. The stage structure morphisms remain etale by base change. The cone is still a limit in the over-category since base change is a right adjoint. Apply [lem-pe-coefficient-comparison-continuity] to the antecedent over Z. Its section cocone is exactly the section cocone of the direct image on the original presentation over X. Thus the direct image has invertible continuity maps. Naturality transports this through the chosen isomorphism to H.",
+   "uses": [
+    "lem-pe-coefficient-comparison-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit of the constant-scalar equivalence identifies the fixed-scalar sheaf underlying the inverse-equivalence image of i_*H with i_*H itself. Naturality of continuity transports the preceding result to that intrinsic module. Apply [lem-pe-coefficient-classical-module-origin], then the proved private fixed-comparison isomorphism and the scalar-equivalence counit, to obtain an etale antecedent of i_*H. Empty Z and a full-image nonisomorphic closed immersion use the identical pullback construction.",
+   "uses": [
+    "lem-pe-coefficient-classical-module-origin",
+    "lem-ctf-finite-comparison-model-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-ctf-finite-comparison-model-realization",
+  "lem-pe-coefficient-comparison-continuity",
+  "lem-pe-coefficient-classical-module-origin"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A6, lemma-morphism-comparison, degree zero; Tag 09AA, lemma-closed-immersion; scalar-linear transport to the independent coefficient universe"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion direct image of a classical proetale sheaf of modules is in the essential image of etale comparison",
+   "results": [
+    "AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+    "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Only scheme and Zariski-module results; no comparison theorem or pro-etale localization sequence in the independent coefficient universe."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the closed immersion localization unit is the extension by zero of the restriction to the complementary open subscheme",
+   "results": [
+    "AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Ideal-sheaf kernel results do not state a pro-etale fixed-coefficient sheaf comparison or localization result."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*kernel|kernel.*localization|essImage.*shortExact; rg on Sheaf and WeilConjectures for etaleOrigin_of_shortExact and exact_openClosedSequence",
+   "results": [
+    "Mathlib/RingTheory/Localization/Algebra.lean",
+    "WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension.etaleOrigin_of_shortExact",
+    "Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequence.exact_openClosedSequence"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Existing geometric declarations use ModuleCat.{u+1} with schemes in u, so do not specialize to max v (u+1). The original item is broader and is not reintroduced here: this result concerns one endpoint only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientOriginAffineOpenClosed",
+  "date": "2026-10-26",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "Tag 09A6, lemma-morphism-comparison, degree zero; Tag 09AA, lemma-closed-immersion",
+   "via": [
+    "lem-pe-coefficient-origin-affine-open-closed",
+    "lem-pe-coefficient-stratified-essential-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientOriginClosedDirectImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientOriginClosedDirectImage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientFixed_closed_directImage_essImage",
+  "statement": "theorem coefficientFixed_closed_directImage_essImage\n    (A : Type (max v (u + 1))) [CommRing A]\n    {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (H : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} Z)\n      (ModuleCat.{max v (u + 1)} A))\n    (hH : (Functor.sheafPullbackConstruction.sheafPullback\n      (Scheme.smallModelComparisonInclusion.{u, v} Z) (ModuleCat.{max v (u + 1)} A)\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} Z)\n      (Scheme.coefficientProEtaleModelTopology.{u, v} Z)).essImage H) :\n    (Functor.sheafPullbackConstruction.sheafPullback\n      (Scheme.smallModelComparisonInclusion.{u, v} X) (ModuleCat.{max v (u + 1)} A)\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X)).essImage\n      (((Scheme.coefficientProEtaleModelBaseChange.{u, v} i).sheafPushforwardContinuous\n      (ModuleCat.{max v (u + 1)} A) (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      (Scheme.coefficientProEtaleModelTopology.{u, v} Z)).obj H)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T001140-L-4172002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T001140-L-4172002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

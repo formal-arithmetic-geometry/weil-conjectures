@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-affine-adjoint-unit-properties",
+ "kind": "statement",
+ "title": "Relative perfection and endomorphisms of the affine adjoint unit",
+ "statement": "Use schemes [def-pc-scheme], algebraic spaces and their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and the unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived direct image is computed by K-injective resolutions, and derived tensor pullback by K-flat resolutions. A morphism of algebraic spaces is proper if it is separated, of finite type and universally closed; flatness and local finite presentation are tested on etale scheme charts. Let $Y$ be an affine scheme and $f:X\\to Y$ proper flat of finite presentation. Let $a_f$ be a right adjoint of $Rf_*$ on $D_{\\mathrm{QCoh}}$ and set $W=a_f(\\mathcal O_Y)$. Then $W$ is $Y$-perfect: it is pseudo-coherent (etale locally represented by a bounded-above complex of finite free modules) and locally has finite Tor amplitude over $f^{-1}\\mathcal O_Y$ (tensoring with any module over that ring sheaf gives cohomology in a fixed finite interval locally). Moreover $H^i(Rf_*W)=0$ for $i>0$, and scalar multiplication is an isomorphism $\\mathcal O_X\\xrightarrow{\\sim}R\\mathcal Hom_{\\mathcal O_X}(W,W)$ in $D(\\mathcal O_X)$. Internal derived Hom here is the right adjoint to derived tensor product of module sheaves.",
+ "source": {
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Tag 0E5V, lemma-properties-relative-dualizing, clauses (1)-(3); definition of relative perfectness: spaces-more-morphisms.tex Tag 0DKN, definition-relatively-perfect."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-relative-perfect"
+ ],
+ "proof": [
+  {
+   "text": "Write $Y=\\operatorname{Spec}A$ and $G=R\\Gamma(X,-)$. Proper finite presentation over the affine base makes $X$ quasi-compact and quasi-separated. For a perfect $E$, ringed-site perfect duality gives $E^\\vee$ perfect, $(E^\\vee)^\\vee\\cong E$, and $E\\otimes^{\\mathbf L}W\\cong R\\mathcal Hom_X(E^\\vee,W)$. The global trace adjunction, applied to $L=E^\\vee$, gives the natural isomorphism $$T_E:G(E\\otimes^{\\mathbf L}W)\\xrightarrow{\\sim}R\\operatorname{Hom}_A(G(E^\\vee),A).$$ The perfect-sections theorem makes $G(E^\\vee)$ perfect over $A$, and perfect duality on the one-object ringed site of $A$ makes its dual perfect. Thus $G(E\\otimes^{\\mathbf L}W)$ is perfect for every perfect $E$.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-space-affine-global-trace-adjunction",
+    "lem-sfb-flat-proper-space-perfect-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E5V, first paragraph; derived global form of the displayed computation."
+   }
+  },
+  {
+   "text": "The relative-perfection criterion applies to $K=W$: membership in $D_{\\mathrm{QCoh}}$ is part of the supplied right adjoint, and $f$ is separated, flat and finitely presented. Step 1 supplies every perfect tensor test. Hence $W$ is $Y$-perfect and locally bounded below. In particular the internal-Hom quasi-coherence theorem applies to $K=L=W$: its source is pseudo-coherent and its target is locally bounded below with quasi-coherent cohomology. Put $B_X=R\\mathcal Hom_X(W,W)$; it belongs to $D_{\\mathrm{QCoh}}(\\mathcal O_X)$.",
+   "uses": [
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-space-pseudocoherent-rhom-quasicoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E5V, end of first paragraph and last paragraph; local lower-bound hypothesis made explicit."
+   }
+  },
+  {
+   "text": "Put $B=G(\\mathcal O_X)$. Perfect sections with $E=\\mathcal O_X$ make $B$ perfect over $A$, so a bounded finite-projective representative gives some upper Tor bound $N\\ge0$. For every $A$-module $M$, the affine projection formula identifies $B\\otimes_A^{\\mathbf L}M$ with $G(\\mathcal O_X\\otimes_A M)$: flatness of $f$ makes the pullback an ordinary sheaf in degree zero. Its derived global sections vanish in negative degrees, by the nonnegative injective resolution of a sheaf. Consequently $B$ has Tor amplitude in $[0,N]$. To apply the projective-window theorem, its pseudo-coherence hypothesis is obtained as follows: the proper flat structure-sheaf direct-image theorem makes $R\\epsilon_{Y,*}Rf_*\\mathcal O_X$ perfect on the affine Zariski site; its affine module preimage is pseudo-coherent. The Zariski-etale comparison, the affine module equivalence and the derived pushforward compositor identify that preimage with $B$. Thus the projective-window theorem supplies a finite-projective representative $P$ of $B$ supported in $[0,N]$.",
+   "uses": [
+    "lem-sfb-flat-proper-space-perfect-sections",
+    "lem-sfb-space-affine-derived-projection-formula",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-pc-perfect-affine-module-preimage",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-trf-pseudo-coherent-tor-projective-window"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E5V, second paragraph, nonnegative Tor amplitude and finite projective model; Tag 0658 used through the existing projective-window node."
+   }
+  },
+  {
+   "text": "Apply the global trace adjunction with $L=\\mathcal O_X$. Since $R\\mathcal Hom_X(\\mathcal O_X,W)=W$, it gives $$G(W)\\cong R\\operatorname{Hom}_A(B,A).$$ The right side is computed by $\\operatorname{Hom}_A^\\bullet(P,A[0])$ because $P$ is bounded projective. It is zero outside $[-N,0]$. The derived pushforward compositor gives $G(W)\\cong R\\Gamma(Y,Rf_*W)$, and $Rf_*W$ has quasi-coherent cohomology by the right-adjoint setup. Under the affine etale module equivalence, $\\mathcal H^i(Rf_*W)$ is the associated sheaf of $H^iG(W)$. It therefore vanishes for $i>0$.",
+   "uses": [
+    "lem-sfb-space-affine-global-trace-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E5V, second paragraph, concluding vanishing argument."
+   }
+  },
+  {
+   "text": "Let $\\alpha:\\mathcal O_X\\to B_X$ be scalar multiplication, the transpose of $\\mathcal O_X\\otimes W\\cong W$. For every perfect $E$, closed tensor-Hom adjunction, the supplied right adjunction, Step 1, and perfect biduality yield $$\\operatorname{Hom}_X(E,B_X)\\cong\\operatorname{Hom}_X(E\\otimes W,W)\\cong\\operatorname{Hom}_{D(A)}(G(E\\otimes W),A)\\cong\\operatorname{Hom}_{D(A)}(G(E^\\vee)^\\vee,A)\\cong H^0G(E^\\vee)\\cong\\operatorname{Hom}_X(E,\\mathcal O_X).$$ The last identification uses ringed-site perfect duality and the canonical global-Hom cohomology identification. These are natural bijections.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-space-affine-global-trace-adjunction",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-ringed-site-global-rhom-derived-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E5V, third paragraph, Hom chain, written with H^0 rather than a derived object in a group-valued equality."
+   }
+  },
+  {
+   "text": "Check the specified map in that bijection. A morphism $u:E\\to\\mathcal O_X$ corresponds by perfect duality to $s:\\mathcal O_X\\to E^\\vee$. Under $T_E$, the trace functional of $u\\otimes1_W$ is evaluation at the section $G(s):A\\to G(E^\\vee)$: both are $$G(E\\otimes W)\\xrightarrow{G(u\\otimes1)}G(W)\\xrightarrow{t}A.$$ Indeed the trace pairing defining $\\tau_{E^\\vee}$ first evaluates $E^\\vee$ against its dual $E$, and evaluation on $s$ is exactly $u$ by the bidual triangle identity. Thus the inverse of the displayed bijection sends $u$ to the transpose of $u\\otimes1_W$, which is $\\alpha\\circ u$. This proves that $\\operatorname{Hom}(E,\\alpha)$ itself, rather than an unspecified bijection of groups, is bijective. The argument also applies to every shift of $E$.",
+   "uses": [
+    "lem-sfb-space-affine-global-trace-adjunction",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E5V, third paragraph and scalar-map identification; evaluation-and-counit normalization of Tag 0E58."
+   }
+  },
+  {
+   "text": "Take a distinguished triangle $\\mathcal O_X\\xrightarrow\\alpha B_X\\to C\\to\\mathcal O_X[1]$. Its terms are quasi-coherent by Step 2. Bijectivity on every perfect test and its shifts gives $\\operatorname{Hom}(E,C[n])=0$ for all perfect $E$ and all integers $n$ by the long exact Hom sequence. To use precisely the localizing-generation statement, fix $C$ and consider the objects $T\\in D_{\\mathrm{QCoh}}$ such that $\\operatorname{Hom}(T,C[n])=0$ for every $n$. This class is closed under shifts, cones, retracts, and coproducts (Hom out of a coproduct is the product of Hom groups). It contains every perfect object, so localizing generation makes it all of $D_{\\mathrm{QCoh}}$. Taking $T=C$ gives $1_C=0$, hence $C=0$ and $\\alpha$ is an isomorphism. Together with Steps 2 and 4 this proves all three assertions.",
+   "uses": [
+    "lem-sfb-space-perfect-localizing-generation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E5V, final paragraph, generation applied to the cone."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-space-affine-global-trace-adjunction",
+  "lem-sfb-flat-proper-space-perfect-sections",
+  "lem-sfb-space-perfect-test-relative-perfection",
+  "lem-sfb-space-pseudocoherent-rhom-quasicoherent",
+  "lem-sfb-space-affine-derived-projection-formula",
+  "lem-sfb-proper-flat-space-derived-base-change",
+  "lem-pc-perfect-affine-module-preimage",
+  "lem-sfb-scheme-derived-etale-qcoh-comparison",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-trf-pseudo-coherent-tor-projective-window",
+  "lem-sfb-qcqs-space-pushforward-right-adjoint",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-site-global-rhom-derived-limits",
+  "lem-sfb-space-perfect-localizing-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Tag 0E5V, lemma-properties-relative-dualizing, proof of (1)-(3), with derived-global trace form and explicit scalar-map check."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For proper flat finitely presented algebraic spaces over an affine scheme the right adjoint of the structure sheaf is relatively perfect semidualizing and has nonpositive direct image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  P f →\\n    ∀ [AlgebraicGeometry.IsAffine X] [AlgebraicG\", \"doc\": \"If a morphism $ f $ between affine schemes $ X $ and $ Y $ satisfies property $ P $, then the induced ring homomorphism $ f^\\\\#: \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ on global sectio\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative perfection and scalar endomorphism isomorphism for coherent dualizing complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PerfectionMap.lift\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (R : Type u₁) →\\n      [inst_1 : CommSemiring R] →\\n        [inst_2 : CharP R p] →\\n          [PerfectRing R p] →\\n            (S : Type u₂) →\\n              [inst_4 : CommSemiring S] →\\n                [inst_5 : CharP S p] →\\n                  (P : Type u₃) →\\n\", \"doc\": \"Given a prime number $ p $, a perfect ring $ P $, and a commutative semiring $ R $ with characteristic $ p $, there exists a ring equivalence between $ P $ and the perfection of $ R $ (the set of $ p \"}\n  {\"name\": \"PerfectionMap.comp_symm_equiv\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u₁} [inst_1 : CommSemiring R] [inst_2 : CharP R p] {P : Type u₃}\\n  [inst_3 : CommSemiring P] [inst_4 : CharP P p] [inst_5 : PerfectRing P p] {π : P →+* R} (m : PerfectionMap p π)\\n  (f : Ring.Perfection R p), π (m.equiv.symm f) = (Perfection.coeff R p 0\", \"doc\": \"For a prime number $ p $, a perfect ring $ P $, and a commutative semiring $ R $ with characteristic $ p $, if $ \\\\pi : P \\\\to R $ is a ring homomorphism and $ m $ is a perfection map, then applying $ \\\\\"}\n  {\"name\": \"PerfectionMap.comp_symm_equiv'\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u₁} [inst_1 : CommSemiring R] [inst_2 : CharP R p] {P : Type u₃}\\n  [inst_3 : CommSemiring P] [inst_4 : CharP P p] [inst_5 : PerfectRing P p] {π : P →+* R} (m : PerfectionMap p π),\\n  π.comp ↑m.equiv.symm = Perfection.coeff R p 0\", \"doc\": \"Given a prime number $ p $, a perfect ring $ P $, and a commutative semiring $ R $ with characteristic $ p $, there exists a ring equivalence between $ P $ and the perfection of $ R $ (the set of $ p \"}\n  {\"name\": \"PerfectionMap.comp_equiv'\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u₁} [inst_1 : CommSemiring R] [inst_2 : CharP R p] {P : Type u₃}\\n  [inst_3 : CommSemiring P] [inst_4 : CharP P p] [inst_5 : PerfectRing P p] {π : P →+* R} (m : PerfectionMap p π),\\n  (Perfection.coeff R p 0).comp ↑m.equiv = π\", \"doc\": \"The composition of the 0th coefficient homomorphism of the perfection of $ R $ and the ring equivalence induced by the perfection map equals the original ring homomorphism $ \\\\pi $.\"}\n  {\"name\": \"PerfectionMap.comp_equiv\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u₁} [inst_1 : CommSemiring R] [inst_2 : CharP R p] {P : Type u₃}\\n  [inst_3 : CommSemiring P] [inst_4 : CharP P p] [inst_5 : PerfectRing P p] {π : P →+* R} (m : PerfectionMap p π)\\n  (x : P), (Perfection.coeff R p 0) (m.equiv x) = π x\", \"doc\": \"For a prime $p$, a perfect ring $P$, and a commutative semiring $R$ with characteristic $p$, the zeroth coefficient homomorphism of the perfection equivalence between $P$ and the perfection of $R$ sat\"}\n  {\"name\": \"PerfectionMap.mk'\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u₁} [inst_1 : CommSemiring R] [inst_2 : CharP R p] {P : Type u₃}\\n  [inst_3 : CommSemiring P] [inst_4 : CharP P p] [inst_5 : PerfectRing P p] {f : P →+* R}\\n  (g : P ≃+* Ring.Perfection R p), (Perfection.lift p P R) f = ↑g → PerfectionMap p f\", \"doc\": \"For commutative semirings $ R $ and $ S $ of prime characteristic $ p $, where $ R $ is perfect, there is a bijection between the set of ring homomorphisms $ R \\to S $ and the set of ring homomorphisms\"}\n  {\"name\": \"frobeniusEquiv_apply\", \"module\": \"Mathlib/FieldTheory/Perfect\", \"type\": \"∀ (R : Type u_1) (p : ℕ) [inst : CommSemiring R] [inst_1 : ExpChar R p] [inst_2 : PerfectRing R p] (a : R),\\n  (frobeniusEquiv R p) a = (frobenius R p) a\", \"doc\": \"For any element $ a $ in a perfect ring $ R $ of characteristic $ p $, the Frobenius ring equivalence $ \\\\text{{frobeniusEquiv}} $ satisfies $ \\\\text{{frobeniusEquiv}}(a) = a^p $, coinciding with the Fr\"}\n  {\"name\": \"WittVector.IsocrystalEquiv.toLinearEquiv\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"{p : ℕ} →\\n  [inst : Fact (Nat.Prime p)] →\\n    {k : Type u_1} →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            {V : Type u_2} →\\n              [inst_4 : AddCommGroup V] →\\n                [inst_5 : WittVector.Isocrystal p k V] →\\n         \", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and additive commutative groups $ V $ and $ V_2 $ equipped with Witt vector isocrystal structures over $ k $, an isocrystal equivalen\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Perfect\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyPerfect|relative_perfect|semidualizing|dualizingComplex",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For proper flat finitely presented algebraic spaces over an affine scheme the right adjoint of the structure sheaf is relatively perfect semidualizing and has nonpositive direct image",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": LocallyRingedSpace.Γ.IsRightAdjoint\", \"doc\": \"The global sections functor $\\\\Gamma$ from the category of locally ringed spaces to the opposite category of commutative rings is a right adjoint functor. This establishes an adjunction between the con\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": Scheme.Γ.IsRightAdjoint\", \"doc\": \"The contravariant global sections functor from the category of schemes to the category of commutative rings is a right adjoint functor. This establishes an adjunction between the opposite category of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} φ).IsRightAdjoint\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Spec.full\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": Scheme.Spec.Full\", \"doc\": \"The contravariant Spec functor from the opposite category of commutative rings to schemes is left adjoint to the global sections (Gamma) functor from schemes to commutative rings. This establishes a n\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyPerfect|relative_perfect|semidualizing|dualizingComplex",
+   "results": "{\"t\": \"2026-10-23T11:26:24Z\", \"tool\": \"grep\", \"query\": \"relativelyPerfect|relative_perfect|semidualizing|dualizingComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions and scheme flatness do not state the three derived dualizing-complex conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat morphism affine base right adjoint dualizing complex endomorphisms and relative perfection",
+   "results": "{\"t\": \"2026-10-23T11:26:24Z\", \"tool\": \"leansearch\", \"query\": \"Proper flat morphism affine base right adjoint dualizing complex endomorphisms and relative perfection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.recOn\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"PerfectionMap.map_eq_map\"], \"digest\": \"f8a179b1b84bda68\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions and scheme flatness do not state the three derived dualizing-complex conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Perfect\"",
+   "results": "{\"t\": \"2026-10-23T11:26:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"Perfect\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions and scheme flatness do not state the three derived dualizing-complex conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat finitely presented algebraic space dualizing complex right adjoint structure sheaf relatively perfect semidualizing",
+   "results": "{\"t\": \"2026-10-23T11:26:25Z\", \"tool\": \"leanfinder\", \"query\": \"Proper flat finitely presented algebraic space dualizing complex right adjoint structure sheaf relatively perfect semidualizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.instReflectiveLocallyRingedSpaceOppositeCommRingCatToLocallyRingedSpace\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\"], \"digest\": \"35f5da29f98c86db\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions and scheme flatness do not state the three derived dualizing-complex conclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-derived-duality",
+  "date": "2026-10-23",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit.",
+   "via": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-adjoint-unit-properties",
+  "worker": "stage1",
+  "summary": "Q76: split Stacks 0E5V in seven steps, reusing perfect sections and ringed-site duality, introducing three smaller statement-only inputs for perfect tests, global trace adjunction and internal-Hom quasi-coherence. Checked Tor positivity, local boundedness, and normalization of the scalar multiplication map. Statement unchanged.",
+  "blueprint": "The inherited from.place traces this coherent-duality input to det-thm-sf-ctf-stability-direct-images (3), through the stable-curve alteration prerequisites; the latest blueprint proof (3) is unchanged in scope. This split realizes the supporting Stacks 0E5V proof, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-perfect-affine-module-preimage",
+    "why": "Generic affine perfect-complex preimage supplies pseudo-coherence without Noetherianity; no node of this unit states this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Leray compositor identifies global sections of pushforward with global sections on X; no node of this unit states this generic input."
+   },
+   {
+    "node": "lem-trf-pseudo-coherent-tor-projective-window",
+    "why": "Generic algebraic finite-projective model in the exact Tor interval; no node of this unit states this generic input."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site tensor-Hom adjunction and evaluation normalization; no node of this unit states this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-perfect-affine-module-preimage",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-trf-pseudo-coherent-tor-projective-window",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-b80b7c0e1",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-b80b7c0e1 (reviewer sub-agent of L); spot-checked: I read in full the item, Stacks 0E5V (spaces-duality l.1613, all three proof paragraphs), the three new nodes against their sources (0E58/0GG4, 0GFL, 0A8A, plus the warning example) and all 16 cited statements. The item statement is unchanged and matches 0E5V hypothesis by hypothesis, with Y-perfect spelled out per 0DKN. Live and side-live still have the item unsplit with the same statement; there is no repair note, no cycle and no SGA citation. New nodes: (1) lem-sfb-space-affine-global-trace-adjunction is true: in each degree, Hom_X(L,W[n]) = Hom_Y(Rf_*L,O_Y[n]) = Hom_A(RΓL,A[n]) via the affine equivalence. No coherator is needed and the false sheaf-level claim is avoided. It is not the scheme-only lem-pc-qcqs-sheaf-rhom-adjunction or the nodal-trace node. (2) lem-sfb-space-perfect-test-relative-perfection is 0GFL; its local lower bound follows from Tor amplitude applied to f^{-1}O_Y. It is not lem-sfb-perfect-tests-detect-pseudocoherence, which is scheme-only and gives only pseudo-coherence. (3) lem-sfb-space-pseudocoherent-rhom-quasicoherent is 0A8A; the 'locally bounded below' form is true because the statement is étale local. The existing quasi-coherence-internal-hom nodes are scheme, Noetherian or affine only. Steps 1-5 follow the source's three chains: Step 2 checks the lower bound before applying 0A8A, Step 3 builds the [0,N] projective window from projection-formula Tor positivity, and Step 4 gets sheaf-level vanishing via a_A. Steps 6-7 are genuinely elementary: the scalar map α is identified from the stated normalizations, and the orthogonal class is localizing so it contains C, hence C=0. Batch-5 flags: the two sfb citations reach only def-trf-algebraic-space; the trf Tor-window lemma is generic commutative algebra; the new-node citations of def-trf-algebraic-space and def-trf-space-quasi-coherent-module are definitions. None is a trace-formula or Poincaré-duality step, so all are accepted. I accept the four declared tool_uses. Advisory, no fix: the trace node does not bracket-cite 'affine derived-module equivalence' or 'cup product', and Step 3's pseudo-coherence detour is longer than needed but correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineAdjointUnitProperties",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affineAdjointUnit_properties",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affineAdjointUnit_properties"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAdjointUnitProperties.lean",
+  "statement": "theorem affineAdjointUnit_properties {S : Scheme.{u}} (Y : Over S) [IsAffine Y.left] (X : AlgebraicSpace S) (f : X ⟶ schemeSpace Y) (hproper : MapIsProper f) (hflat : MapIsFlat f) (hfp : MapIsLocallyOfFinitePresentation f) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} (schemeSpace Y).SmallModules] (F : QCohDirectImagePresentation f) (a : (schemeSpace Y).DerivedQCoh ⥤ X.DerivedQCoh) (adj : F.functor ⊣ a) : IsPerfectRelativeToScheme Y f (a.obj (schemeSpace Y).derivedQCohStructure).obj ∧ (∀ i : ℤ, 0 < i → IsZero ((DerivedCategory.homologyFunctor (schemeSpace Y).SmallModules i).obj ((derivedDirectImage f).obj (a.obj (schemeSpace Y).derivedQCohStructure).obj))) ∧ IsIso (derivedScalarEndomorphism X (a.obj (schemeSpace Y).derivedQCohStructure).obj)",
+  "branch": "sheaf-dag",
+  "by": "Q115",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Canonical small affine etale ringed-model equivalence retains the original module universe. The actual scalar endomorphism map is fixed by the normalized closed tensor-Hom model; the direct-image presentation includes its natural identification with the canonical ambient K-injective Rf_*. Relative perfectness uses the equivalent affine etale chart criterion of 0DKN. Properness plus local finite presentation is finite presentation, since proper implies quasi-compact and quasi-separated. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f0f35306",
+  "group": "Q115",
+  "result": "fix",
+  "note": "Item matches node and Stacks 0E5V clause by clause: affine Y; proper, flat, locally finitely presented f (finite presentation via proper ⇒ qcqs); Rf_* on D_QCoh pinned by an iso to the canonical K-injective direct image; arbitrary right adjoint. (1) Y-perfect = 0DKN by the affine-chart criterion with V=Y; (2) cohomology sheaves of Rf_*W vanish for i>0; (3) IsIso of the actual scalar map, pinned by the duality model's uncurry/unit/symmetry formulas. Three new def nodes are not duplicates (none in side-live/live; runs dir has only stage-1 sibling splits, no competing stage-2 delivery); data real; 7 sorry'd obligations true and stated in the nodes; dependency records identical to side-live; no recompile, as instructed. FIX: theorem stmt_dep lem-trf-space-enlarged-etale-ringed-site-model, used only for the plain def schemeSpace, replaced by its def owner def-trf-scheme-algebraic-space in fixes/def-sfb-space-derived-module-calculus.json; the same citation added in fixes/def-sfb-space-relative-perfect.json. JSON only. lem-sfb-ringed-site-duality-maps kept (Classical.choice of the theorem)."
+ }
+}

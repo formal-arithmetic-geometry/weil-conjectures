@@ -1,0 +1,245 @@
+{
+ "id": "lem-per-semilocal-jacobson-completion-product",
+ "kind": "statement",
+ "title": "Jacobson-radical completion of a Noetherian semilocal ring",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] whose distinct maximal ideals are $\\mathfrak m_1,\\ldots,\\mathfrak m_t$, with $0\\leq t<\\infty$. Put $J=\\bigcap_{i=1}^t\\mathfrak m_i$, taking the empty intersection to be $A$, and put $C=\\varprojlim_{n\\geq1}A/J^n$ [def-weil-pbc-adic-completion]. For each $i$ let $H_i=\\varprojlim_{n\\geq1} A_{\\mathfrak m_i}/(\\mathfrak m_iA_{\\mathfrak m_i})^n$, using localization at a prime [def-weil-pbc-localization-at-prime]. The canonical maps induced by $A\\to A_{\\mathfrak m_i}$ give an isomorphism of $A$-algebras $C\\xrightarrow{\\sim}\\prod_{i=1}^tH_i$. In particular each factor map agrees on $A$ with localization followed by completion. For $t=0$, $A$ and both sides are the zero ring.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, algebra-lemma-completion-finite-extension, proof: decomposition of the completion of a semilocal algebra into completed local factors. The same Chinese-remainder/inverse-limit argument applies to an arbitrary Noetherian semilocal ring at its Jacobson radical, without a chosen finite map from a local base."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "If $t=0$, the maximal-ideal existence assertion of [lem-weil-pbc-proper-ideal-contained-in-maximal] implies that $A$ is the zero ring. Then $J=A$, each $A/J^n$ is zero, and the empty product is the zero ring. This proves every clause in this case. Henceforth $t>0$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (algebra-lemma-Zariski-topology), item (2)."
+   }
+  },
+  {
+   "text": "For $i\\ne j$, maximality and distinctness give $\\mathfrak m_i+\\mathfrak m_j=A$: otherwise the sum, containing $\\mathfrak m_i$, would equal $\\mathfrak m_i$ and force $\\mathfrak m_j=\\mathfrak m_i$. Choose $u\\in\\mathfrak m_i$, $v\\in\\mathfrak m_j$ with $u+v=1$. For $n\\ge1$, expand $1=(u+v)^{2n-1}$. Every term lies in $\\mathfrak m_i^n$ or $\\mathfrak m_j^n$, so these powers are pairwise comaximal. Here comaximal means that the sum of the ideals is $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (algebra-lemma-chinese-remainder), with Tag 07N9 (algebra-lemma-completion-finite-extension), proof, quotient-product and inverse-limit argument."
+   }
+  },
+  {
+   "text": "For ideals $K,L$ with $a+b=1$, $a\\in K$, $b\\in L$, an element $x\\in K\\cap L$ satisfies $x=xa+xb\\in KL$, proving $K\\cap L=KL$. For pairwise comaximal $I_1,\\ldots,I_r$, their product up to $r-1$ is comaximal with $I_r$: multiply equations $a_j+b_j=1$ with $a_j\\in I_j$, $b_j\\in I_r$ to obtain $1-\\prod_{j<r}a_j\\in I_r$. Inducting from the one-ideal case therefore gives $\\bigcap I_i=\\prod I_i$. Apply this first to $\\mathfrak m_i$, then to their powers from Step 2. Distributing finite products gives $J^n=(\\prod_i\\mathfrak m_i)^n=\\prod_i\\mathfrak m_i^n=\\bigcap_i\\mathfrak m_i^n$. This uses only the definition of ideal multiplication as finite sums of products.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (algebra-lemma-chinese-remainder), with Tag 07N9 (algebra-lemma-completion-finite-extension), proof, quotient-product and inverse-limit argument."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-crt-ideal-quotient-product] to the finite pairwise comaximal ideals $\\mathfrak m_i^n$ and use Step 3. It yields a ring isomorphism $\\phi_n:A/J^n\\xrightarrow{\\sim}\\prod_i A/\\mathfrak m_i^n$, sending the class of $a$ to its residue classes. This is an $A$-algebra isomorphism because its formula commutes with the structural maps from $A$. For the transition from $n+1$ to $n$, both composites send $[a]$ to $([a]\\bmod\\mathfrak m_i^n)_i$; every class has such a representative. Thus the $\\phi_n$ commute with transitions.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (algebra-lemma-chinese-remainder), with Tag 07N9 (algebra-lemma-completion-finite-extension), proof, quotient-product and inverse-limit argument."
+   }
+  },
+  {
+   "text": "Fix $i$ and $n\\ge1$, and put $\\mathfrak m=\\mathfrak m_i$. If $s\\notin\\mathfrak m$, maximality gives $as+b=1$ for some $a\\in A$, $b\\in\\mathfrak m$. Modulo $\\mathfrak m^n$, the element $a(1+b+\\cdots+b^{n-1})$ is an inverse for $s$, since their product is $1-b^n$. Thus every denominator in $A_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] is already invertible modulo $\\mathfrak m^n$. This construction uses no assertion that $A$ or $A/\\mathfrak m^n$ is a domain.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (algebra-lemma-chinese-remainder), with Tag 07N9 (algebra-lemma-completion-finite-extension), proof, quotient-product and inverse-limit argument."
+   }
+  },
+  {
+   "text": "The extended ideal $(\\mathfrak mA_{\\mathfrak m})^n$ equals $\\mathfrak m^nA_{\\mathfrak m}$: expanding products of fractions proves one inclusion, and a generator $(x_1\\cdots x_n)/s$ is a product of $n$ elements of $\\mathfrak mA_{\\mathfrak m}$, proving the other. Its elements are fractions $c/s$ with $c\\in\\mathfrak m^n$, since a finite sum of these fractions has a common denominator and numerator still in $\\mathfrak m^n$. Hence localization gives $\\lambda_{i,n}:A/\\mathfrak m_i^n\\to A_{\\mathfrak m_i}/(\\mathfrak m_iA_{\\mathfrak m_i})^n$. It is surjective: for $x/s$, choose the inverse $v$ of $s$ modulo $\\mathfrak m_i^n$ from Step 5; its class equals that of $xv/1$. It is injective: if $x/1=c/s$ with $c\\in\\mathfrak m_i^n$, fraction equality gives $u(sx-c)=0$ for some $u\\notin\\mathfrak m_i$. Thus $usx\\in\\mathfrak m_i^n$; the classes of $u$ and $s$ are units by Step 5, forcing $x\\in\\mathfrak m_i^n$. This proves bijectivity directly from the fraction relation of [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (algebra-lemma-chinese-remainder), with Tag 07N9 (algebra-lemma-completion-finite-extension), proof, quotient-product and inverse-limit argument."
+   }
+  },
+  {
+   "text": "Compose $\\phi_n$ with the product of the $\\lambda_{i,n}$ to obtain $\\psi_n:A/J^n\\xrightarrow{\\sim}\\prod_i A_{\\mathfrak m_i}/(\\mathfrak m_iA_{\\mathfrak m_i})^n$. The maps $\\lambda_{i,n}$ commute with reduction: both routes on a class $[a]$ give the class of $a/1$ at level $n$. Together with Step 4 this proves transition compatibility of $\\psi_n$. By [def-weil-pbc-adic-completion], $C$ consists of compatible sequences $x=(x_n)$. Send $x$ to $((\\psi_n(x_n)_i)_{n\\ge1})_i$. Conversely, from $(h_i)_i\\in\\prod_iH_i$, set $x_n=\\psi_n^{-1}((h_{i,n})_i)$. Transition compatibility and injectivity of $\\psi_n$ imply that these $x_n$ are compatible. The two formulas are inverse and preserve ring operations componentwise, so define a ring isomorphism $C\\cong\\prod_iH_i$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (algebra-lemma-chinese-remainder), with Tag 07N9 (algebra-lemma-completion-finite-extension), proof, quotient-product and inverse-limit argument."
+   }
+  },
+  {
+   "text": "For $a\\in A$, its image in $C$ is $([a]\\bmod J^n)_n$. The isomorphism of Step 7 sends this to $(([a/1]\\bmod(\\mathfrak m_iA_{\\mathfrak m_i})^n)_n)_i$. This is exactly localization followed by completion in every factor, using [def-weil-pbc-adic-completion] and [def-weil-pbc-localization-at-prime]. Thus the constructed ring isomorphism respects the given $A$-algebra structures and has the stipulated factor maps.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT (algebra-lemma-chinese-remainder), with Tag 07N9 (algebra-lemma-completion-finite-extension), proof, quotient-product and inverse-limit argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-pc-crt-ideal-quotient-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit CRT variant of Tag 07N9, proof: quotient products and inverse limit, using Tag 00DT. The elementary power and fraction calculations are written out rather than invoking the Artinian decomposition route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a Noetherian semilocal ring at its Jacobson radical is the product of the completions at its finitely many maximal ideals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.piEquivFin_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (n : ℕ) (x : AdicCompletion I (Fin n → R)),\\n  (AdicCompletion.piEquivFin I n) x = (AdicCompletion.pi I fun x => R) x\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a natural number $ n $, there exists a linear equivalence between the $ I $-adic completion of the product module $ R^n $ (viewed as functions $ \\\\math\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"IsAdicComplete.le_jacobson_bot\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], I ≤ ⊥.jacobson\", \"doc\": \"If a commutative ring $ R $ is $ I $-adic complete with respect to an ideal $ I $, then $ I $ is contained in the Jacobson radical of $ R $, which is the intersection of all maximal ideals of $ R $. T\"}\n  {\"name\": \"instIsHausdorffMaximalIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsNoetherianRing R]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R], IsHausdorff (IsLocalRing.maximalIdeal R) M\", \"doc\": \"The maximal ideal of a local Noetherian ring is equipped with a Hausdorff topology, ensuring that the intersection of all powers of the ideal is trivial.\"}\n  {\"name\": \"IsHausdorff.of_isLocalRing\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M] [IsLocalRing R], I ≠ ⊤ → IsHausdorff I M\", \"doc\": \"If $ R $ is a local ring and $ I $ is a proper ideal of $ R $, then the $ I $-adic topology on the module $ M $ is Hausdorff, meaning the intersection of all powers of $ I $ in $ M $ is trivial.\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsHausdorff.of_le_jacobson\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], I ≤ ⊥.jacobson → IsHausdorff I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, if $ I $ is contained in the Jacobson radical of $ R $, then the intersection of $ I^n M $ over all positive integers $ n $ is \"}\n  {\"name\": \"isUnit_iff_notMem_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R] (r : R), IsUnit r ↔ r ∉ m\", \"doc\": \"In an adic complete commutative ring $ R $ with respect to a maximal ideal $ \\\\mathfrak{m} $, an element $ r \\\\in R $ is a unit if and only if $ r \\\\notin \\\\mathfrak{m} $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned completion product equivalences keep one fixed ideal on an already given product of modules; CRT concerns finite quotient rings, not the inverse-limit comparison with completed maximal localizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic completion at intersection of finitely many maximal ideals is product of completed localizations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"MaximalSpectrum.PiLocalization\", \"module\": \"Mathlib.RingTheory.Spectrum.Maximal.Localization\", \"type\": \": Type _\", \"doc\": \"The product of localizations of a commutative semiring $ R $ at each maximal ideal in its maximal spectrum, where each localization inverts all elements outside the corresponding maximal ideal.\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.pi\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              AdicCompletion I ((j : ι) → M j) →ₗ[AdicCompletion I R] (j : ι) → AdicC\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, this constructs a linear map from the $ I $-adic completion of the pro\"}\n  {\"name\": \"AdicCompletion.piEquivOfFintype_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"(x : AdicCompletion I (∀ j, M j)) : piEquivOfFintype I M x = pi I M x\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\} $, there exists a linear equivalence between the $ I $-adic completion of the pro\"}\n  {\"name\": \"MaximalSpectrum.toPiLocalization\", \"module\": \"Mathlib.RingTheory.Spectrum.Maximal.Localization\", \"type\": \": R →+* PiLocalization R\", \"doc\": \"The canonical ring homomorphism from a commutative semiring $ R $ to the product of its localizations at each maximal ideal in the maximal spectrum, constructed by mapping each element of $ R $ to its\"}\n  {\"name\": \"AdicCompletion.piEquivOfFintype\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              [DecidableEq ι] →\\n                [Fintype ι] → AdicCompletion I ((j : \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\} $, this constructs a linear equivalence between the $ I $-adic completion of the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned completion product equivalences keep one fixed ideal on an already given product of modules; CRT concerns finite quotient rings, not the inverse-limit comparison with completed maximal localizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Ideal",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Type u_4\", \"doc\": \"The completion of a module with respect to an ideal.\\n\\nThis is Hausdorff but not necessarily complete: a classical sufficient condition for\\ncompleteness is that `I` be finitely generated [Stacks, 05GG]\"}\n  {\"name\": \"AdicCompletion.instAdd\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Add (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instAddCommGroup\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : AddCommGroup (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instNeg\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Neg (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instSub\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Sub (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instZero\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Zero (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instSMul\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [SMul S R] [SMul S M] [IsScalarTower S R M] : SMul S (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instIsHausdorff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : IsHausdorff I (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : M →ₗ[R] AdicCompletion I M\", \"doc\": \"The canonical linear map to the completion.\"}\n  {\"name\": \"AdicCompletion.mk\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : AdicCompletion.AdicCauchySequence I M →ₗ[R] AdicCompletion I M\", \"doc\": \"The canonical linear map from Cauchy sequences to the completion.\"}\n  {\"name\": \"AdicCompletion.ofLinearEquiv\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [IsAdicComplete I M] : M ≃ₗ[R] AdicCompletion I M\", \"doc\": \"When `M` is `I`-adic complete, the canonical map from `M` to its `I`-adic completion is a linear\\nequivalence.\"}\n  {\"name\": \"AdicCompletion.instModuleOfIsScalarTower\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] [Semiring S] [SMul S R] [Module S M] [IsScalarTower S R M] : Module S (AdicCompletion I M)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned completion product equivalences keep one fixed ideal on an already given product of modules; CRT concerns finite quotient rings, not the inverse-limit comparison with completed maximal localizations."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*prod|prod.*completion|semilocal|semi.local",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"38\", \"text\": \"  into the product of its infinite completions is dense.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean\", \"line\": \"16\", \"text\": \"finite product of completions over its infinite places.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean\", \"line\": \"46\", \"text\": \"The infinite adele ring is the finite product of completions of a number field over its\"}\n  {\"file\": \"Mathlib/CategoryTheory/Idempotents/Biproducts.lean\", \"line\": \"12\", \"text\": \"# Biproducts in the idempotent completion of a preadditive category\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/GelfandNaimarkSegal.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Analysis.InnerProductSpace.Completion\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/GelfandNaimarkSegal.lean\", \"line\": \"50\", \"text\": \"This space is only a pre-inner product space. Its Hilbert space completion is\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/AbstractCompletion.lean\", \"line\": \"339\", \"text\": \"/-- Products of completions -/\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/AbstractCompletion.lean\", \"line\": \"340\", \"text\": \"protected def prod : AbstractCompletion (α × β) where\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/LocallyContractible.lean\", \"line\": \"58\", \"text\": \"\\\"locally contractible\\\" and \\\"semilocally contractible\\\" respectively.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Reproducing.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.InnerProductSpace.Completion\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Completion.lean\", \"line\": \"12\", \"text\": \"# Completion of an inner product space\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Completion.lean\", \"line\": \"14\", \"text\": \"We show that the separation quotient and the completion of an inner product space are inner\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Completion.lean\", \"line\": \"87\", \"text\": \"  UniformSpace.Completion.continuous_inner.comp (hf.prodMk hg :)\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Completion.lean\", \"line\": \"89\", \"text\": \"instance innerProductSpace : InnerProductSpace 𝕜 (Completion E) where\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Completion.lean\", \"line\": \"49\", \"text\": \"  Completion.uniformContinuous_dist.continuous.comp (hf.prodMk hg :)\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Semilocal.lean\", \"line\": \"12\", \"text\": \"# Local properties for semilocal rings\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Semilocal.lean\", \"line\": \"14\", \"text\": \"This file proves some local properties for a semilocal ring `R` (a ring with\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Semilocal.lean\", \"line\": \"19\", \"text\": \"* `Module.Finite.of_isLocalized_maximal`: A module `M` over a semilocal ring `R` is finite if its\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Semilocal.lean\", \"line\": \"21\", \"text\": \"* `IsNoetherianRing.of_isLocalization_maximal`: A semilocal ring `R` is Noetherian if its\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Semilocal.lean\", \"line\": \"23\", \"text\": \"* `isPrincipalIdealRing_of_isPrincipalIdealRing_isLocalization_maximal`: A semilocal\"}\n  {\"file\": \"Mathlib/RingTheory/PicardGroup.lean\", \"line\": \"546\", \"text\": \"/-- The Picard group of a semilocal ring is trivial. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/Finiteness.lean\", \"line\": \"31\", \"text\": \"* Move the results that `Module.Finite` over a semilocal ring is a local property from\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/Finiteness.lean\", \"line\": \"32\", \"text\": \"  `Mathlib/RingTheory/LocalProperties/Semilocal.lean` to this file.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"16\", \"text\": \"# Adic completion as tensor product\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned completion product equivalences keep one fixed ideal on an already given product of modules; CRT concerns finite quotient rings, not the inverse-limit comparison with completed maximal localizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chinese remainder theorem for adic completion of a ring at a finite intersection of pairwise comaximal maximal ideals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.piEquivFin_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (n : ℕ) (x : AdicCompletion I (Fin n → R)),\\n  (AdicCompletion.piEquivFin I n) x = (AdicCompletion.pi I fun x => R) x\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a natural number $ n $, there exists a linear equivalence between the $ I $-adic completion of the product module $ R^n $ (viewed as functions $ \\\\math\"}\n  {\"name\": \"AdicCompletion.piEquivOfFintype_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {ι : Type u_6} (M : ι → Type u_7)\\n  [inst_1 : (i : ι) → AddCommGroup (M i)] [inst_2 : (i : ι) → Module R (M i)] [inst_3 : DecidableEq ι]\\n  [inst_4 : Fintype ι] (x : AdicCompletion I ((j : ι) → M j)),\\n  (AdicCompletion.piEquivOfFintype I M) x = (Adic\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\} $, there exists a linear equivalence between the $ I $-adic completion of the pro\"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"Ideal.pi_quotient_surjective\", \"module\": \"Mathlib/RingTheory/Ideal/Quotient/Operations\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {ι : Type u_3} [Finite ι] {I : ι → Ideal R},\\n  Pairwise (Function.onFun IsCoprime I) → ∀ (x : (i : ι) → R ⧸ I i), ∃ r, ∀ (i : ι), (Ideal.Quotient.mk (I i)) r = x i\", \"doc\": \"For any family of pairwise coprime ideals $\\\\{I_i\\\\}$ in a commutative ring $R$, the natural map from $R$ to the product of quotient rings $\\\\prod_{i} R/I_i$ is surjective. Specifically, given any tuple \"}\n  {\"name\": \"IsDedekindDomain.exists_representative_mod_finset\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] {ι : Type u_4} {s : Finset ι} (P : ι → Ideal R) (e : ι → ℕ),\\n  (∀ i ∈ s, Prime (P i)) →\\n    (∀ i ∈ s, ∀ j ∈ s, i ≠ j → P i ≠ P j) →\\n      ∀ (x : (i : ↥s) → R ⧸ P ↑i ^ e ↑i), ∃ y, ∀ (i : ι) (hi : i ∈ s), (Ideal.Quotient.mk (P i ^ e i)) y = x ⟨\", \"doc\": \"In a Dedekind domain $ R $, given a finite set of pairwise distinct prime ideals $ P_i $ and positive integers $ e_i $, for any collection of elements $ x_i \\\\in R / P_i^{e_i} $, there exists an elemen\"}\n  {\"name\": \"Ideal.pi_mkQ_surjective\", \"module\": \"Mathlib/RingTheory/Ideal/Quotient/Operations\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {ι : Type u_3} [Finite ι] {I : ι → Ideal R},\\n  Pairwise (Function.onFun IsCoprime I) → Function.Surjective ⇑(LinearMap.pi fun i => Submodule.mkQ (I i))\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the quotient ring $ R/I $ is a commutative ring, inheriting commutative multiplication from $ R $.\"}\n  {\"name\": \"Ideal.quotientInfToPiQuotient_surj\", \"module\": \"Mathlib/RingTheory/Ideal/Quotient/Operations\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {ι : Type u_3} [Finite ι] {I : ι → Ideal R},\\n  Pairwise (Function.onFun IsCoprime I) → Function.Surjective ⇑(Ideal.quotientInfToPiQuotient I)\", \"doc\": \"For a ring $ R $ and a family of pairwise coprime two-sided ideals $\\\\{I_i\\\\}_{i \\\\in \\\\iota}$, the canonical ring homomorphism $ R / \\\\bigcap_{i \\\\in \\\\iota} I_i \\\\to \\\\prod_{i \\\\in \\\\iota} R / I_i $ is surject\"}\n  {\"name\": \"Ideal.quotientInfRingEquivPiQuotient\", \"module\": \"Mathlib/RingTheory/Ideal/Quotient/Operations\", \"type\": \"{R : Type u_2} →\\n  [inst : CommRing R] →\\n    {ι : Type u_3} →\\n      [Finite ι] → (f : ι → Ideal R) → Pairwise (Function.onFun IsCoprime f) → R ⧸ ⨅ i, f i ≃+* ((i : ι) → R ⧸ f i)\", \"doc\": \"For a commutative ring $ R $ and a finite family of pairwise coprime ideals $\\\\{I_i\\\\}_{i \\\\in \\\\iota}$ (i.e., $ I_i + I_j = R $ for all $ i \\\\neq j $), the canonical ring homomorphism from the quotient ri\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned completion product equivalences keep one fixed ideal on an already given product of modules; CRT concerns finite quotient rings, not the inverse-limit comparison with completed maximal localizations."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*prod|prod.*completion|semilocal|semi.local",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"16\", \"text\": \"# Adic completion as tensor product\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"57\", \"text\": \"def ofTensorProduct : AdicCompletion I R ⊗[R] M →ₗ[AdicCompletion I R] AdicCompletion I M :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"68\", \"text\": \"lemma ofTensorProduct_tmul (r : AdicCompletion I R) (x : M) :\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"95\", \"text\": \"      (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).toLinearMap := by\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"120\", \"text\": \"      (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).toLinearMap := by\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"344\", \"text\": \"/-- The canonical inclusion from the completion to the product. -/\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"line\": \"26\", \"text\": \"- `piEquivOfFintype`: adic completion commutes with finite products\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"line\": \"215\", \"text\": \"/-- The canonical map from the adic completion of the product to the product of the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned completion product equivalences keep one fixed ideal on an already given product of modules; CRT concerns finite quotient rings, not the inverse-limit comparison with completed maximal localizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a semilocal ring at its Jacobson radical is the product of the completions of its maximal localizations",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"isLocalRing_of_isAdicComplete_maximal\", \"IsAdicComplete.le_jacobson_bot\", \"MaximalSpectrum.toPiLocalizationEquiv\", \"isLocalHom_of_le_jacobson_bot\", \"isJacobsonRing_localization\", \"isUnit_iff_notMem_of_isAdicComplete_maximal\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsAdicComplete.henselianRing\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a fixed-ideal product, local-ring criteria and finite-level CRT do not state the comparison with completed maximal localizations."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*prod|prod.*completion|semilocal|semi.local",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\"], \"note\": \"\", \"subdirectory\": \"RingTheory/AdicCompletion\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a fixed-ideal product, local-ring criteria and finite-level CRT do not state the comparison with completed maximal localizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic completion at intersection of finitely many maximal ideals is product of completed localizations",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AdicCompletion.module\", \"AdicCompletion.instCommRing\", \"MaximalSpectrum.PiLocalization\", \"AdicCompletion\", \"AdicCompletion.pi\", \"AdicCompletion.piEquivOfFintype_apply\", \"MaximalSpectrum.toPiLocalization\", \"AdicCompletion.piEquivOfFintype\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a fixed-ideal product, local-ring criteria and finite-level CRT do not state the comparison with completed maximal localizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Ideal",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"top\": [\"AdicCompletion\", \"AdicCompletion.instAdd\", \"AdicCompletion.instAddCommGroup\", \"AdicCompletion.instNeg\", \"AdicCompletion.instSub\", \"AdicCompletion.instZero\", \"AdicCompletion.instSMul\", \"AdicCompletion.instIsHausdorff\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a fixed-ideal product, local-ring criteria and finite-level CRT do not state the comparison with completed maximal localizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chinese remainder theorem for adic completion of a ring at a finite intersection of pairwise comaximal maximal ideals",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AdicCompletion.piEquivFin_apply\", \"AdicCompletion.piEquivOfFintype_apply\", \"AdicCompletion.instCommRing\", \"Ideal.pi_quotient_surjective\", \"IsDedekindDomain.exists_representative_mod_finset\", \"Ideal.pi_mkQ_surjective\", \"Ideal.quotientInfToPiQuotient_surj\", \"Ideal.quotientInfRingEquivPiQuotient\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a fixed-ideal product, local-ring criteria and finite-level CRT do not state the comparison with completed maximal localizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-g-ring-finite-domain-generic-test",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular local model and purity), through the existing small-singular-locus / ideal-adic quasi-excellence chain: the local G-ring lifting input to Kurano–Shimomoto Theorem 5.1 Step 2 equation (5.1). Refined using Rotthaus (1979), Theorem 3, pp.176–179. Rotthaus, Komplettierung semilokaler quasiausgezeichneter Ringe, Nagoya Math. J. 76 (1979), Lemma 1(a)–(b), p.174 (Matsumura 33.E); her terminology quasiausgezeichnet means geometrically regular formal fibres, as explicitly defined on p.173. Related Stacks Tag 07PQ, more-algebra-lemma-check-G-ring, is the finite-free regular-formal-fibre test, not this finite-domain generic-fibre formulation. Semilocal passage in Rotthaus Lemma 1, remark (2): identifying Jacobson-radical completion with the product of completed maximal localizations.",
+   "via": [
+    "lem-per-g-ring-finite-domain-generic-test",
+    "lem-per-local-g-ring-adic-lifting",
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-semilocal-jacobson-completion-product",
+  "worker": "stage1",
+  "summary": "No attachment or exact Mathlib match. Reused the existing general CRT and maximal-ideal existence leaves; supplied ideal-power, localization-quotient, transition and compatible-sequence arguments explicitly. Statement unchanged, including the zero ring. No new nodes.",
+  "blueprint": "The existing ancestry through lem-per-g-ring-finite-domain-generic-test supplies the semilocal completion comparison used in the regular-local-model/purity chain under lem-per-artin-gabber-affine-curve; preserves the inherited from.place and via. Read the current latest ancestor proof, especially its Step 3; this split is a commutative-algebra input below that route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-418d835fa",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-418d835fa (reviewer sub-agent of L); spot-checked: Read the item's 8 steps in full against Stacks 00DT (algebra.tex:2615-2663), 07N9 (23135-23175; it needs a finite map over a localized base, so it serves only as a model and proof_origin=agent is right) and 00E0(2). No new nodes; statement and stmt_deps unchanged, target not weakened. Each cited statement says what its step takes from it: maximal-ideal leaf (nonzero ring has a maximal ideal) gives t=0 forces A=0; CRT leaf gives A/∩I ≅ ∏A/I for 𝔪ᵢⁿ, with ∩=∏ and Jⁿ=∩𝔪ᵢⁿ written out in Step 3 because the leaf does not state it. Steps checked: (u+v)^{2n-1} comaximality; denominators invertible mod 𝔪ⁿ via a(1+...+b^{n-1}); λ bijective from u(sx-c)=0 with nothing cancelled in A; limit of products assembled by hand from compatible sequences; factor maps are localization followed by completion. Small cases checked: Z localized away from (2)∪(3) gives Z₂×Z₃; local A; k×k; dual numbers × k; A=0. Searched the DAG: no duplicate (the 07N9 family needs a finite map over a local base; the Artinian product node is a different statement). All cited non-definition nodes are Mathlib leaves, so no tool_uses. Maintainer note: the existing leaf lem-pc-crt-ideal-quotient-product cites source Tag 00U3, which is lemma-etale-over-field; the right tag is 00DT. This is not a fault of the delivery and not split-owned, so no fix."
+ }
+}

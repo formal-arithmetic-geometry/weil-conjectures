@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-power-transition-functor",
+ "kind": "definition",
+ "title": "Twisting abelian tower transitions by a fixed integer",
+ "statement": "Let C be a preadditive category and l a natural number. The power-transition functor V_l on towers X in C leaves X_n unchanged and replaces each successive transition t_n by l times t_n. It leaves every component of every morphism unchanged. There is a natural transformation mu_l:V_l → Id with component at level n equal to l^(n+1) times the identity. The functor is additive. If C is abelian it preserves quasi-isomorphisms of cochain complexes of towers.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower.proof.md",
+  "place": "Functorial derived completion: simultaneous tensor with quotient rings; resolution [Z --ell^n--> Z] with transitions (ell,1). For the ordinary quotient see Stacks sites-modules.tex, lemma-adjointness-tensor-restrict (03D7); for resolutions see sites-cohomology.tex, lemma-K-flat-resolution (06YS) and lemma-derived-base-change (06YY)."
+ },
+ "proof": [
+  {
+   "text": "Construct the tower and every morphism by Functor.ofOpSequence and NatTrans.ofOpSequence. The compatibility square is l times the old naturality square. The powers satisfy l times l^(n+1)=l^(n+2), giving multiplication. Functoriality and additivity are componentwise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "After exact evaluation at any level the twisted cochain map is literally the original evaluated cochain map. HomologicalComplex.quasiIso_iff_evaluation proves preservation of quasi-isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H5",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "coefficient reduction, expanded into the ordinary quotient and resolution comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars to a quotient integer ring system is the mapping cone of its variable multiplication natural transformation, with second arrow the derived adjunction unit",
+   "results": "Generic derived-category functors, singleFunctor and Q, and scalar-extension APIs only; no variable-power calculation.",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedNatTrans",
+   "results": "No hits; unknown identifier 'Functor.leftDerivedNatTrans'. Local source inspection used the universal derived pairs and mapHomologicalComplex APIs instead.",
+   "date": "2026-10-27",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit.*CokernelCofork|exists_isKFlatResolutionIndependentCoefficients",
+   "results": "Generic cokernel universal properties. Local source inspection found CochainComplex.exists_isKFlatResolutionIndependentCoefficients and DerivedChangeOfRingsCochainModel.computes. Neither identifies an arbitrary Reduction over Rrings with this model, nor computes the variable-power ordinary quotient.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic resolution and derived-extension nodes; specialized remaining steps are new."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived tensor product with a quotient of the integers is computed by the two term resolution given by multiplication, naturally in an inverse system",
+   "results": "TensorProduct.tensorQuotientEquiv, quotTensorEquivQuotSMul, tensorQuotEquivQuotSMul and quotientTensorQuotientEquiv. These are ordinary module quotient computations; none computes variable-power sheaf-system derived extension or its unit.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf-system theorem; ordinary tensor quotient APIs are supporting algebra only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PowerSystemReductionTriangle",
+  "date": "2026-10-27",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "variable-power coefficient resolution in simultaneous Kummer reduction",
+   "via": [
+    "lem-sfb-power-system-reduction-triangle",
+    "lem-sfb-kummer-reduction-unit",
+    "lem-sfb-normalized-kummer-reduction",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PowerTransitionFunctor",
+  "file": "lean/Sheaf/Paper/PowerTransitionFunctor.lean",
+  "declaration": "CategoryTheory.PowerTransition.functor",
+  "statement": "def functor (l : ℕ) : (ℕᵒᵖ ⥤ C) ⥤ (ℕᵒᵖ ⥤ C)",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-27",
+  "declarations": [
+   "CategoryTheory.PowerTransition.obj",
+   "CategoryTheory.PowerTransition.functor",
+   "CategoryTheory.PowerTransition.additive",
+   "CategoryTheory.PowerTransition.multiplication",
+   "CategoryTheory.PowerTransition.multiplication_app_app",
+   "CategoryTheory.PowerTransition.quasiIso_map"
+  ]
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T094418-L-223465",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T094418-L-223465",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

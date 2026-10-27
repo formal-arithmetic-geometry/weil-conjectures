@@ -1,0 +1,358 @@
+{
+ "id": "lem-pur-etale-normalized-mates-composition-pasting",
+ "kind": "statement",
+ "title": "Composition and refinement-pasting of actual etale normalized mates",
+ "statement": "Let $A$ be a finite commutative ring. Work in ordinary unbounded derived categories of constant-$A$ module sheaves on small etale sites [def-weil-pbc-derived-categories]. All schemes are Noetherian, meaning they admit finite affine covers by spectra of Noetherian rings [def-pc-scheme] [def-weil-pbc-noetherian-ring]. For separated etale finite-type arrows $a$ and their composites [def-weil-scheme-morphism-properties] [def-weil-etale-morphism], choose compactifications [def-weil-compactifications-refinements]. Put $F_a=Ra_!\\dashv G_a$, with counit $\\varepsilon_a$ [def-amb-etale-compact-support] [thm-amb-etale-exceptional-adjoint], and $S_a=D(a_{\\Sigma!})\\dashv a^*$ with counit $\\operatorname{ev}_a$ [def-weil-pbc-etale-sum-extension] [lem-amb-etale-adjoint-locality]. Let $d_a:F_a\\xrightarrow{\\sim}S_a$ be the actual proper-support/sum comparison [lem-sfb-quasifinite-compact-support-exact], and $\\rho_a=(d_a^{-1})^c:G_a\\xrightarrow{\\sim}a^*$ [def-weil-pbc-adjunction-conjugate]. For composable $e:U\\to X$, $v:X\\to T$, let $\\alpha:F_vF_e\\to F_{ve}$ be the specified proper/open compositor [lem-amb-unbounded-compact-support-comparisons], let $c_{v,e}:G_{ve}\\to G_eG_v$ be its conjugate using the composite adjunction [def-weil-pbc-composite-adjunction], and let $\\kappa:(ve)^*\\to e^*v^*$ be canonical pullback composition. Then\n$$\\kappa_K\\circ\\rho_{ve,K}=e^*(\\rho_{v,K})\\circ\\rho_{e,G_vK}\\circ c_{v,e,K}$$\nfor every $K\\in D(T_{\\mathrm{et}},A)$. For identity arrows, $\\rho$ is the canonical comparison with the identity functor. These equalities agree under the canonical proper-refinement comparisons for all chosen compactifications, with the right adjoints compared by their adjunction conjugates.\n\nFor an arbitrary Cartesian base change of an etale $e:U\\to X$ by $w:X'\\to X$, denote the resulting arrows by $e':U'\\to X'$, $w':U'\\to U$ [def-weil-pbc-cartesian-square]. Let $C_{e,w}:w^*F_e\\to F_{e'}w'^*$ be the actual compact-support exchange from the same unbounded-comparisons node. For every $K\\in D(X_{\\mathrm{et}},A)$ let $B_{e,w,K}:w'^*G_eK\\to G_{e'}w^*K$ be the adjunct of $w^*\\varepsilon_{e,K}\\circ C_{e,w,G_eK}^{-1}$. For a further morphism $z:X''\\to X'$ of Noetherian schemes, write $e'':U''\\to X''$ and $z':U''\\to U'$ for its base change. With canonical pullback-composition identifications [prop-weil-pbc-inverse-image-modules-exact],\n$$B_{e,wz,K}=B_{e',z,w^*K}\\circ z'^*B_{e,w,K}.$$\nThese maps and the composition equalities above agree under proper refinement and under arbitrary further Cartesian restriction by an open immersion. In particular, write $\\chi^{w}_K:w'^*e^*K\\xrightarrow{\\sim}e'^*w^*K$ for the canonical pullback-composition map of the square of $w$, and similarly $\\chi^{z}$, $\\chi^{wz}$; then $\\chi^{wz}_K=\\chi^{z}_{w^*K}\\circ z'^*\\chi^{w}_K$ under the same identifications. Consequently, if $\\rho_{e',w^*K}\\circ B_{e,w,K}=\\chi^{w}_K\\circ w'^*\\rho_{e,K}$ and $\\rho_{e'',z^*w^*K}\\circ B_{e',z,w^*K}=\\chi^{z}_{w^*K}\\circ z'^*\\rho_{e',w^*K}$, then $\\rho_{e'',(wz)^*K}\\circ B_{e,wz,K}=\\chi^{wz}_K\\circ(w'z')^*\\rho_{e,K}$ is obtained from them by this pasting.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); etale-cohomology.tex Tag 03S6 (lemma-shriek-base-change); expanded conjugacy and exchange pasting for blueprint etale locality Step 1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-etale-morphism",
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-amb-etale-adjoint-locality",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-cartesian-square",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-etale-support-sum-compositor] to the three arbitrary compactifications. It identifies the specified proper/open compositor alpha followed by the constructed graph comparison d_ve with the horizontal composite of d_e,d_v followed by the exact derived nested-sum compositor sigma. Invert the two graph comparisons horizontally and cancel their horizontal composite to obtain sigma followed by d_ve inverse equal to the horizontal inverses followed by alpha. The sum-composition-counit theorem identifies the conjugate of this specified sigma with the exact pullback compositor of [def-pur-etale-exact-pullback-unit-composition-comparisons].",
+   "uses": [
+    "lem-pur-etale-support-sum-compositor",
+    "lem-pur-etale-sum-composition-counit",
+    "def-pur-etale-exact-pullback-unit-composition-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor), 0F7L (lemma-base-change-shriek); adjunction calculations expanded by Q109"
+   }
+  },
+  {
+   "text": "Apply adjunction conjugacy to the equality in Step 1. Its reversal of vertical composition is [def-weil-pbc-adjunction-conjugate]; the conjugate of the horizontal composite of the two inverse comparisons is, by [lem-weil-pbc-mate-pasting](2),\n$$G_eG_v\\xrightarrow{\\rho_eG_v}e^*G_v\\xrightarrow{e^*\\rho_v}e^*v^*.$$\nThe conjugates of the remaining factors are $c_{v,e}$, $\\rho_{ve}$ and $\\kappa$, respectively. Thus the equality of conjugates is exactly\n$$e^*\\rho_v\\,\\rho_eG_v\\,c_{v,e}=\\kappa\\rho_{ve}.$$\nNo inverse of $c_{v,e}$ is inserted: $\\alpha$ points toward $F_{ve}$, so its conjugate points out of $G_{ve}$. For the identity clause, descend the ordinary sum-adjunction counit equation as a finite exact-derived pasting expression. Its conjugate is the specified exact pullback identity comparison. The identity clause of [lem-asd-compact-support-graph-coherence] identifies the graph comparison at the proper identity compactification. The already established rho refinement equation transports this comparison to arbitrary compactifications and right adjunctions.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-asd-compact-support-graph-coherence",
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor), 0F7L (lemma-base-change-shriek); adjunction calculations expanded by Q109"
+   }
+  },
+  {
+   "text": "For a proper-refinement comparison $t_a:F_a\\to\\widehat F_a$, [lem-sfb-quasifinite-compact-support-exact] gives $d_a=\\widehat d_a t_a$, and [lem-amb-unbounded-compact-support-comparisons] gives\n$$t_{ve}\\alpha=\\widehat\\alpha\\,(t_v*t_e).$$\nHere $*$ denotes horizontal composition. Conjugating the first equation gives $\\widehat\\rho_a=\\rho_a t_a^c$ by [def-weil-pbc-adjunction-conjugate]. Conjugating the second gives\n$$c_{v,e}t_{ve}^c=(t_v*t_e)^c\\widehat c_{v,e},$$\nwith the horizontal conjugate expanded by [lem-weil-pbc-mate-pasting](2). Substitute these two equations into the composition identity of Step 2 and cancel the invertible refinement maps. This identifies its two sides with the two sides for the hatted choices. The cocycle and identity clauses of the unbounded-comparisons node make this independent of the common refinement, and also extend the identity normalization to every compactification. In the Lean proof, the refinement clause is an immediate application of EtaleSupportExchange.rightAdjointIso_refinement from [lem-pur-etale-support-exchange-right-mate], whose right-adjoint identification is definitionally this normalization. For the compositor-refinement clause, use the every-tower formula of [lem-amb-unbounded-compact-support-comparisons] to express each actual compositor through the common chosen compact-support functors. The comparison cocycle and naturality give alpha followed by t_ve equal to the horizontal comparison followed by alpha_hat. Conjugate this equality and expand horizontal conjugacy by the whiskerLeft and whiskerRight laws of [lem-weil-pbc-mate-pasting].",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-etale-support-exchange-right-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor), 0F7L (lemma-base-change-shriek); adjunction calculations expanded by Q109"
+   }
+  },
+  {
+   "text": "First use support_exchange_global to identify each transported exchange with unboundedEtaleCompactSupportBaseChange after the canonical compactification comparisons. Apply the composite-base-change equation of [lem-amb-unbounded-compact-support-comparisons]; naturality of the inverse-image compositors and the comparison maps cancels these maps and gives the forward pasting equation at the fixed compactifications. Invert it by cancellation. The private mates_paste lemma applies the final adjunction hom-bijection to the desired right-mate equation. The three mate counit identities, naturality of the intermediate inverse exchange and of the target pullback compositor reduce the two transposes to the inverted support pasting equation. Injectivity proves the result for every unbounded K. This is the counit calculation underlying [lem-weil-pbc-mate-pasting].",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor), 0F7L (lemma-base-change-shriek); adjunction calculations expanded by Q109"
+   }
+  },
+  {
+   "text": "For refinement maps $t_e:F_e\\to\\widehat F_e$ and $t_{e'}:F_{e'}\\to\\widehat F_{e'}$, refinement compatibility of the actual exchanges in [lem-amb-unbounded-compact-support-comparisons] says\n$$\\widehat C\\,w^*t_e=(t_{e'}w'^*)C.$$\nEquivalently, $\\widehat C^{-1}(t_{e'}w'^*)=(w^*t_e)C^{-1}$. By [lem-weil-pbc-mate-pasting](3a),(3b), taking mates gives\n$$(t_{e'}^c w^*)\\widehat B=B(w'^*t_e^c).$$\nThus $B$ is unchanged under precisely the conjugate identifications of right adjoints required in the statement. The cocycle law for $t$ and the identity/composition laws for conjugacy show that this is independent of a common refinement. Substitution in Step 4 proves the same assertion for its pasted equality. In Lean, first identify each transported exchange with the compactification-independent base-change map using [lem-amb-unbounded-compact-support-comparisons]. Its comparison cocycle gives the exchange-refinement square for arbitrary pairs of compactifications. Invert this square. Apply the adjunction hom-bijection and its counit equations to obtain the displayed right-mate refinement identity.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor), 0F7L (lemma-base-change-shriek); adjunction calculations expanded by Q109"
+   }
+  },
+  {
+   "text": "Apply the sheaf-level vertical square-pasting equation [lem-weil-pbc-square-iso-pasting] to the flipped squares. A flipped square comparison is the inverse of the original comparison. Precompose with the inverse source pullback compositor and postcompose with the target pullback compositor; inverse cancellation yields the displayed inverse-square pasting equation on sheaves. Package all six sheaf categories and their exact inverse-image functors into finite words and the two routes into finite pasting expressions. Exactness is [prop-weil-pbc-inverse-image-modules-exact]. Apply [lem-sp-exact-derived-transformation-pasting] to the equality of their ordinary evaluations. Its prescribed word comparisons identify the derived square cells with exactDerivedSquareUpperStarIso.inv and the compositor cells with unboundedEtaleUpperStarCompIso.hom or .inv. Taking the component at an arbitrary unbounded derived object proves exactly the required pullback-pasting equation, with no bounded-below restriction. The complete calculation is extracted as the proved theorem [lem-pur-etale-exact-pullback-square-pasting] after profiling and local transparency improvements; the original clause applies it directly.",
+   "uses": [
+    "lem-weil-pbc-square-iso-pasting",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-exact-derived-transformation-pasting",
+    "lem-pur-etale-exact-pullback-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor), 0F7L (lemma-base-change-shriek); adjunction calculations expanded by Q109"
+   }
+  },
+  {
+   "text": "Suppose the two displayed $\\rho B$ equations in the last clause hold. Using Step 4 and functoriality of $z'^*$, their substitution gives\n$$\\begin{aligned}\n\\rho_{e''}B_{e,wz}\n&=\\rho_{e''}B_{e',z}\\,z'^*B_{e,w}\\\\\n&=\\chi^z z'^*\\rho_{e'}\\,z'^*B_{e,w}\n=\\chi^z z'^*(\\chi^w w'^*\\rho_e)\n=\\chi^{wz}(w'z')^*\\rho_e.\n\\end{aligned}$$\nThe last equality is Step 6. This proves exactly the conditional claim of the statement, without adding a new normalization or asserting the antecedents without proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor), 0F7L (lemma-base-change-shriek); adjunction calculations expanded by Q109"
+   }
+  },
+  {
+   "text": "For composition under arbitrary Cartesian restriction, use support_compositor_global and support_exchange_global to express every support map through the compactification-independent functors. The composition/base-change equation of [lem-amb-unbounded-compact-support-comparisons], with naturality and cancellation of the three comparison isomorphisms, gives W(alpha) followed by C_ve equal to C_v followed by F_v'(C_e) followed by alpha'. Invert the exchanges by cancellation. Apply the generic mate_refinement identity with comparison maps alpha and alpha', comparing the composite adjunctions with the single adjunctions. Expand the mate of the vertically pasted inverse exchanges with mateEquiv_hcomp of [lem-weil-pbc-mate-pasting]. Evaluation at K gives exactly B_ve followed by c' equal to w_U^*(c), then B_e at G_v(K), then H_e(B_v).",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor), 0F7L (lemma-base-change-shriek); adjunction calculations expanded by Q109"
+   }
+  },
+  {
+   "text": "For open restriction, prove the stronger normalization square for an arbitrary Cartesian square. The graph-comparison identification of [lem-asd-compact-support-graph-geometric-base-change] identifies the inverse constructed comparison with the existing compactificationEtaleComparison. Its base-change equation, transported through the exact/left-derived inverse-image isomorphisms, gives the square between the inverse support exchange and mapDerivedCategoryEtaleLowerShriekBaseChangeIso. The graph comparison refinement identity of [lem-pur-etale-support-exchange-right-mate] transports its target to any compactification. The ordinary sheaf unit equation unit_map_etaleLowerShriekSquareBaseChangeMap_app identifies the ordinary sum exchange as the mate of the inverse pullback-square map. Write its counit transpose as two finite expressions in exact functors and descend their equality using [lem-sp-exact-derived-transformation-pasting]. The descended counit cells are the counits of the specified onDerivedCategory adjunctions, so their hom-bijection identifies the mate of the exact sum exchange with the inverse exact pullback-square map. This avoids replacing the specified adjunction by the differently constructed mapDerivedCategoryAdjunction. Apply mate_refinement to the two inverse graph comparisons and the support/sum exchange square. Its conjugates are exactly rho and rho', so the resulting equation is the required normalization square, in particular for every open immersion. The exact sum mate calculation is implemented as the proved standalone theorem [lem-pur-etale-exact-sum-base-change-mate], to keep each module within the compile-time limit.",
+   "uses": [
+    "lem-asd-compact-support-graph-geometric-base-change",
+    "lem-pur-etale-support-exchange-right-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sp-exact-derived-transformation-pasting",
+    "lem-pur-etale-exact-sum-base-change-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); etale-cohomology.tex Tag 03S6 (lemma-shriek-base-change); expanded conjugacy and exchange pasting for blueprint etale locality Step 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-exact-pullback-unit-composition-comparisons",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-support-graph-coherence",
+  "lem-asd-compact-support-graph-geometric-base-change",
+  "lem-pur-etale-exact-pullback-square-pasting",
+  "lem-pur-etale-exact-sum-base-change-mate",
+  "lem-pur-etale-sum-composition-counit",
+  "lem-pur-etale-support-exchange-right-mate",
+  "lem-pur-etale-support-sum-compositor",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-square-iso-pasting",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); etale-cohomology.tex Tag 03S6 (lemma-shriek-base-change); expanded conjugacy and exchange pasting for blueprint etale locality Step 1; E3: support pasting transported from the unbounded package and mated by counit identities; composition restriction by mate refinement and horizontal mate composition; arbitrary-square normalization by the source graph comparison and exact sum mate. Composition reduced to the separate support/sum compositor normalization lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction conjugates of the actual compact support compositor for separated etale morphisms agree with pullback composition and the normalized right exchange mates respect proper refinement and iterated cartesian base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.conjugateEquiv\\n        ((AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction g).comp\\n          (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f))\\n        (AlgebraicGeometry.Scheme.Modules.pull\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For composed exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the whiskered composition of the pushforward functors' hom transformation with the pullback along $f \\\\ci\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let `C` be a category with chosen pullbacks. Let `f: I → J` and `g: J → K` be composable morphisms such that `f`, `g`, and their composition `g ∘ f` are all exponentiable. Let `(g ∘ f)^*` and `(g ∘ f)\"}\n  {\"name\": \"PresheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {E : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$, $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of pullba\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {I J K : C} →\\n      (f : I ⟶ J) →\\n        (g : J ⟶ K) →\\n          [inst_1 : CategoryTheory.ChosenPullbacksAlong f] →\\n            [inst_2 : CategoryTheory.ChosenPullbacksAlong g] →\\n              [inst_3 : CategoryTheory.ChosenPullbacksA\", \"doc\": \"Given composable morphisms $f : I \\\\to J$ and $g : J \\\\to K$ in a category $\\\\mathcal{C}$, if $f$, $g$, and their composition $g \\\\circ f$ are all exponentiable, then the pushforward functor associated wi\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.comp\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {I J K : C} →\\n      (f : I ⟶ J) →\\n        (g : J ⟶ K) →\\n          [inst_1 : CategoryTheory.ChosenPullbacksAlong f] →\\n            [inst_2 : CategoryTheory.ChosenPullbacksAlong g] →\\n              [inst_3 : CategoryTheory.ChosenPullbacksA\", \"doc\": \"Let $\\\\mathcal{C}$ be a category. Given composable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in $\\\\mathcal{C}$. If $\\\\mathcal{C}$ has chosen pullbacks along $f$, $g$, and their composition $g \\\\circ f$, and\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate composition and scheme structure-sheaf module adjunctions do not assert the normalization of the actual compact-support compositor by its proper-support comparison together with refinement and exchange pasting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale compactification sum normalization makes exceptional adjoint composition coherent with refinement and successive base change mates on arbitrary unbounded complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀_obj_termwise_mapMono_comp_PInfty\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (X : CategoryTheory.SimplicialObject C) {Δ Δ' : SimplexCategory} (i : Δ ⟶ Δ') [inst_2 : CategoryTheory.Mono i],\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicTopology.DoldKan.Γ₀.Obj.Termwi\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$ and a monomorphism $i : \\\\Delta' \\\\to \\\\Delta$ in the simplex category, the composition of the termwise map $\\\\Gamma_0$-induced morphism on the alte\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K : ChainComplex C ℕ) [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] {Δ Δ' : SimplexCategoryᵒᵖ}\\n  (A : SimplicialObject.Splitting.IndexSet Δ) {θ : Δ ⟶ Δ'} {Δ'' : SimplexCategory} {e : Op\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, given objects $ \\\\Delta, \\\\Delta' $ in the opposite simplex category $ \\\\Delta^{\\\\text{op}} $, a morphism $ \\\\the\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K : ChainComplex C ℕ) [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] {Δ Δ' : SimplexCategoryᵒᵖ}\\n  (A : SimplicialObject.Splitting.IndexSet Δ) (θ : Δ ⟶ Δ') {Δ'' : SimplexCategory} {e : Op\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, given an object $ \\\\Delta $ in the opposite simplex category $ \\\\Delta^{\\\\text{op}} $, a splitting index $ A = \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀_assoc\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K : ChainComplex C ℕ) [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] {Δ Δ' : SimplexCategoryᵒᵖ}\\n  (A : SimplicialObject.Splitting.IndexSet Δ) {θ : Δ ⟶ Δ'} {Δ'' : SimplexCategory} {e : Op\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, and for morphisms $ \\\\theta: \\\\Delta \\\\to \\\\Delta' $ in the opposite simplex category $ \\\\Delta^{\\\\text{op}} $, th\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand_assoc\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K : ChainComplex C ℕ) [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] {Δ Δ' : SimplexCategoryᵒᵖ}\\n  (A : SimplicialObject.Splitting.IndexSet Δ) (θ : Δ ⟶ Δ') {Δ'' : SimplexCategory} {e : Op\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, and for morphisms $ \\\\theta: \\\\Delta \\\\to \\\\Delta' $, $ e: \\\\Delta' \\\\to \\\\Delta'' $, and $ i: \\\\Delta'' \\\\to \\\\Delta'\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_comp_inclusionOfMooreComplexMap\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/Normalized\", \"type\": \"∀ {A : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} A] [inst_1 : CategoryTheory.Abelian A]\\n  (X : CategoryTheory.SimplicialObject A),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex X)\\n      (AlgebraicTopology.inclusionOfMooreComplexMap X) =\\n   \", \"doc\": \"For a simplicial object $X$ in an abelian category $\\\\mathcal{A}$, the composition of the chain map from the $P_\\\\infty$-complex $K[X]$ to the normalized Moore complex $N[X]$ with the canonical inclusio\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ) {n : ℕ},\\n  CategoryTheory.CategoryStruct.comp\\n      (((AlgebraicTopology.DoldKan.Γ₀.splitting K).cofan (Opposite.op (\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, the morphism $ P_\\\\infty $ applied to the summand of the Γ₀-splitting corresponding to the identity epimorphi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate composition and scheme structure-sheaf module adjunctions do not assert the normalization of the actual compact-support compositor by its proper-support comparison together with refinement and exchange pasting"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.conjugateEquiv",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo\", \"doc\": \"When all four functors in a square are left adjoints, the mates operation can be iterated:\\n\\n```\\n         L₁                  R₁                  R₁\\n      C --→ D             C ←-- D             C ←-- \"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate composition and scheme structure-sheaf module adjunctions do not assert the normalization of the actual compact-support compositor by its proper-support comparison together with refinement and exchange pasting"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*(comp|associator)|mateEquiv.*(vcomp|hcomp)|etale.*compactSupport",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"66\", \"text\": \"  (conjugateEquiv adj₀₂ (adj₀₁.comp adj₁₂)).symm τ₀₁₂\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"82\", \"text\": \"lemma conjugateEquiv_leftAdjointCompIso_inv (e₀₁₂ : G₂₁ ⋙ G₁₀ ≅ G₂₀) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"83\", \"text\": \"    conjugateEquiv (adj₀₁.comp adj₁₂) adj₀₂\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"135\", \"text\": \"    (conjugateEquiv adj₀₃ (adj₀₁.comp (adj₁₂.comp adj₂₃))).symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"137\", \"text\": \"  obtain ⟨τ₁₂₃, rfl⟩ := (conjugateEquiv adj₁₃ (adj₁₂.comp adj₂₃)).surjective τ₁₂₃\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"line\": \"65\", \"text\": \"    conjugateEquiv_symm_apply_app, NatTrans.id_app, Functor.map_id, Category.id_comp,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"line\": \"116\", \"text\": \"    Iso.refl_hom, conjugateEquiv_apply_app, NatTrans.id_app, Functor.map_id, Category.id_comp]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"line\": \"351\", \"text\": \"    conjugateEquiv_apply_app, Functor.comp_obj, comp_unit_app, Functor.id_obj,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"159\", \"text\": \"section mateEquivVComp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"170\", \"text\": \"theorem mateEquiv_vcomp (α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"195\", \"text\": \"end mateEquivVComp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"197\", \"text\": \"section mateEquivHComp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"209\", \"text\": \"theorem mateEquiv_hcomp (α : TwoSquare G L₁ L₂ H) (β : TwoSquare H L₃ L₄ K) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"112\", \"text\": \"  have vcomp1 := mateEquiv_conjugateEquiv_vcomp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"115\", \"text\": \"  have vcomp2 := conjugateEquiv_mateEquiv_vcomp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"140\", \"text\": \"    conjugateEquiv (h.comp (ihom.adjunction A)) ((ihom.adjunction (F.obj A)).comp h)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"line\": \"283\", \"text\": \"  rw [pre, pre, pre, conjugateEquiv_comp, (tensoringLeft C).map_comp]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"177\", \"text\": \"lemma conjugateEquiv_pullbackComp_inv :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"178\", \"text\": \"    conjugateEquiv ((pullbackPushforwardAdjunction.{v} φ).comp\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"182\", \"text\": \"  Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"199\", \"text\": \"section mateEquivVComp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"216\", \"text\": \"theorem mateEquiv_vcomp (α : g₁ ≫ l₂ ⟶ l₁ ≫ h₁) (β : g₂ ≫ l₃ ⟶ l₂ ≫ h₂) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"217\", \"text\": \"    mateEquiv adj₁ adj₃ (leftAdjointSquare.vcomp α β) =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"219\", \"text\": \"  simp only [leftAdjointSquare.vcomp, mateEquiv_apply', rightAdjointSquare.vcomp]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"252\", \"text\": \"end mateEquivVComp\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate composition and scheme structure-sheaf module adjunctions do not assert the normalization of the actual compact-support compositor by its proper-support comparison together with refinement and exchange pasting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proper support sum normalized right adjoint compositor and exchange respect proper refinement and composite cartesian base changes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{f : X ⟶ Y} {g : Y ⟶ Z} [IsProper g] : IsProper (f ≫ g) ↔ IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n  {\"name\": \"CategoryTheory.Functor.isRightAdjoint_comp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"{E : Type u₃} [Category.{v₃} E] {F : C ⥤ D} {G : D ⥤ E} [IsRightAdjoint F] [IsRightAdjoint G] : IsRightAdjoint (F ⋙ G)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, if $F$ and $G$ are both right adjoint functors, then their c\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsRightAdjointSheafComposeOfHasWeakSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Adjunction\", \"type\": \"[HasWeakSheafify J D] [F.IsRightAdjoint] : (sheafCompose J F).IsRightAdjoint\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, a category $ \\\\mathcal{A} $, and a right adjoint functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, if weak sheafification exists for $ J $ \"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let `C` be a category with chosen pullbacks. Let `f: I → J` and `g: J → K` be composable morphisms such that `f`, `g`, and their composition `g ∘ f` are all exponentiable. Let `(g ∘ f)^*` and `(g ∘ f)\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsProper f] [IsProper g] : IsProper (f ≫ g)\", \"doc\": \"The composition of two proper morphisms of schemes is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": (pushforward.{v} (F := F ⋙ G) (φ ≫ whiskerLeft F.op ψ)).IsRightAdjoint\", \"doc\": \"For functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, a presheaf of rings $ R : \\\\mathcal{E}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and natural transformations $ \\\\phi: R \\\\to \"}\n  {\"name\": \"CategoryTheory.TwoSquare.lanBaseChange\", \"module\": \"Mathlib.CategoryTheory.GuitartExact.KanExtension\", \"type\": \": (whiskeringLeft C₁ C₂ D).obj T ⋙ L.lan ⟶ R.lan ⋙ (whiskeringLeft C₃ C₄ D).obj B\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{C}_3, \\\\mathcal{C}_4, \\\\mathcal{D}$, functors $T: \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $L: \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_3$, $R: \\\\mathcal{C}_2 \\\\to \\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate composition and scheme structure-sheaf module adjunctions do not assert the normalization of the actual compact-support compositor by its proper-support comparison together with refinement and exchange pasting"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(vcomp|hcomp)|conjugateEquiv_comp|compactSupport",
+   "results": "OK 25 hits: Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Module/FiniteDimension.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: general mate lemmas are reused through existing nodes; none includes actual etale proper-support/sum normalization and compactification coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compact support proper support sum comparison normalizes exceptional adjoint composition and base change mates",
+   "results": "OK 8 hits: AlgebraicGeometry.IsProper.comp_iff, HasCompactSupport.comp_isClosedEmbedding, CategoryTheory.mateEquiv_square, AlgebraicGeometry.IsProper.isStableUnderBaseChange, CategoryTheory.mateEquiv, AlgebraicGeometry.IsProper.instCompScheme, ContinuousLinearMap.adjoint_comp, CategoryTheory.Bicategory.mateEquiv_square; ",
+   "date": "2026-10-22",
+   "verdict": "no match: general mate lemmas are reused through existing nodes; none includes actual etale proper-support/sum normalization and compactification coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.conjugateEquiv",
+   "results": "OK 4 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm; ",
+   "date": "2026-10-22",
+   "verdict": "no match: general mate lemmas are reused through existing nodes; none includes actual etale proper-support/sum normalization and compactification coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction conjugates of etale compact support composition agree with pullback composition using the proper support sum comparison",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, PresheafOfModules.pullbackComp, CategoryTheory.ExponentiableMorphism.comp_pushforward; ",
+   "date": "2026-10-22",
+   "verdict": "no match: general mate lemmas are reused through existing nodes; none includes actual etale proper-support/sum normalization and compactification coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized exceptional adjoint mates compose under successive cartesian base changes and proper compactification refinement",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.comp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; ",
+   "date": "2026-10-22",
+   "verdict": "no match: general mate lemmas are reused through existing nodes; none includes actual etale proper-support/sum normalization and compactification coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(vcomp|hcomp)|conjugateEquiv_comp",
+   "results": "OK 7 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: general mate lemmas are reused through existing nodes; none includes actual etale proper-support/sum normalization and compactification coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-sum-right-adjoint-coherence",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "thm-pur-composition-coherence proof Step 1: compatibility of etale normal forms with composition; lem-pur-co-smooth-etale-locality proof Step 1: natural etale normalization; returned Steps 4 and 9, conjugating the actual compositor and refinement/base-change pasting",
+   "via": [
+    "lem-pur-etale-sum-right-adjoint-coherence",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-etale-normalized-mates-composition-pasting",
+  "worker": "stage1",
+  "summary": "Eight explicit steps retained and revalidated against the current DAG after the cited sum-counit statement changed. Steps 1 and 6 now explicitly identify its specified pullback compositor with the existing exact termwise-descent definition, tying the conjugate equation to the unbounded pullback-pasting calculation. No new nodes; statement and statement dependencies retained.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1, coherence in etale local normal forms and composition/base-change squares; via etale-sum-right-adjoint-coherence, the actual compositor and further restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "Exact proper-support/sum identification with its actual compositor normalization is a generic input, not a replacement of the smooth-purity route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Unbounded compact-support compositor and exchange coherence supply the actual maps whose mates the item computes."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Only its sheaf-level associativity is used; exact termwise descent supplies the unbounded version."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Module-linearity transfers the sheaf-level canonical pullback comparison to constant-coefficient modules."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-composition-module-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-4ed313f9e",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-4ed313f9e (reviewer sub-agent of L); spot-checked: Re-delivery after a landing return; the same group's d45b7a66 delivery had PASSed. Shape: the statement and stmt_deps are byte-identical to the d45b snapshot, which matched the unsplit item. There are still no new nodes, and the item is still unsplit in clones/live and clones/side-live, so it is not superseded. There is no repair note. The only change is to Steps 1 and 6, which each add a sentence and a citation of def-pur-etale-exact-pullback-unit-composition-comparisons(2). That definition is c_{f,g}, the sheaf composition comparison descended termwise and followed by the exact-functor composition comparison. It covers arbitrary morphisms, has no proof_deps and does not cite the item, so there is no cycle. The citation matches the updated statement of lem-pur-etale-sum-composition-counit (Q110 FIX: kappa = c_{e,v}, sigma^c = kappa). proof_deps equals the union of the step uses, and every step is under 2000 characters. Step checks: (1) the sfb composition clause with its etale nested-summand identification gives d_ve alpha = sigma(d_v S_e)(F_v d_e). (2) I recomputed the directions: (d^-1)^c = rho, alpha^c = c: G_ve -> G_e G_v, and mate-pasting(2) gives (e^* rho_v)(rho_e G_v); conjugate reversal then gives the item's display. (3) rho-hat = rho t^c, and c t_ve^c = (t_v*t_e)^c c-hat. (4) B is the mate of C^-1; amb's composite base change and mate-pasting(1) give B_wz = B_z o z'^* B_w. (5) Mate-pasting (3a)/(3b) give the refinement relation. (6) Sheaf associativity (clause 1 only, not the D+ clauses), module linearity, exactness and localization (2),(3) give the unbounded chi^{wz} identity; this is c_{f,g} by definition. (7) Elementary substitution, re-derived. (8) The c/B square comes from amb's C-alpha compatibility; the right-mate squares and naturality of rho reduce the base-changed Step 2 to w_U^* of Step 2. Advisory: Step 8 also needs horizontal pullback associativity, which holds by the same argument as Step 6. Sources: Stacks tags 0F7J, 0F7K and 0F7L (more-etale.tex lines 3159, 3374, 3429) and 03S6 (etale-cohomology.tex line 11493); no SGA. Edge cases checked: identity arrows, w or z the identity, empty U, and a two-sheet fold. Batch-5 flags: (a) the sum-composition-counit route reaches lem-pod-lisse-module-sheaves-as-module-objects through the already stmt_dep lem-sfb-quasifinite-compact-support-exact and the proper-base-change machinery. That endpoint is a general structural fact (lisse sheaves are module objects of FLC), not a step of Poincare duality, so I accept it. (b) The right-mate route reaches lem-trf-iterated-square-mates, a status-mathlib generic mate/conjugate identity that is not part of the trace formula; I accept it, as in Q140. Accepted tool_uses: lem-sfb-quasifinite-compact-support-exact, lem-amb-unbounded-compact-support-comparisons, lem-weil-pbc-derived-inverse-image-composition (sheaf clause only), lem-weil-pbc-inverse-image-composition-module-linear. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleNormalizedMatesCompositionPasting",
+  "declaration": "AlgebraicGeometry.Etale.etaleNormalizedMates_composition",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleNormalizedSupportCompositor",
+   "AlgebraicGeometry.Etale.etaleNormalizedSupportExchange",
+   "AlgebraicGeometry.Etale.etaleNormalizedRightExchange",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_composition",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_identity",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_refinement",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_baseChange_pasting",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_pullback_pasting",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_normalization_pasting",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_exchange_adjunct",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_exchange_refinement",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_composition_refinement",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_composition_restriction",
+   "AlgebraicGeometry.Etale.etaleNormalizedMates_openRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleNormalizedMatesCompositionPasting.lean",
+  "statement": "theorem etaleNormalizedMates_composition (A : Type (u + 1)) [CommRing A] [Finite A] {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T] (e : U ⟶ X) (v : X ⟶ T) [Etale e] [Etale v] [IsSeparated e] [IsSeparated v] [QuasiCompact e] [QuasiCompact v] (c : Compactification e) (d : Compactification v) (k : Compactification (e ≫ v)) (G_e : DerivedCategoryModule A X ⥤ DerivedCategoryModule A U) (G_v : DerivedCategoryModule A T ⥤ DerivedCategoryModule A X) (G_ve : DerivedCategoryModule A T ⥤ DerivedCategoryModule A U) (adj_e : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ G_e) (adj_v : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d ⊣ G_v) (adj_ve : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) k ⊣ G_ve) (K : DerivedCategoryModule A T) : (conjugateIsoEquiv adj_ve (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (e ≫ v) inferInstance) (canonicalEtaleCompactSupportComparison A (e ≫ v) k).symm).hom.app K ≫ (unboundedEtaleUpperStarCompIso A e v).hom.app K = (conjugateIsoEquiv adj_ve (adj_e.comp adj_v) (etaleNormalizedSupportCompositor A c d k)).hom.app K ≫ (conjugateIsoEquiv adj_e (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance) (canonicalEtaleCompactSupportComparison A e c).symm).hom.app (G_v.obj K) ≫ (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.map ((conjugateIsoEquiv adj_v (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance) (canonicalEtaleCompactSupportComparison A v d).symm).hom.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43e02463e",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Only the item node's lean field changes, plus one new module (3 canonical helper defs, 11 sorry theorems); the statement is verbatim and the 14 declarations match the file; the item is not superseded. Clause check: rho = conjugateIsoEquiv adj sumAdj (canonicalEtaleCompactSupportComparison).symm, G->a^*; alpha = unboundedEtaleLowerShriekCompIso body transported to arbitrary c,d,k via rightDerivedLowerShriekOfCompactificationIso; c = conj(alpha) under adj_e.comp adj_v, out of G_ve; kappa = unboundedEtaleUpperStarCompIso.hom; chi = exactDerivedSquareUpperStarIso.inv (its hom is e'^*w^*->w'^*e^*); B = mateEquiv of the inverse of the actual exchange, with the adjunct formula stated. The B-pasting and chi-pasting equations carry explicit compositors; the normalization-pasting theorem takes the node's antecedents hw and hz as hypotheses; the identity clause is pinned to the body of unboundedEtaleLowerShriekId; refinement squares are given for rho, c and B; restriction squares for arbitrary w and for open w. No extra assumptions or universe restrictions; edge cases (identities, empty U) are covered; no duplicate of any notion (EtaleSumRightAdjointCoherence is downstream and works only at chosen compactifications). Docstrings carry Stacks 0F7J/0F7K/03S6 and the blueprint tag; no SGA. Advisory: d is cited through the graph-comparison declaration of a node outside stmt_deps, accepted as before. No changes made and no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T021313-L-2755214",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

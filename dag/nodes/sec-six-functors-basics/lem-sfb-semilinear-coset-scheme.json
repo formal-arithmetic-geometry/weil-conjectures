@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-semilinear-coset-scheme",
+ "kind": "statement",
+ "title": "Scalar-twisted coset coproduct induction for scheme actions",
+ "statement": "Let $e\\subseteq K$ be fields, let $G$ be a finite group, let $\\pi:G\\to\\operatorname{Aut}_e(K)$ be a homomorphism, and let $\\Gamma\\leq G$. Let $p:W\\to\\operatorname{Spec}K$ be a scheme with a left $\\Gamma$-action $d$ satisfying\n$$p\\circ d_\\gamma=\\operatorname{Spec}(\\pi(\\gamma)^{-1})\\circ p.$$\nLet $B$ be an $e$-scheme and let $q:W\\to B$ be a $\\Gamma$-invariant $e$-morphism. For any choice of representatives $s:G/\\Gamma\\to G$ of left cosets with $s(\\Gamma)=1$, there exist a $K$-scheme $Y$, maps $t_g:W\\to Y$ for all $g\\in G$, a left $G$-action $a$ on $Y$, and a morphism $f:Y\\to B$, with these properties. The maps $(t_{s(c)})_{c\\in G/\\Gamma}$ exhibit $Y$ as the coproduct of copies of $W$ in schemes; they are open immersions with pairwise disjoint clopen images covering $Y$. If $p_Y:Y\\to\\operatorname{Spec}K$ is its structure map, then\n$$t_{g\\gamma}=t_g\\circ d_\\gamma,\\qquad p_Y\\circ t_g=\\operatorname{Spec}(\\pi(g)^{-1})\\circ p,\\qquad a_h\\circ t_g=t_{hg},\\qquad f\\circ t_g=q.$$\nThus $Y$ realizes the contracted product with relation $(g\\gamma,w)\\sim(g,d_\\gamma w)$; different choices of representatives give isomorphic objects preserving all these maps. The action is semilinear,\n$$p_Y\\circ a_h=\\operatorname{Spec}(\\pi(h)^{-1})\\circ p_Y,$$\nand $f$ is a $G$-invariant $e$-morphism. For every scheme $T$ with a morphism $T\\to B$, the base change $Y_T=Y\\times_B T$ is the coproduct of the copies of $W_T=W\\times_B T$ via the base changes of $t_{s(c)}$. If the underlying points of $W_T$ form a nonempty single $\\Gamma$-orbit, then the underlying points of $Y_T$ form a nonempty single $G$-orbit. No normality or finiteness of $K/e$, no finite-type hypothesis on $W$ or $B$, and no quotient-existence assumption on $W$ are required. Fields, schemes, spectrum, fibre product, open immersions and coproducts use [def-weil-field], [def-pc-field-extension], [def-pc-scheme], [def-weil-affine-spectrum], [def-pc-fibre-product], [def-weil-open-immersion], and [lem-weil-pbc-scheme-coproduct-family].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit semilinear coset version, former steps 4–6 and 9 of lem-sfb-common-field-semilinear-induction. Coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=G/\\Gamma$ and write $s_c=s(c)$. Every $g\\in G$ has a unique expression $g=s_c\\eta(g)$, where $c=g\\Gamma$ and $\\eta(g)=s_c^{-1}g\\in\\Gamma$. Thus $\\eta(g\\gamma)=\\eta(g)\\gamma$. Put $S_g=\\operatorname{Spec}(\\pi(g)^{-1})$. Contravariant functoriality of spectrum gives $S_{gh}=S_g\\circ S_h$ and $S_1=1$: indeed $\\pi(gh)^{-1}=\\pi(h)^{-1}\\circ\\pi(g)^{-1}$. Every $S_g$ is over $\\operatorname{Spec}e$ because $\\pi(g)$ fixes $e$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit left-action coset construction. Scheme coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes)."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-scheme-coproduct-family] to form $Y=\\coprod_{c\\in C}W$, with coprojections $j_c$. Define $p_Y$ by $p_Yj_c=S_{s_c}p$ and $t_g=j_{g\\Gamma}d_{\\eta(g)}$. The coproduct universal property gives $p_Y$, and its open-immersion and disjoint-cover clauses give all the required assertions about the maps $t_{s_c}=j_c$. The action law of $d$ gives $t_{g\\gamma}=j_{g\\Gamma}d_{\\eta(g)\\gamma}=t_gd_\\gamma$. Also $p_Yt_g=S_{s_c}p d_{\\eta(g)}=S_{s_c}S_{\\eta(g)}p=S_gp$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit left-action coset construction. Scheme coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes)."
+   }
+  },
+  {
+   "text": "For each $h\\in G$ define $a_h$ uniquely by $a_hj_c=t_{hs_c}$. Then for $g=s_c\\eta$, $a_ht_g=t_{hs_c}d_\\eta=t_{hg}$. Consequently $a_1j_c=j_c$ and $a_ha_kj_c=t_{hks_c}=a_{hk}j_c$; coproduct uniqueness proves $a_1=1$ and $a_ha_k=a_{hk}$. In particular $a_{h^{-1}}$ is the inverse of $a_h$. On each coprojection, $p_Ya_hj_c=S_{hs_c}p=S_hS_{s_c}p=S_hp_Yj_c$. Uniqueness proves $p_Ya_h=S_hp_Y$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit left-action coset construction. Scheme coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes)."
+   }
+  },
+  {
+   "text": "Define $f$ uniquely by $fj_c=q$. For $g=s_c\\eta$, invariance of $q$ gives $ft_g=q d_\\eta=q$; hence $fa_hj_c=ft_{hs_c}=q=fj_c$, so $fa_h=f$. Let $b:B\\to\\operatorname{Spec}e$ and $r:\\operatorname{Spec}K\\to\\operatorname{Spec}e$ be the structure maps. On $j_c$, $b f j_c=bq=rp=rS_{s_c}p=rp_Yj_c$, and therefore $bf=rp_Y$. Thus $f$ is an $e$-morphism and each $a_h$ is an $e$-automorphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit left-action coset construction. Scheme coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes)."
+   }
+  },
+  {
+   "text": "The relation is realized with its mapping property: if maps $b_g:W\\to Z$ to any scheme satisfy $b_{g\\gamma}=b_gd_\\gamma$, the unique map $b:Y\\to Z$ with $bj_c=b_{s_c}$ satisfies $bt_g=b_{s_c}d_{\\eta(g)}=b_g$. Conversely a map out of $Y$ gives such a family. For another representative system, write its construction as $(Y',t'_g)$. The unique map $\\phi:Y\\to Y'$ with $\\phi j_c=t'_{s_c}$ satisfies $\\phi t_g=t'_g$. Construct the reverse map using the other representatives. Their composites fix every coprojection, hence are identities. The identities already proved on all $t_g$ imply that $\\phi$ preserves the scalar map, the invariant map and the action.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit left-action coset construction. Scheme coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes)."
+   }
+  },
+  {
+   "text": "Let $T\\to B$ be arbitrary, and put $W_T=W\\times_BT$, with projections $u:W_T\\to W$ and $\\tau:W_T\\to T$. Define the codiagonal $r_Y:Y\\to W$ by $r_Yj_c=1_W$. Coproduct uniqueness gives $f=q r_Y$. Apply [lem-weil-pbc-sets-etale-inverse-image-constant-base-change] with $U=W$, $V=W_T$, its morphism $v=u$, and $E=C$. It identifies $\\coprod_C W_T$ with $W_T\\times_WY$. Write $\\alpha,\\beta$ for the projections of $W_T\\times_WY$ to $W_T,Y$. The morphism to $Y\\times_BT$ has components $(\\beta,\\tau\\alpha)$; these are compatible since $f\\beta=q r_Y\\beta=q u\\alpha$. Conversely the projections $(y,t)$ of $Y\\times_BT$ give $(r_Yy,t)$ into $W_T$, since $q r_Yy=fy=t|_B$, and then $((r_Yy,t),y)$ into $W_T\\times_WY$. Both composites are identities by equality of their projections. On the $c$-th summand these formulas give $j_c\\times_B1_T$. This proves the asserted base-change coproduct.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit left-action coset construction. Scheme coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes)."
+   }
+  },
+  {
+   "text": "Since $qd_\\gamma=q$ and $fa_h=f$, the maps $d_\\gamma\\times_B1_T$ and $a_h\\times_B1_T$ exist and satisfy the action laws by fibre-product uniqueness. The identity $a_ht_g=t_{hg}$ remains true after base change. Write the base-changed maps as $t_{g,T}$. The coproduct in the preceding step implies every underlying point of $Y_T$ is $t_{s_c,T}(w)$ for a point $w$ of $W_T$. If $W_T$ is nonempty and transitive, two points are $t_{s_c,T}(w)$ and $t_{s_b,T}(w\\prime)$ with $w\\prime=d_{\\gamma,T}(w)$ for some $\\gamma\\in\\Gamma$. The element $h=s_b\\gamma s_c^{-1}$ carries the first to $t_{s_b\\gamma,T}(w)=t_{s_b,T}(w\\prime)$, the second. The image under $t_{1,T}$ of any point of $W_T$ proves nonemptiness. No condition on $K/e$ beyond the stated field action, and no finiteness or quotient-existence property of schemes, was used.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit left-action coset construction. Scheme coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit left-action coset construction. Scheme coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Induction of a semilinear subgroup action on a scheme using a coproduct over left cosets with twisted scalar structure and invariant morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.indToCoindAux\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {S : Subgroup G} → [DecidableRel ⇑(QuotientGroup.rightRel S)] → (A : Rep k ↥S) → G → ↑A.V →ₗ[k] G → ↑A.V\", \"doc\": \"For a group $G$, subgroup $S$, and representation $A$ in $\\\\text{Rep}(k, G)$, this linear map sends an element $a \\\\in A$ to a function $G \\\\to A$ defined by: for each $g_1 \\\\in G$, if $g_1$ belongs to th\"}\n  {\"name\": \"Representation.ind_mk\", \"module\": \"Mathlib/RepresentationTheory/Induced\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} {H : Type u_3} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Group H] (φ : G →* H)\\n  {A : Type u_4} [inst_3 : AddCommGroup A] [inst_4 : Module k A] (ρ : Representation k G A) (h₁ h₂ : H) (a : A),\\n  ((Representation.ind φ ρ) h₁) ((Representation.IndV.mk φ ρ h₂) a) =\", \"doc\": \"For any elements $h_1, h_2 \\\\in H$ and $a \\\\in A$, the action of $h_1$ on the induced module element constructed from $h_2$ and $a$ results in the element constructed from $h_2 \\\\cdot h_1^{-1}$ and $a$. \"}\n  {\"name\": \"Representation.ind\", \"module\": \"Mathlib/RepresentationTheory/Induced\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : CommRing k] →\\n        [inst_1 : Group G] →\\n          [inst_2 : Group H] →\\n            (φ : G →* H) →\\n              {A : Type u_4} →\\n                [inst_3 : AddCommGroup A] →\\n                  [inst_4 : Module k A] → (ρ : Repres\", \"doc\": \"Given a commutative ring $k$, groups $G$ and $H$, a group homomorphism $\\\\varphi: G \\\\to H$, and a $k$-representation $\\\\rho$ of $G$, this constructs the induced representation of $H$ on the coinvariants\"}\n  {\"name\": \"Rep.indToCoindAux_mul_snd\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {S : Subgroup G}\\n  [inst_2 : DecidableRel ⇑(QuotientGroup.rightRel S)] {A : Rep k ↥S} (g g₁ : G) (a : ↑A.V) (s : ↥S),\\n  (A.indToCoindAux g) a (↑s * g₁) = (A.ρ s) ((A.indToCoindAux g) a g₁)\", \"doc\": \"For a commutative ring $k$, monoid $G$, representation $A$ in $\\\\text{Rep}(k,G)$, elements $g,g_1 \\\\in G$, $a$ in the carrier of $A$, and $s \\\\in S$, the induced-to-coinduced auxiliary map satisfies $\\\\te\"}\n  {\"name\": \"Rep.indToCoindAux_mul_fst\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {S : Subgroup G}\\n  [inst_2 : DecidableRel ⇑(QuotientGroup.rightRel S)] {A : Rep k ↥S} (g₁ g₂ : G) (a : ↑A.V) (s : ↥S),\\n  (A.indToCoindAux (↑s * g₁)) ((A.ρ s) a) g₂ = (A.indToCoindAux g₁) a g₂\", \"doc\": \"For a commutative ring $k$, monoid $G$, representation $A$ in $\\\\text{Rep}(k,G)$, and elements $g_1,g_2 \\\\in G$, $a \\\\in A$, and $s \\\\in S$, the auxiliary map $\\\\text{indToCoindAux}$ satisfies the identity\"}\n  {\"name\": \"Representation.IndV\", \"module\": \"Mathlib/RepresentationTheory/Induced\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : CommRing k] →\\n        [inst_1 : Group G] →\\n          [inst_2 : Group H] →\\n            (G →* H) →\\n              {A : Type u_4} →\\n                [inst_3 : AddCommGroup A] → [inst_4 : Module k A] → Representation k G A → Type (max \", \"doc\": \"Given a commutative ring $k$, groups $G$ and $H$, a group homomorphism $\\\\phi: G \\\\to H$, and a $k$-representation $\\\\rho$ of $G$ on an additive commutative group $A$, the induced representation is const\"}\n  {\"name\": \"Representation.toCoinvariants_mk\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k : Type u_6} {G : Type u_7} {V : Type u_8} [inst : CommRing k] [inst_1 : Group G] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V) (S : Subgroup G) [inst_4 : S.Normal] (g : G) (x : V),\\n  ((ρ.toCoinvariants S) g) ((Representation.Coinvariants.mk (MonoidHom.comp ρ S.sub\", \"doc\": \"For any element $g$ in the monoid $G$ and any element $x$ in the module $V$, the action of $g$ on the coinvariants of $x$ equals the coinvariants of the action of $g$ on $x$. Formally, $\\\\text{toCoinva\"}\n  {\"name\": \"GrpCat.SurjectiveOfEpiAuxs.instSMulCarrierXWithInfinity\", \"module\": \"Mathlib/Algebra/Category/Grp/EpiMono\", \"type\": \"{A B : GrpCat} → (f : A ⟶ B) → SMul (↑B) (GrpCat.SurjectiveOfEpiAuxs.XWithInfinity f)\", \"doc\": \"The scalar multiplication (group action) of group $ B $ on the auxiliary inductive type $ X_{\\\\infty} $, defined by acting on coset elements via the group operation and fixing the infinity element. Thi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contracted product of a finite group with a scheme carrying a subgroup action exists as disjoint copies and transfers transitive fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.PreGaloisCategory (Action FintypeCat G)\", \"doc\": \"The category of actions of a group $ G $ on the category of finite types is equipped with a pre-Galois category structure. This means that for any group $ G $, the category whose objects are $ G $-act\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    (X : Action FintypeCat G) →\\n      [CategoryTheory.PreGaloisCategory.IsConnected X] →\\n        (x : X.V.carrier) →\\n          [inst_2 : Fintype (G ⧸ MulAction.stabilizer G x)] →\\n            X ≅ Action.FintypeCat.ofMulAction G { carrier := G ⧸ MulAction.stabilizer\", \"doc\": \"For a connected action $ X $ of a group $ G $ on the category of finite types and any element $ x $ in the underlying type of $ X $, there exists an isomorphism between $ X $ and the quotient $ G / \\te\"}\n  {\"name\": \"GrpCat.SurjectiveOfEpiAuxs.g_apply_fromCoset\", \"module\": \"Mathlib/Algebra/Category/Grp/EpiMono\", \"type\": \"∀ {A B : GrpCat} (f : A ⟶ B) (x : ↑B) (y : ↑(Set.range fun x => x • ↑(GrpCat.Hom.hom f).range)),\\n  ((GrpCat.SurjectiveOfEpiAuxs.g f) x) (GrpCat.SurjectiveOfEpiAuxs.XWithInfinity.fromCoset y) =\\n    GrpCat.SurjectiveOfEpiAuxs.XWithInfinity.fromCoset ⟨x • ↑y, ⋯⟩\", \"doc\": \"For any element $x$ in the group $B$ and any coset $y$ in the auxiliary set $X$, applying the group homomorphism $g$ to $x$ followed by evaluation at $\\\\text{fromCoset}(y)$ yields $\\\\text{fromCoset}(x \\\\\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, and a compact topological group $G$ acting continuously on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, if $G$ is the fun\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.GaloisCategory (Action FintypeCat G)\", \"doc\": \"The category of actions of the finite type category on a group $G$ is equipped with a Galois category structure. This means that the category satisfies the axioms defining a Galois category, including\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"coproduct\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \" : CategoryTheory.Limits.HasFiniteCoproducts AlgebraicGeometry.Scheme\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \" {σ : Type v} [Small.{u, v} σ] : CategoryTheory.Limits.CoproductsOfShapeDisjoint AlgebraicGeometry.Scheme σ\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.LimitsOver\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P] {S : AlgebraicGeometry.Scheme} : CategoryTheory.Limits.HasFiniteCoproducts (P.Over ⊤ S)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall\", \"module\": \"Mathlib.AlgebraicGeometry.LimitsOver\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtSource P] {S : AlgebraicGeometry.Scheme} {ι : Type u_2} [Small.{u, u_2} ι] : CategoryTheory.Limits.HasCoproductsOfShape ι (P.Over ⊤ S)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasFiniteCoproductsCostructuredArrowOppositeCommRingCatSchemeTopMorphismPropertySpec\", \"module\": \"Mathlib.AlgebraicGeometry.LimitsOver\", \"type\": \" {S : AlgebraicGeometry.Scheme} {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P] : CategoryTheory.Limits.HasFiniteCoproducts (P.CostructuredArrow ⊤ AlgebraicGeometry.Scheme.Spec S)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "contractedProduct|contracted_product|semilinear|coset",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"1094\", \"text\": \"    (comapₗ f.toSemilinearMap U V hUV s).1 p =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"1098\", \"text\": \"  suffices ⇑(Localizations.comapFun f.toSemilinearMap p.1) =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"1119\", \"text\": \"  __ := comapₗ f.toSemilinearMap U V hUV\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"1126\", \"text\": \"    change _ = (comapₗ f.toSemilinearMap U V hUV r).1 p * (comapₗ f.toSemilinearMap U V hUV s).1 p\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induced group action on a scheme as a finite coproduct of scalar twists",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "contractedProduct|contracted_product|coset|semilinear",
+   "results": "Search returned 4 hits: Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern representations, group actions on sets, or basic scheme coproducts, not the simultaneous semilinear scheme construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme induced action of a finite group from a subgroup by disjoint union of scalar twisted copies",
+   "results": "Search returned 8 hits: MulAction.subgroup_smul_def, Subgroup.instMulActionLeftTransversal, Subgroup.smul_def, AddSubgroup.instAddAction, AddAction.selfEquivSigmaOrbits', AddAction.addSubgroup_vadd_def, AddAction.selfEquivSigmaOrbits, Subgroup.instIsScalarTowerSubtypeMem. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern representations, group actions on sets, or basic scheme coproducts, not the simultaneous semilinear scheme construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"coproduct\"",
+   "results": "Search returned 5 hits: AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty, AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall, AlgebraicGeometry.instHasFiniteCoproductsCostructuredArrowOppositeCommRingCatSchemeTopMorphismPropertySpec. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern representations, group actions on sets, or basic scheme coproducts, not the simultaneous semilinear scheme construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Induction of a semilinear subgroup action on a scheme using left coset coproducts and scalar twists",
+   "results": "Search returned 8 hits: Rep.indToCoindAux, Subgroup.smul_toLeftFun, Rep.indToCoindAux_mul_fst, Rep.indToCoindAux_mul_snd, instMulActionSubtypeGeneralLinearGroupFinOfNatNatRealMemSubgroupQuotientSubgroupOf, Rep.indToCoindAux_fst_mul_inv, Rep.indToCoindAux_snd_mul_inv, Representation.ind. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern representations, group actions on sets, or basic scheme coproducts, not the simultaneous semilinear scheme construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contracted product of a finite group and a scheme with subgroup action as a disjoint union of schemes",
+   "results": "Search returned 8 hits: CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern representations, group actions on sets, or basic scheme coproducts, not the simultaneous semilinear scheme construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-field-semilinear-induction",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "X 2.3 Step 2, printed p.150, contracted products and diagram (2.b); explicit semilinear coset version, former steps 4–6 and 9 of lem-sfb-common-field-semilinear-induction. Coproduct input: Stacks Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes).",
+   "via": [
+    "lem-sfb-common-field-semilinear-induction",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-semilinear-coset-scheme",
+  "worker": "stage1",
+  "summary": "Expanded the contracted-product assertion into the explicit coset formula, scalar and action identities, invariant morphism, representative-independent universal property, arbitrary base change and the explicit group element proving orbit transitivity. Reused the existing coproduct and constant-copy base-change nodes; no new nodes and no statement change. Repair of the landing return: rebased on the current live DAG, re-read all cited statements (unchanged from returned head 5bbb5223bc1), made the base-change inverse morphisms explicit, and cited the coproduct cover directly in the orbit step.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None). This realizes the contracted-product construction in the inherited source X 2.3 Step 2, printed p.150, diagram (2.b), and former steps 4–6 and 9 of lem-sfb-common-field-semilinear-induction. Whole-blueprint searches for semilinear, coset, contracted and coproduct yielded no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+    "why": "Generic scheme base change for a coproduct of identical copies, applied to the codiagonal Y→W and W_T→W; the unit has no such general scheme lemma. It does not replace the semilinear induction argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sets-etale-inverse-image-constant-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-e163af62b",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-e163af62b (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement in full: def-weil-affine-spectrum, lem-weil-pbc-scheme-coproduct-family, lem-weil-pbc-sets-etale-inverse-image-constant-base-change and def-pc-fibre-product, plus the stmt_dep definitions. Source: ILO X 2.3 Step 2 (PDF p.156) defines X0 = Y0 ×^H G with H acting on the right. The item's left-action relation (gγ,w)~(g,d_γ w) matches it, and there is no SGA input. The statement is unchanged, and the only delta from the returned head 5bbb5223 is in steps 5, 6 and 7. Every step checks. Step 1: S_{gh}=S_g S_h follows from contravariance, and η(gγ)=η(g)γ needs no normality. Step 2: t_{gγ}=t_g d_γ and p_Y t_g=S_g p. Step 3: a_h t_g=t_{hg} gives the action laws and semilinearity. Step 4: f is invariant and bf=r p_Y because rS_g=r. Step 5: the comparison maps between representative systems are mutually inverse. Step 6: f=q r_Y, and the generic constant-coproduct base-change lemma gives Y_T ≅ ∐W_T, with j_c ×_B 1_T on each summand. Step 7: h=s_b γ s_c^{-1} sends one point to the other. Edge cases checked: Γ=G, Γ={1}, W or W_T empty, non-normal Γ, non-injective π. No duplicate: the 'contracted product' hits are all torsor constructions. I accept the tool use of lem-weil-pbc-sets-etale-inverse-image-constant-base-change, which is a generic scheme lemma from unit sk-thm-iff. FIX: step 6 used the symbol v both as the tool lemma's morphism (pr_W) and as the projection W_T→T. The repaired text names the projections u and τ, applies the lemma with v=u, and writes the comparison as (β,τα). Only that step's text changes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearCosetScheme",
+  "declaration": "AlgebraicGeometry.semilinear_coset_scheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearCosetScheme.lean",
+  "statement": "theorem semilinear_coset_scheme (e K : Type u) [Field e] [Field K] [Algebra e K] (G : Type v) [Group G] [Finite G] (pi : G →* (K ≃ₐ[e] K)) (Gamma : Subgroup G) (W B : Scheme.{u}) (p : W ⟶ Spec (.of K)) (b : B ⟶ Spec (.of e)) (d : Gamma →* Aut W) (hd : ∀ gamma : Gamma, (d gamma).hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (pi (gamma : G)⁻¹).toRingHom)) (q : W ⟶ B) (hqbase : q ≫ b = p ≫ Spec.map (CommRingCat.ofHom (algebraMap e K))) (hq : ∀ gamma : Gamma, (d gamma).hom ≫ q = q) (s : G ⧸ Gamma → G) (hs : ∀ c : G ⧸ Gamma, Quotient.mk (QuotientGroup.leftRel Gamma) (s c) = c) (hsone : s (Quotient.mk (QuotientGroup.leftRel Gamma) (1 : G)) = 1) : ∃ (Y : Scheme.{u}) (pY : Y ⟶ Spec (.of K)) (t : G → (W ⟶ Y)) (a : G →* Aut Y) (f : Y ⟶ B) (htf : ∀ g : G, t g ≫ f = q) (haf : ∀ h : G, (a h).hom ≫ f = f), Nonempty (IsColimit (Cofan.mk Y (fun c : G ⧸ Gamma ↦ t (s c)))) ∧ (∀ c : G ⧸ Gamma, IsOpenImmersion (t (s c))) ∧ (∀ c : G ⧸ Gamma, IsClopen (Set.range (t (s c)))) ∧ (∀ c c' : G ⧸ Gamma, c ≠ c' → Disjoint (Set.range (t (s c))) (Set.range (t (s c')))) ∧ (∀ y : Y, ∃ (c : G ⧸ Gamma) (w : W), t (s c) w = y) ∧ (∀ (g : G) (gamma : Gamma), t (g * gamma) = (d gamma).hom ≫ t g) ∧ (∀ g : G, t g ≫ pY = p ≫ Spec.map (CommRingCat.ofHom (pi g⁻¹).toRingHom)) ∧ (∀ h g : G, t g ≫ (a h).hom = t (h * g)) ∧ (∀ h : G, (a h).hom ≫ pY = pY ≫ Spec.map (CommRingCat.ofHom (pi h⁻¹).toRingHom)) ∧ (f ≫ b = pY ≫ Spec.map (CommRingCat.ofHom (algebraMap e K))) ∧ (∀ (Z : Scheme.{u}) (k : G → (W ⟶ Z)), (∀ (g : G) (gamma : Gamma), k (g * gamma) = (d gamma).hom ≫ k g) → ∃! l : Y ⟶ Z, ∀ g : G, t g ≫ l = k g) ∧ (∀ (s' : G ⧸ Gamma → G), (∀ c : G ⧸ Gamma, Quotient.mk (QuotientGroup.leftRel Gamma) (s' c) = c) → s' (Quotient.mk (QuotientGroup.leftRel Gamma) (1 : G)) = 1 → ∀ (Y' : Scheme.{u}) (pY' : Y' ⟶ Spec (.of K)) (t' : G → (W ⟶ Y')) (a' : G →* Aut Y') (f' : Y' ⟶ B), Nonempty (IsColimit (Cofan.mk Y' (fun c : G ⧸ Gamma ↦ t' (s' c)))) → (∀ (g : G) (gamma : Gamma), t' (g * gamma) = (d gamma).hom ≫ t' g) → (∀ g : G, t' g ≫ pY' = p ≫ Spec.map (CommRingCat.ofHom (pi g⁻¹).toRingHom)) → (∀ h g : G, t' g ≫ (a' h).hom = t' (h * g)) → (∀ g : G, t' g ≫ f' = q) → ∃ phi : Y ≅ Y', (∀ g : G, t g ≫ phi.hom = t' g) ∧ phi.hom ≫ pY' = pY ∧ phi.hom ≫ f' = f ∧ ∀ h : G, (a h).hom ≫ phi.hom = phi.hom ≫ (a' h).hom) ∧ (∀ (T : Scheme.{u}) (z : T ⟶ B), Nonempty (IsColimit (Cofan.mk (pullback f z) (fun c : G ⧸ Gamma ↦ pullback.map q z f z (t (s c)) (𝟙 T) (𝟙 B) (by simpa only [Category.comp_id] using (htf (s c)).symm) (by simp only [Category.comp_id, Category.id_comp]))))) ∧ (∀ (T : Scheme.{u}) (z : T ⟶ B), (Nonempty ↥(pullback q z) ∧ ∀ x y : ↥(pullback q z), ∃ gamma : Gamma, pullback.map q z q z (d gamma).hom (𝟙 T) (𝟙 B) (by simpa only [Category.comp_id] using (hq gamma).symm) (by simp only [Category.comp_id, Category.id_comp]) x = y) → Nonempty ↥(pullback f z) ∧ ∀ x y : ↥(pullback f z), ∃ h : G, pullback.map f z f z (a h).hom (𝟙 T) (𝟙 B) (by simpa only [Category.comp_id] using (haf h).symm) (by simp only [Category.comp_id, Category.id_comp]) x = y)",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-850d09b63",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Checked the statement against the node clause by clause: hypotheses e⊆K, finite G, π:G→*Aut_e K, Γ, W with p, left action d with hd, B with b, q with hqbase and hq, s with hs and hsone; conclusions coproduct cofan, open/clopen/disjoint/covering images, t_{gγ}=t_g d_γ, p_Y t_g=S_g p, a_h t_g=t_{hg}, f t_g=q, semilinearity, f an e-morphism and G-invariant, contracted-product ∃! mapping property, representative independence (stated for any second construction, stronger than the node's wording but provable from the coproduct property), base change over any T→B with pullback.map legs, nonempty single-orbit transfer. Composition orientation checked against Mathlib source (Aut_mul_def, leftRel_apply, AlgEquiv.mul_apply); S_{gh}=S_g S_h is consistent. No extra hypotheses: no normality, finiteness, finite type, quotient existence or Small; G's universe v is free. Edge cases: W or T empty, Γ=G, Γ=1, π not injective, Γ not normal. The 7 stmt_deps are identical to side-live; only the item's lean field changed and lean.statement is verbatim in the file; the proof-dep import is non-public and exists live. Docstrings carry the source place, blueprint id and all 7 steps; the only proof is sorry; the report has Worker report and Second reading by NZ. No compile (no FIX). Stage-3 note: baseChange_sigmaScheme_iso takes its index in Type u while G⧸Γ is in Type v, so the proof needs a transport along a finite equivalence."
+ }
+}

@@ -26,14 +26,9 @@
  ],
  "proof": [
   {
-   "text": "In the ambient derived categories put $F=Lr^*$, $R=Rr_*$, $Q=Lj^*$, $J=j_!$, $P=RJ$, $S=QF$. The canonical symmetric monoidal comparisons satisfy $\\delta^S=\\delta^Q Q\\delta^F$ and $e_S=e_Q Qe_F$ [lem-pur-derived-pullback-tensor-iso, lem-sf-ringed-derived-closed-symmetric-monoidal]. Apply [lem-pur-adjoint-left-projection-action] to $F\\dashv R$ and its specified counit projection $\\rho$, obtaining $t$ and both forward laws. Apply [lem-pur-open-left-projection-action] to the open unit and normalized $\\gamma$ of [lem-sf-open-tensor-normalization], obtaining $v$ and both forward laws. Neither application requires a projection inverse.",
+   "text": "Reuse the proved categorical compactification-pasting calculation in lem-pur-finite-projection-action-laws. Its proper-map input follows from the existing adjoint projection-map associativity and its open-map input is the existing inverse open projection action; the canonical pullback comparison respects tensor. Identify each pasted component with projectionMapOfCompactification by its component equation. This establishes its native right action without an absolute separatedness hypothesis.",
    "uses": [
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-pur-adjoint-left-projection-action",
-    "lem-pur-open-left-projection-action",
-    "lem-sf-open-tensor-normalization",
-    "def-exchange-projection"
+    "lem-pur-finite-projection-action-laws"
    ],
    "elementary": false,
    "source": {
@@ -42,22 +37,20 @@
    }
   },
   {
-   "text": "Define $T_{B,M}=P(\\beta_{M,SB})\\operatorname{PF}^c_{M,B}\\beta_{B,PM}$. Substitution of the exact composite in [def-exchange-projection] cancels the adjacent symmetries at $FB,JM$, giving $T_{B,M}=R(v_{FB,M})t_{B,JM}$. Apply [lem-pur-composite-left-projection-action] to obtain $P(h^S_M)T_{\\mathbf1,M}=\\lambda_{PM}$ and $P(a^S_{B,B',M})T_{B\\otimes B',M}=T_{B,SB'\\otimes M}(1_B\\otimes T_{B',M})\\alpha_{B,B',PM}$, where $h^S_M=\\lambda_M(e_S\\otimes1)$ and $a^S=\\alpha(\\delta^S\\otimes1)$.",
+   "text": "Derive the right unit equation from that associativity and naturality, using only invertibility of the unit projection component. Specialize both coefficients to the tensor unit, use the pullback oplax left unit law and the monoidal triangle, and cancel the unit projection component and tensoring with the unit. Identify the derived oplax unit with the specified leftDerivedUpperStarUnitIso by its defining degree-zero complex comparison.",
    "uses": [
-    "def-exchange-projection",
-    "lem-pur-composite-left-projection-action",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-pur-finite-projection-action-laws"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tags 0B56 (equation-projection-formula-map), 0GL1 (lemma-j-shriek-and-tensor); fixed compactification, coefficient constraints supporting blueprint (G13)"
    }
   },
   {
-   "text": "For exactly the assumed invertible components, symmetry squared is identity, hence $T_{B,M}^{-1}=\\beta_{PM,B}(\\operatorname{PF}^c_{M,B})^{-1}P(\\beta_{SB,M})=\\pi_{B,M}$. Right-compose the unit law with $\\pi_{\\mathbf1,M}$. Right-compose the coefficient law with $\\pi_{B\\otimes B',M}$, then left-compose with $\\pi_{B,SB'\\otimes M}$ and $1_B\\otimes\\pi_{B',M}$. Cancellation gives precisely the two displayed equations, with the constraints of [def-sfb-projection-formula].",
+   "text": "Conjugate the right projection action by canonical tensor symmetries. Naturality, the two hexagons, symmetry squared equal to identity, and compatibility of derived pullback with symmetry give the forward left coefficient-associativity law. The right unit law gives the left unit law. For precisely the four assumed invertible components, the displayed inverseCompactificationProjection is inverse to the conjugated action. Cancel these components to obtain exactly the two asserted equations.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-finite-projection-action-laws",
     "def-sfb-projection-formula"
    ],
    "elementary": true,
@@ -67,10 +60,9 @@
    }
   },
   {
-   "text": "[lem-sf-pullback-tor-amplitude] makes $SB,SB',S(B\\otimes B')$ finite Tor. [lem-sf-tensor-ctf](ii) makes $B\\otimes B'$ and $SB\\otimes SB'$ finite Tor; (i) makes every tensor with $M$ bounded constructible, regardless of Tor amplitude of $M$. [prop-finite-compact-support-constructibility] makes their $P$-images bounded constructible at the chosen compactification, and (i) again handles all coefficient tensors with those images. These lemmas require finite-type schemes over $k$ and separated finite-type $f$, not absolute separatedness. The unit $A_T[0]$ is constructible and flat with Tor interval $[0,0]$: tensoring with it is the identity. Thus every displayed input lies in its stated domain, including empty schemes, zero objects and unit coefficients.",
+   "text": "Transport intrinsic bounded constructibility and Tor amplitude to the canonical fixed-ring categories by intrinsic realization and lem-exc-intrinsic-tor-amplitude-transport. Standard coefficient theorems give the constructible finite-Tor tensor unit, stability under pullback and tensor, and bounded constructibility of a tensor whenever one factor is constructible of finite Tor amplitude. Symmetry treats either order. Finally transport the existing compact-support constructibility theorem to the chosen compactification using its canonical comparison; assemble the complete displayed list of domains. No Tor hypothesis on M and no absolute separatedness hypothesis are used.",
    "uses": [
-    "lem-sf-pullback-tor-amplitude",
-    "lem-sf-tensor-ctf",
+    "lem-exc-intrinsic-tor-amplitude-transport",
     "prop-finite-compact-support-constructibility"
    ],
    "elementary": false,
@@ -81,22 +73,15 @@
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
   "def-sfb-projection-formula",
-  "lem-pur-adjoint-left-projection-action",
-  "lem-pur-composite-left-projection-action",
-  "lem-pur-derived-pullback-tensor-iso",
-  "lem-pur-open-left-projection-action",
-  "lem-sf-open-tensor-normalization",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sf-tensor-ctf",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-pur-finite-projection-action-laws",
   "prop-finite-compact-support-constructibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0B56 (equation-projection-formula-map) and 0GL1 (lemma-j-shriek-and-tensor), plus sites-modules.tex Tag 0E8I; explicit formal unit/associativity computations for their fixed-compactification composite."
+  "place": "Tags 0B56 and 0GL1, supporting blueprint (G13). E6 reuses the proved proper/open right-action components and tensor-compatible compactification pasting, proves the canonical derived unit comparison, and calculates symmetry conjugation and inverse cancellation. Canonical fixed-ring realization transports constructibility and Tor amplitude."
  },
  "mathlib_searches": [
   {
@@ -223,11 +208,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-derived-pullback-tensor-iso",
-  "lem-sf-open-tensor-normalization",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sf-tensor-ctf",
   "prop-finite-compact-support-constructibility"
  ],
  "reviewed": {
@@ -260,6 +240,7 @@
    "AlgebraicGeometry.ProEtale.inverseCompactificationProjection",
    "AlgebraicGeometry.ProEtale.CompactificationProjectionDomains",
    "AlgebraicGeometry.ProEtale.CompactificationProjectionCoefficientCoherence",
+   "AlgebraicGeometry.ProEtale.CompactificationProjectionCoefficientCoherence.laws",
    "AlgebraicGeometry.ProEtale.compactificationProjection_coefficient_coherence"
   ],
   "file": "lean/Sheaf/Paper/ProjectionFormulaCoefficientCoherence.lean",
@@ -268,8 +249,29 @@
   "by": "NE",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Uses the actual ordinary fixed-ring compactification projection map and canonical K-flat symmetry and pullback comparisons. The recorded intrinsic constructibility predicates are transported by the canonical derived realization equivalence. The positive level is indexed by n+1, covering every n≥1 without an added finiteness or Noetherian hypothesis. The four component-isomorphism hypotheses are exactly the components inverted by the two equations. The finite PF^c is the existing upstream AlgebraicGeometry.ProEtale.projectionMapOfCompactification, exactly the projection component of Sheaf.Paper.ExchangeProjection.finiteExchangeProjection. This item uses that finite component directly; the full def-exchange-projection lean record, including Q14’s supplied-domain exchange/projection interface, is preserved unchanged. Presentation: P is the existing fixed-ring AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification (R(c.g)_* after termwise exact (c.i)_! at the same c), and S, delta, e are the fixed-ring L((f)^*[V]), leftDerivedUpperStarTensorIso and leftDerivedUpperStarUnitIso; the canonical projection map exists only in this presentation. The def-compact-support-direct-image-detailed record on newtargets-dag (Q13, AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport) is the same Rr_* j_! in the intrinsic presentation, whose coefficient category Scheme.sfIntrinsicDerivedEquivalence identifies with the fixed-ring one; that record is left unchanged; likewise the intrinsic records of def-weil-derived-pullback-tensor-hom and lem-pur-derived-pullback-tensor-iso. Stage 3 must transport the pullback tensor coherence through that realization. def-pur-finite-pullback-tensor-comparison is cited only for its imported positive-level coefficient module; no declaration of it occurs in the statement.",
+  "note": "Uses the actual ordinary fixed-ring compactification projection map and canonical K-flat symmetry and pullback comparisons. The recorded intrinsic constructibility predicates are transported by the canonical derived realization equivalence. The positive level is indexed by n+1, covering every n≥1 without an added finiteness or Noetherian hypothesis. The four component-isomorphism hypotheses are exactly the components inverted by the two equations. The finite PF^c is the existing upstream AlgebraicGeometry.ProEtale.projectionMapOfCompactification, exactly the projection component of Sheaf.Paper.ExchangeProjection.finiteExchangeProjection. This item uses that finite component directly; the full def-exchange-projection lean record, including Q14’s supplied-domain exchange/projection interface, is preserved unchanged. Presentation: P is the existing fixed-ring AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification (R(c.g)_* after termwise exact (c.i)_! at the same c), and S, delta, e are the fixed-ring L((f)^*[V]), leftDerivedUpperStarTensorIso and leftDerivedUpperStarUnitIso; the canonical projection map exists only in this presentation. The def-compact-support-direct-image-detailed record on newtargets-dag (Q13, AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport) is the same Rr_* j_! in the intrinsic presentation, whose coefficient category Scheme.sfIntrinsicDerivedEquivalence identifies with the fixed-ring one; that record is left unchanged; likewise the intrinsic records of def-weil-derived-pullback-tensor-hom and lem-pur-derived-pullback-tensor-iso. Stage 3 must transport the pullback tensor coherence through that realization. def-pur-finite-pullback-tensor-comparison is cited only for its imported positive-level coefficient module; no declaration of it occurs in the statement. E6 stage 3: CompactificationProjectionCoefficientCoherence is represented as a Prop structure with the single field laws, whose type is exactly its former quantified definition body. This representation avoids repeated conversion of abstracted monoidal instance certificates. The theorem signature and every mathematical clause are unchanged; see coord/changes/E6-projection-coherence-prop-structure.md for old/new declarations and the complete consumer check.",
   "fixed_by": "NT-stage2-cc-55428d46b"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-17c2a",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261026T001338-L-4185567",
+  "kind": "interface",
+  "note": "independent cc review: delivered ProjectionFormulaCoefficientCoherence.lean and node lem-pur-projection-formula-coefficient-coherence against live clone 509a6c5b44c: def→Prop-structure with laws field identical to old body (change record present, no external users); direct importer CompositionTensorMate compiled against delivered module; axioms only sorryAx via upstream boundedConstructible_rightDerivedLowerShriek (prop-finite-compact-support-constructibility); proof_deps match imports"
+ }
 }

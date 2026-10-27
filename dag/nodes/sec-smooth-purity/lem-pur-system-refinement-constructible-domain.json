@@ -1,0 +1,402 @@
+{
+ "id": "lem-pur-system-refinement-constructible-domain",
+ "kind": "statement",
+ "title": "Constructible domain and finite normalization of system refinement inverses",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Put $A_n=\\mathcal O_E/\\varpi_E^n$, $n\\ge1$. For each scheme $W$ below put $B_{n,W}=(A_n)_W$ on a fixed small representative of $W_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site, def-weil-size-convention]. Write $\\mathscr S_W$ for the abelian category of strict semilinear systems of these module sheaves, with componentwise morphisms commuting with the quotient transitions, and use its ordinary unbounded derived category $D(\\mathscr S_W)$ [lem-coef-semilinear-derived-sections]. Use the simultaneous system functors $P_u=u^*$, $R_u=Ru_*$ with $P_u\\dashv R_u$, unit $\\eta_u$, counit $\\varepsilon_u$, and exact open extension $j_!$ of that node. Let $f:X\\to Y$ be a separated finite-type morphism of separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. For $i=1,2$, let $c_i=(j_i:X\\hookrightarrow\\overline X_i,p_i:\\overline X_i\\to Y)$ be compactifications of $f$, and let $u:\\overline X_1\\to\\overline X_2$ be a proper refinement, so $uj_1=j_2$ and $p_2u=p_1$ [def-weil-compactifications-refinements]. Define $\\gamma_u:j_{2!}\\to R_uj_{1!}$ to be the actual varying-ring proper/open mate for $(j_1,j_2,1_X,u)$: its inverse-image map is open base change followed by projection to the clopen component $X\\to\\overline X_1\\times_{\\overline X_2}X$, identity on this component and zero on its complement [lem-sp-varying-ring-proper-open-pasting]. Let $c_{p_2,u}:R_{p_1}\\cong R_{p_2}R_u$ be the canonical direct-image compositor [lem-weil-pbc-ringed-topoi-derived-pushforward-composition].\n\nFor every $K\\in D(\\mathscr S_X)$ with bounded constructible pro-etale cohomology at each level [def-weil-proetale-constructible-sheaf], $\\gamma_{u,K}$ is invertible. For every $n\\ge1$ there is $L_n\\in D^b_c(X_{\\mathrm{et}},A_n)$ and an isomorphism $\\nu_X^*L_n\\cong K_n$ [lem-sf-proetale-constructible-origin]; evaluation of $\\gamma_{u,K}$ is the constant-$A_n$ normalized proper/open mate $\\gamma_Q$ of [lem-cbc-strict-tower-proper-open-calculus] on $K_n$, and evaluation of $R_{p_2}(\\gamma_{u,K}^{-1})c_{p_2,u}$ is exactly the comparison $\\theta_u(K_n,L_n,\\alpha_n)$ of [def-sf-refinement-comparison-isomorphism], for every such witness $\\alpha_n$. No compatible choice of the $L_n$ is required.\n\nMoreover let $M\\in D(\\mathscr S_X)$ and $N\\in D(\\mathscr S_Y)$ be normalized, meaning their transition-adjoints $\\alpha_{m,n}:M_m\\otimes^L_{A_m}A_n\\to M_n$ (and those of $N$) are invertible [def-coef-normalized-dvr-tower]. Suppose their levels are bounded constructible of finite Tor amplitude [def-weil-finite-tor-amplitude]. Then $P_fN$ and $T=M\\otimes^LP_fN$ are normalized with levels in $D^b_{ctf}$. If the level-$n$ Tor intervals of $M_n,N_n$ are $[a_n,b_n],[c_n,d_n]$, those of $(P_fN)_n,T_n$ can be chosen as $[c_n,d_n]$ and $[a_n+c_n,b_n+d_n]$. Under canonical scalar-extension comparisons the transition-adjoints are $f^{-1}\\alpha^N_{m,n}$ and the strong monoidal scalar-extension comparison followed by $\\alpha^M_{m,n}\\otimes\\alpha^{P_fN}_{m,n}$ [lem-pur-system-normalized-tensor-closure]. In particular the asserted inverse mates and finite normalizations apply to both $M$ and $T$. All bounds may depend on $n$; no normalization of $R_pj_!M$ and no faithfulness of derived evaluation on morphisms are assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B (lemma-shriek-proper-and-open), Tag 0F7J (lemma-shriek-composition); agent strict-system domain and fixed-A_n normalization, with finite Tor preservation from blueprint lem-sf-tensor-ctf (i),(ii)."
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-sf-refinement-comparison-isomorphism",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-size-convention",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-normalized-tensor-closure",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sp-varying-ring-proper-open-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sfb-constant-scalar-restriction-tensor"
+ ],
+ "proof": [
+  {
+   "text": "For each positive level use the proved fixedDerivedOrigin argument of lem-sf-proetale-constructible-origin. Compare ConstantScalarRestriction.restriction with the intrinsic proEtaleModuleRestriction by identity section maps; the sheafification-unit equation identifies their scalar actions. Intrinsic constructibility therefore becomes fixed-scalar constructibility. Finite support supplies lower and upper bounds, and exact scalar encoding carries cohomology and its vanishing to the fixed presentation. Apply bounded constructible essential surjectivity, then lift the bounded etale antecedent to D-plus using its lower bound. This is independent at each n.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/lem-sf-proetale-constructible-origin.md",
+    "place": "Clause (ii), bounded constructible essential image."
+   }
+  },
+  {
+   "text": "Specialize VaryingRing.gamma_evaluation to the refinement square. Naturality of evalJ moves the canonical identity-edge factor through open evaluation, proving gamma_evaluation by functoriality. For invertibility, choose a bounded constructible origin at each level by step 1 and apply gamma_witness_evaluation from step 3. Its right-hand side consists entirely of isomorphisms. Cancel the invertible evaluation comparisons on the left, reflect isomorphisms through the exact fixed-scalar equivalence, and use joint detection by the semilinear level evaluations. No common bound, normalization, or faithfulness on system arrows is used.",
+   "uses": [
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open; refinement specialization, combined with the existing strict-system and site-normalization statements."
+   }
+  },
+  {
+   "text": "Fix any witness $(L_n,\\alpha_n)$ from step 1. The constant-$A_n$ normalization of [lem-cbc-strict-tower-proper-open-calculus] identifies the evaluated mate, under the canonical site comparisons, with the finite etale proper/open map. Its refinement clause in [lem-cbc-proper-open-interchange-coherence] identifies that map with $\\alpha_u$ on $L_n$. Here $L_n$ is bounded, hence bounded below, so the finite-etale-origin hypothesis holds. The schemes in the compactifications are finite type over $k$, and hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied over $\\operatorname{Spec}k$ (a field has only the ideals $0$ and $k$). Therefore [lem-sf-proper-open-comparison-site-normalization] applies: the normalized finite map transported by the site comparisons is the named pro-etale map $\\alpha_u(L_n)$ in [def-sf-refinement-comparison-isomorphism]. Naturality of the specified mate gives the explicit identity $e_n(\\gamma_{u,K})=Ru_*j_{1!}(\\alpha_n)\\circ\\alpha_u(L_n)\\circ j_{2!}(\\alpha_n)^{-1}$. This is exactly $\\alpha_u(K_n,L_n,\\alpha_n)$ of that definition. The same calculation starts with every witness, proving the asserted universal quantifier without choosing compatible witnesses.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sf-proper-open-comparison-site-normalization",
+    "def-sf-refinement-comparison-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open; refinement specialization, combined with the existing strict-system and site-normalization statements."
+   }
+  },
+  {
+   "text": "Evaluation respects composition and the specified direct-image comparisons by [lem-coef-semilinear-derived-sections]. The canonical compositor is the one normalized by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. A functor sends an inverse to the inverse of its image: applying it to both inverse equations proves this directly. Consequently evaluation of $R_{p_2}(\\gamma_{u,K}^{-1})\\circ c_{p_2,u}$ is $Rp_{2*}(\\alpha_u(K_n,L_n,\\alpha_n)^{-1})\\circ c_{p_2,u,n}$. Clause (b) of [def-sf-refinement-comparison-isomorphism] defines this very composite to be $\\theta_u(K_n,L_n,\\alpha_n)$. This proves equality of the finite maps themselves; it makes no inference about equality of system maps from their evaluations.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-sf-refinement-comparison-isomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open; refinement specialization, combined with the existing strict-system and site-normalization statements."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-system-normalized-tensor-closure] first with $v=f$ and $P=N$. Since inverse image of the constant ring sheaf $(A_n)_Y$ is $(A_n)_X$, its hypothesis $C_n=v^{-1}B_n$ is satisfied. It gives normalized $P_fN$ with transition-adjoint $f^{-1}\\alpha^N_{m,n}$. Apply the tensor clause of the same statement to $M$ and $P_fN$ over $X$. It gives normalized $T$ and exactly the strong monoidal scalar-extension comparison followed by $\\alpha^M_{m,n}\\otimes\\alpha^{P_fN}_{m,n}$. These are the actual transition-adjoints, including their cocycles, even though $A_m\\to A_n$ need not be flat.",
+   "uses": [
+    "lem-pur-system-normalized-tensor-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-compatibility/_section.md",
+    "place": "Clause (7), compatibility with finite reduction; agent application of the existing normalized-system tensor and inverse-image theorem."
+   }
+  },
+  {
+   "text": "By [lem-coef-semilinear-derived-sections], $(P_fN)_n=f^{-1}N_n$ and $T_n=M_n\\otimes^L_{A_n}f^{-1}N_n$ under the canonical evaluation comparisons. At constant coefficients the specified inverse image is exact, so this is the finite-level derived pullback. Apply [lem-sf-pullback-tor-amplitude] to $N_n$ along the given separated finite-type $f$: the level remains bounded constructible with Tor interval $[c_n,d_n]$. Apply clause (ii) of [lem-sf-tensor-ctf] on $X$ to $M_n$ and this pullback: $T_n$ is bounded constructible with Tor interval $[a_n+c_n,b_n+d_n]$. Both results are applied separately for each $n$, so no common bound has been introduced.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
+    "place": "Clause (ii), with lem-sf-pullback-tor-amplitude for the second tensor factor."
+   }
+  },
+  {
+   "text": "The given levels of $M$ and the levels of $T$ just proved satisfy the hypothesis on $K$ in steps 1-4. Substitute $K=M$ and $K=T$ there. This supplies their inverse mates, witnesses and finite normalizations. All constructions take place in the ordinary system derived categories; neither this substitution nor any earlier step asserts normalization of $R_pj_!M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open; refinement specialization, combined with the existing strict-system and site-normalization statements."
+   }
+  },
+  {
+   "text": "For ordinaryDirect use the identity-on-sections fixedDirect comparison from def-cbc-finite-constant-coefficient-transport, conjugated by the identity-on-sections scalar encoding isomorphisms of step 1; sectionwise extensionality proves uniqueness. For ordinaryPull and ordinaryOpen take inverse adjunction mates through the encoding equivalences. They are invertible by the equivalence-edge mate lemma. The mate unit identity and cancellation prove the prescribed unit normalization, and injectivity of the adjunction Hom equivalence proves uniqueness. The scalarPull comparison remains the separately named postponed part already present in Lean.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY, 03D3, 03DI; adjunction uniqueness and scalar encoding."
+   }
+  },
+  {
+   "text": "For restrictionDirect_existsUnique, assemble a natural transformation between the two constant-coefficient towers using coefficient naturality from def-sp-varying-ring-operations. Naturality at the arrow n <= m gives compatibility of the actual quotient maps with constant direct image. Adjunction transports this to the inverse-image coefficient square. Specialize the already proved identity-on-sections direct-image comparison of lem-weil-pbc-ring-sheaf-change-adjunction and take its inverse. The required identity after forgetting scalars holds literally; faithfulness on sections proves uniqueness. For restrictionPull_existsUnique specialize the ordinary restriction-pullback isomorphism of the same node. Its direct-image comparison is the inverse of restrictionDirect by the common identity section formula and uniqueness. The mates unit identity then shows that the adjunction transpose of the pullback comparison is exactly the displayed scalar-restricted unit followed by restrictionDirect inverse. Injectivity of each Hom equivalence gives uniqueness.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Restriction of scalars and lemma-adjoint-push-pull-modules; naturality of constant sections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-finite-constant-coefficient-transport",
+  "def-sf-refinement-comparison-isomorphism",
+  "def-sp-varying-ring-operations",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-normalized-tensor-closure",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-proper-open-comparison-site-normalization",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-sp-varying-ring-proper-open-pasting",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "D2 proves the section-normalized restriction/direct-image comparison and its ordinary inverse-image mate using constant-coefficient naturality and the existing compatible ring-sheaf-change theorem. The other proof steps are retained from the previous delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semilinear.*(constructible|refinement)|refinement.*(mate|projection)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived semilinear coefficient systems compactification refinement mate invertibility constructible cohomology",
+   "results": "8 hits: ContinuousLinearMap.isInvertible_equiv, SemilinearMapClass.map_smul_inv, Module.Invertible.instDual, instInvertibleCarrierOutSemimoduleCatValSkeleton, ContinuousLinearMap.isInvertible_inverse_iff, ContinuousLinearMap.IsInvertible.of_inverse, ContinuousLinearEquiv.coe_symm_toLinearEquiv, instInvertibleReprₛ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict semilinear derived systems of finite quotient coefficient sheaves normalized tensor pullback constructible refinement mate invertible",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.IsIso",
+   "results": "12 hits: PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.instIsIsoπMap, SheafOfModules.Presentation.ofIsIso, SheafOfModules.instIsFiniteOfIsIso, SheafOfModules.QuasicoherentData.ofIsIso, SheafOfModules.Presentation.ofIsIso_generators, SheafOfModules.QuasicoherentData.ofIsIso_I",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse sequence of module sheaves over quotient rings is cartesian after derived tensor and inverse image; proper open mate is an isomorphism on bounded constructible levels",
+   "results": "8 hits: CondensedMod.ofSheafProfinite, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.pullbackObjFreeIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*(constructible|refinement)|refinement.*(mate|normaliz)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general sheaf, condensed module, etale morphism and pullback declarations do not state this strict semilinear refinement and Tor-domain assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category inverse systems constructible proper open comparison normalized tensor pullback",
+   "results": "8 hits: CategoryTheory.Limits.pullbackComparison, SheafOfModules.pullback, TopCat.Presheaf.pullbackObjObjOfImageOpen, CategoryTheory.Limits.instIsIsoPullbackComparison, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right, SheafOfModules.pullbackComp, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_left",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general sheaf, condensed module, etale morphism and pullback declarations do not state this strict semilinear refinement and Tor-domain assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.IsIso",
+   "results": "12 hits: PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.instIsIsoπMap, SheafOfModules.Presentation.ofIsIso, SheafOfModules.instIsFiniteOfIsIso, SheafOfModules.QuasicoherentData.ofIsIso, SheafOfModules.Presentation.ofIsIso_generators, SheafOfModules.QuasicoherentData.ofIsIso_I",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general sheaf, condensed module, etale morphism and pullback declarations do not state this strict semilinear refinement and Tor-domain assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict semilinear systems of quotient module sheaves proper compactification refinement mate invertible on bounded constructible levels",
+   "results": "8 hits: CondensedMod.IsSolid, Profinite.NobelingProof.succ_exact, CondensedMod.ofSheafStonean, CondensedMod.ofSheafProfinite, Profinite.NobelingProof.CC_exact, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, IsAdicComplete.StrictMono.extend, IsAdicComplete.StrictMono.mkQ_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general sheaf, condensed module, etale morphism and pullback declarations do not state this strict semilinear refinement and Tor-domain assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward extension by zero comparison is an isomorphism for etale origin complexes over finite coefficient rings",
+   "results": "8 hits: RingHom.Etale.respectsIso, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.Etale.of_equiv, Algebra.FormallyEtale.iff_of_equiv, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, StandardEtalePresentation.mapEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general sheaf, condensed module, etale morphism and pullback declarations do not state this strict semilinear refinement and Tor-domain assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-system-compactification-pf-substitution",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Sole proof paragraph: compatible systems of finite-level coherence statements; via system-level projection coherence Step 7, domain and invertibility prerequisites (old substitution Steps 2-3).",
+   "via": [
+    "lem-pur-system-compactification-pf-substitution",
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-system-refinement-constructible-domain",
+  "worker": "stage1",
+  "summary": "Assembled the existing general varying-ring proper/open theorem, finite origin and canonical normalization statements, and normalized tensor/pullback closure with unchanged Tor intervals. No new nodes and no changes to the statement. Checked witness independence by the explicit naturality conjugation formula, with no faithfulness claim.",
+  "blueprint": "prop-pur-adic-reconstruction-trace-coherence, sole transport assertion; this item supplies the domain and finite-normalization prerequisites in the system-level projection/refinement part of clause (7) of sk-thm-sf-compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   },
+   {
+    "node": "lem-sf-proper-open-comparison-site-normalization",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   },
+   {
+    "node": "lem-sp-varying-ring-proper-open-pasting",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Uses its stated finite-level or system comparison/closure interface as a black box in the compatibility assembly; no replacement of the unit proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-proper-open-comparison-site-normalization",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sp-varying-ring-proper-open-pasting",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NL-d3cb2dfc2",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-d3cb2dfc2 (reviewer sub-agent of L); spot-checked: Read the full item and every cited statement; no fixes needed. No new nodes, and the statement is kept verbatim (base change = the varying-ring mate for (j1,j2,1,u) over strict (A_n) systems). proof_deps equals the union of uses, there is no cycle, no repair note applies and no SGA is cited. Step 1: origin (ii) gives a separate witness (L_n, α_n) for each n. Step 2: the substitution into sp-pasting and lem-pur-system-proper-open-invertibility (same unit, unsplit, does not reach the item) checks out; the opens are quasi-compact because the compactifications are Noetherian, and the two β normalizations agree because j'_! is fully faithful and both are the identity over the open. Step 3: the cbc evaluation, the refinement clause of interchange-coherence (= α_u), and site-normalization (Noetherian via finite-type-over-noetherian, L_n in D^+) give α^p = α_u(L) of def-sf-refinement (a), conjugated by naturality for every witness. Stacks 0F7B (more-etale l.2460) matches this K-injective normalization. Step 4: the evaluated compositor and inverse give exactly clause (b), via the levelwise-agreement clause of the semilinear node. Step 5: normalized-tensor-closure with v=f and C_n=(A_n)_X. Step 6: pullback-tor keeps [c_n,d_n]; tensor-ctf (ii) gives [a_n+c_n,b_n+d_n]. Step 7: the finite-torsion and intrinsic constructibility definitions are the same condition. Edge cases checked: m=n, u=1, empty X, bounds varying in n, nonflat quotient maps. Declared tool uses are accepted as generic. Maintainer notes: the item's first paragraph is the r=1 case of the existing lem-pur-system-proper-open-invertibility (Q141); the separatedness of the compactifications is left implicit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SystemRefinementConstructibleDomain",
+  "declaration": "AlgebraicGeometry.ProEtale.SystemRefinement.gamma_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SystemRefinement.rings",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.transitions",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.finiteRings",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.fixed",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.level",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.ordinaryDirect_existsUnique",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.ordinaryDirect",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.fixedDirect",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.ordinaryPull_existsUnique",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.ordinaryPull",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.ordinaryOpen_existsUnique",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.ordinaryOpen",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.fixedOpen",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.pushLevel",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.openLevel",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.domain",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.B",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.tau",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.Calculus",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.quotient",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.restrictionDirect_existsUnique",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.restrictionDirect",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.restrictionPull_existsUnique",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.restrictionPull",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.derivedRestrictionPull",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.scalarPull_existsUnique",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.scalarPull",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.reduction",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.normalized",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.tor",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.ctf",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.compactificationOpenQuasiCompact",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.gamma",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.gamma_evaluation",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.image",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.compositor",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.imageLevel",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.gamma_isIso",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.theta",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.level_origin",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.gamma_witness_evaluation",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.theta_evaluation",
+   "AlgebraicGeometry.ProEtale.SystemRefinement.normalized_operations"
+  ],
+  "file": "lean/Sheaf/Paper/SystemRefinementConstructibleDomain.lean",
+  "statement": "theorem gamma_isIso {c₁ c₂ : Compactification f} (r : c₁.Refinement c₂) (K : VaryingRing.Derived (rings l E) (transitions l E) X) (hK : domain l E X K) : IsIso (gamma l E r K)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The node has several clauses: gamma_isIso, level_origin, gamma_evaluation, gamma_witness_evaluation, theta_evaluation and normalized_operations state them. All other listed declarations are the canonical maps or encoding comparisons used by those signatures; data chosen from postponed theorems are uniquely section- or adjunction-normalized."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7962671eb",
+  "group": "Q31",
+  "result": "pass",
+  "note": "All clauses match the node, with no extra hypotheses or universe restriction. gamma is VaryingRing.gamma(j1,1,u,j2) composed with the canonical pId; compositor is eqToIso(r.hom_g) then pComp inverse (the adjoint conjugate of gComp); domain is levelwise intrinsicFiniteTorsionConstructible with no common bound; level_origin gives a separate witness for each n; gamma_evaluation equals constantGamma (cbc gamma); theta_evaluation holds for every witness and equals the alpha-conjugate of properTransportRefinement (def-sf-refinement clause b); normalized_operations covers normalization, ctf, Tor intervals [c,d] and [a+c,b+d] per n, and both reduction formulas, the tensor one in the normalized_tensor_closure form. All helpers are .choose of uniqueness theorems pinned by sections or transposes; A is the recorded SemilinearSections.Data. Statement field verbatim; every listed declaration exists. Mechanical finding on lem-sfb-constant-scalar-restriction-tensor: PASS on this point, because the item uses its theorems additive, exact and isEquivalence to supply the instances that fixedDirect and fixedOpen need on derived categories, and no def node owns restriction. Advisories: some declarations come from nodes outside the stage-1 stmt_deps; the NormalizedDVRTower import is unused. No compile (no change); the worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T204444-L-2958160",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

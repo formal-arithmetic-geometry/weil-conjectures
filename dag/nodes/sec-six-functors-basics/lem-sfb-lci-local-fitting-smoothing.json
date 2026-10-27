@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-lci-local-fitting-smoothing",
+ "kind": "statement",
+ "title": "Local complete-intersection deformations with a Fitting-ideal bound",
+ "statement": "Let $k$ be a field [def-weil-field], and let $A$ be a complete-intersection local $k$-algebra [def-trf-complete-intersection-local-algebra]. Write $\\kappa=A/\\mathfrak m_A$ for its residue field and set $d=\\dim A+\\operatorname{trdeg}_k\\kappa$, where $\\dim A$ is ring Krull dimension [def-weil-pbc-krull-dimension-ring] and transcendence degree is [def-kun-transcendence-degree]. Put $R=k[[t]]$, the formal power-series ring. There are an integer $e\\geq0$ and a local $R$-algebra $B$, flat over $R$ [def-weil-pbc-flat-ring-map] and essentially of finite type over $R$ [def-weil-pbc-essentially-finite-type-algebra], together with a $k$-algebra isomorphism $B/tB\\cong A$, such that $t^e\\in\\operatorname{Fit}_d(\\Omega_{B/R})$. Here $\\Omega_{B/R}$ is the module of Kähler differentials [def-weil-pbc-kahler-differentials] and $\\operatorname{Fit}_d$ is the presentation-independent kernel-minor ideal of [lem-trf-fitting-ideal-independence-base-change].",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7X, lemma-smoothing-at-lci-point; the final construction B = Q_q makes B local."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-complete-intersection-local-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "By [def-trf-complete-intersection-local-algebra] and [def-weil-pbc-essentially-finite-type-algebra], write $A=W^{-1}S$ for a finite type $k$-algebra $S$ and a multiplicative subset $W$. Let $\\mathfrak p_0$ be the inverse image in $S$ of the maximal ideal of $A$. Every $w\\in W$ maps to a unit, so $W\\cap\\mathfrak p_0=\\varnothing$. Every $s\\notin\\mathfrak p_0$ also maps to a unit, since $A$ is local. Thus the maps $W^{-1}S\\to S_{\\mathfrak p_0}$ and $S_{\\mathfrak p_0}\\to A$, given respectively by $s/w\\mapsto s/w$ and $s/u\\mapsto(s/1)(u/1)^{-1}$, are inverse $k$-algebra maps, as is checked on fractions. Hence $A\\cong S_{\\mathfrak p_0}$.",
+   "uses": [
+    "def-trf-complete-intersection-local-algebra",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "0E7X, first sentence: expressing the essentially finite type local algebra as a prime localization, expanded on fractions"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-ci-local-ring-principal-neighbourhood] to $S$ and $\\mathfrak p_0$: its complete-intersection local-ring hypothesis is precisely the hypothesis on $A\\cong S_{\\mathfrak p_0}$. Obtain $h\\notin\\mathfrak p_0$ such that $P=S_h$ is a global complete intersection. With $\\mathfrak p=\\mathfrak p_0S_h$ we have $P_{\\mathfrak p}\\cong S_{\\mathfrak p_0}\\cong A$: both localizations invert exactly the elements needed to invert every element of $S\\setminus\\mathfrak p_0$, and the inverse maps send each fraction to the same fraction. In particular $P\\neq0$.",
+   "uses": [
+    "lem-trf-ci-local-ring-principal-neighbourhood",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "0E7X, first sentence, via the existing principal-neighbourhood form of the global complete-intersection localization theorem"
+   }
+  },
+  {
+   "text": "Choose a global complete-intersection presentation $P=k[x_1,\\ldots,x_N]/(f_1,\\ldots,f_c)$ with $\\dim P=N-c$ [def-weil-pbc-complete-intersection-over-field]. By [lem-weil-pbc-global-complete-intersection-equidimensional], $\\dim_{\\mathfrak p}\\operatorname{Spec}P=N-c$. Apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] to this finite type $k$-algebra and prime: its right side is $\\dim P_{\\mathfrak p}+\\operatorname{trdeg}_k\\kappa(\\mathfrak p)=\\dim A+\\operatorname{trdeg}_k\\kappa=d$, because the local $k$-algebra isomorphism identifies maximal ideals and residue fields. Thus $d=N-c=\\dim P\\geq0$.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-global-complete-intersection-equidimensional",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "0E7X, second sentence, dimension computation including the equidimensionality needed to replace dimension at the prime by global dimension"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-global-ci-smoothing] to the presentation of $P$ in Step 3, with $r=d$. It gives $Q=R[x_1,\\ldots,x_N]/(g_1,\\ldots,g_c)$, flat over $R=k[[t]]$, an isomorphism $Q/tQ\\cong P$, a smooth generic-fibre morphism $\\operatorname{Spec}Q[1/t]\\to\\operatorname{Spec}k((t))$, and pure dimension $d$ for every nonempty geometric fibre. Its displayed presentation makes $Q$ a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra].",
+   "uses": [
+    "lem-sfb-affine-global-ci-smoothing",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "0E7X, third sentence and the following assertion about the relative dimension of the constructed Q"
+   }
+  },
+  {
+   "text": "The $Q$-module $M=\\Omega_{Q/R}$ is generated by $\\mathrm dx_1,\\ldots,\\mathrm dx_N$. Indeed every element of $Q$ is represented by a polynomial in the $x_i$ over $R$; additivity, the Leibniz rule and vanishing on $R$ give $\\mathrm dF=\\sum_i (\\partial F/\\partial x_i)\\,\\mathrm dx_i$. The symbols $\\mathrm dq$ generate $\\Omega_{Q/R}$ in its construction [def-weil-pbc-kahler-differentials], so these finitely many differentials suffice. Consequently $I=\\operatorname{Fit}_d(M)\\subset Q$ is defined by [lem-trf-fitting-ideal-independence-base-change].",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-trf-fitting-ideal-independence-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "0E7X, introduction of the dth Fitting ideal; finite generation expanded from the universal differential construction"
+   }
+  },
+  {
+   "text": "Let $f:\\operatorname{Spec}Q\\to\\operatorname{Spec}R$. It is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine], and locally of finite presentation by the displayed presentation and [def-sbc-locally-finite-presentation]. Its nonempty geometric fibres have pure dimension $d$ by Step 4. The relative differential sheaf is the sheaf associated to $M$ by [def-sc-relative-differential-sheaf]. Hence [lem-trf-dth-fitting-smooth-locus] applies and identifies $V(I)$ with the nonsmooth locus of $f$. Step 4 gives smoothness of the restriction $D(t)\\to\\operatorname{Spec}R[1/t]$. Clause (b) of [lem-weil-pbc-smooth-restrict-open-subschemes] makes $D(t)\\to\\operatorname{Spec}R$ smooth as well. Thus $V(I)\\cap D(t)=\\varnothing$, or $V(I)\\subseteq V(t)$.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-sbc-locally-finite-presentation",
+    "def-sc-relative-differential-sheaf",
+    "lem-trf-dth-fitting-smooth-locus",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "0E7X, application of the Fitting-ideal smooth-locus criterion and smoothness away from t"
+   }
+  },
+  {
+   "text": "Every prime ideal of $Q$ containing $I$ contains $t$ by Step 6. By the intersection-of-primes formula in [lem-weil-pbc-zero-locus-eq-iff-radical-eq], $t\\in\\sqrt I$. The same cited statement defines $\\sqrt I$ by positive powers, so there is $e\\geq1$ with $t^e\\in I$. This supplies the required nonnegative exponent; if $I=Q$ one could also take $e=0$.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "0E7X, sentence Thus t^n is in I for some n, expanded through the radical formula"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\subset Q$ be the inverse image of $\\mathfrak p\\subset P$ under $Q\\to Q/tQ\\cong P$, and set $B=Q_{\\mathfrak q}$. This is local with maximal ideal $\\mathfrak qB$ [def-weil-pbc-localization-at-prime]. It is flat over $R$ by [lem-pc-affine-flat-module-localization-preserves-flatness], applied to the flat $R$-module $Q$ and the multiplicative set $Q\\setminus\\mathfrak q$. Since $Q$ is finite type over $R$, $B$ is essentially finite type by [def-weil-pbc-essentially-finite-type-algebra]. Applying [lem-weil-pbc-localization-at-prime-of-quotient] to the ideal $tQ$ gives $B/tB\\cong(Q/tQ)_{\\mathfrak p}\\cong P_{\\mathfrak p}\\cong A$. These maps are $k$-linear: the quotient/localization map sends the class of $q/s$ to $\\bar q/\\bar s$ and fixes $k$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "0E7X, final two sentences: q is the inverse image of p and B is Q_q"
+   }
+  },
+  {
+   "text": "Put $U=Q\\setminus\\mathfrak q$. By [lem-weil-pbc-kahler-differentials-localization], $\\Omega_{B/R}\\cong U^{-1}M$. The canonical tensor/fraction identification $M\\otimes_QB\\cong U^{-1}M$ sends $m\\otimes(q/s)$ to $qm/s$ and has inverse $m/s\\mapsto m\\otimes(1/s)$. Balancing defines the forward map. If $m/s=m\\prime/s\\prime$, choose $u\\in U$ with $u(s\\prime m-sm\\prime)=0$; the difference of the proposed inverse images is $u(s\\prime m-sm\\prime)\\otimes1/(uss\\prime)=0$. The inverse is additive and balanced by the same common-denominator calculation. The two composites fix pure tensors and fractions. Thus $\\Omega_{B/R}\\cong M\\otimes_QB$. Apply clause (2) of [lem-trf-fitting-ideal-independence-base-change] to the ring map $Q\\to B$ and the finite generating surjection $Q^{\\oplus N}\\to M$ from Step 5. It gives $\\operatorname{Fit}_d(\\Omega_{B/R})=IB$. Here the isomorphism does not alter the Fitting ideal: composing a free surjection with a module isomorphism leaves its kernel, and hence every defining kernel minor, unchanged. The image of $t^e\\in I$ is therefore in $\\operatorname{Fit}_d(\\Omega_{B/R})$, completing every clause.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-trf-fitting-ideal-independence-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "0E7X, concluding localization, using 00RT and Fitting base change to retain the parameter-power bound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-complete-intersection-local-algebra",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-ci-local-ring-principal-neighbourhood",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-sfb-affine-global-ci-smoothing",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-relative-differential-sheaf",
+  "lem-trf-dth-fitting-smooth-locus",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7X, lemma-smoothing-at-lci-point; the existing principal-neighbourhood criterion realizes its initial localization step; radical and final localization arguments are expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A local complete intersection algebra over a field admits a flat deformation over power series with a power of t in the dimension Fitting ideal of differentials",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give criteria for an already smooth algebra, not existence of a local deformation with a parameter-power bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth the local ring of a complete intersection singularity and control the singular ideal by a power of the parameter",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ), Algebra.IsStandardSmooth R S\", \"doc\": \"Given a finite index set $\\\\iota$ and a submersive presentation $P$ of an $R$-algebra $S$ with generating set $\\\\sigma$, the algebra $S$ is standard smooth over $R$. This means $S$ is isomorphic to a lo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give criteria for an already smooth algebra, not existence of a local deformation with a parameter-power bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give criteria for an already smooth algebra, not existence of a local deformation with a parameter-power bound"
+  },
+  {
+   "tool": "grep",
+   "query": "fittingIdeal|FittingIdeal|smoothing|deformation",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/Computability/AkraBazzi/SumTransform.lean\", \"line\": \"25\", \"text\": \"* `AkraBazziRecurrence.smoothingFn`: the smoothing function $\\\\varepsilon(x) = 1 / \\\\log x$ used in\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/SumTransform.lean\", \"line\": \"259\", \"text\": \"### Smoothing function\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/SumTransform.lean\", \"line\": \"261\", \"text\": \"We define `ε` as the \\\"smoothing function\\\" `fun n => 1 / log n`, which will be used in the form of a\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/SumTransform.lean\", \"line\": \"264\", \"text\": \"This is its own definition to make it easier to switch to a different smoothing function.\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/SumTransform.lean\", \"line\": \"272\", \"text\": \"/-- The \\\"smoothing function\\\" is defined as `1 / log n`. This is defined as an `ℝ → ℝ` function\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/AkraBazzi.lean\", \"line\": \"72\", \"text\": \"local notation \\\"ε\\\" => smoothingFn\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/AkraBazzi.lean\", \"line\": \"78\", \"text\": \"The next several lemmas are technical results leading up to `rpow_p_mul_one_sub_smoothingFn_le` and\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/AkraBazzi.lean\", \"line\": \"79\", \"text\": \"`rpow_p_mul_one_add_smoothingFn_ge`, which are key steps in the main proof.\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/AkraBazzi.lean\", \"line\": \"82\", \"text\": \"lemma eventually_deriv_rpow_p_mul_one_sub_smoothingFn (p : ℝ) :\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/AkraBazzi.lean\", \"line\": \"90\", \"text\": \"    · exact differentiableAt_one_sub_smoothingFn hx\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean\", \"line\": \"16\", \"text\": \"# smoothingSeminorm\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean\", \"line\": \"24\", \"text\": \"* `smoothingSeminormSeq` : the `ℝ`-valued sequence sending `n` to `((f( (x ^ n)) ^ (1 / n : ℝ)`.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean\", \"line\": \"25\", \"text\": \"* `smoothingFun` : the iInf of the sequence `n ↦ f(x ^ (n : ℕ))) ^ (1 / (n : ℝ)`.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean\", \"line\": \"26\", \"text\": \"* `smoothingSeminorm` : if `μ 1 ≤ 1` and `μ` is nonarchimedean, then `smoothingFun`\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean\", \"line\": \"31\", \"text\": \"* `tendsto_smoothingFun_of_map_one_le_one` : if `μ 1 ≤ 1`, then `smoothingFun μ x` is the limit\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/FiniteExtension.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Analysis.Normed.Unbundled.SmoothingSeminorm\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/FiniteExtension.lean\", \"line\": \"213\", \"text\": \"  set F' := smoothingSeminorm f hf_1 hf_na with hF'\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/FiniteExtension.lean\", \"line\": \"217\", \"text\": \"    exact smoothingSeminorm_apply_of_map_mul_eq_mul f hf_1 hf_na\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/FiniteExtension.lean\", \"line\": \"228\", \"text\": \"        have hfk : ‖k‖ = (smoothingSeminorm f hf_1 hf_na) ((algebraMap K L) k) := by\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/FiniteExtension.lean\", \"line\": \"229\", \"text\": \"          rw [← hf_ext k, eq_comm, smoothingSeminorm_apply_of_map_mul_eq_mul f hf_1 hf_na hk]\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give criteria for an already smooth algebra, not existence of a local deformation with a parameter-power bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local complete intersection algebra over a field admits a flat deformation over power series with a power of t in the dimension Fitting ideal of differentials",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give criteria for an already smooth algebra, not existence of a local deformation with a parameter-power bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local complete intersection over a field has a flat power series deformation whose module of differentials has a power of the parameter in its Fitting ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness of a supplied algebra or standard smooth presentations; none constructs a deformation of an arbitrary complete intersection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness of a supplied algebra or standard smooth presentations; none constructs a deformation of an arbitrary complete intersection"
+  },
+  {
+   "tool": "grep",
+   "query": "fittingIdeal|FittingIdeal|smoothing|deformation",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness of a supplied algebra or standard smooth presentations; none constructs a deformation of an arbitrary complete intersection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local complete intersection admits a flat smoothing with power of the parameter in the Fitting ideal of Kahler differentials",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Module.Projective A Ω[A⁄R]\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a commutative $ R $-algebra. If $ A $ is formally smooth over $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \"[FinitePresentation R S] [Subsingleton (H1Cotangent R S)] {I : Type*} (b : Module.Basis I S (Ω[S⁄R]))\\n  (hb : Set.range b ⊆ Set.range (D R S)) : IsStandardSmooth R S\", \"doc\": \"If $ S $ is finitely presented over $ R $, the first cohomology group $ H^1 $ of the cotangent complex of $ S $ over $ R $ is trivial, and there exists a basis for the module of Kähler differentials $\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness of a supplied algebra or standard smooth presentations; none constructs a deformation of an arbitrary complete intersection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-lci-curve-smoothing",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Local complete-intersection deformations with a Fitting-ideal bound.",
+   "via": [
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-lci-local-fitting-smoothing",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0E7X into nine steps, retaining the statement. Reused the existing complete-intersection neighbourhood, equidimensionality, local-dimension formula, Fitting smooth-locus/radical and localization results. Added only the polynomial affine-smoothing input, statement-only; its expected geometric fibre dimension is explicit so the smooth-locus theorem has all of its hypotheses. Searched Mathlib through the logged command; no match.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Local complete-intersection deformations with a Fitting-ideal bound. The nine steps supply the local smoothing prerequisite of the isolated-lci-curve smoothing branch. The ancestry tool returns null on this inherited broken imported chain; the existing from.node and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-ci-local-ring-principal-neighbourhood",
+    "why": "Generic commutative-algebra or affine-scheme input in the Stacks 0E7X local smoothing argument; the constructible direct-image unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-global-complete-intersection-equidimensional",
+    "why": "Generic commutative-algebra or affine-scheme input in the Stacks 0E7X local smoothing argument; the constructible direct-image unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic commutative-algebra or affine-scheme input in the Stacks 0E7X local smoothing argument; the constructible direct-image unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-trf-fitting-ideal-independence-base-change",
+    "why": "Generic commutative-algebra or affine-scheme input in the Stacks 0E7X local smoothing argument; the constructible direct-image unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-trf-dth-fitting-smooth-locus",
+    "why": "Generic commutative-algebra or affine-scheme input in the Stacks 0E7X local smoothing argument; the constructible direct-image unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic commutative-algebra or affine-scheme input in the Stacks 0E7X local smoothing argument; the constructible direct-image unit contains no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-ci-local-ring-principal-neighbourhood",
+  "lem-weil-pbc-global-complete-intersection-equidimensional",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-trf-dth-fitting-smooth-locus",
+  "lem-pc-affine-flat-module-localization-preserves-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-732a43c95",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-732a43c95 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, along with Stacks examples-defos 0E7V, 0E7X and the Jouanolou lemma. Item statement = 0E7X; local B comes from the source's B = Q_q. New node lem-sfb-affine-global-ci-smoothing = 0E7V plus pure geometric-fibre dimension N−c. 0E7X uses that clause, and it is true: P⊗k̄ is a global complete intersection, so equidimensional. The Jouanolou count rules out every rank-deficient Jacobian point over the generic parameter, so Chevalley gives an open set avoiding that locus. Tested c=0, N=c=0, char-p x^p+tx, inseparable residue fields. No duplicate in the DAG (rg -L for the tags and for smoothing). Statement-only, self-contained. Steps 1–9 checked against cited statements: 00SG neighbourhood, 00S9 equidimensional + 00P1 for d=N−c, 0C3K Fitting smooth locus (hypotheses flat/lfp/pure fibres met; open-restriction clause (b) right direction), 00E0 radical, 00HT flatness, 00CT quotient localization (k-linear), 00RT arbitrary localization + 07ZA base change. Batch-5 finding: lem-trf-ci-local-ring-principal-neighbourhood (00SG) and lem-trf-dth-fitting-smooth-locus (0C3K) are generic commutative algebra, not steps of the trace formula or Poincaré duality. Their closure holds only Fitting/regular-sequence/CI algebra trf nodes, with no thm-trf, Poincaré or trace-transport node, and the parent already reaches two of them; accepted. Six declared generic-algebra tool_uses accepted. Not on the drop list, no SGA, not superseded live. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LCILocalFittingSmoothing",
+  "declaration": "Algebra.exists_local_fitting_smoothing",
+  "file": "lean/Sheaf/RingTheory/LCILocalFittingSmoothing.lean",
+  "statement": "theorem exists_local_fitting_smoothing (k : Type u) [Field k] (A : Type v) [CommRing A] [Algebra k A] [IsLocalRing A] (hA : IsCompleteIntersectionLocalAlgebra k A) : ∃ (e : ℕ) (B : Type (max u v)) (_ : CommRing B) (_ : IsLocalRing B) (_ : Algebra (PowerSeries k) B) (_ : Algebra k B) (_ : IsScalarTower k (PowerSeries k) B), Module.Flat (PowerSeries k) B ∧ EssFiniteType (PowerSeries k) B ∧ Nonempty ((B ⧸ Ideal.span ({algebraMap (PowerSeries k) B PowerSeries.X} : Set B)) ≃ₐ[k] A) ∧ ∃ (n : ℕ) (π : (Fin n → B) →ₗ[B] KaehlerDifferential (PowerSeries k) B), Function.Surjective π ∧ (algebraMap (PowerSeries k) B PowerSeries.X) ^ e ∈ π.presentationFittingIdeal ((WithBot.unbotD 0 (ringKrullDim A)).toNat + (Algebra.trdeg k (IsLocalRing.ResidueField A)).toNat)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-398eded0b",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 0E7X clause by clause: CI-local hA (IsLocalRing instance redundant with its first conjunct), d = unbotD/toNat of ringKrullDim + Cardinal.toNat trdeg (finite under hA, conversions exact), ∃ e:ℕ, local B : Type (max u v) with k-algebra structure fixed by IsScalarTower through k[[t]], Module.Flat + EssFiniteType over PowerSeries k, Nonempty (B/(X) ≃ₐ[k] A), ∃ surjective π : (Fin n → B) → Ω with X^e ∈ π.presentationFittingIdeal d (presentation-independent by the recorded theorem; project idiom). Edge cases A=k (e=0, n≤d ⇒ ⊤), inseparable residue fields, universes OK. Node differs from live only in lean; statement verbatim; imports = stmt deps public + proof-dep modules plain, all exist; docstrings carry source/blueprint and the 9 steps; sorry-only; no new defs; no Mathlib Fitting ideal, no project duplicate. No fix, no compile; worker reports clean compiles."
+ }
+}

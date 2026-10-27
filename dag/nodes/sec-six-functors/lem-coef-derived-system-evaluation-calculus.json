@@ -68,6 +68,17 @@
    }
   },
   {
+   "text": "For the auxiliary representative calculations, assemble the actual scalar-derived pair from its recorded ordinary and derived adjunctions using [lem-coef-actual-scalar-derived-pair]. Apply [lem-coef-prescribed-scalar-tensor-comparison] for the ordinary scalar tensor isomorphism with its pure-generator formula and uniqueness. For evaluation, apply [lem-coef-actual-total-tensor-evaluation] to the actual coefficient ring sequence and its identity-on-underlying-sections transport. This inverts the semilinear total chain comparison and proves both its pure-generator formula and uniqueness without any flatness assumption. For arbitrary K-flat evaluation lift each acyclic finite test complex by [lem-coef-semilinear-evaluation-acyclic-lift], apply system K-flatness and exact evaluation, and transport through the ordinary total-tensor evaluation isomorphism.",
+   "uses": [
+    "lem-coef-actual-scalar-derived-pair",
+    "lem-coef-prescribed-scalar-tensor-comparison",
+    "lem-coef-semilinear-evaluation-acyclic-lift",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-actual-total-tensor-evaluation"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Use the closed structure [lem-sf-ringed-derived-closed-symmetric-monoidal] on the sequence site and define $\\mathcal I_W(M,N)=H_B(M,N)$. The fiber identifications and actual scalar-extension transitions, carrying system evaluation to level evaluation, are [lem-coef-semilinear-derived-sections]. Apply [lem-coef-ringed-pullback-hom-evaluation-comparison] to $p$ to obtain $\\beta$, its finite formula and evaluation/transpose/composition identities as system maps.",
    "uses": [
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
@@ -110,12 +121,16 @@
   }
  ],
  "proof_deps": [
+  "lem-coef-actual-scalar-derived-pair",
+  "lem-coef-actual-total-tensor-evaluation",
   "lem-coef-closed-adjunction-enriched-isomorphism",
   "lem-coef-closed-adjunction-naturality",
   "lem-coef-enriched-sequence-projection-formula",
   "lem-coef-monoidal-adjunction-parameter-composition",
+  "lem-coef-prescribed-scalar-tensor-comparison",
   "lem-coef-ringed-pullback-hom-evaluation-comparison",
   "lem-coef-semilinear-derived-sections",
+  "lem-coef-semilinear-evaluation-acyclic-lift",
   "lem-coef-sequence-global-sections-evaluation",
   "lem-coef-sequence-projection-derived-adjunction",
   "lem-coef-sequence-pushforward-limit-projections",
@@ -129,7 +144,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Human-requested finer split, 2026-10-21. Same sequence-site, finite-prefix and enriched-adjunction route as the reviewed proof; seven extracted generic lemmas and existing sequence/closed-structure results assemble the unchanged statement."
+  "place": "Human-requested finer split, 2026-10-21. Same sequence-site, finite-prefix and enriched-adjunction route as the reviewed proof; seven extracted generic lemmas and existing sequence/closed-structure results assemble the unchanged statement. B3 adds explicit auxiliary scalar-generator and all-acyclic-test K-flat evaluation arguments; the ordinary tensor-evaluation comparison and final calculus assembly remain unproved in this partial delivery. J6 repair of returned adf7546a9e3: all 92 original declaration headers, structure field signatures and public imports are retained. All 154 existing compiled declaration and field types, 92 universe-parameter lists and 15 exported attributes agree with source. Twelve standalone item-local definitions name the existing adjunction, quotient transformation, localized counit, three generic equation constructors, three tensor-model isomorphisms, two mapped complex transformations and the original unique-comparison choice. No structure field is renamed or aliased. Nine full predicate equations and ten constructor/comparison bodies agree with their original formulas by rfl; the scalar-sections formula supplies its existing additive zero-map proof explicitly. Its sections functor is named separately at each level, and unused local monoidal instances are removed from the K-flat preservation proof. Restriction composition uses Functor.ext_of_iso and the existing normalizedDVRRestrictionCompIso from the already listed normalized-tower dependency. Both global comparison bodies and all shared total-tensor, inverse-limit and change-of-rings definitions remain unchanged. The two original holes remain; none is added, moved or closed. The proof route and dependencies of the calculus assembly remain unchanged. C2, 2026-10-27: coefficientEvaluationTensorIso_exists is proved from the fully proved generic ordinary total-tensor evaluation comparison and its coefficient specialization. The generic comparison uses the existing evaluation/coextension adjunction, signed total chain comparison, summand equations and pure-generator extensionality. The coefficient specialization uses the actual functor equality, explicit zero-morphism preservation and eqToHom transport for the recorded abelian section equality; equality elimination proves the transport is heterogeneously the identity. The assigned theorem unfolds only coefficientEvaluationSection and applies the specialized result. Local irreducibility reduces generic evaluation unfolding; after these improvements the coefficient specialization is placed in a separate proved module to keep every file within 60 seconds. Existing signatures, definitions and public imports are unchanged; asynchronous elaboration is disabled locally. One of the two original holes is closed, none is added, and the final calculus assembly remains open. After local unfolding improvements, extract the existing scalar prefix verbatim to CoefficientSystemScalarCalculus and publicly re-export it, as permitted by the session compile-limit brief. Existing definition attachments record the new owner; declaration signatures, bodies and attributes are preserved. The completed evaluation proof applies the specialized theorem by a direct kernel-checked proof term built from the exact local arguments, avoiding the expensive repeated elaborator conversion."
  },
  "mathlib_searches": [
   {
@@ -355,7 +370,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-6813aa34c (reviewer sub-agent of L); spot-checked: I read the whole re-split: the base 18-step proof (21383 characters, live node), the new 5-step assembly (2577 characters, statement and stmt_deps byte-identical to the base), all 7 new statement-only nodes and the statements of all 15 cited nodes. No old argument is dropped or blurred; each became a new or existing node. Steps 2, 3-4, 11, 12 (split in two halves), 13 and 14 became the 7 new nodes. Steps 1, 5, 6, 7-10 and 15-16 go to existing nodes: pur-system-ringed-sequence-site, level-left-extension, evaluation-topos, sf-ringed-derived-closed-symmetric-monoidal, coef-semilinear-derived-sections (fiber identification for cartesian first input, transition formula) and the coherence nodes. Step 17 is elementary in step 5. The step-18 signs moved into the ringed-pullback statement. Checks: no cycle (closures of all 15 proof_deps; semilinear-derived-sections is not downstream of the item). No duplicates found by statement search (pod-derived-automorphism-hom-evaluation is only for isomorphisms and cites the item; qcqs/asd internal adjunctions are different functors). Maths verified: Yoneda chain sends h to G(b)u_V h with only naturality of mu; projection of delta has adjunct b_n with the displayed transpose; the adjunct of h is e_{N,n}(h tensor B_n). Evaluation on constant-A towers preserves K-injectives (exact left adjoint), and the statement correctly makes no varying-ring claim. The two-order sections comparison holds since both sides are the direct image to the point (0D6E). Stacks 0941/06YY/07A6/0D6E/07A4/08J9/0A98/079P checked in the tex and tags file; no SGA. FIX (B3/C): lem-coef-ringed-pullback-hom-evaluation-comparison cites def-pur-hom-complex and def-pc-tensor-complex-sheaves in its statement but lacked them in stmt_deps; I added both. Advisory: the item's top-level tool_uses is the stale base list (maintainer field).; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.CoefDerivedSystemEvaluationCalculus",
   "declaration": "WeilConjectures.coefficientDerivedSystemEvaluationCalculus",
@@ -378,6 +404,7 @@
    "WeilConjectures.CoefficientEvaluationCompatible",
    "WeilConjectures.coefficientEnrichedAdjunctionMap",
    "WeilConjectures.coefficientRestrictionComp",
+   "WeilConjectures.coefficientQuotientNatTrans",
    "WeilConjectures.coefficientOrdinaryQuotientComponent",
    "WeilConjectures.coefficientOrdinaryQuotient_exists",
    "WeilConjectures.coefficientOrdinaryQuotient",
@@ -450,7 +477,19 @@
    "WeilConjectures.CoefficientHomProjection",
    "WeilConjectures.CoefficientMappingComposition",
    "WeilConjectures.CoefficientDerivedSystemCoherence",
-   "WeilConjectures.coefficientDerivedSystemEvaluationCalculus"
+   "WeilConjectures.coefficientDerivedSystemEvaluationCalculus",
+   "WeilConjectures.CoefficientComparisonEquation",
+   "WeilConjectures.CoefficientTensorComparisonSquare",
+   "WeilConjectures.CoefficientTransitionEquation",
+   "WeilConjectures.coefficientComplexCompositeSourceTransformation",
+   "WeilConjectures.coefficientComplexCompositeTransformation",
+   "WeilConjectures.coefficientFiniteTensorModelIso",
+   "WeilConjectures.coefficientIntegralTensorModelIso",
+   "WeilConjectures.coefficientLocalizedCounitModel",
+   "WeilConjectures.coefficientOrdinaryQuotientNaturalTransformation",
+   "WeilConjectures.coefficientOrdinaryScalarAdjunction",
+   "WeilConjectures.coefficientSystemTensorModelIso",
+   "WeilConjectures.coefficientUniqueComparisonChoice"
   ],
   "file": "lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean",
   "statement": "theorem coefficientDerivedSystemEvaluationCalculus : ∃ S : CoefficientDerivedSystemCalculus l E W, Nonempty (CoefficientDerivedSystemCoherence l E W S)",
@@ -458,7 +497,7 @@
   "by": "N0",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Repair of returned head 24d3ed97d8f8, H3 finding 2: fiber_transition explicitly identifies the actual internal-Hom transition-adjoint under fiberHom at m and n with the evaluation-defined finite scalar-extension comparison followed by RHom(alpha_M inverse, alpha_N). The finite quotient uses recorded derived change of rings, with normalized ordinary/derived adjunction units and a tensor comparison pinned on K-flat representatives by pure-tensor chain formulas. Earlier tensor/Hom and gamma normalizations retained; statement unchanged. Performance packaging: CoefficientFiberTransition contains the identical transition equation; CoefficientScalarTensorGenerators and coefficientIntegralScalarUnitSection package the identical integral scalar pure-tensor normalization without repeatedly expanding the adjunction unit. CoefficientGlobalLimitModel likewise packages the unchanged resolution equation to avoid repeating exact-localization terms in generated structure declarations."
+  "note": "Repair of returned head 24d3ed97d8f8, H3 finding 2: fiber_transition explicitly identifies the actual internal-Hom transition-adjoint under fiberHom at m and n with the evaluation-defined finite scalar-extension comparison followed by RHom(alpha_M inverse, alpha_N). The finite quotient uses recorded derived change of rings, with normalized ordinary/derived adjunction units and a tensor comparison pinned on K-flat representatives by pure-tensor chain formulas. Earlier tensor/Hom and gamma normalizations retained; statement unchanged. Performance packaging: CoefficientFiberTransition contains the identical transition equation; CoefficientScalarTensorGenerators and coefficientIntegralScalarUnitSection package the identical integral scalar pure-tensor normalization without repeatedly expanding the adjunction unit. CoefficientGlobalLimitModel likewise packages the unchanged resolution equation to avoid repeating exact-localization terms in generated structure declarations. J6 repair of returned adf7546a9e3: all 92 original declaration headers, structure field signatures and public imports are retained. All 154 existing compiled declaration and field types, 92 universe-parameter lists and 15 exported attributes agree with source. Twelve standalone item-local definitions name the existing adjunction, quotient transformation, localized counit, three generic equation constructors, three tensor-model isomorphisms, two mapped complex transformations and the original unique-comparison choice. No structure field is renamed or aliased. Nine full predicate equations and ten constructor/comparison bodies agree with their original formulas by rfl; the scalar-sections formula supplies its existing additive zero-map proof explicitly. Its sections functor is named separately at each level, and unused local monoidal instances are removed from the K-flat preservation proof. Restriction composition uses Functor.ext_of_iso and the existing normalizedDVRRestrictionCompIso from the already listed normalized-tower dependency. Both global comparison bodies and all shared total-tensor, inverse-limit and change-of-rings definitions remain unchanged. The two original holes remain; none is added, moved or closed. The proof route and dependencies of the calculus assembly remain unchanged. C2, 2026-10-27: the scalar-foundation prefix (coefficientTowerSections through coefficientScalarTensorIso) is declared verbatim in Sheaf.Paper.CoefficientSystemScalarCalculus and publicly re-exported by this module; its names stay listed here as re-exported declarations of this node."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -469,43 +508,13 @@
   "note": "Previous RETURN (24d3ed97d8f8) finding resolved: the new fiber_transition field states that, for normalized M,N and n<=m, the transition of the internal Hom (in adjoint form, under fiberHom at m and n) equals F_{mn}(fiberHom_m) then c_{m,n} then RHom_{B_n}(alpha_M^-1, alpha_N). c_{m,n} is the transpose of reduced evaluation along the recorded derivedChangeOfRingsIndependentCoefficients for B_m->B_n. The adjunction is pinned by ordinary_unit (sheafified 1⊗x) and unit_model; D.tensor is pinned by the pure-tensor tensor_model on K-flats. alpha is the actual transition adjoint, and its invertibility follows from the normalization criterion by Yoneda. The other changes only package existing formulas, verbatim: CoefficientScalarTensorGenerators, CoefficientTensorUncurryModel, CoefficientGlobalLimitModel. The commit touches only its 11 files. Statement verbatim; all 92 declarations listed; docstrings with source and blueprint everywhere; no hollow data; every sorry is a standalone theorem. nt_compile --json on all 5 modules: exit 0, no messages (calculus 33.8 s, tensor-Hom 14.8 s, others under 28 s). Edge cases m=n, n=0 (index n means B_{n+1}), empty W, zero objects and unbounded complexes are all admitted. Report has Worker report and Second reading by N0."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "P1",
-  "result": "pass",
-  "landing": "20261019T005354-L-2759843",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.coefficientAbLimit_additive",
-   "WeilConjectures.coefficientAbTowers_haveKInjectives",
-   "WeilConjectures.coefficientDerivedSystemEvaluationCalculus",
-   "WeilConjectures.coefficientEvaluationTensorIso_exists",
-   "WeilConjectures.coefficientFiniteQuotientCounit_isIso",
-   "WeilConjectures.coefficientFiniteQuotientExtension_obj",
-   "WeilConjectures.coefficientFiniteReductionCounit_isIso",
-   "WeilConjectures.coefficientMappingProjection_exists",
-   "WeilConjectures.coefficientOrdinaryQuotient_exists",
-   "WeilConjectures.coefficientRestrictionComp",
-   "WeilConjectures.coefficientScalarTensorIso_exists",
-   "WeilConjectures.coefficientSectionsLimitIso_exists",
-   "WeilConjectures.coefficientSequenceTransitionAdjoint_isIso",
-   "WeilConjectures.coefficientTensorModelPreservation",
-   "WeilConjectures.coefficientTowerSections_additive"
-  ],
-  "sorry_after": [
-   "WeilConjectures.coefficientAbTowers_haveKInjectives",
-   "WeilConjectures.coefficientDerivedSystemEvaluationCalculus",
-   "WeilConjectures.coefficientEvaluationTensorIso_exists",
-   "WeilConjectures.coefficientFiniteQuotientCounit_isIso",
-   "WeilConjectures.coefficientFiniteQuotientExtension_obj",
-   "WeilConjectures.coefficientMappingProjection_exists",
-   "WeilConjectures.coefficientOrdinaryQuotient_exists",
-   "WeilConjectures.coefficientRestrictionComp",
-   "WeilConjectures.coefficientScalarTensorIso_exists",
-   "WeilConjectures.coefficientSectionsLimitIso_exists",
-   "WeilConjectures.coefficientTensorModelPreservation"
-  ]
+  "reviewer": "C-39893",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T134955-L-3651497",
+  "kind": "interface",
+  "note": "independent cc review: delivered 4 modules vs clone original (verbatim prefix split + 1 hole proved, statement unchanged); all 107 direct importers compiled against the delivered set (104 OK, 3 slow pre-existing, equal time on published); axioms clean; nodes vs Lean"
  }
 }

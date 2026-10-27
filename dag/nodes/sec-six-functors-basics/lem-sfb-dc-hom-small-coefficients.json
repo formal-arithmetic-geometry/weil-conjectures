@@ -33,88 +33,23 @@
  ],
  "proof": [
   {
-   "text": "For an abstract finite normed $E$ (or its closed unit ball $A$), the realization lemma gives a finite $E'\\subseteq\\overline{\\mathbf Q}_\\ell$, an isometric isomorphism $E\\cong E'$ restricting to $A\\cong\\mathcal O_{E'}$, condensed-ring isomorphisms, and exact equivalences $J=J_X^B$ that, with their inverses, preserve bounded constructibility. Ext along a ring isomorphism is exact, so the tensor comparison gives $\\mu:J(M\\otimes^{\\mathrm L}N)\\simeq JM\\otimes^{\\mathrm L}JN$. As $R\\mathcal Hom$ is right adjoint to $\\otimes^{\\mathrm L}$ and $J$ is an equivalence, Yoneda gives $\\operatorname{Hom}(M,J\\,R\\mathcal Hom(K,L))\\cong\\operatorname{Hom}(J^{-1}M\\otimes^{\\mathrm L}K,L)\\cong\\operatorname{Hom}(M\\otimes^{\\mathrm L}JK,JL)$, so $J\\,R\\mathcal Hom(K,L)\\simeq R\\mathcal Hom(JK,JL)$. Thus it suffices to prove the embedded integral, finite rational and closure cases.",
+   "text": "Apply the proved two-variable truncation induction to the degree-zero geometric internal-Hom finiteness theorem. It first reduces the second input to a constructible sheaf using the right-adjoint triangulated structure, and then the first input using the native contravariant exactness theorem. No coefficient-specific argument is repeated for general complexes.",
    "uses": [
-    "lem-sfb-normed-coefficient-realization",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-internal-scalar-tensor-comparison",
-    "sk-def-sfb-derived-tensor-hom"
+    "lem-sfb-dc-hom-single",
+    "lem-sfb-dc-hom-devissage"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Coefficient normalization (§6.8 conventions, Remark 6.8.15): existing realization lemma plus the Yoneda transport of the closed structure along the derived scalar equivalence."
-   }
-  },
-  {
-   "text": "$\\operatorname{Spec}k$ is Noetherian (its ideals are $0,k$), hence $X$ is Noetherian by the finite-type theorem. For integral inputs put $B=\\mathcal O_{E,X}$, choose a uniformizer $t$ and set $A=\\mathcal O_E/(t)$. The coefficient-limit identification gives $B=\\varprojlim_n(\\mathcal O_E/t^n)_X$. For $H=R\\mathcal Hom_B(K,L)$ the residue-witness lemma gives local derived completeness and $H\\otimes_B^LA_X\\simeq\\nu_X^*D$ with $D$ bounded constructible of finite Tor amplitude. Apply the adic criterion (2)$\\Rightarrow$(1) to $H$, then the reverse integral model comparison to every $H^i(H)$: $H$ is bounded constructible in the general-lfp sense.",
-   "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "lem-sfb-integral-general-lfp-hom-finiteness",
-    "lem-sfb-integral-cohomological-adic-criterion",
-    "lem-sfb-integral-lfp-constant-model-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Integral case: Definition 6.5.1 and Proposition 6.8.11(3); reverse criterion and model comparison remain in this step."
-   }
-  },
-  {
-   "text": "For bounded constructible $E_X$-complexes $K,L$, rationalization supplies integral bounded constructible representatives $K_0,L_0$. The inversion theorem identifies their rationalized internal Hom with $R\\mathcal Hom_{E_X}(K,L)$. Step 2 and preservation under integral-to-rational scalar extension show that this object is bounded constructible.",
-   "uses": [
-    "def-sfb-rationalization-equivalence",
-    "lem-sfb-integral-general-lfp-hom-inversion",
-    "lem-sfb-extend-scalars-bounded-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Finite rational case: Proposition 6.8.14(2)."
-   }
-  },
-  {
-   "text": "For closure coefficients, descend $K,L$ to finite fields by the two-colimit theorem and extend to their compositum, preserving constructibility; call them $K_E,L_E$. On Noetherian $X$, adic predicate comparison gives finite scalar models for $K_E$. Constructible internal-Hom continuity then verifies the closure comparison's hypothesis, with small filtered diagrams and a common termwise lower bound. Since $L_E$ is bounded below, that comparison identifies the closure Hom with extension of $R\\mathcal Hom_{E_X}(K_E,L_E)$; step 3 and extension preservation finish.",
-   "uses": [
-    "sk-thm-sfb-qlbar-two-colimit",
-    "lem-sfb-extend-subfield-constructible",
-    "lem-sfb-adic-constructibility-predicate-comparison",
-    "lem-sfb-constructible-internal-hom-continuity",
-    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
-    "lem-sfb-extend-to-qlbar-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Algebraic-closure case: Proposition 6.8.14 and Remark 6.8.15. The rational local-model and continuity assertions are existing nodes, not a new conjunction."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-normed-coefficient-realization",
-  "sk-def-sfb-change-of-scalars",
-  "def-sfb-internal-scalar-tensor-comparison",
-  "sk-def-sfb-derived-tensor-hom",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-sfb-integral-general-lfp-hom-finiteness",
-  "lem-sfb-integral-cohomological-adic-criterion",
-  "lem-sfb-integral-lfp-constant-model-comparison",
-  "def-sfb-rationalization-equivalence",
-  "lem-sfb-integral-general-lfp-hom-inversion",
-  "lem-sfb-extend-scalars-bounded-constructible",
-  "sk-thm-sfb-qlbar-two-colimit",
-  "lem-sfb-extend-subfield-constructible",
-  "lem-sfb-adic-constructibility-predicate-comparison",
-  "lem-sfb-constructible-internal-hom-continuity",
-  "lem-sfb-qlbar-internal-hom-coefficient-comparison",
-  "lem-sfb-extend-to-qlbar-constructible"
+  "lem-sfb-dc-hom-single",
+  "lem-sfb-dc-hom-devissage"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "D4",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Repair assembly: normed coefficient derived transport; complete integral residue witness followed here by reverse adic criterion and lfp comparison; integral inversion and rationalization; finite-field descent and canonical closure comparison. Existing predicate comparison and internal-Hom continuity replace the duplicate rational node."
+  "place": "Remark 6.8.15; isolate the geometric single-sheaf case and perform both finite truncation inductions in Lean."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -186,22 +121,18 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-a21bbffb3 (reviewer sub-agent of L); spot-checked: FIX for one fault (C5/D1). The new node lem-sfb-finite-normed-coefficient-transport duplicates the existing reviewed node lem-sfb-normed-coefficient-realization (Q23, split, Q69 PASS ea1b5673, present in the base and in side-live). That node already states: the isometric embedding E≅E'⊆Q̄_ℓ restricting to closed unit balls, the condensed-ring identifications, and for every scheme exact derived equivalences J whose inverses also preserve cohomological bounds and stratified-lfp bounded constructibility. The only clause it lacks is the RHom comparison, which is formal. Ext along a ring isomorphism is exact, so def-sfb-internal-scalar-tensor-comparison gives μ. RHom is the right adjoint of ⊗^L (sk-def-sfb-derived-tensor-hom), and Yoneda then gives J RHom(K,L)≅RHom(JK,JL). The report's not-duplicate list never compared the node with the realization lemma, and my ddba RETURN, which suggested this node, missed it too. Repair: I dropped the node; the item was its only citer. Step 1 now cites the realization lemma, sk-def-sfb-change-of-scalars, the tensor comparison and sk-def-sfb-derived-tensor-hom, with the Yoneda argument written out. proof_deps is recomputed and split_report has two tool_uses added. The proof is 2421 characters. The note's count still holds: the realization lemma landed at 03:40Z, after note commit 4e02d2fdfc, so preflight counts it, giving 3+1=4. Every old argument has a node as carrier. Both points of the ddba return are repaired: the rational continuity duplicate is gone, and step 4 cites predicate comparison plus constructible continuity. The integral node stops at the complete residue witness, and step 2 applies criterion (2)⇒(1) and the reverse lfp comparison. Steps checked: (2) X is Noetherian, B is the inverse limit, and the witness matches criterion (2) exactly (same completeness notion and Tor wording). (3) rationalization essential surjectivity, then inversion (K_0 general-lfp, L_0 bounded below, Noetherian X), then extend-scalars; no circularity. (4) two-colimit descent, compositum, predicate comparison for E, continuity equal to the closure-comparison hypothesis, L_E bounded below, then extend-to-Q̄. The three kept nodes are true and not duplicates. The witness node uses 099A completeness, Hom reduction at n=1, finite-field Hom finiteness, the pe comparison and flatness over a field. It differs from Q64 residue-controlled-finite-homs, which needs k=F̄_q and uniform bounds. The inversion node is the localization comparison with s=ℓ and stage formula ℓ^{-n}(1⊗h(k)). In the closure comparison the F⊇E form a small filtered cofinal set, F_X is finite free, and the colimit is T. Edge cases tested: K=0, L=0, X empty, E=Q_ℓ, F=E, torsion R/t^n. There is no cycle, nothing cited is on the dropped list, the statement is byte-identical and live is not superseded. Sources read: the blueprint lem-sfb-dc-hom-preserves (order 1788), and Bhatt–Scholze Def 6.8.10, Prop 6.8.11(3), Lemmas 6.8.12–13, Prop 6.8.14 and Rem 6.8.15 (pp. 60–62). No SGA citation is used.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "A4",
+  "reviewer": "C-46b2a",
+  "group": "J7",
   "result": "pass",
-  "landing": "20261021T013334-L-2287154",
+  "landing": "20261025T101203-L-3669421",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "note": "independent cc review: boundedConstructible_rightDerivedLowerStar_obj proof (devissage + triangulated inverse image) against lem-sfb-dc-lower-star-preserves node and the two new single-sheaf nodes/modules; removed plain imports against unit sk-prop-open-coefficients (realized empty) and 4 direct importers compiled with the delivered modules",
   "sorry_before": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
-   "AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible"
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj"
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
-   "AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible"
-  ]
+  "sorry_after": []
  },
  "split_report": {
   "date": "2026-10-21",
@@ -290,5 +221,16 @@
   "lem-sfb-normed-coefficient-realization",
   "def-sfb-internal-scalar-tensor-comparison"
  ],
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

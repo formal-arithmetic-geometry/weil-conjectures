@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-principal-union-restriction-kernel-localization",
+ "kind": "statement",
+ "title": "Restriction kernels on a finite principal-open union commute with principal localization",
+ "statement": "Let $A$ be a commutative ring, $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum], $n\\geq0$, and $f_1,\\ldots,f_n\\in A$. Write $A_h=A[1/h]$ [def-weil-ring-localization-away] and $D(h)=\\{\\mathfrak p\\in\\operatorname{Spec}A:h\\notin\\mathfrak p\\}$, and put $U=\\bigcup_{i=1}^nD(f_i)$. Let $K=\\{a\\in A:\\text{the image of }a\\text{ in }A_{f_i}\\text{ is zero for every }i\\}$. For every $g\\in A$, under the section identification $\\mathcal O_X(D(g))\\cong A_g$ induced by restriction from $\\mathcal O_X(X)=A$ [lem-weil-pbc-affine-open-section-vanishing-prime](b) (applied to the affine open $X$), one has the equality of subsets of $A_g$ $$\\ker\\bigl(\\mathcal O_X(D(g))\\longrightarrow\\mathcal O_X(D(g)\\cap U)\\bigr)=\\{a/g^r:a\\in K,\\ r\\geq0\\}.$$",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+  "place": "Morphisms Tag 056C (example-scheme-theoretic-closure), the ideal I=Ker(A to product A_fi) on principal affine restrictions; Schemes Tag 01HV (lemma-spec-sheaves), principal-open section and restriction identifications. The denominator calculation realizing this implicit compatibility is written in the worker report."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "proof": [
+  {
+   "text": "Put $V=D(g)\\cap U$ and $V_i=D(g)\\cap D(f_i)$, so $V=\\bigcup_iV_i$. The structure sheaf in [def-weil-affine-spectrum] satisfies the sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology](1) on the site of open subsets with open coverings. Thus a section on $V$ is zero if and only if all its restrictions to $V_i$ are zero: the section and the zero section have the same image in the product, and an equalizer map is injective. This applies also to the empty covering of the empty open.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 006T (definition-sheaf), uniqueness in the sheaf axiom, including the empty covering"
+   }
+  },
+  {
+   "text": "Write an arbitrary section on $D(g)$ as $z=a/g^r$ using [lem-weil-pbc-affine-open-section-vanishing-prime](b) and [def-weil-ring-localization-away]. Fix $i$, and write $a_i,g_i$ for the images of $a,g$ in $A_{f_i}=\\mathcal O_X(D(f_i))$. The basic open of $g_i$ in $D(f_i)$ is $V_i$: restricting a section does not change its germ at a point, so the unit-germ criterion of [lem-weil-pbc-basic-open-function](a) gives this equality. Apply [lem-weil-pbc-affine-open-section-vanishing-prime](b) to the affine open $D(f_i)$ and its section $g_i$. Its restriction ring on $V_i$ is $(A_{f_i})_{g_i}$, with the identification induced by restriction. Functoriality of restriction therefore sends $z$ to the image of $a_i$ times the inverse of the image of $g_i^r$: both routes send global $a,g$ to their restrictions, and ring maps preserve inverses of units. This value is zero if and only if $a_i/1=0$ in $(A_{f_i})_{g_i}$, since $g_i$ is a unit there. By the fraction equality in [def-weil-ring-localization-away], this holds if and only if $g_i^{e_i}a_i=0$ in $A_{f_i}$ for some $e_i\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-basic-open-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), clauses (3) and (5); Tag 01I3 (lemma-standard-open-affine). Fraction equality: algebra.tex, Tag 00CO (definition-localization) and preceding construction"
+   }
+  },
+  {
+   "text": "Suppose $z$ is in the restriction kernel. Steps 1--2 supply an exponent $e_i$ for every $i$. Take $N=\\max(\\{0\\}\\cup\\{e_i:1\\leq i\\leq n\\})$ and $b=g^Na\\in A$. In $A_{f_i}$ its image is $g_i^{N-e_i}(g_i^{e_i}a_i)=0$, hence $b\\in K$. In $A_g$ the fraction identity of [def-weil-ring-localization-away] gives $a/g^r=b/g^{r+N}$: the cross products $ag^{r+N}$ and $(g^Na)g^r$ are equal already in $A$. This proves inclusion in the displayed right-hand set. If $n=0$, take $N=0$; then $K=A$ and the same argument applies.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056C (example-scheme-theoretic-closure), finite principal-open kernel; explicit common-exponent calculation using algebra.tex, Tag 00CO (definition-localization)"
+   }
+  },
+  {
+   "text": "Conversely let $b\\in K$ and $s\\geq0$. Its image in each $A_{f_i}$ is zero, so Step 2, now with numerator $b$ and denominator exponent $s$, shows that $b/g^s$ restricts to zero on every $V_i$. Step 1 gives zero on $V$ itself. This proves the reverse inclusion. The zero ring and nilpotent $g$ cause no exception: the fraction relation of [def-weil-ring-localization-away] and sheaf uniqueness hold for the zero ring of sections on an empty open as well.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056C (example-scheme-theoretic-closure), finite principal-open kernel; sheaves.tex Tag 006T (definition-sheaf) and algebra.tex Tag 00CO (definition-localization)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-basic-open-function"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex; literature/stacks-project/sheaves.tex",
+  "place": "Explicit denominator proof of the principal-restriction compatibility implicit in Tag 056C, using Tags 01HV, 01I3, 00CO and 006T; the source does not spell out the common-exponent calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ker.*(basicOpen|[Ll]ocal|[Rr]estrict)|([Ll]ocal|[Rr]estrict).*ker|toBasicOpen_injective",
+   "results": "{\"t\": \"2026-10-22T06:46:59Z\", \"tool\": \"grep\", \"query\": \"ker.*(basicOpen|[Ll]ocal|[Rr]estrict)|([Ll]ocal|[Rr]estrict).*ker|toBasicOpen_injective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"2a4890e21ff654e9\"} Read Scheme.Hom.ker_apply (Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702), its proof through line 730, ker_morphismRestrict_ideal at line 816, and the returned types. These concern a quasi-compact scheme morphism and its ideal-sheaf kernel. Identifying the finite product-localization kernel with the open-immersion kernel and obtaining the displayed fractions requires the finite-cover/sheaf and denominator arguments, so this is not a one-line specialization. PrimeSpectrum.vanishingIdeal_union concerns radical set-theoretic vanishing, not vanishing of sections in a possibly nonreduced ring. The StructureSheaf.toBasicOpen_injective Loogle name was unknown; the valid Scheme.Hom.ker_apply query was run instead.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ideal of functions vanishing on a finite union of basic open subsets of an affine scheme localizes to the ideal of sections vanishing on that union intersected with another basic open",
+   "results": "{\"t\": \"2026-10-22T06:46:59Z\", \"tool\": \"leansearch\", \"query\": \"The ideal of functions vanishing on a finite union of basic open subsets of an affine scheme localizes to the ideal of sections vanishing on that union intersected with another basic open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"PrimeSpectrum.vanishingIdeal_union\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.basicOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal\", \"AlgebraicGeometry.Scheme.zeroLocus_inf\"], \"digest\": \"04dc8dbf070991a5\"} Read Scheme.Hom.ker_apply (Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702), its proof through line 730, ker_morphismRestrict_ideal at line 816, and the returned types. These concern a quasi-compact scheme morphism and its ideal-sheaf kernel. Identifying the finite product-localization kernel with the open-immersion kernel and obtaining the displayed fractions requires the finite-cover/sheaf and denominator arguments, so this is not a one-line specialization. PrimeSpectrum.vanishingIdeal_union concerns radical set-theoretic vanishing, not vanishing of sections in a possibly nonreduced ring. The StructureSheaf.toBasicOpen_injective Loogle name was unknown; the valid Scheme.Hom.ker_apply query was run instead.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.StructureSheaf.toBasicOpen_injective",
+   "results": "{\"t\": \"2026-10-22T06:46:59Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.StructureSheaf.toBasicOpen_injective'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read Scheme.Hom.ker_apply (Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702), its proof through line 730, ker_morphismRestrict_ideal at line 816, and the returned types. These concern a quasi-compact scheme morphism and its ideal-sheaf kernel. Identifying the finite product-localization kernel with the open-immersion kernel and obtaining the displayed fractions requires the finite-cover/sheaf and denominator arguments, so this is not a one-line specialization. PrimeSpectrum.vanishingIdeal_union concerns radical set-theoretic vanishing, not vanishing of sections in a possibly nonreduced ring. The StructureSheaf.toBasicOpen_injective Loogle name was unknown; the valid Scheme.Hom.ker_apply query was run instead.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite union U of principal opens in Spec A, the kernel of restriction from sections on D(g) to D(g) intersect U is the localization at g of the kernel of A to the product of A localized at the defining elements of U",
+   "results": "{\"t\": \"2026-10-22T06:47:10Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite union U of principal opens in Spec A, the kernel of restriction from sections on D(g) to D(g) intersect U is the localization at g of the kernel of A to the product of A localized at the defining elements of U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply\", \"Algebra.Generators.comp_localizationAway_ker\", \"AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp\", \"AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"Algebra.Generators.sq_ker_comp_le_ker_compLocalizationAwayAlgHom\", \"IsLocalization.ker_map\"], \"digest\": \"c0f61e9ece8f8e64\"} Read Scheme.Hom.ker_apply (Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702), its proof through line 730, ker_morphismRestrict_ideal at line 816, and the returned types. These concern a quasi-compact scheme morphism and its ideal-sheaf kernel. Identifying the finite product-localization kernel with the open-immersion kernel and obtaining the displayed fractions requires the finite-cover/sheaf and denominator arguments, so this is not a one-line specialization. PrimeSpectrum.vanishingIdeal_union concerns radical set-theoretic vanishing, not vanishing of sections in a possibly nonreduced ring. The StructureSheaf.toBasicOpen_injective Loogle name was unknown; the valid Scheme.Hom.ker_apply query was run instead.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.ker_apply",
+   "results": "{\"t\": \"2026-10-22T06:48:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.ker_apply\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ker_apply\"], \"digest\": \"5b6ea27c1323beac\"} Read Scheme.Hom.ker_apply (Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702), its proof through line 730, ker_morphismRestrict_ideal at line 816, and the returned types. These concern a quasi-compact scheme morphism and its ideal-sheaf kernel. Identifying the finite product-localization kernel with the open-immersion kernel and obtaining the displayed fractions requires the finite-cover/sheaf and denominator arguments, so this is not a one-line specialization. PrimeSpectrum.vanishingIdeal_union concerns radical set-theoretic vanishing, not vanishing of sections in a possibly nonreduced ring. The StructureSheaf.toBasicOpen_injective Loogle name was unknown; the valid Scheme.Hom.ker_apply query was run instead.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite union of principal opens U in Spec A, the kernel of restriction from sections on D(g) to sections on D(g) intersect U consists of fractions a/g^r with a vanishing in each A localized at f_i",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T23:45:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite union of principal opens U in Spec A, the kernel of restriction from sections on D(g) to sections on D(g) intersect U consists of fractions a/g^r with a vanishing in each A localized at f_i\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal\", \"ModuleCat.Tilde.sectionsSubmodule\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\", \"AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\"], \"digest\": \"ef228e3de4295a07\"} Read Hom.ker_apply at Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702-730, ker_morphismRestrict_ideal at 816-822, IdealSheafData.map_ideal_basicOpen at 69-71, IsAffineOpen.isLocalization_basicOpen at Mathlib/AlgebraicGeometry/AffineScheme.lean:673-682, and the affine/compact annihilation results at Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:250-279. They supply ingredients but not the finite-cover kernel expressed as fractions with numerator in K; identifying K and proving the two inclusions still requires the displayed argument. PrimeSpectrum zero loci concern set-theoretic vanishing, not vanishing in localizations over a nonreduced ring. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.ker_apply",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T23:45:55Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.ker_apply\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ker_apply\"], \"digest\": \"5b6ea27c1323beac\"} Read Hom.ker_apply at Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702-730, ker_morphismRestrict_ideal at 816-822, IdealSheafData.map_ideal_basicOpen at 69-71, IsAffineOpen.isLocalization_basicOpen at Mathlib/AlgebraicGeometry/AffineScheme.lean:673-682, and the affine/compact annihilation results at Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:250-279. They supply ingredients but not the finite-cover kernel expressed as fractions with numerator in K; identifying K and proving the two inclusions still requires the displayed argument. PrimeSpectrum zero loci concern set-theoretic vanishing, not vanishing in localizations over a nonreduced ring. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_apply|ker_morphismRestrict_ideal|isLocalization_basicOpen",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T23:45:56Z\", \"tool\": \"grep\", \"query\": \"ker_apply|ker_morphismRestrict_ideal|isLocalization_basicOpen\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\"], \"digest\": \"466e57998abae69d\"} Read Hom.ker_apply at Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702-730, ker_morphismRestrict_ideal at 816-822, IdealSheafData.map_ideal_basicOpen at 69-71, IsAffineOpen.isLocalization_basicOpen at Mathlib/AlgebraicGeometry/AffineScheme.lean:673-682, and the affine/compact annihilation results at Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:250-279. They supply ingredients but not the finite-cover kernel expressed as fractions with numerator in K; identifying K and proving the two inclusions still requires the displayed argument. PrimeSpectrum zero loci concern set-theoretic vanishing, not vanishing in localizations over a nonreduced ring. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ideal of functions zero on a finite union of principal opens commutes with localization at another element of the ring",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T23:45:56Z\", \"tool\": \"leansearch\", \"query\": \"The ideal of functions zero on a finite union of principal opens commutes with localization at another element of the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isLocalization_away_iff_atPrime_of_basicOpen_eq_singleton\", \"PrimeSpectrum.zeroLocus_union\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_ideal_basicOpen\", \"FractionalIdeal.extended_zero\", \"PrimeSpectrum.zeroLocus_mul\", \"PrimeSpectrum.zeroLocus_bUnion\", \"AlgebraicGeometry.Γ_restrict_isLocalization\"], \"digest\": \"757767e830daaf46\"} Read Hom.ker_apply at Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702-730, ker_morphismRestrict_ideal at 816-822, IdealSheafData.map_ideal_basicOpen at 69-71, IsAffineOpen.isLocalization_basicOpen at Mathlib/AlgebraicGeometry/AffineScheme.lean:673-682, and the affine/compact annihilation results at Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:250-279. They supply ingredients but not the finite-cover kernel expressed as fractions with numerator in K; identifying K and proving the two inclusions still requires the displayed argument. PrimeSpectrum zero loci concern set-theoretic vanishing, not vanishing in localizations over a nonreduced ring. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero|normalize_finite_fraction_representation|map_ideal_basicOpen",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T23:47:11Z\", \"tool\": \"grep\", \"query\": \"exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero|normalize_finite_fraction_representation|map_ideal_basicOpen\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\"], \"digest\": \"4c24493113ee6a8e\"} Read Hom.ker_apply at Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702-730, ker_morphismRestrict_ideal at 816-822, IdealSheafData.map_ideal_basicOpen at 69-71, IsAffineOpen.isLocalization_basicOpen at Mathlib/AlgebraicGeometry/AffineScheme.lean:673-682, and the affine/compact annihilation results at Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:250-279. They supply ingredients but not the finite-cover kernel expressed as fractions with numerator in K; identifying K and proving the two inclusions still requires the displayed argument. PrimeSpectrum zero loci concern set-theoretic vanishing, not vanishing in localizations over a nonreduced ring. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section on a finite union of affine principal opens that vanishes after inverting g is annihilated by one common power of g, hence localized restriction kernels are fractions with numerators in the global kernel",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T23:47:12Z\", \"tool\": \"leanfinder\", \"query\": \"A section on a finite union of affine principal opens that vanishes after inverting g is annihilated by one common power of g, hence localized restriction kernels are fractions with numerators in the global kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"ModuleCat.Tilde.sectionsSubmodule\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\"], \"digest\": \"4ca65de8d376d0dd\"} Read Hom.ker_apply at Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:702-730, ker_morphismRestrict_ideal at 816-822, IdealSheafData.map_ideal_basicOpen at 69-71, IsAffineOpen.isLocalization_basicOpen at Mathlib/AlgebraicGeometry/AffineScheme.lean:673-682, and the affine/compact annihilation results at Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:250-279. They supply ingredients but not the finite-cover kernel expressed as fractions with numerator in K; identifying K and proving the two inclusions still requires the displayed argument. PrimeSpectrum zero loci concern set-theoretic vanishing, not vanishing in localizations over a nonreduced ring. No exact or one-line match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-schematic-density-criterion",
+  "date": "2026-10-22",
+  "group": "Q105"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Affine algebra calculation of Tag 0573 in the Tag 0578 generic-fibre input below lem-trf-local-term-locality: the principal-open restriction and common-denominator arguments underlying Tags 056C and 01RE, formerly Steps 3--5 of lem-trf-affine-schematic-density-criterion.",
+   "via": [
+    "lem-trf-affine-schematic-density-criterion",
+    "lem-trf-schematic-density-generic-fibre-open",
+    "lem-trf-generic-fibre-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-principal-union-restriction-kernel-localization",
+  "worker": "stage1",
+  "summary": "Q84: unchanged statement; proved both inclusions via the sheaf axiom, affine basic-open restriction localizations, the explicit zero-fraction relation, and a finite maximum of exponents. No new nodes: the common-exponent calculation is elementary from the existing localization definition. Checked empty covers, zero rings, nilpotents and zero divisors; searched the live Lean source, DAG, whole blueprint and Mathlib. All citations use statements, not proofs.",
+  "blueprint": "The affine Tag 056C restriction-kernel calculation in the descendant chain of lem-trf-local-term-locality: the item realizes the principal-open compatibility formerly used in Steps 3--5 of lem-trf-affine-schematic-density-criterion. The latest local-term blueprint proof has no direct affine calculation; this is a subordinate algebraic tool and changes no unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-e78e4c1bc",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-e78e4c1bc (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with the item and the report, and no new nodes. There is no repair note, so the re-split rule does not apply; the delivery gives a statement-only item its first proof. The statement is unchanged and true, and it agrees with Stacks Tag 056C (morphisms.tex:1088, example-scheme-theoretic-closure; the kernel I=Ker(A→∏A_{f_i}) is the item's K) and Tag 01HV (schemes.tex:692, lemma-spec-sheaves (3) and (5)). The section identification is induced by restriction, which is what the parent affine-schematic-density-criterion needs in its Steps 2 and 3. I read every cited statement. Step 1: sheaf uniqueness, an instance of the equalizer definition in def-weil-pbc-sites-and-cohomology (1), including the empty cover. Step 2: affine-open-section-vanishing-prime (b) on U=X and on U=D(f_i); basic-open-function (a) gives that the basic open of g_i inside D(f_i) is D(g)∩D(f_i); restriction is functorial; the localization zero criterion gives g_i^{e_i}a_i=0. Step 3: with N=max e_i, g^N a lies in K, and the cross products are equal in A, so a/g^r=g^N a/g^{r+N}. Step 4: the converse follows from Steps 2 and 1. Every use is in a cited statement; the elementary flags are justified. Edge cases tested: n=0; A=0; g or f_i nilpotent; f_i a unit; k[ε]/ε²; k[x,y]/(xy) with f=x, g=y. Duplicate search over the DAG (056C, finite principal-union kernels; the supported-sections-quasi-coherent and generic-open-principal-multiplication nodes are different statements) found nothing. The Mathlib searches are recorded. No SGA source is cited. All off-unit citations are Mathlib leaves or definitions, so there is no tool_use to accept. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrincipalUnionRestrictionKernelLocalization",
+  "declaration": "AlgebraicGeometry.principalUnion_restriction_kernel_localization",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalUnionRestrictionKernelLocalization.lean",
+  "statement": "theorem principalUnion_restriction_kernel_localization (A : Type u) [CommRing A] (n : ℕ) (f : Fin n → A) (g : A) : {z : Localization.Away g | (Spec (CommRingCat.of A)).presheaf.map (homOfLE (inf_le_left : PrimeSpectrum.basicOpen g ⊓ (⨆ i : Fin n, PrimeSpectrum.basicOpen (f i)) ≤ PrimeSpectrum.basicOpen g)).op ((IsLocalization.algEquiv (Submonoid.powers g) (Localization.Away g) ((Spec.structureSheaf A).obj.obj (op (PrimeSpectrum.basicOpen g)))) z) = 0} = {z : Localization.Away g | ∃ a : A, (∀ i : Fin n, algebraMap A (Localization.Away (f i)) a = 0) ∧ ∃ r : ℕ, z = Localization.mk (S := Submonoid.powers g) a ⟨g ^ r, ⟨r, rfl⟩⟩}",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a8e887ab9",
+  "group": "Q17",
+  "result": "fix",
+  "note": "Lean statement exact against node: arbitrary CommRing A (universe u), Fin n family (n=0 ok), U = ⨆ basicOpen (f i), K via algebraMap to Away (f i) = 0, restriction D(g)→D(g)⊓U via presheaf.map homOfLE inf_le_left, kernel transported by IsLocalization.algEquiv using Mathlib's canonical openAlgebra/to_basicOpen (restriction-induced, dep clause (b)), RHS Localization.mk a ⟨g^r,_⟩, Set equality; lean.statement verbatim; docstrings/source/blueprint present; sorry only; no H4 duplicate; edge cases n=0, A=0, nilpotent g/f_i, unit f_i, k[x,y]/(xy) fine. Sole fault H11: 'Second reading by Q17' is a self-audit ('No separate worker review was performed') → fixes/<item>.report.md = worker report verbatim + clause-by-clause second reading. No Lean changed, no compile."
+ }
+}

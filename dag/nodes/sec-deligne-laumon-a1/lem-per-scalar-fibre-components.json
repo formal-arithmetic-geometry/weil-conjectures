@@ -1,0 +1,153 @@
+{
+ "id": "lem-per-scalar-fibre-components",
+ "kind": "statement",
+ "title": "Objectwise normalized scalar fibre construction",
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, and a coherent continuous rational realization family $R$. Use the separated finite-type $k$-bases, their actual localized rational hearts and scalar functors, normalized geometric fibres and pullback data of [def-per-adic-fibre-comparison-data], [def-per-adic-fibre-coherence-data], [def-per-adic-normalized-fibre-data] and [lem-per-adic-normalized-fibre-pullback], and the actual finite scalar quotients and reduction-cone maps of [def-zl-normalized-adic-fibre-limit-data]. There exist a normalized fibre family $\\omega$ and its normalized pullback $\\alpha$ together with objectwise scalar components d satisfying ScalarFibreComponents [def-per-scalar-fibre-component-data]. Thus each component has the specified germ, quotient, reduction-cone and pure-tensor formulas, but no naturality or coherence in scalar embeddings is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4),(6), Proposition 6.8.14, Remark 6.8.15; scalar fibre construction and tensor normalization"
+ },
+ "stmt_deps": [
+  "def-per-adic-fibre-comparison-data",
+  "def-per-adic-fibre-coherence-data",
+  "def-zl-normalized-adic-fibre-limit-data",
+  "def-per-adic-normalized-fibre-data",
+  "lem-per-adic-normalized-fibre-pullback",
+  "def-per-scalar-fibre-component-data"
+ ],
+ "proof": [
+  {
+   "text": "Use normalized fibre exactness and its intrinsic local lattice comparisons, together with the normalized pullback construction on these same intrinsic fibres. A completed-system comparison reconstructs the scalar lattice as the actual finite-free integral tensor, and realization scalar comparison fixes its degree-zero derived presentation and chart comparison.",
+   "uses": [
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-per-adic-normalized-fibre-pullback",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-per-rational-realization-scalar-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At quotient exponent m the ramification-ceiling source power already acts by zero. The larger cofinal exponent m used by finiteScalarLevel gives the same unit and tensor quotient. Apply the finite etale stalk scalar theorem, including non-flat quotient maps, and adic tower reconstruction to identify the resulting stalk system with the quotients of the scalar tensor of the original limit.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-pod-adic-tower-reconstruction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source stalk limit is finite free by normalized fibre exactness. In any finite basis the scalar reduction cone is a finite product of the complete target integer-ring cones, hence is limiting even in rank zero. Its inverse gives the integral iso with the prescribed completion-map equation. Localize both uniformizers and balance tensors to get each objectwise component and its local pure-tensor formula. The realization counits and finite germ formulas give the universal presentation formula. Common refinements identify these with the intrinsic fibres.",
+   "uses": [
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-per-rational-realization-scalar-coherence",
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-adic-normalized-fibre-exactness",
+  "lem-per-adic-normalized-fibre-pullback",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-per-rational-realization-scalar-coherence",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pod-adic-tower-reconstruction",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4),(6), Proposition 6.8.14, Remark 6.8.15; scalar fibre construction and tensor normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural geometric fibre scalar comparison for rational l-adic sheaves, compatible with finite free lattice completion and coefficient extension",
+   "results": "8 hits on scalar towers, sheaf scalar actions and adic completion actions; none states the normalized fibre construction, naturality or its specified coherence equations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "12 hits, including extendScalarsId and extendScalarsComp. These supply the module comparison functors, not normalized adic heart fibre comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized geometric fibre functor on a rational constructible heart commutes with finite extension of p-adic coefficient fields",
+   "results": "8 hits on Witt isocrystals, scheme normalization, and Galois limits; no normalized adic scalar-fibre statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Ff]ibre|[Ff]ibre.*tensor|finite.*free.*complet",
+   "results": "0 hits through msearch Mathlib grep. Repository search found only the owning normalized comparison modules and their data.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedFibreScalar",
+  "date": "2026-10-25",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: pullback is exact; scalar node steps 1--4 and objectwise chart independence in step 5.",
+   "via": [
+    "lem-per-adic-normalized-fibre-scalar",
+    "lem-per-adic-normalized-fibre-comparisons",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarFibreComponents",
+  "declaration": "AlgebraicGeometry.Scheme.AdicFibreComparison.scalar_fibre_components",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.scalar_fibre_components"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarFibreComponents.lean",
+  "statement": "theorem scalar_fibre_components :\n    ∃ (ω : Fibres (k := k) l R) (α : NormalizedPullback l R ω),\n      Nonempty (ScalarFibreComponents l R ω)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T143554-L-1053051",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T143554-L-1053051",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

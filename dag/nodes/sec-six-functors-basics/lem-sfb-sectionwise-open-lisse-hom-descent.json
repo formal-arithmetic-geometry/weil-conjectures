@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-sectionwise-open-lisse-hom-descent",
+ "kind": "statement",
+ "title": "Lisse Hom descent from affine coefficient-section restriction",
+ "statement": "Let $X$ be any scheme and $j:V\\hookrightarrow X$ an open immersion [def-pc-scheme, def-weil-open-immersion]. Let $\\Lambda$ be a commutative condensed ring, and put $\\Lambda_Z=p_Z^*\\Lambda$ on the small pro-etale site of every scheme $Z$ [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. Use internal module objects [sk-def-sfb-module-objects] and their restriction to slice sites [def-pur-localized-ringed-site]. Assume that for every affine object $W\\to X$ of this site, writing $W_V=W\\times_XV$, actual coefficient restriction\n$$\\Gamma(W,\\Lambda_X)\\longrightarrow\\Gamma(W_V,\\Lambda_V)$$\nis bijective. Let $M,N$ be lisse $\\Lambda_X$-modules, meaning pro-etale locally finite free, with ranks allowed to vary [def-sfb-lisse-coefficient-module]. Then actual restriction is a bijection\n$$\\operatorname{Hom}_{\\Lambda_X}(M,N)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\Lambda_V}(j^*M,j^*N).$$\nFor any common affine pro-etale trivializing cover $\\{W_i\\to X\\}$ with $M|_{W_i}\\cong\\Lambda_{W_i}^{a_i}$ and $N|_{W_i}\\cong\\Lambda_{W_i}^{b_i}$, the inverse is characterized by entrywise inverse coefficient restriction on the $b_i\\times a_i$ matrix of a morphism. It is independent of the cover and bases, and these local maps agree on all overlap refinements and glue uniquely. Rank zero and the empty scheme are allowed. Moreover, let $f:X'\\to X$ be a scheme morphism, set $V'=X'\\times_XV$, with open immersion $j':V'\\hookrightarrow X'$ and projection $g:V'\\to V$, and assume the same coefficient-section bijection on every affine pro-etale object over $X'$. Let $f^*$, $g^*$, $j'^*$ denote the module pullbacks with their composition isomorphisms [sk-def-sfb-module-pushforward-pullback]. Whenever $f^*M,f^*N$ are lisse, the Hom bijections commute with pullback under the canonical coefficient identifications: for a morphism $u:j^*M\\to j^*N$, with $e$ and $e'$ the respective inverse restriction maps, one has\n$$f^*e(u)=e'(g^*u)$$\nafter the canonical comparisons $j'^*f^*\\cong g^*j^*$. This assertion concerns morphisms between given lisse modules, not extension of objects from $V$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent ringed-site lemma extracted from returned parent proof steps 6–7 and the uniqueness/base-change argument in step 8. Full affine trivialization, matrix extension and overlap gluing argument is retained in the Q12 report; this is not asserted verbatim by the blueprint."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "def-pur-localized-ringed-site",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-coefficient-section-maps",
+  "def-sfb-coefficient-finite-free-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the internal/sectionwise equivalence to regard the modules as module sheaves; it preserves sections and restriction maps identically. The coefficient-localization lemma identifies the site over every pro-etale object $W$ with the slice and identifies $\\Lambda_X(W)$ with $\\Gamma(W,\\Lambda_W)$, compatibly with actual restriction. In particular it applies to $V$ and $W_V$. Module pullback along such an object is slice restriction: in the defining formula $\\Lambda_W\\otimes_{u^{-1}\\Lambda_X}u^{-1}M$, inverse image is restriction and the coefficient map is the specified isomorphism, so $b\\otimes m\\mapsto\\alpha_u^{-1}(b)m$ gives the identification. Thus all subsequent restrictions are the actual maps in the statement.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-coefficient-sections-localization",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ringed-site lemma extracted from returned parent proof steps 6–7 and the uniqueness/base-change argument in step 8. Full affine trivialization, matrix extension and overlap gluing argument is retained in the Q12 report; this is not asserted verbatim by the blueprint."
+   }
+  },
+  {
+   "text": "Choose trivializing covers for $M$ and $N$ from the lisse definition. Pull one cover back to each member of the other and compose the covers, using the site axioms; both modules are free on the resulting common cover $\\{C_k\\to X\\}$. Replace it by the family of all affine open subschemes of all $C_k$. Affine opens form a basis. Source locality of weak etaleness ensures these restrictions remain site objects. For each affine open $U\\subset X$, the covering condition for $\\{C_k\\to X\\}$ already supplies finitely many affine opens $A_j\\subset C_{k_j}$ whose images cover $U$; each $A_j$ itself is a member of the new family, so these same witnesses prove its covering condition. Thus there is a common affine trivializing cover $\\{W_i\\to X\\}$ with finite ranks $a_i,b_i$. For an overlap scheme $P$, its family of all affine opens is likewise a cover: each affine open of $P$ itself supplies a single witness to the finite-affine condition. No assertion that $P$ is affine, and no separation hypothesis, is used.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-affine-opens-basis",
+    "sk-lem-pe-weakly-etale-stability",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT, lemma-basis-affine-opens; site-cover refinement applied to the lisse definition"
+   }
+  },
+  {
+   "text": "On any affine object $T\\to X$ on which both modules have chosen free bases, the free-matrix lemma identifies morphisms with $b\\times a$ matrices over $\\Gamma(T,\\Lambda_T)$. Apply it also on the slice over $T_V$, which need not be affine. The displayed section formula in that lemma, and the coefficient-localization compatibility, show that restricting a morphism restricts each matrix entry by the actual coefficient-section map $r_T$. Thus restriction on these Hom sets is bijective: its inverse replaces every entry $c$ by the unique $r_T^{-1}(c)$. This uses exactly the hypothesis on the affine object $T$, not a hypothesis that $T_V$ is affine. In particular it gives injectivity for any two maps expressed in any fixed bases on $T$.",
+   "uses": [
+    "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "lem-sfb-coefficient-sections-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ringed-site lemma extracted from returned parent proof steps 6–7 and the uniqueness/base-change argument in step 8. Full affine trivialization, matrix extension and overlap gluing argument is retained in the Q12 report; this is not asserted verbatim by the blueprint."
+   }
+  },
+  {
+   "text": "Given $u:j^*M\\to j^*N$, extend its matrix on every $(W_i)_V$ by Step 3, obtaining $e_i:M|_{W_i}\\to N|_{W_i}$. Put $P=W_i\\times_XW_j$. On every affine open $T$ in an affine cover of $P$, the restrictions of both $e_i$ and $e_j$ are maps between the same two free modules. Express both in the bases inherited from $W_i$. Their restrictions to $T_V$ are both the restriction of $u$, regardless of the bases originally used to construct $e_j$. Injectivity from Step 3 gives equality on $T$. The Hom-sheaf separatedness gives equality on $P$. The Hom-sheaf gluing property on $\\{W_i\\to X\\}$ now gives a unique global map $e(u)$ restricting to $e_i$. Its restriction to $V$ equals $u$, since they agree on the covering $\\{(W_i)_V\\to V\\}$.",
+   "uses": [
+    "lem-pur-sheaf-hom-is-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM, lemma-internal-hom, and its restriction paragraph; Sites Tag 04TQ, lemma-glue-maps"
+   }
+  },
+  {
+   "text": "If $h,k:M\\to N$ have equal restrictions to $V$, Step 3 gives $h|_{W_i}=k|_{W_i}$ for every $i$. Separatedness of the Hom sheaf gives $h=k$. Together with Step 4 this proves the claimed bijection. Any other cover or bases produce an extension with the same restriction, so injectivity identifies it with $e(u)$. On any affine overlap refinement Step 3 likewise identifies the two local maps, and equality persists under all further restrictions. This proves the asserted characterization, independence and agreement on refinements without a comparison formula for transition matrices.",
+   "uses": [
+    "lem-pur-sheaf-hom-is-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM, lemma-internal-hom: separatedness and localization"
+   }
+  },
+  {
+   "text": "For the Cartesian square in the statement apply Steps 1--5 on $X'$; their assumptions are exactly the stipulated coefficient bijections and lisseness of $f^*M,f^*N$. Let $c_M:j'^*f^*M\\xrightarrow{\\sim}g^*j^*M$ and $c_N$ be the comparisons obtained from the module composition isomorphisms and $f\\circ j'=j\\circ g$. Naturality gives $c_N\\circ j'^*(f^*e(u))=g^*(j^*e(u))\\circ c_M=g^*u\\circ c_M$. By definition $e'(g^*u)$ has precisely this restriction, with the same comparisons. The injectivity already proved on $X'$ therefore gives $f^*e(u)=e'(g^*u)$. This verifies the actual comparison square, rather than claiming entrywise compatibility for a pullback chart which might not be affine.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ringed-site lemma extracted from returned parent proof steps 6–7 and the uniqueness/base-change argument in step 8. Full affine trivialization, matrix extension and overlap gluing argument is retained in the Q12 report; this is not asserted verbatim by the blueprint."
+   }
+  },
+  {
+   "text": "If either local rank is zero, the free-matrix lemma gives a singleton Hom set and the entrywise inverse is the unique empty matrix. For the empty scheme the empty covering and the Hom sheaf axiom give a singleton set of global morphisms. All gluing and uniqueness arguments above therefore include these cases. For the identity open every $r_T$ is the identity, so the constructed inverse is the identity.",
+   "uses": [
+    "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "lem-pur-sheaf-hom-is-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ringed-site lemma extracted from returned parent proof steps 6–7 and the uniqueness/base-change argument in step 8. Full affine trivialization, matrix extension and overlap gluing argument is retained in the Q12 report; this is not asserted verbatim by the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pur-sheaf-hom-is-sheaf",
+  "lem-sfb-coefficient-sections-localization",
+  "lem-sfb-ringed-site-free-matrix-scalar-extension",
+  "lem-weil-pbc-affine-opens-basis",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-lem-pe-weakly-etale-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), supplied-root lisse morphisms: explicit affine matrix extension and overlap descent, using Stacks Tags 01IT, 03EM, 04TQ and 04IX for the general tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If coefficient ring sections restrict bijectively on every affine pro etale chart of an open immersion, morphisms between finite locally free coefficient sheaves extend uniquely",
+   "results": "8 hits: AlgebraicGeometry.Spec.basicOpen_hom_ext, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.AffineSpace.hom_ext, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.AffineSpace.hom_ext_iff, StandardEtalePair.hom_ext_iff, StandardEtalePair.hom_ext",
+   "date": "2026-10-22",
+   "verdict": "no match: forgetting the sheaf property, restricting scalars and open pushforward do not give restriction full faithfulness on lisse modules from section bijections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"FullyFaithful\"",
+   "results": "3 hits: SheafOfModules.fullyFaithfulForget, SheafOfModules.fullyFaithfulForget_preimage_val, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules",
+   "date": "2026-10-22",
+   "verdict": "no match: forgetting the sheaf property, restricting scalars and open pushforward do not give restriction full faithfulness on lisse modules from section bijections"
+  },
+  {
+   "tool": "grep",
+   "query": "(fullyFaithful|bijective).*(restrict|Restrict)|(restrict|Restrict).*(fullyFaithful|bijective)",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Subobject.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: forgetting the sheaf property, restricting scalars and open pushforward do not give restriction full faithfulness on lisse modules from section bijections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full faithfulness of restriction of finite locally free sheaves of modules when the structure sheaf sections restrict isomorphically on a basis",
+   "results": "8 hits: PresheafOfModules.instFaithfulRestrictScalars, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.restrictScalars, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: forgetting the sheaf property, restricting scalars and open pushforward do not give restriction full faithfulness on lisse modules from section bijections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion whose coefficient sheaf unit is an isomorphism induces a fully faithful restriction functor on locally free module sheaves by extending matrices on a trivializing cover",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.instFullPushforward, SheafOfModules.fullyFaithfulForget, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules, LightCondMod.LocallyConstant.instFullModuleCatFunctor, CondensedMod.LocallyConstant.instFullModuleCatFunctor, PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat, SheafOfModules.map_ιFree_mapFree_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: forgetting the sheaf property, restricting scalars and open pushforward do not give restriction full faithfulness on lisse modules from section bijections"
+  },
+  {
+   "tool": "grep",
+   "query": "(fullyFaithful|bijective).*(restrict|Restrict)|(restrict|Restrict).*(fullyFaithful|bijective)",
+   "results": "25 hits: Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Normal/Defs.lean, Mathlib/FieldTheory/Normal/Defs.lean, Mathlib/FieldTheory/IntermediateField/Basic.lean; digest 2a2af952a7a55993",
+   "date": "2026-10-22",
+   "verdict": "no match: checked candidates concern sheafification on one fixed site, final-functor sections, restriction of scalars, or forgetting the sheaf condition; none gives open restriction on locally free modules under the stated coefficient hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full faithfulness of open restriction on locally free module sheaves from bijections of coefficient sections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrict_obj, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict, PresheafOfModules.instFaithfulRestrictScalars, ModuleCat.Tilde.toOpen, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; digest 5735571da33e485d",
+   "date": "2026-10-22",
+   "verdict": "no match: checked candidates concern sheafification on one fixed site, final-functor sections, restriction of scalars, or forgetting the sheaf condition; none gives open restriction on locally free modules under the stated coefficient hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrict\", \"FullyFaithful\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: checked candidates concern sheafification on one fixed site, final-functor sections, restriction of scalars, or forgetting the sheaf condition; none gives open restriction on locally free modules under the stated coefficient hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of morphisms between locally finite free sheaves is bijective when coefficient sections restrict bijectively on every affine chart",
+   "results": "8 hits: PresheafOfModules.homEquivOfIsLocallyBijective, PresheafOfModules.homEquivOfIsLocallyBijective_apply, SheafOfModules.bijective_pushforwardSections, CategoryTheory.Sheaf.isLocallyBijective_iff_isIso, AlgebraicGeometry.instIsZariskiLocalAtTargetStalkwiseBijectiveCoeRingHom, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply, TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app; digest 5cda41ab846a745f",
+   "date": "2026-10-22",
+   "verdict": "no match: checked candidates concern sheafification on one fixed site, final-functor sections, restriction of scalars, or forgetting the sheaf condition; none gives open restriction on locally free modules under the stated coefficient hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ringed topos open localization with isomorphic coefficient sections is fully faithful on finite locally free modules by matrix gluing",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, SheafOfModules.fullyFaithfulForget, LightCondMod.LocallyConstant.instFullModuleCatFunctor, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules, CondensedMod.LocallyConstant.instFullModuleCatFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedMod.LocallyConstant.fullyFaithfulFunctor, SheafOfModules.instFullPresheafOfModulesValRingCatForget; digest 515d524b6e4d8320",
+   "date": "2026-10-22",
+   "verdict": "no match: checked candidates concern sheafification on one fixed site, final-functor sections, restriction of scalars, or forgetting the sheaf condition; none gives open restriction on locally free modules under the stated coefficient hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-tower-lisse-morphism-extension",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images paragraph (3), supplied-root lisse morphism argument: coefficient-section restriction, local free matrices, affine overlap refinement, gluing, uniqueness, and pullback compatibility. The ancestor command returns None for this inherited created-node chain.",
+   "via": [
+    "lem-sfb-root-tower-lisse-morphism-extension",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-sectionwise-open-lisse-hom-descent",
+  "worker": "stage1",
+  "summary": "Q103: no exact upstream attachment. Reused all ringed-site tools, with no new nodes. Wrote matrix extension, injectivity on arbitrary affine overlap refinements, Hom-sheaf gluing, cover and basis independence, and the explicit naturality square for base change. Statement unchanged; rank-zero and empty cases checked.",
+  "blueprint": "Realizes the inherited supplied-root lisse Hom argument under direct-images paragraph (3). This auxiliary assertion is not verbatim in the blueprint; its inherited from.node is null as confirmed by ancestor. No unit/chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic conversion of internal modules to sectionwise module sheaves, preserving actual sections and restriction; needed to apply the ringed-site tools."
+   },
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "Generic compatibility of actual condensed coefficient maps with slice restriction; it supplies the precise coefficient identification for the matrix argument."
+   },
+   {
+    "node": "def-sfb-lisse-coefficient-module",
+    "why": "Definition of the lisse hypothesis, used only to choose local finite free frames."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic covering base-change and composition axioms for common trivializing covers."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic scheme basis theorem for refining charts and nonaffine overlaps; the unit does not replace this geometric tool."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic source-locality of weak etaleness, used to retain site objects after affine-open refinement."
+   },
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Definition of the site and the finite-affine covering condition, used only for chart refinement."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-is-sheaf",
+    "why": "General ringed-site descent of module morphisms, including separatedness, gluing and relocalization; this does not replace the coefficient-specific matrix extension argument."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Definition of the actual module pullbacks and their natural composition comparisons, used for the final compatibility square."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-coefficient-sections-localization",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-affine-opens-basis",
+  "sk-lem-pe-weakly-etale-stability",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-sheaf-hom-is-sheaf",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-14b0608a6",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-14b0608a6 (reviewer sub-agent of L); spot-checked: Q103 delivers 0 new nodes and leaves the item statement unchanged. Live and side-live are still unsplit with no other run, so the item is not superseded, and no re-split note exists. I read every cited statement and Stacks 01IT/03EM/04TQ/04IX. The claim is true: Hom(M,|U,N|U) and Hom over the slice at U_V are sheaves, and restriction between them is entrywise r_T on every affine object T where M and N are free; such T cover everything. Step 1 identifies j^* with slice restriction via α_j (coefficient-sections-localization). Step 2 refines the composed cover to all affine opens using the original fpqc witnesses, with no affine-overlap claim (E1 checked). Step 3 applies the matrix lemma on the slices at T and T_V, which need only final objects. Step 4 compares e_i and e_j in one basis on affine T ⊂ P, then uses Hom-sheaf separatedness and gluing. Step 5 gives injectivity and independence of cover and bases. Step 6 proves base change from naturality of the composition isomorphisms plus injectivity on X'. Step 7 covers the edge cases. I also tested V=∅, which forces Λ_X=0 so the claim holds, and V=X, rank 0, X=∅ and Λ=0. The citer root-tower step 4 supplies the extra base-change hypotheses. The rg -L duplicate search found only different results: lisse-morphism-rigidity and normalized-open-refinement-coherence. I accept the declared tool_uses for lem-pur-sheaf-hom-is-sheaf, lem-sfb-coefficient-sections-localization and the definitions. No SGA citation. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionwiseOpenLisseHomDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.sfbSectionwiseOpenLisseHomDescent",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfbOpenHomCoverObject",
+   "AlgebraicGeometry.ProEtale.sfbOpenHomCoefficientRestriction",
+   "AlgebraicGeometry.ProEtale.sfbOpenHomMatrixEntry",
+   "AlgebraicGeometry.ProEtale.sfbOpenHomPullbackComparison",
+   "AlgebraicGeometry.ProEtale.sfbOpenHomPullback",
+   "AlgebraicGeometry.ProEtale.sfbOpenHomCompositePullback",
+   "AlgebraicGeometry.ProEtale.sfbSectionwiseOpenLisseHomDescent"
+  ],
+  "file": "lean/Sheaf/Paper/SectionwiseOpenLisseHomDescent.lean",
+  "statement": "theorem sfbSectionwiseOpenLisseHomDescent (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {X V : Scheme.{u}} (j : V ⟶ X) [IsOpenImmersion j] (hsec : ∀ W : X.ProEt, IsAffine W.left → Function.Bijective (sfbOpenHomCoefficientRestriction Λ j W).hom) (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (hM : IsLisseCoefficientModule Λ M) (hN : IsLisseCoefficientModule Λ N) : ∃ e : (M ⟶ N) ≃ ((CondensedRing.upperStar Λ j).obj M ⟶ (CondensedRing.upperStar Λ j).obj N), (∀ h : M ⟶ N, e h = (CondensedRing.upperStar Λ j).map h) ∧ (∀ (C : Scheme.Cover.{v} Scheme.proetalePrecoverage X) (hC : ∀ i : C.I₀, IsAffine (C.X i)) (a b : C.I₀ → ℕ) (α : ∀ i : C.I₀, (CondensedRing.upperStar Λ (C.f i)).obj M ≅ Mod.finiteFree (condensedRingObj Λ (C.X i)) (a i)) (β : ∀ i : C.I₀, (CondensedRing.upperStar Λ (C.f i)).obj N ≅ Mod.finiteFree (condensedRingObj Λ (C.X i)) (b i)) (u : (CondensedRing.upperStar Λ j).obj M ⟶ (CondensedRing.upperStar Λ j).obj N), (∀ (i : C.I₀) (row : Fin (b i)) (col : Fin (a i)), sfbOpenHomMatrixEntry Λ (C.X i) ((α i).inv ≫ (CondensedRing.upperStar Λ (C.f i)).map (e.symm u) ≫ (β i).hom) row col = (sfbCoefficientSectionMap Λ (sfbOpenHomCoverObject C i)).hom ((Equiv.ofBijective (sfbCoefficientSectionMap Λ (sfbOpenHomCoverObject C i) ≫ sfbCoefficientGlobalMap Λ (pullback.fst (C.f i) j)).hom (hsec (sfbOpenHomCoverObject C i) (hC i))).symm (sfbOpenHomMatrixEntry Λ (pullback (C.f i) j) (((CondensedRing.upperStar Λ (pullback.fst (C.f i) j)).mapIso (α i) ≪≫ coefficientHeartFiniteFreePullbackIso Λ (pullback.fst (C.f i) j) (a i)).inv ≫ sfbOpenHomPullback Λ (C.f i) j u ≫ ((CondensedRing.upperStar Λ (pullback.fst (C.f i) j)).mapIso (β i) ≪≫ coefficientHeartFiniteFreePullbackIso Λ (pullback.fst (C.f i) j) (b i)).hom) row col))) ∧ (∀ (i k : C.I₀) (T : X.ProEt) (q : T ⟶ sfbOpenHomCoverObject C i) (r : T ⟶ sfbOpenHomCoverObject C k), HEq (sfbOpenHomCompositePullback Λ (C.f i) q.left ((CondensedRing.upperStar Λ (C.f i)).map (e.symm u))) (sfbOpenHomCompositePullback Λ (C.f k) r.left ((CondensedRing.upperStar Λ (C.f k)).map (e.symm u)))) ∧ (∀ k : ∀ i : C.I₀, (CondensedRing.upperStar Λ (C.f i)).obj M ⟶ (CondensedRing.upperStar Λ (C.f i)).obj N, (∀ i : C.I₀, (CondensedRing.upperStar Λ (pullback.fst (C.f i) j)).map (k i) = sfbOpenHomPullback Λ (C.f i) j u) → ∃! h : M ⟶ N, ∀ i : C.I₀, (CondensedRing.upperStar Λ (C.f i)).map h = k i)) ∧ ∀ (Y : Scheme.{u}) (f : Y ⟶ X), (∀ W : Y.ProEt, IsAffine W.left → Function.Bijective (sfbOpenHomCoefficientRestriction Λ (pullback.fst f j) W).hom) → IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ f).obj M) → IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ f).obj N) → ∃ e' : ((CondensedRing.upperStar Λ f).obj M ⟶ (CondensedRing.upperStar Λ f).obj N) ≃ ((CondensedRing.upperStar Λ (pullback.fst f j)).obj ((CondensedRing.upperStar Λ f).obj M) ⟶ (CondensedRing.upperStar Λ (pullback.fst f j)).obj ((CondensedRing.upperStar Λ f).obj N)), (∀ h : (CondensedRing.upperStar Λ f).obj M ⟶ (CondensedRing.upperStar Λ f).obj N, e' h = (CondensedRing.upperStar Λ (pullback.fst f j)).map h) ∧ ∀ u : (CondensedRing.upperStar Λ j).obj M ⟶ (CondensedRing.upperStar Λ j).obj N, (CondensedRing.upperStar Λ f).map (e.symm u) = e'.symm (sfbOpenHomPullback Λ f j u)",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The equivalence has actual module restriction as its forward map. All affine-cover/basis matrix characterizations, overlap-refinement agreement, unique gluing and the canonical pullback square are included. Two new existing:true definition nodes own the reused coefficient-section maps and finite-free comparison. The two theorem dependencies added by the returned packet are removed from stmt_deps. The original proof_deps, mathematical statement and Lean source are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a1858d54",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Re-delivery after the L return on 0a481d34 (H2: theorem stmt_deps used only for plain defs). The module is byte-identical to the returned head (sha256 374d81b7…), and the node differs only in stmt_deps: lem-sfb-coefficient-sections-localization and lem-sfb-coefficient-heart-curve-lisse-descent are replaced by the new existing:true definition nodes def-sfb-coefficient-section-maps (sfbCoefficientSectionMap, sfbCoefficientGlobalMap, sfbSectionOne) and def-sfb-coefficient-finite-free-pullback (coefficientHeartFiniteFreePullbackIso). Their signatures match the side-live source verbatim, and their bodies are the canonical mate, biproduct and regular comparisons. The used decls are exactly the union of the two declarations lists. No other owner node exists in side-live, and the new nodes' stmt_deps are all definitions. Re-checked the substance: hsec, the pinned forward map, the entrywise inverse (θ(r⁻¹d) = g♯⁻¹d), cover and basis independence, unique gluing, the base-change square, and the edge cases (rank 0, empty X, V = ∅, V = X, Λ = 0). No compile: no file changed, and the worker's compile and dry run are clean. Advisory: the HEq overlap clause is automatic; the free-matrix proof dependency has no Lean binding."
+ }
+}

@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-split-reductive-integral-maximal-bounded",
+ "kind": "statement",
+ "title": "Maximal boundedness of integral points of a split reductive model",
+ "statement": "Let $R$ be a henselian discrete valuation ring [def-sc-discrete-valuation-ring, def-weil-pbc-henselian-terminology] with algebraically closed residue field [def-weil-algebraic-closure], fraction field $L$ and normalized valuation $v:L^\\times\\to\\mathbf Z$, extended by $v(0)=+\\infty$. Let $\\mathcal D$ be a split reductive $R$-group scheme: a smooth affine finite-type group scheme with reductive geometric fibres and a closed subgroup $\\mathcal T\\cong\\mathbf G_{m,R}^{r}$ maximal among tori in each geometric fibre. Group schemes over a ring have multiplication, identity and inverse satisfying the group diagrams of [def-sc-group-scheme], with that ring as base. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme].Over a field, reductive means smooth, geometrically connected, affine of finite type, with no nontrivial smooth connected normal unipotent subgroup after algebraic closure; unipotent means that all geometric points are unipotent matrices in a faithful representation. Here $\\mathbf G_{m,R}=\\operatorname{Spec}R[t,t^{-1}]$ with multiplication of units, and a torus over an algebraically closed field is a finite product of $\\mathbf G_m$. Put $G=\\mathcal D_L$. For an $R$-algebra $S$, write $\\mathcal D(S)$ for morphisms of $R$-schemes $\\operatorname{Spec}S\\to\\mathcal D$, with the group structure induced by multiplication. Regard $\\mathcal D(R)$ as a subgroup of $G(L)$ by generic restriction. Call a subgroup $M\\subseteq G(L)$ bounded if for every regular function $f\\in L[G]$ there exists $n_f\\in\\mathbf Z$ such that $v(f(x))\\geq n_f$ for all $x\\in M$. Then $\\mathcal D(R)$ is bounded, and every bounded subgroup $M$ of $G(L)$ containing $\\mathcal D(R)$ equals $\\mathcal D(R)$. No completeness or local compactness of $L$ is assumed.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://arxiv.org/pdf/math/0405381: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-split-torus-over-ring",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-valuatively-bounded-group-points"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal D=\\operatorname{Spec}A$. The affine-spectrum correspondence [def-weil-affine-spectrum] identifies $R$-points with $R$-algebra maps $A\\to R$. By [lem-weil-pbc-fibre-product-affine-spectra], the fibre product [def-pc-fibre-product] $G=\\mathcal D\\times_R\\operatorname{Spec}L$ is affine with $L[G]=A\\otimes_R L$, and $A\\otimes_RL=S^{-1}A$, where $S=R\\setminus\\{0\\}$, since $L=S^{-1}R$ and a ring map out of either side is exactly a ring map out of $A$ inverting the image of $S$. Thus each $f\\in L[G]$ is $a/s$ with $a\\in A$, $0\\ne s\\in R$. For every integral point $x$, $a(x)\\in R$, so $v(f(x))\\geq-v(s)$. This includes $a(x)=0$ under the stated convention for $v(0)$, and proves boundedness of $K:=\\mathcal D(R)$. Its generic restriction is injective: if two maps $A\\to R$ agree in $L$, they agree in the subring $R\\subset L$. The valuation-ring description of a DVR is [def-sc-discrete-valuation-ring].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Lemma 3.7, first assertion: agent coordinate-ring proof of boundedness, using affine definitions."
+   }
+  },
+  {
+   "text": "Let $M\\subseteq G(L)$ be a bounded subgroup containing $K$, and fix $m\\in M$. Apply [lem-sfb-split-reductive-dvr-cartan-decomposition] to the given split reductive model and its given closed split maximal torus. All its hypotheses are in the statement of the item; henselianity and algebraic closedness of the residue field are more than the decomposition needs. Obtain $m=k_1tk_2$, where $k_1,k_2\\in K$ and $t\\in T(L)$. Since $K\\subseteq M$ and $M$ is a subgroup, $t=k_1^{-1}mk_2^{-1}\\in M$, and $t^n\\in M$ for every integer $n\\geq1$.",
+   "uses": [
+    "lem-sfb-split-reductive-dvr-cartan-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "WANTED locally; author-hosted PDF https://sites.math.washington.edu/~jarod/papers/iwahori.pdf, Theorem 4.1 and Remark 4.2, printed p.7, together with the fixed-torus formulation in Remark 3.5, printed p.5."
+   }
+  },
+  {
+   "text": "Use the chosen splitting $\\mathcal T\\cong\\mathbf G_{m,R}^r$ and write $t=(a_1,\\ldots,a_r)\\in(L^\\times)^r$. By the affine description of a closed immersion in [def-weil-closed-immersion], the restriction $A\\to R[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$ is surjective. Choose lifts $b_j,c_j\\in A$ of $z_j,z_j^{-1}$. Their images in $L[G]$ are regular functions, so boundedness of $M$ supplies integers $B_j,C_j$ such that for every $n\\geq1$, $B_j\\leq v(b_j(t^n))=n v(a_j)$ and $C_j\\leq v(c_j(t^n))=-n v(a_j)$. If $v(a_j)>0$ the second right-hand side tends to minus infinity, contradicting $C_j$; if $v(a_j)<0$ the first contradicts $B_j$. Hence $v(a_j)=0$ for each $j$. No extension of a character as a group homomorphism on $G$ is asserted: only its lift as an element of the coordinate ring is used.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, morphisms-lemma-closed-immersion (2), as stated by def-weil-closed-immersion; agent integer-valuation calculation."
+   }
+  },
+  {
+   "text": "By the valuation-ring description of [def-sc-discrete-valuation-ring], $v(a_j)=0$ implies $a_j,a_j^{-1}\\in R$, hence $a_j\\in R^\\times$. Thus $t\\in\\mathcal T(R)\\subseteq K$, and $m=k_1tk_2\\in K$. As $m$ was arbitrary, $M\\subseteq K$; the assumed reverse inclusion gives $M=K$. For $r=0$ there are no coordinates and $T(L)=\\{1\\}$, so the same argument applies with an empty list. Together with step 1 this proves both requested assertions without any completeness or compactness argument.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Lemma 3.7, first assertion: agent torus-coordinate conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-split-reductive-dvr-cartan-decomposition",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "Lemma 3.7, first assertion; explicit coordinate-ring and powers argument, with Cartan decomposition sourced separately. PDFs not present locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral points of a split reductive group scheme over a strictly henselian discrete valuation ring form a maximal bounded subgroup of its fraction field points",
+   "results": "{\"t\": \"2026-10-24T02:00:18Z\", \"tool\": \"leanfinder\", \"query\": \"Integral points of a split reductive group scheme over a strictly henselian discrete valuation ring form a maximal bounded subgroup of its fraction field points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.unit\", \"ValuationSubring.inertiaSubgroup\", \"ValuationSubring.decompositionSubgroup\", \"IsDedekindDomain.selmerGroup.valuation_ker_eq\", \"NumberField.AdeleRing.principalSubgroup\", \"IsDedekindDomain.selmerGroup\", \"ValuationSubring.principalUnitGroup\", \"IsDiscreteValuationRing.exists_lift_of_le_one\"], \"digest\": \"627b3c3b6b934c06\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation integer criteria, Selmer subgroups, abstract Iwasawa structures and bounded scalar multiplication do not prove maximal boundedness for integral points of split reductive groups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iwahori Matsumoto hyperspecial subgroup is maximal bounded in a reductive group",
+   "results": "{\"t\": \"2026-10-24T02:00:18Z\", \"tool\": \"leansearch\", \"query\": \"Iwahori Matsumoto hyperspecial subgroup is maximal bounded in a reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_generator\", \"MulAction.IwasawaStructure.commutator_le\", \"instBoundedSub\", \"MulAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"Sylow.is_maximal'\", \"OpenSubgroup.instTop\", \"RootPairing.instBoundedOrderSubtypeSubmoduleMemSublatticeInvtRootSubmodule\", \"frattini\"], \"digest\": \"f23562d61cabbcdd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation integer criteria, Selmer subgroups, abstract Iwasawa structures and bounded scalar multiplication do not prove maximal boundedness for integral points of split reductive groups"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsBounded\", \"Subgroup\"",
+   "results": "{\"t\": \"2026-10-24T02:00:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsBounded\\\", \\\"Subgroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"lp.instIsBoundedSMulSubtypePreLpMemAddSubgroup\"], \"digest\": \"f0bc7de5e238e260\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation integer criteria, Selmer subgroups, abstract Iwasawa structures and bounded scalar multiplication do not prove maximal boundedness for integral points of split reductive groups"
+  },
+  {
+   "tool": "grep",
+   "query": "hyperspecial|maximal.*bounded|Chevalley",
+   "results": "{\"t\": \"2026-10-24T02:00:19Z\", \"tool\": \"grep\", \"query\": \"hyperspecial|maximal.*bounded|Chevalley\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"94219d14698fc6fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation integer criteria, Selmer subgroups, abstract Iwasawa structures and bounded scalar multiplication do not prove maximal boundedness for integral points of split reductive groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Chevalley scheme over a discrete valuation ring any bounded subgroup containing all integral points equals the integral points",
+   "results": "{\"t\": \"2026-10-24T02:00:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a Chevalley scheme over a discrete valuation ring any bounded subgroup containing all integral points equals the integral points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.Integers.mem_of_integral\", \"Set.coe_integer\", \"Valuation.integer.integers\", \"Valuation.Integers.exists_of_le_one\", \"NumberField.mixedEmbedding.fundamentalCone.mem_integerSet\", \"Valuation.Integers.isIntegral_iff_v_le_one\", \"Valuation.Integers.isIntegrallyClosed_integers\", \"Valuation.Integers.isIntegrallyClosed\"], \"digest\": \"6f9ecebd1c846d55\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation integer criteria, Selmer subgroups, abstract Iwasawa structures and bounded scalar multiplication do not prove maximal boundedness for integral points of split reductive groups"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan.*decomposition|Iwahori|hyperspecial|maximal.*bounded|SplitReductive",
+   "results": "{\"t\": \"2026-10-24T02:43:45Z\", \"tool\": \"grep\", \"query\": \"Cartan.*decomposition|Iwahori|hyperspecial|maximal.*bounded|SplitReductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Flasque.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean\", \"Mathlib/Order/Zorn.lean\", \"Mathlib/Order/Zorn.lean\", \"Mathlib/Order/Zorn.lean\", \"Mathlib/Order/Zorn.lean\", \"Mathlib/Order/Zorn.lean\"], \"digest\": \"9c69670d163ce535\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integer-ring and valuation-subgroup results do not state maximal boundedness of integral points of reductive group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral points of a split reductive group scheme form a maximal bounded subgroup over a discretely valued field",
+   "results": "{\"t\": \"2026-10-24T02:45:36Z\", \"tool\": \"leansearch\", \"query\": \"Integral points of a split reductive group scheme form a maximal bounded subgroup over a discretely valued field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.integer\", \"IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"LocalSubring.mem_of_isMax_of_isIntegral\", \"Valued.maximalIdeal\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"IsNonarchimedeanLocalField.instIsDiscrete\", \"Valuation.Integers.mem_of_integral\", \"Valuation.Integers.isIntegral_iff_v_le_one\"], \"digest\": \"28f4179ac3db226a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integer-ring and valuation-subgroup results do not state maximal boundedness of integral points of reductive group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral points of a split reductive group over a strictly henselian discrete valuation ring are a maximal bounded subgroup",
+   "results": "{\"t\": \"2026-10-24T02:46:54Z\", \"tool\": \"leanfinder\", \"query\": \"Integral points of a split reductive group over a strictly henselian discrete valuation ring are a maximal bounded subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.inertiaSubgroup\", \"NumberField.AdeleRing.principalSubgroup\", \"Set.unit\", \"ValuationSubring.decompositionSubgroup\", \"IsNonarchimedeanLocalField.instIsDiscreteValuationRingSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"IsDedekindDomain.selmerGroup.valuation_ker_eq\", \"Subgroup.strictPeriods\", \"IsDiscreteValuationRing.instIsHausdorffMaximalIdeal\"], \"digest\": \"d9cc2a0a9721e89c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integer-ring and valuation-subgroup results do not state maximal boundedness of integral points of reductive group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasi-reductive-special-connectedness",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8",
+   "via": [
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-reductive-integral-maximal-bounded",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied the affine denominator bound, Cartan reduction, explicit positive-power valuation contradiction using lifts of torus coordinates, and integral-unit conclusion. One new statement-only Cartan-decomposition node; no Mathlib match or project attachment. Added the closed-immersion definition used by the statement and proof.",
+  "blueprint": "Realizes the maximal-boundedness prerequisite in the existing ancestry for det-thm-sf-ctf-stability-direct-images (3), via quasi-reductive-special-connectedness and the integral Chevalley atlas. Latest blueprint searched; no alternative blueprint statement of maximal boundedness or Cartan decomposition. Inherited from.node=null is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-0ea4ba944",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-0ea4ba944 (reviewer sub-agent of L); spot-checked: S1, one commit; no repair note; no SGA reference. The item statement is unchanged apart from a closed-immersion stmt_dep. Its citer, quasi-reductive-special-connectedness, uses exactly the bounded-and-contains-D(R) => equal form. Fix: step 1 derived L[G]=A⊗_R L from the definition def-pc-fibre-product 'applied to rings', which only covers affine test schemes (C4). I now cite the Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra in step-1 uses and proof_deps; the rest of the file is verbatim. Step 2: every hypothesis of the new Cartan node is in the item. Step 3: def-weil-closed-immersion (01QO) gives A→R[z^±] onto; on t^n the lifts of z_j and z_j^-1 have valuations n·v(a_j) and -n·v(a_j), so v(a_j)=0. Step 4: def-sc-discrete-valuation-ring states the valuation-ring form, so a_j is a unit and t is in T(R), which lies in D(R); r=0 is covered. New node lem-sfb-split-reductive-dvr-cartan-decomposition: statement only and self-contained. Truth check: the split torus makes D a Chevalley model, so G(L)=D(R)T(L)D(R) holds over any DVR. For non-complete R the completion case transfers by density of G(L) (rational big cell), with G(L)∩D(R^)=D(R). Small cases checked: GL_n (Smith form), G_m, r=0. Not a restated clause; maximality stays in the item. No duplicate found by rg over the DAG; Bruhat and Smith nodes differ. Caveat: the Prasad–Yu and AHLH PDFs are not in local literature (WANTED, as the item already was). I could not open them and checked the mathematics independently.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitReductiveIntegralMaximalBounded",
+  "declaration": "AlgebraicGeometry.splitReductive_integral_maximal_bounded",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitReductiveIntegralMaximalBounded.lean",
+  "statement": "theorem splitReductive_integral_maximal_bounded (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [HenselianLocalRing R] [IsAlgClosed (IsLocalRing.ResidueField R)] (L : Type u) [Field L] [Algebra R L] [IsFractionRing R L] (v : AddValuation L (WithTop ℤ)) (hv : ∀ a : R, v (algebraMap R L a) = WithTop.map (fun n : ℕ ↦ (n : ℤ)) (IsDiscreteValuationRing.addVal R a)) (D T : Grp (Over (Spec (.of R)))) [Smooth D.X.hom] [IsAffine D.X.left] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom] (i : T ⟶ D) [IsClosedImmersion i.hom.hom.left] (r : ℕ) (e : T ≅ RingGroupSchemes.splitTorus R r) (hred : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (f : R →+* Ω), ReductiveTorusCentralizer.IsReductive ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.obj D)) (hmax : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (f : R →+* Ω), ReductiveTorusCentralizer.IsMaximalTorus ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.map i)) : ValuativelyBoundedPoints.IsBounded R L D v (ValuativelyBoundedPoints.integralPoints R L D) ∧ ∀ M : Subgroup (ValuativelyBoundedPoints.genericPoints R L D), ValuativelyBoundedPoints.IsBounded R L D v M → ValuativelyBoundedPoints.integralPoints R L D ≤ M → M = ValuativelyBoundedPoints.integralPoints R L D",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c8707d72",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Clause-by-clause: henselian DVR (HenselianLocalRing is in the henselian-terminology record), alg. closed residue field, fraction field L with no completeness; v pinned on R to addVal by hv (determines v on Frac R, so not an extra assumption); D smooth/affine/finite type in Grp(Over Spec R), closed T ≅ splitTorus R r, hred/hmax over all R→Ω identical to the landed Cartan node; integralPoints = range of canonical pointsPrecomp restriction; IsBounded quantifies over all of Γ(D×_R Spec L) with an f-dependent uniform integer bound; conclusion IsBounded K ∧ ∀ M bounded, K ≤ M → M = K. New def node def-sfb-valuatively-bounded-group-points: 4 real definitions, source/blueprint docstrings, no duplicate in side-live or DAG. Item JSON differs from live only in lean and 3 used stmt_deps; both statements verbatim; sorry only; 4-step proof docstring; universes bound. Edge cases r=0, zero values, M=K checked. Second-reading section is the post-2026-10-17 placeholder. No files changed, no compile."
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-diagonal-finite-coefficient-closure",
+ "kind": "statement",
+ "title": "Complete fixed finite coefficient diagrams by transitions and closure",
+ "statement": "Let ell be prime and let Y, P1_Y and its self-product be Noetherian, with ell invertible on Y. In the categories of [def-sfb-diagonal-coefficient-category], fix a Z_ell Diagram d, integral Diagrams i_E and rational Diagrams r_E for all finite subextensions E. Suppose ScalarCompatibility records of [def-sfb-diagonal-coefficient-scalars] are given from d to i_E and from i_E to r_E using the actual maps of [def-sfb-diagonal-coefficient-maps]. There exists an algebraic-closure Diagram c with spQbarTwist, a ScalarCompatibility from each r_E to c using closureLineMap, and a ScalarCompatibility from r_E to r_F for each inclusion E <= F using spRationalTwistMap. The finite diagrams are fixed inputs; no finite diagram is constructed by this statement.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-maps",
+  "def-sfb-diagonal-coefficient-scalars"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), finite-field colimit and compatibility of the prescribed legs"
+ },
+ "proof": [
+  {
+   "text": "Prove the actual coefficient and root-map triangle equations. The coefficient maps agree on continuous sections. Integral root transitions compose by their finite projection uniqueness; their localized maps preserve the extension units by the normalized tensor formula. The closure root maps satisfy the colimit-leg equation, and the rational and closure maps are explicitly semilinear.",
+   "uses": [
+    "lem-route-sp-integers-map-exists-unique",
+    "lem-route-sp-ell-map-exists-unique",
+    "lem-route-sp-integral-twist-map-exists-unique",
+    "lem-route-sp-rational-twist-map-exists-unique",
+    "lem-sp-rational-twist-transition-semilinear",
+    "lem-route-sp-qbar-twist-action-exists-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose each prescribed Z_l-to-integral and integral-to-rational compatibility using the reverse scalar triangle implication. For E≤F cancel the compatibility from the common Z_l input using the forward triangle implication and the proved coefficient/root triangle equations. This constructs all required rational transitions, including identities.",
+   "uses": [
+    "lem-diagonal-scalar-compatibility-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the bottom finite field obtain the closure scalar frame. Define the closure class by conjugating its scalar image with the supported and line endpoints. Define its three traces by the inverse scalar/direct-image mate and line endpoint followed by the scalar image of the input trace and the unit endpoint. Verify the class and trace equations by inverse cancellation, and apply integration_transport to both normalized supported-source squares. This explicitly constructs a closure Diagram and its compatibility with the bottom rational diagram.",
+   "uses": [
+    "lem-diagonal-closure-scalar-frame",
+    "lem-diagonal-coefficient-integration-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the bottom rational-to-closure compatibility with its common Z_l route. For every E use the bottom-to-E coefficient and root triangles followed by the actual closure cocone equations to identify this with the E route. Cancel the Z_l-to-E compatibility by the scalar triangle lemma, using the proved semilinearity of closureLineMap. This supplies compatibility from every unchanged rational input to the one constructed closure diagram.",
+   "uses": [
+    "lem-diagonal-scalar-compatibility-triangle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-route-sp-integers-map-exists-unique",
+  "lem-route-sp-ell-map-exists-unique",
+  "lem-route-sp-integral-twist-map-exists-unique",
+  "lem-route-sp-rational-twist-map-exists-unique",
+  "lem-sp-rational-twist-transition-semilinear",
+  "lem-route-sp-qbar-twist-action-exists-unique",
+  "lem-diagonal-scalar-compatibility-triangle",
+  "lem-diagonal-closure-scalar-frame",
+  "lem-diagonal-coefficient-integration-transport"
+ ],
+ "proof_origin": {
+  "by": "Q1",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2); explicit scalar-frame transport at the bottom field and cancellation of the common Z_l scalar route"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars transports a diagram and traces compatible with integral rational algebraic closure coefficient changes",
+   "results": "Eight hits, including LinearMap.trace_baseChange and algebraic trace comparisons; none is a derived-sheaf diagram extension theorem.",
+   "date": "2026-10-26",
+   "verdict": "No match for either normalized finite-stage transport or closure coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits, including CategoryTheory.NatTrans.naturality. This is the naturality equation used to transport integration identities, not a coefficient-extension comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing integration_transport lemma for this categorical calculation; no complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarCompatibility|integration_transport|diagonalCoefficientFamily_extension",
+   "results": "The search service returned no hits. Local rg in lean/Sheaf and lean/WeilConjectures found the ScalarCompatibility definition, the original open extension theorem and the proved CategoryTheory.integration_transport. No finite-extension or coherent closure construction was found. Mathlib has PreservesFiniteBiproducts, not these geometric comparison records.",
+   "date": "2026-10-26",
+   "verdict": "New statements isolate the missing geometric comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCoefficientFamilyExtension",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (2), finite-field colimit and compatibility of the prescribed legs",
+   "via": [
+    "lem-diagonal-coefficient-family-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCoefficientFiniteClosure",
+  "file": "lean/Sheaf/Paper/DiagonalCoefficientFiniteClosure.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCoefficient_finiteClosure",
+  "statement": "theorem diagonalCoefficient_finiteClosure\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    (d : Diagram (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y (zlLine l))\n    (i : ∀ E : PadicAlgCl.FiniteIntermediateField l,\n      Diagram (Profinite.padicIntegersRingObj.{u} l E.1) Y\n        (fun X ↦ spIntegralTwist X l E))\n    (r : ∀ E : PadicAlgCl.FiniteIntermediateField l,\n      Diagram (Profinite.continuousMapRingObj.{u} E.1) Y\n        (fun X ↦ spRationalTwist X l E))\n    (hi : ∀ E : PadicAlgCl.FiniteIntermediateField l,\n      ScalarCompatibility (integralMap l E) Y (zlLine l)\n        (fun X ↦ spIntegralTwist X l E) (integralLineMap l E) d (i E))\n    (hr : ∀ E : PadicAlgCl.FiniteIntermediateField l,\n      ScalarCompatibility (padicIntegersRingObjToContinuousMapRingObj l E) Y\n        (fun X ↦ spIntegralTwist X l E) (fun X ↦ spRationalTwist X l E)\n        (rationalLineMap l E) (i E) (r E)) :\n    ∃ c : Diagram (Profinite.padicAlgClRingObj.{u} l) Y (fun X ↦ spQbarTwist X l),\n      (∀ E : PadicAlgCl.FiniteIntermediateField l,\n        Nonempty (ScalarCompatibility (Profinite.padicSubfieldRingObjToPadicAlgCl l E) Y\n          (fun X ↦ spRationalTwist X l E) (fun X ↦ spQbarTwist X l)\n          (closureLineMap l E) (r E) c)) ∧\n      ∀ (E F : PadicAlgCl.FiniteIntermediateField l) (h : E ≤ F),\n        Nonempty (ScalarCompatibility (Profinite.padicSubfieldRingObjMap l h) Y\n          (fun X ↦ spRationalTwist X l E) (fun X ↦ spRationalTwist X l F)\n          (fun X ↦ spRationalTwistMap X l (E := E) (F := F) h) (r E) (r F))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3df5",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261026T222726-L-686554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T235928-L-1470691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

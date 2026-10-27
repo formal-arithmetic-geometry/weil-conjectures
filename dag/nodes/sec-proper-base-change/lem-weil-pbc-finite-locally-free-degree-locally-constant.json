@@ -100,7 +100,32 @@
   "item": "lem-weil-pbc-finite-etale-trace-degree",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.finiteLocallyFree_fiberDimension_isLocallyConstant"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.finiteLocallyFree_fiberDimension_isLocallyConstant",
+     "module": "WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant",
+     "lines": [
+      28,
+      100
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -144,5 +169,27 @@
   "landing": "20261012T063507-L-3154100",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:Y\\to X$ be a finite locally free morphism of schemes [def-pc-finite-locally-free], i.e. finite, flat and locally of finite presentation. For $x\\in X$ with residue field $\\kappa(x)$ let $Y_x=Y\\times_X\\operatorname{Spec}\\kappa(x)$ be the fibre and\n$$\\delta_f(x)=\\dim_{\\kappa(x)}\\Gamma(Y_x,\\mathcal O_{Y_x}).$$\nThen $\\delta_f(x)$ is finite for every $x\\in X$, and the function $\\delta_f:X\\to\\mathbf Z_{\\ge0}$ is locally constant on the underlying topological space of $X$ (every point has an open neighbourhood on which $\\delta_f$ is constant). Equivalently, $X=\\coprod_{d\\ge0}X_d$ with $X_d=\\delta_f^{-1}(d)$ open and closed, and $f^{-1}(X_d)\\to X_d$ is finite locally free of degree $d$ in the sense of [def-pc-finite-locally-free].",
+  "proof": [
+   {
+    "text": "For each $x\\in X$ the fibre morphism $Y_x\\to\\operatorname{Spec}\\kappa(x)$ is finite as a base change of $f$, so $\\Gamma(Y_x,\\mathcal O_{Y_x})$ is a finite $\\kappa(x)$-module and $\\delta_f(x)<\\infty$. The rank of the finite flat morphism $f$ of finite presentation at $x$ (the rank of the finite locally free module $f_*\\mathcal O_Y$ at $x$) is a locally constant function of $x$. Working on an affine chart $\\operatorname{Spec}A\\subseteq X$ over which $f$ is $\\operatorname{Spec}A\\to\\operatorname{Spec}B$, the rank at $x=\\mathfrak p$ is the rank of the free $A_{\\mathfrak p}$-module $B_{\\mathfrak p}$, which equals $\\dim_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p)\\otimes_AB=\\delta_f(x)$. Hence $\\delta_f$ is locally constant.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For each $d$, the set $X_d=\\delta_f^{-1}(d)$ is open, and closed since its complement is the union of the other open sets $X_{d'}$. Finite, flat and locally of finite presentation are preserved by restriction to the open $X_d$, and the fibre degree of the restriction $f^{-1}(X_d)\\to X_d$ at a point equals $\\delta_f$ at that point, namely $d$. So the restriction is finite locally free of degree $d$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

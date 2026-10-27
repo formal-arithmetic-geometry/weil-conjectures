@@ -1,0 +1,159 @@
+{
+ "id": "lem-pur-complete-integral-constant-restriction",
+ "kind": "statement",
+ "title": "Completeness and faithful scalar restriction for integral objects",
+ "statement": "Fix a prime l and a finite extension E of Q_l, with R=O_E and its uniformizer ideal I. Use the actual completed integral coefficient sheaves, strict system calculus, and the normalized constant scalar restrictions H and U [def-sf-constant-completed-reduction-transport, def-sf-integral-system-operations]. For any scheme W and any M in D(W,Rhat) satisfying finiteTorConstructibleIntegral [def-weil-finite-tor-amplitude], the actual constant quotient-completion unit eta_(H M) is invertible. For every such N, H induces an injective map Hom(M,N) -> Hom(H M,H N). No faithfulness is asserted outside the complete subcategory, and there is no scheme-finiteness or nonempty-site assumption.",
+ "stmt_deps": [
+  "def-sf-constant-completed-reduction-transport",
+  "def-sf-integral-system-operations",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099I, 099L and 099N; parent Steps 1 and 9. T9 site-specific specialization of complete constant/completed equivalence and its unit normalization."
+ },
+ "proof": [
+  {
+   "text": "Extract IsSfDerivedComplete from the sfIntegralConstructible component of finiteTorConstructibleIntegral: its actual quotient units exhibit M as the derived limit of its reduction tower. Over the Noetherian DVR, the quotient/Koszul comparison identifies this with intrinsic derived completeness. The flat constant/completed equivalence identifies the uniformizer kernel ideals and positive quotient sheaves and carries M to a complete constant-coefficient object.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport along the fixed exact small-site module equivalence used in ordinaryH. Its quotient comparisons preserve the full quotient diagram, total right derived limit and augmentation. The completion-unit criterion identifies the constant intrinsic completeness predicate with invertibility of the actual sfCbcSite.unit, proving the first claim.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sf-cbc-compact-support-composition-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For M,N both complete, restrict the constant/completed equivalence to these objects. Its faithful functor detects equality of maps. The subsequent small-site exact equivalence is faithful on derived categories, and its composite is H by definition. Thus H.map is injective on Hom(M,N). Zero objects and the empty site require no additional hypotheses.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-cbc-compact-support-composition-limit",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Parent Steps 1 and 9; Stacks 099I, 099L, 099N, with the fixed small-site model. The site-specific normalization assembly is written by T9, following the cited parent dependencies."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete constant coefficient restriction is fully faithful and completion unit is invertible",
+   "results": "Eight hits, including CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull, instIsIsoAppUnitOfFullOfFaithful and map_restrictFullyFaithful_unit_app; no coefficient-site specialization.",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical constituents only; no statement of the normalized integral strict-tower comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality, plus eight unrelated cone and resolution hits.",
+   "date": "2026-10-25",
+   "verdict": "Used for the parent assembly; does not establish scalar completeness or the specified reduction square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived completion unit and reduction word comparison realizes strict tower path equations",
+   "results": "Eight hits on ordinary adic module completion, including IsAdicComplete.StrictMono.of_comp_lift and AdicCompletion.transitionMap_comp_reduceModIdeal.",
+   "date": "2026-10-25",
+   "verdict": "No derived sheaf or normalized strict path comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|map_injective; rg GeneratorReduction.H, reductionComparison and corner in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib ordinary completion and injectivity lemmas; project definitions and original item. No exact specialization for completeIntegralConstantRestriction or compactSupportPathReductionSquare.",
+   "date": "2026-10-25",
+   "verdict": "The required site and normalization glue is not an existing standalone declaration."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search constant complete; search compact support reduction; search constant completed; search compact support path",
+   "results": "Zero matches for all four conjunctive queries; ancestor is prop-pur-weil-equivariance-compatibilities.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint node for the extracted interface or the two precise substeps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportLimitEquationRealization",
+  "date": "2026-10-25",
+  "group": "T9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility paragraph of prop-pur-weil-equivariance-compatibilities.proof.md: transport of the integral compact-support base-change constituent through its prescribed strict reduction and total-limit comparisons. Parent Steps 1 and 9; Stacks 099I, 099L, 099N, with the fixed small-site model.",
+   "via": [
+    "lem-pur-compact-support-limit-equation-realization",
+    "lem-pur-weil-basechange-semilinear-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompleteIntegralConstantRestriction",
+  "file": "lean/Sheaf/Paper/CompleteIntegralConstantRestriction.lean",
+  "declaration": "WeilConjectures.CompactSupportLimit.completeIntegralConstantRestriction",
+  "declarations": [
+   "WeilConjectures.CompactSupportLimit.completeIntegralConstantRestriction"
+  ],
+  "statement": "theorem completeIntegralConstantRestriction (W : Scheme.{u})\n    (M : IntegralSystemRealization.Integral l E W)\n    (hM : finiteTorConstructibleIntegral l E W M) :\n    IsIso (((sfCbcSite W).unit _\n      (sfCbcModelIdeal (GeneratorReduction.constantDatum l E))).app\n        ((GeneratorReduction.H l E W).obj M)) ∧\n    ∀ (N : IntegralSystemRealization.Integral l E W),\n      finiteTorConstructibleIntegral l E W N →\n        Function.Injective ((GeneratorReduction.H l E W).map (X := M) (Y := N))",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pur-complete-integral-constant-restriction",
+  "worker": "stage3",
+  "summary": "T9 extracted the precise scalar-completeness and pre-limit path normalization steps needed by the main Lean assembly, preserving all original word, path and domain definitions.",
+  "blueprint": "Constituent-compatibility paragraph of prop-pur-weil-equivariance-compatibilities.proof.md: transport of the integral compact-support base-change constituent through its prescribed strict reduction and total-limit comparisons. Parent Steps 1 and 9; Stacks 099I, 099L, 099N, with the fixed small-site model."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1bc5c",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T203307-L-2801491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1bc5c",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T203307-L-2801491",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs EquationLaws (corner iso, square via limit_square, cancellation); moved 12 defs vs clone text (byte-identical); new sorry statements vs nodes/plan Steps 1-9 and Stacks 099N completeness/faithfulness"
+ }
+}

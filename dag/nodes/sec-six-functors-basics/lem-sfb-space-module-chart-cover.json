@@ -1,0 +1,167 @@
+{
+ "id": "lem-sfb-space-module-chart-cover",
+ "kind": "statement",
+ "title": "Scheme charts over a pulled-back etale covering",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $I$ be an index type and $V_i$ objects of the small etale site of $Y$. Suppose they cover the final sheaf: on every object $T$ of $Y_{\\mathrm{et}}$, the sieve of arrows $W\\to T$ for which there exists a map $W\\to V_i$ is covering [def-weil-pbc-sites-and-cohomology]. For each $i$ let $\\mathcal A(f,V_i)$ be the commuting scheme-chart category of [def-trf-space-etale-module-functors]: its objects are etale scheme charts $U\\to X$ with a scheme map $U\\to V_i$ commuting over $Y$. Then the family of all these $U$, indexed by pairs $(i,q)$ with $q\\in\\mathcal A(f,V_i)$, covers the final sheaf of $X_{\\mathrm{et}}$ in the same sieve sense. Neither representability of $f$ nor finiteness of $I$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DO (lemma-local-pullback), proof: the base-changed covering; spaces-properties.tex Tag 03G2 (lemma-functoriality-etale-site)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas A to Y. On A, the hypothesis gives a covering sieve of scheme charts admitting maps to the V_i. These charts compose with A to cover the final object of the enlarged etale site of Y. Indeed, after pulling back the atlas to any enlarged object, refine by scheme atlases and use the covering sieve on their scheme objects. The scheme-object comparison has exactly these coverings.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DO (lemma-local-pullback), proof; spaces-properties.tex Tags 03G1 and 03G2."
+   }
+  },
+  {
+   "text": "The enlarged base-change functor preserves coverings. Pull back this covering to X, and take surjective etale scheme atlases of its algebraic-space members. Each resulting scheme U is etale over X and maps to some V_i over Y, so it defines a commuting chart q in A(f,V_i).",
+   "uses": [
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "def-trf-algebraic-space",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DO (lemma-local-pullback), proof; spaces-properties.tex Tag 03G2."
+   }
+  },
+  {
+   "text": "For any scheme chart T of X pull back the preceding cover and refine by scheme atlases. Composition of etale covers gives a covering of T whose arrows lie in the sieve of objects q.left. Upward closure of covering sieves gives the required covering on T. This is precisely CoversTop; if the original indexing family is empty the same covering argument applies.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DO (lemma-local-pullback), proof, and Tag 03DN (lemma-local-final-object)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-chart-ringed-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DO (lemma-local-pullback), proof: the base-changed covering; spaces-properties.tex Tag 03G2 (lemma-functoriality-etale-site)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A covering of the target etale site pulls back to a covering by all commuting scheme charts over a morphism of algebraic spaces",
+   "results": "8 hits: scheme Cover.pullbackCoverOver and its Over variants in Mathlib.AlgebraicGeometry.Cover.Over; no algebraic-space chart statement.",
+   "date": "2026-10-26",
+   "verdict": "no match: the scheme cover constructions do not identify all commuting charts of an arbitrary space morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A covering family of etale scheme charts of an algebraic space pulls back to a covering after refining the fibre products by scheme atlases",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etalePretopology, etaleTopology, smallEtalePretopology, smallEtaleTopology, Scheme.Cover and scheme pullback-open-cover constructions.",
+   "date": "2026-10-26",
+   "verdict": "no match: these are scheme site and cover constructions, not the algebraic-space chart-refinement assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "CoversTop.*pullback|pullback.*CoversTop|cover_lift",
+   "results": "22 hits including SheafOfModules.QuasicoherentData.pushforward (Quasicoherent.lean:313), Functor.cover_lift (CoverLifting.lean:78) and dense-subsite cover lifting. Read CoversTop.Basic.lean:39-51 and CoversTop.Over.lean:28-36.",
+   "date": "2026-10-26",
+   "verdict": "no match: cover_lift needs a single cocontinuous site functor, whereas the small-site base change must be refined by all commuting scheme charts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceModulePullbackQuasiCoherent",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3Q (lemma-thickening-over-thickening-space-quasi-coherent), with the preceding setup; its derived-coherator hypothesis is expressed by the equivalent universal derived-Hom test. Supporting input: Tag 0D3Q, last sentence: reflection of equality of induced base-ideal maps, by testing with f-star J.; chart cover step of the local-presentation argument for Stacks 03GA",
+   "via": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-square-zero-extension-transfer",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceModuleChartCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceModuleChartCover.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.moduleChart_coversTop",
+  "statement": "theorem moduleChart_coversTop {S : Scheme.{u}} {X Y : AlgebraicSpace S}\n    (f : X ⟶ Y) {I : Type w} (V : I → Y.EtaleSite)\n    (hV : Y.etaleTopology.CoversTop V) :\n    X.etaleTopology.CoversTop\n      (fun p : Σ i, ModuleChart f (V i) ↦ p.2.left)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T083410-L-2342444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T083410-L-2342444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

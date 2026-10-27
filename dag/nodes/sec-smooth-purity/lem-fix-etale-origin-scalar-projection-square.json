@@ -65,78 +65,52 @@
  ],
  "proof": [
   {
-   "text": "Take N=B_Y[0] with its A-action. The canonical coefficient pullback identifies E tensor p* N with H(E); transfer the assumed bound across this isomorphism. E and this tensor are precisely the admissible pair for the fixed-coefficient projection-comparison theorem.",
+   "text": "Use originMate_app to identify each specified bounded-below direct-image isomorphism with its canonical ambient mate. The helper originMate_counit supplies its geometric counit identity, including the intrinsic realization factors.",
    "uses": [
-    "lem-sfb-geometric-inverse-image-constant-module",
-    "lem-sfb-projection-comparison-etale-proetale"
+    "lem-fix-etale-origin-scalar-pullback-square",
+    "def-fix-etale-origin-scalar-pullback-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
-   }
+   "elementary": true
   },
   {
-   "text": "Specialize projection_comparison_etale_proetale to (E,N). Equate its two component expressions. Package its five included D⁺ comparison arrows as properOriginFixedMateIso. This gives F_fixed(π_e), then the fixed mate at the tensor, then direct image of the tensor/pullback comparison, equal to the tensor comparison followed by tensor of the fixed mate at E and the pro-etale projection.",
+   "text": "Apply the ring-sheaf change adjunction formula to the B-geometric counit. After applying the inverse A-adjunction Hom equivalence it identifies the counit transpose of scalarMateRestrictionPush. Compose with the defining scalar-extension mate counit identity and use naturality of the restriction/pullback comparison. This proves scalar_counit, identifying the restricted scalar comparison composite with the mate of originScalarPullback.",
    "uses": [
-    "lem-sfb-projection-comparison-etale-proetale",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-fix-etale-origin-scalar-pullback-square",
+    "def-fix-etale-origin-scalar-pullback-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the intrinsic realization equivalence to that equality and insert its site-factorization and normalized direct-image comparisons. The definition of properOriginMateIso is exactly the resulting fixed-mate composite. Naturality moves the coefficient-pullback map past the tensor-input mate, giving b_(H E).",
+   "text": "Compute the counit transpose of properOriginEtaleProjection from the published projection arrow. Tensor naturality moves the constant-coefficient pullback identification past the counit, giving originEtaleTensorPullback followed by tensor of the etale counit.",
    "uses": [
-    "def-fix-proper-etale-origin-scalar-data"
+    "def-fix-proper-etale-origin-scalar-data",
+    "lem-fix-etale-origin-scalar-pullback-square",
+    "def-fix-etale-origin-scalar-pullback-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
-   }
+   "elementary": true
   },
   {
-   "text": "Identify the tensor comparison on each side with properOriginTensorIso. For ordinary modules, all restriction and realization maps are identity on scalar-unit sections; the scalar extension adjunction sends x tensor b to the same balanced tensor. On flat K-flat total tensor representatives these maps preserve both bidegrees and signed differentials. The unique representative normalizations of the scalar/tensor comparisons and canonical tensor pullback therefore identify the composites. Naturality with respect to K-flat resolutions and cancellation after localization extend the equality to every unbounded input, including R_e E; no bound on its scalar extension is needed.",
+   "text": "Specialize the local scalar/tensor pullback square to C=R_e(E). Transpose both sides of the claimed direct-image square under the intrinsic A-geometric adjunction. Use the two counit calculations, then the local square, naturality of originTensorComparison at the etale counit, and naturality of originPullback at properOriginEtaleProjection. The two transposes coincide. Injectivity of the Hom equivalence proves the original equation. Only the supplied bounds on E and H are used to identify the included mates.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-fix-proper-etale-origin-scalar-data"
+    "lem-fix-etale-origin-scalar-pullback-square",
+    "def-fix-proper-etale-origin-scalar-data",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-fix-etale-origin-scalar-pullback-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
-   }
-  },
-  {
-   "text": "Use proEtaleScalarMateNormalization to replace the intrinsic projection composite by U(χ) followed by the canonical d and the target scalar/tensor comparison. Cancel the intermediate tensor and realization isomorphisms. The resulting equation is q_(R_e E) US(b_E) U(χ) d = F_Y(π_e) b_(H E) P_A(q_E). This argument uses only the two stated lower bounds, applies to identity morphisms and zero rings, and nowhere uses properness or projection invertibility.",
-   "uses": [
-    "lem-fix-proetale-scalar-mate-normalization",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0B56 (equation-projection-formula-map), transported through the canonical constant-coefficient realization"
-   }
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0E48 specialized to the constant B coefficient; Tag 0B56 identifies scalar-restricted counit mates. This records the independent intrinsic-realization compatibility part of the original argument."
+  "place": "Tag 0B56 counit definition and Tag 0E48: transpose the local tensor/pullback normalization square under the geometric adjunction; H6"
  },
  "proof_deps": [
-  "lem-sfb-geometric-inverse-image-constant-module",
-  "lem-sfb-projection-comparison-etale-proetale",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "def-fix-proper-etale-origin-scalar-data",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-fix-proetale-scalar-mate-normalization",
-  "lem-weil-pbc-ring-sheaf-change-adjunction"
+  "lem-fix-etale-origin-scalar-pullback-square",
+  "def-fix-etale-origin-scalar-pullback-data",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-fix-proper-etale-origin-scalar-data"
  ],
  "lean": {
   "existing": false,
@@ -159,13 +133,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-7992d",
-  "group": "W6",
+  "reviewer": "COMPILER",
+  "group": "H6",
   "result": "pass",
-  "landing": "20261021T152415-L-1937288",
+  "landing": "20261027T094420-L-223756",
   "kind": "interface",
-  "note": "independent cc review: item theorem signature vs live clone (identical, sorry→proof); 8 moved defs vs live bodies (identical, publicly re-exported); new square = item's equation conjunct for qcqs p without IsIso; item node proof_deps vs Lean proof; unit realized empty"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }
